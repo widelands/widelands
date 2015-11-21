@@ -38,7 +38,6 @@
 #include "logic/map.h"
 #include "logic/player.h"
 #include "map_io/map_loader.h"
-#include "profile/profile.h"
 #include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
 #include "ui_fsmenu/loadgame.h"
@@ -132,9 +131,7 @@ FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG
 	m_cur_wincondition = -1;
 	win_condition_clicked();
 
-	m_title  .set_textstyle(UI::TextStyle::ui_big());
-	m_mapname.set_textstyle(UI::TextStyle::ui_small());
-	m_wincondition_type.set_textstyle(UI::TextStyle::ui_small());
+	m_title.set_textstyle(UI::TextStyle::ui_big());
 
 	UI::TextStyle tsmaller
 		(UI::TextStyle::makebold
@@ -232,21 +229,49 @@ void FullscreenMenuLaunchSPG::win_condition_update() {
 		m_wincondition.set_tooltip
 			(_("Win condition is set through the scenario"));
 	} else {
-		try {
-			std::unique_ptr<LuaTable> t =
-			   m_lua->run_script(m_settings->get_win_condition_script());
-			t->do_not_warn_about_unaccessed_keys();
-			const std::string name = t->get_string("name");
-			const std::string descr = t->get_string("description");
-			{
-				i18n::Textdomain td("win_conditions");
-				m_wincondition.set_title(_(name));
+		win_condition_load();
+	}
+}
+
+
+/**
+ * Loads the current win condition script from the settings provider.
+ * Calls win_condition_clicked() if the current map can't handle the win condition.
+ */
+void FullscreenMenuLaunchSPG::win_condition_load() {
+	bool is_usable = true;
+	try {
+		std::unique_ptr<LuaTable> t =
+			m_lua->run_script(m_settings->get_win_condition_script());
+		t->do_not_warn_about_unaccessed_keys();
+
+		// Skip this win condition if the map doesn't have all the required tags
+		if (t->has_key("map_tags") && !m_settings->settings().mapfilename.empty()) {
+			Widelands::Map map;
+			std::unique_ptr<Widelands::MapLoader> ml =
+					map.get_correct_loader(m_settings->settings().mapfilename);
+			ml->preload_map(true);
+			for (const std::string map_tag : t->get_table("map_tags")->array_entries<std::string>()) {
+				if (!map.has_tag(map_tag)) {
+					is_usable = false;
+					break;
+				}
 			}
-			m_wincondition.set_tooltip(descr.c_str());
-		} catch (LuaTableKeyError &) {
-			// might be that this is not a win condition after all.
-			win_condition_clicked();
 		}
+
+		const std::string name = t->get_string("name");
+		const std::string descr = t->get_string("description");
+		{
+			i18n::Textdomain td("win_conditions");
+			m_wincondition.set_title(_(name));
+		}
+		m_wincondition.set_tooltip(descr.c_str());
+	} catch (LuaTableKeyError &) {
+		// might be that this is not a win condition after all.
+		is_usable = false;
+	}
+	if (!is_usable) {
+		win_condition_clicked();
 	}
 }
 

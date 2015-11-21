@@ -82,7 +82,7 @@ struct DefaultAI : ComputerPlayer {
 	};
 
 	enum class WalkSearch : uint8_t {kAnyPlayer, kOtherPlayers, kEnemy};
-	enum class WoodPolicy : uint8_t {kDismantleRangers, kStopRangers, kStartRangers, kBuildRangers};
+	enum class WoodPolicy : uint8_t {kDismantleRangers, kStopRangers, kAllowRangers};
 	enum class NewShip : uint8_t {kBuilt, kFoundOnLoad};
 	enum class PerfEvaluation : uint8_t {kForConstruction, kForDismantle};
 	enum class ScheduleTasks : uint8_t {
@@ -105,19 +105,13 @@ struct DefaultAI : ComputerPlayer {
 		kCountMilitaryVacant,
 		kCheckEnemySites
 	};
-	enum class MilitaryStrategy : uint8_t {
-		kNoNewMilitary,
-		kDefenseOnly,
-		kResourcesOrDefense,
-		kExpansion,
-		kPushExpansion
-	};
 	enum class Tribes : uint8_t {
 		kNone,
 		kBarbarians,
 		kAtlanteans,
 		kEmpire
 	};
+
 
 	/// Implementation for Aggressive
 	struct AggressiveImpl : public ComputerPlayer::Implementation {
@@ -169,7 +163,12 @@ private:
 
 	void update_productionsite_stats(uint32_t);
 
-	void check_building_necessity(BuildingObserver& bo);
+	// for productionsites
+	Widelands::BuildingNecessity check_building_necessity
+		(BuildingObserver& bo, PerfEvaluation purpose, uint32_t);
+	// for militarysites (overloading the function)
+	Widelands::BuildingNecessity check_building_necessity
+		(uint8_t, uint32_t);
 
 	ScheduleTasks get_oldest_task(uint32_t);
 
@@ -210,8 +209,8 @@ private:
 	int32_t calculate_strength(const std::vector<Widelands::Soldier*>);
 	uint32_t get_stocklevel_by_hint(size_t);
 	uint32_t get_stocklevel(BuildingObserver&);
-	uint32_t get_warehoused_stock(Widelands::WareIndex wt);
-	uint32_t get_stocklevel(Widelands::WareIndex);  // count all direct outputs_
+	uint32_t get_warehoused_stock(Widelands::DescriptionIndex wt);
+	uint32_t get_stocklevel(Widelands::DescriptionIndex);  // count all direct outputs_
 	void review_wares_targets(uint32_t);
 	void count_military_vacant_positions();
 
@@ -219,17 +218,16 @@ private:
 	// other player is accessible
 	// via walking
 	bool other_player_accessible(uint32_t max_distance,
-	                             int32_t* tested_fields,
+	                             uint32_t* tested_fields,
 	                             uint16_t* mineable_fields_count,
 	                             const Widelands::Coords starting_spot,
 	                             const WalkSearch type);
 
 	int32_t recalc_with_border_range(const BuildableField&, int32_t);
-	int32_t calculate_need_for_ps(BuildingObserver&, int32_t);
 
 	void
 	consider_productionsite_influence(BuildableField&, Widelands::Coords, const BuildingObserver&);
-	// considering wood, stones, mines, water, fishes for candidate for colonization (new port)
+	// considering trees, rocks, mines, water, fishes for candidate for colonization (new port)
 	uint8_t spot_scoring(Widelands::Coords candidate_spot);
 
 	EconomyObserver* get_economy_observer(Widelands::Economy&);
@@ -243,15 +241,15 @@ private:
 	void expedition_management(ShipObserver&);
 	void out_of_resources_site(const Widelands::ProductionSite&);
 	void soldier_trained(const Widelands::TrainingSite&);
-	bool is_productionsite_needed(int32_t outputs,
-										int32_t performance,
-										PerfEvaluation purpose);
 
 	bool check_supply(const BuildingObserver&);
 
-	// bool consider_attack(int32_t);
-
 	void print_land_stats();
+
+	//checks whether first value is in range, or lesser then...
+	template<typename T> void check_range(const T, const  T, const  T, const char *);
+	template<typename T> void check_range(const T, const  T, const char *);
+
 
 private:
 	// Variables of default AI
@@ -264,14 +262,17 @@ private:
 	Widelands::TribeDescr const* tribe_;
 
 	std::vector<BuildingObserver> buildings_;
-	uint32_t num_constructionsites_;
-	uint32_t num_milit_constructionsites;
 	uint32_t num_prod_constructionsites;
 	uint32_t num_ports;
 
-	uint16_t last_attacked_player_;
+	int16_t last_attacked_player_;
+	uint32_t last_attack_time_;
 	// check ms in this interval - will auto-adjust
 	uint32_t enemysites_check_delay_;
+
+	// helping scores for building new military sites
+	int32_t target_military_score_;
+	int32_t least_military_score_;
 
 	WoodPolicy wood_policy_;
 
@@ -294,6 +295,13 @@ private:
 	std::map<uint32_t, EnemySiteObserver> enemy_sites;
 	// it will map mined material to observer
 	std::map<int32_t, MineTypesObserver> mines_per_type;
+	// returns count of mines of the same type (output)
+	uint32_t mines_in_constr() const;
+	uint32_t mines_built() const;
+	std::map<int32_t, MilitarySiteSizeObserver> msites_per_size;
+	// returns count of militarysites
+	uint32_t msites_in_constr() const;
+	uint32_t msites_built() const;
 
 	std::vector<WareObserver> wares;
 
@@ -315,8 +323,9 @@ private:
 	int32_t resource_necessity_water_;
 	bool resource_necessity_water_needed_;  // unless atlanteans
 
-	uint16_t unstationed_milit_buildings_;  // counts empty military buildings (ones where no soldier
-	                                        // is belogning to)
+	// average count of trees around cutters
+	uint32_t trees_around_cutters_;
+
 	uint16_t military_last_dismantle_;
 	uint32_t military_last_build_;  // sometimes expansions just stops, this is time of last military
 	                                // building build
@@ -337,12 +346,15 @@ private:
 	// the purpose is to print out a warning that the game is pacing too fast
 	int32_t scheduler_delay_counter_;
 
+	int16_t ai_personality_military_loneliness_;
+	uint32_t ai_personality_attack_margin_;
+	int32_t ai_personality_wood_difference_;
+	uint32_t ai_productionsites_ratio_;
+	uint32_t ai_personality_early_militarysites;
+
 	// this is a bunch of patterns that have to identify weapons and armors for input queues of trainingsites
 	std::vector<std::string> const armors_and_weapons =
 		{"ax", "lance", "armor", "helm", "lance", "trident", "tabard", "shield", "mask"};
-	// some buildings can be upgraded even when they are only one
-	// now only microbrewery get this special treatment
-	const char* preferred_upgrade[1] = {"micro-brewery"};
 
 	enum {kReprioritize, kStopShipyard, kStapShipyard};
 

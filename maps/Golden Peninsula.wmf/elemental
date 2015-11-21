@@ -1,10 +1,12 @@
+# Automatically created by Widelands bzr7574[artifacts] (Debug)
+
 [global]
-packet_version=1
-map_w=64
-map_h=80
-nr_players=2
-world=greenland
-name=_Golden Peninsula
-author=Winterwind
-descr=_"Two empires race for the treasures of a legendary peninsula..."
-tags="official,1v1"
+packet_version="1"
+map_w="64"
+map_h="80"
+nr_players="2"
+name=_"Golden Peninsula"
+author="Winterwind"
+descr=_"Two empires race for the treasures of a legendary peninsula…"
+hint=
+tags="1v1,artifacts,official"

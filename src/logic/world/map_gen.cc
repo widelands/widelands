@@ -25,7 +25,6 @@
 
 #include "logic/game_data_error.h"
 #include "logic/world/world.h"
-#include "profile/profile.h"
 #include "scripting/lua_table.h"
 
 namespace Widelands {
@@ -82,11 +81,11 @@ MapGenAreaInfo::MapGenAreaInfo(const LuaTable& table,
 	weight_ = get_positive_int(table, "weight");
 
 	const auto read_terrains = [this, &table, &world](
-	   const std::string& key, std::vector<TerrainIndex>* list) {
+	   const std::string& key, std::vector<DescriptionIndex>* list) {
 		const std::vector<std::string> terrains = table.get_table(key)->array_entries<std::string>();
 
 		for (const std::string& terrain : terrains) {
-			const TerrainIndex tix = world.terrains().get_index(terrain);
+			const DescriptionIndex tix = world.terrains().get_index(terrain);
 			list->push_back(tix);
 		}
 	};
@@ -149,7 +148,7 @@ size_t MapGenAreaInfo::get_num_terrains(MapGenTerrainType const terrType) const 
 	}
 }
 
-TerrainIndex MapGenAreaInfo::get_terrain(MapGenTerrainType const terrType,
+DescriptionIndex MapGenAreaInfo::get_terrain(MapGenTerrainType const terrType,
                                          uint32_t const index) const {
 	switch (terrType) {
 	case ttWaterOcean:
@@ -306,12 +305,12 @@ MapGenInfo::MapGenInfo(const LuaTable& table, const World& world) {
 			MapGenBobCategory& category = bob_categories_.at(entry->get_string("name"));
 
 			for (size_t jx = 0; jx < category.num_immovables(); jx++)
-				if (world.get_immovable_index(category.get_immovable(jx).c_str()) < 0)
+				if (world.get_immovable_index(category.get_immovable(jx).c_str()) == Widelands::INVALID_INDEX)
 					throw wexception("unknown immovable %s", category.get_immovable(jx).c_str());
 
 			for (size_t jx = 0; jx < category.num_critters(); jx++)
-				if (world.get_bob(category.get_critter(jx).c_str()) < 0)
-					throw wexception("unknown moveable %s", category.get_critter(jx).c_str());
+				if (world.get_bob(category.get_critter(jx).c_str()) == Widelands::INVALID_INDEX)
+					throw wexception("unknown critter %s", category.get_critter(jx).c_str());
 		}
 	}
 

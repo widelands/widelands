@@ -32,7 +32,7 @@
 
 namespace Widelands {
 
-#define CURRENT_PACKET_VERSION 1
+constexpr int32_t kCurrentPacketVersion = 1;
 
 void MapPortSpacesPacket::read
 	(FileSystem & fs, EditorGameBase & egbase, bool, MapObjectLoader &)
@@ -46,7 +46,7 @@ void MapPortSpacesPacket::read
 
 	try {
 		int32_t const packet_version = s1.get_int("packet_version");
-		if (packet_version == CURRENT_PACKET_VERSION) {
+		if (packet_version == kCurrentPacketVersion) {
 			const uint16_t num = s1.get_int("number_of_port_spaces", 0);
 			if (!num)
 				return;
@@ -55,9 +55,9 @@ void MapPortSpacesPacket::read
 			for (uint16_t i = 0; i < num; ++i) {
 				map.set_port_space(get_safe_coords(std::to_string(static_cast<unsigned int>(i)), ext, &s2), true);
 			}
-		} else
-			throw GameDataError
-				("unknown/unhandled version %i", packet_version);
+		} else {
+			throw UnhandledVersionError("MapPortSpacesPacket", packet_version, kCurrentPacketVersion);
+		}
 	} catch (const WException & e) {
 		throw GameDataError("port_spaces data: %s", e.what());
 	}
@@ -69,7 +69,7 @@ void MapPortSpacesPacket::write(FileSystem & fs, EditorGameBase & egbase, MapObj
 {
 	Profile prof;
 	Section & s1 = prof.create_section("global");
-	s1.set_int("packet_version", CURRENT_PACKET_VERSION);
+	s1.set_int("packet_version", kCurrentPacketVersion);
 
 
 	// Clean up before saving: Delete port build spaces that are defined for a

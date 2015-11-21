@@ -55,34 +55,34 @@ _finish_areas = {
 _finish_rewards = {
    { -- Island 1
       { -- 1st to finish
-         log = 25, planks = 15, stone = 10,
+         log = 25, planks = 15, granite = 10,
          spidercloth = 5, corn = 20,
       },
       { -- 2st to finish
-         log = 45, planks = 30, stone = 20,
+         log = 45, planks = 30, granite = 20,
          spidercloth = 7, corn = 25,
       },
       { -- 3rd to finish
-         log = 65, planks = 45, stone = 30,
+         log = 65, planks = 45, granite = 30,
          spidercloth = 9, corn = 30,
       },
       { -- 4th to finish
-         log = 85, planks = 50, stone = 40,
+         log = 85, planks = 50, granite = 40,
          spidercloth = 11, corn = 35,
       }
    },
    { -- Island 2
       { -- 1st to finish
-         coal = 20, ironore = 10, goldore = 10,
+         coal = 20, iron_ore = 10, gold_ore = 10,
       },
       { -- 2st to finish
-         coal = 30, ironore = 15, goldore = 15,
+         coal = 30, iron_ore = 15, gold_ore = 15,
       },
       { -- 3rd to finish
-         coal = 40, ironore = 20, goldore = 20,
+         coal = 40, iron_ore = 20, gold_ore = 20,
       },
       { -- 4th to finish
-         coal = 50, ironore = 25, goldore = 25,
+         coal = 50, iron_ore = 25, gold_ore = 25,
       }
    }
 }
@@ -103,8 +103,8 @@ end
 function format_rewards(r)
    rv = {}
    for name,count in pairs(r) do
-		local ware_description = wl.Game():get_ware_description("atlanteans", name)
-		-- TRANSLATORS: number + resource name, e.g. '1x Log'
+      local ware_description = wl.Game():get_ware_description(name)
+      -- TRANSLATORS: number + resource name, e.g. '1x Log'
       rv[#rv + 1] = _"%1$dx %2$s":bformat(count, ware_description.descname) .. "<br>\n"
    end
    return table.concat(rv)
@@ -138,32 +138,32 @@ function place_headquarters()
    for idx, plr in ipairs(game.players) do
       local sf = map.player_slots[plr.number].starting_field
 
-      prefilled_buildings(plr, {"headquarters", sf.x, sf.y,
+      prefilled_buildings(plr, {"atlanteans_headquarters", sf.x, sf.y,
          wares = {
             diamond = 7,
-            ironore = 5,
+            iron_ore = 5,
             quartz = 9,
-            stone = 50,
-            spideryarn = 9,
+            granite = 50,
+            spider_silk = 9,
             log = 20,
             coal = 12,
             gold = 4,
-            goldyarn = 6,
+            gold_thread = 6,
             iron = 8,
             planks = 45,
             spidercloth = 5,
             blackroot = 5,
-            blackrootflour = 12,
-            bread = 8,
+            blackroot_flour = 12,
+            atlanteans_bread = 8,
             corn = 5,
-            cornflour = 12,
+            cornmeal = 12,
             fish = 3,
             meat = 3,
             smoked_fish = 6,
             smoked_meat = 6,
             water = 12,
             bread_paddle = 2,
-            bucket = 2,
+            buckets = 2,
             fire_tongs = 2,
             fishing_net = 4,
             hammer = 11,
@@ -175,23 +175,23 @@ function place_headquarters()
             scythe = 4,
             shovel = 9,
             tabard = 5,
-            light_trident = 5,
+            trident_light = 5,
          },
          workers = {
-            armorsmith = 1,
-            blackroot_farmer = 1,
-            builder = 10,
-            carrier = 40,
-            charcoal_burner = 1,
-            fish_breeder = 1,
-            geologist = 4,
-            miner = 4,
-            sawyer = 1,
-            stonecutter = 2,
-            toolsmith = 2,
-            weaponsmith = 1,
-            woodcutter = 3,
-            horse = 5,
+            atlanteans_armorsmith = 1,
+            atlanteans_blackroot_farmer = 1,
+            atlanteans_builder = 10,
+            atlanteans_carrier = 40,
+            atlanteans_charcoal_burner = 1,
+            atlanteans_fishbreeder = 1,
+            atlanteans_geologist = 4,
+            atlanteans_miner = 4,
+            atlanteans_sawyer = 1,
+            atlanteans_stonecutter = 2,
+            atlanteans_toolsmith = 2,
+            atlanteans_weaponsmith = 1,
+            atlanteans_woodcutter = 3,
+            atlanteans_horse = 5,
          },
          soldiers = {
             [{0,0,0,0}] = 35,
@@ -203,7 +203,7 @@ end
 -- Disable some Buildings for all players
 function disable_unused_buildings()
    for idx, plr in ipairs(game.players) do
-      plr:forbid_buildings{"shipyard"}
+      plr:forbid_buildings{"atlanteans_shipyard"}
    end
 end
 

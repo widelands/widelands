@@ -29,8 +29,7 @@
 
 namespace Widelands {
 
-#define CURRENT_PACKET_VERSION 2
-
+constexpr uint16_t kCurrentPacketVersion = 2;
 
 void GameCmdQueuePacket::read
 	(FileSystem & fs, Game & game, MapObjectLoader * const ol)
@@ -39,7 +38,7 @@ void GameCmdQueuePacket::read
 		FileRead fr;
 		fr.open(fs, "binary/cmd_queue");
 		uint16_t const packet_version = fr.unsigned_16();
-		if (packet_version == CURRENT_PACKET_VERSION) {
+		if (packet_version == kCurrentPacketVersion) {
 			CmdQueue & cmdq = game.cmdqueue();
 
 			// nothing to be done for m_game
@@ -60,16 +59,6 @@ void GameCmdQueuePacket::read
 				item.category = fr.signed_32();
 				item.serial = fr.unsigned_32();
 
-				if (packet_id == 129) {
-					// For backwards compatibility with savegames up to build15:
-					// Discard old CheckEventChain commands
-					fr.unsigned_16(); // CheckEventChain version
-					fr.unsigned_16(); // GameLogicCommand version
-					fr.unsigned_32(); // GameLogicCommand duetime
-					fr.unsigned_16(); // CheckEventChain ID
-					continue;
-				}
-
 				GameLogicCommand & cmd =
 					QueueCmdFactory::create_correct_queue_command(packet_id);
 				cmd.read(fr, game, *ol);
@@ -79,9 +68,9 @@ void GameCmdQueuePacket::read
 				cmdq.m_cmds[cmd.duetime() % CMD_QUEUE_BUCKET_SIZE].push(item);
 				++ cmdq.m_ncmds;
 			}
-		} else
-			throw GameDataError
-				("unknown/unhandled version %u", packet_version);
+		} else {
+			throw UnhandledVersionError("GameCmdQueuePacket", packet_version, kCurrentPacketVersion);
+		}
 	} catch (const WException & e) {
 		throw GameDataError("command queue: %s", e.what());
 	}
@@ -93,8 +82,7 @@ void GameCmdQueuePacket::write
 {
 	FileWrite fw;
 
-	// Now packet version
-	fw.unsigned_16(CURRENT_PACKET_VERSION);
+	fw.unsigned_16(kCurrentPacketVersion);
 
 	const CmdQueue & cmdq = game.cmdqueue();
 

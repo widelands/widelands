@@ -20,6 +20,7 @@
 #include "logic/bob.h"
 
 #include <cstdlib>
+#include <memory>
 
 #include <stdint.h>
 
@@ -27,6 +28,7 @@
 #include "base/wexception.h"
 #include "economy/route.h"
 #include "economy/transfer.h"
+#include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
@@ -40,42 +42,37 @@
 #include "logic/player.h"
 #include "logic/ship.h"
 #include "logic/soldier.h"
-#include "logic/tribe.h"
+#include "logic/tribes/tribe_descr.h"
 #include "logic/widelands_geometry_io.h"
 #include "map_io/map_object_loader.h"
 #include "map_io/map_object_saver.h"
-#include "profile/profile.h"
 #include "wui/mapviewpixelconstants.h"
 
 
 namespace Widelands {
 
-BobDescr::BobDescr(MapObjectType object_type, const std::string& init_name,
-                  const std::string& init_descname,
-                  TribeDescr const* tribe)
+BobDescr::BobDescr(const std::string& init_descname, const MapObjectType init_type,
+						 MapObjectDescr::OwnerType owner_type, const LuaTable& table)
 	:
-	MapObjectDescr(object_type, init_name, init_descname),
-	owner_tribe_    (tribe)
+	MapObjectDescr(init_type,  table.get_string("name"), init_descname, table),
+	owner_type_   (owner_type),
+	// Only tribe bobs have a vision range, since it would be irrelevant for world bobs.
+	vision_range_ (owner_type == MapObjectDescr::OwnerType::kTribe ? table.get_int("vision_range") : 0)
 {
+	if (!is_animation_known("idle")) {
+		throw GameDataError("Bob %s has no idle animation", table.get_string("name").c_str());
+	}
 }
 
 /**
  * Only tribe bobs have a vision range, since it would be irrelevant
  * for world bobs.
  *
- * Currently, all bobs use the tribe's default vision range.
- *
  * \returns radius (in fields) of area that the bob can see
  */
 uint32_t BobDescr::vision_range() const
 {
-	if (owner_tribe_) {
-		if (upcast(const ShipDescr, ship, this))
-			return ship->vision_range();
-		return owner_tribe_->get_bob_vision_range();
-	}
-
-	return 0;
+	return vision_range_;
 }
 
 /**
@@ -1066,7 +1063,7 @@ Load/save support
 ==============================
 */
 
-#define BOB_SAVEGAME_VERSION 1
+constexpr uint8_t kCurrentPacketVersion = 1;
 
 Bob::Loader::Loader()
 {
@@ -1076,74 +1073,80 @@ void Bob::Loader::load(FileRead & fr)
 {
 	MapObject::Loader::load(fr);
 
-	uint8_t version = fr.unsigned_8();
-	if (version != BOB_SAVEGAME_VERSION)
-		throw GameDataError("unknown/unhandled version: %u", version);
+	try {
+		uint8_t packet_version = fr.unsigned_8();
+		if (packet_version == kCurrentPacketVersion) {
 
-	Bob & bob = get<Bob>();
+			Bob & bob = get<Bob>();
 
-	if (PlayerNumber owner_number = fr.unsigned_8()) {
-		if (owner_number > egbase().map().get_nrplayers())
-			throw GameDataError
-				("owner number is %u but there are only %u players",
-				 owner_number, egbase().map().get_nrplayers());
+			if (PlayerNumber owner_number = fr.unsigned_8()) {
+				if (owner_number > egbase().map().get_nrplayers())
+					throw GameDataError
+						("owner number is %u but there are only %u players",
+						 owner_number, egbase().map().get_nrplayers());
 
-		Player * owner = egbase().get_player(owner_number);
-		if (!owner)
-			throw GameDataError("owning player %u does not exist", owner_number);
+				Player * owner = egbase().get_player(owner_number);
+				if (!owner)
+					throw GameDataError("owning player %u does not exist", owner_number);
 
-		bob.set_owner(owner);
-	}
+				bob.set_owner(owner);
+			}
 
-	bob.set_position(egbase(), read_coords_32(&fr));
+			bob.set_position(egbase(), read_coords_32(&fr));
 
-	std::string animname = fr.c_string();
-	bob.m_anim = animname.size() ? bob.descr().get_animation(animname) : 0;
-	bob.m_animstart = fr.signed_32();
-	bob.m_walking = static_cast<WalkingDir>(read_direction_8_allow_null(&fr));
-	if (bob.m_walking) {
-		bob.m_walkstart = fr.signed_32();
-		bob.m_walkend = fr.signed_32();
-	}
+			std::string animname = fr.c_string();
+			bob.m_anim = animname.size() ? bob.descr().get_animation(animname) : 0;
+			bob.m_animstart = fr.signed_32();
+			bob.m_walking = static_cast<WalkingDir>(read_direction_8_allow_null(&fr));
+			if (bob.m_walking) {
+				bob.m_walkstart = fr.signed_32();
+				bob.m_walkend = fr.signed_32();
+			}
 
-	bob.m_actid = fr.unsigned_32();
-	bob.m_signal = fr.c_string();
+			bob.m_actid = fr.unsigned_32();
+			bob.m_signal = fr.c_string();
 
-	uint32_t stacksize = fr.unsigned_32();
-	bob.m_stack.resize(stacksize);
-	states.resize(stacksize);
-	for (uint32_t i = 0; i < stacksize; ++i) {
-		State & state = bob.m_stack[i];
-		LoadState & loadstate = states[i];
+			uint32_t stacksize = fr.unsigned_32();
+			bob.m_stack.resize(stacksize);
+			states.resize(stacksize);
+			for (uint32_t i = 0; i < stacksize; ++i) {
+				State & state = bob.m_stack[i];
+				LoadState & loadstate = states[i];
 
-		state.task = get_task(fr.c_string());
-		state.ivar1 = fr.signed_32();
-		state.ivar2 = fr.signed_32();
-		state.ivar3 = fr.signed_32();
-		loadstate.objvar1 = fr.unsigned_32();
-		state.svar1 = fr.c_string();
-		state.coords = read_coords_32_allow_null(&fr, egbase().map().extent());
+				state.task = get_task(fr.c_string());
+				state.ivar1 = fr.signed_32();
+				state.ivar2 = fr.signed_32();
+				state.ivar3 = fr.signed_32();
+				loadstate.objvar1 = fr.unsigned_32();
+				state.svar1 = fr.c_string();
+				state.coords = read_coords_32_allow_null(&fr, egbase().map().extent());
 
-		if (fr.unsigned_8()) {
-			uint32_t anims[6];
-			for (int j = 0; j < 6; ++j)
-				anims[j] = bob.descr().get_animation(fr.c_string());
-			state.diranims = DirAnimations(anims[0], anims[1], anims[2], anims[3], anims[4], anims[5]);
+				if (fr.unsigned_8()) {
+					uint32_t anims[6];
+					for (int j = 0; j < 6; ++j)
+						anims[j] = bob.descr().get_animation(fr.c_string());
+					state.diranims = DirAnimations(anims[0], anims[1], anims[2], anims[3], anims[4], anims[5]);
+				}
+
+				if (fr.unsigned_8()) {
+					state.path = new Path;
+					state.path->load(fr, egbase().map());
+				}
+
+				if (fr.unsigned_8()) {
+					state.route = new Route;
+					state.route->load(loadstate.route, fr);
+				}
+
+				std::string programname = fr.c_string();
+				if (programname.size())
+					state.program = get_program(programname);
+			}
+		} else {
+			throw UnhandledVersionError("Bob", packet_version, kCurrentPacketVersion);
 		}
-
-		if (fr.unsigned_8()) {
-			state.path = new Path;
-			state.path->load(fr, egbase().map());
-		}
-
-		if (fr.unsigned_8()) {
-			state.route = new Route;
-			state.route->load(loadstate.route, fr);
-		}
-
-		std::string programname = fr.c_string();
-		if (programname.size())
-			state.program = get_program(programname);
+	} catch (const WException & e) {
+		throw wexception("loading bob: %s", e.what());
 	}
 }
 
@@ -1199,7 +1202,7 @@ void Bob::save
 {
 	MapObject::save(eg, mos, fw);
 
-	fw.unsigned_8(BOB_SAVEGAME_VERSION);
+	fw.unsigned_8(kCurrentPacketVersion);
 
 	fw.unsigned_8(m_owner ? m_owner->player_number() : 0);
 	write_coords_32(&fw, m_position);

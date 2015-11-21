@@ -65,6 +65,7 @@ public:
 	int get_defeated(lua_State * L);
 	int get_inbox(lua_State * L);
 	int get_team(lua_State * L);
+	int get_tribe(lua_State * L);
 	int set_team(lua_State * L);
 	int get_see_all(lua_State * L);
 	int set_see_all(lua_State * L);
@@ -95,7 +96,7 @@ public:
 private:
 	void m_parse_building_list
 		(lua_State *, const Widelands::TribeDescr &,
-		 std::vector<Widelands::BuildingIndex> &);
+		 std::vector<Widelands::DescriptionIndex> &);
 	int m_allow_forbid_buildings(lua_State * L, bool);
 
 };

@@ -49,7 +49,7 @@ public:
 		 Warehouse & wh, Widelands::WareWorker type, bool selectable);
 
 protected:
-	void draw_ware(RenderTarget & dst, Widelands::WareIndex ware) override;
+	void draw_ware(RenderTarget & dst, Widelands::DescriptionIndex ware) override;
 
 private:
 	Warehouse & m_warehouse;
@@ -66,8 +66,8 @@ m_warehouse(wh)
 	add_warelist(type == Widelands::wwWORKER ? m_warehouse.get_workers() : m_warehouse.get_wares());
 	if (type == Widelands::wwWORKER)
 	{
-		const std::vector<Widelands::WareIndex> & worker_types_without_cost =
-			m_warehouse.descr().tribe().worker_types_without_cost();
+		const std::vector<Widelands::DescriptionIndex> & worker_types_without_cost =
+			m_warehouse.owner().tribe().worker_types_without_cost();
 		for (size_t i = 0; i < worker_types_without_cost.size(); ++i)
 		{
 			hide_ware(worker_types_without_cost.at(i));
@@ -75,7 +75,7 @@ m_warehouse(wh)
 	}
 }
 
-void WarehouseWaresDisplay::draw_ware(RenderTarget & dst, Widelands::WareIndex ware)
+void WarehouseWaresDisplay::draw_ware(RenderTarget & dst, Widelands::DescriptionIndex ware)
 {
 	WaresDisplay::draw_ware(dst, ware);
 
@@ -150,22 +150,19 @@ WarehouseWaresPanel::WarehouseWaresPanel
  * Add Buttons policy buttons
  */
 void WarehouseWaresPanel::set_policy(Warehouse::StockPolicy newpolicy) {
-	bool is_workers = m_type == Widelands::wwWORKER;
-	Widelands::WareIndex nritems =
-	                   is_workers ? m_wh.owner().tribe().get_nrworkers() :
-				        m_wh.owner().tribe().get_nrwares();
 	if (m_gb.can_act(m_wh.owner().player_number())) {
-		for
-			(Widelands::WareIndex id = 0;
-			 id < nritems; ++id)
-		{
-			if (m_display.ware_selected(id)) {
+		bool is_workers = m_type == Widelands::wwWORKER;
+		const std::set<Widelands::DescriptionIndex> indices =
+				is_workers ? m_wh.owner().tribe().workers() : m_wh.owner().tribe().wares();
+
+		for (const Widelands::DescriptionIndex& index : indices) {
+			if (m_display.ware_selected(index)) {
 				m_gb.game().send_player_command
 					(*new Widelands::CmdSetStockPolicy
 						(m_gb.game().get_gametime(),
 						 m_wh.owner().player_number(),
 						 m_wh, is_workers,
-						 id, newpolicy));
+						 index, newpolicy));
 			}
 		}
 	}

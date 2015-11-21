@@ -21,6 +21,7 @@
 #define WL_LOGIC_IMMOVABLE_H
 
 #include <memory>
+#include <unordered_map>
 
 #include "base/macros.h"
 #include "graphic/animation.h"
@@ -31,14 +32,15 @@
 #include "notifications/notifications.h"
 
 class LuaTable;
-class OneWorldLegacyLookupTable;
-class Profile;
+class TribesLegacyLookupTable;
+class WorldLegacyLookupTable;
 
 namespace Widelands {
 
 class Economy;
 class Map;
 class TerrainAffinity;
+class Tribes;
 class WareInstance;
 class Worker;
 class World;
@@ -106,16 +108,16 @@ struct ImmovableAction;
 struct ImmovableActionData;
 
 /**
- * Immovable represents a standard immovable such as trees or stones.
+ * Immovable represents a standard immovable such as trees or rocks.
  */
-struct ImmovableDescr : public MapObjectDescr {
+class ImmovableDescr : public MapObjectDescr {
+public:
 	using Programs = std::map<std::string, ImmovableProgram *>;
 
-	ImmovableDescr
-		(char const * name, char const * descname,
-		 const std::string & directory, Profile &, Section & global_s,
-		 TribeDescr const * const);
-	ImmovableDescr(const LuaTable&, const World&);
+	/// World immovable
+	ImmovableDescr(const std::string& init_descname, const LuaTable&, const World& world);
+	/// Tribes immovable
+	ImmovableDescr(const std::string& init_descname, const LuaTable&, const Tribes& tribes);
 	~ImmovableDescr() override;
 
 	int32_t get_size() const {return m_size;}
@@ -123,7 +125,7 @@ struct ImmovableDescr : public MapObjectDescr {
 
 	Immovable & create(EditorGameBase &, Coords) const;
 
-	TribeDescr const * get_owner_tribe() const {return m_owner_tribe;}
+	MapObjectDescr::OwnerType owner_type() const {return owner_type_;}
 
 	const Buildcost & buildcost() const {return m_buildcost;}
 
@@ -143,15 +145,17 @@ protected:
 	int32_t     m_size;
 	Programs    m_programs;
 
-	/// The tribe to which this ImmovableDescr belongs or 0 if it is a
-	/// world immovable
-	const TribeDescr * const m_owner_tribe;
+	/// Whether this ImmovableDescr belongs to a tribe or the world
+	const MapObjectDescr::OwnerType owner_type_;
 
 	/// Buildcost for externally constructible immovables (for ship construction)
 	/// \see ActConstruction
 	Buildcost m_buildcost;
 
 private:
+	 // Common constructor functions for tribes and world.
+	ImmovableDescr(const std::string& init_descname, const LuaTable&, MapObjectDescr::OwnerType type);
+
 	// Adds a default program if none was defined.
 	void make_sure_default_program_is_there();
 
@@ -161,7 +165,7 @@ private:
 };
 
 class Immovable : public BaseImmovable {
-	friend struct ImmovableDescr;
+	friend class ImmovableDescr;
 	friend struct ImmovableProgram;
 	friend class Map;
 
@@ -194,7 +198,7 @@ public:
 	void draw(const EditorGameBase &, RenderTarget &, const FCoords&, const Point&) override;
 
 	void switch_program(Game & game, const std::string & programname);
-	bool construct_ware(Game & game, WareIndex index);
+	bool construct_ware(Game & game, DescriptionIndex index);
 	bool construct_remaining_buildcost(Game & game, Buildcost * buildcost);
 
 
@@ -249,7 +253,7 @@ protected:
         // Load/save support
 protected:
 	struct Loader : public BaseImmovable::Loader {
-		void load(FileRead &, uint8_t version);
+		void load(FileRead &, uint8_t packet_version);
 		void load_pointers() override;
 		void load_finish() override;
 	};
@@ -261,7 +265,8 @@ public:
 	void save(EditorGameBase &, MapObjectSaver &, FileWrite &) override;
 	static MapObject::Loader * load
 		(EditorGameBase &, MapObjectLoader &, FileRead &,
-		 const OneWorldLegacyLookupTable& lookup_table);
+		 const WorldLegacyLookupTable& world_lookup_table,
+		 const TribesLegacyLookupTable& tribes_lookup_table);
 
 private:
 	void increment_program_pointer();
@@ -317,7 +322,7 @@ struct PlayerImmovable : public BaseImmovable {
 	 * functionality, which has to do with setting up locations.
 	 */
 	/*@{*/
-	virtual void receive_ware(Game &, WareIndex ware);
+	virtual void receive_ware(Game &, DescriptionIndex ware);
 	virtual void receive_worker(Game &, Worker & worker);
 	/*@}*/
 

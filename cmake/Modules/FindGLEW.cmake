@@ -27,9 +27,9 @@ if( WIN32 )
                  PATHS c:/glew/lib ${COMPILER_PATH}/PlatformSDK/Lib )
    # Static library version requires extra flag
    GET_FILENAME_COMPONENT( GLEW_LIBRARY_NAME ${GLEW_LIBRARY} NAME_WE )
-   if ( GLEW_LIBRARY_NAME STREQUAL "glew32s" )
+   if ( GLEW_LIBRARY_NAME STREQUAL "glew32s" OR OPTION_GLEW_STATIC) 
        SET(GLEW_EXTRA_DEFINITIONS "-DGLEW_STATIC")
-   else ( GLEW_LIBRARY_NAME STREQUAL "glew32s" )
+   else ( GLEW_LIBRARY_NAME STREQUAL "glew32s" OR OPTION_GLEW_STATIC)
        SET(GLEW_EXTRA_DEFINITIONS )
    endif()
 

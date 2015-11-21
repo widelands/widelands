@@ -33,7 +33,7 @@
 #include "logic/player.h"
 #include "logic/ship.h"
 #include "logic/soldier.h"
-#include "logic/tribe.h"
+#include "logic/tribes/tribe_descr.h"
 #include "logic/widelands_geometry_io.h"
 #include "map_io/map_object_loader.h"
 #include "map_io/map_object_saver.h"
@@ -138,12 +138,13 @@ PlayerCommand * PlayerCommand::deserialize (StreamRead & des)
 /**
  * Write this player command to a file. Call this from base classes
  */
-#define PLAYER_COMMAND_VERSION 2
+constexpr uint16_t kCurrentPacketVersionPlayerCommand = 2;
+
 void PlayerCommand::write
 	(FileWrite & fw, EditorGameBase & egbase, MapObjectSaver & mos)
 {
 	// First, write version
-	fw.unsigned_16(PLAYER_COMMAND_VERSION);
+	fw.unsigned_16(kCurrentPacketVersionPlayerCommand);
 
 	GameLogicCommand::write(fw, egbase, mos);
 	// Now sender
@@ -156,15 +157,15 @@ void PlayerCommand::read
 {
 	try {
 		const uint16_t packet_version = fr.unsigned_16();
-		if (2 <= packet_version && packet_version <= PLAYER_COMMAND_VERSION) {
+		if (packet_version == kCurrentPacketVersionPlayerCommand) {
 			GameLogicCommand::read(fr, egbase, mol);
 			m_sender    = fr.unsigned_8 ();
 			if (!egbase.get_player(m_sender))
 				throw GameDataError("player %u does not exist", m_sender);
 			m_cmdserial = fr.unsigned_32();
-		} else
-			throw GameDataError
-				("unknown/unhandled version %u", packet_version);
+		} else {
+			throw UnhandledVersionError("PlayerCommand", packet_version, kCurrentPacketVersionPlayerCommand);
+		}
 	} catch (const WException & e) {
 		throw GameDataError("player command: %s", e.what());
 	}
@@ -191,22 +192,22 @@ void CmdBulldoze::serialize (StreamWrite & ser)
 	ser.unsigned_32(serial);
 	ser.unsigned_8 (recurse);
 }
-#define PLAYER_CMD_BULLDOZE_VERSION 2
+
+constexpr uint16_t kCurrentPacketVersionCmdBulldoze = 2;
+
 void CmdBulldoze::read
 	(FileRead & fr, EditorGameBase & egbase, MapObjectLoader & mol)
 {
 	try {
 		const uint16_t packet_version = fr.unsigned_16();
-		if
-			(1 <= packet_version &&
-			 packet_version <= PLAYER_CMD_BULLDOZE_VERSION)
-		{
+		if (packet_version == kCurrentPacketVersionCmdBulldoze) {
 			PlayerCommand::read(fr, egbase, mol);
 			serial = get_object_serial_or_zero<PlayerImmovable>(fr.unsigned_32(), mol);
 			recurse = 2 <= packet_version ? fr.unsigned_8() : false;
-		} else
-			throw GameDataError
-				("unknown/unhandled version %u", packet_version);
+		} else {
+			throw UnhandledVersionError("CmdBulldoze",
+												 packet_version, kCurrentPacketVersionCmdBulldoze);
+		}
 	} catch (const WException & e) {
 		throw GameDataError("bulldoze: %s", e.what());
 	}
@@ -215,7 +216,7 @@ void CmdBulldoze::write
 	(FileWrite & fw, EditorGameBase & egbase, MapObjectSaver & mos)
 {
 	// First, write version
-	fw.unsigned_16(PLAYER_CMD_BULLDOZE_VERSION);
+	fw.unsigned_16(kCurrentPacketVersionCmdBulldoze);
 	// Write base classes
 	PlayerCommand::write(fw, egbase, mos);
 	// Now serial
@@ -245,19 +246,23 @@ void CmdBuild::serialize (StreamWrite & ser) {
 	ser.signed_16  (bi);
 	write_coords_32  (&ser, coords);
 }
-#define PLAYER_CMD_BUILD_VERSION 1
+
+constexpr uint16_t kCurrentPacketVersionCmdBuild = 1;
+
 void CmdBuild::read
 	(FileRead & fr, EditorGameBase & egbase, MapObjectLoader & mol)
 {
 	try {
 		const uint16_t packet_version = fr.unsigned_16();
-		if (packet_version == PLAYER_CMD_BUILD_VERSION) {
+		if (packet_version == kCurrentPacketVersionCmdBuild) {
 			PlayerCommand::read(fr, egbase, mol);
 			bi = fr.unsigned_16();
 			coords = read_coords_32(&fr, egbase.map().extent());
-		} else
-			throw GameDataError
-				("unknown/unhandled version %u", packet_version);
+		} else {
+			throw UnhandledVersionError("CmdBuild",
+												 packet_version, kCurrentPacketVersionCmdBuild);
+		}
+
 	} catch (const WException & e) {
 		throw GameDataError("build: %s", e.what());
 	}
@@ -267,7 +272,7 @@ void CmdBuild::write
 	(FileWrite & fw, EditorGameBase & egbase, MapObjectSaver & mos)
 {
 	// First, write version
-	fw.unsigned_16(PLAYER_CMD_BUILD_VERSION);
+	fw.unsigned_16(kCurrentPacketVersionCmdBuild);
 	// Write base classes
 	PlayerCommand::write(fw, egbase, mos);
 	fw.unsigned_16(bi);
@@ -294,18 +299,21 @@ void CmdBuildFlag::serialize (StreamWrite & ser)
 	ser.unsigned_8 (sender());
 	write_coords_32  (&ser, coords);
 }
-#define PLAYER_CMD_BUILDFLAG_VERSION 1
+
+constexpr uint16_t kCurrentPacketVersionCmdBuildFlag = 1;
+
 void CmdBuildFlag::read
 	(FileRead & fr, EditorGameBase & egbase, MapObjectLoader & mol)
 {
 	try {
 		const uint16_t packet_version = fr.unsigned_16();
-		if (packet_version == PLAYER_CMD_BUILDFLAG_VERSION) {
+		if (packet_version == kCurrentPacketVersionCmdBuildFlag) {
 			PlayerCommand::read(fr, egbase, mol);
 			coords = read_coords_32(&fr, egbase.map().extent());
-		} else
-			throw GameDataError
-				("unknown/unhandled version %u", packet_version);
+		} else {
+			throw UnhandledVersionError("CmdBuildFlag",
+												 packet_version, kCurrentPacketVersionCmdBuildFlag);
+		}
 	} catch (const WException & e) {
 		throw GameDataError("build flag: %s", e.what());
 	}
@@ -314,7 +322,7 @@ void CmdBuildFlag::write
 	(FileWrite & fw, EditorGameBase & egbase, MapObjectSaver & mos)
 {
 	// First, write version
-	fw.unsigned_16(PLAYER_CMD_BUILDFLAG_VERSION);
+	fw.unsigned_16(kCurrentPacketVersionCmdBuildFlag);
 	// Write base classes
 	PlayerCommand::write(fw, egbase, mos);
 	write_coords_32  (&fw, coords);
@@ -376,13 +384,15 @@ void CmdBuildRoad::serialize (StreamWrite & ser)
 	for (Path::StepVector::size_type i = 0; i < nsteps; ++i)
 		ser.unsigned_8(path ? (*path)[i] : steps[i]);
 }
-#define PLAYER_CMD_BUILDROAD_VERSION 1
+
+constexpr uint16_t kCurrentPacketVersionCmdBuildRoad = 1;
+
 void CmdBuildRoad::read
 	(FileRead & fr, EditorGameBase & egbase, MapObjectLoader & mol)
 {
 	try {
 		const uint16_t packet_version = fr.unsigned_16();
-		if (packet_version == PLAYER_CMD_BUILDROAD_VERSION) {
+		if (packet_version == kCurrentPacketVersionCmdBuildRoad) {
 			PlayerCommand::read(fr, egbase, mol);
 			start = read_coords_32(&fr, egbase.map().extent());
 			nsteps = fr.unsigned_16();
@@ -390,9 +400,10 @@ void CmdBuildRoad::read
 			steps = new char[nsteps];
 			for (Path::StepVector::size_type i = 0; i < nsteps; ++i)
 			steps[i] = fr.unsigned_8();
-		} else
-			throw GameDataError
-				("unknown/unhandled version %u", packet_version);
+		} else {
+			throw UnhandledVersionError("CmdBuildRoad",
+												 packet_version, kCurrentPacketVersionCmdBuildRoad);
+		}
 	} catch (const WException & e) {
 		throw GameDataError("build road: %s", e.what());
 	}
@@ -401,7 +412,7 @@ void CmdBuildRoad::write
 	(FileWrite & fw, EditorGameBase & egbase, MapObjectSaver & mos)
 {
 	// First, write version
-	fw.unsigned_16(PLAYER_CMD_BUILDROAD_VERSION);
+	fw.unsigned_16(kCurrentPacketVersionCmdBuildRoad);
 	// Write base classes
 	PlayerCommand::write(fw, egbase, mos);
 	write_coords_32  (&fw, start);
@@ -435,19 +446,21 @@ void CmdFlagAction::serialize (StreamWrite & ser)
 	ser.unsigned_32(serial);
 }
 
-#define PLAYER_CMD_FLAGACTION_VERSION 1
+constexpr uint16_t kCurrentPacketVersionCmdFlagAction = 1;
+
 void CmdFlagAction::read
 	(FileRead & fr, EditorGameBase & egbase, MapObjectLoader & mol)
 {
 	try {
 		const uint16_t packet_version = fr.unsigned_16();
-		if (packet_version == PLAYER_CMD_FLAGACTION_VERSION) {
+		if (packet_version == kCurrentPacketVersionCmdFlagAction) {
 			PlayerCommand::read(fr, egbase, mol);
 			fr                             .unsigned_8 ();
 			serial = get_object_serial_or_zero<Flag>(fr.unsigned_32(), mol);
-		} else
-			throw GameDataError
-				("unknown/unhandled version %u", packet_version);
+		} else {
+			throw UnhandledVersionError("CmdFlagAction",
+												 packet_version, kCurrentPacketVersionCmdFlagAction);
+		}
 	} catch (const WException & e) {
 		throw GameDataError("flag action: %s", e.what());
 	}
@@ -456,7 +469,7 @@ void CmdFlagAction::write
 	(FileWrite & fw, EditorGameBase & egbase, MapObjectSaver & mos)
 {
 	// First, write version
-	fw.unsigned_16(PLAYER_CMD_FLAGACTION_VERSION);
+	fw.unsigned_16(kCurrentPacketVersionCmdFlagAction);
 	// Write base classes
 	PlayerCommand::write(fw, egbase, mos);
 	// Now action
@@ -486,18 +499,21 @@ void CmdStartStopBuilding::serialize (StreamWrite & ser)
 	ser.unsigned_8 (sender());
 	ser.unsigned_32(serial);
 }
-#define PLAYER_CMD_STOPBUILDING_VERSION 1
+
+constexpr uint16_t kCurrentPacketVersionCmdStartStopBuilding = 1;
+
 void CmdStartStopBuilding::read
 	(FileRead & fr, EditorGameBase & egbase, MapObjectLoader & mol)
 {
 	try {
 		const uint16_t packet_version = fr.unsigned_16();
-		if (packet_version == PLAYER_CMD_STOPBUILDING_VERSION) {
+		if (packet_version == kCurrentPacketVersionCmdStartStopBuilding) {
 			PlayerCommand::read(fr, egbase, mol);
 			serial = get_object_serial_or_zero<Building>(fr.unsigned_32(), mol);
-		} else
-			throw GameDataError
-				("unknown/unhandled version %u", packet_version);
+		} else {
+			throw UnhandledVersionError("CmdStartStopBuilding",
+												 packet_version, kCurrentPacketVersionCmdStartStopBuilding);
+		}
 	} catch (const WException & e) {
 		throw GameDataError("start/stop building: %s", e.what());
 	}
@@ -506,7 +522,7 @@ void CmdStartStopBuilding::write
 	(FileWrite & fw, EditorGameBase & egbase, MapObjectSaver & mos)
 {
 	// First, write version
-	fw.unsigned_16(PLAYER_CMD_STOPBUILDING_VERSION);
+	fw.unsigned_16(kCurrentPacketVersionCmdStartStopBuilding);
 	// Write base classes
 	PlayerCommand::write(fw, egbase, mos);
 
@@ -537,12 +553,13 @@ void CmdMilitarySiteSetSoldierPreference::execute (Game & game)
 
 }
 
-#define PLAYER_CMD_SOLDIERPREFERENCE_VERSION 1
+constexpr uint16_t kCurrentPacketVersionSoldierPreference = 1;
+
 void CmdMilitarySiteSetSoldierPreference::write
 	(FileWrite & fw, EditorGameBase & egbase, MapObjectSaver & mos)
 {
 	// First, write version
-	fw.unsigned_16(PLAYER_CMD_SOLDIERPREFERENCE_VERSION);
+	fw.unsigned_16(kCurrentPacketVersionSoldierPreference);
 	// Write base classes
 	PlayerCommand::write(fw, egbase, mos);
 
@@ -558,13 +575,14 @@ void CmdMilitarySiteSetSoldierPreference::read
 	try
 	{
 		const uint16_t packet_version = fr.unsigned_16();
-		if (packet_version == PLAYER_CMD_SOLDIERPREFERENCE_VERSION) {
+		if (packet_version == kCurrentPacketVersionSoldierPreference) {
 			PlayerCommand::read(fr, egbase, mol);
 			preference = fr.unsigned_8();
 			serial = get_object_serial_or_zero<MilitarySite>(fr.unsigned_32(), mol);
-		} else
-			throw GameDataError
-				("unknown/unhandled version %u", packet_version);
+		} else {
+			throw UnhandledVersionError("CmdMilitarySiteSetSoldierPreference",
+												 packet_version, kCurrentPacketVersionSoldierPreference);
+		}
 	} catch (const WException & e) {
 		throw GameDataError("start/stop building: %s", e.what());
 	}
@@ -591,18 +609,21 @@ void CmdStartOrCancelExpedition::serialize (StreamWrite & ser)
 	ser.unsigned_8 (sender());
 	ser.unsigned_32(serial);
 }
-#define PLAYER_CMD_EXPEDITION_VERSION 1
+
+constexpr uint16_t kCurrentPacketVersionExpedition = 1;
+
 void CmdStartOrCancelExpedition::read
 	(FileRead & fr, EditorGameBase & egbase, MapObjectLoader & mol)
 {
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
-		if (packet_version == PLAYER_CMD_EXPEDITION_VERSION) {
+		if (packet_version == kCurrentPacketVersionExpedition) {
 			PlayerCommand::read(fr, egbase, mol);
 			serial = get_object_serial_or_zero<Warehouse>(fr.unsigned_32(), mol);
-		} else
-			throw GameDataError
-				("unknown/unhandled version %u", packet_version);
+		} else {
+			throw UnhandledVersionError("CmdStartOrCancelExpedition",
+												 packet_version, kCurrentPacketVersionExpedition);
+		}
 	} catch (const WException & e) {
 		throw GameDataError("start/stop building: %s", e.what());
 	}
@@ -611,7 +632,7 @@ void CmdStartOrCancelExpedition::write
 	(FileWrite & fw, EditorGameBase & egbase, MapObjectSaver & mos)
 {
 	// First, write version
-	fw.unsigned_16(PLAYER_CMD_EXPEDITION_VERSION);
+	fw.unsigned_16(kCurrentPacketVersionExpedition);
 	// Write base classes
 	PlayerCommand::write(fw, egbase, mos);
 
@@ -642,19 +663,22 @@ void CmdEnhanceBuilding::serialize (StreamWrite & ser)
 	ser.unsigned_32(serial);
 	ser.unsigned_16(bi);
 }
-#define PLAYER_CMD_ENHANCEBUILDING_VERSION 1
+
+constexpr uint16_t kCurrentPacketVersionCmdEnhanceBuilding = 1;
+
 void CmdEnhanceBuilding::read
 	(FileRead & fr, EditorGameBase & egbase, MapObjectLoader & mol)
 {
 	try {
 		const uint16_t packet_version = fr.unsigned_16();
-		if (packet_version == PLAYER_CMD_ENHANCEBUILDING_VERSION) {
+		if (packet_version == kCurrentPacketVersionCmdEnhanceBuilding) {
 			PlayerCommand::read(fr, egbase, mol);
 			serial = get_object_serial_or_zero<Building>(fr.unsigned_32(), mol);
 			bi = fr.unsigned_16();
-		} else
-			throw GameDataError
-				("unknown/unhandled version %u", packet_version);
+		} else {
+			throw UnhandledVersionError("CmdEnhanceBuilding",
+												 packet_version, kCurrentPacketVersionCmdEnhanceBuilding);
+		}
 	} catch (const WException & e) {
 		throw GameDataError("enhance building: %s", e.what());
 	}
@@ -663,7 +687,7 @@ void CmdEnhanceBuilding::write
 	(FileWrite & fw, EditorGameBase & egbase, MapObjectSaver & mos)
 {
 	// First, write version
-	fw.unsigned_16(PLAYER_CMD_ENHANCEBUILDING_VERSION);
+	fw.unsigned_16(kCurrentPacketVersionCmdEnhanceBuilding);
 	// Write base classes
 	PlayerCommand::write(fw, egbase, mos);
 
@@ -694,18 +718,21 @@ void CmdDismantleBuilding::serialize (StreamWrite & ser)
 	ser.unsigned_8 (sender());
 	ser.unsigned_32(serial);
 }
-#define PLAYER_CMD_DISMANTLEBUILDING_VERSION 1
+
+constexpr uint16_t kCurrentPacketVersionDismantleBuilding = 1;
+
 void CmdDismantleBuilding::read
 	(FileRead & fr, EditorGameBase & egbase, MapObjectLoader & mol)
 {
 	try {
 		const uint16_t packet_version = fr.unsigned_16();
-		if (packet_version == PLAYER_CMD_DISMANTLEBUILDING_VERSION) {
+		if (packet_version == kCurrentPacketVersionDismantleBuilding) {
 			PlayerCommand::read(fr, egbase, mol);
 			serial = get_object_serial_or_zero<Building>(fr.unsigned_32(), mol);
-		} else
-			throw GameDataError
-				("unknown/unhandled version %u", packet_version);
+		} else {
+			throw UnhandledVersionError("CmdDismantleBuilding",
+												 packet_version, kCurrentPacketVersionDismantleBuilding);
+		}
 	} catch (const WException & e) {
 		throw GameDataError("dismantle building: %s", e.what());
 	}
@@ -714,7 +741,7 @@ void CmdDismantleBuilding::write
 	(FileWrite & fw, EditorGameBase & egbase, MapObjectSaver & mos)
 {
 	// First, write version
-	fw.unsigned_16(PLAYER_CMD_DISMANTLEBUILDING_VERSION);
+	fw.unsigned_16(kCurrentPacketVersionDismantleBuilding);
 	// Write base classes
 	PlayerCommand::write(fw, egbase, mos);
 
@@ -743,18 +770,21 @@ void CmdEvictWorker::serialize (StreamWrite & ser)
 	ser.unsigned_8 (sender());
 	ser.unsigned_32(serial);
 }
-#define PLAYER_CMD_EVICTWORKER_VERSION 1
+
+constexpr uint16_t kCurrentPacketVersionCmdEvictWorker = 1;
+
 void CmdEvictWorker::read
 	(FileRead & fr, EditorGameBase & egbase, MapObjectLoader & mol)
 {
 	try {
 		const uint16_t packet_version = fr.unsigned_16();
-		if (packet_version == PLAYER_CMD_EVICTWORKER_VERSION) {
+		if (packet_version == kCurrentPacketVersionCmdEvictWorker) {
 			PlayerCommand::read(fr, egbase, mol);
 			serial = get_object_serial_or_zero<Worker>(fr.unsigned_32(), mol);
-		} else
-			throw GameDataError
-				("unknown/unhandled version %u", packet_version);
+		} else {
+			throw UnhandledVersionError("CmdEvictWorker",
+												 packet_version, kCurrentPacketVersionCmdEvictWorker);
+		}
 	} catch (const WException & e) {
 		throw GameDataError("evict worker: %s", e.what());
 	}
@@ -763,7 +793,7 @@ void CmdEvictWorker::write
 	(FileWrite & fw, EditorGameBase & egbase, MapObjectSaver & mos)
 {
 	// First, write version
-	fw.unsigned_16(PLAYER_CMD_EVICTWORKER_VERSION);
+	fw.unsigned_16(kCurrentPacketVersionCmdEvictWorker);
 	// Write base classes
 	PlayerCommand::write(fw, egbase, mos);
 
@@ -808,19 +838,22 @@ void CmdShipScoutDirection::serialize (StreamWrite & ser)
 	ser.unsigned_8 (static_cast<uint8_t>(dir));
 }
 
-#define PLAYER_CMD_SHIP_SCOUT_DIRECTION_VERSION 1
+constexpr uint16_t kCurrentPacketVersionShipScoutDirection = 1;
+
 void CmdShipScoutDirection::read
 	(FileRead & fr, EditorGameBase & egbase, MapObjectLoader & mol)
 {
 	try {
 		const uint16_t packet_version = fr.unsigned_16();
-		if (packet_version == PLAYER_CMD_SHIP_SCOUT_DIRECTION_VERSION) {
+		if (packet_version == kCurrentPacketVersionShipScoutDirection) {
 			PlayerCommand::read(fr, egbase, mol);
 			serial = get_object_serial_or_zero<Ship>(fr.unsigned_32(), mol);
 			// direction
 			dir = static_cast<WalkingDir>(fr.unsigned_8());
-		} else
-			throw GameDataError("unknown/unhandled version %u", packet_version);
+		} else {
+			throw UnhandledVersionError("CmdShipScoutDirection",
+												 packet_version, kCurrentPacketVersionShipScoutDirection);
+		}
 	} catch (const WException & e) {
 		throw GameDataError("Ship scout: %s", e.what());
 	}
@@ -829,7 +862,7 @@ void CmdShipScoutDirection::write
 	(FileWrite & fw, EditorGameBase & egbase, MapObjectSaver & mos)
 {
 	// First, write version
-	fw.unsigned_16(PLAYER_CMD_SHIP_SCOUT_DIRECTION_VERSION);
+	fw.unsigned_16(kCurrentPacketVersionShipScoutDirection);
 	// Write base classes
 	PlayerCommand::write(fw, egbase, mos);
 
@@ -874,19 +907,22 @@ void CmdShipConstructPort::serialize (StreamWrite & ser)
 	write_coords_32  (&ser, coords);
 }
 
-#define PLAYER_CMD_SHIP_CONSTRUCT_PORT_VERSION 1
+constexpr uint16_t kCurrentPacketVersionShipConstructPort = 1;
+
 void CmdShipConstructPort::read
 	(FileRead & fr, EditorGameBase & egbase, MapObjectLoader & mol)
 {
 	try {
 		const uint16_t packet_version = fr.unsigned_16();
-		if (packet_version == PLAYER_CMD_SHIP_CONSTRUCT_PORT_VERSION) {
+		if (packet_version == kCurrentPacketVersionShipConstructPort) {
 			PlayerCommand::read(fr, egbase, mol);
 			serial = get_object_serial_or_zero<Ship>(fr.unsigned_32(), mol);
 			// Coords
 			coords = read_coords_32(&fr);
-		} else
-			throw GameDataError("unknown/unhandled version %u", packet_version);
+		} else {
+			throw UnhandledVersionError("CmdShipConstructPort",
+												 packet_version, kCurrentPacketVersionShipConstructPort);
+		}
 	} catch (const WException & e) {
 		throw GameDataError("Ship construct port: %s", e.what());
 	}
@@ -895,7 +931,7 @@ void CmdShipConstructPort::write
 	(FileWrite & fw, EditorGameBase & egbase, MapObjectSaver & mos)
 {
 	// First, write version
-	fw.unsigned_16(PLAYER_CMD_SHIP_CONSTRUCT_PORT_VERSION);
+	fw.unsigned_16(kCurrentPacketVersionShipConstructPort);
 	// Write base classes
 	PlayerCommand::write(fw, egbase, mos);
 
@@ -943,18 +979,21 @@ void CmdShipExploreIsland::serialize (StreamWrite & ser)
 	ser.unsigned_8 (static_cast<uint8_t>(island_explore_direction));
 }
 
-#define PLAYER_CMD_SHIP_EXPLORE_ISLAND_VERSION 1
+constexpr uint16_t kCurrentPacketVersionShipExploreIsland = 1;
+
 void CmdShipExploreIsland::read
 	(FileRead & fr, EditorGameBase & egbase, MapObjectLoader & mol)
 {
 	try {
 		const uint16_t packet_version = fr.unsigned_16();
-		if (packet_version == PLAYER_CMD_SHIP_EXPLORE_ISLAND_VERSION) {
+		if (packet_version == kCurrentPacketVersionShipExploreIsland) {
 			PlayerCommand::read(fr, egbase, mol);
 			serial = get_object_serial_or_zero<Ship>(fr.unsigned_32(), mol);
 			island_explore_direction = static_cast<IslandExploreDirection>(fr.unsigned_8());
-		} else
-			throw GameDataError("unknown/unhandled version %u", packet_version);
+		} else {
+			throw UnhandledVersionError("CmdShipExploreIsland",
+												 packet_version, kCurrentPacketVersionShipExploreIsland);
+		}
 	} catch (const WException & e) {
 		throw GameDataError("Ship explore: %s", e.what());
 	}
@@ -963,7 +1002,7 @@ void CmdShipExploreIsland::write
 	(FileWrite & fw, EditorGameBase & egbase, MapObjectSaver & mos)
 {
 	// First, write version
-	fw.unsigned_16(PLAYER_CMD_SHIP_EXPLORE_ISLAND_VERSION);
+	fw.unsigned_16(kCurrentPacketVersionShipExploreIsland);
 	// Write base classes
 	PlayerCommand::write(fw, egbase, mos);
 
@@ -997,17 +1036,20 @@ void CmdShipSink::serialize (StreamWrite & ser)
 	ser.unsigned_32(serial);
 }
 
-#define PLAYER_CMD_SHIP_SINK_VERSION 1
+constexpr uint16_t kCurrentPacketVersionCmdShipSink = 1;
+
 void CmdShipSink::read
 	(FileRead & fr, EditorGameBase & egbase, MapObjectLoader & mol)
 {
 	try {
 		const uint16_t packet_version = fr.unsigned_16();
-		if (packet_version == PLAYER_CMD_SHIP_SINK_VERSION) {
+		if (packet_version == kCurrentPacketVersionCmdShipSink) {
 			PlayerCommand::read(fr, egbase, mol);
 			serial = get_object_serial_or_zero<Ship>(fr.unsigned_32(), mol);
-		} else
-			throw GameDataError("unknown/unhandled version %u", packet_version);
+		} else {
+			throw UnhandledVersionError("CmdShipSink", packet_version,
+												 kCurrentPacketVersionCmdShipSink);
+		}
 	} catch (const WException & e) {
 		throw GameDataError("Ship explore: %s", e.what());
 	}
@@ -1016,7 +1058,7 @@ void CmdShipSink::write
 	(FileWrite & fw, EditorGameBase & egbase, MapObjectSaver & mos)
 {
 	// First, write version
-	fw.unsigned_16(PLAYER_CMD_SHIP_SINK_VERSION);
+	fw.unsigned_16(kCurrentPacketVersionCmdShipSink);
 	// Write base classes
 	PlayerCommand::write(fw, egbase, mos);
 
@@ -1047,17 +1089,20 @@ void CmdShipCancelExpedition::serialize (StreamWrite & ser)
 	ser.unsigned_32(serial);
 }
 
-#define PLAYER_CMD_SHIP_CANCELEXPEDITION_VERSION 1
+constexpr uint16_t kCurrentPacketVersionShipCancelExpedition = 1;
+
 void CmdShipCancelExpedition::read
 	(FileRead & fr, EditorGameBase & egbase, MapObjectLoader & mol)
 {
 	try {
 		const uint16_t packet_version = fr.unsigned_16();
-		if (packet_version == PLAYER_CMD_SHIP_CANCELEXPEDITION_VERSION) {
+		if (packet_version == kCurrentPacketVersionShipCancelExpedition) {
 			PlayerCommand::read(fr, egbase, mol);
 			serial = get_object_serial_or_zero<Ship>(fr.unsigned_32(), mol);
-		} else
-			throw GameDataError("unknown/unhandled version %u", packet_version);
+		} else {
+			throw UnhandledVersionError("CmdShipCancelExpedition",
+												 packet_version, kCurrentPacketVersionShipCancelExpedition);
+		}
 	} catch (const WException & e) {
 		throw GameDataError("Ship explore: %s", e.what());
 	}
@@ -1066,7 +1111,7 @@ void CmdShipCancelExpedition::write
 	(FileWrite & fw, EditorGameBase & egbase, MapObjectSaver & mos)
 {
 	// First, write version
-	fw.unsigned_16(PLAYER_CMD_SHIP_CANCELEXPEDITION_VERSION);
+	fw.unsigned_16(kCurrentPacketVersionShipCancelExpedition);
 	// Write base classes
 	PlayerCommand::write(fw, egbase, mos);
 
@@ -1079,7 +1124,7 @@ void CmdShipCancelExpedition::write
 CmdSetWarePriority::CmdSetWarePriority
 	(const int32_t _duetime, const PlayerNumber _sender,
 	 PlayerImmovable & imm,
-	 const int32_t type, const WareIndex index, const int32_t priority)
+	 const int32_t type, const DescriptionIndex index, const int32_t priority)
 	:
 	PlayerCommand(_duetime, _sender),
 	m_serial     (imm.serial()),
@@ -1100,12 +1145,12 @@ void CmdSetWarePriority::execute(Game & game)
 	psite->set_priority(m_type, m_index, m_priority);
 }
 
-#define PLAYER_CMD_SETWAREPRIORITY_VERSION 1
+constexpr uint16_t kCurrentPacketVersionCmdSetWarePriority = 1;
 
 void CmdSetWarePriority::write
 	(FileWrite & fw, EditorGameBase & egbase, MapObjectSaver & mos)
 {
-	fw.unsigned_16(PLAYER_CMD_SETWAREPRIORITY_VERSION);
+	fw.unsigned_16(kCurrentPacketVersionCmdSetWarePriority);
 
 	PlayerCommand::write(fw, egbase, mos);
 
@@ -1120,15 +1165,17 @@ void CmdSetWarePriority::read
 {
 	try {
 		const uint16_t packet_version = fr.unsigned_16();
-		if (packet_version == PLAYER_CMD_SETWAREPRIORITY_VERSION) {
+		if (packet_version == kCurrentPacketVersionCmdSetWarePriority) {
 			PlayerCommand::read(fr, egbase, mol);
 			m_serial = get_object_serial_or_zero<Building>(fr.unsigned_32(), mol);
 			m_type = fr.unsigned_8();
 			m_index = fr.signed_32();
 			m_priority = fr.signed_32();
-		} else
-			throw GameDataError
-				("unknown/unhandled version %u", packet_version);
+		} else {
+			throw UnhandledVersionError("CmdSetWarePriority",
+												 packet_version, kCurrentPacketVersionCmdSetWarePriority);
+		}
+
 	} catch (const WException & e) {
 		throw GameDataError("set ware priority: %s", e.what());
 	}
@@ -1156,7 +1203,7 @@ void CmdSetWarePriority::serialize(StreamWrite & ser)
 CmdSetWareMaxFill::CmdSetWareMaxFill
 	(const int32_t _duetime, const PlayerNumber _sender,
 	 PlayerImmovable & imm,
-	 const WareIndex index, const uint32_t max_fill)
+	 const DescriptionIndex index, const uint32_t max_fill)
 	:
 	PlayerCommand(_duetime, _sender),
 	m_serial     (imm.serial()),
@@ -1176,12 +1223,12 @@ void CmdSetWareMaxFill::execute(Game & game)
 	b->waresqueue(m_index).set_max_fill(m_max_fill);
 }
 
-#define PLAYER_CMD_SETWAREMAXFILL_SIZE_VERSION 1
+constexpr uint16_t kCurrentPacketVersionCmdSetWareMaxFill = 1;
 
 void CmdSetWareMaxFill::write
 	(FileWrite & fw, EditorGameBase & egbase, MapObjectSaver & mos)
 {
-	fw.unsigned_16(PLAYER_CMD_SETWAREMAXFILL_SIZE_VERSION);
+	fw.unsigned_16(kCurrentPacketVersionCmdSetWareMaxFill);
 
 	PlayerCommand::write(fw, egbase, mos);
 
@@ -1195,14 +1242,15 @@ void CmdSetWareMaxFill::read
 {
 	try {
 		const uint16_t packet_version = fr.unsigned_16();
-		if (packet_version == PLAYER_CMD_SETWAREMAXFILL_SIZE_VERSION) {
+		if (packet_version == kCurrentPacketVersionCmdSetWareMaxFill) {
 			PlayerCommand::read(fr, egbase, mol);
 			m_serial = get_object_serial_or_zero<Building>(fr.unsigned_32(), mol);
 			m_index = fr.signed_32();
 			m_max_fill = fr.unsigned_32();
-		} else
-			throw GameDataError
-				("unknown/unhandled version %u", packet_version);
+		} else {
+			throw UnhandledVersionError("CmdSetWareMaxFill",
+												 packet_version, kCurrentPacketVersionCmdSetWareMaxFill);
+		}
 	} catch (const WException & e) {
 		throw GameDataError("set ware max fill: %s", e.what());
 	}
@@ -1227,7 +1275,7 @@ void CmdSetWareMaxFill::serialize(StreamWrite & ser)
 
 CmdChangeTargetQuantity::CmdChangeTargetQuantity
 	(const int32_t _duetime, const PlayerNumber _sender,
-	 const uint32_t _economy, const WareIndex _ware_type)
+	 const uint32_t _economy, const DescriptionIndex _ware_type)
 	:
 	PlayerCommand(_duetime, _sender),
 	m_economy (_economy), m_ware_type(_ware_type)
@@ -1273,7 +1321,7 @@ void CmdChangeTargetQuantity::serialize(StreamWrite & ser)
 CmdSetWareTargetQuantity::CmdSetWareTargetQuantity
 	(const int32_t _duetime, const PlayerNumber _sender,
 	 const uint32_t _economy,
-	 const WareIndex _ware_type,
+	 const DescriptionIndex _ware_type,
 	 const uint32_t _permanent)
 	:
 	CmdChangeTargetQuantity(_duetime, _sender, _economy, _ware_type),
@@ -1283,19 +1331,18 @@ CmdSetWareTargetQuantity::CmdSetWareTargetQuantity
 void CmdSetWareTargetQuantity::execute(Game & game)
 {
 	Player & player = game.player(sender());
-	if
-		(economy  () < player.get_nr_economies() &&
-		 ware_type() < player.tribe().get_nrwares())
+	if (economy() < player.get_nr_economies() && game.tribes().ware_exists(ware_type())) {
 		player.get_economy_by_number(economy())->set_ware_target_quantity
-			(ware_type(),  m_permanent, duetime());
+			(ware_type(), m_permanent, duetime());
+	}
 }
 
-#define PLAYER_CMD_SETWARETARGETQUANTITY_VERSION 2
+constexpr uint16_t kCurrentPacketVersionSetWareTargetQuantity = 2;
 
 void CmdSetWareTargetQuantity::write
 	(FileWrite & fw, EditorGameBase & egbase, MapObjectSaver & mos)
 {
-	fw.unsigned_16(PLAYER_CMD_SETWARETARGETQUANTITY_VERSION);
+	fw.unsigned_16(kCurrentPacketVersionSetWareTargetQuantity);
 	CmdChangeTargetQuantity::write(fw, egbase, mos);
 	fw.unsigned_32(m_permanent);
 }
@@ -1305,14 +1352,13 @@ void CmdSetWareTargetQuantity::read
 {
 	try {
 		const uint16_t packet_version = fr.unsigned_16();
-		if (packet_version <= PLAYER_CMD_SETWARETARGETQUANTITY_VERSION) {
+		if (packet_version == kCurrentPacketVersionSetWareTargetQuantity) {
 			CmdChangeTargetQuantity::read(fr, egbase, mol);
 			m_permanent = fr.unsigned_32();
-			if (packet_version == 1)
-				fr.unsigned_32();
-		} else
-			throw GameDataError
-				("unknown/unhandled version %u", packet_version);
+		} else {
+			throw UnhandledVersionError("CmdSetWareTargetQuantity",
+												 packet_version, kCurrentPacketVersionSetWareTargetQuantity);
+		}
 	} catch (const WException & e) {
 		throw GameDataError("set ware target quantity: %s", e.what());
 	}
@@ -1337,7 +1383,7 @@ void CmdSetWareTargetQuantity::serialize(StreamWrite & ser)
 CmdResetWareTargetQuantity::CmdResetWareTargetQuantity
 	(const int32_t _duetime, const PlayerNumber _sender,
 	 const uint32_t _economy,
-	 const WareIndex _ware_type)
+	 const DescriptionIndex _ware_type)
 	:
 	CmdChangeTargetQuantity(_duetime, _sender, _economy, _ware_type)
 {}
@@ -1346,23 +1392,20 @@ void CmdResetWareTargetQuantity::execute(Game & game)
 {
 	Player & player = game.player(sender());
 	const TribeDescr & tribe = player.tribe();
-	if
-		(economy  () < player.get_nr_economies() &&
-		 ware_type() < tribe.get_nrwares())
-	{
-		const int32_t count =
-			tribe.get_ware_descr(ware_type())->default_target_quantity();
+	if (economy() < player.get_nr_economies() && game.tribes().ware_exists(ware_type())) {
+		const int count =
+			tribe.get_ware_descr(ware_type())->default_target_quantity(tribe.name());
 		player.get_economy_by_number(economy())->set_ware_target_quantity
 			(ware_type(),  count, duetime());
 	}
 }
 
-#define PLAYER_CMD_RESETWARETARGETQUANTITY_VERSION 1
+constexpr uint16_t kCurrentPacketVersionResetWareTargetQuantity = 1;
 
 void CmdResetWareTargetQuantity::write
 	(FileWrite & fw, EditorGameBase & egbase, MapObjectSaver & mos)
 {
-	fw.unsigned_16(PLAYER_CMD_RESETWARETARGETQUANTITY_VERSION);
+	fw.unsigned_16(kCurrentPacketVersionResetWareTargetQuantity);
 	CmdChangeTargetQuantity::write(fw, egbase, mos);
 }
 
@@ -1371,11 +1414,12 @@ void CmdResetWareTargetQuantity::read
 {
 	try {
 		const uint16_t packet_version = fr.unsigned_16();
-		if (packet_version == PLAYER_CMD_RESETWARETARGETQUANTITY_VERSION)
+		if (packet_version == kCurrentPacketVersionResetWareTargetQuantity) {
 			CmdChangeTargetQuantity::read(fr, egbase, mol);
-		else
-			throw GameDataError
-				("unknown/unhandled version %u", packet_version);
+		} else {
+			throw UnhandledVersionError("CmdResetWareTargetQuantity",
+												 packet_version, kCurrentPacketVersionResetWareTargetQuantity);
+		}
 	} catch (const WException & e) {
 		throw GameDataError("reset target quantity: %s", e.what());
 	}
@@ -1395,7 +1439,7 @@ void CmdResetWareTargetQuantity::serialize(StreamWrite & ser)
 CmdSetWorkerTargetQuantity::CmdSetWorkerTargetQuantity
 	(const int32_t _duetime, const PlayerNumber _sender,
 	 const uint32_t _economy,
-	 const WareIndex _ware_type,
+	 const DescriptionIndex _ware_type,
 	 const uint32_t _permanent)
 	:
 	CmdChangeTargetQuantity(_duetime, _sender, _economy, _ware_type),
@@ -1405,19 +1449,18 @@ CmdSetWorkerTargetQuantity::CmdSetWorkerTargetQuantity
 void CmdSetWorkerTargetQuantity::execute(Game & game)
 {
 	Player & player = game.player(sender());
-	if
-		(economy  () < player.get_nr_economies() &&
-		 ware_type() < player.tribe().get_nrwares())
+	if (economy() < player.get_nr_economies() && game.tribes().ware_exists(ware_type())) {
 		player.get_economy_by_number(economy())->set_worker_target_quantity
 			(ware_type(),  m_permanent, duetime());
+	}
 }
 
-#define PLAYER_CMD_SETWORKERTARGETQUANTITY_VERSION 2
+constexpr uint16_t kCurrentPacketVersionSetWorkerTargetQuantity = 2;
 
 void CmdSetWorkerTargetQuantity::write
 	(FileWrite & fw, EditorGameBase & egbase, MapObjectSaver & mos)
 {
-	fw.unsigned_16(PLAYER_CMD_SETWORKERTARGETQUANTITY_VERSION);
+	fw.unsigned_16(kCurrentPacketVersionSetWorkerTargetQuantity);
 	CmdChangeTargetQuantity::write(fw, egbase, mos);
 	fw.unsigned_32(m_permanent);
 }
@@ -1427,14 +1470,13 @@ void CmdSetWorkerTargetQuantity::read
 {
 	try {
 		const uint16_t packet_version = fr.unsigned_16();
-		if (packet_version <= PLAYER_CMD_SETWORKERTARGETQUANTITY_VERSION) {
+		if (packet_version == kCurrentPacketVersionSetWorkerTargetQuantity) {
 			CmdChangeTargetQuantity::read(fr, egbase, mol);
 			m_permanent = fr.unsigned_32();
-			if (packet_version == 1)
-				fr.unsigned_32();
-		} else
-			throw GameDataError
-				("unknown/unhandled version %u", packet_version);
+		} else {
+			throw UnhandledVersionError("CmdSetWorkerTargetQuantity",
+												 packet_version, kCurrentPacketVersionSetWorkerTargetQuantity);
+		}
 	} catch (const WException & e) {
 		throw GameDataError("set worker target quantity: %s", e.what());
 	}
@@ -1459,7 +1501,7 @@ void CmdSetWorkerTargetQuantity::serialize(StreamWrite & ser)
 CmdResetWorkerTargetQuantity::CmdResetWorkerTargetQuantity
 	(const int32_t _duetime, const PlayerNumber _sender,
 	 const uint32_t _economy,
-	 const WareIndex _ware_type)
+	 const DescriptionIndex _ware_type)
 	:
 	CmdChangeTargetQuantity(_duetime, _sender, _economy, _ware_type)
 {}
@@ -1468,23 +1510,20 @@ void CmdResetWorkerTargetQuantity::execute(Game & game)
 {
 	Player & player = game.player(sender());
 	const TribeDescr & tribe = player.tribe();
-	if
-		(economy  () < player.get_nr_economies() &&
-		 ware_type() < tribe.get_nrwares())
-	{
-		const int32_t count =
-			tribe.get_ware_descr(ware_type())->default_target_quantity();
+	if (economy() < player.get_nr_economies() && game.tribes().ware_exists(ware_type())) {
+		const int count =
+			tribe.get_ware_descr(ware_type())->default_target_quantity(tribe.name());
 		player.get_economy_by_number(economy())->set_worker_target_quantity
 			(ware_type(),  count, duetime());
 	}
 }
 
-#define PLAYER_CMD_RESETWORKERTARGETQUANTITY_VERSION 1
+constexpr uint16_t kCurrentPacketVersionResetWorkerTargetQuantity = 1;
 
 void CmdResetWorkerTargetQuantity::write
 	(FileWrite & fw, EditorGameBase & egbase, MapObjectSaver & mos)
 {
-	fw.unsigned_16(PLAYER_CMD_RESETWORKERTARGETQUANTITY_VERSION);
+	fw.unsigned_16(kCurrentPacketVersionResetWorkerTargetQuantity);
 	CmdChangeTargetQuantity::write(fw, egbase, mos);
 }
 
@@ -1493,11 +1532,12 @@ void CmdResetWorkerTargetQuantity::read
 {
 	try {
 		const uint16_t packet_version = fr.unsigned_16();
-		if (packet_version == PLAYER_CMD_RESETWORKERTARGETQUANTITY_VERSION) {
+		if (packet_version == kCurrentPacketVersionResetWorkerTargetQuantity) {
 			CmdChangeTargetQuantity::read(fr, egbase, mol);
-		} else
-			throw GameDataError
-				("unknown/unhandled version %u", packet_version);
+		} else {
+			throw UnhandledVersionError("CmdResetWorkerTargetQuantity",
+												 packet_version, kCurrentPacketVersionResetWorkerTargetQuantity);
+		}
 	} catch (const WException & e) {
 		throw GameDataError("reset worker target quantity: %s", e.what());
 	}
@@ -1539,21 +1579,22 @@ void CmdChangeTrainingOptions::serialize (StreamWrite & ser) {
 	ser.unsigned_16(value);
 }
 
+constexpr uint16_t kCurrentPacketVersionChangeTrainingOptions = 1;
 
-#define PLAYER_CMD_CHANGETRAININGOPTIONS_VERSION 1
 void CmdChangeTrainingOptions::read
 	(FileRead & fr, EditorGameBase & egbase, MapObjectLoader & mol)
 {
 	try {
 		const uint16_t packet_version = fr.unsigned_16();
-		if (packet_version == PLAYER_CMD_CHANGETRAININGOPTIONS_VERSION) {
+		if (packet_version == kCurrentPacketVersionChangeTrainingOptions) {
 			PlayerCommand::read(fr, egbase, mol);
 			serial = get_object_serial_or_zero<TrainingSite>(fr.unsigned_32(), mol);
 			attribute = fr.unsigned_16();
 			value     = fr.unsigned_16();
-		} else
-			throw GameDataError
-				("unknown/unhandled version %u", packet_version);
+		} else {
+			throw UnhandledVersionError("CmdChangeTrainingOptions",
+												 packet_version, kCurrentPacketVersionChangeTrainingOptions);
+		}
 	} catch (const WException & e) {
 		throw GameDataError("change training options: %s", e.what());
 	}
@@ -1563,7 +1604,7 @@ void CmdChangeTrainingOptions::write
 	(FileWrite & fw, EditorGameBase & egbase, MapObjectSaver & mos)
 {
 	// First, write version
-	fw.unsigned_16(PLAYER_CMD_CHANGETRAININGOPTIONS_VERSION);
+	fw.unsigned_16(kCurrentPacketVersionChangeTrainingOptions);
 	// Write base classes
 	PlayerCommand::write(fw, egbase, mos);
 
@@ -1598,19 +1639,21 @@ void CmdDropSoldier::serialize (StreamWrite & ser)
 	ser.unsigned_32(soldier);
 }
 
-#define PLAYER_CMD_DROPSOLDIER_VERSION 1
+constexpr uint16_t kCurrentPacketVersionCmdDropSoldier = 1;
+
 void CmdDropSoldier::read
 	(FileRead & fr, EditorGameBase & egbase, MapObjectLoader & mol)
 {
 	try {
 		const uint16_t packet_version = fr.unsigned_16();
-		if (packet_version == PLAYER_CMD_DROPSOLDIER_VERSION) {
+		if (packet_version == kCurrentPacketVersionCmdDropSoldier) {
 			PlayerCommand::read(fr, egbase, mol);
 			serial = get_object_serial_or_zero<PlayerImmovable>(fr.unsigned_32(), mol);
 			soldier = get_object_serial_or_zero<Soldier>(fr.unsigned_32(), mol);
-		} else
-			throw GameDataError
-				("unknown/unhandled version %u", packet_version);
+		} else {
+			throw UnhandledVersionError("CmdDropSoldier",
+												 packet_version, kCurrentPacketVersionCmdDropSoldier);
+		}
 	} catch (const WException & e) {
 		throw GameDataError("drop soldier: %s", e.what());
 	}
@@ -1620,7 +1663,7 @@ void CmdDropSoldier::write
 	(FileWrite & fw, EditorGameBase & egbase, MapObjectSaver & mos)
 {
 	// First, write version
-	fw.unsigned_16(PLAYER_CMD_DROPSOLDIER_VERSION);
+	fw.unsigned_16(kCurrentPacketVersionCmdDropSoldier);
 	// Write base classes
 	PlayerCommand::write(fw, egbase, mos);
 
@@ -1657,19 +1700,21 @@ void CmdChangeSoldierCapacity::serialize (StreamWrite & ser)
 	ser.signed_16(val);
 }
 
-#define PLAYER_CMD_CHANGESOLDIERCAPACITY_VERSION 1
+constexpr uint16_t kCurrentPacketVersionChangeSoldierCapacity = 1;
+
 void CmdChangeSoldierCapacity::read
 	(FileRead & fr, EditorGameBase & egbase, MapObjectLoader & mol)
 {
 	try {
 		const uint16_t packet_version = fr.unsigned_16();
-		if (packet_version == PLAYER_CMD_CHANGESOLDIERCAPACITY_VERSION) {
+		if (packet_version == kCurrentPacketVersionChangeSoldierCapacity) {
 			PlayerCommand::read(fr, egbase, mol);
 			serial = get_object_serial_or_zero<Building>(fr.unsigned_32(), mol);
 			val = fr.signed_16();
-		} else
-			throw GameDataError
-				("unknown/unhandled version %u", packet_version);
+		} else {
+			throw UnhandledVersionError("CmdChangeSoldierCapacity",
+												 packet_version, kCurrentPacketVersionChangeSoldierCapacity);
+		}
 	} catch (const WException & e) {
 		throw GameDataError("change soldier capacity: %s", e.what());
 	}
@@ -1679,7 +1724,7 @@ void CmdChangeSoldierCapacity::write
 	(FileWrite & fw, EditorGameBase & egbase, MapObjectSaver & mos)
 {
 	// First, write version
-	fw.unsigned_16(PLAYER_CMD_CHANGESOLDIERCAPACITY_VERSION);
+	fw.unsigned_16(kCurrentPacketVersionChangeSoldierCapacity);
 	// Write base classes
 	PlayerCommand::write(fw, egbase, mos);
 
@@ -1739,21 +1784,23 @@ void CmdEnemyFlagAction::serialize (StreamWrite & ser) {
 	ser.unsigned_8 (number);
 }
 
-#define PLAYER_CMD_ENEMYFLAGACTION_VERSION 3
+constexpr uint16_t kCurrentPacketVersionCmdEnemyFlagAction = 3;
+
 void CmdEnemyFlagAction::read
 	(FileRead & fr, EditorGameBase & egbase, MapObjectLoader & mol)
 {
 	try {
 		const uint16_t packet_version = fr.unsigned_16();
-		if (packet_version == PLAYER_CMD_ENEMYFLAGACTION_VERSION) {
+		if (packet_version == kCurrentPacketVersionCmdEnemyFlagAction) {
 			PlayerCommand::read(fr, egbase, mol);
 			fr           .unsigned_8 ();
 			serial = get_object_serial_or_zero<Flag>(fr.unsigned_32(), mol);
 			fr           .unsigned_8 ();
 			number   = fr.unsigned_8 ();
-		} else
-			throw GameDataError
-				("unknown/unhandled version %u", packet_version);
+		} else {
+			throw UnhandledVersionError("CmdEnemyFlagAction",
+												 packet_version, kCurrentPacketVersionCmdEnemyFlagAction);
+		}
 	} catch (const WException & e) {
 		throw GameDataError("enemy flag action: %s", e.what());
 	}
@@ -1763,7 +1810,7 @@ void CmdEnemyFlagAction::write
 	(FileWrite & fw, EditorGameBase & egbase, MapObjectSaver & mos)
 {
 	// First, write version
-	fw.unsigned_16(PLAYER_CMD_ENEMYFLAGACTION_VERSION);
+	fw.unsigned_16(kCurrentPacketVersionCmdEnemyFlagAction);
 	// Write base classes
 	PlayerCommand::write(fw, egbase, mos);
 	// Now action
@@ -1783,21 +1830,23 @@ PlayerMessageCommand::PlayerMessageCommand(StreamRead & des) :
 PlayerCommand (0, des.unsigned_8()), m_message_id(des.unsigned_32())
 {}
 
-#define PLAYER_MESSAGE_CMD_VERSION 1
+constexpr uint16_t kCurrentPacketVersionPlayerMessageCommand = 1;
+
 void PlayerMessageCommand::read
 	(FileRead & fr, EditorGameBase & egbase, MapObjectLoader & mol)
 {
 	try {
 		const uint16_t packet_version = fr.unsigned_16();
-		if (packet_version == PLAYER_MESSAGE_CMD_VERSION) {
+		if (packet_version == kCurrentPacketVersionPlayerMessageCommand) {
 			PlayerCommand::read(fr, egbase, mol);
 			m_message_id = MessageId(fr.unsigned_32());
 			if (!m_message_id)
 				throw GameDataError
 					("(player %u): message id is null", sender());
-		} else
-			throw GameDataError
-				("unknown/unhandled version %u", packet_version);
+		} else {
+			throw UnhandledVersionError("PlayerMessageCommand",
+												 packet_version, kCurrentPacketVersionPlayerMessageCommand);
+		}
 	} catch (const WException & e) {
 		throw GameDataError("player message: %s", e.what());
 	}
@@ -1806,7 +1855,7 @@ void PlayerMessageCommand::read
 void PlayerMessageCommand::write
 	(FileWrite & fw, EditorGameBase & egbase, MapObjectSaver & mos)
 {
-	fw.unsigned_16(PLAYER_MESSAGE_CMD_VERSION);
+	fw.unsigned_16(kCurrentPacketVersionPlayerMessageCommand);
 	PlayerCommand::write(fw, egbase, mos);
 	fw.unsigned_32(mos.message_savers[sender() - 1][message_id()].value());
 }
@@ -1846,7 +1895,7 @@ void CmdMessageSetStatusArchived::serialize (StreamWrite & ser)
 /*** struct Cmd_SetStockPolicy ***/
 CmdSetStockPolicy::CmdSetStockPolicy
 	(int32_t time, PlayerNumber p,
-	 Warehouse & wh, bool isworker, WareIndex ware,
+	 Warehouse & wh, bool isworker, DescriptionIndex ware,
 	 Warehouse::StockPolicy policy)
 : PlayerCommand(time, p)
 {
@@ -1892,19 +1941,18 @@ void CmdSetStockPolicy::execute(Game & game)
 				return;
 			}
 
-			const TribeDescr & tribe = warehouse->descr().tribe();
 			if (m_isworker) {
-				if (!(m_ware < tribe.get_nrworkers())) {
+				if (!(game.tribes().worker_exists(m_ware))) {
 					log
-						("Cmd_SetStockPolicy: sender %u, worker %u out of bounds\n",
+						("Cmd_SetStockPolicy: sender %u, worker %u does not exist\n",
 						 sender(), m_ware);
 					return;
 				}
 				warehouse->set_worker_policy(m_ware, m_policy);
 			} else {
-				if (!(m_ware < tribe.get_nrwares())) {
+				if (!(game.tribes().ware_exists(m_ware))) {
 					log
-						("Cmd_SetStockPolicy: sender %u, ware %u out of bounds\n",
+						("Cmd_SetStockPolicy: sender %u, ware %u does not exist\n",
 						 sender(), m_ware);
 					return;
 				}
@@ -1919,7 +1967,7 @@ CmdSetStockPolicy::CmdSetStockPolicy(StreamRead & des)
 {
 	m_warehouse = des.unsigned_32();
 	m_isworker = des.unsigned_8();
-	m_ware = WareIndex(des.unsigned_8());
+	m_ware = DescriptionIndex(des.unsigned_8());
 	m_policy = static_cast<Warehouse::StockPolicy>(des.unsigned_8());
 }
 
@@ -1933,19 +1981,23 @@ void CmdSetStockPolicy::serialize(StreamWrite & ser)
 	ser.unsigned_8(m_policy);
 }
 
-#define PLAYER_CMD_SETSTOCKPOLICY_VERSION 1
+constexpr uint8_t kCurrentPacketVersionCmdSetStockPolicy = 1;
+
 void CmdSetStockPolicy::read
 	(FileRead & fr, EditorGameBase & egbase, MapObjectLoader & mol)
 {
 	try {
-		uint8_t version = fr.unsigned_8();
-		if (version != PLAYER_CMD_SETSTOCKPOLICY_VERSION)
-			throw GameDataError("unknown/unhandled version %u", version);
-		PlayerCommand::read(fr, egbase, mol);
-		m_warehouse = fr.unsigned_32();
-		m_isworker = fr.unsigned_8();
-		m_ware = WareIndex(fr.unsigned_8());
-		m_policy = static_cast<Warehouse::StockPolicy>(fr.unsigned_8());
+		uint8_t packet_version = fr.unsigned_8();
+		if (packet_version == kCurrentPacketVersionCmdSetStockPolicy) {
+			PlayerCommand::read(fr, egbase, mol);
+			m_warehouse = fr.unsigned_32();
+			m_isworker = fr.unsigned_8();
+			m_ware = DescriptionIndex(fr.unsigned_8());
+			m_policy = static_cast<Warehouse::StockPolicy>(fr.unsigned_8());
+		} else {
+			throw UnhandledVersionError("CmdSetStockPolicy",
+												 packet_version, kCurrentPacketVersionCmdSetStockPolicy);
+		}
 	} catch (const std::exception & e) {
 		throw GameDataError("Cmd_SetStockPolicy: %s", e.what());
 	}
@@ -1954,7 +2006,7 @@ void CmdSetStockPolicy::read
 void CmdSetStockPolicy::write
 	(FileWrite & fw, EditorGameBase & egbase, MapObjectSaver & mos)
 {
-	fw.unsigned_8(PLAYER_CMD_SETSTOCKPOLICY_VERSION);
+	fw.unsigned_8(kCurrentPacketVersionCmdSetStockPolicy);
 	PlayerCommand::write(fw, egbase, mos);
 	fw.unsigned_32(m_warehouse);
 	fw.unsigned_8(m_isworker);

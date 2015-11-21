@@ -79,21 +79,9 @@ source_file = po/tribes/tribes.pot
 source_lang = en
 type = PO
 
-[widelands.tribe_atlanteans]
-file_filter = po/tribe_atlanteans/<lang>.po
-source_file = po/tribe_atlanteans/tribe_atlanteans.pot
-source_lang = en
-type = PO
-
-[widelands.tribe_barbarians]
-file_filter = po/tribe_barbarians/<lang>.po
-source_file = po/tribe_barbarians/tribe_barbarians.pot
-source_lang = en
-type = PO
-
-[widelands.tribe_empire]
-file_filter = po/tribe_empire/<lang>.po
-source_file = po/tribe_empire/tribe_empire.pot
+[widelands.tribes_encyclopedia]
+file_filter = po/tribes_encyclopedia/<lang>.po
+source_file = po/tribes_encyclopedia/tribes_encyclopedia.pot
 source_lang = en
 type = PO
 

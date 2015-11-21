@@ -24,7 +24,6 @@
 #endif
 
 #include "base/i18n.h"
-#include "graphic/font_handler.h"
 #include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
@@ -60,8 +59,8 @@ void ProgressWindow::draw_background
 	m_label_center.y = yres * PROGRESS_LABEL_POSITION_Y / 100;
 	Rect wnd_rect(Point(0, 0), xres, yres);
 
-	const uint32_t h = g_fh->get_fontheight(UI::g_fh1->fontset()->serif(),
-														 UI_FONT_SIZE_SMALL);
+	const uint32_t h = UI::g_fh1->render(as_uifont("."))->height();
+
 	m_label_rectangle.x = xres / 4;
 	m_label_rectangle.w = xres / 2;
 	m_label_rectangle.y =
@@ -103,10 +102,10 @@ void ProgressWindow::step(const std::string & description) {
 	draw_background(rt, xres, yres);
 
 	rt.fill_rect(m_label_rectangle, PROGRESS_FONT_COLOR_BG);
-
-	UI::TextStyle ts(UI::TextStyle::ui_small());
-	ts.fg = PROGRESS_FONT_COLOR_FG;
-	UI::g_fh->draw_text(rt, ts, m_label_center, description, Align_Center);
+	rt.blit(m_label_center,
+			 UI::g_fh1->render(as_uifont(description, UI_FONT_SIZE_SMALL, PROGRESS_FONT_COLOR_FG)),
+			 BlendMode::UseAlpha,
+			 Align_Center);
 	g_gr->update();
 
 #ifdef _WIN32

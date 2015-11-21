@@ -1,9 +1,11 @@
+# Automatically created by Widelands bzr7574[artifacts] (Debug)
+
 [global]
-packet_version=2
-player_1=159 26
-player_2=172 138
-player_3=126 37
-player_4=137 113
-player_5=47 33
-player_6=33 150
-player_7=26 76
+packet_version="2"
+player_1="159 26"
+player_2="172 138"
+player_3="126 37"
+player_4="137 113"
+player_5="47 33"
+player_6="33 150"
+player_7="26 76"

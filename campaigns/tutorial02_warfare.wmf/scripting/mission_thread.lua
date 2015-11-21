@@ -15,12 +15,12 @@ function training()
 
    message_box_objective(plr, abilities)
    local o = message_box_objective(plr, battlearena1)
-   while #plr:get_buildings("battlearena") == 0 do sleep(500) end
+   while #plr:get_buildings("barbarians_battlearena") == 0 do sleep(500) end
    o.done = true
    message_box_objective(plr, battlearena2)
 
    o = message_box_objective(plr, trainingcamp1)
-   while #plr:get_buildings("trainingcamp") == 0 do sleep(500) end
+   while #plr:get_buildings("barbarians_trainingcamp") == 0 do sleep(500) end
    o.done = true
    message_box_objective(plr, trainingcamp2)
 
@@ -34,7 +34,7 @@ function military_buildings()
    message_box_objective(plr, soldier_capacity)
    local o = message_box_objective(plr, dismantle)
 
-   while #plr:get_buildings("sentry") > 1 do sleep(200) end
+   while #plr:get_buildings("barbarians_sentry") > 1 do sleep(200) end
    o.done = true
 
    sleep(2000)
@@ -48,7 +48,7 @@ function enhance_fortress()
    local citadel_field = wl.Game().map:get_field(32, 62)
    local o = message_box_objective(plr, fortress_enhancement)
    while not (citadel_field.immovable and
-      citadel_field.immovable.descr.name == "citadel") do sleep(800) end
+      citadel_field.immovable.descr.name == "barbarians_citadel") do sleep(800) end
    o.done = true
 
    create_enemy()
@@ -72,10 +72,10 @@ end
 
 function create_enemy()
    prefilled_buildings(wl.Game().players[2],
-      {"barrier", 24, 7},
-      {"sentry", 29, 16},
-      {"tower", 30, 21},
-      {"headquarters", 30, 27,
+      {"empire_barrier", 24, 7},
+      {"empire_sentry", 29, 16},
+      {"empire_tower", 30, 21},
+      {"empire_headquarters", 30, 27,
          soldiers = {
             [{0,0,0,0}] = 15,
          }
@@ -88,7 +88,7 @@ function attack()
    local o = message_box_objective(plr, attack_enemy)
 
    local plr2 = wl.Game().players[2]
-   while #plr2:get_buildings("headquarters") > 0 do
+   while #plr2:get_buildings("empire_headquarters") > 0 do
       sleep(3000)
    end
    o.done = true
@@ -102,4 +102,3 @@ function conclusion()
 end
 
 run(intro)
-

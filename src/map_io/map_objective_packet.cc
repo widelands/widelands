@@ -29,8 +29,7 @@
 
 namespace Widelands {
 
-#define CURRENT_PACKET_VERSION 2
-
+constexpr int32_t kCurrentPacketVersion = 2;
 
 void MapObjectivePacket::read
 	(FileSystem            &       fs,
@@ -46,7 +45,7 @@ void MapObjectivePacket::read
 	try {
 		int32_t const packet_version =
 			prof.get_safe_section("global").get_safe_int("packet_version");
-		if (packet_version <= CURRENT_PACKET_VERSION) {
+		if (packet_version == kCurrentPacketVersion) {
 			while (Section * const s = prof.get_next_section(nullptr)) {
 				char const * const         name = s->get_name();
 				try {
@@ -64,9 +63,9 @@ void MapObjectivePacket::read
 					throw GameDataError("%s: %s", name, e.what());
 				}
 			}
-		} else
-			throw GameDataError
-				("unknown/unhandled version %i", packet_version);
+		} else {
+			throw UnhandledVersionError("MapObjectivePacket", packet_version, kCurrentPacketVersion);
+		}
 	} catch (const WException & e) {
 		throw GameDataError("Objectives: %s", e.what());
 	}
@@ -78,7 +77,7 @@ void MapObjectivePacket::write
 {
 	Profile prof;
 	prof.create_section("global").set_int
-		("packet_version", CURRENT_PACKET_VERSION);
+		("packet_version", kCurrentPacketVersion);
 
 	for (const auto& item : egbase.map().objectives()) {
 		Section& s = prof.create_section(item.second->name().c_str());

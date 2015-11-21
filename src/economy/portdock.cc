@@ -389,7 +389,7 @@ void PortDock::set_need_ship(Game& game, bool need) {
 /**
  * Return the number of wares or workers of the given type that are waiting at the dock.
  */
-uint32_t PortDock::count_waiting(WareWorker waretype, WareIndex wareindex) {
+uint32_t PortDock::count_waiting(WareWorker waretype, DescriptionIndex wareindex) {
 	uint32_t count = 0;
 
 	for (ShippingItem& shipping_item : m_waiting) {
@@ -471,12 +471,12 @@ void PortDock::log_general_info(const EditorGameBase& egbase) {
 	}
 }
 
-#define PORTDOCK_SAVEGAME_VERSION 3
+constexpr uint8_t kCurrentPacketVersion = 3;
 
 PortDock::Loader::Loader() : m_warehouse(0) {
 }
 
-void PortDock::Loader::load(FileRead& fr, uint8_t version) {
+void PortDock::Loader::load(FileRead & fr) {
 	PlayerImmovable::Loader::load(fr);
 
 	PortDock& pd = get<PortDock>();
@@ -490,24 +490,18 @@ void PortDock::Loader::load(FileRead& fr, uint8_t version) {
 		pd.set_position(egbase(), pd.m_dockpoints[i]);
 	}
 
-	if (version >= 2) {
-		pd.m_need_ship = fr.unsigned_8();
+	pd.m_need_ship = fr.unsigned_8();
 
-		m_waiting.resize(fr.unsigned_32());
-		for (ShippingItem::Loader& shipping_loader : m_waiting) {
-			shipping_loader.load(fr);
-		}
-
-		if (version >= 3) {
-			// All the other expedition specific stuff is saved in the warehouse.
-			if (fr.unsigned_8()) {  // Do we have an expedition?
-				pd.m_expedition_bootstrap.reset(new ExpeditionBootstrap(&pd));
-			}
-			pd.m_expedition_ready = (fr.unsigned_8() == 1) ? true : false;
-		} else {
-			pd.m_expedition_ready = false;
-		}
+	m_waiting.resize(fr.unsigned_32());
+	for (ShippingItem::Loader& shipping_loader : m_waiting) {
+		shipping_loader.load(fr);
 	}
+
+	// All the other expedition specific stuff is saved in the warehouse.
+	if (fr.unsigned_8()) {  // Do we have an expedition?
+		pd.m_expedition_bootstrap.reset(new ExpeditionBootstrap(&pd));
+	}
+	pd.m_expedition_ready = (fr.unsigned_8() == 1) ? true : false;
 }
 
 void PortDock::Loader::load_pointers() {
@@ -544,12 +538,13 @@ MapObject::Loader* PortDock::load(EditorGameBase& egbase, MapObjectLoader& mol, 
 	try {
 		// The header has been peeled away by the caller
 
-		uint8_t const version = fr.unsigned_8();
-		if (1 <= version && version <= PORTDOCK_SAVEGAME_VERSION) {
+		uint8_t const packet_version = fr.unsigned_8();
+		if (packet_version == kCurrentPacketVersion) {
 			loader->init(egbase, mol, *new PortDock(nullptr));
-			loader->load(fr, version);
-		} else
-			throw GameDataError("unknown/unhandled version %u", version);
+			loader->load(fr);
+		} else {
+			throw UnhandledVersionError("PortDock", packet_version, kCurrentPacketVersion);
+		}
 	} catch (const std::exception& e) {
 		throw wexception("loading portdock: %s", e.what());
 	}
@@ -559,7 +554,7 @@ MapObject::Loader* PortDock::load(EditorGameBase& egbase, MapObjectLoader& mol, 
 
 void PortDock::save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw) {
 	fw.unsigned_8(HeaderPortDock);
-	fw.unsigned_8(PORTDOCK_SAVEGAME_VERSION);
+	fw.unsigned_8(kCurrentPacketVersion);
 
 	PlayerImmovable::save(egbase, mos, fw);
 

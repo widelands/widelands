@@ -135,7 +135,7 @@ int32_t EditorInfoTool::handle_click_impl(Widelands::Map& map,
 	// *** Resources info
 	buf += std::string("\n") + _("Resources:") + "\n";
 
-	Widelands::ResourceIndex ridx = f.get_resources();
+	Widelands::DescriptionIndex ridx = f.get_resources();
 	int ramount = f.get_resources_amount();
 
 	if (ramount > 0) {

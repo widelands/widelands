@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2013 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2013, 2015 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -52,7 +52,7 @@
 #include "logic/player.h"
 #include "logic/soldier.h"
 #include "logic/terrain_affinity.h"
-#include "logic/tribe.h"
+#include "logic/tribes/tribe_descr.h"
 #include "logic/warehouse.h"
 #include "logic/worker_program.h"
 #include "logic/world/resource_description.h"
@@ -60,7 +60,7 @@
 #include "logic/world/world.h"
 #include "map_io/map_object_loader.h"
 #include "map_io/map_object_saver.h"
-#include "profile/profile.h"
+#include "map_io/tribes_legacy_lookup_table.h"
 #include "sound/sound_handler.h"
 
 namespace Widelands {
@@ -81,9 +81,9 @@ bool Worker::run_createware(Game & game, State & state, const Action & action)
 	}
 
 	Player & player = *get_owner();
-	WareIndex const wareid(action.iparam1);
+	DescriptionIndex const wareid(action.iparam1);
 	WareInstance & ware =
-		*new WareInstance(wareid, descr().tribe().get_ware_descr(wareid));
+		*new WareInstance(wareid, player.tribe().get_ware_descr(wareid));
 	ware.init(game);
 
 	set_carried_ware(game, &ware);
@@ -112,9 +112,9 @@ bool Worker::run_mine(Game & game, State & state, const Action & action)
 	Map & map = game.map();
 
 	//Make sure that the specified resource is available in this world
-	ResourceIndex const res =
+	DescriptionIndex const res =
 		game.world().get_resource(action.sparam1.c_str());
-	if (static_cast<int8_t>(res) == -1) //  TODO(unknown): ARGH!!
+	if (res == Widelands::INVALID_INDEX)
 		throw GameDataError
 			(_
 				("should mine resource %s, which does not exist in world; tribe "
@@ -217,9 +217,9 @@ bool Worker::run_breed(Game & game, State & state, const Action & action)
 	Map & map = game.map();
 
 	//Make sure that the specified resource is available in this world
-	ResourceIndex const res =
+	DescriptionIndex const res =
 		game.world().get_resource(action.sparam1.c_str());
-	if (static_cast<int8_t>(res) == -1) //  TODO(unknown): ARGH!!
+	if (res == Widelands::INVALID_INDEX)
 		throw GameDataError
 			(_
 				("should breed resource type %s, which does not exist in world; "
@@ -353,7 +353,7 @@ bool Worker::run_setbobdescription
 		state.svar1 == "world" ?
 		game.world().get_bob(bob.c_str())
 		:
-		descr ().tribe().get_bob(bob.c_str());
+		game.tribes().ship_index(bob.c_str());
 
 	if (state.ivar2 < 0) {
 		molog("  WARNING: Unknown bob %s\n", action.sparamv[idx].c_str());
@@ -521,7 +521,7 @@ bool Worker::run_findobject(Game & game, State & state, const Action & action)
 // as in this case, only before a worker starts walking there to place an
 // object. But that would make it very difficult to find space for things
 // like farm fileds. So our only option seems to be to keep all farm
-// fields, trees, stones and such on triangles and keep the nodes
+// fields, trees, rocks and such on triangles and keep the nodes
 // passable. See code structure issue #1096824.
 struct FindNodeSpace {
 	FindNodeSpace(BaseImmovable * const ignoreimm)
@@ -783,12 +783,12 @@ bool Worker::run_plant(Game & game, State & state, const Action & action)
 	// affinity). We will pick one of them at random later. The container is
 	// picked to be a stable sorting one, so that no deyncs happen in
 	// multiplayer.
-	std::set<std::tuple<double, uint32_t>> best_suited_immovables_index;
+	std::set<std::tuple<double, DescriptionIndex>> best_suited_immovables_index;
 
 	// Checks if the 'immovable_description' has a terrain_affinity, if so use it. Otherwise assume it
 	// to be 1. (perfect fit). Adds it to the best_suited_immovables_index.
 	const auto test_suitability = [&best_suited_immovables_index, &fpos, &map, &game](
-		const uint32_t index, const ImmovableDescr& immovable_description) {
+		const DescriptionIndex index, const ImmovableDescr& immovable_description) {
 		double p = 1.;
 		if (immovable_description.has_terrain_affinity()) {
 			p = probability_to_grow(
@@ -816,8 +816,8 @@ bool Worker::run_plant(Game & game, State & state, const Action & action)
 		const DescriptionMaintainer<ImmovableDescr>& immovables = game.world().immovables();
 
 		const uint32_t attribute_id = ImmovableDescr::get_attribute_id(list[1]);
-		for (uint32_t i = 0; i < immovables.get_nitems(); ++i) {
-			ImmovableDescr& immovable_descr = immovables.get_unmutable(i);
+		for (uint32_t i = 0; i < immovables.size(); ++i) {
+			const ImmovableDescr& immovable_descr = immovables.get(i);
 			if (!immovable_descr.has_attribute(attribute_id)) {
 				continue;
 			}
@@ -825,10 +825,10 @@ bool Worker::run_plant(Game & game, State & state, const Action & action)
 		}
 	} else {
 		state.svar1 = "tribe";
-		uint32_t immovable_index = descr().tribe().get_immovable_index(list[1]);
+		DescriptionIndex immovable_index = game.tribes().immovable_index(list[1]);
 
-		if (immovable_index > 0) {
-			const ImmovableDescr* imm = descr().tribe().get_immovable_descr(immovable_index);
+		if (game.tribes().immovable_exists(immovable_index)) {
+			const ImmovableDescr* imm = game.tribes().get_immovable_descr(immovable_index);
 			test_suitability(immovable_index, *imm);
 		}
 	}
@@ -864,7 +864,10 @@ bool Worker::run_plant(Game & game, State & state, const Action & action)
 	}
 
 	Immovable& newimm =
-	   game.create_immovable(pos, state.ivar2, state.svar1 == "tribe" ? &descr().tribe() : nullptr);
+		game.create_immovable(pos, state.ivar2,
+									 state.svar1 == "tribe" ?
+										 MapObjectDescr::OwnerType::kTribe :
+										 MapObjectDescr::OwnerType::kWorld);
 	newimm.set_owner(get_owner());
 
 	if (action.iparam1 == Action::plantUnlessObject)
@@ -882,8 +885,11 @@ bool Worker::run_plant(Game & game, State & state, const Action & action)
  */
 bool Worker::run_create_bob(Game & game, State & state, const Action &)
 {
-	game.create_bob
-		(get_position(), state.ivar2, state.svar1 == "world" ? nullptr : &descr().tribe());
+	if (state.svar1 == "world") {
+		game.create_critter(get_position(), state.ivar2);
+	} else {
+		game.create_ship(get_position(), state.ivar2);
+	}
 	++state.ivar1;
 	schedule_act(game, 10);
 	return true;
@@ -960,8 +966,8 @@ bool Worker::run_geologist_find(Game & game, State & state, const Action &)
 				message_type = Message::Type::kGeologistsCoal;
 			else if (rdescr->name() == "gold")
 				message_type = Message::Type::kGeologistsGold;
-			else if (rdescr->name() == "granite")
-				message_type = Message::Type::kGeologistsGranite;
+			else if (rdescr->name() == "stones")
+				message_type = Message::Type::kGeologistsStones;
 			else if (rdescr->name() == "iron")
 				message_type = Message::Type::kGeologistsIron;
 			else if (rdescr->name() == "water")
@@ -982,14 +988,15 @@ bool Worker::run_geologist_find(Game & game, State & state, const Action &)
 				 300000, 8);
 		}
 
-		const TribeDescr & t = descr().tribe();
-		game.create_immovable
+		const TribeDescr & t = owner().tribe();
+		Immovable & newimm = game.create_immovable
 			(position,
 			 t.get_resource_indicator
 				(rdescr,
-				 rdescr->detectable() ?
-				 position.field->get_resources_amount() : 0),
-			 &t);
+				rdescr->detectable() ?
+				position.field->get_resources_amount() : 0),
+			 MapObjectDescr::OwnerType::kTribe);
+		newimm.set_owner(get_owner());
 	}
 
 	++state.ivar1;
@@ -1032,7 +1039,7 @@ bool Worker::run_construct(Game & game, State & state, const Action & /* action 
 		return true;
 	}
 
-	WareIndex wareindex = ware->descr_index();
+	DescriptionIndex wareindex = ware->descr_index();
 	if (!imm->construct_ware(game, wareindex)) {
 		molog("run_construct: construct_ware failed");
 		send_signal(game, "fail");
@@ -1163,7 +1170,7 @@ void Worker::set_economy(Economy * const economy)
 
 	if (m_economy)
 		m_economy->remove_workers
-			(descr().tribe().worker_index(descr().name().c_str()), 1);
+			(owner().tribe().worker_index(descr().name().c_str()), 1);
 
 	m_economy = economy;
 
@@ -1173,7 +1180,7 @@ void Worker::set_economy(Economy * const economy)
 		m_supply->set_economy(m_economy);
 
 	if (m_economy)
-		m_economy->add_workers(descr().tribe().worker_index(descr().name().c_str()), 1);
+		m_economy->add_workers(owner().tribe().worker_index(descr().name().c_str()), 1);
 }
 
 
@@ -1294,8 +1301,8 @@ void Worker::incorporate(Game & game)
  */
 void Worker::create_needed_experience(Game & /* game */)
 {
-	if (descr().get_needed_experience() == -1) {
-		m_current_exp = -1;
+	if (descr().get_needed_experience() == INVALID_INDEX) {
+		m_current_exp = INVALID_INDEX;
 		return;
 	}
 
@@ -1310,10 +1317,11 @@ void Worker::create_needed_experience(Game & /* game */)
  * of the worker by one, if he reaches
  * needed_experience he levels
  */
-WareIndex Worker::gain_experience(Game & game) {
-	return descr().get_needed_experience() == -1 || ++m_current_exp < descr().get_needed_experience() ?
-			  INVALID_INDEX :
-			  level(game);
+DescriptionIndex Worker::gain_experience(Game & game) {
+	return (descr().get_needed_experience() == INVALID_INDEX ||
+			  ++m_current_exp < descr().get_needed_experience()) ?
+				INVALID_INDEX :
+				level(game);
 }
 
 
@@ -1321,7 +1329,7 @@ WareIndex Worker::gain_experience(Game & game) {
  * Level this worker to the next higher level. this includes creating a
  * new worker with his propertys and removing this worker
  */
-WareIndex Worker::level(Game & game) {
+DescriptionIndex Worker::level(Game & game) {
 
 	// We do not really remove this worker, all we do
 	// is to overwrite his description with the new one and to
@@ -1329,12 +1337,12 @@ WareIndex Worker::level(Game & game) {
 	// This silently expects that the new worker is the same type as the old
 	// worker and can fullfill the same jobs (which should be given in all
 	// circumstances)
-	assert(descr().becomes());
-	const TribeDescr & t = descr().tribe();
-	WareIndex const old_index = t.worker_index(descr().name());
-	WareIndex const new_index = descr().becomes();
+	assert(descr().becomes() != INVALID_INDEX);
+	const TribeDescr & t = owner().tribe();
+	DescriptionIndex const old_index = t.worker_index(descr().name());
+	DescriptionIndex const new_index = descr().becomes();
 	m_descr = t.get_worker_descr(new_index);
-	assert(new_index != INVALID_INDEX);
+	assert(t.has_worker(new_index));
 
 	// Inform the economy, that something has changed
 	m_economy->remove_workers(old_index, 1);
@@ -2553,14 +2561,14 @@ void Worker::fugitive_update(Game & game, State & state)
 	// We always have a high probability to see flags within our vision range,
 	// but with some luck we see flags that are even further away.
 	std::vector<ImmovableFound> flags;
-	int32_t vision = descr().vision_range();
-	int32_t maxdist = 4 * vision;
+	uint32_t vision = descr().vision_range();
+	uint32_t maxdist = 4 * vision;
 	if
 		(map.find_immovables
 			(Area<FCoords>(map.get_fcoords(get_position()), maxdist),
 			 &flags, FindFlagWithPlayersWarehouse(*get_owner())))
 	{
-		int32_t bestdist = -1;
+		uint32_t bestdist = 0;
 		Flag *  best     =  nullptr;
 
 		molog("[fugitive]: found a flag connected to warehouse(s)\n");
@@ -2571,7 +2579,7 @@ void Worker::fugitive_update(Game & game, State & state)
 			if (game.logic_rand() % 2 == 0)
 				continue;
 
-			int32_t const dist =
+			uint32_t const dist =
 				map.calc_distance(get_position(), tmp_flag.coords);
 
 			if (!best || bestdist > dist) {
@@ -2955,7 +2963,7 @@ Load/save support
 ==============================
 */
 
-#define WORKER_SAVEGAME_VERSION 2
+constexpr uint8_t kCurrentPacketVersion = 2;
 
 Worker::Loader::Loader() :
 	m_location(0),
@@ -2966,21 +2974,24 @@ Worker::Loader::Loader() :
 void Worker::Loader::load(FileRead & fr)
 {
 	Bob::Loader::load(fr);
+	try {
+		uint8_t packet_version = fr.unsigned_8();
+		if (packet_version == kCurrentPacketVersion) {
 
-	uint8_t version = fr.unsigned_8();
-	if (!(1 <= version && version <= WORKER_SAVEGAME_VERSION))
-		throw GameDataError("unknown/unhandled version %u", version);
+			Worker & worker = get<Worker>();
+			m_location = fr.unsigned_32();
+			m_carried_ware = fr.unsigned_32();
+			worker.m_current_exp = fr.signed_32();
 
-	Worker & worker = get<Worker>();
-	m_location = fr.unsigned_32();
-	m_carried_ware = fr.unsigned_32();
-	worker.m_current_exp = fr.signed_32();
-
-	if (version >= 2) {
-		if (fr.unsigned_8()) {
-			worker.m_transfer = new Transfer(dynamic_cast<Game&>(egbase()), worker);
-			worker.m_transfer->read(fr, m_transfer);
+			if (fr.unsigned_8()) {
+				worker.m_transfer = new Transfer(dynamic_cast<Game&>(egbase()), worker);
+				worker.m_transfer->read(fr, m_transfer);
+			}
+		} else {
+			throw UnhandledVersionError("Worker", packet_version, kCurrentPacketVersion);
 		}
+	} catch (const std::exception& e) {
+		throw wexception("loading worker: %s", e.what());
 	}
 }
 
@@ -3052,21 +3063,22 @@ Worker::Loader * Worker::create_loader()
  * the appropriate actual load functions are called.
  */
 MapObject::Loader * Worker::load
-	(EditorGameBase & egbase, MapObjectLoader & mol, FileRead & fr)
+	(EditorGameBase & egbase, MapObjectLoader & mol, FileRead & fr,
+	 const TribesLegacyLookupTable& lookup_table, uint8_t packet_version)
 {
 	try {
 		// header has already been read by caller
-		std::string tribename = fr.c_string();
 		std::string name = fr.c_string();
-
-		egbase.manually_load_tribe(tribename);
-
-		const TribeDescr * tribe = egbase.get_tribe(tribename);
-		if (!tribe)
-			throw GameDataError("unknown tribe '%s'", tribename.c_str());
+		// Some maps contain worker info, so we need compatibility here.
+		if (packet_version == 1) {
+			if (!(egbase.tribes().tribe_exists(name))) {
+				throw GameDataError("unknown tribe '%s'", name.c_str());
+			}
+			name = lookup_table.lookup_worker(name, fr.c_string());
+		}
 
 		const WorkerDescr * descr =
-			tribe->get_worker_descr(tribe->safe_worker_index(name));
+			egbase.tribes().get_worker_descr(egbase.tribes().safe_worker_index(name));
 
 		Worker * worker = static_cast<Worker *>(&descr->create_object());
 		std::unique_ptr<Loader> loader(worker->create_loader());
@@ -3087,7 +3099,6 @@ void Worker::save
 	(EditorGameBase & egbase, MapObjectSaver & mos, FileWrite & fw)
 {
 	fw.unsigned_8(HeaderWorker);
-	fw.c_string(descr().tribe().name());
 	fw.c_string(descr().name());
 
 	do_save(egbase, mos, fw);
@@ -3105,7 +3116,7 @@ void Worker::do_save
 {
 	Bob::save(egbase, mos, fw);
 
-	fw.unsigned_8(WORKER_SAVEGAME_VERSION);
+	fw.unsigned_8(kCurrentPacketVersion);
 	fw.unsigned_32(mos.get_object_file_index_or_zero(m_location.get(egbase)));
 	fw.unsigned_32(mos.get_object_file_index_or_zero(m_carried_ware.get(egbase)));
 	fw.signed_32(m_current_exp);

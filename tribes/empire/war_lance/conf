@@ -1,8 +1,0 @@
-help=_This is the best and sharpest weapon the Empire weaponsmith creates for the warriors. It is used in the training camp – together with food – to train soldiers from attack level 3 to level 4.
-
-default_target_quantity=1
-preciousness=1
-
-[idle]
-pics=idle.png
-hotspot=4 3

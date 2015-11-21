@@ -27,7 +27,7 @@
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
 #include "logic/player.h"
-#include "logic/tribe.h"
+#include "logic/tribes/tribe_descr.h"
 #include "map_io/map_object_loader.h"
 #include "map_io/map_object_saver.h"
 
@@ -38,7 +38,7 @@ namespace Widelands {
 */
 WaresQueue::WaresQueue
 	(PlayerImmovable &       _owner,
-	 WareIndex        const _ware,
+	 DescriptionIndex        const _ware,
 	 uint8_t           const _max_size)
 	:
 	m_owner           (_owner),
@@ -122,7 +122,7 @@ void WaresQueue::set_callback(CallbackFn * const fn, void * const data)
 void WaresQueue::request_callback
 	(Game            &       game,
 	 Request         &,
-	 WareIndex        const ware,
+	 DescriptionIndex        const ware,
 #ifndef NDEBUG
 	 Worker          * const w,
 #else
@@ -234,10 +234,12 @@ void WaresQueue::set_consume_interval(const uint32_t time)
 /**
  * Read and write
  */
-#define WARES_QUEUE_DATA_PACKET_VERSION 2
+
+constexpr uint16_t kCurrentPacketVersion = 2;
+
 void WaresQueue::write(FileWrite & fw, Game & game, MapObjectSaver & mos)
 {
-	fw.unsigned_16(WARES_QUEUE_DATA_PACKET_VERSION);
+	fw.unsigned_16(kCurrentPacketVersion);
 
 	//  Owner and callback is not saved, but this should be obvious on load.
 	fw.c_string
@@ -258,14 +260,11 @@ void WaresQueue::read(FileRead & fr, Game & game, MapObjectLoader & mol)
 {
 	uint16_t const packet_version = fr.unsigned_16();
 	try {
-		if (packet_version == WARES_QUEUE_DATA_PACKET_VERSION || packet_version == 1) {
+		if (packet_version == kCurrentPacketVersion) {
 			delete m_request;
 			m_ware             = owner().tribe().ware_index(fr.c_string  ());
 			m_max_size         =                            fr.unsigned_32();
-			if (packet_version == 1)
-				m_max_fill = m_max_size;
-			else
-				m_max_fill = fr.signed_32();
+			m_max_fill = fr.signed_32();
 			m_filled           =                            fr.unsigned_32();
 			m_consume_interval =                            fr.unsigned_32();
 			if                                             (fr.unsigned_8 ()) {
@@ -282,9 +281,9 @@ void WaresQueue::read(FileRead & fr, Game & game, MapObjectLoader & mol)
 			//  Now Economy stuff. We have to add our filled items to the economy.
 			if (m_owner.get_economy())
 				add_to_economy(*m_owner.get_economy());
-		} else
-			throw GameDataError
-				("unknown/unhandled version %u", packet_version);
+		} else {
+			throw UnhandledVersionError("WaresQueue", packet_version, kCurrentPacketVersion);
+		}
 	} catch (const GameDataError & e) {
 		throw GameDataError("waresqueue: %s", e.what());
 	}

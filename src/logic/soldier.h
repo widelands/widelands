@@ -20,6 +20,8 @@
 #ifndef WL_LOGIC_SOLDIER_H
 #define WL_LOGIC_SOLDIER_H
 
+#include <memory>
+
 #include "base/macros.h"
 #include "logic/training_attribute.h"
 #include "logic/worker.h"
@@ -39,15 +41,13 @@ class Battle;
 
 #define HP_FRAMECOLOR RGBColor(255, 255, 255)
 
-struct SoldierDescr : public WorkerDescr {
+class SoldierDescr : public WorkerDescr {
+public:
 	friend class Economy;
-	SoldierDescr
-		(char const * const _name, char const * const _descname,
-		 const std::string & directory, Profile &, Section & global_s,
-		 const TribeDescr &);
-	~SoldierDescr() override {}
 
-	void load_graphics() override;
+	SoldierDescr(const std::string& init_descname,
+					 const LuaTable& t, const EditorGameBase& egbase);
+	~SoldierDescr() override {}
 
 	uint32_t get_max_hp_level          () const {return m_max_hp_level;}
 	uint32_t get_max_attack_level      () const {return m_max_attack_level;}
@@ -125,11 +125,10 @@ protected:
 	std::vector<std::string> m_evade_failure_e_name;
 	std::vector<std::string> m_die_e_name;
 
-	std::vector<std::string> load_animations_from_string
-			(const std::string & directory, Profile & prof, Section & global_s,
-			 const char * anim_name);
-
 private:
+	// Reads list of animation names from the table and pushes them into result.
+	void add_battle_animation(std::unique_ptr<LuaTable> table, std::vector<std::string>* result);
+
 	DISALLOW_COPY_AND_ASSIGN(SoldierDescr);
 };
 

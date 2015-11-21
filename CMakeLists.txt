@@ -4,7 +4,8 @@ cmake_minimum_required (VERSION 2.8.7)
 
 include("${CMAKE_SOURCE_DIR}/cmake/WlFunctions.cmake")
 
-option(OPTION_USE_GLBINDING "USe glbinding instead of GLEW" OFF)
+option(OPTION_USE_GLBINDING "Use glbinding instead of GLEW" OFF)
+option(OPTION_GLEW_STATIC "Use static GLEW Library" OFF)
 
 if (CMAKE_SOURCE_DIR STREQUAL CMAKE_BINARY_DIR)
   message(FATAL_ERROR "Build directory and source directory must not be the same.")
@@ -238,7 +239,6 @@ install(
   DIRECTORY
     campaigns
     i18n
-    global
     tribes
     txts
     world

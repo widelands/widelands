@@ -68,7 +68,7 @@
 #include "logic/replay_game_controller.h"
 #include "logic/single_player_game_controller.h"
 #include "logic/single_player_game_settings_provider.h"
-#include "logic/tribe.h"
+#include "logic/tribes/tribe_descr.h"
 #include "map_io/map_loader.h"
 #include "network/internet_gaming.h"
 #include "network/netclient.h"
@@ -630,16 +630,6 @@ void WLApplication::_handle_mousebutton
 		}
 }
 
-/**
- * Return the current time, in milliseconds
- */
-// TODO(unknown): Use our internally defined time type
-// TODO(sirver): get rid of this method and use SDL_GetTicks() directly.
-int32_t WLApplication::get_time() {
-	uint32_t time = SDL_GetTicks();
-
-	return time;
-}
 
 /// Instantaneously move the mouse cursor without creating a motion event.
 ///

@@ -36,11 +36,6 @@ struct MapPortSpacesPacket {
 	//  The following function prereads a given map without the need of a
 	//  properly configured EditorGameBase object.
 	void pre_read(FileSystem &, Map*);
-
-	uint32_t get_version() {return m_version;}
-
-private:
-	uint32_t m_version;
 };
 
 }

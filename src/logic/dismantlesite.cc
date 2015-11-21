@@ -32,18 +32,15 @@
 #include "graphic/rendertarget.h"
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
-#include "logic/tribe.h"
+#include "logic/tribes/tribe_descr.h"
 #include "logic/worker.h"
 #include "sound/sound_handler.h"
 
 namespace Widelands {
 
-DismantleSiteDescr::DismantleSiteDescr
-	(char const * const _name, char const * const _descname,
-	 const std::string & directory, Profile & prof, Section & global_s,
-	 const TribeDescr & _tribe)
-	:
-	BuildingDescr(MapObjectType::DISMANTLESITE, _name, _descname, directory, prof, global_s, _tribe)
+DismantleSiteDescr::DismantleSiteDescr(const std::string& init_descname,
+													const LuaTable& table, const EditorGameBase& egbase)
+	: BuildingDescr(init_descname, MapObjectType::DISMANTLESITE, table, egbase)
 {
 	add_attribute(MapObject::Attribute::CONSTRUCTIONSITE); // Yep, this is correct.
 }
@@ -75,7 +72,7 @@ PartiallyFinishedBuilding(gdescr)
 	set_owner(&plr);
 
 	assert(!former_buildings.empty());
-	for (BuildingIndex former_idx : former_buildings) {
+	for (DescriptionIndex former_idx : former_buildings) {
 		m_old_buildings.push_back(former_idx);
 	}
 	const BuildingDescr* cur_descr = owner().tribe().get_building_descr(m_old_buildings.back());
@@ -108,10 +105,10 @@ void DismantleSite::init(EditorGameBase & egbase)
 {
 	PartiallyFinishedBuilding::init(egbase);
 
-	std::map<WareIndex, uint8_t> wares;
+	std::map<DescriptionIndex, uint8_t> wares;
 	count_returned_wares(this, wares);
 
-	std::map<WareIndex, uint8_t>::const_iterator it = wares.begin();
+	std::map<DescriptionIndex, uint8_t>::const_iterator it = wares.begin();
 	m_wares.resize(wares.size());
 
 	for (size_t i = 0; i < wares.size(); ++i, ++it) {
@@ -130,11 +127,11 @@ Count wich wares you get back if you dismantle the given building
 */
 void DismantleSite::count_returned_wares
 	(Building* building,
-	 std::map<WareIndex, uint8_t>   & res)
+	 std::map<DescriptionIndex, uint8_t>   & res)
 {
-	for (BuildingIndex former_idx : building->get_former_buildings()) {
-		const std::map<WareIndex, uint8_t> * return_wares;
-		const BuildingDescr* former_descr = building->descr().tribe().get_building_descr(former_idx);
+	for (DescriptionIndex former_idx : building->get_former_buildings()) {
+		const std::map<DescriptionIndex, uint8_t> * return_wares;
+		const BuildingDescr* former_descr = building->owner().tribe().get_building_descr(former_idx);
 		if (former_idx != building->get_former_buildings().front()) {
 			return_wares = & former_descr->returned_wares_enhanced();
 		} else {
@@ -142,7 +139,7 @@ void DismantleSite::count_returned_wares
 		}
 		assert(return_wares != nullptr);
 
-		std::map<WareIndex, uint8_t>::const_iterator i;
+		std::map<DescriptionIndex, uint8_t>::const_iterator i;
 		for (i = return_wares->begin(); i != return_wares->end(); ++i) {
 			res[i->first] += i->second;
 		}
@@ -196,7 +193,7 @@ bool DismantleSite::get_building_work(Game & game, Worker & worker, bool) {
 			//update statistics
 			owner().ware_produced(wq.get_ware());
 
-			const WareDescr & wd = *descr().tribe().get_ware_descr(wq.get_ware());
+			const WareDescr & wd = *owner().tribe().get_ware_descr(wq.get_ware());
 			WareInstance & ware = *new WareInstance(wq.get_ware(), &wd);
 			ware.init(game);
 			worker.start_task_dropoff(game, ware);

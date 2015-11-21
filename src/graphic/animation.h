@@ -33,7 +33,6 @@
 
 class Image;
 class LuaTable;
-class Section;
 class Surface;
 struct RGBColor;
 
@@ -68,16 +67,13 @@ public:
 	/// so the caller has to adjust for the hotspot himself.
 	virtual const Point& hotspot() const = 0;
 
-	// An image frame that is guaranteed to be a path to a file on disc. This is
-	// a clutch needed to make sure that messages can always be displayed, even
-	// no image processing has taken place before.
-	virtual const Image& representative_image_from_disk() const = 0;
+	/// Returns the disk filename for the first image in the animation
 	virtual const std::string& representative_image_from_disk_filename() const = 0;
 
 	/// Blit the animation frame that should be displayed at the given time index
 	/// so that the given point is at the top left of the frame. Srcrc defines
 	/// the part of the animation that should be blitted. The 'clr' is the player
-	/// color used for blitting - the parameter can be NULL in which case the
+	/// color used for blitting - the parameter can be nullptr in which case the
 	/// neutral image will be blitted. The Surface is the target for the blit
 	/// operation and must be non-null.
 	virtual void blit(uint32_t time, const Point&, const Rect& srcrc, const RGBColor* clr, Surface*) const = 0;
@@ -96,18 +92,12 @@ class AnimationManager {
 public:
 	~AnimationManager();
 	/**
-	 * Loads an animation, graphics sound and everything.
+	 * Loads an animation, graphics sound and everything from a Lua table.
 	 *
-	 * The animation resides in the given directory and is described by the
-	 * given section.
+	 * The Lua table must contain a table 'pictures' with image paths and a 'hotspot' table.
 	 *
-	 * This function looks for image files as defined by the 'pics' key. If this
-	 * is not present, it will try \<sectionname\>_??.png
-	 *
-	 * \param directory     which directory to look in for image and sound files
-	 * \param s             conffile section to search for data on this animation
+	 * Optional parameters in the Lua table are 'fps' and 'sound_effect'.
 	*/
-	uint32_t load(const std::string & directory, Section& s);
 	uint32_t load(const LuaTable& table);
 
 	/// Returns the animation with the given ID or throws an exception if it is

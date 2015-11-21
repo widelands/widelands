@@ -1,8 +1,0 @@
-help=_Golden tabards are produced in Atlantean weaving mills out of gold yarn. They are used in the labyrinth – together with food – to train soldiers from health level 0 to level 1.
-
-default_target_quantity=1
-preciousness=1
-
-[idle]
-pics=idle.png
-hotspot=5 10

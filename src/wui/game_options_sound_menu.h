@@ -33,9 +33,7 @@ struct GameOptionsSoundMenu : public UI::UniqueWindow {
 
 private:
 	UI::Checkbox         ingame_music;
-	UI::Textarea         ingame_music_label;
 	UI::Checkbox         ingame_sound;
-	UI::Textarea         ingame_sound_label;
 
 	UI::Textarea         ingame_music_volume_label;
 	UI::HorizontalSlider ingame_music_volume;

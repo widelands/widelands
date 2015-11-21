@@ -2,6 +2,7 @@
 # Copyright (C) 2005-2015 Widelands Development Team
 # 
 # Translators:
+# Bamstam, 2015
 # wl-zocker, 2014
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # millimarg, 2015
@@ -12,9 +13,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-09-12 10:50+0000\n"
-"PO-Revision-Date: 2015-09-12 18:46+0000\n"
-"Last-Translator: Venatrix\n"
+"POT-Creation-Date: 2015-11-10 08:55+0000\n"
+"PO-Revision-Date: 2015-11-16 18:47+0000\n"
+"Last-Translator: wl-zocker\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -139,8 +140,8 @@ msgstr "Ein neu erschaffener Soldat hat keine Erfahrung und kämpft nicht sehr g
 msgid ""
 "One of these training sites is the battle arena. It is a big and expensive "
 "building, and it trains soldiers in evade. Since soldiers get very hungry "
-"during their workout, this building needs a lot of food and strongbeer. In a"
-" real game, you should have a good infrastructure before you build it."
+"during their workout, this building needs a lot of food and strong beer. In "
+"a real game, you should have a good infrastructure before you build it."
 msgstr "Eines dieser Trainingsgebäude ist die Arena. Es ist ein großes und teures Gebäude, das die Soldaten im Ausweichen trainiert. Da die Soldaten während ihrer Übungen sehr hungrig werden, braucht dieses Gebäude viel Nahrung und Starkbier. In einem richtigen Spiel solltest du eine gute Infrastruktur haben, bevor du es baust."
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:53
@@ -181,8 +182,8 @@ msgstr "Sehr gut. Unsere Arena ist nun fertig und die Soldaten laufen schon zu i
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:74
 msgid ""
 "The needed wares are also delivered there. For successful training, you need"
-" pitta bread and strongbeer, as well as either fish or meat."
-msgstr "Die benötigten Ware werden ebenfalls dorthin gebracht. Für erfolgreiches Training brauchst du Fladenbrot und Starkbier, außerdem entweder Fisch oder Fleisch."
+" pitta bread and strong beer, as well as either fish or meat."
+msgstr "Die benötigten Waren werden ebenfalls dorthin gebracht. Für ein erfolgreiches Training brauchst du Fladenbrot und Starkbier, außerdem entweder Fisch oder Fleisch."
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:75
 msgid ""
@@ -225,7 +226,7 @@ msgid ""
 "There is a second training site: the training camp. It is a big building "
 "too, and to complement the battle arena, it trains attack and health "
 "(remember, the Barbarian soldiers cannot be trained in defense)."
-msgstr "Es gibt ein weiteres Trainingsgebäude: das Ausbildungslager. Es ist ebenfalls ein großes Gebäude und ergänzt die Arena, da es den Angriff und die Lebenspunkte trainiert (erinnere dich, die Barbaren können ihre Verteidigungsfähigkeit nicht trainieren)."
+msgstr "Es gibt ein weiteres Trainingsgebäude: das Ausbildungslager. Es ist ebenfalls ein großes Gebäude und ergänzt die Arena, da es den Angriff und die Lebenspunkte trainiert (bedenke, dass die Barbaren ihre Verteidigungsfähigkeit nicht trainieren können)."
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:91
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:99
@@ -252,9 +253,9 @@ msgstr "Großartig, unser Ausbildungslager ist jetzt auch fertig. Jetzt hindert 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:108
 msgid ""
 "To train in the training camp, our soldiers need food like in the battle "
-"arena, but no strongbeer. Instead, they need different axes for attack "
+"arena, but no strong beer. Instead, they need different axes for attack "
 "training and helmets for health training."
-msgstr "Um im Ausbildungslager zu trainieren, brauchen unsere Soldaten Nahrung, wie in der Arena, aber kein Starkbier. Stattdessen brauchen sie verschiedene Äxte für das Angriffstraining und Helme für das Lebenspunkte-Training."
+msgstr "Um im Ausbildungslager zu trainieren, brauchen unsere Soldaten Nahrung wie in der Arena, aber kein Starkbier. Stattdessen benötigen sie verschiedene Äxte für das Angriffstraining und Helme für das Lebenspunktetraining."
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:109
 msgid ""
@@ -396,7 +397,7 @@ msgstr "Reiße ihn ab."
 msgid ""
 "You can also use this opportunity to become familiar with the other options:"
 " the heroes/rookies preference and the capacity."
-msgstr "Du kannst diese Gelegenheit auch nutzen, um dich mit den anderen Optionen vertraut zumachen: der Helden/Neulinge-Einstellung und der Soldatenkapazität."
+msgstr "Du kannst diese Gelegenheit auch nutzen, um dich mit den anderen Optionen vertraut zu machen: der Helden/Neulinge-Einstellung und der Soldatenkapazität."
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:155
 msgid "Dismantle your north-western sentry"

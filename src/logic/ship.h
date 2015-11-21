@@ -57,11 +57,9 @@ struct NoteShipMessage {
 	}
 };
 
-struct ShipDescr : BobDescr {
-	ShipDescr
-		(char const * name, char const * descname,
-		 const std::string & directory, Profile &, Section & global_s,
-		 const TribeDescr &);
+class ShipDescr : public BobDescr {
+public:
+	ShipDescr(const std::string& init_descname, const LuaTable& t);
 	~ShipDescr() override {}
 
 	Bob & create_object() const override;
@@ -70,13 +68,10 @@ struct ShipDescr : BobDescr {
 	const DirAnimations & get_sail_anims() const {return m_sail_anims;}
 
 	uint32_t get_capacity() const {return m_capacity;}
-	uint32_t vision_range() const {return m_vision_range;}
-
 
 private:
 	DirAnimations m_sail_anims;
 	uint32_t m_capacity;
-	uint32_t m_vision_range;
 	DISALLOW_COPY_AND_ASSIGN(ShipDescr);
 };
 
@@ -268,7 +263,7 @@ protected:
 
 		const Task * get_task(const std::string & name) override;
 
-		void load(FileRead & fr, uint8_t version);
+		void load(FileRead & fr);
 		void load_pointers() override;
 		void load_finish() override;
 

@@ -31,8 +31,6 @@
 namespace Widelands {
 
 //  Type definitions for the game logic.
-using TribeIndex = uint8_t;
-
 using MilitaryInfluence = uint16_t;
 
 using PlayerNumber = uint8_t; /// 5 bits used, so 0 .. 31
@@ -48,8 +46,7 @@ inline PlayerNumber neutral() {return 0;}
  */
 using TeamNumber = uint8_t;
 
-using TerrainIndex = uint8_t;
-using ResourceIndex = uint8_t;  /// 4 bits used, so 0 .. 15.
+using DescriptionIndex = uint8_t;
 using ResourceAmount = uint8_t; /// 4 bits used, so 0 .. 15.
 
 using Vision = uint16_t;
@@ -62,10 +59,9 @@ inline Duration endless() {return 0xffffffff;}
 
 using Serial = uint32_t; /// Serial number for MapObject.
 
-constexpr uint8_t INVALID_INDEX = std::numeric_limits<uint8_t>::max();
-using WareIndex = uint8_t;
-using BuildingIndex = uint8_t;
 using Direction = uint8_t;
+constexpr uint8_t INVALID_INDEX = std::numeric_limits<uint8_t>::max();
+constexpr DescriptionIndex kInvalidWare = INVALID_INDEX - 1;
 
 struct SoldierStrength {
 	uint8_t hp, attack, defense, evade;

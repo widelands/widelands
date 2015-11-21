@@ -39,35 +39,25 @@
 #include "logic/mapregion.h"
 #include "logic/path.h"
 #include "logic/player.h"
-#include "logic/tribe.h"
+#include "logic/tribes/tribe_descr.h"
 #include "logic/warehouse.h"
 #include "logic/widelands_geometry_io.h"
 #include "map_io/map_object_loader.h"
 #include "map_io/map_object_saver.h"
-#include "profile/profile.h"
 #include "wui/interactive_gamebase.h"
 
 namespace Widelands {
 
-ShipDescr::ShipDescr(const char* given_name,
-                     const char* gdescname,
-                     const std::string& directory,
-                     Profile& prof,
-                     Section& global_s,
-                     const TribeDescr& gtribe)
-   : BobDescr(MapObjectType::SHIP, given_name, gdescname, &gtribe) {
-	{  //  global options
-		Section& idle_s = prof.get_safe_section("idle");
-		add_animation("idle", g_gr->animations().load(directory, idle_s));
-	}
-	m_sail_anims.parse(*this, directory, prof, "sail");
+ShipDescr::ShipDescr(const std::string& init_descname, const LuaTable& table)
+	:
+	BobDescr(init_descname, MapObjectType::SHIP, MapObjectDescr::OwnerType::kTribe, table) {
 
-	Section* sinking_s = prof.get_section("sinking");
-	if (sinking_s)
-		add_animation("sinking", g_gr->animations().load(directory, *sinking_s));
+	i18n::Textdomain td("tribes");
 
-	m_capacity = global_s.get_natural("capacity", 20);
-	m_vision_range = global_s.get_natural("vision_range", 7);
+	// Read the sailing animations
+	add_directional_animation(&m_sail_anims, "sail");
+
+	m_capacity = table.has_key("capacity") ? table.get_int("capacity") : 20;
 }
 
 uint32_t ShipDescr::movecaps() const {
@@ -237,13 +227,13 @@ void Ship::ship_update(Game& game, Bob::State& state) {
 }
 
 /// updates a ships tasks in transport mode \returns false if failed to update tasks
-bool Ship::ship_update_transport(Game& game, Bob::State&) {
+bool Ship::ship_update_transport(Game& game, Bob::State& state) {
 	Map& map = game.map();
 
 	PortDock* dst = get_destination(game);
 	if (!dst) {
-		//here we just do nothing, this is usually OK
-		start_task_idle(game, descr().main_animation(), 10000);
+		// The ship has no destination, so let it sleep
+		ship_update_idle(game, state);
 		return true;
 	}
 
@@ -451,6 +441,7 @@ void Ship::ship_update_expedition(Game& game, Bob::State&) {
 }
 
 void Ship::ship_update_idle(Game& game, Bob::State& state) {
+
 	if (state.ivar1) {
 		// We've just completed one step, so give neighbours
 		// a chance to move away first
@@ -865,7 +856,7 @@ WalkingDir Ship::get_scouting_direction() {
 /// @note only called via player command
 void Ship::exp_construct_port(Game&, const Coords& c) {
 	assert(m_expedition);
-	BuildingIndex port_idx = get_owner()->tribe().safe_building_index("port");
+	DescriptionIndex port_idx = get_owner()->tribe().port();
 	get_owner()->force_csite(c, port_idx);
 	m_ship_state = EXP_COLONIZING;
 }
@@ -999,7 +990,7 @@ Load / Save implementation
 ==============================
 */
 
-#define SHIP_SAVEGAME_VERSION 4
+constexpr uint8_t kCurrentPacketVersion = 5;
 
 Ship::Loader::Loader() : m_lastdock(0), m_destination(0) {
 }
@@ -1010,45 +1001,43 @@ const Bob::Task* Ship::Loader::get_task(const std::string& name) {
 	return Bob::Loader::get_task(name);
 }
 
-void Ship::Loader::load(FileRead& fr, uint8_t version) {
+void Ship::Loader::load(FileRead & fr)
+{
 	Bob::Loader::load(fr);
 
-	if (version >= 2) {
-		// The state the ship is in
-		if (version >= 3) {
-			m_ship_state = fr.unsigned_8();
+	// The state the ship is in
+	m_ship_state = fr.unsigned_8();
 
-			// Expedition specific data
-			if (m_ship_state == EXP_SCOUTING || m_ship_state == EXP_WAITING ||
-			    m_ship_state == EXP_FOUNDPORTSPACE || m_ship_state == EXP_COLONIZING) {
-				m_expedition.reset(new Expedition());
-				// Currently seen port build spaces
-				m_expedition->seen_port_buildspaces.reset(new std::list<Coords>());
-				uint8_t numofports = fr.unsigned_8();
-				for (uint8_t i = 0; i < numofports; ++i)
-					m_expedition->seen_port_buildspaces->push_back(read_coords_32(&fr));
-				// Swimability of the directions
-				for (uint8_t i = 0; i < LAST_DIRECTION; ++i)
-					m_expedition->swimable[i] = (fr.unsigned_8() == 1);
-				// whether scouting or exploring
-				m_expedition->island_exploration = fr.unsigned_8() == 1;
-				// current direction
-				m_expedition->scouting_direction = static_cast<WalkingDir>(fr.unsigned_8());
-				// Start coordinates of an island exploration
-				m_expedition->exploration_start = read_coords_32(&fr);
-				// Whether the exploration is done clockwise or counter clockwise
-				m_expedition->island_explore_direction = static_cast<IslandExploreDirection>(fr.unsigned_8());
-			}
-		} else
-			m_ship_state = TRANSPORT;
+	// Expedition specific data
+	if (m_ship_state == EXP_SCOUTING || m_ship_state == EXP_WAITING ||
+		 m_ship_state == EXP_FOUNDPORTSPACE || m_ship_state == EXP_COLONIZING) {
+		m_expedition.reset(new Expedition());
+		// Currently seen port build spaces
+		m_expedition->seen_port_buildspaces.reset(new std::list<Coords>());
+		uint8_t numofports = fr.unsigned_8();
+		for (uint8_t i = 0; i < numofports; ++i)
+			m_expedition->seen_port_buildspaces->push_back(read_coords_32(&fr));
+		// Swimability of the directions
+		for (uint8_t i = 0; i < LAST_DIRECTION; ++i)
+			m_expedition->swimable[i] = (fr.unsigned_8() == 1);
+		// whether scouting or exploring
+		m_expedition->island_exploration = fr.unsigned_8() == 1;
+		// current direction
+		m_expedition->scouting_direction = static_cast<WalkingDir>(fr.unsigned_8());
+		// Start coordinates of an island exploration
+		m_expedition->exploration_start = read_coords_32(&fr);
+		// Whether the exploration is done clockwise or counter clockwise
+		m_expedition->island_explore_direction = static_cast<IslandExploreDirection>(fr.unsigned_8());
+	} else {
+		m_ship_state = TRANSPORT;
+	}
 
-		m_lastdock = fr.unsigned_32();
-		m_destination = fr.unsigned_32();
+	m_lastdock = fr.unsigned_32();
+	m_destination = fr.unsigned_32();
 
-		m_items.resize(fr.unsigned_32());
-		for (ShippingItem::Loader& item_loader : m_items) {
-			item_loader.load(fr);
-		}
+	m_items.resize(fr.unsigned_32());
+	for (ShippingItem::Loader& item_loader : m_items) {
+		item_loader.load(fr);
 	}
 }
 
@@ -1098,25 +1087,33 @@ MapObject::Loader* Ship::load(EditorGameBase& egbase, MapObjectLoader& mol, File
 
 	try {
 		// The header has been peeled away by the caller
-
-		uint8_t const version = fr.unsigned_8();
-		if (1 <= version && version <= SHIP_SAVEGAME_VERSION) {
-			std::string owner = fr.c_string();
-			std::string name = fr.c_string();
-			const ShipDescr* descr = nullptr;
-
-			egbase.manually_load_tribe(owner);
-
-			if (const TribeDescr* tribe = egbase.get_tribe(owner))
-				descr = dynamic_cast<const ShipDescr*>(tribe->get_bob_descr(name));
-
-			if (!descr)
-				throw GameDataError("undefined ship %s/%s", owner.c_str(), name.c_str());
-
-			loader->init(egbase, mol, descr->create_object());
-			loader->load(fr, version);
-		} else
-			throw GameDataError("unknown/unhandled version %u", version);
+		uint8_t const packet_version = fr.unsigned_8();
+		if (1 <= packet_version && packet_version <= kCurrentPacketVersion) {
+			try {
+				const ShipDescr* descr = nullptr;
+				// Removing this will break the test suite
+				if (packet_version < 5) {
+					std::string tribe_name = fr.c_string();
+					fr.c_string(); // This used to be the ship's name, which we don't need any more.
+					if (!(egbase.tribes().tribe_exists(tribe_name))) {
+						throw GameDataError("Tribe %s does not exist for ship", tribe_name.c_str());
+					}
+					const DescriptionIndex& tribe_index = egbase.tribes().tribe_index(tribe_name);
+					const TribeDescr& tribe_descr = *egbase.tribes().get_tribe_descr(tribe_index);
+					descr = egbase.tribes().get_ship_descr(tribe_descr.ship());
+				} else {
+					std::string name = fr.c_string();
+					const DescriptionIndex& ship_index = egbase.tribes().safe_ship_index(name);
+					descr = egbase.tribes().get_ship_descr(ship_index);
+				}
+				loader->init(egbase, mol, descr->create_object());
+				loader->load(fr);
+			} catch (const WException& e) {
+				throw GameDataError("Failed to load ship: %s", e.what());
+			}
+		} else {
+			throw UnhandledVersionError("Ship", packet_version, kCurrentPacketVersion);
+		}
 	} catch (const std::exception& e) {
 		throw wexception("loading ship: %s", e.what());
 	}
@@ -1126,9 +1123,7 @@ MapObject::Loader* Ship::load(EditorGameBase& egbase, MapObjectLoader& mol, File
 
 void Ship::save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw) {
 	fw.unsigned_8(HeaderShip);
-	fw.unsigned_8(SHIP_SAVEGAME_VERSION);
-
-	fw.c_string(descr().get_owner_tribe()->name());
+	fw.unsigned_8(kCurrentPacketVersion);
 	fw.c_string(descr().name());
 
 	Bob::save(egbase, mos, fw);

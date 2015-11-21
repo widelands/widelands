@@ -10,7 +10,8 @@ world:new_immovable_type{
    programs = {},
    animations = {
       idle = {
-         pictures = { dirname .. "idle.png" },
+         template = "idle",
+         directory = dirname,
          hotspot = { 30, 15 },
       },
    }

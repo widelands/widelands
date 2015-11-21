@@ -28,9 +28,9 @@ economic infrastructure, explore the land around you and face rivaling
 tribes.]]
    ) .. h3(_
 [[Check out the Widelands project homepage:]]
-   ) .. p(
-[[http://wl.widelands.org]]
-   ) .. p(_
+   ) .. p(a(
+[[https://wl.widelands.org]]
+   )) .. p(_
 [[Widelands is licensed under the GNU General Public License (GPL). For more
 information, see the file ‘COPYING’.]]
    ) .. h3(_
@@ -44,9 +44,7 @@ creating new maps – get in touch on our homepage.]])
    .. h2(_
 [[General game control]]
    ) .. p(_
-[[To close an open window, right-click on it. To minimize/maximize a window, click
-on the title bar of that window either with the middle mouse button or with the left
-mouse button while holding down CTRL.]]
+[[To close an open window, right-click on it. To minimize/maximize a window, click on it with the middle mouse button or with the left mouse button while holding down CTRL.]]
    ) .. p(_
 [[If you hold CTRL while building a road, flags will be placed automatically.
 If you hold CTRL while removing a road, all flags up to the first junction are
@@ -81,7 +79,7 @@ _"PAGEUP: increases game speed" .. "<br>"
 [[In the message window, the following additional shortcuts are available:]]
    ) .. p(
 _ "0: shows all messages" .. "<br>"
-.. _ "1: shows geologists' messages only" .. "<br>"
+.. _ "1: shows geologists’ messages only" .. "<br>"
 .. _ "2: shows economy messages only" .. "<br>"
 .. _ "3: shows seafaring messages only" .. "<br>"
 .. _ "4: shows warfare messages only" .. "<br>"
@@ -90,17 +88,15 @@ _ "0: shows all messages" .. "<br>"
 .. _"DELETE: archives/restores the current message"
    ) .. h2(_
 [[Online Help]]
-   ) .. p( _
-[[If you need documentation or help for Widelands or the Widelands Editor, be
-sure to visit our homepage. You can find an up to date online help in our Wiki
-and a detailed description of the tribe economies in our online encyclopedia.]]
+   ) .. p(_"A detailed description of the tribes’ economies is available in the in-game Tribal Encyclopedia." .. " " ..
+(_[[If you need more documentation or help for Widelands or the Widelands Editor, be sure to visit our homepage at %s. You can find online help in our Wiki there.]]):bformat(a("https://wl.widelands.org/"))
    ) .. h2(_
 [[Reporting Bugs]]
    ) .. p(_
 [[If you encounter a bug, please report it to our bugtracker:]]
-   ) .. p(
+   ) .. p(a(
 [[https://bugs.launchpad.net/widelands]]
-   ) .. p(_
+   )) .. p(_
 [[Please provide enough background information. Tell us:]]
    ) .. p(_
 [[- Detailed steps on how to trigger the bug, if possible.]]

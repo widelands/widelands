@@ -34,7 +34,6 @@
 #include "logic/editor_game_base.h"
 #include "logic/map.h"
 #include "logic/world/world.h"
-#include "profile/profile.h"
 #include "random/random.h"
 #include "ui_basic/button.h"
 #include "ui_basic/progresswindow.h"
@@ -237,13 +236,10 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent) :
 
 	// ---------- Island mode ----------
 
-	Point pos(get_inner_w() - spacing - height, posy);
-	m_island_mode = new UI::Checkbox(this, pos);
+	m_island_mode = new UI::Checkbox(this, Point(posx, posy), _("Island mode"));
 	m_island_mode->set_state(true);
 	m_island_mode->changed.connect
 		(boost::bind(&MainMenuNewRandomMap::button_clicked, this, ButtonId::SWITCH_ISLAND_MODE));
-
-	new UI::Textarea(this, posx, posy, _("Island mode:"));
 	posy += height + spacing;
 
 
@@ -521,6 +517,8 @@ void MainMenuNewRandomMap::clicked_create_map() {
 
 	eia.set_need_save(true);
 	eia.register_overlays();
+	eia.toggle_minimap();
+	eia.toggle_minimap();
 
 	die();
 }
@@ -555,7 +553,7 @@ void MainMenuNewRandomMap::id_edit_box_changed()
 		m_res->set_title(m_res_amounts[m_res_amount].c_str());
 
 		// Update other values in UI as well
-		button_clicked(static_cast<ButtonId>(-1));
+		button_clicked(ButtonId::NO_BUTTON);
 
 		m_goButton->set_enabled(true);
 	}

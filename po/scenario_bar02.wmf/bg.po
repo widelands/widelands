@@ -3,14 +3,15 @@
 # 
 # Translators:
 # Lyubomir Vasilev, 2015
+# Lyubomir Vasilev, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-07-27 09:40+0000\n"
-"PO-Revision-Date: 2015-07-30 11:44+0000\n"
+"POT-Creation-Date: 2015-11-04 07:08+0000\n"
+"PO-Revision-Date: 2015-11-04 07:36+0000\n"
 "Last-Translator: Lyubomir Vasilev\n"
-"Language-Team: Bulgarian (http://www.transifex.com/projects/p/widelands/language/bg/)\n"
+"Language-Team: Bulgarian (http://www.transifex.com/widelands/widelands/language/bg/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -63,14 +64,14 @@ msgstr "С нарастването на мрежата Ви от пътища �
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:46
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:48
-msgid "Build a donjon"
-msgstr "Постройте донжон"
+msgid "Build a tower"
+msgstr "Постройте кула"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:49
 msgid ""
-"Build a donjon at the north-east border of your territory to get greater "
+"Build a tower at the north-east border of your territory to get greater "
 "visual range and to protect your people from sudden attacks by enemies."
-msgstr "Постройте донжон на североизточната граница на територията си, за да имате по-голям обхват на видимост и да можете да защитите хората си от внезапни вражески нападения."
+msgstr "Постройте кула на североизточната граница на територията си, за да имате по-голям обхват на видимост и да можете да защитите хората си от внезапни вражески нападения."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:54
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:56
@@ -117,11 +118,12 @@ msgstr "Постройте бойна арена и тренировъчен л�
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:82
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:112
 msgid ""
-"Enhance your metal workshop to an axfactory in order to produce weapons, and"
-" build up a second metal workshop to ensure the production of tools. When "
-"the blacksmith reaches his next level (master blacksmith), you can even "
-"enhance the axfactory to a war mill, which will produce additional weapons."
-msgstr "Надградете работилницата си за метали до фабрика за брадви, за да можете да произвеждате оръжия и постройте втора работилница за метали, за да подсигурите производството на инструменти. Когато ковачът достигне следващото си ниво (главен ковач), ще можете дори да подобрите фабриката за брадви до оръжейна, която произвежда допълнителни оръжия."
+"Enhance your metal workshop to an ax workshop in order to produce weapons, "
+"and build up a second metal workshop to ensure the production of tools. When"
+" the blacksmith reaches his next level (master blacksmith), you can even "
+"enhance the ax workshop to a war mill, which will produce additional "
+"weapons."
+msgstr "Надградете работилницата си за метали до работилница за брадви, за да можете да произвеждате оръжия и постройте втора работилница за метали, за да подсигурите производството на инструменти. Когато ковачът достигне следващото си ниво (главен ковач), ще можете дори да подобрите работилницата за брадви до оръжейна, която произвежда допълнителни оръжия."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:83
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:120
@@ -205,31 +207,34 @@ msgid "Close to Home"
 msgstr "Близо до дома"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:146
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:155
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:290
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:157
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:313
 msgid "Thron looks worried…"
 msgstr "Трон изглежда притеснен..."
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:147
+#. TRANSLATORS: Thron
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:148
 msgid ""
 "These last days, we came closer to our capital. Many people have already "
 "joined us on our march and set their hopes on me. However, I fear that we "
 "are not strong enough to take up the battle against my brothers."
 msgstr "Последните дни се приближихме по-близо до столицата. Много хора вече се бяха присъединили към нас и всички те възлагат надеждите си на мен. Все пак, аз се страхувам, че не сме достатъчно силни, за да започнем битката срещу братята ми."
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:149
+#. TRANSLATORS: Thron
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:151
 msgid ""
 "For now, we are resting at the borders of the old forest and preparing for "
 "the coming days."
 msgstr "Засега се разположихме до границата на старата гора и се подготвяме за предстоящите дни."
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:154
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:175
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:289
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:156
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:180
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:312
 msgid "Another Cold Day"
 msgstr "Още един студен ден"
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:156
+#. TRANSLATORS: Thron
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:159
 msgid ""
 "The news that a patrol brought is not good to hear. Our spies tell us that "
 "the war tribes still rage in battle, but some of the elder soldiers and "
@@ -239,15 +244,16 @@ msgid ""
 "around the capital, securing the outer fortification rings."
 msgstr "Новините, които един от патрулите донесе, не са добри. Шпионите ни казват, че племената все още се бият, но изглежда, че на някои от по-старшите войници и водачите на племената тази безсмислена война започва да им омръзва. Калитат, син на Кун, е първият военен водач, който напуснал Ал'тунран, оставяйки своя фронт слаб и уязвим. Както докладват разузнавачите ми, той обикаля ниските полета около столицата, подсигурявайки външния кръг от укрепления."
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:161
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:164
 msgid "Doubts"
 msgstr "Съмнения"
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:162
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:165
 msgid "Boldreth is shaking his head…"
 msgstr "Болдрет клати глава..."
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:163
+#. TRANSLATORS: Boldreth
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:167
 msgid ""
 "Thron seeks to believe that Kalitath is tired of fighting and would be "
 "willing to join us once we march to re-establish law and order in "
@@ -257,31 +263,33 @@ msgid ""
 "Chat’Karuth’s son to reclaim his heritage and the throne?"
 msgstr "Трон иска да вярва, че Калитат е уморен от битките и би се присъединил към нас в похода ни да възстановим реда и закона в Ал'тунран. Но аз не мисля така. Калитат е син на един от най-великите генерали и на семейството му никога не е допадала идеята да се кланя пред знамето на Чат'Карут. Защо би искал помогне на сина на Чат'Карут да си върне трона и наследството?"
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:168
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:182
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:172
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:188
 msgid "The Story Continues"
 msgstr "Историята продължава"
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:169
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:210
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:232
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:240
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:280
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:173
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:221
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:246
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:255
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:301
 msgid "Boldreth says:"
 msgstr "Болдрет казва..."
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:170
+#. TRANSLATORS: Boldreth
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:175
 msgid ""
 "However, Thron is not willing to listen to my doubts. He seeks to expand our"
 " fortifications to the borders of Kalitath’s territory and to reunite with "
 "his forces. I have to keep an eye on everything that happens here."
 msgstr "Но Трон не иска да чуе притесненията ми. Той иска да разшири укрепленията ни към границата с територията на Калитат и да обедини войските ни. Трябва да следя много внимателно всичко, което се случва там."
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:176
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:181
 msgid "Thron is speaking confidently."
 msgstr "Трон говори убедено."
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:177
+#. TRANSLATORS: Thron
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:183
 msgid ""
 "The frontier line of my forces has expanded to the edge of the forests. We "
 "have a long and cold winter and so many miles behind us. The fortification "
@@ -291,17 +299,18 @@ msgid ""
 " this mission, I hope Kalitath son of Kun will follow my call."
 msgstr "Предната линия на войските ми вече достигна края на горите. Преживяхме дълга и студена зима и изминахме дълъг път. Укрепленията, които издигнахме около Ондун, ще ни осигурят бърз приток на хора и стоки, а след като Ал'тунран бъде в моите ръце, двата града ще бъдат свързани от добра и защитена инфраструктура. Все пак се надявам, че няма да съм сам в тази мисия. Надявам се, че Калитат, син на Кун, ще ме последва."
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:183
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:199
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:225
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:258
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:265
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:273
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:301
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:189
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:207
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:238
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:276
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:284
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:293
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:326
 msgid "Thron says:"
 msgstr "Трон казва:"
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:184
+#. TRANSLATORS: Thron
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:191
 msgid ""
 "I have sent men to meet with Kalitath in his fortress. He has barricaded the"
 " former main entrance to the capital and is trying to set up a siege ring "
@@ -311,15 +320,16 @@ msgid ""
 "prepare for battle."
 msgstr "Пратих хора, които да се срещнат с Калитат в крепостта му. Той е барикадирал някогашния главен вход към столицата и се опитва да създаде защитен кръг около Ал'тунран. Той не би позволил на никого да влезе или излезе от града, докато кръга е цял. Досега не е отговорил на нито едно от съобщенията ми. Но времето, което прекарвам в чакане, няма да бъде загубено. Ще продължа да подобрявам войниците си и да се подготвям за битка."
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:188
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:195
 msgid "Your Loyal Companion"
 msgstr "Вашият верен другар"
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:189
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:196
 msgid "Boldreth shouts out!"
 msgstr "Болдрет крещи!"
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:190
+#. TRANSLATORS: Boldreth
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:198
 msgid ""
 "The BASTARD! Only one man of our frontier patrol came back alive. He carried"
 " a message from Kalitath, telling us that he will punish every move of our "
@@ -327,11 +337,12 @@ msgid ""
 "there is war between Kalitath and us!"
 msgstr "Този НЕГОДНИК! Само един човек от граничния ни патрул се върна жив. Той носеше съобщение от Калитат, че за всяко действие на войниците ни, те ще платят с живота си! Не можем да приемем това. От сега нататък сме във война с Калитат!"
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:198
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:206
 msgid "Renegade Fortification"
 msgstr "Крепост на отцепници"
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:200
+#. TRANSLATORS: Thron
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:209
 msgid ""
 "The traitor left his armies dying where they lay when he saw that he would "
 "not keep my forces back. Kalitath disappeared in the confusion of the war, "
@@ -340,7 +351,8 @@ msgid ""
 "take now."
 msgstr "Предателят остави армиите си да загинат, когато видя, че няма да удържи силите ми. Калитат изчезна в суматохата на войната, но това вече няма значение. Нека бяга и бъде забравен завинаги – племенен водач, който не зачита дървения трон, който сега ще бъде мой."
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:202
+#. TRANSLATORS: Thron
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:212
 msgid ""
 "Furthermore, his flight brought us a great benefit: all year, Kalitath was "
 "so busy fighting that he did not even care to store enough food for all his "
@@ -349,7 +361,8 @@ msgid ""
 "ring."
 msgstr "Освен това, бягството му ни донесе и голяма полза. Цяла година, Калитат е бил толкова зает с битките, че не се е грижел да има достатъчно хранителни запаси за всичките му мъже. Сега, след като той избяга, гладът е принудил някои от по-младите му последователи да го напуснат. Тази група държи едно сериозно укрепление на главния кръг."
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:204
+#. TRANSLATORS: Thron
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:215
 msgid ""
 "But there is more news: My scouts have reported that the two raging tribes "
 "of my brothers are in chaos and have barely noticed the new danger that is "
@@ -357,11 +370,12 @@ msgid ""
 "blinded by rage and hate, there is no sense left in them at all I believe."
 msgstr "Но има и още новини. Разузнавачите ми докладваха, че воюващите племена на двамата ми братя са в хаос и не са забелязали новата опасност, която ще ги сполети. Едва ли щеше да ги интересува, дори и ако я бяха забелязали, тъй като са заслепени от ярост и омраза. Мисля, че в тях не са останали човешки чувства."
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:209
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:220
 msgid "Winter Ahead"
 msgstr "Зимата наближава"
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:211
+#. TRANSLATORS: Boldreth
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:223
 msgid ""
 "This morning, I found Thron’s mind troubled. He returned from his patrol "
 "late last night and sat back against a tree, watching over the encampment. "
@@ -370,15 +384,16 @@ msgid ""
 "cold winter!"
 msgstr "Тази сутрин открих Трон обезпокоен. Беше се завърнал от патрулиране късно през нощта и беше поседнал, подпрян на едно дърво, с поглед към лагера. Кавгите и споровете се увеличават и зимата ни стяга в хватката си. Трябва да сложим храна в складовете си, за да преживеем дългата студена зима."
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:216
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:228
 msgid "The Advisor"
 msgstr "Съветникът"
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:217
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:229
 msgid "Khantrukh nods."
 msgstr "Кхантрук кима."
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:218
+#. TRANSLATORS: Khantrukh
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:231
 msgid ""
 "Boldreth is right! We don’t have enough food to survive a long, cold winter."
 " We should start building a well, a fisher’s and a hunter’s hut. And if we "
@@ -387,33 +402,36 @@ msgid ""
 "this cold soil."
 msgstr "Болдрет е прав! Нямаме достатъчно храна, за да преживеем дълга и студена зима. Трябва да построим кладенец, рибарска и ловджийска колиби. И ако намерим достатъчно място, също и ферма и пекарна! Един от фермерите ни изглежда доста изобретателен – вече е успял да отгледа някакви насаждения върху тази студена почва."
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:224
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:237
 msgid "Food Economy Completed"
 msgstr "Хранителната промишленост е завършена"
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:226
+#. TRANSLATORS: Thron
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:240
 msgid ""
 "Khantrukh has just informed me that our basic food economy was built up "
 "successfully. Finally, none of us has to fear starvation anymore."
 msgstr "Кхантрук току-що ме уведоми, че основната ни хранителна промишленост е изградена успешно. Най-после никой няма да се страхува, че ще умрем от глад."
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:231
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:245
 msgid "Tracks"
 msgstr "Следи"
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:233
+#. TRANSLATORS: Boldreth
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:248
 msgid ""
 "Thron told me that he discovered tracks in the snow to the northeast of our "
-"settlement. He has instructed us to build a donjon, to have a greater visual"
+"settlement. He has instructed us to build a tower,  to have a greater visual"
 " range over the area around our hall to protect our people from sudden "
 "attacks."
-msgstr "Трон ми каза, че е забелязал следи в снега в североизточния край на селището. Той ни нареди да построим донжон, за да имаме по-голям обхват на видимост върху територията около залата ни, така че да защитим хората си от внезапни нападения."
+msgstr "Трон ми каза, че е забелязал следи в снега в североизточния край на селището. Той ни нареди да построим кула, за да имаме по-голям обхват на видимост върху територията около залата ни, така че да защитим хората си от внезапни нападения."
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:239
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:254
 msgid "Further Exploration"
 msgstr "По-нататъшно изследване"
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:241
+#. TRANSLATORS: Boldreth
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:257
 msgid ""
 "The first fortification Thron ordered has just been completed. At the "
 "moment, he seeks to bring trust and belief to those who live inside the "
@@ -424,7 +442,8 @@ msgid ""
 " tracks."
 msgstr "Първото укрепление, което Трон поръча, е готово. В момента той се опитва да вдъхне вяра и доверие у онези, които живеят между стените на новото ни местообитание, наречено от нас „Ондун“, което на стария език означава „онези, които чакат“. Но Трон все още не е доволен – и аз напълно разбирам страховете му: горите са дълбоки, а границата с Ал'тунран е близо. Сигурен съм, че има хиляди опасности, които са по-големи от непознатите следи."
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:243
+#. TRANSLATORS: Boldreth
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:260
 msgid ""
 "To overlook more of the area around our hall, we should explore further and "
 "set up more guards and scouts to observe the frontier and keep an eye on the"
@@ -432,11 +451,12 @@ msgid ""
 " capture our woods."
 msgstr "За да виждаме повече от земята около нас, трябва да изследваме по-далеч и да разпределим още пазачи и разузнавачи, които да наблюдават границата и следят бушуващите пред портите ни войни. Едва ТОГАВА ще бъдем готови, ако някой иска да превземе горите ни."
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:249
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:266
 msgid "Mountains Found"
 msgstr "Открити са планини"
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:251
+#. TRANSLATORS: Khantrukh
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:269
 msgid ""
 "I have just spoken to the leader of our patrol. He told me that they found "
 "some mountains to the north-east and east of our territory. With a bit of "
@@ -445,22 +465,24 @@ msgid ""
 "metal ores."
 msgstr "Току-що говорих с водача на патрула ни. Той ми каза, че са открили някакви планини на североизток и изток от териториите ни. С малко късмет това може да е нов шанс да въоръжим бойците си, тъй като, ако си спомням добре, в повечето от планините на запад от Ал'тунран има въглища и железни руди."
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:257
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:275
 msgid "Mining Economy Completed"
 msgstr "Минната промишленост е завършена"
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:259
+#. TRANSLATORS: Thron
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:278
 msgid ""
 "I just got informed that our mining economy has started its work. This news "
 "brought a smile to my face – even if the hardest part is still waiting to be"
 " done, now that our smiths will give their best to further ease our lives."
 msgstr "Току-що бях уведомен, че минната ни промишленост е започнала да работи. Тези новини ме накараха да се усмихна – въпреки, че най-трудното предстои, сега нашите ковачи ще могат да улеснят живота ни с работата си."
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:264
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:283
 msgid "Fortress Needed"
 msgstr "Нужна е крепост"
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:266
+#. TRANSLATORS: Thron
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:286
 msgid ""
 "Boldreth and I just explored the area around the three mountains. One major "
 "strategic problem of that area seems to be that there are two bigger "
@@ -470,30 +492,33 @@ msgid ""
 " the east of the mountains!"
 msgstr "Болдрет и аз тъкмо изследвахме околността около трите планини. Основният стратегически проблем изглежда това, че там има два по-големи прохода – един на север и един на юг от средната планина. Тези проходи са доста трудни за опазване и затова ми се струва, че има само един начин да защитим планините от врага: трябва да построим крепост на изток от тях!"
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:272
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:292
 msgid "Fortress Completed"
 msgstr "Крепостта е завършена"
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:274
+#. TRANSLATORS: Thron
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:295
 msgid ""
 "Finally! The fortress has just been completed, so the entrance to our "
 "settlement should be safe for now. For the future, we might think on "
-"building some more fortifications like barriers and donjons at the passages,"
-" but for now we can take a deep breath."
-msgstr "Най-после! Крепостта беше завършена току-що, така че входът към селището ни е трябва да е защитен засега. За бъдеще, може да помислим за построяване на още укрепления, като прегради и донжони при проходите, но засега можем да си отдъхнем."
+"building some more fortifications like barriers and towers at the passages, "
+"but for now we can take a deep breath."
+msgstr "Най-после! Крепостта беше завършена току-що, така че входът към селището ни е трябва да е защитен засега. За бъдеще, може да помислим за построяване на още укрепления, като прегради и кули при проходите, но засега можем да си отдъхнем."
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:279
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:300
 msgid "Enhanced Economy and Training"
 msgstr "Подобрена промишленост и трениране"
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:281
+#. TRANSLATORS: Boldreth
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:303
 msgid ""
 "Our mining economy seems to work fine, that is already good news! Anyway, "
 "there are still a lot of men and women waiting in our hall to get a task, so"
 " they can help our soldiers to prepare for the war to come."
 msgstr "Минната ни промишленост изглежда работи добре, а това са добри новини! Обаче все още има много мъже и жени, чакащи да получат задачи, за да могат да помогнат на войниците ни в подготовката им за предстоящата война."
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:283
+#. TRANSLATORS: Boldreth
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:306
 msgid ""
 "Our geologists found a lot more deposits of iron ore, coal and even gold. We"
 " should enhance our current mines as soon as our miners are more "
@@ -504,7 +529,8 @@ msgid ""
 " should build up training sites to prepare them for their future tasks."
 msgstr "Геолозите ни откриха още много залежи на желязна руда, въглища и дори злато. Трябва да надградим мините си веднага щом миньорите ни станат по-опитни. Трябва да построим още мини, да изградим по-голяма хранителна промишленост, за да осигуряваме достатъчно храна на хората си, и преработвателна промишленост. Но това не е всичко – повечето от войниците ни са доста млади и нямат нито оръжие, нито пък са добре обучени. Трябва да построим тренировъчни сгради, за да ги подготвим за бъдещите им задачи."
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:291
+#. TRANSLATORS: Thron
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:315
 msgid ""
 "My brothers and their soldiers are dead and left fire and destruction "
 "behind. In none of all the ruins could I find any man or woman of the normal"
@@ -512,7 +538,8 @@ msgid ""
 "and started a better life somewhere else."
 msgstr "Братята ми и войниците им са мъртви и след тях са останали само пламъци и разрушения. Не успях да намеря нито един мъж или жена от народа в никоя от развалините, затова се надявам, че те просто са избягали от това жестоко бойно поле и са започнали нов живот на друго място."
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:293
+#. TRANSLATORS: Thron
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:318
 msgid ""
 "Nothing is left of that beauty I remember, only ruins remain of the old "
 "capital. I am sorrowful but also relieved. I never hoped to see Al’thunran’s"
@@ -522,28 +549,30 @@ msgid ""
 "people have. I can’t wait to see it again in its old beauty."
 msgstr "Не е останало нищо от красотата, която помня. Старата столица е в развалини. Това ме изпълва с тъга, но и ми носи облекчение. Не се и надявах да видя старата красота на Ал'тунран отново – само преди няколко месеца си мислех, че никога няма да стъпя пак тук. Но сега старият град е в мои ръце и аз без колебания ще го построя наново със силата на хората си. Нямам търпение да го видя в стария му вид."
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:294
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:319
 msgid "Victory"
 msgstr "Победа"
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:295
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:320
 msgid ""
 "You have completed the last mission of the Barbarian tutorial campaign. You "
 "may continue playing if you wish, otherwise move on to the next campaign."
 msgstr "Вие завършихте последната мисия от обучителната кампания на варварите. Ако искате, можете да продължите да играете, или да преминете към следващата кампания."
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:300
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:325
 msgid "Military Assault"
 msgstr "Военно нападение"
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:302
+#. TRANSLATORS: Thron
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:328
 msgid ""
 "So be it, the generals are out and about arranging my troops, and Boldreth "
 "himself will lead the first strike. I will ride by his side, to free "
 "Al’thunran of this war and return peace to our capital."
 msgstr "Така да бъде. Генералите са заети с организацията на войниците, а Болдрет сам ще поведе първото нападение. Аз ще яздя до него, за да освободим Ал'тунран от тази война и да върнем мира в столицата ни."
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:304
+#. TRANSLATORS: Thron
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:331
 msgid ""
 "When the young sun rises above the trees tomorrow morning, I will order the "
 "assault. By dusk, I will celebrate my victory in the wooden halls of the "
@@ -551,19 +580,21 @@ msgid ""
 "are set upon me today."
 msgstr "Когато утре слънцето изгрее над дърветата, ще дам начало на нападението. При залез слънце ще празнувам победата си в дървените зали на военачалника и ще пожертвам едно новородено агне в чест на баща ми, чиито очи ме гледат днес."
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:306
+#. TRANSLATORS: Thron
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:334
 msgid "So be it!"
 msgstr "Така да бъде!"
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:311
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:339
 msgid "Faster Transportation"
 msgstr "По-бързо транспортиране"
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:312
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:340
 msgid "Khantrukh says:"
 msgstr "Кхантрук казва:"
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:313
+#. TRANSLATORS: Khantrukh
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:342
 msgid ""
 "Chieftain, remember the poor carriers: Our roads get longer and longer and "
 "the burden on their shoulders never gets lighter. We should breed more oxen "

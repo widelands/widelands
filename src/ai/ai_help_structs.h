@@ -42,6 +42,8 @@ class ProductionSite;
 class MilitarySite;
 
 enum class ExtendedBool : uint8_t {kUnset, kTrue, kFalse};
+enum class BuildingNecessity : uint8_t
+	{kForced, kNeeded, kNotNeeded, kUnset, kNotBuildable, kAllowed, kNeededPending};
 
 struct CheckStepRoadAI {
 	CheckStepRoadAI(Player* const pl, uint8_t const mc, bool const oe)
@@ -239,15 +241,16 @@ struct BuildableField {
 	uint8_t unowned_land_nearby_;
 	// to identify that field is too close to border and no production building should be built there
 	bool near_border_;
-	uint8_t unowned_mines_pots_nearby_;
+	uint8_t unowned_mines_spots_nearby_;
 	uint8_t trees_nearby_;
-	uint8_t stones_nearby_;
+	uint8_t rocks_nearby_;
 	int16_t water_nearby_;
 	int16_t distant_water_;
 	int8_t fish_nearby_;
 	int8_t critters_nearby_;
 	int8_t ground_water_;  // used by wells
 	uint8_t space_consumers_nearby_;
+	uint8_t rangers_nearby_;
 	// to manage the military better following variables exists:
 	// capacity of nearby buildings:
 	int16_t area_military_capacity_;
@@ -268,9 +271,15 @@ struct BuildableField {
 	bool port_nearby_;  // to increase priority if a port is nearby,
 	// especially for new colonies
 	Widelands::ExtendedBool portspace_nearby_;  // prefer military buildings closer to the portspace
+	int32_t max_buildcap_nearby_;
+	// it is not necessary to check resources (stones, fish...) too frequently as they do not change fast
+	// this stores time of last check
+	uint32_t last_resources_check_time_;
 
 	std::vector<uint8_t> consumers_nearby_;
 	std::vector<uint8_t> producers_nearby_;
+	// and for rangers, fishbreeders:
+	std::vector<uint8_t> supporters_nearby_;
 
 	BuildableField(const Widelands::FCoords& fc)
 	   : coords(fc),
@@ -279,22 +288,23 @@ struct BuildableField {
 	     enemy_nearby_(0),
 	     unowned_land_nearby_(0),
 	     near_border_(false),
-	     unowned_mines_pots_nearby_(0),
+	     unowned_mines_spots_nearby_(0),
 	     trees_nearby_(0),
 	     // explanation of starting values
 	     // this is done to save some work for AI (CPU utilization)
 	     // base rules are:
-	     // count of stones can only decrease, so  amount of stones
+		  // count of rocks can only decrease, so  amount of rocks
 	     // is recalculated only when previous count is positive
 	     // count of water fields are stable, so if the current count is
 	     // non-negative, water is not recaldulated
-	     stones_nearby_(1),
+	     rocks_nearby_(1),
 	     water_nearby_(-1),
 	     distant_water_(0),
 	     fish_nearby_(-1),
 	     critters_nearby_(-1),
 	     ground_water_(1),
 	     space_consumers_nearby_(0),
+	     rangers_nearby_(0),
 	     area_military_capacity_(0),
 	     military_loneliness_(1000),
 	     military_in_constr_nearby_(0),
@@ -303,7 +313,13 @@ struct BuildableField {
 	     military_unstationed_(0),
 	     is_portspace_(false),
 	     port_nearby_(false),
-	     portspace_nearby_(Widelands::ExtendedBool::kUnset) {
+	     portspace_nearby_(Widelands::ExtendedBool::kUnset),
+	     max_buildcap_nearby_(0),
+	     last_resources_check_time_(0) {
+	}
+
+	int32_t own_military_sites_nearby_() {
+		return military_stationed_ + military_unstationed_;
 	}
 };
 
@@ -339,7 +355,7 @@ struct EconomyObserver {
 
 struct BuildingObserver {
 	char const* name;
-	Widelands::BuildingIndex id;
+	Widelands::DescriptionIndex id;
 	Widelands::BuildingDescr const* desc;
 
 	enum {
@@ -352,12 +368,14 @@ struct BuildingObserver {
 		MINE
 	} type;
 
-	bool prod_build_material_;
 	bool plants_trees_;
 	bool recruitment_;  // is "producing" workers?
+	Widelands::BuildingNecessity new_building_;
+	uint32_t new_building_overdue_;
+	int32_t primary_priority_;
 	bool is_buildable_;
 	bool need_trees_;   // lumberjack = true
-	bool need_stones_;  // quarry = true
+	bool need_rocks_;  // quarry = true
 	bool mines_water_;  // wells
 	bool need_water_;   // fisher, fish_breeder = true
 	bool is_hunter_;    // need to identify hunters
@@ -372,8 +390,7 @@ struct BuildingObserver {
 	uint32_t forced_after_;     // do not wait until ware is needed
 	TrainingSiteType trainingsite_type_;
 
-	bool unoccupied_;
-	uint16_t unconnected_;  // to any warehouse (count of such buildings)
+	uint16_t unconnected_count_;  // to any warehouse (count of such buildings)
 
 	int32_t mines_;           // type of resource it mines_
 	uint16_t mines_percent_;  // % of res it can mine
@@ -381,23 +398,26 @@ struct BuildingObserver {
 
 	std::vector<int16_t> inputs_;
 	std::vector<int16_t> outputs_;
-	std::vector<Widelands::WareIndex> critical_built_mat_;
+	std::vector<Widelands::DescriptionIndex> critical_built_mat_;
 
+	bool built_mat_producer_;
+
+	// an enhancement to this building:
+	// produces all wares as current building, and perhaps more
 	bool upgrade_substitutes_;
+	// produces some additional wares
+	bool upgrade_extends_;
 
 	// It seems that fish and meat are subsitutes (for trainingsites), so
 	// when testing if a trainingsite is supplied enough
 	// we count the wares together
-	std::unordered_set<Widelands::WareIndex> substitute_inputs_;
+	std::unordered_set<Widelands::DescriptionIndex> substitute_inputs_;
 	int32_t substitutes_count_;
 
 	int16_t production_hint_;
 
 	// information needed for decision on new building construction
-	// these should be calculated only once during one run of construct_building()
-	// function
-	Widelands::ExtendedBool output_needed_;
-	int16_t max_preciousness;
+	int16_t max_preciousness_;
 	int16_t max_needed_preciousness_;
 
 	int32_t cnt_built_;
@@ -409,6 +429,9 @@ struct BuildingObserver {
 	int32_t stocklevel_time;  // time when stocklevel_ was last time recalculated
 	int32_t last_dismantle_time_;
 	int32_t construction_decision_time_;
+
+	uint32_t unoccupied_count_;
+
 	bool build_material_shortage_;
 
 	int32_t total_count() const {
@@ -424,7 +447,7 @@ struct ProductionSiteObserver {
 	uint32_t built_time_;
 	uint32_t unoccupied_till_;
 	uint8_t stats_zero_;
-	uint8_t no_resources_count;
+	uint32_t no_resources_since_;
 	BuildingObserver* bo;
 };
 
@@ -456,7 +479,7 @@ struct ShipObserver {
 	// is assigned only once
 	Widelands::IslandExploreDirection island_circ_direction = Widelands::IslandExploreDirection::kClockwise;
 	bool waiting_for_command_ = false;
-	int32_t last_command_time = 0;
+	uint32_t last_command_time = 0;
 };
 
 struct WareObserver {
@@ -501,7 +524,20 @@ struct MineTypesObserver {
 	uint16_t in_construction;
 	uint16_t finished;
 
+	uint16_t total_count() const {
+		return in_construction + finished;
+	}
+
 	MineTypesObserver() : in_construction(0), finished(0) {
+	}
+};
+
+// this is used to count militarysites by their size
+struct MilitarySiteSizeObserver {
+	uint16_t in_construction;
+	uint16_t finished;
+
+	MilitarySiteSizeObserver() : in_construction(0), finished(0) {
 	}
 };
 
