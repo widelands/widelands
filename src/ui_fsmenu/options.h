@@ -31,6 +31,7 @@
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/spinbox.h"
 #include "ui_basic/textarea.h"
+#include "ui_basic/tabpanel.h"
 
 class FullscreenMenuOptions;
 class Section;
@@ -95,37 +96,60 @@ private:
 	uint32_t const              m_offset_first_group;
 	uint32_t const              m_offset_second_group;
 
-	UI::Button                  m_advanced_options, m_cancel, m_apply;
-
 	UI::Textarea                m_title;
-	UI::Textarea                m_label_resolution;
-	UI::Listselect<void *>      m_reslist;
-	UI::Checkbox                m_fullscreen;
-	UI::Checkbox                m_inputgrab;
-	UI::Textarea                m_label_maxfps;
-	UI::SpinBox                 m_sb_maxfps;
+	UI::Button                  m_cancel, m_apply;
 
-	UI::Textarea                m_label_language;
-	UI::Listselect<std::string> m_language_list;
-	UI::Checkbox                m_music;
-	UI::Checkbox                m_fx;
+	// UI elements
+	UI::TabPanel tabs_;
+	UI::Box box_interface_;
+	UI::Box box_interface_column1_;
+	UI::Box box_interface_column2_;
+	UI::Box box_sound_;
+	UI::Box box_saving_;
+	UI::Box box_gamecontrol_;
 
-	UI::Textarea                m_label_game_options;
-	UI::Checkbox                m_single_watchwin;
-	UI::Checkbox                m_auto_roadbuild_mode;
-	UI::Checkbox                m_show_workarea_preview;
-	UI::Checkbox                m_snap_win_overlap_only;
-	UI::Checkbox                m_dock_windows_to_edges;
-	UI::SpinBox                 m_sb_autosave;
-	UI::Textarea                m_label_autosave;
-	UI::SpinBox                 m_sb_remove_replays;
-	UI::Textarea                m_label_remove_replays;
+	// Interface options
+	UI::Textarea                label_resolution_;
+	UI::Listselect<void *>      resolution_list_;
+	UI::Checkbox                fullscreen_;
+	UI::Checkbox                inputgrab_;
+	UI::Textarea                label_maxfps_;
+	UI::SpinBox                 sb_maxfps_;
+	UI::Checkbox                snap_win_overlap_only_;
+	UI::Checkbox                dock_windows_to_edges_;
+	UI::Textarea                label_snap_dis_panel_;
+	UI::SpinBox                 sb_dis_panel_;
+	UI::Textarea                label_snap_dis_border_;
+	UI::SpinBox                 sb_dis_border_;
+	UI::Checkbox                transparent_chat_;
+
+	UI::Textarea                label_language_;
+	UI::Listselect<std::string> language_list_;
+
+	// Sound options
+	UI::Checkbox                music_;
+	UI::Checkbox                fx_;
+	UI::Checkbox                message_sound_;
+
+	// Saving
+	UI::SpinBox                 sb_autosave_;
+	UI::Textarea                label_autosave_;
+	UI::SpinBox                 sb_remove_replays_;
+	UI::Textarea                label_remove_replays_;
+	UI::Checkbox                nozip_;
+	UI::Checkbox                remove_syncstreams_;
+
+	// Game Control
+	UI::Checkbox                single_watchwin_;
+	UI::Checkbox                auto_roadbuild_mode_;
+	UI::Checkbox                show_workarea_preview_;
 
 	OptionsCtrl::OptionsStruct  os;
 
 	void update_sb_autosave_unit();
 	void update_sb_remove_replays_unit();
-	void advanced_options();
+	void update_sb_dis_panel_unit();
+	void update_sb_dis_border_unit();
 
 	// Fills the language selection list
 	void add_languages_to_list(const std::string& current_locale);
@@ -139,39 +163,6 @@ private:
 
 	/// All supported screen resolutions.
 	std::vector<ScreenResolution> m_resolutions;
-};
-
-/**
- * Fullscreen Optionsmenu. A modal optionsmenu
- */
-
-class FullscreenMenuAdvancedOptions : public FullscreenMenuBase {
-public:
-	FullscreenMenuAdvancedOptions(OptionsCtrl::OptionsStruct opt);
-	OptionsCtrl::OptionsStruct get_values();
-
-private:
-	void update_sb_dis_panel_unit();
-	void update_sb_dis_border_unit();
-
-	uint32_t const              m_vbutw;
-	uint32_t const              m_butw;
-	uint32_t const              m_buth;
-	uint32_t const              m_hmargin;
-	uint32_t const              m_padding;
-	uint32_t const              m_space;
-
-	UI::Button                  m_cancel, m_apply;
-	UI::Textarea                m_title;
-
-	UI::Textarea                m_label_snap_dis_panel, m_label_snap_dis_border;
-	UI::SpinBox                 m_sb_dis_panel, m_sb_dis_border;
-	UI::Checkbox                m_transparent_chat;
-	UI::Checkbox                m_message_sound;
-	UI::Checkbox                m_nozip;
-	UI::Checkbox                m_remove_syncstreams;
-
-	OptionsCtrl::OptionsStruct  os;
 };
 
 #endif  // end of include guard: WL_UI_FSMENU_OPTIONS_H
