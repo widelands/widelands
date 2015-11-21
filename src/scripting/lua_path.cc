@@ -49,7 +49,7 @@ private:
 };
 
 /**
- * Implemantation for NumberGlob.
+ * Implementation for NumberGlob.
  */
 NumberGlob::NumberGlob(const std::string& file_template) : template_(file_template), current_(0) {
 	int nchars = count(file_template.begin(), file_template.end(), '?');
