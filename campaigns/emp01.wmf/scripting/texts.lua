@@ -64,7 +64,7 @@ obj_build_quarry = {
    title=_"Build a quarry",
    number = 5,
    body = objective_text(_"Quarry",
-      listitem_bullet(_[[Build a quarry in the south to cut some stones and marble out of the rocks.]]) ..
+      listitem_bullet(_[[Build a quarry in the south to cut some granite and marble out of the rocks.]]) ..
       listitem_arrow(_[[These might be used for future buildings.]])
    ),
 }
@@ -108,7 +108,7 @@ diary_page_2 = {
 }
 
 diary_page_3 = {
-   title=_"Survivor",
+   title=_"Survivors",
    body= lutius(_"Diary of Lutius",
       -- TRANSLATORS: Lutius - Diary
       _([[Finally, the Gods were with us!]])
@@ -201,7 +201,7 @@ saledus_3 = {
    title=_"Thinking About the Future",
    body= saledus(_"Saledus notes…",
       -- TRANSLATORS: Saledus
-      _([[Sire, I just thought about the rocks standing on the south shore of this land. Perhaps we could cut out some useful hard stones and beautiful marble.]])
+      _([[Sire, I just thought about the rocks standing on the south shore of this land. Perhaps we could cut out some useful granite and beautiful marble.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Saledus
       _([[The repair of our ship will take a few weeks, anyway, and the resources we harvest now might be the base of strong and big buildings in another land.]]))
@@ -213,7 +213,7 @@ saledus_4 = {
    title=_"A Step Forward",
    body= saledus(_"Saledus looks excited…",
       -- TRANSLATORS: Saledus
-      _([[Sire, today we got a lot closer to our first castle. The quarry to the south began its work today and will soon provide us with stones and beautiful marble.]])
+      _([[Sire, today we got a lot closer to our first castle. The quarry to the south began its work today and will soon provide us with granite and beautiful marble.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Saledus
       _([[Now we truly can look forward to settling down on another island.]])),

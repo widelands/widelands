@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2011, 2015 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -50,7 +50,7 @@ Request IMPLEMENTATION
 
 Request::Request
 	(PlayerImmovable & _target,
-	 WareIndex const index,
+	 DescriptionIndex const index,
 	 CallbackFn const cbfn,
 	 WareWorker const w)
 	:
@@ -111,12 +111,12 @@ void Request::read
 		if (packet_version == kCurrentPacketVersion) {
 			const TribeDescr& tribe = m_target.owner().tribe();
 			char const* const type_name = fr.c_string();
-			WareIndex const wai = tribe.ware_index(type_name);
+			DescriptionIndex const wai = tribe.ware_index(type_name);
 			if (tribe.has_ware(wai)) {
 				m_type = wwWARE;
 				m_index = wai;
 			} else {
-				WareIndex const woi = tribe.worker_index(type_name);
+				DescriptionIndex const woi = tribe.worker_index(type_name);
 				if (tribe.has_worker(woi)) {
 					m_type = wwWORKER;
 					m_index = woi;
@@ -310,7 +310,7 @@ int32_t Request::get_priority (int32_t cost) const
 		MAX_IDLE_PRIORITY
 		+
 		std::max
-			(1,
+			(uint32_t(1),
 			 ((m_economy->owner().egbase().get_gametime() -
 			   (is_construction_site ?
 			    get_required_time() : get_last_request_time()))

@@ -1,0 +1,11 @@
+# Automatically created by Widelands bzr7574[artifacts] (Debug)
+
+[global]
+map_source_url=
+map_release=
+map_creator_version="unknown"
+map_version_major="0"
+map_version_minor="1"
+map_version_timestamp="1446411105"
+packet_version="1"
+packet_compatibility="1"

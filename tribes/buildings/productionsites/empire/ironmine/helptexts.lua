@@ -13,7 +13,7 @@ end
 
 function building_helptext_purpose()
    -- TRANSLATORS: Purpose helptext for a building
-   return pgettext("empire_building", "Digs iron ore out of the ground in mountain terrain.")
+   return pgettext("building", "Digs iron ore out of the ground in mountain terrain.")
 end
 
 function building_helptext_note()

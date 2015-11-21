@@ -7,13 +7,14 @@
 # Venatrix, 2015
 # Venatrix, 2015
 # wl-zocker, 2014
+# wl-zocker, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-04 07:08+0000\n"
-"PO-Revision-Date: 2015-11-04 08:06+0000\n"
-"Last-Translator: Venatrix\n"
+"POT-Creation-Date: 2015-11-10 08:55+0000\n"
+"PO-Revision-Date: 2015-11-16 18:19+0000\n"
+"Last-Translator: wl-zocker\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -126,7 +127,7 @@ msgid ""
 " the blacksmith reaches his next level (master blacksmith), you can even "
 "enhance the ax workshop to a war mill, which will produce additional "
 "weapons."
-msgstr ""
+msgstr "Erweitere deine Werkzeugschmiede zu einer Axtschmiede, um Waffen produzieren zu können, und errichte eine zweite Werkzeugschmiede, um die Werkzeugproduktion sicherzustellen. Wenn der Schmied seine nächste Stufe (Meisterschmied) erreicht, kannst du die Axtschmiede sogar zu einer Waffenschmiede ausbauen, die zusätzliche Waffen produziert."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:83
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:120
@@ -198,7 +199,7 @@ msgstr "Um einen Feind anzugreifen, musst du auf die Tür eines gegnerischen Mil
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:134
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:136
 msgid "Military assault on Al’thunran"
-msgstr "Angriff auf Al’thunran."
+msgstr "Angriff auf Al’thunran"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:137
 msgid ""
@@ -362,7 +363,7 @@ msgid ""
 "men. Now that he has fled, their hunger has caused some of his younger "
 "followers to desert. This group holds a strong fortification on the main "
 "ring."
-msgstr "Mehr noch, seine Flucht brachte uns einen großen Vorteil: Das ganze Jahr über war Kalitath so beschäftigt mit kämpfen, dass er sich nicht einmal darum gekümmert hat, genug Nahrung für seine Männer zu lagern. Nun, da er geflohen ist, hat ihr Hunger einige seiner jüngeren Gefolgsleute dazu veranlasst zu desertieren. Diese Gruppe hält eine starke Befestigung im Hauptring."
+msgstr "Mehr noch, seine Flucht brachte uns einen großen Vorteil: Das ganze Jahr über war Kalitath so beschäftigt mit Kämpfen, dass er sich nicht einmal darum gekümmert hat, genug Nahrung für seine Männer zu lagern. Nun, da er geflohen ist, hat ihr Hunger einige seiner jüngeren Gefolgsleute dazu veranlasst zu desertieren. Diese Gruppe hält eine starke Befestigung im Hauptring."
 
 #. TRANSLATORS: Thron
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:215

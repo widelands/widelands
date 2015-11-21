@@ -456,7 +456,7 @@ void Immovable::draw_construction
 		constructionact = dynamic_cast<const ImmovableProgram::ActConstruction *>
 			(&(*m_program)[m_program_ptr]);
 
-	const int32_t steptime = constructionact ? constructionact->buildtime() : 5000;
+	const uint32_t steptime = constructionact ? constructionact->buildtime() : 5000;
 
 	uint32_t done = 0;
 	if (m_anim_construction_done > 0) {
@@ -693,7 +693,7 @@ MapObject::Loader * Immovable::load
 				if (packet_version < 7) {
 					name = tribes_lookup_table.lookup_immovable(owner_type, name);
 				}
-				const WareIndex idx = egbase.tribes().immovable_index(name);
+				const DescriptionIndex idx = egbase.tribes().immovable_index(name);
 				if (idx != Widelands::INVALID_INDEX) {
 					imm = new Immovable(*egbase.tribes().get_immovable_descr(idx));
 				} else {
@@ -703,7 +703,7 @@ MapObject::Loader * Immovable::load
 			} else { //  world immovable
 				const World & world = egbase.world();
 				name = world_lookup_table.lookup_immovable(name);
-				const WareIndex idx = world.get_immovable_index(name.c_str());
+				const DescriptionIndex idx = world.get_immovable_index(name.c_str());
 				if (idx == Widelands::INVALID_INDEX) {
 					throw GameDataError
 						("world does not define immovable type \"%s\"", name.c_str());
@@ -1172,7 +1172,7 @@ bool Immovable::construct_remaining_buildcost(Game & /* game */, Buildcost * bui
  *
  * If the immovable is not currently in construction mode, return \c false.
  */
-bool Immovable::construct_ware(Game & game, WareIndex index)
+bool Immovable::construct_ware(Game & game, DescriptionIndex index)
 {
 	ActConstructionData * d = get_action_data<ActConstructionData>();
 	if (!d)
@@ -1325,7 +1325,7 @@ void PlayerImmovable::cleanup(EditorGameBase & egbase)
  * We are the destination of the given ware's transfer, which is not associated
  * with any request.
  */
-void PlayerImmovable::receive_ware(Game &, WareIndex ware)
+void PlayerImmovable::receive_ware(Game &, DescriptionIndex ware)
 {
 	throw wexception
 		("MO(%u): Received a ware(%u), do not know what to do with it",

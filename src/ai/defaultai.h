@@ -209,8 +209,8 @@ private:
 	int32_t calculate_strength(const std::vector<Widelands::Soldier*>);
 	uint32_t get_stocklevel_by_hint(size_t);
 	uint32_t get_stocklevel(BuildingObserver&);
-	uint32_t get_warehoused_stock(Widelands::WareIndex wt);
-	uint32_t get_stocklevel(Widelands::WareIndex);  // count all direct outputs_
+	uint32_t get_warehoused_stock(Widelands::DescriptionIndex wt);
+	uint32_t get_stocklevel(Widelands::DescriptionIndex);  // count all direct outputs_
 	void review_wares_targets(uint32_t);
 	void count_military_vacant_positions();
 

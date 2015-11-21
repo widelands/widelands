@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006, 2008-2011 by the Widelands Development Team
+ * Copyright (C) 2002, 2006, 2008-2011, 2015 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -101,7 +101,7 @@ protected:
 	bool        m_keep_image_size; // Keep image's original size and center it
 	bool        m_draw_flat_background;
 
-	int32_t     m_time_nextact;
+	uint32_t     m_time_nextact;
 
 	std::string m_title;          //  title string used when _mypic == 0
 

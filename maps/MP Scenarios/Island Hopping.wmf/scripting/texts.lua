@@ -20,7 +20,7 @@ welcome_msg = rt(
 [[Whenever you finish an island, you will get bonus wares, depending on how many players ]] ..
 [[have finished the island before you. The earlier you finish, the fewer wares you will get. ]] ..
 [[See below for the details.]])) .. p(_(
-[[The point is that the first island only provides stones and wood, the second only meadows and resources. The economies you leave behind will continue to work for you, but you will only reap the benefits at the moment you reach a new island.]])
+[[The point is that the first island only provides rocks and trees, the second only meadows and resources. The economies you leave behind will continue to work for you, but you will only reap the benefits at the moment you reach a new island.]])
 ) ..
 p(_
 [[Finally, be careful not to waste your quartz and diamonds.]]

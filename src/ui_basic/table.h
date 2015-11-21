@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006, 2008-2011 by the Widelands Development Team
+ * Copyright (C) 2002, 2006, 2008-2011, 2015 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -273,7 +273,7 @@ private:
 	Scrollbar        * m_scrollbar;
 	int32_t            m_scrollpos; //  in pixels
 	uint32_t           m_selection;
-	int32_t            m_last_click_time;
+	uint32_t           m_last_click_time;
 	uint32_t           m_last_selection;  // for double clicks
 	Columns::size_type m_sort_column;
 	bool               m_sort_descending;

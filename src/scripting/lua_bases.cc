@@ -164,7 +164,7 @@ int LuaEditorGameBase::get_building_description(lua_State* L) {
 	}
 	const Tribes& tribes = get_egbase(L).tribes();
 	const std::string building_name = luaL_checkstring(L, 2);
-	const BuildingIndex building_index = tribes.building_index(building_name);
+	const DescriptionIndex building_index = tribes.building_index(building_name);
 	if (!tribes.building_exists(building_index)) {
 		report_error(L, "Building %s does not exist", building_name.c_str());
 	}
@@ -212,7 +212,7 @@ int LuaEditorGameBase::get_ware_description(lua_State* L) {
 	}
 	const Tribes& tribes = get_egbase(L).tribes();
 	const std::string ware_name = luaL_checkstring(L, 2);
-	WareIndex ware_index = tribes.ware_index(ware_name);
+	DescriptionIndex ware_index = tribes.ware_index(ware_name);
 	if (!tribes.ware_exists(ware_index)) {
 		report_error(L, "Ware %s does not exist", ware_name.c_str());
 	}
@@ -236,7 +236,7 @@ int LuaEditorGameBase::get_worker_description(lua_State* L) {
 	}
 	const Tribes& tribes = get_egbase(L).tribes();
 	const std::string worker_name = luaL_checkstring(L, 2);
-	const WareIndex worker_index = tribes.worker_index(worker_name);
+	const DescriptionIndex worker_index = tribes.worker_index(worker_name);
 	if (!tribes.worker_exists(worker_index)) {
 		report_error(L, "Worker %s does not exist", worker_name.c_str());
 	}
@@ -503,7 +503,7 @@ int LuaPlayerBase::place_building(lua_State * L) {
 	if (!tribes.building_exists(name)) {
 		report_error(L, "Unknown Building: '%s'", name.c_str());
 	}
-	BuildingIndex building_index = tribes.building_index(name);
+	DescriptionIndex building_index = tribes.building_index(name);
 
 	BuildingDescr::FormerBuildings former_buildings;
 	find_former_buildings(tribes, building_index, &former_buildings);
@@ -599,7 +599,7 @@ int LuaPlayerBase::get_workers(lua_State * L) {
 	Player& player = get(L, get_egbase(L));
 	const std::string workername = luaL_checkstring(L, -1);
 
-	const WareIndex worker = player.tribe().worker_index(workername);
+	const DescriptionIndex worker = player.tribe().worker_index(workername);
 
 	uint32_t nworkers = 0;
 	for (uint32_t i = 0; i < player.get_nr_economies(); ++i) {
@@ -625,7 +625,7 @@ int LuaPlayerBase::get_wares(lua_State * L) {
 	Player& player = get(L, egbase);
 	const std::string warename = luaL_checkstring(L, -1);
 
-	const WareIndex ware = egbase.tribes().ware_index(warename);
+	const DescriptionIndex ware = egbase.tribes().ware_index(warename);
 
 	uint32_t nwares = 0;
 	for (uint32_t i = 0; i < player.get_nr_economies(); ++i) {

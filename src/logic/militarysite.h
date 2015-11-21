@@ -137,7 +137,7 @@ private:
 
 	bool is_present(Soldier &) const;
 	static void request_soldier_callback
-		(Game &, Request &, WareIndex, Worker *, PlayerImmovable &);
+		(Game &, Request &, DescriptionIndex, Worker *, PlayerImmovable &);
 
 	MapObject * pop_soldier_job
 		(Soldier *, bool * stayhome = nullptr);

@@ -475,7 +475,7 @@ void WorkerProgram::parse_plant(Worker::Action* act, const std::vector<std::stri
 			// This will throw a GameDataError if the attribute doesn't exist.
 			ImmovableDescr::get_attribute_id(list[1]);
 		} else {
-			WareIndex idx = tribes_.safe_immovable_index(list[1]);
+			DescriptionIndex idx = tribes_.safe_immovable_index(list[1]);
 			if (!tribes_.immovable_exists(idx)) {
 				throw GameDataError("There is no tribe immovable %s for workers to plant.", list[1].c_str());
 			}

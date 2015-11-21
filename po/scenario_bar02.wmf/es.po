@@ -3,13 +3,14 @@
 # 
 # Translators:
 # Lucía Pradillos <dreamers_88@hotmail.com>, 2015
+# Madkat Here, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-04 07:08+0000\n"
-"PO-Revision-Date: 2015-11-04 07:11+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2015-11-07 08:47+0000\n"
+"PO-Revision-Date: 2015-11-07 15:57+0000\n"
+"Last-Translator: Madkat Here\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -64,7 +65,7 @@ msgstr ""
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:46
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:48
 msgid "Build a tower"
-msgstr ""
+msgstr "Construye una torre"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:49
 msgid ""
@@ -399,7 +400,7 @@ msgid ""
 "find enough space, we should as well build up a farm and a bakery! One of "
 "our farmers seems to be very clever – he already got some crops to grow in "
 "this cold soil."
-msgstr ""
+msgstr "Boldreth tiene razón! No tenemos suficiente comida para sobrevivir a un largo y frío invierno. Debemos empezar a construir un pozo, una cabaña de pescador y una de cazador. Y si tenemos espacio suficiente, también debemos construir una granja y una panadería! Uno de nuestros agricultores parece ser muy inteligente - ya tiene algunos cultivos creciendo en este suelo frío."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:237
 msgid "Food Economy Completed"
@@ -489,7 +490,7 @@ msgid ""
 "are quite hard to control, and so it seems to me like we have only one "
 "chance to secure the mountains from enemy hands: we must build a fortress to"
 " the east of the mountains!"
-msgstr ""
+msgstr "Boldreth y yo sólo exploramos el área alrededor de las tres montañas. Un problema estratégico importante de esa zona parece ser que hay dos grandes pasajes - uno al norte y otro al sur de la montaña central. Esos pasajes son muy difíciles de controlar, por lo que me parece que tenemos una sola oportunidad para asegurar las montañas de las manos del enemigo: hay que construir una fortaleza, al este de las montañas!"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:292
 msgid "Fortress Completed"
@@ -514,7 +515,7 @@ msgid ""
 "Our mining economy seems to work fine, that is already good news! Anyway, "
 "there are still a lot of men and women waiting in our hall to get a task, so"
 " they can help our soldiers to prepare for the war to come."
-msgstr ""
+msgstr "Nuestra economía minera parece funcionar bien, esta ya es una buena noticia! De todos modos, todavía hay una gran cantidad de hombres y mujeres que esperan en nuestra sala para conseguir un trabajo, para que puedan ayudar a nuestros soldados a prepararse para la guerra que se aproxima."
 
 #. TRANSLATORS: Boldreth
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:306

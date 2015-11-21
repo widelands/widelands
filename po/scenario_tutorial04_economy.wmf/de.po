@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-04 07:08+0000\n"
-"PO-Revision-Date: 2015-11-04 09:50+0000\n"
+"POT-Creation-Date: 2015-11-17 08:09+0000\n"
+"PO-Revision-Date: 2015-11-17 09:34+0000\n"
 "Last-Translator: Venatrix\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -236,7 +236,7 @@ msgid ""
 "You have closed the building statistics window. I didn’t notice that you "
 "switched to the medium buildings to look up the number of taverns. Would you"
 " please be so nice and show it to me?"
-msgstr "Du hast das Gebäudestatistik-Fenster geschlossen. I habe nicht bemerkt, dass du zu den mittelgroßen Gebäuden gewechselt hast, um die Anzahl der Tavernen nachzuschauen. Wärst du bitte so nett und zeigst sie mir?"
+msgstr "Du hast das Gebäudestatistik-Fenster geschlossen. Ich habe nicht bemerkt, dass du zu den mittelgroßen Gebäuden gewechselt hast, um die Anzahl der Tavernen nachzuschauen. Bist du bitte so nett und zeigst sie mir?"
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:116
 msgid "Open the building statistics window again."
@@ -772,7 +772,7 @@ msgid ""
 "Every warehouse has four buttons to set the preference. If you move your "
 "mouse pointer over them, you will see tooltips that explain what the buttons"
 " do."
-msgstr "Jedes Lagerhaus hat vier Schaltflächen, um Einstellungen vorzunehmen. Wenn du den Mauszeiger über sie bewegst, siehst du Tooltips, die dir erklären, was die Knöpfe bewirken."
+msgstr "Jedes Lagerhaus hat vier Schaltflächen, um Einstellungen vorzunehmen. Wenn du den Mauszeiger über sie bewegst, siehst du Tooltips, die dir erklären, was die Schaltflächen bewirken."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:432
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:440

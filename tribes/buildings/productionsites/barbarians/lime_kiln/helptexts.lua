@@ -10,7 +10,7 @@ end
 
 function building_helptext_purpose()
    -- TRANSLATORS: Purpose helptext for a building
-   return pgettext("barbarians_building", "The lime kiln processes granite to make ‘grout’, a substance that solidifies and so reinforces masonry.")
+   return pgettext("barbarians_building", "Processes granite to make ‘grout’, a substance that solidifies and so reinforces masonry.")
 end
 
 function building_helptext_note()

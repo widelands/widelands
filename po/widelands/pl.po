@@ -8,19 +8,107 @@
 # MikeNow <m.nowot@gmail.com>, 2015
 # Sebastian Janus <sebek89@gmail.com>, 2015
 # Tomasz Pudło <wptom@wp.pl>, 2015
+# Tomasz Pudło <wptom@wp.pl>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-04 07:08+0000\n"
-"PO-Revision-Date: 2015-11-04 08:51+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2015-11-17 08:09+0000\n"
+"PO-Revision-Date: 2015-11-17 22:16+0000\n"
+"Last-Translator: Tomasz Pudło <wptom@wp.pl>\n"
 "Language-Team: Polish (http://www.transifex.com/widelands/widelands/language/pl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: pl\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+#. * TRANSLATORS: This is a heading for a help window
+#: ../../scripting/widelands/multiplayer_help.lua:10
+#: ../../src/ui_fsmenu/launch_mpg.cc:158 ../../src/ui_fsmenu/launch_mpg.cc:673
+msgid "Multiplayer Game Setup"
+msgstr "Ustawienia gry wieloosobowej"
+
+#: ../../scripting/widelands/multiplayer_help.lua:11
+msgid "You are in the multiplayer launch game menu."
+msgstr "Jesteś w menu dla gry wieloosobowej."
+
+#: ../../scripting/widelands/multiplayer_help.lua:14
+msgid "Client settings"
+msgstr "Ustawienia klienta"
+
+#: ../../scripting/widelands/multiplayer_help.lua:15
+msgid ""
+"On the left side is a list of all clients including you. You can set your "
+"role with the button following your nickname. Available roles are:"
+msgstr "Po lewej stronie znajduje się lista klientów włącznie z tobą. Możesz wybrać swoją rolę za pomocą przycisku po swoim nicku. Dostępne role to:"
+
+#: ../../scripting/widelands/multiplayer_help.lua:16
+msgid ""
+"The player with the color of the flag. If more than one client selected the "
+"same color, these share control over the player (‘shared kingdom mode’)."
+msgstr "Gracz o danym kolorze flagi. Jeśli więcej niż jeden klient wybrał ten sam kolor, współdzielą oni tego gracza (\"tryb wspólnego królestwa\")."
+
+#: ../../scripting/widelands/multiplayer_help.lua:17
+msgid ""
+"Spectator mode, meaning you can see everything, but cannot control any "
+"player"
+msgstr "Tryb obserwatora, w którym widzisz cała mapę, lecz nie możesz kontrolować żadnego gracza"
+
+#: ../../scripting/widelands/multiplayer_help.lua:19
+msgid "Player settings"
+msgstr "Ustawienia graczy"
+
+#: ../../scripting/widelands/multiplayer_help.lua:20
+msgid ""
+"In the middle are the settings for the players. To start a game, each player"
+" must be one of the following:"
+msgstr "Na środku znajdują się opcje dla graczy. Aby zacząć grę, każdy gracz musi być jednym z poniższych:"
+
+#: ../../scripting/widelands/multiplayer_help.lua:21
+msgid "Connected to one or more clients (see ‘Client settings’)."
+msgstr "Połączony z jednym lub więcej klientem (patrz \"ustawienia klientów\")."
+
+#: ../../scripting/widelands/multiplayer_help.lua:22
+msgid ""
+"Connected to a computer player (the face in the picture as well as the mouse"
+" hover texts indicate the strength of the currently selected computer "
+"player)."
+msgstr "Połączony z graczem komputerowym (twarz na obrazku oraz tekst po najechaniu myszą podają stopień trudności wybranego gracza komputerowego)."
+
+#: ../../scripting/widelands/multiplayer_help.lua:23
+msgid "Set as shared in starting position for another player."
+msgstr "Ustawiony jako dodatkowa pozycja startowa innego gracza."
+
+#: ../../scripting/widelands/multiplayer_help.lua:24
+msgid "Closed."
+msgstr "Zamknięty."
+
+#: ../../scripting/widelands/multiplayer_help.lua:25
+msgid ""
+"The latter three can only be set by the hosting client by left-clicking the "
+"‘type’ button of a player. Hosting players can also set the initialization "
+"of each player (the set of buildings, wares and workers the player starts "
+"with) and the tribe and team for computer players"
+msgstr "Ostatnie trzy mogą być ustawione przez klienta-hosta poprzez kliknięcie lewym przyciskiem myszy na przycisk \"typ\" gracza. Host może również ustawić stan początkowy każdego gracza (początkowy zestaw budynków, towarów i pracowników) oraz plemiona i drużyny graczy komputerowych."
+
+#: ../../scripting/widelands/multiplayer_help.lua:26
+msgid ""
+"Every client connected to a player (the set ‘role’ player) can set the tribe"
+" and the team for that player"
+msgstr "Każdy klient połączony z graczem (w roli 'gracz') może ustawić plemię i drużynę tego gracza"
+
+#: ../../scripting/widelands/multiplayer_help.lua:28
+msgid "Map details"
+msgstr "Szczegóły mapy"
+
+#: ../../scripting/widelands/multiplayer_help.lua:29
+msgid ""
+"You can see information about the selected map or savegame on the right-hand"
+" side. A button next to the map name allows the host to change to a "
+"different map. Furthermore, the host is able to set a specific win "
+"condition, and finally can start the game as soon as all players are set up."
+msgstr "Informacje o wybranej mapie lub zapisie gry znajdziesz po prawej stronie. Przycisk obok nazwy mapy pozwala hostowi zmienić mapę na inną. Oprócz tego host może ustalić warunek zwycięstwa oraz rozpocząć grę, gdy wszyscy gracze zgłoszą gotowość do rozpoczęcia."
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
 #: ../../src/ai/computer_player.cc:40
@@ -241,16 +329,16 @@ msgstr "Widelands nie mogło załadować pliku \"%s\". Format pliku wygląda na 
 msgid "Creating players"
 msgstr "Tworzenie graczy"
 
-#: ../../src/editor/editorinteractive.cc:253
+#: ../../src/editor/editorinteractive.cc:251
 msgid "Unsaved Map"
 msgstr "Niezapisana mapa"
 
-#: ../../src/editor/editorinteractive.cc:254
+#: ../../src/editor/editorinteractive.cc:252
 msgid "The map has not been saved, do you really want to quit?"
 msgstr "Mapa nie została zapisana, czy na pewno chcesz wyjść?"
 
 #. * TRANSLATORS: Default name for new map
-#: ../../src/editor/editorinteractive.cc:599
+#: ../../src/editor/editorinteractive.cc:597
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:147
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:507
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:140
@@ -258,7 +346,7 @@ msgstr "Mapa nie została zapisana, czy na pewno chcesz wyjść?"
 msgid "No Name"
 msgstr "Bez nazwy"
 
-#: ../../src/editor/editorinteractive.cc:600
+#: ../../src/editor/editorinteractive.cc:598
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:148
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:508
 msgctxt "map_name"
@@ -515,8 +603,8 @@ msgstr "Opuść edytor"
 #: ../../src/editor/ui_menus/editor_main_menu_load_or_save_map.cc:58
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:63
 #: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:41
-#: ../../src/scripting/lua_game.cc:398 ../../src/ui_basic/helpwindow.cc:85
-#: ../../src/ui_basic/messagebox.cc:90 ../../src/ui_basic/messagebox.cc:97
+#: ../../src/scripting/lua_game.cc:398 ../../src/ui_basic/messagebox.cc:90
+#: ../../src/ui_basic/messagebox.cc:97 ../../src/ui_fsmenu/helpwindow.cc:53
 #: ../../src/ui_fsmenu/load_map_or_game.cc:64
 #: ../../src/wui/game_main_menu_save_game.cc:91
 msgid "OK"
@@ -609,7 +697,7 @@ msgid "Suggested Teams:"
 msgstr "Sugerowane drużyny:"
 
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:130
-#: ../../src/ui_fsmenu/launch_mpg.cc:649
+#: ../../src/ui_fsmenu/launch_mpg.cc:647
 #: ../../src/wui/game_main_menu_save_game.cc:172
 #, c-format
 msgid "%u Player"
@@ -792,7 +880,7 @@ msgstr "Liczba graczy"
 #: ../../src/editor/ui_menus/editor_player_menu.cc:209
 #: ../../src/logic/map.cc:339
 #: ../../src/logic/single_player_game_settings_provider.cc:87
-#: ../../src/network/nethost.cc:2064 ../../src/ui_fsmenu/launch_mpg.cc:567
+#: ../../src/network/nethost.cc:2064 ../../src/ui_fsmenu/launch_mpg.cc:565
 #: ../../src/wui/multiplayersetupgroup.cc:121
 #: ../../src/wui/multiplayersetupgroup.cc:287
 #, c-format
@@ -800,6 +888,7 @@ msgid "Player %u"
 msgstr "Gracz %u"
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:272
+#: ../../src/ui_fsmenu/multiplayer.cc:144
 msgid "Error!"
 msgstr "Błąd!"
 
@@ -921,7 +1010,7 @@ msgstr "Rozebrano %u%%"
 
 #: ../../src/logic/editor_game_base.cc:253
 msgid "Loading graphics"
-msgstr ""
+msgstr "Ładowanie grafiki"
 
 #. * TRANSLATORS: Win condition for this game has not been set.
 #: ../../src/logic/game.cc:142
@@ -935,7 +1024,7 @@ msgstr "Przedwczytywanie mapy"
 
 #: ../../src/logic/game.cc:234 ../../src/logic/game.cc:294
 msgid "Loading world"
-msgstr ""
+msgstr "Wczytywanie świata"
 
 #: ../../src/logic/game.cc:242
 #, c-format
@@ -944,7 +1033,7 @@ msgstr "Dodawanie gracza %u"
 
 #. * TRANSLATORS: This is a message's type
 #: ../../src/logic/game.cc:250 ../../src/logic/game.cc:353
-#: ../../src/ui_fsmenu/launch_mpg.cc:293 ../../src/ui_fsmenu/launch_spg.cc:228
+#: ../../src/ui_fsmenu/launch_mpg.cc:291 ../../src/ui_fsmenu/launch_spg.cc:228
 #: ../../src/ui_fsmenu/mapselect.cc:100 ../../src/wui/game_message_menu.cc:563
 #: ../../src/wui/multiplayersetupgroup.cc:351
 msgid "Scenario"
@@ -959,7 +1048,7 @@ msgid "Configuring players"
 msgstr "Konfigurowanie graczy"
 
 #: ../../src/logic/game.cc:384 ../../src/logic/game.cc:418
-#: ../../src/wlapplication.cc:1421
+#: ../../src/wlapplication.cc:1411
 msgid "Loading..."
 msgstr "Wczytywanie..."
 
@@ -1225,15 +1314,15 @@ msgid ""
 " unpause the game and continue watching if you want to."
 msgstr "Koniec powtórki, gra została wstrzymana. Możesz wznowić grę i kontynuować oglądanie."
 
-#: ../../src/logic/save_handler.cc:101
+#: ../../src/logic/save_handler.cc:106
 msgid "Saving game..."
 msgstr "Zapisywanie gry..."
 
-#: ../../src/logic/save_handler.cc:120
+#: ../../src/logic/save_handler.cc:125
 msgid "Saving failed!"
 msgstr "Zapis nieudany!"
 
-#: ../../src/logic/save_handler.cc:139
+#: ../../src/logic/save_handler.cc:144
 msgid "Game saved"
 msgstr "Gra zapisana"
 
@@ -1312,12 +1401,12 @@ msgstr "powinno się hodować surowiec %s, który nie jest dostępny w tym świe
 msgid "A geologist found resources."
 msgstr "Geolog znalazł surowce."
 
-#: ../../src/logic/worker.cc:1876
+#: ../../src/logic/worker.cc:1877
 #, c-format
 msgid "Your %s can't find a way home and will likely die."
 msgstr "Twój %s nie może znaleźć drogi do domu i najpewniej umrze."
 
-#: ../../src/logic/worker.cc:1884
+#: ../../src/logic/worker.cc:1885
 msgid "Worker got lost!"
 msgstr "Zaginął pracownik!"
 
@@ -1532,7 +1621,7 @@ msgid ""
 msgstr "Widelands nie mogło się połączyć z wybranym adresem.\nAlbo żaden serwer nie jest uruchomiony na domniemanym\nporcie, albo serwer został wyłączony, kiedy próbowano się połączyć."
 
 #: ../../src/network/netclient.cc:196 ../../src/network/nethost.cc:837
-#: ../../src/wlapplication.cc:1311
+#: ../../src/wlapplication.cc:1301
 msgid "Preparing game"
 msgstr "Przygotowywanie gry"
 
@@ -1985,11 +2074,6 @@ msgstr "wyłącz"
 msgid "%1% (%2%)"
 msgstr "%1% (%2%)"
 
-#: ../../src/ui_basic/helpwindow.cc:49 ../../src/ui_basic/helpwindow.cc:208
-#, c-format
-msgid "Help: %s"
-msgstr "Pomoc: %s"
-
 #: ../../src/ui_basic/progresswindow.cc:46
 msgid "Preparing..."
 msgstr "Przygotowywanie..."
@@ -2172,6 +2256,11 @@ msgstr "Po prawej znajdziesz opis wybranego obecnie scenariusza."
 msgid "Close"
 msgstr "Zamknij"
 
+#: ../../src/ui_fsmenu/helpwindow.cc:42 ../../src/wui/helpwindow.cc:44
+#, c-format
+msgid "Help: %s"
+msgstr "Pomoc: %s"
+
 #: ../../src/ui_fsmenu/internet_lobby.cc:55
 msgid "Metaserver Lobby"
 msgstr "Lobby metaserwera"
@@ -2200,7 +2289,7 @@ msgstr "Stwórz nową grę"
 #: ../../src/ui_fsmenu/internet_lobby.cc:84
 #: ../../src/ui_fsmenu/launch_mpg.cc:141 ../../src/ui_fsmenu/launch_spg.cc:72
 #: ../../src/ui_fsmenu/load_map_or_game.cc:59
-#: ../../src/ui_fsmenu/multiplayer.cc:47
+#: ../../src/ui_fsmenu/multiplayer.cc:49
 #: ../../src/ui_fsmenu/netsetup_lan.cc:72
 #: ../../src/ui_fsmenu/singleplayer.cc:49
 msgid "Back"
@@ -2251,6 +2340,13 @@ msgstr "Połączenie wygasło"
 msgid "Widelands was unable to connect to the host."
 msgstr "Widelands nie było w stanie połączyć się z hostem."
 
+#. * TRANSLATORS: This is shown for multiplayer games when no host
+#. * TRANSLATORS: server to connect to has been specified yet.
+#: ../../src/ui_fsmenu/internet_lobby.cc:439
+msgctxt "server_name"
+msgid "unnamed"
+msgstr "nienazwany"
+
 #: ../../src/ui_fsmenu/intro.cc:32
 msgid "Press any key or click to continue ..."
 msgstr "Naciśnij dowolny klawisz lub kliknij, aby kontynuować..."
@@ -2270,7 +2366,7 @@ msgstr "Mapa"
 msgid "Select a map"
 msgstr "Wybierz mapę"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:78 ../../src/ui_fsmenu/launch_mpg.cc:298
+#: ../../src/ui_fsmenu/launch_mpg.cc:78 ../../src/ui_fsmenu/launch_mpg.cc:296
 #: ../../src/wui/multiplayersetupgroup.cc:354
 msgid "Saved Game"
 msgstr "Zapisana gra"
@@ -2295,10 +2391,6 @@ msgstr "Rozpocznij grę"
 msgid "Show the help window"
 msgstr "Pokaż okno pomocy"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:158 ../../src/ui_fsmenu/launch_mpg.cc:672
-msgid "Multiplayer Game Setup"
-msgstr "Ustawienia gry wieloosobowej"
-
 #: ../../src/ui_fsmenu/launch_mpg.cc:167
 msgid "Clients"
 msgstr "Klienci"
@@ -2315,30 +2407,30 @@ msgstr "(żadna)"
 msgid "The host has not yet selected a map or saved game."
 msgstr "Host nie wybrał mapy lub zapisanej gry."
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:295 ../../src/ui_fsmenu/launch_spg.cc:230
+#: ../../src/ui_fsmenu/launch_mpg.cc:293 ../../src/ui_fsmenu/launch_spg.cc:230
 msgid "Win condition is set through the scenario"
 msgstr "Warunki zwycięstwa określa scenariusz"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:300
+#: ../../src/ui_fsmenu/launch_mpg.cc:298
 msgid "The game is a saved game – the win condition was set before."
 msgstr "Wznowienie zapisanej gry - warunki zwycięstwa są już określone."
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:404
+#: ../../src/ui_fsmenu/launch_mpg.cc:402
 msgid "Saved game is directory"
 msgstr "Zapis gry jest katalogiem"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:406
+#: ../../src/ui_fsmenu/launch_mpg.cc:404
 msgid ""
 "WARNING:\n"
 "The saved game you selected is a directory. This happens if you set the option ‘nozip’ to true or manually unzipped the saved game.\n"
 "Widelands is not able to transfer directory structures to the clients, please select another saved game or zip the directories’ content."
 msgstr "UWAGA:\nWybrany zapis gry jest katalogiem. Zdarza się to, jeśli ustawiono opcję 'nozip' jako true lub ręcznie rozpakowano zapis gry.\nWidelands nie jest w stanie przesłać klientom drzewa katalogów, wybierz inny zapis lub spakuj zawartość katalogu."
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:435 ../../src/ui_fsmenu/launch_spg.cc:257
+#: ../../src/ui_fsmenu/launch_mpg.cc:433 ../../src/ui_fsmenu/launch_spg.cc:257
 msgid "File not found"
 msgstr "Nie znaleziono pliku"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:437 ../../src/ui_fsmenu/launch_spg.cc:259
+#: ../../src/ui_fsmenu/launch_mpg.cc:435 ../../src/ui_fsmenu/launch_spg.cc:259
 #, c-format
 msgid ""
 "Widelands tried to start a game with a file that could not be found at the given path.\n"
@@ -2346,122 +2438,41 @@ msgid ""
 "If this happens in a network game, the host might have selected a file that you do not own. Normally, such a file should be sent from the host to you, but perhaps the transfer was not yet finished!?!"
 msgstr "Widelands próbowało rozpocząć grę z plikiem, którego nie znaleziono w podanej ścieżce.\nPlikiem był: %s\nPrzyczyną mogło być wybranie przez hosta pliku, którego nie posiadasz. Normalnie plik ten powinien był zostać wysłany do ciebie przez hosta, być może transfer się jeszcze nie skończył?"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:462
+#: ../../src/ui_fsmenu/launch_mpg.cc:460
 msgid ""
 "The selected file can not be found. If it is not automatically transferred "
 "to you, please write to the host about this problem."
 msgstr "Nie znaleziono wybranego pliku. Jeśli nie zostanie automatycznie przesłany, poinformuj o tym hosta."
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:493
+#: ../../src/ui_fsmenu/launch_mpg.cc:491
 #, c-format
 msgid "You are Player %i."
 msgstr "Jesteś graczem %i."
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:494
+#: ../../src/ui_fsmenu/launch_mpg.cc:492
 msgid "You are a spectator."
 msgstr "Jesteś obserwatorem."
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:553
+#: ../../src/ui_fsmenu/launch_mpg.cc:551
 msgid "Saved players are:"
 msgstr "Zapisani gracze to:"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:570
+#: ../../src/ui_fsmenu/launch_mpg.cc:568
 msgid "closed"
 msgstr "zamknięte"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:646
+#: ../../src/ui_fsmenu/launch_mpg.cc:644
 msgid "Map details:"
 msgstr "Szczegóły mapy:"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:647
+#: ../../src/ui_fsmenu/launch_mpg.cc:645
 #, c-format
 msgid "Size: %1$u x %2$u"
 msgstr "Rozmiar: %1$u x %2$u"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:652
+#: ../../src/ui_fsmenu/launch_mpg.cc:650
 msgid "Scenario mode selected"
 msgstr "Wybrano tryb scenariusza"
-
-#: ../../src/ui_fsmenu/launch_mpg.cc:673
-msgid "You are in the multiplayer launch game menu."
-msgstr "Jesteś w menu dla gry wieloosobowej."
-
-#: ../../src/ui_fsmenu/launch_mpg.cc:674
-msgid "Client settings"
-msgstr "Ustawienia klienta"
-
-#: ../../src/ui_fsmenu/launch_mpg.cc:677
-msgid ""
-"On the left side is a list of all clients including you. You can set your "
-"role with the button following your nickname. Available roles are:"
-msgstr "Po lewej stronie znajduje się lista klientów włącznie z tobą. Możesz wybrać swoją rolę za pomocą przycisku po swoim nicku. Dostępne role to:"
-
-#: ../../src/ui_fsmenu/launch_mpg.cc:681
-msgid ""
-"The player with the color of the flag. If more than one client selected the "
-"same color, these share control over the player (‘shared kingdom mode’)."
-msgstr "Gracz o danym kolorze flagi. Jeśli więcej niż jeden klient wybrał ten sam kolor, współdzielą oni tego gracza (\"tryb wspólnego królestwa\")."
-
-#: ../../src/ui_fsmenu/launch_mpg.cc:685
-msgid ""
-"Spectator mode, meaning you can see everything, but cannot control any "
-"player"
-msgstr "Tryb obserwatora, w którym widzisz cała mapę, lecz nie możesz kontrolować żadnego gracza"
-
-#: ../../src/ui_fsmenu/launch_mpg.cc:687
-msgid "Player settings"
-msgstr "Ustawienia graczy"
-
-#: ../../src/ui_fsmenu/launch_mpg.cc:690
-msgid ""
-"In the middle are the settings for the players. To start a game, each player"
-" must be one of the following:"
-msgstr "Na środku znajdują się opcje dla graczy. Aby zacząć grę, każdy gracz musi być jednym z poniższych:"
-
-#: ../../src/ui_fsmenu/launch_mpg.cc:693
-msgid "Connected to one or more clients (see ‘Client settings’)."
-msgstr "Połączony z jednym lub więcej klientem (patrz \"ustawienia klientów\")."
-
-#: ../../src/ui_fsmenu/launch_mpg.cc:696
-msgid ""
-"Connected to a computer player (the face in the picture as well as the mouse"
-" hover texts indicate the strength of the currently selected computer "
-"player)."
-msgstr "Połączony z graczem komputerowym (twarz na obrazku oraz tekst po najechaniu myszą podają stopień trudności wybranego gracza komputerowego)."
-
-#: ../../src/ui_fsmenu/launch_mpg.cc:699
-msgid "Set as shared in starting position for another player."
-msgstr "Ustawiony jako dodatkowa pozycja startowa innego gracza."
-
-#: ../../src/ui_fsmenu/launch_mpg.cc:700
-msgid "Closed."
-msgstr "Zamknięty."
-
-#: ../../src/ui_fsmenu/launch_mpg.cc:703
-msgid ""
-"The latter three can only be set by the hosting client by left-clicking the "
-"‘type’ button of a player. Hosting players can also set the initialization "
-"of each player (the set of buildings, wares and workers the player starts "
-"with) and the tribe and team for computer players"
-msgstr "Ostatnie trzy mogą być ustawione przez klienta-hosta poprzez kliknięcie lewym przyciskiem myszy na przycisk \"typ\" gracza. Host może również ustawić stan początkowy każdego gracza (początkowy zestaw budynków, towarów i pracowników) oraz plemiona i drużyny graczy komputerowych."
-
-#: ../../src/ui_fsmenu/launch_mpg.cc:708
-msgid ""
-"Every client connected to a player (the set ‘role’ player) can set the tribe"
-" and the team for that player"
-msgstr "Każdy klient połączony z graczem (w roli 'gracz') może ustawić plemię i drużynę tego gracza"
-
-#: ../../src/ui_fsmenu/launch_mpg.cc:710
-msgid "Map details"
-msgstr "Szczegóły mapy"
-
-#: ../../src/ui_fsmenu/launch_mpg.cc:713
-msgid ""
-"You can see information about the selected map or savegame on the right-hand"
-" side. A button next to the map name allows the host to change to a "
-"different map. Furthermore, the host is able to set a specific win "
-"condition, and finally can start the game as soon as all players are set up."
-msgstr "Informacje o wybranej mapie lub zapisie gry znajdziesz po prawej stronie. Przycisk obok nazwy mapy pozwala hostowi zmienić mapę na inną. Oprócz tego host może ustalić warunek zwycięstwa oraz rozpocząć grę, gdy wszyscy gracze zgłoszą gotowość do rozpoczęcia."
 
 #: ../../src/ui_fsmenu/launch_spg.cc:62
 msgid "Select map"
@@ -2803,23 +2814,23 @@ msgid ""
 "sent by the server."
 msgstr "Tego pliku mapy nie ma w twoim systemie plików. Podane informacje wysłane zostały z serwera."
 
-#: ../../src/ui_fsmenu/multiplayer.cc:34
+#: ../../src/ui_fsmenu/multiplayer.cc:36
 msgid "Choose game type"
 msgstr "Wybierz typ gry"
 
-#: ../../src/ui_fsmenu/multiplayer.cc:41
+#: ../../src/ui_fsmenu/multiplayer.cc:43
 msgid "Internet game"
 msgstr "Gra przez internet"
 
-#: ../../src/ui_fsmenu/multiplayer.cc:44
+#: ../../src/ui_fsmenu/multiplayer.cc:46
 msgid "LAN / Direct IP"
 msgstr "LAN / Bezpośrednie IP"
 
-#: ../../src/ui_fsmenu/multiplayer.cc:84
+#: ../../src/ui_fsmenu/multiplayer.cc:86
 msgid "Show login dialog"
 msgstr "Pokazuj dialog logowania"
 
-#: ../../src/ui_fsmenu/multiplayer.cc:114
+#: ../../src/ui_fsmenu/multiplayer.cc:116
 #: ../../src/ui_fsmenu/netsetup_lan.cc:112 ../../src/wui/login_box.cc:76
 msgid "nobody"
 msgstr "nikt"
@@ -3031,11 +3042,11 @@ msgstr "Kampanie"
 msgid "Load Game"
 msgstr "Wczytaj grę"
 
-#: ../../src/wlapplication.cc:1095
+#: ../../src/wlapplication.cc:1085
 msgid "Game data error"
 msgstr "Błąd danych gry"
 
-#: ../../src/wlapplication.cc:1105
+#: ../../src/wlapplication.cc:1095
 #, c-format
 msgid ""
 "\n"
@@ -3043,7 +3054,7 @@ msgid ""
 "Please report this problem to help us improve Widelands. You will find related messages in the standard output (stdout.txt on Windows). You are using build %1$s (%2$s). "
 msgstr "\n\nProsimy o poinformowanie o błędzie, by pomóc nam ulepszać Widelands. Informacje o błędzie znajdziesz na standardowym wyjściu (stdout.txt na Windowsie). Używasz build %1$s (%2$s). "
 
-#: ../../src/wlapplication.cc:1112
+#: ../../src/wlapplication.cc:1102
 msgid ""
 "Please add this information to your report.\n"
 "\n"
@@ -3982,7 +3993,7 @@ msgstr "SI: Losowa"
 
 #: ../../src/wui/playerdescrgroup.cc:187
 msgid "The tribe will be set at random."
-msgstr ""
+msgstr "Plemię będzie ustawione losowo."
 
 #: ../../src/wui/plot_area.cc:107
 msgid "%1% d"
