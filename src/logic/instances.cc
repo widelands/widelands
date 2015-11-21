@@ -40,7 +40,7 @@
 namespace Widelands {
 
 CmdDestroyMapObject::CmdDestroyMapObject
-	(int32_t const t, MapObject & o)
+	(uint32_t const t, MapObject & o)
 	: GameLogicCommand(t), obj_serial(o.serial())
 {}
 
@@ -90,7 +90,7 @@ void CmdDestroyMapObject::write
 	fw.unsigned_32(mos.get_object_file_index_or_zero(egbase.objects().get_object(obj_serial)));
 }
 
-CmdAct::CmdAct(int32_t const t, MapObject & o, int32_t const a) :
+CmdAct::CmdAct(uint32_t const t, MapObject & o, int32_t const a) :
 	GameLogicCommand(t), obj_serial(o.serial()), arg(a)
 {}
 

@@ -513,7 +513,7 @@ private:
 
 struct CmdDestroyMapObject : public GameLogicCommand {
 	CmdDestroyMapObject() : GameLogicCommand(0), obj_serial(0) {} ///< For savegame loading
-	CmdDestroyMapObject (int32_t t, MapObject &);
+	CmdDestroyMapObject (uint32_t t, MapObject &);
 	void execute (Game &) override;
 
 	void write(FileWrite &, EditorGameBase &, MapObjectSaver  &) override;
@@ -527,7 +527,7 @@ private:
 
 struct CmdAct : public GameLogicCommand {
 	CmdAct() : GameLogicCommand(0), obj_serial(0), arg(0) {} ///< For savegame loading
-	CmdAct (int32_t t, MapObject &, int32_t a);
+	CmdAct (uint32_t t, MapObject &, int32_t a);
 
 	void execute (Game &) override;
 

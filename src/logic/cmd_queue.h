@@ -85,17 +85,17 @@ class Game;
  * the same for all parallel simulation.
  */
 struct Command {
-	Command (const int32_t _duetime) : m_duetime(_duetime) {}
+	Command (const uint32_t _duetime) : m_duetime(_duetime) {}
 	virtual ~Command ();
 
 	virtual void execute (Game &) = 0;
 	virtual uint8_t id() const = 0;
 
-	int32_t duetime() const {return m_duetime;}
-	void set_duetime(int32_t const t) {m_duetime = t;}
+	uint32_t duetime() const {return m_duetime;}
+	void set_duetime(uint32_t const t) {m_duetime = t;}
 
 private:
-	int32_t m_duetime;
+	uint32_t m_duetime;
 };
 
 
@@ -107,7 +107,7 @@ private:
  * for all instances of a game to ensure parallel simulation.
  */
 struct GameLogicCommand : public Command {
-	GameLogicCommand (int32_t const _duetime) : Command(_duetime) {}
+	GameLogicCommand (uint32_t const _duetime) : Command(_duetime) {}
 
 	// Write these commands to a file (for savegames)
 	virtual void write

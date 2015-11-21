@@ -29,7 +29,7 @@ namespace Widelands {
 struct CmdLuaScript : public GameLogicCommand {
 	CmdLuaScript() : GameLogicCommand(0) {} // For savegame loading
 	CmdLuaScript
-		(int32_t const _duetime, const std::string& script) :
+		(uint32_t const _duetime, const std::string& script) :
 		GameLogicCommand(_duetime), script_(script) {}
 
 	// Write these commands to a file (for savegames)
