@@ -201,7 +201,7 @@ void Textarea::expand()
 	// We want empty textareas to have height
 	if (m_text.empty()) {
 		h = UI::g_fh1->render(
-				 as_uifont(".",
+				 as_uifont(UI::g_fh1->fontset()->representative_character(),
 							  m_textstyle.font->size() - UI::g_fh1->fontset()->size_offset(),
 							  m_textstyle.fg))->height();
 	}
@@ -234,7 +234,7 @@ void Textarea::update_desired_size()
 	// We want empty textareas to have height
 	if (m_text.empty()) {
 		h = UI::g_fh1->render(
-				 as_uifont(".",
+				 as_uifont(UI::g_fh1->fontset()->representative_character(),
 							  m_textstyle.font->size() - UI::g_fh1->fontset()->size_offset(),
 							  m_textstyle.fg))->height();
 	}

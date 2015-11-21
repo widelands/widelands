@@ -94,7 +94,7 @@ SpinBox::SpinBox
 
 	uint32_t padding = 2;
 
-	uint32_t texth = UI::g_fh1->render(as_uifont("."))->height();
+	uint32_t texth = UI::g_fh1->render(as_uifont(UI::g_fh1->fontset()->representative_character()))->height();
 	box_ = new UI::Box(this, 0, 0, UI::Box::Horizontal, w, texth, padding);
 
 #ifndef NDEBUG //  only in debug builds

@@ -50,8 +50,12 @@ Table<void *>::Table
 	Panel             (parent, x, y, w, h),
 	m_total_width     (0),
 	m_fontsize        (UI_FONT_SIZE_SMALL),
-	m_headerheight    (UI::g_fh1->render(as_uifont(".", m_fontsize))->height() + 4),
-	m_lineheight      (UI::g_fh1->render(as_uifont(".", m_fontsize))->height()),
+	m_headerheight    (UI::g_fh1->render(
+								 as_uifont(
+									 UI::g_fh1->fontset()->representative_character(),
+									 m_fontsize))->height() + 4),
+	m_lineheight      (UI::g_fh1->render(
+								 as_uifont(UI::g_fh1->fontset()->representative_character(), m_fontsize))->height()),
 	m_scrollbar       (nullptr),
 	m_scrollpos       (0),
 	m_selection       (no_selection_index()),
