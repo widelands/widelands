@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-07 08:28+0000\n"
-"PO-Revision-Date: 2015-11-07 08:29+0000\n"
+"POT-Creation-Date: 2015-11-10 08:45+0000\n"
+"PO-Revision-Date: 2015-11-10 08:46+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Malay (http://www.transifex.com/widelands/widelands/language/ms/)\n"
 "MIME-Version: 1.0\n"
@@ -142,212 +142,212 @@ msgstr "Kawalan permainan umum"
 
 #: ../../txts/README.lua:47
 msgid ""
-"To close an open window, right-click on it. To minimize/maximize a window, click\n"
-"on the title bar of that window either with the middle mouse button or with the left\n"
-"mouse button while holding down CTRL."
-msgstr "Untuk menutup tetingkap terbuka, klik-kanan padanya. Untuk meminimumkan\natau memaksimumkan tetingkap, klik pada palang tajuk tetingkap sama ada dengan\nbutang tetikus tengah atau butang tetikus kiri ketika menahan kekunci CTRL."
+"To close an open window, right-click on it. To minimize/maximize a window, "
+"click on it with the middle mouse button or with the left mouse button while"
+" holding down CTRL."
+msgstr ""
 
-#: ../../txts/README.lua:51
+#: ../../txts/README.lua:49
 msgid ""
 "If you hold CTRL while building a road, flags will be placed automatically.\n"
 "If you hold CTRL while removing a road, all flags up to the first junction are\n"
 "removed."
 msgstr "Jika anda tahan kekunci CTRL ketika membina jalan, bendera akan diganti\nsecara automatik. Jika anda tahan kekunci CTRL ketika membuang jalan,\nsemua bendera sehingga simpang pertama akan dibuang."
 
-#: ../../txts/README.lua:55
+#: ../../txts/README.lua:53
 msgid ""
 "You can skip confirmation windows for irreversible actions if you hold CTRL\n"
 "while clicking on the action button."
 msgstr "Anda boleh langkau tetingkap pengesahan bagi tindakan tidak boleh kembali\njika anda menahan kekunci CTRL ketika mengklik butang tindakan."
 
-#: ../../txts/README.lua:58
+#: ../../txts/README.lua:56
 msgid "Keyboard shortcuts (in-game)"
 msgstr "Pintasan papan kekunci (dalam-permainan)"
 
-#: ../../txts/README.lua:60
+#: ../../txts/README.lua:58
 msgid "PAGEUP: increases game speed"
 msgstr "PAGEUP: tingkatkan kelajuan permainan"
 
-#: ../../txts/README.lua:61
+#: ../../txts/README.lua:59
 msgid "PAGEDOWN: decreases game speed"
 msgstr "PAGEDOWN: kurangkan kelajuan permainan"
 
-#: ../../txts/README.lua:62
+#: ../../txts/README.lua:60
 msgid "PAUSE: pauses the game"
 msgstr "PAUSE: jedakan permainan"
 
-#: ../../txts/README.lua:63
+#: ../../txts/README.lua:61
 msgid "SPACE: toggles if building spaces are shown"
 msgstr "SPACE: togol jika ruang bangunan ditunjukkan"
 
-#: ../../txts/README.lua:64
+#: ../../txts/README.lua:62
 msgid "M: toggles minimap"
 msgstr "M: togol peta mini"
 
-#: ../../txts/README.lua:65
+#: ../../txts/README.lua:63
 msgid "N: toggles messages (‘news’)"
 msgstr "N: togol mesej (‘berita’)"
 
-#: ../../txts/README.lua:66
+#: ../../txts/README.lua:64
 msgid "C: toggles census"
 msgstr "C: togol bancian"
 
-#: ../../txts/README.lua:67
+#: ../../txts/README.lua:65
 msgid "S: toggles statistics"
 msgstr "S: togol statistik"
 
-#: ../../txts/README.lua:68
+#: ../../txts/README.lua:66
 msgid "I: toggles stock inventory"
 msgstr "I: togol inventori stok"
 
-#: ../../txts/README.lua:69
+#: ../../txts/README.lua:67
 msgid "O: toggles objectives"
 msgstr "O: togol objektif"
 
-#: ../../txts/README.lua:70
+#: ../../txts/README.lua:68
 msgid "B: toggles building statistics"
 msgstr "B: togol statistik bangunan"
 
-#: ../../txts/README.lua:71
+#: ../../txts/README.lua:69
 msgid "F: toggles fullscreen (if supported by the OS)"
 msgstr "F: togol skrin penuh (jika disokong oleh OS)"
 
-#: ../../txts/README.lua:72
+#: ../../txts/README.lua:70
 msgid "Home: centers main mapview on starting location"
 msgstr "Home: tengahkan paparan peta utama pada lokasi permulaan"
 
-#: ../../txts/README.lua:73
+#: ../../txts/README.lua:71
 msgid "(CTRL+) 0-9: Remember and go to previously remembered locations"
 msgstr "(CTRL+) 0-9: Ingat dan pergi ke lokasi diingati sebelum ini"
 
-#: ../../txts/README.lua:74
+#: ../../txts/README.lua:72
 msgid ",: goes to the previous location"
 msgstr ",: pergi ke lokasi terdahulu"
 
-#: ../../txts/README.lua:75
+#: ../../txts/README.lua:73
 msgid ".: goes to the next location"
 msgstr ".: pergi ke lokasi berikutnya"
 
-#: ../../txts/README.lua:76
+#: ../../txts/README.lua:74
 msgid "F6: shows the debug console (only in debug-builds)"
 msgstr "F6: tunjuk konsol nyahpepijat (hanya dalam debug-builds)"
 
-#: ../../txts/README.lua:77
+#: ../../txts/README.lua:75
 msgid "CTRL+F10: quits the game immediately"
 msgstr "CTRL+F10: keluar dari permainan serta-merta"
 
-#: ../../txts/README.lua:78
+#: ../../txts/README.lua:76
 msgid "CTRL+Leftclick: skips confirmation dialogs"
 msgstr "CTRL+Klik kiri: langkau dialog pengesahan"
 
-#: ../../txts/README.lua:79
+#: ../../txts/README.lua:77
 msgid "CTRL+F11: takes a screenshot"
 msgstr "CTRL+F11: ambil cekupan skrin"
 
-#: ../../txts/README.lua:81
+#: ../../txts/README.lua:79
 msgid ""
 "In the message window, the following additional shortcuts are available:"
 msgstr "Dalam tetingkap mesej, pintasan tambahan berikut tersedia:"
 
-#: ../../txts/README.lua:83
+#: ../../txts/README.lua:81
 msgid "0: shows all messages"
 msgstr "0: tunjuk semua mesej all messages"
 
-#: ../../txts/README.lua:84
+#: ../../txts/README.lua:82
 msgid "1: shows geologists' messages only"
 msgstr "1: tunjuk mesej ahli geologi sahaja"
 
-#: ../../txts/README.lua:85
+#: ../../txts/README.lua:83
 msgid "2: shows economy messages only"
 msgstr "2: tunjuk mesej ekonomi sahaja"
 
-#: ../../txts/README.lua:86
+#: ../../txts/README.lua:84
 msgid "3: shows seafaring messages only"
 msgstr "3: tunjuk mesej pelautan sahaja"
 
-#: ../../txts/README.lua:87
+#: ../../txts/README.lua:85
 msgid "4: shows warfare messages only"
 msgstr "4: tunjuk mesej perperangan sahaja"
 
-#: ../../txts/README.lua:88
+#: ../../txts/README.lua:86
 msgid "5: shows scenario messages only"
 msgstr "5: tunjuk mesej senario sahaja"
 
-#: ../../txts/README.lua:89
+#: ../../txts/README.lua:87
 msgid "G: jumps to the location corresponding to the current message"
 msgstr "G: lompat ke lokasi berkenaan dengan mesej semasa"
 
-#: ../../txts/README.lua:90
+#: ../../txts/README.lua:88
 msgid "DELETE: archives/restores the current message"
 msgstr "DELETE: arkib/pulihkan mesej semasa"
 
-#: ../../txts/README.lua:92
+#: ../../txts/README.lua:90
 msgid "Online Help"
 msgstr "Bantuan Atas Talian"
 
-#: ../../txts/README.lua:94
+#: ../../txts/README.lua:92
 msgid ""
 "If you need documentation or help for Widelands or the Widelands Editor, be\n"
 "sure to visit our homepage. You can find an up to date online help in our Wiki\n"
 "and a detailed description of the tribe economies in our online encyclopedia."
 msgstr "Jika anda perlukan dokumentasi atau bantuan berkenaan Widelands ataupun\npenyunting Widelands, pastikan anda melayari laman sesawang kami. Anda\nboleh temui bantuan atas-talian yang terkini di dalam Wiki kami dan juga\nketerangan terperinci ekonomi puak di dalam ensiklopedia atas-talian kami."
 
-#: ../../txts/README.lua:98
+#: ../../txts/README.lua:96
 msgid "Reporting Bugs"
 msgstr "Melaporkan Pepijat"
 
-#: ../../txts/README.lua:100
+#: ../../txts/README.lua:98
 msgid "If you encounter a bug, please report it to our bugtracker:"
 msgstr "Jika anda menghadapi pepijat, sila laporkannya di dalam penjejak pepijat kami:"
 
-#: ../../txts/README.lua:104
+#: ../../txts/README.lua:102
 msgid "Please provide enough background information. Tell us:"
 msgstr "Sila sediakan maklumat latar belakang yang mencukupi. Beritahu kami:"
 
-#: ../../txts/README.lua:106
+#: ../../txts/README.lua:104
 msgid "- Detailed steps on how to trigger the bug, if possible."
 msgstr "- Langkah terperinci bagaimana pepijat dapat dipicu, jika boleh."
 
-#: ../../txts/README.lua:108
+#: ../../txts/README.lua:106
 msgid ""
 "- What you expected to happen when performing the steps and what actually "
 "happened."
 msgstr "- Apa yang anda jangkakan berlaku bila melakukan langkah tersebut dan apakah yang sebenarnya berlaku."
 
-#: ../../txts/README.lua:110
+#: ../../txts/README.lua:108
 msgid ""
 "- Which version of Widelands you are running (i.e. either the build number or\n"
 "the revision number if you are running a development version or a daily build.)"
 msgstr "- Versi Widelands yang manakah anda mai (iaitu sama ada nombor binaan\natau nombor revisi jika menjalankan versi pembangunan atau binaan harian.)"
 
-#: ../../txts/README.lua:113
+#: ../../txts/README.lua:111
 msgid ""
 "- Please also include which operating system you are running Widelands on as\n"
 "some bugs can be platform specific."
 msgstr "- Sila sertakan sistem pengoperasian yang anda jalan kan Widelands di dalamnya\nkerana sesetengah pepijat boleh jadi spesifik platform."
 
-#: ../../txts/README.lua:116
+#: ../../txts/README.lua:114
 msgid "- Which map you were playing when the bug occurred."
 msgstr "- Peta yang manakah anda main ketika pepijat berlaku."
 
-#: ../../txts/README.lua:118
+#: ../../txts/README.lua:116
 msgid ""
 "- If the bug concerns something not being displayed correctly or if it helps\n"
 "demonstrate the issue, please include one or more screenshots."
 msgstr "- Jika pepijat berkenaan sesuatu yang tidak dipaparkan dengan baik atau jika\nia dapat demonstrasikan masalah tersebut, sila sertakan satu atau lebih cekupan\nskrin itu."
 
-#: ../../txts/README.lua:121
+#: ../../txts/README.lua:119
 msgid ""
 "- If you have a save game or replay demonstrating the issue (for instance\n"
 "crashes where it can be hard to tell exactly what is triggering it), please\n"
 "include that too. For more information, see the section on Replays below."
 msgstr "- Jika anda telah menyimpan permainan atau demonstrasi semula masalah\n(seperti kerosakan yang sukar diberitahui apakah puncanya), sila sertakannya\njuga. Untuk maklumat lanjut, sila rujuk seksyen Main Semula di bawah."
 
-#: ../../txts/README.lua:125
+#: ../../txts/README.lua:123
 msgid "Replays"
 msgstr "Main Semula"
 
-#: ../../txts/README.lua:127
+#: ../../txts/README.lua:125
 msgid ""
 "Widelands records every game you play in two files. One of these files has a\n"
 ".wrpl.wgf extension and contains an initial savegame. The other file has a\n"
@@ -356,7 +356,7 @@ msgid ""
 "you the time you started the game."
 msgstr "Widelands merekod setiap permainan yang anda main kepada dua fail. Salah\nsatu dari fail ini memiliki sambungan .wrpl.wgf dan mengandungi \npermainansimpan awalan. Fail kedua mempunyai sambungan.wrpl dan \nmengandungi semua perintah yang telah dibuat oleh semua pemain, seperti \nmembina jalan atau menyerang musuh. Nama fail selebihnya memberitahu anda\nmasa anda memulakan permainan."
 
-#: ../../txts/README.lua:133
+#: ../../txts/README.lua:131
 msgid ""
 "Using the Watch Replay option in the main menu, a previously played game will\n"
 "be precisely reconstructed for you to watch. Note, however, that even small\n"
@@ -366,7 +366,7 @@ msgid ""
 "different version of the game."
 msgstr "Penggunaan pilihan Tonton Main Semula dalam menu utama, permainan sebelum\nini yang telah dimainkan akan dijalankan semula untuk tontonan anda. Kadangkala,\nsedikit perubahan dalam fail data permainan atau bolehlaku Widelands boleh\nmenyebabkan main semula menjadi tidak serasi dan 'terkeluar dari penyegerakan'.\nIa seakan dengan permainan rangkaian yang mengalami masalah penyahgerakan\njika salah seorang pemain mempunyai versi permainan yang berlainan."
 
-#: ../../txts/README.lua:140
+#: ../../txts/README.lua:138
 msgid ""
 "Replays are a very useful tool to find bugs in the game logic, so they\n"
 "can be useful as attachments to bug reports. The replay files are saved in the\n"

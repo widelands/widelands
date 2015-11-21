@@ -53,7 +53,7 @@ class World;
 struct ProductionProgram {
 
 	/// A group of ware types with a count.
-	using WareTypeGroup = std::pair<std::set<WareIndex>, uint8_t>;
+	using WareTypeGroup = std::pair<std::set<DescriptionIndex>, uint8_t>;
 	using Groups = std::vector<WareTypeGroup>;
 
 	/// Can be executed on a ProductionSite.
@@ -176,22 +176,22 @@ struct ProductionProgram {
 
 		/// Tests whether the economy needs a ware of type ware_type.
 		struct EconomyNeedsWare : public Condition {
-			EconomyNeedsWare(const WareIndex& i) : ware_type(i) {}
+			EconomyNeedsWare(const DescriptionIndex& i) : ware_type(i) {}
 			bool evaluate(const ProductionSite &) const override;
 			std::string description(const Tribes& tribes) const override;
 			std::string description_negation(const Tribes& tribes) const override;
 		private:
-			WareIndex ware_type;
+			DescriptionIndex ware_type;
 		};
 
 		/// Tests whether the economy needs a worker of type worker_type.
 		struct EconomyNeedsWorker : public Condition {
-			EconomyNeedsWorker(const WareIndex& i) : worker_type(i) {}
+			EconomyNeedsWorker(const DescriptionIndex& i) : worker_type(i) {}
 			bool evaluate(const ProductionSite &) const override;
 			std::string description(const Tribes& tribes) const override;
 			std::string description_negation(const Tribes& tribes) const override;
 		private:
-			WareIndex worker_type;
+			DescriptionIndex worker_type;
 		};
 
 		/// Tests whether the site has the specified (or implied) number of
@@ -437,7 +437,7 @@ struct ProductionProgram {
 		void execute(Game &, ProductionSite &) const override;
 
 	private:
-		ResourceIndex m_resource;
+		DescriptionIndex m_resource;
 		uint8_t        m_distance; // width/radius of mine
 		uint8_t        m_max;  // Can work up to this percent (of total mountain resources)
 		uint8_t        m_chance; // odds of finding resources from empty mine

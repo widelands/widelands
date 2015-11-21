@@ -20,11 +20,12 @@
 #ifndef WL_UI_FSMENU_LAUNCH_MPG_H
 #define WL_UI_FSMENU_LAUNCH_MPG_H
 
+#include <memory>
 #include <string>
 
 #include "ui_fsmenu/base.h"
+#include "ui_fsmenu/helpwindow.h"
 #include "ui_basic/button.h"
-#include "ui_basic/helpwindow.h"
 #include "ui_basic/listselect.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/textarea.h"
@@ -65,6 +66,7 @@ private:
 	void select_saved_game();
 	void win_condition_clicked();
 	void win_condition_update();
+	void win_condition_load();
 	void set_scenario_values();
 	void load_previous_playerdata();
 	void load_map_info();
@@ -85,7 +87,7 @@ private:
 	UI::Button       m_help_button;
 	UI::Textarea              m_title, m_mapname, m_clients, m_players, m_map, m_wincondition_type;
 	UI::MultilineTextarea    m_map_info, m_client_info;
-	UI::HelpWindow          * m_help;
+	std::unique_ptr<UI::FullscreenHelpWindow> m_help;
 	GameSettingsProvider    * m_settings;
 	GameController          * m_ctrl;
 	GameChatPanel           * m_chat;

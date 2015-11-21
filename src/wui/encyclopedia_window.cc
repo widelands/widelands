@@ -137,8 +137,8 @@ EncyclopediaWindow::EncyclopediaWindow(InteractivePlayer& parent,
 
 		lists_.insert(
 		   std::make_pair(tab->key,
-		                  std::unique_ptr<UI::Listselect<Widelands::WareIndex>>(
-		                     new UI::Listselect<Widelands::WareIndex>(
+								std::unique_ptr<UI::Listselect<Widelands::DescriptionIndex>>(
+									new UI::Listselect<Widelands::DescriptionIndex>(
 		                        boxes_.at(tab->key).get(), 0, 0, contents_width, contents_height))));
 		lists_.at(tab->key)->selected.connect(boost::bind(
 		   &EncyclopediaWindow::entry_selected, this, tab->key, tab->script_path, tab->type));
@@ -185,7 +185,7 @@ void EncyclopediaWindow::fill_buildings() {
 	const TribeDescr& tribe = iaplayer().player().tribe();
 	std::vector<EncyclopediaEntry> entries;
 
-	for (BuildingIndex i = 0; i < tribes.nrbuildings(); ++i) {
+	for (Widelands::DescriptionIndex i = 0; i < tribes.nrbuildings(); ++i) {
 		const BuildingDescr* building = tribes.get_building_descr(i);
 		if (tribe.has_building(i) || building->type() == MapObjectType::MILITARYSITE) {
 			EncyclopediaEntry entry(i, building->descname(), building->icon());
@@ -199,7 +199,7 @@ void EncyclopediaWindow::fill_wares() {
 	const TribeDescr& tribe = iaplayer().player().tribe();
 	std::vector<EncyclopediaEntry> entries;
 
-	for (const WareIndex& i : tribe.wares()) {
+	for (const Widelands::DescriptionIndex& i : tribe.wares()) {
 		const WareDescr* ware = tribe.get_ware_descr(i);
 		EncyclopediaEntry entry(i, ware->descname(), ware->icon());
 		entries.push_back(entry);
@@ -211,7 +211,7 @@ void EncyclopediaWindow::fill_workers() {
 	const TribeDescr& tribe = iaplayer().player().tribe();
 	std::vector<EncyclopediaEntry> entries;
 
-	for (const WareIndex& i : tribe.workers()) {
+	for (const Widelands::DescriptionIndex& i : tribe.workers()) {
 		const WorkerDescr* worker = tribe.get_worker_descr(i);
 		EncyclopediaEntry entry(i, worker->descname(), worker->icon());
 		entries.push_back(entry);

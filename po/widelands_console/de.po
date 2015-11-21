@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-07 08:28+0000\n"
-"PO-Revision-Date: 2015-11-06 16:27+0000\n"
+"POT-Creation-Date: 2015-11-07 08:48+0000\n"
+"PO-Revision-Date: 2015-11-08 15:13+0000\n"
 "Last-Translator: wl-zocker\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -140,7 +140,7 @@ msgstr " --scenario=DATEINAME Startet sofort die Karte DATEINAME als Szenario."
 
 #: ../../src/wlapplication_messages.cc:85
 msgid " --loadgame=FILENAME  Directly loads the savegame FILENAME."
-msgstr " --loadgame=DATEINAME Lädt sofort den Spielstand DATEINAME."
+msgstr " --loadgame=DATEINAME Lädt direkt den Spielstand DATEINAME."
 
 #: ../../src/wlapplication_messages.cc:86
 msgid ""

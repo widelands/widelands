@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-07 08:28+0000\n"
-"PO-Revision-Date: 2015-11-06 20:01+0000\n"
+"POT-Creation-Date: 2015-11-10 08:55+0000\n"
+"PO-Revision-Date: 2015-11-15 15:17+0000\n"
 "Last-Translator: MiroslavR <miroslavr256@gmail.com>\n"
 "Language-Team: Slovak (http://www.transifex.com/widelands/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
@@ -350,27 +350,27 @@ msgstr "Vaše vojsko porazilo nepriateľov v strážnici."
 #: ../../tribes/buildings/militarysites/empire/blockhouse/init.lua:7
 msgctxt "empire_building"
 msgid "Blockhouse"
-msgstr ""
+msgstr "Vojenský zrub"
 
 #: ../../tribes/buildings/militarysites/empire/blockhouse/init.lua:41
 msgid "Your soldiers have occupied your blockhouse."
-msgstr ""
+msgstr "Vaši vojaci obsadili váš vojenský zrub."
 
 #: ../../tribes/buildings/militarysites/empire/blockhouse/init.lua:42
 msgid "Your blockhouse discovered an aggressor."
-msgstr ""
+msgstr "Váš vojenský zrub odhalil útočníka."
 
 #: ../../tribes/buildings/militarysites/empire/blockhouse/init.lua:43
 msgid "Your blockhouse is under attack."
-msgstr ""
+msgstr "Nepriateľ útočí na váš vojenský zrub."
 
 #: ../../tribes/buildings/militarysites/empire/blockhouse/init.lua:44
 msgid "The enemy defeated your soldiers at the blockhouse."
-msgstr ""
+msgstr "Nepriateľ porazil vaše vojsko vo vojenskom zrube."
 
 #: ../../tribes/buildings/militarysites/empire/blockhouse/init.lua:45
 msgid "Your soldiers defeated the enemy at the blockhouse."
-msgstr ""
+msgstr "Vaše vojsko porazilo nepriateľov vo vojenskom zrube."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/militarysites/empire/outpost/init.lua:7

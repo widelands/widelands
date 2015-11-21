@@ -1,13 +1,12 @@
-# Automatically created by Widelands bzr6712[widelands] (Debug)
+# Automatically created by Widelands bzr7574[artifacts] (Debug)
 
 [global]
 packet_version="1"
 map_w="144"
 map_h="144"
 nr_players="2"
-world="greenland"
 name=_"Volcanic Winter"
 author="Nasenbaer"
 descr=_"In the middle of summer, a series of volcanic eruptions drew the winter in. Suddenly, the sun seemed to be gone and the only light and heat sources left were those that enforced this dramatic change. Continents, oceans and seas are frozen now, only the volcanic islands seem to be left as habitable land."
 hint=
-tags="official,seafaring,1v1"
+tags="1v1,artifacts,official,seafaring"

@@ -4,13 +4,14 @@
 # Translators:
 # Antonio Trueba <atrueba@users.sourceforge.net>, 2007
 # Lucía Pradillos <dreamers_88@hotmail.com>, 2015
+# Madkat Here, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-09-05 09:36+0000\n"
-"PO-Revision-Date: 2015-09-06 10:57+0000\n"
-"Last-Translator: Lucía Pradillos <dreamers_88@hotmail.com>\n"
+"POT-Creation-Date: 2015-11-07 08:47+0000\n"
+"PO-Revision-Date: 2015-11-07 16:30+0000\n"
+"Last-Translator: Madkat Here\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -26,7 +27,7 @@ msgstr "De Némesis a Génesis"
 msgid ""
 "After landing on a mysterious island close to Atlantis, the remaining "
 "Atlanteans struggle to make a new home for themselves."
-msgstr ""
+msgstr "Después de aterrizar en una misteriosa isla, cerca de la Atlántida, los atlantes restantes luchan para crear un nuevo hogar para ellos."
 
 #: ../../campaigns/bar01.wmf/elemental:8 ../../campaigns/campaigns.conf:67
 msgid "A Place to Call Home"
@@ -36,7 +37,7 @@ msgstr "Un lugar para llamar a casa "
 msgid ""
 "In this scenario, the higher production buildings including mining will be "
 "introduced."
-msgstr ""
+msgstr "En este escenario se introducirán los edificios de producción más alta, incluyendo la minería."
 
 #: ../../campaigns/bar02.wmf/elemental:7 ../../campaigns/campaigns.conf:72
 msgid "This Land is Our Land"
@@ -46,7 +47,7 @@ msgstr "Esta tierra es nuestra tierra"
 msgid ""
 "This tutorial explains the handling of military and training site buildings "
 "and will introduce fighting."
-msgstr ""
+msgstr "Este tutorial explica el manejo de los edificios militares y sitios de entrenamiento y te introducirá a los combates."
 
 #: ../../campaigns/campaigns.conf:27
 msgid "The Second Empire"
@@ -58,7 +59,7 @@ msgstr "Bárbaros"
 
 #: ../../campaigns/campaigns.conf:31
 msgid "Easy. Introduces the Barbarians"
-msgstr ""
+msgstr "Fácil. Introduce los Bárbaros"
 
 #: ../../campaigns/campaigns.conf:32
 msgid ""
@@ -75,7 +76,7 @@ msgid ""
 "forces he left to secure the borders of Al’thunran, the young warlord seeks "
 "to reunite his ambitious brothers and force the tribes to march once again "
 "under a common banner."
-msgstr ""
+msgstr "Cuando Chat'Karuth murió, él era un hombre de edad, padre de tres hijos fuertes y ambiciosos, y el señor de la guerra a un ejército que podría coincidir con cualquier enemigo dispuesto a levantarse contra los antiguos bosques. Aunque al final de su glorioso reinado, Chat'Karuth eligió a su hijo mayor, Thron, para sucederle como jefe militar de la tribu - una decisión que dejó a sus dos hermanos insatisfechos. El antiguo señor de la guerra lo sabía. Como su padre le enseñó, Thron dejó la capital de Al'thunran, el hogar del Trono Entre los árboles, y dirigió a sus fuerzas a las altas colinas donde enterró el cadáver de su padre. Allí juró a los dioses y al espíritu de su padre que él volvería a restablecer el orden. Mientras que sus hermanos han desatado una guerra ciega contra Thron y las pocas fuerzas que dejó para asegurar las fronteras de Al'thunran, el joven señor de la guerra busca reunir a sus ambiciosos hermanos y forzar a las tribus a marchar de nuevo bajo una misma bandera."
 
 #: ../../campaigns/campaigns.conf:35
 msgid "The Months of Exile"
@@ -87,7 +88,7 @@ msgstr "Imperio"
 
 #: ../../campaigns/campaigns.conf:39
 msgid "Easy. Introduces the Empire"
-msgstr ""
+msgstr "Fácil. Introduce al Imperio"
 
 #: ../../campaigns/campaigns.conf:40
 msgid ""
@@ -101,11 +102,11 @@ msgid ""
 "March his unprepared army was attacked by 100 Barbarian footmen and was "
 "completely scattered. Only with his bare life he and a handful of his "
 "soldiers survived."
-msgstr ""
+msgstr "Hace seis meses, Lutius - un joven general del Imperio - fue enviado con 150 soldados a la frontera más allá de los bosques del norte donde las tribus bárbaras estaban cruzando a la tierra en poder del Imperio. Su tarea era defender las tierras del Imperio. Al principio, todo estaba en calma. Incluso habló con algunos niños bárbaros y pensó en una vida pacífica - al lado de su antiguo compañero. Empezó a sentirse más seguro y su ejército comenzó a disminuir su atención al enemigo potencial. Esa fue su perdición. Una noche de marzo su ejército fue atacado por 100 hombres bárbaros a pie y fué disperso completamente. Sólo con su vida desnuda él y un puñado de sus soldados sobrevivieron."
 
 #: ../../campaigns/campaigns.conf:43
 msgid "The Run for the Fire"
-msgstr ""
+msgstr "La Carrera por el Fuego"
 
 #: ../../campaigns/campaigns.conf:45
 msgid "Atlanteans"
@@ -113,7 +114,7 @@ msgstr "Atlantes"
 
 #: ../../campaigns/campaigns.conf:47
 msgid "Challenging. Introduces the Atlanteans"
-msgstr ""
+msgstr "Desafiante. Introduce a los Atlantes"
 
 #: ../../campaigns/campaigns.conf:48
 msgid ""
@@ -122,11 +123,11 @@ msgid ""
 " the stuff of legends. Leading the remaining Atlanteans into a new future in"
 " a new part of the World, Jundlina became the most powerful human of her "
 "time, but at a high cost: her humanity and soul."
-msgstr ""
+msgstr "Cuando su Dios pierde la fe en los atlantes y hundió su isla, la lucha de una mujer por la justicia y una segunda oportunidad para su gente se convertirían en la materia de leyendas. Liderando los atlantes restantes a un nuevo futuro en una nueva parte del mundo, Jundlina se convirtió en el más poderoso humano de su tiempo, pero a un alto costo: su humanidad y su alma."
 
 #: ../../campaigns/campaigns.conf:78 ../../campaigns/emp01.wmf/elemental:7
 msgid "The Strands of Malac’ Mor"
-msgstr ""
+msgstr "Las hebras de Malac 'Mor"
 
 #: ../../campaigns/campaigns.conf:83 ../../campaigns/emp02.wmf/elemental:9
 msgid "An Outpost for Exile"
@@ -152,7 +153,7 @@ msgid ""
 "a new life. But his destiny takes his ship into a heavy storm, which nearly "
 "destroys it. Only with a lot of luck he manages to beach his damaged ship on"
 " an unknown desert strand and save his people. For now."
-msgstr ""
+msgstr "Después de perder una batalla importante contra los bárbaros que condujo a la pérdida de una gran parte del territorio del Imperio, Lutius deja Fremil para iniciar una nueva vida. Pero su destino lleva a su barco hacia una fuerte tormenta, que casi la destruye. Sólo con mucha suerte su barco dañado se dirige hacia la playa en un desierto desconocido y salva a su pueblo. Por ahora."
 
 #: ../../campaigns/emp02.wmf/elemental:11
 msgid ""
@@ -160,7 +161,7 @@ msgid ""
 "quest to find a good place for a new beginning. Only a few days later, they "
 "land on a green, Mediterranean island, looking like paradise. Overjoyed, "
 "they set out to explore this new living space."
-msgstr ""
+msgstr "Finalmente el barco fue reparado, Lutius y su pueblo volvieron a la búsqueda de un buen lugar para un nuevo comienzo. Unos pocos días más tarde, desembarcaron en una isla mediterránea verde, parecía el paraíso. Rebosantes de alegría, se dispusieron a explorar este nuevo espacio de vida."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/elemental:8
 #: ../../campaigns/tutorials.conf:15
@@ -171,7 +172,7 @@ msgstr "Control básico "
 msgid ""
 "In this tutorial, you will learn how to navigate in Widelands and how to "
 "build buildings and roads."
-msgstr ""
+msgstr "En este tutorial, aprenderás cómo navegar en Widelands y cómo construir edificios y carreteras."
 
 #: ../../campaigns/tutorial02_warfare.wmf/elemental:8
 #: ../../campaigns/tutorials.conf:19
@@ -182,7 +183,7 @@ msgstr "Guerra"
 msgid ""
 "In this tutorial, you will be taught the secrets of warfare: how to create "
 "soldiers, how to train them and how to lead them in battle."
-msgstr ""
+msgstr "En este tutorial, se te enseñarán los secretos de la guerra: cómo crear soldados, cómo entrenarlos y cómo liderarlos en batalla."
 
 #: ../../campaigns/tutorial03_seafaring.wmf/elemental:8
 #: ../../campaigns/tutorials.conf:23
@@ -193,7 +194,7 @@ msgstr "Marítimo"
 msgid ""
 "In this tutorial, you will get to know seafaring, which is how to handle "
 "ships and ports."
-msgstr ""
+msgstr "En este tutorial, serás marinero, aprenderás cómo manejar buques y puertos."
 
 #: ../../campaigns/tutorial04_economy.wmf/elemental:8
 #: ../../campaigns/tutorials.conf:27
@@ -204,7 +205,7 @@ msgstr "Economía"
 msgid ""
 "In this tutorial, you will learn what option Widelands offers to adjust your"
 " economy. Recommended for players with some experience."
-msgstr ""
+msgstr "En este tutorial, aprenderáa las opciones que Widelands te ofrece para ajustar tu economía. Recomendado para jugadores con poca experiencia."
 
 #: ../../maps/Atoll.wmf/elemental:9
 msgid "Atoll"
@@ -223,7 +224,7 @@ msgid ""
 "It’s a pleasure to settle in the beauty of this fissured countryside. But "
 "the ways to encompass these large territories are long and meandering, so it"
 " is easy to err into the land of the foreign clans."
-msgstr ""
+msgstr "Es un placer instalarse en la belleza de este paisaje fisurado. Pero las formas de abarcar estos grandes territorios son largas y serpenteantes, por lo que es fácil equivocarse en la tierra de los clanes extranjeros."
 
 #: ../../maps/Checkmate.wmf/elemental:7
 msgid "Checkmate"
@@ -234,7 +235,7 @@ msgid ""
 "Whether just one of nature’s strangest features or the creation of a mad "
 "(and game-hungry) god, this weird battleground awaits two opponents for "
 "another confrontation."
-msgstr ""
+msgstr "Si es una de las características más extrañas de la naturaleza o la creación de un loco dios (con hambre de juego), este raro campo de batalla espera dos oponentes para otra confrontación."
 
 #: ../../maps/Comet Island.wmf/elemental:7
 msgid "Comet Island"
@@ -338,7 +339,7 @@ msgid ""
 "your tribe woke up on this island among fire and lava? Until now it seems as"
 " if you are alone, but no-one knows what might happen if you met an opposing"
 " tribe?"
-msgstr ""
+msgstr "¿Es esta una prueba de los dioses o un malvado plan de alguien más, que tu y tu tribu despierten en esta isla entre el fuego y la lava? Hasta ahora parece que estás solo, pero nadie sabe lo que podría pasar si conoces a una tribu opuesta?"
 
 #: ../../maps/Four Castles.wmf/elemental:7
 msgid "Four Castles"
@@ -415,7 +416,7 @@ msgid ""
 "For centuries, you’ve lived peacefully side by side with the other tribe on "
 "the neighboring island. This peace seems to come to an end now – your "
 "neighbor has begun to expand."
-msgstr ""
+msgstr "Durante siglos, has vivido en paz al lado de la otra tribu en la isla vecina. Esta paz parece llegar a su fin ahora - tu vecino ha empezado a expandirse."
 
 #: ../../maps/Kings and Queens.wmf/elemental:9
 msgid "Kings and Queens"
@@ -657,7 +658,7 @@ msgstr ""
 msgid ""
 "Another strange test by the Gods. To reach the other side, there seems to be"
 " no other way but to occupy the land of your enemies."
-msgstr ""
+msgstr "Otra prueba extraña de los dioses. Para llegar al otro lado, no parece haber ninguna otra manera que ocupar la tierra de tus enemigos."
 
 #: ../../maps/The pass through the mountains.wmf/elemental:9
 msgid "The Pass Through the Mountains"
@@ -695,7 +696,7 @@ msgid ""
 "exclusive trade alliance, forcing the other two to do the same. Suddenly, it"
 " seems only a matter of time before the first fights between the harbors "
 "will shatter the peaceful life that has lasted for so long..."
-msgstr ""
+msgstr "Los cuatro puertos poderosos de las Islas Craw han estado negociando sus bienes entre sí por años. Todos necesitaban los recursos que no podían producir en su propio territorio y a cambio proporcionan otros recursos a los que no podrían producirlos. Sobre la base de estos oficios, el comercio amable era común entre los cuatro puertos y las personas que vivían en las islas Craw - hasta hace poco, cuando dos de los puertos se unieron para formar una alianza comercial exclusiva, obligando a los otros dos a hacer lo mismo. De repente, parece sólo cuestión de tiempo antes de que las primeras luchas entre los puertos rompan la vida pacífica que ha durado tanto tiempo ..."
 
 #: ../../maps/Trident of Fire.wmf/elemental:9
 msgid "Trident of Fire"
@@ -774,4 +775,4 @@ msgid ""
 "beginning of days. When your tribe came to this place, you were sure that it"
 " offered enough space for a peaceful life. But can your tribe live in peace "
 "with your neighbors?"
-msgstr ""
+msgstr "Parece que este valle mágico ha sido habitado por bisontes europeos desde el comienzo de los tiempos. Cuando tu tribu llegó a este lugar, estabas seguro que ofrecía espacio suficiente para una vida pacífica. Pero, ¿Puede tu tribu vivir en paz con sus vecinos?"

@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-07 08:28+0000\n"
-"PO-Revision-Date: 2015-11-07 08:29+0000\n"
+"POT-Creation-Date: 2015-11-10 08:45+0000\n"
+"PO-Revision-Date: 2015-11-10 08:46+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -144,212 +144,212 @@ msgstr "Contrôle général du jeu"
 
 #: ../../txts/README.lua:47
 msgid ""
-"To close an open window, right-click on it. To minimize/maximize a window, click\n"
-"on the title bar of that window either with the middle mouse button or with the left\n"
-"mouse button while holding down CTRL."
-msgstr "Pour fermer une fenêtre, faites un clic-droit dessus. Pour réduire/agrandir<br>une fenêtre, cliquez sur la barre de titre de cette fenêtre avec le bouton du<br>milieu de la souris ou le clic gauche en maintenant CTRL appuyé."
+"To close an open window, right-click on it. To minimize/maximize a window, "
+"click on it with the middle mouse button or with the left mouse button while"
+" holding down CTRL."
+msgstr ""
 
-#: ../../txts/README.lua:51
+#: ../../txts/README.lua:49
 msgid ""
 "If you hold CTRL while building a road, flags will be placed automatically.\n"
 "If you hold CTRL while removing a road, all flags up to the first junction are\n"
 "removed."
 msgstr "Si vous maintenez la touche Ctrl tout en construisant une route, les drapeaux seront placés automatiquement.\nSi vous maintenez la touche Ctrl tout en supprimant une route, tous les drapeaux jusqu'à la première \nintersection seront supprimés."
 
-#: ../../txts/README.lua:55
+#: ../../txts/README.lua:53
 msgid ""
 "You can skip confirmation windows for irreversible actions if you hold CTRL\n"
 "while clicking on the action button."
 msgstr "Vous pouvez passer les fenêtres de confirmation pour les actions irréversibles\nsi vous maintenez la touche CTRL en cliquant sur le bouton d'action."
 
-#: ../../txts/README.lua:58
+#: ../../txts/README.lua:56
 msgid "Keyboard shortcuts (in-game)"
 msgstr "Raccourcis clavier (dans le jeu)"
 
-#: ../../txts/README.lua:60
+#: ../../txts/README.lua:58
 msgid "PAGEUP: increases game speed"
 msgstr "PAGEHAUT: augmente la vitesse de jeu"
 
-#: ../../txts/README.lua:61
+#: ../../txts/README.lua:59
 msgid "PAGEDOWN: decreases game speed"
 msgstr "PAGEBAS: baisse la vitesse de jeu"
 
-#: ../../txts/README.lua:62
+#: ../../txts/README.lua:60
 msgid "PAUSE: pauses the game"
 msgstr "PAUSE: met le jeu en pause"
 
-#: ../../txts/README.lua:63
+#: ../../txts/README.lua:61
 msgid "SPACE: toggles if building spaces are shown"
 msgstr "ESPACE: bascule l'affichage des espaces de construction"
 
-#: ../../txts/README.lua:64
+#: ../../txts/README.lua:62
 msgid "M: toggles minimap"
 msgstr "M: active la minicarte"
 
-#: ../../txts/README.lua:65
+#: ../../txts/README.lua:63
 msgid "N: toggles messages (‘news’)"
 msgstr "N: bascule les messages ('news')"
 
-#: ../../txts/README.lua:66
+#: ../../txts/README.lua:64
 msgid "C: toggles census"
 msgstr "C: Afficher/Masquer le recensement"
 
-#: ../../txts/README.lua:67
+#: ../../txts/README.lua:65
 msgid "S: toggles statistics"
 msgstr "S: Afficher/Masquer les statistiques"
 
-#: ../../txts/README.lua:68
+#: ../../txts/README.lua:66
 msgid "I: toggles stock inventory"
 msgstr "I: Affiche/cache l'inventaire du stock"
 
-#: ../../txts/README.lua:69
+#: ../../txts/README.lua:67
 msgid "O: toggles objectives"
 msgstr "O: active les objectifs"
 
-#: ../../txts/README.lua:70
+#: ../../txts/README.lua:68
 msgid "B: toggles building statistics"
 msgstr "B: bascule les statistiques de construction"
 
-#: ../../txts/README.lua:71
+#: ../../txts/README.lua:69
 msgid "F: toggles fullscreen (if supported by the OS)"
 msgstr "F: bascule en plein écran (si le système d'exploitation le supporte)"
 
-#: ../../txts/README.lua:72
+#: ../../txts/README.lua:70
 msgid "Home: centers main mapview on starting location"
 msgstr "Home: centre la vue principale de la carte sur l'emplacement de départ"
 
-#: ../../txts/README.lua:73
+#: ../../txts/README.lua:71
 msgid "(CTRL+) 0-9: Remember and go to previously remembered locations"
 msgstr "(CTRL+) 0-9: Mémoriser et aller à des emplacements mémorisés antérieurement"
 
-#: ../../txts/README.lua:74
+#: ../../txts/README.lua:72
 msgid ",: goes to the previous location"
 msgstr ",: va à l'endroit précédent"
 
-#: ../../txts/README.lua:75
+#: ../../txts/README.lua:73
 msgid ".: goes to the next location"
 msgstr ".: va à l'endroit suivant"
 
-#: ../../txts/README.lua:76
+#: ../../txts/README.lua:74
 msgid "F6: shows the debug console (only in debug-builds)"
 msgstr "F6: affiche la console de déboguage (seulement dans les compilations de déboguage)"
 
-#: ../../txts/README.lua:77
+#: ../../txts/README.lua:75
 msgid "CTRL+F10: quits the game immediately"
 msgstr "CTRL+F10: quitter le jeu immédiatemment"
 
-#: ../../txts/README.lua:78
+#: ../../txts/README.lua:76
 msgid "CTRL+Leftclick: skips confirmation dialogs"
 msgstr "CTRL+Clic-gauche: passe les dialogues de confirmation"
 
-#: ../../txts/README.lua:79
+#: ../../txts/README.lua:77
 msgid "CTRL+F11: takes a screenshot"
 msgstr "CTRL+F11: Prend une capture d'écran"
 
-#: ../../txts/README.lua:81
+#: ../../txts/README.lua:79
 msgid ""
 "In the message window, the following additional shortcuts are available:"
 msgstr "Dans la fenêtre de message, vous pouvez utiliser les raccourcis clavier suivants :"
 
-#: ../../txts/README.lua:83
+#: ../../txts/README.lua:81
 msgid "0: shows all messages"
 msgstr "0: montre tous les messages"
 
-#: ../../txts/README.lua:84
+#: ../../txts/README.lua:82
 msgid "1: shows geologists' messages only"
 msgstr "1: montre les  messages des géologues seulement"
 
-#: ../../txts/README.lua:85
+#: ../../txts/README.lua:83
 msgid "2: shows economy messages only"
 msgstr "2: montre les  messages de l'économie seulement"
 
-#: ../../txts/README.lua:86
+#: ../../txts/README.lua:84
 msgid "3: shows seafaring messages only"
 msgstr "3: montre les  messages maritimes seulement"
 
-#: ../../txts/README.lua:87
+#: ../../txts/README.lua:85
 msgid "4: shows warfare messages only"
 msgstr "4: montre les  messages militaires seulement"
 
-#: ../../txts/README.lua:88
+#: ../../txts/README.lua:86
 msgid "5: shows scenario messages only"
 msgstr "5: montre les  messages du scénario seulement"
 
-#: ../../txts/README.lua:89
+#: ../../txts/README.lua:87
 msgid "G: jumps to the location corresponding to the current message"
 msgstr "G: saute vers la location du message actuel"
 
-#: ../../txts/README.lua:90
+#: ../../txts/README.lua:88
 msgid "DELETE: archives/restores the current message"
 msgstr "Suppr: archive/restitue le message actuel"
 
-#: ../../txts/README.lua:92
+#: ../../txts/README.lua:90
 msgid "Online Help"
 msgstr "Aide en Ligne"
 
-#: ../../txts/README.lua:94
+#: ../../txts/README.lua:92
 msgid ""
 "If you need documentation or help for Widelands or the Widelands Editor, be\n"
 "sure to visit our homepage. You can find an up to date online help in our Wiki\n"
 "and a detailed description of the tribe economies in our online encyclopedia."
 msgstr "Si vous avez besoin de documentation ou d'aide pour Widelands ou l'éditeur Widelands,\nn'oubliez pas de visiter notre page d'accueil. Vous pouvez trouver une aide en ligne actualisée \ndans notre Wiki et une description détaillée de l'économie tribale dans notre encyclopédie en ligne."
 
-#: ../../txts/README.lua:98
+#: ../../txts/README.lua:96
 msgid "Reporting Bugs"
 msgstr "Rapporter des bogues"
 
-#: ../../txts/README.lua:100
+#: ../../txts/README.lua:98
 msgid "If you encounter a bug, please report it to our bugtracker:"
 msgstr "Si vous rencontrez un bogue, merci de le reporter sur notre bugtracker :"
 
-#: ../../txts/README.lua:104
+#: ../../txts/README.lua:102
 msgid "Please provide enough background information. Tell us:"
 msgstr "Veuillez fournir le contexte du problème. Dites nous :"
 
-#: ../../txts/README.lua:106
+#: ../../txts/README.lua:104
 msgid "- Detailed steps on how to trigger the bug, if possible."
 msgstr "- Étapes détaillées sur la manière de déclencher le bogue, si possible."
 
-#: ../../txts/README.lua:108
+#: ../../txts/README.lua:106
 msgid ""
 "- What you expected to happen when performing the steps and what actually "
 "happened."
 msgstr "- Qu'attendiez-vous qu'il se passe en effectuant les étapes et que s'est-il réellement passé."
 
-#: ../../txts/README.lua:110
+#: ../../txts/README.lua:108
 msgid ""
 "- Which version of Widelands you are running (i.e. either the build number or\n"
 "the revision number if you are running a development version or a daily build.)"
 msgstr "- Quelle version de Widelands vous exécutez (c.à.d soit le numéro de compilation ou\nle numéro de révision si vous exécutez une version de développement ou une compilation quotidienne.)"
 
-#: ../../txts/README.lua:113
+#: ../../txts/README.lua:111
 msgid ""
 "- Please also include which operating system you are running Widelands on as\n"
 "some bugs can be platform specific."
 msgstr "- Veuillez inclure également le système d'exploitation sur lequel vous exécutez \nWidelands, quelques bogues pouvant être spécifiques à la plate-forme."
 
-#: ../../txts/README.lua:116
+#: ../../txts/README.lua:114
 msgid "- Which map you were playing when the bug occurred."
 msgstr "- Quelle carte vous jouiez lorsque le bogue est survenu."
 
-#: ../../txts/README.lua:118
+#: ../../txts/README.lua:116
 msgid ""
 "- If the bug concerns something not being displayed correctly or if it helps\n"
 "demonstrate the issue, please include one or more screenshots."
 msgstr "- Si le bogue concerne quelque chose qui ne s'affiche pas correctement ou \nsi cela aide à démontrer le problème, veuillez inclure une ou plusieurs captures d'écran."
 
-#: ../../txts/README.lua:121
+#: ../../txts/README.lua:119
 msgid ""
 "- If you have a save game or replay demonstrating the issue (for instance\n"
 "crashes where it can be hard to tell exactly what is triggering it), please\n"
 "include that too. For more information, see the section on Replays below."
 msgstr "- Si vous avez une sauvegarde de jeu ou replay montrant le problème \n(par exemple les plantages où il peut être difficile de dire exactement\n ce qui les déclenche), merci de les inclure. Pour plus d'informations,\n voir la section sur les replays ci-dessous."
 
-#: ../../txts/README.lua:125
+#: ../../txts/README.lua:123
 msgid "Replays"
 msgstr "Replays"
 
-#: ../../txts/README.lua:127
+#: ../../txts/README.lua:125
 msgid ""
 "Widelands records every game you play in two files. One of these files has a\n"
 ".wrpl.wgf extension and contains an initial savegame. The other file has a\n"
@@ -358,7 +358,7 @@ msgid ""
 "you the time you started the game."
 msgstr "Widelands enregistre chaque partie que vous jouez dans deux fichiers.\n Un de ces fichiers a une extension .wrpl.wgf et contient la sauvegarde du jeu\n initial. L'autre fichier possède une extension. wrpl et contient toutes les commandes\n qui ont été émises par l'ensemble des acteurs, tels que la construction d'une route \nou l'attaque d'un ennemi. Le reste des noms de fichiers vous donnera l'heure à laquelle \nvous avez commencé la partie."
 
-#: ../../txts/README.lua:133
+#: ../../txts/README.lua:131
 msgid ""
 "Using the Watch Replay option in the main menu, a previously played game will\n"
 "be precisely reconstructed for you to watch. Note, however, that even small\n"
@@ -368,7 +368,7 @@ msgid ""
 "different version of the game."
 msgstr "Utilisez le bouton Voir Replay du menu principal, un jeu précédent sera<br>\nprécisément reconstruit pour que vous puissiez le visionner. Notez, cependant,<br>\nque même de petits changements dans les fichiers de données<br>\nou sur l'exécutable de Widelands peuvent causer au replays<br>\nde devenir incompatibles et 'd'aller hors de synchronisation'.<br>\nCela est similaire au réseaux qui souffrent de problèmes de désynchronisation<br>\nsi un des joueurs à une différente version du jeu."
 
-#: ../../txts/README.lua:140
+#: ../../txts/README.lua:138
 msgid ""
 "Replays are a very useful tool to find bugs in the game logic, so they\n"
 "can be useful as attachments to bug reports. The replay files are saved in the\n"

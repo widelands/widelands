@@ -140,22 +140,22 @@ struct SoldierMapDescr {
 };
 
 using SoldiersMap = std::map<SoldierMapDescr, uint32_t>;
-using WaresMap = std::map<Widelands::WareIndex, uint32_t>;
-using WorkersMap = std::map<Widelands::WareIndex, uint32_t>;
+using WaresMap = std::map<Widelands::DescriptionIndex, uint32_t>;
+using WorkersMap = std::map<Widelands::DescriptionIndex, uint32_t>;
 using SoldierAmount = std::pair<SoldierMapDescr, uint32_t>;
-using WorkerAmount = std::pair<Widelands::WareIndex, uint32_t>;
+using WorkerAmount = std::pair<Widelands::DescriptionIndex, uint32_t>;
 using PlrInfluence = std::pair<uint8_t, uint32_t>;
-using WaresSet = std::set<Widelands::WareIndex>;
-using WorkersSet = std::set<Widelands::WareIndex>;
+using WaresSet = std::set<Widelands::DescriptionIndex>;
+using WorkersSet = std::set<Widelands::DescriptionIndex>;
 using SoldiersList = std::vector<Widelands::Soldier *>;
 
 // parses the get argument for all classes that can be asked for their
-// current wares. Returns a set with all WareIndexes that must be considered.
+// current wares. Returns a set with all DescriptionIndices that must be considered.
 #define GET_INDEX(type) \
-	WareIndex m_get_ ## type ## _index \
+	DescriptionIndex m_get_ ## type ## _index \
 		(lua_State * L, const TribeDescr& tribe,  const std::string & what) \
 	{ \
-		WareIndex idx = tribe. type ## _index(what); \
+		DescriptionIndex idx = tribe. type ## _index(what); \
 		if (!tribe.has_ ## type (idx)) \
 			report_error(L, "Invalid " #type ": <%s>", what.c_str()); \
 		return idx; \
@@ -177,7 +177,7 @@ btype ##sSet m_parse_get_##type##s_arguments \
 	if (lua_isstring(L, 2)) { \
 		std::string what = luaL_checkstring(L, -1); \
 		if (what == "all") { \
-			for (const WareIndex& i : tribe.type##s()) { \
+			for (const DescriptionIndex& i : tribe.type##s()) { \
 				rv.insert(i); \
 			} \
 		} else { \
@@ -232,7 +232,7 @@ WaresMap count_wares_on_flag_(Flag& f, const Tribes& tribes) {
 	WaresMap rv;
 
 	for (const WareInstance * ware : f.get_wares()) {
-		WareIndex i = tribes.ware_index(ware->descr().name());
+		DescriptionIndex i = tribes.ware_index(ware->descr().name());
 		if (!rv.count(i))
 			rv.insert(Widelands::WareAmount(i, 1));
 		else
@@ -287,7 +287,7 @@ int do_get_workers(lua_State* L, const PlayerImmovable& pi, const WorkersMap& va
 
 	WorkersMap c_workers;
 	for (const Worker* w : pi.get_workers()) {
-		WareIndex i = tribe.worker_index(w->descr().name());
+		DescriptionIndex i = tribe.worker_index(w->descr().name());
 		if (!c_workers.count(i)) {
 			c_workers.insert(WorkerAmount(i, 1));
 		} else {
@@ -305,7 +305,7 @@ int do_get_workers(lua_State* L, const PlayerImmovable& pi, const WorkersMap& va
 	if (!return_number)
 		lua_newtable(L);
 
-	for (const WareIndex& i : set) {
+	for (const DescriptionIndex& i : set) {
 		uint32_t cnt = 0;
 		if (c_workers.count(i))
 			cnt = c_workers[i];
@@ -332,7 +332,7 @@ int do_set_workers(lua_State* L, PlayerImmovable* pi, const WorkersMap& valid_wo
 
 	WorkersMap c_workers;
 	for (const Worker* w : pi->get_workers()) {
-		WareIndex i = tribe.worker_index(w->descr().name());
+		DescriptionIndex i = tribe.worker_index(w->descr().name());
 		if (!c_workers.count(i))
 			c_workers.insert(WorkerAmount(i, 1));
 		else
@@ -992,13 +992,13 @@ int LuaMap::place_immovable(lua_State * const L) {
 
 	BaseImmovable * m = nullptr;
 	if (from_where == "world") {
-		WareIndex const imm_idx = egbase.world().get_immovable_index(objname);
+		DescriptionIndex const imm_idx = egbase.world().get_immovable_index(objname);
 		if (imm_idx == Widelands::INVALID_INDEX)
 			report_error(L, "Unknown world immovable <%s>", objname.c_str());
 
 		m = &egbase.create_immovable(c->coords(), imm_idx, MapObjectDescr::OwnerType::kWorld);
 	} else if (from_where == "tribes") {
-		WareIndex const imm_idx = egbase.tribes().immovable_index(objname);
+		DescriptionIndex const imm_idx = egbase.tribes().immovable_index(objname);
 		if (imm_idx == Widelands::INVALID_INDEX)
 			report_error(L, "Unknown tribes immovable <%s>", objname.c_str());
 
@@ -1090,7 +1090,7 @@ void LuaTribeDescription::__unpersist(lua_State* L) {
 	std::string name;
 	UNPERS_STRING("name", name);
 	const Tribes& tribes = get_egbase(L).tribes();
-	WareIndex idx = tribes.safe_tribe_index(name);
+	DescriptionIndex idx = tribes.safe_tribe_index(name);
 	set_description_pointer(tribes.get_tribe_descr(idx));
 }
 
@@ -1109,7 +1109,7 @@ void LuaTribeDescription::__unpersist(lua_State* L) {
 int LuaTribeDescription::get_buildings(lua_State * L) {
 	lua_newtable(L);
 	int counter = 0;
-	for (BuildingIndex building : get()->buildings()) {
+	for (DescriptionIndex building : get()->buildings()) {
 		lua_pushinteger(L, ++counter);
 		lua_pushstring(L, get_egbase(L).tribes().get_building_descr(building)->name());
 		lua_settable(L, -3);
@@ -1231,7 +1231,7 @@ int LuaTribeDescription::get_soldier(lua_State * L) {
 int LuaTribeDescription::get_wares(lua_State * L) {
 	lua_newtable(L);
 	int counter = 0;
-	for (WareIndex ware : get()->wares()) {
+	for (DescriptionIndex ware : get()->wares()) {
 		lua_pushinteger(L, ++counter);
 		lua_pushstring(L, get_egbase(L).tribes().get_ware_descr(ware)->name());
 		lua_settable(L, -3);
@@ -1248,7 +1248,7 @@ int LuaTribeDescription::get_wares(lua_State * L) {
 int LuaTribeDescription::get_workers(lua_State * L) {
 	lua_newtable(L);
 	int counter = 0;
-	for (WareIndex worker : get()->workers()) {
+	for (DescriptionIndex worker : get()->workers()) {
 		lua_pushinteger(L, ++counter);
 		lua_pushstring(L, get_egbase(L).tribes().get_worker_descr(worker)->name());
 		lua_settable(L, -3);
@@ -1267,7 +1267,7 @@ int LuaTribeDescription::get_workers(lua_State * L) {
 */
 int LuaTribeDescription::has_building(lua_State * L) {
 	const std::string buildingname = luaL_checkstring(L, 2);
-	const BuildingIndex index = get_egbase(L).tribes().building_index(buildingname);
+	const DescriptionIndex index = get_egbase(L).tribes().building_index(buildingname);
 	lua_pushboolean(L, get()->has_building(index));
 	return 1;
 }
@@ -1282,7 +1282,7 @@ int LuaTribeDescription::has_building(lua_State * L) {
 */
 int LuaTribeDescription::has_ware(lua_State * L) {
 	const std::string warename = luaL_checkstring(L, 2);
-	const WareIndex index = get_egbase(L).tribes().ware_index(warename);
+	const DescriptionIndex index = get_egbase(L).tribes().ware_index(warename);
 	lua_pushboolean(L, get()->has_ware(index));
 	return 1;
 }
@@ -1298,7 +1298,7 @@ int LuaTribeDescription::has_ware(lua_State * L) {
 */
 int LuaTribeDescription::has_worker(lua_State * L) {
 	const std::string workername = luaL_checkstring(L, 2);
-	const WareIndex index = get_egbase(L).tribes().worker_index(workername);
+	const DescriptionIndex index = get_egbase(L).tribes().worker_index(workername);
 	lua_pushboolean(L, get()->has_worker(index));
 	return 1;
 }
@@ -1455,7 +1455,7 @@ void LuaBuildingDescription::__unpersist(lua_State* L) {
 	std::string name;
 	UNPERS_STRING("name", name);
 	const Tribes& tribes = get_egbase(L).tribes();
-	BuildingIndex idx = tribes.safe_building_index(name.c_str());
+	DescriptionIndex idx = tribes.safe_building_index(name.c_str());
 	set_description_pointer(tribes.get_building_descr(idx));
 }
 
@@ -1538,7 +1538,7 @@ int LuaBuildingDescription::get_enhanced(lua_State * L) {
 */
 int LuaBuildingDescription::get_enhanced_from(lua_State * L) {
 	if (get()->is_enhanced()) {
-		const BuildingIndex& enhanced_from = get()->enhanced_from();
+		const DescriptionIndex& enhanced_from = get()->enhanced_from();
 		assert(get_egbase(L).tribes().building_exists(enhanced_from));
 		return upcasted_map_object_descr_to_lua(L, get_egbase(L).tribes().get_building_descr(enhanced_from));
 	}
@@ -1562,7 +1562,7 @@ int LuaBuildingDescription::get_enhancement_cost(lua_State * L) {
 		(RO) a building description that this building can enhance to.
 */
 int LuaBuildingDescription::get_enhancement(lua_State * L) {
-	const BuildingIndex enhancement = get()->enhancement();
+	const DescriptionIndex enhancement = get()->enhancement();
 	if (enhancement == INVALID_INDEX) {
 		return 0;
 	}
@@ -1827,7 +1827,7 @@ int LuaProductionSiteDescription::consumed_wares(lua_State * L) {
 		for (const Widelands::ProductionProgram::WareTypeGroup& group: program.consumed_wares()) {
 			lua_pushnumber(L, ++counter);
 			lua_newtable(L);
-			for (const WareIndex& ware_index : group.first) {
+			for (const DescriptionIndex& ware_index : group.first) {
 				lua_pushstring(L, get_egbase(L).tribes().get_ware_descr(ware_index)->name());
 				lua_pushnumber(L, group.second);
 				lua_settable(L, -3);
@@ -2270,7 +2270,7 @@ void LuaWareDescription::__persist(lua_State* L) {
 void LuaWareDescription::__unpersist(lua_State* L) {
 	std::string name;
 	UNPERS_STRING("name", name);
-	WareIndex idx = get_egbase(L).tribes().safe_ware_index(name.c_str());
+	DescriptionIndex idx = get_egbase(L).tribes().safe_ware_index(name.c_str());
 	set_description_pointer(get_egbase(L).tribes().get_ware_descr(idx));
 }
 
@@ -2290,7 +2290,7 @@ void LuaWareDescription::__unpersist(lua_State* L) {
 int LuaWareDescription::get_consumers(lua_State * L) {
 	lua_newtable(L);
 	int index = 1;
-	for (const BuildingIndex& building_index : get()->consumers()) {
+	for (const DescriptionIndex& building_index : get()->consumers()) {
 		lua_pushint32(L, index++);
 		upcasted_map_object_descr_to_lua(L, get_egbase(L).tribes().get_building_descr(building_index));
 		lua_rawset(L, -3);
@@ -2321,7 +2321,7 @@ int LuaWareDescription::is_construction_material(lua_State * L) {
 	std::string tribename = luaL_checkstring(L, -1);
 	const Tribes& tribes = get_egbase(L).tribes();
 	if (tribes.tribe_exists(tribename)) {
-		const WareIndex& ware_index = tribes.safe_ware_index(get()->name());
+		const DescriptionIndex& ware_index = tribes.safe_ware_index(get()->name());
 		int tribeindex = tribes.tribe_index(tribename);
 		lua_pushboolean(L, tribes.get_tribe_descr(tribeindex)->is_construction_material(ware_index));
 	} else {
@@ -2340,7 +2340,7 @@ int LuaWareDescription::is_construction_material(lua_State * L) {
 int LuaWareDescription::get_producers(lua_State * L) {
 	lua_newtable(L);
 	int index = 1;
-	for (const BuildingIndex& building_index : get()->producers()) {
+	for (const DescriptionIndex& building_index : get()->producers()) {
 		lua_pushint32(L, index++);
 		upcasted_map_object_descr_to_lua(L, get_egbase(L).tribes().get_building_descr(building_index));
 		lua_rawset(L, -3);
@@ -2383,7 +2383,7 @@ void LuaWorkerDescription::__unpersist(lua_State* L) {
 	std::string name;
 	UNPERS_STRING("name", name);
 	const Tribes& tribes = get_egbase(L).tribes();
-	WareIndex idx = tribes.safe_worker_index(name.c_str());
+	DescriptionIndex idx = tribes.safe_worker_index(name.c_str());
 	set_description_pointer(tribes.get_worker_descr(idx));
 }
 
@@ -2401,7 +2401,7 @@ void LuaWorkerDescription::__unpersist(lua_State* L) {
 		to or :const:`nil` if it never levels up.
 */
 int LuaWorkerDescription::get_becomes(lua_State * L) {
-	const WareIndex becomes_index = get()->becomes();
+	const DescriptionIndex becomes_index = get()->becomes();
 	if (becomes_index == INVALID_INDEX) {
 		lua_pushnil(L);
 		return 1;
@@ -2914,7 +2914,7 @@ int LuaFlag::set_wares(lua_State * L)
 
 	uint32_t nwares = 0;
 
-	for (const std::pair<Widelands::WareIndex, uint32_t>& ware : c_wares) {
+	for (const std::pair<Widelands::DescriptionIndex, uint32_t>& ware : c_wares) {
 		// all wares currently on the flag without a setpoint should be removed
 		if (!setpoints.count(ware.first))
 			setpoints.insert(Widelands::WareAmount(ware.first, 0));
@@ -2922,7 +2922,7 @@ int LuaFlag::set_wares(lua_State * L)
 	}
 
 	// The idea is to change as little as possible on this flag
-	for (const std::pair<Widelands::WareIndex, uint32_t>& sp : setpoints) {
+	for (const std::pair<Widelands::DescriptionIndex, uint32_t>& sp : setpoints) {
 		uint32_t cur = 0;
 		WaresMap::iterator i = c_wares.find(sp.first);
 		if (i != c_wares.end())
@@ -2972,7 +2972,7 @@ int LuaFlag::get_wares(lua_State * L) {
 	if (wares_set.size() == flag->owner().tribe().get_nrwares()) { // Want all returned
 		wares_set.clear();
 
-		for (const std::pair<Widelands::WareIndex, uint32_t>& ware : wares) {
+		for (const std::pair<Widelands::DescriptionIndex, uint32_t>& ware : wares) {
 			wares_set.insert(ware.first);
 		}
 	}
@@ -2980,7 +2980,7 @@ int LuaFlag::get_wares(lua_State * L) {
 	if (!return_number)
 		lua_newtable(L);
 
-	for (const Widelands::WareIndex& ware : wares_set) {
+	for (const Widelands::DescriptionIndex& ware : wares_set) {
 		uint32_t count = 0;
 		if (wares.count(ware))
 			count = wares[ware];
@@ -3546,7 +3546,7 @@ int LuaProductionSite::set_wares(lua_State * L) {
 	for (const WareAmount& input_ware : ps->descr().inputs()) {
 		valid_wares.insert(input_ware.first);
 	}
-	for (const std::pair<Widelands::WareIndex, uint32_t>& sp : setpoints) {
+	for (const std::pair<Widelands::DescriptionIndex, uint32_t>& sp : setpoints) {
 		if (!valid_wares.count(sp.first)) {
 			report_error(
 				L, "<%s> can't be stored in this building: %s!",
@@ -3584,7 +3584,7 @@ int LuaProductionSite::get_wares(lua_State * L) {
 	if (!return_number)
 		lua_newtable(L);
 
-	for (const Widelands::WareIndex& ware : wares_set) {
+	for (const Widelands::DescriptionIndex& ware : wares_set) {
 		uint32_t cnt = 0;
 		if (valid_wares.count(ware))
 			cnt = ps->waresqueue(ware).get_filled();
@@ -4548,8 +4548,8 @@ int LuaField::set_terr(lua_State* L) {
 	const char* name = luaL_checkstring(L, -1);
 	EditorGameBase& egbase = get_egbase(L);
 	const World& world = egbase.world();
-	const TerrainIndex td = world.terrains().get_index(name);
-	if (td == static_cast<TerrainIndex>(-1))
+	const DescriptionIndex td = world.terrains().get_index(name);
+	if (td == static_cast<DescriptionIndex>(-1))
 		report_error(L, "Unknown terrain '%s'", name);
 
 	egbase.map().change_terrain(world, TCoords<FCoords>(fcoords(L), TCoords<FCoords>::R), td);
@@ -4569,9 +4569,9 @@ int LuaField::set_terd(lua_State * L) {
 	const char * name = luaL_checkstring(L, -1);
 	EditorGameBase& egbase = get_egbase(L);
 	const World& world = egbase.world();
-	const TerrainIndex td =
+	const DescriptionIndex td =
 		world.terrains().get_index(name);
-	if (td == static_cast<TerrainIndex>(INVALID_INDEX))
+	if (td == static_cast<DescriptionIndex>(INVALID_INDEX))
 		report_error(L, "Unknown terrain '%s'", name);
 
 	egbase.map().change_terrain

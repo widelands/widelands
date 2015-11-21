@@ -43,12 +43,12 @@ private:
 		EncyclopediaEntry(const EncyclopediaEntry& other)
 		   : EncyclopediaEntry(other.index, other.descname, other.icon) {
 		}
-		EncyclopediaEntry(const Widelands::WareIndex _index,
+		EncyclopediaEntry(const Widelands::DescriptionIndex _index,
 		                  const std::string& _descname,
 		                  const Image* _icon)
 		   : index(_index), descname(_descname), icon(_icon) {
 		}
-		Widelands::WareIndex index;
+		Widelands::DescriptionIndex index;
 		std::string descname;
 		const Image* icon;
 
@@ -78,7 +78,7 @@ private:
 	// Main contents boxes for each tab
 	std::map<std::string, std::unique_ptr<UI::Box>> boxes_;
 	// A tab's table of contents
-	std::map<std::string, std::unique_ptr<UI::Listselect<Widelands::WareIndex>>> lists_;
+	std::map<std::string, std::unique_ptr<UI::Listselect<Widelands::DescriptionIndex>>> lists_;
 	// The contents shown when an entry is selected in a tab
 	std::map<std::string, std::unique_ptr<UI::MultilineTextarea>> contents_;
 };

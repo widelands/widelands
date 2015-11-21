@@ -6,6 +6,8 @@ wl_library(ui_fsmenu
     campaign_select.h
     fileview.cc
     fileview.h
+    helpwindow.cc
+    helpwindow.h
     internet_lobby.cc
     internet_lobby.h
     intro.cc

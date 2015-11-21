@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2011, 2015 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -235,7 +235,7 @@ void SoldierPanel::think()
 	}
 
 	// Third pass: animate icons
-	int32_t curtime = WLApplication::get()->get_time();
+	int32_t curtime = SDL_GetTicks();
 	int32_t dt = std::min(std::max(curtime - m_last_animate_time, 0), 1000);
 	int32_t maxdist = dt * AnimateSpeed / 1000;
 	m_last_animate_time = curtime;

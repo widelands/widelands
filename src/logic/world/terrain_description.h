@@ -78,7 +78,7 @@ public:
 	Type get_is() const;
 
 	/// Returns the valid resource with the given index.
-	ResourceIndex get_valid_resource(uint8_t index) const;
+	DescriptionIndex get_valid_resource(uint8_t index) const;
 
 	/// Returns the number of valid resources.
 	int get_num_valid_resources() const;
