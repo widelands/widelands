@@ -397,6 +397,14 @@ void BaseListselect::draw(RenderTarget & dst)
 		const Image* entry_text_im = UI::g_fh1->render(as_uifont(er.name, UI_FONT_SIZE_SMALL,
 																					er.use_clr ? er.clr : UI_FONT_CLR_FG));
 		UI::correct_for_align(alignment, entry_text_im->width(), entry_text_im->height(), &point);
+
+		// Fix vertical position for mixed font heights
+		if (get_lineheight() > static_cast<uint32_t>(entry_text_im->height())) {
+			point.y += (get_lineheight() - entry_text_im->height()) / 2;
+		} else {
+			point.y -= (entry_text_im->height() - get_lineheight()) / 2;
+		}
+
 		dst.blitrect(point, entry_text_im, Rect(0, 0, get_eff_w(), m_lineheight));
 
 		y += lineheight;
