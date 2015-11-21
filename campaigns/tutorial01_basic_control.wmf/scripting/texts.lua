@@ -350,7 +350,7 @@ quarry_not_connected = {
 quarry_illegally_destroyed = {
    title = _"You Destroyed the Construction Site!",
    body = rt(
-      p(_[[It seems like you destroyed a construction site for a quarry we wanted to build. Since we need the stones, I suggest you reload the game from a previous savegame. Luckily, these are created from time to time. To do so, you have to go back to the main menu and choose ‘Single Player’ → ‘Load Game’. And please be a bit more careful next time.]])
+      p(_[[It seems like you destroyed a construction site for a quarry we wanted to build. Since we need the granite, I suggest you reload the game from a previous savegame. Luckily, these are created from time to time. To do so, you have to go back to the main menu and choose ‘Single Player’ → ‘Load Game’. And please be a bit more careful next time.]])
    ),
    w = 350,
    h = 250
@@ -444,7 +444,7 @@ closing_msg_window_01 = {
    field = first_quarry_field,
    title = _"Closing Windows",
    body = rt(
-      p(_[[Well done! Let’s see how messages work in a real game, shall we? For this, I’ll take all rocks away from the poor stonemasons in the quarries. They will then send a message each that they can’t find any in their working areas the next time they try to do some work.]])
+      p(_[[Well done! Let’s see how messages work in a real game, shall we? For this, I’ll take all rocks away from the poor stonemasons in the quarries. They will then send a message each that they can’t find any in their work areas the next time they try to do some work.]])
    ),
    h = 300,
    w = 350

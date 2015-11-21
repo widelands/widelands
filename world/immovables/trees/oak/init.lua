@@ -93,7 +93,7 @@ world:new_immovable_type{
          "seed=oak_summer_sapling",
       },
       fall = {
-         "animate=falling 1200",
+         "animate=falling 1400",
          "transform=fallentree",
       },
    },
@@ -113,6 +113,7 @@ world:new_immovable_type{
          directory = dirname .. "old/",
          hotspot = { 10, 60 },
          fps = 10,
+         play_once = true
       },
    },
 }

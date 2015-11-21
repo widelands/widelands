@@ -91,9 +91,9 @@ public:
 
 	// For leveling
 	int32_t get_needed_experience() const {return needed_experience_;}
-	WareIndex becomes() const {return becomes_;}
-	WareIndex worker_index() const;
-	bool can_act_as(WareIndex) const;
+	DescriptionIndex becomes() const {return becomes_;}
+	DescriptionIndex worker_index() const;
+	bool can_act_as(DescriptionIndex) const;
 
 	Worker & create
 		(EditorGameBase &, Player &, PlayerImmovable *, Coords) const;
@@ -121,7 +121,7 @@ protected:
 	/**
 	 * Type that this worker can become, i.e. level up to (or null).
 	 */
-	WareIndex becomes_;
+	DescriptionIndex becomes_;
 	Programs  programs_;
 private:
 	const EditorGameBase& egbase_;

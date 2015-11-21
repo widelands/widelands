@@ -1,13 +1,12 @@
-# Automatically created by Widelands bzr6718[widelands] (Debug)
+# Automatically created by Widelands bzr7574[artifacts] (Debug)
 
 [global]
 packet_version="1"
 map_w="192"
 map_h="128"
 nr_players="2"
-world="greenland"
 name=_"Twin Lagoons"
 author="fk"
 descr=_"When the wind swelled up and the first dunes were formed on these abandoned twin lagoons, nobody could have expected that two tribes that are desperately searching for more resources to support their endlessly ongoing wars would end up in this forgotten place at the same time and for the same well-known reason. Defend your transport lines or use ships to bypass the opponent. Then remove all enemy activity."
 hint=
-tags="1v1,official,seafaring"
+tags="1v1,artifacts,official,seafaring"

@@ -106,6 +106,8 @@ wl_library(wui
     game_tips.h
     general_statistics_menu.cc
     general_statistics_menu.h
+    helpwindow.cc
+    helpwindow.h
     interactive_base.cc
     interactive_base.h
     interactive_gamebase.cc

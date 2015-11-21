@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2009, 2015 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -158,7 +158,7 @@ public:
 	// the internal time as well. the game_time_var represents the current game
 	// time, which we update and with which we must mess around (to run all
 	// queued cmd.s) and which we update (add the interval)
-	int32_t run_queue(int32_t interval, int32_t & game_time_var);
+	int32_t run_queue(int32_t interval, uint32_t & game_time_var);
 
 	void flush(); // delete all commands in the queue now
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2011, 2015 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -91,7 +91,7 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
 #else
      m_display_flags(0),
 #endif
-     m_lastframe(WLApplication::get()->get_time()),
+     m_lastframe(SDL_GetTicks()),
      m_frametime(0),
      m_avg_usframetime(0),
      m_jobid(0),
@@ -305,7 +305,7 @@ Called once per frame by the UI code
 void InteractiveBase::think()
 {
 	// Timing
-	uint32_t curframe = WLApplication::get()->get_time();
+	uint32_t curframe = SDL_GetTicks();
 
 	m_frametime = curframe - m_lastframe;
 	m_avg_usframetime = ((m_avg_usframetime * 15) + (m_frametime * 1000)) / 16;

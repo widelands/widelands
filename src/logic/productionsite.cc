@@ -81,7 +81,7 @@ ProductionSiteDescr::ProductionSiteDescr
 	if (table.has_key("outputs")) {
 		for (const std::string& output : table.get_table("outputs")->array_entries<std::string>()) {
 			try {
-				WareIndex idx = egbase.tribes().ware_index(output);
+				DescriptionIndex idx = egbase.tribes().ware_index(output);
 				if (egbase.tribes().ware_exists(idx)) {
 					if (m_output_ware_types.count(idx)) {
 						throw wexception("this ware type has already been declared as an output");
@@ -112,14 +112,14 @@ ProductionSiteDescr::ProductionSiteDescr
 				if (amount < 1 || 255 < amount) {
 					throw wexception("count is out of range 1 .. 255");
 				}
-				WareIndex const idx = egbase.tribes().ware_index(ware_name);
+				DescriptionIndex const idx = egbase.tribes().ware_index(ware_name);
 				if (egbase.tribes().ware_exists(idx)) {
 					for (const WareAmount& temp_inputs : inputs()) {
 						if (temp_inputs.first == idx) {
 							throw wexception("duplicated");
 						}
 					}
-					m_inputs.push_back(std::pair<WareIndex, uint8_t>(idx, amount));
+					m_inputs.push_back(std::pair<DescriptionIndex, uint8_t>(idx, amount));
 				} else {
 					throw wexception
 						("tribes do not define a ware type with this name");
@@ -141,14 +141,14 @@ ProductionSiteDescr::ProductionSiteDescr
 				if (amount < 1 || 255 < amount) {
 					throw wexception("count is out of range 1 .. 255");
 				}
-				WareIndex const woi = egbase.tribes().worker_index(worker_name);
+				DescriptionIndex const woi = egbase.tribes().worker_index(worker_name);
 				if (egbase.tribes().worker_exists(woi)) {
 					for (const WareAmount& wp : working_positions()) {
 						if (wp.first == woi) {
 							throw wexception("duplicated");
 						}
 					}
-					m_working_positions.push_back(std::pair<WareIndex, uint32_t>(woi, amount));
+					m_working_positions.push_back(std::pair<DescriptionIndex, uint32_t>(woi, amount));
 				} else {
 					throw wexception("invalid");
 				}
@@ -289,18 +289,18 @@ void ProductionSite::update_statistics_string(std::string* s) {
  * Detect if the workers are experienced enough for an upgrade
  * @param idx Index of the enhancement
  */
-bool ProductionSite::has_workers(BuildingIndex targetSite, Game & /* game */)
+bool ProductionSite::has_workers(DescriptionIndex targetSite, Game & /* game */)
 {
 	// bld holds the description of the building we want to have
 	if (upcast(ProductionSiteDescr const, bld, owner().tribe().get_building_descr(targetSite))) {
 		// if he has workers
 		if (bld->nr_working_positions()) {
-			WareIndex need = bld->working_positions()[0].first;
+			DescriptionIndex need = bld->working_positions()[0].first;
 			for (unsigned int i = 0; i < descr().nr_working_positions(); ++i) {
 				if (!working_positions()[i].worker) {
 					return false; // no one is in this house
 				} else {
-					WareIndex have = working_positions()[i].worker->descr().worker_index();
+					DescriptionIndex have = working_positions()[i].worker->descr().worker_index();
 					if (owner().tribe().get_worker_descr(have)->can_act_as(need)) {
 						return true; // he found a lead worker
 					}
@@ -313,7 +313,7 @@ bool ProductionSite::has_workers(BuildingIndex targetSite, Game & /* game */)
 }
 
 
-WaresQueue & ProductionSite::waresqueue(WareIndex const wi) {
+WaresQueue & ProductionSite::waresqueue(DescriptionIndex const wi) {
 	for (WaresQueue * ip_queue : m_input_queues) {
 		if (ip_queue->get_ware() == wi) {
 			return *ip_queue;
@@ -403,7 +403,7 @@ void ProductionSite::init(EditorGameBase & egbase)
 	//  Request missing workers.
 	WorkingPosition * wp = m_working_positions;
 	for (const WareAmount& temp_wp : descr().working_positions()) {
-		WareIndex const worker_index = temp_wp.first;
+		DescriptionIndex const worker_index = temp_wp.first;
 		for (uint32_t j =  temp_wp.second; j; --j, ++wp)
 			if (Worker * const worker = wp->worker)
 				worker->set_location(this);
@@ -520,7 +520,7 @@ void ProductionSite::remove_worker(Worker & w)
 	WorkingPosition * wp = m_working_positions;
 
 	for (const WareAmount& temp_wp : descr().working_positions()) {
-		WareIndex const worker_index = temp_wp.first;
+		DescriptionIndex const worker_index = temp_wp.first;
 		for (uint32_t j = temp_wp.second; j; --j, ++wp) {
 			Worker * const worker = wp->worker;
 			if (worker && worker == &w) {
@@ -541,7 +541,7 @@ void ProductionSite::remove_worker(Worker & w)
 /**
  * Issue the worker requests
  */
-Request & ProductionSite::request_worker(WareIndex const wareid) {
+Request & ProductionSite::request_worker(DescriptionIndex const wareid) {
 	return
 		*new Request
 			(*this,
@@ -557,7 +557,7 @@ Request & ProductionSite::request_worker(WareIndex const wareid) {
 void ProductionSite::request_worker_callback
 	(Game            &       game,
 	 Request         &       rq,
-	 WareIndex              /* widx */,
+	 DescriptionIndex              /* widx */,
 	 Worker          * const w,
 	 PlayerImmovable &       target)
 {
@@ -574,7 +574,7 @@ void ProductionSite::request_worker_callback
 	// needs a worker like the one just arrived. That way it is of course still possible, that the worker is
 	// placed on the slot that originally requested the arrived worker.
 	bool worker_placed = false;
-	WareIndex     idx = w->descr().worker_index();
+	DescriptionIndex     idx = w->descr().worker_index();
 	for (WorkingPosition * wp = psite.m_working_positions;; ++wp) {
 		if (wp->worker_request == &rq) {
 			if (wp->worker_request->get_index() == idx) {
@@ -584,7 +584,7 @@ void ProductionSite::request_worker_callback
 				worker_placed = true;
 			} else {
 				// Set new request for this slot
-				WareIndex workerid = wp->worker_request->get_index();
+				DescriptionIndex workerid = wp->worker_request->get_index();
 				delete wp->worker_request;
 				wp->worker_request = &psite.request_worker(workerid);
 			}
@@ -609,8 +609,8 @@ void ProductionSite::request_worker_callback
 		}
 		if (!worker_placed) {
 			// Find the next smaller version of this worker
-			WareIndex nuwo    = game.tribes().nrworkers();
-			WareIndex current = 0;
+			DescriptionIndex nuwo    = game.tribes().nrworkers();
+			DescriptionIndex current = 0;
 			for (; current < nuwo; ++current) {
 				WorkerDescr const * worker = game.tribes().get_worker_descr(current);
 				if (worker->becomes() == idx) {
@@ -783,10 +783,10 @@ bool ProductionSite::get_building_work
 	if (!m_produced_wares.empty()) {
 		//  There is still a produced ware waiting for delivery. Carry it out
 		//  before continuing with the program.
-		std::pair<WareIndex, uint8_t> & ware_type_with_count =
+		std::pair<DescriptionIndex, uint8_t> & ware_type_with_count =
 			*m_produced_wares.rbegin();
 		{
-			WareIndex const ware_index = ware_type_with_count.first;
+			DescriptionIndex const ware_index = ware_type_with_count.first;
 			const WareDescr & ware_ware_descr =
 				*owner().tribe().get_ware_descr(ware_type_with_count.first);
 			{
@@ -806,7 +806,7 @@ bool ProductionSite::get_building_work
 	if (!m_recruited_workers.empty()) {
 		//  There is still a recruited worker waiting to be released. Send it
 		//  out.
-		std::pair<WareIndex, uint8_t> & worker_type_with_count =
+		std::pair<DescriptionIndex, uint8_t> & worker_type_with_count =
 			*m_recruited_workers.rbegin();
 		{
 			const WorkerDescr & worker_descr =

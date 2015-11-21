@@ -34,7 +34,7 @@ SinglePlayerGameController::SinglePlayerGameController
 	 Widelands::PlayerNumber const local)
 	: m_game          (game),
 	m_useai           (useai),
-	m_lastframe       (WLApplication::get()->get_time()),
+	m_lastframe       (SDL_GetTicks()),
 	m_time            (m_game.get_gametime()),
 	m_speed
 		(g_options.pull_section("global").get_natural
@@ -54,7 +54,7 @@ SinglePlayerGameController::~SinglePlayerGameController()
 
 void SinglePlayerGameController::think()
 {
-	int32_t const curtime = WLApplication::get()->get_time();
+	uint32_t const curtime = SDL_GetTicks();
 	int32_t frametime = curtime - m_lastframe;
 	m_lastframe = curtime;
 

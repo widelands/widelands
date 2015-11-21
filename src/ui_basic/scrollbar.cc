@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2011, 2013 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2011, 2013, 2015 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -384,7 +384,7 @@ void Scrollbar::think()
 	if (m_pressed == None || m_pressed == Knob)
 		return;
 
-	int32_t const time = WLApplication::get()->get_time();
+	uint32_t const time = SDL_GetTicks();
 	if (time < m_time_nextact)
 		return;
 
@@ -417,9 +417,7 @@ bool Scrollbar::handle_mousepress(const uint8_t btn, int32_t x, int32_t y) {
 			grab_mouse(true);
 			if (m_pressed != Knob) {
 				action(m_pressed);
-				m_time_nextact =
-					WLApplication::get()->get_time() +
-					MOUSE_BUTTON_AUTOREPEAT_DELAY;
+				m_time_nextact = SDL_GetTicks() + MOUSE_BUTTON_AUTOREPEAT_DELAY;
 			} else
 				m_knob_grabdelta = (m_horizontal ? x : y) - get_knob_pos();
 		}

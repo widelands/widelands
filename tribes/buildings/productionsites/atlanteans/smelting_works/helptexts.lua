@@ -13,7 +13,7 @@ end
 
 function building_helptext_purpose()
    -- TRANSLATORS: Purpose helptext for a building
-   return pgettext("atlanteans_building", "Smelts iron ore into iron and gold ore into gold.")
+   return pgettext("building", "Smelts iron ore into iron and gold ore into gold.")
 end
 
 function building_helptext_note()

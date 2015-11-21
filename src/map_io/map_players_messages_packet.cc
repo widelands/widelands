@@ -53,7 +53,7 @@ void MapPlayersMessagesPacket::read
 				prof.read(profile_filename.c_str(), nullptr, fs);
 			} catch (...) {continue;}
 			uint32_t packet_version = prof.get_safe_section("global").get_positive("packet_version");
-			if (packet_version == kCurrentPacketVersion) {
+			if (1 <= packet_version && packet_version <= kCurrentPacketVersion) {
 				MessageQueue & messages = player->messages();
 
 				{
@@ -122,18 +122,34 @@ void MapPlayersMessagesPacket::read
 							assert(mol.is_object_loaded(mo));
 							serial = mo.serial();
 						}
+						// Compatibility code needed for map loading.
+						if (packet_version == 1) {
+							const std::string name = s->get_name();
+							messages.add_message
+								(*new Message
+									(static_cast<Message::Type>(s->get_natural("type")),
+									 sent,
+									 name,
+									 name,
+									 name,
+									 s->get_safe_string("body"),
+									 get_coords("position", extent, Coords::null(), s),
+									 serial,
+									 status));
+						} else {
 
-						messages.add_message
-							(*new Message
-								(static_cast<Message::Type>(s->get_natural("type")),
-								 sent,
-								 s->get_name       (),
-								 s->get_safe_string("icon"),
-								 s->get_safe_string("heading"),
-								 s->get_safe_string("body"),
-								 get_coords("position", extent, Coords::null(), s),
-								 serial,
-								 status));
+							messages.add_message
+								(*new Message
+									(static_cast<Message::Type>(s->get_natural("type")),
+									 sent,
+									 s->get_name       (),
+									 s->get_safe_string("icon"),
+									 s->get_safe_string("heading"),
+									 s->get_safe_string("body"),
+									 get_coords("position", extent, Coords::null(), s),
+									 serial,
+									 status));
+						}
 						previous_message_sent = sent;
 					} catch (const WException & e) {
 						throw GameDataError

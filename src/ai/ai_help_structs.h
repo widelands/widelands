@@ -355,7 +355,7 @@ struct EconomyObserver {
 
 struct BuildingObserver {
 	char const* name;
-	Widelands::BuildingIndex id;
+	Widelands::DescriptionIndex id;
 	Widelands::BuildingDescr const* desc;
 
 	enum {
@@ -398,7 +398,7 @@ struct BuildingObserver {
 
 	std::vector<int16_t> inputs_;
 	std::vector<int16_t> outputs_;
-	std::vector<Widelands::WareIndex> critical_built_mat_;
+	std::vector<Widelands::DescriptionIndex> critical_built_mat_;
 
 	bool built_mat_producer_;
 
@@ -411,7 +411,7 @@ struct BuildingObserver {
 	// It seems that fish and meat are subsitutes (for trainingsites), so
 	// when testing if a trainingsite is supplied enough
 	// we count the wares together
-	std::unordered_set<Widelands::WareIndex> substitute_inputs_;
+	std::unordered_set<Widelands::DescriptionIndex> substitute_inputs_;
 	int32_t substitutes_count_;
 
 	int16_t production_hint_;
@@ -479,7 +479,7 @@ struct ShipObserver {
 	// is assigned only once
 	Widelands::IslandExploreDirection island_circ_direction = Widelands::IslandExploreDirection::kClockwise;
 	bool waiting_for_command_ = false;
-	int32_t last_command_time = 0;
+	uint32_t last_command_time = 0;
 };
 
 struct WareObserver {

@@ -172,7 +172,7 @@ void EncyclopediaWindow::fill_buildings() {
 	std::vector<Building> building_vec;
 
 	const Tribes& tribes = iaplayer().egbase().tribes();
-	for (BuildingIndex i = 0; i < tribes.nrbuildings(); ++i) {
+	for (DescriptionIndex i = 0; i < tribes.nrbuildings(); ++i) {
 		const BuildingDescr* building = tribes.get_building_descr(i);
 		if (tribe.has_building(i) || building->type() == MapObjectType::MILITARYSITE) {
 			Building b(i, building);
@@ -214,7 +214,7 @@ void EncyclopediaWindow::fill_wares() {
 	const TribeDescr & tribe = iaplayer().player().tribe();
 	std::vector<Ware> ware_vec;
 
-	for (const WareIndex& ware_index : tribe.wares()) {
+	for (const DescriptionIndex& ware_index : tribe.wares()) {
 		Ware w(ware_index, tribe.get_ware_descr(ware_index));
 		ware_vec.push_back(w);
 	}
@@ -249,7 +249,7 @@ void EncyclopediaWindow::ware_selected(uint32_t) {
 	prod_sites_.clear();
 	cond_table_.clear();
 
-	for (const BuildingIndex& building_index : selected_ware_->producers()) {
+	for (const DescriptionIndex& building_index : selected_ware_->producers()) {
 		const BuildingDescr* building_descr = tribe.get_building_descr(building_index);
 		if (tribe.has_building(building_index)) {
 			prod_sites_.add(building_descr->descname(), building_index, building_descr->icon());
@@ -303,10 +303,10 @@ void EncyclopediaWindow::prod_site_selected(uint32_t) {
 						action->groups();
 
 					for (const ProductionProgram::WareTypeGroup& temp_group : groups) {
-						const std::set<WareIndex> & ware_types = temp_group.first;
+						const std::set<DescriptionIndex> & ware_types = temp_group.first;
 						assert(ware_types.size());
 						std::vector<std::string> ware_type_descnames;
-						for (const WareIndex& ware_index : ware_types) {
+						for (const DescriptionIndex& ware_index : ware_types) {
 							ware_type_descnames.push_back(tribe.get_ware_descr(ware_index)->descname());
 						}
 						no_of_wares = no_of_wares + ware_types.size();
@@ -338,7 +338,7 @@ void EncyclopediaWindow::fill_workers() {
 	const TribeDescr& tribe = iaplayer().player().tribe();
 	std::vector<Worker> worker_vec;
 
-	for (const WareIndex& i: tribe.workers()) {
+	for (const DescriptionIndex& i: tribe.workers()) {
 		WorkerDescr const * worker = tribe.get_worker_descr(i);
 		Worker w(i, worker);
 		worker_vec.push_back(w);
