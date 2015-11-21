@@ -119,7 +119,7 @@ int32_t CmdQueue::run_queue(int32_t const interval, uint32_t & game_time_var) {
 				static uint8_t const tag[] = {0xde, 0xad, 0x00};
 				ss.data(tag, 3); // provide an easy-to-find pattern as debugging aid
 				ss.unsigned_32(c.duetime());
-				ss.unsigned_32(c.id());
+				ss.unsigned_32(static_cast<uint32_t>(c.id()));
 			}
 
 			c.execute (m_game);

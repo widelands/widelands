@@ -36,7 +36,7 @@ struct CmdLuaScript : public GameLogicCommand {
 	void write(FileWrite &, EditorGameBase &, MapObjectSaver  &) override;
 	void read (FileRead  &, EditorGameBase &, MapObjectLoader &) override;
 
-	uint8_t id() const override {return QUEUE_CMD_LUASCRIPT;}
+	QueueCommandTypes id() const override {return QueueCommandTypes::kLuaScript;}
 
 	void execute(Game &) override;
 

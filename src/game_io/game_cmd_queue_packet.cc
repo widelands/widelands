@@ -60,7 +60,7 @@ void GameCmdQueuePacket::read
 				item.serial = fr.unsigned_32();
 
 				GameLogicCommand & cmd =
-					QueueCmdFactory::create_correct_queue_command(packet_id);
+					QueueCmdFactory::create_correct_queue_command(static_cast<QueueCommandTypes>(packet_id));
 				cmd.read(fr, game, *ol);
 
 				item.cmd = &cmd;
@@ -106,7 +106,7 @@ void GameCmdQueuePacket::write
 			if (it.cmd->duetime() == time) {
 				if (upcast(GameLogicCommand, cmd, it.cmd)) {
 					// The id (aka command type)
-					fw.unsigned_16(cmd->id());
+					fw.unsigned_16(static_cast<uint16_t>(cmd->id()));
 
 					// Serial number
 					fw.signed_32(it.category);

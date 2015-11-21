@@ -89,7 +89,7 @@ struct Command {
 	virtual ~Command ();
 
 	virtual void execute (Game &) = 0;
-	virtual uint8_t id() const = 0;
+	virtual QueueCommandTypes id() const = 0;
 
 	int32_t duetime() const {return m_duetime;}
 	void set_duetime(int32_t const t) {m_duetime = t;}

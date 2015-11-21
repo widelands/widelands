@@ -42,7 +42,7 @@ struct CmdDeleteMessage : public Command {
 	{}
 
 	void execute (Game & game) override;
-	uint8_t id() const override {return QUEUE_CMD_DELETEMESSAGE;}
+	QueueCommandTypes id() const override {return QueueCommandTypes::kDeleteMessage;}
 
 private:
 	PlayerNumber player;
