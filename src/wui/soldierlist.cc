@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2011, 2015 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -112,7 +112,7 @@ m_egbase(gegbase),
 m_soldiers(*dynamic_cast<SoldierControl *>(&building)),
 m_last_animate_time(0)
 {
-	Soldier::calc_info_icon_size(building.descr().tribe(), m_icon_width, m_icon_height);
+	Soldier::calc_info_icon_size(building.owner().tribe(), m_icon_width, m_icon_height);
 	m_icon_width += 2 * IconBorder;
 	m_icon_height += 2 * IconBorder;
 
@@ -235,7 +235,7 @@ void SoldierPanel::think()
 	}
 
 	// Third pass: animate icons
-	int32_t curtime = WLApplication::get()->get_time();
+	int32_t curtime = SDL_GetTicks();
 	int32_t dt = std::min(std::max(curtime - m_last_animate_time, 0), 1000);
 	int32_t maxdist = dt * AnimateSpeed / 1000;
 	m_last_animate_time = curtime;

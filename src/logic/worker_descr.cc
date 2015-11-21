@@ -19,136 +19,126 @@
 
 #include "logic/worker_descr.h"
 
+#include <memory>
+
 #include "base/i18n.h"
+#include "base/point.h"
 #include "base/wexception.h"
 #include "graphic/graphic.h"
 #include "logic/carrier.h"
 #include "logic/game_data_error.h"
 #include "logic/nodecaps.h"
 #include "logic/soldier.h"
-#include "logic/tribe.h"
+#include "logic/tribes/tribe_descr.h"
 #include "logic/worker.h"
 #include "logic/worker_program.h"
-#include "profile/profile.h"
 #include "sound/sound_handler.h"
 
 namespace Widelands {
 
-WorkerDescr::WorkerDescr
-	(const MapObjectType object_type, char const * const _name, char const * const _descname,
-	 const std::string & directory, Profile & prof, Section & global_s,
-	 const TribeDescr & _tribe)
-	:
-	BobDescr(object_type, _name, _descname, &_tribe),
-	m_helptext          (global_s.get_string("help", "")),
-	m_ware_hotspot      (global_s.get_point("ware_hotspot", Point(0, 15))),
-	m_icon_fname        (directory + "/menu.png"),
-	m_icon              (nullptr),
-	m_buildable         (false),
-	m_needed_experience  (-1),
-	m_becomes           (INVALID_INDEX)
+WorkerDescr::WorkerDescr(const std::string& init_descname,
+								 MapObjectType init_type,
+								 const LuaTable& table,
+								 const EditorGameBase& egbase) :
+	BobDescr(init_descname, init_type, MapObjectDescr::OwnerType::kTribe, table),
+	ware_hotspot_      (Point(0, 15)),
+	buildable_         (false),
+	needed_experience_ (INVALID_INDEX),
+	becomes_           (INVALID_INDEX),
+	egbase_            (egbase)
 {
-	{ //  global options
-		Section & idle_s = prof.get_safe_section("idle");
-		add_animation("idle", g_gr->animations().load(directory, idle_s));
+	if (icon_filename().empty()) {
+		throw GameDataError("Worker %s has no menu icon", table.get_string("name").c_str());
 	}
+	i18n::Textdomain td("tribes");
+	std::unique_ptr<LuaTable> items_table;
 
-	add_attribute(MapObject::Attribute::WORKER);
-
-	m_default_target_quantity =
-		global_s.get_positive("default_target_quantity", std::numeric_limits<uint32_t>::max());
-
-	if (Section * const s = prof.get_section("buildcost")) {
-		m_buildable = true;
-		while (Section::Value const * const val = s->get_next_val())
+	if (table.has_key("buildcost")) {
+		buildable_ = true;
+		const Tribes& tribes = egbase_.tribes();
+		items_table = table.get_table("buildcost");
+		for (const std::string& key : items_table->keys<std::string>()) {
 			try {
-				std::string const input = val->get_name();
-				if (m_buildcost.count(input))
-					throw wexception("a buildcost item of this ware type has already been defined");
-				if (tribe().ware_index(input) == INVALID_INDEX &&
-				    tribe().worker_index(input) == INVALID_INDEX)
-					throw wexception
+				if (buildcost_.count(key)) {
+					throw GameDataError("a buildcost item of this ware type has already been defined: %s",
+											  key.c_str());
+				}
+				if (!tribes.ware_exists(tribes.ware_index(key)) &&
+					 !tribes.worker_exists(tribes.worker_index(key))) {
+					throw GameDataError
 						("\"%s\" has not been defined as a ware/worker type (wrong "
 						 "declaration order?)",
-						 input.c_str());
-				int32_t const value = val->get_int();
+						 key.c_str());
+				}
+				int32_t value = items_table->get_int(key);
 				uint8_t const count = value;
 				if (count != value)
-					throw wexception("count is out of range 1 .. 255");
-				m_buildcost.insert(std::pair<std::string, uint8_t>(input, value));
+					throw GameDataError("count is out of range 1 .. 255");
+				buildcost_.insert(std::pair<std::string, uint8_t>(key, count));
 			} catch (const WException & e) {
-				throw wexception
-					("[buildcost] \"%s=%s\": %s",
-					 val->get_name(), val->get_string(), e.what());
+				throw GameDataError
+					("[buildcost] \"%s\": %s",
+					 key.c_str(), e.what());
 			}
+		}
 	}
 
-	// If worker has a work animation load and add it.
-	Section * work_s = prof.get_section("work");
-	if (work_s)
-		add_animation("work", g_gr->animations().load(directory, *work_s));
+	directory_ = table.get_string("directory");
 
 	// Read the walking animations
-	m_walk_anims.parse(*this, directory, prof, "walk");
-	m_walkload_anims.parse(*this, directory, prof, "walkload", true);
+	add_directional_animation(&walk_anims_, "walk");
 
-	// Read the becomes and experience
-	if (char const * const becomes_name = global_s.get_string("becomes")) {
-		m_becomes = tribe().safe_worker_index(becomes_name);
-		m_needed_experience = global_s.get_safe_positive("experience");
+	// Many workers don't carry wares, so they have no walkload animation.
+	std::unique_ptr<LuaTable> anims(table.get_table("animations"));
+	anims->do_not_warn_about_unaccessed_keys();
+	if (anims->has_key("walkload_e")) {
+		add_directional_animation(&walkload_anims_, "walkload");
+	}
+
+	// Read what the worker can become and the needed experience
+	if (table.has_key("becomes")) {
+		becomes_ = egbase_.tribes().safe_worker_index(table.get_string("becomes"));
+		needed_experience_ = table.get_int("experience");
 	}
 
 	// Read programs
-	while (Section::Value const * const v = global_s.get_next_val("program")) {
-		std::string program_name = v->get_string();
-		std::transform
-			(program_name.begin(), program_name.end(), program_name.begin(),
-			 tolower);
-		WorkerProgram * program = nullptr;
+	if (table.has_key("programs")) {
+		std::unique_ptr<LuaTable> programs_table = table.get_table("programs");
+		for (std::string program_name : programs_table->keys<std::string>()) {
+			std::transform
+				(program_name.begin(), program_name.end(), program_name.begin(),
+				 tolower);
 
-		try {
-			if (m_programs.count(program_name))
-				throw wexception("this program has already been declared");
-			WorkerProgram::Parser parser;
+			try {
+				if (programs_.count(program_name))
+					throw wexception("this program has already been declared");
 
-			parser.descr = this;
-			parser.directory = directory;
-			parser.prof = &prof;
-
-			program = new WorkerProgram(program_name);
-			program->parse(this, &parser, program_name.c_str());
-			m_programs[program_name.c_str()] = program;
+				programs_[program_name] =
+						std::unique_ptr<WorkerProgram>(new WorkerProgram(program_name, *this, egbase_.tribes()));
+				programs_[program_name]->parse(*programs_table->get_table(program_name).get());
+			} catch (const std::exception & e) {
+				throw wexception("program %s: %s", program_name.c_str(), e.what());
+			}
 		}
-
-		catch (const std::exception & e) {
-			delete program;
-			throw wexception("program %s: %s", program_name.c_str(), e.what());
-		}
+	}
+	if (table.has_key("default_target_quantity")) {
+		default_target_quantity_ = table.get_int("default_target_quantity");
+	} else {
+		default_target_quantity_ = std::numeric_limits<uint32_t>::max();
+	}
+	if (table.has_key("ware_hotspot")) {
+		items_table = table.get_table("ware_hotspot");
+		ware_hotspot_ = Point(items_table->get_int(1), items_table->get_int(2));
 	}
 }
 
+WorkerDescr::WorkerDescr(const std::string& init_descname,
+								 const LuaTable& table, const EditorGameBase& egbase) :
+	WorkerDescr(init_descname, MapObjectType::WORKER, table, egbase)
+{}
 
-WorkerDescr::~WorkerDescr()
-{
-	while (m_programs.size()) {
-		delete m_programs.begin()->second;
-		m_programs.erase(m_programs.begin());
-	}
-}
 
-const TribeDescr& WorkerDescr::tribe() const {
-	const TribeDescr* owner_tribe = get_owner_tribe();
-	assert(owner_tribe != nullptr);
-	return *owner_tribe;
-}
-
-/**
- * Load graphics (other than animations).
- */
-void WorkerDescr::load_graphics()
-{
-	m_icon = g_gr->images().get(m_icon_fname);
-}
+WorkerDescr::~WorkerDescr() {}
 
 
 /**
@@ -157,13 +147,13 @@ void WorkerDescr::load_graphics()
 WorkerProgram const * WorkerDescr::get_program
 	(const std::string & programname) const
 {
-	Programs::const_iterator it = m_programs.find(programname);
+	Programs::const_iterator it = programs_.find(programname);
 
-	if (it == m_programs.end())
+	if (it == programs_.end())
 		throw wexception
 			("%s has no program '%s'", name().c_str(), programname.c_str());
 
-	return it->second;
+	return it->second.get();
 }
 
 /**
@@ -200,19 +190,20 @@ Bob & WorkerDescr::create_object() const
 /**
 * check if worker can be substitute for a requested worker type
  */
-bool WorkerDescr::can_act_as(WareIndex const index) const {
-	assert(index < tribe().get_nrworkers());
-	if (index == worker_index())
+bool WorkerDescr::can_act_as(DescriptionIndex const index) const {
+	assert(egbase_.tribes().worker_exists(index));
+	if (index == worker_index()) {
 		return true;
+	}
 
 	// if requested worker type can be promoted, compare with that type
-	const WorkerDescr & descr = *tribe().get_worker_descr(index);
-	WareIndex const becomes_index = descr.becomes();
+	const WorkerDescr& descr = *egbase_.tribes().get_worker_descr(index);
+	DescriptionIndex const becomes_index = descr.becomes();
 	return becomes_index != INVALID_INDEX ? can_act_as(becomes_index) : false;
 }
 
-WareIndex WorkerDescr::worker_index() const {
-	return tribe().worker_index(name());
+DescriptionIndex WorkerDescr::worker_index() const {
+	return egbase_.tribes().worker_index(name());
 }
 
 }

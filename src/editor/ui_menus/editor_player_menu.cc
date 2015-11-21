@@ -29,9 +29,8 @@
 #include "logic/constants.h"
 #include "logic/map.h"
 #include "logic/player.h"
-#include "logic/tribe.h"
+#include "logic/tribes/tribes.h"
 #include "logic/warehouse.h"
-#include "profile/profile.h"
 #include "ui_basic/editbox.h"
 #include "ui_basic/messagebox.h"
 #include "ui_basic/textarea.h"
@@ -61,7 +60,8 @@ EditorPlayerMenu::EditorPlayerMenu
 		 g_gr->images().get("pics/but1.png"),
 		 g_gr->images().get("pics/scrollbar_down.png"),
 		 _("Remove last player"),
-		 1 < parent.egbase().map().get_nrplayers())
+		 1 < parent.egbase().map().get_nrplayers()),
+	m_tribenames(eia().egbase().tribes().get_all_tribenames())
 {
 	m_add_player.sigclicked.connect(boost::bind(&EditorPlayerMenu::clicked_add_player, boost::ref(*this)));
 	m_remove_last_player.sigclicked.connect
@@ -70,18 +70,6 @@ EditorPlayerMenu::EditorPlayerMenu
 	int32_t const spacing = 5;
 	int32_t const width   = 20;
 	int32_t       posy    = 0;
-
-	// Initializing the descnames for the tribes.
-	for (const std::string& tribename : Widelands::TribeDescr::get_all_tribenames()) {
-		std::string tribepath("tribes/" + tribename);
-		// get translated tribesname
-		Profile prof
-			((tribepath + "/conf").c_str(), nullptr, "tribe_" + tribename);
-		Section & global = prof.get_safe_section("tribe");
-		const char* descname = global.get_safe_string("name");
-		m_tribenames.push_back(tribename);
-		m_tribe_descnames.insert(std::make_pair(tribename, descname));
-	}
 
 	set_inner_size(375, 135);
 
@@ -181,7 +169,9 @@ void EditorPlayerMenu::update() {
 			m_selected_tribes[p - 1] = m_tribenames[0];
 			map.set_scenario_player_tribe(p, m_selected_tribes[p - 1]);
 		}
-		m_plr_set_tribes_buts[p - 1]->set_title(m_tribe_descnames.find(m_selected_tribes[p - 1])->second);
+
+		m_plr_set_tribes_buts[p - 1]
+				->set_title(eia().egbase().tribes().tribeinfo(m_selected_tribes[p - 1]).descname);
 
 		// Set default AI and closeable to false (always default - should be changed by hand)
 		map.set_scenario_player_ai(p, "");
@@ -263,15 +253,18 @@ void EditorPlayerMenu::clicked_remove_last_player() {
 void EditorPlayerMenu::player_tribe_clicked(uint8_t n) {
 	EditorInteractive& menu = eia();
 	if (!menu.is_player_tribe_referenced(n + 1)) {
-		if (!Widelands::TribeDescr::exists_tribe(m_selected_tribes[n + 1]))
+		if (!Widelands::Tribes::tribe_exists(m_selected_tribes[n])) {
 			throw wexception
-				("Map defines tribe %s, but it does not exist!", m_selected_tribes[n + 1].c_str());
+				("Map defines tribe %s, but it does not exist!", m_selected_tribes[n].c_str());
+		}
 		uint32_t i;
-		for (i = 0; i < m_tribenames.size(); ++i)
-			if (m_tribenames[i] == m_selected_tribes[n + 1])
+		for (i = 0; i < m_tribenames.size(); ++i) {
+			if (m_tribenames[i] == m_selected_tribes[n]) {
 				break;
-		m_selected_tribes[n + 1] = i == m_tribenames.size() - 1 ? m_tribenames[0] : m_tribenames[++i];
-		menu.egbase().map().set_scenario_player_tribe(n + 1, m_selected_tribes[n + 1]);
+			}
+		}
+		m_selected_tribes[n] = i == m_tribenames.size() - 1 ? m_tribenames[0] : m_tribenames[++i];
+		menu.egbase().map().set_scenario_player_tribe(n + 1, m_selected_tribes[n]);
 		menu.set_need_save(true);
 	} else {
 		UI::WLMessageBox mmb
@@ -350,7 +343,7 @@ void EditorPlayerMenu::make_infrastructure_clicked(uint8_t n) {
 		// so that this tribe can not be changed
 		egbase.add_player
 			(n, 0, // TODO(SirVer): initialization index makes no sense here
-			 m_tribe_descnames.find(m_selected_tribes[n])->second,
+			 eia().egbase().tribes().tribeinfo(m_selected_tribes[n]).descname,
 			 m_plr_names[n - 1]->text());
 
 		p = egbase.get_player(n);
@@ -365,9 +358,8 @@ void EditorPlayerMenu::make_infrastructure_clicked(uint8_t n) {
 	if (!imm) {
       // place HQ
 		const Widelands::TribeDescr & tribe = p->tribe();
-		const Widelands::BuildingIndex idx =
-			tribe.building_index("headquarters");
-		if (idx == Widelands::INVALID_INDEX)
+		const Widelands::DescriptionIndex idx = tribe.headquarters();
+		if (!tribe.has_building(idx))
 			throw wexception("Tribe %s lacks headquarters", tribe.name().c_str());
 		// Widelands::Warehouse & headquarter = dynamic_cast<Widelands::Warehouse &>
 		//         (egbase.warp_building(starting_pos, player_number, idx));

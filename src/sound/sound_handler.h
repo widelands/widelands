@@ -183,7 +183,7 @@ public:
 
 	void load_fx_if_needed
 		(const std::string & dir,
-		 const std::string & filename,
+		 const std::string & basename,
 		 const std::string & fx_name);
 	void play_fx
 		(const std::string & fx_name,
@@ -246,7 +246,7 @@ protected:
 	// Prints an error and disables the sound system.
 	void initialization_error(const std::string& msg);
 
-	void load_one_fx(const char * filename, const std::string & fx_name);
+	void load_one_fx(const std::string& path, const std::string& fx_name);
 	int32_t stereo_position(Widelands::Coords position);
 	bool play_or_not
 		(const std::string & fx_name,

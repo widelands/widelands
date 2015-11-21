@@ -198,7 +198,6 @@ wl_library(graphic
     io_stream
     logic
     notifications
-    profile
     scripting_lua_table
     sound
     wui_overlay_manager

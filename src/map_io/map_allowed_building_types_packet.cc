@@ -25,7 +25,7 @@
 #include "logic/game.h"
 #include "logic/game_data_error.h"
 #include "logic/player.h"
-#include "logic/tribe.h"
+#include "logic/tribes/tribe_descr.h"
 #include "profile/profile.h"
 
 namespace Widelands {
@@ -65,24 +65,25 @@ void MapAllowedBuildingTypesPacket::read
 				const TribeDescr & tribe = player->tribe();
 				//  All building types default to false in the game (not in the
 				//  editor).
-				if (game)
-					for
-						(BuildingIndex i = tribe.get_nrbuildings();
-						 0 < i;)
-						player->allow_building_type(--i, false);
+				if (game) {
+					for (DescriptionIndex i = 0; i < game->tribes().nrbuildings(); ++i) {
+						player->allow_building_type(i, false);
+					}
+				}
 				try {
 					Section & s = prof.get_safe_section((boost::format("player_%u")
 																	 % static_cast<unsigned int>(p)).str());
 
 					bool allowed;
 					while (const char * const name = s.get_next_bool(nullptr, &allowed)) {
-						const BuildingIndex index = tribe.building_index(name);
-						if (index != INVALID_INDEX)
+						const DescriptionIndex index = tribe.building_index(name);
+						if (tribe.has_building(index)) {
 							player->allow_building_type(index, allowed);
-						else
+						} else {
 							throw GameDataError
 								("tribe %s does not define building type \"%s\"",
 								 tribe.name().c_str(), name);
+						}
 					}
 				} catch (const WException & e) {
 					throw GameDataError
@@ -113,11 +114,12 @@ void MapAllowedBuildingTypesPacket::write
 		Section & section = prof.create_section(section_key.c_str());
 
 		//  Write for all buildings if it is enabled.
-		BuildingIndex const nr_buildings = tribe.get_nrbuildings();
-		for (BuildingIndex b = 0; b < nr_buildings; ++b)
-			if (player->is_building_type_allowed(b))
-				section.set_bool
-					(tribe.get_building_descr(b)->name().c_str(), true);
+		for (const Widelands::DescriptionIndex& building_index : tribe.buildings()) {
+			if (player->is_building_type_allowed(building_index)) {
+				const BuildingDescr* building_descr = egbase.tribes().get_building_descr(building_index);
+				section.set_bool(building_descr->name().c_str(), true);
+			}
+		}
 	}
 
 	prof.write("allowed_building_types", false, fs);

@@ -36,7 +36,7 @@
 
 namespace Widelands {
 
-constexpr uint8_t kCurrentPacketVersion = 1;
+constexpr uint8_t kCurrentPacketVersion = 2;
 
 MapObjectPacket::~MapObjectPacket() {
 	while (loaders.size()) {
@@ -48,14 +48,17 @@ MapObjectPacket::~MapObjectPacket() {
 
 void MapObjectPacket::read
 	(FileSystem & fs, EditorGameBase & egbase, MapObjectLoader & mol,
-	 const OneWorldLegacyLookupTable& lookup_table)
+	 const WorldLegacyLookupTable& world_lookup_table,
+	 const TribesLegacyLookupTable& tribe_lookup_table)
 {
 	try {
 		FileRead fr;
 		fr.open(fs, "binary/mapobjects");
 
 		const uint8_t packet_version = fr.unsigned_8();
-		if (packet_version == kCurrentPacketVersion) {
+
+		// Some maps contain ware/worker info, so we need compatibility here.
+		if (1 <= packet_version && packet_version <= kCurrentPacketVersion) {
 
 		// Initial loading stage
 		for (;;)
@@ -63,7 +66,7 @@ void MapObjectPacket::read
 			case 0:
 				return;
 			case MapObject::HeaderImmovable:
-				loaders.insert(Immovable::load(egbase, mol, fr, lookup_table));
+				loaders.insert(Immovable::load(egbase, mol, fr, world_lookup_table, tribe_lookup_table));
 				break;
 
 			case MapObject::HeaderBattle:
@@ -71,15 +74,17 @@ void MapObjectPacket::read
 				break;
 
 			case MapObject::HeaderCritter:
-				loaders.insert(Critter::load(egbase, mol, fr, lookup_table));
+				loaders.insert(Critter::load(egbase, mol, fr, world_lookup_table));
 				break;
 
 			case MapObject::HeaderWorker:
-				loaders.insert(Worker::load(egbase, mol, fr));
+				// We can't use the worker's savegame version, because some stuff is loaded before that
+				// packet version, and we removed the tribe name.
+				loaders.insert(Worker::load(egbase, mol, fr, tribe_lookup_table, packet_version));
 				break;
 
 			case MapObject::HeaderWareInstance:
-				loaders.insert(WareInstance::load(egbase, mol, fr));
+				loaders.insert(WareInstance::load(egbase, mol, fr, tribe_lookup_table));
 				break;
 
 			case MapObject::HeaderShip:

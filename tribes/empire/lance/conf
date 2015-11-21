@@ -1,8 +1,0 @@
-help=_This lance has an iron spike. It is produced in a weapon smithy and used in a training camp – together with food – to train soldiers from attack level 0 to attack level 1.
-
-default_target_quantity=1
-preciousness=0
-
-[idle]
-pics=idle.png
-hotspot=7 10

@@ -27,7 +27,8 @@
 #include "logic/game.h"
 #include "logic/game_controller.h"
 #include "logic/immovable.h"
-#include "logic/tribe.h"
+#include "logic/tribes/tribe_descr.h"
+#include "logic/tribes/tribes.h"
 #include "logic/world/world.h"
 #include "scripting/globals.h"
 #include "scripting/lua_coroutine.h"
@@ -487,6 +488,357 @@ int LuaWorld::new_editor_immovable_category(lua_State* L) {
  ==========================================================
  */
 
+/* RST
+Tribes
+------
+
+.. class:: Tribes
+
+	This offers access to the objects available for the tribes and allows to add
+	new objects.
+*/
+
+const char LuaTribes::className[] = "Tribes";
+const MethodType<LuaTribes> LuaTribes::Methods[] = {
+	METHOD(LuaTribes, new_constructionsite_type),
+	METHOD(LuaTribes, new_dismantlesite_type),
+	METHOD(LuaTribes, new_militarysite_type),
+	METHOD(LuaTribes, new_productionsite_type),
+	METHOD(LuaTribes, new_trainingsite_type),
+	METHOD(LuaTribes, new_warehouse_type),
+	METHOD(LuaTribes, new_immovable_type),
+	METHOD(LuaTribes, new_ship_type),
+	METHOD(LuaTribes, new_ware_type),
+	METHOD(LuaTribes, new_carrier_type),
+	METHOD(LuaTribes, new_soldier_type),
+	METHOD(LuaTribes, new_worker_type),
+	METHOD(LuaTribes, new_tribe),
+	{0, 0},
+};
+const PropertyType<LuaTribes> LuaTribes::Properties[] = {
+	{0, 0, 0},
+};
+
+
+LuaTribes::LuaTribes(lua_State * /* L */) {
+	// Nothing to do.
+}
+
+void LuaTribes::__persist(lua_State*) {
+	// Nothing to be done.
+}
+
+void LuaTribes::__unpersist(lua_State*) {
+	// Nothing to be done.
+}
+
+/*
+ ==========================================================
+ PROPERTIES
+ ==========================================================
+ */
+
+/*
+ ==========================================================
+ LUA METHODS
+ ==========================================================
+ */
+
+/* RST
+	.. method:: new_constructionsite_type(table)
+
+		Adds a new constructionsite building type. Takes a single argument, a table with
+		the descriptions. See the files in tribes/ for usage examples.
+
+		:returns: :const:`nil`
+*/
+int LuaTribes::new_constructionsite_type(lua_State* L) {
+	if (lua_gettop(L) != 2) {
+		report_error(L, "Takes only one argument.");
+	}
+
+	try {
+		LuaTable table(L);  // Will pop the table eventually.
+		get_egbase(L).mutable_tribes()->add_constructionsite_type(table, get_egbase(L));
+	} catch (std::exception& e) {
+		report_error(L, "%s", e.what());
+	}
+	return 0;
+}
+
+/* RST
+	.. method:: new_dismantlesite_type(table)
+
+		Adds a new disnamtlesite building type. Takes a single argument, a table with
+		the descriptions. See the files in tribes/ for usage examples.
+
+		:returns: :const:`nil`
+*/
+int LuaTribes::new_dismantlesite_type(lua_State* L) {
+	if (lua_gettop(L) != 2) {
+		report_error(L, "Takes only one argument.");
+	}
+
+	try {
+		LuaTable table(L);  // Will pop the table eventually.
+		get_egbase(L).mutable_tribes()->add_dismantlesite_type(table, get_egbase(L));
+	} catch (std::exception& e) {
+		report_error(L, "%s", e.what());
+	}
+	return 0;
+}
+
+
+/* RST
+	.. method:: new_militarysite_type(table)
+
+		Adds a new militarysite building type. Takes a single argument, a table with
+		the descriptions. See the files in tribes/ for usage examples.
+
+		:returns: :const:`nil`
+*/
+int LuaTribes::new_militarysite_type(lua_State* L) {
+	if (lua_gettop(L) != 2) {
+		report_error(L, "Takes only one argument.");
+	}
+
+	try {
+		LuaTable table(L);  // Will pop the table eventually.
+		get_egbase(L).mutable_tribes()->add_militarysite_type(table, get_egbase(L));
+	} catch (std::exception& e) {
+		report_error(L, "%s", e.what());
+	}
+	return 0;
+}
+
+/* RST
+	.. method:: new_productionsite_type(table)
+
+		Adds a new productionsite building type. Takes a single argument, a table with
+		the descriptions. See the files in tribes/ for usage examples.
+
+		:returns: :const:`nil`
+*/
+int LuaTribes::new_productionsite_type(lua_State* L) {
+	if (lua_gettop(L) != 2) {
+		report_error(L, "Takes only one argument.");
+	}
+
+	try {
+		LuaTable table(L);  // Will pop the table eventually.
+		get_egbase(L).mutable_tribes()->add_productionsite_type(table, get_egbase(L));
+	} catch (std::exception& e) {
+		report_error(L, "%s", e.what());
+	}
+	return 0;
+}
+
+/* RST
+	.. method:: new_trainingsite_type(table)
+
+		Adds a new trainingsite building type. Takes a single argument, a table with
+		the descriptions. See the files in tribes/ for usage examples.
+
+		:returns: :const:`nil`
+*/
+int LuaTribes::new_trainingsite_type(lua_State* L) {
+	if (lua_gettop(L) != 2) {
+		report_error(L, "Takes only one argument.");
+	}
+
+	try {
+		LuaTable table(L);  // Will pop the table eventually.
+		get_egbase(L).mutable_tribes()->add_trainingsite_type(table, get_egbase(L));
+	} catch (std::exception& e) {
+		report_error(L, "%s", e.what());
+	}
+	return 0;
+}
+
+/* RST
+	.. method:: new_warehouse_type(table)
+
+		Adds a new warehouse building type. Takes a single argument, a table with
+		the descriptions. See the files in tribes/ for usage examples.
+
+		:returns: :const:`nil`
+*/
+int LuaTribes::new_warehouse_type(lua_State* L) {
+	if (lua_gettop(L) != 2) {
+		report_error(L, "Takes only one argument.");
+	}
+
+	try {
+		LuaTable table(L);  // Will pop the table eventually.
+		get_egbase(L).mutable_tribes()->add_warehouse_type(table, get_egbase(L));
+	} catch (std::exception& e) {
+		report_error(L, "%s", e.what());
+	}
+	return 0;
+}
+
+/* RST
+	.. method:: new_immovable_type(table)
+
+		Adds a new immovable type. Takes a single argument, a table with
+		the descriptions. See the files in tribes/ for usage examples.
+
+		:returns: :const:`nil`
+*/
+int LuaTribes::new_immovable_type(lua_State* L) {
+	if (lua_gettop(L) != 2) {
+		report_error(L, "Takes only one argument.");
+	}
+
+	try {
+		LuaTable table(L);  // Will pop the table eventually.
+		get_egbase(L).mutable_tribes()->add_immovable_type(table);
+	} catch (std::exception& e) {
+		report_error(L, "%s", e.what());
+	}
+	return 0;
+}
+
+/* RST
+	.. method:: new_ship_type(table)
+
+		Adds a new ship type. Takes a single argument, a table with
+		the descriptions. See the files in tribes/ for usage examples.
+
+		:returns: :const:`nil`
+*/
+int LuaTribes::new_ship_type(lua_State* L) {
+	if (lua_gettop(L) != 2) {
+		report_error(L, "Takes only one argument.");
+	}
+
+	try {
+		LuaTable table(L);  // Will pop the table eventually.
+		get_egbase(L).mutable_tribes()->add_ship_type(table);
+	} catch (std::exception& e) {
+		report_error(L, "%s", e.what());
+	}
+	return 0;
+}
+
+/* RST
+	.. method:: new_ware_type(table)
+
+		Adds a new ware type. Takes a single argument, a table with
+		the descriptions. See the files in tribes/ for usage examples.
+
+		:returns: :const:`nil`
+*/
+int LuaTribes::new_ware_type(lua_State* L) {
+	if (lua_gettop(L) != 2) {
+		report_error(L, "Takes only one argument.");
+	}
+
+	try {
+		LuaTable table(L);  // Will pop the table eventually.
+		get_egbase(L).mutable_tribes()->add_ware_type(table);
+	} catch (std::exception& e) {
+		report_error(L, "%s", e.what());
+	}
+	return 0;
+}
+
+/* RST
+	.. method:: new_carrier_type(table)
+
+		Adds a new carrier worker type. Takes a single argument, a table with
+		the descriptions. See the files in tribes/ for usage examples.
+
+		:returns: :const:`nil`
+*/
+int LuaTribes::new_carrier_type(lua_State* L) {
+	if (lua_gettop(L) != 2) {
+		report_error(L, "Takes only one argument.");
+	}
+
+	try {
+		LuaTable table(L);  // Will pop the table eventually.
+		get_egbase(L).mutable_tribes()->add_carrier_type(table, get_egbase(L));
+	} catch (std::exception& e) {
+		report_error(L, "%s", e.what());
+	}
+	return 0;
+}
+
+/* RST
+	.. method:: new_soldier_type(table)
+
+		Adds a new soldier worker type. Takes a single argument, a table with
+		the descriptions. See the files in tribes/ for usage examples.
+
+		:returns: :const:`nil`
+*/
+int LuaTribes::new_soldier_type(lua_State* L) {
+	if (lua_gettop(L) != 2) {
+		report_error(L, "Takes only one argument.");
+	}
+
+	try {
+		LuaTable table(L);  // Will pop the table eventually.
+		get_egbase(L).mutable_tribes()->add_soldier_type(table, get_egbase(L));
+	} catch (std::exception& e) {
+		report_error(L, "%s", e.what());
+	}
+	return 0;
+}
+
+/* RST
+	.. method:: new_worker_type(table)
+
+		Adds a new worker type. Takes a single argument, a table with
+		the descriptions. See the files in tribes/ for usage examples.
+
+		:returns: :const:`nil`
+*/
+int LuaTribes::new_worker_type(lua_State* L) {
+	if (lua_gettop(L) != 2) {
+		report_error(L, "Takes only one argument.");
+	}
+
+	try {
+		LuaTable table(L);  // Will pop the table eventually.
+		get_egbase(L).mutable_tribes()->add_worker_type(table, get_egbase(L));
+	} catch (std::exception& e) {
+		report_error(L, "%s", e.what());
+	}
+	return 0;
+}
+
+
+/* RST
+	.. method:: new_tribe(table)
+
+		Adds a new tribe. Takes a single argument, a table with
+		the descriptions. See the files in tribes/ for usage examples.
+
+		:returns: :const:`nil`
+*/
+int LuaTribes::new_tribe(lua_State* L) {
+	if (lua_gettop(L) != 2) {
+		report_error(L, "Takes only one argument.");
+	}
+
+	try {
+		LuaTable table(L);  // Will pop the table eventually.
+		get_egbase(L).mutable_tribes()->add_tribe(table, get_egbase(L));
+	} catch (std::exception& e) {
+		report_error(L, "%s", e.what());
+	}
+	return 0;
+}
+
+
+/*
+ ==========================================================
+ C METHODS
+ ==========================================================
+ */
+
 
 const static struct luaL_Reg wlroot [] = {
 	{nullptr, nullptr}
@@ -507,6 +859,7 @@ void luaopen_wlroot(lua_State * L, bool in_editor) {
 		lua_pop(L, 1); // Pop the meta table
 	}
 	register_class<LuaWorld>(L, "", false);
+	register_class<LuaTribes>(L, "", false);
 }
 
 }

@@ -1,8 +1,0 @@
-help=_A real meal is made in inns out of bread and fish/meat. It satisfies the needs of miners in deep mines.
-
-default_target_quantity=20
-preciousness=4
-
-[idle]
-pics=idle.png
-hotspot=6 6

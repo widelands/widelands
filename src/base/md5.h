@@ -91,7 +91,7 @@ public:
 	/// This function consumes new data. It buffers it and calculates one MD5
 	/// block when the buffer is full.
 	///
-	/// \param data data to compute chksum for
+	/// \param newdata data to compute chksum for
 	/// \param size size of data
 	void data(const void * const newdata, const size_t size) {
 		assert(can_handle_data);

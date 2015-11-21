@@ -1,8 +1,0 @@
-help=_The fires of the Empire smelting works, armor smithies and weapon smithies are usually fed with coal. It is mined in coal mines or produced by a charcoal kiln out of logs.
-
-default_target_quantity=20
-preciousness=1
-
-[idle]
-pics=idle.png
-hotspot=4 6

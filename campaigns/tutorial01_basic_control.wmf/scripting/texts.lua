@@ -40,7 +40,7 @@ initial_message_02 = {
    body = rt(
       h1(_"Let’s dive right in!") ..
       p(_[[There are three different tribes in Widelands: the Barbarians, the Empire and the Atlanteans. All tribes have a different economy, strength and weaknesses, but the general gameplay is the same for all. We will play the Barbarians for now.]]) ..
-      p(_[[You will usually start the game with one headquarters. This is the big building with the blue flag in front of it. The headquarters is a warehouse that stores wares, workers and soldiers. Some wares are needed for building houses, others for making other wares. Obviously, the wares in the headquarters will not last forever, so you must make sure to replace them. The most important wares in the early game are the basic construction wares: logs and raw stone. Let’s make sure that we do not run out of logs. For this, we need a lumberjack and a hut for him to stay in.]]) ..
+      p(_[[You will usually start the game with one headquarters. This is the big building with the blue flag in front of it. The headquarters is a warehouse that stores wares, workers and soldiers. Some wares are needed for building houses, others for making other wares. Obviously, the wares in the headquarters will not last forever, so you must make sure to replace them. The most important wares in the early game are the basic construction wares: logs and granite. Let’s make sure that we do not run out of logs. For this, we need a lumberjack and a hut for him to stay in.]]) ..
       p(_[[We need to find a nice place for the lumberjack’s hut. To make this easier, we can activate ‘Show Building Spaces’. There are two ways you can do this, either by clicking on the ‘Show Building Spaces’ button at the bottom of the screen, which is the fourth one from the left. Or you can use the SPACE key to toggle it.]]) ..
       paragraphdivider() ..
       listitem_bullet(_[[Left-click the ‘OK’ button to close this box and then try it.]])
@@ -169,7 +169,7 @@ lumberjack_message_07 = {
    title = _"Lumberjack is Done",
    position = "topright",
    body = rt(
-      p(_[[Excellent. The lumberjack’s hut is done. A lumberjack will now move in and start chopping down trees, so our log income is secured for now. Now on to the raw stone.]])
+      p(_[[Excellent. The lumberjack’s hut is done. A lumberjack will now move in and start chopping down trees, so our log income is secured for now. Now on to the granite.]])
    ),
    h = 300,
    w = 350
@@ -179,7 +179,7 @@ inform_about_rocks = {
    title = _"Some Rocks Were Found",
    body = rt(h1(_"Getting a Quarry Up")) ..
    rt(
-      p(_[[Stones can be mined in granite mines, but the easier way is to build a quarry next to some rocks lying around. As it happens, there is a pile of them just to the west (left) of your headquarters. I will teach you now how to move your view over there.]]) ..
+      p(_[[Granite can be mined in granite mines, but the easier way is to build a quarry next to some rocks lying around. As it happens, there is a pile of them just to the west (left) of your headquarters. I will teach you now how to move your view over there.]]) ..
       paragraphdivider() ..
       listitem_arrow(_[[There are three ways to move your view. The first one is using the cursor keys on your keyboard. Go ahead and try this out.]]) ..
       listitem_bullet(_[[Click the ‘OK’ button and then move the view using the cursor keys]])
@@ -350,7 +350,7 @@ quarry_not_connected = {
 quarry_illegally_destroyed = {
    title = _"You Destroyed the Construction Site!",
    body = rt(
-      p(_[[It seems like you destroyed a construction site for a quarry we wanted to build. Since we need the stones, I suggest you reload the game from a previous savegame. Luckily, these are created from time to time. To do so, you have to go back to the main menu and choose ‘Single Player’ → ‘Load Game’. And please be a bit more careful next time.]])
+      p(_[[It seems like you destroyed a construction site for a quarry we wanted to build. Since we need the granite, I suggest you reload the game from a previous savegame. Luckily, these are created from time to time. To do so, you have to go back to the main menu and choose ‘Single Player’ → ‘Load Game’. And please be a bit more careful next time.]])
    ),
    w = 350,
    h = 250
@@ -360,7 +360,7 @@ build_second_quarry = {
    position = "topright",
    title = _"Build a second quarry",
    body = rt(
-      p(_[[When there are many rocks, you can consider building another quarry. This will make the stone production faster.]]) ..
+      p(_[[When there are many rocks, you can consider building another quarry. This will make the granite production faster.]]) ..
       paragraphdivider() ..
       listitem_bullet(_[[Build a second quarry near the rocks and connect it to your road network.]])
    ),
@@ -443,7 +443,7 @@ closing_msg_window_01 = {
    field = first_quarry_field,
    title = _"Closing Windows",
    body = rt(
-      p(_[[Well done! Let’s see how messages work in a real game, shall we? For this, I’ll take all rocks away from the poor stonemasons in the quarries. They will then send a message each that they can’t find any in their working areas the next time they try to do some work.]])
+      p(_[[Well done! Let’s see how messages work in a real game, shall we? For this, I’ll take all rocks away from the poor stonemasons in the quarries. They will then send a message each that they can’t find any in their work areas the next time they try to do some work.]])
    ),
    h = 300,
    w = 350
@@ -474,7 +474,7 @@ introduce_expansion = {
    title = _"Expanding Your Territory!",
    body = rt(
       p(_[[There is one more thing I’d like to teach you now: Expanding your territory. The place that we started with around our headquarters is barely enough for a basic building infrastructure, and we do not have access to mountains, which we need to mine minerals and coal. So, we have to expand our territory.]]) ..
-      p(_[[Expanding is as simple as building a military building at the edge of your territory. The Barbarians have a selection of different military buildings: sentries, barriers, donjons, fortresses and citadels. The bigger the building, the more expensive it is to build, but the more land it will conquer around itself and the more soldiers can be stationed there. The buildings also vary in their vision range: buildings with a tower see farther than others.]]) ..
+      p(_[[Expanding is as simple as building a military building at the edge of your territory. The Barbarians have a selection of different military buildings: sentries, barriers, towers, fortresses and citadels. The bigger the building, the more expensive it is to build, but the more land it will conquer around itself and the more soldiers can be stationed there. The buildings also vary in their vision range: buildings with a tower see farther than others.]]) ..
       p(_[[As soon as a military building is manned, it will extend your land. I will tell your more about military buildings in another tutorial.]]) ..
       paragraphdivider() ..
       listitem_bullet(_[[Let’s try it out now: build a military building on your border.]]) ..
@@ -486,7 +486,7 @@ introduce_expansion = {
       h1(_"Make your territory grow") ..
       p(_[[In Widelands, it is necessary to build many buildings, which take up a lot of space. To expand your territory, you have to build military buildings next to your border. Every tribe has several military buildings.]]) ..
       paragraphdivider() ..
-      listitem_bullet(_[[The Barbarians have four different military buildings you can build: the sentry (small), the barrier and the donjon (both medium) and the fortress (big). Just choose the one you like most.]]) ..
+      listitem_bullet(_[[The Barbarians have four different military buildings you can build: the sentry (small), the barrier and the tower (both medium) and the fortress (big). Just choose the one you like most.]]) ..
       listitem_arrow(_[[Remember that big buildings (green icon) cannot be built on small (red) or medium (yellow) building plots, but buildings can be built on a building plot that provides more space than they need. You should always keep that in mind when you search for a suitable place.]])
    )
 }

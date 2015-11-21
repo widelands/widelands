@@ -1,8 +1,0 @@
-help=_Thatch reed is produced in a reed yard and used to make the roofs of buildings waterproof.
-
-default_target_quantity=10 # currently not used
-preciousness=5
-
-[idle]
-pics=idle.png
-hotspot=3 12

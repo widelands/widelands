@@ -22,6 +22,7 @@
 
 #include <cstring>
 #include <map>
+#include <memory>
 #include <set>
 #include <string>
 #include <vector>
@@ -31,13 +32,14 @@
 #include "logic/building.h"
 #include "logic/production_program.h"
 #include "logic/program_result.h"
+#include "scripting/lua_table.h"
 
 namespace Widelands {
 
-struct WareDescr;
 struct ProductionProgram;
-class Soldier;
 class Request;
+class Soldier;
+class WareDescr;
 class WaresQueue;
 class WorkerDescr;
 
@@ -52,14 +54,14 @@ class WorkerDescr;
  * A production site can have one (or more) input wares types. Every input
  * wares type has an associated store.
  */
-struct ProductionSiteDescr : public BuildingDescr {
+class ProductionSiteDescr : public BuildingDescr {
+public:
 	friend struct ProductionProgram; // To add animations
 
-	ProductionSiteDescr
-		(MapObjectType type, char const * name, char const * descname,
-		 const std::string & directory, Profile &, Section & global_s,
-		 const TribeDescr &, const World&);
-	~ProductionSiteDescr() override;
+	ProductionSiteDescr(const std::string& init_descname, const char* msgctxt, MapObjectType type,
+							  const LuaTable& t, const EditorGameBase& egbase);
+	ProductionSiteDescr(const std::string& init_descname, const char* msgctxt,
+							  const LuaTable& t, const EditorGameBase& egbase);
 
 	Building & create_object() const override;
 
@@ -73,18 +75,18 @@ struct ProductionSiteDescr : public BuildingDescr {
 	const BillOfMaterials & working_positions() const {
 		return m_working_positions;
 	}
-	bool is_output_ware_type  (const WareIndex& i) const {
+	bool is_output_ware_type  (const DescriptionIndex& i) const {
 		return m_output_ware_types  .count(i);
 	}
-	bool is_output_worker_type(const WareIndex& i) const {
+	bool is_output_worker_type(const DescriptionIndex& i) const {
 		return m_output_worker_types.count(i);
 	}
 	const BillOfMaterials & inputs() const {return m_inputs;}
-	using Output = std::set<WareIndex>;
+	using Output = std::set<DescriptionIndex>;
 	const Output   & output_ware_types  () const {return m_output_ware_types;}
 	const Output   & output_worker_types() const {return m_output_worker_types;}
 	const ProductionProgram * get_program(const std::string &) const;
-	using Programs = std::map<std::string, ProductionProgram *>;
+	using Programs = std::map<std::string, std::unique_ptr<ProductionProgram>>;
 	const Programs & programs() const {return m_programs;}
 
 	const std::string& out_of_resource_title() const {
@@ -151,7 +153,7 @@ public:
 		return m_working_positions;
 	}
 
-	virtual bool has_workers(BuildingIndex targetSite, Game & game);
+	virtual bool has_workers(DescriptionIndex targetSite, Game & game);
 	uint8_t get_statistics_percent() {return m_last_stat_percent;}
 	uint8_t get_crude_statistics() {return (m_crude_percent + 5000) / 10000;}
 
@@ -165,7 +167,7 @@ public:
 		m_production_result = text;
 	}
 
-	WaresQueue & waresqueue(WareIndex) override;
+	WaresQueue & waresqueue(DescriptionIndex) override;
 
 	void init(EditorGameBase &) override;
 	void cleanup(EditorGameBase &) override;
@@ -223,9 +225,9 @@ protected:
 			coord(Coords::null()) {}
 	};
 
-	Request & request_worker(WareIndex);
+	Request & request_worker(DescriptionIndex);
 	static void request_worker_callback
-		(Game &, Request &, WareIndex, Worker *, PlayerImmovable &);
+		(Game &, Request &, DescriptionIndex, Worker *, PlayerImmovable &);
 
 	/**
 	 * Determine the next program to be run when the last program has finished.
@@ -296,15 +298,15 @@ private:
  * releasing some wares out of a building
 */
 struct Input {
-	Input(const WareIndex& Ware, uint8_t const Max) : m_ware(Ware), m_max(Max)
+	Input(const DescriptionIndex& Ware, uint8_t const Max) : m_ware(Ware), m_max(Max)
 	{}
 	~Input() {}
 
-	WareIndex ware() const {return m_ware;}
+	DescriptionIndex ware() const {return m_ware;}
 	uint8_t     max() const {return m_max;}
 
 private:
-	WareIndex m_ware;
+	DescriptionIndex m_ware;
 	uint8_t    m_max;
 };
 

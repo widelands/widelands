@@ -209,8 +209,8 @@ private:
 	int32_t calculate_strength(const std::vector<Widelands::Soldier*>);
 	uint32_t get_stocklevel_by_hint(size_t);
 	uint32_t get_stocklevel(BuildingObserver&);
-	uint32_t get_warehoused_stock(Widelands::WareIndex wt);
-	uint32_t get_stocklevel(Widelands::WareIndex);  // count all direct outputs_
+	uint32_t get_warehoused_stock(Widelands::DescriptionIndex wt);
+	uint32_t get_stocklevel(Widelands::DescriptionIndex);  // count all direct outputs_
 	void review_wares_targets(uint32_t);
 	void count_military_vacant_positions();
 
@@ -218,7 +218,7 @@ private:
 	// other player is accessible
 	// via walking
 	bool other_player_accessible(uint32_t max_distance,
-	                             int32_t* tested_fields,
+	                             uint32_t* tested_fields,
 	                             uint16_t* mineable_fields_count,
 	                             const Widelands::Coords starting_spot,
 	                             const WalkSearch type);
@@ -227,7 +227,7 @@ private:
 
 	void
 	consider_productionsite_influence(BuildableField&, Widelands::Coords, const BuildingObserver&);
-	// considering wood, stones, mines, water, fishes for candidate for colonization (new port)
+	// considering trees, rocks, mines, water, fishes for candidate for colonization (new port)
 	uint8_t spot_scoring(Widelands::Coords candidate_spot);
 
 	EconomyObserver* get_economy_observer(Widelands::Economy&);

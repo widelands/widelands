@@ -35,10 +35,10 @@ namespace Widelands {
 class BobDescr;
 class EditorCategory;
 class EditorGameBase;
+class ImmovableDescr;
 class ResourceDescription;
 class TerrainDescription;
 struct CritterDescr;
-struct ImmovableDescr;
 
 /// This is the in memory descriptions of the world and provides access to
 /// terrains, immovables and resources.
@@ -50,23 +50,23 @@ public:
 	// TODO(sirver): Refactor these to only return the description_maintainer so that world
 	// becomes a pure container.
 	const DescriptionMaintainer<TerrainDescription>& terrains() const;
-	TerrainDescription& terrain_descr(TerrainIndex i) const;
+	TerrainDescription& terrain_descr(DescriptionIndex i) const;
 	TerrainDescription const* get_ter(char const* const name) const;
 
-	int32_t get_bob(char const* const l) const;
-	BobDescr const* get_bob_descr(uint16_t index) const;
+	DescriptionIndex get_bob(char const* const l) const;
+	BobDescr const* get_bob_descr(DescriptionIndex index) const;
 	BobDescr const* get_bob_descr(const std::string& name) const;
 	int32_t get_nr_bobs() const;
 
 	const DescriptionMaintainer<ImmovableDescr>& immovables() const;
-	int32_t get_immovable_index(char const* const l) const;
-	int32_t get_nr_immovables() const;
-	ImmovableDescr const* get_immovable_descr(int32_t index) const;
+	DescriptionIndex get_immovable_index(const std::string& name) const;
+	DescriptionIndex get_nr_immovables() const;
+	ImmovableDescr const* get_immovable_descr(DescriptionIndex index) const;
 
-	int32_t get_resource(const char* const name) const;
-	ResourceDescription const* get_resource(ResourceIndex res) const;
-	int32_t get_nr_resources() const;
-	int32_t safe_resource_index(const char* const warename) const;
+	DescriptionIndex get_resource(const char* const name) const;
+	ResourceDescription const* get_resource(DescriptionIndex res) const;
+	DescriptionIndex get_nr_resources() const;
+	DescriptionIndex safe_resource_index(const char* const warename) const;
 
 	/// Add this new resource to the world description.
 	void add_resource_type(const LuaTable& table);

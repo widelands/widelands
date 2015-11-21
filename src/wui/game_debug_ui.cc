@@ -233,20 +233,20 @@ private:
 FieldDebugWindow::FieldDebugWindow
 	(InteractiveBase & parent, Widelands::Coords const coords)
 :
-	UI::Window(&parent, "field_debug", 0, 60, 214, 400, _("Debug Field")),
+	UI::Window(&parent, "field_debug", 0, 60, 300, 400, _("Debug Field")),
 	m_map     (parent.egbase().map()),
 	m_coords  (m_map.get_fcoords(coords)),
 
 	//  setup child panels
-	m_ui_field(this, 0, 0, 214, 280, ""),
+	m_ui_field(this, 0, 0, 300, 280, ""),
 
 	m_ui_immovable
 		(this, "immovable",
-		 0, 280, 214, 24,
+		 0, 280, 300, 24,
 		 g_gr->images().get("pics/but0.png"),
 		 ""),
 
-	m_ui_bobs(this, 0, 304, 214, 96)
+	m_ui_bobs(this, 0, 304, 300, 96)
 {
 	m_ui_immovable.sigclicked.connect(boost::bind(&FieldDebugWindow::open_immovable, this));
 
@@ -358,7 +358,7 @@ void FieldDebugWindow::think()
 		}
 	}
 	{
-		Widelands::ResourceIndex ridx = m_coords.field->get_resources();
+		Widelands::DescriptionIndex ridx = m_coords.field->get_resources();
 		int ramount = m_coords.field->get_resources_amount();
 		int initial_amount = m_coords.field->get_initial_res_amount();
 

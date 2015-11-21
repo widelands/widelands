@@ -2,14 +2,15 @@
 # Copyright (C) 2005-2015 Widelands Development Team
 # 
 # Translators:
-# Joe Hansen <joedalton2@yahoo.dk>, 2015
+# Erik Soe Sorensen <eriksoe@daimi.au.dk>, 2007
+# Joe Hansen <joedalton2@yahoo.dk>, 2009,2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-08-04 07:49+0000\n"
-"PO-Revision-Date: 2015-08-04 07:50+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2015-11-07 08:47+0000\n"
+"PO-Revision-Date: 2015-11-08 12:32+0000\n"
+"Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
 "Language-Team: Danish (http://www.transifex.com/widelands/widelands/language/da/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -17,270 +18,3477 @@ msgstr ""
 "Language: da\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../../tribes/scripting/format_help.lua:150
-#: ../../tribes/scripting/format_help.lua:442
-msgid "Dependencies"
-msgstr "Afhængigheder"
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/militarysites/atlanteans/castle/init.lua:7
+msgctxt "atlanteans_building"
+msgid "Castle"
+msgstr "Borg"
 
-#: ../../tribes/scripting/format_help.lua:150
-msgid "Soldiers:"
-msgstr "Soldater:"
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/militarysites/empire/castle/init.lua:7
+msgctxt "empire_building"
+msgid "Castle"
+msgstr "Borg"
 
-#: ../../tribes/scripting/format_help.lua:181
-msgid "%1$s or %2$s"
-msgstr "%1$s eller %2$s"
+#: ../../tribes/buildings/militarysites/atlanteans/castle/init.lua:51
+#: ../../tribes/buildings/militarysites/empire/castle/init.lua:45
+msgid "Your soldiers have occupied your castle."
+msgstr "Dine soldater har indtaget din borg."
 
-#: ../../tribes/scripting/format_help.lua:188
-msgid "%s and"
-msgstr "%s og"
+#: ../../tribes/buildings/militarysites/atlanteans/castle/init.lua:52
+#: ../../tribes/buildings/militarysites/empire/castle/init.lua:46
+msgid "Your castle discovered an aggressor."
+msgstr "Din borg opdagede en aggressor."
 
-#: TRANSLATORS This is a headline, you can see it in the building help for
-#: trainingsites, in the dependencies section
-#: ../../tribes/scripting/format_help.lua:219
-msgid "Equipment from"
-msgstr "Udstyr fra"
+#: ../../tribes/buildings/militarysites/atlanteans/castle/init.lua:53
+#: ../../tribes/buildings/militarysites/empire/castle/init.lua:47
+msgid "Your castle is under attack."
+msgstr "Din borg er under angreb."
 
-#: TRANSLATORS This is a headline, you can see it in the building help for
-#: trainingsites, in the dependencies section
-#: ../../tribes/scripting/format_help.lua:221
-msgid "and equipment from"
-msgstr "og udstyr fra"
+#: ../../tribes/buildings/militarysites/atlanteans/castle/init.lua:54
+#: ../../tribes/buildings/militarysites/empire/castle/init.lua:48
+msgid "The enemy defeated your soldiers at the castle."
+msgstr "Fjenden besejrede dine soldater ved borgen."
 
-#: TRANSLATORS This is a headline, you can see it in the building help for
-#: trainingsites, in the dependencies section
-#: ../../tribes/scripting/format_help.lua:223
-msgid "or equipment from"
-msgstr "eller udstyr fra"
+#: ../../tribes/buildings/militarysites/atlanteans/castle/init.lua:55
+#: ../../tribes/buildings/militarysites/empire/castle/init.lua:49
+msgid "Your soldiers defeated the enemy at the castle."
+msgstr "Dine soldater besejrede fjenden ved borgen."
 
-#: ../../tribes/scripting/format_help.lua:270
-msgid "General"
-msgstr "Generelt"
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/militarysites/atlanteans/guardhall/init.lua:7
+msgctxt "atlanteans_building"
+msgid "Guardhall"
+msgstr "Vagthal"
 
-#: ../../tribes/scripting/format_help.lua:271
-msgid "Purpose:"
-msgstr "Formål:"
+#: ../../tribes/buildings/militarysites/atlanteans/guardhall/init.lua:46
+msgid "Your soldiers have occupied your guardhall."
+msgstr "Dine soldater har indtaget din vagthal."
 
-#: ../../tribes/scripting/format_help.lua:277
-#: ../../tribes/scripting/format_help.lua:504
-msgid "Note:"
-msgstr "Note:"
+#: ../../tribes/buildings/militarysites/atlanteans/guardhall/init.lua:47
+msgid "Your guardhall discovered an aggressor."
+msgstr "Din vagthal opdagede en aggressor."
 
-#: ../../tribes/scripting/format_help.lua:281
-msgid "Work area radius:"
-msgstr ""
+#: ../../tribes/buildings/militarysites/atlanteans/guardhall/init.lua:48
+msgid "Your guardhall is under attack."
+msgstr "Din vagthal er under angreb."
 
-#: ../../tribes/scripting/format_help.lua:285
-#: ../../tribes/scripting/format_help.lua:290
-msgid "Healing:"
-msgstr "Helbred:"
+#: ../../tribes/buildings/militarysites/atlanteans/guardhall/init.lua:49
+msgid "The enemy defeated your soldiers at the guardhall."
+msgstr "Fjenden besejrede dine soldater ved vagthallen."
 
-#: ../../tribes/scripting/format_help.lua:286
-#: ../../tribes/scripting/format_help.lua:291
-msgid "Garrisoned soldiers heal %d health point per second"
-msgid_plural "Garrisoned soldiers heal %s health points per second"
-msgstr[0] ""
-msgstr[1] ""
+#: ../../tribes/buildings/militarysites/atlanteans/guardhall/init.lua:50
+msgid "Your soldiers defeated the enemy at the guardhall."
+msgstr "Din soldater besejrede fjenden ved vagthallen."
 
-#: ../../tribes/scripting/format_help.lua:287
-#: ../../tribes/scripting/format_help.lua:293
-msgid "Conquer range:"
-msgstr "Erobringsafstand:"
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/militarysites/atlanteans/guardhouse/init.lua:7
+msgctxt "atlanteans_building"
+msgid "Guardhouse"
+msgstr "Vagthus"
 
-#: ../../tribes/scripting/format_help.lua:292
-#: ../../tribes/scripting/format_help.lua:314
-msgid "Capacity:"
-msgstr "Kapacitet:"
+#: ../../tribes/buildings/militarysites/atlanteans/guardhouse/init.lua:45
+msgid "Your soldiers have occupied your guardhouse."
+msgstr "Dine soldater har indtaget dit vagthus."
 
-#: ../../tribes/scripting/format_help.lua:296
-msgid "Training:"
-msgstr "Træning:"
+#: ../../tribes/buildings/militarysites/atlanteans/guardhouse/init.lua:46
+msgid "Your guardhouse discovered an aggressor."
+msgstr "Dit vagthus opdagede en aggressor."
 
-#: TRANSLATORS %1$s = Health, Evade, Attack or Defense. %2$s and %3$s are
-#: numbers. ../../tribes/scripting/format_help.lua:299
-#: ../../tribes/scripting/format_help.lua:303
-#: ../../tribes/scripting/format_help.lua:307
-#: ../../tribes/scripting/format_help.lua:311
-msgid "Trains ‘%1$s’ from %2$s up to %3$s"
-msgstr "Træner »%1$s« fra %2$s op til %3$s"
+#: ../../tribes/buildings/militarysites/atlanteans/guardhouse/init.lua:47
+msgid "Your guardhouse is under attack."
+msgstr "Dit vagthus er under angreb."
 
-#: ../../tribes/scripting/format_help.lua:300
-msgid "Attack"
-msgstr "Angreb"
+#: ../../tribes/buildings/militarysites/atlanteans/guardhouse/init.lua:48
+msgid "The enemy defeated your soldiers at the guardhouse."
+msgstr "Fjenden besejrede dine soldater ved vagthuset."
 
-#: ../../tribes/scripting/format_help.lua:304
-msgid "Defense"
-msgstr "Forsvar"
+#: ../../tribes/buildings/militarysites/atlanteans/guardhouse/init.lua:49
+msgid "Your soldiers defeated the enemy at the guardhouse."
+msgstr "Dine soldater besejrede fjenden ved vagthuset."
 
-#: ../../tribes/scripting/format_help.lua:308
-msgid "Evade"
-msgstr "Undvig"
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/militarysites/atlanteans/tower/init.lua:7
+msgctxt "atlanteans_building"
+msgid "Tower"
+msgstr "Tårn"
 
-#: ../../tribes/scripting/format_help.lua:312
-msgid "Health"
-msgstr "Helbred"
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/militarysites/barbarians/tower/init.lua:7
+msgctxt "barbarians_building"
+msgid "Tower"
+msgstr "Tårn"
 
-#: ../../tribes/scripting/format_help.lua:316
-msgid "Vision range:"
-msgstr "Synsfelt:"
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/militarysites/empire/tower/init.lua:7
+msgctxt "empire_building"
+msgid "Tower"
+msgstr "Tårn"
 
-#: ../../tribes/scripting/format_help.lua:333
-#: ../../tribes/scripting/worker_help.lua:46
-msgid "Lore"
-msgstr "Folkeminde"
+#: ../../tribes/buildings/militarysites/atlanteans/tower/init.lua:50
+#: ../../tribes/buildings/militarysites/barbarians/tower/init.lua:59
+#: ../../tribes/buildings/militarysites/empire/tower/init.lua:53
+msgid "Your soldiers have occupied your tower."
+msgstr "Dine soldater har indtaget dit tårn."
 
-#: ../../tribes/scripting/format_help.lua:361
-msgid "%1$s from: %2$s"
-msgstr "%1$s fra: %2$s"
+#: ../../tribes/buildings/militarysites/atlanteans/tower/init.lua:51
+#: ../../tribes/buildings/militarysites/barbarians/tower/init.lua:60
+#: ../../tribes/buildings/militarysites/empire/tower/init.lua:54
+msgid "Your tower discovered an aggressor."
+msgstr "Dit tårn opdagede en aggressor."
 
-#: ../../tribes/scripting/format_help.lua:366
-msgid "Incoming:"
-msgstr "Indgående:"
+#: ../../tribes/buildings/militarysites/atlanteans/tower/init.lua:52
+#: ../../tribes/buildings/militarysites/barbarians/tower/init.lua:61
+#: ../../tribes/buildings/militarysites/empire/tower/init.lua:55
+msgid "Your tower is under attack."
+msgstr "Dit tårn er under angreb."
 
-#: ../../tribes/scripting/format_help.lua:370
-msgid "Collects:"
-msgstr "Indsamlinger:"
+#: ../../tribes/buildings/militarysites/atlanteans/tower/init.lua:53
+#: ../../tribes/buildings/militarysites/barbarians/tower/init.lua:62
+#: ../../tribes/buildings/militarysites/empire/tower/init.lua:56
+msgid "The enemy defeated your soldiers at the tower."
+msgstr "Fjenden besejrede dine soldater ved tårnet."
 
-#: TRANSLATORS This is a verb (The miner mines)
-#: ../../tribes/scripting/format_help.lua:382
-msgid "Mines:"
-msgstr "Miner:"
+#: ../../tribes/buildings/militarysites/atlanteans/tower/init.lua:54
+#: ../../tribes/buildings/militarysites/barbarians/tower/init.lua:63
+#: ../../tribes/buildings/militarysites/empire/tower/init.lua:57
+msgid "Your soldiers defeated the enemy at the tower."
+msgstr "Dine soldater besejrede fjenden ved tårnet."
 
-#: ../../tribes/scripting/format_help.lua:404
-msgid "Produces:"
-msgstr "Fremstiller:"
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/militarysites/atlanteans/tower_high/init.lua:7
+msgctxt "atlanteans_building"
+msgid "High Tower"
+msgstr "Højt tårn"
 
-#: ../../tribes/scripting/format_help.lua:439
-msgid "Outgoing:"
-msgstr "Udgående:"
+#: ../../tribes/buildings/militarysites/atlanteans/tower_high/init.lua:42
+msgid "Your soldiers have occupied your high tower."
+msgstr "Dine soldater har indtaget dit store tårn."
 
-#: ../../tribes/scripting/format_help.lua:441
-msgid "None"
-msgstr "Intet"
+#: ../../tribes/buildings/militarysites/atlanteans/tower_high/init.lua:43
+msgid "Your high tower discovered an aggressor."
+msgstr "Dit store tårn opdagede en aggressor."
 
-#: TRANSLATORS %1$d is a number, %2$s the name of a ware, e.g. 12x Stone
-#: ../../tribes/scripting/format_help.lua:459
-msgid "%1$dx %2$s"
-msgstr "%1$dx %2$s"
+#: ../../tribes/buildings/militarysites/atlanteans/tower_high/init.lua:44
+msgid "Your high tower is under attack."
+msgstr "Dit store tårn er under angreb."
 
-#: ../../tribes/scripting/format_help.lua:481
-msgid "Building"
-msgstr "Bygning"
+#: ../../tribes/buildings/militarysites/atlanteans/tower_high/init.lua:45
+msgid "The enemy defeated your soldiers at the high tower."
+msgstr "Fjenden besejrede dine soldater ved det store tårn."
 
-#: ../../tribes/scripting/format_help.lua:485
-msgid "Mine plot"
-msgstr "Mineplads"
+#: ../../tribes/buildings/militarysites/atlanteans/tower_high/init.lua:46
+msgid "Your soldiers defeated the enemy at the high tower."
+msgstr "Dine soldater besejrede fjenden ved det store tårn."
 
-#: ../../tribes/scripting/format_help.lua:485
-#: ../../tribes/scripting/format_help.lua:487
-#: ../../tribes/scripting/format_help.lua:490
-#: ../../tribes/scripting/format_help.lua:492
-#: ../../tribes/scripting/format_help.lua:494
-#: ../../tribes/scripting/format_help.lua:496
-msgid "Space required:"
-msgstr "Plads krævet:"
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/militarysites/atlanteans/tower_small/init.lua:7
+msgctxt "atlanteans_building"
+msgid "Small Tower"
+msgstr "Lille tårn"
 
-#: ../../tribes/scripting/format_help.lua:487
-msgid "Port plot"
-msgstr "Portplads"
+#: ../../tribes/buildings/militarysites/atlanteans/tower_small/init.lua:45
+msgid "Your soldiers have occupied your small tower."
+msgstr "Dine soldater har indtaget dit lille tårn."
 
-#: ../../tribes/scripting/format_help.lua:490
-msgid "Small plot"
-msgstr "Lille plads"
+#: ../../tribes/buildings/militarysites/atlanteans/tower_small/init.lua:46
+msgid "Your small tower discovered an aggressor."
+msgstr "Dit lille tårn opdagede en aggressor."
 
-#: ../../tribes/scripting/format_help.lua:492
-msgid "Medium plot"
-msgstr "Mellem plads"
+#: ../../tribes/buildings/militarysites/atlanteans/tower_small/init.lua:47
+msgid "Your small tower is under attack."
+msgstr "Dit lille tårn er under angreb."
 
-#: ../../tribes/scripting/format_help.lua:494
-msgid "Big plot"
-msgstr "Stor plads"
+#: ../../tribes/buildings/militarysites/atlanteans/tower_small/init.lua:48
+msgid "The enemy defeated your soldiers at the small tower."
+msgstr "Fjenden besejrede dine soldater ved det lille tårn."
 
-#: ../../tribes/scripting/format_help.lua:496
-#: ../../tribes/scripting/format_help.lua:530
-#: ../../tribes/scripting/format_help.lua:575
-#: ../../tribes/scripting/format_help.lua:623
-msgid "Unknown"
-msgstr "Ukendt"
+#: ../../tribes/buildings/militarysites/atlanteans/tower_small/init.lua:49
+msgid "Your soldiers defeated the enemy at the small tower."
+msgstr "Dine soldater besejrede fjenden ved det lille tårn."
 
-#: ../../tribes/scripting/format_help.lua:505
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/militarysites/barbarians/barrier/init.lua:7
+msgctxt "barbarians_building"
+msgid "Barrier"
+msgstr "Fæstning"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/militarysites/empire/barrier/init.lua:7
+msgctxt "empire_building"
+msgid "Barrier"
+msgstr "Fæstning"
+
+#: ../../tribes/buildings/militarysites/barbarians/barrier/init.lua:52
+#: ../../tribes/buildings/militarysites/empire/barrier/init.lua:56
+msgid "Your soldiers have occupied your barrier."
+msgstr "Dine soldater har indtaget din barriere."
+
+#: ../../tribes/buildings/militarysites/barbarians/barrier/init.lua:53
+#: ../../tribes/buildings/militarysites/empire/barrier/init.lua:57
+msgid "Your barrier discovered an aggressor."
+msgstr "Din barriere opdagede en aggressor."
+
+#: ../../tribes/buildings/militarysites/barbarians/barrier/init.lua:54
+#: ../../tribes/buildings/militarysites/empire/barrier/init.lua:58
+msgid "Your barrier is under attack."
+msgstr "Din barriere er under angreb."
+
+#: ../../tribes/buildings/militarysites/barbarians/barrier/init.lua:55
+#: ../../tribes/buildings/militarysites/empire/barrier/init.lua:59
+msgid "The enemy defeated your soldiers at the barrier."
+msgstr "Fjenden besejrede dine soldater ved barrieren."
+
+#: ../../tribes/buildings/militarysites/barbarians/barrier/init.lua:56
+#: ../../tribes/buildings/militarysites/empire/barrier/init.lua:60
+msgid "Your soldiers defeated the enemy at the barrier."
+msgstr "Dine soldater besejrede fjenden ved barrieren."
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/militarysites/barbarians/citadel/init.lua:7
+msgctxt "barbarians_building"
+msgid "Citadel"
+msgstr "Kastel"
+
+#: ../../tribes/buildings/militarysites/barbarians/citadel/init.lua:56
+msgid "Your soldiers have occupied your citadel."
+msgstr "Dine soldater har indtaget dit kastel."
+
+#: ../../tribes/buildings/militarysites/barbarians/citadel/init.lua:57
+msgid "Your citadel discovered an aggressor."
+msgstr "Dit kastel opdagede en aggressor."
+
+#: ../../tribes/buildings/militarysites/barbarians/citadel/init.lua:58
+msgid "Your citadel is under attack."
+msgstr "Dit kastel er under angreb."
+
+#: ../../tribes/buildings/militarysites/barbarians/citadel/init.lua:59
+msgid "The enemy defeated your soldiers at the citadel."
+msgstr "Fjenden besejrede dine soldater ved kastellet."
+
+#: ../../tribes/buildings/militarysites/barbarians/citadel/init.lua:60
+msgid "Your soldiers defeated the enemy at the citadel."
+msgstr "Dine soldater besejrede fjenden ved kastellet."
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/militarysites/barbarians/fortress/init.lua:7
+msgctxt "barbarians_building"
+msgid "Fortress"
+msgstr "Fort"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/militarysites/empire/fortress/init.lua:7
+msgctxt "empire_building"
+msgid "Fortress"
+msgstr "Fort"
+
+#: ../../tribes/buildings/militarysites/barbarians/fortress/init.lua:62
+#: ../../tribes/buildings/militarysites/empire/fortress/init.lua:58
+msgid "Your soldiers have occupied your fortress."
+msgstr "Dine soldater har indtaget din fæstning."
+
+#: ../../tribes/buildings/militarysites/barbarians/fortress/init.lua:63
+#: ../../tribes/buildings/militarysites/empire/fortress/init.lua:59
+msgid "Your fortress discovered an aggressor."
+msgstr "Din fæstning opdagede en aggressor."
+
+#: ../../tribes/buildings/militarysites/barbarians/fortress/init.lua:64
+#: ../../tribes/buildings/militarysites/empire/fortress/init.lua:60
+msgid "Your fortress is under attack."
+msgstr "Din fæstning er under angreb."
+
+#: ../../tribes/buildings/militarysites/barbarians/fortress/init.lua:65
+#: ../../tribes/buildings/militarysites/empire/fortress/init.lua:61
+msgid "The enemy defeated your soldiers at the fortress."
+msgstr "Fjenden besejrede dine soldater ved fæstningen."
+
+#: ../../tribes/buildings/militarysites/barbarians/fortress/init.lua:66
+#: ../../tribes/buildings/militarysites/empire/fortress/init.lua:62
+msgid "Your soldiers defeated the enemy at the fortress."
+msgstr "Dine soldater besejrede fjenden ved fæstningen."
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/militarysites/barbarians/sentry/init.lua:7
+msgctxt "barbarians_building"
+msgid "Sentry"
+msgstr "Forpost"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/militarysites/empire/sentry/init.lua:7
+msgctxt "empire_building"
+msgid "Sentry"
+msgstr "Forpost"
+
+#: ../../tribes/buildings/militarysites/barbarians/sentry/init.lua:54
+#: ../../tribes/buildings/militarysites/empire/sentry/init.lua:53
+msgid "Your soldiers have occupied your sentry."
+msgstr "Dine soldater har indtaget dit vagttårn."
+
+#: ../../tribes/buildings/militarysites/barbarians/sentry/init.lua:55
+#: ../../tribes/buildings/militarysites/empire/sentry/init.lua:54
+msgid "Your sentry discovered an aggressor."
+msgstr "Dit vagttårn opdagede en aggressor."
+
+#: ../../tribes/buildings/militarysites/barbarians/sentry/init.lua:56
+#: ../../tribes/buildings/militarysites/empire/sentry/init.lua:55
+msgid "Your sentry is under attack."
+msgstr "Dit vagttårn er under angreb."
+
+#: ../../tribes/buildings/militarysites/barbarians/sentry/init.lua:57
+#: ../../tribes/buildings/militarysites/empire/sentry/init.lua:56
+msgid "The enemy defeated your soldiers at the sentry."
+msgstr "Fjenden besejrede dine soldater ved vagttårnet."
+
+#: ../../tribes/buildings/militarysites/barbarians/sentry/init.lua:58
+#: ../../tribes/buildings/militarysites/empire/sentry/init.lua:57
+msgid "Your soldiers defeated the enemy at the sentry."
+msgstr "Dine soldater besejrede fjenden ved vagttårnet."
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/militarysites/empire/blockhouse/init.lua:7
+msgctxt "empire_building"
+msgid "Blockhouse"
+msgstr "Blokhus"
+
+#: ../../tribes/buildings/militarysites/empire/blockhouse/init.lua:41
+msgid "Your soldiers have occupied your blockhouse."
+msgstr "Din soldater har indtaget dit blokhus."
+
+#: ../../tribes/buildings/militarysites/empire/blockhouse/init.lua:42
+msgid "Your blockhouse discovered an aggressor."
+msgstr "Dit blokhus opdagede en aggressor."
+
+#: ../../tribes/buildings/militarysites/empire/blockhouse/init.lua:43
+msgid "Your blockhouse is under attack."
+msgstr "Dit blokhus er under angreb."
+
+#: ../../tribes/buildings/militarysites/empire/blockhouse/init.lua:44
+msgid "The enemy defeated your soldiers at the blockhouse."
+msgstr "Fjenden besejrede dine soldater ved blokhuset."
+
+#: ../../tribes/buildings/militarysites/empire/blockhouse/init.lua:45
+msgid "Your soldiers defeated the enemy at the blockhouse."
+msgstr "Dine soldater besejrede fjenden ved blokhuset."
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/militarysites/empire/outpost/init.lua:7
+msgctxt "empire_building"
+msgid "Outpost"
+msgstr "Forpost"
+
+#: ../../tribes/buildings/militarysites/empire/outpost/init.lua:47
+msgid "Your soldiers have occupied your outpost."
+msgstr "Dine soldater har indtaget din forpost."
+
+#: ../../tribes/buildings/militarysites/empire/outpost/init.lua:48
+msgid "Your outpost discovered an aggressor."
+msgstr "Din forpost opdagede en aggressor."
+
+#: ../../tribes/buildings/militarysites/empire/outpost/init.lua:49
+msgid "Your outpost is under attack."
+msgstr "Din forpost er under angreb."
+
+#: ../../tribes/buildings/militarysites/empire/outpost/init.lua:50
+msgid "The enemy defeated your soldiers at the outpost."
+msgstr "Fjenden besejrede dine soldater ved forposten."
+
+#: ../../tribes/buildings/militarysites/empire/outpost/init.lua:51
+msgid "Your soldiers defeated the enemy at the outpost."
+msgstr "Dine soldater besejrede fjenden ved forposten."
+
+#. TRANSLATORS: This is a name used in lists of buildings for buildings under
+#. construction
+#: ../../tribes/buildings/partially_finished/constructionsite/init.lua:7
+msgctxt "building"
+msgid "Construction Site"
+msgstr "Byggeplads"
+
+#. TRANSLATORS: This is a name used in lists of buildings for buildings being
+#. taken apart
+#: ../../tribes/buildings/partially_finished/dismantlesite/init.lua:7
+msgctxt "building"
+msgid "Dismantle Site"
+msgstr "Nedrivningsområde"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/atlanteans/armorsmithy/init.lua:7
+msgctxt "atlanteans_building"
+msgid "Armor Smithy"
+msgstr "Rustningssmedje"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/empire/armorsmithy/init.lua:7
+msgctxt "empire_building"
+msgid "Armor Smithy"
+msgstr "Rustningssmedje"
+
+#. TRANSLATORS: Completed/Skipped/Did not start working because ...
+#: ../../tribes/buildings/productionsites/atlanteans/armorsmithy/init.lua:58
+#: ../../tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:48
+#: ../../tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:63
+#: ../../tribes/buildings/productionsites/atlanteans/farm/init.lua:51
+#: ../../tribes/buildings/productionsites/atlanteans/mill/init.lua:57
+#: ../../tribes/buildings/productionsites/atlanteans/quarry/init.lua:45
+#: ../../tribes/buildings/productionsites/atlanteans/shipyard/init.lua:67
+#: ../../tribes/buildings/productionsites/atlanteans/smelting_works/init.lua:56
+#: ../../tribes/buildings/productionsites/atlanteans/smokery/init.lua:58
+#: ../../tribes/buildings/productionsites/atlanteans/spiderfarm/init.lua:55
+#: ../../tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:68
+#: ../../tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua:63
+#: ../../tribes/buildings/productionsites/atlanteans/weaving_mill/init.lua:58
+#: ../../tribes/buildings/productionsites/atlanteans/well/init.lua:52
+#: ../../tribes/buildings/productionsites/barbarians/ax_workshop/init.lua:69
+#: ../../tribes/buildings/productionsites/barbarians/big_inn/init.lua:63
+#: ../../tribes/buildings/productionsites/barbarians/farm/init.lua:62
+#: ../../tribes/buildings/productionsites/barbarians/gamekeepers_hut/init.lua:51
+#: ../../tribes/buildings/productionsites/barbarians/helmsmithy/init.lua:72
+#: ../../tribes/buildings/productionsites/barbarians/inn/init.lua:61
+#: ../../tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:79
+#: ../../tribes/buildings/productionsites/barbarians/quarry/init.lua:54
+#: ../../tribes/buildings/productionsites/barbarians/reed_yard/init.lua:46
+#: ../../tribes/buildings/productionsites/barbarians/shipyard/init.lua:66
+#: ../../tribes/buildings/productionsites/barbarians/smelting_works/init.lua:59
+#: ../../tribes/buildings/productionsites/barbarians/warmill/init.lua:73
+#: ../../tribes/buildings/productionsites/barbarians/well/init.lua:54
+#: ../../tribes/buildings/productionsites/empire/armorsmithy/init.lua:73
+#: ../../tribes/buildings/productionsites/empire/farm/init.lua:49
+#: ../../tribes/buildings/productionsites/empire/inn/init.lua:57
+#: ../../tribes/buildings/productionsites/empire/marblemine/init.lua:63
+#: ../../tribes/buildings/productionsites/empire/quarry/init.lua:46
+#: ../../tribes/buildings/productionsites/empire/shipyard/init.lua:66
+#: ../../tribes/buildings/productionsites/empire/smelting_works/init.lua:62
+#: ../../tribes/buildings/productionsites/empire/toolsmithy/init.lua:67
+#: ../../tribes/buildings/productionsites/empire/vineyard/init.lua:47
+#: ../../tribes/buildings/productionsites/empire/weaponsmithy/init.lua:69
+#: ../../tribes/buildings/productionsites/empire/well/init.lua:52
+msgid "working"
+msgstr "arbejder"
+
+#. TRANSLATORS: Completed/Skipped/Did not start forging a steel shield because
+#. ...
+#: ../../tribes/buildings/productionsites/atlanteans/armorsmithy/init.lua:67
+msgid "forging a steel shield"
+msgstr "smedning af en hjelm"
+
+#. TRANSLATORS: Completed/Skipped/Did not start forging an advanced shield
+#. because ...
+#: ../../tribes/buildings/productionsites/atlanteans/armorsmithy/init.lua:78
+msgid "forging an advanced shield"
+msgstr "smedning af et avanceret skjold"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/atlanteans/bakery/init.lua:7
+msgctxt "atlanteans_building"
+msgid "Bakery"
+msgstr "Bageri"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/barbarians/bakery/init.lua:7
+msgctxt "barbarians_building"
+msgid "Bakery"
+msgstr "Bageri"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/empire/bakery/init.lua:7
+msgctxt "empire_building"
+msgid "Bakery"
+msgstr "Bageri"
+
+#. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
+#: ../../tribes/buildings/productionsites/atlanteans/bakery/init.lua:57
+#: ../../tribes/buildings/productionsites/barbarians/bakery/init.lua:61
+#: ../../tribes/buildings/productionsites/empire/bakery/init.lua:61
+msgid "baking bread"
+msgstr "bager brød"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:7
+msgctxt "atlanteans_building"
+msgid "Blackroot Farm"
+msgstr "Rodfrugtslandbrug"
+
+#. TRANSLATORS: Completed/Skipped/Did not start planting blackroot because ...
+#: ../../tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:57
+msgid "planting blackroot"
+msgstr "planter rodfrugter"
+
+#. TRANSLATORS: Completed/Skipped/Did not start harvesting blackroot because
+#. ...
+#: ../../tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:65
+msgid "harvesting blackroot"
+msgstr "høster rodfrugter"
+
+#: ../../tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:73
+#: ../../tribes/buildings/productionsites/atlanteans/farm/init.lua:77
+#: ../../tribes/buildings/productionsites/barbarians/farm/init.lua:89
+#: ../../tribes/buildings/productionsites/barbarians/reed_yard/init.lua:71
+#: ../../tribes/buildings/productionsites/empire/farm/init.lua:75
+#: ../../tribes/buildings/productionsites/empire/vineyard/init.lua:72
+msgid "Out of Fields"
+msgstr "Ikke flere marker"
+
+#: ../../tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:74
+msgctxt "atlanteans_building"
 msgid ""
-"This building can either be built directly or obtained by enhancing another "
-"building."
-msgstr "Denne bygning kan enten bygges direkte eller dannes ved at forbedre en anden bygning."
+"The blackroot farmer working at this blackroot farm has no cleared soil to "
+"plant his seeds."
+msgstr "Landmanden på denne rodfrugtgård har ingen ryddet jort til sine frø."
 
-#: ../../tribes/scripting/format_help.lua:511
-msgid "Direct build cost:"
-msgstr "Direkte byggepris:"
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/atlanteans/charcoal_kiln/init.lua:7
+msgctxt "atlanteans_building"
+msgid "Charcoal Kiln"
+msgstr "Trækulsovn"
 
-#: ../../tribes/scripting/format_help.lua:513
-msgid "Build cost:"
-msgstr "Byggepris:"
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/barbarians/charcoal_kiln/init.lua:7
+msgctxt "barbarians_building"
+msgid "Charcoal Kiln"
+msgstr "Trækulsovn"
 
-#: ../../tribes/scripting/format_help.lua:525
-msgid "Or enhanced from:"
-msgstr "Eller forbedret fra:"
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/empire/charcoal_kiln/init.lua:7
+msgctxt "empire_building"
+msgid "Charcoal Kiln"
+msgstr "Trækulsovn"
 
-#: ../../tribes/scripting/format_help.lua:527
-#: ../../tribes/scripting/format_help.lua:530
-msgid "Enhanced from:"
-msgstr "Forbedret fra:"
+#. TRANSLATORS: Completed/Skipped/Did not start producing coal because ...
+#: ../../tribes/buildings/productionsites/atlanteans/charcoal_kiln/init.lua:53
+#: ../../tribes/buildings/productionsites/barbarians/charcoal_kiln/init.lua:58
+#: ../../tribes/buildings/productionsites/empire/charcoal_kiln/init.lua:54
+msgid "producing coal"
+msgstr "fremstiller kul"
 
-#: ../../tribes/scripting/format_help.lua:539
-msgid "Cumulative cost:"
-msgstr "Samlet omkostning:"
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/atlanteans/coalmine/init.lua:7
+msgctxt "atlanteans_building"
+msgid "Coal Mine"
+msgstr "Kulmine"
 
-#: ../../tribes/scripting/format_help.lua:580
-msgid "If built directly, dismantle yields:"
-msgstr "Hvis bygget direkte giver nedrivning:"
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/barbarians/coalmine/init.lua:7
+msgctxt "barbarians_building"
+msgid "Coal Mine"
+msgstr "Kulmine"
 
-#: ../../tribes/scripting/format_help.lua:585
-msgid "If enhanced, dismantle yields:"
-msgstr "Hvis forbedret giver nedrivning:"
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/empire/coalmine/init.lua:7
+msgctxt "empire_building"
+msgid "Coal Mine"
+msgstr "Kulmine"
 
-#: ../../tribes/scripting/format_help.lua:587
-#: ../../tribes/scripting/format_help.lua:628
-msgid "Dismantle yields:"
-msgstr "Nedrivning giver:"
+#. TRANSLATORS: Completed/Skipped/Did not start mining coal because ...
+#: ../../tribes/buildings/productionsites/atlanteans/coalmine/init.lua:61
+#: ../../tribes/buildings/productionsites/barbarians/coalmine/init.lua:65
+#: ../../tribes/buildings/productionsites/barbarians/coalmine_deep/init.lua:65
+#: ../../tribes/buildings/productionsites/barbarians/coalmine_deeper/init.lua:64
+#: ../../tribes/buildings/productionsites/empire/coalmine/init.lua:62
+#: ../../tribes/buildings/productionsites/empire/coalmine_deep/init.lua:60
+msgid "mining coal"
+msgstr "kulmindedrift"
 
-#: ../../tribes/scripting/format_help.lua:637
-msgid "Can be enhanced to:"
-msgstr "Kan forbedres til:"
+#: ../../tribes/buildings/productionsites/atlanteans/coalmine/init.lua:79
+#: ../../tribes/buildings/productionsites/barbarians/coalmine/init.lua:77
+#: ../../tribes/buildings/productionsites/barbarians/coalmine_deep/init.lua:80
+#: ../../tribes/buildings/productionsites/barbarians/coalmine_deeper/init.lua:79
+#: ../../tribes/buildings/productionsites/empire/coalmine/init.lua:77
+#: ../../tribes/buildings/productionsites/empire/coalmine_deep/init.lua:75
+msgid "Main Coal Vein Exhausted"
+msgstr "Kullets hovedåre er udtømt"
 
-#: ../../tribes/scripting/format_help.lua:665
-msgid "Crew required:"
-msgstr "Bemanding krævet:"
+#: ../../tribes/buildings/productionsites/atlanteans/coalmine/init.lua:81
+msgctxt "atlanteans_building"
+msgid ""
+"This coal mine’s main vein is exhausted. Expect strongly diminished returns "
+"on investment. You should consider dismantling or destroying it."
+msgstr "Kulmines hovedåre er udtømt. Forvent stærkt formindsket udbytte på din investering. Du bør overveje at udvide minden, rive den ned eller ødelægge den."
 
-#: ../../tribes/scripting/format_help.lua:665
-msgid "Workers"
-msgstr "Arbejdere"
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:7
+msgctxt "atlanteans_building"
+msgid "Crystal Mine"
+msgstr "Krystalmine"
 
-#: ../../tribes/scripting/format_help.lua:688
-msgid "%s or better"
-msgstr "%s eller bedre"
+#. TRANSLATORS: Completed/Skipped/Did not start mining granite because ...
+#: ../../tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:73
+#: ../../tribes/buildings/productionsites/barbarians/granitemine/init.lua:63
+#: ../../tribes/buildings/productionsites/empire/marblemine/init.lua:87
+msgid "mining granite"
+msgstr "granitminedrift"
 
-#: ../../tribes/scripting/format_help.lua:701
-#: ../../tribes/scripting/worker_help.lua:67
-msgid "Experience levels:"
-msgstr "Erfaringsniveau"
+#. TRANSLATORS: Completed/Skipped/Did not start mining quartz because ...
+#: ../../tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:94
+msgid "mining quartz"
+msgstr "minekvarts"
 
-#: ../../tribes/scripting/format_help.lua:702
-#: ../../tribes/scripting/format_help.lua:711
-#: ../../tribes/scripting/worker_help.lua:68
-#: ../../tribes/scripting/worker_help.lua:77
-msgid "%s to %s (%s EP)"
-msgstr "%s til %s (%s EP)"
+#. TRANSLATORS: Completed/Skipped/Did not start mining diamonds because ...
+#: ../../tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:112
+msgid "mining diamonds"
+msgstr "minediamanter"
 
-#: ../../tribes/scripting/format_help.lua:736
-#: ../../tribes/scripting/worker_help.lua:99
-msgid "Worker uses:"
-msgid_plural "Workers use:"
-msgstr[0] "Arbejder bruger:"
-msgstr[1] "Arbejdere bruger:"
+#: ../../tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:130
+msgid "Main Crystal Vein Exhausted"
+msgstr "Krystalhovedåren er udtømt"
 
-#: ../../tribes/scripting/format_help.lua:754
-msgid "Performance:"
-msgstr "Ydelse:"
+#: ../../tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:132
+msgctxt "atlanteans_building"
+msgid ""
+"This crystal mine’s main vein is exhausted. Expect strongly diminished "
+"returns on investment. You should consider dismantling or destroying it."
+msgstr "Krystalminens hovedåre er udtømt. Forvent kraftigt formindsket udbytte på din investering. Du bør overveje at rive minen ned eller ødelægge den."
 
-#: ../../tribes/scripting/format_help.lua:754
-msgid "Production"
-msgstr "Produktion"
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/atlanteans/farm/init.lua:7
+msgctxt "atlanteans_building"
+msgid "Farm"
+msgstr "Landbrug"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/barbarians/farm/init.lua:7
+msgctxt "barbarians_building"
+msgid "Farm"
+msgstr "Landbrug"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/empire/farm/init.lua:7
+msgctxt "empire_building"
+msgid "Farm"
+msgstr "Landbrug"
+
+#. TRANSLATORS: Completed/Skipped/Did not start planting corn because ...
+#: ../../tribes/buildings/productionsites/atlanteans/farm/init.lua:61
+msgid "planting corn"
+msgstr "planter korn"
+
+#. TRANSLATORS: Completed/Skipped/Did not start harvesting corn because ...
+#: ../../tribes/buildings/productionsites/atlanteans/farm/init.lua:69
+msgid "harvesting corn"
+msgstr "høster korn"
+
+#: ../../tribes/buildings/productionsites/atlanteans/farm/init.lua:78
+msgctxt "atlanteans_building"
+msgid ""
+"The farmer working at this farm has no cleared soil to plant his seeds."
+msgstr "Landmanden der arbejder på dette landbrug har ikke ryddet jord til sine frø."
+
+#: ../../tribes/buildings/productionsites/barbarians/farm/init.lua:90
+msgctxt "barbarians_building"
+msgid ""
+"The farmer working at this farm has no cleared soil to plant his seeds."
+msgstr "Landmanden der arbejder på dette landbrug har ikke ryddet jord til sine frø."
+
+#: ../../tribes/buildings/productionsites/empire/farm/init.lua:76
+msgctxt "empire_building"
+msgid ""
+"The farmer working at this farm has no cleared soil to plant his seeds."
+msgstr "Landmanden der arbejder på dette landbrug har ikke ryddet jord til sine frø."
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:7
+msgctxt "atlanteans_building"
+msgid "Fish Breeder’s House"
+msgstr "Fiskeopdræt"
+
+#. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
+#: ../../tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:43
+msgid "breeding fish"
+msgstr "avler fisk"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/atlanteans/fishers_house/init.lua:7
+msgctxt "atlanteans_building"
+msgid "Fisher’s House"
+msgstr "Fiskerhus"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/empire/fishers_house/init.lua:7
+msgctxt "empire_building"
+msgid "Fisher’s House"
+msgstr "Fiskerhus"
+
+#. TRANSLATORS: Completed/Skipped/Did not start fishing because ...
+#: ../../tribes/buildings/productionsites/atlanteans/fishers_house/init.lua:44
+#: ../../tribes/buildings/productionsites/barbarians/fishers_hut/init.lua:53
+#: ../../tribes/buildings/productionsites/empire/fishers_house/init.lua:45
+msgid "fishing"
+msgstr "fisker"
+
+#: ../../tribes/buildings/productionsites/atlanteans/fishers_house/init.lua:53
+#: ../../tribes/buildings/productionsites/barbarians/fishers_hut/init.lua:61
+#: ../../tribes/buildings/productionsites/empire/fishers_house/init.lua:53
+msgid "Out of Fish"
+msgstr "Ikke flere fisk"
+
+#: ../../tribes/buildings/productionsites/atlanteans/fishers_house/init.lua:54
+msgctxt "atlanteans_building"
+msgid ""
+"The fisher working out of this fisher’s house can’t find any fish in his "
+"work area. Remember that you can increase the number of existing fish by "
+"building a fish breeder’s house."
+msgstr "Fiskeren fra dette fiskerhus kan ikke finde nogle fisk indenfor sin fiskeradius. Husk at du kan øge antallet af eksisterende fisk ved at bygge et fiskeopdræt."
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/atlanteans/foresters_house/init.lua:7
+msgctxt "atlanteans_building"
+msgid "Forester’s House"
+msgstr "Skovfogedhus"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/empire/foresters_house/init.lua:7
+msgctxt "empire_building"
+msgid "Forester’s House"
+msgstr "Skovfogedhus"
+
+#. TRANSLATORS: Completed/Skipped/Did not start planting trees because ...
+#: ../../tribes/buildings/productionsites/atlanteans/foresters_house/init.lua:43
+#: ../../tribes/buildings/productionsites/barbarians/rangers_hut/init.lua:50
+#: ../../tribes/buildings/productionsites/empire/foresters_house/init.lua:43
+msgid "planting trees"
+msgstr "Plantning af træer"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/atlanteans/gold_spinning_mill/init.lua:7
+msgctxt "atlanteans_building"
+msgid "Gold Spinning Mill"
+msgstr "Guldspindemølle"
+
+#. TRANSLATORS: Completed/Skipped/Did not start spinning gold because ...
+#: ../../tribes/buildings/productionsites/atlanteans/gold_spinning_mill/init.lua:53
+msgid "spinning gold"
+msgstr "Spinder guldtråde"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/atlanteans/goldmine/init.lua:7
+msgctxt "atlanteans_building"
+msgid "Gold Mine"
+msgstr "Guldmine"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/barbarians/goldmine/init.lua:7
+msgctxt "barbarians_building"
+msgid "Gold Mine"
+msgstr "Guldmine"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/empire/goldmine/init.lua:7
+msgctxt "empire_building"
+msgid "Gold Mine"
+msgstr "Guldmine"
+
+#. TRANSLATORS: Completed/Skipped/Did not start mining gold because ...
+#: ../../tribes/buildings/productionsites/atlanteans/goldmine/init.lua:61
+#: ../../tribes/buildings/productionsites/barbarians/goldmine/init.lua:65
+#: ../../tribes/buildings/productionsites/barbarians/goldmine_deep/init.lua:65
+#: ../../tribes/buildings/productionsites/barbarians/goldmine_deeper/init.lua:64
+#: ../../tribes/buildings/productionsites/empire/goldmine/init.lua:62
+#: ../../tribes/buildings/productionsites/empire/goldmine_deep/init.lua:60
+msgid "mining gold"
+msgstr "Guldminedrift"
+
+#: ../../tribes/buildings/productionsites/atlanteans/goldmine/init.lua:79
+#: ../../tribes/buildings/productionsites/barbarians/goldmine/init.lua:77
+#: ../../tribes/buildings/productionsites/barbarians/goldmine_deep/init.lua:80
+#: ../../tribes/buildings/productionsites/barbarians/goldmine_deeper/init.lua:79
+#: ../../tribes/buildings/productionsites/empire/goldmine/init.lua:77
+#: ../../tribes/buildings/productionsites/empire/goldmine_deep/init.lua:75
+msgid "Main Gold Vein Exhausted"
+msgstr "Guldets hovedåre er udtømt"
+
+#: ../../tribes/buildings/productionsites/atlanteans/goldmine/init.lua:81
+msgctxt "atlanteans_building"
+msgid ""
+"This gold mine’s main vein is exhausted. Expect strongly diminished returns "
+"on investment. You should consider dismantling or destroying it."
+msgstr "Kulmines hovedåre er udtømt. Forvent stærkt formindsket udbytte på din investering. Du bør overveje at udvide minen, rive den ned eller ødelægge den."
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/atlanteans/horsefarm/init.lua:7
+msgctxt "atlanteans_building"
+msgid "Horse Farm"
+msgstr "Stutteri"
+
+#. TRANSLATORS: Completed/Skipped/Did not start breeding horses because ...
+#: ../../tribes/buildings/productionsites/atlanteans/horsefarm/init.lua:54
+msgid "breeding horses"
+msgstr "avler heste"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/atlanteans/hunters_house/init.lua:7
+msgctxt "atlanteans_building"
+msgid "Hunter’s House"
+msgstr "Jægerhus"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/empire/hunters_house/init.lua:7
+msgctxt "empire_building"
+msgid "Hunter’s House"
+msgstr "Jægerhus"
+
+#. TRANSLATORS: Completed/Skipped/Did not start hunting because ...
+#: ../../tribes/buildings/productionsites/atlanteans/hunters_house/init.lua:44
+#: ../../tribes/buildings/productionsites/barbarians/hunters_hut/init.lua:54
+#: ../../tribes/buildings/productionsites/empire/hunters_house/init.lua:42
+msgid "hunting"
+msgstr "jagt"
+
+#. TRANSLATORS: "Game" means animals that you can hunt
+#: ../../tribes/buildings/productionsites/atlanteans/hunters_house/init.lua:53
+#: ../../tribes/buildings/productionsites/barbarians/hunters_hut/init.lua:63
+#: ../../tribes/buildings/productionsites/empire/hunters_house/init.lua:51
+msgid "Out of Game"
+msgstr "Ikke mere vildt"
+
+#. TRANSLATORS: "game" means animals that you can hunt
+#: ../../tribes/buildings/productionsites/atlanteans/hunters_house/init.lua:55
+msgctxt "atlanteans_building"
+msgid ""
+"The hunter working out of this hunter’s house can’t find any game in his "
+"work area."
+msgstr "Jægeren, der arbejder fra jægerhuset, kan ikke finde mere vildt indenfor sin radius."
+
+#. TRANSLATORS: "game" means animals that you can hunt
+#: ../../tribes/buildings/productionsites/empire/hunters_house/init.lua:53
+msgctxt "empire_building"
+msgid ""
+"The hunter working out of this hunter’s house can’t find any game in his "
+"work area."
+msgstr "Jægeren, der arbejder fra jægerhuset, kan ikke finde mere vildt indenfor sin radius."
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/atlanteans/ironmine/init.lua:7
+msgctxt "atlanteans_building"
+msgid "Iron Mine"
+msgstr "Jernmine"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/barbarians/ironmine/init.lua:7
+msgctxt "barbarians_building"
+msgid "Iron Mine"
+msgstr "Jernmine"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/empire/ironmine/init.lua:7
+msgctxt "empire_building"
+msgid "Iron Mine"
+msgstr "Jernmine"
+
+#. TRANSLATORS: Completed/Skipped/Did not start mining iron because ...
+#: ../../tribes/buildings/productionsites/atlanteans/ironmine/init.lua:61
+#: ../../tribes/buildings/productionsites/barbarians/ironmine/init.lua:65
+#: ../../tribes/buildings/productionsites/barbarians/ironmine_deep/init.lua:65
+#: ../../tribes/buildings/productionsites/barbarians/ironmine_deeper/init.lua:64
+#: ../../tribes/buildings/productionsites/empire/ironmine/init.lua:62
+#: ../../tribes/buildings/productionsites/empire/ironmine_deep/init.lua:60
+msgid "mining iron"
+msgstr "Jernmindedrift"
+
+#: ../../tribes/buildings/productionsites/atlanteans/ironmine/init.lua:79
+#: ../../tribes/buildings/productionsites/barbarians/ironmine/init.lua:77
+#: ../../tribes/buildings/productionsites/barbarians/ironmine_deep/init.lua:80
+#: ../../tribes/buildings/productionsites/barbarians/ironmine_deeper/init.lua:82
+#: ../../tribes/buildings/productionsites/empire/ironmine/init.lua:77
+#: ../../tribes/buildings/productionsites/empire/ironmine_deep/init.lua:75
+msgid "Main Iron Vein Exhausted"
+msgstr "Jernets hovedåre er udtømt"
+
+#: ../../tribes/buildings/productionsites/atlanteans/ironmine/init.lua:81
+msgctxt "atlanteans_building"
+msgid ""
+"This iron mine’s main vein is exhausted. Expect strongly diminished returns "
+"on investment. You should consider dismantling or destroying it."
+msgstr "Denne jernmines hovedåre er udtømt. Forvent stærkt formindsket udbytte på din investering. Du bør overveje at rive minen ned eller ødelægge den."
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/atlanteans/mill/init.lua:7
+msgctxt "atlanteans_building"
+msgid "Mill"
+msgstr "Mølle"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/empire/mill/init.lua:7
+msgctxt "empire_building"
+msgid "Mill"
+msgstr "Mølle"
+
+#. TRANSLATORS: Completed/Skipped/Did not start grinding corn because ...
+#: ../../tribes/buildings/productionsites/atlanteans/mill/init.lua:66
+msgid "grinding corn"
+msgstr "maling af korn"
+
+#. TRANSLATORS: Completed/Skipped/Did not start grinding blackrootbecause ...
+#: ../../tribes/buildings/productionsites/atlanteans/mill/init.lua:78
+msgid "grinding blackroot"
+msgstr "maling af rodfrugter"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/atlanteans/quarry/init.lua:7
+msgctxt "atlanteans_building"
+msgid "Quarry"
+msgstr "Stenbrud"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/barbarians/quarry/init.lua:7
+msgctxt "barbarians_building"
+msgid "Quarry"
+msgstr "Stenbrud"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/empire/quarry/init.lua:7
+msgctxt "empire_building"
+msgid "Quarry"
+msgstr "Stenbrud"
+
+#. TRANSLATORS: Completed/Skipped/Did not start quarrying granite because ...
+#: ../../tribes/buildings/productionsites/atlanteans/quarry/init.lua:55
+#: ../../tribes/buildings/productionsites/barbarians/quarry/init.lua:64
+#: ../../tribes/buildings/productionsites/empire/quarry/init.lua:60
+msgid "quarrying granite"
+msgstr "hugger granit ud"
+
+#: ../../tribes/buildings/productionsites/atlanteans/quarry/init.lua:65
+#: ../../tribes/buildings/productionsites/barbarians/quarry/init.lua:74
+#: ../../tribes/buildings/productionsites/empire/quarry/init.lua:80
+msgid "Out of Rocks"
+msgstr "Ikke flere sten"
+
+#: ../../tribes/buildings/productionsites/atlanteans/quarry/init.lua:66
+msgctxt "atlanteans_building"
+msgid ""
+"The stonecutter working at this quarry can’t find any rocks in his work "
+"area."
+msgstr "Stenhuggeren, der arbejder i stenbruddet, kan ikke finde flere sten indenfor sin arbejdsradius."
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/atlanteans/sawmill/init.lua:7
+msgctxt "atlanteans_building"
+msgid "Sawmill"
+msgstr "Savværk"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/empire/sawmill/init.lua:7
+msgctxt "empire_building"
+msgid "Sawmill"
+msgstr "Savværk"
+
+#. TRANSLATORS: Completed/Skipped/Did not start sawing logs because ...
+#: ../../tribes/buildings/productionsites/atlanteans/sawmill/init.lua:54
+#: ../../tribes/buildings/productionsites/empire/sawmill/init.lua:54
+msgid "sawing logs"
+msgstr "saver træstammer ud"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/atlanteans/scouts_house/init.lua:7
+msgctxt "atlanteans_building"
+msgid "Scout’s House"
+msgstr "Spejderhus"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/empire/scouts_house/init.lua:7
+msgctxt "empire_building"
+msgid "Scout’s House"
+msgstr "Spejderhus"
+
+#. TRANSLATORS: Completed/Skipped/Did not start scouting because ...
+#: ../../tribes/buildings/productionsites/atlanteans/scouts_house/init.lua:47
+#: ../../tribes/buildings/productionsites/barbarians/scouts_hut/init.lua:52
+#: ../../tribes/buildings/productionsites/empire/scouts_house/init.lua:47
+msgid "scouting"
+msgstr "spejder"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/atlanteans/shipyard/init.lua:7
+msgctxt "atlanteans_building"
+msgid "Shipyard"
+msgstr "Skibsværft"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/barbarians/shipyard/init.lua:7
+msgctxt "barbarians_building"
+msgid "Shipyard"
+msgstr "Skibsværft"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/empire/shipyard/init.lua:7
+msgctxt "empire_building"
+msgid "Shipyard"
+msgstr "Skibsværft"
+
+#. TRANSLATORS: Completed/Skipped/Did not start constructing a ship because
+#. ...
+#: ../../tribes/buildings/productionsites/atlanteans/shipyard/init.lua:76
+#: ../../tribes/buildings/productionsites/barbarians/shipyard/init.lua:75
+#: ../../tribes/buildings/productionsites/empire/shipyard/init.lua:75
+msgid "constructing a ship"
+msgstr "konstruktion af et skib"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/atlanteans/smelting_works/init.lua:7
+msgctxt "atlanteans_building"
+msgid "Smelting Works"
+msgstr "Smelteværker"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/barbarians/smelting_works/init.lua:7
+msgctxt "barbarians_building"
+msgid "Smelting Works"
+msgstr "Smelteværker"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/empire/smelting_works/init.lua:7
+msgctxt "empire_building"
+msgid "Smelting Works"
+msgstr "Smelteværker"
+
+#. TRANSLATORS: Completed/Skipped/Did not start smelting iron because ...
+#: ../../tribes/buildings/productionsites/atlanteans/smelting_works/init.lua:66
+#: ../../tribes/buildings/productionsites/barbarians/smelting_works/init.lua:69
+#: ../../tribes/buildings/productionsites/empire/smelting_works/init.lua:72
+msgid "smelting iron"
+msgstr "smelter jern"
+
+#. TRANSLATORS: Completed/Skipped/Did not start smelting gold because ...
+#: ../../tribes/buildings/productionsites/atlanteans/smelting_works/init.lua:77
+#: ../../tribes/buildings/productionsites/barbarians/smelting_works/init.lua:80
+#: ../../tribes/buildings/productionsites/empire/smelting_works/init.lua:83
+msgid "smelting gold"
+msgstr "smelter guld"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/atlanteans/smokery/init.lua:7
+msgctxt "atlanteans_building"
+msgid "Smokery"
+msgstr "Røgeri"
+
+#. TRANSLATORS: Completed/Skipped/Did not start smoking meat because ...
+#: ../../tribes/buildings/productionsites/atlanteans/smokery/init.lua:68
+msgid "smoking meat"
+msgstr "ryger kød"
+
+#. TRANSLATORS: Completed/Skipped/Did not start smoking fish because ...
+#: ../../tribes/buildings/productionsites/atlanteans/smokery/init.lua:80
+msgid "smoking fish"
+msgstr "ryger fisk"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/atlanteans/spiderfarm/init.lua:7
+msgctxt "atlanteans_building"
+msgid "Spider Farm"
+msgstr "Silkelandbrug"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:7
+msgctxt "atlanteans_building"
+msgid "Toolsmithy"
+msgstr "Værktøjssmedje"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/empire/toolsmithy/init.lua:7
+msgctxt "empire_building"
+msgid "Toolsmithy"
+msgstr "Værktøjssmedje"
+
+#. TRANSLATORS: Completed/Skipped/Did not start making a bread paddle because
+#. ...
+#: ../../tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:87
+#: ../../tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:96
+#: ../../tribes/buildings/productionsites/empire/toolsmithy/init.lua:110
+msgid "making a bread paddle"
+msgstr "laver en brødpadle"
+
+#. TRANSLATORS: Completed/Skipped/Did not start making a pair of buckets
+#. because ...
+#: ../../tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:98
+msgid "making a pair of buckets"
+msgstr "laver et par spande"
+
+#. TRANSLATORS: Completed/Skipped/Did not start making fire tongs because ...
+#: ../../tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:109
+#: ../../tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:120
+#: ../../tribes/buildings/productionsites/empire/toolsmithy/init.lua:122
+msgid "making fire tongs"
+msgstr "laver en ildtang"
+
+#. TRANSLATORS: Completed/Skipped/Did not start making a fishing net because
+#. ...
+#: ../../tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:120
+msgid "making a fishing net"
+msgstr "laver et fiskenet"
+
+#. TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
+#: ../../tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:131
+#: ../../tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:144
+#: ../../tribes/buildings/productionsites/empire/toolsmithy/init.lua:146
+msgid "making a hammer"
+msgstr "laver en hammer"
+
+#. TRANSLATORS: Completed/Skipped/Did not start making a hook pole because ...
+#: ../../tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:142
+msgid "making a hook pole"
+msgstr "laver en krogstang"
+
+#. TRANSLATORS: Completed/Skipped/Did not start making a hunting bow because
+#. ...
+#: ../../tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:153
+msgid "making a hunting bow"
+msgstr "laver en jagtbue"
+
+#. TRANSLATORS: Completed/Skipped/Did not start making milking tongs because
+#. ...
+#: ../../tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:164
+msgid "making milking tongs"
+msgstr "laver en malketang"
+
+#. TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
+#: ../../tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:175
+#: ../../tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:180
+#: ../../tribes/buildings/productionsites/empire/toolsmithy/init.lua:182
+msgid "making a pick"
+msgstr "laver en hakke"
+
+#. TRANSLATORS: Completed/Skipped/Did not start making a saw because ...
+#: ../../tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:186
+#: ../../tribes/buildings/productionsites/empire/toolsmithy/init.lua:194
+msgid "making a saw"
+msgstr "laver en sav"
+
+#. TRANSLATORS: Completed/Skipped/Did not start making a scythe because ...
+#: ../../tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:197
+#: ../../tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:192
+#: ../../tribes/buildings/productionsites/empire/toolsmithy/init.lua:206
+msgid "making a scythe"
+msgstr "laver en le"
+
+#. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
+#: ../../tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:208
+#: ../../tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:204
+#: ../../tribes/buildings/productionsites/empire/toolsmithy/init.lua:218
+msgid "making a shovel"
+msgstr "laver en skovl"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua:7
+msgctxt "atlanteans_building"
+msgid "Weapon Smithy"
+msgstr "Våbensmedje"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/empire/weaponsmithy/init.lua:7
+msgctxt "empire_building"
+msgid "Weapon Smithy"
+msgstr "Våbensmedje"
+
+#. TRANSLATORS: Completed/Skipped/Did not start forging a light trident
+#. because ...
+#: ../../tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua:75
+msgid "forging a light trident"
+msgstr "smeder en let trefork"
+
+#. TRANSLATORS: Completed/Skipped/Did not start forging a long trident because
+#. ...
+#: ../../tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua:88
+msgid "forging a long trident"
+msgstr "smeder en lang trefork"
+
+#. TRANSLATORS: Completed/Skipped/Did not start forging a steel trident
+#. because ...
+#: ../../tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua:101
+msgid "forging a steel trident"
+msgstr "smeder en ståltrefork"
+
+#. TRANSLATORS: Completed/Skipped/Did not start forging a double trident
+#. because ...
+#: ../../tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua:114
+msgid "forging a double trident"
+msgstr "smeder en dobblet trefork"
+
+#. TRANSLATORS: Completed/Skipped/Did not start forging a heavy double trident
+#. because ...
+#: ../../tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua:127
+msgid "forging a heavy double trident"
+msgstr "smeder en tung dobbelt trefork"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/atlanteans/weaving_mill/init.lua:7
+msgctxt "atlanteans_building"
+msgid "Weaving Mill"
+msgstr "Væveri"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/barbarians/weaving_mill/init.lua:7
+msgctxt "barbarians_building"
+msgid "Weaving Mill"
+msgstr "Væveri"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/empire/weaving_mill/init.lua:7
+msgctxt "empire_building"
+msgid "Weaving Mill"
+msgstr "Væveri"
+
+#. TRANSLATORS: Completed/Skipped/Did not start weaving spidercloth because
+#. ...
+#: ../../tribes/buildings/productionsites/atlanteans/weaving_mill/init.lua:68
+msgid "weaving spidercloth"
+msgstr "væver silketøj"
+
+#. TRANSLATORS: Completed/Skipped/Did not start tailoring a tabard because ...
+#: ../../tribes/buildings/productionsites/atlanteans/weaving_mill/init.lua:79
+msgid "tailoring a tabard"
+msgstr "skræddersyr en våbenkjortel"
+
+#. TRANSLATORS: Completed/Skipped/Did not start tailoring a golden tabard
+#. because ...
+#: ../../tribes/buildings/productionsites/atlanteans/weaving_mill/init.lua:90
+msgid "tailoring a golden tabard"
+msgstr "skræddersyr en gylden våbenkjortel"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/atlanteans/well/init.lua:7
+msgctxt "atlanteans_building"
+msgid "Well"
+msgstr "Brønd"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/barbarians/well/init.lua:7
+msgctxt "barbarians_building"
+msgid "Well"
+msgstr "Brønd"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/empire/well/init.lua:7
+msgctxt "empire_building"
+msgid "Well"
+msgstr "Brønd"
+
+#: ../../tribes/buildings/productionsites/atlanteans/well/init.lua:62
+#: ../../tribes/buildings/productionsites/barbarians/well/init.lua:65
+#: ../../tribes/buildings/productionsites/empire/well/init.lua:62
+msgid "Out of Water"
+msgstr "Ikke mere vand"
+
+#: ../../tribes/buildings/productionsites/atlanteans/well/init.lua:63
+msgctxt "atlanteans_building"
+msgid ""
+"The carrier working at this well can’t find any water in his work area."
+msgstr "Fragtmanden, der arbejder med denne brønd, kan ikke finde mere vand indenfor arbejdsradiussen."
+
+#: ../../tribes/buildings/productionsites/barbarians/well/init.lua:66
+msgctxt "barbarians_building"
+msgid ""
+"The carrier working at this well can’t find any water in his work area."
+msgstr "Fragtmanden, der arbejder med denne brønd, kan ikke finde mere vand indenfor arbejdsradiussen."
+
+#: ../../tribes/buildings/productionsites/empire/well/init.lua:63
+msgctxt "empire_building"
+msgid ""
+"The carrier working at this well can’t find any water in his work area."
+msgstr "Fragtmanden, der arbejder med denne brønd, kan ikke finde mere vand indenfor arbejdsradiussen."
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/atlanteans/woodcutters_house/init.lua:7
+msgctxt "atlanteans_building"
+msgid "Woodcutter’s House"
+msgstr "Skovhuggerhus"
+
+#. TRANSLATORS: Completed/Skipped/Did not start felling trees because ...
+#: ../../tribes/buildings/productionsites/atlanteans/woodcutters_house/init.lua:46
+#: ../../tribes/buildings/productionsites/barbarians/lumberjacks_hut/init.lua:54
+#: ../../tribes/buildings/productionsites/empire/lumberjacks_house/init.lua:46
+msgid "felling trees"
+msgstr "fælder træer"
+
+#: ../../tribes/buildings/productionsites/atlanteans/woodcutters_house/init.lua:54
+#: ../../tribes/buildings/productionsites/barbarians/lumberjacks_hut/init.lua:62
+#: ../../tribes/buildings/productionsites/empire/lumberjacks_house/init.lua:54
+msgid "Out of Trees"
+msgstr "Ikke flere træer"
+
+#: ../../tribes/buildings/productionsites/atlanteans/woodcutters_house/init.lua:55
+msgctxt "atlanteans_building"
+msgid ""
+"The woodcutter working at this woodcutter’s house can’t find any trees in "
+"his work area. You should consider dismantling or destroying the building or"
+" building a forester’s house."
+msgstr "Skovhuggeren, der arbejder i dette skovhuggerhus, kan ikke finde nogle træer indenfor sin arbejdsradius. Du bør overveje at rive huset ned eller bygge et skovfogedhus."
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/barbarians/ax_workshop/init.lua:7
+msgctxt "barbarians_building"
+msgid "Ax Workshop"
+msgstr "Økseværksted"
+
+#. TRANSLATORS: Completed/Skipped/Did not start forging an ax because ...
+#: ../../tribes/buildings/productionsites/barbarians/ax_workshop/init.lua:79
+#: ../../tribes/buildings/productionsites/barbarians/warmill/init.lua:86
+msgid "forging an ax"
+msgstr "former en økse"
+
+#. TRANSLATORS: Completed/Skipped/Did not start forging a sharp ax because ...
+#: ../../tribes/buildings/productionsites/barbarians/ax_workshop/init.lua:92
+#: ../../tribes/buildings/productionsites/barbarians/warmill/init.lua:99
+msgid "forging a sharp ax"
+msgstr "former en skarp økse"
+
+#. TRANSLATORS: Completed/Skipped/Did not start forging a broad ax because ...
+#: ../../tribes/buildings/productionsites/barbarians/ax_workshop/init.lua:105
+#: ../../tribes/buildings/productionsites/barbarians/warmill/init.lua:112
+msgid "forging a broad ax"
+msgstr "former en bred økse"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/barbarians/big_inn/init.lua:7
+msgctxt "barbarians_building"
+msgid "Big Inn"
+msgstr "Gæstgivergård"
+
+#. TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
+#: ../../tribes/buildings/productionsites/barbarians/big_inn/init.lua:73
+#: ../../tribes/buildings/productionsites/barbarians/inn/init.lua:70
+#: ../../tribes/buildings/productionsites/barbarians/tavern/init.lua:63
+#: ../../tribes/buildings/productionsites/empire/inn/init.lua:66
+#: ../../tribes/buildings/productionsites/empire/tavern/init.lua:58
+msgid "preparing a ration"
+msgstr "forbereder en ration"
+
+#. TRANSLATORS: Completed/Skipped/Did not start preparing a snack because ...
+#: ../../tribes/buildings/productionsites/barbarians/big_inn/init.lua:83
+#: ../../tribes/buildings/productionsites/barbarians/inn/init.lua:81
+msgid "preparing a snack"
+msgstr "forbereder et mellemmåltid"
+
+#. TRANSLATORS: Completed/Skipped/Did not start preparing a meal because ...
+#: ../../tribes/buildings/productionsites/barbarians/big_inn/init.lua:93
+#: ../../tribes/buildings/productionsites/empire/inn/init.lua:77
+msgid "preparing a meal"
+msgstr "forbereder et måltid"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/barbarians/brewery/init.lua:7
+msgctxt "barbarians_building"
+msgid "Brewery"
+msgstr "Bryggeri"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/empire/brewery/init.lua:7
+msgctxt "empire_building"
+msgid "Brewery"
+msgstr "Bryggeri"
+
+#. TRANSLATORS: Completed/Skipped/Did not start brewing strong beer because
+#. ...
+#: ../../tribes/buildings/productionsites/barbarians/brewery/init.lua:55
+msgid "brewing strong beer"
+msgstr "brygger stærk øl"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/barbarians/cattlefarm/init.lua:7
+msgctxt "barbarians_building"
+msgid "Cattle Farm"
+msgstr "Kvægbrug"
+
+#. TRANSLATORS: Completed/Skipped/Did not start rearing cattle because ...
+#: ../../tribes/buildings/productionsites/barbarians/cattlefarm/init.lua:54
+msgid "rearing cattle"
+msgstr "opdrætter kvæg"
+
+#: ../../tribes/buildings/productionsites/barbarians/coalmine/init.lua:79
+#: ../../tribes/buildings/productionsites/barbarians/coalmine_deep/init.lua:82
+msgctxt "barbarians_building"
+msgid ""
+"This coal mine’s main vein is exhausted. Expect strongly diminished returns "
+"on investment. You should consider enhancing, dismantling or destroying it."
+msgstr "Kulmines hovedåre er udtømt. Forvent stærkt formindsket udbytte på din investering. Du bør overveje at udvide minden, rive den ned eller ødelægge den."
+
+#: ../../tribes/buildings/productionsites/empire/coalmine/init.lua:79
+msgctxt "empire_building"
+msgid ""
+"This coal mine’s main vein is exhausted. Expect strongly diminished returns "
+"on investment. You should consider enhancing, dismantling or destroying it."
+msgstr "Kulmines hovedåre er udtømt. Forvent stærkt formindsket udbytte på din investering. Du bør overveje at udvide minden, rive den ned eller ødelægge den."
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/barbarians/coalmine_deep/init.lua:7
+msgctxt "barbarians_building"
+msgid "Deep Coal Mine"
+msgstr "Dyb kulmine"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/empire/coalmine_deep/init.lua:7
+msgctxt "empire_building"
+msgid "Deep Coal Mine"
+msgstr "Dyb kulmine"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/barbarians/coalmine_deeper/init.lua:7
+msgctxt "barbarians_building"
+msgid "Deeper Coal Mine"
+msgstr "Dybere kulmine"
+
+#: ../../tribes/buildings/productionsites/barbarians/coalmine_deeper/init.lua:81
+msgctxt "barbarians_building"
+msgid ""
+"This coal mine’s main vein is exhausted. Expect strongly diminished returns "
+"on investment. This mine can’t be enhanced any further, so you should "
+"consider dismantling or destroying it."
+msgstr "Kulmines hovedåre er udtømt. Forvent stærkt formindsket udbytte på din investering. Denne mine kan ikke længere udvides, så du bør overveje at rive minen ned eller ødelægge den."
+
+#: ../../tribes/buildings/productionsites/empire/coalmine_deep/init.lua:77
+msgctxt "empire_building"
+msgid ""
+"This coal mine’s main vein is exhausted. Expect strongly diminished returns "
+"on investment. This mine can’t be enhanced any further, so you should "
+"consider dismantling or destroying it."
+msgstr "Kulmines hovedåre er udtømt. Forvent stærkt formindsket udbytte på din investering. Denne mine kan ikke længere udvides, så du bør overveje at rive minen ned eller ødelægge den."
+
+#. TRANSLATORS: Completed/Skipped/Did not start planting wheat because ...
+#: ../../tribes/buildings/productionsites/barbarians/farm/init.lua:72
+#: ../../tribes/buildings/productionsites/empire/farm/init.lua:59
+msgid "planting wheat"
+msgstr "planter hvede"
+
+#. TRANSLATORS: Completed/Skipped/Did not start harvesting wheat because ...
+#: ../../tribes/buildings/productionsites/barbarians/farm/init.lua:80
+#: ../../tribes/buildings/productionsites/empire/farm/init.lua:67
+msgid "harvesting wheat"
+msgstr "høster hvede"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/barbarians/fishers_hut/init.lua:7
+msgctxt "barbarians_building"
+msgid "Fisher’s Hut"
+msgstr "Fiskerhytte"
+
+#: ../../tribes/buildings/productionsites/barbarians/fishers_hut/init.lua:62
+msgctxt "barbarians_building"
+msgid ""
+"The fisher working out of this fisher’s hut can’t find any fish in his work "
+"area."
+msgstr "Fiskeren, der arbejder i fiskerhuset, kan ikke fange flere fisk indenfor sin arbejdsradius."
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/barbarians/gamekeepers_hut/init.lua:7
+msgctxt "barbarians_building"
+msgid "Gamekeeper’s Hut"
+msgstr "Vildtforvalterhytte"
+
+#: ../../tribes/buildings/productionsites/barbarians/goldmine/init.lua:79
+#: ../../tribes/buildings/productionsites/barbarians/goldmine_deep/init.lua:82
+msgctxt "barbarians_building"
+msgid ""
+"This gold mine’s main vein is exhausted. Expect strongly diminished returns "
+"on investment. You should consider enhancing, dismantling or destroying it."
+msgstr "Kulmines hovedåre er udtømt. Forvent stærkt formindsket udbytte på din investering. Du bør overveje at udvide minen, rive den ned eller ødelægge den."
+
+#: ../../tribes/buildings/productionsites/empire/goldmine/init.lua:79
+msgctxt "empire_building"
+msgid ""
+"This gold mine’s main vein is exhausted. Expect strongly diminished returns "
+"on investment. You should consider enhancing, dismantling or destroying it."
+msgstr "Kulmines hovedåre er udtømt. Forvent stærkt formindsket udbytte på din investering. Du bør overveje at udvide minen, rive den ned eller ødelægge den."
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/barbarians/goldmine_deep/init.lua:7
+msgctxt "barbarians_building"
+msgid "Deep Gold Mine"
+msgstr "Dyb guldmine"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/empire/goldmine_deep/init.lua:7
+msgctxt "empire_building"
+msgid "Deep Gold Mine"
+msgstr "Dyb guldmine"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/barbarians/goldmine_deeper/init.lua:7
+msgctxt "barbarians_building"
+msgid "Deeper Gold Mine"
+msgstr "Dybere guldmine"
+
+#: ../../tribes/buildings/productionsites/barbarians/goldmine_deeper/init.lua:81
+msgctxt "barbarians_building"
+msgid ""
+"This gold mine’s main vein is exhausted. Expect strongly diminished returns "
+"on investment. This mine can’t be enhanced any further, so you should "
+"consider dismantling or destroying it."
+msgstr "Denne guldmines hovedåre er udtømt. Forvent stærkt formindsket udbytte på din investering. Minen kan ikke udvides yderligere, så du bør overveje at rive minen ned eller ødelægge den."
+
+#: ../../tribes/buildings/productionsites/empire/goldmine_deep/init.lua:77
+msgctxt "empire_building"
+msgid ""
+"This gold mine’s main vein is exhausted. Expect strongly diminished returns "
+"on investment. This mine can’t be enhanced any further, so you should "
+"consider dismantling or destroying it."
+msgstr "Denne guldmines hovedåre er udtømt. Forvent stærkt formindsket udbytte på din investering. Minen kan ikke udvides yderligere, så du bør overveje at rive minen ned eller ødelægge den."
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/barbarians/granitemine/init.lua:7
+msgctxt "barbarians_building"
+msgid "Granite Mine"
+msgstr "Granitmine"
+
+#: ../../tribes/buildings/productionsites/barbarians/granitemine/init.lua:75
+msgid "Main Granite Vein Exhausted"
+msgstr "Granittens hovedåre er udtømt"
+
+#: ../../tribes/buildings/productionsites/barbarians/granitemine/init.lua:77
+msgctxt "barbarians_building"
+msgid ""
+"This granite mine’s main vein is exhausted. Expect strongly diminished "
+"returns on investment. This mine can’t be enhanced any further, so you "
+"should consider dismantling or destroying it."
+msgstr "Denne granitmines hovedåre er udtømt. Forvent stærkt formindsket udbytte på din investering. Denne mine kan ikke længere udvides, så du bør overveje at rive minen ned eller ødelægge den."
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/barbarians/helmsmithy/init.lua:7
+msgctxt "barbarians_building"
+msgid "Helm Smithy"
+msgstr "Hjelmsmedje"
+
+#. TRANSLATORS: Completed/Skipped/Did not start forging a helmet because ...
+#: ../../tribes/buildings/productionsites/barbarians/helmsmithy/init.lua:82
+#: ../../tribes/buildings/productionsites/empire/armorsmithy/init.lua:84
+msgid "forging a helmet"
+msgstr "smedning af en hjelm"
+
+#. TRANSLATORS: Completed/Skipped/Did not start forging a mask because ...
+#: ../../tribes/buildings/productionsites/barbarians/helmsmithy/init.lua:93
+msgid "forging a mask"
+msgstr "smedning af en maske"
+
+#. TRANSLATORS: Completed/Skipped/Did not start forging a warhelm because ...
+#: ../../tribes/buildings/productionsites/barbarians/helmsmithy/init.lua:104
+msgid "forging a warhelm"
+msgstr "smedning af en krigshjelm"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/barbarians/hunters_hut/init.lua:7
+msgctxt "barbarians_building"
+msgid "Hunter’s Hut"
+msgstr "Jægerhytte"
+
+#. TRANSLATORS: "game" means animals that you can hunt
+#: ../../tribes/buildings/productionsites/barbarians/hunters_hut/init.lua:65
+msgctxt "barbarians_building"
+msgid ""
+"The hunter working out of this hunter’s hut can’t find any game in his work "
+"area. Remember that you can build a gamekeeper’s hut to release more game "
+"into the wild."
+msgstr "Jægeren, der arbejder fra jægerhuset, kan ikke finde mere vildt indenfor sin radius. Husk at du kan bygge en jagtbestyrerhytte for at få mere vildtudbytte."
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/barbarians/inn/init.lua:7
+msgctxt "barbarians_building"
+msgid "Inn"
+msgstr "Kro"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/empire/inn/init.lua:7
+msgctxt "empire_building"
+msgid "Inn"
+msgstr "Kro"
+
+#: ../../tribes/buildings/productionsites/barbarians/ironmine/init.lua:79
+#: ../../tribes/buildings/productionsites/barbarians/ironmine_deep/init.lua:82
+msgctxt "barbarians_building"
+msgid ""
+"This iron mine’s main vein is exhausted. Expect strongly diminished returns "
+"on investment. You should consider enhancing, dismantling or destroying it."
+msgstr "Denne jernmines hovedåre er udtømt. Forvent stærkt formindsket udbytte på din investering. Du bør overveje at udvide minen, rive den ned eller ødelægge den."
+
+#: ../../tribes/buildings/productionsites/empire/ironmine/init.lua:79
+msgctxt "empire_building"
+msgid ""
+"This iron mine’s main vein is exhausted. Expect strongly diminished returns "
+"on investment. You should consider enhancing, dismantling or destroying it."
+msgstr "Denne jernmines hovedåre er udtømt. Forvent stærkt formindsket udbytte på din investering. Du bør overveje at udvide minen, rive den ned eller ødelægge den."
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/barbarians/ironmine_deep/init.lua:7
+msgctxt "barbarians_building"
+msgid "Deep Iron Mine"
+msgstr "Dyb jernmine"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/empire/ironmine_deep/init.lua:7
+msgctxt "empire_building"
+msgid "Deep Iron Mine"
+msgstr "Dyb jernmine"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/barbarians/ironmine_deeper/init.lua:7
+msgctxt "barbarians_building"
+msgid "Deeper Iron Mine"
+msgstr "Dybere jernmine"
+
+#: ../../tribes/buildings/productionsites/barbarians/ironmine_deeper/init.lua:84
+msgctxt "barbarians_building"
+msgid ""
+"This iron mine’s main vein is exhausted. Expect strongly diminished returns "
+"on investment. This mine can’t be enhanced any further, so you should "
+"consider dismantling or destroying it."
+msgstr "Denne jernmines hovedåre er udtømt. Forvent stærkt formindsket udbytte på din investering. Denne mine kan ikke længere udvides, så du bør overveje at rive minen ned eller ødelægge den."
+
+#: ../../tribes/buildings/productionsites/empire/ironmine_deep/init.lua:77
+msgctxt "empire_building"
+msgid ""
+"This iron mine’s main vein is exhausted. Expect strongly diminished returns "
+"on investment. This mine can’t be enhanced any further, so you should "
+"consider dismantling or destroying it."
+msgstr "Denne jernmines hovedåre er udtømt. Forvent stærkt formindsket udbytte på din investering. Denne mine kan ikke længere udvides, så du bør overveje at rive minen ned eller ødelægge den."
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/barbarians/lime_kiln/init.lua:7
+msgctxt "barbarians_building"
+msgid "Lime Kiln"
+msgstr "Lindeovn"
+
+#. TRANSLATORS: Completed/Skipped/Did not start mixing grout because ...
+#: ../../tribes/buildings/productionsites/barbarians/lime_kiln/init.lua:55
+msgid "mixing grout"
+msgstr "blander injektionsmørtel"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/barbarians/lumberjacks_hut/init.lua:7
+msgctxt "barbarians_building"
+msgid "Lumberjack’s Hut"
+msgstr "Skovhuggerhytte"
+
+#: ../../tribes/buildings/productionsites/barbarians/lumberjacks_hut/init.lua:63
+msgctxt "barbarians_building"
+msgid ""
+"The lumberjack working at this lumberjack’s hut can’t find any trees in his "
+"work area. You should consider dismantling or destroying the building or "
+"building a ranger’s hut."
+msgstr "Skovhuggeren, der arbejder i dette skovhuggerhus, kan ikke finde nogle træer indenfor sin arbejdsradius. Du bør overveje at rive huset ned eller bygge et skovfogedhus."
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:7
+msgctxt "barbarians_building"
+msgid "Metal Workshop"
+msgstr "Metalværksted"
+
+#. TRANSLATORS: Completed/Skipped/Did not start making a felling ax because
+#. ...
+#: ../../tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:108
+#: ../../tribes/buildings/productionsites/empire/toolsmithy/init.lua:86
+msgid "making a felling ax"
+msgstr "laver en skovøkse"
+
+#. TRANSLATORS: Completed/Skipped/Did not start making a fishing rod because
+#. ...
+#: ../../tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:132
+#: ../../tribes/buildings/productionsites/empire/toolsmithy/init.lua:134
+msgid "making a fishing rod"
+msgstr "laver en fiskestang"
+
+#. TRANSLATORS: Completed/Skipped/Did not start making a hunting spear because
+#. ...
+#: ../../tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:156
+#: ../../tribes/buildings/productionsites/empire/toolsmithy/init.lua:158
+msgid "making a hunting spear"
+msgstr "laver et jagtspyd"
+
+#. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
+#. ...
+#: ../../tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:168
+#: ../../tribes/buildings/productionsites/empire/toolsmithy/init.lua:170
+msgid "making kitchen tools"
+msgstr "laver køkkenredskaber"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/barbarians/micro_brewery/init.lua:7
+msgctxt "barbarians_building"
+msgid "Micro Brewery"
+msgstr "Mikrobryggeri"
+
+#. TRANSLATORS: Completed/Skipped/Did not start brewing beer because ...
+#: ../../tribes/buildings/productionsites/barbarians/micro_brewery/init.lua:57
+#: ../../tribes/buildings/productionsites/empire/brewery/init.lua:55
+msgid "brewing beer"
+msgstr "brygning"
+
+#: ../../tribes/buildings/productionsites/barbarians/quarry/init.lua:75
+msgctxt "barbarians_building"
+msgid ""
+"The stonemason working at this quarry can’t find any rocks in his work area."
+msgstr "Stenhuggeren, der arbejder i stenbruddet, kan ikke finde flere sten indenfor sin arbejdsradius."
+
+#: ../../tribes/buildings/productionsites/empire/quarry/init.lua:81
+msgctxt "empire_building"
+msgid ""
+"The stonemason working at this quarry can’t find any rocks in his work area."
+msgstr "Stenhuggeren, der arbejder i stenbruddet, kan ikke finde flere sten indenfor sin arbejdsradius."
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/barbarians/rangers_hut/init.lua:7
+msgctxt "barbarians_building"
+msgid "Ranger’s Hut"
+msgstr "Skovfogedhytte"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/barbarians/reed_yard/init.lua:7
+msgctxt "barbarians_building"
+msgid "Reed Yard"
+msgstr "Stråfabrik"
+
+#. TRANSLATORS: Completed/Skipped/Did not start planting reed because ...
+#: ../../tribes/buildings/productionsites/barbarians/reed_yard/init.lua:55
+msgid "planting reed"
+msgstr "planter strå"
+
+#. TRANSLATORS: Completed/Skipped/Did not start harvesting reed because ...
+#: ../../tribes/buildings/productionsites/barbarians/reed_yard/init.lua:63
+msgid "harvesting reed"
+msgstr "høster strå"
+
+#: ../../tribes/buildings/productionsites/barbarians/reed_yard/init.lua:72
+msgctxt "barbarians_building"
+msgid ""
+"The gardener working at this reed yard has no cleared soil to plant his "
+"seeds."
+msgstr "Gartneren, der arbejder på denne stråfabrik, har ikke ryddet jord til sine frø."
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/barbarians/scouts_hut/init.lua:7
+msgctxt "barbarians_building"
+msgid "Scout’s Hut"
+msgstr "Spejderhytte"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/barbarians/tavern/init.lua:7
+msgctxt "barbarians_building"
+msgid "Tavern"
+msgstr "Værtshus"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/empire/tavern/init.lua:7
+msgctxt "empire_building"
+msgid "Tavern"
+msgstr "Værtshus"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/barbarians/warmill/init.lua:7
+msgctxt "barbarians_building"
+msgid "War Mill"
+msgstr "Våbenfabrik"
+
+#. TRANSLATORS: Completed/Skipped/Did not start forging a bronze ax because
+#. ...
+#: ../../tribes/buildings/productionsites/barbarians/warmill/init.lua:125
+msgid "forging a bronze ax"
+msgstr "smedning af en bronzeøkse"
+
+#. TRANSLATORS: Completed/Skipped/Did not start forging a battle ax because
+#. ...
+#: ../../tribes/buildings/productionsites/barbarians/warmill/init.lua:138
+msgid "forging a battle ax"
+msgstr "smedning af en kampøkse"
+
+#. TRANSLATORS: Completed/Skipped/Did not start forging a warrior’s ax because
+#. ...
+#: ../../tribes/buildings/productionsites/barbarians/warmill/init.lua:151
+msgid "forging a warrior’s ax"
+msgstr "smedning af en krigsøkse"
+
+#. TRANSLATORS: Completed/Skipped/Did not start weaving because ...
+#: ../../tribes/buildings/productionsites/barbarians/weaving_mill/init.lua:58
+#: ../../tribes/buildings/productionsites/empire/weaving_mill/init.lua:64
+msgid "weaving"
+msgstr "væver"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/barbarians/wood_hardener/init.lua:7
+msgctxt "barbarians_building"
+msgid "Wood Hardener"
+msgstr "Træhærder"
+
+#. TRANSLATORS: Completed/Skipped/Did not start hardening wood because ...
+#: ../../tribes/buildings/productionsites/barbarians/wood_hardener/init.lua:63
+msgid "hardening wood"
+msgstr "hærder træ"
+
+#. TRANSLATORS: Completed/Skipped/Did not start forging a suit of armor
+#. because ...
+#: ../../tribes/buildings/productionsites/empire/armorsmithy/init.lua:95
+msgid "forging a suit of armor"
+msgstr "smedning af rustning"
+
+#. TRANSLATORS: Completed/Skipped/Did not start forging a suit of chain armor
+#. because ...
+#: ../../tribes/buildings/productionsites/empire/armorsmithy/init.lua:106
+msgid "forging a suit of chain armor"
+msgstr "smedning af en kæderustning"
+
+#. TRANSLATORS: Completed/Skipped/Did not start forging a suit of gilded armor
+#. because ...
+#: ../../tribes/buildings/productionsites/empire/armorsmithy/init.lua:117
+msgid "forging a suit of gilded armor"
+msgstr "smedning af forgyldt rustning"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/empire/donkeyfarm/init.lua:7
+msgctxt "empire_building"
+msgid "Donkey Farm"
+msgstr "Æselfarm"
+
+#. TRANSLATORS: Completed/Skipped/Did not start rearing donkeys because ...
+#: ../../tribes/buildings/productionsites/empire/donkeyfarm/init.lua:54
+msgid "rearing donkeys"
+msgstr "opdrætter æsler"
+
+#: ../../tribes/buildings/productionsites/empire/fishers_house/init.lua:54
+msgctxt "empire_building"
+msgid ""
+"The fisher working out of this fisher’s house can’t find any fish in his "
+"work area."
+msgstr "Fiskeren, der arbejder i fiskerhuset, kan ikke fange flere fisk indenfor sin arbejdsradius."
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/empire/lumberjacks_house/init.lua:7
+msgctxt "empire_building"
+msgid "Lumberjack’s House"
+msgstr "Skovhuggerbygning"
+
+#: ../../tribes/buildings/productionsites/empire/lumberjacks_house/init.lua:55
+msgctxt "empire_building"
+msgid ""
+"The lumberjack working at this lumberjack’s house can’t find any trees in "
+"his work area. You should consider dismantling or destroying the building or"
+" building a forester’s house."
+msgstr "Skovhuggeren, der arbejder i dette skovhuggerhus, kan ikke finde nogle træer indenfor sin arbejdsradius. Du bør overveje at rive huset ned eller bygge et skovfogedhus."
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/empire/marblemine/init.lua:7
+msgctxt "empire_building"
+msgid "Marble Mine"
+msgstr "Marmormine"
+
+#. TRANSLATORS: Completed/Skipped/Did not start mining marble because ...
+#: ../../tribes/buildings/productionsites/empire/marblemine/init.lua:72
+#: ../../tribes/buildings/productionsites/empire/marblemine_deep/init.lua:61
+msgid "mining marble"
+msgstr "miner marmor"
+
+#: ../../tribes/buildings/productionsites/empire/marblemine/init.lua:102
+#: ../../tribes/buildings/productionsites/empire/marblemine_deep/init.lua:76
+msgid "Main Marble Vein Exhausted"
+msgstr "Marmorens hovedåre er udtømt"
+
+#: ../../tribes/buildings/productionsites/empire/marblemine/init.lua:104
+msgctxt "empire_building"
+msgid ""
+"This marble mine’s main vein is exhausted. Expect strongly diminished "
+"returns on investment. You should consider enhancing, dismantling or "
+"destroying it."
+msgstr "Marmorens hovedåre er udtømt. Forvent stærkt formindsket udbytte på din investering. Du bør overveje at udvide minen, rive den ned eller ødelægge den."
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/empire/marblemine_deep/init.lua:7
+msgctxt "empire_building"
+msgid "Deep Marble Mine"
+msgstr "Dyb marmormine"
+
+#: ../../tribes/buildings/productionsites/empire/marblemine_deep/init.lua:78
+msgctxt "empire_building"
+msgid ""
+"This marble mine’s main vein is exhausted. Expect strongly diminished "
+"returns on investment. This mine can’t be enhanced any further, so you "
+"should consider dismantling or destroying it."
+msgstr "Marmorens hovedåre er udtømt. Forvent stærkt formindsket udbytte på din investering. Denne mine kan ikke udvides yderligere, så du bør overveje at rive minen ned eller ødelægge den."
+
+#. TRANSLATORS: Completed/Skipped/Did not start grinding wheat because ...
+#: ../../tribes/buildings/productionsites/empire/mill/init.lua:55
+msgid "grinding wheat"
+msgstr "maler hvede"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/empire/piggery/init.lua:7
+msgctxt "empire_building"
+msgid "Piggery"
+msgstr "Svinestald"
+
+#. TRANSLATORS: Completed/Skipped/Did not start raising pigs because ...
+#: ../../tribes/buildings/productionsites/empire/piggery/init.lua:56
+msgid "raising pigs"
+msgstr "avler grise"
+
+#. TRANSLATORS: Completed/Skipped/Did not start quarrying marble because ...
+#: ../../tribes/buildings/productionsites/empire/quarry/init.lua:70
+msgid "quarrying marble"
+msgstr "hugger marmor ud"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/empire/sheepfarm/init.lua:7
+msgctxt "empire_building"
+msgid "Sheep Farm"
+msgstr "Fåreavl"
+
+#. TRANSLATORS: Completed/Skipped/Did not start breeding sheep because ...
+#: ../../tribes/buildings/productionsites/empire/sheepfarm/init.lua:54
+msgid "breeding sheep"
+msgstr "avler får"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/empire/stonemasons_house/init.lua:7
+msgctxt "empire_building"
+msgid "Stonemason’s House"
+msgstr "Stenhuggerhus"
+
+#. TRANSLATORS: Completed/Skipped/Did not start sculpting a marble column
+#. because ...
+#: ../../tribes/buildings/productionsites/empire/stonemasons_house/init.lua:55
+msgid "sculpting a marble column"
+msgstr "udsmykning af marmorsøjle"
+
+#. TRANSLATORS: Completed/Skipped/Did not start making a basket because ...
+#: ../../tribes/buildings/productionsites/empire/toolsmithy/init.lua:98
+msgid "making a basket"
+msgstr "laver en kurv"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/empire/vineyard/init.lua:7
+msgctxt "empire_building"
+msgid "Vineyard"
+msgstr "Vingård"
+
+#. TRANSLATORS: Completed/Skipped/Did not start planting grapevines because
+#. ...
+#: ../../tribes/buildings/productionsites/empire/vineyard/init.lua:56
+msgid "planting grapevines"
+msgstr "planter druer"
+
+#. TRANSLATORS: Completed/Skipped/Did not start harvesting grapevines because
+#. ...
+#: ../../tribes/buildings/productionsites/empire/vineyard/init.lua:64
+msgid "harvesting grapes"
+msgstr "høster druer"
+
+#: ../../tribes/buildings/productionsites/empire/vineyard/init.lua:73
+msgctxt "empire_building"
+msgid ""
+"The vine farmer working at this vineyard has no cleared soil to plant his "
+"grapevines."
+msgstr "Vinavleren der arbejder på denne vingård har ikke ryddet jord til at plante sine frø."
+
+#. TRANSLATORS: Completed/Skipped/Did not start forging a wooden spear because
+#. ...
+#: ../../tribes/buildings/productionsites/empire/weaponsmithy/init.lua:81
+msgid "forging a wooden spear"
+msgstr "smedning af træspyd"
+
+#. TRANSLATORS: Completed/Skipped/Did not start forging a spear because ...
+#: ../../tribes/buildings/productionsites/empire/weaponsmithy/init.lua:94
+msgid "forging a spear"
+msgstr "smedning af spyd"
+
+#. TRANSLATORS: Completed/Skipped/Did not start forging an advanced spear
+#. because ...
+#: ../../tribes/buildings/productionsites/empire/weaponsmithy/init.lua:107
+msgid "forging an advanced spear"
+msgstr "smedning af avanceret spyd"
+
+#. TRANSLATORS: Completed/Skipped/Did not start forging a heavy spear because
+#. ...
+#: ../../tribes/buildings/productionsites/empire/weaponsmithy/init.lua:120
+msgid "forging a heavy spear"
+msgstr "smedning af tungt spyd"
+
+#. TRANSLATORS: Completed/Skipped/Did not start forging a war spear because
+#. ...
+#: ../../tribes/buildings/productionsites/empire/weaponsmithy/init.lua:133
+msgid "forging a war spear"
+msgstr "smedning af krigsspyd"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/empire/winery/init.lua:7
+msgctxt "empire_building"
+msgid "Winery"
+msgstr "Vingård"
+
+#. TRANSLATORS: Completed/Skipped/Did not start making wine because ...
+#: ../../tribes/buildings/productionsites/empire/winery/init.lua:56
+msgid "making wine"
+msgstr "laver vin"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:7
+msgctxt "atlanteans_building"
+msgid "Dungeon"
+msgstr "Forhindringsbane"
+
+#. TRANSLATORS: Completed/Skipped/Did not start sleeping because ...
+#: ../../tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:77
+#: ../../tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:92
+#: ../../tribes/buildings/trainingsites/barbarians/battlearena/init.lua:85
+#: ../../tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:104
+#: ../../tribes/buildings/trainingsites/empire/arena/init.lua:72
+#: ../../tribes/buildings/trainingsites/empire/colosseum/init.lua:65
+#: ../../tribes/buildings/trainingsites/empire/trainingcamp/init.lua:95
+msgid "sleeping"
+msgstr "sover"
+
+#. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
+#: ../../tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:85
+#: ../../tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:112
+#: ../../tribes/buildings/trainingsites/empire/trainingcamp/init.lua:103
+msgid "upgrading soldier attack from level 0 to level 1"
+msgstr "opgraderer soldaterangreb fra niveau 0 til niveau 1"
+
+#. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
+#: ../../tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:96
+#: ../../tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:123
+#: ../../tribes/buildings/trainingsites/empire/trainingcamp/init.lua:114
+msgid "upgrading soldier attack from level 1 to level 2"
+msgstr "opgraderer soldaterangreb fra niveau 1 til niveau 2"
+
+#. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
+#: ../../tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:107
+#: ../../tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:134
+#: ../../tribes/buildings/trainingsites/empire/trainingcamp/init.lua:125
+msgid "upgrading soldier attack from level 2 to level 3"
+msgstr "opgraderer  soldaterangreb fra niveau 2 til niveau 3"
+
+#. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
+#: ../../tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:118
+#: ../../tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:145
+#: ../../tribes/buildings/trainingsites/empire/trainingcamp/init.lua:136
+msgid "upgrading soldier attack from level 3 to level 4"
+msgstr "opgraderer soldaterangreb fra niveau 3 til niveau 4"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:7
+msgctxt "atlanteans_building"
+msgid "Labyrinth"
+msgstr "Labyrint"
+
+#. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
+#: ../../tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:100
+msgid "upgrading soldier defense from level 0 to level 1"
+msgstr "opgraderer soldaterforsvar fra niveau 0 til niveau 1"
+
+#. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
+#: ../../tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:111
+msgid "upgrading soldier defense from level 1 to level 2"
+msgstr "opgraderer soldaterforsvar fra niveau 1 til niveau 2"
+
+#. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
+#: ../../tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:122
+#: ../../tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:167
+#: ../../tribes/buildings/trainingsites/empire/trainingcamp/init.lua:147
+msgid "upgrading soldier health from level 0 to level 1"
+msgstr "opgraderer soldaterhelbred fra niveau 0 til niveau 1"
+
+#. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
+#: ../../tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:133
+#: ../../tribes/buildings/trainingsites/barbarians/battlearena/init.lua:93
+#: ../../tribes/buildings/trainingsites/empire/arena/init.lua:80
+#: ../../tribes/buildings/trainingsites/empire/colosseum/init.lua:73
+msgid "upgrading soldier evade from level 0 to level 1"
+msgstr "opgraderer soldaterundvig fra niveau 0 til niveau 1"
+
+#. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
+#: ../../tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:144
+#: ../../tribes/buildings/trainingsites/barbarians/battlearena/init.lua:105
+#: ../../tribes/buildings/trainingsites/empire/colosseum/init.lua:84
+msgid "upgrading soldier evade from level 1 to level 2"
+msgstr "opgraderer soldaterundvig fra niveau 1 til niveau 2"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/trainingsites/barbarians/battlearena/init.lua:7
+msgctxt "barbarians_building"
+msgid "Battle Arena"
+msgstr "Kamparena"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:7
+msgctxt "barbarians_building"
+msgid "Training Camp"
+msgstr "Træningslejr"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/trainingsites/empire/trainingcamp/init.lua:7
+msgctxt "empire_building"
+msgid "Training Camp"
+msgstr "Træningslejr"
+
+#. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
+#: ../../tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:156
+msgid "upgrading soldier attack from level 4 to level 5"
+msgstr "opgrader soldaterangreb fra niveau 4 til niveau 5"
+
+#. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
+#: ../../tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:178
+#: ../../tribes/buildings/trainingsites/empire/trainingcamp/init.lua:158
+msgid "upgrading soldier health from level 1 to level 2"
+msgstr "opgraderer soldaterhelbred fra niveau 1 til niveau 2"
+
+#. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
+#: ../../tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:189
+#: ../../tribes/buildings/trainingsites/empire/trainingcamp/init.lua:169
+msgid "upgrading soldier health from level 2 to level 3"
+msgstr "opgraderer soldaterhelbred fra niveau 2 til niveau 3"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/trainingsites/empire/arena/init.lua:7
+msgctxt "empire_building"
+msgid "Arena"
+msgstr "Arena"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/trainingsites/empire/colosseum/init.lua:7
+msgctxt "empire_building"
+msgid "Colosseum"
+msgstr "Amfiteater"
+
+#. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
+#: ../../tribes/buildings/trainingsites/empire/trainingcamp/init.lua:180
+msgid "upgrading soldier health from level 3 to level 4"
+msgstr "opgraderer soldaterhelbred fra niveau 3 til niveau 4"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/warehouses/atlanteans/headquarters/init.lua:7
+msgctxt "atlanteans_building"
+msgid "Headquarters"
+msgstr "Hovedkvarter"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/warehouses/barbarians/headquarters/init.lua:7
+#: ../../tribes/buildings/warehouses/barbarians/headquarters_interim/init.lua:7
+msgctxt "barbarians_building"
+msgid "Headquarters"
+msgstr "Hovedkvarter"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/warehouses/empire/headquarters/init.lua:7
+msgctxt "empire_building"
+msgid "Headquarters"
+msgstr "Hovedkvarter"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/warehouses/atlanteans/port/init.lua:7
+msgctxt "atlanteans_building"
+msgid "Port"
+msgstr "havn"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/warehouses/barbarians/port/init.lua:7
+msgctxt "barbarians_building"
+msgid "Port"
+msgstr "havn"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/warehouses/empire/port/init.lua:7
+msgctxt "empire_building"
+msgid "Port"
+msgstr "havn"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/warehouses/atlanteans/warehouse/init.lua:7
+msgctxt "atlanteans_building"
+msgid "Warehouse"
+msgstr "Varehus"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/warehouses/barbarians/warehouse/init.lua:7
+msgctxt "barbarians_building"
+msgid "Warehouse"
+msgstr "Varehus"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/warehouses/empire/warehouse/init.lua:7
+msgctxt "empire_building"
+msgid "Warehouse"
+msgstr "Varehus"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/warehouses/empire/headquarters_shipwreck/init.lua:7
+msgctxt "empire_building"
+msgid "Headquarters Shipwreck"
+msgstr "Hovedkvarterskibbrud"
+
+#. TRANSLATORS: This is an immovable name used in lists of immovables
+#: ../../tribes/immovables/ashes/init.lua:7
+msgctxt "immovable"
+msgid "Ashes"
+msgstr "Aske"
+
+#. TRANSLATORS: This is an immovable name used in lists of immovables
+#: ../../tribes/immovables/blackrootfield_harvested/init.lua:7
+msgctxt "immovable"
+msgid "Blackroot Field (harvested)"
+msgstr "Rodfrugtmark (høstet)"
+
+#. TRANSLATORS: This is an immovable name used in lists of immovables
+#: ../../tribes/immovables/blackrootfield_medium/init.lua:7
+msgctxt "immovable"
+msgid "Blackroot Field (medium)"
+msgstr "Rodfrugtmark (mellem)"
+
+#. TRANSLATORS: This is an immovable name used in lists of immovables
+#: ../../tribes/immovables/blackrootfield_ripe/init.lua:7
+msgctxt "immovable"
+msgid "Blackroot Field (ripe)"
+msgstr "Rodfrugtmark (meget lille)"
+
+#. TRANSLATORS: This is an immovable name used in lists of immovables
+#: ../../tribes/immovables/blackrootfield_small/init.lua:7
+msgctxt "immovable"
+msgid "Blackroot Field (small)"
+msgstr "Rodfrugtmark (lille)"
+
+#. TRANSLATORS: This is an immovable name used in lists of immovables
+#: ../../tribes/immovables/blackrootfield_tiny/init.lua:7
+msgctxt "immovable"
+msgid "Blackroot Field (tiny)"
+msgstr "Rodfrugtmark (meget lille)"
+
+#. TRANSLATORS: This is an immovable name used in lists of immovables
+#: ../../tribes/immovables/cornfield_harvested/init.lua:7
+msgctxt "immovable"
+msgid "Cornfield (harvested)"
+msgstr "Kornmark (høstet)"
+
+#. TRANSLATORS: This is an immovable name used in lists of immovables
+#: ../../tribes/immovables/cornfield_medium/init.lua:7
+msgctxt "immovable"
+msgid "Cornfield (medium)"
+msgstr "Kornmarkt (mellem)"
+
+#. TRANSLATORS: This is an immovable name used in lists of immovables
+#: ../../tribes/immovables/cornfield_ripe/init.lua:7
+msgctxt "immovable"
+msgid "Cornfield (ripe)"
+msgstr "Kornmark (meget lille)"
+
+#. TRANSLATORS: This is an immovable name used in lists of immovables
+#: ../../tribes/immovables/cornfield_small/init.lua:7
+msgctxt "immovable"
+msgid "Cornfield (small)"
+msgstr "Kornmark (lille)"
+
+#. TRANSLATORS: This is an immovable name used in lists of immovables
+#: ../../tribes/immovables/cornfield_tiny/init.lua:7
+msgctxt "immovable"
+msgid "Cornfield (tiny)"
+msgstr "Kornmark (meget lille)"
+
+#. TRANSLATORS: This is an immovable name used in lists of immovables
+#: ../../tribes/immovables/destroyed_building/init.lua:7
+msgctxt "immovable"
+msgid "Destroyed building"
+msgstr "Ødelagt bygning"
+
+#. TRANSLATORS: This is an immovable name used in lists of immovables
+#: ../../tribes/immovables/field_harvested/init.lua:7
+msgctxt "immovable"
+msgid "Field (harvested)"
+msgstr "Mark (høstet)"
+
+#. TRANSLATORS: This is an immovable name used in lists of immovables
+#: ../../tribes/immovables/field_medium/init.lua:7
+msgctxt "immovable"
+msgid "Field (medium)"
+msgstr "Mark (mellem)"
+
+#. TRANSLATORS: This is an immovable name used in lists of immovables
+#: ../../tribes/immovables/field_ripe/init.lua:7
+msgctxt "immovable"
+msgid "Field (ripe)"
+msgstr "Mark (moden)"
+
+#. TRANSLATORS: This is an immovable name used in lists of immovables
+#: ../../tribes/immovables/field_small/init.lua:7
+msgctxt "immovable"
+msgid "Field (small)"
+msgstr "Mark (lille)"
+
+#. TRANSLATORS: This is an immovable name used in lists of immovables
+#: ../../tribes/immovables/field_tiny/init.lua:7
+msgctxt "immovable"
+msgid "Field (tiny)"
+msgstr "Mark (meget lille)"
+
+#. TRANSLATORS: This is an immovable name used in lists of immovables
+#: ../../tribes/immovables/grapevine_medium/init.lua:7
+msgctxt "immovable"
+msgid "Grapevine (medium)"
+msgstr "Vin (mellem)"
+
+#. TRANSLATORS: This is an immovable name used in lists of immovables
+#: ../../tribes/immovables/grapevine_ripe/init.lua:7
+msgctxt "immovable"
+msgid "Grapevine (ripe)"
+msgstr "Vin (moden)"
+
+#. TRANSLATORS: This is an immovable name used in lists of immovables
+#: ../../tribes/immovables/grapevine_small/init.lua:7
+msgctxt "immovable"
+msgid "Grapevine (small)"
+msgstr "Vin (lille)"
+
+#. TRANSLATORS: This is an immovable name used in lists of immovables
+#: ../../tribes/immovables/grapevine_tiny/init.lua:7
+msgctxt "immovable"
+msgid "Grapevine (tiny)"
+msgstr "Vin (meget lille)"
+
+#. TRANSLATORS: This is an immovable name used in lists of immovables
+#: ../../tribes/immovables/reed_medium/init.lua:7
+msgctxt "immovable"
+msgid "Reed (medium)"
+msgstr "Strå (mellem)"
+
+#. TRANSLATORS: This is an immovable name used in lists of immovables
+#: ../../tribes/immovables/reed_ripe/init.lua:7
+msgctxt "immovable"
+msgid "Reed (ripe)"
+msgstr "Strå (moden)"
+
+#. TRANSLATORS: This is an immovable name used in lists of immovables
+#: ../../tribes/immovables/reed_small/init.lua:7
+msgctxt "immovable"
+msgid "Reed (small)"
+msgstr "Strå (lille)"
+
+#. TRANSLATORS: This is an immovable name used in lists of immovables
+#: ../../tribes/immovables/reed_tiny/init.lua:7
+msgctxt "immovable"
+msgid "Reed (tiny)"
+msgstr "Strå (meget lille)"
+
+#. TRANSLATORS: This is a resource name used in lists of resources
+#: ../../tribes/immovables/resi_coal1/init.lua:7
+msgctxt "immovable"
+msgid "Coal Vein"
+msgstr "Kulåre"
+
+#. TRANSLATORS: This is a resource name used in lists of resources
+#: ../../tribes/immovables/resi_coal2/init.lua:7
+msgctxt "immovable"
+msgid "Main Coal Vein"
+msgstr "Hovedkulåre"
+
+#. TRANSLATORS: This is a resource name used in lists of resources
+#: ../../tribes/immovables/resi_gold1/init.lua:7
+msgctxt "immovable"
+msgid "Gold Vein"
+msgstr "Guldåre"
+
+#. TRANSLATORS: This is a resource name used in lists of resources
+#: ../../tribes/immovables/resi_gold2/init.lua:7
+msgctxt "immovable"
+msgid "Main Gold Vein"
+msgstr "Hovedguldåre"
+
+#. TRANSLATORS: This is a resource name used in lists of resources
+#: ../../tribes/immovables/resi_iron1/init.lua:7
+msgctxt "immovable"
+msgid "Iron Vein"
+msgstr "Jernåre"
+
+#. TRANSLATORS: This is a resource name used in lists of resources
+#: ../../tribes/immovables/resi_iron2/init.lua:7
+msgctxt "immovable"
+msgid "Main Iron Vein"
+msgstr "Hovedkulåre"
+
+#. TRANSLATORS: This is a resource name used in lists of resources
+#: ../../tribes/immovables/resi_none/init.lua:7
+msgctxt "immovable"
+msgid "No Resources"
+msgstr "Ingen ressourcer"
+
+#. TRANSLATORS: This is a resource name used in lists of resources
+#: ../../tribes/immovables/resi_stones1/init.lua:7
+msgctxt "immovable"
+msgid "Some Stones"
+msgstr "Lidt sten"
+
+#. TRANSLATORS: This is a resource name used in lists of resources
+#: ../../tribes/immovables/resi_stones2/init.lua:7
+msgctxt "immovable"
+msgid "A Lot of Stones"
+msgstr "En masse sten"
+
+#. TRANSLATORS: This is a resource name used in lists of resources
+#: ../../tribes/immovables/resi_water1/init.lua:7
+msgctxt "immovable"
+msgid "Water Vein"
+msgstr "Vandåre"
+
+#. TRANSLATORS: This is an immovable name used in lists of immovables
+#: ../../tribes/immovables/shipconstruction_atlanteans/init.lua:7
+#: ../../tribes/immovables/shipconstruction_barbarians/init.lua:7
+#: ../../tribes/immovables/shipconstruction_empire/init.lua:7
+msgctxt "immovable"
+msgid "Ship Under Construction"
+msgstr "Skibsbyggeplads"
+
+#. TRANSLATORS: This is the ship's name used in lists of units
+#: ../../tribes/ships/atlanteans/init.lua:22
+#: ../../tribes/ships/barbarians/init.lua:17
+#: ../../tribes/ships/empire/init.lua:17
+msgid "Ship"
+msgstr "Skib"
+
+#. TRANSLATORS: This is a ware name used in lists of wares
+#: ../../tribes/wares/armor/init.lua:7
+msgctxt "ware"
+msgid "Armor"
+msgstr "Rustning"
+
+#. TRANSLATORS: This is a ware name used in lists of wares
+#: ../../tribes/wares/armor_chain/init.lua:7
+msgctxt "ware"
+msgid "Chain Armor"
+msgstr "Kæderustning"
+
+#. TRANSLATORS: This is a ware name used in lists of wares
+#: ../../tribes/wares/armor_gilded/init.lua:7
+msgctxt "ware"
+msgid "Gilded Armor"
+msgstr "Forgyldt rustning"
+
+#. TRANSLATORS: This is a ware name used in lists of wares
+#: ../../tribes/wares/armor_helmet/init.lua:7
+msgctxt "empire_ware"
+msgid "Helmet"
+msgstr "Hjelm"
+
+#. TRANSLATORS: This is a ware name used in lists of wares
+#: ../../tribes/wares/helmet/init.lua:7
+msgctxt "barbarians_ware"
+msgid "Helmet"
+msgstr "Hjelm"
+
+#. TRANSLATORS: This is a ware name used in lists of wares
+#: ../../tribes/wares/ax/init.lua:7
+msgctxt "ware"
+msgid "Ax"
+msgstr "Økse"
+
+#. TRANSLATORS: This is a ware name used in lists of wares
+#: ../../tribes/wares/ax_battle/init.lua:7
+msgctxt "ware"
+msgid "Battle Ax"
+msgstr "Krigsøkse"
+
+#. TRANSLATORS: This is a ware name used in lists of wares
+#: ../../tribes/wares/ax_broad/init.lua:7
+msgctxt "ware"
+msgid "Broad Ax"
+msgstr "Bred økse"
+
+#. TRANSLATORS: This is a ware name used in lists of wares
+#: ../../tribes/wares/ax_bronze/init.lua:7
+msgctxt "ware"
+msgid "Bronze Ax"
+msgstr "Bronzeøkse"
+
+#. TRANSLATORS: This is a ware name used in lists of wares
+#: ../../tribes/wares/ax_sharp/init.lua:7
+msgctxt "ware"
+msgid "Sharp Ax"
+msgstr "Skarp økse"
+
+#. TRANSLATORS: This is a ware name used in lists of wares
+#: ../../tribes/wares/ax_warriors/init.lua:7
+msgctxt "ware"
+msgid "Warrior’s Ax"
+msgstr "Krigerøkse"
+
+#. TRANSLATORS: This is a ware name used in lists of wares
+#: ../../tribes/wares/basket/init.lua:7
+msgctxt "ware"
+msgid "Basket"
+msgstr "Kurv"
+
+#. TRANSLATORS: This is a ware name used in lists of wares
+#: ../../tribes/wares/beer/init.lua:7
+msgctxt "ware"
+msgid "Beer"
+msgstr "Øl"
+
+#. TRANSLATORS: This is a ware name used in lists of wares
+#: ../../tribes/wares/beer_strong/init.lua:7
+msgctxt "ware"
+msgid "Strong Beer"
+msgstr "Stærk øl"
+
+#. TRANSLATORS: This is a ware name used in lists of wares
+#: ../../tribes/wares/blackroot/init.lua:7
+msgctxt "ware"
+msgid "Blackroot"
+msgstr "Rodfrugt"
+
+#. TRANSLATORS: This is a ware name used in lists of wares
+#: ../../tribes/wares/blackroot_flour/init.lua:7
+msgctxt "ware"
+msgid "Blackroot Flour"
+msgstr "Rodfrugtsmel"
+
+#. TRANSLATORS: This is a ware name used in lists of wares
+#: ../../tribes/wares/blackwood/init.lua:7
+msgctxt "ware"
+msgid "Blackwood"
+msgstr "Sort træ"
+
+#. TRANSLATORS: This is a ware name used in lists of wares
+#: ../../tribes/wares/bread_atlanteans/init.lua:7
+msgctxt "atlanteans_ware"
+msgid "Bread"
+msgstr "Brød"
+
+#. TRANSLATORS: This is a ware name used in lists of wares
+#: ../../tribes/wares/bread_empire/init.lua:7
+msgctxt "empire_ware"
+msgid "Bread"
+msgstr "Brød"
+
+#. TRANSLATORS: This is a ware name used in lists of wares
+#: ../../tribes/wares/bread_barbarians/init.lua:7
+msgctxt "barbarians_ware"
+msgid "Pitta Bread"
+msgstr "Pittabrød"
+
+#. TRANSLATORS: This is a ware name used in lists of wares
+#: ../../tribes/wares/bread_paddle/init.lua:7
+msgctxt "ware"
+msgid "Bread Paddle"
+msgstr "Brødpadle"
+
+#. TRANSLATORS: This is a ware name used in lists of wares
+#: ../../tribes/wares/buckets/init.lua:7
+msgctxt "ware"
+msgid "Buckets"
+msgstr "Spande"
+
+#. TRANSLATORS: This is a ware name used in lists of wares
+#: ../../tribes/wares/cloth/init.lua:7
+msgctxt "ware"
+msgid "Cloth"
+msgstr "Klæde"
+
+#. TRANSLATORS: This is a ware name used in lists of wares
+#: ../../tribes/wares/coal/init.lua:7
+msgctxt "ware"
+msgid "Coal"
+msgstr "Kul"
+
+#. TRANSLATORS: This is a ware name used in lists of wares
+#: ../../tribes/wares/corn/init.lua:7
+msgctxt "ware"
+msgid "Corn"
+msgstr "Korn"
+
+#. TRANSLATORS: This is a ware name used in lists of wares
+#: ../../tribes/wares/cornmeal/init.lua:7
+msgctxt "ware"
+msgid "Cornmeal"
+msgstr "Kornmåltid"
+
+#. TRANSLATORS: This is a ware name used in lists of wares
+#: ../../tribes/wares/diamond/init.lua:7
+msgctxt "ware"
+msgid "Diamond"
+msgstr "Diamant"
+
+#. TRANSLATORS: This is a ware name used in lists of wares
+#: ../../tribes/wares/felling_ax/init.lua:7
+msgctxt "ware"
+msgid "Felling Ax"
+msgstr "Skovøkse"
+
+#. TRANSLATORS: This is a ware name used in lists of wares
+#: ../../tribes/wares/fire_tongs/init.lua:7
+msgctxt "ware"
+msgid "Fire Tongs"
+msgstr "Ildtang"
+
+#. TRANSLATORS: This is a ware name used in lists of wares
+#: ../../tribes/wares/fish/init.lua:7
+msgctxt "ware"
+msgid "Fish"
+msgstr "Fisk"
+
+#. TRANSLATORS: This is a ware name used in lists of wares
+#: ../../tribes/wares/fishing_net/init.lua:7
+msgctxt "ware"
+msgid "Fishing Net"
+msgstr "Fiskenet"
+
+#. TRANSLATORS: This is a ware name used in lists of wares
+#: ../../tribes/wares/fishing_rod/init.lua:7
+msgctxt "ware"
+msgid "Fishing Rod"
+msgstr "Fiskestang"
+
+#. TRANSLATORS: This is a ware name used in lists of wares
+#: ../../tribes/wares/flour/init.lua:7
+msgctxt "ware"
+msgid "Flour"
+msgstr "Mel"
+
+#. TRANSLATORS: This is a ware name used in lists of wares
+#: ../../tribes/wares/gold/init.lua:7
+msgctxt "ware"
+msgid "Gold"
+msgstr "Guld"
+
+#. TRANSLATORS: This is a ware name used in lists of wares
+#: ../../tribes/wares/gold_ore/init.lua:7
+msgctxt "ware"
+msgid "Gold Ore"
+msgstr "Guldmalm"
+
+#. TRANSLATORS: This is a ware name used in lists of wares
+#: ../../tribes/wares/gold_thread/init.lua:7
+msgctxt "ware"
+msgid "Gold Thread"
+msgstr "Guldtråd"
+
+#. TRANSLATORS: This is a ware name used in lists of wares
+#: ../../tribes/wares/granite/init.lua:7
+msgctxt "ware"
+msgid "Granite"
+msgstr "Granit"
+
+#. TRANSLATORS: This is a ware name used in lists of wares
+#: ../../tribes/wares/grape/init.lua:7
+msgctxt "ware"
+msgid "Grape"
+msgstr "Vindrue"
+
+#. TRANSLATORS: This is a ware name used in lists of wares
+#: ../../tribes/wares/grout/init.lua:7
+msgctxt "ware"
+msgid "Grout"
+msgstr "Injektionsmørtel"
+
+#. TRANSLATORS: This is a ware name used in lists of wares
+#: ../../tribes/wares/hammer/init.lua:7
+msgctxt "ware"
+msgid "Hammer"
+msgstr "Hammer"
+
+#. TRANSLATORS: This is a ware name used in lists of wares
+#: ../../tribes/wares/helmet_mask/init.lua:7
+msgctxt "ware"
+msgid "Mask"
+msgstr "Maske"
+
+#. TRANSLATORS: This is a ware name used in lists of wares
+#: ../../tribes/wares/helmet_warhelm/init.lua:7
+msgctxt "ware"
+msgid "Warhelm"
+msgstr "Krigshjelm"
+
+#. TRANSLATORS: This is a ware name used in lists of wares
+#: ../../tribes/wares/hook_pole/init.lua:7
+msgctxt "ware"
+msgid "Hook Pole"
+msgstr "Krogstang"
+
+#. TRANSLATORS: This is a ware name used in lists of wares
+#: ../../tribes/wares/hunting_bow/init.lua:7
+msgctxt "ware"
+msgid "Hunting Bow"
+msgstr "Jagtbue"
+
+#. TRANSLATORS: This is a ware name used in lists of wares
+#: ../../tribes/wares/hunting_spear/init.lua:7
+msgctxt "ware"
+msgid "Hunting Spear"
+msgstr "Jagtspyd"
+
+#. TRANSLATORS: This is a ware name used in lists of wares
+#: ../../tribes/wares/iron/init.lua:7
+msgctxt "ware"
+msgid "Iron"
+msgstr "Jern"
+
+#. TRANSLATORS: This is a ware name used in lists of wares
+#: ../../tribes/wares/iron_ore/init.lua:7
+msgctxt "ware"
+msgid "Iron Ore"
+msgstr "Jernmalm"
+
+#. TRANSLATORS: This is a ware name used in lists of wares
+#: ../../tribes/wares/kitchen_tools/init.lua:7
+msgctxt "ware"
+msgid "Kitchen Tools"
+msgstr "Køkkenredskaber"
+
+#. TRANSLATORS: This is a ware name used in lists of wares
+#: ../../tribes/wares/log/init.lua:7
+msgctxt "ware"
+msgid "Log"
+msgstr "Træstamme"
+
+#. TRANSLATORS: This is a ware name used in lists of wares
+#: ../../tribes/wares/marble/init.lua:7
+msgctxt "ware"
+msgid "Marble"
+msgstr "Marmor"
+
+#. TRANSLATORS: This is a ware name used in lists of wares
+#: ../../tribes/wares/marble_column/init.lua:7
+msgctxt "ware"
+msgid "Marble Column"
+msgstr "Marmorsøjle"
+
+#. TRANSLATORS: This is a ware name used in lists of wares
+#: ../../tribes/wares/meal/init.lua:7
+msgctxt "ware"
+msgid "Meal"
+msgstr "Måltid"
+
+#. TRANSLATORS: This is a ware name used in lists of wares
+#: ../../tribes/wares/meat/init.lua:7
+msgctxt "ware"
+msgid "Meat"
+msgstr "Mad"
+
+#. TRANSLATORS: This is a ware name used in lists of wares
+#: ../../tribes/wares/milking_tongs/init.lua:7
+msgctxt "ware"
+msgid "Milking Tongs"
+msgstr "Mælketang"
+
+#. TRANSLATORS: This is a ware name used in lists of wares
+#: ../../tribes/wares/pick/init.lua:7
+msgctxt "ware"
+msgid "Pick"
+msgstr "Hakke"
+
+#. TRANSLATORS: This is a ware name used in lists of wares
+#: ../../tribes/wares/planks/init.lua:7
+msgctxt "ware"
+msgid "Planks"
+msgstr "Brædder"
+
+#. TRANSLATORS: This is a ware name used in lists of wares
+#: ../../tribes/wares/quartz/init.lua:7
+msgctxt "ware"
+msgid "Quartz"
+msgstr "Kvarts"
+
+#. TRANSLATORS: This is a ware name used in lists of wares
+#: ../../tribes/wares/ration/init.lua:7
+msgctxt "ware"
+msgid "Ration"
+msgstr "Ration"
+
+#. TRANSLATORS: This is a ware name used in lists of wares
+#: ../../tribes/wares/saw/init.lua:7
+msgctxt "ware"
+msgid "Saw"
+msgstr "Sav"
+
+#. TRANSLATORS: This is a ware name used in lists of wares
+#: ../../tribes/wares/scythe/init.lua:7
+msgctxt "ware"
+msgid "Scythe"
+msgstr "Le"
+
+#. TRANSLATORS: This is a ware name used in lists of wares
+#: ../../tribes/wares/shield_advanced/init.lua:7
+msgctxt "ware"
+msgid "Advanced Shield"
+msgstr "Avanceret skjold"
+
+#. TRANSLATORS: This is a ware name used in lists of wares
+#: ../../tribes/wares/shield_steel/init.lua:7
+msgctxt "ware"
+msgid "Steel Shield"
+msgstr "Stålskjold"
+
+#. TRANSLATORS: This is a ware name used in lists of wares
+#: ../../tribes/wares/shovel/init.lua:7
+msgctxt "ware"
+msgid "Shovel"
+msgstr "Skovl"
+
+#. TRANSLATORS: This is a ware name used in lists of wares
+#: ../../tribes/wares/smoked_fish/init.lua:7
+msgctxt "ware"
+msgid "Smoked Fish"
+msgstr "Røget fisk"
+
+#. TRANSLATORS: This is a ware name used in lists of wares
+#: ../../tribes/wares/smoked_meat/init.lua:7
+msgctxt "ware"
+msgid "Smoked Meat"
+msgstr "Røget kød"
+
+#. TRANSLATORS: This is a ware name used in lists of wares
+#: ../../tribes/wares/snack/init.lua:7
+msgctxt "ware"
+msgid "Snack"
+msgstr "Mellemmåltid"
+
+#. TRANSLATORS: This is a ware name used in lists of wares
+#: ../../tribes/wares/spear/init.lua:7
+msgctxt "ware"
+msgid "Spear"
+msgstr "Spyd"
+
+#. TRANSLATORS: This is a ware name used in lists of wares
+#: ../../tribes/wares/spear_advanced/init.lua:7
+msgctxt "ware"
+msgid "Advanced Spear"
+msgstr "Avanceret spyd"
+
+#. TRANSLATORS: This is a ware name used in lists of wares
+#: ../../tribes/wares/spear_heavy/init.lua:7
+msgctxt "ware"
+msgid "Heavy Spear"
+msgstr "Tungt spyd"
+
+#. TRANSLATORS: This is a ware name used in lists of wares
+#: ../../tribes/wares/spear_war/init.lua:7
+msgctxt "ware"
+msgid "War Spear"
+msgstr "Krigsspyd"
+
+#. TRANSLATORS: This is a ware name used in lists of wares
+#: ../../tribes/wares/spear_wooden/init.lua:7
+msgctxt "ware"
+msgid "Wooden Spear"
+msgstr "Træspyd"
+
+#. TRANSLATORS: This is a ware name used in lists of wares
+#: ../../tribes/wares/spider_silk/init.lua:7
+msgctxt "ware"
+msgid "Spider Silk"
+msgstr "Edderkopsilke"
+
+#. TRANSLATORS: This is a ware name used in lists of wares
+#: ../../tribes/wares/spidercloth/init.lua:7
+msgctxt "ware"
+msgid "Spidercloth"
+msgstr "Silketøj"
+
+#. TRANSLATORS: This is a ware name used in lists of wares
+#: ../../tribes/wares/tabard/init.lua:7
+msgctxt "ware"
+msgid "Tabard"
+msgstr "Våbenkjortel"
+
+#. TRANSLATORS: This is a ware name used in lists of wares
+#: ../../tribes/wares/tabard_golden/init.lua:7
+msgctxt "ware"
+msgid "Golden Tabard"
+msgstr "Gylden våbenkjortel"
+
+#. TRANSLATORS: This is a ware name used in lists of wares
+#: ../../tribes/wares/thatch_reed/init.lua:7
+msgctxt "ware"
+msgid "Thatch Reed"
+msgstr "Strå"
+
+#. TRANSLATORS: This is a ware name used in lists of wares
+#: ../../tribes/wares/trident_double/init.lua:7
+msgctxt "ware"
+msgid "Double Trident"
+msgstr "Dobbelt trefork"
+
+#. TRANSLATORS: This is a ware name used in lists of wares
+#: ../../tribes/wares/trident_heavy_double/init.lua:7
+msgctxt "ware"
+msgid "Heavy Double Trident"
+msgstr "Tung dobbelt trefork"
+
+#. TRANSLATORS: This is a ware name used in lists of wares
+#: ../../tribes/wares/trident_light/init.lua:7
+msgctxt "ware"
+msgid "Light Trident"
+msgstr "Let trefork"
+
+#. TRANSLATORS: This is a ware name used in lists of wares
+#: ../../tribes/wares/trident_long/init.lua:7
+msgctxt "ware"
+msgid "Long Trident"
+msgstr "Lang trefork"
+
+#. TRANSLATORS: This is a ware name used in lists of wares
+#: ../../tribes/wares/trident_steel/init.lua:7
+msgctxt "ware"
+msgid "Steel Trident"
+msgstr "Ståltrefork"
+
+#. TRANSLATORS: This is a ware name used in lists of wares
+#: ../../tribes/wares/water/init.lua:7
+msgctxt "ware"
+msgid "Water"
+msgstr "Vand"
+
+#. TRANSLATORS: This is a ware name used in lists of wares
+#: ../../tribes/wares/wheat/init.lua:7
+msgctxt "ware"
+msgid "Wheat"
+msgstr "Hvede"
+
+#. TRANSLATORS: This is a ware name used in lists of wares
+#: ../../tribes/wares/wine/init.lua:7
+msgctxt "ware"
+msgid "Wine"
+msgstr "Vin"
+
+#. TRANSLATORS: This is a ware name used in lists of wares
+#: ../../tribes/wares/wool/init.lua:7
+msgctxt "ware"
+msgid "Wool"
+msgstr "Uld"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/atlanteans/armorsmith/init.lua:18
+msgctxt "atlanteans_worker"
+msgid "Armorsmith"
+msgstr "Rustningssmed"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/empire/armorsmith/init.lua:18
+msgctxt "empire_worker"
+msgid "Armorsmith"
+msgstr "Rustningssmed"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/atlanteans/baker/init.lua:18
+msgctxt "atlanteans_worker"
+msgid "Baker"
+msgstr "Bager"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/barbarians/baker/init.lua:18
+msgctxt "barbarians_worker"
+msgid "Baker"
+msgstr "Bager"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/empire/baker/init.lua:18
+msgctxt "empire_worker"
+msgid "Baker"
+msgstr "Bager"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/atlanteans/blackroot_farmer/init.lua:36
+msgctxt "atlanteans_worker"
+msgid "Blackroot Farmer"
+msgstr "Rodfrugtlandmand"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/atlanteans/builder/init.lua:28
+msgctxt "atlanteans_worker"
+msgid "Builder"
+msgstr "Bygger"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/barbarians/builder/init.lua:29
+msgctxt "barbarians_worker"
+msgid "Builder"
+msgstr "Bygger"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/empire/builder/init.lua:29
+msgctxt "empire_worker"
+msgid "Builder"
+msgstr "Bygger"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/atlanteans/carrier/init.lua:20
+msgctxt "atlanteans_worker"
+msgid "Carrier"
+msgstr "Bærer"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/barbarians/carrier/init.lua:19
+msgctxt "barbarians_worker"
+msgid "Carrier"
+msgstr "Bærer"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/empire/carrier/init.lua:19
+msgctxt "empire_worker"
+msgid "Carrier"
+msgstr "Bærer"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/atlanteans/charcoal_burner/init.lua:18
+msgctxt "atlanteans_worker"
+msgid "Charcoal Burner"
+msgstr "Trækulsbrænder"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/barbarians/charcoal_burner/init.lua:18
+msgctxt "barbarians_worker"
+msgid "Charcoal Burner"
+msgstr "Trækulsbrænder"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/empire/charcoal_burner/init.lua:18
+msgctxt "empire_worker"
+msgid "Charcoal Burner"
+msgstr "Trækulsbrænder"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/atlanteans/farmer/init.lua:36
+msgctxt "atlanteans_worker"
+msgid "Farmer"
+msgstr "Landmand"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/barbarians/farmer/init.lua:36
+msgctxt "barbarians_worker"
+msgid "Farmer"
+msgstr "Landmand"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/empire/farmer/init.lua:36
+msgctxt "empire_worker"
+msgid "Farmer"
+msgstr "Landmand"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/atlanteans/fishbreeder/init.lua:22
+msgctxt "atlanteans_worker"
+msgid "Fish Breeder"
+msgstr "Fiskeopdrætter"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/atlanteans/fisher/init.lua:24
+msgctxt "atlanteans_worker"
+msgid "Fisher"
+msgstr "Fisker"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/barbarians/fisher/init.lua:24
+msgctxt "barbarians_worker"
+msgid "Fisher"
+msgstr "Fisker"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/empire/fisher/init.lua:23
+msgctxt "empire_worker"
+msgid "Fisher"
+msgstr "Fisker"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/atlanteans/forester/init.lua:36
+msgctxt "atlanteans_worker"
+msgid "Forester"
+msgstr "Skovfoged"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/empire/forester/init.lua:36
+msgctxt "empire_worker"
+msgid "Forester"
+msgstr "Skovfoged"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/atlanteans/geologist/init.lua:25
+msgctxt "atlanteans_worker"
+msgid "Geologist"
+msgstr "Geolog"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/barbarians/geologist/init.lua:25
+msgctxt "barbarians_worker"
+msgid "Geologist"
+msgstr "Geolog"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/empire/geologist/init.lua:25
+msgctxt "empire_worker"
+msgid "Geologist"
+msgstr "Geolog"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/atlanteans/horse/init.lua:19
+msgctxt "atlanteans_worker"
+msgid "Horse"
+msgstr "Hest"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/atlanteans/horsebreeder/init.lua:16
+msgctxt "atlanteans_worker"
+msgid "Horse Breeder"
+msgstr "Hesteavler"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/atlanteans/hunter/init.lua:19
+msgctxt "atlanteans_worker"
+msgid "Hunter"
+msgstr "Jæger"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/barbarians/hunter/init.lua:19
+msgctxt "barbarians_worker"
+msgid "Hunter"
+msgstr "Jæger"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/empire/hunter/init.lua:19
+msgctxt "empire_worker"
+msgid "Hunter"
+msgstr "Jæger"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/atlanteans/miller/init.lua:18
+msgctxt "atlanteans_worker"
+msgid "Miller"
+msgstr "Møller"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/empire/miller/init.lua:18
+msgctxt "empire_worker"
+msgid "Miller"
+msgstr "Møller"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/atlanteans/miner/init.lua:18
+msgctxt "atlanteans_worker"
+msgid "Miner"
+msgstr "Minearbejder"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/barbarians/miner/init.lua:18
+msgctxt "barbarians_worker"
+msgid "Miner"
+msgstr "Minearbejder"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/empire/miner/init.lua:18
+msgctxt "empire_worker"
+msgid "Miner"
+msgstr "Minearbejder"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/atlanteans/sawyer/init.lua:18
+msgctxt "atlanteans_worker"
+msgid "Sawyer"
+msgstr "Savskærer"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/atlanteans/scout/init.lua:16
+msgctxt "atlanteans_worker"
+msgid "Scout"
+msgstr "Spejder"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/barbarians/scout/init.lua:18
+msgctxt "barbarians_worker"
+msgid "Scout"
+msgstr "Spejder"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/empire/scout/init.lua:18
+msgctxt "empire_worker"
+msgid "Scout"
+msgstr "Spejder"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/atlanteans/shipwright/init.lua:23
+msgctxt "atlanteans_worker"
+msgid "Shipwright"
+msgstr "Skibsbygger"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/barbarians/shipwright/init.lua:28
+msgctxt "barbarians_worker"
+msgid "Shipwright"
+msgstr "Skibsbygger"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/empire/shipwright/init.lua:28
+msgctxt "empire_worker"
+msgid "Shipwright"
+msgstr "Skibsbygger"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/atlanteans/smelter/init.lua:18
+msgctxt "atlanteans_worker"
+msgid "Smelter"
+msgstr "Smelteværksarbejder"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/barbarians/smelter/init.lua:18
+msgctxt "barbarians_worker"
+msgid "Smelter"
+msgstr "Smelteværksarbejder"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/empire/smelter/init.lua:18
+msgctxt "empire_worker"
+msgid "Smelter"
+msgstr "Smelteværksarbejder"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/atlanteans/smoker/init.lua:16
+msgctxt "atlanteans_worker"
+msgid "Smoker"
+msgstr "Røgeriarbejder"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/atlanteans/soldier/init.lua:78
+msgctxt "atlanteans_worker"
+msgid "Soldier"
+msgstr "Soldat"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/barbarians/soldier/init.lua:78
+msgctxt "barbarians_worker"
+msgid "Soldier"
+msgstr "Soldat"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/empire/soldier/init.lua:78
+msgctxt "empire_worker"
+msgid "Soldier"
+msgstr "Soldat"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/atlanteans/spiderbreeder/init.lua:18
+msgctxt "atlanteans_worker"
+msgid "Spider Breeder"
+msgstr "Silkeavler"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/atlanteans/stonecutter/init.lua:24
+msgctxt "atlanteans_worker"
+msgid "Stonecutter"
+msgstr "Stenhugger"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/atlanteans/toolsmith/init.lua:18
+msgctxt "atlanteans_worker"
+msgid "Toolsmith"
+msgstr "Værktøjsmager"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/empire/toolsmith/init.lua:18
+msgctxt "empire_worker"
+msgid "Toolsmith"
+msgstr "Værktøjsmager"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/atlanteans/trainer/init.lua:18
+msgctxt "atlanteans_worker"
+msgid "Trainer"
+msgstr "Træner"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/barbarians/trainer/init.lua:17
+msgctxt "barbarians_worker"
+msgid "Trainer"
+msgstr "Træner"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/empire/trainer/init.lua:18
+msgctxt "empire_worker"
+msgid "Trainer"
+msgstr "Træner"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/atlanteans/weaponsmith/init.lua:18
+msgctxt "atlanteans_worker"
+msgid "Weaponsmith"
+msgstr "Våbensmed"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/empire/weaponsmith/init.lua:18
+msgctxt "empire_worker"
+msgid "Weaponsmith"
+msgstr "Våbensmed"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/atlanteans/weaver/init.lua:18
+msgctxt "atlanteans_worker"
+msgid "Weaver"
+msgstr "Væver"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/barbarians/weaver/init.lua:18
+msgctxt "barbarians_worker"
+msgid "Weaver"
+msgstr "Væver"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/empire/weaver/init.lua:18
+msgctxt "empire_worker"
+msgid "Weaver"
+msgstr "Væver"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/atlanteans/woodcutter/init.lua:24
+msgctxt "atlanteans_worker"
+msgid "Woodcutter"
+msgstr "Skovhugger"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/barbarians/blacksmith/init.lua:18
+msgctxt "barbarians_worker"
+msgid "Blacksmith"
+msgstr "Smed"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/barbarians/blacksmith_master/init.lua:18
+msgctxt "barbarians_worker"
+msgid "Master Blacksmith"
+msgstr "Ekspertsmed"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/barbarians/brewer/init.lua:18
+msgctxt "barbarians_worker"
+msgid "Brewer"
+msgstr "Brygger"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/empire/brewer/init.lua:18
+msgctxt "empire_worker"
+msgid "Brewer"
+msgstr "Brygger"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/barbarians/brewer_master/init.lua:18
+msgctxt "barbarians_worker"
+msgid "Master Brewer"
+msgstr "Ekspertbrygger"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/barbarians/cattlebreeder/init.lua:18
+msgctxt "barbarians_worker"
+msgid "Cattle Breeder"
+msgstr "Kvægavler"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/barbarians/gamekeeper/init.lua:30
+msgctxt "barbarians_worker"
+msgid "Gamekeeper"
+msgstr "Jagtbestyrer"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/barbarians/gardener/init.lua:30
+msgctxt "barbarians_worker"
+msgid "Gardener"
+msgstr "Gartner"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/barbarians/helmsmith/init.lua:18
+msgctxt "barbarians_worker"
+msgid "Helmsmith"
+msgstr "Hjelmsmed"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/barbarians/innkeeper/init.lua:18
+msgctxt "barbarians_worker"
+msgid "Innkeeper"
+msgstr "Kroholder"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/empire/innkeeper/init.lua:18
+msgctxt "empire_worker"
+msgid "Innkeeper"
+msgstr "Kroholder"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/barbarians/lime_burner/init.lua:18
+msgctxt "barbarians_worker"
+msgid "Lime-Burner"
+msgstr "Kalkbrænder"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/barbarians/lumberjack/init.lua:25
+msgctxt "barbarians_worker"
+msgid "Lumberjack"
+msgstr "Skovhugger"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/empire/lumberjack/init.lua:25
+msgctxt "empire_worker"
+msgid "Lumberjack"
+msgstr "Skovhugger"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/barbarians/miner_chief/init.lua:18
+msgctxt "barbarians_worker"
+msgid "Chief Miner"
+msgstr "Ledende minearbejder"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/barbarians/miner_master/init.lua:18
+msgctxt "barbarians_worker"
+msgid "Master Miner"
+msgstr "Minemester"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/empire/miner_master/init.lua:18
+msgctxt "empire_worker"
+msgid "Master Miner"
+msgstr "Minemester"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/barbarians/ox/init.lua:20
+msgctxt "barbarians_worker"
+msgid "Ox"
+msgstr "Okse"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/barbarians/ranger/init.lua:36
+msgctxt "barbarians_worker"
+msgid "Ranger"
+msgstr "Skovridder"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/barbarians/stonemason/init.lua:25
+msgctxt "barbarians_worker"
+msgid "Stonemason"
+msgstr "Stenhugger"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/empire/stonemason/init.lua:25
+msgctxt "empire_worker"
+msgid "Stonemason"
+msgstr "Stenhugger"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/empire/carpenter/init.lua:18
+msgctxt "empire_worker"
+msgid "Carpenter"
+msgstr "Snedker"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/empire/donkey/init.lua:19
+msgctxt "empire_worker"
+msgid "Donkey"
+msgstr "Æsel"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/empire/donkeybreeder/init.lua:18
+msgctxt "empire_worker"
+msgid "Donkey Breeder"
+msgstr "Æselavler"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/empire/pigbreeder/init.lua:18
+msgctxt "empire_worker"
+msgid "Pig Breeder"
+msgstr "Svineavler"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/empire/shepherd/init.lua:18
+msgctxt "empire_worker"
+msgid "Shepherd"
+msgstr "Hyrde"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/empire/vinefarmer/init.lua:36
+msgctxt "empire_worker"
+msgid "Vine Farmer"
+msgstr "Vinavler"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/empire/vintner/init.lua:19
+msgctxt "empire_worker"
+msgid "Vintner"
+msgstr "Vinbrygger"

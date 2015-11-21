@@ -27,7 +27,7 @@
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
 #include "logic/player.h"
-#include "logic/tribe.h"
+#include "logic/tribes/tribe_descr.h"
 #include "map_io/map_object_loader.h"
 #include "map_io/map_object_saver.h"
 
@@ -38,7 +38,7 @@ namespace Widelands {
 */
 WaresQueue::WaresQueue
 	(PlayerImmovable &       _owner,
-	 WareIndex        const _ware,
+	 DescriptionIndex        const _ware,
 	 uint8_t           const _max_size)
 	:
 	m_owner           (_owner),
@@ -122,7 +122,7 @@ void WaresQueue::set_callback(CallbackFn * const fn, void * const data)
 void WaresQueue::request_callback
 	(Game            &       game,
 	 Request         &,
-	 WareIndex        const ware,
+	 DescriptionIndex        const ware,
 #ifndef NDEBUG
 	 Worker          * const w,
 #else

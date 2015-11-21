@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2011, 2015 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -31,7 +31,7 @@
 #include "logic/player.h"
 #include "logic/productionsite.h"
 #include "logic/soldier.h"
-#include "logic/tribe.h"
+#include "logic/tribes/tribe_descr.h"
 #include "logic/warehouse.h"
 #include "logic/worker.h"
 #include "map_io/map_object_loader.h"
@@ -50,7 +50,7 @@ Request IMPLEMENTATION
 
 Request::Request
 	(PlayerImmovable & _target,
-	 WareIndex const index,
+	 DescriptionIndex const index,
 	 CallbackFn const cbfn,
 	 WareWorker const w)
 	:
@@ -69,16 +69,14 @@ Request::Request
 	m_last_request_time(m_required_time)
 {
 	assert(m_type == wwWARE || m_type == wwWORKER);
-	if (w == wwWARE && _target.owner().tribe().get_nrwares() <= index)
+	if (w == wwWARE && !_target.owner().egbase().tribes().ware_exists(index))
 		throw wexception
-			("creating ware request with index %u, but tribe has only %u "
-			 "ware types",
-			 index, _target.owner().tribe().get_nrwares  ());
-	if (w == wwWORKER && _target.owner().tribe().get_nrworkers() <= index)
+			("creating ware request with index %u, but the ware for this index doesn't exist",
+			 index);
+	if (w == wwWORKER && !_target.owner().egbase().tribes().worker_exists(index))
 		throw wexception
-			("creating worker request with index %u, but tribe has only %u "
-			 "worker types",
-			 index, _target.owner().tribe().get_nrworkers());
+			("creating worker request with index %u, but the worker for this index doesn't exist",
+			 index);
 	if (m_economy)
 		m_economy->add_request(*this);
 }
@@ -113,13 +111,13 @@ void Request::read
 		if (packet_version == kCurrentPacketVersion) {
 			const TribeDescr& tribe = m_target.owner().tribe();
 			char const* const type_name = fr.c_string();
-			WareIndex const wai = tribe.ware_index(type_name);
-			if (wai != INVALID_INDEX) {
+			DescriptionIndex const wai = tribe.ware_index(type_name);
+			if (tribe.has_ware(wai)) {
 				m_type = wwWARE;
 				m_index = wai;
 			} else {
-				WareIndex const woi = tribe.worker_index(type_name);
-				if (woi != INVALID_INDEX) {
+				DescriptionIndex const woi = tribe.worker_index(type_name);
+				if (tribe.has_worker(woi)) {
 					m_type = wwWORKER;
 					m_index = woi;
 				} else {
@@ -183,16 +181,16 @@ void Request::write
 {
 	fw.unsigned_16(kCurrentPacketVersion);
 
-	//  Target and econmy should be set. Same is true for callback stuff.
+	//  Target and economy should be set. Same is true for callback stuff.
 
 	assert(m_type == wwWARE || m_type == wwWORKER);
-	const TribeDescr & tribe = m_target.owner().tribe();
-	assert(m_type != wwWARE   || m_index < tribe.get_nrwares  ());
-	assert(m_type != wwWORKER || m_index < tribe.get_nrworkers());
-	fw.c_string
-		(m_type == wwWARE                        ?
-		 tribe.get_ware_descr  (m_index)->name() :
-		 tribe.get_worker_descr(m_index)->name());
+	if (m_type == wwWARE) {
+		assert(game.tribes().ware_exists(m_index));
+		fw.c_string(game.tribes().get_ware_descr(m_index)->name());
+	} else if (m_type == wwWORKER) {
+		assert(game.tribes().worker_exists(m_index));
+		fw.c_string(game.tribes().get_worker_descr(m_index)->name());
+	}
 
 	fw.unsigned_32(m_count);
 
@@ -312,7 +310,7 @@ int32_t Request::get_priority (int32_t cost) const
 		MAX_IDLE_PRIORITY
 		+
 		std::max
-			(1,
+			(uint32_t(1),
 			 ((m_economy->owner().egbase().get_gametime() -
 			   (is_construction_site ?
 			    get_required_time() : get_last_request_time()))

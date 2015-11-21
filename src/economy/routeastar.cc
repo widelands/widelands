@@ -19,6 +19,7 @@
 
 #include "economy/routeastar.h"
 
+#include "base/wexception.h"
 #include "economy/iroute.h"
 #include "economy/router.h"
 
@@ -37,7 +38,9 @@ BaseRouteAStar::BaseRouteAStar(Router & router, WareWorker type) :
  */
 void BaseRouteAStar::routeto(RoutingNode & to, IRoute & route)
 {
-	assert(!to.cookie().is_active());
+	if (to.cookie().is_active()) {
+		throw wexception("BaseRouteAStar::routeto should not have an active cookie.");
+	}
 	assert(to.mpf_cycle == mpf_cycle);
 
 	route.init(to.mpf_realcost);

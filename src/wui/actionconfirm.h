@@ -43,7 +43,7 @@ void show_dismantle_confirm
 void show_enhance_confirm
 	(InteractivePlayer & player,
 	 Widelands::Building & building,
-	 const Widelands::BuildingIndex & id);
+	 const Widelands::DescriptionIndex & id);
 
 // Ship confirm windows
 void show_ship_sink_confirm
