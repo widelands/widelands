@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-04 07:08+0000\n"
-"PO-Revision-Date: 2015-11-04 07:11+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2015-11-10 08:55+0000\n"
+"PO-Revision-Date: 2015-11-16 01:42+0000\n"
+"Last-Translator: MiroslavR <miroslavr256@gmail.com>\n"
 "Language-Team: Slovak (http://www.transifex.com/widelands/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -65,13 +65,13 @@ msgstr "Keď sa začne rozrastať vaša cestná sieť a ekonomika, mali by ste z
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:46
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:48
 msgid "Build a tower"
-msgstr ""
+msgstr "Postavte vežu"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:49
 msgid ""
 "Build a tower at the north-east border of your territory to get greater "
 "visual range and to protect your people from sudden attacks by enemies."
-msgstr ""
+msgstr "Postavte vežu na severovýchodnej hranici svojho územia. Zväčšíte tak dosah viditeľnosti a poskytnete svojim ľuďom ochranu pred náhlymi útokmi nepriateľov."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:54
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:56
@@ -123,7 +123,7 @@ msgid ""
 " the blacksmith reaches his next level (master blacksmith), you can even "
 "enhance the ax workshop to a war mill, which will produce additional "
 "weapons."
-msgstr ""
+msgstr "Vylepšite kovodielňu na výrobňu sekier a zabezpečte tak výrobu zbraní. Na zaistenie výroby nástrojov postavte druhú kovodielňu. Keď kováč dosiahne nasledujúcu úroveň (kováčsky majster), výrobňu sekier budete môcť vylepšiť až na vojenský závod, ktorý vyrába ďalšie zbrane."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:83
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:120
@@ -424,7 +424,7 @@ msgid ""
 "settlement. He has instructed us to build a tower,  to have a greater visual"
 " range over the area around our hall to protect our people from sudden "
 "attacks."
-msgstr ""
+msgstr "Thron mi oznámil, že severovýchodne od našej osady objavil v snehu stopy. Prikázal nám postaviť vežu, ktorá nám umožní dovidieť na väčšiu oblasť okolo základne, aby sme tak mohli ochrániť našich ľudí pred náhlymi útokmi."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:254
 msgid "Further Exploration"
@@ -503,7 +503,7 @@ msgid ""
 "settlement should be safe for now. For the future, we might think on "
 "building some more fortifications like barriers and towers at the passages, "
 "but for now we can take a deep breath."
-msgstr ""
+msgstr "Konečne! Práve sa dokončila pevnosť, takže vstup do našej osady by mal byť nateraz chránený. V budúcnosti by sme mohli postaviť na priechodoch opevnenia ako hradby a veže, no zatiaľ sa môžeme zhlboka nadýchnuť."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:300
 msgid "Enhanced Economy and Training"
@@ -515,7 +515,7 @@ msgid ""
 "Our mining economy seems to work fine, that is already good news! Anyway, "
 "there are still a lot of men and women waiting in our hall to get a task, so"
 " they can help our soldiers to prepare for the war to come."
-msgstr ""
+msgstr "Zdá sa, že naša banská ekonomika funguje tak, ako má – to je hneď dobrá správa! Mimochodom, naša sieň je naďalej preplnená mužmi a ženami čakajúcimi na úlohu, ktorá by pomohla našim vojakom s prípravou na nastávajúcu vojnu."
 
 #. TRANSLATORS: Boldreth
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:306

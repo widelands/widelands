@@ -19,7 +19,6 @@
 
 #include "ui_basic/button.h"
 
-#include "base/log.h"
 #include "graphic/font_handler1.h"
 #include "graphic/image.h"
 #include "graphic/rendertarget.h"
@@ -58,7 +57,9 @@ Button::Button //  for textual buttons. If h = 0, h will resize according to the
 {
 	// Automatically resize for font height and give it a margin.
 	if (h < 1) {
-		set_desired_size(w, UI::g_fh1->render(as_uifont("."))->height() + 4);
+		int new_height = UI::g_fh1->render(as_uifont("."))->height() + 4;
+		set_desired_size(w, new_height);
+		set_size(w, new_height);
 	}
 	set_thinks(false);
 }

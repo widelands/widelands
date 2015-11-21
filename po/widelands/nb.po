@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-04 07:08+0000\n"
-"PO-Revision-Date: 2015-11-04 08:44+0000\n"
+"POT-Creation-Date: 2015-11-10 08:45+0000\n"
+"PO-Revision-Date: 2015-11-09 08:43+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Norwegian Bokmål (http://www.transifex.com/widelands/widelands/language/nb/)\n"
 "MIME-Version: 1.0\n"
@@ -237,16 +237,16 @@ msgstr "Widelands kunne ikke laste filen «%s». Filformatet ser ikke ut til å 
 msgid "Creating players"
 msgstr "Lager spillere"
 
-#: ../../src/editor/editorinteractive.cc:253
+#: ../../src/editor/editorinteractive.cc:251
 msgid "Unsaved Map"
 msgstr "Ulagret kart"
 
-#: ../../src/editor/editorinteractive.cc:254
+#: ../../src/editor/editorinteractive.cc:252
 msgid "The map has not been saved, do you really want to quit?"
 msgstr "Kartet har ikke blitt lagret, vil du virkelig avslutte?"
 
 #. * TRANSLATORS: Default name for new map
-#: ../../src/editor/editorinteractive.cc:599
+#: ../../src/editor/editorinteractive.cc:597
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:147
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:507
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:140
@@ -254,7 +254,7 @@ msgstr "Kartet har ikke blitt lagret, vil du virkelig avslutte?"
 msgid "No Name"
 msgstr "Uten navn"
 
-#: ../../src/editor/editorinteractive.cc:600
+#: ../../src/editor/editorinteractive.cc:598
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:148
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:508
 msgctxt "map_name"
@@ -795,6 +795,7 @@ msgid "Player %u"
 msgstr "Spiller %u"
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:272
+#: ../../src/ui_fsmenu/multiplayer.cc:144
 msgid "Error!"
 msgstr "Feil!"
 
@@ -954,7 +955,7 @@ msgid "Configuring players"
 msgstr "Setter opp spillere"
 
 #: ../../src/logic/game.cc:384 ../../src/logic/game.cc:418
-#: ../../src/wlapplication.cc:1421
+#: ../../src/wlapplication.cc:1411
 msgid "Loading..."
 msgstr "Laster…"
 
@@ -1218,11 +1219,11 @@ msgstr "Reprisen er slutt og spillet har blitt pauset. Du kan fortsette spillet 
 msgid "Saving game..."
 msgstr "Lagrer spill..."
 
-#: ../../src/logic/save_handler.cc:120
+#: ../../src/logic/save_handler.cc:121
 msgid "Saving failed!"
 msgstr "Kunne ikke lagre!"
 
-#: ../../src/logic/save_handler.cc:139
+#: ../../src/logic/save_handler.cc:140
 msgid "Game saved"
 msgstr "Spill lagret"
 
@@ -1301,12 +1302,12 @@ msgstr "burde ale opp %s, som ikke finnes i verden; stamme passer ikke med verde
 msgid "A geologist found resources."
 msgstr "En geolog fant ressurser."
 
-#: ../../src/logic/worker.cc:1876
+#: ../../src/logic/worker.cc:1877
 #, c-format
 msgid "Your %s can't find a way home and will likely die."
 msgstr "Din %s kan ikke finne en vei hjem og vil sannsynligvis dø."
 
-#: ../../src/logic/worker.cc:1884
+#: ../../src/logic/worker.cc:1885
 msgid "Worker got lost!"
 msgstr "Arbeider gikk seg bort!"
 
@@ -1519,7 +1520,7 @@ msgid ""
 msgstr "Widelands kunne ikke koble til den gitte adressen.\nEnten er det ingen Widelands-tjener som kjører på den antatte porten eller\nså ble tjeneren slått av mens du forsøkte å koble deg til."
 
 #: ../../src/network/netclient.cc:196 ../../src/network/nethost.cc:837
-#: ../../src/wlapplication.cc:1311
+#: ../../src/wlapplication.cc:1301
 msgid "Preparing game"
 msgstr "Klargjør spill"
 
@@ -2183,7 +2184,7 @@ msgstr "Åpne et nytt spill"
 #: ../../src/ui_fsmenu/internet_lobby.cc:84
 #: ../../src/ui_fsmenu/launch_mpg.cc:141 ../../src/ui_fsmenu/launch_spg.cc:72
 #: ../../src/ui_fsmenu/load_map_or_game.cc:59
-#: ../../src/ui_fsmenu/multiplayer.cc:47
+#: ../../src/ui_fsmenu/multiplayer.cc:49
 #: ../../src/ui_fsmenu/netsetup_lan.cc:72
 #: ../../src/ui_fsmenu/singleplayer.cc:49
 msgid "Back"
@@ -2233,6 +2234,13 @@ msgstr "Forbindelsen ble tidsavbrutt"
 #: ../../src/ui_fsmenu/internet_lobby.cc:418
 msgid "Widelands was unable to connect to the host."
 msgstr "Widelands kunne ikke koble til vert."
+
+#. * TRANSLATORS: This is shown for multiplayer games when no host
+#. * TRANSLATORS: server to connect to has been specified yet.
+#: ../../src/ui_fsmenu/internet_lobby.cc:439
+msgctxt "server_name"
+msgid "unnamed"
+msgstr ""
 
 #: ../../src/ui_fsmenu/intro.cc:32
 msgid "Press any key or click to continue ..."
@@ -2786,23 +2794,23 @@ msgid ""
 "sent by the server."
 msgstr "Denne kartfilen finnes ikke i filsystemet ditt. Informasjonen som er vist her ble sendt av tjeneren."
 
-#: ../../src/ui_fsmenu/multiplayer.cc:34
+#: ../../src/ui_fsmenu/multiplayer.cc:36
 msgid "Choose game type"
 msgstr "Velg spilltype"
 
-#: ../../src/ui_fsmenu/multiplayer.cc:41
+#: ../../src/ui_fsmenu/multiplayer.cc:43
 msgid "Internet game"
 msgstr "Spill over Internett"
 
-#: ../../src/ui_fsmenu/multiplayer.cc:44
+#: ../../src/ui_fsmenu/multiplayer.cc:46
 msgid "LAN / Direct IP"
 msgstr "Lokalt nettverk (LAN) / Direkte IP"
 
-#: ../../src/ui_fsmenu/multiplayer.cc:84
+#: ../../src/ui_fsmenu/multiplayer.cc:86
 msgid "Show login dialog"
 msgstr "Vis dialog for innlogging"
 
-#: ../../src/ui_fsmenu/multiplayer.cc:114
+#: ../../src/ui_fsmenu/multiplayer.cc:116
 #: ../../src/ui_fsmenu/netsetup_lan.cc:112 ../../src/wui/login_box.cc:76
 msgid "nobody"
 msgstr "ingen"
@@ -3011,11 +3019,11 @@ msgstr "Kampanjer"
 msgid "Load Game"
 msgstr "Last spill"
 
-#: ../../src/wlapplication.cc:1095
+#: ../../src/wlapplication.cc:1085
 msgid "Game data error"
 msgstr "Spilldatafeil"
 
-#: ../../src/wlapplication.cc:1105
+#: ../../src/wlapplication.cc:1095
 #, c-format
 msgid ""
 "\n"
@@ -3023,7 +3031,7 @@ msgid ""
 "Please report this problem to help us improve Widelands. You will find related messages in the standard output (stdout.txt on Windows). You are using build %1$s (%2$s). "
 msgstr "\n\nVennligst rapporter dette problemet og hjelp oss å forbedre Widelands. Du kan finne relaterte meldinger i standard utdata (stdout.txt på Windows). Du bruker bygg %1$s (%2$s). "
 
-#: ../../src/wlapplication.cc:1112
+#: ../../src/wlapplication.cc:1102
 msgid ""
 "Please add this information to your report.\n"
 "\n"

@@ -10,9 +10,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-04 07:08+0000\n"
-"PO-Revision-Date: 2015-11-04 07:10+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2015-11-10 08:55+0000\n"
+"PO-Revision-Date: 2015-11-14 09:45+0000\n"
+"Last-Translator: Szűcs Kornél Géza <sz.kornelgeza@gmail.com>\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -138,13 +138,13 @@ msgid ""
 "A hunter can hunt down animals, while a gamekeeper prevents them from "
 "becoming extinct. The meat is then processed in a tavern into lunches for "
 "your miners."
-msgstr "Egy vadász elejti az állatokat, míg a vadőr megelőzi, hogy elfogyjanak. A húst aztán egy kocsmában dolgozzák fel, bányászaidnak szánt étellé."
+msgstr "Egy vadász elejti az állatokat, míg a vadőr megelőzi, hogy kihaljanak. A húst aztán egy kocsmában dolgozzák fel, bányászaidnak szánt étellé."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:69
 msgid ""
 "This is only the first example of a ware which has to be refined before "
 "being used in a secondary building – others will follow."
-msgstr "Ez az első, de nem az utolsó példa olyan árura, amit felhasználás előtt egy másik épületben fel kell dolgozni."
+msgstr "Ez az első, de nem az utolsó példa olyan árura, amit finomítani kell mielőtt egy másik épületben használhatnád."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:74
 msgid "Bake bread"
@@ -164,7 +164,7 @@ msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:82
 msgid "Refine your mined resources"
-msgstr "Dolgozd fel a kibányászott kincseket"
+msgstr "Finomítsd a kibányászott nyersanyagokat"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:84
 msgid "Build a smelting works"

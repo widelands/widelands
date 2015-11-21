@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-08 15:56+0000\n"
+"POT-Creation-Date: 2015-11-18 08:43+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -62,6 +62,87 @@ msgstr ""
 #: ../../scripting/win_condition_texts.lua:23
 msgid ""
 "Player overview:"
+msgstr ""
+
+#: ../../scripting/win_conditions/artifacts.lua:16
+msgid ""
+"Artifacts"
+msgstr ""
+
+#: ../../scripting/win_conditions/artifacts.lua:18
+msgid ""
+"Search for ancient artifacts. Once all of them are found, the team who owns most of them will win the game."
+msgstr ""
+
+#: ../../scripting/win_conditions/artifacts.lua:55
+msgid ""
+"No Artifacts"
+msgstr ""
+
+#: ../../scripting/win_conditions/artifacts.lua:55
+msgid ""
+"There are no artifacts on this map. This should not happen. Please file a bug report on https://launchpad.net/widelands and specify your Widelands version and the map you tried to load."
+msgstr ""
+
+#: ../../scripting/win_conditions/artifacts.lua:61
+msgid ""
+"New Artifact Found"
+msgstr ""
+
+#: ../../scripting/win_conditions/artifacts.lua:62
+msgid ""
+"Your team found a new artifact."
+msgstr ""
+
+#: ../../scripting/win_conditions/artifacts.lua:65
+msgid ""
+"Artifact Lost"
+msgstr ""
+
+#: ../../scripting/win_conditions/artifacts.lua:66
+msgid ""
+"One of your team’s artifacts was stolen by an enemy."
+msgstr ""
+
+#: ../../scripting/win_conditions/artifacts.lua:69
+msgid ""
+"Artifact Conquered"
+msgstr ""
+
+#: ../../scripting/win_conditions/artifacts.lua:70
+msgid ""
+"Your team stole an artifact from an enemy."
+msgstr ""
+
+#. TRANSLATORS: This is used to seperate players’ names in a list, e.g. "Steve, Robert, David"
+#: ../../scripting/win_conditions/artifacts.lua:140
+msgid ""
+", "
+msgstr ""
+
+#: ../../scripting/win_conditions/artifacts.lua:147
+msgid ""
+"Overview:"
+msgstr ""
+
+#: ../../scripting/win_conditions/artifacts.lua:150
+#: ../../scripting/win_conditions/artifacts.lua:162
+msgid ""
+"%i artifact"
+msgid_plural ""
+"%i artifacts"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../../scripting/win_conditions/artifacts.lua:151
+msgid ""
+"%1$s owns %2$s."
+msgstr ""
+
+#. TRANSLATORS: %1$i is the team's number; %2$s is a list of team members (e.g. "Steve, Robert, David"), %3$s is something like "x artifact(s)"
+#: ../../scripting/win_conditions/artifacts.lua:164
+msgid ""
+"Team %1$i (%2$s) owns %3$s."
 msgstr ""
 
 #: ../../scripting/win_conditions/collectors.lua:19

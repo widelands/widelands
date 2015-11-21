@@ -370,7 +370,7 @@ public:
 	uint32_t set_height(const World& world, Area<FCoords>, HeightInterval height_interval);
 
 	//  change terrain of a triangle, recalculate buildcaps
-	int32_t change_terrain(const World& world, TCoords<FCoords>, TerrainIndex);
+	int32_t change_terrain(const World& world, TCoords<FCoords>, DescriptionIndex);
 
 	// The objectives that are defined in this map if it is a scenario.
 	const Objectives& objectives() const {
@@ -392,6 +392,7 @@ public:
 	const PortSpacesSet& get_port_spaces() const {return m_port_spaces;}
 	std::vector<Coords> find_portdock(const Widelands::Coords& c) const;
 	bool allows_seafaring();
+	bool has_artifacts(const World& world);
 
 protected: /// These functions are needed in Testclasses
 	void set_size(uint32_t w, uint32_t h);

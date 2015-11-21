@@ -113,7 +113,7 @@ obj_better_material_2 = {
    title = _"Build a lime kiln and coal economy",
    number = 3,
    body = objective_text(_"Build a lime kiln fed by a well, and by a charcoal kiln or by a coal mine",
-      _([[Better buildings may also require other improved materials besides blackwood. One of these is grout, which is produced out of raw stone, water and coal by a lime-burner.]])
+      _([[Better buildings may also require other improved materials besides blackwood. One of these is grout, which is produced out of granite, water and coal by a lime-burner.]])
       .. paragraphdivider() ..
       _([[You can obtain water by building a well upon a water source, which your geologists can discover when you send them to any flag that is not on a mountain.]])
       ..paragraphdivider() ..

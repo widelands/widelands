@@ -133,3 +133,13 @@ function p(text_or_opts, text)
    return ("<p %s>"):format(opts) .. text .. "<br></p>" ..
       "<p font-size=8> <br></p>"
 end
+
+-- RST
+-- .. function:: a(text)
+--
+--    Underlines the text to show links. Only words with default paragraph text style.
+--
+--    :returns: Underlined text within a default paragraph
+function a(text)
+   return "</p><p font-size=12 font-decoration=underline>" .. text .. "</p><p font-size=12>"
+end

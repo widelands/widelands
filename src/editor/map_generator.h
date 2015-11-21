@@ -104,7 +104,7 @@ private:
 	static uint32_t * generate_random_value_map
 		(uint32_t w, uint32_t h, RNG & rng);
 
-	TerrainIndex figure_out_terrain
+	DescriptionIndex figure_out_terrain
 		(uint32_t                  * const random2,
 		 uint32_t                  * const random3,
 		 uint32_t                  * const random4,

@@ -112,7 +112,7 @@ public:
 
 	void log_general_info(const EditorGameBase &) override;
 
-	uint32_t count_waiting(WareWorker waretype, WareIndex wareindex);
+	uint32_t count_waiting(WareWorker waretype, DescriptionIndex wareindex);
 	uint32_t count_waiting();
 
 	// Returns true if a expedition is started or ready to be send out.

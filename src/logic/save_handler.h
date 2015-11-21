@@ -32,9 +32,9 @@ namespace Widelands {class Game;}
 
 class SaveHandler {
 public:
-	SaveHandler() : m_last_saved_gametime(0), m_initialized(false), m_allow_saving(true),
+	SaveHandler() : m_last_saved_realtime(0), m_initialized(false), m_allow_saving(true),
 		m_save_requested(false), m_save_filename("") {}
-	void think(Widelands::Game &, uint32_t gametime);
+	void think(Widelands::Game &);
 	std::string create_file_name(std::string dir, std::string filename);
 	bool save_game
 		(Widelands::Game   &,
@@ -53,7 +53,7 @@ public:
 	}
 
 private:
-	uint32_t m_last_saved_gametime;
+	uint32_t m_last_saved_realtime;
 	bool m_initialized;
 	bool m_allow_saving;
 	bool m_save_requested;

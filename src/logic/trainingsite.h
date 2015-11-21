@@ -207,7 +207,7 @@ protected:
 private:
 	void update_soldier_request();
 	static void request_soldier_callback
-		(Game &, Request &, WareIndex, Worker *, PlayerImmovable &);
+		(Game &, Request &, DescriptionIndex, Worker *, PlayerImmovable &);
 
 	void find_and_start_next_program(Game &) override;
 	void start_upgrade(Game &, Upgrade &);

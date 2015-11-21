@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-07 08:47+0000\n"
-"PO-Revision-Date: 2015-11-08 15:54+0000\n"
+"POT-Creation-Date: 2015-11-10 08:55+0000\n"
+"PO-Revision-Date: 2015-11-16 18:26+0000\n"
 "Last-Translator: wl-zocker\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -172,7 +172,7 @@ msgid ""
 msgstr "Unser Schiff ist schwer beschädigt und es fasst immer mehr Wasser. Wir können den Göttern danken, wenn wir diese schwarze Nacht überleben."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:111
-msgid "Survivor"
+msgid "Survivors"
 msgstr "Überlebende"
 
 #. TRANSLATORS: Lutius - Diary
@@ -300,7 +300,7 @@ msgid ""
 "turn them into planks, which are needed by every ship and every bigger "
 "building too. So we should build a sawmill – as soon as we have enough space"
 " for this."
-msgstr "Aber unglücklicherweise sind die Baumstämme nutzlos für die Reparatur – wir müssen sie zu Brettern verarbeiten, die von jedem Schiff und jedem größeren Gebäude benötigt werden. Wir sollten ein Sägewerk errichten – sobald wir genug Platz dafür haben."
+msgstr "Aber unglücklicherweise sind die Baumstämme nutzlos für die Reparatur – wir müssen sie zu Brettern verarbeiten, die von jedem Schiff und jedem größeren Gebäude benötigt werden. Wir sollten daher ein Sägewerk errichten – sobald wir genug Platz dafür haben."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:181
 msgid "Amalea comes in…"
@@ -331,7 +331,7 @@ msgid ""
 "These trees provide shelter from the sandstorms that sweep in from the "
 "desert, and shade on the hot days, and they are the home of many gentle "
 "animals. We shouldn’t leave this island a complete desert."
-msgstr "Diese Bäume geben uns Schutz vor den Sandstürmen aus der Wüste und spenden uns an heißen Tagen Schatten. Außerdem sind sie die Heimat von vielen Tieren. Wir sollten diese Insel nicht als reine Wüste zurücklassen."
+msgstr "Diese Bäume geben uns Schutz vor den Sandstürmen aus der Wüste und spenden uns an heißen Tagen Schatten. Außerdem sind sie die Heimat vieler Tiere. Wir sollten diese Insel nicht als reine Wüste zurücklassen."
 
 #. TRANSLATORS: Amalea
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:195
@@ -358,11 +358,11 @@ msgstr "Herr, ich habe gerade über die Felsen an der Südküste dieses Landes n
 msgid ""
 "The repair of our ship will take a few weeks, anyway, and the resources we "
 "harvest now might be the base of strong and big buildings in another land."
-msgstr "Die Reparatur unseres Schiffes wird einige Wochen in Anspruch nehmen, trotz allem, und die Rohstoffe, die wir sammeln, könnten vielleicht die Grundlage für starke und große Gebäude in einem anderen Land bilden."
+msgstr "Die Reparatur unseres Schiffes wird trotz allem einige Wochen in Anspruch nehmen und die Rohstoffe, die wir sammeln, könnten vielleicht die Grundlage für starke und große Gebäude in einem anderen Land bilden."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:213
 msgid "A Step Forward"
-msgstr "Ein Schritt vorwärts"
+msgstr "Ein Schritt nach vorne"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:214
 msgid "Saledus looks excited…"

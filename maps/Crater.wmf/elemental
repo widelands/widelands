@@ -1,10 +1,12 @@
+# Automatically created by Widelands bzr7574[artifacts] (Debug)
+
 [global]
 packet_version="1"
 map_w="64"
 map_h="64"
 nr_players="2"
-world="greenland"
 name=_"Crater"
 author="Tarrei"
 descr=_"Long after a meteor crashed into a couple of mountains, life blossoms in the crater. Two tribes are now fighting for the rich resources."
-tags="official,1v1"
+hint=
+tags="1v1,artifacts,official"

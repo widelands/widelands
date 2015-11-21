@@ -15,9 +15,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-07 08:47+0000\n"
-"PO-Revision-Date: 2015-11-08 15:10+0000\n"
-"Last-Translator: wl-zocker\n"
+"POT-Creation-Date: 2015-11-10 08:55+0000\n"
+"PO-Revision-Date: 2015-11-16 20:21+0000\n"
+"Last-Translator: Venatrix\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -317,7 +317,7 @@ msgid ""
 "During the nights, they went crazy and were full of fear. It was not long "
 "before the horse breeder Xydra figured out what was wrong with them: the sea"
 " level in front of their stable was rising with ever increasing speed."
-msgstr "Doch alles schien in bester Ordnung zu sein. Nur die Pferde schienen zu spüren, dass etwas nicht stimmte. Während der Nacht wurden sie fast verrückt und waren voller Angst. Es dauerte nicht lange, bis die Pferdezüchterin Xydra die Ursache herausfand: Das Meer vor dem Pferdestall stieg mit zunehmender Geschwindigkeit an."
+msgstr "Doch alles schien in bester Ordnung zu sein. Nur die Pferde schienen zu spüren, dass etwas nicht stimmte. Während der Nacht wurden sie fast verrückt und waren voller Angst. Es dauerte nicht lange, bis die Pferdezüchterin Xydra die Ursache herausfand: Der Meeresspiegel vor dem Pferdestall stieg immer schneller an."
 
 #. TRANSLATORS: Foreword
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:151
@@ -454,7 +454,7 @@ msgid ""
 " most buildings can’t be made out of logs alone. Stronger buildings also "
 "need stone, but there is plenty to the north-east of here; we just need to "
 "build a quarry, and my stonemasons will go to work promptly."
-msgstr "Möge Satul Euch wärmen, Jundlina! Das wichtigste für die Errichtung einer Siedlung sind die Baumaterialien. Es gibt einige Bäume hier, daher sollten wir ein paar Hütten für unsere Holzfäller bauen, ebenso einige Förster, damit uns die Bäume nicht ausgehen. Nicht zu vergessen die Sägemühle, denn die meisten Gebäude können nicht mit Stämmen alleine errichtet werden. Für stabilere Gebäude brauchen wir außerdem Steine, aber davon gibt es im Nordosten reichlich; wir brauchen nur einen Steinbruch zu bauen, dann werden meine Steinmetze die Arbeit unverzüglich aufnehmen."
+msgstr "Möge Satul Euch wärmen, Jundlina! Das wichtigste für die Errichtung einer Siedlung sind die Baumaterialien. Es gibt einige Bäume hier, daher sollten wir ein paar Häuser für unsere Holzfäller bauen, ebenso einige Förster, damit uns die Bäume nicht ausgehen. Nicht zu vergessen die Sägemühle, denn die meisten Gebäude können nicht mit Stämmen alleine errichtet werden. Für stabilere Gebäude brauchen wir außerdem Stein, aber davon gibt es im Nordosten reichlich; wir brauchen nur einen Steinbruch zu bauen, dann werden meine Steinmetze die Arbeit unverzüglich aufnehmen."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:197
 msgid "Sidolus Speaks"
@@ -496,7 +496,7 @@ msgstr "Colionder tritt ein"
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:216
 msgid ""
 "May Satul warm you, Jundlina. Can I be of any service to you or the god?"
-msgstr "Möge Satul Euch wärmen, Jundlina! Kann ich Euch oder dem Gott irgendeinen Dienst tun?"
+msgstr "Möge Satul Euch wärmen, Jundlina! Wie kann ich Euch oder dem Gott dienen?"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:219
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:265
@@ -516,7 +516,7 @@ msgid ""
 " our people are accustomed to making their own food. I feel if we could "
 "split responsibilities, it would be better for us all. I want your thoughts "
 "on this."
-msgstr "Möge Satul auch Euch wärmen, Colionder. Ja, ich habe bereits über einen Weg nachgedacht, die Nahrungsproduktion zu bündeln. Wir verlieren viel Ertrag, weil die Menschen gewohnt sind, ihre eigene Nahrung selbst herzustellen. Wenn wir diese Aufgaben jemandem zuteilen würden, wäre das zu unserem Vorteil. Was haltet Ihr davon?"
+msgstr "Möge Satul auch Euch wärmen, Colionder. Ja, ich habe über einen Weg nachgedacht, die Nahrungsproduktion zu bündeln. Wir verlieren viel Arbeitszeit, weil die Menschen gewohnt sind, ihre eigene Nahrung selbst herzustellen. Wenn wir diese Aufgaben jemandem zuteilen würden, wäre das zu unserem Vorteil. Was haltet Ihr davon?"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:225
 msgid "Colionder is in Thought"
@@ -529,7 +529,7 @@ msgid ""
 "food is something deeply ingrained in us Atlanteans – it is a ceremony that "
 "we just need for our well-being. So I guess we cannot take this away from "
 "the individuals completely."
-msgstr "Ahh, aber ich denke, das können wir unmöglich ändern. Die Zubereitung und das Essen von Nahrung ist etwas, was tief in uns Atlantern verwurzelt ist - es ist eine Zeremonie, die wir für unser Wohlbefinden brauchen. Ich vermute daher, dass wir das den Einzelnen nicht komplett wegnehmen können."
+msgstr "Ahh, aber ich denke, das können wir unmöglich ändern. Die Zubereitung und das Essen von Nahrung ist etwas, was tief in uns Atlantern verwurzelt ist – es ist eine Zeremonie, die wir für unser Wohlbefinden brauchen. Ich vermute daher, dass wir das den Einzelnen nicht komplett wegnehmen können."
 
 #. TRANSLATORS: Colionder
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:231
@@ -681,7 +681,7 @@ msgid ""
 "would keep them occupied and focused on their duties. I would need a dungeon"
 " and a labyrinth for them. I have the plans ready, but I guess they won’t "
 "come cheap."
-msgstr "Ihr habt Recht, ich habe diese Soldaten bereits streng bestraft. Aber es ist schwer, meine Männer ruhig zu halten: Sie langweilen sich und haben nichts zu tun. Ich würde gerne ihr Training verbessern. Etwas mehr Beschäftigung im Alltag würde sie bei Laune halten und pflichtbewusster machen. Dazu bräuchte ich ein Verlies und ein Labyrinth für sie. Ich habe bereits Pläne dafür vorbereitet, aber es wird nicht billig werden."
+msgstr "Ihr habt Recht, ich habe diese Soldaten bereits streng bestraft. Aber es ist schwer, meine Männer ruhig zu halten: Sie langweilen sich und haben nichts zu tun. Ich würde gerne ihre Ausbildung verbessern. Etwas mehr Beschäftigung im Alltag würde sie bei Laune halten und pflichtbewusster machen. Dazu bräuchte ich ein Verlies und ein Labyrinth für sie. Ich habe bereits Pläne dafür vorbereitet, aber es wird nicht billig werden."
 
 #. TRANSLATORS: Jundlina
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:322
@@ -794,7 +794,7 @@ msgid ""
 "no trace of this old economy to be found. I am starting to relax, but I will"
 " not let our guard down as we continue to explore this beautiful island. But"
 " without obvious dangers, I am feeling very much at home here already."
-msgstr "Und schon wieder ein solches Gebäude. Jetzt wissen wir, dass der Stamm, der sie erbaut hatte, volle Kontrolle über die Insel hatte. Doch bin ich jetzt nicht mehr so besorgt wegen potentieller Feinde. Wir wissen schon so viel über diese Insel und es gibt keine Spur dieser alten Zivilisation. Langsam fühle ich mich etwas wohler, aber ich werde mich nicht in Sicherheit wiegen, während wir diese wundervolle Insel weiter erkunden. Aber ohne offensichtliche Gefahr fühle ich mich hier schon beinahe wie zu Hause."
+msgstr "Und schon wieder ein solches Gebäude. Jetzt wissen wir, dass der Stamm, der sie erbaut hatte, volle Kontrolle über die Insel hatte. Doch bin ich jetzt nicht mehr so besorgt wegen potentieller Feinde. Wir wissen schon viel über diese Insel und es gibt keine Spur dieser alten Zivilisation. Langsam fühle ich mich etwas wohler, aber ich werde mich nicht in Sicherheit wiegen, während wir diese wundervolle Insel weiter erkunden. Doch ohne offensichtliche Gefahr fühle ich mich hier schon beinahe wie zu Hause."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:398
 msgid "The Water is Rising!"
@@ -820,7 +820,7 @@ msgid ""
 " invented a new kind of ship: smaller than those we are used to, but much "
 "sturdier. If we build them correctly, I am confident that we can sail a much"
 " longer distance with them and maybe escape from Lutas’ influence."
-msgstr "Möge Satul Euch wärmen, Jundlina! Mein Name ist Ostur, und ich bin Schiffbauer. Ich habe eine neue Art von Schiff erfunden: kleiner als unsere bisherigen, aber viel robuster. Wenn wir sie richtig bauen, bin ich sicher, dass wir mit ihnen viel weiter kommen und vielleicht Lutas’ Einfluss entfliehen können."
+msgstr "Möge Satul Euch wärmen, Jundlina! Mein Name ist Ostur, und ich bin Schiffbauer. Ich habe eine neue Art von Schiff erfunden: kleiner als unsere bisherigen, aber viel robuster. Wenn wir sie richtig bauen, bin ich mir sicher, dass wir mit ihnen viel weiter segeln können. Vielleicht können wir so Lutas’ Einfluss entfliehen."
 
 #. TRANSLATORS: Jundlina
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:413
