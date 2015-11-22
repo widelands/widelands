@@ -35,11 +35,15 @@ struct TabPanel;
 struct Tab : public NamedPanel {
 	friend struct TabPanel;
 
+	/** If title is not empty, this will be a textual tab. In that case, pic will need to be the rendered title */
 	Tab
 		(TabPanel * parent,
-		 uint32_t,
+		 uint32_t id,
+		 int32_t x,
+		 int32_t w,
 		 const std::string & name,
-		 const Image*,
+		 const std::string & title,
+		 const Image* pic,
 		 const std::string & gtooltip,
 		 Panel             * gpanel);
 
@@ -51,6 +55,7 @@ private:
 	uint32_t    m_id;
 
 	const Image* pic;
+	std::string title;
 	std::string tooltip;
 	Panel     * panel;
 };
@@ -75,6 +80,14 @@ struct TabPanel : public Panel {
 		 int32_t x, int32_t y, int32_t w, int32_t h,
 		 const Image* background);
 
+	/** Add textual tab */
+	uint32_t add
+		(const std::string & name,
+		 const std::string & title,
+		 Panel             * panel,
+		 const std::string & tooltip = std::string());
+
+	/** Add pictorial tab */
 	uint32_t add
 		(const std::string & name,
 		 const Image* pic,
@@ -102,6 +115,7 @@ private:
 		(uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff) override;
 	void handle_mousein(bool inside) override;
 
+	size_t find_tab(int32_t x, int32_t y) const;
 
 	TabList          m_tabs;
 	uint32_t         m_active;         ///< index of the currently active tab

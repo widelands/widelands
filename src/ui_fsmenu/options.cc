@@ -215,19 +215,19 @@ FullscreenMenuOptions::FullscreenMenuOptions
 	os(opt)
 {
 	tabs_.add("options_interface",
-				 g_gr->images().get("pics/but1.png"), // NOCOM need image. Or define text tabs?
+				 _("Interface"),
 				 &box_interface_,
 				 _("Interface"));
 	tabs_.add("options_sound",
-				 g_gr->images().get("pics/but1.png"), // NOCOM need image. Or define text tabs?
+				 g_gr->images().get("pics/but2.png"), // NOCOM need image. Or define text tabs?
 				 &box_sound_,
 				 _("Sound"));
 	tabs_.add("options_saving",
-				 g_gr->images().get("pics/but1.png"), // NOCOM need image. Or define text tabs?
+				 _("Saving"),
 				 &box_saving_,
 				 _("Saving"));
 	tabs_.add("options_gamecontrol",
-				 g_gr->images().get("pics/but1.png"), // NOCOM need image. Or define text tabs?
+				 g_gr->images().get("pics/but2.png"), // NOCOM need image. Or define text tabs?
 				 &box_gamecontrol_,
 				 _("Game Control"));
 
