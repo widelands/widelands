@@ -313,6 +313,7 @@ bool ProductionSite::has_workers(DescriptionIndex targetSite, Game & /* game */)
 							= working_positions()[i].worker->descr().worker_index();
 						if (owner().tribe().get_worker_descr(current_worker)->can_act_as(needed_worker)) {
 							worker_available = true; // We found a worker for the position
+							break;
 						}
 					}
 				}
@@ -329,7 +330,7 @@ bool ProductionSite::has_workers(DescriptionIndex targetSite, Game & /* game */)
 		} else {
 			throw wexception("Building, index: %d, needs no workers!\n", targetSite);
 		}
-	} else { //NOCOM
+	} else {
 		throw wexception("No such building, index: %d\n", targetSite);
 	}
 }
