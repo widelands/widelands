@@ -5524,6 +5524,7 @@ uint32_t DefaultAI::get_taskpool_task_time(const Widelands::SchedulerTaskId task
 	}
 
 	assert (false);
+	exit(1);
 }
 
 // This performs one "iteration" of sorting based on due_time
