@@ -26,6 +26,7 @@
 
 #include "base/i18n.h"
 #include "editor/editorinteractive.h"
+#include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
 #include "logic/map.h"
 #include "ui_basic/editbox.h"
@@ -33,7 +34,6 @@
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/textarea.h"
 
-// NOCOM we have some cropping here; investigate.
 inline EditorInteractive & MainMenuMapOptions::eia() {
 	return dynamic_cast<EditorInteractive&>(*get_parent());
 }
@@ -46,25 +46,24 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive & parent, bool modal)
 	:
 	UI::Window
 		(&parent, "map_options",
-		 0, 0, 350, 520,
+		 0, 0, 350, parent.get_inner_h() - 80,
 		 _("Map Options")),
 	padding_(4),
 	indent_(10),
-	labelh_(20),
+	labelh_(UI::g_fh1->render(as_uifont(UI::g_fh1->fontset()->representative_character()))->height() + 4),
 	checkbox_space_(25),
 	butw_((get_inner_w() - 3 * padding_) / 2),
-	buth_(20),
 	max_w_(get_inner_w() - 2 * padding_),
 	ok_(
 		this, "ok",
-		padding_, get_inner_h() - padding_ - buth_,
-		butw_, buth_,
+		padding_, get_inner_h() - padding_ - labelh_,
+		butw_, labelh_,
 		g_gr->images().get("pics/but5.png"),
 		_("OK")),
 	cancel_(
 		this, "cancel",
-		butw_ + 2 * padding_, get_inner_h() - padding_ - buth_,
-		butw_, buth_,
+		butw_ + 2 * padding_, get_inner_h() - padding_ - labelh_,
+		butw_, labelh_,
 		g_gr->images().get("pics/but1.png"),
 		_("Cancel")),
 	tab_box_(this, padding_, padding_, UI::Box::Vertical, max_w_, get_inner_h(), 0),
@@ -82,10 +81,21 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive & parent, bool modal)
 
 	modal_(modal) {
 
-	descr_ = new UI::MultilineEditbox(
-					&main_box_, 0, 0, max_w_, 9 * labelh_, "", g_gr->images().get("pics/but1.png"));
+	tab_box_.set_size(max_w_, get_inner_h() - labelh_ - 2 * padding_);
+	tabs_.set_size(max_w_, tab_box_.get_inner_h());
+	main_box_.set_size(max_w_, tabs_.get_inner_h() - 35);
+	tags_box_.set_size(max_w_, main_box_.get_h());
+	teams_box_.set_size(max_w_, main_box_.get_h());
+
+	// Calculate the overall remaining space for MultilineEditboxes.
+	uint32_t remaining_space = main_box_.get_inner_h() - 7 * labelh_ - 5 * indent_;
+
+	// We need less space for the hint and the description, but it should at least have 1 line height.
 	hint_ = new UI::MultilineEditbox(
-				  &main_box_, 0, 0, max_w_, 4 * labelh_, "", g_gr->images().get("pics/but1.png"));
+				  &main_box_, 0, 0, max_w_, std::max(labelh_, remaining_space * 1 / 3), "", g_gr->images().get("pics/but1.png"));
+	descr_ = new UI::MultilineEditbox(
+					&main_box_, 0, 0, max_w_, remaining_space - hint_->get_h(),
+					"", g_gr->images().get("pics/but1.png"));
 
 	main_box_.add(new UI::Textarea(&main_box_, 0, 0, max_w_, labelh_, _("Map Name:")), UI::Box::AlignLeft);
 	main_box_.add(&name_, UI::Box::AlignLeft);
@@ -107,7 +117,6 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive & parent, bool modal)
 	main_box_.add(&size_, UI::Box::AlignLeft);
 	main_box_.add_space(indent_);
 
-	main_box_.set_size(max_w_, get_inner_h() - buth_ - 2 * padding_);
 
 	tags_box_.add(new UI::Textarea(&tags_box_, 0, 0, max_w_, labelh_, _("Tags:")), UI::Box::AlignLeft);
 	add_tag_checkbox(&tags_box_, "unbalanced", _("Unbalanced"));
@@ -116,7 +125,6 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive & parent, bool modal)
 	add_tag_checkbox(&tags_box_, "2teams", _("Teams of 2"));
 	add_tag_checkbox(&tags_box_, "3teams", _("Teams of 3"));
 	add_tag_checkbox(&tags_box_, "4teams", _("Teams of 4"));
-	tags_box_.set_size(max_w_, get_inner_h() - buth_ - 2 * padding_);
 
 	teams_box_.add(new UI::Textarea(&teams_box_, 0, 0, max_w_, labelh_, _("Suggested Teams:")),
 						UI::Box::AlignLeft);
@@ -129,15 +137,12 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive & parent, bool modal)
 	unsigned int nr_players = static_cast<unsigned int>(eia().egbase().map().get_nrplayers());
 	std::string players = (boost::format(ngettext("%u Player", "%u Players", nr_players)) % nr_players).str();
 	teams_box_.add(new UI::Textarea(&teams_box_, 0, 0, max_w_, labelh_, players), UI::Box::AlignLeft);
-	teams_box_.set_size(max_w_, get_inner_h() - buth_ - 2 * padding_);
 
 	tab_box_.add(&tabs_, UI::Box::AlignLeft, true);
 	tabs_.add("main_map_options",
 				 g_gr->images().get("pics/menu_toggle_minimap.png"), &main_box_, _("Main Options"));
 	tabs_.add("map_tags", g_gr->images().get("pics/checkbox_checked.png"), &tags_box_, _("Tags"));
 	tabs_.add("map_teams", g_gr->images().get("pics/editor_menu_player_menu.png"), &teams_box_, _("Teams"));
-	tabs_.set_size(max_w_, get_inner_h() - buth_ - 2 * padding_);
-	tab_box_.set_size(max_w_, get_inner_h() - buth_ - 2 * padding_);
 
 	name_.changed.connect(boost::bind(&MainMenuMapOptions::changed, this));
 	author_.changed.connect(boost::bind(&MainMenuMapOptions::changed, this));

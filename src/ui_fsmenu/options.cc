@@ -396,7 +396,6 @@ void FullscreenMenuOptions::add_languages_to_list(const std::string& current_loc
 	}  // End read locales table
 
 	find_selected_locale(&selected_locale, current_locale);
-// NOCOM we have some clipping in this list now.
 	std::sort(entries.begin(), entries.end());
 	for (const LanguageEntry& entry : entries) {
 		m_language_list.add(entry.descname.c_str(), entry.localename, nullptr,

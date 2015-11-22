@@ -61,7 +61,6 @@ const std::string& FontSet::condensed() const {return condensed_;}
 const std::string& FontSet::condensed_bold() const {return condensed_bold_;}
 const std::string& FontSet::condensed_italic() const {return condensed_italic_;}
 const std::string& FontSet::condensed_bold_italic() const {return condensed_bold_italic_;}
-// NOCOM Use this wherever we want the line height.
 const std::string& FontSet::representative_character() const {return representative_character_;}
 uint16_t FontSet::size_offset() const {return size_offset_;}
 bool FontSet::is_rtl() const {return is_rtl_;}
