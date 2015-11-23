@@ -4,13 +4,14 @@
 # Translators:
 # GunChleoc, 2015
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2013
-# GunChleoc, 2013-2014
+# GunChleoc, 2015
+# GunChleoc, 2013-2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-10 08:45+0000\n"
-"PO-Revision-Date: 2015-11-08 15:56+0000\n"
+"POT-Creation-Date: 2015-11-18 08:43+0000\n"
+"PO-Revision-Date: 2015-11-18 15:53+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -84,8 +85,8 @@ msgstr "Coireall"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:67
 msgid ""
-"Build a quarry in the south to cut some stones and marble out of the rocks."
-msgstr "Tog coireall gu deas gus clachan 's marbhal a ghearradh às na creagan."
+"Build a quarry in the south to cut some granite and marble out of the rocks."
+msgstr "Tog coireall gu deas gus gaireal 's marbhal a ghearradh às na creagan."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:68
 msgid "These might be used for future buildings."
@@ -108,7 +109,7 @@ msgid ""
 "What has become of our Empire? I really ask this question – why did my king "
 "forbid me from fighting against that monstrous Barbarian tribe, who first "
 "acted as a peaceful friend and then attacked my army in the darkest night?"
-msgstr ""
+msgstr "Dè dh’èirich air ar n-impireachd? Tha mi ’ga fhaighneachd ann an da-rìribh – carson nach do leig an rìgh leam sabaid an aghaidh treubh uabhasach nan Tùsanach ud a chuir dreach a’ charaid shìtheil air an toiseach ’s a thug ionnsaigh air an fheachd agam ann an oidhche dhubh-dhorcha an uairsin?"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:84
@@ -118,7 +119,7 @@ msgid ""
 "forest. Soon, we met a Barbarian tribe, which at first was friendly. A few "
 "of my men even traded with them and their children came to us, to admire our"
 " clean and tidy uniforms and weapons."
-msgstr ""
+msgstr "Le ceud gu leth duine nam fheachd, chaidh uallach a chur orm gus sùil a chumail air a’ chrìch taobh tuath a tha faisg air Monadh Ghaldain ann am mòr-choille àrsaidh àlainn. Thachair sinn ri treubh nan Tùsanach a bha càirdeil aig an toiseach. Rinn cuid dem dhaoine fiù ’s malart leotha agus thàinig an cuid chloinne thugainne gus meas a chur air an aodach ’s na h-airm glana spaideil againn."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:87
@@ -129,7 +130,7 @@ msgid ""
 "He did not want new land and did not want our land, but he told me that THIS"
 " forest was their land – and it would stay theirs until the spirits took the"
 " last man of his folk!"
-msgstr ""
+msgstr "Ach rè a’ chòigeamh oidhche againn san sgìre ud, thug iad ionnsaigh gun adhbhar oirnn. Chaill mi dusanan de shàr-dhaoine agus chaidh mo ghlacadh ’s a chur air beulaibh a’ cheannaird aca. Dh’fheuch e smugaid orm ’s rinn e magadh orm is thuirt e rium gum fàgainn an dùthaich aige gun tilleadh. Cha robh e ag iarraidh barrachd tìre no an tìr againne, ach dh’innis e dhomh gur ann leotha-san a bhiodh a’ choille ud – agus gur ann leotha-san a bhiodh e gus am beireadh na spioradan air duine mu dheireadh a mhuinntire."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:90
@@ -138,7 +139,7 @@ msgid ""
 "furious at the Barbarians, yet forbade any attack on these tribes. He "
 "believed that our army was too weak to survive in a war against the "
 "Barbarians."
-msgstr ""
+msgstr "Trì seachdainean às dèidh sin, thill mi gu Fremil gus bruidhinn ri ’r rìgh. Bha an ainmein air ris na Tùsanaich ach thoirmisg e ionnsaigh sam bith ’nan aghaidh. Bha e den bheachd gun robh am feachd againn ro lag airson seasamh ann an cogadh an aghaidh nan Tùsanach."
 
 #. TRANSLATORS: Lutius - Diary. Gulf of Perl is a place name.
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:93
@@ -171,7 +172,7 @@ msgstr ""
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:111
 msgid "Survivors"
-msgstr ""
+msgstr "Luchd-tarrsainn"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:114
@@ -348,7 +349,7 @@ msgstr "Tha Saledus a' beachdachadh…"
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:204
 msgid ""
 "Sire, I just thought about the rocks standing on the south shore of this "
-"land. Perhaps we could cut out some useful hard stones and beautiful marble."
+"land. Perhaps we could cut out some useful granite and beautiful marble."
 msgstr ""
 
 #. TRANSLATORS: Saledus
@@ -370,7 +371,7 @@ msgstr "Tha Saledus air a thogail…"
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:216
 msgid ""
 "Sire, today we got a lot closer to our first castle. The quarry to the south"
-" began its work today and will soon provide us with stones and beautiful "
+" began its work today and will soon provide us with granite and beautiful "
 "marble."
 msgstr ""
 

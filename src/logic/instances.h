@@ -32,6 +32,7 @@
 
 #include "base/log.h"
 #include "base/macros.h"
+#include "graphic/color.h"
 #include "graphic/image.h"
 #include "logic/cmd_queue.h"
 #include "logic/widelands.h"
@@ -139,7 +140,7 @@ struct MapObjectDescr {
 
 	/// Returns the image for the first frame of the idle animation if the MapObject has animations,
 	/// nullptr otherwise
-	const Image* representative_image() const;
+	const Image* representative_image(const RGBColor* player_color = nullptr) const;
 	/// Returns the image fileneme for first frame of the idle animation if the MapObject has animations,
 	/// is empty otherwise
 	const std::string& representative_image_filename() const;
