@@ -38,7 +38,7 @@ struct Tab : public NamedPanel {
 	/** If title is not empty, this will be a textual tab. In that case, pic will need to be the rendered title */
 	Tab
 		(TabPanel * parent,
-		 uint32_t id,
+		 size_t id,
 		 int32_t x,
 		 int32_t w,
 		 const std::string & name,
@@ -118,8 +118,8 @@ private:
 	size_t find_tab(int32_t x, int32_t y) const;
 
 	TabList          m_tabs;
-	uint32_t         m_active;         ///< index of the currently active tab
-	int32_t          m_highlight;      ///< index of the highlighted button
+	size_t           m_active;         ///< index of the currently active tab
+	size_t           m_highlight;      ///< index of the highlighted button
 
 	const Image* m_pic_background; ///< picture used to draw background
 };

@@ -45,7 +45,7 @@ constexpr uint32_t kNotFound = std::numeric_limits<uint32_t>::max();
  */
 Tab::Tab
 	(TabPanel         * const parent,
-	 uint32_t            const id,
+	 size_t            const id,
 	 int32_t x,
 	 int32_t w,
 	 const std::string &       name,
@@ -89,7 +89,7 @@ TabPanel::TabPanel
 	:
 	Panel            (parent, x, y, 0, 0),
 	m_active         (0),
-	m_highlight      (-1),
+	m_highlight      (kNotFound),
 	m_pic_background (background)
 {}
 TabPanel::TabPanel
@@ -99,7 +99,7 @@ TabPanel::TabPanel
 	:
 	Panel            (parent, x, y, w, h),
 	m_active         (0),
-	m_highlight      (-1),
+	m_highlight      (kNotFound),
 	m_pic_background (background)
 {}
 
@@ -164,7 +164,7 @@ uint32_t TabPanel::add
 	assert(panel);
 	assert(panel->get_parent() == this);
 
-	uint32_t id = m_tabs.size();
+	size_t id = m_tabs.size();
 	int32_t x = id > 0 ? m_tabs[id - 1]->get_x() + m_tabs[id - 1]->get_w() : 0;
 	log("NOCOM new textual tab %s at %d\n", title.c_str(), x);
 	const Image* pic = UI::g_fh1->render(as_uifont(title));
@@ -189,7 +189,7 @@ uint32_t TabPanel::add
 	assert(panel);
 	assert(panel->get_parent() == this);
 
-	uint32_t id = m_tabs.size();
+	size_t id = m_tabs.size();
 	int32_t x = id > 0 ? m_tabs[id - 1]->get_x() + m_tabs[id - 1]->get_w() : 0;
 	log("NOCOM new pictorial tab %s at %d\n", tooltip_text.c_str(), x);
 	m_tabs.push_back(new Tab(this, id, x, kTabPanelButtonSize, name, "", pic, tooltip_text, panel));
@@ -255,12 +255,12 @@ void TabPanel::draw(RenderTarget & dst)
 
 	// draw the buttons
 	int tab_width;
-	uint32_t idx;
-	uint32_t x;
+	size_t idx;
+	int32_t x;
 	for (idx = 0; idx < m_tabs.size(); idx++) {
 		tab_width = m_tabs[idx]->get_w();
 		x = m_tabs[idx]->get_x();
-		if (m_highlight == static_cast<int32_t>(idx))
+		if (m_highlight == idx)
 			dst.brighten_rect
 				(Rect(Point(x, 0), tab_width, kTabPanelButtonSize),
 				 MOUSE_OVER_BRIGHT_FACTOR);
@@ -269,6 +269,7 @@ void TabPanel::draw(RenderTarget & dst)
 
 		// If the title is empty, we will assume a pictorial tab
 		if (m_tabs[idx]->title.empty()) {
+			//log("NOCOM drawing pictorial tab at %d\n", x);
 			// Scale the image down if needed, but keep the ratio.
 			constexpr int kMaxImageSize = kTabPanelButtonSize - 2 * kTabPanelImageMargin;
 			double image_scale =
@@ -287,6 +288,7 @@ void TabPanel::draw(RenderTarget & dst)
 									 1.,
 									 BlendMode::UseAlpha);
 		} else {
+			//log("NOCOM drawing textual tab %s at %d\n", m_tabs[idx]->title.c_str(), x);
 			dst.blitrect(Point(x + kTabPanelImageMargin, 0),
 							 m_tabs[idx]->pic,
 							 Rect(x + kTabPanelImageMargin, 0, m_tabs[idx]->pic->width(), m_tabs[idx]->pic->height()));
@@ -330,7 +332,7 @@ void TabPanel::draw(RenderTarget & dst)
 	}
 
 	// draw the remaining separator
-	assert(x <= static_cast<uint32_t>(get_w()));
+	assert(x <= get_w());
 	dst.brighten_rect
 		(Rect(Point(x, kTabPanelButtonSize - 2), get_w() - x, 2),
 		 2 * BUTTON_EDGE_BRIGHT_FACTOR);
@@ -342,11 +344,11 @@ void TabPanel::draw(RenderTarget & dst)
 */
 void TabPanel::handle_mousein(bool inside)
 {
-	if (!inside && m_highlight >= 0) {
+	if (!inside && m_highlight != kNotFound) {
 		update
 			(m_highlight * kTabPanelButtonSize, 0, kTabPanelButtonSize, kTabPanelButtonSize);
 
-		m_highlight = -1;
+		m_highlight = kNotFound;
 	}
 }
 
@@ -357,10 +359,10 @@ void TabPanel::handle_mousein(bool inside)
 bool TabPanel::handle_mousemove
 	(uint8_t, int32_t const x, int32_t const y, int32_t, int32_t)
 {
-	int32_t hl;
+	size_t hl;
 
 	if (y < 0 || y >= kTabPanelButtonSize)
-		hl = -1;
+		hl = kNotFound;
 	else {
 		size_t id = find_tab(x, y);
 		if (id != kNotFound) {
@@ -368,21 +370,21 @@ bool TabPanel::handle_mousemove
 		}
 
 		// NOCOM can this line go?
-		if (m_tabs.size() <= static_cast<size_t>(hl))
-			hl = -1;
+		if (m_tabs.size() <= hl)
+			hl = kNotFound;
 	}
 
 	if (hl != m_highlight) {
 		{
-			if (hl >= 0)
+			if (hl != kNotFound)
 				set_tooltip(m_tabs[hl]->tooltip);
 		}
 		// NOCOM update the correct range
-		if (m_highlight >= 0)
+		if (m_highlight != kNotFound)
 			update
 				(m_highlight * kTabPanelButtonSize, 0,
 				 kTabPanelButtonSize, kTabPanelButtonSize);
-		if (hl >= 0)
+		if (hl != kNotFound)
 			update
 				(hl * kTabPanelButtonSize, 0, kTabPanelButtonSize, kTabPanelButtonSize);
 
