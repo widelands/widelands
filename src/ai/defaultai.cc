@@ -5523,7 +5523,7 @@ uint32_t DefaultAI::get_taskpool_task_time(const Widelands::SchedulerTaskId task
 		}
 	}
 
-	assert (false);
+	throw wexception("AI internal error: nonexistent task.");
 }
 
 // This performs one "iteration" of sorting based on due_time

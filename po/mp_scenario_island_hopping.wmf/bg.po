@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-09-21 19:04+0000\n"
-"PO-Revision-Date: 2015-09-21 20:32+0000\n"
+"POT-Creation-Date: 2015-11-18 08:43+0000\n"
+"PO-Revision-Date: 2015-11-18 13:09+0000\n"
 "Last-Translator: Lyubomir Vasilev\n"
 "Language-Team: Bulgarian (http://www.transifex.com/widelands/widelands/language/bg/)\n"
 "MIME-Version: 1.0\n"
@@ -75,11 +75,11 @@ msgstr "Когато завършите един остров, ще получи
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:23
 msgid ""
-"The point is that the first island only provides stones and wood, the second"
+"The point is that the first island only provides rocks and trees, the second"
 " only meadows and resources. The economies you leave behind will continue to"
 " work for you, but you will only reap the benefits at the moment you reach a"
 " new island."
-msgstr "Важното тук е, че първият остров осигурява само камъни и дърва, втория предлага само поляни и ресурси. Икономиките, които оставяте, когато напускате остров, продължават да работят за Вас, но ще получите облагите в момента, когато достигнете нов остров."
+msgstr "Важното тук е, че на първия остров има само скали и дърва, а на втория – само поляни и ресурси. Икономиките, които оставяте, когато напускате остров, продължават да работят за Вас, но ще получите облагите в момента, когато достигнете нов остров."
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:26
 msgid "Finally, be careful not to waste your quartz and diamonds."

@@ -45,3 +45,43 @@ function no_performance_text_yet()
    -- TRANSLATORS: Performance helptext for a building - it hasn't been written yet.
    return _"Calculation needed"
 end
+
+-- RST
+-- .. function:: format_seconds(seconds)
+--
+--    :arg seconds: number of seconds
+--
+--    Returns a localized string to tell the time in seconds with the proper plural form.
+--    :returns: "1 second", or "20 seconds" etc.
+--
+function format_seconds(seconds)
+   return ngettext("%d second", "%d seconds", seconds):bformat(seconds)
+end
+
+-- RST
+-- .. function:: format_minutes(minutes)
+--
+--    :arg minutes: number of minutes
+--
+--    Returns a localized string to tell the time in minutes with the proper plural form.
+--    :returns: "1 minute", or "20 minutes" etc.
+--
+function format_minutes(minutes)
+   return ngettext("%d minute", "%d minutes", minutes):bformat(minutes)
+end
+
+-- RST
+-- .. function:: format_minutes_seconds(minutes, seconds)
+--
+--    :arg minutes: number of minutes
+--    :arg seconds: number of seconds
+--
+--    Returns a localized string to tell the time in minutes and seconds with the proper plural form.
+--    :returns: "1 minute and 20 seconds" etc.
+--
+function format_minutes_seconds(minutes, seconds)
+   return _("%1% and %2%"):bformat(
+      ngettext("%d minute", "%d minutes", minutes):bformat(minutes),
+      ngettext("%d second", "%d seconds", seconds):bformat(seconds)
+   )
+end
