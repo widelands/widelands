@@ -33,6 +33,8 @@ constexpr int kTabPanelButtonSize = 34;
 // Margin around image. The image will be scaled down to fit into this rectangle with preserving size.
 constexpr int kTabPanelImageMargin = 2;
 
+constexpr int kTabPanelTextMargin = 4;
+
 //  height of the bar separating buttons and tab contents
 constexpr int kTabPanelSeparatorHeight = 4;
 
@@ -166,10 +168,9 @@ uint32_t TabPanel::add
 
 	size_t id = m_tabs.size();
 	int32_t x = id > 0 ? m_tabs[id - 1]->get_x() + m_tabs[id - 1]->get_w() : 0;
-	log("NOCOM new textual tab %s at %d\n", title.c_str(), x);
 	const Image* pic = UI::g_fh1->render(as_uifont(title));
-	m_tabs.push_back(new Tab(this, id, x, std::max(kTabPanelButtonSize, pic->width() + 2 * kTabPanelImageMargin), name, title, pic, tooltip_text, panel));
-
+	m_tabs.push_back(new Tab(this, id, x, std::max(kTabPanelButtonSize, pic->width() + 2 * kTabPanelTextMargin), name, title, pic, tooltip_text, panel));
+	log("NOCOM new textual tab %s at %d - %d\n", tooltip_text.c_str(), m_tabs[id]->get_x(), m_tabs[id]->get_w());
 	panel->set_pos(Point(0, kTabPanelButtonSize + kTabPanelSeparatorHeight));
 	panel->set_visible(id == m_active);
 	update_desired_size();
@@ -191,9 +192,8 @@ uint32_t TabPanel::add
 
 	size_t id = m_tabs.size();
 	int32_t x = id > 0 ? m_tabs[id - 1]->get_x() + m_tabs[id - 1]->get_w() : 0;
-	log("NOCOM new pictorial tab %s at %d\n", tooltip_text.c_str(), x);
 	m_tabs.push_back(new Tab(this, id, x, kTabPanelButtonSize, name, "", pic, tooltip_text, panel));
-
+	log("NOCOM new pictorial tab %s at %d - %d\n", tooltip_text.c_str(), m_tabs[id]->get_x(), m_tabs[id]->get_w());
 	panel->set_pos(Point(0, kTabPanelButtonSize + kTabPanelSeparatorHeight));
 	panel->set_visible(id == m_active);
 	update_desired_size();
@@ -257,13 +257,15 @@ void TabPanel::draw(RenderTarget & dst)
 	int tab_width;
 	size_t idx;
 	int32_t x;
-	for (idx = 0; idx < m_tabs.size(); idx++) {
+	for (idx = 0; idx < m_tabs.size(); ++idx) {
 		tab_width = m_tabs[idx]->get_w();
 		x = m_tabs[idx]->get_x();
-		if (m_highlight == idx)
+
+		if (m_highlight == idx) {
 			dst.brighten_rect
 				(Rect(Point(x, 0), tab_width, kTabPanelButtonSize),
 				 MOUSE_OVER_BRIGHT_FACTOR);
+		}
 
 		assert(m_tabs[idx]->pic);
 
@@ -289,9 +291,11 @@ void TabPanel::draw(RenderTarget & dst)
 									 BlendMode::UseAlpha);
 		} else {
 			//log("NOCOM drawing textual tab %s at %d\n", m_tabs[idx]->title.c_str(), x);
-			dst.blitrect(Point(x + kTabPanelImageMargin, 0),
-							 m_tabs[idx]->pic,
-							 Rect(x + kTabPanelImageMargin, 0, m_tabs[idx]->pic->width(), m_tabs[idx]->pic->height()));
+
+			dst.blit(Point(x + kTabPanelTextMargin, (kTabPanelButtonSize - m_tabs[idx]->pic->height()) / 2),
+						m_tabs[idx]->pic,
+						BlendMode::UseAlpha,
+						UI::Align_Left);
 		}
 
 		// Draw top part of border
