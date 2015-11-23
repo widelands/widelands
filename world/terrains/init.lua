@@ -525,6 +525,35 @@ world:new_terrain_type{
    fertility = 0.2,
 }
 
+world:new_terrain_type{
+   name = "wasteland_forested_mountain_0",
+   descname = _ "Mountain, tree friendly",
+   editor_category = "wasteland",
+   is = "mountain",
+   valid_resources = {"coal", "iron", "gold", "stones"},
+   default_resource = "",
+   default_resource_amount = 0,
+   textures = { pics_dir .. "wasteland/forested_mountain_00.png" },
+   dither_layer = 81,
+   temperature = 70,
+   humidity = 0.5,
+   fertility = 0.75,
+}
+
+world:new_terrain_type{
+   name = "wasteland_forested_mountain_1",
+   descname = _ "Mountain, tree friendly",
+   editor_category = "wasteland",
+   is = "mountain",
+   valid_resources = {"coal", "iron", "gold", "stones"},
+   default_resource = "",
+   default_resource_amount = 0,
+   textures = { pics_dir .. "wasteland/forested_mountain_01.png" },
+   dither_layer = 81,
+   temperature = 70,
+   humidity = 0.5,
+   fertility = 0.75,
+}
 
 world:new_terrain_type{
    name = "wasteland_beach",
@@ -757,6 +786,35 @@ world:new_terrain_type{
    fertility = 0.05,
 }
 
+world:new_terrain_type{
+   name = "winter_forested_mountain_0",
+   descname = _ "Mountain, tree friendly",
+   editor_category = "winter",
+   is = "mountain",
+   valid_resources = {"coal", "iron", "gold", "stones"},
+   default_resource = "",
+   default_resource_amount = 0,
+   textures = { pics_dir .. "winter/forested_mountain_00.png" },
+   dither_layer = 101,
+   temperature = 35,
+   humidity = 0.7,
+   fertility = 0.4,
+}
+
+world:new_terrain_type{
+   name = "winter_forested_mountain_1",
+   descname = _ "Mountain, tree friendly",
+   editor_category = "winter",
+   is = "mountain",
+   valid_resources = {"coal", "iron", "gold", "stones"},
+   default_resource = "",
+   default_resource_amount = 0,
+   textures = { pics_dir .. "winter/forested_mountain_01.png" },
+   dither_layer = 101,
+   temperature = 35,
+   humidity = 0.7,
+   fertility = 0.4,
+}
 
 world:new_terrain_type{
    name = "ice",
@@ -1003,6 +1061,35 @@ world:new_terrain_type{
    fertility = 0.05,
 }
 
+world:new_terrain_type{
+   name = "desert_forested_mountain_0",
+   descname = _ "Mountain, tree friendly",
+   editor_category = "desert",
+   is = "mountain",
+   valid_resources = {"coal", "iron", "gold", "stones"},
+   default_resource = "",
+   default_resource_amount = 0,
+   textures = { pics_dir .. "desert/forested_mountain_00.png" },
+   dither_layer = 71,
+   temperature = 141,
+   humidity = 0.5,
+   fertility = 0.5,
+}
+
+world:new_terrain_type{
+   name = "desert_forested_mountain_1",
+   descname = _ "Mountain, tree friendly",
+   editor_category = "desert",
+   is = "mountain",
+   valid_resources = {"coal", "iron", "gold", "stones"},
+   default_resource = "",
+   default_resource_amount = 0,
+   textures = { pics_dir .. "desert/forested_mountain_01.png" },
+   dither_layer = 141,
+   temperature = 120,
+   humidity = 0.5,
+   fertility = 0.5,
+}
 
 world:new_terrain_type{
    name = "desert1",
