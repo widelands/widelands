@@ -27,17 +27,19 @@
 
 namespace UI {
 
-// Button size of tab buttons in pixels.
-constexpr int kTabPanelButtonSize = 34;
+// Button height of tab buttons in pixels. Is also used for width with pictorial buttons.
+constexpr int kTabPanelButtonHeight = 34;
 
 // Margin around image. The image will be scaled down to fit into this rectangle with preserving size.
 constexpr int kTabPanelImageMargin = 2;
 
+// Left and right margin around text.
 constexpr int kTabPanelTextMargin = 4;
 
 //  height of the bar separating buttons and tab contents
 constexpr int kTabPanelSeparatorHeight = 4;
 
+// Constant to flag up when we're not at a tab.
 constexpr uint32_t kNotFound = std::numeric_limits<uint32_t>::max();
 
 /*
@@ -56,7 +58,7 @@ Tab::Tab
 	 const std::string &       gtooltip,
 	 Panel             * const gpanel)
 	:
-	NamedPanel(parent, name, x, 0, w, kTabPanelButtonSize, gtooltip),
+	NamedPanel(parent, name, x, 0, w, kTabPanelButtonHeight, gtooltip),
 	m_parent(parent),
 	m_id(id),
 	pic(gpic),
@@ -115,7 +117,7 @@ void TabPanel::layout()
 		uint32_t h = get_h();
 
 		// avoid excessive craziness in case there is a wraparound
-		h = std::min(h, h - (kTabPanelButtonSize + kTabPanelSeparatorHeight));
+		h = std::min(h, h - (kTabPanelButtonHeight + kTabPanelSeparatorHeight));
 		panel->set_size(get_w(), h);
 	}
 }
@@ -129,8 +131,8 @@ void TabPanel::update_desired_size()
 	uint32_t h;
 
 	// size of button row
-	w = kTabPanelButtonSize * m_tabs.size();
-	h = kTabPanelButtonSize + kTabPanelSeparatorHeight;
+	w = kTabPanelButtonHeight * m_tabs.size();
+	h = kTabPanelButtonHeight + kTabPanelSeparatorHeight;
 
 	// size of contents
 	if (m_active < m_tabs.size()) {
@@ -169,9 +171,9 @@ uint32_t TabPanel::add
 	size_t id = m_tabs.size();
 	int32_t x = id > 0 ? m_tabs[id - 1]->get_x() + m_tabs[id - 1]->get_w() : 0;
 	const Image* pic = UI::g_fh1->render(as_uifont(title));
-	m_tabs.push_back(new Tab(this, id, x, std::max(kTabPanelButtonSize, pic->width() + 2 * kTabPanelTextMargin), name, title, pic, tooltip_text, panel));
-	log("NOCOM new textual tab %s at %d - %d\n", tooltip_text.c_str(), m_tabs[id]->get_x(), m_tabs[id]->get_w());
-	panel->set_pos(Point(0, kTabPanelButtonSize + kTabPanelSeparatorHeight));
+	m_tabs.push_back(new Tab(this, id, x, std::max(kTabPanelButtonHeight, pic->width() + 2 * kTabPanelTextMargin), name, title, pic, tooltip_text, panel));
+
+	panel->set_pos(Point(0, kTabPanelButtonHeight + kTabPanelSeparatorHeight));
 	panel->set_visible(id == m_active);
 	update_desired_size();
 
@@ -192,9 +194,9 @@ uint32_t TabPanel::add
 
 	size_t id = m_tabs.size();
 	int32_t x = id > 0 ? m_tabs[id - 1]->get_x() + m_tabs[id - 1]->get_w() : 0;
-	m_tabs.push_back(new Tab(this, id, x, kTabPanelButtonSize, name, "", pic, tooltip_text, panel));
-	log("NOCOM new pictorial tab %s at %d - %d\n", tooltip_text.c_str(), m_tabs[id]->get_x(), m_tabs[id]->get_w());
-	panel->set_pos(Point(0, kTabPanelButtonSize + kTabPanelSeparatorHeight));
+	m_tabs.push_back(new Tab(this, id, x, kTabPanelButtonHeight, name, "", pic, tooltip_text, panel));
+
+	panel->set_pos(Point(0, kTabPanelButtonHeight + kTabPanelSeparatorHeight));
 	panel->set_visible(id == m_active);
 	update_desired_size();
 
@@ -237,43 +239,38 @@ const TabPanel::TabList & TabPanel::tabs() {
 void TabPanel::draw(RenderTarget & dst)
 {
 	// draw the background
-	static_assert(2 < kTabPanelButtonSize, "assert(2 < kTabPanelButtonSize) failed.");
-	static_assert(4 < kTabPanelButtonSize, "assert(4 < kTabPanelButtonSize) failed.");
+	static_assert(2 < kTabPanelButtonHeight, "assert(2 < kTabPanelButtonSize) failed.");
+	static_assert(4 < kTabPanelButtonHeight, "assert(4 < kTabPanelButtonSize) failed.");
 
 	if (m_pic_background) {
 		dst.tile
-			(Rect(Point(0, 0), m_tabs.size() * kTabPanelButtonSize, kTabPanelButtonSize - 2),
+			(Rect(Point(0, 0), m_tabs.size() * kTabPanelButtonHeight, kTabPanelButtonHeight - 2),
 			 m_pic_background, Point(get_x(), get_y()));
-		assert(kTabPanelButtonSize - 2 <= get_h());
+		assert(kTabPanelButtonHeight - 2 <= get_h());
 		dst.tile
 			(Rect
-			 (Point(0, kTabPanelButtonSize - 2),
-			  get_w(), get_h() - kTabPanelButtonSize + 2),
+			 (Point(0, kTabPanelButtonHeight - 2),
+			  get_w(), get_h() - kTabPanelButtonHeight + 2),
 			 m_pic_background,
-			 Point(get_x(), get_y() + kTabPanelButtonSize - 2));
+			 Point(get_x(), get_y() + kTabPanelButtonHeight - 2));
 	}
 
 	// draw the buttons
-	int tab_width;
-	size_t idx;
 	int32_t x;
-	for (idx = 0; idx < m_tabs.size(); ++idx) {
-		tab_width = m_tabs[idx]->get_w();
+	for (size_t idx = 0; idx < m_tabs.size(); ++idx) {
+		int tab_width = m_tabs[idx]->get_w();
 		x = m_tabs[idx]->get_x();
 
 		if (m_highlight == idx) {
-			dst.brighten_rect
-				(Rect(Point(x, 0), tab_width, kTabPanelButtonSize),
-				 MOUSE_OVER_BRIGHT_FACTOR);
+			dst.brighten_rect(Rect(Point(x, 0), tab_width, kTabPanelButtonHeight), MOUSE_OVER_BRIGHT_FACTOR);
 		}
 
 		assert(m_tabs[idx]->pic);
 
 		// If the title is empty, we will assume a pictorial tab
 		if (m_tabs[idx]->title.empty()) {
-			//log("NOCOM drawing pictorial tab at %d\n", x);
 			// Scale the image down if needed, but keep the ratio.
-			constexpr int kMaxImageSize = kTabPanelButtonSize - 2 * kTabPanelImageMargin;
+			constexpr int kMaxImageSize = kTabPanelButtonHeight - 2 * kTabPanelImageMargin;
 			double image_scale =
 				std::min(1.,
 							std::min(static_cast<double>(kMaxImageSize) / m_tabs[idx]->pic->width(),
@@ -281,8 +278,8 @@ void TabPanel::draw(RenderTarget & dst)
 
 			uint16_t picture_width = image_scale * m_tabs[idx]->pic->width();
 			uint16_t picture_height = image_scale * m_tabs[idx]->pic->height();
-			dst.blitrect_scale(Rect(x + (kTabPanelButtonSize - picture_width) / 2,
-											(kTabPanelButtonSize - picture_height) / 2,
+			dst.blitrect_scale(Rect(x + (kTabPanelButtonHeight - picture_width) / 2,
+											(kTabPanelButtonHeight - picture_height) / 2,
 											picture_width,
 											picture_height),
 									 m_tabs[idx]->pic,
@@ -290,9 +287,7 @@ void TabPanel::draw(RenderTarget & dst)
 									 1.,
 									 BlendMode::UseAlpha);
 		} else {
-			//log("NOCOM drawing textual tab %s at %d\n", m_tabs[idx]->title.c_str(), x);
-
-			dst.blit(Point(x + kTabPanelTextMargin, (kTabPanelButtonSize - m_tabs[idx]->pic->height()) / 2),
+			dst.blit(Point(x + kTabPanelTextMargin, (kTabPanelButtonHeight - m_tabs[idx]->pic->height()) / 2),
 						m_tabs[idx]->pic,
 						BlendMode::UseAlpha,
 						UI::Align_Left);
@@ -304,33 +299,33 @@ void TabPanel::draw(RenderTarget & dst)
 		dst.brighten_rect
 			(Rect(Point(x, 0), tab_width, 2), BUTTON_EDGE_BRIGHT_FACTOR);
 		dst.brighten_rect
-			(Rect(Point(x, 2), 2, kTabPanelButtonSize - 4),
+			(Rect(Point(x, 2), 2, kTabPanelButtonHeight - 4),
 			 BUTTON_EDGE_BRIGHT_FACTOR);
 		dst.fill_rect
-			(Rect(Point(x + tab_width - 2, 2), 1, kTabPanelButtonSize - 4),
+			(Rect(Point(x + tab_width - 2, 2), 1, kTabPanelButtonHeight - 4),
 			 black);
 		dst.fill_rect
-			(Rect(Point(x + tab_width - 1, 1), 1, kTabPanelButtonSize - 3),
+			(Rect(Point(x + tab_width - 1, 1), 1, kTabPanelButtonHeight - 3),
 			 black);
 
 		// Draw bottom part
 		if (m_active != idx)
 			dst.brighten_rect
-				(Rect(Point(x, kTabPanelButtonSize - 2), tab_width, 2),
+				(Rect(Point(x, kTabPanelButtonHeight - 2), tab_width, 2),
 				 2 * BUTTON_EDGE_BRIGHT_FACTOR);
 		else {
 			dst.brighten_rect
-				(Rect(Point(x, kTabPanelButtonSize - 2), 2, 2),
+				(Rect(Point(x, kTabPanelButtonHeight - 2), 2, 2),
 				 BUTTON_EDGE_BRIGHT_FACTOR);
 
 			dst.brighten_rect
-				(Rect(Point(x + tab_width - 2, kTabPanelButtonSize - 2), 2, 2),
+				(Rect(Point(x + tab_width - 2, kTabPanelButtonHeight - 2), 2, 2),
 				 2 * BUTTON_EDGE_BRIGHT_FACTOR);
 			dst.fill_rect
-				(Rect(Point(x + tab_width - 2, kTabPanelButtonSize - 1), 1, 1),
+				(Rect(Point(x + tab_width - 2, kTabPanelButtonHeight - 1), 1, 1),
 				 black);
 			dst.fill_rect
-				(Rect(Point(x + tab_width - 2, kTabPanelButtonSize - 2), 2, 1),
+				(Rect(Point(x + tab_width - 2, kTabPanelButtonHeight - 2), 2, 1),
 				 black);
 		}
 	}
@@ -338,7 +333,7 @@ void TabPanel::draw(RenderTarget & dst)
 	// draw the remaining separator
 	assert(x <= get_w());
 	dst.brighten_rect
-		(Rect(Point(x, kTabPanelButtonSize - 2), get_w() - x, 2),
+		(Rect(Point(x, kTabPanelButtonHeight - 2), get_w() - x, 2),
 		 2 * BUTTON_EDGE_BRIGHT_FACTOR);
 }
 
@@ -349,9 +344,7 @@ void TabPanel::draw(RenderTarget & dst)
 void TabPanel::handle_mousein(bool inside)
 {
 	if (!inside && m_highlight != kNotFound) {
-		update
-			(m_highlight * kTabPanelButtonSize, 0, kTabPanelButtonSize, kTabPanelButtonSize);
-
+		update(m_tabs[m_highlight]->get_x(), 0, m_tabs[m_highlight]->get_w(), kTabPanelButtonHeight);
 		m_highlight = kNotFound;
 	}
 }
@@ -363,36 +356,17 @@ void TabPanel::handle_mousein(bool inside)
 bool TabPanel::handle_mousemove
 	(uint8_t, int32_t const x, int32_t const y, int32_t, int32_t)
 {
-	size_t hl;
-
-	if (y < 0 || y >= kTabPanelButtonSize)
-		hl = kNotFound;
-	else {
-		size_t id = find_tab(x, y);
-		if (id != kNotFound) {
-			hl = id;
-		}
-
-		// NOCOM can this line go?
-		if (m_tabs.size() <= hl)
-			hl = kNotFound;
-	}
+	size_t hl = find_tab(x, y);
 
 	if (hl != m_highlight) {
-		{
-			if (hl != kNotFound)
-				set_tooltip(m_tabs[hl]->tooltip);
+		if (hl != kNotFound) {
+			update(m_tabs[hl]->get_x(), 0, m_tabs[hl]->get_w(), kTabPanelButtonHeight);
 		}
-		// NOCOM update the correct range
-		if (m_highlight != kNotFound)
-			update
-				(m_highlight * kTabPanelButtonSize, 0,
-				 kTabPanelButtonSize, kTabPanelButtonSize);
-		if (hl != kNotFound)
-			update
-				(hl * kTabPanelButtonSize, 0, kTabPanelButtonSize, kTabPanelButtonSize);
-
+		if (m_highlight != kNotFound) {
+			update(m_tabs[m_highlight]->get_x(), 0, m_tabs[m_highlight]->get_w(), kTabPanelButtonHeight);
+		}
 		m_highlight = hl;
+		set_tooltip(m_highlight != kNotFound ? m_tabs[m_highlight]->tooltip : "");
 	}
 	return true;
 }
@@ -423,7 +397,7 @@ bool TabPanel::handle_mouserelease(uint8_t, int32_t, int32_t)
  * Returns kNotFound if no tab was found
  */
 size_t TabPanel::find_tab(int32_t x, int32_t y) const {
-	if (y < 0 || y >= kTabPanelButtonSize) {
+	if (y < 0 || y >= kTabPanelButtonHeight) {
 		return kNotFound;
 	}
 
@@ -431,10 +405,7 @@ size_t TabPanel::find_tab(int32_t x, int32_t y) const {
 	for (size_t id = 0; id < m_tabs.size(); ++id) {
 		width += m_tabs[id]->get_w();
 		if (width > x) {
-			if (id < m_tabs.size()) {
-				return id;
-			}
-			break;
+			return id;
 		}
 	}
 	return kNotFound;

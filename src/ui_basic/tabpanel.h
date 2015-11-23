@@ -51,6 +51,9 @@ struct Tab : public NamedPanel {
 	void activate();
 
 private:
+	// Leave handling the mouse move to the TabPanel.
+	bool handle_mousemove(uint8_t, int32_t, int32_t, int32_t, int32_t) override {return false;}
+
 	TabPanel * m_parent;
 	uint32_t    m_id;
 
