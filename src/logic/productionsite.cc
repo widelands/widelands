@@ -308,9 +308,9 @@ bool ProductionSite::has_workers(DescriptionIndex targetSite, Game & /* game */)
 				const DescriptionIndex needed_worker = wp.first;
 				bool worker_available =  false;
 				for (unsigned int i = 0; i < descr().nr_working_positions(); ++i) {
-					if (working_positions()[i].worker) {
-						DescriptionIndex current_worker
-							= working_positions()[i].worker->descr().worker_index();
+					const Worker* cw = working_positions()[i].worker;
+					if (cw) {
+						DescriptionIndex current_worker = cw->descr().worker_index();
 						if (owner().tribe().get_worker_descr(current_worker)->can_act_as(needed_worker)) {
 							worker_available = true; // We found a worker for the position
 							break;
