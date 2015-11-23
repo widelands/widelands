@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-04 07:08+0000\n"
-"PO-Revision-Date: 2015-11-04 07:10+0000\n"
+"POT-Creation-Date: 2015-11-18 08:43+0000\n"
+"PO-Revision-Date: 2015-11-18 08:43+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
@@ -255,9 +255,9 @@ msgstr "Costruisci una calchera alimentata da un pozzo e da una miniera di carbo
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:116
 msgid ""
 "Better buildings may also require other improved materials besides "
-"blackwood. One of these is grout, which is produced out of raw stone, water "
+"blackwood. One of these is grout, which is produced out of granite, water "
 "and coal by a lime-burner."
-msgstr "Edifici migliori potrebbero anche richiedere ulteriori materiali avanzati, oltre al legno trattato. Uno di questi è la calce, che è prodotta a partire dalla pietra grezza, acqua e carbone in una calchera."
+msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:118
 msgid ""

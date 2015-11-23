@@ -16,8 +16,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-10 08:55+0000\n"
-"PO-Revision-Date: 2015-11-16 14:17+0000\n"
+"POT-Creation-Date: 2015-11-17 08:09+0000\n"
+"PO-Revision-Date: 2015-11-17 12:41+0000\n"
 "Last-Translator: Venatrix\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -763,7 +763,7 @@ msgstr "Goldspinnerei"
 #. TRANSLATORS: Completed/Skipped/Did not start spinning gold because ...
 #: ../../tribes/buildings/productionsites/atlanteans/gold_spinning_mill/init.lua:53
 msgid "spinning gold"
-msgstr ""
+msgstr "Das Spinnen von Gold"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/atlanteans/goldmine/init.lua:7
@@ -2410,13 +2410,13 @@ msgstr "Keine Rohstoffe"
 #: ../../tribes/immovables/resi_stones1/init.lua:7
 msgctxt "immovable"
 msgid "Some Stones"
-msgstr "Ein bisschen Stein"
+msgstr "Ein bisschen Gestein"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../tribes/immovables/resi_stones2/init.lua:7
 msgctxt "immovable"
 msgid "A Lot of Stones"
-msgstr "Eine Menge Stein"
+msgstr "Eine Menge Gestein"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../tribes/immovables/resi_water1/init.lua:7
@@ -2986,7 +2986,7 @@ msgid "Blackroot Farmer"
 msgstr "Dunkelrübenbauer"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../tribes/workers/atlanteans/builder/init.lua:28
+#: ../../tribes/workers/atlanteans/builder/init.lua:29
 msgctxt "atlanteans_worker"
 msgid "Builder"
 msgstr "Bauarbeiter"

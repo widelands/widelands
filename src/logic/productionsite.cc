@@ -284,32 +284,56 @@ void ProductionSite::update_statistics_string(std::string* s) {
 }
 
 /**
- * Detect if the workers are experienced enough for an upgrade
+ * Detect if the workers are experienced enough for an target building
+ * Buildable workers are skipped, but upgraded ones (required be target site) are tested
  * @param idx Index of the enhancement
  */
 bool ProductionSite::has_workers(DescriptionIndex targetSite, Game & /* game */)
 {
 	// bld holds the description of the building we want to have
 	if (upcast(ProductionSiteDescr const, bld, owner().tribe().get_building_descr(targetSite))) {
-		// if he has workers
+
 		if (bld->nr_working_positions()) {
-			DescriptionIndex need = bld->working_positions()[0].first;
-			for (unsigned int i = 0; i < descr().nr_working_positions(); ++i) {
-				if (!working_positions()[i].worker) {
-					return false; // no one is in this house
-				} else {
-					DescriptionIndex have = working_positions()[i].worker->descr().worker_index();
-					if (owner().tribe().get_worker_descr(have)->can_act_as(need)) {
-						return true; // he found a lead worker
+
+			// Iterating over workers positions in target building
+			for (const auto& wp : bld->working_positions()) {
+
+				// If worker for this position is buildable, just skip him
+				if (owner().tribe().get_worker_descr(wp.first)->is_buildable()){
+					continue;
+				}
+
+				// This position needs promoted worker, so trying to find out if there is such worker
+				// currently available in this site
+				const DescriptionIndex needed_worker = wp.first;
+				bool worker_available =  false;
+				for (unsigned int i = 0; i < descr().nr_working_positions(); ++i) {
+					const Worker* cw = working_positions()[i].worker;
+					if (cw) {
+						DescriptionIndex current_worker = cw->descr().worker_index();
+						if (owner().tribe().get_worker_descr(current_worker)->can_act_as(needed_worker)) {
+							worker_available = true; // We found a worker for the position
+							break;
+						}
 					}
 				}
-			}
-			return false;
-		}
-		return true;
-	} else return true;
-}
+				if (!worker_available) {
+					// We dont have needed workers in the site :(
+					return false;
+				}
 
+			}
+
+			//if we are here, all needs are satisfied
+			return true;
+
+		} else {
+			throw wexception("Building, index: %d, needs no workers!\n", targetSite);
+		}
+	} else {
+		throw wexception("No such building, index: %d\n", targetSite);
+	}
+}
 
 WaresQueue & ProductionSite::waresqueue(DescriptionIndex const wi) {
 	for (WaresQueue * ip_queue : m_input_queues) {

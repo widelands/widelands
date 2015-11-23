@@ -2,10 +2,6 @@ include "scripting/formatting.lua"
 
 set_textdomain("texts")
 
-function a(text)
-   return "</p><p font-size=14 font-decoration=underline>" .. text
-end
-
 return {
    title = _"README for the Widelands Editor",
    text = rt(
@@ -13,9 +9,8 @@ return {
 
       h1(_"Introduction") ..
 
-      p(_"This editor is intended for players who would like to design their own maps to use with Widelands. As you can see, this Editor is heavy work in progress and as the Editor becomes better and better, this text will also get longer and more complete.") ..
-      p(_"This Editor is intended for players who would like to design their own maps to use with Widelands.") ..
-      p(_"As you can see, this Editor is heavy work in progress and as the Editor becomes better and better, this text will also get longer and more complete.") ..
+      p(_"This editor is intended for players who would like to design their own maps to use with Widelands.") ..
+      p(_"As you can see, this editor is heavy work in progress and as the editor becomes better and better, this text will also get longer and more complete.") ..
       p(_"Please have a look at our enduser manuals on our wiki pages at: %s"):bformat(a("http://wl.widelands.org/wiki")) ..
       p(_"Those pages might be more complete and up to date than this file, and you will also find a short tutorial about building a map there.") ..
 

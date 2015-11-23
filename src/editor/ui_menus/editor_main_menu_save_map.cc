@@ -263,17 +263,26 @@ bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
 		return false;
 	}
 
+	Widelands::EditorGameBase& egbase = eia().egbase();
+	Widelands::Map& map = egbase.map();
+
 	{ // fs scope
 		std::unique_ptr<FileSystem> fs
 			(g_fs->create_sub_file_system(tmp_name.empty() ? complete_filename : tmp_name,
 				binary ? FileSystem::ZIP : FileSystem::DIR));
-		Widelands::MapSaver wms(*fs, eia().egbase());
+		Widelands::MapSaver wms(*fs, egbase);
 
 		// Recompute seafaring tag
-		if (eia().egbase().map().allows_seafaring()) {
-			eia().egbase().map().add_tag("seafaring");
+		if (map.allows_seafaring()) {
+			map.add_tag("seafaring");
 		} else {
-			eia().egbase().map().delete_tag("seafaring");
+			map.delete_tag("seafaring");
+		}
+
+		if (map.has_artifacts(egbase.world())) {
+			map.add_tag("artifacts");
+		} else {
+			map.delete_tag("artifacts");
 		}
 
 		try {
@@ -289,7 +298,7 @@ bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
 			}
 
 			// set the filesystem of the map to the current save file / directory
-			eia().egbase().map().swap_filesystem(fs);
+			map.swap_filesystem(fs);
 			// DONT use fs as of here, its garbage now!
 
 		} catch (const std::exception & e) {

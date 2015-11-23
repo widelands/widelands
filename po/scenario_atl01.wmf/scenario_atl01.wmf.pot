@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-17 08:09+0000\n"
+"POT-Creation-Date: 2015-11-23 09:42+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -414,7 +414,7 @@ msgstr ""
 #. TRANSLATORS: Loftomor
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:193
 msgid ""
-"May Satul warm you, Jundlina! The most important things for building a settlement are the building materials. There are some trees here, so we should build housings for some woodcutters and of course also for foresters, so we will not run out of trees. Oh, and we mustn’t forget the sawmill, for most buildings can’t be made out of logs alone. Stronger buildings also need stone, but there is plenty to the north-east of here; we just need to build a quarry, and my stonemasons will go to work promptly."
+"May Satul warm you, Jundlina! The most important things for building a settlement are the building materials. There are some trees here, so we should build housings for some woodcutters and of course also for foresters, so we will not run out of trees. Oh, and we mustn’t forget the sawmill, for most buildings can’t be made out of logs alone. Stronger buildings also need granite, but there is plenty to the north-east of here; we just need to build a quarry, and my stonemasons will go to work promptly."
 msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:197

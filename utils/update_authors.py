@@ -138,4 +138,8 @@ dest_filename = "developers.lua"
 dest_filepath = source_path + "/" + dest_filename
 dest_file = codecs.open(dest_filepath, encoding='utf-8', mode='w')
 dest_file.write(lua_string)
+
+print("Fixing the formatting")
+import fix_lua_tabs
+fix_lua_tabs.main()
 print("Done.")
