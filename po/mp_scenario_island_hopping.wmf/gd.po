@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-09-21 19:04+0000\n"
-"PO-Revision-Date: 2015-09-21 19:05+0000\n"
+"POT-Creation-Date: 2015-11-18 08:43+0000\n"
+"PO-Revision-Date: 2015-11-18 13:09+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -77,11 +77,11 @@ msgstr "Gach turas a choileanas tu eilean, gheibh thu duais de bhathar a-rèir c
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:23
 msgid ""
-"The point is that the first island only provides stones and wood, the second"
+"The point is that the first island only provides rocks and trees, the second"
 " only meadows and resources. The economies you leave behind will continue to"
 " work for you, but you will only reap the benefits at the moment you reach a"
 " new island."
-msgstr "'S e cnag na cùise nach doir a’ chiad eilean dhut ach fiodh is clachan ’s nach fhaigh thu ach machair ’s clach-mèinneir is gual air an dàrna eilean. Obraichidh an t-eaconamaidh air na h-eileanan roimhe fhathast ach chan fhaigh thu buannachd às ach aig an àm a ruigeas tu eilean ùr."
+msgstr "'S e cnag na cùise nach doir a’ chiad eilean dhut ach creagan is craobhan ’s nach fhaigh thu ach machair ’s clach-mèinneir is gual air an dàrna eilean. Obraichidh an t-eaconamaidh air na h-eileanan roimhe fhathast ach chan fhaigh thu buannachd às ach aig an àm a ruigeas tu eilean ùr."
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:26
 msgid "Finally, be careful not to waste your quartz and diamonds."

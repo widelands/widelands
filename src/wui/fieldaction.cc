@@ -56,7 +56,7 @@ constexpr int kBuildGridCellSize = 50;
 // The BuildGrid presents a selection of buildable buildings
 struct BuildGrid : public UI::IconGrid {
 	BuildGrid(UI::Panel* parent,
-	          const Widelands::TribeDescr& tribe,
+				 Widelands::Player* plr,
 	          int32_t x,
 	          int32_t y,
 	          int32_t cols);
@@ -73,14 +73,14 @@ private:
 	void mousein_slot(int32_t idx);
 
 private:
-	const Widelands::TribeDescr& tribe_;
+	Widelands::Player* plr_;
 };
 
 BuildGrid::BuildGrid(
-		UI::Panel* parent, const Widelands::TribeDescr& tribe,
+		UI::Panel* parent, Widelands::Player* plr,
 		int32_t x, int32_t y, int32_t cols) :
 	UI::IconGrid(parent, x, y, kBuildGridCellSize, kBuildGridCellSize, cols),
-	tribe_(tribe)
+	plr_(plr)
 {
 	clicked.connect(boost::bind(&BuildGrid::click_slot, this, _1));
 	mouseout.connect(boost::bind(&BuildGrid::mouseout_slot, this, _1));
@@ -95,15 +95,16 @@ Add a new building to the list of buildable buildings
 void BuildGrid::add(Widelands::DescriptionIndex id)
 {
 	const Widelands::BuildingDescr & descr =
-		*tribe_.get_building_descr(Widelands::DescriptionIndex(id));
+		*plr_->tribe().get_building_descr(Widelands::DescriptionIndex(id));
+
 	// TODO(sirver): change this to take a Button subclass instead of
 	// parameters. This will allow overriding the way it is rendered
 	// to bring back player colors.
 	UI::IconGrid::add(descr.name(),
-							descr.representative_image(),
+							descr.representative_image(&plr_->get_playercolor()),
 	                  reinterpret_cast<void*>(id),
 	                  descr.descname() + "<br><font size=11>" + _("Construction costs:") +
-	                     "</font><br>" + waremap_to_richtext(tribe_, descr.buildcost()));
+								"</font><br>" + waremap_to_richtext(plr_->tribe(), descr.buildcost()));
 }
 
 
@@ -531,7 +532,7 @@ void FieldActionWindow::add_buttons_build(int32_t buildcaps)
 
 		// Allocate the tab's grid if necessary
 		if (!*ppgrid) {
-			*ppgrid = new BuildGrid(&m_tabpanel, tribe, 0, 0, 5);
+			*ppgrid = new BuildGrid(&m_tabpanel, m_plr, 0, 0, 5);
 			(*ppgrid)->buildclicked.connect(boost::bind(&FieldActionWindow::act_build, this, _1));
 			(*ppgrid)->buildmouseout.connect
 				(boost::bind(&FieldActionWindow::building_icon_mouse_out, this, _1));

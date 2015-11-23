@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-10 08:45+0000\n"
-"PO-Revision-Date: 2015-11-10 08:46+0000\n"
+"POT-Creation-Date: 2015-11-18 08:43+0000\n"
+"PO-Revision-Date: 2015-11-18 08:43+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
@@ -96,7 +96,7 @@ msgstr "ПАМЯТКА"
 msgid "an open source strategy game"
 msgstr "стратегическая игра с открытым исходным кодом"
 
-#: ../../txts/README.lua:17 ../../txts/editor_readme.lua:14
+#: ../../txts/README.lua:17 ../../txts/editor_readme.lua:10
 msgid "Introduction"
 msgstr "Введение"
 
@@ -258,8 +258,8 @@ msgid "0: shows all messages"
 msgstr "0: показать все сообщения"
 
 #: ../../txts/README.lua:82
-msgid "1: shows geologists' messages only"
-msgstr "1: показывать только сообщения геологов"
+msgid "1: shows geologists’ messages only"
+msgstr ""
 
 #: ../../txts/README.lua:83
 msgid "2: shows economy messages only"
@@ -289,69 +289,75 @@ msgstr "DELETE: архивировать или восстановить тек�
 msgid "Online Help"
 msgstr "Онлайн-помощь"
 
+#: ../../txts/README.lua:91
+msgid ""
+"A detailed description of the tribes’ economies is available in the in-game "
+"Tribal Encyclopedia."
+msgstr ""
+
 #: ../../txts/README.lua:92
 msgid ""
-"If you need documentation or help for Widelands or the Widelands Editor, be\n"
-"sure to visit our homepage. You can find an up to date online help in our Wiki\n"
-"and a detailed description of the tribe economies in our online encyclopedia."
-msgstr "Если вам нужна документация или помощь по «Widelands» или редактору «Widelands», обязательно посетите наш сайт. Вы сможете найти самую актуальную помощь в нашей вики и подробное описание экономики племени в нашей онлайн-энциклопедии."
+"If you need more documentation or help for Widelands or the Widelands "
+"Editor, be sure to visit our homepage at %s. You can find online help in our"
+" Wiki there."
+msgstr ""
 
-#: ../../txts/README.lua:96
+#: ../../txts/README.lua:94
 msgid "Reporting Bugs"
 msgstr "Сообщить об ошибке"
 
-#: ../../txts/README.lua:98
+#: ../../txts/README.lua:96
 msgid "If you encounter a bug, please report it to our bugtracker:"
 msgstr "Если вы обнаружили ошибку, пожалуйста, сообщите о ней в нашу систему отслеживания ошибок:"
 
-#: ../../txts/README.lua:102
+#: ../../txts/README.lua:100
 msgid "Please provide enough background information. Tell us:"
 msgstr "Пожалуйста, сообщите дополнительную информацию. Укажите:"
 
-#: ../../txts/README.lua:104
+#: ../../txts/README.lua:102
 msgid "- Detailed steps on how to trigger the bug, if possible."
 msgstr "— Детальное описание действий, приводящих к ошибке, если это возможно"
 
-#: ../../txts/README.lua:106
+#: ../../txts/README.lua:104
 msgid ""
 "- What you expected to happen when performing the steps and what actually "
 "happened."
 msgstr "— Чего вы ждали выполняя эти действия, и что на самом деле произошло."
 
-#: ../../txts/README.lua:108
+#: ../../txts/README.lua:106
 msgid ""
 "- Which version of Widelands you are running (i.e. either the build number or\n"
 "the revision number if you are running a development version or a daily build.)"
 msgstr "— Какую версию «Widelands» вы используете (номер сборки или номер версии, если вы используете версию находящуюся в разработке или ежедневную сборку)."
 
-#: ../../txts/README.lua:111
+#: ../../txts/README.lua:109
 msgid ""
 "- Please also include which operating system you are running Widelands on as\n"
 "some bugs can be platform specific."
 msgstr "— Также, пожалуйста, сообщите на какой операционной системе вы запускали «Widelands», так как некоторые ошибки могут зависеть от этого."
 
-#: ../../txts/README.lua:114
+#: ../../txts/README.lua:112
 msgid "- Which map you were playing when the bug occurred."
 msgstr "— На какой карте вы играли когда произошла ошибка."
 
-#: ../../txts/README.lua:116
+#: ../../txts/README.lua:114
 msgid ""
 "- If the bug concerns something not being displayed correctly or if it helps\n"
 "demonstrate the issue, please include one or more screenshots."
 msgstr "— Если ошибка сопровождается некорректным отображением чего-либо или необходимо продемонстрировать проблему — приложите один или несколько снимков экрана."
 
-#: ../../txts/README.lua:119
+#: ../../txts/README.lua:117
 msgid ""
 "- If you have a save game or replay demonstrating the issue (for instance\n"
 "crashes where it can be hard to tell exactly what is triggering it), please\n"
 "include that too. For more information, see the section on Replays below."
 msgstr "— Если у вас есть сохранение или повтор, демонстрирующий проблему (для случаев «падения», когда трудно точно сказать, что его вызвало), пожалуйста, приложите его. Для получения более подробной информации смотрите раздел «Повторы» ниже."
 
-#: ../../txts/README.lua:123
+#: ../../txts/README.lua:121
 msgid "Replays"
 msgstr "Повторы"
 
-#: ../../txts/README.lua:125
+#: ../../txts/README.lua:123
 msgid ""
 "Widelands records every game you play in two files. One of these files has a\n"
 ".wrpl.wgf extension and contains an initial savegame. The other file has a\n"
@@ -360,7 +366,7 @@ msgid ""
 "you the time you started the game."
 msgstr "«Widelands» записывает каждую играемую игру в два файла. Один из этих файлов имеет расширение .wrpl.wgf и содержит начальное сохранение. Другой файл имеет расширение .wrpl и содержит все действия игроков, таких как строительство дорог и атаки противников. Остальная часть имени файла указывает время начала игры."
 
-#: ../../txts/README.lua:131
+#: ../../txts/README.lua:129
 msgid ""
 "Using the Watch Replay option in the main menu, a previously played game will\n"
 "be precisely reconstructed for you to watch. Note, however, that even small\n"
@@ -370,7 +376,7 @@ msgid ""
 "different version of the game."
 msgstr "Воспользуйтесь пунктом «Смотреть повтор» в главном меню, чтобы просмотреть ранее сыгранную игру. Заметим, однако, что даже небольшие изменения в файлах данных игры или исполняемом файле «Widelands» могут привести к несовместимости повтора с игрой. Схожим образом страдает от рассинхронизации сетевая игра, если один из игроков имеет другую версию игры."
 
-#: ../../txts/README.lua:138
+#: ../../txts/README.lua:136
 msgid ""
 "Replays are a very useful tool to find bugs in the game logic, so they\n"
 "can be useful as attachments to bug reports. The replay files are saved in the\n"
@@ -495,162 +501,154 @@ msgstr "Windows"
 msgid "ZetaOS"
 msgstr "ZetaOS"
 
-#: ../../txts/editor_readme.lua:10
+#: ../../txts/editor_readme.lua:6
 msgid "README for the Widelands Editor"
 msgstr "ПАМЯТКА для редактора «Wideland»"
 
-#: ../../txts/editor_readme.lua:12
+#: ../../txts/editor_readme.lua:8
 msgid "The Widelands Editor"
 msgstr "Редактор карт Widelands"
 
-#: ../../txts/editor_readme.lua:16
+#: ../../txts/editor_readme.lua:12
 msgid ""
 "This editor is intended for players who would like to design their own maps "
-"to use with Widelands. As you can see, this Editor is heavy work in progress"
-" and as the Editor becomes better and better, this text will also get longer"
-" and more complete."
-msgstr "Этот редактор карт предназначен для игроков, которые хотели бы разрабатывать свои собственные карты для «Widelands». Редактор всё ещё совершенствуется и становится лучше и лучше, а этот текст становится всё длиннее и полнее."
-
-#: ../../txts/editor_readme.lua:17
-msgid ""
-"This Editor is intended for players who would like to design their own maps "
 "to use with Widelands."
-msgstr "Этот редактор карт предназначен для игроков, которые хотели бы разрабатывать свои собственные карты для «Widelands»."
+msgstr ""
 
-#: ../../txts/editor_readme.lua:18
+#: ../../txts/editor_readme.lua:13
 msgid ""
-"As you can see, this Editor is heavy work in progress and as the Editor "
+"As you can see, this editor is heavy work in progress and as the editor "
 "becomes better and better, this text will also get longer and more complete."
-msgstr "Редактор всё ещё совершенствуется и становится лучше и лучше, а этот текст становится всё длиннее и полнее."
+msgstr ""
 
-#: ../../txts/editor_readme.lua:19
+#: ../../txts/editor_readme.lua:14
 msgid "Please have a look at our enduser manuals on our wiki pages at: %s"
 msgstr "Пожалуйста, ознакомьтесь с руководством пользователя на страницах вики по адресу: %s"
 
-#: ../../txts/editor_readme.lua:20
+#: ../../txts/editor_readme.lua:15
 msgid ""
 "Those pages might be more complete and up to date than this file, and you "
 "will also find a short tutorial about building a map there."
 msgstr "Эти страницы могут более подробными и актуальными чем этот файл и, кроме того, там вы найдёте краткое руководство по созданию карт."
 
-#: ../../txts/editor_readme.lua:22
+#: ../../txts/editor_readme.lua:17
 msgid "Keyboard shortcuts"
 msgstr "Горячие клавиши"
 
 #. TRANSLATORS: This is a hotkey
-#: ../../txts/editor_readme.lua:26
+#: ../../txts/editor_readme.lua:21
 msgid "SPACE:"
 msgstr "ПРОБЕЛ:"
 
-#: ../../txts/editor_readme.lua:26
+#: ../../txts/editor_readme.lua:21
 msgid "toggles if building spaces are shown"
 msgstr "включить/выключить обозначение мест для строительства"
 
 #. TRANSLATORS: This is a hotkey
-#: ../../txts/editor_readme.lua:28
+#: ../../txts/editor_readme.lua:23
 msgid "C:"
 msgstr "C:"
 
-#: ../../txts/editor_readme.lua:28
+#: ../../txts/editor_readme.lua:23
 msgid "toggles census"
 msgstr "показывать наименования"
 
 #. TRANSLATORS: This is a hotkey
-#: ../../txts/editor_readme.lua:30
+#: ../../txts/editor_readme.lua:25
 msgid "F:"
 msgstr "F:"
 
-#: ../../txts/editor_readme.lua:30
+#: ../../txts/editor_readme.lua:25
 msgid "toggles fullscreen"
 msgstr "полноэкранный режим"
 
 #. TRANSLATORS: This is a hotkey
-#: ../../txts/editor_readme.lua:32
+#: ../../txts/editor_readme.lua:27
 msgid "H:"
 msgstr "H:"
 
-#: ../../txts/editor_readme.lua:32
+#: ../../txts/editor_readme.lua:27
 msgid "toggles main menu"
 msgstr "показать главное меню"
 
 #. TRANSLATORS: This is a hotkey
-#: ../../txts/editor_readme.lua:34
+#: ../../txts/editor_readme.lua:29
 msgid "M:"
 msgstr "M:"
 
-#: ../../txts/editor_readme.lua:34
+#: ../../txts/editor_readme.lua:29
 msgid "toggles minimap"
 msgstr "переключить миникарту"
 
 #. TRANSLATORS: This is a hotkey
-#: ../../txts/editor_readme.lua:36
+#: ../../txts/editor_readme.lua:31
 msgid "P:"
 msgstr "P:"
 
-#: ../../txts/editor_readme.lua:36
+#: ../../txts/editor_readme.lua:31
 msgid "toggles player menu"
 msgstr "показать меню игрока"
 
 #. TRANSLATORS: This is a hotkey
-#: ../../txts/editor_readme.lua:38
+#: ../../txts/editor_readme.lua:33
 msgid "T:"
 msgstr "T:"
 
-#: ../../txts/editor_readme.lua:38
+#: ../../txts/editor_readme.lua:33
 msgid "toggles tools menu"
 msgstr "показать меню инструментов"
 
 #. TRANSLATORS: This is a hotkey
-#: ../../txts/editor_readme.lua:40
+#: ../../txts/editor_readme.lua:35
 msgid "I:"
 msgstr "I:"
 
-#: ../../txts/editor_readme.lua:40
+#: ../../txts/editor_readme.lua:35
 msgid "activates information tool"
 msgstr "активировать окно информации"
 
 #. TRANSLATORS: This is a hotkey
-#: ../../txts/editor_readme.lua:42
+#: ../../txts/editor_readme.lua:37
 msgid "CTRL+L:"
 msgstr "CTRL+L:"
 
-#: ../../txts/editor_readme.lua:42
+#: ../../txts/editor_readme.lua:37
 msgid "load map"
 msgstr "Загрузить карту"
 
 #. TRANSLATORS: This is a hotkey
-#: ../../txts/editor_readme.lua:44
+#: ../../txts/editor_readme.lua:39
 msgid "CTRL+S:"
 msgstr "CTRL+S:"
 
-#: ../../txts/editor_readme.lua:44
+#: ../../txts/editor_readme.lua:39
 msgid "save map"
 msgstr "Сохранить Карту"
 
 #. TRANSLATORS: This is a hotkey
-#: ../../txts/editor_readme.lua:46
+#: ../../txts/editor_readme.lua:41
 msgid "1-0:"
 msgstr "1-0:"
 
-#: ../../txts/editor_readme.lua:46
+#: ../../txts/editor_readme.lua:41
 msgid "changes tool size"
 msgstr "изменить размер инструмента"
 
 #. TRANSLATORS: This is a hotkey
-#: ../../txts/editor_readme.lua:48
+#: ../../txts/editor_readme.lua:43
 msgid "SHIFT (Hold):"
 msgstr "SHIFT (удерживая):"
 
-#: ../../txts/editor_readme.lua:48
+#: ../../txts/editor_readme.lua:43
 msgid "selects first alternative tool while pressed"
 msgstr "выбирает первый альтернативный инструмент"
 
 #. TRANSLATORS: This is a hotkey
-#: ../../txts/editor_readme.lua:50
+#: ../../txts/editor_readme.lua:45
 msgid "ALT (Hold):"
 msgstr "ALT (удерживая):"
 
-#: ../../txts/editor_readme.lua:50
+#: ../../txts/editor_readme.lua:45
 msgid "Selects second alternative tool while pressed"
 msgstr "выбирает второй альтернативный инструмент"
 
