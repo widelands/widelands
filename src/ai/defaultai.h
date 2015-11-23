@@ -303,6 +303,8 @@ private:
 	uint32_t msites_in_constr() const;
 	uint32_t msites_built() const;
 
+	int32_t limit_cnt_target(int32_t, int32_t);
+
 	std::vector<WareObserver> wares;
 
 	uint32_t next_ai_think_;

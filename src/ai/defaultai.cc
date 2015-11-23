@@ -437,6 +437,7 @@ void DefaultAI::late_initialization() {
 		bo.cnt_built_ = 0;
 		bo.cnt_under_construction_ = 0;
 		bo.cnt_target_ = 1;  // default for everything
+		bo.cnt_limit_by_aimode_ = std::numeric_limits<int32_t>::max();
 		bo.stocklevel_ = 0;
 		bo.stocklevel_time = 0;
 		bo.last_dismantle_time_ = 0;
@@ -480,6 +481,22 @@ void DefaultAI::late_initialization() {
 		} else {
 			bo.plants_trees_ = false;
 		}
+
+	// Is total count of this building limited by AI mode?
+	if (type_ == DEFENSIVE && bh.get_weak_ai_limit() >= 0) {
+		bo.cnt_limit_by_aimode_ = bh.get_weak_ai_limit();
+		log (" %d: AI defensive mode: applying limit %d building(s) for %s\n",
+		player_number(),
+		bo.cnt_limit_by_aimode_,
+		bo.name);
+	}
+	if (type_ == NORMAL && bh.get_normal_ai_limit() >= 0) {
+		bo.cnt_limit_by_aimode_ = bh.get_normal_ai_limit();
+		log (" %d: AI normal mode: applying limit %d building(s) for %s\n",
+		player_number(),
+		bo.cnt_limit_by_aimode_,
+		bo.name);
+	}
 
 		// Read all interesting data from ware producing buildings
 		if (bld.type() == MapObjectType::PRODUCTIONSITE) {
@@ -1595,11 +1612,21 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 					throw wexception("AI: Max presciousness must not be <= 0 for building: %s",
 										  bo.desc->name().c_str());
 				}
-			} else {
-				// For other situations we set max_needed_preciousness_ to zero
+			} else if (bo.new_building_ == BuildingNecessity::kForbidden) {
 				bo.max_needed_preciousness_ = 0;
+			} else {
+				// For other situations we make sure max_needed_preciousness_ is zero
+				assert (bo.max_needed_preciousness_ == 0);
 			}
 
+			// Positive max_needed_preciousness_ says a building type is needed
+			// here we increase or reset the counter
+			// The counter is added to score when considering new building
+			if (bo.max_needed_preciousness_ > 0) {
+				bo.new_building_overdue_ += 1;
+			} else {
+				bo.new_building_overdue_ = 0;
+			}
 
 			// Here we consider a time how long a building needed
 			// We calculate primary_priority used later in construct_building(),
@@ -1643,7 +1670,13 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 
 		} else if (bo.type == BuildingObserver::MILITARYSITE) {
 			bo.new_building_ = check_building_necessity(bo.desc->get_size(), gametime);
-		} else if  (bo.type == BuildingObserver::TRAININGSITE && bo.build_material_shortage_) {
+		} else if  (bo.type == BuildingObserver::TRAININGSITE
+			&& // if we dont have enough build material or are above target of current ai mode
+			(bo.build_material_shortage_
+			||
+			bo.total_count() - bo.unconnected_count_ >= bo.cnt_limit_by_aimode_)) {
+					bo.new_building_ = BuildingNecessity::kNotNeeded;
+		} else if (bo.total_count() - bo.unconnected_count_ >= bo.cnt_limit_by_aimode_) {
 			bo.new_building_ = BuildingNecessity::kNotNeeded;
 		} else {
 			bo.new_building_ = BuildingNecessity::kAllowed;
@@ -1687,7 +1720,8 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 			}
 
 			if (bo.new_building_ == BuildingNecessity::kNotNeeded ||
-				bo.new_building_ == BuildingNecessity::kNeededPending) {
+				bo.new_building_ == BuildingNecessity::kNeededPending ||
+				bo.new_building_ == BuildingNecessity::kForbidden) {
 				continue;
 				}
 
@@ -3005,12 +3039,14 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 
 	const DescriptionIndex enhancement = site.site->descr().enhancement();
 	if (connected_to_wh && enhancement != INVALID_INDEX &&
-		(site.bo->cnt_built_ - site.bo->unoccupied_count_ > 1 ||
-		((site.bo->upgrade_substitutes_ || site.bo->upgrade_extends_) &&
+		// if upgrade does not subsitute, we need to have two buildings at least
+		((site.bo->cnt_built_ - site.bo->unoccupied_count_ > 1 && site.bo->upgrade_extends_)
+		||
+		site.bo->upgrade_substitutes_) &&
 	    gametime > 45 * 60 * 1000 &&
-	    gametime > site.built_time_ + 20 * 60 * 1000))) {
+	    gametime > site.built_time_ + 20 * 60 * 1000) {
 
-		DescriptionIndex enbld = INVALID_INDEX;  // to get rid of this
+		//DescriptionIndex enbld = INVALID_INDEX;  // to get rid of this
 
 		// Only enhance buildings that are allowed (scenario mode)
 		// do not do decisions too fast
@@ -3018,9 +3054,9 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 
 			const BuildingDescr& bld = *tribe_->get_building_descr(enhancement);
 			BuildingObserver& en_bo = get_building_observer(bld.name().c_str());
-			BuildingObserver* bestbld = nullptr;
+			bool doing_upgrade = false;
 
-			if (gametime - en_bo.construction_decision_time_ >= kBuildingMinInterval &&
+			if (gametime - en_bo.construction_decision_time_ >= 10 * 60 * 1000 &&
 			    (en_bo.cnt_under_construction_ + en_bo.unoccupied_count_) == 0) {
 
 				// don't upgrade without workers
@@ -3028,19 +3064,15 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 
 					// forcing first upgrade
 					if (en_bo.total_count() == 0) {
-						enbld = enhancement;
-						bestbld = &en_bo;
+						doing_upgrade = true;
 					}
 
 					// if the decision was not made yet, consider normal upgrade
-					if (enbld == INVALID_INDEX) {
+					if (!doing_upgrade) {
 						// compare the performance %
 						if (static_cast<int32_t>(en_bo.current_stats_) -
-						       static_cast<int32_t>(site.bo->current_stats_) >
-						    20) {
-
-							enbld = enhancement;
-							bestbld = &en_bo;
+						    static_cast<int32_t>(site.bo->current_stats_) > 20) {
+								doing_upgrade = true;
 						}
 
 						if ((static_cast<int32_t>(en_bo.current_stats_) > 85 &&
@@ -3048,8 +3080,12 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 						    (static_cast<int32_t>(en_bo.current_stats_) > 50 &&
 						     en_bo.total_count() * 4 < site.bo->total_count())) {
 
-							enbld = enhancement;
-							bestbld = &en_bo;
+								doing_upgrade = true;
+						}
+
+						// Dont forget about limitation of number of buildings
+						if (en_bo.cnt_limit_by_aimode_ <= en_bo.total_count() - en_bo.unconnected_count_) {
+							doing_upgrade = false;
 						}
 					}
 				}
@@ -3057,10 +3093,9 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 
 			// Enhance if enhanced building is useful
 			// additional: we dont want to lose the old building
-			if (enbld != INVALID_INDEX) {
-				game().send_player_enhance_building(*site.site, enbld);
-				bestbld->construction_decision_time_ = gametime;
-
+			if (doing_upgrade) {
+				game().send_player_enhance_building(*site.site, enhancement);
+				en_bo.construction_decision_time_ = gametime;
 				return true;
 			}
 		}
@@ -3636,19 +3671,23 @@ bool DefaultAI::check_mines_(uint32_t const gametime) {
 	const BuildingDescr& bld = *tribe_->get_building_descr(enhancement);
 	BuildingObserver& en_bo = get_building_observer(bld.name().c_str());
 
-	// if it is too soon for enhancement
-	if (gametime - en_bo.construction_decision_time_ >= kBuildingMinInterval) {
-		// now verify that there are enough workers
-		if (site.site->has_workers(enhancement, game())) {  // enhancing
-			game().send_player_enhance_building(*site.site, enhancement);
-			if (site.bo->max_needed_preciousness_ == 0) {
-				assert (mines_per_type[site.bo->mines_].total_count() <= minimal_mines_count);
+	// Make sure we do not exceed limit given by AI mode
+	if (en_bo.cnt_limit_by_aimode_ >= en_bo.total_count() - en_bo.unconnected_count_) {
+
+		// if it is too soon for enhancement
+		if (gametime - en_bo.construction_decision_time_ >= kBuildingMinInterval) {
+			// now verify that there are enough workers
+			if (site.site->has_workers(enhancement, game())) {  // enhancing
+				game().send_player_enhance_building(*site.site, enhancement);
+				if (site.bo->max_needed_preciousness_ == 0) {
+					assert (mines_per_type[site.bo->mines_].total_count() <= minimal_mines_count);
+				}
+				if (mines_per_type[site.bo->mines_].total_count() > minimal_mines_count) {
+					assert(site.bo->max_needed_preciousness_ > 0);
+				}
+				en_bo.construction_decision_time_ = gametime;
+				changed = true;
 			}
-			if (mines_per_type[site.bo->mines_].total_count() > minimal_mines_count) {
-				assert(site.bo->max_needed_preciousness_ > 0);
-			}
-			en_bo.construction_decision_time_ = gametime;
-			changed = true;
 		}
 	}
 
@@ -3679,6 +3718,13 @@ uint32_t DefaultAI::get_stocklevel_by_hint(size_t hintoutput) {
 BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 										const PerfEvaluation purpose,
 										const uint32_t gametime) {
+
+	// Very first we finds if AI is allowed to build such building due to its mode
+	if (purpose == PerfEvaluation::kForConstruction
+		&&
+		bo.total_count() - bo.unconnected_count_ >= bo.cnt_limit_by_aimode_) {
+			return BuildingNecessity::kForbidden;
+		}
 
 	// First we iterate over outputs of building, count warehoused stock
 	// and deciding if we have enough on stock (in warehouses)
@@ -3712,15 +3758,6 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 		assert (bo.max_preciousness_ > 0);
 	}
 
-	// positive max_needed_preciousness_ says a building type is needed
-	// here we increase of reset the counter
-	// the counter is added to score when considering new building
-	if (bo.max_needed_preciousness_ > 0) {
-		bo.new_building_overdue_ += 1;
-	} else {
-		bo.new_building_overdue_ = 0;
-	}
-
 	// This flag is to be used when buildig is forced. AI will not build another building when
 	// a substitution exists. F.e. mines or pairs like tavern-inn
 	// To skip unnecessary calculation, we calculate this only if we have 0 count of the buildings
@@ -3737,6 +3774,28 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 		if (mines_per_type[bo.mines_].in_construction + mines_per_type[bo.mines_].finished > 0) {
 			has_substitution_building = true;
 		}
+	}
+
+	// Some buildings are upgraded to ones that does not produce current output, so we need to have
+	// two of current buildings to have at least one left after one of them is upgraded
+	// Logic is: after 30th minute we need second building if there is no enhanced building yet,
+	// and after 90th minute we want second building unconditionally
+	bool needs_second_for_upgrade = false;
+	if (gametime > 30 * 60 * 1000 &&
+		bo.cnt_built_ == 1 &&
+		bo.cnt_under_construction_ == 0 &&
+		bo.upgrade_extends_ &&
+		!bo.upgrade_substitutes_ &&
+		bo.type == BuildingObserver::PRODUCTIONSITE) {
+			const DescriptionIndex enhancement = bo.desc->enhancement();
+			BuildingObserver& en_bo
+				= get_building_observer(tribe_->get_building_descr(enhancement)->name().c_str());
+			if ((gametime > 30 * 60 * 1000 && en_bo.total_count() == 0) ||
+			 	gametime > 90 * 60 * 1000) {
+					// We fake this
+					bo.max_needed_preciousness_ = bo.max_preciousness_;
+					needs_second_for_upgrade = true;
+			}
 	}
 
 	// This function is going to say if a building is needed. But there is a 'new_buildings_stop_'
@@ -3785,24 +3844,27 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			bo.max_needed_preciousness_ = bo.max_preciousness_;
 			return BuildingNecessity::kForced;
 		} else if (bo.prohibited_till_ > gametime) {
-			return BuildingNecessity::kNotNeeded;
+			return BuildingNecessity::kForbidden;
 		} else if (bo.is_hunter_ || bo.is_fisher_) {
 
 			if (bo.max_needed_preciousness_ == 0) {
 				return BuildingNecessity::kNotNeeded;
 			} else if (bo.cnt_under_construction_ + bo.unoccupied_count_ > 0) {
-				return BuildingNecessity::kNotNeeded;
+				return BuildingNecessity::kForbidden;
 			} else if (bo.total_count() > 0 && new_buildings_stop_) {
-				return BuildingNecessity::kNotNeeded;
+				return BuildingNecessity::kForbidden;
 			} else {
 				return BuildingNecessity::kNeeded;
 			}
 		} else if (bo.need_trees_) {
 			if (bo.total_count() > 1 && (bo.cnt_under_construction_ + bo.unoccupied_count_ > 0)) {
-				return BuildingNecessity::kNotNeeded;
+				return BuildingNecessity::kForbidden;
 			}
 			bo.cnt_target_ =
 					   3 + static_cast<int32_t>(mines_.size() + productionsites.size()) / 20;
+
+			// adjusting/decreasing based on cnt_limit_by_aimode_
+			bo.cnt_target_ = limit_cnt_target(bo.cnt_target_, bo.cnt_limit_by_aimode_);
 
 			// for case the wood is not needed yet, to avoid inconsistency later on
 			bo.max_needed_preciousness_ = bo.max_preciousness_;
@@ -3817,17 +3879,21 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			bo.cnt_target_ =
 				   2 +
 				   static_cast<int32_t>(mines_.size() + productionsites.size()) / 40;
+
+			// adjusting/decreasing based on cnt_limit_by_aimode_
+			bo.cnt_target_ = limit_cnt_target(bo.cnt_target_, bo.cnt_limit_by_aimode_);
+
 			if (wood_policy_ != WoodPolicy::kAllowRangers) {
-				return BuildingNecessity::kNotNeeded;
+				return BuildingNecessity::kForbidden;
 			}
 			// 150 corresponds to 15 trees
 			if (trees_around_cutters_ < 150) {
 				bo.cnt_target_ *= 4;
 			}
 			if (bo.total_count() > 1 && (bo.cnt_under_construction_ + bo.unoccupied_count_ > 0)) {
-				return BuildingNecessity::kNotNeeded;
+				return BuildingNecessity::kForbidden;
 			} else if (bo.total_count() > bo.cnt_target_) {
-				return BuildingNecessity::kNotNeeded;
+				return BuildingNecessity::kForbidden;
 			}
 			return BuildingNecessity::kNeeded;
 		} else if (bo.need_rocks_ && bo.cnt_under_construction_ + bo.unoccupied_count_ == 0) {
@@ -3836,11 +3902,11 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 		} else if (bo.production_hint_ >= 0 && bo.cnt_under_construction_ + bo.unoccupied_count_ == 0) {
 			return BuildingNecessity::kAllowed;
 		} else if (bo.cnt_under_construction_ + bo.unoccupied_count_ > 0 && bo.max_needed_preciousness_ < 10) {
-			return BuildingNecessity::kNotNeeded;
+			return BuildingNecessity::kForbidden;
 		} else if (bo.cnt_under_construction_ + bo.unoccupied_count_ > 0 && gametime < 30 * 60 * 1000) {
-			return BuildingNecessity::kNotNeeded;
+			return BuildingNecessity::kForbidden;
 		} else if (bo.cnt_under_construction_ + bo.unoccupied_count_ > 1) {
-			return BuildingNecessity::kNotNeeded; // for preciousness>=10 and after 30 min
+			return BuildingNecessity::kForbidden; // for preciousness>=10 and after 30 min
 		} else if (bo.type == BuildingObserver::MINE) {
 			if ((mines_per_type[bo.mines_].in_construction + mines_per_type[bo.mines_].finished) == 0) {
 				// unless a mine is prohibited, we want to have at least one of the kind
@@ -3855,8 +3921,8 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			if (bo.max_needed_preciousness_ == 0) {
 				return BuildingNecessity::kNotNeeded;
 			}
-			if (bo.total_count() - bo.unconnected_count_ >= 1 || bo.current_stats_ < 20) {
-				return BuildingNecessity::kNotNeeded;
+			if (bo.current_stats_ < 40) {
+				return BuildingNecessity::kForbidden;
 			}
 			return needed_type;
 		} if (bo.max_needed_preciousness_ > 0) {
@@ -3875,15 +3941,17 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 				return needed_type;
 			} else if (bo.current_stats_ > 10 + 70 / bo.outputs_.size()) {
 				return needed_type;
+			} else if (needs_second_for_upgrade) {
+				return needed_type;
 			} else {
-				return BuildingNecessity::kNotNeeded;
+				return BuildingNecessity::kForbidden;
 			}
 		} else if (bo.is_shipyard_) {
 			return BuildingNecessity::kAllowed;
 		} else  if (bo.max_needed_preciousness_ == 0) {
 			return BuildingNecessity::kNotNeeded;
 		} else {
-			return BuildingNecessity::kNotNeeded;
+			return BuildingNecessity::kForbidden;
 		}
 	} else if (purpose == PerfEvaluation::kForDismantle) { // now for dismantling
 		// never dismantle last building (a care should be taken elsewhere)
@@ -4035,6 +4103,8 @@ bool DefaultAI::check_trainingsites(uint32_t gametime) {
 
 	TrainingSite* ts = trainingsites.front().site;
 	TrainingSiteObserver& tso = trainingsites.front();
+
+	assert(tso.bo->total_count() <= tso.bo->cnt_limit_by_aimode_);
 
 	const DescriptionIndex enhancement = ts->descr().enhancement();
 
@@ -5568,4 +5638,23 @@ template<typename T> void DefaultAI::check_range(T value, T upper_range, const c
 		value_name,
 		value);
 	}
+}
+
+int32_t DefaultAI::limit_cnt_target(const int32_t current_cnt_target, const int32_t ai_limit) {
+
+	if (ai_limit >= std::numeric_limits<int32_t>::max() - 1) {
+		// = ai limit is not set
+		return current_cnt_target;
+	}
+
+	int32_t new_target = current_cnt_target;
+
+	if (current_cnt_target > (ai_limit + 1) / 2) {
+		new_target = (ai_limit + 1) / 2;
+	}
+	assert (new_target * 2 >= ai_limit);
+	assert (new_target > 0);
+	assert (new_target <= ai_limit);
+
+	return new_target;
 }
