@@ -92,8 +92,8 @@ private:
 	uint32_t const              hmargin_;
 	uint32_t const              padding_;
 	uint32_t const              space_;
-	uint32_t const              column_width_;
 	uint32_t const              tab_panel_width_;
+	uint32_t const              column_width_;
 	uint32_t const              tab_panel_y_;
 
 	UI::Textarea                title_;
@@ -102,11 +102,10 @@ private:
 	// UI elements
 	UI::TabPanel tabs_;
 	UI::Box box_interface_;
-	UI::Box box_interface_column1_;
-	UI::Box box_interface_column2_;
 	UI::Box box_sound_;
 	UI::Box box_saving_;
 	UI::Box box_gamecontrol_;
+	UI::Box box_language_;
 
 	// Interface options
 	UI::Textarea                label_resolution_;
@@ -122,9 +121,6 @@ private:
 	UI::Textarea                label_snap_dis_border_;
 	UI::SpinBox                 sb_dis_border_;
 	UI::Checkbox                transparent_chat_;
-
-	UI::Textarea                label_language_;
-	UI::Listselect<std::string> language_list_;
 
 	// Sound options
 	UI::Checkbox                music_;
@@ -143,6 +139,10 @@ private:
 	UI::Checkbox                single_watchwin_;
 	UI::Checkbox                auto_roadbuild_mode_;
 	UI::Checkbox                show_workarea_preview_;
+
+	// Language
+	UI::Textarea                label_language_;
+	UI::Listselect<std::string> language_list_;
 
 	OptionsCtrl::OptionsStruct  os;
 

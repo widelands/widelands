@@ -104,8 +104,8 @@ FullscreenMenuOptions::FullscreenMenuOptions
 	hmargin_ (get_w() * 19 / 200),
 	padding_ (10),
 	space_   (25),
-	column_width_((get_w() - 2 * hmargin_ - space_) / 2),
 	tab_panel_width_(get_inner_w() - 2 * hmargin_),
+	column_width_(tab_panel_width_ - padding_),
 	tab_panel_y_(get_h() * 14 / 100),
 
 	// Title
@@ -135,51 +135,46 @@ FullscreenMenuOptions::FullscreenMenuOptions
 			g_gr->images().get("pics/but1.png"),
 			UI::TabPanel::Type::kBorder),
 
-	box_interface_(&tabs_, 0, 0, UI::Box::Horizontal, 0, 0, space_ / 2),
-	box_interface_column1_(&box_interface_, 0, 0, UI::Box::Vertical, 0, 0, padding_),
-	box_interface_column2_(&box_interface_, 0, 0, UI::Box::Vertical),
+	box_interface_(&tabs_, 0, 0, UI::Box::Vertical, 0, 0, padding_),
 	box_sound_(&tabs_, 0, 0, UI::Box::Vertical, 0, 0, padding_),
 	box_saving_(&tabs_, 0, 0, UI::Box::Vertical, 0, 0, padding_),
 	box_gamecontrol_(&tabs_, 0, 0, UI::Box::Vertical, 0, 0, padding_),
+	box_language_(&tabs_, 0, 0, UI::Box::Vertical, 0, 0, padding_),
 
 	// Interface options
-	label_resolution_(&box_interface_column1_, 0, 0, _("In-game resolution"), UI::Align_Left),
-	resolution_list_(&box_interface_column1_, 0, 0, column_width_, 95, UI::Align_Left, true),
+	label_resolution_(&box_interface_, _("In-game resolution"), UI::Align_Left),
+	resolution_list_(&box_interface_, 0, 0, column_width_ / 2, 80, UI::Align_Left, true),
 
-	fullscreen_ (&box_interface_column1_, Point(0, 0), _("Fullscreen"), "", column_width_),
-	inputgrab_ (&box_interface_column1_, Point(0, 0), _("Grab Input"), "", column_width_),
+	fullscreen_ (&box_interface_, Point(0, 0), _("Fullscreen"), "", column_width_),
+	inputgrab_ (&box_interface_, Point(0, 0), _("Grab Input"), "", column_width_),
 
-	label_maxfps_(&box_interface_column1_, 0, 0, _("Maximum FPS:"), UI::Align_VCenter),
-	sb_maxfps_(&box_interface_column1_, 0, 0, 240, opt.maxfps, 0, 99, ""),
+	label_maxfps_(&box_interface_, _("Maximum FPS:"), UI::Align_VCenter),
+	sb_maxfps_(&box_interface_, 0, 0, 240, opt.maxfps, 0, 99, ""),
 
-	snap_win_overlap_only_(&box_interface_column1_, Point(0, 0), _("Snap windows only when overlapping"),
+	snap_win_overlap_only_(&box_interface_, Point(0, 0), _("Snap windows only when overlapping"),
 								  "", column_width_),
-	dock_windows_to_edges_(&box_interface_column1_, Point(0, 0), _("Dock windows to edges"),
+	dock_windows_to_edges_(&box_interface_, Point(0, 0), _("Dock windows to edges"),
 								  "", column_width_),
 
-	label_snap_dis_panel_(&box_interface_column1_, 0, 0, _("Distance for windows to snap to other panels:")),
+	label_snap_dis_panel_(&box_interface_, 0, 0, 20, column_width_,
+								 _("Distance for windows to snap to other panels:")),
 	sb_dis_panel_
-			(&box_interface_column1_, 0, 0, 240,
+			(&box_interface_, 0, 0, 240,
 			 opt.panel_snap_distance, 0, 99, ngettext("pixel", "pixels", opt.panel_snap_distance)),
 
-	label_snap_dis_border_(&box_interface_column1_, 0, 0, _("Distance for windows to snap to borders:")),
+	label_snap_dis_border_(&box_interface_, 0, 0, _("Distance for windows to snap to borders:")),
 	sb_dis_border_
-			(&box_interface_column1_, 0, 0, 240,
+			(&box_interface_, 0, 0, 240,
 			 opt.border_snap_distance, 0, 99, ngettext("pixel", "pixels", opt.border_snap_distance)),
 
-	transparent_chat_(&box_interface_column1_, Point(0, 0), _("Show in-game chat with transparent background"),
+	transparent_chat_(&box_interface_, Point(0, 0), _("Show in-game chat with transparent background"),
 							"", column_width_),
 
-	label_language_(&box_interface_column2_, 0, 0, _("Language"), UI::Align_Left),
-	language_list_(&box_interface_column2_, 0, 0, column_width_, resolution_list_.get_h(),
-						UI::Align_Left, true),
-
-
 	// Sound options
-	music_ (&box_sound_, Point(0, 0), _("Enable Music"), "", tab_panel_width_ - padding_),
-	fx_ (&box_sound_, Point(0, 0), _("Enable Sound Effects"), "", tab_panel_width_ - padding_),
+	music_ (&box_sound_, Point(0, 0), _("Enable Music"), "", column_width_),
+	fx_ (&box_sound_, Point(0, 0), _("Enable Sound Effects"), "", column_width_),
 	message_sound_(&box_sound_, Point(0, 0), _("Play a sound at message arrival"),
-						"", tab_panel_width_ - padding_),
+						"", column_width_),
 
 	// Saving options
 	sb_autosave_
@@ -188,10 +183,9 @@ FullscreenMenuOptions::FullscreenMenuOptions
 		 /** TRANSLATORS: This will have a number added in front of it */
 		 opt.autosave / 60, 0, 100, ngettext("minute", "minutes", opt.autosave / 60),
 		 g_gr->images().get("pics/but3.png"), true),
+
 	label_autosave_
-		(&box_saving_, 0, 0,
-		 get_w() - sb_autosave_.get_w() - 2 * hmargin_,
-		 dock_windows_to_edges_.get_h(),
+		(&box_saving_, 0, 0, tab_panel_width_, sb_autosave_.get_h(),
 		 _("Save game automatically every"), UI::Align_VCenter),
 
 	sb_remove_replays_
@@ -206,9 +200,9 @@ FullscreenMenuOptions::FullscreenMenuOptions
 		 dock_windows_to_edges_.get_h(),
 		 _("Remove replays older than:"), UI::Align_VCenter),
 	nozip_(&box_saving_, Point(0, 0), _("Do not zip widelands data files (maps, replays and savegames)"),
-			 "", tab_panel_width_ - padding_),
+			 "", column_width_),
 	remove_syncstreams_(&box_saving_, Point(0, 0), _("Remove Syncstream dumps on startup"),
-							  "", tab_panel_width_ - padding_),
+							  "", column_width_),
 
 	// Game Control options
 	/** TRANSLATORS: A watchwindow is a window where you keep watching an object or a map region,*/
@@ -217,12 +211,19 @@ FullscreenMenuOptions::FullscreenMenuOptions
 	auto_roadbuild_mode_(&box_gamecontrol_, Point(0, 0), _("Start building road after placing a flag")),
 	show_workarea_preview_(&box_gamecontrol_, Point(0, 0), _("Show buildings area preview")),
 
+	// Language
+	label_language_(&box_language_, _("Language"), UI::Align_Left),
+	language_list_(&box_language_, 0, 0, column_width_ / 2,
+						get_inner_h() - tab_panel_y_ - buth_ - hmargin_ - 5 * padding_,
+						UI::Align_Left, true),
+
 	os(opt)
 {
 	tabs_.add("options_interface", _("Interface"), &box_interface_, "");
 	tabs_.add("options_sound", _("Sound"), &box_sound_, "");
 	tabs_.add("options_saving", _("Saving"), &box_saving_, "");
 	tabs_.add("options_gamecontrol", _("Game Control"), &box_gamecontrol_, "");
+	tabs_.add("options_language", _("Language"), &box_language_, "");
 
 	tabs_.set_pos(Point(hmargin_, tab_panel_y_));
 
@@ -230,30 +231,22 @@ FullscreenMenuOptions::FullscreenMenuOptions
 	box_sound_.set_size(tabs_.get_inner_w(), tabs_.get_inner_h());
 	box_saving_.set_size(tabs_.get_inner_w(), tabs_.get_inner_h());
 	box_gamecontrol_.set_size(tabs_.get_inner_w(), tabs_.get_inner_h());
+	box_language_.set_size(tabs_.get_inner_w(), tabs_.get_inner_h());
 
 	// Interface
-	box_interface_column1_.set_size(box_interface_.get_inner_w() / 2, box_interface_.get_inner_h());
-	box_interface_column2_.set_size(box_interface_.get_inner_w() / 2, box_interface_.get_inner_h());
-
-	box_interface_.add(&box_interface_column1_, UI::Align_Left);
-	box_interface_.add(&box_interface_column2_, UI::Align_Left);
-
-	box_interface_column1_.add(&label_resolution_, UI::Align_Left);
-	box_interface_column1_.add(&resolution_list_, UI::Align_Left);
-	box_interface_column1_.add(&fullscreen_, UI::Align_Left);
-	box_interface_column1_.add(&inputgrab_, UI::Align_Left);
-	box_interface_column1_.add(&label_maxfps_, UI::Align_Left);
-	box_interface_column1_.add(&sb_maxfps_, UI::Align_Left);
-	box_interface_column1_.add(&snap_win_overlap_only_, UI::Align_Left);
-	box_interface_column1_.add(&dock_windows_to_edges_, UI::Align_Left);
-	box_interface_column1_.add(&label_snap_dis_panel_, UI::Align_Left);
-	box_interface_column1_.add(&sb_dis_panel_, UI::Align_Left);
-	box_interface_column1_.add(&label_snap_dis_border_, UI::Align_Left);
-	box_interface_column1_.add(&sb_dis_border_, UI::Align_Left);
-	box_interface_column1_.add(&transparent_chat_, UI::Align_Left);
-
-	box_interface_column2_.add(&label_language_, UI::Align_Left);
-	box_interface_column2_.add(&language_list_, UI::Align_Left);
+	box_interface_.add(&label_resolution_, UI::Align_Left);
+	box_interface_.add(&resolution_list_, UI::Align_Left);
+	box_interface_.add(&fullscreen_, UI::Align_Left);
+	box_interface_.add(&inputgrab_, UI::Align_Left);
+	box_interface_.add(&label_maxfps_, UI::Align_Left);
+	box_interface_.add(&sb_maxfps_, UI::Align_Left);
+	box_interface_.add(&snap_win_overlap_only_, UI::Align_Left);
+	box_interface_.add(&dock_windows_to_edges_, UI::Align_Left);
+	box_interface_.add(&label_snap_dis_panel_, UI::Align_Left);
+	box_interface_.add(&sb_dis_panel_, UI::Align_Left);
+	box_interface_.add(&label_snap_dis_border_, UI::Align_Left);
+	box_interface_.add(&sb_dis_border_, UI::Align_Left);
+	box_interface_.add(&transparent_chat_, UI::Align_Left);
 
 	// Sound
 	box_sound_.add(&music_, UI::Align_Left);
@@ -272,6 +265,10 @@ FullscreenMenuOptions::FullscreenMenuOptions
 	box_gamecontrol_.add(&single_watchwin_, UI::Align_Left);
 	box_gamecontrol_.add(&auto_roadbuild_mode_, UI::Align_Left);
 	box_gamecontrol_.add(&show_workarea_preview_, UI::Align_Left);
+
+	// Language
+	box_language_.add(&label_language_, UI::Align_Left);
+	box_language_.add(&language_list_, UI::Align_Left);
 
 	cancel_.sigclicked.connect(boost::bind(&FullscreenMenuOptions::clicked_back, this));
 	apply_.sigclicked.connect(boost::bind(&FullscreenMenuOptions::clicked_ok, this));
