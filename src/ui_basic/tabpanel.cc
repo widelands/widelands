@@ -165,19 +165,13 @@ uint32_t TabPanel::add
 	 Panel             * const panel,
 	 const std::string &       tooltip_text)
 {
-	assert(panel);
-	assert(panel->get_parent() == this);
-
-	size_t id = m_tabs.size();
-	int32_t x = id > 0 ? m_tabs[id - 1]->get_x() + m_tabs[id - 1]->get_w() : 0;
 	const Image* pic = UI::g_fh1->render(as_uifont(title));
-	m_tabs.push_back(new Tab(this, id, x, std::max(kTabPanelButtonHeight, pic->width() + 2 * kTabPanelTextMargin), name, title, pic, tooltip_text, panel));
-
-	panel->set_pos(Point(0, kTabPanelButtonHeight + kTabPanelSeparatorHeight));
-	panel->set_visible(id == m_active);
-	update_desired_size();
-
-	return id;
+	return add_tab(std::max(kTabPanelButtonHeight, pic->width() + 2 * kTabPanelTextMargin),
+						name,
+						title,
+						pic,
+						tooltip_text,
+						panel);
 }
 
 /**
@@ -189,12 +183,27 @@ uint32_t TabPanel::add
 	 Panel             * const panel,
 	 const std::string &       tooltip_text)
 {
+	return add_tab(kTabPanelButtonHeight,
+						name,
+						"",
+						pic,
+						tooltip_text,
+						panel);
+}
+
+/** Common adding function for textual and pictorial tabs. */
+uint32_t TabPanel::add_tab(int32_t width,
+									const std::string& name,
+									const std::string& title,
+									const Image* pic,
+									const std::string& tooltip_text,
+									Panel* panel) {
 	assert(panel);
 	assert(panel->get_parent() == this);
 
 	size_t id = m_tabs.size();
 	int32_t x = id > 0 ? m_tabs[id - 1]->get_x() + m_tabs[id - 1]->get_w() : 0;
-	m_tabs.push_back(new Tab(this, id, x, kTabPanelButtonHeight, name, "", pic, tooltip_text, panel));
+	m_tabs.push_back(new Tab(this, id, x, width, name, title, pic, tooltip_text, panel));
 
 	panel->set_pos(Point(0, kTabPanelButtonHeight + kTabPanelSeparatorHeight));
 	panel->set_visible(id == m_active);
@@ -257,9 +266,10 @@ void TabPanel::draw(RenderTarget & dst)
 
 	// draw the buttons
 	int32_t x;
+	int tab_width;
 	for (size_t idx = 0; idx < m_tabs.size(); ++idx) {
-		int tab_width = m_tabs[idx]->get_w();
 		x = m_tabs[idx]->get_x();
+		tab_width = m_tabs[idx]->get_w();
 
 		if (m_highlight == idx) {
 			dst.brighten_rect(Rect(Point(x, 0), tab_width, kTabPanelButtonHeight), MOUSE_OVER_BRIGHT_FACTOR);
@@ -333,7 +343,7 @@ void TabPanel::draw(RenderTarget & dst)
 	// draw the remaining separator
 	assert(x <= get_w());
 	dst.brighten_rect
-		(Rect(Point(x, kTabPanelButtonHeight - 2), get_w() - x, 2),
+		(Rect(Point(x + tab_width, kTabPanelButtonHeight - 2), get_w() - x, 2),
 		 2 * BUTTON_EDGE_BRIGHT_FACTOR);
 }
 

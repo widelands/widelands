@@ -109,6 +109,14 @@ protected:
 	void update_desired_size() override;
 
 private:
+	// Common adding function for textual and pictorial tabs
+	uint32_t add_tab(int32_t width,
+						  const std::string& name,
+						  const std::string& title,
+						  const Image* pic,
+						  const std::string& tooltip,
+						  Panel* panel);
+
 	// Drawing and event handlers
 	void draw(RenderTarget &) override;
 
