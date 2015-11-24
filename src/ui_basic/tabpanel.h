@@ -54,13 +54,13 @@ private:
 	// Leave handling the mouse move to the TabPanel.
 	bool handle_mousemove(uint8_t, int32_t, int32_t, int32_t, int32_t) override {return false;}
 
-	TabPanel * m_parent;
-	uint32_t    m_id;
+	TabPanel* parent;
+	uint32_t id;
 
 	const Image* pic;
 	std::string title;
 	std::string tooltip;
-	Panel     * panel;
+	Panel* panel;
 };
 
 /**
@@ -109,7 +109,7 @@ struct TabPanel : public Panel {
 	const TabList & tabs();
 	void activate(uint32_t idx);
 	void activate(const std::string &);
-	uint32_t active() {return m_active;}
+	uint32_t active() {return active_;}
 
 protected:
 	void layout() override;
@@ -122,7 +122,7 @@ private:
 						  const std::string& title,
 						  const Image* pic,
 						  const std::string& tooltip,
-						  Panel* panel);
+						  Panel* contents);
 
 	// Drawing and event handlers
 	void draw(RenderTarget &) override;
@@ -135,12 +135,12 @@ private:
 
 	size_t find_tab(int32_t x, int32_t y) const;
 
-	TabList          m_tabs;
-	size_t           m_active;         ///< index of the currently active tab
-	size_t           m_highlight;      ///< index of the highlighted button
+	TabList          tabs_;
+	size_t           active_;         ///< index of the currently active tab
+	size_t           highlight_;      ///< index of the highlighted button
 
-	const Image* m_pic_background; ///< picture used to draw background
-	TabPanel::Type border_type_;
+	const Image*     pic_background_; ///< picture used to draw background
+	TabPanel::Type   border_type_;    ///< whether there will be a border around the panels.
 };
 }
 
