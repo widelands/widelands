@@ -120,9 +120,12 @@ void TabPanel::layout()
 		Panel * const panel = m_tabs[m_active]->panel;
 		uint32_t h = get_h();
 
-		// NOCOM fix for border
 		// avoid excessive craziness in case there is a wraparound
 		h = std::min(h, h - (kTabPanelButtonHeight + kTabPanelSeparatorHeight));
+		// If we have a border, we will also want some margin to the bottom
+		if (border_type_ == TabPanel::Type::kBorder) {
+			h = h - kTabPanelSeparatorHeight;
+		}
 		panel->set_size(get_w(), h);
 	}
 }
@@ -211,7 +214,6 @@ uint32_t TabPanel::add_tab(int32_t width,
 	m_tabs.push_back(new Tab(this, id, x, width, name, title, pic, tooltip_text, panel));
 
 	// Add a margin if there is a border
-	// NOCOM make the margins uniform for all tab panels, with or without border
 	if (border_type_ == TabPanel::Type::kBorder) {
 		panel->set_border(kTabPanelSeparatorHeight + 1, kTabPanelSeparatorHeight + 1,
 								kTabPanelSeparatorHeight, kTabPanelSeparatorHeight);
