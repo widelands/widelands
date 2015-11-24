@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-07 08:28+0000\n"
-"PO-Revision-Date: 2015-11-06 17:30+0000\n"
+"POT-Creation-Date: 2015-11-18 08:43+0000\n"
+"PO-Revision-Date: 2015-11-18 13:50+0000\n"
 "Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -222,8 +222,8 @@ msgstr "Les roques"
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:137
 msgid ""
 "Later, I walked down to the rocks in the south and looked for a place where "
-"we could build a quarry to get some hard stones for our larger buildings."
-msgstr "Després, vaig caminar fins a les roques del sud i vaig buscar un lloc on construir-hi una pedrera per aconseguir pedres per als edificis més grans."
+"we could build a quarry to get some granite for our larger buildings."
+msgstr "Després, vaig caminar fins a les roques del sud i vaig buscar un lloc on construir-hi una pedrera per aconseguir materials de construcció per als edificis més grans."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:140
