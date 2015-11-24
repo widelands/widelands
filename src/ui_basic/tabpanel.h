@@ -74,14 +74,21 @@ private:
  *
  */
 struct TabPanel : public Panel {
+	enum class Type {
+		kNoBorder,
+		kBorder
+	};
+
 	friend struct Tab;
 
-	TabPanel(Panel * parent, int32_t x, int32_t y, const Image* background);
+	TabPanel(Panel * parent, int32_t x, int32_t y, const Image* background,
+				TabPanel::Type border_type = TabPanel::Type::kNoBorder);
 	// For Fullscreen menus
 	TabPanel
 		(Panel * parent,
 		 int32_t x, int32_t y, int32_t w, int32_t h,
-		 const Image* background);
+		 const Image* background,
+		 TabPanel::Type border_type = TabPanel::Type::kNoBorder);
 
 	/** Add textual tab */
 	uint32_t add
@@ -133,6 +140,7 @@ private:
 	size_t           m_highlight;      ///< index of the highlighted button
 
 	const Image* m_pic_background; ///< picture used to draw background
+	TabPanel::Type border_type_;
 };
 }
 

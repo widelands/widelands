@@ -89,22 +89,26 @@ void Tab::activate() {
 TabPanel::TabPanel
 	(Panel * const parent,
 	 int32_t const x, int32_t const y,
-	 const Image* background)
+	 const Image* background,
+	 TabPanel::Type border_type)
 	:
 	Panel            (parent, x, y, 0, 0),
 	m_active         (0),
 	m_highlight      (kNotFound),
-	m_pic_background (background)
+	m_pic_background (background),
+	border_type_(border_type)
 {}
 TabPanel::TabPanel
 	(Panel * const parent,
 	 int32_t const x, int32_t const y, int32_t const w, int32_t const h,
-	 const Image* background)
+	 const Image* background,
+	 TabPanel::Type border_type)
 	:
 	Panel            (parent, x, y, w, h),
 	m_active         (0),
 	m_highlight      (kNotFound),
-	m_pic_background (background)
+	m_pic_background (background),
+	border_type_(border_type)
 {}
 
 /**
@@ -205,9 +209,21 @@ uint32_t TabPanel::add_tab(int32_t width,
 	int32_t x = id > 0 ? m_tabs[id - 1]->get_x() + m_tabs[id - 1]->get_w() : 0;
 	m_tabs.push_back(new Tab(this, id, x, width, name, title, pic, tooltip_text, panel));
 
-	panel->set_pos(Point(0, kTabPanelButtonHeight + kTabPanelSeparatorHeight));
+	panel->set_pos(Point(border_type_ == TabPanel::Type::kBorder ? kTabPanelSeparatorHeight : 0,
+								kTabPanelButtonHeight + kTabPanelSeparatorHeight));
+
 	panel->set_visible(id == m_active);
 	update_desired_size();
+	// NOCOM can this be moved down into the function?
+	// IT doesn't work yet anyway.
+	if (border_type_ == TabPanel::Type::kBorder) {
+		//uint32_t panelw, panelh;
+		//panel->get_desired_size(panelw, panelh);
+		//panelw = panelw - 2 * kTabPanelSeparatorHeight;
+		//panel->set_desired_size(panelw, panelh);
+		panel->set_size(panel->get_w() - 2 * kTabPanelSeparatorHeight, panel->get_h());
+		update_desired_size();
+	}
 
 	return id;
 }
@@ -264,6 +280,8 @@ void TabPanel::draw(RenderTarget & dst)
 			 Point(get_x(), get_y() + kTabPanelButtonHeight - 2));
 	}
 
+	RGBColor black(0, 0, 0);
+
 	// draw the buttons
 	int32_t x;
 	int tab_width;
@@ -304,8 +322,6 @@ void TabPanel::draw(RenderTarget & dst)
 		}
 
 		// Draw top part of border
-		RGBColor black(0, 0, 0);
-
 		dst.brighten_rect
 			(Rect(Point(x, 0), tab_width, 2), BUTTON_EDGE_BRIGHT_FACTOR);
 		dst.brighten_rect
@@ -345,6 +361,19 @@ void TabPanel::draw(RenderTarget & dst)
 	dst.brighten_rect
 		(Rect(Point(x + tab_width, kTabPanelButtonHeight - 2), get_w() - x, 2),
 		 2 * BUTTON_EDGE_BRIGHT_FACTOR);
+
+	// Draw border around the main panel
+	if (border_type_ == TabPanel::Type::kBorder) {
+		//  left edge
+		dst.brighten_rect
+			(Rect(Point(0, kTabPanelButtonHeight), 2, get_h() - 2), BUTTON_EDGE_BRIGHT_FACTOR);
+		//  bottom edge
+		dst.fill_rect(Rect(Point(2, get_h() - 2), get_w() - 2, 1), black);
+		dst.fill_rect(Rect(Point(1, get_h() - 1), get_w() - 1, 1), black);
+		//  right edge
+		dst.fill_rect(Rect(Point(get_w() - 2, kTabPanelButtonHeight - 1), 1, get_h() - 2), black);
+		dst.fill_rect(Rect(Point(get_w() - 1, kTabPanelButtonHeight - 2), 1, get_h() - 1), black);
+	}
 }
 
 
