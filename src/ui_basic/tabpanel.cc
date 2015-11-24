@@ -268,9 +268,13 @@ void TabPanel::draw(RenderTarget & dst)
 	static_assert(4 < kTabPanelButtonHeight, "assert(4 < kTabPanelButtonSize) failed.");
 
 	if (pic_background_) {
-		dst.tile
-			(Rect(Point(0, 0), tabs_.size() * kTabPanelButtonHeight, kTabPanelButtonHeight - 2),
-			 pic_background_, Point(get_x(), get_y()));
+		if (!tabs_.empty()) {
+			dst.tile
+				(Rect(Point(0, 0),
+						tabs_[tabs_.size() - 1]->get_x() + tabs_[tabs_.size() - 1]->get_w(),
+						kTabPanelButtonHeight - 2),
+				 pic_background_, Point(get_x(), get_y()));
+		}
 		assert(kTabPanelButtonHeight - 2 <= get_h());
 		dst.tile
 			(Rect
