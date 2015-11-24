@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-04 07:08+0000\n"
-"PO-Revision-Date: 2015-11-04 07:35+0000\n"
+"POT-Creation-Date: 2015-11-18 08:43+0000\n"
+"PO-Revision-Date: 2015-11-18 13:09+0000\n"
 "Last-Translator: Lyubomir Vasilev\n"
 "Language-Team: Bulgarian (http://www.transifex.com/widelands/widelands/language/bg/)\n"
 "MIME-Version: 1.0\n"
@@ -250,9 +250,9 @@ msgstr "Постройте варджийница, захранена от кл�
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:116
 msgid ""
 "Better buildings may also require other improved materials besides "
-"blackwood. One of these is grout, which is produced out of raw stone, water "
+"blackwood. One of these is grout, which is produced out of granite, water "
 "and coal by a lime-burner."
-msgstr "По-добрите сгради може да изискват и други подобрени материали, освен черното дърво. Един от тях е варта, която се произвежда от необработени камъни, вода и въглища от варджия."
+msgstr "По-добрите сгради може да изискват и други подобрени материали, освен черното дърво. Един от тях е варта, която се произвежда от гранит, вода и въглища от варджия."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:118
 msgid ""

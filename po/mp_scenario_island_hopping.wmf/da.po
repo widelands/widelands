@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-10-25 20:03+0000\n"
-"PO-Revision-Date: 2015-10-31 19:42+0000\n"
-"Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
+"POT-Creation-Date: 2015-11-18 08:43+0000\n"
+"PO-Revision-Date: 2015-11-18 08:43+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Danish (http://www.transifex.com/widelands/widelands/language/da/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -75,11 +75,11 @@ msgstr "Når du er færdig med en ø, så får du bonusvarer, afhængig af hvor 
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:23
 msgid ""
-"The point is that the first island only provides stones and wood, the second"
+"The point is that the first island only provides rocks and trees, the second"
 " only meadows and resources. The economies you leave behind will continue to"
 " work for you, but you will only reap the benefits at the moment you reach a"
 " new island."
-msgstr "Ideen er, at den første ø kun tilbyder sten og træ, den anden kun enge og ressourcer. Økonomien du efterlader vil fortsætte med at arbejde for dig, men du får kun fordelene i det øjeblik, du når en ny ø."
+msgstr ""
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:26
 msgid "Finally, be careful not to waste your quartz and diamonds."
