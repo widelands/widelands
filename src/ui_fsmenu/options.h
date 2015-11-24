@@ -73,8 +73,8 @@ public:
 	OptionsCtrl::OptionsStruct options_struct();
 	void save_options();
 private:
-	Section & m_opt_section;
-	FullscreenMenuOptions * m_opt_dialog;
+	Section & opt_section_;
+	FullscreenMenuOptions * opt_dialog_;
 };
 
 /**
@@ -87,11 +87,13 @@ public:
 	OptionsCtrl::OptionsStruct get_values();
 
 private:
-	uint32_t const              m_butw;
-	uint32_t const              m_buth;
-	uint32_t const              m_hmargin;
-	uint32_t const              m_padding;
-	uint32_t const              m_space;
+	uint32_t const              butw_;
+	uint32_t const              buth_;
+	uint32_t const              hmargin_;
+	uint32_t const              padding_;
+	uint32_t const              space_;
+	uint32_t const              column_width_;
+	uint32_t const              tab_panel_width_;
 	uint32_t const              tab_panel_y_;
 
 	UI::Textarea                title_;
@@ -160,7 +162,7 @@ private:
 	};
 
 	/// All supported screen resolutions.
-	std::vector<ScreenResolution> m_resolutions;
+	std::vector<ScreenResolution> resolutions_;
 };
 
 #endif  // end of include guard: WL_UI_FSMENU_OPTIONS_H

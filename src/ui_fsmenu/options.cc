@@ -99,65 +99,63 @@ FullscreenMenuOptions::FullscreenMenuOptions
 	FullscreenMenuBase("ui_fsmenu.jpg"),
 
 // Values for alignment and size
-	m_butw    (get_w() / 4),
-	m_buth    (get_h() * 9 / 200),
-	m_hmargin (get_w() * 19 / 200),
-	m_padding (10),
-	m_space   (25),
-	tab_panel_y_ (get_h() * 14 / 100),
+	butw_    (get_w() / 4),
+	buth_    (get_h() * 9 / 200),
+	hmargin_ (get_w() * 19 / 200),
+	padding_ (10),
+	space_   (25),
+	column_width_((get_w() - 2 * hmargin_ - space_) / 2),
+	tab_panel_width_(get_inner_w() - 2 * hmargin_),
+	tab_panel_y_(get_h() * 14 / 100),
 
 	// Title
 	title_
 	(this,
-	 get_w() / 2, m_buth,
+	 get_w() / 2, buth_,
 	 _("Options"), UI::Align_HCenter),
 
 	// Buttons
 	cancel_
 		(this, "cancel",
-		 get_w() * 2 / 3 - m_butw / 2,
-		 get_inner_h() - m_hmargin,
-		 m_butw, m_buth,
+		 get_w() * 2 / 3 - butw_ / 2,
+		 get_inner_h() - hmargin_,
+		 butw_, buth_,
 		 g_gr->images().get("pics/but0.png"),
 		 _("Cancel"), std::string(), true, false),
 	apply_
 		(this, "apply",
-		 get_w() * 1 / 3 - m_butw / 2,
-		 get_inner_h() - m_hmargin,
-		 m_butw, m_buth,
+		 get_w() * 1 / 3 - butw_ / 2,
+		 get_inner_h() - hmargin_,
+		 butw_, buth_,
 		 g_gr->images().get("pics/but2.png"),
 		 _("Apply"), std::string(), true, false),
 
-	tabs_(this, m_hmargin, 0,
-			get_inner_w() - 2 * m_hmargin, get_inner_h() - tab_panel_y_ - m_buth - m_hmargin,
+	tabs_(this, hmargin_, 0,
+			tab_panel_width_, get_inner_h() - tab_panel_y_ - buth_ - hmargin_,
 			g_gr->images().get("pics/but1.png"),
 			UI::TabPanel::Type::kBorder),
 
-	box_interface_(&tabs_, 0, 0, UI::Box::Horizontal),
-	box_interface_column1_(&box_interface_, 0, 0, UI::Box::Vertical),
+	box_interface_(&tabs_, 0, 0, UI::Box::Horizontal, 0, 0, space_ / 2),
+	box_interface_column1_(&box_interface_, 0, 0, UI::Box::Vertical, 0, 0, padding_),
 	box_interface_column2_(&box_interface_, 0, 0, UI::Box::Vertical),
-	box_sound_(&tabs_, 0, 0, UI::Box::Vertical),
-	box_saving_(&tabs_, 0, 0, UI::Box::Vertical),
-	box_gamecontrol_(&tabs_, 0, 0, UI::Box::Vertical),
+	box_sound_(&tabs_, 0, 0, UI::Box::Vertical, 0, 0, padding_),
+	box_saving_(&tabs_, 0, 0, UI::Box::Vertical, 0, 0, padding_),
+	box_gamecontrol_(&tabs_, 0, 0, UI::Box::Vertical, 0, 0, padding_),
 
 	// Interface options
-	label_resolution_
-		(&box_interface_column1_,
-		 0, 0,
-		 _("In-game resolution"), UI::Align_VCenter),
-	resolution_list_
-		(&box_interface_column1_,
-		 0, 0,
-		 (get_w() - 2 * m_hmargin - m_space) / 2, 95,
-		 UI::Align_Left, true),
-	fullscreen_ (&box_interface_column1_, Point(0, 0), _("Fullscreen")),
-	inputgrab_ (&box_interface_column1_, Point(0, 0), _("Grab Input")),
+	label_resolution_(&box_interface_column1_, 0, 0, _("In-game resolution"), UI::Align_Left),
+	resolution_list_(&box_interface_column1_, 0, 0, column_width_, 95, UI::Align_Left, true),
+
+	fullscreen_ (&box_interface_column1_, Point(0, 0), _("Fullscreen"), "", column_width_),
+	inputgrab_ (&box_interface_column1_, Point(0, 0), _("Grab Input"), "", column_width_),
 
 	label_maxfps_(&box_interface_column1_, 0, 0, _("Maximum FPS:"), UI::Align_VCenter),
 	sb_maxfps_(&box_interface_column1_, 0, 0, 240, opt.maxfps, 0, 99, ""),
 
-	snap_win_overlap_only_(&box_interface_column1_, Point(0, 0), _("Snap windows only when overlapping")),
-	dock_windows_to_edges_(&box_interface_column1_, Point(0, 0), _("Dock windows to edges")),
+	snap_win_overlap_only_(&box_interface_column1_, Point(0, 0), _("Snap windows only when overlapping"),
+								  "", column_width_),
+	dock_windows_to_edges_(&box_interface_column1_, Point(0, 0), _("Dock windows to edges"),
+								  "", column_width_),
 
 	label_snap_dis_panel_(&box_interface_column1_, 0, 0, _("Distance for windows to snap to other panels:")),
 	sb_dis_panel_
@@ -169,19 +167,19 @@ FullscreenMenuOptions::FullscreenMenuOptions
 			(&box_interface_column1_, 0, 0, 240,
 			 opt.border_snap_distance, 0, 99, ngettext("pixel", "pixels", opt.border_snap_distance)),
 
-	transparent_chat_(&box_interface_column1_, Point(0, 0), _("Show in-game chat with transparent background")),
+	transparent_chat_(&box_interface_column1_, Point(0, 0), _("Show in-game chat with transparent background"),
+							"", column_width_),
 
-	label_language_(&box_interface_column2_, 0, 0, _("Language"), UI::Align_VCenter),
-	language_list_
-		(&box_interface_column2_, 0, 0,
-		 (get_w() - 2 * m_hmargin - m_space) / 2, resolution_list_.get_h(),
-		 UI::Align_Left, true),
+	label_language_(&box_interface_column2_, 0, 0, _("Language"), UI::Align_Left),
+	language_list_(&box_interface_column2_, 0, 0, column_width_, resolution_list_.get_h(),
+						UI::Align_Left, true),
 
 
 	// Sound options
-	music_ (&box_sound_, Point(0, 0), _("Enable Music")),
-	fx_ (&box_sound_, Point(0, 0), _("Enable Sound Effects")),
-	message_sound_(&box_sound_, Point(0, 0), _("Play a sound at message arrival")),
+	music_ (&box_sound_, Point(0, 0), _("Enable Music"), "", tab_panel_width_ - padding_),
+	fx_ (&box_sound_, Point(0, 0), _("Enable Sound Effects"), "", tab_panel_width_ - padding_),
+	message_sound_(&box_sound_, Point(0, 0), _("Play a sound at message arrival"),
+						"", tab_panel_width_ - padding_),
 
 	// Saving options
 	sb_autosave_
@@ -192,7 +190,7 @@ FullscreenMenuOptions::FullscreenMenuOptions
 		 g_gr->images().get("pics/but3.png"), true),
 	label_autosave_
 		(&box_saving_, 0, 0,
-		 get_w() - sb_autosave_.get_w() - 2 * m_hmargin,
+		 get_w() - sb_autosave_.get_w() - 2 * hmargin_,
 		 dock_windows_to_edges_.get_h(),
 		 _("Save game automatically every"), UI::Align_VCenter),
 
@@ -204,11 +202,13 @@ FullscreenMenuOptions::FullscreenMenuOptions
 		 g_gr->images().get("pics/but3.png"), true),
 	label_remove_replays_
 		(&box_saving_, 0, 0,
-		 get_w() - sb_remove_replays_.get_w() - 2 * m_hmargin,
+		 get_w() - sb_remove_replays_.get_w() - 2 * hmargin_,
 		 dock_windows_to_edges_.get_h(),
 		 _("Remove replays older than:"), UI::Align_VCenter),
-	nozip_(&box_saving_, Point(0, 0), _("Do not zip widelands data files (maps, replays and savegames)")),
-	remove_syncstreams_(&box_saving_, Point(0, 0), _("Remove Syncstream dumps on startup")),
+	nozip_(&box_saving_, Point(0, 0), _("Do not zip widelands data files (maps, replays and savegames)"),
+			 "", tab_panel_width_ - padding_),
+	remove_syncstreams_(&box_saving_, Point(0, 0), _("Remove Syncstream dumps on startup"),
+							  "", tab_panel_width_ - padding_),
 
 	// Game Control options
 	/** TRANSLATORS: A watchwindow is a window where you keep watching an object or a map region,*/
@@ -224,7 +224,7 @@ FullscreenMenuOptions::FullscreenMenuOptions
 	tabs_.add("options_saving", _("Saving"), &box_saving_, "");
 	tabs_.add("options_gamecontrol", _("Game Control"), &box_gamecontrol_, "");
 
-	tabs_.set_pos(Point(m_hmargin, tab_panel_y_));
+	tabs_.set_pos(Point(hmargin_, tab_panel_y_));
 
 	box_interface_.set_size(tabs_.get_inner_w(), tabs_.get_inner_h());
 	box_sound_.set_size(tabs_.get_inner_w(), tabs_.get_inner_h());
@@ -329,24 +329,24 @@ FullscreenMenuOptions::FullscreenMenuOptions
 			ScreenResolution this_res = {
 			   mode.w, mode.h, static_cast<int32_t>(SDL_BITSPERPIXEL(mode.format))};
 			if (this_res.depth == 24) this_res.depth = 32;
-			if (m_resolutions.empty()
-				 || this_res.xres != m_resolutions.rbegin()->xres
-				 || this_res.yres != m_resolutions.rbegin()->yres) {
-				m_resolutions.push_back(this_res);
+			if (resolutions_.empty()
+				 || this_res.xres != resolutions_.rbegin()->xres
+				 || this_res.yres != resolutions_.rbegin()->yres) {
+				resolutions_.push_back(this_res);
 			}
 		}
 	}
 
 	bool did_select_a_res = false;
-	for (uint32_t i = 0; i < m_resolutions.size(); ++i) {
+	for (uint32_t i = 0; i < resolutions_.size(); ++i) {
 		const bool selected =
-			m_resolutions[i].xres  == opt.xres &&
-			m_resolutions[i].yres  == opt.yres;
+			resolutions_[i].xres  == opt.xres &&
+			resolutions_[i].yres  == opt.yres;
 		did_select_a_res |= selected;
 		/** TRANSLATORS: Screen resolution, e.g. 800 x 600*/
 		resolution_list_.add((boost::format(_("%1% x %2%"))
-							% m_resolutions[i].xres
-							% m_resolutions[i].yres).str(),
+							% resolutions_[i].xres
+							% resolutions_[i].yres).str(),
 						  nullptr, nullptr, selected);
 	}
 	if (!did_select_a_res) {
@@ -354,10 +354,10 @@ FullscreenMenuOptions::FullscreenMenuOptions
 							% opt.xres
 							% opt.yres).str(),
 						  nullptr, nullptr, true);
-		uint32_t entry = m_resolutions.size();
-		m_resolutions.resize(entry + 1);
-		m_resolutions[entry].xres  = opt.xres;
-		m_resolutions[entry].yres  = opt.yres;
+		uint32_t entry = resolutions_.size();
+		resolutions_.resize(entry + 1);
+		resolutions_[entry].xres  = opt.xres;
+		resolutions_[entry].yres  = opt.yres;
 	}
 
 	add_languages_to_list(opt.language);
@@ -452,8 +452,8 @@ OptionsCtrl::OptionsStruct FullscreenMenuOptions::get_values() {
 	const uint32_t res_index = resolution_list_.selection_index();
 
 	// Write all data from UI elements
-	os.xres                  = m_resolutions[res_index].xres;
-	os.yres                  = m_resolutions[res_index].yres;
+	os.xres                  = resolutions_[res_index].xres;
+	os.yres                  = resolutions_[res_index].yres;
 	os.inputgrab             = inputgrab_.get_state();
 	os.fullscreen            = fullscreen_.get_state();
 	os.single_watchwin       = single_watchwin_.get_state();
@@ -484,84 +484,84 @@ OptionsCtrl::OptionsStruct FullscreenMenuOptions::get_values() {
  * Handles communication between window class and options
  */
 OptionsCtrl::OptionsCtrl(Section & s)
-: m_opt_section(s), m_opt_dialog(new FullscreenMenuOptions(options_struct()))
+: opt_section_(s), opt_dialog_(new FullscreenMenuOptions(options_struct()))
 {
 	handle_menu();
 }
 
 OptionsCtrl::~OptionsCtrl() {
-	delete m_opt_dialog;
+	delete opt_dialog_;
 }
 
 void OptionsCtrl::handle_menu()
 {
-	FullscreenMenuBase::MenuTarget i = m_opt_dialog->run<FullscreenMenuBase::MenuTarget>();
+	FullscreenMenuBase::MenuTarget i = opt_dialog_->run<FullscreenMenuBase::MenuTarget>();
 	if (i != FullscreenMenuBase::MenuTarget::kBack)
 		save_options();
 	if (i == FullscreenMenuBase::MenuTarget::kRestart) {
-		delete m_opt_dialog;
-		m_opt_dialog = new FullscreenMenuOptions(options_struct());
+		delete opt_dialog_;
+		opt_dialog_ = new FullscreenMenuOptions(options_struct());
 		handle_menu(); // Restart general options menu
 	}
 }
 
 OptionsCtrl::OptionsStruct OptionsCtrl::options_struct() {
 	OptionsStruct opt;
-	opt.xres = m_opt_section.get_int("xres", DEFAULT_RESOLUTION_W);
-	opt.yres = m_opt_section.get_int("yres", DEFAULT_RESOLUTION_H);
-	opt.inputgrab = m_opt_section.get_bool("inputgrab", false);
-	opt.fullscreen = m_opt_section.get_bool("fullscreen", false);
-	opt.single_watchwin = m_opt_section.get_bool("single_watchwin", false);
-	opt.auto_roadbuild_mode = m_opt_section.get_bool("auto_roadbuild_mode", true);
-	opt.show_warea = m_opt_section.get_bool("workareapreview", true);
+	opt.xres = opt_section_.get_int("xres", DEFAULT_RESOLUTION_W);
+	opt.yres = opt_section_.get_int("yres", DEFAULT_RESOLUTION_H);
+	opt.inputgrab = opt_section_.get_bool("inputgrab", false);
+	opt.fullscreen = opt_section_.get_bool("fullscreen", false);
+	opt.single_watchwin = opt_section_.get_bool("single_watchwin", false);
+	opt.auto_roadbuild_mode = opt_section_.get_bool("auto_roadbuild_mode", true);
+	opt.show_warea = opt_section_.get_bool("workareapreview", true);
 	opt.snap_win_overlap_only =
-	   m_opt_section.get_bool("snap_windows_only_when_overlapping", false);
-	opt.dock_windows_to_edges = m_opt_section.get_bool("dock_windows_to_edges", false);
-	opt.language = m_opt_section.get_string("language", "");
-	opt.music = !m_opt_section.get_bool("disable_music", false);
-	opt.fx = !m_opt_section.get_bool("disable_fx", false);
-	opt.autosave = m_opt_section.get_int("autosave", DEFAULT_AUTOSAVE_INTERVAL * 60);
-	opt.rolling_autosave = m_opt_section.get_int("rolling_autosave", 5);
-	opt.maxfps = m_opt_section.get_int("maxfps", 25);
+		opt_section_.get_bool("snap_windows_only_when_overlapping", false);
+	opt.dock_windows_to_edges = opt_section_.get_bool("dock_windows_to_edges", false);
+	opt.language = opt_section_.get_string("language", "");
+	opt.music = !opt_section_.get_bool("disable_music", false);
+	opt.fx = !opt_section_.get_bool("disable_fx", false);
+	opt.autosave = opt_section_.get_int("autosave", DEFAULT_AUTOSAVE_INTERVAL * 60);
+	opt.rolling_autosave = opt_section_.get_int("rolling_autosave", 5);
+	opt.maxfps = opt_section_.get_int("maxfps", 25);
 
-	opt.message_sound = m_opt_section.get_bool("sound_at_message", true);
-	opt.nozip = m_opt_section.get_bool("nozip", false);
-	opt.border_snap_distance = m_opt_section.get_int("border_snap_distance", 0);
-	opt.panel_snap_distance = m_opt_section.get_int("panel_snap_distance", 0);
-	opt.remove_replays = m_opt_section.get_int("remove_replays", 0);
-	opt.remove_syncstreams = m_opt_section.get_bool("remove_syncstreams", true);
-	opt.transparent_chat = m_opt_section.get_bool("transparent_chat", true);
+	opt.message_sound = opt_section_.get_bool("sound_at_message", true);
+	opt.nozip = opt_section_.get_bool("nozip", false);
+	opt.border_snap_distance = opt_section_.get_int("border_snap_distance", 0);
+	opt.panel_snap_distance = opt_section_.get_int("panel_snap_distance", 0);
+	opt.remove_replays = opt_section_.get_int("remove_replays", 0);
+	opt.remove_syncstreams = opt_section_.get_bool("remove_syncstreams", true);
+	opt.transparent_chat = opt_section_.get_bool("transparent_chat", true);
 	return opt;
 }
 
 void OptionsCtrl::save_options() {
-	OptionsCtrl::OptionsStruct opt = m_opt_dialog->get_values();
-	m_opt_section.set_int ("xres",                  opt.xres);
-	m_opt_section.set_int ("yres",                  opt.yres);
-	m_opt_section.set_bool("fullscreen",            opt.fullscreen);
-	m_opt_section.set_bool("inputgrab",             opt.inputgrab);
-	m_opt_section.set_bool("single_watchwin",       opt.single_watchwin);
-	m_opt_section.set_bool("auto_roadbuild_mode",   opt.auto_roadbuild_mode);
-	m_opt_section.set_bool("workareapreview",       opt.show_warea);
-	m_opt_section.set_bool
+	OptionsCtrl::OptionsStruct opt = opt_dialog_->get_values();
+	opt_section_.set_int ("xres",                  opt.xres);
+	opt_section_.set_int ("yres",                  opt.yres);
+	opt_section_.set_bool("fullscreen",            opt.fullscreen);
+	opt_section_.set_bool("inputgrab",             opt.inputgrab);
+	opt_section_.set_bool("single_watchwin",       opt.single_watchwin);
+	opt_section_.set_bool("auto_roadbuild_mode",   opt.auto_roadbuild_mode);
+	opt_section_.set_bool("workareapreview",       opt.show_warea);
+	opt_section_.set_bool
 		("snap_windows_only_when_overlapping",
 		 opt.snap_win_overlap_only);
-	m_opt_section.set_bool("dock_windows_to_edges", opt.dock_windows_to_edges);
-	m_opt_section.set_bool("disable_music",        !opt.music);
-	m_opt_section.set_bool("disable_fx",           !opt.fx);
-	m_opt_section.set_string("language",            opt.language);
-	m_opt_section.set_int("autosave",               opt.autosave * 60);
-	m_opt_section.set_int("rolling_autosave",       opt.rolling_autosave);
-	m_opt_section.set_int("maxfps",                 opt.maxfps);
+	opt_section_.set_bool("dock_windows_to_edges", opt.dock_windows_to_edges);
+	opt_section_.set_bool("disable_music",        !opt.music);
+	opt_section_.set_bool("disable_fx",           !opt.fx);
+	opt_section_.set_string("language",            opt.language);
+	opt_section_.set_int("autosave",               opt.autosave * 60);
+	opt_section_.set_int("rolling_autosave",       opt.rolling_autosave);
+	opt_section_.set_int("maxfps",                 opt.maxfps);
 
-	m_opt_section.set_bool("sound_at_message",      opt.message_sound);
-	m_opt_section.set_bool("nozip",                 opt.nozip);
-	m_opt_section.set_int("border_snap_distance",   opt.border_snap_distance);
-	m_opt_section.set_int("panel_snap_distance",    opt.panel_snap_distance);
+	opt_section_.set_bool("sound_at_message",      opt.message_sound);
+	opt_section_.set_bool("nozip",                 opt.nozip);
+	opt_section_.set_int("border_snap_distance",   opt.border_snap_distance);
+	opt_section_.set_int("panel_snap_distance",    opt.panel_snap_distance);
 
-	m_opt_section.set_int("remove_replays",         opt.remove_replays);
-	m_opt_section.set_bool("remove_syncstreams",    opt.remove_syncstreams);
-	m_opt_section.set_bool("transparent_chat",      opt.transparent_chat);
+	opt_section_.set_int("remove_replays",         opt.remove_replays);
+	opt_section_.set_bool("remove_syncstreams",    opt.remove_syncstreams);
+	opt_section_.set_bool("transparent_chat",      opt.transparent_chat);
 
 	WLApplication::get()->set_input_grab(opt.inputgrab);
 	i18n::set_locale(opt.language);
