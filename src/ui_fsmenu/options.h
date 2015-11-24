@@ -94,7 +94,6 @@ private:
 	uint32_t const              m_padding;
 	uint32_t const              m_space;
 	uint32_t const              m_offset_first_group;
-	uint32_t const              m_offset_second_group;
 
 	UI::Textarea                m_title;
 	UI::Button                  m_cancel, m_apply;

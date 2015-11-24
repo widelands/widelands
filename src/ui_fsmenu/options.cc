@@ -106,7 +106,6 @@ FullscreenMenuOptions::FullscreenMenuOptions
 	m_padding (10),
 	m_space   (25),
 	m_offset_first_group (get_h() * 1417 / 10000),
-	m_offset_second_group(get_h() * 5833 / 10000),
 
 	// Title
 	m_title
@@ -126,8 +125,11 @@ FullscreenMenuOptions::FullscreenMenuOptions
 		 g_gr->images().get("pics/but2.png"),
 		 _("Apply"), std::string(), true, false),
 
+	tabs_(this, m_hmargin, 0,
+			get_inner_w() - 2 * m_hmargin, get_inner_h() - m_offset_first_group - m_buth - m_hmargin,
+			g_gr->images().get("pics/but1.png"),
+			UI::TabPanel::Type::kBorder),
 
-	tabs_(this, 0, 0, nullptr),
 	box_interface_(&tabs_, 0, 0, UI::Box::Horizontal),
 	box_interface_column1_(&box_interface_, 0, 0, UI::Box::Vertical),
 	box_interface_column2_(&box_interface_, 0, 0, UI::Box::Vertical),
@@ -214,25 +216,12 @@ FullscreenMenuOptions::FullscreenMenuOptions
 
 	os(opt)
 {
-	tabs_.add("options_interface",
-				 _("Interface"),
-				 &box_interface_,
-				 _("Interface"));
-	tabs_.add("options_sound",
-				 g_gr->images().get("pics/but2.png"), // NOCOM need image. Or define text tabs?
-				 &box_sound_,
-				 _("Sound"));
-	tabs_.add("options_saving",
-				 _("Saving"),
-				 &box_saving_,
-				 _("Saving"));
-	tabs_.add("options_gamecontrol",
-				 g_gr->images().get("pics/but2.png"), // NOCOM need image. Or define text tabs?
-				 &box_gamecontrol_,
-				 _("Game Control"));
+	tabs_.add("options_interface", _("Interface"), &box_interface_, "");
+	tabs_.add("options_sound", _("Sound"), &box_sound_, "");
+	tabs_.add("options_saving", _("Saving"), &box_saving_, "");
+	tabs_.add("options_gamecontrol", _("Game Control"), &box_gamecontrol_, "");
 
-	tabs_.set_size(get_inner_w(), get_inner_h() - m_offset_first_group - m_buth);
-	tabs_.set_pos(Point(0, m_offset_first_group));
+	tabs_.set_pos(Point(m_hmargin, m_offset_first_group));
 
 	box_interface_.set_size(tabs_.get_inner_w(), tabs_.get_inner_h());
 	box_sound_.set_size(tabs_.get_inner_w(), tabs_.get_inner_h());
