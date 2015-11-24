@@ -99,34 +99,37 @@ FullscreenMenuOptions::FullscreenMenuOptions
 	FullscreenMenuBase("ui_fsmenu.jpg"),
 
 // Values for alignment and size
-	m_vbutw   (get_h() * 333 / 10000),
 	m_butw    (get_w() / 4),
 	m_buth    (get_h() * 9 / 200),
 	m_hmargin (get_w() * 19 / 200),
 	m_padding (10),
 	m_space   (25),
-	m_offset_first_group (get_h() * 1417 / 10000),
+	tab_panel_y_ (get_h() * 14 / 100),
 
 	// Title
-	m_title
+	title_
 	(this,
-	 get_w() / 2, get_h() / 40,
+	 get_w() / 2, m_buth,
 	 _("Options"), UI::Align_HCenter),
 
 	// Buttons
-	m_cancel
+	cancel_
 		(this, "cancel",
-		 get_w() * 51 / 80, get_h() * 19 / 20, m_butw, m_buth,
+		 get_w() * 2 / 3 - m_butw / 2,
+		 get_inner_h() - m_hmargin,
+		 m_butw, m_buth,
 		 g_gr->images().get("pics/but0.png"),
 		 _("Cancel"), std::string(), true, false),
-	m_apply
+	apply_
 		(this, "apply",
-		 get_w() * 3 / 8, get_h() * 19 / 20, m_butw, m_buth,
+		 get_w() * 1 / 3 - m_butw / 2,
+		 get_inner_h() - m_hmargin,
+		 m_butw, m_buth,
 		 g_gr->images().get("pics/but2.png"),
 		 _("Apply"), std::string(), true, false),
 
 	tabs_(this, m_hmargin, 0,
-			get_inner_w() - 2 * m_hmargin, get_inner_h() - m_offset_first_group - m_buth - m_hmargin,
+			get_inner_w() - 2 * m_hmargin, get_inner_h() - tab_panel_y_ - m_buth - m_hmargin,
 			g_gr->images().get("pics/but1.png"),
 			UI::TabPanel::Type::kBorder),
 
@@ -221,7 +224,7 @@ FullscreenMenuOptions::FullscreenMenuOptions
 	tabs_.add("options_saving", _("Saving"), &box_saving_, "");
 	tabs_.add("options_gamecontrol", _("Game Control"), &box_gamecontrol_, "");
 
-	tabs_.set_pos(Point(m_hmargin, m_offset_first_group));
+	tabs_.set_pos(Point(m_hmargin, tab_panel_y_));
 
 	box_interface_.set_size(tabs_.get_inner_w(), tabs_.get_inner_h());
 	box_sound_.set_size(tabs_.get_inner_w(), tabs_.get_inner_h());
@@ -270,8 +273,8 @@ FullscreenMenuOptions::FullscreenMenuOptions
 	box_gamecontrol_.add(&auto_roadbuild_mode_, UI::Align_Left);
 	box_gamecontrol_.add(&show_workarea_preview_, UI::Align_Left);
 
-	m_cancel.sigclicked.connect(boost::bind(&FullscreenMenuOptions::clicked_back, this));
-	m_apply.sigclicked.connect(boost::bind(&FullscreenMenuOptions::clicked_ok, this));
+	cancel_.sigclicked.connect(boost::bind(&FullscreenMenuOptions::clicked_back, this));
+	apply_.sigclicked.connect(boost::bind(&FullscreenMenuOptions::clicked_ok, this));
 
 	/** TRANSLATORS Options: Save game automatically every: */
 	sb_autosave_     .add_replacement(0, _("Off"));
@@ -303,7 +306,7 @@ FullscreenMenuOptions::FullscreenMenuOptions
 					 boost::ref(*this)));
 	}
 
-	m_title           .set_textstyle(UI::TextStyle::ui_big());
+	title_           .set_textstyle(UI::TextStyle::ui_big());
 	fullscreen_      .set_state(opt.fullscreen);
 	inputgrab_       .set_state(opt.inputgrab);
 	music_           .set_state(opt.music);

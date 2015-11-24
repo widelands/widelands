@@ -87,16 +87,15 @@ public:
 	OptionsCtrl::OptionsStruct get_values();
 
 private:
-	uint32_t const              m_vbutw;
 	uint32_t const              m_butw;
 	uint32_t const              m_buth;
 	uint32_t const              m_hmargin;
 	uint32_t const              m_padding;
 	uint32_t const              m_space;
-	uint32_t const              m_offset_first_group;
+	uint32_t const              tab_panel_y_;
 
-	UI::Textarea                m_title;
-	UI::Button                  m_cancel, m_apply;
+	UI::Textarea                title_;
+	UI::Button                  cancel_, apply_;
 
 	// UI elements
 	UI::TabPanel tabs_;
