@@ -120,6 +120,7 @@ void TabPanel::layout()
 		Panel * const panel = m_tabs[m_active]->panel;
 		uint32_t h = get_h();
 
+		// NOCOM fix for border
 		// avoid excessive craziness in case there is a wraparound
 		h = std::min(h, h - (kTabPanelButtonHeight + kTabPanelSeparatorHeight));
 		panel->set_size(get_w(), h);
@@ -209,21 +210,18 @@ uint32_t TabPanel::add_tab(int32_t width,
 	int32_t x = id > 0 ? m_tabs[id - 1]->get_x() + m_tabs[id - 1]->get_w() : 0;
 	m_tabs.push_back(new Tab(this, id, x, width, name, title, pic, tooltip_text, panel));
 
-	panel->set_pos(Point(border_type_ == TabPanel::Type::kBorder ? kTabPanelSeparatorHeight : 0,
-								kTabPanelButtonHeight + kTabPanelSeparatorHeight));
+	// Add a margin if there is a border
+	// NOCOM make the margins uniform for all tab panels, with or without border
+	if (border_type_ == TabPanel::Type::kBorder) {
+		panel->set_border(kTabPanelSeparatorHeight + 1, kTabPanelSeparatorHeight + 1,
+								kTabPanelSeparatorHeight, kTabPanelSeparatorHeight);
+		panel->set_pos(Point(0, kTabPanelButtonHeight));
+	} else {
+		panel->set_pos(Point(0, kTabPanelButtonHeight + kTabPanelSeparatorHeight));
+	}
 
 	panel->set_visible(id == m_active);
 	update_desired_size();
-	// NOCOM can this be moved down into the function?
-	// IT doesn't work yet anyway.
-	if (border_type_ == TabPanel::Type::kBorder) {
-		//uint32_t panelw, panelh;
-		//panel->get_desired_size(panelw, panelh);
-		//panelw = panelw - 2 * kTabPanelSeparatorHeight;
-		//panel->set_desired_size(panelw, panelh);
-		panel->set_size(panel->get_w() - 2 * kTabPanelSeparatorHeight, panel->get_h());
-		update_desired_size();
-	}
 
 	return id;
 }
