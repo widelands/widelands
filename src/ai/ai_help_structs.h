@@ -44,7 +44,7 @@ class MilitarySite;
 enum class ExtendedBool : uint8_t {kUnset, kTrue, kFalse};
 enum class BuildingNecessity : uint8_t
 	{kForced, kNeeded, kNotNeeded, kUnset, kNotBuildable, kAllowed, kNeededPending, kForbidden};
-enum class SchedulerTaskId : uint8_t { //NOCOM - review this
+enum class SchedulerTaskId : uint8_t {
 		kBbuildableFieldsCheck,
 		kMineableFieldsCheck,
 		kRoadCheck,
