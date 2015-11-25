@@ -487,7 +487,7 @@ Point Soldier::calc_drawpos
 			static_cast<float>(game.get_gametime() - m_combat_walkstart)
 			/
 			(m_combat_walkend - m_combat_walkstart);
-		assert(static_cast<uint32_t>(m_combat_walkstart) <= game.get_gametime());
+		assert(m_combat_walkstart <= game.get_gametime());
 		assert(m_combat_walkstart < m_combat_walkend);
 
 		if (f < 0)
@@ -1317,7 +1317,7 @@ void Soldier::start_task_move_in_battle(Game & game, CombatWalkingDir dir)
 
 void Soldier::move_in_battle_update(Game & game, State &)
 {
-	if (static_cast<int32_t>(game.get_gametime() - m_combat_walkend) >= 0) {
+	if (game.get_gametime() >= m_combat_walkend) {
 		switch (m_combat_walking) {
 			case CD_NONE:
 				break;
@@ -1590,7 +1590,7 @@ void Soldier::die_update(Game & game, State & state)
 		signal_handled();
 	}
 
-	if (static_cast<uint32_t>(state.ivar1) > game.get_gametime())
+	if ((state.ivar1 >= 0) && (static_cast<uint32_t>(state.ivar1) > game.get_gametime()))
 		return schedule_act(game, state.ivar1 - game.get_gametime());
 
 	// When task updated, dead is near!
@@ -1804,8 +1804,8 @@ void Soldier::Loader::load(FileRead & fr)
 
 			soldier.m_combat_walking = static_cast<CombatWalkingDir>(fr.unsigned_8());
 			if (soldier.m_combat_walking != CD_NONE) {
-				soldier.m_combat_walkstart = fr.signed_32();
-				soldier.m_combat_walkend = fr.signed_32();
+				soldier.m_combat_walkstart = fr.unsigned_32();
+				soldier.m_combat_walkend = fr.unsigned_32();
 			}
 
 			m_battle = fr.unsigned_32();
@@ -1856,8 +1856,8 @@ void Soldier::do_save
 
 	fw.unsigned_8(m_combat_walking);
 	if (m_combat_walking != CD_NONE) {
-		fw.signed_32(m_combat_walkstart);
-		fw.signed_32(m_combat_walkend);
+		fw.unsigned_32(m_combat_walkstart);
+		fw.unsigned_32(m_combat_walkend);
 	}
 
 	fw.unsigned_32(mos.get_object_file_index_or_zero(m_battle));

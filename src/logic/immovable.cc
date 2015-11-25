@@ -430,7 +430,7 @@ void Immovable::act(Game & game, uint32_t const data)
 {
 	BaseImmovable::act(game, data);
 
-	if (static_cast<uint32_t>(m_program_step) <= game.get_gametime()) {
+	if (m_program_step <= game.get_gametime()) {
 		//  Might delete itself!
 		(*m_program)[m_program_ptr].execute(game, *this);
 	}
@@ -524,7 +524,7 @@ Load/save support
 ==============================
 */
 
-constexpr uint8_t kCurrentPacketVersionImmovable = 6;
+constexpr uint8_t kCurrentPacketVersionImmovable = 7;
 
 // Supporting older versions for map loading
 void Immovable::Loader::load(FileRead & fr, uint8_t const packet_version)
@@ -596,9 +596,13 @@ void Immovable::Loader::load(FileRead & fr, uint8_t const packet_version)
 		}
 	}
 
-	imm.m_program_step = fr.signed_32();
+	if (packet_version >= 3 && packet_version > 6) {
+		imm.m_program_step = fr.unsigned_32();
+	} else {
+		imm.m_program_step = fr.signed_32();
+	}
 
-	if (packet_version >= 3 && packet_version <= 5){
+	if (packet_version >= 3 && packet_version <= 5) {
 	        imm.m_reserved_by_worker = fr.unsigned_8();
 	}
 	if (packet_version >= 4) {
@@ -661,7 +665,7 @@ void Immovable::save
 	fw.string(m_program ? m_program->name() : "");
 
 	fw.unsigned_32(m_program_ptr);
-	fw.signed_32(m_program_step);
+	fw.unsigned_32(m_program_step);
 
 	if (m_action_data) {
 	  fw.c_string(m_action_data->name());

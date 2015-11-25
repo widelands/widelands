@@ -1938,7 +1938,7 @@ void Worker::program_update(Game & game, State & state)
 	for (;;) {
 		const WorkerProgram & program = dynamic_cast<const WorkerProgram&>(*state.program);
 
-		if (static_cast<uint32_t>(state.ivar1) >= program.get_size())
+		if ((state.ivar1 >= 0) && (static_cast<uint32_t>(state.ivar1) >= program.get_size()))
 			return pop_task(game);
 
 		const Action & action = *program.get_action(state.ivar1);
@@ -2613,7 +2613,7 @@ void Worker::fugitive_update(Game & game, State & state)
 		}
 	}
 
-	if (static_cast<uint32_t>(state.ivar1) < game.get_gametime()) { //  time to die?
+	if ((state.ivar1 < 0) || (static_cast<uint32_t>(state.ivar1) < game.get_gametime())) { //  time to die?
 		molog("[fugitive]: die\n");
 		return schedule_destroy(game);
 	}
