@@ -59,7 +59,7 @@ struct Flag;
  *   remember to change some time() in network save random functions.
  */
 // TODO(unknown): Improvements:
-// - Improve different initialization types (Aggressive, Normal, Defensive)
+// - Improve different initialization types (Strong, Normal, Weak)
 // - Improve update code - currently the whole buildable area owned by defaultAI
 //   is rechecked after construction of a building or a road. Instead it would
 //   be better to write down the changed coordinates and only check those and
@@ -76,9 +76,9 @@ struct DefaultAI : ComputerPlayer {
 	void think() override;
 
 	enum {
-		AGGRESSIVE = 2,
-		NORMAL = 1,
-		DEFENSIVE = 0,
+		kStrong = 2,
+		kNormal = 1,
+		kWeak = 0,
 	};
 
 	enum class WalkSearch : uint8_t {kAnyPlayer, kOtherPlayers, kEnemy};
@@ -94,15 +94,15 @@ struct DefaultAI : ComputerPlayer {
 	};
 
 
-	/// Implementation for Aggressive
-	struct AggressiveImpl : public ComputerPlayer::Implementation {
-		AggressiveImpl() {
+	/// Implementation for Strong
+	struct StrongImpl : public ComputerPlayer::Implementation {
+		StrongImpl() {
 			/** TRANSLATORS: This is the name of an AI used in the game setup screens */
-			name = pgettext("ai_name", "Aggressive");
+			name = pgettext("ai_name", "Strong");
 		}
 		ComputerPlayer* instantiate(Widelands::Game& game,
 		                            Widelands::PlayerNumber const p) const override {
-			return new DefaultAI(game, p, AGGRESSIVE);
+			return new DefaultAI(game, p, kStrong);
 		}
 	};
 
@@ -113,24 +113,24 @@ struct DefaultAI : ComputerPlayer {
 		}
 		ComputerPlayer* instantiate(Widelands::Game& game,
 		                            Widelands::PlayerNumber const p) const override {
-			return new DefaultAI(game, p, NORMAL);
+			return new DefaultAI(game, p, kNormal);
 		}
 	};
 
-	struct DefensiveImpl : public ComputerPlayer::Implementation {
-		DefensiveImpl() {
+	struct WeakImpl : public ComputerPlayer::Implementation {
+		WeakImpl() {
 			/** TRANSLATORS: This is the name of an AI used in the game setup screens */
-			name = pgettext("ai_name", "Defensive");
+			name = pgettext("ai_name", "Weak");
 		}
 		ComputerPlayer* instantiate(Widelands::Game& game,
 		                            Widelands::PlayerNumber const p) const override {
-			return new DefaultAI(game, p, DEFENSIVE);
+			return new DefaultAI(game, p, kWeak);
 		}
 	};
 
-	static AggressiveImpl aggressiveImpl;
+	static StrongImpl strongImpl;
 	static NormalImpl normalImpl;
-	static DefensiveImpl defensiveImpl;
+	static WeakImpl defensiveImpl;
 
 private:
 	void late_initialization();
@@ -233,7 +233,6 @@ private:
 	//checks whether first value is in range, or lesser then...
 	template<typename T> void check_range(const T, const  T, const  T, const char *);
 	template<typename T> void check_range(const T, const  T, const char *);
-
 
 private:
 	// Variables of default AI

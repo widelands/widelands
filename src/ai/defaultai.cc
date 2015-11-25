@@ -83,6 +83,8 @@ constexpr int kWoodDiff        = 0; //int32_t
 constexpr int kTargetMilit     = 1;
 constexpr int kLeastMilit      = 2;
 
+constexpr int8_t UNCALCULATED = -1;
+
 // duration of military campaign
 constexpr int kCampaignDuration = 15 * 60 * 1000;
 
@@ -91,9 +93,9 @@ constexpr int kMaxJobs = 4;
 
 using namespace Widelands;
 
-DefaultAI::AggressiveImpl DefaultAI::aggressiveImpl;
+DefaultAI::StrongImpl DefaultAI::strongImpl;
 DefaultAI::NormalImpl DefaultAI::normalImpl;
-DefaultAI::DefensiveImpl DefaultAI::defensiveImpl;
+DefaultAI::WeakImpl DefaultAI::defensiveImpl;
 
 /// Constructor of DefaultAI
 DefaultAI::DefaultAI(Game& ggame, PlayerNumber const pid, uint8_t const t)
@@ -520,7 +522,7 @@ void DefaultAI::late_initialization() {
 		// after game start not building anything
 		bo.construction_decision_time_ = -60 * 60 * 1000;
 		bo.build_material_shortage_ = false;
-		bo.production_hint_ = -1;
+		bo.production_hint_ = UNCALCULATED;
 		bo.current_stats_ = 0;
 		bo.unoccupied_count_ = 0;
 		bo.unconnected_count_ = 0;
@@ -558,14 +560,14 @@ void DefaultAI::late_initialization() {
 		}
 
 	// Is total count of this building limited by AI mode?
-	if (type_ == DEFENSIVE && bh.get_weak_ai_limit() >= 0) {
+	if (type_ == kWeak && bh.get_weak_ai_limit() >= 0) {
 		bo.cnt_limit_by_aimode_ = bh.get_weak_ai_limit();
 		log (" %d: AI defensive mode: applying limit %d building(s) for %s\n",
 		player_number(),
 		bo.cnt_limit_by_aimode_,
 		bo.name);
 	}
-	if (type_ == NORMAL && bh.get_normal_ai_limit() >= 0) {
+	if (type_ == kNormal && bh.get_normal_ai_limit() >= 0) {
 		bo.cnt_limit_by_aimode_ = bh.get_normal_ai_limit();
 		log (" %d: AI normal mode: applying limit %d building(s) for %s\n",
 		player_number(),
@@ -1165,7 +1167,7 @@ void DefaultAI::update_buildable_field(BuildableField& field, uint16_t range, bo
 		std::vector<Coords> resource_list;
 		std::vector<Bob*> critters_list;
 
-		if (field.water_nearby_ == -1) {  //-1 means "value has never been calculated"
+		if (field.water_nearby_ == UNCALCULATED) {
 
 			FindNodeWater find_water(game().world());
 			map.find_fields(Area<FCoords>(field.coords, 5), &water_list, find_water);
@@ -1178,7 +1180,7 @@ void DefaultAI::update_buildable_field(BuildableField& field, uint16_t range, bo
 		}
 
 		// counting fields with fish
-		if (field.water_nearby_ > 0 && (field.fish_nearby_ == -1 || resource_count_now)) {
+		if (field.water_nearby_ > 0 && (field.fish_nearby_ == UNCALCULATED || resource_count_now)) {
 			map.find_fields(Area<FCoords>(field.coords, 6),
 			                &resource_list,
 			                FindNodeResource(world.get_resource("fish")));
@@ -1763,11 +1765,9 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 			bo.new_building_ = check_building_necessity(bo.desc->get_size(), gametime);
 		} else if  (bo.type == BuildingObserver::TRAININGSITE
 			&& // if we dont have enough build material or are above target of current ai mode
-			(bo.build_material_shortage_
-			||
-			bo.total_count() - bo.unconnected_count_ >= bo.cnt_limit_by_aimode_)) {
-					bo.new_building_ = BuildingNecessity::kNotNeeded;
-		} else if (bo.total_count() - bo.unconnected_count_ >= bo.cnt_limit_by_aimode_) {
+			(bo.build_material_shortage_ || bo.aimode_limit_achieved())) {
+				bo.new_building_ = BuildingNecessity::kNotNeeded;
+		} else if (bo.aimode_limit_achieved()) {
 			bo.new_building_ = BuildingNecessity::kNotNeeded;
 		} else {
 			bo.new_building_ = BuildingNecessity::kAllowed;
@@ -3137,8 +3137,6 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 	    gametime > 45 * 60 * 1000 &&
 	    gametime > site.built_time_ + 20 * 60 * 1000) {
 
-		//DescriptionIndex enbld = INVALID_INDEX;  // to get rid of this
-
 		// Only enhance buildings that are allowed (scenario mode)
 		// do not do decisions too fast
 		if (player_->is_building_type_allowed(enhancement)) {
@@ -3161,8 +3159,8 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 					// if the decision was not made yet, consider normal upgrade
 					if (!doing_upgrade) {
 						// compare the performance %
-						if (static_cast<int32_t>(en_bo.current_stats_) -
-						    static_cast<int32_t>(site.bo->current_stats_) > 20) {
+						if (en_bo.current_stats_ - site.bo->current_stats_
+							> static_cast<uint32_t>(20)) {
 								doing_upgrade = true;
 						}
 
@@ -3800,11 +3798,9 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 										const uint32_t gametime) {
 
 	// Very first we finds if AI is allowed to build such building due to its mode
-	if (purpose == PerfEvaluation::kForConstruction
-		&&
-		bo.total_count() - bo.unconnected_count_ >= bo.cnt_limit_by_aimode_) {
-			return BuildingNecessity::kForbidden;
-		}
+	if (purpose == PerfEvaluation::kForConstruction && bo.aimode_limit_achieved()) {
+		return BuildingNecessity::kForbidden;
+	}
 
 	// First we iterate over outputs of building, count warehoused stock
 	// and deciding if we have enough on stock (in warehouses)
@@ -5200,10 +5196,10 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 
 	// defining treshold ratio of own_strenght/enemy's_strength
 	uint32_t treshold_ratio = 100;
-	if (type_ == AGGRESSIVE) {
+	if (type_ == kStrong) {
 		treshold_ratio = 80;
 	}
-	if (type_ == DEFENSIVE) {
+	if (type_ == kWeak) {
 		treshold_ratio = 120;
 	}
 
@@ -5424,10 +5420,10 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 				}
 
 				// here is some differentiation based on "character" of a player
-				if (type_ == NORMAL) {
+				if (type_ == kNormal) {
 					site->second.score -= 3;
 					site->second.score -= vacant_mil_positions_ / 8;
-				} else if (type_ == DEFENSIVE) {
+				} else if (type_ == kWeak) {
 					site->second.score -= 6;
 					site->second.score -= vacant_mil_positions_ / 4;
 				} else {  //=AGRESSIVE

@@ -458,6 +458,9 @@ struct BuildingObserver {
 	int32_t total_count() const {
 		return cnt_built_ + cnt_under_construction_;
 	}
+	bool aimode_limit_achieved() {
+		return total_count() - unconnected_count_ >= cnt_limit_by_aimode_;
+	}
 	bool buildable(Widelands::Player& player_) {
 		return is_buildable_ && player_.is_building_type_allowed(id);
 	}
