@@ -596,7 +596,7 @@ void Immovable::Loader::load(FileRead & fr, uint8_t const packet_version)
 		}
 	}
 
-	if (packet_version > 7) {
+	if (packet_version > 6) {
 		imm.m_program_step = fr.unsigned_32();
 	} else {
 		imm.m_program_step = fr.signed_32();
