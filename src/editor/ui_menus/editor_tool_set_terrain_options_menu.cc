@@ -43,25 +43,24 @@ namespace {
 using namespace Widelands;
 
 static const int32_t check[] = {
-	TerrainDescription::Type::kGreen,                                 //  "green"
-	TerrainDescription::Type::kDry,                                   //  "dry"
-	TerrainDescription::Type::kDry | TerrainDescription::Type::kMountain,    //  "mountain"
-	TerrainDescription::Type::kDry | TerrainDescription::Type::kImpassable,  //  "impassable"
-	TerrainDescription::Type::kDead | TerrainDescription::Type::kDry |
-		TerrainDescription::Type::kImpassable,  //  "dead"
-	TerrainDescription::Type::kImpassable | TerrainDescription::Type::kDry | TerrainDescription::Type::kWater,
+	TerrainDescription::Type::kArable,                                        // Arable implies walkable
+	TerrainDescription::Type::kWalkable,
+	TerrainDescription::Type::kMineable,                                      // Mountain implies walkable"
+	TerrainDescription::Type::kImpassable,
+	TerrainDescription::Type::kDead | TerrainDescription::Type::kImpassable,  // Dead is impassable
+	TerrainDescription::Type::kImpassable | TerrainDescription::Type::kWater, // Water is impassable
 	-1,  // end marker
 };
 
 UI::Checkbox* create_terrain_checkbox(UI::Panel* parent,
                                       const TerrainDescription& terrain_descr,
                                       std::vector<std::unique_ptr<const Image>>* offscreen_images) {
-	const Image* green = g_gr->images().get("pics/terrain_green.png");
+	const Image* arable = g_gr->images().get("pics/terrain_arable.png");
 	const Image* water = g_gr->images().get("pics/terrain_water.png");
-	const Image* mountain = g_gr->images().get("pics/terrain_mountain.png");
+	const Image* mineable = g_gr->images().get("pics/terrain_mineable.png");
 	const Image* dead = g_gr->images().get("pics/terrain_dead.png");
 	const Image* impassable = g_gr->images().get("pics/terrain_impassable.png");
-	const Image* dry = g_gr->images().get("pics/terrain_dry.png");
+	const Image* walkable = g_gr->images().get("pics/terrain_walkable.png");
 
 	constexpr int kSmallPicHeight = 20;
 	constexpr int kSmallPicWidth = 20;
@@ -82,10 +81,10 @@ UI::Checkbox* create_terrain_checkbox(UI::Panel* parent,
 		              BlendMode::UseAlpha, texture);
 		Point pt(1, terrain_texture.height() - kSmallPicHeight - 1);
 
-		if (ter_is == TerrainDescription::Type::kGreen) {
-			blit(Rect(pt.x, pt.y, green->width(), green->height()),
-			     *green,
-			     Rect(0, 0, green->width(), green->height()),
+		if (ter_is == TerrainDescription::Type::kArable) {
+			blit(Rect(pt.x, pt.y, arable->width(), arable->height()),
+				 *arable,
+				 Rect(0, 0, arable->width(), arable->height()),
 			     1.,
 			     BlendMode::UseAlpha,
 			     texture);
@@ -102,18 +101,18 @@ UI::Checkbox* create_terrain_checkbox(UI::Panel* parent,
 				     texture);
 				pt.x += kSmallPicWidth + 1;
 				/** TRANSLATORS: This is a terrain type tooltip in the editor */
-				tooltips.push_back(_("aquatic"));
+				tooltips.push_back(_("navigable"));
 			}
-			else if (ter_is & TerrainDescription::Type::kMountain) {
-				blit(Rect(pt.x, pt.y, mountain->width(), mountain->height()),
-				     *mountain,
-				     Rect(0, 0, mountain->width(), mountain->height()),
-				     1.,
-				     BlendMode::UseAlpha,
-				     texture);
+			else if (ter_is & TerrainDescription::Type::kMineable) {
+				blit(Rect(pt.x, pt.y, mineable->width(), mineable->height()),
+					 *mineable,
+					 Rect(0, 0, mineable->width(), mineable->height()),
+					 1.,
+					 BlendMode::UseAlpha,
+					 texture);
 				pt.x += kSmallPicWidth + 1;
 				/** TRANSLATORS: This is a terrain type tooltip in the editor */
-				tooltips.push_back(_("mountainous"));
+				tooltips.push_back(_("mineable"));
 			}
 			if (ter_is & TerrainDescription::Type::kDead) {
 				blit(Rect(pt.x, pt.y, dead->width(), dead->height()),
@@ -124,7 +123,7 @@ UI::Checkbox* create_terrain_checkbox(UI::Panel* parent,
 				     texture);
 				pt.x += kSmallPicWidth + 1;
 				/** TRANSLATORS: This is a terrain type tooltip in the editor */
-				tooltips.push_back(_("dead"));
+				tooltips.push_back(_("irreclaimable"));
 			}
 			if (ter_is & TerrainDescription::Type::kImpassable) {
 				blit(Rect(pt.x, pt.y, impassable->width(), impassable->height()),
@@ -137,15 +136,15 @@ UI::Checkbox* create_terrain_checkbox(UI::Panel* parent,
 				/** TRANSLATORS: This is a terrain type tooltip in the editor */
 				tooltips.push_back(_("impassable"));
 			}
-			if (ter_is & TerrainDescription::Type::kDry) {
-				blit(Rect(pt.x, pt.y, dry->width(), dry->height()),
-				     *dry,
-				     Rect(0, 0, dry->width(), dry->height()),
+			if (ter_is & TerrainDescription::Type::kWalkable) {
+				blit(Rect(pt.x, pt.y, walkable->width(), walkable->height()),
+					 *walkable,
+					 Rect(0, 0, walkable->width(), walkable->height()),
 				     1.,
 				     BlendMode::UseAlpha,
 				     texture);
 				/** TRANSLATORS: This is a terrain type tooltip in the editor */
-				 tooltips.push_back(_("treeless"));
+				 tooltips.push_back(_("walkable"));
 			}
 		}
 

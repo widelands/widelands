@@ -37,29 +37,25 @@ namespace  {
 
 // Parse a terrain type from the giving string.
 TerrainDescription::Type terrain_type_from_string(const std::string& type) {
-	if (type == "green") {
-		return TerrainDescription::Type::kGreen;
+	if (type == "arable") {
+		return TerrainDescription::Type::kArable;
 	}
-	if (type == "dry") {
-		return TerrainDescription::Type::kDry;
+	if (type == "walkable") {
+		return TerrainDescription::Type::kWalkable;
 	}
 	if (type == "water") {
 		return static_cast<TerrainDescription::Type>(TerrainDescription::Type::kWater |
-																	TerrainDescription::Type::kDry |
 																	TerrainDescription::Type::kImpassable);
 	}
 	if (type == "dead") {
 		return static_cast<TerrainDescription::Type>(TerrainDescription::Type::kDead |
-																	TerrainDescription::Type::kDry |
 																	TerrainDescription::Type::kImpassable);
 	}
-	if (type == "mountain") {
-		return static_cast<TerrainDescription::Type>(TerrainDescription::Type::kDry |
-																	TerrainDescription::Type::kMountain);
+	if (type == "mineable") {
+		return static_cast<TerrainDescription::Type>(TerrainDescription::Type::kMineable);
 	}
 	if (type == "impassable") {
-		return static_cast<TerrainDescription::Type>(TerrainDescription::Type::kDry |
-																	TerrainDescription::Type::kImpassable);
+		return static_cast<TerrainDescription::Type>(TerrainDescription::Type::kImpassable);
 	}
 	throw LuaError((boost::format("invalid terrain type '%s'") % type).str());
 }

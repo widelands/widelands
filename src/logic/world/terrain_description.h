@@ -43,11 +43,11 @@ constexpr int kTextureSideLength = 64;
 class TerrainDescription {
 public:
 	enum Type {
-		kGreen = 0,
-		kDry = 1,
+		kArable = 0,
+		kWalkable = 1,
 		kWater =  2,
 		kDead = 4,
-		kMountain = 8,
+		kMineable = 8,
 		kImpassable = 16,
 	};
 

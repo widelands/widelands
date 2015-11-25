@@ -110,10 +110,10 @@ int32_t EditorInfoTool::handle_click_impl(Widelands::Map& map,
 	Widelands::TerrainDescription::Type terrain_is = ter.get_is();
 	std::vector<std::string> terrain_is_strings;
 
-	if (terrain_is == Widelands::TerrainDescription::Type::kGreen) {
+	if (terrain_is == Widelands::TerrainDescription::Type::kArable) {
 		terrain_is_strings.push_back(_("arable"));
 	}
-	if (terrain_is & Widelands::TerrainDescription::Type::kDry) {
+	if (terrain_is & Widelands::TerrainDescription::Type::kWalkable) {
 		terrain_is_strings.push_back(_("treeless"));
 	}
 	if (terrain_is & Widelands::TerrainDescription::Type::kWater) {
@@ -122,7 +122,7 @@ int32_t EditorInfoTool::handle_click_impl(Widelands::Map& map,
 	if (terrain_is & Widelands::TerrainDescription::Type::kDead) {
 		terrain_is_strings.push_back(_("dead"));
 	}
-	if (terrain_is & Widelands::TerrainDescription::Type::kMountain) {
+	if (terrain_is & Widelands::TerrainDescription::Type::kMineable) {
 		terrain_is_strings.push_back(_("mountainous"));
 	}
 	if (terrain_is & Widelands::TerrainDescription::Type::kImpassable) {

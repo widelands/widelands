@@ -1281,21 +1281,23 @@ int Map::calc_buildsize
 		world.terrain_descr (f.field->terrain_r()).get_is()
 	};
 
-	uint32_t cnt_mountain = 0;
-	uint32_t cnt_dry = 0;
+	uint32_t cnt_mineable = 0;
+	uint32_t cnt_walkable = 0;
 	for (uint32_t i = 0; i < 6; ++i) {
 		if (terrains[i] & TerrainDescription::Type::kWater)
 			return BaseImmovable::NONE;
-		if (terrains[i] & TerrainDescription::Type::kMountain) ++cnt_mountain;
-		if (terrains[i] & TerrainDescription::Type::kDry) ++cnt_dry;
+		if (terrains[i] & TerrainDescription::Type::kImpassable)
+			return BaseImmovable::NONE;
+		if (terrains[i] & TerrainDescription::Type::kMineable) ++cnt_mineable;
+		if (terrains[i] & TerrainDescription::Type::kWalkable) ++cnt_walkable;
 	}
 
-	if (cnt_mountain == 6) {
+	if (cnt_mineable == 6) {
 		if (ismine)
 			*ismine = true;
 		return BaseImmovable::SMALL;
 	}
-	if (cnt_mountain || cnt_dry)
+	if (cnt_mineable || cnt_walkable)
 		return BaseImmovable::NONE;
 
 	// Adjust size based on neighbouring immovables
