@@ -98,9 +98,8 @@ void CmdQueue::enqueue (Command * const cmd)
 	++ m_ncmds;
 }
 
-int32_t CmdQueue::run_queue(int32_t const interval, uint32_t & game_time_var) {
+void CmdQueue::run_queue(int32_t const interval, uint32_t & game_time_var) {
 	uint32_t const final = game_time_var + interval;
-	int32_t cnt = 0;
 
 	while (game_time_var < final) {
 		std::priority_queue<CmdItem> & current_cmds = m_cmds[game_time_var % CMD_QUEUE_BUCKET_SIZE];
@@ -131,8 +130,6 @@ int32_t CmdQueue::run_queue(int32_t const interval, uint32_t & game_time_var) {
 
 	assert(final - game_time_var == 0);
 	game_time_var = final;
-
-	return cnt;
 }
 
 
@@ -173,7 +170,7 @@ void GameLogicCommand::read
 		uint16_t const packet_version = fr.unsigned_16();
 		if (packet_version == kCurrentPacketVersion) {
 			set_duetime(fr.unsigned_32());
-			int32_t const gametime = egbase.get_gametime();
+			uint32_t const gametime = egbase.get_gametime();
 			if (duetime() < gametime)
 				throw GameDataError
 					("duetime (%i) < gametime (%i)", duetime(), gametime);
