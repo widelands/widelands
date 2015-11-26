@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-10 08:45+0000\n"
-"PO-Revision-Date: 2015-11-09 08:44+0000\n"
+"POT-Creation-Date: 2015-11-18 08:43+0000\n"
+"PO-Revision-Date: 2015-11-18 08:44+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Danish (http://www.transifex.com/widelands/widelands/language/da/)\n"
 "MIME-Version: 1.0\n"
@@ -19,6 +19,93 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language: da\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. * TRANSLATORS: This is a heading for a help window
+#: ../../scripting/widelands/multiplayer_help.lua:10
+#: ../../src/ui_fsmenu/launch_mpg.cc:158 ../../src/ui_fsmenu/launch_mpg.cc:698
+msgid "Multiplayer Game Setup"
+msgstr "Flerspilleropsætning"
+
+#: ../../scripting/widelands/multiplayer_help.lua:11
+msgid "You are in the multiplayer launch game menu."
+msgstr "Du er i menuen til start af spil for flere spillere"
+
+#: ../../scripting/widelands/multiplayer_help.lua:14
+msgid "Client settings"
+msgstr "Klientindstillinger"
+
+#: ../../scripting/widelands/multiplayer_help.lua:15
+msgid ""
+"On the left side is a list of all clients including you. You can set your "
+"role with the button following your nickname. Available roles are:"
+msgstr "På den venstre side er en liste over alle klienter inklusive dig. Du kan angive din rolle med knappen efterfulgt af dit kaldenavn. Tilgængelige roller er:"
+
+#: ../../scripting/widelands/multiplayer_help.lua:16
+msgid ""
+"The player with the color of the flag. If more than one client selected the "
+"same color, these share control over the player (‘shared kingdom mode’)."
+msgstr "Spilleren med flagets farve. Hvis mere end en klient valgte den samme farve, så deler de kontrol over spilleren (»delt kongedømmetilstand«)."
+
+#: ../../scripting/widelands/multiplayer_help.lua:17
+msgid ""
+"Spectator mode, meaning you can see everything, but cannot control any "
+"player"
+msgstr "Tilskuertilstand, hvilket betyder, at du kan se alt men ikke kan kontrollere en spiller"
+
+#: ../../scripting/widelands/multiplayer_help.lua:19
+msgid "Player settings"
+msgstr "Spillerindstillinger"
+
+#: ../../scripting/widelands/multiplayer_help.lua:20
+msgid ""
+"In the middle are the settings for the players. To start a game, each player"
+" must be one of the following:"
+msgstr "I midten er indstillingerne for spillerne. For at starte et spil, skal hver spiller være en af de følgende:"
+
+#: ../../scripting/widelands/multiplayer_help.lua:21
+msgid "Connected to one or more clients (see ‘Client settings’)."
+msgstr "Forbundet til en eller flere klienter (se »klientopsætning«)."
+
+#: ../../scripting/widelands/multiplayer_help.lua:22
+msgid ""
+"Connected to a computer player (the face in the picture as well as the mouse"
+" hover texts indicate the strength of the currently selected computer "
+"player)."
+msgstr "Forbundet til en computerspiller (ansigtet i billedet samt teksten som fremgår når musen føres hen over indikerer styrken for den aktuelt valgte computerspiller)."
+
+#: ../../scripting/widelands/multiplayer_help.lua:23
+msgid "Set as shared in starting position for another player."
+msgstr "Set som delt i startposition for en anden spiller."
+
+#: ../../scripting/widelands/multiplayer_help.lua:24
+msgid "Closed."
+msgstr "Lukket."
+
+#: ../../scripting/widelands/multiplayer_help.lua:25
+msgid ""
+"The latter three can only be set by the hosting client by left-clicking the "
+"‘type’ button of a player. Hosting players can also set the initialization "
+"of each player (the set of buildings, wares and workers the player starts "
+"with) and the tribe and team for computer players"
+msgstr "De sidste tre kan kun sættes af værtsklienten ved at klikke på venstre musetast for »type-knappen« for en spiller. Værtsspillere kan også sætte initialiseringen af hver spiller (bygningssættet, varer og arbejdere spilleren starter med) og stammen og holdet for computerspillere"
+
+#: ../../scripting/widelands/multiplayer_help.lua:26
+msgid ""
+"Every client connected to a player (the set ‘role’ player) can set the tribe"
+" and the team for that player"
+msgstr "Hver klient forbundet til en spiller (sættet »rollespiller«) kan sætte stammen og holdet for den spiller"
+
+#: ../../scripting/widelands/multiplayer_help.lua:28
+msgid "Map details"
+msgstr "Kortdetaljer"
+
+#: ../../scripting/widelands/multiplayer_help.lua:29
+msgid ""
+"You can see information about the selected map or savegame on the right-hand"
+" side. A button next to the map name allows the host to change to a "
+"different map. Furthermore, the host is able to set a specific win "
+"condition, and finally can start the game as soon as all players are set up."
+msgstr "Du kan se information om det valgte kort eller gemte spil på højre side. En knap ved siden af kortet giver værten mulighed for at ændre til et andet kort. Derudover kan værten angive en specifik sejrsbetingelse samt starte spillet så snart alle spillere er klar."
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
 #: ../../src/ai/computer_player.cc:40
@@ -513,8 +600,8 @@ msgstr "Afslut Editor"
 #: ../../src/editor/ui_menus/editor_main_menu_load_or_save_map.cc:58
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:63
 #: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:41
-#: ../../src/scripting/lua_game.cc:398 ../../src/ui_basic/helpwindow.cc:85
-#: ../../src/ui_basic/messagebox.cc:90 ../../src/ui_basic/messagebox.cc:97
+#: ../../src/scripting/lua_game.cc:398 ../../src/ui_basic/messagebox.cc:90
+#: ../../src/ui_basic/messagebox.cc:97 ../../src/ui_fsmenu/helpwindow.cc:53
 #: ../../src/ui_fsmenu/load_map_or_game.cc:64
 #: ../../src/wui/game_main_menu_save_game.cc:91
 msgid "OK"
@@ -576,27 +663,27 @@ msgid "Unbalanced"
 msgstr "Ubalanceret"
 
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:114
-#: ../../src/ui_fsmenu/mapselect.cc:106
+#: ../../src/ui_fsmenu/mapselect.cc:107
 msgid "Free for all"
 msgstr "Fri for alle"
 
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:115
-#: ../../src/ui_fsmenu/mapselect.cc:107
+#: ../../src/ui_fsmenu/mapselect.cc:108
 msgid "1v1"
 msgstr "1v1"
 
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:116
-#: ../../src/ui_fsmenu/mapselect.cc:114
+#: ../../src/ui_fsmenu/mapselect.cc:115
 msgid "Teams of 2"
 msgstr "Hold på 2"
 
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:117
-#: ../../src/ui_fsmenu/mapselect.cc:115
+#: ../../src/ui_fsmenu/mapselect.cc:116
 msgid "Teams of 3"
 msgstr "Hold på 3"
 
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:118
-#: ../../src/ui_fsmenu/mapselect.cc:116
+#: ../../src/ui_fsmenu/mapselect.cc:117
 msgid "Teams of 4"
 msgstr "Hold på 4"
 
@@ -607,7 +694,7 @@ msgid "Suggested Teams:"
 msgstr "Anbefalede hold:"
 
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:130
-#: ../../src/ui_fsmenu/launch_mpg.cc:649
+#: ../../src/ui_fsmenu/launch_mpg.cc:672
 #: ../../src/wui/game_main_menu_save_game.cc:172
 #, c-format
 msgid "%u Player"
@@ -746,7 +833,7 @@ msgstr "En fil med navnet »%s« findes allerede. Overskriv?"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:248
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:261
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:302
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:311
 msgid "Error Saving Map!"
 msgstr "Kunne ikke gemme kort!"
 
@@ -757,7 +844,7 @@ msgid ""
 "manually."
 msgstr "En fil med navnet »%s.tmp« findes allerede. Du skal fjerne den manuelt."
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:298
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:307
 msgid ""
 "Error Saving Map!\n"
 "Saved map file may be corrupt!\n"
@@ -789,7 +876,7 @@ msgstr "Antal spillere"
 #: ../../src/editor/ui_menus/editor_player_menu.cc:209
 #: ../../src/logic/map.cc:339
 #: ../../src/logic/single_player_game_settings_provider.cc:87
-#: ../../src/network/nethost.cc:2064 ../../src/ui_fsmenu/launch_mpg.cc:567
+#: ../../src/network/nethost.cc:2064 ../../src/ui_fsmenu/launch_mpg.cc:590
 #: ../../src/wui/multiplayersetupgroup.cc:121
 #: ../../src/wui/multiplayersetupgroup.cc:287
 #, c-format
@@ -942,8 +1029,8 @@ msgstr "Tilføjer spiller %u"
 
 #. * TRANSLATORS: This is a message's type
 #: ../../src/logic/game.cc:250 ../../src/logic/game.cc:353
-#: ../../src/ui_fsmenu/launch_mpg.cc:293 ../../src/ui_fsmenu/launch_spg.cc:228
-#: ../../src/ui_fsmenu/mapselect.cc:100 ../../src/wui/game_message_menu.cc:563
+#: ../../src/ui_fsmenu/launch_mpg.cc:291 ../../src/ui_fsmenu/launch_spg.cc:228
+#: ../../src/ui_fsmenu/mapselect.cc:101 ../../src/wui/game_message_menu.cc:563
 #: ../../src/wui/multiplayersetupgroup.cc:351
 msgid "Scenario"
 msgstr "Scenarie"
@@ -1198,7 +1285,7 @@ msgstr "(stoppet)"
 #. * TRANSLATORS: Percent in building statistics window, e.g. 85%
 #. * TRANSLATORS: If you wish to add a space, translate as '%i %%'
 #: ../../src/logic/productionsite.cc:357
-#: ../../src/wui/building_statistics_menu.cc:679
+#: ../../src/wui/building_statistics_menu.cc:680
 #, c-format
 msgid "%i%%"
 msgstr "%i%%"
@@ -1217,15 +1304,15 @@ msgid ""
 " unpause the game and continue watching if you want to."
 msgstr "Enden af genafspilningen er nået og derfor spillet er sat på pause. Du kan se vidre efter denne genafspilning og se videre hvis du lyster."
 
-#: ../../src/logic/save_handler.cc:101
+#: ../../src/logic/save_handler.cc:106
 msgid "Saving game..."
 msgstr "Gemmer spil ..."
 
-#: ../../src/logic/save_handler.cc:121
+#: ../../src/logic/save_handler.cc:125
 msgid "Saving failed!"
 msgstr "Kunne ikke gemme!"
 
-#: ../../src/logic/save_handler.cc:140
+#: ../../src/logic/save_handler.cc:144
 msgid "Game saved"
 msgstr "Spil gemt"
 
@@ -1974,11 +2061,6 @@ msgstr "sluk"
 msgid "%1% (%2%)"
 msgstr "%1% (%2%)"
 
-#: ../../src/ui_basic/helpwindow.cc:49 ../../src/ui_basic/helpwindow.cc:208
-#, c-format
-msgid "Help: %s"
-msgstr "Hjælp: %s"
-
 #: ../../src/ui_basic/progresswindow.cc:46
 msgid "Preparing..."
 msgstr "Forbereder..."
@@ -2158,6 +2240,11 @@ msgstr "Du kan se en beskrivelse af det valgte prøvespil til højre."
 msgid "Close"
 msgstr "Luk"
 
+#: ../../src/ui_fsmenu/helpwindow.cc:42 ../../src/wui/helpwindow.cc:44
+#, c-format
+msgid "Help: %s"
+msgstr "Hjælp: %s"
+
 #: ../../src/ui_fsmenu/internet_lobby.cc:55
 msgid "Metaserver Lobby"
 msgstr "Metaserverlobby"
@@ -2263,7 +2350,7 @@ msgstr "Kort"
 msgid "Select a map"
 msgstr "Vælg en verden"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:78 ../../src/ui_fsmenu/launch_mpg.cc:298
+#: ../../src/ui_fsmenu/launch_mpg.cc:78 ../../src/ui_fsmenu/launch_mpg.cc:296
 #: ../../src/wui/multiplayersetupgroup.cc:354
 msgid "Saved Game"
 msgstr "Gemt spil"
@@ -2288,10 +2375,6 @@ msgstr "Start spil"
 msgid "Show the help window"
 msgstr "Vis hjælpevindue"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:158 ../../src/ui_fsmenu/launch_mpg.cc:672
-msgid "Multiplayer Game Setup"
-msgstr "Flerspilleropsætning"
-
 #: ../../src/ui_fsmenu/launch_mpg.cc:167
 msgid "Clients"
 msgstr "Klienter"
@@ -2300,7 +2383,7 @@ msgstr "Klienter"
 msgid "Type of game"
 msgstr "Spiltype"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:215 ../../src/ui_fsmenu/launch_spg.cc:287
+#: ../../src/ui_fsmenu/launch_mpg.cc:215 ../../src/ui_fsmenu/launch_spg.cc:314
 msgid "(no map)"
 msgstr "(intet kort)"
 
@@ -2308,30 +2391,30 @@ msgstr "(intet kort)"
 msgid "The host has not yet selected a map or saved game."
 msgstr "Værten har endnu ikke valgt et kort eller gemt spil."
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:295 ../../src/ui_fsmenu/launch_spg.cc:230
+#: ../../src/ui_fsmenu/launch_mpg.cc:293 ../../src/ui_fsmenu/launch_spg.cc:230
 msgid "Win condition is set through the scenario"
 msgstr "Vinderbetingelse er valgt via scenariet"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:300
+#: ../../src/ui_fsmenu/launch_mpg.cc:298
 msgid "The game is a saved game – the win condition was set before."
 msgstr "Spillet er et gemt spil - sejrsbetingelsen blev sat tidligere."
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:404
+#: ../../src/ui_fsmenu/launch_mpg.cc:427
 msgid "Saved game is directory"
 msgstr "Gemt spil er en mappe"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:406
+#: ../../src/ui_fsmenu/launch_mpg.cc:429
 msgid ""
 "WARNING:\n"
 "The saved game you selected is a directory. This happens if you set the option ‘nozip’ to true or manually unzipped the saved game.\n"
 "Widelands is not able to transfer directory structures to the clients, please select another saved game or zip the directories’ content."
 msgstr "ADVARSEL:\nDet gemte spil du valgte er en mappe. Dette opstår hvis du angiver tilvalget »nozip« som true (sand) eller manuelt udpakker det gemte spil.\nWidelands kan ikke overføre mappestrukturer til klienterne, så vælg et andet gemt spil eller zip mappernes indhold."
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:435 ../../src/ui_fsmenu/launch_spg.cc:257
+#: ../../src/ui_fsmenu/launch_mpg.cc:458 ../../src/ui_fsmenu/launch_spg.cc:284
 msgid "File not found"
 msgstr "Fil ikke fundet"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:437 ../../src/ui_fsmenu/launch_spg.cc:259
+#: ../../src/ui_fsmenu/launch_mpg.cc:460 ../../src/ui_fsmenu/launch_spg.cc:286
 #, c-format
 msgid ""
 "Widelands tried to start a game with a file that could not be found at the given path.\n"
@@ -2339,122 +2422,41 @@ msgid ""
 "If this happens in a network game, the host might have selected a file that you do not own. Normally, such a file should be sent from the host to you, but perhaps the transfer was not yet finished!?!"
 msgstr "Widelands forsøgte at starte et spil med en fil, som ikke kunne findes på den angivne sti.\nFilen var: %s\nHvis dette sker i et netværksspil, så har værten måske valgt en fil, som du ikke ejer. Normalt skal sådan en fil sendes fra værten til dig, men måske overførslen endnu ikke er færdig!?!"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:462
+#: ../../src/ui_fsmenu/launch_mpg.cc:485
 msgid ""
 "The selected file can not be found. If it is not automatically transferred "
 "to you, please write to the host about this problem."
 msgstr "Den valgte fil kan ikke findes. Hvis den ikke automatisk overføres til dig, så skriv venligst til værten om dette problem."
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:493
+#: ../../src/ui_fsmenu/launch_mpg.cc:516
 #, c-format
 msgid "You are Player %i."
 msgstr "Du er spiller %i."
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:494
+#: ../../src/ui_fsmenu/launch_mpg.cc:517
 msgid "You are a spectator."
 msgstr "Du er en tilskuer."
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:553
+#: ../../src/ui_fsmenu/launch_mpg.cc:576
 msgid "Saved players are:"
 msgstr "Gemte spillere er:"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:570
+#: ../../src/ui_fsmenu/launch_mpg.cc:593
 msgid "closed"
 msgstr "lukket"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:646
+#: ../../src/ui_fsmenu/launch_mpg.cc:669
 msgid "Map details:"
 msgstr "Kortdetaljer:"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:647
+#: ../../src/ui_fsmenu/launch_mpg.cc:670
 #, c-format
 msgid "Size: %1$u x %2$u"
 msgstr "Størrelse: %1$u x %2$u"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:652
+#: ../../src/ui_fsmenu/launch_mpg.cc:675
 msgid "Scenario mode selected"
 msgstr "Scenarietilstand valgt"
-
-#: ../../src/ui_fsmenu/launch_mpg.cc:673
-msgid "You are in the multiplayer launch game menu."
-msgstr "Du er i menuen til start af spil for flere spillere"
-
-#: ../../src/ui_fsmenu/launch_mpg.cc:674
-msgid "Client settings"
-msgstr "Klientindstillinger"
-
-#: ../../src/ui_fsmenu/launch_mpg.cc:677
-msgid ""
-"On the left side is a list of all clients including you. You can set your "
-"role with the button following your nickname. Available roles are:"
-msgstr "På den venstre side er en liste over alle klienter inklusive dig. Du kan angive din rolle med knappen efterfulgt af dit kaldenavn. Tilgængelige roller er:"
-
-#: ../../src/ui_fsmenu/launch_mpg.cc:681
-msgid ""
-"The player with the color of the flag. If more than one client selected the "
-"same color, these share control over the player (‘shared kingdom mode’)."
-msgstr "Spilleren med flagets farve. Hvis mere end en klient valgte den samme farve, så deler de kontrol over spilleren (»delt kongedømmetilstand«)."
-
-#: ../../src/ui_fsmenu/launch_mpg.cc:685
-msgid ""
-"Spectator mode, meaning you can see everything, but cannot control any "
-"player"
-msgstr "Tilskuertilstand, hvilket betyder, at du kan se alt men ikke kan kontrollere en spiller"
-
-#: ../../src/ui_fsmenu/launch_mpg.cc:687
-msgid "Player settings"
-msgstr "Spillerindstillinger"
-
-#: ../../src/ui_fsmenu/launch_mpg.cc:690
-msgid ""
-"In the middle are the settings for the players. To start a game, each player"
-" must be one of the following:"
-msgstr "I midten er indstillingerne for spillerne. For at starte et spil, skal hver spiller være en af de følgende:"
-
-#: ../../src/ui_fsmenu/launch_mpg.cc:693
-msgid "Connected to one or more clients (see ‘Client settings’)."
-msgstr "Forbundet til en eller flere klienter (se »klientopsætning«)."
-
-#: ../../src/ui_fsmenu/launch_mpg.cc:696
-msgid ""
-"Connected to a computer player (the face in the picture as well as the mouse"
-" hover texts indicate the strength of the currently selected computer "
-"player)."
-msgstr "Forbundet til en computerspiller (ansigtet i billedet samt teksten som fremgår når musen føres hen over indikerer styrken for den aktuelt valgte computerspiller)."
-
-#: ../../src/ui_fsmenu/launch_mpg.cc:699
-msgid "Set as shared in starting position for another player."
-msgstr "Set som delt i startposition for en anden spiller."
-
-#: ../../src/ui_fsmenu/launch_mpg.cc:700
-msgid "Closed."
-msgstr "Lukket."
-
-#: ../../src/ui_fsmenu/launch_mpg.cc:703
-msgid ""
-"The latter three can only be set by the hosting client by left-clicking the "
-"‘type’ button of a player. Hosting players can also set the initialization "
-"of each player (the set of buildings, wares and workers the player starts "
-"with) and the tribe and team for computer players"
-msgstr "De sidste tre kan kun sættes af værtsklienten ved at klikke på venstre musetast for »type-knappen« for en spiller. Værtsspillere kan også sætte initialiseringen af hver spiller (bygningssættet, varer og arbejdere spilleren starter med) og stammen og holdet for computerspillere"
-
-#: ../../src/ui_fsmenu/launch_mpg.cc:708
-msgid ""
-"Every client connected to a player (the set ‘role’ player) can set the tribe"
-" and the team for that player"
-msgstr "Hver klient forbundet til en spiller (sættet »rollespiller«) kan sætte stammen og holdet for den spiller"
-
-#: ../../src/ui_fsmenu/launch_mpg.cc:710
-msgid "Map details"
-msgstr "Kortdetaljer"
-
-#: ../../src/ui_fsmenu/launch_mpg.cc:713
-msgid ""
-"You can see information about the selected map or savegame on the right-hand"
-" side. A button next to the map name allows the host to change to a "
-"different map. Furthermore, the host is able to set a specific win "
-"condition, and finally can start the game as soon as all players are set up."
-msgstr "Du kan se information om det valgte kort eller gemte spil på højre side. En knap ved siden af kortet giver værten mulighed for at ændre til et andet kort. Derudover kan værten angive en specifik sejrsbetingelse samt starte spillet så snart alle spillere er klar."
 
 #: ../../src/ui_fsmenu/launch_spg.cc:62
 msgid "Select map"
@@ -2786,11 +2788,15 @@ msgstr "Officiel"
 msgid "Seafaring"
 msgstr "Søfart"
 
-#: ../../src/ui_fsmenu/mapselect.cc:341
+#: ../../src/ui_fsmenu/mapselect.cc:100
+msgid "Artifacts"
+msgstr ""
+
+#: ../../src/ui_fsmenu/mapselect.cc:342
 msgid "Nobody"
 msgstr "Ingen"
 
-#: ../../src/ui_fsmenu/mapselect.cc:342
+#: ../../src/ui_fsmenu/mapselect.cc:343
 msgid ""
 "This map file is not present in your filesystem. The data shown here was "
 "sent by the server."
@@ -3113,17 +3119,17 @@ msgid "Under Construction:"
 msgstr "Under konstruktion:"
 
 #. * TRANSLATORS: This is the first part of productivity with input field
-#. * TRANSLATORS: Building statistics window -  'Low Production: <input>%'
+#. * TRANSLATORS: Building statistics window - 'Low Productivity <input>%:'
 #: ../../src/wui/building_statistics_menu.cc:95
-#: ../../src/wui/building_statistics_menu.cc:691
-msgid "Low Production: "
-msgstr "Lav produktion:"
+#: ../../src/wui/building_statistics_menu.cc:692
+msgid "Low Productivity "
+msgstr ""
 
 #. * TRANSLATORS: This is the second part of productivity with input field
-#. * TRANSLATORS: Building statistics window -  'Low Production: <input>%'
+#. * TRANSLATORS: Building statistics window -  'Low Productivity <input>%:'
 #: ../../src/wui/building_statistics_menu.cc:103
-msgid "%"
-msgstr "%"
+msgid "%:"
+msgstr ""
 
 #: ../../src/wui/building_statistics_menu.cc:137
 msgid "Small Buildings"
@@ -3145,30 +3151,30 @@ msgstr "Miner"
 msgid "Ports"
 msgstr "Havne"
 
-#: ../../src/wui/building_statistics_menu.cc:289
-#: ../../src/wui/building_statistics_menu.cc:313
-#: ../../src/wui/building_statistics_menu.cc:337
+#: ../../src/wui/building_statistics_menu.cc:290
+#: ../../src/wui/building_statistics_menu.cc:314
+#: ../../src/wui/building_statistics_menu.cc:338
 msgid "Show previous building"
 msgstr "Vis forrige bygning"
 
-#: ../../src/wui/building_statistics_menu.cc:301
-#: ../../src/wui/building_statistics_menu.cc:325
-#: ../../src/wui/building_statistics_menu.cc:349
+#: ../../src/wui/building_statistics_menu.cc:302
+#: ../../src/wui/building_statistics_menu.cc:326
+#: ../../src/wui/building_statistics_menu.cc:350
 msgid "Show next building"
 msgstr "Vis næste bygning"
 
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
 #. * TRANSLATORS Buildings: owned / under construction
-#: ../../src/wui/building_statistics_menu.cc:708
-#: ../../src/wui/building_statistics_menu.cc:732
-#: ../../src/wui/building_statistics_menu.cc:734
+#: ../../src/wui/building_statistics_menu.cc:709
+#: ../../src/wui/building_statistics_menu.cc:733
+#: ../../src/wui/building_statistics_menu.cc:735
 #: ../../src/wui/productionsitewindow.cc:180
 msgid "%1%/%2%"
 msgstr "%1%/%2%"
 
 #. * TRANSLATORS Label for number of buildings that are waiting for soldiers
-#: ../../src/wui/building_statistics_menu.cc:722
+#: ../../src/wui/building_statistics_menu.cc:723
 msgid "Lacking Soldiers:"
 msgstr "Mangler soldater:"
 

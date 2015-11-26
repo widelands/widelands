@@ -232,7 +232,6 @@ Draw it.
 void DismantleSite::draw
 	(const EditorGameBase& game, RenderTarget& dst, const FCoords& coords, const Point& pos)
 {
-	assert(0 <= game.get_gametime());
 	const uint32_t gametime = game.get_gametime();
 	uint32_t tanim = gametime - m_animstart;
 

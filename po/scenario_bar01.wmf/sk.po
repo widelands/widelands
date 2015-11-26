@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-10 08:55+0000\n"
-"PO-Revision-Date: 2015-11-16 19:34+0000\n"
+"POT-Creation-Date: 2015-11-18 08:43+0000\n"
+"PO-Revision-Date: 2015-11-18 17:33+0000\n"
 "Last-Translator: MiroslavR <miroslavr256@gmail.com>\n"
 "Language-Team: Slovak (http://www.transifex.com/widelands/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
@@ -252,9 +252,9 @@ msgstr "Postavte vápenku zásobovanú studňou a uhliarskou pecou či uhoľnou 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:116
 msgid ""
 "Better buildings may also require other improved materials besides "
-"blackwood. One of these is grout, which is produced out of raw stone, water "
+"blackwood. One of these is grout, which is produced out of granite, water "
 "and coal by a lime-burner."
-msgstr "Lepšie budovy môžu vyžadovať okrem upraveného dreva aj iné vylepšené materiály. Jedným z nich je malta, ktorá sa vyrába vo vápenke zo surových kameňov, vody a uhlia."
+msgstr "Lepšie budovy môžu vyžadovať okrem upraveného dreva aj iné vylepšené materiály. Jedným z nich je malta, ktorá sa vyrába vo vápenke zo žuly, vody a uhlia."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:118
 msgid ""

@@ -94,7 +94,7 @@ void GameCmdQueuePacket::write
 	// Write all commands
 
 	// Find all the items in the current cmdqueue
-	int32_t time = game.get_gametime();
+	uint32_t time = game.get_gametime();
 	size_t nhandled = 0;
 
 	while (nhandled < cmdq.m_ncmds) {
