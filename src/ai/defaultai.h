@@ -71,15 +71,15 @@ struct Flag;
 //   out, to have some more forces. Reincrease the number of soldiers that
 //   should be trained if inputs_ get filled again.).
 struct DefaultAI : ComputerPlayer {
-	DefaultAI(Widelands::Game&, const Widelands::PlayerNumber, uint8_t);
+	enum class Type {
+		kWeak,
+		kNormal,
+		kStrong,
+	};
+
+	DefaultAI(Widelands::Game&, const Widelands::PlayerNumber, DefaultAI::Type);
 	~DefaultAI();
 	void think() override;
-
-	enum {
-		kStrong = 2,
-		kNormal = 1,
-		kWeak = 0,
-	};
 
 	enum class WalkSearch : uint8_t {kAnyPlayer, kOtherPlayers, kEnemy};
 	enum class WoodPolicy : uint8_t {kDismantleRangers, kStopRangers, kAllowRangers};
@@ -102,7 +102,7 @@ struct DefaultAI : ComputerPlayer {
 		}
 		ComputerPlayer* instantiate(Widelands::Game& game,
 		                            Widelands::PlayerNumber const p) const override {
-			return new DefaultAI(game, p, kStrong);
+			return new DefaultAI(game, p, DefaultAI::Type::kStrong);
 		}
 	};
 
@@ -113,7 +113,7 @@ struct DefaultAI : ComputerPlayer {
 		}
 		ComputerPlayer* instantiate(Widelands::Game& game,
 		                            Widelands::PlayerNumber const p) const override {
-			return new DefaultAI(game, p, kNormal);
+			return new DefaultAI(game, p, DefaultAI::Type::kNormal);
 		}
 	};
 
@@ -124,13 +124,13 @@ struct DefaultAI : ComputerPlayer {
 		}
 		ComputerPlayer* instantiate(Widelands::Game& game,
 		                            Widelands::PlayerNumber const p) const override {
-			return new DefaultAI(game, p, kWeak);
+			return new DefaultAI(game, p, DefaultAI::Type::kWeak);
 		}
 	};
 
-	static StrongImpl strongImpl;
-	static NormalImpl normalImpl;
-	static WeakImpl defensiveImpl;
+	static StrongImpl strong_impl;
+	static NormalImpl normal_impl;
+	static WeakImpl weak_impl;
 
 private:
 	void late_initialization();
@@ -236,7 +236,7 @@ private:
 
 private:
 	// Variables of default AI
-	uint8_t type_;
+	DefaultAI::Type type_;
 
 	// collect statistics on how many times which job was run
 	uint32_t sched_stat_[20] = {0};

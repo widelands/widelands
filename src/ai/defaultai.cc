@@ -83,7 +83,7 @@ constexpr int kWoodDiff        = 0; //int32_t
 constexpr int kTargetMilit     = 1;
 constexpr int kLeastMilit      = 2;
 
-constexpr int8_t UNCALCULATED = -1;
+constexpr int8_t kUncalculated = -1;
 
 // duration of military campaign
 constexpr int kCampaignDuration = 15 * 60 * 1000;
@@ -93,12 +93,12 @@ constexpr int kMaxJobs = 4;
 
 using namespace Widelands;
 
-DefaultAI::StrongImpl DefaultAI::strongImpl;
-DefaultAI::NormalImpl DefaultAI::normalImpl;
-DefaultAI::WeakImpl DefaultAI::defensiveImpl;
+DefaultAI::StrongImpl DefaultAI::strong_impl;
+DefaultAI::NormalImpl DefaultAI::normal_impl;
+DefaultAI::WeakImpl DefaultAI::weak_impl;
 
 /// Constructor of DefaultAI
-DefaultAI::DefaultAI(Game& ggame, PlayerNumber const pid, uint8_t const t)
+DefaultAI::DefaultAI(Game& ggame, PlayerNumber const pid, DefaultAI::Type const t)
    : ComputerPlayer(ggame, pid),
      type_(t),
      player_(nullptr),
@@ -484,7 +484,7 @@ void DefaultAI::late_initialization() {
 	tribe_ = &player_->tribe();
 	const uint32_t gametime = game().get_gametime();
 
-	log("ComputerPlayer(%d): initializing (%u)\n", player_number(), type_);
+	log("ComputerPlayer(%d): initializing (%u)\n", player_number(), static_cast<unsigned int>(type_));
 
 	wares.resize(game().tribes().nrwares());
 	for (DescriptionIndex i = 0; i < static_cast<DescriptionIndex>(game().tribes().nrwares()); ++i) {
@@ -522,7 +522,7 @@ void DefaultAI::late_initialization() {
 		// after game start not building anything
 		bo.construction_decision_time_ = -60 * 60 * 1000;
 		bo.build_material_shortage_ = false;
-		bo.production_hint_ = UNCALCULATED;
+		bo.production_hint_ = kUncalculated;
 		bo.current_stats_ = 0;
 		bo.unoccupied_count_ = 0;
 		bo.unconnected_count_ = 0;
@@ -560,14 +560,14 @@ void DefaultAI::late_initialization() {
 		}
 
 	// Is total count of this building limited by AI mode?
-	if (type_ == kWeak && bh.get_weak_ai_limit() >= 0) {
+	if (type_ == DefaultAI::Type::kWeak && bh.get_weak_ai_limit() >= 0) {
 		bo.cnt_limit_by_aimode_ = bh.get_weak_ai_limit();
 		log (" %d: AI defensive mode: applying limit %d building(s) for %s\n",
 		player_number(),
 		bo.cnt_limit_by_aimode_,
 		bo.name);
 	}
-	if (type_ == kNormal && bh.get_normal_ai_limit() >= 0) {
+	if (type_ == DefaultAI::Type::kNormal && bh.get_normal_ai_limit() >= 0) {
 		bo.cnt_limit_by_aimode_ = bh.get_normal_ai_limit();
 		log (" %d: AI normal mode: applying limit %d building(s) for %s\n",
 		player_number(),
@@ -1167,7 +1167,7 @@ void DefaultAI::update_buildable_field(BuildableField& field, uint16_t range, bo
 		std::vector<Coords> resource_list;
 		std::vector<Bob*> critters_list;
 
-		if (field.water_nearby_ == UNCALCULATED) {
+		if (field.water_nearby_ == kUncalculated) {
 
 			FindNodeWater find_water(game().world());
 			map.find_fields(Area<FCoords>(field.coords, 5), &water_list, find_water);
@@ -1180,7 +1180,7 @@ void DefaultAI::update_buildable_field(BuildableField& field, uint16_t range, bo
 		}
 
 		// counting fields with fish
-		if (field.water_nearby_ > 0 && (field.fish_nearby_ == UNCALCULATED || resource_count_now)) {
+		if (field.water_nearby_ > 0 && (field.fish_nearby_ == kUncalculated || resource_count_now)) {
 			map.find_fields(Area<FCoords>(field.coords, 6),
 			                &resource_list,
 			                FindNodeResource(world.get_resource("fish")));
@@ -5196,10 +5196,10 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 
 	// defining treshold ratio of own_strenght/enemy's_strength
 	uint32_t treshold_ratio = 100;
-	if (type_ == kStrong) {
+	if (type_ == DefaultAI::Type::kStrong) {
 		treshold_ratio = 80;
 	}
-	if (type_ == kWeak) {
+	if (type_ == DefaultAI::Type::kWeak) {
 		treshold_ratio = 120;
 	}
 
@@ -5420,10 +5420,10 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 				}
 
 				// here is some differentiation based on "character" of a player
-				if (type_ == kNormal) {
+				if (type_ == DefaultAI::Type::kNormal) {
 					site->second.score -= 3;
 					site->second.score -= vacant_mil_positions_ / 8;
-				} else if (type_ == kWeak) {
+				} else if (type_ == DefaultAI::Type::kWeak) {
 					site->second.score -= 6;
 					site->second.score -= vacant_mil_positions_ / 4;
 				} else {  //=AGRESSIVE
