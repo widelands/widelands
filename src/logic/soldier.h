@@ -278,8 +278,8 @@ private:
 	/// the new states. I thought that it is cleaner to have this variable
 	/// separate.
 	CombatWalkingDir m_combat_walking;
-	int32_t  m_combat_walkstart;
-	int32_t  m_combat_walkend;
+	uint32_t  m_combat_walkstart;
+	uint32_t  m_combat_walkend;
 
 	/**
 	 * If the soldier is involved in a challenge, it is assigned a battle

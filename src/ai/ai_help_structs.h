@@ -446,8 +446,8 @@ struct BuildingObserver {
 
 	// used to track amount of wares produced by building
 	uint32_t stocklevel_;
-	int32_t stocklevel_time;  // time when stocklevel_ was last time recalculated
-	int32_t last_dismantle_time_;
+	uint32_t stocklevel_time;  // time when stocklevel_ was last time recalculated
+	uint32_t last_dismantle_time_;
 	int32_t construction_decision_time_;
 
 	uint32_t unoccupied_count_;

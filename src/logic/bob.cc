@@ -760,7 +760,7 @@ void Bob::start_task_move
 
 void Bob::move_update(Game & game, State &)
 {
-	if (m_walkend <= game.get_gametime()) {
+	if (static_cast<uint32_t>(m_walkend) <= game.get_gametime()) {
 		end_walk();
 		return pop_task(game);
 	} else
@@ -822,7 +822,7 @@ Point Bob::calc_drawpos(const EditorGameBase & game, const Point pos) const
 		spos.y += end.field->get_height() * HEIGHT_FACTOR;
 		spos.y -= start.field->get_height() * HEIGHT_FACTOR;
 
-		assert(m_walkstart <= game.get_gametime());
+		assert(static_cast<uint32_t>(m_walkstart) <= game.get_gametime());
 		assert(m_walkstart < m_walkend);
 		float f =
 			static_cast<float>(game.get_gametime() - m_walkstart)
