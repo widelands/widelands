@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-10 08:55+0000\n"
-"PO-Revision-Date: 2015-11-10 09:25+0000\n"
+"POT-Creation-Date: 2015-11-18 08:43+0000\n"
+"PO-Revision-Date: 2015-11-18 13:47+0000\n"
 "Last-Translator: Lyubomir Vasilev\n"
 "Language-Team: Bulgarian (http://www.transifex.com/widelands/widelands/language/bg/)\n"
 "MIME-Version: 1.0\n"
@@ -651,8 +651,8 @@ msgstr "Дивечовъдът спира за %s преди да започне
 msgctxt "barbarians_building"
 msgid ""
 "‘Soft and supple.<br> And yet untouched by time and weather.<br> Rays of "
-"sun, wrought into eternity ...’"
-msgstr "„Меко и гъвкаво.<br> И все пак недокоснато от времето.<br> Лъчи слънчеви, изковани във вечността...“"
+"sun, wrought into eternity…’"
+msgstr "„Меко и гъвкаво.<br> И все пак недокоснато от времето.<br> Лъчи слънчеви, изковани във вечността…“"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../tribes/buildings/productionsites/barbarians/goldmine/helptexts.lua:8
@@ -1098,9 +1098,9 @@ msgstr "Носачът има нужда от %s, за да напълни ед�
 #: ../../tribes/buildings/productionsites/barbarians/wood_hardener/helptexts.lua:16
 msgctxt "barbarians_building"
 msgid ""
-"Hardens wood by fire into blackwood, which is used to construct robust "
+"Hardens logs by fire into blackwood, which is used to construct robust "
 "buildings."
-msgstr "Втвърдява дървесина чрез огън, за да я превърне в черно дърво, което се използва за строеж на стабилни сгради."
+msgstr "Втвърдява дървени трупи чрез огън, за да ти превърне в черно дърво, което се използва за строеж на стабилни сгради."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/productionsites/empire/armorsmithy/helptexts.lua:16
@@ -1430,21 +1430,13 @@ msgstr "Служи като база за колонизация и търгов
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/warehouses/atlanteans/warehouse/helptexts.lua:16
-msgctxt "atlanteans_building"
-msgid "Stores soldiers, wares and tools."
-msgstr "Място за войниците, стоките и инструментите."
-
-#. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/warehouses/barbarians/warehouse/helptexts.lua:16
-msgctxt "barbarians_building"
-msgid "Stores soldiers, wares and tools."
-msgstr "Място за войниците, стоките и инструментите."
-
-#. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/warehouses/empire/warehouse/helptexts.lua:16
-msgctxt "empire_building"
-msgid "Stores soldiers, wares and tools."
-msgstr "Място за войниците, стоките и инструментите.Място за войниците, стоките и инструментите."
+msgctxt "building"
+msgid ""
+"Your workers and soldiers will find shelter here. Also stores your wares and"
+" tools."
+msgstr "Работниците и войниците Ви могат да се подслонят тук. Също складира стоките и инструментите Ви."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/warehouses/empire/headquarters_shipwreck/helptexts.lua:16
@@ -2073,17 +2065,25 @@ msgstr "Машата е инструмент на топиларя, който �
 
 #. TRANSLATORS: Helptext for a ware: Fire Tongs
 #: ../../tribes/wares/fire_tongs/helptexts.lua:6
-msgctxt "atlanteans_ware"
+msgctxt "atlanteans_ware_fire_tongs"
 msgid "They are produced by the toolsmith."
 msgstr "Те се произвеждат от ковача на инструменти."
 
 #. TRANSLATORS: Helptext for a ware: Fire Tongs
-#. TRANSLATORS: Helptext for a ware: Fishing Rod
-#. TRANSLATORS: Helptext for a ware: Hunting Spear
 #: ../../tribes/wares/fire_tongs/helptexts.lua:10
+msgctxt "empire_ware_fire_tongs"
+msgid "They are produced by the toolsmith."
+msgstr "Те се произвеждат от ковача на инструменти."
+
+#. TRANSLATORS: Helptext for a ware: Fishing Rod
 #: ../../tribes/wares/fishing_rod/helptexts.lua:8
+msgctxt "empire_ware_fishing_rod"
+msgid "They are produced by the toolsmith."
+msgstr "Те се произвеждат от ковача на инструменти."
+
+#. TRANSLATORS: Helptext for a ware: Hunting Spear
 #: ../../tribes/wares/hunting_spear/helptexts.lua:8
-msgctxt "empire_ware"
+msgctxt "empire_ware_hunting_spear"
 msgid "They are produced by the toolsmith."
 msgstr "Те се произвеждат от ковача на инструменти."
 
@@ -2522,21 +2522,29 @@ msgstr "Кирките се използват от каменоделците �
 #. TRANSLATORS: Helptext for a ware: Planks
 #: ../../tribes/wares/planks/helptexts.lua:4
 msgctxt "ware"
-msgid ""
-"Planks are an important building material. They are produced out of logs by "
-"the sawmill."
-msgstr "Дъските са основен строителен материал. Те се произвеждат от дървени трупи в дъскорезницата."
+msgid "Planks are an important building material."
+msgstr "Дъските са важен строителен материал."
 
 #. TRANSLATORS: Helptext for a ware: Planks
-#: ../../tribes/wares/planks/helptexts.lua:6
+#: ../../tribes/wares/planks/helptexts.lua:7
+msgctxt "atlanteans_ware_planks"
+msgid "They are produced out of logs by the sawmill."
+msgstr "Те се произвеждат от дървени трупи в дъскорезницата."
+
+#. TRANSLATORS: Helptext for a ware: Planks
+#: ../../tribes/wares/planks/helptexts.lua:11
+msgctxt "empire_ware_planks"
+msgid "They are produced out of logs by the sawmill."
+msgstr "Те се произвеждат от дървени трупи в дъскорезницата."
+
+#: ../../tribes/wares/planks/helptexts.lua:8
 msgctxt "atlanteans_ware"
 msgid ""
 "The weapon smithy and the shipyard also use planks to produce the different "
 "tridents and mighty ships."
 msgstr "Ковачницата за оръжия и корабостроителницата също използват дъски, за да произвеждат различните тризъбци и могъщи кораби."
 
-#. TRANSLATORS: Helptext for a ware: Planks
-#: ../../tribes/wares/planks/helptexts.lua:8
+#: ../../tribes/wares/planks/helptexts.lua:12
 msgctxt "empire_ware"
 msgid "They are also used by the weapon smithy."
 msgstr "Те се използват също и от ковачницата за оръжия."
@@ -3271,8 +3279,8 @@ msgstr "Произвежда храна за миньорите."
 #. TRANSLATORS: Helptext for a worker: Lime-Burner
 #: ../../tribes/workers/barbarians/lime_burner/helptexts.lua:3
 msgctxt "barbarians_worker"
-msgid "Burns lime in the lime kiln."
-msgstr "Пече вар във варджийницата."
+msgid "Mixes grout out of granite, water and coal in the lime kiln."
+msgstr "Забърква вар от гранит, вода и въглища във варджийницата."
 
 #. TRANSLATORS: Helptext for a worker: Chief Miner
 #. TRANSLATORS: Helptext for a worker: Master Miner
