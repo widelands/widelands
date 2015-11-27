@@ -25,19 +25,19 @@ tribes:new_worker_type {
    vision_range = 2,
 
    buildcost = {
-		atlanteans_carrier = 1,
-		buckets = 1
-	},
+      atlanteans_carrier = 1,
+      buckets = 1
+   },
 
-	programs = {
-		breed = {
-			"findspace size:any radius:7 breed resource:fish",
-			"walk coords",
-			"animation freeing 3000", -- Play a freeing animation
-			"breed fish 1",
-			"return"
-		}
-	},
+   programs = {
+      breed = {
+         "findspace size:any radius:7 breed resource:fish",
+         "walk coords",
+         "animation freeing 3000", -- Play a freeing animation
+         "breed fish 1",
+         "return"
+      }
+   },
 
    animations = animations,
 }

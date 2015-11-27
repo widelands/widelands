@@ -39,6 +39,7 @@
 #include "graphic/image.h"
 #include "graphic/image_cache.h"
 #include "graphic/surface.h"
+#include "graphic/texture.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/bob.h"
 #include "logic/instances.h"
@@ -123,9 +124,10 @@ public:
 	uint16_t nr_frames() const override;
 	uint32_t frametime() const override;
 	const Point& hotspot() const override;
-	const std::string& representative_image_from_disk_filename() const override;
+	Image* representative_image(const RGBColor* clr) const override;
+	const std::string& representative_image_filename() const override;
 	virtual void blit(uint32_t time, const Point&, const Rect& srcrc, const RGBColor* clr, Surface*)
-	   const override;
+		const override;
 	void trigger_soundfx(uint32_t framenumber, uint32_t stereo_position) const override;
 
 
@@ -135,6 +137,8 @@ private:
 
 	// Load the needed graphics from disk.
 	void load_graphics();
+
+	uint32_t current_frame(uint32_t time) const;
 
 	uint32_t frametime_;
 	Point hotspot_;
@@ -149,11 +153,13 @@ private:
 	// TODO(sirver): this should be done using playFX in a program instead of
 	// binding it to the animation.
 	string sound_effect_;
+	bool play_once_;
 };
 
 NonPackedAnimation::NonPackedAnimation(const LuaTable& table)
 		: frametime_(FRAME_LENGTH),
-		  hasplrclrs_(false) {
+		  hasplrclrs_(false),
+		  play_once_(false) {
 	try {
 		get_point(*table.get_table("hotspot"), &hotspot_);
 
@@ -164,6 +170,10 @@ NonPackedAnimation::NonPackedAnimation(const LuaTable& table)
 			const std::string directory = sound_effects->get_string("directory");
 			sound_effect_ = directory + "/" + name;
 			g_sound_handler.load_fx_if_needed(directory, name, sound_effect_);
+		}
+
+		if (table.has_key("play_once")) {
+			play_once_ = table.get_bool("play_once");
 		}
 
 		const std::string templatedirname = table.get_string("directory");
@@ -179,6 +189,9 @@ NonPackedAnimation::NonPackedAnimation(const LuaTable& table)
 		// Strip the .png extension if it has one.
 		boost::replace_all(picnametempl, ".png", "");
 
+		// TODO(GunChleoc): NumberGlob could go away if you'd use
+		// path.list_directory from Lua and we'd know earlier which files will be
+		// used.
 		NumberGlob glob(picnametempl);
 		string filename_wo_ext;
 		while (glob.next(&filename_wo_ext)) {
@@ -286,15 +299,52 @@ const Point& NonPackedAnimation::hotspot() const {
 	return hotspot_;
 }
 
-const std::string& NonPackedAnimation::representative_image_from_disk_filename() const {
+Image* NonPackedAnimation::representative_image(const RGBColor* clr) const {
+	assert(!image_files_.empty());
+
+	const Image* image = g_gr->images().get(image_files_[0]);
+	int w = image->width();
+	int h = image->height();
+
+	Texture* rv = new Texture(w, h);
+	if (!hasplrclrs_ || clr == nullptr) {
+		::blit(Rect(Point(0, 0), w, h),
+				 *image,
+				 Rect(Point(0, 0), w, h),
+				 1.,
+				 BlendMode::UseAlpha,
+				 rv);
+	} else {
+		blit_blended(Rect(Point(0, 0), w, h),
+						 *image,
+						 *g_gr->images().get(pc_mask_image_files_[0]),
+						 Rect(Point(0, 0), w, h),
+						 *clr,
+						 rv);
+	}
+	return rv;
+}
+
+const std::string& NonPackedAnimation::representative_image_filename() const {
 	return image_files_[0];
+}
+
+uint32_t NonPackedAnimation::current_frame(uint32_t time) const {
+	if (nr_frames() > 1) {
+		return (play_once_ && time / frametime_ > static_cast<uint32_t>(nr_frames() - 1)) ?
+					static_cast<uint32_t>(nr_frames() - 1) :
+					time / frametime_ % nr_frames();
+	}
+	return 0;
 }
 
 void NonPackedAnimation::trigger_soundfx(uint32_t time, uint32_t stereo_position) const {
 	if (sound_effect_.empty()) {
 		return;
 	}
-	const uint32_t framenumber = time / frametime_ % nr_frames();
+
+	const uint32_t framenumber = current_frame(time);
+
 	if (framenumber == 0) {
 		g_sound_handler.play_fx(sound_effect_, stereo_position, 1);
 	}
@@ -305,7 +355,7 @@ void NonPackedAnimation::blit
 {
 	assert(target);
 
-	const int idx = time / frametime_ % nr_frames();
+	const uint32_t idx = current_frame(time);
 	assert(idx < nr_frames());
 
 	if (!hasplrclrs_ || clr == nullptr) {
@@ -361,20 +411,24 @@ AnimationManager IMPLEMENTATION
 */
 
 uint32_t AnimationManager::load(const LuaTable& table) {
-	m_animations.push_back(new NonPackedAnimation(table));
-	return m_animations.size();
+	animations_.push_back(std::unique_ptr<Animation>(new NonPackedAnimation(table)));
+	return animations_.size();
 }
 
 const Animation& AnimationManager::get_animation(uint32_t id) const
 {
-	if (!id || id > m_animations.size())
+	if (!id || id > animations_.size())
 		throw wexception("Requested unknown animation with id: %i", id);
 
-	return *m_animations[id - 1];
+	return *animations_[id - 1].get();
 }
 
-AnimationManager::~AnimationManager()
-{
-	for (vector<Animation*>::iterator it = m_animations.begin(); it != m_animations.end(); ++it)
-		delete *it;
+const Image* AnimationManager::get_representative_image(uint32_t id, const RGBColor* clr) {
+	if (representative_images_.count(id) != 1) {
+		representative_images_.insert(
+					std::make_pair(
+						id,
+						std::unique_ptr<Image>(g_gr->animations().get_animation(id).representative_image(clr))));
+	}
+	return representative_images_.at(id).get();
 }

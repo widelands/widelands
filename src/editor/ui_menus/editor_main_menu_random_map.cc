@@ -34,7 +34,6 @@
 #include "logic/editor_game_base.h"
 #include "logic/map.h"
 #include "logic/world/world.h"
-#include "profile/profile.h"
 #include "random/random.h"
 #include "ui_basic/button.h"
 #include "ui_basic/progresswindow.h"
@@ -518,6 +517,8 @@ void MainMenuNewRandomMap::clicked_create_map() {
 
 	eia.set_need_save(true);
 	eia.register_overlays();
+	eia.toggle_minimap();
+	eia.toggle_minimap();
 
 	die();
 }

@@ -31,7 +31,6 @@
 #include "logic/player.h"
 #include "logic/tribes/tribes.h"
 #include "logic/warehouse.h"
-#include "profile/profile.h"
 #include "ui_basic/editbox.h"
 #include "ui_basic/messagebox.h"
 #include "ui_basic/textarea.h"
@@ -359,7 +358,7 @@ void EditorPlayerMenu::make_infrastructure_clicked(uint8_t n) {
 	if (!imm) {
       // place HQ
 		const Widelands::TribeDescr & tribe = p->tribe();
-		const Widelands::BuildingIndex idx = tribe.headquarters();
+		const Widelands::DescriptionIndex idx = tribe.headquarters();
 		if (!tribe.has_building(idx))
 			throw wexception("Tribe %s lacks headquarters", tribe.name().c_str());
 		// Widelands::Warehouse & headquarter = dynamic_cast<Widelands::Warehouse &>

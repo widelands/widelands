@@ -11,60 +11,60 @@ tribes:new_productionsite_type {
    needs_seafaring = true,
 
    buildcost = {
-		log = 5,
-		granite = 2,
-		thatch_reed = 2
-	},
-	return_on_dismantle = {
-		log = 2,
-		granite = 2
-	},
+      log = 5,
+      granite = 2,
+      thatch_reed = 2
+   },
+   return_on_dismantle = {
+      log = 2,
+      granite = 2
+   },
 
    animations = {
-		idle = {
-			template = "idle_??",
-			directory = dirname,
-			hotspot = { 36, 74 },
-		},
-		build = {
-			template = "build_??",
-			directory = dirname,
-			hotspot = { 36, 74 },
-		},
-		working = {
-			template = "working_??",
-			directory = dirname,
-			hotspot = { 36, 74 },
-		},
-	},
+      idle = {
+         template = "idle_??",
+         directory = dirname,
+         hotspot = { 36, 74 },
+      },
+      build = {
+         template = "build_??",
+         directory = dirname,
+         hotspot = { 36, 74 },
+      },
+      working = {
+         template = "working_??",
+         directory = dirname,
+         hotspot = { 36, 74 },
+      },
+   },
 
    aihints = {
-		prohibited_till = 1200
+      prohibited_till = 1200
    },
 
-	working_positions = {
-		barbarians_weaver = 1
-	},
+   working_positions = {
+      barbarians_weaver = 1
+   },
 
    inputs = {
-		thatch_reed = 8
-	},
+      thatch_reed = 8
+   },
    outputs = {
-		"cloth"
+      "cloth"
    },
 
-	programs = {
-		work = {
-			-- TRANSLATORS: Completed/Skipped/Did not start weaving because ...
-			descname = _"weaving",
-			actions = {
-				"sleep=20000",
-				"check_map=seafaring",
-				"return=skipped unless economy needs cloth",
-				"consume=thatch_reed",
-				"animate=working 25000",
-				"produce=cloth"
-			}
-		},
-	},
+   programs = {
+      work = {
+         -- TRANSLATORS: Completed/Skipped/Did not start weaving because ...
+         descname = _"weaving",
+         actions = {
+            "sleep=20000",
+            "check_map=seafaring",
+            "return=skipped unless economy needs cloth",
+            "consume=thatch_reed",
+            "animate=working 25000",
+            "produce=cloth"
+         }
+      },
+   },
 }

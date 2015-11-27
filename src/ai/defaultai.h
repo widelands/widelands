@@ -59,7 +59,7 @@ struct Flag;
  *   remember to change some time() in network save random functions.
  */
 // TODO(unknown): Improvements:
-// - Improve different initialization types (Aggressive, Normal, Defensive)
+// - Improve different initialization types (Strong, Normal, Weak)
 // - Improve update code - currently the whole buildable area owned by defaultAI
 //   is rechecked after construction of a building or a road. Instead it would
 //   be better to write down the changed coordinates and only check those and
@@ -71,40 +71,21 @@ struct Flag;
 //   out, to have some more forces. Reincrease the number of soldiers that
 //   should be trained if inputs_ get filled again.).
 struct DefaultAI : ComputerPlayer {
-	DefaultAI(Widelands::Game&, const Widelands::PlayerNumber, uint8_t);
+	enum class Type {
+		kWeak,
+		kNormal,
+		kStrong,
+	};
+
+	DefaultAI(Widelands::Game&, const Widelands::PlayerNumber, DefaultAI::Type);
 	~DefaultAI();
 	void think() override;
-
-	enum {
-		AGGRESSIVE = 2,
-		NORMAL = 1,
-		DEFENSIVE = 0,
-	};
 
 	enum class WalkSearch : uint8_t {kAnyPlayer, kOtherPlayers, kEnemy};
 	enum class WoodPolicy : uint8_t {kDismantleRangers, kStopRangers, kAllowRangers};
 	enum class NewShip : uint8_t {kBuilt, kFoundOnLoad};
 	enum class PerfEvaluation : uint8_t {kForConstruction, kForDismantle};
-	enum class ScheduleTasks : uint8_t {
-		kBbuildableFieldsCheck,
-		kMineableFieldsCheck,
-		kRoadCheck,
-		kUnbuildableFCheck,
-		kCheckEconomies,
-		kProductionsitesStats,
-		kConstructBuilding,
-		kCheckProductionsites,
-		kCheckShips,
-		KMarineDecisions,
-		kCheckMines,
-		kWareReview,
-		kPrintStats,
-		kIdle,
-		kCheckMilitarysites,
-		kCheckTrainingsites,
-		kCountMilitaryVacant,
-		kCheckEnemySites
-	};
+
 	enum class Tribes : uint8_t {
 		kNone,
 		kBarbarians,
@@ -113,15 +94,15 @@ struct DefaultAI : ComputerPlayer {
 	};
 
 
-	/// Implementation for Aggressive
-	struct AggressiveImpl : public ComputerPlayer::Implementation {
-		AggressiveImpl() {
+	/// Implementation for Strong
+	struct StrongImpl : public ComputerPlayer::Implementation {
+		StrongImpl() {
 			/** TRANSLATORS: This is the name of an AI used in the game setup screens */
-			name = pgettext("ai_name", "Aggressive");
+			name = pgettext("ai_name", "Strong");
 		}
 		ComputerPlayer* instantiate(Widelands::Game& game,
 		                            Widelands::PlayerNumber const p) const override {
-			return new DefaultAI(game, p, AGGRESSIVE);
+			return new DefaultAI(game, p, DefaultAI::Type::kStrong);
 		}
 	};
 
@@ -132,24 +113,24 @@ struct DefaultAI : ComputerPlayer {
 		}
 		ComputerPlayer* instantiate(Widelands::Game& game,
 		                            Widelands::PlayerNumber const p) const override {
-			return new DefaultAI(game, p, NORMAL);
+			return new DefaultAI(game, p, DefaultAI::Type::kNormal);
 		}
 	};
 
-	struct DefensiveImpl : public ComputerPlayer::Implementation {
-		DefensiveImpl() {
+	struct WeakImpl : public ComputerPlayer::Implementation {
+		WeakImpl() {
 			/** TRANSLATORS: This is the name of an AI used in the game setup screens */
-			name = pgettext("ai_name", "Defensive");
+			name = pgettext("ai_name", "Weak");
 		}
 		ComputerPlayer* instantiate(Widelands::Game& game,
 		                            Widelands::PlayerNumber const p) const override {
-			return new DefaultAI(game, p, DEFENSIVE);
+			return new DefaultAI(game, p, DefaultAI::Type::kWeak);
 		}
 	};
 
-	static AggressiveImpl aggressiveImpl;
-	static NormalImpl normalImpl;
-	static DefensiveImpl defensiveImpl;
+	static StrongImpl strong_impl;
+	static NormalImpl normal_impl;
+	static WeakImpl weak_impl;
 
 private:
 	void late_initialization();
@@ -161,7 +142,7 @@ private:
 	void update_buildable_field(BuildableField&, uint16_t = 6, bool = false);
 	void update_mineable_field(MineableField&);
 
-	void update_productionsite_stats(uint32_t);
+	void update_productionsite_stats();
 
 	// for productionsites
 	Widelands::BuildingNecessity check_building_necessity
@@ -170,7 +151,10 @@ private:
 	Widelands::BuildingNecessity check_building_necessity
 		(uint8_t, uint32_t);
 
-	ScheduleTasks get_oldest_task(uint32_t);
+	void sort_task_pool();
+	void sort_by_priority();
+	void set_taskpool_task_time(uint32_t, Widelands::SchedulerTaskId);
+	uint32_t get_taskpool_task_time(Widelands::SchedulerTaskId);
 
 	bool construct_building(uint32_t);
 
@@ -201,16 +185,16 @@ private:
 	bool check_trainingsites(uint32_t);
 	bool check_mines_(uint32_t);
 	bool check_militarysites(uint32_t);
-	bool marine_main_decisions(uint32_t);
+	bool marine_main_decisions();
 	bool check_ships(uint32_t);
 	bool check_enemy_sites(uint32_t);
-	void print_stats(uint32_t);
+	void print_stats();
 	// return single number of strength of vector of soldiers
 	int32_t calculate_strength(const std::vector<Widelands::Soldier*>);
 	uint32_t get_stocklevel_by_hint(size_t);
 	uint32_t get_stocklevel(BuildingObserver&);
-	uint32_t get_warehoused_stock(Widelands::WareIndex wt);
-	uint32_t get_stocklevel(Widelands::WareIndex);  // count all direct outputs_
+	uint32_t get_warehoused_stock(Widelands::DescriptionIndex wt);
+	uint32_t get_stocklevel(Widelands::DescriptionIndex);  // count all direct outputs_
 	void review_wares_targets(uint32_t);
 	void count_military_vacant_positions();
 
@@ -218,7 +202,7 @@ private:
 	// other player is accessible
 	// via walking
 	bool other_player_accessible(uint32_t max_distance,
-	                             int32_t* tested_fields,
+	                             uint32_t* tested_fields,
 	                             uint16_t* mineable_fields_count,
 	                             const Widelands::Coords starting_spot,
 	                             const WalkSearch type);
@@ -250,13 +234,12 @@ private:
 	template<typename T> void check_range(const T, const  T, const  T, const char *);
 	template<typename T> void check_range(const T, const  T, const char *);
 
-
 private:
 	// Variables of default AI
-	uint8_t type_;
+	DefaultAI::Type type_;
 
 	// collect statistics on how many times which job was run
-	uint32_t schedStat[20] = {0};
+	uint32_t sched_stat_[20] = {0};
 
 	Widelands::Player* player_;
 	Widelands::TribeDescr const* tribe_;
@@ -291,7 +274,9 @@ private:
 	std::list<WarehouseSiteObserver> warehousesites;
 	std::list<TrainingSiteObserver> trainingsites;
 	std::list<ShipObserver> allships;
-	std::map<ScheduleTasks, uint32_t> taskDue;
+	// This is a vector that is filled up on initiatlization
+	// and no items are added/removed afterwards
+	std::vector<SchedulerTask> taskPool;
 	std::map<uint32_t, EnemySiteObserver> enemy_sites;
 	// it will map mined material to observer
 	std::map<int32_t, MineTypesObserver> mines_per_type;
@@ -302,6 +287,8 @@ private:
 	// returns count of militarysites
 	uint32_t msites_in_constr() const;
 	uint32_t msites_built() const;
+
+	int32_t limit_cnt_target(int32_t, int32_t);
 
 	std::vector<WareObserver> wares;
 

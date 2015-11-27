@@ -11,9 +11,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-09-21 19:04+0000\n"
-"PO-Revision-Date: 2015-09-25 05:00+0000\n"
-"Last-Translator: Anton Khabarov <2233009@gmail.com>\n"
+"POT-Creation-Date: 2015-11-18 08:43+0000\n"
+"PO-Revision-Date: 2015-11-18 08:43+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -59,12 +59,12 @@ msgid "Start building mines on the mountain"
 msgstr "Начать строить шахты в горе"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:44
-msgid "Build coal and iron ore mines"
-msgstr "Построить угольную шахту и рудник."
+msgid "Build coal and iron mines"
+msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:45
-msgid "Build a coal mine and an iron ore mine."
-msgstr "Постройте шахту по добыче угля и шахту по добыче железа."
+msgid "Build a coal mine and an iron mine."
+msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:46
 msgid ""
@@ -235,7 +235,7 @@ msgstr "Постройте балочную мастерскую."
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:106
 msgid ""
 "Bigger and better buildings – including all military ones – require better "
-"building materials. They cannot be built out of simple logs – the wood has "
+"building materials. They cannot be built out of simple logs – the logs have "
 "to be refined to blackwood by a wood hardener first. Always remember to "
 "build a wood hardener before you run out of blackwood, as without it you "
 "cannot expand."
@@ -253,7 +253,7 @@ msgstr "Построй цементную печь, которую снабдя�
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:116
 msgid ""
 "Better buildings may also require other improved materials besides "
-"blackwood. One of these is grout, which is produced out of raw stone, water "
+"blackwood. One of these is grout, which is produced out of granite, water "
 "and coal by a lime-burner."
 msgstr ""
 

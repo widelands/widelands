@@ -59,7 +59,7 @@ class WareInstance : public MapObject {
 	MO_DESCR(WareDescr)
 
 public:
-	WareInstance(WareIndex, const WareDescr* const);
+	WareInstance(DescriptionIndex, const WareDescr* const);
 	~WareInstance();
 
 	MapObject* get_location(EditorGameBase& egbase) {
@@ -68,7 +68,7 @@ public:
 	Economy* get_economy() const {
 		return m_economy;
 	}
-	WareIndex descr_index() const {
+	DescriptionIndex descr_index() const {
 		return m_descr_index;
 	}
 
@@ -98,7 +98,7 @@ public:
 private:
 	ObjectPointer m_location;
 	Economy* m_economy;
-	WareIndex m_descr_index;
+	DescriptionIndex m_descr_index;
 
 	IdleWareSupply* m_supply;
 	Transfer* m_transfer;

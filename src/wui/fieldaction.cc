@@ -56,16 +56,16 @@ constexpr int kBuildGridCellSize = 50;
 // The BuildGrid presents a selection of buildable buildings
 struct BuildGrid : public UI::IconGrid {
 	BuildGrid(UI::Panel* parent,
-	          const Widelands::TribeDescr& tribe,
+				 Widelands::Player* plr,
 	          int32_t x,
 	          int32_t y,
 	          int32_t cols);
 
-	boost::signals2::signal<void(Widelands::BuildingIndex)> buildclicked;
-	boost::signals2::signal<void(Widelands::BuildingIndex)> buildmouseout;
-	boost::signals2::signal<void(Widelands::BuildingIndex)> buildmousein;
+	boost::signals2::signal<void(Widelands::DescriptionIndex)> buildclicked;
+	boost::signals2::signal<void(Widelands::DescriptionIndex)> buildmouseout;
+	boost::signals2::signal<void(Widelands::DescriptionIndex)> buildmousein;
 
-	void add(Widelands::BuildingIndex);
+	void add(Widelands::DescriptionIndex);
 
 private:
 	void click_slot(int32_t idx);
@@ -73,14 +73,14 @@ private:
 	void mousein_slot(int32_t idx);
 
 private:
-	const Widelands::TribeDescr& tribe_;
+	Widelands::Player* plr_;
 };
 
 BuildGrid::BuildGrid(
-		UI::Panel* parent, const Widelands::TribeDescr& tribe,
+		UI::Panel* parent, Widelands::Player* plr,
 		int32_t x, int32_t y, int32_t cols) :
 	UI::IconGrid(parent, x, y, kBuildGridCellSize, kBuildGridCellSize, cols),
-	tribe_(tribe)
+	plr_(plr)
 {
 	clicked.connect(boost::bind(&BuildGrid::click_slot, this, _1));
 	mouseout.connect(boost::bind(&BuildGrid::mouseout_slot, this, _1));
@@ -92,18 +92,19 @@ BuildGrid::BuildGrid(
 Add a new building to the list of buildable buildings
 ===============
 */
-void BuildGrid::add(Widelands::BuildingIndex id)
+void BuildGrid::add(Widelands::DescriptionIndex id)
 {
 	const Widelands::BuildingDescr & descr =
-		*tribe_.get_building_descr(Widelands::BuildingIndex(id));
+		*plr_->tribe().get_building_descr(Widelands::DescriptionIndex(id));
+
 	// TODO(sirver): change this to take a Button subclass instead of
 	// parameters. This will allow overriding the way it is rendered
 	// to bring back player colors.
 	UI::IconGrid::add(descr.name(),
-							descr.representative_image(),
+							descr.representative_image(&plr_->get_playercolor()),
 	                  reinterpret_cast<void*>(id),
 	                  descr.descname() + "<br><font size=11>" + _("Construction costs:") +
-	                     "</font><br>" + waremap_to_richtext(tribe_, descr.buildcost()));
+								"</font><br>" + waremap_to_richtext(plr_->tribe(), descr.buildcost()));
 }
 
 
@@ -187,9 +188,9 @@ public:
 	void act_buildroad();
 	void act_abort_buildroad();
 	void act_removeroad();
-	void act_build              (Widelands::BuildingIndex);
-	void building_icon_mouse_out(Widelands::BuildingIndex);
-	void building_icon_mouse_in (Widelands::BuildingIndex);
+	void act_build              (Widelands::DescriptionIndex);
+	void building_icon_mouse_out(Widelands::DescriptionIndex);
+	void building_icon_mouse_in (Widelands::DescriptionIndex);
 	void act_geologist();
 	void act_attack();      /// Launch the attack
 
@@ -497,7 +498,7 @@ void FieldActionWindow::add_buttons_build(int32_t buildcaps)
 
 	m_fastclick = false;
 
-	for (const Widelands::BuildingIndex& building_index : tribe.buildings()) {
+	for (const Widelands::DescriptionIndex& building_index : tribe.buildings()) {
 		const Widelands::BuildingDescr* building_descr = tribe.get_building_descr(building_index);
 		BuildGrid * * ppgrid;
 
@@ -533,7 +534,7 @@ void FieldActionWindow::add_buttons_build(int32_t buildcaps)
 
 		// Allocate the tab's grid if necessary
 		if (!*ppgrid) {
-			*ppgrid = new BuildGrid(&m_tabpanel, tribe, 0, 0, 5);
+			*ppgrid = new BuildGrid(&m_tabpanel, m_plr, 0, 0, 5);
 			(*ppgrid)->buildclicked.connect(boost::bind(&FieldActionWindow::act_build, this, _1));
 			(*ppgrid)->buildmouseout.connect
 				(boost::bind(&FieldActionWindow::building_icon_mouse_out, this, _1));
@@ -793,12 +794,12 @@ void FieldActionWindow::act_removeroad()
 Start construction of the building with the give description index
 ===============
 */
-void FieldActionWindow::act_build(Widelands::BuildingIndex idx)
+void FieldActionWindow::act_build(Widelands::DescriptionIndex idx)
 {
 	upcast(Game, game, &ibase().egbase());
 	upcast(InteractivePlayer, iaplayer, &ibase());
 
-	game->send_player_build(iaplayer->player_number(), m_node, Widelands::BuildingIndex(idx));
+	game->send_player_build(iaplayer->player_number(), m_node, Widelands::DescriptionIndex(idx));
 	ibase().reference_player_tribe(m_plr->player_number(), &m_plr->tribe());
 	iaplayer->set_flag_to_connect(game->map().br_n(m_node));
 	okdialog();
@@ -806,7 +807,7 @@ void FieldActionWindow::act_build(Widelands::BuildingIndex idx)
 
 
 void FieldActionWindow::building_icon_mouse_out
-	(Widelands::BuildingIndex)
+	(Widelands::DescriptionIndex)
 {
 	if (m_workarea_preview_job_id) {
 		m_overlay_manager.remove_overlay(m_workarea_preview_job_id);
@@ -816,11 +817,11 @@ void FieldActionWindow::building_icon_mouse_out
 
 
 void FieldActionWindow::building_icon_mouse_in
-	(const Widelands::BuildingIndex idx)
+	(const Widelands::DescriptionIndex idx)
 {
 	if (ibase().m_show_workarea_preview && !m_workarea_preview_job_id) {
 		const WorkareaInfo & workarea_info =
-			m_plr->tribe().get_building_descr(Widelands::BuildingIndex(idx))
+			m_plr->tribe().get_building_descr(Widelands::DescriptionIndex(idx))
 			->m_workarea_info;
 		m_workarea_preview_job_id = ibase().show_work_area(workarea_info, m_node);
 	}

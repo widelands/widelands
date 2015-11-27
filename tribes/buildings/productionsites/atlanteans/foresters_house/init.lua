@@ -10,41 +10,41 @@ tribes:new_productionsite_type {
    size = "small",
 
    buildcost = {
-		log = 1,
-		planks = 1,
-		granite = 1
-	},
-	return_on_dismantle = {
-		granite = 1,
-		log = 1
-	},
-
-   animations = {
-		idle = {
-			template = "idle_??",
-			directory = dirname,
-			hotspot = { 37, 44 },
-		}
-	},
-
-   aihints = {
-		space_consumer = true,
-		renews_map_resource = "log",
-		prohibited_till = 240
+      log = 1,
+      planks = 1,
+      granite = 1
+   },
+   return_on_dismantle = {
+      granite = 1,
+      log = 1
    },
 
-	working_positions = {
-		atlanteans_forester = 1
-	},
+   animations = {
+      idle = {
+         template = "idle_??",
+         directory = dirname,
+         hotspot = { 37, 44 },
+      }
+   },
 
-	programs = {
-		work = {
-			-- TRANSLATORS: Completed/Skipped/Did not start planting trees because ...
-			descname = _"planting trees",
-			actions = {
-				"sleep=11000",
-				"worker=plant"
-			}
-		},
-	},
+   aihints = {
+      space_consumer = true,
+      renews_map_resource = "log",
+      prohibited_till = 240
+   },
+
+   working_positions = {
+      atlanteans_forester = 1
+   },
+
+   programs = {
+      work = {
+         -- TRANSLATORS: Completed/Skipped/Did not start planting trees because ...
+         descname = _"planting trees",
+         actions = {
+            "sleep=11000",
+            "worker=plant"
+         }
+      },
+   },
 }

@@ -97,6 +97,7 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect
 	_add_tag_checkbox(vbox, "official", _("Official"));
 	_add_tag_checkbox(vbox, "unbalanced", _("Unbalanced"));
 	_add_tag_checkbox(vbox, "seafaring", _("Seafaring"));
+	_add_tag_checkbox(vbox, "artifacts", _("Artifacts"));
 	_add_tag_checkbox(vbox, "scenario", _("Scenario"));
 	vbox->set_size(get_w() - 2 * tablex_, checkbox_space_);
 
@@ -362,7 +363,7 @@ void FullscreenMenuMapSelect::fill_table()
 		}
 	}
 	table_.fill(maps_data_, display_type);
-	if (table_.size() > 0) {
+	if (!table_.empty()) {
 		table_.select(0);
 	} else {
 		ok_.set_enabled(false);

@@ -10,9 +10,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-09-05 09:36+0000\n"
-"PO-Revision-Date: 2015-09-05 09:38+0000\n"
-"Last-Translator: Anton Khabarov <2233009@gmail.com>\n"
+"POT-Creation-Date: 2015-11-18 08:43+0000\n"
+"PO-Revision-Date: 2015-11-18 08:44+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -75,9 +75,9 @@ msgid ""
 "houses, others for making other wares. Obviously, the wares in the "
 "headquarters will not last forever, so you must make sure to replace them. "
 "The most important wares in the early game are the basic construction wares:"
-" logs and raw stone. Let’s make sure that we do not run out of logs. For "
-"this, we need a lumberjack and a hut for him to stay in."
-msgstr "Обычно игра начинается лишь с одним штабом. Это большое здание с синим флагом перед ним. В штабе находятся рабочие и солдаты, а также хранятся товары. Некоторые ресурсы нужны для строительства зданий, другие — для производства товаров. Запас ресурсов в штабе не бесконечен, так что необходимо наладить их производство. Самые нужные ресурсы в начале игры — основные строительные материалы: брёвна и камни. Давайте позаботимся о том, чтобы у нас не закончились брёвна. Для этого нам нужен дровосек и его хижина."
+" logs and granite. Let’s make sure that we do not run out of logs. For this,"
+" we need a lumberjack and a hut for him to stay in."
+msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:44
 msgid ""
@@ -289,8 +289,8 @@ msgstr "Хижина лесоруба готова"
 msgid ""
 "Excellent. The lumberjack’s hut is done. A lumberjack will now move in and "
 "start chopping down trees, so our log income is secured for now. Now on to "
-"the raw stone."
-msgstr "Великолепно! Хижина лесоруба построена. Сейчас он пойдет валить деревья — снабжение брёвнами налажено. Теперь перейдем к ещё одному важному ресурсу — камню."
+"the granite."
+msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:179
 msgid "Some Rocks Were Found"
@@ -302,11 +302,11 @@ msgstr "Строительство каменоломни"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:182
 msgid ""
-"Stones can be mined in granite mines, but the easier way is to build a "
+"Granite can be mined in granite mines, but the easier way is to build a "
 "quarry next to some rocks lying around. As it happens, there is a pile of "
 "them just to the west (left) of your headquarters. I will teach you now how "
 "to move your view over there."
-msgstr "Камни можно добыть в гранитной шахте, но проще построить каменоломню около разбросанных рядом скал. Так случилось, что есть целая груда таких на западе (слева) от вашего штаба. Я объясню, как перевести обзор."
+msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:184
 msgid ""
@@ -646,11 +646,11 @@ msgstr "Вы уничтожили строительную площадку!"
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:353
 msgid ""
 "It seems like you destroyed a construction site for a quarry we wanted to "
-"build. Since we need the stones, I suggest you reload the game from a "
+"build. Since we need the granite, I suggest you reload the game from a "
 "previous savegame. Luckily, these are created from time to time. To do so, "
 "you have to go back to the main menu and choose ‘Single Player’ → ‘Load "
 "Game’. And please be a bit more careful next time."
-msgstr "Похоже, что вы разрушили стройплощадку для каменоломни, которую мы хотели построить. Так как нам нужны камни, я предлагаю вам загрузить игру из последнего сохранения. К счастью, игра автоматически сохраняется время от времени. Чтобы зарузить игру из файла сохранения, вам нужно выйти в главное меню и выбрать \"Одиночная игра\" → \"Загрузить игру\". И, пожалуйста, в следующий раз будьте более осторожным."
+msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:361
 msgid "Build a second quarry"
@@ -659,8 +659,8 @@ msgstr "Построить вторую каменоломню"
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:363
 msgid ""
 "When there are many rocks, you can consider building another quarry. This "
-"will make the stone production faster."
-msgstr "Если в округе есть много скал, вы можете построить несколько каменоломен. Это увеличит скорость добычи камня."
+"will make the granite production faster."
+msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:365
 msgid ""
@@ -826,9 +826,9 @@ msgstr "Прямо сейчас! Закройте окно сообщений, �
 msgid ""
 "Well done! Let’s see how messages work in a real game, shall we? For this, "
 "I’ll take all rocks away from the poor stonemasons in the quarries. They "
-"will then send a message each that they can’t find any in their working "
-"areas the next time they try to do some work."
-msgstr "Ай да молодец! Давайте посмотрим, как работает система сообщений в реальной игре. Нужно ведь проверить, не так ли? Для этого я уберу все скалы подальше от бедных каменщиков в каменоломнях. Тогда каждый из них отправит сообщение о том, что он не может найти камень, как только он попробует его добыть."
+"will then send a message each that they can’t find any in their work areas "
+"the next time they try to do some work."
+msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:454
 msgid "Messages Arrived!"
@@ -897,12 +897,12 @@ msgstr "Теперь я хочу показать, как можно расши�
 msgid ""
 "Expanding is as simple as building a military building at the edge of your "
 "territory. The Barbarians have a selection of different military buildings: "
-"sentries, barriers, donjons, fortresses and citadels. The bigger the "
+"sentries, barriers, towers, fortresses and citadels. The bigger the "
 "building, the more expensive it is to build, but the more land it will "
 "conquer around itself and the more soldiers can be stationed there. The "
 "buildings also vary in their vision range: buildings with a tower see "
 "farther than others."
-msgstr "Для расширения своих владений - достаточно построить военное здание вблизи границы на краю вашей территории. У Варваров есть выбор различных военных зданий: караульные, форпосты, донжоны, крепости и цитадели. Чем больше здание, тем более дорогим будет его строительство, но тем больше солдат сможет в нем разместиться и большая территория будет завоевана. Здания также отличаются по степени обзора: высокие здания позволяют видеть дальше, чем другие."
+msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:478
 msgid ""
@@ -939,9 +939,9 @@ msgstr "В Widelands вам придется построить много зд�
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:489
 msgid ""
 "The Barbarians have four different military buildings you can build: the "
-"sentry (small), the barrier and the donjon (both medium) and the fortress "
+"sentry (small), the barrier and the tower (both medium) and the fortress "
 "(big). Just choose the one you like most."
-msgstr "У Варваров есть четыре различных военных здания, которые вы можете построить: караульная (малое здание), форпост и донжон (средние здания) и крепость (большое здание). Просто выберите то, которое вам больше понравится."
+msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:490
 msgid ""

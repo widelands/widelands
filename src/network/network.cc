@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2009 by the Widelands Development Team
+ * Copyright (C) 2004-2009, 2015 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,7 +24,7 @@
 
 
 
-CmdNetCheckSync::CmdNetCheckSync(int32_t const dt, SyncCallback * const cb) :
+CmdNetCheckSync::CmdNetCheckSync(uint32_t const dt, SyncCallback * const cb) :
 Command (dt), m_callback(cb)
 {}
 
@@ -42,19 +42,19 @@ NetworkTime::NetworkTime()
 void NetworkTime::reset(int32_t const ntime)
 {
 	m_networktime = m_time = ntime;
-	m_lastframe = WLApplication::get()->get_time();
+	m_lastframe = SDL_GetTicks();
 	m_latency = 0;
 }
 
 void NetworkTime::fastforward()
 {
 	m_time = m_networktime;
-	m_lastframe = WLApplication::get()->get_time();
+	m_lastframe = SDL_GetTicks();
 }
 
 void NetworkTime::think(uint32_t const speed)
 {
-	int32_t const curtime = WLApplication::get()->get_time();
+	uint32_t const curtime = SDL_GetTicks();
 	int32_t delta = curtime - m_lastframe;
 	m_lastframe = curtime;
 

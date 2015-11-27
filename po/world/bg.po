@@ -7,77 +7,77 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-07-04 14:22+0000\n"
-"PO-Revision-Date: 2015-07-23 14:05+0000\n"
+"POT-Creation-Date: 2015-11-18 08:43+0000\n"
+"PO-Revision-Date: 2015-11-18 13:47+0000\n"
 "Last-Translator: Lyubomir Vasilev\n"
-"Language-Team: Bulgarian (http://www.transifex.com/projects/p/widelands/language/bg/)\n"
+"Language-Team: Bulgarian (http://www.transifex.com/widelands/widelands/language/bg/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: bg\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../../world/critters/badger/init.lua:14
+#: ../../world/critters/badger/init.lua:15
 msgid "Badger"
 msgstr "Язовец"
 
-#: ../../world/critters/brownbear/init.lua:14
+#: ../../world/critters/brownbear/init.lua:15
 msgid "Brown bear"
 msgstr "Кафява мечка"
 
-#: ../../world/critters/bunny/init.lua:13
+#: ../../world/critters/bunny/init.lua:14
 msgid "Bunny"
 msgstr "Зайче"
 
-#: ../../world/critters/chamois/init.lua:14
+#: ../../world/critters/chamois/init.lua:15
 msgid "Chamois"
 msgstr "Дива коза"
 
-#: ../../world/critters/deer/init.lua:14
+#: ../../world/critters/deer/init.lua:15
 msgid "Deer"
 msgstr "Елен"
 
-#: ../../world/critters/duck/init.lua:18
+#: ../../world/critters/duck/init.lua:19
 msgid "Duck"
 msgstr "Патица"
 
-#: ../../world/critters/elk/init.lua:14
+#: ../../world/critters/elk/init.lua:15
 msgid "Elk"
 msgstr "Уапит"
 
-#: ../../world/critters/fox/init.lua:14
+#: ../../world/critters/fox/init.lua:15
 msgid "Fox"
 msgstr "Лисица"
 
-#: ../../world/critters/lynx/init.lua:14
+#: ../../world/critters/lynx/init.lua:15
 msgid "Lynx"
 msgstr "Рис"
 
-#: ../../world/critters/marten/init.lua:14
+#: ../../world/critters/marten/init.lua:15
 msgid "Marten"
 msgstr "Златка"
 
-#: ../../world/critters/reindeer/init.lua:14
+#: ../../world/critters/reindeer/init.lua:15
 msgid "Reindeer"
 msgstr "Северен елен"
 
-#: ../../world/critters/sheep/init.lua:18
+#: ../../world/critters/sheep/init.lua:19
 msgid "Sheep"
 msgstr "Овца"
 
-#: ../../world/critters/stag/init.lua:14
+#: ../../world/critters/stag/init.lua:15
 msgid "Stag"
 msgstr "Мъжки елен"
 
-#: ../../world/critters/wildboar/init.lua:14
+#: ../../world/critters/wildboar/init.lua:15
 msgid "Wild boar"
 msgstr "Дива свиня"
 
-#: ../../world/critters/wisent/init.lua:14
+#: ../../world/critters/wisent/init.lua:15
 msgid "Wisent"
 msgstr "Зубър"
 
-#: ../../world/critters/wolf/init.lua:14
+#: ../../world/critters/wolf/init.lua:15
 msgid "Wolf"
 msgstr "Вълк"
 
@@ -101,6 +101,13 @@ msgstr "Кактус"
 #: ../../world/immovables/grass3/init.lua:5
 msgid "Grass"
 msgstr "Трева"
+
+#: ../../world/immovables/manmade/artifacts/artifact00/init.lua:5
+#: ../../world/immovables/manmade/artifacts/artifact01/init.lua:5
+#: ../../world/immovables/manmade/artifacts/artifact02/init.lua:5
+#: ../../world/immovables/manmade/artifacts/artifact03/init.lua:5
+msgid "Artifact"
+msgstr "Артефакт"
 
 #: ../../world/immovables/manmade/bar-ruin00/init.lua:5
 #: ../../world/immovables/manmade/bar-ruin01/init.lua:5
@@ -138,6 +145,48 @@ msgstr "Гъба"
 msgid "Pebble"
 msgstr "Чакъл"
 
+#: ../../world/immovables/rocks/blackland_rocks1/init.lua:13
+#: ../../world/immovables/rocks/desert_rocks1/init.lua:13
+#: ../../world/immovables/rocks/greenland_rocks1/init.lua:13
+#: ../../world/immovables/rocks/winterland_rocks1/init.lua:13
+msgid "Rocks 1"
+msgstr "Скали 1"
+
+#: ../../world/immovables/rocks/blackland_rocks2/init.lua:13
+#: ../../world/immovables/rocks/desert_rocks2/init.lua:13
+#: ../../world/immovables/rocks/greenland_rocks2/init.lua:13
+#: ../../world/immovables/rocks/winterland_rocks2/init.lua:13
+msgid "Rocks 2"
+msgstr "Скали 2"
+
+#: ../../world/immovables/rocks/blackland_rocks3/init.lua:13
+#: ../../world/immovables/rocks/desert_rocks3/init.lua:13
+#: ../../world/immovables/rocks/greenland_rocks3/init.lua:13
+#: ../../world/immovables/rocks/winterland_rocks3/init.lua:13
+msgid "Rocks 3"
+msgstr "Скали 3"
+
+#: ../../world/immovables/rocks/blackland_rocks4/init.lua:13
+#: ../../world/immovables/rocks/desert_rocks4/init.lua:13
+#: ../../world/immovables/rocks/greenland_rocks4/init.lua:13
+#: ../../world/immovables/rocks/winterland_rocks4/init.lua:13
+msgid "Rocks 4"
+msgstr "Скали 4"
+
+#: ../../world/immovables/rocks/blackland_rocks5/init.lua:13
+#: ../../world/immovables/rocks/desert_rocks5/init.lua:13
+#: ../../world/immovables/rocks/greenland_rocks5/init.lua:13
+#: ../../world/immovables/rocks/winterland_rocks5/init.lua:13
+msgid "Rocks 5"
+msgstr "Скали 5"
+
+#: ../../world/immovables/rocks/blackland_rocks6/init.lua:13
+#: ../../world/immovables/rocks/desert_rocks6/init.lua:13
+#: ../../world/immovables/rocks/greenland_rocks6/init.lua:13
+#: ../../world/immovables/rocks/winterland_rocks6/init.lua:13
+msgid "Rocks 6"
+msgstr "Скали 6"
+
 #: ../../world/immovables/skeleton1/init.lua:5
 #: ../../world/immovables/skeleton3/init.lua:5
 msgid "Skeleton"
@@ -173,49 +222,7 @@ msgstr "Раковина"
 msgid "Standing Stone"
 msgstr "Побит камък"
 
-#: ../../world/immovables/stones/blackland_stones1/init.lua:12
-#: ../../world/immovables/stones/desert_stones1/init.lua:12
-#: ../../world/immovables/stones/greenland_stones1/init.lua:12
-#: ../../world/immovables/stones/winterland_stones1/init.lua:12
-msgid "Stones 1"
-msgstr "Камъни 1"
-
-#: ../../world/immovables/stones/blackland_stones2/init.lua:12
-#: ../../world/immovables/stones/desert_stones2/init.lua:12
-#: ../../world/immovables/stones/greenland_stones2/init.lua:12
-#: ../../world/immovables/stones/winterland_stones2/init.lua:12
-msgid "Stones 2"
-msgstr "Камъни 2"
-
-#: ../../world/immovables/stones/blackland_stones3/init.lua:12
-#: ../../world/immovables/stones/desert_stones3/init.lua:12
-#: ../../world/immovables/stones/greenland_stones3/init.lua:12
-#: ../../world/immovables/stones/winterland_stones3/init.lua:12
-msgid "Stones 3"
-msgstr "Камъни 3"
-
-#: ../../world/immovables/stones/blackland_stones4/init.lua:12
-#: ../../world/immovables/stones/desert_stones4/init.lua:12
-#: ../../world/immovables/stones/greenland_stones4/init.lua:12
-#: ../../world/immovables/stones/winterland_stones4/init.lua:12
-msgid "Stones 4"
-msgstr "Камъни 4"
-
-#: ../../world/immovables/stones/blackland_stones5/init.lua:12
-#: ../../world/immovables/stones/desert_stones5/init.lua:12
-#: ../../world/immovables/stones/greenland_stones5/init.lua:12
-#: ../../world/immovables/stones/winterland_stones5/init.lua:12
-msgid "Stones 5"
-msgstr "Камъни 5"
-
-#: ../../world/immovables/stones/blackland_stones6/init.lua:12
-#: ../../world/immovables/stones/desert_stones6/init.lua:12
-#: ../../world/immovables/stones/greenland_stones6/init.lua:12
-#: ../../world/immovables/stones/winterland_stones6/init.lua:12
-msgid "Stones 6"
-msgstr "Камъни 6"
-
-#: TRANSLATORS This track is made of footprints in the snow
+#. TRANSLATORS: This track is made of footprints in the snow
 #: ../../world/immovables/track_winter/init.lua:6
 msgid "Track"
 msgstr "Следа"
@@ -224,15 +231,15 @@ msgstr "Следа"
 msgid "Alder (Sapling)"
 msgstr "Елша (фиданка)"
 
-#: ../../world/immovables/trees/alder/init.lua:43
+#: ../../world/immovables/trees/alder/init.lua:44
 msgid "Alder (Pole)"
 msgstr "Елша (млада)"
 
-#: ../../world/immovables/trees/alder/init.lua:66
+#: ../../world/immovables/trees/alder/init.lua:68
 msgid "Alder (Mature)"
 msgstr "Елша (развита)"
 
-#: ../../world/immovables/trees/alder/init.lua:89
+#: ../../world/immovables/trees/alder/init.lua:92
 msgid "Alder (Old)"
 msgstr "Елша (стара)"
 
@@ -240,15 +247,15 @@ msgstr "Елша (стара)"
 msgid "Aspen (Sapling)"
 msgstr "Аспен (фиданка)"
 
-#: ../../world/immovables/trees/aspen/init.lua:35
+#: ../../world/immovables/trees/aspen/init.lua:36
 msgid "Aspen (Pole)"
 msgstr "Аспен (млад)"
 
-#: ../../world/immovables/trees/aspen/init.lua:58
+#: ../../world/immovables/trees/aspen/init.lua:60
 msgid "Aspen (Mature)"
 msgstr "Аспен (развит)"
 
-#: ../../world/immovables/trees/aspen/init.lua:84
+#: ../../world/immovables/trees/aspen/init.lua:87
 msgid "Aspen (Old)"
 msgstr "Аспен (стар)"
 
@@ -256,15 +263,15 @@ msgstr "Аспен (стар)"
 msgid "Beech (Sapling)"
 msgstr "Бук (фиданка)"
 
-#: ../../world/immovables/trees/beech/init.lua:35
+#: ../../world/immovables/trees/beech/init.lua:36
 msgid "Beech (Pole)"
 msgstr "Бук (млад)"
 
-#: ../../world/immovables/trees/beech/init.lua:58
+#: ../../world/immovables/trees/beech/init.lua:60
 msgid "Beech (Mature)"
 msgstr "Бук (развит"
 
-#: ../../world/immovables/trees/beech/init.lua:81
+#: ../../world/immovables/trees/beech/init.lua:84
 msgid "Beech (Old)"
 msgstr "Бук (стар)"
 
@@ -272,35 +279,35 @@ msgstr "Бук (стар)"
 msgid "Birch (Sapling)"
 msgstr "Бреза (фиданка)"
 
-#: ../../world/immovables/trees/birch/init.lua:35
+#: ../../world/immovables/trees/birch/init.lua:36
 msgid "Birch (Pole)"
 msgstr "Бреза (млада)"
 
-#: ../../world/immovables/trees/birch/init.lua:58
+#: ../../world/immovables/trees/birch/init.lua:60
 msgid "Birch (Mature)"
 msgstr "Бреза (развита)"
 
-#: ../../world/immovables/trees/birch/init.lua:84
+#: ../../world/immovables/trees/birch/init.lua:87
 msgid "Birch (Old)"
 msgstr "Бреза (стара)"
 
-#: TRANSLATORS This is a fictitious tree. Be creative if you want.
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../world/immovables/trees/cirrus/init.lua:13
 msgid "Cirrus Tree (Sapling)"
 msgstr "Пересто дърво (фиданка)"
 
-#: TRANSLATORS This is a fictitious tree. Be creative if you want.
-#: ../../world/immovables/trees/cirrus/init.lua:37
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#: ../../world/immovables/trees/cirrus/init.lua:38
 msgid "Cirrus Tree (Pole)"
 msgstr "Пересто дърво (младо)"
 
-#: TRANSLATORS This is a fictitious tree. Be creative if you want.
-#: ../../world/immovables/trees/cirrus/init.lua:61
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#: ../../world/immovables/trees/cirrus/init.lua:63
 msgid "Cirrus Tree (Mature)"
 msgstr "Пересто дърво (развито)"
 
-#: TRANSLATORS This is a fictitious tree. Be creative if you want.
-#: ../../world/immovables/trees/cirrus/init.lua:85
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#: ../../world/immovables/trees/cirrus/init.lua:88
 msgid "Cirrus Tree (Old)"
 msgstr "Пересто дърво (старо)"
 
@@ -313,7 +320,7 @@ msgstr "Пересто дърво (старо)"
 msgid "Dead Tree"
 msgstr "Мъртво дърво"
 
-#: ../../world/immovables/trees/fallentree/init.lua:12
+#: ../../world/immovables/trees/fallentree/init.lua:13
 msgid "Fallen Tree"
 msgstr "Паднало дърво"
 
@@ -321,35 +328,35 @@ msgstr "Паднало дърво"
 msgid "Larch (Sapling)"
 msgstr "Лиственица (фиданка)"
 
-#: ../../world/immovables/trees/larch/init.lua:35
+#: ../../world/immovables/trees/larch/init.lua:36
 msgid "Larch (Pole)"
 msgstr "Лиственица (млада)"
 
-#: ../../world/immovables/trees/larch/init.lua:58
+#: ../../world/immovables/trees/larch/init.lua:60
 msgid "Larch (Mature)"
 msgstr "Лиственица (развита)"
 
-#: ../../world/immovables/trees/larch/init.lua:81
+#: ../../world/immovables/trees/larch/init.lua:84
 msgid "Larch (Old)"
 msgstr "Лиственица (стара)"
 
-#: TRANSLATORS This is a fictitious tree. Be creative if you want.
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../world/immovables/trees/liana/init.lua:13
 msgid "Liana Tree (Sapling)"
 msgstr "Лиана (фиданка)"
 
-#: TRANSLATORS This is a fictitious tree. Be creative if you want.
-#: ../../world/immovables/trees/liana/init.lua:37
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#: ../../world/immovables/trees/liana/init.lua:38
 msgid "Liana Tree (Pole)"
 msgstr "Лиана (млада)"
 
-#: TRANSLATORS This is a fictitious tree. Be creative if you want.
-#: ../../world/immovables/trees/liana/init.lua:61
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#: ../../world/immovables/trees/liana/init.lua:63
 msgid "Liana Tree (Mature)"
 msgstr "Лиана (развита)"
 
-#: TRANSLATORS This is a fictitious tree. Be creative if you want.
-#: ../../world/immovables/trees/liana/init.lua:88
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#: ../../world/immovables/trees/liana/init.lua:91
 msgid "Liana Tree (Old)"
 msgstr "Лиана (стара)"
 
@@ -357,75 +364,75 @@ msgstr "Лиана (стара)"
 msgid "Maple (Sapling)"
 msgstr "Явор (фиданка)"
 
-#: ../../world/immovables/trees/maple/init.lua:35
+#: ../../world/immovables/trees/maple/init.lua:36
 msgid "Maple (Pole)"
 msgstr "Явор (млад)"
 
-#: ../../world/immovables/trees/maple/init.lua:58
+#: ../../world/immovables/trees/maple/init.lua:60
 msgid "Maple (Mature)"
 msgstr "Явор (развит)"
 
-#: ../../world/immovables/trees/maple/init.lua:81
+#: ../../world/immovables/trees/maple/init.lua:84
 msgid "Maple (Old)"
 msgstr "Явор (стар)"
 
-#: TRANSLATORS This is a fictitious tree. Be creative if you want.
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../world/immovables/trees/mushroom_dark/init.lua:13
 msgid "Dark Mushroom Tree (Sapling)"
 msgstr "Тъмно гъбено дърво (фиданка)"
 
-#: TRANSLATORS This is a fictitious tree. Be creative if you want.
-#: ../../world/immovables/trees/mushroom_dark/init.lua:37
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#: ../../world/immovables/trees/mushroom_dark/init.lua:38
 msgid "Dark Mushroom Tree (Pole)"
 msgstr "Тъмно гъбено дърво (младо)"
 
-#: TRANSLATORS This is a fictitious tree. Be creative if you want.
-#: ../../world/immovables/trees/mushroom_dark/init.lua:61
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#: ../../world/immovables/trees/mushroom_dark/init.lua:63
 msgid "Dark Mushroom Tree (Mature)"
 msgstr "Тъмно гъбено дърво (развито)"
 
-#: TRANSLATORS This is a fictitious tree. Be creative if you want.
-#: ../../world/immovables/trees/mushroom_dark/init.lua:85
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#: ../../world/immovables/trees/mushroom_dark/init.lua:88
 msgid "Dark Mushroom Tree (Old)"
 msgstr "Тъмно гъбено дърво (старо)"
 
-#: TRANSLATORS This is a fictitious tree. Be creative if you want.
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../world/immovables/trees/mushroom_green/init.lua:13
 msgid "Green Mushroom Tree (Sapling)"
 msgstr "Зелено гъбено дърво (фиданка)"
 
-#: TRANSLATORS This is a fictitious tree. Be creative if you want.
-#: ../../world/immovables/trees/mushroom_green/init.lua:37
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#: ../../world/immovables/trees/mushroom_green/init.lua:38
 msgid "Green Mushroom Tree (Pole)"
 msgstr "Зелено гъбено дърво (младо)"
 
-#: TRANSLATORS This is a fictitious tree. Be creative if you want.
-#: ../../world/immovables/trees/mushroom_green/init.lua:61
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#: ../../world/immovables/trees/mushroom_green/init.lua:63
 msgid "Green Mushroom Tree (Mature)"
 msgstr "Зелено гъбено дърво (развито)"
 
-#: TRANSLATORS This is a fictitious tree. Be creative if you want.
-#: ../../world/immovables/trees/mushroom_green/init.lua:85
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#: ../../world/immovables/trees/mushroom_green/init.lua:88
 msgid "Green Mushroom Tree (Old)"
 msgstr "Зелено гъбено дърво (старо)"
 
-#: TRANSLATORS This is a fictitious tree. Be creative if you want.
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../world/immovables/trees/mushroom_red/init.lua:13
 msgid "Red Mushroom Tree (Sapling)"
 msgstr "Червено гъбено дърво (фиданка)"
 
-#: TRANSLATORS This is a fictitious tree. Be creative if you want.
-#: ../../world/immovables/trees/mushroom_red/init.lua:37
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#: ../../world/immovables/trees/mushroom_red/init.lua:38
 msgid "Red Mushroom Tree (Pole)"
 msgstr "Червено гъбено дърво (младо)"
 
-#: TRANSLATORS This is a fictitious tree. Be creative if you want.
-#: ../../world/immovables/trees/mushroom_red/init.lua:61
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#: ../../world/immovables/trees/mushroom_red/init.lua:63
 msgid "Red Mushroom Tree (Mature)"
 msgstr "Червено гъбено дърво (развито)"
 
-#: TRANSLATORS This is a fictitious tree. Be creative if you want.
-#: ../../world/immovables/trees/mushroom_red/init.lua:88
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#: ../../world/immovables/trees/mushroom_red/init.lua:91
 msgid "Red Mushroom Tree (Old)"
 msgstr "Червено гъбено дърво (старо)"
 
@@ -433,15 +440,15 @@ msgstr "Червено гъбено дърво (старо)"
 msgid "Oak (Sapling)"
 msgstr "Дъб (фиданка)"
 
-#: ../../world/immovables/trees/oak/init.lua:35
+#: ../../world/immovables/trees/oak/init.lua:36
 msgid "Oak (Pole)"
 msgstr "Дъб (млад)"
 
-#: ../../world/immovables/trees/oak/init.lua:58
+#: ../../world/immovables/trees/oak/init.lua:60
 msgid "Oak (Mature)"
 msgstr "Дъб (развит)"
 
-#: ../../world/immovables/trees/oak/init.lua:81
+#: ../../world/immovables/trees/oak/init.lua:84
 msgid "Oak (Old)"
 msgstr "Дъб (стар)"
 
@@ -449,15 +456,15 @@ msgstr "Дъб (стар)"
 msgid "Borassus Palm (Sapling)"
 msgstr "Борасова палма (фиданка)"
 
-#: ../../world/immovables/trees/palm_borassus/init.lua:35
+#: ../../world/immovables/trees/palm_borassus/init.lua:36
 msgid "Borassus Palm (Pole)"
 msgstr "Борасова палма (млада)"
 
-#: ../../world/immovables/trees/palm_borassus/init.lua:58
+#: ../../world/immovables/trees/palm_borassus/init.lua:60
 msgid "Borassus Palm (Mature)"
 msgstr "Борасова палма (развита)"
 
-#: ../../world/immovables/trees/palm_borassus/init.lua:81
+#: ../../world/immovables/trees/palm_borassus/init.lua:84
 msgid "Borassus Palm (Old)"
 msgstr "Борасова палма (стара)"
 
@@ -465,15 +472,15 @@ msgstr "Борасова палма (стара)"
 msgid "Coconut Palm (Sapling)"
 msgstr "Кокосова палма (фиданка)"
 
-#: ../../world/immovables/trees/palm_coconut/init.lua:35
+#: ../../world/immovables/trees/palm_coconut/init.lua:36
 msgid "Coconut Palm (Pole)"
 msgstr "Кокосова палма (млада)"
 
-#: ../../world/immovables/trees/palm_coconut/init.lua:58
+#: ../../world/immovables/trees/palm_coconut/init.lua:60
 msgid "Coconut Palm (Mature)"
 msgstr "Кокосова палма (развита)"
 
-#: ../../world/immovables/trees/palm_coconut/init.lua:81
+#: ../../world/immovables/trees/palm_coconut/init.lua:84
 msgid "Coconut Palm (Old)"
 msgstr "Кокосова палма (стара)"
 
@@ -481,15 +488,15 @@ msgstr "Кокосова палма (стара)"
 msgid "Date Palm (Sapling)"
 msgstr "Финикова палма (фиданка)"
 
-#: ../../world/immovables/trees/palm_date/init.lua:35
+#: ../../world/immovables/trees/palm_date/init.lua:36
 msgid "Date Palm (Pole)"
 msgstr "Финикова палма (млада)"
 
-#: ../../world/immovables/trees/palm_date/init.lua:58
+#: ../../world/immovables/trees/palm_date/init.lua:60
 msgid "Date Palm (Mature)"
 msgstr "Финикова палма (развита)"
 
-#: ../../world/immovables/trees/palm_date/init.lua:84
+#: ../../world/immovables/trees/palm_date/init.lua:87
 msgid "Date Palm (Old)"
 msgstr "Финикова палма (стара)"
 
@@ -497,15 +504,15 @@ msgstr "Финикова палма (стара)"
 msgid "Oil Palm (Sapling)"
 msgstr "Маслодайна палма (фиданка)"
 
-#: ../../world/immovables/trees/palm_oil/init.lua:35
+#: ../../world/immovables/trees/palm_oil/init.lua:36
 msgid "Oil Palm (Pole)"
 msgstr "Маслодайна палма (млада)"
 
-#: ../../world/immovables/trees/palm_oil/init.lua:58
+#: ../../world/immovables/trees/palm_oil/init.lua:60
 msgid "Oil Palm (Mature)"
 msgstr "Маслодайна палма (развита)"
 
-#: ../../world/immovables/trees/palm_oil/init.lua:85
+#: ../../world/immovables/trees/palm_oil/init.lua:88
 msgid "Oil Palm (Old)"
 msgstr "Маслодайна палма (стара)"
 
@@ -513,15 +520,15 @@ msgstr "Маслодайна палма (стара)"
 msgid "Roystonea regia Palm (Sapling)"
 msgstr "Кралска палма (фиданка)"
 
-#: ../../world/immovables/trees/palm_roystonea/init.lua:35
+#: ../../world/immovables/trees/palm_roystonea/init.lua:36
 msgid "Roystonea regia Palm (Pole)"
 msgstr "Кралска палма (млада)"
 
-#: ../../world/immovables/trees/palm_roystonea/init.lua:58
+#: ../../world/immovables/trees/palm_roystonea/init.lua:60
 msgid "Roystonea regia Palm (Mature)"
 msgstr "Кралска палма (развита)"
 
-#: ../../world/immovables/trees/palm_roystonea/init.lua:81
+#: ../../world/immovables/trees/palm_roystonea/init.lua:84
 msgid "Roystonea regia Palm (Old)"
 msgstr "Кралска палма (стара)"
 
@@ -529,15 +536,15 @@ msgstr "Кралска палма (стара)"
 msgid "Rowan (Sapling)"
 msgstr "Рябина (фиданка)"
 
-#: ../../world/immovables/trees/rowan/init.lua:35
+#: ../../world/immovables/trees/rowan/init.lua:36
 msgid "Rowan (Pole)"
 msgstr "Рябина (млада)"
 
-#: ../../world/immovables/trees/rowan/init.lua:58
+#: ../../world/immovables/trees/rowan/init.lua:60
 msgid "Rowan (Mature)"
 msgstr "Рябина (развита)"
 
-#: ../../world/immovables/trees/rowan/init.lua:84
+#: ../../world/immovables/trees/rowan/init.lua:87
 msgid "Rowan (Old)"
 msgstr "Рябина (стара)"
 
@@ -545,75 +552,75 @@ msgstr "Рябина (стара)"
 msgid "Spruce (Sapling)"
 msgstr "Смърч (фиданка)"
 
-#: ../../world/immovables/trees/spruce/init.lua:35
+#: ../../world/immovables/trees/spruce/init.lua:36
 msgid "Spruce (Pole)"
 msgstr "Смърч (млад)"
 
-#: ../../world/immovables/trees/spruce/init.lua:58
+#: ../../world/immovables/trees/spruce/init.lua:60
 msgid "Spruce (Mature)"
 msgstr "Смърч (развит)"
 
-#: ../../world/immovables/trees/spruce/init.lua:81
+#: ../../world/immovables/trees/spruce/init.lua:84
 msgid "Spruce (Old)"
 msgstr "Смърч (стар)"
 
-#: TRANSLATORS This is a fictitious tree. Be creative if you want.
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../world/immovables/trees/twine/init.lua:13
 msgid "Twine Tree (Sapling)"
 msgstr "Конопено дърво (фиданка)"
 
-#: TRANSLATORS This is a fictitious tree. Be creative if you want.
-#: ../../world/immovables/trees/twine/init.lua:37
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#: ../../world/immovables/trees/twine/init.lua:38
 msgid "Twine Tree (Pole)"
 msgstr "Конопено дърво (младо)"
 
-#: TRANSLATORS This is a fictitious tree. Be creative if you want.
-#: ../../world/immovables/trees/twine/init.lua:61
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#: ../../world/immovables/trees/twine/init.lua:63
 msgid "Twine Tree (Mature)"
 msgstr "Конопено дърво (развито)"
 
-#: TRANSLATORS This is a fictitious tree. Be creative if you want.
-#: ../../world/immovables/trees/twine/init.lua:85
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#: ../../world/immovables/trees/twine/init.lua:88
 msgid "Twine Tree (Old)"
 msgstr "Конопено дърво (старо)"
 
-#: TRANSLATORS This is a fictitious tree. Be creative if you want.
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../world/immovables/trees/umbrella_green/init.lua:13
 msgid "Green Umbrella Tree (Sapling)"
 msgstr "Зелено чадърено дърво (фиданка)"
 
-#: TRANSLATORS This is a fictitious tree. Be creative if you want.
-#: ../../world/immovables/trees/umbrella_green/init.lua:37
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#: ../../world/immovables/trees/umbrella_green/init.lua:38
 msgid "Green Umbrella Tree (Pole)"
 msgstr "Зелено чадърено дърво (младо)"
 
-#: TRANSLATORS This is a fictitious tree. Be creative if you want.
-#: ../../world/immovables/trees/umbrella_green/init.lua:61
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#: ../../world/immovables/trees/umbrella_green/init.lua:63
 msgid "Green Umbrella Tree (Mature)"
 msgstr "Зелено чадърено дърво (развито)"
 
-#: TRANSLATORS This is a fictitious tree. Be creative if you want.
-#: ../../world/immovables/trees/umbrella_green/init.lua:85
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#: ../../world/immovables/trees/umbrella_green/init.lua:88
 msgid "Green Umbrella Tree (Old)"
 msgstr "Зелено чадърено дърво (старо)"
 
-#: TRANSLATORS This is a fictitious tree. Be creative if you want.
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../world/immovables/trees/umbrella_red/init.lua:13
 msgid "Red Umbrella Tree (Sapling)"
 msgstr "Червено чадърено дърво (фиданка)"
 
-#: TRANSLATORS This is a fictitious tree. Be creative if you want.
-#: ../../world/immovables/trees/umbrella_red/init.lua:37
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#: ../../world/immovables/trees/umbrella_red/init.lua:38
 msgid "Red Umbrella Tree (Pole)"
 msgstr "Червено чадърено дърво (младо)"
 
-#: TRANSLATORS This is a fictitious tree. Be creative if you want.
-#: ../../world/immovables/trees/umbrella_red/init.lua:61
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#: ../../world/immovables/trees/umbrella_red/init.lua:63
 msgid "Red Umbrella Tree (Mature)"
 msgstr "Червено чадърено дърво (развито)"
 
-#: TRANSLATORS This is a fictitious tree. Be creative if you want.
-#: ../../world/immovables/trees/umbrella_red/init.lua:88
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#: ../../world/immovables/trees/umbrella_red/init.lua:91
 msgid "Red Umbrella Tree (Old)"
 msgstr "Червено чадърено дърво (старо)"
 
@@ -622,34 +629,42 @@ msgid "Miscellaneous"
 msgstr "Разни"
 
 #: ../../world/init.lua:17
+msgid "Artifacts"
+msgstr "Артефакти"
+
+#: ../../world/init.lua:17
+msgid "These immovables are used by the win condition “Artifacts”."
+msgstr "Тези неподвижни обекти се използват при условието за победа „Артефакти“."
+
+#: ../../world/init.lua:23
 msgid "Plants"
 msgstr "Растения"
 
-#: ../../world/init.lua:23
+#: ../../world/init.lua:29
 msgid "Standing Stones"
 msgstr "Побити камъни"
 
-#: ../../world/init.lua:29
-msgid "Stones"
-msgstr "Камъни"
-
 #: ../../world/init.lua:35
+msgid "Rocks"
+msgstr "Скали"
+
+#: ../../world/init.lua:41
 msgid "Coniferous Trees"
 msgstr "Иглолистни дървета"
 
-#: ../../world/init.lua:41
+#: ../../world/init.lua:47
 msgid "Dead Trees"
 msgstr "Мъртви дървета"
 
-#: ../../world/init.lua:47
+#: ../../world/init.lua:53
 msgid "Deciduous Trees"
 msgstr "Широколистни дървета"
 
-#: ../../world/init.lua:53
+#: ../../world/init.lua:59
 msgid "Palm Trees"
 msgstr "Палмови дървета"
 
-#: ../../world/init.lua:59
+#: ../../world/init.lua:65
 msgid "Wasteland Trees"
 msgstr "Дървета за пустош"
 
@@ -666,12 +681,12 @@ msgid "Iron"
 msgstr "Желязо"
 
 #: ../../world/resources/init.lua:44
-msgid "Granite"
-msgstr "Гранит"
+msgid "Stones"
+msgstr "Камъни"
 
-#: ../../world/resources/init.lua:57 ../../world/terrains/init.lua:292
-#: ../../world/terrains/init.lua:523 ../../world/terrains/init.lua:755
-#: ../../world/terrains/init.lua:985
+#: ../../world/resources/init.lua:57 ../../world/terrains/init.lua:305
+#: ../../world/terrains/init.lua:552 ../../world/terrains/init.lua:800
+#: ../../world/terrains/init.lua:1044
 msgid "Water"
 msgstr "Вода"
 
@@ -691,100 +706,100 @@ msgstr "Пустош"
 msgid "Winter"
 msgstr "Зима"
 
-#: ../../world/terrains/init.lua:19 ../../world/terrains/init.lua:775
-#: ../../world/terrains/init.lua:925 ../../world/terrains/init.lua:940
-#: ../../world/terrains/init.lua:955
+#: ../../world/terrains/init.lua:19 ../../world/terrains/init.lua:822
+#: ../../world/terrains/init.lua:980 ../../world/terrains/init.lua:996
+#: ../../world/terrains/init.lua:1012
 msgid "Desert"
 msgstr "Пустиня"
 
-#: ../../world/terrains/init.lua:33 ../../world/terrains/init.lua:79
-#: ../../world/terrains/init.lua:95 ../../world/terrains/init.lua:110
-#: ../../world/terrains/init.lua:820
+#: ../../world/terrains/init.lua:33 ../../world/terrains/init.lua:80
+#: ../../world/terrains/init.lua:97 ../../world/terrains/init.lua:113
+#: ../../world/terrains/init.lua:868
 msgid "Meadow"
 msgstr "Поляна"
 
-#: ../../world/terrains/init.lua:125 ../../world/terrains/init.lua:805
+#: ../../world/terrains/init.lua:129 ../../world/terrains/init.lua:852
 msgid "Steppe"
 msgstr "Степ"
 
-#: ../../world/terrains/init.lua:140
+#: ../../world/terrains/init.lua:145
 msgid "Barren Steppe"
 msgstr "Неплодородна степ"
 
-#: ../../world/terrains/init.lua:155 ../../world/terrains/init.lua:835
+#: ../../world/terrains/init.lua:161 ../../world/terrains/init.lua:884
 msgid "Mountain Meadow"
 msgstr "Планинска поляна"
 
-#: ../../world/terrains/init.lua:170 ../../world/terrains/init.lua:185
-#: ../../world/terrains/init.lua:200 ../../world/terrains/init.lua:215
-#: ../../world/terrains/init.lua:416 ../../world/terrains/init.lua:431
-#: ../../world/terrains/init.lua:446 ../../world/terrains/init.lua:461
-#: ../../world/terrains/init.lua:633 ../../world/terrains/init.lua:648
-#: ../../world/terrains/init.lua:663 ../../world/terrains/init.lua:678
-#: ../../world/terrains/init.lua:865 ../../world/terrains/init.lua:880
-#: ../../world/terrains/init.lua:895 ../../world/terrains/init.lua:910
+#: ../../world/terrains/init.lua:177 ../../world/terrains/init.lua:193
+#: ../../world/terrains/init.lua:209 ../../world/terrains/init.lua:225
+#: ../../world/terrains/init.lua:438 ../../world/terrains/init.lua:454
+#: ../../world/terrains/init.lua:470 ../../world/terrains/init.lua:486
+#: ../../world/terrains/init.lua:670 ../../world/terrains/init.lua:686
+#: ../../world/terrains/init.lua:702 ../../world/terrains/init.lua:718
+#: ../../world/terrains/init.lua:916 ../../world/terrains/init.lua:932
+#: ../../world/terrains/init.lua:948 ../../world/terrains/init.lua:964
 msgid "Mountain"
 msgstr "Планина"
 
-#: ../../world/terrains/init.lua:230
+#: ../../world/terrains/init.lua:241
 msgid "Swamp"
 msgstr "Блато"
 
-#: ../../world/terrains/init.lua:246 ../../world/terrains/init.lua:476
-#: ../../world/terrains/init.lua:708 ../../world/terrains/init.lua:970
+#: ../../world/terrains/init.lua:258 ../../world/terrains/init.lua:502
+#: ../../world/terrains/init.lua:750 ../../world/terrains/init.lua:1028
 msgid "Beach"
 msgstr "Плаж"
 
-#: ../../world/terrains/init.lua:261 ../../world/terrains/init.lua:618
+#: ../../world/terrains/init.lua:272 ../../world/terrains/init.lua:654
 msgid "Snow"
 msgstr "Сняг"
 
-#: ../../world/terrains/init.lua:276
+#: ../../world/terrains/init.lua:288
 msgid "Lava"
 msgstr "Лава"
 
-#: ../../world/terrains/init.lua:311 ../../world/terrains/init.lua:326
+#: ../../world/terrains/init.lua:326 ../../world/terrains/init.lua:342
 msgid "Ashes"
 msgstr "Пепел"
 
-#: ../../world/terrains/init.lua:341 ../../world/terrains/init.lua:356
-#: ../../world/terrains/init.lua:371 ../../world/terrains/init.lua:386
+#: ../../world/terrains/init.lua:358 ../../world/terrains/init.lua:374
+#: ../../world/terrains/init.lua:390 ../../world/terrains/init.lua:406
 msgid "Hard Ground"
 msgstr "Твърда земя"
 
-#: ../../world/terrains/init.lua:401
+#: ../../world/terrains/init.lua:422
 msgid "Igneous Rocks"
 msgstr "Вулканични скали"
 
-#: ../../world/terrains/init.lua:491 ../../world/terrains/init.lua:507
+#: ../../world/terrains/init.lua:518 ../../world/terrains/init.lua:535
 msgid "Lava Rocks"
 msgstr "Скали от лава"
 
-#: ../../world/terrains/init.lua:543 ../../world/terrains/init.lua:558
-#: ../../world/terrains/init.lua:573
+#: ../../world/terrains/init.lua:574 ../../world/terrains/init.lua:590
+#: ../../world/terrains/init.lua:606
 msgid "Tundra"
 msgstr "Тундра"
 
-#: ../../world/terrains/init.lua:588
+#: ../../world/terrains/init.lua:622
 msgid "Tundra Taiga"
 msgstr "Тундра и тайга"
 
-#: ../../world/terrains/init.lua:603
+#: ../../world/terrains/init.lua:638
 msgid "Taiga"
 msgstr "Тайга"
 
-#: ../../world/terrains/init.lua:693
+#: ../../world/terrains/init.lua:734
 msgid "Ice"
 msgstr "Лед"
 
-#: ../../world/terrains/init.lua:723 ../../world/terrains/init.lua:739
+#: ../../world/terrains/init.lua:766 ../../world/terrains/init.lua:783
 msgid "Ice Floes"
 msgstr "Ледени късове"
 
-#: ../../world/terrains/init.lua:790
+#: ../../world/terrains/init.lua:838
 msgid "Dry Soil"
 msgstr "Суха почва"
 
-#: ../../world/terrains/init.lua:850
+#: ../../world/terrains/init.lua:900
 msgid "High Mountain Meadow"
 msgstr "Високопланинска поляна"

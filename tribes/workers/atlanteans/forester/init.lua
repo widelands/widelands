@@ -39,21 +39,21 @@ tribes:new_worker_type {
    vision_range = 2,
 
    buildcost = {
-		atlanteans_carrier = 1,
-		shovel = 1
-	},
+      atlanteans_carrier = 1,
+      shovel = 1
+   },
 
-	programs = {
-		plant = {
-			"findspace size:any radius:5 avoid:field",
-			"walk coords",
-			"animation dig 2000", -- Play a planting animation
-			"animation crop 1000", -- Play a planting animation
-			"plant attrib:tree_sapling",
-			"animation water 2000",
-			"return"
-		}
-	},
+   programs = {
+      plant = {
+         "findspace size:any radius:5 avoid:field",
+         "walk coords",
+         "animation dig 2000", -- Play a planting animation
+         "animation crop 1000", -- Play a planting animation
+         "plant attrib:tree_sapling",
+         "animation water 2000",
+         "return"
+      }
+   },
 
    animations = animations,
 }

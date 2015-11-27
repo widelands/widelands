@@ -141,7 +141,7 @@ void MapSaver::save() {
 
  //  allowed building types
 	iterate_players_existing_const(plnum, nr_players, m_egbase, player) {
-		for (BuildingIndex i = 0; i < m_egbase.tribes().nrbuildings(); ++i) {
+		for (DescriptionIndex i = 0; i < m_egbase.tribes().nrbuildings(); ++i) {
 			if (!player->is_building_type_allowed(i)) {
 				log("Writing Allowed Building Types Data ... ");
 				MapAllowedBuildingTypesPacket p;

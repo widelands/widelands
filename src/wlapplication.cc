@@ -630,16 +630,6 @@ void WLApplication::_handle_mousebutton
 		}
 }
 
-/**
- * Return the current time, in milliseconds
- */
-// TODO(unknown): Use our internally defined time type
-// TODO(sirver): get rid of this method and use SDL_GetTicks() directly.
-int32_t WLApplication::get_time() {
-	uint32_t time = SDL_GetTicks();
-
-	return time;
-}
 
 /// Instantaneously move the mouse cursor without creating a motion event.
 ///

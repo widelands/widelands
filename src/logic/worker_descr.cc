@@ -190,7 +190,7 @@ Bob & WorkerDescr::create_object() const
 /**
 * check if worker can be substitute for a requested worker type
  */
-bool WorkerDescr::can_act_as(WareIndex const index) const {
+bool WorkerDescr::can_act_as(DescriptionIndex const index) const {
 	assert(egbase_.tribes().worker_exists(index));
 	if (index == worker_index()) {
 		return true;
@@ -198,11 +198,11 @@ bool WorkerDescr::can_act_as(WareIndex const index) const {
 
 	// if requested worker type can be promoted, compare with that type
 	const WorkerDescr& descr = *egbase_.tribes().get_worker_descr(index);
-	WareIndex const becomes_index = descr.becomes();
+	DescriptionIndex const becomes_index = descr.becomes();
 	return becomes_index != INVALID_INDEX ? can_act_as(becomes_index) : false;
 }
 
-WareIndex WorkerDescr::worker_index() const {
+DescriptionIndex WorkerDescr::worker_index() const {
 	return egbase_.tribes().worker_index(name());
 }
 

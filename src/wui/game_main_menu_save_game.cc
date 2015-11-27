@@ -31,7 +31,6 @@
 #include "logic/game.h"
 #include "logic/game_controller.h"
 #include "logic/playersmanager.h"
-#include "profile/profile.h"
 #include "wui/interactive_gamebase.h"
 
 InteractiveGameBase & GameMainMenuSaveGame::igbase() {

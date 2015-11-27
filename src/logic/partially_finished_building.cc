@@ -149,7 +149,7 @@ should be more useful to the player.
 */
 const Image* PartiallyFinishedBuilding::representative_image() const
 {
-	return m_building->representative_image();
+	return m_building->representative_image(&owner().get_playercolor());
 }
 
 
@@ -195,7 +195,7 @@ Called by transfer code when the builder has arrived on site.
 void PartiallyFinishedBuilding::request_builder_callback
 	(Game            &       game,
 	 Request         &       rq,
-	 WareIndex,
+	 DescriptionIndex,
 	 Worker          * const w,
 	 PlayerImmovable &       target)
 {

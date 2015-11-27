@@ -32,8 +32,6 @@
 #include "logic/buildcost.h"
 #include "logic/immovable.h"
 
-class Profile;
-
 namespace Widelands {
 
 /// Ordered sequence of actions (at least 1). Has a name.
@@ -185,13 +183,6 @@ struct ImmovableProgram {
 	ImmovableProgram(const std::string& init_name,
 	                 const std::vector<std::string>& lines,
 	                 ImmovableDescr* immovable);
-
-	/// Create a program by parsing a conf-file section.
-	ImmovableProgram
-		(const std::string    & directory,
-		 Profile              &,
-		 const std::string    & name,
-		 ImmovableDescr      &);
 
 	~ImmovableProgram() {
 		for (Action * action : m_actions) {

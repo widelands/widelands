@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006, 2008-2011 by the Widelands Development Team
+ * Copyright (C) 2002, 2006, 2008-2011, 2015 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -80,6 +80,7 @@ public:
 	EntryRecord & add(void * const entry, const bool select_this = false);
 
 	uint32_t size() const;
+	bool empty() const;
 	Entry operator[](uint32_t) const;
 	static uint32_t no_selection_index();
 	bool has_selection() const;
@@ -194,6 +195,7 @@ public:
 	EntryRecord & add(void * entry = nullptr, bool select = false);
 
 	uint32_t size() const {return m_entry_records.size();}
+	bool empty() const {return m_entry_records.empty();}
 	void * operator[](uint32_t const i) const {
 		assert(i < m_entry_records.size());
 		return m_entry_records[i]->entry();
@@ -271,7 +273,7 @@ private:
 	Scrollbar        * m_scrollbar;
 	int32_t            m_scrollpos; //  in pixels
 	uint32_t           m_selection;
-	int32_t            m_last_click_time;
+	uint32_t           m_last_click_time;
 	uint32_t           m_last_selection;  // for double clicks
 	Columns::size_type m_sort_column;
 	bool               m_sort_descending;

@@ -109,7 +109,7 @@ public:
 		(UI::Panel * const parent,
 		 int32_t const x, int32_t const y,
 		 const Widelands::TribeDescr & tribe,
-		 boost::function<void(Widelands::WareIndex, bool)> callback_function,
+		 boost::function<void(Widelands::DescriptionIndex, bool)> callback_function,
 		 std::vector<uint8_t> & color_map)
 	:
 		 AbstractWaresDisplay(parent, x, y, tribe, Widelands::wwWARE, true, callback_function),
@@ -120,11 +120,11 @@ public:
 		set_size(w, h);
 	}
 protected:
-	std::string info_for_ware(Widelands::WareIndex const /* ware */) override {
+	std::string info_for_ware(Widelands::DescriptionIndex const /* ware */) override {
 		return "";
 	}
 
-	RGBColor info_color_for_ware(Widelands::WareIndex const ware) override
+	RGBColor info_color_for_ware(Widelands::DescriptionIndex const ware) override
 	{
 		size_t index = static_cast<size_t>(ware);
 
@@ -213,34 +213,34 @@ m_parent(&parent)
 	box->add(tabs, UI::Box::AlignLeft, true);
 
 	//register statistics data
-	for (Widelands::WareIndex cur_ware = 0; cur_ware < nr_wares; ++cur_ware) {
+	for (Widelands::DescriptionIndex cur_ware = 0; cur_ware < nr_wares; ++cur_ware) {
 		m_plot_production->register_plot_data
 			(cur_ware,
 				parent.get_player()->get_ware_production_statistics
-				(Widelands::WareIndex(cur_ware)),
+				(Widelands::DescriptionIndex(cur_ware)),
 				colors[cur_ware]);
 
 		m_plot_consumption->register_plot_data
 			(cur_ware,
 				parent.get_player()->get_ware_consumption_statistics
-				(Widelands::WareIndex(cur_ware)),
+				(Widelands::DescriptionIndex(cur_ware)),
 				colors[cur_ware]);
 
 		m_plot_economy->register_plot_data
 			(cur_ware,
 				parent.get_player()->get_ware_production_statistics
-				(Widelands::WareIndex(cur_ware)),
+				(Widelands::DescriptionIndex(cur_ware)),
 				colors[cur_ware]);
 
 		m_plot_economy->register_negative_plot_data
 			(cur_ware,
 				parent.get_player()->get_ware_consumption_statistics
-				(Widelands::WareIndex(cur_ware)));
+				(Widelands::DescriptionIndex(cur_ware)));
 
 		m_plot_stock->register_plot_data
 			(cur_ware,
 				parent.get_player()->get_ware_stock_statistics
-				(Widelands::WareIndex(cur_ware)),
+				(Widelands::DescriptionIndex(cur_ware)),
 				colors[cur_ware]);
 	}
 
@@ -264,7 +264,7 @@ m_parent(&parent)
  * Callback for the ware buttons. Change the state of all ware statistics
  * simultaneously.
  */
-void WareStatisticsMenu::cb_changed_to(Widelands::WareIndex id, bool what) {
+void WareStatisticsMenu::cb_changed_to(Widelands::DescriptionIndex id, bool what) {
 	if (what) { //activate ware
 		//search lowest free color
 		uint8_t color_index = INACTIVE;

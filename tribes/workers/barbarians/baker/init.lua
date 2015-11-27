@@ -21,9 +21,9 @@ tribes:new_worker_type {
    vision_range = 2,
 
    buildcost = {
-		barbarians_carrier = 1,
-		bread_paddle = 1
-	},
+      barbarians_carrier = 1,
+      bread_paddle = 1
+   },
 
    animations = animations,
 }

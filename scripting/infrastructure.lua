@@ -89,8 +89,8 @@ end
 --          :meth:`wl.map.Warehouse.set_workers`.  Note that ProductionSites
 --          are filled with workers by default.
 --    :type b1_descr: :class:`array`
--- TODO(GunChleoc) this should produce an error message if a building/ware/worker doesn't exist.
 function prefilled_buildings(p, ...)
+   -- TODO(GunChleoc) this should produce an error message if a building/ware/worker doesn't exist.
    for idx,bdescr in ipairs({...}) do
       b = p:place_building(bdescr[1], wl.Game().map:get_field(bdescr[2],bdescr[3]), false, true)
       -- Fill with workers
@@ -170,8 +170,8 @@ end
 --
 --    :returns: true if the immovable is a building
 function is_building(immovable)
-	return immovable.descr.type_name == "productionsite" or
-		immovable.descr.type_name == "warehouse" or
-		immovable.descr.type_name == "militarysite" or
-		immovable.descr.type_name == "trainingsite"
+   return immovable.descr.type_name == "productionsite" or
+      immovable.descr.type_name == "warehouse" or
+      immovable.descr.type_name == "militarysite" or
+      immovable.descr.type_name == "trainingsite"
 end

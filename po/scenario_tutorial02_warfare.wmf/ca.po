@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-09-12 10:50+0000\n"
-"PO-Revision-Date: 2015-09-12 13:47+0000\n"
+"POT-Creation-Date: 2015-11-07 08:28+0000\n"
+"PO-Revision-Date: 2015-11-06 17:18+0000\n"
 "Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -134,8 +134,8 @@ msgstr "Un soldat creat recentment no té experiència i no és molt bo lluitant
 msgid ""
 "One of these training sites is the battle arena. It is a big and expensive "
 "building, and it trains soldiers in evade. Since soldiers get very hungry "
-"during their workout, this building needs a lot of food and strongbeer. In a"
-" real game, you should have a good infrastructure before you build it."
+"during their workout, this building needs a lot of food and strong beer. In "
+"a real game, you should have a good infrastructure before you build it."
 msgstr "Una d'aquestes zones d'entrenament és la palestra. És un edifici gran i car i entrena els soldats en l'evasió. Com els soldats acaben amb molta gana després de l'entrenament, aquest edifici necessita molt menjar i cervesa negra. En una partida real hauríeu de tenir una molt bona indústria d'alimentació abans de construir-lo."
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:53
@@ -176,8 +176,8 @@ msgstr "Molt bé! La nostra palestra d'entrenament s'ha completat i els soldats 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:74
 msgid ""
 "The needed wares are also delivered there. For successful training, you need"
-" pitta bread and strongbeer, as well as either fish or meat."
-msgstr "S'enviaran automàticament els béns necessaris. Per a un entrenament amb èxit es necessita pita i cervesa negra, així com peix o carn."
+" pitta bread and strong beer, as well as either fish or meat."
+msgstr "S'enviaran automàticament els béns necessaris. Per un entrenament amb èxit es necessita pita i cervesa negra, així com peix o carn."
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:75
 msgid ""
@@ -247,7 +247,7 @@ msgstr "Genial. S'ha acabat de construir el camp d'entrenament. Ara res ens impe
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:108
 msgid ""
 "To train in the training camp, our soldiers need food like in the battle "
-"arena, but no strongbeer. Instead, they need different axes for attack "
+"arena, but no strong beer. Instead, they need different axes for attack "
 "training and helmets for health training."
 msgstr "Per entrenar al camp d'entrenament, els nostres soldats necessiten menjar com a la palestra. Però no necessiten cervesa negra. En el seu lloc, necessiten diferents destrals per entrenar l'atac i cascos per entrenar la salut."
 

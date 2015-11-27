@@ -10,66 +10,66 @@ tribes:new_productionsite_type {
    size = "medium",
 
    buildcost = {
-		log = 5,
-		granite = 2
-	},
-	return_on_dismantle = {
-		log = 2,
-		granite = 1
-	},
+      log = 5,
+      granite = 2
+   },
+   return_on_dismantle = {
+      log = 2,
+      granite = 1
+   },
 
    animations = {
-		idle = {
-			template = "idle_??",
-			directory = dirname,
-			hotspot = { 46, 44 },
-		},
-	},
+      idle = {
+         template = "idle_??",
+         directory = dirname,
+         hotspot = { 46, 44 },
+      },
+   },
 
    aihints = {
-		space_consumer = true,
-		forced_after = 250,
-		prohibited_till = 250
+      space_consumer = true,
+      forced_after = 250,
+      prohibited_till = 250
    },
 
-	working_positions = {
-		barbarians_gardener = 1
-	},
+   working_positions = {
+      barbarians_gardener = 1
+   },
 
    outputs = {
-		"thatch_reed"
+      "thatch_reed"
    },
 
-	programs = {
-		work = {
-			-- TRANSLATORS: Completed/Skipped/Did not start working because ...
-			descname = _"working",
-			actions = {
-				"call=plant_reed",
-				"call=harvest_reed",
-				"return=skipped"
-			}
-		},
-		plant_reed = {
-			-- TRANSLATORS: Completed/Skipped/Did not start planting reed because ...
-			descname = _"planting reed",
-			actions = {
-				"sleep=18000", -- orig sleep=20000 but gardener animation was increased by 2sec
-				"worker=plantreed"
-			}
-		},
-		harvest_reed = {
-			-- TRANSLATORS: Completed/Skipped/Did not start harvesting reed because ...
-			descname = _"harvesting reed",
-			actions = {
-				"sleep=5000",
-				"worker=harvestreed"
-			}
-		},
-	},
-	out_of_resource_notification = {
-		title = _"Out of Fields",
-		message = pgettext("barbarians_building", "The gardener working at this reed yard has no cleared soil to plant his seeds."),
-		productivity_threshold = 20
-	},
+   programs = {
+      work = {
+         -- TRANSLATORS: Completed/Skipped/Did not start working because ...
+         descname = _"working",
+         actions = {
+            "call=plant_reed",
+            "call=harvest_reed",
+            "return=skipped"
+         }
+      },
+      plant_reed = {
+         -- TRANSLATORS: Completed/Skipped/Did not start planting reed because ...
+         descname = _"planting reed",
+         actions = {
+            "sleep=18000", -- orig sleep=20000 but gardener animation was increased by 2sec
+            "worker=plantreed"
+         }
+      },
+      harvest_reed = {
+         -- TRANSLATORS: Completed/Skipped/Did not start harvesting reed because ...
+         descname = _"harvesting reed",
+         actions = {
+            "sleep=5000",
+            "worker=harvestreed"
+         }
+      },
+   },
+   out_of_resource_notification = {
+      title = _"Out of Fields",
+      message = pgettext("barbarians_building", "The gardener working at this reed yard has no cleared soil to plant his seeds."),
+      productivity_threshold = 20
+   },
 }

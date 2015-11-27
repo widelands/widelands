@@ -82,7 +82,7 @@ void ConstructionSite::update_statistics_string(std::string* s)
 Access to the wares queues by id
 =======
 */
-WaresQueue & ConstructionSite::waresqueue(WareIndex const wi) {
+WaresQueue & ConstructionSite::waresqueue(DescriptionIndex const wi) {
 	for (WaresQueue * ware : m_wares) {
 		if (ware->get_ware() == wi) {
 			return *ware;
@@ -114,10 +114,10 @@ void ConstructionSite::init(EditorGameBase & egbase)
 {
 	PartiallyFinishedBuilding::init(egbase);
 
-	const std::map<WareIndex, uint8_t> * buildcost;
+	const std::map<DescriptionIndex, uint8_t> * buildcost;
 	if (!m_old_buildings.empty()) {
 		// Enhancement
-		BuildingIndex was_index = m_old_buildings.back();
+		DescriptionIndex was_index = m_old_buildings.back();
 		const BuildingDescr* was_descr = owner().tribe().get_building_descr(was_index);
 		m_info.was = was_descr;
 		buildcost = &m_building->enhancement_cost();
@@ -130,7 +130,7 @@ void ConstructionSite::init(EditorGameBase & egbase)
 	//  initialize the wares queues
 	size_t const buildcost_size = buildcost->size();
 	m_wares.resize(buildcost_size);
-	std::map<WareIndex, uint8_t>::const_iterator it = buildcost->begin();
+	std::map<DescriptionIndex, uint8_t>::const_iterator it = buildcost->begin();
 
 	for (size_t i = 0; i < buildcost_size; ++i, ++it) {
 		WaresQueue & wq =
@@ -156,7 +156,7 @@ void ConstructionSite::cleanup(EditorGameBase & egbase)
 
 	if (m_work_steps <= m_work_completed) {
 		// Put the real building in place
-		BuildingIndex becomes_idx = owner().tribe().building_index(m_building->name());
+		DescriptionIndex becomes_idx = owner().tribe().building_index(m_building->name());
 		m_old_buildings.push_back(becomes_idx);
 		Building & b =
 			m_building->create(egbase, owner(), m_position, false, false, m_old_buildings);
@@ -304,7 +304,7 @@ Called by WaresQueue code when an ware has arrived
 ===============
 */
 void ConstructionSite::wares_queue_callback
-	(Game & game, WaresQueue *, WareIndex, void * const data)
+	(Game & game, WaresQueue *, DescriptionIndex, void * const data)
 {
 	ConstructionSite & cs = *static_cast<ConstructionSite *>(data);
 
@@ -322,7 +322,6 @@ Draw the construction site.
 void ConstructionSite::draw
 	(const EditorGameBase & game, RenderTarget & dst, const FCoords& coords, const Point& pos)
 {
-	assert(0 <= game.get_gametime());
 	const uint32_t gametime = game.get_gametime();
 	uint32_t tanim = gametime - m_animstart;
 
@@ -376,7 +375,7 @@ void ConstructionSite::draw
 		//  draw the prev pic from top to where next image will be drawing
 		dst.drawanimrect(pos, anim_idx, tanim - FRAME_LENGTH, get_owner(), Rect(Point(0, 0), w, h - lines));
 	else if (!m_old_buildings.empty()) {
-		BuildingIndex prev_idx = m_old_buildings.back();
+		DescriptionIndex prev_idx = m_old_buildings.back();
 		const BuildingDescr* prev_building = owner().tribe().get_building_descr(prev_idx);
 		//  Is the first picture but there was another building here before,
 		//  get its most fitting picture and draw it instead.

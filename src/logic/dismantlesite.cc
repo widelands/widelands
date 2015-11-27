@@ -72,7 +72,7 @@ PartiallyFinishedBuilding(gdescr)
 	set_owner(&plr);
 
 	assert(!former_buildings.empty());
-	for (BuildingIndex former_idx : former_buildings) {
+	for (DescriptionIndex former_idx : former_buildings) {
 		m_old_buildings.push_back(former_idx);
 	}
 	const BuildingDescr* cur_descr = owner().tribe().get_building_descr(m_old_buildings.back());
@@ -105,10 +105,10 @@ void DismantleSite::init(EditorGameBase & egbase)
 {
 	PartiallyFinishedBuilding::init(egbase);
 
-	std::map<WareIndex, uint8_t> wares;
+	std::map<DescriptionIndex, uint8_t> wares;
 	count_returned_wares(this, wares);
 
-	std::map<WareIndex, uint8_t>::const_iterator it = wares.begin();
+	std::map<DescriptionIndex, uint8_t>::const_iterator it = wares.begin();
 	m_wares.resize(wares.size());
 
 	for (size_t i = 0; i < wares.size(); ++i, ++it) {
@@ -127,10 +127,10 @@ Count wich wares you get back if you dismantle the given building
 */
 void DismantleSite::count_returned_wares
 	(Building* building,
-	 std::map<WareIndex, uint8_t>   & res)
+	 std::map<DescriptionIndex, uint8_t>   & res)
 {
-	for (BuildingIndex former_idx : building->get_former_buildings()) {
-		const std::map<WareIndex, uint8_t> * return_wares;
+	for (DescriptionIndex former_idx : building->get_former_buildings()) {
+		const std::map<DescriptionIndex, uint8_t> * return_wares;
 		const BuildingDescr* former_descr = building->owner().tribe().get_building_descr(former_idx);
 		if (former_idx != building->get_former_buildings().front()) {
 			return_wares = & former_descr->returned_wares_enhanced();
@@ -139,7 +139,7 @@ void DismantleSite::count_returned_wares
 		}
 		assert(return_wares != nullptr);
 
-		std::map<WareIndex, uint8_t>::const_iterator i;
+		std::map<DescriptionIndex, uint8_t>::const_iterator i;
 		for (i = return_wares->begin(); i != return_wares->end(); ++i) {
 			res[i->first] += i->second;
 		}
@@ -232,7 +232,6 @@ Draw it.
 void DismantleSite::draw
 	(const EditorGameBase& game, RenderTarget& dst, const FCoords& coords, const Point& pos)
 {
-	assert(0 <= game.get_gametime());
 	const uint32_t gametime = game.get_gametime();
 	uint32_t tanim = gametime - m_animstart;
 

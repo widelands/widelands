@@ -38,7 +38,6 @@
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/game.h"
 #include "logic/map.h"
-#include "profile/profile.h"
 #include "sound/songset.h"
 #include "wui/interactive_base.h"
 #include "wui/mapview.h"

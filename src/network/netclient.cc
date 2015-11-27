@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2013 by the Widelands Development Team
+ * Copyright (C) 2008-2013, 2015 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -44,7 +44,6 @@
 #include "network/network_gaming_messages.h"
 #include "network/network_protocol.h"
 #include "network/network_system.h"
-#include "profile/profile.h"
 #include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
 #include "ui_basic/messagebox.h"
@@ -83,8 +82,8 @@ struct NetClientImpl {
 	bool server_is_waiting;
 
 	/// Data for the last time message we sent.
-	int32_t lasttimestamp;
-	int32_t lasttimestamp_realtime;
+	uint32_t lasttimestamp;
+	uint32_t lasttimestamp_realtime;
 
 	/// The real target speed, in milliseconds per second.
 	/// This is always set by the server
@@ -217,7 +216,7 @@ void NetClient::run ()
 			game.init_savegame(loaderUI, d->settings);
 		d->time.reset(game.get_gametime());
 		d->lasttimestamp = game.get_gametime();
-		d->lasttimestamp_realtime = WLApplication::get()->get_time();
+		d->lasttimestamp_realtime = SDL_GetTicks();
 
 		d->modal = game.get_ibase();
 		game.run
@@ -254,12 +253,12 @@ void NetClient::think()
 
 		if
 			(d->server_is_waiting &&
-			 d->game->get_gametime() == d->time.networktime())
+			 d->game->get_gametime() == static_cast<uint32_t>(d->time.networktime()))
 		{
 			send_time();
 			d->server_is_waiting = false;
 		} else if (d->game->get_gametime() != d->lasttimestamp) {
-			int32_t curtime = WLApplication::get()->get_time();
+			uint32_t curtime = SDL_GetTicks();
 			if (curtime - d->lasttimestamp_realtime > CLIENT_TIMESTAMP_INTERVAL)
 				send_time();
 		}
@@ -284,7 +283,7 @@ void NetClient::send_player_command(Widelands::PlayerCommand & pc)
 	s.send(d->sock);
 
 	d->lasttimestamp = d->game->get_gametime();
-	d->lasttimestamp_realtime = WLApplication::get()->get_time();
+	d->lasttimestamp_realtime = SDL_GetTicks();
 
 	delete &pc;
 }
@@ -652,7 +651,7 @@ void NetClient::send_time()
 	s.send(d->sock);
 
 	d->lasttimestamp = d->game->get_gametime();
-	d->lasttimestamp_realtime = WLApplication::get()->get_time();
+	d->lasttimestamp_realtime = SDL_GetTicks();
 }
 
 void NetClient::syncreport()

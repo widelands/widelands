@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2009, 2015 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -85,17 +85,17 @@ class Game;
  * the same for all parallel simulation.
  */
 struct Command {
-	Command (const int32_t _duetime) : m_duetime(_duetime) {}
+	Command (const uint32_t _duetime) : m_duetime(_duetime) {}
 	virtual ~Command ();
 
 	virtual void execute (Game &) = 0;
 	virtual uint8_t id() const = 0;
 
-	int32_t duetime() const {return m_duetime;}
-	void set_duetime(int32_t const t) {m_duetime = t;}
+	uint32_t duetime() const {return m_duetime;}
+	void set_duetime(uint32_t const t) {m_duetime = t;}
 
 private:
-	int32_t m_duetime;
+	uint32_t m_duetime;
 };
 
 
@@ -107,7 +107,7 @@ private:
  * for all instances of a game to ensure parallel simulation.
  */
 struct GameLogicCommand : public Command {
-	GameLogicCommand (int32_t const _duetime) : Command(_duetime) {}
+	GameLogicCommand (uint32_t const _duetime) : Command(_duetime) {}
 
 	// Write these commands to a file (for savegames)
 	virtual void write
@@ -158,7 +158,7 @@ public:
 	// the internal time as well. the game_time_var represents the current game
 	// time, which we update and with which we must mess around (to run all
 	// queued cmd.s) and which we update (add the interval)
-	int32_t run_queue(int32_t interval, int32_t & game_time_var);
+	void run_queue(int32_t interval, uint32_t & game_time_var);
 
 	void flush(); // delete all commands in the queue now
 
