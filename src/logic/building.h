@@ -145,7 +145,7 @@ private:
 	int32_t       m_size;            // size of the building
 	bool          m_mine;
 	bool          m_port;
-	bool          m_needs_seafaring; // THis building should only be built on seafaring maps.
+	bool          m_needs_seafaring; // This building should only be built on seafaring maps.
 	DescriptionIndex  m_enhancement;
 	DescriptionIndex  m_enhanced_from; // The building this building was enhanced from, or INVALID_INDEX
 	bool          m_enhanced_building; // if it is one, it is bulldozable
