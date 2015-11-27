@@ -378,8 +378,17 @@ void BaseListselect::draw(RenderTarget & dst)
 			}
 		}
 
-		uint32_t picw =  m_max_pic_width ? m_max_pic_width + 10 : 0;
-		point.x += picw;
+		uint32_t picw = m_max_pic_width ? m_max_pic_width + 10 : 0;
+
+		// Now draw pictures
+		if (er.pic) {
+			dst.blit(Point(UI::g_fh1->fontset()->is_rtl() ? get_eff_w() - er.pic->width() - 1 : 1,
+								y + (get_lineheight() - er.pic->height()) / 2),
+						er.pic);
+		}
+
+		const Image* entry_text_im = UI::g_fh1->render(as_uifont(er.name, UI_FONT_SIZE_SMALL,
+																					er.use_clr ? er.clr : UI_FONT_CLR_FG));
 
 		Align alignment = mirror_alignment(m_align);
 		if (alignment & Align_Right) {
@@ -388,15 +397,13 @@ void BaseListselect::draw(RenderTarget & dst)
 			point.x += (maxw - picw) / 2;
 		}
 
-		// NOCOM Pictures are always left aligned
-		// Now draw pictures
-		if (er.pic) {
-			dst.blit(Point(1, y + (get_lineheight() - er.pic->height()) / 2), er.pic);
-		}
 
-		const Image* entry_text_im = UI::g_fh1->render(as_uifont(er.name, UI_FONT_SIZE_SMALL,
-																					er.use_clr ? er.clr : UI_FONT_CLR_FG));
 		UI::correct_for_align(alignment, entry_text_im->width(), entry_text_im->height(), &point);
+
+		// Shift for image width
+		if (!UI::g_fh1->fontset()->is_rtl()) {
+			point.x += picw;
+		}
 
 		// Fix vertical position for mixed font heights
 		if (get_lineheight() > static_cast<uint32_t>(entry_text_im->height())) {

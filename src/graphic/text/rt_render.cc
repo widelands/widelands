@@ -348,7 +348,6 @@ uint16_t TextNode::hotspot_y() {
 	return m_font.ascent(m_s.font_style);
 }
 Texture* TextNode::render(TextureCache* texture_cache) {
-	// NOCOM select font per glyph here
 	const Texture& img = m_font.render(m_txt, m_s.font_color, m_s.font_style, texture_cache);
 	Texture* rv = new Texture(img.width(), img.height());
 	blit(Rect(0, 0, img.width(), img.height()),
@@ -622,7 +621,6 @@ FontCache::~FontCache() {
 }
 
 IFont& FontCache::get_font(NodeStyle* ns) {
-	// NOCOM select font per glyph
 	if (ns->font_face == "serif") {
 		ns->font_face = ns->fontset->serif();
 	} else if (ns->font_face == "sans") {
@@ -726,7 +724,6 @@ void TagHandler::m_make_text_nodes(const string& txt, vector<RenderNode*>& nodes
 		while (ts.pos() < txt.size()) {
 			ts.skip_ws();
 			word = ts.till_any_or_end(" \t\n\r");
-			// NOCOM get font for all scripts
 			ns.fontset = i18n::find_fontset(word.c_str(), fontsets_);
 			if (!word.empty()) {
 				bool word_is_bidi = i18n::has_rtl_character(word.c_str());
@@ -765,9 +762,7 @@ void TagHandler::m_make_text_nodes(const string& txt, vector<RenderNode*>& nodes
 				nodes.push_back(new WordSpacerNode(font_cache_.get_font(&ns), ns));
 			}
 			word = ts.till_any_or_end(" \t\n\r");
-			// NOCOM get font for all scripts
 			ns.fontset = i18n::find_fontset(word.c_str(), fontsets_);
-
 			if (!word.empty()) {
 				word = i18n::make_ligatures(word.c_str());
 				if (i18n::has_script_character(word.c_str(), UI::FontSets::Selector::kCJK)) {
