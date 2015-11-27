@@ -535,9 +535,9 @@ world:new_terrain_type{
    default_resource_amount = 0,
    textures = { pics_dir .. "wasteland/forested_mountain_00.png" },
    dither_layer = 81,
-   temperature = 70,
-   humidity = 0.5,
-   fertility = 0.75,
+   temperature = 110,
+   humidity = 0.15,
+   fertility = 0.95,
 }
 
 world:new_terrain_type{
@@ -550,9 +550,9 @@ world:new_terrain_type{
    default_resource_amount = 0,
    textures = { pics_dir .. "wasteland/forested_mountain_01.png" },
    dither_layer = 81,
-   temperature = 70,
-   humidity = 0.5,
-   fertility = 0.75,
+   temperature = 95,
+   humidity = 0.2,
+   fertility = 0.4,
 }
 
 world:new_terrain_type{
