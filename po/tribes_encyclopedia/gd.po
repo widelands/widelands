@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-10 08:55+0000\n"
-"PO-Revision-Date: 2015-11-10 18:21+0000\n"
+"POT-Creation-Date: 2015-11-18 08:43+0000\n"
+"PO-Revision-Date: 2015-11-18 15:24+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -655,8 +655,8 @@ msgstr "Gabhaidh an geamair fois fad %s mus tòisich e air an obair a-rithist."
 msgctxt "barbarians_building"
 msgid ""
 "‘Soft and supple.<br> And yet untouched by time and weather.<br> Rays of "
-"sun, wrought into eternity ...’"
-msgstr "“Sùbailte bog.<br>Ach slàn on t-àm is aimsir.<br>Gathan na grèine ceàrdail gu sìorraidh ...”"
+"sun, wrought into eternity…’"
+msgstr "“Sùbailte bog.<br>Ach slàn on t-àm is aimsir.<br>Gathan na grèine ceàrdail gu sìorraidh…”"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../tribes/buildings/productionsites/barbarians/goldmine/helptexts.lua:8
@@ -1102,7 +1102,7 @@ msgstr "Bheir an giùlanair %s gus peile uisge fhaighinn."
 #: ../../tribes/buildings/productionsites/barbarians/wood_hardener/helptexts.lua:16
 msgctxt "barbarians_building"
 msgid ""
-"Hardens wood by fire into blackwood, which is used to construct robust "
+"Hardens logs by fire into blackwood, which is used to construct robust "
 "buildings."
 msgstr "Cleachdaidh e teine gus fiodh a chruthachadh ach an gabh a chleachdadh gus togalaichean seasmhach a thogail."
 
@@ -1436,21 +1436,13 @@ msgstr "Seo an t-ionad agad airson tuineachadh is malart thar chuain. Cumaidh tu
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/warehouses/atlanteans/warehouse/helptexts.lua:16
-msgctxt "atlanteans_building"
-msgid "Stores soldiers, wares and tools."
-msgstr "Cumaidh e saighdearan, bathar ’s acainnean."
-
-#. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/warehouses/barbarians/warehouse/helptexts.lua:16
-msgctxt "barbarians_building"
-msgid "Stores soldiers, wares and tools."
-msgstr "Cumaidh e saighdearan, bathar ’s acainnean."
-
-#. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/warehouses/empire/warehouse/helptexts.lua:16
-msgctxt "empire_building"
-msgid "Stores soldiers, wares and tools."
-msgstr "Cumaidh e saighdearan, bathar ’s acainnean."
+msgctxt "building"
+msgid ""
+"Your workers and soldiers will find shelter here. Also stores your wares and"
+" tools."
+msgstr "Gheibh an luchd-obrach ’s na saighdearan agad fasgadh an-seo. Cumaidh tu am bathar ’s na h-acainnean agad ann cuideachd."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/warehouses/empire/headquarters_shipwreck/helptexts.lua:16
@@ -2083,17 +2075,25 @@ msgstr "’S e acainn a chleachdas an leaghadair sa cheàrdach leaghadair a tha 
 
 #. TRANSLATORS: Helptext for a ware: Fire Tongs
 #: ../../tribes/wares/fire_tongs/helptexts.lua:6
-msgctxt "atlanteans_ware"
+msgctxt "atlanteans_ware_fire_tongs"
+msgid "They are produced by the toolsmith."
+msgstr "Thèid a shaothrachadh leis a’ cheàrdach acainnean."
+
+#. TRANSLATORS: Helptext for a ware: Fire Tongs
+#: ../../tribes/wares/fire_tongs/helptexts.lua:10
+msgctxt "empire_ware_fire_tongs"
+msgid "They are produced by the toolsmith."
+msgstr "Thèid a shaothrachadh leis a’ cheàrdach acainnean."
+
+#. TRANSLATORS: Helptext for a ware: Fishing Rod
+#: ../../tribes/wares/fishing_rod/helptexts.lua:8
+msgctxt "empire_ware_fishing_rod"
 msgid "They are produced by the toolsmith."
 msgstr "Thèid an saothrachadh leis a’ cheàrdach acainnean."
 
-#. TRANSLATORS: Helptext for a ware: Fire Tongs
-#. TRANSLATORS: Helptext for a ware: Fishing Rod
 #. TRANSLATORS: Helptext for a ware: Hunting Spear
-#: ../../tribes/wares/fire_tongs/helptexts.lua:10
-#: ../../tribes/wares/fishing_rod/helptexts.lua:8
 #: ../../tribes/wares/hunting_spear/helptexts.lua:8
-msgctxt "empire_ware"
+msgctxt "empire_ware_hunting_spear"
 msgid "They are produced by the toolsmith."
 msgstr "Thèid an saothrachadh leis a’ cheàrdach acainnean."
 
@@ -2532,21 +2532,29 @@ msgstr "Cleachdaidh clachairean is mèinnearan piocaidean. Saothraichidh an gobh
 #. TRANSLATORS: Helptext for a ware: Planks
 #: ../../tribes/wares/planks/helptexts.lua:4
 msgctxt "ware"
-msgid ""
-"Planks are an important building material. They are produced out of logs by "
-"the sawmill."
-msgstr "’S e stuth togail cudromach a th’ anns na maidean. Thèid an dèanamh de dh’fhiodh leis a’ mhuileann shàbhaidh."
+msgid "Planks are an important building material."
+msgstr "’S e stuth togail cudromach a th’ anns na maidean."
 
 #. TRANSLATORS: Helptext for a ware: Planks
-#: ../../tribes/wares/planks/helptexts.lua:6
+#: ../../tribes/wares/planks/helptexts.lua:7
+msgctxt "atlanteans_ware_planks"
+msgid "They are produced out of logs by the sawmill."
+msgstr "Thèid an dèanamh de dh’fhiodh leis a’ mhuileann shàbhaidh."
+
+#. TRANSLATORS: Helptext for a ware: Planks
+#: ../../tribes/wares/planks/helptexts.lua:11
+msgctxt "empire_ware_planks"
+msgid "They are produced out of logs by the sawmill."
+msgstr "Thèid an dèanamh de dh’fhiodh leis a’ mhuileann shàbhaidh."
+
+#: ../../tribes/wares/planks/helptexts.lua:8
 msgctxt "atlanteans_ware"
 msgid ""
 "The weapon smithy and the shipyard also use planks to produce the different "
 "tridents and mighty ships."
 msgstr "Cleachdaidh a’ cheàrdach arm is an doca maidean cuideachd gus muirgheadhan is longan cumhachdach a thogail."
 
-#. TRANSLATORS: Helptext for a ware: Planks
-#: ../../tribes/wares/planks/helptexts.lua:8
+#: ../../tribes/wares/planks/helptexts.lua:12
 msgctxt "empire_ware"
 msgid "They are also used by the weapon smithy."
 msgstr "Cleachdaidh a’ cheàrdach arm iad cuideachd."
@@ -3281,8 +3289,8 @@ msgstr "Nì e biadh airson mèinnearan."
 #. TRANSLATORS: Helptext for a worker: Lime-Burner
 #: ../../tribes/workers/barbarians/lime_burner/helptexts.lua:3
 msgctxt "barbarians_worker"
-msgid "Burns lime in the lime kiln."
-msgstr "Loisgidh e aol san àth-aoil."
+msgid "Mixes grout out of granite, water and coal in the lime kiln."
+msgstr "Measgaichidh e aol-tàthaidh à gaireal, uisge is gual san àth-aoil."
 
 #. TRANSLATORS: Helptext for a worker: Chief Miner
 #. TRANSLATORS: Helptext for a worker: Master Miner

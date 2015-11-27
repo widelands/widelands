@@ -2458,7 +2458,7 @@ void NetHost::check_sync_reports()
 
 void NetHost::syncreport()
 {
-	assert(d->game->get_gametime() == d->syncreport_time);
+	assert(d->game->get_gametime() == static_cast<uint32_t>(d->syncreport_time));
 
 	d->syncreport = d->game->get_sync_hash();
 	d->syncreport_arrived = true;

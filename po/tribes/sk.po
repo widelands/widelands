@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-10 08:55+0000\n"
-"PO-Revision-Date: 2015-11-15 15:17+0000\n"
+"POT-Creation-Date: 2015-11-18 08:43+0000\n"
+"PO-Revision-Date: 2015-11-18 21:59+0000\n"
 "Last-Translator: MiroslavR <miroslavr256@gmail.com>\n"
 "Language-Team: Slovak (http://www.transifex.com/widelands/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
@@ -2027,7 +2027,7 @@ msgstr "Kobka"
 #: ../../tribes/buildings/trainingsites/empire/colosseum/init.lua:65
 #: ../../tribes/buildings/trainingsites/empire/trainingcamp/init.lua:95
 msgid "sleeping"
-msgstr ""
+msgstr "pozastavenie"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:85
@@ -2743,7 +2743,7 @@ msgstr "Mramorový stĺp"
 #: ../../tribes/wares/meal/init.lua:7
 msgctxt "ware"
 msgid "Meal"
-msgstr "Jedlo"
+msgstr "Obed"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../tribes/wares/meat/init.lua:7
@@ -2980,7 +2980,7 @@ msgid "Blackroot Farmer"
 msgstr "Pestovateľ čierneho koreňa"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../tribes/workers/atlanteans/builder/init.lua:28
+#: ../../tribes/workers/atlanteans/builder/init.lua:29
 msgctxt "atlanteans_worker"
 msgid "Builder"
 msgstr "Stavbár"

@@ -93,7 +93,7 @@ enum {
 
 /*** class PlayerCommand ***/
 
-PlayerCommand::PlayerCommand (const int32_t time, const PlayerNumber s)
+PlayerCommand::PlayerCommand (const uint32_t time, const PlayerNumber s)
 	: GameLogicCommand (time), m_sender(s), m_cmdserial(0)
 {}
 
@@ -330,7 +330,7 @@ void CmdBuildFlag::write
 
 /*** class Cmd_BuildRoad ***/
 
-CmdBuildRoad::CmdBuildRoad (int32_t t, int32_t p, Path & pa) :
+CmdBuildRoad::CmdBuildRoad (uint32_t t, int32_t p, Path & pa) :
 PlayerCommand(t, p),
 path         (&pa),
 start        (pa.get_start()),
@@ -1122,7 +1122,7 @@ void CmdShipCancelExpedition::write
 
 /*** class Cmd_SetWarePriority ***/
 CmdSetWarePriority::CmdSetWarePriority
-	(const int32_t _duetime, const PlayerNumber _sender,
+	(const uint32_t _duetime, const PlayerNumber _sender,
 	 PlayerImmovable & imm,
 	 const int32_t type, const DescriptionIndex index, const int32_t priority)
 	:
@@ -1201,7 +1201,7 @@ void CmdSetWarePriority::serialize(StreamWrite & ser)
 
 /*** class Cmd_SetWareMaxFill ***/
 CmdSetWareMaxFill::CmdSetWareMaxFill
-	(const int32_t _duetime, const PlayerNumber _sender,
+	(const uint32_t _duetime, const PlayerNumber _sender,
 	 PlayerImmovable & imm,
 	 const DescriptionIndex index, const uint32_t max_fill)
 	:
@@ -1274,7 +1274,7 @@ void CmdSetWareMaxFill::serialize(StreamWrite & ser)
 
 
 CmdChangeTargetQuantity::CmdChangeTargetQuantity
-	(const int32_t _duetime, const PlayerNumber _sender,
+	(const uint32_t _duetime, const PlayerNumber _sender,
 	 const uint32_t _economy, const DescriptionIndex _ware_type)
 	:
 	PlayerCommand(_duetime, _sender),
@@ -1319,7 +1319,7 @@ void CmdChangeTargetQuantity::serialize(StreamWrite & ser)
 
 
 CmdSetWareTargetQuantity::CmdSetWareTargetQuantity
-	(const int32_t _duetime, const PlayerNumber _sender,
+	(const uint32_t _duetime, const PlayerNumber _sender,
 	 const uint32_t _economy,
 	 const DescriptionIndex _ware_type,
 	 const uint32_t _permanent)
@@ -1381,7 +1381,7 @@ void CmdSetWareTargetQuantity::serialize(StreamWrite & ser)
 
 
 CmdResetWareTargetQuantity::CmdResetWareTargetQuantity
-	(const int32_t _duetime, const PlayerNumber _sender,
+	(const uint32_t _duetime, const PlayerNumber _sender,
 	 const uint32_t _economy,
 	 const DescriptionIndex _ware_type)
 	:
@@ -1437,7 +1437,7 @@ void CmdResetWareTargetQuantity::serialize(StreamWrite & ser)
 
 
 CmdSetWorkerTargetQuantity::CmdSetWorkerTargetQuantity
-	(const int32_t _duetime, const PlayerNumber _sender,
+	(const uint32_t _duetime, const PlayerNumber _sender,
 	 const uint32_t _economy,
 	 const DescriptionIndex _ware_type,
 	 const uint32_t _permanent)
@@ -1499,7 +1499,7 @@ void CmdSetWorkerTargetQuantity::serialize(StreamWrite & ser)
 
 
 CmdResetWorkerTargetQuantity::CmdResetWorkerTargetQuantity
-	(const int32_t _duetime, const PlayerNumber _sender,
+	(const uint32_t _duetime, const PlayerNumber _sender,
 	 const uint32_t _economy,
 	 const DescriptionIndex _ware_type)
 	:
@@ -1894,7 +1894,7 @@ void CmdMessageSetStatusArchived::serialize (StreamWrite & ser)
 
 /*** struct Cmd_SetStockPolicy ***/
 CmdSetStockPolicy::CmdSetStockPolicy
-	(int32_t time, PlayerNumber p,
+	(uint32_t time, PlayerNumber p,
 	 Warehouse & wh, bool isworker, DescriptionIndex ware,
 	 Warehouse::StockPolicy policy)
 : PlayerCommand(time, p)

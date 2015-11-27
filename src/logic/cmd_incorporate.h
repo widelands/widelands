@@ -27,7 +27,7 @@ namespace Widelands {
 
 struct CmdIncorporate : public GameLogicCommand {
 	CmdIncorporate() : GameLogicCommand(0), worker(nullptr) {} // For savegame loading
-	CmdIncorporate (int32_t const t, Worker * const w)
+	CmdIncorporate (uint32_t const t, Worker * const w)
 		: GameLogicCommand(t), worker(w)
 	{}
 

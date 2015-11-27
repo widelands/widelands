@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-10 08:45+0000\n"
-"PO-Revision-Date: 2015-11-08 15:56+0000\n"
+"POT-Creation-Date: 2015-11-18 08:43+0000\n"
+"PO-Revision-Date: 2015-11-18 08:43+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Norwegian Bokmål (http://www.transifex.com/widelands/widelands/language/nb/)\n"
 "MIME-Version: 1.0\n"
@@ -83,8 +83,8 @@ msgstr "Steinbrudd"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:67
 msgid ""
-"Build a quarry in the south to cut some stones and marble out of the rocks."
-msgstr "Bygg et steinbrudd i sør for å hugge ut stein og marmor fra steinene."
+"Build a quarry in the south to cut some granite and marble out of the rocks."
+msgstr ""
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:68
 msgid "These might be used for future buildings."
@@ -347,7 +347,7 @@ msgstr "Saledus noterer..."
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:204
 msgid ""
 "Sire, I just thought about the rocks standing on the south shore of this "
-"land. Perhaps we could cut out some useful hard stones and beautiful marble."
+"land. Perhaps we could cut out some useful granite and beautiful marble."
 msgstr ""
 
 #. TRANSLATORS: Saledus
@@ -369,7 +369,7 @@ msgstr ""
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:216
 msgid ""
 "Sire, today we got a lot closer to our first castle. The quarry to the south"
-" began its work today and will soon provide us with stones and beautiful "
+" began its work today and will soon provide us with granite and beautiful "
 "marble."
 msgstr ""
 

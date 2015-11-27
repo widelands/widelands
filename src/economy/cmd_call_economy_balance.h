@@ -33,7 +33,7 @@ class MapObjectLoader;
 struct CmdCallEconomyBalance : public GameLogicCommand {
 	CmdCallEconomyBalance () : GameLogicCommand(0), m_timerid(0) {} ///< for load and save
 
-	CmdCallEconomyBalance (int32_t starttime, Economy *, uint32_t timerid);
+	CmdCallEconomyBalance (uint32_t starttime, Economy *, uint32_t timerid);
 
 	void execute (Game &) override;
 
