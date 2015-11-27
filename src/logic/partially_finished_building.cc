@@ -149,7 +149,7 @@ should be more useful to the player.
 */
 const Image* PartiallyFinishedBuilding::representative_image() const
 {
-	return m_building->representative_image();
+	return m_building->representative_image(&owner().get_playercolor());
 }
 
 

@@ -40,7 +40,7 @@
 namespace Widelands {
 
 CmdDestroyMapObject::CmdDestroyMapObject
-	(int32_t const t, MapObject & o)
+	(uint32_t const t, MapObject & o)
 	: GameLogicCommand(t), obj_serial(o.serial())
 {}
 
@@ -90,7 +90,7 @@ void CmdDestroyMapObject::write
 	fw.unsigned_32(mos.get_object_file_index_or_zero(egbase.objects().get_object(obj_serial)));
 }
 
-CmdAct::CmdAct(int32_t const t, MapObject & o, int32_t const a) :
+CmdAct::CmdAct(uint32_t const t, MapObject & o, int32_t const a) :
 	GameLogicCommand(t), obj_serial(o.serial()), arg(a)
 {}
 
@@ -249,7 +249,7 @@ MapObjectDescr::MapObjectDescr(const MapObjectType init_type,
 			throw GameDataError("Map object %s has animations but no idle animation", init_name.c_str());
 		}
 		representative_image_filename_ = g_gr->animations().get_animation(get_animation("idle"))
-													.representative_image_from_disk_filename();
+													.representative_image_filename();
 	}
 	if (table.has_key("icon")) {
 		icon_filename_ = table.get_string("icon");
@@ -310,9 +310,9 @@ std::string MapObjectDescr::get_animation_name(uint32_t const anim) const {
 	return "";
 }
 
-const Image* MapObjectDescr::representative_image() const {
-	if (!representative_image_filename_.empty()) {
-		return g_gr->images().get(representative_image_filename_);
+const Image* MapObjectDescr::representative_image(const RGBColor* player_color) const {
+	if (is_animation_known("idle")) {
+		return g_gr->animations().get_representative_image(get_animation("idle"), player_color);
 	}
 	return nullptr;
 }

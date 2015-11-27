@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-10 08:55+0000\n"
-"PO-Revision-Date: 2015-11-15 15:15+0000\n"
+"POT-Creation-Date: 2015-11-18 08:43+0000\n"
+"PO-Revision-Date: 2015-11-18 23:44+0000\n"
 "Last-Translator: MiroslavR <miroslavr256@gmail.com>\n"
 "Language-Team: Slovak (http://www.transifex.com/widelands/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
@@ -102,6 +102,13 @@ msgstr "Kaktus"
 #: ../../world/immovables/grass3/init.lua:5
 msgid "Grass"
 msgstr "Tráva"
+
+#: ../../world/immovables/manmade/artifacts/artifact00/init.lua:5
+#: ../../world/immovables/manmade/artifacts/artifact01/init.lua:5
+#: ../../world/immovables/manmade/artifacts/artifact02/init.lua:5
+#: ../../world/immovables/manmade/artifacts/artifact03/init.lua:5
+msgid "Artifact"
+msgstr "Artefakt"
 
 #: ../../world/immovables/manmade/bar-ruin00/init.lua:5
 #: ../../world/immovables/manmade/bar-ruin01/init.lua:5
@@ -623,34 +630,42 @@ msgid "Miscellaneous"
 msgstr "Rôzne"
 
 #: ../../world/init.lua:17
+msgid "Artifacts"
+msgstr "Artefakty"
+
+#: ../../world/init.lua:17
+msgid "These immovables are used by the win condition “Artifacts”."
+msgstr "Tieto nehybné objekty používa podmienka na víťazstvo „Artefakty“."
+
+#: ../../world/init.lua:23
 msgid "Plants"
 msgstr "Rastliny"
 
-#: ../../world/init.lua:23
+#: ../../world/init.lua:29
 msgid "Standing Stones"
 msgstr "Stojace kamene"
 
-#: ../../world/init.lua:29
+#: ../../world/init.lua:35
 msgid "Rocks"
 msgstr "Skaly"
 
-#: ../../world/init.lua:35
+#: ../../world/init.lua:41
 msgid "Coniferous Trees"
 msgstr "Ihličnaté stromy"
 
-#: ../../world/init.lua:41
+#: ../../world/init.lua:47
 msgid "Dead Trees"
 msgstr "Mŕtve stromy"
 
-#: ../../world/init.lua:47
+#: ../../world/init.lua:53
 msgid "Deciduous Trees"
 msgstr "Listnaté stromy"
 
-#: ../../world/init.lua:53
+#: ../../world/init.lua:59
 msgid "Palm Trees"
 msgstr "Palmy"
 
-#: ../../world/init.lua:59
+#: ../../world/init.lua:65
 msgid "Wasteland Trees"
 msgstr "Stromy pustatiny"
 

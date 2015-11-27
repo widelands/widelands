@@ -32,6 +32,7 @@
 
 #include "base/log.h"
 #include "base/macros.h"
+#include "graphic/color.h"
 #include "graphic/image.h"
 #include "logic/cmd_queue.h"
 #include "logic/widelands.h"
@@ -139,7 +140,7 @@ struct MapObjectDescr {
 
 	/// Returns the image for the first frame of the idle animation if the MapObject has animations,
 	/// nullptr otherwise
-	const Image* representative_image() const;
+	const Image* representative_image(const RGBColor* player_color = nullptr) const;
 	/// Returns the image fileneme for first frame of the idle animation if the MapObject has animations,
 	/// is empty otherwise
 	const std::string& representative_image_filename() const;
@@ -306,15 +307,6 @@ public:
 		HeaderFleet = 11,
 	};
 
-	protected:
-	/**
-	 * MapObjects like trees are reserved by a worker that is walking
-	 * towards them, so that e.g. two lumberjacks don't attempt to
-	 * work on the same tree simultaneously or two hunters try to hunt
-	 * the same animal.
-	 */
-	bool m_reserved_by_worker;
-
 	public:
 
 	/**
@@ -392,6 +384,14 @@ protected:
 	const MapObjectDescr * m_descr;
 	Serial                   m_serial;
 	LogSink                * m_logsink;
+
+	/**
+	 * MapObjects like trees are reserved by a worker that is walking
+	 * towards them, so that e.g. two lumberjacks don't attempt to
+	 * work on the same tree simultaneously or two hunters try to hunt
+	 * the same animal.
+	 */
+	bool m_reserved_by_worker;
 
 private:
 	DISALLOW_COPY_AND_ASSIGN(MapObject);
@@ -514,7 +514,7 @@ private:
 
 struct CmdDestroyMapObject : public GameLogicCommand {
 	CmdDestroyMapObject() : GameLogicCommand(0), obj_serial(0) {} ///< For savegame loading
-	CmdDestroyMapObject (int32_t t, MapObject &);
+	CmdDestroyMapObject (uint32_t t, MapObject &);
 	void execute (Game &) override;
 
 	void write(FileWrite &, EditorGameBase &, MapObjectSaver  &) override;
@@ -528,7 +528,7 @@ private:
 
 struct CmdAct : public GameLogicCommand {
 	CmdAct() : GameLogicCommand(0), obj_serial(0), arg(0) {} ///< For savegame loading
-	CmdAct (int32_t t, MapObject &, int32_t a);
+	CmdAct (uint32_t t, MapObject &, int32_t a);
 
 	void execute (Game &) override;
 
