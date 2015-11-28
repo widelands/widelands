@@ -58,9 +58,8 @@ MAINPOTS = [
         "../../world/*/*/*/*/*/*.lua",
     ]),
     ("tribes/tribes", [
-        "../../tribes/scripting/starting_conditions/*/*.lua" # TODO(GunChleoc): the starting conditions aren't being picked up.
+        "../../tribes/scripting/starting_conditions/*/*.lua",
         "../../tribes/*.lua",
-        "../../tribes/preload.lua", # TODO(GunChleoc): Why do I have to load both *.lua and preload.lua for this to work?
         "../../tribes/*/init.lua",
         "../../tribes/*/*/init.lua",
         "../../tribes/*/*/*/init.lua",
