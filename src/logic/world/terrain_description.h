@@ -110,11 +110,15 @@ public:
 	/// Fertility in percent [0, 1].
 	double fertility() const;
 
+	/// Additional tooptip entries for the editor
+	const std::vector<std::string>& custom_tooltips() const {return custom_tooltips_;}
+
 private:
 	const std::string name_;
 	const std::string descname_;
 	const EditorCategory* editor_category_;  ///< not owned.
 	Type is_;
+	std::vector<std::string> custom_tooltips_;
 	std::vector<uint8_t> valid_resources_;
 	int default_resource_index_;
 	int default_resource_amount_;

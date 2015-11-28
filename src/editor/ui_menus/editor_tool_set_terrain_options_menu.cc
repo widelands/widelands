@@ -153,6 +153,11 @@ UI::Checkbox* create_terrain_checkbox(UI::Panel* parent,
 		offscreen_images->emplace_back(texture);
 		break;
 	}
+
+	tooltips.insert(tooltips.end(),
+						 terrain_descr.custom_tooltips().begin(),
+						 terrain_descr.custom_tooltips().end());
+
 	/** TRANSLATORS: %1% = terrain name, %2% = list of terrain types  */
 	const std::string tooltip = ((boost::format("%1%: %2%"))
 								  % terrain_descr.descname()

@@ -48,6 +48,13 @@ world:new_terrain_type{
    -- "impassable": Nothing can be built here, and nothing can walk on it
    is = "green",
 
+   -- You can add custom additional tooltip entries here.
+   tooltips = {
+		-- TRANSLATORS: This is an entry in a terrain tooltip. Try to use 1 word if possible.
+		_"NOCOM custom 1",
+		_"NOCOM custom 2",
+   },
+
    -- The list resources that can be found in this terrain.
    valid_resources = {"water"},
 
