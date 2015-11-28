@@ -22,7 +22,7 @@
 
 #include <set>
 
-#include "logic/instances.h"
+#include "logic/map_objects/instances.h"
 
 class FileSystem;
 class WorldLegacyLookupTable;

@@ -25,7 +25,7 @@
 #include "logic/cmd_incorporate.h"
 #include "logic/cmd_luacoroutine.h"
 #include "logic/cmd_luascript.h"
-#include "logic/instances.h"
+#include "logic/map_objects/instances.h"
 #include "logic/playercommand.h"
 #include "logic/queue_cmd_ids.h"
 

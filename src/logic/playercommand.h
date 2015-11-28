@@ -26,10 +26,10 @@
 #include "economy/flag.h"
 #include "logic/message_id.h"
 #include "logic/path.h"
-#include "logic/ship.h"
-#include "logic/trainingsite.h"
-#include "logic/warehouse.h"
-#include "logic/worker.h"
+#include "logic/map_objects/tribes/ship.h"
+#include "logic/map_objects/tribes/trainingsite.h"
+#include "logic/map_objects/tribes/warehouse.h"
+#include "logic/map_objects/tribes/worker.h"
 
 namespace Widelands {
 

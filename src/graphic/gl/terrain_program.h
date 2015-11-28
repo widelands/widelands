@@ -26,7 +26,7 @@
 #include "graphic/gl/fields_to_draw.h"
 #include "graphic/gl/utils.h"
 #include "logic/description_maintainer.h"
-#include "logic/world/terrain_description.h"
+#include "logic/map_objects/world/terrain_description.h"
 
 
 class TerrainProgram {

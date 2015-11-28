@@ -23,7 +23,7 @@
 #include <vector>
 
 #include "economy/iroute.h"
-#include "logic/instances.h"
+#include "logic/map_objects/instances.h"
 
 
 namespace Widelands {

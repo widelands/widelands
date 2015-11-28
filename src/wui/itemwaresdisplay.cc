@@ -20,8 +20,8 @@
 #include "wui/itemwaresdisplay.h"
 
 #include "graphic/rendertarget.h"
+#include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/player.h"
-#include "logic/tribes/tribe_descr.h"
 
 namespace {
 

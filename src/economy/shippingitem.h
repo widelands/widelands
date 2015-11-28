@@ -21,7 +21,7 @@
 #define WL_ECONOMY_SHIPPINGITEM_H
 
 #include "logic/game.h"
-#include "logic/instances.h"
+#include "logic/map_objects/instances.h"
 
 class FileRead;
 class FileWrite;

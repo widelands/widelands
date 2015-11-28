@@ -28,9 +28,9 @@
 #include "graphic/texture.h"
 #include "logic/field.h"
 #include "logic/map.h"
+#include "logic/map_objects/world/terrain_description.h"
+#include "logic/map_objects/world/world.h"
 #include "logic/player.h"
-#include "logic/world/terrain_description.h"
-#include "logic/world/world.h"
 #include "wui/mapviewpixelconstants.h"
 #include "wui/mapviewpixelfunctions.h"
 

@@ -32,7 +32,7 @@
 #include "logic/field.h"
 #include "logic/map_revision.h"
 #include "logic/objective.h"
-#include "logic/walkingdir.h"
+#include "logic/map_objects/walkingdir.h"
 #include "logic/widelands_geometry.h"
 #include "notifications/note_ids.h"
 #include "notifications/notifications.h"

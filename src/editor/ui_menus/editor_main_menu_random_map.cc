@@ -33,7 +33,7 @@
 #include "logic/constants.h"
 #include "logic/editor_game_base.h"
 #include "logic/map.h"
-#include "logic/world/world.h"
+#include "logic/map_objects/world/world.h"
 #include "random/random.h"
 #include "ui_basic/button.h"
 #include "ui_basic/progresswindow.h"

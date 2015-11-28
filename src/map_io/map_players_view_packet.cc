@@ -33,10 +33,9 @@
 #include "logic/editor_game_base.h"
 #include "logic/field.h"
 #include "logic/game_data_error.h"
+#include "logic/map_objects/tribes/tribe_descr.h"
+#include "logic/map_objects/world/world.h"
 #include "logic/player.h"
-#include "logic/tribes/tribe_descr.h"
-#include "logic/world/world.h"
-
 
 namespace Widelands {
 

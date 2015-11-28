@@ -20,8 +20,8 @@
 #include "editor/tools/editor_delete_bob_tool.h"
 
 #include "editor/editorinteractive.h"
-#include "logic/bob.h"
 #include "logic/field.h"
+#include "logic/map_objects/bob.h"
 #include "logic/mapregion.h"
 
 /**

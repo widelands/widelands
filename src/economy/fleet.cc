@@ -29,11 +29,11 @@
 #include "io/fileread.h"
 #include "io/filewrite.h"
 #include "logic/game.h"
+#include "logic/map_objects/tribes/ship.h"
+#include "logic/map_objects/tribes/warehouse.h"
 #include "logic/mapastar.h"
 #include "logic/path.h"
 #include "logic/player.h"
-#include "logic/ship.h"
-#include "logic/warehouse.h"
 #include "map_io/map_object_loader.h"
 #include "map_io/map_object_saver.h"
 

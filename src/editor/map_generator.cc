@@ -27,8 +27,8 @@
 #include "logic/editor_game_base.h"
 #include "logic/findnode.h"
 #include "logic/map.h"
-#include "logic/world/map_gen.h"
-#include "logic/world/world.h"
+#include "logic/map_objects/world/map_gen.h"
+#include "logic/map_objects/world/world.h"
 #include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
 

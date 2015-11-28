@@ -22,8 +22,8 @@
 #include "editor/editorinteractive.h"
 #include "editor/tools/editor_tool.h"
 #include "graphic/graphic.h"
-#include "logic/building.h"
 #include "logic/map.h"
+#include "logic/map_objects/tribes/building.h"
 #include "wui/overlay_manager.h"
 
 // global variable to pass data from callback to class

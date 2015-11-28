@@ -24,8 +24,8 @@
 #include "logic/constants.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
+#include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/player.h"
-#include "logic/tribes/tribe_descr.h"
 #include "wui/interactive_player.h"
 
 namespace Widelands {

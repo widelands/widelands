@@ -20,9 +20,9 @@
 #ifndef WL_WUI_ENCYCLOPEDIA_WINDOW_H
 #define WL_WUI_ENCYCLOPEDIA_WINDOW_H
 
-#include "logic/building.h"
-#include "logic/ware_descr.h"
-#include "logic/worker_descr.h"
+#include "logic/map_objects/tribes/building.h"
+#include "logic/map_objects/tribes/ware_descr.h"
+#include "logic/map_objects/tribes/worker_descr.h"
 #include "ui_basic/box.h"
 #include "ui_basic/listselect.h"
 #include "ui_basic/multilinetextarea.h"

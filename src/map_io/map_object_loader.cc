@@ -21,7 +21,7 @@
 
 #include "base/wexception.h"
 #include "logic/editor_game_base.h"
-#include "logic/instances.h"
+#include "logic/map_objects/instances.h"
 
 namespace Widelands {
 

@@ -26,7 +26,7 @@
 
 #include <stdint.h>
 
-#include "logic/road_textures.h"
+#include "logic/map_objects/tribes/road_textures.h"
 
 // Helper struct that contains the data needed for drawing all fields. All
 // methods are inlined for performance reasons.

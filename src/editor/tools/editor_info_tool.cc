@@ -27,9 +27,9 @@
 #include "base/i18n.h"
 #include "editor/editorinteractive.h"
 #include "logic/map.h"
-#include "logic/world/editor_category.h"
-#include "logic/world/terrain_description.h"
-#include "logic/world/world.h"
+#include "logic/map_objects/world/editor_category.h"
+#include "logic/map_objects/world/terrain_description.h"
+#include "logic/map_objects/world/world.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/window.h"
 

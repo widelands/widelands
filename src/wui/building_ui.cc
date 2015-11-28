@@ -22,7 +22,7 @@
 #include <boost/lexical_cast.hpp>
 
 #include "base/macros.h"
-#include "logic/building.h"
+#include "logic/map_objects/tribes/building.h"
 #include "ui_basic/window.h"
 
 using Widelands::Building;

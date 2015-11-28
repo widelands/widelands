@@ -24,7 +24,7 @@
 #include <vector>
 
 #include "base/macros.h"
-#include "logic/immovable.h"
+#include "logic/map_objects/immovable.h"
 #include "economy/routing_node.h"
 
 namespace Widelands {
