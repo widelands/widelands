@@ -159,6 +159,8 @@ BuildingDescr::BuildingDescr
 
 	directory_ = table.get_string("directory");
 
+	m_needs_seafaring = table.has_key("needs_seafaring") ? table.get_bool("needs_seafaring") : false;
+
 	if (table.has_key("vision_range")) {
 		m_vision_range = table.get_int("vision_range");
 	}
