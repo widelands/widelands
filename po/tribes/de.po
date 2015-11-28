@@ -16,8 +16,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-17 08:09+0000\n"
-"PO-Revision-Date: 2015-11-17 12:41+0000\n"
+"POT-Creation-Date: 2015-11-23 09:42+0000\n"
+"PO-Revision-Date: 2015-11-25 12:04+0000\n"
 "Last-Translator: Venatrix\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -527,10 +527,10 @@ msgid "harvesting blackroot"
 msgstr "Das Ernten von Dunkelrüben"
 
 #: ../../tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:73
-#: ../../tribes/buildings/productionsites/atlanteans/farm/init.lua:77
-#: ../../tribes/buildings/productionsites/barbarians/farm/init.lua:89
+#: ../../tribes/buildings/productionsites/atlanteans/farm/init.lua:76
+#: ../../tribes/buildings/productionsites/barbarians/farm/init.lua:88
 #: ../../tribes/buildings/productionsites/barbarians/reed_yard/init.lua:71
-#: ../../tribes/buildings/productionsites/empire/farm/init.lua:75
+#: ../../tribes/buildings/productionsites/empire/farm/init.lua:74
 #: ../../tribes/buildings/productionsites/empire/vineyard/init.lua:72
 msgid "Out of Fields"
 msgstr "Keine Felder"
@@ -664,28 +664,28 @@ msgid "Farm"
 msgstr "Bauernhof"
 
 #. TRANSLATORS: Completed/Skipped/Did not start planting corn because ...
-#: ../../tribes/buildings/productionsites/atlanteans/farm/init.lua:61
+#: ../../tribes/buildings/productionsites/atlanteans/farm/init.lua:60
 msgid "planting corn"
 msgstr "Das Pflanzen von Mais"
 
 #. TRANSLATORS: Completed/Skipped/Did not start harvesting corn because ...
-#: ../../tribes/buildings/productionsites/atlanteans/farm/init.lua:69
+#: ../../tribes/buildings/productionsites/atlanteans/farm/init.lua:68
 msgid "harvesting corn"
 msgstr "Das Ernten von Mais"
 
-#: ../../tribes/buildings/productionsites/atlanteans/farm/init.lua:78
+#: ../../tribes/buildings/productionsites/atlanteans/farm/init.lua:77
 msgctxt "atlanteans_building"
 msgid ""
 "The farmer working at this farm has no cleared soil to plant his seeds."
 msgstr "Der Bauer in diesem Bauernhof hat keinen freien Platz, um Getreide zu säen."
 
-#: ../../tribes/buildings/productionsites/barbarians/farm/init.lua:90
+#: ../../tribes/buildings/productionsites/barbarians/farm/init.lua:89
 msgctxt "barbarians_building"
 msgid ""
 "The farmer working at this farm has no cleared soil to plant his seeds."
 msgstr "Der Bauer in diesem Bauernhof hat keinen freien Platz, um Getreide zu säen."
 
-#: ../../tribes/buildings/productionsites/empire/farm/init.lua:76
+#: ../../tribes/buildings/productionsites/empire/farm/init.lua:75
 msgctxt "empire_building"
 msgid ""
 "The farmer working at this farm has no cleared soil to plant his seeds."
@@ -1449,14 +1449,14 @@ msgid ""
 msgstr "Die Hauptader dieser Kohlemine ist erschöpft. Die Produktivität wird stark einbrechen. Diese Mine kann nicht mehr ausgebaut werden, daher solltest du diese Mine abreißen oder zerstören."
 
 #. TRANSLATORS: Completed/Skipped/Did not start planting wheat because ...
-#: ../../tribes/buildings/productionsites/barbarians/farm/init.lua:72
-#: ../../tribes/buildings/productionsites/empire/farm/init.lua:59
+#: ../../tribes/buildings/productionsites/barbarians/farm/init.lua:71
+#: ../../tribes/buildings/productionsites/empire/farm/init.lua:58
 msgid "planting wheat"
 msgstr "Das Pflanzen von Weizen"
 
 #. TRANSLATORS: Completed/Skipped/Did not start harvesting wheat because ...
-#: ../../tribes/buildings/productionsites/barbarians/farm/init.lua:80
-#: ../../tribes/buildings/productionsites/empire/farm/init.lua:67
+#: ../../tribes/buildings/productionsites/barbarians/farm/init.lua:79
+#: ../../tribes/buildings/productionsites/empire/farm/init.lua:66
 msgid "harvesting wheat"
 msgstr "Das Ernten von Weizen"
 

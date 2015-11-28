@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-18 08:43+0000\n"
-"PO-Revision-Date: 2015-11-23 02:20+0000\n"
+"POT-Creation-Date: 2015-11-23 09:42+0000\n"
+"PO-Revision-Date: 2015-11-26 19:03+0000\n"
 "Last-Translator: MiroslavR <miroslavr256@gmail.com>\n"
 "Language-Team: Slovak (http://www.transifex.com/widelands/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
@@ -67,7 +67,7 @@ msgid ""
 "If you’re low on soldiers to occupy new military sites, use the downward "
 "arrow button to decrease the capacity. You can also click on a soldier to "
 "send him away."
-msgstr "Ak nemáte dostatok vojakov, ktorí by obsadzovali nové vojenské budovy, môžete znížiť kapacitu kliknutím na tlačidlo so šípkou nadol. Taktiež ak kliknete na niektorého vojaka, pošlete ho preč."
+msgstr "Ak nemáte dostatok vojakov, ktorí by obsadzovali nové vojenské budovy, môžete znížiť kapacitu kliknutím na tlačidlo so šípkou nadol. Zároveň môžete poslať niektorého vojaka preč, ak naňho kliknete."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/partially_finished/constructionsite/helptexts.lua:16
@@ -104,6 +104,14 @@ msgctxt "atlanteans_building"
 msgid "Sows and harvests blackroot."
 msgstr "Seje a zberá čierny koreň."
 
+#. TRANSLATORS: Performance helptext for a building
+#: ../../tribes/buildings/productionsites/atlanteans/blackroot_farm/helptexts.lua:26
+msgctxt "atlanteans_building"
+msgid ""
+"The blackroot farmer needs %1% on average to sow and harvest a bundle of "
+"blackroot."
+msgstr "Pestovateľ čierneho koreňa vyprodukuje jeden zväzok čierneho koreňa, od zasiatia po žatvu, v priemere za %1%."
+
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/productionsites/atlanteans/charcoal_kiln/helptexts.lua:16
 #: ../../tribes/buildings/productionsites/barbarians/charcoal_kiln/helptexts.lua:16
@@ -134,6 +142,12 @@ msgstr "Vysekáva drahokamy zo skaly na horskom teréne."
 msgctxt "atlanteans_building"
 msgid "Sows and harvests corn."
 msgstr "Seje a zberá kukuricu."
+
+#. TRANSLATORS: Performance helptext for a building
+#: ../../tribes/buildings/productionsites/atlanteans/farm/helptexts.lua:26
+msgctxt "atlanteans_building"
+msgid "The farmer needs %1% on average to sow and harvest a sheaf of corn."
+msgstr "Farmár vyprodukuje jeden snop kukurice, od zasiatia po žatvu, v priemere za %1%."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/productionsites/atlanteans/fishbreeders_house/helptexts.lua:16
@@ -477,6 +491,8 @@ msgstr "Barbarská výrobňa sekier je prostrednou produkčnou stavbou v sérii 
 #: ../../tribes/buildings/productionsites/barbarians/well/helptexts.lua:23
 #: ../../tribes/buildings/trainingsites/barbarians/battlearena/helptexts.lua:26
 #: ../../tribes/buildings/trainingsites/barbarians/trainingcamp/helptexts.lua:26
+#: ../../tribes/scripting/help/global_helptexts.lua:58
+#: ../../tribes/scripting/help/global_helptexts.lua:85
 msgid "%d second"
 msgid_plural "%d seconds"
 msgstr[0] "%d sekundu"
@@ -596,6 +612,18 @@ msgstr "Táto baňa dokáže vyťažiť celý zdroj po najhlbšiu úroveň. Aj p
 msgctxt "building"
 msgid "Sows and harvests wheat."
 msgstr "Seje a zberá pšenicu."
+
+#. TRANSLATORS: Performance helptext for a building
+#: ../../tribes/buildings/productionsites/barbarians/farm/helptexts.lua:26
+msgctxt "barbarians_building"
+msgid "The farmer needs %1% on average to sow and harvest a sheaf of wheat."
+msgstr "Farmár vyprodukuje jeden snop pšenice, od zasiatia po žatvu, v priemere za %1%."
+
+#. TRANSLATORS: Performance helptext for a building
+#: ../../tribes/buildings/productionsites/empire/farm/helptexts.lua:26
+msgctxt "empire_building"
+msgid "The farmer needs %1% on average to sow and harvest a sheaf of wheat."
+msgstr "Farmár vyprodukuje jeden snop pšenice, od zasiatia po žatvu, v priemere za %1%."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../tribes/buildings/productionsites/barbarians/fishers_hut/helptexts.lua:3
@@ -1067,7 +1095,7 @@ msgctxt "barbarians_building"
 msgid ""
 "All weapons require the same time for making, but the consumption of the "
 "same raw materials increases from step to step. The last two need gold."
-msgstr ""
+msgstr "Výroba každej zbrane trvá rovnako dlho, ale spotreba tých istých surovín rastie zo zbrane na zbraň. Posledné dve potrebujú zlato."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/productionsites/barbarians/weaving_mill/helptexts.lua:16
@@ -1119,6 +1147,18 @@ msgctxt "empire_building"
 msgid "Bakes bread for soldiers and miners alike."
 msgstr "Pečie chlieb pre vojakov a baníkov."
 
+#. TRANSLATORS: Performance helptext for a building
+#: ../../tribes/buildings/productionsites/empire/bakery/helptexts.lua:26
+msgctxt "empire_building"
+msgid "The baker needs %1% on average to bake a loaf of bread."
+msgstr "Pekár upečie bochník chleba v priemere za %1%."
+
+#. TRANSLATORS: Performance helptext for a building
+#: ../../tribes/buildings/productionsites/empire/brewery/helptexts.lua:26
+msgctxt "empire_building"
+msgid "The brewer needs %1% on average to brew a vat of beer."
+msgstr "Pivovarník uvarí sud piva v priemere za %1%."
+
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/productionsites/empire/donkeyfarm/helptexts.lua:16
 msgctxt "empire_building"
@@ -1142,6 +1182,15 @@ msgid ""
 "Prepares rations for scouts and rations and snacks to feed the miners in all"
 " mines."
 msgstr "Pripravuje prídely pre prieskumníkov, ako aj prídely a desiaty, ktoré sa podávajú baníkom vo všetkých baniach."
+
+#. TRANSLATORS: Performance helptext for a building
+#: ../../tribes/buildings/productionsites/empire/inn/helptexts.lua:26
+msgctxt "empire_building"
+msgid ""
+"The innkeeper needs %1% on average to prepare a ration and a meal. If the "
+"economy doesn’t need both, the innkeeper needs %2% on average to prepare one"
+" ration or one meal."
+msgstr "Hostinský pripraví prídel a zároveň obed v priemere za %1%. V prípade, že ekonomika nevyžaduje obe, hostinský pripraví buď jeden prídel, alebo jeden obed v priemere za %2%."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../tribes/buildings/productionsites/empire/lumberjacks_house/helptexts.lua:21
@@ -1168,11 +1217,23 @@ msgctxt "empire_worker"
 msgid "Grinds wheat to produce flour."
 msgstr "Mlie pšenicu na múku."
 
+#. TRANSLATORS: Performance helptext for a building
+#: ../../tribes/buildings/productionsites/empire/mill/helptexts.lua:26
+msgctxt "empire_building"
+msgid "The miller needs %1% on average to grind wheat into a sack of corn."
+msgstr "Mlynár pomelie pšenicu a vyprodukuje jedno vrece múky v priemere za %1%."
+
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/productionsites/empire/piggery/helptexts.lua:16
 msgctxt "empire_building"
 msgid "Breeds pigs for their meat."
 msgstr "Chová ošípané pre mäso."
+
+#. TRANSLATORS: Performance helptext for a building
+#: ../../tribes/buildings/productionsites/empire/piggery/helptexts.lua:26
+msgctxt "empire_building"
+msgid "The pig breeder needs %1% on average to raise and slaughter a pig."
+msgstr "Chovateľ ošípaných vykŕmi a zabije jednu ošípanú v priemere za %1%."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/productionsites/empire/quarry/helptexts.lua:16
@@ -1197,6 +1258,12 @@ msgstr "Pasie ovce pre vlnu."
 msgctxt "empire_building"
 msgid "Carves marble columns out of marble."
 msgstr "Vykresáva mramorové stĺpy z mramoru."
+
+#. TRANSLATORS: Performance helptext for a building
+#: ../../tribes/buildings/productionsites/empire/tavern/helptexts.lua:26
+msgctxt "empire_building"
+msgid "The innkeeper needs %1% on average to prepare a ration."
+msgstr "Hostinský pripraví prídel v priemere za %1%."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/productionsites/empire/vineyard/helptexts.lua:16
@@ -1310,6 +1377,8 @@ msgstr "Barbarských vojakov nemožno cvičiť v obrane, a preto zostanú na po�
 
 #: ../../tribes/buildings/trainingsites/barbarians/battlearena/helptexts.lua:26
 #: ../../tribes/buildings/trainingsites/barbarians/trainingcamp/helptexts.lua:26
+#: ../../tribes/scripting/help/global_helptexts.lua:70
+#: ../../tribes/scripting/help/global_helptexts.lua:84
 msgid "%d minute"
 msgid_plural "%d minutes"
 msgstr[0] "%d minútu"
@@ -1563,7 +1632,7 @@ msgstr "Výcvik zdravia"
 #: ../../tribes/scripting/help/building_help.lua:449
 #: ../../tribes/scripting/help/building_help.lua:462
 msgid "Trains ‘%1$s’ from %2$s up to %3$s"
-msgstr ""
+msgstr "Cvičí %1$s od úrovne %2$s až po úroveň %3$s"
 
 #: ../../tribes/scripting/help/building_help.lua:424
 msgid "Health"
@@ -1752,6 +1821,10 @@ msgstr "Chýba zdroj"
 msgid "Calculation needed"
 msgstr "Chýba výpočet"
 
+#: ../../tribes/scripting/help/global_helptexts.lua:83
+msgid "%1% and %2%"
+msgstr "%1% a %2%"
+
 #: ../../tribes/scripting/help/worker_help.lua:49
 msgid "Purpose"
 msgstr "Účel"
@@ -1809,7 +1882,7 @@ msgid ""
 "produced in the ax workshop. Only trained soldiers are able to wield such a "
 "weapon. It is used – together with food – in the training camp to train "
 "soldiers from attack level 3 to 4."
-msgstr ""
+msgstr "Túto nebezpečnú zbraň vyrábajú Barbari vo výrobni sekier. S takouto zbraňou dokážu narábať len vycvičení vojaci. Používa sa – spolu s jedlom – vo výcvikovom tábore na výcvik vojakov v útoku z úrovne 3 na úroveň 4."
 
 #. TRANSLATORS: Helptext for a ware: Broad Ax
 #: ../../tribes/wares/ax_broad/helptexts.lua:4
@@ -2294,7 +2367,7 @@ msgid ""
 "This is the most enhanced Barbarian armor. It is produced in the helm smithy"
 " and used in the training camp – together with food – to train soldiers from"
 " health level 2 to level 3."
-msgstr ""
+msgstr "Toto je najlepšia zbroj, akú môžu mať Barbari k dispozícii. Vyrába sa vo vyhni na helmy a používa sa vo výcvikovom tábore – spolu s jedlom – na výcvik vojakov v zdraví z úrovne 2 na úroveň 3."
 
 #. TRANSLATORS: Helptext for a ware: Warhelm
 #: ../../tribes/wares/helmet_warhelm/helptexts.lua:4
