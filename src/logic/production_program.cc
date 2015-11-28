@@ -1049,7 +1049,7 @@ void ProductionProgram::ActProduce::execute
 	assert(m_items.size());
 
 	std::vector<std::string> ware_descnames;
-	uint8_t count;
+	uint8_t count = 0;
 	for (const auto& item_pair : m_items) {
 		count = item_pair.second;
 		std::string ware_descname = tribe.get_ware_descr(item_pair.first)->descname();
@@ -1145,7 +1145,7 @@ void ProductionProgram::ActRecruit::execute
 	const TribeDescr & tribe = ps.owner().tribe();
 	assert(m_items.size());
 	std::vector<std::string> worker_descnames;
-	uint8_t count;
+	uint8_t count = 0;
 	for (const auto& item_pair : m_items) {
 		count = item_pair.second;
 		std::string worker_descname = tribe.get_worker_descr(item_pair.first)->descname();
