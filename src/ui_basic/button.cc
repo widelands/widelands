@@ -156,9 +156,6 @@ void Button::set_enabled(bool const on)
 */
 void Button::draw(RenderTarget & dst)
 {
-	// Initialize the rectangle
-	dst.fill_rect(Rect(Point(0, 0), get_w(), get_h()), RGBAColor(0, 0, 0, 0));
-
 	// Draw the background
 	if (!m_flat || m_draw_flat_background) {
 		assert(m_pic_background);
