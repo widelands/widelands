@@ -307,6 +307,10 @@ Image* NonPackedAnimation::representative_image(const RGBColor* clr) const {
 	int h = image->height();
 
 	Texture* rv = new Texture(w, h);
+
+	// Initialize the rectangle
+	::fill_rect(Rect(Point(0, 0), w, h), RGBAColor(0, 0, 0, 0), rv);
+
 	if (!hasplrclrs_ || clr == nullptr) {
 		::blit(Rect(Point(0, 0), w, h),
 				 *image,
@@ -315,7 +319,7 @@ Image* NonPackedAnimation::representative_image(const RGBColor* clr) const {
 				 BlendMode::UseAlpha,
 				 rv);
 	} else {
-		blit_blended(Rect(Point(0, 0), w, h),
+		::blit_blended(Rect(Point(0, 0), w, h),
 						 *image,
 						 *g_gr->images().get(pc_mask_image_files_[0]),
 						 Rect(Point(0, 0), w, h),
