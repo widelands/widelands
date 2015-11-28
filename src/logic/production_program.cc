@@ -1067,7 +1067,8 @@ void ProductionProgram::ActProduce::execute
 	std::string ware_list = i18n::localize_list(ware_descnames, i18n::ConcatenateWith::AND);
 
 	/** TRANSLATORS: %s is a list of wares. String is fetched according to total amount of wares. */
-	const std::string result_string = (boost::format(ngettext("Produced %s", "Produced %s", count)) % ware_list).str();
+	const std::string result_string =
+	   (boost::format(ngettext("Produced %s", "Produced %s", count)) % ware_list).str();
 	ps.set_production_result(result_string);
 }
 
@@ -1162,7 +1163,8 @@ void ProductionProgram::ActRecruit::execute
 	std::string unit_string = i18n::localize_list(worker_descnames, i18n::ConcatenateWith::AND);
 
 	/** TRANSLATORS: %s is a list of workers. String is fetched according to total amount of workers. */
-	const std::string result_string = (boost::format(ngettext("Recruited %s", "Recruited %s", count)) % unit_string).str();
+	const std::string result_string =
+	   (boost::format(ngettext("Recruited %s", "Recruited %s", count)) % unit_string).str();
 	ps.set_production_result(result_string);
 }
 

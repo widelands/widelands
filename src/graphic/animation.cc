@@ -308,19 +308,10 @@ Image* NonPackedAnimation::representative_image(const RGBColor* clr) const {
 
 	Texture* rv = new Texture(w, h);
 	if (!hasplrclrs_ || clr == nullptr) {
-		::blit(Rect(Point(0, 0), w, h),
-				 *image,
-				 Rect(Point(0, 0), w, h),
-				 1.,
-				 BlendMode::UseAlpha,
-				 rv);
+		rv->blit(Rect(Point(0, 0), w, h), *image, Rect(Point(0, 0), w, h), 1., BlendMode::UseAlpha);
 	} else {
-		blit_blended(Rect(Point(0, 0), w, h),
-						 *image,
-						 *g_gr->images().get(pc_mask_image_files_[0]),
-						 Rect(Point(0, 0), w, h),
-						 *clr,
-						 rv);
+		rv->blit_blended(Rect(Point(0, 0), w, h), *image,
+		                 *g_gr->images().get(pc_mask_image_files_[0]), Rect(Point(0, 0), w, h), *clr);
 	}
 	return rv;
 }

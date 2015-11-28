@@ -190,11 +190,8 @@ void RenderTarget::blit_monochrome(const Point& dst,
 	Rect srcrc(Point(0, 0), image->width(), image->height());
 
 	if (to_surface_geometry(&destination_point, &srcrc)) {
-		::blit_monochrome(Rect(destination_point.x, destination_point.y, srcrc.w, srcrc.h),
-			  *image,
-			  srcrc,
-			  blend_mode,
-			  m_surface);
+		m_surface->blit_monochrome(Rect(destination_point.x, destination_point.y, srcrc.w, srcrc.h),
+		                           *image, srcrc, blend_mode);
 	}
 }
 
