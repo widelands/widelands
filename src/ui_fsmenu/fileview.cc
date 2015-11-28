@@ -19,9 +19,11 @@
 
 #include "ui_fsmenu/fileview.h"
 
+#include <map>
 #include <memory>
 
-#include <boost/algorithm/string/predicate.hpp>
+#include <boost/algorithm/string.hpp>
+#include <boost/format.hpp>
 
 #include "base/i18n.h"
 #include "graphic/font_handler1.h"
@@ -29,40 +31,32 @@
 #include "graphic/text/font_set.h"
 #include "graphic/text_constants.h"
 #include "io/filesystem/filesystem.h"
-#include "profile/profile.h"
 #include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
 
 namespace {
 bool read_text(const std::string& filename, std::string* title, std::string* content) {
-	if (boost::algorithm::ends_with(filename, ".lua")) {
-		try {
-			LuaInterface lua;
-			std::unique_ptr<LuaTable> t(lua.run_script(filename));
-			*content = t->get_string("text");
-			*title = t->get_string("title");
-		} catch (LuaError & err) {
-			*content = err.what();
-			*title = "Lua error";
-			return false;
-		}
-	} else {  // Old style plain text file.
-		Profile prof(filename.c_str(), "global", "texts"); // section-less file
-		Section & s = prof.get_safe_section("global");
-
-		*title = s.get_safe_string("title");
-		*content = s.get_safe_string("text");
+	try {
+		LuaInterface lua;
+		std::unique_ptr<LuaTable> t(lua.run_script(filename));
+		*content = t->get_string("text");
+		*title = t->get_string("title");
+	} catch (LuaError & err) {
+		*content = err.what();
+		*title = "Lua error";
+		return false;
 	}
 	return true;
 }
 
 }  // namespace
+
 FullscreenMenuTextView::FullscreenMenuTextView
-	(const std::string & filename)
+	()
 	:
 	FullscreenMenuBase("fileviewmenu.jpg"),
 
-	title (this, get_w() * 3 / 50, get_h() / 10),
+	title (this, get_w() * 3 / 50, get_h() / 10, "", UI::Align_Center),
 
 	textview
 		(this,
@@ -75,13 +69,10 @@ FullscreenMenuTextView::FullscreenMenuTextView
 		 g_gr->images().get("pics/but0.png"),
 		 _("Close"), std::string(), true, false)
 {
-	close_button.sigclicked.connect(boost::bind(&FullscreenMenuTextView::end_modal, boost::ref(*this), 0));
-
-	std::string content, title_text;
-	read_text(filename, &title_text, &content);
-
-	title   .set_text(title_text);
-	textview.set_text(content);
+	close_button.sigclicked.connect(
+				boost::bind(&FullscreenMenuTextView::end_modal<FullscreenMenuBase::MenuTarget>,
+								boost::ref(*this),
+								FullscreenMenuBase::MenuTarget::kBack));
 
 	title.set_font(ui_fn(), fs_big(), UI_FONT_CLR_FG);
 	title.set_pos
@@ -95,18 +86,56 @@ void FullscreenMenuTextView::set_text(const std::string & text)
 	textview.set_text(text);
 }
 
+void FullscreenMenuTextView::set_title(const std::string& text)
+{
+	title.set_text(text);
+}
+
 FullscreenMenuFileView::FullscreenMenuFileView(const std::string & filename)
-: FullscreenMenuTextView(filename)
-{}
+: FullscreenMenuTextView()
+{
+	std::string content, title_text;
+	read_text(filename, &title_text, &content);
+	set_text(content);
+	set_title(title_text);
+}
+
+struct TextViewWindow : public UI::UniqueWindow {
+	TextViewWindow
+		(UI::Panel                  & parent,
+		 UI::UniqueWindow::Registry & reg);
+protected:
+	void set_text(const std::string & text);
+private:
+	UI::MultilineTextarea textview;
+};
+
+TextViewWindow::TextViewWindow
+	(UI::Panel                  & parent,
+	 UI::UniqueWindow::Registry & reg)
+	:
+	UI::UniqueWindow(&parent, "file_view", &reg, 0, 0, ""),
+	textview(this, 0, 0, 560, 240)
+{
+	textview.set_font(UI::g_fh1->fontset().serif(), UI_FONT_SIZE_PROSA, PROSA_FONT_CLR_FG);
+
+	set_inner_size(560, 240);
+
+	if (get_usedefaultpos())
+		center_to_parent();
+}
+
+void TextViewWindow::set_text(const std::string& text)
+{
+	textview.set_text(text);
+}
 
 
-struct FileViewWindow : public UI::UniqueWindow {
+struct FileViewWindow : public TextViewWindow {
 	FileViewWindow
 		(UI::Panel                  & parent,
 		 UI::UniqueWindow::Registry & reg,
 		 const std::string          & filename);
-private:
-	UI::MultilineTextarea textview;
 };
 
 FileViewWindow::FileViewWindow
@@ -114,19 +143,12 @@ FileViewWindow::FileViewWindow
 	 UI::UniqueWindow::Registry & reg,
 	 const std::string          & filename)
 	:
-	UI::UniqueWindow(&parent, "file_view", &reg, 0, 0, ""),
-	textview(this, 0, 0, 560, 240)
+	TextViewWindow(parent, reg)
 {
 	std::string title_text, content;
 	read_text(filename, &title_text, &content);
-
-	textview.set_text(content);
-	textview.set_font(UI::g_fh1->fontset().serif(), UI_FONT_SIZE_PROSA, PROSA_FONT_CLR_FG);
-
-	set_inner_size(560, 240);
-
-	if (get_usedefaultpos())
-		center_to_parent();
+	set_text(content);
+	set_title(title_text);
 }
 
 

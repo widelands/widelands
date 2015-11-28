@@ -84,14 +84,6 @@ class FullscreenMenuOptions : public FullscreenMenuBase {
 public:
 	FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt);
 	OptionsCtrl::OptionsStruct get_values();
-	enum {
-		om_cancel  = 0,
-		om_ok      = 1,
-		om_restart = 2
-	};
-
-	/// Handle keypresses
-	bool handle_key(bool down, SDL_Keysym code) override;
 
 private:
 	uint32_t const              m_vbutw;
@@ -109,30 +101,21 @@ private:
 	UI::Textarea                m_label_resolution;
 	UI::Listselect<void *>      m_reslist;
 	UI::Checkbox                m_fullscreen;
-	UI::Textarea                m_label_fullscreen;
 	UI::Checkbox                m_inputgrab;
-	UI::Textarea                m_label_inputgrab;
 	UI::Textarea                m_label_maxfps;
 	UI::SpinBox                 m_sb_maxfps;
 
 	UI::Textarea                m_label_language;
 	UI::Listselect<std::string> m_language_list;
 	UI::Checkbox                m_music;
-	UI::Textarea                m_label_music;
 	UI::Checkbox                m_fx;
-	UI::Textarea                m_label_fx;
 
 	UI::Textarea                m_label_game_options;
 	UI::Checkbox                m_single_watchwin;
-	UI::Textarea                m_label_single_watchwin;
 	UI::Checkbox                m_auto_roadbuild_mode;
-	UI::Textarea                m_label_auto_roadbuild_mode;
 	UI::Checkbox                m_show_workarea_preview;
-	UI::Textarea                m_label_show_workarea_preview;
 	UI::Checkbox                m_snap_win_overlap_only;
-	UI::Textarea                m_label_snap_win_overlap_only;
 	UI::Checkbox                m_dock_windows_to_edges;
-	UI::Textarea                m_label_dock_windows_to_edges;
 	UI::SpinBox                 m_sb_autosave;
 	UI::Textarea                m_label_autosave;
 	UI::SpinBox                 m_sb_remove_replays;
@@ -166,13 +149,6 @@ class FullscreenMenuAdvancedOptions : public FullscreenMenuBase {
 public:
 	FullscreenMenuAdvancedOptions(OptionsCtrl::OptionsStruct opt);
 	OptionsCtrl::OptionsStruct get_values();
-	enum {
-		om_cancel =   0,
-		om_ok     =   1
-	};
-
-	/// Handle keypresses
-	bool handle_key(bool down, SDL_Keysym code) override;
 
 private:
 	void update_sb_dis_panel_unit();
@@ -191,13 +167,9 @@ private:
 	UI::Textarea                m_label_snap_dis_panel, m_label_snap_dis_border;
 	UI::SpinBox                 m_sb_dis_panel, m_sb_dis_border;
 	UI::Checkbox                m_transparent_chat;
-	UI::MultilineTextarea       m_label_transparent_chat;
 	UI::Checkbox                m_message_sound;
-	UI::MultilineTextarea       m_label_message_sound;
 	UI::Checkbox                m_nozip;
-	UI::MultilineTextarea       m_label_nozip;
 	UI::Checkbox                m_remove_syncstreams;
-	UI::MultilineTextarea       m_label_remove_syncstreams;
 
 	OptionsCtrl::OptionsStruct  os;
 };

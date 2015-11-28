@@ -40,7 +40,7 @@
 
 GameSummaryScreen::GameSummaryScreen
 	(InteractiveGameBase * parent, UI::UniqueWindow::Registry * r)
-: UI::UniqueWindow(parent, "game_summary", r, 550, 260, _("Game over")),
+: UI::UniqueWindow(parent, "game_summary", r, 0, 0, _("Game over")),
 m_game(parent->game())
 {
 	// Init boxes
@@ -50,44 +50,55 @@ m_game(parent->game())
 	vbox->add_space(PADDING);
 
 	UI::Box * hbox1 = new UI::Box(this, 0, 0, UI::Box::Horizontal);
-	m_players_table = new UI::Table<uintptr_t const>(hbox1, 0, 0, 150 + 80 + 100 + 100, 200);
+	m_players_table = new UI::Table<uintptr_t const>(hbox1, 0, 0, 0, 0);
+	m_players_table->fit_height(m_game.player_manager()->get_players_end_status().size());
 	hbox1->add_space(PADDING);
 	hbox1->add(m_players_table, UI::Box::AlignTop);
 	hbox1->add_space(PADDING);
 
-	UI::Box * infoBox = new UI::Box(hbox1, 0, 0, UI::Box::Vertical, 0, 0);
-	m_gametime_label = new UI::Textarea(infoBox, _("Elapsed time:"));
-	infoBox->add(m_gametime_label, UI::Box::AlignLeft);
-	m_gametime_value = new UI::Textarea(infoBox);
-	infoBox->add(m_gametime_value, UI::Box::AlignLeft);
-	infoBox->add_space(2 * PADDING);
-	m_info_area_label = new UI::Textarea(infoBox, _("Player info:"));
-	infoBox->add(m_info_area_label, UI::Box::AlignLeft);
-	m_info_area = new UI::MultilineTextarea(infoBox, 0, 0, 130, 130, "");
-	infoBox->add(m_info_area, UI::Box::AlignLeft, true);
-	infoBox->add_space(PADDING);
-	hbox1->add(infoBox, UI::Box::AlignTop);
+	UI::Box * info_box = new UI::Box(hbox1, 0, 0, UI::Box::Vertical, 0, 0);
+	m_info_area_label = new UI::Textarea(info_box, _("Player info:"));
+	info_box->add(m_info_area_label, UI::Box::AlignLeft);
+	m_info_area = new UI::MultilineTextarea(
+						  info_box, 0, 0, 130,
+						  std::max(130, m_players_table->get_h() - m_info_area_label->get_h() - PADDING),
+						  "");
+	info_box->add(m_info_area, UI::Box::AlignLeft, true);
+	info_box->add_space(PADDING);
+	hbox1->add(info_box, UI::Box::AlignTop);
 	hbox1->add_space(PADDING);
 	vbox->add(hbox1, UI::Box::AlignLeft);
 
-	UI::Box * buttonBox = new UI::Box(this, 0, 0, UI::Box::Horizontal);
+	UI::Box * bottom_box = new UI::Box(this, 0, 0, UI::Box::Horizontal);
+
+	bottom_box->add_space(PADDING);
+
+	m_gametime_label = new UI::Textarea(bottom_box, _("Elapsed time:"));
+	bottom_box->add(m_gametime_label, UI::Box::AlignCenter);
+	bottom_box->add_space(PADDING);
+	m_gametime_value = new UI::Textarea(bottom_box, gametimestring(m_game.get_gametime()));
+	bottom_box->add(m_gametime_value, UI::Box::AlignCenter);
+
+	bottom_box->add_inf_space();
+
 	m_continue_button = new UI::Button
-		(buttonBox, "continue_button",
+		(bottom_box, "continue_button",
 		 0, 0, 35, 35,
 		 g_gr->images().get("pics/but4.png"),
 		 g_gr->images().get("pics/continue.png"),
 		 _("Continue playing"));
-	buttonBox->add(m_continue_button, UI::Box::AlignRight);
-	buttonBox->add_space(PADDING);
+	bottom_box->add(m_continue_button, UI::Box::AlignCenter);
+	bottom_box->add_space(PADDING);
 	m_stop_button = new UI::Button
-		(buttonBox, "stop_button",
+		(bottom_box, "stop_button",
 		 0, 0, 35, 35,
 		 g_gr->images().get("pics/but4.png"),
 		 g_gr->images().get("pics/menu_exit_game.png"),
 		_("Exit Game"));
-	buttonBox->add(m_stop_button, UI::Box::AlignRight);
-	buttonBox->add_space(PADDING);
-	vbox->add(buttonBox, UI::Box::AlignBottom);
+	bottom_box->add(m_stop_button, UI::Box::AlignCenter);
+	bottom_box->add_space(PADDING);
+
+	vbox->add(bottom_box, UI::Box::AlignLeft, true);
 	vbox->add_space(PADDING);
 	set_center_panel(vbox);
 
@@ -135,12 +146,16 @@ void GameSummaryScreen::fill_data()
 	Widelands::Player* single_won = nullptr;
 	uint8_t team_won = 0;
 	InteractivePlayer* ipl = m_game.get_ipl();
+	//this defines a row to be selected, current player,
+	//if not then the first line
+	uint32_t current_player_position = 0;
 
 	for (uintptr_t i = 0; i < players_status.size(); i++) {
 		Widelands::PlayerEndStatus pes = players_status.at(i);
 		if (ipl && pes.player == ipl->player_number()) {
 			local_in_game = true;
 			local_won = pes.result == Widelands::PlayerEndResult::PLAYER_WON;
+			current_player_position = i;
 		}
 		Widelands::Player* p = m_game.get_player(pes.player);
 		UI::Table<uintptr_t const>::EntryRecord & te = m_players_table->add(i);
@@ -159,9 +174,11 @@ void GameSummaryScreen::fill_data()
 		std::string stat_str;
 		switch (pes.result) {
 			case Widelands::PlayerEndResult::PLAYER_LOST:
+				/** TRANSLATORS: This is shown in the game summary for the players who have lost. */
 				stat_str = _("Lost");
 				break;
 			case Widelands::PlayerEndResult::PLAYER_WON:
+				/** TRANSLATORS: This is shown in the game summary for the players who have won. */
 				stat_str = _("Won");
 				if (!single_won) {
 					single_won = p;
@@ -170,10 +187,13 @@ void GameSummaryScreen::fill_data()
 				}
 				break;
 			case Widelands::PlayerEndResult::PLAYER_RESIGNED:
+				/** TRANSLATORS: This is shown in the game summary for the players who have resigned. */
 				 stat_str = _("Resigned");
 				 break;
 			default:
-				stat_str = _("Unknown");
+				/** TRANSLATORS: This is shown in the game summary when we don't know */
+				/** TRANSLATORS: if the player has lost or won. */
+				stat_str = pgettext("player_won", "Unknown");
 		}
 		te.set_string(2, stat_str);
 		// Time
@@ -199,9 +219,8 @@ void GameSummaryScreen::fill_data()
 	}
 	m_players_table->update();
 	if (!players_status.empty()) {
-		m_players_table->select(players_status.at(0).player);
+		m_players_table->select(current_player_position);
 	}
-	m_gametime_value->set_text(gametimestring(m_game.get_gametime()));
 }
 
 void GameSummaryScreen::continue_clicked()
@@ -211,7 +230,7 @@ void GameSummaryScreen::continue_clicked()
 
 void GameSummaryScreen::stop_clicked()
 {
-	m_game.get_ibase()->end_modal(0);
+	m_game.get_ibase()->end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack);
 }
 
 void GameSummaryScreen::player_selected(uint32_t entry_index)

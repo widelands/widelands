@@ -33,8 +33,7 @@
 
 namespace Widelands {
 
-#define CURRENT_PACKET_VERSION 1
-
+constexpr uint16_t kCurrentPacketVersion = 1;
 
 void MapRoadPacket::read
 	(FileSystem            &       fs,
@@ -50,7 +49,7 @@ void MapRoadPacket::read
 
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
-		if (packet_version == CURRENT_PACKET_VERSION) {
+		if (packet_version == kCurrentPacketVersion) {
 			Serial serial;
 			while ((serial = fr.unsigned_32()) != 0xffffffff) {
 				try {
@@ -61,9 +60,9 @@ void MapRoadPacket::read
 					throw GameDataError("%u: %s", serial, e.what());
 				}
 			}
-		} else
-			throw GameDataError
-				("unknown/unhandled version %u", packet_version);
+		} else {
+			throw UnhandledVersionError("MapRoadPacket", packet_version, kCurrentPacketVersion);
+		}
 	} catch (const WException & e) {
 		throw GameDataError("road: %s", e.what());
 	}
@@ -75,7 +74,7 @@ void MapRoadPacket::write
 {
 	FileWrite fw;
 
-	fw.unsigned_16(CURRENT_PACKET_VERSION);
+	fw.unsigned_16(kCurrentPacketVersion);
 
 	//  Write roads. Register this with the map_object_saver so that its data
 	//  can be saved later.

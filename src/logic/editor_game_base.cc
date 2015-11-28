@@ -8,7 +8,7 @@
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+rnrnrn * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
@@ -30,23 +30,21 @@
 #include "economy/flag.h"
 #include "economy/road.h"
 #include "graphic/color.h"
-#include "graphic/font_handler.h"
 #include "graphic/graphic.h"
-#include "graphic/image_io.h"
-#include "graphic/texture_atlas.h"
-#include "io/filesystem/layered_filesystem.h"
 #include "logic/battle.h"
 #include "logic/building.h"
 #include "logic/constants.h"
 #include "logic/dismantlesite.h"
 #include "logic/findimmovable.h"
 #include "logic/game.h"
+#include "logic/game_data_error.h"
 #include "logic/instances.h"
 #include "logic/mapregion.h"
 #include "logic/player.h"
 #include "logic/playersmanager.h"
 #include "logic/roadtype.h"
-#include "logic/tribe.h"
+#include "logic/tribes/tribe_descr.h"
+#include "logic/tribes/tribes.h"
 #include "logic/ware_descr.h"
 #include "logic/worker.h"
 #include "logic/world/world.h"
@@ -86,9 +84,6 @@ EditorGameBase::~EditorGameBase() {
 	delete map_;
 	delete player_manager_.release();
 
-	for (TribeDescr* tribe_descr : tribes_) {
-		delete tribe_descr;
-	}
 	if (g_gr) { // dedicated does not use the sound_handler
 		assert(this == g_sound_handler.egbase_);
 		g_sound_handler.egbase_ = nullptr;
@@ -127,6 +122,34 @@ World* EditorGameBase::mutable_world() {
 	return world_.get();
 }
 
+const Tribes& EditorGameBase::tribes() const {
+	// Const casts are evil, but this is essentially lazy evaluation and the
+	// caller should really not modify this.
+	return *const_cast<EditorGameBase*>(this)->mutable_tribes();
+}
+
+Tribes* EditorGameBase::mutable_tribes() {
+	if (!tribes_) {
+		// We need to make sure that the world is loaded first for some attribute checks in the worker programs.
+		world();
+
+		// Lazy initialization of Tribes. We need to create the pointer to the
+		// tribe immediately though, because the lua scripts need to have access
+		// to tribes through this method already.
+		ScopedTimer timer("Loading the tribes took %ums");
+		tribes_.reset(new Tribes());
+
+		try {
+			lua_->run_script("tribes/init.lua");
+		} catch (const WException& e) {
+			log("Could not read tribes information: %s", e.what());
+			throw;
+		}
+	}
+	return tribes_.get();
+}
+
+
 InteractiveGameBase* EditorGameBase::get_igbase()
 {
 	return dynamic_cast<InteractiveGameBase *>(get_ibase());
@@ -151,24 +174,6 @@ Player * EditorGameBase::add_player
 			name, team);
 }
 
-/// Load the given tribe into structure
-const TribeDescr & EditorGameBase::manually_load_tribe
-	(const std::string & tribe)
-{
-	for (const TribeDescr* tribe_descr : tribes_) {
-		if (tribe_descr->name() == tribe) {
-			return *tribe_descr;
-		}
-	}
-
-	TribeDescr & result = *new TribeDescr(tribe, *this);
-	//resize the configuration of our wares if they won't fit in the current window (12 = info label size)
-	int number = (g_gr->get_yres() - 270) / (WARE_MENU_PIC_HEIGHT + WARE_MENU_PIC_PAD_Y + 12);
-	result.resize_ware_orders(number);
-	tribes_.push_back(&result);
-	return result;
-}
-
 Player* EditorGameBase::get_player(const int32_t n) const
 {
 	return player_manager_->get_player(n);
@@ -177,19 +182,6 @@ Player* EditorGameBase::get_player(const int32_t n) const
 Player& EditorGameBase::player(const int32_t n) const
 {
 	return player_manager_->player(n);
-}
-
-
-
-/// Returns a tribe description from the internally loaded list
-const TribeDescr * EditorGameBase::get_tribe(const std::string& tribename) const
-{
-	for (const TribeDescr* tribe : tribes_) {
-		if (tribe->name() == tribename) {
-			return tribe;
-		}
-	}
-	return nullptr;
 }
 
 void EditorGameBase::inform_players_about_ownership
@@ -236,36 +228,15 @@ void EditorGameBase::allocate_player_maps() {
 
 
 /**
- * Load and prepare detailled game data.
+ * Load and prepare detailed game data.
  * This happens once just after the host has started the game and before the
  * graphics are loaded.
  */
 void EditorGameBase::postload()
 {
-	uint32_t id;
-	int32_t pid;
-
 	// Postload tribes
-	id = 0;
-	while (id < tribes_.size()) {
-		for (pid = 1; pid <= MAX_PLAYERS; ++pid)
-			if (const Player * const plr = get_player(pid))
-				if (&plr->tribe() == tribes_[id])
-					break;
-
-		if
-			(pid <= MAX_PLAYERS
-			 ||
-			 !dynamic_cast<const Game *>(this))
-		{ // if this is editor, load the tribe anyways
-			// the tribe is used, postload it
-			tribes_[id]->postload(*this);
-			++id;
-		} else {
-			delete tribes_[id]; // the tribe is no longer used, remove it
-			tribes_.erase(tribes_.begin() + id);
-		}
-	}
+	assert(tribes_);
+	tribes_->postload();
 
 	// TODO(unknown): postload players? (maybe)
 }
@@ -276,43 +247,11 @@ void EditorGameBase::postload()
  * This function needs to be called once at startup when the graphics system is ready.
  * If the graphics system is to be replaced at runtime, the function must be called after that has happened.
  */
-void EditorGameBase::load_graphics(UI::ProgressWindow & loader_ui)
+void EditorGameBase::load_graphics(UI::ProgressWindow& loader_ui)
 {
-	loader_ui.step(_("Loading world data"));
-
-	for (TribeDescr* tribe_descr : tribes_) {
-		loader_ui.stepf(_("Loading tribes"));
-		tribe_descr->load_graphics();
-	}
-
-	// Construct and hold on to the texture atlas that contains all road images.
-	TextureAtlas ta;
-
-	// These will be deleted at the end of the method.
-	std::vector<std::unique_ptr<Texture>> individual_textures_;
-	for (auto* tribe : tribes_) {
-		for (const std::string& texture_path : tribe->normal_road_paths()) {
-			individual_textures_.emplace_back(load_image(texture_path, g_fs));
-			ta.add(*individual_textures_.back());
-		}
-		for (const std::string& texture_path : tribe->busy_road_paths()) {
-			individual_textures_.emplace_back(load_image(texture_path, g_fs));
-			ta.add(*individual_textures_.back());
-		}
-	}
-
-	std::vector<std::unique_ptr<Texture>> textures;
-	road_texture_ = ta.pack(&textures);
-
-	size_t next_texture_to_move = 0;
-	for (auto* tribe : tribes_) {
-		for (size_t i = 0; i < tribe->normal_road_paths().size(); ++i) {
-			tribe->add_normal_road_texture(std::move(textures.at(next_texture_to_move++)));
-		}
-		for (size_t i = 0; i < tribe->busy_road_paths().size(); ++i) {
-			tribe->add_busy_road_texture(std::move(textures.at(next_texture_to_move++)));
-		}
-	}
+	assert(tribes_);
+	loader_ui.step(_("Loading graphics"));
+	tribes_->load_graphics();
 }
 
 /**
@@ -322,7 +261,7 @@ void EditorGameBase::load_graphics(UI::ProgressWindow & loader_ui)
  * \li former_buildings is the list of former buildings
  */
 Building & EditorGameBase::warp_building
-	(Coords const c, PlayerNumber const owner, BuildingIndex const idx,
+	(Coords const c, PlayerNumber const owner, DescriptionIndex const idx,
 		Building::FormerBuildings former_buildings)
 {
 	Player & plr = player(owner);
@@ -342,7 +281,7 @@ Building & EditorGameBase::warp_building
  */
 Building & EditorGameBase::warp_constructionsite
 	(Coords const c, PlayerNumber const owner,
-	 BuildingIndex idx, bool loading,
+	 DescriptionIndex idx, bool loading,
 	 Building::FormerBuildings former_buildings)
 {
 	Player            & plr   = player(owner);
@@ -378,43 +317,26 @@ Building & EditorGameBase::warp_dismantlesite
 
 /**
  * Instantly create a bob at the given x/y location.
- *
- * idx is the bob type.
  */
 Bob & EditorGameBase::create_bob(Coords c, const BobDescr & descr, Player * owner)
 {
 	return descr.create(*this, owner, c);
 }
 
+/**
+ * Instantly create a critter at the given x/y location.
+ *
+ */
 
-Bob & EditorGameBase::create_bob
-	(Coords const c,
-	 int const idx, TribeDescr const * const tribe, Player * owner)
-{
-	const BobDescr & descr =
-		*
-		(tribe ?
-		 tribe->get_bob_descr(idx)
-		 :
-		 world().get_bob_descr(idx));
-
-	return create_bob(c, descr, owner);
+Bob& EditorGameBase::create_critter(Coords const c, DescriptionIndex const bob_type_idx, Player* owner) {
+	return create_bob(c, *world().get_bob_descr(bob_type_idx), owner);
 }
 
-Bob & EditorGameBase::create_bob
-	(Coords c, const std::string & name, const Widelands::TribeDescr * const tribe,
-	 Player * owner)
-{
-	const BobDescr * descr =
-		tribe ?
-		tribe->get_bob_descr(name) :
-		world().get_bob_descr(name);
-
-	if (!descr)
-		throw wexception
-			("create_bob(%i,%i,%s,%s): bob not found",
-			 c.x, c.y, name.c_str(), tribe ? tribe->name().c_str() : "world");
-
+Bob& EditorGameBase::create_critter(Coords c, const std::string& name, Player* owner) {
+	const BobDescr* descr = world().get_bob_descr(name);
+	if (descr == nullptr)
+		throw GameDataError("create_critter(%i,%i,%s,%s): critter not found", c.x, c.y, name.c_str(),
+		                    owner->get_name().c_str());
 	return create_bob(c, *descr, owner);
 }
 
@@ -428,12 +350,12 @@ Does not perform any placability checks.
 ===============
 */
 Immovable & EditorGameBase::create_immovable
-	(Coords const c, uint32_t const idx, TribeDescr const * const tribe)
+	(Coords const c, uint32_t const idx, MapObjectDescr::OwnerType type)
 {
 	const ImmovableDescr & descr =
 		*
-		(tribe ?
-		 tribe->get_immovable_descr(idx)
+		(type == MapObjectDescr::OwnerType::kTribe ?
+		 tribes().get_immovable_descr(idx)
 		 :
 		 world().get_immovable_descr(idx));
 	assert(&descr);
@@ -443,20 +365,46 @@ Immovable & EditorGameBase::create_immovable
 }
 
 Immovable & EditorGameBase::create_immovable
-	(Coords const c, const std::string & name, TribeDescr const * const tribe)
+	(Coords const c, const std::string & name, MapObjectDescr::OwnerType type)
 {
-	const int32_t idx =
-		tribe ?
-		tribe->get_immovable_index(name.c_str())
-		:
-		world().get_immovable_index(name.c_str());
-	if (idx < 0)
-		throw wexception
-			("EditorGameBase::create_immovable(%i, %i): %s is not defined for "
-			 "%s",
-			 c.x, c.y, name.c_str(), tribe ? tribe->name().c_str() : "world");
+	DescriptionIndex idx;
+	if (type == MapObjectDescr::OwnerType::kTribe) {
+		idx = tribes().immovable_index(name.c_str());
+		if (!tribes().immovable_exists(idx)) {
+			throw wexception
+				("EditorGameBase::create_immovable(%i, %i): %s is not defined for the tribes",
+				 c.x, c.y, name.c_str());
+		}
+	} else {
+		idx =  world().get_immovable_index(name.c_str());
+		if (idx == INVALID_INDEX) {
+			throw wexception
+				("EditorGameBase::create_immovable(%i, %i): %s is not defined for the world",
+				 c.x, c.y, name.c_str());
+		}
+	}
+	return create_immovable(c, idx, type);
+}
 
-	return create_immovable(c, idx, tribe);
+/**
+ * Instantly create a ship at the given x/y location.
+ *
+ * idx is the bob type.
+ */
+
+Bob& EditorGameBase::create_ship(Coords const c, int const ship_type_idx, Player* owner) {
+	const BobDescr* descr = dynamic_cast<const BobDescr*>(tribes().get_ship_descr(ship_type_idx));
+	return create_bob(c, *descr, owner);
+}
+
+Bob& EditorGameBase::create_ship(Coords c, const std::string& name, Player* owner) {
+	try {
+		int idx = tribes().safe_ship_index(name);
+		return create_ship(c, idx, owner);
+	} catch (const GameDataError& e) {
+		throw GameDataError("create_ship(%i,%i,%s,%s): ship not found: %s", c.x, c.y, name.c_str(),
+		                    owner->get_name().c_str(), e.what());
+	}
 }
 
 /*

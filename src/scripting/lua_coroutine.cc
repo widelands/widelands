@@ -105,6 +105,24 @@ void LuaCoroutine::push_arg(const Widelands::BuildingDescr* building_descr) {
 	++m_ninput_args;
 }
 
+void LuaCoroutine::push_arg(const Widelands::WareDescr* ware_descr) {
+	assert(ware_descr != nullptr);
+	to_lua<LuaMaps::LuaWareDescription>(m_L, new LuaMaps::LuaWareDescription(ware_descr));
+	++m_ninput_args;
+}
+
+void LuaCoroutine::push_arg(const Widelands::WorkerDescr* worker_descr) {
+	assert(worker_descr != nullptr);
+	to_lua<LuaMaps::LuaWorkerDescription>(m_L, new LuaMaps::LuaWorkerDescription(worker_descr));
+	++m_ninput_args;
+}
+
+void LuaCoroutine::push_arg(const std::string& string) {
+	assert(!string.empty());
+	lua_pushstring(m_L, string);
+	++m_ninput_args;
+}
+
 std::string LuaCoroutine::pop_string() {
 	if (!m_nreturn_values) {
 		return "";
@@ -131,9 +149,9 @@ uint32_t LuaCoroutine::pop_uint32() {
 	return return_value;
 }
 
-#define COROUTINE_DATA_PACKET_VERSION 3
+constexpr uint8_t kCoroutineDataPacketVersion = 3;
 void LuaCoroutine::write(FileWrite& fw) {
-	fw.unsigned_8(COROUTINE_DATA_PACKET_VERSION);
+	fw.unsigned_8(kCoroutineDataPacketVersion);
 
 	fw.unsigned_32(m_ninput_args);
 	fw.unsigned_32(m_nreturn_values);
@@ -143,7 +161,7 @@ void LuaCoroutine::write(FileWrite& fw) {
 void LuaCoroutine::read(lua_State* parent, FileRead& fr) {
 	uint8_t version = fr.unsigned_8();
 
-	if (version != COROUTINE_DATA_PACKET_VERSION)
+	if (version != kCoroutineDataPacketVersion)
 		throw wexception("Unhandled data packet version: %i\n", version);
 
 	m_ninput_args = fr.unsigned_32();

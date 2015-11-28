@@ -21,6 +21,7 @@
 
 #include <clocale>
 #include <cstdio>
+#include <memory>
 
 #include <boost/format.hpp>
 
@@ -36,37 +37,37 @@
 #include "logic/message_queue.h"
 #include "logic/player.h"
 #include "logic/soldier.h"
-#include "logic/tribe.h"
+#include "logic/tribes/tribe_descr.h"
 #include "logic/worker.h"
-#include "profile/profile.h"
 
 namespace Widelands {
 
-MilitarySiteDescr::MilitarySiteDescr
-	(char        const * const _name,
-	 char        const * const _descname,
-	 const std::string & directory, Profile & prof,  Section & global_s,
-	 const TribeDescr & _tribe,
-	 const World& world)
+MilitarySiteDescr::MilitarySiteDescr(const std::string& init_descname,
+												 const LuaTable& table,
+												 const EditorGameBase& egbase)
 	:
 	ProductionSiteDescr
-		(MapObjectType::MILITARYSITE, _name, _descname, directory, prof, global_s, _tribe, world),
+		(init_descname, "", MapObjectType::MILITARYSITE, table, egbase),
 	m_conquer_radius     (0),
 	m_num_soldiers       (0),
 	m_heal_per_second    (0)
 {
-	m_conquer_radius      = global_s.get_safe_int("conquers");
-	m_num_soldiers        = global_s.get_safe_int("max_soldiers");
-	m_heal_per_second     = global_s.get_safe_int("heal_per_second");
+	i18n::Textdomain td("tribes");
+
+	m_conquer_radius      = table.get_int("conquers");
+	m_num_soldiers        = table.get_int("max_soldiers");
+	m_heal_per_second     = table.get_int("heal_per_second");
 
 	if (m_conquer_radius > 0)
 		m_workarea_info[m_conquer_radius].insert(descname() + " conquer");
-	m_prefers_heroes_at_start = global_s.get_safe_bool("prefer_heroes");
-	m_occupied_str = global_s.get_safe_string("occupied_string");
-	m_aggressor_str = global_s.get_safe_string("aggressor_string");
-	m_attack_str = global_s.get_safe_string("attack_string");
-	m_defeated_enemy_str = global_s.get_safe_string("defeated_enemy_string");
-	m_defeated_you_str = global_s.get_safe_string("defeated_you_string");
+	m_prefers_heroes_at_start = table.get_bool("prefer_heroes");
+
+	std::unique_ptr<LuaTable> items_table = table.get_table("messages");
+	m_occupied_str = _(items_table->get_string("occupied"));
+	m_aggressor_str = _(items_table->get_string("aggressor"));
+	m_attack_str = _(items_table->get_string("attack"));
+	m_defeated_enemy_str = _(items_table->get_string("defeated_enemy"));
+	m_defeated_you_str = _(items_table->get_string("defeated_you"));
 }
 
 /**
@@ -277,7 +278,7 @@ Soldier *
 MilitarySite::find_least_suited_soldier()
 {
 	const std::vector<Soldier *> present = present_soldiers();
-	const int32_t multiplier = kPrefersHeroes == m_soldier_preference ? -1:1;
+	const int32_t multiplier = kPrefersHeroes == m_soldier_preference ? -1 : 1;
 	int worst_soldier_level = INT_MIN;
 	Soldier * worst_soldier = nullptr;
 	for (Soldier* sld : present) {
@@ -372,7 +373,7 @@ Called when our soldier arrives.
 void MilitarySite::request_soldier_callback
 	(Game            &       game,
 	 Request         &,
-	 WareIndex,
+	 DescriptionIndex,
 	 Worker          * const w,
 	 PlayerImmovable &       target)
 {
@@ -397,7 +398,7 @@ void MilitarySite::update_normal_soldier_request()
 			m_normal_soldier_request.reset
 				(new Request
 					(*this,
-					 descr().tribe().safe_worker_index("soldier"),
+					 owner().tribe().soldier(),
 					 MilitarySite::request_soldier_callback,
 					 wwWORKER));
 			m_normal_soldier_request->set_requirements (m_soldier_requirements);
@@ -453,7 +454,7 @@ void MilitarySite::update_upgrade_soldier_request()
 		m_upgrade_soldier_request.reset
 				(new Request
 				(*this,
-				descr().tribe().safe_worker_index("soldier"),
+				owner().tribe().soldier(),
 				MilitarySite::request_soldier_callback,
 				wwWORKER));
 
@@ -579,21 +580,35 @@ void MilitarySite::act(Game & game, uint32_t const data)
 			update_soldier_request();
 		}
 
-	if (m_nexthealtime <= game.get_gametime()) {
+	if (m_nexthealtime <= timeofgame) {
 		uint32_t total_heal = descr().get_heal_per_second();
 		std::vector<Soldier *> soldiers = present_soldiers();
+		uint32_t max_total_level = 0;
+		float max_health = 0;
+		Soldier * soldier_to_heal = 0;
 
 		for (uint32_t i = 0; i < soldiers.size(); ++i) {
-			Soldier & s = *soldiers[i];
+			Soldier * s = soldiers[i];
 
-			// The healing algorithm is totally arbitrary
-			if (s.get_current_hitpoints() < s.get_max_hitpoints()) {
-				s.heal(total_heal);
-				break;
+			// The healing algorithm is:
+			// * heal soldier with highest total level
+			// * heal healthiest if multiple of same total level exist
+			if (s->get_current_hitpoints() < s->get_max_hitpoints()) {
+				if (0 == soldier_to_heal || s->get_total_level() > max_total_level ||
+						(s->get_total_level() == max_total_level &&
+								s->get_current_hitpoints() / s->get_max_hitpoints() > max_health)) {
+					max_total_level = s->get_total_level();
+					max_health = s->get_current_hitpoints() / s->get_max_hitpoints();
+					soldier_to_heal = s;
+				}
 			}
 		}
 
-		m_nexthealtime = game.get_gametime() + 1000;
+		if (0 != soldier_to_heal) {
+			soldier_to_heal->heal(total_heal);
+		}
+
+		m_nexthealtime = timeofgame + 1000;
 		schedule_act(game, 1000);
 	}
 }
@@ -866,29 +881,16 @@ bool MilitarySite::attack(Soldier & enemy)
 		// The enemy conquers the building
 		// In fact we do not conquer it, but place a new building of same type at
 		// the old location.
-		Player            * enemyplayer = enemy.get_owner();
-		const TribeDescr & enemytribe  = enemyplayer->tribe();
 
-		// Add suffix to all descr in former buildings in cases
-		// the new owner comes from another tribe
-		Building::FormerBuildings former_buildings;
-		for (BuildingIndex former_idx : m_old_buildings) {
-			const BuildingDescr * old_descr = descr().tribe().get_building_descr(former_idx);
-			std::string bldname = old_descr->name();
-			// Has this building already a suffix? == conquered building?
-			std::string::size_type const dot = bldname.rfind('.');
-			if (dot >= bldname.size()) {
-				// Add suffix, if the new owner uses another tribe than we.
-				if (enemytribe.name() != owner().tribe().name())
-					bldname += "." + owner().tribe().name();
-			} else if (enemytribe.name() == bldname.substr(dot + 1, bldname.size()))
-				bldname = bldname.substr(0, dot);
-			BuildingIndex bldi = enemytribe.safe_building_index(bldname.c_str());
-			former_buildings.push_back(bldi);
-		}
+		Building::FormerBuildings former_buildings = m_old_buildings;
+
+		// The enemy conquers the building
+		// In fact we do not conquer it, but place a new building of same type at
+		// the old location.
+		Player* enemyplayer = enemy.get_owner();
 
 		// Now we destroy the old building before we place the new one.
-		set_defeating_player(enemy.owner().player_number());
+		set_defeating_player(enemyplayer->player_number());
 		schedule_destroy(game);
 
 		enemyplayer->force_building(coords, former_buildings);

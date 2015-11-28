@@ -1,8 +1,0 @@
-help=_The barbarian bakers are best in making this flat and tasty pitta bread. It is made out of wheat and water following a secret recipe. Pitta bread is used in the taverns, inns and big inns to prepare rations, snacks and meals. It is also consumed at training sites (training camp and battle arena).
-
-default_target_quantity=20
-preciousness=4
-
-[idle]
-pics=bread_idle.png
-hotspot=5 11

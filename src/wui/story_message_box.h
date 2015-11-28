@@ -32,6 +32,9 @@ struct StoryMessageBox : public UI::Window {
 
 	bool handle_mousepress(uint8_t btn, int32_t mx, int32_t my) override;
 
+	/// Handle keypresses
+	bool handle_key(bool down, SDL_Keysym code) override;
+
 private:
 	void clicked_ok();
 };

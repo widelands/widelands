@@ -21,52 +21,47 @@
 
 #include "base/i18n.h"
 #include "graphic/graphic.h"
-#include "ui_basic/button.h"
-#include "ui_basic/editbox.h"
-#include "ui_basic/textarea.h"
-#include "ui_basic/window.h"
 
 MainMenuSaveMapMakeDirectory::MainMenuSaveMapMakeDirectory
-	(UI::Panel * const parent, char const * dirname)
-:
-UI::Window(parent, "make_directory", 0, 0, 230, 120, _("Make Directory"))
-{
-	int32_t const spacing =  5;
-	int32_t const offsy   = 30;
-	int32_t       posy    = offsy;
+	(UI::Panel * const parent, char const * dirname) :
+	UI::Window(parent, "make_directory", 0, 0, 330, 100, _("Make Directory")),
+	padding_(5),
+	butw_(get_inner_w() / 2 - 3 * padding_),
+	buth_(20),
+	dirname_(dirname),
+	vbox_(this, padding_, padding_, UI::Box::Vertical,
+		  get_inner_w() - 2 * padding_, get_inner_h() - 3 * padding_ - buth_, padding_ / 2),
+	label_(&vbox_, 0, 0, get_inner_w() - 2 * padding_, buth_, _("Enter Directory Name: "), UI::Align_Left),
+	edit_(&vbox_, 0, 0, get_inner_w() - 2 * padding_, buth_, g_gr->images().get("pics/but1.png")),
+	ok_button_(
+		this, "ok",
+		padding_, get_inner_h() - padding_ - buth_,
+		butw_, buth_,
+		g_gr->images().get("pics/but5.png"),
+		_("OK")),
+	cancel_button_(
+		this, "cancel",
+		get_inner_w() - butw_ - padding_, get_inner_h() - padding_ - buth_,
+		butw_, buth_,
+		g_gr->images().get("pics/but1.png"),
+		_("Cancel")) {
 
-	new UI::Textarea(this, spacing, posy, _("Enter Directory Name: "));
-	posy += 20 + spacing;
+	vbox_.add(&label_, UI::Box::AlignLeft);
+	vbox_.add_space(padding_);
+	vbox_.add(&edit_, UI::Box::AlignLeft);
+	vbox_.set_size(get_inner_w() - 2 * padding_, get_inner_h() - 3 * padding_ - buth_);
 
-	m_edit =
-		new UI::EditBox
-			(this, spacing, posy, get_inner_w() - 2 * spacing, 20,
-			 g_gr->images().get("pics/but1.png"));
-	m_edit->set_text(dirname);
-	m_dirname = dirname;
-	m_edit->changed.connect(boost::bind(&MainMenuSaveMapMakeDirectory::edit_changed, this));
-
-	posy = get_inner_h() - 30;
-
-	m_ok_button = new
-		UI::Button
-		(this, "ok",
-		 get_inner_w() / 2 - spacing - 80, posy, 80, 20,
-		 g_gr->images().get("pics/but0.png"),
-		 _("OK"),
-		 std::string(),
-		 m_dirname.size());
-	m_ok_button->sigclicked.connect
-		(boost::bind(&MainMenuSaveMapMakeDirectory::end_modal, boost::ref(*this), 1));
-
-	UI::Button * cancelbtn = new UI::Button
-		(this, "cancel",
-		 get_inner_w() / 2 + spacing, posy, 80, 20,
-		 g_gr->images().get("pics/but1.png"),
-		 _("Cancel"));
-	cancelbtn->sigclicked.connect
-		(boost::bind(&MainMenuSaveMapMakeDirectory::end_modal, boost::ref(*this), 0));
-
+	edit_.set_text(dirname_);
+	edit_.changed.connect(boost::bind(&MainMenuSaveMapMakeDirectory::edit_changed, this));
+	ok_button_.sigclicked.connect
+			(boost::bind(&MainMenuSaveMapMakeDirectory::end_modal<UI::Panel::Returncodes>,
+							 boost::ref(*this),
+							 UI::Panel::Returncodes::kOk));
+	ok_button_.set_enabled(false);
+	cancel_button_.sigclicked.connect
+		(boost::bind(&MainMenuSaveMapMakeDirectory::end_modal<UI::Panel::Returncodes>,
+						 boost::ref(*this),
+						 UI::Panel::Returncodes::kBack));
 	center_to_parent();
 }
 
@@ -75,9 +70,7 @@ UI::Window(parent, "make_directory", 0, 0, 230, 120, _("Make Directory"))
  * Editbox changed
  */
 void MainMenuSaveMapMakeDirectory::edit_changed() {
-	const std::string & text = m_edit->text();
-	if (text.size()) {
-		m_ok_button->set_enabled(true);
-		m_dirname = text;
-	}
+	const std::string& text = edit_.text();
+	ok_button_.set_enabled(!text.empty());
+	dirname_ = text;
 }

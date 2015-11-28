@@ -63,7 +63,7 @@ public:
 
 protected:
 	void layout() override;
-	void calc_cursor_pos();
+	void calculate_cursor_position();
 
 	//  drawing
 	int32_t get_x_gap()    const {return m_x_gap;}

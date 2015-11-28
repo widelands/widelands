@@ -46,6 +46,7 @@ struct MainMenuNewRandomMap : public UI::Window {
 	MainMenuNewRandomMap(EditorInteractive &);
 
 	enum class ButtonId: uint8_t {
+		NO_BUTTON,
 		MAP_W_PLUS,
 		MAP_W_MINUS,
 		MAP_H_PLUS,

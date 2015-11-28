@@ -1,5 +1,5 @@
-#ifndef __CONFIG_H__
-#define __CONFIG_H__
+#ifndef CONFIG_H
+#define CONFIG_H
 
 // This is the path where the data files are located; If this is an absolute
 // path (i.e. starting with a /), it will be interpreted as such. If it is a
@@ -11,4 +11,4 @@
 // True if getenv has been found.
 #define HAS_GETENV
 
-#endif /* __CONFIG_H__ */
+#endif /* CONFIG_H */

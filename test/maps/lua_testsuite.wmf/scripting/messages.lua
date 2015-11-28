@@ -58,4 +58,3 @@ function messages_tests:test_inbox()
    assert_equal(m1, player1.inbox[1])
    assert_equal(m2, player1.inbox[2])
 end
-

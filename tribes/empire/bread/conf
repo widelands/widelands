@@ -1,8 +1,0 @@
-help=_The bakers of the Empire make really tasty bread out of flour and water. It is used in taverns and inns to prepare rations and meals. Bread is also consumed at the training sites (arena, colosseum, training camp).
-
-default_target_quantity=20
-preciousness=5
-
-[idle]
-pics=bread_idle.png
-hotspot=5 11

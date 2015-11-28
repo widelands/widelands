@@ -30,12 +30,8 @@ MAINPOTS = [
         "../../campaigns/*.conf",
         "../../campaigns/*/elemental"
     ] ),
-    ( "texts/texts", ["../../txts/license",
-                  "../../txts/README.lua",
-                  "../../txts/developers",
-                  "../../txts/editor_readme",
+    ( "texts/texts", ["../../txts/*.lua",
                   "../../txts/tips/*.tip"] ),
-    ( "translator_credits/translator_credits", ["../../txts/translator_credits.lua"] ),
     ( "widelands/widelands", [
                     "../../src/wlapplication.cc",
                     "../../src/*/*.cc",
@@ -43,6 +39,7 @@ MAINPOTS = [
                     "../../src/wlapplication.h",
                     "../../src/*/*.h",
                     "../../src/*/*/*.h",
+                    "../../scripting/widelands/*.lua",
     ] ),
     ( "widelands_console/widelands_console", [
                     "../../src/wlapplication_messages.cc",
@@ -61,7 +58,22 @@ MAINPOTS = [
         "../../world/*/*/*/*/*/*.lua",
     ]),
     ("tribes/tribes", [
-        "../../tribes/scripting/*.lua",
+        "../../tribes/scripting/starting_conditions/*/*.lua",
+        "../../tribes/*.lua",
+        "../../tribes/*/init.lua",
+        "../../tribes/*/*/init.lua",
+        "../../tribes/*/*/*/init.lua",
+        "../../tribes/*/*/*/*/init.lua",
+        "../../tribes/*/*/*/*/*/init.lua",
+    ]),
+
+    ("tribes_encyclopedia/tribes_encyclopedia", [
+        "../../tribes/scripting/help/*.lua",
+        "../../tribes/*/helptexts.lua",
+        "../../tribes/*/*/helptexts.lua",
+        "../../tribes/*/*/*/helptexts.lua",
+        "../../tribes/*/*/*/*/helptexts.lua",
+        "../../tribes/*/*/*/*/*/helptexts.lua",
     ]),
 ]
 
@@ -92,30 +104,6 @@ ITERATIVEPOTS = [
     ),
     ("mp_scenario_%(name)s/mp_scenario_%(name)s", "maps/MP Scenarios/",
          [ "../../maps/MP Scenarios/%(name)s/scripting/*.lua", ]
-    ),
-    ("tribe_atlanteans/tribe_atlanteans", "tribes/",
-        ["../../tribes/atlanteans/conf",
-         "../../tribes/atlanteans/*/conf",
-         "../../tribes/atlanteans/scripting/*.lua",
-         "../../tribes/atlanteans/*/help.lua",
-         "../../global/militarysites/*/conf"
-    ]
-    ),
-    ("tribe_barbarians/tribe_barbarians", "tribes/",
-        ["../../tribes/barbarians/conf",
-         "../../tribes/barbarians/*/conf",
-         "../../tribes/barbarians/scripting/*.lua",
-         "../../tribes/barbarians/*/help.lua",
-         "../../global/militarysites/*/conf"
-    ]
-    ),
-    ("tribe_empire/tribe_empire", "tribes/",
-        ["../../tribes/empire/conf",
-         "../../tribes/empire/*/conf",
-         "../../tribes/empire/scripting/*.lua",
-         "../../tribes/empire/*/help.lua",
-         "../../global/militarysites/*/conf"
-    ]
     ),
 ]
 

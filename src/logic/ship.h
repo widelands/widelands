@@ -38,13 +38,14 @@ struct Fleet;
 class PortDock;
 
 // This can't be part of the Ship class because of forward declaration in game.h
-enum class ScoutingDirection {
+enum class IslandExploreDirection {
 	kCounterClockwise = 0, // This comes first for savegame compatibility (used to be = 0)
-	kClockwise = 1
+	kClockwise = 1,
+	kNotSet
 };
 
 struct NoteShipMessage {
-	CAN_BE_SEND_AS_NOTE(NoteId::ShipMessage)
+	CAN_BE_SENT_AS_NOTE(NoteId::ShipMessage)
 
 	Ship* ship;
 
@@ -56,11 +57,9 @@ struct NoteShipMessage {
 	}
 };
 
-struct ShipDescr : BobDescr {
-	ShipDescr
-		(char const * name, char const * descname,
-		 const std::string & directory, Profile &, Section & global_s,
-		 const TribeDescr &);
+class ShipDescr : public BobDescr {
+public:
+	ShipDescr(const std::string& init_descname, const LuaTable& t);
 	~ShipDescr() override {}
 
 	Bob & create_object() const override;
@@ -69,13 +68,10 @@ struct ShipDescr : BobDescr {
 	const DirAnimations & get_sail_anims() const {return m_sail_anims;}
 
 	uint32_t get_capacity() const {return m_capacity;}
-	uint32_t vision_range() const {return m_vision_range;}
-
 
 private:
 	DirAnimations m_sail_anims;
 	uint32_t m_capacity;
-	uint32_t m_vision_range;
 	DISALLOW_COPY_AND_ASSIGN(ShipDescr);
 };
 
@@ -113,6 +109,8 @@ struct Ship : Bob {
 	void start_task_ship(Game &);
 	void start_task_movetodock(Game &, PortDock &);
 	void start_task_expedition(Game &);
+
+	uint32_t calculate_sea_route(Game& game, PortDock& pd, Path* finalpath = nullptr);
 
 	void log_general_info(const EditorGameBase &) override;
 
@@ -202,9 +200,18 @@ struct Ship : Bob {
 		return m_expedition->seen_port_buildspaces.get();
 	}
 
-	void exp_scout_direction(Game &, uint8_t);
+	void exp_scouting_direction(Game &, WalkingDir);
 	void exp_construct_port (Game &, const Coords&);
-	void exp_explore_island (Game &, ScoutingDirection);
+	void exp_explore_island (Game &, IslandExploreDirection);
+
+	//Returns integer of direction, or WalkingDir::IDLE if query invalid
+	//Intended for LUA scripting
+	WalkingDir get_scouting_direction();
+
+	//Returns integer of direction, or IslandExploreDirection::kNotSet
+	//if query invalid
+	//Intended for LUA scripting
+	IslandExploreDirection get_island_explore_direction();
 
 	void exp_cancel (Game &);
 	void sink_ship  (Game &);
@@ -242,9 +249,9 @@ private:
 		std::unique_ptr<std::list<Coords> > seen_port_buildspaces;
 		bool swimable[LAST_DIRECTION];
 		bool island_exploration;
-		uint8_t direction;
+		WalkingDir scouting_direction;
 		Coords exploration_start;
-		ScoutingDirection scouting_direction;
+		IslandExploreDirection island_explore_direction;
 		std::unique_ptr<Economy> economy;
 	};
 	std::unique_ptr<Expedition> m_expedition;
@@ -256,7 +263,7 @@ protected:
 
 		const Task * get_task(const std::string & name) override;
 
-		void load(FileRead & fr, uint8_t version);
+		void load(FileRead & fr);
 		void load_pointers() override;
 		void load_finish() override;
 

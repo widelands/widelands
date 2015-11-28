@@ -3,10 +3,10 @@
 -- ================
 
 function starting_infos()
-   map:place_immovable("debris00",second_quarry_field)
+   map:place_immovable("debris00",second_quarry_field, "world")
    -- so that the player cannot build anything here
 
-   sleep(100)
+   sleep(1000)
 
    message_box_objective(plr, initial_message_01)
    sleep(500)
@@ -44,7 +44,7 @@ function build_lumberjack()
 
    click_on_field(first_lumberjack_field)
    click_on_panel(wl.ui.MapView().windows.field_action.tabs.small)
-   click_on_panel(wl.ui.MapView().windows.field_action.buttons.lumberjacks_hut)
+   click_on_panel(wl.ui.MapView().windows.field_action.buttons.barbarians_lumberjacks_hut)
 
    sleep(500)
 
@@ -56,7 +56,7 @@ function build_lumberjack()
    end
    sleep(500)
 
-   click_on_field(map.player_slots[1].starting_field.brn)
+   click_on_field(sf.brn)
 
    message_box_objective(plr, lumberjack_message_04)
 
@@ -99,7 +99,7 @@ function build_lumberjack()
    sleep(30*1000) -- let the player experiment a bit with the speed
    message_box_objective(plr, construction_site_window)
 
-   while #plr:get_buildings("lumberjacks_hut") < 1 do sleep(300) end
+   while #plr:get_buildings("barbarians_lumberjacks_hut") < 1 do sleep(300) end
 
    message_box_objective(plr, lumberjack_message_07)
 
@@ -153,7 +153,7 @@ function build_a_quarry()
    immovable_is_legal = function(i)
       -- only allow quarry and flag at this position because the road building below relies on this
       if (i.fields[1] == first_quarry_field) or (i.fields[1] == first_quarry_field.brn) then
-         cs = allow_constructionsite(i, {"quarry"})
+         cs = allow_constructionsite(i, {"barbarians_quarry"})
          return cs
       else return false end
    end
@@ -206,7 +206,7 @@ function build_a_quarry()
    -- Showoff direct roadbuilding
    click_on_field(first_quarry_field.brn)
    click_on_panel(wl.ui.MapView().windows.field_action.buttons.build_road, 300)
-   click_on_field(map.player_slots[1].starting_field.brn)
+   click_on_field(sf.brn)
 
    sleep(3000)
 
@@ -224,21 +224,20 @@ function build_a_quarry()
       else return false end
    end
 
-   -- Give the player some time to build the road
-   -- It is not possible to check for the road. See https://bugs.launchpad.net/widelands/+bug/1380286
+   -- Wait till the construction site is connected to the headquarters
    sleep(20*1000)
+   while first_quarry_field.brn.immovable.debug_economy ~= sf.brn.immovable.debug_economy do
+      message_box_objective(plr,quarry_not_connected)
+      sleep(60*1000)
+      if not first_quarry_field.immovable then message_box_objective(plr,quarry_illegally_destroyed) return end
+   end
 
    second_quarry()
-
-   -- Wait a while
-   sleep(60*1000)
-   -- When the said bug is fixed, check every 30 seconds if the second quarry is connected. Inform the player if not.
-   -- When that is finally done (and 30 seconds have passed), go on
 
    -- Interludium: talk about census and statistics
    census_and_statistics()
 
-   while #plr:get_buildings("quarry") < 1 do sleep(1400) end
+   while #plr:get_buildings("barbarians_quarry") < 2 do sleep(1400) end
    o.done = true
 
    messages()
@@ -254,7 +253,7 @@ function second_quarry()
    local cs = nil
    immovable_is_legal = function(i)
       if (i.fields[1] == second_quarry_field) or (i.fields[1] == second_quarry_field.brn) then
-         cs = allow_constructionsite(i, {"quarry"})
+         cs = allow_constructionsite(i, {"barbarians_quarry"})
          return cs
       elseif(i.descr.type_name == "flag") or (i.descr.type_name == "road") then
          register_immovable_as_allowed(i)
@@ -264,6 +263,13 @@ function second_quarry()
 
    -- Wait for the constructionsite to be placed
    while not cs do sleep(200) end
+
+   sleep(60*1000)
+   while second_quarry_field.brn.immovable.debug_economy ~= sf.brn.immovable.debug_economy do
+      message_box_objective(plr,quarry_not_connected)
+      sleep(60*1000)
+      if not second_quarry_field.immovable then message_box_objective(plr,quarry_illegally_destroyed) return end
+   end
 
    o.done = true
    register_immovable_as_allowed(cs)
@@ -334,7 +340,7 @@ function destroy_quarries()
    -- From now on, the player can build whatever he wants
    terminate_bad_boy_sentinel = true
 
-   while #plr:get_buildings("quarry") > 0 do sleep(200) end
+   while #plr:get_buildings("barbarians_quarry") > 0 do sleep(200) end
    o.done = true
 
    sleep(3000)
@@ -351,7 +357,12 @@ function expansion()
    -- wait until there are soldiers inside so that the player sees the expansion
    local soldier_inside = false
    while not soldier_inside do
-      local military_buildings = array_combine(plr:get_buildings("sentry"), plr:get_buildings("donjon"), plr:get_buildings("barrier"), plr:get_buildings("fortress"), plr:get_buildings("citadel"))
+      local military_buildings = array_combine(
+         plr:get_buildings("barbarians_sentry"),
+         plr:get_buildings("barbarians_tower"),
+         plr:get_buildings("barbarians_barrier"),
+         plr:get_buildings("barbarians_fortress"),
+         plr:get_buildings("barbarians_citadel"))
       for i = 1,#military_buildings do
          for k,v in pairs(military_buildings[i]:get_soldiers("all")) do
             soldier_inside = true
@@ -379,4 +390,3 @@ end
 
 run(bad_boy_sentry)
 run(starting_infos)
-

@@ -34,7 +34,6 @@
 #include "logic/editor_game_base.h"
 #include "logic/map.h"
 #include "logic/world/world.h"
-#include "profile/profile.h"
 #include "random/random.h"
 #include "ui_basic/button.h"
 #include "ui_basic/progresswindow.h"
@@ -42,7 +41,7 @@
 #include "ui_basic/window.h"
 
 using namespace Widelands;
-
+// TODO(GunChleoc): Arabic: buttons need more height for Arabic.
 MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent) :
 	UI::Window(&parent,
 				  "random_map_menu",
@@ -57,7 +56,7 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent) :
 		{"greenland", _("Summer")},
 		{"winterland", _("Winter")},
 		{"desert", _("Desert")},
-		{"blackland", _("Black")},
+		{"blackland", _("Wasteland")},
 	}),
 	m_current_world(0) {
 	int32_t const offsx   =  5;
@@ -237,13 +236,10 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent) :
 
 	// ---------- Island mode ----------
 
-	Point pos(get_inner_w() - spacing - height, posy);
-	m_island_mode = new UI::Checkbox(this, pos);
+	m_island_mode = new UI::Checkbox(this, Point(posx, posy), _("Island mode"));
 	m_island_mode->set_state(true);
 	m_island_mode->changed.connect
 		(boost::bind(&MainMenuNewRandomMap::button_clicked, this, ButtonId::SWITCH_ISLAND_MODE));
-
-	new UI::Textarea(this, posx, posy, _("Island mode:"));
 	posy += height + spacing;
 
 
@@ -328,7 +324,7 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent) :
 	m_goButton = new UI::Button
 		(this, "generate_map",
 		 posx, posy, width, height,
-		 g_gr->images().get("pics/but0.png"),
+		 g_gr->images().get("pics/but5.png"),
 		 _("Generate Map"));
 	m_goButton->sigclicked.connect(boost::bind(&MainMenuNewRandomMap::clicked_create_map, this));
 	posy += height + spacing;
@@ -504,12 +500,13 @@ void MainMenuNewRandomMap::clicked_create_map() {
 		<< "ID = " << m_idEditbox->text() << "\n";
 
 	MapGenerator gen(map, mapInfo, egbase);
-	map.create_empty_map(egbase.world(),
-	                     mapInfo.w,
-	                     mapInfo.h,
-	                     _("No Name"),
-	                     g_options.pull_section("global").get_string("realname", _("Unknown")),
-	                     sstrm.str().c_str());
+	map.create_empty_map(
+		egbase.world(),
+		mapInfo.w,
+		mapInfo.h,
+		_("No Name"),
+		g_options.pull_section("global").get_string("realname", pgettext("map_name", "Unknown")),
+		sstrm.str().c_str());
 	loader.step(_("Generating random map..."));
 	gen.create_random_map();
 
@@ -520,6 +517,8 @@ void MainMenuNewRandomMap::clicked_create_map() {
 
 	eia.set_need_save(true);
 	eia.register_overlays();
+	eia.toggle_minimap();
+	eia.toggle_minimap();
 
 	die();
 }
@@ -554,7 +553,7 @@ void MainMenuNewRandomMap::id_edit_box_changed()
 		m_res->set_title(m_res_amounts[m_res_amount].c_str());
 
 		// Update other values in UI as well
-		button_clicked(static_cast<ButtonId>(-1));
+		button_clicked(ButtonId::NO_BUTTON);
 
 		m_goButton->set_enabled(true);
 	}

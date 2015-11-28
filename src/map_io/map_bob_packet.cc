@@ -21,21 +21,21 @@
 
 #include "io/fileread.h"
 #include "logic/player.h"
-#include "logic/tribe.h"
+#include "logic/tribes/tribe_descr.h"
 #include "logic/world/world.h"
 #include "map_io/map_object_loader.h"
 #include "map_io/map_object_saver.h"
-#include "map_io/one_world_legacy_lookup_table.h"
+#include "map_io/world_legacy_lookup_table.h"
 
 namespace Widelands {
 
-#define CURRENT_PACKET_VERSION 1
+constexpr uint16_t kCurrentPacketVersion = 1;
 
 void MapBobPacket::read_bob(FileRead& fr,
-                                  EditorGameBase& egbase,
-											 MapObjectLoader&,
-                                  Coords const coords,
-                                  const OneWorldLegacyLookupTable& lookup_table) {
+									 EditorGameBase& egbase,
+									 MapObjectLoader&,
+									 Coords const coords,
+									 const WorldLegacyLookupTable& lookup_table) {
 	const std::string owner = fr.c_string();
 	char const* const read_name = fr.c_string();
 	uint8_t subtype = fr.unsigned_8();
@@ -49,7 +49,7 @@ void MapBobPacket::read_bob(FileRead& fr,
 	const std::string name = lookup_table.lookup_critter(read_name);
 	try {
 		const World& world = egbase.world();
-		int32_t const idx = world.get_bob(name.c_str());
+		DescriptionIndex const idx = world.get_bob(name.c_str());
 		if (idx == INVALID_INDEX)
 			throw GameDataError("world does not define bob type \"%s\"", name.c_str());
 
@@ -68,9 +68,9 @@ void MapBobPacket::read_bob(FileRead& fr,
 }
 
 void MapBobPacket::read(FileSystem& fs,
-                               EditorGameBase& egbase,
-										 MapObjectLoader& mol,
-                               const OneWorldLegacyLookupTable& lookup_table) {
+								EditorGameBase& egbase,
+								MapObjectLoader& mol,
+								const WorldLegacyLookupTable& lookup_table) {
 	FileRead fr;
 	fr.open(fs, "binary/bob");
 
@@ -78,7 +78,7 @@ void MapBobPacket::read(FileSystem& fs,
 	map.recalc_whole_map(egbase.world());  //  for movecaps checks in ReadBob
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
-		if (packet_version == CURRENT_PACKET_VERSION)
+		if (packet_version == kCurrentPacketVersion)
 			for (uint16_t y = 0; y < map.get_height(); ++y) {
 				for (uint16_t x = 0; x < map.get_width(); ++x) {
 					uint32_t const nr_bobs = fr.unsigned_32();
@@ -86,8 +86,9 @@ void MapBobPacket::read(FileSystem& fs,
 						read_bob(fr, egbase, mol, Coords(x, y), lookup_table);
 				}
 			}
-		else
-			throw GameDataError("unknown/unhandled version %u", packet_version);
+		else {
+			throw UnhandledVersionError("MapBobPacket", packet_version, kCurrentPacketVersion);
+		}
 	} catch (const WException& e) {
 		throw GameDataError("bobs: %s", e.what());
 	}

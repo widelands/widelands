@@ -6,10 +6,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-02-07 14:46+0000\n"
-"PO-Revision-Date: 2015-02-03 15:15+0000\n"
+"POT-Creation-Date: 2015-08-04 07:49+0000\n"
+"PO-Revision-Date: 2015-08-04 07:50+0000\n"
 "Last-Translator: GunChleoc\n"
-"Language-Team: Basque (http://www.transifex.com/projects/p/widelands/language/eu/)\n"
+"Language-Team: Basque (http://www.transifex.com/widelands/widelands/language/eu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -23,12 +23,12 @@ msgstr ""
 msgid "Game Status"
 msgstr ""
 
-#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:119
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:118
 msgid "Wares Smuggled"
 msgstr ""
 
-#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:142
-#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:145
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:141
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:144
 #: ../../maps/MP Scenarios/Smugglers.wmf/scripting/smuggling.lua:33
 #: ../../maps/MP Scenarios/Smugglers.wmf/scripting/smuggling.lua:55
 #: ../../maps/MP Scenarios/Smugglers.wmf/scripting/smuggling.lua:90
@@ -37,7 +37,7 @@ msgid_plural "%i points"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:145
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:144
 #: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:6
 msgid "Rules"
 msgstr ""
@@ -50,7 +50,7 @@ msgstr ""
 msgid ""
 "Smugglers is a fun map for 4 players. You and your partner start diagonally "
 "from each other on a point symmetric island. There are plenty of smuggling "
-"tunnels on this island, each consisting of a receiving and a sending end. "
+"tunnels on this island, each consisting of a receiving and a sending end."
 msgstr ""
 
 #: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:8
@@ -58,7 +58,7 @@ msgid ""
 "To establish a smuggling route, you need to build a warehouse on a "
 "sending/receiving spot while your team mate has to build one on the "
 "corresponding receiving/sending spot. A ware is then transported every 10 "
-"seconds. "
+"seconds."
 msgstr ""
 
 #: TRANSLATORS %s = '<number> points' ../../maps/MP

@@ -31,7 +31,7 @@
 
 namespace Widelands {
 
-#define CURRENT_PACKET_VERSION 1
+constexpr int32_t kCurrentPacketVersion = 1;
 
 void MapExtradataPacket::read(FileSystem& fs, bool const skip) {
 	if (skip)
@@ -43,7 +43,7 @@ void MapExtradataPacket::read(FileSystem& fs, bool const skip) {
 	try {
 		int32_t const packet_version =
 			prof.get_safe_section("global").get_safe_int("packet_version");
-		if (packet_version == CURRENT_PACKET_VERSION) {
+		if (packet_version == kCurrentPacketVersion) {
 			// Read all pics.
 			if (fs.file_exists("pics") && fs.is_directory("pics")) {
 				FilenameSet pictures = fs.list_directory("pics");
@@ -65,9 +65,9 @@ void MapExtradataPacket::read(FileSystem& fs, bool const skip) {
 					assert(image);
 				}
 			}
-		} else
-			throw GameDataError
-				("unknown/unhandled version %u", packet_version);
+		} else {
+			throw UnhandledVersionError("MapExtradataPacket", packet_version, kCurrentPacketVersion);
+		}
 	} catch (const WException & e) {
 		throw GameDataError("extradata: %s", e.what());
 	}
@@ -79,7 +79,7 @@ void MapExtradataPacket::write
 {
 	Profile prof;
 	prof.create_section("global").set_int
-		("packet_version", CURRENT_PACKET_VERSION);
+		("packet_version", kCurrentPacketVersion);
 
 	// Copy all files from pics/ from the old map to the new.
 	FileSystem* map_fs = egbase.map().filesystem();

@@ -10,7 +10,7 @@ welcome_msg = rt(
 [[When you finish a castle at the end of the first island, you are granted a ]] ..
 [[second headquarters on a second island, which will contain all wares from your ]] ..
 [[first headquarters.]]
-)) .. 
+)) ..
  p(_(
 [[If you finish a castle in the target area on the second island, you will get ]] ..
 [[a third headquarters on the third island. You must build a castle at ]] ..
@@ -20,9 +20,7 @@ welcome_msg = rt(
 [[Whenever you finish an island, you will get bonus wares, depending on how many players ]] ..
 [[have finished the island before you. The earlier you finish, the fewer wares you will get. ]] ..
 [[See below for the details.]])) .. p(_(
-[[The clue is that the first island only provides stones and wood, the second ]] ..
-[[only meadows and resources. The economies you leave behind will continue to ]] ..
-[[work for you, but you will only reap the benefits at the moment you reach a new island.]])
+[[The point is that the first island only provides rocks and trees, the second only meadows and resources. The economies you leave behind will continue to work for you, but you will only reap the benefits at the moment you reach a new island.]])
 ) ..
 p(_
 [[Finally, be careful not to waste your quartz and diamonds.]]
@@ -57,7 +55,3 @@ lost_control = rt(p(_
 ))
 had_control_for = rt(p(_[[%1$s has been King of the Hill for %2$s!]]))
 player_won = rt(p(_[[%s has won the game. Congratulations!]]))
-
-
-
-

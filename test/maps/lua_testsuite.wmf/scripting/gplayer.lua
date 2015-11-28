@@ -1,5 +1,5 @@
 -- ======================================================
--- Testing Player functionality that is only in the game 
+-- Testing Player functionality that is only in the game
 -- ======================================================
 
 function player_tests:test_name_property()
@@ -71,8 +71,8 @@ function player_allow_buildings_tests:teardown()
    player1:allow_buildings "all"
 end
 function player_allow_buildings_tests:test_property()
-   assert_equal(true, player1.allowed_buildings.lumberjacks_hut)
-   assert_equal(true, player1.allowed_buildings["quarry"])
+   assert_equal(true, player1.allowed_buildings.barbarians_lumberjacks_hut)
+   assert_equal(true, player1.allowed_buildings["barbarians_quarry"])
 end
 function player_allow_buildings_tests:test_forbid_all_buildings()
    player1:forbid_buildings("all")
@@ -81,19 +81,19 @@ function player_allow_buildings_tests:test_forbid_all_buildings()
    end
 end
 function player_allow_buildings_tests:test_forbid_some_buildings()
-   player1:forbid_buildings{"lumberjacks_hut"}
-   assert_equal(false, player1.allowed_buildings.lumberjacks_hut)
-   assert_equal(true, player1.allowed_buildings["quarry"])
-   player1:forbid_buildings{"quarry", "sentry"}
-   assert_equal(false, player1.allowed_buildings["quarry"])
-   assert_equal(false, player1.allowed_buildings["sentry"])
+   player1:forbid_buildings{"barbarians_lumberjacks_hut"}
+   assert_equal(false, player1.allowed_buildings.barbarians_lumberjacks_hut)
+   assert_equal(true, player1.allowed_buildings["barbarians_quarry"])
+   player1:forbid_buildings{"barbarians_quarry", "barbarians_sentry"}
+   assert_equal(false, player1.allowed_buildings["barbarians_quarry"])
+   assert_equal(false, player1.allowed_buildings["barbarians_sentry"])
 end
 function player_allow_buildings_tests:test_allow_some()
    player1:forbid_buildings("all")
-   player1:allow_buildings{"quarry", "sentry"}
-   assert_equal(false, player1.allowed_buildings.lumberjacks_hut)
-   assert_equal(true, player1.allowed_buildings["quarry"])
-   assert_equal(true, player1.allowed_buildings["sentry"])
+   player1:allow_buildings{"barbarians_quarry", "barbarians_sentry"}
+   assert_equal(false, player1.allowed_buildings.barbarians_lumberjacks_hut)
+   assert_equal(true, player1.allowed_buildings["barbarians_quarry"])
+   assert_equal(true, player1.allowed_buildings["barbarians_sentry"])
 end
 function player_allow_buildings_tests:test_forbid_illegal_buildings()
    function a() player1:forbid_buildings{"lumberjacksjkdhfs_hut"} end
@@ -115,33 +115,32 @@ function player_building_access:teardown()
 end
 function player_building_access:test_single()
    self.bs = {
-      player1:place_building("lumberjacks_hut", map:get_field(10,10)),
-      player1:place_building("lumberjacks_hut", map:get_field(13,10)),
-      player1:place_building("quarry", map:get_field(8,10)),
+      player1:place_building("barbarians_lumberjacks_hut", map:get_field(10,10)),
+      player1:place_building("barbarians_lumberjacks_hut", map:get_field(13,10)),
+      player1:place_building("barbarians_quarry", map:get_field(8,10)),
    }
-   assert_equal(2, #player1:get_buildings("lumberjacks_hut"))
-   assert_equal(1, #player1:get_buildings("quarry"))
+   assert_equal(2, #player1:get_buildings("barbarians_lumberjacks_hut"))
+   assert_equal(1, #player1:get_buildings("barbarians_quarry"))
 end
 function player_building_access:test_multi()
    self.bs = {
-      player1:place_building("lumberjacks_hut", map:get_field(10,10)),
-      player1:place_building("lumberjacks_hut", map:get_field(13,10)),
-      player1:place_building("quarry", map:get_field(8,10)),
+      player1:place_building("barbarians_lumberjacks_hut", map:get_field(10,10)),
+      player1:place_building("barbarians_lumberjacks_hut", map:get_field(13,10)),
+      player1:place_building("barbarians_quarry", map:get_field(8,10)),
    }
-   rv = player1:get_buildings{"lumberjacks_hut", "quarry"}
+   rv = player1:get_buildings{"barbarians_lumberjacks_hut", "barbarians_quarry"}
 
-   assert_equal(2, #rv.lumberjacks_hut)
-   assert_equal(1, #rv.quarry)
+   assert_equal(2, #rv.barbarians_lumberjacks_hut)
+   assert_equal(1, #rv.barbarians_quarry)
 end
 function player_building_access:test_access()
-   local b1 = player1:place_building("lumberjacks_hut", map:get_field(10,10))
-   local b2 = player1:place_building("lumberjacks_hut", map:get_field(13,10))
-   local b3 = player1:place_building("quarry", map:get_field(8,10))
+   local b1 = player1:place_building("barbarians_lumberjacks_hut", map:get_field(10,10))
+   local b2 = player1:place_building("barbarians_lumberjacks_hut", map:get_field(13,10))
+   local b3 = player1:place_building("barbarians_quarry", map:get_field(8,10))
    self.bs = { b1, b2, b3 }
-   rv = player1:get_buildings{"lumberjacks_hut", "quarry"}
+   rv = player1:get_buildings{"barbarians_lumberjacks_hut", "barbarians_quarry"}
 
-   assert_equal(b3, rv.quarry[1])
+   assert_equal(b3, rv.barbarians_quarry[1])
    b1.fields[1].brn.immovable:remove()
-   assert_equal(1, #player1:get_buildings("lumberjacks_hut"))
+   assert_equal(1, #player1:get_buildings("barbarians_lumberjacks_hut"))
 end
-

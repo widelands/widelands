@@ -32,7 +32,6 @@
 #include "logic/editor_game_base.h"
 #include "logic/map.h"
 #include "logic/world/world.h"
-#include "profile/profile.h"
 #include "ui_basic/button.h"
 #include "ui_basic/progresswindow.h"
 #include "ui_basic/textarea.h"
@@ -105,7 +104,7 @@ MainMenuNewMap::MainMenuNewMap(EditorInteractive & parent)
 	UI::Button * createbtn = new UI::Button
 		(this, "create_map",
 		 posx, posy, width, height,
-		 g_gr->images().get("pics/but0.png"),
+		 g_gr->images().get("pics/but5.png"),
 		 _("Create Map"));
 	createbtn->sigclicked.connect(boost::bind(&MainMenuNewMap::clicked_create_map, this));
 }
@@ -141,11 +140,12 @@ void MainMenuNewMap::clicked_create_map() {
 
 	egbase.cleanup_for_load();
 
-	map.create_empty_map(egbase.world(),
-	                     Widelands::MAP_DIMENSIONS[m_w],
-	                     Widelands::MAP_DIMENSIONS[m_h],
-	                     _("No Name"),
-	                     g_options.pull_section("global").get_string("realname", _("Unknown")));
+	map.create_empty_map(
+				egbase.world(),
+				Widelands::MAP_DIMENSIONS[m_w],
+				Widelands::MAP_DIMENSIONS[m_h],
+				_("No Name"),
+				g_options.pull_section("global").get_string("realname", pgettext("map_name", "Unknown")));
 
 	egbase.postload     ();
 	egbase.load_graphics(loader);
@@ -153,6 +153,8 @@ void MainMenuNewMap::clicked_create_map() {
 	map.recalc_whole_map(egbase.world());
 
 	eia.set_need_save(true);
+	eia.toggle_minimap();
+	eia.toggle_minimap();
 
 	die();
 }

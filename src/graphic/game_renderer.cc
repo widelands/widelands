@@ -319,7 +319,7 @@ void GameRenderer::draw_objects(RenderTarget& dst,
 					if
 						(f_pl.constructionsite.becomes)
 					{
-						const Player::ConstructionsiteInformation & csinf = f_pl.constructionsite;
+						const ConstructionsiteInformation & csinf = f_pl.constructionsite;
 						// draw the partly finished constructionsite
 						uint32_t anim_idx;
 						try {

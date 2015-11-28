@@ -68,7 +68,7 @@
 #include "logic/replay_game_controller.h"
 #include "logic/single_player_game_controller.h"
 #include "logic/single_player_game_settings_provider.h"
-#include "logic/tribe.h"
+#include "logic/tribes/tribe_descr.h"
 #include "map_io/map_loader.h"
 #include "network/internet_gaming.h"
 #include "network/netclient.h"
@@ -409,7 +409,6 @@ void WLApplication::run()
 
 				// Load the requested map
 				Widelands::Map map;
-				i18n::Textdomain td("maps");
 				map.set_filename(m_filename);
 				std::unique_ptr<Widelands::MapLoader> ml = map.get_correct_loader(m_filename);
 				if (!ml) {
@@ -420,18 +419,8 @@ void WLApplication::run()
 				}
 				ml->preload_map(true);
 
-				// fill in the mapdata structure
-				MapData mapdata;
-				mapdata.filename = m_filename;
-				mapdata.name = map.get_name();
-				mapdata.authors.parse(map.get_author());
-				mapdata.description = map.get_description();
-				mapdata.nrplayers = map.get_nrplayers();
-				mapdata.width = map.get_width();
-				mapdata.height = map.get_height();
-
 				// set the map
-				netgame.set_map(mapdata.name, mapdata.filename, mapdata.nrplayers);
+				netgame.set_map(map.get_name(), map.get_filename(), map.get_nrplayers());
 
 				// run the network game
 				// -> autostarts when a player sends "/start" as pm to the server.
@@ -449,7 +438,7 @@ void WLApplication::run()
 
 		{
 			FullscreenMenuIntro intro;
-			intro.run();
+			intro.run<FullscreenMenuBase::MenuTarget>();
 		}
 
 		g_sound_handler.change_music("menu", 1000);
@@ -501,46 +490,48 @@ bool WLApplication::poll_event(SDL_Event& ev) {
 	return true;
 }
 
-bool WLApplication::handle_key(const SDL_Keycode& keycode, int modifiers) {
-	const bool ctrl = (modifiers & KMOD_LCTRL) || (modifiers & KMOD_RCTRL);
-	switch (keycode) {
-	case SDLK_F10:
-		// exits the game.
-		if (ctrl) {
-			m_should_die = true;
-		}
-		return true;
-
-	case SDLK_F11:
-		// Takes a screenshot.
-		if (ctrl) {
-			if (g_fs->disk_space() < MINIMUM_DISK_SPACE) {
-				log("Omitting screenshot because diskspace is lower than %luMB\n",
-				    MINIMUM_DISK_SPACE / (1000 * 1000));
-				break;
+bool WLApplication::handle_key(bool down, const SDL_Keycode& keycode, int modifiers) {
+	if (down) {
+		const bool ctrl = (modifiers & KMOD_LCTRL) || (modifiers & KMOD_RCTRL);
+		switch (keycode) {
+		case SDLK_F10:
+			// exits the game.
+			if (ctrl) {
+				m_should_die = true;
 			}
-			g_fs->ensure_directory_exists(SCREENSHOT_DIR);
-			for (uint32_t nr = 0; nr < 10000; ++nr) {
-				const std::string filename = (boost::format(SCREENSHOT_DIR "/shot%04u.png") % nr).str();
-				if (g_fs->file_exists(filename)) {
-					continue;
+			return true;
+
+		case SDLK_F11:
+			// Takes a screenshot.
+			if (ctrl) {
+				if (g_fs->disk_space() < MINIMUM_DISK_SPACE) {
+					log("Omitting screenshot because diskspace is lower than %luMB\n",
+						 MINIMUM_DISK_SPACE / (1000 * 1000));
+					break;
 				}
-				g_gr->screenshot(filename);
-				break;
+				g_fs->ensure_directory_exists(SCREENSHOT_DIR);
+				for (uint32_t nr = 0; nr < 10000; ++nr) {
+					const std::string filename = (boost::format(SCREENSHOT_DIR "/shot%04u.png") % nr).str();
+					if (g_fs->file_exists(filename)) {
+						continue;
+					}
+					g_gr->screenshot(filename);
+					break;
+				}
 			}
+			return true;
+
+		case SDLK_f: {
+			// toggle fullscreen
+			bool value = !g_gr->fullscreen();
+			g_gr->set_fullscreen(value);
+			g_options.pull_section("global").set_bool("fullscreen", value);
+			return true;
 		}
-		return true;
 
-	case SDLK_f: {
-		// toggle fullscreen
-		bool value = !g_gr->fullscreen();
-		g_gr->set_fullscreen(value);
-		g_options.pull_section("global").set_bool("fullscreen", value);
-		return true;
-	}
-
-	default:
-		break;
+		default:
+			break;
+		}
 	}
 	return false;
 }
@@ -550,13 +541,14 @@ void WLApplication::handle_input(InputCallback const * cb)
 	SDL_Event ev;
 	while (poll_event(ev)) {
 		switch (ev.type) {
+		case SDL_KEYUP:
 		case SDL_KEYDOWN: {
 			bool handled = false;
 			if (cb && cb->key) {
 				handled = cb->key(ev.type == SDL_KEYDOWN, ev.key.keysym);
 			}
 			if (!handled) {
-				handle_key(ev.key.keysym.sym, ev.key.keysym.mod);
+				handle_key(ev.type == SDL_KEYDOWN, ev.key.keysym.sym, ev.key.keysym.mod);
 			}
 		} break;
 
@@ -638,16 +630,6 @@ void WLApplication::_handle_mousebutton
 		}
 }
 
-/**
- * Return the current time, in milliseconds
- */
-// TODO(unknown): Use our internally defined time type
-// TODO(sirver): get rid of this method and use SDL_GetTicks() directly.
-int32_t WLApplication::get_time() {
-	uint32_t time = SDL_GetTicks();
-
-	return time;
-}
 
 /// Instantaneously move the mouse cursor without creating a motion event.
 ///
@@ -898,10 +880,6 @@ void WLApplication::parse_commandline
 */
 void WLApplication::handle_commandline_parameters()
 {
-	if (m_commandline.count("help") || m_commandline.count("version")) {
-		init_language();
-		throw ParameterError(); //no message on purpose
-	}
 	if (m_commandline.count("logfile")) {
 		m_logfile = m_commandline["logfile"];
 		std::cerr << "Redirecting log target to: " <<  m_logfile << std::endl;
@@ -1022,6 +1000,11 @@ void WLApplication::handle_commandline_parameters()
 		g_options.pull_section("global").create_val
 			(it->first.c_str(), it->second.c_str());
 	}
+
+	if (m_commandline.count("help") || m_commandline.count("version")) {
+		init_language();
+		throw ParameterError(); //no message on purpose
+	}
 }
 
 
@@ -1046,53 +1029,53 @@ void WLApplication::mainmenu()
 				(&mm,
 				 messagetitle,
 				 message,
-				 UI::WLMessageBox::OK,
+				 UI::WLMessageBox::MBoxType::kOk,
 				 UI::Align_Left);
-			mmb.run();
+			mmb.run<UI::Panel::Returncodes>();
 
 			message.clear();
 			messagetitle.clear();
 		}
 
 		try {
-			switch (static_cast<FullscreenMenuMain::MenuTarget>(mm.run())) {
-			case FullscreenMenuMain::MenuTarget::kTutorial:
+			switch (mm.run<FullscreenMenuBase::MenuTarget>()) {
+			case FullscreenMenuBase::MenuTarget::kTutorial:
 				mainmenu_tutorial();
 				break;
-			case FullscreenMenuMain::MenuTarget::kSinglePlayer:
+			case FullscreenMenuBase::MenuTarget::kSinglePlayer:
 				mainmenu_singleplayer();
 				break;
-			case FullscreenMenuMain::MenuTarget::kMultiplayer:
+			case FullscreenMenuBase::MenuTarget::kMultiplayer:
 				mainmenu_multiplayer();
 				break;
-			case FullscreenMenuMain::MenuTarget::kReplay:
+			case FullscreenMenuBase::MenuTarget::kReplay:
 				replay();
 				break;
-			case FullscreenMenuMain::MenuTarget::kOptions: {
+			case FullscreenMenuBase::MenuTarget::kOptions: {
 				Section & s = g_options.pull_section("global");
 				OptionsCtrl om(s);
 				break;
 			}
-			case FullscreenMenuMain::MenuTarget::kReadme: {
+			case FullscreenMenuBase::MenuTarget::kReadme: {
 				FullscreenMenuFileView ff("txts/README.lua");
-				ff.run();
+				ff.run<FullscreenMenuBase::MenuTarget>();
 				break;
 			}
-			case FullscreenMenuMain::MenuTarget::kLicense: {
-				FullscreenMenuFileView ff("txts/license");
-				ff.run();
+			case FullscreenMenuBase::MenuTarget::kLicense: {
+				FullscreenMenuFileView ff("txts/LICENSE.lua");
+				ff.run<FullscreenMenuBase::MenuTarget>();
 				break;
 			}
-			case FullscreenMenuMain::MenuTarget::kAuthors: {
-				FullscreenMenuFileView ff("txts/developers");
-				ff.run();
+			case FullscreenMenuBase::MenuTarget::kAuthors: {
+				FullscreenMenuFileView ff("txts/AUTHORS.lua");
+				ff.run<FullscreenMenuBase::MenuTarget>();
 				break;
 			}
-			case FullscreenMenuMain::MenuTarget::kEditor:
+			case FullscreenMenuBase::MenuTarget::kEditor:
 				EditorInteractive::run_editor(m_filename, m_script_to_run);
 				break;
 			default:
-			case FullscreenMenuMain::MenuTarget::kExit:
+			case FullscreenMenuBase::MenuTarget::kExit:
 				return;
 			}
 		} catch (const WLWarning & e) {
@@ -1137,7 +1120,7 @@ void WLApplication::mainmenu_tutorial()
 		//  Start UI for the tutorials.
 		FullscreenMenuCampaignMapSelect select_campaignmap(true);
 		select_campaignmap.set_campaign(0);
-		if (select_campaignmap.run() > 0) {
+		if (select_campaignmap.run<FullscreenMenuBase::MenuTarget>() == FullscreenMenuBase::MenuTarget::kOk) {
 			filename = select_campaignmap.get_map();
 		}
 	try {
@@ -1158,26 +1141,27 @@ void WLApplication::mainmenu_tutorial()
  */
 void WLApplication::mainmenu_singleplayer()
 {
-	//  This is the code returned by UI::Panel::run() when the panel is dying.
+	//  This is the code returned by UI::Panel::run<Returncode>() when the panel is dying.
 	//  Make sure that the program exits when the window manager says so.
 	static_assert
-		(static_cast<int32_t>(FullscreenMenuSinglePlayer::MenuTarget::kBack) == UI::Panel::dying_code,
+		(static_cast<int>(FullscreenMenuBase::MenuTarget::kBack)
+		 == static_cast<int>(UI::Panel::Returncodes::kBack),
 		 "Panel should be dying.");
 
 	for (;;) {
 		FullscreenMenuSinglePlayer single_player_menu;
-		switch (static_cast<FullscreenMenuSinglePlayer::MenuTarget>(single_player_menu.run())) {
-		case FullscreenMenuSinglePlayer::MenuTarget::kBack:
+		switch (single_player_menu.run<FullscreenMenuBase::MenuTarget>()) {
+		case FullscreenMenuBase::MenuTarget::kBack:
 			return;
-		case FullscreenMenuSinglePlayer::MenuTarget::kNewGame:
+		case FullscreenMenuBase::MenuTarget::kNewGame:
 			if (new_game())
 				return;
 			break;
-		case FullscreenMenuSinglePlayer::MenuTarget::kLoadGame:
+		case FullscreenMenuBase::MenuTarget::kLoadGame:
 			if (load_game())
 				return;
 			break;
-		case FullscreenMenuSinglePlayer::MenuTarget::kCampaign:
+		case FullscreenMenuBase::MenuTarget::kCampaign:
 			if (campaign_game())
 				return;
 			break;
@@ -1194,17 +1178,17 @@ void WLApplication::mainmenu_singleplayer()
  */
 void WLApplication::mainmenu_multiplayer()
 {
-	int32_t menu_result = FullscreenMenuNetSetupLAN::JOINGAME; // dummy init;
+	FullscreenMenuBase::MenuTarget menu_result = FullscreenMenuBase::MenuTarget::kJoingame; // dummy init;
 	for (;;) { // stay in menu until player clicks "back" button
 		bool internet = false;
 		FullscreenMenuMultiPlayer mp;
-		switch (static_cast<FullscreenMenuMultiPlayer::MenuTarget>(mp.run())) {
-			case FullscreenMenuMultiPlayer::MenuTarget::kBack:
+		switch (mp.run<FullscreenMenuBase::MenuTarget>()) {
+			case FullscreenMenuBase::MenuTarget::kBack:
 				return;
-			case FullscreenMenuMultiPlayer::MenuTarget::kMetaserver:
+			case FullscreenMenuBase::MenuTarget::kMetaserver:
 				internet = true;
 				break;
-			case FullscreenMenuMultiPlayer::MenuTarget::kLan:
+			case FullscreenMenuBase::MenuTarget::kLan:
 				break;
 			default:
 				assert(false);
@@ -1224,7 +1208,7 @@ void WLApplication::mainmenu_multiplayer()
 
 			// reinitalise in every run, else graphics look strange
 			FullscreenMenuInternetLobby ns(playername.c_str(), password.c_str(), registered);
-			ns.run();
+			ns.run<FullscreenMenuBase::MenuTarget>();
 
 			if (InternetGaming::ref().logged_in())
 				// logout of the metaserver
@@ -1235,19 +1219,19 @@ void WLApplication::mainmenu_multiplayer()
 		} else {
 			// reinitalise in every run, else graphics look strange
 			FullscreenMenuNetSetupLAN ns;
-			menu_result = ns.run();
+			menu_result = ns.run<FullscreenMenuBase::MenuTarget>();
 			std::string playername = ns.get_playername();
 			uint32_t addr;
 			uint16_t port;
 			bool const host_address = ns.get_host_address(addr, port);
 
 			switch (menu_result) {
-				case FullscreenMenuNetSetupLAN::HOSTGAME: {
+				case FullscreenMenuBase::MenuTarget::kHostgame: {
 					NetHost netgame(playername);
 					netgame.run();
 					break;
 				}
-				case FullscreenMenuNetSetupLAN::JOINGAME: {
+				case FullscreenMenuBase::MenuTarget::kJoingame: {
 					IPaddress peer;
 
 					if (!host_address)
@@ -1280,12 +1264,13 @@ bool WLApplication::new_game()
 {
 	SinglePlayerGameSettingsProvider sp;
 	FullscreenMenuLaunchSPG lgm(&sp);
-	const int32_t code = lgm.run();
+	const FullscreenMenuBase::MenuTarget code = lgm.run<FullscreenMenuBase::MenuTarget>();
 	Widelands::Game game;
 
-	if (code <= 0)
+	if (code == FullscreenMenuBase::MenuTarget::kBack) {
 		return false;
-	if (code == 2) { // scenario
+	}
+	if (code == FullscreenMenuBase::MenuTarget::kScenarioGame) { // scenario
 		try {
 			game.run_splayer_scenario_direct(sp.get_map().c_str(), "");
 		} catch (const std::exception & e) {
@@ -1343,7 +1328,7 @@ bool WLApplication::load_game()
 	SinglePlayerGameSettingsProvider sp;
 	FullscreenMenuLoadGame ssg(game, &sp, nullptr);
 
-	if (ssg.run() > 0)
+	if (ssg.run<FullscreenMenuBase::MenuTarget>() == FullscreenMenuBase::MenuTarget::kOk)
 		filename = ssg.filename();
 	else
 		return false;
@@ -1375,7 +1360,7 @@ bool WLApplication::campaign_game()
 		int32_t campaign;
 		{ //  First start UI for selecting the campaign.
 			FullscreenMenuCampaignSelect select_campaign;
-			if (select_campaign.run() > 0)
+			if (select_campaign.run<FullscreenMenuBase::MenuTarget>() == FullscreenMenuBase::MenuTarget::kOk)
 				campaign = select_campaign.get_campaign();
 			else { //  back was pressed
 				filename = "";
@@ -1385,7 +1370,7 @@ bool WLApplication::campaign_game()
 		//  Then start UI for the selected campaign.
 		FullscreenMenuCampaignMapSelect select_campaignmap;
 		select_campaignmap.set_campaign(campaign);
-		if (select_campaignmap.run() > 0) {
+		if (select_campaignmap.run<FullscreenMenuBase::MenuTarget>() == FullscreenMenuBase::MenuTarget::kOk) {
 			filename = select_campaignmap.get_map();
 			break;
 		}
@@ -1411,7 +1396,7 @@ void WLApplication::replay()
 	if (m_filename.empty()) {
 		SinglePlayerGameSettingsProvider sp;
 		FullscreenMenuLoadGame rm(game, &sp, nullptr, true);
-		if (rm.run() <= 0)
+		if (rm.run<FullscreenMenuBase::MenuTarget>() == FullscreenMenuBase::MenuTarget::kBack)
 			return;
 
 		m_filename = rm.filename();

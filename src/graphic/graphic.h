@@ -35,7 +35,7 @@ class StreamWrite;
 
 // Will be send whenever the resolution changes.
 struct GraphicResolutionChanged {
-	CAN_BE_SEND_AS_NOTE(NoteId::GraphicResolutionChanged)
+	CAN_BE_SENT_AS_NOTE(NoteId::GraphicResolutionChanged)
 
 	// New width and height in pixels.
 	int width;

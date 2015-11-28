@@ -31,7 +31,7 @@ FullscreenMenuMain::FullscreenMenuMain() :
 	// Buttons
 	// This box needs to be a bit higher than in the other menus, because we have a lot of buttons
 	vbox(this, m_box_x, m_box_y - m_buth, UI::Box::Vertical,
-		  m_butw, get_h() - vbox.get_y(), m_padding),
+		  m_butw, get_h() - (m_box_y - m_buth), m_padding),
 	playtutorial
 		(&vbox, "play_tutorial", 0, 0, m_butw, m_buth, g_gr->images().get(m_button_background),
 		 _("Play Tutorial"), "", true, false),
@@ -82,44 +82,44 @@ FullscreenMenuMain::FullscreenMenuMain() :
 {
 	playtutorial.sigclicked.connect
 		(boost::bind
-			 (&FullscreenMenuMain::end_modal, boost::ref(*this),
-			  static_cast<int32_t>(MenuTarget::kTutorial)));
+			 (&FullscreenMenuMain::end_modal<FullscreenMenuBase::MenuTarget>, boost::ref(*this),
+			  FullscreenMenuBase::MenuTarget::kTutorial));
 	singleplayer.sigclicked.connect
 		(boost::bind
-			 (&FullscreenMenuMain::end_modal, boost::ref(*this),
-			  static_cast<int32_t>(MenuTarget::kSinglePlayer)));
+			 (&FullscreenMenuMain::end_modal<FullscreenMenuBase::MenuTarget>, boost::ref(*this),
+			  FullscreenMenuBase::MenuTarget::kSinglePlayer));
 	multiplayer.sigclicked.connect
 		(boost::bind
-			 (&FullscreenMenuMain::end_modal, boost::ref(*this),
-			  static_cast<int32_t>(MenuTarget::kMultiplayer)));
+			 (&FullscreenMenuMain::end_modal<FullscreenMenuBase::MenuTarget>, boost::ref(*this),
+			  FullscreenMenuBase::MenuTarget::kMultiplayer));
 	replay.sigclicked.connect
 		(boost::bind
-			 (&FullscreenMenuMain::end_modal, boost::ref(*this),
-			  static_cast<int32_t>(MenuTarget::kReplay)));
+			 (&FullscreenMenuMain::end_modal<FullscreenMenuBase::MenuTarget>, boost::ref(*this),
+			  FullscreenMenuBase::MenuTarget::kReplay));
 	editor.sigclicked.connect
 		(boost::bind
-			 (&FullscreenMenuMain::end_modal, boost::ref(*this),
-			  static_cast<int32_t>(MenuTarget::kEditor)));
+			 (&FullscreenMenuMain::end_modal<FullscreenMenuBase::MenuTarget>, boost::ref(*this),
+			  FullscreenMenuBase::MenuTarget::kEditor));
 	options.sigclicked.connect
 		(boost::bind
-			 (&FullscreenMenuMain::end_modal, boost::ref(*this),
-			  static_cast<int32_t>(MenuTarget::kOptions)));
+			 (&FullscreenMenuMain::end_modal<FullscreenMenuBase::MenuTarget>, boost::ref(*this),
+			  FullscreenMenuBase::MenuTarget::kOptions));
 	readme.sigclicked.connect
 		(boost::bind
-			 (&FullscreenMenuMain::end_modal, boost::ref(*this),
-			  static_cast<int32_t>(MenuTarget::kReadme)));
+			 (&FullscreenMenuMain::end_modal<FullscreenMenuBase::MenuTarget>, boost::ref(*this),
+			  FullscreenMenuBase::MenuTarget::kReadme));
 	license.sigclicked.connect
 		(boost::bind
-			 (&FullscreenMenuMain::end_modal, boost::ref(*this),
-			  static_cast<int32_t>(MenuTarget::kLicense)));
+			 (&FullscreenMenuMain::end_modal<FullscreenMenuBase::MenuTarget>, boost::ref(*this),
+			  FullscreenMenuBase::MenuTarget::kLicense));
 	authors.sigclicked.connect
 		(boost::bind
-			 (&FullscreenMenuMain::end_modal, boost::ref(*this),
-			  static_cast<int32_t>(MenuTarget::kAuthors)));
+			 (&FullscreenMenuMain::end_modal<FullscreenMenuBase::MenuTarget>, boost::ref(*this),
+			  FullscreenMenuBase::MenuTarget::kAuthors));
 	exit.sigclicked.connect
 		(boost::bind
-			 (&FullscreenMenuMain::end_modal, boost::ref(*this),
-			  static_cast<int32_t>(MenuTarget::kExit)));
+			 (&FullscreenMenuMain::end_modal<FullscreenMenuBase::MenuTarget>, boost::ref(*this),
+			  FullscreenMenuBase::MenuTarget::kExit));
 
 	vbox.add(&playtutorial, UI::Box::AlignCenter);
 
@@ -149,3 +149,8 @@ FullscreenMenuMain::FullscreenMenuMain() :
 
 	vbox.set_size(m_butw, get_h() - vbox.get_y());
 }
+
+void FullscreenMenuMain::clicked_ok() {
+	; // do nothing
+}
+

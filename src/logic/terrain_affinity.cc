@@ -54,7 +54,7 @@ TerrainAffinity::TerrainAffinity(const LuaTable& table, const std::string& immov
 		throw GameDataError("%s: pickiness is not in [0, 1].", immovable_name.c_str());
 	}
 	if (preferred_temperature_ < 0) {
-		throw GameDataError("%s: preferred_temperature is not in Kelvin.", immovable_name.c_str());
+		throw GameDataError("%s: preferred_temperature is not possible.", immovable_name.c_str());
 	}
 }
 
@@ -84,7 +84,7 @@ double probability_to_grow(const TerrainAffinity& affinity,
 
 	const auto average = [&terrain_humidity, &terrain_fertility, &terrain_temperature, &terrains](
 	   const int terrain_index) {
-		const TerrainDescription& t = terrains.get_unmutable(terrain_index);
+		const TerrainDescription& t = terrains.get(terrain_index);
 		terrain_humidity += t.humidity() / 6.;
 		terrain_temperature += t.temperature() / 6.;
 		terrain_fertility += t.fertility() / 6.;

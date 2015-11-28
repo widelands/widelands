@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2003, 2006-2011, 2013 by the Widelands Development Team
+ * Copyright (C) 2002-2003, 2006-2011, 2013, 2015 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -39,11 +39,10 @@
 #include "graphic/graphic.h"
 #include "logic/map.h"
 #include "logic/player.h"
-#include "logic/tribe.h"
+#include "logic/tribes/tribes.h"
 #include "logic/world/resource_description.h"
 #include "logic/world/world.h"
 #include "map_io/widelands_map_loader.h"
-#include "profile/profile.h"
 #include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
 #include "ui_basic/messagebox.h"
@@ -59,11 +58,8 @@ using Widelands::Building;
 
 // Load all tribes from disk.
 void load_all_tribes(Widelands::EditorGameBase* egbase, UI::ProgressWindow* loader_ui) {
-	for (const std::string& tribename : Widelands::TribeDescr::get_all_tribenames()) {
-		ScopedTimer timer((boost::format("Loading %s took %%ums.") % tribename).str());
-		loader_ui->stepf(_("Loading tribe: %s"), tribename.c_str());
-		egbase->manually_load_tribe(tribename);
-	}
+	loader_ui->step(_("Loading tribes"));
+	egbase->tribes();
 }
 
 }  // namespace
@@ -71,7 +67,7 @@ void load_all_tribes(Widelands::EditorGameBase* egbase, UI::ProgressWindow* load
 EditorInteractive::EditorInteractive(Widelands::EditorGameBase & e) :
 	InteractiveBase(e, g_options.pull_section("global")),
 	m_need_save(false),
-	m_realtime(WLApplication::get()->get_time()),
+	m_realtime(SDL_GetTicks()),
 	m_left_mouse_button_is_down(false),
 	m_history(m_undo, m_redo),
 
@@ -207,7 +203,7 @@ void EditorInteractive::load(const std::string & filename) {
 	}
 
 	ml->load_map_complete(egbase(), true);
-	loader_ui.step(_("Loading graphics..."));
+
 	egbase().load_graphics(loader_ui);
 
 	register_overlays();
@@ -236,13 +232,11 @@ void EditorInteractive::start() {
 void EditorInteractive::think() {
 	InteractiveBase::think();
 
-	int32_t lasttime = m_realtime;
-	int32_t frametime;
+	uint32_t lasttime = m_realtime;
 
-	m_realtime = WLApplication::get()->get_time();
-	frametime = m_realtime - lasttime;
+	m_realtime = SDL_GetTicks();
 
-	egbase().get_gametime_pointer() += frametime;
+	egbase().get_gametime_pointer() += m_realtime - lasttime;
 }
 
 
@@ -250,18 +244,18 @@ void EditorInteractive::think() {
 void EditorInteractive::exit() {
 	if (m_need_save) {
 		if (get_key_state(SDL_SCANCODE_LCTRL) || get_key_state(SDL_SCANCODE_RCTRL)) {
-			end_modal(0);
+			end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack);
 		} else {
 			UI::WLMessageBox mmb
 			(this,
 			 _("Unsaved Map"),
 			 _("The map has not been saved, do you really want to quit?"),
-			 UI::WLMessageBox::YESNO);
-			if (mmb.run() == 0)
+			 UI::WLMessageBox::MBoxType::kOkCancel);
+			if (mmb.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kBack)
 				return;
 		}
 	}
-	end_modal(0);
+	end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack);
 }
 
 void EditorInteractive::toggle_mainmenu() {
@@ -335,6 +329,7 @@ void EditorInteractive::toolsize_menu_btn() {
 
 void EditorInteractive::set_sel_radius_and_update_menu(uint32_t const val) {
 	if (tools.current().has_size_one()) {
+		set_sel_radius(0);
 		return;
 	}
 	if (UI::UniqueWindow * const w = m_toolsizemenu.window) {
@@ -497,8 +492,18 @@ bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 void EditorInteractive::select_tool
 (EditorTool & primary, EditorTool::ToolIndex const which) {
 	if (which == EditorTool::First && & primary != tools.current_pointer) {
-		if (primary.has_size_one())
-			set_sel_radius_and_update_menu(0);
+		if (primary.has_size_one()) {
+			set_sel_radius(0);
+			if (UI::UniqueWindow * const w = m_toolsizemenu.window) {
+				EditorToolsizeMenu& toolsize_menu = dynamic_cast<EditorToolsizeMenu&>(*w);
+				toolsize_menu.set_buttons_enabled(false);
+			}
+		} else {
+			if (UI::UniqueWindow * const w = m_toolsizemenu.window) {
+				EditorToolsizeMenu& toolsize_menu = dynamic_cast<EditorToolsizeMenu&>(*w);
+				toolsize_menu.update(toolsize_menu.value());
+			}
+		}
 		Widelands::Map & map = egbase().map();
 		//  A new tool has been selected. Remove all registered overlay callback
 		//  functions.
@@ -588,12 +593,12 @@ void EditorInteractive::run_editor(const std::string& filename, const std::strin
 				   editor.world(),
 				   64,
 				   64,
+					/** TRANSLATORS: Default name for new map */
 				   _("No Name"),
-				   g_options.pull_section("global").get_string("realname", _("Unknown")));
+					g_options.pull_section("global").get_string("realname", pgettext("map_name", "Unknown")));
 
 				load_all_tribes(&editor, &loader_ui);
 
-				loader_ui.step(_("Loading graphics..."));
 				editor.load_graphics(loader_ui);
 				loader_ui.step(std::string());
 			} else {
@@ -611,7 +616,7 @@ void EditorInteractive::run_editor(const std::string& filename, const std::strin
 			eia.egbase().lua().run_script(script_to_run);
 		}
 	}
-	eia.run();
+	eia.run<UI::Panel::Returncodes>();
 
 	editor.cleanup_objects();
 }

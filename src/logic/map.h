@@ -70,7 +70,7 @@ struct Path;
 class Immovable;
 
 struct NoteFieldTransformed {
-	CAN_BE_SEND_AS_NOTE(NoteId::FieldTransformed)
+	CAN_BE_SENT_AS_NOTE(NoteId::FieldTransformed)
 
 	FCoords fc;
 	MapIndex map_index;
@@ -178,7 +178,7 @@ public:
 	    uint32_t w = 64,
 	    uint32_t h = 64,
 		 const std::string& name = _("No Name"),
-		 const std::string& author = _("Unknown"),
+		 const std::string& author = pgettext("author_name", "Unknown"),
 		 const std::string& description = _("No description defined"));
 
 	void recalc_whole_map(const World& world);
@@ -200,11 +200,14 @@ public:
 	void set_hint       (const std::string& hint);
 	void set_background (const std::string& image_path);
 	void add_tag        (const std::string& tag);
+	void delete_tag     (const std::string& tag);
 	void set_scenario_types(ScenarioTypes t) {m_scenario_types = t;}
 
 	// Allows access to the filesystem of the map to access auxiliary files.
 	// This can be nullptr if this file is new.
 	FileSystem* filesystem() const;
+	// swap the filesystem after load / save
+	void swap_filesystem(std::unique_ptr<FileSystem>& fs);
 
 	// informational functions
 	const std::string& get_filename()    const {return m_filename;}
@@ -216,7 +219,8 @@ public:
 
 	using Tags = std::set<std::string>;
 	const Tags & get_tags() const {return m_tags;}
-	bool has_tag(std::string & s) const {return m_tags.count(s);}
+	void clear_tags() {m_tags.clear();}
+	bool has_tag(const std::string& s) const {return m_tags.count(s);}
 
 	const std::vector<SuggestedTeamLineup>& get_suggested_teams() const {return m_suggested_teams;}
 
@@ -366,7 +370,7 @@ public:
 	uint32_t set_height(const World& world, Area<FCoords>, HeightInterval height_interval);
 
 	//  change terrain of a triangle, recalculate buildcaps
-	int32_t change_terrain(const World& world, TCoords<FCoords>, TerrainIndex);
+	int32_t change_terrain(const World& world, TCoords<FCoords>, DescriptionIndex);
 
 	// The objectives that are defined in this map if it is a scenario.
 	const Objectives& objectives() const {
@@ -383,10 +387,12 @@ public:
 	void set_origin(Coords);
 
 	/// Port space specific functions
-	bool is_port_space(const Coords& c);
+	bool is_port_space(const Coords& c) const;
 	void set_port_space(Coords c, bool allowed);
-	const PortSpacesSet& get_port_spaces() {return m_port_spaces;}
+	const PortSpacesSet& get_port_spaces() const {return m_port_spaces;}
 	std::vector<Coords> find_portdock(const Widelands::Coords& c) const;
+	bool allows_seafaring();
+	bool has_artifacts(const World& world);
 
 protected: /// These functions are needed in Testclasses
 	void set_size(uint32_t w, uint32_t h);

@@ -26,11 +26,14 @@
 
 #include <SDL_ttf.h>
 #include <boost/algorithm/string.hpp>
+#include <boost/format.hpp>
 
 #include "base/log.h"
 #include "base/wexception.h"
+#include "graphic/font_handler1.h" // We need the fontset for the BiDi algorithm
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
+#include "graphic/text/bidi.h"
 #include "graphic/texture.h"
 #include "graphic/wordwrap.h"
 
@@ -174,11 +177,16 @@ void FontHandler::Data::render_line(LineCacheEntry & lce)
 {
 	TTF_Font * font = lce.style.font->get_ttf_font();
 	SDL_Color sdl_fg = {lce.style.fg.r, lce.style.fg.g, lce.style.fg.b, SDL_ALPHA_OPAQUE};
+	std::string renderme = i18n::make_ligatures(lce.text.c_str());
+
+	if (i18n::has_rtl_character(lce.text.c_str())) {
+		renderme = i18n::line2bidi(renderme.c_str());
+	}
 
 	// Work around an Issue in SDL_TTF that dies when the surface
 	// has zero width
 	int width = 0;
-	if (TTF_SizeUTF8(font, lce.text.c_str(), &width, nullptr) < 0 || !width) {
+	if (TTF_SizeUTF8(font, renderme.c_str(), &width, nullptr) < 0 || !width) {
 		lce.width = 0;
 		lce.height = TTF_FontHeight(font);
 		return;
@@ -186,12 +194,12 @@ void FontHandler::Data::render_line(LineCacheEntry & lce)
 
 	lce.style.setup();
 
-	SDL_Surface* text_surface = TTF_RenderUTF8_Blended(font, lce.text.c_str(), sdl_fg);
+	SDL_Surface* text_surface = TTF_RenderUTF8_Blended(font, renderme.c_str(), sdl_fg);
 	if (!text_surface) {
 		log
 			("FontHandler::render_line, an error : %s\n",
 			 TTF_GetError());
-		log("Text was: '%s'\n", lce.text.c_str());
+		log("Text was: '%s'\n", renderme.c_str());
 		return;
 	}
 
@@ -214,6 +222,7 @@ void FontHandler::draw_text
 	// Erase every backslash in front of brackets
 	std::string copytext = boost::replace_all_copy(text, "\\<", "<");
 	boost::replace_all(copytext, "\\>", ">");
+	copytext = i18n::make_ligatures(copytext.c_str());
 	const LineCacheEntry & lce = d->get_line(style, copytext);
 
 	UI::correct_for_align(align, lce.width + 2 * LINE_MARGIN, lce.height, &dstpoint);

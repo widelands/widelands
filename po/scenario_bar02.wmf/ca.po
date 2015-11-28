@@ -2,14 +2,17 @@
 # Copyright (C) 2005-2015 Widelands Development Team
 # 
 # Translators:
+# Juanjo, 2015
+# Juanjo, 2015
+# Juanjo, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-02-07 14:46+0000\n"
-"PO-Revision-Date: 2015-02-03 15:15+0000\n"
-"Last-Translator: GunChleoc\n"
-"Language-Team: Catalan (http://www.transifex.com/projects/p/widelands/language/ca/)\n"
+"POT-Creation-Date: 2015-11-07 08:28+0000\n"
+"PO-Revision-Date: 2015-11-06 17:10+0000\n"
+"Last-Translator: Juanjo\n"
+"Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -19,124 +22,125 @@ msgstr ""
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:21
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:23
 msgid "Build up a small food economy"
-msgstr ""
+msgstr "Construïu els edificis per proveir-vos d'aliments bàsics"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:24
 msgid "Build up a basic food economy to provide your people with food."
-msgstr ""
+msgstr "Construïu l'estructura bàsica per proveir la vostra gent de menjar."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:26
 msgid "Build a fisher’s hut"
-msgstr ""
+msgstr "Construïu una barraca de pescador"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:27
 msgid "Build a hunter’s hut"
-msgstr ""
+msgstr "Construïu una cabana de caçador"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:28
 msgid "Build a well"
-msgstr ""
+msgstr "Construïu un pou"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:29
 msgid "Build a farm"
-msgstr ""
+msgstr "Construïu una granja"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:30
 msgid "Build a bakery"
-msgstr ""
+msgstr "Construïu una fleca"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:35
 msgid "Build a cattle farm"
-msgstr ""
+msgstr "Construïu una granja de bous"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:37
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:40
 msgid "Remember to build a cattle farm"
-msgstr ""
+msgstr "Recordeu-vos-en de construir una granja de bous"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:38
 msgid ""
 "As your roads grow longer and your economy bigger, you should make good use "
 "of your oxen to help transport wares more quickly."
-msgstr ""
+msgstr "Tal com creixen la colònia i els seus camins, hauríeu de fer un bon ús dels bous per ajudar a transportar béns més ràpidament."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:46
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:48
-msgid "Build a donjon"
-msgstr ""
+msgid "Build a tower"
+msgstr "Construïu una torre"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:49
 msgid ""
-"Build a donjon at the north-east border of your territory to get greater "
+"Build a tower at the north-east border of your territory to get greater "
 "visual range and to protect your people from sudden attacks by enemies."
-msgstr ""
+msgstr "Construïu una torre a la frontera nord-est del vostre territori per aconseguir un major rang visual i protegir l'assentament d'atacs imprevistos."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:54
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:56
 msgid "Explore further"
-msgstr ""
+msgstr "Exploreu més lluny"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:57
 msgid ""
 "Build more military buildings to explore the area around the headquarters "
 "and to ensure the safety of your people."
-msgstr ""
+msgstr "Construïu més edificis militars per explorar l'àrea del voltant del quarter general i assegureu la protecció de la vostra gent."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:62
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:64
 msgid "Build a mining infrastructure"
-msgstr ""
+msgstr "Construïu una infraestructura minera"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:65
 msgid ""
 "Expand your territory to the mountains, send geologists to search for ore "
 "and coal and build a mining economy with mines, taverns, smelting works and "
 "metal workshop."
-msgstr ""
+msgstr "Expandiu el vostre territori a les muntanyes, envieu-hi geòlegs per buscar carbó i minerals. Construïu una economia amb mines, tavernes i forns i tallers de metall."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:70
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:72
 msgid "Build a fortress"
-msgstr ""
+msgstr "Construïu una fortalesa"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:73
 msgid "Build a fortress to the east of the mountains."
-msgstr ""
+msgstr "Construïu una fortalesa a l'est de les muntanyes."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:78
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:80
 msgid "Build a training infrastructure"
-msgstr ""
+msgstr "Construïu una infraestructura d'entrenament"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:81
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:101
 msgid "Build a battle arena and a training camp to the west of the mountains."
-msgstr ""
+msgstr "Construïu una palestra d'entrenament i un camp d'entrenament a l'oest de les muntanyes."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:82
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:112
 msgid ""
-"Enhance your metal workshop to an axfactory in order to produce weapons, and"
-" build up a second metal workshop to ensure the production of tools. When "
-"the blacksmith reaches his next level (master blacksmith), you can even "
-"enhance the axfactory to a war mill, which will produce additional weapons."
-msgstr ""
+"Enhance your metal workshop to an ax workshop in order to produce weapons, "
+"and build up a second metal workshop to ensure the production of tools. When"
+" the blacksmith reaches his next level (master blacksmith), you can even "
+"enhance the ax workshop to a war mill, which will produce additional "
+"weapons."
+msgstr "Milloreu el taller de metall a fàbrica de destrals per produir armes i construïu un altre taller de metall per assegurar la producció d'eines. Quan el forjador arribi al següent nivell (mestre forjador), llavors podeu millorar la fàbrica de destrals a taller de guerra, que produirà armes addicionals."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:83
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:120
 msgid ""
 "Build a helm smithy to the west of the mountains to provide your soldiers "
 "with better armor."
-msgstr ""
+msgstr "Construïu un taller de cascos a l'oest de les muntanyes i proveïu els vostres soldats amb les millors armadures."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:89
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:91
 msgid "Build a warehouse"
-msgstr ""
+msgstr "Construïu un magatzem"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:92
 msgid "Build a warehouse to the west of the mountains."
-msgstr ""
+msgstr "Construïu un magatzem a l'oest de les muntanyes."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:93
 msgid ""
@@ -144,42 +148,42 @@ msgid ""
 "they aren’t defended by soldiers. It is often wise to build a warehouse when"
 " your territory is growing and the paths to your headquarters get longer and"
 " longer."
-msgstr ""
+msgstr "Els magatzems s'assemblen al quarter general, amb la diferència que no són defensats per soldats. És recomanable construir un magatzem quan el territori està creixent i els camins fins al quarter general es fan més i més llargs."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:98
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:100
 msgid "Build training sites"
-msgstr ""
+msgstr "Construïu llocs d'entrenaments"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:102
 msgid ""
 "Training sites like a training camp or a battle arena are used for training "
 "soldiers in their different attributes. These attributes are important in "
 "fights and the better a soldier is, the higher is the chance to win a fight."
-msgstr ""
+msgstr "Els llocs d'entrenament (edificis com el camp d'entrenament o la palestra) els usen els soldats per millorar les seves característiques. Aquestes característiques són importants durant la lluita i com millor sigui un soldat major és la probabilitat de guanyar una lluita."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:104
 msgid "The attributes are: health, attack, defense and evade."
-msgstr ""
+msgstr "Els atributs són: salut, atac, defensa i evasió."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:109
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:111
 msgid "Build weapons production"
-msgstr ""
+msgstr "Construïu indústries d'armes*"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:117
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:119
 msgid "Build a helm smithy"
-msgstr ""
+msgstr "Construïu un taller de cascos"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:125
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:127
 msgid "Destroy Kalitath’s army"
-msgstr ""
+msgstr "Destruïu l'exèrcit d'en Kalitath"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:128
 msgid "Destroy Kalitath’s army and expand your territory to the east."
-msgstr ""
+msgstr "Destruïu l'exèrcit d'en Kalitath i expandiu el vostre territori cap a l'est."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:129
 msgid ""
@@ -187,48 +191,51 @@ msgid ""
 "building. A menu will pop up allowing you to select the number of soldiers "
 "that should attack. When you are ready with setting the number, click on the"
 " cross (‘Start Attack’)."
-msgstr ""
+msgstr "Per atacar un enemic, heu de clicar a la porta de l'edifici militar de l'adversari. Apareixerà un menú, permetent-vos seleccionar quants soldats han d'atacar. Quan hagueu escollit el nombre, cliqueu la creu («Comença l'atac»)."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:134
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:136
 msgid "Military assault on Al’thunran"
-msgstr ""
+msgstr "Assalt militar a Al'thunran"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:137
 msgid ""
 "Destroy all forces of Thron’s two brothers to liberate the throne-circle."
-msgstr ""
+msgstr "Destruïu totes les forces dels dos germans d'en Thron per alliberar el cercle del tron."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:145
 msgid "Close to Home"
-msgstr ""
+msgstr "A prop de casa"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:146
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:155
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:290
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:157
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:313
 msgid "Thron looks worried…"
-msgstr ""
+msgstr "En Thron sembla preocupat..."
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:147
+#. TRANSLATORS: Thron
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:148
 msgid ""
 "These last days, we came closer to our capital. Many people have already "
 "joined us on our march and set their hopes on me. However, I fear that we "
 "are not strong enough to take up the battle against my brothers."
-msgstr ""
+msgstr "Aquests últims dies ens hem apropat a la nostra capital. Part de la població se'ns ha unit i han posat les seves esperances en la nostra causa. No obstant, em temo que no som prou forts per emprendre la batalla final contra els meus germans."
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:149
+#. TRANSLATORS: Thron
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:151
 msgid ""
 "For now, we are resting at the borders of the old forest and preparing for "
 "the coming days."
-msgstr ""
-
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:154
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:175
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:289
-msgid "Another Cold Day"
-msgstr ""
+msgstr "Per ara, ens quedarem a la vora del vell bosc, preparant-nos pels dies que vindran."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:156
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:180
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:312
+msgid "Another Cold Day"
+msgstr "Un altre dia fred"
+
+#. TRANSLATORS: Thron
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:159
 msgid ""
 "The news that a patrol brought is not good to hear. Our spies tell us that "
 "the war tribes still rage in battle, but some of the elder soldiers and "
@@ -236,17 +243,18 @@ msgid ""
 " is the first war leader to leave Al’thunran, thus leaving his side weak and"
 " vulnerable. As my scouts report, he has set foot on the lower grounds "
 "around the capital, securing the outer fortification rings."
-msgstr ""
+msgstr "Notícies com les que ens ha portat la patrulla no són bones d'escoltar. Els nostres espies diuen que les batalles de la guerra de clans encara continua. Però alguns dels soldats i líders més ancians semblen cansats d'aquesta guerra sense sentit. Kalitath, fill d'en Kun és el primer líder de la guerra en perdre Al'thunran, cosa que deixa aquest flanc dèbil i vulnerable. Tal i com m'informen els exploradors, ell està en els terrenys més baixos al voltant de la capital, assegurant les fortaleses exteriors."
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:161
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:164
 msgid "Doubts"
-msgstr ""
+msgstr "Dubtes"
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:162
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:165
 msgid "Boldreth is shaking his head…"
-msgstr ""
+msgstr "En Boldreth nega amb el cap..."
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:163
+#. TRANSLATORS: Boldreth
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:167
 msgid ""
 "Thron seeks to believe that Kalitath is tired of fighting and would be "
 "willing to join us once we march to re-establish law and order in "
@@ -254,33 +262,35 @@ msgid ""
 "generals of our forces and his family never quite liked the thought of "
 "bowing before the banner of Chat’Karuth. Why should he march with "
 "Chat’Karuth’s son to reclaim his heritage and the throne?"
-msgstr ""
+msgstr "En Thron vol creure que en Kalitath està cansat de la lluita i voldria unir-se a nosaltres un cop comencem a marxar per restablir la llei i l'ordre en Al'thunran. Però jo no ho crec. En Kalitath és fill d'un dels generals més valents de les nostres forces i la seva família mai ha estat per agenollar-se davant la bandera d'en Chat'Karuth. Per què hauria de marxar amb el fill d'en Chat'Karuth per reclamar l'herència al tron?"
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:168
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:182
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:172
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:188
 msgid "The Story Continues"
-msgstr ""
+msgstr "La història continua"
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:169
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:210
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:232
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:240
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:280
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:173
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:221
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:246
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:255
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:301
 msgid "Boldreth says:"
-msgstr ""
+msgstr "En Boldreth diu:"
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:170
+#. TRANSLATORS: Boldreth
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:175
 msgid ""
 "However, Thron is not willing to listen to my doubts. He seeks to expand our"
 " fortifications to the borders of Kalitath’s territory and to reunite with "
 "his forces. I have to keep an eye on everything that happens here."
-msgstr ""
+msgstr "Tot i això, en Thron no vol escoltar-me. Busca expandir les nostres fortificacions fins a la frontera d'en Kalitath i unir forces. Hauré de tenir un ull obert a veure què passa."
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:176
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:181
 msgid "Thron is speaking confidently."
-msgstr ""
+msgstr "En Thron parla amb seguretat."
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:177
+#. TRANSLATORS: Thron
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:183
 msgid ""
 "The frontier line of my forces has expanded to the edge of the forests. We "
 "have a long and cold winter and so many miles behind us. The fortification "
@@ -288,19 +298,20 @@ msgid ""
 "goods, and once Al’thunran is in my hands, the two cities will be linked by "
 "a good and defensible infrastructure. Still, I hope I will not walk alone on"
 " this mission, I hope Kalitath son of Kun will follow my call."
-msgstr ""
+msgstr "La línia fronterera de les meves forces s'ha expandit cap als boscos. Tenim un hivern llarg i fred i moltes milles per endavant. La fortificació que hem erigit al voltant de l'Ondun ens garantirà un subministrament ràpid d'homes i béns i, un cop l'Al'thunran estigui sota les meves mans, les dues ciutats estaran connectades per infraestructures productives i fàcilment defensables. Tot i això, espero no caminar sol en aquesta missió. Espero que en Kalitath, fill d'en Kun em segueixi quan ho necessiti."
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:183
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:199
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:225
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:258
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:265
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:273
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:301
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:189
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:207
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:238
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:276
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:284
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:293
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:326
 msgid "Thron says:"
-msgstr ""
+msgstr "En Thron diu:"
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:184
+#. TRANSLATORS: Thron
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:191
 msgid ""
 "I have sent men to meet with Kalitath in his fortress. He has barricaded the"
 " former main entrance to the capital and is trying to set up a siege ring "
@@ -308,111 +319,120 @@ msgid ""
 "ring is intact. Until now, he has not answered any of my messages. But the "
 "time I spend waiting won’t be lost. I will further upgrade my soldiers and "
 "prepare for battle."
-msgstr ""
+msgstr "He enviat homes a reunir-se amb en Kalitath a la seva fortalesa. Ha fet una barricada a l'antiga entrada principal de la ciutat i prova de muntar un setge al voltant de l'Al'thunran. No deixarà que entri ni surti ningú de la ciutat mentre duri el setge. Fins ara, no ha contestat els meus missatges. Però el temps que ha passat esperant resposta no ha estat en va. Acabaré d'entrenar els soldats i em prepararé per a la batalla."
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:188
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:195
 msgid "Your Loyal Companion"
-msgstr ""
+msgstr "El vostre lleial company"
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:189
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:196
 msgid "Boldreth shouts out!"
-msgstr ""
+msgstr "En Boldreth crida..."
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:190
+#. TRANSLATORS: Boldreth
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:198
 msgid ""
 "The BASTARD! Only one man of our frontier patrol came back alive. He carried"
 " a message from Kalitath, telling us that he will punish every move of our "
 "troops with their own blood! We cannot accept this behavior. From now on, "
 "there is war between Kalitath and us!"
-msgstr ""
+msgstr "El bastard! Només ha tornat viu un dels homes del control de la frontera. Portava un missatge d'en Kalitath, dient-nos que castigarà tots els moviments de tropes amb la seva sang! No podem acceptar-ho i a partir d'ara estem amb guerra amb en Kalitath!"
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:198
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:206
 msgid "Renegade Fortification"
-msgstr ""
+msgstr "Fortificació renegada"
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:200
+#. TRANSLATORS: Thron
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:209
 msgid ""
 "The traitor left his armies dying where they lay when he saw that he would "
 "not keep my forces back. Kalitath disappeared in the confusion of the war, "
 "but I don’t care now. Shall he flee and be forgotten for all times as a "
 "tribal leader that would not bow before the wooden throne, that is mine to "
 "take now."
-msgstr ""
+msgstr "El traïdor ha deixat els seus exèrcits morint quan ha vist que no podria contenir les nostres forces. En Kalitath ha desaparegut en la confusió de la guerra, però no em preocupa. Que s'escapi i sigui oblidat per sempre com al líder tribal que no s'agenolla davant del tron de fusta, que és meu a partir d'ara."
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:202
+#. TRANSLATORS: Thron
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:212
 msgid ""
 "Furthermore, his flight brought us a great benefit: all year, Kalitath was "
 "so busy fighting that he did not even care to store enough food for all his "
 "men. Now that he has fled, their hunger has caused some of his younger "
 "followers to desert. This group holds a strong fortification on the main "
 "ring."
-msgstr ""
+msgstr "A més a més, la seva fugida ens ha anat bé: en Kalitath ha estat tan ocupat lluitant durant tot l'any que ni tan sols es va preocupar d'aconseguir menjar per a tots els seus homes. Ara que ha fugit, la fam dels seus joves seguidors fa que desertin. Aquest grup té una fortificació a l'anell principal."
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:204
+#. TRANSLATORS: Thron
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:215
 msgid ""
 "But there is more news: My scouts have reported that the two raging tribes "
 "of my brothers are in chaos and have barely noticed the new danger that is "
 "about to strike them. However, they would not care if they noticed I guess, "
 "blinded by rage and hate, there is no sense left in them at all I believe."
-msgstr ""
+msgstr "Però encara hi ha més novetats: els meus exploradors m'han informat que les dues tribus dels meus germans estan lluitant caòticament i no s'han adonat del perill que nosaltres els suposem. No obstant, tampoc es preocuparien si s'adonessin on estem. Estan encegats per l'odi i ràbia i han perdut la raó."
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:209
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:220
 msgid "Winter Ahead"
-msgstr ""
+msgstr "L'hivern a prop"
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:211
+#. TRANSLATORS: Boldreth
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:223
 msgid ""
 "This morning, I found Thron’s mind troubled. He returned from his patrol "
 "late last night and sat back against a tree, watching over the encampment. "
 "The number of quarrels and disputes keeps growing, and the winter has us "
 "firmly in its grip. We should put food in our storage to survive the long, "
 "cold winter!"
-msgstr ""
+msgstr "Aquest matí, he trobat en Thron preocupat. Després de tornar de patrullar ahir per la nit i va asseure's i mirà el campament. El nombre de batalles i disputes continua creixent i l'hivern ens té ben agafats. Hem d'omplir els rebostos per sobreviuré el fred hivern."
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:216
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:228
 msgid "The Advisor"
-msgstr ""
+msgstr "El conseller"
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:217
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:229
 msgid "Khantrukh nods."
-msgstr ""
+msgstr "En Khantrukh assenteix."
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:218
+#. TRANSLATORS: Khantrukh
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:231
 msgid ""
 "Boldreth is right! We don’t have enough food to survive a long, cold winter."
 " We should start building a well, a fisher’s and a hunter’s hut. And if we "
 "find enough space, we should as well build up a farm and a bakery! One of "
 "our farmers seems to be very clever – he already got some crops to grow in "
 "this cold soil."
-msgstr ""
+msgstr "En Boldreth té raó! No tenim prou menjar per sobreviure el llarg i fred hivern. Cal començar construint un pou i cabanes de pescadors i caçadors. I si trobem prou espai, hauríem de construir una granja i una fleca! Un dels nostres grangers sembla ser molt hàbil: ja ha aconseguit fer créixer cultius en aquesta terra freda."
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:224
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:237
 msgid "Food Economy Completed"
-msgstr ""
+msgstr "Indústria d'alimentació completada"
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:226
+#. TRANSLATORS: Thron
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:240
 msgid ""
 "Khantrukh has just informed me that our basic food economy was built up "
 "successfully. Finally, none of us has to fear starvation anymore."
-msgstr ""
+msgstr "En Khantrukh m'acaba d'informar que s'ha acabat de construir l'economia bàsica de producció de menjar. Finalment, cap de nosaltres ha de témer morir de gana."
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:231
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:245
 msgid "Tracks"
-msgstr ""
+msgstr "Vies"
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:233
+#. TRANSLATORS: Boldreth
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:248
 msgid ""
 "Thron told me that he discovered tracks in the snow to the northeast of our "
-"settlement. He has instructed us to build a donjon, to have a greater visual"
+"settlement. He has instructed us to build a tower,  to have a greater visual"
 " range over the area around our hall to protect our people from sudden "
 "attacks."
-msgstr ""
+msgstr "En Thron m'ha dit que ha descobert rastres a la neu cap al nord-est del nostre assentament. Ens ha ordenat construir una torre, per aconseguir un major rang visual dels voltants i protegir la nostra gent d'atacs imprevistos."
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:239
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:254
 msgid "Further Exploration"
-msgstr ""
+msgstr "Exploració llunyana"
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:241
+#. TRANSLATORS: Boldreth
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:257
 msgid ""
 "The first fortification Thron ordered has just been completed. At the "
 "moment, he seeks to bring trust and belief to those who live inside the "
@@ -421,45 +441,49 @@ msgid ""
 "his fears: the forests are deep, and the frontier to Al’thunran is near. I "
 "am sure that there are a thousand greater dangers out there than the unknown"
 " tracks."
-msgstr ""
+msgstr "La primera fortificació que ordenà en Thron ja s'ha completat. Per ara, vol que els soldats vegin que poden viure dins d'aquest estrany habitatge, al qual anomenen «Ondun», que significa «aquells que esperen» en la llengua antiga. Però en Thron no està satisfet i entenc les seves pors: els boscos són profunds i la frontera amb l'Al'thunran està prop. Estic segur que hi ha milers de perills majors que els rastres desconeguts que hem vist fins ara."
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:243
+#. TRANSLATORS: Boldreth
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:260
 msgid ""
 "To overlook more of the area around our hall, we should explore further and "
 "set up more guards and scouts to observe the frontier and keep an eye on the"
 " raging wars on our doorstep. THEN we will be prepared once trouble seeks to"
 " capture our woods."
-msgstr ""
+msgstr "Per veure més lluny, hauríem d'explorar més enllà i guarnir-hi guardes i exploradors per observar la frontera i tenir un ull a sobre de les guerres que es mantenen al costat de casa. Llavors, estarem preparats un cop els problemes truquin a la nostra porta."
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:249
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:266
 msgid "Mountains Found"
-msgstr ""
+msgstr "S'han trobat muntanyes"
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:251
+#. TRANSLATORS: Khantrukh
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:269
 msgid ""
 "I have just spoken to the leader of our patrol. He told me that they found "
 "some mountains to the north-east and east of our territory. With a bit of "
 "luck this will open up a new chance for rearming our men, because as far as "
 "I remember, most of the mountains west of Al’thunran hold coal and some "
 "metal ores."
-msgstr ""
+msgstr "Acabo de parlar amb el líder de la patrulla. M'ha explicat que han trobat més muntanyes al nord-est i a l'est del nostre territori. Amb una mica de sort, això obrirà una nova via per rearmar els homes, perquè, si no recordo malament, moltes de les muntanyes a l'oest de l'Al'thunran amaguen carbó i minerals de metalls."
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:257
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:275
 msgid "Mining Economy Completed"
-msgstr ""
+msgstr "Indústria minera completada"
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:259
+#. TRANSLATORS: Thron
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:278
 msgid ""
 "I just got informed that our mining economy has started its work. This news "
 "brought a smile to my face – even if the hardest part is still waiting to be"
 " done, now that our smiths will give their best to further ease our lives."
-msgstr ""
+msgstr "M'acaben d'informar que l'economia minera ja funciona. Aquesta notícia em fa somriure. Encara que la part difícil està per fer, almenys a partir d'ara els forjadors podran ajudar en les nostres tasques."
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:264
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:283
 msgid "Fortress Needed"
-msgstr ""
+msgstr "Cal una fortalesa"
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:266
+#. TRANSLATORS: Thron
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:286
 msgid ""
 "Boldreth and I just explored the area around the three mountains. One major "
 "strategic problem of that area seems to be that there are two bigger "
@@ -467,32 +491,35 @@ msgid ""
 "are quite hard to control, and so it seems to me like we have only one "
 "chance to secure the mountains from enemy hands: we must build a fortress to"
 " the east of the mountains!"
-msgstr ""
+msgstr "En Boldreth i jo hem explorat l'àrea al voltant de les tres muntanyes. El problema estratègic de la zona és que hi ha dos passatges grans: un al nord i l'altre al sud de la muntanya central. Aquests passatges seran difícils de controlar i em sembla que només tindrem una oportunitat per mantenir les muntanyes lluny de les mans dels enemics: hem de construir una fortalesa a l'est de les muntanyes."
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:272
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:292
 msgid "Fortress Completed"
-msgstr ""
+msgstr "S'ha completat la fortalesa"
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:274
+#. TRANSLATORS: Thron
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:295
 msgid ""
 "Finally! The fortress has just been completed, so the entrance to our "
 "settlement should be safe for now. For the future, we might think on "
-"building some more fortifications like barriers and donjons at the passages,"
-" but for now we can take a deep breath."
-msgstr ""
+"building some more fortifications like barriers and towers at the passages, "
+"but for now we can take a deep breath."
+msgstr "Per fi! S'ha completat la fortalesa. L'entrada al nostre assentament hauria de ser segura per ara. De cara al futur, hauríem de pensar en construir més fortificacions com ara casernes i torres als passos estrets. Però per ara podem respirar tranquils."
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:279
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:300
 msgid "Enhanced Economy and Training"
-msgstr ""
+msgstr "Economia avançada i entrenament"
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:281
+#. TRANSLATORS: Boldreth
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:303
 msgid ""
 "Our mining economy seems to work fine, that is already good news! Anyway, "
 "there are still a lot of men and women waiting in our hall to get a task, so"
 " they can help our soldiers to prepare for the war to come."
-msgstr ""
+msgstr "La nostra economia minera sembla funcionar bé. No obstant, encara hi ha molts homes i dones que necessiten alguna tasca per ajudar a preparar els nostres soldats."
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:283
+#. TRANSLATORS: Boldreth
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:306
 msgid ""
 "Our geologists found a lot more deposits of iron ore, coal and even gold. We"
 " should enhance our current mines as soon as our miners are more "
@@ -501,17 +528,19 @@ msgid ""
 "processing economy. But that’s still not everything – most of our soldiers "
 "are quite young and neither have a good weapon nor are they well trained. We"
 " should build up training sites to prepare them for their future tasks."
-msgstr ""
+msgstr "Els geòlegs han trobat més jaciments de carbó, de mineral de ferro i fins i tot d'or. Hem de millorar les mines que tenim tan aviat com els miners guanyin experiència. Caldrà construir noves mines, infraestructures per proveir més menjar i millorar les indústries de processat.  Però això no és tot: molts dels nostres soldats són joves i ni tenen bones armes ni estan ben entrenats. Hem de construir llocs d'entrenament per a preparar-los."
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:291
+#. TRANSLATORS: Thron
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:315
 msgid ""
 "My brothers and their soldiers are dead and left fire and destruction "
 "behind. In none of all the ruins could I find any man or woman of the normal"
 " folk, and so I just may hope that they fled from this cruel battleground "
 "and started a better life somewhere else."
-msgstr ""
+msgstr "Els meus germans i els seus soldats han mort i han deixat foc i destrucció al seu darrere. En cap de les ruïnes hem trobat home o dona de la gent que hi vivia i espero que haguessin fugit del camp de batalla per començar una nova vida en un altre lloc."
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:293
+#. TRANSLATORS: Thron
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:318
 msgid ""
 "Nothing is left of that beauty I remember, only ruins remain of the old "
 "capital. I am sorrowful but also relieved. I never hoped to see Al’thunran’s"
@@ -519,62 +548,66 @@ msgid ""
 "would ever be able to set my feet there again. Now the old town is back in "
 "my hands, and I will not hesitate to rebuild it with all the strength my "
 "people have. I can’t wait to see it again in its old beauty."
-msgstr ""
+msgstr "Ja no queda res del que era bell. A l'antiga capital només hi queden ruïnes. Estic trist però esperançat. No esperava veure la bellesa de l'antic Al'thunran un altre cop. Ara, l'antic poble ja torna a estar sota les meves mans i no dubtaré en reconstruir-lo amb tota la força de la meva gent. No puc esperar a veure'l reconstruït."
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:294
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:319
 msgid "Victory"
-msgstr ""
+msgstr "Victòria"
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:295
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:320
 msgid ""
 "You have completed the last mission of the Barbarian tutorial campaign. You "
 "may continue playing if you wish, otherwise move on to the next campaign."
-msgstr ""
+msgstr "Heu completat l'última missió del tutorial-campanya bàrbar. Podeu continuar jugant si voleu, altrament continueu amb la següent campanya."
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:300
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:325
 msgid "Military Assault"
-msgstr ""
+msgstr "Assalt militar"
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:302
+#. TRANSLATORS: Thron
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:328
 msgid ""
 "So be it, the generals are out and about arranging my troops, and Boldreth "
 "himself will lead the first strike. I will ride by his side, to free "
 "Al’thunran of this war and return peace to our capital."
-msgstr ""
+msgstr "Així sigui. Els generals estan fora organitzant les tropes i en Boldreth mateix liderarà el primer cop. Cavalcaré al seu costat, per alliberar l'Al'thunran de la guerra i tornar la pau a la nostra capital."
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:304
+#. TRANSLATORS: Thron
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:331
 msgid ""
 "When the young sun rises above the trees tomorrow morning, I will order the "
 "assault. By dusk, I will celebrate my victory in the wooden halls of the "
 "warlord and sacrifice a newborn lamb in the honor of my father, whose eyes "
 "are set upon me today."
-msgstr ""
+msgstr "Quan el jove sol s'aixequi demà pel matí, ordenaré l'assalt. Pel capvespre, celebraré la meva victòria en les sales de fusta del senyor de la guerra i sacrificaré un corder en honor del meu pare, els ulls del qual m'estan mirant avui."
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:306
+#. TRANSLATORS: Thron
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:334
 msgid "So be it!"
-msgstr ""
+msgstr "Així sigui!"
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:311
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:339
 msgid "Faster Transportation"
-msgstr ""
+msgstr "Transport ràpid"
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:312
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:340
 msgid "Khantrukh says:"
-msgstr ""
+msgstr "En Khantrukh diu:"
 
-#: ../../campaigns/bar02.wmf/scripting/texts.lua:313
+#. TRANSLATORS: Khantrukh
+#: ../../campaigns/bar02.wmf/scripting/texts.lua:342
 msgid ""
 "Chieftain, remember the poor carriers: Our roads get longer and longer and "
 "the burden on their shoulders never gets lighter. We should breed more oxen "
 "to make their work lighter and our transportation more efficient."
-msgstr ""
+msgstr "Cap, recordeu-vos-en dels pobres transportistes. Els nostres camins s'estan fent massa llargs i la càrrega que suporten no es fa més lleugera. Hauríem de criar bous per alleugerir la seva feina i millorar el sistema de transport."
 
 #: ../../scripting/format_scenario.lua:36
 msgid "“%s”"
-msgstr ""
+msgstr "“%s”"
 
 #: ../../scripting/format_scenario.lua:146
 msgid "New Objective"
 msgid_plural "New Objectives"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Objectiu"
+msgstr[1] "Objectius"

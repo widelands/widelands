@@ -25,6 +25,7 @@
 #include "graphic/graphic.h"
 #include "logic/game_controller.h"
 #include "logic/player.h"
+#include "profile/profile.h"
 #include "ui_basic/editbox.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/textarea.h"
@@ -171,7 +172,7 @@ void InteractiveSpectator::exit_btn()
 	if (is_multiplayer()) {
 		return;
 	}
-	end_modal(0);
+	end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack);
 }
 
 

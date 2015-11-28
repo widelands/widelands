@@ -79,21 +79,9 @@ source_file = po/tribes/tribes.pot
 source_lang = en
 type = PO
 
-[widelands.tribe_atlanteans]
-file_filter = po/tribe_atlanteans/<lang>.po
-source_file = po/tribe_atlanteans/tribe_atlanteans.pot
-source_lang = en
-type = PO
-
-[widelands.tribe_barbarians]
-file_filter = po/tribe_barbarians/<lang>.po
-source_file = po/tribe_barbarians/tribe_barbarians.pot
-source_lang = en
-type = PO
-
-[widelands.tribe_empire]
-file_filter = po/tribe_empire/<lang>.po
-source_file = po/tribe_empire/tribe_empire.pot
+[widelands.tribes_encyclopedia]
+file_filter = po/tribes_encyclopedia/<lang>.po
+source_file = po/tribes_encyclopedia/tribes_encyclopedia.pot
 source_lang = en
 type = PO
 
@@ -139,8 +127,8 @@ source_file = po/world/world.pot
 source_lang = en
 type = PO
 
-[widelands.translator_credits]
-file_filter = po/translator_credits/<lang>.po
-source_file = po/translator_credits/translator_credits.pot
+[widelands.translators]
+file_filter = i18n/locales/<lang>.json
+source_file = i18n/locales/locales_translators.json
 source_lang = en
-type = PO
+type = KEYVALUEJSON

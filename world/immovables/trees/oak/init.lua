@@ -1,10 +1,10 @@
 dirname = path.dirname(__file__)
 
 terrain_affinity = {
-   preferred_temperature = 294.10408393399462,
-   preferred_humidity = 0.721922215809505,
-   preferred_fertility = 0.33114978886085622,
-   pickiness = 0.59052376522124506,
+   preferred_temperature = 90,
+   preferred_humidity = 0.7,
+   preferred_fertility = 0.5,
+   pickiness = 0.6,
 }
 
 world:new_immovable_type{
@@ -23,7 +23,8 @@ world:new_immovable_type{
    },
    animations = {
       idle = {
-         pictures = path.list_directory(dirname .. "sapling/", "idle_\\d+.png"),
+         template = "idle_?",
+         directory = dirname .. "sapling/",
          hotspot = { 5, 12 },
          fps = 8,
       },
@@ -46,7 +47,8 @@ world:new_immovable_type{
    },
    animations = {
       idle = {
-         pictures = path.list_directory(dirname .. "pole/", "idle_\\d+.png"),
+         template = "idle_?",
+         directory = dirname .. "pole/",
          hotspot = { 12, 28 },
          fps = 8,
       },
@@ -69,7 +71,8 @@ world:new_immovable_type{
    },
    animations = {
       idle = {
-         pictures = path.list_directory(dirname .. "mature/", "idle_\\d+.png"),
+         template = "idle_?",
+         directory = dirname .. "mature/",
          hotspot = { 18, 48 },
          fps = 8,
       },
@@ -90,13 +93,14 @@ world:new_immovable_type{
          "seed=oak_summer_sapling",
       },
       fall = {
-         "animate=falling 1200",
+         "animate=falling 1400",
          "transform=fallentree",
       },
    },
    animations = {
       idle = {
-         pictures = path.list_directory(dirname .. "old/", "idle_\\d+.png"),
+         template = "idle_?",
+         directory = dirname .. "old/",
          hotspot = { 24, 60 },
          fps = 10,
          sound_effect = {
@@ -105,9 +109,11 @@ world:new_immovable_type{
          },
       },
       falling = {
-         pictures = path.list_directory(dirname .. "old/", "f_tree_\\d+.png"),
+         template = "f_tree_??",
+         directory = dirname .. "old/",
          hotspot = { 10, 60 },
          fps = 10,
+         play_once = true
       },
    },
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2010, 2012 by the Widelands Development Team
+ * Copyright (C) 2002-2010, 2012, 2015 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,7 +21,9 @@
 
 #include "base/i18n.h"
 #include "graphic/text_constants.h"
+#include "network/internet_gaming.h"
 #include "profile/profile.h"
+#include "ui_basic/messagebox.h"
 #include "wui/login_box.h"
 
 FullscreenMenuMultiPlayer::FullscreenMenuMultiPlayer() :
@@ -35,7 +37,7 @@ FullscreenMenuMultiPlayer::FullscreenMenuMultiPlayer() :
 
 // Buttons
 	vbox(this, m_box_x, m_box_y, UI::Box::Vertical,
-		  m_butw, get_h() - vbox.get_y(), m_padding),
+		  m_butw, get_h() - m_box_y, m_padding),
 	metaserver
 		(&vbox, "metaserver", 0, 0, m_butw, m_buth, g_gr->images().get(m_button_background),
 		 _("Internet game"), "", true, false),
@@ -50,13 +52,13 @@ FullscreenMenuMultiPlayer::FullscreenMenuMultiPlayer() :
 
 	lan.sigclicked.connect
 		(boost::bind
-			 (&FullscreenMenuMultiPlayer::end_modal, boost::ref(*this),
-			  static_cast<int32_t>(MenuTarget::kLan)));
+			 (&FullscreenMenuMultiPlayer::end_modal<FullscreenMenuBase::MenuTarget>, boost::ref(*this),
+			  FullscreenMenuBase::MenuTarget::kLan));
 
 	back.sigclicked.connect
 		(boost::bind
-			 (&FullscreenMenuMultiPlayer::end_modal, boost::ref(*this),
-			  static_cast<int32_t>(MenuTarget::kBack)));
+			 (&FullscreenMenuMultiPlayer::end_modal<FullscreenMenuBase::MenuTarget>, boost::ref(*this),
+			  FullscreenMenuBase::MenuTarget::kBack));
 
 	title.set_font(ui_fn(), fs_big(), UI_FONT_CLR_FG);
 
@@ -114,19 +116,41 @@ void FullscreenMenuMultiPlayer::internet_login() {
 		m_nickname = s.get_string("nickname", _("nobody"));
 		m_password = s.get_string("password", "nobody");
 		m_register = s.get_bool("registered", false);
-		end_modal(static_cast<int32_t>(MenuTarget::kMetaserver));
-		return;
+	} else {
+		LoginBox lb(*this);
+		if (lb.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk) {
+			m_nickname = lb.get_nickname();
+			m_password = lb.get_password();
+			m_register = lb.registered();
+
+			s.set_bool("registered", lb.registered());
+			s.set_bool("auto_log", lb.set_automaticlog());
+		} else {
+			return;
+		}
 	}
 
-	LoginBox lb(*this);
-	if (lb.run()) {
-		m_nickname = lb.get_nickname();
-		m_password = lb.get_password();
-		m_register = lb.registered();
+	// Try to connect to the metaserver
+	const std::string & meta = s.get_string("metaserver", INTERNET_GAMING_METASERVER.c_str());
+	uint32_t port = s.get_natural("metaserverport", INTERNET_GAMING_PORT);
+	InternetGaming::ref().login(m_nickname, m_password, m_register, meta, port);
 
-		s.set_bool("registered", lb.registered());
-		s.set_bool("auto_log", lb.set_automaticlog());
+	// Check whether metaserver send some data
+	if (InternetGaming::ref().logged_in())
+		end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kMetaserver);
+	else {
+		// something went wrong -> show the error message
+		ChatMessage msg = InternetGaming::ref().get_messages().back();
+		UI::WLMessageBox wmb(this, _("Error!"), msg.msg, UI::WLMessageBox::MBoxType::kOk);
+		wmb.run<UI::Panel::Returncodes>();
 
-		end_modal(static_cast<int32_t>(MenuTarget::kMetaserver));
+		// Reset InternetGaming and passwort and show internet login again
+		InternetGaming::ref().reset();
+		s.set_string("password", "");
+		show_internet_login();
 	}
+}
+
+void FullscreenMenuMultiPlayer::clicked_ok() {
+	internet_login();
 }

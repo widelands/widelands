@@ -30,6 +30,8 @@
 
 namespace Widelands {
 
+constexpr uint8_t kCurrentPacketVersion = 1;
+
 Path::Path(CoordPath & o)
 	: m_start(o.get_start()), m_end(o.get_end()), m_path(o.steps())
 {
@@ -65,7 +67,7 @@ void Path::append(const Map & map, const Direction dir) {
  */
 void Path::save(FileWrite & fw) const
 {
-	fw.unsigned_8(1); // version number
+	fw.unsigned_8(kCurrentPacketVersion);
 	write_coords_32(&fw, m_start);
 
 	// Careful: steps are stored in the reverse order in m_path
@@ -83,15 +85,21 @@ void Path::save(FileWrite & fw) const
  */
 void Path::load(FileRead & fr, const Map & map)
 {
-	uint8_t version = fr.unsigned_8();
-	if (version != 1)
-		throw GameDataError("path: unknown version %u", version);
+	try {
+		uint8_t packet_version = fr.unsigned_8();
+		if (packet_version == kCurrentPacketVersion) {
 
-	m_start = m_end = read_coords_32(&fr, map.extent());
-	m_path.clear();
-	uint32_t steps = fr.unsigned_32();
-	while (steps--)
-		append(map, read_direction_8(&fr));
+			m_start = m_end = read_coords_32(&fr, map.extent());
+			m_path.clear();
+			uint32_t steps = fr.unsigned_32();
+			while (steps--)
+				append(map, read_direction_8(&fr));
+		} else {
+			throw UnhandledVersionError("Path", packet_version, kCurrentPacketVersion);
+		}
+	} catch (const WException & e) {
+		throw GameDataError("player names and tribes: %s", e.what());
+	}
 }
 
 /*

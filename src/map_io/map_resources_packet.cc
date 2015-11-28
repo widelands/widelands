@@ -27,15 +27,14 @@
 #include "logic/map.h"
 #include "logic/world/resource_description.h"
 #include "logic/world/world.h"
-#include "map_io/one_world_legacy_lookup_table.h"
+#include "map_io/world_legacy_lookup_table.h"
 
 namespace Widelands {
 
-#define CURRENT_PACKET_VERSION 1
-
+constexpr uint16_t kCurrentPacketVersion = 1;
 
 void MapResourcesPacket::read
-	(FileSystem & fs, EditorGameBase & egbase, const OneWorldLegacyLookupTable& lookup_table)
+	(FileSystem & fs, EditorGameBase & egbase, const WorldLegacyLookupTable& lookup_table)
 {
 	FileRead fr;
 	fr.open(fs, "binary/resource");
@@ -43,55 +42,59 @@ void MapResourcesPacket::read
 	Map   & map   = egbase.map();
 	const World & world = egbase.world();
 
-	const uint16_t packet_version = fr.unsigned_16();
-	if (packet_version == CURRENT_PACKET_VERSION) {
-		int32_t const nr_res = fr.unsigned_16();
-		if (world.get_nr_resources() < nr_res)
-			log
-				("WARNING: Number of resources in map (%i) is bigger than in world "
-				 "(%i)",
-				 nr_res, world.get_nr_resources());
+	try {
+		const uint16_t packet_version = fr.unsigned_16();
+		if (packet_version == kCurrentPacketVersion) {
+			int32_t const nr_res = fr.unsigned_16();
+			if (world.get_nr_resources() < nr_res)
+				log
+					("WARNING: Number of resources in map (%i) is bigger than in world "
+					 "(%i)",
+					 nr_res, world.get_nr_resources());
 
-		// construct ids and map
-		std::map<uint8_t, uint8_t> smap;
-		for (uint8_t i = 0; i < nr_res; ++i) {
-			uint8_t const id = fr.unsigned_16();
-			const std::string resource_name = lookup_table.lookup_resource(fr.c_string());
-			int32_t const res = world.get_resource(resource_name.c_str());
-			if (res == -1)
-				throw GameDataError
-					("resource '%s' exists in map but not in world", resource_name.c_str());
-			smap[id] = res;
-		}
-
-		for (uint16_t y = 0; y < map.get_height(); ++y) {
-			for (uint16_t x = 0; x < map.get_width(); ++x) {
-				uint8_t const id           = fr.unsigned_8();
-				uint8_t const found_amount = fr.unsigned_8();
-				uint8_t const amount       = found_amount;
-				uint8_t const start_amount = fr.unsigned_8();
-
-				uint8_t set_id, set_amount, set_start_amount;
-				//  if amount is zero, theres nothing here
-				if (!amount) {
-					set_id           = 0;
-					set_amount       = 0;
-					set_start_amount = 0;
-				} else {
-					set_id           = smap[id];
-					set_amount       = amount;
-					set_start_amount = start_amount;
-				}
-
-				if (0xa < set_id)
-					throw "Unknown resource in map file. It is not in world!\n";
-				map[Coords(x, y)].set_resources(set_id, set_amount);
-				map[Coords(x, y)].set_initial_res_amount(set_start_amount);
+			// construct ids and map
+			std::map<uint8_t, uint8_t> smap;
+			for (uint8_t i = 0; i < nr_res; ++i) {
+				uint8_t const id = fr.unsigned_16();
+				const std::string resource_name = lookup_table.lookup_resource(fr.c_string());
+				int32_t const res = world.get_resource(resource_name.c_str());
+				if (res == Widelands::INVALID_INDEX)
+					throw GameDataError
+						("resource '%s' exists in map but not in world", resource_name.c_str());
+				smap[id] = res;
 			}
+
+			for (uint16_t y = 0; y < map.get_height(); ++y) {
+				for (uint16_t x = 0; x < map.get_width(); ++x) {
+					uint8_t const id           = fr.unsigned_8();
+					uint8_t const found_amount = fr.unsigned_8();
+					uint8_t const amount       = found_amount;
+					uint8_t const start_amount = fr.unsigned_8();
+
+					uint8_t set_id, set_amount, set_start_amount;
+					//  if amount is zero, theres nothing here
+					if (!amount) {
+						set_id           = 0;
+						set_amount       = 0;
+						set_start_amount = 0;
+					} else {
+						set_id           = smap[id];
+						set_amount       = amount;
+						set_start_amount = start_amount;
+					}
+
+					if (0xa < set_id)
+						throw "Unknown resource in map file. It is not in world!\n";
+					map[Coords(x, y)].set_resources(set_id, set_amount);
+					map[Coords(x, y)].set_initial_res_amount(set_start_amount);
+				}
+			}
+		} else {
+			throw UnhandledVersionError("MapResourcesPacket", packet_version, kCurrentPacketVersion);
 		}
-	} else
-		throw GameDataError
-			("Unknown version in MapResourcesPacket: %u", packet_version);
+	} catch (const WException & e) {
+		throw GameDataError("port spaces: %s", e.what());
+	}
 }
 
 
@@ -107,7 +110,7 @@ void MapResourcesPacket::write
 {
 	FileWrite fw;
 
-	fw.unsigned_16(CURRENT_PACKET_VERSION);
+	fw.unsigned_16(kCurrentPacketVersion);
 
 	// This is a bit more complicated saved so that the order of loading
 	// of the resources at run time doesn't matter.

@@ -41,6 +41,15 @@ def detect_debian_version():
     version = version[m.start():m.end()]
     return version
 
+def detect_git_revision():
+    if not sys.platform.startswith('linux') and \
+       not sys.platform.startswith('darwin'):
+        return None
+
+    is_git_workdir=os.system('git show >/dev/null 2>&1')==0
+    if is_git_workdir:
+        git_revnum=os.popen('git show --pretty=format:%h | head -n 1').read().rstrip()
+        return 'unofficial-git-%s' % (git_revnum,)
 
 
 def check_for_explicit_version():
@@ -72,6 +81,7 @@ def detect_bzr_revision():
 def detect_revision():
     for func in (
         check_for_explicit_version,
+        detect_git_revision,
         detect_bzr_revision,
         detect_debian_version):
         rv = func()
@@ -82,4 +92,3 @@ def detect_revision():
 
 if __name__ == "__main__":
     print(detect_revision())
-

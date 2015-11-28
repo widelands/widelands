@@ -22,10 +22,13 @@
 #include <algorithm>
 #include <cstring>
 #include <map>
+#include <memory>
 #include <set>
 #include <string>
 #include <typeinfo>
 #include <vector>
+
+#include <boost/format.hpp>
 
 #include "base/i18n.h"
 #include "base/macros.h"
@@ -35,8 +38,12 @@
 #include "logic/player.h"
 #include "logic/production_program.h"
 #include "logic/productionsite.h"
-#include "logic/tribe.h"
+#include "logic/tribes/tribe_descr.h"
+#include "logic/tribes/tribes.h"
+#include "logic/ware_descr.h"
 #include "logic/warelist.h"
+#include "scripting/lua_interface.h"
+#include "scripting/lua_table.h"
 #include "ui_basic/table.h"
 #include "ui_basic/unique_window.h"
 #include "ui_basic/window.h"
@@ -47,12 +54,21 @@
 constexpr uint32_t quantityColumnWidth = 100;
 constexpr uint32_t wareColumnWidth = 250;
 #define PRODSITE_GROUPS_WIDTH (WINDOW_WIDTH - wareColumnWidth - quantityColumnWidth - 10)
+constexpr int kPadding = 5;
+constexpr int kTabHeight = 35;
 
 using namespace Widelands;
 
 inline InteractivePlayer & EncyclopediaWindow::iaplayer() const {
 	return dynamic_cast<InteractivePlayer&>(*get_parent());
 }
+
+namespace {
+const std::string heading(const std::string& text) {
+	return ((boost::format("<rt><p font-size=18 font-weight=bold font-color=D1D1D1>"
+								  "%s<br></p><p font-size=8> <br></p></rt>") % text).str());
+}
+} // namespace
 
 
 EncyclopediaWindow::EncyclopediaWindow
@@ -62,37 +78,144 @@ EncyclopediaWindow::EncyclopediaWindow
 		(&parent, "encyclopedia",
 		 &registry,
 		 WINDOW_WIDTH, WINDOW_HEIGHT,
-		 _("Tribal Ware Encyclopedia")),
-	wares            (this, 5, 5, WINDOW_WIDTH - 10, WINDOW_HEIGHT - 250),
-	prodSites        (this, 5, WINDOW_HEIGHT - 150, PRODSITE_GROUPS_WIDTH, 145),
-	condTable
-		(this,
-		 PRODSITE_GROUPS_WIDTH + 5, WINDOW_HEIGHT - 150, WINDOW_WIDTH - PRODSITE_GROUPS_WIDTH - 5, 145),
-	descrTxt         (this, 5, WINDOW_HEIGHT - 240, WINDOW_WIDTH - 10, 80, "")
+		 _("Tribal Encyclopedia")),
+	tabs_(this, 0, 0, nullptr),
+	buildings_tab_box_(&tabs_, 0, 0, UI::Box::Horizontal),
+	buildings_box_(&buildings_tab_box_, 0, 0, UI::Box::Horizontal),
+	buildings_    (&buildings_box_, 0, 0,
+						WINDOW_WIDTH / 2 - 1.5 * kPadding, WINDOW_HEIGHT - kTabHeight - 2 * kPadding),
+	building_text_(&buildings_box_, 0, 0,
+						WINDOW_WIDTH / 2 - 1.5 * kPadding, WINDOW_HEIGHT - kTabHeight - 2 * kPadding),
+
+	wares_tab_box_(&tabs_, 0, 0, UI::Box::Horizontal),
+	wares_box_(&wares_tab_box_, 0, 0, UI::Box::Vertical),
+	wares_details_box_(&wares_box_, 0, 0, UI::Box::Horizontal),
+	wares_            (&wares_box_, 0, 0, WINDOW_WIDTH - 2 * kPadding, WINDOW_HEIGHT - 270 - 2 * kPadding),
+	ware_text_        (&wares_box_, 0, 0, WINDOW_WIDTH - 2 * kPadding, 80, ""),
+	prod_sites_       (&wares_details_box_, 0, 0, PRODSITE_GROUPS_WIDTH, 145),
+	cond_table_
+		(&wares_details_box_,
+		 0, 0, WINDOW_WIDTH - PRODSITE_GROUPS_WIDTH - 2 * kPadding, 145),
+
+	workers_tab_box_(&tabs_, 0, 0, UI::Box::Horizontal),
+	workers_box_(&workers_tab_box_, 0, 0, UI::Box::Horizontal),
+	workers_    (&workers_box_, 0, 0,
+						WINDOW_WIDTH / 2 - 1.5 * kPadding, WINDOW_HEIGHT - kTabHeight - 2 * kPadding),
+	worker_text_(&workers_box_, 0, 0,
+						WINDOW_WIDTH / 2 - 1.5 * kPadding, WINDOW_HEIGHT - kTabHeight - 2 * kPadding)
 {
-	wares.selected.connect(boost::bind(&EncyclopediaWindow::ware_selected, this, _1));
+	// Buildings
+	buildings_box_.add(&buildings_, UI::Align_Left);
+	buildings_box_.add_space(kPadding);
+	buildings_box_.add(&building_text_, UI::Align_Left);
 
-	prodSites.selected.connect(boost::bind(&EncyclopediaWindow::prod_site_selected, this, _1));
-	condTable.add_column
-			/** TRANSLATORS: Column title in the Tribal Wares Encyclopedia */
+	buildings_tab_box_.add_space(kPadding);
+	buildings_tab_box_.add(&buildings_box_, UI::Align_Left);
+
+	// Wares
+	wares_details_box_.add(&prod_sites_, UI::Align_Left);
+	wares_details_box_.add(&cond_table_, UI::Align_Left);
+	wares_details_box_.set_size(WINDOW_WIDTH,
+										 tabs_.get_inner_h() - wares_.get_h() - ware_text_.get_h() - 4 * kPadding);
+
+	wares_box_.add(&wares_, UI::Align_Left);
+	wares_box_.add_space(kPadding);
+	wares_box_.add(&ware_text_, UI::Align_Left);
+	wares_box_.add_space(kPadding);
+	wares_box_.add(&wares_details_box_, UI::Align_Left);
+	wares_box_.set_size(WINDOW_WIDTH, wares_.get_h() + ware_text_.get_h() + 2 * kPadding);
+
+	wares_tab_box_.add_space(kPadding);
+	wares_tab_box_.add(&wares_box_, UI::Align_Left);
+
+	// Workers
+	workers_box_.add(&workers_, UI::Align_Left);
+	workers_box_.add_space(kPadding);
+	workers_box_.add(&worker_text_, UI::Align_Left);
+
+	workers_tab_box_.add_space(kPadding);
+	workers_tab_box_.add(&workers_box_, UI::Align_Left);
+
+	tabs_.add("encyclopedia_wares", g_gr->images().get("pics/genstats_nrwares.png"),
+				 &wares_tab_box_, _("Wares"));
+	tabs_.add("encyclopedia_workers", g_gr->images().get("pics/genstats_nrworkers.png"),
+				 &workers_tab_box_, _("Workers"));
+	tabs_.add("encyclopedia_buildings", g_gr->images().get("pics/genstats_nrbuildings.png"),
+				 &buildings_tab_box_, _("Buildings"));
+	tabs_.set_size(WINDOW_WIDTH, WINDOW_HEIGHT);
+
+	// Content
+	buildings_.selected.connect(boost::bind(&EncyclopediaWindow::building_selected, this, _1));
+
+	wares_.selected.connect(boost::bind(&EncyclopediaWindow::ware_selected, this, _1));
+	prod_sites_.selected.connect(boost::bind(&EncyclopediaWindow::prod_site_selected, this, _1));
+	cond_table_.add_column
+			/** TRANSLATORS: Column title in the Tribal Encyclopedia */
 			(wareColumnWidth, ngettext("Consumed Ware Type", "Consumed Ware Types", 0));
-	condTable.add_column (quantityColumnWidth, _("Quantity"));
-	condTable.focus();
+	cond_table_.add_column (quantityColumnWidth, _("Quantity"));
+	cond_table_.focus();
 
+	workers_.selected.connect(boost::bind(&EncyclopediaWindow::worker_selected, this, _1));
+
+	fill_buildings();
 	fill_wares();
+	fill_workers();
 
-	if (get_usedefaultpos())
+	if (get_usedefaultpos()) {
 		center_to_parent();
+	}
+}
+
+
+void EncyclopediaWindow::fill_buildings() {
+	const TribeDescr& tribe = iaplayer().player().tribe();
+	std::vector<Building> building_vec;
+
+	const Tribes& tribes = iaplayer().egbase().tribes();
+	for (DescriptionIndex i = 0; i < tribes.nrbuildings(); ++i) {
+		const BuildingDescr* building = tribes.get_building_descr(i);
+		if (tribe.has_building(i) || building->type() == MapObjectType::MILITARYSITE) {
+			Building b(i, building);
+			building_vec.push_back(b);
+		}
+	}
+
+	std::sort(building_vec.begin(), building_vec.end());
+
+	for (uint32_t i = 0; i < building_vec.size(); i++) {
+		Building cur = building_vec[i];
+		buildings_.add(cur.descr_->descname(), cur.index_, cur.descr_->icon());
+	}
+}
+
+
+void EncyclopediaWindow::building_selected(uint32_t) {
+	const TribeDescr& tribe = iaplayer().player().tribe();
+	const Widelands::BuildingDescr& selected_building = *tribe.get_building_descr(buildings_.get_selected());
+
+	assert(tribe.has_building(tribe.building_index(selected_building.name())) ||
+			 selected_building.type() == MapObjectType::MILITARYSITE);
+	try {
+		std::unique_ptr<LuaTable> t(
+				iaplayer().egbase().lua().run_script("tribes/scripting/help/building_help.lua"));
+		std::unique_ptr<LuaCoroutine> cr(t->get_coroutine("func"));
+		cr->push_arg(tribe.name());
+		cr->push_arg(selected_building.name());
+		cr->resume();
+		const std::string help_text = cr->pop_string();
+		building_text_.set_text(help_text);
+	} catch (LuaError& err) {
+		building_text_.set_text(err.what());
+	}
+	building_text_.scroll_to_top();
 }
 
 void EncyclopediaWindow::fill_wares() {
 	const TribeDescr & tribe = iaplayer().player().tribe();
-	WareIndex const nr_wares = tribe.get_nrwares();
 	std::vector<Ware> ware_vec;
 
-	for (WareIndex i = 0; i < nr_wares; ++i) {
-		WareDescr const * ware = tribe.get_ware_descr(i);
-		Ware w(i, ware);
+	for (const DescriptionIndex& ware_index : tribe.wares()) {
+		Ware w(ware_index, tribe.get_ware_descr(ware_index));
 		ware_vec.push_back(w);
 	}
 
@@ -100,109 +223,153 @@ void EncyclopediaWindow::fill_wares() {
 
 	for (uint32_t i = 0; i < ware_vec.size(); i++) {
 		Ware cur = ware_vec[i];
-		wares.add(cur.m_descr->descname(), cur.m_i, cur.m_descr->icon());
+		wares_.add(cur.descr_->descname(), cur.index_, cur.descr_->icon());
 	}
 }
 
 void EncyclopediaWindow::ware_selected(uint32_t) {
 	const TribeDescr & tribe = iaplayer().player().tribe();
-	selectedWare = tribe.get_ware_descr(wares.get_selected());
+	selected_ware_ = tribe.get_ware_descr(wares_.get_selected());
 
-	descrTxt.set_text(selectedWare->helptext());
+	try {
+		std::unique_ptr<LuaTable> t(
+			iaplayer().egbase().lua().run_script("tribes/scripting/help/ware_help.lua"));
+		std::unique_ptr<LuaCoroutine> cr(t->get_coroutine("func"));
+		cr->push_arg(tribe.name());
+		cr->push_arg(selected_ware_);
+		cr->resume();
+		const std::string help_text = cr->pop_string();
+		ware_text_.set_text(help_text);
+	} catch (LuaError& err) {
+		ware_text_.set_text(err.what());
+	}
 
-	prodSites.clear();
-	condTable.clear();
+	ware_text_.scroll_to_top();
 
-	bool found = false;
+	prod_sites_.clear();
+	cond_table_.clear();
 
-	BuildingIndex const nr_buildings = tribe.get_nrbuildings();
-	for (BuildingIndex i = 0; i < nr_buildings; ++i) {
-		const BuildingDescr & descr = *tribe.get_building_descr(i);
-		if (upcast(ProductionSiteDescr const, de, &descr)) {
-
-			if
-				((descr.is_buildable() || descr.is_enhanced())
-				 &&
-				 de->output_ware_types().count(wares.get_selected()))
-			{
-				prodSites.add(de->descname(), i, de->get_icon());
-				found = true;
-			}
+	for (const DescriptionIndex& building_index : selected_ware_->producers()) {
+		const BuildingDescr* building_descr = tribe.get_building_descr(building_index);
+		if (tribe.has_building(building_index)) {
+			prod_sites_.add(building_descr->descname(), building_index, building_descr->icon());
 		}
 	}
-	if (found)
-		prodSites.select(0);
 
+	if (!prod_sites_.empty()) {
+		prod_sites_.select(0);
+	}
 }
 
 void EncyclopediaWindow::prod_site_selected(uint32_t) {
-	assert(prodSites.has_selection());
+	assert(prod_sites_.has_selection());
 	size_t no_of_wares = 0;
-	condTable.clear();
+	cond_table_.clear();
 	const TribeDescr & tribe = iaplayer().player().tribe();
 
-	upcast(ProductionSiteDescr const, descr, tribe.get_building_descr(prodSites.get_selected()));
-	const ProductionSiteDescr::Programs & programs = descr->programs();
+	if (upcast(ProductionSiteDescr const, descr, tribe.get_building_descr(prod_sites_.get_selected()))) {
+		const ProductionSiteDescr::Programs & programs = descr->programs();
 
-	//  TODO(unknown): This needs reworking. A program can indeed produce iron even if
-	//  the program name is not any of produce_iron, smelt_iron, prog_iron
-	//  or work. What matters is whether the program has a statement such
-	//  as "produce iron" or "createware iron". The program name is not
-	//  supposed to have any meaning to the game logic except to uniquely
-	//  identify the program.
-	//  Only shows information from the first program that has a name indicating
-	//  that it produces the considered ware type.
-	std::map<std::string, ProductionProgram *>::const_iterator programIt =
-		programs.find(std::string("produce_") + selectedWare->name());
+		//  TODO(unknown): This needs reworking. A program can indeed produce iron even if
+		//  the program name is not any of produce_iron, smelt_iron, prog_iron
+		//  or work. What matters is whether the program has a statement such
+		//  as "produce iron" or "createware iron". The program name is not
+		//  supposed to have any meaning to the game logic except to uniquely
+		//  identify the program.
+		//  Only shows information from the first program that has a name indicating
+		//  that it produces the considered ware type.
+		Widelands::ProductionSiteDescr::Programs::const_iterator programIt =
+			programs.find(std::string("produce_") + selected_ware_->name());
 
-	if (programIt == programs.end())
-		programIt = programs.find(std::string("smelt_")  + selectedWare->name());
+		if (programIt == programs.end())
+			programIt = programs.find(std::string("smelt_")  + selected_ware_->name());
 
-	if (programIt == programs.end())
-		programIt = programs.find(std::string("smoke_")  + selectedWare->name());
+		if (programIt == programs.end())
+			programIt = programs.find(std::string("smoke_")  + selected_ware_->name());
 
-	if (programIt == programs.end())
-		programIt = programs.find(std::string("mine_")   + selectedWare->name());
+		if (programIt == programs.end())
+			programIt = programs.find(std::string("mine_")   + selected_ware_->name());
 
-	if (programIt == programs.end())
-		programIt = programs.find("work");
+		if (programIt == programs.end())
+			programIt = programs.find("work");
 
-	if (programIt != programs.end()) {
-		const ProductionProgram::Actions & actions =
-			programIt->second->actions();
+		if (programIt != programs.end()) {
+			const ProductionProgram::Actions & actions =
+				programIt->second->actions();
 
-		for (const ProductionProgram::Action * temp_action : actions) {
-			if (upcast(ProductionProgram::ActConsume const, action, temp_action)) {
-				const ProductionProgram::ActConsume::Groups & groups =
-					action->groups();
+			for (const ProductionProgram::Action * temp_action : actions) {
+				if (upcast(ProductionProgram::ActConsume const, action, temp_action)) {
+					const ProductionProgram::ActConsume::Groups & groups =
+						action->groups();
 
-				for (const ProductionProgram::WareTypeGroup& temp_group : groups) {
-					const std::set<WareIndex> & ware_types = temp_group.first;
-					assert(ware_types.size());
-					std::vector<std::string> ware_type_descnames;
-					for (const WareIndex& ware_index : ware_types) {
-						ware_type_descnames.push_back(tribe.get_ware_descr(ware_index)->descname());
+					for (const ProductionProgram::WareTypeGroup& temp_group : groups) {
+						const std::set<DescriptionIndex> & ware_types = temp_group.first;
+						assert(ware_types.size());
+						std::vector<std::string> ware_type_descnames;
+						for (const DescriptionIndex& ware_index : ware_types) {
+							ware_type_descnames.push_back(tribe.get_ware_descr(ware_index)->descname());
+						}
+						no_of_wares = no_of_wares + ware_types.size();
+
+						std::string ware_type_names =
+								i18n::localize_list(ware_type_descnames, i18n::ConcatenateWith::OR);
+
+						//  Make sure to detect if someone changes the type so that it
+						//  needs more than 3 decimal digits to represent.
+						static_assert(sizeof(temp_group.second) == 1, "Number is too big for 3 char string.");
+
+						//  picture only of first ware type in group
+						UI::Table<uintptr_t>::EntryRecord & tableEntry =
+							cond_table_.add(0);
+						tableEntry.set_picture
+							(0, tribe.get_ware_descr(*ware_types.begin())->icon(), ware_type_names);
+						tableEntry.set_string(1, std::to_string(static_cast<unsigned int>(temp_group.second)));
+						cond_table_.set_sort_column(0);
+						cond_table_.sort();
 					}
-					no_of_wares = no_of_wares + ware_types.size();
-
-					std::string ware_type_names =
-							i18n::localize_list(ware_type_descnames, i18n::ConcatenateWith::OR);
-
-					//  Make sure to detect if someone changes the type so that it
-					//  needs more than 3 decimal digits to represent.
-					static_assert(sizeof(temp_group.second) == 1, "Number is too big for 3 char string.");
-
-					//  picture only of first ware type in group
-					UI::Table<uintptr_t>::EntryRecord & tableEntry =
-						condTable.add(0);
-					tableEntry.set_picture
-						(0, tribe.get_ware_descr(*ware_types.begin())->icon(), ware_type_names);
-					tableEntry.set_string(1, std::to_string(static_cast<unsigned int>(temp_group.second)));
-					condTable.set_sort_column(0);
-					condTable.sort();
 				}
 			}
 		}
 	}
-	condTable.set_column_title(0, ngettext("Consumed Ware Type", "Consumed Ware Types", no_of_wares));
+	cond_table_.set_column_title(0, ngettext("Consumed Ware Type", "Consumed Ware Types", no_of_wares));
+}
+
+void EncyclopediaWindow::fill_workers() {
+	const TribeDescr& tribe = iaplayer().player().tribe();
+	std::vector<Worker> worker_vec;
+
+	for (const DescriptionIndex& i: tribe.workers()) {
+		WorkerDescr const * worker = tribe.get_worker_descr(i);
+		Worker w(i, worker);
+		worker_vec.push_back(w);
+	}
+
+	std::sort(worker_vec.begin(), worker_vec.end());
+
+	for (uint32_t i = 0; i < worker_vec.size(); i++) {
+		Worker cur = worker_vec[i];
+		workers_.add(cur.descr_->descname(), cur.index_, cur.descr_->icon());
+	}
+}
+
+void EncyclopediaWindow::worker_selected(uint32_t) {
+	const TribeDescr& tribe = iaplayer().player().tribe();
+	const Widelands::WorkerDescr& selected_worker = *tribe.get_worker_descr(workers_.get_selected());
+
+	try {
+		std::unique_ptr<LuaTable> t(
+			iaplayer().egbase().lua().run_script("tribes/scripting/help/worker_help.lua"));
+		std::unique_ptr<LuaCoroutine> cr(t->get_coroutine("func"));
+		cr->push_arg(tribe.name());
+		cr->push_arg(&selected_worker);
+		cr->resume();
+		const std::string help_text = cr->pop_string();
+		worker_text_.set_text((boost::format("%s%s")
+									  % heading(selected_worker.descname())
+									  % help_text).str());
+	} catch (LuaError& err) {
+		worker_text_.set_text(err.what());
+	}
+
+	worker_text_.scroll_to_top();
 }

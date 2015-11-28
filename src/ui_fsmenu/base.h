@@ -40,15 +40,57 @@ class Image;
  */
 class FullscreenMenuBase : public UI::Panel {
 public:
+	enum class MenuTarget {
+		kBack = static_cast<int>(UI::Panel::Returncodes::kBack),
+		kOk = static_cast<int>(UI::Panel::Returncodes::kOk),
+
+		// Options
+		kRestart,
+
+		// Main menu
+		kTutorial,
+		kSinglePlayer,
+		kMultiplayer,
+		kReplay,
+		kEditor,
+		kOptions,
+		kReadme,
+		kLicense,
+		kAuthors,
+		kExit,
+
+		// Single player
+		kNewGame,
+		kCampaign,
+		kLoadGame,
+
+		// Multiplayer
+		kMetaserver,
+		kLan,
+
+		// Launch game
+		kNormalGame,
+		kScenarioGame,
+		kMultiPlayerSavegame,
+		kHostgame,
+		kJoingame
+	};
+
 	FullscreenMenuBase(char const * bgpic);
 	virtual ~FullscreenMenuBase();
 
 	void draw(RenderTarget &) override;
 
-public:
 	///\return the size for texts fitting to current resolution
 	uint32_t fs_small();
 	uint32_t fs_big();
+
+	/// Handle keypresses
+	bool handle_key(bool down, SDL_Keysym code) override;
+
+protected:
+	virtual void clicked_back();
+	virtual void clicked_ok();
 
 private:
 	std::string background_image_;

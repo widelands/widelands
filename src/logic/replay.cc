@@ -36,17 +36,15 @@
 namespace Widelands {
 
 // File format definitions
-#define REPLAY_MAGIC 0x2E21A101
-#define REPLAY_VERSION 2
+constexpr uint32_t kReplayMagic = 0x2E21A101;
+constexpr uint8_t kCurrentPacketVersion = 2;
+constexpr uint32_t kSyncInterval = 200;
 
 enum {
 	pkt_end = 2,
 	pkt_playercommand = 3,
 	pkt_syncreport = 4
 };
-
-#define SYNC_INTERVAL 200
-
 
 class CmdReplaySyncRead : public Command {
 public:
@@ -102,17 +100,14 @@ ReplayReader::ReplayReader(Game & game, const std::string & filename)
 				("%s is a replay from a version that is known to have desync "
 				 "problems",
 				 filename.c_str());
-		if (magic != REPLAY_MAGIC)
+		if (magic != kReplayMagic)
 			throw wexception
 				("%s apparently not a valid replay file", filename.c_str());
 
-		const uint8_t version = m_cmdlog->unsigned_8();
-		if (version < REPLAY_VERSION)
-			throw wexception
-				("Replay of version %u is known to have desync problems", version);
-		if (version != REPLAY_VERSION)
-			throw GameDataError("unknown/unhandled version %u", version);
-
+		const uint8_t packet_version = m_cmdlog->unsigned_8();
+		if (packet_version != kCurrentPacketVersion) {
+			throw UnhandledVersionError("ReplayReader", packet_version, kCurrentPacketVersion);
+		}
 		game.rng().read_state(*m_cmdlog);
 	}
 	catch (...) {
@@ -215,7 +210,7 @@ public:
 			rw->send_sync (game.get_sync_hash());
 
 			game.enqueue_command
-				(new CmdReplaySyncWrite(duetime() + SYNC_INTERVAL));
+				(new CmdReplaySyncWrite(duetime() + kSyncInterval));
 		}
 	}
 };
@@ -248,11 +243,11 @@ ReplayWriter::ReplayWriter(Game & game, const std::string & filename)
 	log("Done reloading the game from replay\n");
 
 	game.enqueue_command
-		(new CmdReplaySyncWrite(game.get_gametime() + SYNC_INTERVAL));
+		(new CmdReplaySyncWrite(game.get_gametime() + kSyncInterval));
 
 	m_cmdlog = g_fs->open_stream_write(filename);
-	m_cmdlog->unsigned_32(REPLAY_MAGIC);
-	m_cmdlog->unsigned_8(REPLAY_VERSION);
+	m_cmdlog->unsigned_32(kReplayMagic);
+	m_cmdlog->unsigned_8(kCurrentPacketVersion);
 
 	game.rng().write_state(*m_cmdlog);
 }

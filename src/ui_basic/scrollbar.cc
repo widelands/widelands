@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2011, 2013 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2011, 2013, 2015 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -80,6 +80,11 @@ void Scrollbar::set_steps(int32_t steps)
 
 	m_steps = steps;
 	update();
+}
+
+
+bool Scrollbar::is_enabled() const {
+	return m_steps != 1 || m_force_draw;
 }
 
 
@@ -309,8 +314,9 @@ void Scrollbar::draw(RenderTarget & dst)
 	uint32_t knobpos = get_knob_pos();
 	uint32_t knobsize = get_knob_size();
 
-	if (m_steps == 1 && !m_force_draw)
+	if (!is_enabled()) {
 		return; // don't draw a not doing scrollbar
+	}
 
 	if (m_horizontal) {
 		if ((2 * Size + knobsize) > static_cast<uint32_t>(get_w())) {
@@ -378,7 +384,7 @@ void Scrollbar::think()
 	if (m_pressed == None || m_pressed == Knob)
 		return;
 
-	int32_t const time = WLApplication::get()->get_time();
+	uint32_t const time = SDL_GetTicks();
 	if (time < m_time_nextact)
 		return;
 
@@ -411,9 +417,7 @@ bool Scrollbar::handle_mousepress(const uint8_t btn, int32_t x, int32_t y) {
 			grab_mouse(true);
 			if (m_pressed != Knob) {
 				action(m_pressed);
-				m_time_nextact =
-					WLApplication::get()->get_time() +
-					MOUSE_BUTTON_AUTOREPEAT_DELAY;
+				m_time_nextact = SDL_GetTicks() + MOUSE_BUTTON_AUTOREPEAT_DELAY;
 			} else
 				m_knob_grabdelta = (m_horizontal ? x : y) - get_knob_pos();
 		}

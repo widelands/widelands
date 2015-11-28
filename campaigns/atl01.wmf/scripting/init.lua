@@ -57,8 +57,8 @@ end
 -- ware.
 function count_in_warehouses(ware)
    local whs = array_combine(
-      p1:get_buildings("headquarters"),
-      p1:get_buildings("warehouse")
+      p1:get_buildings("atlanteans_headquarters"),
+      p1:get_buildings("atlanteans_warehouse")
    )
    local rv = 0
    for idx,wh in ipairs(whs) do

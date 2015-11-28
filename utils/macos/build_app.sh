@@ -133,7 +133,6 @@ function BuildWidelands() {
       -DCMAKE_OSX_ARCHITECTURES:STRING="x86_64" \
       -DCMAKE_BUILD_TYPE:STRING="$TYPE" \
       -DCMAKE_PREFIX_PATH:PATH="/usr/local"
-
    ninja
 
    echo "Done building."

@@ -44,15 +44,15 @@ struct WareList {
 	using WareCountVector = std::vector<WareCount>;
 
 	/// \return Highest possible ware id
-	WareIndex get_nrwareids() const {return WareIndex(m_wares.size());}
+	DescriptionIndex get_nrwareids() const {return DescriptionIndex(m_wares.size());}
 
-	void add   (WareIndex, WareCount = 1);
+	void add   (DescriptionIndex, WareCount = 1);
 	void add(const WareList &);
-	void remove(WareIndex, WareCount = 1);
+	void remove(DescriptionIndex, WareCount = 1);
 	void remove(const WareList & wl);
-	WareCount stock(WareIndex) const;
+	WareCount stock(DescriptionIndex) const;
 
-	void set_nrwares(WareIndex const i) {
+	void set_nrwares(DescriptionIndex const i) {
 		assert(m_wares.empty());
 		m_wares.resize(i, 0);
 	}

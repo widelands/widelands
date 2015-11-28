@@ -55,7 +55,8 @@ EditorToolsizeMenu::EditorToolsizeMenu
 		 g_gr->images().get("pics/but0.png"),
 		 g_gr->images().get("pics/scrollbar_down.png"),
 		 std::string(),
-		 0 < parent.get_sel_radius())
+		 0 < parent.get_sel_radius()),
+	value_(0)
 {
 	m_increase.sigclicked.connect(boost::bind(&EditorToolsizeMenu::increase_radius, boost::ref(*this)));
 	m_decrease.sigclicked.connect(boost::bind(&EditorToolsizeMenu::decrease_radius, boost::ref(*this)));
@@ -64,16 +65,25 @@ EditorToolsizeMenu::EditorToolsizeMenu
 	m_decrease.set_repeating(true);
 	update(parent.get_sel_radius());
 
+	if (eia().tools.current().has_size_one()) {
+		set_buttons_enabled(false);
+	}
+
 	if (get_usedefaultpos())
 		center_to_parent();
 }
 
 
 void EditorToolsizeMenu::update(uint32_t const val) {
+	value_ = val;
 	eia().set_sel_radius(val);
-	m_decrease.set_enabled(0 < val);
-	m_increase.set_enabled    (val < MAX_TOOL_AREA);
+	set_buttons_enabled(true);
 	m_textarea.set_text((boost::format(_("Current Size: %u")) % (val + 1)).str());
+}
+
+void EditorToolsizeMenu::set_buttons_enabled(bool enable) {
+	m_decrease.set_enabled(enable && 0 < value_);
+	m_increase.set_enabled(enable && value_ < MAX_TOOL_AREA);
 }
 
 

@@ -22,4 +22,3 @@ game_status = {
   title = _ "Status",
   body = _ "Player overview:"
 }
-

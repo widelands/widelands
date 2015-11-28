@@ -157,17 +157,21 @@ void Battle::get_battle_work(Game & game, Soldier & soldier)
 
 	assert(m_first->get_battle() == this || m_second->get_battle() == this);
 
-	//  Created this three 'states' of the battle:
+	//  Created this four 'states' of the battle:
 	// *First time entered, one enters :
 	//    oneReadyToFight, mark m_readyflags as he is ready to fight
 	// *Next time, the opponent enters:
 	//    bothReadyToFight, mark m_readyflags as 3 (round fighted)
 	// *Next time, the first enters again:
-	//    roundFighted, reset m_readyflags
+	//    roundFought, reset m_readyflags
+	// *Opponent not on field yet, so one enters :
+	//    waitingForOpponent, if others are false
+
 	bool const oneReadyToFight  = (m_readyflags == 0);
-	bool const roundFighted     = (m_readyflags == 3);
+	bool const roundFought      = (m_readyflags == 3);
 	bool const bothReadyToFight = ((this_soldier_is | m_readyflags) == 3) &&
-		(!roundFighted);
+		(!roundFought);
+	bool const waitingForOpponent = !(oneReadyToFight || roundFought || bothReadyToFight);
 	std::string what_anim;
 
 	// Apply pending damage
@@ -193,18 +197,27 @@ void Battle::get_battle_work(Game & game, Soldier & soldier)
 	if (!m_first || !m_second)
 		return soldier.skip_act();
 
+	// Here is a timeout to prevent battle freezes
+	if (waitingForOpponent && (game.get_gametime() - m_creationtime) > 90 * 1000) {
+		molog("[battle] soldier %u waiting for opponent %u too long (%5d sec), cancelling battle...\n",
+			soldier.serial(),
+			opponent(soldier)->serial(),
+			(game.get_gametime() - m_creationtime) / 1000);
+		cancel(game, soldier);
+		return;
+	}
+
 	// So both soldiers are alive; are we ready to trade the next blow?
 	//
 	//  This code choses one of 3 codepaths:
 	//  *oneReadyToFight : This soldier is ready, but his opponent isn't, so
 	//                     wait until opponent "wakeup"-us
 	//  *bothReadyToFight: Opponent is ready to fight, so calculate this round
-	//                     and set flags to 'roundFighted', so the opponent
+	//                     and set flags to 'roundFought', so the opponent
 	//                     will know that it need to set proper animation
-	//  *roundFighted    : Opponent has calculated this round, so this soldier
+	//  *roundFought     : Opponent has calculated this round, so this soldier
 	//                     only need to set his proper animation.
 	//
-
 	if (oneReadyToFight) {
 		//  My opponent is not ready to battle. Idle until he wakes me up.
 		assert(m_readyflags == 0);
@@ -237,7 +250,7 @@ void Battle::get_battle_work(Game & game, Soldier & soldier)
 		opponent(soldier)->send_signal(game, "wakeup");
 	}
 
-	if (roundFighted) {
+	if (roundFought) {
 		//  Both of us were already ready. That means that we already fought and
 		//  it is time to wait until both become ready.
 		m_readyflags = 0;
@@ -342,9 +355,9 @@ Load/Save support
 ==============================
 */
 
-#define BATTLE_SAVEGAME_VERSION 2
+constexpr uint8_t kCurrentPacketVersion = 2;
 
-void Battle::Loader::load(FileRead & fr, uint8_t const version)
+void Battle::Loader::load(FileRead & fr)
 {
 	MapObject::Loader::load(fr);
 
@@ -353,10 +366,7 @@ void Battle::Loader::load(FileRead & fr, uint8_t const version)
 	battle.m_creationtime  = fr.signed_32();
 	battle.m_readyflags    = fr.unsigned_8();
 	battle.m_first_strikes = fr.unsigned_8();
-
-	if (version == BATTLE_SAVEGAME_VERSION)
-		battle.m_damage     = fr.unsigned_32();
-
+	battle.m_damage     = fr.unsigned_32();
 	m_first                = fr.unsigned_32();
 	m_second               = fr.unsigned_32();
 }
@@ -387,7 +397,7 @@ void Battle::save
 	(EditorGameBase & egbase, MapObjectSaver & mos, FileWrite & fw)
 {
 	fw.unsigned_8(HeaderBattle);
-	fw.unsigned_8(BATTLE_SAVEGAME_VERSION);
+	fw.unsigned_8(kCurrentPacketVersion);
 
 	MapObject::save(egbase, mos, fw);
 
@@ -410,12 +420,13 @@ MapObject::Loader * Battle::load
 	try {
 		// Header has been peeled away by caller
 
-		uint8_t const version = fr.unsigned_8();
-		if (version <= BATTLE_SAVEGAME_VERSION) {
+		uint8_t const packet_version = fr.unsigned_8();
+		if (packet_version == kCurrentPacketVersion) {
 			loader->init(egbase, mol, *new Battle);
-			loader->load(fr, version);
-		} else
-			throw GameDataError("unknown/unhandled version %u", version);
+			loader->load(fr);
+		} else {
+			throw UnhandledVersionError("Battle", packet_version, kCurrentPacketVersion);
+		}
 	} catch (const std::exception & e) {
 		throw wexception("Loading Battle: %s", e.what());
 	}

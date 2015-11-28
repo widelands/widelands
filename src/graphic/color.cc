@@ -20,10 +20,13 @@
 #include "graphic/color.h"
 
 RGBColor::RGBColor() : RGBColor(0, 0, 0) {
-}
 
 RGBColor::RGBColor(uint8_t const R, uint8_t const G, uint8_t const B) :
 	r(R), g(G), b(B) {}
+
+std::string RGBColor::hex_value() const {
+	return (boost::format ("%02x%02x%02x") % int(r) % int(g) % int(b)).str();
+}
 
 uint32_t RGBColor::map(const SDL_PixelFormat& fmt) const {
 	return SDL_MapRGB(&const_cast<SDL_PixelFormat&>(fmt), r, g, b);
@@ -51,6 +54,10 @@ RGBAColor::RGBAColor(const RGBColor& c) {
 	g = c.g;
 	b = c.b;
 	a = 255;
+}
+
+std::string RGBAColor::hex_value() const {
+	return (boost::format ("%02x%02x%02x%02x>") % int(r) % int(g) % int(b) % int(a)).str();
 }
 
 uint32_t RGBAColor::map(const SDL_PixelFormat& fmt) const {

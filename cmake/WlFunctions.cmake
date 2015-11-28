@@ -15,6 +15,7 @@ macro(_parse_common_args ARGS)
     USES_SDL2_NET
     USES_SDL2_TTF
     USES_ZLIB
+    USES_ICU
   )
   set(ONE_VALUE_ARG )
   set(MULTI_VALUE_ARGS SRCS DEPENDS)
@@ -140,6 +141,11 @@ macro(_common_compile_tasks)
 
   if (ARG_USES_BOOST_REGEX)
     target_link_libraries(${NAME} ${Boost_LIBRARIES})
+  endif()
+
+  if(ARG_USES_ICU)
+    wl_include_system_directories(${NAME} ${ICU_INCLUDE_DIRS})
+    target_link_libraries(${NAME} ${ICU_LIBRARIES})
   endif()
 
   foreach(DEPENDENCY ${ARG_DEPENDS})

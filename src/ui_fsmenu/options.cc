@@ -33,6 +33,7 @@
 #include "graphic/default_resolution.h"
 #include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
+#include "graphic/text/bidi.h"
 #include "graphic/text/font_set.h"
 #include "graphic/text_constants.h"
 #include "helper.h"
@@ -91,6 +92,7 @@ void find_selected_locale(std::string* selected_locale, const std::string& curre
 
 }  // namespace
 
+// TODO(GunChleoc): Arabic: This doesn't fit the window in Arabic.
 FullscreenMenuOptions::FullscreenMenuOptions
 		(OptionsCtrl::OptionsStruct opt)
 	:
@@ -142,38 +144,22 @@ FullscreenMenuOptions::FullscreenMenuOptions
 
 	m_fullscreen (this, Point(m_hmargin,
 									  m_reslist.get_y() +
-									  m_reslist.get_h() + m_padding)),
-	m_label_fullscreen
-		(this,
-		 m_hmargin + m_fullscreen.get_w() + m_padding,
-		 m_reslist.get_y() + m_reslist.get_h() + m_padding,
-		 m_reslist.get_w() - m_fullscreen.get_w() - m_padding,
-		 m_fullscreen.get_h(),
-		 _("Fullscreen"), UI::Align_VCenter),
-
+									  m_reslist.get_h() + m_padding),
+					  _("Fullscreen")),
 	m_inputgrab (this, Point(m_hmargin,
-									 m_label_fullscreen.get_y() +
-									 m_label_fullscreen.get_h() + m_padding)),
-	m_label_inputgrab
-		(this,
-		 m_hmargin + m_inputgrab.get_w() + m_padding,
-		 m_label_fullscreen.get_y() + m_label_fullscreen.get_h() + m_padding,
-		 m_reslist.get_w() - m_inputgrab.get_w() - m_padding,
-		 m_inputgrab.get_h(),
-		 _("Grab Input"), UI::Align_VCenter),
-
+									 m_fullscreen.get_y() +
+									 m_fullscreen.get_h() + m_padding),
+					 _("Grab Input")),
 	m_label_maxfps
 		(this,
 		 m_hmargin,
-		 m_label_inputgrab.get_y() + m_label_inputgrab.get_h() + m_padding,
-		 m_reslist.get_w() - 80, m_inputgrab.get_h(),
+		 m_inputgrab.get_y() + m_inputgrab.get_h() + m_padding,
+		 m_reslist.get_w() - 105, m_inputgrab.get_h(),
 		 _("Maximum FPS:"), UI::Align_VCenter),
 	m_sb_maxfps
 		(this,
-		 m_hmargin + m_reslist.get_w() - 80, m_label_maxfps.get_y(),
-		 80, m_vbutw,
-		 opt.maxfps, 0, 99, "",
-		 g_gr->images().get("pics/but1.png")),
+		 m_hmargin + m_reslist.get_w() - 105, m_label_maxfps.get_y(), 105,
+		 opt.maxfps, 0, 99, ""),
 
 
 	// First options block 'general options', second column
@@ -190,23 +176,12 @@ FullscreenMenuOptions::FullscreenMenuOptions
 
 	m_music (this, Point(m_label_language.get_x(),
 								m_language_list.get_y() +
-								m_language_list.get_h() + m_padding)),
-	m_label_music
-		(this,
-		 m_label_language.get_x() + m_music.get_w() + m_padding,
-		 m_language_list.get_y() + m_language_list.get_h() + m_padding,
-		 m_language_list.get_w(), m_music.get_h(),
-		 _("Enable Music"), UI::Align_VCenter),
-
+								m_language_list.get_h() + m_padding),
+				_("Enable Music")),
 	m_fx (this, Point(m_label_language.get_x(),
-							m_label_music.get_y() +
-							m_label_music.get_h() + m_padding)),
-	m_label_fx
-		(this,
-		 m_label_language.get_x() + m_fx.get_w() + m_padding,
-		 m_label_music.get_y() + m_label_music.get_h() + m_padding,
-		 m_language_list.get_w(), m_fx.get_h(),
-		 _("Enable Sound"), UI::Align_VCenter),
+							m_music.get_y() +
+							m_music.get_h() + m_padding),
+			_("Enable Sound Effects")),
 
 	// Second options block 'In-game options'
 	// Title 2
@@ -215,65 +190,39 @@ FullscreenMenuOptions::FullscreenMenuOptions
 		 get_w() / 2, get_h() / 2,
 		 _("In-game Options"), UI::Align_HCenter),
 
-	m_single_watchwin (this, Point(m_hmargin, m_offset_second_group)),
-	m_label_single_watchwin
-		(this,
-		 m_single_watchwin.get_x() + m_single_watchwin.get_w() + m_padding,
-		 m_offset_second_group,
-		 get_w() - 2 * m_hmargin - m_single_watchwin.get_w(), m_single_watchwin.get_h(),
-		 _("Use single watchwindow mode"), UI::Align_VCenter),
+	/** TRANSLATORS: A watchwindow is a window where you keep watching an object or a map region,*/
+	/** TRANSLATORS: and it also lets you jump to it on the map. */
+	m_single_watchwin (this, Point(m_hmargin, m_offset_second_group), _("Use single watchwindow mode")),
 
 	m_auto_roadbuild_mode (this, Point(m_single_watchwin.get_x(),
-												  m_label_single_watchwin.get_y() +
-												  m_label_single_watchwin.get_h() + m_padding)),
-	m_label_auto_roadbuild_mode
-		(this,
-		 m_auto_roadbuild_mode.get_x() + m_auto_roadbuild_mode.get_w() + m_padding,
-		 m_label_single_watchwin.get_y() + m_label_single_watchwin.get_h() + m_padding,
-		 get_w() - 2 * m_hmargin - m_auto_roadbuild_mode.get_w(), m_auto_roadbuild_mode.get_h(),
-		 _("Start building road after placing a flag"), UI::Align_VCenter),
-
+												  m_single_watchwin.get_y() +
+												  m_single_watchwin.get_h() + m_padding),
+								  _("Start building road after placing a flag")),
 	m_show_workarea_preview
 		(this, Point(m_auto_roadbuild_mode.get_x(),
-						 m_label_auto_roadbuild_mode.get_y() +
-						 m_label_auto_roadbuild_mode.get_h() + m_padding)),
-	m_label_show_workarea_preview
-		(this,
-		 m_show_workarea_preview.get_x() + m_show_workarea_preview.get_w() + m_padding,
-		 m_label_auto_roadbuild_mode.get_y() + m_label_auto_roadbuild_mode.get_h() + m_padding,
-		 get_w() - 2 * m_hmargin - m_show_workarea_preview.get_w(), m_show_workarea_preview.get_h(),
-		 _("Show buildings area preview"), UI::Align_VCenter),
+						 m_auto_roadbuild_mode.get_y() +
+						 m_auto_roadbuild_mode.get_h() + m_padding),
+		 _("Show buildings area preview")),
 
 	m_snap_win_overlap_only
 		(this, Point(m_show_workarea_preview.get_x(),
-						 m_label_show_workarea_preview.get_y() +
-						 m_label_show_workarea_preview.get_h() + m_padding)),
-	m_label_snap_win_overlap_only
-		(this,
-		 m_snap_win_overlap_only.get_x() + m_snap_win_overlap_only.get_w() + m_padding,
-		 m_label_show_workarea_preview.get_y() + m_label_show_workarea_preview.get_h() + m_padding,
-		 get_w() - 2 * m_hmargin - m_snap_win_overlap_only.get_w(), m_snap_win_overlap_only.get_h(),
-		 _("Snap windows only when overlapping"), UI::Align_VCenter),
+						 m_show_workarea_preview.get_y() +
+						 m_show_workarea_preview.get_h() + m_padding),
+		 _("Snap windows only when overlapping")),
 
 	m_dock_windows_to_edges (this, Point(m_snap_win_overlap_only.get_x(),
-													 m_label_snap_win_overlap_only.get_y() +
-													 m_label_snap_win_overlap_only.get_h() + m_padding)),
-	m_label_dock_windows_to_edges
-		(this,
-		 m_dock_windows_to_edges.get_x() + m_dock_windows_to_edges.get_w() + m_padding,
-		 m_label_snap_win_overlap_only.get_y() + m_label_snap_win_overlap_only.get_h() + m_padding,
-		 get_w() - 2 * m_hmargin - m_dock_windows_to_edges.get_w(), m_dock_windows_to_edges.get_h(),
-		 _("Dock windows to edges"), UI::Align_VCenter),
-
+													 m_snap_win_overlap_only.get_y() +
+													 m_snap_win_overlap_only.get_h() + m_padding),
+									 _("Dock windows to edges")),
 	m_sb_autosave
 		(this,
 		 get_w() - m_hmargin - 240,
 		 m_dock_windows_to_edges.get_y() + m_dock_windows_to_edges.get_h() + m_padding,
-		 240, m_vbutw,
+		 240,
 		 /** TRANSLATORS: Options: Save game automatically every: */
 		 /** TRANSLATORS: This will have a number added in front of it */
 		 opt.autosave / 60, 0, 100, ngettext("minute", "minutes", opt.autosave / 60),
-		 g_gr->images().get("pics/but1.png"), true),
+		 g_gr->images().get("pics/but3.png"), true),
 	m_label_autosave
 		(this,
 		 m_dock_windows_to_edges.get_x(),
@@ -286,11 +235,11 @@ FullscreenMenuOptions::FullscreenMenuOptions
 		(this,
 		 get_w() - m_hmargin - 240,
 		 m_sb_autosave.get_y() + m_sb_autosave.get_h() + m_padding,
-		 240, m_vbutw,
+		 240,
 		 /** TRANSLATORS: Options: Remove Replays older than: */
 		 /** TRANSLATORS: This will have a number added in front of it */
 		 opt.remove_replays, 0, 365, ngettext("day", "days", opt.remove_replays),
-		 g_gr->images().get("pics/but1.png"), true),
+		 g_gr->images().get("pics/but3.png"), true),
 	m_label_remove_replays
 		(this,
 		 m_label_autosave.get_x(),
@@ -303,10 +252,8 @@ FullscreenMenuOptions::FullscreenMenuOptions
 {
 	m_advanced_options.sigclicked.connect
 		(boost::bind(&FullscreenMenuOptions::advanced_options, boost::ref(*this)));
-	m_cancel.sigclicked.connect
-		(boost::bind(&FullscreenMenuOptions::end_modal, this, static_cast<int32_t>(om_cancel)));
-	m_apply.sigclicked.connect
-		(boost::bind(&FullscreenMenuOptions::end_modal, this, static_cast<int32_t>(om_ok)));
+	m_cancel.sigclicked.connect(boost::bind(&FullscreenMenuOptions::clicked_back, this));
+	m_apply.sigclicked.connect(boost::bind(&FullscreenMenuOptions::clicked_ok, this));
 
 	/** TRANSLATORS Options: Save game automatically every: */
 	m_sb_autosave     .add_replacement(0, _("Off"));
@@ -394,9 +341,9 @@ void FullscreenMenuOptions::update_sb_remove_replays_unit() {
 
 void FullscreenMenuOptions::advanced_options() {
 	FullscreenMenuAdvancedOptions aom(os);
-	if (aom.run() == FullscreenMenuAdvancedOptions::om_ok) {
+	if (aom.run<FullscreenMenuBase::MenuTarget>() == FullscreenMenuBase::MenuTarget::kOk) {
 		os = aom.get_values();
-		end_modal(om_restart);
+		end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kRestart);
 	}
 }
 
@@ -433,9 +380,10 @@ void FullscreenMenuOptions::add_languages_to_list(const std::string& current_loc
 				std::unique_ptr<LuaTable> table = all_locales->get_table(localename);
 				table->do_not_warn_about_unaccessed_keys();
 
-				const std::string name = table->get_string("name");
+				std::string name = i18n::make_ligatures(table->get_string("name").c_str());
 				const std::string sortname = table->get_string("sort_name");
 				std::unique_ptr<UI::FontSet> fontset(new UI::FontSet(localename));
+
 				entries.push_back(LanguageEntry(localename, name, sortname, fontset->serif()));
 
 				if (localename == current_locale) {
@@ -461,25 +409,6 @@ void FullscreenMenuOptions::add_languages_to_list(const std::string& current_loc
 	}
 }
 
-
-bool FullscreenMenuOptions::handle_key(bool down, SDL_Keysym code)
-{
-	if (down) {
-		switch (code.sym) {
-			case SDLK_KP_ENTER:
-			case SDLK_RETURN:
-				end_modal(static_cast<int32_t>(om_ok));
-				return true;
-			case SDLK_ESCAPE:
-				end_modal(static_cast<int32_t>(om_cancel));
-				return true;
-			default:
-				break; // not handled
-		}
-	}
-
-	return FullscreenMenuBase::handle_key(down, code);
-}
 
 OptionsCtrl::OptionsStruct FullscreenMenuOptions::get_values() {
 	const uint32_t res_index = m_reslist.selection_index();
@@ -553,56 +482,38 @@ FullscreenMenuAdvancedOptions::FullscreenMenuAdvancedOptions
 	// Spinboxes
 	m_sb_dis_panel
 			(this,
-			 get_w() - m_hmargin - (get_w() / 5), m_label_snap_dis_panel.get_y(),
-			 get_w() / 5, m_vbutw,
-			 opt.panel_snap_distance, 0, 99, ngettext("pixel", "pixels", opt.panel_snap_distance),
-			 g_gr->images().get("pics/but1.png")),
+			 get_w() - m_hmargin - (get_w() / 5), m_label_snap_dis_panel.get_y(), get_w() / 5,
+			 opt.panel_snap_distance, 0, 99, ngettext("pixel", "pixels", opt.panel_snap_distance)),
 
 	m_sb_dis_border
 			(this,
-			 get_w() - m_hmargin - (get_w() / 5), m_label_snap_dis_border.get_y(),
-			 get_w() / 5, m_vbutw,
-			 opt.border_snap_distance, 0, 99, ngettext("pixel", "pixels", opt.border_snap_distance),
-			 g_gr->images().get("pics/but1.png")),
+			 get_w() - m_hmargin - (get_w() / 5), m_label_snap_dis_border.get_y(), get_w() / 5,
+			 opt.border_snap_distance, 0, 99, ngettext("pixel", "pixels", opt.border_snap_distance)),
 
 	m_transparent_chat (this, Point(m_hmargin,
 											  m_label_snap_dis_border.get_y() +
-											  m_label_snap_dis_border.get_h() + m_space)),
-	m_label_transparent_chat
-		(this,
-		 m_hmargin + m_transparent_chat.get_w() + m_padding, m_transparent_chat.get_y(),
-		 get_w() - 2 * m_hmargin - m_transparent_chat.get_w() - m_padding, 40,
-		 _("Show in-game chat with transparent background"), UI::Align_VCenter),
+											  m_label_snap_dis_border.get_h() + m_space),
+							  _("Show in-game chat with transparent background"),
+							  "", get_w() - 2 * m_hmargin),
 
 	m_message_sound
 		(this, Point(m_hmargin,
-						 m_label_transparent_chat.get_y() +
-						 m_label_transparent_chat.get_h() + m_padding)),
-	m_label_message_sound
-		(this,
-		 m_hmargin + m_message_sound.get_w() + m_padding, m_message_sound.get_y(),
-		 get_w() - 2 * m_hmargin - m_message_sound.get_w() - m_padding, 40,
-		 _("Play a sound at message arrival."),
-		 UI::Align_VCenter),
+						 m_transparent_chat.get_y() +
+						 m_transparent_chat.get_h() + m_padding),
+		 _("Play a sound at message arrival"),
+		 "", get_w() - 2 * m_hmargin),
 
 	m_nozip (this, Point(m_hmargin,
-								m_label_message_sound.get_y() +
-								m_label_message_sound.get_h() + m_padding)),
-	m_label_nozip
-		(this,
-		 m_hmargin + m_nozip.get_w() + m_padding, m_nozip.get_y(),
-		 get_w() - 2 * m_hmargin - m_nozip.get_w() - m_padding, 40,
-		 _("Do not zip widelands data files (maps, replays and savegames)."),
-		 UI::Align_VCenter),
+								m_message_sound.get_y() +
+								m_message_sound.get_h() + m_padding),
+				_("Do not zip widelands data files (maps, replays and savegames)"),
+				"", get_w() - 2 * m_hmargin),
 
 	m_remove_syncstreams (this, Point(m_hmargin,
-												 m_label_nozip.get_y() +
-												 m_label_nozip.get_h() + m_padding)),
-	m_label_remove_syncstreams
-		(this,
-		 m_hmargin + m_remove_syncstreams.get_w() + m_padding, m_remove_syncstreams.get_y(),
-		 get_w() - 2 * m_hmargin - m_remove_syncstreams.get_w() - m_padding, 40,
-		 _("Remove Syncstream dumps on startup"), UI::Align_VCenter),
+												 m_nozip.get_y() +
+												 m_nozip.get_h() + m_padding),
+								 _("Remove Syncstream dumps on startup"),
+								 "", get_w() - 2 * m_hmargin),
 
 	os(opt)
 {
@@ -620,41 +531,14 @@ FullscreenMenuAdvancedOptions::FullscreenMenuAdvancedOptions
 					 boost::ref(*this)));
 	}
 
-	m_cancel.sigclicked.connect
-		(boost::bind
-			(&FullscreenMenuAdvancedOptions::end_modal,
-			 boost::ref(*this),
-			 static_cast<int32_t>(om_cancel)));
-	m_apply.sigclicked.connect
-		(boost::bind
-			(&FullscreenMenuAdvancedOptions::end_modal,
-			 boost::ref(*this),
-			 static_cast<int32_t>(om_ok)));
+	m_cancel.sigclicked.connect(boost::bind(&FullscreenMenuAdvancedOptions::clicked_back, boost::ref(*this)));
+	m_apply.sigclicked.connect(boost::bind(&FullscreenMenuAdvancedOptions::clicked_ok, boost::ref(*this)));
 
 	m_title                .set_textstyle(UI::TextStyle::ui_big());
 	m_message_sound        .set_state(opt.message_sound);
 	m_nozip                .set_state(opt.nozip);
 	m_remove_syncstreams   .set_state(opt.remove_syncstreams);
 	m_transparent_chat     .set_state(opt.transparent_chat);
-}
-
-bool FullscreenMenuAdvancedOptions::handle_key(bool down, SDL_Keysym code)
-{
-	if (down) {
-		switch (code.sym) {
-			case SDLK_KP_ENTER:
-			case SDLK_RETURN:
-				end_modal(static_cast<int32_t>(om_ok));
-				return true;
-			case SDLK_ESCAPE:
-				end_modal(static_cast<int32_t>(om_cancel));
-				return true;
-			default:
-				break; // not handled
-		}
-	}
-
-	return FullscreenMenuBase::handle_key(down, code);
 }
 
 void FullscreenMenuAdvancedOptions::update_sb_dis_panel_unit() {
@@ -692,10 +576,10 @@ OptionsCtrl::~OptionsCtrl() {
 
 void OptionsCtrl::handle_menu()
 {
-	int32_t i = m_opt_dialog->run();
-	if (i != FullscreenMenuOptions::om_cancel)
+	FullscreenMenuBase::MenuTarget i = m_opt_dialog->run<FullscreenMenuBase::MenuTarget>();
+	if (i != FullscreenMenuBase::MenuTarget::kBack)
 		save_options();
-	if (i == FullscreenMenuOptions::om_restart) {
+	if (i == FullscreenMenuBase::MenuTarget::kRestart) {
 		delete m_opt_dialog;
 		m_opt_dialog = new FullscreenMenuOptions(options_struct());
 		handle_menu(); // Restart general options menu

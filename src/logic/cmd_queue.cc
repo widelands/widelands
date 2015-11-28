@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2007-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2007-2008, 2015 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -98,9 +98,8 @@ void CmdQueue::enqueue (Command * const cmd)
 	++ m_ncmds;
 }
 
-int32_t CmdQueue::run_queue(int32_t const interval, int32_t & game_time_var) {
-	int32_t const final = game_time_var + interval;
-	int32_t cnt = 0;
+void CmdQueue::run_queue(int32_t const interval, uint32_t & game_time_var) {
+	uint32_t const final = game_time_var + interval;
 
 	while (game_time_var < final) {
 		std::priority_queue<CmdItem> & current_cmds = m_cmds[game_time_var % CMD_QUEUE_BUCKET_SIZE];
@@ -131,15 +130,12 @@ int32_t CmdQueue::run_queue(int32_t const interval, int32_t & game_time_var) {
 
 	assert(final - game_time_var == 0);
 	game_time_var = final;
-
-	return cnt;
 }
 
 
 Command::~Command () {}
 
-
-#define BASE_CMD_VERSION 1
+constexpr uint16_t kCurrentPacketVersion = 1;
 
 /**
  * Write variables from the base command to a file.
@@ -155,8 +151,7 @@ void GameLogicCommand::write
 #endif
 	 MapObjectSaver &)
 {
-	// First version
-	fw.unsigned_16(BASE_CMD_VERSION);
+	fw.unsigned_16(kCurrentPacketVersion);
 
 	// Write duetime
 	assert(egbase.get_gametime() <= duetime());
@@ -173,15 +168,15 @@ void GameLogicCommand::read
 {
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
-		if (packet_version == BASE_CMD_VERSION) {
+		if (packet_version == kCurrentPacketVersion) {
 			set_duetime(fr.unsigned_32());
-			int32_t const gametime = egbase.get_gametime();
+			uint32_t const gametime = egbase.get_gametime();
 			if (duetime() < gametime)
 				throw GameDataError
 					("duetime (%i) < gametime (%i)", duetime(), gametime);
-		} else
-			throw GameDataError
-				("unknown/unhandled version %u", packet_version);
+		} else {
+			throw UnhandledVersionError("GameLogicCommand", packet_version, kCurrentPacketVersion);
+		}
 	} catch (const WException & e) {
 		throw GameDataError("game logic: %s", e.what());
 	}

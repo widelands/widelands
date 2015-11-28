@@ -30,7 +30,6 @@
 #include "base/macros.h"
 #include "economy/flag.h"
 #include "game_io/game_loader.h"
-#include "graphic/font_handler.h"
 #include "logic/building.h"
 #include "logic/cmd_queue.h"
 #include "logic/constants.h"
@@ -40,7 +39,7 @@
 #include "logic/player.h"
 #include "logic/productionsite.h"
 #include "logic/soldier.h"
-#include "logic/tribe.h"
+#include "logic/tribes/tribe_descr.h"
 #include "profile/profile.h"
 #include "ui_basic/unique_window.h"
 #include "wui/building_statistics_menu.h"
@@ -106,7 +105,7 @@ m_toggle_message_menu
 	 ("menu_toggle_oldmessage_menu", "messages", _("Messages"))),
 m_toggle_help
 	(INIT_BTN
-	 ("menu_help", "help", _("Tribal Ware Encyclopedia")))
+	 ("menu_help", "help", _("Tribal Encyclopedia")))
 
 {
 	m_toggle_chat.sigclicked.connect
@@ -334,6 +333,14 @@ bool InteractivePlayer::handle_key(bool const down, SDL_Keysym const code)
 
 		case SDLK_c:
 			set_display_flag(dfShowCensus, !get_display_flag(dfShowCensus));
+			return true;
+
+		case SDLK_b:
+			if (m_mainm_windows.building_stats.window == nullptr) {
+				new BuildingStatisticsMenu(*this, m_mainm_windows.building_stats);
+			} else {
+				m_mainm_windows.building_stats.toggle();
+			}
 			return true;
 
 		case SDLK_s:

@@ -9,7 +9,6 @@ world="desert"
 name=_"Trident of Fire"
 author="Robnick"
 descr=_"In the vicinity of three major volcanoes, six lovely islands are inviting settlers to start a new life. Deserts and a quickly growing forest wait to be discovered. But only by becoming a naval power will your tribe be able to explore enough resources to compete with its opponents."
-hint=_"Suggested teams: red vs. green | (blue, yellow) vs. (green, orange) | (blue, black) vs. (green, red) | (blue, black, yellow) vs. (green, red, orange)"
 tags="official,seafaring,1v1,2teams,3teams"
 
 [teams00]

@@ -37,7 +37,7 @@ struct EmptyAI : ComputerPlayer {
 
 	struct EmptyAIImpl : Implementation {
 		/** TRANSLATORS: This is the name of an AI used in the game setup screens */
-		EmptyAIImpl() {name = _("None");}
+		EmptyAIImpl() {name = pgettext("ai_name", "None");}
 		ComputerPlayer * instantiate
 			(Widelands::Game & g, Widelands::PlayerNumber const pid) const override
 		{
@@ -56,9 +56,9 @@ ComputerPlayer::get_implementations()
 	static std::vector<ComputerPlayer::Implementation const *> impls;
 
 	if (impls.empty()) {
-		impls.push_back(&DefaultAI::aggressiveImpl);
-		impls.push_back(&DefaultAI::normalImpl);
-		impls.push_back(&DefaultAI::defensiveImpl);
+		impls.push_back(&DefaultAI::strong_impl);
+		impls.push_back(&DefaultAI::normal_impl);
+		impls.push_back(&DefaultAI::weak_impl);
 		impls.push_back(&EmptyAI::implementation);
 	}
 

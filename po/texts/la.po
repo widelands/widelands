@@ -7,15 +7,82 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-03-06 16:48+0000\n"
-"PO-Revision-Date: 2015-03-06 16:49+0000\n"
+"POT-Creation-Date: 2015-11-18 08:43+0000\n"
+"PO-Revision-Date: 2015-11-18 08:43+0000\n"
 "Last-Translator: GunChleoc\n"
-"Language-Team: Latin (http://www.transifex.com/projects/p/widelands/language/la/)\n"
+"Language-Team: Latin (http://www.transifex.com/widelands/widelands/language/la/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: la\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: ../../txts/AUTHORS.lua:40
+msgid "Authors"
+msgstr ""
+
+#: ../../txts/AUTHORS.lua:42
+msgid "Widelands Development Team"
+msgstr "Concilium Widelands ludum fingens"
+
+#: ../../txts/LICENSE.lua:18
+msgid "License"
+msgstr "Licentia"
+
+#: ../../txts/LICENSE.lua:20
+msgid "Licensing information for Widelands"
+msgstr ""
+
+#: ../../txts/LICENSE.lua:23
+msgid "Copyright 2002 - 2015 by the Widelands Development Team."
+msgstr ""
+
+#: ../../txts/LICENSE.lua:24
+msgid ""
+"This game is Free and Open Source (FOSS), licensed under the GNU General "
+"Public License (GPL) V2.0."
+msgstr ""
+
+#: ../../txts/LICENSE.lua:26
+msgid ""
+"You can find more information on FOSS and the GPL by visiting the following "
+"webpage:  %s"
+msgstr ""
+
+#: ../../txts/LICENSE.lua:27
+msgid ""
+"You can find the full text of the license there as well as further "
+"information about its philosophy and the legal implications."
+msgstr ""
+
+#: ../../txts/LICENSE.lua:29
+msgid "We are also shipping the GPL as a text document with Widelands itself."
+msgstr ""
+
+#: ../../txts/LICENSE.lua:30
+msgid ""
+"On Linux, you can find the file called COPYING in the root of the source or "
+"standalone binary package, or in the installation directory (like ‘%1%’)."
+msgstr ""
+
+#: ../../txts/LICENSE.lua:31
+msgid ""
+"On Windows, you can find the file called COPYING.txt in the installation "
+"folder, and the Widelands Start menu entry provides a link to this file."
+msgstr ""
+
+#: ../../txts/LICENSE.lua:32
+msgid ""
+"On MacOS, you can find the file called COPYING in the archive you downloaded"
+" from the website."
+msgstr ""
+
+#: ../../txts/LICENSE.lua:34
+msgid ""
+"This game comes as-is and without any warranty. For more information and "
+"support you can find us at %1% (Website, Wiki, Forum for questions or "
+"general support), %2% (Bugtracker), and %3% (Translations)."
+msgstr ""
 
 #: ../../txts/README.lua:6
 msgid "README"
@@ -25,7 +92,7 @@ msgstr "LEGEME"
 msgid "an open source strategy game"
 msgstr ""
 
-#: ../../txts/README.lua:17 ../../txts/editor_readme:7
+#: ../../txts/README.lua:17 ../../txts/editor_readme.lua:10
 msgid "Introduction"
 msgstr "Introduction"
 
@@ -75,208 +142,218 @@ msgstr ""
 
 #: ../../txts/README.lua:47
 msgid ""
-"To close an open window, right-click on it. To minimize/maximize a window, click\n"
-"on the title bar of that window either with the middle mouse button or with the left\n"
-"mouse button while holding down CTRL."
+"To close an open window, right-click on it. To minimize/maximize a window, "
+"click on it with the middle mouse button or with the left mouse button while"
+" holding down CTRL."
 msgstr ""
 
-#: ../../txts/README.lua:51
+#: ../../txts/README.lua:49
 msgid ""
 "If you hold CTRL while building a road, flags will be placed automatically.\n"
 "If you hold CTRL while removing a road, all flags up to the first junction are\n"
 "removed."
 msgstr ""
 
-#: ../../txts/README.lua:55
+#: ../../txts/README.lua:53
 msgid ""
 "You can skip confirmation windows for irreversible actions if you hold CTRL\n"
 "while clicking on the action button."
 msgstr ""
 
-#: ../../txts/README.lua:58
+#: ../../txts/README.lua:56
 msgid "Keyboard shortcuts (in-game)"
 msgstr "claviaturae iussa (in ludo)"
 
-#: ../../txts/README.lua:60
+#: ../../txts/README.lua:58
 msgid "PAGEUP: increases game speed"
 msgstr ""
 
-#: ../../txts/README.lua:61
+#: ../../txts/README.lua:59
 msgid "PAGEDOWN: decreases game speed"
 msgstr ""
 
-#: ../../txts/README.lua:62
+#: ../../txts/README.lua:60
 msgid "PAUSE: pauses the game"
 msgstr ""
 
-#: ../../txts/README.lua:63 ../../txts/editor_readme:21
+#: ../../txts/README.lua:61
 msgid "SPACE: toggles if building spaces are shown"
 msgstr ""
 
-#: ../../txts/README.lua:64 ../../txts/editor_readme:29
+#: ../../txts/README.lua:62
 msgid "M: toggles minimap"
 msgstr ""
 
-#: ../../txts/README.lua:65
+#: ../../txts/README.lua:63
 msgid "N: toggles messages (‘news’)"
 msgstr ""
 
-#: ../../txts/README.lua:66 ../../txts/editor_readme:23
+#: ../../txts/README.lua:64
 msgid "C: toggles census"
 msgstr ""
 
-#: ../../txts/README.lua:67
+#: ../../txts/README.lua:65
 msgid "S: toggles statistics"
 msgstr ""
 
-#: ../../txts/README.lua:68
+#: ../../txts/README.lua:66
 msgid "I: toggles stock inventory"
 msgstr ""
 
-#: ../../txts/README.lua:69
+#: ../../txts/README.lua:67
 msgid "O: toggles objectives"
 msgstr ""
 
-#: ../../txts/README.lua:70
+#: ../../txts/README.lua:68
+msgid "B: toggles building statistics"
+msgstr ""
+
+#: ../../txts/README.lua:69
 msgid "F: toggles fullscreen (if supported by the OS)"
 msgstr ""
 
-#: ../../txts/README.lua:71
+#: ../../txts/README.lua:70
 msgid "Home: centers main mapview on starting location"
 msgstr ""
 
-#: ../../txts/README.lua:72
+#: ../../txts/README.lua:71
 msgid "(CTRL+) 0-9: Remember and go to previously remembered locations"
 msgstr ""
 
-#: ../../txts/README.lua:73
+#: ../../txts/README.lua:72
 msgid ",: goes to the previous location"
 msgstr ""
 
-#: ../../txts/README.lua:74
+#: ../../txts/README.lua:73
 msgid ".: goes to the next location"
 msgstr ""
 
-#: ../../txts/README.lua:75
+#: ../../txts/README.lua:74
 msgid "F6: shows the debug console (only in debug-builds)"
 msgstr ""
 
-#: ../../txts/README.lua:76
+#: ../../txts/README.lua:75
 msgid "CTRL+F10: quits the game immediately"
 msgstr ""
 
-#: ../../txts/README.lua:77
+#: ../../txts/README.lua:76
 msgid "CTRL+Leftclick: skips confirmation dialogs"
 msgstr ""
 
-#: ../../txts/README.lua:78
+#: ../../txts/README.lua:77
 msgid "CTRL+F11: takes a screenshot"
 msgstr ""
 
-#: ../../txts/README.lua:80
+#: ../../txts/README.lua:79
 msgid ""
 "In the message window, the following additional shortcuts are available:"
 msgstr ""
 
-#: ../../txts/README.lua:82
+#: ../../txts/README.lua:81
 msgid "0: shows all messages"
 msgstr ""
 
-#: ../../txts/README.lua:83
-msgid "1: shows geologists' messages only"
+#: ../../txts/README.lua:82
+msgid "1: shows geologists’ messages only"
 msgstr ""
 
-#: ../../txts/README.lua:84
+#: ../../txts/README.lua:83
 msgid "2: shows economy messages only"
 msgstr ""
 
-#: ../../txts/README.lua:85
+#: ../../txts/README.lua:84
 msgid "3: shows seafaring messages only"
 msgstr ""
 
-#: ../../txts/README.lua:86
+#: ../../txts/README.lua:85
 msgid "4: shows warfare messages only"
 msgstr ""
 
-#: ../../txts/README.lua:87
+#: ../../txts/README.lua:86
 msgid "5: shows scenario messages only"
 msgstr ""
 
-#: ../../txts/README.lua:88
+#: ../../txts/README.lua:87
 msgid "G: jumps to the location corresponding to the current message"
 msgstr ""
 
-#: ../../txts/README.lua:89
+#: ../../txts/README.lua:88
 msgid "DELETE: archives/restores the current message"
 msgstr ""
 
-#: ../../txts/README.lua:91
+#: ../../txts/README.lua:90
 msgid "Online Help"
 msgstr "Adiutorium interretialis"
 
-#: ../../txts/README.lua:93
+#: ../../txts/README.lua:91
 msgid ""
-"If you need documentation or help for Widelands or the Widelands Editor, be\n"
-"sure to visit our homepage. You can find an up to date online help in our Wiki\n"
-"and a detailed description of the tribe economies in our online encyclopedia."
+"A detailed description of the tribes’ economies is available in the in-game "
+"Tribal Encyclopedia."
 msgstr ""
 
-#: ../../txts/README.lua:97
+#: ../../txts/README.lua:92
+msgid ""
+"If you need more documentation or help for Widelands or the Widelands "
+"Editor, be sure to visit our homepage at %s. You can find online help in our"
+" Wiki there."
+msgstr ""
+
+#: ../../txts/README.lua:94
 msgid "Reporting Bugs"
 msgstr "Emenda nuntiandi"
 
-#: ../../txts/README.lua:99
+#: ../../txts/README.lua:96
 msgid "If you encounter a bug, please report it to our bugtracker:"
 msgstr ""
 
-#: ../../txts/README.lua:103
+#: ../../txts/README.lua:100
 msgid "Please provide enough background information. Tell us:"
 msgstr ""
 
-#: ../../txts/README.lua:105
+#: ../../txts/README.lua:102
 msgid "- Detailed steps on how to trigger the bug, if possible."
 msgstr ""
 
-#: ../../txts/README.lua:107
+#: ../../txts/README.lua:104
 msgid ""
 "- What you expected to happen when performing the steps and what actually "
 "happened."
 msgstr ""
 
-#: ../../txts/README.lua:109
+#: ../../txts/README.lua:106
 msgid ""
 "- Which version of Widelands you are running (i.e. either the build number or\n"
 "the revision number if you are running a development version or a daily build.)"
 msgstr ""
 
-#: ../../txts/README.lua:112
+#: ../../txts/README.lua:109
 msgid ""
 "- Please also include which operating system you are running Widelands on as\n"
 "some bugs can be platform specific."
 msgstr ""
 
-#: ../../txts/README.lua:115
+#: ../../txts/README.lua:112
 msgid "- Which map you were playing when the bug occurred."
 msgstr ""
 
-#: ../../txts/README.lua:117
+#: ../../txts/README.lua:114
 msgid ""
 "- If the bug concerns something not being displayed correctly or if it helps\n"
 "demonstrate the issue, please include one or more screenshots."
 msgstr ""
 
-#: ../../txts/README.lua:120
+#: ../../txts/README.lua:117
 msgid ""
 "- If you have a save game or replay demonstrating the issue (for instance\n"
 "crashes where it can be hard to tell exactly what is triggering it), please\n"
 "include that too. For more information, see the section on Replays below."
 msgstr ""
 
-#: ../../txts/README.lua:124
+#: ../../txts/README.lua:121
 msgid "Replays"
 msgstr ""
 
-#: ../../txts/README.lua:126
+#: ../../txts/README.lua:123
 msgid ""
 "Widelands records every game you play in two files. One of these files has a\n"
 ".wrpl.wgf extension and contains an initial savegame. The other file has a\n"
@@ -285,7 +362,7 @@ msgid ""
 "you the time you started the game."
 msgstr ""
 
-#: ../../txts/README.lua:132
+#: ../../txts/README.lua:129
 msgid ""
 "Using the Watch Replay option in the main menu, a previously played game will\n"
 "be precisely reconstructed for you to watch. Note, however, that even small\n"
@@ -295,7 +372,7 @@ msgid ""
 "different version of the game."
 msgstr ""
 
-#: ../../txts/README.lua:139
+#: ../../txts/README.lua:136
 msgid ""
 "Replays are a very useful tool to find bugs in the game logic, so they\n"
 "can be useful as attachments to bug reports. The replay files are saved in the\n"
@@ -303,325 +380,278 @@ msgid ""
 "they are in the ‘replays’ subdirectory of your Widelands installation."
 msgstr ""
 
-#: ../../txts/developers:1
-msgid "Authors"
-msgstr ""
-
-#: ../../txts/developers:3
-msgid "Widelands Development Team"
-msgstr "Concilium Widelands ludum fingens"
-
-#: ../../txts/developers:8
-msgid "Chieftain"
-msgstr "Regulus"
-
-#: ../../txts/developers:14
-msgid "Elders"
-msgstr "Patres"
-
-#: ../../txts/developers:18 ../../txts/developers:366
-msgid "Graphics"
-msgstr "Imagines"
-
-#: ../../txts/developers:23 ../../txts/developers:359
-msgid "Homepage"
-msgstr "Pagina domestica"
-
-#: ../../txts/developers:28 ../../txts/developers:373
-msgid "Sound"
-msgstr "Sonus"
-
-#: ../../txts/developers:33
-msgid "Tongues"
-msgstr ""
-
-#: ../../txts/developers:38
-msgid "Coders"
-msgstr "Scriptores"
-
-#: ../../txts/developers:96
-msgid "Graphicians"
-msgstr "Pictores"
-
-#: ../../txts/developers:126
-msgid "Musicians"
-msgstr "Musici"
-
-#: ../../txts/developers:138
-msgid "Sound Effects"
-msgstr "Sonitus"
-
-#: ../../txts/developers:148
-msgid "Maps and Missions"
-msgstr "Tabulae missusque"
-
-#: ../../txts/developers:169
-msgid "Campaign Story"
-msgstr "Fabula contentionis"
-
-#: ../../txts/developers:172
-msgid "Barbarian"
-msgstr "Barbari"
-
-#: ../../txts/developers:178
-msgid "Empire"
-msgstr "Imperium"
-
-#: ../../txts/developers:182
+#: ../../txts/developers.lua:3
 msgid "Atlantean"
 msgstr ""
 
-#: ../../txts/developers:189
-msgid "Translators"
+#: ../../txts/developers.lua:3
+msgid "Barbarian"
+msgstr "Barbari"
+
+#: ../../txts/developers.lua:3
+msgid "Campaign Story"
+msgstr "Fabula contentionis"
+
+#: ../../txts/developers.lua:3
+msgid "Chieftain"
+msgstr "Regulus"
+
+#: ../../txts/developers.lua:3
+msgid "Coders"
+msgstr "Scriptores"
+
+#: ../../txts/developers.lua:3
+msgid "Debian Linux"
 msgstr ""
 
-#: ../../txts/developers:192
-msgid ""
-"NOTE: this list holds people that translated Widelands before we moved to "
-"launchpad.net. "
-msgstr ""
-
-#: ../../txts/developers:193
-msgid ""
-"See https://translations.launchpad.net/widelands for a list of people that "
-"helped to translate Widelands via launchpad.net."
-msgstr ""
-
-#: ../../txts/developers:197
-msgid "Czech"
-msgstr "Lingua Bohemica"
-
-#: ../../txts/developers:204
-msgid "Dansk"
-msgstr "Danica lingua"
-
-#: ../../txts/developers:210
-msgid "Dutch"
-msgstr "Nederlandica lingua"
-
-#: ../../txts/developers:217
-msgid "Finnish"
-msgstr "Finnica lingua"
-
-#: ../../txts/developers:223
-msgid "French"
-msgstr "Francogallica lingua"
-
-#: ../../txts/developers:230
-msgid "Galician"
-msgstr "Gallaica lingua"
-
-#: ../../txts/developers:235
-msgid "German"
-msgstr "Theodisca lingua"
-
-#: ../../txts/developers:247
-msgid "Hebrew"
-msgstr "Hebraica lingua"
-
-#: ../../txts/developers:252
-msgid "Hungarian"
-msgstr "Hungarica lingua"
-
-#: ../../txts/developers:257
-msgid "Italian"
-msgstr "Italica lingua"
-
-#: ../../txts/developers:262
-msgid "Polish"
-msgstr "Polonica lingua"
-
-#: ../../txts/developers:270
-msgid "Russian"
-msgstr "Ruthenica lingua"
-
-#: ../../txts/developers:275
-msgid "Slovak"
-msgstr "Slovaca lingua"
-
-#: ../../txts/developers:280
-msgid "Spanish"
-msgstr "Hispanica lingua"
-
-#: ../../txts/developers:285
-msgid "Swedish"
-msgstr "Suecica lingua"
-
-#: ../../txts/developers:292
-msgid "Packagers"
-msgstr ""
-
-#: ../../txts/developers:296
-msgid "Linux Distributions"
-msgstr ""
-
-#: ../../txts/developers:307
-msgid "Other Unix Distributions"
-msgstr ""
-
-#: ../../txts/developers:318
-msgid "Non Unix Distributions"
-msgstr ""
-
-#: ../../txts/developers:330
-msgid "Homepage Coders"
-msgstr ""
-
-#: ../../txts/developers:340
+#: ../../txts/developers.lua:3
 msgid "Documentation, Help and Wiki"
 msgstr "Documenta, adiutatum, vici"
 
-#: ../../txts/developers:355
-msgid "Former elders"
-msgstr "Patres pristini"
+#: ../../txts/developers.lua:3
+msgid "Elders"
+msgstr "Patres"
 
-#: ../../txts/developers:378
-msgid "Translation"
+#: ../../txts/developers.lua:3
+msgid "Empire"
+msgstr "Imperium"
+
+#: ../../txts/developers.lua:3
+msgid "Fedora Linux"
 msgstr ""
 
-#: ../../txts/developers:385
+#: ../../txts/developers.lua:3
+msgid "Former Elders"
+msgstr ""
+
+#: ../../txts/developers.lua:3
+msgid "FreeBSD"
+msgstr ""
+
+#: ../../txts/developers.lua:3
+msgid "Graphicians"
+msgstr "Pictores"
+
+#: ../../txts/developers.lua:3 ../../txts/developers.lua:3
+msgid "Graphics"
+msgstr "Imagines"
+
+#: ../../txts/developers.lua:3 ../../txts/developers.lua:3
+#: ../../txts/developers.lua:3
+msgid "Homepage"
+msgstr "Pagina domestica"
+
+#: ../../txts/developers.lua:3
+msgid "Homepage Coders"
+msgstr ""
+
+#: ../../txts/developers.lua:3
+msgid "Mac OS X"
+msgstr ""
+
+#: ../../txts/developers.lua:3
+msgid "Mandriva Linux"
+msgstr ""
+
+#: ../../txts/developers.lua:3
+msgid "Maps and Missions"
+msgstr "Tabulae missusque"
+
+#: ../../txts/developers.lua:3
+msgid "Musicians"
+msgstr "Musici"
+
+#: ../../txts/developers.lua:3
 msgid "Other"
 msgstr "Altera"
 
-#: ../../txts/editor_readme:1
+#: ../../txts/developers.lua:3
+msgid "Packagers"
+msgstr ""
+
+#: ../../txts/developers.lua:3 ../../txts/developers.lua:3
+msgid "Sound"
+msgstr "Sonus"
+
+#: ../../txts/developers.lua:3
+msgid "Sound Effects"
+msgstr "Sonitus"
+
+#: ../../txts/developers.lua:3
+msgid "Tongues"
+msgstr ""
+
+#: ../../txts/developers.lua:3
+msgid "Translation"
+msgstr ""
+
+#: ../../txts/developers.lua:3
+msgid "Translators"
+msgstr ""
+
+#: ../../txts/developers.lua:3
+msgid "Windows"
+msgstr ""
+
+#: ../../txts/developers.lua:3
+msgid "ZetaOS"
+msgstr ""
+
+#: ../../txts/editor_readme.lua:6
 msgid "README for the Widelands Editor"
 msgstr "LEGEME Widelands editoris"
 
-#: ../../txts/editor_readme:4
-msgid "README for the Editor"
-msgstr "LEGEME editoris"
+#: ../../txts/editor_readme.lua:8
+msgid "The Widelands Editor"
+msgstr ""
 
-#: ../../txts/editor_readme:10
+#: ../../txts/editor_readme.lua:12
 msgid ""
-"This Editor is intended for players who would like to design their own maps "
-"to use with Widelands.<br>As you can see, this Editor is heavy work in "
-"progress and as the Editor becomes better and better, this text will also "
-"get longer and more complete."
+"This editor is intended for players who would like to design their own maps "
+"to use with Widelands."
 msgstr ""
 
-#: ../../txts/editor_readme:12
-msgid "Please have a look at our enduser manuals on our wiki pages at:"
+#: ../../txts/editor_readme.lua:13
+msgid ""
+"As you can see, this editor is heavy work in progress and as the editor "
+"becomes better and better, this text will also get longer and more complete."
 msgstr ""
 
-#: ../../txts/editor_readme:14
+#: ../../txts/editor_readme.lua:14
+msgid "Please have a look at our enduser manuals on our wiki pages at: %s"
+msgstr ""
+
+#: ../../txts/editor_readme.lua:15
 msgid ""
 "Those pages might be more complete and up to date than this file, and you "
 "will also find a short tutorial about building a map there."
 msgstr ""
 
-#: ../../txts/editor_readme:18
+#: ../../txts/editor_readme.lua:17
 msgid "Keyboard shortcuts"
 msgstr "claviaturae iussa"
 
-#: ../../txts/editor_readme:25
-msgid "F: toggles fullscreen"
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:21
+msgid "SPACE:"
 msgstr ""
 
-#: ../../txts/editor_readme:27
-msgid "H: toggles main menu"
+#: ../../txts/editor_readme.lua:21
+msgid "toggles if building spaces are shown"
 msgstr ""
 
-#: ../../txts/editor_readme:31
-msgid "P: toggles player menu"
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:23
+msgid "C:"
 msgstr ""
 
-#: ../../txts/editor_readme:33
-msgid "T: toggles tools menu"
+#: ../../txts/editor_readme.lua:23
+msgid "toggles census"
 msgstr ""
 
-#: ../../txts/editor_readme:35
-msgid "I: activates information tool"
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:25
+msgid "F:"
 msgstr ""
 
-#: ../../txts/editor_readme:37
-msgid "CTRL+L: load map"
+#: ../../txts/editor_readme.lua:25
+msgid "toggles fullscreen"
 msgstr ""
 
-#: ../../txts/editor_readme:39
-msgid "CTRL+S: save map"
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:27
+msgid "H:"
 msgstr ""
 
-#: ../../txts/editor_readme:41
-msgid "1-0: changes tool size"
+#: ../../txts/editor_readme.lua:27
+msgid "toggles main menu"
 msgstr ""
 
-#: ../../txts/editor_readme:43
-msgid "SHIFT (Hold): selects first alternative tool while pressed"
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:29
+msgid "M:"
 msgstr ""
 
-#: ../../txts/editor_readme:45
-msgid "ALT (Hold): Selects second alternative tool while pressed"
+#: ../../txts/editor_readme.lua:29
+msgid "toggles minimap"
 msgstr ""
 
-#: ../../txts/license:1
-msgid "License"
-msgstr "Licentia"
-
-#: ../../txts/license:4
-msgid "Licensing information for Widelands"
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:31
+msgid "P:"
 msgstr ""
 
-#: ../../txts/license:7
-msgid "Copyright 2002 - 2015 by the Widelands Development Team."
+#: ../../txts/editor_readme.lua:31
+msgid "toggles player menu"
 msgstr ""
 
-#: ../../txts/license:9
-msgid ""
-"This game is Free and Open Source (FOSS), licensed under the GNU General "
-"Public License (GPL) V2.0."
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:33
+msgid "T:"
 msgstr ""
 
-#: ../../txts/license:11
-msgid ""
-"You can find more information on FOSS and the GPL by visiting the following "
-"webpage: "
+#: ../../txts/editor_readme.lua:33
+msgid "toggles tools menu"
 msgstr ""
 
-#: ../../txts/license:12
-msgid "http://www.gnu.org/licenses/old-licenses/gpl-2.0"
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:35
+msgid "I:"
 msgstr ""
 
-#: ../../txts/license:14
-msgid ""
-"You can find the full text of the license there as well as further "
-"information about its philosophy and the legal implications."
+#: ../../txts/editor_readme.lua:35
+msgid "activates information tool"
 msgstr ""
 
-#: ../../txts/license:16
-msgid "We are also shipping the GPL as a text document with Widelands itself."
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:37
+msgid "CTRL+L:"
 msgstr ""
 
-#: ../../txts/license:18
-msgid ""
-"On Linux, you can find the file called COPYING in the root of the source or "
-"standalone binary package, or in the installation directory (like "
-"/usr/share/games/widelands)."
+#: ../../txts/editor_readme.lua:37
+msgid "load map"
 msgstr ""
 
-#: ../../txts/license:19
-msgid ""
-"On Windows, you can find the file called COPYING.txt in the installation "
-"folder, and the Widelands Start menu entry provides a link to this file."
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:39
+msgid "CTRL+S:"
 msgstr ""
 
-#: ../../txts/license:20
-msgid ""
-"On MacOS, you can find the file called COPYING in the archive you downloaded"
-" from the website."
+#: ../../txts/editor_readme.lua:39
+msgid "save map"
 msgstr ""
 
-#: ../../txts/license:22
-msgid ""
-"This game comes as-is and without any warranty. For more information and "
-"support you can find us at http://wl.widelands.org (Website, Wiki, Forum for"
-" questions or general support) or https://launchpad.net/widelands "
-"(Bugtracker, Translations)."
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:41
+msgid "1-0:"
+msgstr ""
+
+#: ../../txts/editor_readme.lua:41
+msgid "changes tool size"
+msgstr ""
+
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:43
+msgid "SHIFT (Hold):"
+msgstr ""
+
+#: ../../txts/editor_readme.lua:43
+msgid "selects first alternative tool while pressed"
+msgstr ""
+
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:45
+msgid "ALT (Hold):"
+msgstr ""
+
+#: ../../txts/editor_readme.lua:45
+msgid "Selects second alternative tool while pressed"
 msgstr ""
 
 #: ../../txts/tips/atlanteans.tip:2 ../../txts/tips/barbarians.tip:2
 #: ../../txts/tips/empire.tip:2
 msgid ""
-"Some buildings, such as the farm, have a very small working area. If the "
+"Some buildings, such as the farm, have a very small work area. If the "
 "building is surrounded with trees or roads, production will stop."
 msgstr ""
 
@@ -634,7 +664,7 @@ msgstr ""
 #: ../../txts/tips/barbarians.tip:6 ../../txts/tips/empire.tip:6
 msgid ""
 "Keep an eye on your fishers. After fish resources are exhausted in their "
-"working area, they will stop fishing."
+"work area, they will stop fishing."
 msgstr ""
 
 #: ../../txts/tips/barbarians.tip:10
@@ -705,7 +735,7 @@ msgstr "Ante metalla seu fontis aedificium construenda mitte geologum, ut materi
 #: ../../txts/tips/general_game.tip:10
 msgid ""
 "Your territory can be expanded by building various military buildings – "
-"Sentry, Fortress, Barracks, etc."
+"Sentry, Fortress, Blockhouse, etc."
 msgstr ""
 
 #: ../../txts/tips/general_game.tip:14

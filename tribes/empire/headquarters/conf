@@ -1,9 +1,0 @@
-size=big
-buildable=no
-destructible=no
-heal_per_second=220
-conquers=9
-
-[idle]
-pics=headquarters_i_??.png
-hotspot=95 109

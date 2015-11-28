@@ -1,5 +1,6 @@
 run(function()
-   create_two_ships()
+   create_one_ship()
 
-   test_cancel_started_expedition_on_ship()
+   --true indicates that second ship is to be created
+   test_cancel_started_expedition_on_ship(true)
 end)

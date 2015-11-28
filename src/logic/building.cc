@@ -21,6 +21,7 @@
 
 #include <cstdio>
 #include <cstring>
+#include <memory>
 #include <sstream>
 
 #include <boost/algorithm/string.hpp>
@@ -30,7 +31,6 @@
 #include "base/wexception.h"
 #include "economy/flag.h"
 #include "economy/request.h"
-#include "graphic/font_handler.h"
 #include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
@@ -44,9 +44,9 @@
 #include "logic/map.h"
 #include "logic/player.h"
 #include "logic/productionsite.h"
-#include "logic/tribe.h"
+#include "logic/tribes/tribe_descr.h"
+#include "logic/tribes/tribes.h"
 #include "logic/worker.h"
-#include "profile/profile.h"
 #include "sound/sound_handler.h"
 #include "wui/interactive_player.h"
 
@@ -54,129 +54,116 @@ namespace Widelands {
 
 static const int32_t BUILDING_LEAVE_INTERVAL = 1000;
 
-
 BuildingDescr::BuildingDescr
-	(const MapObjectType _type, char const * const _name, char const * const _descname,
-	 const std::string & directory, Profile & prof, Section & global_s,
-	 const TribeDescr & _descr)
+	(const std::string& init_descname, const MapObjectType _type,
+	 const LuaTable& table, const EditorGameBase& egbase)
 	:
-	MapObjectDescr(_type, _name, _descname),
-	m_tribe         (_descr),
-	m_buildable     (true),
-	m_icon     (nullptr),
+	MapObjectDescr(_type, table.get_string("name"), init_descname, table),
+	egbase_         (egbase),
+	m_buildable     (false),
 	m_size          (BaseImmovable::SMALL),
 	m_mine          (false),
 	m_port          (false),
-	m_hints         (prof.get_section("aihints")),
-	m_global        (false),
+	m_enhancement   (INVALID_INDEX),
+	m_enhanced_from (INVALID_INDEX),
+	m_enhanced_building(false),
+	m_hints         (table.get_table("aihints")),
 	m_vision_range  (0)
 {
-	using boost::iequals;
-
-	try {
-		const auto& size = global_s.get_safe_string("size");
-		if      (iequals(size, "small"))
-			m_size = BaseImmovable::SMALL;
-		else if (iequals(size, "medium"))
-			m_size = BaseImmovable::MEDIUM;
-		else if (iequals(size, "big"))
-			m_size = BaseImmovable::BIG;
-		else if (iequals(size, "mine")) {
-			m_size = BaseImmovable::SMALL;
-			m_mine = true;
-		} else if (iequals(size, "port")) {
-			m_size = BaseImmovable::BIG;
-			m_port = true;
-		} else
-			throw GameDataError
-				("expected %s but found \"%s\"",
-				 "{\"small\"|\"medium\"|\"big\"|\"port\"|\"mine\"}", size);
-	} catch (const WException & e) {
-		throw GameDataError("size: %s", e.what());
+	if (!is_animation_known("idle")) {
+		throw GameDataError("Building %s has no idle animation", table.get_string("name").c_str());
+	}
+	if (icon_filename().empty()) {
+		throw GameDataError("Building %s needs a menu icon", table.get_string("name").c_str());
 	}
 
-	m_helptext_script = directory + "/help.lua";
-	if (!g_fs->file_exists(m_helptext_script))
-		m_helptext_script = "";
+	i18n::Textdomain td("tribes");
+
+	// Partially finished buildings get their sizes from their associated building
+	if (_type != MapObjectType::CONSTRUCTIONSITE && _type != MapObjectType::DISMANTLESITE) {
+		try {
+			const std::string size = table.get_string("size");
+			if (boost::iequals(size, "small")) {
+				m_size = BaseImmovable::SMALL;
+			} else if (boost::iequals(size, "medium")) {
+				m_size = BaseImmovable::MEDIUM;
+			} else if (boost::iequals(size, "big")) {
+				m_size = BaseImmovable::BIG;
+			} else if (boost::iequals(size, "mine")) {
+				m_size = BaseImmovable::SMALL;
+				m_mine = true;
+			} else if (boost::iequals(size, "port")) {
+				m_size = BaseImmovable::BIG;
+				m_port = true;
+			} else {
+				throw GameDataError
+					("expected %s but found \"%s\"",
+					 "{\"small\"|\"medium\"|\"big\"|\"port\"|\"mine\"}", size.c_str());
+			}
+		} catch (const WException & e) {
+			throw GameDataError("size: %s", e.what());
+		}
+	}
 
 	// Parse build options
-	m_buildable = global_s.get_bool("buildable", true);
-	m_destructible = global_s.get_bool("destructible", true);
-	m_enhancement = INVALID_INDEX;
+	m_destructible = table.has_key("destructible") ? table.get_bool("destructible") : true;
 
-	if (Section::Value const * const enVal = global_s.get_next_val("enhancement"))
-	{
-		std::string const target_name = enVal->get_string();
-		if (target_name == name())
+	if (table.has_key("enhancement")) {
+		const std::string enh = table.get_string("enhancement");
+
+		if (enh == name()) {
 			throw wexception("enhancement to same type");
-		BuildingIndex const en_i = tribe().building_index(target_name);
-		if (en_i != INVALID_INDEX) {
+		}
+		DescriptionIndex const en_i = egbase_.tribes().building_index(enh);
+		if (egbase_.tribes().building_exists(en_i)) {
 			m_enhancement = en_i;
 
 			//  Merge the enhancements workarea info into this building's
 			//  workarea info.
-			const BuildingDescr * tmp_enhancement =
-				tribe().get_building_descr(en_i);
+			const BuildingDescr * tmp_enhancement = egbase_.tribes().get_building_descr(en_i);
 			for (std::pair<uint32_t, std::set<std::string>> area : tmp_enhancement->m_workarea_info)
 			{
 				std::set<std::string> & strs = m_workarea_info[area.first];
 				for (std::string str : area.second)
 					strs.insert(str);
 			}
-		} else
+		} else {
 			throw wexception
 				("\"%s\" has not been defined as a building type (wrong declaration order?)",
-				target_name.c_str());
+				enh.c_str());
+		}
 	}
 
-	m_enhanced_building = global_s.get_bool("enhanced_building", false);
-	m_global = directory.find("global/") < directory.size();
-	if (m_buildable || m_enhanced_building) {
-		//  get build icon
-		m_icon_fname  = directory;
-		m_icon_fname += "/menu.png";
-
-		//  build animation
-		if (Section * const build_s = prof.get_section("build")) {
-			if (build_s->get_int("fps", -1) != -1)
-				throw wexception("fps defined for build animation!");
-			if (!is_animation_known("build"))
-				add_animation("build", g_gr->animations().load(directory, *build_s));
+	if (table.has_key("buildcost")) {
+		m_buildable = true;
+		try {
+			m_buildcost = Buildcost(table.get_table("buildcost"), egbase_.tribes());
+			m_return_dismantle = Buildcost(table.get_table("return_on_dismantle"), egbase_.tribes());
+		} catch (const WException & e) {
+			throw wexception
+					("A buildable building must define \"buildcost\" and \"return_on_dismantle\": %s",
+					 e.what());
 		}
-
-		// Get costs
-		if (m_buildable) {
-			Section & buildcost_s = prof.get_safe_section("buildcost");
-			m_buildcost.parse(m_tribe, buildcost_s);
-			Section & returnsect_s = prof.get_safe_section("return_on_dismantle");
-			m_return_dismantle.parse(m_tribe, returnsect_s);
+	}
+	if (table.has_key("enhancement_cost")) {
+		m_enhanced_building = true;
+		try {
+			m_enhance_cost = Buildcost(table.get_table("enhancement_cost"), egbase_.tribes());
+			m_return_enhanced = Buildcost(table.get_table("return_on_dismantle_on_enhanced"), egbase_.tribes());
+		} catch (const WException & e) {
+			throw wexception
+					("An enhanced building must define \"enhancement_cost\""
+					 "and \"return_on_dismantle_on_enhanced\": %s", e.what());
 		}
-
-		if (m_enhanced_building) {
-			Section & en_buildcost_s = prof.get_safe_section("enhancement_cost");
-			m_enhance_cost.parse(m_tribe, en_buildcost_s);
-			Section & en_returnsect_s = prof.get_safe_section("return_on_dismantle_on_enhanced");
-			m_return_enhanced.parse(m_tribe, en_returnsect_s);
-		}
-	} else if (m_global) {
-		//  get build icon for global buildings (for statistics window)
-		m_icon_fname  = directory;
-		m_icon_fname += "/menu.png";
 	}
 
-	{ //  parse basic animation data
-		Section & idle_s = prof.get_safe_section("idle");
-		if (!is_animation_known("idle"))
-			add_animation("idle", g_gr->animations().load(directory, idle_s));
-		if (Section * unoccupied = prof.get_section("unoccupied"))
-			if (!is_animation_known("unoccupied"))
-				add_animation("unoccupied", g_gr->animations().load(directory, *unoccupied));
-		if (Section * empty = prof.get_section("empty"))
-			if (!is_animation_known("empty"))
-				add_animation("empty", g_gr->animations().load(directory, *empty));
-	}
+	directory_ = table.get_string("directory");
 
-	m_vision_range = global_s.get_int("vision_range");
+	m_needs_seafaring = table.has_key("needs_seafaring") ? table.get_bool("needs_seafaring") : false;
+
+	if (table.has_key("vision_range")) {
+		m_vision_range = table.get_int("vision_range");
+	}
 }
 
 
@@ -192,7 +179,7 @@ Building & BuildingDescr::create
 	Building & b = construct ? create_constructionsite() : create_object();
 	b.m_position = pos;
 	b.set_owner(&owner);
-	for (BuildingIndex idx : former_buildings) {
+	for (DescriptionIndex idx : former_buildings) {
 		b.m_old_buildings.push_back(idx);
 	}
 	if (loading) {
@@ -231,25 +218,14 @@ uint32_t BuildingDescr::vision_range() const
 
 /*
 ===============
-Called whenever building graphics need to be loaded.
-===============
-*/
-void BuildingDescr::load_graphics()
-{
-	if (!m_icon_fname.empty())
-		m_icon = g_gr->images().get(m_icon_fname);
-}
-
-/*
-===============
 Create a construction site for this type of building
 ===============
 */
 Building & BuildingDescr::create_constructionsite() const
 {
 	BuildingDescr const * const descr =
-		m_tribe.get_building_descr
-			(m_tribe.safe_building_index("constructionsite"));
+		egbase_.tribes().get_building_descr
+			(egbase_.tribes().safe_building_index("constructionsite"));
 	ConstructionSite & csite =
 		dynamic_cast<ConstructionSite&>(descr->create_object());
 	csite.set_building(*this);
@@ -267,14 +243,14 @@ Implementation
 */
 
 Building::Building(const BuildingDescr & building_descr) :
-PlayerImmovable(building_descr),
-m_optionswindow(nullptr),
-m_flag         (nullptr),
-m_anim(0),
-m_animstart(0),
-m_leave_time(0),
-m_defeating_player(0),
-m_seeing(false)
+	PlayerImmovable(building_descr),
+	m_optionswindow(nullptr),
+	m_flag         (nullptr),
+	m_anim(0),
+	m_animstart(0),
+	m_leave_time(0),
+	m_defeating_player(0),
+	m_seeing(false)
 {}
 
 Building::~Building()
@@ -499,11 +475,10 @@ void Building::destroy(EditorGameBase & egbase)
 {
 	const bool fire           = burn_on_destroy();
 	const Coords pos          = m_position;
-	const TribeDescr & t     = descr().tribe();
 	PlayerImmovable::destroy(egbase);
 	// We are deleted. Only use stack variables beyond this point
 	if (fire)
-		egbase.create_immovable(pos, "destroyed_building", &t);
+		egbase.create_immovable(pos, "destroyed_building", MapObjectDescr::OwnerType::kTribe);
 }
 
 
@@ -569,7 +544,7 @@ std::string Building::info_string(const std::string & format) {
 }
 
 
-WaresQueue & Building::waresqueue(WareIndex const wi) {
+WaresQueue & Building::waresqueue(DescriptionIndex const wi) {
 	throw wexception("%s (%u) has no WaresQueue for %u", descr().name().c_str(), serial(), wi);
 }
 
@@ -755,13 +730,13 @@ void Building::draw_help
 }
 
 int32_t Building::get_priority
-	(WareWorker type, WareIndex const ware_index, bool adjust) const
+	(WareWorker type, DescriptionIndex const ware_index, bool adjust) const
 {
 	int32_t priority = DEFAULT_PRIORITY;
 	if (type == wwWARE) {
 		// if priority is defined for specific ware,
 		// combine base priority and ware priority
-		std::map<WareIndex, int32_t>::const_iterator it =
+		std::map<DescriptionIndex, int32_t>::const_iterator it =
 			m_ware_priorities.find(ware_index);
 		if (it != m_ware_priorities.end())
 			priority = adjust
@@ -777,12 +752,12 @@ int32_t Building::get_priority
 * priorities are identified by ware type and index
  */
 void Building::collect_priorities
-	(std::map<int32_t, std::map<WareIndex, int32_t> > & p) const
+	(std::map<int32_t, std::map<DescriptionIndex, int32_t> > & p) const
 {
 	if (m_ware_priorities.empty())
 		return;
-	std::map<WareIndex, int32_t> & ware_priorities = p[wwWARE];
-	std::map<WareIndex, int32_t>::const_iterator it;
+	std::map<DescriptionIndex, int32_t> & ware_priorities = p[wwWARE];
+	std::map<DescriptionIndex, int32_t>::const_iterator it;
 	for (it = m_ware_priorities.begin(); it != m_ware_priorities.end(); ++it) {
 		if (it->second == DEFAULT_PRIORITY)
 			continue;
@@ -795,7 +770,7 @@ void Building::collect_priorities
  */
 void Building::set_priority
 	(int32_t    const type,
-	 WareIndex const ware_index,
+	 DescriptionIndex const ware_index,
 	 int32_t    const new_priority)
 {
 	if (type == wwWARE) {
@@ -827,8 +802,9 @@ void Building::log_general_info(const EditorGameBase & egbase) {
 
 void Building::add_worker(Worker & worker) {
 	if (!get_workers().size()) {
-		if (worker.descr().name() != "builder")
+		if (owner().tribe().safe_worker_index(worker.descr().name()) != owner().tribe().builder()) {
 			set_seeing(true);
+		}
 	}
 	PlayerImmovable::add_worker(worker);
 	workers_changed();
@@ -894,8 +870,7 @@ void Building::send_message
 	// TODO(sirver): add support into the font renderer to get to representative
 	// animations of buildings so that the messages can still be displayed, even
 	// after reload.
-	const std::string& img = g_gr->animations().get_animation
-		(get_ui_anim()).representative_image_from_disk_filename();
+	const std::string& img = descr().representative_image_filename();
 	std::string rt_description;
 	rt_description.reserve
 		(strlen("<rt image=") + img.size() + 1 +

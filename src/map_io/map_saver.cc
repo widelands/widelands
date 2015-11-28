@@ -32,7 +32,7 @@
 #include "logic/editor_game_base.h"
 #include "logic/map.h"
 #include "logic/player.h"
-#include "logic/tribe.h"
+#include "logic/tribes/tribe_descr.h"
 #include "map_io/map_allowed_building_types_packet.h"
 #include "map_io/map_allowed_worker_types_packet.h"
 #include "map_io/map_building_packet.h"
@@ -141,8 +141,7 @@ void MapSaver::save() {
 
  //  allowed building types
 	iterate_players_existing_const(plnum, nr_players, m_egbase, player) {
-		BuildingIndex const nr_buildings = player->tribe().get_nrbuildings();
-		for (BuildingIndex i = 0; i < nr_buildings; ++i)
+		for (DescriptionIndex i = 0; i < m_egbase.tribes().nrbuildings(); ++i) {
 			if (!player->is_building_type_allowed(i)) {
 				log("Writing Allowed Building Types Data ... ");
 				MapAllowedBuildingTypesPacket p;
@@ -150,6 +149,7 @@ void MapSaver::save() {
 				log("took %ums\n ", timer.ms_since_last_query());
 				goto end_find_a_forbidden_building_type_loop;
 			}
+		}
 	} end_find_a_forbidden_building_type_loop:;
 
 	// !!!!!!!!!! NOTE

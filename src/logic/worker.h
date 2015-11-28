@@ -26,6 +26,7 @@
 #include "economy/ware_instance.h"
 #include "logic/productionsite.h"
 #include "logic/worker_descr.h"
+#include "map_io/tribes_legacy_lookup_table.h"
 
 namespace Widelands {
 class Building;
@@ -122,16 +123,16 @@ public:
 	/// This should be called whenever the worker has done work that he gains
 	/// experience from. It may cause him to change his type so that he becomes
 	/// overqualified for his current working position and can be replaced.
-	/// If so, his old WareIndex is returned so that the calling code can
+	/// If so, his old DescriptionIndex is returned so that the calling code can
 	/// request a new worker of his old type. Otherwise INVALID_INDEX is
 	/// returned.
-	WareIndex gain_experience   (Game &);
+	DescriptionIndex gain_experience   (Game &);
 
 	void create_needed_experience(Game &);
-	WareIndex level             (Game &);
+	DescriptionIndex level             (Game &);
 
 	int32_t get_current_experience() const {return m_current_exp;}
-	bool needs_experience() const {return descr().get_needed_experience() != -1;}
+	bool needs_experience() const {return descr().get_needed_experience() != INVALID_INDEX;}
 
 	// debug
 	void log_general_info(const EditorGameBase &) override;
@@ -277,7 +278,8 @@ public:
 		(EditorGameBase &, MapObjectSaver &, FileWrite &);
 
 	static MapObject::Loader * load
-		(EditorGameBase &, MapObjectLoader &, FileRead &);
+		(EditorGameBase &, MapObjectLoader &, FileRead &, const TribesLegacyLookupTable& lookup_table,
+		 uint8_t packet_version);
 };
 
 }

@@ -1,8 +1,0 @@
-help=_Iron is made out of iron ore in the smelting works. It is used in the toolsmithy, armor smithy and weapon smithy.
-
-default_target_quantity=20
-preciousness=4
-
-[idle]
-pics=idle.png
-hotspot=7 9

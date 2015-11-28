@@ -26,8 +26,7 @@
 
 namespace Widelands {
 
-#define CURRENT_PACKET_VERSION 2
-
+constexpr uint16_t kCurrentPacketVersion = 3;
 
 void GameClassPacket::read
 	(FileSystem & fs, Game & game, MapObjectLoader *)
@@ -36,12 +35,11 @@ void GameClassPacket::read
 		FileRead fr;
 		fr.open(fs, "binary/game_class");
 		uint16_t const packet_version = fr.unsigned_16();
-		if (packet_version <= CURRENT_PACKET_VERSION) {
-			fr.signed_16(); // This used to be game speed
+		if (packet_version == kCurrentPacketVersion) {
 			game.gametime_ = fr.unsigned_32();
-		} else
-			throw GameDataError
-				("unknown/unhandled version %u", packet_version);
+		} else {
+			throw UnhandledVersionError("GameClassPacket", packet_version, kCurrentPacketVersion);
+		}
 	} catch (const WException & e) {
 		throw GameDataError("game class: %s", e.what());
 	}
@@ -55,12 +53,7 @@ void GameClassPacket::write
 {
 	FileWrite fw;
 
-	// Packet version
-	fw.unsigned_16(CURRENT_PACKET_VERSION);
-
-	// State is running, we do not need to save this
-	// Save speed
-	fw.signed_16(1000);
+	fw.unsigned_16(kCurrentPacketVersion);
 
 	// From the interactive player, is saved somewhere else
 	// Computer players are saved somewhere else

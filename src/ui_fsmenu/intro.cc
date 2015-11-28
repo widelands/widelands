@@ -29,14 +29,14 @@ FullscreenMenuIntro::FullscreenMenuIntro()
 m_message
 	(this,
 	 get_w() / 2, get_h() * 19 / 20,
-	 _("Press ESC or click to continue ..."), UI::Align_HCenter)
+	 _("Press any key or click to continue ..."), UI::Align_HCenter)
 {
 	m_message.set_font(ui_fn(), fs_small() * 6 / 5, RGBColor(192, 192, 128));
 }
 
 bool FullscreenMenuIntro::handle_mousepress  (uint8_t, int32_t, int32_t)
 {
-	end_modal(0);
+	end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kOk);
 
 	return true;
 }
@@ -45,10 +45,11 @@ bool FullscreenMenuIntro::handle_mouserelease(uint8_t, int32_t, int32_t)
 	return true;
 }
 
-bool FullscreenMenuIntro::handle_key(bool const down, SDL_Keysym const code)
+bool FullscreenMenuIntro::handle_key(const bool down, const SDL_Keysym)
 {
-	if (down && code.sym == SDLK_ESCAPE)
-		end_modal(0);
+	if (down) {
+		end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kOk);
+	}
 
 	return false;
 }

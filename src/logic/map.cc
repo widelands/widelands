@@ -24,6 +24,7 @@
 
 #include <boost/algorithm/string.hpp>
 #include <boost/algorithm/string/predicate.hpp>
+#include <boost/format.hpp>
 
 #include "base/log.h"
 #include "base/macros.h"
@@ -41,7 +42,7 @@
 #include "logic/pathfield.h"
 #include "logic/player.h"
 #include "logic/soldier.h"
-#include "logic/tribe.h"
+#include "logic/tribes/tribe_descr.h"
 #include "logic/world/terrain_description.h"
 #include "logic/world/world.h"
 #include "map_io/s2map.h"
@@ -307,6 +308,11 @@ void Map::cleanup() {
 	objectives_.clear();
 
 	m_port_spaces.clear();
+
+	// TODO(meitis): should be done here ... but WidelandsMapLoader::preload_map calls
+	// this cleanup AFTER assigning filesystem_ in WidelandsMapLoader::WidelandsMapLoader
+	// ... so we can't do it here :/
+	// filesystem_.reset(nullptr);
 }
 
 /*
@@ -329,8 +335,8 @@ void Map::create_empty_map
 	// Set first tribe found as the "basic" tribe
 	// <undefined> (as set before) is useless and will lead to a
 	// crash -> Widelands will search for tribe "<undefined>"
-	set_scenario_player_tribe(1, TribeDescr::get_all_tribenames()[0]);
-	set_scenario_player_name(1, _("Player 1"));
+	set_scenario_player_tribe(1, Tribes::get_all_tribenames()[0]);
+	set_scenario_player_name(1, (boost::format(_("Player %u")) % 1).str());
 	set_scenario_player_ai(1, "");
 	set_scenario_player_closeable(1, false);
 
@@ -346,6 +352,8 @@ void Map::create_empty_map
 		}
 	}
 	recalc_whole_map(world);
+
+	filesystem_.reset(nullptr);
 }
 
 
@@ -473,6 +481,11 @@ bool Map::get_scenario_player_closeable(const PlayerNumber p) const
 	return m_scenario_closeables[p - 1];
 }
 
+void Map::swap_filesystem(std::unique_ptr<FileSystem>& fs)
+{
+	filesystem_.swap(fs);
+}
+
 FileSystem* Map::filesystem() const {
 	return filesystem_.get();
 }
@@ -578,6 +591,12 @@ void Map::set_background(const std::string& image_path)
 
 void Map::add_tag(const std::string& tag) {
 	m_tags.insert(tag);
+}
+
+void Map::delete_tag(const std::string& tag) {
+	if (has_tag(tag)) {
+		m_tags.erase(m_tags.find(tag));
+	}
 }
 
 NodeCaps Map::get_max_nodecaps(const World& world, FCoords & fc) {
@@ -1377,7 +1396,7 @@ std::vector<Coords> Map::find_portdock(const Coords & c) const
 }
 
 /// \returns true, if Coordinates are in port space list
-bool Map::is_port_space(const Coords& c) {
+bool Map::is_port_space(const Coords& c) const {
 	return m_port_spaces.count(c);
 }
 
@@ -1389,7 +1408,6 @@ void Map::set_port_space(Coords c, bool allowed) {
 		m_port_spaces.erase(c);
 	}
 }
-
 
 /**
  * Calculate the (Manhattan) distance from a to b
@@ -1847,7 +1865,7 @@ returns the radius of changes (which are always 2)
 ===========
 */
 int32_t Map::change_terrain
-	(const World& world, TCoords<FCoords> const c, TerrainIndex const terrain)
+	(const World& world, TCoords<FCoords> const c, DescriptionIndex const terrain)
 {
 	c.field->set_terrain(c.t, terrain);
 
@@ -1989,6 +2007,70 @@ void Map::check_neighbour_heights(FCoords coords, uint32_t & area)
 	for (uint8_t i = 0; i < 6; ++i)
 		if (check[i])
 			check_neighbour_heights(n[i], area);
+}
+
+/*
+===========
+Map::allows_seafaring()
+
+This function checks if there are two ports that are reachable
+for each other - then the map is seafaring.
+=============
+*/
+bool Map::allows_seafaring() {
+	Map::PortSpacesSet port_spaces = get_port_spaces();
+	std::vector<Coords> portdocks;
+	std::set<Coords, Coords::OrderingFunctor> swim_coords;
+
+	for (const Coords& c : port_spaces) {
+		std::queue<Coords> q_positions;
+		std::set<Coords, Coords::OrderingFunctor> visited_positions;
+		FCoords fc = get_fcoords(c);
+		portdocks = find_portdock(fc);
+
+		/* remove the port space if it is not longer valid port space */
+		if ((fc.field->get_caps() & BUILDCAPS_SIZEMASK) != BUILDCAPS_BIG || portdocks.empty()) {
+			set_port_space(c, false);
+			continue;
+		}
+
+		for (const Coords& portdock: portdocks) {
+			visited_positions.insert(portdock);
+			q_positions.push(portdock);
+		}
+
+		while (!q_positions.empty()) {
+			const Coords& swim_coord = q_positions.front();
+			q_positions.pop();
+			for (uint8_t i = 1; i <= 6; ++i) {
+				FCoords neighbour;
+				get_neighbour(get_fcoords(swim_coord), i, &neighbour);
+				if ((neighbour.field->get_caps() & (MOVECAPS_SWIM | MOVECAPS_WALK)) == MOVECAPS_SWIM) {
+					if (visited_positions.count(neighbour) == 0) {
+						visited_positions.insert(neighbour);
+						q_positions.push(neighbour);
+					}
+				}
+			}
+		}
+
+		for (const Coords& swim_coord: visited_positions)
+			if (swim_coords.count(swim_coord) == 0)
+				swim_coords.insert(swim_coord);
+			else
+				return true;
+	}
+	return false;
+}
+
+bool Map::has_artifacts(const World& world) {
+	for (int32_t i = 0; i < world.get_nr_immovables(); ++i) {
+		const ImmovableDescr& descr = *world.get_immovable_descr(i);
+		if (descr.has_attribute(descr.get_attribute_id("artifact"))) {
+			return true;
+		}
+	}
+	return false;
 }
 
 

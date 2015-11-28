@@ -20,6 +20,7 @@
 #include "logic/trainingsite.h"
 
 #include <cstdio>
+#include <memory>
 
 #include <boost/format.hpp>
 
@@ -32,24 +33,20 @@
 #include "logic/player.h"
 #include "logic/production_program.h"
 #include "logic/soldier.h"
-#include "logic/tribe.h"
+#include "logic/tribes/tribe_descr.h"
 #include "logic/worker.h"
-#include "profile/profile.h"
-
 
 namespace Widelands {
 
 const uint32_t TrainingSite::training_state_multiplier = 12;
 
 TrainingSiteDescr::TrainingSiteDescr
-	(char const * const _name, char const * const _descname,
-	 const std::string & directory, Profile & prof, Section & global_s,
-	 const TribeDescr & _tribe, const World& world)
+	(const std::string& init_descname, const LuaTable& table, const EditorGameBase& egbase)
 	:
 	ProductionSiteDescr
-		(MapObjectType::TRAININGSITE, _name, _descname, directory, prof, global_s, _tribe, world),
-	m_num_soldiers      (global_s.get_safe_int("soldier_capacity")),
-	m_max_stall         (global_s.get_safe_int("trainer_patience")),
+		(init_descname, "", MapObjectType::TRAININGSITE, table, egbase),
+	m_num_soldiers      (table.get_int("soldier_capacity")),
+	m_max_stall         (table.get_int("trainer_patience")),
 
 	m_train_hp          (false),
 	m_train_attack      (false),
@@ -69,25 +66,35 @@ TrainingSiteDescr::TrainingSiteDescr
 	//  sections starting with the name of each soldier type.
 	//  These sections also seem redundant. Eliminate them (having the
 	//  programs should be enough).
-	if (Section * const s = prof.get_section("soldier hp")) {
+	std::unique_ptr<LuaTable> items_table;
+	if (table.has_key("soldier hp")) {
+		items_table = table.get_table("soldier hp");
 		m_train_hp      = true;
-		m_min_hp        = s->get_safe_int("min_level");
-		m_max_hp        = s->get_safe_int("max_level");
+		m_min_hp = items_table->get_int("min_level");
+		m_max_hp = items_table->get_int("max_level");
+		add_training_inputs(*items_table.get(), &food_hp_, &weapons_hp_);
 	}
-	if (Section * const s = prof.get_section("soldier attack")) {
-		m_train_attack  = true;
-		m_min_attack    = s->get_safe_int("min_level");
-		m_max_attack    = s->get_safe_int("max_level");
+
+	if (table.has_key("soldier attack")) {
+		items_table = table.get_table("soldier attack");
+		m_train_attack      = true;
+		m_min_attack = items_table->get_int("min_level");
+		m_max_attack = items_table->get_int("max_level");
+		add_training_inputs(*items_table.get(), &food_attack_, &weapons_attack_);
 	}
-	if (Section * const s = prof.get_section("soldier defense")) {
-		m_train_defense = true;
-		m_min_defense   = s->get_safe_int("min_level");
-		m_max_defense   = s->get_safe_int("max_level");
+	if (table.has_key("soldier defense")) {
+		items_table = table.get_table("soldier defense");
+		m_train_defense      = true;
+		m_min_defense = items_table->get_int("min_level");
+		m_max_defense = items_table->get_int("max_level");
+		add_training_inputs(*items_table.get(), &food_defense_, &weapons_defense_);
 	}
-	if (Section * const s = prof.get_section("soldier evade")) {
-		m_train_evade   = true;
-		m_min_evade     = s->get_safe_int("min_level");
-		m_max_evade     = s->get_safe_int("max_level");
+	if (table.has_key("soldier evade")) {
+		items_table = table.get_table("soldier evade");
+		m_train_evade      = true;
+		m_min_evade = items_table->get_int("min_level");
+		m_max_evade = items_table->get_int("max_level");
+		add_training_inputs(*items_table.get(), &food_evade_, &weapons_evade_);
 	}
 }
 
@@ -144,6 +151,28 @@ int32_t
 TrainingSiteDescr::get_max_stall() const
 {
 	return m_max_stall;
+}
+
+void TrainingSiteDescr::add_training_inputs(
+		const LuaTable& table,
+		std::vector<std::vector<std::string>>* food,
+		std::vector<std::string>* weapons) {
+
+	if (table.has_key("food")) {
+		std::unique_ptr<LuaTable> food_table = table.get_table("food");
+		for (const int key : food_table->keys<int>()) {
+			std::vector<std::string> food_vector;
+			for (const std::string& food_item : food_table->get_table(key)->array_entries<std::string>()) {
+				food_vector.push_back(food_item);
+			}
+			food->push_back(food_vector);
+		}
+	}
+	if (table.has_key("weapons")) {
+		for (const std::string& weapon : table.get_table("weapons")->array_entries<std::string>()) {
+			weapons->push_back(weapon);
+		}
+	}
 }
 
 /*
@@ -280,7 +309,7 @@ void TrainingSite::update_soldier_request() {
 			m_soldier_request =
 				new Request
 					(*this,
-					 descr().tribe().safe_worker_index("soldier"),
+					 owner().tribe().soldier(),
 					 TrainingSite::request_soldier_callback,
 					 wwWORKER);
 
@@ -320,8 +349,9 @@ void TrainingSite::update_soldier_request() {
 		delete m_soldier_request;
 		m_soldier_request = nullptr;
 
-		while (m_soldiers.size() > m_capacity)
+		while (m_soldiers.size() > m_capacity) {
 			drop_soldier(**m_soldiers.rbegin());
+		}
 	}
 }
 
@@ -337,7 +367,7 @@ void TrainingSite::request_soldier_callback
 #else
 	 Request         &,
 #endif
-	 WareIndex,
+	 DescriptionIndex,
 	 Worker          * const w,
 	 PlayerImmovable &       target)
 {
@@ -432,6 +462,7 @@ void TrainingSite::drop_soldier(Soldier & soldier)
 
 	// Schedule, so that we can call new soldiers on next act()
 	schedule_act(game, 100);
+	Notifications::publish(NoteTrainingSiteSoldierTrained(this, get_owner()));
 }
 
 
@@ -483,28 +514,27 @@ void TrainingSite::drop_stalled_soldiers(Game &)
 		}
 		else
 		{
-			std::vector<Upgrade>::iterator it = m_upgrades.begin();
-			for (; it != m_upgrades.end(); ++it)
+			for (const Upgrade& upgrade: m_upgrades)
 			if  (! this_soldier_is_safe)
 			{
 				// Soldier is safe, if he:
 				//  - is below maximum, and
 				//  - is not in a stalled state
 				// Check done separately for each art.
-				int32_t level = m_soldiers[i]->get_level(it->attribute);
+				int32_t level = m_soldiers[i]->get_level(upgrade.attribute);
 
 				 // Below maximum -check
-				if (level > it->max)
+				if (level > upgrade.max)
 				{
-					break;
+					continue;
 				}
 
-				TypeAndLevel train_tl(it->attribute, level);
+				TypeAndLevel train_tl(upgrade.attribute, level);
 				TrainFailCount::iterator tstep = training_failure_count.find(train_tl);
 				if (tstep ==  training_failure_count.end())
 					{
 						log("\nTrainingSite::drop_stalled_soldiers: ");
-						log("training step %d,%d not found in this school!\n", it->attribute, level);
+						log("training step %d,%d not found in this school!\n", upgrade.attribute, level);
 						break;
 					}
 
@@ -552,19 +582,31 @@ void TrainingSite::program_end(Game & game, ProgramResult const result)
 {
 	m_result = result;
 	ProductionSite::program_end(game, result);
+	// For unknown reasons sometimes there is a fully upgraded soldier
+	// that failed to be send away, so at the end of this function
+	// we test for such soldiers, unless another drop_soldiers
+	// function were run
+	bool leftover_soldiers_check = true;
 
 	if (m_current_upgrade) {
 		if (m_result == Completed) {
 			drop_unupgradable_soldiers(game);
+			leftover_soldiers_check = false;
 			m_current_upgrade->lastsuccess = true;
 			m_current_upgrade->failures = 0;
 		}
 		else {
 			m_current_upgrade->failures++;
 			drop_stalled_soldiers(game);
+			leftover_soldiers_check = false;
 		}
 		m_current_upgrade = nullptr;
 	}
+
+	if (leftover_soldiers_check) {
+		drop_unupgradable_soldiers(game);
+	}
+
 	training_done();
 }
 
@@ -594,8 +636,9 @@ void TrainingSite::find_and_start_next_program(Game & game)
 				maxcredit  = upgrade.credit;
 		}
 
-		if (maxprio == 0)
+		if (maxprio == 0) {
 			return program_start(game, "sleep");
+		}
 
 		uint32_t const multiplier = 1 + (10 - maxcredit) / maxprio;
 

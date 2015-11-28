@@ -5,7 +5,7 @@
 include "scripting/messages.lua"
 
 function building_materials()
-   sleep(200)
+   sleep(1000)
    campaign_message_box(diary_page_5)
 
    local map = wl.Game().map
@@ -22,9 +22,9 @@ function building_materials()
    -- Check for completing of the woodeconomy
    run(function()
       while not check_for_buildings(p1, {
-         lumberjacks_house = 3,
-         foresters_house = 1,
-         sawmill = 1,
+         empire_lumberjacks_house = 3,
+         empire_foresters_house = 1,
+         empire_sawmill = 1,
       }) do sleep(2342) end
 
       campaign_message_box(diary_page_6)
@@ -38,7 +38,7 @@ function building_materials()
    local o_quarry = add_campaign_objective(obj_build_quarry)
    -- Check for completeness of the quarry
    run(function()
-      while not check_for_buildings(p1, {quarry=1}) do sleep(3423) end
+      while not check_for_buildings(p1, {empire_quarry=1}) do sleep(3423) end
       o_quarry.done = true
 
       campaign_message_box(diary_page_7)
@@ -49,11 +49,11 @@ function food_thread()
    -- Wait till one mine goes up
    while true do
       local rv = p1:get_buildings{
-         "coalmine",
-         "deep_coalmine",
-         "oremine",
-         "deep_oremine",
-         "marblemine",
+         "empire_coalmine",
+         "empire_coalmine_deep",
+         "empire_ironmine",
+         "empire_ironmine_deep",
+         "empire_marblemine",
       }
       local s = 0
       for idx,a in pairs(rv) do s = s + #a end
@@ -63,41 +63,41 @@ function food_thread()
 
    campaign_message_box(amalea_1)
    p1:allow_buildings{
-      "well",
-      "farm",
-      "brewery",
-      "vineyard",
-      "winery",
-      "mill",
-      "bakery",
-      "hunters_house",
-      "piggery",
-      "tavern",
-      "inn",
-      "fishers_house",
+      "empire_well",
+      "empire_farm",
+      "empire_brewery",
+      "empire_vineyard",
+      "empire_winery",
+      "empire_mill",
+      "empire_bakery",
+      "empire_hunters_house",
+      "empire_piggery",
+      "empire_tavern",
+      "empire_inn",
+      "empire_fishers_house",
    }
    local o = add_campaign_objective(obj_build_food_infrastructure)
 
    -- Run easter egg: Amalea says something when Tavern is done
    run(function()
-      while #p1:get_buildings("tavern") < 1 do sleep(2349) end
+      while #p1:get_buildings("empire_tavern") < 1 do sleep(2349) end
       campaign_message_box(amalea_2)
    end)
 
    while true do
       local rv = p1:get_buildings{
-         "brewery",
-         "fishers_house",
-         "bakery",
-         "hunters_house",
-         "piggery",
-         "tavern",
-         "inn",
+         "empire_brewery",
+         "empire_fishers_house",
+         "empire_bakery",
+         "empire_hunters_house",
+         "empire_piggery",
+         "empire_tavern",
+         "empire_inn",
       }
-      if #rv.brewery > 0 and
-         (#rv.tavern + #rv.inn) > 0 and
-         (#rv.fishers_house + #rv.hunters_house +
-          #rv.piggery + #rv.bakery) > 0 then break end
+      if #rv.empire_brewery > 0 and
+         (#rv.empire_tavern + #rv.empire_inn) > 0 and
+         (#rv.empire_fishers_house + #rv.empire_hunters_house +
+          #rv.empire_piggery + #rv.empire_bakery) > 0 then break end
       sleep(4857)
    end
    o.done = true
@@ -123,40 +123,40 @@ function mining_infrastructure()
 
    campaign_message_box(saledus_3)
    p1:allow_buildings{
-      "coalmine",
-      "deep_coalmine",
-      "oremine",
-      "deep_oremine",
-      "stonemasons_house",
-      "toolsmithy",
-      "armorsmithy",
-      "weaponsmithy",
-      "smelting_works",
-      "charcoal_kiln",
+      "empire_coalmine",
+      "empire_coalmine_deep",
+      "empire_ironmine",
+      "empire_ironmine_deep",
+      "empire_stonemasons_house",
+      "empire_toolsmithy",
+      "empire_armorsmithy",
+      "empire_weaponsmithy",
+      "empire_smelting_works",
+      "empire_charcoal_kiln",
    }
 
    local o = add_campaign_objective(obj_build_mining_infrastructure)
    -- Wait for the infrastructure to come up
    while true do
       local rv = p1:get_buildings{
-         "coalmine",
-         "deep_coalmine",
-         "oremine",
-         "deep_oremine",
-         "stonemasons_house",
-         "toolsmithy",
-         "armorsmithy",
-         "weaponsmithy",
-         "smelting_works",
-         "charcoal_kiln",
+         "empire_coalmine",
+         "empire_coalmine_deep",
+         "empire_ironmine",
+         "empire_ironmine_deep",
+         "empire_stonemasons_house",
+         "empire_toolsmithy",
+         "empire_armorsmithy",
+         "empire_weaponsmithy",
+         "empire_smelting_works",
+         "empire_charcoal_kiln",
       }
-      if #rv.stonemasons_house > 0 and
-         #rv.toolsmithy > 0 and
-         #rv.armorsmithy > 0 and
-         #rv.smelting_works > 0 and
-         (#rv.oremine + #rv.deep_oremine > 0) and
-         (#rv.coalmine + #rv.deep_coalmine + #rv.charcoal_kiln > 0) and
-         #rv.weaponsmithy > 0 then break end
+      if #rv.empire_stonemasons_house > 0 and
+         #rv.empire_toolsmithy > 0 and
+         #rv.empire_armorsmithy > 0 and
+         #rv.empire_smelting_works > 0 and
+         (#rv.empire_ironmine + #rv.empire_ironmine_deep > 0) and
+         (#rv.empire_coalmine + #rv.empire_coalmine_deep + #rv.empire_charcoal_kiln > 0) and
+         #rv.empire_weaponsmithy > 0 then break end
       sleep(4948)
    end
    o.done = true
@@ -175,7 +175,7 @@ function expand_and_build_marblemine()
 
    campaign_message_box(saledus_1)
    local o = add_campaign_objective(obj_build_military_buildings)
-   p1:allow_buildings{"barracks", "sentry"}
+   p1:allow_buildings{"empire_blockhouse", "empire_sentry"}
 
    -- Go back to where we were
    timed_scroll(array_reverse(pts))
@@ -192,9 +192,9 @@ function expand_and_build_marblemine()
    pts = wait_for_roadbuilding_and_scroll(marblemountains)
 
    campaign_message_box(saledus_2)
-   p1:allow_buildings{"marblemine", "deep_marblemine"}
+   p1:allow_buildings{"empire_marblemine", "empire_marblemine_deep"}
    o = add_campaign_objective(obj_build_marblemine)
-   run(function() while not check_for_buildings(p1, {marblemine = 1})
+   run(function() while not check_for_buildings(p1, {empire_marblemine = 1})
       do sleep(2133) end  o.done = true end)
 
    -- Go back to where we were
@@ -205,12 +205,13 @@ function barbarians_thread()
    -- Wait for various buildings to go up
    while true do
       local rv = p1:get_buildings{
-         "marblemine", "deep_marblemine", "oremine", "deep_oremine",
-         "coalmine", "deep_coalmine", "charcoal_kiln"
+         "empire_marblemine", "empire_marblemine_deep",
+         "empire_ironmine", "empire_ironmine_deep",
+         "empire_coalmine", "empire_coalmine_deep", "empire_charcoal_kiln"
       }
-      local mm = #rv.marblemine + #rv.deep_marblemine
-      local ore = #rv.oremine + #rv.deep_oremine
-      local coal = #rv.coalmine + #rv.deep_coalmine + #rv.charcoal_kiln
+      local mm = #rv.empire_marblemine + #rv.empire_marblemine_deep
+      local ore = #rv.empire_ironmine + #rv.empire_ironmine_deep
+      local coal = #rv.empire_coalmine + #rv.empire_coalmine_deep + #rv.empire_charcoal_kiln
 
       if mm > 0 and ore > 0 and coal > 0 then break end
       sleep(6674)
@@ -227,13 +228,13 @@ function barbarians_thread()
 
    campaign_message_box(diary_page_8)
    local o = add_campaign_objective(obj_build_bigger_military_buildings)
-   p1:allow_buildings{"outpost", "barrier", "tower"}
-   p2:allow_buildings{"quarry"}
+   p1:allow_buildings{"empire_outpost", "empire_barrier", "empire_tower"}
+   p2:allow_buildings{"barbarians_quarry"}
 
    -- Wait for one of the buildings to go up
    while true do
-      local rv = p1:get_buildings{"outpost", "barrier", "tower"}
-      if (#rv.tower + #rv.outpost + #rv.barrier) > 0 then
+      local rv = p1:get_buildings{"empire_outpost", "empire_barrier", "empire_tower"}
+      if (#rv.empire_tower + #rv.empire_outpost + #rv.empire_barrier) > 0 then
          break
       end
       sleep(2342)
@@ -245,11 +246,11 @@ function barbarians_thread()
       sleep(2343)
    end
    campaign_message_box(diary_page_9)
-   p1:allow_buildings{"fortress"}
+   p1:allow_buildings{"empire_fortress"}
 
    o = add_campaign_objective(obj_remove_the_barbarians)
    -- Wait for the fortress to come up
-   while not check_for_buildings(p1, {fortress=1},
+   while not check_for_buildings(p1, {empire_fortress = 1},
       wl.Game().map:get_field(60,65):region(6))
    do sleep(2435) end
 
@@ -269,4 +270,3 @@ run(food_thread)
 run(mining_infrastructure)
 run(expand_and_build_marblemine)
 run(barbarians_thread)
-

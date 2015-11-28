@@ -32,7 +32,7 @@ bool Requirements::check(const MapObject & obj) const
 	return !m || m->check(obj);
 }
 
-#define REQUIREMENTS_VERSION 3
+constexpr uint16_t kCurrentPacketVersion = 3;
 
 /**
  * Read this requirement from a file
@@ -42,11 +42,11 @@ void Requirements::read
 {
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
-		if (packet_version == REQUIREMENTS_VERSION) {
+		if (packet_version == kCurrentPacketVersion) {
 			*this = RequirementsStorage::read(fr, egbase, mol);
-		} else
-			throw GameDataError
-				("unknown/unhandled version %u", packet_version);
+		} else {
+			throw UnhandledVersionError("Requirements", packet_version, kCurrentPacketVersion);
+		}
 	} catch (const WException & e) {
 		throw wexception("requirements: %s", e.what());
 	}
@@ -56,7 +56,7 @@ void Requirements::write
 	(FileWrite & fw, EditorGameBase & egbase, MapObjectSaver & mos)
 	const
 {
-	fw.unsigned_16(REQUIREMENTS_VERSION);
+	fw.unsigned_16(kCurrentPacketVersion);
 
 	if (!m) {
 		fw.unsigned_16(0);

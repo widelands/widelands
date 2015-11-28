@@ -19,36 +19,40 @@
 
 #include "logic/buildcost.h"
 
+#include <map>
+#include <memory>
+
 #include "base/wexception.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
-#include "logic/tribe.h"
-#include "profile/profile.h"
+#include "logic/game_data_error.h"
+#include "logic/tribes/tribe_descr.h"
+#include "logic/tribes/tribes.h"
 
 namespace Widelands {
 
-void Buildcost::parse(const TribeDescr & tribe, Section & buildcost_s)
-{
-	while (Section::Value const * const val = buildcost_s.get_next_val())
+Buildcost::Buildcost() : std::map<DescriptionIndex, uint8_t>() {}
+
+Buildcost::Buildcost(std::unique_ptr<LuaTable> table, const Tribes& tribes) :
+	std::map<DescriptionIndex, uint8_t>() {
+	for (const std::string& warename : table->keys<std::string>()) {
+		int32_t value = INVALID_INDEX;
 		try {
-			WareIndex const idx = tribe.ware_index(val->get_name());
-			if (idx != INVALID_INDEX) {
-				if (count(idx))
-					throw wexception
-						("a buildcost item of this ware type has already been "
-						 "defined");
-				int32_t const value = val->get_int();
-				if (value < 1 || 255 < value)
-					throw wexception("count is out of range 1 .. 255");
-				insert(std::pair<WareIndex, uint8_t>(idx, value));
-			} else
-				throw wexception
-					("tribe does not define a ware type with this name");
-		} catch (const WException & e) {
-			throw wexception
-				("[buildcost] \"%s=%s\": %s",
-				 val->get_name(), val->get_string(), e.what());
+			DescriptionIndex const idx = tribes.safe_ware_index(warename);
+			if (count(idx)) {
+				throw GameDataError(
+					"A buildcost item of this ware type has already been defined: %s", warename.c_str());
+			}
+			value = table->get_int(warename);
+			const uint8_t ware_count = value;
+			if (ware_count != value) {
+				throw GameDataError("Ware count is out of range 1 .. 255");
+			}
+			insert(std::pair<DescriptionIndex, uint8_t>(idx, ware_count));
+		} catch (const WException& e) {
+			throw GameDataError("[buildcost] \"%s=%d\": %s", warename.c_str(), value, e.what());
 		}
+	}
 }
 
 /**
@@ -78,8 +82,8 @@ void Buildcost::load(FileRead& fr, const Widelands::TribeDescr& tribe) {
 		if (name.empty())
 			break;
 
-		WareIndex index = tribe.ware_index(name);
-		if (index == INVALID_INDEX) {
+		DescriptionIndex index = tribe.ware_index(name);
+		if (!tribe.has_ware(index)) {
 			log("buildcost: tribe %s does not define ware %s", tribe.name().c_str(), name.c_str());
 			fr.unsigned_8();
 		} else {
