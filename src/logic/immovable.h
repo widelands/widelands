@@ -239,7 +239,7 @@ protected:
 #else
 	uint32_t m_anim_construction_total;
 	uint32_t m_anim_construction_done;
-	int32_t m_program_step; ///< time of next step
+	uint32_t m_program_step; ///< time of next step
 #endif
 	std::string m_construct_string;
 

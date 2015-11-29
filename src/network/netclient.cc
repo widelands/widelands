@@ -82,7 +82,7 @@ struct NetClientImpl {
 	bool server_is_waiting;
 
 	/// Data for the last time message we sent.
-	int32_t lasttimestamp;
+	uint32_t lasttimestamp;
 	uint32_t lasttimestamp_realtime;
 
 	/// The real target speed, in milliseconds per second.
@@ -253,7 +253,7 @@ void NetClient::think()
 
 		if
 			(d->server_is_waiting &&
-			 d->game->get_gametime() == d->time.networktime())
+			 d->game->get_gametime() == static_cast<uint32_t>(d->time.networktime()))
 		{
 			send_time();
 			d->server_is_waiting = false;

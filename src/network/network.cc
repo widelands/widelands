@@ -24,7 +24,7 @@
 
 
 
-CmdNetCheckSync::CmdNetCheckSync(int32_t const dt, SyncCallback * const cb) :
+CmdNetCheckSync::CmdNetCheckSync(uint32_t const dt, SyncCallback * const cb) :
 Command (dt), m_callback(cb)
 {}
 

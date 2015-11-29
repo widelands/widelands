@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-23 09:42+0000\n"
+"POT-Creation-Date: 2015-11-28 11:19+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -1223,7 +1223,7 @@ msgstr ""
 #: ../../tribes/buildings/productionsites/empire/mill/helptexts.lua:26
 msgctxt "empire_building"
 msgid ""
-"The miller needs %1% on average to grind wheat into a sack of corn."
+"The miller needs %1% on average to grind wheat into a sack of flour."
 msgstr ""
 
 #. TRANSLATORS: Purpose helptext for a building
@@ -1664,18 +1664,9 @@ msgid ""
 "Health Training"
 msgstr ""
 
-#. TRANSLATORS: %1$s = Health, Evade, Attack or Defense. %2$s and %3$s are numbers.
 #: ../../tribes/scripting/help/building_help.lua:423
-#: ../../tribes/scripting/help/building_help.lua:437
-#: ../../tribes/scripting/help/building_help.lua:449
-#: ../../tribes/scripting/help/building_help.lua:462
 msgid ""
-"Trains ‘%1$s’ from %2$s up to %3$s"
-msgstr ""
-
-#: ../../tribes/scripting/help/building_help.lua:424
-msgid ""
-"Health"
+"Trains ‘Health’ from %1% up to %2%"
 msgstr ""
 
 #: ../../tribes/scripting/help/building_help.lua:425
@@ -1691,9 +1682,10 @@ msgid ""
 "Attack Training"
 msgstr ""
 
-#: ../../tribes/scripting/help/building_help.lua:438
+#. TRANSLATORS: %1$s = Health, Evade, Attack or Defense. %2$s and %3$s are numbers.
+#: ../../tribes/scripting/help/building_help.lua:437
 msgid ""
-"Attack"
+"Trains ‘Attack’ from %1% up to %2%"
 msgstr ""
 
 #: ../../tribes/scripting/help/building_help.lua:448
@@ -1701,9 +1693,9 @@ msgid ""
 "Defense Training"
 msgstr ""
 
-#: ../../tribes/scripting/help/building_help.lua:450
+#: ../../tribes/scripting/help/building_help.lua:449
 msgid ""
-"Defense"
+"Trains ‘Defense’ from %1% up to %2%"
 msgstr ""
 
 #: ../../tribes/scripting/help/building_help.lua:461
@@ -1711,9 +1703,9 @@ msgid ""
 "Evade Training"
 msgstr ""
 
-#: ../../tribes/scripting/help/building_help.lua:463
+#: ../../tribes/scripting/help/building_help.lua:462
 msgid ""
-"Evade"
+"Trains ‘Evade’ from %1% up to %2%"
 msgstr ""
 
 #. TRANSLATORS: %1$d is a number, %2$s the name of a ware, e.g. 12x Stone

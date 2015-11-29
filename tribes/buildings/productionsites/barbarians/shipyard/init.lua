@@ -8,6 +8,7 @@ tribes:new_productionsite_type {
    directory = dirname,
    icon = dirname .. "menu.png",
    size = "medium",
+   needs_seafaring = true,
 
    buildcost = {
       log = 3,
@@ -74,7 +75,7 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start constructing a ship because ...
          descname = _"constructing a ship",
          actions = {
-            "check_map=seafaring", -- TODO(GunChleoc): We should make this check on game creation as well and remove it from the allowed buildings
+            "check_map=seafaring",
             "construct=barbarians_shipconstruction buildship 6",
             "animate=working 35000",
             "return=completed"
