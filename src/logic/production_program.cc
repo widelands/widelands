@@ -1051,7 +1051,7 @@ void ProductionProgram::ActProduce::execute
 	std::vector<std::string> ware_descnames;
 	uint8_t count = 0;
 	for (const auto& item_pair : m_items) {
-		count = item_pair.second;
+		count += item_pair.second;
 		std::string ware_descname = tribe.get_ware_descr(item_pair.first)->descname();
 		// TODO(GunChleoc): would be nice with pngettext whenever it gets added to xgettext for Lua.
 		if (1 < count) {
@@ -1059,7 +1059,7 @@ void ProductionProgram::ActProduce::execute
 			/** TRANSLATORS:    %%1$i = "2" */
 			/** TRANSLATORS:    %2$s = "Coal" */
 			ware_descname = (boost::format(_("%1$ix %2$s"))
-								  % static_cast<unsigned int>(count)
+								  % static_cast<unsigned int>(item_pair.second)
 								  % ware_descname).str();
 		}
 		ware_descnames.push_back(ware_descname);
@@ -1147,7 +1147,7 @@ void ProductionProgram::ActRecruit::execute
 	std::vector<std::string> worker_descnames;
 	uint8_t count = 0;
 	for (const auto& item_pair : m_items) {
-		count = item_pair.second;
+		count += item_pair.second;
 		std::string worker_descname = tribe.get_worker_descr(item_pair.first)->descname();
 		// TODO(GunChleoc): would be nice with pngettext whenever it gets added to xgettext for Lua.
 		if (1 < count) {
@@ -1155,7 +1155,7 @@ void ProductionProgram::ActRecruit::execute
 			/** TRANSLATORS:    %1$i = "2" */
 			/** TRANSLATORS:    %2$s = "Ox" */
 			worker_descname = (boost::format(_("%1$ix %2$s"))
-									 % static_cast<unsigned int>(count)
+									 % static_cast<unsigned int>(item_pair.second)
 									 % worker_descname).str();
 		}
 		worker_descnames.push_back(worker_descname);
