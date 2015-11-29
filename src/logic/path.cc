@@ -25,7 +25,7 @@
 #include "io/filewrite.h"
 #include "logic/game_data_error.h"
 #include "logic/map.h"
-#include "logic/map_objects/instances.h"
+#include "logic/map_objects/map_object.h"
 #include "logic/widelands_geometry_io.h"
 
 namespace Widelands {

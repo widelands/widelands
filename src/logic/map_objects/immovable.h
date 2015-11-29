@@ -26,7 +26,7 @@
 #include "base/macros.h"
 #include "graphic/animation.h"
 #include "logic/map_objects/buildcost.h"
-#include "logic/map_objects/instances.h"
+#include "logic/map_objects/map_object.h"
 #include "logic/widelands_geometry.h"
 #include "notifications/note_ids.h"
 #include "notifications/notifications.h"

@@ -42,7 +42,7 @@
 #include "graphic/texture.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/map_objects/bob.h"
-#include "logic/map_objects/instances.h"
+#include "logic/map_objects/map_object.h"
 #include "scripting/lua_table.h"
 #include "sound/sound_handler.h"
 

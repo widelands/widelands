@@ -25,7 +25,7 @@
 #include "economy/route.h"
 #include "graphic/animation.h"
 #include "graphic/diranimations.h"
-#include "logic/map_objects/instances.h"
+#include "logic/map_objects/map_object.h"
 #include "logic/map_objects/walkingdir.h"
 #include "logic/widelands_geometry.h"
 

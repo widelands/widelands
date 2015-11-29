@@ -21,7 +21,7 @@
 #define WL_ECONOMY_WARE_INSTANCE_H
 
 #include "economy/transfer.h"
-#include "logic/map_objects/instances.h"
+#include "logic/map_objects/map_object.h"
 #include "logic/map_objects/tribes/ware_descr.h"
 #include "logic/widelands.h"
 #include "map_io/tribes_legacy_lookup_table.h"

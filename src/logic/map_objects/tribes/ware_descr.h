@@ -27,7 +27,7 @@
 #include <stdint.h>
 
 #include "base/macros.h"
-#include "logic/map_objects/instances.h"
+#include "logic/map_objects/map_object.h"
 #include "scripting/lua_table.h"
 
 class Image;

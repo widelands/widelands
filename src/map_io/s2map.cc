@@ -34,7 +34,7 @@
 #include "logic/field.h"
 #include "logic/game.h"
 #include "logic/map.h"
-#include "logic/map_objects/instances.h"
+#include "logic/map_objects/map_object.h"
 #include "logic/map_objects/world/world.h"
 #include "logic/mapregion.h"
 #include "map_io/map_loader.h"

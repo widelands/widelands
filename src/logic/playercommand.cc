@@ -28,7 +28,7 @@
 #include "io/filewrite.h"
 #include "io/streamwrite.h"
 #include "logic/game.h"
-#include "logic/map_objects/instances.h"
+#include "logic/map_objects/map_object.h"
 #include "logic/map_objects/tribes/militarysite.h"
 #include "logic/map_objects/tribes/ship.h"
 #include "logic/map_objects/tribes/soldier.h"

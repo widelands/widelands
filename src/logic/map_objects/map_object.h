@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef WL_LOGIC_MAP_OBJECTS_INSTANCES_H
-#define WL_LOGIC_MAP_OBJECTS_INSTANCES_H
+#ifndef WL_LOGIC_MAP_OBJECTS_MAP_OBJECT_H
+#define WL_LOGIC_MAP_OBJECTS_MAP_OBJECT_H
 
 #include <cstring>
 #include <map>
@@ -544,4 +544,4 @@ private:
 
 }
 
-#endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_INSTANCES_H
+#endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_MAP_OBJECT_H

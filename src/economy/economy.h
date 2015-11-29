@@ -28,7 +28,7 @@
 #include <boost/utility.hpp>
 
 #include "base/macros.h"
-#include "logic/map_objects/instances.h"
+#include "logic/map_objects/map_object.h"
 #include "logic/map_objects/tribes/warelist.h"
 #include "logic/map_objects/tribes/wareworker.h"
 #include "economy/supply_list.h"

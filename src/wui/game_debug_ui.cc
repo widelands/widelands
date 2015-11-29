@@ -30,7 +30,7 @@
 #include "logic/field.h"
 #include "logic/map.h"
 #include "logic/map_objects/bob.h"
-#include "logic/map_objects/instances.h"
+#include "logic/map_objects/map_object.h"
 #include "logic/map_objects/tribes/building.h"
 #include "logic/map_objects/world/resource_description.h"
 #include "logic/map_objects/world/world.h"

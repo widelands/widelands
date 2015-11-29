@@ -27,7 +27,7 @@
 
 #include "base/macros.h"
 #include "logic/game_data_error.h"
-#include "logic/map_objects/instances.h"
+#include "logic/map_objects/map_object.h"
 #include "logic/widelands.h"
 
 

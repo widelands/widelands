@@ -35,7 +35,7 @@
 #include "logic/game_controller.h"
 #include "logic/game_settings.h"
 #include "logic/map.h"
-#include "logic/map_objects/instances.h"
+#include "logic/map_objects/map_object.h"
 #include "logic/player.h"
 #include "map_io/map_loader.h"
 #include "scripting/lua_interface.h"

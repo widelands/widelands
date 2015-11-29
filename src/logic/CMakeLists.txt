@@ -144,8 +144,8 @@ wl_library(logic
     map_objects/immovable_program.h
     map_objects/immovable.cc
     map_objects/immovable.h
-    map_objects/instances.cc
-    map_objects/instances.h
+    map_objects/map_object.cc
+    map_objects/map_object.h
     map_objects/terrain_affinity.cc
     map_objects/terrain_affinity.h
     map_objects/walkingdir.cc

@@ -22,7 +22,7 @@
 
 #include <stdint.h>
 
-#include "logic/map_objects/instances.h"
+#include "logic/map_objects/map_object.h"
 
 namespace Widelands {
 

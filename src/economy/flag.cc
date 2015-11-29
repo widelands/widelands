@@ -28,7 +28,7 @@
 #include "economy/ware_instance.h"
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
-#include "logic/map_objects/instances.h"
+#include "logic/map_objects/map_object.h"
 #include "logic/map_objects/tribes/building.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/warehouse.h"

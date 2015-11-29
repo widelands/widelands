@@ -19,7 +19,7 @@
 #ifndef WL_LOGIC_MAP_OBJECTS_TRIBES_BATTLE_H
 #define WL_LOGIC_MAP_OBJECTS_TRIBES_BATTLE_H
 
-#include "logic/map_objects/instances.h"
+#include "logic/map_objects/map_object.h"
 
 namespace Widelands {
 class Soldier;

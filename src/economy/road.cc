@@ -25,7 +25,7 @@
 #include "economy/request.h"
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
-#include "logic/map_objects/instances.h"
+#include "logic/map_objects/map_object.h"
 #include "logic/map_objects/tribes/carrier.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/player.h"

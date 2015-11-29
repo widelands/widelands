@@ -23,7 +23,7 @@
 #include "io/fileread.h"
 #include "io/filewrite.h"
 #include "logic/game_data_error.h"
-#include "logic/map_objects/instances.h"
+#include "logic/map_objects/map_object.h"
 
 namespace Widelands {
 
