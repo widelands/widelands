@@ -59,7 +59,7 @@ constexpr uint16_t kCurrentPacketVersionDismantlesite = 1;
 constexpr uint16_t kCurrentPacketVersionConstructionsite = 3;
 constexpr uint16_t kCurrentPacketPFBuilding = 1;
 constexpr uint16_t kCurrentPacketVersionWarehouse = 6;
-constexpr uint16_t kCurrentPacketVersionMilitarysite = 4;
+constexpr uint16_t kCurrentPacketVersionMilitarysite = 5;
 constexpr uint16_t kCurrentPacketVersionProductionsite = 5;
 constexpr uint16_t kCurrentPacketVersionTrainingsite = 4;
 
@@ -509,8 +509,6 @@ void MapBuildingdataPacket::read_militarysite
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
 		if (packet_version == kCurrentPacketVersionMilitarysite) {
-			read_productionsite(militarysite, fr, game, mol);
-
 			militarysite.m_normal_soldier_request.reset();
 
 			if (fr.unsigned_8()) {
@@ -1134,7 +1132,6 @@ void MapBuildingdataPacket::write_militarysite
 	 MapObjectSaver & mos)
 {
 	fw.unsigned_16(kCurrentPacketVersionMilitarysite);
-	write_productionsite(militarysite, fw, game, mos);
 
 	if (militarysite.m_normal_soldier_request) {
 		fw.unsigned_8(1);
