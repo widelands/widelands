@@ -65,7 +65,7 @@ void GameCmdQueuePacket::read
 
 				item.cmd = &cmd;
 
-				cmdq.m_cmds[cmd.duetime() % CMD_QUEUE_BUCKET_SIZE].push(item);
+				cmdq.m_cmds[cmd.duetime() % kCommandQueueBucketSize].push(item);
 				++ cmdq.m_ncmds;
 			}
 		} else {
@@ -99,7 +99,7 @@ void GameCmdQueuePacket::write
 
 	while (nhandled < cmdq.m_ncmds) {
 		// Make a copy, so we can pop stuff
-		std::priority_queue<CmdQueue::CmdItem> p = cmdq.m_cmds[time % CMD_QUEUE_BUCKET_SIZE];
+		std::priority_queue<CmdQueue::CmdItem> p = cmdq.m_cmds[time % kCommandQueueBucketSize];
 
 		while (!p.empty()) {
 			const CmdQueue::CmdItem & it = p.top();
