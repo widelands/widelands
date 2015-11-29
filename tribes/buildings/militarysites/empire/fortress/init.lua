@@ -38,10 +38,6 @@ tribes:new_militarysite_type {
       }
    },
 
-   outputs = {
-      "empire_soldier",
-   },
-
    aihints = {
       expansion = true,
       fighting = true,

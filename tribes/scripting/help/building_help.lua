@@ -221,15 +221,16 @@ end
 
 
 -- RST
--- .. function building_help_general_string(building_description)
+-- .. function building_help_general_string(tribe, building_description)
 --
 --    Creates the string for the general section in building help
 --
+--    :arg tribe: The :class:`LuaTribeDescription` for the tribe that has this building.
 --    :arg building_description: The :class:`LuaBuildingDescription` for the building
 --                               that we are displaying this help for.
 --    :returns: rt of the formatted text
 --
-function building_help_general_string(building_description)
+function building_help_general_string(tribe, building_description)
    -- TRANSLATORS: Heading for a flavour text in the building help.
    local result = rt(h2(_"Lore")) ..
       rt("image=" .. building_description.representative_image, p(building_helptext_lore()))
@@ -246,12 +247,13 @@ function building_help_general_string(building_description)
 -- TODO(GunChleoc) use aihints for gamekeeper, forester?
    local representative_resource = nil
    if (building_description.type_name == "productionsite" or
-       building_description.type_name == "militarysite" or
        building_description.type_name == "trainingsite") then
       representative_resource = building_description.output_ware_types[1]
       if(not representative_resource) then
          representative_resource = building_description.output_worker_types[1]
       end
+   elseif (building_description.type_name == "militarysite") then
+      representative_resource = wl.Game():get_worker_description(tribe.soldier)
 -- TODO(GunChleoc) need a bob_descr for the ship -> port and shipyard
 -- TODO(GunChleoc) create descr objects for flag, portdock, ...
    elseif (building_description.is_port or building_description.name == "shipyard") then
@@ -812,33 +814,33 @@ function building_help(tribe, building_description)
    include(building_description.directory .. "helptexts.lua")
 
    if (building_description.type_name == "productionsite") then
-      return building_help_general_string(building_description) ..
+      return building_help_general_string(tribe, building_description) ..
          building_help_dependencies_production(tribe, building_description) ..
          building_help_crew_string(tribe, building_description) ..
          building_help_building_section(building_description) ..
          building_help_production_section()
    elseif (building_description.type_name == "militarysite") then
-      return building_help_general_string(building_description) ..
+      return building_help_general_string(tribe, building_description) ..
          building_help_building_section(building_description)
    elseif (building_description.type_name == "warehouse") then
       if (building_description.is_port) then
-         return building_help_general_string(building_description) ..
+         return building_help_general_string(tribe, building_description) ..
             -- TODO(GunChleoc) expedition costs here?
             building_help_building_section(building_description) ..
             building_help_production_section()
       else
-         return building_help_general_string(building_description) ..
+         return building_help_general_string(tribe, building_description) ..
             building_help_building_section(building_description)
       end
    elseif (building_description.type_name == "trainingsite") then
-      return building_help_general_string(building_description) ..
+      return building_help_general_string(tribe, building_description) ..
          building_help_dependencies_training(tribe, building_description) ..
          building_help_crew_string(tribe, building_description) ..
          building_help_building_section(building_description) ..building_help_production_section()
    elseif (building_description.type_name == "constructionsite" or
             building_description.type_name == "dismantlesite") then
             -- TODO(GunChleoc) Get them a crew string for the builder
-      return building_help_general_string(building_description)
+      return building_help_general_string(tribe, building_description)
    else
       return ""
    end

@@ -40,10 +40,6 @@ tribes:new_militarysite_type {
       mountain_conqueror = true
    },
 
-   outputs = {
-      "empire_soldier",
-   },
-
    max_soldiers = 2,
    heal_per_second = 80,
    conquers = 6,

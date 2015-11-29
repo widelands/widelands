@@ -49,10 +49,6 @@ tribes:new_militarysite_type {
       prohibited_till=1500
    },
 
-   outputs = {
-      "barbarians_soldier",
-   },
-
    max_soldiers = 8,
    heal_per_second = 170,
    conquers = 11,

@@ -38,10 +38,6 @@ tribes:new_militarysite_type {
       prohibited_till = 1500
    },
 
-   outputs = {
-      "atlanteans_soldier",
-   },
-
    max_soldiers = 12,
    heal_per_second = 200,
    conquers = 12,

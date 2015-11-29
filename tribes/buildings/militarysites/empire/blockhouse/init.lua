@@ -28,10 +28,6 @@ tribes:new_militarysite_type {
 
    aihints = {},
 
-   outputs = {
-      "empire_soldier",
-   },
-
    max_soldiers = 1,
    heal_per_second = 60, -- very low -> smallest building
    conquers = 6,

@@ -33,10 +33,6 @@ tribes:new_militarysite_type {
       }
    },
 
-   outputs = {
-      "atlanteans_soldier",
-   },
-
    max_soldiers = 7,
    heal_per_second = 140,
    conquers = 7,

@@ -43,10 +43,6 @@ tribes:new_militarysite_type {
       fighting = true
    },
 
-   outputs = {
-      "empire_soldier",
-   },
-
    max_soldiers = 5,
    heal_per_second = 130,
    conquers = 8,
