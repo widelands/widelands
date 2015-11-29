@@ -33,7 +33,7 @@ namespace Widelands {
 GameLogicCommand & QueueCmdFactory::create_correct_queue_command
 	(QueueCommandTypes const id)
 {
-	switch(id) {
+	switch (id) {
 	case QueueCommandTypes::kBuild:
 		return *new CmdBuild();
 	case QueueCommandTypes::kFlag:
