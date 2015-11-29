@@ -187,12 +187,12 @@ void MapBuildingdataPacket::read
 						read_constructionsite(*constructionsite, fr, game, mol);
 					} else if (upcast(DismantleSite, dms, &building)) {
 						read_dismantlesite(*dms, fr, game, mol);
+					} else if (upcast(MilitarySite, militarysite, &building)) {
+						read_militarysite(*militarysite, fr, game, mol);
 					} else if (upcast(Warehouse, warehouse, &building)) {
 						read_warehouse(*warehouse, fr, game, mol);
 					} else if (upcast(ProductionSite, productionsite, &building)) {
-						if (upcast(MilitarySite, militarysite, productionsite)) {
-							read_militarysite(*militarysite, fr, game, mol);
-						} else if (upcast(TrainingSite, trainingsite, productionsite)) {
+						if (upcast(TrainingSite, trainingsite, productionsite)) {
 							read_trainingsite(*trainingsite, fr, game, mol);
 						} else {
 							read_productionsite(*productionsite, fr, game, mol);
@@ -946,13 +946,12 @@ void MapBuildingdataPacket::write
 				write_constructionsite(*constructionsite, fw, game, mos);
 			} else if (upcast(DismantleSite const, dms, building)) {
 				write_dismantlesite(*dms, fw, game, mos);
+			} else if (upcast(MilitarySite const, militarysite, building)) {
+				write_militarysite(*militarysite, fw, game, mos);
 			} else if (upcast(Warehouse const, warehouse, building)) {
 				write_warehouse (*warehouse, fw, game, mos);
 			} else if (upcast(ProductionSite const, productionsite, building)) {
-				if (upcast(MilitarySite const, militarysite, productionsite)) {
-					write_militarysite(*militarysite, fw, game, mos);
-				}
-				else if (upcast(TrainingSite const, trainingsite, productionsite)) {
+				if (upcast(TrainingSite const, trainingsite, productionsite)) {
 					write_trainingsite(*trainingsite, fw, game, mos);
 				}
 				else {
