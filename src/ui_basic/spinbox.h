@@ -40,6 +40,12 @@ struct TextStyle;
 /// label_text is a text that precedes the actual spinbox.
 class SpinBox : public Panel {
 public:
+	enum class Type {
+		kSmall,    // Displays buttons for small steps
+		kBig,      // Displays buttons for small and big steps
+		kValueList // Uses the values that are set by set_value_list().
+	};
+
 	SpinBox
 		(Panel*,
 		 int32_t x, int32_t y, uint32_t w, uint32_t unit_w,
@@ -47,10 +53,13 @@ public:
 		 const std::string& label_text = std::string(),
 		 const std::string& unit = std::string(),
 		 const Image* buttonbackground = g_gr->images().get("pics/but3.png"),
-		 bool big = false);
+		 SpinBox::Type = SpinBox::Type::kSmall);
 	~SpinBox();
 
 	void set_value(int32_t);
+	// For spinboxes of type kValueList. The vector needs to be sorted in ascending order,
+	// otherwise you will confuse the user.
+	void set_value_list(const std::vector<int32_t>&);
 	void set_interval(int32_t min, int32_t max);
 	void set_unit(const std::string&);
 	int32_t get_value();
@@ -65,7 +74,7 @@ private:
 	void change_value(int32_t);
 	int32_t find_replacement(int32_t value) const;
 
-	const bool big_;
+	const SpinBox::Type type_;
 	SpinBoxImpl* sbi_;
 	std::vector<UI::Button*> buttons_;
 	UI::Box* box_;

@@ -50,6 +50,9 @@ struct SpinBoxImpl {
 	int32_t min;
 	int32_t max;
 
+	/// List of possible values for type kValueList
+	std::vector<int32_t> values;
+
 	/// The unit of the value
 	std::string unit;
 
@@ -82,21 +85,28 @@ SpinBox::SpinBox
 	 const std::string& label_text,
 	 const std::string& unit,
 	 const Image* background,
-	 bool const big)
+	 SpinBox::Type type)
 	:
 	Panel(parent, x, y, std::max(w, unit_w), 0),
-	big_(big),
+	type_(type),
 	sbi_(new SpinBoxImpl)
 {
+	if (type_ == SpinBox::Type::kValueList) {
+		sbi_->min   = 0;
+		sbi_->max   = 0;
+	} else {
+		sbi_->min   = minval;
+		sbi_->max   = maxval;
+	}
 	sbi_->value = startval;
-	sbi_->min   = minval;
-	sbi_->max   = maxval;
 	sbi_->unit  = unit;
 	sbi_->background = background;
 
+	bool is_big = type_ == SpinBox::Type::kBig;
+
 	uint32_t padding = 2;
 	uint32_t actual_w = std::max(w, unit_w);
-	uint32_t no_padding = (big_ ? 6 : 4);
+	uint32_t no_padding = (is_big ? 6 : 4);
 	uint32_t texth = UI::g_fh1->render(as_uifont("."))->height();
 
 	// 40 is an ad hoc width estimate for the MultilineTextarea scrollbar + a bit of text.
@@ -107,9 +117,9 @@ SpinBox::SpinBox
 	}
 
 #ifndef NDEBUG //  only in debug builds
-	if (unit_w < (big_ ? 7 * texth : 3 * texth)) {
+	if (unit_w < (is_big ? 7 * texth : 3 * texth)) {
 		throw wexception("Not enough space to draw spinbox. Width %d is smaller than required width %d",
-							  unit_w, (big_ ? 7 * texth : 3 * texth));
+							  unit_w, (is_big ? 7 * texth : 3 * texth));
 	}
 #endif
 
@@ -134,17 +144,17 @@ SpinBox::SpinBox
 			(box_, "-",
 			 0, 0, texth, texth,
 			 sbi_->background,
-			 g_gr->images().get(big_? "pics/scrollbar_left.png" : "pics/scrollbar_down.png"),
+			 g_gr->images().get(is_big ? "pics/scrollbar_left.png" : "pics/scrollbar_down.png"),
 			 _("Decrease the value"));
 	sbi_->button_plus =
 		new Button
 			(box_, "+",
 			 0, 0, texth, texth,
 			 sbi_->background,
-			 g_gr->images().get(big_? "pics/scrollbar_right.png" : "pics/scrollbar_up.png"),
+			 g_gr->images().get(is_big ? "pics/scrollbar_right.png" : "pics/scrollbar_up.png"),
 			 _("Increase the value"));
 
-	if (big_) {
+	if (is_big) {
 		sbi_->button_ten_minus =
 			new Button
 				(box_, "--",
@@ -192,6 +202,7 @@ SpinBox::SpinBox
 	buttons_.push_back(sbi_->button_minus);
 	buttons_.push_back(sbi_->button_plus);
 	box_->set_size(actual_w, texth * (extra_rows + 1));
+	set_desired_size(actual_w, texth * (extra_rows + 1));
 	set_size(actual_w, texth * (extra_rows + 1));
 	update();
 }
@@ -216,13 +227,22 @@ void SpinBox::update()
 		}
 	}
 	if (!was_in_list) {
-		/** TRANSLATORS: %i = number, %s = unit, e.g. "5 pixels" in the advanced options */
-		sbi_->text->set_text((boost::format(_("%1$i %2$s")) % sbi_->value % sbi_->unit.c_str()).str());
+		if (type_ == SpinBox::Type::kValueList) {
+			if ((sbi_->value >= 0) && (sbi_->values.size() > static_cast<size_t>(sbi_->value))) {
+				/** TRANSLATORS: %i = number, %s = unit, e.g. "5 pixels" in the advanced options */
+				sbi_->text->set_text((boost::format(_("%1$i %2$s")) % sbi_->values.at(sbi_->value) % sbi_->unit.c_str()).str());
+			} else {
+				sbi_->text->set_text("undefined"); // The user should never see this, so we're not localizing
+			}
+		} else {
+			/** TRANSLATORS: %i = number, %s = unit, e.g. "5 pixels" in the advanced options */
+			sbi_->text->set_text((boost::format(_("%1$i %2$s")) % sbi_->value % sbi_->unit.c_str()).str());
+		}
 	}
 
 	sbi_->button_minus->set_enabled(sbi_->min < sbi_->value);
 	sbi_->button_plus ->set_enabled(sbi_->value < sbi_->max);
-	if (big_) {
+	if (type_ == SpinBox::Type::kBig) {
 		sbi_->button_ten_minus->set_enabled(sbi_->min < sbi_->value);
 		sbi_->button_ten_plus ->set_enabled(sbi_->value < sbi_->max);
 	}
@@ -248,6 +268,13 @@ void SpinBox::set_value(int32_t const value)
 		sbi_->value = sbi_->max;
 	else if (sbi_->value < sbi_->min)
 		sbi_->value = sbi_->min;
+	update();
+}
+
+void SpinBox::set_value_list(const std::vector<int32_t>& values) {
+	sbi_->values = values;
+	sbi_->min = 0;
+	sbi_->max = values.size() - 1;
 	update();
 }
 
@@ -282,7 +309,15 @@ void SpinBox::set_unit(const std::string & unit)
  */
 int32_t SpinBox::get_value()
 {
-	return sbi_->value;
+	if (type_ == SpinBox::Type::kValueList) {
+		if ((sbi_->value >= 0) && (sbi_->values.size() > static_cast<size_t>(sbi_->value))) {
+			return sbi_->values.at(sbi_->value);
+		} else {
+			return -1;
+		}
+	} else {
+		return sbi_->value;
+	}
 }
 
 /**
