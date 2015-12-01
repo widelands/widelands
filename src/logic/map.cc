@@ -1056,7 +1056,7 @@ NodeCaps Map::_calc_nodecaps_pass1(const World& world, FCoords const f, bool con
 	//  1b) Collect some information about the neighbours
 	uint8_t cnt_impassable = 0;
 	uint8_t cnt_water = 0;
-	uint8_t cnt_dead = 0;
+	uint8_t cnt_unreachable = 0;
 
 	if  (tr_d_terrain_is & TerrainDescription::Type::kImpassable) ++cnt_impassable;
 	if  (tl_r_terrain_is & TerrainDescription::Type::kImpassable) ++cnt_impassable;
@@ -1072,12 +1072,12 @@ NodeCaps Map::_calc_nodecaps_pass1(const World& world, FCoords const f, bool con
 	if   (f_d_terrain_is & TerrainDescription::Type::kWater)      ++cnt_water;
 	if   (f_r_terrain_is & TerrainDescription::Type::kWater)      ++cnt_water;
 
-	if  (tr_d_terrain_is & TerrainDescription::Type::kDead)       ++cnt_dead;
-	if  (tl_r_terrain_is & TerrainDescription::Type::kDead)       ++cnt_dead;
-	if  (tl_d_terrain_is & TerrainDescription::Type::kDead)       ++cnt_dead;
-	if   (l_r_terrain_is & TerrainDescription::Type::kDead)       ++cnt_dead;
-	if   (f_d_terrain_is & TerrainDescription::Type::kDead)       ++cnt_dead;
-	if   (f_r_terrain_is & TerrainDescription::Type::kDead)       ++cnt_dead;
+	if  (tr_d_terrain_is & TerrainDescription::Type::kUnreachable)       ++cnt_unreachable;
+	if  (tl_r_terrain_is & TerrainDescription::Type::kUnreachable)       ++cnt_unreachable;
+	if  (tl_d_terrain_is & TerrainDescription::Type::kUnreachable)       ++cnt_unreachable;
+	if   (l_r_terrain_is & TerrainDescription::Type::kUnreachable)       ++cnt_unreachable;
+	if   (f_d_terrain_is & TerrainDescription::Type::kUnreachable)       ++cnt_unreachable;
+	if   (f_r_terrain_is & TerrainDescription::Type::kUnreachable)       ++cnt_unreachable;
 
 
 	//  2) Passability
@@ -1094,7 +1094,7 @@ NodeCaps Map::_calc_nodecaps_pass1(const World& world, FCoords const f, bool con
 
 	// 2c) [OVERRIDE] If any of the neighbouring triangles is really "bad" (such
 	// as lava), we can neither walk nor swim to this node.
-	if (cnt_dead)
+	if (cnt_unreachable)
 		caps &= ~(MOVECAPS_WALK | MOVECAPS_SWIM);
 
 	//  === everything below is used to check buildability ===

@@ -44,7 +44,7 @@ world:new_terrain_type{
    -- "mineable": Allows building of mines and roads
    -- "walkable": Allows building of roads only
    -- "water": Nothing can be built here, but ships and aquatic animals can pass
-   -- "dead": Nothing can be built here (not even immovables), and nothing can walk on it
+   -- "unreachable": Nothing can be built here (not even immovables), and nothing can walk on it
    -- "impassable": Nothing can be built here, and nothing can walk on it
    is = "arable",
 
@@ -271,7 +271,7 @@ world:new_terrain_type{
    name = "schnee",
    descname = _ "Snow",
    editor_category = "green",
-   is = "dead",
+   is = "unreachable",
    valid_resources = {},
    default_resource = "",
    default_resource_amount = 0,
@@ -287,7 +287,7 @@ world:new_terrain_type{
    name = "lava",
    descname = _ "Lava",
    editor_category = "green",
-   is = "dead",
+   is = "unreachable",
    valid_resources = {},
    default_resource = "",
    default_resource_amount = 0,
@@ -517,7 +517,7 @@ world:new_terrain_type{
    name = "lava-stone1",
    descname = _ "Lava Rocks",
    editor_category = "wasteland",
-   is = "dead",
+   is = "unreachable",
    valid_resources = {},
    default_resource = "",
    default_resource_amount = 0,
@@ -534,7 +534,7 @@ world:new_terrain_type{
    name = "lava-stone2",
    descname = _ "Lava Rocks",
    editor_category = "wasteland",
-   is = "dead",
+   is = "unreachable",
    valid_resources = {},
    default_resource = "",
    default_resource_amount = 0,

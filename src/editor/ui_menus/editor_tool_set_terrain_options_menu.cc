@@ -47,8 +47,10 @@ static const int32_t check[] = {
 	TerrainDescription::Type::kWalkable,
 	TerrainDescription::Type::kMineable,                                      // Mountain implies walkable"
 	TerrainDescription::Type::kImpassable,
-	TerrainDescription::Type::kDead | TerrainDescription::Type::kImpassable,  // Dead is impassable
-	TerrainDescription::Type::kImpassable | TerrainDescription::Type::kWater, // Water is impassable
+	TerrainDescription::Type::kUnreachable |                                  // Unreachable is impassable
+									TerrainDescription::Type::kImpassable,
+	TerrainDescription::Type::kWater |                                        // Water is impassable
+									TerrainDescription::Type::kImpassable,
 	-1,  // end marker
 };
 
@@ -58,7 +60,7 @@ UI::Checkbox* create_terrain_checkbox(UI::Panel* parent,
 	const Image* arable = g_gr->images().get("pics/terrain_arable.png");
 	const Image* water = g_gr->images().get("pics/terrain_water.png");
 	const Image* mineable = g_gr->images().get("pics/terrain_mineable.png");
-	const Image* dead = g_gr->images().get("pics/terrain_dead.png");
+	const Image* unreachable = g_gr->images().get("pics/terrain_unreachable.png");
 	const Image* impassable = g_gr->images().get("pics/terrain_impassable.png");
 	const Image* walkable = g_gr->images().get("pics/terrain_walkable.png");
 
@@ -114,16 +116,16 @@ UI::Checkbox* create_terrain_checkbox(UI::Panel* parent,
 				/** TRANSLATORS: This is a terrain type tooltip in the editor */
 				tooltips.push_back(_("mineable"));
 			}
-			if (ter_is & TerrainDescription::Type::kDead) {
-				blit(Rect(pt.x, pt.y, dead->width(), dead->height()),
-				     *dead,
-				     Rect(0, 0, dead->width(), dead->height()),
+			if (ter_is & TerrainDescription::Type::kUnreachable) {
+				blit(Rect(pt.x, pt.y, unreachable->width(), unreachable->height()),
+					 *unreachable,
+					 Rect(0, 0, unreachable->width(), unreachable->height()),
 				     1.,
 				     BlendMode::UseAlpha,
 				     texture);
 				pt.x += kSmallPicWidth + 1;
 				/** TRANSLATORS: This is a terrain type tooltip in the editor */
-				tooltips.push_back(_("irreclaimable"));
+				tooltips.push_back(_("unreachable"));
 			}
 			if (ter_is & TerrainDescription::Type::kImpassable) {
 				blit(Rect(pt.x, pt.y, impassable->width(), impassable->height()),

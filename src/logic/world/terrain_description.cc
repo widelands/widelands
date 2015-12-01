@@ -47,8 +47,8 @@ TerrainDescription::Type terrain_type_from_string(const std::string& type) {
 		return static_cast<TerrainDescription::Type>(TerrainDescription::Type::kWater |
 																	TerrainDescription::Type::kImpassable);
 	}
-	if (type == "dead") {
-		return static_cast<TerrainDescription::Type>(TerrainDescription::Type::kDead |
+	if (type == "unreachable") {
+		return static_cast<TerrainDescription::Type>(TerrainDescription::Type::kUnreachable |
 																	TerrainDescription::Type::kImpassable);
 	}
 	if (type == "mineable") {

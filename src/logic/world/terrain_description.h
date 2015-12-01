@@ -46,7 +46,7 @@ public:
 		kArable = 0,
 		kWalkable = 1,
 		kWater =  2,
-		kDead = 4,
+		kUnreachable = 4,
 		kMineable = 8,
 		kImpassable = 16,
 	};

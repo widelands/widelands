@@ -114,21 +114,21 @@ int32_t EditorInfoTool::handle_click_impl(Widelands::Map& map,
 		terrain_is_strings.push_back(_("arable"));
 	}
 	if (terrain_is & Widelands::TerrainDescription::Type::kWalkable) {
-		terrain_is_strings.push_back(_("treeless"));
+		terrain_is_strings.push_back(_("walkable"));
 	}
 	if (terrain_is & Widelands::TerrainDescription::Type::kWater) {
-		terrain_is_strings.push_back(_("aquatic"));
+		terrain_is_strings.push_back(_("navigable"));
 	}
-	if (terrain_is & Widelands::TerrainDescription::Type::kDead) {
-		terrain_is_strings.push_back(_("dead"));
+	if (terrain_is & Widelands::TerrainDescription::Type::kUnreachable) {
+		terrain_is_strings.push_back(_("unreachable"));
 	}
 	if (terrain_is & Widelands::TerrainDescription::Type::kMineable) {
-		terrain_is_strings.push_back(_("mountainous"));
+		terrain_is_strings.push_back(_("mineable"));
 	}
 	if (terrain_is & Widelands::TerrainDescription::Type::kImpassable) {
 		terrain_is_strings.push_back(_("impassable"));
 	}
-	buf += "• " + (boost::format(_("Category: %s"))
+	buf += "• " + (boost::format(_("Is: %s"))
 						% i18n::localize_list(terrain_is_strings, i18n::ConcatenateWith::AMPERSAND)).str() + "\n";
 	buf += "• " + (boost::format(_("Editor Category: %s")) % ter.editor_category().descname()).str() + "\n";
 
