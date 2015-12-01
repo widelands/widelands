@@ -150,16 +150,12 @@ FullscreenMenuOptions::FullscreenMenuOptions
 									 m_fullscreen.get_y() +
 									 m_fullscreen.get_h() + m_padding),
 					 _("Grab Input")),
-	m_label_maxfps
+	m_sb_maxfps
 		(this,
 		 m_hmargin,
 		 m_inputgrab.get_y() + m_inputgrab.get_h() + m_padding,
-		 m_reslist.get_w() - 105, m_inputgrab.get_h(),
-		 _("Maximum FPS:"), UI::Align_VCenter),
-	m_sb_maxfps
-		(this,
-		 m_hmargin + m_reslist.get_w() - 105, m_label_maxfps.get_y(), 105,
-		 opt.maxfps, 0, 99, ""),
+		 m_reslist.get_w(), 105,
+		 opt.maxfps, 0, 99, _("Maximum FPS:"), ""),
 
 
 	// First options block 'general options', second column
@@ -216,38 +212,29 @@ FullscreenMenuOptions::FullscreenMenuOptions
 									 _("Dock windows to edges")),
 	m_sb_autosave
 		(this,
-		 get_w() - m_hmargin - 240,
+		 m_hmargin,
 		 m_dock_windows_to_edges.get_y() + m_dock_windows_to_edges.get_h() + m_padding,
+		 get_w() - 2 * m_hmargin,
 		 240,
+		 opt.autosave / 60, 0, 100,
+		 _("Save game automatically every"),
 		 /** TRANSLATORS: Options: Save game automatically every: */
 		 /** TRANSLATORS: This will have a number added in front of it */
-		 opt.autosave / 60, 0, 100, ngettext("minute", "minutes", opt.autosave / 60),
+		 ngettext("minute", "minutes", opt.autosave / 60),
 		 g_gr->images().get("pics/but3.png"), true),
-	m_label_autosave
-		(this,
-		 m_dock_windows_to_edges.get_x(),
-		 m_sb_autosave.get_y(),
-		 get_w() - m_sb_autosave.get_w() - 2 * m_hmargin,
-		 m_dock_windows_to_edges.get_h(),
-		 _("Save game automatically every"), UI::Align_VCenter),
 
 	m_sb_remove_replays
 		(this,
-		 get_w() - m_hmargin - 240,
+		 m_hmargin,
 		 m_sb_autosave.get_y() + m_sb_autosave.get_h() + m_padding,
+		 get_w() - 2 * m_hmargin,
 		 240,
+		 opt.remove_replays, 0, 365,
+		 _("Remove replays older than:"),
 		 /** TRANSLATORS: Options: Remove Replays older than: */
 		 /** TRANSLATORS: This will have a number added in front of it */
-		 opt.remove_replays, 0, 365, ngettext("day", "days", opt.remove_replays),
+		 ngettext("day", "days", opt.remove_replays),
 		 g_gr->images().get("pics/but3.png"), true),
-	m_label_remove_replays
-		(this,
-		 m_label_autosave.get_x(),
-		 m_sb_remove_replays.get_y(),
-		 get_w() - m_sb_remove_replays.get_w() - 2 * m_hmargin,
-		 m_dock_windows_to_edges.get_h(),
-		 _("Remove replays older than:"), UI::Align_VCenter),
-
 	os(opt)
 {
 	m_advanced_options.sigclicked.connect
@@ -469,30 +456,26 @@ FullscreenMenuAdvancedOptions::FullscreenMenuAdvancedOptions
 		 get_w() / 2, get_h() * 17 / 150,
 		 _("Advanced Options"), UI::Align_HCenter),
 
-// First options block
-	m_label_snap_dis_panel
-		(this,
-		 m_hmargin, get_h() * 9 / 30,
-		 _("Distance for windows to snap to other panels:"), UI::Align_VCenter),
-	m_label_snap_dis_border
-		(this,
-		 m_hmargin,  m_label_snap_dis_panel.get_y() + m_label_snap_dis_panel.get_h() + 2 * m_padding,
-		 _("Distance for windows to snap to borders:"), UI::Align_VCenter),
-
 	// Spinboxes
 	m_sb_dis_panel
 			(this,
-			 get_w() - m_hmargin - (get_w() / 5), m_label_snap_dis_panel.get_y(), get_w() / 5,
-			 opt.panel_snap_distance, 0, 99, ngettext("pixel", "pixels", opt.panel_snap_distance)),
+			 m_hmargin, get_h() * 9 / 30,
+			 get_w() - 2 * m_hmargin, get_w() / 5,
+			 opt.panel_snap_distance, 0, 99,
+			 _("Distance for windows to snap to other panels:"),
+			 ngettext("pixel", "pixels", opt.panel_snap_distance)),
 
 	m_sb_dis_border
 			(this,
-			 get_w() - m_hmargin - (get_w() / 5), m_label_snap_dis_border.get_y(), get_w() / 5,
-			 opt.border_snap_distance, 0, 99, ngettext("pixel", "pixels", opt.border_snap_distance)),
+			 m_hmargin, m_sb_dis_panel.get_y() + m_sb_dis_panel.get_h() + 2 * m_padding,
+			 get_w() - 2 * m_hmargin, get_w() / 5,
+			 opt.border_snap_distance, 0, 99,
+			 _("Distance for windows to snap to borders:"),
+			 ngettext("pixel", "pixels", opt.border_snap_distance)),
 
 	m_transparent_chat (this, Point(m_hmargin,
-											  m_label_snap_dis_border.get_y() +
-											  m_label_snap_dis_border.get_h() + m_space),
+											  m_sb_dis_border.get_y() +
+											  m_sb_dis_border.get_h() + m_space),
 							  _("Show in-game chat with transparent background"),
 							  "", get_w() - 2 * m_hmargin),
 
