@@ -104,6 +104,8 @@ SpinBox::SpinBox
 	}
 #endif
 
+	sbi_->text = new UI::Textarea(box_, "", Align_Center);
+
 	sbi_->button_minus =
 		new Button
 			(box_, "-",
@@ -142,11 +144,8 @@ SpinBox::SpinBox
 		buttons_.push_back(sbi_->button_ten_minus);
 		buttons_.push_back(sbi_->button_ten_plus);
 
-		sbi_->text =
-				new UI::Textarea(
-					box_, 0, 0,
-					w - 2 * sbi_->button_ten_plus->get_w() - 2 * sbi_->button_minus->get_w() - 4 * padding, texth,
-					"", Align_Center);
+		sbi_->text->set_fixed_width(w - 2 * sbi_->button_ten_plus->get_w() - 2 * sbi_->button_minus->get_w()
+											 - 4 * padding);
 
 		box_->add(sbi_->button_ten_minus, UI::Box::AlignCenter);
 		box_->add(sbi_->button_minus, UI::Box::AlignCenter);
@@ -154,9 +153,8 @@ SpinBox::SpinBox
 		box_->add(sbi_->button_plus, UI::Box::AlignCenter);
 		box_->add(sbi_->button_ten_plus, UI::Box::AlignCenter);
 	} else {
-		sbi_->text = new UI::Textarea(box_, 0, 0,
-												w - 2 * sbi_->button_minus->get_w() - 2 * padding, texth,
-												"", Align_Center);
+		sbi_->text->set_fixed_width(w - 2 * sbi_->button_minus->get_w() - 2 * padding);
+
 		box_->add(sbi_->button_minus, UI::Box::AlignCenter);
 		box_->add(sbi_->text, UI::Box::AlignCenter);
 		box_->add(sbi_->button_plus, UI::Box::AlignCenter);
