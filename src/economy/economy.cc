@@ -38,6 +38,9 @@
 #include "logic/tribes/tribe_descr.h"
 #include "logic/warehouse.h"
 
+// To speed up searching for nearest supply, we check only n nearest supplies
+constexpr int kSuppliesToCheck = 5;
+
 namespace Widelands {
 
 Economy::Economy(Player & player) :
@@ -664,13 +667,36 @@ Supply * Economy::_find_best_supply
 	Route  * best_route  = nullptr;
 	int32_t  best_cost   = -1;
 	Flag & target_flag = req.target_flag();
+	Map & map = game.map();
+
+	available_supplies.clear();
 
 	for (size_t i = 0; i < m_supplies.get_nrsupplies(); ++i) {
 		Supply & supp = m_supplies[i];
 
-		// Check requirements
+		// Just skip if supply does not provide required ware
 		if (!supp.nr_supplies(game, req))
 			continue;
+
+		const uint32_t dist = map.calc_distance(
+			target_flag.get_position(),
+			supp.get_position(game)->base_flag().get_position());
+
+		// Inserting into 'queue'
+		if (available_supplies.count(dist) == 0) {
+			available_supplies[dist] = &m_supplies[i];
+		}
+	}
+
+	// We check only kSuppliesToCheck closest wares
+	uint16_t counter = 0; //NOCOM good idea to limit this?
+	for (auto& supplypair : available_supplies) {
+
+		if (++counter > kSuppliesToCheck) {
+			break;
+		}
+
+		Supply & supp = *supplypair.second;
 
 		Route * const route =
 			best_route != &buf_route0 ? &buf_route0 : &buf_route1;
@@ -685,11 +711,17 @@ Supply * Economy::_find_best_supply
 			 	 req.get_type(),
 			 	 best_cost))
 		{
-			if (!best_route)
-			log ("Economy::find_best_supply: Error, COULD NOT FIND A ROUTE!");
+			if (!best_route) {
+				log ("Economy::find_best_supply: Error, COULD NOT FIND A ROUTE!");
+				// To help debugging the issue a bit:
+				log (" ... ware at: %3dx%3d, requestor at: %3dx%3d!",
+					supp.get_position(game)->base_flag().get_position().x,
+					supp.get_position(game)->base_flag().get_position().y,
+					target_flag.get_position().x,
+					target_flag.get_position().y);
+			}
 			continue;
 		}
-
 		best_supply = &supp;
 		best_route = route;
 		best_cost = route->get_totalcost();
@@ -801,6 +833,11 @@ void Economy::_balance_requestsupply(Game & game)
 	//  Try to fulfill Requests.
 	_process_requests(game, rsps);
 
+	//printf (" %d: _balance_requestsupply time: %8d, pairs: %3d\n",
+		//owner().player_number(),
+		//game.get_gametime(),
+		//rsps.queue.size()); //NOCOM
+
 	//  Now execute request/supply pairs.
 	while (!rsps.queue.empty()) {
 		RequestSupplyPair rsp = rsps.queue.top();
@@ -813,7 +850,7 @@ void Economy::_balance_requestsupply(Game & game)
 			 !_has_request(*rsp.request) ||
 			 !rsp.supply->nr_supplies(game, *rsp.request))
 		{
-			rsps.nexttimer = 200;
+			rsps.nexttimer = 250; //NOCOM was 200
 			continue;
 		}
 
@@ -822,11 +859,12 @@ void Economy::_balance_requestsupply(Game & game)
 
 		//  for multiple wares
 		if (rsp.request && _has_request(*rsp.request))
-			rsps.nexttimer = 200;
+			rsps.nexttimer = 250; //NOCOM was 200
 	}
 
-	if (rsps.nexttimer > 0) //  restart the timer, if necessary
+	if (rsps.nexttimer > 0) { //  restart the timer, if necessary
 		_start_request_timer(rsps.nexttimer);
+	}
 }
 
 
@@ -1037,12 +1075,29 @@ void Economy::_handle_active_supplies(Game & game)
 
 		bool haveprefer = false;
 		bool havenormal = false;
+
+		// One of preferred warehouses (if any) with lowest stock of ware/worker
+		Warehouse * preferred_wh = nullptr;
+		uint32_t preferred_wh_stock = std::numeric_limits<uint32_t>::max();
+
 		for (uint32_t nwh = 0; nwh < m_warehouses.size(); ++nwh) {
 			Warehouse * wh = m_warehouses[nwh];
 			Warehouse::StockPolicy policy = wh->get_stock_policy(type, ware);
 			if (policy == Warehouse::SP_Prefer) {
 				haveprefer = true;
-				break;
+
+				// Getting count of worker/ware
+				uint32_t current_stock;
+				if (type == WareWorker::wwWARE) {
+					current_stock = wh->get_wares().stock(ware);
+				} else {
+					current_stock = wh->get_workers().stock(ware);
+				}
+				// Stocks lower then in previous one?
+				if (current_stock < preferred_wh_stock) {
+					preferred_wh = wh;
+					preferred_wh_stock = current_stock;
+				}
 			}
 			if (policy == Warehouse::SP_Normal)
 				havenormal = true;
@@ -1050,17 +1105,21 @@ void Economy::_handle_active_supplies(Game & game)
 		if (!havenormal && !haveprefer && type == wwWARE)
 			continue;
 
-		Warehouse * wh = find_closest_warehouse
-			(supply.get_position(game)->base_flag(), type, nullptr, 0,
-			 (!haveprefer && !havenormal)
-			 ?
-			 WarehouseAcceptFn()
-			 :
-			 boost::bind
-				(&accept_warehouse_if_policy,
-				 _1, type, ware,
-				 haveprefer ? Warehouse::SP_Prefer : Warehouse::SP_Normal));
-
+		Warehouse * wh = nullptr;
+		if (preferred_wh) {
+			wh = preferred_wh;
+		} else {
+			wh = find_closest_warehouse
+				(supply.get_position(game)->base_flag(), type, nullptr, 0,
+				 (!havenormal)
+				 ?
+				 WarehouseAcceptFn()
+				 :
+				 boost::bind
+					(&accept_warehouse_if_policy,
+					 _1, type, ware,
+					 Warehouse::SP_Normal));
+		}
 		if (!wh) {
 			log
 				("Warning: Economy::_handle_active_supplies "

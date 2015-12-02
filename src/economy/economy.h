@@ -33,6 +33,7 @@
 #include "logic/wareworker.h"
 #include "economy/supply_list.h"
 #include "ui_basic/unique_window.h"
+//#include "economy/warehousesupply.h" //NOCOM added
 
 
 namespace Widelands {
@@ -194,7 +195,7 @@ private:
 	void _check_splits();
 	void _split(const std::set<OPtr<Flag> > &);
 
-	void _start_request_timer(int32_t delta = 200);
+	void _start_request_timer(int32_t delta = 500); //NOCOM was 200
 
 	Supply * _find_best_supply(Game &, const Request &, int32_t & cost);
 	void _process_requests(Game &, RSPairStruct &);
@@ -236,6 +237,12 @@ private:
 
 	static std::unique_ptr<Soldier> m_soldier_prototype;
 	UI::UniqueWindow::Registry m_optionswindow_registry;
+
+	// Map of Distance:Supply pairs
+	// Distance is meant map distance supply<->request
+	// Used to speed up _find_best_supply function, it is convenient to start testing routes from
+	// nearest supplies
+	std::map<uint32_t, Supply*> available_supplies;
 
 	DISALLOW_COPY_AND_ASSIGN(Economy);
 };
