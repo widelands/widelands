@@ -17,8 +17,8 @@ import string
 import subprocess
 import sys
 
-from lua_xgettext import Lua_GetText
-import confgettext
+#from lua_xgettext import Lua_GetText
+from confgettext import Conf_GetText
 
 # Holds the names of non-iterative catalogs to build and the
 # corresponding source paths list. Note that paths MUST be relative to po/pot,
@@ -115,6 +115,21 @@ XGETTEXTOPTS+=" -F -c\"* TRANSLATORS\""
 XGETTEXTOPTS+=" --copyright-holder=\"Widelands Development Team\""
 XGETTEXTOPTS+=" --msgid-bugs-address=\"https://bugs.launchpad.net/widelands\""
 
+# Options for xgettext when parsing Lua scripts
+# Official Lua backend of xgettext does not support pgettext and npgettext right
+# off the bat and also expects keywords (besides _) to be prefixed with 'gettext.',
+# so we need to specify the keywords we need ourselves.
+LUAXGETTEXTOPTS ="-k" # Remove known keywords
+LUAXGETTEXTOPTS+=" --keyword=_ --flag=_:1:pass-lua-format"
+LUAXGETTEXTOPTS+=" --keyword=ngettext:1,2 --flag=ngettext:1:pass-lua-format --flag=ngettext:2:pass-lua-format"
+LUAXGETTEXTOPTS+=" --keyword=pgettext:1c,2 --flag=pgettext:2:pass-lua-format"
+LUAXGETTEXTOPTS+=" --keyword=npgettext:1c,2,3 --flag=npgettext:2:pass-lua-format --flag=npgettext:3:pass-lua-format"
+LUAXGETTEXTOPTS+=" --from-code=UTF-8 -F -c\" TRANSLATORS:\""
+LUAXGETTEXTOPTS+=" --copyright-holder=\"Widelands Development Team\""
+LUAXGETTEXTOPTS+=" --msgid-bugs-address=\"https://bugs.launchpad.net/widelands\""
+LUAXGETTEXTOPTS+=" --package-name=Widelands --package-version=svnVERSION"
+
+
 
 def are_we_in_root_directory():
     """Make sure we are called in the root directory"""
@@ -147,20 +162,52 @@ def do_compile( potfile, srcfiles ):
     lua_files = set([ f for f in files if
         os.path.splitext(f)[-1].lower() == '.lua' ])
     conf_files = files - lua_files
-
-    l = Lua_GetText()
-    for fname in lua_files:
-        l.parse(open(fname, "r").read(), fname)
-
-    l.merge(confgettext.parse_conf(conf_files))
-
-    if not l.found_something_to_translate:
+    
+    # Find translatable strings in Lua files using xgettext
+    xgettext = subprocess.Popen("xgettext %s --files-from=- --output=\"%s\"" % \
+        (LUAXGETTEXTOPTS, potfile), shell=True, stdin=subprocess.PIPE)
+    try:
+        for fname in lua_files:
+            xgettext.stdin.write(os.path.normpath(fname) + "\n")
+        xgettext.stdin.close()
+    except IOError as err_msg:
+        sys.stderr.write("Failed to call xgettext: %s\n" % err_msg)
         return False
+    
+    xgettext_status = xgettext.wait()
+    if (xgettext_status != 0):
+        sys.stderr.write("xgettext exited with errorcode %i\n" % xgettext_status)
+        return False
+        
+    xgettext_found_something_to_translate = os.path.exists(potfile)
+    
+    # Find translatable strings in configuration files
+    conf = Conf_GetText()
+    conf.parse(conf_files)
+    
+    if not (xgettext_found_something_to_translate or conf.found_something_to_translate):
+        return False
+    
+    if (not conf.found_something_to_translate):
+        return True
+    
+    # At this point some translatable strings were extracted from
+    # the conf files, so merge the conf POT with Lua POT (if any)
+    with open(potfile, "a") as p:
+        if (xgettext_found_something_to_translate):
+            p.write("\n" + conf.toString(header=False))
+            p.close();
+            
+            msguniq_rv = os.system("msguniq \"%s\" -F --output-file=\"%s\"" % (potfile, potfile))
+            if (msguniq_rv):
+                sys.stderr.write("msguniq exited with errorcode %i\n" % msguniq_rv)
+                return False
+        else:
+            p.write(conf.toString(header=True))
+            p.close();
 
-    with open(potfile, "w") as potfileobject:
-        potfileobject.write(str(l))
-        potfileobject.close()
     return True
+    
 
 
 def do_compile_src( potfile, srcfiles ):
