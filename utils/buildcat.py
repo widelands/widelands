@@ -17,7 +17,6 @@ import string
 import subprocess
 import sys
 
-#from lua_xgettext import Lua_GetText
 from confgettext import Conf_GetText
 
 # Holds the names of non-iterative catalogs to build and the
