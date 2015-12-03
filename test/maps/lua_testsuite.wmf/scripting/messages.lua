@@ -31,6 +31,15 @@ function messages_tests:test_status_illegal()
       player1:send_message("Hallo", "World!", {status="nono"})
    end)
 end
+function messages_tests:test_heading()
+   local m = player1:send_message("Hallo", "World!", {heading="long heading"})
+   assert_equal("long heading", m.heading)
+end
+function messages_tests:test_icon_name()
+   local ware_description = game:get_ware_description("log")
+   local m = player1:send_message("Hallo", "World!", {icon=ware_description.icon_name})
+   assert_equal(ware_description.icon_name, m.icon_name)
+end
 function messages_tests:test_field()
    local f = map:get_field(23,28)
    local m = player1:send_message("Hallo", "World!", {field = f})

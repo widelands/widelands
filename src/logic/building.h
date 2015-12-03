@@ -255,6 +255,7 @@ public:
 		(Game & game,
 		 const Message::Type msgtype,
 		 const std::string & title,
+		 const std::string& icon_filename, const std::string& heading,
 		 const std::string & description,
 		 bool link_to_building_lifetime = true,
 		 uint32_t throttle_time = 0,
