@@ -980,9 +980,6 @@ bool Worker::run_geologist_find(Game & game, State & state, const Action &)
 			else if (rdescr->name() == "water")
 				message_type = Message::Type::kGeologistsWater;
 
-			const std::string& img = g_gr->animations().get_animation
-											 (ri.descr().main_animation()).representative_image_from_disk_filename();
-
 			//  We should add a message to the player's message queue - but only,
 			//  if there is not already a similar one in list.
 			owner().add_message_with_timeout
@@ -991,7 +988,7 @@ bool Worker::run_geologist_find(Game & game, State & state, const Action &)
 					(message_type,
 					 game.get_gametime(),
 					 rdescr->descname(),
-					 img,
+					 ri.descr().representative_image_filename(),
 					 rdescr->descname(),
 					 message,
 					 position,
@@ -1942,7 +1939,7 @@ void Worker::program_update(Game & game, State & state)
 	for (;;) {
 		const WorkerProgram & program = dynamic_cast<const WorkerProgram&>(*state.program);
 
-		if (static_cast<uint32_t>(state.ivar1) >= program.get_size())
+		if ((state.ivar1 >= 0) && (static_cast<uint32_t>(state.ivar1) >= program.get_size()))
 			return pop_task(game);
 
 		const Action & action = *program.get_action(state.ivar1);
@@ -2617,7 +2614,7 @@ void Worker::fugitive_update(Game & game, State & state)
 		}
 	}
 
-	if (state.ivar1 < game.get_gametime()) { //  time to die?
+	if ((state.ivar1 < 0) || (static_cast<uint32_t>(state.ivar1) < game.get_gametime())) { //  time to die?
 		molog("[fugitive]: die\n");
 		return schedule_destroy(game);
 	}

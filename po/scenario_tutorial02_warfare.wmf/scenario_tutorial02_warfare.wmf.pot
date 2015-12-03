@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-18 08:43+0000\n"
+"POT-Creation-Date: 2015-11-28 11:19+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -137,7 +137,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:63
 msgid ""
-"Since the construction will take some time, you can change the game speed using PAGE UP and PAGE DOWN."
+"Since the construction will take some time, you can change the game speed using Page Up and Page Down."
 msgstr ""
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:71

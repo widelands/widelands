@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-10 08:55+0000\n"
-"PO-Revision-Date: 2015-11-10 18:21+0000\n"
+"POT-Creation-Date: 2015-11-23 09:42+0000\n"
+"PO-Revision-Date: 2015-11-25 16:40+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -104,6 +104,14 @@ msgctxt "atlanteans_building"
 msgid "Sows and harvests blackroot."
 msgstr "Cuiridh is buainidh e freumhagan."
 
+#. TRANSLATORS: Performance helptext for a building
+#: ../../tribes/buildings/productionsites/atlanteans/blackroot_farm/helptexts.lua:26
+msgctxt "atlanteans_building"
+msgid ""
+"The blackroot farmer needs %1% on average to sow and harvest a bundle of "
+"blackroot."
+msgstr "Feumaidh an tuathanach fhreumhagan %1% sa chuibheas gus bad fhreumhagan a chur ’s a bhuain."
+
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/productionsites/atlanteans/charcoal_kiln/helptexts.lua:16
 #: ../../tribes/buildings/productionsites/barbarians/charcoal_kiln/helptexts.lua:16
@@ -134,6 +142,12 @@ msgstr "Tochlaidh e seudan às na beanntan."
 msgctxt "atlanteans_building"
 msgid "Sows and harvests corn."
 msgstr "Cuiridh is buainidh e coirce."
+
+#. TRANSLATORS: Performance helptext for a building
+#: ../../tribes/buildings/productionsites/atlanteans/farm/helptexts.lua:26
+msgctxt "atlanteans_building"
+msgid "The farmer needs %1% on average to sow and harvest a sheaf of corn."
+msgstr "Feumaidh an tuathanach %1% sa chuibheas gus bad coirce a chur ’s a bhuain."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/productionsites/atlanteans/fishbreeders_house/helptexts.lua:16
@@ -477,6 +491,8 @@ msgstr "’S e an togalach air ìre meadhanach ann an sreath de trì togalaichea
 #: ../../tribes/buildings/productionsites/barbarians/well/helptexts.lua:23
 #: ../../tribes/buildings/trainingsites/barbarians/battlearena/helptexts.lua:26
 #: ../../tribes/buildings/trainingsites/barbarians/trainingcamp/helptexts.lua:26
+#: ../../tribes/scripting/help/global_helptexts.lua:58
+#: ../../tribes/scripting/help/global_helptexts.lua:85
 msgid "%d second"
 msgid_plural "%d seconds"
 msgstr[0] "%d diog"
@@ -598,6 +614,18 @@ msgctxt "building"
 msgid "Sows and harvests wheat."
 msgstr "Cuiridh is buainidh e cruithneachd."
 
+#. TRANSLATORS: Performance helptext for a building
+#: ../../tribes/buildings/productionsites/barbarians/farm/helptexts.lua:26
+msgctxt "barbarians_building"
+msgid "The farmer needs %1% on average to sow and harvest a sheaf of wheat."
+msgstr "Feumaidh an tuathanach %1% sa chuibheas gus sguab arbhair a chur ’s a bhuain."
+
+#. TRANSLATORS: Performance helptext for a building
+#: ../../tribes/buildings/productionsites/empire/farm/helptexts.lua:26
+msgctxt "empire_building"
+msgid "The farmer needs %1% on average to sow and harvest a sheaf of wheat."
+msgstr "Feumaidh an tuathanach %1% sa chuibheas gus sguab arbhair a chur ’s a bhuain."
+
 #. TRANSLATORS: Lore helptext for a building
 #: ../../tribes/buildings/productionsites/barbarians/fishers_hut/helptexts.lua:3
 msgctxt "barbarians_building"
@@ -655,8 +683,8 @@ msgstr "Gabhaidh an geamair fois fad %s mus tòisich e air an obair a-rithist."
 msgctxt "barbarians_building"
 msgid ""
 "‘Soft and supple.<br> And yet untouched by time and weather.<br> Rays of "
-"sun, wrought into eternity ...’"
-msgstr "“Sùbailte bog.<br>Ach slàn on t-àm is aimsir.<br>Gathan na grèine ceàrdail gu sìorraidh ...”"
+"sun, wrought into eternity…’"
+msgstr "“Sùbailte bog.<br>Ach slàn on t-àm is aimsir.<br>Gathan na grèine ceàrdail gu sìorraidh…”"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../tribes/buildings/productionsites/barbarians/goldmine/helptexts.lua:8
@@ -1102,7 +1130,7 @@ msgstr "Bheir an giùlanair %s gus peile uisge fhaighinn."
 #: ../../tribes/buildings/productionsites/barbarians/wood_hardener/helptexts.lua:16
 msgctxt "barbarians_building"
 msgid ""
-"Hardens wood by fire into blackwood, which is used to construct robust "
+"Hardens logs by fire into blackwood, which is used to construct robust "
 "buildings."
 msgstr "Cleachdaidh e teine gus fiodh a chruthachadh ach an gabh a chleachdadh gus togalaichean seasmhach a thogail."
 
@@ -1119,6 +1147,18 @@ msgstr "Nì e armachd ’s clogaidean a thèid a chleachdadh gus slàinte nan sa
 msgctxt "empire_building"
 msgid "Bakes bread for soldiers and miners alike."
 msgstr "Fuinidh e aran airson nan saighdearan is mèinnearan."
+
+#. TRANSLATORS: Performance helptext for a building
+#: ../../tribes/buildings/productionsites/empire/bakery/helptexts.lua:26
+msgctxt "empire_building"
+msgid "The baker needs %1% on average to bake a loaf of bread."
+msgstr "Feumaidh am fuineadair %1% sa chuibheas gus buileann arain fhuineadh."
+
+#. TRANSLATORS: Performance helptext for a building
+#: ../../tribes/buildings/productionsites/empire/brewery/helptexts.lua:26
+msgctxt "empire_building"
+msgid "The brewer needs %1% on average to brew a vat of beer."
+msgstr "Feumaidh an leannair %1% sa chuibheas gus pinnt leanna a thogail."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/productionsites/empire/donkeyfarm/helptexts.lua:16
@@ -1143,6 +1183,15 @@ msgid ""
 "Prepares rations for scouts and rations and snacks to feed the miners in all"
 " mines."
 msgstr "Ullaichidh e greimeagan airson rabhadairean agus greimeagan is lòin gus biadh a thoirt dhan a h-uile mèinnear."
+
+#. TRANSLATORS: Performance helptext for a building
+#: ../../tribes/buildings/productionsites/empire/inn/helptexts.lua:26
+msgctxt "empire_building"
+msgid ""
+"The innkeeper needs %1% on average to prepare a ration and a meal. If the "
+"economy doesn’t need both, the innkeeper needs %2% on average to prepare one"
+" ration or one meal."
+msgstr "Feumaidh an tàrnadair %1% sa chuibheas gus greimeag ’s mias ullachadh. Mur eil an eaconamaidh feumach air an dà chuid, feumaidh an tàrnadair %1% sa chuibheas gus greimeag no mias ullachadh."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../tribes/buildings/productionsites/empire/lumberjacks_house/helptexts.lua:21
@@ -1169,11 +1218,23 @@ msgctxt "empire_worker"
 msgid "Grinds wheat to produce flour."
 msgstr "Bleithidh e a’ chruithneachd gus flùr a shaothrachadh."
 
+#. TRANSLATORS: Performance helptext for a building
+#: ../../tribes/buildings/productionsites/empire/mill/helptexts.lua:26
+msgctxt "empire_building"
+msgid "The miller needs %1% on average to grind wheat into a sack of corn."
+msgstr "Feumaidh am muillear %1% sa chuibheas gus baga coirce a bhleith de chruithneachd."
+
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/productionsites/empire/piggery/helptexts.lua:16
 msgctxt "empire_building"
 msgid "Breeds pigs for their meat."
 msgstr "Togaidh e mucan airson am feòil."
+
+#. TRANSLATORS: Performance helptext for a building
+#: ../../tribes/buildings/productionsites/empire/piggery/helptexts.lua:26
+msgctxt "empire_building"
+msgid "The pig breeder needs %1% on average to raise and slaughter a pig."
+msgstr "Feumaidh an tàrmachair mhucan %1% sa chuibheas gus muc a thogail ’s a shlacadh."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/productionsites/empire/quarry/helptexts.lua:16
@@ -1198,6 +1259,12 @@ msgstr "Tha e ris na caoraich airson an clòimh."
 msgctxt "empire_building"
 msgid "Carves marble columns out of marble."
 msgstr "Snaidhidh e colbhan marmoir à marmor."
+
+#. TRANSLATORS: Performance helptext for a building
+#: ../../tribes/buildings/productionsites/empire/tavern/helptexts.lua:26
+msgctxt "empire_building"
+msgid "The innkeeper needs %1% on average to prepare a ration."
+msgstr "Feumaidh an tàrnadair %1% sa chuibheas gus greimeag ullachadh."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/productionsites/empire/vineyard/helptexts.lua:16
@@ -1311,6 +1378,8 @@ msgstr "Cha ghabh saighdearan nan Tùsanach trèanadh ann an “Dìon” agus bi
 
 #: ../../tribes/buildings/trainingsites/barbarians/battlearena/helptexts.lua:26
 #: ../../tribes/buildings/trainingsites/barbarians/trainingcamp/helptexts.lua:26
+#: ../../tribes/scripting/help/global_helptexts.lua:70
+#: ../../tribes/scripting/help/global_helptexts.lua:84
 msgid "%d minute"
 msgid_plural "%d minutes"
 msgstr[0] "%d mhionaid"
@@ -1436,21 +1505,13 @@ msgstr "Seo an t-ionad agad airson tuineachadh is malart thar chuain. Cumaidh tu
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/warehouses/atlanteans/warehouse/helptexts.lua:16
-msgctxt "atlanteans_building"
-msgid "Stores soldiers, wares and tools."
-msgstr "Cumaidh e saighdearan, bathar ’s acainnean."
-
-#. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/warehouses/barbarians/warehouse/helptexts.lua:16
-msgctxt "barbarians_building"
-msgid "Stores soldiers, wares and tools."
-msgstr "Cumaidh e saighdearan, bathar ’s acainnean."
-
-#. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/warehouses/empire/warehouse/helptexts.lua:16
-msgctxt "empire_building"
-msgid "Stores soldiers, wares and tools."
-msgstr "Cumaidh e saighdearan, bathar ’s acainnean."
+msgctxt "building"
+msgid ""
+"Your workers and soldiers will find shelter here. Also stores your wares and"
+" tools."
+msgstr "Gheibh an luchd-obrach ’s na saighdearan agad fasgadh an-seo. Cumaidh tu am bathar ’s na h-acainnean agad ann cuideachd."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/warehouses/empire/headquarters_shipwreck/helptexts.lua:16
@@ -1763,6 +1824,10 @@ msgstr "Tha tùs a dhìth"
 #: ../../tribes/scripting/help/global_helptexts.lua:46
 msgid "Calculation needed"
 msgstr "Cha deach seo àireamhachadh fhathast"
+
+#: ../../tribes/scripting/help/global_helptexts.lua:83
+msgid "%1% and %2%"
+msgstr "%1% ’s %2%"
 
 #: ../../tribes/scripting/help/worker_help.lua:49
 msgid "Purpose"
@@ -2083,17 +2148,25 @@ msgstr "’S e acainn a chleachdas an leaghadair sa cheàrdach leaghadair a tha 
 
 #. TRANSLATORS: Helptext for a ware: Fire Tongs
 #: ../../tribes/wares/fire_tongs/helptexts.lua:6
-msgctxt "atlanteans_ware"
+msgctxt "atlanteans_ware_fire_tongs"
+msgid "They are produced by the toolsmith."
+msgstr "Thèid a shaothrachadh leis a’ cheàrdach acainnean."
+
+#. TRANSLATORS: Helptext for a ware: Fire Tongs
+#: ../../tribes/wares/fire_tongs/helptexts.lua:10
+msgctxt "empire_ware_fire_tongs"
+msgid "They are produced by the toolsmith."
+msgstr "Thèid a shaothrachadh leis a’ cheàrdach acainnean."
+
+#. TRANSLATORS: Helptext for a ware: Fishing Rod
+#: ../../tribes/wares/fishing_rod/helptexts.lua:8
+msgctxt "empire_ware_fishing_rod"
 msgid "They are produced by the toolsmith."
 msgstr "Thèid an saothrachadh leis a’ cheàrdach acainnean."
 
-#. TRANSLATORS: Helptext for a ware: Fire Tongs
-#. TRANSLATORS: Helptext for a ware: Fishing Rod
 #. TRANSLATORS: Helptext for a ware: Hunting Spear
-#: ../../tribes/wares/fire_tongs/helptexts.lua:10
-#: ../../tribes/wares/fishing_rod/helptexts.lua:8
 #: ../../tribes/wares/hunting_spear/helptexts.lua:8
-msgctxt "empire_ware"
+msgctxt "empire_ware_hunting_spear"
 msgid "They are produced by the toolsmith."
 msgstr "Thèid an saothrachadh leis a’ cheàrdach acainnean."
 
@@ -2532,21 +2605,29 @@ msgstr "Cleachdaidh clachairean is mèinnearan piocaidean. Saothraichidh an gobh
 #. TRANSLATORS: Helptext for a ware: Planks
 #: ../../tribes/wares/planks/helptexts.lua:4
 msgctxt "ware"
-msgid ""
-"Planks are an important building material. They are produced out of logs by "
-"the sawmill."
-msgstr "’S e stuth togail cudromach a th’ anns na maidean. Thèid an dèanamh de dh’fhiodh leis a’ mhuileann shàbhaidh."
+msgid "Planks are an important building material."
+msgstr "’S e stuth togail cudromach a th’ anns na maidean."
 
 #. TRANSLATORS: Helptext for a ware: Planks
-#: ../../tribes/wares/planks/helptexts.lua:6
+#: ../../tribes/wares/planks/helptexts.lua:7
+msgctxt "atlanteans_ware_planks"
+msgid "They are produced out of logs by the sawmill."
+msgstr "Thèid an dèanamh de dh’fhiodh leis a’ mhuileann shàbhaidh."
+
+#. TRANSLATORS: Helptext for a ware: Planks
+#: ../../tribes/wares/planks/helptexts.lua:11
+msgctxt "empire_ware_planks"
+msgid "They are produced out of logs by the sawmill."
+msgstr "Thèid an dèanamh de dh’fhiodh leis a’ mhuileann shàbhaidh."
+
+#: ../../tribes/wares/planks/helptexts.lua:8
 msgctxt "atlanteans_ware"
 msgid ""
 "The weapon smithy and the shipyard also use planks to produce the different "
 "tridents and mighty ships."
 msgstr "Cleachdaidh a’ cheàrdach arm is an doca maidean cuideachd gus muirgheadhan is longan cumhachdach a thogail."
 
-#. TRANSLATORS: Helptext for a ware: Planks
-#: ../../tribes/wares/planks/helptexts.lua:8
+#: ../../tribes/wares/planks/helptexts.lua:12
 msgctxt "empire_ware"
 msgid "They are also used by the weapon smithy."
 msgstr "Cleachdaidh a’ cheàrdach arm iad cuideachd."
@@ -3281,8 +3362,8 @@ msgstr "Nì e biadh airson mèinnearan."
 #. TRANSLATORS: Helptext for a worker: Lime-Burner
 #: ../../tribes/workers/barbarians/lime_burner/helptexts.lua:3
 msgctxt "barbarians_worker"
-msgid "Burns lime in the lime kiln."
-msgstr "Loisgidh e aol san àth-aoil."
+msgid "Mixes grout out of granite, water and coal in the lime kiln."
+msgstr "Measgaichidh e aol-tàthaidh à gaireal, uisge is gual san àth-aoil."
 
 #. TRANSLATORS: Helptext for a worker: Chief Miner
 #. TRANSLATORS: Helptext for a worker: Master Miner

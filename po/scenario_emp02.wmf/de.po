@@ -12,9 +12,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-10 08:55+0000\n"
-"PO-Revision-Date: 2015-11-16 18:56+0000\n"
-"Last-Translator: wl-zocker\n"
+"POT-Creation-Date: 2015-11-23 09:42+0000\n"
+"PO-Revision-Date: 2015-11-25 11:55+0000\n"
+"Last-Translator: Venatrix\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -202,7 +202,7 @@ msgid ""
 "As Saledus and I walked through these wonderful forests in the north, we "
 "felt that our future had just begun. This land is so peaceful, good and "
 "beautiful, I could stay here until the end of my life."
-msgstr "Als Saledus und ich durch diesen wunderbaren Wald im Norden spazierten, fühlten wir, dass unsere Zukunft eben erst begonnen hat. Dieses Land ist so friedlich, gut und schön, dass ich hier für den Rest meines Lebens verbringen könnte."
+msgstr "Als Saledus und ich durch diesen wunderbaren Wald im Norden spazierten, fühlten wir, dass unsere Zukunft gerade erst begonnen hat. Dieses Land ist so friedlich, gut und schön, dass ich hier den Rest meines Lebens verbringen könnte."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:125
@@ -227,8 +227,8 @@ msgstr "Die Felsen"
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:137
 msgid ""
 "Later, I walked down to the rocks in the south and looked for a place where "
-"we could build a quarry to get some hard stones for our larger buildings."
-msgstr "Später wanderte ich zu den Felsen im Süden und schaute mich nach einem geeigneten Platz für den Bau eines Steinbruchs um, um einige gute Steine für unsere größeren Gebäude zu bekommen."
+"we could build a quarry to get some granite for our larger buildings."
+msgstr "Später wanderte ich zu den Felsen im Süden und schaute mich nach einem geeigneten Platz für den Bau eines Steinbruchs um, um Stein für unsere größeren Gebäude zu bekommen."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:140
@@ -236,7 +236,7 @@ msgid ""
 "Again, I felt like I was in paradise when I noticed that some marble-like "
 "stones were among the rocks. It seems that we will soon be able to build "
 "strong, luxurious buildings, like those we were accustomed to in Fremil."
-msgstr "Abermals fühlte ich mich wie im Paradies, als ich bemerkte, wie einige marmorähnliche Steine rund um die Felsen zu sehen waren. Es scheint, als ob wir schon bald große und luxuriöse Gebäude bauen können werden, wie diejenigen in Fremil."
+msgstr "Abermals fühlte ich mich wie im Paradies, als ich bemerkte, wie einige marmorähnliche Steine rund um die Felsen zu sehen waren. Möglicherweise werden wir schon bald große und luxuriöse Gebäude bauen können, wie diejenigen in Fremil."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:145
 msgid "Wood for the Colony"
@@ -251,7 +251,7 @@ msgstr "Gute Nachricht! Heute nahm auch der letzte Betrieb unserer Holzwirtschaf
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:153
 msgid "Stones for the Colony"
-msgstr "Steine für die Kolonie"
+msgstr "Gestein für die Kolonie"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:157
@@ -372,7 +372,7 @@ msgid ""
 "a more comfortable life, but the people working in the mines are unhappy "
 "with the current situation. They have to do hard work and have no time for "
 "making their own food."
-msgstr "Es ist schön, und natürlich eine gute Idee, Minen zu errichten, welche uns ein komfortableres Leben ermöglichen werden, aber die Bergleute sind mit der Situation nicht einverstanden. Sie müssen hart arbeiten und haben keine Zeit, selbst eine Mahlzeit zuzubereiten."
+msgstr "Es ist schön, und natürlich eine gute Idee, Minen zu errichten, welche uns ein komfortableres Leben ermöglichen werden, aber die Bergleute sind mit der Situation nicht einverstanden. Sie müssen hart arbeiten und haben keine Zeit, sich selbst um ihr Essen zu kümmern."
 
 #. TRANSLATORS: Amalea
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:213
@@ -448,7 +448,7 @@ msgid ""
 "That’s good. The first large military building is complete and the mining "
 "infrastructure is getting better and better. Now we should think about "
 "preparing ourselves for battle."
-msgstr "Das ist gut. Das erste große Militärgebäude ist fertiggestellt und die Minenwirtschaft läuft besser und besser. Nun sollten wir anfangen, uns für den Kampf vorzubereiten."
+msgstr "Das ist gut. Das erste große Militärgebäude ist fertiggestellt und die Minenwirtschaft läuft besser und besser. Nun sollten wir anfangen, uns für den Kampf zu rüsten."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:255
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:263
@@ -467,7 +467,7 @@ msgid ""
 "There are still a few Barbarians hiding on our island, but I am sure that we"
 " will find them soon. Every Barbarian who doesn’t attack us will be put in a"
 " boat with the other peaceful ones, and sent back to their country."
-msgstr "Immer noch verstecken sich einige Barbaren auf der Insel, doch bin ich mir sicher, dass wir sie bald finden werden. Jeder Barbar, der sich ergibt, wird mit den anderen Friedlichen in einem Boot zurück in sein Land geschickt."
+msgstr "Immer noch verstecken sich einige Barbaren auf der Insel, doch bin ich mir sicher, dass wir sie bald finden werden. Jeder Barbar, der sich ergibt, wird mit den anderen Friedlichen in ein Boot gesetzt und zurück in sein Land geschickt."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:264
 msgid ""

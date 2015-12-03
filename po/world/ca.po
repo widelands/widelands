@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-07 08:28+0000\n"
-"PO-Revision-Date: 2015-11-06 17:15+0000\n"
+"POT-Creation-Date: 2015-11-18 08:43+0000\n"
+"PO-Revision-Date: 2015-11-18 13:51+0000\n"
 "Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -102,6 +102,13 @@ msgstr "Cactus"
 #: ../../world/immovables/grass3/init.lua:5
 msgid "Grass"
 msgstr "Herba"
+
+#: ../../world/immovables/manmade/artifacts/artifact00/init.lua:5
+#: ../../world/immovables/manmade/artifacts/artifact01/init.lua:5
+#: ../../world/immovables/manmade/artifacts/artifact02/init.lua:5
+#: ../../world/immovables/manmade/artifacts/artifact03/init.lua:5
+msgid "Artifact"
+msgstr "Artefacte"
 
 #: ../../world/immovables/manmade/bar-ruin00/init.lua:5
 #: ../../world/immovables/manmade/bar-ruin01/init.lua:5
@@ -623,34 +630,42 @@ msgid "Miscellaneous"
 msgstr "Miscel·lanis"
 
 #: ../../world/init.lua:17
+msgid "Artifacts"
+msgstr "Artefactes"
+
+#: ../../world/init.lua:17
+msgid "These immovables are used by the win condition “Artifacts”."
+msgstr "Aquests objectes inamovibles s'usen amb la condició de victòria «Artefactes»."
+
+#: ../../world/init.lua:23
 msgid "Plants"
 msgstr "Plantes"
 
-#: ../../world/init.lua:23
+#: ../../world/init.lua:29
 msgid "Standing Stones"
 msgstr "Monòlits"
 
-#: ../../world/init.lua:29
+#: ../../world/init.lua:35
 msgid "Rocks"
 msgstr "Roques"
 
-#: ../../world/init.lua:35
+#: ../../world/init.lua:41
 msgid "Coniferous Trees"
 msgstr "Coníferes"
 
-#: ../../world/init.lua:41
+#: ../../world/init.lua:47
 msgid "Dead Trees"
 msgstr "Arbres morts"
 
-#: ../../world/init.lua:47
+#: ../../world/init.lua:53
 msgid "Deciduous Trees"
 msgstr "Caducifolis"
 
-#: ../../world/init.lua:53
+#: ../../world/init.lua:59
 msgid "Palm Trees"
 msgstr "Palmeres"
 
-#: ../../world/init.lua:59
+#: ../../world/init.lua:65
 msgid "Wasteland Trees"
 msgstr "Arbres d'erms"
 

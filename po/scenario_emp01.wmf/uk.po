@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-10 08:45+0000\n"
-"PO-Revision-Date: 2015-11-08 15:56+0000\n"
+"POT-Creation-Date: 2015-11-18 08:43+0000\n"
+"PO-Revision-Date: 2015-11-18 08:43+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Ukrainian (http://www.transifex.com/widelands/widelands/language/uk/)\n"
 "MIME-Version: 1.0\n"
@@ -85,7 +85,7 @@ msgstr "Кар’єр"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:67
 msgid ""
-"Build a quarry in the south to cut some stones and marble out of the rocks."
+"Build a quarry in the south to cut some granite and marble out of the rocks."
 msgstr ""
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:68
@@ -349,8 +349,8 @@ msgstr ""
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:204
 msgid ""
 "Sire, I just thought about the rocks standing on the south shore of this "
-"land. Perhaps we could cut out some useful hard stones and beautiful marble."
-msgstr "Пане, Я тут подумав про скелі, на південному березі цього острова. Може нам варто розбити невелику кількість валунів та декоративного мармуру."
+"land. Perhaps we could cut out some useful granite and beautiful marble."
+msgstr ""
 
 #. TRANSLATORS: Saledus
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:207
@@ -371,9 +371,9 @@ msgstr ""
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:216
 msgid ""
 "Sire, today we got a lot closer to our first castle. The quarry to the south"
-" began its work today and will soon provide us with stones and beautiful "
+" began its work today and will soon provide us with granite and beautiful "
 "marble."
-msgstr "Пане, сьогодні ми трошки ближче до нашого нового замку. Каменоломня вже працює і скоро забезпечить нас будівельним каменем та мармуром."
+msgstr ""
 
 #. TRANSLATORS: Saledus
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:219
