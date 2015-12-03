@@ -171,8 +171,12 @@ SpinBox::SpinBox
 				 g_gr->images().get("pics/scrollbar_right_fast.png"),
 				 _("Increase the value by 10"));
 
-		sbi_->button_ten_plus->sigclicked.connect(boost::bind(&SpinBox::change_value, boost::ref(*this), big_step_size));
-		sbi_->button_ten_minus->sigclicked.connect(boost::bind(&SpinBox::change_value, boost::ref(*this), -1 * big_step_size));
+		sbi_->button_ten_plus->sigclicked.connect(boost::bind(&SpinBox::change_value,
+																				boost::ref(*this),
+																				big_step_size));
+		sbi_->button_ten_minus->sigclicked.connect(boost::bind(&SpinBox::change_value,
+																				 boost::ref(*this),
+																				 -1 * big_step_size));
 		sbi_->button_ten_plus->set_repeating(true);
 		sbi_->button_ten_minus->set_repeating(true);
 		buttons_.push_back(sbi_->button_ten_minus);
@@ -197,7 +201,9 @@ SpinBox::SpinBox
 	}
 
 	sbi_->button_plus->sigclicked.connect(boost::bind(&SpinBox::change_value, boost::ref(*this), step_size));
-	sbi_->button_minus->sigclicked.connect(boost::bind(&SpinBox::change_value, boost::ref(*this), -1 * step_size));
+	sbi_->button_minus->sigclicked.connect(boost::bind(&SpinBox::change_value,
+																		boost::ref(*this),
+																		-1 * step_size));
 	sbi_->button_plus->set_repeating(true);
 	sbi_->button_minus->set_repeating(true);
 	buttons_.push_back(sbi_->button_minus);
@@ -231,7 +237,9 @@ void SpinBox::update()
 		if (type_ == SpinBox::Type::kValueList) {
 			if ((sbi_->value >= 0) && (sbi_->values.size() > static_cast<size_t>(sbi_->value))) {
 				/** TRANSLATORS: %i = number, %s = unit, e.g. "5 pixels" in the advanced options */
-				sbi_->text->set_text((boost::format(_("%1$i %2$s")) % sbi_->values.at(sbi_->value) % sbi_->unit.c_str()).str());
+				sbi_->text->set_text((boost::format(_("%1$i %2$s"))
+											 % sbi_->values.at(sbi_->value)
+											 % sbi_->unit.c_str()).str());
 			} else {
 				sbi_->text->set_text("undefined"); // The user should never see this, so we're not localizing
 			}

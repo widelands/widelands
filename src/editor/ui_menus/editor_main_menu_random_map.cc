@@ -91,7 +91,8 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent) :
 		 g_gr->images().get("pics/but1.png"),
 		 world_descriptions_[current_world_].descname),
 	resources_(&resources_box_, "resources", 0, 0,
-				  box_width_ - 2 * margin_ - std::max(world_label_.get_w(), resources_label_.get_w()), label_height_,
+				  box_width_ - 2 * margin_ - std::max(world_label_.get_w(), resources_label_.get_w()),
+				  label_height_,
 				  g_gr->images().get("pics/but1.png"),
 				  resource_amounts_[resource_amount_].c_str()),
 	// Terrain
@@ -192,7 +193,9 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent) :
 		resources_box_.add_space(world_label_.get_w() - resources_label_.get_w() - margin_);
 	}
 
-	resources_.sigclicked.connect(boost::bind(&MainMenuNewRandomMap::button_clicked, this, ButtonId::kResources));
+	resources_.sigclicked.connect(boost::bind(&MainMenuNewRandomMap::button_clicked,
+															this,
+															ButtonId::kResources));
 	resources_box_.add(&resources_, UI::Box::AlignLeft);
 	box_.add(&resources_box_, UI::Box::AlignLeft);
 	box_height += margin_ + resources_box_.get_h();
@@ -234,7 +237,8 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent) :
 	mountains_box_.add(&mountains_label_, UI::Box::AlignLeft);
 
 	// Convince the value label to align with the spinbox labels above
-	mountains_box_.add_space(box_width_ - box_width_ / 6 - mountains_label_.get_w() - mountains_.get_w() + margin_ + 3);
+	mountains_box_.add_space(box_width_ - box_width_ / 6
+									 - mountains_label_.get_w() - mountains_.get_w() + margin_ + 3);
 	mountains_.set_fixed_width(box_width_ / 3 - margin_);
 	mountains_box_.add(&mountains_, UI::Box::AlignLeft);
 	mountains_box_.set_size(box_width_, mountains_label_.get_h());
@@ -308,7 +312,10 @@ void MainMenuNewRandomMap::button_clicked(MainMenuNewRandomMap::ButtonId n) {
 	switch (n) {
 	case ButtonId::kMapSize:
 		// Restrict maximum players according to map size, but allow at least 2 players.
-		max_players_ = std::min(static_cast<size_t>(MAX_PLAYERS), (find_dimension_index(width_.get_value()) + find_dimension_index(height_.get_value())) / 2 + 2);
+		max_players_ =
+				std::min(static_cast<size_t>(MAX_PLAYERS),
+							(find_dimension_index(width_.get_value())
+							 + find_dimension_index(height_.get_value())) / 2 + 2);
 		players_.set_interval(1, max_players_);
 		if (players_.get_value() > max_players_) {
 			players_.set_value(max_players_);
@@ -338,7 +345,10 @@ void MainMenuNewRandomMap::button_clicked(MainMenuNewRandomMap::ButtonId n) {
 		break;
 	case ButtonId::kNone:
 		// Make sure that all conditions are met
-		max_players_ = std::min(static_cast<size_t>(MAX_PLAYERS), (find_dimension_index(width_.get_value()) + find_dimension_index(height_.get_value())) / 2 + 2);
+		max_players_ =
+				std::min(static_cast<size_t>(MAX_PLAYERS),
+							(find_dimension_index(width_.get_value()) +
+							 find_dimension_index(height_.get_value())) / 2 + 2);
 		players_.set_interval(1, max_players_);
 		if (players_.get_value() > max_players_) {
 			players_.set_value(max_players_);
