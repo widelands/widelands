@@ -130,7 +130,7 @@ void MapPlayersMessagesPacket::read
 									(static_cast<Message::Type>(s->get_natural("type")),
 									 sent,
 									 name,
-									 name,
+									 "pics/menu_build_flag.png",
 									 name,
 									 s->get_safe_string("body"),
 									 get_coords("position", extent, Coords::null(), s),
