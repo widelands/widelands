@@ -58,9 +58,9 @@ tribes:new_productionsite_type {
       },
    },
    out_of_resource_notification = {
-		-- Translators: Short for "Out of ..." for a resource
-		title = _"No Fish",
-		heading = _"Out of Fish",
+      -- Translators: Short for "Out of ..." for a resource
+      title = _"No Fish",
+      heading = _"Out of Fish",
       message = pgettext("barbarians_building", "The fisher working out of this fisher’s hut can’t find any fish in his work area."),
    },
 }

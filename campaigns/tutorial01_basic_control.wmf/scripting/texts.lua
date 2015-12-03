@@ -403,7 +403,7 @@ teaching_about_messages = {
    ) ..
    rt("image=pics/message_archive.png", p(_[[‘Archive selected message’ button to move it into your archive.]])) ..
    rt(
-		p(_[[Once you have deleted a message, another message will be selected automatically from the list.]]) ..
+      p(_[[Once you have deleted a message, another message will be selected automatically from the list.]]) ..
       paragraphdivider() ..
       listitem_bullet(_[[Archive all messages that you currently have in your inbox, including this one.]])
    ),

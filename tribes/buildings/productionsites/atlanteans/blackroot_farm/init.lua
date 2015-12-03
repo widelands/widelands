@@ -70,9 +70,9 @@ tribes:new_productionsite_type {
       },
    },
    out_of_resource_notification = {
-		-- Translators: Short for "Out of ..." for a resource
+      -- Translators: Short for "Out of ..." for a resource
       title = _"No Fields",
-		heading = _"Out of Fields",
+      heading = _"Out of Fields",
       message = pgettext("atlanteans_building", "The blackroot farmer working at this blackroot farm has no cleared soil to plant his seeds."),
       productivity_threshold = 30
    },

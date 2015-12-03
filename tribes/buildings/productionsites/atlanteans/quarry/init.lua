@@ -62,9 +62,9 @@ tribes:new_productionsite_type {
       },
    },
    out_of_resource_notification = {
-		-- Translators: Short for "Out of ..." for a resource
-		title = _"No Rocks",
-		heading = _"Out of Rocks",
+      -- Translators: Short for "Out of ..." for a resource
+      title = _"No Rocks",
+      heading = _"Out of Rocks",
       message = pgettext("atlanteans_building", "The stonecutter working at this quarry can’t find any rocks in his work area."),
    },
 }

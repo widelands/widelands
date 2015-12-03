@@ -76,9 +76,9 @@ tribes:new_productionsite_type {
       },
    },
    out_of_resource_notification = {
-		-- Translators: Short for "Out of ..." for a resource
-		title = _"No Gold",
-		heading = _"Main Gold Vein Exhausted",
+      -- Translators: Short for "Out of ..." for a resource
+      title = _"No Gold",
+      heading = _"Main Gold Vein Exhausted",
       message =
          pgettext("atlanteans_building", "This gold mine’s main vein is exhausted. Expect strongly diminished returns on investment. You should consider dismantling or destroying it."),
    },

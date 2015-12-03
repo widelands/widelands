@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-18 08:43+0000\n"
-"PO-Revision-Date: 2015-11-18 08:44+0000\n"
+"POT-Creation-Date: 2015-11-28 11:19+0000\n"
+"PO-Revision-Date: 2015-11-28 11:21+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Norwegian Bokmål (http://www.transifex.com/widelands/widelands/language/nb/)\n"
 "MIME-Version: 1.0\n"
@@ -83,9 +83,9 @@ msgid ""
 "We need to find a nice place for the lumberjack’s hut. To make this easier, "
 "we can activate ‘Show Building Spaces’. There are two ways you can do this, "
 "either by clicking on the ‘Show Building Spaces’ button at the bottom of the"
-" screen, which is the fourth one from the left. Or you can use the SPACE key"
+" screen, which is the fourth one from the left. Or you can use the Space key"
 " to toggle it."
-msgstr "Vi må finne et fint sted til tømmerhuggerens hytte. For å gjøre dette lettere kan vi aktivere «vis byggeplasser». Det er to måter å gjøre dette på, enten ved å trykke «vis byggeplasser»-knappen nederst på skjermen, som er den fjerde knappen fra venstre. Ellers kan du skru funksjonen av og på med mellomromtasten."
+msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:46
 msgid "Left-click the ‘OK’ button to close this box and then try it."
@@ -107,10 +107,10 @@ msgstr "Det er lettere å forstå hva slags bygninger som kan bygges på hvilket
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:54
 msgid ""
-"Do so now, either by pressing SPACE or by clicking the fourth button from "
+"Do so now, either by pressing Space or by clicking the fourth button from "
 "the left at the very bottom of the screen. Right-click on this window and "
 "then give it a try."
-msgstr "Gjør det nå, enten ved å trykke på mellomromtasten eller ved å trykke på fjerde knapp fra venstre helt nederst på skjermen. Høyreklikk på dette vinduet og prøv."
+msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:59
 msgid "Lumberjack’s Spot"
@@ -232,8 +232,8 @@ msgstr ""
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:138
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:151
 msgid ""
-"If you want things to go faster, simply use the PAGE UP key on your keyboard"
-" to increase the game speed. You can use PAGE DOWN to make the game slower "
+"If you want things to go faster, simply use the Page Up key on your keyboard"
+" to increase the game speed. You can use Page Down to make the game slower "
 "again."
 msgstr ""
 
@@ -494,7 +494,7 @@ msgstr "Det er noen steiner vest for hovedkvarteret ditt. Bygg et steinbrudd lik
 msgid ""
 "The quarry is a small building like the lumberjack’s hut. You can therefore "
 "build it on any field that shows a red, yellow or green house when the "
-"building spaces symbols are enabled (Press SPACE for that)."
+"building spaces symbols are enabled (Press Space for that)."
 msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:269

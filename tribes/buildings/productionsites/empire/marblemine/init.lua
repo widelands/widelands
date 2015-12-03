@@ -99,9 +99,9 @@ tribes:new_productionsite_type {
       },
    },
    out_of_resource_notification = {
-		-- Translators: Short for "Out of ..." for a resource
-		title = _"No Marble",
-		heading = _"Main Marble Vein Exhausted",
+      -- Translators: Short for "Out of ..." for a resource
+      title = _"No Marble",
+      heading = _"Main Marble Vein Exhausted",
       message =
          pgettext("empire_building", "This marble mine’s main vein is exhausted. Expect strongly diminished returns on investment. You should consider enhancing, dismantling or destroying it."),
    },

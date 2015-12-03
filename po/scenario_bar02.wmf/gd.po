@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-07 08:28+0000\n"
-"PO-Revision-Date: 2015-11-06 16:22+0000\n"
+"POT-Creation-Date: 2015-11-28 11:19+0000\n"
+"PO-Revision-Date: 2015-11-30 10:33+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -51,12 +51,12 @@ msgstr "Tog taigh-fuine"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:35
 msgid "Build a cattle farm"
-msgstr "Tog tuathanas crodh"
+msgstr "Tog taigh-buaile"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:37
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:40
 msgid "Remember to build a cattle farm"
-msgstr "Cuimhnich gun tog thu tuathanas crodh"
+msgstr "Cuimhnich gun tog thu taigh-buaile"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:38
 msgid ""
