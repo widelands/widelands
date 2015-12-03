@@ -59,6 +59,7 @@ ProductionSiteDescr::ProductionSiteDescr
 	 const LuaTable& table, const EditorGameBase& egbase)
 	: BuildingDescr(init_descname, _type, table, egbase),
 	  m_out_of_resource_title(""),
+	  m_out_of_resource_heading(""),
 	  m_out_of_resource_message(""),
 	  out_of_resource_productivity_threshold_(100)
 {
@@ -68,6 +69,7 @@ ProductionSiteDescr::ProductionSiteDescr
 	if (table.has_key("out_of_resource_notification")) {
 		items_table = table.get_table("out_of_resource_notification");
 		m_out_of_resource_title = _(items_table->get_string("title"));
+		m_out_of_resource_heading = _(items_table->get_string("heading"));
 		m_out_of_resource_message = pgettext_expr(msgctxt, items_table->get_string("message").c_str());
 		if (items_table->has_key("productivity_threshold")) {
 			out_of_resource_productivity_threshold_ = items_table->get_int("productivity_threshold");
@@ -284,32 +286,56 @@ void ProductionSite::update_statistics_string(std::string* s) {
 }
 
 /**
- * Detect if the workers are experienced enough for an upgrade
+ * Detect if the workers are experienced enough for an target building
+ * Buildable workers are skipped, but upgraded ones (required be target site) are tested
  * @param idx Index of the enhancement
  */
 bool ProductionSite::has_workers(DescriptionIndex targetSite, Game & /* game */)
 {
 	// bld holds the description of the building we want to have
 	if (upcast(ProductionSiteDescr const, bld, owner().tribe().get_building_descr(targetSite))) {
-		// if he has workers
+
 		if (bld->nr_working_positions()) {
-			DescriptionIndex need = bld->working_positions()[0].first;
-			for (unsigned int i = 0; i < descr().nr_working_positions(); ++i) {
-				if (!working_positions()[i].worker) {
-					return false; // no one is in this house
-				} else {
-					DescriptionIndex have = working_positions()[i].worker->descr().worker_index();
-					if (owner().tribe().get_worker_descr(have)->can_act_as(need)) {
-						return true; // he found a lead worker
+
+			// Iterating over workers positions in target building
+			for (const auto& wp : bld->working_positions()) {
+
+				// If worker for this position is buildable, just skip him
+				if (owner().tribe().get_worker_descr(wp.first)->is_buildable()){
+					continue;
+				}
+
+				// This position needs promoted worker, so trying to find out if there is such worker
+				// currently available in this site
+				const DescriptionIndex needed_worker = wp.first;
+				bool worker_available =  false;
+				for (unsigned int i = 0; i < descr().nr_working_positions(); ++i) {
+					const Worker* cw = working_positions()[i].worker;
+					if (cw) {
+						DescriptionIndex current_worker = cw->descr().worker_index();
+						if (owner().tribe().get_worker_descr(current_worker)->can_act_as(needed_worker)) {
+							worker_available = true; // We found a worker for the position
+							break;
+						}
 					}
 				}
-			}
-			return false;
-		}
-		return true;
-	} else return true;
-}
+				if (!worker_available) {
+					// We dont have needed workers in the site :(
+					return false;
+				}
 
+			}
+
+			//if we are here, all needs are satisfied
+			return true;
+
+		} else {
+			throw wexception("Building, index: %d, needs no workers!\n", targetSite);
+		}
+	} else {
+		throw wexception("No such building, index: %d\n", targetSite);
+	}
+}
 
 WaresQueue & ProductionSite::waresqueue(DescriptionIndex const wi) {
 	for (WaresQueue * ip_queue : m_input_queues) {
@@ -960,18 +986,20 @@ void ProductionSite::notify_player(Game & game, uint8_t minutes)
 	if (m_last_stat_percent == 0 ||
 		 (m_last_stat_percent <= descr().out_of_resource_productivity_threshold()
 		  && trend_ == Trend::kFalling)) {
-		if (descr().out_of_resource_title().empty())
+		if (descr().out_of_resource_heading().empty())
 		{
 			set_production_result(_("Can’t find any more resources!"));
 		}
 		else {
-			set_production_result(descr().out_of_resource_title());
+			set_production_result(descr().out_of_resource_heading());
 
 			assert(!descr().out_of_resource_message().empty());
 			send_message
 				(game,
 				 Message::Type::kEconomy,
 				 descr().out_of_resource_title(),
+				 descr().icon_filename(),
+				 descr().out_of_resource_heading(),
 				 descr().out_of_resource_message(),
 				 true,
 				 minutes * 60000, 0);

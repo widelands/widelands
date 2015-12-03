@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-07 08:47+0000\n"
-"PO-Revision-Date: 2015-11-07 14:09+0000\n"
+"POT-Creation-Date: 2015-11-28 11:19+0000\n"
+"PO-Revision-Date: 2015-11-28 20:17+0000\n"
 "Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -81,9 +81,9 @@ msgid ""
 "We need to find a nice place for the lumberjack’s hut. To make this easier, "
 "we can activate ‘Show Building Spaces’. There are two ways you can do this, "
 "either by clicking on the ‘Show Building Spaces’ button at the bottom of the"
-" screen, which is the fourth one from the left. Or you can use the SPACE key"
+" screen, which is the fourth one from the left. Or you can use the Space key"
 " to toggle it."
-msgstr "Hem de trobar un lloc agradable per a la cabana del llenyataire. Per fer això més fàcil, podem activar \"Mostrar els Espais per Construir\". Hi ha dues formes per fer-ho: o be clicant la icona corresponent en la part inferior de la pantalla, el quart botó començant per l'esquerra, o bé prement la tecla Espai."
+msgstr "Hem de trobar un lloc agradable per a la cabana del llenyataire. Per fer això més fàcil, podem activar «Mostrar els espais per construir». Hi ha dues formes per fer-ho: o be clicant la icona corresponent en la part inferior de la pantalla, el quart botó començant per l'esquerra, o bé prement la tecla «Espai»."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:46
 msgid "Left-click the ‘OK’ button to close this box and then try it."
@@ -105,10 +105,10 @@ msgstr "És més fàcil entendre quin tipus d'edificis es poden construir en det
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:54
 msgid ""
-"Do so now, either by pressing SPACE or by clicking the fourth button from "
+"Do so now, either by pressing Space or by clicking the fourth button from "
 "the left at the very bottom of the screen. Right-click on this window and "
 "then give it a try."
-msgstr "Feu-ho ara, o bé prement la tecla Espai o bé fent clic en el quart botó començant per l'esquerra de la part inferior de la pantalla. Fes clic dret en aquesta finestra i intenteu-ho."
+msgstr "Feu-ho ara, o bé prement la tecla «Espai» o bé fent clic en el quart botó començant per l'esquerra de la part inferior de la pantalla. Fes clic dret en aquesta finestra i intenteu-ho."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:59
 msgid "Lumberjack’s Spot"
@@ -230,8 +230,8 @@ msgstr "Ben fet! Esperem fins que s'acabi de construir la cabana."
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:138
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:151
 msgid ""
-"If you want things to go faster, simply use the PAGE UP key on your keyboard"
-" to increase the game speed. You can use PAGE DOWN to make the game slower "
+"If you want things to go faster, simply use the Page Up key on your keyboard"
+" to increase the game speed. You can use Page Down to make the game slower "
 "again."
 msgstr "Si voleu que les coses passin més ràpidament, useu la tecla «Re Pàg» per incrementar la velocitat de la partida. Després, podeu usar «Av Pàg» per reduir-la."
 
@@ -492,7 +492,7 @@ msgstr "Hi ha algunes roques a l'oest del vostre quarter general. Construïu una
 msgid ""
 "The quarry is a small building like the lumberjack’s hut. You can therefore "
 "build it on any field that shows a red, yellow or green house when the "
-"building spaces symbols are enabled (Press SPACE for that)."
+"building spaces symbols are enabled (Press Space for that)."
 msgstr "La pedrera és un edifici petit com la cabana del llenyataire. Es pot construir en qualsevol parcel·la que es mostri disponible amb una casa vermella, groga o verda (premeu «Espai» per mostrar o ocultar aquests símbols)."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:269
@@ -643,11 +643,11 @@ msgstr "Heu destruït l'obra en construcció!"
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:353
 msgid ""
 "It seems like you destroyed a construction site for a quarry we wanted to "
-"build. Since we need the stones, I suggest you reload the game from a "
+"build. Since we need the granite, I suggest you reload the game from a "
 "previous savegame. Luckily, these are created from time to time. To do so, "
 "you have to go back to the main menu and choose ‘Single Player’ → ‘Load "
 "Game’. And please be a bit more careful next time."
-msgstr "Sembla que heu destruït la pedrera que estava planejada construir-se. Com que necessitem pedres, és recomanable carregar una de les partides desades automàticament. Afortunadament, es creen cada cert interval de temps. Per fer-ho, torneu al menú principal i escolliu «Un jugador» → «Carrega partida». I sigues una mica més curós el proper cop."
+msgstr "Sembla que heu destruït la pedrera que estava planejada construir-se. Com que necessitem granit, és recomanable carregar una de les partides desades automàticament. Afortunadament, es creen cada cert interval de temps. Per fer-ho, torneu al menú principal i escolliu «Un jugador» → «Carrega partida». I sigueu una mica més curosos el proper cop."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:361
 msgid "Build a second quarry"

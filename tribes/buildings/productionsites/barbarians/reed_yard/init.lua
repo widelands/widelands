@@ -67,7 +67,9 @@ tribes:new_productionsite_type {
       },
    },
    out_of_resource_notification = {
-      title = _"Out of Fields",
+      -- Translators: Short for "Out of ..." for a resource
+      title = _"No Fields",
+      heading = _"Out of Fields",
       message = pgettext("barbarians_building", "The gardener working at this reed yard has no cleared soil to plant his seeds."),
       productivity_threshold = 20
    },

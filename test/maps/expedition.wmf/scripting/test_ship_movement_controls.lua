@@ -96,7 +96,7 @@ run(function()
    assert_equal("cw", ships[1].island_explore_direction)
 
    -- wait till it finds a port
-   wait_for_message("Port Space Found")
+   wait_for_message("Port Space")
    sleep(500)
    assert_equal("exp_found_port_space", ships[1].state)
 

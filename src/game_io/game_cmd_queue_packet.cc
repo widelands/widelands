@@ -60,12 +60,12 @@ void GameCmdQueuePacket::read
 				item.serial = fr.unsigned_32();
 
 				GameLogicCommand & cmd =
-					QueueCmdFactory::create_correct_queue_command(packet_id);
+					QueueCmdFactory::create_correct_queue_command(static_cast<QueueCommandTypes>(packet_id));
 				cmd.read(fr, game, *ol);
 
 				item.cmd = &cmd;
 
-				cmdq.m_cmds[cmd.duetime() % CMD_QUEUE_BUCKET_SIZE].push(item);
+				cmdq.m_cmds[cmd.duetime() % kCommandQueueBucketSize].push(item);
 				++ cmdq.m_ncmds;
 			}
 		} else {
@@ -94,19 +94,19 @@ void GameCmdQueuePacket::write
 	// Write all commands
 
 	// Find all the items in the current cmdqueue
-	int32_t time = game.get_gametime();
+	uint32_t time = game.get_gametime();
 	size_t nhandled = 0;
 
 	while (nhandled < cmdq.m_ncmds) {
 		// Make a copy, so we can pop stuff
-		std::priority_queue<CmdQueue::CmdItem> p = cmdq.m_cmds[time % CMD_QUEUE_BUCKET_SIZE];
+		std::priority_queue<CmdQueue::CmdItem> p = cmdq.m_cmds[time % kCommandQueueBucketSize];
 
 		while (!p.empty()) {
 			const CmdQueue::CmdItem & it = p.top();
 			if (it.cmd->duetime() == time) {
 				if (upcast(GameLogicCommand, cmd, it.cmd)) {
 					// The id (aka command type)
-					fw.unsigned_16(cmd->id());
+					fw.unsigned_16(static_cast<uint16_t>(cmd->id()));
 
 					// Serial number
 					fw.signed_32(it.category);

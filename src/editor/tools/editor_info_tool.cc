@@ -92,7 +92,7 @@ int32_t EditorInfoTool::handle_click_impl(Widelands::Map& map,
 	}
 
 	std::string temp = "";
-	temp = f.get_immovable() ? _("Has base immovable") : _("No base immovable");
+	temp = f.get_immovable() ? _("Has immovable") : _("No immovable");
 	buf += "• " + temp + "\n";
 
 	temp = f.get_first_bob() ? _("Has animals") : _("No animals");

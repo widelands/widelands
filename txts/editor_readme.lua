@@ -18,7 +18,7 @@ return {
 
       p(
          -- TRANSLATORS: This is a hotkey
-         _"SPACE:" .. " " .. _"toggles if building spaces are shown" .. "<br>" ..
+         _"Space:" .. " " .. _"toggles if building spaces are shown" .. "<br>" ..
          -- TRANSLATORS: This is a hotkey
          _"C:" .. " " .. _"toggles census" .. "<br>" ..
          -- TRANSLATORS: This is a hotkey
@@ -34,15 +34,15 @@ return {
          -- TRANSLATORS: This is a hotkey
          _"I:" .. " " .. _"activates information tool" .. "<br>" ..
          -- TRANSLATORS: This is a hotkey
-         _"CTRL+L:" .. " " .. _"load map" .. "<br>" ..
+         _"Ctrl + L:" .. " " .. _"load map" .. "<br>" ..
          -- TRANSLATORS: This is a hotkey
-         _"CTRL+S:" .. " " .. _"save map" .. "<br>" ..
+         _"Ctrl + S:" .. " " .. _"save map" .. "<br>" ..
          -- TRANSLATORS: This is a hotkey
          _"1-0:" .. " " .. _"changes tool size" .. "<br>" ..
          -- TRANSLATORS: This is a hotkey
-         _"SHIFT (Hold):" .. " " .. _"selects first alternative tool while pressed" .. "<br>" ..
+         _"Shift (Hold):" .. " " .. _"selects first alternative tool while pressed" .. "<br>" ..
          -- TRANSLATORS: This is a hotkey
-         _"ALT (Hold):" .. " " .. _"Selects second alternative tool while pressed" .. "<br>"
+         _"Alt (Hold):" .. " " .. _"Selects second alternative tool while pressed" .. "<br>"
       )
    )
 }

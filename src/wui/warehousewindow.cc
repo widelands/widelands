@@ -216,12 +216,12 @@ WarehouseWindow::WarehouseWindow
 			("dock_wares",
 			 g_gr->images().get(pic_tab_dock_wares),
 			 create_portdock_wares_display(get_tabs(), Width, *pd, Widelands::wwWARE),
-			 _("Wares in dock"));
+			 _("Wares waiting to be shipped"));
 		get_tabs()->add
 			("dock_workers",
 			 g_gr->images().get(pic_tab_dock_workers),
 			 create_portdock_wares_display(get_tabs(), Width, *pd, Widelands::wwWORKER),
-			 _("Workers in dock"));
+			 _("Workers waiting to embark"));
 		if (pd->expedition_started()) {
 			get_tabs()->add
 				("expedition_wares_queue",

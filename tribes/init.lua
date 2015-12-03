@@ -10,8 +10,6 @@
 -- Also, enhanced/upgraded units need to come before their basic units.
 --
 
-set_textdomain("tribes")
-
 tribes = wl.Tribes()
 
 

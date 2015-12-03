@@ -22,6 +22,6 @@ function building_helptext_note()
 end
 
 function building_helptext_performance()
-   -- #TRANSLATORS: Performance helptext for a building
-   return no_performance_text_yet()
+   -- TRANSLATORS: Performance helptext for a building
+   return pgettext("empire_building", "The miller needs %1% on average to grind wheat into a sack of flour."):bformat(format_seconds(19))
 end

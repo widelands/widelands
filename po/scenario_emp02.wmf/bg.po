@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-04 07:08+0000\n"
-"PO-Revision-Date: 2015-11-05 12:33+0000\n"
+"POT-Creation-Date: 2015-11-28 11:19+0000\n"
+"PO-Revision-Date: 2015-11-28 11:29+0000\n"
 "Last-Translator: Lyubomir Vasilev\n"
 "Language-Team: Bulgarian (http://www.transifex.com/widelands/widelands/language/bg/)\n"
 "MIME-Version: 1.0\n"
@@ -222,8 +222,8 @@ msgstr "Скалите"
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:137
 msgid ""
 "Later, I walked down to the rocks in the south and looked for a place where "
-"we could build a quarry to get some hard stones for our larger buildings."
-msgstr "По-късно се разходих до скалите на юг и потърсих място, където можем да построим кариера, за да добиваме камъни за по-големите сгради."
+"we could build a quarry to get some granite for our larger buildings."
+msgstr "По-късно се разходих до скалите на юг и потърсих място, където можем да построим кариера, за да добиваме гранит за по-големите сгради."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:140
@@ -252,8 +252,8 @@ msgstr "Камъни за колонията"
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:157
 msgid ""
 "Great! Today the building of the quarry was completed. Now we will get "
-"enough stones to construct larger buildings."
-msgstr "Чудесно! Строежът на кариерата беше завършен днес. Сега ще имаме достатъчно камъни, за да строим по-големи сгради."
+"enough granite and marble to construct larger buildings."
+msgstr "Чудесно! Строежът на кариерата беше завършен днес. Сега ще имаме достатъчно гранит и мрамор, за да строим по-големи сгради."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:161
 msgid "Dangerous Ship Parts"

@@ -1049,24 +1049,26 @@ void ProductionProgram::ActProduce::execute
 	assert(m_items.size());
 
 	std::vector<std::string> ware_descnames;
+	uint8_t count = 0;
 	for (const auto& item_pair : m_items) {
-		uint8_t const count = item_pair.second;
+		count += item_pair.second;
 		std::string ware_descname = tribe.get_ware_descr(item_pair.first)->descname();
-		// TODO(GunChleoc): needs ngettext when we have one_tribe.
+		// TODO(GunChleoc): would be nice with pngettext whenever it gets added to xgettext for Lua.
 		if (1 < count) {
 			/** TRANSLATORS: This is an item in a list of wares, e.g. "Produced 2x Coal": */
 			/** TRANSLATORS:    %%1$i = "2" */
 			/** TRANSLATORS:    %2$s = "Coal" */
 			ware_descname = (boost::format(_("%1$ix %2$s"))
-								  % static_cast<unsigned int>(count)
+								  % static_cast<unsigned int>(item_pair.second)
 								  % ware_descname).str();
 		}
 		ware_descnames.push_back(ware_descname);
 	}
 	std::string ware_list = i18n::localize_list(ware_descnames, i18n::ConcatenateWith::AND);
 
-	/** TRANSLATORS: %s is a list of wares */
-	const std::string result_string = (boost::format(_("Produced %s")) % ware_list).str();
+	const std::string result_string =
+		/** TRANSLATORS: %s is a list of wares. String is fetched according to total amount of wares. */
+		(boost::format(ngettext("Produced %s", "Produced %s", count)) % ware_list).str();
 	ps.set_production_result(result_string);
 }
 
@@ -1143,24 +1145,26 @@ void ProductionProgram::ActRecruit::execute
 	const TribeDescr & tribe = ps.owner().tribe();
 	assert(m_items.size());
 	std::vector<std::string> worker_descnames;
+	uint8_t count = 0;
 	for (const auto& item_pair : m_items) {
-		uint8_t const count = item_pair.second;
+		count += item_pair.second;
 		std::string worker_descname = tribe.get_worker_descr(item_pair.first)->descname();
-		// TODO(GunChleoc): needs ngettext when we have one_tribe.
+		// TODO(GunChleoc): would be nice with pngettext whenever it gets added to xgettext for Lua.
 		if (1 < count) {
 			/** TRANSLATORS: This is an item in a list of workers, e.g. "Recruited 2x Ox": */
 			/** TRANSLATORS:    %1$i = "2" */
 			/** TRANSLATORS:    %2$s = "Ox" */
 			worker_descname = (boost::format(_("%1$ix %2$s"))
-									 % static_cast<unsigned int>(count)
+									 % static_cast<unsigned int>(item_pair.second)
 									 % worker_descname).str();
 		}
 		worker_descnames.push_back(worker_descname);
 	}
 	std::string unit_string = i18n::localize_list(worker_descnames, i18n::ConcatenateWith::AND);
 
-	/** TRANSLATORS: %s is a list of workers */
-	const std::string result_string = (boost::format(_("Recruited %s")) % unit_string).str();
+	const std::string result_string =
+		/** TRANSLATORS: %s is a list of workers. String is fetched according to total amount of workers. */
+		(boost::format(ngettext("Recruited %s", "Recruited %s", count)) % unit_string).str();
 	ps.set_production_result(result_string);
 }
 

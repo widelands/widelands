@@ -40,7 +40,7 @@ CmdQueue::CmdQueue(Game & game) :
 	m_game(game),
 	nextserial(0),
 	m_ncmds(0),
-	m_cmds(CMD_QUEUE_BUCKET_SIZE, std::priority_queue<CmdItem>()) {}
+	m_cmds(kCommandQueueBucketSize, std::priority_queue<CmdItem>()) {}
 
 CmdQueue::~CmdQueue()
 {
@@ -55,7 +55,7 @@ CmdQueue::~CmdQueue()
 // Note: Order of destruction of Items is not guaranteed
 void CmdQueue::flush() {
 	uint32_t cbucket = 0;
-	while (m_ncmds && cbucket < CMD_QUEUE_BUCKET_SIZE) {
+	while (m_ncmds && cbucket < kCommandQueueBucketSize) {
 		std::priority_queue<CmdItem> & current_cmds = m_cmds[cbucket];
 
 		while (!current_cmds.empty()) {
@@ -94,16 +94,15 @@ void CmdQueue::enqueue (Command * const cmd)
 		ci.serial = 0;
 	}
 
-	m_cmds[cmd->duetime() % CMD_QUEUE_BUCKET_SIZE].push(ci);
+	m_cmds[cmd->duetime() % kCommandQueueBucketSize].push(ci);
 	++ m_ncmds;
 }
 
-int32_t CmdQueue::run_queue(int32_t const interval, uint32_t & game_time_var) {
+void CmdQueue::run_queue(int32_t const interval, uint32_t & game_time_var) {
 	uint32_t const final = game_time_var + interval;
-	int32_t cnt = 0;
 
 	while (game_time_var < final) {
-		std::priority_queue<CmdItem> & current_cmds = m_cmds[game_time_var % CMD_QUEUE_BUCKET_SIZE];
+		std::priority_queue<CmdItem> & current_cmds = m_cmds[game_time_var % kCommandQueueBucketSize];
 
 		while (!current_cmds.empty()) {
 			Command & c = *current_cmds.top().cmd;
@@ -119,7 +118,7 @@ int32_t CmdQueue::run_queue(int32_t const interval, uint32_t & game_time_var) {
 				static uint8_t const tag[] = {0xde, 0xad, 0x00};
 				ss.data(tag, 3); // provide an easy-to-find pattern as debugging aid
 				ss.unsigned_32(c.duetime());
-				ss.unsigned_32(c.id());
+				ss.unsigned_32(static_cast<uint32_t>(c.id()));
 			}
 
 			c.execute (m_game);
@@ -131,8 +130,6 @@ int32_t CmdQueue::run_queue(int32_t const interval, uint32_t & game_time_var) {
 
 	assert(final - game_time_var == 0);
 	game_time_var = final;
-
-	return cnt;
 }
 
 
@@ -173,7 +170,7 @@ void GameLogicCommand::read
 		uint16_t const packet_version = fr.unsigned_16();
 		if (packet_version == kCurrentPacketVersion) {
 			set_duetime(fr.unsigned_32());
-			int32_t const gametime = egbase.get_gametime();
+			uint32_t const gametime = egbase.get_gametime();
 			if (duetime() < gametime)
 				throw GameDataError
 					("duetime (%i) < gametime (%i)", duetime(), gametime);

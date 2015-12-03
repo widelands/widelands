@@ -60,7 +60,7 @@ battlearena1 = {
    obj_body = rt(
       paragraphdivider() ..
       listitem_bullet(_[[Build a battle arena. It is a big building.]]) ..
-      listitem_arrow(_[[Since the construction will take some time, you can change the game speed using PAGE UP and PAGE DOWN.]])
+      listitem_arrow(_[[Since the construction will take some time, you can change the game speed using Page Up and Page Down.]])
    )
 }
 

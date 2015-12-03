@@ -58,7 +58,7 @@ MAINPOTS = [
         "../../world/*/*/*/*/*/*.lua",
     ]),
     ("tribes/tribes", [
-        "../../tribes/scripting/starting_conditions/*/*.lua"
+        "../../tribes/scripting/starting_conditions/*/*.lua",
         "../../tribes/*.lua",
         "../../tribes/*/init.lua",
         "../../tribes/*/*/init.lua",
