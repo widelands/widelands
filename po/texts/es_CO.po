@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-18 08:43+0000\n"
-"PO-Revision-Date: 2015-11-18 08:43+0000\n"
+"POT-Creation-Date: 2015-11-28 11:19+0000\n"
+"PO-Revision-Date: 2015-11-28 11:21+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Spanish (Colombia) (http://www.transifex.com/widelands/widelands/language/es_CO/)\n"
 "MIME-Version: 1.0\n"
@@ -143,19 +143,19 @@ msgstr ""
 msgid ""
 "To close an open window, right-click on it. To minimize/maximize a window, "
 "click on it with the middle mouse button or with the left mouse button while"
-" holding down CTRL."
+" holding down Ctrl."
 msgstr ""
 
 #: ../../txts/README.lua:49
 msgid ""
-"If you hold CTRL while building a road, flags will be placed automatically.\n"
-"If you hold CTRL while removing a road, all flags up to the first junction are\n"
+"If you hold Ctrl while building a road, flags will be placed automatically.\n"
+"If you hold Ctrl while removing a road, all flags up to the first junction are\n"
 "removed."
 msgstr ""
 
 #: ../../txts/README.lua:53
 msgid ""
-"You can skip confirmation windows for irreversible actions if you hold CTRL\n"
+"You can skip confirmation windows for irreversible actions if you hold Ctrl\n"
 "while clicking on the action button."
 msgstr ""
 
@@ -164,19 +164,19 @@ msgid "Keyboard shortcuts (in-game)"
 msgstr ""
 
 #: ../../txts/README.lua:58
-msgid "PAGEUP: increases game speed"
+msgid " Page Up: increases game speed"
 msgstr ""
 
 #: ../../txts/README.lua:59
-msgid "PAGEDOWN: decreases game speed"
+msgid " Page Down: decreases game speed"
 msgstr ""
 
 #: ../../txts/README.lua:60
-msgid "PAUSE: pauses the game"
+msgid "Pause: pauses the game"
 msgstr ""
 
 #: ../../txts/README.lua:61
-msgid "SPACE: toggles if building spaces are shown"
+msgid "Space: toggles if building spaces are shown"
 msgstr ""
 
 #: ../../txts/README.lua:62
@@ -216,7 +216,7 @@ msgid "Home: centers main mapview on starting location"
 msgstr ""
 
 #: ../../txts/README.lua:71
-msgid "(CTRL+) 0-9: Remember and go to previously remembered locations"
+msgid "(Ctrl +) 0-9: Remember and go to previously remembered locations"
 msgstr ""
 
 #: ../../txts/README.lua:72
@@ -232,15 +232,15 @@ msgid "F6: shows the debug console (only in debug-builds)"
 msgstr ""
 
 #: ../../txts/README.lua:75
-msgid "CTRL+F10: quits the game immediately"
+msgid "Ctrl + F10: quits the game immediately"
 msgstr ""
 
 #: ../../txts/README.lua:76
-msgid "CTRL+Leftclick: skips confirmation dialogs"
+msgid "Ctrl + Leftclick: skips confirmation dialogs"
 msgstr ""
 
 #: ../../txts/README.lua:77
-msgid "CTRL+F11: takes a screenshot"
+msgid "Ctrl + F11: takes a screenshot"
 msgstr ""
 
 #: ../../txts/README.lua:79
@@ -277,7 +277,7 @@ msgid "G: jumps to the location corresponding to the current message"
 msgstr ""
 
 #: ../../txts/README.lua:88
-msgid "DELETE: archives/restores the current message"
+msgid "Delete: archives/restores the current message"
 msgstr ""
 
 #: ../../txts/README.lua:90
@@ -532,7 +532,7 @@ msgstr ""
 
 #. TRANSLATORS: This is a hotkey
 #: ../../txts/editor_readme.lua:21
-msgid "SPACE:"
+msgid "Space:"
 msgstr ""
 
 #: ../../txts/editor_readme.lua:21
@@ -604,7 +604,7 @@ msgstr ""
 
 #. TRANSLATORS: This is a hotkey
 #: ../../txts/editor_readme.lua:37
-msgid "CTRL+L:"
+msgid "Ctrl + L:"
 msgstr ""
 
 #: ../../txts/editor_readme.lua:37
@@ -613,7 +613,7 @@ msgstr ""
 
 #. TRANSLATORS: This is a hotkey
 #: ../../txts/editor_readme.lua:39
-msgid "CTRL+S:"
+msgid "Ctrl + S:"
 msgstr ""
 
 #: ../../txts/editor_readme.lua:39
@@ -631,7 +631,7 @@ msgstr ""
 
 #. TRANSLATORS: This is a hotkey
 #: ../../txts/editor_readme.lua:43
-msgid "SHIFT (Hold):"
+msgid "Shift (Hold):"
 msgstr ""
 
 #: ../../txts/editor_readme.lua:43
@@ -640,7 +640,7 @@ msgstr ""
 
 #. TRANSLATORS: This is a hotkey
 #: ../../txts/editor_readme.lua:45
-msgid "ALT (Hold):"
+msgid "Alt (Hold):"
 msgstr ""
 
 #: ../../txts/editor_readme.lua:45
@@ -680,7 +680,7 @@ msgstr ""
 
 #: ../../txts/tips/editor.tip:6
 msgid ""
-"You can select multiple animal types if you hold down CTRL during selection."
+"You can select multiple animal types if you hold down Ctrl during selection."
 " If you then click on the map, an instance of one of the selected animal "
 "types will be placed."
 msgstr ""
@@ -688,19 +688,19 @@ msgstr ""
 #: ../../txts/tips/editor.tip:10
 msgid ""
 "Just like with animals, you can also select multiple immovables or ground "
-"textures with CTRL + mouse click."
+"textures with Ctrl + mouse click."
 msgstr ""
 
 #: ../../txts/tips/editor.tip:14
 msgid ""
-"Holding down SHIFT switches the first alternative tool on. This tool is in "
+"Holding down Shift switches the first alternative tool on. This tool is in "
 "most cases the complete opposite of the normal tool (for example deletion of"
 " an object instead of placing one)."
 msgstr ""
 
 #: ../../txts/tips/editor.tip:18
 msgid ""
-"Holding down ALT switches the second alternative tool on (if it exists)."
+"Holding down Alt switches the second alternative tool on (if it exists)."
 msgstr ""
 
 #: ../../txts/tips/editor.tip:22
@@ -711,7 +711,7 @@ msgstr ""
 
 #: ../../txts/tips/editor.tip:26
 msgid ""
-"SPACE key behaves like in normal game. It switches if building spaces are "
+"Space key behaves like in normal game. It switches if building spaces are "
 "shown on or off."
 msgstr ""
 

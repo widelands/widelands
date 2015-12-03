@@ -35,27 +35,13 @@ class FileWrite;
 namespace Widelands {
 
 class EditorGameBase;
-struct MapObjectSaver;
+class Game;
 class MapObjectLoader;
+struct MapObjectSaver;
 
-// Define here all the possible users
-#define SENDER_MAPOBJECT 0
-#define SENDER_PLAYER1 1 // those are just place holder, a player can send
-#define SENDER_PLAYER2 2 // commands with it's player number
-#define SENDER_PLAYER3 3
-#define SENDER_PLAYER4 4
-#define SENDER_PLAYER5 5
-#define SENDER_PLAYER6 6
-#define SENDER_PLAYER7 7
-#define SENDER_PLAYER8 8
-#define SENDER_CMDQUEUE 100   // The Cmdqueue sends itself some action request
+constexpr uint32_t kCommandQueueBucketSize = 65536; // Make this a power of two, so that % is fast
 
-#define CMD_QUEUE_BUCKET_SIZE 65536 // Make this a power of two, so that % is fast
-
-// ---------------------- END    OF CMDS ----------------------------------
-
-//
-// This is finally the command queue. It is fully widelands specific,
+// This is the command queue. It is fully widelands specific,
 // it needs to know nearly all modules.
 //
 // It used to be implemented as a priority_queue sorted by execution_time,
@@ -72,7 +58,6 @@ class MapObjectLoader;
 // The price we pay is that when saving, we also have to traverse till we no
 // longer find any new command to write. This could theoretically take forever
 // but in my tests it was not noticeable.
-class Game;
 
 /**
  * A command that is supposed to be executed at a certain gametime.
@@ -89,7 +74,7 @@ struct Command {
 	virtual ~Command ();
 
 	virtual void execute (Game &) = 0;
-	virtual uint8_t id() const = 0;
+	virtual QueueCommandTypes id() const = 0;
 
 	uint32_t duetime() const {return m_duetime;}
 	void set_duetime(uint32_t const t) {m_duetime = t;}

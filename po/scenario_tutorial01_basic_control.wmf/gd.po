@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-18 08:43+0000\n"
-"PO-Revision-Date: 2015-11-18 13:09+0000\n"
+"POT-Creation-Date: 2015-11-28 11:19+0000\n"
+"PO-Revision-Date: 2015-11-29 10:40+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -83,9 +83,9 @@ msgid ""
 "We need to find a nice place for the lumberjack’s hut. To make this easier, "
 "we can activate ‘Show Building Spaces’. There are two ways you can do this, "
 "either by clicking on the ‘Show Building Spaces’ button at the bottom of the"
-" screen, which is the fourth one from the left. Or you can use the SPACE key"
+" screen, which is the fourth one from the left. Or you can use the Space key"
 " to toggle it."
-msgstr "Feumaidh sinn àite ghoireasach a lorg airson bothan a’ choillteir. Nochdamaid na h-ionadan togail gus seo a dhèanamh nas fhasa. Tha dà dhòigh ann gus am feart seo a chur air. Air an dàrna dòigh, briog air a’ phutan “Nochd ionadan togail (air/dheth)” aig bonn na sgrìn, seo an ceathramh putan on taobh chlì. Air an dòigh eile, brùth air an iuchair SPACE gus a thoglachadh."
+msgstr "Feumaidh sinn àite ghoireasach a lorg airson bothan a’ choillteir. Nochdamaid na h-ionadan togail gus seo a dhèanamh nas fhasa. Tha dà dhòigh ann gus am feart seo a chur air. Air an dàrna dòigh, briog air a’ phutan “Nochd ionadan togail” aig bonn na sgrìn, seo an ceathramh putan on taobh chlì. Air an dòigh eile, brùth air an iuchair Space gus a thoglachadh."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:46
 msgid "Left-click the ‘OK’ button to close this box and then try it."
@@ -107,10 +107,10 @@ msgstr "Tha e nas fhasa tuigsinn na dh’fhaodas tu togail air gach raon ma bhio
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:54
 msgid ""
-"Do so now, either by pressing SPACE or by clicking the fourth button from "
+"Do so now, either by pressing Space or by clicking the fourth button from "
 "the left at the very bottom of the screen. Right-click on this window and "
 "then give it a try."
-msgstr "Dèan seo a-nis is brùth air SPACE no briog air a’ cheathramh putan on taobh chlì aig bonn na sgrìn. Dèan briogadh deas air an uinneag seo is feuch e."
+msgstr "Dèan seo a-nis is brùth air Space no briog air a’ cheathramh putan on taobh chlì aig bonn na sgrìn. Dèan briogadh deas air an uinneag seo is feuch e."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:59
 msgid "Lumberjack’s Spot"
@@ -232,10 +232,10 @@ msgstr "Sin thu fhèin! Fuirich ort fhad ’s a thèid am bothan a chrìochnacha
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:138
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:151
 msgid ""
-"If you want things to go faster, simply use the PAGE UP key on your keyboard"
-" to increase the game speed. You can use PAGE DOWN to make the game slower "
+"If you want things to go faster, simply use the Page Up key on your keyboard"
+" to increase the game speed. You can use Page Down to make the game slower "
 "again."
-msgstr "Ma tha thu airson cùisean a dhèanamh nas luaithe, cha leig thu leas ach an iuchair PAGE UP a chleachdadh air a’ mheur-chlàr agad gus luaths a’ gheama a mheudachadh. Cleachd an iuchair PAGE DOWN gus maille a chur air a’ gheama a-rithist."
+msgstr "Ma tha thu airson cùisean a dhèanamh nas luaithe, cha leig thu leas ach an iuchair Page Up a chleachdadh air a’ mheur-chlàr agad gus luaths a’ gheama a mheudachadh. Cleachd an iuchair Page Down gus maille a chur air a’ gheama a-rithist."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:145
 msgid "Waiting for the Hut to be Finished"
@@ -293,11 +293,11 @@ msgstr "Taghta. Tha am bothan coillteir deiseil. Gabhaidh coilltear còmhnaidh a
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:179
 msgid "Some Rocks Were Found"
-msgstr "Chaidh creagan a lorg"
+msgstr "Lorg thu carraigean"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:180
 msgid "Getting a Quarry Up"
-msgstr "A’ togail coireall"
+msgstr "A’ togail cuaraidh"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:182
 msgid ""
@@ -305,7 +305,7 @@ msgid ""
 "quarry next to some rocks lying around. As it happens, there is a pile of "
 "them just to the west (left) of your headquarters. I will teach you now how "
 "to move your view over there."
-msgstr "Gabhaidh gaireal a thochladh ann am mèinnean gaireil, ach tha e nas fhasa coireall a thogail faisg air creagan air an talamh. Nach goireasach gu bheil tòrr dhiubh dìreach gu siar (gu clì) air a’ phrìomh-àras agad. Innsidh mi dhut mar a ghluaiseas tu an sealladh agad ann."
+msgstr "Gabhaidh gaireal a thochladh ann am mèinnean gaireil, ach tha e nas fhasa cuaraidh a thogail faisg air carraigean air an talamh. Nach goireasach gu bheil tòrr dhiubh dìreach gu siar (gu clì) air a’ phrìomh-àras agad. Innsidh mi dhut mar a ghluaiseas tu an sealladh agad ann."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:184
 msgid ""
@@ -416,20 +416,20 @@ msgstr "Dùin am meanbh-mhapa nuair a bhios tu deiseil gus leantainn air adhart.
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:238
 msgid "Onward to the Quarry"
-msgstr "Air adhart dhan choireall"
+msgstr "Air adhart dhan chuaraidh"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:239
 msgid "Great. Now about that quarry…"
-msgstr "Taghta. Nise, mu dhèidhinn a’ choirill ud…"
+msgstr "Taghta. Nise, mu dhèidhinn a’ chuaraidh ud…"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:247
 msgid "How to Build a Quarry"
-msgstr "Mar a thogas tu coireall"
+msgstr "Mar a thogas tu cuaraidh"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:249
 msgid ""
 "Build a quarry next to those rocks here. Remember how I did it earlier?"
-msgstr "Tog coireall faisg air na creagan an-seo. A bheil chuimhne agad air mar a rinn mi seo roimhe?"
+msgstr "Tog cuaraidh faisg air na carraigean an-seo. A bheil chuimhne agad air mar a rinn mi seo roimhe?"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:250
 msgid ""
@@ -474,34 +474,34 @@ msgid ""
 "Now go ahead, try it. The quarry is a small building, so if you click on a "
 "medium or big building symbol, you will have to select the small buildings "
 "tab first to find it. Go on, check it out!"
-msgstr "Siuthad is feuch e a-nis. ’S e togalach beag a th’ anns a’ choireall, mar sin ma bhriogas tu air samhla togail meadhanach no mòr, feumaidh tu taba nan togalaichean beaga a thaghadh an toiseach gus a lorg. Siuthad, thoir sùil air!"
+msgstr "Siuthad is feuch e a-nis. ’S e togalach beag a th’ anns a’ chuaraidh, mar sin ma bhriogas tu air samhla togail meadhanach no mòr, feumaidh tu taba nan togalaichean beaga a thaghadh an toiseach gus a lorg. Siuthad, thoir sùil air!"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:263
 msgid "Build a quarry next to the rocks"
-msgstr "Tog coireall ri taobh nan creagan"
+msgstr "Tog cuaraidh ri taobh nan carraigean"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:265
 msgid "Build a Quarry"
-msgstr "Tog coireall"
+msgstr "Tog cuaraidh"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:267
 msgid ""
 "There are some rocks to the west of your headquarters. Build a quarry right "
 "next to them."
-msgstr "Tha creagan gu siar air a’ phrìomh-àras agad. Tog coireall ris an taobh."
+msgstr "Tha carraigean gu siar air a’ phrìomh-àras agad. Tog cuaraidh ris an taobh."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:268
 msgid ""
 "The quarry is a small building like the lumberjack’s hut. You can therefore "
 "build it on any field that shows a red, yellow or green house when the "
-"building spaces symbols are enabled (Press SPACE for that)."
-msgstr "’S e togalach beag a tha sa choireall mar a tha am bothan coillteir. Mar sin, ’s urrainn dhut fear a thogail air raon sam bith a sheallas taigh dearg, buidhe no uaine nuair a bhios na h-ionadan togail ’gan nochdadh (brùth air SPACE gus an nochdadh)."
+"building spaces symbols are enabled (Press Space for that)."
+msgstr "’S e togalach beag a tha sa chuaraidh mar a tha am bothan coillteir. Mar sin, ’s urrainn dhut fear a thogail air raon sam bith a sheallas taigh dearg, buidhe no uaine nuair a bhios na h-ionadan togail ’gan nochdadh (brùth air Space gus an nochdadh)."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:269
 msgid ""
 "Just click on any house symbol next to the rocks, select the small buildings"
 " tab in the window that opens up, then click on the quarry symbol."
-msgstr "Briog air samhla taighe sam bith ri taobh nan creagan, tagh taba nan togalaichean beaga san uinneag a nochdas is an uairsin briog air samhla a’ choirill."
+msgstr "Briog air samhla taighe sam bith ri taobh nan carraigean, tagh taba nan togalaichean beaga san uinneag a nochdas is an uairsin briog air samhla a’ chuaraidh."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:276
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:293
@@ -540,7 +540,7 @@ msgid ""
 "you just ordered the quarry. You can either make it longer by one field at a"
 " time by left-clicking multiple times on neighboring fields for perfect "
 "control over the route the road takes, like so:"
-msgstr "Nise, tòisicheamaid air an rathad. Cuimhnich gu bheil sinn ann am modh togail rathaidean mar-thà on a tha thu air coireall òrdachadh. ’S urrainn dhut an rathad a dhèanamh nas fhaide raon air raon ’s tu a’ briogadh iomadh turas air raointean nàbaidh airson smachd mhionaidich air far an tèid an rathad. Seallaidh mi seo dhut a-nis:"
+msgstr "Nise, tòisicheamaid air an rathad. Cuimhnich gu bheil sinn ann am modh togail rathaidean mar-thà on a tha thu air cuaraidh òrdachadh. ’S urrainn dhut an rathad a dhèanamh nas fhaide raon air raon ’s tu a’ briogadh iomadh turas air raointean nàbaidh airson smachd mhionaidich air far an tèid an rathad. Seallaidh mi seo dhut a-nis:"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:295
 msgid ""
@@ -601,11 +601,11 @@ msgstr "Thoir an aire air na slèibhtean nuair a thogas tu rathaidean is faigh b
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:328
 msgid "Now please rebuild the road between your quarry and your headquarters."
-msgstr "An tog thu an rathad eadar an coireall agus am prìomh-àras agad as ùr?"
+msgstr "An tog thu an rathad eadar an cuaraidh agus am prìomh-àras agad as ùr?"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:332
 msgid "Connect the quarry to the headquarters"
-msgstr "Ceangail an coireall ris a’ phrìomh-àras"
+msgstr "Ceangail an cuaraidh ris a’ phrìomh-àras"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:334
 msgid "Connect Your Construction Site"
@@ -616,18 +616,18 @@ msgid ""
 "Connect your quarry construction site to your headquarters with a road. You "
 "would have been put directly into road building mode after ordering a new "
 "site. But now, you aren’t."
-msgstr "Ceangal làrach togail a’ choirill ris a’ phrìomh-àras agad le rathad. Bhiodh thu ann am modh togail rathaidean sa bhad nan robh thu dìreach air làrach ùr òrdachadh. Ach chan eil thu an-dràsta."
+msgstr "Ceangal làrach togail a’ chuaraidh ris a’ phrìomh-àras agad le rathad. Bhiodh thu ann am modh togail rathaidean sa bhad nan robh thu dìreach air làrach ùr òrdachadh. Ach chan eil thu an-dràsta."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:337
 msgid ""
 "To build a completely new road, just click on the flag in front of your "
 "construction site, click on the build road icon and then click on the flag "
 "in front of your headquarters. Wait for the completion of the quarry."
-msgstr "Gus rathad ùr a thogail, cha leig thu leas ach briogadh air a’ bhratach air beulaibh an làraich togail agad is an uairsin air an ìomhaigheag togail rathaid is air a’ bhratach air beulaibh a’ phrìomh-àrais agad. Fuirich ort an uairsin gus am bi an coireall deiseil."
+msgstr "Gus rathad ùr a thogail, cha leig thu leas ach briogadh air a’ bhratach air beulaibh an làraich togail agad is an uairsin air an ìomhaigheag togail rathaid is air a’ bhratach air beulaibh a’ phrìomh-àrais agad. Fuirich ort an uairsin gus am bi an cuaraidh deiseil."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:342
 msgid "Quarry not Connected"
-msgstr "Cha deach an coireall a cheangal"
+msgstr "Cha deach an cuaraidh a cheangal"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:344
 msgid ""
@@ -649,33 +649,33 @@ msgid ""
 "previous savegame. Luckily, these are created from time to time. To do so, "
 "you have to go back to the main menu and choose ‘Single Player’ → ‘Load "
 "Game’. And please be a bit more careful next time."
-msgstr "Na mhill thu làrach togail a’ choirill a bha sinn airson togail? On a tha sinn feumach air a’ ghaireal, mholainn gun luchdaich thu an geama às ùr o gheama air a shàbhaladh. Gu fortanach, cruthaichidh sinn fear dhut o àm gu àm. Gus geama a luchdadh, till dhan phrìomh chlàr-taice agus tagh “Aon chluicheadair” → “Luchdaich geama”. Agus nach bi thu nas fhaiceallaiche an ath thuras?"
+msgstr "Na mhill thu làrach togail a’ chuaraidh a bha sinn airson togail? On a tha sinn feumach air a’ ghaireal, mholainn gun luchdaich thu an geama às ùr o gheama air a shàbhaladh. Gu fortanach, cruthaichidh sinn fear dhut o àm gu àm. Gus geama a luchdadh, till dhan phrìomh chlàr-taice agus tagh “Aon chluicheadair” → “Luchdaich geama”. Agus nach bi thu nas fhaiceallaiche an ath thuras?"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:361
 msgid "Build a second quarry"
-msgstr "Tog coireall eile"
+msgstr "Tog cuaraidh eile"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:363
 msgid ""
 "When there are many rocks, you can consider building another quarry. This "
 "will make the granite production faster."
-msgstr "Nuair a bhios torr chreagan ann, thoir fainear dhut an tog thu coireall eile. Gheibh thu gaireal nas luaithe mar sin."
+msgstr "Nuair a bhios torr charraigean ann, thoir fainear dhut an tog thu cuaraidh eile. Gheibh thu gaireal nas luaithe mar sin."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:365
 msgid ""
 "Build a second quarry near the rocks and connect it to your road network."
-msgstr "Tog coireall eile faisg air na creagan agus ceangail e ri lìonra nan rathaidean agad."
+msgstr "Tog cuaraidh eile faisg air na carraigean agus ceangail e ri lìonra nan rathaidean agad."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:368
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:370
 msgid "Build another quarry"
-msgstr "Tog coireall eile"
+msgstr "Tog cuaraidh eile"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:371
 msgid ""
 "Build a second quarry next to the rocks. Do not forget to connect it to "
 "another flag."
-msgstr "Tog coireall eile faisg air na creagan: Na dìochuimhnich a cheangail ri bratach eile."
+msgstr "Tog cuaraidh eile faisg air na carraigean: Na dìochuimhnich a cheangail ri bratach eile."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:373
 msgid ""
@@ -827,7 +827,7 @@ msgid ""
 "I’ll take all rocks away from the poor stonemasons in the quarries. They "
 "will then send a message each that they can’t find any in their work areas "
 "the next time they try to do some work."
-msgstr "Sin thu fhèin! Nise, nach doir sin sùil air mar a dh’obraicheas teachdaireachdan am broinn geama? Bheir mi na h-uile creag air falbh o na clachairean bochda a-nis. Cuiridh gach fear dhiubh teachdaireachd an uairsin nach urrainn dhaibh creagan a lorg san roinn obrach aca tuilleadh an ath thuras a dh’fheuchas iad ri obair a dhèanamh."
+msgstr "Sin thu fhèin! Nise, nach doir sin sùil air mar a dh’obraicheas teachdaireachdan am broinn geama? Bheir mi na h-uile carraig air falbh o na clachairean bochda a-nis. Cuiridh gach fear dhiubh teachdaireachd an uairsin nach urrainn dhaibh creagan a lorg san roinn obrach aca tuilleadh an ath thuras a dh’fheuchas iad ri obair a dhèanamh."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:454
 msgid "Messages Arrived!"
@@ -845,14 +845,14 @@ msgstr "Fhuair thu teachdaireachdan. Am faic thu mar a dh’atharraich dreach a�
 msgid ""
 "Burning down the quarry: this is the fastest way of clearing the space. "
 "While the worker abandons the building, the wares are lost."
-msgstr "Milleadh a’ choirill: seo an dòigh as luaithe gus an rum fhaighinn air ais. Fad ’s a dh’fhalbhas an t-obraiche thèid gach bathair san togalach air chall."
+msgstr "Milleadh a’ chuaraidh: seo an dòigh as luaithe gus an rum fhaighinn air ais. Fad ’s a dh’fhalbhas an t-obraiche thèid gach bathair san togalach air chall."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:459
 msgid ""
 "Dismantling the quarry: a builder will walk from the headquarters to "
 "dismantle the quarry piece by piece. Thereby, you regain some of the "
 "resources you used for the construction."
-msgstr "A’ toirt a’ choirill às a chèile: thig neach-togail on phrìomh-àras gus an coireall a thoirt às a chèile beag air bheag. Le sin, gheibh thu cuid dhe na stòrasan a chleachd thu gus a thogail air ais."
+msgstr "A’ toirt a’ chuaraidh às a chèile: thig neach-togail on phrìomh-àras gus an coireall a thoirt às a chèile beag air bheag. Le sin, gheibh thu cuid dhe na stòrasan a chleachd thu gus a thogail air ais."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:465
 msgid ""
@@ -870,14 +870,14 @@ msgstr "Tha dà dhòigh ann gus cuidhteas fhaighinn de thogalach: mill e no thoi
 msgid ""
 "Burning down the quarry: This is the fastest way of clearing the space. "
 "While the worker abandons the building, the wares are lost."
-msgstr "Milleadh a’ choirill: seo an dòigh as luaithe gus an rum fhaighinn air ais. Fad ’s a dh’fhalbhas an t-obraiche thèid gach bathair san togalach air chall."
+msgstr "Milleadh a’ chuaraidh: seo an dòigh as luaithe gus an rum fhaighinn air ais. Fad ’s a dh’fhalbhas an t-obraiche thèid gach bathair san togalach air chall."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:469
 msgid ""
 "Dismantling the quarry: A builder will walk from the headquarters to "
 "dismantle the quarry piece by piece. Thereby, you regain some of the "
 "resources you used for the construction."
-msgstr "A’ toirt a’ choirill às a chèile: thig neach-togail on phrìomh-àras gus an coireall a thoirt às a chèile beag air bheag. Le sin, gheibh thu cuid dhe na stòrasan a chleachd thu gus a thogail air ais."
+msgstr "A’ toirt a’ chuaraidh às a chèile: thig neach-togail on phrìomh-àras gus an coireall a thoirt às a chèile beag air bheag. Le sin, gheibh thu cuid dhe na stòrasan a chleachd thu gus a thogail air ais."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:474
 msgid "Expanding Your Territory!"

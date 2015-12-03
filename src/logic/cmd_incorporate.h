@@ -36,7 +36,7 @@ struct CmdIncorporate : public GameLogicCommand {
 	void write(FileWrite &, EditorGameBase &, MapObjectSaver  &) override;
 	void read (FileRead  &, EditorGameBase &, MapObjectLoader &) override;
 
-	uint8_t id() const override {return QUEUE_CMD_INCORPORATE;}
+	QueueCommandTypes id() const override {return QueueCommandTypes::kIncorporate;}
 
 private:
 	Worker * worker;
