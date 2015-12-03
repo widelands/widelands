@@ -49,8 +49,10 @@ tribes:new_productionsite_type {
       },
    },
    out_of_resource_notification = {
-      -- TRANSLATORS: "Game" means animals that you can hunt
-      title = _"Out of Game",
+		-- Translators: Short for "Out of Game" for a resource
+		title = _"No Game",
+		-- TRANSLATORS: "Game" means animals that you can hunt
+		heading = _"Out of Game",
       -- TRANSLATORS: "game" means animals that you can hunt
       message = pgettext("atlanteans_building", "The hunter working out of this hunter’s house can’t find any game in his work area."),
       productivity_threshold = 0

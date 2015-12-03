@@ -51,7 +51,9 @@ tribes:new_productionsite_type {
       },
    },
    out_of_resource_notification = {
-      title = _"Out of Trees",
+		-- Translators: Short for "Out of ..." for a resource
+		title = _"No Trees",
+		heading = _"Out of Trees",
       message = pgettext("empire_building", "The lumberjack working at this lumberjack’s house can’t find any trees in his work area. You should consider dismantling or destroying the building or building a forester’s house."),
       productivity_threshold = 66
    },
