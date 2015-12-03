@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-07 08:28+0000\n"
-"PO-Revision-Date: 2015-11-06 19:12+0000\n"
+"POT-Creation-Date: 2015-11-28 11:19+0000\n"
+"PO-Revision-Date: 2015-11-28 11:21+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -430,13 +430,13 @@ msgstr "Forgeron d'armures"
 #: ../../tribes/buildings/productionsites/atlanteans/farm/init.lua:51
 #: ../../tribes/buildings/productionsites/atlanteans/mill/init.lua:57
 #: ../../tribes/buildings/productionsites/atlanteans/quarry/init.lua:45
-#: ../../tribes/buildings/productionsites/atlanteans/shipyard/init.lua:67
-#: ../../tribes/buildings/productionsites/atlanteans/smelting_works/init.lua:56
-#: ../../tribes/buildings/productionsites/atlanteans/smokery/init.lua:58
+#: ../../tribes/buildings/productionsites/atlanteans/shipyard/init.lua:68
+#: ../../tribes/buildings/productionsites/atlanteans/smelting_works/init.lua:58
+#: ../../tribes/buildings/productionsites/atlanteans/smokery/init.lua:60
 #: ../../tribes/buildings/productionsites/atlanteans/spiderfarm/init.lua:55
 #: ../../tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:68
 #: ../../tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua:63
-#: ../../tribes/buildings/productionsites/atlanteans/weaving_mill/init.lua:58
+#: ../../tribes/buildings/productionsites/atlanteans/weaving_mill/init.lua:60
 #: ../../tribes/buildings/productionsites/atlanteans/well/init.lua:52
 #: ../../tribes/buildings/productionsites/barbarians/ax_workshop/init.lua:69
 #: ../../tribes/buildings/productionsites/barbarians/big_inn/init.lua:63
@@ -447,8 +447,8 @@ msgstr "Forgeron d'armures"
 #: ../../tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:79
 #: ../../tribes/buildings/productionsites/barbarians/quarry/init.lua:54
 #: ../../tribes/buildings/productionsites/barbarians/reed_yard/init.lua:46
-#: ../../tribes/buildings/productionsites/barbarians/shipyard/init.lua:66
-#: ../../tribes/buildings/productionsites/barbarians/smelting_works/init.lua:59
+#: ../../tribes/buildings/productionsites/barbarians/shipyard/init.lua:67
+#: ../../tribes/buildings/productionsites/barbarians/smelting_works/init.lua:61
 #: ../../tribes/buildings/productionsites/barbarians/warmill/init.lua:73
 #: ../../tribes/buildings/productionsites/barbarians/well/init.lua:54
 #: ../../tribes/buildings/productionsites/empire/armorsmithy/init.lua:73
@@ -456,8 +456,8 @@ msgstr "Forgeron d'armures"
 #: ../../tribes/buildings/productionsites/empire/inn/init.lua:57
 #: ../../tribes/buildings/productionsites/empire/marblemine/init.lua:63
 #: ../../tribes/buildings/productionsites/empire/quarry/init.lua:46
-#: ../../tribes/buildings/productionsites/empire/shipyard/init.lua:66
-#: ../../tribes/buildings/productionsites/empire/smelting_works/init.lua:62
+#: ../../tribes/buildings/productionsites/empire/shipyard/init.lua:67
+#: ../../tribes/buildings/productionsites/empire/smelting_works/init.lua:64
 #: ../../tribes/buildings/productionsites/empire/toolsmithy/init.lua:67
 #: ../../tribes/buildings/productionsites/empire/vineyard/init.lua:47
 #: ../../tribes/buildings/productionsites/empire/weaponsmithy/init.lua:69
@@ -520,10 +520,10 @@ msgid "harvesting blackroot"
 msgstr "Récolte des racines noires"
 
 #: ../../tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:73
-#: ../../tribes/buildings/productionsites/atlanteans/farm/init.lua:77
-#: ../../tribes/buildings/productionsites/barbarians/farm/init.lua:89
+#: ../../tribes/buildings/productionsites/atlanteans/farm/init.lua:76
+#: ../../tribes/buildings/productionsites/barbarians/farm/init.lua:88
 #: ../../tribes/buildings/productionsites/barbarians/reed_yard/init.lua:71
-#: ../../tribes/buildings/productionsites/empire/farm/init.lua:75
+#: ../../tribes/buildings/productionsites/empire/farm/init.lua:74
 #: ../../tribes/buildings/productionsites/empire/vineyard/init.lua:72
 msgid "Out of Fields"
 msgstr "En dehors des champs"
@@ -657,28 +657,28 @@ msgid "Farm"
 msgstr "Ferme"
 
 #. TRANSLATORS: Completed/Skipped/Did not start planting corn because ...
-#: ../../tribes/buildings/productionsites/atlanteans/farm/init.lua:61
+#: ../../tribes/buildings/productionsites/atlanteans/farm/init.lua:60
 msgid "planting corn"
 msgstr "Plante du maïs"
 
 #. TRANSLATORS: Completed/Skipped/Did not start harvesting corn because ...
-#: ../../tribes/buildings/productionsites/atlanteans/farm/init.lua:69
+#: ../../tribes/buildings/productionsites/atlanteans/farm/init.lua:68
 msgid "harvesting corn"
 msgstr "Récolte du maïs"
 
-#: ../../tribes/buildings/productionsites/atlanteans/farm/init.lua:78
+#: ../../tribes/buildings/productionsites/atlanteans/farm/init.lua:77
 msgctxt "atlanteans_building"
 msgid ""
 "The farmer working at this farm has no cleared soil to plant his seeds."
 msgstr "Le fermier qui travaille à cette ferme n'a pas nettoyé le sol pour planter ses graines."
 
-#: ../../tribes/buildings/productionsites/barbarians/farm/init.lua:90
+#: ../../tribes/buildings/productionsites/barbarians/farm/init.lua:89
 msgctxt "barbarians_building"
 msgid ""
 "The farmer working at this farm has no cleared soil to plant his seeds."
 msgstr "Le fermier qui travaille à cette ferme n'a pas nettoyé le sol pour planter ses graines."
 
-#: ../../tribes/buildings/productionsites/empire/farm/init.lua:76
+#: ../../tribes/buildings/productionsites/empire/farm/init.lua:75
 msgctxt "empire_building"
 msgid ""
 "The farmer working at this farm has no cleared soil to plant his seeds."
@@ -972,8 +972,8 @@ msgid "Sawmill"
 msgstr "Scierie"
 
 #. TRANSLATORS: Completed/Skipped/Did not start sawing logs because ...
-#: ../../tribes/buildings/productionsites/atlanteans/sawmill/init.lua:54
-#: ../../tribes/buildings/productionsites/empire/sawmill/init.lua:54
+#: ../../tribes/buildings/productionsites/atlanteans/sawmill/init.lua:56
+#: ../../tribes/buildings/productionsites/empire/sawmill/init.lua:56
 msgid "sawing logs"
 msgstr ""
 
@@ -1016,9 +1016,9 @@ msgstr "Chantier naval"
 
 #. TRANSLATORS: Completed/Skipped/Did not start constructing a ship because
 #. ...
-#: ../../tribes/buildings/productionsites/atlanteans/shipyard/init.lua:76
-#: ../../tribes/buildings/productionsites/barbarians/shipyard/init.lua:75
-#: ../../tribes/buildings/productionsites/empire/shipyard/init.lua:75
+#: ../../tribes/buildings/productionsites/atlanteans/shipyard/init.lua:77
+#: ../../tribes/buildings/productionsites/barbarians/shipyard/init.lua:76
+#: ../../tribes/buildings/productionsites/empire/shipyard/init.lua:76
 msgid "constructing a ship"
 msgstr "Construit un navire"
 
@@ -1041,16 +1041,16 @@ msgid "Smelting Works"
 msgstr "Fonderie"
 
 #. TRANSLATORS: Completed/Skipped/Did not start smelting iron because ...
-#: ../../tribes/buildings/productionsites/atlanteans/smelting_works/init.lua:66
-#: ../../tribes/buildings/productionsites/barbarians/smelting_works/init.lua:69
-#: ../../tribes/buildings/productionsites/empire/smelting_works/init.lua:72
+#: ../../tribes/buildings/productionsites/atlanteans/smelting_works/init.lua:68
+#: ../../tribes/buildings/productionsites/barbarians/smelting_works/init.lua:71
+#: ../../tribes/buildings/productionsites/empire/smelting_works/init.lua:74
 msgid "smelting iron"
 msgstr "Fait fondre du fer"
 
 #. TRANSLATORS: Completed/Skipped/Did not start smelting gold because ...
-#: ../../tribes/buildings/productionsites/atlanteans/smelting_works/init.lua:77
-#: ../../tribes/buildings/productionsites/barbarians/smelting_works/init.lua:80
-#: ../../tribes/buildings/productionsites/empire/smelting_works/init.lua:83
+#: ../../tribes/buildings/productionsites/atlanteans/smelting_works/init.lua:79
+#: ../../tribes/buildings/productionsites/barbarians/smelting_works/init.lua:82
+#: ../../tribes/buildings/productionsites/empire/smelting_works/init.lua:85
 msgid "smelting gold"
 msgstr "Fait fondre de l'or"
 
@@ -1061,12 +1061,12 @@ msgid "Smokery"
 msgstr "Fumoir"
 
 #. TRANSLATORS: Completed/Skipped/Did not start smoking meat because ...
-#: ../../tribes/buildings/productionsites/atlanteans/smokery/init.lua:68
+#: ../../tribes/buildings/productionsites/atlanteans/smokery/init.lua:70
 msgid "smoking meat"
 msgstr "fume de la viande"
 
 #. TRANSLATORS: Completed/Skipped/Did not start smoking fish because ...
-#: ../../tribes/buildings/productionsites/atlanteans/smokery/init.lua:80
+#: ../../tribes/buildings/productionsites/atlanteans/smokery/init.lua:82
 msgid "smoking fish"
 msgstr "fume du poisson"
 
@@ -1228,18 +1228,18 @@ msgstr "Atelier de tissage"
 
 #. TRANSLATORS: Completed/Skipped/Did not start weaving spidercloth because
 #. ...
-#: ../../tribes/buildings/productionsites/atlanteans/weaving_mill/init.lua:68
+#: ../../tribes/buildings/productionsites/atlanteans/weaving_mill/init.lua:70
 msgid "weaving spidercloth"
 msgstr "tisse de l'étoffe d'araignée"
 
 #. TRANSLATORS: Completed/Skipped/Did not start tailoring a tabard because ...
-#: ../../tribes/buildings/productionsites/atlanteans/weaving_mill/init.lua:79
+#: ../../tribes/buildings/productionsites/atlanteans/weaving_mill/init.lua:81
 msgid "tailoring a tabard"
 msgstr "confectionne un tabard"
 
 #. TRANSLATORS: Completed/Skipped/Did not start tailoring a golden tabard
 #. because ...
-#: ../../tribes/buildings/productionsites/atlanteans/weaving_mill/init.lua:90
+#: ../../tribes/buildings/productionsites/atlanteans/weaving_mill/init.lua:92
 msgid "tailoring a golden tabard"
 msgstr "confectionne un tabard doré"
 
@@ -1442,14 +1442,14 @@ msgid ""
 msgstr "La veine principale de charbon de cette mine est épuisée. Attendez vous à des retours sur investissement fortement diminués. Vous devriez penser à l'améliorer, la démanteler ou la détruire."
 
 #. TRANSLATORS: Completed/Skipped/Did not start planting wheat because ...
-#: ../../tribes/buildings/productionsites/barbarians/farm/init.lua:72
-#: ../../tribes/buildings/productionsites/empire/farm/init.lua:59
+#: ../../tribes/buildings/productionsites/barbarians/farm/init.lua:71
+#: ../../tribes/buildings/productionsites/empire/farm/init.lua:58
 msgid "planting wheat"
 msgstr "plante du blé"
 
 #. TRANSLATORS: Completed/Skipped/Did not start harvesting wheat because ...
-#: ../../tribes/buildings/productionsites/barbarians/farm/init.lua:80
-#: ../../tribes/buildings/productionsites/empire/farm/init.lua:67
+#: ../../tribes/buildings/productionsites/barbarians/farm/init.lua:79
+#: ../../tribes/buildings/productionsites/empire/farm/init.lua:66
 msgid "harvesting wheat"
 msgstr "récolte le blé"
 
@@ -1644,7 +1644,7 @@ msgid "Lime Kiln"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start mixing grout because ...
-#: ../../tribes/buildings/productionsites/barbarians/lime_kiln/init.lua:55
+#: ../../tribes/buildings/productionsites/barbarians/lime_kiln/init.lua:57
 msgid "mixing grout"
 msgstr ""
 
@@ -1704,7 +1704,7 @@ msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start brewing beer because ...
 #: ../../tribes/buildings/productionsites/barbarians/micro_brewery/init.lua:57
-#: ../../tribes/buildings/productionsites/empire/brewery/init.lua:55
+#: ../../tribes/buildings/productionsites/empire/brewery/init.lua:57
 msgid "brewing beer"
 msgstr "Brasse"
 
@@ -1792,7 +1792,7 @@ msgid "forging a warrior’s ax"
 msgstr "Forge une hache de guerrier"
 
 #. TRANSLATORS: Completed/Skipped/Did not start weaving because ...
-#: ../../tribes/buildings/productionsites/barbarians/weaving_mill/init.lua:58
+#: ../../tribes/buildings/productionsites/barbarians/weaving_mill/init.lua:59
 #: ../../tribes/buildings/productionsites/empire/weaving_mill/init.lua:64
 msgid "weaving"
 msgstr "tisse"
@@ -1804,7 +1804,7 @@ msgid "Wood Hardener"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start hardening wood because ...
-#: ../../tribes/buildings/productionsites/barbarians/wood_hardener/init.lua:63
+#: ../../tribes/buildings/productionsites/barbarians/wood_hardener/init.lua:65
 msgid "hardening wood"
 msgstr ""
 
@@ -1937,7 +1937,7 @@ msgstr "Marbrerie"
 
 #. TRANSLATORS: Completed/Skipped/Did not start sculpting a marble column
 #. because ...
-#: ../../tribes/buildings/productionsites/empire/stonemasons_house/init.lua:55
+#: ../../tribes/buildings/productionsites/empire/stonemasons_house/init.lua:57
 msgid "sculpting a marble column"
 msgstr ""
 
@@ -2007,7 +2007,7 @@ msgid "Winery"
 msgstr "Pressoir"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making wine because ...
-#: ../../tribes/buildings/productionsites/empire/winery/init.lua:56
+#: ../../tribes/buildings/productionsites/empire/winery/init.lua:58
 msgid "making wine"
 msgstr ""
 
@@ -2018,41 +2018,41 @@ msgid "Dungeon"
 msgstr "Donjon"
 
 #. TRANSLATORS: Completed/Skipped/Did not start sleeping because ...
-#: ../../tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:77
-#: ../../tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:92
-#: ../../tribes/buildings/trainingsites/barbarians/battlearena/init.lua:85
-#: ../../tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:104
-#: ../../tribes/buildings/trainingsites/empire/arena/init.lua:72
-#: ../../tribes/buildings/trainingsites/empire/colosseum/init.lua:65
-#: ../../tribes/buildings/trainingsites/empire/trainingcamp/init.lua:95
+#: ../../tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:79
+#: ../../tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:94
+#: ../../tribes/buildings/trainingsites/barbarians/battlearena/init.lua:87
+#: ../../tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:106
+#: ../../tribes/buildings/trainingsites/empire/arena/init.lua:74
+#: ../../tribes/buildings/trainingsites/empire/colosseum/init.lua:67
+#: ../../tribes/buildings/trainingsites/empire/trainingcamp/init.lua:97
 msgid "sleeping"
 msgstr "endormi"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:85
-#: ../../tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:112
-#: ../../tribes/buildings/trainingsites/empire/trainingcamp/init.lua:103
+#: ../../tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:87
+#: ../../tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:114
+#: ../../tribes/buildings/trainingsites/empire/trainingcamp/init.lua:105
 msgid "upgrading soldier attack from level 0 to level 1"
 msgstr "Améliore l'attaque du soldat du niveau 0 au niveau 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:96
-#: ../../tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:123
-#: ../../tribes/buildings/trainingsites/empire/trainingcamp/init.lua:114
+#: ../../tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:98
+#: ../../tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:125
+#: ../../tribes/buildings/trainingsites/empire/trainingcamp/init.lua:116
 msgid "upgrading soldier attack from level 1 to level 2"
 msgstr "Améliore l'attaque du soldat du niveau 1 au niveau 2"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:107
-#: ../../tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:134
-#: ../../tribes/buildings/trainingsites/empire/trainingcamp/init.lua:125
+#: ../../tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:109
+#: ../../tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:136
+#: ../../tribes/buildings/trainingsites/empire/trainingcamp/init.lua:127
 msgid "upgrading soldier attack from level 2 to level 3"
 msgstr "Améliore l'attaque du soldat du niveau 2 au niveau 3"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:118
-#: ../../tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:145
-#: ../../tribes/buildings/trainingsites/empire/trainingcamp/init.lua:136
+#: ../../tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:120
+#: ../../tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:147
+#: ../../tribes/buildings/trainingsites/empire/trainingcamp/init.lua:138
 msgid "upgrading soldier attack from level 3 to level 4"
 msgstr "Améliore l'attaque du soldat du niveau 3 au niveau 4"
 
@@ -2063,34 +2063,34 @@ msgid "Labyrinth"
 msgstr "Labyrinthe"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:100
+#: ../../tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:102
 msgid "upgrading soldier defense from level 0 to level 1"
 msgstr "augmenter la défense du soldat du niveau 0 au niveau 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:111
+#: ../../tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:113
 msgid "upgrading soldier defense from level 1 to level 2"
 msgstr "augmenter la défense du soldat du niveau 1 au niveau 2"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:122
-#: ../../tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:167
-#: ../../tribes/buildings/trainingsites/empire/trainingcamp/init.lua:147
+#: ../../tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:124
+#: ../../tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:169
+#: ../../tribes/buildings/trainingsites/empire/trainingcamp/init.lua:149
 msgid "upgrading soldier health from level 0 to level 1"
 msgstr "Améliore la santé du soldat du niveau 0 au niveau 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:133
-#: ../../tribes/buildings/trainingsites/barbarians/battlearena/init.lua:93
-#: ../../tribes/buildings/trainingsites/empire/arena/init.lua:80
-#: ../../tribes/buildings/trainingsites/empire/colosseum/init.lua:73
+#: ../../tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:135
+#: ../../tribes/buildings/trainingsites/barbarians/battlearena/init.lua:95
+#: ../../tribes/buildings/trainingsites/empire/arena/init.lua:82
+#: ../../tribes/buildings/trainingsites/empire/colosseum/init.lua:75
 msgid "upgrading soldier evade from level 0 to level 1"
 msgstr "Améliorer l'esquive du soldat du niveau 0 au niveau 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:144
-#: ../../tribes/buildings/trainingsites/barbarians/battlearena/init.lua:105
-#: ../../tribes/buildings/trainingsites/empire/colosseum/init.lua:84
+#: ../../tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:146
+#: ../../tribes/buildings/trainingsites/barbarians/battlearena/init.lua:107
+#: ../../tribes/buildings/trainingsites/empire/colosseum/init.lua:86
 msgid "upgrading soldier evade from level 1 to level 2"
 msgstr "Améliorer l'esquive du soldat du niveau 1 au niveau 2"
 
@@ -2113,19 +2113,19 @@ msgid "Training Camp"
 msgstr "Camp d'entraînement"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:156
+#: ../../tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:158
 msgid "upgrading soldier attack from level 4 to level 5"
 msgstr "Améliore l'attaque du soldat du niveau 4 au niveau 5"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:178
-#: ../../tribes/buildings/trainingsites/empire/trainingcamp/init.lua:158
+#: ../../tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:180
+#: ../../tribes/buildings/trainingsites/empire/trainingcamp/init.lua:160
 msgid "upgrading soldier health from level 1 to level 2"
 msgstr "Améliore la santé du soldat du niveau 1 au niveau 2"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:189
-#: ../../tribes/buildings/trainingsites/empire/trainingcamp/init.lua:169
+#: ../../tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:191
+#: ../../tribes/buildings/trainingsites/empire/trainingcamp/init.lua:171
 msgid "upgrading soldier health from level 2 to level 3"
 msgstr "Améliore la santé du soldat du niveau 2 au niveau 3"
 
@@ -2142,7 +2142,7 @@ msgid "Colosseum"
 msgstr "Colisée"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../tribes/buildings/trainingsites/empire/trainingcamp/init.lua:180
+#: ../../tribes/buildings/trainingsites/empire/trainingcamp/init.lua:182
 msgid "upgrading soldier health from level 3 to level 4"
 msgstr ""
 
@@ -2164,6 +2164,12 @@ msgstr "Quartier Général"
 msgctxt "empire_building"
 msgid "Headquarters"
 msgstr "Quartier Général"
+
+#: ../../tribes/scripting/starting_conditions/atlanteans/headquarters.lua:10
+#: ../../tribes/scripting/starting_conditions/barbarians/headquarters.lua:10
+#: ../../tribes/scripting/starting_conditions/empire/headquarters.lua:10
+msgid "Headquarters"
+msgstr ""
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/warehouses/atlanteans/port/init.lua:7
@@ -2424,6 +2430,61 @@ msgstr ""
 msgctxt "immovable"
 msgid "Ship Under Construction"
 msgstr "Site de construction navale"
+
+#: ../../tribes/preload.lua:12 ../../tribes/preload.lua:27
+#: ../../tribes/preload.lua:42
+msgid "The Widelands Development Team"
+msgstr ""
+
+#. TRANSLATORS: This is a tribe name
+#: ../../tribes/preload.lua:14
+msgid "Barbarians"
+msgstr ""
+
+#: ../../tribes/preload.lua:15
+msgid "The mighty tribes of the east-lands."
+msgstr ""
+
+#. TRANSLATORS: This is a tribe name
+#: ../../tribes/preload.lua:29
+msgid "Empire"
+msgstr ""
+
+#: ../../tribes/preload.lua:30
+msgid "This is the culture of the Roman Empire."
+msgstr ""
+
+#. TRANSLATORS: This is a tribe name
+#: ../../tribes/preload.lua:44
+msgid "Atlanteans"
+msgstr ""
+
+#: ../../tribes/preload.lua:45
+msgid ""
+"This tribe is known from the oldest tales. The sons and daughters of "
+"Atlantis."
+msgstr ""
+
+#: ../../tribes/scripting/starting_conditions/atlanteans/fortified_village.lua:10
+#: ../../tribes/scripting/starting_conditions/barbarians/fortified_village.lua:10
+#: ../../tribes/scripting/starting_conditions/empire/fortified_village.lua:10
+msgid "Fortified Village"
+msgstr ""
+
+#: ../../tribes/scripting/starting_conditions/atlanteans/fortified_village.lua:102
+#: ../../tribes/scripting/starting_conditions/barbarians/fortified_village.lua:95
+#: ../../tribes/scripting/starting_conditions/empire/fortified_village.lua:120
+msgid "Not enough space"
+msgstr ""
+
+#: ../../tribes/scripting/starting_conditions/atlanteans/fortified_village.lua:103
+#: ../../tribes/scripting/starting_conditions/barbarians/fortified_village.lua:96
+#: ../../tribes/scripting/starting_conditions/empire/fortified_village.lua:121
+msgid ""
+"Some of your starting buildings didn’t have enough room and weren’t built. "
+"You are at a disadvantage with this; consider restarting this map with a "
+"fair starting condition."
+msgstr ""
 
 #. TRANSLATORS: This is the ship's name used in lists of units
 #: ../../tribes/ships/atlanteans/init.lua:22
@@ -2979,7 +3040,7 @@ msgid "Blackroot Farmer"
 msgstr "Fermier de racines noires"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../tribes/workers/atlanteans/builder/init.lua:28
+#: ../../tribes/workers/atlanteans/builder/init.lua:29
 msgctxt "atlanteans_worker"
 msgid "Builder"
 msgstr "Bâtisseur"

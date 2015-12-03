@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-04 07:08+0000\n"
-"PO-Revision-Date: 2015-11-04 07:43+0000\n"
+"POT-Creation-Date: 2015-11-28 11:19+0000\n"
+"PO-Revision-Date: 2015-11-28 11:37+0000\n"
 "Last-Translator: Lyubomir Vasilev\n"
 "Language-Team: Bulgarian (http://www.transifex.com/widelands/widelands/language/bg/)\n"
 "MIME-Version: 1.0\n"
@@ -160,8 +160,8 @@ msgstr "Постройте бойна арена. Тя е голяма сгра�
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:63
 msgid ""
 "Since the construction will take some time, you can change the game speed "
-"using PAGE UP and PAGE DOWN."
-msgstr "Тъй като строежа ще отнеме известно време, можете да промените скоростта на играта чрез PAGE UP и PAGE DOWN."
+"using Page Up and Page Down."
+msgstr "Тъй като строежа ще отнеме известно време, можете да промените скоростта на играта чрез Page Up и Page Down."
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:71
 msgid "The Battle Arena Has Been Constructed"
