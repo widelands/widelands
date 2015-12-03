@@ -12,7 +12,7 @@ include "scripting/format_scenario.lua"
 -- =============
 -- Texts below
 -- =============
-scould_player = {
+scold_player = {
    title = _"Nice And Easy Does It All the Time",
    body = rt(
       p(_[[I am sorry, but will I have to tear this down again. We might need the space here later on. If I am too slow for you, you might want to play a real game and just find everything out for yourself. Otherwise, please bear with me, I am not the youngest and quickest anymore.]]
@@ -394,15 +394,16 @@ census_and_statistics_01 = {
 
 teaching_about_messages = {
    popup = true,
-   title = _"Introducing Messages",
+   title = _"Messages",
+   heading = _"Introducing Messages",
    body = rt(
-      h1(_"Messages") ..
       p(_[[Hi, it’s me again! This time, I have sent you a message. Messages are sent to you by Widelands to inform you about important events: empty mines, attacks on your tribe, won or lost military buildings, resources found…]]) ..
       p(_[[The message window can be toggled by the button on the very right at the bottom of the screen. This button will also change appearance whenever new messages are available, but there is also a bell sound played whenever you receive a new message.]]) ..
-      p(_[[You have two messages at the moment. This one, which you are currently reading, and the one that informed you that a new headquarters was added to your economy. Let’s learn how to archive messages: You can check them off in your inbox so that they get a tick-symbol in front of them. Then, you can click the]])
+      p(_[[You have two messages at the moment. This one, which you are currently reading, and the one that informed you that a new headquarters was added to your economy. Let’s learn how to archive messages: first, select the message that you wish to archive by clicking on it in the list. Then, click the]])
    ) ..
-   rt("image=pics/message_archive.png", p(_[[archive message button to move them into your archive.]])) ..
+   rt("image=pics/message_archive.png", p(_[[‘Archive selected message’ button to move it into your archive.]])) ..
    rt(
+      p(_[[Once you have deleted a message, another message will be selected automatically from the list.]]) ..
       paragraphdivider() ..
       listitem_bullet(_[[Archive all messages that you currently have in your inbox, including this one.]])
    ),
@@ -413,7 +414,7 @@ teaching_about_messages = {
       p(_[[The message window is central to fully controlling your tribe’s fortune. However, you will get a lot of messages in a real game. To keep your head straight, you should try to keep the inbox empty.]]) ..
       paragraphdivider() ..
       listitem_bullet(_[[Archive all your messages in your inbox now.]]) ..
-      listitem_arrow(_[[To do so, open the message window by pressing ‘n’ or clicking the rightmost button at the very bottom of the screen. Then mark all messages by checking the check box in front of them. Then, click the ‘Archive All’ button.]])
+      listitem_arrow(_[[To do so, open the message window by pressing ‘n’ or clicking the rightmost button at the very bottom of the screen. The newest message will be marked for you automatically. Keep clicking the ‘Archive selected message’ button until all messages have been archived and the list is empty.]])
    )
 }
 

@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-18 08:43+0000\n"
-"PO-Revision-Date: 2015-11-18 08:44+0000\n"
+"POT-Creation-Date: 2015-11-28 11:19+0000\n"
+"PO-Revision-Date: 2015-11-28 11:21+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -84,9 +84,9 @@ msgid ""
 "We need to find a nice place for the lumberjack’s hut. To make this easier, "
 "we can activate ‘Show Building Spaces’. There are two ways you can do this, "
 "either by clicking on the ‘Show Building Spaces’ button at the bottom of the"
-" screen, which is the fourth one from the left. Or you can use the SPACE key"
+" screen, which is the fourth one from the left. Or you can use the Space key"
 " to toggle it."
-msgstr "Nous devons trouver un bel endroit pour la cabane de bûcheron. Pour rendre ceci plus facile, nous pouvons activer 'Montrer les espaces de construction'. Il y a deux manières de faire cela, une en cliquant le bouton 'Montrer les espaces de construction' en bas de l'écran, le quatrième depuis la gauche. Ou vous pouvez utiliser la touche ESPACE pour l'activer."
+msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:46
 msgid "Left-click the ‘OK’ button to close this box and then try it."
@@ -108,10 +108,10 @@ msgstr "Il est plus facile de comprendre quel type de construction peut être co
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:54
 msgid ""
-"Do so now, either by pressing SPACE or by clicking the fourth button from "
+"Do so now, either by pressing Space or by clicking the fourth button from "
 "the left at the very bottom of the screen. Right-click on this window and "
 "then give it a try."
-msgstr "Faites le maintenant, soit en pressant ESPACE ou en cliquant sur le quatrième bouton depuis la gauche en bas de l'écran. Cliquez-droit sur cette fenêtre et essayez."
+msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:59
 msgid "Lumberjack’s Spot"
@@ -233,10 +233,10 @@ msgstr "Bien joué ! Attendons que la cabane soit finie."
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:138
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:151
 msgid ""
-"If you want things to go faster, simply use the PAGE UP key on your keyboard"
-" to increase the game speed. You can use PAGE DOWN to make the game slower "
+"If you want things to go faster, simply use the Page Up key on your keyboard"
+" to increase the game speed. You can use Page Down to make the game slower "
 "again."
-msgstr "Si vous voulez aller plus vite, appuyez simplement sur la touche P. PRÉC. (page up) de votre clavier pour augmenter la vitesse du jeu. Vous pouvez utiliser P. SUIV. (page down) pour ralentir le jeu à nouveau."
+msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:145
 msgid "Waiting for the Hut to be Finished"
@@ -495,8 +495,8 @@ msgstr "Il y a des roches à l'Ouest de votre quartier-général. Construisez un
 msgid ""
 "The quarry is a small building like the lumberjack’s hut. You can therefore "
 "build it on any field that shows a red, yellow or green house when the "
-"building spaces symbols are enabled (Press SPACE for that)."
-msgstr "La carrière est un petit bâtiment comme la cabane du bûcheron. Vous pouvez donc la construire sur n'importe quel emplacement affichant une maison rouge, jaune ou verte lorsque l'aide à la construction est activée (Appuyez sur ESPACE pour cela)."
+"building spaces symbols are enabled (Press Space for that)."
+msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:269
 msgid ""

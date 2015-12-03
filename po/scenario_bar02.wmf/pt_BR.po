@@ -4,13 +4,14 @@
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # GunChleoc, 2014
+# Patrick de Castro <raybackpc@gmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-04 07:08+0000\n"
-"PO-Revision-Date: 2015-11-04 07:11+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2015-11-28 11:19+0000\n"
+"PO-Revision-Date: 2015-11-29 17:44+0000\n"
+"Last-Translator: Patrick de Castro <raybackpc@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/widelands/widelands/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -49,7 +50,7 @@ msgstr ""
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:35
 msgid "Build a cattle farm"
-msgstr "Construir uma criação de animais"
+msgstr "Construir uma fazenda de gado"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:37
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:40
@@ -113,7 +114,7 @@ msgstr ""
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:81
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:101
 msgid "Build a battle arena and a training camp to the west of the mountains."
-msgstr "Constrói uma Arena de Batalha e uma Campo de Treinos a oeste das montanhas."
+msgstr "Construa uma Arena de Batalha e uma Campo de Treinos a oeste das montanhas."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:82
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:112
@@ -139,7 +140,7 @@ msgstr "Construa um armazém"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:92
 msgid "Build a warehouse to the west of the mountains."
-msgstr "Construir um armazém a oeste das montanhas."
+msgstr "Construa um armazém a oeste das montanhas."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:93
 msgid ""
@@ -159,7 +160,7 @@ msgid ""
 "Training sites like a training camp or a battle arena are used for training "
 "soldiers in their different attributes. These attributes are important in "
 "fights and the better a soldier is, the higher is the chance to win a fight."
-msgstr "Os Campos de treino assim como a Arena de Batalha são usados para treinar os guerreiros nos seus diferentes atributos. Estes atributos são importantes nas batalhas pois quanto melhor for o guerreiro, melhor será a sua chances de ganhar essa escaramuça."
+msgstr "Os Campos de treino assim como a Arena de Batalha são usados para treinar os guerreiros nos seus diferentes atributos. Estes atributos são importantes nas batalhas pois quanto melhor for o guerreiro, melhor será a sua chances de ganhar uma luta."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:104
 msgid "The attributes are: health, attack, defense and evade."
@@ -168,7 +169,7 @@ msgstr ""
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:109
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:111
 msgid "Build weapons production"
-msgstr "Construir os Produtores de armas"
+msgstr "Construa os fabricantes de armas"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:117
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:119
@@ -178,7 +179,7 @@ msgstr ""
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:125
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:127
 msgid "Destroy Kalitath’s army"
-msgstr "Destrua o exército Kalitaths"
+msgstr "Destrua o exército de Kalitaths"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:128
 msgid "Destroy Kalitath’s army and expand your territory to the east."
@@ -242,7 +243,7 @@ msgid ""
 " is the first war leader to leave Al’thunran, thus leaving his side weak and"
 " vulnerable. As my scouts report, he has set foot on the lower grounds "
 "around the capital, securing the outer fortification rings."
-msgstr "As novidades que a patrulha me trouxe não foram boas de ouvir. Os nossos espiões dizem-me que as outras tribos ainda continuam em guerra mas que alguns dos seus veteranos de guerra e dos lideres tribais estão ficando cansados desta guerra sem sentido. Kalitath, filho de Kun, é o primeiro chefe-guerreiro a deixar Al'Thunran, deixando assim o seu flanco vulnerável. Os meus escoteiros relataram que ele fortificou-se nos campos baixos à volta da capital, defendendo assim a linha exterior de fortificações."
+msgstr "As novidades que a patrulha me trouxe não foram boas de ouvir. Os nossos espiões dizem-me que as outras tribos ainda continuam em guerra mas que alguns dos seus veteranos de guerra e dos lideres tribais estão ficando cansados desta guerra sem sentido. Kalitath, filho de Kun, é o primeiro chefe-guerreiro a deixar Al'Thunran, deixando assim o seu flanco vulnerável. Os meus batedores relataram que ele fortificou-se nos campos baixos à volta da capital, defendendo assim a linha exterior de fortificações."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:164
 msgid "Doubts"
