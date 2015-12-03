@@ -85,7 +85,8 @@ SpinBox::SpinBox
 	 const std::string& label_text,
 	 const std::string& unit,
 	 const Image* background,
-	 SpinBox::Type type)
+	 SpinBox::Type type,
+	 int32_t step_size, int32_t big_step_size)
 	:
 	Panel(parent, x, y, std::max(w, unit_w), 0),
 	type_(type),
@@ -170,8 +171,8 @@ SpinBox::SpinBox
 				 g_gr->images().get("pics/scrollbar_right_fast.png"),
 				 _("Increase the value by 10"));
 
-		sbi_->button_ten_plus->sigclicked.connect(boost::bind(&SpinBox::change_value, boost::ref(*this), 10));
-		sbi_->button_ten_minus->sigclicked.connect(boost::bind(&SpinBox::change_value, boost::ref(*this), -10));
+		sbi_->button_ten_plus->sigclicked.connect(boost::bind(&SpinBox::change_value, boost::ref(*this), big_step_size));
+		sbi_->button_ten_minus->sigclicked.connect(boost::bind(&SpinBox::change_value, boost::ref(*this), -1 * big_step_size));
 		sbi_->button_ten_plus->set_repeating(true);
 		sbi_->button_ten_minus->set_repeating(true);
 		buttons_.push_back(sbi_->button_ten_minus);
@@ -195,8 +196,8 @@ SpinBox::SpinBox
 		box_->add(sbi_->button_plus, UI::Box::AlignTop);
 	}
 
-	sbi_->button_plus->sigclicked.connect(boost::bind(&SpinBox::change_value, boost::ref(*this), 1));
-	sbi_->button_minus->sigclicked.connect(boost::bind(&SpinBox::change_value, boost::ref(*this), -1));
+	sbi_->button_plus->sigclicked.connect(boost::bind(&SpinBox::change_value, boost::ref(*this), step_size));
+	sbi_->button_minus->sigclicked.connect(boost::bind(&SpinBox::change_value, boost::ref(*this), -1 * step_size));
 	sbi_->button_plus->set_repeating(true);
 	sbi_->button_minus->set_repeating(true);
 	buttons_.push_back(sbi_->button_minus);
@@ -307,7 +308,7 @@ void SpinBox::set_unit(const std::string & unit)
 /**
  * \returns the value
  */
-int32_t SpinBox::get_value()
+int32_t SpinBox::get_value() const
 {
 	if (type_ == SpinBox::Type::kValueList) {
 		if ((sbi_->value >= 0) && (sbi_->values.size() > static_cast<size_t>(sbi_->value))) {
@@ -323,7 +324,7 @@ int32_t SpinBox::get_value()
 /**
  * \returns the unit
  */
-std::string SpinBox::get_unit()
+std::string SpinBox::get_unit() const
 {
 	return sbi_->unit;
 }

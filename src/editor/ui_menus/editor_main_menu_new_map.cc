@@ -32,11 +32,6 @@
 #include "logic/world/world.h"
 #include "ui_basic/progresswindow.h"
 
-// NOCOM move this to map.h and use everywhere
-const std::vector<int32_t> kMapDimensions = {
-	64, 80, 96, 112, 128, 144, 160, 176, 192, 208, 224, 240, 256, 272, 288, 304,
-	320, 336, 352, 368, 384, 400, 416, 432, 448, 464, 480, 496, 512
-};
 
 MainMenuNewMap::MainMenuNewMap(EditorInteractive & parent)
 	:
@@ -51,19 +46,25 @@ MainMenuNewMap::MainMenuNewMap(EditorInteractive & parent)
 			  0, 0, 0,
 			  _("Height:"), "", g_gr->images().get("pics/but1.png"), UI::SpinBox::Type::kValueList)
 {
-	const Widelands::Map & map = parent.egbase().map();
-	size_t width_index, height_index;
+	width_.set_value_list(Widelands::kMapDimensions);
+	height_.set_value_list(Widelands::kMapDimensions);
+
 	{
-		Widelands::Extent const map_extent = map.extent();
-		for (width_index = 0; width_index < kMapDimensions.size() && kMapDimensions[width_index] < map_extent.w; ++width_index) {}
-		for (height_index = 0; kMapDimensions[height_index] < map_extent.h; ++height_index) {}
+		size_t width_index, height_index;
+		Widelands::Extent const map_extent = parent.egbase().map().extent();
+		for (width_index = 0;
+			  width_index < Widelands::kMapDimensions.size() &&
+			  Widelands::kMapDimensions[width_index] < map_extent.w;
+			  ++width_index) {}
+		width_.set_value(width_index);
+
+		for (height_index = 0;
+			  height_index < Widelands::kMapDimensions.size() &&
+			  Widelands::kMapDimensions[height_index] < map_extent.h;
+			  ++height_index) {}
+		height_.set_value(height_index);
 	}
 
-	width_.set_value_list(kMapDimensions);
-	width_.set_value(width_index);
-
-	height_.set_value_list(kMapDimensions);
-	height_.set_value(height_index);
 
 	UI::Button* createbtn = new UI::Button
 		(&box_, "create_map",
@@ -94,8 +95,8 @@ void MainMenuNewMap::clicked_create_map() {
 
 	map.create_empty_map(
 				egbase.world(),
-				width_.get_value() > 0 ? width_.get_value() : kMapDimensions[0],
-				height_.get_value() > 0 ? height_.get_value() : kMapDimensions[0],
+				width_.get_value() > 0 ? width_.get_value() : Widelands::kMapDimensions[0],
+				height_.get_value() > 0 ? height_.get_value() : Widelands::kMapDimensions[0],
 				_("No Name"),
 				g_options.pull_section("global").get_string("realname", pgettext("map_name", "Unknown")));
 

@@ -53,7 +53,9 @@ public:
 		 const std::string& label_text = std::string(),
 		 const std::string& unit = std::string(),
 		 const Image* buttonbackground = g_gr->images().get("pics/but3.png"),
-		 SpinBox::Type = SpinBox::Type::kSmall);
+		 SpinBox::Type = SpinBox::Type::kSmall,
+		  // The amount by which units are increased/decreased for small and big steps when a button is pressed.
+		 int32_t step_size = 1, int32_t big_step_size = 10);
 	~SpinBox();
 
 	void set_value(int32_t);
@@ -62,8 +64,8 @@ public:
 	void set_value_list(const std::vector<int32_t>&);
 	void set_interval(int32_t min, int32_t max);
 	void set_unit(const std::string&);
-	int32_t get_value();
-	std::string get_unit();
+	int32_t get_value() const;
+	std::string get_unit() const;
 	void add_replacement(int32_t, const std::string&);
 	void remove_replacement(int32_t);
 	bool has_replacement(int32_t) const;
