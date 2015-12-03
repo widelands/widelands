@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-07 08:28+0000\n"
-"PO-Revision-Date: 2015-11-06 16:23+0000\n"
+"POT-Creation-Date: 2015-11-28 11:19+0000\n"
+"PO-Revision-Date: 2015-11-29 10:37+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -33,15 +33,15 @@ msgstr "tog trì taighean coillteir, taigh planntair-choille agus muillean-sàbh
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:37
 msgid "Build a quarry"
-msgstr "Tog coireall"
+msgstr "Tog cuaraidh"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:39
 msgid "Quarry"
-msgstr "Coireall"
+msgstr "Cuaraidh"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:40
 msgid "Build a quarry to the south of your headquarters."
-msgstr "Tog coireall gu deas air a' phrìomh-àras agad."
+msgstr "Tog cuaraidh gu deas air a' phrìomh-àras agad."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:46
 msgid "Protect your colony"
@@ -218,13 +218,13 @@ msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:133
 msgid "The Rocks"
-msgstr "Na creagan"
+msgstr "Na carraigean"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:137
 msgid ""
 "Later, I walked down to the rocks in the south and looked for a place where "
-"we could build a quarry to get some hard stones for our larger buildings."
+"we could build a quarry to get some granite for our larger buildings."
 msgstr ""
 
 #. TRANSLATORS: Lutius - Diary
@@ -254,7 +254,7 @@ msgstr "Clachan airson an tuineachaidh"
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:157
 msgid ""
 "Great! Today the building of the quarry was completed. Now we will get "
-"enough stones to construct larger buildings."
+"enough granite and marble to construct larger buildings."
 msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:161

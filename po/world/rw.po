@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-04 07:08+0000\n"
-"PO-Revision-Date: 2015-11-04 08:26+0000\n"
+"POT-Creation-Date: 2015-11-18 08:43+0000\n"
+"PO-Revision-Date: 2015-11-18 08:44+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Kinyarwanda (http://www.transifex.com/widelands/widelands/language/rw/)\n"
 "MIME-Version: 1.0\n"
@@ -99,6 +99,13 @@ msgstr ""
 #: ../../world/immovables/grass2/init.lua:5
 #: ../../world/immovables/grass3/init.lua:5
 msgid "Grass"
+msgstr ""
+
+#: ../../world/immovables/manmade/artifacts/artifact00/init.lua:5
+#: ../../world/immovables/manmade/artifacts/artifact01/init.lua:5
+#: ../../world/immovables/manmade/artifacts/artifact02/init.lua:5
+#: ../../world/immovables/manmade/artifacts/artifact03/init.lua:5
+msgid "Artifact"
 msgstr ""
 
 #: ../../world/immovables/manmade/bar-ruin00/init.lua:5
@@ -621,34 +628,42 @@ msgid "Miscellaneous"
 msgstr ""
 
 #: ../../world/init.lua:17
-msgid "Plants"
+msgid "Artifacts"
+msgstr ""
+
+#: ../../world/init.lua:17
+msgid "These immovables are used by the win condition “Artifacts”."
 msgstr ""
 
 #: ../../world/init.lua:23
-msgid "Standing Stones"
+msgid "Plants"
 msgstr ""
 
 #: ../../world/init.lua:29
-msgid "Rocks"
+msgid "Standing Stones"
 msgstr ""
 
 #: ../../world/init.lua:35
-msgid "Coniferous Trees"
+msgid "Rocks"
 msgstr ""
 
 #: ../../world/init.lua:41
-msgid "Dead Trees"
+msgid "Coniferous Trees"
 msgstr ""
 
 #: ../../world/init.lua:47
-msgid "Deciduous Trees"
+msgid "Dead Trees"
 msgstr ""
 
 #: ../../world/init.lua:53
-msgid "Palm Trees"
+msgid "Deciduous Trees"
 msgstr ""
 
 #: ../../world/init.lua:59
+msgid "Palm Trees"
+msgstr ""
+
+#: ../../world/init.lua:65
 msgid "Wasteland Trees"
 msgstr ""
 

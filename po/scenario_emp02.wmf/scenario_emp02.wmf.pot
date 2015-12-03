@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-18 08:43+0000\n"
+"POT-Creation-Date: 2015-12-03 09:55+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -248,7 +248,7 @@ msgstr ""
 #. TRANSLATORS: Lutius - Diary
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:157
 msgid ""
-"Great! Today the building of the quarry was completed. Now we will get enough stones to construct larger buildings."
+"Great! Today the building of the quarry was completed. Now we will get enough granite and marble to construct larger buildings."
 msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:161

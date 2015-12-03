@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-10 08:55+0000\n"
-"PO-Revision-Date: 2015-11-16 16:07+0000\n"
+"POT-Creation-Date: 2015-11-18 08:43+0000\n"
+"PO-Revision-Date: 2015-11-20 00:06+0000\n"
 "Last-Translator: MiroslavR <miroslavr256@gmail.com>\n"
 "Language-Team: Slovak (http://www.transifex.com/widelands/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
@@ -84,8 +84,8 @@ msgstr "Kameňolom"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:67
 msgid ""
-"Build a quarry in the south to cut some stones and marble out of the rocks."
-msgstr "Postavte na juhu kameňolom na ťažbu kameňa a mramoru zo skál."
+"Build a quarry in the south to cut some granite and marble out of the rocks."
+msgstr "Postavte na juhu kameňolom na ťažbu žuly a mramoru zo skál."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:68
 msgid "These might be used for future buildings."
@@ -118,7 +118,7 @@ msgid ""
 "forest. Soon, we met a Barbarian tribe, which at first was friendly. A few "
 "of my men even traded with them and their children came to us, to admire our"
 " clean and tidy uniforms and weapons."
-msgstr "S armádou 150 mužov ma poslali strážiť severnú hranicu Impéria, ležiacu neďaleko pohoria Galdin vo veľkom, prekrásnom a prastarom lese. Krátko nato sme narazili na barbarský kmeň, ktorý spočiatku pôsobil priateľským dojmom. Niekoľko mojich mužov s nimi dokonca aj obchodovalo a ich deti k nám chodili obdivovať naše čisté, slušné uniformy a zbrane."
+msgstr "S armádou 150 mužov ma poslali strážiť severnú hranicu Impéria, ležiacu neďaleko pohoria Galdin vo veľkom, prekrásnom a prastarom lese. Netrvalo dlho, kým sme narazili na barbarský kmeň, ktorý spočiatku pôsobil priateľským dojmom. Niekoľko mojich mužov s nimi dokonca aj obchodovalo a ich deti k nám chodili obdivovať naše čisté, slušné uniformy a zbrane."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:87
@@ -138,7 +138,7 @@ msgid ""
 "furious at the Barbarians, yet forbade any attack on these tribes. He "
 "believed that our army was too weak to survive in a war against the "
 "Barbarians."
-msgstr "O tri týždne neskôr som sa vrátil do Fremilu, aby som mohol všetko vyrozprávať nášmu kráľovi. Hoci zúril na Barbarov, napriek tomu zakázal na tieto kmene útočiť. Podľa neho je naše vojsko na boj s Barbarmi prislabé."
+msgstr "O tri týždne neskôr som sa vrátil do Fremilu, aby som hovoril s kráľom. Hoci zúril na Barbarov, napriek tomu zakázal na tieto kmene útočiť. Podľa neho bolo naše vojsko na boj s Barbarmi prislabé."
 
 #. TRANSLATORS: Lutius - Diary. Gulf of Perl is a place name.
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:93
@@ -147,7 +147,7 @@ msgid ""
 "these Barbarians. So, I left Fremil by boat to find a new world and a new "
 "life for myself, somewhere in the south. Now I am sailing on the Gulf of "
 "Perl with my family, some of my friends and a few of my best warriors."
-msgstr "Bez boja proti Barbarom by som však tú potupu nedokázal prekonať. Opustil som preto loďou Fremil a vydal sa hľadať pre seba nový svet a nový život, kdesi na juhu. Teraz sa, spolu s rodinou, niektorými mojimi priateľmi a najlepšími bojovníkmi, plavím po Perlskom zálive."
+msgstr "Tú potupu by som však bez boja proti Barbarom nedokázal prekonať. Opustil som preto loďou Fremil a vydal sa hľadať pre seba nový svet a nový život, kdesi na juhu. Teraz sa, spolu s rodinou, niektorými mojimi priateľmi a najlepšími bojovníkmi, plavím po Perlskom zálive."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:99
 msgid "The Rough Sea"
@@ -167,7 +167,7 @@ msgstr "Zdá sa, že plavba po Perlskom zálive bola jednou z našich najväčš
 msgid ""
 "Our ship is badly damaged and is taking in more and more water. We can thank"
 " the Gods if we survive this black night with our lives."
-msgstr "Naša loď je vážne poškodená a dostáva sa do nej čoraz viac vody. Môžeme ďakovať bohom, ak prežijeme túto temnú noc."
+msgstr "Naša loď je vážne poškodená a preniká do nej čoraz viac vody. Ak prežijeme túto temnú noc, môžeme za to ďakovať bohom."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:111
 msgid "Survivors"
@@ -239,7 +239,7 @@ msgstr "Saledus s výdychom úľavy prehovorí…"
 msgid ""
 "Sire, I saw that the construction of the blockhouse was completed, so I have"
 " assigned one of my best soldiers to it to keep watch on the desert."
-msgstr "Pane, všimol som si, že sa dokončil vojenský zrub. Preto som poslal jedného zo svojich najlepších vojakov strážiť púšť."
+msgstr "Pane, všimol som si, že sa dokončil vojenský zrub, a tak som poslal jedného zo svojich najlepších vojakov strážiť púšť."
 
 #. TRANSLATORS: Saledus
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:148
@@ -348,8 +348,8 @@ msgstr "Saledus poznamená…"
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:204
 msgid ""
 "Sire, I just thought about the rocks standing on the south shore of this "
-"land. Perhaps we could cut out some useful hard stones and beautiful marble."
-msgstr ""
+"land. Perhaps we could cut out some useful granite and beautiful marble."
+msgstr "Pane, akurát som premýšľal nad skalami ležiacimi na južnom brehu tohto kraja. Možno by bolo na úžitok vyťažiť nejakú žulu a nádherný mramor."
 
 #. TRANSLATORS: Saledus
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:207
@@ -370,9 +370,9 @@ msgstr "Saledus vyzerá nadšene…"
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:216
 msgid ""
 "Sire, today we got a lot closer to our first castle. The quarry to the south"
-" began its work today and will soon provide us with stones and beautiful "
+" began its work today and will soon provide us with granite and beautiful "
 "marble."
-msgstr ""
+msgstr "Pane, dnes sme urobili veľký krok k vybudovaniu prvého hradu. Kameňolom na juhu začal dnes pracovať a čoskoro nám dodá žulu a nádherný mramor."
 
 #. TRANSLATORS: Saledus
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:219

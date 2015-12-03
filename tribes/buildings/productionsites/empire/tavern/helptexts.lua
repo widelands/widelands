@@ -22,6 +22,6 @@ function building_helptext_note()
 end
 
 function building_helptext_performance()
-   -- #TRANSLATORS: Performance helptext for a building
-   return no_performance_text_yet()
+   -- TRANSLATORS: Performance helptext for a building
+   return pgettext("empire_building", "The innkeeper needs %1% on average to prepare a ration."):bformat(format_seconds(36))
 end

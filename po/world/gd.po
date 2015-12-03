@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-07 08:28+0000\n"
-"PO-Revision-Date: 2015-11-06 16:21+0000\n"
+"POT-Creation-Date: 2015-11-28 11:19+0000\n"
+"PO-Revision-Date: 2015-11-29 10:31+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -104,6 +104,13 @@ msgstr "Cactas"
 msgid "Grass"
 msgstr "Feur"
 
+#: ../../world/immovables/manmade/artifacts/artifact00/init.lua:5
+#: ../../world/immovables/manmade/artifacts/artifact01/init.lua:5
+#: ../../world/immovables/manmade/artifacts/artifact02/init.lua:5
+#: ../../world/immovables/manmade/artifacts/artifact03/init.lua:5
+msgid "Artifact"
+msgstr "Fuigheall"
+
 #: ../../world/immovables/manmade/bar-ruin00/init.lua:5
 #: ../../world/immovables/manmade/bar-ruin01/init.lua:5
 #: ../../world/immovables/manmade/bar-ruin02/init.lua:5
@@ -145,42 +152,42 @@ msgstr "Morghan"
 #: ../../world/immovables/rocks/greenland_rocks1/init.lua:13
 #: ../../world/immovables/rocks/winterland_rocks1/init.lua:13
 msgid "Rocks 1"
-msgstr "Creagan 1"
+msgstr "Carraigean 1"
 
 #: ../../world/immovables/rocks/blackland_rocks2/init.lua:13
 #: ../../world/immovables/rocks/desert_rocks2/init.lua:13
 #: ../../world/immovables/rocks/greenland_rocks2/init.lua:13
 #: ../../world/immovables/rocks/winterland_rocks2/init.lua:13
 msgid "Rocks 2"
-msgstr "Creagan 2"
+msgstr "Carraigean 2"
 
 #: ../../world/immovables/rocks/blackland_rocks3/init.lua:13
 #: ../../world/immovables/rocks/desert_rocks3/init.lua:13
 #: ../../world/immovables/rocks/greenland_rocks3/init.lua:13
 #: ../../world/immovables/rocks/winterland_rocks3/init.lua:13
 msgid "Rocks 3"
-msgstr "Creagan 3"
+msgstr "Carraigean 3"
 
 #: ../../world/immovables/rocks/blackland_rocks4/init.lua:13
 #: ../../world/immovables/rocks/desert_rocks4/init.lua:13
 #: ../../world/immovables/rocks/greenland_rocks4/init.lua:13
 #: ../../world/immovables/rocks/winterland_rocks4/init.lua:13
 msgid "Rocks 4"
-msgstr "Creagan 4"
+msgstr "Carraigean 4"
 
 #: ../../world/immovables/rocks/blackland_rocks5/init.lua:13
 #: ../../world/immovables/rocks/desert_rocks5/init.lua:13
 #: ../../world/immovables/rocks/greenland_rocks5/init.lua:13
 #: ../../world/immovables/rocks/winterland_rocks5/init.lua:13
 msgid "Rocks 5"
-msgstr "Creagan 5"
+msgstr "Carraigean 5"
 
 #: ../../world/immovables/rocks/blackland_rocks6/init.lua:13
 #: ../../world/immovables/rocks/desert_rocks6/init.lua:13
 #: ../../world/immovables/rocks/greenland_rocks6/init.lua:13
 #: ../../world/immovables/rocks/winterland_rocks6/init.lua:13
 msgid "Rocks 6"
-msgstr "Creagan 6"
+msgstr "Carraigean 6"
 
 #: ../../world/immovables/skeleton1/init.lua:5
 #: ../../world/immovables/skeleton3/init.lua:5
@@ -624,34 +631,42 @@ msgid "Miscellaneous"
 msgstr "Measgaichte"
 
 #: ../../world/init.lua:17
+msgid "Artifacts"
+msgstr "Fuighill"
+
+#: ../../world/init.lua:17
+msgid "These immovables are used by the win condition “Artifacts”."
+msgstr "Tha na nithean do-ghluasad seo ’gan cleachdadh le cumha na buaidhe “Fuighill”."
+
+#: ../../world/init.lua:23
 msgid "Plants"
 msgstr "Lusan"
 
-#: ../../world/init.lua:23
+#: ../../world/init.lua:29
 msgid "Standing Stones"
 msgstr "Tursachan"
 
-#: ../../world/init.lua:29
-msgid "Rocks"
-msgstr "Creagan"
-
 #: ../../world/init.lua:35
+msgid "Rocks"
+msgstr "Carraigean"
+
+#: ../../world/init.lua:41
 msgid "Coniferous Trees"
 msgstr "Craobhan cònach"
 
-#: ../../world/init.lua:41
+#: ../../world/init.lua:47
 msgid "Dead Trees"
 msgstr "Craobhan marbh"
 
-#: ../../world/init.lua:47
+#: ../../world/init.lua:53
 msgid "Deciduous Trees"
 msgstr "Craobhan seargach"
 
-#: ../../world/init.lua:53
+#: ../../world/init.lua:59
 msgid "Palm Trees"
 msgstr "Craobhan pailme"
 
-#: ../../world/init.lua:59
+#: ../../world/init.lua:65
 msgid "Wasteland Trees"
 msgstr "Craobhan na talmhainn fàise"
 

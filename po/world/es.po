@@ -12,9 +12,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-07 08:47+0000\n"
-"PO-Revision-Date: 2015-11-07 16:23+0000\n"
-"Last-Translator: Madkat Here\n"
+"POT-Creation-Date: 2015-11-18 08:43+0000\n"
+"PO-Revision-Date: 2015-11-22 01:25+0000\n"
+"Last-Translator: Thadah <juchuf@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -106,6 +106,13 @@ msgstr "Cacto"
 #: ../../world/immovables/grass3/init.lua:5
 msgid "Grass"
 msgstr "Hierba"
+
+#: ../../world/immovables/manmade/artifacts/artifact00/init.lua:5
+#: ../../world/immovables/manmade/artifacts/artifact01/init.lua:5
+#: ../../world/immovables/manmade/artifacts/artifact02/init.lua:5
+#: ../../world/immovables/manmade/artifacts/artifact03/init.lua:5
+msgid "Artifact"
+msgstr "Artefacto"
 
 #: ../../world/immovables/manmade/bar-ruin00/init.lua:5
 #: ../../world/immovables/manmade/bar-ruin01/init.lua:5
@@ -627,34 +634,42 @@ msgid "Miscellaneous"
 msgstr "Miscelania"
 
 #: ../../world/init.lua:17
+msgid "Artifacts"
+msgstr "Artefactos"
+
+#: ../../world/init.lua:17
+msgid "These immovables are used by the win condition “Artifacts”."
+msgstr "Estos inamovibles son utilizados en la condición de victoria \"Artefactos\"."
+
+#: ../../world/init.lua:23
 msgid "Plants"
 msgstr "Plantas"
 
-#: ../../world/init.lua:23
+#: ../../world/init.lua:29
 msgid "Standing Stones"
 msgstr "Monolito"
 
-#: ../../world/init.lua:29
+#: ../../world/init.lua:35
 msgid "Rocks"
 msgstr "Rocas"
 
-#: ../../world/init.lua:35
+#: ../../world/init.lua:41
 msgid "Coniferous Trees"
 msgstr "Coniferas"
 
-#: ../../world/init.lua:41
+#: ../../world/init.lua:47
 msgid "Dead Trees"
 msgstr "Árboles muertos"
 
-#: ../../world/init.lua:47
+#: ../../world/init.lua:53
 msgid "Deciduous Trees"
 msgstr "Caducifolios"
 
-#: ../../world/init.lua:53
+#: ../../world/init.lua:59
 msgid "Palm Trees"
 msgstr "Palmeras"
 
-#: ../../world/init.lua:59
+#: ../../world/init.lua:65
 msgid "Wasteland Trees"
 msgstr "Árboles de páramo "
 

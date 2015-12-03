@@ -93,6 +93,10 @@ public:
 		return m_out_of_resource_title;
 	}
 
+	const std::string& out_of_resource_heading() const {
+		return m_out_of_resource_heading;
+	}
+
 	const std::string& out_of_resource_message() const {
 		return m_out_of_resource_message;
 	}
@@ -107,6 +111,7 @@ private:
 	Output   m_output_worker_types;
 	Programs m_programs;
 	std::string m_out_of_resource_title;
+	std::string m_out_of_resource_heading;
 	std::string m_out_of_resource_message;
 	int         out_of_resource_productivity_threshold_;
 

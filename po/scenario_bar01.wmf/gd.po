@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-07 08:28+0000\n"
-"PO-Revision-Date: 2015-11-06 16:18+0000\n"
+"POT-Creation-Date: 2015-11-28 11:19+0000\n"
+"PO-Revision-Date: 2015-11-30 11:02+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -37,11 +37,11 @@ msgstr "Chan fhàs craobhan ach gu slaodach. Feumaidh tu bothanan coillteir a th
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:33
 msgid "Expand north-east and build a quarry"
-msgstr "Meudaich do ranntair gu ear-thuath is tog coireall"
+msgstr "Meudaich do ranntair gu ear-thuath is tog cuaraidh"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:35
 msgid "Expand north-east to the rocks"
-msgstr "Meudaich do ranntair gu ear-thuath dha na creagan"
+msgstr "Meudaich do ranntair gu ear-thuath dha na carraigean"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:36
 msgid ""
@@ -51,7 +51,7 @@ msgstr "Tog togalaichean an airm (can freiceadain no taighean-faire) gus do rann
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:37
 msgid "Get to the rocks north-east from you and build a quarry there."
-msgstr "Ruig na creagan gu ear-thuath ’s tog coireall ann."
+msgstr "Ruig na carraigean gu ear-thuath ’s tog cuaraidh ann."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:42
 msgid "Start building mines on the mountain"
@@ -247,14 +247,14 @@ msgstr "Tog àth-aoil is eaconamaidh guail"
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:115
 msgid ""
 "Build a lime kiln fed by a well, and by a charcoal kiln or by a coal mine"
-msgstr "Tog àth-aoil le taic tobair ’s àth-ghuail no mèinne guail."
+msgstr "Tog àth-aoil le taic tobair is sluic guail-fhiodha no mèinne guail."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:116
 msgid ""
 "Better buildings may also require other improved materials besides "
-"blackwood. One of these is grout, which is produced out of raw stone, water "
+"blackwood. One of these is grout, which is produced out of granite, water "
 "and coal by a lime-burner."
-msgstr "Tha togalaichean nas fhearr feumach air stuthan togail leasaichte eile seach fiodh cruaidh a-mhàin. Is aol-tàthaidh aonan dhiubh a nì loisgeadair aoil a-mach à clachan, uisge ’s gual."
+msgstr "Tha togalaichean nas fhearr feumach air stuthan togail leasaichte eile seach fiodh cruaidh a-mhàin. Is aol-tàthaidh aonan dhiubh a nì loisgeadair aoil a-mach à gaireal, uisge ’s gual."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:118
 msgid ""
@@ -275,13 +275,13 @@ msgid ""
 "Coal can be obtained by building a charcoal kiln or a coal mine. Burning "
 "charcoal out of logs is slow. You should only build a charcoal kiln when no "
 "coal is available."
-msgstr "’S urrainn dhut taghadh an tog thu àth-ghuail no mèinn guail ach am faigh thu gual. Co-dhiù, ’s e obair slaodach a th’ ann gual a losgadh à fiodh. Cha bu chòir dhut àth-ghuail a thogail ach mur eil gual ri làimh."
+msgstr "’S urrainn dhut taghadh an tog thu sloc guail-fhiodha no mèinn guail ach am faigh thu gual. Co-dhiù, ’s e obair slaodach a th’ ann gual a losgadh à fiodh. Cha bu chòir dhut sloc guail-fhiodha a thogail ach mur eil gual ri làimh."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:125
 msgid ""
 "Build a lime kiln and a well. Additionally, build either a charcoal kiln or "
 "a coal mine for coal supply."
-msgstr "Tog àth-aoil ’s tobar. Tog àth-ghuail no mèinn guail cuideachd gus gual a thoirt dhi."
+msgstr "Tog àth-aoil ’s tobar. Tog sloc guail-fhiodha no mèinn guail cuideachd gus gual a thoirt dhi."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:130
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:132
@@ -300,7 +300,7 @@ msgstr "’S e feur tughaidh a th’ anns an treas stuth togail a dh’fheumas t
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:142
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:147
 msgid "Build a cattle farm"
-msgstr "Tog tuathanas crodh"
+msgstr "Tog taigh-buaile"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:143
 msgid ""
@@ -312,7 +312,7 @@ msgstr "Nuair a bhios eallach mòr ri ghiùlain a’ feitheamh air na rathaidean
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:145
 msgid "Oxen are bred in cattle farms out of wheat and water."
-msgstr "Togaidh tu daimh ann an tuathanas crodh le cruithneachd ’s uisge."
+msgstr "Togaidh tu daimh ann an taigh-buaile le cruithneachd ’s uisge."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:156
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:168
@@ -484,7 +484,7 @@ msgstr "Tha Kantrach a’ mothachadh…"
 msgid ""
 "I see you have already built a quarry and two lumberjack’s huts. That is a "
 "good beginning if we want to stay here longer."
-msgstr "Chì mi gun do thog sibh coireall agus dà bhothan coillteir mar-thà. Seo toiseach tòiseachaidh math ma tha sinn airson fuireach ann a sheo nas fhaide."
+msgstr "Chì mi gun do thog sibh cuaraidh agus dà bhothan coillteir mar-thà. Seo toiseach tòiseachaidh math ma tha sinn airson fuireach ann a sheo nas fhaide."
 
 #. TRANSLATORS: Khantrukh
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:254
@@ -624,7 +624,7 @@ msgid ""
 "I beg your forgiveness, chieftain, but I have a grave concern to discuss "
 "with you. The rocks close to our camp are shrinking fast under our workers’ "
 "tools, and it is a matter of little time only before they are all gone."
-msgstr "Gabhaibh mo leisgeul, a cheannaird, ach feumaidh mi ur n-aire a thoirt air cùis chudromach. Tha na creagan faisg air a’ champachadh againn a’ crìonadh gu luath fo acainnean an luchd-obrach againn agus cha mhair iad fada tuilleadh."
+msgstr "Gabhaibh mo leisgeul, a cheannaird, ach feumaidh mi ur n-aire a thoirt air cùis chudromach. Tha na carraigean faisg air a’ champachadh againn a’ crìonadh gu luath fo acainnean an luchd-obrach againn agus cha mhair iad fada tuilleadh."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:330
 msgid "Boldreth jumps up…"
@@ -637,7 +637,7 @@ msgid ""
 " to do! Thron, what would you say about my taking a few of our most restless"
 " warriors and venturing somewhat closer to the great mountain of Kal’mavrath"
 " – maybe we will find some more big rocks to please the old man?"
-msgstr "Ged nach e obair dàna gaisgich a th’ ann, seo rudeigin as urrainn dhuinn dèanamh co-dhiù! A Throin, dè do bheachd nan doirinn cuid dhe na gaisgich as an-fhoiseile againn còmhla rium ach an rùraich sinn nas fhaisge air beinn mhòr Chal’mabhraid – ’s dòcha gun lorg sinn barrachd creagan mòra ann ach am biodh am bodach toilichte?"
+msgstr "Ged nach e obair dàna gaisgich a th’ ann, seo rudeigin as urrainn dhuinn dèanamh co-dhiù! A Throin, dè do bheachd nan doirinn cuid dhe na gaisgich as an-fhoiseile againn còmhla rium ach an rùraich sinn nas fhaisge air beinn mhòr Chal’mabhraid – ’s dòcha gun lorg sinn barrachd charraigean mòra ann ach am biodh am bodach toilichte?"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:339
 msgid "Khantrukh grumbles…"
@@ -655,7 +655,7 @@ msgstr "Tha Kantrach toilichte…"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:348
 msgid "At last! These rocks should last for a while."
-msgstr "Mu dheireadh thall! Bu chòir do na creagan ud mairsinn ùine mhath."
+msgstr "Mu dheireadh thall! Bu chòir do na carraigean ud mairsinn ùine mhath."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:353
 msgid "Boldreth exclaims…"

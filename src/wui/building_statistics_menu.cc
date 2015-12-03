@@ -394,7 +394,8 @@ bool BuildingStatisticsMenu::add_button(
 														kBuildGridCellWidth,
 														kBuildGridCellHeight,
 														g_gr->images().get("pics/but1.png"),
-														descr.representative_image(),
+														descr.representative_image(&iplayer().get_player()
+																							->get_playercolor()),
 														"",
 														false,
 														true);
@@ -558,20 +559,25 @@ void BuildingStatisticsMenu::jump_building(JumpTarget target, bool reverse) {
  */
 void BuildingStatisticsMenu::think() {
 	// Adjust height to current tab
-	int tab_height =
-		35 + row_counters_[tab_panel_.active()] * (kBuildGridCellHeight + kLabelHeight + kLabelHeight);
-	tab_panel_.set_size(kWindowWidth, tab_height);
-	set_size(get_w(), tab_height + kMargin + 4 * kButtonRowHeight + get_tborder() + get_bborder());
-	navigation_panel_.set_pos(Point(0, tab_height + kMargin));
+	if (is_minimal()) {
+		tab_panel_.set_size(0, 0);
+	} else {
+		int tab_height =
+			35 + row_counters_[tab_panel_.active()] * (kBuildGridCellHeight + kLabelHeight + kLabelHeight);
+		tab_panel_.set_size(kWindowWidth, tab_height);
+		set_size(get_w(), tab_height + kMargin + 4 * kButtonRowHeight + get_tborder() + get_bborder());
+		navigation_panel_.set_pos(Point(0, tab_height + kMargin));
+	}
 
 	// Update statistics
-	const Game& game = iplayer().game();
-	const int32_t gametime = game.get_gametime();
+	const int32_t gametime = iplayer().game().get_gametime();
 
-	if ((gametime - lastupdate_) > kUpdateTimeInGametimeMs) {
+	if (was_minimized_ || (gametime - lastupdate_) > kUpdateTimeInGametimeMs) {
 		update();
 		lastupdate_ = gametime;
 	}
+	// Make sure we don't have a delay with displaying labels when we restore the window.
+	was_minimized_ = is_minimal();
 }
 
 /*

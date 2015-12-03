@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-07 08:28+0000\n"
-"PO-Revision-Date: 2015-11-06 16:27+0000\n"
+"POT-Creation-Date: 2015-11-28 11:19+0000\n"
+"PO-Revision-Date: 2015-11-30 11:00+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -42,7 +42,7 @@ msgstr "Solair stuth togail bunasach dhan eaconamaidh agad:"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:36
 msgid "Build a quarry"
-msgstr "Tog coireall"
+msgstr "Tog cuaraidh"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:37
 msgid "Build two woodcutter’s houses"
@@ -99,7 +99,7 @@ msgid ""
 "breeding more. Make sure that there are always fish left, otherwise the fish"
 " breeder won’t be able to breed new ones. The smoking happens in a smokery, "
 "you will need at least two of those."
-msgstr "'S e iasg-rèiste 's feòil-rèiste a th' anns an dà seòrsa bhìdh eile a tha cudromach. Bheir thu feòil on t-sealgair. Togaidh iasgair èisg on mhuir fhad 's a nì an tàrmachair èisg cinnteach nach tèid a h-uile iasg à bith. Dèan cinnteach gum bi èisg sa mhuir agad an-còmhnaidh oir cha tèid leis an tàrmachair cur riutha. Nì thu an toiteadh san taigh-toitidh is feumaidh tu dà dhiubh a thogail air a char as lugha."
+msgstr "'S e iasg-rèiste 's feòil-rèiste a th' anns an dà seòrsa bhìdh eile a tha cudromach. Bheir thu feòil on t-sealgair. Togaidh iasgair èisg on mhuir fhad 's a nì an gille-iasg cinnteach nach dèid a h-uile iasg à bith. Dèan cinnteach gum bi èisg sa mhuir agad an-còmhnaidh oir cha dèid leis an gile-iasg cur riutha. Nì thu an toiteadh san taigh-toitidh is feumaidh tu dà dhiubh a thogail air a char as lugha."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:60
 msgid "Build a farm and a blackroot farm"
@@ -129,7 +129,7 @@ msgstr "Tog taigh-iasgair faisg air uisge gus èisg a thogail"
 msgid ""
 "Build a fish breeder’s house close to the fisher to make sure the fish do "
 "not die out"
-msgstr "Tog taigh tàrmachair èisg faisg air an taigh-iasgair ach nach tèid na h-èisg à bith"
+msgstr "Tog ionad-àraich èisg faisg air an taigh-iasgair ach nach tèid na h-èisg à bith"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:67
 msgid "Build two smokeries to smoke raw meat and fish"
@@ -137,7 +137,7 @@ msgstr "Tog dà thaigh-toitidh gus na h-èisg 's an fheòil a thoiteadh"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:73
 msgid "Build a spider farm and a weaving mill"
-msgstr "Tog tuathanas dhamhan is taigh nam beart"
+msgstr "Tog rainse dhamhan is taigh nam beart"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:75
 msgid "Spidercloth Production"
@@ -158,7 +158,7 @@ msgstr "Tog taigh nam beart"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:78
 msgid "Build a spider farm"
-msgstr "Tog tuathanas dhamhan"
+msgstr "Tog rainse dhamhan"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:79
 msgid "Build a gold spinning mill"
@@ -227,11 +227,11 @@ msgstr "Tog toll-dubh is cuartan"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:109
 msgid "Build a warehouse and a horse farm"
-msgstr "Tog taigh-stòrais is tuathanas each"
+msgstr "Tog taigh-stòrais is stàball"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:111
 msgid "Warehouse and Horse Farm"
-msgstr "Taigh-stòrais is tuathanas each"
+msgstr "Taigh-stòrais is stàball"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:112
 msgid ""
@@ -247,7 +247,7 @@ msgstr "Tog taigh-stòrais"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:114
 msgid "Build a horse farm"
-msgstr "Tog tuathanas each"
+msgstr "Tog stàball"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:120
 msgid "Build 3 ships to escape from the island"
@@ -447,8 +447,8 @@ msgid ""
 "should build housings for some woodcutters and of course also for foresters,"
 " so we will not run out of trees. Oh, and we mustn’t forget the sawmill, for"
 " most buildings can’t be made out of logs alone. Stronger buildings also "
-"need stone, but there is plenty to the north-east of here; we just need to "
-"build a quarry, and my stonemasons will go to work promptly."
+"need granite, but there is plenty to the north-east of here; we just need to"
+" build a quarry, and my stonemasons will go to work promptly."
 msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:197

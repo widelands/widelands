@@ -8,6 +8,7 @@ tribes:new_productionsite_type {
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "big",
+   needs_seafaring = true,
 
    buildcost = {
       log = 5,
@@ -58,6 +59,7 @@ tribes:new_productionsite_type {
          descname = _"weaving",
          actions = {
             "sleep=20000",
+            "check_map=seafaring",
             "return=skipped unless economy needs cloth",
             "consume=thatch_reed",
             "animate=working 25000",

@@ -56,7 +56,7 @@ AbstractWaresDisplay::AbstractWaresDisplay
 	m_curware
 		(this,
 		 0, get_inner_h() - 25, get_inner_w(), 20,
-		 _("Stock"), UI::Align_Center),
+		 "", UI::Align_Center),
 
 	m_selectable(selectable),
 	m_horizontal(horizontal),
@@ -67,7 +67,16 @@ AbstractWaresDisplay::AbstractWaresDisplay
 		m_selected.insert(std::make_pair(index, false));
 		m_hidden.insert(std::make_pair(index, false));
 		m_in_selection.insert(std::make_pair(index, false));
+
+		// Prerender all texts to avoid flickering with mouseover
+		m_curware.set_text(index != Widelands::INVALID_INDEX ?
+									 (m_type == Widelands::wwWORKER ?
+										  m_tribe.get_worker_descr(index)->descname() :
+										  m_tribe.get_ware_descr(index)->descname()) :
+									 "");
 	}
+
+	m_curware.set_text(_("Stock"));
 
 	// Find out geometry from icons_order
 	unsigned int columns = icons_order().size();
