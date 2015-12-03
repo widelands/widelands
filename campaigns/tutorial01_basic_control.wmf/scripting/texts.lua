@@ -12,7 +12,7 @@ include "scripting/format_scenario.lua"
 -- =============
 -- Texts below
 -- =============
-scould_player = {
+scold_player = {
    title = _"Nice And Easy Does It All the Time",
    body = rt(
       p(_[[I am sorry, but will I have to tear this down again. We might need the space here later on. If I am too slow for you, you might want to play a real game and just find everything out for yourself. Otherwise, please bear with me, I am not the youngest and quickest anymore.]]
@@ -41,7 +41,7 @@ initial_message_02 = {
       h1(_"Let’s dive right in!") ..
       p(_[[There are three different tribes in Widelands: the Barbarians, the Empire and the Atlanteans. All tribes have a different economy, strength and weaknesses, but the general gameplay is the same for all. We will play the Barbarians for now.]]) ..
       p(_[[You will usually start the game with one headquarters. This is the big building with the blue flag in front of it. The headquarters is a warehouse that stores wares, workers and soldiers. Some wares are needed for building houses, others for making other wares. Obviously, the wares in the headquarters will not last forever, so you must make sure to replace them. The most important wares in the early game are the basic construction wares: logs and granite. Let’s make sure that we do not run out of logs. For this, we need a lumberjack and a hut for him to stay in.]]) ..
-      p(_[[We need to find a nice place for the lumberjack’s hut. To make this easier, we can activate ‘Show Building Spaces’. There are two ways you can do this, either by clicking on the ‘Show Building Spaces’ button at the bottom of the screen, which is the fourth one from the left. Or you can use the SPACE key to toggle it.]]) ..
+      p(_[[We need to find a nice place for the lumberjack’s hut. To make this easier, we can activate ‘Show Building Spaces’. There are two ways you can do this, either by clicking on the ‘Show Building Spaces’ button at the bottom of the screen, which is the fourth one from the left. Or you can use the Space key to toggle it.]]) ..
       paragraphdivider() ..
       listitem_bullet(_[[Left-click the ‘OK’ button to close this box and then try it.]])
    ),
@@ -51,7 +51,7 @@ initial_message_02 = {
       h1(_"Show Building Spaces") ..
       p(_[[It is easier to understand what type of buildings can be built on which field when the symbols for the building spaces are enabled.]]) ..
       paragraphdivider() ..
-      listitem_bullet(_[[Do so now, either by pressing SPACE or by clicking the fourth button from the left at the very bottom of the screen. Right-click on this window and then give it a try.]])
+      listitem_bullet(_[[Do so now, either by pressing Space or by clicking the fourth button from the left at the very bottom of the screen. Right-click on this window and then give it a try.]])
    )
 }
 
@@ -135,7 +135,7 @@ lumberjack_message_06 = {
    position = "topright",
    body = rt(
       p(_[[Well done! Let’s wait till the hut is finished.]]) ..
-      p(_[[If you want things to go faster, simply use the PAGE UP key on your keyboard to increase the game speed. You can use PAGE DOWN to make the game slower again.]])
+      p(_[[If you want things to go faster, simply use the Page Up key on your keyboard to increase the game speed. You can use Page Down to make the game slower again.]])
    ),
    h = 300,
    w = 350
@@ -148,7 +148,7 @@ flag_built = {
       p(_[[I wanted to teach you how to build new flags, but it seems you have already found out on your own. Well done!]]) ..
       p(_[[Now you have split the road in two parts with a carrier each. This means less work for him and higher efficiency for us. You should therefore always place as many flags as possible on your roads.]]) ..
       p(_[[Now we only have to wait till the hut is finished.]]) ..
-      p(_[[If you want things to go faster, simply use the PAGE UP key on your keyboard to increase the game speed. You can use PAGE DOWN to make the game slower again.]])
+      p(_[[If you want things to go faster, simply use the Page Up key on your keyboard to increase the game speed. You can use Page Down to make the game slower again.]])
    ),
    h = 350
 }
@@ -265,7 +265,7 @@ order_quarry_recap_how_to_build = {
       h1(_"Build a Quarry") ..
       paragraphdivider() ..
       listitem_bullet(_[[There are some rocks to the west of your headquarters. Build a quarry right next to them.]]) ..
-      listitem_arrow(_[[The quarry is a small building like the lumberjack’s hut. You can therefore build it on any field that shows a red, yellow or green house when the building spaces symbols are enabled (Press SPACE for that).]]) ..
+      listitem_arrow(_[[The quarry is a small building like the lumberjack’s hut. You can therefore build it on any field that shows a red, yellow or green house when the building spaces symbols are enabled (Press Space for that).]]) ..
       listitem_arrow(_[[Just click on any house symbol next to the rocks, select the small buildings tab in the window that opens up, then click on the quarry symbol.]])
    )
 }
@@ -394,15 +394,16 @@ census_and_statistics_01 = {
 
 teaching_about_messages = {
    popup = true,
-   title = _"Introducing Messages",
+   title = _"Messages",
+   heading = _"Introducing Messages",
    body = rt(
-      h1(_"Messages") ..
       p(_[[Hi, it’s me again! This time, I have sent you a message. Messages are sent to you by Widelands to inform you about important events: empty mines, attacks on your tribe, won or lost military buildings, resources found…]]) ..
       p(_[[The message window can be toggled by the button on the very right at the bottom of the screen. This button will also change appearance whenever new messages are available, but there is also a bell sound played whenever you receive a new message.]]) ..
-      p(_[[You have two messages at the moment. This one, which you are currently reading, and the one that informed you that a new headquarters was added to your economy. Let’s learn how to archive messages: You can check them off in your inbox so that they get a tick-symbol in front of them. Then, you can click the]])
+      p(_[[You have two messages at the moment. This one, which you are currently reading, and the one that informed you that a new headquarters was added to your economy. Let’s learn how to archive messages: first, select the message that you wish to archive by clicking on it in the list. Then, click the]])
    ) ..
-   rt("image=pics/message_archive.png", p(_[[archive message button to move them into your archive.]])) ..
+   rt("image=pics/message_archive.png", p(_[[‘Archive selected message’ button to move it into your archive.]])) ..
    rt(
+      p(_[[Once you have deleted a message, another message will be selected automatically from the list.]]) ..
       paragraphdivider() ..
       listitem_bullet(_[[Archive all messages that you currently have in your inbox, including this one.]])
    ),
@@ -413,7 +414,7 @@ teaching_about_messages = {
       p(_[[The message window is central to fully controlling your tribe’s fortune. However, you will get a lot of messages in a real game. To keep your head straight, you should try to keep the inbox empty.]]) ..
       paragraphdivider() ..
       listitem_bullet(_[[Archive all your messages in your inbox now.]]) ..
-      listitem_arrow(_[[To do so, open the message window by pressing ‘n’ or clicking the rightmost button at the very bottom of the screen. Then mark all messages by checking the check box in front of them. Then, click the ‘Archive All’ button.]])
+      listitem_arrow(_[[To do so, open the message window by pressing ‘n’ or clicking the rightmost button at the very bottom of the screen. The newest message will be marked for you automatically. Keep clicking the ‘Archive selected message’ button until all messages have been archived and the list is empty.]])
    )
 }
 
