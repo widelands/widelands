@@ -35,7 +35,7 @@
 
 MainMenuNewMap::MainMenuNewMap(EditorInteractive & parent)
 	:
-	UI::Window(&parent, "new_map_menu", 0, 0, 280, 150, _("New Map")),
+	UI::Window(&parent, "new_map_menu", 0, 0, 360, 150, _("New Map")),
 	margin_(4),
 	box_width_(get_inner_w() -  2 * margin_),
 	box_(this, margin_, margin_, UI::Box::Vertical, 0, 0, margin_),
@@ -44,7 +44,15 @@ MainMenuNewMap::MainMenuNewMap(EditorInteractive & parent)
 			 _("Width:"), "", g_gr->images().get("pics/but1.png"), UI::SpinBox::Type::kValueList),
 	height_(&box_, 0, 0, box_width_, 105,
 			  0, 0, 0,
-			  _("Height:"), "", g_gr->images().get("pics/but1.png"), UI::SpinBox::Type::kValueList)
+			  _("Height:"), "", g_gr->images().get("pics/but1.png"), UI::SpinBox::Type::kValueList),
+	// Buttons
+	button_box_(&box_, 0, 0, UI::Box::Horizontal, 0, 0, margin_),
+	ok_button_(&button_box_, "create_map", 0, 0, box_width_ / 2 - margin_, 0,
+		 g_gr->images().get("pics/but5.png"),
+		 _("Create Map")),
+	cancel_button_(&button_box_, "generate_map", 0, 0, box_width_ / 2 - margin_, 0,
+		 g_gr->images().get("pics/but1.png"),
+		 _("Cancel"))
 {
 	width_.set_value_list(Widelands::kMapDimensions);
 	height_.set_value_list(Widelands::kMapDimensions);
@@ -65,20 +73,18 @@ MainMenuNewMap::MainMenuNewMap(EditorInteractive & parent)
 		height_.set_value(height_index);
 	}
 
-
-	UI::Button* createbtn = new UI::Button
-		(&box_, "create_map",
-		 0, 0, box_width_, 0,
-		 g_gr->images().get("pics/but5.png"),
-		 _("Create Map"));
-	createbtn->sigclicked.connect(boost::bind(&MainMenuNewMap::clicked_create_map, this));
-
 	box_.add(&width_, UI::Box::AlignLeft);
 	box_.add(&height_, UI::Box::AlignLeft);
 	box_.add_space(2 * margin_);
-	box_.add(createbtn, UI::Box::AlignLeft);
+
+	cancel_button_.sigclicked.connect(boost::bind(&MainMenuNewMap::clicked_cancel, this));
+	ok_button_.sigclicked.connect(boost::bind(&MainMenuNewMap::clicked_create_map, this));
+	button_box_.add(&cancel_button_, UI::Box::AlignLeft);
+	button_box_.add(&ok_button_, UI::Box::AlignLeft);
+	box_.add(&button_box_, UI::Box::AlignLeft);
+
 	box_.set_size(box_width_,
-					  width_.get_h() + height_.get_h() + createbtn->get_h() + 5 * margin_);
+					  width_.get_h() + height_.get_h() + button_box_.get_h() + 5 * margin_);
 	set_size(get_w(), box_.get_h() + 2 * margin_ + get_h() - get_inner_h());
 	center_to_parent();
 }
@@ -111,3 +117,8 @@ void MainMenuNewMap::clicked_create_map() {
 
 	die();
 }
+
+void MainMenuNewMap::clicked_cancel() {
+	die();
+}
+

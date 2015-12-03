@@ -37,12 +37,17 @@ struct MainMenuNewMap : public UI::Window {
 
 private:
 	void clicked_create_map();
+	void clicked_cancel();
 
 	int32_t margin_;
 	int32_t box_width_;
 	UI::Box box_;
 	UI::SpinBox width_;
 	UI::SpinBox height_;
+
+	// Buttons
+	UI::Box button_box_;
+	UI::Button ok_button_, cancel_button_;
 };
 
 #endif  // end of include guard: WL_EDITOR_UI_MENUS_EDITOR_MAIN_MENU_NEW_MAP_H
