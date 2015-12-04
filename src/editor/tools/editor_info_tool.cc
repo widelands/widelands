@@ -107,13 +107,13 @@ int32_t EditorInfoTool::handle_click_impl(Widelands::Map& map,
 
 	buf += "• " + (boost::format(pgettext("terrain_name", "Name: %s")) % ter.descname()).str() + "\n";
 
-	std::vector<std::string> is_list;
+	std::vector<std::string> terrain_is_strings;
 	for (const Widelands::TerrainDescription::Type& terrain_type : ter.get_types()) {
-		is_list.push_back(terrain_type.descname);
+		terrain_is_strings.push_back(terrain_type.descname);
 	}
 	/** TRANSLATORS: "Is" is a list of terrain properties, e.g. "arable", "unreachable and impassable" */
 	buf += "• " + (boost::format(_("Is: %s"))
-						% i18n::localize_list(is_list, i18n::ConcatenateWith::AMPERSAND)).str() + "\n";
+						% i18n::localize_list(terrain_is_strings, i18n::ConcatenateWith::AMPERSAND)).str() + "\n";
 	buf += "• " + (boost::format(_("Editor Category: %s")) % ter.editor_category().descname()).str() + "\n";
 
 	// *** Resources info

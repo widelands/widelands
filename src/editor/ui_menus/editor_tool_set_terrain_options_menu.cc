@@ -50,6 +50,7 @@ UI::Checkbox* create_terrain_checkbox(UI::Panel* parent,
 
 	std::vector<std::string> tooltips;
 
+	// Blit the main terrain image
 	const Texture& terrain_texture = terrain_descr.get_texture(0);
 	Texture* texture = new Texture(terrain_texture.width(), terrain_texture.height());
 	blit(Rect(0, 0, terrain_texture.width(), terrain_texture.height()),
@@ -59,6 +60,7 @@ UI::Checkbox* create_terrain_checkbox(UI::Panel* parent,
 					  BlendMode::UseAlpha, texture);
 	Point pt(1, terrain_texture.height() - kSmallPicSize - 1);
 
+	// Collect tooltips and blit small icons representing "is" values
 	for (const TerrainDescription::Type& terrain_type : terrain_descr.get_types()) {
 		tooltips.push_back(terrain_type.descname);
 
