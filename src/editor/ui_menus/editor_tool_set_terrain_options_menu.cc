@@ -42,118 +42,37 @@ namespace {
 
 using namespace Widelands;
 
-static const int32_t check[] = {
-	TerrainDescription::Type::kArable,                                        // Arable implies walkable
-	TerrainDescription::Type::kWalkable,
-	TerrainDescription::Type::kMineable,                                      // Mountain implies walkable"
-	TerrainDescription::Type::kImpassable,
-	TerrainDescription::Type::kUnreachable |                                  // Unreachable is impassable
-									TerrainDescription::Type::kImpassable,
-	TerrainDescription::Type::kWater |                                        // Water is impassable
-									TerrainDescription::Type::kImpassable,
-	-1,  // end marker
-};
-
 UI::Checkbox* create_terrain_checkbox(UI::Panel* parent,
                                       const TerrainDescription& terrain_descr,
                                       std::vector<std::unique_ptr<const Image>>* offscreen_images) {
-	const Image* arable = g_gr->images().get("pics/terrain_arable.png");
-	const Image* water = g_gr->images().get("pics/terrain_water.png");
-	const Image* mineable = g_gr->images().get("pics/terrain_mineable.png");
-	const Image* unreachable = g_gr->images().get("pics/terrain_unreachable.png");
-	const Image* impassable = g_gr->images().get("pics/terrain_impassable.png");
-	const Image* walkable = g_gr->images().get("pics/terrain_walkable.png");
 
-	constexpr int kSmallPicHeight = 20;
-	constexpr int kSmallPicWidth = 20;
+	constexpr int kSmallPicSize = 20;
 
 	std::vector<std::string> tooltips;
 
-	for (size_t checkfor = 0; check[checkfor] >= 0; ++checkfor) {
-		const TerrainDescription::Type ter_is = terrain_descr.get_is();
-		if (ter_is != check[checkfor])
-			continue;
+	const Texture& terrain_texture = terrain_descr.get_texture(0);
+	Texture* texture = new Texture(terrain_texture.width(), terrain_texture.height());
+	blit(Rect(0, 0, terrain_texture.width(), terrain_texture.height()),
+					  terrain_texture,
+					  Rect(0, 0, terrain_texture.width(), terrain_texture.height()),
+					  1.,
+					  BlendMode::UseAlpha, texture);
+	Point pt(1, terrain_texture.height() - kSmallPicSize - 1);
 
-		const Texture& terrain_texture = terrain_descr.get_texture(0);
-		Texture* texture = new Texture(terrain_texture.width(), terrain_texture.height());
-		blit(Rect(0, 0, terrain_texture.width(), terrain_texture.height()),
-		              terrain_texture,
-		              Rect(0, 0, terrain_texture.width(), terrain_texture.height()),
-		              1.,
-		              BlendMode::UseAlpha, texture);
-		Point pt(1, terrain_texture.height() - kSmallPicHeight - 1);
+	for (const TerrainDescription::Type& terrain_type : terrain_descr.get_types()) {
+		tooltips.push_back(terrain_type.descname);
 
-		if (ter_is == TerrainDescription::Type::kArable) {
-			blit(Rect(pt.x, pt.y, arable->width(), arable->height()),
-				 *arable,
-				 Rect(0, 0, arable->width(), arable->height()),
-			     1.,
-			     BlendMode::UseAlpha,
-			     texture);
-			pt.x += kSmallPicWidth + 1;
-			/** TRANSLATORS: This is a terrain type tooltip in the editor */
-			tooltips.push_back(_("arable"));
-		} else {
-			if (ter_is & TerrainDescription::Type::kWater) {
-				blit(Rect(pt.x, pt.y, water->width(), water->height()),
-				     *water,
-				     Rect(0, 0, water->width(), water->height()),
-				     1.,
-				     BlendMode::UseAlpha,
-				     texture);
-				pt.x += kSmallPicWidth + 1;
-				/** TRANSLATORS: This is a terrain type tooltip in the editor */
-				tooltips.push_back(_("navigable"));
-			}
-			else if (ter_is & TerrainDescription::Type::kMineable) {
-				blit(Rect(pt.x, pt.y, mineable->width(), mineable->height()),
-					 *mineable,
-					 Rect(0, 0, mineable->width(), mineable->height()),
-					 1.,
-					 BlendMode::UseAlpha,
-					 texture);
-				pt.x += kSmallPicWidth + 1;
-				/** TRANSLATORS: This is a terrain type tooltip in the editor */
-				tooltips.push_back(_("mineable"));
-			}
-			if (ter_is & TerrainDescription::Type::kUnreachable) {
-				blit(Rect(pt.x, pt.y, unreachable->width(), unreachable->height()),
-					 *unreachable,
-					 Rect(0, 0, unreachable->width(), unreachable->height()),
-				     1.,
-				     BlendMode::UseAlpha,
-				     texture);
-				pt.x += kSmallPicWidth + 1;
-				/** TRANSLATORS: This is a terrain type tooltip in the editor */
-				tooltips.push_back(_("unreachable"));
-			}
-			if (ter_is & TerrainDescription::Type::kImpassable) {
-				blit(Rect(pt.x, pt.y, impassable->width(), impassable->height()),
-				     *impassable,
-				     Rect(0, 0, impassable->width(), impassable->height()),
-				     1.,
-				     BlendMode::UseAlpha,
-				     texture);
-				pt.x += kSmallPicWidth + 1;
-				/** TRANSLATORS: This is a terrain type tooltip in the editor */
-				tooltips.push_back(_("impassable"));
-			}
-			if (ter_is & TerrainDescription::Type::kWalkable) {
-				blit(Rect(pt.x, pt.y, walkable->width(), walkable->height()),
-					 *walkable,
-					 Rect(0, 0, walkable->width(), walkable->height()),
-				     1.,
-				     BlendMode::UseAlpha,
-				     texture);
-				/** TRANSLATORS: This is a terrain type tooltip in the editor */
-				 tooltips.push_back(_("walkable"));
-			}
-		}
-
-		// Make sure we delete this later on.
-		offscreen_images->emplace_back(texture);
-		break;
+		blit(Rect(pt.x, pt.y, terrain_type.icon->width(), terrain_type.icon->height()),
+			 *terrain_type.icon,
+			 Rect(0, 0, terrain_type.icon->width(), terrain_type.icon->height()),
+			  1.,
+			  BlendMode::UseAlpha,
+			  texture);
+		pt.x += kSmallPicSize + 1;
 	}
+	// Make sure we delete this later on.
+	offscreen_images->emplace_back(texture);
+
 	/** TRANSLATORS: %1% = terrain name, %2% = list of terrain types  */
 	const std::string tooltip = ((boost::format("%1%: %2%"))
 								  % terrain_descr.descname()

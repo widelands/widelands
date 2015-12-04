@@ -37,7 +37,7 @@ int32_t resource_value(const Widelands::TerrainDescription& terrain,
 	if (!terrain.is_resource_valid(resource)) {
 		return -1;
 	}
-	if (terrain.get_is() & Widelands::TerrainDescription::Type::kImpassable) {
+	if (terrain.get_is() & Widelands::TerrainDescription::Is::kImpassable) {
 		return 8;
 	}
 	return 1;

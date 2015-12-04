@@ -107,29 +107,13 @@ int32_t EditorInfoTool::handle_click_impl(Widelands::Map& map,
 
 	buf += "• " + (boost::format(pgettext("terrain_name", "Name: %s")) % ter.descname()).str() + "\n";
 
-	Widelands::TerrainDescription::Type terrain_is = ter.get_is();
-	std::vector<std::string> terrain_is_strings;
-
-	if (terrain_is == Widelands::TerrainDescription::Type::kArable) {
-		terrain_is_strings.push_back(_("arable"));
+	std::vector<std::string> is_list;
+	for (const Widelands::TerrainDescription::Type& terrain_type : ter.get_types()) {
+		is_list.push_back(terrain_type.descname);
 	}
-	if (terrain_is & Widelands::TerrainDescription::Type::kWalkable) {
-		terrain_is_strings.push_back(_("walkable"));
-	}
-	if (terrain_is & Widelands::TerrainDescription::Type::kWater) {
-		terrain_is_strings.push_back(_("navigable"));
-	}
-	if (terrain_is & Widelands::TerrainDescription::Type::kUnreachable) {
-		terrain_is_strings.push_back(_("unreachable"));
-	}
-	if (terrain_is & Widelands::TerrainDescription::Type::kMineable) {
-		terrain_is_strings.push_back(_("mineable"));
-	}
-	if (terrain_is & Widelands::TerrainDescription::Type::kImpassable) {
-		terrain_is_strings.push_back(_("impassable"));
-	}
+	/** TRANSLATORS: "Is" is a list of terrain properties, e.g. "arable", "unreachable and impassable" */
 	buf += "• " + (boost::format(_("Is: %s"))
-						% i18n::localize_list(terrain_is_strings, i18n::ConcatenateWith::AMPERSAND)).str() + "\n";
+						% i18n::localize_list(is_list, i18n::ConcatenateWith::AMPERSAND)).str() + "\n";
 	buf += "• " + (boost::format(_("Editor Category: %s")) % ter.editor_category().descname()).str() + "\n";
 
 	// *** Resources info
