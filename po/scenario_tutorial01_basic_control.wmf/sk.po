@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-18 08:43+0000\n"
-"PO-Revision-Date: 2015-11-18 22:02+0000\n"
+"POT-Creation-Date: 2015-11-28 11:19+0000\n"
+"PO-Revision-Date: 2015-11-28 14:06+0000\n"
 "Last-Translator: MiroslavR <miroslavr256@gmail.com>\n"
 "Language-Team: Slovak (http://www.transifex.com/widelands/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
@@ -83,9 +83,9 @@ msgid ""
 "We need to find a nice place for the lumberjack’s hut. To make this easier, "
 "we can activate ‘Show Building Spaces’. There are two ways you can do this, "
 "either by clicking on the ‘Show Building Spaces’ button at the bottom of the"
-" screen, which is the fourth one from the left. Or you can use the SPACE key"
+" screen, which is the fourth one from the left. Or you can use the Space key"
 " to toggle it."
-msgstr "Potrebujeme nájsť vhodné miesto pre drevorubačskú chatrč. Môžeme si to uľahčiť aktivovaním funkcie na zobrazenie stavebných miest. Možno to spraviť dvojakým spôsobom: buď kliknutím na tlačidlo „Zobraziť stavebné miesta“, ktoré sa nachádza naspodku obrazovky (štvrté zľava), alebo stlačením klávesu MEDZERNÍK."
+msgstr "Potrebujeme nájsť vhodné miesto pre drevorubačskú chatrč. Môžeme si to uľahčiť aktivovaním funkcie na zobrazenie stavebných miest. Možno to spraviť dvojakým spôsobom: buď kliknutím na tlačidlo „Zobraziť stavebné miesta“, ktoré sa nachádza naspodku obrazovky (štvrté zľava), alebo stlačením klávesu medzerník."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:46
 msgid "Left-click the ‘OK’ button to close this box and then try it."
@@ -107,10 +107,10 @@ msgstr "Je ľahšie pochopiť, ktoré typy budov možno postaviť na ktorých po
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:54
 msgid ""
-"Do so now, either by pressing SPACE or by clicking the fourth button from "
+"Do so now, either by pressing Space or by clicking the fourth button from "
 "the left at the very bottom of the screen. Right-click on this window and "
 "then give it a try."
-msgstr "Zobrazte ich, a to buď stlačením klávesu MEDZERNÍK, alebo kliknutím na štvrté tlačidlo zľava na úplnom spodku obrazovky. Kliknite pravým tlačidlom myši na toto okno a vyskúšajte to."
+msgstr "Zobrazte ich, a to buď stlačením klávesu medzerník, alebo kliknutím na štvrté tlačidlo zľava na úplnom spodku obrazovky. Kliknite pravým tlačidlom myši na toto okno a vyskúšajte to."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:59
 msgid "Lumberjack’s Spot"
@@ -232,10 +232,10 @@ msgstr "Výborne! Počkajme, kým postavia chatrč."
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:138
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:151
 msgid ""
-"If you want things to go faster, simply use the PAGE UP key on your keyboard"
-" to increase the game speed. You can use PAGE DOWN to make the game slower "
+"If you want things to go faster, simply use the Page Up key on your keyboard"
+" to increase the game speed. You can use Page Down to make the game slower "
 "again."
-msgstr "Ak chcete zvýšiť rýchlosť hry, jednoducho stlačte kláves PAGE UP na klávesnici. Hru môžete opäť spomaliť stlačením klávesu PAGE DOWN."
+msgstr "Ak chcete zvýšiť rýchlosť hry, jednoducho stlačte kláves Page Up na klávesnici. Hru môžete opäť spomaliť stlačením klávesu Page Down."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:145
 msgid "Waiting for the Hut to be Finished"
@@ -494,8 +494,8 @@ msgstr "Na západ od základne leží niekoľko skál. Postavte vedľa nich kame
 msgid ""
 "The quarry is a small building like the lumberjack’s hut. You can therefore "
 "build it on any field that shows a red, yellow or green house when the "
-"building spaces symbols are enabled (Press SPACE for that)."
-msgstr "Kameňolom je malá budova, rovnako ako drevorubačská chatrč. Môžete ho preto postaviť na hociktorom políčku, na ktorom je, ak je zapnuté zobrazovanie symbolov stavebných miest (prepnete ho stlačením klávesu MEDZERNÍK), zobrazený červený, žltý alebo zelený dom."
+"building spaces symbols are enabled (Press Space for that)."
+msgstr "Kameňolom je malá budova, rovnako ako drevorubačská chatrč. Môžete ho preto postaviť na hociktorom políčku, na ktorom je, ak je zapnuté zobrazovanie symbolov stavebných miest (prepnete ho stlačením klávesu medzerník), zobrazený červený, žltý alebo zelený dom."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:269
 msgid ""

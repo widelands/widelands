@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-18 08:43+0000\n"
-"PO-Revision-Date: 2015-11-18 08:44+0000\n"
+"POT-Creation-Date: 2015-11-28 11:19+0000\n"
+"PO-Revision-Date: 2015-11-28 11:21+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Portuguese (http://www.transifex.com/widelands/widelands/language/pt/)\n"
 "MIME-Version: 1.0\n"
@@ -83,9 +83,9 @@ msgid ""
 "We need to find a nice place for the lumberjack’s hut. To make this easier, "
 "we can activate ‘Show Building Spaces’. There are two ways you can do this, "
 "either by clicking on the ‘Show Building Spaces’ button at the bottom of the"
-" screen, which is the fourth one from the left. Or you can use the SPACE key"
+" screen, which is the fourth one from the left. Or you can use the Space key"
 " to toggle it."
-msgstr "Precisamos de encontrar um bom sitio para a Cabana do Lenhador. Para tornar isto ser mais fácil podemos activar a Ajuda à Construção. Existem dois modos de fazer isto: ou clicando no Botão Ajuda à Construção do menu que está em baixo (o quarto botão a contar da esquerda). Ou podes usar a Barra de espaços para ligar/desligar os símbolos da ajuda."
+msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:46
 msgid "Left-click the ‘OK’ button to close this box and then try it."
@@ -107,7 +107,7 @@ msgstr "É mais fácil compreenderes o que é permitido construir em cada campo 
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:54
 msgid ""
-"Do so now, either by pressing SPACE or by clicking the fourth button from "
+"Do so now, either by pressing Space or by clicking the fourth button from "
 "the left at the very bottom of the screen. Right-click on this window and "
 "then give it a try."
 msgstr ""
@@ -232,10 +232,10 @@ msgstr "Muito Bem ! Vamos esperar enquanto a construção da Cabana é concluida
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:138
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:151
 msgid ""
-"If you want things to go faster, simply use the PAGE UP key on your keyboard"
-" to increase the game speed. You can use PAGE DOWN to make the game slower "
+"If you want things to go faster, simply use the Page Up key on your keyboard"
+" to increase the game speed. You can use Page Down to make the game slower "
 "again."
-msgstr "Se quiseres que as coisas andem mais depressa podes usar as teclas PAGE UP para acelerar o jogo e PAGE DOWN para baixar novamente a velocidade."
+msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:145
 msgid "Waiting for the Hut to be Finished"
@@ -494,8 +494,8 @@ msgstr "Existem alguns rochedos a Oeste do teu Quartel-general. Constrói uma Pe
 msgid ""
 "The quarry is a small building like the lumberjack’s hut. You can therefore "
 "build it on any field that shows a red, yellow or green house when the "
-"building spaces symbols are enabled (Press SPACE for that)."
-msgstr "A Pedreira é um edifício pequeno como a Cabana do Lenhador. Podes por isso construí-la em qualquer terreno que tenha um símbolo de casa seja ele vermelho,amarelo ou verde quando a Ajuda à Construção estiver ligada (Prime a barra de espaços para ligar/desligar essa ajuda)."
+"building spaces symbols are enabled (Press Space for that)."
+msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:269
 msgid ""

@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-23 09:42+0000\n"
-"PO-Revision-Date: 2015-11-23 10:23+0000\n"
+"POT-Creation-Date: 2015-11-28 11:19+0000\n"
+"PO-Revision-Date: 2015-11-28 11:36+0000\n"
 "Last-Translator: Lyubomir Vasilev\n"
 "Language-Team: Bulgarian (http://www.transifex.com/widelands/widelands/language/bg/)\n"
 "MIME-Version: 1.0\n"
@@ -1217,7 +1217,7 @@ msgstr "Мели пшеницата за производство на браш�
 #. TRANSLATORS: Performance helptext for a building
 #: ../../tribes/buildings/productionsites/empire/mill/helptexts.lua:26
 msgctxt "empire_building"
-msgid "The miller needs %1% on average to grind wheat into a sack of corn."
+msgid "The miller needs %1% on average to grind wheat into a sack of flour."
 msgstr "Мелничарят има нужда средно от %1%, за да смели пшеницата за една торба брашно."
 
 #. TRANSLATORS: Purpose helptext for a building
@@ -1620,18 +1620,9 @@ msgstr "Зависимости"
 msgid "Health Training"
 msgstr "Трениране на здравето"
 
-#. TRANSLATORS: %1$s = Health, Evade, Attack or Defense. %2$s and %3$s are
-#. numbers.
 #: ../../tribes/scripting/help/building_help.lua:423
-#: ../../tribes/scripting/help/building_help.lua:437
-#: ../../tribes/scripting/help/building_help.lua:449
-#: ../../tribes/scripting/help/building_help.lua:462
-msgid "Trains ‘%1$s’ from %2$s up to %3$s"
-msgstr "Тренира „%1$s“ от %2$s до %3$s"
-
-#: ../../tribes/scripting/help/building_help.lua:424
-msgid "Health"
-msgstr "Здраве"
+msgid "Trains ‘Health’ from %1% up to %2%"
+msgstr "Тренира здравето от %1% до %2%"
 
 #: ../../tribes/scripting/help/building_help.lua:425
 #: ../../tribes/scripting/help/building_help.lua:439
@@ -1644,25 +1635,27 @@ msgstr "Войници:"
 msgid "Attack Training"
 msgstr "Трениране на атаката"
 
-#: ../../tribes/scripting/help/building_help.lua:438
-msgid "Attack"
-msgstr "Атака"
+#. TRANSLATORS: %1$s = Health, Evade, Attack or Defense. %2$s and %3$s are
+#. numbers.
+#: ../../tribes/scripting/help/building_help.lua:437
+msgid "Trains ‘Attack’ from %1% up to %2%"
+msgstr "Тренира атаката от %1% до %2%"
 
 #: ../../tribes/scripting/help/building_help.lua:448
 msgid "Defense Training"
 msgstr "Трениране на защитата"
 
-#: ../../tribes/scripting/help/building_help.lua:450
-msgid "Defense"
-msgstr "Защита"
+#: ../../tribes/scripting/help/building_help.lua:449
+msgid "Trains ‘Defense’ from %1% up to %2%"
+msgstr "Тренира защитата от %1% до %2%"
 
 #: ../../tribes/scripting/help/building_help.lua:461
 msgid "Evade Training"
 msgstr "Трениране на ловкостта"
 
-#: ../../tribes/scripting/help/building_help.lua:463
-msgid "Evade"
-msgstr "Ловкост"
+#: ../../tribes/scripting/help/building_help.lua:462
+msgid "Trains ‘Evade’ from %1% up to %2%"
+msgstr "Тренира ловкостта от %1% до %2%"
 
 #. TRANSLATORS: %1$d is a number, %2$s the name of a ware, e.g. 12x Stone
 #: ../../tribes/scripting/help/building_help.lua:490

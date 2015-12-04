@@ -295,16 +295,30 @@ int LuaPlayer::get_see_all(lua_State * const L) {
 			Default: :const:`false`
 		:type popup: :class:`boolean`
 
+		:arg icon: show a custom icon instead of the standard scenario message icon.
+			Default: "pics/menu_toggle_objectives_menu.png""
+		:type icon: :class:`string` The icon's file path.
+
+		:arg heading: a longer message heading to be shown within the message.
+			If this is not set, `title` is used instead.
+			Default: ""
+		:type building: :class:`string`
+
 		:returns: the message created
 		:rtype: :class:`wl.game.Message`
 */
 int LuaPlayer::send_message(lua_State * L) {
 	uint32_t n = lua_gettop(L);
 	std::string title = luaL_checkstring(L, 2);
+	std::string heading = title;
 	std::string body = luaL_checkstring(L, 3);
+	std::string icon = "pics/menu_toggle_objectives_menu.png";
 	Coords c = Coords::null();
 	Message::Status st = Message::Status::kNew;
 	bool popup = false;
+
+	Game & game = get_game(L);
+	Player & plr = get(L, game);
 
 	if (n == 4) {
 		// Optional arguments
@@ -327,10 +341,22 @@ int LuaPlayer::send_message(lua_State * L) {
 		if (!lua_isnil(L, -1))
 			popup = luaL_checkboolean(L, -1);
 		lua_pop(L, 1);
-	}
 
-	Game & game = get_game(L);
-	Player & plr = get(L, game);
+		lua_getfield(L, 4, "icon");
+		if (!lua_isnil(L, -1)) {
+			std::string s = luaL_checkstring(L, -1);
+			if (!s.empty()) {
+				icon = s;
+			}
+		}
+		lua_getfield(L, 4, "heading");
+		if (!lua_isnil(L, -1)) {
+			std::string s = luaL_checkstring(L, -1);
+			if (!s.empty()) {
+				heading = s;
+			}
+		}
+	}
 
 	MessageId const message =
 		plr.add_message
@@ -339,6 +365,8 @@ int LuaPlayer::send_message(lua_State * L) {
 				(Message::Type::kScenario,
 			 	 game.get_gametime(),
 			 	 title,
+				 icon,
+				 heading,
 			 	 body,
 				 c,
 				 0,
@@ -1098,6 +1126,8 @@ const PropertyType<LuaMessage> LuaMessage::Properties[] = {
 	PROP_RO(LuaMessage, sent),
 	PROP_RO(LuaMessage, field),
 	PROP_RW(LuaMessage, status),
+	PROP_RO(LuaMessage, heading),
+	PROP_RO(LuaMessage, icon_name),
 	{nullptr, nullptr, nullptr},
 };
 
@@ -1195,6 +1225,28 @@ int LuaMessage::set_status(lua_State * L) {
 
 	return 0;
 }
+
+/* RST
+	.. attribute:: heading
+
+		(RO) The long heading of this message that is shown in the body
+*/
+int LuaMessage::get_heading(lua_State * L) {
+	lua_pushstring(L, get(L, get_game(L)).heading());
+	return 1;
+}
+
+/* RST
+	.. attribute:: icon_name
+
+		(RO) The filename for the icon that is shown with the message title
+*/
+int LuaMessage::get_icon_name(lua_State * L) {
+	lua_pushstring(L, get(L, get_game(L)).icon_filename());
+	return 1;
+}
+
+
 
 /*
  ==========================================================

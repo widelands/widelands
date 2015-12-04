@@ -93,9 +93,13 @@ hill = map:get_field(0,0):region(3)
 -- ==================
 
 -- Sends a game status message to all players
-function send_to_all(text)
+function send_to_all(text, long_title)
    for idx,plr in ipairs(game.players) do
-      send_message(plr, _ "Game Status", text, {popup=true})
+      if (long_title ~= nil and long_title ~= "") then
+         send_message(plr, _"Status", text, {popup=true, heading=long_title})
+      else
+         send_message(plr, _"Status", text, {popup=true})
+      end
    end
 end
 
@@ -213,10 +217,10 @@ function initialize()
    place_headquarters()
    disable_unused_buildings()
 
-   send_to_all(welcome_msg)
+   send_to_all(welcome_msg.body, welcome_msg.heading)
    -- set the objective with the game type for all players
    -- TODO change this to a broadcast once individual game objectives have been implemented
-   game.players[1]:add_objective("win_conditions", _"Rules", welcome_msg)
+   game.players[1]:add_objective("win_conditions", _"Rules", welcome_msg.body)
 
    for idx,plr in ipairs(game.players) do
       run(function() run_island(plr, 1) end)

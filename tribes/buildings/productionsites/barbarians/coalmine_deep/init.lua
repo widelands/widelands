@@ -77,7 +77,9 @@ tribes:new_productionsite_type {
       },
    },
    out_of_resource_notification = {
-      title = _"Main Coal Vein Exhausted",
+      -- Translators: Short for "Out of ..." for a resource
+      title = _"No Coal",
+      heading = _"Main Coal Vein Exhausted",
       message =
          pgettext("barbarians_building", "This coal mine’s main vein is exhausted. Expect strongly diminished returns on investment. You should consider enhancing, dismantling or destroying it."),
    },
