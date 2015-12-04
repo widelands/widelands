@@ -113,6 +113,6 @@ void ReplayGameController::CmdReplayEnd::execute (Widelands::Game & game) {
 	mmb.run<UI::Panel::Returncodes>();
 }
 
-uint8_t ReplayGameController::CmdReplayEnd::id() const {
-	return QUEUE_CMD_REPLAYEND;
+Widelands::QueueCommandTypes ReplayGameController::CmdReplayEnd::id() const {
+	return Widelands::QueueCommandTypes::kReplayEnd;
 }

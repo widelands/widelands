@@ -951,14 +951,21 @@ bool Worker::run_geologist_find(Game & game, State & state, const Action &)
 		(const ResourceDescription * const rdescr =
 			world.get_resource(position.field->get_resources()))
 	{
+		const TribeDescr & t = owner().tribe();
+		const Immovable& ri = game.create_immovable
+			(position,
+			 t.get_resource_indicator
+				(rdescr,
+				rdescr->detectable() ?
+				position.field->get_resources_amount() : 0),
+			 MapObjectDescr::OwnerType::kTribe);
+
 		// Geologist also sends a message notifying the player
 		if (rdescr->detectable() && position.field->get_resources_amount()) {
-			// TODO(sirver): this is very wrong: It assumes a directory layout
-			// that might not be around forever.
 			const std::string message =
-					(boost::format("<rt image=world/resources/pics/%s4.png>"
+					(boost::format("<rt image=%s>"
 										"<p font-face=serif font-size=14>%s</p></rt>")
-					 % rdescr->name().c_str()
+					 % rdescr->get_editor_pic(rdescr->max_amount())
 					 % _("A geologist found resources.")).str();
 
 			Message::Type message_type = Message::Type::kGeologists;
@@ -981,22 +988,14 @@ bool Worker::run_geologist_find(Game & game, State & state, const Action &)
 					(message_type,
 					 game.get_gametime(),
 					 rdescr->descname(),
+					 ri.descr().representative_image_filename(),
+					 rdescr->descname(),
 					 message,
 					 position,
 					 m_serial
 					),
 				 300000, 8);
 		}
-
-		const TribeDescr & t = owner().tribe();
-		Immovable & newimm = game.create_immovable
-			(position,
-			 t.get_resource_indicator
-				(rdescr,
-				rdescr->detectable() ?
-				position.field->get_resources_amount() : 0),
-			 MapObjectDescr::OwnerType::kTribe);
-		newimm.set_owner(get_owner());
 	}
 
 	++state.ivar1;
@@ -1882,6 +1881,8 @@ void Worker::return_update(Game & game, State & state)
 			 *new Message
 				(Message::Type::kGameLogic,
 				 game.get_gametime(),
+				 _("Worker"),
+				 "pics/menu_help.png",
 				 _("Worker got lost!"),
 				 message,
 				 get_position()),

@@ -59,6 +59,7 @@ ProductionSiteDescr::ProductionSiteDescr
 	 const LuaTable& table, const EditorGameBase& egbase)
 	: BuildingDescr(init_descname, _type, table, egbase),
 	  m_out_of_resource_title(""),
+	  m_out_of_resource_heading(""),
 	  m_out_of_resource_message(""),
 	  out_of_resource_productivity_threshold_(100)
 {
@@ -68,6 +69,7 @@ ProductionSiteDescr::ProductionSiteDescr
 	if (table.has_key("out_of_resource_notification")) {
 		items_table = table.get_table("out_of_resource_notification");
 		m_out_of_resource_title = _(items_table->get_string("title"));
+		m_out_of_resource_heading = _(items_table->get_string("heading"));
 		m_out_of_resource_message = pgettext_expr(msgctxt, items_table->get_string("message").c_str());
 		if (items_table->has_key("productivity_threshold")) {
 			out_of_resource_productivity_threshold_ = items_table->get_int("productivity_threshold");
@@ -984,18 +986,20 @@ void ProductionSite::notify_player(Game & game, uint8_t minutes)
 	if (m_last_stat_percent == 0 ||
 		 (m_last_stat_percent <= descr().out_of_resource_productivity_threshold()
 		  && trend_ == Trend::kFalling)) {
-		if (descr().out_of_resource_title().empty())
+		if (descr().out_of_resource_heading().empty())
 		{
 			set_production_result(_("Can’t find any more resources!"));
 		}
 		else {
-			set_production_result(descr().out_of_resource_title());
+			set_production_result(descr().out_of_resource_heading());
 
 			assert(!descr().out_of_resource_message().empty());
 			send_message
 				(game,
 				 Message::Type::kEconomy,
 				 descr().out_of_resource_title(),
+				 descr().icon_filename(),
+				 descr().out_of_resource_heading(),
 				 descr().out_of_resource_message(),
 				 true,
 				 minutes * 60000, 0);

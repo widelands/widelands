@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-18 08:43+0000\n"
-"PO-Revision-Date: 2015-11-18 08:44+0000\n"
+"POT-Creation-Date: 2015-11-28 11:19+0000\n"
+"PO-Revision-Date: 2015-11-28 11:21+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Dutch (http://www.transifex.com/widelands/widelands/language/nl/)\n"
 "MIME-Version: 1.0\n"
@@ -82,9 +82,9 @@ msgid ""
 "We need to find a nice place for the lumberjack’s hut. To make this easier, "
 "we can activate ‘Show Building Spaces’. There are two ways you can do this, "
 "either by clicking on the ‘Show Building Spaces’ button at the bottom of the"
-" screen, which is the fourth one from the left. Or you can use the SPACE key"
+" screen, which is the fourth one from the left. Or you can use the Space key"
 " to toggle it."
-msgstr "We moeten een geschikte plek vinden voor de houthakkershut. Om dit makkelijker te maken zetten we de bouwhulp aan. Er zijn twee manieren om dit te doen, klik de bouwhulpknop aan de onderkant van het scherm, het is de vierde van links, of gebruik de spatiebalk om de hulp aan of uit te zetten."
+msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:46
 msgid "Left-click the ‘OK’ button to close this box and then try it."
@@ -106,7 +106,7 @@ msgstr "Het is gemakkelijker om te begrijpen wat er mag worden gebouwd op welk v
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:54
 msgid ""
-"Do so now, either by pressing SPACE or by clicking the fourth button from "
+"Do so now, either by pressing Space or by clicking the fourth button from "
 "the left at the very bottom of the screen. Right-click on this window and "
 "then give it a try."
 msgstr ""
@@ -231,10 +231,10 @@ msgstr "Goed gedaan! Laten we wachten tot de hut klaar is."
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:138
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:151
 msgid ""
-"If you want things to go faster, simply use the PAGE UP key on your keyboard"
-" to increase the game speed. You can use PAGE DOWN to make the game slower "
+"If you want things to go faster, simply use the Page Up key on your keyboard"
+" to increase the game speed. You can use Page Down to make the game slower "
 "again."
-msgstr "Als je wilt dat alles sneller gaat gebruik dan gewoon de PAGE UP-toets op het toetsenbord om de spelsnelheid te verhogen. Met  de PAGE DOWN-toets kan je het spel weer langzamer laten gaan."
+msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:145
 msgid "Waiting for the Hut to be Finished"
@@ -493,8 +493,8 @@ msgstr ""
 msgid ""
 "The quarry is a small building like the lumberjack’s hut. You can therefore "
 "build it on any field that shows a red, yellow or green house when the "
-"building spaces symbols are enabled (Press SPACE for that)."
-msgstr "De steengroeve is net als de houthakkershut een klein gebouw. Je kan het daarom op elk veld bouwen waar een rood, geel of groen huis te zien is als de bouwhulp aanstaat (Druk daarvoor op SPATIE)."
+"building spaces symbols are enabled (Press Space for that)."
+msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:269
 msgid ""

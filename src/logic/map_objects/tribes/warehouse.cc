@@ -452,6 +452,8 @@ void Warehouse::init(EditorGameBase & egbase)
 				(*game,
 				 Message::Type::kSeafaring,
 				 descr().descname(),
+				 descr().icon_filename(),
+				 descr().descname(),
 				 _("A new port was added to your economy."),
 				 true);
 		} else if (!descr().is_buildable()) {
@@ -459,12 +461,16 @@ void Warehouse::init(EditorGameBase & egbase)
 				(*game,
 				 Message::Type::kEconomy,
 				 descr().descname(),
+				 descr().icon_filename(),
+				 descr().descname(),
 				 _("A new headquarters was added to your economy."),
 				 true);
 		} else {
 			send_message
 				(*game,
 				 Message::Type::kEconomy,
+				 descr().descname(),
+				 descr().icon_filename(),
 				 descr().descname(),
 				 _("A new warehouse was added to your economy."),
 				 true);

@@ -4453,7 +4453,7 @@ void DefaultAI::consider_productionsite_influence(BuildableField& field,
 		++field.supporters_nearby_.at(bo.production_hint_);
 	}
 
-	if (bo.plants_trees_ >= 0) {
+	if (bo.plants_trees_) {
 		++field.rangers_nearby_;
 	}
 }

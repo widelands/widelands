@@ -1910,11 +1910,6 @@ CmdSetStockPolicy::CmdSetStockPolicy()
 {
 }
 
-uint8_t CmdSetStockPolicy::id() const
-{
-	return QUEUE_CMD_SETSTOCKPOLICY;
-}
-
 void CmdSetStockPolicy::execute(Game & game)
 {
 	// Sanitize data that could have come from the network
