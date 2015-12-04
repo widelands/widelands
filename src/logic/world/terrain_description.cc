@@ -53,12 +53,12 @@ TerrainDescription::Is terrain_type_from_string(const std::string& type) {
 																	TerrainDescription::Is::kImpassable);
 	}
 	if (type == "mineable") {
-		return static_cast<TerrainDescription::Is>(TerrainDescription::Is::kMineable);
+		return TerrainDescription::Is::kMineable;
 	}
 	if (type == "impassable") {
-		return static_cast<TerrainDescription::Is>(TerrainDescription::Is::kImpassable);
+		return TerrainDescription::Is::kImpassable;
 	}
-	throw LuaError((boost::format("invalid terrain type '%s'") % type).str());
+	throw LuaError((boost::format("Invalid terrain \"is\" value '%s'") % type).str());
 }
 
 }  // namespace
