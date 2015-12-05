@@ -46,17 +46,17 @@ TerrainDescription::Is terrain_type_from_string(const std::string& type) {
 	}
 	if (type == "water") {
 		return static_cast<TerrainDescription::Is>(TerrainDescription::Is::kWater |
-																	TerrainDescription::Is::kImpassable);
+																	TerrainDescription::Is::kUnwalkable);
 	}
 	if (type == "unreachable") {
 		return static_cast<TerrainDescription::Is>(TerrainDescription::Is::kUnreachable |
-																	TerrainDescription::Is::kImpassable);
+																	TerrainDescription::Is::kUnwalkable);
 	}
 	if (type == "mineable") {
 		return TerrainDescription::Is::kMineable;
 	}
-	if (type == "impassable") {
-		return TerrainDescription::Is::kImpassable;
+	if (type == "unwalkable") {
+		return TerrainDescription::Is::kUnwalkable;
 	}
 	throw LuaError((boost::format("Invalid terrain \"is\" value '%s'") % type).str());
 }
@@ -91,10 +91,10 @@ TerrainDescription::Type::Type(TerrainDescription::Is _is) : is(_is) {
 		descname = _("mineable");
 		icon = g_gr->images().get("pics/terrain_mineable.png");
 		break;
-	case Is::kImpassable:
+	case Is::kUnwalkable:
 		/** TRANSLATORS: This is a terrain type tooltip in the editor */
-		descname = _("impassable");
-		icon = g_gr->images().get("pics/terrain_impassable.png");
+		descname = _("unwalkable");
+		icon = g_gr->images().get("pics/terrain_unwalkable.png");
 		break;
 	default:
 		throw wexception("Unknown TerrainDescription::Is in TerrainDescription::Type");
@@ -194,8 +194,8 @@ const std::vector<TerrainDescription::Type> TerrainDescription::get_types() cons
 	if (is_ & Widelands::TerrainDescription::Is::kMineable) {
 		terrain_types.push_back(TerrainDescription::Type(TerrainDescription::Is::kMineable));
 	}
-	if (is_ & Widelands::TerrainDescription::Is::kImpassable) {
-		terrain_types.push_back(TerrainDescription::Type(TerrainDescription::Is::kImpassable));
+	if (is_ & Widelands::TerrainDescription::Is::kUnwalkable) {
+		terrain_types.push_back(TerrainDescription::Type(TerrainDescription::Is::kUnwalkable));
 	}
 	return terrain_types;
 }

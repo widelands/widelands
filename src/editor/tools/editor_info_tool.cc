@@ -111,7 +111,7 @@ int32_t EditorInfoTool::handle_click_impl(Widelands::Map& map,
 	for (const Widelands::TerrainDescription::Type& terrain_type : ter.get_types()) {
 		terrain_is_strings.push_back(terrain_type.descname);
 	}
-	/** TRANSLATORS: "Is" is a list of terrain properties, e.g. "arable", "unreachable and impassable" */
+	/** TRANSLATORS: "Is" is a list of terrain properties, e.g. "arable", "unreachable and unwalkable" */
 	/** TRANSLATORS: You can also translate this as "Category: %s" or "Property: %s" */
 	buf += "• " + (boost::format(_("Is: %s"))
 						% i18n::localize_list(terrain_is_strings, i18n::ConcatenateWith::AMPERSAND)).str() + "\n";

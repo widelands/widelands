@@ -515,7 +515,7 @@ bool Worker::run_findobject(Game & game, State & state, const Action & action)
 // will also allow blocking the shoreline if it is next to the worker's
 // location. Also, the gap of 2 nodes between 2 farms will be blocked,
 // because both are next to their farm. The only real solution that I can
-// think of for this kind of bugs is to only allow impassable objects to
+// think of for this kind of bugs is to only allow unwalkable objects to
 // be placed on a node if ALL neighbouring nodes are passable. This must
 // of course be checked at the moment when the object is placed and not,
 // as in this case, only before a worker starts walking there to place an

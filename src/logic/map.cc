@@ -208,7 +208,7 @@ void Map::recalc_default_resources(const World& world) {
 				amount += terd.get_default_resource_amount();
 			}
 
-			//  If one of the neighbours is impassable, count its resource
+			//  If one of the neighbours is unwalkable, count its resource
 			//  stronger
 			//  top left neigbour
 			get_neighbour(f, WALK_NW, &f1);
@@ -216,7 +216,7 @@ void Map::recalc_default_resources(const World& world) {
 				const TerrainDescription& terr = world.terrain_descr(f1.field->terrain_r());
 				const int8_t resr = terr.get_default_resource();
 				const int default_amount = terr.get_default_resource_amount();
-				if ((terr.get_is() & TerrainDescription::Is::kImpassable) && default_amount > 0)
+				if ((terr.get_is() & TerrainDescription::Is::kUnwalkable) && default_amount > 0)
 					m[resr] += 3;
 				else
 					++m[resr];
@@ -226,7 +226,7 @@ void Map::recalc_default_resources(const World& world) {
 				const TerrainDescription& terd = world.terrain_descr(f1.field->terrain_d());
 				const int8_t resd = terd.get_default_resource();
 				const int default_amount = terd.get_default_resource_amount();
-				if ((terd.get_is() & TerrainDescription::Is::kImpassable) && default_amount > 0)
+				if ((terd.get_is() & TerrainDescription::Is::kUnwalkable) && default_amount > 0)
 					m[resd] += 3;
 				else
 					++m[resd];
@@ -239,7 +239,7 @@ void Map::recalc_default_resources(const World& world) {
 				const TerrainDescription& terd = world.terrain_descr(f1.field->terrain_d());
 				const int8_t resd = terd.get_default_resource();
 				const int default_amount = terd.get_default_resource_amount();
-				if ((terd.get_is() & TerrainDescription::Is::kImpassable) && default_amount > 0)
+				if ((terd.get_is() & TerrainDescription::Is::kUnwalkable) && default_amount > 0)
 					m[resd] += 3;
 				else
 					++m[resd];
@@ -252,7 +252,7 @@ void Map::recalc_default_resources(const World& world) {
 				const TerrainDescription& terr = world.terrain_descr(f1.field->terrain_r());
 				const int8_t resr = terr.get_default_resource();
 				const int default_amount = terr.get_default_resource_amount();
-				if ((terr.get_is() & TerrainDescription::Is::kImpassable) && default_amount > 0)
+				if ((terr.get_is() & TerrainDescription::Is::kUnwalkable) && default_amount > 0)
 					m[resr] += 3;
 				else
 					++m[resr];
@@ -1054,16 +1054,16 @@ NodeCaps Map::_calc_nodecaps_pass1(const World& world, FCoords const f, bool con
 		world.terrain_descr (f.field->terrain_r()).get_is();
 
 	//  1b) Collect some information about the neighbours
-	uint8_t cnt_impassable = 0;
+	uint8_t cnt_unwalkable = 0;
 	uint8_t cnt_water = 0;
 	uint8_t cnt_unreachable = 0;
 
-	if  (tr_d_terrain_is & TerrainDescription::Is::kImpassable) ++cnt_impassable;
-	if  (tl_r_terrain_is & TerrainDescription::Is::kImpassable) ++cnt_impassable;
-	if  (tl_d_terrain_is & TerrainDescription::Is::kImpassable) ++cnt_impassable;
-	if   (l_r_terrain_is & TerrainDescription::Is::kImpassable) ++cnt_impassable;
-	if   (f_d_terrain_is & TerrainDescription::Is::kImpassable) ++cnt_impassable;
-	if   (f_r_terrain_is & TerrainDescription::Is::kImpassable) ++cnt_impassable;
+	if  (tr_d_terrain_is & TerrainDescription::Is::kUnwalkable) ++cnt_unwalkable;
+	if  (tl_r_terrain_is & TerrainDescription::Is::kUnwalkable) ++cnt_unwalkable;
+	if  (tl_d_terrain_is & TerrainDescription::Is::kUnwalkable) ++cnt_unwalkable;
+	if   (l_r_terrain_is & TerrainDescription::Is::kUnwalkable) ++cnt_unwalkable;
+	if   (f_d_terrain_is & TerrainDescription::Is::kUnwalkable) ++cnt_unwalkable;
+	if   (f_r_terrain_is & TerrainDescription::Is::kUnwalkable) ++cnt_unwalkable;
 
 	if  (tr_d_terrain_is & TerrainDescription::Is::kWater)      ++cnt_water;
 	if  (tl_r_terrain_is & TerrainDescription::Is::kWater)      ++cnt_water;
@@ -1084,7 +1084,7 @@ NodeCaps Map::_calc_nodecaps_pass1(const World& world, FCoords const f, bool con
 
 	//  2a) If any of the neigbouring triangles is walkable this node is
 	//  walkable.
-	if (cnt_impassable < 6)
+	if (cnt_unwalkable < 6)
 		caps |= MOVECAPS_WALK;
 
 	//  2b) If all neighbouring triangles are water, the node is swimable.
@@ -1109,7 +1109,7 @@ NodeCaps Map::_calc_nodecaps_pass1(const World& world, FCoords const f, bool con
 				&&
 				imm->get_size() >= BaseImmovable::SMALL)
 			{
-				// 3b) [OVERRIDE] check for "impassable" MapObjects
+				// 3b) [OVERRIDE] check for "unwalkable" MapObjects
 				if (!imm->get_passable())
 					caps &= ~(MOVECAPS_WALK | MOVECAPS_SWIM);
 				return static_cast<NodeCaps>(caps);
@@ -1285,7 +1285,7 @@ int Map::calc_buildsize
 	uint32_t cnt_walkable = 0;
 	for (uint32_t i = 0; i < 6; ++i) {
 		if (terrains[i] & TerrainDescription::Is::kWater ||
-			 terrains[i] & TerrainDescription::Is::kImpassable)
+			 terrains[i] & TerrainDescription::Is::kUnwalkable)
 			return BaseImmovable::NONE;
 		if (terrains[i] & TerrainDescription::Is::kMineable) ++cnt_mineable;
 		if (terrains[i] & TerrainDescription::Is::kWalkable) ++cnt_walkable;

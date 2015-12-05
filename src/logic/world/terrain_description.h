@@ -49,7 +49,7 @@ public:
 		kWater =  2,
 		kUnreachable = 4,
 		kMineable = 8,
-		kImpassable = 16,
+		kUnwalkable = 16,
 	};
 
 	struct Type {
