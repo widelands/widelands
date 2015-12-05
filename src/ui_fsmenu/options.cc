@@ -47,6 +47,8 @@
 
 namespace {
 
+constexpr uint32_t kSpinboxWidth = 240;
+
 // Data model for the entries in the language selection list.
 struct LanguageEntry {
 	LanguageEntry(const std::string& init_localename,
@@ -148,24 +150,27 @@ FullscreenMenuOptions::FullscreenMenuOptions
 	fullscreen_ (&box_interface_, Point(0, 0), _("Fullscreen"), "", column_width_),
 	inputgrab_ (&box_interface_, Point(0, 0), _("Grab Input"), "", column_width_),
 
-	label_maxfps_(&box_interface_, _("Maximum FPS:"), UI::Align_VCenter),
-	sb_maxfps_(&box_interface_, 0, 0, 240, opt.maxfps, 0, 99, ""),
+	sb_maxfps_(&box_interface_, 0, 0, column_width_, kSpinboxWidth, opt.maxfps, 0, 99, _("Maximum FPS:"), ""),
 
 	snap_win_overlap_only_(&box_interface_, Point(0, 0), _("Snap windows only when overlapping"),
 								  "", column_width_),
 	dock_windows_to_edges_(&box_interface_, Point(0, 0), _("Dock windows to edges"),
 								  "", column_width_),
 
-	label_snap_dis_panel_(&box_interface_, 0, 0, 20, column_width_,
-								 _("Distance for windows to snap to other panels:")),
 	sb_dis_panel_
-			(&box_interface_, 0, 0, 240,
-			 opt.panel_snap_distance, 0, 99, ngettext("pixel", "pixels", opt.panel_snap_distance)),
+			(&box_interface_, 0, 0, column_width_, kSpinboxWidth,
+			 opt.panel_snap_distance, 0, 99,_("Distance for windows to snap to other panels:"),
+			 /** TRANSLATORS: Options: Distance for windows to snap to  other panels: */
+			 /** TRANSLATORS: This will have a number added in front of it */
+			 ngettext("pixel", "pixels", opt.panel_snap_distance)),
 
-	label_snap_dis_border_(&box_interface_, 0, 0, _("Distance for windows to snap to borders:")),
 	sb_dis_border_
-			(&box_interface_, 0, 0, 240,
-			 opt.border_snap_distance, 0, 99, ngettext("pixel", "pixels", opt.border_snap_distance)),
+			(&box_interface_, 0, 0, column_width_, kSpinboxWidth,
+			 opt.border_snap_distance, 0, 99,
+			 _("Distance for windows to snap to borders:"),
+			 /** TRANSLATORS: Options: Distance for windows to snap to borders: */
+			 /** TRANSLATORS: This will have a number added in front of it */
+			 ngettext("pixel", "pixels", opt.border_snap_distance)),
 
 	transparent_chat_(&box_interface_, Point(0, 0), _("Show in-game chat with transparent background"),
 							"", column_width_),
@@ -178,27 +183,21 @@ FullscreenMenuOptions::FullscreenMenuOptions
 
 	// Saving options
 	sb_autosave_
-		(&box_saving_, 0, 0, 240,
+		(&box_saving_, 0, 0, column_width_, kSpinboxWidth,
+		 opt.autosave / 60, 0, 100, _("Save game automatically every"),
 		 /** TRANSLATORS: Options: Save game automatically every: */
 		 /** TRANSLATORS: This will have a number added in front of it */
-		 opt.autosave / 60, 0, 100, ngettext("minute", "minutes", opt.autosave / 60),
+		 ngettext("minute", "minutes", opt.autosave / 60),
 		 g_gr->images().get("pics/but3.png"), true),
-
-	label_autosave_
-		(&box_saving_, 0, 0, tab_panel_width_, sb_autosave_.get_h(),
-		 _("Save game automatically every"), UI::Align_VCenter),
 
 	sb_remove_replays_
-		(&box_saving_, 0, 0, 240,
+		(&box_saving_, 0, 0, column_width_, kSpinboxWidth,
+		 opt.remove_replays, 0, 365, _("Remove replays older than:"),
 		 /** TRANSLATORS: Options: Remove Replays older than: */
 		 /** TRANSLATORS: This will have a number added in front of it */
-		 opt.remove_replays, 0, 365, ngettext("day", "days", opt.remove_replays),
+		 ngettext("day", "days", opt.remove_replays),
 		 g_gr->images().get("pics/but3.png"), true),
-	label_remove_replays_
-		(&box_saving_, 0, 0,
-		 get_w() - sb_remove_replays_.get_w() - 2 * hmargin_,
-		 dock_windows_to_edges_.get_h(),
-		 _("Remove replays older than:"), UI::Align_VCenter),
+
 	nozip_(&box_saving_, Point(0, 0), _("Do not zip widelands data files (maps, replays and savegames)"),
 			 "", column_width_),
 	remove_syncstreams_(&box_saving_, Point(0, 0), _("Remove Syncstream dumps on startup"),
@@ -238,13 +237,10 @@ FullscreenMenuOptions::FullscreenMenuOptions
 	box_interface_.add(&resolution_list_, UI::Align_Left);
 	box_interface_.add(&fullscreen_, UI::Align_Left);
 	box_interface_.add(&inputgrab_, UI::Align_Left);
-	box_interface_.add(&label_maxfps_, UI::Align_Left);
 	box_interface_.add(&sb_maxfps_, UI::Align_Left);
 	box_interface_.add(&snap_win_overlap_only_, UI::Align_Left);
 	box_interface_.add(&dock_windows_to_edges_, UI::Align_Left);
-	box_interface_.add(&label_snap_dis_panel_, UI::Align_Left);
 	box_interface_.add(&sb_dis_panel_, UI::Align_Left);
-	box_interface_.add(&label_snap_dis_border_, UI::Align_Left);
 	box_interface_.add(&sb_dis_border_, UI::Align_Left);
 	box_interface_.add(&transparent_chat_, UI::Align_Left);
 
@@ -254,9 +250,7 @@ FullscreenMenuOptions::FullscreenMenuOptions
 	box_sound_.add(&message_sound_, UI::Align_Left);
 
 	// Saving
-	box_saving_.add(&label_autosave_, UI::Align_Left);
 	box_saving_.add(&sb_autosave_, UI::Align_Left);
-	box_saving_.add(&label_remove_replays_, UI::Align_Left);
 	box_saving_.add(&sb_remove_replays_, UI::Align_Left);
 	box_saving_.add(&nozip_, UI::Align_Left);
 	box_saving_.add(&remove_syncstreams_, UI::Align_Left);

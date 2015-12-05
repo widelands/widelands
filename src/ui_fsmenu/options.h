@@ -112,13 +112,10 @@ private:
 	UI::Listselect<void *>      resolution_list_;
 	UI::Checkbox                fullscreen_;
 	UI::Checkbox                inputgrab_;
-	UI::Textarea                label_maxfps_;
 	UI::SpinBox                 sb_maxfps_;
 	UI::Checkbox                snap_win_overlap_only_;
 	UI::Checkbox                dock_windows_to_edges_;
-	UI::Textarea                label_snap_dis_panel_;
 	UI::SpinBox                 sb_dis_panel_;
-	UI::Textarea                label_snap_dis_border_;
 	UI::SpinBox                 sb_dis_border_;
 	UI::Checkbox                transparent_chat_;
 
@@ -129,9 +126,7 @@ private:
 
 	// Saving
 	UI::SpinBox                 sb_autosave_;
-	UI::Textarea                label_autosave_;
 	UI::SpinBox                 sb_remove_replays_;
-	UI::Textarea                label_remove_replays_;
 	UI::Checkbox                nozip_;
 	UI::Checkbox                remove_syncstreams_;
 
