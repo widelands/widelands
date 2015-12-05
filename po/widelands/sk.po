@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-23 09:42+0000\n"
-"PO-Revision-Date: 2015-11-26 19:05+0000\n"
+"POT-Creation-Date: 2015-11-28 11:19+0000\n"
+"PO-Revision-Date: 2015-11-29 01:10+0000\n"
 "Last-Translator: MiroslavR <miroslavr256@gmail.com>\n"
 "Language-Team: Slovak (http://www.transifex.com/widelands/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
@@ -116,8 +116,8 @@ msgstr "Žiadna"
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
 #: ../../src/ai/defaultai.h:101
 msgctxt "ai_name"
-msgid "Aggressive"
-msgstr "Agresívna"
+msgid "Strong"
+msgstr "Silná"
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
 #: ../../src/ai/defaultai.h:112
@@ -128,8 +128,8 @@ msgstr "Normálna"
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
 #: ../../src/ai/defaultai.h:123
 msgctxt "ai_name"
-msgid "Defensive"
-msgstr "Obranná"
+msgid "Weak"
+msgstr "Slabá"
 
 #. * TRANSLATORS: Concatenate the last 2 items on a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
@@ -369,19 +369,19 @@ msgstr "Súradnice: (%1$i, %2$i)"
 
 #. * TRANSLATORS: Editor terrain property: small building plot
 #: ../../src/editor/tools/editor_info_tool.cc:63
-#: ../../src/logic/building.cc:504
+#: ../../src/logic/building.cc:506
 msgid "small"
 msgstr "malá"
 
 #. * TRANSLATORS: Editor terrain property: medium building plot
 #: ../../src/editor/tools/editor_info_tool.cc:65
-#: ../../src/logic/building.cc:505
+#: ../../src/logic/building.cc:507
 msgid "medium"
 msgstr "stredná"
 
 #. * TRANSLATORS: Editor terrain property: big building plot
 #: ../../src/editor/tools/editor_info_tool.cc:67
-#: ../../src/logic/building.cc:505
+#: ../../src/logic/building.cc:507
 msgid "big"
 msgstr "veľká"
 
@@ -392,7 +392,7 @@ msgstr "vlajka"
 
 #. * TRANSLATORS: Editor terrain property: mine building plot
 #: ../../src/editor/tools/editor_info_tool.cc:73
-#: ../../src/logic/building.cc:503
+#: ../../src/logic/building.cc:505
 msgid "mine"
 msgstr "tažit"
 
@@ -427,11 +427,11 @@ msgid "Owned by: —"
 msgstr "Vlastník: —"
 
 #: ../../src/editor/tools/editor_info_tool.cc:95
-msgid "Has base immovable"
+msgid "Has immovable"
 msgstr "Obsahuje nehybný objekt"
 
 #: ../../src/editor/tools/editor_info_tool.cc:95
-msgid "No base immovable"
+msgid "No immovable"
 msgstr "Neobsahuje nehybný objekt"
 
 #: ../../src/editor/tools/editor_info_tool.cc:98
@@ -792,7 +792,7 @@ msgid "Low"
 msgstr "Nízke"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:253
-#: ../../src/logic/building.cc:510
+#: ../../src/logic/building.cc:512
 msgid "Medium"
 msgstr "Stredné"
 
@@ -983,15 +983,15 @@ msgstr "Aktuálna veľkosť: %u"
 msgid "unknown"
 msgstr "neznámy"
 
-#: ../../src/logic/building.cc:508
+#: ../../src/logic/building.cc:510
 msgid "Mine"
 msgstr "Baňa"
 
-#: ../../src/logic/building.cc:509
+#: ../../src/logic/building.cc:511
 msgid "Small"
 msgstr "Malý"
 
-#: ../../src/logic/building.cc:510
+#: ../../src/logic/building.cc:512
 msgid "Big"
 msgstr "Veľký"
 
@@ -1177,8 +1177,8 @@ msgstr "ekonomika nepotrebuje pracovníka „%s“"
 #: ../../src/logic/production_program.cc:407
 #: ../../src/logic/production_program.cc:429
 #: ../../src/logic/production_program.cc:943
-#: ../../src/logic/production_program.cc:1060
-#: ../../src/logic/production_program.cc:1154
+#: ../../src/logic/production_program.cc:1061
+#: ../../src/logic/production_program.cc:1156
 #, c-format
 msgid "%1$ix %2$s"
 msgstr "%1$ix %2$s"
@@ -1253,24 +1253,32 @@ msgstr[0] "chýba %s"
 msgstr[1] "chýba %s"
 msgstr[2] "chýba %s"
 
-#. * TRANSLATORS: %s is a list of wares
-#: ../../src/logic/production_program.cc:1069
+#. * TRANSLATORS: %s is a list of wares. String is fetched according to total
+#. amount of wares.
+#: ../../src/logic/production_program.cc:1070
 #, c-format
 msgid "Produced %s"
-msgstr "Vyrobil %s"
+msgid_plural "Produced %s"
+msgstr[0] "Vyrobený výrobok: %s"
+msgstr[1] "Vyrobené výrobky: %s"
+msgstr[2] "Vyrobené výrobky: %s"
 
-#. * TRANSLATORS: %s is a list of workers
-#: ../../src/logic/production_program.cc:1163
+#. * TRANSLATORS: %s is a list of workers. String is fetched according to
+#. total amount of workers.
+#: ../../src/logic/production_program.cc:1165
 #, c-format
 msgid "Recruited %s"
-msgstr "Najatí pracovníci: %s"
+msgid_plural "Recruited %s"
+msgstr[0] "Najatý pracovník: %s"
+msgstr[1] "Najatí pracovníci: %s"
+msgstr[2] "Najatí pracovníci: %s"
 
-#: ../../src/logic/production_program.cc:1386
+#: ../../src/logic/production_program.cc:1388
 msgid "No soldier to train!"
 msgstr "Žiaden vojak na trénovanie!"
 
-#: ../../src/logic/production_program.cc:1394
-#: ../../src/logic/production_program.cc:1479
+#: ../../src/logic/production_program.cc:1396
+#: ../../src/logic/production_program.cc:1481
 msgid "No soldier found for this training level!"
 msgstr "Nenájdený žiadny vojak na tejto tréningovej úrovni!"
 
@@ -1291,13 +1299,13 @@ msgstr "(zastavené)"
 
 #. * TRANSLATORS: Percent in building statistics window, e.g. 85%
 #. * TRANSLATORS: If you wish to add a space, translate as '%i %%'
-#: ../../src/logic/productionsite.cc:357
+#: ../../src/logic/productionsite.cc:381
 #: ../../src/wui/building_statistics_menu.cc:681
 #, c-format
 msgid "%i%%"
 msgstr "%i %%"
 
-#: ../../src/logic/productionsite.cc:965
+#: ../../src/logic/productionsite.cc:989
 msgid "Can’t find any more resources!"
 msgstr "Nemožno nájsť ďalšie zdroje!"
 
@@ -3365,19 +3373,19 @@ msgstr "Zaútočiť"
 msgid "Attack"
 msgstr "Útok"
 
-#: ../../src/wui/fieldaction.cc:560
+#: ../../src/wui/fieldaction.cc:562
 msgid "Build mines"
 msgstr "Postaviť bane"
 
-#: ../../src/wui/fieldaction.cc:576
+#: ../../src/wui/fieldaction.cc:578
 msgid "Build flag"
 msgstr "Postaviť vlajku"
 
-#: ../../src/wui/fieldaction.cc:580
+#: ../../src/wui/fieldaction.cc:582
 msgid "Cancel road"
 msgstr "Zrušiť cestu"
 
-#: ../../src/wui/fieldaction.cc:583
+#: ../../src/wui/fieldaction.cc:585
 msgid "Build roads"
 msgstr "Postaviť cesty"
 
@@ -3409,7 +3417,7 @@ msgid "Ware Statistics"
 msgstr "Štatistika výrobkov"
 
 #: ../../src/wui/game_main_menu.cc:65 ../../src/wui/stock_menu.cc:40
-#: ../../src/wui/ware_statistics_menu.cc:208 ../../src/wui/waresdisplay.cc:59
+#: ../../src/wui/ware_statistics_menu.cc:208 ../../src/wui/waresdisplay.cc:79
 msgid "Stock"
 msgstr "Zásoby"
 
@@ -4192,12 +4200,12 @@ msgid "Remove selected wares from here"
 msgstr "Odstrániť vybrané výrobky"
 
 #: ../../src/wui/warehousewindow.cc:219
-msgid "Wares in dock"
-msgstr "Výrobky v doku"
+msgid "Wares waiting to be shipped"
+msgstr "Výrobky, ktoré sa majú dopraviť"
 
 #: ../../src/wui/warehousewindow.cc:224
-msgid "Workers in dock"
-msgstr "Pracovníci v doku"
+msgid "Workers waiting to embark"
+msgstr "Pracovníci čakajúci na nalodenie"
 
 #: ../../src/wui/warehousewindow.cc:230
 msgid "Expedition"

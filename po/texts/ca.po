@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-18 08:43+0000\n"
-"PO-Revision-Date: 2015-11-18 13:51+0000\n"
+"POT-Creation-Date: 2015-11-28 11:19+0000\n"
+"PO-Revision-Date: 2015-11-28 20:27+0000\n"
 "Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -146,41 +146,41 @@ msgstr "Control general del joc"
 msgid ""
 "To close an open window, right-click on it. To minimize/maximize a window, "
 "click on it with the middle mouse button or with the left mouse button while"
-" holding down CTRL."
-msgstr "Per tancar una finestra oberta, cliqueu amb el botó dret. Per minimitzar/maximitzar una finestra,\ncliqueu la barra de títol amb el botó del mig o amb l'esquerre mentre\nmanteniu premuda la tecla Ctrl."
+" holding down Ctrl."
+msgstr "Per tancar una finestra oberta, cliqueu amb el botó dret. Per minimitzar/maximitzar una finestra,\ncliqueu la barra de títol amb el botó del mig o amb l'esquerre mentre\nmanteniu premuda la tecla «Ctrl»."
 
 #: ../../txts/README.lua:49
 msgid ""
-"If you hold CTRL while building a road, flags will be placed automatically.\n"
-"If you hold CTRL while removing a road, all flags up to the first junction are\n"
+"If you hold Ctrl while building a road, flags will be placed automatically.\n"
+"If you hold Ctrl while removing a road, all flags up to the first junction are\n"
 "removed."
-msgstr "Si manteniu premuda la tecla Ctrl mentre construïu un camí, automàticament\nes plantaran banderes al llarg d'aquest. Si ho feu mentre retireu un camí,\nes destruiran tots els camins i banderes fins a trobar una cruïlla."
+msgstr "Si manteniu premuda la tecla «Ctrl» mentre construïu un camí, automàticament\nes plantaran banderes al llarg d'aquest. Si ho feu mentre retireu un camí,\nes destruiran tots els camins i banderes fins a trobar una cruïlla."
 
 #: ../../txts/README.lua:53
 msgid ""
-"You can skip confirmation windows for irreversible actions if you hold CTRL\n"
+"You can skip confirmation windows for irreversible actions if you hold Ctrl\n"
 "while clicking on the action button."
-msgstr "Podeu saltar-vos les finestres de confirmació d'accions irreversibles\nsi manteniu la tecla Ctrl premuda mentre cliqueu el botó d'acció."
+msgstr "Podeu saltar-vos les finestres de confirmació d'accions irreversibles\nsi manteniu la tecla «Ctrl» premuda mentre cliqueu el botó d'acció."
 
 #: ../../txts/README.lua:56
 msgid "Keyboard shortcuts (in-game)"
 msgstr "Dreceres de teclat (durant la partida)"
 
 #: ../../txts/README.lua:58
-msgid "PAGEUP: increases game speed"
+msgid " Page Up: increases game speed"
 msgstr "Re Pàg: incrementa la velocitat de la partida"
 
 #: ../../txts/README.lua:59
-msgid "PAGEDOWN: decreases game speed"
+msgid " Page Down: decreases game speed"
 msgstr "Av Pàg: redueix la velocitat de la partida"
 
 #: ../../txts/README.lua:60
-msgid "PAUSE: pauses the game"
-msgstr "PAUSE: fer una pausa"
+msgid "Pause: pauses the game"
+msgstr "Pausa: fer una pausa"
 
 #: ../../txts/README.lua:61
-msgid "SPACE: toggles if building spaces are shown"
-msgstr "Espai: commuta entre mostrar o no els espais on construir"
+msgid "Space: toggles if building spaces are shown"
+msgstr "Espai: commuta entre mostrar o no els espais on es pot construir"
 
 #: ../../txts/README.lua:62
 msgid "M: toggles minimap"
@@ -219,7 +219,7 @@ msgid "Home: centers main mapview on starting location"
 msgstr "Inici: centra la vista del mapa en la posició inicial"
 
 #: ../../txts/README.lua:71
-msgid "(CTRL+) 0-9: Remember and go to previously remembered locations"
+msgid "(Ctrl +) 0-9: Remember and go to previously remembered locations"
 msgstr "0-9: vés a les posicions recordades anteriorment (pulsant un número i mantenint Ctrl premuda, recorda la posició)"
 
 #: ../../txts/README.lua:72
@@ -235,15 +235,15 @@ msgid "F6: shows the debug console (only in debug-builds)"
 msgstr "F6: mostra la consola de depuració (només en muntatges de depuració)"
 
 #: ../../txts/README.lua:75
-msgid "CTRL+F10: quits the game immediately"
+msgid "Ctrl + F10: quits the game immediately"
 msgstr "Ctrl+F10: surt del programa immediatament"
 
 #: ../../txts/README.lua:76
-msgid "CTRL+Leftclick: skips confirmation dialogs"
+msgid "Ctrl + Leftclick: skips confirmation dialogs"
 msgstr "Ctrl+Clic esquerre: salta els diàlegs de confirmació"
 
 #: ../../txts/README.lua:77
-msgid "CTRL+F11: takes a screenshot"
+msgid "Ctrl + F11: takes a screenshot"
 msgstr "Ctrl+F11: pren una captura de pantalla"
 
 #: ../../txts/README.lua:79
@@ -280,7 +280,7 @@ msgid "G: jumps to the location corresponding to the current message"
 msgstr "G: salta a la posició corresponent del missatge actual"
 
 #: ../../txts/README.lua:88
-msgid "DELETE: archives/restores the current message"
+msgid "Delete: archives/restores the current message"
 msgstr "Supr: arxiva/restaura el missatge actual"
 
 #: ../../txts/README.lua:90
@@ -535,7 +535,7 @@ msgstr "Dreceres de teclat"
 
 #. TRANSLATORS: This is a hotkey
 #: ../../txts/editor_readme.lua:21
-msgid "SPACE:"
+msgid "Space:"
 msgstr "Espai:"
 
 #: ../../txts/editor_readme.lua:21
@@ -607,7 +607,7 @@ msgstr "activa l'eina d'informació"
 
 #. TRANSLATORS: This is a hotkey
 #: ../../txts/editor_readme.lua:37
-msgid "CTRL+L:"
+msgid "Ctrl + L:"
 msgstr "Ctrl+L:"
 
 #: ../../txts/editor_readme.lua:37
@@ -616,7 +616,7 @@ msgstr "carrega un mapa"
 
 #. TRANSLATORS: This is a hotkey
 #: ../../txts/editor_readme.lua:39
-msgid "CTRL+S:"
+msgid "Ctrl + S:"
 msgstr "Ctrl+S:"
 
 #: ../../txts/editor_readme.lua:39
@@ -634,8 +634,8 @@ msgstr "canvia la mida d'eina"
 
 #. TRANSLATORS: This is a hotkey
 #: ../../txts/editor_readme.lua:43
-msgid "SHIFT (Hold):"
-msgstr "Maj (+acció):"
+msgid "Shift (Hold):"
+msgstr "Maj. (mantinguda premuda):"
 
 #: ../../txts/editor_readme.lua:43
 msgid "selects first alternative tool while pressed"
@@ -643,8 +643,8 @@ msgstr "selecciona la funció alternativa quan es manté premuda"
 
 #. TRANSLATORS: This is a hotkey
 #: ../../txts/editor_readme.lua:45
-msgid "ALT (Hold):"
-msgstr "Alt (+acció):"
+msgid "Alt (Hold):"
+msgstr "Alt (mantinguda premuda):"
 
 #: ../../txts/editor_readme.lua:45
 msgid "Selects second alternative tool while pressed"
@@ -683,7 +683,7 @@ msgstr "Podeu trobar ajuda general per a l'editor i un breu tutorial a la nostra
 
 #: ../../txts/tips/editor.tip:6
 msgid ""
-"You can select multiple animal types if you hold down CTRL during selection."
+"You can select multiple animal types if you hold down Ctrl during selection."
 " If you then click on the map, an instance of one of the selected animal "
 "types will be placed."
 msgstr "Podeu seleccionar diversos tipus d'animals si manteniu premuda la tecla «Ctrl» durant la selecció. Si després cliqueu al mapa, es posarà al mapa un dels animals seleccionats."
@@ -691,20 +691,20 @@ msgstr "Podeu seleccionar diversos tipus d'animals si manteniu premuda la tecla 
 #: ../../txts/tips/editor.tip:10
 msgid ""
 "Just like with animals, you can also select multiple immovables or ground "
-"textures with CTRL + mouse click."
+"textures with Ctrl + mouse click."
 msgstr "Igual que amb els animals, podeu seleccionar diversos objectes inamovibles o textures de terreny amb la combinació «Ctrl+clic»."
 
 #: ../../txts/tips/editor.tip:14
 msgid ""
-"Holding down SHIFT switches the first alternative tool on. This tool is in "
+"Holding down Shift switches the first alternative tool on. This tool is in "
 "most cases the complete opposite of the normal tool (for example deletion of"
 " an object instead of placing one)."
 msgstr "Mantenint premuda la tecla Maj, s'executarà la funció alternativa. Aquesta alternativa molts cops realitzen l'acció contrària de la funció normal (per exemple, treure un objecte del mapa en lloc de posar-lo)."
 
 #: ../../txts/tips/editor.tip:18
 msgid ""
-"Holding down ALT switches the second alternative tool on (if it exists)."
-msgstr "Mantenint premuda la tecla Alt, s'executarà la segona funció alternativa (si està definida)."
+"Holding down Alt switches the second alternative tool on (if it exists)."
+msgstr "Mantenint premuda la tecla «Alt», s'executarà la segona funció alternativa (si està definida)."
 
 #: ../../txts/tips/editor.tip:22
 msgid ""
@@ -714,7 +714,7 @@ msgstr "Les tecles de números (0...9) permeten seleccionar la mida de l'àrea a
 
 #: ../../txts/tips/editor.tip:26
 msgid ""
-"SPACE key behaves like in normal game. It switches if building spaces are "
+"Space key behaves like in normal game. It switches if building spaces are "
 "shown on or off."
 msgstr "La tecla «Espai» es comporta com en una partida normal: commuta entre mostrar o no els espais disponibles per construir-hi."
 

@@ -19,8 +19,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-23 09:42+0000\n"
-"PO-Revision-Date: 2015-11-23 14:27+0000\n"
+"POT-Creation-Date: 2015-11-28 11:19+0000\n"
+"PO-Revision-Date: 2015-11-28 19:34+0000\n"
 "Last-Translator: Venatrix\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -1228,8 +1228,8 @@ msgstr "Mahlt Weizen zu Mehl."
 #. TRANSLATORS: Performance helptext for a building
 #: ../../tribes/buildings/productionsites/empire/mill/helptexts.lua:26
 msgctxt "empire_building"
-msgid "The miller needs %1% on average to grind wheat into a sack of corn."
-msgstr ""
+msgid "The miller needs %1% on average to grind wheat into a sack of flour."
+msgstr "Der Müller braucht durchschnittlich %1%, um Weizen zu Mehl zu mahlen."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/productionsites/empire/piggery/helptexts.lua:16
@@ -1631,18 +1631,9 @@ msgstr "Abhängigkeiten"
 msgid "Health Training"
 msgstr "Lebenspunktetraining"
 
-#. TRANSLATORS: %1$s = Health, Evade, Attack or Defense. %2$s and %3$s are
-#. numbers.
 #: ../../tribes/scripting/help/building_help.lua:423
-#: ../../tribes/scripting/help/building_help.lua:437
-#: ../../tribes/scripting/help/building_help.lua:449
-#: ../../tribes/scripting/help/building_help.lua:462
-msgid "Trains ‘%1$s’ from %2$s up to %3$s"
-msgstr "Trainiert %1$s von %2$s zu %3$s"
-
-#: ../../tribes/scripting/help/building_help.lua:424
-msgid "Health"
-msgstr "die Lebenspunkte"
+msgid "Trains ‘Health’ from %1% up to %2%"
+msgstr "Trainiert „Lebenspunkte“ von %1% auf %2%"
 
 #: ../../tribes/scripting/help/building_help.lua:425
 #: ../../tribes/scripting/help/building_help.lua:439
@@ -1655,25 +1646,27 @@ msgstr "Soldaten:"
 msgid "Attack Training"
 msgstr "Angriffstraining"
 
-#: ../../tribes/scripting/help/building_help.lua:438
-msgid "Attack"
-msgstr "den Angriff"
+#. TRANSLATORS: %1$s = Health, Evade, Attack or Defense. %2$s and %3$s are
+#. numbers.
+#: ../../tribes/scripting/help/building_help.lua:437
+msgid "Trains ‘Attack’ from %1% up to %2%"
+msgstr "Trainiert „Angriff“ von %1% auf %2%"
 
 #: ../../tribes/scripting/help/building_help.lua:448
 msgid "Defense Training"
 msgstr "Verteidigungstraining"
 
-#: ../../tribes/scripting/help/building_help.lua:450
-msgid "Defense"
-msgstr "die Verteidigung"
+#: ../../tribes/scripting/help/building_help.lua:449
+msgid "Trains ‘Defense’ from %1% up to %2%"
+msgstr "Trainiert „Verteidigung“ von %1% auf %2%"
 
 #: ../../tribes/scripting/help/building_help.lua:461
 msgid "Evade Training"
 msgstr "Ausweichtraining"
 
-#: ../../tribes/scripting/help/building_help.lua:463
-msgid "Evade"
-msgstr "das Ausweichen"
+#: ../../tribes/scripting/help/building_help.lua:462
+msgid "Trains ‘Evade’ from %1% up to %2%"
+msgstr "Trainiert „Ausweichen“ von %1% auf %2%"
 
 #. TRANSLATORS: %1$d is a number, %2$s the name of a ware, e.g. 12x Stone
 #: ../../tribes/scripting/help/building_help.lua:490
