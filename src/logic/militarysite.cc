@@ -204,10 +204,17 @@ void MilitarySite::cleanup(EditorGameBase & egbase)
 			 	 	(egbase.map().get_fcoords(get_position()), descr().get_conquers())),
 			 m_defeating_player);
 
+	Building::cleanup(egbase);
+
+	// Evict soldiers to get rid of requests
+	while (m_capacity > 0) {
+		update_soldier_request();
+		--m_capacity;
+	}
+	update_soldier_request();
+
 	m_normal_soldier_request.reset();
 	m_upgrade_soldier_request.reset();
-
-	Building::cleanup(egbase);
 }
 
 
