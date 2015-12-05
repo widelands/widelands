@@ -31,7 +31,7 @@
 namespace Widelands {
 
 CmdCallEconomyBalance::CmdCallEconomyBalance
-	(int32_t const starttime, Economy * const economy, uint32_t const timerid)
+	(uint32_t const starttime, Economy * const economy, uint32_t const timerid)
 	: GameLogicCommand(starttime)
 {
 	m_flag = economy->get_arbitrary_flag();

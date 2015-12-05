@@ -45,11 +45,11 @@ struct SyncCallback {
  * to schedule taking a synchronization hash.
  */
 struct CmdNetCheckSync : public Widelands::Command {
-	CmdNetCheckSync (int32_t dt, SyncCallback *);
+	CmdNetCheckSync (uint32_t dt, SyncCallback *);
 
 	void execute (Widelands::Game &) override;
 
-	uint8_t id() const override {return QUEUE_CMD_NETCHECKSYNC;}
+	Widelands::QueueCommandTypes id() const override {return Widelands::QueueCommandTypes::kNetCheckSync;}
 
 private:
 	SyncCallback * m_callback;

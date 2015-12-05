@@ -420,8 +420,8 @@ function building_help_dependencies_training(tribe, building_description)
    local result = ""
    if (building_description.max_hp and building_description.min_hp) then
       result = result .. rt(h2(_"Health Training"))
-      result = result .. rt(p(_"Trains ‘%1$s’ from %2$s up to %3$s":
-            bformat(_"Health", building_description.min_hp, building_description.max_hp+1)))
+      result = result .. rt(p(_"Trains ‘Health’ from %1% up to %2%":
+            bformat(building_description.min_hp, building_description.max_hp+1)))
       result = result .. rt(h3(_"Soldiers:"))
       result = result ..
          dependencies_basic({
@@ -434,8 +434,8 @@ function building_help_dependencies_training(tribe, building_description)
    if (building_description.max_attack and building_description.min_attack) then
       result = result .. rt(h2(_"Attack Training"))
       -- TRANSLATORS: %1$s = Health, Evade, Attack or Defense. %2$s and %3$s are numbers.
-      result = result .. rt(p(_"Trains ‘%1$s’ from %2$s up to %3$s":
-         bformat(_"Attack", building_description.min_attack, building_description.max_attack+1)))
+      result = result .. rt(p(_"Trains ‘Attack’ from %1% up to %2%":
+         bformat(building_description.min_attack, building_description.max_attack+1)))
       result = result .. rt(h3(_"Soldiers:")) ..
          dependencies_basic({
             "tribes/workers/" .. tribe.name .. "/soldier/attack_level" .. building_description.min_attack .. ".png",
@@ -446,8 +446,8 @@ function building_help_dependencies_training(tribe, building_description)
    end
    if (building_description.max_defense and building_description.min_defense) then
       result = result .. rt(h2(_"Defense Training"))
-      result = result .. rt(p( _"Trains ‘%1$s’ from %2$s up to %3$s":
-            bformat(_"Defense", building_description.min_defense, building_description.max_defense+1)))
+      result = result .. rt(p( _"Trains ‘Defense’ from %1% up to %2%":
+            bformat(building_description.min_defense, building_description.max_defense+1)))
             result = result .. rt(h3(_"Soldiers:"))
       result = result ..
          dependencies_basic({
@@ -459,8 +459,8 @@ function building_help_dependencies_training(tribe, building_description)
    end
    if (building_description.max_evade and building_description.min_evade) then
       result = result .. rt(h2(_"Evade Training"))
-      result = result .. rt(p( _"Trains ‘%1$s’ from %2$s up to %3$s":
-            bformat(_"Evade", building_description.min_evade, building_description.max_evade+1)))
+      result = result .. rt(p( _"Trains ‘Evade’ from %1% up to %2%":
+            bformat(building_description.min_evade, building_description.max_evade+1)))
       result = result .. rt(h3(_"Soldiers:"))
       result = result ..
          dependencies_basic({

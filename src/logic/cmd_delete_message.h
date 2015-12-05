@@ -37,12 +37,12 @@ namespace Widelands {
 /// the savegame.
 struct CmdDeleteMessage : public Command {
 	CmdDeleteMessage
-		(int32_t const t, PlayerNumber const p, MessageId const m)
+		(uint32_t const t, PlayerNumber const p, MessageId const m)
 		: Command(t), player(p), message(m)
 	{}
 
 	void execute (Game & game) override;
-	uint8_t id() const override {return QUEUE_CMD_DELETEMESSAGE;}
+	QueueCommandTypes id() const override {return QueueCommandTypes::kDeleteMessage;}
 
 private:
 	PlayerNumber player;
