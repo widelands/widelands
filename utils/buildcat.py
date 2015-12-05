@@ -16,6 +16,8 @@ import os
 import string
 import subprocess
 import sys
+from time import strftime,gmtime
+from enum import Enum
 
 from confgettext import Conf_GetText
 
@@ -123,12 +125,27 @@ LUAXGETTEXTOPTS+=" --keyword=_ --flag=_:1:pass-lua-format"
 LUAXGETTEXTOPTS+=" --keyword=ngettext:1,2 --flag=ngettext:1:pass-lua-format --flag=ngettext:2:pass-lua-format"
 LUAXGETTEXTOPTS+=" --keyword=pgettext:1c,2 --flag=pgettext:2:pass-lua-format"
 LUAXGETTEXTOPTS+=" --keyword=npgettext:1c,2,3 --flag=npgettext:2:pass-lua-format --flag=npgettext:3:pass-lua-format"
-LUAXGETTEXTOPTS+=" --from-code=UTF-8 -F -c\" TRANSLATORS:\""
-LUAXGETTEXTOPTS+=" --copyright-holder=\"Widelands Development Team\""
-LUAXGETTEXTOPTS+=" --msgid-bugs-address=\"https://bugs.launchpad.net/widelands\""
-LUAXGETTEXTOPTS+=" --package-name=Widelands --package-version=svnVERSION"
+LUAXGETTEXTOPTS+=" --language=Lua --from-code=UTF-8 -F -c\" TRANSLATORS:\""
 
-
+time_now = gmtime()
+# This is the header used for Lua+conf potfiles.
+# Set it to something sensible, as much as is possible here.
+HEAD =  "# Widelands PATH/TO/FILE.PO\n"
+HEAD += "# Copyright (C) 2005-" + strftime("%Y", time_now) + " Widelands Development Team\n"
+HEAD += "# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.\n"
+HEAD += "#\n"
+HEAD += "msgid \"\"\n"
+HEAD += "msgstr \"\"\n"
+HEAD += "\"Project-Id-Version: Widelands svnVERSION\\n\"\n"
+HEAD += "\"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\\n\"\n"
+HEAD += "\"POT-Creation-Date: " + strftime("%Y-%m-%d %H:%M+0000", time_now) + "\\n\"\n"
+HEAD += "\"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\\n\"\n"
+HEAD += "\"Last-Translator: FULL NAME <EMAIL@ADDRESS>\\n\"\n"
+HEAD += "\"Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\\n\"\n"
+HEAD += "\"MIME-Version: 1.0\\n\"\n"
+HEAD += "\"Content-Type: text/plain; charset=UTF-8\\n\"\n"
+HEAD += "\"Content-Transfer-Encoding: 8bit\\n\"\n"
+HEAD += "\n"
 
 def are_we_in_root_directory():
     """Make sure we are called in the root directory"""
@@ -147,6 +164,55 @@ def do_makedirs( dirs ):
     except:
         pass
 
+def pot_modify_header( potfile_in, potfile_out, header ):
+    """
+    Modify the header of a translation catalog read from potfile_in to
+    the given header and write out the modified catalog to potfile_out.
+    
+    Returns whether or not the header was successfully modified.
+    
+    Note: potfile_in and potfile_out must not point to the same file!
+    """
+    class State(Enum):
+        start = 0
+        possibly_empty_msgid = 1
+        search_for_empty_line = 2
+        header_traversed = 3
+        
+    st = State.start
+    with open(potfile_in, "rt") as potin:
+        for line in potin:
+            line = line.strip()
+            
+            if st == State.start:
+                if line.startswith("msgid \"\""):
+                    st = State.possibly_empty_msgid
+                elif line.startswith("msgid"):
+                    # The first entry is not a header entry,
+                    # since msgid is not empty.
+                    return False
+            elif st == State.possibly_empty_msgid:
+                if line.startswith("msgstr"):
+                    # msgstr right after msgid "", which means msgid must
+                    # be empty, therefore we have reached the header entry
+                    st = State.search_for_empty_line
+                else:
+                    # Header check failed.
+                    return False
+            elif st == State.search_for_empty_line:
+                if not line:
+                    st = State.header_traversed
+                    break;
+        
+        if st != State.header_traversed:
+            return False
+        
+        with open(potfile_out, "wt") as potout:
+            potout.write(header)
+            potout.writelines(potin)
+
+        return True
+
 
 def do_compile( potfile, srcfiles ):
     """
@@ -162,9 +228,13 @@ def do_compile( potfile, srcfiles ):
         os.path.splitext(f)[-1].lower() == '.lua' ])
     conf_files = files - lua_files
     
+    temp_potfile = potfile + ".tmp"
+    
+    if (os.path.exists(temp_potfile)): os.remove(temp_potfile)
+    
     # Find translatable strings in Lua files using xgettext
     xgettext = subprocess.Popen("xgettext %s --files-from=- --output=\"%s\"" % \
-        (LUAXGETTEXTOPTS, potfile), shell=True, stdin=subprocess.PIPE)
+        (LUAXGETTEXTOPTS, temp_potfile), shell=True, stdin=subprocess.PIPE)
     try:
         for fname in lua_files:
             xgettext.stdin.write(os.path.normpath(fname) + "\n")
@@ -178,32 +248,35 @@ def do_compile( potfile, srcfiles ):
         sys.stderr.write("xgettext exited with errorcode %i\n" % xgettext_status)
         return False
         
-    xgettext_found_something_to_translate = os.path.exists(potfile)
+    xgettext_found_something_to_translate = os.path.exists(temp_potfile)
     
     # Find translatable strings in configuration files
     conf = Conf_GetText()
     conf.parse(conf_files)
     
     if not (xgettext_found_something_to_translate or conf.found_something_to_translate):
+        # Found no translatable strings
         return False
     
-    if (not conf.found_something_to_translate):
-        return True
-    
-    # At this point some translatable strings were extracted from
-    # the conf files, so merge the conf POT with Lua POT (if any)
-    with open(potfile, "a") as p:
-        if (xgettext_found_something_to_translate):
-            p.write("\n" + conf.toString(header=False))
-            p.close();
-            
+    if (xgettext_found_something_to_translate):
+        header_fixed = pot_modify_header(temp_potfile, potfile, HEAD)
+        os.remove(temp_potfile)
+        
+        if not header_fixed:
+            return False
+        
+        if (conf.found_something_to_translate):
+            # Merge the conf POT with Lua POT
+            with open(potfile, "a") as p:
+                p.write("\n" + conf.toString())
+                
             msguniq_rv = os.system("msguniq \"%s\" -F --output-file=\"%s\"" % (potfile, potfile))
             if (msguniq_rv):
                 sys.stderr.write("msguniq exited with errorcode %i\n" % msguniq_rv)
                 return False
-        else:
-            p.write(conf.toString(header=True))
-            p.close();
+    elif (conf.found_something_to_translate):
+        with open(potfile, "w") as p:
+            p.write(HEAD + conf.toString())
 
     return True
     

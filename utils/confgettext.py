@@ -5,28 +5,8 @@ if some are found they are output in a xgettext style file"""
 
 import sys
 import os
-from time import strftime,gmtime
 
 from collections import defaultdict
-
-time_now = gmtime()
-### Set the header to something sensible, a much as is possible here.
-head =  "# Widelands PATH/TO/FILE.PO\n"
-head += "# Copyright (C) 2005-" + strftime("%Y", time_now) + " Widelands Development Team\n"
-head += "# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.\n"
-head += "#\n"
-head += "msgid \"\"\n"
-head += "msgstr \"\"\n"
-head += "\"Project-Id-Version: Widelands svnVERSION\\n\"\n"
-head += "\"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\\n\"\n"
-head += "\"POT-Creation-Date: " + strftime("%Y-%m-%d %H:%M+0000", time_now) + "\\n\"\n"
-head += "\"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\\n\"\n"
-head += "\"Last-Translator: FULL NAME <EMAIL@ADDRESS>\\n\"\n"
-head += "\"Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\\n\"\n"
-head += "\"MIME-Version: 1.0\\n\"\n"
-head += "\"Content-Type: text/plain; charset=UTF-8\\n\"\n"
-head += "\"Content-Transfer-Encoding: 8bit\\n\"\n"
-head += "\n"
 
 class occurences:
     def __init__( self, file, line ):
@@ -87,6 +67,7 @@ def _format_msgid(tag, string, output):
 class Conf_GetText(object):
     def __init__(self):
         self.translatable_strings = []
+        
         
     @property
     def found_something_to_translate(self):
@@ -158,7 +139,7 @@ class Conf_GetText(object):
         self.translatable_strings.sort( lambda str1,str2:
                     cmp(str1.occurences[0].file,str2.occurences[0].file) )
     
-    def toString(self, header=True):
+    def toString(self):
         lines = []
         for i in self.translatable_strings:
             for occ in i.occurences:
@@ -166,7 +147,4 @@ class Conf_GetText(object):
                 
             _format_msgid('msgid', i.str, lines)
             lines.extend(['msgstr ""', ''])
-        if (header):
-            return (head + "\n".join(lines))
-        else:
-            return ("\n".join(lines))
+        return ("\n".join(lines))
