@@ -47,8 +47,6 @@
 
 namespace {
 
-constexpr uint32_t kSpinboxWidth = 240;
-
 // Data model for the entries in the language selection list.
 struct LanguageEntry {
 	LanguageEntry(const std::string& init_localename,
@@ -138,9 +136,10 @@ FullscreenMenuOptions::FullscreenMenuOptions
 			UI::TabPanel::Type::kBorder),
 
 	box_interface_(&tabs_, 0, 0, UI::Box::Vertical, 0, 0, padding_),
+	box_windows_(&tabs_, 0, 0, UI::Box::Vertical, 0, 0, padding_),
 	box_sound_(&tabs_, 0, 0, UI::Box::Vertical, 0, 0, padding_),
 	box_saving_(&tabs_, 0, 0, UI::Box::Vertical, 0, 0, padding_),
-	box_gamecontrol_(&tabs_, 0, 0, UI::Box::Vertical, 0, 0, padding_),
+	box_game_(&tabs_, 0, 0, UI::Box::Vertical, 0, 0, padding_),
 	box_language_(&tabs_, 0, 0, UI::Box::Vertical, 0, 0, padding_),
 
 	// Interface options
@@ -150,30 +149,29 @@ FullscreenMenuOptions::FullscreenMenuOptions
 	fullscreen_ (&box_interface_, Point(0, 0), _("Fullscreen"), "", column_width_),
 	inputgrab_ (&box_interface_, Point(0, 0), _("Grab Input"), "", column_width_),
 
-	sb_maxfps_(&box_interface_, 0, 0, column_width_, kSpinboxWidth, opt.maxfps, 0, 99, _("Maximum FPS:"), ""),
+	sb_maxfps_(&box_interface_, 0, 0, column_width_ / 2, column_width_ / 4, opt.maxfps, 0, 99, _("Maximum FPS:"), ""),
 
-	snap_win_overlap_only_(&box_interface_, Point(0, 0), _("Snap windows only when overlapping"),
+
+	// Windows options
+	snap_win_overlap_only_(&box_windows_, Point(0, 0), _("Snap windows only when overlapping"),
 								  "", column_width_),
-	dock_windows_to_edges_(&box_interface_, Point(0, 0), _("Dock windows to edges"),
+	dock_windows_to_edges_(&box_windows_, Point(0, 0), _("Dock windows to edges"),
 								  "", column_width_),
 
 	sb_dis_panel_
-			(&box_interface_, 0, 0, column_width_, kSpinboxWidth,
+			(&box_windows_, 0, 0, column_width_, 200,
 			 opt.panel_snap_distance, 0, 99,_("Distance for windows to snap to other panels:"),
 			 /** TRANSLATORS: Options: Distance for windows to snap to  other panels: */
 			 /** TRANSLATORS: This will have a number added in front of it */
 			 ngettext("pixel", "pixels", opt.panel_snap_distance)),
 
 	sb_dis_border_
-			(&box_interface_, 0, 0, column_width_, kSpinboxWidth,
+			(&box_windows_, 0, 0, column_width_, 200,
 			 opt.border_snap_distance, 0, 99,
 			 _("Distance for windows to snap to borders:"),
 			 /** TRANSLATORS: Options: Distance for windows to snap to borders: */
 			 /** TRANSLATORS: This will have a number added in front of it */
 			 ngettext("pixel", "pixels", opt.border_snap_distance)),
-
-	transparent_chat_(&box_interface_, Point(0, 0), _("Show in-game chat with transparent background"),
-							"", column_width_),
 
 	// Sound options
 	music_ (&box_sound_, Point(0, 0), _("Enable Music"), "", column_width_),
@@ -183,7 +181,7 @@ FullscreenMenuOptions::FullscreenMenuOptions
 
 	// Saving options
 	sb_autosave_
-		(&box_saving_, 0, 0, column_width_, kSpinboxWidth,
+		(&box_saving_, 0, 0, column_width_, 240,
 		 opt.autosave / 60, 0, 100, _("Save game automatically every"),
 		 /** TRANSLATORS: Options: Save game automatically every: */
 		 /** TRANSLATORS: This will have a number added in front of it */
@@ -191,7 +189,7 @@ FullscreenMenuOptions::FullscreenMenuOptions
 		 g_gr->images().get("pics/but3.png"), true),
 
 	sb_remove_replays_
-		(&box_saving_, 0, 0, column_width_, kSpinboxWidth,
+		(&box_saving_, 0, 0, column_width_, 240,
 		 opt.remove_replays, 0, 365, _("Remove replays older than:"),
 		 /** TRANSLATORS: Options: Remove Replays older than: */
 		 /** TRANSLATORS: This will have a number added in front of it */
@@ -203,14 +201,16 @@ FullscreenMenuOptions::FullscreenMenuOptions
 	remove_syncstreams_(&box_saving_, Point(0, 0), _("Remove Syncstream dumps on startup"),
 							  "", column_width_),
 
-	// Game Control options
+	// Game options
+	auto_roadbuild_mode_(&box_game_, Point(0, 0), _("Start building road after placing a flag")),
+	show_workarea_preview_(&box_game_, Point(0, 0), _("Show buildings area preview")),
+	transparent_chat_(&box_game_, Point(0, 0), _("Show in-game chat with transparent background"),
+							"", column_width_),
 	/** TRANSLATORS: A watchwindow is a window where you keep watching an object or a map region,*/
 	/** TRANSLATORS: and it also lets you jump to it on the map. */
-	single_watchwin_(&box_gamecontrol_, Point(0, 0), _("Use single watchwindow mode")),
-	auto_roadbuild_mode_(&box_gamecontrol_, Point(0, 0), _("Start building road after placing a flag")),
-	show_workarea_preview_(&box_gamecontrol_, Point(0, 0), _("Show buildings area preview")),
+	single_watchwin_(&box_game_, Point(0, 0), _("Use single watchwindow mode")),
 
-	// Language
+	// Language options
 	label_language_(&box_language_, _("Language"), UI::Align_Left),
 	language_list_(&box_language_, 0, 0, column_width_ / 2,
 						get_inner_h() - tab_panel_y_ - buth_ - hmargin_ - 5 * padding_,
@@ -218,18 +218,23 @@ FullscreenMenuOptions::FullscreenMenuOptions
 
 	os(opt)
 {
+	// Set up UI Elements
+	title_           .set_textstyle(UI::TextStyle::ui_big());
+
 	tabs_.add("options_interface", _("Interface"), &box_interface_, "");
+	tabs_.add("options_windows", _("Windows"), &box_windows_, "");
 	tabs_.add("options_sound", _("Sound"), &box_sound_, "");
 	tabs_.add("options_saving", _("Saving"), &box_saving_, "");
-	tabs_.add("options_gamecontrol", _("Game Control"), &box_gamecontrol_, "");
+	tabs_.add("options_game", _("Game"), &box_game_, "");
 	tabs_.add("options_language", _("Language"), &box_language_, "");
 
 	tabs_.set_pos(Point(hmargin_, tab_panel_y_));
 
 	box_interface_.set_size(tabs_.get_inner_w(), tabs_.get_inner_h());
+	box_windows_.set_size(tabs_.get_inner_w(), tabs_.get_inner_h());
 	box_sound_.set_size(tabs_.get_inner_w(), tabs_.get_inner_h());
 	box_saving_.set_size(tabs_.get_inner_w(), tabs_.get_inner_h());
-	box_gamecontrol_.set_size(tabs_.get_inner_w(), tabs_.get_inner_h());
+	box_game_.set_size(tabs_.get_inner_w(), tabs_.get_inner_h());
 	box_language_.set_size(tabs_.get_inner_w(), tabs_.get_inner_h());
 
 	// Interface
@@ -238,11 +243,12 @@ FullscreenMenuOptions::FullscreenMenuOptions
 	box_interface_.add(&fullscreen_, UI::Align_Left);
 	box_interface_.add(&inputgrab_, UI::Align_Left);
 	box_interface_.add(&sb_maxfps_, UI::Align_Left);
-	box_interface_.add(&snap_win_overlap_only_, UI::Align_Left);
-	box_interface_.add(&dock_windows_to_edges_, UI::Align_Left);
-	box_interface_.add(&sb_dis_panel_, UI::Align_Left);
-	box_interface_.add(&sb_dis_border_, UI::Align_Left);
-	box_interface_.add(&transparent_chat_, UI::Align_Left);
+
+	// Windows
+	box_windows_.add(&snap_win_overlap_only_, UI::Align_Left);
+	box_windows_.add(&dock_windows_to_edges_, UI::Align_Left);
+	box_windows_.add(&sb_dis_panel_, UI::Align_Left);
+	box_windows_.add(&sb_dis_border_, UI::Align_Left);
 
 	// Sound
 	box_sound_.add(&music_, UI::Align_Left);
@@ -255,15 +261,18 @@ FullscreenMenuOptions::FullscreenMenuOptions
 	box_saving_.add(&nozip_, UI::Align_Left);
 	box_saving_.add(&remove_syncstreams_, UI::Align_Left);
 
-	// Game control
-	box_gamecontrol_.add(&single_watchwin_, UI::Align_Left);
-	box_gamecontrol_.add(&auto_roadbuild_mode_, UI::Align_Left);
-	box_gamecontrol_.add(&show_workarea_preview_, UI::Align_Left);
+	// Game
+	box_game_.add(&auto_roadbuild_mode_, UI::Align_Left);
+	box_game_.add(&show_workarea_preview_, UI::Align_Left);
+	box_game_.add(&transparent_chat_, UI::Align_Left);
+	box_game_.add(&single_watchwin_, UI::Align_Left);
 
 	// Language
 	box_language_.add(&label_language_, UI::Align_Left);
 	box_language_.add(&language_list_, UI::Align_Left);
 
+
+	// Bind actions
 	cancel_.sigclicked.connect(boost::bind(&FullscreenMenuOptions::clicked_back, this));
 	apply_.sigclicked.connect(boost::bind(&FullscreenMenuOptions::clicked_ok, this));
 
@@ -297,7 +306,7 @@ FullscreenMenuOptions::FullscreenMenuOptions
 					 boost::ref(*this)));
 	}
 
-	title_           .set_textstyle(UI::TextStyle::ui_big());
+	// Fill in data
 	fullscreen_      .set_state(opt.fullscreen);
 	inputgrab_       .set_state(opt.inputgrab);
 	music_           .set_state(opt.music);

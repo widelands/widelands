@@ -102,9 +102,10 @@ private:
 	// UI elements
 	UI::TabPanel tabs_;
 	UI::Box box_interface_;
+	UI::Box box_windows_;
 	UI::Box box_sound_;
 	UI::Box box_saving_;
-	UI::Box box_gamecontrol_;
+	UI::Box box_game_;
 	UI::Box box_language_;
 
 	// Interface options
@@ -113,29 +114,31 @@ private:
 	UI::Checkbox                fullscreen_;
 	UI::Checkbox                inputgrab_;
 	UI::SpinBox                 sb_maxfps_;
+
+	// Windows options
 	UI::Checkbox                snap_win_overlap_only_;
 	UI::Checkbox                dock_windows_to_edges_;
 	UI::SpinBox                 sb_dis_panel_;
 	UI::SpinBox                 sb_dis_border_;
-	UI::Checkbox                transparent_chat_;
 
 	// Sound options
 	UI::Checkbox                music_;
 	UI::Checkbox                fx_;
 	UI::Checkbox                message_sound_;
 
-	// Saving
+	// Saving options
 	UI::SpinBox                 sb_autosave_;
 	UI::SpinBox                 sb_remove_replays_;
 	UI::Checkbox                nozip_;
 	UI::Checkbox                remove_syncstreams_;
 
-	// Game Control
-	UI::Checkbox                single_watchwin_;
+	// Game options
 	UI::Checkbox                auto_roadbuild_mode_;
 	UI::Checkbox                show_workarea_preview_;
+	UI::Checkbox                transparent_chat_;
+	UI::Checkbox                single_watchwin_;
 
-	// Language
+	// Language options
 	UI::Textarea                label_language_;
 	UI::Listselect<std::string> language_list_;
 

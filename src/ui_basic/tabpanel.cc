@@ -19,7 +19,6 @@
 
 #include "ui_basic/tabpanel.h"
 
-#include "base/log.h" // NOCOM
 #include "graphic/font_handler1.h"
 #include "graphic/rendertarget.h"
 #include "graphic/text_layout.h"

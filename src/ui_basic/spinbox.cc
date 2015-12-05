@@ -192,6 +192,7 @@ SpinBox::SpinBox
 	buttons_.push_back(sbi_->button_minus);
 	buttons_.push_back(sbi_->button_plus);
 	box_->set_size(actual_w, texth * (extra_rows + 1));
+	set_desired_size(actual_w, texth * (extra_rows + 1));
 	set_size(actual_w, texth * (extra_rows + 1));
 	update();
 }
