@@ -99,7 +99,7 @@ FullscreenMenuOptions::FullscreenMenuOptions
 	FullscreenMenuBase("ui_fsmenu.jpg"),
 
 // Values for alignment and size
-	butw_    (get_w() / 4),
+	butw_    (get_w() / 5),
 	buth_    (get_h() * 9 / 200),
 	hmargin_ (get_w() * 19 / 200),
 	padding_ (10),
@@ -117,18 +117,25 @@ FullscreenMenuOptions::FullscreenMenuOptions
 	// Buttons
 	cancel_
 		(this, "cancel",
-		 get_w() * 2 / 3 - butw_ / 2,
+		 get_w() * 1 / 4 - butw_ / 2,
 		 get_inner_h() - hmargin_,
 		 butw_, buth_,
 		 g_gr->images().get("pics/but0.png"),
 		 _("Cancel"), std::string(), true, false),
 	apply_
 		(this, "apply",
-		 get_w() * 1 / 3 - butw_ / 2,
+		 get_w() * 2 / 4 - butw_ / 2,
+		 get_inner_h() - hmargin_,
+		 butw_, buth_,
+		 g_gr->images().get("pics/but0.png"),
+		 _("Apply"), std::string(), true, false),
+	ok_
+		(this, "ok",
+		 get_w() * 3 / 4 - butw_ / 2,
 		 get_inner_h() - hmargin_,
 		 butw_, buth_,
 		 g_gr->images().get("pics/but2.png"),
-		 _("Apply"), std::string(), true, false),
+		 _("OK"), std::string(), true, false),
 
 	tabs_(this, hmargin_, 0,
 			tab_panel_width_, get_inner_h() - tab_panel_y_ - buth_ - hmargin_,
@@ -149,7 +156,9 @@ FullscreenMenuOptions::FullscreenMenuOptions
 	fullscreen_ (&box_interface_, Point(0, 0), _("Fullscreen"), "", column_width_),
 	inputgrab_ (&box_interface_, Point(0, 0), _("Grab Input"), "", column_width_),
 
-	sb_maxfps_(&box_interface_, 0, 0, column_width_ / 2, column_width_ / 4, opt.maxfps, 0, 99, _("Maximum FPS:"), ""),
+	sb_maxfps_(&box_interface_, 0, 0, column_width_ / 2, column_width_ / 4,
+				  opt.maxfps, 0, 99,
+				  _("Maximum FPS:"), ""),
 
 
 	// Windows options
@@ -160,7 +169,7 @@ FullscreenMenuOptions::FullscreenMenuOptions
 
 	sb_dis_panel_
 			(&box_windows_, 0, 0, column_width_, 200,
-			 opt.panel_snap_distance, 0, 99,_("Distance for windows to snap to other panels:"),
+			 opt.panel_snap_distance, 0, 99, _("Distance for windows to snap to other panels:"),
 			 /** TRANSLATORS: Options: Distance for windows to snap to  other panels: */
 			 /** TRANSLATORS: This will have a number added in front of it */
 			 ngettext("pixel", "pixels", opt.panel_snap_distance)),
@@ -216,7 +225,7 @@ FullscreenMenuOptions::FullscreenMenuOptions
 						get_inner_h() - tab_panel_y_ - buth_ - hmargin_ - 5 * padding_,
 						UI::Align_Left, true),
 
-	os(opt)
+	os_(opt)
 {
 	// Set up UI Elements
 	title_           .set_textstyle(UI::TextStyle::ui_big());
@@ -227,6 +236,11 @@ FullscreenMenuOptions::FullscreenMenuOptions
 	tabs_.add("options_saving", _("Saving"), &box_saving_, "");
 	tabs_.add("options_game", _("Game"), &box_game_, "");
 	tabs_.add("options_language", _("Language"), &box_language_, "");
+
+	// We want the last active tab when "Apply" was clicked.
+	if (os_.active_tab < tabs_.tabs().size()) {
+		tabs_.activate(os_.active_tab);
+	}
 
 	tabs_.set_pos(Point(hmargin_, tab_panel_y_));
 
@@ -274,7 +288,8 @@ FullscreenMenuOptions::FullscreenMenuOptions
 
 	// Bind actions
 	cancel_.sigclicked.connect(boost::bind(&FullscreenMenuOptions::clicked_back, this));
-	apply_.sigclicked.connect(boost::bind(&FullscreenMenuOptions::clicked_ok, this));
+	apply_.sigclicked.connect(boost::bind(&FullscreenMenuOptions::clicked_apply, this));
+	ok_.sigclicked.connect(boost::bind(&FullscreenMenuOptions::clicked_ok, this));
 
 	/** TRANSLATORS Options: Save game automatically every: */
 	sb_autosave_     .add_replacement(0, _("Off"));
@@ -448,34 +463,42 @@ void FullscreenMenuOptions::add_languages_to_list(const std::string& current_loc
 }
 
 
+void FullscreenMenuOptions::clicked_apply() {
+	end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kApplyOptions);
+}
+
+
 OptionsCtrl::OptionsStruct FullscreenMenuOptions::get_values() {
 	const uint32_t res_index = resolution_list_.selection_index();
 
 	// Write all data from UI elements
-	os.xres                  = resolutions_[res_index].xres;
-	os.yres                  = resolutions_[res_index].yres;
-	os.inputgrab             = inputgrab_.get_state();
-	os.fullscreen            = fullscreen_.get_state();
-	os.single_watchwin       = single_watchwin_.get_state();
-	os.auto_roadbuild_mode   = auto_roadbuild_mode_.get_state();
-	os.show_warea            = show_workarea_preview_.get_state();
-	os.snap_win_overlap_only = snap_win_overlap_only_.get_state();
-	os.dock_windows_to_edges = dock_windows_to_edges_.get_state();
-	os.music                 = music_.get_state();
-	os.fx                    = fx_.get_state();
+	os_.xres                  = resolutions_[res_index].xres;
+	os_.yres                  = resolutions_[res_index].yres;
+	os_.inputgrab             = inputgrab_.get_state();
+	os_.fullscreen            = fullscreen_.get_state();
+	os_.single_watchwin       = single_watchwin_.get_state();
+	os_.auto_roadbuild_mode   = auto_roadbuild_mode_.get_state();
+	os_.show_warea            = show_workarea_preview_.get_state();
+	os_.snap_win_overlap_only = snap_win_overlap_only_.get_state();
+	os_.dock_windows_to_edges = dock_windows_to_edges_.get_state();
+	os_.music                 = music_.get_state();
+	os_.fx                    = fx_.get_state();
 	if (language_list_.has_selection())
-		os.language           = language_list_.get_selected();
-	os.autosave              = sb_autosave_.get_value();
-	os.maxfps                = sb_maxfps_.get_value();
-	os.remove_replays        = sb_remove_replays_.get_value();
-		os.message_sound        = message_sound_.get_state();
-	os.nozip                = nozip_.get_state();
-	os.panel_snap_distance  = sb_dis_panel_.get_value();
-	os.border_snap_distance = sb_dis_border_.get_value();
-	os.remove_syncstreams   = remove_syncstreams_.get_state();
-	os.transparent_chat     = transparent_chat_.get_state();
+		os_.language           = language_list_.get_selected();
+	os_.autosave              = sb_autosave_.get_value();
+	os_.maxfps                = sb_maxfps_.get_value();
+	os_.remove_replays        = sb_remove_replays_.get_value();
+		os_.message_sound        = message_sound_.get_state();
+	os_.nozip                = nozip_.get_state();
+	os_.panel_snap_distance  = sb_dis_panel_.get_value();
+	os_.border_snap_distance = sb_dis_border_.get_value();
+	os_.remove_syncstreams   = remove_syncstreams_.get_state();
+	os_.transparent_chat     = transparent_chat_.get_state();
 
-	return os;
+	// Last tab for reloading the options menu
+	os_.active_tab = tabs_.active();
+
+	return os_;
 }
 
 
@@ -484,7 +507,7 @@ OptionsCtrl::OptionsStruct FullscreenMenuOptions::get_values() {
  * Handles communication between window class and options
  */
 OptionsCtrl::OptionsCtrl(Section & s)
-: opt_section_(s), opt_dialog_(new FullscreenMenuOptions(options_struct()))
+: opt_section_(s), opt_dialog_(new FullscreenMenuOptions(options_struct(0)))
 {
 	handle_menu();
 }
@@ -498,14 +521,15 @@ void OptionsCtrl::handle_menu()
 	FullscreenMenuBase::MenuTarget i = opt_dialog_->run<FullscreenMenuBase::MenuTarget>();
 	if (i != FullscreenMenuBase::MenuTarget::kBack)
 		save_options();
-	if (i == FullscreenMenuBase::MenuTarget::kRestart) {
+	if (i == FullscreenMenuBase::MenuTarget::kApplyOptions) {
+		uint32_t active_tab = opt_dialog_->get_values().active_tab;
 		delete opt_dialog_;
-		opt_dialog_ = new FullscreenMenuOptions(options_struct());
+		opt_dialog_ = new FullscreenMenuOptions(options_struct(active_tab));
 		handle_menu(); // Restart general options menu
 	}
 }
 
-OptionsCtrl::OptionsStruct OptionsCtrl::options_struct() {
+OptionsCtrl::OptionsStruct OptionsCtrl::options_struct(uint32_t active_tab) {
 	OptionsStruct opt;
 	opt.xres = opt_section_.get_int("xres", DEFAULT_RESOLUTION_W);
 	opt.yres = opt_section_.get_int("yres", DEFAULT_RESOLUTION_H);
@@ -531,6 +555,8 @@ OptionsCtrl::OptionsStruct OptionsCtrl::options_struct() {
 	opt.remove_replays = opt_section_.get_int("remove_replays", 0);
 	opt.remove_syncstreams = opt_section_.get_bool("remove_syncstreams", true);
 	opt.transparent_chat = opt_section_.get_bool("transparent_chat", true);
+
+	opt.active_tab = active_tab;
 	return opt;
 }
 

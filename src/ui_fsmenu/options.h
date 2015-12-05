@@ -40,6 +40,7 @@ class Section;
 class OptionsCtrl {
 public:
 	struct OptionsStruct {
+		// NOCOM reorder these once we have decided on where everything goes.
 		int32_t xres;
 		int32_t yres;
 		bool inputgrab;
@@ -65,12 +66,15 @@ public:
 		std::string ui_font;
 		int32_t border_snap_distance;
 		int32_t panel_snap_distance;
+
+		// Last tab for reloading the options menu
+		uint32_t active_tab;
 	};
 
 	OptionsCtrl(Section &);
 	~OptionsCtrl();
 	void handle_menu();
-	OptionsCtrl::OptionsStruct options_struct();
+	OptionsCtrl::OptionsStruct options_struct(uint32_t active_tab);
 	void save_options();
 private:
 	Section & opt_section_;
@@ -87,6 +91,17 @@ public:
 	OptionsCtrl::OptionsStruct get_values();
 
 private:
+	void update_sb_autosave_unit();
+	void update_sb_remove_replays_unit();
+	void update_sb_dis_panel_unit();
+	void update_sb_dis_border_unit();
+
+	// Fills the language selection list
+	void add_languages_to_list(const std::string& current_locale);
+
+	// Saves the options and reloads the active tab
+	void clicked_apply();
+
 	uint32_t const              butw_;
 	uint32_t const              buth_;
 	uint32_t const              hmargin_;
@@ -97,7 +112,7 @@ private:
 	uint32_t const              tab_panel_y_;
 
 	UI::Textarea                title_;
-	UI::Button                  cancel_, apply_;
+	UI::Button                  cancel_, apply_, ok_;
 
 	// UI elements
 	UI::TabPanel tabs_;
@@ -142,15 +157,7 @@ private:
 	UI::Textarea                label_language_;
 	UI::Listselect<std::string> language_list_;
 
-	OptionsCtrl::OptionsStruct  os;
-
-	void update_sb_autosave_unit();
-	void update_sb_remove_replays_unit();
-	void update_sb_dis_panel_unit();
-	void update_sb_dis_border_unit();
-
-	// Fills the language selection list
-	void add_languages_to_list(const std::string& current_locale);
+	OptionsCtrl::OptionsStruct  os_;
 
 	class ScreenResolution {
 	public:

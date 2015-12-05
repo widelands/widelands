@@ -35,7 +35,8 @@ struct TabPanel;
 struct Tab : public NamedPanel {
 	friend struct TabPanel;
 
-	/** If title is not empty, this will be a textual tab. In that case, pic will need to be the rendered title */
+	/** If title is not empty, this will be a textual tab.
+	 *  In that case, pic will need to be the rendered title */
 	Tab
 		(TabPanel * parent,
 		 size_t id,

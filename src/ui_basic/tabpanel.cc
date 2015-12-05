@@ -269,16 +269,13 @@ void TabPanel::draw(RenderTarget & dst)
 	if (pic_background_) {
 		if (!tabs_.empty()) {
 			dst.tile
-				(Rect(Point(0, 0),
-						tabs_[tabs_.size() - 1]->get_x() + tabs_[tabs_.size() - 1]->get_w(),
-						kTabPanelButtonHeight - 2),
-				 pic_background_, Point(get_x(), get_y()));
+				(Rect(Point(0, 0), tabs_.back()->get_x() + tabs_.back()->get_w(), kTabPanelButtonHeight - 2),
+				 pic_background_,
+				 Point(get_x(), get_y()));
 		}
 		assert(kTabPanelButtonHeight - 2 <= get_h());
 		dst.tile
-			(Rect
-			 (Point(0, kTabPanelButtonHeight - 2),
-			  get_w(), get_h() - kTabPanelButtonHeight + 2),
+			(Rect(Point(0, kTabPanelButtonHeight - 2), get_w(), get_h() - kTabPanelButtonHeight + 2),
 			 pic_background_,
 			 Point(get_x(), get_y() + kTabPanelButtonHeight - 2));
 	}
