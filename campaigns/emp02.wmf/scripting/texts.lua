@@ -154,7 +154,7 @@ diary_page_7 = {
    posy=1,
    body= lutius(_"Diary of Lutius",
       -- TRANSLATORS: Lutius - Diary
-      _[[Great! Today the building of the quarry was completed. Now we will get enough stones to construct larger buildings.]]),
+      _[[Great! Today the building of the quarry was completed. Now we will get enough granite and marble to construct larger buildings.]]),
 }
 
 saledus_1 = {

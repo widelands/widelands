@@ -35,7 +35,7 @@ struct CmdCalculateStatistics : public GameLogicCommand {
 	void write(FileWrite &, EditorGameBase &, MapObjectSaver  &) override;
 	void read (FileRead  &, EditorGameBase &, MapObjectLoader &) override;
 
-	uint8_t id() const override {return QUEUE_CMD_CALCULATE_STATISTICS;}
+	QueueCommandTypes id() const override {return QueueCommandTypes::kCalculateStatistics;}
 	void execute(Game &) override;
 };
 

@@ -289,24 +289,52 @@ void Table<void *>::draw(RenderTarget & dst)
 			Align alignment = mirror_alignment(column.alignment);
 
 			const Image* entry_picture = er.get_picture(i);
-			const std::string &       entry_string  = er.get_string (i);
-			uint32_t picw = 0;
-			uint32_t pich = 0;
+			const std::string& entry_string = er.get_string(i);
+
+			Point point(curx, y);
+			int picw = 0;
+			int pich = 0;
 
 			if (entry_picture) {
 				picw = entry_picture->width();
 				pich = entry_picture->height();
-			}
-			Point point(curx, y);
-			if (entry_picture) {
-				dst.blit
-					(point +
-					 Point
-					 	(0,
-					 	 (static_cast<int32_t>(lineheight) -
-					 	  static_cast<int32_t>(pich))
-					 	 / 2),
-					 entry_picture);
+
+				int draw_x = point.x;
+
+				if (pich > 0 && pich > lineheight) {
+					// Scale image to fit lineheight
+					double image_scale = static_cast<double>(lineheight) / pich;
+					int blit_width = image_scale * picw;
+
+					if (entry_string.empty()) {
+						if (i == nr_columns - 1 && m_scrollbar->is_enabled()) {
+							draw_x = point.x + (curw - blit_width - m_scrollbar->get_w()) / 2;
+						} else {
+							draw_x = point.x + (curw - blit_width) / 2;
+						}
+					}
+
+					dst.blitrect_scale(
+								// Center align if text is empty
+								Rect(draw_x,
+									  point.y,
+									  blit_width,
+									  lineheight),
+								entry_picture,
+								Rect(0, 0, picw, pich),
+								1.,
+								BlendMode::UseAlpha);
+					picw = blit_width;
+				} else {
+					if (entry_string.empty()) {
+						if (i == nr_columns - 1 && m_scrollbar->is_enabled()) {
+							draw_x = point.x + (curw - picw - m_scrollbar->get_w()) / 2;
+						} else {
+							draw_x = point.x + (curw - picw) / 2;
+						}
+					}
+					dst.blit(Point(draw_x, point.y + (lineheight - pich) / 2), entry_picture);
+				}
 				point.x += picw;
 			}
 
@@ -315,11 +343,17 @@ void Table<void *>::draw(RenderTarget & dst)
 				continue;
 			}
 			const Image* entry_text_im = UI::g_fh1->render(as_uifont(entry_string, m_fontsize));
-			uint16_t text_width = entry_text_im->width();
+
 			if (alignment & Align_Right) {
 				point.x += curw - picw;
 			} else if (alignment & Align_HCenter) {
 				point.x += (curw - picw) / 2;
+			}
+
+			// Add an offset for rightmost column when the scrollbar is shown.
+			uint16_t text_width = entry_text_im->width();
+			if (i == nr_columns - 1 && m_scrollbar->is_enabled()) {
+				text_width = text_width + m_scrollbar->get_w();
 			}
 			UI::correct_for_align(alignment, text_width, entry_text_im->height(), &point);
 			// Crop to column width

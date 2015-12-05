@@ -159,6 +159,8 @@ BuildingDescr::BuildingDescr
 
 	directory_ = table.get_string("directory");
 
+	m_needs_seafaring = table.has_key("needs_seafaring") ? table.get_bool("needs_seafaring") : false;
+
 	if (table.has_key("vision_range")) {
 		m_vision_range = table.get_int("vision_range");
 	}
@@ -860,6 +862,8 @@ void Building::send_message
 	(Game & game,
 	 const Message::Type msgtype,
 	 const std::string & title,
+	 const std::string & icon_filename,
+	 const std::string & heading,
 	 const std::string & description,
 	 bool link_to_building_lifetime,
 	 uint32_t throttle_time,
@@ -887,7 +891,7 @@ void Building::send_message
 			% rt_description % description).str();
 
 	Message * msg = new Message
-		(msgtype, game.get_gametime(), title, rt_description,
+		(msgtype, game.get_gametime(), title, icon_filename, heading, rt_description,
 		 get_position(), (link_to_building_lifetime ? m_serial : 0));
 
 	if (throttle_time)
