@@ -25,6 +25,7 @@
 #include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
+#include "graphic/text/bidi.h"
 #include "graphic/text/font_set.h"
 #include "graphic/text_constants.h"
 #include "graphic/text_layout.h"
@@ -352,8 +353,22 @@ void Table<void *>::draw(RenderTarget & dst)
 				text_width = text_width + m_scrollbar->get_w();
 			}
 			UI::correct_for_align(alignment, text_width, entry_text_im->height(), &point);
-			// Crop to column width
-			dst.blitrect(point, entry_text_im, Rect(0, 0, curw - picw, lineheight));
+
+			// Crop to column width while blitting
+			if (UI::g_fh1->fontset().is_rtl() &&
+				 ((static_cast<int32_t>(curw) + picw) < text_width)) { // Extra treatment for BiDi languages
+				point.x = curx + picw;
+				if(i18n::has_rtl_character(entry_string.c_str())) {
+					dst.blitrect(point,
+									 entry_text_im,
+									 Rect(text_width - curw + picw, 0, text_width, lineheight));
+				}
+				else {
+					dst.blitrect(point, entry_text_im, Rect(0, 0, curw - picw, lineheight));
+				}
+			} else {
+				dst.blitrect(point, entry_text_im, Rect(0, 0, curw - picw, lineheight));
+			}
 			curx += curw;
 		}
 
