@@ -98,6 +98,7 @@ SpinBox::SpinBox
 	uint32_t actual_w = std::max(w, unit_w);
 	uint32_t no_padding = (big_ ? 6 : 4);
 	uint32_t texth = UI::g_fh1->render(as_uifont("."))->height();
+	uint32_t buttonh = 20;
 
 	// 40 is an ad hoc width estimate for the MultilineTextarea scrollbar + a bit of text.
 	if (!label_text.empty() && (w + padding) <= unit_w - 40) {
@@ -107,9 +108,9 @@ SpinBox::SpinBox
 	}
 
 #ifndef NDEBUG //  only in debug builds
-	if (unit_w < (big_ ? 7 * texth : 3 * texth)) {
+	if (unit_w < (big_ ? 7 * buttonh : 3 * buttonh)) {
 		throw wexception("Not enough space to draw spinbox. Width %d is smaller than required width %d",
-							  unit_w, (big_ ? 7 * texth : 3 * texth));
+							  unit_w, (big_ ? 7 * buttonh : 3 * buttonh));
 	}
 #endif
 
@@ -125,21 +126,21 @@ SpinBox::SpinBox
 	UI::MultilineTextarea* label = new UI::MultilineTextarea(box_, 0, 0, available_width,
 																				texth * (extra_rows + 1), label_text);
 
-	box_->add(label, UI::Box::AlignTop);
+	box_->add(label, UI::Box::AlignCenter);
 
 	sbi_->text = new UI::Textarea(box_, "", Align_Center);
 
 	sbi_->button_minus =
 		new Button
 			(box_, "-",
-			 0, 0, texth, texth,
+			 0, 0, buttonh, buttonh,
 			 sbi_->background,
 			 g_gr->images().get(big_? "pics/scrollbar_left.png" : "pics/scrollbar_down.png"),
 			 _("Decrease the value"));
 	sbi_->button_plus =
 		new Button
 			(box_, "+",
-			 0, 0, texth, texth,
+			 0, 0, buttonh, buttonh,
 			 sbi_->background,
 			 g_gr->images().get(big_? "pics/scrollbar_right.png" : "pics/scrollbar_up.png"),
 			 _("Increase the value"));
@@ -148,14 +149,14 @@ SpinBox::SpinBox
 		sbi_->button_ten_minus =
 			new Button
 				(box_, "--",
-				 0, 0, 2 * texth, texth,
+				 0, 0, 2 * buttonh, buttonh,
 				 sbi_->background,
 				 g_gr->images().get("pics/scrollbar_left_fast.png"),
 				 _("Decrease the value by 10"));
 		sbi_->button_ten_plus =
 			new Button
 				(box_, "++",
-				 0, 0, 2 * texth, texth,
+				 0, 0, 2 * buttonh, buttonh,
 				 sbi_->background,
 				 g_gr->images().get("pics/scrollbar_right_fast.png"),
 				 _("Increase the value by 10"));
@@ -172,17 +173,17 @@ SpinBox::SpinBox
 											 - 2 * sbi_->button_minus->get_w()
 											 - 4 * padding);
 
-		box_->add(sbi_->button_ten_minus, UI::Box::AlignTop);
-		box_->add(sbi_->button_minus, UI::Box::AlignTop);
-		box_->add(sbi_->text, UI::Box::AlignTop);
-		box_->add(sbi_->button_plus, UI::Box::AlignTop);
-		box_->add(sbi_->button_ten_plus, UI::Box::AlignTop);
+		box_->add(sbi_->button_ten_minus, UI::Box::AlignCenter);
+		box_->add(sbi_->button_minus, UI::Box::AlignCenter);
+		box_->add(sbi_->text, UI::Box::AlignCenter);
+		box_->add(sbi_->button_plus, UI::Box::AlignCenter);
+		box_->add(sbi_->button_ten_plus, UI::Box::AlignCenter);
 	} else {
 		sbi_->text->set_fixed_width(unit_w - 2 * sbi_->button_minus->get_w() - 2 * padding);
 
-		box_->add(sbi_->button_minus, UI::Box::AlignTop);
-		box_->add(sbi_->text, UI::Box::AlignTop);
-		box_->add(sbi_->button_plus, UI::Box::AlignTop);
+		box_->add(sbi_->button_minus, UI::Box::AlignCenter);
+		box_->add(sbi_->text, UI::Box::AlignCenter);
+		box_->add(sbi_->button_plus, UI::Box::AlignCenter);
 	}
 
 	sbi_->button_plus->sigclicked.connect(boost::bind(&SpinBox::change_value, boost::ref(*this), 1));
@@ -191,9 +192,10 @@ SpinBox::SpinBox
 	sbi_->button_minus->set_repeating(true);
 	buttons_.push_back(sbi_->button_minus);
 	buttons_.push_back(sbi_->button_plus);
-	box_->set_size(actual_w, texth * (extra_rows + 1));
-	set_desired_size(actual_w, texth * (extra_rows + 1));
-	set_size(actual_w, texth * (extra_rows + 1));
+	uint32_t box_height = std::max(label->get_h(), static_cast<int32_t>(buttonh));
+	box_->set_size(actual_w, box_height);
+	set_desired_size(actual_w, box_height);
+	set_size(actual_w, box_height);
 	update();
 }
 
