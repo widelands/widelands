@@ -355,10 +355,13 @@ void Table<void *>::draw(RenderTarget & dst)
 			UI::correct_for_align(alignment, text_width, entry_text_im->height(), &point);
 
 			// Crop to column width while blitting
-			if (UI::g_fh1->fontset().is_rtl() &&
-				 ((static_cast<int32_t>(curw) + picw) < text_width)) { // Extra treatment for BiDi languages
-				point.x = curx + picw;
-				if(i18n::has_rtl_character(entry_string.c_str())) {
+			if (((static_cast<int32_t>(curw) + picw) < text_width)) {
+				// Extra treatment for BiDi languages.
+				if (UI::g_fh1->fontset().is_rtl()) {
+					point.x = curx + picw;
+				}
+				// We want this always on, e.g. for mixed language savegame filenames
+				if (i18n::has_rtl_character(entry_string.c_str(), 20)) { // Restrict check for efficiency
 					dst.blitrect(point,
 									 entry_text_im,
 									 Rect(text_width - curw + picw, 0, text_width, lineheight));

@@ -32,7 +32,7 @@ namespace i18n {
 	std::string make_ligatures(const char* input);
 	std::string line2bidi(const char* input);
 	std::vector<std::string> split_cjk_word(const char* input);
-	bool has_rtl_character(const char* input);
+	bool has_rtl_character(const char* input, int32_t limit = std::numeric_limits<int32_t>::max());
 	bool has_rtl_character(std::vector<std::string> input);
 	bool has_cjk_character(const char* input);
 	bool cannot_start_line(const UChar& c);
