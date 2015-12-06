@@ -97,8 +97,10 @@ struct DefaultAI : ComputerPlayer {
 	/// Implementation for Strong
 	struct StrongImpl : public ComputerPlayer::Implementation {
 		StrongImpl() {
+			name = "strong";
 			/** TRANSLATORS: This is the name of an AI used in the game setup screens */
-			name = pgettext("ai_name", "Strong");
+			descname = _("Strong AI");
+			icon_filename = "pics/ai_strong.png";
 		}
 		ComputerPlayer* instantiate(Widelands::Game& game,
 		                            Widelands::PlayerNumber const p) const override {
@@ -108,8 +110,10 @@ struct DefaultAI : ComputerPlayer {
 
 	struct NormalImpl : public ComputerPlayer::Implementation {
 		NormalImpl() {
+			name = "normal";
 			/** TRANSLATORS: This is the name of an AI used in the game setup screens */
-			name = pgettext("ai_name", "Normal");
+			descname = _("Normal AI");
+			icon_filename = "pics/ai_normal.png";
 		}
 		ComputerPlayer* instantiate(Widelands::Game& game,
 		                            Widelands::PlayerNumber const p) const override {
@@ -119,8 +123,10 @@ struct DefaultAI : ComputerPlayer {
 
 	struct WeakImpl : public ComputerPlayer::Implementation {
 		WeakImpl() {
+			name = "weak";
 			/** TRANSLATORS: This is the name of an AI used in the game setup screens */
-			name = pgettext("ai_name", "Weak");
+			descname = _("Weak AI");
+			icon_filename = "pics/ai_weak.png";
 		}
 		ComputerPlayer* instantiate(Widelands::Game& game,
 		                            Widelands::PlayerNumber const p) const override {
