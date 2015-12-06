@@ -72,9 +72,9 @@ struct Flag;
 //   should be trained if inputs_ get filled again.).
 struct DefaultAI : ComputerPlayer {
 	enum class Type {
+		kVeryWeak,
 		kWeak,
 		kNormal,
-		kStrong,
 	};
 
 	DefaultAI(Widelands::Game&, const Widelands::PlayerNumber, DefaultAI::Type);
@@ -95,19 +95,6 @@ struct DefaultAI : ComputerPlayer {
 
 
 	/// Implementation for Strong
-	struct StrongImpl : public ComputerPlayer::Implementation {
-		StrongImpl() {
-			name = "strong";
-			/** TRANSLATORS: This is the name of an AI used in the game setup screens */
-			descname = _("Strong AI");
-			icon_filename = "pics/ai_strong.png";
-		}
-		ComputerPlayer* instantiate(Widelands::Game& game,
-		                            Widelands::PlayerNumber const p) const override {
-			return new DefaultAI(game, p, DefaultAI::Type::kStrong);
-		}
-	};
-
 	struct NormalImpl : public ComputerPlayer::Implementation {
 		NormalImpl() {
 			name = "normal";
@@ -134,9 +121,22 @@ struct DefaultAI : ComputerPlayer {
 		}
 	};
 
-	static StrongImpl strong_impl;
+	struct VeryWeakImpl : public ComputerPlayer::Implementation {
+		VeryWeakImpl() {
+			name = "very_weak";
+			/** TRANSLATORS: This is the name of an AI used in the game setup screens */
+			descname = _("Very Weak AI");
+			icon_filename = "pics/ai_very_weak.png";
+		}
+		ComputerPlayer* instantiate(Widelands::Game& game,
+		                            Widelands::PlayerNumber const p) const override {
+			return new DefaultAI(game, p, DefaultAI::Type::kVeryWeak);
+		}
+	};
+
 	static NormalImpl normal_impl;
 	static WeakImpl weak_impl;
+	static VeryWeakImpl very_weak_impl;
 
 private:
 	void late_initialization();

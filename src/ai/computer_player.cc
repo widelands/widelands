@@ -60,9 +60,9 @@ ComputerPlayer::get_implementations()
 	static std::vector<ComputerPlayer::Implementation const *> impls;
 
 	if (impls.empty()) {
-		impls.push_back(&DefaultAI::strong_impl);
 		impls.push_back(&DefaultAI::normal_impl);
 		impls.push_back(&DefaultAI::weak_impl);
+		impls.push_back(&DefaultAI::very_weak_impl);
 		impls.push_back(&EmptyAI::implementation);
 	}
 
