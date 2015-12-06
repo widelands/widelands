@@ -77,6 +77,11 @@ void Tab::activate() {
 	return parent->activate(id);
 }
 
+bool Tab::handle_mousepress(uint8_t, int32_t, int32_t) {
+	play_click();
+	return false;
+}
+
 /*
  * =================
  * class TabPanel

@@ -54,6 +54,8 @@ struct Tab : public NamedPanel {
 private:
 	// Leave handling the mouse move to the TabPanel.
 	bool handle_mousemove(uint8_t, int32_t, int32_t, int32_t, int32_t) override {return false;}
+	// Play click
+	bool handle_mousepress(uint8_t, int32_t, int32_t) override;
 
 	TabPanel* parent;
 	uint32_t id;
