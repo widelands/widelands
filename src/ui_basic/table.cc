@@ -311,6 +311,10 @@ void Table<void *>::draw(RenderTarget & dst)
 						}
 					}
 
+					if (alignment & Align_Right) {
+						draw_x += curw - blit_width;
+					}
+
 					dst.blitrect_scale(
 								// Center align if text is empty
 								Rect(draw_x,
@@ -329,11 +333,15 @@ void Table<void *>::draw(RenderTarget & dst)
 						} else {
 							draw_x = point.x + (curw - picw) / 2;
 						}
+					} else if (alignment & Align_Right) {
+						draw_x += curw - picw;
 					}
 					dst.blit(Point(draw_x, point.y + (lineheight - pich) / 2), entry_picture);
 				}
 				point.x += picw;
 			}
+
+			++picw; // A bit or margin between image and text
 
 			if (entry_string.empty()) {
 				curx += curw;
@@ -342,7 +350,7 @@ void Table<void *>::draw(RenderTarget & dst)
 			const Image* entry_text_im = UI::g_fh1->render(as_uifont(entry_string, m_fontsize));
 
 			if (alignment & Align_Right) {
-				point.x += curw - picw;
+				point.x += curw - 2 * picw;
 			} else if (alignment & Align_HCenter) {
 				point.x += (curw - picw) / 2;
 			}
@@ -356,9 +364,9 @@ void Table<void *>::draw(RenderTarget & dst)
 
 			// Crop to column width while blitting
 			if (((static_cast<int32_t>(curw) + picw) < text_width)) {
-				// Extra treatment for BiDi languages.
+				// Fix positioning for BiDi languages.
 				if (UI::g_fh1->fontset().is_rtl()) {
-					point.x = curx + picw;
+					point.x = alignment & Align_Right ? curx : curx + picw;
 				}
 				// We want this always on, e.g. for mixed language savegame filenames
 				if (i18n::has_rtl_character(entry_string.c_str(), 20)) { // Restrict check for efficiency
