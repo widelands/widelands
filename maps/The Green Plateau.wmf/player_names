@@ -12,17 +12,17 @@ closeable="false"
 [player_2]
 name="Erwyn"
 tribe="barbarians"
-ai="Normal"
+ai="weak"
 closeable="false"
 
 [player_3]
 name="Jomo"
 tribe="barbarians"
-ai="Defensive"
+ai="very_weak"
 closeable="false"
 
 [player_4]
 name="Lanissa"
 tribe="barbarians"
-ai="None"
+ai="empty"
 closeable="false"
