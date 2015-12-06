@@ -320,6 +320,11 @@ private:
 	bool seafaring_economy;          // false by default, until first port space is found
 	uint32_t colony_scan_area_;  // distance from a possible port that is scanned for owned territory
 	// it decreases with failed scans
+	uint32_t expedition_start_time_;
+	bool no_more_expeditions_;
+	uint32_t expedition_ship_;
+	int16_t ships_utilization_; //0-10000 to avoid floats, used for decision for building new ships
+
 	int32_t spots_;  // sum of buildable fields
 	int32_t vacant_mil_positions_;  // sum of vacant positions in militarysites and training sites
 	// statistics for training sites per type

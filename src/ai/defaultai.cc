@@ -29,6 +29,7 @@
 #include "ai/ai_hints.h"
 #include "base/log.h"
 #include "base/macros.h"
+#include "base/time_string.h" //NOCOM
 #include "economy/economy.h"
 #include "economy/flag.h"
 #include "economy/portdock.h"
@@ -64,21 +65,28 @@ constexpr int kShipCheckInterval = 5 * 1000;
 constexpr int kMarineDecisionInterval = 20 * 1000;
 constexpr int kTrainingSitesCheckInterval = 45 * 1000;
 
-// least radius to scan terrain when considering colonization port
+// least radius to scan terrain when considering colonization port //NOCOM
+constexpr int kColonyScanStartArea = 35;
 constexpr int kColonyScanMinArea = 10;
+constexpr int kExpeditionMaxDuration = 60 * 1000;// NOCOM 60 * 60 * 1000
+constexpr uint32_t kNoShip = std::numeric_limits<uint32_t>::max();
 
 // this is intended for map developers, by default should be off
 constexpr bool kPrintStats = false;
 
-constexpr int kPersistentData  = 0; //int16_t
+constexpr int kPersistentData  = 0; //int16_t & bools
 constexpr int kMilitLoneliness = 1;
 constexpr int kAttacker        = 2;
+constexpr int kShipUtil        = 3;
+constexpr int kNoExpeditions   = 4;
 constexpr int kAttackMargin    = 0; //uint32_t
 constexpr int kLastAttack      = 1;
 constexpr int kProdRatio       = 2;
 constexpr int kColonyScan      = 3;
 constexpr int kTreesAround     = 4;
 constexpr int kEarlyMilitary   = 5;
+constexpr int kExpStartTime    = 6;
+constexpr int kExpShipSerial   = 7;
 constexpr int kWoodDiff        = 0; //int32_t
 constexpr int kTargetMilit     = 1;
 constexpr int kLeastMilit      = 2;
@@ -126,7 +134,11 @@ DefaultAI::DefaultAI(Game& ggame, PlayerNumber const pid, DefaultAI::Type const 
      military_last_dismantle_(0),
      military_last_build_(0),
      seafaring_economy(false),
-     colony_scan_area_(35),
+     colony_scan_area_(kColonyScanStartArea),
+     expedition_start_time_(0),
+     no_more_expeditions_(false),
+     expedition_ship_(kNoShip),
+     ships_utilization_(200),
      spots_(0),
      vacant_mil_positions_(0),
      ts_basic_count_(0),
@@ -851,12 +863,14 @@ void DefaultAI::late_initialization() {
 
 	// Here the AI persistent data either exists - then they are read
 	// or does not exist, then they are created and saved
-	int16_t persistent_data_exists_ = 0;
+	bool persistent_data_exists_;
+	//player_->get_ai_data(&persistent_data_exists_, kPersistentData);
 	player_->get_ai_data(&persistent_data_exists_, kPersistentData);
 
-	// 0 implies no saved data exits yet
-	if (persistent_data_exists_ == 0) {
-		player_->set_ai_data(static_cast<int16_t>(1), kPersistentData);
+	// if false, generate new values
+	if (!persistent_data_exists_) {
+		//player_->set_ai_data(static_cast<int16_t>(1), kPersistentData); NOCOM
+		player_->set_ai_data(true, kPersistentData);
 
 		// these random values to make some small differences between players
 		// they are immediately saved
@@ -878,6 +892,10 @@ void DefaultAI::late_initialization() {
 
 		// same defaults are directly saved to avoid inconsistency
 		player_->set_ai_data(colony_scan_area_, kColonyScan);
+		player_->set_ai_data(expedition_start_time_, kExpStartTime);
+		player_->set_ai_data(expedition_ship_, kExpShipSerial);
+		player_->set_ai_data(ships_utilization_, kShipUtil);
+		player_->set_ai_data(no_more_expeditions_, kNoExpeditions);
 		player_->set_ai_data(last_attacked_player_, kLastAttack);
 		player_->set_ai_data(least_military_score_, kLeastMilit);
 		player_->set_ai_data(target_military_score_, kTargetMilit);
@@ -910,6 +928,16 @@ void DefaultAI::late_initialization() {
 
 		player_->get_ai_data(&colony_scan_area_, kColonyScan);
 		check_range<uint32_t>(colony_scan_area_, kColonyScanMinArea, 50, "colony_scan_area_");
+
+		player_->get_ai_data(&expedition_start_time_, kExpStartTime);
+		check_range<uint32_t>(expedition_start_time_, kExpStartTime, gametime, "expedition_start_time_");
+
+		player_->get_ai_data(&expedition_ship_, kExpShipSerial);
+
+		player_->get_ai_data(&ships_utilization_, kShipUtil);
+		check_range<uint16_t>(ships_utilization_, 0, 10000, "ships_utilization_");
+
+		player_->get_ai_data(&no_more_expeditions_, kNoExpeditions);
 
 		player_->get_ai_data(&trees_around_cutters_, kTreesAround);
 
@@ -3502,7 +3530,7 @@ bool DefaultAI::marine_main_decisions() {
 			for (size_t i = 0; i < nr_warequeues; ++i) {
 				stocked_wares += warequeues[i]->get_filled();
 			}
-			if (stocked_wares == 16 && ps_obs.site->is_stopped()) {
+			if (stocked_wares == 16 && ps_obs.site->is_stopped() && ps_obs.site->can_start_working()) {
 				idle_shipyard_stocked = true;
 			}
 		}
@@ -3516,19 +3544,27 @@ bool DefaultAI::marine_main_decisions() {
 		}
 	}
 
+	assert (allships.size() >= expeditions_in_progress);
+
 	enum class FleetStatus : uint8_t {kNeedShip = 0, kEnoughShips = 1, kDoNothing = 2};
 
 	// now we must compare ports vs ships to decide if new ship is needed or new expedition can start
 	FleetStatus enough_ships = FleetStatus::kDoNothing;
-	if (static_cast<float>(allships.size()) >= ports_count) {
-		enough_ships = FleetStatus::kEnoughShips;
-	} else if (static_cast<float>(allships.size()) < ports_count) {
+	if (shipyards_count == 0 || !idle_shipyard_stocked || ports_count == 0) {
+		enough_ships = FleetStatus::kDoNothing;
+	// We allways need one ship in transport mode
+	} else if (allships.size() - expeditions_in_progress == 0) {
+		printf (" %d: ordering new ship, first one\n", player_number());
 		enough_ships = FleetStatus::kNeedShip;
+	} else if (ships_utilization_ > 5000) {
+		printf (" %d: ordering new ship, utilization: %5d\n", player_number(), ships_utilization_);
+		enough_ships = FleetStatus::kNeedShip;
+	} else {
+		enough_ships = FleetStatus::kEnoughShips;
 	}
 
 	// building a ship? if yes, find a shipyard and order it to build a ship
-	if (shipyards_count > 0 && enough_ships == FleetStatus::kNeedShip && idle_shipyard_stocked &&
-	    ports_count > 0) {
+	if (enough_ships == FleetStatus::kNeedShip) {
 
 		for (const ProductionSiteObserver& ps_obs : productionsites) {
 			if (ps_obs.bo->is_shipyard_ && ps_obs.site->can_start_working() &&
@@ -3580,6 +3616,68 @@ bool DefaultAI::check_ships(uint32_t const gametime) {
 		// iterating over ships and executing what is needed
 		for (std::list<ShipObserver>::iterator i = allships.begin(); i != allships.end(); ++i) {
 
+			const uint8_t ship_state = i->ship->get_ship_state();
+
+			// Here we manage duration of expedition and related variables
+			if (ship_state	== Widelands::Ship::EXP_WAITING ||
+			    ship_state	== Widelands::Ship::EXP_SCOUTING ||
+			    ship_state	== Widelands::Ship::EXP_FOUNDPORTSPACE) {
+					//NOCOM
+					if (!(expedition_ship_==i->ship->serial() || expedition_ship_==kNoShip)){
+						printf (" %d, this ship: %6d, ship in expedition: %6d\n", 
+						player_number(), i->ship->serial(),expedition_ship_);
+					}
+					assert (expedition_ship_==i->ship->serial() || expedition_ship_==kNoShip);
+
+					//new expedition
+					if (expedition_ship_==kNoShip) {
+						assert (expedition_start_time_ == 0);
+						expedition_start_time_ = gametime;
+						player_->set_ai_data(gametime, kExpStartTime);
+						printf (" %d: ship %5d in expedition here (spotted first time) - %s, state: %d, scan area: %2d\n",
+						player_number(), i->ship->serial(),   gametimestring(gametime).c_str(), ship_state,colony_scan_area_);						
+						expedition_ship_=i->ship->serial();
+						player_->set_ai_data(expedition_ship_, kExpShipSerial);
+					// older expedition	
+					} else if (gametime - expedition_start_time_ < kExpeditionMaxDuration) {
+						assert (expedition_start_time_ > 0);
+						// this is a percent so in range 0-100
+						const uint32_t remaining_time = 100 - ((gametime - expedition_start_time_) / (kExpeditionMaxDuration / 100));
+						assert (remaining_time<= 100);
+						const uint32_t expected_colony_scan = kColonyScanMinArea
+							+
+							(kColonyScanStartArea - kColonyScanMinArea) * remaining_time / 100;
+						assert (expected_colony_scan >= kColonyScanMinArea && expected_colony_scan <= kColonyScanStartArea);
+						if (expected_colony_scan < colony_scan_area_) {
+							colony_scan_area_ = expected_colony_scan;
+							player_->set_ai_data(colony_scan_area_, kColonyScan);
+							printf(" %d: decreasing colony scan area to %5d, lapsed exp. time: %s\n",
+							player_number(), colony_scan_area_, gametimestring(gametime - expedition_start_time_).c_str());
+						}
+					// expedition time over	
+					} else if (gametime - expedition_start_time_ >= kExpeditionMaxDuration) {
+						assert (expedition_start_time_ > 0);
+						printf (" %d: giving up with expeditions\n", player_number());
+						no_more_expeditions_ = true;
+						player_->set_ai_data(true, kNoExpeditions);
+						// expedition is not quitted here !
+					}
+
+
+			// We are not in expedition mode (or perhaps building a colonisation port)
+			// so resetting start time
+			} else if (expedition_ship_ == i->ship->serial()) {
+				// Obviously expedition just ended
+				expedition_start_time_ = 0;
+				expedition_ship_= kNoShip;
+				player_->set_ai_data(expedition_ship_, kExpShipSerial);				
+				player_->set_ai_data(static_cast<uint32_t>(0), kExpStartTime);
+				printf (" %d: ship %5d no more in expedition %s, state: %d\n",
+					player_number(),i->ship->serial(), gametimestring(gametime).c_str(), ship_state );
+			}				
+				
+
+
 			// only two states need an attention
 			if ((i->ship->get_ship_state() == Widelands::Ship::EXP_WAITING ||
 			     i->ship->get_ship_state() == Widelands::Ship::EXP_FOUNDPORTSPACE) &&
@@ -3596,8 +3694,28 @@ bool DefaultAI::check_ships(uint32_t const gametime) {
 			}
 			// if ships is waiting for command
 			if (i->waiting_for_command_) {
+				if (no_more_expeditions_) {
+					printf ("why is ship waiting for command when expedition was cancelled\n");// NOCOM
+				}
 				expedition_management(*i);
 				action_taken = true;
+			}
+			// NOCOM
+			// Checking utilization
+			if (i->ship->get_ship_state() == Widelands::Ship::TRANSPORT) {
+
+				// good utilization is 10 pieces of ware onboard, we need to get int in range 0-10000
+				const int16_t tmp_util = (i->ship->get_nritems() > 10) ? 10000 : i->ship->get_nritems() * 1000;
+				ships_utilization_ = ships_utilization_ / 20 * 19 + tmp_util / 20;
+				player_->set_ai_data(ships_utilization_, kShipUtil);
+
+				if (gametime % 500 == 0){
+					printf (" %d: ship with %2d items onboard, average utilization: %5d\n",
+					player_number(),
+					i->ship->get_nritems(),
+					ships_utilization_);
+				}
+				assert (ships_utilization_ >= 0 && ships_utilization_ <= 10000);
 			}
 		}
 	}
@@ -4500,12 +4618,6 @@ void DefaultAI::gain_immovable(PlayerImmovable& pi) {
 // this is called whenever we gain ownership of a Ship
 void DefaultAI::gain_ship(Ship& ship, NewShip type) {
 
-	if (type == NewShip::kBuilt) {
-		marineTaskQueue_.push_back(kStopShipyard);
-	} else {
-		seafaring_economy = true;
-	}
-
 	allships.push_back(ShipObserver());
 	allships.back().ship = &ship;
 	if (game().get_gametime() % 2 == 0) {
@@ -4513,6 +4625,20 @@ void DefaultAI::gain_ship(Ship& ship, NewShip type) {
 	} else {
 		allships.back().island_circ_direction = IslandExploreDirection::kCounterClockwise;
 	}
+
+	if (type == NewShip::kBuilt) {
+		marineTaskQueue_.push_back(kStopShipyard);
+	} else {
+		seafaring_economy = true;
+		//if (ship.state_is_expedition()) {
+			//allships.back().in_expedition_ = true;
+			//assert (expedition_start_time_>0);
+			//allships.back().expedition_since_ =  expedition_start_time_;//NOCOM
+		//}
+			
+	}
+
+
 }
 
 // this is called whenever we lose ownership of a PlayerImmovable
@@ -4744,8 +4870,8 @@ void DefaultAI::expedition_management(ShipObserver& so) {
 
 	Map& map = game().map();
 	const int32_t gametime = game().get_gametime();
-
-	// first we put current spot into visited_spots_
+	
+	// second we put current spot into visited_spots_
 	bool first_time_here = false;
 	if (so.visited_spots_.count(coords_hash(so.ship->get_position())) == 0) {
 		first_time_here = true;
@@ -4778,16 +4904,36 @@ void DefaultAI::expedition_management(ShipObserver& so) {
 			return;
 		}
 
-		// decreasing colony_scan_area_
-		if (colony_scan_area_ > kColonyScanMinArea && gametime % 4 == 0) {
-			colony_scan_area_ -= 1;
-			player_->set_ai_data(colony_scan_area_, kColonyScan);
-		}
-		assert(colony_scan_area_ >= kColonyScanMinArea);
+		//// decreasing colony_scan_area_ //NOCOM
+		//if (colony_scan_area_ > kColonyScanMinArea && gametime % 4 == 0) {
+			//colony_scan_area_ -= 1;
+			//player_->set_ai_data(colony_scan_area_, kColonyScan);
+		//}
+		//assert(colony_scan_area_ >= kColonyScanMinArea);
+
+
 	}
 
 	// if we are here, port was not ordered above
-	// 2. Go on with expedition
+	// 2. let check if expedition is not overdue
+	if  (no_more_expeditions_) {
+		for (std::list<WarehouseSiteObserver>::iterator i = warehousesites.begin();
+	     i != warehousesites.end();
+	     ++i) {
+			if (i->bo->is_port_) {
+				PortDock* pd_tmp = i->site->get_portdock();
+				assert(pd_tmp);
+				if (pd_tmp->expedition_started()){
+	                printf (" %d: ordering expedition stop\n", player_number());
+					game().send_player_start_or_cancel_expedition(*i->site);
+					break;
+				}
+			}
+		}
+	return;
+	}
+		
+	// 3. Go on with expedition
 
 	if (first_time_here) {
 		game().send_player_ship_explore_island(*so.ship, so.island_circ_direction);
