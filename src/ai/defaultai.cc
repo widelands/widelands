@@ -5194,7 +5194,7 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 		}
 	}
 
-	// defining treshold ratio of own_strenght/enemy's_strength
+	// defining treshold ratio of own_strength/enemy's_strength
 	uint32_t treshold_ratio = 100;
 	if (type_ == DefaultAI::Type::kNormal) {
 		treshold_ratio = 80;
