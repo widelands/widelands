@@ -513,7 +513,7 @@ OptionsCtrl::OptionsCtrl(Section & s)
 }
 
 OptionsCtrl::~OptionsCtrl() {
-	delete opt_dialog_;
+	delete opt_dialog_; // NOCOM unique_ptr
 }
 
 void OptionsCtrl::handle_menu()
@@ -523,6 +523,9 @@ void OptionsCtrl::handle_menu()
 		save_options();
 	if (i == FullscreenMenuBase::MenuTarget::kApplyOptions) {
 		uint32_t active_tab = opt_dialog_->get_values().active_tab;
+		g_gr->change_resolution(opt_dialog_->get_values().xres, opt_dialog_->get_values().yres);
+		g_gr->set_fullscreen(opt_dialog_->get_values().fullscreen);
+
 		delete opt_dialog_;
 		opt_dialog_ = new FullscreenMenuOptions(options_struct(active_tab));
 		handle_menu(); // Restart general options menu
