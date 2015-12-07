@@ -23,6 +23,7 @@
 
 #include <boost/format.hpp>
 
+#include "ai/computer_player.h"
 #include "base/i18n.h"
 #include "base/log.h"
 #include "base/wexception.h"
@@ -301,11 +302,14 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 					pic += "novalue.png";
 				} else {
 					if (player_setting.random_ai) {
-						title = (boost::format(_("AI: %s")) % pgettext("ai_name", "Random")).str();
-						pic += "ai_Random.png";
+						/** TRANSLATORS: This is the name of an AI used in the game setup screens */
+						title = _("Random AI");
+						pic += "ai_random.png";
 					} else {
-						title = (boost::format(_("AI: %s")) % _(player_setting.ai)).str();
-						pic += "ai_" + player_setting.ai + ".png";
+						const ComputerPlayer::Implementation* impl =
+								ComputerPlayer::get_implementation(player_setting.ai);
+						title = impl->descname;
+						pic = impl->icon_filename;
 					}
 				}
 			} else { // PlayerSettings::stateHuman

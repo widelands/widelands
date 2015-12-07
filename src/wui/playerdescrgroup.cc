@@ -23,6 +23,7 @@
 
 #include <boost/format.hpp>
 
+#include "ai/computer_player.h"
 #include "base/i18n.h"
 #include "base/wexception.h"
 #include "graphic/graphic.h"
@@ -166,10 +167,11 @@ void PlayerDescriptionGroup::refresh()
 					title = _("Computer");
 				else {
 					if (player.random_ai) {
-						title += _("AI: Random");
+						title += _("Random AI");
 					} else {
-						/** TRANSLATORS %s = AI type, e.g. 'Agressive' */
-						title += (boost::format(_("AI: %s")) % _(player.ai)).str();
+						const ComputerPlayer::Implementation* impl =
+								ComputerPlayer::get_implementation(player.ai);
+						title = impl->descname;
 					}
 				}
 			} else { // PlayerSettings::stateHuman
