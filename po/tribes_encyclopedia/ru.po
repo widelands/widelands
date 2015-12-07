@@ -7,13 +7,14 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2014
 # Ivan <mail@cupivan.ru>, 2015
 # Yuriy Sokolov <lention@mail.ru>, 2015
+# Федор <Lunar-energy@ya.ru>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-28 11:19+0000\n"
-"PO-Revision-Date: 2015-11-28 11:21+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2015-12-03 09:55+0000\n"
+"PO-Revision-Date: 2015-12-06 15:21+0000\n"
+"Last-Translator: Федор <Lunar-energy@ya.ru>\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -74,7 +75,7 @@ msgstr "Если у вас не достаточно солдат для кон�
 #: ../../tribes/buildings/partially_finished/constructionsite/helptexts.lua:16
 msgctxt "building"
 msgid "A new building is being built at this construction site."
-msgstr ""
+msgstr "Процесс строительства начнётся только тогда, когда будет проложена дорога к строительной площадке."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../tribes/buildings/partially_finished/dismantlesite/helptexts.lua:16

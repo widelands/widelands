@@ -12,9 +12,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-28 11:19+0000\n"
-"PO-Revision-Date: 2015-11-28 11:21+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2015-12-03 09:55+0000\n"
+"PO-Revision-Date: 2015-12-06 15:27+0000\n"
+"Last-Translator: Федор <Lunar-energy@ya.ru>\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -171,15 +171,15 @@ msgstr "Горячие клавиши (в игре)"
 
 #: ../../txts/README.lua:58
 msgid " Page Up: increases game speed"
-msgstr ""
+msgstr "Page Up: увеличивает скорость игры"
 
 #: ../../txts/README.lua:59
 msgid " Page Down: decreases game speed"
-msgstr ""
+msgstr "Page Down: уменьшает скорость игры"
 
 #: ../../txts/README.lua:60
 msgid "Pause: pauses the game"
-msgstr ""
+msgstr "Пауза: приостанавливает игру"
 
 #: ../../txts/README.lua:61
 msgid "Space: toggles if building spaces are shown"
@@ -247,7 +247,7 @@ msgstr ""
 
 #: ../../txts/README.lua:77
 msgid "Ctrl + F11: takes a screenshot"
-msgstr ""
+msgstr "Ctrl + F11: делает скриншот"
 
 #: ../../txts/README.lua:79
 msgid ""
@@ -539,7 +539,7 @@ msgstr "Горячие клавиши"
 #. TRANSLATORS: This is a hotkey
 #: ../../txts/editor_readme.lua:21
 msgid "Space:"
-msgstr ""
+msgstr "Пробел:"
 
 #: ../../txts/editor_readme.lua:21
 msgid "toggles if building spaces are shown"
