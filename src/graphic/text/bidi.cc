@@ -568,10 +568,11 @@ UChar find_arabic_letter_form(UChar c, UChar previous, UChar next) {
 namespace i18n {
 
 
-// True if a string does not contain Latin characters
-bool has_rtl_character(const char* input) {
+// True if a string does not contain Latin characters.
+// Checks for the first 'limit' characters maximum.
+bool has_rtl_character(const char* input, int32_t limit) {
 	const icu::UnicodeString parseme(input);
-	for (int32_t i = 0; i < parseme.length(); ++i) {
+	for (int32_t i = 0; i < parseme.length() && i < limit; ++i) {
 		if (is_rtl_character(parseme.char32At(i))) {
 			return true;
 		}

@@ -29,6 +29,7 @@
 #include "graphic/rendertarget.h"
 #include "graphic/text_constants.h"
 #include "graphic/text_layout.h"
+#include "graphic/text/bidi.h"
 #include "wlapplication.h"
 
 constexpr int kMargin = 2;
@@ -412,7 +413,24 @@ void BaseListselect::draw(RenderTarget & dst)
 			point.y -= (entry_text_im->height() - get_lineheight()) / 2;
 		}
 
-		dst.blitrect(point, entry_text_im, Rect(0, 0, get_eff_w(), m_lineheight));
+		// Crop to column width while blitting
+		if ((maxw  + picw) < static_cast<uint32_t>(entry_text_im->width())) {
+			// Fix positioning for BiDi languages.
+			if (UI::g_fh1->fontset()->is_rtl()) {
+				point.x = alignment & Align_Right ? 0 : 0 + picw;
+			}
+			// We want this always on, e.g. for mixed language savegame filenames
+			if (i18n::has_rtl_character(er.name.c_str(), 20)) { // Restrict check for efficiency
+				dst.blitrect(point,
+								 entry_text_im,
+								 Rect(entry_text_im->width() - maxw + picw, 0, maxw, m_lineheight));
+			}
+			else {
+				dst.blitrect(point, entry_text_im, Rect(0, 0, maxw, m_lineheight));
+			}
+		} else {
+			dst.blitrect(point, entry_text_im, Rect(0, 0, maxw, m_lineheight));
+		}
 
 		y += lineheight;
 		++idx;
