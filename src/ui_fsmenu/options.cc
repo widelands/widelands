@@ -137,7 +137,7 @@ FullscreenMenuOptions::FullscreenMenuOptions
 		(this,
 		 m_hmargin, m_label_resolution.get_y() + m_label_resolution.get_h(),
 		 (get_w() - 2 * m_hmargin - m_space) / 2, 95,
-		 UI::Align_Left, true),
+		 true),
 
 	m_fullscreen (this, Point(m_hmargin,
 									  m_reslist.get_y() +
@@ -169,7 +169,7 @@ FullscreenMenuOptions::FullscreenMenuOptions
 		(this,
 		 m_label_language.get_x(), m_label_language.get_y() + m_label_language.get_h(),
 		 (get_w() - 2 * m_hmargin - m_space) / 2, m_reslist.get_h(),
-		 UI::Align_Left, true),
+		 true),
 
 	m_music (this, Point(m_label_language.get_x(),
 								m_language_list.get_y() +

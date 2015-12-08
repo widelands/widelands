@@ -77,7 +77,7 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive & parent, bool modal)
 	author_(&main_box_, 0, 0, max_w_, labelh_, g_gr->images().get("pics/but1.png")),
 	size_(&main_box_, 0, 0, max_w_ - indent_, labelh_, ""),
 
-	teams_list_(&teams_box_, 0, 0, max_w_, 60, UI::Align_Left, true),
+	teams_list_(&teams_box_, 0, 0, max_w_, 60, true),
 
 	modal_(modal) {
 

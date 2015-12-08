@@ -24,6 +24,7 @@
 #include <boost/bind.hpp>
 
 #include "base/log.h"
+#include "graphic/align.h"
 #include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
@@ -43,12 +44,11 @@ namespace UI {
  *       y
  *       w       dimensions, in pixels, of the Listselect
  *       h
- *       align   alignment of text inside the Listselect
 */
 BaseListselect::BaseListselect
 	(Panel * const parent,
 	 int32_t const x, int32_t const y, uint32_t const w, uint32_t const h,
-	 Align const align, bool const show_check)
+	 bool const show_check)
 	:
 	Panel(parent, x, y, w, h),
 	m_lineheight(UI::g_fh1->render(as_uifont(UI::g_fh1->fontset()->representative_character()))->height()
@@ -61,9 +61,6 @@ BaseListselect::BaseListselect
 	m_show_check(show_check)
 {
 	set_thinks(false);
-
-	//  do not allow vertical alignment as it does not make sense
-	m_align = static_cast<Align>(align & Align_Horizontal);
 
 	m_scrollbar.moved.connect(boost::bind(&BaseListselect::set_scrollpos, this, _1));
 	m_scrollbar.set_singlestepsize(m_lineheight);
@@ -391,13 +388,10 @@ void BaseListselect::draw(RenderTarget & dst)
 		const Image* entry_text_im = UI::g_fh1->render(as_uifont(er.name, UI_FONT_SIZE_SMALL,
 																					er.use_clr ? er.clr : UI_FONT_CLR_FG));
 
-		Align alignment = mirror_alignment(m_align);
+		Align alignment = i18n::has_rtl_character(er.name.c_str(), 20) ? UI::Align_Right : Align_Left;
 		if (alignment & Align_Right) {
 			point.x += maxw - picw;
-		} else if (alignment & Align_HCenter) {
-			point.x += (maxw - picw) / 2;
 		}
-
 
 		UI::correct_for_align(alignment, entry_text_im->width(), entry_text_im->height(), &point);
 
@@ -414,20 +408,14 @@ void BaseListselect::draw(RenderTarget & dst)
 		}
 
 		// Crop to column width while blitting
-		if ((maxw  + picw) < static_cast<uint32_t>(entry_text_im->width())) {
+		if (alignment & Align_Right && (maxw  + picw) < static_cast<uint32_t>(entry_text_im->width())) {
 			// Fix positioning for BiDi languages.
-			if (UI::g_fh1->fontset()->is_rtl()) {
-				point.x = alignment & Align_Right ? 0 : 0 + picw;
-			}
+			point.x = 0;
+
 			// We want this always on, e.g. for mixed language savegame filenames
-			if (i18n::has_rtl_character(er.name.c_str(), 20)) { // Restrict check for efficiency
 				dst.blitrect(point,
 								 entry_text_im,
 								 Rect(entry_text_im->width() - maxw + picw, 0, maxw, m_lineheight));
-			}
-			else {
-				dst.blitrect(point, entry_text_im, Rect(0, 0, maxw, m_lineheight));
-			}
 		} else {
 			dst.blitrect(point, entry_text_im, Rect(0, 0, maxw, m_lineheight));
 		}

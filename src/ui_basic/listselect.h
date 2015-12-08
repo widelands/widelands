@@ -26,7 +26,6 @@
 
 #include <boost/signals2.hpp>
 
-#include "graphic/align.h"
 #include "graphic/color.h"
 #include "ui_basic/panel.h"
 #include "ui_basic/scrollbar.h"
@@ -47,7 +46,6 @@ struct BaseListselect : public Panel {
 		 int32_t y,
 		 uint32_t w,
 		 uint32_t h,
-		 Align align = Align_Left,
 		 bool show_check = false);
 	~BaseListselect();
 
@@ -136,7 +134,6 @@ private:
 
 	uint32_t m_max_pic_width;
 	uint32_t m_lineheight;
-	Align m_align;
 	EntryRecordDeque m_entry_records;
 	Scrollbar m_scrollbar;
 	uint32_t m_scrollpos;         //  in pixels
@@ -154,9 +151,8 @@ struct Listselect : public BaseListselect {
 		(Panel * parent,
 		 int32_t x, int32_t y,
 		 uint32_t w, uint32_t h,
-		 Align align = Align_Left,
 		 bool show_check = false)
-		: BaseListselect(parent, x, y, w, h, align, show_check)
+		: BaseListselect(parent, x, y, w, h, show_check)
 	{}
 
 	void add
@@ -209,9 +205,8 @@ struct Listselect<Entry &> : public Listselect<Entry *> {
 		(Panel * parent,
 		 int32_t x, int32_t y,
 		 uint32_t w, uint32_t h,
-		 Align align = Align_Left,
 		 bool show_check = false)
-		: Base(parent, x, y, w, h, align, show_check)
+		: Base(parent, x, y, w, h, show_check)
 	{}
 
 	void add
