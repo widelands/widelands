@@ -95,14 +95,14 @@ EncyclopediaWindow::EncyclopediaWindow(InteractivePlayer& parent,
 
 	tab_definitions.push_back(
 	   std::unique_ptr<EncyclopediaTab>(new EncyclopediaTab("wares",
-	                                                        "pics/genstats_nrwares.png",
+																			  "pics/menu_tab_wares.png",
 	                                                        _("Wares"),
 	                                                        "tribes/scripting/help/ware_help.lua",
 	                                                        Widelands::MapObjectType::WARE)));
 
 	tab_definitions.push_back(
 	   std::unique_ptr<EncyclopediaTab>(new EncyclopediaTab("workers",
-	                                                        "pics/genstats_nrworkers.png",
+																			  "pics/menu_tab_workers.png",
 	                                                        _("Workers"),
 	                                                        "tribes/scripting/help/worker_help.lua",
 	                                                        Widelands::MapObjectType::WORKER)));
