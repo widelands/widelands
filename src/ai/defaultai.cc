@@ -29,7 +29,7 @@
 #include "ai/ai_hints.h"
 #include "base/log.h"
 #include "base/macros.h"
-#include "base/time_string.h" //NOCOM
+#include "base/time_string.h"
 #include "economy/economy.h"
 #include "economy/flag.h"
 #include "economy/portdock.h"
@@ -63,13 +63,14 @@ constexpr int kMinBFCheckInterval = 5 * 1000;
 constexpr int kMinMFCheckInterval = 19 * 1000;
 constexpr int kShipCheckInterval = 5 * 1000;
 constexpr int kMarineDecisionInterval = 20 * 1000;
-constexpr int kTrainingSitesCheckInterval = 45 * 1000;
+constexpr int kTrainingSitesCheckInterval = 15 * 1000;
 
-// least radius to scan terrain when considering colonization port //NOCOM
+// handfull of constants used for expeditions/colonization
 constexpr int kColonyScanStartArea = 35;
 constexpr int kColonyScanMinArea = 10;
-constexpr int kExpeditionMaxDuration = 60 * 1000;// NOCOM 60 * 60 * 1000
+constexpr int kExpeditionMaxDuration = 60 * 60 * 1000;
 constexpr uint32_t kNoShip = std::numeric_limits<uint32_t>::max();
+const uint32_t kNoExpedition = 0;
 
 // this is intended for map developers, by default should be off
 constexpr bool kPrintStats = false;
@@ -86,7 +87,6 @@ constexpr int kColonyScan      = 3;
 constexpr int kTreesAround     = 4;
 constexpr int kEarlyMilitary   = 5;
 constexpr int kExpStartTime    = 6;
-constexpr int kExpShipSerial   = 7;
 constexpr int kWoodDiff        = 0; //int32_t
 constexpr int kTargetMilit     = 1;
 constexpr int kLeastMilit      = 2;
@@ -135,7 +135,7 @@ DefaultAI::DefaultAI(Game& ggame, PlayerNumber const pid, DefaultAI::Type const 
      military_last_build_(0),
      seafaring_economy(false),
      colony_scan_area_(kColonyScanStartArea),
-     expedition_start_time_(0),
+     expedition_start_time_(kNoExpedition),
      no_more_expeditions_(false),
      expedition_ship_(kNoShip),
      ships_utilization_(200),
@@ -146,6 +146,7 @@ DefaultAI::DefaultAI(Game& ggame, PlayerNumber const pid, DefaultAI::Type const 
      ts_advanced_count_(0),
      ts_advanced_const_count_(0),
      ts_without_trainers_(0),
+     highest_nonmil_prio_(0),
      scheduler_delay_counter_(0),
      ai_personality_military_loneliness_(0),
      ai_personality_attack_margin_(0),
@@ -324,6 +325,7 @@ void DefaultAI::think() {
 
 	// Pool of tasks to be executed this run. In ideal situation it will consist of one task only.
 	std::vector<SchedulerTask> current_task_queue;
+	assert (current_task_queue.empty());
 	// Here we push SchedulerTask members into the temporary queue, providing that a task is due now and
 	// the limit (jobs_to_run_count) is not exceeded
 	for (uint8_t i = 0; i < jobs_to_run_count; i += 1) {
@@ -864,12 +866,10 @@ void DefaultAI::late_initialization() {
 	// Here the AI persistent data either exists - then they are read
 	// or does not exist, then they are created and saved
 	bool persistent_data_exists_;
-	//player_->get_ai_data(&persistent_data_exists_, kPersistentData);
 	player_->get_ai_data(&persistent_data_exists_, kPersistentData);
 
 	// if false, generate new values
 	if (!persistent_data_exists_) {
-		//player_->set_ai_data(static_cast<int16_t>(1), kPersistentData); NOCOM
 		player_->set_ai_data(true, kPersistentData);
 
 		// these random values to make some small differences between players
@@ -893,7 +893,6 @@ void DefaultAI::late_initialization() {
 		// same defaults are directly saved to avoid inconsistency
 		player_->set_ai_data(colony_scan_area_, kColonyScan);
 		player_->set_ai_data(expedition_start_time_, kExpStartTime);
-		player_->set_ai_data(expedition_ship_, kExpShipSerial);
 		player_->set_ai_data(ships_utilization_, kShipUtil);
 		player_->set_ai_data(no_more_expeditions_, kNoExpeditions);
 		player_->set_ai_data(last_attacked_player_, kLastAttack);
@@ -931,8 +930,6 @@ void DefaultAI::late_initialization() {
 
 		player_->get_ai_data(&expedition_start_time_, kExpStartTime);
 		check_range<uint32_t>(expedition_start_time_, kExpStartTime, gametime, "expedition_start_time_");
-
-		player_->get_ai_data(&expedition_ship_, kExpShipSerial);
 
 		player_->get_ai_data(&ships_utilization_, kShipUtil);
 		check_range<uint16_t>(ships_utilization_, 0, 10000, "ships_utilization_");
@@ -1518,7 +1515,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 	std::vector<int32_t> spots_avail;
 	spots_avail.resize(4);
 	Map& map = game().map();
-
+	
 	for (int32_t i = 0; i < 4; ++i)
 		spots_avail.at(i) = 0;
 
@@ -1548,7 +1545,12 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 	} else {
 		needed_spots = 1300 + (productionsites.size() - 200) * 20;
 	}
-
+	const bool has_enough_space = (spots_ > needed_spots);
+	
+	//This is a replacement for simple count of mines
+	const int32_t virtual_mines =
+	   mines_.size() + mineable_fields.size() / 25;
+	
 	// *_military_scores are used as minimal score for a new military building
 	// to be built. As AI does not traverse all building fields at once, these thresholds
 	// are gradually going down until it finds a field&building that are above threshold
@@ -1562,6 +1564,16 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 	// right now in order to (try to) avoid expansion lockup
 
 	// this is just helpers to improve readability of code
+	// This is to say that we need to prefere productionsites instead militarysites
+	bool needs_boost_economy = false;
+	if (highest_nonmil_prio_ > 10
+		&& has_enough_space
+		&& virtual_mines >= 5){
+		needs_boost_economy = true;
+	} 
+	//resetting so it can be recalculated anew	
+	highest_nonmil_prio_ = 0;
+		
 	const bool too_many_ms_constructionsites =
 		(pow(msites_in_constr(), 2) > militarysites.size());
 	const bool too_many_vacant_mil =
@@ -1569,7 +1581,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 	const int32_t kUpperLimit = 275;
 	const int32_t kBottomLimit = 40; // to prevent too dense militarysites
 	// modifying least_military_score_, down if more military sites are needed and vice versa
-	if (too_many_ms_constructionsites || too_many_vacant_mil) {
+	if (too_many_ms_constructionsites || too_many_vacant_mil || needs_boost_economy) {
 		if (least_military_score_ < kUpperLimit) { //no sense to let it grow too hight
 			least_military_score_ += 2;
 		}
@@ -1608,7 +1620,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 			new_buildings_stop_ = true;
 	}
 	// 2. to not exhaust all free spots
-	if (spots_ < needed_spots) {
+	if (!has_enough_space) {
 		new_buildings_stop_ = true;
 	}
 	// 3. too keep some proportions production sites vs military sites
@@ -1644,8 +1656,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 	// set necessity for mines
 	// we use 'virtual mines', because also mine spots can be changed
 	// to mines when AI decides so
-	const int32_t virtual_mines =
-	   mines_.size() + mineable_fields.size() / 25;
+
 	resource_necessity_mines_ = 100 * (15 - virtual_mines) / 15;
 	resource_necessity_mines_ = (resource_necessity_mines_ > 100) ? 100 : resource_necessity_mines_;
 	resource_necessity_mines_ = (resource_necessity_mines_ < 20) ? 10 : resource_necessity_mines_;
@@ -1702,9 +1713,15 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 		// checking we have enough critical material on stock
 		for (uint32_t m = 0; m < bo.critical_built_mat_.size(); ++m) {
 			DescriptionIndex wt(static_cast<size_t>(bo.critical_built_mat_.at(m)));
-			// shortage = less then 3 items in warehouses
-			if (get_warehoused_stock(wt) < 3) {
+			uint32_t treshold = 3;
+			//generally trainingsites are more important
+			if (bo.type == BuildingObserver::TRAININGSITE) { 
+				treshold = 2;
+			}
+
+			if (get_warehoused_stock(wt) < treshold) {
 				bo.build_material_shortage_ = true;
+				break;
 			}
 		}
 	}
@@ -1791,10 +1808,18 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 
 		} else if (bo.type == BuildingObserver::MILITARYSITE) {
 			bo.new_building_ = check_building_necessity(bo.desc->get_size(), gametime);
-		} else if  (bo.type == BuildingObserver::TRAININGSITE
-			&& // if we dont have enough build material or are above target of current ai mode
-			(bo.build_material_shortage_ || bo.aimode_limit_achieved())) {
+		} else if  (bo.type == BuildingObserver::TRAININGSITE){
+			if (bo.forced_after_ < gametime && bo.total_count() == 0) {
+				bo.new_building_ = BuildingNecessity::kForced;
+			} else if (ts_without_trainers_ || (ts_basic_const_count_ + ts_advanced_const_count_) > 0) {
 				bo.new_building_ = BuildingNecessity::kNotNeeded;
+			} else if (bo.prohibited_till_ > gametime) {
+				bo.new_building_ = BuildingNecessity::kNotNeeded;
+			} else if (bo.build_material_shortage_ || bo.aimode_limit_achieved()) {
+				bo.new_building_ = BuildingNecessity::kNotNeeded;
+			} else {
+				bo.new_building_ = BuildingNecessity::kAllowed;
+			}
 		} else if (bo.aimode_limit_achieved()) {
 			bo.new_building_ = BuildingNecessity::kNotNeeded;
 		} else {
@@ -2307,54 +2332,45 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 				}
 
 			} else if (bo.type == BuildingObserver::TRAININGSITE) {
-
-				assert(!bo.build_material_shortage_);
+				
+				prio = 30;
+			
+				if (bo.new_building_ == BuildingNecessity::kForced) {
+					prio += 30;
+				}
+				
+				
+				if (bo.trainingsite_type_ == TrainingSiteType::kBasic){
+					prio = static_cast<int32_t>(militarysites.size()) - 40 * static_cast<int32_t>(ts_basic_count_);
+				}
+				
+				if (bo.trainingsite_type_ == TrainingSiteType::kAdvanced) {
+					prio = static_cast<int32_t>(militarysites.size()) - 50 * static_cast<int32_t>(ts_advanced_count_);					
+				}
 
 				// exclude spots on border
 				if (bf->near_border_) {
-					continue;
+					prio -= 5;
 				}
 
-				// it is a bit difficult to get a new trainer.....
-				if (ts_without_trainers_) {
-					continue;
-				}
-
-				// target is only one for both types
-				if ((ts_basic_const_count_ + ts_advanced_const_count_) > 0) {
-					continue;
-				}
-
-				// we build one basic training site for 50 militarysites
-				if (bo.trainingsite_type_ == TrainingSiteType::kBasic &&
-				    militarysites.size() / 50 < static_cast<int32_t>(ts_basic_count_)) {
-					continue;
-				}
-				// we build one advanced training site for 75 militarysites
-				if (bo.trainingsite_type_ == TrainingSiteType::kAdvanced &&
-				    militarysites.size() / 75 < static_cast<int32_t>(ts_advanced_count_)) {
-					continue;
-				}
 
 				// for type1 we need 15 productionsties
 				if (bo.trainingsite_type_ == TrainingSiteType::kBasic && productionsites.size() < 15) {
-					continue;
+					prio -= 15;
 				}
 
 				// for type2 we need 4 mines
 				if (bo.trainingsite_type_ == TrainingSiteType::kAdvanced && virtual_mines < 4) {
-					continue;
+					prio -= 15;;
 				}
-
-				prio = 10;
 
 				// take care about borders and enemies
 				if (bf->enemy_nearby_) {
-					prio /= 2;
+					prio -= 10;
 				}
 
 				if (bf->unowned_land_nearby_) {
-					prio -= bf->unowned_land_nearby_ / 10;
+					prio -= 5;
 				}
 			}
 
@@ -2395,6 +2411,10 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 			// prefer vicinity of ports (with exemption of warehouses)
 			if (bf->port_nearby_ && bo.type == BuildingObserver::MILITARYSITE) {
 				prio *= 2;
+			}
+
+			if (bo.type != BuildingObserver::MILITARYSITE && highest_nonmil_prio_ < prio) {
+				highest_nonmil_prio_ = prio;
 			}
 
 			if (prio > proposed_priority) {
@@ -2522,6 +2542,10 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 						proposed_priority = prio;
 						proposed_coords = mf->coords;
 						mine = true;
+					}
+					
+					if (prio > highest_nonmil_prio_) {
+						highest_nonmil_prio_ = prio;
 					}
 				}  // end of evaluation of field
 			}
@@ -3184,26 +3208,26 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 						doing_upgrade = true;
 					}
 
-					// if the decision was not made yet, consider normal upgrade
-					if (!doing_upgrade) {
-						// compare the performance %
-						if (en_bo.current_stats_ - site.bo->current_stats_
-							> static_cast<uint32_t>(20)) {
+					if (en_bo.total_count() == 1) {
+						//if the upgrade itself can be upgradeed futher, we are more willing to upgrade 2nd building
+						if (en_bo.upgrade_extends_ || en_bo.upgrade_substitutes_) {
+							if (en_bo.current_stats_ > 30) {
+								doing_upgrade = true;
+							}
+						} else if (en_bo.current_stats_ > 50) {
+							doing_upgrade = true;
+						}
+					}
+					
+					if (en_bo.total_count() > 1) {
+						if (en_bo.current_stats_ > 80) {
 								doing_upgrade = true;
 						}
-
-						if ((static_cast<int32_t>(en_bo.current_stats_) > 85 &&
-						     en_bo.total_count() * 2 < site.bo->total_count()) ||
-						    (static_cast<int32_t>(en_bo.current_stats_) > 50 &&
-						     en_bo.total_count() * 4 < site.bo->total_count())) {
-
-								doing_upgrade = true;
-						}
-
-						// Dont forget about limitation of number of buildings
-						if (en_bo.cnt_limit_by_aimode_ <= en_bo.total_count() - en_bo.unconnected_count_) {
-							doing_upgrade = false;
-						}
+					}					
+					
+					// Dont forget about limitation of number of buildings
+					if (en_bo.cnt_limit_by_aimode_ <= en_bo.total_count() - en_bo.unconnected_count_) {
+						doing_upgrade = false;
 					}
 				}
 			}
@@ -3588,12 +3612,13 @@ bool DefaultAI::marine_main_decisions() {
 	}
 
 	// starting an expedition? if yes, find a port and order it to start an expedition
-	if (ports_count > 0 && enough_ships == FleetStatus::kEnoughShips && expeditions_in_prep == 0 &&
+	if (idle_shipyard_stocked && !no_more_expeditions_ && ports_count > 0 && enough_ships == FleetStatus::kEnoughShips && expeditions_in_prep == 0 &&
 	    expeditions_in_progress == 0) {
 		// we need to find a port
 		for (const WarehouseSiteObserver& wh_obs : warehousesites) {
 
 			if (wh_obs.bo->is_port_) {
+				printf (" %d: ordering new expedition\n", player_number());
 				game().send_player_start_or_cancel_expedition(*wh_obs.site);
 				return true;
 			}
@@ -3622,25 +3647,26 @@ bool DefaultAI::check_ships(uint32_t const gametime) {
 			if (ship_state	== Widelands::Ship::EXP_WAITING ||
 			    ship_state	== Widelands::Ship::EXP_SCOUTING ||
 			    ship_state	== Widelands::Ship::EXP_FOUNDPORTSPACE) {
-					//NOCOM
 					if (!(expedition_ship_==i->ship->serial() || expedition_ship_==kNoShip)){
 						printf (" %d, this ship: %6d, ship in expedition: %6d\n", 
 						player_number(), i->ship->serial(),expedition_ship_);
 					}
+					
+					// consistency check
 					assert (expedition_ship_==i->ship->serial() || expedition_ship_==kNoShip);
 
-					//new expedition
+					// This is obviously new expedition
 					if (expedition_ship_==kNoShip) {
-						assert (expedition_start_time_ == 0);
+						assert (expedition_start_time_ == kNoExpedition);
 						expedition_start_time_ = gametime;
 						player_->set_ai_data(gametime, kExpStartTime);
 						printf (" %d: ship %5d in expedition here (spotted first time) - %s, state: %d, scan area: %2d\n",
 						player_number(), i->ship->serial(),   gametimestring(gametime).c_str(), ship_state,colony_scan_area_);						
 						expedition_ship_=i->ship->serial();
-						player_->set_ai_data(expedition_ship_, kExpShipSerial);
-					// older expedition	
+
+					// Already known expedition	
 					} else if (gametime - expedition_start_time_ < kExpeditionMaxDuration) {
-						assert (expedition_start_time_ > 0);
+						assert (expedition_start_time_ > kNoExpedition);
 						// this is a percent so in range 0-100
 						const uint32_t remaining_time = 100 - ((gametime - expedition_start_time_) / (kExpeditionMaxDuration / 100));
 						assert (remaining_time<= 100);
@@ -3654,13 +3680,15 @@ bool DefaultAI::check_ships(uint32_t const gametime) {
 							printf(" %d: decreasing colony scan area to %5d, lapsed exp. time: %s\n",
 							player_number(), colony_scan_area_, gametimestring(gametime - expedition_start_time_).c_str());
 						}
-					// expedition time over	
+					// Expedition overdue. Settin no_more_expeditions_=true
+					// But we do not cancel it, the code for cancellation does not work properly now
 					} else if (gametime - expedition_start_time_ >= kExpeditionMaxDuration) {
 						assert (expedition_start_time_ > 0);
 						printf (" %d: giving up with expeditions\n", player_number());
+						colony_scan_area_ = kColonyScanMinArea;
+						player_->set_ai_data(kColonyScanMinArea, kColonyScan);
 						no_more_expeditions_ = true;
 						player_->set_ai_data(true, kNoExpeditions);
-						// expedition is not quitted here !
 					}
 
 
@@ -3668,15 +3696,12 @@ bool DefaultAI::check_ships(uint32_t const gametime) {
 			// so resetting start time
 			} else if (expedition_ship_ == i->ship->serial()) {
 				// Obviously expedition just ended
-				expedition_start_time_ = 0;
+				expedition_start_time_ = kNoExpedition;
 				expedition_ship_= kNoShip;
-				player_->set_ai_data(expedition_ship_, kExpShipSerial);				
 				player_->set_ai_data(static_cast<uint32_t>(0), kExpStartTime);
 				printf (" %d: ship %5d no more in expedition %s, state: %d\n",
 					player_number(),i->ship->serial(), gametimestring(gametime).c_str(), ship_state );
 			}				
-				
-
 
 			// only two states need an attention
 			if ((i->ship->get_ship_state() == Widelands::Ship::EXP_WAITING ||
@@ -3695,16 +3720,17 @@ bool DefaultAI::check_ships(uint32_t const gametime) {
 			// if ships is waiting for command
 			if (i->waiting_for_command_) {
 				if (no_more_expeditions_) {
-					printf ("why is ship waiting for command when expedition was cancelled\n");// NOCOM
+					printf ("   why is ship waiting for command when expedition was cancelled\n");// NOCOM
 				}
 				expedition_management(*i);
 				action_taken = true;
 			}
-			// NOCOM
+
 			// Checking utilization
 			if (i->ship->get_ship_state() == Widelands::Ship::TRANSPORT) {
 
-				// good utilization is 10 pieces of ware onboard, we need to get int in range 0-10000
+				// Good utilization is 10 pieces of ware onboard, we need to get int in range 0-10000
+				// and it matches 0-100 %
 				const int16_t tmp_util = (i->ship->get_nritems() > 10) ? 10000 : i->ship->get_nritems() * 1000;
 				ships_utilization_ = ships_utilization_ / 20 * 19 + tmp_util / 20;
 				player_->set_ai_data(ships_utilization_, kShipUtil);
@@ -4273,6 +4299,7 @@ void DefaultAI::count_military_vacant_positions() {
 	vacant_mil_positions_ = 0;
 	for (TrainingSiteObserver tso : trainingsites) {
 		vacant_mil_positions_ += 10 * (tso.site->soldier_capacity() - tso.site->stationed_soldiers().size());
+		vacant_mil_positions_ += (tso.site->can_start_working()) ? 0 : 10;
 	}
 	for (MilitarySiteObserver mso : militarysites) {
 		vacant_mil_positions_ += mso.site->soldier_capacity() - mso.site->stationed_soldiers().size();
@@ -4282,9 +4309,7 @@ void DefaultAI::count_military_vacant_positions() {
 // this function only check with trainingsites
 // manipulates input queues and soldier capacity
 bool DefaultAI::check_trainingsites(uint32_t gametime) {
-	if (get_taskpool_task_time(SchedulerTaskId::kCheckTrainingsites) > gametime) {
-		return false;
-	}
+
 	if (trainingsites.empty()) {
 		set_taskpool_task_time(
 			gametime + 2 * kTrainingSitesCheckInterval, SchedulerTaskId::kCheckTrainingsites);
@@ -4630,15 +4655,11 @@ void DefaultAI::gain_ship(Ship& ship, NewShip type) {
 		marineTaskQueue_.push_back(kStopShipyard);
 	} else {
 		seafaring_economy = true;
-		//if (ship.state_is_expedition()) {
-			//allships.back().in_expedition_ = true;
-			//assert (expedition_start_time_>0);
-			//allships.back().expedition_since_ =  expedition_start_time_;//NOCOM
-		//}
-			
+		if (ship.state_is_expedition()) {
+			assert (expedition_ship_ == kNoShip);
+			expedition_ship_ = ship.serial();
+		}
 	}
-
-
 }
 
 // this is called whenever we lose ownership of a PlayerImmovable
@@ -4903,37 +4924,9 @@ void DefaultAI::expedition_management(ShipObserver& so) {
 
 			return;
 		}
-
-		//// decreasing colony_scan_area_ //NOCOM
-		//if (colony_scan_area_ > kColonyScanMinArea && gametime % 4 == 0) {
-			//colony_scan_area_ -= 1;
-			//player_->set_ai_data(colony_scan_area_, kColonyScan);
-		//}
-		//assert(colony_scan_area_ >= kColonyScanMinArea);
-
-
 	}
 
-	// if we are here, port was not ordered above
-	// 2. let check if expedition is not overdue
-	if  (no_more_expeditions_) {
-		for (std::list<WarehouseSiteObserver>::iterator i = warehousesites.begin();
-	     i != warehousesites.end();
-	     ++i) {
-			if (i->bo->is_port_) {
-				PortDock* pd_tmp = i->site->get_portdock();
-				assert(pd_tmp);
-				if (pd_tmp->expedition_started()){
-	                printf (" %d: ordering expedition stop\n", player_number());
-					game().send_player_start_or_cancel_expedition(*i->site);
-					break;
-				}
-			}
-		}
-	return;
-	}
-		
-	// 3. Go on with expedition
+	// 2. Go on with expedition
 
 	if (first_time_here) {
 		game().send_player_ship_explore_island(*so.ship, so.island_circ_direction);

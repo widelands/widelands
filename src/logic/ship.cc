@@ -634,6 +634,18 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 					WaresQueue& wq = cs->waresqueue(ware->descr_index());
 					const uint32_t max = wq.get_max_fill();
 					const uint32_t cur = wq.get_filled();
+
+					// This is to help to debug the situation when colonization fails
+					if (max <= cur) { //NOCOM replace for log
+						printf ("  %d: Colonization error: filling wares to future %s (owner %d) failed."
+						" Unloded wares: %d, capacity: %d\n",
+						get_owner()->player_number(),
+						cs->get_info().becomes->name().c_str(),
+						cs->get_owner()->player_number(),
+						cur,
+						max);
+					}
+
 					assert(max > cur);
 					wq.set_filled(cur + 1);
 					m_items.at(i).remove(game);
