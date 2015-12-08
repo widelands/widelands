@@ -82,10 +82,9 @@ const std::string heading(const std::string& text) {
 }
 }  // namespace
 
-EncyclopediaWindow::EncyclopediaWindow(InteractivePlayer& parent,
-													UI::UniqueWindow::Registry& registry) :
-	UI::UniqueWindow(
-		&parent, "encyclopedia", &registry, WINDOW_WIDTH, WINDOW_HEIGHT, _("Tribal Encyclopedia")),
+EncyclopediaWindow::EncyclopediaWindow(InteractivePlayer& parent, UI::UniqueWindow::Registry& registry)
+	: UI::UniqueWindow(
+        &parent, "encyclopedia", &registry, WINDOW_WIDTH, WINDOW_HEIGHT, _("Tribal Encyclopedia")),
      tabs_(this, 0, 0, nullptr) {
 
 	const int contents_height = WINDOW_HEIGHT - kTabHeight - 2 * kPadding;
@@ -95,14 +94,14 @@ EncyclopediaWindow::EncyclopediaWindow(InteractivePlayer& parent,
 
 	tab_definitions.push_back(
 	   std::unique_ptr<EncyclopediaTab>(new EncyclopediaTab("wares",
-																			  "pics/menu_tab_wares.png",
+	                                                        "pics/menu_tab_wares.png",
 	                                                        _("Wares"),
 	                                                        "tribes/scripting/help/ware_help.lua",
 	                                                        Widelands::MapObjectType::WARE)));
 
 	tab_definitions.push_back(
 	   std::unique_ptr<EncyclopediaTab>(new EncyclopediaTab("workers",
-																			  "pics/menu_tab_workers.png",
+	                                                        "pics/menu_tab_workers.png",
 	                                                        _("Workers"),
 	                                                        "tribes/scripting/help/worker_help.lua",
 	                                                        Widelands::MapObjectType::WORKER)));
@@ -137,8 +136,8 @@ EncyclopediaWindow::EncyclopediaWindow(InteractivePlayer& parent,
 
 		lists_.insert(
 		   std::make_pair(tab->key,
-								std::unique_ptr<UI::Listselect<Widelands::DescriptionIndex>>(
-									new UI::Listselect<Widelands::DescriptionIndex>(
+		                  std::unique_ptr<UI::Listselect<Widelands::DescriptionIndex>>(
+		                     new UI::Listselect<Widelands::DescriptionIndex>(
 		                        boxes_.at(tab->key).get(), 0, 0, contents_width, contents_height))));
 		lists_.at(tab->key)->selected.connect(boost::bind(
 		   &EncyclopediaWindow::entry_selected, this, tab->key, tab->script_path, tab->type));
