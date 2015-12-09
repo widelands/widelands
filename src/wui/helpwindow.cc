@@ -50,7 +50,7 @@ BuildingHelpWindow::BuildingHelpWindow
 		   lua->run_script("tribes/scripting/help/building_help.lua"));
 		std::unique_ptr<LuaCoroutine> cr(t->get_coroutine("func"));
 		cr->push_arg(tribe.name());
-		cr->push_arg(building_description.name());
+		cr->push_arg(&building_description);
 		cr->resume();
 		const std::string help_text = cr->pop_string();
 		textarea_->set_text(help_text);

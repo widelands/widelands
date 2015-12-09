@@ -91,7 +91,7 @@ public:
 	 */
 	const Buildcost & returned_wares_enhanced() const {return m_return_enhanced;}
 
-	std::string directory() const {return directory_;}
+	std::string helptext_script() const {return helptext_script_;}
 	int32_t get_size() const {return m_size;}
 	bool get_ismine() const {return m_mine;}
 	bool get_isport() const {return m_port;}
@@ -141,7 +141,7 @@ private:
 	Buildcost     m_return_dismantle; // Returned wares on dismantle
 	Buildcost     m_enhance_cost;     // cost for enhancing
 	Buildcost     m_return_enhanced;   // Returned ware for dismantling an enhanced building
-	std::string   directory_;         // The directory where the init files are located
+	std::string   helptext_script_;   // The path and filename to the building's helptext script
 	int32_t       m_size;            // size of the building
 	bool          m_mine;
 	bool          m_port;

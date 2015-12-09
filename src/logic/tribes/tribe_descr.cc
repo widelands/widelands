@@ -159,13 +159,12 @@ TribeDescr::TribeDescr
 				buildings_.push_back(index);
 
 				// Register construction materials
-				for (std::pair<DescriptionIndex, uint8_t> build_cost : get_building_descr(index)->buildcost()) {
+				for (WareAmount build_cost : get_building_descr(index)->buildcost()) {
 					if (!is_construction_material(build_cost.first)) {
 						construction_materials_.insert(build_cost.first);
 					}
 				}
-				for (std::pair<DescriptionIndex, uint8_t> enhancement_cost :
-					  get_building_descr(index)->enhancement_cost()) {
+				for (WareAmount enhancement_cost : get_building_descr(index)->enhancement_cost()) {
 					if (!is_construction_material(enhancement_cost.first)) {
 						construction_materials_.insert(enhancement_cost.first);
 					}
