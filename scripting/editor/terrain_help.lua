@@ -6,10 +6,9 @@ function picture_li(imagepath, text)
 end
 
 return {
-   func = function()
+   func = function(terrain_name)
       set_textdomain("widelands")
-      local result = rt(h1("Not Implermented"))
-      result = result .. rt(p("We want some help here"))
-      return result
+      local terrain = wl.Editor():get_terrain_description(terrain_name)
+      return rt(p(terrain.name))
    end
 }

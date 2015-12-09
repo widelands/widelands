@@ -28,6 +28,7 @@
 #include "logic/tribes/tribe_descr.h"
 #include "logic/tribes/tribes.h"
 #include "logic/ware_descr.h"
+#include "logic/world/world.h"
 #include "scripting/factory.h"
 #include "scripting/globals.h"
 #include "scripting/lua_map.h"
@@ -82,6 +83,7 @@ const MethodType<LuaEditorGameBase> LuaEditorGameBase::Methods[] = {
 	METHOD(LuaEditorGameBase, get_tribe_description),
 	METHOD(LuaEditorGameBase, get_ware_description),
 	METHOD(LuaEditorGameBase, get_worker_description),
+	METHOD(LuaEditorGameBase, get_terrain_description),
 	{nullptr, nullptr},
 };
 const PropertyType<LuaEditorGameBase> LuaEditorGameBase::Properties[] = {
@@ -243,6 +245,28 @@ int LuaEditorGameBase::get_worker_description(lua_State* L) {
 	const WorkerDescr* worker_description = tribes.get_worker_descr(worker_index);
 	return LuaMaps::upcasted_map_object_descr_to_lua(L, worker_description);
 }
+
+/* RST
+	.. function:: get_terrain_description(tribe_name)
+
+		:arg terrain_name: the name of the terrain
+
+		Registers a terrain description so Lua can reference it from the editor.
+
+		(RO) The :class:`~wl.Game.Terrain_description`.
+*/
+int LuaEditorGameBase::get_terrain_description(lua_State* L) {
+	if (lua_gettop(L) != 2) {
+		report_error(L, "Wrong number of arguments");
+	}
+	const std::string terrain_name = luaL_checkstring(L, 2);
+	const TerrainDescription* descr = get_egbase(L).world().get_ter(terrain_name.c_str());
+	if (!descr) {
+		report_error(L, "Terrain %s does not exist", terrain_name.c_str());
+	}
+	return to_lua<LuaMaps::LuaTerrainDescription>(L, new LuaMaps::LuaTerrainDescription(descr));
+}
+
 
 /*
  ==========================================================

@@ -162,7 +162,6 @@ void EditorHelp::entry_selected(const std::string& key,
 	try {
 		std::unique_ptr<LuaTable> table(eia().egbase().lua().run_script(script_path));
 		std::unique_ptr<LuaCoroutine> cr(table->get_coroutine("func"));
-		// NOCOM cr->push_arg(tribe.name());
 
 		std::string descname = "";
 
@@ -170,7 +169,7 @@ void EditorHelp::entry_selected(const std::string& key,
 		case (HelpEntry::Type::kTerrain): {
 			const TerrainDescription& descr = eia().egbase().world().terrain_descr(lists_.at(key)->get_selected());
 			descname = descr.descname();
-			// NOCOM cr->push_arg(descr);
+			cr->push_arg(descr.name());
 			break;
 		}
 		default:

@@ -2368,6 +2368,52 @@ int LuaWorkerDescription::get_needed_experience(lua_State * L) {
 
 
 /* RST
+TerrainDescription
+--------------------
+.. class:: TerrainDescription
+
+	A static description of a terrain.
+*/
+const char LuaTerrainDescription::className[] = "TerrainDescription";
+const MethodType<LuaTerrainDescription> LuaTerrainDescription::Methods[] = {
+	{nullptr, nullptr},
+};
+const PropertyType<LuaTerrainDescription> LuaTerrainDescription::Properties[] = {
+	PROP_RO(LuaTerrainDescription, name),
+	{nullptr, nullptr, nullptr},
+};
+
+void LuaTerrainDescription::__persist(lua_State* L) {
+	const Widelands::TerrainDescription* descr = get();
+	PERS_STRING("name", descr->name());
+}
+
+void LuaTerrainDescription::__unpersist(lua_State* L) {
+	std::string name;
+	UNPERS_STRING("name", name);
+	set_description_pointer(get_egbase(L).world().get_ter(name.c_str()));
+}
+
+/*
+ ==========================================================
+ PROPERTIES
+ ==========================================================
+ */
+
+/* RST
+	.. attribute:: name
+
+			(RO) the :class:`string` internal name of this terrain
+*/
+
+int LuaTerrainDescription::get_name(lua_State * L) {
+	lua_pushstring(L, get()->name());
+	return 1;
+}
+
+
+
+/* RST
 MapObject
 ---------
 
@@ -4850,6 +4896,8 @@ void luaopen_wlmap(lua_State * L) {
 	register_class<LuaWorkerDescription>(L, "map", true);
 	add_parent<LuaWorkerDescription, LuaMapObjectDescription>(L);
 	lua_pop(L, 1); // Pop the meta table
+
+	register_class<LuaTerrainDescription>(L, "map");
 
 	register_class<LuaField>(L, "map");
 	register_class<LuaPlayerSlot>(L, "map");

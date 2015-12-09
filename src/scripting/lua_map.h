@@ -35,6 +35,7 @@
 #include "logic/trainingsite.h"
 #include "logic/warehouse.h"
 #include "logic/worker.h"
+#include "logic/world/terrain_description.h"
 #include "scripting/lua.h"
 #include "scripting/luna.h"
 
@@ -45,6 +46,7 @@ namespace Widelands {
 	class Bob;
 	class WareDescr;
 	class WorkerDescr;
+	class TerrainDescription;
 	class TribeDescr;
 }
 
@@ -508,6 +510,50 @@ private:
 };
 
 #undef CASTED_GET_DESCRIPTION
+
+
+class LuaTerrainDescription : public LuaMapModuleClass {
+public:
+	LUNA_CLASS_HEAD(LuaTerrainDescription);
+
+	virtual ~LuaTerrainDescription() {}
+
+	LuaTerrainDescription() : terraindescr_(nullptr) {}
+	LuaTerrainDescription(const Widelands::TerrainDescription* const terraindescr)
+		: terraindescr_(terraindescr) {}
+	LuaTerrainDescription(lua_State* L) : terraindescr_(nullptr) {
+		report_error(L, "Cannot instantiate a 'LuaTerrainDescription' directly!");
+	}
+
+	void __persist(lua_State * L) override;
+	void __unpersist(lua_State * L) override;
+
+	/*
+	 * Properties
+	 */
+	int get_name(lua_State *);
+
+	/*
+	 * Lua methods
+	 */
+
+	/*
+	 * C methods
+	 */
+protected:
+	const Widelands::TerrainDescription* get() const {
+		assert(terraindescr_ != nullptr);
+		return terraindescr_;
+	}
+	// For persistence.
+	void set_description_pointer(const Widelands::TerrainDescription* pointer) {
+		terraindescr_ = pointer;
+	}
+
+private:
+	const Widelands::TerrainDescription* terraindescr_;
+};
+
 
 #define CASTED_GET(klass) \
 Widelands:: klass * get(lua_State * L, Widelands::EditorGameBase & egbase) { \
