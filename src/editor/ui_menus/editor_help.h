@@ -22,6 +22,7 @@
 
 #include <map>
 #include <memory>
+#include <vector>
 
 #include "logic/instances.h"
 #include "ui_basic/box.h"
@@ -38,6 +39,10 @@ struct EditorHelp : public UI::UniqueWindow {
 	EditorHelp(EditorInteractive &, UI::UniqueWindow::Registry &);
 private:
 	struct HelpEntry {
+		enum class Type {
+			kTerrain
+		};
+
 		HelpEntry(const HelpEntry& other)
 			: HelpEntry(other.index, other.descname, other.icon) {
 		}
@@ -55,6 +60,25 @@ private:
 		}
 	};
 
+	struct HelpTab {
+		HelpTab(const std::string& _key,
+							 const std::string& _image_filename,
+							 const std::string& _tooltip,
+							 const std::string& _script_path,
+							 const EditorHelp::HelpEntry::Type _type)
+			: key(_key),
+			  image_filename(_image_filename),
+			  tooltip(_tooltip),
+			  script_path(_script_path),
+			  type(_type) {
+		}
+		const std::string key;
+		const std::string image_filename;
+		const std::string tooltip;
+		const std::string script_path;
+		const EditorHelp::HelpEntry::Type type;
+	};
+
 	EditorInteractive & eia() const;
 
 	// Fill table of contents
@@ -64,7 +88,7 @@ private:
 	// Update contents when an entry is selected
 	void entry_selected(const std::string& key,
 							  const std::string& script_path,
-							  const Widelands::MapObjectType& type);
+							  const HelpEntry::Type& type);
 
 	// UI elements
 	UI::TabPanel tabs_;

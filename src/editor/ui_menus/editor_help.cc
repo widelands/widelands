@@ -32,6 +32,7 @@
 #include "base/i18n.h"
 #include "editor/editorinteractive.h"
 #include "graphic/graphic.h"
+#include "graphic/texture.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/world/world.h"
 #include "logic/world/terrain_description.h"
@@ -52,26 +53,6 @@ inline EditorInteractive & EditorHelp::eia() const {
 }
 
 namespace {
-
-struct HelpTab {
-	HelpTab(const std::string& _key,
-						 const std::string& _image_filename,
-						 const std::string& _tooltip,
-						 const std::string& _script_path,
-						 const Widelands::MapObjectType _type)
-		: key(_key),
-		  image_filename(_image_filename),
-		  tooltip(_tooltip),
-		  script_path(_script_path),
-		  type(_type) {
-	}
-	const std::string key;
-	const std::string image_filename;
-	const std::string tooltip;
-	const std::string script_path;
-	const Widelands::MapObjectType type;
-};
-
 const std::string heading(const std::string& text) {
 	return ((boost::format("<rt><p font-size=18 font-weight=bold font-color=D1D1D1>"
 								  "%s<br></p><p font-size=8> <br></p></rt>") %
@@ -95,7 +76,7 @@ EditorHelp::EditorHelp(EditorInteractive& parent, UI::UniqueWindow::Registry& re
 								  "pics/editor_menu_tool_set_terrain.png",
 								  _("Terrains"),
 								  "scripting/editor/terrain_help.lua",
-								  Widelands::MapObjectType::BUILDING)));
+								  HelpEntry::Type::kTerrain)));
 
 	for (const auto& tab : tab_definitions) {
 		// Make sure that all paths exist
@@ -162,26 +143,22 @@ void EditorHelp::fill_entries(const char* key, std::vector<HelpEntry>& entries) 
 }
 
 void EditorHelp::fill_terrains() {
-	/* NOCOM
-	const Tribes& tribes = eia().egbase().tribes();
-	const TribeDescr& tribe = eia().player().tribe();
+	const World& world = eia().egbase().world();
 	std::vector<HelpEntry> entries;
 
-	for (Widelands::DescriptionIndex i = 0; i < tribes.nrbuildings(); ++i) {
-		const BuildingDescr* building = tribes.get_building_descr(i);
-		if (tribe.has_building(i) || building->type() == MapObjectType::MILITARYSITE) {
-			HelpEntry entry(i, building->descname(), building->icon());
-			entries.push_back(entry);
-		}
+	for (Widelands::DescriptionIndex i = 0; i < world.terrains().size(); ++i) {
+		const TerrainDescription& terrain = world.terrain_descr(i);
+		upcast(Image const, icon, &terrain.get_texture(0));
+		HelpEntry entry(i, terrain.descname(), icon);
+		entries.push_back(entry);
 	}
-	fill_entries("buildings", entries);
-	*/
+	fill_entries("terrains", entries);
 }
 
 
 void EditorHelp::entry_selected(const std::string& key,
 													 const std::string& script_path,
-													 const Widelands::MapObjectType& type) {
+													 const HelpEntry::Type& type) {
 	try {
 		std::unique_ptr<LuaTable> table(eia().egbase().lua().run_script(script_path));
 		std::unique_ptr<LuaCoroutine> cr(table->get_coroutine("func"));
@@ -190,52 +167,14 @@ void EditorHelp::entry_selected(const std::string& key,
 		std::string descname = "";
 
 		switch (type) {
-		case (Widelands::MapObjectType::BUILDING):
-		case (Widelands::MapObjectType::CONSTRUCTIONSITE):
-		case (Widelands::MapObjectType::DISMANTLESITE):
-		case (Widelands::MapObjectType::WAREHOUSE):
-		case (Widelands::MapObjectType::PRODUCTIONSITE):
-		case (Widelands::MapObjectType::MILITARYSITE):
-		case (Widelands::MapObjectType::TRAININGSITE): {
-			/* NOCOM
-			const Widelands::BuildingDescr* descr =
-				tribe.get_building_descr(lists_.at(key)->get_selected());
-			descname = descr->descname();
-			cr->push_arg(descr);
-			*/
+		case (HelpEntry::Type::kTerrain): {
+			const TerrainDescription& descr = eia().egbase().world().terrain_descr(lists_.at(key)->get_selected());
+			descname = descr.descname();
+			// NOCOM cr->push_arg(descr);
 			break;
 		}
-		case (Widelands::MapObjectType::WARE): {
-			/* NOCOM
-			const Widelands::WareDescr* descr = tribe.get_ware_descr(lists_.at(key)->get_selected());
-			descname = descr->descname();
-			cr->push_arg(descr);
-			*/
-			break;
-		}
-		case (Widelands::MapObjectType::WORKER):
-		case (Widelands::MapObjectType::CARRIER):
-		case (Widelands::MapObjectType::SOLDIER): {
-			/* NOOM
-			const Widelands::WorkerDescr* descr =
-				tribe.get_worker_descr(lists_.at(key)->get_selected());
-			descname = descr->descname();
-			cr->push_arg(descr);
-			*/
-			break;
-		}
-		case (Widelands::MapObjectType::MAPOBJECT):
-		case (Widelands::MapObjectType::BATTLE):
-		case (Widelands::MapObjectType::FLEET):
-		case (Widelands::MapObjectType::BOB):
-		case (Widelands::MapObjectType::CRITTER):
-		case (Widelands::MapObjectType::SHIP):
-		case (Widelands::MapObjectType::IMMOVABLE):
-		case (Widelands::MapObjectType::FLAG):
-		case (Widelands::MapObjectType::ROAD):
-		case (Widelands::MapObjectType::PORTDOCK):
 		default:
-			throw wexception("EncyclopediaWindow: No MapObjectType defined for tab.");
+			throw wexception("EditorHelp: No Type defined for tab.");
 		}
 
 		cr->resume();
