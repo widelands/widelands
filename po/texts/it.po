@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-12-03 09:55+0000\n"
-"PO-Revision-Date: 2015-12-07 15:27+0000\n"
+"POT-Creation-Date: 2015-12-07 20:16+0000\n"
+"PO-Revision-Date: 2015-12-08 16:35+0000\n"
 "Last-Translator: Davide Nicolini <davide97@gmail.com>\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
@@ -338,7 +338,7 @@ msgstr "- Per favore indica anche su quale sistema operativo sta girando Widelan
 
 #: ../../txts/README.lua:112
 msgid "- Which map you were playing when the bug occurred."
-msgstr "- Su quale mappa stavi giocando quando è avvenuto il problema."
+msgstr "- Nella mappa in cui stavi giocando quando è avvenuto il problema."
 
 #: ../../txts/README.lua:114
 msgid ""
