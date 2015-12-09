@@ -157,7 +157,7 @@ BuildingDescr::BuildingDescr
 		}
 	}
 
-	directory_ = table.get_string("directory");
+	helptext_script_ = table.get_string("helptext_script");
 
 	m_needs_seafaring = table.has_key("needs_seafaring") ? table.get_bool("needs_seafaring") : false;
 
