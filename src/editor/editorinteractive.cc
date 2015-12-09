@@ -30,6 +30,7 @@
 #include "base/scoped_timer.h"
 #include "base/warning.h"
 #include "editor/tools/editor_delete_immovable_tool.h"
+#include "editor/ui_menus/editor_help.h"
 #include "editor/ui_menus/editor_main_menu.h"
 #include "editor/ui_menus/editor_main_menu_load_map.h"
 #include "editor/ui_menus/editor_main_menu_save_map.h"
@@ -100,7 +101,10 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase & e) :
 	 ("editor_undo", "undo", _("Undo"))),
 	m_redo
 	(INIT_BUTTON
-	 ("editor_redo", "redo", _("Redo")))
+	 ("editor_redo", "redo", _("Redo"))),
+	m_toggle_help
+	(INIT_BUTTON
+	 ("menu_help", "help", _("Help")))
 {
 	m_toggle_main_menu.sigclicked.connect(boost::bind(&EditorInteractive::toggle_mainmenu, this));
 	m_toggle_tool_menu.sigclicked.connect(boost::bind(&EditorInteractive::tool_menu_btn, this));
@@ -112,6 +116,7 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase & e) :
 		boost::bind(&EditorHistory::undo_action, &m_history, boost::cref(egbase().world())));
 	m_redo.sigclicked.connect(
 		boost::bind(&EditorHistory::redo_action, &m_history, boost::cref(egbase().world())));
+	m_toggle_help.sigclicked.connect(boost::bind(&EditorInteractive::toggle_help, this));
 
 	m_toolbar.set_layout_toplevel(true);
 	m_toolbar.add(&m_toggle_main_menu,       UI::Box::AlignLeft);
@@ -122,6 +127,7 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase & e) :
 	m_toolbar.add(&m_toggle_player_menu,     UI::Box::AlignLeft);
 	m_toolbar.add(&m_undo,                   UI::Box::AlignLeft);
 	m_toolbar.add(&m_redo,                   UI::Box::AlignLeft);
+	m_toolbar.add(&m_toggle_help,            UI::Box::AlignLeft);
 	adjust_toolbar_position();
 
 	m_undo.set_enabled(false);
@@ -339,6 +345,14 @@ void EditorInteractive::set_sel_radius_and_update_menu(uint32_t const val) {
 	}
 }
 
+void EditorInteractive::toggle_help() {
+	if (m_helpmenu.window)
+		delete m_helpmenu.window;
+	else
+		new EditorHelp(*this, m_helpmenu);
+}
+
+
 
 bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 	bool handled = InteractiveBase::handle_key(down, code);
@@ -466,6 +480,12 @@ bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 				m_history.redo_action(egbase().world());
 			handled = true;
 			break;
+
+		case SDLK_F1:
+			toggle_help();
+			handled = true;
+			break;
+
 		default:
 			break;
 		}

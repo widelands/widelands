@@ -47,6 +47,8 @@ wl_library(editor
     tools/editor_tool_action.h
     tools/multi_select.h
     ui_menus/categorized_item_selection_menu.h
+    ui_menus/editor_help.cc
+    ui_menus/editor_help.h
     ui_menus/editor_main_menu.cc
     ui_menus/editor_main_menu.h
     ui_menus/editor_main_menu_load_map.cc
