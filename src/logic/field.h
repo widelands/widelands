@@ -135,7 +135,9 @@ public:
 	uint16_t get_caps()     const {return caps;}
 
 	Terrains      get_terrains() const {return terrains;}
+	// The terrain on the downward triangle
 	DescriptionIndex terrain_d   () const {return terrains.d;}
+	// The terrain on the triangle to the right
 	DescriptionIndex terrain_r   () const {return terrains.r;}
 	void          set_terrains(const Terrains & i) {terrains = i;}
 	void set_terrain
