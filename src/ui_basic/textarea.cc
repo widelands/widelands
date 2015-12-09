@@ -80,6 +80,7 @@ m_align(align)
  */
 void Textarea::init()
 {
+	fixed_width_ = 0;
 	set_handle_mouse(false);
 	set_thinks(false);
 	set_textstyle(UI::TextStyle::ui_small());
@@ -143,6 +144,14 @@ void Textarea::set_text(const std::string & text)
 const std::string& Textarea::get_text()
 {
 	return m_text;
+}
+
+
+/**
+ * Set the fixed width. The Textarea will still collapse, but then restore this width when expand() is called.
+ */
+void Textarea::set_fixed_width(uint32_t w) {
+	fixed_width_ = w;
 }
 
 
@@ -223,7 +232,7 @@ void Textarea::update_desired_size()
 	uint16_t h = 0;
 
 	if (rendered_text_) {
-		w = rendered_text_->width();
+		w = fixed_width_ > 0 ? fixed_width_ : rendered_text_->width();
 		h = rendered_text_->height();
 		// We want empty textareas to have height
 		if (m_text.empty()) {

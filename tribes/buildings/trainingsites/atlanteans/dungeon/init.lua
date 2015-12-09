@@ -37,8 +37,8 @@ tribes:new_trainingsite_type {
 
    aihints = {
       trainingsite_type = "advanced",
-      weak_ai_limit = 0,
-      normal_ai_limit = 1
+      very_weak_ai_limit = 0,
+      weak_ai_limit = 1
    },
 
    working_positions = {

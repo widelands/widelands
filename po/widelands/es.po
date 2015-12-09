@@ -15,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-28 11:19+0000\n"
-"PO-Revision-Date: 2015-11-28 11:21+0000\n"
+"POT-Creation-Date: 2015-12-03 09:55+0000\n"
+"PO-Revision-Date: 2015-12-03 09:57+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -605,7 +605,7 @@ msgstr "Salir del editor"
 #: ../../src/editor/ui_menus/editor_main_menu_load_or_save_map.cc:58
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:63
 #: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:41
-#: ../../src/scripting/lua_game.cc:398 ../../src/ui_basic/messagebox.cc:90
+#: ../../src/scripting/lua_game.cc:426 ../../src/ui_basic/messagebox.cc:90
 #: ../../src/ui_basic/messagebox.cc:97 ../../src/ui_fsmenu/helpwindow.cc:53
 #: ../../src/ui_fsmenu/load_map_or_game.cc:64
 #: ../../src/wui/game_main_menu_save_game.cc:91
@@ -1032,10 +1032,9 @@ msgstr "Cargando mundo"
 msgid "Adding player %u"
 msgstr "Añadiendo jugador %u"
 
-#. * TRANSLATORS: This is a message's type
 #: ../../src/logic/game.cc:250 ../../src/logic/game.cc:353
 #: ../../src/ui_fsmenu/launch_mpg.cc:291 ../../src/ui_fsmenu/launch_spg.cc:228
-#: ../../src/ui_fsmenu/mapselect.cc:101 ../../src/wui/game_message_menu.cc:563
+#: ../../src/ui_fsmenu/mapselect.cc:101
 #: ../../src/wui/multiplayersetupgroup.cc:351
 msgid "Scenario"
 msgstr "Escenario"
@@ -1112,15 +1111,34 @@ msgid_plural "%1%(+%2%) soldiers"
 msgstr[0] "%1%(+%2%) soldado"
 msgstr[1] "%1%(+%2%) soldados"
 
-#: ../../src/logic/militarysite.cc:864
+#. * TRANSLATORS: Militarysite lost (taken/destroyed by enemy)
+#: ../../src/logic/militarysite.cc:867
+msgctxt "building"
+msgid "Lost!"
+msgstr ""
+
+#: ../../src/logic/militarysite.cc:869
 msgid "Militarysite lost!"
 msgstr "¡Construcción militar perdida!"
 
-#: ../../src/logic/militarysite.cc:905
+#. * TRANSLATORS: Message title.
+#. * TRANSLATORS: If you run out of space, you can also translate this as
+#. "Success!"
+#: ../../src/logic/militarysite.cc:912
+msgid "Enemy Defeated!"
+msgstr ""
+
+#: ../../src/logic/militarysite.cc:914
 msgid "Enemy at site defeated!"
 msgstr "¡Enemigo derrotado en este lugar!"
 
-#: ../../src/logic/militarysite.cc:955
+#. * TRANSLATORS: Militarysite is being attacked
+#: ../../src/logic/militarysite.cc:965
+msgctxt "building"
+msgid "Attack!"
+msgstr ""
+
+#: ../../src/logic/militarysite.cc:967
 msgid "You are under attack"
 msgstr "Estás siendo atacado"
 
@@ -1178,7 +1196,7 @@ msgstr "la economía no necesita al trabajador ‘%s’"
 #: ../../src/logic/production_program.cc:429
 #: ../../src/logic/production_program.cc:943
 #: ../../src/logic/production_program.cc:1061
-#: ../../src/logic/production_program.cc:1156
+#: ../../src/logic/production_program.cc:1157
 #, c-format
 msgid "%1$ix %2$s"
 msgstr "%1$ix %2$s"
@@ -1254,7 +1272,7 @@ msgstr[1] "falta %s"
 
 #. * TRANSLATORS: %s is a list of wares. String is fetched according to total
 #. amount of wares.
-#: ../../src/logic/production_program.cc:1070
+#: ../../src/logic/production_program.cc:1071
 #, c-format
 msgid "Produced %s"
 msgid_plural "Produced %s"
@@ -1263,45 +1281,45 @@ msgstr[1] ""
 
 #. * TRANSLATORS: %s is a list of workers. String is fetched according to
 #. total amount of workers.
-#: ../../src/logic/production_program.cc:1165
+#: ../../src/logic/production_program.cc:1167
 #, c-format
 msgid "Recruited %s"
 msgid_plural "Recruited %s"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../../src/logic/production_program.cc:1388
+#: ../../src/logic/production_program.cc:1390
 msgid "No soldier to train!"
 msgstr "¡No hay soldados para entrenar!"
 
-#: ../../src/logic/production_program.cc:1396
-#: ../../src/logic/production_program.cc:1481
+#: ../../src/logic/production_program.cc:1398
+#: ../../src/logic/production_program.cc:1483
 msgid "No soldier found for this training level!"
 msgstr "No se han encontrado soldados para este nivel de entrenamiento!"
 
-#: ../../src/logic/productionsite.cc:267
+#: ../../src/logic/productionsite.cc:269
 msgid "(not occupied)"
 msgstr "(desocupado)"
 
-#: ../../src/logic/productionsite.cc:274
+#: ../../src/logic/productionsite.cc:276
 msgid "Worker missing"
 msgid_plural "Workers missing"
 msgstr[0] "Falta un trabajador"
 msgstr[1] "Faltan trabajadores"
 
-#: ../../src/logic/productionsite.cc:279
+#: ../../src/logic/productionsite.cc:281
 msgid "(stopped)"
 msgstr "(detenido)"
 
 #. * TRANSLATORS: Percent in building statistics window, e.g. 85%
 #. * TRANSLATORS: If you wish to add a space, translate as '%i %%'
-#: ../../src/logic/productionsite.cc:381
-#: ../../src/wui/building_statistics_menu.cc:681
+#: ../../src/logic/productionsite.cc:383
+#: ../../src/wui/building_statistics_menu.cc:686
 #, c-format
 msgid "%i%%"
 msgstr "%i %%"
 
-#: ../../src/logic/productionsite.cc:989
+#: ../../src/logic/productionsite.cc:991
 msgid "Can’t find any more resources!"
 msgstr "¡No se encuentran más recursos!"
 
@@ -1327,60 +1345,90 @@ msgstr "¡El guardado ha fallado!"
 msgid "Game saved"
 msgstr "Partida guardada"
 
-#: ../../src/logic/ship.cc:431
+#: ../../src/logic/ship.cc:435
+msgid "Port Space"
+msgstr ""
+
+#: ../../src/logic/ship.cc:436
 msgid "Port Space Found"
 msgstr "Se ha encontrado espacio para un puerto"
 
-#: ../../src/logic/ship.cc:432
+#: ../../src/logic/ship.cc:437
 msgid "An expedition ship found a new port build space."
 msgstr "Un barco de expedición ha encontrado un espacio de construcción para un puerto."
 
-#: ../../src/logic/ship.cc:548
+#. * TRANSLATORS: A ship has circumnavigated an island and is waiting for
+#. orders
+#: ../../src/logic/ship.cc:556
+msgctxt "ship"
+msgid "Waiting"
+msgstr ""
+
+#: ../../src/logic/ship.cc:557
 msgid "Island Circumnavigated"
 msgstr "Isla Circunnavegada "
 
-#: ../../src/logic/ship.cc:549
+#: ../../src/logic/ship.cc:558
 msgid "An expedition ship sailed around its island without any events."
 msgstr "Un barco de expedición ha navegado alrededor de su isla sin eventos."
 
-#: ../../src/logic/ship.cc:609
+#. * TRANSLATORS: A ship has discovered land
+#: ../../src/logic/ship.cc:620
+msgid "Land Ahoy!"
+msgstr ""
+
+#: ../../src/logic/ship.cc:621
 msgid "Coast Reached"
 msgstr "Costa Alcanzada"
 
-#: ../../src/logic/ship.cc:611
+#: ../../src/logic/ship.cc:622
 msgid ""
 "An expedition ship reached a coast and is waiting for further commands."
 msgstr "Un barco de expedición ha llegado a la costa y espera ordenes."
 
-#: ../../src/logic/ship.cc:655
+#: ../../src/logic/ship.cc:668
+msgid "Port Lost!"
+msgstr ""
+
+#: ../../src/logic/ship.cc:669
 msgid "New port construction site is gone"
 msgstr "La nueva obra del puerto ha terminado"
 
-#: ../../src/logic/ship.cc:656
+#: ../../src/logic/ship.cc:670
 msgid "Unloading of wares failed, expedition is cancelled now."
 msgstr "Descarga de mercancías fallida, expedición cancelada."
 
-#: ../../src/logic/ship.cc:833
+#. * TRANSLATORS: Ship expedition ready
+#: ../../src/logic/ship.cc:850
+msgctxt "ship"
+msgid "Expedition"
+msgstr ""
+
+#: ../../src/logic/ship.cc:851
 msgid "Expedition Ready"
 msgstr "Expedición Lista"
 
-#: ../../src/logic/ship.cc:834
+#: ../../src/logic/ship.cc:852
 msgid "An expedition ship is waiting for your commands."
 msgstr "Un barco de expedición espera tus ordenes."
 
-#: ../../src/logic/soldier.cc:1504 ../../src/logic/soldier.cc:1513
+#: ../../src/logic/soldier.cc:1504 ../../src/logic/soldier.cc:1515
+msgid "Soldier"
+msgstr ""
+
+#: ../../src/logic/soldier.cc:1506 ../../src/logic/soldier.cc:1517
 msgid "Logic error"
 msgstr "Error lógico"
 
-#: ../../src/logic/warehouse.cc:455
+#: ../../src/logic/warehouse.cc:457
 msgid "A new port was added to your economy."
 msgstr "Se ha añadido un nuevo puerto a tu economía"
 
-#: ../../src/logic/warehouse.cc:462
+#: ../../src/logic/warehouse.cc:466
 msgid "A new headquarters was added to your economy."
 msgstr "Un nuevo cuartel general ha sido añadido a tu economía."
 
-#: ../../src/logic/warehouse.cc:469
+#: ../../src/logic/warehouse.cc:475
 msgid "A new warehouse was added to your economy."
 msgstr "Un nuevo almacén ha sido añadido a tu economía."
 
@@ -1398,16 +1446,23 @@ msgid ""
 "compatible with world"
 msgstr "debe consumir %s, lo que no existe en el mundo; la tribu no es compatible con el mundo"
 
-#: ../../src/logic/worker.cc:962
+#: ../../src/logic/worker.cc:969
 msgid "A geologist found resources."
 msgstr "Un geólogo encontró recursos."
 
-#: ../../src/logic/worker.cc:1877
+#: ../../src/logic/worker.cc:1876
 #, c-format
 msgid "Your %s can't find a way home and will likely die."
 msgstr "Tu %s no encuentra un camino a casa, es posible que muera."
 
-#: ../../src/logic/worker.cc:1885
+#: ../../src/logic/worker.cc:1884 ../../src/wui/productionsitewindow.cc:82
+#: ../../src/wui/productionsitewindow.cc:110
+msgid "Worker"
+msgid_plural "Workers"
+msgstr[0] "Trabajador"
+msgstr[1] "Trabajadores"
+
+#: ../../src/logic/worker.cc:1886
 msgid "Worker got lost!"
 msgstr "¡Un trabajador se ha perdido!"
 
@@ -2068,7 +2123,7 @@ msgstr "apagado"
 #. * TRANSLATORS: File name for saving objective achieved
 #. * TRANSLATORS: %1% = map name. %2% = achievement name
 #. * TRANSLATORS: %1% is a filename, %2% a map's name.
-#: ../../src/scripting/lua_game.cc:1031 ../../src/ui_fsmenu/loadgame.cc:74
+#: ../../src/scripting/lua_game.cc:1059 ../../src/ui_fsmenu/loadgame.cc:74
 msgid "%1% (%2%)"
 msgstr "%1% (%2%)"
 
@@ -2794,8 +2849,7 @@ msgstr "Mostrar todos los mapas"
 msgid "Official"
 msgstr "Oficial"
 
-#. * TRANSLATORS: This is a message's type
-#: ../../src/ui_fsmenu/mapselect.cc:99 ../../src/wui/game_message_menu.cc:553
+#: ../../src/ui_fsmenu/mapselect.cc:99
 msgid "Seafaring"
 msgstr "Marítimo"
 
@@ -3132,7 +3186,7 @@ msgstr "En Construcción:"
 #. * TRANSLATORS: This is the first part of productivity with input field
 #. * TRANSLATORS: Building statistics window - 'Low Productivity <input>%:'
 #: ../../src/wui/building_statistics_menu.cc:95
-#: ../../src/wui/building_statistics_menu.cc:693
+#: ../../src/wui/building_statistics_menu.cc:698
 msgid "Low Productivity "
 msgstr "Baja Productividad"
 
@@ -3177,15 +3231,15 @@ msgstr "Mostrar siguiente edificio"
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
 #. * TRANSLATORS Buildings: owned / under construction
-#: ../../src/wui/building_statistics_menu.cc:710
-#: ../../src/wui/building_statistics_menu.cc:734
-#: ../../src/wui/building_statistics_menu.cc:736
+#: ../../src/wui/building_statistics_menu.cc:715
+#: ../../src/wui/building_statistics_menu.cc:739
+#: ../../src/wui/building_statistics_menu.cc:741
 #: ../../src/wui/productionsitewindow.cc:180
 msgid "%1%/%2%"
 msgstr "%1%/%2%"
 
 #. * TRANSLATORS Label for number of buildings that are waiting for soldiers
-#: ../../src/wui/building_statistics_menu.cc:724
+#: ../../src/wui/building_statistics_menu.cc:729
 msgid "Lacking Soldiers:"
 msgstr "Faltan soldados:"
 
@@ -3451,51 +3505,49 @@ msgstr "Eliminación de archivo"
 msgid "Do you really want to delete the file %s?"
 msgstr "¿Desea eliminar el archivo %s?"
 
-#: ../../src/wui/game_message_menu.cc:46
-#: ../../src/wui/game_message_menu.cc:618
+#: ../../src/wui/game_message_menu.cc:53
+#: ../../src/wui/game_message_menu.cc:616
 msgid "Messages: Inbox"
 msgstr "Mensajes: Bandeja de Entrada"
 
-#: ../../src/wui/game_message_menu.cc:57
-msgid "Select"
-msgstr "Elige"
-
-#: ../../src/wui/game_message_menu.cc:58 ../../src/wui/game_summary.cc:108
-msgid "Status"
-msgstr "Estado"
-
-#: ../../src/wui/game_message_menu.cc:59
+#: ../../src/wui/game_message_menu.cc:72
 msgid "Title"
 msgstr "Título"
 
-#: ../../src/wui/game_message_menu.cc:60
-msgid "Time sent"
-msgstr "Tiempo enviado"
+#: ../../src/wui/game_message_menu.cc:73
+msgctxt "message"
+msgid "Type"
+msgstr ""
 
-#: ../../src/wui/game_message_menu.cc:129
-msgid "Clear selection"
-msgstr "Limpiar selección"
+#: ../../src/wui/game_message_menu.cc:74 ../../src/wui/game_summary.cc:108
+msgid "Status"
+msgstr "Estado"
 
-#: ../../src/wui/game_message_menu.cc:139
-msgid "Invert selection"
-msgstr "Invertir selección"
+#. * TRANSLATORS: We have very little space here. You can also translate this
+#. as "Time" or "Time Sent"
+#. * TRANSLATORS: This is used in the game messages menu - please open an
+#. issue if you need more space.
+#: ../../src/wui/game_message_menu.cc:77
+msgctxt "message"
+msgid "Sent"
+msgstr ""
 
 #. * TRANSLATORS: %s is a tooltip, Del is the corresponding hotkey
-#: ../../src/wui/game_message_menu.cc:150
-#: ../../src/wui/game_message_menu.cc:610
-#: ../../src/wui/game_message_menu.cc:621
+#: ../../src/wui/game_message_menu.cc:147
+#: ../../src/wui/game_message_menu.cc:608
+#: ../../src/wui/game_message_menu.cc:619
 #, c-format
 msgid "Del: %s"
 msgstr "Supr: %s"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:152
-#: ../../src/wui/game_message_menu.cc:623
-msgid "Archive selected messages"
-msgstr "Archivar mensajes seleccionados"
+#: ../../src/wui/game_message_menu.cc:149
+#: ../../src/wui/game_message_menu.cc:621
+msgid "Archive selected message"
+msgstr ""
 
 #: ../../src/wui/game_message_menu.cc:162
-#: ../../src/wui/game_message_menu.cc:625
+#: ../../src/wui/game_message_menu.cc:623
 msgid "Show Archive"
 msgstr "Mostrar archivo"
 
@@ -3511,87 +3563,55 @@ msgid "Center main mapview on location"
 msgstr "Centrar vista de mapa principal en la posición"
 
 #. * TRANSLATORS: %1% is a tooltip, %2% is the corresponding hotkey
-#: ../../src/wui/game_message_menu.cc:500
-#: ../../src/wui/game_message_menu.cc:511
-#: ../../src/wui/game_message_menu.cc:515
-#: ../../src/wui/game_message_menu.cc:519
-#: ../../src/wui/game_message_menu.cc:523
-#: ../../src/wui/game_message_menu.cc:527
+#: ../../src/wui/game_message_menu.cc:542
+#: ../../src/wui/game_message_menu.cc:553
+#: ../../src/wui/game_message_menu.cc:557
+#: ../../src/wui/game_message_menu.cc:561
+#: ../../src/wui/game_message_menu.cc:565
+#: ../../src/wui/game_message_menu.cc:569
 msgid "%1% (Hotkey: %2%)"
 msgstr "%1% (Tecla rápida: %2%)"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:502
+#: ../../src/wui/game_message_menu.cc:544
 msgid "Show all messages"
 msgstr "Mostrar todos los mensajes"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:513
+#: ../../src/wui/game_message_menu.cc:555
 msgid "Show geologists' messages only"
 msgstr "Mostrar mensajes de geólogos solamente"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:517
+#: ../../src/wui/game_message_menu.cc:559
 msgid "Show economy messages only"
 msgstr "Mostrar mensajes económicos solamente"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:521
+#: ../../src/wui/game_message_menu.cc:563
 msgid "Show seafaring messages only"
 msgstr "Mostrar mensajes marítimos solamente"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:525
+#: ../../src/wui/game_message_menu.cc:567
 msgid "Show warfare messages only"
 msgstr "Mostrar mensajes de guerra solamente"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:529
+#: ../../src/wui/game_message_menu.cc:571
 msgid "Show scenario messages only"
 msgstr "Mostrar mensajes de escenario solamente"
 
-#. * TRANSLATORS: This is a message's type
-#: ../../src/wui/game_message_menu.cc:543
-msgid "Geologists"
-msgstr "Geólogos"
-
-#. * TRANSLATORS: This is a message's type
-#: ../../src/wui/game_message_menu.cc:548
-msgid "Economy"
-msgstr "Economía"
-
-#. * TRANSLATORS: This is a message's type
-#: ../../src/wui/game_message_menu.cc:558
-msgid "Warfare"
-msgstr "Guerra"
-
-#. * TRANSLATORS: This show up instead of a message's type when there are no
-#. messages found
-#: ../../src/wui/game_message_menu.cc:568
-msgid "No message found"
-msgstr "No se ha encontrado mensaje"
-
-#. * TRANSLATORS: This is the default message type
-#: ../../src/wui/game_message_menu.cc:572
-msgid "General"
-msgstr "General"
-
-#. * TRANSLATORS: %s is a message's type
-#: ../../src/wui/game_message_menu.cc:578
-#, c-format
-msgid "Type of this message: %s"
-msgstr "Tipo de mensaje: %s"
-
-#: ../../src/wui/game_message_menu.cc:607
+#: ../../src/wui/game_message_menu.cc:605
 msgid "Messages: Archive"
 msgstr "Mensajes: Archivo"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:612
-msgid "Restore selected messages"
-msgstr "Restaurar mensajes seleccionados"
+#: ../../src/wui/game_message_menu.cc:610
+msgid "Restore selected message"
+msgstr ""
 
-#: ../../src/wui/game_message_menu.cc:614
+#: ../../src/wui/game_message_menu.cc:612
 msgid "Show Inbox"
 msgstr "Mostrar entradas"
 
@@ -4003,13 +4023,6 @@ msgstr "%1% min"
 #: ../../src/wui/plot_area.cc:275
 msgid "game"
 msgstr "juego"
-
-#: ../../src/wui/productionsitewindow.cc:82
-#: ../../src/wui/productionsitewindow.cc:110
-msgid "Worker"
-msgid_plural "Workers"
-msgstr[0] "Trabajador"
-msgstr[1] "Trabajadores"
 
 #: ../../src/wui/productionsitewindow.cc:84
 msgid "Exp"

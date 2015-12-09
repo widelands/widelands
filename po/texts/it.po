@@ -2,6 +2,7 @@
 # Copyright (C) 2005-2015 Widelands Development Team
 # 
 # Translators:
+# Davide Nicolini <davide97@gmail.com>, 2015
 # FIRST AUTHOR <gabriel.rota@gmail.com>, 2009
 # Gabriel Rota <gabriel.rota@gmail.com>, 2009
 # GunChleoc, 2014
@@ -10,9 +11,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-28 11:19+0000\n"
-"PO-Revision-Date: 2015-11-28 11:21+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2015-12-03 09:55+0000\n"
+"PO-Revision-Date: 2015-12-07 15:27+0000\n"
+"Last-Translator: Davide Nicolini <davide97@gmail.com>\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -114,7 +115,7 @@ msgid ""
 "inhabitants. On your way towards this goal, you will have to establish an\n"
 "economic infrastructure, explore the land around you and face rivaling\n"
 "tribes."
-msgstr "In questa partita, cominci con un piccolo appezzamento di terra con solo poche\nrisorse. Utilizzandole, creerai un impero con diverse migliaia di abitanti.\nLungo la strada verso questo obiettivo, dovrai creare un'infrastruttura economica,\nesplorare il terreno intorno a te e fronteggiare delle tribù rivali."
+msgstr "In questa partita, cominci con un piccolo appezzamento di terra con solo poche\nrisorse. Utilizzandole, creerai un impero con diverse migliaia di \nabitanti. Lungo la strada verso questo obiettivo, dovrai creare una \ninfrastruttura economica, esplorare il terreno intorno a te e fronteggiare delle tribù\nrivali."
 
 #: ../../txts/README.lua:30
 msgid "Check out the Widelands project homepage:"
@@ -169,19 +170,19 @@ msgstr "Scorciatoie da tastiera (durante il gioco)"
 
 #: ../../txts/README.lua:58
 msgid " Page Up: increases game speed"
-msgstr ""
+msgstr "PAGEUP: aumenta la velocità di gioco"
 
 #: ../../txts/README.lua:59
 msgid " Page Down: decreases game speed"
-msgstr ""
+msgstr "PAGEDOWN: diminuisce la velocità di gioco"
 
 #: ../../txts/README.lua:60
 msgid "Pause: pauses the game"
-msgstr ""
+msgstr "PAUSA: metti il gioco in pausa"
 
 #: ../../txts/README.lua:61
 msgid "Space: toggles if building spaces are shown"
-msgstr ""
+msgstr "SPACE: mostra o toglie gli spazi per la costruzione"
 
 #: ../../txts/README.lua:62
 msgid "M: toggles minimap"
@@ -221,7 +222,7 @@ msgstr "Home: centra la visuale della mappa sulla posizione di partenza"
 
 #: ../../txts/README.lua:71
 msgid "(Ctrl +) 0-9: Remember and go to previously remembered locations"
-msgstr ""
+msgstr "(CTRL+) 0-9: Memorizza e vai alle posizioni precedentemente memorizzate"
 
 #: ../../txts/README.lua:72
 msgid ",: goes to the previous location"
@@ -237,15 +238,15 @@ msgstr "F6: mostra la console debug (solamente nelle build di debug)"
 
 #: ../../txts/README.lua:75
 msgid "Ctrl + F10: quits the game immediately"
-msgstr ""
+msgstr "CTRL+F10: esci immediatamente dal gioco"
 
 #: ../../txts/README.lua:76
 msgid "Ctrl + Leftclick: skips confirmation dialogs"
-msgstr ""
+msgstr "CTRL+ click con il tasto sinistro del mouse: evita le finestre di conferma"
 
 #: ../../txts/README.lua:77
 msgid "Ctrl + F11: takes a screenshot"
-msgstr ""
+msgstr "CTRL+F11: crea una schermata"
 
 #: ../../txts/README.lua:79
 msgid ""
@@ -258,7 +259,7 @@ msgstr "0: mostra tutti i messaggi"
 
 #: ../../txts/README.lua:82
 msgid "1: shows geologists’ messages only"
-msgstr ""
+msgstr "1: mostra solamente i messaggi dei geologi"
 
 #: ../../txts/README.lua:83
 msgid "2: shows economy messages only"
@@ -282,7 +283,7 @@ msgstr "G: vai alla posizione collegata al messaggio corrente"
 
 #: ../../txts/README.lua:88
 msgid "Delete: archives/restores the current message"
-msgstr ""
+msgstr "CANC: archivia/ripristina il messaggio corrente"
 
 #: ../../txts/README.lua:90
 msgid "Online Help"
@@ -292,14 +293,14 @@ msgstr "Aiuto in linea"
 msgid ""
 "A detailed description of the tribes’ economies is available in the in-game "
 "Tribal Encyclopedia."
-msgstr ""
+msgstr "Una descrizione dettagliata dell' economia delle tribù è disponibile nel Enciclopedia Tribale presente nel gioco."
 
 #: ../../txts/README.lua:92
 msgid ""
 "If you need more documentation or help for Widelands or the Widelands "
 "Editor, be sure to visit our homepage at %s. You can find online help in our"
 " Wiki there."
-msgstr ""
+msgstr "Se hai bisogno di documentazione o aiuto per Widelands o per l'editor,\nvisita la nostra homepage su %s. Potrai trovare aiuto online nella nostra Wiki."
 
 #: ../../txts/README.lua:94
 msgid "Reporting Bugs"
@@ -512,17 +513,17 @@ msgstr "L'editor di Widelands"
 msgid ""
 "This editor is intended for players who would like to design their own maps "
 "to use with Widelands."
-msgstr ""
+msgstr "Questo editor è destinato ai giocatori che vogliono creare la propria mappa da usare su Widelands."
 
 #: ../../txts/editor_readme.lua:13
 msgid ""
 "As you can see, this editor is heavy work in progress and as the editor "
 "becomes better and better, this text will also get longer and more complete."
-msgstr ""
+msgstr "Come puoi vedere, questo Editor è fortemente sotto sviluppo e può essere migliorato e migliorerà, questo testo inoltre diventerà più lungo e più completo."
 
 #: ../../txts/editor_readme.lua:14
 msgid "Please have a look at our enduser manuals on our wiki pages at: %s"
-msgstr ""
+msgstr "Guarda nel nostro manuale per l'utente finale nelle nostre pagine wiki a:"
 
 #: ../../txts/editor_readme.lua:15
 msgid ""
@@ -537,11 +538,11 @@ msgstr "Scorciatoie da tastiera"
 #. TRANSLATORS: This is a hotkey
 #: ../../txts/editor_readme.lua:21
 msgid "Space:"
-msgstr ""
+msgstr "Spazio:"
 
 #: ../../txts/editor_readme.lua:21
 msgid "toggles if building spaces are shown"
-msgstr ""
+msgstr "Nasconde se gli spazi per la costruzione sono visibili"
 
 #. TRANSLATORS: This is a hotkey
 #: ../../txts/editor_readme.lua:23
@@ -550,7 +551,7 @@ msgstr "C:"
 
 #: ../../txts/editor_readme.lua:23
 msgid "toggles census"
-msgstr ""
+msgstr "disattiva censo"
 
 #. TRANSLATORS: This is a hotkey
 #: ../../txts/editor_readme.lua:25
@@ -586,7 +587,7 @@ msgstr "P:"
 
 #: ../../txts/editor_readme.lua:31
 msgid "toggles player menu"
-msgstr ""
+msgstr "toglie il menù del giocatore"
 
 #. TRANSLATORS: This is a hotkey
 #: ../../txts/editor_readme.lua:33
@@ -595,7 +596,7 @@ msgstr "T:"
 
 #: ../../txts/editor_readme.lua:33
 msgid "toggles tools menu"
-msgstr ""
+msgstr "toglie il menù degli strumenti"
 
 #. TRANSLATORS: This is a hotkey
 #: ../../txts/editor_readme.lua:35
@@ -609,7 +610,7 @@ msgstr "attiva lo strumento per le informazioni"
 #. TRANSLATORS: This is a hotkey
 #: ../../txts/editor_readme.lua:37
 msgid "Ctrl + L:"
-msgstr ""
+msgstr "Ctrl + L:"
 
 #: ../../txts/editor_readme.lua:37
 msgid "load map"
@@ -618,7 +619,7 @@ msgstr "carica una mappa"
 #. TRANSLATORS: This is a hotkey
 #: ../../txts/editor_readme.lua:39
 msgid "Ctrl + S:"
-msgstr ""
+msgstr "Ctrl + S:"
 
 #: ../../txts/editor_readme.lua:39
 msgid "save map"
@@ -636,7 +637,7 @@ msgstr "cambia la dimensione dello strumento"
 #. TRANSLATORS: This is a hotkey
 #: ../../txts/editor_readme.lua:43
 msgid "Shift (Hold):"
-msgstr ""
+msgstr "SHIFT (Tieni premuto):"
 
 #: ../../txts/editor_readme.lua:43
 msgid "selects first alternative tool while pressed"
@@ -645,7 +646,7 @@ msgstr ""
 #. TRANSLATORS: This is a hotkey
 #: ../../txts/editor_readme.lua:45
 msgid "Alt (Hold):"
-msgstr ""
+msgstr "ALT (Tieni premuto):"
 
 #: ../../txts/editor_readme.lua:45
 msgid "Selects second alternative tool while pressed"
