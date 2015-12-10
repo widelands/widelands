@@ -23,6 +23,7 @@
 
 #include <boost/format.hpp>
 
+#include "base/i18n.h"
 #include "graphic/animation.h"
 #include "graphic/graphic.h"
 #include "graphic/texture.h"
@@ -36,35 +37,69 @@ namespace Widelands {
 namespace  {
 
 // Parse a terrain type from the giving string.
-TerrainDescription::Type terrain_type_from_string(const std::string& type) {
-	if (type == "green") {
-		return TerrainDescription::Type::kGreen;
+TerrainDescription::Is terrain_type_from_string(const std::string& type) {
+	if (type == "arable") {
+		return TerrainDescription::Is::kArable;
 	}
-	if (type == "dry") {
-		return TerrainDescription::Type::kDry;
+	if (type == "walkable") {
+		return TerrainDescription::Is::kWalkable;
 	}
 	if (type == "water") {
-		return static_cast<TerrainDescription::Type>(TerrainDescription::Type::kWater |
-																	TerrainDescription::Type::kDry |
-																	TerrainDescription::Type::kImpassable);
+		return static_cast<TerrainDescription::Is>(TerrainDescription::Is::kWater |
+																	TerrainDescription::Is::kUnwalkable);
 	}
-	if (type == "dead") {
-		return static_cast<TerrainDescription::Type>(TerrainDescription::Type::kDead |
-																	TerrainDescription::Type::kDry |
-																	TerrainDescription::Type::kImpassable);
+	if (type == "unreachable") {
+		return static_cast<TerrainDescription::Is>(TerrainDescription::Is::kUnreachable |
+																	TerrainDescription::Is::kUnwalkable);
 	}
-	if (type == "mountain") {
-		return static_cast<TerrainDescription::Type>(TerrainDescription::Type::kDry |
-																	TerrainDescription::Type::kMountain);
+	if (type == "mineable") {
+		return TerrainDescription::Is::kMineable;
 	}
-	if (type == "impassable") {
-		return static_cast<TerrainDescription::Type>(TerrainDescription::Type::kDry |
-																	TerrainDescription::Type::kImpassable);
+	if (type == "unwalkable") {
+		return TerrainDescription::Is::kUnwalkable;
 	}
-	throw LuaError((boost::format("invalid terrain type '%s'") % type).str());
+	throw LuaError((boost::format("Invalid terrain \"is\" value '%s'") % type).str());
 }
 
 }  // namespace
+
+
+TerrainDescription::Type::Type(TerrainDescription::Is _is) : is(_is) {
+	switch (is) {
+	case Is::kArable:
+		/** TRANSLATORS: This is a terrain type tooltip in the editor */
+		descname = _("arable");
+		icon = g_gr->images().get("pics/terrain_arable.png");
+		break;
+	case Is::kWalkable:
+		/** TRANSLATORS: This is a terrain type tooltip in the editor */
+		descname = _("walkable");
+		icon = g_gr->images().get("pics/terrain_walkable.png");
+		break;
+	case Is::kWater:
+		/** TRANSLATORS: This is a terrain type tooltip in the editor */
+		descname = _("navigable");
+		icon = g_gr->images().get("pics/terrain_water.png");
+		break;
+	case Is::kUnreachable:
+		/** TRANSLATORS: This is a terrain type tooltip in the editor */
+		descname = _("unreachable");
+		icon = g_gr->images().get("pics/terrain_unreachable.png");
+		break;
+	case Is::kMineable:
+		/** TRANSLATORS: This is a terrain type tooltip in the editor */
+		descname = _("mineable");
+		icon = g_gr->images().get("pics/terrain_mineable.png");
+		break;
+	case Is::kUnwalkable:
+		/** TRANSLATORS: This is a terrain type tooltip in the editor */
+		descname = _("unwalkable");
+		icon = g_gr->images().get("pics/terrain_unwalkable.png");
+		break;
+	default:
+		throw wexception("Unknown TerrainDescription::Is in TerrainDescription::Type");
+	}
+}
 
 TerrainDescription::TerrainDescription(const LuaTable& table, const Widelands::World& world)
    : name_(table.get_string("name")),
@@ -140,8 +175,33 @@ const std::vector<std::string>& TerrainDescription::texture_paths() const {
 	return texture_paths_;
 }
 
-TerrainDescription::Type TerrainDescription::get_is() const {
+TerrainDescription::Is TerrainDescription::get_is() const {
 	return is_;
+}
+
+
+const std::vector<TerrainDescription::Type> TerrainDescription::get_types() const {
+	std::vector<TerrainDescription::Type> terrain_types;
+
+	if (is_ == Widelands::TerrainDescription::Is::kArable) {
+		terrain_types.push_back(TerrainDescription::Type(TerrainDescription::Is::kArable));
+	}
+	if (is_ & Widelands::TerrainDescription::Is::kWalkable) {
+		terrain_types.push_back(TerrainDescription::Type(TerrainDescription::Is::kWalkable));
+	}
+	if (is_ & Widelands::TerrainDescription::Is::kWater) {
+		terrain_types.push_back(TerrainDescription::Type(TerrainDescription::Is::kWater));
+	}
+	if (is_ & Widelands::TerrainDescription::Is::kUnreachable) {
+		terrain_types.push_back(TerrainDescription::Type(TerrainDescription::Is::kUnreachable));
+	}
+	if (is_ & Widelands::TerrainDescription::Is::kMineable) {
+		terrain_types.push_back(TerrainDescription::Type(TerrainDescription::Is::kMineable));
+	}
+	if (is_ & Widelands::TerrainDescription::Is::kUnwalkable) {
+		terrain_types.push_back(TerrainDescription::Type(TerrainDescription::Is::kUnwalkable));
+	}
+	return terrain_types;
 }
 
 const std::string& TerrainDescription::name() const {
