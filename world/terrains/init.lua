@@ -256,7 +256,7 @@ world:new_terrain_type{
 
 world:new_terrain_type{
    name = "summer_forested_mountain1",
-   descname = _ "Mountain, tree friendly",
+   descname = _ "Mountain",
    editor_category = "green",
    is = "mineable",
    -- You can add custom additional tooltip entries here.
@@ -275,8 +275,8 @@ world:new_terrain_type{
 }
 
 world:new_terrain_type{
-   name = "summer_forested_mountain_2",
-   descname = _ "Mountain, tree friendly",
+   name = "summer_forested_mountain2",
+   descname = _ "Mountain",
    editor_category = "green",
    is = "mineable",
    -- You can add custom additional tooltip entries here.
@@ -579,7 +579,7 @@ world:new_terrain_type{
 
 world:new_terrain_type{
    name = "wasteland_forested_mountain1",
-   descname = _ "Mountain, tree friendly",
+   descname = _ "Mountain",
    editor_category = "wasteland",
    is = "mineable",
    tooltips = {
@@ -598,7 +598,7 @@ world:new_terrain_type{
 
 world:new_terrain_type{
    name = "wasteland_forested_mountain2",
-   descname = _ "Mountain, tree friendly",
+   descname = _ "Mountain",
    editor_category = "wasteland",
    is = "mineable",
    tooltips = {
@@ -860,7 +860,7 @@ world:new_terrain_type{
 
 world:new_terrain_type{
    name = "winter_forested_mountain1",
-   descname = _ "Mountain, tree friendly",
+   descname = _ "Mountain",
    editor_category = "winter",
    is = "mineable",
    tooltips = {
@@ -878,8 +878,8 @@ world:new_terrain_type{
 }
 
 world:new_terrain_type{
-   name = "winter_forested_mountain_2",
-   descname = _ "Mountain, tree friendly",
+   name = "winter_forested_mountain2",
+   descname = _ "Mountain",
    editor_category = "winter",
    is = "mineable",
    tooltips = {
@@ -1159,7 +1159,7 @@ world:new_terrain_type{
 
 world:new_terrain_type{
    name = "desert_forested_mountain1",
-   descname = _ "Mountain, tree friendly",
+   descname = _ "Mountain",
    editor_category = "desert",
    is = "mineable",
    tooltips = {
@@ -1178,7 +1178,7 @@ world:new_terrain_type{
 
 world:new_terrain_type{
    name = "desert_forested_mountain2",
-   descname = _ "Mountain, tree friendly",
+   descname = _ "Mountain",
    editor_category = "desert",
    is = "mineable",
    tooltips = {
