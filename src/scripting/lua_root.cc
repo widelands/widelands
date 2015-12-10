@@ -309,6 +309,7 @@ World
 
 const char LuaWorld::className[] = "World";
 const MethodType<LuaWorld> LuaWorld::Methods[] = {
+	METHOD(LuaWorld, immovable_descriptions),
 	METHOD(LuaWorld, new_critter_type),
 	METHOD(LuaWorld, new_editor_immovable_category),
 	METHOD(LuaWorld, new_editor_terrain_category),
@@ -343,6 +344,34 @@ void LuaWorld::__unpersist(lua_State*) {
  LUA METHODS
  ==========================================================
  */
+
+/* RST
+	.. method:: immovable_descriptions(attribute_name)
+
+		Returns a list of names with the immovables that have the attribute with the given attribute_name.
+
+		(RO) a list of immovable names, e.g. {"alder_summer_old", "cirrus_wasteland_old", ...}
+*/
+int LuaWorld::immovable_descriptions(lua_State* L) {
+	if (lua_gettop(L) != 2) {
+		report_error(L, "Takes only one argument.");
+	}
+	const World& world = get_egbase(L).world();
+	const std::string attribute_name = luaL_checkstring(L, 2);
+	lua_newtable(L);
+	int index = 1;
+	for (DescriptionIndex i = 0; i < world.get_nr_immovables(); ++i) {
+		const ImmovableDescr* immovable = world.get_immovable_descr(i);
+		uint32_t attribute_id = immovable->get_attribute_id(attribute_name);
+		if (immovable->has_attribute(attribute_id)) {
+			lua_pushint32(L, index++);
+			lua_pushstring(L, immovable->name());
+			lua_settable(L, -3);
+		}
+	}
+	return 1;
+}
+
 
 /* RST
 	.. method:: new_resource_type(table)

@@ -2435,6 +2435,9 @@ int LuaTerrainDescription::get_descname(lua_State * L) {
 		(RO) A double describing the probability that the given tree will gow on this terrain.
 */
 int LuaTerrainDescription::probability_to_grow(lua_State * L) {
+	if (lua_gettop(L) != 2) {
+		report_error(L, "Takes only one argument.");
+	}
 	const std::string tree_name = luaL_checkstring(L, 2);
 	const World& world = get_egbase(L).world();
 	const DescriptionIndex index = world.get_immovable_index(tree_name);

@@ -111,6 +111,7 @@ public:
 	/*
 	 * Lua methods
 	 */
+	int immovable_descriptions(lua_State* L);
 	int new_critter_type(lua_State* L);
 	int new_editor_immovable_category(lua_State* L);
 	int new_editor_terrain_category(lua_State* L);

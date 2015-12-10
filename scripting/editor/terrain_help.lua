@@ -8,8 +8,15 @@ end
 return {
    func = function(terrain_name)
       set_textdomain("widelands")
+      local world = wl.World();
       local terrain = wl.Editor():get_terrain_description(terrain_name)
-      local result = p(("%2.1f%%"):bformat(100 * terrain:probability_to_grow("alder_summer_old")))
+      local result = ""
+      for j, tree in ipairs(world:immovable_descriptions("tree")) do
+			local probability = terrain:probability_to_grow(tree)
+			if (probability > 0.01) then
+				result = result .. p(tree .. ": " .. ("%2.1f%%"):bformat(100 * probability))
+			end
+		end
       return rt(result)
    end
 }
