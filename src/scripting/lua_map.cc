@@ -34,6 +34,7 @@
 #include "logic/player.h"
 #include "logic/ship.h"
 #include "logic/soldier.h"
+#include "logic/terrain_affinity.h"
 #include "logic/tribes/tribes.h"
 #include "logic/warelist.h"
 #include "logic/widelands_geometry.h"
@@ -2210,7 +2211,7 @@ int LuaWareDescription::get_directory(lua_State * L) {
 
 
 /* RST
-	.. attribute:: is_construction_material
+	.. .. method:: is_construction_material
 
 		:arg tribename: the name of the tribe that this ware gets checked for
 		:type tribename: :class:`string`
@@ -2374,12 +2375,15 @@ TerrainDescription
 
 	A static description of a terrain.
 */
+// NOCOM write tests
 const char LuaTerrainDescription::className[] = "TerrainDescription";
 const MethodType<LuaTerrainDescription> LuaTerrainDescription::Methods[] = {
+	METHOD(LuaTerrainDescription, probability_to_grow),
 	{nullptr, nullptr},
 };
 const PropertyType<LuaTerrainDescription> LuaTerrainDescription::Properties[] = {
 	PROP_RO(LuaTerrainDescription, name),
+	PROP_RO(LuaTerrainDescription, descname),
 	{nullptr, nullptr, nullptr},
 };
 
@@ -2410,6 +2414,43 @@ int LuaTerrainDescription::get_name(lua_State * L) {
 	lua_pushstring(L, get()->name());
 	return 1;
 }
+
+/* RST
+	.. attribute:: descname
+
+			(RO) the :class:`string` display name of this terrain
+*/
+
+int LuaTerrainDescription::get_descname(lua_State * L) {
+	lua_pushstring(L, get()->descname());
+	return 1;
+}
+
+/* RST
+	.. method:: probability_to_grow
+
+		:arg treename: The tree that we are checking the probability for.
+		:type treename: :class:`string`
+
+		(RO) A double describing the probability that the given tree will gow on this terrain.
+*/
+int LuaTerrainDescription::probability_to_grow(lua_State * L) {
+	const std::string tree_name = luaL_checkstring(L, 2);
+	const World& world = get_egbase(L).world();
+	const DescriptionIndex index = world.get_immovable_index(tree_name);
+	if (index != INVALID_INDEX) {
+		const ImmovableDescr* tree = world.get_immovable_descr(index);
+		if (tree->has_terrain_affinity()) {
+			lua_pushnumber(L, Widelands::probability_to_grow(tree->terrain_affinity(), *get()));
+		} else {
+			lua_pushnil(L);
+		}
+	} else {
+		lua_pushnil(L);
+	}
+	return 1;
+}
+
 
 
 

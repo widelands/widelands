@@ -9,6 +9,7 @@ return {
    func = function(terrain_name)
       set_textdomain("widelands")
       local terrain = wl.Editor():get_terrain_description(terrain_name)
-      return rt(p(terrain.name))
+      local result = p(("%2.1f%%"):bformat(100 * terrain:probability_to_grow("alder_summer_old")))
+      return rt(result)
    end
 }

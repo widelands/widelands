@@ -532,10 +532,12 @@ public:
 	 * Properties
 	 */
 	int get_name(lua_State *);
+	int get_descname(lua_State *);
 
 	/*
 	 * Lua methods
 	 */
+	int probability_to_grow(lua_State *);
 
 	/*
 	 * C methods
