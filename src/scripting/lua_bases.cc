@@ -79,6 +79,7 @@ EditorGameBase
 
 const char LuaEditorGameBase::className[] = "EditorGameBase";
 const MethodType<LuaEditorGameBase> LuaEditorGameBase::Methods[] = {
+	METHOD(LuaEditorGameBase, get_immovable_description),
 	METHOD(LuaEditorGameBase, get_building_description),
 	METHOD(LuaEditorGameBase, get_tribe_description),
 	METHOD(LuaEditorGameBase, get_ware_description),
@@ -150,6 +151,30 @@ int LuaEditorGameBase::get_players(lua_State * L) {
  LUA METHODS
  ==========================================================
  */
+
+/* RST
+	.. function:: get_immovable_description(immovable_name)
+
+		:arg immovable_name: the name of the immovable
+
+		Registers an immovable description so Lua can reference it from the editor.
+
+		(RO) The :class:`~wl.Game.Immovable_description`.
+*/
+int LuaEditorGameBase::get_immovable_description(lua_State* L) {
+	if (lua_gettop(L) != 2) {
+		report_error(L, "Wrong number of arguments");
+	}
+	const std::string immovable_name = luaL_checkstring(L, 2);
+	DescriptionIndex idx = get_egbase(L).world().get_immovable_index(immovable_name);
+	if (idx == INVALID_INDEX) {
+		report_error(L, "Terrain %s does not exist", immovable_name.c_str());
+	}
+	const ImmovableDescr* descr = get_egbase(L).world().get_immovable_descr(idx);
+
+	return to_lua<LuaMaps::LuaImmovableDescription>(L, new LuaMaps::LuaImmovableDescription(descr));
+}
+
 
 /* RST
 	.. function:: get_building_description(building_description.name)

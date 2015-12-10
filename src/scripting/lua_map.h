@@ -205,6 +205,48 @@ private:
 		return static_cast<const Widelands::klass*>(LuaMapObjectDescription::get());                  \
 	}
 
+class LuaImmovableDescription : public LuaMapObjectDescription {
+public:
+	LUNA_CLASS_HEAD(LuaImmovableDescription);
+
+	virtual ~LuaImmovableDescription() {}
+
+	LuaImmovableDescription() {}
+	LuaImmovableDescription(const Widelands::ImmovableDescr* const immovabledescr)
+		: LuaMapObjectDescription(immovabledescr) {
+	}
+	LuaImmovableDescription(lua_State* L) : LuaMapObjectDescription(L) {
+	}
+
+	void __persist(lua_State * L) override;
+	void __unpersist(lua_State * L) override;
+
+	/*
+	 * Properties
+	 */
+	int get_build_cost(lua_State *);
+	int get_editor_category(lua_State *);
+	int get_has_terrain_affinity(lua_State *);
+	int get_pickiness(lua_State *);
+	int get_preferred_fertility(lua_State *);
+	int get_preferred_humidity(lua_State *);
+	int get_preferred_temperature(lua_State *);
+	int get_owner_type(lua_State *);
+	int get_size(lua_State *);
+
+	/*
+	 * Lua methods
+	 */
+
+	/*
+	 * C methods
+	 */
+
+private:
+	CASTED_GET_DESCRIPTION(ImmovableDescr)
+};
+
+
 class LuaBuildingDescription : public LuaMapObjectDescription {
 public:
 	LUNA_CLASS_HEAD(LuaBuildingDescription);

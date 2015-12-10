@@ -40,7 +40,8 @@ struct EditorHelp : public UI::UniqueWindow {
 private:
 	struct HelpEntry {
 		enum class Type {
-			kTerrain
+			kTerrain,
+			kTree
 		};
 
 		HelpEntry(const HelpEntry& other)
@@ -84,6 +85,7 @@ private:
 	// Fill table of contents
 	void fill_entries(const char* key, std::vector<HelpEntry>& entries);
 	void fill_terrains();
+	void fill_trees();
 
 	// Update contents when an entry is selected
 	void entry_selected(const std::string& key,

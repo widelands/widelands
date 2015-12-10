@@ -40,6 +40,7 @@
 #include "logic/tribes/tribes.h"
 #include "logic/warelist.h"
 #include "logic/widelands_geometry.h"
+#include "logic/world/editor_category.h"
 #include "logic/world/resource_description.h"
 #include "logic/world/terrain_description.h"
 #include "logic/world/world.h"
@@ -605,6 +606,8 @@ int upcasted_map_object_descr_to_lua(lua_State* L, const MapObjectDescr* const d
 				return CAST_TO_LUA(WorkerDescr, LuaWorkerDescription);
 			case MapObjectType::SOLDIER:
 				return CAST_TO_LUA(WorkerDescr, LuaWorkerDescription);
+			case MapObjectType::IMMOVABLE:
+				return CAST_TO_LUA(ImmovableDescr, LuaImmovableDescription);
 			default:
 				return CAST_TO_LUA(MapObjectDescr, LuaMapObjectDescription);
 		}
@@ -1405,6 +1408,150 @@ int LuaMapObjectDescription::get_type_name(lua_State * L) {
 	lua_pushstring(L, to_string(get()->type()));
 	return 1;
 }
+
+
+/* RST
+BuildingDescription
+-------------------
+
+.. class:: LuaImmovableDescription
+
+	A static description of a base immovable, so it can be used in help files
+	without having to access an actual immovalbe on the map.
+	See also class MapObjectDescription for more properties.
+*/
+// NOCOM write tests
+const char LuaImmovableDescription::className[] = "ImmovableDescription";
+const MethodType<LuaImmovableDescription> LuaImmovableDescription::Methods[] = {
+	{nullptr, nullptr},
+};
+const PropertyType<LuaImmovableDescription> LuaImmovableDescription::Properties[] = {
+	PROP_RO(LuaImmovableDescription, build_cost),
+	PROP_RO(LuaImmovableDescription, editor_category),
+	PROP_RO(LuaImmovableDescription, has_terrain_affinity),
+	PROP_RO(LuaImmovableDescription, pickiness),
+	PROP_RO(LuaImmovableDescription, preferred_fertility),
+	PROP_RO(LuaImmovableDescription, preferred_humidity),
+	PROP_RO(LuaImmovableDescription, preferred_temperature),
+	PROP_RO(LuaImmovableDescription, owner_type),
+	PROP_RO(LuaImmovableDescription, size),
+	{nullptr, nullptr, nullptr},
+};
+
+
+void LuaImmovableDescription::__persist(lua_State* L) {
+	const ImmovableDescr* descr = get();
+	PERS_STRING("name", descr->name());
+}
+
+void LuaImmovableDescription::__unpersist(lua_State* L) {
+	std::string name;
+	UNPERS_STRING("name", name);
+	const World& world = get_egbase(L).world();
+	DescriptionIndex idx = world.get_immovable_index(name);
+	if (idx == INVALID_INDEX) {
+		throw LuaError((boost::format("Immovable '%s' doesn't exist.") % name).str());
+	}
+	set_description_pointer(world.get_immovable_descr(idx));
+}
+
+/* RST
+	.. attribute:: build_cost
+
+			(RO) a list of ware build cost for the immovable.
+*/
+int LuaImmovableDescription::get_build_cost(lua_State * L) {
+	return wares_or_workers_map_to_lua(L, get()->buildcost(), MapObjectType::WARE);
+}
+
+/* RST
+	.. attribute:: the name of the editor category of this immovable
+
+			(RO) the name of the editor category, or nil if it has none.
+*/
+int LuaImmovableDescription::get_editor_category(lua_State * L) {
+	const EditorCategory& editor_category = get()->editor_category();
+	if (&editor_category) {
+		lua_pushstring(L, editor_category.name());
+	} else {
+		lua_pushnil(L);
+	}
+	return 1;
+}
+
+/* RST
+	.. attribute:: whether this immovable has terrain affinity
+
+			(RO) true if this immovable has terrain affinity
+*/
+int LuaImmovableDescription::get_has_terrain_affinity(lua_State * L) {
+	lua_pushboolean(L, get()->has_terrain_affinity());
+	return 1;
+}
+
+/* RST
+	.. attribute:: the terrain affinity's pickiness
+
+			(RO) the immovable's pickiness terrain affinity value. 0 if it has no terrain affinity.
+*/
+int LuaImmovableDescription::get_pickiness(lua_State * L) {
+	lua_pushnumber(L, get()->has_terrain_affinity() ? get()->terrain_affinity().pickiness() : 0);
+	return 1;
+}
+
+/* RST
+	.. attribute:: the terrain affinity's preferred_fertility
+
+			(RO) the immovable's preferred_fertility terrain affinity value. 0 if it has no terrain affinity.
+*/
+int LuaImmovableDescription::get_preferred_fertility(lua_State * L) {
+	lua_pushnumber(L, get()->has_terrain_affinity() ? get()->terrain_affinity().preferred_fertility() : 0);
+	return 1;
+}
+
+/* RST
+	.. attribute:: the terrain affinity's preferred_humidity
+
+			(RO) the immovable's preferred_humidity terrain affinity value. 0 if it has no terrain affinity.
+*/
+int LuaImmovableDescription::get_preferred_humidity(lua_State * L) {
+	lua_pushnumber(L, get()->has_terrain_affinity() ? get()->terrain_affinity().preferred_humidity() : 0);
+	return 1;
+}
+
+
+/* RST
+	.. attribute:: the terrain affinity's preferred_temperature
+
+			(RO) the immovable's preferred_temperature terrain affinity value. 0 if it has no terrain affinity.
+*/
+int LuaImmovableDescription::get_preferred_temperature(lua_State * L) {
+	lua_pushnumber(L, get()->has_terrain_affinity() ? get()->terrain_affinity().preferred_temperature() : 0);
+	return 1;
+}
+
+
+/* RST
+	.. attribute:: the owner type of this immovable
+
+			(RO) "world" for world immovables and "tribe" for tribe immovables.
+*/
+int LuaImmovableDescription::get_owner_type(lua_State * L) {
+	lua_pushstring(L, get()->owner_type() == MapObjectDescr::OwnerType::kWorld ? "world" : "tribe");
+	return 1;
+}
+
+
+/* RST
+	.. attribute:: size
+
+			(RO) the size of the immovable as an int.
+*/
+int LuaImmovableDescription::get_size(lua_State * L) {
+	lua_pushinteger(L, get()->get_size());
+	return 1;
+}
+
 
 /* RST
 BuildingDescription
@@ -5007,6 +5154,10 @@ void luaopen_wlmap(lua_State * L) {
 	register_class<LuaMap>(L, "map");
 	register_class<LuaTribeDescription>(L, "map");
 	register_class<LuaMapObjectDescription>(L, "map");
+
+	register_class<LuaImmovableDescription>(L, "map", true);
+	add_parent<LuaImmovableDescription, LuaMapObjectDescription>(L);
+	lua_pop(L, 1); // Pop the meta table
 
 	register_class<LuaBuildingDescription>(L, "map", true);
 	add_parent<LuaBuildingDescription, LuaMapObjectDescription>(L);

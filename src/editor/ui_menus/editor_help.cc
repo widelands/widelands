@@ -78,6 +78,13 @@ EditorHelp::EditorHelp(EditorInteractive& parent, UI::UniqueWindow::Registry& re
 								  "scripting/editor/terrain_help.lua",
 								  HelpEntry::Type::kTerrain)));
 
+	tab_definitions.push_back(std::unique_ptr<HelpTab>(
+		new HelpTab("trees",
+								  "world/immovables/trees/alder/old/idle_0.png",
+								  _("Trees"),
+								  "scripting/editor/tree_help.lua",
+								  HelpEntry::Type::kTree)));
+
 	for (const auto& tab : tab_definitions) {
 		// Make sure that all paths exist
 		if (!g_fs->file_exists(tab->script_path)) {
@@ -127,6 +134,7 @@ EditorHelp::EditorHelp(EditorInteractive& parent, UI::UniqueWindow::Registry& re
 	tabs_.set_size(WINDOW_WIDTH, WINDOW_HEIGHT);
 
 	fill_terrains();
+	fill_trees();
 
 	if (get_usedefaultpos()) {
 		center_to_parent();
@@ -155,6 +163,21 @@ void EditorHelp::fill_terrains() {
 	fill_entries("terrains", entries);
 }
 
+void EditorHelp::fill_trees() {
+	const World& world = eia().egbase().world();
+	std::vector<HelpEntry> entries;
+
+	for (Widelands::DescriptionIndex i = 0; i < world.get_nr_immovables(); ++i) {
+		const ImmovableDescr* immovable = world.get_immovable_descr(i);
+		uint32_t attribute_id = immovable->get_attribute_id("tree");
+		if (immovable->has_attribute(attribute_id)) {
+			const Image* icon = immovable->representative_image();
+			HelpEntry entry(i, immovable->descname(), icon);
+			entries.push_back(entry);
+		}
+	}
+	fill_entries("trees", entries);
+}
 
 void EditorHelp::entry_selected(const std::string& key,
 													 const std::string& script_path,
@@ -170,6 +193,12 @@ void EditorHelp::entry_selected(const std::string& key,
 			const TerrainDescription& descr = eia().egbase().world().terrain_descr(lists_.at(key)->get_selected());
 			descname = descr.descname();
 			cr->push_arg(descr.name());
+			break;
+		}
+		case (HelpEntry::Type::kTree): {
+			const ImmovableDescr* descr = eia().egbase().world().get_immovable_descr(lists_.at(key)->get_selected());
+			descname = descr->descname();
+			cr->push_arg(descr->name());
 			break;
 		}
 		default:

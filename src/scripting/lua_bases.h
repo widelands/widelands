@@ -58,6 +58,7 @@ public:
 	/*
 	 * Lua methods
 	 */
+	int get_immovable_description(lua_State * L);
 	int get_building_description(lua_State * L);
 	int get_tribe_description(lua_State * L);
 	int get_ware_description(lua_State * L);
