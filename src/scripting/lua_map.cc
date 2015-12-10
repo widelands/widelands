@@ -2642,6 +2642,7 @@ const MethodType<LuaTerrainDescription> LuaTerrainDescription::Methods[] = {
 const PropertyType<LuaTerrainDescription> LuaTerrainDescription::Properties[] = {
 	PROP_RO(LuaTerrainDescription, name),
 	PROP_RO(LuaTerrainDescription, descname),
+	PROP_RO(LuaTerrainDescription, representative_image),
 	{nullptr, nullptr, nullptr},
 };
 
@@ -2685,12 +2686,23 @@ int LuaTerrainDescription::get_descname(lua_State * L) {
 }
 
 /* RST
+	.. attribute:: representative_image
+
+			(RO) the :class:`string` file path to a representative image
+*/
+
+int LuaTerrainDescription::get_representative_image(lua_State * L) {
+	lua_pushstring(L, *get()->texture_paths().begin());
+	return 1;
+}
+
+/* RST
 	.. method:: probability_to_grow
 
 		:arg treename: The tree that we are checking the probability for.
 		:type treename: :class:`string`
 
-		(RO) A double describing the probability that the given tree will gow on this terrain.
+		(RO) A double describing the probability that the given tree will grow on this terrain.
 */
 int LuaTerrainDescription::probability_to_grow(lua_State * L) {
 	if (lua_gettop(L) != 2) {

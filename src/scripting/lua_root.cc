@@ -310,6 +310,7 @@ World
 const char LuaWorld::className[] = "World";
 const MethodType<LuaWorld> LuaWorld::Methods[] = {
 	METHOD(LuaWorld, immovable_descriptions),
+	METHOD(LuaWorld, terrain_descriptions),
 	METHOD(LuaWorld, new_critter_type),
 	METHOD(LuaWorld, new_editor_immovable_category),
 	METHOD(LuaWorld, new_editor_terrain_category),
@@ -368,6 +369,27 @@ int LuaWorld::immovable_descriptions(lua_State* L) {
 			lua_pushstring(L, immovable->name());
 			lua_settable(L, -3);
 		}
+	}
+	return 1;
+}
+
+
+/* RST
+	.. method:: terrain_descriptions()
+
+		Returns a list of names with the terrains that are available in the worls.
+
+		(RO) a list of terrain names, e.g. {"wiese1", "wiese2", ...}
+*/
+int LuaWorld::terrain_descriptions(lua_State* L) {
+	const World& world = get_egbase(L).world();
+	lua_newtable(L);
+	int index = 1;
+	for (DescriptionIndex i = 0; i < world.terrains().size(); ++i) {
+		const TerrainDescription& terrain = world.terrain_descr(i);
+		lua_pushint32(L, index++);
+		lua_pushstring(L, terrain.name());
+		lua_settable(L, -3);
 	}
 	return 1;
 }

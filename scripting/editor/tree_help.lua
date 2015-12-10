@@ -1,4 +1,4 @@
--- NOCOM fill with content
+-- NOCOM Sort by percentage and localize
 include "scripting/formatting.lua"
 
 function picture_li(imagepath, text)
@@ -10,13 +10,22 @@ return {
       set_textdomain("widelands")
       local world = wl.World();
       local tree = wl.Editor():get_immovable_description(tree_name)
-      local result = ""
+      local result = picture_li(tree.representative_image, "")
+      result = result .. rt(h2("Terrain affinity"))
       if (tree.has_terrain_affinity) then
-			result = result .. p("Pickiness:" .. " " .. tree.pickiness)
-			result = result .. p("Preferred fertility:" .. " " .. tree.preferred_fertility)
-			result = result .. p("Preferred humidity:" .. " " .. tree.preferred_humidity)
-			result = result .. p("Preferred temperature:" .. " " .. tree.preferred_temperature)
+			result = result .. rt(p("Pickiness:" .. " " .. tree.pickiness))
+			result = result .. rt(p("Preferred fertility:" .. " " .. tree.preferred_fertility))
+			result = result .. rt(p("Preferred humidity:" .. " " .. tree.preferred_humidity))
+			result = result .. rt(p("Preferred temperature:" .. " " .. tree.preferred_temperature))
       end
-      return rt(result)
+      result = result .. rt(h2("Preferred terrains"))
+      for i, terrain_name in ipairs(world:terrain_descriptions()) do
+			local terrain = wl.Editor():get_terrain_description(terrain_name)
+			local probability = terrain:probability_to_grow(tree_name)
+			if (probability > 0.01) then
+				result = result .. picture_li(terrain.representative_image, terrain.descname .. "<br>" .. ("%2.1f%%"):bformat(100 * probability))
+			end
+		end
+      return result
    end
 }
