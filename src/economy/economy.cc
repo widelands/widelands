@@ -688,8 +688,9 @@ Supply * Economy::_find_best_supply
 		}
 	}
 
-	// We check only kSuppliesToCheck closest wares
-	uint16_t counter = 0; //NOCOM good idea to limit this?
+	// Now available supplies are sorted by distance to requestor
+	// And we will check only first n (kSuppliesToCheck) from them
+	uint16_t counter = 0;
 	for (auto& supplypair : available_supplies) {
 
 		if (++counter > kSuppliesToCheck) {
@@ -713,7 +714,7 @@ Supply * Economy::_find_best_supply
 		{
 			if (!best_route) {
 				log ("Economy::find_best_supply: Error, COULD NOT FIND A ROUTE!");
-				// To help debugging the issue a bit:
+				// To help to debug this a bit:
 				log (" ... ware at: %3dx%3d, requestor at: %3dx%3d!",
 					supp.get_position(game)->base_flag().get_position().x,
 					supp.get_position(game)->base_flag().get_position().y,
@@ -833,11 +834,6 @@ void Economy::_balance_requestsupply(Game & game)
 	//  Try to fulfill Requests.
 	_process_requests(game, rsps);
 
-	//printf (" %d: _balance_requestsupply time: %8d, pairs: %3d\n",
-		//owner().player_number(),
-		//game.get_gametime(),
-		//rsps.queue.size()); //NOCOM
-
 	//  Now execute request/supply pairs.
 	while (!rsps.queue.empty()) {
 		RequestSupplyPair rsp = rsps.queue.top();
@@ -850,7 +846,7 @@ void Economy::_balance_requestsupply(Game & game)
 			 !_has_request(*rsp.request) ||
 			 !rsp.supply->nr_supplies(game, *rsp.request))
 		{
-			rsps.nexttimer = 250; //NOCOM was 200
+			rsps.nexttimer = 250;
 			continue;
 		}
 
@@ -859,7 +855,7 @@ void Economy::_balance_requestsupply(Game & game)
 
 		//  for multiple wares
 		if (rsp.request && _has_request(*rsp.request))
-			rsps.nexttimer = 250; //NOCOM was 200
+			rsps.nexttimer = 250;
 	}
 
 	if (rsps.nexttimer > 0) { //  restart the timer, if necessary
@@ -1078,6 +1074,7 @@ void Economy::_handle_active_supplies(Game & game)
 
 		// One of preferred warehouses (if any) with lowest stock of ware/worker
 		Warehouse * preferred_wh = nullptr;
+		// Stock of particular ware in preferred warehouse
 		uint32_t preferred_wh_stock = std::numeric_limits<uint32_t>::max();
 
 		for (uint32_t nwh = 0; nwh < m_warehouses.size(); ++nwh) {
@@ -1105,6 +1102,7 @@ void Economy::_handle_active_supplies(Game & game)
 		if (!havenormal && !haveprefer && type == wwWARE)
 			continue;
 
+		// We either have one preferred warehouse picked up or walk on roads to find nearest one
 		Warehouse * wh = nullptr;
 		if (preferred_wh) {
 			wh = preferred_wh;
