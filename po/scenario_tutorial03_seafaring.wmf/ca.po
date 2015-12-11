@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-08-12 06:27+0000\n"
-"PO-Revision-Date: 2015-08-24 18:59+0000\n"
+"POT-Creation-Date: 2015-12-03 09:55+0000\n"
+"PO-Revision-Date: 2015-12-03 21:50+0000\n"
 "Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -269,7 +269,7 @@ msgid ""
 "have to undertake an expedition to the unknown seas."
 msgstr "Encara que pot trigar molt temps, ser car i comporta perills, qui sap quins monstres viuen al mar? No veig cap altra possibilitat: haurem de començar una expedició cap a mars desconeguts."
 
-#: TRANSLATORS This shall be the beginning of a poem
+#. TRANSLATORS: This shall be the beginning of a poem
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:138
 msgid "A trip by the sea, what fun it can be"
 msgstr "Un vaixell per mar; què divertit deu ser!"

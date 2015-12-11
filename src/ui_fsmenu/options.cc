@@ -215,6 +215,7 @@ FullscreenMenuOptions::FullscreenMenuOptions
 	show_workarea_preview_(&box_game_, Point(0, 0), _("Show buildings area preview")),
 	transparent_chat_(&box_game_, Point(0, 0), _("Show in-game chat with transparent background"),
 							"", column_width_),
+
 	/** TRANSLATORS: A watchwindow is a window where you keep watching an object or a map region,*/
 	/** TRANSLATORS: and it also lets you jump to it on the map. */
 	single_watchwin_(&box_game_, Point(0, 0), _("Use single watchwindow mode")),
@@ -500,8 +501,6 @@ OptionsCtrl::OptionsStruct FullscreenMenuOptions::get_values() {
 
 	return os_;
 }
-
-
 
 /**
  * Handles communication between window class and options
