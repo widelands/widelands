@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-12-09 20:23+0000\n"
-"PO-Revision-Date: 2015-12-09 20:51+0000\n"
+"POT-Creation-Date: 2015-12-10 13:43+0000\n"
+"PO-Revision-Date: 2015-12-10 14:20+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -1806,10 +1806,10 @@ msgstr[3] "Cleachdaidh an luchd-obrach:"
 #: ../../tribes/scripting/help/format_help.lua:165
 msgid "Ware consumed:"
 msgid_plural "Wares consumed:"
-msgstr[0] "Bathar ’ga chaitheamh:"
-msgstr[1] "Batharan ’gan caitheamh:"
-msgstr[2] "Batharan ’gan caitheamh:"
-msgstr[3] "Batharan ’gan caitheamh:"
+msgstr[0] "Caitheamh bathair:"
+msgstr[1] "Caitheamh bhatharan:"
+msgstr[2] "Caitheamh bhatharan:"
+msgstr[3] "Caitheamh bhatharan:"
 
 #. TRANSLATORS: Lore helptext for a building - it hasn't been written yet.
 #. TRANSLATORS: Purpose helptext for a building - it hasn't been written yet.
@@ -1844,35 +1844,35 @@ msgstr "Adhbhar"
 #: ../../tribes/scripting/help/ware_help.lua:52
 #: ../../tribes/scripting/help/worker_help.lua:28
 msgid "Producer"
-msgstr "’Ga shaothrachadh"
+msgstr "Saothraiche"
 
 #. TRANSLATORS: Ware Encyclopedia: Wares produced by a productionsite
 #: ../../tribes/scripting/help/ware_help.lua:93
 msgid "Ware produced:"
 msgid_plural "Wares produced:"
-msgstr[0] "Bathar ’ga shaothrachadh:"
-msgstr[1] "Batharan ’gan saothrachadh:"
-msgstr[2] "Batharan ’gan saothrachadh:"
-msgstr[3] "Batharan ’gan saothrachadh:"
+msgstr[0] "Saothrachadh bathair:"
+msgstr[1] "Saothrachadh bhatharan:"
+msgstr[2] "Saothrachadh bhatharan:"
+msgstr[3] "Saothrachadh bhatharan:"
 
 #. TRANSLATORS: Ware Encyclopedia: A list of buildings and / or workers that
 #. consume a ware
 #: ../../tribes/scripting/help/ware_help.lua:155
 msgid "Consumer"
 msgid_plural "Consumers"
-msgstr[0] "’Ga chaitheamh"
-msgstr[1] "’Ga chaitheamh"
-msgstr[2] "’Ga chaitheamh"
-msgstr[3] "’Ga chaitheamh"
+msgstr[0] "Caitheamh"
+msgstr[1] "Caitheamh"
+msgstr[2] "Caitheamh"
+msgstr[3] "Caitheamh"
 
 #. TRANSLATORS: Worker Encyclopedia: Workers recruited by a productionsite
 #: ../../tribes/scripting/help/worker_help.lua:69
 msgid "Worker recruited:"
 msgid_plural "Workers recruited:"
-msgstr[0] "Obraiche ’ga thrusadh:"
-msgstr[1] "Obraichean ’gan trusadh:"
-msgstr[2] "Obraichean ’gan trusadh:"
-msgstr[3] "Obraichean ’gan trusadh:"
+msgstr[0] "Trusadh:"
+msgstr[1] "Trusadh:"
+msgstr[2] "Trusadh:"
+msgstr[3] "Trusadh:"
 
 #. TRANSLATORS: Helptext for a ware: Armor
 #: ../../tribes/wares/armor/helptexts.lua:4

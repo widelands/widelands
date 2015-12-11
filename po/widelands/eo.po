@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-12-09 20:23+0000\n"
-"PO-Revision-Date: 2015-12-09 20:24+0000\n"
+"POT-Creation-Date: 2015-12-10 13:43+0000\n"
+"PO-Revision-Date: 2015-12-10 13:44+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Esperanto (http://www.transifex.com/widelands/widelands/language/eo/)\n"
 "MIME-Version: 1.0\n"
@@ -398,7 +398,9 @@ msgid "port"
 msgstr ""
 
 #. * TRANSLATORS: Editor terrain property: units can walk on this terrain
+#. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/editor/tools/editor_info_tool.cc:77
+#: ../../src/logic/world/terrain_description.cc:76
 msgid "walkable"
 msgstr ""
 
@@ -448,104 +450,72 @@ msgctxt "terrain_name"
 msgid "Name: %s"
 msgstr ""
 
-#. * TRANSLATORS: This is a terrain type tooltip in the editor
-#: ../../src/editor/tools/editor_info_tool.cc:114
-#: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:94
-msgid "arable"
-msgstr "kultivebla"
-
-#. * TRANSLATORS: This is a terrain type tooltip in the editor
-#: ../../src/editor/tools/editor_info_tool.cc:117
-#: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:148
-msgid "treeless"
-msgstr "senarba"
-
-#. * TRANSLATORS: This is a terrain type tooltip in the editor
-#: ../../src/editor/tools/editor_info_tool.cc:120
-#: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:105
-msgid "aquatic"
-msgstr "Akvuma"
-
-#. * TRANSLATORS: This is a terrain type tooltip in the editor
-#: ../../src/editor/tools/editor_info_tool.cc:123
-#: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:127
-msgid "dead"
-msgstr "morta"
-
-#. * TRANSLATORS: This is a terrain type tooltip in the editor
-#: ../../src/editor/tools/editor_info_tool.cc:126
-#: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:116
-msgid "mountainous"
-msgstr "Montuma"
-
-#. * TRANSLATORS: This is a terrain type tooltip in the editor
-#: ../../src/editor/tools/editor_info_tool.cc:129
-#: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:138
-msgid "impassable"
-msgstr ""
-
-#: ../../src/editor/tools/editor_info_tool.cc:131
+#. * TRANSLATORS: "Is" is a list of terrain properties, e.g. "arable",
+#. "unreachable and unwalkable"
+#. * TRANSLATORS: You can also translate this as "Category: %s" or "Property:
+#. %s"
+#: ../../src/editor/tools/editor_info_tool.cc:116
 #, c-format
-msgid "Category: %s"
+msgid "Is: %s"
 msgstr ""
 
-#: ../../src/editor/tools/editor_info_tool.cc:133
+#: ../../src/editor/tools/editor_info_tool.cc:118
 #, c-format
 msgid "Editor Category: %s"
 msgstr ""
 
-#: ../../src/editor/tools/editor_info_tool.cc:136
+#: ../../src/editor/tools/editor_info_tool.cc:121
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:249
 msgid "Resources:"
 msgstr "Krudmaterialoj:"
 
-#: ../../src/editor/tools/editor_info_tool.cc:143
+#: ../../src/editor/tools/editor_info_tool.cc:128
 #, c-format
 msgid "Resource name: %s"
 msgstr "Krudmaterial-nomo: %s"
 
-#: ../../src/editor/tools/editor_info_tool.cc:145
+#: ../../src/editor/tools/editor_info_tool.cc:130
 #, c-format
 msgid "Resource amount: %i"
 msgstr "Krudmaterial-provizo: %i"
 
-#: ../../src/editor/tools/editor_info_tool.cc:148
+#: ../../src/editor/tools/editor_info_tool.cc:133
 msgid "No resources"
 msgstr "Neniaj krudmaterialoj"
 
-#: ../../src/editor/tools/editor_info_tool.cc:152
+#: ../../src/editor/tools/editor_info_tool.cc:137
 #: ../../src/wui/mapdetails.cc:111
 msgid "Map:"
 msgstr "Mapo:"
 
-#: ../../src/editor/tools/editor_info_tool.cc:153
+#: ../../src/editor/tools/editor_info_tool.cc:138
 #, c-format
 msgctxt "map_name"
 msgid "Name: %s"
 msgstr ""
 
-#: ../../src/editor/tools/editor_info_tool.cc:154
+#: ../../src/editor/tools/editor_info_tool.cc:139
 #, c-format
 msgid "Size: %1$ix%2$i"
 msgstr "Grando:%1$ix%2$i"
 
-#: ../../src/editor/tools/editor_info_tool.cc:159
+#: ../../src/editor/tools/editor_info_tool.cc:144
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:315
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:429
 #, c-format
 msgid "Players: %u"
 msgstr "Ludantoj: %u"
 
-#: ../../src/editor/tools/editor_info_tool.cc:162
+#: ../../src/editor/tools/editor_info_tool.cc:147
 msgid "Players: -"
 msgstr "Ludantoj: -"
 
-#: ../../src/editor/tools/editor_info_tool.cc:165
+#: ../../src/editor/tools/editor_info_tool.cc:150
 #, c-format
 msgid "Author: %s"
 msgstr "Aŭtoro: %s"
 
-#: ../../src/editor/tools/editor_info_tool.cc:166
+#: ../../src/editor/tools/editor_info_tool.cc:151
 #, c-format
 msgid "Descr: %s"
 msgstr "Priskribo:%s"
@@ -965,7 +935,7 @@ msgstr "Maksimumo: %u"
 msgid "Set value: %u"
 msgstr "Agordi valoron: %u"
 
-#: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:171
+#: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:93
 msgid "Terrain Select"
 msgstr ""
 
@@ -1455,6 +1425,31 @@ msgstr[1] ""
 
 #: ../../src/logic/worker.cc:1886
 msgid "Worker got lost!"
+msgstr ""
+
+#. * TRANSLATORS: This is a terrain type tooltip in the editor
+#: ../../src/logic/world/terrain_description.cc:71
+msgid "arable"
+msgstr "kultivebla"
+
+#. * TRANSLATORS: This is a terrain type tooltip in the editor
+#: ../../src/logic/world/terrain_description.cc:81
+msgid "navigable"
+msgstr ""
+
+#. * TRANSLATORS: This is a terrain type tooltip in the editor
+#: ../../src/logic/world/terrain_description.cc:86
+msgid "unreachable"
+msgstr ""
+
+#. * TRANSLATORS: This is a terrain type tooltip in the editor
+#: ../../src/logic/world/terrain_description.cc:91
+msgid "mineable"
+msgstr ""
+
+#. * TRANSLATORS: This is a terrain type tooltip in the editor
+#: ../../src/logic/world/terrain_description.cc:96
+msgid "unwalkable"
 msgstr ""
 
 #: ../../src/map_io/s2map.cc:403

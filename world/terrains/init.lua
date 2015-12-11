@@ -50,8 +50,8 @@ world:new_terrain_type{
 
    -- You can add custom additional tooltip entries here.
    tooltips = {
-		-- TRANSLATORS: This is an entry in a terrain tooltip. Try to use 1 word if possible.
-		_"likes trees",
+      -- TRANSLATORS: This is an entry in a terrain tooltip. Try to use 1 word if possible.
+      _"likes trees",
    },
 
    -- The list resources that can be found in this terrain.
@@ -87,8 +87,8 @@ world:new_terrain_type{
    editor_category = "green",
    is = "arable",
    tooltips = {
-		-- TRANSLATORS: This is an entry in a terrain tooltip. Try to use 1 word if possible.
-		_"likes trees",
+      -- TRANSLATORS: This is an entry in a terrain tooltip. Try to use 1 word if possible.
+      _"likes trees",
    },
    valid_resources = {"water"},
    default_resource = "water",
@@ -108,8 +108,8 @@ world:new_terrain_type{
    editor_category = "green",
    is = "arable",
    tooltips = {
-		-- TRANSLATORS: This is an entry in a terrain tooltip. Try to use 1 word if possible.
-		_"likes trees",
+      -- TRANSLATORS: This is an entry in a terrain tooltip. Try to use 1 word if possible.
+      _"likes trees",
    },
    valid_resources = {"water"},
    default_resource = "water",
@@ -128,8 +128,8 @@ world:new_terrain_type{
    editor_category = "green",
    is = "arable",
    tooltips = {
-		-- TRANSLATORS: This is an entry in a terrain tooltip. Try to use 1 word if possible.
-		_"likes trees",
+      -- TRANSLATORS: This is an entry in a terrain tooltip. Try to use 1 word if possible.
+      _"likes trees",
    },
    valid_resources = {"water"},
    default_resource = "water",
@@ -261,8 +261,8 @@ world:new_terrain_type{
    is = "mineable",
    -- You can add custom additional tooltip entries here.
    tooltips = {
-		-- TRANSLATORS: This is an entry in a terrain tooltip. Try to use 1 word if possible.
-		_"likes trees",
+      -- TRANSLATORS: This is an entry in a terrain tooltip. Try to use 1 word if possible.
+      _"likes trees",
    },
    valid_resources = {"coal", "iron", "gold", "stones"},
    default_resource = "",
@@ -281,8 +281,8 @@ world:new_terrain_type{
    is = "mineable",
    -- You can add custom additional tooltip entries here.
    tooltips = {
-		-- TRANSLATORS: This is an entry in a terrain tooltip. Try to use 1 word if possible.
-		_"likes trees",
+      -- TRANSLATORS: This is an entry in a terrain tooltip. Try to use 1 word if possible.
+      _"likes trees",
    },
    valid_resources = {"coal", "iron", "gold", "stones"},
    default_resource = "",
@@ -384,8 +384,8 @@ world:new_terrain_type{
    editor_category = "wasteland",
    is = "arable",
    tooltips = {
-		-- TRANSLATORS: This is an entry in a terrain tooltip. Try to use 1 word if possible.
-		_"likes trees",
+      -- TRANSLATORS: This is an entry in a terrain tooltip. Try to use 1 word if possible.
+      _"likes trees",
    },
    valid_resources = { "water" },
    default_resource = "water",
@@ -404,8 +404,8 @@ world:new_terrain_type{
    editor_category = "wasteland",
    is = "arable",
    tooltips = {
-		-- TRANSLATORS: This is an entry in a terrain tooltip. Try to use 1 word if possible.
-		_"likes trees",
+      -- TRANSLATORS: This is an entry in a terrain tooltip. Try to use 1 word if possible.
+      _"likes trees",
    },
    valid_resources = { "water" },
    default_resource = "water",
@@ -424,8 +424,8 @@ world:new_terrain_type{
    editor_category = "wasteland",
    is = "arable",
    tooltips = {
-		-- TRANSLATORS: This is an entry in a terrain tooltip. Try to use 1 word if possible.
-		_"likes trees",
+      -- TRANSLATORS: This is an entry in a terrain tooltip. Try to use 1 word if possible.
+      _"likes trees",
    },
    valid_resources = { "water" },
    default_resource = "water",
@@ -444,8 +444,8 @@ world:new_terrain_type{
    editor_category = "wasteland",
    is = "arable",
    tooltips = {
-		-- TRANSLATORS: This is an entry in a terrain tooltip. Try to use 1 word if possible.
-		_"likes trees",
+      -- TRANSLATORS: This is an entry in a terrain tooltip. Try to use 1 word if possible.
+      _"likes trees",
    },
    valid_resources = { "water" },
    default_resource = "water",
@@ -464,8 +464,8 @@ world:new_terrain_type{
    editor_category = "wasteland",
    is = "arable",
    tooltips = {
-		-- TRANSLATORS: This is an entry in a terrain tooltip. Try to use 1 word if possible.
-		_"likes trees",
+      -- TRANSLATORS: This is an entry in a terrain tooltip. Try to use 1 word if possible.
+      _"likes trees",
    },
    valid_resources = { "water" },
    default_resource = "water",
@@ -484,8 +484,8 @@ world:new_terrain_type{
    editor_category = "wasteland",
    is = "arable",
    tooltips = {
-		-- TRANSLATORS: This is an entry in a terrain tooltip. Try to use 1 word if possible.
-		_"likes trees",
+      -- TRANSLATORS: This is an entry in a terrain tooltip. Try to use 1 word if possible.
+      _"likes trees",
    },
    valid_resources = { "water" },
    default_resource = "water",
@@ -583,8 +583,8 @@ world:new_terrain_type{
    editor_category = "wasteland",
    is = "mineable",
    tooltips = {
-		-- TRANSLATORS: This is an entry in a terrain tooltip. Try to use 1 word if possible.
-		_"likes trees",
+      -- TRANSLATORS: This is an entry in a terrain tooltip. Try to use 1 word if possible.
+      _"likes trees",
    },
    valid_resources = {"coal", "iron", "gold", "stones"},
    default_resource = "",
@@ -602,8 +602,8 @@ world:new_terrain_type{
    editor_category = "wasteland",
    is = "mineable",
    tooltips = {
-		-- TRANSLATORS: This is an entry in a terrain tooltip. Try to use 1 word if possible.
-		_"likes trees",
+      -- TRANSLATORS: This is an entry in a terrain tooltip. Try to use 1 word if possible.
+      _"likes trees",
    },
    valid_resources = {"coal", "iron", "gold", "stones"},
    default_resource = "",
@@ -693,8 +693,8 @@ world:new_terrain_type{
    editor_category = "winter",
    is = "arable",
    tooltips = {
-		-- TRANSLATORS: This is an entry in a terrain tooltip. Try to use 1 word if possible.
-		_"likes trees",
+      -- TRANSLATORS: This is an entry in a terrain tooltip. Try to use 1 word if possible.
+      _"likes trees",
    },
    valid_resources = { "water" },
    default_resource = "water",
@@ -713,8 +713,8 @@ world:new_terrain_type{
    editor_category = "winter",
    is = "arable",
    tooltips = {
-		-- TRANSLATORS: This is an entry in a terrain tooltip. Try to use 1 word if possible.
-		_"likes trees",
+      -- TRANSLATORS: This is an entry in a terrain tooltip. Try to use 1 word if possible.
+      _"likes trees",
    },
    valid_resources = { "water" },
    default_resource = "water",
@@ -733,8 +733,8 @@ world:new_terrain_type{
    editor_category = "winter",
    is = "arable",
    tooltips = {
-		-- TRANSLATORS: This is an entry in a terrain tooltip. Try to use 1 word if possible.
-		_"likes trees",
+      -- TRANSLATORS: This is an entry in a terrain tooltip. Try to use 1 word if possible.
+      _"likes trees",
    },
    valid_resources = { "water" },
    default_resource = "water",
@@ -864,8 +864,8 @@ world:new_terrain_type{
    editor_category = "winter",
    is = "mineable",
    tooltips = {
-		-- TRANSLATORS: This is an entry in a terrain tooltip. Try to use 1 word if possible.
-		_"likes trees",
+      -- TRANSLATORS: This is an entry in a terrain tooltip. Try to use 1 word if possible.
+      _"likes trees",
    },
    valid_resources = {"coal", "iron", "gold", "stones"},
    default_resource = "",
@@ -883,8 +883,8 @@ world:new_terrain_type{
    editor_category = "winter",
    is = "mineable",
    tooltips = {
-		-- TRANSLATORS: This is an entry in a terrain tooltip. Try to use 1 word if possible.
-		_"likes trees",
+      -- TRANSLATORS: This is an entry in a terrain tooltip. Try to use 1 word if possible.
+      _"likes trees",
    },
    valid_resources = {"coal", "iron", "gold", "stones"},
    default_resource = "",
@@ -1020,8 +1020,8 @@ world:new_terrain_type{
    editor_category = "desert",
    is = "arable",
    tooltips = {
-		-- TRANSLATORS: This is an entry in a terrain tooltip. Try to use 1 word if possible.
-		_"likes trees",
+      -- TRANSLATORS: This is an entry in a terrain tooltip. Try to use 1 word if possible.
+      _"likes trees",
    },
    valid_resources = {"water"},
    default_resource = "water",
@@ -1040,8 +1040,8 @@ world:new_terrain_type{
    editor_category = "desert",
    is = "arable",
    tooltips = {
-		-- TRANSLATORS: This is an entry in a terrain tooltip. Try to use 1 word if possible.
-		_"likes trees",
+      -- TRANSLATORS: This is an entry in a terrain tooltip. Try to use 1 word if possible.
+      _"likes trees",
    },
    valid_resources = {"water"},
    default_resource = "water",
@@ -1060,8 +1060,8 @@ world:new_terrain_type{
    editor_category = "desert",
    is = "arable",
    tooltips = {
-		-- TRANSLATORS: This is an entry in a terrain tooltip. Try to use 1 word if possible.
-		_"likes trees",
+      -- TRANSLATORS: This is an entry in a terrain tooltip. Try to use 1 word if possible.
+      _"likes trees",
    },
    valid_resources = {"water"},
    default_resource = "",
@@ -1080,8 +1080,8 @@ world:new_terrain_type{
    editor_category = "desert",
    is = "arable",
    tooltips = {
-		-- TRANSLATORS: This is an entry in a terrain tooltip. Try to use 1 word if possible.
-		_"likes trees",
+      -- TRANSLATORS: This is an entry in a terrain tooltip. Try to use 1 word if possible.
+      _"likes trees",
    },
    valid_resources = {"water"},
    default_resource = "",
@@ -1163,8 +1163,8 @@ world:new_terrain_type{
    editor_category = "desert",
    is = "mineable",
    tooltips = {
-		-- TRANSLATORS: This is an entry in a terrain tooltip. Try to use 1 word if possible.
-		_"likes trees",
+      -- TRANSLATORS: This is an entry in a terrain tooltip. Try to use 1 word if possible.
+      _"likes trees",
    },
    valid_resources = {"coal", "iron", "gold", "stones"},
    default_resource = "",
@@ -1182,8 +1182,8 @@ world:new_terrain_type{
    editor_category = "desert",
    is = "mineable",
    tooltips = {
-		-- TRANSLATORS: This is an entry in a terrain tooltip. Try to use 1 word if possible.
-		_"likes trees",
+      -- TRANSLATORS: This is an entry in a terrain tooltip. Try to use 1 word if possible.
+      _"likes trees",
    },
    valid_resources = {"coal", "iron", "gold", "stones"},
    default_resource = "",

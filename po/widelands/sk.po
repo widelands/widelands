@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-12-09 20:23+0000\n"
-"PO-Revision-Date: 2015-12-10 09:01+0000\n"
+"POT-Creation-Date: 2015-12-10 13:43+0000\n"
+"PO-Revision-Date: 2015-12-10 22:11+0000\n"
 "Last-Translator: MiroslavR <miroslavr256@gmail.com>\n"
 "Language-Team: Slovak (http://www.transifex.com/widelands/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
@@ -398,7 +398,9 @@ msgid "port"
 msgstr "prístav"
 
 #. * TRANSLATORS: Editor terrain property: units can walk on this terrain
+#. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/editor/tools/editor_info_tool.cc:77
+#: ../../src/logic/world/terrain_description.cc:76
 msgid "walkable"
 msgstr "schodný"
 
@@ -448,104 +450,72 @@ msgctxt "terrain_name"
 msgid "Name: %s"
 msgstr "Názov: %s"
 
-#. * TRANSLATORS: This is a terrain type tooltip in the editor
-#: ../../src/editor/tools/editor_info_tool.cc:114
-#: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:94
-msgid "arable"
-msgstr "orný"
-
-#. * TRANSLATORS: This is a terrain type tooltip in the editor
-#: ../../src/editor/tools/editor_info_tool.cc:117
-#: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:148
-msgid "treeless"
-msgstr "bez stromov"
-
-#. * TRANSLATORS: This is a terrain type tooltip in the editor
-#: ../../src/editor/tools/editor_info_tool.cc:120
-#: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:105
-msgid "aquatic"
-msgstr "vodný"
-
-#. * TRANSLATORS: This is a terrain type tooltip in the editor
-#: ../../src/editor/tools/editor_info_tool.cc:123
-#: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:127
-msgid "dead"
-msgstr "mŕtvy"
-
-#. * TRANSLATORS: This is a terrain type tooltip in the editor
-#: ../../src/editor/tools/editor_info_tool.cc:126
-#: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:116
-msgid "mountainous"
-msgstr "horský"
-
-#. * TRANSLATORS: This is a terrain type tooltip in the editor
-#: ../../src/editor/tools/editor_info_tool.cc:129
-#: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:138
-msgid "impassable"
-msgstr "nepriechodný"
-
-#: ../../src/editor/tools/editor_info_tool.cc:131
+#. * TRANSLATORS: "Is" is a list of terrain properties, e.g. "arable",
+#. "unreachable and unwalkable"
+#. * TRANSLATORS: You can also translate this as "Category: %s" or "Property:
+#. %s"
+#: ../../src/editor/tools/editor_info_tool.cc:116
 #, c-format
-msgid "Category: %s"
-msgstr "Kategória: %s"
+msgid "Is: %s"
+msgstr "Vlastnosti: %s"
 
-#: ../../src/editor/tools/editor_info_tool.cc:133
+#: ../../src/editor/tools/editor_info_tool.cc:118
 #, c-format
 msgid "Editor Category: %s"
 msgstr "Kategória editora: %s"
 
-#: ../../src/editor/tools/editor_info_tool.cc:136
+#: ../../src/editor/tools/editor_info_tool.cc:121
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:249
 msgid "Resources:"
 msgstr "Zdroje:"
 
-#: ../../src/editor/tools/editor_info_tool.cc:143
+#: ../../src/editor/tools/editor_info_tool.cc:128
 #, c-format
 msgid "Resource name: %s"
 msgstr "Názov zdroja: %s"
 
-#: ../../src/editor/tools/editor_info_tool.cc:145
+#: ../../src/editor/tools/editor_info_tool.cc:130
 #, c-format
 msgid "Resource amount: %i"
 msgstr "Množstvo zdroja: %i"
 
-#: ../../src/editor/tools/editor_info_tool.cc:148
+#: ../../src/editor/tools/editor_info_tool.cc:133
 msgid "No resources"
 msgstr "Žiadne zdroje"
 
-#: ../../src/editor/tools/editor_info_tool.cc:152
+#: ../../src/editor/tools/editor_info_tool.cc:137
 #: ../../src/wui/mapdetails.cc:111
 msgid "Map:"
 msgstr "Mapa:"
 
-#: ../../src/editor/tools/editor_info_tool.cc:153
+#: ../../src/editor/tools/editor_info_tool.cc:138
 #, c-format
 msgctxt "map_name"
 msgid "Name: %s"
 msgstr "Názov: %s"
 
-#: ../../src/editor/tools/editor_info_tool.cc:154
+#: ../../src/editor/tools/editor_info_tool.cc:139
 #, c-format
 msgid "Size: %1$ix%2$i"
 msgstr "Veľkosť: %1$ix%2$i"
 
-#: ../../src/editor/tools/editor_info_tool.cc:159
+#: ../../src/editor/tools/editor_info_tool.cc:144
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:315
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:429
 #, c-format
 msgid "Players: %u"
 msgstr "Hráči: %u"
 
-#: ../../src/editor/tools/editor_info_tool.cc:162
+#: ../../src/editor/tools/editor_info_tool.cc:147
 msgid "Players: -"
 msgstr "Hráči: -"
 
-#: ../../src/editor/tools/editor_info_tool.cc:165
+#: ../../src/editor/tools/editor_info_tool.cc:150
 #, c-format
 msgid "Author: %s"
 msgstr "Autor: %s"
 
-#: ../../src/editor/tools/editor_info_tool.cc:166
+#: ../../src/editor/tools/editor_info_tool.cc:151
 #, c-format
 msgid "Descr: %s"
 msgstr "Popis: %s"
@@ -966,7 +936,7 @@ msgstr "Maximálne: %u"
 msgid "Set value: %u"
 msgstr "Nastaviť hodnotu: %u"
 
-#: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:171
+#: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:93
 msgid "Terrain Select"
 msgstr "Výber terénu"
 
@@ -1466,6 +1436,31 @@ msgstr[2] "Pracovníci"
 #: ../../src/logic/worker.cc:1886
 msgid "Worker got lost!"
 msgstr "Pracovník sa stratil!"
+
+#. * TRANSLATORS: This is a terrain type tooltip in the editor
+#: ../../src/logic/world/terrain_description.cc:71
+msgid "arable"
+msgstr "orný"
+
+#. * TRANSLATORS: This is a terrain type tooltip in the editor
+#: ../../src/logic/world/terrain_description.cc:81
+msgid "navigable"
+msgstr "navigovateľný"
+
+#. * TRANSLATORS: This is a terrain type tooltip in the editor
+#: ../../src/logic/world/terrain_description.cc:86
+msgid "unreachable"
+msgstr "nedosiahnuteľný"
+
+#. * TRANSLATORS: This is a terrain type tooltip in the editor
+#: ../../src/logic/world/terrain_description.cc:91
+msgid "mineable"
+msgstr "banský"
+
+#. * TRANSLATORS: This is a terrain type tooltip in the editor
+#: ../../src/logic/world/terrain_description.cc:96
+msgid "unwalkable"
+msgstr "neschodný"
 
 #: ../../src/map_io/s2map.cc:403
 msgid "Bluebyte Settlers II Map. No comment defined!"
