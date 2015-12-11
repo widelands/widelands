@@ -73,12 +73,6 @@ double probability_to_grow
 double probability_to_grow
 	(const TerrainAffinity& immovable_affinity, const TerrainDescription& terrain);
 
-// Calculates the probability to grow for the given affinity and terrain values
-double calculate_probability_to_grow(const TerrainAffinity& affinity,
-												 double terrain_humidity,
-												 double terrain_fertility,
-												 double terrain_temperature);
-
 }  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_TERRAIN_AFFINITY_H
