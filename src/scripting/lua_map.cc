@@ -2642,7 +2642,10 @@ const MethodType<LuaTerrainDescription> LuaTerrainDescription::Methods[] = {
 const PropertyType<LuaTerrainDescription> LuaTerrainDescription::Properties[] = {
 	PROP_RO(LuaTerrainDescription, name),
 	PROP_RO(LuaTerrainDescription, descname),
+	PROP_RO(LuaTerrainDescription, fertility),
+	PROP_RO(LuaTerrainDescription, humidity),
 	PROP_RO(LuaTerrainDescription, representative_image),
+	PROP_RO(LuaTerrainDescription, temperature),
 	{nullptr, nullptr, nullptr},
 };
 
@@ -2686,6 +2689,28 @@ int LuaTerrainDescription::get_descname(lua_State * L) {
 }
 
 /* RST
+	.. attribute:: fertility
+
+			(RO) the :class:`double` fertility value for this terrain
+*/
+
+int LuaTerrainDescription::get_fertility(lua_State * L) {
+	lua_pushnumber(L, get()->fertility());
+	return 1;
+}
+
+/* RST
+	.. attribute:: humidity
+
+			(RO) the :class:`double` humidity value for this terrain
+*/
+
+int LuaTerrainDescription::get_humidity(lua_State * L) {
+	lua_pushnumber(L, get()->humidity());
+	return 1;
+}
+
+/* RST
 	.. attribute:: representative_image
 
 			(RO) the :class:`string` file path to a representative image
@@ -2695,6 +2720,23 @@ int LuaTerrainDescription::get_representative_image(lua_State * L) {
 	lua_pushstring(L, *get()->texture_paths().begin());
 	return 1;
 }
+
+/* RST
+	.. attribute:: temperature
+
+			(RO) the :class:`double` temperature value for this terrain
+*/
+
+int LuaTerrainDescription::get_temperature(lua_State * L) {
+	lua_pushnumber(L, get()->temperature());
+	return 1;
+}
+
+/*
+ ==========================================================
+ METHODS
+ ==========================================================
+ */
 
 /* RST
 	.. method:: probability_to_grow

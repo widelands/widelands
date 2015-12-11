@@ -10,7 +10,13 @@ return {
       set_textdomain("widelands")
       local world = wl.World();
       local terrain = wl.Editor():get_terrain_description(terrain_name)
-      local result = picture_li(terrain.representative_image, "")
+
+      local result = picture_li(terrain.representative_image,
+			"Fertility:" .. " " .. ("%2.1f%%"):bformat(100 * terrain.fertility) .. "<br>" ..
+			"Humidity:" .. " " .. ("%2.1f%%"):bformat(100 * terrain.humidity) .. "<br>" ..
+			"Temperature:" .. " " .. terrain.temperature
+		)
+
       local tree_string = ""
       for i, tree_name in ipairs(world:immovable_descriptions("tree")) do
 			local probability = terrain:probability_to_grow(tree_name)

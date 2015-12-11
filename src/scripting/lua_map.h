@@ -581,7 +581,10 @@ public:
 	 */
 	int get_name(lua_State *);
 	int get_descname(lua_State *);
+	int get_fertility(lua_State *);
+	int get_humidity(lua_State *);
 	int get_representative_image(lua_State *);
+	int get_temperature(lua_State *);
 
 	/*
 	 * Lua methods
