@@ -478,12 +478,14 @@ public:
 	uint32_t msites_defeated    () const {return m_msites_defeated;}
 	uint32_t civil_blds_lost    () const {return m_civil_blds_lost;}
 	uint32_t civil_blds_defeated() const {return m_civil_blds_defeated;}
+	uint32_t next_ship_id       () const {return m_next_ship_id;}	
 	void count_casualty          () {++m_casualties;}
 	void count_kill              () {++m_kills;}
 	void count_msite_lost        () {++m_msites_lost;}
 	void count_msite_defeated    () {++m_msites_defeated;}
 	void count_civil_bld_lost    () {++m_civil_blds_lost;}
 	void count_civil_bld_defeated() {++m_civil_blds_defeated;}
+	void incr_next_ship_id       () {++m_next_ship_id;}
 
 	// Statistics
 	const BuildingStatsVector& get_building_statistics(const DescriptionIndex& i) const;
@@ -556,6 +558,7 @@ private:
 	uint32_t               m_casualties, m_kills;
 	uint32_t               m_msites_lost,     m_msites_defeated;
 	uint32_t               m_civil_blds_lost, m_civil_blds_defeated;
+	uint32_t               m_next_ship_id;
 
 	Field *               m_fields;
 	std::vector<bool>     m_allowed_worker_types;

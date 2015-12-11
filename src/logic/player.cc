@@ -153,6 +153,7 @@ Player::Player
 	m_msites_defeated    (0),
 	m_civil_blds_lost    (0),
 	m_civil_blds_defeated(0),
+	m_next_ship_id       (1),  
 	m_fields            (nullptr),
 	m_allowed_worker_types(the_egbase.tribes().nrworkers(), true),
 	m_allowed_building_types(the_egbase.tribes().nrbuildings(), true),

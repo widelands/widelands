@@ -96,6 +96,10 @@ void Ship::init(EditorGameBase& egbase) {
 	Bob::init(egbase);
 	init_fleet(egbase);
 	Notifications::publish(NoteShipMessage(this, NoteShipMessage::Message::kGained));
+	assert(get_owner());
+	m_id = get_owner()->next_ship_id();
+	printf (" %d: new ship with id: %d\n", get_owner()->player_number(), m_id);
+	get_owner()->incr_next_ship_id();
 }
 
 /**
@@ -1044,6 +1048,7 @@ void Ship::Loader::load(FileRead & fr)
 		m_ship_state = TRANSPORT;
 	}
 
+	m_id = fr.unsigned_32();
 	m_lastdock = fr.unsigned_32();
 	m_destination = fr.unsigned_32();
 
@@ -1076,6 +1081,9 @@ void Ship::Loader::load_finish() {
 
 	// restore the state the ship is in
 	ship.m_ship_state = m_ship_state;
+
+	// restore the  ship id
+	ship.m_id = m_id;
 
 	// if the ship is on an expedition, restore the expedition specific data
 	if (m_expedition) {
@@ -1166,6 +1174,7 @@ void Ship::save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw) {
 		fw.unsigned_8(static_cast<uint8_t>(m_expedition->island_explore_direction));
 	}
 
+	fw.unsigned_32(m_id);
 	fw.unsigned_32(mos.get_object_file_index_or_zero(m_lastdock.get(egbase)));
 	fw.unsigned_32(mos.get_object_file_index_or_zero(m_destination.get(egbase)));
 
