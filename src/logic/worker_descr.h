@@ -81,7 +81,7 @@ public:
 			default_target_quantity_ = 1;
 	}
 
-	std::string directory() const {return directory_;}
+	std::string helptext_script() const {return helptext_script_;}
 
 	const DirAnimations & get_walk_anims() const {return walk_anims_;}
 	const DirAnimations & get_right_walk_anims(bool const carries_ware) const {
@@ -106,7 +106,7 @@ public:
 protected:
 	Point             ware_hotspot_;
 	uint32_t          default_target_quantity_;
-	std::string       directory_;  /// The directory where the init files are located
+	std::string       helptext_script_;  // The path and filename to the worker's helptext script
 	DirAnimations     walk_anims_;
 	DirAnimations     walkload_anims_;
 	bool              buildable_;

@@ -65,7 +65,7 @@ tribes:new_soldier_type {
    name = "barbarians_soldier",
    -- TRANSLATORS: This is a worker name used in lists of workers
    descname = pgettext("barbarians_worker", "Soldier"),
-   directory = dirname,
+   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    vision_range = 2,
 

@@ -5,7 +5,7 @@ tribes:new_productionsite_type {
    name = "atlanteans_foresters_house",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("atlanteans_building", "Forester’s House"),
-   directory = dirname,
+   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "small",
 

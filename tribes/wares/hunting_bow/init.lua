@@ -5,7 +5,7 @@ tribes:new_ware_type {
    name = "hunting_bow",
    -- TRANSLATORS: This is a ware name used in lists of wares
    descname = pgettext("ware", "Hunting Bow"),
-   directory = dirname,
+   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    default_target_quantity = {
       atlanteans = 1

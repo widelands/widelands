@@ -15,7 +15,7 @@ tribes:new_worker_type {
    name = "empire_pigbreeder",
    -- TRANSLATORS: This is a worker name used in lists of workers
    descname = pgettext("empire_worker", "Pig Breeder"),
-   directory = dirname,
+   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    vision_range = 2,
 

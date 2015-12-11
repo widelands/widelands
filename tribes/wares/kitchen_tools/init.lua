@@ -5,7 +5,7 @@ tribes:new_ware_type {
    name = "kitchen_tools",
    -- TRANSLATORS: This is a ware name used in lists of wares
    descname = pgettext("ware", "Kitchen Tools"),
-   directory = dirname,
+   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    default_target_quantity = {
       barbarians = 1,

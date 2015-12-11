@@ -40,13 +40,19 @@ world:new_terrain_type{
    -- on.
    --
    -- The following properties are available:
-   -- "green": Allows building of normal buildings and roads
-   -- "mountain": Allows building of mines and roads
-   -- "dry": Allows building of roads only. Trees don't like this terrain.
+   -- "arable": Allows building of normal buildings and roads
+   -- "mineable": Allows building of mines and roads
+   -- "walkable": Allows building of roads only.
    -- "water": Nothing can be built here, but ships and aquatic animals can pass
-   -- "dead": Nothing can be built here, and nothing can walk on it, and nothing will grow.
-   -- "impassable": Nothing can be built here, and nothing can walk on it
-   is = "green",
+   -- "unreachable": Nothing can be built here, and nothing can walk on it, and nothing will grow.
+   -- "unwalkable": Nothing can be built here, and nothing can walk on it
+   is = "arable",
+
+   -- You can add custom additional tooltip entries here.
+   tooltips = {
+      -- TRANSLATORS: This is an entry in a terrain tooltip. Try to use 1 word if possible.
+      _"likes trees",
+   },
 
    -- The list resources that can be found in this terrain.
    valid_resources = {"water"},
@@ -79,7 +85,11 @@ world:new_terrain_type{
    name = "wiese2",
    descname = _ "Meadow",
    editor_category = "green",
-   is = "green",
+   is = "arable",
+   tooltips = {
+      -- TRANSLATORS: This is an entry in a terrain tooltip. Try to use 1 word if possible.
+      _"likes trees",
+   },
    valid_resources = {"water"},
    default_resource = "water",
    default_resource_amount = 10,
@@ -96,7 +106,11 @@ world:new_terrain_type{
    name = "wiese3",
    descname = _ "Meadow",
    editor_category = "green",
-   is = "green",
+   is = "arable",
+   tooltips = {
+      -- TRANSLATORS: This is an entry in a terrain tooltip. Try to use 1 word if possible.
+      _"likes trees",
+   },
    valid_resources = {"water"},
    default_resource = "water",
    default_resource_amount = 10,
@@ -112,7 +126,11 @@ world:new_terrain_type{
    name = "wiese4",
    descname = _ "Meadow",
    editor_category = "green",
-   is = "green",
+   is = "arable",
+   tooltips = {
+      -- TRANSLATORS: This is an entry in a terrain tooltip. Try to use 1 word if possible.
+      _"likes trees",
+   },
    valid_resources = {"water"},
    default_resource = "water",
    default_resource_amount = 10,
@@ -128,7 +146,7 @@ world:new_terrain_type{
    name = "steppe",
    descname = _ "Steppe",
    editor_category = "green",
-   is = "green",
+   is = "arable",
    valid_resources = { "water" },
    default_resource = "water",
    default_resource_amount = 5,
@@ -144,7 +162,7 @@ world:new_terrain_type{
    name = "steppe_kahl",
    descname = _ "Barren Steppe",
    editor_category = "green",
-   is = "green",
+   is = "arable",
    valid_resources = {"water"},
    default_resource = "water",
    default_resource_amount = 4,
@@ -160,7 +178,7 @@ world:new_terrain_type{
    name = "bergwiese",
    descname = _ "Mountain Meadow",
    editor_category = "green",
-   is = "green",
+   is = "arable",
    valid_resources = {},
    default_resource = "",
    default_resource_amount = 0,
@@ -176,7 +194,7 @@ world:new_terrain_type{
    name = "berg1",
    descname = _ "Mountain",
    editor_category = "green",
-   is = "mountain",
+   is = "mineable",
    valid_resources = { "coal", "iron", "gold", "stones" },
    default_resource = "",
    default_resource_amount = 0,
@@ -192,7 +210,7 @@ world:new_terrain_type{
    name = "berg2",
    descname = _ "Mountain",
    editor_category = "green",
-   is = "mountain",
+   is = "mineable",
    valid_resources = {"coal", "iron", "gold", "stones"},
    default_resource = "",
    default_resource_amount = 0,
@@ -208,7 +226,7 @@ world:new_terrain_type{
    name = "berg3",
    descname = _ "Mountain",
    editor_category = "green",
-   is = "mountain",
+   is = "mineable",
    valid_resources = {"coal", "iron", "gold", "stones"},
    default_resource = "",
    default_resource_amount = 0,
@@ -224,7 +242,7 @@ world:new_terrain_type{
    name = "berg4",
    descname = _ "Mountain",
    editor_category = "green",
-   is = "mountain",
+   is = "mineable",
    valid_resources = {"coal", "iron", "gold", "stones"},
    default_resource = "",
    default_resource_amount = 0,
@@ -237,10 +255,50 @@ world:new_terrain_type{
 
 
 world:new_terrain_type{
+   name = "summer_forested_mountain1",
+   descname = _ "Forested Mountain",
+   editor_category = "green",
+   is = "mineable",
+   -- You can add custom additional tooltip entries here.
+   tooltips = {
+      -- TRANSLATORS: This is an entry in a terrain tooltip. Try to use 1 word if possible.
+      _"likes trees",
+   },
+   valid_resources = {"coal", "iron", "gold", "stones"},
+   default_resource = "",
+   default_resource_amount = 0,
+   textures = { pics_dir .. "green/forested_mountain1_00.png" },
+   dither_layer = 71,
+   temperature = 50,
+   humidity = 0.75,
+   fertility = 0.5,
+}
+
+world:new_terrain_type{
+   name = "summer_forested_mountain2",
+   descname = _ "Forested Mountain",
+   editor_category = "green",
+   is = "mineable",
+   -- You can add custom additional tooltip entries here.
+   tooltips = {
+      -- TRANSLATORS: This is an entry in a terrain tooltip. Try to use 1 word if possible.
+      _"likes trees",
+   },
+   valid_resources = {"coal", "iron", "gold", "stones"},
+   default_resource = "",
+   default_resource_amount = 0,
+   textures = { pics_dir .. "green/forested_mountain2_00.png" },
+   dither_layer = 71,
+   temperature = 50,
+   humidity = 0.75,
+   fertility = 0.5,
+}
+
+world:new_terrain_type{
    name = "sumpf",
    descname = _ "Swamp",
    editor_category = "green",
-   is = "impassable",
+   is = "unwalkable",
    valid_resources = {"water"},
    default_resource = "water",
    default_resource_amount = 20,
@@ -252,12 +310,11 @@ world:new_terrain_type{
    fertility = 0.1,
 }
 
-
 world:new_terrain_type{
    name = "strand",
    descname = _ "Beach",
    editor_category = "green",
-   is = "dry",
+   is = "walkable",
    valid_resources = {},
    default_resource = "",
    default_resource_amount = 0,
@@ -271,7 +328,7 @@ world:new_terrain_type{
    name = "schnee",
    descname = _ "Snow",
    editor_category = "green",
-   is = "dead",
+   is = "unreachable",
    valid_resources = {},
    default_resource = "",
    default_resource_amount = 0,
@@ -287,7 +344,7 @@ world:new_terrain_type{
    name = "lava",
    descname = _ "Lava",
    editor_category = "green",
-   is = "dead",
+   is = "unreachable",
    valid_resources = {},
    default_resource = "",
    default_resource_amount = 0,
@@ -325,7 +382,11 @@ world:new_terrain_type{
    name = "ashes",
    descname = _ "Ashes",
    editor_category = "wasteland",
-   is = "green",
+   is = "arable",
+   tooltips = {
+      -- TRANSLATORS: This is an entry in a terrain tooltip. Try to use 1 word if possible.
+      _"likes trees",
+   },
    valid_resources = { "water" },
    default_resource = "water",
    default_resource_amount = 5,
@@ -341,7 +402,11 @@ world:new_terrain_type{
    name = "ashes2",
    descname = _ "Ashes",
    editor_category = "wasteland",
-   is = "green",
+   is = "arable",
+   tooltips = {
+      -- TRANSLATORS: This is an entry in a terrain tooltip. Try to use 1 word if possible.
+      _"likes trees",
+   },
    valid_resources = { "water" },
    default_resource = "water",
    default_resource_amount = 4,
@@ -357,7 +422,11 @@ world:new_terrain_type{
    name = "hardground1",
    descname = _ "Hard Ground",
    editor_category = "wasteland",
-   is = "green",
+   is = "arable",
+   tooltips = {
+      -- TRANSLATORS: This is an entry in a terrain tooltip. Try to use 1 word if possible.
+      _"likes trees",
+   },
    valid_resources = { "water" },
    default_resource = "water",
    default_resource_amount = 10,
@@ -373,7 +442,11 @@ world:new_terrain_type{
    name = "hardground2",
    descname = _ "Hard Ground",
    editor_category = "wasteland",
-   is = "green",
+   is = "arable",
+   tooltips = {
+      -- TRANSLATORS: This is an entry in a terrain tooltip. Try to use 1 word if possible.
+      _"likes trees",
+   },
    valid_resources = { "water" },
    default_resource = "water",
    default_resource_amount = 10,
@@ -389,7 +462,11 @@ world:new_terrain_type{
    name = "hardground3",
    descname = _ "Hard Ground",
    editor_category = "wasteland",
-   is = "green",
+   is = "arable",
+   tooltips = {
+      -- TRANSLATORS: This is an entry in a terrain tooltip. Try to use 1 word if possible.
+      _"likes trees",
+   },
    valid_resources = { "water" },
    default_resource = "water",
    default_resource_amount = 10,
@@ -405,7 +482,11 @@ world:new_terrain_type{
    name = "hardground4",
    descname = _ "Hard Ground",
    editor_category = "wasteland",
-   is = "green",
+   is = "arable",
+   tooltips = {
+      -- TRANSLATORS: This is an entry in a terrain tooltip. Try to use 1 word if possible.
+      _"likes trees",
+   },
    valid_resources = { "water" },
    default_resource = "water",
    default_resource_amount = 10,
@@ -421,7 +502,7 @@ world:new_terrain_type{
    name = "hardlava",
    descname = _ "Igneous Rocks",
    editor_category = "wasteland",
-   is = "green",
+   is = "arable",
    valid_resources = { "water" },
    default_resource = "",
    default_resource_amount = 0,
@@ -437,7 +518,7 @@ world:new_terrain_type{
    name = "wasteland_mountain1",
    descname = _ "Mountain",
    editor_category = "wasteland",
-   is = "mountain",
+   is = "mineable",
    valid_resources = { "coal", "iron", "gold", "stones" },
    default_resource = "",
    default_resource_amount = 0,
@@ -453,7 +534,7 @@ world:new_terrain_type{
    name = "wasteland_mountain2",
    descname = _ "Mountain",
    editor_category = "wasteland",
-   is = "mountain",
+   is = "mineable",
    valid_resources = { "coal", "iron", "gold", "stones" },
    default_resource = "",
    default_resource_amount = 0,
@@ -469,7 +550,7 @@ world:new_terrain_type{
    name = "wasteland_mountain3",
    descname = _ "Mountain",
    editor_category = "wasteland",
-   is = "mountain",
+   is = "mineable",
    valid_resources = { "coal", "iron", "gold", "stones" },
    default_resource = "",
    default_resource_amount = 0,
@@ -485,7 +566,7 @@ world:new_terrain_type{
    name = "wasteland_mountain4",
    descname = _ "Mountain",
    editor_category = "wasteland",
-   is = "mountain",
+   is = "mineable",
    valid_resources = { "coal", "iron", "gold", "stones" },
    default_resource = "",
    default_resource_amount = 0,
@@ -496,12 +577,49 @@ world:new_terrain_type{
    fertility = 0.2,
 }
 
+world:new_terrain_type{
+   name = "wasteland_forested_mountain1",
+   descname = _ "Forested Mountain",
+   editor_category = "wasteland",
+   is = "mineable",
+   tooltips = {
+      -- TRANSLATORS: This is an entry in a terrain tooltip. Try to use 1 word if possible.
+      _"likes trees",
+   },
+   valid_resources = {"coal", "iron", "gold", "stones"},
+   default_resource = "",
+   default_resource_amount = 0,
+   textures = { pics_dir .. "wasteland/forested_mountain1_00.png" },
+   dither_layer = 81,
+   temperature = 110,
+   humidity = 0.15,
+   fertility = 0.95,
+}
+
+world:new_terrain_type{
+   name = "wasteland_forested_mountain2",
+   descname = _ "Forested Mountain",
+   editor_category = "wasteland",
+   is = "mineable",
+   tooltips = {
+      -- TRANSLATORS: This is an entry in a terrain tooltip. Try to use 1 word if possible.
+      _"likes trees",
+   },
+   valid_resources = {"coal", "iron", "gold", "stones"},
+   default_resource = "",
+   default_resource_amount = 0,
+   textures = { pics_dir .. "wasteland/forested_mountain2_00.png" },
+   dither_layer = 81,
+   temperature = 95,
+   humidity = 0.2,
+   fertility = 0.4,
+}
 
 world:new_terrain_type{
    name = "wasteland_beach",
    descname = _ "Beach",
    editor_category = "wasteland",
-   is = "dry",
+   is = "walkable",
    valid_resources = {},
    default_resource = "",
    default_resource_amount = 0,
@@ -517,7 +635,7 @@ world:new_terrain_type{
    name = "lava-stone1",
    descname = _ "Lava Rocks",
    editor_category = "wasteland",
-   is = "dead",
+   is = "unreachable",
    valid_resources = {},
    default_resource = "",
    default_resource_amount = 0,
@@ -534,7 +652,7 @@ world:new_terrain_type{
    name = "lava-stone2",
    descname = _ "Lava Rocks",
    editor_category = "wasteland",
-   is = "dead",
+   is = "unreachable",
    valid_resources = {},
    default_resource = "",
    default_resource_amount = 0,
@@ -573,7 +691,11 @@ world:new_terrain_type{
    name = "tundra",
    descname = _ "Tundra",
    editor_category = "winter",
-   is = "green",
+   is = "arable",
+   tooltips = {
+      -- TRANSLATORS: This is an entry in a terrain tooltip. Try to use 1 word if possible.
+      _"likes trees",
+   },
    valid_resources = { "water" },
    default_resource = "water",
    default_resource_amount = 10,
@@ -589,7 +711,11 @@ world:new_terrain_type{
    name = "tundra2",
    descname = _ "Tundra",
    editor_category = "winter",
-   is = "green",
+   is = "arable",
+   tooltips = {
+      -- TRANSLATORS: This is an entry in a terrain tooltip. Try to use 1 word if possible.
+      _"likes trees",
+   },
    valid_resources = { "water" },
    default_resource = "water",
    default_resource_amount = 10,
@@ -605,7 +731,11 @@ world:new_terrain_type{
    name = "tundra3",
    descname = _ "Tundra",
    editor_category = "winter",
-   is = "green",
+   is = "arable",
+   tooltips = {
+      -- TRANSLATORS: This is an entry in a terrain tooltip. Try to use 1 word if possible.
+      _"likes trees",
+   },
    valid_resources = { "water" },
    default_resource = "water",
    default_resource_amount = 10,
@@ -621,7 +751,7 @@ world:new_terrain_type{
    name = "tundra_taiga",
    descname = _ "Tundra Taiga",
    editor_category = "winter",
-   is = "green",
+   is = "arable",
    valid_resources = { "water" },
    default_resource = "water",
    default_resource_amount = 10,
@@ -637,7 +767,7 @@ world:new_terrain_type{
    name = "taiga",
    descname = _ "Taiga",
    editor_category = "winter",
-   is = "green",
+   is = "arable",
    valid_resources = { "water" },
    default_resource = "water",
    default_resource_amount = 10,
@@ -653,7 +783,7 @@ world:new_terrain_type{
    name = "snow",
    descname = _ "Snow",
    editor_category = "winter",
-   is = "green",
+   is = "arable",
    valid_resources = { "water" },
    default_resource = "",
    default_resource_amount = 0,
@@ -669,7 +799,7 @@ world:new_terrain_type{
    name = "winter_mountain1",
    descname = _ "Mountain",
    editor_category = "winter",
-   is = "mountain",
+   is = "mineable",
    valid_resources = { "coal", "iron", "gold", "stones" },
    default_resource = "",
    default_resource_amount = 0,
@@ -685,7 +815,7 @@ world:new_terrain_type{
    name = "winter_mountain2",
    descname = _ "Mountain",
    editor_category = "winter",
-   is = "mountain",
+   is = "mineable",
    valid_resources = { "coal", "iron", "gold", "stones" },
    default_resource = "",
    default_resource_amount = 0,
@@ -701,7 +831,7 @@ world:new_terrain_type{
    name = "winter_mountain3",
    descname = _ "Mountain",
    editor_category = "winter",
-   is = "mountain",
+   is = "mineable",
    valid_resources = { "coal", "iron", "gold", "stones" },
    default_resource = "",
    default_resource_amount = 0,
@@ -717,7 +847,7 @@ world:new_terrain_type{
    name = "winter_mountain4",
    descname = _ "Mountain",
    editor_category = "winter",
-   is = "mountain",
+   is = "mineable",
    valid_resources = { "coal", "iron", "gold", "stones" },
    default_resource = "",
    default_resource_amount = 0,
@@ -728,12 +858,49 @@ world:new_terrain_type{
    fertility = 0.05,
 }
 
+world:new_terrain_type{
+   name = "winter_forested_mountain1",
+   descname = _ "Forested Mountain",
+   editor_category = "winter",
+   is = "mineable",
+   tooltips = {
+      -- TRANSLATORS: This is an entry in a terrain tooltip. Try to use 1 word if possible.
+      _"likes trees",
+   },
+   valid_resources = {"coal", "iron", "gold", "stones"},
+   default_resource = "",
+   default_resource_amount = 0,
+   textures = { pics_dir .. "winter/forested_mountain1_00.png" },
+   dither_layer = 101,
+   temperature = 35,
+   humidity = 0.7,
+   fertility = 0.4,
+}
+
+world:new_terrain_type{
+   name = "winter_forested_mountain2",
+   descname = _ "Forested Mountain",
+   editor_category = "winter",
+   is = "mineable",
+   tooltips = {
+      -- TRANSLATORS: This is an entry in a terrain tooltip. Try to use 1 word if possible.
+      _"likes trees",
+   },
+   valid_resources = {"coal", "iron", "gold", "stones"},
+   default_resource = "",
+   default_resource_amount = 0,
+   textures = { pics_dir .. "winter/forested_mountain2_00.png" },
+   dither_layer = 101,
+   temperature = 35,
+   humidity = 0.7,
+   fertility = 0.4,
+}
 
 world:new_terrain_type{
    name = "ice",
    descname = _ "Ice",
    editor_category = "winter",
-   is = "dry",
+   is = "walkable",
    valid_resources = {},
    default_resource = "",
    default_resource_amount = 0,
@@ -749,7 +916,7 @@ world:new_terrain_type{
    name = "winter_beach",
    descname = _ "Beach",
    editor_category = "winter",
-   is = "dry",
+   is = "walkable",
    valid_resources = {},
    default_resource = "",
    default_resource_amount = 0,
@@ -821,7 +988,7 @@ world:new_terrain_type{
    name = "desert4",
    descname = _ "Desert",
    editor_category = "desert",
-   is = "green",
+   is = "arable",
    valid_resources = {"water"},
    default_resource = "water",
    default_resource_amount = 2,
@@ -837,7 +1004,7 @@ world:new_terrain_type{
    name = "drysoil",
    descname = _ "Dry Soil",
    editor_category = "desert",
-   is = "green",
+   is = "arable",
    valid_resources = {"water"},
    default_resource = "water",
    default_resource_amount = 4,
@@ -851,7 +1018,11 @@ world:new_terrain_type{
    name = "desert_steppe",
    descname = _ "Steppe",
    editor_category = "desert",
-   is = "green",
+   is = "arable",
+   tooltips = {
+      -- TRANSLATORS: This is an entry in a terrain tooltip. Try to use 1 word if possible.
+      _"likes trees",
+   },
    valid_resources = {"water"},
    default_resource = "water",
    default_resource_amount = 5,
@@ -867,7 +1038,11 @@ world:new_terrain_type{
    name = "meadow",
    descname = _ "Meadow",
    editor_category = "desert",
-   is = "green",
+   is = "arable",
+   tooltips = {
+      -- TRANSLATORS: This is an entry in a terrain tooltip. Try to use 1 word if possible.
+      _"likes trees",
+   },
    valid_resources = {"water"},
    default_resource = "water",
    default_resource_amount = 10,
@@ -883,7 +1058,11 @@ world:new_terrain_type{
    name = "mountainmeadow",
    descname = _ "Mountain Meadow",
    editor_category = "desert",
-   is = "green",
+   is = "arable",
+   tooltips = {
+      -- TRANSLATORS: This is an entry in a terrain tooltip. Try to use 1 word if possible.
+      _"likes trees",
+   },
    valid_resources = {"water"},
    default_resource = "",
    default_resource_amount = 0,
@@ -899,7 +1078,11 @@ world:new_terrain_type{
    name = "highmountainmeadow",
    descname = _ "High Mountain Meadow",
    editor_category = "desert",
-   is = "green",
+   is = "arable",
+   tooltips = {
+      -- TRANSLATORS: This is an entry in a terrain tooltip. Try to use 1 word if possible.
+      _"likes trees",
+   },
    valid_resources = {"water"},
    default_resource = "",
    default_resource_amount = 0,
@@ -915,7 +1098,7 @@ world:new_terrain_type{
    name = "mountain1",
    descname = _ "Mountain",
    editor_category = "desert",
-   is = "mountain",
+   is = "mineable",
    valid_resources = { "coal", "iron", "gold", "stones" },
    default_resource = "",
    default_resource_amount = 0,
@@ -931,7 +1114,7 @@ world:new_terrain_type{
    name = "mountain2",
    descname = _ "Mountain",
    editor_category = "desert",
-   is = "mountain",
+   is = "mineable",
    valid_resources = { "coal", "iron", "gold", "stones" },
    default_resource = "",
    default_resource_amount = 0,
@@ -947,7 +1130,7 @@ world:new_terrain_type{
    name = "mountain3",
    descname = _ "Mountain",
    editor_category = "desert",
-   is = "mountain",
+   is = "mineable",
    valid_resources = { "coal", "iron", "gold", "stones" },
    default_resource = "",
    default_resource_amount = 0,
@@ -963,7 +1146,7 @@ world:new_terrain_type{
    name = "mountain4",
    descname = _ "Mountain",
    editor_category = "desert",
-   is = "mountain",
+   is = "mineable",
    valid_resources = { "coal", "iron", "gold", "stones" },
    default_resource = "",
    default_resource_amount = 0,
@@ -974,12 +1157,49 @@ world:new_terrain_type{
    fertility = 0.05,
 }
 
+world:new_terrain_type{
+   name = "desert_forested_mountain1",
+   descname = _ "Forested Mountain",
+   editor_category = "desert",
+   is = "mineable",
+   tooltips = {
+      -- TRANSLATORS: This is an entry in a terrain tooltip. Try to use 1 word if possible.
+      _"likes trees",
+   },
+   valid_resources = {"coal", "iron", "gold", "stones"},
+   default_resource = "",
+   default_resource_amount = 0,
+   textures = { pics_dir .. "desert/forested_mountain1_00.png" },
+   dither_layer = 71,
+   temperature = 141,
+   humidity = 0.5,
+   fertility = 0.5,
+}
+
+world:new_terrain_type{
+   name = "desert_forested_mountain2",
+   descname = _ "Forested Mountain",
+   editor_category = "desert",
+   is = "mineable",
+   tooltips = {
+      -- TRANSLATORS: This is an entry in a terrain tooltip. Try to use 1 word if possible.
+      _"likes trees",
+   },
+   valid_resources = {"coal", "iron", "gold", "stones"},
+   default_resource = "",
+   default_resource_amount = 0,
+   textures = { pics_dir .. "desert/forested_mountain2_00.png" },
+   dither_layer = 141,
+   temperature = 120,
+   humidity = 0.5,
+   fertility = 0.5,
+}
 
 world:new_terrain_type{
    name = "desert1",
    descname = _ "Desert",
    editor_category = "desert",
-   is = "dry",
+   is = "walkable",
    valid_resources = {},
    default_resource = "",
    default_resource_amount = 0,
@@ -995,7 +1215,7 @@ world:new_terrain_type{
    name = "desert2",
    descname = _ "Desert",
    editor_category = "desert",
-   is = "dry",
+   is = "walkable",
    valid_resources = {},
    default_resource = "",
    default_resource_amount = 0,
@@ -1011,7 +1231,7 @@ world:new_terrain_type{
    name = "desert3",
    descname = _ "Desert",
    editor_category = "desert",
-   is = "dry",
+   is = "walkable",
    valid_resources = {},
    default_resource = "",
    default_resource_amount = 0,
@@ -1027,7 +1247,7 @@ world:new_terrain_type{
    name = "desert_beach",
    descname = _ "Beach",
    editor_category = "desert",
-   is = "dry",
+   is = "walkable",
    valid_resources = {},
    default_resource = "",
    default_resource_amount = 0,

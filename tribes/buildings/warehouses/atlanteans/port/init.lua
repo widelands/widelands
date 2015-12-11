@@ -5,7 +5,7 @@ tribes:new_warehouse_type {
    name = "atlanteans_port",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("atlanteans_building", "Port"),
-   directory = dirname,
+   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "port",
 
