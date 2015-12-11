@@ -112,6 +112,10 @@ TerrainDescription::TerrainDescription(const LuaTable& table, const Widelands::W
      fertility_(table.get_double("fertility")),
      humidity_(table.get_double("humidity")) {
 
+	if (table.has_key("tooltips")) {
+		custom_tooltips_ = table.get_table("tooltips")->array_entries<std::string>();
+	}
+
 	if (!(0 < fertility_ && fertility_ < 1.)) {
 		throw GameDataError("%s: fertility is not in (0, 1).", name_.c_str());
 	}

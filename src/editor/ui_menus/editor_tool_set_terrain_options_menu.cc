@@ -62,6 +62,9 @@ UI::Checkbox* create_terrain_checkbox(UI::Panel* parent,
 
 	// Collect tooltips and blit small icons representing "is" values
 	for (const TerrainDescription::Type& terrain_type : terrain_descr.get_types()) {
+                tooltips.insert(tooltips.end(),
+								terrain_descr.custom_tooltips().begin(),
+								terrain_descr.custom_tooltips().end());
 		tooltips.push_back(terrain_type.descname);
 
 		blit(Rect(pt.x, pt.y, terrain_type.icon->width(), terrain_type.icon->height()),
