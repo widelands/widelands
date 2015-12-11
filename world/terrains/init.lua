@@ -42,7 +42,7 @@ world:new_terrain_type{
    -- The following properties are available:
    -- "arable": Allows building of normal buildings and roads
    -- "mineable": Allows building of mines and roads
-   -- "walkable": Allows building of roads only. Trees don't like this terrain.
+   -- "walkable": Allows building of roads only.
    -- "water": Nothing can be built here, but ships and aquatic animals can pass
    -- "unreachable": Nothing can be built here, and nothing can walk on it, and nothing will grow.
    -- "unwalkable": Nothing can be built here, and nothing can walk on it
@@ -256,7 +256,7 @@ world:new_terrain_type{
 
 world:new_terrain_type{
    name = "summer_forested_mountain1",
-   descname = _ "Mountain",
+   descname = _ "Forested mountain",
    editor_category = "green",
    is = "mineable",
    -- You can add custom additional tooltip entries here.
@@ -276,7 +276,7 @@ world:new_terrain_type{
 
 world:new_terrain_type{
    name = "summer_forested_mountain2",
-   descname = _ "Mountain",
+   descname = _ "Forested mountain",
    editor_category = "green",
    is = "mineable",
    -- You can add custom additional tooltip entries here.
@@ -579,7 +579,7 @@ world:new_terrain_type{
 
 world:new_terrain_type{
    name = "wasteland_forested_mountain1",
-   descname = _ "Mountain",
+   descname = _ "Forested mountain",
    editor_category = "wasteland",
    is = "mineable",
    tooltips = {
@@ -598,7 +598,7 @@ world:new_terrain_type{
 
 world:new_terrain_type{
    name = "wasteland_forested_mountain2",
-   descname = _ "Mountain",
+   descname = _ "Forested mountain",
    editor_category = "wasteland",
    is = "mineable",
    tooltips = {
@@ -860,7 +860,7 @@ world:new_terrain_type{
 
 world:new_terrain_type{
    name = "winter_forested_mountain1",
-   descname = _ "Mountain",
+   descname = _ "Forested mountain",
    editor_category = "winter",
    is = "mineable",
    tooltips = {
@@ -879,7 +879,7 @@ world:new_terrain_type{
 
 world:new_terrain_type{
    name = "winter_forested_mountain2",
-   descname = _ "Mountain",
+   descname = _ "Forested mountain",
    editor_category = "winter",
    is = "mineable",
    tooltips = {
@@ -1159,7 +1159,7 @@ world:new_terrain_type{
 
 world:new_terrain_type{
    name = "desert_forested_mountain1",
-   descname = _ "Mountain",
+   descname = _ "Forested mountain",
    editor_category = "desert",
    is = "mineable",
    tooltips = {
@@ -1178,7 +1178,7 @@ world:new_terrain_type{
 
 world:new_terrain_type{
    name = "desert_forested_mountain2",
-   descname = _ "Mountain",
+   descname = _ "Forested mountain",
    editor_category = "desert",
    is = "mineable",
    tooltips = {
