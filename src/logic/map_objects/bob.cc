@@ -868,7 +868,7 @@ void Bob::set_animation(EditorGameBase & egbase, uint32_t const anim)
 
 
 /**
- * Cause the object to walk, honoring passable/impassable parts of the map
+ * Cause the object to walk, honoring passable/unwalkable parts of the map
  * using movecaps. If force is true, the passability check is skipped.
  *
  * \return the number of milliseconds after which the walk has ended. You must

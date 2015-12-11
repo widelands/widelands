@@ -26,6 +26,7 @@
 
 #include "base/macros.h"
 #include "graphic/color.h"
+#include "graphic/graphic.h"
 #include "logic/widelands.h"
 #include "logic/map_objects/world/resource_description.h"
 
@@ -42,13 +43,21 @@ constexpr int kTextureSideLength = 64;
 
 class TerrainDescription {
 public:
-	enum Type {
-		kGreen = 0,
-		kDry = 1,
+	enum Is {
+		kArable = 0,
+		kWalkable = 1,
 		kWater =  2,
-		kDead = 4,
-		kMountain = 8,
-		kImpassable = 16,
+		kUnreachable = 4,
+		kMineable = 8,
+		kUnwalkable = 16,
+	};
+
+	struct Type {
+		Type(TerrainDescription::Is _is);
+
+		TerrainDescription::Is is;
+		const char* descname;
+		const Image* icon;
 	};
 
 	TerrainDescription(const LuaTable& table, const World&);
@@ -75,7 +84,9 @@ public:
 	const RGBColor& get_minimap_color(int shade);
 
 	/// Returns the type of terrain this is (water, walkable, and so on).
-	Type get_is() const;
+	Is get_is() const;
+	/// Returns a list of the types that match get_is()
+	const std::vector<TerrainDescription::Type> get_types() const;
 
 	/// Returns the valid resource with the given index.
 	DescriptionIndex get_valid_resource(uint8_t index) const;
@@ -110,11 +121,16 @@ public:
 	/// Fertility in percent [0, 1].
 	double fertility() const;
 
+	/// Additional tooptip entries for the editor
+	const std::vector<std::string>& custom_tooltips() const {return custom_tooltips_;}
+
+
 private:
 	const std::string name_;
 	const std::string descname_;
 	const EditorCategory* editor_category_;  ///< not owned.
-	Type is_;
+	Is is_;
+	std::vector<std::string> custom_tooltips_;
 	std::vector<uint8_t> valid_resources_;
 	int default_resource_index_;
 	int default_resource_amount_;

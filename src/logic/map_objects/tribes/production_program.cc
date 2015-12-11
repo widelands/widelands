@@ -865,16 +865,17 @@ ProductionProgram::ActConsume::ActConsume
 {
 	try {
 		for (;;) {
-			m_groups.resize(m_groups.size() + 1);
+			consumed_wares_.resize(consumed_wares_.size() + 1);
 			parse_ware_type_group
-				(parameters, *m_groups.rbegin(), tribes, descr.inputs());
+				(parameters, *consumed_wares_.rbegin(), tribes, descr.inputs());
 			if (!*parameters)
 				break;
 			force_skip(parameters);
 		}
-		if (m_groups.empty())
+		if (consumed_wares_.empty()) {
 			throw GameDataError
 				("expected ware_type1[,ware_type2[,...]][:N] ...");
+		}
 	} catch (const WException & e) {
 		throw GameDataError("consume: %s", e.what());
 	}
@@ -887,7 +888,7 @@ void ProductionProgram::ActConsume::execute
 	size_t const nr_warequeues = warequeues.size();
 	std::vector<uint8_t> consumption_quantities(nr_warequeues, 0);
 
-	Groups l_groups = m_groups; //  make a copy for local modification
+	Groups l_groups = consumed_wares_; //  make a copy for local modification
 	//log("ActConsume::execute(%s):\n", ps.descname().c_str());
 
 	//  Iterate over all input queues and see how much we should consume from
@@ -988,8 +989,8 @@ ProductionProgram::ActProduce::ActProduce
 {
 	try {
 		for (bool more = true; more; ++parameters) {
-			m_items.resize(m_items.size() + 1);
-			std::pair<DescriptionIndex, uint8_t> & item = *m_items.rbegin();
+			produced_wares_.resize(produced_wares_.size() + 1);
+			WareAmount& item = *produced_wares_.rbegin();
 			skip(parameters);
 			char const * ware = parameters;
 			for (;; ++parameters) {
@@ -1042,15 +1043,15 @@ void ProductionProgram::ActProduce::execute
 {
 	//ps.molog("  Produce\n");
 	assert(ps.m_produced_wares.empty());
-	ps.m_produced_wares = m_items;
+	ps.m_produced_wares = produced_wares_;
 	ps.m_working_positions[0].worker->update_task_buildingwork(game);
 
 	const TribeDescr & tribe = ps.owner().tribe();
-	assert(m_items.size());
+	assert(produced_wares_.size());
 
 	std::vector<std::string> ware_descnames;
 	uint8_t count = 0;
-	for (const auto& item_pair : m_items) {
+	for (const auto& item_pair : produced_wares_) {
 		count += item_pair.second;
 		std::string ware_descname = tribe.get_ware_descr(item_pair.first)->descname();
 		// TODO(GunChleoc): would be nice with pngettext whenever it gets added to xgettext for Lua.
@@ -1086,8 +1087,8 @@ ProductionProgram::ActRecruit::ActRecruit
 {
 	try {
 		for (bool more = true; more; ++parameters) {
-			m_items.resize(m_items.size() + 1);
-			std::pair<DescriptionIndex, uint8_t> & item = *m_items.rbegin();
+			recruited_workers_.resize(recruited_workers_.size() + 1);
+			WareAmount& item = *recruited_workers_.rbegin();
 			skip(parameters);
 			char const * worker = parameters;
 			for (;; ++parameters) {
@@ -1139,14 +1140,14 @@ void ProductionProgram::ActRecruit::execute
 	(Game & game, ProductionSite & ps) const
 {
 	assert(ps.m_recruited_workers.empty());
-	ps.m_recruited_workers = m_items;
+	ps.m_recruited_workers = recruited_workers_;
 	ps.m_working_positions[0].worker->update_task_buildingwork(game);
 
 	const TribeDescr & tribe = ps.owner().tribe();
-	assert(m_items.size());
+	assert(recruited_workers_.size());
 	std::vector<std::string> worker_descnames;
 	uint8_t count = 0;
-	for (const auto& item_pair : m_items) {
+	for (const auto& item_pair : recruited_workers_) {
 		count += item_pair.second;
 		std::string worker_descname = tribe.get_worker_descr(item_pair.first)->descname();
 		// TODO(GunChleoc): would be nice with pngettext whenever it gets added to xgettext for Lua.
@@ -1730,7 +1731,7 @@ ProductionProgram::ProductionProgram(const std::string& _name,
 		std::unique_ptr<LuaTable> actions_table,
 		const EditorGameBase& egbase,
 		ProductionSiteDescr* building)
-	: m_name(_name), m_descname(_descname) {
+	: name_(_name), descname_(_descname) {
 
 	for (const std::string& action_string : actions_table->array_entries<std::string>()) {
 		std::vector<std::string> parts;
@@ -1742,43 +1743,88 @@ ProductionProgram::ProductionProgram(const std::string& _name,
 		std::unique_ptr<char []> arguments(new char[parts[1].size() + 1]);
 		strncpy(arguments.get(), parts[1].c_str(), parts[1].size() + 1);
 
-		ProductionProgram::Action* action;
-
-		if (boost::iequals(parts[0], "return"))
-			action = new ActReturn(arguments.get(), *building, egbase.tribes());
-		else if (boost::iequals(parts[0], "call"))
-			action = new ActCall(arguments.get(), *building);
-		else if (boost::iequals(parts[0], "sleep"))
-			action = new ActSleep(arguments.get());
-		else if (boost::iequals(parts[0], "animate"))
-		action = new ActAnimate(arguments.get(), building);
-		else if (boost::iequals(parts[0], "consume"))
-			action = new ActConsume(arguments.get(), *building, egbase.tribes());
-		else if (boost::iequals(parts[0], "produce"))
-			action = new ActProduce(arguments.get(), *building, egbase.tribes());
-		else if (boost::iequals(parts[0], "recruit"))
-			action = new ActRecruit(arguments.get(), *building, egbase.tribes());
-		else if (boost::iequals(parts[0], "worker"))
-			action = new ActWorker(arguments.get(), _name, building, egbase.tribes());
-		else if (boost::iequals(parts[0], "mine"))
-			action = new ActMine(arguments.get(), egbase.world(), _name, building);
-		else if (boost::iequals(parts[0], "check_soldier"))
-			action = new ActCheckSoldier(arguments.get());
-		else if (boost::iequals(parts[0], "train"))
-			action = new ActTrain(arguments.get());
-		else if (boost::iequals(parts[0], "playFX"))
-			action = new ActPlayFX(arguments.get());
-		else if (boost::iequals(parts[0], "construct"))
-			action = new ActConstruct(arguments.get(), _name, building);
-		else if (boost::iequals(parts[0], "check_map"))
-			action = new ActCheckMap(arguments.get());
-		else
+		if (boost::iequals(parts[0], "return")) {
+			actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
+										 new ActReturn(arguments.get(), *building, egbase.tribes())));
+		} else if (boost::iequals(parts[0], "call")) {
+			actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
+										 new ActCall(arguments.get(), *building)));
+		} else if (boost::iequals(parts[0], "sleep")) {
+			actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
+										 new ActSleep(arguments.get())));
+		} else if (boost::iequals(parts[0], "animate")) {
+			actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
+										 new ActAnimate(arguments.get(), building)));
+		} else if (boost::iequals(parts[0], "consume")) {
+			actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
+										 new ActConsume(arguments.get(), *building, egbase.tribes())));
+		} else if (boost::iequals(parts[0], "produce")) {
+			actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
+										 new ActProduce(arguments.get(), *building, egbase.tribes())));
+		} else if (boost::iequals(parts[0], "recruit")) {
+			actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
+										 new ActRecruit(arguments.get(), *building, egbase.tribes())));
+		} else if (boost::iequals(parts[0], "worker")) {
+			actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
+										 new ActWorker(arguments.get(), _name, building, egbase.tribes())));
+		} else if (boost::iequals(parts[0], "mine")) {
+			actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
+										 new ActMine(arguments.get(), egbase.world(), _name, building)));
+		} else if (boost::iequals(parts[0], "check_soldier")) {
+			actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
+										 new ActCheckSoldier(arguments.get())));
+		} else if (boost::iequals(parts[0], "train")) {
+			actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
+										 new ActTrain(arguments.get())));
+		} else if (boost::iequals(parts[0], "playFX")) {
+			actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
+										 new ActPlayFX(arguments.get())));
+		} else if (boost::iequals(parts[0], "construct")) {
+			actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
+										 new ActConstruct(arguments.get(), _name, building)));
+		} else if (boost::iequals(parts[0], "check_map")) {
+			actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
+										 new ActCheckMap(arguments.get())));
+		} else {
 			throw GameDataError("unknown command type \"%s\" in production program \"%s\" for building \"%s\"",
 									  arguments.get(), _name.c_str(), building->name().c_str());
-		m_actions.push_back(action);
+		}
+
+		const ProductionProgram::Action& action = *actions_.back().get();
+		for (const WareTypeGroup& group : action.consumed_wares()) {
+			consumed_wares_.push_back(group);
+		}
+		// Add produced wares. If the ware already exists, increase the amount
+		for (const WareAmount& ware : action.produced_wares()) {
+			if (produced_wares_.count(ware.first) == 1) {
+				produced_wares_.at(ware.first) += ware.second;
+			} else {
+				produced_wares_.insert(ware);
+			}
+		}
+		// Add recruited workers. If the worker already exists, increase the amount
+		for (const WareAmount& worker : action.recruited_workers()) {
+			if (recruited_workers_.count(worker.first) == 1) {
+				recruited_workers_.at(worker.first) += worker.second;
+			} else {
+				recruited_workers_.insert(worker);
+			}
+		}
 	}
-	if (m_actions.empty())
+	if (actions_.empty())
 		throw GameDataError("no actions in production program \"%s\" for building \"%s\"",
 								  _name.c_str(), building->name().c_str());
 }
+
+const std::string & ProductionProgram::name() const {return name_;}
+const std::string & ProductionProgram::descname() const {return descname_;}
+size_t ProductionProgram::size() const {return actions_.size();}
+
+const ProductionProgram::Action& ProductionProgram::operator[](size_t const idx) const {
+	return *actions_.at(idx).get();
 }
+
+const ProductionProgram::Groups& ProductionProgram::consumed_wares() const {return consumed_wares_;}
+const Buildcost& ProductionProgram::produced_wares() const {return produced_wares_;}
+const Buildcost& ProductionProgram::recruited_workers() const {return recruited_workers_;}
+} // namespace Widelands

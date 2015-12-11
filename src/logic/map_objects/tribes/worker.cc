@@ -515,7 +515,7 @@ bool Worker::run_findobject(Game & game, State & state, const Action & action)
 // will also allow blocking the shoreline if it is next to the worker's
 // location. Also, the gap of 2 nodes between 2 farms will be blocked,
 // because both are next to their farm. The only real solution that I can
-// think of for this kind of bugs is to only allow impassable objects to
+// think of for this kind of bugs is to only allow unwalkable objects to
 // be placed on a node if ALL neighbouring nodes are passable. This must
 // of course be checked at the moment when the object is placed and not,
 // as in this case, only before a worker starts walking there to place an
@@ -2716,11 +2716,11 @@ void Worker::geologist_update(Game & game, State & state)
 			bool is_center_mountain =
 				(world.terrain_descr(owner_area.field->terrain_d()).get_is()
 				 &
-				 TerrainDescription::Type::kMountain)
+				 TerrainDescription::Is::kMineable)
 				|
 				(world.terrain_descr(owner_area.field->terrain_r()).get_is()
 				 &
-				 TerrainDescription::Type::kMountain);
+				 TerrainDescription::Is::kMineable);
 			// Only run towards fields that are on a mountain (or not)
 			// depending on position of center
 			bool is_target_mountain;
@@ -2733,11 +2733,11 @@ void Worker::geologist_update(Game & game, State & state)
 				is_target_mountain =
 					(world.terrain_descr(target.field->terrain_d()).get_is()
 					 &
-					 TerrainDescription::Type::kMountain)
+					 TerrainDescription::Is::kMineable)
 					|
 					(world.terrain_descr(target.field->terrain_r()).get_is()
 					 &
-					 TerrainDescription::Type::kMountain);
+					 TerrainDescription::Is::kMineable);
 				if (i == 0)
 					i = list.size();
 				--i;

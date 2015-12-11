@@ -119,7 +119,7 @@ ProductionSiteDescr::ProductionSiteDescr
 							throw wexception("duplicated");
 						}
 					}
-					m_inputs.push_back(std::pair<DescriptionIndex, uint8_t>(idx, amount));
+					m_inputs.push_back(WareAmount(idx, amount));
 				} else {
 					throw wexception
 						("tribes do not define a ware type with this name");
@@ -685,7 +685,7 @@ void ProductionSite::act(Game & game, uint32_t const data)
 			}
 
 			State & state = top_state();
-			if (state.program->get_size() <= state.ip)
+			if (state.program->size() <= state.ip)
 				return program_end(game, Completed);
 
 			if (m_anim != descr().get_animation(m_default_anim)) {
@@ -788,7 +788,7 @@ bool ProductionSite::get_building_work
 	// If unsuccessful: Check if we need to abort current program
 	if (!success) {
 		State * state = get_state();
-		if (state->ip < state->program->get_size())
+		if (state->ip < state->program->size())
 			(*state->program)[state->ip].building_work_failed(game, *this, worker);
 	}
 
@@ -807,8 +807,7 @@ bool ProductionSite::get_building_work
 	if (!m_produced_wares.empty()) {
 		//  There is still a produced ware waiting for delivery. Carry it out
 		//  before continuing with the program.
-		std::pair<DescriptionIndex, uint8_t> & ware_type_with_count =
-			*m_produced_wares.rbegin();
+		WareAmount& ware_type_with_count = *m_produced_wares.rbegin();
 		{
 			DescriptionIndex const ware_index = ware_type_with_count.first;
 			const WareDescr & ware_ware_descr =
@@ -830,8 +829,7 @@ bool ProductionSite::get_building_work
 	if (!m_recruited_workers.empty()) {
 		//  There is still a recruited worker waiting to be released. Send it
 		//  out.
-		std::pair<DescriptionIndex, uint8_t> & worker_type_with_count =
-			*m_recruited_workers.rbegin();
+		WareAmount& worker_type_with_count = *m_recruited_workers.rbegin();
 		{
 			const WorkerDescr & worker_descr =
 				*owner().tribe().get_worker_descr(worker_type_with_count.first);
@@ -874,7 +872,7 @@ bool ProductionSite::get_building_work
 		//m_program_timer = true;
 		find_and_start_next_program(game);
 		// m_program_time = schedule_act(game, 10);
-	} else if (state->ip < state->program->get_size()) {
+	} else if (state->ip < state->program->size()) {
 		const ProductionProgram::Action & action = (*state->program)[state->ip];
 		return action.get_building_work(game, *this, worker);
 	}

@@ -107,28 +107,13 @@ int32_t EditorInfoTool::handle_click_impl(Widelands::Map& map,
 
 	buf += "• " + (boost::format(pgettext("terrain_name", "Name: %s")) % ter.descname()).str() + "\n";
 
-	Widelands::TerrainDescription::Type terrain_is = ter.get_is();
 	std::vector<std::string> terrain_is_strings;
-
-	if (terrain_is == Widelands::TerrainDescription::Type::kGreen) {
-		terrain_is_strings.push_back(_("arable"));
+	for (const Widelands::TerrainDescription::Type& terrain_type : ter.get_types()) {
+		terrain_is_strings.push_back(terrain_type.descname);
 	}
-	if (terrain_is & Widelands::TerrainDescription::Type::kDry) {
-		terrain_is_strings.push_back(_("treeless"));
-	}
-	if (terrain_is & Widelands::TerrainDescription::Type::kWater) {
-		terrain_is_strings.push_back(_("aquatic"));
-	}
-	if (terrain_is & Widelands::TerrainDescription::Type::kDead) {
-		terrain_is_strings.push_back(_("dead"));
-	}
-	if (terrain_is & Widelands::TerrainDescription::Type::kMountain) {
-		terrain_is_strings.push_back(_("mountainous"));
-	}
-	if (terrain_is & Widelands::TerrainDescription::Type::kImpassable) {
-		terrain_is_strings.push_back(_("impassable"));
-	}
-	buf += "• " + (boost::format(_("Category: %s"))
+	/** TRANSLATORS: "Is" is a list of terrain properties, e.g. "arable", "unreachable and unwalkable" */
+	/** TRANSLATORS: You can also translate this as "Category: %s" or "Property: %s" */
+	buf += "• " + (boost::format(_("Is: %s"))
 						% i18n::localize_list(terrain_is_strings, i18n::ConcatenateWith::AMPERSAND)).str() + "\n";
 	buf += "• " + (boost::format(_("Editor Category: %s")) % ter.editor_category().descname()).str() + "\n";
 

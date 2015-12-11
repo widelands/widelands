@@ -180,7 +180,6 @@ ImmovableDescr IMPLEMENTATION
 ==============================================================================
 */
 
-
 /**
  * Parse a common immovable functions from init file.
  */
