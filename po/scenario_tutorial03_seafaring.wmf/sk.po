@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-08-01 05:39+0000\n"
-"PO-Revision-Date: 2015-08-02 15:58+0000\n"
+"POT-Creation-Date: 2015-12-03 09:55+0000\n"
+"PO-Revision-Date: 2015-12-05 21:56+0000\n"
 "Last-Translator: MiroslavR <miroslavr256@gmail.com>\n"
 "Language-Team: Slovak (http://www.transifex.com/widelands/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
@@ -268,7 +268,7 @@ msgid ""
 "have to undertake an expedition to the unknown seas."
 msgstr "Aj keď to môže trvať dlho, byť drahé a nebezpečné – ktovie, aké príšery sa ukrývajú pod morskou hladinou – inú možnosť nevidím: budeme musieť podstúpiť výpravu do neznámych vôd."
 
-#: TRANSLATORS This shall be the beginning of a poem
+#. TRANSLATORS: This shall be the beginning of a poem
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:138
 msgid "A trip by the sea, what fun it can be"
 msgstr "Výprava po mori zábave dvere otvorí"
