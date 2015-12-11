@@ -36,7 +36,8 @@
 class EditorInteractive;
 
 struct EditorHelp : public UI::UniqueWindow {
-	EditorHelp(EditorInteractive &, UI::UniqueWindow::Registry &);
+	EditorHelp(EditorInteractive&, UI::UniqueWindow::Registry&);
+
 private:
 	struct HelpEntry {
 		enum class Type {
@@ -44,13 +45,12 @@ private:
 			kTree
 		};
 
-		HelpEntry(const HelpEntry& other)
-			: HelpEntry(other.index, other.descname, other.icon) {
+		HelpEntry(const HelpEntry& other) : HelpEntry(other.index, other.descname, other.icon) {
 		}
 		HelpEntry(const Widelands::DescriptionIndex _index,
-								const std::string& _descname,
-								const Image* _icon)
-			: index(_index), descname(_descname), icon(_icon) {
+		          const std::string& _descname,
+		          const Image* _icon)
+		   : index(_index), descname(_descname), icon(_icon) {
 		}
 		Widelands::DescriptionIndex index;
 		std::string descname;
@@ -63,15 +63,15 @@ private:
 
 	struct HelpTab {
 		HelpTab(const std::string& _key,
-							 const std::string& _image_filename,
-							 const std::string& _tooltip,
-							 const std::string& _script_path,
-							 const EditorHelp::HelpEntry::Type _type)
-			: key(_key),
-			  image_filename(_image_filename),
-			  tooltip(_tooltip),
-			  script_path(_script_path),
-			  type(_type) {
+		        const std::string& _image_filename,
+		        const std::string& _tooltip,
+		        const std::string& _script_path,
+		        const EditorHelp::HelpEntry::Type _type)
+		   : key(_key),
+		     image_filename(_image_filename),
+		     tooltip(_tooltip),
+		     script_path(_script_path),
+		     type(_type) {
 		}
 		const std::string key;
 		const std::string image_filename;
@@ -80,7 +80,7 @@ private:
 		const EditorHelp::HelpEntry::Type type;
 	};
 
-	EditorInteractive & eia() const;
+	EditorInteractive& eia() const;
 
 	// Fill table of contents
 	void fill_entries(const char* key, std::vector<HelpEntry>& entries);
@@ -89,8 +89,8 @@ private:
 
 	// Update contents when an entry is selected
 	void entry_selected(const std::string& key,
-							  const std::string& script_path,
-							  const HelpEntry::Type& type);
+	                    const std::string& script_path,
+	                    const HelpEntry::Type& type);
 
 	// UI elements
 	UI::TabPanel tabs_;

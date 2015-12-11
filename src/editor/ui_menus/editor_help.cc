@@ -19,11 +19,8 @@
 
 #include "editor/ui_menus/editor_help.h"
 
-#include <algorithm>
-#include <cstring>
 #include <map>
 #include <memory>
-#include <set>
 #include <string>
 #include <vector>
 
@@ -34,11 +31,10 @@
 #include "graphic/graphic.h"
 #include "graphic/texture.h"
 #include "io/filesystem/layered_filesystem.h"
-#include "logic/world/world.h"
 #include "logic/world/terrain_description.h"
+#include "logic/world/world.h"
 #include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
-
 
 #define WINDOW_WIDTH std::min(700, g_gr->get_xres() - 40)
 #define WINDOW_HEIGHT std::min(550, g_gr->get_yres() - 40)
@@ -48,76 +44,74 @@ constexpr int kTabHeight = 35;
 
 using namespace Widelands;
 
-inline EditorInteractive & EditorHelp::eia() const {
+inline EditorInteractive& EditorHelp::eia() const {
 	return dynamic_cast<EditorInteractive&>(*get_parent());
 }
 
 namespace {
 const std::string heading(const std::string& text) {
 	return ((boost::format("<rt><p font-size=18 font-weight=bold font-color=D1D1D1>"
-								  "%s<br></p><p font-size=8> <br></p></rt>") %
-				text).str());
+	                       "%s<br></p><p font-size=8> <br></p></rt>") %
+	         text).str());
 }
 }  // namespace
 
-
 EditorHelp::EditorHelp(EditorInteractive& parent, UI::UniqueWindow::Registry& registry)
-	: UI::UniqueWindow(
-		  &parent, "encyclopedia", &registry, WINDOW_WIDTH, WINDOW_HEIGHT, _("Help")),
-	  tabs_(this, 0, 0, nullptr) {
+   : UI::UniqueWindow(&parent, "encyclopedia", &registry, WINDOW_WIDTH, WINDOW_HEIGHT, _("Help")),
+     tabs_(this, 0, 0, nullptr) {
 
 	const int contents_height = WINDOW_HEIGHT - kTabHeight - 2 * kPadding;
 	const int contents_width = WINDOW_WIDTH / 2 - 1.5 * kPadding;
 
 	std::vector<std::unique_ptr<HelpTab>> tab_definitions;
 
-	tab_definitions.push_back(std::unique_ptr<HelpTab>(
-		new HelpTab("terrains",
-								  "pics/editor_menu_tool_set_terrain.png",
-								  _("Terrains"),
-								  "scripting/editor/terrain_help.lua",
-								  HelpEntry::Type::kTerrain)));
+	tab_definitions.push_back(
+	   std::unique_ptr<HelpTab>(new HelpTab("terrains",
+	                                        "pics/editor_menu_tool_set_terrain.png",
+	                                        _("Terrains"),
+	                                        "scripting/editor/terrain_help.lua",
+	                                        HelpEntry::Type::kTerrain)));
 
-	tab_definitions.push_back(std::unique_ptr<HelpTab>(
-		new HelpTab("trees",
-								  "world/immovables/trees/alder/old/idle_0.png",
-								  _("Trees"),
-								  "scripting/editor/tree_help.lua",
-								  HelpEntry::Type::kTree)));
+	tab_definitions.push_back(
+	   std::unique_ptr<HelpTab>(new HelpTab("trees",
+	                                        "world/immovables/trees/alder/old/idle_0.png",
+	                                        _("Trees"),
+	                                        "scripting/editor/tree_help.lua",
+	                                        HelpEntry::Type::kTree)));
 
 	for (const auto& tab : tab_definitions) {
 		// Make sure that all paths exist
 		if (!g_fs->file_exists(tab->script_path)) {
 			throw wexception("Script path %s for tab %s does not exist!",
-								  tab->script_path.c_str(),
-								  tab->key.c_str());
+			                 tab->script_path.c_str(),
+			                 tab->key.c_str());
 		}
 		if (!g_fs->file_exists(tab->image_filename)) {
 			throw wexception("Image path %s for tab %s does not exist!",
-								  tab->image_filename.c_str(),
-								  tab->key.c_str());
+			                 tab->image_filename.c_str(),
+			                 tab->key.c_str());
 		}
 
 		wrapper_boxes_.insert(std::make_pair(
-			tab->key, std::unique_ptr<UI::Box>(new UI::Box(&tabs_, 0, 0, UI::Box::Horizontal))));
+		   tab->key, std::unique_ptr<UI::Box>(new UI::Box(&tabs_, 0, 0, UI::Box::Horizontal))));
 
 		boxes_.insert(
-			std::make_pair(tab->key,
-								std::unique_ptr<UI::Box>(new UI::Box(
-									wrapper_boxes_.at(tab->key).get(), 0, 0, UI::Box::Horizontal))));
+		   std::make_pair(tab->key,
+		                  std::unique_ptr<UI::Box>(new UI::Box(
+		                     wrapper_boxes_.at(tab->key).get(), 0, 0, UI::Box::Horizontal))));
 
 		lists_.insert(
-			std::make_pair(tab->key,
-								std::unique_ptr<UI::Listselect<Widelands::DescriptionIndex>>(
-									new UI::Listselect<Widelands::DescriptionIndex>(
-										boxes_.at(tab->key).get(), 0, 0, contents_width, contents_height))));
-		lists_.at(tab->key)->selected.connect(boost::bind(
-			&EditorHelp::entry_selected, this, tab->key, tab->script_path, tab->type));
+		   std::make_pair(tab->key,
+		                  std::unique_ptr<UI::Listselect<Widelands::DescriptionIndex>>(
+		                     new UI::Listselect<Widelands::DescriptionIndex>(
+		                        boxes_.at(tab->key).get(), 0, 0, contents_width, contents_height))));
+		lists_.at(tab->key)->selected.connect(
+		   boost::bind(&EditorHelp::entry_selected, this, tab->key, tab->script_path, tab->type));
 
 		contents_.insert(
-			std::make_pair(tab->key,
-								std::unique_ptr<UI::MultilineTextarea>(new UI::MultilineTextarea(
-									boxes_.at(tab->key).get(), 0, 0, contents_width, contents_height))));
+		   std::make_pair(tab->key,
+		                  std::unique_ptr<UI::MultilineTextarea>(new UI::MultilineTextarea(
+		                     boxes_.at(tab->key).get(), 0, 0, contents_width, contents_height))));
 
 		boxes_.at(tab->key)->add(lists_.at(tab->key).get(), UI::Align_Left);
 		boxes_.at(tab->key)->add_space(kPadding);
@@ -127,9 +121,9 @@ EditorHelp::EditorHelp(EditorInteractive& parent, UI::UniqueWindow::Registry& re
 		wrapper_boxes_.at(tab->key)->add(boxes_.at(tab->key).get(), UI::Align_Left);
 
 		tabs_.add("editor_help_" + tab->key,
-					 g_gr->images().get(tab->image_filename),
-					 wrapper_boxes_.at(tab->key).get(),
-					 tab->tooltip);
+		          g_gr->images().get(tab->image_filename),
+		          wrapper_boxes_.at(tab->key).get(),
+		          tab->tooltip);
 	}
 	tabs_.set_size(WINDOW_WIDTH, WINDOW_HEIGHT);
 
@@ -180,8 +174,8 @@ void EditorHelp::fill_trees() {
 }
 
 void EditorHelp::entry_selected(const std::string& key,
-													 const std::string& script_path,
-													 const HelpEntry::Type& type) {
+                                const std::string& script_path,
+                                const HelpEntry::Type& type) {
 	try {
 		std::unique_ptr<LuaTable> table(eia().egbase().lua().run_script(script_path));
 		std::unique_ptr<LuaCoroutine> cr(table->get_coroutine("func"));
@@ -190,13 +184,15 @@ void EditorHelp::entry_selected(const std::string& key,
 
 		switch (type) {
 		case (HelpEntry::Type::kTerrain): {
-			const TerrainDescription& descr = eia().egbase().world().terrain_descr(lists_.at(key)->get_selected());
+			const TerrainDescription& descr =
+			   eia().egbase().world().terrain_descr(lists_.at(key)->get_selected());
 			descname = descr.descname();
 			cr->push_arg(descr.name());
 			break;
 		}
 		case (HelpEntry::Type::kTree): {
-			const ImmovableDescr* descr = eia().egbase().world().get_immovable_descr(lists_.at(key)->get_selected());
+			const ImmovableDescr* descr =
+			   eia().egbase().world().get_immovable_descr(lists_.at(key)->get_selected());
 			descname = descr->descname();
 			cr->push_arg(descr->name());
 			break;
