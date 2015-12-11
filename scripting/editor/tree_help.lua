@@ -14,8 +14,8 @@ return {
       result = result .. rt(h2("Terrain affinity"))
       if (tree.has_terrain_affinity) then
 			result = result .. rt(p("Pickiness:" .. " " .. tree.pickiness))
-			result = result .. rt(p("Preferred fertility:" .. " " .. tree.preferred_fertility))
-			result = result .. rt(p("Preferred humidity:" .. " " .. tree.preferred_humidity))
+			result = result .. rt(p("Preferred fertility:" .. " " .. ("%2.1f%%"):bformat(100 * tree.preferred_fertility)))
+			result = result .. rt(p("Preferred humidity:" .. " " .. ("%2.1f%%"):bformat(100 * tree.preferred_humidity)))
 			result = result .. rt(p("Preferred temperature:" .. " " .. tree.preferred_temperature))
       end
       result = result .. rt(h2("Preferred terrains"))
@@ -23,7 +23,13 @@ return {
 			local terrain = wl.Editor():get_terrain_description(terrain_name)
 			local probability = terrain:probability_to_grow(tree_name)
 			if (probability > 0.01) then
-				result = result .. picture_li(terrain.representative_image, terrain.descname .. "<br>" .. ("%2.1f%%"):bformat(100 * probability))
+				result = result .. rt(h3(terrain.descname))
+				--result = result .. picture_li(terrain.representative_image, terrain.descname .. "<br>" .. ("%2.1f%%"):bformat(100 * probability))
+				result = result .. picture_li(terrain.representative_image,
+							"Fertility:" .. " " .. ("%2.1f%%"):bformat(100 * terrain.fertility) .. "<br>" ..
+							"Humidity:" .. " " .. ("%2.1f%%"):bformat(100 * terrain.humidity) .. "<br>" ..
+							"Temperature:" .. " " .. terrain.temperature)
+				result = result .. rt(p(("Probability to grow: %2.1f%%"):bformat(100 * probability)))
 			end
 		end
       return result
