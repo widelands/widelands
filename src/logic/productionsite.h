@@ -210,7 +210,7 @@ protected:
 protected:
 	struct State {
 		const ProductionProgram * program; ///< currently running program
-		int32_t  ip; ///< instruction pointer
+		size_t  ip; ///< instruction pointer
 		uint32_t phase; ///< micro-step index (instruction dependent)
 		uint32_t flags; ///< pfXXX flags
 
@@ -278,8 +278,8 @@ protected:  // TrainingSite must have access to this stuff
 	int32_t      m_program_time; ///< timer time
 	int32_t      m_post_timer;    ///< Time to schedule after ends
 
-	ProductionProgram::ActProduce::Items m_produced_wares;
-	ProductionProgram::ActProduce::Items m_recruited_workers;
+	BillOfMaterials m_produced_wares;
+	BillOfMaterials m_recruited_workers;
 	InputQueues m_input_queues; ///< input queues for all inputs
 	std::vector<bool>        m_statistics;
 	uint8_t                  m_last_stat_percent;

@@ -93,9 +93,9 @@ constexpr int kMaxJobs = 4;
 
 using namespace Widelands;
 
-DefaultAI::StrongImpl DefaultAI::strong_impl;
 DefaultAI::NormalImpl DefaultAI::normal_impl;
 DefaultAI::WeakImpl DefaultAI::weak_impl;
+DefaultAI::VeryWeakImpl DefaultAI::very_weak_impl;
 
 /// Constructor of DefaultAI
 DefaultAI::DefaultAI(Game& ggame, PlayerNumber const pid, DefaultAI::Type const t)
@@ -560,16 +560,16 @@ void DefaultAI::late_initialization() {
 		}
 
 	// Is total count of this building limited by AI mode?
-	if (type_ == DefaultAI::Type::kWeak && bh.get_weak_ai_limit() >= 0) {
-		bo.cnt_limit_by_aimode_ = bh.get_weak_ai_limit();
-		log (" %d: AI defensive mode: applying limit %d building(s) for %s\n",
+	if (type_ == DefaultAI::Type::kVeryWeak && bh.get_very_weak_ai_limit() >= 0) {
+		bo.cnt_limit_by_aimode_ = bh.get_very_weak_ai_limit();
+		log (" %d: AI 'very weak' mode: applying limit %d building(s) for %s\n",
 		player_number(),
 		bo.cnt_limit_by_aimode_,
 		bo.name);
 	}
-	if (type_ == DefaultAI::Type::kNormal && bh.get_normal_ai_limit() >= 0) {
-		bo.cnt_limit_by_aimode_ = bh.get_normal_ai_limit();
-		log (" %d: AI normal mode: applying limit %d building(s) for %s\n",
+	if (type_ == DefaultAI::Type::kWeak && bh.get_weak_ai_limit() >= 0) {
+		bo.cnt_limit_by_aimode_ = bh.get_weak_ai_limit();
+		log (" %d: AI 'weak' mode: applying limit %d building(s) for %s\n",
 		player_number(),
 		bo.cnt_limit_by_aimode_,
 		bo.name);
@@ -5194,12 +5194,12 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 		}
 	}
 
-	// defining treshold ratio of own_strenght/enemy's_strength
+	// defining treshold ratio of own_strength/enemy's_strength
 	uint32_t treshold_ratio = 100;
-	if (type_ == DefaultAI::Type::kStrong) {
+	if (type_ == DefaultAI::Type::kNormal) {
 		treshold_ratio = 80;
 	}
-	if (type_ == DefaultAI::Type::kWeak) {
+	if (type_ == DefaultAI::Type::kVeryWeak) {
 		treshold_ratio = 120;
 	}
 
@@ -5420,10 +5420,10 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 				}
 
 				// here is some differentiation based on "character" of a player
-				if (type_ == DefaultAI::Type::kNormal) {
+				if (type_ == DefaultAI::Type::kWeak) {
 					site->second.score -= 3;
 					site->second.score -= vacant_mil_positions_ / 8;
-				} else if (type_ == DefaultAI::Type::kWeak) {
+				} else if (type_ == DefaultAI::Type::kVeryWeak) {
 					site->second.score -= 6;
 					site->second.score -= vacant_mil_positions_ / 4;
 				} else {  //=AGRESSIVE
