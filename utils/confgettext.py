@@ -39,7 +39,7 @@ def firstr( str, what ):
     return -1
 
 def append_string( known_strings, array, string ):
-    if known_strings.has_key( string.str ):
+    if string.str in known_strings:
         i = known_strings[string.str]
         array[i].occurences += string.occurences
     else:
@@ -135,9 +135,6 @@ class Conf_GetText(object):
                         restline = restline.strip()
                     curstr.str = restline
                     append_string( known_strings, self.translatable_strings, curstr )
-
-        self.translatable_strings.sort( lambda str1,str2:
-                    cmp(str1.occurences[0].file,str2.occurences[0].file) )
     
     def toString(self):
         lines = []

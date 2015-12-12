@@ -13,11 +13,15 @@
 from glob import glob
 from itertools import takewhile
 import os
-import string
 import subprocess
 import sys
 from time import strftime,gmtime
-from enum import Enum
+
+try:
+    maketrans = "".maketrans
+except AttributeError:
+    # fallback for python2
+    from string import maketrans
 
 from confgettext import Conf_GetText
 
@@ -173,11 +177,11 @@ def pot_modify_header( potfile_in, potfile_out, header ):
     
     Note: potfile_in and potfile_out must not point to the same file!
     """
-    class State(Enum):
-        start = 0
-        possibly_empty_msgid = 1
-        search_for_empty_line = 2
-        header_traversed = 3
+    class State:
+        (start,
+         possibly_empty_msgid,
+         search_for_empty_line,
+         header_traversed) = range(4)
         
     st = State.start
     with open(potfile_in, "rt") as potin:
@@ -234,7 +238,7 @@ def do_compile( potfile, srcfiles ):
     
     # Find translatable strings in Lua files using xgettext
     xgettext = subprocess.Popen("xgettext %s --files-from=- --output=\"%s\"" % \
-        (LUAXGETTEXTOPTS, temp_potfile), shell=True, stdin=subprocess.PIPE)
+        (LUAXGETTEXTOPTS, temp_potfile), shell=True, stdin=subprocess.PIPE, universal_newlines=True)
     try:
         for fname in lua_files:
             xgettext.stdin.write(os.path.normpath(fname) + "\n")
@@ -267,7 +271,7 @@ def do_compile( potfile, srcfiles ):
         
         if (conf.found_something_to_translate):
             # Merge the conf POT with Lua POT
-            with open(potfile, "a") as p:
+            with open(potfile, "at") as p:
                 p.write("\n" + conf.toString())
                 
             msguniq_rv = os.system("msguniq \"%s\" -F --output-file=\"%s\"" % (potfile, potfile))
@@ -275,7 +279,7 @@ def do_compile( potfile, srcfiles ):
                 sys.stderr.write("msguniq exited with errorcode %i\n" % msguniq_rv)
                 return False
     elif (conf.found_something_to_translate):
-        with open(potfile, "w") as p:
+        with open(potfile, "wt") as p:
             p.write(HEAD + conf.toString())
 
     return True
@@ -289,7 +293,7 @@ def do_compile_src( potfile, srcfiles ):
     """
     # call xgettext and supply source filenames via stdin
     gettext_input = subprocess.Popen("xgettext %s --files-from=- --output=%s" % \
-            (XGETTEXTOPTS, potfile), shell=True, stdin=subprocess.PIPE).stdin
+            (XGETTEXTOPTS, potfile), shell=True, stdin=subprocess.PIPE, universal_newlines=True).stdin
     try:
         for one_pattern in srcfiles:
             # 'normpath' is necessary for windows ('/' vs. '\')
@@ -342,7 +346,7 @@ def do_update_potfiles():
         # Generate .pot catalogs
         dangerous_chars = "'\" " # Those chars are replaced via '_'
         for pot, srcfiles in potfiles:
-            pot = pot.lower().translate(string.maketrans(dangerous_chars, len(dangerous_chars)*"_"))
+            pot = pot.lower().translate(maketrans(dangerous_chars, len(dangerous_chars)*"_"))
             path = os.path.normpath("po/" + os.path.dirname(pot))
             do_makedirs(path)
             oldcwd = os.getcwd()
