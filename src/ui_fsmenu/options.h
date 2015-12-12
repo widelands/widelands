@@ -41,32 +41,41 @@ class Section;
 class OptionsCtrl {
 public:
 	struct OptionsStruct {
-		// NOCOM reorder these once we have decided on where everything goes.
+
+		// Interface options
 		int32_t xres;
 		int32_t yres;
-		bool inputgrab;
 		bool fullscreen;
-		bool single_watchwin;
-		bool auto_roadbuild_mode;
-		bool show_warea;
+		bool inputgrab;
+		uint32_t maxfps;
+
+		// Windows options
 		bool snap_win_overlap_only;
 		bool dock_windows_to_edges;
+		int32_t panel_snap_distance;
+		int32_t border_snap_distance;
+
+		// Sound options
 		bool music;
 		bool fx;
-		std::string language;
-		int32_t autosave; // autosave interval in minutes
-		int32_t rolling_autosave; //number of file to use for rolling autosave
-		uint32_t maxfps;
-		uint32_t remove_replays;
-		bool remove_syncstreams;
-		bool transparent_chat;
-
-		// advanced options
 		bool message_sound;
+
+		// Saving options
+		int32_t autosave; // autosave interval in minutes
+		// NOCOM (GunChleoc): Add GUI and save
+		int32_t rolling_autosave; // number of file to use for rolling autosave
+		uint32_t remove_replays;
 		bool nozip;
-		std::string ui_font;
-		int32_t border_snap_distance;
-		int32_t panel_snap_distance;
+		bool remove_syncstreams;
+
+		// Game options
+		bool auto_roadbuild_mode;
+		bool show_warea;
+		bool transparent_chat;
+		bool single_watchwin;
+
+		// Language options
+		std::string language;
 
 		// Last tab for reloading the options menu
 		uint32_t active_tab;
