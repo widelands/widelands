@@ -335,6 +335,9 @@ private:
 	uint8_t ts_advanced_const_count_;
 	uint8_t ts_without_trainers_;
 
+	// This stores highest priority for new buildings except for militarysites
+	int32_t highest_nonmil_prio_;
+
 	// this is helping counter to track how many scheduler tasks are too delayed
 	// the purpose is to print out a warning that the game is pacing too fast
 	int32_t scheduler_delay_counter_;
