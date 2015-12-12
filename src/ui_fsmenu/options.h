@@ -21,6 +21,7 @@
 #define WL_UI_FSMENU_OPTIONS_H
 
 #include <cstring>
+#include <memory>
 #include <string>
 #include <vector>
 
@@ -72,13 +73,12 @@ public:
 	};
 
 	OptionsCtrl(Section &);
-	~OptionsCtrl();
 	void handle_menu();
 	OptionsCtrl::OptionsStruct options_struct(uint32_t active_tab);
 	void save_options();
 private:
 	Section & opt_section_;
-	FullscreenMenuOptions * opt_dialog_;
+	std::unique_ptr<FullscreenMenuOptions> opt_dialog_;
 };
 
 /**

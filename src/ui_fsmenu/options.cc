@@ -506,13 +506,9 @@ OptionsCtrl::OptionsStruct FullscreenMenuOptions::get_values() {
  * Handles communication between window class and options
  */
 OptionsCtrl::OptionsCtrl(Section & s)
-: opt_section_(s), opt_dialog_(new FullscreenMenuOptions(options_struct(0)))
+: opt_section_(s), opt_dialog_(std::unique_ptr<FullscreenMenuOptions>(new FullscreenMenuOptions(options_struct(0))))
 {
 	handle_menu();
-}
-
-OptionsCtrl::~OptionsCtrl() {
-	delete opt_dialog_; // NOCOM unique_ptr
 }
 
 void OptionsCtrl::handle_menu()
@@ -524,9 +520,7 @@ void OptionsCtrl::handle_menu()
 		uint32_t active_tab = opt_dialog_->get_values().active_tab;
 		g_gr->change_resolution(opt_dialog_->get_values().xres, opt_dialog_->get_values().yres);
 		g_gr->set_fullscreen(opt_dialog_->get_values().fullscreen);
-
-		delete opt_dialog_;
-		opt_dialog_ = new FullscreenMenuOptions(options_struct(active_tab));
+		opt_dialog_.reset(new FullscreenMenuOptions(options_struct(active_tab)));
 		handle_menu(); // Restart general options menu
 	}
 }
