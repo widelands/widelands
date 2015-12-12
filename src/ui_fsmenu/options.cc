@@ -197,6 +197,12 @@ FullscreenMenuOptions::FullscreenMenuOptions
 		 ngettext("minute", "minutes", opt.autosave / 60),
 		 g_gr->images().get("pics/but3.png"), true),
 
+	sb_rolling_autosave_
+		(&box_saving_, 0, 0, column_width_, 240,
+		 opt.rolling_autosave, 1, 20, _("Maximum number of autosave files"),
+		 "",
+		 g_gr->images().get("pics/but3.png"), true),
+
 	sb_remove_replays_
 		(&box_saving_, 0, 0, column_width_, 240,
 		 opt.remove_replays, 0, 365, _("Remove replays older than:"),
@@ -272,6 +278,7 @@ FullscreenMenuOptions::FullscreenMenuOptions
 
 	// Saving
 	box_saving_.add(&sb_autosave_, UI::Align_Left);
+	box_saving_.add(&sb_rolling_autosave_, UI::Align_Left);
 	box_saving_.add(&sb_remove_replays_, UI::Align_Left);
 	box_saving_.add(&nozip_, UI::Align_Left);
 	box_saving_.add(&remove_syncstreams_, UI::Align_Left);
@@ -500,7 +507,7 @@ OptionsCtrl::OptionsStruct FullscreenMenuOptions::get_values() {
 
 	// Saving options
 	os_.autosave              = sb_autosave_.get_value();
-	// NOCOM rolling autosave
+	os_.rolling_autosave      = sb_rolling_autosave_.get_value();
 	os_.remove_replays        = sb_remove_replays_.get_value();
 	os_.nozip                 = nozip_.get_state();
 	os_.remove_syncstreams    = remove_syncstreams_.get_state();

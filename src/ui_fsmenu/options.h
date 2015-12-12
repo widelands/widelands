@@ -62,7 +62,6 @@ public:
 
 		// Saving options
 		int32_t autosave; // autosave interval in minutes
-		// NOCOM (GunChleoc): Add GUI and save
 		int32_t rolling_autosave; // number of file to use for rolling autosave
 		uint32_t remove_replays;
 		bool nozip;
@@ -152,6 +151,7 @@ private:
 
 	// Saving options
 	UI::SpinBox                 sb_autosave_;
+	UI::SpinBox                 sb_rolling_autosave_;
 	UI::SpinBox                 sb_remove_replays_;
 	UI::Checkbox                nozip_;
 	UI::Checkbox                remove_syncstreams_;
