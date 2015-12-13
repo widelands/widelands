@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-23 09:42+0000\n"
+"POT-Creation-Date: 2015-12-11 07:41+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -14,52 +14,52 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../../scripting/win_condition_texts.lua:2
+#: ../../scripting/win_condition_texts.lua:4
 msgid ""
 "Congratulations!"
 msgstr ""
 
-#: ../../scripting/win_condition_texts.lua:3
+#: ../../scripting/win_condition_texts.lua:5
 msgid ""
 "You have won this game!"
 msgstr ""
 
-#: ../../scripting/win_condition_texts.lua:7
+#: ../../scripting/win_condition_texts.lua:9
 msgid ""
 "You are defeated!"
 msgstr ""
 
-#: ../../scripting/win_condition_texts.lua:8
+#: ../../scripting/win_condition_texts.lua:10
 msgid ""
 "You lost your last warehouse and are therefore defeated. You may continue as spectator if you want."
 msgstr ""
 
-#: ../../scripting/win_condition_texts.lua:12
+#: ../../scripting/win_condition_texts.lua:14
 msgid ""
 "You won"
 msgstr ""
 
-#: ../../scripting/win_condition_texts.lua:13
+#: ../../scripting/win_condition_texts.lua:15
 msgid ""
 "You are the winner!"
 msgstr ""
 
-#: ../../scripting/win_condition_texts.lua:17
+#: ../../scripting/win_condition_texts.lua:19
 msgid ""
 "You lost"
 msgstr ""
 
-#: ../../scripting/win_condition_texts.lua:18
+#: ../../scripting/win_condition_texts.lua:20
 msgid ""
 "You’ve lost this game!"
 msgstr ""
 
-#: ../../scripting/win_condition_texts.lua:22
+#: ../../scripting/win_condition_texts.lua:24
 msgid ""
 "Status"
 msgstr ""
 
-#: ../../scripting/win_condition_texts.lua:23
+#: ../../scripting/win_condition_texts.lua:25
 msgid ""
 "Player overview:"
 msgstr ""

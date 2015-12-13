@@ -5,7 +5,7 @@ tribes:new_productionsite_type {
    name = "barbarians_well",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("barbarians_building", "Well"),
-   directory = dirname,
+   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "small",
 
@@ -62,7 +62,9 @@ tribes:new_productionsite_type {
    },
 
    out_of_resource_notification = {
-      title = _"Out of Water",
+      -- Translators: Short for "Out of ..." for a resource
+      title = _"No Water",
+      heading = _"Out of Water",
       message = pgettext("barbarians_building", "The carrier working at this well can’t find any water in his work area."),
       productivity_threshold = 33
    },

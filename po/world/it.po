@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-18 08:43+0000\n"
-"PO-Revision-Date: 2015-11-18 08:44+0000\n"
+"POT-Creation-Date: 2015-12-07 20:16+0000\n"
+"PO-Revision-Date: 2015-12-08 15:20+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
@@ -631,7 +631,7 @@ msgstr "Varie"
 
 #: ../../world/init.lua:17
 msgid "Artifacts"
-msgstr ""
+msgstr "Artefatto"
 
 #: ../../world/init.lua:17
 msgid "These immovables are used by the win condition “Artifacts”."

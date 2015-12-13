@@ -7,13 +7,14 @@
 # Anton Khabarov <2233009@gmail.com>, 2015
 # dr&mx <dronmax@gmail.com>, 2015
 # Yuriy Sokolov <lention@mail.ru>, 2015
+# Федор <Lunar-energy@ya.ru>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-18 08:43+0000\n"
-"PO-Revision-Date: 2015-11-18 08:43+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2015-11-23 09:42+0000\n"
+"PO-Revision-Date: 2015-11-26 14:00+0000\n"
+"Last-Translator: Федор <Lunar-energy@ya.ru>\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -56,15 +57,15 @@ msgstr "Доберитесь до скал на северо-востоке и �
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:42
 msgid "Start building mines on the mountain"
-msgstr "Начать строить шахты в горе"
+msgstr "Начните строить шахты в горе"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:44
 msgid "Build coal and iron mines"
-msgstr ""
+msgstr "Постройте угольные шахты и железные рудники."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:45
 msgid "Build a coal mine and an iron mine."
-msgstr ""
+msgstr "Постройте угольную шахту и железный рудник."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:46
 msgid ""
@@ -114,7 +115,7 @@ msgstr "вода"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:57
 msgid "nothing was found here"
-msgstr "ничего не найдено"
+msgstr "ничего не найдено здесь"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:59
 msgid ""
@@ -201,7 +202,7 @@ msgid ""
 "beneath it; then it must be enhanced to a deep mine in order to keep it "
 "working properly. To enhance a building, choose it and then click the "
 "appropriate button in the appearing window."
-msgstr ""
+msgstr "Обычные шахты могут выкопать около трети всех ресурсов, которые лежат под ними; затем они должны быть повышены до глубоких шахт для того, чтобы сохранить работу должным образом. Чтобы улучшить здание, выберите его и нажмите соответствующую кнопку в появившемся окне."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:96
 msgid ""
@@ -862,7 +863,7 @@ msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:472
 msgid "Khantrukh steps in…"
-msgstr ""
+msgstr "Хантрух идет в..."
 
 #. TRANSLATORS: Khantrukh
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:474
@@ -892,7 +893,7 @@ msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:489
 msgid "We Need Oxen!"
-msgstr ""
+msgstr "Нам нужны волы!"
 
 #. TRANSLATORS: Khantrukh
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:492

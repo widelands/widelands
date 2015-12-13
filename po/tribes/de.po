@@ -16,8 +16,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-17 08:09+0000\n"
-"PO-Revision-Date: 2015-11-17 12:41+0000\n"
+"POT-Creation-Date: 2015-12-07 20:16+0000\n"
+"PO-Revision-Date: 2015-12-09 06:21+0000\n"
 "Last-Translator: Venatrix\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -437,13 +437,13 @@ msgstr "Rüstungsschmiede"
 #: ../../tribes/buildings/productionsites/atlanteans/farm/init.lua:51
 #: ../../tribes/buildings/productionsites/atlanteans/mill/init.lua:57
 #: ../../tribes/buildings/productionsites/atlanteans/quarry/init.lua:45
-#: ../../tribes/buildings/productionsites/atlanteans/shipyard/init.lua:67
-#: ../../tribes/buildings/productionsites/atlanteans/smelting_works/init.lua:56
-#: ../../tribes/buildings/productionsites/atlanteans/smokery/init.lua:58
+#: ../../tribes/buildings/productionsites/atlanteans/shipyard/init.lua:68
+#: ../../tribes/buildings/productionsites/atlanteans/smelting_works/init.lua:58
+#: ../../tribes/buildings/productionsites/atlanteans/smokery/init.lua:60
 #: ../../tribes/buildings/productionsites/atlanteans/spiderfarm/init.lua:55
 #: ../../tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:68
 #: ../../tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua:63
-#: ../../tribes/buildings/productionsites/atlanteans/weaving_mill/init.lua:58
+#: ../../tribes/buildings/productionsites/atlanteans/weaving_mill/init.lua:60
 #: ../../tribes/buildings/productionsites/atlanteans/well/init.lua:52
 #: ../../tribes/buildings/productionsites/barbarians/ax_workshop/init.lua:69
 #: ../../tribes/buildings/productionsites/barbarians/big_inn/init.lua:63
@@ -454,8 +454,8 @@ msgstr "Rüstungsschmiede"
 #: ../../tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:79
 #: ../../tribes/buildings/productionsites/barbarians/quarry/init.lua:54
 #: ../../tribes/buildings/productionsites/barbarians/reed_yard/init.lua:46
-#: ../../tribes/buildings/productionsites/barbarians/shipyard/init.lua:66
-#: ../../tribes/buildings/productionsites/barbarians/smelting_works/init.lua:59
+#: ../../tribes/buildings/productionsites/barbarians/shipyard/init.lua:67
+#: ../../tribes/buildings/productionsites/barbarians/smelting_works/init.lua:61
 #: ../../tribes/buildings/productionsites/barbarians/warmill/init.lua:73
 #: ../../tribes/buildings/productionsites/barbarians/well/init.lua:54
 #: ../../tribes/buildings/productionsites/empire/armorsmithy/init.lua:73
@@ -463,8 +463,8 @@ msgstr "Rüstungsschmiede"
 #: ../../tribes/buildings/productionsites/empire/inn/init.lua:57
 #: ../../tribes/buildings/productionsites/empire/marblemine/init.lua:63
 #: ../../tribes/buildings/productionsites/empire/quarry/init.lua:46
-#: ../../tribes/buildings/productionsites/empire/shipyard/init.lua:66
-#: ../../tribes/buildings/productionsites/empire/smelting_works/init.lua:62
+#: ../../tribes/buildings/productionsites/empire/shipyard/init.lua:67
+#: ../../tribes/buildings/productionsites/empire/smelting_works/init.lua:64
 #: ../../tribes/buildings/productionsites/empire/toolsmithy/init.lua:67
 #: ../../tribes/buildings/productionsites/empire/vineyard/init.lua:47
 #: ../../tribes/buildings/productionsites/empire/weaponsmithy/init.lua:69
@@ -526,16 +526,25 @@ msgstr "Das Pflanzen von Dunkelrüben"
 msgid "harvesting blackroot"
 msgstr "Das Ernten von Dunkelrüben"
 
-#: ../../tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:73
+#: ../../tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:74
 #: ../../tribes/buildings/productionsites/atlanteans/farm/init.lua:77
 #: ../../tribes/buildings/productionsites/barbarians/farm/init.lua:89
-#: ../../tribes/buildings/productionsites/barbarians/reed_yard/init.lua:71
+#: ../../tribes/buildings/productionsites/barbarians/reed_yard/init.lua:72
 #: ../../tribes/buildings/productionsites/empire/farm/init.lua:75
-#: ../../tribes/buildings/productionsites/empire/vineyard/init.lua:72
+#: ../../tribes/buildings/productionsites/empire/vineyard/init.lua:73
+msgid "No Fields"
+msgstr "Keine Felder"
+
+#: ../../tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:75
+#: ../../tribes/buildings/productionsites/atlanteans/farm/init.lua:78
+#: ../../tribes/buildings/productionsites/barbarians/farm/init.lua:90
+#: ../../tribes/buildings/productionsites/barbarians/reed_yard/init.lua:73
+#: ../../tribes/buildings/productionsites/empire/farm/init.lua:76
+#: ../../tribes/buildings/productionsites/empire/vineyard/init.lua:74
 msgid "Out of Fields"
 msgstr "Keine Felder"
 
-#: ../../tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:74
+#: ../../tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:76
 msgctxt "atlanteans_building"
 msgid ""
 "The blackroot farmer working at this blackroot farm has no cleared soil to "
@@ -595,16 +604,25 @@ msgstr "Kohlemine"
 msgid "mining coal"
 msgstr "Das Schürfen von Kohle"
 
-#: ../../tribes/buildings/productionsites/atlanteans/coalmine/init.lua:79
-#: ../../tribes/buildings/productionsites/barbarians/coalmine/init.lua:77
-#: ../../tribes/buildings/productionsites/barbarians/coalmine_deep/init.lua:80
-#: ../../tribes/buildings/productionsites/barbarians/coalmine_deeper/init.lua:79
-#: ../../tribes/buildings/productionsites/empire/coalmine/init.lua:77
-#: ../../tribes/buildings/productionsites/empire/coalmine_deep/init.lua:75
+#: ../../tribes/buildings/productionsites/atlanteans/coalmine/init.lua:80
+#: ../../tribes/buildings/productionsites/barbarians/coalmine/init.lua:78
+#: ../../tribes/buildings/productionsites/barbarians/coalmine_deep/init.lua:81
+#: ../../tribes/buildings/productionsites/barbarians/coalmine_deeper/init.lua:80
+#: ../../tribes/buildings/productionsites/empire/coalmine/init.lua:78
+#: ../../tribes/buildings/productionsites/empire/coalmine_deep/init.lua:76
+msgid "No Coal"
+msgstr "Keine Kohle"
+
+#: ../../tribes/buildings/productionsites/atlanteans/coalmine/init.lua:81
+#: ../../tribes/buildings/productionsites/barbarians/coalmine/init.lua:79
+#: ../../tribes/buildings/productionsites/barbarians/coalmine_deep/init.lua:82
+#: ../../tribes/buildings/productionsites/barbarians/coalmine_deeper/init.lua:81
+#: ../../tribes/buildings/productionsites/empire/coalmine/init.lua:79
+#: ../../tribes/buildings/productionsites/empire/coalmine_deep/init.lua:77
 msgid "Main Coal Vein Exhausted"
 msgstr "Hauptkohleader erschöpft"
 
-#: ../../tribes/buildings/productionsites/atlanteans/coalmine/init.lua:81
+#: ../../tribes/buildings/productionsites/atlanteans/coalmine/init.lua:83
 msgctxt "atlanteans_building"
 msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -634,11 +652,15 @@ msgstr "Das Abbauen von Bergkristall"
 msgid "mining diamonds"
 msgstr "Das Abbauen von Diamanten"
 
-#: ../../tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:130
+#: ../../tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:131
+msgid "No Crystal"
+msgstr "Keine Edelsteine"
+
+#: ../../tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:132
 msgid "Main Crystal Vein Exhausted"
 msgstr "Hauptkristallader erschöpft"
 
-#: ../../tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:132
+#: ../../tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:134
 msgctxt "atlanteans_building"
 msgid ""
 "This crystal mine’s main vein is exhausted. Expect strongly diminished "
@@ -664,28 +686,28 @@ msgid "Farm"
 msgstr "Bauernhof"
 
 #. TRANSLATORS: Completed/Skipped/Did not start planting corn because ...
-#: ../../tribes/buildings/productionsites/atlanteans/farm/init.lua:61
+#: ../../tribes/buildings/productionsites/atlanteans/farm/init.lua:60
 msgid "planting corn"
 msgstr "Das Pflanzen von Mais"
 
 #. TRANSLATORS: Completed/Skipped/Did not start harvesting corn because ...
-#: ../../tribes/buildings/productionsites/atlanteans/farm/init.lua:69
+#: ../../tribes/buildings/productionsites/atlanteans/farm/init.lua:68
 msgid "harvesting corn"
 msgstr "Das Ernten von Mais"
 
-#: ../../tribes/buildings/productionsites/atlanteans/farm/init.lua:78
+#: ../../tribes/buildings/productionsites/atlanteans/farm/init.lua:79
 msgctxt "atlanteans_building"
 msgid ""
 "The farmer working at this farm has no cleared soil to plant his seeds."
 msgstr "Der Bauer in diesem Bauernhof hat keinen freien Platz, um Getreide zu säen."
 
-#: ../../tribes/buildings/productionsites/barbarians/farm/init.lua:90
+#: ../../tribes/buildings/productionsites/barbarians/farm/init.lua:91
 msgctxt "barbarians_building"
 msgid ""
 "The farmer working at this farm has no cleared soil to plant his seeds."
 msgstr "Der Bauer in diesem Bauernhof hat keinen freien Platz, um Getreide zu säen."
 
-#: ../../tribes/buildings/productionsites/empire/farm/init.lua:76
+#: ../../tribes/buildings/productionsites/empire/farm/init.lua:77
 msgctxt "empire_building"
 msgid ""
 "The farmer working at this farm has no cleared soil to plant his seeds."
@@ -721,13 +743,19 @@ msgstr "Fischerhaus"
 msgid "fishing"
 msgstr "Das Fischen"
 
-#: ../../tribes/buildings/productionsites/atlanteans/fishers_house/init.lua:53
-#: ../../tribes/buildings/productionsites/barbarians/fishers_hut/init.lua:61
-#: ../../tribes/buildings/productionsites/empire/fishers_house/init.lua:53
+#: ../../tribes/buildings/productionsites/atlanteans/fishers_house/init.lua:54
+#: ../../tribes/buildings/productionsites/barbarians/fishers_hut/init.lua:62
+#: ../../tribes/buildings/productionsites/empire/fishers_house/init.lua:54
+msgid "No Fish"
+msgstr "Kein Fisch"
+
+#: ../../tribes/buildings/productionsites/atlanteans/fishers_house/init.lua:55
+#: ../../tribes/buildings/productionsites/barbarians/fishers_hut/init.lua:63
+#: ../../tribes/buildings/productionsites/empire/fishers_house/init.lua:55
 msgid "Out of Fish"
 msgstr "Kein Fisch"
 
-#: ../../tribes/buildings/productionsites/atlanteans/fishers_house/init.lua:54
+#: ../../tribes/buildings/productionsites/atlanteans/fishers_house/init.lua:56
 msgctxt "atlanteans_building"
 msgid ""
 "The fisher working out of this fisher’s house can’t find any fish in his "
@@ -793,16 +821,25 @@ msgstr "Goldmine"
 msgid "mining gold"
 msgstr "Das Schürfen von Gold"
 
-#: ../../tribes/buildings/productionsites/atlanteans/goldmine/init.lua:79
-#: ../../tribes/buildings/productionsites/barbarians/goldmine/init.lua:77
-#: ../../tribes/buildings/productionsites/barbarians/goldmine_deep/init.lua:80
-#: ../../tribes/buildings/productionsites/barbarians/goldmine_deeper/init.lua:79
-#: ../../tribes/buildings/productionsites/empire/goldmine/init.lua:77
-#: ../../tribes/buildings/productionsites/empire/goldmine_deep/init.lua:75
+#: ../../tribes/buildings/productionsites/atlanteans/goldmine/init.lua:80
+#: ../../tribes/buildings/productionsites/barbarians/goldmine/init.lua:78
+#: ../../tribes/buildings/productionsites/barbarians/goldmine_deep/init.lua:81
+#: ../../tribes/buildings/productionsites/barbarians/goldmine_deeper/init.lua:80
+#: ../../tribes/buildings/productionsites/empire/goldmine/init.lua:78
+#: ../../tribes/buildings/productionsites/empire/goldmine_deep/init.lua:76
+msgid "No Gold"
+msgstr "Kein Gold"
+
+#: ../../tribes/buildings/productionsites/atlanteans/goldmine/init.lua:81
+#: ../../tribes/buildings/productionsites/barbarians/goldmine/init.lua:79
+#: ../../tribes/buildings/productionsites/barbarians/goldmine_deep/init.lua:82
+#: ../../tribes/buildings/productionsites/barbarians/goldmine_deeper/init.lua:81
+#: ../../tribes/buildings/productionsites/empire/goldmine/init.lua:79
+#: ../../tribes/buildings/productionsites/empire/goldmine_deep/init.lua:77
 msgid "Main Gold Vein Exhausted"
 msgstr "Hauptgoldader erschöpft"
 
-#: ../../tribes/buildings/productionsites/atlanteans/goldmine/init.lua:81
+#: ../../tribes/buildings/productionsites/atlanteans/goldmine/init.lua:83
 msgctxt "atlanteans_building"
 msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -839,15 +876,21 @@ msgstr "Jagdhaus"
 msgid "hunting"
 msgstr "Das Jagen"
 
-#. TRANSLATORS: "Game" means animals that you can hunt
 #: ../../tribes/buildings/productionsites/atlanteans/hunters_house/init.lua:53
 #: ../../tribes/buildings/productionsites/barbarians/hunters_hut/init.lua:63
 #: ../../tribes/buildings/productionsites/empire/hunters_house/init.lua:51
+msgid "No Game"
+msgstr "Kein Wild"
+
+#. TRANSLATORS: "Game" means animals that you can hunt
+#: ../../tribes/buildings/productionsites/atlanteans/hunters_house/init.lua:55
+#: ../../tribes/buildings/productionsites/barbarians/hunters_hut/init.lua:65
+#: ../../tribes/buildings/productionsites/empire/hunters_house/init.lua:53
 msgid "Out of Game"
 msgstr "Keine Tiere"
 
 #. TRANSLATORS: "game" means animals that you can hunt
-#: ../../tribes/buildings/productionsites/atlanteans/hunters_house/init.lua:55
+#: ../../tribes/buildings/productionsites/atlanteans/hunters_house/init.lua:57
 msgctxt "atlanteans_building"
 msgid ""
 "The hunter working out of this hunter’s house can’t find any game in his "
@@ -855,7 +898,7 @@ msgid ""
 msgstr "Der Jäger in diesem Jagdhaus kann kein Wild in seinem Jagdgebiet finden."
 
 #. TRANSLATORS: "game" means animals that you can hunt
-#: ../../tribes/buildings/productionsites/empire/hunters_house/init.lua:53
+#: ../../tribes/buildings/productionsites/empire/hunters_house/init.lua:55
 msgctxt "empire_building"
 msgid ""
 "The hunter working out of this hunter’s house can’t find any game in his "
@@ -890,16 +933,25 @@ msgstr "Eisenerzmine"
 msgid "mining iron"
 msgstr "Das Schürfen von Eisen"
 
-#: ../../tribes/buildings/productionsites/atlanteans/ironmine/init.lua:79
-#: ../../tribes/buildings/productionsites/barbarians/ironmine/init.lua:77
-#: ../../tribes/buildings/productionsites/barbarians/ironmine_deep/init.lua:80
-#: ../../tribes/buildings/productionsites/barbarians/ironmine_deeper/init.lua:82
-#: ../../tribes/buildings/productionsites/empire/ironmine/init.lua:77
-#: ../../tribes/buildings/productionsites/empire/ironmine_deep/init.lua:75
+#: ../../tribes/buildings/productionsites/atlanteans/ironmine/init.lua:80
+#: ../../tribes/buildings/productionsites/barbarians/ironmine/init.lua:78
+#: ../../tribes/buildings/productionsites/barbarians/ironmine_deep/init.lua:81
+#: ../../tribes/buildings/productionsites/barbarians/ironmine_deeper/init.lua:83
+#: ../../tribes/buildings/productionsites/empire/ironmine/init.lua:78
+#: ../../tribes/buildings/productionsites/empire/ironmine_deep/init.lua:76
+msgid "No Iron"
+msgstr "Kein Eisen"
+
+#: ../../tribes/buildings/productionsites/atlanteans/ironmine/init.lua:81
+#: ../../tribes/buildings/productionsites/barbarians/ironmine/init.lua:79
+#: ../../tribes/buildings/productionsites/barbarians/ironmine_deep/init.lua:82
+#: ../../tribes/buildings/productionsites/barbarians/ironmine_deeper/init.lua:84
+#: ../../tribes/buildings/productionsites/empire/ironmine/init.lua:79
+#: ../../tribes/buildings/productionsites/empire/ironmine_deep/init.lua:77
 msgid "Main Iron Vein Exhausted"
 msgstr "Haupteisenader erschöpft"
 
-#: ../../tribes/buildings/productionsites/atlanteans/ironmine/init.lua:81
+#: ../../tribes/buildings/productionsites/atlanteans/ironmine/init.lua:83
 msgctxt "atlanteans_building"
 msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -953,13 +1005,19 @@ msgstr "Steinbruch"
 msgid "quarrying granite"
 msgstr "Das Abbauen von Stein"
 
-#: ../../tribes/buildings/productionsites/atlanteans/quarry/init.lua:65
-#: ../../tribes/buildings/productionsites/barbarians/quarry/init.lua:74
-#: ../../tribes/buildings/productionsites/empire/quarry/init.lua:80
+#: ../../tribes/buildings/productionsites/atlanteans/quarry/init.lua:66
+#: ../../tribes/buildings/productionsites/barbarians/quarry/init.lua:75
+#: ../../tribes/buildings/productionsites/empire/quarry/init.lua:81
+msgid "No Rocks"
+msgstr "Keine Felsen"
+
+#: ../../tribes/buildings/productionsites/atlanteans/quarry/init.lua:67
+#: ../../tribes/buildings/productionsites/barbarians/quarry/init.lua:76
+#: ../../tribes/buildings/productionsites/empire/quarry/init.lua:82
 msgid "Out of Rocks"
 msgstr "Keine Felsen"
 
-#: ../../tribes/buildings/productionsites/atlanteans/quarry/init.lua:66
+#: ../../tribes/buildings/productionsites/atlanteans/quarry/init.lua:68
 msgctxt "atlanteans_building"
 msgid ""
 "The stonecutter working at this quarry can’t find any rocks in his work "
@@ -979,8 +1037,8 @@ msgid "Sawmill"
 msgstr "Sägewerk"
 
 #. TRANSLATORS: Completed/Skipped/Did not start sawing logs because ...
-#: ../../tribes/buildings/productionsites/atlanteans/sawmill/init.lua:54
-#: ../../tribes/buildings/productionsites/empire/sawmill/init.lua:54
+#: ../../tribes/buildings/productionsites/atlanteans/sawmill/init.lua:56
+#: ../../tribes/buildings/productionsites/empire/sawmill/init.lua:56
 msgid "sawing logs"
 msgstr "Das Zersägen von Stämmen"
 
@@ -1023,9 +1081,9 @@ msgstr "Werft"
 
 #. TRANSLATORS: Completed/Skipped/Did not start constructing a ship because
 #. ...
-#: ../../tribes/buildings/productionsites/atlanteans/shipyard/init.lua:76
-#: ../../tribes/buildings/productionsites/barbarians/shipyard/init.lua:75
-#: ../../tribes/buildings/productionsites/empire/shipyard/init.lua:75
+#: ../../tribes/buildings/productionsites/atlanteans/shipyard/init.lua:77
+#: ../../tribes/buildings/productionsites/barbarians/shipyard/init.lua:76
+#: ../../tribes/buildings/productionsites/empire/shipyard/init.lua:76
 msgid "constructing a ship"
 msgstr "Das Bauen eines Schiffs"
 
@@ -1048,16 +1106,16 @@ msgid "Smelting Works"
 msgstr "Hochofen"
 
 #. TRANSLATORS: Completed/Skipped/Did not start smelting iron because ...
-#: ../../tribes/buildings/productionsites/atlanteans/smelting_works/init.lua:66
-#: ../../tribes/buildings/productionsites/barbarians/smelting_works/init.lua:69
-#: ../../tribes/buildings/productionsites/empire/smelting_works/init.lua:72
+#: ../../tribes/buildings/productionsites/atlanteans/smelting_works/init.lua:68
+#: ../../tribes/buildings/productionsites/barbarians/smelting_works/init.lua:71
+#: ../../tribes/buildings/productionsites/empire/smelting_works/init.lua:74
 msgid "smelting iron"
 msgstr "Das Verhütten von Eisen"
 
 #. TRANSLATORS: Completed/Skipped/Did not start smelting gold because ...
-#: ../../tribes/buildings/productionsites/atlanteans/smelting_works/init.lua:77
-#: ../../tribes/buildings/productionsites/barbarians/smelting_works/init.lua:80
-#: ../../tribes/buildings/productionsites/empire/smelting_works/init.lua:83
+#: ../../tribes/buildings/productionsites/atlanteans/smelting_works/init.lua:79
+#: ../../tribes/buildings/productionsites/barbarians/smelting_works/init.lua:82
+#: ../../tribes/buildings/productionsites/empire/smelting_works/init.lua:85
 msgid "smelting gold"
 msgstr "Das Verhütten von Gold"
 
@@ -1068,12 +1126,12 @@ msgid "Smokery"
 msgstr "Räucherei"
 
 #. TRANSLATORS: Completed/Skipped/Did not start smoking meat because ...
-#: ../../tribes/buildings/productionsites/atlanteans/smokery/init.lua:68
+#: ../../tribes/buildings/productionsites/atlanteans/smokery/init.lua:70
 msgid "smoking meat"
 msgstr "Das Räuchern von Fleisch"
 
 #. TRANSLATORS: Completed/Skipped/Did not start smoking fish because ...
-#: ../../tribes/buildings/productionsites/atlanteans/smokery/init.lua:80
+#: ../../tribes/buildings/productionsites/atlanteans/smokery/init.lua:82
 msgid "smoking fish"
 msgstr "Das Räuchern von Fisch"
 
@@ -1235,18 +1293,18 @@ msgstr "Weberei"
 
 #. TRANSLATORS: Completed/Skipped/Did not start weaving spidercloth because
 #. ...
-#: ../../tribes/buildings/productionsites/atlanteans/weaving_mill/init.lua:68
+#: ../../tribes/buildings/productionsites/atlanteans/weaving_mill/init.lua:70
 msgid "weaving spidercloth"
 msgstr "Das Weben von Spinnenstoff"
 
 #. TRANSLATORS: Completed/Skipped/Did not start tailoring a tabard because ...
-#: ../../tribes/buildings/productionsites/atlanteans/weaving_mill/init.lua:79
+#: ../../tribes/buildings/productionsites/atlanteans/weaving_mill/init.lua:81
 msgid "tailoring a tabard"
 msgstr "Das Schneidern eines Wappenrocks"
 
 #. TRANSLATORS: Completed/Skipped/Did not start tailoring a golden tabard
 #. because ...
-#: ../../tribes/buildings/productionsites/atlanteans/weaving_mill/init.lua:90
+#: ../../tribes/buildings/productionsites/atlanteans/weaving_mill/init.lua:92
 msgid "tailoring a golden tabard"
 msgstr "Das Schneidern eines goldenen Wappenrocks"
 
@@ -1268,25 +1326,31 @@ msgctxt "empire_building"
 msgid "Well"
 msgstr "Brunnen"
 
-#: ../../tribes/buildings/productionsites/atlanteans/well/init.lua:62
-#: ../../tribes/buildings/productionsites/barbarians/well/init.lua:65
-#: ../../tribes/buildings/productionsites/empire/well/init.lua:62
+#: ../../tribes/buildings/productionsites/atlanteans/well/init.lua:63
+#: ../../tribes/buildings/productionsites/barbarians/well/init.lua:66
+#: ../../tribes/buildings/productionsites/empire/well/init.lua:63
+msgid "No Water"
+msgstr "Kein Wasser"
+
+#: ../../tribes/buildings/productionsites/atlanteans/well/init.lua:64
+#: ../../tribes/buildings/productionsites/barbarians/well/init.lua:67
+#: ../../tribes/buildings/productionsites/empire/well/init.lua:64
 msgid "Out of Water"
 msgstr "Kein Wasser"
 
-#: ../../tribes/buildings/productionsites/atlanteans/well/init.lua:63
+#: ../../tribes/buildings/productionsites/atlanteans/well/init.lua:65
 msgctxt "atlanteans_building"
 msgid ""
 "The carrier working at this well can’t find any water in his work area."
 msgstr "Der Träger an diesem Brunnen kann kein Wasser in seinem Arbeitsbereich finden."
 
-#: ../../tribes/buildings/productionsites/barbarians/well/init.lua:66
+#: ../../tribes/buildings/productionsites/barbarians/well/init.lua:68
 msgctxt "barbarians_building"
 msgid ""
 "The carrier working at this well can’t find any water in his work area."
 msgstr "Der Träger an diesem Brunnen kann kein Wasser in seinem Arbeitsbereich finden."
 
-#: ../../tribes/buildings/productionsites/empire/well/init.lua:63
+#: ../../tribes/buildings/productionsites/empire/well/init.lua:65
 msgctxt "empire_building"
 msgid ""
 "The carrier working at this well can’t find any water in his work area."
@@ -1305,13 +1369,19 @@ msgstr "Holzfällerhaus"
 msgid "felling trees"
 msgstr "Das Fällen von Bäumen"
 
-#: ../../tribes/buildings/productionsites/atlanteans/woodcutters_house/init.lua:54
-#: ../../tribes/buildings/productionsites/barbarians/lumberjacks_hut/init.lua:62
-#: ../../tribes/buildings/productionsites/empire/lumberjacks_house/init.lua:54
+#: ../../tribes/buildings/productionsites/atlanteans/woodcutters_house/init.lua:55
+#: ../../tribes/buildings/productionsites/barbarians/lumberjacks_hut/init.lua:63
+#: ../../tribes/buildings/productionsites/empire/lumberjacks_house/init.lua:55
+msgid "No Trees"
+msgstr "Keine Bäume"
+
+#: ../../tribes/buildings/productionsites/atlanteans/woodcutters_house/init.lua:56
+#: ../../tribes/buildings/productionsites/barbarians/lumberjacks_hut/init.lua:64
+#: ../../tribes/buildings/productionsites/empire/lumberjacks_house/init.lua:56
 msgid "Out of Trees"
 msgstr "Keine Bäume"
 
-#: ../../tribes/buildings/productionsites/atlanteans/woodcutters_house/init.lua:55
+#: ../../tribes/buildings/productionsites/atlanteans/woodcutters_house/init.lua:57
 msgctxt "atlanteans_building"
 msgid ""
 "The woodcutter working at this woodcutter’s house can’t find any trees in "
@@ -1399,15 +1469,15 @@ msgstr "Rinderzucht"
 msgid "rearing cattle"
 msgstr "Das Züchten eines Ochsen"
 
-#: ../../tribes/buildings/productionsites/barbarians/coalmine/init.lua:79
-#: ../../tribes/buildings/productionsites/barbarians/coalmine_deep/init.lua:82
+#: ../../tribes/buildings/productionsites/barbarians/coalmine/init.lua:81
+#: ../../tribes/buildings/productionsites/barbarians/coalmine_deep/init.lua:84
 msgctxt "barbarians_building"
 msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider enhancing, dismantling or destroying it."
 msgstr "Die Hauptader dieser Kohlemine ist erschöpft. Die Produktivität wird stark einbrechen. Du solltest diese Mine ausbauen, abreißen oder zerstören."
 
-#: ../../tribes/buildings/productionsites/empire/coalmine/init.lua:79
+#: ../../tribes/buildings/productionsites/empire/coalmine/init.lua:81
 msgctxt "empire_building"
 msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -1432,7 +1502,7 @@ msgctxt "barbarians_building"
 msgid "Deeper Coal Mine"
 msgstr "Tiefste Kohlemine"
 
-#: ../../tribes/buildings/productionsites/barbarians/coalmine_deeper/init.lua:81
+#: ../../tribes/buildings/productionsites/barbarians/coalmine_deeper/init.lua:83
 msgctxt "barbarians_building"
 msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -1440,7 +1510,7 @@ msgid ""
 "consider dismantling or destroying it."
 msgstr "Die Hauptader dieser Kohlemine ist erschöpft. Die Produktivität wird stark einbrechen. Diese Mine kann nicht mehr ausgebaut werden, daher solltest du diese Mine abreißen oder zerstören."
 
-#: ../../tribes/buildings/productionsites/empire/coalmine_deep/init.lua:77
+#: ../../tribes/buildings/productionsites/empire/coalmine_deep/init.lua:79
 msgctxt "empire_building"
 msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -1449,14 +1519,14 @@ msgid ""
 msgstr "Die Hauptader dieser Kohlemine ist erschöpft. Die Produktivität wird stark einbrechen. Diese Mine kann nicht mehr ausgebaut werden, daher solltest du diese Mine abreißen oder zerstören."
 
 #. TRANSLATORS: Completed/Skipped/Did not start planting wheat because ...
-#: ../../tribes/buildings/productionsites/barbarians/farm/init.lua:72
-#: ../../tribes/buildings/productionsites/empire/farm/init.lua:59
+#: ../../tribes/buildings/productionsites/barbarians/farm/init.lua:71
+#: ../../tribes/buildings/productionsites/empire/farm/init.lua:58
 msgid "planting wheat"
 msgstr "Das Pflanzen von Weizen"
 
 #. TRANSLATORS: Completed/Skipped/Did not start harvesting wheat because ...
-#: ../../tribes/buildings/productionsites/barbarians/farm/init.lua:80
-#: ../../tribes/buildings/productionsites/empire/farm/init.lua:67
+#: ../../tribes/buildings/productionsites/barbarians/farm/init.lua:79
+#: ../../tribes/buildings/productionsites/empire/farm/init.lua:66
 msgid "harvesting wheat"
 msgstr "Das Ernten von Weizen"
 
@@ -1466,7 +1536,7 @@ msgctxt "barbarians_building"
 msgid "Fisher’s Hut"
 msgstr "Fischerhütte"
 
-#: ../../tribes/buildings/productionsites/barbarians/fishers_hut/init.lua:62
+#: ../../tribes/buildings/productionsites/barbarians/fishers_hut/init.lua:64
 msgctxt "barbarians_building"
 msgid ""
 "The fisher working out of this fisher’s hut can’t find any fish in his work "
@@ -1479,15 +1549,15 @@ msgctxt "barbarians_building"
 msgid "Gamekeeper’s Hut"
 msgstr "Wildhüterhütte"
 
-#: ../../tribes/buildings/productionsites/barbarians/goldmine/init.lua:79
-#: ../../tribes/buildings/productionsites/barbarians/goldmine_deep/init.lua:82
+#: ../../tribes/buildings/productionsites/barbarians/goldmine/init.lua:81
+#: ../../tribes/buildings/productionsites/barbarians/goldmine_deep/init.lua:84
 msgctxt "barbarians_building"
 msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider enhancing, dismantling or destroying it."
 msgstr "Die Hauptader dieser Goldmine ist erschöpft. Die Produktivität wird stark einbrechen. Du solltest diese Mine ausbauen, abreißen oder zerstören."
 
-#: ../../tribes/buildings/productionsites/empire/goldmine/init.lua:79
+#: ../../tribes/buildings/productionsites/empire/goldmine/init.lua:81
 msgctxt "empire_building"
 msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -1512,7 +1582,7 @@ msgctxt "barbarians_building"
 msgid "Deeper Gold Mine"
 msgstr "Tiefste Goldmine"
 
-#: ../../tribes/buildings/productionsites/barbarians/goldmine_deeper/init.lua:81
+#: ../../tribes/buildings/productionsites/barbarians/goldmine_deeper/init.lua:83
 msgctxt "barbarians_building"
 msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -1520,7 +1590,7 @@ msgid ""
 "consider dismantling or destroying it."
 msgstr "Die Hauptader dieser Goldmine ist erschöpft. Die Produktivität wird stark einbrechen. Diese Mine kann nicht mehr ausgebaut werden, daher solltest du diese Mine abreißen oder zerstören."
 
-#: ../../tribes/buildings/productionsites/empire/goldmine_deep/init.lua:77
+#: ../../tribes/buildings/productionsites/empire/goldmine_deep/init.lua:79
 msgctxt "empire_building"
 msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -1534,11 +1604,15 @@ msgctxt "barbarians_building"
 msgid "Granite Mine"
 msgstr "Granitmine"
 
-#: ../../tribes/buildings/productionsites/barbarians/granitemine/init.lua:75
+#: ../../tribes/buildings/productionsites/barbarians/granitemine/init.lua:76
+msgid "No Granite"
+msgstr "Kein Stein"
+
+#: ../../tribes/buildings/productionsites/barbarians/granitemine/init.lua:77
 msgid "Main Granite Vein Exhausted"
 msgstr "Hauptgranitader erschöpft"
 
-#: ../../tribes/buildings/productionsites/barbarians/granitemine/init.lua:77
+#: ../../tribes/buildings/productionsites/barbarians/granitemine/init.lua:79
 msgctxt "barbarians_building"
 msgid ""
 "This granite mine’s main vein is exhausted. Expect strongly diminished "
@@ -1575,7 +1649,7 @@ msgid "Hunter’s Hut"
 msgstr "Jagdhütte"
 
 #. TRANSLATORS: "game" means animals that you can hunt
-#: ../../tribes/buildings/productionsites/barbarians/hunters_hut/init.lua:65
+#: ../../tribes/buildings/productionsites/barbarians/hunters_hut/init.lua:67
 msgctxt "barbarians_building"
 msgid ""
 "The hunter working out of this hunter’s hut can’t find any game in his work "
@@ -1595,15 +1669,15 @@ msgctxt "empire_building"
 msgid "Inn"
 msgstr "Wirtshaus"
 
-#: ../../tribes/buildings/productionsites/barbarians/ironmine/init.lua:79
-#: ../../tribes/buildings/productionsites/barbarians/ironmine_deep/init.lua:82
+#: ../../tribes/buildings/productionsites/barbarians/ironmine/init.lua:81
+#: ../../tribes/buildings/productionsites/barbarians/ironmine_deep/init.lua:84
 msgctxt "barbarians_building"
 msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider enhancing, dismantling or destroying it."
 msgstr "Die Hauptader dieser Eisenerzmine ist erschöpft. Die Produktivität wird stark einbrechen. Du solltest diese Mine ausbauen, abreißen oder zerstören."
 
-#: ../../tribes/buildings/productionsites/empire/ironmine/init.lua:79
+#: ../../tribes/buildings/productionsites/empire/ironmine/init.lua:81
 msgctxt "empire_building"
 msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -1628,7 +1702,7 @@ msgctxt "barbarians_building"
 msgid "Deeper Iron Mine"
 msgstr "Tiefste Eisenerzmine"
 
-#: ../../tribes/buildings/productionsites/barbarians/ironmine_deeper/init.lua:84
+#: ../../tribes/buildings/productionsites/barbarians/ironmine_deeper/init.lua:86
 msgctxt "barbarians_building"
 msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -1636,7 +1710,7 @@ msgid ""
 "consider dismantling or destroying it."
 msgstr "Die Hauptader dieser Eisenerzmine ist erschöpft. Die Produktivität wird stark einbrechen. Diese Mine kann nicht mehr ausgebaut werden, daher solltest du diese Mine abreißen oder zerstören."
 
-#: ../../tribes/buildings/productionsites/empire/ironmine_deep/init.lua:77
+#: ../../tribes/buildings/productionsites/empire/ironmine_deep/init.lua:79
 msgctxt "empire_building"
 msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -1651,7 +1725,7 @@ msgid "Lime Kiln"
 msgstr "Kalkbrennerei"
 
 #. TRANSLATORS: Completed/Skipped/Did not start mixing grout because ...
-#: ../../tribes/buildings/productionsites/barbarians/lime_kiln/init.lua:55
+#: ../../tribes/buildings/productionsites/barbarians/lime_kiln/init.lua:57
 msgid "mixing grout"
 msgstr "Das Mischen von Mörtel"
 
@@ -1661,7 +1735,7 @@ msgctxt "barbarians_building"
 msgid "Lumberjack’s Hut"
 msgstr "Holzfällerhütte"
 
-#: ../../tribes/buildings/productionsites/barbarians/lumberjacks_hut/init.lua:63
+#: ../../tribes/buildings/productionsites/barbarians/lumberjacks_hut/init.lua:65
 msgctxt "barbarians_building"
 msgid ""
 "The lumberjack working at this lumberjack’s hut can’t find any trees in his "
@@ -1711,17 +1785,17 @@ msgstr "Kleinbrauerei"
 
 #. TRANSLATORS: Completed/Skipped/Did not start brewing beer because ...
 #: ../../tribes/buildings/productionsites/barbarians/micro_brewery/init.lua:57
-#: ../../tribes/buildings/productionsites/empire/brewery/init.lua:55
+#: ../../tribes/buildings/productionsites/empire/brewery/init.lua:57
 msgid "brewing beer"
 msgstr "Das Brauen von Bier"
 
-#: ../../tribes/buildings/productionsites/barbarians/quarry/init.lua:75
+#: ../../tribes/buildings/productionsites/barbarians/quarry/init.lua:77
 msgctxt "barbarians_building"
 msgid ""
 "The stonemason working at this quarry can’t find any rocks in his work area."
 msgstr "Der Steinmetz in diesem Steinbruch kann keine Felsen in seinem Arbeitsbereich finden."
 
-#: ../../tribes/buildings/productionsites/empire/quarry/init.lua:81
+#: ../../tribes/buildings/productionsites/empire/quarry/init.lua:83
 msgctxt "empire_building"
 msgid ""
 "The stonemason working at this quarry can’t find any rocks in his work area."
@@ -1749,7 +1823,7 @@ msgstr "Das Pflanzen von Reet"
 msgid "harvesting reed"
 msgstr "Das Ernten von Reet"
 
-#: ../../tribes/buildings/productionsites/barbarians/reed_yard/init.lua:72
+#: ../../tribes/buildings/productionsites/barbarians/reed_yard/init.lua:74
 msgctxt "barbarians_building"
 msgid ""
 "The gardener working at this reed yard has no cleared soil to plant his "
@@ -1799,7 +1873,7 @@ msgid "forging a warrior’s ax"
 msgstr "Das Schmieden einer Kriegeraxt"
 
 #. TRANSLATORS: Completed/Skipped/Did not start weaving because ...
-#: ../../tribes/buildings/productionsites/barbarians/weaving_mill/init.lua:58
+#: ../../tribes/buildings/productionsites/barbarians/weaving_mill/init.lua:59
 #: ../../tribes/buildings/productionsites/empire/weaving_mill/init.lua:64
 msgid "weaving"
 msgstr "Das Weben"
@@ -1811,7 +1885,7 @@ msgid "Wood Hardener"
 msgstr "Holzhärter"
 
 #. TRANSLATORS: Completed/Skipped/Did not start hardening wood because ...
-#: ../../tribes/buildings/productionsites/barbarians/wood_hardener/init.lua:63
+#: ../../tribes/buildings/productionsites/barbarians/wood_hardener/init.lua:65
 msgid "hardening wood"
 msgstr "Das Härten von Holz"
 
@@ -1844,7 +1918,7 @@ msgstr "Eselfarm"
 msgid "rearing donkeys"
 msgstr "Das Züchten von Eseln"
 
-#: ../../tribes/buildings/productionsites/empire/fishers_house/init.lua:54
+#: ../../tribes/buildings/productionsites/empire/fishers_house/init.lua:56
 msgctxt "empire_building"
 msgid ""
 "The fisher working out of this fisher’s house can’t find any fish in his "
@@ -1857,7 +1931,7 @@ msgctxt "empire_building"
 msgid "Lumberjack’s House"
 msgstr "Holzfällerhaus"
 
-#: ../../tribes/buildings/productionsites/empire/lumberjacks_house/init.lua:55
+#: ../../tribes/buildings/productionsites/empire/lumberjacks_house/init.lua:57
 msgctxt "empire_building"
 msgid ""
 "The lumberjack working at this lumberjack’s house can’t find any trees in "
@@ -1877,12 +1951,17 @@ msgstr "Marmormine"
 msgid "mining marble"
 msgstr "Das Abbauen von Marmor"
 
-#: ../../tribes/buildings/productionsites/empire/marblemine/init.lua:102
-#: ../../tribes/buildings/productionsites/empire/marblemine_deep/init.lua:76
+#: ../../tribes/buildings/productionsites/empire/marblemine/init.lua:103
+#: ../../tribes/buildings/productionsites/empire/marblemine_deep/init.lua:77
+msgid "No Marble"
+msgstr "Kein Marmor"
+
+#: ../../tribes/buildings/productionsites/empire/marblemine/init.lua:104
+#: ../../tribes/buildings/productionsites/empire/marblemine_deep/init.lua:78
 msgid "Main Marble Vein Exhausted"
 msgstr "Hauptmarmorader erschöpft"
 
-#: ../../tribes/buildings/productionsites/empire/marblemine/init.lua:104
+#: ../../tribes/buildings/productionsites/empire/marblemine/init.lua:106
 msgctxt "empire_building"
 msgid ""
 "This marble mine’s main vein is exhausted. Expect strongly diminished "
@@ -1896,7 +1975,7 @@ msgctxt "empire_building"
 msgid "Deep Marble Mine"
 msgstr "Tiefe Marmormine"
 
-#: ../../tribes/buildings/productionsites/empire/marblemine_deep/init.lua:78
+#: ../../tribes/buildings/productionsites/empire/marblemine_deep/init.lua:80
 msgctxt "empire_building"
 msgid ""
 "This marble mine’s main vein is exhausted. Expect strongly diminished "
@@ -1944,7 +2023,7 @@ msgstr "Steinmetz"
 
 #. TRANSLATORS: Completed/Skipped/Did not start sculpting a marble column
 #. because ...
-#: ../../tribes/buildings/productionsites/empire/stonemasons_house/init.lua:55
+#: ../../tribes/buildings/productionsites/empire/stonemasons_house/init.lua:57
 msgid "sculpting a marble column"
 msgstr "Das Formen einer Marmorsäule"
 
@@ -1971,7 +2050,7 @@ msgstr "Das Pflanzen von Weinreben"
 msgid "harvesting grapes"
 msgstr "Das Ernten von Weintrauben"
 
-#: ../../tribes/buildings/productionsites/empire/vineyard/init.lua:73
+#: ../../tribes/buildings/productionsites/empire/vineyard/init.lua:75
 msgctxt "empire_building"
 msgid ""
 "The vine farmer working at this vineyard has no cleared soil to plant his "
@@ -2014,7 +2093,7 @@ msgid "Winery"
 msgstr "Weinkellerei"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making wine because ...
-#: ../../tribes/buildings/productionsites/empire/winery/init.lua:56
+#: ../../tribes/buildings/productionsites/empire/winery/init.lua:58
 msgid "making wine"
 msgstr "Das Keltern von Wein"
 
@@ -2025,41 +2104,41 @@ msgid "Dungeon"
 msgstr "Verlies"
 
 #. TRANSLATORS: Completed/Skipped/Did not start sleeping because ...
-#: ../../tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:77
-#: ../../tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:92
-#: ../../tribes/buildings/trainingsites/barbarians/battlearena/init.lua:85
-#: ../../tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:104
-#: ../../tribes/buildings/trainingsites/empire/arena/init.lua:72
-#: ../../tribes/buildings/trainingsites/empire/colosseum/init.lua:65
-#: ../../tribes/buildings/trainingsites/empire/trainingcamp/init.lua:95
+#: ../../tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:79
+#: ../../tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:94
+#: ../../tribes/buildings/trainingsites/barbarians/battlearena/init.lua:87
+#: ../../tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:106
+#: ../../tribes/buildings/trainingsites/empire/arena/init.lua:74
+#: ../../tribes/buildings/trainingsites/empire/colosseum/init.lua:67
+#: ../../tribes/buildings/trainingsites/empire/trainingcamp/init.lua:97
 msgid "sleeping"
 msgstr "Das Schlafen"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:85
-#: ../../tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:112
-#: ../../tribes/buildings/trainingsites/empire/trainingcamp/init.lua:103
+#: ../../tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:87
+#: ../../tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:114
+#: ../../tribes/buildings/trainingsites/empire/trainingcamp/init.lua:105
 msgid "upgrading soldier attack from level 0 to level 1"
 msgstr "Das Verbessern des Angriffs eines Soldaten von Stufe 0 auf 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:96
-#: ../../tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:123
-#: ../../tribes/buildings/trainingsites/empire/trainingcamp/init.lua:114
+#: ../../tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:98
+#: ../../tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:125
+#: ../../tribes/buildings/trainingsites/empire/trainingcamp/init.lua:116
 msgid "upgrading soldier attack from level 1 to level 2"
 msgstr "Das Verbessern des Angriffs eines Soldaten von Stufe 1 auf 2"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:107
-#: ../../tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:134
-#: ../../tribes/buildings/trainingsites/empire/trainingcamp/init.lua:125
+#: ../../tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:109
+#: ../../tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:136
+#: ../../tribes/buildings/trainingsites/empire/trainingcamp/init.lua:127
 msgid "upgrading soldier attack from level 2 to level 3"
 msgstr "Das Verbessern des Angriffs eines Soldaten von Stufe 2 auf 3"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:118
-#: ../../tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:145
-#: ../../tribes/buildings/trainingsites/empire/trainingcamp/init.lua:136
+#: ../../tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:120
+#: ../../tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:147
+#: ../../tribes/buildings/trainingsites/empire/trainingcamp/init.lua:138
 msgid "upgrading soldier attack from level 3 to level 4"
 msgstr "Das Verbessern des Angriffs eines Soldaten von Stufe 3 auf 4"
 
@@ -2070,34 +2149,34 @@ msgid "Labyrinth"
 msgstr "Labyrinth"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:100
+#: ../../tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:102
 msgid "upgrading soldier defense from level 0 to level 1"
 msgstr "Das Verbessern der Verteidigung eines Soldaten von Stufe 0 auf 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:111
+#: ../../tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:113
 msgid "upgrading soldier defense from level 1 to level 2"
 msgstr "Das Verbessern der Verteidigung eines Soldaten von Stufe 1 auf 2"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:122
-#: ../../tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:167
-#: ../../tribes/buildings/trainingsites/empire/trainingcamp/init.lua:147
+#: ../../tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:124
+#: ../../tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:169
+#: ../../tribes/buildings/trainingsites/empire/trainingcamp/init.lua:149
 msgid "upgrading soldier health from level 0 to level 1"
 msgstr "Das Verbessern der Lebenspunkte eines Soldaten von Stufe 0 auf 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:133
-#: ../../tribes/buildings/trainingsites/barbarians/battlearena/init.lua:93
-#: ../../tribes/buildings/trainingsites/empire/arena/init.lua:80
-#: ../../tribes/buildings/trainingsites/empire/colosseum/init.lua:73
+#: ../../tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:135
+#: ../../tribes/buildings/trainingsites/barbarians/battlearena/init.lua:95
+#: ../../tribes/buildings/trainingsites/empire/arena/init.lua:82
+#: ../../tribes/buildings/trainingsites/empire/colosseum/init.lua:75
 msgid "upgrading soldier evade from level 0 to level 1"
 msgstr "Das Verbessern des Ausweichens eines Soldaten von Stufe 0 auf 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:144
-#: ../../tribes/buildings/trainingsites/barbarians/battlearena/init.lua:105
-#: ../../tribes/buildings/trainingsites/empire/colosseum/init.lua:84
+#: ../../tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:146
+#: ../../tribes/buildings/trainingsites/barbarians/battlearena/init.lua:107
+#: ../../tribes/buildings/trainingsites/empire/colosseum/init.lua:86
 msgid "upgrading soldier evade from level 1 to level 2"
 msgstr "Das Verbessern des Ausweichens eines Soldaten von Stufe 1 auf 2"
 
@@ -2120,19 +2199,19 @@ msgid "Training Camp"
 msgstr "Ausbildungslager"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:156
+#: ../../tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:158
 msgid "upgrading soldier attack from level 4 to level 5"
 msgstr "Das Verbessern des Angriffs eines Soldaten von Stufe 4 auf 5"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:178
-#: ../../tribes/buildings/trainingsites/empire/trainingcamp/init.lua:158
+#: ../../tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:180
+#: ../../tribes/buildings/trainingsites/empire/trainingcamp/init.lua:160
 msgid "upgrading soldier health from level 1 to level 2"
 msgstr "Das Verbessern der Lebenspunkte eines Soldaten von Stufe 1 auf 2"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:189
-#: ../../tribes/buildings/trainingsites/empire/trainingcamp/init.lua:169
+#: ../../tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:191
+#: ../../tribes/buildings/trainingsites/empire/trainingcamp/init.lua:171
 msgid "upgrading soldier health from level 2 to level 3"
 msgstr "Das Verbessern der Lebenspunkte eines Soldaten von Stufe 2 auf 3"
 
@@ -2149,7 +2228,7 @@ msgid "Colosseum"
 msgstr "Kolosseum"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../tribes/buildings/trainingsites/empire/trainingcamp/init.lua:180
+#: ../../tribes/buildings/trainingsites/empire/trainingcamp/init.lua:182
 msgid "upgrading soldier health from level 3 to level 4"
 msgstr "Das Verbessern der Lebenspunkte eines Soldaten von Stufe 3 auf 4"
 
@@ -2169,6 +2248,12 @@ msgstr "Hauptquartier"
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/warehouses/empire/headquarters/init.lua:7
 msgctxt "empire_building"
+msgid "Headquarters"
+msgstr "Hauptquartier"
+
+#: ../../tribes/scripting/starting_conditions/atlanteans/headquarters.lua:10
+#: ../../tribes/scripting/starting_conditions/barbarians/headquarters.lua:10
+#: ../../tribes/scripting/starting_conditions/empire/headquarters.lua:10
 msgid "Headquarters"
 msgstr "Hauptquartier"
 
@@ -2431,6 +2516,68 @@ msgstr "Wasserader"
 msgctxt "immovable"
 msgid "Ship Under Construction"
 msgstr "Schiffsbaustelle"
+
+#: ../../tribes/preload.lua:12 ../../tribes/preload.lua:27
+#: ../../tribes/preload.lua:42
+msgid "The Widelands Development Team"
+msgstr "Das Widelands-Entwicklerteam"
+
+#. TRANSLATORS: This is a tribe name
+#: ../../tribes/preload.lua:14
+msgid "Barbarians"
+msgstr "Barbaren"
+
+#: ../../tribes/preload.lua:15
+msgid "The mighty tribes of the east-lands."
+msgstr "Die mächtigen Stämme des Ostens."
+
+#. TRANSLATORS: This is a tribe name
+#: ../../tribes/preload.lua:29
+msgid "Empire"
+msgstr "Imperium"
+
+#: ../../tribes/preload.lua:30
+msgid "This is the culture of the Roman Empire."
+msgstr "Dies ist die Kultur des römischen Imperiums."
+
+#. TRANSLATORS: This is a tribe name
+#: ../../tribes/preload.lua:44
+msgid "Atlanteans"
+msgstr "Atlanter"
+
+#: ../../tribes/preload.lua:45
+msgid ""
+"This tribe is known from the oldest tales. The sons and daughters of "
+"Atlantis."
+msgstr "Dieser Stamm wird schon in den ältesten Sagen erwähnt. Die Söhne und Töchter von Atlantis."
+
+#: ../../tribes/scripting/starting_conditions/atlanteans/fortified_village.lua:10
+#: ../../tribes/scripting/starting_conditions/barbarians/fortified_village.lua:10
+#: ../../tribes/scripting/starting_conditions/empire/fortified_village.lua:10
+msgid "Fortified Village"
+msgstr "Befestigtes Dorf"
+
+#. TRANSLATORS: Short for "Not enough space"
+#: ../../tribes/scripting/starting_conditions/atlanteans/fortified_village.lua:103
+#: ../../tribes/scripting/starting_conditions/barbarians/fortified_village.lua:96
+#: ../../tribes/scripting/starting_conditions/empire/fortified_village.lua:121
+msgid "Space"
+msgstr "Platz"
+
+#: ../../tribes/scripting/starting_conditions/atlanteans/fortified_village.lua:104
+#: ../../tribes/scripting/starting_conditions/barbarians/fortified_village.lua:97
+#: ../../tribes/scripting/starting_conditions/empire/fortified_village.lua:122
+msgid ""
+"Some of your starting buildings didn’t have enough room and weren’t built. "
+"You are at a disadvantage with this; consider restarting this map with a "
+"fair starting condition."
+msgstr "Einige deiner Startgebäude hatten nicht genug Platz und wurden nicht gebaut. Du bist damit im Nachteil; vielleicht solltest du die Karte mit gerechten Startbedingungen neu starten."
+
+#: ../../tribes/scripting/starting_conditions/atlanteans/fortified_village.lua:105
+#: ../../tribes/scripting/starting_conditions/barbarians/fortified_village.lua:98
+#: ../../tribes/scripting/starting_conditions/empire/fortified_village.lua:123
+msgid "Not enough space"
+msgstr "Nicht genug Platz"
 
 #. TRANSLATORS: This is the ship's name used in lists of units
 #: ../../tribes/ships/atlanteans/init.lua:22

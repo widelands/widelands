@@ -15,7 +15,7 @@ function building_helptext_purpose()
 end
 
 function building_helptext_note()
-   -- #TRANSLATORS: Note helptext for a building
+   -- TRANSLATORS#: Note helptext for a building
    return ""
 end
 

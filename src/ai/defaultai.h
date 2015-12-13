@@ -59,7 +59,7 @@ struct Flag;
  *   remember to change some time() in network save random functions.
  */
 // TODO(unknown): Improvements:
-// - Improve different initialization types (Aggressive, Normal, Defensive)
+// - Improve different initialization types (Strong, Normal, Weak)
 // - Improve update code - currently the whole buildable area owned by defaultAI
 //   is rechecked after construction of a building or a road. Instead it would
 //   be better to write down the changed coordinates and only check those and
@@ -71,15 +71,15 @@ struct Flag;
 //   out, to have some more forces. Reincrease the number of soldiers that
 //   should be trained if inputs_ get filled again.).
 struct DefaultAI : ComputerPlayer {
-	DefaultAI(Widelands::Game&, const Widelands::PlayerNumber, uint8_t);
+	enum class Type {
+		kVeryWeak,
+		kWeak,
+		kNormal,
+	};
+
+	DefaultAI(Widelands::Game&, const Widelands::PlayerNumber, DefaultAI::Type);
 	~DefaultAI();
 	void think() override;
-
-	enum {
-		AGGRESSIVE = 2,
-		NORMAL = 1,
-		DEFENSIVE = 0,
-	};
 
 	enum class WalkSearch : uint8_t {kAnyPlayer, kOtherPlayers, kEnemy};
 	enum class WoodPolicy : uint8_t {kDismantleRangers, kStopRangers, kAllowRangers};
@@ -94,43 +94,49 @@ struct DefaultAI : ComputerPlayer {
 	};
 
 
-	/// Implementation for Aggressive
-	struct AggressiveImpl : public ComputerPlayer::Implementation {
-		AggressiveImpl() {
-			/** TRANSLATORS: This is the name of an AI used in the game setup screens */
-			name = pgettext("ai_name", "Aggressive");
-		}
-		ComputerPlayer* instantiate(Widelands::Game& game,
-		                            Widelands::PlayerNumber const p) const override {
-			return new DefaultAI(game, p, AGGRESSIVE);
-		}
-	};
-
+	/// Implementation for Strong
 	struct NormalImpl : public ComputerPlayer::Implementation {
 		NormalImpl() {
+			name = "normal";
 			/** TRANSLATORS: This is the name of an AI used in the game setup screens */
-			name = pgettext("ai_name", "Normal");
+			descname = _("Normal AI");
+			icon_filename = "pics/ai_normal.png";
 		}
 		ComputerPlayer* instantiate(Widelands::Game& game,
 		                            Widelands::PlayerNumber const p) const override {
-			return new DefaultAI(game, p, NORMAL);
+			return new DefaultAI(game, p, DefaultAI::Type::kNormal);
 		}
 	};
 
-	struct DefensiveImpl : public ComputerPlayer::Implementation {
-		DefensiveImpl() {
+	struct WeakImpl : public ComputerPlayer::Implementation {
+		WeakImpl() {
+			name = "weak";
 			/** TRANSLATORS: This is the name of an AI used in the game setup screens */
-			name = pgettext("ai_name", "Defensive");
+			descname = _("Weak AI");
+			icon_filename = "pics/ai_weak.png";
 		}
 		ComputerPlayer* instantiate(Widelands::Game& game,
 		                            Widelands::PlayerNumber const p) const override {
-			return new DefaultAI(game, p, DEFENSIVE);
+			return new DefaultAI(game, p, DefaultAI::Type::kWeak);
 		}
 	};
 
-	static AggressiveImpl aggressiveImpl;
-	static NormalImpl normalImpl;
-	static DefensiveImpl defensiveImpl;
+	struct VeryWeakImpl : public ComputerPlayer::Implementation {
+		VeryWeakImpl() {
+			name = "very_weak";
+			/** TRANSLATORS: This is the name of an AI used in the game setup screens */
+			descname = _("Very Weak AI");
+			icon_filename = "pics/ai_very_weak.png";
+		}
+		ComputerPlayer* instantiate(Widelands::Game& game,
+		                            Widelands::PlayerNumber const p) const override {
+			return new DefaultAI(game, p, DefaultAI::Type::kVeryWeak);
+		}
+	};
+
+	static NormalImpl normal_impl;
+	static WeakImpl weak_impl;
+	static VeryWeakImpl very_weak_impl;
 
 private:
 	void late_initialization();
@@ -234,10 +240,9 @@ private:
 	template<typename T> void check_range(const T, const  T, const  T, const char *);
 	template<typename T> void check_range(const T, const  T, const char *);
 
-
 private:
 	// Variables of default AI
-	uint8_t type_;
+	DefaultAI::Type type_;
 
 	// collect statistics on how many times which job was run
 	uint32_t sched_stat_[20] = {0};
@@ -288,6 +293,8 @@ private:
 	// returns count of militarysites
 	uint32_t msites_in_constr() const;
 	uint32_t msites_built() const;
+
+	int32_t limit_cnt_target(int32_t, int32_t);
 
 	std::vector<WareObserver> wares;
 

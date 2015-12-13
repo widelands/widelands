@@ -13,12 +13,17 @@
 from glob import glob
 from itertools import takewhile
 import os
-import string
 import subprocess
 import sys
+from time import strftime,gmtime
 
-from lua_xgettext import Lua_GetText
-import confgettext
+try:
+    maketrans = "".maketrans
+except AttributeError:
+    # fallback for python2
+    from string import maketrans
+
+from confgettext import Conf_GetText
 
 # Holds the names of non-iterative catalogs to build and the
 # corresponding source paths list. Note that paths MUST be relative to po/pot,
@@ -58,7 +63,7 @@ MAINPOTS = [
         "../../world/*/*/*/*/*/*.lua",
     ]),
     ("tribes/tribes", [
-        "../../tribes/scripting/starting_conditions/*/*.lua"
+        "../../tribes/scripting/starting_conditions/*/*.lua",
         "../../tribes/*.lua",
         "../../tribes/*/init.lua",
         "../../tribes/*/*/init.lua",
@@ -115,6 +120,36 @@ XGETTEXTOPTS+=" -F -c\"* TRANSLATORS\""
 XGETTEXTOPTS+=" --copyright-holder=\"Widelands Development Team\""
 XGETTEXTOPTS+=" --msgid-bugs-address=\"https://bugs.launchpad.net/widelands\""
 
+# Options for xgettext when parsing Lua scripts
+# Official Lua backend of xgettext does not support pgettext and npgettext right
+# off the bat and also expects keywords (besides _) to be prefixed with 'gettext.',
+# so we need to specify the keywords we need ourselves.
+LUAXGETTEXTOPTS ="-k" # Remove known keywords
+LUAXGETTEXTOPTS+=" --keyword=_ --flag=_:1:pass-lua-format"
+LUAXGETTEXTOPTS+=" --keyword=ngettext:1,2 --flag=ngettext:1:pass-lua-format --flag=ngettext:2:pass-lua-format"
+LUAXGETTEXTOPTS+=" --keyword=pgettext:1c,2 --flag=pgettext:2:pass-lua-format"
+LUAXGETTEXTOPTS+=" --keyword=npgettext:1c,2,3 --flag=npgettext:2:pass-lua-format --flag=npgettext:3:pass-lua-format"
+LUAXGETTEXTOPTS+=" --language=Lua --from-code=UTF-8 -F -c\" TRANSLATORS:\""
+
+time_now = gmtime()
+# This is the header used for Lua+conf potfiles.
+# Set it to something sensible, as much as is possible here.
+HEAD =  "# Widelands PATH/TO/FILE.PO\n"
+HEAD += "# Copyright (C) 2005-" + strftime("%Y", time_now) + " Widelands Development Team\n"
+HEAD += "# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.\n"
+HEAD += "#\n"
+HEAD += "msgid \"\"\n"
+HEAD += "msgstr \"\"\n"
+HEAD += "\"Project-Id-Version: Widelands svnVERSION\\n\"\n"
+HEAD += "\"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\\n\"\n"
+HEAD += "\"POT-Creation-Date: " + strftime("%Y-%m-%d %H:%M+0000", time_now) + "\\n\"\n"
+HEAD += "\"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\\n\"\n"
+HEAD += "\"Last-Translator: FULL NAME <EMAIL@ADDRESS>\\n\"\n"
+HEAD += "\"Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\\n\"\n"
+HEAD += "\"MIME-Version: 1.0\\n\"\n"
+HEAD += "\"Content-Type: text/plain; charset=UTF-8\\n\"\n"
+HEAD += "\"Content-Transfer-Encoding: 8bit\\n\"\n"
+HEAD += "\n"
 
 def are_we_in_root_directory():
     """Make sure we are called in the root directory"""
@@ -133,6 +168,55 @@ def do_makedirs( dirs ):
     except:
         pass
 
+def pot_modify_header( potfile_in, potfile_out, header ):
+    """
+    Modify the header of a translation catalog read from potfile_in to
+    the given header and write out the modified catalog to potfile_out.
+    
+    Returns whether or not the header was successfully modified.
+    
+    Note: potfile_in and potfile_out must not point to the same file!
+    """
+    class State:
+        (start,
+         possibly_empty_msgid,
+         search_for_empty_line,
+         header_traversed) = range(4)
+        
+    st = State.start
+    with open(potfile_in, "rt") as potin:
+        for line in potin:
+            line = line.strip()
+            
+            if st == State.start:
+                if line.startswith("msgid \"\""):
+                    st = State.possibly_empty_msgid
+                elif line.startswith("msgid"):
+                    # The first entry is not a header entry,
+                    # since msgid is not empty.
+                    return False
+            elif st == State.possibly_empty_msgid:
+                if line.startswith("msgstr"):
+                    # msgstr right after msgid "", which means msgid must
+                    # be empty, therefore we have reached the header entry
+                    st = State.search_for_empty_line
+                else:
+                    # Header check failed.
+                    return False
+            elif st == State.search_for_empty_line:
+                if not line:
+                    st = State.header_traversed
+                    break;
+        
+        if st != State.header_traversed:
+            return False
+        
+        with open(potfile_out, "wt") as potout:
+            potout.write(header)
+            potout.writelines(potin)
+
+        return True
+
 
 def do_compile( potfile, srcfiles ):
     """
@@ -147,20 +231,59 @@ def do_compile( potfile, srcfiles ):
     lua_files = set([ f for f in files if
         os.path.splitext(f)[-1].lower() == '.lua' ])
     conf_files = files - lua_files
-
-    l = Lua_GetText()
-    for fname in lua_files:
-        l.parse(open(fname, "r").read(), fname)
-
-    l.merge(confgettext.parse_conf(conf_files))
-
-    if not l.found_something_to_translate:
+    
+    temp_potfile = potfile + ".tmp"
+    
+    if (os.path.exists(temp_potfile)): os.remove(temp_potfile)
+    
+    # Find translatable strings in Lua files using xgettext
+    xgettext = subprocess.Popen("xgettext %s --files-from=- --output=\"%s\"" % \
+        (LUAXGETTEXTOPTS, temp_potfile), shell=True, stdin=subprocess.PIPE, universal_newlines=True)
+    try:
+        for fname in lua_files:
+            xgettext.stdin.write(os.path.normpath(fname) + "\n")
+        xgettext.stdin.close()
+    except IOError as err_msg:
+        sys.stderr.write("Failed to call xgettext: %s\n" % err_msg)
         return False
+    
+    xgettext_status = xgettext.wait()
+    if (xgettext_status != 0):
+        sys.stderr.write("xgettext exited with errorcode %i\n" % xgettext_status)
+        return False
+        
+    xgettext_found_something_to_translate = os.path.exists(temp_potfile)
+    
+    # Find translatable strings in configuration files
+    conf = Conf_GetText()
+    conf.parse(conf_files)
+    
+    if not (xgettext_found_something_to_translate or conf.found_something_to_translate):
+        # Found no translatable strings
+        return False
+    
+    if (xgettext_found_something_to_translate):
+        header_fixed = pot_modify_header(temp_potfile, potfile, HEAD)
+        os.remove(temp_potfile)
+        
+        if not header_fixed:
+            return False
+        
+        if (conf.found_something_to_translate):
+            # Merge the conf POT with Lua POT
+            with open(potfile, "at") as p:
+                p.write("\n" + conf.toString())
+                
+            msguniq_rv = os.system("msguniq \"%s\" -F --output-file=\"%s\"" % (potfile, potfile))
+            if (msguniq_rv):
+                sys.stderr.write("msguniq exited with errorcode %i\n" % msguniq_rv)
+                return False
+    elif (conf.found_something_to_translate):
+        with open(potfile, "wt") as p:
+            p.write(HEAD + conf.toString())
 
-    with open(potfile, "w") as potfileobject:
-        potfileobject.write(str(l))
-        potfileobject.close()
     return True
+    
 
 
 def do_compile_src( potfile, srcfiles ):
@@ -170,7 +293,7 @@ def do_compile_src( potfile, srcfiles ):
     """
     # call xgettext and supply source filenames via stdin
     gettext_input = subprocess.Popen("xgettext %s --files-from=- --output=%s" % \
-            (XGETTEXTOPTS, potfile), shell=True, stdin=subprocess.PIPE).stdin
+            (XGETTEXTOPTS, potfile), shell=True, stdin=subprocess.PIPE, universal_newlines=True).stdin
     try:
         for one_pattern in srcfiles:
             # 'normpath' is necessary for windows ('/' vs. '\')
@@ -223,7 +346,7 @@ def do_update_potfiles():
         # Generate .pot catalogs
         dangerous_chars = "'\" " # Those chars are replaced via '_'
         for pot, srcfiles in potfiles:
-            pot = pot.lower().translate(string.maketrans(dangerous_chars, len(dangerous_chars)*"_"))
+            pot = pot.lower().translate(maketrans(dangerous_chars, len(dangerous_chars)*"_"))
             path = os.path.normpath("po/" + os.path.dirname(pot))
             do_makedirs(path)
             oldcwd = os.getcwd()

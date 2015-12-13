@@ -102,7 +102,6 @@ private:
 	UI::Listselect<void *>      m_reslist;
 	UI::Checkbox                m_fullscreen;
 	UI::Checkbox                m_inputgrab;
-	UI::Textarea                m_label_maxfps;
 	UI::SpinBox                 m_sb_maxfps;
 
 	UI::Textarea                m_label_language;
@@ -117,9 +116,7 @@ private:
 	UI::Checkbox                m_snap_win_overlap_only;
 	UI::Checkbox                m_dock_windows_to_edges;
 	UI::SpinBox                 m_sb_autosave;
-	UI::Textarea                m_label_autosave;
 	UI::SpinBox                 m_sb_remove_replays;
-	UI::Textarea                m_label_remove_replays;
 
 	OptionsCtrl::OptionsStruct  os;
 
@@ -164,7 +161,6 @@ private:
 	UI::Button                  m_cancel, m_apply;
 	UI::Textarea                m_title;
 
-	UI::Textarea                m_label_snap_dis_panel, m_label_snap_dis_border;
 	UI::SpinBox                 m_sb_dis_panel, m_sb_dis_border;
 	UI::Checkbox                m_transparent_chat;
 	UI::Checkbox                m_message_sound;

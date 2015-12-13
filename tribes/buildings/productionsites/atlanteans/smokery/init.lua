@@ -5,7 +5,7 @@ tribes:new_productionsite_type {
    name = "atlanteans_smokery",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("atlanteans_building", "Smokery"),
-   directory = dirname,
+   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",
 
@@ -35,7 +35,9 @@ tribes:new_productionsite_type {
 
    aihints = {
       forced_after = 800,
-      prohibited_till = 180
+      prohibited_till = 180,
+      very_weak_ai_limit = 1,
+      weak_ai_limit = 2
    },
 
    working_positions = {

@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-18 08:43+0000\n"
-"PO-Revision-Date: 2015-11-18 15:53+0000\n"
+"POT-Creation-Date: 2015-11-28 11:19+0000\n"
+"PO-Revision-Date: 2015-11-29 10:37+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -77,16 +77,16 @@ msgstr "Tog taigh planntair-choille ach an glèidh thu stòras nan craobhan san 
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:64
 msgid "Build a quarry"
-msgstr "Tog coireall"
+msgstr "Tog cuaraidh"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:66
 msgid "Quarry"
-msgstr "Coireall"
+msgstr "Cuaraidh"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:67
 msgid ""
 "Build a quarry in the south to cut some granite and marble out of the rocks."
-msgstr "Tog coireall gu deas gus gaireal 's marbhal a ghearradh às na creagan."
+msgstr "Tog cuaraidh gu deas gus gaireal 's marbhal a ghearradh às na carraigean."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:68
 msgid "These might be used for future buildings."
