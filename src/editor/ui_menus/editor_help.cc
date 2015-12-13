@@ -31,6 +31,7 @@
 #include "graphic/graphic.h"
 #include "graphic/texture.h"
 #include "io/filesystem/layered_filesystem.h"
+#include "logic/world/editor_category.h"
 #include "logic/world/terrain_description.h"
 #include "logic/world/world.h"
 #include "scripting/lua_interface.h"
@@ -151,7 +152,10 @@ void EditorHelp::fill_terrains() {
 	for (Widelands::DescriptionIndex i = 0; i < world.terrains().size(); ++i) {
 		const TerrainDescription& terrain = world.terrain_descr(i);
 		upcast(Image const, icon, &terrain.get_texture(0));
-		HelpEntry entry(i, terrain.descname(), icon);
+		/** TRANSLATORS: Terrain name + editor category, e.g. Steppe (Summer) */
+		HelpEntry entry(i, (boost::format(_("%1% (%2%)"))
+								  % terrain.descname().c_str()
+								  % terrain.editor_category().descname()).str(), icon);
 		entries.push_back(entry);
 	}
 	fill_entries("terrains", entries);
@@ -186,7 +190,10 @@ void EditorHelp::entry_selected(const std::string& key,
 		case (HelpEntry::Type::kTerrain): {
 			const TerrainDescription& descr =
 			   eia().egbase().world().terrain_descr(lists_.at(key)->get_selected());
-			descname = descr.descname();
+			/** TRANSLATORS: Terrain name + editor category, e.g. Steppe (Summer) */
+			descname = (boost::format(_("%1% (%2%)"))
+						  % descr.descname().c_str()
+						  % descr.editor_category().descname()).str();
 			cr->push_arg(descr.name());
 			break;
 		}
