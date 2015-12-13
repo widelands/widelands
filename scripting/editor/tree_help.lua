@@ -25,8 +25,8 @@ return {
 			local terrain = wl.Editor():get_terrain_description(terrain_name)
 			local probability = terrain:probability_to_grow(tree_name)
 			if (probability > 0.01) then
-				result = result .. rt(h3(terrain.descname))
-				result = result .. picture_li(terrain.representative_image, terrain.descname .. "<br>" .. ("%2.1f%%"):bformat(100 * probability))
+				-- NOCOM result = result .. rt(h3(terrain.descname))
+				result = result .. picture_li(terrain.representative_image, (_"%1% (%2%)"):bformat(terrain.descname, terrain.editor_category.descname) .. "<br>" .. ("%2.1f%%"):bformat(100 * probability))
 				--[[ NOCOM
 				result = result .. picture_li(terrain.representative_image,
 							"Fertility:" .. " " .. ("%2.1f%%"):bformat(100 * terrain.fertility) .. "<br>" ..

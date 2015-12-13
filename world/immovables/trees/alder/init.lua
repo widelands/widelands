@@ -90,6 +90,7 @@ world:new_immovable_type{
 world:new_immovable_type{
    name = "alder_summer_old",
    descname = _ "Alder (Old)",
+   basename = _ "Alder",
    editor_category = "trees_deciduous",
    size = "small",
    attributes = { "tree" },

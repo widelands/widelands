@@ -1426,6 +1426,7 @@ const MethodType<LuaImmovableDescription> LuaImmovableDescription::Methods[] = {
 	{nullptr, nullptr},
 };
 const PropertyType<LuaImmovableDescription> LuaImmovableDescription::Properties[] = {
+	PROP_RO(LuaImmovableDescription, basename),
 	PROP_RO(LuaImmovableDescription, build_cost),
 	PROP_RO(LuaImmovableDescription, editor_category),
 	PROP_RO(LuaImmovableDescription, has_terrain_affinity),
@@ -1455,6 +1456,18 @@ void LuaImmovableDescription::__unpersist(lua_State* L) {
 	set_description_pointer(world.get_immovable_descr(idx));
 }
 
+
+/* RST
+	.. attribute:: the basename of a tree for editor lists
+
+			(RO) the basename of the immovable, or an empty string if it has none.
+*/
+int LuaImmovableDescription::get_basename(lua_State * L) {
+	lua_pushstring(L, get()->basename());
+	return 1;
+}
+
+
 /* RST
 	.. attribute:: build_cost
 
@@ -1465,14 +1478,20 @@ int LuaImmovableDescription::get_build_cost(lua_State * L) {
 }
 
 /* RST
-	.. attribute:: the name of the editor category of this immovable
+	.. attribute:: the name and descname of the editor category of this immovable
 
-			(RO) the name of the editor category, or nil if it has none.
+			(RO) a table with "name" and "descname" entries for the editor category, or nil if it has none.
 */
 int LuaImmovableDescription::get_editor_category(lua_State * L) {
 	const EditorCategory& editor_category = get()->editor_category();
 	if (&editor_category) {
+		lua_newtable(L);
+		lua_pushstring(L, "name");
 		lua_pushstring(L, editor_category.name());
+		lua_settable(L, -3);
+		lua_pushstring(L, "descname");
+		lua_pushstring(L, editor_category.descname());
+		lua_settable(L, -3);
 	} else {
 		lua_pushnil(L);
 	}
@@ -2642,6 +2661,7 @@ const MethodType<LuaTerrainDescription> LuaTerrainDescription::Methods[] = {
 const PropertyType<LuaTerrainDescription> LuaTerrainDescription::Properties[] = {
 	PROP_RO(LuaTerrainDescription, name),
 	PROP_RO(LuaTerrainDescription, descname),
+	PROP_RO(LuaTerrainDescription, editor_category),
 	PROP_RO(LuaTerrainDescription, fertility),
 	PROP_RO(LuaTerrainDescription, humidity),
 	PROP_RO(LuaTerrainDescription, representative_image),
@@ -2685,6 +2705,27 @@ int LuaTerrainDescription::get_name(lua_State * L) {
 
 int LuaTerrainDescription::get_descname(lua_State * L) {
 	lua_pushstring(L, get()->descname());
+	return 1;
+}
+
+/* RST
+	.. attribute:: the name and descname of the editor category of this terrain
+
+			(RO) a table with "name" and "descname" entries for the editor category, or nil if it has none.
+*/
+int LuaTerrainDescription::get_editor_category(lua_State * L) {
+	const EditorCategory& editor_category = get()->editor_category();
+	if (&editor_category) {
+		lua_newtable(L);
+		lua_pushstring(L, "name");
+		lua_pushstring(L, editor_category.name());
+		lua_settable(L, -3);
+		lua_pushstring(L, "descname");
+		lua_pushstring(L, editor_category.descname());
+		lua_settable(L, -3);
+	} else {
+		lua_pushnil(L);
+	}
 	return 1;
 }
 

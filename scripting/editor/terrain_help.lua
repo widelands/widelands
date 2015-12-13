@@ -26,7 +26,7 @@ return {
 			local probability = terrain:probability_to_grow(tree_name)
 			local tree = wl.Editor():get_immovable_description(tree_name)
 			if (probability > 0.01) then
-				tree_string = tree_string .. picture_li(tree.representative_image, tree.descname .. ("<br>Probability to grow: %2.1f%%"):bformat(100 * probability))
+				tree_string = tree_string .. picture_li(tree.representative_image, tree.basename .. ("<br>Probability to grow: %2.1f%%"):bformat(100 * probability))
 			end
 		end
 		if (tree_string ~="") then

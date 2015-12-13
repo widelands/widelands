@@ -170,7 +170,7 @@ void EditorHelp::fill_trees() {
 		uint32_t attribute_id = immovable->get_attribute_id("tree");
 		if (immovable->has_attribute(attribute_id)) {
 			const Image* icon = immovable->representative_image();
-			HelpEntry entry(i, immovable->descname(), icon);
+			HelpEntry entry(i, immovable->basename(), icon);
 			entries.push_back(entry);
 		}
 	}
@@ -200,7 +200,7 @@ void EditorHelp::entry_selected(const std::string& key,
 		case (HelpEntry::Type::kTree): {
 			const ImmovableDescr* descr =
 			   eia().egbase().world().get_immovable_descr(lists_.at(key)->get_selected());
-			descname = descr->descname();
+			descname = descr->basename();
 			cr->push_arg(descr->name());
 			break;
 		}

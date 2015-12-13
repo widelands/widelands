@@ -133,6 +133,9 @@ public:
 	// Returns the editor category.
 	const EditorCategory& editor_category() const;
 
+	// A basic licalized name for the immovable, used by trees
+	const std::string& basename() const {return basename_;}
+
 	// Every immovable that can 'grow' needs to have terrain affinity defined,
 	// all others do not. Returns true if this one has it defined.
 	bool has_terrain_affinity() const;
@@ -151,6 +154,8 @@ protected:
 	/// Buildcost for externally constructible immovables (for ship construction)
 	/// \see ActConstruction
 	Buildcost m_buildcost;
+
+	std::string basename_;
 
 private:
 	 // Common constructor functions for tribes and world.

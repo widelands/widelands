@@ -82,6 +82,7 @@ world:new_immovable_type{
 world:new_immovable_type{
    name = "larch_summer_old",
    descname = _ "Larch (Old)",
+   basename = _ "Larch",
    editor_category = "trees_coniferous",
    size = "small",
    attributes = { "tree" },

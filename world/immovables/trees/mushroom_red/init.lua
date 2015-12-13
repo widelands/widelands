@@ -89,6 +89,8 @@ world:new_immovable_type{
    name = "mushroom_red_wasteland_old",
    -- TRANSLATORS: This is a fictitious tree. Be creative if you want.
    descname = _ "Red Mushroom Tree (Old)",
+   -- TRANSLATORS: This is a fictitious tree. Be creative if you want.
+   basename = _ "Red Mushroom Tree",
    editor_category = "trees_wasteland",
    size = "small",
    attributes = { "tree" },
