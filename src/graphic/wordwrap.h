@@ -73,7 +73,10 @@ private:
 		(const std::string & text,
 		 std::string::size_type line_start,
 		 std::string::size_type & line_end,
-		 std::string::size_type & next_line_start);
+		 std::string::size_type & next_line_start,
+		 uint32_t safety_margin);
+
+	bool line_fits(const std::string& text, uint32_t safety_margin) const;
 
 	TextStyle m_style;
 	uint32_t m_wrapwidth;

@@ -118,12 +118,13 @@ void WordWrap::wrap(const std::string & text, WordWrap::Mode mode)
 	m_lines.clear();
 
 	std::string::size_type line_start = 0;
+	uint32_t margin =  m_style.calc_width_for_wrapping(0x2003); // Em space
 
 	while (line_start <= text.size()) {
 		std::string::size_type next_line_start;
 		std::string::size_type line_end;
 
-		compute_end_of_line(text, line_start, line_end, next_line_start);
+		compute_end_of_line(text, line_start, line_end, next_line_start, margin);
 
 		LineData ld;
 		ld.start = line_start;
@@ -143,20 +144,19 @@ void WordWrap::compute_end_of_line
 	(const std::string & text,
 	 std::string::size_type line_start,
 	 std::string::size_type & line_end,
-	 std::string::size_type & next_line_start)
+	 std::string::size_type & next_line_start,
+	 uint32_t safety_margin)
 {
-	int32_t minimum_chars = 1; // So we won't get empty lines
-	// Keep lines from getting too wide, because calc_width_for_wrapping is not exact.
-	uint32_t margin = 4 * m_style.calc_width_for_wrapping(0x2003); // Em space
-	assert(m_wrapwidth > margin);
+	std::string::size_type minimum_chars = 1; // So we won't get empty lines
+	assert(m_wrapwidth > safety_margin);
 
 	std::string::size_type orig_end = text.find('\n', line_start);
 	if (orig_end == std::string::npos)
 		orig_end = text.size();
 
-	if (m_wrapwidth == std::numeric_limits<uint32_t>::max() || orig_end - line_start <= 1) {
+	if (m_wrapwidth == std::numeric_limits<uint32_t>::max() || orig_end - line_start <= minimum_chars) {
 		// Special fast path when wrapping is disabled or
-		// original text line contains at most one character
+		// original text line contains at most minimum_chars characters
 		line_end = orig_end;
 		next_line_start = orig_end + 1;
 		return;
@@ -164,9 +164,8 @@ void WordWrap::compute_end_of_line
 
 
 	// Optimism: perhaps the entire line fits?
-	if (m_style.calc_width_for_wrapping(
-			 i18n::make_ligatures(text.substr(line_start, orig_end - line_start).c_str()))
-		 <= m_wrapwidth - margin) {
+	if (text_width(text.substr(line_start, orig_end - line_start), m_style.font->size())
+		 <= m_wrapwidth - safety_margin) {
 		line_end = orig_end;
 		next_line_start = orig_end + 1;
 		return;
@@ -183,9 +182,7 @@ void WordWrap::compute_end_of_line
 	while (end_upper - end_lower > 4) {
 		std::string::size_type mid = end_lower + (end_upper - end_lower + 1) / 2;
 
-		if (m_style.calc_width_for_wrapping(
-				 i18n::make_ligatures(text.substr(line_start, mid - line_start).c_str()))
-			 <= m_wrapwidth - margin) {
+		if (line_fits(i18n::make_ligatures(text.substr(line_start, mid - line_start).c_str()), safety_margin)) {
 			end_lower = mid;
 		} else {
 			end_upper = mid - 1;
@@ -205,11 +202,9 @@ void WordWrap::compute_end_of_line
 			break; // we already know that this cannot possibly fit
 
 		// check whether the next word still fits
-		if (m_style.calc_width_for_wrapping(
-				 i18n::make_ligatures(text.substr(line_start, nextspace - line_start).c_str()))
-			 > m_wrapwidth - margin)
+		if (!line_fits(i18n::make_ligatures(text.substr(line_start, nextspace - line_start).c_str()), safety_margin)) {
 			break;
-
+		}
 		space = nextspace;
 	}
 
@@ -227,25 +222,36 @@ void WordWrap::compute_end_of_line
 	int32_t end = -1;
 	icu::UnicodeString unicode_line;
 
-	while ((line_width < (m_wrapwidth - margin)) && (end < unicode_word.length())) {
+	while ((line_width < (m_wrapwidth - safety_margin)) && (end < unicode_word.length())) {
 		++end;
 		UChar c = unicode_word.charAt(end);
 		// Diacritics do not add to the line width
 		if (!i18n::is_diacritic(c)) {
+			// This only estimates the width
 			line_width += m_style.calc_width_for_wrapping(c);
 		}
 		unicode_line += c;
 	}
 
+	// Now make sure that it really fits.
+	std::string::size_type test_cutoff = line_start + end * 2 / 3;
+	while ((end > 0) && (static_cast<uint32_t>(line_start + end) > test_cutoff)) {
+		if (text_width(text.substr(line_start, end), m_style.font->size()) > m_wrapwidth - safety_margin) {
+			--end;
+		} else {
+			break;
+		}
+	}
+
 	// Find last space
 	int32_t last_space = unicode_line.lastIndexOf(0x0020); // space character
-	if (last_space > minimum_chars) {
+	if ((last_space > 0) && (static_cast<uint32_t>(last_space) > minimum_chars)) {
 		end = last_space;
 	}
 
 	// Make sure that diacritics stay with their base letters, and that
 	// start/end line rules are being followed.
-	while (end > minimum_chars &&
+	while ((end > 0) && (static_cast<uint32_t>(end) > minimum_chars) &&
 			 (i18n::cannot_start_line(unicode_line.charAt(end)) ||
 			  i18n::cannot_end_line(unicode_line.charAt(end - 1)))) {
 		--end;
@@ -254,6 +260,15 @@ void WordWrap::compute_end_of_line
 
 	next_line_start = line_end =
 			(i18n::icustring2string(unicode_word.tempSubString(0, end)).size() + line_start);
+}
+
+
+// Returns true if the text won't fit into the alotted width.
+bool WordWrap::line_fits(const std::string& text, uint32_t safety_margin) const {
+	// calc_width_for_wrapping is fast, but it will underestimate the width.
+	// So, we test again with text_width to make sure that the line really fits.
+	return m_style.calc_width_for_wrapping(i18n::make_ligatures(text.c_str())) <= m_wrapwidth - safety_margin &&
+			text_width(text, m_style.font->size()) <= m_wrapwidth - safety_margin;
 }
 
 
