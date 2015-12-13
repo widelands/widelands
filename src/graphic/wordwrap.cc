@@ -202,7 +202,8 @@ void WordWrap::compute_end_of_line
 			break; // we already know that this cannot possibly fit
 
 		// check whether the next word still fits
-		if (!line_fits(i18n::make_ligatures(text.substr(line_start, nextspace - line_start).c_str()), safety_margin)) {
+		if (!line_fits(i18n::make_ligatures(text.substr(line_start, nextspace - line_start).c_str()),
+							safety_margin)) {
 			break;
 		}
 		space = nextspace;
@@ -267,7 +268,8 @@ void WordWrap::compute_end_of_line
 bool WordWrap::line_fits(const std::string& text, uint32_t safety_margin) const {
 	// calc_width_for_wrapping is fast, but it will underestimate the width.
 	// So, we test again with text_width to make sure that the line really fits.
-	return m_style.calc_width_for_wrapping(i18n::make_ligatures(text.c_str())) <= m_wrapwidth - safety_margin &&
+	return m_style.calc_width_for_wrapping(i18n::make_ligatures(text.c_str()))
+			<= m_wrapwidth - safety_margin &&
 			text_width(text, m_style.font->size()) <= m_wrapwidth - safety_margin;
 }
 
@@ -373,8 +375,6 @@ void WordWrap::draw(RenderTarget & dst, Point where, Align align, uint32_t caret
 
 		if (alignment & Align_Right) {
 			point.x += m_wrapwidth - LINE_MARGIN;
-		} else if (alignment & Align_HCenter) {
-			point.x += m_wrapwidth / 2;
 		}
 
 		const Image* entry_text_im =
