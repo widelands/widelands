@@ -1524,7 +1524,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 	}
 	const bool has_enough_space = (spots_ > needed_spots);
 
-	//This is a replacement for simple count of mines
+	// This is a replacement for simple count of mines
 	const int32_t virtual_mines =
 	   mines_.size() + mineable_fields.size() / 25;
 
@@ -1549,7 +1549,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 		&& virtual_mines >= 5){
 			needs_boost_economy = true;
 		}
-	//resetting highest_nonmil_prio_ so it can be recalculated anew
+	// resetting highest_nonmil_prio_ so it can be recalculated anew
 	highest_nonmil_prio_ = 0;
 
 	const bool too_many_ms_constructionsites =
@@ -1692,7 +1692,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 		for (uint32_t m = 0; m < bo.critical_built_mat_.size(); ++m) {
 			DescriptionIndex wt(static_cast<size_t>(bo.critical_built_mat_.at(m)));
 			uint32_t treshold = 3;
-			//generally trainingsites are more important
+			// generally trainingsites are more important
 			if (bo.type == BuildingObserver::TRAININGSITE) {
 				treshold = 2;
 			}
@@ -2317,14 +2317,14 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 					prio += 30;
 				}
 
-				if (bo.trainingsite_type_ == TrainingSiteType::kBasic){
+				if (bo.trainingsite_type_ == TrainingSiteType::kBasic) {
 					prio = static_cast<int32_t>(militarysites.size())
-						- 40 * static_cast<int32_t>(ts_basic_count_);
+						- 40 * ts_basic_count_;
 				}
 
 				if (bo.trainingsite_type_ == TrainingSiteType::kAdvanced) {
 					prio = static_cast<int32_t>(militarysites.size())
-						- 50 * static_cast<int32_t>(ts_advanced_count_);
+						- 50 * ts_advanced_count_;
 				}
 
 				// exclude spots on border
@@ -3188,7 +3188,7 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 					}
 
 					if (en_bo.total_count() == 1) {
-						//if the upgrade itself can be upgradeed futher, we are more willing to upgrade 2nd building
+						//if the upgrade itself can be upgraded futher, we are more willing to upgrade 2nd building
 						if (en_bo.upgrade_extends_ || en_bo.upgrade_substitutes_) {
 							if (en_bo.current_stats_ > 30) {
 								doing_upgrade = true;
@@ -5002,9 +5002,11 @@ void DefaultAI::lose_building(const Building& b) {
 		if (target_bo.type == BuildingObserver::TRAININGSITE) {
 			if (target_bo.trainingsite_type_ == TrainingSiteType::kBasic) {
 				ts_basic_const_count_ -= 1;
+				assert(ts_basic_const_count_ >= 0);
 			}
 			if (target_bo.trainingsite_type_ == TrainingSiteType::kAdvanced) {
 				ts_advanced_const_count_ -= 1;
+				assert(ts_advanced_const_count_ >= 0);
 			}
 		}
 
@@ -5080,9 +5082,11 @@ void DefaultAI::lose_building(const Building& b) {
 					trainingsites.erase(i);
 					if (bo.trainingsite_type_ == TrainingSiteType::kBasic) {
 						ts_basic_count_ -= 1;
+						assert(ts_basic_count_ >= 0);
 					}
 					if (bo.trainingsite_type_ == TrainingSiteType::kAdvanced) {
 						ts_advanced_count_ -= 1;
+						assert(ts_advanced_count_ >= 0);
 					}
 					break;
 				}
