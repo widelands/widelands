@@ -209,8 +209,6 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG
 	m_clients    .set_font(m_fn, m_fs, RGBColor(0, 255, 0));
 	m_players    .set_font(m_fn, m_fs, RGBColor(0, 255, 0));
 	m_map        .set_font(m_fn, m_fs, RGBColor(0, 255, 0));
-	m_client_info.set_font(m_fn, m_fs, UI_FONT_CLR_FG);
-	m_map_info   .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 
 	m_mapname .set_text(_("(no map)"));
 	m_map_info.set_text(_("The host has not yet selected a map or saved game."));
@@ -481,13 +479,13 @@ void FullscreenMenuLaunchMPG::refresh()
 
 	if (settings.mapfilename != m_filename_proof) {
 		if (!g_fs->file_exists(settings.mapfilename)) {
-			m_client_info.set_font(m_fn, m_fs, UI_FONT_CLR_WARNING);
+			m_client_info.set_color(UI_FONT_CLR_WARNING);
 			m_client_info.set_text
 				(_("The selected file can not be found. If it is not automatically "
 				   "transferred to you, please write to the host about this problem."));
 		} else {
 			// Reset font color
-			m_client_info.set_font(m_fn, m_fs, UI_FONT_CLR_FG);
+			m_client_info.set_color(UI_FONT_CLR_FG);
 
 			// Update local nr of players - needed for the client UI
 			m_nr_players = settings.players.size();
@@ -666,6 +664,7 @@ void FullscreenMenuLaunchMPG::load_map_info()
 		ml->preload_map(true);
 	}
 
+	// NOCOM we need to replace \n in multiline textareas with <br>
 	std::string infotext;
 	infotext += std::string(_("Map details:")) + "\n";
 	infotext += std::string("• ") + (boost::format(_("Size: %1$u x %2$u"))
