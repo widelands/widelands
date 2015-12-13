@@ -43,7 +43,7 @@ std::string as_game_tip(const std::string& txt) {
 		("<rt padding_l=48 padding_t=28 padding_r=48 padding_b=28>"
 		 "<p align=center><font color=21211b face=serif size=16>%s</font></p></rt>");
 
-	f % richtext_escape(txt);
+	f % txt;
 	return f.str();
 }
 
@@ -51,7 +51,7 @@ std::string as_window_title(const std::string& txt) {
 	static boost::format f("<rt><p><font face=serif size=13 bold=1 color=%s>%s</font></p></rt>");
 
 	f % UI_FONT_CLR_FG.hex_value();
-	f % richtext_escape(txt);
+	f % txt;
 	return f.str();
 }
 std::string as_uifont(const std::string & txt, int size, const RGBColor& clr) {
@@ -61,7 +61,7 @@ std::string as_uifont(const std::string & txt, int size, const RGBColor& clr) {
 
 	f % size;
 	f % clr.hex_value();
-	f % richtext_escape(txt);
+	f % txt;
 	return f.str();
 }
 
@@ -70,7 +70,7 @@ std::string as_tooltip(const std::string & txt) {
 
 	f % UI_FONT_SIZE_SMALL;
 	f % UI_FONT_TOOLTIP_CLR.hex_value();
-	f % richtext_escape(txt);
+	f % txt;
 	return f.str();
 }
 
@@ -78,7 +78,7 @@ std::string as_waresinfo(const std::string & txt) {
 	static boost::format f
 		("<rt><p><font face=condensed size=10 bold=0 color=%s>%s</font></p></rt>");
 	f % UI_FONT_TOOLTIP_CLR.hex_value();
-	f % richtext_escape(txt);
+	f % txt;
 	return f.str();
 }
 
