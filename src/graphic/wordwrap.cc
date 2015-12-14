@@ -66,12 +66,12 @@ namespace UI {
  * and a default-constructed text style.
  */
 WordWrap::WordWrap() :
-	m_wrapwidth(std::numeric_limits<uint32_t>::max()), m_draw_caret(false), mode_(WordWrap::Mode::kDisplay)
+	m_wrapwidth(std::numeric_limits<uint32_t>::max()), m_draw_caret(false)
 {
 }
 
 WordWrap::WordWrap(const TextStyle & style, uint32_t gwrapwidth) :
-	m_style(style), m_draw_caret(false), mode_(WordWrap::Mode::kDisplay)
+	m_style(style), m_draw_caret(false)
 {
 	m_wrapwidth = gwrapwidth;
 
@@ -112,9 +112,8 @@ uint32_t WordWrap::wrapwidth() const
  * Perform the wrapping computations for the given text and fill in
  * the private data containing the wrapped results.
  */
-void WordWrap::wrap(const std::string & text, WordWrap::Mode mode)
+void WordWrap::wrap(const std::string & text)
 {
-	mode_ = mode;
 	m_lines.clear();
 
 	std::string::size_type line_start = 0;
@@ -378,17 +377,13 @@ void WordWrap::draw(RenderTarget & dst, Point where, Align align, uint32_t caret
 		}
 
 		const Image* entry_text_im =
-				UI::g_fh1->render(mode_ == WordWrap::Mode::kDisplay ?
-											as_uifont(m_lines[line].text,
-														 m_style.font->size() - UI::g_fh1->fontset().size_offset(),
-														 m_style.fg) :
-											as_editorfont(m_lines[line].text,
-															  m_style.font->size() - UI::g_fh1->fontset().size_offset(),
-															  m_style.fg));
+				UI::g_fh1->render(as_editorfont(m_lines[line].text,
+														  m_style.font->size() - UI::g_fh1->fontset().size_offset(),
+														  m_style.fg));
 		UI::correct_for_align(alignment, entry_text_im->width(), fontheight, &point);
 		dst.blit(point, entry_text_im);
 
-		if (mode_ == WordWrap::Mode::kEditor && m_draw_caret && line == caretline) {
+		if (m_draw_caret && line == caretline) {
 			std::string line_to_caret = m_lines[line].text.substr(0, caretpos);
 			// TODO(GunChleoc): Arabic: Fix cursor position for BIDI text.
 			int caret_x = text_width(line_to_caret, m_style.font->size());
