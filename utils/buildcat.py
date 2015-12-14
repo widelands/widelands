@@ -216,7 +216,13 @@ def pot_modify_header( potfile_in, potfile_out, header ):
             potout.writelines(potin)
 
         return True
-
+    
+def run_msguniq(potfile):
+    msguniq_rv = os.system("msguniq \"%s\" -F --output-file=\"%s\"" % (potfile, potfile))
+    if (msguniq_rv):
+        sys.stderr.write("msguniq exited with errorcode %i\n" % msguniq_rv)
+        return False
+    return True
 
 def do_compile( potfile, srcfiles ):
     """
@@ -274,13 +280,15 @@ def do_compile( potfile, srcfiles ):
             with open(potfile, "at") as p:
                 p.write("\n" + conf.toString())
                 
-            msguniq_rv = os.system("msguniq \"%s\" -F --output-file=\"%s\"" % (potfile, potfile))
-            if (msguniq_rv):
-                sys.stderr.write("msguniq exited with errorcode %i\n" % msguniq_rv)
+            if not run_msguniq(potfile):
                 return False
     elif (conf.found_something_to_translate):
         with open(potfile, "wt") as p:
             p.write(HEAD + conf.toString())
+            
+        # Msguniq is run here only to sort POT entries by file
+        if not run_msguniq(potfile):
+            return False
 
     return True
     
