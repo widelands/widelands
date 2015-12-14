@@ -19,6 +19,7 @@
 
 #include "ui_basic/multilinetextarea.h"
 
+#include <boost/algorithm/string.hpp>
 #include <boost/bind.hpp>
 
 #include "graphic/font_handler1.h"
@@ -86,6 +87,7 @@ void MultilineTextarea::recompute()
 	for (int i = 0; i < 2; ++i) {
 		if (m_text.compare(0, 3, "<rt")) {
 			isrichtext = false;
+			boost::replace_all(m_text, "\n", "<br>");
 			const Image* text_im = UI::g_fh1->render(as_uifont(m_text, m_style.font->size(), m_style.fg),
 																  get_eff_w() - 2 * RICHTEXT_MARGIN);
 			height = text_im->height();

@@ -664,7 +664,6 @@ void FullscreenMenuLaunchMPG::load_map_info()
 		ml->preload_map(true);
 	}
 
-	// NOCOM we need to replace \n in multiline textareas with <br>
 	std::string infotext;
 	infotext += std::string(_("Map details:")) + "\n";
 	infotext += std::string("• ") + (boost::format(_("Size: %1$u x %2$u"))
