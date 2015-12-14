@@ -30,7 +30,7 @@ FullscreenMenuSinglePlayer::FullscreenMenuSinglePlayer() :
 	title
 		(this,
 		 get_w() / 2, m_title_y,
-		 _("Single Player"), UI::Align_HCenter),
+		 _("Single Player"), UI::Align::Align_HCenter),
 
 // Buttons
 	vbox(this, m_box_x, m_box_y, UI::Box::Vertical,

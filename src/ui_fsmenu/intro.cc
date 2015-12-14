@@ -29,7 +29,7 @@ FullscreenMenuIntro::FullscreenMenuIntro()
 m_message
 	(this,
 	 get_w() / 2, get_h() * 19 / 20,
-	 _("Press any key or click to continue ..."), UI::Align_HCenter)
+	 _("Press any key or click to continue ..."), UI::Align::Align_HCenter)
 {
 	m_message.set_font(ui_fn(), fs_small() * 6 / 5, RGBColor(192, 192, 128));
 }

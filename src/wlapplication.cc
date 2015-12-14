@@ -1030,7 +1030,7 @@ void WLApplication::mainmenu()
 				 messagetitle,
 				 message,
 				 UI::WLMessageBox::MBoxType::kOk,
-				 UI::Align_Left);
+				 UI::Align::Align_Left);
 			mmb.run<UI::Panel::Returncodes>();
 
 			message.clear();

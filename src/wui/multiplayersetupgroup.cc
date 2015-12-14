@@ -447,11 +447,11 @@ m_fname(fname)
 		(new UI::Textarea
 			(this,
 			 w * 6 / 15 + buth * 3, buth / 3,
-			 w * 9 / 15 - 4 * buth, buth, UI::Align_HCenter));
+			 w * 9 / 15 - 4 * buth, buth, UI::Align::Align_HCenter));
 	labels.back()->set_text(_("Initialization"));
 	labels.back()->set_textstyle(tsmaller);
 
-	labels.push_back(new UI::Textarea(this, w - buth, buth / 3, buth, buth, UI::Align_Right));
+	labels.push_back(new UI::Textarea(this, w - buth, buth / 3, buth, buth, UI::Align::Align_Right));
 	labels.back()->set_text(_("Team"));
 	labels.back()->set_textstyle(tsmaller);
 

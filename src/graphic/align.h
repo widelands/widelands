@@ -24,7 +24,7 @@
 
 namespace UI {
 
-enum Align {
+enum class Align {
 	Align_Left         =  0,
 	Align_HCenter      =  1,
 	Align_Right        =  2,
@@ -36,18 +36,28 @@ enum Align {
 	Align_Vertical     = 12,
 
 	Align_TopLeft      =  0,
-	Align_CenterLeft   = Align_VCenter,
-	Align_BottomLeft   = Align_Bottom,
+	Align_CenterLeft   = Align::Align_VCenter,
+	Align_BottomLeft   = Align::Align_Bottom,
 
-	Align_TopCenter    = Align_HCenter,
-	Align_Center       = Align_HCenter|Align_VCenter,
-	Align_BottomCenter = Align_HCenter|Align_Bottom,
+	Align_TopCenter    = Align::Align_HCenter,
+	Align_Center       = Align::Align_HCenter | Align::Align_VCenter,
+	Align_BottomCenter = Align::Align_HCenter | Align::Align_Bottom,
 
-	Align_TopRight     = Align_Right,
-	Align_CenterRight  = Align_Right|Align_VCenter,
+	Align_TopRight     = Align::Align_Right,
+	Align_CenterRight  = Align::Align_Right | Align::Align_VCenter,
 
-	Align_BottomRight  = Align_Right|Align_Bottom,
+	Align_BottomRight  = Align::Align_Right | Align::Align_Bottom,
 };
+
+inline Align operator &(Align a, Align b)
+{
+	 return static_cast<Align>(static_cast<int>(a) & static_cast<int>(b));
+}
+
+inline Align operator |(Align a, Align b)
+{
+	 return static_cast<Align>(static_cast<int>(a) | static_cast<int>(b));
+}
 
 Align mirror_alignment(Align alignment);
 void correct_for_align(Align, uint32_t w, uint32_t h, Point* pt);

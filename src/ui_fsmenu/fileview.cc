@@ -56,7 +56,7 @@ FullscreenMenuTextView::FullscreenMenuTextView
 	:
 	FullscreenMenuBase("fileviewmenu.jpg"),
 
-	title (this, get_w() * 3 / 50, get_h() / 10, "", UI::Align_Center),
+	title (this, get_w() * 3 / 50, get_h() / 10, "", UI::Align::Align_Center),
 
 	textview
 		(this,

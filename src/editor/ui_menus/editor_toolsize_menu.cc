@@ -41,7 +41,7 @@ EditorToolsizeMenu::EditorToolsizeMenu
 	:
 	UI::UniqueWindow
 		(&parent, "toolsize_menu", &registry, 250, 50, _("Tool Size")),
-	m_textarea(this, 5, 10, 240, 10, std::string(), UI::Align_BottomCenter),
+	m_textarea(this, 5, 10, 240, 10, std::string(), UI::Align::Align_BottomCenter),
 	m_increase
 		(this, "incr",
 		 get_inner_w() / 2 - 10, 25, 20, 20,

@@ -68,17 +68,17 @@ FullscreenMenuMain::FullscreenMenuMain() :
 		(this, get_w(), get_h(),
 		 /** TRANSLATORS: %1$s = version string, %2%s = "Debug" or "Release" */
 		 (boost::format(_("Version %1$s (%2$s)")) % build_id().c_str() % build_type().c_str()).str(),
-		 UI::Align_BottomRight),
+		 UI::Align::Align_BottomRight),
 	copyright
 		(this, 0, get_h() - 0.5 * m_buth,
 		 /** TRANSLATORS: Placeholders are the copyright years */
 		 (boost::format(_("(C) %1%-%2% by the Widelands Development Team"))
 		  % kWidelandsCopyrightStart % kWidelandsCopyrightEnd).str(),
-		 UI::Align_BottomLeft),
+		 UI::Align::Align_BottomLeft),
 	gpl
 		(this, 0, get_h(),
 		 _("Licensed under the GNU General Public License V2.0"),
-		 UI::Align_BottomLeft)
+		 UI::Align::Align_BottomLeft)
 {
 	playtutorial.sigclicked.connect
 		(boost::bind

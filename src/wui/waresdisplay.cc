@@ -56,7 +56,7 @@ AbstractWaresDisplay::AbstractWaresDisplay
 	m_curware
 		(this,
 		 0, get_inner_h() - 25, get_inner_w(), 20,
-		 "", UI::Align_Center),
+		 "", UI::Align::Align_Center),
 
 	m_selectable(selectable),
 	m_horizontal(horizontal),

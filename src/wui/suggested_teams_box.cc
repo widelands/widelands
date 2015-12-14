@@ -44,7 +44,7 @@ SuggestedTeamsBox::SuggestedTeamsBox(Panel * parent,
 	set_size(max_x, max_y);
 
 	m_suggested_teams_box_label =
-			new UI::Textarea(this, "", UI::Align_CenterLeft);
+			new UI::Textarea(this, "", UI::Align::Align_CenterLeft);
 	add(m_suggested_teams_box_label, UI::Align::Align_Left);
 }
 SuggestedTeamsBox::~SuggestedTeamsBox() {
@@ -105,7 +105,7 @@ void SuggestedTeamsBox::show(const std::vector<Widelands::Map::SuggestedTeamLine
 
 				if (!is_first) {
 					m_lineup_box->add_space(m_padding);
-					vs_label = new UI::Textarea(m_lineup_box, "x", UI::Align_BottomCenter);
+					vs_label = new UI::Textarea(m_lineup_box, "x", UI::Align::Align_BottomCenter);
 					m_lineup_box->add(vs_label, UI::Align::Align_Left);
 					vs_label->set_visible(true);
 					m_vs_labels.push_back(vs_label);

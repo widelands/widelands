@@ -55,18 +55,18 @@ Align mirror_alignment(Align alignment) {
 
 void correct_for_align(Align align, uint32_t w, uint32_t h, Point* pt) {
 	//Vertical Align
-	if (align & (Align_VCenter | Align_Bottom)) {
-		if (align & Align_VCenter)
+	if (static_cast<int>(align & (Align::Align_VCenter | Align::Align_Bottom))) {
+		if (static_cast<int>(align & Align::Align_VCenter))
 			pt->y -= h / 2;
 		else
 			pt->y -= h;
 	}
 
 	//Horizontal Align
-	if ((align & Align_Horizontal) != Align_Left) {
-		if (align & Align_HCenter)
+	if ((align & Align::Align_Horizontal) != Align::Align_Left) {
+		if (static_cast<int>(align & Align::Align_HCenter))
 			pt->x -= w / 2;
-		else if (align & Align_Right)
+		else if (static_cast<int>(align & Align::Align_Right))
 			pt->x -= w;
 	}
 }

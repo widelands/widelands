@@ -61,19 +61,19 @@ GameMainMenuSaveGame::GameMainMenuSaveGame
 		 WINDOW_WIDTH, WINDOW_HEIGHT, _("Save Game")),
 	m_ls     (this, HSPACING, VSPACING,  LIST_WIDTH, LIST_HEIGHT),
 	m_name_label
-		(this, DESCRIPTION_X,  5, 0, 20, _("Map Name:"),  UI::Align_CenterLeft),
+		(this, DESCRIPTION_X,  5, 0, 20, _("Map Name:"),  UI::Align::Align_CenterLeft),
 	m_mapname
-		(this, DESCRIPTION_X, 20, 0, 20, " ",              UI::Align_CenterLeft),
+		(this, DESCRIPTION_X, 20, 0, 20, " ",              UI::Align::Align_CenterLeft),
 	m_gametime_label
-		(this, DESCRIPTION_X, 45, 0, 20, _("Game Time:"), UI::Align_CenterLeft),
+		(this, DESCRIPTION_X, 45, 0, 20, _("Game Time:"), UI::Align::Align_CenterLeft),
 	m_gametime
-		(this, DESCRIPTION_X, 60, 0, 20, " ",              UI::Align_CenterLeft),
+		(this, DESCRIPTION_X, 60, 0, 20, " ",              UI::Align::Align_CenterLeft),
 	m_players_label
-		(this, DESCRIPTION_X, 85, 0, 20, " ",              UI::Align_CenterLeft),
+		(this, DESCRIPTION_X, 85, 0, 20, " ",              UI::Align::Align_CenterLeft),
 	m_win_condition_label
-		(this, DESCRIPTION_X, 110, 0, 20, _("Win condition:"), UI::Align_CenterLeft),
+		(this, DESCRIPTION_X, 110, 0, 20, _("Win condition:"), UI::Align::Align_CenterLeft),
 	m_win_condition
-		(this, DESCRIPTION_X, 125, 0, 20, " ",             UI::Align_CenterLeft),
+		(this, DESCRIPTION_X, 125, 0, 20, " ",             UI::Align::Align_CenterLeft),
 	m_curdir(SaveHandler::get_base_dir())
 {
 	m_editbox =

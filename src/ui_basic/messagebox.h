@@ -60,7 +60,7 @@ struct WLMessageBox : public Window {
 		 const std::string & caption,
 		 const std::string & text,
 		 MBoxType,
-		 Align = Align_Center);
+		 Align = UI::Align::Align_Center);
 	~WLMessageBox();
 
 	boost::signals2::signal<void ()> ok;

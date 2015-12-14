@@ -80,36 +80,36 @@ FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG
 	m_title
 		(this,
 		 get_w() / 2, get_h() / 10,
-		 _("Launch Game"), UI::Align_HCenter),
+		 _("Launch Game"), UI::Align::Align_HCenter),
 	m_mapname
 		(this,
 		 get_w() * 7 / 10 + m_butw / 2, get_h() * 53 / 200 - 15,
-		 std::string(), UI::Align_HCenter),
+		 std::string(), UI::Align::Align_HCenter),
 	m_name
 		(this,
 		 get_w() * 1 / 25, get_h() * 53 / 200 - 15,
-		 _("Player’s name"), UI::Align_Left),
+		 _("Player’s name"), UI::Align::Align_Left),
 	m_type
 		(this,
 		 // (Element x) + (PlayerDescriptionGroup x)  + border
 		 ((get_w() * 16 / 25) * 35 / 125) + (get_w() / 25) + 2, get_h() * 53 / 200 - 15,
-		 _("Player’s type"), UI::Align_Left),
+		 _("Player’s type"), UI::Align::Align_Left),
 	m_team
 		(this,
 		 ((get_w() * 16 / 25) * 35 / 125) + (get_w() / 25) + 2, get_h() * 53 / 200,
-		 _("Team"), UI::Align_Left),
+		 _("Team"), UI::Align::Align_Left),
 	m_tribe
 		(this,
 		 ((get_w() * 16 / 25) * 80 / 125) + (get_w() / 25) + 2, get_h() * 53 / 200 - 15,
-		 _("Player’s tribe"), UI::Align_Left),
+		 _("Player’s tribe"), UI::Align::Align_Left),
 	m_init
 		(this,
 		 ((get_w() * 16 / 25) * 55 / 125) + (get_w() / 25) + 2, get_h() * 53 / 200,
-		 _("Start type"), UI::Align_Left),
+		 _("Start type"), UI::Align::Align_Left),
 	m_wincondition_type
 		(this,
 		 get_w() * 7 / 10 + (m_butw / 2), get_h() * 7 / 20 + m_buth,
-		 _("Type of game"), UI::Align_HCenter),
+		 _("Type of game"), UI::Align::Align_HCenter),
 
 // Variables and objects used in the menu
 	m_settings     (settings),

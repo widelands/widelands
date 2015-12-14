@@ -33,7 +33,7 @@ FullscreenMenuMultiPlayer::FullscreenMenuMultiPlayer() :
 	title
 		(this,
 		 get_w() / 2, m_title_y,
-		 _("Choose game type"), UI::Align_HCenter),
+		 _("Choose game type"), UI::Align::Align_HCenter),
 
 // Buttons
 	vbox(this, m_box_x, m_box_y, UI::Box::Vertical,

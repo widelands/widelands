@@ -45,7 +45,7 @@ m_game(parent->game())
 {
 	// Init boxes
 	UI::Box * vbox = new UI::Box(this, 0, 0, UI::Box::Vertical, 0, 0, PADDING);
-	m_title_area = new UI::Textarea(vbox, "", UI::Align_HCenter);
+	m_title_area = new UI::Textarea(vbox, "", UI::Align::Align_HCenter);
 	vbox->add(m_title_area, UI::Align::Align_HCenter);
 	vbox->add_space(PADDING);
 
@@ -104,8 +104,8 @@ m_game(parent->game())
 
 	// Prepare table
 	m_players_table->add_column(150, _("Player"));
-	m_players_table->add_column(80, _("Team"), "", UI::Align_HCenter);
-	m_players_table->add_column(100, _("Status"), "", UI::Align_HCenter);
+	m_players_table->add_column(80, _("Team"), "", UI::Align::Align_HCenter);
+	m_players_table->add_column(100, _("Status"), "", UI::Align::Align_HCenter);
 	m_players_table->add_column(100, _("Time"));
 
 	// Prepare Elements

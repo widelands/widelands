@@ -81,7 +81,7 @@ EditBox::EditBox
 	m->fontsize = UI_FONT_SIZE_SMALL;
 	m->fontcolor = UI_FONT_CLR_FG;
 
-	m->align = static_cast<Align>((_align & Align_Horizontal) | Align_VCenter);
+	m->align = (_align & UI::Align::Align_Horizontal) | UI::Align::Align_VCenter;
 	m->caret = 0;
 	m->scrolloffset = 0;
 	// yes, use *signed* max as maximum length; just a small safe-guard.
@@ -189,7 +189,7 @@ Align EditBox::align() const
  */
 void EditBox::set_align(Align _align)
 {
-	_align = static_cast<Align>((_align & Align_Horizontal) | Align_VCenter);
+	_align = (_align & UI::Align::Align_Horizontal) | UI::Align::Align_VCenter;
 	if (_align != m->align) {
 		m->align = _align;
 		m->scrolloffset = 0;
@@ -435,11 +435,11 @@ void EditBox::draw(RenderTarget & odst)
 
 	Point pos(4, get_h() >> 1);
 
-	switch (m->align & Align_Horizontal) {
-	case Align_HCenter:
+	switch (m->align & UI::Align::Align_Horizontal) {
+	case UI::Align::Align_HCenter:
 		pos.x = get_w() >> 1;
 		break;
-	case Align_Right:
+	case UI::Align::Align_Right:
 		pos.x = get_w() - 4;
 		break;
 	default:
@@ -473,12 +473,12 @@ void EditBox::check_caret()
 
 	int32_t caretpos;
 
-	switch (m->align & Align_Horizontal) {
-	case Align_HCenter:
+	switch (m->align & UI::Align::Align_Horizontal) {
+	case UI::Align::Align_HCenter:
 		caretpos  = (get_w() - static_cast<int32_t>(leftw + rightw)) / 2;
 		caretpos += m->scrolloffset + leftw;
 		break;
-	case Align_Right:
+	case UI::Align::Align_Right:
 		caretpos = get_w() - 4 + m->scrolloffset - rightw;
 		break;
 	default:
@@ -491,10 +491,10 @@ void EditBox::check_caret()
 	else if (caretpos > get_w() - 4)
 		m->scrolloffset -= caretpos - get_w() + 4 + get_w() / 5;
 
-	if ((m->align & Align_Horizontal) == Align_Left) {
+	if ((m->align & UI::Align::Align_Horizontal) == UI::Align::Align_Left) {
 		if (m->scrolloffset > 0)
 			m->scrolloffset = 0;
-	} else if ((m->align & Align_Horizontal) == Align_Right) {
+	} else if ((m->align & UI::Align::Align_Horizontal) == UI::Align::Align_Right) {
 		if (m->scrolloffset < 0)
 			m->scrolloffset = 0;
 	}

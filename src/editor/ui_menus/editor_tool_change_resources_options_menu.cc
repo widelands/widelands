@@ -53,7 +53,7 @@ EditorToolChangeResourcesOptionsMenu
 	m_change_by_label
 		(this,
 		 hmargin(), vmargin(), get_inner_w() - 2 * hmargin(), BUTTON_HEIGHT,
-		 _("Increase/Decrease Value"), UI::Align_BottomCenter),
+		 _("Increase/Decrease Value"), UI::Align::Align_BottomCenter),
 	m_change_by_increase
 		(this, "incr_change_by",
 		 get_inner_w() - hmargin() - BUTTON_WIDTH,
@@ -78,13 +78,13 @@ EditorToolChangeResourcesOptionsMenu
 		 (m_change_by_increase.get_x() + m_change_by_increase.get_w() +
 		  hspacing()),
 		 BUTTON_HEIGHT,
-		 UI::Align_BottomCenter),
+		 UI::Align::Align_BottomCenter),
 	m_set_to_label
 		(this,
 		 vmargin(),
 		 m_change_by_increase.get_y() + m_change_by_increase.get_h() + vspacing(),
 		 get_inner_w() - 2 * hmargin(), BUTTON_HEIGHT,
-		 _("Set Value"), UI::Align_BottomCenter),
+		 _("Set Value"), UI::Align::Align_BottomCenter),
 	m_set_to_increase
 		(this, "incr_set_to",
 		 m_change_by_increase.get_x(),
@@ -102,8 +102,8 @@ EditorToolChangeResourcesOptionsMenu
 		(this,
 		 m_change_by_value.get_x(), m_set_to_increase.get_y(),
 		 m_change_by_value.get_w(), BUTTON_HEIGHT,
-		 UI::Align_BottomCenter),
-	m_cur_selection(this, 0, 0, _("Current Selection"), UI::Align_BottomCenter),
+		 UI::Align::Align_BottomCenter),
+	m_cur_selection(this, 0, 0, _("Current Selection"), UI::Align::Align_BottomCenter),
 	m_increase_tool(increase_tool)
 {
 	m_change_by_increase.sigclicked.connect

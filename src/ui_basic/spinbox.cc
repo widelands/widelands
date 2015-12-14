@@ -128,7 +128,7 @@ SpinBox::SpinBox
 
 	box_->add(label, UI::Align::Align_HCenter);
 
-	sbi_->text = new UI::Textarea(box_, "", Align_Center);
+	sbi_->text = new UI::Textarea(box_, "", UI::Align::Align_Center);
 
 	sbi_->button_minus =
 		new Button

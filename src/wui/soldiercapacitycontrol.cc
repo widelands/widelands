@@ -68,12 +68,12 @@ m_increase
 	(this, "increase", 0, 0, 32, 32,
 	 g_gr->images().get("pics/but4.png"),
 	 g_gr->images().get("pics/menu_up_train.png"), _("Increase capacity")),
-m_value(this, "199", UI::Align_Center)
+m_value(this, "199", UI::Align::Align_Center)
 {
 	m_decrease.sigclicked.connect(boost::bind(&SoldierCapacityControl::click_decrease, boost::ref(*this)));
 	m_increase.sigclicked.connect(boost::bind(&SoldierCapacityControl::click_increase, boost::ref(*this)));
 
-	add(new UI::Textarea(this, _("Capacity")), UI::Align::Align_HCenter);
+	add(new UI::Textarea(this, _("Align_HCenter")), UI::Align::Align_HCenter);
 	add(&m_decrease, UI::Align::Align_HCenter);
 	add(&m_value, UI::Align::Align_HCenter);
 	add(&m_increase, UI::Align::Align_HCenter);

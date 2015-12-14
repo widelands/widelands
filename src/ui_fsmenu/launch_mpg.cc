@@ -155,7 +155,7 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG
 	m_title
 		(this,
 		 get_w() / 2, get_h() / 25,
-		 _("Multiplayer Game Setup"), UI::Align_HCenter),
+		 _("Multiplayer Game Setup"), UI::Align::Align_HCenter),
 	m_mapname
 		(this,
 		 m_right_column_x, get_h() * 3 / 20,
@@ -164,19 +164,19 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG
 		(this,
 		 // (get_w() * 57 / 80) is the width of the MultiPlayerSetupGroup
 		 get_w() / 50, get_h() / 10, (get_w() * 57 / 80) / 3, get_h() / 10,
-		 _("Clients"), UI::Align_HCenter),
+		 _("Clients"), UI::Align::Align_HCenter),
 	m_players
 		(this,
 		 get_w() / 50 + (get_w() * 57 / 80) * 6 / 15, get_h() / 10, (get_w() * 57 / 80) * 9 / 15, get_h() / 10,
-		 _("Players"), UI::Align_HCenter),
+		 _("Players"), UI::Align::Align_HCenter),
 	m_map
 		(this,
 		 m_right_column_x, get_h() / 10, m_butw, get_h() / 10,
-		 _("Map"), UI::Align_HCenter),
+		 _("Map"), UI::Align::Align_HCenter),
 	m_wincondition_type
 		(this,
 		 m_right_column_x + (m_butw / 2), get_h() * 10 / 20 - 1.5 * m_label_height,
-		 _("Type of game"), UI::Align_HCenter),
+		 _("Type of game"), UI::Align::Align_HCenter),
 
 	m_map_info(this, m_right_column_x, get_h() * 2 / 10, m_butw, get_h() * 23 / 80 - 2 * m_label_height),
 	m_client_info(this, m_right_column_x, get_h() * 13 / 20 - 2 * m_label_height, m_butw, 2 * m_label_height),
