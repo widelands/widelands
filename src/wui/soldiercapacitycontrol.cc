@@ -73,10 +73,10 @@ m_value(this, "199", UI::Align_Center)
 	m_decrease.sigclicked.connect(boost::bind(&SoldierCapacityControl::click_decrease, boost::ref(*this)));
 	m_increase.sigclicked.connect(boost::bind(&SoldierCapacityControl::click_increase, boost::ref(*this)));
 
-	add(new UI::Textarea(this, _("Capacity")), AlignCenter);
-	add(&m_decrease, AlignCenter);
-	add(&m_value, AlignCenter);
-	add(&m_increase, AlignCenter);
+	add(new UI::Textarea(this, _("Capacity")), UI::Align::Align_HCenter);
+	add(&m_decrease, UI::Align::Align_HCenter);
+	add(&m_value, UI::Align::Align_HCenter);
+	add(&m_increase, UI::Align::Align_HCenter);
 
 	m_decrease.set_repeating(true);
 	m_increase.set_repeating(true);

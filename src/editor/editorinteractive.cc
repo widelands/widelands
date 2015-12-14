@@ -114,14 +114,14 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase & e) :
 		boost::bind(&EditorHistory::redo_action, &m_history, boost::cref(egbase().world())));
 
 	m_toolbar.set_layout_toplevel(true);
-	m_toolbar.add(&m_toggle_main_menu,       UI::Box::AlignLeft);
-	m_toolbar.add(&m_toggle_tool_menu,       UI::Box::AlignLeft);
-	m_toolbar.add(&m_toggle_toolsize_menu,   UI::Box::AlignLeft);
-	m_toolbar.add(&m_toggle_minimap,         UI::Box::AlignLeft);
-	m_toolbar.add(&m_toggle_buildhelp,       UI::Box::AlignLeft);
-	m_toolbar.add(&m_toggle_player_menu,     UI::Box::AlignLeft);
-	m_toolbar.add(&m_undo,                   UI::Box::AlignLeft);
-	m_toolbar.add(&m_redo,                   UI::Box::AlignLeft);
+	m_toolbar.add(&m_toggle_main_menu,       UI::Align::Align_Left);
+	m_toolbar.add(&m_toggle_tool_menu,       UI::Align::Align_Left);
+	m_toolbar.add(&m_toggle_toolsize_menu,   UI::Align::Align_Left);
+	m_toolbar.add(&m_toggle_minimap,         UI::Align::Align_Left);
+	m_toolbar.add(&m_toggle_buildhelp,       UI::Align::Align_Left);
+	m_toolbar.add(&m_toggle_player_menu,     UI::Align::Align_Left);
+	m_toolbar.add(&m_undo,                   UI::Align::Align_Left);
+	m_toolbar.add(&m_redo,                   UI::Align::Align_Left);
 	adjust_toolbar_position();
 
 	m_undo.set_enabled(false);

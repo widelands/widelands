@@ -58,7 +58,7 @@ DismantleSiteWindow::DismantleSiteWindow
 			 UI::ProgressBar::DefaultWidth, UI::ProgressBar::DefaultHeight,
 			 UI::ProgressBar::Horizontal);
 	m_progress->set_total(1 << 16);
-	box.add(m_progress, UI::Box::AlignCenter);
+	box.add(m_progress, UI::Align::Align_HCenter);
 
 	box.add_space(8);
 

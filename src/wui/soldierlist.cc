@@ -390,11 +390,11 @@ m_building(building),
 m_soldierpanel(*this, igb.egbase(), building),
 m_infotext(this, _("Click soldier to send away"))
 {
-	add(&m_soldierpanel, UI::Box::AlignCenter);
+	add(&m_soldierpanel, UI::Align::Align_HCenter);
 
 	add_space(2);
 
-	add(&m_infotext, UI::Box::AlignCenter);
+	add(&m_infotext, UI::Align::Align_HCenter);
 
 	m_soldierpanel.set_mouseover(boost::bind(&SoldierList::mouseover, this, _1));
 	m_soldierpanel.set_click(boost::bind(&SoldierList::eject, this, _1));
@@ -422,7 +422,7 @@ m_infotext(this, _("Click soldier to send away"))
 			(buttons, Point(32, 0), g_gr->images().get("pics/prefer_heroes.png"), _("Prefer Heroes"));
 		UI::Radiobutton* button = m_soldier_preference.get_first_button();
 		while (button) {
-			buttons->add(button, AlignLeft);
+			buttons->add(button, UI::Align::Align_Left);
 			button = button->next_button();
 		}
 
@@ -440,9 +440,9 @@ m_infotext(this, _("Click soldier to send away"))
 	buttons->add_inf_space();
 	buttons->add
 		(create_soldier_capacity_control(*buttons, igb, building),
-		 UI::Box::AlignRight);
+		 UI::Align::Align_Right);
 
-	add(buttons, UI::Box::AlignCenter, true);
+	add(buttons, UI::Align::Align_HCenter, true);
 }
 
 SoldierControl & SoldierList::soldiers() const

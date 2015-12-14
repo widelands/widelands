@@ -121,31 +121,31 @@ FullscreenMenuMain::FullscreenMenuMain() :
 			 (&FullscreenMenuMain::end_modal<FullscreenMenuBase::MenuTarget>, boost::ref(*this),
 			  FullscreenMenuBase::MenuTarget::kExit));
 
-	vbox.add(&playtutorial, UI::Box::AlignCenter);
+	vbox.add(&playtutorial, UI::Align::Align_HCenter);
 
 	vbox.add_space(m_padding);
 
-	vbox.add(&singleplayer, UI::Box::AlignCenter);
-	vbox.add(&multiplayer, UI::Box::AlignCenter);
-	vbox.add(&replay, UI::Box::AlignCenter);
+	vbox.add(&singleplayer, UI::Align::Align_HCenter);
+	vbox.add(&multiplayer, UI::Align::Align_HCenter);
+	vbox.add(&replay, UI::Align::Align_HCenter);
 
 	vbox.add_space(m_padding);
 
-	vbox.add(&editor, UI::Box::AlignCenter);
+	vbox.add(&editor, UI::Align::Align_HCenter);
 
 	vbox.add_space(m_padding);
 
-	vbox.add(&options, UI::Box::AlignCenter);
+	vbox.add(&options, UI::Align::Align_HCenter);
 
 	vbox.add_space(m_padding);
 
-	vbox.add(&readme, UI::Box::AlignCenter);
-	vbox.add(&license, UI::Box::AlignCenter);
-	vbox.add(&authors, UI::Box::AlignCenter);
+	vbox.add(&readme, UI::Align::Align_HCenter);
+	vbox.add(&license, UI::Align::Align_HCenter);
+	vbox.add(&authors, UI::Align::Align_HCenter);
 
 	vbox.add_space(m_padding);
 
-	vbox.add(&exit, UI::Box::AlignCenter);
+	vbox.add(&exit, UI::Align::Align_HCenter);
 
 	vbox.set_size(m_butw, get_h() - vbox.get_y());
 }

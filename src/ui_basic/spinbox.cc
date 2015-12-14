@@ -126,7 +126,7 @@ SpinBox::SpinBox
 	UI::MultilineTextarea* label = new UI::MultilineTextarea(box_, 0, 0, available_width,
 																				texth * (extra_rows + 1), label_text);
 
-	box_->add(label, UI::Box::AlignCenter);
+	box_->add(label, UI::Align::Align_HCenter);
 
 	sbi_->text = new UI::Textarea(box_, "", Align_Center);
 
@@ -173,17 +173,17 @@ SpinBox::SpinBox
 											 - 2 * sbi_->button_minus->get_w()
 											 - 4 * padding);
 
-		box_->add(sbi_->button_ten_minus, UI::Box::AlignCenter);
-		box_->add(sbi_->button_minus, UI::Box::AlignCenter);
-		box_->add(sbi_->text, UI::Box::AlignCenter);
-		box_->add(sbi_->button_plus, UI::Box::AlignCenter);
-		box_->add(sbi_->button_ten_plus, UI::Box::AlignCenter);
+		box_->add(sbi_->button_ten_minus, UI::Align::Align_HCenter);
+		box_->add(sbi_->button_minus, UI::Align::Align_HCenter);
+		box_->add(sbi_->text, UI::Align::Align_HCenter);
+		box_->add(sbi_->button_plus, UI::Align::Align_HCenter);
+		box_->add(sbi_->button_ten_plus, UI::Align::Align_HCenter);
 	} else {
 		sbi_->text->set_fixed_width(unit_w - 2 * sbi_->button_minus->get_w() - 2 * padding);
 
-		box_->add(sbi_->button_minus, UI::Box::AlignCenter);
-		box_->add(sbi_->text, UI::Box::AlignCenter);
-		box_->add(sbi_->button_plus, UI::Box::AlignCenter);
+		box_->add(sbi_->button_minus, UI::Align::Align_HCenter);
+		box_->add(sbi_->text, UI::Align::Align_HCenter);
+		box_->add(sbi_->button_plus, UI::Align::Align_HCenter);
 	}
 
 	sbi_->button_plus->sigclicked.connect(boost::bind(&SpinBox::change_value, boost::ref(*this), 1));

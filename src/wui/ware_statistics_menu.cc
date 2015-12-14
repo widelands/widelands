@@ -210,7 +210,7 @@ m_parent(&parent)
 	tabs->activate(0);
 
 	//add tabbed environment to box
-	box->add(tabs, UI::Box::AlignLeft, true);
+	box->add(tabs, UI::Align::Align_Left, true);
 
 	//register statistics data
 	for (Widelands::DescriptionIndex cur_ware = 0; cur_ware < nr_wares; ++cur_ware) {
@@ -249,14 +249,14 @@ m_parent(&parent)
 			(box, 0, 0, parent.get_player()->tribe(),
 			 boost::bind(&WareStatisticsMenu::cb_changed_to, boost::ref(*this), _1, _2),
 			 m_color_map),
-		 UI::Box::AlignLeft, true);
+		 UI::Align::Align_Left, true);
 
 	box->add
 		(new WuiPlotGenericAreaSlider
 			(this, *m_plot_production, this,
 			0, 0, 100, 45,
 			g_gr->images().get("pics/but1.png")),
-		 UI::Box::AlignLeft, true);
+		 UI::Align::Align_Left, true);
 
 }
 

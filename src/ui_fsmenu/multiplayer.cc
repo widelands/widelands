@@ -62,15 +62,15 @@ FullscreenMenuMultiPlayer::FullscreenMenuMultiPlayer() :
 
 	title.set_font(ui_fn(), fs_big(), UI_FONT_CLR_FG);
 
-	vbox.add(&metaserver, UI::Box::AlignCenter);
-	vbox.add(&lan, UI::Box::AlignCenter);
+	vbox.add(&metaserver, UI::Align::Align_HCenter);
+	vbox.add(&lan, UI::Align::Align_HCenter);
 
 	// Multiple add_space calls to get the same height for the back button as in the single player menu
 	vbox.add_space(m_buth);
 	vbox.add_space(m_buth);
 	vbox.add_space(6 * m_buth);
 
-	vbox.add(&back, UI::Box::AlignCenter);
+	vbox.add(&back, UI::Align::Align_HCenter);
 
 	vbox.set_size(m_butw, get_h() - vbox.get_y());
 

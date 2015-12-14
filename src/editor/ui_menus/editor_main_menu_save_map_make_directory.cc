@@ -46,9 +46,9 @@ MainMenuSaveMapMakeDirectory::MainMenuSaveMapMakeDirectory
 		g_gr->images().get("pics/but1.png"),
 		_("Cancel")) {
 
-	vbox_.add(&label_, UI::Box::AlignLeft);
+	vbox_.add(&label_, UI::Align::Align_Left);
 	vbox_.add_space(padding_);
-	vbox_.add(&edit_, UI::Box::AlignLeft);
+	vbox_.add(&edit_, UI::Align::Align_Left);
 	vbox_.set_size(get_inner_w() - 2 * padding_, get_inner_h() - 3 * padding_ - buth_);
 
 	edit_.set_text(dirname_);

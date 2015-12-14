@@ -71,16 +71,16 @@ FullscreenMenuSinglePlayer::FullscreenMenuSinglePlayer() :
 
 	title.set_font(ui_fn(), fs_big(), UI_FONT_CLR_FG);
 
-	vbox.add(&new_game, UI::Box::AlignCenter);
-	vbox.add(&campaign, UI::Box::AlignCenter);
+	vbox.add(&new_game, UI::Align::Align_HCenter);
+	vbox.add(&campaign, UI::Align::Align_HCenter);
 
 	vbox.add_space(m_buth);
 
-	vbox.add(&load_game, UI::Box::AlignCenter);
+	vbox.add(&load_game, UI::Align::Align_HCenter);
 
 	vbox.add_space(6 * m_buth);
 
-	vbox.add(&back, UI::Box::AlignCenter);
+	vbox.add(&back, UI::Align::Align_HCenter);
 
 	vbox.set_size(m_butw, get_h() - vbox.get_y());
 }

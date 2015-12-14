@@ -124,10 +124,10 @@ private:
 			m_display(this, 0, 0, economy.owner().tribe(), Widelands::wwWARE, m_can_act, economy),
 			m_economy(economy)
 		{
-			add(&m_display, UI::Box::AlignLeft, true);
+			add(&m_display, UI::Align::Align_Left, true);
 
 			UI::Box * buttons = new UI::Box(this, 0, 0, UI::Box::Horizontal);
-			add(buttons, UI::Box::AlignLeft);
+			add(buttons, UI::Align::Align_Left);
 
 			UI::Button * b = nullptr;
 
@@ -138,7 +138,7 @@ private:
 		  g_gr->images().get("pics/but4.png"),            \
 		  text, tooltip, m_can_act);                                \
 	b->sigclicked.connect(boost::bind(&EconomyOptionsWarePanel::callback, this)); \
-	buttons->add(b, UI::Box::AlignCenter);
+	buttons->add(b, UI::Align::Align_HCenter);
 			ADD_WARE_BUTTON(decrease_target, "-", _("Decrease target"))
 			b->set_repeating(true);
 			ADD_WARE_BUTTON(increase_target, "+", _("Increase target"))
@@ -207,10 +207,10 @@ private:
 			m_display(this, 0, 0, economy.owner().tribe(), Widelands::wwWORKER, m_can_act, economy),
 			m_economy(economy)
 		{
-			add(&m_display, UI::Box::AlignLeft, true);
+			add(&m_display, UI::Align::Align_Left, true);
 
 			UI::Box * buttons = new UI::Box(this, 0, 0, UI::Box::Horizontal);
-			add(buttons, UI::Box::AlignLeft);
+			add(buttons, UI::Align::Align_Left);
 
 			UI::Button * b = nullptr;
 #define ADD_WORKER_BUTTON(callback, text, tooltip)                  \
@@ -220,7 +220,7 @@ private:
 		  g_gr->images().get("pics/but4.png"),              \
 		  text, tooltip, m_can_act);                                  \
 	b->sigclicked.connect(boost::bind(&EconomyOptionsWorkerPanel::callback, this)); \
-	buttons->add(b, UI::Box::AlignCenter);
+	buttons->add(b, UI::Align::Align_HCenter);
 
 			ADD_WORKER_BUTTON(decrease_target, "-", _("Decrease target"))
 			b->set_repeating(true);
