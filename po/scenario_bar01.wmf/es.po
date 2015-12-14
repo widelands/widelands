@@ -3,15 +3,16 @@
 # 
 # Translators:
 # Antonio Trueba <atrueba@users.sourceforge.net>, 2007
+# Ivan Radzik <radzik_ivan@outlook.com>, 2015
 # Lucía Pradillos <dreamers_88@hotmail.com>, 2015
 # Madkat Here, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-23 09:42+0000\n"
-"PO-Revision-Date: 2015-11-26 10:54+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2015-12-11 07:41+0000\n"
+"PO-Revision-Date: 2015-12-11 19:41+0000\n"
+"Last-Translator: Ivan Radzik <radzik_ivan@outlook.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -32,7 +33,7 @@ msgstr "Construye una cabaña de guardabosques al lado de cada cabaña de leñad
 msgid ""
 "Naturally, trees only grow at a slow rate. To make sure you have enough "
 "logs, you have to build rangers."
-msgstr ""
+msgstr "Los árboles crecen lentamente, naturalmente. Para asegúrate de que tienes suficientes troncos, debes construir guardabosques."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:33
 msgid "Expand north-east and build a quarry"
@@ -58,11 +59,11 @@ msgstr "Empieza a construir minas en la montaña"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:44
 msgid "Build coal and iron mines"
-msgstr ""
+msgstr "Construye minas de carbón y de mineral de hierro."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:45
 msgid "Build a coal mine and an iron mine."
-msgstr ""
+msgstr "Construye una mina de carbón y una mina de mineral de hierro."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:46
 msgid ""

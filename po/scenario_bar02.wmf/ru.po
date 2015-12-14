@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-12-03 09:55+0000\n"
-"PO-Revision-Date: 2015-12-06 15:10+0000\n"
+"POT-Creation-Date: 2015-12-11 07:41+0000\n"
+"PO-Revision-Date: 2015-12-12 13:47+0000\n"
 "Last-Translator: Федор <Lunar-energy@ya.ru>\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
@@ -34,7 +34,7 @@ msgstr "Постройте рыбацкую хижину"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:27
 msgid "Build a hunter’s hut"
-msgstr ""
+msgstr "Постройте хижину охотника"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:28
 msgid "Build a well"
@@ -66,7 +66,7 @@ msgstr ""
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:46
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:48
 msgid "Build a tower"
-msgstr ""
+msgstr "Постройте башню"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:49
 msgid ""
@@ -205,7 +205,7 @@ msgstr ""
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:145
 msgid "Close to Home"
-msgstr ""
+msgstr "Близко к штабу"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:146
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:157
@@ -579,20 +579,20 @@ msgid ""
 "assault. By dusk, I will celebrate my victory in the wooden halls of the "
 "warlord and sacrifice a newborn lamb in the honor of my father, whose eyes "
 "are set upon me today."
-msgstr ""
+msgstr "Завтрашним утром, когда молодое солнце поднимется над деревьями, мы нападём. На закате, я буду праздновать мою победу в деревянных залах военачальника и жертву новорожденного ягненка в честь моего отца, чьи глаза настроены на меня сегодня."
 
 #. TRANSLATORS: Thron
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:334
 msgid "So be it!"
-msgstr ""
+msgstr "Так тому и быть!"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:339
 msgid "Faster Transportation"
-msgstr ""
+msgstr "Быстрее транспорта"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:340
 msgid "Khantrukh says:"
-msgstr ""
+msgstr "Хантрух сказал:"
 
 #. TRANSLATORS: Khantrukh
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:342
@@ -600,16 +600,16 @@ msgid ""
 "Chieftain, remember the poor carriers: Our roads get longer and longer and "
 "the burden on their shoulders never gets lighter. We should breed more oxen "
 "to make their work lighter and our transportation more efficient."
-msgstr ""
+msgstr "Вождь, помни о своих носильщиках: наши дороги становятся всё длиннее и длиннее, а нагрузка наших бедных носильщиков не становится легче. Нам нужно разводить больше быков, чтобы облегчить нагрузку наших носильщиков и сделать эффективнее перенос предметов."
 
 #: ../../scripting/format_scenario.lua:36
 msgid "“%s”"
-msgstr ""
+msgstr "“%s”"
 
 #: ../../scripting/format_scenario.lua:146
 msgid "New Objective"
 msgid_plural "New Objectives"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Новое задание"
+msgstr[1] "Новые задания"
+msgstr[2] "Новые задания"
+msgstr[3] "Новые задания"

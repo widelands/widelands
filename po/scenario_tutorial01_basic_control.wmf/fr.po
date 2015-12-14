@@ -5,14 +5,15 @@
 # xXxLolimixXx <e.osmaaane@gmail.com>, 2015
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # GunChleoc, 2014
+# Jaypad <ju-ju@nataju.fr>, 2015
 # Renaud Bouchard, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-12-03 09:55+0000\n"
-"PO-Revision-Date: 2015-12-03 09:57+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2015-12-11 07:41+0000\n"
+"PO-Revision-Date: 2015-12-13 15:25+0000\n"
+"Last-Translator: Jaypad <ju-ju@nataju.fr>\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -77,7 +78,7 @@ msgid ""
 "The most important wares in the early game are the basic construction wares:"
 " logs and granite. Let’s make sure that we do not run out of logs. For this,"
 " we need a lumberjack and a hut for him to stay in."
-msgstr ""
+msgstr "Vous commencez habituellement la partie avec un quartier général. C'est le gros édifice avec le drapeau bleu devant. Le quartier général est un entrepôt qui stocke les marchandises, les travailleurs et les soldats. Certaines marchandises sont requises pour la construction de maisons, d'autres pour produire d'autres biens. Évidemment, les marchandises qui se trouvent dans le quartier général ne dureront pas éternellement, il vous faut donc vous assurer de les remplacer. Les marchandises les plus importantes au début de la partie sont les matériaux de construction de base : troncs et pierre brute. Assurons-nous que nous ne manquerons pas de troncs. Pour cela, nous avons besoin d'un bûcheron et d'une cabane pour l'héberger."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:44
 msgid ""
@@ -86,7 +87,7 @@ msgid ""
 "either by clicking on the ‘Show Building Spaces’ button at the bottom of the"
 " screen, which is the fourth one from the left. Or you can use the Space key"
 " to toggle it."
-msgstr ""
+msgstr "Nous devons trouver un endroit approprié pour constrire la cabane de bûcheron. Pour que ce soit plus facile, nous pouvons activer 'Montrer les espaces de construction'. Vous pouvez le faire de deux manières : en cliquant sur le bouton 'Montrer les espaces de construction' en bas de l'écran, le quatrième depuis la gauche,  ou en utilisant la touche ESPACE du clavier."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:46
 msgid "Left-click the ‘OK’ button to close this box and then try it."
@@ -111,7 +112,7 @@ msgid ""
 "Do so now, either by pressing Space or by clicking the fourth button from "
 "the left at the very bottom of the screen. Right-click on this window and "
 "then give it a try."
-msgstr ""
+msgstr "Faites le maintenant, soit en pressant la touche ESPACE, soit en cliquant sur le quatrième bouton depuis la gauche en bas de l'écran. Faites un clic droit sur cette fenêtre et essayez."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:59
 msgid "Lumberjack’s Spot"
@@ -236,7 +237,7 @@ msgid ""
 "If you want things to go faster, simply use the Page Up key on your keyboard"
 " to increase the game speed. You can use Page Down to make the game slower "
 "again."
-msgstr ""
+msgstr "Si vous voulez aller plus vite, appuyez simplement sur la touche P. PRÉC. (page up) de votre clavier pour augmenter la vitesse du jeu. Vous pouvez utiliser P. SUIV. (page down) pour ralentir le jeu à nouveau."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:145
 msgid "Waiting for the Hut to be Finished"
@@ -290,7 +291,7 @@ msgid ""
 "Excellent. The lumberjack’s hut is done. A lumberjack will now move in and "
 "start chopping down trees, so our log income is secured for now. Now on to "
 "the granite."
-msgstr ""
+msgstr "Excellent. La cabane du bûcheron est terminée. un bûcheron va maintenant la rejoindre, et commencer à abattre des arbres. Notre approvisionnement en troncs est donc assuré pour le moment. Occupons-nous maintenant des pierres brutes."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:179
 msgid "Some Rocks Were Found"
@@ -306,7 +307,7 @@ msgid ""
 "quarry next to some rocks lying around. As it happens, there is a pile of "
 "them just to the west (left) of your headquarters. I will teach you now how "
 "to move your view over there."
-msgstr ""
+msgstr "Les pierres peuvent être extraites des mines de granite, mais il est plus facile de construire une carrière à proximité des rochers environnants. En l'occurrence, il y en a juste à l'Ouest (gauche) de votre quartier-général. Je vais vous apprendre maintenant à déplacer votre vue à cet endroit."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:184
 msgid ""
@@ -496,7 +497,7 @@ msgid ""
 "The quarry is a small building like the lumberjack’s hut. You can therefore "
 "build it on any field that shows a red, yellow or green house when the "
 "building spaces symbols are enabled (Press Space for that)."
-msgstr ""
+msgstr "La carrière est un petit bâtiment, comme la cabane du bûcheron. Vous pouvez donc la construire sur n'importe quel emplacement affichant une maison rouge, jaune ou verte lorsque l'aide à la construction est activée (Appuyez sur ESPACE pour cela)."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:269
 msgid ""
@@ -628,7 +629,7 @@ msgstr "Afin de construire une nouvelle route, cliquez sur le drapeau situé à 
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:342
 msgid "Quarry not Connected"
-msgstr ""
+msgstr "La carrière n'est pas reliée au réseau routier"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:344
 msgid ""
@@ -637,11 +638,11 @@ msgid ""
 "transport wares. The simplest way is to click on the construction site’s "
 "flag, choose ‘Build road’, and then click on the destination flag (the one "
 "in front of your headquarters), just like I’ve demonstrated."
-msgstr ""
+msgstr "Vos ouvriers n'aiment pas marcher à travers-champs. Vous devez contruire une route entre votre quartier-général et le site de construction afin que les porteurs puissent y acheminer les marchandises. La manière la plus simple est de cliquer sur le drapeau du site de construction, de choisir 'Construire des routes' et de cliquer sur le drapeau de destination (celui devant votre quartier-général), comme je viens de vous le montrer."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:351
 msgid "You Destroyed the Construction Site!"
-msgstr ""
+msgstr "Vous avez détruit le site de construction !"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:353
 msgid ""
@@ -650,7 +651,7 @@ msgid ""
 "previous savegame. Luckily, these are created from time to time. To do so, "
 "you have to go back to the main menu and choose ‘Single Player’ → ‘Load "
 "Game’. And please be a bit more careful next time."
-msgstr ""
+msgstr "Il semble que vous avez détruit le site de construction pour une carrière que nous voulions construire. Puisque nous avons besoin de granite, je vous suggère de recharger une précédente sauvegarde. Heureusement, elle sont créées à intervales réguliers. Pour ce faire, vous devez revenir au menu principal  et choisir 'Solo' → ‘Charger une partie'. Et faites plus attention la prochaine fois s'il vous plaît."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:361
 msgid "Build a second quarry"
@@ -660,7 +661,7 @@ msgstr "Construisez une seconde carrière"
 msgid ""
 "When there are many rocks, you can consider building another quarry. This "
 "will make the granite production faster."
-msgstr ""
+msgstr "Lorsqu'il y a beaucoup de rochers, vous pouvez envisager de construire une autre carrière. La production de granite sera ainsi plus rapide."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:365
 msgid ""
@@ -746,17 +747,17 @@ msgid ""
 "reading, and the one that informed you that a new headquarters was added to "
 "your economy. Let’s learn how to archive messages: first, select the message"
 " that you wish to archive by clicking on it in the list. Then, click the"
-msgstr ""
+msgstr "Vous avez actuellement deux messages. Celui que vous lisez en ce moment et celui qui vous a prévenu qu'un nouveau quartier général a été ajouté à votre économie. Apprenons comment archiver les messages : sélectionnez d'abord le message à archiver en cliquant dessus dans la liste des messages. Puis cliquez sur le "
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:404
 msgid "‘Archive selected message’ button to move it into your archive."
-msgstr ""
+msgstr "bouton 'Archiver le message sélectionné' pour le déplacer dans vos archives."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:406
 msgid ""
 "Once you have deleted a message, another message will be selected "
 "automatically from the list."
-msgstr ""
+msgstr "Lorsque vous avez effacé un message, un autre message est automatiquement sélectionné dans la liste."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:408
 msgid ""
@@ -777,7 +778,7 @@ msgid ""
 "The message window is central to fully controlling your tribe’s fortune. "
 "However, you will get a lot of messages in a real game. To keep your head "
 "straight, you should try to keep the inbox empty."
-msgstr ""
+msgstr "La fenêtre des messages est la pierre angulaire du plein contrôle du destin de votre tribu. Mais vous recevrez beaucoup de messages durant une vraie partie. Pour garder les idées claires, il vaut mieux que vous gardiez votre boîte de réception vide. "
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:416
 msgid "Archive all your messages in your inbox now."
@@ -789,7 +790,7 @@ msgid ""
 "button at the very bottom of the screen. The newest message will be marked "
 "for you automatically. Keep clicking the ‘Archive selected message’ button "
 "until all messages have been archived and the list is empty."
-msgstr ""
+msgstr "Pour ce faire, ouvrez la fenêtre des messages en appuyant sur \"n\" ou cliquez sur le bouton le plus à droite au bas de l'écran. Le message le plus récent sera automatiquement sélectionné. Cliquez sur le bouton \"Archiver le message sélectionné\" jusqu'à ce que tous les messages aient été archivés et la liste vidée."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:424
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:445
@@ -834,7 +835,7 @@ msgid ""
 "I’ll take all rocks away from the poor stonemasons in the quarries. They "
 "will then send a message each that they can’t find any in their work areas "
 "the next time they try to do some work."
-msgstr ""
+msgstr "Bien joué ! Voyons comment fonctionnent réellement les messages dans une vraie partie. Pour cela, je vais enlever toutes les roches aux pauvres tailleurs de pierre dans leur carrière. Ils vont chacun envoyer un message pour dire qu'ils ne peuvent trouver de travail dans leur périmètre la prochaine fois qu'ils vont vouloir travailler. "
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:455
 msgid "Messages Arrived!"
@@ -908,7 +909,7 @@ msgid ""
 "conquer around itself and the more soldiers can be stationed there. The "
 "buildings also vary in their vision range: buildings with a tower see "
 "farther than others."
-msgstr ""
+msgstr "Etendre son territoire est aussi simple que la construction d'un bâtiment militaire près de vos frontières. Les Barbares disposent de plusieurs bâtiments militaires différents : guérites, barricades, tours, forteresses et citadelles. Plus le bâtiment est grand, plus il coûte cher à construire, plus il conquiert de terrain autour de lui et plus le nombre de soldats qui y sont stationnés est important. Les bâtiments ont également différents champs de vision : ceux qui disposent d'une tour peuvent voir plus loin que les autres."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:479
 msgid ""
@@ -947,7 +948,7 @@ msgid ""
 "The Barbarians have four different military buildings you can build: the "
 "sentry (small), the barrier and the tower (both medium) and the fortress "
 "(big). Just choose the one you like most."
-msgstr ""
+msgstr "Les Barbares disposent de quatre bâtiments militaires : la guérite (petit), la barricade et la tour (moyen) ainsi que la forteresse (grand). Choisissez juste celui qui vous plaît le plus."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:491
 msgid ""
