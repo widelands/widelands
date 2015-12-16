@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-18 08:43+0000\n"
-"PO-Revision-Date: 2015-11-19 23:42+0000\n"
+"POT-Creation-Date: 2015-12-03 09:55+0000\n"
+"PO-Revision-Date: 2015-12-03 16:50+0000\n"
 "Last-Translator: MiroslavR <miroslavr256@gmail.com>\n"
 "Language-Team: Slovak (http://www.transifex.com/widelands/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
@@ -24,7 +24,7 @@ msgstr "Autori"
 
 #: ../../txts/AUTHORS.lua:42
 msgid "Widelands Development Team"
-msgstr "Vývojový tím Widelands"
+msgstr "Vývojový tím hry Widelands"
 
 #: ../../txts/LICENSE.lua:18
 msgid "License"
@@ -145,41 +145,41 @@ msgstr "Hlavné ovládanie hry"
 msgid ""
 "To close an open window, right-click on it. To minimize/maximize a window, "
 "click on it with the middle mouse button or with the left mouse button while"
-" holding down CTRL."
-msgstr "Ak chcete zatvoriť otvorené okno, kliknite naň pravým tlačidlom myši. Ak chcete minimalizovať/maximalizovať okno, podržte CTRL a kliknite na okno buď stredným, alebo ľavým tlačidlom myši."
+" holding down Ctrl."
+msgstr "Ak chcete zatvoriť otvorené okno, kliknite naň pravým tlačidlom myši. Ak chcete minimalizovať/maximalizovať okno, podržte Ctrl a kliknite na okno buď stredným, alebo ľavým tlačidlom myši."
 
 #: ../../txts/README.lua:49
 msgid ""
-"If you hold CTRL while building a road, flags will be placed automatically.\n"
-"If you hold CTRL while removing a road, all flags up to the first junction are\n"
+"If you hold Ctrl while building a road, flags will be placed automatically.\n"
+"If you hold Ctrl while removing a road, all flags up to the first junction are\n"
 "removed."
-msgstr "Ak pri stavaní cesty podržíte CTRL, vlajky sa umiestnia automaticky.\nAk pri odstraňovaní cesty podržíte CTRL, odstránia sa všetky vlajky\naž po prvú križovatku."
+msgstr "Ak pri stavaní cesty podržíte Ctrl, vlajky sa umiestnia automaticky.\nAk pri odstraňovaní cesty podržíte Ctrl, odstránia sa všetky vlajky\naž po prvú križovatku."
 
 #: ../../txts/README.lua:53
 msgid ""
-"You can skip confirmation windows for irreversible actions if you hold CTRL\n"
+"You can skip confirmation windows for irreversible actions if you hold Ctrl\n"
 "while clicking on the action button."
-msgstr "Potvrdzovacie okná pre nevratné činnosti môžete preskočiť podržaním CTRL\na kliknutím na príslušné tlačidlo vykonávajúce činnosť."
+msgstr "Okná potvrdzujúce nevratné činnosti môžete preskočiť podržaním klávesu Ctrl a kliknutím na príslušné tlačidlo vykonávajúce činnosť."
 
 #: ../../txts/README.lua:56
 msgid "Keyboard shortcuts (in-game)"
 msgstr "Klávesové skratky (počas hry)"
 
 #: ../../txts/README.lua:58
-msgid "PAGEUP: increases game speed"
-msgstr "PAGEUP: zvýši rýchlosť hry"
+msgid " Page Up: increases game speed"
+msgstr "Page Up: zvýši rýchlosť hry"
 
 #: ../../txts/README.lua:59
-msgid "PAGEDOWN: decreases game speed"
-msgstr "PAGEDOWN: zníži rýchlosť hry"
+msgid " Page Down: decreases game speed"
+msgstr "Page Down: zníži rýchlosť hry"
 
 #: ../../txts/README.lua:60
-msgid "PAUSE: pauses the game"
-msgstr "PAUSE: pozastaví hru"
+msgid "Pause: pauses the game"
+msgstr "Pause: pozastaví hru"
 
 #: ../../txts/README.lua:61
-msgid "SPACE: toggles if building spaces are shown"
-msgstr "SPACE: prepne zobrazovanie miest, na ktorých možno stavať"
+msgid "Space: toggles if building spaces are shown"
+msgstr "Medzerník: prepne zobrazovanie miest, na ktorých možno stavať"
 
 #: ../../txts/README.lua:62
 msgid "M: toggles minimap"
@@ -218,8 +218,8 @@ msgid "Home: centers main mapview on starting location"
 msgstr "Home: vycentruje hlavný obraz mapy na počiatočnú pozíciu"
 
 #: ../../txts/README.lua:71
-msgid "(CTRL+) 0-9: Remember and go to previously remembered locations"
-msgstr "(CTRL+) 0-9: Pamätať si a ísť na skôr zapamätané miesta"
+msgid "(Ctrl +) 0-9: Remember and go to previously remembered locations"
+msgstr "(Ctrl +) 0-9: Zapamätať miesta a prejsť na skôr zapamätané miesta"
 
 #: ../../txts/README.lua:72
 msgid ",: goes to the previous location"
@@ -234,16 +234,16 @@ msgid "F6: shows the debug console (only in debug-builds)"
 msgstr "F6: zobrazí ladiacu konzolu (len v zostaveniach s podporou ladenia)"
 
 #: ../../txts/README.lua:75
-msgid "CTRL+F10: quits the game immediately"
-msgstr "CTRL+F10: okamžite ukončí hru"
+msgid "Ctrl + F10: quits the game immediately"
+msgstr "Ctrl + F10: okamžite ukončí hru"
 
 #: ../../txts/README.lua:76
-msgid "CTRL+Leftclick: skips confirmation dialogs"
-msgstr "CTRL+Kliknutie ľavým tlačidlom myši: preskočí potvrdzovacie dialógové okná"
+msgid "Ctrl + Leftclick: skips confirmation dialogs"
+msgstr "Ctrl + kliknutie ľavým tlačidlom: preskočí potvrdzovacie dialógové okná"
 
 #: ../../txts/README.lua:77
-msgid "CTRL+F11: takes a screenshot"
-msgstr "CTRL+F11: urobí snímku obrazovky"
+msgid "Ctrl + F11: takes a screenshot"
+msgstr "Ctrl + F11: urobí snímku obrazovky"
 
 #: ../../txts/README.lua:79
 msgid ""
@@ -279,8 +279,8 @@ msgid "G: jumps to the location corresponding to the current message"
 msgstr "G: skočí na miesto zodpovedajúce aktuálnej správe"
 
 #: ../../txts/README.lua:88
-msgid "DELETE: archives/restores the current message"
-msgstr "DELETE: archivuje/obnoví aktuálnu správu"
+msgid "Delete: archives/restores the current message"
+msgstr "Delete: archivuje/obnoví aktuálnu správu"
 
 #: ../../txts/README.lua:90
 msgid "Online Help"
@@ -407,7 +407,7 @@ msgstr "Debian Linux"
 
 #: ../../txts/developers.lua:3
 msgid "Documentation, Help and Wiki"
-msgstr "Dokumentácia, pomoc a Wiki"
+msgstr "Dokumentácia, pomoc a wiki"
 
 #: ../../txts/developers.lua:3
 msgid "Elders"
@@ -534,8 +534,8 @@ msgstr "Klávesové skratky"
 
 #. TRANSLATORS: This is a hotkey
 #: ../../txts/editor_readme.lua:21
-msgid "SPACE:"
-msgstr "MEDZERNÍK:"
+msgid "Space:"
+msgstr "Medzerník:"
 
 #: ../../txts/editor_readme.lua:21
 msgid "toggles if building spaces are shown"
@@ -606,8 +606,8 @@ msgstr "aktivuje informačný nástroj"
 
 #. TRANSLATORS: This is a hotkey
 #: ../../txts/editor_readme.lua:37
-msgid "CTRL+L:"
-msgstr "CTRL+L:"
+msgid "Ctrl + L:"
+msgstr "Ctrl + L:"
 
 #: ../../txts/editor_readme.lua:37
 msgid "load map"
@@ -615,8 +615,8 @@ msgstr "načíta mapu"
 
 #. TRANSLATORS: This is a hotkey
 #: ../../txts/editor_readme.lua:39
-msgid "CTRL+S:"
-msgstr "CTRL+S:"
+msgid "Ctrl + S:"
+msgstr "Ctrl + S:"
 
 #: ../../txts/editor_readme.lua:39
 msgid "save map"
@@ -633,8 +633,8 @@ msgstr "menia veľkosť nástroja"
 
 #. TRANSLATORS: This is a hotkey
 #: ../../txts/editor_readme.lua:43
-msgid "SHIFT (Hold):"
-msgstr "SHIFT (pri podržaní):"
+msgid "Shift (Hold):"
+msgstr "Shift (pri podržaní):"
 
 #: ../../txts/editor_readme.lua:43
 msgid "selects first alternative tool while pressed"
@@ -642,8 +642,8 @@ msgstr "počas toho, ako ho držíte stlačený, vyberie sa prvý alternatívny 
 
 #. TRANSLATORS: This is a hotkey
 #: ../../txts/editor_readme.lua:45
-msgid "ALT (Hold):"
-msgstr "ALT (pri podržaní):"
+msgid "Alt (Hold):"
+msgstr "Alt (pri podržaní):"
 
 #: ../../txts/editor_readme.lua:45
 msgid "Selects second alternative tool while pressed"
@@ -682,28 +682,28 @@ msgstr "Všeobecnú pomoc pri práci s editorom, ako aj krátky návod možno n�
 
 #: ../../txts/tips/editor.tip:6
 msgid ""
-"You can select multiple animal types if you hold down CTRL during selection."
+"You can select multiple animal types if you hold down Ctrl during selection."
 " If you then click on the map, an instance of one of the selected animal "
 "types will be placed."
-msgstr "Podržaním klávesu CTRL počas výberu môžete vybrať viacero typov zvierat naraz. Ak potom kliknete na mapu, umiestni sa inštancia jedného z vybraných typov zvierat."
+msgstr "Podržaním klávesu Ctrl počas výberu môžete vybrať viacero typov zvierat naraz. Ak potom kliknete na mapu, umiestni sa inštancia jedného z vybraných typov zvierat."
 
 #: ../../txts/tips/editor.tip:10
 msgid ""
 "Just like with animals, you can also select multiple immovables or ground "
-"textures with CTRL + mouse click."
-msgstr "Stlačením klávesu CTRL a kliknutím možno vybrať okrem zvierat aj viacero nehybných objektov alebo textúr zeme."
+"textures with Ctrl + mouse click."
+msgstr "Stlačením klávesu Ctrl a kliknutím možno vybrať okrem zvierat aj viacero nehybných objektov alebo textúr zeme."
 
 #: ../../txts/tips/editor.tip:14
 msgid ""
-"Holding down SHIFT switches the first alternative tool on. This tool is in "
+"Holding down Shift switches the first alternative tool on. This tool is in "
 "most cases the complete opposite of the normal tool (for example deletion of"
 " an object instead of placing one)."
-msgstr "Stlačením klávesu SHIFT možno zapnúť prvý alternatívny nástroj. Tento nástroj je v mnohých prípadoch presný opak normálneho nástroja (napríklad namiesto umiestnenia objektu ho zmaže)."
+msgstr "Stlačením klávesu Shift možno zapnúť prvý alternatívny nástroj. Tento nástroj je v mnohých prípadoch presný opak normálneho nástroja (napríklad namiesto umiestnenia objektu ho zmaže)."
 
 #: ../../txts/tips/editor.tip:18
 msgid ""
-"Holding down ALT switches the second alternative tool on (if it exists)."
-msgstr "Podržaním klávesu ALT možno zapnúť druhý alternatívny nástroj (ak existuje)."
+"Holding down Alt switches the second alternative tool on (if it exists)."
+msgstr "Podržaním klávesu Alt možno zapnúť druhý alternatívny nástroj (ak existuje)."
 
 #: ../../txts/tips/editor.tip:22
 msgid ""
@@ -713,9 +713,9 @@ msgstr "Numerické klávesy (1 - 0) vám umožňujú priamo nastaviť veľkosť 
 
 #: ../../txts/tips/editor.tip:26
 msgid ""
-"SPACE key behaves like in normal game. It switches if building spaces are "
+"Space key behaves like in normal game. It switches if building spaces are "
 "shown on or off."
-msgstr "Kláves MEDZERNÍK sa správa ako v normálnej hre. Zapína/vypína zobrazovanie miest, na ktorých možno stavať."
+msgstr "Kláves medzerník sa správa rovnako ako v normálnej hre. Zapína/vypína zobrazovanie miest, na ktorých možno stavať."
 
 #: ../../txts/tips/empire.tip:10
 msgid "Always build a forester’s house so you will not run out of logs."

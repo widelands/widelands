@@ -5,7 +5,7 @@ tribes:new_productionsite_type {
    name = "empire_goldmine",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("empire_building", "Gold Mine"),
-   directory = dirname,
+   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "mine",
    enhancement = "empire_goldmine_deep",
@@ -74,7 +74,9 @@ tribes:new_productionsite_type {
       },
    },
    out_of_resource_notification = {
-      title = _"Main Gold Vein Exhausted",
+      -- Translators: Short for "Out of ..." for a resource
+      title = _"No Gold",
+      heading = _"Main Gold Vein Exhausted",
       message =
          pgettext("empire_building", "This gold mine’s main vein is exhausted. Expect strongly diminished returns on investment. You should consider enhancing, dismantling or destroying it."),
    },

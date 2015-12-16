@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-18 08:43+0000\n"
-"PO-Revision-Date: 2015-11-18 13:13+0000\n"
+"POT-Creation-Date: 2015-12-03 09:55+0000\n"
+"PO-Revision-Date: 2015-12-03 10:11+0000\n"
 "Last-Translator: Lyubomir Vasilev\n"
 "Language-Team: Bulgarian (http://www.transifex.com/widelands/widelands/language/bg/)\n"
 "MIME-Version: 1.0\n"
@@ -144,41 +144,41 @@ msgstr "Общо управление на играта"
 msgid ""
 "To close an open window, right-click on it. To minimize/maximize a window, "
 "click on it with the middle mouse button or with the left mouse button while"
-" holding down CTRL."
-msgstr "За да затворите прозорец, щракнете в него с десен бутон. За да намалите/увеличите\nпрозорец, щракнете върху него със средния бутон на мишката или с левия такъв,\nдокато натискате бутона CTRL."
+" holding down Ctrl."
+msgstr "За да затворите прозорец, щракнете в него с десен бутон. За да намалите/увеличите\nпрозорец, щракнете върху него със средния бутон на мишката или с левия такъв,\nдокато натискате бутона Контрол."
 
 #: ../../txts/README.lua:49
 msgid ""
-"If you hold CTRL while building a road, flags will be placed automatically.\n"
-"If you hold CTRL while removing a road, all flags up to the first junction are\n"
+"If you hold Ctrl while building a road, flags will be placed automatically.\n"
+"If you hold Ctrl while removing a road, all flags up to the first junction are\n"
 "removed."
-msgstr "Ако задържите CTRL, докато строите път, флаговете ще се поставят автоматично.\nАко задържите CTRL, докато премахвате път, всички флагове до първото кръстовище ще\nбъдат премахнати."
+msgstr "Ако задържите Контрол, докато строите път, флаговете ще се поставят автоматично.\nАко задържите Контрол, докато премахвате път, всички флагове до първото кръстовище ще\nбъдат премахнати."
 
 #: ../../txts/README.lua:53
 msgid ""
-"You can skip confirmation windows for irreversible actions if you hold CTRL\n"
+"You can skip confirmation windows for irreversible actions if you hold Ctrl\n"
 "while clicking on the action button."
-msgstr "Можете да пропуснете прозорците за потвърждение на необратимите действия,\nако задържите CTRL, докато натискате бутона за съответното действие."
+msgstr "Можете да пропуснете прозорците за потвърждение на необратимите действия,\nако задържите Контрол, докато натискате бутона за съответното действие."
 
 #: ../../txts/README.lua:56
 msgid "Keyboard shortcuts (in-game)"
 msgstr "Клавиши и комбинации (в игра)"
 
 #: ../../txts/README.lua:58
-msgid "PAGEUP: increases game speed"
-msgstr "PAGEUP: увеличава скоростта на играта"
+msgid " Page Up: increases game speed"
+msgstr "Page Up: увеличава скоростта на играта"
 
 #: ../../txts/README.lua:59
-msgid "PAGEDOWN: decreases game speed"
-msgstr "PAGEDOWN: намалява скоростта на играта"
+msgid " Page Down: decreases game speed"
+msgstr "Page Down: намалява скоростта на играта"
 
 #: ../../txts/README.lua:60
-msgid "PAUSE: pauses the game"
-msgstr "PAUSE: спира играта на пауза"
+msgid "Pause: pauses the game"
+msgstr "Pause: спира играта на пауза"
 
 #: ../../txts/README.lua:61
-msgid "SPACE: toggles if building spaces are shown"
-msgstr "ИНТЕРВАЛ: превключва показването на местата за строеж"
+msgid "Space: toggles if building spaces are shown"
+msgstr "Интервал: превключва показването на местата за строеж"
 
 #: ../../txts/README.lua:62
 msgid "M: toggles minimap"
@@ -217,8 +217,8 @@ msgid "Home: centers main mapview on starting location"
 msgstr "HOME: центрира картата върху началната позиция"
 
 #: ../../txts/README.lua:71
-msgid "(CTRL+) 0-9: Remember and go to previously remembered locations"
-msgstr "(CTRL+) 0-9: запомня и Ви връща към запомнените местоположения"
+msgid "(Ctrl +) 0-9: Remember and go to previously remembered locations"
+msgstr "(Контрол +) 0-9: запомня и Ви връща към запомнените местоположения"
 
 #: ../../txts/README.lua:72
 msgid ",: goes to the previous location"
@@ -233,16 +233,16 @@ msgid "F6: shows the debug console (only in debug-builds)"
 msgstr "F6: показва конзолата за отстраняване на грешки (само ако играта е компилирана в такъв режим)"
 
 #: ../../txts/README.lua:75
-msgid "CTRL+F10: quits the game immediately"
-msgstr "CTRL+F10: излиза от играта моментално"
+msgid "Ctrl + F10: quits the game immediately"
+msgstr "Контрол + F10: излиза от играта моментално"
 
 #: ../../txts/README.lua:76
-msgid "CTRL+Leftclick: skips confirmation dialogs"
-msgstr "CTRL+Щракване с левия бутон: пропуска прозорците за потвърждение"
+msgid "Ctrl + Leftclick: skips confirmation dialogs"
+msgstr "Контрол + щракване с левия бутон: пропуска прозорците за потвърждение"
 
 #: ../../txts/README.lua:77
-msgid "CTRL+F11: takes a screenshot"
-msgstr "CTRL+F11: прави снимка на екрана"
+msgid "Ctrl + F11: takes a screenshot"
+msgstr "Контрол + F11: прави снимка на екрана"
 
 #: ../../txts/README.lua:79
 msgid ""
@@ -278,8 +278,8 @@ msgid "G: jumps to the location corresponding to the current message"
 msgstr "G: преминава към местоположението, свързано с текущото съобщение"
 
 #: ../../txts/README.lua:88
-msgid "DELETE: archives/restores the current message"
-msgstr "DELETE: архивира/възстановява текущото съобщение"
+msgid "Delete: archives/restores the current message"
+msgstr "De.ete: архивира/възстановява текущото съобщение"
 
 #: ../../txts/README.lua:90
 msgid "Online Help"
@@ -533,8 +533,8 @@ msgstr "Клавиши и комбинации"
 
 #. TRANSLATORS: This is a hotkey
 #: ../../txts/editor_readme.lua:21
-msgid "SPACE:"
-msgstr "ИНТЕРВАЛ:"
+msgid "Space:"
+msgstr "Интервал:"
 
 #: ../../txts/editor_readme.lua:21
 msgid "toggles if building spaces are shown"
@@ -605,8 +605,8 @@ msgstr "включва инструмента за информация"
 
 #. TRANSLATORS: This is a hotkey
 #: ../../txts/editor_readme.lua:37
-msgid "CTRL+L:"
-msgstr "CTRL+L:"
+msgid "Ctrl + L:"
+msgstr "Контрол + L:"
 
 #: ../../txts/editor_readme.lua:37
 msgid "load map"
@@ -614,8 +614,8 @@ msgstr "зарежда карта"
 
 #. TRANSLATORS: This is a hotkey
 #: ../../txts/editor_readme.lua:39
-msgid "CTRL+S:"
-msgstr "CTRL+S:"
+msgid "Ctrl + S:"
+msgstr "Контрол + S:"
 
 #: ../../txts/editor_readme.lua:39
 msgid "save map"
@@ -632,8 +632,8 @@ msgstr "променя размера на инструмента"
 
 #. TRANSLATORS: This is a hotkey
 #: ../../txts/editor_readme.lua:43
-msgid "SHIFT (Hold):"
-msgstr "SHIFT (задържан):"
+msgid "Shift (Hold):"
+msgstr "Шифт (задържан):"
 
 #: ../../txts/editor_readme.lua:43
 msgid "selects first alternative tool while pressed"
@@ -641,8 +641,8 @@ msgstr "избира първия алтернативен инструмент,
 
 #. TRANSLATORS: This is a hotkey
 #: ../../txts/editor_readme.lua:45
-msgid "ALT (Hold):"
-msgstr "ALT (задържан):"
+msgid "Alt (Hold):"
+msgstr "Алт (задържан):"
 
 #: ../../txts/editor_readme.lua:45
 msgid "Selects second alternative tool while pressed"
@@ -681,28 +681,28 @@ msgstr "Ще откриете помощ за редактора, както и 
 
 #: ../../txts/tips/editor.tip:6
 msgid ""
-"You can select multiple animal types if you hold down CTRL during selection."
+"You can select multiple animal types if you hold down Ctrl during selection."
 " If you then click on the map, an instance of one of the selected animal "
 "types will be placed."
-msgstr "Можете да изберете повече от един вид животни, ако задържите CTRL докато избирате. Ако след това щракнете върху картата, там ще бъде поставено животно от един от избраните видове."
+msgstr "Можете да изберете повече от един вид животни, ако задържите Контрол докато избирате. Ако след това щракнете върху картата, там ще бъде поставено животно от един от избраните видове."
 
 #: ../../txts/tips/editor.tip:10
 msgid ""
 "Just like with animals, you can also select multiple immovables or ground "
-"textures with CTRL + mouse click."
-msgstr "Също както при животните, можете да избирате повече от един неподвижни обекти или теренни текстури чрез CTRL + щракване с ляв бутон."
+"textures with Ctrl + mouse click."
+msgstr "Също както при животните, можете да избирате повече от един неподвижни обекти или теренни текстури чрез Контрол + щракване с ляв бутон."
 
 #: ../../txts/tips/editor.tip:14
 msgid ""
-"Holding down SHIFT switches the first alternative tool on. This tool is in "
+"Holding down Shift switches the first alternative tool on. This tool is in "
 "most cases the complete opposite of the normal tool (for example deletion of"
 " an object instead of placing one)."
-msgstr "Задържането на SHIFT включва първия алтернативен инструмент. В повечето случаи, това е този, който върши обратното действие (напр. изтриване на обект, вместо поставяне)."
+msgstr "Задържането на Шифт включва първия алтернативен инструмент. В повечето случаи, това е този, който върши обратното действие (напр. изтриване на обект, вместо поставяне)."
 
 #: ../../txts/tips/editor.tip:18
 msgid ""
-"Holding down ALT switches the second alternative tool on (if it exists)."
-msgstr "Задържането на ALT включва втория алтернативен инструмент (ако има такъв)."
+"Holding down Alt switches the second alternative tool on (if it exists)."
+msgstr "Задържането на Алт включва втория алтернативен инструмент (ако има такъв)."
 
 #: ../../txts/tips/editor.tip:22
 msgid ""
@@ -712,9 +712,9 @@ msgstr "Клавишите с цифри (1 – 0) Ви позволяват д�
 
 #: ../../txts/tips/editor.tip:26
 msgid ""
-"SPACE key behaves like in normal game. It switches if building spaces are "
+"Space key behaves like in normal game. It switches if building spaces are "
 "shown on or off."
-msgstr "Клавишът ИНТЕРВАЛ работи по същия начин, като в игра. Той превключва показването на местата за строеж."
+msgstr "Клавишът Интервал работи по същия начин, като в игра. Той превключва показването на местата за строеж."
 
 #: ../../txts/tips/empire.tip:10
 msgid "Always build a forester’s house so you will not run out of logs."
@@ -783,13 +783,13 @@ msgstr "Използвайте клавишите „,“ (запетая) и �
 msgid ""
 "Press Ctrl+(0-9) to store important locations, then press 0-9 to recall "
 "them."
-msgstr "Натиснете Ctrl+(0-9), за да запазите важните местоположения, а след това 0-9, за да ги видите отново."
+msgstr "Натиснете Контрол+(0-9), за да запазите важните местоположения, а след това 0-9, за да ги видите отново."
 
 #: ../../txts/tips/general_game.tip:46
 msgid ""
 "Removing a road while holding Ctrl lets you remove all flags up to the first"
 " junction."
-msgstr "Ако премахнете път, докато натискате Ctrl, ще премахнете всички флагове до първото кръстовище."
+msgstr "Ако премахнете път, докато натискате Контрол, ще премахнете всички флагове до първото кръстовище."
 
 #: ../../txts/tips/general_game.tip:50
 msgid ""

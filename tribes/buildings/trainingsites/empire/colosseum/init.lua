@@ -5,7 +5,7 @@ tribes:new_trainingsite_type {
    name = "empire_colosseum",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("empire_building", "Colosseum"),
-   directory = dirname,
+   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "big",
 
@@ -36,8 +36,8 @@ tribes:new_trainingsite_type {
    aihints = {
       prohibited_till = 1200,	      
       trainingsite_type = "basic",
-      weak_ai_limit = 1,
-      normal_ai_limit = 2
+      very_weak_ai_limit = 1,
+      weak_ai_limit = 2
    },
 
    working_positions = {

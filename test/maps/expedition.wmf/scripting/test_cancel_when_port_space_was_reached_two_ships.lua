@@ -7,7 +7,7 @@ run(function()
 
    -- Send expedition to port space.
    port:start_expedition()
-   wait_for_message("Expedition Ready")
+   wait_for_message("Expedition")
    assert_equal(1, p1:get_workers("barbarians_builder"))
    sleep(500)
 
@@ -23,7 +23,7 @@ run(function()
    expedition_ship.island_explore_direction="ccw"
    sleep(2000)
    assert_equal("ccw",expedition_ship.island_explore_direction)
-   wait_for_message("Port Space Found")
+   wait_for_message("Port Space")
    sleep(500)
    assert_equal(1, p1:get_workers("barbarians_builder"))
 

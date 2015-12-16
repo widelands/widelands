@@ -19,7 +19,7 @@ return {
       result = result .. rt(h2(_"Player settings"))
       result = result .. rt(p(_"In the middle are the settings for the players. To start a game, each player must be one of the following:"))
       result = result .. picture_li("pics/genstats_nrworkers.png", _"Connected to one or more clients (see ‘Client settings’).")
-      result = result .. picture_li("pics/ai_Normal.png", _"Connected to a computer player (the face in the picture as well as the mouse hover texts indicate the strength of the currently selected computer player).")
+      result = result .. picture_li("pics/ai_normal.png", _"Connected to a computer player (the face in the picture as well as the mouse hover texts indicate the strength of the currently selected computer player).")
       result = result .. picture_li("pics/shared_in.png", _"Set as shared in starting position for another player.")
       result = result .. picture_li("pics/stop.png", _"Closed.")
       result = result .. rt(p(_"The latter three can only be set by the hosting client by left-clicking the ‘type’ button of a player. Hosting players can also set the initialization of each player (the set of buildings, wares and workers the player starts with) and the tribe and team for computer players"))

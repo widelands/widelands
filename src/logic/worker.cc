@@ -515,7 +515,7 @@ bool Worker::run_findobject(Game & game, State & state, const Action & action)
 // will also allow blocking the shoreline if it is next to the worker's
 // location. Also, the gap of 2 nodes between 2 farms will be blocked,
 // because both are next to their farm. The only real solution that I can
-// think of for this kind of bugs is to only allow impassable objects to
+// think of for this kind of bugs is to only allow unwalkable objects to
 // be placed on a node if ALL neighbouring nodes are passable. This must
 // of course be checked at the moment when the object is placed and not,
 // as in this case, only before a worker starts walking there to place an
@@ -951,14 +951,21 @@ bool Worker::run_geologist_find(Game & game, State & state, const Action &)
 		(const ResourceDescription * const rdescr =
 			world.get_resource(position.field->get_resources()))
 	{
+		const TribeDescr & t = owner().tribe();
+		const Immovable& ri = game.create_immovable
+			(position,
+			 t.get_resource_indicator
+				(rdescr,
+				rdescr->detectable() ?
+				position.field->get_resources_amount() : 0),
+			 MapObjectDescr::OwnerType::kTribe);
+
 		// Geologist also sends a message notifying the player
 		if (rdescr->detectable() && position.field->get_resources_amount()) {
-			// TODO(sirver): this is very wrong: It assumes a directory layout
-			// that might not be around forever.
 			const std::string message =
-					(boost::format("<rt image=world/resources/pics/%s4.png>"
+					(boost::format("<rt image=%s>"
 										"<p font-face=serif font-size=14>%s</p></rt>")
-					 % rdescr->name().c_str()
+					 % rdescr->get_editor_pic(rdescr->max_amount())
 					 % _("A geologist found resources.")).str();
 
 			Message::Type message_type = Message::Type::kGeologists;
@@ -981,22 +988,14 @@ bool Worker::run_geologist_find(Game & game, State & state, const Action &)
 					(message_type,
 					 game.get_gametime(),
 					 rdescr->descname(),
+					 ri.descr().representative_image_filename(),
+					 rdescr->descname(),
 					 message,
 					 position,
 					 m_serial
 					),
 				 300000, 8);
 		}
-
-		const TribeDescr & t = owner().tribe();
-		Immovable & newimm = game.create_immovable
-			(position,
-			 t.get_resource_indicator
-				(rdescr,
-				rdescr->detectable() ?
-				position.field->get_resources_amount() : 0),
-			 MapObjectDescr::OwnerType::kTribe);
-		newimm.set_owner(get_owner());
 	}
 
 	++state.ivar1;
@@ -1882,6 +1881,8 @@ void Worker::return_update(Game & game, State & state)
 			 *new Message
 				(Message::Type::kGameLogic,
 				 game.get_gametime(),
+				 _("Worker"),
+				 "pics/menu_help.png",
 				 _("Worker got lost!"),
 				 message,
 				 get_position()),
@@ -2715,11 +2716,11 @@ void Worker::geologist_update(Game & game, State & state)
 			bool is_center_mountain =
 				(world.terrain_descr(owner_area.field->terrain_d()).get_is()
 				 &
-				 TerrainDescription::Type::kMountain)
+				 TerrainDescription::Is::kMineable)
 				|
 				(world.terrain_descr(owner_area.field->terrain_r()).get_is()
 				 &
-				 TerrainDescription::Type::kMountain);
+				 TerrainDescription::Is::kMineable);
 			// Only run towards fields that are on a mountain (or not)
 			// depending on position of center
 			bool is_target_mountain;
@@ -2732,11 +2733,11 @@ void Worker::geologist_update(Game & game, State & state)
 				is_target_mountain =
 					(world.terrain_descr(target.field->terrain_d()).get_is()
 					 &
-					 TerrainDescription::Type::kMountain)
+					 TerrainDescription::Is::kMineable)
 					|
 					(world.terrain_descr(target.field->terrain_r()).get_is()
 					 &
-					 TerrainDescription::Type::kMountain);
+					 TerrainDescription::Is::kMineable);
 				if (i == 0)
 					i = list.size();
 				--i;
