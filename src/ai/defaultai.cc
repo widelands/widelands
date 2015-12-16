@@ -87,6 +87,7 @@ constexpr int kColonyScan      = 3;
 constexpr int kTreesAround     = 4;
 constexpr int kEarlyMilitary   = 5;
 constexpr int kExpStartTime    = 6;
+constexpr int kExpShip         = 7;
 constexpr int kWoodDiff        = 0; //int32_t
 constexpr int kTargetMilit     = 1;
 constexpr int kLeastMilit      = 2;
@@ -898,6 +899,7 @@ void DefaultAI::late_initialization() {
 		player_->set_ai_data(last_attacked_player_, kLastAttack);
 		player_->set_ai_data(least_military_score_, kLeastMilit);
 		player_->set_ai_data(target_military_score_, kTargetMilit);
+		player_->set_ai_data(expedition_ship_, kExpShip);		
 
 	} else {
 		log (" %d: restoring saved AI data...\n", player_number());
@@ -943,6 +945,8 @@ void DefaultAI::late_initialization() {
 
 		player_->get_ai_data(&target_military_score_, kTargetMilit);
 		check_range<uint32_t>(target_military_score_, least_military_score_, 1000, "target_military_score_");
+		
+		player_->get_ai_data(&expedition_ship_, kExpShip);
 	}
 }
 
@@ -1565,7 +1569,8 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 
 	// Bools below are helpers to improve readability of code
 
-	// Military sites have generally higher scores so this is a helper to boost economy
+	// It is bit complicated balance building militarysites and productionsites so this is small hack to help
+	// it
 	bool needs_boost_economy = false;
 	if (highest_nonmil_prio_ > 10
 		&& has_enough_space
@@ -3652,14 +3657,15 @@ bool DefaultAI::check_ships(uint32_t const gametime) {
 				ship_state == Widelands::Ship::EXP_FOUNDPORTSPACE) {
 
 					// consistency check
-					assert (expedition_ship_ == i->ship->serial() || expedition_ship_ == kNoShip);
+					assert (expedition_ship_ == i->ship->get_ship_id() || expedition_ship_ == kNoShip);
 
 					// This is obviously new expedition
 					if (expedition_ship_ == kNoShip) {
 						assert (expedition_start_time_ == kNoExpedition);
 						expedition_start_time_ = gametime;
 						player_->set_ai_data(gametime, kExpStartTime);
-						expedition_ship_ = i->ship->serial();
+						expedition_ship_ = i->ship->get_ship_id();
+						player_->set_ai_data(expedition_ship_, kExpShip);
 
 					// Already known expedition, all we do now, is decreasing colony_scan_area_
 					// based on lapsed time
@@ -3698,11 +3704,12 @@ bool DefaultAI::check_ships(uint32_t const gametime) {
 
 			// We are not in expedition mode (or perhaps building a colonisation port)
 			// so resetting start time
-			} else if (expedition_ship_ == i->ship->serial()) {
+			} else if (expedition_ship_ == i->ship->get_ship_id()) {
 				// Obviously expedition just ended
 				expedition_start_time_ = kNoExpedition;
 				expedition_ship_ = kNoShip;
 				player_->set_ai_data(kNoExpedition, kExpStartTime);
+				player_->set_ai_data(expedition_ship_, kExpShip);
 			}
 
 			// only two states need an attention
@@ -4652,7 +4659,8 @@ void DefaultAI::gain_ship(Ship& ship, NewShip type) {
 		seafaring_economy = true;
 		if (ship.state_is_expedition()) {
 			assert (expedition_ship_ == kNoShip);
-			expedition_ship_ = ship.serial();
+			expedition_ship_ = ship.get_ship_id();
+			player_->set_ai_data(expedition_ship_, kExpShip);
 		}
 	}
 }

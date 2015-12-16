@@ -143,6 +143,7 @@ void MapSaver::save() {
 	iterate_players_existing_const(plnum, nr_players, m_egbase, player) {
 		for (DescriptionIndex i = 0; i < m_egbase.tribes().nrbuildings(); ++i) {
 			if (!player->is_building_type_allowed(i)) {
+				printf (" writing allowed buildings because %s is not allowed\n", player->tribe().get_building_descr(i)->descname().c_str());
 				log("Writing Allowed Building Types Data ... ");
 				MapAllowedBuildingTypesPacket p;
 				p                                  .write(m_fs, m_egbase, *m_mos);

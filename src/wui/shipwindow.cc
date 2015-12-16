@@ -19,8 +19,6 @@
 
 #include "logic/ship.h"
 
-#include <boost/format.hpp>
-
 #include "base/macros.h"
 #include "economy/portdock.h"
 #include "economy/ware_instance.h"
@@ -54,7 +52,7 @@ namespace Widelands {
  * Display information about a ship.
  */
 struct ShipWindow : UI::Window {
-	ShipWindow(InteractiveGameBase & igb, Ship & ship, const std::string & title);
+	ShipWindow(InteractiveGameBase & igb, Ship & ship, std::string & title);
 	virtual ~ShipWindow();
 
 	void think() override;
@@ -89,7 +87,7 @@ private:
 	ItemWaresDisplay * m_display;
 };
 
-ShipWindow::ShipWindow(InteractiveGameBase & igb, Ship & ship, const std::string & title) :
+ShipWindow::ShipWindow(InteractiveGameBase & igb, Ship & ship, std::string & title) :
 	Window(&igb, "shipwindow", 0, 0, 0, 0, title),
 	m_igbase(igb),
 	m_ship(ship)
@@ -359,8 +357,7 @@ void Ship::show_window(InteractiveGameBase & igb, bool avoid_fastclick)
 			m_window->restore();
 		m_window->move_to_top();
 	} else {
-		//NOCOM please review this
-		const std::string & title = (boost::format(_("Ship (%d)")) % _( std::to_string(get_ship_id()))).str();
+		std::string title = this->get_owner()->tribe().get_shipname_by_index(this->get_shipname_index());
 		new ShipWindow(igb, *this, title);
 		if (!avoid_fastclick)
 			m_window->warp_mouse_to_fastclick_panel();

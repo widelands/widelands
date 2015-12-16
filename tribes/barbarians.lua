@@ -238,6 +238,12 @@ tribes:new_tribe {
       "dismantlesite",
    },
 
+   ship_names = {
+      "Warrior",
+      "Explorer",
+      "Brave Caveman",    
+   },
+
    -- Special types
    builder = "barbarians_builder",
    carrier = "barbarians_carrier",

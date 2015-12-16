@@ -150,6 +150,11 @@ TribeDescr::TribeDescr
 			}
 		}
 
+		ship_names_ = table.get_table("ship_names")->array_entries<std::string>();
+		for (const std::string& shipname : ship_names_) { //NOCOM remove before merging
+			printf (" adding shipname: %s\n", shipname.c_str()); 
+		}
+
 		for (const std::string& buildingname : table.get_table("buildings")->array_entries<std::string>()) {
 			try {
 				DescriptionIndex index = tribes_.safe_building_index(buildingname);
@@ -331,6 +336,14 @@ void TribeDescr::add_busy_road_texture(std::unique_ptr<Texture> texture) {
 const RoadTextures& TribeDescr::road_textures() const {
 	return road_textures_;
 }
+
+const std::string TribeDescr::get_shipname_by_index(const uint32_t pos) const {
+	if (pos >= ship_names_.size()) {
+		return "Ship";
+	}
+	return ship_names_[pos];
+}
+	
 
 /*
 ==============

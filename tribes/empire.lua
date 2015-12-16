@@ -247,6 +247,12 @@ tribes:new_tribe {
       "dismantlesite",
    },
 
+   ship_names = {
+      "Cicero",
+      "Ceasar",
+      "Alexandria",      
+   },
+
    -- Special types
    builder = "empire_builder",
    carrier = "empire_carrier",

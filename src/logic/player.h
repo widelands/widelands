@@ -21,6 +21,7 @@
 #define WL_LOGIC_PLAYER_H
 
 #include <memory>
+#include <unordered_set>
 
 #include "base/macros.h"
 #include "graphic/color.h"
@@ -478,14 +479,14 @@ public:
 	uint32_t msites_defeated    () const {return m_msites_defeated;}
 	uint32_t civil_blds_lost    () const {return m_civil_blds_lost;}
 	uint32_t civil_blds_defeated() const {return m_civil_blds_defeated;}
-	uint32_t next_ship_id       () const {return m_next_ship_id;}	
+	uint32_t next_ship_id       (bool increase);
+	uint32_t next_ship_id       () const {return m_next_ship_id;}
 	void count_casualty          () {++m_casualties;}
 	void count_kill              () {++m_kills;}
 	void count_msite_lost        () {++m_msites_lost;}
 	void count_msite_defeated    () {++m_msites_defeated;}
 	void count_civil_bld_lost    () {++m_civil_blds_lost;}
 	void count_civil_bld_defeated() {++m_civil_blds_defeated;}
-	void incr_next_ship_id       () {++m_next_ship_id;}
 
 	// Statistics
 	const BuildingStatsVector& get_building_statistics(const DescriptionIndex& i) const;
@@ -525,6 +526,9 @@ public:
 	void get_ai_data(uint32_t * value, uint32_t position);
 	void get_ai_data(int16_t * value, uint32_t position);
 	void get_ai_data(bool * value, uint32_t position);
+	//NOCOM good place here?
+	uint32_t pick_shipname_index(uint32_t);
+	void set_shipname_used(uint32_t);
 
 private:
 	BuildingStatsVector* get_mutable_building_statistics(const DescriptionIndex& i);
@@ -559,6 +563,7 @@ private:
 	uint32_t               m_msites_lost,     m_msites_defeated;
 	uint32_t               m_civil_blds_lost, m_civil_blds_defeated;
 	uint32_t               m_next_ship_id;
+	std::unordered_set<uint32_t>  m_remaining_shipname_indexes;
 
 	Field *               m_fields;
 	std::vector<bool>     m_allowed_worker_types;
@@ -604,7 +609,7 @@ private:
 	int32_t m_ai_data_int32 [kAIDataSize];
 	uint32_t m_ai_data_uint32 [kAIDataSize];
 	int16_t m_ai_data_int16 [kAIDataSize];
-
+	
 	PlayerBuildingStats m_building_stats;
 
 	DISALLOW_COPY_AND_ASSIGN(Player);

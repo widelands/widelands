@@ -234,6 +234,12 @@ tribes:new_tribe {
       "dismantlesite",
    },
 
+   ship_names = {
+      "Herculles",
+      "Sizyfos",
+      "Atlantic fighter",    
+   },
+
    -- Special types
    builder = "atlanteans_builder",
    carrier = "atlanteans_carrier",

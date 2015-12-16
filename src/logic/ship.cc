@@ -97,9 +97,18 @@ void Ship::init(EditorGameBase& egbase) {
 	init_fleet(egbase);
 	Notifications::publish(NoteShipMessage(this, NoteShipMessage::Message::kGained));
 	assert(get_owner());
-	m_id = get_owner()->next_ship_id();
-	printf (" %d: new ship with id: %d\n", get_owner()->player_number(), m_id);
-	get_owner()->incr_next_ship_id();
+	
+	// Assigning ship id and index of ship name (the ship name itself is not stored here)
+	m_id = get_owner()->next_ship_id(true);
+	m_shipname_index = get_owner()->pick_shipname_index(egbase.get_gametime());
+	get_owner()->set_shipname_used(m_shipname_index);
+	molog("New ship: %s\n",get_owner()->tribe().get_shipname_by_index(m_shipname_index).c_str());
+	printf (" %d: ...new ship with id: %d name index: %d and name: %s\n",  //NOCOM remove before merging
+		get_owner()->player_number(),
+		m_id,
+		m_shipname_index,
+		get_owner()->tribe().get_shipname_by_index(m_shipname_index).c_str());
+	
 }
 
 /**
@@ -1006,7 +1015,7 @@ Load / Save implementation
 ==============================
 */
 
-constexpr uint8_t kCurrentPacketVersion = 5;
+constexpr uint8_t kCurrentPacketVersion = 6;
 
 Ship::Loader::Loader() : m_lastdock(0), m_destination(0) {
 }
@@ -1049,6 +1058,8 @@ void Ship::Loader::load(FileRead & fr)
 	}
 
 	m_id = fr.unsigned_32();
+	m_shipname_index = fr.unsigned_32();
+	printf (" Loading ship with id %d, shipname index: %d\n", m_id, m_shipname_index);
 	m_lastdock = fr.unsigned_32();
 	m_destination = fr.unsigned_32();
 
@@ -1082,8 +1093,13 @@ void Ship::Loader::load_finish() {
 	// restore the state the ship is in
 	ship.m_ship_state = m_ship_state;
 
-	// restore the  ship id
+	//Marking name as used
+	printf (" Ship load: %d ship index marking as used\n", m_shipname_index);
+	ship.get_owner()->set_shipname_used(m_shipname_index);
+
+	// restore the  ship id and name
 	ship.m_id = m_id;
+	ship.m_shipname_index = m_shipname_index;
 
 	// if the ship is on an expedition, restore the expedition specific data
 	if (m_expedition) {
@@ -1113,7 +1129,7 @@ MapObject::Loader* Ship::load(EditorGameBase& egbase, MapObjectLoader& mol, File
 				const ShipDescr* descr = nullptr;
 				// Removing this will break the test suite
 				if (packet_version < 5) {
-					std::string tribe_name = fr.c_string();
+					std::string tribe_name = fr.string();
 					fr.c_string(); // This used to be the ship's name, which we don't need any more.
 					if (!(egbase.tribes().tribe_exists(tribe_name))) {
 						throw GameDataError("Tribe %s does not exist for ship", tribe_name.c_str());
@@ -1175,6 +1191,7 @@ void Ship::save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw) {
 	}
 
 	fw.unsigned_32(m_id);
+	fw.unsigned_32(m_shipname_index); 
 	fw.unsigned_32(mos.get_object_file_index_or_zero(m_lastdock.get(egbase)));
 	fw.unsigned_32(mos.get_object_file_index_or_zero(m_destination.get(egbase)));
 

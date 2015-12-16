@@ -154,7 +154,10 @@ struct Ship : Bob {
 	uint8_t get_ship_state() {return m_ship_state;}
 	
 	/// \returns the current id of ship
-	uint32_t get_ship_id() {return m_id;}	
+	uint32_t get_ship_id() {return m_id;}
+	
+	/// \returns the current name of ship
+	uint32_t get_shipname_index() {return m_shipname_index;}	
 
 	/// \returns whether the ship is currently on an expedition
 	bool state_is_expedition() {
@@ -249,6 +252,7 @@ private:
 	uint8_t m_ship_state;
 	// Unique id for all ships of player
 	uint32_t m_id;
+	uint32_t m_shipname_index;
 
 	struct Expedition {
 		std::unique_ptr<std::list<Coords> > seen_port_buildspaces;
@@ -277,6 +281,7 @@ protected:
 		uint32_t m_destination;
 		uint8_t  m_ship_state;
 		uint32_t m_id;
+		uint32_t m_shipname_index;
 		std::unique_ptr<Expedition> m_expedition;
 		std::vector<ShippingItem::Loader> m_items;
 	};

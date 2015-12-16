@@ -143,6 +143,9 @@ public:
 	}
 
 	void resize_ware_orders(size_t maxLength);
+	
+	const std::string get_shipname_by_index(const uint32_t) const;
+	uint32_t count_defined_shipnames() const {return ship_names_.size();}
 
 private:
 	// Helper function for adding a special worker type (carriers etc.)
@@ -162,6 +165,7 @@ private:
 
 	std::vector<DescriptionIndex>  buildings_;
 	std::set<DescriptionIndex>         immovables_;  // The player immovables
+	std::vector<std::string>           ship_names_;
 	std::set<DescriptionIndex>         workers_;
 	std::set<DescriptionIndex>         wares_;
 	// The wares that are used by construction sites
