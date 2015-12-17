@@ -65,22 +65,22 @@ MapDetails::MapDetails
 	suggested_teams_box_ = new UI::SuggestedTeamsBox(this, 0, 0, UI::Box::Vertical,
 																	 padding_, indent_, labelh_, max_x_, 4 * labelh_);
 
-	main_box_.add(&name_label_, UI::Align::Align_Left);
+	main_box_.add(&name_label_, UI::Align::kLeft);
 	name_box_.add_space(indent_);
-	name_box_.add(&name_, UI::Align::Align_Left);
-	main_box_.add(&name_box_, UI::Align::Align_Left);
+	name_box_.add(&name_, UI::Align::kLeft);
+	main_box_.add(&name_box_, UI::Align::kLeft);
 	main_box_.add_space(padding_);
 
-	main_box_.add(&author_label_, UI::Align::Align_Left);
+	main_box_.add(&author_label_, UI::Align::kLeft);
 	author_box_.add_space(indent_);
-	author_box_.add(&author_, UI::Align::Align_Left);
-	main_box_.add(&author_box_, UI::Align::Align_Left);
+	author_box_.add(&author_, UI::Align::kLeft);
+	main_box_.add(&author_box_, UI::Align::kLeft);
 	main_box_.add_space(padding_);
 
-	main_box_.add(&descr_label_, UI::Align::Align_Left);
+	main_box_.add(&descr_label_, UI::Align::kLeft);
 	descr_box_.add_space(indent_);
-	descr_box_.add(&descr_, UI::Align::Align_Left);
-	main_box_.add(&descr_box_, UI::Align::Align_Left);
+	descr_box_.add(&descr_, UI::Align::kLeft);
+	main_box_.add(&descr_box_, UI::Align::kLeft);
 	main_box_.add_space(padding_);
 }
 

@@ -25,28 +25,28 @@
 namespace UI {
 
 enum class Align {
-	Align_Left         =  0,
-	Align_HCenter      =  1,
-	Align_Right        =  2,
-	Align_Horizontal   =  3,
+    kLeft         =  0,
+    kHCenter      =  1,
+    kRight        =  2,
+    kHorizontal   =  3,
 
-	Align_Top          =  0,
-	Align_VCenter      =  4,
-	Align_Bottom       =  8,
-	Align_Vertical     = 12,
+    kTop          =  0,
+    kVCenter      =  4,
+    kBottom       =  8,
+    kVertical     = 12,
 
-	Align_TopLeft      =  0,
-	Align_CenterLeft   = Align::Align_VCenter,
-	Align_BottomLeft   = Align::Align_Bottom,
+    kTopLeft      =  0,
+    kCenterLeft   = Align::kVCenter,
+    kBottomLeft   = Align::kBottom,
 
-	Align_TopCenter    = Align::Align_HCenter,
-	Align_Center       = Align::Align_HCenter | Align::Align_VCenter,
-	Align_BottomCenter = Align::Align_HCenter | Align::Align_Bottom,
+    kTopCenter    = Align::kHCenter,
+    kCenter       = Align::kHCenter | Align::kVCenter,
+    kBottomCenter = Align::kHCenter | Align::kBottom,
 
-	Align_TopRight     = Align::Align_Right,
-	Align_CenterRight  = Align::Align_Right | Align::Align_VCenter,
+    kTopRight     = Align::kRight,
+    kCenterRight  = Align::kRight | Align::kVCenter,
 
-	Align_BottomRight  = Align::Align_Right | Align::Align_Bottom,
+    kBottomRight  = Align::kRight | Align::kBottom,
 };
 
 inline Align operator &(Align a, Align b)

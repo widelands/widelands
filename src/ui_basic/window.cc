@@ -319,7 +319,7 @@ void Window::draw_border(RenderTarget & dst)
 			(Point(get_lborder() + get_inner_w() / 2, TP_B_PIXMAP_THICKNESS / 2),
 				UI::g_fh1->render(m_title),
 				BlendMode::UseAlpha,
-				UI::Align::Align_Center);
+				UI::Align::kCenter);
 	}
 
 	if (!_is_minimal) {

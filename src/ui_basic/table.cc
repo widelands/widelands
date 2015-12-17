@@ -340,9 +340,9 @@ void Table<void *>::draw(RenderTarget & dst)
 			}
 			const Image* entry_text_im = UI::g_fh1->render(as_uifont(entry_string, m_fontsize));
 
-			if (static_cast<int>(alignment & UI::Align::Align_Right)) {
+			if (static_cast<int>(alignment & UI::Align::kRight)) {
 				point.x += curw - picw;
-			} else if (static_cast<int>(alignment & UI::Align::Align_HCenter)) {
+			} else if (static_cast<int>(alignment & UI::Align::kHCenter)) {
 				point.x += (curw - picw) / 2;
 			}
 

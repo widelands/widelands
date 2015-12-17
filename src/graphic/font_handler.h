@@ -45,7 +45,7 @@ struct FontHandler {
 		 const TextStyle &,
 		 Point dstpoint,
 		 const std::string & text,
-		 Align align = UI::Align::Align_CenterLeft,
+		 Align align = UI::Align::kCenterLeft,
 		 uint32_t caret = std::numeric_limits<uint32_t>::max());
 	uint32_t draw_text_raw(RenderTarget &, const TextStyle &, Point dstpoint, const std::string & text);
 

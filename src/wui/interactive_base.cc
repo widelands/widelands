@@ -359,7 +359,7 @@ void InteractiveBase::draw_overlay(RenderTarget& dst) {
 		if (is_game) {
 			const std::string gametime(gametimestring(egbase().get_gametime(), true));
 			const std::string gametime_text = as_uifont(gametime, UI_FONT_SIZE_SMALL);
-			dst.blit(Point(5, 5), UI::g_fh1->render(gametime_text), BlendMode::UseAlpha, UI::Align::Align_TopLeft);
+			dst.blit(Point(5, 5), UI::g_fh1->render(gametime_text), BlendMode::UseAlpha, UI::Align::kTopLeft);
 
 			static boost::format node_format("(%i, %i)");
 			node_text = as_uifont
@@ -375,7 +375,7 @@ void InteractiveBase::draw_overlay(RenderTarget& dst) {
 			Point(get_w() - 5, get_h() - 5),
 			UI::g_fh1->render(node_text),
 			BlendMode::UseAlpha,
-			UI::Align::Align_BottomRight);
+			UI::Align::kBottomRight);
 	}
 
 	// Blit FPS when in debug mode.
@@ -388,7 +388,7 @@ void InteractiveBase::draw_overlay(RenderTarget& dst) {
 		dst.blit(Point(5, (is_game) ? 25 : 5),
 		         UI::g_fh1->render(fps_text),
 		         BlendMode::UseAlpha,
-					UI::Align::Align_Left);
+					UI::Align::kLeft);
 	}
 }
 

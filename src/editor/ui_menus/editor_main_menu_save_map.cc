@@ -73,7 +73,7 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive& parent)
                     butw_,
                     buth_,
                     _("Filename:"),
-                    UI::Align::Align_Left) {
+                    UI::Align::kLeft) {
 
 	// Make room for edit_options_
 	map_details_.set_size(map_details_.get_w(), map_details_.get_h() - buth_ - padding_);
@@ -88,7 +88,7 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive& parent)
 	                           tablew_ - editbox_label_.get_w() - padding_ + 1,
 	                           buth_,
 	                           g_gr->images().get("pics/but1.png"),
-	                           UI::Align::Align_Left);
+	                           UI::Align::kLeft);
 
 	editbox_->set_text(parent.egbase().map().get_name());
 	editbox_->changed.connect(boost::bind(&MainMenuSaveMap::edit_box_changed, this));

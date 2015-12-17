@@ -58,7 +58,7 @@ struct MultiPlayerClientGroup : public UI::Box {
 		name = new UI::Textarea
 			(this, 0, 0, w - h - UI::Scrollbar::Size * 11 / 5, h);
 		name->set_textstyle(UI::TextStyle::makebold(font, UI_FONT_CLR_FG));
-		add(name, UI::Align::Align_HCenter);
+		add(name, UI::Align::kHCenter);
 		// Either Button if changeable OR text if not
 		if (id == settings->settings().usernum) { // Our Client
 			type = new UI::Button
@@ -69,12 +69,12 @@ struct MultiPlayerClientGroup : public UI::Box {
 			type->sigclicked.connect
 				(boost::bind
 					 (&MultiPlayerClientGroup::toggle_type, boost::ref(*this)));
-			add(type, UI::Align::Align_HCenter);
+			add(type, UI::Align::kHCenter);
 		} else { // just a shown client
 			type_icon = new UI::Icon
 				(this, 0, 0, h, h,
 				 g_gr->images().get("pics/menu_tab_watch.png"));
-			add(type_icon, UI::Align::Align_HCenter);
+			add(type_icon, UI::Align::kHCenter);
 		}
 
 	}
@@ -175,7 +175,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 										 % static_cast<unsigned int>(id + 1)).str();
 		player =
 			new UI::Icon(this, 0, 0, h, h, g_gr->images().get(pic));
-		add(player, UI::Align::Align_HCenter);
+		add(player, UI::Align::kHCenter);
 		type = new UI::Button
 			(this, "player_type",
 			 0, 0, h, h,
@@ -184,7 +184,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		type->sigclicked.connect
 			(boost::bind
 				 (&MultiPlayerPlayerGroup::toggle_type, boost::ref(*this)));
-		add(type, UI::Align::Align_HCenter);
+		add(type, UI::Align::kHCenter);
 		tribe = new UI::Button
 			(this, "player_tribe",
 			 0, 0, h, h,
@@ -193,7 +193,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		tribe->sigclicked.connect
 			(boost::bind
 				 (&MultiPlayerPlayerGroup::toggle_tribe, boost::ref(*this)));
-		add(tribe, UI::Align::Align_HCenter);
+		add(tribe, UI::Align::kHCenter);
 		tribe->set_draw_flat_background(true);
 		init = new UI::Button
 			(this, "player_init",
@@ -203,7 +203,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		init->sigclicked.connect
 			(boost::bind
 				 (&MultiPlayerPlayerGroup::toggle_init, boost::ref(*this)));
-		add(init, UI::Align::Align_HCenter);
+		add(init, UI::Align::kHCenter);
 		team = new UI::Button
 			(this, "player_team",
 			 0, 0, h, h,
@@ -212,7 +212,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		team->sigclicked.connect
 			(boost::bind
 				 (&MultiPlayerPlayerGroup::toggle_team, boost::ref(*this)));
-		add(team, UI::Align::Align_HCenter);
+		add(team, UI::Align::kHCenter);
 	}
 
 	/// Toggle through the types
@@ -447,11 +447,11 @@ m_fname(fname)
 		(new UI::Textarea
 			(this,
 			 w * 6 / 15 + buth * 3, buth / 3,
-			 w * 9 / 15 - 4 * buth, buth, UI::Align::Align_HCenter));
+			 w * 9 / 15 - 4 * buth, buth, UI::Align::kHCenter));
 	labels.back()->set_text(_("Initialization"));
 	labels.back()->set_textstyle(tsmaller);
 
-	labels.push_back(new UI::Textarea(this, w - buth, buth / 3, buth, buth, UI::Align::Align_Right));
+	labels.push_back(new UI::Textarea(this, w - buth, buth / 3, buth, buth, UI::Align::kRight));
 	labels.back()->set_text(_("Team"));
 	labels.back()->set_textstyle(tsmaller);
 
@@ -463,7 +463,7 @@ m_fname(fname)
 			 0, 0, playerbox.get_w(), buth,
 			 s, npsb.get(),
 			 m_tribepics, m_tribenames);
-		playerbox.add(multi_player_player_groups.at(i), UI::Align::Align_HCenter);
+		playerbox.add(multi_player_player_groups.at(i), UI::Align::kHCenter);
 	}
 	refresh();
 }
@@ -489,7 +489,7 @@ void MultiPlayerSetupGroup::refresh()
 		if (!multi_player_client_groups.at(i)) {
 			multi_player_client_groups.at(i) = new MultiPlayerClientGroup(
 			   &clientbox, i, 0, 0, clientbox.get_w(), m_buth, s, UI::Font::get(m_fname, m_fsize));
-			clientbox.add(&*multi_player_client_groups.at(i), UI::Align::Align_HCenter);
+			clientbox.add(&*multi_player_client_groups.at(i), UI::Align::kHCenter);
 		}
 		multi_player_client_groups.at(i)->refresh();
 	}

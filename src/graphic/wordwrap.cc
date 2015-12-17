@@ -279,10 +279,10 @@ void WordWrap::draw(RenderTarget & dst, Point where, Align align, uint32_t caret
 
 	calc_wrapped_pos(caret, caretline, caretpos);
 
-	if ((align & UI::Align::Align_Vertical) != UI::Align::Align_Top) {
+	if ((align & UI::Align::kVertical) != UI::Align::kTop) {
 		uint32_t h = height();
 
-		if ((align & UI::Align::Align_Vertical) == UI::Align::Align_VCenter)
+		if ((align & UI::Align::kVertical) == UI::Align::kVCenter)
 			where.y -= (h + 1) / 2;
 		else
 			where.y -= h;
@@ -303,7 +303,7 @@ void WordWrap::draw(RenderTarget & dst, Point where, Align align, uint32_t caret
 						  where.y);
 
 		g_fh->draw_text
-			(dst, m_style, drawpos, m_lines[line].text.c_str(), Align(align & UI::Align::Align_Horizontal),
+			(dst, m_style, drawpos, m_lines[line].text.c_str(), Align(align & UI::Align::kHorizontal),
 			 line == caretline ? caretpos : std::numeric_limits<uint32_t>::max());
 	}
 }

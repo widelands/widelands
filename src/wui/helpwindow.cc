@@ -42,7 +42,7 @@ BuildingHelpWindow::BuildingHelpWindow
 	:
 	UI::UniqueWindow(parent, "help_window", &reg, width, height,
 			(boost::format(_("Help: %s")) % building_description.descname()).str()),
-	textarea_(new MultilineTextarea(this, 5, 5, width - 10, height - 10, std::string(), UI::Align::Align_Left))
+	textarea_(new MultilineTextarea(this, 5, 5, width - 10, height - 10, std::string(), UI::Align::kLeft))
 {
 	assert(tribe.has_building(tribe.building_index(building_description.name())));
 	try {

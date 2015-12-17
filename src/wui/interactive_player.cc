@@ -125,19 +125,19 @@ m_toggle_help
 
 	// TODO(unknown): instead of making unneeded buttons invisible after generation,
 	// they should not at all be generated. -> implement more dynamic toolbar UI
-	m_toolbar.add(&m_toggle_options_menu,    UI::Align::Align_Left);
-	m_toolbar.add(&m_toggle_statistics_menu, UI::Align::Align_Left);
-	m_toolbar.add(&m_toggle_minimap,         UI::Align::Align_Left);
-	m_toolbar.add(&m_toggle_buildhelp,       UI::Align::Align_Left);
+	m_toolbar.add(&m_toggle_options_menu,    UI::Align::kLeft);
+	m_toolbar.add(&m_toggle_statistics_menu, UI::Align::kLeft);
+	m_toolbar.add(&m_toggle_minimap,         UI::Align::kLeft);
+	m_toolbar.add(&m_toggle_buildhelp,       UI::Align::kLeft);
 	if (multiplayer) {
-		m_toolbar.add(&m_toggle_chat,            UI::Align::Align_Left);
+		m_toolbar.add(&m_toggle_chat,            UI::Align::kLeft);
 		m_toggle_chat.set_visible(false);
 		m_toggle_chat.set_enabled(false);
 	}
 
-	m_toolbar.add(&m_toggle_help,            UI::Align::Align_Left);
-	m_toolbar.add(&m_toggle_objectives,      UI::Align::Align_Left);
-	m_toolbar.add(&m_toggle_message_menu,    UI::Align::Align_Left);
+	m_toolbar.add(&m_toggle_help,            UI::Align::kLeft);
+	m_toolbar.add(&m_toggle_objectives,      UI::Align::kLeft);
+	m_toolbar.add(&m_toggle_message_menu,    UI::Align::kLeft);
 
 	set_player_number(plyn);
 	fieldclicked.connect(boost::bind(&InteractivePlayer::node_action, this));

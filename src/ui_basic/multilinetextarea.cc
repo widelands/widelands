@@ -58,7 +58,7 @@ MultilineTextarea::MultilineTextarea
 	set_thinks(false);
 
 	//  do not allow vertical alignment as it does not make sense
-	m_align = align & UI::Align::Align_Horizontal;
+	m_align = align & UI::Align::kHorizontal;
 
 	m_scrollbar.moved.connect(boost::bind(&MultilineTextarea::scrollpos_changed, this, _1));
 
@@ -180,11 +180,11 @@ void MultilineTextarea::draw(RenderTarget & dst)
 	} else {
 		int32_t anchor = 0;
 
-		switch (m_align & UI::Align::Align_Horizontal) {
-		case UI::Align::Align_HCenter:
+		switch (m_align & UI::Align::kHorizontal) {
+		case UI::Align::kHCenter:
 			anchor = get_eff_w() / 2;
 			break;
-		case UI::Align::Align_Right:
+		case UI::Align::kRight:
 			anchor = get_eff_w();
 			break;
 		default:

@@ -33,7 +33,7 @@ FullscreenMenuMultiPlayer::FullscreenMenuMultiPlayer() :
 	title
 		(this,
 		 get_w() / 2, m_title_y,
-		 _("Choose game type"), UI::Align::Align_HCenter),
+		 _("Choose game type"), UI::Align::kHCenter),
 
 // Buttons
 	vbox(this, m_box_x, m_box_y, UI::Box::Vertical,
@@ -62,15 +62,15 @@ FullscreenMenuMultiPlayer::FullscreenMenuMultiPlayer() :
 
 	title.set_font(ui_fn(), fs_big(), UI_FONT_CLR_FG);
 
-	vbox.add(&metaserver, UI::Align::Align_HCenter);
-	vbox.add(&lan, UI::Align::Align_HCenter);
+	vbox.add(&metaserver, UI::Align::kHCenter);
+	vbox.add(&lan, UI::Align::kHCenter);
 
 	// Multiple add_space calls to get the same height for the back button as in the single player menu
 	vbox.add_space(m_buth);
 	vbox.add_space(m_buth);
 	vbox.add_space(6 * m_buth);
 
-	vbox.add(&back, UI::Align::Align_HCenter);
+	vbox.add(&back, UI::Align::kHCenter);
 
 	vbox.set_size(m_butw, get_h() - vbox.get_y());
 

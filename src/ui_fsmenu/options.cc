@@ -129,18 +129,18 @@ FullscreenMenuOptions::FullscreenMenuOptions
 		m_title
 			(this,
 			 get_w() / 2, get_h() / 40,
-			 _("General Options"), UI::Align::Align_HCenter),
+			 _("General Options"), UI::Align::kHCenter),
 
 	// First options block 'general options', first column
 	m_label_resolution
 		(this,
 		 m_hmargin, m_offset_first_group,
-		 _("In-game resolution"), UI::Align::Align_VCenter),
+		 _("In-game resolution"), UI::Align::kVCenter),
 	m_reslist
 		(this,
 		 m_hmargin, m_label_resolution.get_y() + m_label_resolution.get_h(),
 		 (get_w() - 2 * m_hmargin - m_space) / 2, 95,
-		 UI::Align::Align_Left, true),
+		 UI::Align::kLeft, true),
 
 	m_fullscreen (this, Point(m_hmargin,
 									  m_reslist.get_y() +
@@ -162,13 +162,13 @@ FullscreenMenuOptions::FullscreenMenuOptions
 	m_label_language
 		(this,
 		 get_w() - m_hmargin - (get_w() - 2 * m_hmargin - m_space) / 2, m_offset_first_group,
-		 _("Language"), UI::Align::Align_VCenter),
+		 _("Language"), UI::Align::kVCenter),
 	// same height as m_reslist
 	m_language_list
 		(this,
 		 m_label_language.get_x(), m_label_language.get_y() + m_label_language.get_h(),
 		 (get_w() - 2 * m_hmargin - m_space) / 2, m_reslist.get_h(),
-		 UI::Align::Align_Left, true),
+		 UI::Align::kLeft, true),
 
 	m_music (this, Point(m_label_language.get_x(),
 								m_language_list.get_y() +
@@ -184,7 +184,7 @@ FullscreenMenuOptions::FullscreenMenuOptions
 	m_label_game_options
 		(this,
 		 get_w() / 2, get_h() / 2,
-		 _("In-game Options"), UI::Align::Align_HCenter),
+		 _("In-game Options"), UI::Align::kHCenter),
 
 	/** TRANSLATORS: A watchwindow is a window where you keep watching an object or a map region,*/
 	/** TRANSLATORS: and it also lets you jump to it on the map. */
@@ -454,7 +454,7 @@ FullscreenMenuAdvancedOptions::FullscreenMenuAdvancedOptions
 	m_title
 		(this,
 		 get_w() / 2, get_h() * 17 / 150,
-		 _("Advanced Options"), UI::Align::Align_HCenter),
+		 _("Advanced Options"), UI::Align::kHCenter),
 
 	// Spinboxes
 	m_sb_dis_panel

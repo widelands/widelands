@@ -105,7 +105,7 @@ void ProgressWindow::step(const std::string & description) {
 	rt.blit(m_label_center,
 			 UI::g_fh1->render(as_uifont(description, UI_FONT_SIZE_SMALL, PROGRESS_FONT_COLOR_FG)),
 			 BlendMode::UseAlpha,
-			 UI::Align::Align_Center);
+			 UI::Align::kCenter);
 	g_gr->update();
 
 #ifdef _WIN32

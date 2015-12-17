@@ -44,7 +44,7 @@ struct MultilineTextarea : public Panel {
 		(Panel * const parent,
 		 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
 		 const std::string & text         = std::string(),
-		 const Align                      = UI::Align::Align_Left,
+		 const Align                      = UI::Align::kLeft,
 		 const bool always_show_scrollbar = false);
 	~MultilineTextarea();
 

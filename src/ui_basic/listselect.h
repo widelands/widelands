@@ -47,7 +47,7 @@ struct BaseListselect : public Panel {
 		 int32_t y,
 		 uint32_t w,
 		 uint32_t h,
-		 Align align = UI::Align::Align_Left,
+		 Align align = UI::Align::kLeft,
 		 bool show_check = false);
 	~BaseListselect();
 
@@ -164,7 +164,7 @@ struct Listselect : public BaseListselect {
 		(Panel * parent,
 		 int32_t x, int32_t y,
 		 uint32_t w, uint32_t h,
-		 Align align = UI::Align::Align_Left,
+		 Align align = UI::Align::kLeft,
 		 bool show_check = false)
 		: BaseListselect(parent, x, y, w, h, align, show_check)
 	{}
@@ -220,7 +220,7 @@ struct Listselect<Entry &> : public Listselect<Entry *> {
 		(Panel * parent,
 		 int32_t x, int32_t y,
 		 uint32_t w, uint32_t h,
-		 Align align = UI::Align::Align_Left,
+		 Align align = UI::Align::kLeft,
 		 bool show_check = false)
 		: Base(parent, x, y, w, h, align, show_check)
 	{}

@@ -137,7 +137,7 @@ m_selected_information(0)
 	m_plot.set_time(m_my_registry->time);
 
 	// Setup Widgets
-	m_box.add(&m_plot, UI::Align::Align_Top);
+	m_box.add(&m_plot, UI::Align::kTop);
 
 	UI::Box * hbox1 = new UI::Box(&m_box, 0, 0, UI::Box::Horizontal, 0, 0, 1);
 
@@ -161,11 +161,11 @@ m_selected_information(0)
 
 		m_cbs[p - 1] = &cb;
 
-		hbox1->add(&cb, UI::Align::Align_Left, false, true);
+		hbox1->add(&cb, UI::Align::kLeft, false, true);
 	} else //  player nr p does not exist
 		m_cbs[p - 1] = nullptr;
 
-	m_box.add(hbox1, UI::Align::Align_Top, true);
+	m_box.add(hbox1, UI::Align::kTop, true);
 
 	UI::Box * hbox2 = new UI::Box(&m_box, 0, 0, UI::Box::Horizontal, 0, 0, 1);
 
@@ -177,7 +177,7 @@ m_selected_information(0)
 		 g_gr->images().get("pics/genstats_landsize.png"),
 		 _("Land"),
 		 &btn);
-	hbox2->add(btn, UI::Align::Align_Left, false, true);
+	hbox2->add(btn, UI::Align::kLeft, false, true);
 
 	m_radiogroup.add_button
 		(hbox2,
@@ -185,7 +185,7 @@ m_selected_information(0)
 		 g_gr->images().get("pics/genstats_nrworkers.png"),
 		 _("Workers"),
 		 &btn);
-	hbox2->add(btn, UI::Align::Align_Left, false, true);
+	hbox2->add(btn, UI::Align::kLeft, false, true);
 
 	m_radiogroup.add_button
 		(hbox2,
@@ -193,7 +193,7 @@ m_selected_information(0)
 		 g_gr->images().get("pics/genstats_nrbuildings.png"),
 		 _("Buildings"),
 		 &btn);
-	hbox2->add(btn, UI::Align::Align_Left, false, true);
+	hbox2->add(btn, UI::Align::kLeft, false, true);
 
 	m_radiogroup.add_button
 		(hbox2,
@@ -201,7 +201,7 @@ m_selected_information(0)
 		 g_gr->images().get("pics/genstats_nrwares.png"),
 		 _("Wares"),
 		 &btn);
-	hbox2->add(btn, UI::Align::Align_Left, false, true);
+	hbox2->add(btn, UI::Align::kLeft, false, true);
 
 	m_radiogroup.add_button
 		(hbox2,
@@ -209,7 +209,7 @@ m_selected_information(0)
 		 g_gr->images().get("pics/genstats_productivity.png"),
 		 _("Productivity"),
 		 &btn);
-	hbox2->add(btn, UI::Align::Align_Left, false, true);
+	hbox2->add(btn, UI::Align::kLeft, false, true);
 
 	m_radiogroup.add_button
 		(hbox2,
@@ -217,7 +217,7 @@ m_selected_information(0)
 		 g_gr->images().get("pics/genstats_casualties.png"),
 		 _("Casualties"),
 		 &btn);
-	hbox2->add(btn, UI::Align::Align_Left, false, true);
+	hbox2->add(btn, UI::Align::kLeft, false, true);
 
 	m_radiogroup.add_button
 		(hbox2,
@@ -225,7 +225,7 @@ m_selected_information(0)
 		 g_gr->images().get("pics/genstats_kills.png"),
 		 _("Kills"),
 		 &btn);
-	hbox2->add(btn, UI::Align::Align_Left, false, true);
+	hbox2->add(btn, UI::Align::kLeft, false, true);
 
 	m_radiogroup.add_button
 		(hbox2,
@@ -233,7 +233,7 @@ m_selected_information(0)
 		 g_gr->images().get("pics/genstats_msites_lost.png"),
 		 _("Military buildings lost"),
 		 &btn);
-	hbox2->add(btn, UI::Align::Align_Left, false, true);
+	hbox2->add(btn, UI::Align::kLeft, false, true);
 
 	m_radiogroup.add_button
 		(hbox2,
@@ -241,7 +241,7 @@ m_selected_information(0)
 		 g_gr->images().get("pics/genstats_msites_defeated.png"),
 		 _("Military buildings defeated"),
 		 &btn);
-	hbox2->add(btn, UI::Align::Align_Left, false, true);
+	hbox2->add(btn, UI::Align::kLeft, false, true);
 
 	m_radiogroup.add_button
 		(hbox2,
@@ -249,7 +249,7 @@ m_selected_information(0)
 		 g_gr->images().get("pics/genstats_civil_blds_lost.png"),
 		 _("Civilian buildings lost"),
 		 &btn);
-	hbox2->add(btn, UI::Align::Align_Left, false, true);
+	hbox2->add(btn, UI::Align::kLeft, false, true);
 
 	m_radiogroup.add_button
 		(hbox2,
@@ -257,7 +257,7 @@ m_selected_information(0)
 		 g_gr->images().get("pics/genstats_militarystrength.png"),
 		 _("Military"),
 		 &btn);
-	hbox2->add(btn, UI::Align::Align_Left, false, true);
+	hbox2->add(btn, UI::Align::kLeft, false, true);
 
 	if (hook) {
 		m_radiogroup.add_button
@@ -266,20 +266,20 @@ m_selected_information(0)
 			 g_gr->images().get(cs_pic),
 			 cs_name.c_str(),
 			 &btn);
-		hbox2->add(btn, UI::Align::Align_Left, false, true);
+		hbox2->add(btn, UI::Align::kLeft, false, true);
 	}
 
 	m_radiogroup.set_state(m_selected_information);
 	m_radiogroup.changedto.connect
 		(boost::bind(&GeneralStatisticsMenu::radiogroup_changed, this, _1));
 
-	m_box.add(hbox2, UI::Align::Align_Top, true);
+	m_box.add(hbox2, UI::Align::kTop, true);
 
 	m_box.add
 		(new WuiPlotAreaSlider
 			(&m_box, m_plot, 0, 0, 100, 45,
 			 g_gr->images().get("pics/but1.png"))
-		, UI::Align::Align_Top
+		, UI::Align::kTop
 		, true);
 
 }
