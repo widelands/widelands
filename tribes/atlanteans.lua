@@ -235,9 +235,18 @@ tribes:new_tribe {
    },
 
    ship_names = {
-      "Herculles",
-      "Sizyfos",
-      "Atlantic fighter",    
+      "Coliondor",
+      "Loftomor",
+      "Opol",
+      "Ostur",
+      "Jundlina",
+      "Sidolus",
+      "King Askandor",
+      "King Ajanthul",
+      "Satul",
+      "Atlantis",
+      "Spider",
+      "Atlantean's stronghold",  
    },
 
    -- Special types
