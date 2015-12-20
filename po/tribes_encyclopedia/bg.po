@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-23 09:42+0000\n"
-"PO-Revision-Date: 2015-11-23 10:23+0000\n"
+"POT-Creation-Date: 2015-12-09 20:23+0000\n"
+"PO-Revision-Date: 2015-12-10 06:56+0000\n"
 "Last-Translator: Lyubomir Vasilev\n"
 "Language-Team: Bulgarian (http://www.transifex.com/widelands/widelands/language/bg/)\n"
 "MIME-Version: 1.0\n"
@@ -1217,7 +1217,7 @@ msgstr "Мели пшеницата за производство на браш�
 #. TRANSLATORS: Performance helptext for a building
 #: ../../tribes/buildings/productionsites/empire/mill/helptexts.lua:26
 msgctxt "empire_building"
-msgid "The miller needs %1% on average to grind wheat into a sack of corn."
+msgid "The miller needs %1% on average to grind wheat into a sack of flour."
 msgstr "Мелничарят има нужда средно от %1%, за да смели пшеницата за една торба брашно."
 
 #. TRANSLATORS: Purpose helptext for a building
@@ -1521,280 +1521,283 @@ msgctxt "empire_building"
 msgid "The headquarters shipwreck is your main building."
 msgstr "Корабокруширалият щаб е основната Ви сграда."
 
-#: ../../tribes/scripting/help/building_help.lua:155
+#: ../../tribes/scripting/help/building_help.lua:108
+#: ../../tribes/scripting/help/format_help.lua:146
 msgid "%s and"
 msgstr "%s и"
 
-#: ../../tribes/scripting/help/building_help.lua:164
+#: ../../tribes/scripting/help/building_help.lua:117
 msgid "Food:"
 msgstr "Храна:"
 
-#: ../../tribes/scripting/help/building_help.lua:212
+#: ../../tribes/scripting/help/building_help.lua:165
 msgid "Equipment:"
 msgstr "Екипировка:"
 
 #. TRANSLATORS: Heading for a flavour text in the building help.
-#: ../../tribes/scripting/help/building_help.lua:234
+#: ../../tribes/scripting/help/building_help.lua:187
 msgid "Lore"
 msgstr "Информация"
 
-#: ../../tribes/scripting/help/building_help.lua:242
+#: ../../tribes/scripting/help/building_help.lua:195
 msgid "General"
 msgstr "Общи"
 
-#: ../../tribes/scripting/help/building_help.lua:243
+#: ../../tribes/scripting/help/building_help.lua:196
 msgid "Purpose:"
 msgstr "Цел:"
 
-#: ../../tribes/scripting/help/building_help.lua:270
-#: ../../tribes/scripting/help/building_help.lua:531
+#: ../../tribes/scripting/help/building_help.lua:223
+#: ../../tribes/scripting/help/building_help.lua:465
 msgid "Note:"
 msgstr "Бележка:"
 
-#: ../../tribes/scripting/help/building_help.lua:275
+#: ../../tribes/scripting/help/building_help.lua:228
 msgid "Work area radius:"
 msgstr "Радиус на работната област:"
 
-#: ../../tribes/scripting/help/building_help.lua:279
-#: ../../tribes/scripting/help/building_help.lua:284
+#: ../../tribes/scripting/help/building_help.lua:232
+#: ../../tribes/scripting/help/building_help.lua:237
 msgid "Healing:"
 msgstr "Трениране на здравето:"
 
-#: ../../tribes/scripting/help/building_help.lua:280
-#: ../../tribes/scripting/help/building_help.lua:285
+#: ../../tribes/scripting/help/building_help.lua:233
+#: ../../tribes/scripting/help/building_help.lua:238
 msgid "Garrisoned soldiers heal %d health point per second"
 msgid_plural "Garrisoned soldiers heal %d health points per second"
 msgstr[0] "Здравето на войниците на гарнизон се лекува с %d точка в секунда"
 msgstr[1] "Здравето на войниците на гарнизон се лекува с %d точки в секунда"
 
-#: ../../tribes/scripting/help/building_help.lua:281
-#: ../../tribes/scripting/help/building_help.lua:287
+#: ../../tribes/scripting/help/building_help.lua:234
+#: ../../tribes/scripting/help/building_help.lua:240
 msgid "Conquer range:"
 msgstr "Обхват на завладяване:"
 
-#: ../../tribes/scripting/help/building_help.lua:286
-#: ../../tribes/scripting/help/building_help.lua:290
+#: ../../tribes/scripting/help/building_help.lua:239
+#: ../../tribes/scripting/help/building_help.lua:243
 msgid "Capacity:"
 msgstr "Капацитет:"
 
-#: ../../tribes/scripting/help/building_help.lua:292
+#: ../../tribes/scripting/help/building_help.lua:245
 msgid "Vision range:"
 msgstr "Обхват на видимост:"
 
-#: ../../tribes/scripting/help/building_help.lua:317
+#: ../../tribes/scripting/help/building_help.lua:270
 msgid "%1$s from: %2$s"
 msgstr "%1$s от: %2$s"
 
 #. TRANSLATORS: Heading in the building help for wares that a building accepts
 #. (e.g. wheat for a mill).
-#: ../../tribes/scripting/help/building_help.lua:324
+#: ../../tribes/scripting/help/building_help.lua:277
 msgid "Incoming:"
 msgstr "Входящи:"
 
-#: ../../tribes/scripting/help/building_help.lua:328
+#: ../../tribes/scripting/help/building_help.lua:281
 msgid "Collects:"
 msgstr "Събира:"
 
 #. TRANSLATORS: This is a verb (The miner mines)
-#: ../../tribes/scripting/help/building_help.lua:340
+#: ../../tribes/scripting/help/building_help.lua:293
 msgid "Mines:"
 msgstr "Добива:"
 
-#: ../../tribes/scripting/help/building_help.lua:360
+#: ../../tribes/scripting/help/building_help.lua:313
 msgid "Produces:"
 msgstr "Произвежда:"
 
-#: ../../tribes/scripting/help/building_help.lua:403
+#: ../../tribes/scripting/help/building_help.lua:356
 msgid "Outgoing:"
 msgstr "Изходящи:"
 
-#: ../../tribes/scripting/help/building_help.lua:405
+#: ../../tribes/scripting/help/building_help.lua:358
 msgid "None"
 msgstr "Нищо"
 
-#: ../../tribes/scripting/help/building_help.lua:406
+#: ../../tribes/scripting/help/building_help.lua:359
 msgid "Dependencies"
 msgstr "Зависимости"
 
-#: ../../tribes/scripting/help/building_help.lua:422
+#: ../../tribes/scripting/help/building_help.lua:375
 msgid "Health Training"
 msgstr "Трениране на здравето"
 
-#. TRANSLATORS: %1$s = Health, Evade, Attack or Defense. %2$s and %3$s are
-#. numbers.
-#: ../../tribes/scripting/help/building_help.lua:423
-#: ../../tribes/scripting/help/building_help.lua:437
-#: ../../tribes/scripting/help/building_help.lua:449
-#: ../../tribes/scripting/help/building_help.lua:462
-msgid "Trains ‘%1$s’ from %2$s up to %3$s"
-msgstr "Тренира „%1$s“ от %2$s до %3$s"
+#: ../../tribes/scripting/help/building_help.lua:376
+msgid "Trains ‘Health’ from %1% up to %2%"
+msgstr "Тренира здравето от %1% до %2%"
 
-#: ../../tribes/scripting/help/building_help.lua:424
-msgid "Health"
-msgstr "Здраве"
-
-#: ../../tribes/scripting/help/building_help.lua:425
-#: ../../tribes/scripting/help/building_help.lua:439
-#: ../../tribes/scripting/help/building_help.lua:451
-#: ../../tribes/scripting/help/building_help.lua:464
+#: ../../tribes/scripting/help/building_help.lua:378
+#: ../../tribes/scripting/help/building_help.lua:392
+#: ../../tribes/scripting/help/building_help.lua:404
+#: ../../tribes/scripting/help/building_help.lua:417
 msgid "Soldiers:"
 msgstr "Войници:"
 
-#: ../../tribes/scripting/help/building_help.lua:435
+#: ../../tribes/scripting/help/building_help.lua:388
 msgid "Attack Training"
 msgstr "Трениране на атаката"
 
-#: ../../tribes/scripting/help/building_help.lua:438
-msgid "Attack"
-msgstr "Атака"
+#. TRANSLATORS: %1$s = Health, Evade, Attack or Defense. %2$s and %3$s are
+#. numbers.
+#: ../../tribes/scripting/help/building_help.lua:390
+msgid "Trains ‘Attack’ from %1% up to %2%"
+msgstr "Тренира атаката от %1% до %2%"
 
-#: ../../tribes/scripting/help/building_help.lua:448
+#: ../../tribes/scripting/help/building_help.lua:401
 msgid "Defense Training"
 msgstr "Трениране на защитата"
 
-#: ../../tribes/scripting/help/building_help.lua:450
-msgid "Defense"
-msgstr "Защита"
+#: ../../tribes/scripting/help/building_help.lua:402
+msgid "Trains ‘Defense’ from %1% up to %2%"
+msgstr "Тренира защитата от %1% до %2%"
 
-#: ../../tribes/scripting/help/building_help.lua:461
+#: ../../tribes/scripting/help/building_help.lua:414
 msgid "Evade Training"
 msgstr "Трениране на ловкостта"
 
-#: ../../tribes/scripting/help/building_help.lua:463
-msgid "Evade"
-msgstr "Ловкост"
-
-#. TRANSLATORS: %1$d is a number, %2$s the name of a ware, e.g. 12x Stone
-#: ../../tribes/scripting/help/building_help.lua:490
-msgid "%1$dx %2$s"
-msgstr "%1$dх %2$s"
+#: ../../tribes/scripting/help/building_help.lua:415
+msgid "Trains ‘Evade’ from %1% up to %2%"
+msgstr "Тренира ловкостта от %1% до %2%"
 
 #. TRANSLATORS: This is the header for the "Building" section in the building
 #. help, containing size info, buildcost etc.
-#: ../../tribes/scripting/help/building_help.lua:508
+#: ../../tribes/scripting/help/building_help.lua:442
 msgid "Building"
 msgstr "Сграда"
 
-#: ../../tribes/scripting/help/building_help.lua:512
+#: ../../tribes/scripting/help/building_help.lua:446
 msgid "Mine plot"
 msgstr "Парцел за мина"
 
-#: ../../tribes/scripting/help/building_help.lua:512
-#: ../../tribes/scripting/help/building_help.lua:514
-#: ../../tribes/scripting/help/building_help.lua:517
-#: ../../tribes/scripting/help/building_help.lua:519
-#: ../../tribes/scripting/help/building_help.lua:521
-#: ../../tribes/scripting/help/building_help.lua:523
+#: ../../tribes/scripting/help/building_help.lua:446
+#: ../../tribes/scripting/help/building_help.lua:448
+#: ../../tribes/scripting/help/building_help.lua:451
+#: ../../tribes/scripting/help/building_help.lua:453
+#: ../../tribes/scripting/help/building_help.lua:455
+#: ../../tribes/scripting/help/building_help.lua:457
 msgid "Space required:"
 msgstr "Нужно място:"
 
-#: ../../tribes/scripting/help/building_help.lua:514
+#: ../../tribes/scripting/help/building_help.lua:448
 msgid "Port plot"
 msgstr "Парцел за пристанище"
 
-#: ../../tribes/scripting/help/building_help.lua:517
+#: ../../tribes/scripting/help/building_help.lua:451
 msgid "Small plot"
 msgstr "Малък парцел"
 
-#: ../../tribes/scripting/help/building_help.lua:519
+#: ../../tribes/scripting/help/building_help.lua:453
 msgid "Medium plot"
 msgstr "Среден парцел"
 
-#: ../../tribes/scripting/help/building_help.lua:521
+#: ../../tribes/scripting/help/building_help.lua:455
 msgid "Big plot"
 msgstr "Голям парцел"
 
-#: ../../tribes/scripting/help/building_help.lua:523
-#: ../../tribes/scripting/help/building_help.lua:607
-#: ../../tribes/scripting/help/building_help.lua:656
+#: ../../tribes/scripting/help/building_help.lua:457
+#: ../../tribes/scripting/help/building_help.lua:541
+#: ../../tribes/scripting/help/building_help.lua:590
 msgid "Unknown"
 msgstr "Неизвестно"
 
-#: ../../tribes/scripting/help/building_help.lua:532
+#: ../../tribes/scripting/help/building_help.lua:466
 msgid ""
 "This building can either be built directly or obtained by enhancing another "
 "building."
 msgstr "Тази сграда може или да бъде построена направо или да бъде получена чрез надграждане на друга сграда."
 
-#: ../../tribes/scripting/help/building_help.lua:538
+#: ../../tribes/scripting/help/building_help.lua:472
 msgid "Direct build cost:"
 msgstr "Цена за директно построяване:"
 
-#: ../../tribes/scripting/help/building_help.lua:540
+#: ../../tribes/scripting/help/building_help.lua:474
 msgid "Build cost:"
 msgstr "Цена за строеж:"
 
-#: ../../tribes/scripting/help/building_help.lua:551
+#: ../../tribes/scripting/help/building_help.lua:485
 msgid "Or enhanced from:"
 msgstr "Или надградена от:"
 
-#: ../../tribes/scripting/help/building_help.lua:553
+#: ../../tribes/scripting/help/building_help.lua:487
 msgid "Enhanced from:"
 msgstr "Надградена от:"
 
-#: ../../tribes/scripting/help/building_help.lua:562
+#: ../../tribes/scripting/help/building_help.lua:496
 msgid "Cumulative cost:"
 msgstr "Обща цена:"
 
-#: ../../tribes/scripting/help/building_help.lua:612
+#: ../../tribes/scripting/help/building_help.lua:546
 msgid "If built directly, dismantle yields:"
 msgstr "Ако бъде построена направо, при демонтиране ще дава:"
 
-#: ../../tribes/scripting/help/building_help.lua:617
+#: ../../tribes/scripting/help/building_help.lua:551
 msgid "If enhanced, dismantle yields:"
 msgstr "Ако бъде надградена, при демонтиране ще дава:"
 
 #. TRANSLATORS: This is a heading for the resources that you will get back
 #. when you dismantle a building of this type. What dismantling will give you.
-#: ../../tribes/scripting/help/building_help.lua:620
-#: ../../tribes/scripting/help/building_help.lua:661
+#: ../../tribes/scripting/help/building_help.lua:554
+#: ../../tribes/scripting/help/building_help.lua:595
 msgid "Dismantle yields:"
 msgstr "Демонтирането дава:"
 
-#: ../../tribes/scripting/help/building_help.lua:670
+#: ../../tribes/scripting/help/building_help.lua:604
 msgid "Can be enhanced to:"
 msgstr "Може да бъде надградена до:"
 
-#: ../../tribes/scripting/help/building_help.lua:701
+#: ../../tribes/scripting/help/building_help.lua:634
 msgid "Crew required:"
 msgstr "Нужен екип:"
 
-#: ../../tribes/scripting/help/building_help.lua:701
+#: ../../tribes/scripting/help/building_help.lua:634
 msgid "Workers"
 msgstr "Работници"
 
 #. TRANSLATORS: %s is a worker name, e.g. "Chief Miner" or "Brewer".
-#: ../../tribes/scripting/help/building_help.lua:723
+#: ../../tribes/scripting/help/building_help.lua:656
 msgid "%s or better"
 msgstr "%s или по-добър"
 
-#: ../../tribes/scripting/help/building_help.lua:734
-#: ../../tribes/scripting/help/worker_help.lua:68
+#: ../../tribes/scripting/help/building_help.lua:667
+#: ../../tribes/scripting/help/worker_help.lua:117
 msgid "Experience levels:"
 msgstr "Нива на опит:"
 
 #. TRANSLATORS: EP = Experience Points
-#: ../../tribes/scripting/help/building_help.lua:736
-#: ../../tribes/scripting/help/building_help.lua:745
-#: ../../tribes/scripting/help/worker_help.lua:69
-#: ../../tribes/scripting/help/worker_help.lua:78
+#: ../../tribes/scripting/help/building_help.lua:669
+#: ../../tribes/scripting/help/building_help.lua:678
+#: ../../tribes/scripting/help/worker_help.lua:118
+#: ../../tribes/scripting/help/worker_help.lua:127
 msgid "%s to %s (%s EP)"
 msgstr "%s до %s (%s ТО)"
 
-#: ../../tribes/scripting/help/building_help.lua:779
-#: ../../tribes/scripting/help/worker_help.lua:99
+#: ../../tribes/scripting/help/building_help.lua:701
+msgid "Production"
+msgstr "Производство"
+
+#: ../../tribes/scripting/help/building_help.lua:702
+msgid "Performance:"
+msgstr "Производителност:"
+
+#. TRANSLATORS: %1$d is a number, %2$s the name of a ware, e.g. 12x Stone
+#: ../../tribes/scripting/help/format_help.lua:86
+#: ../../tribes/scripting/help/format_help.lua:138
+msgid "%1$dx %2$s"
+msgstr "%1$dх %2$s"
+
+#. TRANSLATORS: Tribal Encyclopedia: Heading for which tools a worker uses
+#: ../../tribes/scripting/help/format_help.lua:111
 msgid "Worker uses:"
 msgid_plural "Workers use:"
 msgstr[0] "Работникът използва:"
 msgstr[1] "Работниците използват:"
 
-#: ../../tribes/scripting/help/building_help.lua:793
-msgid "Production"
-msgstr "Производство"
-
-#: ../../tribes/scripting/help/building_help.lua:794
-msgid "Performance:"
-msgstr "Производителност:"
+#. TRANSLATORS: Tribal Encyclopedia: Heading for wares consumed by a
+#. productionsite
+#: ../../tribes/scripting/help/format_help.lua:165
+msgid "Ware consumed:"
+msgid_plural "Wares consumed:"
+msgstr[0] "Използвана стока:"
+msgstr[1] "Използвани стоки:"
 
 #. TRANSLATORS: Lore helptext for a building - it hasn't been written yet.
 #. TRANSLATORS: Purpose helptext for a building - it hasn't been written yet.
@@ -1819,9 +1822,39 @@ msgstr "Не е изчислено"
 msgid "%1% and %2%"
 msgstr "%1% и %2%"
 
-#: ../../tribes/scripting/help/worker_help.lua:49
+#: ../../tribes/scripting/help/ware_help.lua:32
+#: ../../tribes/scripting/help/worker_help.lua:93
 msgid "Purpose"
 msgstr "Цел"
+
+#. TRANSLATORS: Ware Encyclopedia: A building producing a ware
+#. TRANSLATORS: Worker Encyclopedia: A building recruiting a worker
+#: ../../tribes/scripting/help/ware_help.lua:52
+#: ../../tribes/scripting/help/worker_help.lua:28
+msgid "Producer"
+msgstr "Производител"
+
+#. TRANSLATORS: Ware Encyclopedia: Wares produced by a productionsite
+#: ../../tribes/scripting/help/ware_help.lua:93
+msgid "Ware produced:"
+msgid_plural "Wares produced:"
+msgstr[0] "Произведена стока:"
+msgstr[1] "Произведени стоки:"
+
+#. TRANSLATORS: Ware Encyclopedia: A list of buildings and / or workers that
+#. consume a ware
+#: ../../tribes/scripting/help/ware_help.lua:155
+msgid "Consumer"
+msgid_plural "Consumers"
+msgstr[0] "Консуматор"
+msgstr[1] "Консуматори"
+
+#. TRANSLATORS: Worker Encyclopedia: Workers recruited by a productionsite
+#: ../../tribes/scripting/help/worker_help.lua:69
+msgid "Worker recruited:"
+msgid_plural "Workers recruited:"
+msgstr[0] "Набран работник:"
+msgstr[1] "Набрани работници:"
 
 #. TRANSLATORS: Helptext for a ware: Armor
 #: ../../tribes/wares/armor/helptexts.lua:4

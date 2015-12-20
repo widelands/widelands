@@ -5,7 +5,7 @@ tribes:new_productionsite_type {
    name = "empire_fishers_house",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("empire_building", "Fisher’s House"),
-   directory = dirname,
+   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "small",
 
@@ -50,7 +50,9 @@ tribes:new_productionsite_type {
       },
    },
    out_of_resource_notification = {
-      title = _"Out of Fish",
+      -- Translators: Short for "Out of ..." for a resource
+      title = _"No Fish",
+      heading = _"Out of Fish",
       message = pgettext("empire_building", "The fisher working out of this fisher’s house can’t find any fish in his work area."),
    },
 }

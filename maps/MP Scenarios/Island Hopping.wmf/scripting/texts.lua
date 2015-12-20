@@ -38,7 +38,6 @@ h4(_"3rd to finish") .. p(format_rewards(_finish_rewards[2][3])) ..
 h4(_"4th to finish") .. p(format_rewards(_finish_rewards[2][4]))
 )
 
-
 msgs_finished_island = {
    _"%1$s was the first to reach Island number %2$i.",
    _"%1$s was the second to reach Island number %2$i.",
