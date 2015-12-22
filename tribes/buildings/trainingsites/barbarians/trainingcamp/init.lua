@@ -44,7 +44,7 @@ tribes:new_trainingsite_type {
    },
 
    aihints = {
-      prohibited_till = 500,
+      prohibited_till = 1500,
       trainingsite_type = "advanced",
       very_weak_ai_limit = 0,
       weak_ai_limit = 1
