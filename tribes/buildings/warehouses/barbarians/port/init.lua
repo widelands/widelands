@@ -39,7 +39,6 @@ tribes:new_warehouse_type {
          template = "build_??",
          directory = dirname,
          hotspot = { 67, 80 },
-         fps = 1
       }
    },
 
