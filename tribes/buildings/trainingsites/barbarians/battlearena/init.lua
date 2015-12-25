@@ -35,7 +35,6 @@ tribes:new_trainingsite_type {
          template = "build_??",
          directory = dirname,
          hotspot = { 110, 72 },
-         fps = 1
       },
       unoccupied = {
          template = "unoccupied_??",
