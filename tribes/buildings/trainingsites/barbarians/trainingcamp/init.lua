@@ -34,7 +34,6 @@ tribes:new_trainingsite_type {
          template = "build_??",
          directory = dirname,
          hotspot = { 110, 77 },
-         fps = 1
       },
       unoccupied = {
          template = "unoccupied_??",
@@ -44,7 +43,7 @@ tribes:new_trainingsite_type {
    },
 
    aihints = {
-      prohibited_till = 500,
+      prohibited_till = 1500,
       trainingsite_type = "advanced",
       very_weak_ai_limit = 0,
       weak_ai_limit = 1
