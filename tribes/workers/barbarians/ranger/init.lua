@@ -12,7 +12,7 @@ animations = {
       hotspot = { 12, 24 },
       fps = 5
    },
-   crop = {
+   planting = {
       template = "plant_??",
       directory = dirname,
       hotspot = { 18, 24 },
@@ -48,7 +48,7 @@ tribes:new_worker_type {
          "findspace size:any radius:5 avoid:field",
          "walk coords",
          "animation dig 2000",
-         "animation crop 1000",
+         "animation planting 1000",
          "plant attrib:tree_sapling",
          "animation water 2000",
          "return"

@@ -12,13 +12,13 @@ animations = {
       hotspot = { 8, 24 },
       fps = 10
    },
-   plant = {
+   planting = {
       template = "plant_??",
       directory = dirname,
       hotspot = { 15, 23 },
       fps = 10
    },
-   gather = {
+   gathering = {
       template = "gather_??",
       directory = dirname,
       hotspot = { 9, 22 },
@@ -50,15 +50,15 @@ tribes:new_worker_type {
          "walk coords",
          "animation dig 2000",
          "plant tribe:grapevine_tiny",
-         "animation plant 3000",
+         "animation planting 3000",
          "return"
       },
       harvestvine = {
          "findobject attrib:ripe_grapes radius:1",
          "walk object",
-         "animation gather 10000",
+         "animation gathering 10000",
          "object harvest",
-         "animation gather 2000",
+         "animation gathering 2000",
          "createware grape",
          "return"
       }
