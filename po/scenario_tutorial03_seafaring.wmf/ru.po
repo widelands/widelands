@@ -3,13 +3,14 @@
 # 
 # Translators:
 # Anton Khabarov <2233009@gmail.com>, 2015
+# Федор <Lunar-energy@ya.ru>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-08-12 06:27+0000\n"
-"PO-Revision-Date: 2015-08-29 08:37+0000\n"
-"Last-Translator: Anton Khabarov <2233009@gmail.com>\n"
+"POT-Creation-Date: 2015-12-11 07:41+0000\n"
+"PO-Revision-Date: 2015-12-12 13:37+0000\n"
+"Last-Translator: Федор <Lunar-energy@ya.ru>\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -29,7 +30,7 @@ msgstr "Обучение мореплаванию"
 msgid ""
 "Welcome back. In this tutorial, you are going to learn the most important "
 "things about seafaring, that is ships, ports, and expedition."
-msgstr ""
+msgstr "Добро пожаловать! В этом обучении вы узнаете все самое главное о мореплавании, то есть о кораблях, портах и экспедициях."
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:24
 msgid ""
@@ -268,7 +269,7 @@ msgid ""
 "have to undertake an expedition to the unknown seas."
 msgstr ""
 
-#: TRANSLATORS This shall be the beginning of a poem
+#. TRANSLATORS: This shall be the beginning of a poem
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:138
 msgid "A trip by the sea, what fun it can be"
 msgstr ""
@@ -414,7 +415,7 @@ msgstr ""
 
 #: ../../scripting/format_scenario.lua:36
 msgid "“%s”"
-msgstr ""
+msgstr "“%s”"
 
 #: ../../scripting/format_scenario.lua:146
 msgid "New Objective"

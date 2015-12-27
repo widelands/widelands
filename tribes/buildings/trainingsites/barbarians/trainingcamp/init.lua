@@ -5,7 +5,7 @@ tribes:new_trainingsite_type {
    name = "barbarians_trainingcamp",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("barbarians_building", "Training Camp"),
-   directory = dirname,
+   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "big",
 
@@ -34,7 +34,6 @@ tribes:new_trainingsite_type {
          template = "build_??",
          directory = dirname,
          hotspot = { 110, 77 },
-         fps = 1
       },
       unoccupied = {
          template = "unoccupied_??",
@@ -44,10 +43,10 @@ tribes:new_trainingsite_type {
    },
 
    aihints = {
-      prohibited_till = 500,
+      prohibited_till = 1500,
       trainingsite_type = "advanced",
-      weak_ai_limit = 0,
-      normal_ai_limit = 1
+      very_weak_ai_limit = 0,
+      weak_ai_limit = 1
    },
 
    working_positions = {

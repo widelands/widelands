@@ -5,7 +5,7 @@ tribes:new_warehouse_type {
    name = "barbarians_port",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("barbarians_building", "Port"),
-   directory = dirname,
+   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "port",
 
@@ -39,7 +39,6 @@ tribes:new_warehouse_type {
          template = "build_??",
          directory = dirname,
          hotspot = { 67, 80 },
-         fps = 1
       }
    },
 

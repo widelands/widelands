@@ -12,11 +12,11 @@ closeable="false"
 [player_2]
 name="Epic Empire"
 tribe="empire"
-ai="Defensive"
+ai="very_weak"
 closeable="false"
 
 [player_3]
 name="Awesome Atlantean"
 tribe="atlanteans"
-ai="Defensive"
+ai="very_weak"
 closeable="false"

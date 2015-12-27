@@ -5,7 +5,7 @@ tribes:new_productionsite_type {
    name = "barbarians_reed_yard",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("barbarians_building", "Reed Yard"),
-   directory = dirname,
+   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",
 
@@ -68,7 +68,9 @@ tribes:new_productionsite_type {
       },
    },
    out_of_resource_notification = {
-      title = _"Out of Fields",
+      -- Translators: Short for "Out of ..." for a resource
+      title = _"No Fields",
+      heading = _"Out of Fields",
       message = pgettext("barbarians_building", "The gardener working at this reed yard has no cleared soil to plant his seeds."),
       productivity_threshold = 20
    },

@@ -5,7 +5,7 @@ tribes:new_productionsite_type {
    name = "empire_marblemine",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("empire_building", "Marble Mine"),
-   directory = dirname,
+   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "mine",
    enhancement = "empire_marblemine_deep",
@@ -99,7 +99,9 @@ tribes:new_productionsite_type {
       },
    },
    out_of_resource_notification = {
-      title = _"Main Marble Vein Exhausted",
+      -- Translators: Short for "Out of ..." for a resource
+      title = _"No Marble",
+      heading = _"Main Marble Vein Exhausted",
       message =
          pgettext("empire_building", "This marble mine’s main vein is exhausted. Expect strongly diminished returns on investment. You should consider enhancing, dismantling or destroying it."),
    },

@@ -169,6 +169,8 @@ public:
 	int get_field(lua_State * L);
 	int get_status(lua_State * L);
 	int set_status(lua_State * L);
+	int get_heading(lua_State * L);
+	int get_icon_name(lua_State * L);
 
 	/*
 	 * Lua Methods

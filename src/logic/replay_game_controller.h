@@ -48,7 +48,7 @@ private:
 	struct CmdReplayEnd : public Widelands::Command {
 		CmdReplayEnd (uint32_t const _duetime) : Widelands::Command(_duetime) {}
 		virtual void execute (Widelands::Game & game);
-		virtual uint8_t id() const;
+		virtual Widelands::QueueCommandTypes id() const;
 	};
 
 	Widelands::Game & m_game;

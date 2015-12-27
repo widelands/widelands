@@ -10,9 +10,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-18 08:43+0000\n"
-"PO-Revision-Date: 2015-11-18 08:43+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2015-11-28 11:19+0000\n"
+"PO-Revision-Date: 2015-11-29 17:45+0000\n"
+"Last-Translator: Patrick de Castro <raybackpc@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/widelands/widelands/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -300,7 +300,7 @@ msgstr ""
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:142
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:147
 msgid "Build a cattle farm"
-msgstr ""
+msgstr "Construir uma fazenda de gado"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:143
 msgid ""

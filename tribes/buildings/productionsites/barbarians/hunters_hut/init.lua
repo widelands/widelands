@@ -5,7 +5,7 @@ tribes:new_productionsite_type {
    name = "barbarians_hunters_hut",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("barbarians_building", "Hunter’s Hut"),
-   directory = dirname,
+   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "small",
 
@@ -59,8 +59,10 @@ tribes:new_productionsite_type {
       },
    },
    out_of_resource_notification = {
+      -- Translators: Short for "Out of Game" for a resource
+      title = _"No Game",
       -- TRANSLATORS: "Game" means animals that you can hunt
-      title = _"Out of Game",
+      heading = _"Out of Game",
       -- TRANSLATORS: "game" means animals that you can hunt
       message = pgettext("barbarians_building", "The hunter working out of this hunter’s hut can’t find any game in his work area. Remember that you can build a gamekeeper’s hut to release more game into the wild."),
       productivity_threshold = 33

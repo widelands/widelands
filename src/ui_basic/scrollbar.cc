@@ -315,7 +315,7 @@ void Scrollbar::draw(RenderTarget & dst)
 	uint32_t knobsize = get_knob_size();
 
 	if (!is_enabled()) {
-		return; // don't draw a not doing scrollbar
+		return; // Don't draw a scrollbar that doesn't do anything
 	}
 
 	if (m_horizontal) {

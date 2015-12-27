@@ -52,7 +52,7 @@ public:
 		: Command(_duetime), m_hash(hash)
 	{}
 
-	uint8_t id() const override {return QUEUE_CMD_REPLAYSYNCREAD;}
+	QueueCommandTypes id() const override {return QueueCommandTypes::kReplaySyncRead;}
 
 	void execute(Game & game) override
 	{
@@ -203,7 +203,7 @@ class CmdReplaySyncWrite : public Command {
 public:
 	CmdReplaySyncWrite(const uint32_t _duetime) : Command(_duetime) {}
 
-	uint8_t id() const override {return QUEUE_CMD_REPLAYSYNCWRITE;}
+	QueueCommandTypes id() const override {return QueueCommandTypes::kReplaySyncWrite;}
 
 	void execute(Game & game) override {
 		if (ReplayWriter * const rw = game.get_replaywriter()) {

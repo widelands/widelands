@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-18 08:43+0000\n"
-"PO-Revision-Date: 2015-11-18 15:16+0000\n"
+"POT-Creation-Date: 2015-12-03 09:55+0000\n"
+"PO-Revision-Date: 2015-12-03 14:36+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -146,41 +146,41 @@ msgstr "Uidheaman-smachd coitcheann a’ gheama"
 msgid ""
 "To close an open window, right-click on it. To minimize/maximize a window, "
 "click on it with the middle mouse button or with the left mouse button while"
-" holding down CTRL."
-msgstr "Dèan briogadh deas air uinneag gus a dùnadh. Gus uinneag fhìor-lùghdachadh no làn-mheudachadh, briog oirre le putan meadhanach na luchaige no leis a’ phutan chlì fhad ’s a bhios tu a’ cumail CTRL sìos."
+" holding down Ctrl."
+msgstr "Dèan briogadh deas air uinneag gus a dùnadh. Gus uinneag fhìor-lùghdachadh no làn-mheudachadh, briog oirre le putan meadhanach na luchaige no leis a’ phutan chlì fhad ’s a bhios tu a’ cumail Ctrl sìos."
 
 #: ../../txts/README.lua:49
 msgid ""
-"If you hold CTRL while building a road, flags will be placed automatically.\n"
-"If you hold CTRL while removing a road, all flags up to the first junction are\n"
+"If you hold Ctrl while building a road, flags will be placed automatically.\n"
+"If you hold Ctrl while removing a road, all flags up to the first junction are\n"
 "removed."
-msgstr "Ma chumas tu CTRL sìos fhad ’s a bhios tu a’ togail rathad, thèid brataich a chur ann gu fèin-obrachail.\nMa chumas tu CTRL sìos fhad ’s a bhios tu a’ toirt rathad air falbh, thèid gach bratach gu ruige a’ chiad ghobhal a thoirt air falbh."
+msgstr "Ma chumas tu Ctrl sìos fhad ’s a bhios tu a’ togail rathad, thèid brataich a chur ann gu fèin-obrachail.\nMa chumas tu Ctrl sìos fhad ’s a bhios tu a’ toirt rathad air falbh, thèid gach bratach gu ruige a’ chiad ghobhal a thoirt air falbh."
 
 #: ../../txts/README.lua:53
 msgid ""
-"You can skip confirmation windows for irreversible actions if you hold CTRL\n"
+"You can skip confirmation windows for irreversible actions if you hold Ctrl\n"
 "while clicking on the action button."
-msgstr "Gearraidh tu leum thairis air uinneagan dearbhaidh nan gnìomhan nach gabh neo-dhèanamh ma chumas tu CTRL sìos fhad ’s a bhios tu a’ briogadh air putan a’ ghnìomha."
+msgstr "Gearraidh tu leum thairis air uinneagan dearbhaidh nan gnìomhan nach gabh neo-dhèanamh ma chumas tu Ctrl sìos fhad ’s a bhios tu a’ briogadh air putan a’ ghnìomha."
 
 #: ../../txts/README.lua:56
 msgid "Keyboard shortcuts (in-game)"
 msgstr "Ath-ghoiridean meur-chlàir (am broinn a’ gheama)"
 
 #: ../../txts/README.lua:58
-msgid "PAGEUP: increases game speed"
-msgstr "PAGEUP: dèan an geama nas luaithe"
+msgid " Page Up: increases game speed"
+msgstr "Page Up: dèan an geama nas luaithe"
 
 #: ../../txts/README.lua:59
-msgid "PAGEDOWN: decreases game speed"
-msgstr "PAGEDOWN: dèan an geama nas maille"
+msgid " Page Down: decreases game speed"
+msgstr "Page Down: dèan an geama nas maille"
 
 #: ../../txts/README.lua:60
-msgid "PAUSE: pauses the game"
-msgstr "PAUSE: cuir an geama ’na stad"
+msgid "Pause: pauses the game"
+msgstr "Pause: cuir an geama ’na stad"
 
 #: ../../txts/README.lua:61
-msgid "SPACE: toggles if building spaces are shown"
-msgstr "SPACE: toglaich an tèid ionadan togail a shealltainn"
+msgid "Space: toggles if building spaces are shown"
+msgstr "Space: toglaich an tèid ionadan togail a shealltainn"
 
 #: ../../txts/README.lua:62
 msgid "M: toggles minimap"
@@ -219,8 +219,8 @@ msgid "Home: centers main mapview on starting location"
 msgstr "Home: meadhanaich prìomh-shealladh a’ mhapa air an ionad tòiseachaidh"
 
 #: ../../txts/README.lua:71
-msgid "(CTRL+) 0-9: Remember and go to previously remembered locations"
-msgstr "(CTRL+) 0-9: Cuimhnich is rach gu ionadan air an cuimhneachadh roimhe"
+msgid "(Ctrl +) 0-9: Remember and go to previously remembered locations"
+msgstr "(Ctrl +) 0-9: Cuimhnich is rach gu ionadan air an cuimhneachadh roimhe"
 
 #: ../../txts/README.lua:72
 msgid ",: goes to the previous location"
@@ -235,16 +235,16 @@ msgid "F6: shows the debug console (only in debug-builds)"
 msgstr "F6: seall a’ chonsoil dhì-bhugachaidh (le toglaichean dì-bhugachaidh a-mhàin)"
 
 #: ../../txts/README.lua:75
-msgid "CTRL+F10: quits the game immediately"
-msgstr "CTRL+F10: fàgaidh seo an geama sa bhad"
+msgid "Ctrl + F10: quits the game immediately"
+msgstr "Ctrl + F10: fàgaidh seo an geama sa bhad"
 
 #: ../../txts/README.lua:76
-msgid "CTRL+Leftclick: skips confirmation dialogs"
-msgstr "CTRL+briogadh clì: gearr leum thar còmhraidh dhearbhaidh"
+msgid "Ctrl + Leftclick: skips confirmation dialogs"
+msgstr "Ctrl + briogadh clì: gearr leum thar còmhraidh dhearbhaidh"
 
 #: ../../txts/README.lua:77
-msgid "CTRL+F11: takes a screenshot"
-msgstr "CTRL+F11: tog glacadh-sgrìn"
+msgid "Ctrl + F11: takes a screenshot"
+msgstr "Ctrl + F11: tog glacadh-sgrìn"
 
 #: ../../txts/README.lua:79
 msgid ""
@@ -280,8 +280,8 @@ msgid "G: jumps to the location corresponding to the current message"
 msgstr "G: gearr leum dhan ionad co-cheangailte ris an teachdaireachd làithreach"
 
 #: ../../txts/README.lua:88
-msgid "DELETE: archives/restores the current message"
-msgstr "DELETE: cuir an teachdaireachd làithreach dhan tasglann no aisig i"
+msgid "Delete: archives/restores the current message"
+msgstr "Delete: cuir an teachdaireachd làithreach dhan tasglann no aisig i"
 
 #: ../../txts/README.lua:90
 msgid "Online Help"
@@ -535,8 +535,8 @@ msgstr "Ath-ghoiridean meur-chlàir"
 
 #. TRANSLATORS: This is a hotkey
 #: ../../txts/editor_readme.lua:21
-msgid "SPACE:"
-msgstr "SPACE:"
+msgid "Space:"
+msgstr "Space:"
 
 #: ../../txts/editor_readme.lua:21
 msgid "toggles if building spaces are shown"
@@ -607,8 +607,8 @@ msgstr "Gnìomhaich an t-inneal fiosrachaidh"
 
 #. TRANSLATORS: This is a hotkey
 #: ../../txts/editor_readme.lua:37
-msgid "CTRL+L:"
-msgstr "CTRL+L:"
+msgid "Ctrl + L:"
+msgstr "Ctrl + L:"
 
 #: ../../txts/editor_readme.lua:37
 msgid "load map"
@@ -616,8 +616,8 @@ msgstr "Luchdaich mapa"
 
 #. TRANSLATORS: This is a hotkey
 #: ../../txts/editor_readme.lua:39
-msgid "CTRL+S:"
-msgstr "CTRL+S:"
+msgid "Ctrl + S:"
+msgstr "Ctrl + S:"
 
 #: ../../txts/editor_readme.lua:39
 msgid "save map"
@@ -634,8 +634,8 @@ msgstr "Atharraich meud nan innealan"
 
 #. TRANSLATORS: This is a hotkey
 #: ../../txts/editor_readme.lua:43
-msgid "SHIFT (Hold):"
-msgstr "SHIFT (cum sìos):"
+msgid "Shift (Hold):"
+msgstr "Shift (cum sìos):"
 
 #: ../../txts/editor_readme.lua:43
 msgid "selects first alternative tool while pressed"
@@ -643,8 +643,8 @@ msgstr "Taghaidh seo an dàrna inneal dàrnach fhad ’s a thèid a chumail sìo
 
 #. TRANSLATORS: This is a hotkey
 #: ../../txts/editor_readme.lua:45
-msgid "ALT (Hold):"
-msgstr "ALT (cum sìos):"
+msgid "Alt (Hold):"
+msgstr "Alt (cum sìos):"
 
 #: ../../txts/editor_readme.lua:45
 msgid "Selects second alternative tool while pressed"
@@ -661,7 +661,7 @@ msgstr "Tha raon-obrach glè bheag aig cuid a thogalaichean mar an tuathanas. Ma
 msgid ""
 "Always build a forester’s and a fish breeder’s house, so you will not run "
 "out of logs or food."
-msgstr "Tog bothan maoir-choille is taigh tàrmachair èisg an-còmhnaidh ach nach ruith stuic no biadh ort."
+msgstr "Tog bothan maoir-choille is ionad-àraich èisg an-còmhnaidh ach nach ruith fiodh no biadh ort."
 
 #: ../../txts/tips/barbarians.tip:6 ../../txts/tips/empire.tip:6
 msgid ""
@@ -673,7 +673,7 @@ msgstr "Cum sùil air na h-iasgairean agad. Sguiridh iad de dh’iasgach nuair n
 msgid ""
 "Always build a ranger’s and a gamekeeper’s hut, so you will not run out of "
 "logs or food."
-msgstr "Tog taigh planntair-coille is tàrmachair iasg an-còmhnaidh ach nach ruith stuic no biadh ort."
+msgstr "Tog bothan maoir-choille is bothan-geamair an-còmhnaidh ach nach ruith fiodh no biadh ort."
 
 #: ../../txts/tips/editor.tip:2
 msgid ""
@@ -683,28 +683,28 @@ msgstr "Gheibh thu cobhair choitcheann airson an deasaiche cho math ri oideachad
 
 #: ../../txts/tips/editor.tip:6
 msgid ""
-"You can select multiple animal types if you hold down CTRL during selection."
+"You can select multiple animal types if you hold down Ctrl during selection."
 " If you then click on the map, an instance of one of the selected animal "
 "types will be placed."
-msgstr "’S urrainn dhut iomadh seòrsa de bheathach a thaghadh aig an aon àm ’s tu a’ cumail CTRL sìos fhad ’s a bhios tu ’gan taghadh. Ma nì thu briogadh air a’ mhapa an uairsin, thèid ball dhe aon dhe na seòrsaichean de bheathach a thagh thu a chur ann."
+msgstr "’S urrainn dhut iomadh seòrsa de bheathach a thaghadh aig an aon àm ’s tu a’ cumail Ctrl sìos fhad ’s a bhios tu ’gan taghadh. Ma nì thu briogadh air a’ mhapa an uairsin, thèid ball dhe aon dhe na seòrsaichean de bheathach a thagh thu a chur ann."
 
 #: ../../txts/tips/editor.tip:10
 msgid ""
 "Just like with animals, you can also select multiple immovables or ground "
-"textures with CTRL + mouse click."
-msgstr "Mar as urrainn dhut le beathaichean, ’s urrainn dhut iomadh nì do-ghluasad no inneach làir a thaghadh le CTRL + briogadh."
+"textures with Ctrl + mouse click."
+msgstr "Mar as urrainn dhut le beathaichean, ’s urrainn dhut iomadh nì do-ghluasad no inneach làir a thaghadh le Ctrl + briogadh."
 
 #: ../../txts/tips/editor.tip:14
 msgid ""
-"Holding down SHIFT switches the first alternative tool on. This tool is in "
+"Holding down Shift switches the first alternative tool on. This tool is in "
 "most cases the complete opposite of the normal tool (for example deletion of"
 " an object instead of placing one)."
-msgstr "Bidh an dàrna inneal dàrnach air fhad ’s a chumas tu SHIFT sìos. Mar as trice, ’s e an dearbh caochladh aig an inneal àbhaisteach a th’ ann (mar eisimpleir, sguabaidh tu oibseact às seach a bhith ga chur ris)."
+msgstr "Bidh an dàrna inneal dàrnach air fhad ’s a chumas tu Shift sìos. Mar as trice, ’s e an dearbh caochladh aig an inneal àbhaisteach a th’ ann (mar eisimpleir, sguabaidh tu oibseact às seach a bhith ga chur ris)."
 
 #: ../../txts/tips/editor.tip:18
 msgid ""
-"Holding down ALT switches the second alternative tool on (if it exists)."
-msgstr "Ma chumas tu ALT sìos, nì seo suids dhan inneal dàrnach eile (ma tha seo ann)."
+"Holding down Alt switches the second alternative tool on (if it exists)."
+msgstr "Ma chumas tu Alt sìos, nì seo suids dhan inneal dàrnach eile (ma tha seo ann)."
 
 #: ../../txts/tips/editor.tip:22
 msgid ""
@@ -714,13 +714,13 @@ msgstr "’S urrainn dhut meud an raoin a thèid a thaghadh mu chùrsair na luch
 
 #: ../../txts/tips/editor.tip:26
 msgid ""
-"SPACE key behaves like in normal game. It switches if building spaces are "
+"Space key behaves like in normal game. It switches if building spaces are "
 "shown on or off."
-msgstr "Nì an iuchair SPACE na nì e ann an geama àbhaisteach. Nochdaidh no falaichidh e na h-ionadan togail."
+msgstr "Nì an iuchair Space na nì e ann an geama àbhaisteach. Nochdaidh no falaichidh e na h-ionadan togail."
 
 #: ../../txts/tips/empire.tip:10
 msgid "Always build a forester’s house so you will not run out of logs."
-msgstr "Tog taigh planntair-coille an-còmhnaidh ach nach ruith na stuic ort."
+msgstr "Tog taigh planntair-coille an-còmhnaidh ach nach ruith am fiodh ort."
 
 #: ../../txts/tips/general_game.tip:2
 msgid ""
