@@ -855,7 +855,7 @@ void Economy::_balance_requestsupply(Game & game)
 			 !_has_request(*rsp.request) ||
 			 !rsp.supply->nr_supplies(game, *rsp.request))
 		{
-			rsps.nexttimer = 250;
+			rsps.nexttimer = 200;
 			continue;
 		}
 
@@ -864,7 +864,7 @@ void Economy::_balance_requestsupply(Game & game)
 
 		//  for multiple wares
 		if (rsp.request && _has_request(*rsp.request))
-			rsps.nexttimer = 250;
+			rsps.nexttimer = 200;
 	}
 
 	if (rsps.nexttimer > 0) { //  restart the timer, if necessary
