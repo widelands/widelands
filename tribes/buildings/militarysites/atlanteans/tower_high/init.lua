@@ -28,10 +28,6 @@ tribes:new_militarysite_type {
 
    aihints = {},
 
-   outputs = {
-      "atlanteans_soldier",
-   },
-
    max_soldiers = 5,
    heal_per_second = 170,
    conquers = 9,

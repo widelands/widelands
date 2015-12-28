@@ -40,10 +40,6 @@ tribes:new_militarysite_type {
 
    aihints = {},
 
-   outputs = {
-      "barbarians_soldier",
-   },
-
    max_soldiers = 12,
    heal_per_second = 220,
    conquers = 12,

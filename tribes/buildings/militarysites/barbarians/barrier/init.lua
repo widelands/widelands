@@ -34,10 +34,6 @@ tribes:new_militarysite_type {
       }
    },
 
-   outputs = {
-      "barbarians_soldier",
-   },
-
    aihints = {},
 
    max_soldiers = 5,

@@ -30,11 +30,6 @@ tribes:new_militarysite_type {
       }
    },
 
-   -- TODO(GunChleoc): Get rid of this when we inherit from BuildingDescr directly.
-   outputs = {
-      "atlanteans_soldier",
-   },
-
    max_soldiers = 2,
    heal_per_second = 75,
    conquers = 6,

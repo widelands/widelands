@@ -38,10 +38,6 @@ tribes:new_militarysite_type {
       prohibited_till = 300
    },
 
-   outputs = {
-      "empire_soldier",
-   },
-
    max_soldiers = 5,
    heal_per_second = 150,
    conquers = 9,
