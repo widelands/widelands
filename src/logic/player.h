@@ -526,7 +526,6 @@ public:
 	void get_ai_data(uint32_t * value, uint32_t position);
 	void get_ai_data(int16_t * value, uint32_t position);
 	void get_ai_data(bool * value, uint32_t position);
-	//NOCOM good place here?
 	uint32_t pick_shipname_index(uint32_t);
 	void set_shipname_used(uint32_t);
 
@@ -609,7 +608,7 @@ private:
 	int32_t m_ai_data_int32 [kAIDataSize];
 	uint32_t m_ai_data_uint32 [kAIDataSize];
 	int16_t m_ai_data_int16 [kAIDataSize];
-	
+
 	PlayerBuildingStats m_building_stats;
 
 	DISALLOW_COPY_AND_ASSIGN(Player);

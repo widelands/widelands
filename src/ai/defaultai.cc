@@ -931,7 +931,7 @@ void DefaultAI::late_initialization() {
 		check_range<uint32_t>(colony_scan_area_, kColonyScanMinArea, 50, "colony_scan_area_");
 
 		player_->get_ai_data(&expedition_start_time_, kExpStartTime);
-		check_range<uint32_t>(expedition_start_time_, kExpStartTime, gametime, "expedition_start_time_");
+		check_range<uint32_t>(expedition_start_time_, gametime, "expedition_start_time_");
 
 		player_->get_ai_data(&ships_utilization_, kShipUtil);
 		check_range<uint16_t>(ships_utilization_, 0, 10000, "ships_utilization_");

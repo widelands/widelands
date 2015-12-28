@@ -357,7 +357,7 @@ void Ship::show_window(InteractiveGameBase & igb, bool avoid_fastclick)
 			m_window->restore();
 		m_window->move_to_top();
 	} else {
-		std::string title = this->get_owner()->tribe().get_shipname_by_index(this->get_shipname_index());
+		std::string title = get_owner()->tribe().get_shipname_by_index(get_shipname_index(), get_ship_id());
 		new ShipWindow(igb, *this, title);
 		if (!avoid_fastclick)
 			m_window->warp_mouse_to_fastclick_panel();

@@ -152,12 +152,12 @@ struct Ship : Bob {
 
 	/// \returns the current state the ship is in
 	uint8_t get_ship_state() {return m_ship_state;}
-	
+
 	/// \returns the current id of ship
 	uint32_t get_ship_id() {return m_id;}
-	
+
 	/// \returns the current name of ship
-	uint32_t get_shipname_index() {return m_shipname_index;}	
+	uint32_t get_shipname_index() {return m_shipname_index;}
 
 	/// \returns whether the ship is currently on an expedition
 	bool state_is_expedition() {

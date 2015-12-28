@@ -153,7 +153,7 @@ Player::Player
 	m_msites_defeated    (0),
 	m_civil_blds_lost    (0),
 	m_civil_blds_defeated(0),
-	m_next_ship_id       (1),  
+	m_next_ship_id       (1),
 	m_fields            (nullptr),
 	m_allowed_worker_types(the_egbase.tribes().nrworkers(), true),
 	m_allowed_building_types(the_egbase.tribes().nrbuildings(), true),
@@ -202,10 +202,9 @@ Player::Player
 				rediscover_node(egbase().map(), egbase().map()[0], note.fc);
 			}
 		});
-		
+
 	//Populating remaining shipnames vector
-	for (uint32_t i=0; i<tribe_descr.count_defined_shipnames(); ++i){
-		printf ("Populating m_remaining_shipname_indexes: %d\n", i);
+	for (uint32_t i = 0; i < tribe_descr.count_defined_shipnames(); ++i){
 		m_remaining_shipname_indexes.insert(i);
 	}
 }
@@ -1366,7 +1365,6 @@ void Player::get_ai_data(bool * value, uint32_t position) {
 }
 
 uint32_t Player::next_ship_id (bool increase){
-	
 	if (increase) {
 		return m_next_ship_id++;
 	}
@@ -1375,24 +1373,24 @@ uint32_t Player::next_ship_id (bool increase){
 
 // Mark shipname as used = remove particular index from m_remaining_shipname_indexes
 void Player::set_shipname_used(uint32_t index) {
-	
-	for (auto it = m_remaining_shipname_indexes.begin(); it != m_remaining_shipname_indexes.end(); ++it ) {
+	for (auto it = m_remaining_shipname_indexes.begin(); it != m_remaining_shipname_indexes.end(); ++it) {
 		if (*it == index) {
-            m_remaining_shipname_indexes.erase(it);
-            return;
+			m_remaining_shipname_indexes.erase(it);
+			return;
 		}
 	}
+	// Should never get here, but not a serious problem
+	return;
 }
 
 // Pick random index (=ship name) from m_remaining_shipname_indexes
 uint32_t Player::pick_shipname_index(uint32_t gametime) {
-	if (m_remaining_shipname_indexes.size()>0) {
+	if (!m_remaining_shipname_indexes.empty()) {
 		const uint32_t index = gametime % m_remaining_shipname_indexes.size();
 		std::unordered_set<uint32_t>::iterator it = m_remaining_shipname_indexes.begin();
 		std::advance(it, index);
 		uint32_t name_index = *it;
-		printf (" returning index %d for name %s, remaining names count: %d\n", name_index, tribe().get_shipname_by_index(name_index).c_str(), m_remaining_shipname_indexes.size());
-		return name_index;		
+		return name_index;
 	}
 	return std::numeric_limits<uint32_t>::max();
 }

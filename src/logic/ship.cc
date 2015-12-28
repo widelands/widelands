@@ -99,18 +99,12 @@ void Ship::init(EditorGameBase& egbase) {
 	init_fleet(egbase);
 	Notifications::publish(NoteShipMessage(this, NoteShipMessage::Message::kGained));
 	assert(get_owner());
-	
+
 	// Assigning ship id and index of ship name (the ship name itself is not stored here)
 	m_id = get_owner()->next_ship_id(true);
 	m_shipname_index = get_owner()->pick_shipname_index(egbase.get_gametime());
 	get_owner()->set_shipname_used(m_shipname_index);
-	molog("New ship: %s\n",get_owner()->tribe().get_shipname_by_index(m_shipname_index).c_str());
-	printf (" %d: ...new ship with id: %d name index: %d and name: %s\n",  //NOCOM remove before merging
-		get_owner()->player_number(),
-		m_id,
-		m_shipname_index,
-		get_owner()->tribe().get_shipname_by_index(m_shipname_index).c_str());
-	
+	molog("New ship: %s\n", get_owner()->tribe().get_shipname_by_index(m_shipname_index, m_id).c_str());
 }
 
 /**
@@ -1080,7 +1074,6 @@ void Ship::Loader::load(FileRead & fr)
 
 	m_id = fr.unsigned_32();
 	m_shipname_index = fr.unsigned_32();
-	printf (" Loading ship with id %d, shipname index: %d\n", m_id, m_shipname_index);
 	m_lastdock = fr.unsigned_32();
 	m_destination = fr.unsigned_32();
 
@@ -1114,8 +1107,7 @@ void Ship::Loader::load_finish() {
 	// restore the state the ship is in
 	ship.m_ship_state = m_ship_state;
 
-	//Marking name as used
-	printf (" Ship load: %d ship index marking as used\n", m_shipname_index);
+	// Marking the name as used
 	ship.get_owner()->set_shipname_used(m_shipname_index);
 
 	// restore the  ship id and name
@@ -1212,7 +1204,7 @@ void Ship::save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw) {
 	}
 
 	fw.unsigned_32(m_id);
-	fw.unsigned_32(m_shipname_index); 
+	fw.unsigned_32(m_shipname_index);
 	fw.unsigned_32(mos.get_object_file_index_or_zero(m_lastdock.get(egbase)));
 	fw.unsigned_32(mos.get_object_file_index_or_zero(m_destination.get(egbase)));
 

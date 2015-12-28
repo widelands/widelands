@@ -151,9 +151,6 @@ TribeDescr::TribeDescr
 		}
 
 		ship_names_ = table.get_table("ship_names")->array_entries<std::string>();
-		for (const std::string& shipname : ship_names_) { //NOCOM remove before merging
-			printf (" adding shipname: %s\n", shipname.c_str()); 
-		}
 
 		for (const std::string& buildingname : table.get_table("buildings")->array_entries<std::string>()) {
 			try {
@@ -336,13 +333,13 @@ const RoadTextures& TribeDescr::road_textures() const {
 	return road_textures_;
 }
 
-const std::string TribeDescr::get_shipname_by_index(const uint32_t pos) const {
+const std::string TribeDescr::get_shipname_by_index(const uint32_t pos, const uint32_t id) const {
 	if (pos >= ship_names_.size()) {
-		return "Ship";
+		// We dont have name for this pos, returning default
+		return (boost::format("Ship %i") % id).str();
 	}
 	return ship_names_[pos];
 }
-	
 
 /*
 ==============
