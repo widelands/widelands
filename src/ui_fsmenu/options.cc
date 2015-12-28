@@ -221,7 +221,7 @@ FullscreenMenuOptions::FullscreenMenuOptions
 		 /** TRANSLATORS: Options: Save game automatically every: */
 		 /** TRANSLATORS: This will have a number added in front of it */
 		 ngettext("minute", "minutes", opt.autosave / 60),
-		 g_gr->images().get("pics/but3.png"), true),
+		 g_gr->images().get("pics/but3.png"), UI::SpinBox::Type::kBig),
 
 	m_sb_remove_replays
 		(this,
@@ -234,7 +234,7 @@ FullscreenMenuOptions::FullscreenMenuOptions
 		 /** TRANSLATORS: Options: Remove Replays older than: */
 		 /** TRANSLATORS: This will have a number added in front of it */
 		 ngettext("day", "days", opt.remove_replays),
-		 g_gr->images().get("pics/but3.png"), true),
+		 g_gr->images().get("pics/but3.png"), UI::SpinBox::Type::kBig),
 	os(opt)
 {
 	m_advanced_options.sigclicked.connect

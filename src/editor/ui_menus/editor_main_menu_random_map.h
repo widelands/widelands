@@ -23,8 +23,11 @@
 #include <vector>
 
 #include "base/macros.h"
+#include "ui_basic/box.h"
 #include "ui_basic/checkbox.h"
 #include "ui_basic/editbox.h"
+#include "ui_basic/spinbox.h"
+#include "ui_basic/textarea.h"
 #include "ui_basic/window.h"
 
 namespace Widelands {
@@ -34,7 +37,6 @@ namespace Widelands {
 struct EditorInteractive;
 namespace UI {
 template <typename T, typename ID> struct IDButton;
-struct Textarea;
 }
 
 /**
@@ -46,32 +48,24 @@ struct MainMenuNewRandomMap : public UI::Window {
 	MainMenuNewRandomMap(EditorInteractive &);
 
 	enum class ButtonId: uint8_t {
-		NO_BUTTON,
-		MAP_W_PLUS,
-		MAP_W_MINUS,
-		MAP_H_PLUS,
-		MAP_H_MINUS,
-		WATER_PLUS,
-		WATER_MINUS,
-		LAND_PLUS,
-		LAND_MINUS,
-		WASTE_PLUS,
-		WASTE_MINUS,
-		PLAYER_PLUS,
-		PLAYER_MINUS,
-		SWITCH_ISLAND_MODE,
-		SWITCH_RES,
-		SWITCH_WORLD
+		kNone,
+		kMapSize,
+		kWater,
+		kLand,
+		kWasteland,
+		kResources,
+		kWorld
 	};
 
 private:
 	struct WorldDescription {
 		std::string name;
-		std::string descrname;
+		std::string descname;
 	};
 
 	void button_clicked(ButtonId);
 	void clicked_create_map();
+	void clicked_cancel();
 	void id_edit_box_changed();
 	void nr_edit_box_changed();
 
@@ -83,25 +77,54 @@ private:
 	//                        as requested by the user.
 	void normalize_landmass(MainMenuNewRandomMap::ButtonId clicked_button);
 
-	void set_map_info(Widelands::UniqueRandomMapInfo & mapInfo) const;
+	void set_map_info(Widelands::UniqueRandomMapInfo& map_info) const;
 
-	const std::vector<WorldDescription> m_world_descriptions;
-	int m_current_world;
-	UI::Textarea * m_width, * m_height, * m_land;
-	UI::Textarea * m_water, * m_mountains, * m_wasteland, * m_players;
-	UI::Button * m_res;
-	UI::Button * m_world;
-	UI::Checkbox * m_island_mode;
-	UI::Button * m_goButton;
-	int32_t m_w, m_h;
-	int32_t m_landval, m_waterval, m_wastelandval, m_mountainsval;
-	uint8_t m_pn;
-	uint32_t m_mapNumber;
-	uint32_t m_res_amount;
-	std::vector<std::string> m_res_amounts;
+	// Helper function to find a map dimension in the global list of available dimensions.
+	size_t find_dimension_index(int32_t value);
 
-	UI::EditBox * m_nrEditbox;
-	UI::EditBox * m_idEditbox;
+	// UI elements
+	int32_t margin_;
+	int32_t box_width_;
+	int32_t label_height_;
+	UI::Box box_;
+
+	// Size
+	UI::SpinBox width_;
+	UI::SpinBox height_;
+
+	uint8_t max_players_;
+	UI::SpinBox players_;
+
+	// World + Resources
+	const std::vector<WorldDescription> world_descriptions_;
+	int current_world_;
+	std::vector<std::string> resource_amounts_;
+	uint32_t resource_amount_;
+	UI::Box world_box_, resources_box_;
+	UI::Textarea world_label_, resources_label_;
+	UI::Button world_, resources_;
+
+	// Land
+	int32_t waterval_, landval_, wastelandval_, mountainsval_;
+	UI::SpinBox water_, land_, wasteland_;
+	UI::Box mountains_box_;
+	UI::Textarea mountains_label_, mountains_;
+
+	UI::Checkbox island_mode_;
+
+	// Geeky stuff
+	UI::Box map_number_box_;
+	uint32_t map_number_;
+	UI::Textarea map_number_label_;
+	UI::EditBox map_number_edit_;
+
+	UI::Box map_id_box_;
+	UI::Textarea map_id_label_;
+	UI::EditBox map_id_edit_;
+
+	// Buttons
+	UI::Box button_box_;
+	UI::Button ok_button_, cancel_button_;
 
 	DISALLOW_COPY_AND_ASSIGN(MainMenuNewRandomMap);
 };
