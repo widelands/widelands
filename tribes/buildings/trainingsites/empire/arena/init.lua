@@ -35,12 +35,12 @@ tribes:new_trainingsite_type {
          template = "build_??",
          directory = dirname,
          hotspot = { 82, 83 },
-         fps = 1
       }
    },
 
    aihints = {
       trainingsite_type = "basic",
+      prohibited_till = 900,
       very_weak_ai_limit = 1,
       weak_ai_limit = 2
    },

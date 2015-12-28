@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-12-03 09:55+0000\n"
-"PO-Revision-Date: 2015-12-03 15:02+0000\n"
+"POT-Creation-Date: 2015-12-11 07:41+0000\n"
+"PO-Revision-Date: 2015-12-13 11:43+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -1003,7 +1003,7 @@ msgstr "gaireal a thochladh"
 #: ../../tribes/buildings/productionsites/barbarians/quarry/init.lua:75
 #: ../../tribes/buildings/productionsites/empire/quarry/init.lua:81
 msgid "No Rocks"
-msgstr "Dìth chreagan"
+msgstr "Dìth charraigean"
 
 #: ../../tribes/buildings/productionsites/atlanteans/quarry/init.lua:67
 #: ../../tribes/buildings/productionsites/barbarians/quarry/init.lua:76

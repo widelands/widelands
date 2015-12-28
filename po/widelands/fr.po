@@ -5,15 +5,16 @@
 # Translators:
 # Bouchard Renaud <renaud.bouchard@gmail.com>, 2014
 # hugues martin, 2015
+# Jaypad <ju-ju@nataju.fr>, 2015
 # Tubuntu <tubuntu@testimonium.be>, 2015
 # wl-zocker, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-12-10 13:43+0000\n"
-"PO-Revision-Date: 2015-12-10 13:44+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2015-12-11 07:41+0000\n"
+"PO-Revision-Date: 2015-12-13 20:24+0000\n"
+"Last-Translator: Jaypad <ju-ju@nataju.fr>\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -111,22 +112,22 @@ msgstr "Il y a sur le côté droit les informations concernant la carte ou la sa
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
 #: ../../src/ai/computer_player.cc:42
 msgid "No AI"
-msgstr ""
+msgstr "Pas d'IA"
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
 #: ../../src/ai/defaultai.h:102
 msgid "Normal AI"
-msgstr ""
+msgstr "IA normale"
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
 #: ../../src/ai/defaultai.h:115
 msgid "Weak AI"
-msgstr ""
+msgstr "IA faible"
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
 #: ../../src/ai/defaultai.h:128
 msgid "Very Weak AI"
-msgstr ""
+msgstr "IA très faible"
 
 #. * TRANSLATORS: Concatenate the last 2 items on a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
@@ -597,7 +598,7 @@ msgstr "Afficher les noms originaux des cartes"
 
 #: ../../src/editor/ui_menus/editor_main_menu_load_or_save_map.cc:133
 msgid "Show Filenames"
-msgstr ""
+msgstr "Afficher les noms de fichiers"
 
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:90
 #: ../../src/ui_fsmenu/loadgame.cc:321
@@ -622,7 +623,7 @@ msgstr ""
 
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:112
 msgid "Tags:"
-msgstr ""
+msgstr "Etiquettes : "
 
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:113
 #: ../../src/ui_fsmenu/mapselect.cc:98
@@ -675,7 +676,7 @@ msgstr "Options principales"
 
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:137
 msgid "Tags"
-msgstr ""
+msgstr "Etiquette"
 
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:138
 msgid "Teams"
@@ -683,7 +684,7 @@ msgstr "Équipes"
 
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:165
 msgid "Size: %1% x %2%"
-msgstr ""
+msgstr "Taille : %1% x %2% "
 
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:64
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:130
@@ -719,7 +720,7 @@ msgstr "Désert"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:59
 msgid "Wasteland"
-msgstr ""
+msgstr "Terrain en friche"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:77
 msgid "Random Number:"
@@ -809,7 +810,7 @@ msgstr "Erreur d'enregistrement de la carte!"
 msgid ""
 "A file with the name ‘%s.tmp’ already exists. You have to remove it "
 "manually."
-msgstr ""
+msgstr "Un fichier nommé \"%s.tmp\" existe déjà. Vous devez le supprimer manuellement."
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:307
 msgid ""
@@ -821,7 +822,7 @@ msgstr "Erreur en sauvant la carte!\nLe fichier de carte sauvé peut être corro
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:34
 msgid "Enter Directory Name: "
-msgstr ""
+msgstr "Entrez le nom du répertoire : "
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:49
 msgid "Player Options"
@@ -936,7 +937,7 @@ msgstr "Maximum: %u"
 msgid "Set value: %u"
 msgstr "Définir la valeur: %u"
 
-#: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:93
+#: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:96
 msgid "Terrain Select"
 msgstr "Sélection du Terrain"
 
@@ -987,7 +988,7 @@ msgstr "Pré-chargement de la carte"
 
 #: ../../src/logic/game.cc:234 ../../src/logic/game.cc:294
 msgid "Loading world"
-msgstr ""
+msgstr "Chargement des données du monde"
 
 #: ../../src/logic/game.cc:242
 #, c-format
@@ -1033,7 +1034,7 @@ msgstr "Widelands n'a pas pu démarrer la partie, car le joueur %u n'a pas de po
 msgid ""
 "This game was saved using an older version of Widelands and cannot be loaded"
 " anymore, or it's a new version that can't be handled yet."
-msgstr ""
+msgstr "Cette partie a été sauvegardée dans une ancienne version de Widelands et ne peut plus être chargée, ou il s'agit d'une nouvelle version qui n'est pas encore prise en charge."
 
 #: ../../src/logic/map.h:181
 msgctxt "author_name"
@@ -1077,7 +1078,7 @@ msgstr[1] "%1%(+%2%) soldats"
 #: ../../src/logic/militarysite.cc:867
 msgctxt "building"
 msgid "Lost!"
-msgstr ""
+msgstr "Perdu !"
 
 #: ../../src/logic/militarysite.cc:869
 msgid "Militarysite lost!"
@@ -1088,7 +1089,7 @@ msgstr "Bâtiment militaire perdu!"
 #. "Success!"
 #: ../../src/logic/militarysite.cc:912
 msgid "Enemy Defeated!"
-msgstr ""
+msgstr "Ennemi vaincu !"
 
 #: ../../src/logic/militarysite.cc:914
 msgid "Enemy at site defeated!"
@@ -1098,7 +1099,7 @@ msgstr "Ennemi sur site vaincu!"
 #: ../../src/logic/militarysite.cc:965
 msgctxt "building"
 msgid "Attack!"
-msgstr ""
+msgstr "Attaque !"
 
 #: ../../src/logic/militarysite.cc:967
 msgid "You are under attack"
@@ -1219,7 +1220,7 @@ msgstr "N'a pas fait %1$s parce que %2$s"
 
 #: ../../src/logic/production_program.cc:816
 msgid "No use for ships on this map!"
-msgstr ""
+msgstr "Les bateaux ne peuvent être utilisés sur cette carte !"
 
 #. * TRANSLATORS: e.g. 'Did not start working because 3x water and 3x wheat
 #. are missing'
@@ -1309,7 +1310,7 @@ msgstr "Jeu sauvegardé"
 
 #: ../../src/logic/ship.cc:435
 msgid "Port Space"
-msgstr ""
+msgstr "Espace portuaire"
 
 #: ../../src/logic/ship.cc:436
 msgid "Port Space Found"
@@ -1324,7 +1325,7 @@ msgstr "Un navire d'expédition a trouvé un nouvel emplacement portuaire à con
 #: ../../src/logic/ship.cc:556
 msgctxt "ship"
 msgid "Waiting"
-msgstr ""
+msgstr "En attente"
 
 #: ../../src/logic/ship.cc:557
 msgid "Island Circumnavigated"
@@ -1337,7 +1338,7 @@ msgstr "Un navire en expédition navigua autours de ses îles sans problèmes."
 #. * TRANSLATORS: A ship has discovered land
 #: ../../src/logic/ship.cc:620
 msgid "Land Ahoy!"
-msgstr ""
+msgstr "Terre en vue !"
 
 #: ../../src/logic/ship.cc:621
 msgid "Coast Reached"
@@ -1350,11 +1351,11 @@ msgstr "Un navire d'expédition a atteint une côte et attend les ordres."
 
 #: ../../src/logic/ship.cc:668
 msgid "Port Lost!"
-msgstr ""
+msgstr "Port perdu !"
 
 #: ../../src/logic/ship.cc:669
 msgid "New port construction site is gone"
-msgstr ""
+msgstr "Le nouveau site de construction du port a disparu"
 
 #: ../../src/logic/ship.cc:670
 msgid "Unloading of wares failed, expedition is cancelled now."
@@ -1364,7 +1365,7 @@ msgstr "Échec du déchargement des marchandises, l'expédition est maintenant a
 #: ../../src/logic/ship.cc:850
 msgctxt "ship"
 msgid "Expedition"
-msgstr ""
+msgstr "Expédition"
 
 #: ../../src/logic/ship.cc:851
 msgid "Expedition Ready"
@@ -1436,22 +1437,22 @@ msgstr "arable"
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/logic/world/terrain_description.cc:81
 msgid "navigable"
-msgstr ""
+msgstr "navigable"
 
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/logic/world/terrain_description.cc:86
 msgid "unreachable"
-msgstr ""
+msgstr "inaccessible"
 
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/logic/world/terrain_description.cc:91
 msgid "mineable"
-msgstr ""
+msgstr "exploitable"
 
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/logic/world/terrain_description.cc:96
 msgid "unwalkable"
-msgstr ""
+msgstr "impraticable"
 
 #: ../../src/map_io/s2map.cc:403
 msgid "Bluebyte Settlers II Map. No comment defined!"
@@ -3057,11 +3058,11 @@ msgstr "Afficher le chat en ligne avec un fond transparent"
 
 #: ../../src/ui_fsmenu/options.cc:486
 msgid "Play a sound at message arrival"
-msgstr ""
+msgstr "Jouer un son à l'arrivée d'un message"
 
 #: ../../src/ui_fsmenu/options.cc:492
 msgid "Do not zip widelands data files (maps, replays and savegames)"
-msgstr ""
+msgstr "Ne pas compresser les fichiers de données (cartes, enregistrements et sauvegardes)"
 
 #: ../../src/ui_fsmenu/options.cc:498
 msgid "Remove Syncstream dumps on startup"
@@ -3492,7 +3493,7 @@ msgstr "Titre"
 #: ../../src/wui/game_message_menu.cc:73
 msgctxt "message"
 msgid "Type"
-msgstr ""
+msgstr "Type"
 
 #: ../../src/wui/game_message_menu.cc:74 ../../src/wui/game_summary.cc:108
 msgid "Status"
@@ -3505,7 +3506,7 @@ msgstr "État"
 #: ../../src/wui/game_message_menu.cc:77
 msgctxt "message"
 msgid "Sent"
-msgstr ""
+msgstr "Reçu"
 
 #. * TRANSLATORS: %s is a tooltip, Del is the corresponding hotkey
 #: ../../src/wui/game_message_menu.cc:147
@@ -3519,7 +3520,7 @@ msgstr "Suppr.: %s"
 #: ../../src/wui/game_message_menu.cc:149
 #: ../../src/wui/game_message_menu.cc:621
 msgid "Archive selected message"
-msgstr ""
+msgstr "Archiver le message sélectionné"
 
 #: ../../src/wui/game_message_menu.cc:162
 #: ../../src/wui/game_message_menu.cc:623
@@ -3584,7 +3585,7 @@ msgstr "Menu des messages : Archives"
 #. * TRANSLATORS: Tooltip in the messages window
 #: ../../src/wui/game_message_menu.cc:610
 msgid "Restore selected message"
-msgstr ""
+msgstr "Restaurer le message sélectionné"
 
 #: ../../src/wui/game_message_menu.cc:612
 msgid "Show Inbox"
@@ -3934,7 +3935,7 @@ msgstr "Ordinateur"
 #: ../../src/wui/multiplayersetupgroup.cc:306
 #: ../../src/wui/playerdescrgroup.cc:170
 msgid "Random AI"
-msgstr ""
+msgstr "IA aléatoire"
 
 #: ../../src/wui/multiplayersetupgroup.cc:316
 #: ../../src/wui/playerdescrgroup.cc:178
@@ -4161,11 +4162,11 @@ msgstr "Retirer les marchandises sélectionnées ici"
 
 #: ../../src/wui/warehousewindow.cc:219
 msgid "Wares waiting to be shipped"
-msgstr ""
+msgstr "Des marchandises attendent d'être embarquées"
 
 #: ../../src/wui/warehousewindow.cc:224
 msgid "Workers waiting to embark"
-msgstr ""
+msgstr "Des ouvriers attendent pour embarquer"
 
 #: ../../src/wui/warehousewindow.cc:230
 msgid "Expedition"
