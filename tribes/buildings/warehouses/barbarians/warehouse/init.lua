@@ -31,7 +31,6 @@ tribes:new_warehouse_type {
       build = {
          pictures = path.list_files(dirname .. "build_??.png"),
          hotspot = { 60, 78 },
-         fps = 1
       }
    },
 

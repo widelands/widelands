@@ -21,6 +21,7 @@
 #define WL_GRAPHIC_TEXT_LAYOUT_H
 
 #include <string>
+#include <unicode/uchar.h>
 
 #include "graphic/font.h"
 #include "graphic/color.h"
@@ -32,6 +33,11 @@
 inline bool is_richtext(const std::string& text) {
 	return text.compare(0, 3, "<rt") == 0;
 }
+
+/**
+ * Escapes reserved characters for Richtext.
+ */
+std::string richtext_escape(const std::string& given_text);
 
 /**
  * Convenience functions to convert simple text into a valid block
@@ -71,6 +77,8 @@ struct TextStyle {
 	static const TextStyle & ui_big();
 	static const TextStyle & ui_small();
 	uint32_t calc_bare_width(const std::string & text) const;
+	uint32_t calc_width_for_wrapping(const UChar& c) const;
+	uint32_t calc_width_for_wrapping(const std::string & text) const;
 	void calc_bare_height_heuristic(const std::string & text, int32_t & miny, int32_t & maxy) const;
 	void setup() const;
 
