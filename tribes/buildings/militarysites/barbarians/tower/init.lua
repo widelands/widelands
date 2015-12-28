@@ -22,19 +22,16 @@ tribes:new_militarysite_type {
 
    animations = {
       idle = {
-         template = "idle_??",
-         directory = dirname,
+         pictures = path.list_files(dirname .. "idle_??.png"),
          hotspot = { 48, 84 },
          fps = 10
       },
       build = {
-         template = "build_??",
-         directory = dirname,
+         pictures = path.list_files(dirname .. "build_??.png"),
          hotspot = { 48, 84 },
       },
       unoccupied = {
-         template = "unoccupied_??",
-         directory = dirname,
+         pictures = path.list_files(dirname .. "unoccupied_??.png"),
          hotspot = { 48, 84 }
       }
    },
