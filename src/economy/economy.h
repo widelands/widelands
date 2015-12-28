@@ -241,7 +241,7 @@ private:
 	// Distance is meant map distance supply<->request
 	// Used to speed up _find_best_supply function, it is convenient to start testing routes from
 	// nearest supplies
-	std::map<uint32_t, Supply*> available_supplies;
+	std::multimap<uint32_t, Supply*> available_supplies;
 
 	DISALLOW_COPY_AND_ASSIGN(Economy);
 };

@@ -20,10 +20,12 @@
 #include "economy/economy.h"
 
 #include <memory>
+#include <unordered_set>
 
 #include <boost/bind.hpp>
 
 #include "base/macros.h"
+#include "base/time_string.h"
 #include "base/wexception.h"
 #include "economy/cmd_call_economy_balance.h"
 #include "economy/flag.h"
@@ -37,9 +39,6 @@
 #include "logic/soldier.h"
 #include "logic/tribes/tribe_descr.h"
 #include "logic/warehouse.h"
-
-// To speed up searching for nearest supply, we check only n nearest supplies
-constexpr int kSuppliesToCheck = 5;
 
 namespace Widelands {
 
@@ -670,6 +669,7 @@ Supply * Economy::_find_best_supply
 	Map & map = game.map();
 
 	available_supplies.clear();
+	std::unordered_set<uint32_t> unique_flag_providers;
 
 	for (size_t i = 0; i < m_supplies.get_nrsupplies(); ++i) {
 		Supply & supp = m_supplies[i];
@@ -678,24 +678,31 @@ Supply * Economy::_find_best_supply
 		if (!supp.nr_supplies(game, req))
 			continue;
 
-		const uint32_t dist = map.calc_distance(
-			target_flag.get_position(),
-			supp.get_position(game)->base_flag().get_position());
+		const SupplyProviders provider = supp.provider_type(game);
 
-		// Inserting into 'queue'
-		if (available_supplies.count(dist) == 0) {
-			available_supplies[dist] = &m_supplies[i];
+		// We generally ignore disponible wares on ship as it is not possible to reliably
+		// calculate route (transportation time)
+		if (provider == SupplyProviders::kShip) {
+			continue;
 		}
+
+		const Widelands::Coords provider_position = supp.get_position(game)->base_flag().get_position();
+
+		// If ware is located on a road/flag, we need to ignore second and other wares there
+		if (provider == SupplyProviders::kFlagOrRoad) {
+			// std::unordered_map::insert return false if member already exists
+			if (!unique_flag_providers.insert(provider_position.hash()).second) {
+				continue;
+			}
+		}
+
+		const uint32_t dist = map.calc_distance(target_flag.get_position(), provider_position);
+
+		available_supplies.insert(std::pair<uint32_t, Supply*>(dist, &m_supplies[i]));
 	}
 
 	// Now available supplies are sorted by distance to requestor
-	// And we will check only first n (kSuppliesToCheck) from them
-	uint16_t counter = 0;
 	for (auto& supplypair : available_supplies) {
-
-		if (++counter > kSuppliesToCheck) {
-			break;
-		}
 
 		Supply & supp = *supplypair.second;
 
@@ -733,6 +740,7 @@ Supply * Economy::_find_best_supply
 
 	cost = best_cost;
 	return best_supply;
+
 }
 
 struct RequestSupplyPair {
@@ -809,8 +817,9 @@ void Economy::_process_requests(Game & game, RSPairStruct & s)
 		}
 
 		int32_t const priority = req.get_priority(cost);
-		if (priority < 0)
+		if (priority < 0) {
 			continue;
+		}
 
 		// Otherwise, consider this request/supply pair for queueing
 		RequestSupplyPair rsp;
