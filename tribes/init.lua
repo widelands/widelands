@@ -23,16 +23,7 @@ function add_worker_animations(table, animationname, dirname, basename, hotspot,
    if (fps ~= nil) then
       for idx, dir in ipairs{ "ne", "e", "se", "sw", "w", "nw" } do
          table[animationname .. "_" .. dir] = {
-            -- TODO(SirVer): get rid of template and directory, instead
-            -- use 'path.list_directory'. See world/ for examples. No globbing
-            -- code should be necessary in c++. Update: I just realized that
-            -- you went the other way in the world too. We should discuss that,
-            -- I think it should be done in Lua, not in c++. My reasoning is
-            -- that the engine should get passed in hard data as much as
-            -- possible and not needing to dig around in directories for the
-            -- correct files.
-            template = basename .. "_" .. dir ..  "_??",
-            directory = dirname,
+            pictures = path.list_files(dirname .. basename .. "_" .. dir ..  "_??.png"),
             hotspot = hotspot,
             fps = fps,
          }
@@ -40,8 +31,7 @@ function add_worker_animations(table, animationname, dirname, basename, hotspot,
    else
       for idx, dir in ipairs{ "ne", "e", "se", "sw", "w", "nw" } do
          table[animationname .. "_" .. dir] = {
-            template = basename .. "_" .. dir ..  "_??",
-            directory = dirname,
+            pictures = path.list_files(dirname .. basename .. "_" .. dir ..  "_??.png"),
             hotspot = hotspot,
          }
       end
