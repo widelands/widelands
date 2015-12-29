@@ -246,7 +246,7 @@ tribes:new_tribe {
       "Satul",
       "Atlantis",
       "Spider",
-      "Atlantean's stronghold",
+      "Atlantean's Stronghold",
       "Juventud",
       "Bahama",
       "Abaco",
