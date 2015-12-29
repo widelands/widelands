@@ -58,9 +58,8 @@ struct PathfieldManager;
 
 #define S2MF_MAGIC  "WORLD_V1.0"
 
-
-uint16_t const NUMBER_OF_MAP_DIMENSIONS = 29;
-const uint16_t MAP_DIMENSIONS[] = {
+// Global list of available map dimensions.
+const std::vector<int32_t> kMapDimensions = {
 	64, 80, 96, 112, 128, 144, 160, 176, 192, 208, 224, 240, 256, 272, 288, 304,
 	320, 336, 352, 368, 384, 400, 416, 432, 448, 464, 480, 496, 512
 };

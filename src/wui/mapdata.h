@@ -125,7 +125,7 @@ struct MapData {
 	/// Create a subdirectory
 	static MapData create_directory(const std::string& directory) {
 		std::string localized_name;
-		if (boost::equals(directory, "maps/MP Scenarios")) {
+		if (boost::equals(directory, "maps/MP_Scenarios")) {
 			/** TRANSLATORS: Directory name for MP Scenarios in map selection */
 			localized_name = _("Multiplayer Scenarios");
 		} else {
