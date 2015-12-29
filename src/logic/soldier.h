@@ -27,6 +27,7 @@
 #include "logic/worker.h"
 
 #define SOLDIER_HP_BAR_WIDTH 13
+#define BLOCK_COUNT_IS_STUCK 10
 
 struct RGBColor;
 

@@ -267,7 +267,8 @@ public:
 		 const int32_t         persist,
 		 const DirAnimations &,
 		 const bool            forceonlast = false,
-		 const int32_t         only_step = -1)
+		 const int32_t         only_step = -1,
+		 const bool            forceall = false)
 		__attribute__((warn_unused_result));
 
 	/// This can fail (and return false). Therefore the caller must check the

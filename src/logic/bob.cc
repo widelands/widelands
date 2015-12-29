@@ -568,7 +568,8 @@ bool Bob::start_task_movepath
 	 int32_t         const persist,
 	 const DirAnimations & anims,
 	 bool            const forceonlast,
-	 int32_t         const only_step)
+	 int32_t         const only_step,
+	 bool            const forceall)
 {
 	Path path;
 	BlockedTracker tracker(game, *this, dest);
@@ -579,6 +580,9 @@ bool Bob::start_task_movepath
 	else
 		cstep.add(CheckStepDefault(descr().movecaps()));
 	cstep.add(CheckStepBlocked(tracker));
+
+	if (forceall)
+		tracker.disabled = true;
 
 	Map & map = game.map();
 	if (map.findpath(m_position, dest, persist, path, cstep) < 0) {
@@ -600,7 +604,7 @@ bool Bob::start_task_movepath
 	State & state  = top_state();
 	state.path     = new Path(path);
 	state.ivar1    = 0; // step #
-	state.ivar2    = forceonlast ? 1 : 0;
+	state.ivar2    = forceonlast ? 1 : (forceall ? 2 : 0);
 	state.ivar3    = only_step;
 	state.diranims = anims;
 	return true;
@@ -676,7 +680,6 @@ bool Bob::start_task_movepath
 	return false;
 }
 
-
 void Bob::movepath_update(Game & game, State & state)
 {
 	if (get_signal().size()) {
@@ -718,12 +721,11 @@ void Bob::movepath_update(Game & game, State & state)
 	}
 
 	++state.ivar1;
-	return start_task_move(game, dir, state.diranims, forcemove);
+	return start_task_move(game, dir, state.diranims, state.ivar2 == 2 ? true : forcemove);
 	// Note: state pointer is invalid beyond this point
 }
 
-
-/**
+	/**
  * Move into one direction for one step.
  * \li ivar1: direction
  * \li ivar2: non-zero if the move should be forced

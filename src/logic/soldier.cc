@@ -741,7 +741,8 @@ void Soldier::start_task_attack
 	State & state  = top_state();
 	state.objvar1  = &building;
 	state.coords   = building.get_position();
-	state.ivar2    = 0; // Thre return state 1=go home 2=go back in known land
+	state.ivar2    = 0; // The return state 1=go home 2=go back in known land
+	state.ivar3    = 0; // Counts how often the soldier is blocked in a row
 
 	state.ivar1    |= CF_RETREAT_WHEN_INJURED;
 	state.ui32var3 = kRetreatWhenHealthDropsBelowThisPercentage * get_max_hitpoints() / 100;
@@ -758,11 +759,15 @@ void Soldier::attack_update(Game & game, State & state)
 	uint32_t    defenders = 0;
 
 	if (signal.size()) {
-		if
-			(signal == "blocked" || signal == "battle" || signal == "wakeup" ||
-			 signal == "sleep")
+		if (signal == "battle" || signal == "wakeup" || signal == "sleep") {
+			state.ivar3 = 0;
 			signal_handled();
+		} else if (signal == "blocked") {
+			state.ivar3++;
+			signal_handled();
+		}
 		else if (signal == "fail") {
+			state.ivar3 = 0;
 			signal_handled();
 			if (state.objvar1.get(game)) {
 				molog("[attack] failed to reach enemy\n");
@@ -773,6 +778,7 @@ void Soldier::attack_update(Game & game, State & state)
 			}
 		} else if (signal == "location") {
 			molog("[attack] Location destroyed\n");
+			state.ivar3 = 0;
 			signal_handled();
 			if (state.ivar2 == 0) {
 				state.ivar2 = 1;
@@ -782,6 +788,9 @@ void Soldier::attack_update(Game & game, State & state)
 				("[attack] cancelled by unexpected signal '%s'\n", signal.c_str());
 			return pop_task(game);
 		}
+	} else {
+		// no signals means no consecutive block -> we're not stuck anymore
+		state.ivar3 = 0;
 	}
 
 	//  We are at enemy building flag, and a defender is coming, sleep until he
@@ -822,12 +831,15 @@ void Soldier::attack_update(Game & game, State & state)
 				return start_task_leavebuilding(game, false);
 			}
 			// Head to home
-			if
-				(start_task_movepath
+			if (state.ivar3 > BLOCK_COUNT_IS_STUCK)
+				molog("[attack] soldier is stuck, blocked nodes will be ignored\n");
+
+			if (start_task_movepath
 					(game,
 						baseflag.get_position(),
 						4, // use larger persist when returning home
-						descr().get_right_walk_anims(does_carry_ware())))
+						descr().get_right_walk_anims(does_carry_ware()),
+						false, -1, state.ivar3 > BLOCK_COUNT_IS_STUCK))
 				return;
 			else {
 				molog("[attack] failed to return home\n");
