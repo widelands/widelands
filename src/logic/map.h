@@ -30,6 +30,7 @@
 #include "base/i18n.h"
 #include "economy/itransport_cost_calculator.h"
 #include "logic/field.h"
+#include "logic/description_maintainer.h"
 #include "logic/map_revision.h"
 #include "logic/objective.h"
 #include "logic/walkingdir.h"
@@ -176,6 +177,7 @@ public:
 	   (const World& world,
 	    uint32_t w = 64,
 	    uint32_t h = 64,
+		 const Widelands::DescriptionIndex default_terrain = 0,
 		 const std::string& name = _("No Name"),
 		 const std::string& author = pgettext("author_name", "Unknown"),
 		 const std::string& description = _("No description defined"));
