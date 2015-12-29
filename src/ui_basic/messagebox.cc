@@ -46,10 +46,6 @@ WLMessageBox::WLMessageBox
 	d(new WLMessageBoxImpl)
 {
 	d->type = type;
-	d->textarea = new MultilineTextarea
-		(this,
-		 5, 5, 30, 30,
-		 text.c_str(), align);
 
 	const int32_t outerwidth = parent ?
 		parent->get_inner_w() : g_gr->get_xres();
@@ -59,6 +55,11 @@ WLMessageBox::WLMessageBox
 	assert(outerheight >= 60);
 	const int32_t maxwidth = outerwidth - 80;
 	const int32_t maxheight = outerheight - 60;
+	d->textarea = new MultilineTextarea
+		(this,
+		 5, 5, maxwidth, maxheight,
+		 text.c_str(), align);
+
 	uint32_t width, height;
 	std::string font = d->textarea->get_font_name();
 	int32_t fontsize = d->textarea->get_font_size();

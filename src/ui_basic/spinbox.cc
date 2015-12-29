@@ -136,7 +136,6 @@ SpinBox::SpinBox
 
 	UI::MultilineTextarea* label = new UI::MultilineTextarea(box_, 0, 0, available_width,
 																				texth * (extra_rows + 1), label_text);
-
 	box_->add(label, UI::Box::AlignCenter);
 
 	sbi_->text = new UI::Textarea(box_, "", Align_Center);

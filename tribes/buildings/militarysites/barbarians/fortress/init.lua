@@ -25,19 +25,16 @@ tribes:new_militarysite_type {
 
    animations = {
       idle = {
-         template = "idle_??",
-         directory = dirname,
+         pictures = path.list_files(dirname .. "idle_??.png"),
          hotspot = { 103, 80 },
          fps = 10
       },
       build = {
-         template = "build_??",
-         directory = dirname,
+         pictures = path.list_files(dirname .. "build_??.png"),
          hotspot = { 103, 80 },
       },
       unoccupied = {
-         template = "unoccupied_??",
-         directory = dirname,
+         pictures = path.list_files(dirname .. "unoccupied_??.png"),
          hotspot = { 103, 80 }
       }
    },
@@ -47,10 +44,6 @@ tribes:new_militarysite_type {
       fighting = true,
       mountain_conqueror = true,
       prohibited_till=1500
-   },
-
-   outputs = {
-      "barbarians_soldier",
    },
 
    max_soldiers = 8,
