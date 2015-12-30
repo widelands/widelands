@@ -6,14 +6,12 @@ tribes:new_tribe {
    animations = {
       -- No idea for the frontier. Maybe some javelins?
       frontier = {
-         template = "frontier_??",
-         directory = dirname .. "images/empire/",
+         pictures = path.list_files(dirname .. "images/empire/frontier_??.png"),
          hotspot = { 1, 19 },
       },
       -- Not just a plain color, maybe a cross or some stripes
       flag = {
-         template = "flag_??",
-         directory = dirname .. "images/empire/",
+         pictures = path.list_files(dirname .. "images/empire/flag_??.png"),
          hotspot = { 14, 38 },
          fps = 10
       }

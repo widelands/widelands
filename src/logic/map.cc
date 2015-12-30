@@ -323,6 +323,7 @@ the given data
 */
 void Map::create_empty_map
 	(const World& world, uint32_t const w, uint32_t const h,
+	 const Widelands::DescriptionIndex default_terrain,
 	 const std::string& name,
 	 const std::string& author,
 	 const std::string& description)
@@ -342,8 +343,8 @@ void Map::create_empty_map
 
 	{
 		Field::Terrains default_terrains;
-		default_terrains.d = 0;
-		default_terrains.r = 0;
+		default_terrains.d = default_terrain;
+		default_terrains.r = default_terrain;
 		Field * field = m_fields.get();
 		const Field * const fields_end = field + max_index();
 		for (; field < fields_end; ++field) {

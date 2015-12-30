@@ -2,8 +2,7 @@ dirname = path.dirname(__file__)
 
 animations = {
    idle = {
-      template = "fallentree_idle",
-      directory = dirname,
+      pictures = path.list_files(dirname .. "fallentree_idle.png"),
       hotspot = { 2, 31 },
    },
 }

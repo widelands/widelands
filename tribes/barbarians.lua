@@ -5,13 +5,11 @@ tribes:new_tribe {
 
    animations = {
       frontier = {
-         template = "frontier_??",
-         directory = dirname .. "images/barbarians/",
+         pictures = path.list_files(dirname .. "images/barbarians/frontier_??.png"),
          hotspot = { 1, 19 },
       },
       flag = {
-         template = "flag_??",
-         directory = dirname .. "images/barbarians/",
+         pictures = path.list_files(dirname .. "images/barbarians/flag_??.png"),
          hotspot = { 10, 38 },
          fps = 5
       }
