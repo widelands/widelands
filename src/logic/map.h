@@ -183,6 +183,7 @@ public:
 
 	void recalc_whole_map(const World& world);
 	virtual void recalc_for_field_area(const World& world, Area<FCoords>);
+	void check_res_consistency(const World& world);
 	void recalc_default_resources(const World& world);
 
 	void set_nrplayers(PlayerNumber);

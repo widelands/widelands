@@ -172,10 +172,35 @@ void Map::recalc_whole_map(const World& world)
 			recalc_nodecaps_pass2(world, f);
 		}
 
-	//  Now only recaluclate the overlays.
+	//  Now only recalculate the overlays.
 	for (int16_t y = 0; y < m_height; ++y)
 		for (int16_t x = 0; x < m_width; ++x)
 			overlay_manager().recalc_field_overlays(get_fcoords(Coords(x, y)));
+}
+
+/***
+ * Check if resources on nodes match with the terrain.
+ * This is needed to deal with broken maps (see #977980).
+ *
+ */
+void Map::check_res_consistency(const World& world)
+{
+	for (int16_t i = 0; i < max_index(); ++i) {
+
+		DescriptionIndex ind_d = m_fields[i].get_terrains().d;
+		DescriptionIndex ind_r = m_fields[i].get_terrains().r;
+
+		// remove invalid resources if necessary
+		if (m_fields[i].get_initial_res_amount() > 0 &&
+				!(world.terrains().get(ind_d).is_resource_valid(m_fields[i].get_resources())
+				&& world.terrains().get(ind_r).is_resource_valid(m_fields[i].get_resources()))){
+
+			log("Invalid resource at (%i,%i): %s\n", get_fcoords(m_fields[i]).x, get_fcoords(m_fields[i]).y,
+				world.get_resource(m_fields[i].get_resources())->name().c_str());
+
+			m_fields[i].set_resources(0, 0);
+		}
+	}
 }
 
 /*
@@ -349,6 +374,7 @@ void Map::create_empty_map
 		for (; field < fields_end; ++field) {
 			field->set_height(10);
 			field->set_terrains(default_terrains);
+			field->set_resources(-1, 0);
 		}
 	}
 	recalc_whole_map(world);
