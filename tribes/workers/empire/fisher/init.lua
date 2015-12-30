@@ -8,6 +8,7 @@ animations = {
    fishing = {
       pictures = path.list_files(dirname .. "fishing_??.png"),
       hotspot = { 9, 39 },
+      fps = 10,
    }
 }
 add_worker_animations(animations, "walk", dirname, "walk", {10, 38}, 20)
