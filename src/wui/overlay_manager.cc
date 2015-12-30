@@ -182,6 +182,8 @@ void OverlayManager::register_overlay
 
 /**
  * remove one (or many) overlays from a node or triangle
+ *
+ * @param pic    The overlay to remove. If null, all overlays are removed.
  */
 void OverlayManager::remove_overlay
 	(Widelands::TCoords<> const c, const Image* pic)
@@ -193,7 +195,7 @@ void OverlayManager::remove_overlay
 	if (overlay_map.count(c)) {
 		RegisteredOverlaysMap::iterator it = overlay_map.lower_bound(c);
 		do {
-			if (pic && it->second.pic == pic) {
+			if (!pic || it->second.pic == pic) {
 				overlay_map.erase(it);
 				it = overlay_map.lower_bound(c);
 			} else {

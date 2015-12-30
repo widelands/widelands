@@ -1869,6 +1869,12 @@ int32_t Map::change_terrain
 {
 	c.field->set_terrain(c.t, terrain);
 
+	// remove invalid resources if necessary
+	if (!world.terrains().get(terrain).is_resource_valid(c.field->get_resources())){
+		c.field->set_resources(0, 0);
+		overlay_manager().remove_overlay(c, NULL);
+	}
+
 	Notifications::publish(NoteFieldTransformed(c, c.field - &m_fields[0]));
 
 	recalc_for_field_area(world, Area<FCoords>(c, 2));
