@@ -191,14 +191,13 @@ void Map::check_res_consistency(const World& world)
 		DescriptionIndex ind_r = m_fields[i].get_terrains().r;
 
 		// remove invalid resources if necessary
-		if (m_fields[i].get_initial_res_amount() > 0 &&
-				!(world.terrains().get(ind_d).is_resource_valid(m_fields[i].get_resources())
+		if ( !(world.terrains().get(ind_d).is_resource_valid(m_fields[i].get_resources())
 				&& world.terrains().get(ind_r).is_resource_valid(m_fields[i].get_resources()))){
 
-			log("Invalid resource at (%i,%i): %s\n", get_fcoords(m_fields[i]).x, get_fcoords(m_fields[i]).y,
-				world.get_resource(m_fields[i].get_resources())->name().c_str());
+			log("Invalid resource \"%s\" removed at (%i,%i)\n", world.get_resource(m_fields[i].get_resources())->name().c_str(),
+				get_fcoords(m_fields[i]).x, get_fcoords(m_fields[i]).y);
 
-			m_fields[i].set_resources(0, 0);
+			m_fields[i].set_resources(-1, 0);
 		}
 	}
 }
@@ -297,7 +296,7 @@ void Map::recalc_default_resources(const World& world) {
 			amount /= 6;
 
 			if (res == -1 || !amount) {
-				f.field->set_resources(0, 0);
+				f.field->set_resources(-1, 0);
 				f.field->set_initial_res_amount(0);
 			} else {
 				f.field->set_resources(res, amount);
@@ -1897,7 +1896,7 @@ int32_t Map::change_terrain
 
 	// remove invalid resources if necessary
 	if (!world.terrains().get(terrain).is_resource_valid(c.field->get_resources())){
-		c.field->set_resources(0, 0);
+		c.field->set_resources(-1, 0);
 		overlay_manager().remove_overlay(c, NULL);
 	}
 
