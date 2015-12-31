@@ -24,11 +24,11 @@
 #include "graphic/font.h"
 #include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
-#include "graphic/texture.h"
 #include "graphic/rendertarget.h"
 #include "graphic/text/font_set.h"
 #include "graphic/text_constants.h"
 #include "graphic/text_layout.h"
+#include "graphic/texture.h"
 #include "ui_basic/button.h"
 #include "ui_basic/mouse_constants.h"
 #include "ui_basic/scrollbar.h"
@@ -318,7 +318,8 @@ void Table<void *>::draw(RenderTarget & dst)
 					Texture* scaled_texture = new Texture(blit_width, max_pic_height);
 
 					// Initialize the rectangle
-					::fill_rect(Rect(0, 0, blit_width, max_pic_height), RGBAColor(255, 255, 255, 0), scaled_texture);
+					::fill_rect(Rect(0, 0, blit_width, max_pic_height),
+									RGBAColor(255, 255, 255, 0), scaled_texture);
 
 					// Create the scaled image
 					::blit(Rect(0, 0, blit_width, max_pic_height),

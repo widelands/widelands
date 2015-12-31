@@ -28,13 +28,13 @@
 #include "base/i18n.h"
 #include "base/macros.h"
 #include "editor/editorinteractive.h"
-#include "graphic/image.h"
 #include "graphic/graphic.h"
+#include "graphic/image.h"
 #include "graphic/texture.h"
 #include "logic/editor_game_base.h"
 #include "logic/map.h"
-#include "logic/world/world.h"
 #include "logic/world/terrain_description.h"
+#include "logic/world/world.h"
 #include "ui_basic/progresswindow.h"
 
 inline EditorInteractive& MainMenuNewMap::eia() {
