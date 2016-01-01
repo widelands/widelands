@@ -194,10 +194,6 @@ void Map::check_res_consistency(const World& world)
 		if (!(world.terrains().get(ind_d).is_resource_valid(m_fields[i].get_resources())
 				|| world.terrains().get(ind_r).is_resource_valid(m_fields[i].get_resources()))){
 
-			log("Invalid resource \"%s\" removed at (%i,%i)\n",
-				world.get_resource(m_fields[i].get_resources())->name().c_str(),
-				get_fcoords(m_fields[i]).x, get_fcoords(m_fields[i]).y);
-
 			m_fields[i].set_resources(Widelands::kNoResource, 0);
 		}
 	}
