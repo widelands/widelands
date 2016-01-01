@@ -65,7 +65,7 @@ EditorDecreaseResourcesTool::handle_click_impl(Widelands::Map& map,
 			const Image* pic = g_gr->images().get(str);
 			map.overlay_manager().remove_overlay(mr.location(), pic);
 			if (!amount) {
-				mr.location().field->set_resources(0, 0);
+				mr.location().field->set_resources(Widelands::kNoResource, 0);
 				mr.location().field->set_initial_res_amount(0);
 			} else {
 				mr.location().field->set_resources(args.cur_res, amount);

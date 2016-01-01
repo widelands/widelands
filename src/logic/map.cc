@@ -190,14 +190,15 @@ void Map::check_res_consistency(const World& world)
 		DescriptionIndex ind_d = m_fields[i].get_terrains().d;
 		DescriptionIndex ind_r = m_fields[i].get_terrains().r;
 
-		// remove invalid resources if necessary
-		if ( !(world.terrains().get(ind_d).is_resource_valid(m_fields[i].get_resources())
-				&& world.terrains().get(ind_r).is_resource_valid(m_fields[i].get_resources()))){
+		// remove resources if it's invalid for r and d terrain
+		if (!(world.terrains().get(ind_d).is_resource_valid(m_fields[i].get_resources())
+				|| world.terrains().get(ind_r).is_resource_valid(m_fields[i].get_resources()))){
 
-			log("Invalid resource \"%s\" removed at (%i,%i)\n", world.get_resource(m_fields[i].get_resources())->name().c_str(),
+			log("Invalid resource \"%s\" removed at (%i,%i)\n",
+				world.get_resource(m_fields[i].get_resources())->name().c_str(),
 				get_fcoords(m_fields[i]).x, get_fcoords(m_fields[i]).y);
 
-			m_fields[i].set_resources(-1, 0);
+			m_fields[i].set_resources(Widelands::kNoResource, 0);
 		}
 	}
 }
@@ -215,7 +216,7 @@ void Map::recalc_default_resources(const World& world) {
 			FCoords f, f1;
 			f = get_fcoords(Coords(x, y));
 			//  only on unset nodes
-			if (f.field->get_resources() != 0 || f.field->get_resources_amount())
+			if (f.field->get_resources() != Widelands::kNoResource || f.field->get_resources_amount())
 				continue;
 			std::map<int32_t, int32_t> m;
 			int32_t amount = 0;
@@ -296,7 +297,7 @@ void Map::recalc_default_resources(const World& world) {
 			amount /= 6;
 
 			if (res == -1 || !amount) {
-				f.field->set_resources(-1, 0);
+				f.field->set_resources(Widelands::kNoResource, 0);
 				f.field->set_initial_res_amount(0);
 			} else {
 				f.field->set_resources(res, amount);
@@ -373,7 +374,7 @@ void Map::create_empty_map
 		for (; field < fields_end; ++field) {
 			field->set_height(10);
 			field->set_terrains(default_terrains);
-			field->set_resources(-1, 0);
+			field->set_resources(Widelands::kNoResource, 0);
 		}
 	}
 	recalc_whole_map(world);
@@ -1896,7 +1897,7 @@ int32_t Map::change_terrain
 
 	// remove invalid resources if necessary
 	if (!world.terrains().get(terrain).is_resource_valid(c.field->get_resources())){
-		c.field->set_resources(-1, 0);
+		c.field->set_resources(Widelands::kNoResource, 0);
 		overlay_manager().remove_overlay(c, NULL);
 	}
 
