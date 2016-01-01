@@ -288,8 +288,8 @@ void TabPanel::draw(RenderTarget & dst)
 	RGBColor black(0, 0, 0);
 
 	// draw the buttons
-	int32_t x;
-	int tab_width;
+	int32_t x = 0;
+	int tab_width = 0;
 	for (size_t idx = 0; idx < tabs_.size(); ++idx) {
 		x = tabs_[idx]->get_x();
 		tab_width = tabs_[idx]->get_w();
