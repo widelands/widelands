@@ -201,7 +201,7 @@ FullscreenMenuOptions::FullscreenMenuOptions
 		(&box_saving_, 0, 0, column_width_, 240,
 		 opt.rolling_autosave, 1, 20, _("Maximum number of autosave files"),
 		 "",
-		 g_gr->images().get("pics/but3.png"), true),
+		 g_gr->images().get("pics/but3.png"), UI::SpinBox::Type::kBig),
 
 	sb_remove_replays_
 		(&box_saving_, 0, 0, column_width_, 240,
