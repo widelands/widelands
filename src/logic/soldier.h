@@ -26,9 +26,6 @@
 #include "logic/training_attribute.h"
 #include "logic/worker.h"
 
-#define SOLDIER_HP_BAR_WIDTH 13
-#define BLOCK_COUNT_IS_STUCK 10
-
 struct RGBColor;
 
 namespace Widelands {
@@ -287,6 +284,11 @@ private:
 	 * object.
 	 */
 	Battle * m_battle;
+
+	static constexpr uint8_t kSoldierHpBarWidth = 13;
+
+	/// Number of consecutive blocked signals until the soldiers are considered permanently stuck
+	static constexpr uint8_t kBockCountIsStuck = 10;
 
 	// saving and loading
 protected:

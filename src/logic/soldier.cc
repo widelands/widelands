@@ -58,18 +58,6 @@ namespace Widelands {
 
 namespace  {
 
-/**
- * remove spaces at the beginning or the end of a string
- */
-void remove_spaces(std::string& s) {
-	while (s[0] == ' ' || s[0] == '\t' || s[0] == '\n')
-		s.erase(0, 1);
-
-	while (*s.rbegin() == ' ' || * s.rbegin() == '\t' || * s.rbegin() == '\n')
-		s.erase(s.size() - 1, 1);
-}
-
-
 constexpr int kRetreatWhenHealthDropsBelowThisPercentage = 50;
 }  // namespace
 
@@ -526,7 +514,7 @@ void Soldier::draw_info_icon
 {
 	// Gather information to determine coordinates
 	uint32_t w;
-	w = SOLDIER_HP_BAR_WIDTH;
+	w = kSoldierHpBarWidth;
 
 	const Image* hppic = get_hp_level_pic();
 	const Image* attackpic = get_attack_level_pic();
@@ -604,7 +592,7 @@ void Soldier::calc_info_icon_size
 	uint16_t evh = evadepic->height();
 
 	uint16_t animw;
-	animw = SOLDIER_HP_BAR_WIDTH;
+	animw = kSoldierHpBarWidth;
 
 	w = std::max(std::max(atw + dew, hpw + evw), 2 * animw);
 	h = 5 + std::max(hph + ath, evh + deh);
@@ -831,7 +819,7 @@ void Soldier::attack_update(Game & game, State & state)
 				return start_task_leavebuilding(game, false);
 			}
 			// Head to home
-			if (state.ivar3 > BLOCK_COUNT_IS_STUCK)
+			if (state.ivar3 > kBockCountIsStuck)
 				molog("[attack] soldier is stuck, blocked nodes will be ignored\n");
 
 			if (start_task_movepath
@@ -839,7 +827,7 @@ void Soldier::attack_update(Game & game, State & state)
 						baseflag.get_position(),
 						4, // use larger persist when returning home
 						descr().get_right_walk_anims(does_carry_ware()),
-						false, -1, state.ivar3 > BLOCK_COUNT_IS_STUCK))
+						false, -1, state.ivar3 > kBockCountIsStuck))
 				return;
 			else {
 				molog("[attack] failed to return home\n");
