@@ -195,7 +195,7 @@ FullscreenMenuOptions::FullscreenMenuOptions
 		 /** TRANSLATORS: Options: Save game automatically every: */
 		 /** TRANSLATORS: This will have a number added in front of it */
 		 ngettext("minute", "minutes", opt.autosave / 60),
-		 g_gr->images().get("pics/but3.png"), true),
+		 g_gr->images().get("pics/but3.png"), UI::SpinBox::Type::kBig),
 
 	sb_rolling_autosave_
 		(&box_saving_, 0, 0, column_width_, 240,
@@ -209,7 +209,7 @@ FullscreenMenuOptions::FullscreenMenuOptions
 		 /** TRANSLATORS: Options: Remove Replays older than: */
 		 /** TRANSLATORS: This will have a number added in front of it */
 		 ngettext("day", "days", opt.remove_replays),
-		 g_gr->images().get("pics/but3.png"), true),
+		 g_gr->images().get("pics/but3.png"), UI::SpinBox::Type::kBig),
 
 	nozip_(&box_saving_, Point(0, 0), _("Do not zip widelands data files (maps, replays and savegames)"),
 			 "", column_width_),

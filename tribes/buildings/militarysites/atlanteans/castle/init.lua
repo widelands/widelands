@@ -25,8 +25,7 @@ tribes:new_militarysite_type {
 
    animations = {
       idle = {
-         template = "idle_??",
-         directory = dirname,
+         pictures = path.list_files(dirname .. "idle_??.png"),
          hotspot = { 91, 91 },
       }
    },
@@ -36,10 +35,6 @@ tribes:new_militarysite_type {
       fighting = true,
       mountain_conqueror = true,
       prohibited_till = 1500
-   },
-
-   outputs = {
-      "atlanteans_soldier",
    },
 
    max_soldiers = 12,

@@ -328,17 +328,17 @@ private:
 };
 
 
-class LuaMilitarySiteDescription : public LuaProductionSiteDescription {
+class LuaMilitarySiteDescription : public LuaBuildingDescription {
 public:
 	LUNA_CLASS_HEAD(LuaMilitarySiteDescription);
 
 	virtual ~LuaMilitarySiteDescription() {}
 
 	LuaMilitarySiteDescription() {}
-	LuaMilitarySiteDescription(const Widelands::ProductionSiteDescr* const militarysitedescr)
-		: LuaProductionSiteDescription(militarysitedescr) {
+	LuaMilitarySiteDescription(const Widelands::MilitarySiteDescr* const militarysitedescr)
+		: LuaBuildingDescription(militarysitedescr) {
 	}
-	LuaMilitarySiteDescription(lua_State* L) : LuaProductionSiteDescription(L) {
+	LuaMilitarySiteDescription(lua_State* L) : LuaBuildingDescription(L) {
 	}
 
 	/*
@@ -367,7 +367,7 @@ public:
 	virtual ~LuaTrainingSiteDescription() {}
 
 	LuaTrainingSiteDescription() {}
-	LuaTrainingSiteDescription(const Widelands::ProductionSiteDescr* const trainingsitedescr)
+	LuaTrainingSiteDescription(const Widelands::TrainingSiteDescr* const trainingsitedescr)
 		: LuaProductionSiteDescription(trainingsitedescr) {
 	}
 	LuaTrainingSiteDescription(lua_State* L) : LuaProductionSiteDescription(L) {

@@ -220,6 +220,7 @@ uint32_t MultilineEditbox::Data::prev_char(uint32_t cursor)
 
 	do {
 		--cursor;
+		// TODO(GunChleoc): When switchover to g_fh1 is complete, see if we can go full ICU here.
 	} while (cursor > 0 && Utf8::is_utf8_extended(text[cursor]));
 
 	return cursor;
@@ -482,6 +483,8 @@ void MultilineEditbox::draw(RenderTarget & dst)
 
 	d->refresh_ww();
 
+	d->ww.set_draw_caret(has_focus());
+
 	d->ww.draw
 		(dst, Point(0, -int32_t(d->scrollbar.get_scrollpos())), Align_Left,
 		 has_focus() ? d->cursor_pos : std::numeric_limits<uint32_t>::max());
@@ -563,7 +566,7 @@ void MultilineEditbox::Data::refresh_ww()
 	ww.set_style(textstyle);
 	ww.set_wrapwidth(owner.get_w() - ms_scrollbar_w);
 
-	ww.wrap(text);
+	ww.wrap(text, WordWrap::Mode::kEditor);
 	ww_valid = true;
 
 	int32_t textheight = ww.height();

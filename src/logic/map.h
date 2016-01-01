@@ -30,6 +30,7 @@
 #include "base/i18n.h"
 #include "economy/itransport_cost_calculator.h"
 #include "logic/field.h"
+#include "logic/description_maintainer.h"
 #include "logic/map_revision.h"
 #include "logic/objective.h"
 #include "logic/walkingdir.h"
@@ -58,9 +59,8 @@ struct PathfieldManager;
 
 #define S2MF_MAGIC  "WORLD_V1.0"
 
-
-uint16_t const NUMBER_OF_MAP_DIMENSIONS = 29;
-const uint16_t MAP_DIMENSIONS[] = {
+// Global list of available map dimensions.
+const std::vector<int32_t> kMapDimensions = {
 	64, 80, 96, 112, 128, 144, 160, 176, 192, 208, 224, 240, 256, 272, 288, 304,
 	320, 336, 352, 368, 384, 400, 416, 432, 448, 464, 480, 496, 512
 };
@@ -177,6 +177,7 @@ public:
 	   (const World& world,
 	    uint32_t w = 64,
 	    uint32_t h = 64,
+		 const Widelands::DescriptionIndex default_terrain = 0,
 		 const std::string& name = _("No Name"),
 		 const std::string& author = pgettext("author_name", "Unknown"),
 		 const std::string& description = _("No description defined"));
