@@ -185,7 +185,7 @@ void Map::recalc_whole_map(const World& world)
  */
 void Map::check_res_consistency(const World& world)
 {
-	for (int16_t i = 0; i < max_index(); ++i) {
+	for (MapIndex i = 0; i < max_index(); ++i) {
 
 		DescriptionIndex ind_d = m_fields[i].get_terrains().d;
 		DescriptionIndex ind_r = m_fields[i].get_terrains().r;

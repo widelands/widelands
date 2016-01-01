@@ -959,7 +959,7 @@ bool Worker::run_geologist_find(Game & game, State & state, const Action &)
 				 MapObjectDescr::OwnerType::kTribe);
 
 		// Geologist also sends a message notifying the player
-		if (rdescr->detectable() && position.field->get_resources_amount()) {
+		if (rdescr && rdescr->detectable() && position.field->get_resources_amount()) {
 			const std::string message =
 					(boost::format("<rt image=%s><p font-face=serif font-size=14>%s</p></rt>")
 					 % rdescr->get_editor_pic(rdescr->max_amount())
