@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2011, 2013, 2015 by the Widelands Development Team
+ * Copyright (C) 2008-2011, 2013, 2015-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -95,7 +95,7 @@ public:
 	 * by the win_condition scripts.
 	 * \param player : the player idx;
 	 * \param result : the player result
-	 * \param info : The info string (\see \struct PlayerEndStatus for allowed values)
+	 * \param info : The info string (\see \struct PlayerEndStatus) 
 	 */
 	virtual void report_result
 	    (uint8_t /* player */,
