@@ -318,16 +318,15 @@ void Table<void *>::draw(RenderTarget & dst)
 					Texture* scaled_texture = new Texture(blit_width, max_pic_height);
 
 					// Initialize the rectangle
-					::fill_rect(Rect(0, 0, blit_width, max_pic_height),
-									RGBAColor(255, 255, 255, 0), scaled_texture);
+					scaled_texture->fill_rect(Rect(0, 0, blit_width, max_pic_height),
+									RGBAColor(255, 255, 255, 0));
 
 					// Create the scaled image
-					::blit(Rect(0, 0, blit_width, max_pic_height),
+					scaled_texture->blit(Rect(0, 0, blit_width, max_pic_height),
 							 *entry_picture,
 							 Rect(0, 0, picw, pich),
 							 1.,
-							 BlendMode::UseAlpha,
-							 scaled_texture);
+							 BlendMode::UseAlpha);
 
 					// This will now blit with any appropriate cropping
 					dst.blit(Point(draw_x, point.y + 1), scaled_texture);
