@@ -113,11 +113,12 @@ EditorIncreaseResourcesTool::handle_click_impl(Widelands::Map& map,
 				  editor_change_resource_tool_callback(mr.location(), map, world, args.cur_res))
 		{
 			//  Ok, we're doing something. First remove the current overlays.
-			const Image* pic =
-			    g_gr->images().get
-			    (world.get_resource(res)->get_editor_pic
-			     (mr.location().field->get_resources_amount()));
-			overlay_manager.remove_overlay(mr.location(), pic);
+			const Image* pic;
+			if (res != Widelands::kNoResource) {
+				pic = g_gr->images().get(world.get_resource(res)->get_editor_pic(
+						mr.location().field->get_resources_amount()));
+				overlay_manager.remove_overlay(mr.location(), pic);
+			}
 
 			if (!amount) {
 				mr.location().field->set_resources(Widelands::kNoResource, 0);
