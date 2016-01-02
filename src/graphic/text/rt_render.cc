@@ -400,7 +400,7 @@ public:
 	Texture* render(TextureCache* texture_cache) override {
 		if (m_show_spaces) {
 			Texture* rv = new Texture(m_w, m_h);
-			rv->fill_rect(Rect(0, 0, m_w, m_h), RGBAColor(0xff, 0, 0, 0xff));
+			rv->fill_rect(Rect(0, 0, m_w, m_h), RGBAColor(0xcc, 0, 0, 0xcc));
 			return rv;
 		}
 		return TextNode::render(texture_cache);
@@ -711,17 +711,26 @@ void TagHandler::m_make_text_nodes(const string& txt, vector<RenderNode*>& nodes
 	if (i18n::has_rtl_character(txt.c_str())) {
 		std::string previous_word;
 		std::vector<RenderNode*>::iterator it = text_nodes.begin();
+		std::vector<WordSpacerNode*> spacer_nodes;
 
 		// Collect the word nodes
 		while (ts.pos() < txt.size()) {
+			std::size_t cpos = ts.pos();
 			ts.skip_ws();
+			spacer_nodes.clear();
+
+			// We only know if the spacer goes to the left or right after having a look at the current word.
+			for (uint16_t ws_indx = 0; ws_indx < ts.pos() - cpos; ws_indx++) {
+				spacer_nodes.push_back(new WordSpacerNode(font_cache_.get_font(&ns), ns));
+			}
+
 			word = ts.till_any_or_end(" \t\n\r");
 			if (!word.empty()) {
 				bool word_is_bidi = i18n::has_rtl_character(word.c_str());
 				word = i18n::make_ligatures(word.c_str());
 				if (word_is_bidi || i18n::has_rtl_character(previous_word.c_str())) {
-					if (!previous_word.empty()) {
-						text_nodes.insert(text_nodes.begin(), new WordSpacerNode(font_cache_.get_font(&ns), ns));
+					for (WordSpacerNode* spacer: spacer_nodes) {
+						it = text_nodes.insert(text_nodes.begin(), spacer);
 					}
 					if (word_is_bidi) {
 						word = i18n::line2bidi(word.c_str());
@@ -732,8 +741,11 @@ void TagHandler::m_make_text_nodes(const string& txt, vector<RenderNode*>& nodes
 					if (it < text_nodes.end()) {
 						++it;
 					}
-					if (!previous_word.empty()) {
-						it = text_nodes.insert(it, new WordSpacerNode(font_cache_.get_font(&ns), ns));
+					for (WordSpacerNode* spacer: spacer_nodes) {
+						it = text_nodes.insert(it, spacer);
+						if (it < text_nodes.end()) {
+							++it;
+						}
 					}
 					it = text_nodes.insert(it, new TextNode(font_cache_.get_font(&ns), ns, word));
 				}
@@ -749,7 +761,7 @@ void TagHandler::m_make_text_nodes(const string& txt, vector<RenderNode*>& nodes
 		while (ts.pos() < txt.size()) {
 			std::size_t cpos = ts.pos();
 			ts.skip_ws();
-			if (ts.pos() != cpos) {
+			for (uint16_t ws_indx = 0; ws_indx < ts.pos() - cpos; ws_indx++) {
 				nodes.push_back(new WordSpacerNode(font_cache_.get_font(&ns), ns));
 			}
 			word = ts.till_any_or_end(" \t\n\r");
@@ -1072,8 +1084,9 @@ public:
 			else if (align == "center" || align == "middle") m_rn->set_valign(UI::Align::Align_Center);
 		}
 	}
-private:
+protected:
 	bool shrink_to_fit_;
+private:
 	uint16_t m_w;
 	SubTagRenderNode* m_rn;
 };
@@ -1089,6 +1102,7 @@ public:
 	void handle_unique_attributes() override {
 		const AttrMap& a = m_tag.attrs();
 		WordSpacerNode::show_spaces(a.has("db_show_spaces") ? a["db_show_spaces"].get_bool() : 0);
+		shrink_to_fit_ = shrink_to_fit_ && (a.has("keep_spaces") ? !a["keep_spaces"].get_bool() : true);
 	}
 };
 

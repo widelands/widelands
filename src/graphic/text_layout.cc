@@ -22,6 +22,7 @@
 #include <map>
 
 #include <SDL_ttf.h>
+#include <boost/algorithm/string.hpp>
 #include <boost/format.hpp>
 
 #include "base/utf8.h"
@@ -29,6 +30,13 @@
 #include "graphic/text/bidi.h"
 #include "graphic/text/font_set.h"
 #include "graphic/text_constants.h"
+
+std::string richtext_escape(const std::string& given_text) {
+	std::string text = given_text;
+	boost::replace_all(text, ">", "&gt;");
+	boost::replace_all(text, "<", "&lt;");
+	return text;
+}
 
 std::string as_game_tip(const std::string& txt) {
 	static boost::format f
@@ -91,6 +99,31 @@ void TextStyle::setup() const
 	if (underline)
 		font_style |= TTF_STYLE_UNDERLINE;
 	TTF_SetFontStyle(font->get_ttf_font(), font_style);
+}
+
+/**
+ * Get a width estimate for text wrapping.
+ */
+uint32_t TextStyle::calc_width_for_wrapping(const UChar& c) const {
+	int result = 0;
+	TTF_GlyphMetrics(font->get_ttf_font(), c, nullptr, nullptr, nullptr, nullptr, &result);
+	return result;
+}
+
+/**
+ * Get a width estimate for text wrapping.
+ */
+uint32_t TextStyle::calc_width_for_wrapping(const std::string & text) const
+{
+	int result = 0;
+	const icu::UnicodeString parseme(text.c_str());
+	for (int i = 0; i < parseme.length(); ++i) {
+		UChar c = parseme.charAt(i);
+		if (!i18n::is_diacritic(c)) {
+			result += calc_width_for_wrapping(c);
+		}
+	}
+	return result;
 }
 
 /**
