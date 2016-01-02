@@ -46,41 +46,16 @@ EditorDecreaseResourcesTool::handle_click_impl(Widelands::Map& map,
 	Widelands::Area<Widelands::FCoords>
 	(map.get_fcoords(center.node), args.sel_radius));
 	do {
-		int32_t res    = mr.location().field->get_resources();
 		int32_t amount = mr.location().field->get_resources_amount();
 
 		amount -= args.change_by;
 		if (amount < 0)
 			amount = 0;
 
-		args.orgResT.push_back(res);
-		args.orgRes.push_back(mr.location().field->get_resources_amount());
+		if (mr.location().field->get_resources() == args.cur_res &&
+			editor_change_resource_tool_callback(mr.location(), map, world, args.cur_res))
+			EditorSetResourcesTool::set_res_and_overlay(map, world, args, mr, amount);
 
-		if (res == args.cur_res &&
-		    editor_change_resource_tool_callback(mr.location(), map, world, args.cur_res)) {
-
-			//  Ok, we're doing something. First remove the current overlays.
-			if (res != Widelands::kNoResource) {
-				std::string str = world.get_resource(res)->get_editor_pic(
-						mr.location().field->get_resources_amount());
-				const Image* pic = g_gr->images().get(str);
-				map.overlay_manager().remove_overlay(mr.location(), pic);
-			}
-
-			if (!amount) {
-				mr.location().field->set_resources(Widelands::kNoResource, 0);
-				mr.location().field->set_initial_res_amount(0);
-			} else {
-				mr.location().field->set_resources(args.cur_res, amount);
-				mr.location().field->set_initial_res_amount(amount);
-				//  set new overlay
-				std::string str = world.get_resource(args.cur_res)->get_editor_pic(amount);
-				const Image* pic = g_gr->images().get(str);
-				map.overlay_manager().register_overlay(mr.location(), pic, 4);
-				map.recalc_for_field_area(
-				   world, Widelands::Area<Widelands::FCoords>(mr.location(), 0));
-			}
-		}
 	} while (mr.advance(map));
 	return mr.radius();
 }

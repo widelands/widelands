@@ -20,6 +20,8 @@
 #ifndef WL_EDITOR_TOOLS_EDITOR_SET_RESOURCES_TOOL_H
 #define WL_EDITOR_TOOLS_EDITOR_SET_RESOURCES_TOOL_H
 
+#include "logic/mapregion.h"
+#include "logic/widelands.h"
 #include "editor/tools/editor_tool.h"
 
 ///  Decreases the resources of a node by a value.
@@ -39,6 +41,9 @@ struct EditorSetResourcesTool : public EditorTool {
 	                         Widelands::NodeAndTriangle<> center,
 	                         EditorInteractive& parent,
 	                         EditorActionArgs& args) override;
+
+	static void set_res_and_overlay(Widelands::Map& map, const Widelands::World& world, EditorActionArgs& args,
+			Widelands::MapRegion<Widelands::Area<Widelands::FCoords> >& mr, int32_t amount);
 
 	EditorActionArgs format_args_impl(EditorInteractive & parent) override;
 
