@@ -14,8 +14,7 @@ world:new_immovable_type{
    },
    animations = {
       idle = {
-         template = "idle",
-         directory = dirname,
+         pictures = path.list_files(dirname .. "idle.png"),
          hotspot = { 27, 56 },
       },
    }

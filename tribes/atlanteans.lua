@@ -6,14 +6,12 @@ tribes:new_tribe {
    animations = {
       -- Some blue fires would be fine, but just an idea
       frontier = {
-         template = "frontier_??",
-         directory = dirname .. "images/atlanteans/",
+         pictures = path.list_files(dirname .. "images/atlanteans/frontier_??.png"),
          hotspot = { 3, 12 },
       },
       flag = {
          -- Not just a plain color, maybe a cross or some stripes
-         template = "flag_??",
-         directory = dirname .. "images/atlanteans/",
+         pictures = path.list_files(dirname .. "images/atlanteans/flag_??.png"),
          hotspot = { 15, 35 },
          fps = 10
       }

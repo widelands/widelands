@@ -13,13 +13,11 @@ tribes:new_constructionsite_type {
       -- The constructionsite is a mess. Not nice and clean, but rather some
       -- logs lying around on piles, maybe some tools.
       idle = {
-         template = "idle_??",
-         directory = dirname,
+         pictures = path.list_files(dirname .. "idle_??.png"),
          hotspot = { 5, 5 },
       },
       idle_with_worker = {
-         template = "idle_with_worker_??",
-         directory = dirname,
+         pictures = path.list_files(dirname .. "idle_with_worker_??.png"),
          hotspot = { 33, 36 },
       }
    },

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006-2010, 2012 by the Widelands Development Team
+ * Copyright (C) 2004, 2006-2010, 2012, 2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -4270,7 +4270,7 @@ uint32_t DefaultAI::get_stocklevel(BuildingObserver& bo) {
 
 // counts produced output on stock
 // if multiple outputs, it returns lowest value
-uint32_t DefaultAI::get_stocklevel(DescriptionIndex wt) {
+uint32_t DefaultAI::get_stocklevel(Widelands::DescriptionIndex wt) {
 	uint32_t count = 0;
 
 	for (EconomyObserver* observer : economies) {

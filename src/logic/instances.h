@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2013 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2013, 2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -135,7 +135,7 @@ struct MapObjectDescr {
 	bool is_animation_known(const std::string & name) const;
 	void add_animation(const std::string & name, uint32_t anim);
 
-	/// Sets the directional animations in 'anims' with the animations '<prefix>_(ne|e|se|sw|w|nw)'.
+	/// Sets the directional animations in 'anims' with the animations '&lt;prefix&gt;_(ne|e|se|sw|w|nw)'.
 	void add_directional_animation(DirAnimations* anims, const std::string& prefix);
 
 	/// Returns the image for the first frame of the idle animation if the MapObject has animations,
@@ -252,7 +252,7 @@ public:
 	 * the game. No conncetion is handled in this class.
 	 * \param serial : the object serial
 	 */
-	boost::signals2::signal<void(uint32_t)> removed;
+	boost::signals2::signal<void(uint32_t serial)> removed;
 
 	/**
 	 * Attributes are fixed boolean properties of an object.
