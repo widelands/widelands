@@ -3,8 +3,7 @@ dirname = path.dirname(__file__)
 -- TODO(GunChleoc): The animations were taken from the brewer.
 animations = {
    idle = {
-      template = "idle_??",
-      directory = dirname,
+      pictures = path.list_files(dirname .. "idle_??.png"),
       hotspot = { 8, 24 }
    }
 }

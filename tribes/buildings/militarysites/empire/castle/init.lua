@@ -24,17 +24,12 @@ tribes:new_militarysite_type {
 
    animations = {
       idle = {
-         template = "idle_??",
-         directory = dirname,
+         pictures = path.list_files(dirname .. "idle_??.png"),
          hotspot = { 94, 106 }
       }
    },
 
    aihints = {},
-
-   outputs = {
-      "empire_soldier",
-   },
 
    max_soldiers = 12,
    heal_per_second = 220,

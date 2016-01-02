@@ -19,10 +19,63 @@
 
 #include "scripting/lua_path.h"
 
-#include <boost/regex.hpp>
+#include <boost/algorithm/string/replace.hpp>
+#include <boost/format.hpp>
+#include <boost/lexical_cast.hpp>
 
+#include "base/macros.h"
 #include "helper.h"
 #include "io/filesystem/layered_filesystem.h"
+
+namespace {
+
+
+/// A class that makes iteration over filename_?.png templates easy.
+class NumberGlob {
+public:
+	NumberGlob(const std::string& file_template);
+
+	/// If there is a next filename, puts it in 's' and returns true.
+	bool next(std::string* s);
+
+private:
+	std::string template_;
+	std::string format_;
+	std::string to_replace_;
+	uint32_t current_;
+	uint32_t max_;
+
+	DISALLOW_COPY_AND_ASSIGN(NumberGlob);
+};
+
+/**
+ * Implementation for NumberGlob.
+ */
+NumberGlob::NumberGlob(const std::string& file_template) : template_(file_template), current_(0) {
+	int nchars = count(file_template.begin(), file_template.end(), '?');
+	format_ = "%0" + boost::lexical_cast<std::string>(nchars) + "i";
+
+	max_ = 1;
+	for (int i = 0; i < nchars; ++i) {
+		max_ *= 10;
+		to_replace_ += "?";
+	}
+	max_ -= 1;
+}
+
+bool NumberGlob::next(std::string* s) {
+	if (current_ > max_)
+		return false;
+
+	if (max_) {
+		*s = boost::replace_last_copy(template_, to_replace_, (boost::format(format_) % current_).str());
+	} else {
+		*s = template_;
+	}
+	++current_;
+	return true;
+}
+} // namespace
 
 namespace LuaPath {
 
@@ -78,34 +131,30 @@ static int L_dirname(lua_State * L) {
 
 
 /* RST
-.. function:: list_directory(directory[, regexp])
+.. function:: list_files(filename_template)
 
-	Lists all files and directories in the given directory. If regexp is not
-	:const:`nil` only the files whose basename matches the regular expression
-	will be returned. The method never returns "." or ".." in its results.
+	Lists the full path for all files that fit the template pattern.
+	Use ? as placeholders for numbers, e.g. 'directory/idle_??.png' will list
+	'directory/idle_00.png', 'directory/idle_01.png' etc, and
+	'directory/idle.png' will just list 'directory/idle.png'.
 
-	:type directory: class:`string`
-	:arg directory: The directory to list files for.
-	:type regexp: class:`string`
-	:arg regexp: The regular expression each files must match.
+	:type filename_template: class:`string`
+	:arg filename_template: The filename template to use for the listing.
 
-   :returns: An :class:`array` of filenames in lexicographical order.
+	:returns: An :class:`array` of file paths in lexicographical order.
 */
-static int L_list_directory(lua_State * L) {
-	const std::string dir = luaL_checkstring(L, 1);
-	std::set<std::string> files = g_fs->list_directory(dir);
+static int L_list_files(lua_State * L) {
+	std::string filename_template = luaL_checkstring(L, 1);
 
-	if (lua_gettop(L) > 1) {
-		boost::regex re(luaL_checkstring(L, 2));
-		files = filter(files, [&re](const std::string& filename) {
-			return boost::regex_match(FileSystem::fs_filename(filename.c_str()), re);
-		});
-	}
-
+	NumberGlob glob(filename_template);
+	std::string filename;
 	lua_newtable(L);
 	int idx = 1;
 
-	for (const std::string& filename : files) {
+	while (glob.next(&filename)) {
+		if (!g_fs->file_exists(filename)) {
+			break;
+		}
 		lua_pushint32(L, idx++);
 		lua_pushstring(L, filename);
 		lua_settable(L, -3);
@@ -116,7 +165,7 @@ static int L_list_directory(lua_State * L) {
 const static struct luaL_Reg path [] = {
 	{"basename", &L_basename},
 	{"dirname", &L_dirname},
-	{"list_directory", &L_list_directory},
+	{"list_files", &L_list_files},
 	{nullptr, nullptr}
 };
 

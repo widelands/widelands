@@ -54,7 +54,7 @@ private:
  * transported by ship are stored in the PortDock instead of
  * the associated @ref WareHouse.
  *
- * @paragraph Lifetime
+ * @paragraph PortDockLifetime
  *
  * The PortDock is created and removed by its owning warehouse.
  * Throughout the life of the PortDock, the corresponding @ref Warehouse

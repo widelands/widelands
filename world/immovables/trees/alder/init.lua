@@ -31,8 +31,7 @@ world:new_immovable_type{
    },
    animations = {
       idle = {
-         template = "idle_?",
-         directory = dirname .. "sapling/",
+         pictures = path.list_files(dirname .. "sapling/idle_?.png"),
          hotspot = { 5, 12 },
          fps = 8,
       },
@@ -55,8 +54,7 @@ world:new_immovable_type{
    },
    animations = {
       idle = {
-         template = "idle_?",
-         directory = dirname .. "pole/",
+         pictures = path.list_files(dirname .. "pole/idle_?.png"),
          hotspot = { 12, 28 },
          fps = 8,
       },
@@ -79,8 +77,7 @@ world:new_immovable_type{
    },
    animations = {
       idle = {
-         template = "idle_?",
-         directory = dirname .. "mature/",
+         pictures = path.list_files(dirname .. "mature/idle_?.png"),
          hotspot = { 18, 48 },
          fps = 8,
       },
@@ -106,8 +103,7 @@ world:new_immovable_type{
    },
    animations = {
       idle = {
-         template = "idle_?",
-         directory = dirname .. "old/",
+         pictures = path.list_files(dirname .. "old/idle_?.png"),
          hotspot = { 23, 59 },
          fps = 10,
          sound_effect = {
