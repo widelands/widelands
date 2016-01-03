@@ -30,6 +30,9 @@ struct EditorSetResourcesTool : public EditorTool {
 		: EditorTool(*this, *this), m_cur_res(0), m_set_to(0)
 	{}
 
+	/**
+	 * Sets the resources of the current to a fixed value
+	*/
 	int32_t handle_click_impl(Widelands::Map& map,
 	                          const Widelands::World& world,
 	                          Widelands::NodeAndTriangle<> center,
@@ -42,10 +45,13 @@ struct EditorSetResourcesTool : public EditorTool {
 	                         EditorInteractive& parent,
 	                         EditorActionArgs& args) override;
 
+	EditorActionArgs format_args_impl(EditorInteractive & parent) override;
+
+	/**
+	 * Sets the resource amount and updates the overlay.
+	 */
 	static void set_res_and_overlay(Widelands::Map& map, const Widelands::World& world, EditorActionArgs& args,
 			Widelands::MapRegion<Widelands::Area<Widelands::FCoords> >& mr, int32_t amount);
-
-	EditorActionArgs format_args_impl(EditorInteractive & parent) override;
 
 	char const * get_sel_impl() const override {
 		return "pics/fsel_editor_set_resources.png";
@@ -61,5 +67,6 @@ private:
 	Widelands::DescriptionIndex m_cur_res;
 	uint8_t m_set_to;
 };
+
 
 #endif  // end of include guard: WL_EDITOR_TOOLS_EDITOR_SET_RESOURCES_TOOL_H

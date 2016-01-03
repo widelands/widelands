@@ -53,7 +53,7 @@ EditorDecreaseResourcesTool::handle_click_impl(Widelands::Map& map,
 			amount = 0;
 
 		if (mr.location().field->get_resources() == args.cur_res &&
-			editor_change_resource_tool_callback(mr.location(), map, world, args.cur_res))
+			map.is_resource_valid(world, mr.location(), args.cur_res))
 			EditorSetResourcesTool::set_res_and_overlay(map, world, args, mr, amount);
 
 	} while (mr.advance(map));

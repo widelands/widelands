@@ -35,6 +35,10 @@ struct EditorIncreaseResourcesTool : public EditorTool {
 	     m_cur_res(0) {
 	}
 
+	/***
+	 * Increase the resources of the current field by one if there is not already
+	 * another resource there.
+	 */
 	int32_t handle_click_impl(Widelands::Map& map,
 	                          const Widelands::World& world,
 	                          Widelands::NodeAndTriangle<> center,
@@ -72,8 +76,5 @@ private:
 	Widelands::DescriptionIndex m_cur_res;
 };
 
-int32_t editor_change_resource_tool_callback
-	(const Widelands::TCoords<Widelands::FCoords>& c, Widelands::Map& map,
-	 const Widelands::World& world, int32_t const curres);
 
 #endif  // end of include guard: WL_EDITOR_TOOLS_EDITOR_INCREASE_RESOURCES_TOOL_H

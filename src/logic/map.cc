@@ -178,26 +178,6 @@ void Map::recalc_whole_map(const World& world)
 			overlay_manager().recalc_field_overlays(get_fcoords(Coords(x, y)));
 }
 
-/***
- * Check if resources on nodes match with the terrain.
- * This is needed to deal with broken maps (see #977980).
- *
- */
-void Map::check_res_consistency(const World& world)
-{
-	for (MapIndex i = 0; i < max_index(); ++i) {
-
-		DescriptionIndex ind_d = m_fields[i].get_terrains().d;
-		DescriptionIndex ind_r = m_fields[i].get_terrains().r;
-
-		// remove resources if it's invalid for r and d terrain
-		if (!(world.terrains().get(ind_d).is_resource_valid(m_fields[i].get_resources())
-				|| world.terrains().get(ind_r).is_resource_valid(m_fields[i].get_resources()))){
-
-			m_fields[i].set_resources(Widelands::kNoResource, 0);
-		}
-	}
-}
 
 /*
  * recalculates all default resources.
@@ -1875,26 +1855,29 @@ bool Map::can_reach_by_water(const Coords field) const
 	return false;
 }
 
-/*
-===========
-changes the given triangle's terrain.
-this happens in the editor and might happen in the game
-too if some kind of land increasement is implemented (like
-drying swamps).
-The nodecaps need to be recalculated
-
-returns the radius of changes (which are always 2)
-===========
-*/
 int32_t Map::change_terrain
 	(const World& world, TCoords<FCoords> const c, DescriptionIndex const terrain)
 {
 	c.field->set_terrain(c.t, terrain);
 
 	// remove invalid resources if necessary
-	if (!world.terrains().get(terrain).is_resource_valid(c.field->get_resources())){
+	if (!is_resource_valid(world, c, c.field->get_resources())){
 		c.field->set_resources(Widelands::kNoResource, 0);
 		overlay_manager().remove_overlay(c, NULL);
+	}
+
+	Widelands::FCoords f_nw(c, c.field);
+	get_neighbour(f_nw, Widelands::WALK_SE, &f_nw);
+	if (!is_resource_valid(world, f_nw, f_nw.field->get_resources())){
+		f_nw.field->set_resources(Widelands::kNoResource, 0);
+		overlay_manager().remove_overlay(f_nw, NULL);
+	}
+
+	Widelands::FCoords f_w(c, c.field);
+	get_neighbour(f_w, Widelands::WALK_SW, &f_w);
+	if (!is_resource_valid(world, f_w, f_w.field->get_resources())){
+		f_w.field->set_resources(Widelands::kNoResource, 0);
+		overlay_manager().remove_overlay(f_w, NULL);
 	}
 
 	Notifications::publish(NoteFieldTransformed(c, c.field - &m_fields[0]));
@@ -1902,6 +1885,61 @@ int32_t Map::change_terrain
 	recalc_for_field_area(world, Area<FCoords>(c, 2));
 
 	return 2;
+}
+
+bool Map::is_resource_valid
+	(const Widelands::World& world, const TCoords<Widelands::FCoords>& c, int32_t const curres)
+{
+	if (curres == Widelands::kNoResource)
+		return true;
+
+	Widelands::FCoords f(c, c.field);
+	Widelands::FCoords f1;
+
+	int32_t count = 0;
+
+	//  this field
+	count += resource_value(world.terrain_descr(f.field->terrain_r()), curres);
+	count += resource_value(world.terrain_descr(f.field->terrain_d()), curres);
+
+	//  If one of the neighbours is impassable, count its resource stronger.
+	//  top left neigbour
+	get_neighbour(f, Widelands::WALK_NW, &f1);
+	count += resource_value(world.terrain_descr(f1.field->terrain_r()), curres);
+	count += resource_value(world.terrain_descr(f1.field->terrain_d()), curres);
+
+	//  top right neigbour
+	get_neighbour(f, Widelands::WALK_NE, &f1);
+	count += resource_value(world.terrain_descr(f1.field->terrain_d()), curres);
+
+	//  left neighbour
+	get_neighbour(f, Widelands::WALK_W, &f1);
+	count += resource_value(world.terrain_descr(f1.field->terrain_r()), curres);
+
+	return count > 3;
+}
+
+int32_t Map::resource_value(const Widelands::TerrainDescription& terrain,
+                       const Widelands::DescriptionIndex resource) {
+	if (!terrain.is_resource_valid(resource)) {
+		return -1;
+	}
+	if (terrain.get_is() & Widelands::TerrainDescription::Type::kImpassable) {
+		return 8;
+	}
+	return 1;
+}
+
+/***
+ * Check if resources on nodes match with the terrain.
+ * This is needed to deal with broken maps (see #977980).
+ *
+ */
+void Map::check_res_consistency(const World& world)
+{
+	for (MapIndex i = 0; i < max_index(); ++i)
+		if (!is_resource_valid(world, get_fcoords(m_fields[i]), m_fields[i].get_resources()))
+			m_fields[i].set_resources(Widelands::kNoResource, 0);
 }
 
 

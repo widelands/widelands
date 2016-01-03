@@ -30,67 +30,12 @@
 
 using Widelands::TCoords;
 
-namespace  {
-
-int32_t resource_value(const Widelands::TerrainDescription& terrain,
-                       const Widelands::DescriptionIndex resource) {
-	if (!terrain.is_resource_valid(resource)) {
-		return -1;
-	}
-	if (terrain.get_is() & Widelands::TerrainDescription::Type::kImpassable) {
-		return 8;
-	}
-	return 1;
-}
-
-}  // namespace
-
-
-int32_t editor_change_resource_tool_callback
-	(const TCoords<Widelands::FCoords>& c, Widelands::Map& map,
-	 const Widelands::World& world, int32_t const curres)
-{
-	Widelands::FCoords f(c, &map[c]);
-
-	Widelands::FCoords f1;
-	int32_t count = 0;
-
-	//  this field
-	count += resource_value(world.terrain_descr(f.field->terrain_r()), curres);
-	count += resource_value(world.terrain_descr(f.field->terrain_d()), curres);
-
-	//  If one of the neighbours is impassable, count its resource stronger.
-	//  top left neigbour
-	map.get_neighbour(f, Widelands::WALK_NW, &f1);
-	count += resource_value(world.terrain_descr(f1.field->terrain_r()), curres);
-	count += resource_value(world.terrain_descr(f1.field->terrain_d()), curres);
-
-	//  top right neigbour
-	map.get_neighbour(f, Widelands::WALK_NE, &f1);
-	count += resource_value(world.terrain_descr(f1.field->terrain_d()), curres);
-
-	//  left neighbour
-	map.get_neighbour(f, Widelands::WALK_W, &f1);
-	count += resource_value(world.terrain_descr(f1.field->terrain_r()), curres);
-
-	return count <= 3 ? 0 : f.field->nodecaps();
-}
-
-/*
-===========
-EditorIncreaseResourcesTool::handle_click_impl()
-
-increase the resources of the current field by one if
-there is not already another resource there.
-===========
-*/
 int32_t
 EditorIncreaseResourcesTool::handle_click_impl(Widelands::Map& map,
                                                   const Widelands::World& world,
                                                   Widelands::NodeAndTriangle<> const center,
                                                   EditorInteractive& /* parent */,
                                                   EditorActionArgs& args) {
-	OverlayManager & overlay_manager = map.overlay_manager();
 	Widelands::MapRegion<Widelands::Area<Widelands::FCoords> > mr
 		(map,
 			Widelands::Area<Widelands::FCoords>
@@ -106,7 +51,7 @@ EditorIncreaseResourcesTool::handle_click_impl(Widelands::Map& map,
 
 		if ((mr.location().field->get_resources() == args.cur_res ||
 				!mr.location().field->get_resources_amount()) &&
-				editor_change_resource_tool_callback(mr.location(), map, world, args.cur_res))
+				map.is_resource_valid(world, mr.location(), args.cur_res))
 			EditorSetResourcesTool::set_res_and_overlay(map, world, args, mr, amount);
 
 	} while (mr.advance(map));

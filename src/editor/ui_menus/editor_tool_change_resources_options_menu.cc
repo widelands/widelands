@@ -221,7 +221,7 @@ void EditorToolChangeResourcesOptionsMenu::selected() {
 	Widelands::EditorGameBase& egbase = eia().egbase();
 	Widelands::Map & map = egbase.map();
 	map.overlay_manager().register_overlay_callback_function(
-	   boost::bind(&editor_change_resource_tool_callback, _1, boost::ref(map), boost::ref(egbase.world()), n));
+	   boost::bind(&Widelands::Map::is_resource_valid, boost::ref(map), boost::ref(egbase.world()), _1, n));
 	map.recalc_whole_map(egbase.world());
 	select_correct_tool();
 
