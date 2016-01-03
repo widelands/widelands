@@ -2,14 +2,12 @@ dirname = path.dirname(__file__)
 
 animations = {
    idle = {
-      template = "idle_??",
-      directory = dirname,
+      pictures = path.list_files(dirname .. "idle_??.png"),
       hotspot = { 9, 23 },
       fps = 10
    },
    hacking = {
-      template = "hacking_??",
-      directory = dirname,
+      pictures = path.list_files(dirname .. "hacking_??.png"),
       hotspot = { 8, 23 },
       fps = 10
    }
@@ -23,7 +21,7 @@ tribes:new_worker_type {
    name = "empire_stonemason",
    -- TRANSLATORS: This is a worker name used in lists of workers
    descname = pgettext("empire_worker", "Stonemason"),
-   directory = dirname,
+   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    vision_range = 2,
 

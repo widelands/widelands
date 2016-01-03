@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2003, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2003, 2006-2009, 2015 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -33,10 +33,10 @@
 class Image;
 class LuaTable;
 
-#define WARE_MENU_PIC_WIDTH   24  //< Default width for ware's menu icons
-#define WARE_MENU_PIC_HEIGHT  24  //< Default height for ware's menu icons
-#define WARE_MENU_PIC_PAD_X    3  //< Default padding between menu icons
-#define WARE_MENU_PIC_PAD_Y    4  //< Default padding between menu icons
+#define WARE_MENU_PIC_WIDTH   24  //!< Default width for ware's menu icons
+#define WARE_MENU_PIC_HEIGHT  24  //!< Default height for ware's menu icons
+#define WARE_MENU_PIC_PAD_X    3  //!< Default padding between menu icons
+#define WARE_MENU_PIC_PAD_Y    4  //!< Default padding between menu icons
 
 namespace Widelands {
 
@@ -60,7 +60,7 @@ public:
   ///  and should not be configurable.
 	DescriptionIndex default_target_quantity(const std::string& tribename) const;
 
-	std::string directory() const {return directory_;}
+	std::string helptext_script() const {return helptext_script_;}
 
 	bool has_demand_check(const std::string& tribename) const;
 
@@ -88,7 +88,7 @@ private:
 	std::set<DescriptionIndex> consumers_; // Buildings that consume this ware
 	std::set<DescriptionIndex> producers_; // Buildings that produce this ware
 
-	std::string  directory_;  /// The directory where the init files are located
+	std::string  helptext_script_;  // The path and filename to the ware's helptext script
 	DISALLOW_COPY_AND_ASSIGN(WareDescr);
 };
 

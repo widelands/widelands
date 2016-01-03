@@ -5,7 +5,7 @@ tribes:new_militarysite_type {
    name = "barbarians_sentry",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("barbarians_building", "Sentry"),
-   directory = dirname,
+   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "small",
 
@@ -18,19 +18,16 @@ tribes:new_militarysite_type {
 
    animations = {
       idle = {
-         template = "idle_??",
-         directory = dirname,
+         pictures = path.list_files(dirname .. "idle_??.png"),
          hotspot = { 39, 40 },
          fps = 10
       },
       build = {
-         template = "build_??",
-         directory = dirname,
+         pictures = path.list_files(dirname .. "build_??.png"),
          hotspot = { 39, 40 },
       },
       unoccupied = {
-         template = "unoccupied_??",
-         directory = dirname,
+         pictures = path.list_files(dirname .. "unoccupied_??.png"),
          hotspot = { 39, 40 }
       }
    },
@@ -39,10 +36,6 @@ tribes:new_militarysite_type {
       expansion = true,
       fighting = true,
       mountain_conqueror = true
-   },
-
-   outputs = {
-      "barbarians_soldier",
    },
 
    max_soldiers = 2,

@@ -5,7 +5,7 @@ tribes:new_ware_type {
    name = "quartz",
    -- TRANSLATORS: This is a ware name used in lists of wares
    descname = pgettext("ware", "Quartz"),
-   directory = dirname,
+   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    default_target_quantity = {
       atlanteans = 5
@@ -16,8 +16,7 @@ tribes:new_ware_type {
 
    animations = {
       idle = {
-         template = "idle",
-         directory = dirname,
+         pictures = path.list_files(dirname .. "idle.png"),
          hotspot = { 7, 13 },
       },
    }

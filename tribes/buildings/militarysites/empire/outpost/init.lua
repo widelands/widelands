@@ -5,7 +5,7 @@ tribes:new_militarysite_type {
    name = "empire_outpost",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("empire_building", "Outpost"),
-   directory = dirname,
+   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",
    enhancement = "empire_barrier",
@@ -23,8 +23,7 @@ tribes:new_militarysite_type {
 
    animations = {
       idle = {
-         template = "idle_??",
-         directory = dirname,
+         pictures = path.list_files(dirname .. "idle_??.png"),
          hotspot = { 57, 77 }
       }
    },
@@ -32,10 +31,6 @@ tribes:new_militarysite_type {
    aihints = {
       expansion = true,
       prohibited_till=600
-   },
-
-   outputs = {
-      "empire_soldier",
    },
 
    max_soldiers = 3,

@@ -1501,7 +1501,7 @@ void Soldier::battle_update(Game & game, State &)
 						 *new Message
 							(Message::Type::kGameLogic,
 							 game.get_gametime(),
-							 _("Soldier"),
+							 descr().descname(),
 							 "pics/menu_help.png",
 							 _("Logic error"),
 							 messagetext,
@@ -1512,7 +1512,7 @@ void Soldier::battle_update(Game & game, State &)
 						 *new Message
 							(Message::Type::kGameLogic,
 							 game.get_gametime(),
-							 _("Soldier"),
+							 descr().descname(),
 							 "pics/menu_help.png",
 							 _("Logic error"),
 							 messagetext,

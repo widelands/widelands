@@ -40,8 +40,8 @@ BuildingHints::BuildingHints(std::unique_ptr<LuaTable> table)
 	  // 10 days default
 	  forced_after_(table->has_key("forced_after") ? table->get_int("forced_after") : 864000),
 	  mines_percent_(table->has_key("mines_percent") ? table->get_int("mines_percent") : 100),
-      weak_ai_limit_(table->has_key("weak_ai_limit") ? table->get_int("weak_ai_limit") : -1),
-      normal_ai_limit_(table->has_key("normal_ai_limit") ? table->get_int("normal_ai_limit") : -1),
+		very_weak_ai_limit_(table->has_key("very_weak_ai_limit") ? table->get_int("very_weak_ai_limit") : -1),
+		weak_ai_limit_(table->has_key("weak_ai_limit") ? table->get_int("weak_ai_limit") : -1),
 	  trainingsite_type_(TrainingSiteType::kNoTS) {
 
 	if (table->has_key("trainingsite_type")) {

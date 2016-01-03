@@ -2,7 +2,7 @@
 
 function immovable_helptext(tribe)
    local helptext = {
-      -- #TRANSLATORS: Helptext for a resource: Iron
+      -- TRANSLATORS#: Helptext for a resource: Iron
       default = "Iron veins contain iron ore that can be dug up by iron mines." .. " " .. "There is only a little bit of iron here."
    }
    local result = ""

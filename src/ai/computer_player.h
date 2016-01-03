@@ -52,6 +52,8 @@ struct ComputerPlayer {
 	 */
 	struct Implementation {
 		std::string name;
+		std::string descname;
+		std::string icon_filename;
 		virtual ~Implementation() {}
 		virtual ComputerPlayer * instantiate
 			(Widelands::Game &, Widelands::PlayerNumber) const = 0;

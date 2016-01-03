@@ -5,7 +5,7 @@ tribes:new_militarysite_type {
    name = "atlanteans_tower_high",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("atlanteans_building", "High Tower"),
-   directory = dirname,
+   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",
    vision_range = 21,
@@ -21,17 +21,12 @@ tribes:new_militarysite_type {
 
    animations = {
       idle = {
-         template = "idle_??",
-         directory = dirname,
+         pictures = path.list_files(dirname .. "idle_??.png"),
          hotspot = { 50, 73 },
       }
    },
 
    aihints = {},
-
-   outputs = {
-      "atlanteans_soldier",
-   },
 
    max_soldiers = 5,
    heal_per_second = 170,

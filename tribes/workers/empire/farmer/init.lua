@@ -2,25 +2,21 @@ dirname = path.dirname(__file__)
 
 animations = {
    idle = {
-      template = "idle_??",
-      directory = dirname,
+      pictures = path.list_files(dirname .. "idle_??.png"),
       hotspot = { 10, 23 }
    },
    planting = {
-      template = "plant_??",
-      directory = dirname,
+      pictures = path.list_files(dirname .. "plant_??.png"),
       hotspot = { 14, 25 },
       fps = 10
    },
    harvesting = {
-      template = "harvest_??",
-      directory = dirname,
+      pictures = path.list_files(dirname .. "harvest_??.png"),
       hotspot = { 19, 24 },
       fps = 10
    },
    gathering = {
-      template = "gather_??",
-      directory = dirname,
+      pictures = path.list_files(dirname .. "gather_??.png"),
       hotspot = { 10, 23 },
       fps = 5
    }
@@ -34,7 +30,7 @@ tribes:new_worker_type {
    name = "empire_farmer",
    -- TRANSLATORS: This is a worker name used in lists of workers
    descname = pgettext("empire_worker", "Farmer"),
-   directory = dirname,
+   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    vision_range = 2,
 
