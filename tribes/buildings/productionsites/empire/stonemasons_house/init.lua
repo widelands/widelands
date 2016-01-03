@@ -5,7 +5,7 @@ tribes:new_productionsite_type {
    name = "empire_stonemasons_house",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("empire_building", "Stonemason’s House"),
-   directory = dirname,
+   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",
 
@@ -22,13 +22,11 @@ tribes:new_productionsite_type {
 
    animations = {
       idle = {
-         template = "idle_??",
-         directory = dirname,
+         pictures = path.list_files(dirname .. "idle_??.png"),
          hotspot = { 58, 61 },
       },
       working = {
-         template = "idle_??", -- TODO(GunChleoc): No animation yet.
-         directory = dirname,
+         pictures = path.list_files(dirname .. "idle_??.png"), -- TODO(GunChleoc): No animation yet.
          hotspot = { 58, 61 },
       },
    },
@@ -36,8 +34,8 @@ tribes:new_productionsite_type {
    aihints = {
       forced_after = 400,
       prohibited_till = 400,
-      weak_ai_limit = 1,
-      normal_ai_limit = 2
+      very_weak_ai_limit = 1,
+      weak_ai_limit = 2
    },
 
    working_positions = {

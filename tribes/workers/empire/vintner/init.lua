@@ -3,8 +3,7 @@ dirname = path.dirname(__file__)
 -- TODO(GunChleoc): The animations were taken from the brewer.
 animations = {
    idle = {
-      template = "idle_??",
-      directory = dirname,
+      pictures = path.list_files(dirname .. "idle_??.png"),
       hotspot = { 8, 24 }
    }
 }
@@ -17,7 +16,7 @@ tribes:new_worker_type {
    name = "empire_vintner",
    -- TRANSLATORS: This is a worker name used in lists of workers
    descname = pgettext("empire_worker", "Vintner"),
-   directory = dirname,
+   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    vision_range = 2,
 

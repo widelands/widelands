@@ -5,7 +5,7 @@ tribes:new_warehouse_type {
    name = "barbarians_headquarters",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("barbarians_building", "Headquarters"),
-   directory = dirname,
+   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "big",
    destructible = false,
@@ -15,8 +15,7 @@ tribes:new_warehouse_type {
    -- in the player colors may be present
    animations = {
       idle = {
-         template = "idle_??",
-         directory = dirname,
+         pictures = path.list_files(dirname .. "idle_??.png"),
          hotspot = { 90, 96 },
          fps = 10
       },

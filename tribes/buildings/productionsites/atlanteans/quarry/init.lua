@@ -5,7 +5,7 @@ tribes:new_productionsite_type {
    name = "atlanteans_quarry",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("atlanteans_building", "Quarry"),
-   directory = dirname,
+   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "small",
 
@@ -19,8 +19,7 @@ tribes:new_productionsite_type {
 
    animations = {
       idle = {
-         template = "idle_??",
-         directory = dirname,
+         pictures = path.list_files(dirname .. "idle_??.png"),
          hotspot = { 40, 45 },
       },
    },

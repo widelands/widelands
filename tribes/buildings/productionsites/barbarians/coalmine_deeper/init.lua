@@ -5,7 +5,7 @@ tribes:new_productionsite_type {
    name = "barbarians_coalmine_deeper",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("barbarians_building", "Deeper Coal Mine"),
-   directory = dirname,
+   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "mine",
 
@@ -20,23 +20,19 @@ tribes:new_productionsite_type {
 
    animations = {
       idle = {
-         template = "idle_??",
-         directory = dirname,
+         pictures = path.list_files(dirname .. "idle_??.png"),
          hotspot = { 60, 37 },
       },
       build = {
-         template = "build_??",
-         directory = dirname,
+         pictures = path.list_files(dirname .. "build_??.png"),
          hotspot = { 60, 37 },
       },
       working = {
-         template = "working_??",
-         directory = dirname,
+         pictures = path.list_files(dirname .. "working_??.png"),
          hotspot = { 60, 37 },
       },
       empty = {
-         template = "empty_??",
-         directory = dirname,
+         pictures = path.list_files(dirname .. "empty_??.png"),
          hotspot = { 60, 37 },
       },
    },

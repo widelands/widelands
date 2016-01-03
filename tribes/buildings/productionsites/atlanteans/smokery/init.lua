@@ -5,7 +5,7 @@ tribes:new_productionsite_type {
    name = "atlanteans_smokery",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("atlanteans_building", "Smokery"),
-   directory = dirname,
+   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",
 
@@ -21,13 +21,11 @@ tribes:new_productionsite_type {
 
    animations = {
       idle = {
-         template = "idle_??",
-         directory = dirname,
+         pictures = path.list_files(dirname .. "idle_??.png"),
          hotspot = { 53, 58 },
       },
       working = {
-         template = "working_??",
-         directory = dirname,
+         pictures = path.list_files(dirname .. "working_??.png"),
          hotspot = { 53, 68 },
          fps = 20
       }
@@ -36,8 +34,8 @@ tribes:new_productionsite_type {
    aihints = {
       forced_after = 800,
       prohibited_till = 180,
-      weak_ai_limit = 1,
-      normal_ai_limit = 2
+      very_weak_ai_limit = 1,
+      weak_ai_limit = 2
    },
 
    working_positions = {

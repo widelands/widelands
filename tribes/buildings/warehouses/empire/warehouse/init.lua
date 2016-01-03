@@ -5,7 +5,7 @@ tribes:new_warehouse_type {
    name = "empire_warehouse",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("empire_building", "Warehouse"),
-   directory = dirname,
+   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",
 
@@ -25,8 +25,7 @@ tribes:new_warehouse_type {
 
    animations = {
       idle = {
-         template = "idle_??",
-         directory = dirname,
+         pictures = path.list_files(dirname .. "idle_??.png"),
          hotspot = { 58, 55 }
       }
    },

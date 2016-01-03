@@ -5,7 +5,7 @@ tribes:new_productionsite_type {
    name = "empire_weaving_mill",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("empire_building", "Weaving Mill"),
-   directory = dirname,
+   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "big",
 
@@ -21,23 +21,19 @@ tribes:new_productionsite_type {
 
    animations = {
       idle = {
-         template = "idle_??",
-         directory = dirname,
+         pictures = path.list_files(dirname .. "idle_??.png"),
          hotspot = { 65, 62 },
       },
       build = {
-         template = "build_??",
-         directory = dirname,
+         pictures = path.list_files(dirname .. "build_??.png"),
          hotspot = { 65, 62 },
       },
       unoccupied = {
-         template = "unoccupied_??",
-         directory = dirname,
+         pictures = path.list_files(dirname .. "unoccupied_??.png"),
          hotspot = { 65, 62 },
       },
       working = {
-         template = "working_??",
-         directory = dirname,
+         pictures = path.list_files(dirname .. "working_??.png"),
          hotspot = { 65, 62 },
          fps = 5
       },

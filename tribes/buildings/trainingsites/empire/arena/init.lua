@@ -5,7 +5,7 @@ tribes:new_trainingsite_type {
    name = "empire_arena",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("empire_building", "Arena"),
-   directory = dirname,
+   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "big",
    enhancement = "empire_colosseum",
@@ -27,22 +27,20 @@ tribes:new_trainingsite_type {
 
    animations = {
       idle = {
-         template = "idle_??",
-         directory = dirname,
+         pictures = path.list_files(dirname .. "idle_??.png"),
          hotspot = { 81, 82 }
       },
       build = {
-         template = "build_??",
-         directory = dirname,
+         pictures = path.list_files(dirname .. "build_??.png"),
          hotspot = { 82, 83 },
-         fps = 1
       }
    },
 
    aihints = {
       trainingsite_type = "basic",
-      weak_ai_limit = 1,
-      normal_ai_limit = 2
+      prohibited_till = 900,
+      very_weak_ai_limit = 1,
+      weak_ai_limit = 2
    },
 
    working_positions = {

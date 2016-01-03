@@ -2,8 +2,7 @@ dirname = path.dirname(__file__)
 
 animations = {
    idle = {
-      template = "idle_??",
-      directory = dirname,
+      pictures = path.list_files(dirname .. "idle_??.png"),
       hotspot = { 14, 21 },
       fps = 5
    }
@@ -17,7 +16,7 @@ tribes:new_carrier_type {
    name = "barbarians_carrier",
    -- TRANSLATORS: This is a worker name used in lists of workers
    descname = pgettext("barbarians_worker", "Carrier"),
-   directory = dirname,
+   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    vision_range = 2,
 

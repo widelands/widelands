@@ -72,9 +72,9 @@ struct Flag;
 //   should be trained if inputs_ get filled again.).
 struct DefaultAI : ComputerPlayer {
 	enum class Type {
+		kVeryWeak,
 		kWeak,
 		kNormal,
-		kStrong,
 	};
 
 	DefaultAI(Widelands::Game&, const Widelands::PlayerNumber, DefaultAI::Type);
@@ -95,21 +95,12 @@ struct DefaultAI : ComputerPlayer {
 
 
 	/// Implementation for Strong
-	struct StrongImpl : public ComputerPlayer::Implementation {
-		StrongImpl() {
-			/** TRANSLATORS: This is the name of an AI used in the game setup screens */
-			name = pgettext("ai_name", "Strong");
-		}
-		ComputerPlayer* instantiate(Widelands::Game& game,
-		                            Widelands::PlayerNumber const p) const override {
-			return new DefaultAI(game, p, DefaultAI::Type::kStrong);
-		}
-	};
-
 	struct NormalImpl : public ComputerPlayer::Implementation {
 		NormalImpl() {
+			name = "normal";
 			/** TRANSLATORS: This is the name of an AI used in the game setup screens */
-			name = pgettext("ai_name", "Normal");
+			descname = _("Normal AI");
+			icon_filename = "pics/ai_normal.png";
 		}
 		ComputerPlayer* instantiate(Widelands::Game& game,
 		                            Widelands::PlayerNumber const p) const override {
@@ -119,8 +110,10 @@ struct DefaultAI : ComputerPlayer {
 
 	struct WeakImpl : public ComputerPlayer::Implementation {
 		WeakImpl() {
+			name = "weak";
 			/** TRANSLATORS: This is the name of an AI used in the game setup screens */
-			name = pgettext("ai_name", "Weak");
+			descname = _("Weak AI");
+			icon_filename = "pics/ai_weak.png";
 		}
 		ComputerPlayer* instantiate(Widelands::Game& game,
 		                            Widelands::PlayerNumber const p) const override {
@@ -128,9 +121,22 @@ struct DefaultAI : ComputerPlayer {
 		}
 	};
 
-	static StrongImpl strong_impl;
+	struct VeryWeakImpl : public ComputerPlayer::Implementation {
+		VeryWeakImpl() {
+			name = "very_weak";
+			/** TRANSLATORS: This is the name of an AI used in the game setup screens */
+			descname = _("Very Weak AI");
+			icon_filename = "pics/ai_very_weak.png";
+		}
+		ComputerPlayer* instantiate(Widelands::Game& game,
+		                            Widelands::PlayerNumber const p) const override {
+			return new DefaultAI(game, p, DefaultAI::Type::kVeryWeak);
+		}
+	};
+
 	static NormalImpl normal_impl;
 	static WeakImpl weak_impl;
+	static VeryWeakImpl very_weak_impl;
 
 private:
 	void late_initialization();
@@ -323,11 +329,14 @@ private:
 	int32_t spots_;  // sum of buildable fields
 	int32_t vacant_mil_positions_;  // sum of vacant positions in militarysites and training sites
 	// statistics for training sites per type
-	uint8_t ts_basic_count_;
-	uint8_t ts_basic_const_count_;
-	uint8_t ts_advanced_count_;
-	uint8_t ts_advanced_const_count_;
-	uint8_t ts_without_trainers_;
+	int16_t ts_basic_count_;
+	int16_t ts_basic_const_count_;
+	int16_t ts_advanced_count_;
+	int16_t ts_advanced_const_count_;
+	int16_t ts_without_trainers_;
+
+	// This stores highest priority for new buildings except for militarysites
+	int32_t highest_nonmil_prio_;
 
 	// this is helping counter to track how many scheduler tasks are too delayed
 	// the purpose is to print out a warning that the game is pacing too fast

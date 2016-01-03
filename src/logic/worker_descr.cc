@@ -83,7 +83,7 @@ WorkerDescr::WorkerDescr(const std::string& init_descname,
 		}
 	}
 
-	directory_ = table.get_string("directory");
+	helptext_script_ = table.get_string("helptext_script");
 
 	// Read the walking animations
 	add_directional_animation(&walk_anims_, "walk");

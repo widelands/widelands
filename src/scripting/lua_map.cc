@@ -19,6 +19,8 @@
 
 #include "scripting/lua_map.h"
 
+#include <memory>
+
 #include <boost/format.hpp>
 
 #include "base/log.h"
@@ -66,13 +68,22 @@ namespace LuaMaps {
 
 namespace {
 
-// Pushes a lua table with (name, count) pairs for the given 'wares_map' on the
-// stack. Returns 1.
-int wares_map_to_lua(lua_State* L, const Buildcost& wares_map) {
+// Pushes a lua table with (name, count) pairs for the given 'ware_amount_container' on the
+// stack. The 'type' needs to be WARE or WORKER. Returns 1.
+int wares_or_workers_map_to_lua(lua_State* L, const Buildcost& ware_amount_map, MapObjectType type) {
 	lua_newtable(L);
-	for (const auto& cost : wares_map) {
-		lua_pushstring(L, get_egbase(L).tribes().get_ware_descr(cost.first)->name());
-		lua_pushuint32(L, cost.second);
+	for (const auto& ware_amount : ware_amount_map) {
+		switch (type) {
+		case MapObjectType::WORKER:
+			lua_pushstring(L, get_egbase(L).tribes().get_worker_descr(ware_amount.first)->name());
+			break;
+		case MapObjectType::WARE:
+			lua_pushstring(L, get_egbase(L).tribes().get_ware_descr(ware_amount.first)->name());
+			break;
+		default:
+			throw wexception("wares_or_workers_map_to_lua needs a ware or worker");
+		}
+		lua_pushuint32(L, ware_amount.second);
 		lua_settable(L, -3);
 	}
 	return 1;
@@ -1415,7 +1426,7 @@ const PropertyType<LuaBuildingDescription> LuaBuildingDescription::Properties[] 
 	PROP_RO(LuaBuildingDescription, buildable),
 	PROP_RO(LuaBuildingDescription, conquers),
 	PROP_RO(LuaBuildingDescription, destructible),
-	PROP_RO(LuaBuildingDescription, directory),
+	PROP_RO(LuaBuildingDescription, helptext_script),
 	PROP_RO(LuaBuildingDescription, enhanced),
 	PROP_RO(LuaBuildingDescription, enhanced_from),
 	PROP_RO(LuaBuildingDescription, enhancement_cost),
@@ -1462,7 +1473,7 @@ void LuaBuildingDescription::__unpersist(lua_State* L) {
 			(RO) a list of ware build cost for the building.
 */
 int LuaBuildingDescription::get_build_cost(lua_State * L) {
-	return wares_map_to_lua(L, get()->buildcost());
+	return wares_or_workers_map_to_lua(L, get()->buildcost(), MapObjectType::WARE);
 }
 
 
@@ -1500,12 +1511,12 @@ int LuaBuildingDescription::get_destructible(lua_State * L) {
 }
 
 /* RST
-	.. attribute:: directory
+	.. attribute:: helptext_script
 
-			(RO) The file path of the directory where the building's init files are located.
+			(RO) The path and filename to the building's helptext script
 */
-int LuaBuildingDescription::get_directory(lua_State * L) {
-	lua_pushstring(L, get()->directory());
+int LuaBuildingDescription::get_helptext_script(lua_State * L) {
+	lua_pushstring(L, get()->helptext_script());
 	return 1;
 }
 
@@ -1542,7 +1553,7 @@ int LuaBuildingDescription::get_enhanced_from(lua_State * L) {
 			(RO) a list of ware cost for enhancing to this building type.
 */
 int LuaBuildingDescription::get_enhancement_cost(lua_State * L) {
-	return wares_map_to_lua(L, get()->enhancement_cost());
+	return wares_or_workers_map_to_lua(L, get()->enhancement_cost(), MapObjectType::WARE);
 }
 
 /* RST
@@ -1585,7 +1596,7 @@ int LuaBuildingDescription::get_is_port(lua_State * L) {
 			(RO) a list of wares returned upon dismantling.
 */
 int LuaBuildingDescription::get_returned_wares(lua_State * L) {
-	return wares_map_to_lua(L, get()->returned_wares());
+	return wares_or_workers_map_to_lua(L, get()->returned_wares(), MapObjectType::WARE);
 }
 
 
@@ -1595,7 +1606,7 @@ int LuaBuildingDescription::get_returned_wares(lua_State * L) {
 			(RO) a list of wares returned upon dismantling an enhanced building.
 */
 int LuaBuildingDescription::get_returned_wares_enhanced(lua_State * L) {
-	return wares_map_to_lua(L, get()->returned_wares_enhanced());
+	return wares_or_workers_map_to_lua(L, get()->returned_wares_enhanced(), MapObjectType::WARE);
 }
 
 
@@ -1683,12 +1694,16 @@ ProductionSiteDescription
 */
 const char LuaProductionSiteDescription::className[] = "ProductionSiteDescription";
 const MethodType<LuaProductionSiteDescription> LuaProductionSiteDescription::Methods[] = {
+	METHOD(LuaProductionSiteDescription, consumed_wares),
+	METHOD(LuaProductionSiteDescription, produced_wares),
+	METHOD(LuaProductionSiteDescription, recruited_workers),
 	{nullptr, nullptr},
 };
 const PropertyType<LuaProductionSiteDescription> LuaProductionSiteDescription::Properties[] = {
 	PROP_RO(LuaProductionSiteDescription, inputs),
 	PROP_RO(LuaProductionSiteDescription, output_ware_types),
 	PROP_RO(LuaProductionSiteDescription, output_worker_types),
+	PROP_RO(LuaProductionSiteDescription, production_programs),
 	PROP_RO(LuaProductionSiteDescription, working_positions),
 	{nullptr, nullptr, nullptr},
 };
@@ -1754,6 +1769,22 @@ int LuaProductionSiteDescription::get_output_worker_types(lua_State * L) {
 }
 
 /* RST
+	.. attribute:: production_programs
+
+		(RO) An array with the production program names as string.
+*/
+int LuaProductionSiteDescription::get_production_programs(lua_State * L) {
+	lua_newtable(L);
+	int index = 1;
+	for (const auto& program : get()->programs()) {
+		lua_pushint32(L, index++);
+		lua_pushstring(L, program.first);
+		lua_settable(L, -3);
+	}
+	return 1;
+}
+
+/* RST
 	.. attribute:: working_positions
 		(RO) An array with :class:`WorkerDescription` containing the workers that
 		can work here with their multiplicity, i.e. for a atlantean mine this
@@ -1772,6 +1803,75 @@ int LuaProductionSiteDescription::get_working_positions(lua_State * L) {
 			lua_settable(L, -3);
 			--amount;
 		}
+	}
+	return 1;
+}
+
+
+/* RST
+	.. attribute:: consumed_wares
+
+		:arg program_name: the name of the production program that we want to get the consumed wares for
+		:type tribename: :class:`string`
+
+		(RO) Returns a table of {{ware name}, ware amount} for the wares consumed by this production program.
+			  Multiple entries in {ware name} are alternatives (OR logic)).
+*/
+int LuaProductionSiteDescription::consumed_wares(lua_State * L) {
+	std::string program_name = luaL_checkstring(L, -1);
+	const Widelands::ProductionSiteDescr::Programs & programs = get()->programs();
+	if (programs.count(program_name) == 1) {
+		const ProductionProgram& program = *programs.at(program_name);
+		lua_newtable(L);
+		int counter = 0;
+		for (const Widelands::ProductionProgram::WareTypeGroup& group: program.consumed_wares()) {
+			lua_pushnumber(L, ++counter);
+			lua_newtable(L);
+			for (const DescriptionIndex& ware_index : group.first) {
+				lua_pushstring(L, get_egbase(L).tribes().get_ware_descr(ware_index)->name());
+				lua_pushnumber(L, group.second);
+				lua_settable(L, -3);
+			}
+			lua_settable(L, -3);
+		}
+	}
+	return 1;
+}
+
+
+/* RST
+	.. attribute:: produced_wares
+
+		:arg program_name: the name of the production program that we want to get the produced wares for
+		:type tribename: :class:`string`
+
+		(RO) Returns a table of {ware name, ware amount} for the wares produced by this production program
+*/
+int LuaProductionSiteDescription::produced_wares(lua_State * L) {
+	std::string program_name = luaL_checkstring(L, -1);
+	const Widelands::ProductionSiteDescr::Programs & programs = get()->programs();
+	if (programs.count(program_name) == 1) {
+		const ProductionProgram& program = *programs.at(program_name);
+		return wares_or_workers_map_to_lua(L, program.produced_wares(), MapObjectType::WARE);
+	}
+	return 1;
+}
+
+/* RST
+	.. attribute:: recruited_workers
+
+		:arg program_name: the name of the production program that we want to get the recruited workers for
+		:type tribename: :class:`string`
+
+		(RO) Returns a table of {worker name, worker amount} for the workers recruited
+			  by this production program
+*/
+int LuaProductionSiteDescription::recruited_workers(lua_State * L) {
+	std::string program_name = luaL_checkstring(L, -1);
+	const Widelands::ProductionSiteDescr::Programs & programs = get()->programs();
+	if (programs.count(program_name) == 1) {
+		const ProductionProgram& program = *programs.at(program_name);
+		return wares_or_workers_map_to_lua(L, program.recruited_workers(), MapObjectType::WORKER);
 	}
 	return 1;
 }
@@ -2156,7 +2256,7 @@ const MethodType<LuaWareDescription> LuaWareDescription::Methods[] = {
 };
 const PropertyType<LuaWareDescription> LuaWareDescription::Properties[] = {
 	PROP_RO(LuaWareDescription, consumers),
-	PROP_RO(LuaWareDescription, directory),
+	PROP_RO(LuaWareDescription, helptext_script),
 	PROP_RO(LuaWareDescription, producers),
 	{nullptr, nullptr, nullptr},
 };
@@ -2199,12 +2299,12 @@ int LuaWareDescription::get_consumers(lua_State * L) {
 }
 
 /* RST
-	.. attribute:: directory
+	.. attribute:: helptext_script
 
-			(RO) The directory where the ware's init files are located.
+			(RO) The path and filename to the ware's helptext script
 */
-int LuaWareDescription::get_directory(lua_State * L) {
-	lua_pushstring(L, get()->directory());
+int LuaWareDescription::get_helptext_script(lua_State * L) {
+	lua_pushstring(L, get()->helptext_script());
 	return 1;
 }
 
@@ -2267,7 +2367,8 @@ const MethodType<LuaWorkerDescription> LuaWorkerDescription::Methods[] = {
 const PropertyType<LuaWorkerDescription> LuaWorkerDescription::Properties[] = {
 	PROP_RO(LuaWorkerDescription, becomes),
 	PROP_RO(LuaWorkerDescription, buildcost),
-	PROP_RO(LuaWorkerDescription, directory),
+	PROP_RO(LuaWorkerDescription, helptext_script),
+	PROP_RO(LuaWorkerDescription, is_buildable),
 	PROP_RO(LuaWorkerDescription, needed_experience),
 	{nullptr, nullptr, nullptr},
 };
@@ -2329,12 +2430,22 @@ int LuaWorkerDescription::get_buildcost(lua_State * L) {
 }
 
 /* RST
-	.. attribute:: directory
+	.. attribute:: helptext_script
 
-			(RO) The directory where the worker's init files are located.
+			(RO) The path and filename to the worker's helptext script
 */
-int LuaWorkerDescription::get_directory(lua_State * L) {
-	lua_pushstring(L, get()->directory());
+int LuaWorkerDescription::get_helptext_script(lua_State * L) {
+	lua_pushstring(L, get()->helptext_script());
+	return 1;
+}
+
+/* RST
+	.. attribute:: is_buildable
+
+		(RO) returns true if this worker is buildable
+*/
+int LuaWorkerDescription::get_is_buildable(lua_State * L) {
+	lua_pushboolean(L, get()->is_buildable());
 	return 1;
 }
 
@@ -4831,7 +4942,6 @@ void luaopen_wlmap(lua_State * L) {
 	lua_pop(L, 1); // Pop the meta table
 
 	register_class<LuaMilitarySiteDescription>(L, "map", true);
-	add_parent<LuaMilitarySiteDescription, LuaProductionSiteDescription>(L);
 	add_parent<LuaMilitarySiteDescription, LuaBuildingDescription>(L);
 	add_parent<LuaMilitarySiteDescription, LuaMapObjectDescription>(L);
 	lua_pop(L, 1); // Pop the meta table

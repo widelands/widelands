@@ -5,7 +5,7 @@ tribes:new_productionsite_type {
    name = "atlanteans_toolsmithy",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("atlanteans_building", "Toolsmithy"),
-   directory = dirname,
+   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",
 
@@ -22,13 +22,11 @@ tribes:new_productionsite_type {
 
    animations = {
       idle = {
-         template = "idle_??",
-         directory = dirname,
+         pictures = path.list_files(dirname .. "idle_??.png"),
          hotspot = { 50, 53 },
       },
       working = {
-         template = "idle_??", -- TODO(GunChleoc): No animation yet.
-         directory = dirname,
+         pictures = path.list_files(dirname .. "idle_??.png"), -- TODO(GunChleoc): No animation yet.
          hotspot = { 50, 53 },
       }
    },

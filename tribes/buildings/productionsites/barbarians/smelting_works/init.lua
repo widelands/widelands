@@ -5,7 +5,7 @@ tribes:new_productionsite_type {
    name = "barbarians_smelting_works",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("barbarians_building", "Smelting Works"),
-   directory = dirname,
+   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",
 
@@ -24,21 +24,19 @@ tribes:new_productionsite_type {
 
    animations = {
       idle = {
-         template = "idle_??",
-         directory = dirname,
+         pictures = path.list_files(dirname .. "idle_??.png"),
          hotspot = { 44, 58 },
       },
       working = {
-         template = "idle_??", -- TODO(GunChleoc): No animation yet.
-         directory = dirname,
+         pictures = path.list_files(dirname .. "idle_??.png"), -- TODO(GunChleoc): No animation yet.
          hotspot = { 44, 58 },
       },
    },
 
    aihints = {
       prohibited_till = 400,
-      weak_ai_limit = 1,
-      normal_ai_limit = 2
+      very_weak_ai_limit = 1,
+      weak_ai_limit = 2
    },
 
    working_positions = {
