@@ -668,7 +668,6 @@ Supply * Economy::_find_best_supply
 	Map & map = game.map();
 
 	available_supplies.clear();
-	std::unordered_set<uint32_t> unique_flag_providers;
 
 	for (size_t i = 0; i < m_supplies.get_nrsupplies(); ++i) {
 		Supply & supp = m_supplies[i];
@@ -687,20 +686,20 @@ Supply * Economy::_find_best_supply
 
 		const Widelands::Coords provider_position = supp.get_position(game)->base_flag().get_position();
 
-		// If ware is located on a road/flag, we need to ignore second and other wares there
-		if (provider == SupplyProviders::kFlagOrRoad) {
-			// std::unordered_map::insert return false if member already exists
-			if (!unique_flag_providers.insert(provider_position.hash()).second) {
-				continue;
-			}
-		}
-
 		const uint32_t dist = map.calc_distance(target_flag.get_position(), provider_position);
 
-		available_supplies.insert(std::pair<uint32_t, Supply*>(dist, &m_supplies[i]));
+		UniqueDistance ud;
+		ud.distance = dist;
+		ud.serial = supp.get_position(game)->serial();
+		ud.provider_type = provider;
+
+		// std::map quarantees uniqueness, practically it means that if more wares are on the same flag, only
+		// first one will be inserted into available_supplies
+		available_supplies.insert(std::pair<UniqueDistance, Supply*>(ud, &m_supplies[i]));
+
 	}
 
-	// Now available supplies are sorted by distance to requestor
+	// Now available supplies have been sorted by distance to requestor
 	for (auto& supplypair : available_supplies) {
 
 		Supply & supp = *supplypair.second;

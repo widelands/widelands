@@ -31,6 +31,7 @@
 #include "logic/instances.h"
 #include "logic/warelist.h"
 #include "logic/wareworker.h"
+#include "economy/supply.h"
 #include "economy/supply_list.h"
 #include "ui_basic/unique_window.h"
 
@@ -237,11 +238,23 @@ private:
 	static std::unique_ptr<Soldier> m_soldier_prototype;
 	UI::UniqueWindow::Registry m_optionswindow_registry;
 
-	// Map of Distance:Supply pairs
-	// Distance is meant map distance supply<->request
-	// Used to speed up _find_best_supply function, it is convenient to start testing routes from
-	// nearest supplies
-	std::multimap<uint32_t, Supply*> available_supplies;
+	// This structs is to store distance from supply to request(or), but to allow unambiguous
+	// sorting if distances are the same, we use also serial number of provider and type of provider (flag,
+	// warehouse)
+	struct UniqueDistance {
+		uint32_t distance;
+		uint32_t serial;
+		SupplyProviders provider_type;
+
+	bool operator<(const UniqueDistance& other) const {
+       return std::forward_as_tuple(distance, serial, provider_type)
+			<
+			std::forward_as_tuple(other.distance, other.serial, other.provider_type);
+		}
+	};
+	// 'list' of unique providers
+	std::map<UniqueDistance, Supply*> available_supplies;
+
 
 	DISALLOW_COPY_AND_ASSIGN(Economy);
 };
