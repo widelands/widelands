@@ -21,6 +21,7 @@
 #define WL_GRAPHIC_GL_COORDINATE_CONVERSION_H
 
 #include "base/rect.h"
+#include "base/log.h" // NOCOM(#sirver): remove again
 
 // Convert the 'rect' in pixel space into opengl space.
 enum class ConversionMode {
@@ -63,6 +64,8 @@ rect_to_gl_renderbuffer(const int width, const int height, const Rect& rect) {
 // The returned rectangle has positive width and height.
 inline FloatRect
 rect_to_gl_texture(const int width, const int height, const FloatRect& rect) {
+	log("#sirver width: %d,height: %d,rect.x: %f,rect.y: %f,rect.w: %f,rect.h: %f\n", width, height,
+	    rect.x, rect.y, rect.w, rect.h);
 	float left = rect.x;
 	float top = rect.y;
 	float right = rect.x + rect.w;
