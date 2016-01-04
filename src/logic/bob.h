@@ -48,7 +48,9 @@ struct BobProgramBase {
 
 class Bob;
 
-// Description for the Bob class.
+/**
+ * Implement MapObjectDescr for the following \ref Bob class.
+ */
 class BobDescr : public MapObjectDescr {
 public:
 	friend struct MapBobdataPacket;
@@ -255,6 +257,8 @@ public:
 
 	// default tasks
 	void reset_tasks(Game &);
+
+        // TODO correct (?) Send a signal that may switch to some other \ref Task
 	void send_signal(Game &, char const *);
 	void start_task_idle(Game &, uint32_t anim, int32_t timeout);
 
@@ -267,7 +271,8 @@ public:
 		 const int32_t         persist,
 		 const DirAnimations &,
 		 const bool            forceonlast = false,
-		 const int32_t         only_step = -1)
+		 const int32_t         only_step = -1,
+		 const bool            forceall = false)
 		__attribute__((warn_unused_result));
 
 	/// This can fail (and return false). Therefore the caller must check the
