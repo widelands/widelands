@@ -178,14 +178,6 @@ void Map::recalc_whole_map(const World& world)
 			overlay_manager().recalc_field_overlays(get_fcoords(Coords(x, y)));
 }
 
-
-/*
- * recalculates all default resources.
- *
- * This just needed for the game, not for
- * the editor. Since there, default resources
- * are not shown.
- */
 void Map::recalc_default_resources(const World& world) {
 	for (int16_t y = 0; y < m_height; ++y)
 		for (int16_t x = 0; x < m_width; ++x) {
@@ -1904,43 +1896,27 @@ bool Map::is_resource_valid
 	int32_t count = 0;
 
 	//  this field
-	count += resource_value(world.terrain_descr(f.field->terrain_r()), curres);
-	count += resource_value(world.terrain_descr(f.field->terrain_d()), curres);
+	count += world.terrain_descr(f.field->terrain_r()).is_resource_valid(curres);
+	count += world.terrain_descr(f.field->terrain_d()).is_resource_valid(curres);
 
 	//  If one of the neighbours is impassable, count its resource stronger.
 	//  top left neigbour
 	get_neighbour(f, Widelands::WALK_NW, &f1);
-	count += resource_value(world.terrain_descr(f1.field->terrain_r()), curres);
-	count += resource_value(world.terrain_descr(f1.field->terrain_d()), curres);
+	count += world.terrain_descr(f1.field->terrain_r()).is_resource_valid(curres);
+	count += world.terrain_descr(f1.field->terrain_d()).is_resource_valid(curres);
 
 	//  top right neigbour
 	get_neighbour(f, Widelands::WALK_NE, &f1);
-	count += resource_value(world.terrain_descr(f1.field->terrain_d()), curres);
+	count += world.terrain_descr(f1.field->terrain_d()).is_resource_valid(curres);
 
 	//  left neighbour
 	get_neighbour(f, Widelands::WALK_W, &f1);
-	count += resource_value(world.terrain_descr(f1.field->terrain_r()), curres);
+	count += world.terrain_descr(f1.field->terrain_r()).is_resource_valid(curres);
 
-	return count > 3;
+	return count > 1;
 }
 
-int32_t Map::resource_value(const Widelands::TerrainDescription& terrain,
-                       const Widelands::DescriptionIndex resource) {
-	if (!terrain.is_resource_valid(resource)) {
-		return -1;
-	}
-	if (terrain.get_is() & Widelands::TerrainDescription::Is::kUnwalkable) {
-		return 8;
-	}
-	return 1;
-}
-
-/***
- * Check if resources on nodes match with the terrain.
- * This is needed to deal with broken maps (see #977980).
- *
- */
-void Map::check_res_consistency(const World& world)
+void Map::ensure_resource_consistency(const World& world)
 {
 	for (MapIndex i = 0; i < max_index(); ++i)
 		if (!is_resource_valid(world, get_fcoords(m_fields[i]), m_fields[i].get_resources()))

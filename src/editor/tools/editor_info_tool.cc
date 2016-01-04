@@ -34,11 +34,11 @@
 #include "ui_basic/window.h"
 
 /// Show a window with information about the pointed at node and triangle.
-int32_t EditorInfoTool::handle_click_impl(Widelands::Map& map,
-					    const Widelands::World& world,
-					    Widelands::NodeAndTriangle<> center,
-					    EditorInteractive& parent,
-					    EditorActionArgs& /* args */) {
+int32_t EditorInfoTool::handle_click_impl(const Widelands::World& world,
+										 Widelands::NodeAndTriangle<> center,
+										 EditorInteractive& parent,
+										 EditorActionArgs* /* args */,
+										 Widelands::Map* map) {
 	UI::Window * const w =
 	    new UI::Window
 	(&parent, "field_information", 30, 30, 400, 200,
@@ -47,7 +47,7 @@ int32_t EditorInfoTool::handle_click_impl(Widelands::Map& map,
 	    new UI::MultilineTextarea
 	(w, 0, 0, w->get_inner_w(), w->get_inner_h());
 
-	Widelands::Field & f = map[center.node];
+	Widelands::Field & f = (*map)[center.node];
 
 	// *** Node info
 	std::string buf = _("Node:");
@@ -101,7 +101,7 @@ int32_t EditorInfoTool::handle_click_impl(Widelands::Map& map,
 	// *** Terrain info
 	buf += std::string("\n") + _("Terrain:") + "\n";
 
-	const Widelands::Field         & tf  = map[center.triangle];
+	const Widelands::Field         & tf  = (*map)[center.triangle];
 	const Widelands::TerrainDescription& ter = world.terrain_descr(
 	   center.triangle.t == Widelands::TCoords<>::D ? tf.terrain_d() : tf.terrain_r());
 
@@ -135,20 +135,20 @@ int32_t EditorInfoTool::handle_click_impl(Widelands::Map& map,
 
 	// *** Map info
 	buf += std::string("\n") + _("Map:") + "\n";
-	buf += "• " + (boost::format(pgettext("map_name", "Name: %s")) % map.get_name().c_str()).str() + "\n";
+	buf += "• " + (boost::format(pgettext("map_name", "Name: %s")) % map->get_name().c_str()).str() + "\n";
 	buf += "• " + (boost::format(_("Size: %1$ix%2$i"))
-					 % map.get_width() % map.get_height()).str() + "\n";
+					 % map->get_width() % map->get_height()).str() + "\n";
 
-	if (map.get_nrplayers() > 0) {
+	if (map->get_nrplayers() > 0) {
 		buf += "• " +
-				 (boost::format(_("Players: %u")) % static_cast<unsigned int>(map.get_nrplayers())).str() + "\n";
+				 (boost::format(_("Players: %u")) % static_cast<unsigned int>(map->get_nrplayers())).str() + "\n";
 	}
 	else {
 		buf += "• " + std::string(_("Players: -")) + "\n";
 	}
 
-	buf += "• " + (boost::format(_("Author: %s")) % map.get_author()).str() + "\n";
-	buf += "• " + (boost::format(_("Descr: %s")) % map.get_description().c_str()).str() + "\n";
+	buf += "• " + (boost::format(_("Author: %s")) % map->get_author()).str() + "\n";
+	buf += "• " + (boost::format(_("Descr: %s")) % map->get_description().c_str()).str() + "\n";
 
 	multiline_textarea->set_text(buf.c_str());
 

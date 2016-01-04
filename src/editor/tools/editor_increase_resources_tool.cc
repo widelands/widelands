@@ -31,40 +31,43 @@
 using Widelands::TCoords;
 
 int32_t
-EditorIncreaseResourcesTool::handle_click_impl(Widelands::Map& map,
-                                                  const Widelands::World& world,
-                                                  Widelands::NodeAndTriangle<> const center,
-                                                  EditorInteractive& /* parent */,
-                                                  EditorActionArgs& args) {
+EditorIncreaseResourcesTool::handle_click_impl(const Widelands::World& world,
+                                               Widelands::NodeAndTriangle<> const center,
+                                               EditorInteractive& /* parent */,
+                                               EditorActionArgs* args,
+											   Widelands::Map* map) {
 	Widelands::MapRegion<Widelands::Area<Widelands::FCoords> > mr
-		(map,
+		(*map,
 			Widelands::Area<Widelands::FCoords>
-				(map.get_fcoords(center.node), args.sel_radius));
+				(map->get_fcoords(center.node), args->sel_radius));
 	do {
 		int32_t amount = mr.location().field->get_resources_amount();
-		int32_t max_amount = args.cur_res != Widelands::kNoResource ?
-							 world.get_resource(args.cur_res)->max_amount() : 0;
+		int32_t max_amount = args->cur_res != Widelands::kNoResource ?
+							 world.get_resource(args->cur_res)->max_amount() : 0;
 
-		amount += args.change_by;
+		amount += args->change_by;
 		if (amount > max_amount)
 			amount = max_amount;
 
-		if ((mr.location().field->get_resources() == args.cur_res ||
+		if ((mr.location().field->get_resources() == args->cur_res ||
 				!mr.location().field->get_resources_amount()) &&
-				map.is_resource_valid(world, mr.location(), args.cur_res))
-			EditorSetResourcesTool::set_res_and_overlay(map, world, args, mr, amount);
+				map->is_resource_valid(world, mr.location(), args->cur_res)) {
+			args->orgResT.push_back(mr.location().field->get_resources());
+			args->orgRes.push_back(mr.location().field->get_resources_amount());
+			EditorSetResourcesTool::set_res_and_overlay(world, amount, args->cur_res, &mr, args, map);
+		}
 
-	} while (mr.advance(map));
+
+	} while (mr.advance(*map));
 	return mr.radius();
 }
 
-int32_t EditorIncreaseResourcesTool::handle_undo_impl(
-   Widelands::Map& map,
-   const Widelands::World& world,
-   Widelands::NodeAndTriangle<Widelands::Coords> center,
-   EditorInteractive& parent,
-   EditorActionArgs& args) {
-	return m_set_tool.handle_undo_impl(map, world, center, parent, args);
+int32_t EditorIncreaseResourcesTool::handle_undo_impl(const Widelands::World& world,
+		                                              Widelands::NodeAndTriangle<Widelands::Coords> center,
+													  EditorInteractive& parent,
+													  EditorActionArgs* args,
+													  Widelands::Map* map) {
+	return m_set_tool.handle_undo_impl(world, center, parent, args, map);
 }
 
 EditorActionArgs EditorIncreaseResourcesTool::format_args_impl(EditorInteractive & parent)

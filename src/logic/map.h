@@ -184,7 +184,19 @@ public:
 
 	void recalc_whole_map(const World& world);
 	virtual void recalc_for_field_area(const World& world, Area<FCoords>);
-	void check_res_consistency(const World& world);
+
+	/***
+	 * Ensures that resources match their adjacent terrains.
+	 */
+	void ensure_resource_consistency(const World& world);
+
+	/***
+	 * Recalculates all default resources.
+	 *
+	 * This is just needed for the game, not for
+	 * the editor. Since there, default resources
+	 * are not shown.
+	 */
 	void recalc_default_resources(const World& world);
 
 	void set_nrplayers(PlayerNumber);
@@ -383,11 +395,7 @@ public:
 	/***
 	 * Verify if a resource attached to a vertex has enough adjacent matching terrains to be valid.
 	 *
-	 * Resources on passable terrain(everything except fish) are only allowed if 5 of 6 terrains
-	 * adjacent to the resource vertex match the resource type.
-	 *
-	 * Resources on impassable terrain(fish) are only allowed if at least 2 of 6 terrains adjacent
-	 * to the resource vertex match the resource type.
+	 * To qualify as valid, resources need to be surrounded by at least two matching terrains.
 	 */
 	bool is_resource_valid
 		(const Widelands::World& world, const Widelands::TCoords<Widelands::FCoords>& c,
@@ -468,19 +476,11 @@ private:
 		 bool consider_mobs = true, NodeCaps initcaps = CAPS_NONE);
 	bool is_cycle_connected
 		(const FCoords & start, uint32_t length, const WalkingDir * dirs);
-
 	template<typename functorT>
 		void find_reachable(Area<FCoords>, const CheckStep &, functorT &);
-
 	template<typename functorT> void find(const Area<FCoords>, functorT &) const;
 
-	int32_t resource_value(const Widelands::TerrainDescription& terrain,
-	                       const Widelands::DescriptionIndex resource);
-
-
 	MapVersion m_map_version;
-
-
 };
 
 

@@ -290,7 +290,7 @@ int32_t WidelandsMapLoader::load_map_complete
 
 	m_map.recalc_whole_map(egbase.world());
 
-	m_map.check_res_consistency(egbase.world());
+	m_map.ensure_resource_consistency(egbase.world());
 
 	set_state(STATE_LOADED);
 

@@ -2,6 +2,8 @@ project (widelands)
 
 cmake_minimum_required (VERSION 2.8.7)
 
+set( CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_HOME_DIRECTORY}/bin )
+
 include("${CMAKE_SOURCE_DIR}/cmake/WlFunctions.cmake")
 
 option(OPTION_USE_GLBINDING "Use glbinding instead of GLEW" OFF)
