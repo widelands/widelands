@@ -63,7 +63,7 @@ private:
 	              const FieldsToDraw::Field& end,
 	              const Widelands::RoadType road_type,
 	              const Direction direction,
-	              int* gl_texture);
+	              uint32_t* gl_texture);
 
 	// The buffer that will contain 'vertices_' for rendering.
 	Gl::NewBuffer<PerVertexData> gl_array_buffer_;

@@ -21,17 +21,7 @@
 #define WL_GRAPHIC_GL_COORDINATE_CONVERSION_H
 
 #include "base/rect.h"
-#include "base/log.h" // NOCOM(#sirver): remove again
-
-// Convert the 'rect' in pixel space into opengl space.
-enum class ConversionMode {
-	// Convert the rect as given.
-	kLeftBottom,
-
-	// Convert the rect so that the borders are in the center
-	// of the pixels.
-	kMidPoint,
-};
+#include "graphic/gl/blit_data.h"
 
 // Converts the pixel (x, y) in a texture to a gl coordinate in [0, 1].
 inline void pixel_to_gl_texture(const int width, const int height, float* x, float* y) {
@@ -64,8 +54,6 @@ rect_to_gl_renderbuffer(const int width, const int height, const Rect& rect) {
 // The returned rectangle has positive width and height.
 inline FloatRect
 rect_to_gl_texture(const int width, const int height, const FloatRect& rect) {
-	log("#sirver width: %d,height: %d,rect.x: %f,rect.y: %f,rect.w: %f,rect.h: %f\n", width, height,
-	    rect.x, rect.y, rect.w, rect.h);
 	float left = rect.x;
 	float top = rect.y;
 	float right = rect.x + rect.w;
@@ -73,6 +61,13 @@ rect_to_gl_texture(const int width, const int height, const FloatRect& rect) {
 	pixel_to_gl_texture(width, height, &left, &top);
 	pixel_to_gl_texture(width, height, &right, &bottom);
 	return FloatRect(left, bottom, right - left, top - bottom);
+}
+
+// Convert 'blit_data' from pixel space into opengl space.
+inline FloatRect to_gl_texture(const BlitData& blit_data) {
+	return rect_to_gl_texture(
+	   blit_data.parent_width, blit_data.parent_height,
+	   FloatRect(blit_data.rect.x, blit_data.rect.y, blit_data.rect.w, blit_data.rect.h));
 }
 
 #endif  // end of include guard: WL_GRAPHIC_GL_COORDINATE_CONVERSION_H

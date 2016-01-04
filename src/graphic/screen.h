@@ -43,15 +43,15 @@ public:
 
 private:
 	void do_blit(const FloatRect& dst_rect,
-	             const BlitSource& texture,
+	             const BlitData& texture,
 	             float opacity,
 	             BlendMode blend_mode) override;
 	void do_blit_blended(const FloatRect& dst_rect,
-	                     const BlitSource& texture,
-	                     const BlitSource& mask,
+	                     const BlitData& texture,
+	                     const BlitData& mask,
 	                     const RGBColor& blend) override;
 	void do_blit_monochrome(const FloatRect& dst_rect,
-	                        const BlitSource& texture,
+	                        const BlitData& texture,
 	                        const RGBAColor& blend) override;
 	void do_draw_line(const FloatPoint& start,
 	                  const FloatPoint& end,

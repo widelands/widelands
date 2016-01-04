@@ -48,8 +48,7 @@ inline float to_opengl_z(const int z) {
 //   - we batch up by program to have maximal batching.
 //   - and we want to render frontmost objects first, so that we do not render
 //     any pixel more than once.
-static_assert(RenderQueue::Program::HIGHEST_PROGRAM_ID <= 8,
-              "Need to change sorting keys.");  // 4 bits.
+static_assert(RenderQueue::Program::HIGHEST_PROGRAM_ID <= 8, "Need to change sorting keys.");  // 4 bits.
 
 uint64_t
 make_key_opaque(const uint64_t program_id, const uint64_t z_value, const uint64_t extra_value) {
@@ -168,15 +167,15 @@ void RenderQueue::enqueue(const Item& given_item) {
 
 	switch (given_item.program_id) {
 		case Program::BLIT:
-		   extra_value = given_item.vanilla_blit_arguments.texture.name;
+		   extra_value = given_item.vanilla_blit_arguments.texture.texture_id;
 		 break;
 
 		case Program::BLIT_MONOCHROME:
-		   extra_value = given_item.monochrome_blit_arguments.texture.name;
+		   extra_value = given_item.monochrome_blit_arguments.texture.texture_id;
 			break;
 
 		case Program::BLIT_BLENDED:
-		   extra_value = given_item.blended_blit_arguments.texture.name;
+		   extra_value = given_item.blended_blit_arguments.texture.texture_id;
 			break;
 
 		case Program::LINE:

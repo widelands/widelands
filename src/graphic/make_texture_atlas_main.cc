@@ -96,20 +96,6 @@ int main(int argc, char** argv) {
 	std::unique_ptr<StreamWrite> sw(output_fs->open_stream_write("output.png"));
 	save_to_png(packed_texture.get(), sw.get(), ColorType::RGBA);
 
-	for (size_t i = 0; i < new_textures.size(); ++i) {
-		log("%s:\n", FileSystem::fs_filename(png_filenames[i].c_str()));
-		const FloatRect coords = new_textures[i]->texture_coordinates();
-		log(" original   w:%d, h:%d\n", images[i]->width(), images[i]->height());
-		log(" gl texture x:%.7f, y:%.7f, w:%.7f, h:%.7f\n", coords.x, coords.y, coords.w, coords.h);
-		log(" as float   x:%.7f, y:%.7f, w:%.7f, h:%.7f\n", coords.x * packed_texture->width(),
-		    coords.y * packed_texture->height(), coords.w * packed_texture->width(),
-		    coords.h * packed_texture->height());
-		log(" as int     x:%d, y:%d, w:%d, h:%d\n", static_cast<int>(coords.x * packed_texture->width()),
-		    static_cast<int>(coords.y * packed_texture->height()),
-		    static_cast<int>(coords.w * packed_texture->width()),
-		    static_cast<int>(coords.h * packed_texture->height()));
-	}
-
 	SDL_Quit();
 	return 0;
 }

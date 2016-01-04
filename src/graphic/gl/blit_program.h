@@ -27,7 +27,7 @@
 #include "base/rect.h"
 #include "graphic/blend_mode.h"
 #include "graphic/color.h"
-#include "graphic/gl/blit_source.h"
+#include "graphic/gl/blit_data.h"
 #include "graphic/gl/system_headers.h"
 
 class BlitProgram;
@@ -38,7 +38,7 @@ public:
 	struct Arguments {
 		FloatRect destination_rect;
 		float z_value;
-		BlitSource texture;
+		BlitData texture;
 		float opacity;
 		BlendMode blend_mode;
 	};
@@ -54,7 +54,7 @@ public:
 	// values are copied or if alpha values are used.
 	void draw(const FloatRect& gl_dest_rect,
 				 const float z_value,
-				 const BlitSource& texture,
+				 const BlitData& texture,
 				 float opacity,
 	          const BlendMode blend_mode);
 
@@ -74,7 +74,7 @@ public:
 	struct Arguments {
 		FloatRect destination_rect;
 		float z_value;
-		BlitSource texture;
+		BlitData texture;
 		RGBAColor blend;
 		BlendMode blend_mode;
 	};
@@ -89,7 +89,7 @@ public:
 	// luminance, then all values are multiplied with blend.
 	void draw(const FloatRect& gl_dest_rect,
 				 const float z_value,
-				 const BlitSource& blit_source,
+				 const BlitData& blit_source,
 				 const RGBAColor& blend);
 
 	// Draws a bunch of items at once.
@@ -108,8 +108,8 @@ public:
 	struct Arguments {
 		FloatRect destination_rect;
 		float z_value;
-		BlitSource texture;
-		BlitSource mask;
+		BlitData texture;
+		BlitData mask;
 		RGBAColor blend;
 		BlendMode blend_mode;
 	};
@@ -124,8 +124,8 @@ public:
 	// the 'blend'. This is used for blitting player colored images.
 	void draw(const FloatRect& gl_dest_rect,
 	          const float z_value,
-				 const BlitSource& texture,
-				 const BlitSource& mask,
+				 const BlitData& texture,
+				 const BlitData& mask,
 	          const RGBAColor& blend);
 
 	// Draws a bunch of items at once.

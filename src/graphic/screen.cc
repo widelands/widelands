@@ -61,7 +61,7 @@ std::unique_ptr<Texture> Screen::to_texture() const {
 }
 
 void Screen::do_blit(const FloatRect& dst_rect,
-                     const BlitSource& texture,
+                     const BlitData& texture,
                      float opacity,
                      BlendMode blend_mode) {
 	RenderQueue::Item i;
@@ -74,8 +74,8 @@ void Screen::do_blit(const FloatRect& dst_rect,
 }
 
 void Screen::do_blit_blended(const FloatRect& dst_rect,
-                             const BlitSource& texture,
-                             const BlitSource& mask,
+                             const BlitData& texture,
+                             const BlitData& mask,
                              const RGBColor& blend) {
 	RenderQueue::Item i;
 	i.destination_rect = dst_rect;
@@ -88,7 +88,7 @@ void Screen::do_blit_blended(const FloatRect& dst_rect,
 }
 
 void Screen::do_blit_monochrome(const FloatRect& dst_rect,
-                                const BlitSource& texture,
+                                const BlitData& texture,
                                 const RGBAColor& blend) {
 	RenderQueue::Item i;
 	i.program_id = RenderQueue::Program::BLIT_MONOCHROME;

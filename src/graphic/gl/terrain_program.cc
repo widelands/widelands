@@ -19,6 +19,7 @@
 
 #include "graphic/gl/terrain_program.h"
 
+#include "graphic/gl/coordinate_conversion.h"
 #include "graphic/gl/fields_to_draw.h"
 #include "graphic/texture.h"
 
@@ -178,7 +179,7 @@ void TerrainProgram::draw(uint32_t gametime,
 		   fields_to_draw.calculate_index(field.fx + (field.fy & 1) - 1, field.fy + 1);
 		if (bln_index != -1) {
 			const FloatPoint texture_offset =
-			   terrains.get(field.ter_d).get_texture(gametime).texture_coordinates().origin();
+			   to_gl_texture(terrains.get(field.ter_d).get_texture(gametime).blit_data()).origin();
 			add_vertex(fields_to_draw.at(current_index), texture_offset);
 			add_vertex(fields_to_draw.at(bln_index), texture_offset);
 			add_vertex(fields_to_draw.at(brn_index), texture_offset);
@@ -188,16 +189,17 @@ void TerrainProgram::draw(uint32_t gametime,
 		const int rn_index = fields_to_draw.calculate_index(field.fx + 1, field.fy);
 		if (rn_index != -1) {
 			const FloatPoint texture_offset =
-			   terrains.get(field.ter_r).get_texture(gametime).texture_coordinates().origin();
+			   to_gl_texture(terrains.get(field.ter_r).get_texture(gametime).blit_data()).origin();
 			add_vertex(fields_to_draw.at(current_index), texture_offset);
 			add_vertex(fields_to_draw.at(brn_index), texture_offset);
 			add_vertex(fields_to_draw.at(rn_index), texture_offset);
 		}
 	}
 
-	const Texture& texture = terrains.get(0).get_texture(0);
-	gl_draw(texture.get_gl_texture(),
-	        texture.texture_coordinates().w,
-	        texture.texture_coordinates().h,
+	const BlitData& blit_data = terrains.get(0).get_texture(0).blit_data();
+	const FloatRect texture_coordinates = to_gl_texture(blit_data);
+	gl_draw(blit_data.texture_id,
+	        texture_coordinates.w,
+	        texture_coordinates.h,
 	        z_value);
 }

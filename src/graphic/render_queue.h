@@ -29,7 +29,6 @@
 #include "base/rect.h"
 #include "graphic/blend_mode.h"
 #include "graphic/color.h"
-#include "graphic/gl/blit_source.h"
 #include "graphic/gl/fields_to_draw.h"
 #include "logic/description_maintainer.h"
 #include "logic/world/terrain_description.h"
@@ -91,18 +90,18 @@ public:
 	};
 
 	struct VanillaBlitArguments {
-		BlitSource texture;
+		BlitData texture;
 		float opacity;
 	};
 
 	struct MonochromeBlitArguments {
-		BlitSource texture;
+		BlitData texture;
 		RGBAColor blend;
 	};
 
 	struct BlendedBlitArguments {
-		BlitSource texture;
-		BlitSource mask;
+		BlitData texture;
+		BlitData mask;
 		RGBAColor blend;
 	};
 

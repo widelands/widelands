@@ -92,7 +92,7 @@ void RoadProgram::add_road(const int renderbuffer_width,
                            const FieldsToDraw::Field& end,
                            const Widelands::RoadType road_type,
                            const Direction direction,
-                           int* gl_texture) {
+                           uint32_t* gl_texture) {
 	// The thickness of the road in pixels on screen.
 	static constexpr float kRoadThicknessInPixels = 5.;
 
@@ -115,24 +115,20 @@ void RoadProgram::add_road(const int renderbuffer_width,
 	   road_type == Widelands::RoadType::kNormal ?
 	      start.road_textures->get_normal_texture(start.fx, start.fy, direction) :
 	      start.road_textures->get_busy_texture(start.fx, start.fy, direction);
-	if (*gl_texture == -1) {
-		*gl_texture = texture.get_gl_texture();
+	if (*gl_texture == 0) {
+		*gl_texture = texture.blit_data().texture_id;
 	}
 	// We assume that all road textures are in the same OpenGL texture, i.e. in
 	// one texture atlas.
-	assert(*gl_texture == texture.get_gl_texture());
+	assert(*gl_texture == texture.blit_data().texture_id);
 
-	const auto& texture_rect = texture.texture_coordinates();
-
-	// TODO(sirver): This is a hack to make sure we are sampling inside of the
-	// terrain texture. This is a common problem with OpenGL and texture atlases.
-	const float MARGIN = 5e-2;
+	const FloatRect texture_rect = to_gl_texture(texture.blit_data());
 
 	vertices_.emplace_back(PerVertexData{
 	   start.pixel_x - road_overshoot_x + road_thickness_x,
 	   start.pixel_y - road_overshoot_y + road_thickness_y,
-	   texture_rect.x + MARGIN,
-	   texture_rect.y + MARGIN,
+	   texture_rect.x,
+	   texture_rect.y,
 	   start.brightness,
 	});
 	pixel_to_gl_renderbuffer(
@@ -141,8 +137,8 @@ void RoadProgram::add_road(const int renderbuffer_width,
 	vertices_.emplace_back(PerVertexData{
 	   start.pixel_x - road_overshoot_x - road_thickness_x,
 	   start.pixel_y - road_overshoot_y - road_thickness_y,
-	   texture_rect.x + MARGIN,
-	   texture_rect.y + texture_rect.h - MARGIN,
+	   texture_rect.x,
+	   texture_rect.y + texture_rect.h,
 	   start.brightness,
 	});
 	pixel_to_gl_renderbuffer(
@@ -151,8 +147,8 @@ void RoadProgram::add_road(const int renderbuffer_width,
 	vertices_.emplace_back(PerVertexData{
 	   end.pixel_x + road_overshoot_x + road_thickness_x,
 	   end.pixel_y + road_overshoot_y + road_thickness_y,
-	   texture_rect.x + texture_rect.w - MARGIN,
-	   texture_rect.y + MARGIN,
+	   texture_rect.x + texture_rect.w,
+	   texture_rect.y,
 	   end.brightness,
 	});
 	pixel_to_gl_renderbuffer(
@@ -168,8 +164,8 @@ void RoadProgram::add_road(const int renderbuffer_width,
 	vertices_.emplace_back(PerVertexData{
 	   end.pixel_x + road_overshoot_x - road_thickness_x,
 	   end.pixel_y + road_overshoot_y - road_thickness_y,
-	   texture_rect.x + texture_rect.w - MARGIN,
-	   texture_rect.y + texture_rect.h - MARGIN,
+	   texture_rect.x + texture_rect.w,
+	   texture_rect.y + texture_rect.h,
 	   end.brightness,
 	});
 	pixel_to_gl_renderbuffer(
@@ -182,7 +178,7 @@ void RoadProgram::draw(const int renderbuffer_width,
                        float z_value) {
 	vertices_.clear();
 
-	int gl_texture = -1;
+	uint32_t gl_texture = 0;
 	for (size_t current_index = 0; current_index < fields_to_draw.size(); ++current_index) {
 		const FieldsToDraw::Field& field = fields_to_draw.at(current_index);
 
