@@ -29,9 +29,9 @@
 #include "graphic/graphic.h"
 #include "logic/map.h"
 #include "logic/widelands.h"
+#include "logic/widelands_geometry.h"
 #include "logic/world/resource_description.h"
 #include "logic/world/world.h"
-#include "logic/widelands_geometry.h"
 #include "ui_basic/button.h"
 #include "wui/overlay_manager.h"
 
