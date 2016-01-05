@@ -1480,6 +1480,7 @@ uint32_t Map::calc_distance(const Coords a, const Coords b) const
 
 
 #define BASE_COST_PER_FIELD 1800
+#define BUIDLING_CAPACTITY_INCR 500
 #define SLOPE_COST_DIVISOR  50
 #define SLOPE_COST_STEPS    8
 
@@ -1702,7 +1703,8 @@ int32_t Map::findpath
 	 int32_t           const persist,
 	 Path            &       path,
 	 const CheckStep &       checkstep,
-	 uint32_t          const flags)
+	 uint32_t          const flags,
+	 bool              const caps_sensitive)
 {
 	FCoords start;
 	FCoords end;
@@ -1799,6 +1801,16 @@ int32_t Map::findpath
 				curpf->real_cost +
 				(flags & fpBidiCost ?
 				 calc_bidi_cost(cur, *direction) : calc_cost(cur, *direction));
+			
+			//building capacity on neighb
+			if (caps_sensitive) {
+				printf (" %d size allowed, mine: %s\n",
+				neighb.field->get_caps() & BUILDCAPS_SIZEMASK,
+				(neighb.field->get_caps() & BUILDCAPS_MINE) ?" yes":" no");
+				cost += neighb.field->get_caps() & BUILDCAPS_SIZEMASK * BUIDLING_CAPACTITY_INCR;
+				cost += (neighb.field->get_caps() & BUILDCAPS_MINE) * BUIDLING_CAPACTITY_INCR;
+			}
+			
 
 			if (neighbpf.cycle != pathfields->cycle) {
 				// add to open list

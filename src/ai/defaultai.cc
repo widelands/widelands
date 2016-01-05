@@ -3040,7 +3040,7 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 
 			// value of pathcost is not important, it just indicates, that the path can be built
 			const int32_t pathcost =
-			   map.findpath(flag.get_position(), nf.flag->get_position(), 0, path, check);
+			   map.findpath(flag.get_position(), nf.flag->get_position(), 0, path, check, 0, true);
 
 			if (pathcost >= 0) {
 				if (static_cast<int32_t>(nf.cost_ - path.get_nsteps()) > min_reduction) {
