@@ -22,10 +22,10 @@
 
 ;Version String
 #define Name "Widelands"
-#define VerName "Widelands Build18"
-#define VerNumber "0.18.0.1"
+#define VerName "Widelands Build19"
+#define VerNumber "0.19.0.1"
 #define Copyright "Widelands Development Team 2001-2015"
-#define SetupFileName "Widelands-Build18-win32"
+#define SetupFileName "Widelands-Build19-win64"
 
 ;General String
 #define Publisher "Widelands Development Team"
@@ -75,8 +75,6 @@ Name: finnish;   MessagesFile: compiler:Languages\Finnish.isl
 Name: french;    MessagesFile: compiler:Languages\French.isl
 Name: german;    MessagesFile: compiler:Languages\German.isl
 Name: polish;    MessagesFile: compiler:Languages\Polish.isl
-Name: swedish;   MessagesFile: compiler:Languages\Swedish.isl
-Name: slovak;    MessagesFile: compiler:Languages\Slovak.isl
 Name: russian;   MessagesFile: compiler:Languages\Russian.isl
 Name: hungarian; MessagesFile: compiler:Languages\Hungarian.isl
 Name: dutch;     MessagesFile: compiler:Languages\Dutch.isl
@@ -92,7 +90,7 @@ Name: quicklaunchicon; Description: {cm:CreateQuickLaunchIcon}; GroupDescription
 [Files]
 Source: ..\..\..\campaigns\*;  DestDir: {app}\campaigns\; Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: " Widelands"
 Source: ..\..\..\i18n\*;       DestDir: {app}\i18n\;      Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: " Widelands"
-Source: ..\..\..\locale\*;     DestDir: {app}\locale\;    Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: " Widelands"
+Source: ..\..\..\..\build\locale\*;     DestDir: {app}\locale\;    Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: " Widelands"
 Source: ..\..\..\maps\*;       DestDir: {app}\maps\;      Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ;                  Components: " Maps"
 Source: ..\..\..\music\*;      DestDir: {app}\music\;     Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ;                  Components: " Music"
 Source: ..\..\..\pics\*;       DestDir: {app}\pics\;      Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: " Widelands"
@@ -100,13 +98,36 @@ Source: ..\..\..\sound\*;      DestDir: {app}\sound\;     Flags: recursesubdirs 
 Source: ..\..\..\tribes\*;     DestDir: {app}\tribes\;    Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: " Widelands"
 Source: ..\..\..\txts\*;       DestDir: {app}\txts\;      Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: " Widelands"
 Source: ..\..\..\world\*;     DestDir: {app}\world\;    Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: " Widelands"
-Source: ..\..\..\global\*;     DestDir: {app}\global\;    Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: " Widelands"
-Source: ..\..\..\*.dll;                                  DestDir: {app};            Flags: ignoreversion;                                                       Components: " Widelands"
-Source: ..\..\..\widelands.exe;                          DestDir: {app};            Flags: ignoreversion;                                                       Components: " Widelands"
-Source: ..\..\..\ChangeLog;                              DestDir: {app};            Flags: ignoreversion; DestName: ChangeLog.txt;                              Components: " Widelands"
-Source: ..\..\..\COPYING;                                DestDir: {app};            Flags: ignoreversion; DestName: COPYING.txt;                                Components: " Widelands"
-Source: ..\..\..\CREDITS;                                DestDir: {app};            Flags: ignoreversion; DestName: CREDITS.txt;                                Components: " Widelands"
-Source: .\WL-Editor.ico;              DestDir: {app};            Flags: ignoreversion;                                                       Components: " Widelands"
+Source: c:\msys64\mingw64\bin\libicuuc56.dll;               DestDir: {app};            Flags: ignoreversion;                                                       Components: " Widelands"
+Source: c:\msys64\mingw64\bin\libbz2-1.dll;                 DestDir: {app};            Flags: ignoreversion;                                                       Components: " Widelands"
+Source: c:\msys64\mingw64\bin\libfreetype-6.dll;            DestDir: {app};            Flags: ignoreversion;                                                       Components: " Widelands"
+Source: c:\msys64\mingw64\bin\libgcc_s_seh-1.dll;           DestDir: {app};            Flags: ignoreversion;                                                       Components: " Widelands"
+Source: c:\msys64\mingw64\bin\libglib-2.0-0.dll;            DestDir: {app};            Flags: ignoreversion;                                                       Components: " Widelands"
+Source: c:\msys64\mingw64\bin\libharfbuzz-0.dll;            DestDir: {app};            Flags: ignoreversion;                                                       Components: " Widelands"
+Source: c:\msys64\mingw64\bin\libicudt56.dll;               DestDir: {app};            Flags: ignoreversion;                                                       Components: " Widelands"
+Source: c:\msys64\mingw64\bin\libicuuc56.dll;               DestDir: {app};            Flags: ignoreversion;                                                       Components: " Widelands"
+Source: c:\msys64\mingw64\bin\libjpeg-8.dll;                DestDir: {app};            Flags: ignoreversion;                                                       Components: " Widelands"
+Source: c:\msys64\mingw64\bin\liblzma-5.dll;                DestDir: {app};            Flags: ignoreversion;                                                       Components: " Widelands"
+Source: c:\msys64\mingw64\bin\libmad-0.dll;                 DestDir: {app};            Flags: ignoreversion;                                                       Components: " Widelands"
+Source: c:\msys64\mingw64\bin\libogg-0.dll;                 DestDir: {app};            Flags: ignoreversion;                                                       Components: " Widelands"
+Source: c:\msys64\mingw64\bin\libpng16-16.dll;              DestDir: {app};            Flags: ignoreversion;                                                       Components: " Widelands"
+Source: c:\msys64\mingw64\bin\libstdc++-6.dll;              DestDir: {app};            Flags: ignoreversion;                                                       Components: " Widelands"
+Source: c:\msys64\mingw64\bin\libtiff-5.dll;                DestDir: {app};            Flags: ignoreversion;                                                       Components: " Widelands"
+Source: c:\msys64\mingw64\bin\libvorbis-0.dll;              DestDir: {app};            Flags: ignoreversion;                                                       Components: " Widelands"
+Source: c:\msys64\mingw64\bin\libvorbisfile-3.dll;          DestDir: {app};            Flags: ignoreversion;                                                       Components: " Widelands"
+Source: c:\msys64\mingw64\bin\libwebp-5.dll;                DestDir: {app};            Flags: ignoreversion;                                                       Components: " Widelands"
+Source: c:\msys64\mingw64\bin\libwinpthread-1.dll;          DestDir: {app};            Flags: ignoreversion;                                                       Components: " Widelands"
+Source: c:\msys64\mingw64\bin\SDL2.dll;                     DestDir: {app};            Flags: ignoreversion;                                                       Components: " Widelands"
+Source: c:\msys64\mingw64\bin\SDL2_image.dll;               DestDir: {app};            Flags: ignoreversion;                                                       Components: " Widelands"
+Source: c:\msys64\mingw64\bin\SDL2_mixer.dll;               DestDir: {app};            Flags: ignoreversion;                                                       Components: " Widelands"
+Source: c:\msys64\mingw64\bin\SDL2_net.dll;                 DestDir: {app};            Flags: ignoreversion;                                                       Components: " Widelands"
+Source: c:\msys64\mingw64\bin\SDL2_ttf.dll;                 DestDir: {app};            Flags: ignoreversion;                                                       Components: " Widelands"
+Source: c:\msys64\mingw64\bin\zlib1.dll;                    DestDir: {app};            Flags: ignoreversion;                                                       Components: " Widelands"
+Source: ..\..\..\..\build\src\widelands.exe;                DestDir: {app};            Flags: ignoreversion;                                                       Components: " Widelands"
+Source: ..\..\..\ChangeLog;                                 DestDir: {app};            Flags: ignoreversion; DestName: ChangeLog.txt;                              Components: " Widelands"
+Source: ..\..\..\COPYING;                                   DestDir: {app};            Flags: ignoreversion; DestName: COPYING.txt;                                Components: " Widelands"
+Source: ..\..\..\CREDITS;                                   DestDir: {app};            Flags: ignoreversion; DestName: CREDITS.txt;                                Components: " Widelands"
+Source: .\WL-Editor.ico;                                    DestDir: {app};            Flags: ignoreversion;                                                       Components: " Widelands"
 
 [INI]
 Filename: {app}\{#UrlName};  Section: InternetShortcut; Key: URL; String: {#URL}

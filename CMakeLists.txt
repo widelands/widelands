@@ -31,7 +31,11 @@ endif()
 
 SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake/Modules)
 
-set (Boost_USE_STATIC_LIBS  OFF)
+if (WIN32)
+  set (Boost_USE_STATIC_LIBS  ON)
+else()
+  set (Boost_USE_STATIC_LIBS  OFF)
+endif()
 set (Boost_USE_MULTITHREADED ON)
 set (Boost_DETAILED_FAILURE_MSG ON)
 find_package(Boost 1.48

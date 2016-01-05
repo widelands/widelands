@@ -22,6 +22,10 @@ if( WIN32 )
    FIND_PATH( GLEW_INCLUDE_DIR gl/glew.h gl/wglew.h
               PATHS c:/glew/include ${COMPILER_PATH}/PlatformSDK/Include )
    SET( GLEW_NAMES glew32 glew32s)
+   if ( OPTION_GLEW_STATIC )
+       #find static lib .a instead of dynamic lib .dll.a
+       set( CMAKE_FIND_LIBRARY_SUFFIXES .a )
+   endif( OPTION_GLEW_STATIC )	
    FIND_LIBRARY( GLEW_LIBRARY
                  NAMES ${GLEW_NAMES}
                  PATHS c:/glew/lib ${COMPILER_PATH}/PlatformSDK/Lib )
