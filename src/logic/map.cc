@@ -1480,7 +1480,7 @@ uint32_t Map::calc_distance(const Coords a, const Coords b) const
 
 
 #define BASE_COST_PER_FIELD 1800
-#define BUIDLING_CAPACTITY_INCR 500
+#define BUIDLING_CAPACTITY_INCR 1000
 #define SLOPE_COST_DIVISOR  50
 #define SLOPE_COST_STEPS    8
 
