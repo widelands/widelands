@@ -78,15 +78,15 @@ class TerrainProgram;
 class RenderQueue {
 public:
 	enum Program {
-		TERRAIN_BASE,
-		TERRAIN_DITHER,
-		TERRAIN_ROAD,
-		BLIT,
-		BLIT_MONOCHROME,
-		BLIT_BLENDED,
-		RECT,
-		LINE,
-		HIGHEST_PROGRAM_ID,
+		kTerrainBase,
+		kTerrainDither,
+		kTerrainRoad,
+		kBlit,
+		kBlitMonochrome,
+		kBlitBlended,
+		kRect,
+		kLine,
+		kHighestProgramId,
 	};
 
 	struct VanillaBlitArguments {

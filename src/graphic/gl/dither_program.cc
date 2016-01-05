@@ -111,7 +111,7 @@ DitherProgram::DitherProgram() {
 DitherProgram::~DitherProgram() {}
 
 void DitherProgram::add_vertex(const FieldsToDraw::Field& field,
-                               const int order_index,
+                               const TrianglePoint triangle_point,
                                const FloatPoint& texture_offset) {
 	vertices_.emplace_back();
 	PerVertexData& back = vertices_.back();
@@ -124,16 +124,16 @@ void DitherProgram::add_vertex(const FieldsToDraw::Field& field,
 	back.texture_offset_x = texture_offset.x;
 	back.texture_offset_y = texture_offset.y;
 
-	switch (order_index) {
-	case 0:
+	switch (triangle_point) {
+	case TrianglePoint::kTopRight:
 		back.dither_texture_x = 1.;
 		back.dither_texture_y = 1.;
 		break;
-	case 1:
+	case TrianglePoint::kTopLeft:
 		back.dither_texture_x = 0.;
 		back.dither_texture_y = 1.;
 		break;
-	case 2:
+	case TrianglePoint::kBottomMiddle:
 		back.dither_texture_x = 0.5;
 		back.dither_texture_y = 0.;
 		break;
@@ -160,9 +160,9 @@ void DitherProgram::maybe_add_dithering_triangle(
 	    other_terrain_description.dither_layer()) {
 		const FloatPoint texture_offset =
 		   to_gl_texture(other_terrain_description.get_texture(gametime).blit_data()).origin();
-		add_vertex(fields_to_draw.at(idx1), 0, texture_offset);
-		add_vertex(fields_to_draw.at(idx2), 1, texture_offset);
-		add_vertex(fields_to_draw.at(idx3), 2, texture_offset);
+		add_vertex(fields_to_draw.at(idx1), TrianglePoint::kTopRight, texture_offset);
+		add_vertex(fields_to_draw.at(idx2), TrianglePoint::kTopLeft, texture_offset);
+		add_vertex(fields_to_draw.at(idx3), TrianglePoint::kBottomMiddle, texture_offset);
 	}
 }
 

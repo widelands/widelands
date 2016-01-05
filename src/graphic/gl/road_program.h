@@ -66,7 +66,7 @@ private:
 	              uint32_t* gl_texture);
 
 	// The buffer that will contain 'vertices_' for rendering.
-	Gl::NewBuffer<PerVertexData> gl_array_buffer_;
+	Gl::Buffer<PerVertexData> gl_array_buffer_;
 
 	// The program used for drawing the roads.
 	Gl::Program gl_program_;

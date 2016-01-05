@@ -65,7 +65,7 @@ void Screen::do_blit(const FloatRect& dst_rect,
                      float opacity,
                      BlendMode blend_mode) {
 	RenderQueue::Item i;
-	i.program_id = RenderQueue::Program::BLIT;
+	i.program_id = RenderQueue::Program::kBlit;
 	i.blend_mode = blend_mode;
 	i.destination_rect = dst_rect;
 	i.vanilla_blit_arguments.texture = texture;
@@ -79,7 +79,7 @@ void Screen::do_blit_blended(const FloatRect& dst_rect,
                              const RGBColor& blend) {
 	RenderQueue::Item i;
 	i.destination_rect = dst_rect;
-	i.program_id = RenderQueue::Program::BLIT_BLENDED;
+	i.program_id = RenderQueue::Program::kBlitBlended;
 	i.blend_mode = BlendMode::UseAlpha;
 	i.blended_blit_arguments.texture = texture;
 	i.blended_blit_arguments.mask = mask;
@@ -91,7 +91,7 @@ void Screen::do_blit_monochrome(const FloatRect& dst_rect,
                                 const BlitData& texture,
                                 const RGBAColor& blend) {
 	RenderQueue::Item i;
-	i.program_id = RenderQueue::Program::BLIT_MONOCHROME;
+	i.program_id = RenderQueue::Program::kBlitMonochrome;
 	i.blend_mode = BlendMode::UseAlpha;
 	i.destination_rect = dst_rect;
 	i.monochrome_blit_arguments.texture = texture;
@@ -104,7 +104,7 @@ void Screen::do_draw_line(const FloatPoint& start,
                           const RGBColor& color,
 								  const int line_width) {
 	RenderQueue::Item i;
-	i.program_id = RenderQueue::Program::LINE;
+	i.program_id = RenderQueue::Program::kLine;
 	i.blend_mode = BlendMode::Copy;
 	i.destination_rect = FloatRect(start.x, start.y, end.x - start.x, end.y - start.y);
 	i.line_arguments.color = color;
@@ -114,7 +114,7 @@ void Screen::do_draw_line(const FloatPoint& start,
 
 void Screen::do_fill_rect(const FloatRect& dst_rect, const RGBAColor& color, BlendMode blend_mode) {
 	RenderQueue::Item i;
-	i.program_id = RenderQueue::Program::RECT;
+	i.program_id = RenderQueue::Program::kRect;
 	i.blend_mode = blend_mode;
 	i.destination_rect = dst_rect;
 	i.rect_arguments.color = color;

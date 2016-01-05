@@ -36,7 +36,7 @@ inline void pixel_to_gl_renderbuffer(const int width, const int height, float* x
 }
 
 // Converts 'rect' given on a screen of 'width' x 'height' pixels into a rect
-// in opengl coordinates in a renderbuffer, i.e. in [-1, 1]. The edges The returned
+// in opengl coordinates in a renderbuffer, i.e. in [-1, 1]. The returned
 // rectangle has positive width and height.
 inline FloatRect
 rect_to_gl_renderbuffer(const int width, const int height, const Rect& rect) {
