@@ -55,10 +55,6 @@ struct Coords {
 		}
 	};
 
-	uint32_t hash() const {
-		return  x << 16 | y;
-	};
-
 	// Move the coords to the 'new_origin'.
 	void reorigin(Coords new_origin, const Extent & extent);
 

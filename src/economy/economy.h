@@ -185,6 +185,22 @@ public:
 	void rebalance_supply() {_start_request_timer();}
 
 private:
+
+	// This structs is to store distance from supply to request(or), but to allow unambiguous
+	// sorting if distances are the same, we use also serial number of provider and type of provider (flag,
+	// warehouse)
+	struct UniqueDistance {
+		bool operator<(const UniqueDistance& other) const {
+       		return std::forward_as_tuple(distance, serial, provider_type)
+				<
+				std::forward_as_tuple(other.distance, other.serial, other.provider_type);
+		}
+
+		uint32_t distance;
+		uint32_t serial;
+		SupplyProviders provider_type;
+	};
+
 /*************/
 /* Functions */
 /*************/
@@ -238,23 +254,8 @@ private:
 	static std::unique_ptr<Soldier> m_soldier_prototype;
 	UI::UniqueWindow::Registry m_optionswindow_registry;
 
-	// This structs is to store distance from supply to request(or), but to allow unambiguous
-	// sorting if distances are the same, we use also serial number of provider and type of provider (flag,
-	// warehouse)
-	struct UniqueDistance {
-		uint32_t distance;
-		uint32_t serial;
-		SupplyProviders provider_type;
-
-	bool operator<(const UniqueDistance& other) const {
-       return std::forward_as_tuple(distance, serial, provider_type)
-			<
-			std::forward_as_tuple(other.distance, other.serial, other.provider_type);
-		}
-	};
 	// 'list' of unique providers
 	std::map<UniqueDistance, Supply*> available_supplies;
-
 
 	DISALLOW_COPY_AND_ASSIGN(Economy);
 };

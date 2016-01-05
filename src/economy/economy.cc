@@ -688,20 +688,17 @@ Supply * Economy::_find_best_supply
 
 		const uint32_t dist = map.calc_distance(target_flag.get_position(), provider_position);
 
-		UniqueDistance ud;
-		ud.distance = dist;
-		ud.serial = supp.get_position(game)->serial();
-		ud.provider_type = provider;
+		UniqueDistance ud = {dist, supp.get_position(game)->serial(), provider};
 
 		// std::map quarantees uniqueness, practically it means that if more wares are on the same flag, only
 		// first one will be inserted into available_supplies
-		available_supplies.insert(std::pair<UniqueDistance, Supply*>(ud, &m_supplies[i]));
+		available_supplies.insert(std::make_pair(ud, &m_supplies[i]));
+		//available_supplies.insert(std::pair<UniqueDistance, Supply*>(ud, &m_supplies[i])); NOCOM remove
 
 	}
 
 	// Now available supplies have been sorted by distance to requestor
 	for (auto& supplypair : available_supplies) {
-
 		Supply & supp = *supplypair.second;
 
 		Route * const route =
@@ -738,7 +735,6 @@ Supply * Economy::_find_best_supply
 
 	cost = best_cost;
 	return best_supply;
-
 }
 
 struct RequestSupplyPair {
