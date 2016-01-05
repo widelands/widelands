@@ -1480,7 +1480,7 @@ uint32_t Map::calc_distance(const Coords a, const Coords b) const
 
 
 #define BASE_COST_PER_FIELD 1800
-#define BUIDLING_CAPACTITY_INCR 1000
+#define BUIDLING_CAPACTITY_INCR 1000 //NOCOM
 #define SLOPE_COST_DIVISOR  50
 #define SLOPE_COST_STEPS    8
 
@@ -1804,11 +1804,18 @@ int32_t Map::findpath
 			
 			//building capacity on neighb
 			if (caps_sensitive) {
-				printf (" %d size allowed, mine: %s\n",
-				neighb.field->get_caps() & BUILDCAPS_SIZEMASK,
-				(neighb.field->get_caps() & BUILDCAPS_MINE) ?" yes":" no");
-				cost += neighb.field->get_caps() & BUILDCAPS_SIZEMASK * BUIDLING_CAPACTITY_INCR;
-				cost += (neighb.field->get_caps() & BUILDCAPS_MINE) * BUIDLING_CAPACTITY_INCR;
+
+				 //NOCOM
+				const int32_t buildcaps = neighb.field->get_caps() & BUILDCAPS_SIZEMASK;
+				const int32_t minecaps = (neighb.field->get_caps() & BUILDCAPS_MINE) ? 1 : 0;
+				printf (" %d size allowed, mine: %d, current cost: %5d\n",
+				buildcaps,
+				minecaps,
+				cost);
+				cost += highest_built_caps(neighb) * BUIDLING_CAPACTITY_INCR;
+				//cost += buildcaps * BUIDLING_CAPACTITY_INCR;
+				//cost += minecaps * BUIDLING_CAPACTITY_INCR;
+				printf ("   ... changed to %5d\n", cost);
 			}
 			
 
@@ -1975,6 +1982,22 @@ uint32_t Map::set_height
 	return area.radius;
 }
 
+//NOCOM
+int32_t Map::highest_built_caps(FCoords coords){
+	int32_t highest_caps=0;
+	MapRegion<Area<FCoords> > mr(*this, Area<FCoords>(coords, 2));
+		do {
+			const int32_t buildcaps = mr.location().field->get_caps() & BUILDCAPS_SIZEMASK;
+			const int32_t minecaps = (mr.location().field->get_caps() & BUILDCAPS_MINE) ? 1 : 0;
+			highest_caps = (buildcaps > highest_caps) ? buildcaps : highest_caps;
+			highest_caps = (minecaps > highest_caps) ? minecaps : highest_caps;
+			if (highest_caps==3) {
+				return 	highest_caps;
+			}		
+		} while (mr.advance(*this));
+	
+	return highest_caps;
+}
 
 /*
 ===========

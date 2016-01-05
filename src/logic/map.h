@@ -444,6 +444,7 @@ private:
 	                              bool consider_mobs = true,
 	                              NodeCaps initcaps = CAPS_NONE);
 	void check_neighbour_heights(FCoords, uint32_t & radius);
+	int32_t highest_built_caps(FCoords);
 	int calc_buildsize
 		(const World& world, const FCoords& f, bool avoidnature, bool * ismine = nullptr,
 		 bool consider_mobs = true, NodeCaps initcaps = CAPS_NONE);
