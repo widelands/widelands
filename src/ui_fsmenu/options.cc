@@ -530,10 +530,10 @@ OptionsCtrl::OptionsStruct FullscreenMenuOptions::get_values() {
 /**
  * Handles communication between window class and options
  */
-OptionsCtrl::OptionsCtrl(Section& s)
-   : opt_section_(s),
-     opt_dialog_(
-        std::unique_ptr<FullscreenMenuOptions>(new FullscreenMenuOptions(options_struct(0)))) {
+OptionsCtrl::OptionsCtrl(Section & s)
+: opt_section_(s),
+  opt_dialog_(std::unique_ptr<FullscreenMenuOptions>(new FullscreenMenuOptions(options_struct(0))))
+{
 	handle_menu();
 }
 

@@ -258,7 +258,7 @@ public:
 	// default tasks
 	void reset_tasks(Game &);
 
-	// TODO(janosch): correct (?) Send a signal that may switch to some other \ref Task
+	// TODO(feature-Hasi50): correct (?) Send a signal that may switch to some other \ref Task
 	void send_signal(Game &, char const *);
 	void start_task_idle(Game &, uint32_t anim, int32_t timeout);
 

@@ -20,6 +20,8 @@
 #ifndef WL_EDITOR_TOOLS_EDITOR_SET_RESOURCES_TOOL_H
 #define WL_EDITOR_TOOLS_EDITOR_SET_RESOURCES_TOOL_H
 
+#include "logic/mapregion.h"
+#include "logic/widelands.h"
 #include "editor/tools/editor_tool.h"
 
 ///  Decreases the resources of a node by a value.
@@ -28,19 +30,29 @@ struct EditorSetResourcesTool : public EditorTool {
 		: EditorTool(*this, *this), m_cur_res(0), m_set_to(0)
 	{}
 
-	int32_t handle_click_impl(Widelands::Map& map,
-	                          const Widelands::World& world,
+	/**
+	 * Sets the resources of the current to a fixed value
+	*/
+	int32_t handle_click_impl(const Widelands::World& world,
 	                          Widelands::NodeAndTriangle<> center,
 	                          EditorInteractive& parent,
-	                          EditorActionArgs& args) override;
+	                          EditorActionArgs* args,
+							  Widelands::Map* map) override;
 
-	int32_t handle_undo_impl(Widelands::Map& map,
-	                         const Widelands::World& world,
+	int32_t handle_undo_impl(const Widelands::World& world,
 	                         Widelands::NodeAndTriangle<> center,
 	                         EditorInteractive& parent,
-	                         EditorActionArgs& args) override;
+	                         EditorActionArgs* args,
+							 Widelands::Map* map) override;
 
 	EditorActionArgs format_args_impl(EditorInteractive & parent) override;
+
+	/**
+	 * Sets the resource amount and updates the overlay.
+	 */
+	static void set_res_and_overlay(const Widelands::World& world, int32_t amount, uint8_t resIx,
+			Widelands::MapRegion<Widelands::Area<Widelands::FCoords> > *mr,
+			EditorActionArgs* args, Widelands::Map* map);
 
 	char const * get_sel_impl() const override {
 		return "pics/fsel_editor_set_resources.png";
@@ -56,5 +68,6 @@ private:
 	Widelands::DescriptionIndex m_cur_res;
 	uint8_t m_set_to;
 };
+
 
 #endif  // end of include guard: WL_EDITOR_TOOLS_EDITOR_SET_RESOURCES_TOOL_H
