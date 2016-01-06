@@ -52,8 +52,8 @@ int32_t EditorSetResourcesTool::handle_click_impl(const Widelands::World& world,
 		if (map->is_resource_valid(world, mr.location(), args->cur_res)) {
 			args->orgResT.push_back(mr.location().field->get_resources());
 			args->orgRes.push_back(mr.location().field->get_resources_amount());
+			set_res_and_overlay(world, amount, args->cur_res, mr.location(), map);
 		}
-		set_res_and_overlay(world, amount, args->cur_res, mr.location(), map);
 	} while (mr.advance(*map));
 	return mr.radius();
 }
@@ -119,8 +119,7 @@ void EditorSetResourcesTool::set_res_and_overlay(const Widelands::World& world,
 		//  set new overlay
 		std::string str = world.get_resource(new_res)->get_editor_pic(amount);
 		const Image* pic = g_gr->images().get(str);
-		map->overlay_manager().register_overlay(fcoords, pic, 4);
+		map->overlay_manager().register_overlay(fcoords, pic, 0);
+		map->recalc_for_field_area(world, Widelands::Area<Widelands::FCoords>(fcoords, 0));
 	}
-	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
-	map->recalc_for_field_area(world, Widelands::Area<Widelands::FCoords>(fcoords, 0));
 }

@@ -40,8 +40,6 @@ EditorIncreaseResourcesTool::handle_click_impl(const Widelands::World& world,
 		(*map,
 			Widelands::Area<Widelands::FCoords>
 				(map->get_fcoords(center.node), args->sel_radius));
-	// NOCOM(#sirver): this is weird - on drag it fails
-	log("#sirver center.node.x: %d,center.node.y: %d\n", center.node.x, center.node.y);
 	do {
 		int32_t amount = mr.location().field->get_resources_amount();
 		int32_t max_amount = args->cur_res != Widelands::kNoResource ?

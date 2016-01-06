@@ -196,7 +196,7 @@ void OverlayManager::remove_overlay
 	if (overlay_map.count(c)) {
 		RegisteredOverlaysMap::iterator it = overlay_map.lower_bound(c);
 		do {
-			if (pic || it->second.pic == pic) {
+			if (!pic || it->second.pic == pic) {
 				overlay_map.erase(it);
 				it = overlay_map.lower_bound(c);
 			} else {
