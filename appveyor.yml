@@ -2,11 +2,15 @@ install:
   # Installing various utilities
   - choco install -y InnoSetup
   - set PATH=C:\msys64\mingw64\bin;C:\msys64\usr\bin;"C:\Program Files (x86)\Inno Setup 5";%PATH%
-  - cmd: "bash --login -c \"update-core\""
-  - cmd: "bash --login -c \"pacman -Syu --noconfirm\""
+  # Update complete msys2 distribution
+  # fails most of the time due slow data transfer
+  #- cmd: "bash --login -c \"update-core\""
+  #- cmd: "bash --login -c \"pacman -Syu --noconfirm\""
   - cmd: "bash --login -c \"pacman --noconfirm -S mingw-w64-x86_64-ninja mingw-w64-x86_64-boost mingw-w64-x86_64-SDL2_net mingw-w64-x86_64-SDL2_ttf mingw-w64-x86_64-SDL2_mixer mingw-w64-x86_64-SDL2_image mingw-w64-x86_64-glew\""
   # Hack, there are wrong dependencies atm in the msys2 packages (SDL_image, libwebp)  
-  - cmd: copy c:\msys64\mingw64\bin\libwebp-6.dll c:\msys64\mingw64\bin\libwebp-5.dll
+  #- cmd: copy c:\msys64\mingw64\bin\libwebp-6.dll c:\msys64\mingw64\bin\libwebp-5.dll
+  # Test git command
+  - cmd: "git show --pretty=format:%h | head -n 1"
 
 shallow_clone: true
 
