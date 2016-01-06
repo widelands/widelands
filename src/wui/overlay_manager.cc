@@ -44,6 +44,7 @@ uint8_t OverlayManager::get_overlays
 	RegisteredOverlaysMap::const_iterator it = overlay_map.lower_bound(c);
 	while (it != overlay_map.end() && it->first == c && it->second.level <= MAX_OVERLAYS_PER_NODE)
 	{
+		assert(it->second.pic);
 		overlays[num_ret].pic = it->second.pic;
 		overlays[num_ret].hotspot = it->second.hotspot;
 		if (++num_ret == MAX_OVERLAYS_PER_NODE)
@@ -195,7 +196,7 @@ void OverlayManager::remove_overlay
 	if (overlay_map.count(c)) {
 		RegisteredOverlaysMap::iterator it = overlay_map.lower_bound(c);
 		do {
-			if (!pic || it->second.pic == pic) {
+			if (pic || it->second.pic == pic) {
 				overlay_map.erase(it);
 				it = overlay_map.lower_bound(c);
 			} else {
