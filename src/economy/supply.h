@@ -62,7 +62,7 @@ struct Supply : public Trackable {
 	 * Return the type of player im/movable where the ware is now (warehouse,
 	 * flag or ship).
 	 */
-	virtual SupplyProviders provider_type(Game &) const = 0;
+	virtual SupplyProviders provider_type(Game *) const = 0;
 
 	/**
 	 * Indicates whether this supply is in storage or on its way to

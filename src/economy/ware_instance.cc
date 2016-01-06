@@ -55,7 +55,7 @@ struct IdleWareSupply : public Supply {
 	//  implementation of Supply
 	PlayerImmovable * get_position(Game &) override;
 	bool is_active() const override;
-	SupplyProviders provider_type(Game &) const override;
+	SupplyProviders provider_type(Game *) const override;
 	bool has_storage() const override;
 	void get_ware_type(WareWorker & type, DescriptionIndex & ware) const override;
 	void send_to_storage(Game &, Warehouse * wh) override;
@@ -127,10 +127,10 @@ bool IdleWareSupply::is_active() const
 	return true;
 }
 
-SupplyProviders IdleWareSupply::provider_type(Game & game) const
+SupplyProviders IdleWareSupply::provider_type(Game* game) const
 {
-	MapObject * const loc = m_ware.get_location(game);
-	if (upcast(Ship, ship, loc)) {
+	MapObject * const loc = m_ware.get_location(*game);
+	if (is_a(Ship, loc)) {
 		return SupplyProviders::kShip;
 	}
 

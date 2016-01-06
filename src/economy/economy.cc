@@ -676,7 +676,7 @@ Supply * Economy::_find_best_supply
 		if (!supp.nr_supplies(game, req))
 			continue;
 
-		const SupplyProviders provider = supp.provider_type(game);
+		const SupplyProviders provider = supp.provider_type(&game);
 
 		// We generally ignore disponible wares on ship as it is not possible to reliably
 		// calculate route (transportation time)

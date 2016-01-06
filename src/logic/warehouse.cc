@@ -183,7 +183,7 @@ PlayerImmovable * WarehouseSupply::get_position(Game &) {return m_warehouse;}
 
 /// Warehouse supplies are never active.
 bool WarehouseSupply::is_active() const {return false;}
-SupplyProviders WarehouseSupply::provider_type(Game &) const {return SupplyProviders::kWarehouse;}
+SupplyProviders WarehouseSupply::provider_type(Game *) const {return SupplyProviders::kWarehouse;}
 
 bool WarehouseSupply::has_storage() const
 {

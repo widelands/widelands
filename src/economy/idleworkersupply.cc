@@ -71,7 +71,7 @@ bool IdleWorkerSupply::is_active() const
 	return true;
 }
 
-SupplyProviders IdleWorkerSupply::provider_type(Game &) const
+SupplyProviders IdleWorkerSupply::provider_type(Game *) const
 {
 	return SupplyProviders::kFlagOrRoad;
 }
