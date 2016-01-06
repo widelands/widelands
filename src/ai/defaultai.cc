@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006-2010, 2012 by the Widelands Development Team
+ * Copyright (C) 2004, 2006-2010, 2012, 2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -70,7 +70,7 @@ constexpr int kColonyScanMinArea = 10;
 // this is intended for map developers, by default should be off
 constexpr bool kPrintStats = false;
 
-constexpr int kPersistentData  = 0; //int16_t
+constexpr int kPersistentData  = 0; //int16_t & bools
 constexpr int kMilitLoneliness = 1;
 constexpr int kAttacker        = 2;
 constexpr int kAttackMargin    = 0; //uint32_t
@@ -134,6 +134,7 @@ DefaultAI::DefaultAI(Game& ggame, PlayerNumber const pid, DefaultAI::Type const 
      ts_advanced_count_(0),
      ts_advanced_const_count_(0),
      ts_without_trainers_(0),
+     highest_nonmil_prio_(0),
      scheduler_delay_counter_(0),
      ai_personality_military_loneliness_(0),
      ai_personality_attack_margin_(0),
@@ -312,6 +313,7 @@ void DefaultAI::think() {
 
 	// Pool of tasks to be executed this run. In ideal situation it will consist of one task only.
 	std::vector<SchedulerTask> current_task_queue;
+	assert (current_task_queue.empty());
 	// Here we push SchedulerTask members into the temporary queue, providing that a task is due now and
 	// the limit (jobs_to_run_count) is not exceeded
 	for (uint8_t i = 0; i < jobs_to_run_count; i += 1) {
@@ -851,12 +853,12 @@ void DefaultAI::late_initialization() {
 
 	// Here the AI persistent data either exists - then they are read
 	// or does not exist, then they are created and saved
-	int16_t persistent_data_exists_ = 0;
+	bool persistent_data_exists_;
 	player_->get_ai_data(&persistent_data_exists_, kPersistentData);
 
-	// 0 implies no saved data exits yet
-	if (persistent_data_exists_ == 0) {
-		player_->set_ai_data(static_cast<int16_t>(1), kPersistentData);
+	// if false, generate new values
+	if (!persistent_data_exists_) {
+		player_->set_ai_data(true, kPersistentData);
 
 		// these random values to make some small differences between players
 		// they are immediately saved
@@ -1520,6 +1522,11 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 	} else {
 		needed_spots = 1300 + (productionsites.size() - 200) * 20;
 	}
+	const bool has_enough_space = (spots_ > needed_spots);
+
+	// This is a replacement for simple count of mines
+	const int32_t virtual_mines =
+	   mines_.size() + mineable_fields.size() / 25;
 
 	// *_military_scores are used as minimal score for a new military building
 	// to be built. As AI does not traverse all building fields at once, these thresholds
@@ -1533,7 +1540,18 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 	// least_military_score_ is allowed to get bellow 100 only if there is no military site in construction
 	// right now in order to (try to) avoid expansion lockup
 
-	// this is just helpers to improve readability of code
+	// Bools below are helpers to improve readability of code
+
+	// Military sites have generally higher scores so this is a helper to boost economy
+	bool needs_boost_economy = false;
+	if (highest_nonmil_prio_ > 10
+		&& has_enough_space
+		&& virtual_mines >= 5){
+			needs_boost_economy = true;
+		}
+	// resetting highest_nonmil_prio_ so it can be recalculated anew
+	highest_nonmil_prio_ = 0;
+
 	const bool too_many_ms_constructionsites =
 		(pow(msites_in_constr(), 2) > militarysites.size());
 	const bool too_many_vacant_mil =
@@ -1541,7 +1559,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 	const int32_t kUpperLimit = 275;
 	const int32_t kBottomLimit = 40; // to prevent too dense militarysites
 	// modifying least_military_score_, down if more military sites are needed and vice versa
-	if (too_many_ms_constructionsites || too_many_vacant_mil) {
+	if (too_many_ms_constructionsites || too_many_vacant_mil || needs_boost_economy) {
 		if (least_military_score_ < kUpperLimit) { //no sense to let it grow too hight
 			least_military_score_ += 2;
 		}
@@ -1580,7 +1598,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 			new_buildings_stop_ = true;
 	}
 	// 2. to not exhaust all free spots
-	if (spots_ < needed_spots) {
+	if (!has_enough_space) {
 		new_buildings_stop_ = true;
 	}
 	// 3. too keep some proportions production sites vs military sites
@@ -1616,8 +1634,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 	// set necessity for mines
 	// we use 'virtual mines', because also mine spots can be changed
 	// to mines when AI decides so
-	const int32_t virtual_mines =
-	   mines_.size() + mineable_fields.size() / 25;
+
 	resource_necessity_mines_ = 100 * (15 - virtual_mines) / 15;
 	resource_necessity_mines_ = (resource_necessity_mines_ > 100) ? 100 : resource_necessity_mines_;
 	resource_necessity_mines_ = (resource_necessity_mines_ < 20) ? 10 : resource_necessity_mines_;
@@ -1674,9 +1691,15 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 		// checking we have enough critical material on stock
 		for (uint32_t m = 0; m < bo.critical_built_mat_.size(); ++m) {
 			DescriptionIndex wt(static_cast<size_t>(bo.critical_built_mat_.at(m)));
-			// shortage = less then 3 items in warehouses
-			if (get_warehoused_stock(wt) < 3) {
+			uint32_t treshold = 3;
+			// generally trainingsites are more important
+			if (bo.type == BuildingObserver::TRAININGSITE) {
+				treshold = 2;
+			}
+
+			if (get_warehoused_stock(wt) < treshold) {
 				bo.build_material_shortage_ = true;
+				break;
 			}
 		}
 	}
@@ -1763,10 +1786,18 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 
 		} else if (bo.type == BuildingObserver::MILITARYSITE) {
 			bo.new_building_ = check_building_necessity(bo.desc->get_size(), gametime);
-		} else if  (bo.type == BuildingObserver::TRAININGSITE
-			&& // if we dont have enough build material or are above target of current ai mode
-			(bo.build_material_shortage_ || bo.aimode_limit_achieved())) {
+		} else if  (bo.type == BuildingObserver::TRAININGSITE){
+			if (bo.forced_after_ < gametime && bo.total_count() == 0) {
+				bo.new_building_ = BuildingNecessity::kForced;
+			} else if (ts_without_trainers_ || (ts_basic_const_count_ + ts_advanced_const_count_) > 0) {
 				bo.new_building_ = BuildingNecessity::kNotNeeded;
+			} else if (bo.prohibited_till_ > gametime) {
+				bo.new_building_ = BuildingNecessity::kNotNeeded;
+			} else if (bo.build_material_shortage_ || bo.aimode_limit_achieved()) {
+				bo.new_building_ = BuildingNecessity::kNotNeeded;
+			} else {
+				bo.new_building_ = BuildingNecessity::kAllowed;
+			}
 		} else if (bo.aimode_limit_achieved()) {
 			bo.new_building_ = BuildingNecessity::kNotNeeded;
 		} else {
@@ -2280,53 +2311,45 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 
 			} else if (bo.type == BuildingObserver::TRAININGSITE) {
 
-				assert(!bo.build_material_shortage_);
+				prio = 30;
+
+				if (bo.new_building_ == BuildingNecessity::kForced) {
+					prio += 30;
+				}
+
+				if (bo.trainingsite_type_ == TrainingSiteType::kBasic) {
+					prio = static_cast<int32_t>(militarysites.size())
+						- 40 * ts_basic_count_;
+				}
+
+				if (bo.trainingsite_type_ == TrainingSiteType::kAdvanced) {
+					prio = static_cast<int32_t>(militarysites.size())
+						- 50 * ts_advanced_count_;
+				}
 
 				// exclude spots on border
 				if (bf->near_border_) {
-					continue;
+					prio -= 5;
 				}
 
-				// it is a bit difficult to get a new trainer.....
-				if (ts_without_trainers_) {
-					continue;
-				}
-
-				// target is only one for both types
-				if ((ts_basic_const_count_ + ts_advanced_const_count_) > 0) {
-					continue;
-				}
-
-				// we build one basic training site for 50 militarysites
-				if (bo.trainingsite_type_ == TrainingSiteType::kBasic &&
-				    militarysites.size() / 50 < static_cast<int32_t>(ts_basic_count_)) {
-					continue;
-				}
-				// we build one advanced training site for 75 militarysites
-				if (bo.trainingsite_type_ == TrainingSiteType::kAdvanced &&
-				    militarysites.size() / 75 < static_cast<int32_t>(ts_advanced_count_)) {
-					continue;
-				}
 
 				// for type1 we need 15 productionsties
 				if (bo.trainingsite_type_ == TrainingSiteType::kBasic && productionsites.size() < 15) {
-					continue;
+					prio -= 15;
 				}
 
 				// for type2 we need 4 mines
 				if (bo.trainingsite_type_ == TrainingSiteType::kAdvanced && virtual_mines < 4) {
-					continue;
+					prio -= 15;;
 				}
-
-				prio = 10;
 
 				// take care about borders and enemies
 				if (bf->enemy_nearby_) {
-					prio /= 2;
+					prio -= 10;
 				}
 
 				if (bf->unowned_land_nearby_) {
-					prio -= bf->unowned_land_nearby_ / 10;
+					prio -= 5;
 				}
 			}
 
@@ -2367,6 +2390,10 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 			// prefer vicinity of ports (with exemption of warehouses)
 			if (bf->port_nearby_ && bo.type == BuildingObserver::MILITARYSITE) {
 				prio *= 2;
+			}
+
+			if (bo.type != BuildingObserver::MILITARYSITE && highest_nonmil_prio_ < prio) {
+				highest_nonmil_prio_ = prio;
 			}
 
 			if (prio > proposed_priority) {
@@ -2494,6 +2521,10 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 						proposed_priority = prio;
 						proposed_coords = mf->coords;
 						mine = true;
+					}
+
+					if (prio > highest_nonmil_prio_) {
+						highest_nonmil_prio_ = prio;
 					}
 				}  // end of evaluation of field
 			}
@@ -3156,26 +3187,26 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 						doing_upgrade = true;
 					}
 
-					// if the decision was not made yet, consider normal upgrade
-					if (!doing_upgrade) {
-						// compare the performance %
-						if (en_bo.current_stats_ - site.bo->current_stats_
-							> static_cast<uint32_t>(20)) {
+					if (en_bo.total_count() == 1) {
+						//if the upgrade itself can be upgraded futher, we are more willing to upgrade 2nd building
+						if (en_bo.upgrade_extends_ || en_bo.upgrade_substitutes_) {
+							if (en_bo.current_stats_ > 30) {
+								doing_upgrade = true;
+							}
+						} else if (en_bo.current_stats_ > 50) {
+							doing_upgrade = true;
+						}
+					}
+
+					if (en_bo.total_count() > 1) {
+						if (en_bo.current_stats_ > 80) {
 								doing_upgrade = true;
 						}
+					}
 
-						if ((static_cast<int32_t>(en_bo.current_stats_) > 85 &&
-						     en_bo.total_count() * 2 < site.bo->total_count()) ||
-						    (static_cast<int32_t>(en_bo.current_stats_) > 50 &&
-						     en_bo.total_count() * 4 < site.bo->total_count())) {
-
-								doing_upgrade = true;
-						}
-
-						// Dont forget about limitation of number of buildings
-						if (en_bo.cnt_limit_by_aimode_ <= en_bo.total_count() - en_bo.unconnected_count_) {
-							doing_upgrade = false;
-						}
+					// Dont forget about limitation of number of buildings
+					if (en_bo.cnt_limit_by_aimode_ <= en_bo.total_count() - en_bo.unconnected_count_) {
+						doing_upgrade = false;
 					}
 				}
 			}
@@ -4121,7 +4152,7 @@ uint32_t DefaultAI::get_stocklevel(BuildingObserver& bo) {
 
 // counts produced output on stock
 // if multiple outputs, it returns lowest value
-uint32_t DefaultAI::get_stocklevel(DescriptionIndex wt) {
+uint32_t DefaultAI::get_stocklevel(Widelands::DescriptionIndex wt) {
 	uint32_t count = 0;
 
 	for (EconomyObserver* observer : economies) {
@@ -4155,6 +4186,7 @@ void DefaultAI::count_military_vacant_positions() {
 	vacant_mil_positions_ = 0;
 	for (TrainingSiteObserver tso : trainingsites) {
 		vacant_mil_positions_ += 10 * (tso.site->soldier_capacity() - tso.site->stationed_soldiers().size());
+		vacant_mil_positions_ += (tso.site->can_start_working()) ? 0 : 10;
 	}
 	for (MilitarySiteObserver mso : militarysites) {
 		vacant_mil_positions_ += mso.site->soldier_capacity() - mso.site->stationed_soldiers().size();
@@ -4164,9 +4196,7 @@ void DefaultAI::count_military_vacant_positions() {
 // this function only check with trainingsites
 // manipulates input queues and soldier capacity
 bool DefaultAI::check_trainingsites(uint32_t gametime) {
-	if (get_taskpool_task_time(SchedulerTaskId::kCheckTrainingsites) > gametime) {
-		return false;
-	}
+
 	if (trainingsites.empty()) {
 		set_taskpool_task_time(
 			gametime + 2 * kTrainingSitesCheckInterval, SchedulerTaskId::kCheckTrainingsites);
@@ -4972,9 +5002,11 @@ void DefaultAI::lose_building(const Building& b) {
 		if (target_bo.type == BuildingObserver::TRAININGSITE) {
 			if (target_bo.trainingsite_type_ == TrainingSiteType::kBasic) {
 				ts_basic_const_count_ -= 1;
+				assert(ts_basic_const_count_ >= 0);
 			}
 			if (target_bo.trainingsite_type_ == TrainingSiteType::kAdvanced) {
 				ts_advanced_const_count_ -= 1;
+				assert(ts_advanced_const_count_ >= 0);
 			}
 		}
 
@@ -5050,9 +5082,11 @@ void DefaultAI::lose_building(const Building& b) {
 					trainingsites.erase(i);
 					if (bo.trainingsite_type_ == TrainingSiteType::kBasic) {
 						ts_basic_count_ -= 1;
+						assert(ts_basic_count_ >= 0);
 					}
 					if (bo.trainingsite_type_ == TrainingSiteType::kAdvanced) {
 						ts_advanced_count_ -= 1;
+						assert(ts_advanced_count_ >= 0);
 					}
 					break;
 				}
@@ -5317,6 +5351,8 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 	uint32_t best_target = std::numeric_limits<uint32_t>::max();
 	uint8_t best_score = 0;
 	uint32_t count = 0;
+	// sites that were either conquered or destroyed
+	std::vector<uint32_t> disappeared_sites;
 
 	for (std::map<uint32_t, EnemySiteObserver>::iterator site = enemy_sites.begin();
 	     site != enemy_sites.end();
@@ -5476,9 +5512,13 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 		}
 
 		if (site_to_be_removed < std::numeric_limits<uint32_t>::max()) {
-			enemy_sites.erase(site_to_be_removed);
-			continue;
+			disappeared_sites.push_back(site_to_be_removed);
 		}
+	}
+
+	while (!disappeared_sites.empty()) {
+		enemy_sites.erase(disappeared_sites.back());
+		disappeared_sites.pop_back();
 	}
 
 	// modifying enemysites_check_delay_,this depends on the count
@@ -5494,6 +5534,8 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 	if (best_target == std::numeric_limits<uint32_t>::max()) {
 		return false;
 	}
+
+	assert(enemy_sites.count(best_target) > 0);
 
 	// attacking
 	FCoords f = map.get_fcoords(coords_unhash(best_target));

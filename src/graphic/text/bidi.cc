@@ -22,10 +22,10 @@
 #include <map>
 #include <string>
 
-#include <unicode/unistr.h>
 #include <unicode/utypes.h>
 
 #include "base/log.h"
+#include "graphic/text/font_set.h"
 
 namespace {
 // TODO(GunChleoc): Have a look at the ICU API to see which helper functions can be gained from there.
@@ -710,6 +710,17 @@ std::string line2bidi(const char* input) {
 	return result;
 }
 
+// Helper to convert ICU strings to C++ strings
+std::string icustring2string(const icu::UnicodeString& convertme) {
+	std::string result;
+	convertme.toUTF8String(result);
+	return result;
+}
+std::string icuchar2string(const UChar& convertme) {
+	const icu::UnicodeString temp(convertme);
+	return icustring2string(temp);
+}
+
 // True if a string contains a character from a CJK code block
 bool has_cjk_character(const char* input) {
 	bool result = false;
@@ -745,11 +756,16 @@ std::vector<std::string> split_cjk_word(const char* input) {
 }
 
 bool cannot_start_line(const UChar& c) {
-	return kCannottStartLineJapanese.count(c) == 1;
+	return is_diacritic(c) || is_punctuation_char(c) || kCannottStartLineJapanese.count(c) == 1;
 }
 
 bool cannot_end_line(const UChar& c) {
 	return kCannotEndLineJapanese.count(c) == 1;
 }
+
+bool is_diacritic(const UChar& c) {
+	return kArabicDiacritics.count(c) == 1;
+}
+
 
 } // namespace UI

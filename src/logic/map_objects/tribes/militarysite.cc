@@ -46,8 +46,8 @@ MilitarySiteDescr::MilitarySiteDescr(const std::string& init_descname,
 												 const LuaTable& table,
 												 const EditorGameBase& egbase)
 	:
-	ProductionSiteDescr
-		(init_descname, "", MapObjectType::MILITARYSITE, table, egbase),
+	BuildingDescr
+		(init_descname, MapObjectType::MILITARYSITE, table, egbase),
 	m_conquer_radius     (0),
 	m_num_soldiers       (0),
 	m_heal_per_second    (0)
@@ -89,7 +89,7 @@ class MilitarySite
 */
 
 MilitarySite::MilitarySite(const MilitarySiteDescr & ms_descr) :
-ProductionSite(ms_descr),
+Building(ms_descr),
 m_didconquer  (false),
 m_capacity    (ms_descr.get_max_number_of_soldiers()),
 m_nexthealtime(0),
@@ -151,7 +151,7 @@ void MilitarySite::update_statistics_string(std::string* s)
 
 void MilitarySite::init(EditorGameBase & egbase)
 {
-	ProductionSite::init(egbase);
+	Building::init(egbase);
 
 	upcast(Game, game, &egbase);
 
@@ -180,7 +180,7 @@ Note that the workers are dealt with in the PlayerImmovable code.
 */
 void MilitarySite::set_economy(Economy * const e)
 {
-	ProductionSite::set_economy(e);
+	Building::set_economy(e);
 
 	if (m_normal_soldier_request && e)
 		m_normal_soldier_request->set_economy(e);
@@ -204,10 +204,15 @@ void MilitarySite::cleanup(EditorGameBase & egbase)
 			 	 	(egbase.map().get_fcoords(get_position()), descr().get_conquers())),
 			 m_defeating_player);
 
-	ProductionSite::cleanup(egbase);
+	Building::cleanup(egbase);
 
-	// Note that removing workers during ProductionSite::cleanup can generate
-	// new requests; that's why we delete it at the end of this function.
+	// Evict soldiers to get rid of requests
+	while (m_capacity > 0) {
+		update_soldier_request();
+		--m_capacity;
+	}
+	update_soldier_request();
+
 	m_normal_soldier_request.reset();
 	m_upgrade_soldier_request.reset();
 }
@@ -558,12 +563,12 @@ Advance the program state if applicable.
 void MilitarySite::act(Game & game, uint32_t const data)
 {
 	// TODO(unknown): do all kinds of stuff, but if you do nothing, let
-	// ProductionSite::act() handle all this. Also note, that some ProductionSite
-	// commands rely, that ProductionSite::act() is not called for a certain
+	// Building::act() handle all this. Also note, that some Building
+	// commands rely, that Building::act() is not called for a certain
 	// period (like cmdAnimation). This should be reworked.
 	// Maybe a new queueing system like MilitaryAct could be introduced.
 
-	ProductionSite::act(game, data);
+	Building::act(game, data);
 
 	const int32_t timeofgame = game.get_gametime();
 	if (m_normal_soldier_request && m_upgrade_soldier_request)
@@ -624,7 +629,7 @@ void MilitarySite::act(Game & game, uint32_t const data)
  */
 void MilitarySite::remove_worker(Worker & w)
 {
-	ProductionSite::remove_worker(w);
+	Building::remove_worker(w);
 
 	if (upcast(Soldier, soldier, &w))
 		pop_soldier_job(soldier, nullptr);

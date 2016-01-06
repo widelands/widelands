@@ -4432,9 +4432,12 @@ int LuaField::get_viewpoint_y(lua_State * L) {
 		:see also: :attr:`resource_amount`
 */
 int LuaField::get_resource(lua_State * L) {
+
+	const ResourceDescription* rDesc = get_egbase(L).world().get_resource
+			(fcoords(L).field->get_resources());
+
 	lua_pushstring
-		(L, get_egbase(L).world().get_resource
-			 (fcoords(L).field->get_resources())->name().c_str());
+		(L, rDesc ? rDesc->name().c_str() : "none");
 
 	return 1;
 }
@@ -4466,7 +4469,8 @@ int LuaField::set_resource_amount(lua_State * L) {
 	Field * field = fcoords(L).field;
 	int32_t res = field->get_resources();
 	int32_t amount = luaL_checkint32(L, -1);
-	int32_t max_amount = get_egbase(L).world().get_resource(res)->max_amount();
+	const ResourceDescription * resDesc = get_egbase(L).world().get_resource(res);
+	int32_t max_amount = resDesc ? resDesc->max_amount() : 0;
 
 	if (amount < 0 || amount > max_amount)
 		report_error(L, "Illegal amount: %i, must be >= 0 and <= %i", amount, max_amount);
@@ -4938,7 +4942,6 @@ void luaopen_wlmap(lua_State * L) {
 	lua_pop(L, 1); // Pop the meta table
 
 	register_class<LuaMilitarySiteDescription>(L, "map", true);
-	add_parent<LuaMilitarySiteDescription, LuaProductionSiteDescription>(L);
 	add_parent<LuaMilitarySiteDescription, LuaBuildingDescription>(L);
 	add_parent<LuaMilitarySiteDescription, LuaMapObjectDescription>(L);
 	lua_pop(L, 1); // Pop the meta table

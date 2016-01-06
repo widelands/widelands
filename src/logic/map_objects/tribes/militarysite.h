@@ -23,8 +23,9 @@
 #include <memory>
 
 #include "base/macros.h"
+#include "economy/request.h"
 #include "logic/map_objects/attackable.h"
-#include "logic/map_objects/tribes/productionsite.h"
+#include "logic/map_objects/tribes/building.h"
 #include "logic/map_objects/tribes/requirements.h"
 #include "logic/map_objects/tribes/soldiercontrol.h"
 #include "scripting/lua_table.h"
@@ -34,7 +35,7 @@ namespace Widelands {
 class Soldier;
 class World;
 
-class MilitarySiteDescr : public ProductionSiteDescr {
+class MilitarySiteDescr : public BuildingDescr {
 public:
 	MilitarySiteDescr(const std::string& init_descname, const LuaTable& t, const EditorGameBase& egbase);
 	~MilitarySiteDescr() override {}
@@ -65,7 +66,7 @@ private:
 };
 
 class MilitarySite :
-	public ProductionSite, public SoldierControl, public Attackable
+	public Building, public SoldierControl, public Attackable
 {
 	friend class MapBuildingdataPacket;
 	MO_DESCR(MilitarySiteDescr)

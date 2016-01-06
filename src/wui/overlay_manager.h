@@ -66,7 +66,7 @@ struct OverlayManager {
 	};
 
 	using CallbackFn =
-		boost::function<int32_t(const Widelands::TCoords<Widelands::FCoords>& coordinates)>;
+		boost::function<bool(const Widelands::TCoords<Widelands::FCoords>& coordinates)>;
 
 	OverlayManager();
 

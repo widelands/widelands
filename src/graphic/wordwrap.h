@@ -33,6 +33,11 @@ namespace UI {
  * Helper struct that provides word wrapping and related functionality.
  */
 struct WordWrap {
+	enum class Mode {
+		kDisplay,
+		kEditor
+	};
+
 	WordWrap();
 	WordWrap(const TextStyle & style, uint32_t wrapwidth = std::numeric_limits<uint32_t>::max());
 
@@ -41,10 +46,11 @@ struct WordWrap {
 
 	uint32_t wrapwidth() const;
 
-	void wrap(const std::string & text);
+	void wrap(const std::string & text, WordWrap::Mode mode = WordWrap::Mode::kDisplay);
 
 	uint32_t width() const;
 	uint32_t height() const;
+	void set_draw_caret(bool draw_it) {m_draw_caret = draw_it;}
 
 	void draw
 		(RenderTarget & dst, Point where, Align align = Align_Left,
@@ -60,17 +66,23 @@ private:
 		std::string text;
 
 		/// Starting offset of this line within the original un-wrapped text
-		uint32_t start;
+		size_t start;
 	};
 
 	void compute_end_of_line
 		(const std::string & text,
 		 std::string::size_type line_start,
 		 std::string::size_type & line_end,
-		 std::string::size_type & next_line_start);
+		 std::string::size_type & next_line_start,
+		 uint32_t safety_margin);
+
+	bool line_fits(const std::string& text, uint32_t safety_margin) const;
 
 	TextStyle m_style;
 	uint32_t m_wrapwidth;
+	bool m_draw_caret;
+
+	WordWrap::Mode mode_;
 
 	std::vector<LineData> m_lines;
 };
