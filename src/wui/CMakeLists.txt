@@ -163,6 +163,7 @@ wl_library(wui
     watchwindow.h
   USES_SDL2
   DEPENDS
+    ai
     base_exceptions
     base_geometry
     base_i18n

@@ -19,6 +19,8 @@
 
 #include "graphic/gl/draw_line_program.h"
 
+#include <algorithm>
+#include <cassert>
 #include <vector>
 
 #include "base/log.h"
@@ -29,22 +31,32 @@ const char kDrawLineVertexShader[] = R"(
 #version 120
 
 // Attributes.
-attribute vec2 attr_position;
+attribute vec3 attr_position;
+attribute vec3 attr_color;
+
+varying vec3 var_color;
 
 void main() {
-	gl_Position = vec4(attr_position, 0., 1.);
+	var_color = attr_color;
+	gl_Position = vec4(attr_position, 1.);
 }
 )";
 
 const char kDrawLineFragmentShader[] = R"(
 #version 120
 
-uniform ivec3 u_color;
+varying vec3 var_color;
 
 void main() {
-	gl_FragColor = vec4(vec3(u_color) / 255., 1.);
+	gl_FragColor = vec4(var_color.rgb, 1.);
 }
 )";
+
+struct DrawBatch {
+	int offset;
+	int count;
+	int line_width;
+};
 
 }  // namespace
 
@@ -58,37 +70,81 @@ DrawLineProgram::DrawLineProgram() {
 	gl_program_.build(kDrawLineVertexShader, kDrawLineFragmentShader);
 
 	attr_position_ = glGetAttribLocation(gl_program_.object(), "attr_position");
-	u_color_ = glGetUniformLocation(gl_program_.object(), "u_color");
-
+	attr_color_ = glGetAttribLocation(gl_program_.object(), "attr_color");
 }
 
-void DrawLineProgram::draw(const float x1,
-                           const float y1,
-                           const float x2,
-                           const float y2,
+void DrawLineProgram::draw(const FloatPoint& start,
+                           const FloatPoint& end,
+                           const float z_value,
                            const RGBColor& color,
-                           const int line_width) {
+									int line_width) {
+	draw({Arguments{FloatRect(start.x, start.y, end.x - start.x, end.y - start.y),
+	                z_value,
+	                color,
+						 static_cast<uint8_t>(line_width),
+	                BlendMode::Copy}});
+}
+
+void DrawLineProgram::draw(std::vector<Arguments> arguments) {
+	size_t i = 0;
+
 	glUseProgram(gl_program_.object());
 	glEnableVertexAttribArray(attr_position_);
+	glEnableVertexAttribArray(attr_color_);
 
-	const std::vector<PerVertexData> vertices = {{x1, y1}, {x2, y2}};
+	gl_array_buffer_.bind();
 
-	glBindBuffer(GL_ARRAY_BUFFER, gl_array_buffer_.object());
-	glBufferData(
-	   GL_ARRAY_BUFFER, sizeof(PerVertexData) * vertices.size(), vertices.data(), GL_STREAM_DRAW);
-	glVertexAttribPointer(attr_position_,
-								 2,
-								 GL_FLOAT,
-								 GL_FALSE,
-								 sizeof(PerVertexData),
-								 reinterpret_cast<void*>(0));
+	Gl::vertex_attrib_pointer(attr_position_, 3, sizeof(PerVertexData), offsetof(PerVertexData, gl_x));
+	Gl::vertex_attrib_pointer(attr_color_, 3, sizeof(PerVertexData), offsetof(PerVertexData, color_r));
 
-	glUniform3i(u_color_, color.r, color.g, color.b);
+	vertices_.clear();
 
-	glLineWidth(line_width);
-	glDrawArrays(GL_LINES, 0, 2);
+	std::vector<DrawBatch> draw_batches;
+	int offset = 0;
+	while (i < arguments.size()) {
+		const Arguments& template_args = arguments[i];
+
+		while (i < arguments.size()) {
+			const Arguments& current_args = arguments[i];
+			if (current_args.line_width != template_args.line_width) {
+				break;
+			}
+			// We do not support anything else for drawing lines, really.
+			assert(current_args.blend_mode == BlendMode::Copy);
+
+			vertices_.emplace_back(current_args.destination_rect.x,
+			                       current_args.destination_rect.y,
+			                       current_args.z_value,
+			                       current_args.color.r / 255.,
+			                       current_args.color.g / 255.,
+			                       current_args.color.b / 255.);
+
+			vertices_.emplace_back(current_args.destination_rect.x + current_args.destination_rect.w,
+			                       current_args.destination_rect.y + current_args.destination_rect.h,
+			                       current_args.z_value,
+			                       current_args.color.r / 255.,
+			                       current_args.color.g / 255.,
+			                       current_args.color.b / 255.);
+			++i;
+		}
+
+		draw_batches.emplace_back(
+		   DrawBatch{offset, static_cast<int>(vertices_.size() - offset), template_args.line_width});
+		offset = vertices_.size();
+	}
+
+	gl_array_buffer_.update(vertices_);
+
+	// Now do the draw calls.
+	for (const auto& draw_arg : draw_batches) {
+		glLineWidth(draw_arg.line_width);
+		glDrawArrays(GL_LINES, draw_arg.offset, draw_arg.count);
+	}
 
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
+
 	glDisableVertexAttribArray(attr_position_);
+	glDisableVertexAttribArray(attr_color_);
+
 	glUseProgram(0);
 }

@@ -103,7 +103,6 @@ FullscreenMenuOptions::FullscreenMenuOptions
 	buth_    (get_h() * 9 / 200),
 	hmargin_ (get_w() * 19 / 200),
 	padding_ (10),
-	space_   (25),
 	tab_panel_width_(get_inner_w() - 2 * hmargin_),
 	column_width_(tab_panel_width_ - padding_),
 	tab_panel_y_(get_h() * 14 / 100),

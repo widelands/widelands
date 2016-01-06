@@ -500,8 +500,10 @@ void SoldierList::eject(const Soldier * soldier)
 }
 
 void SoldierList::set_soldier_preference(int32_t changed_to) {
+#ifndef NDEBUG
 	upcast(Widelands::MilitarySite, ms, &m_building);
 	assert(ms);
+#endif
 	m_igb.game().send_player_militarysite_set_soldier_preference
 		(m_building, changed_to == 0 ?
 			Widelands::MilitarySite::kPrefersRookies:
