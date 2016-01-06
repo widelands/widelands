@@ -28,38 +28,37 @@
 /**
  * Deletes the immovable at the given location
 */
-int32_t EditorDeleteImmovableTool::handle_click_impl(Widelands::Map& map,
-                                                        const Widelands::World&,
-                                                        Widelands::NodeAndTriangle<> const center,
-                                                        EditorInteractive& parent,
-                                                        EditorActionArgs& args) {
+int32_t EditorDeleteImmovableTool::handle_click_impl(const Widelands::World&,
+                                                     Widelands::NodeAndTriangle<> const center,
+                                                     EditorInteractive& parent,
+                                                     EditorActionArgs* args,
+													 Widelands::Map* map) {
 	Widelands::EditorGameBase & egbase = parent.egbase();
 	Widelands::MapRegion<Widelands::Area<Widelands::FCoords> > mr
-	(map,
+	(*map,
 	 Widelands::Area<Widelands::FCoords>
-	 (map.get_fcoords(center.node), args.sel_radius));
+	 (map->get_fcoords(center.node), args->sel_radius));
 	do if
 		(upcast
 		        (Widelands::Immovable,
 		         immovable,
 		         mr.location().field->get_immovable()))
 		{
-			args.oimmov_types.push_back(immovable->descr().name());
+			args->oimmov_types.push_back(immovable->descr().name());
 			immovable->remove(egbase); //  Delete no buildings or stuff.
 		} else {
-			args.oimmov_types.push_back("");
+			args->oimmov_types.push_back("");
 		}
-	while (mr.advance(map));
+	while (mr.advance(*map));
 	return mr.radius() + 2;
 }
 
-int32_t EditorDeleteImmovableTool::handle_undo_impl(
-   Widelands::Map& map,
-   const Widelands::World& world,
-   Widelands::NodeAndTriangle<Widelands::Coords> center,
-   EditorInteractive& parent,
-   EditorActionArgs& args) {
-	return parent.tools.place_immovable.handle_undo_impl(map, world, center, parent, args);
+int32_t EditorDeleteImmovableTool::handle_undo_impl(const Widelands::World& world,
+													Widelands::NodeAndTriangle<Widelands::Coords> center,
+													EditorInteractive& parent,
+													EditorActionArgs* args,
+													Widelands::Map* map) {
+	return parent.tools.place_immovable.handle_undo_impl(world, center, parent, args, map);
 }
 
 EditorActionArgs EditorDeleteImmovableTool::format_args_impl(EditorInteractive & parent)

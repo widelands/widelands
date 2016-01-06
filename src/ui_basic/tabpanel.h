@@ -35,11 +35,16 @@ struct TabPanel;
 struct Tab : public NamedPanel {
 	friend struct TabPanel;
 
+	/** If title is not empty, this will be a textual tab.
+	 *  In that case, pic will need to be the rendered title */
 	Tab
 		(TabPanel * parent,
-		 uint32_t,
+		 size_t id,
+		 int32_t x,
+		 int32_t w,
 		 const std::string & name,
-		 const Image*,
+		 const std::string & title,
+		 const Image* pic,
 		 const std::string & gtooltip,
 		 Panel             * gpanel);
 
@@ -47,12 +52,18 @@ struct Tab : public NamedPanel {
 	void activate();
 
 private:
-	TabPanel * m_parent;
-	uint32_t    m_id;
+	// Leave handling the mouse move to the TabPanel.
+	bool handle_mousemove(uint8_t, int32_t, int32_t, int32_t, int32_t) override {return false;}
+	// Play click
+	bool handle_mousepress(uint8_t, int32_t, int32_t) override;
+
+	TabPanel* parent;
+	uint32_t id;
 
 	const Image* pic;
+	std::string title;
 	std::string tooltip;
-	Panel     * panel;
+	Panel* panel;
 };
 
 /**
@@ -66,15 +77,30 @@ private:
  *
  */
 struct TabPanel : public Panel {
+	enum class Type {
+		kNoBorder,
+		kBorder
+	};
+
 	friend struct Tab;
 
-	TabPanel(Panel * parent, int32_t x, int32_t y, const Image* background);
+	TabPanel(Panel * parent, int32_t x, int32_t y, const Image* background,
+				TabPanel::Type border_type = TabPanel::Type::kNoBorder);
 	// For Fullscreen menus
 	TabPanel
 		(Panel * parent,
 		 int32_t x, int32_t y, int32_t w, int32_t h,
-		 const Image* background);
+		 const Image* background,
+		 TabPanel::Type border_type = TabPanel::Type::kNoBorder);
 
+	/** Add textual tab */
+	uint32_t add
+		(const std::string & name,
+		 const std::string & title,
+		 Panel             * panel,
+		 const std::string & tooltip = std::string());
+
+	/** Add pictorial tab */
 	uint32_t add
 		(const std::string & name,
 		 const Image* pic,
@@ -86,13 +112,21 @@ struct TabPanel : public Panel {
 	const TabList & tabs();
 	void activate(uint32_t idx);
 	void activate(const std::string &);
-	uint32_t active() {return m_active;}
+	uint32_t active() {return active_;}
 
 protected:
 	void layout() override;
 	void update_desired_size() override;
 
 private:
+	// Common adding function for textual and pictorial tabs
+	uint32_t add_tab(int32_t width,
+						  const std::string& name,
+						  const std::string& title,
+						  const Image* pic,
+						  const std::string& tooltip,
+						  Panel* contents);
+
 	// Drawing and event handlers
 	void draw(RenderTarget &) override;
 
@@ -102,12 +136,14 @@ private:
 		(uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff) override;
 	void handle_mousein(bool inside) override;
 
+	size_t find_tab(int32_t x, int32_t y) const;
 
-	TabList          m_tabs;
-	uint32_t         m_active;         ///< index of the currently active tab
-	int32_t          m_highlight;      ///< index of the highlighted button
+	TabList          tabs_;
+	size_t           active_;         ///< index of the currently active tab
+	size_t           highlight_;      ///< index of the highlighted button
 
-	const Image* m_pic_background; ///< picture used to draw background
+	const Image*     pic_background_; ///< picture used to draw background
+	TabPanel::Type   border_type_;    ///< whether there will be a border around the panels.
 };
 }
 

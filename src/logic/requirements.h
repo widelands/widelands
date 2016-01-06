@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2010 by the Widelands Development Team
+ * Copyright (C) 2008-2010, 2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -44,7 +44,7 @@ struct RequirementsStorage;
  * Requirements can be attached to Requests.
  *
  * Requirements are matched to a \ref MapObject 's \ref TrainingAttribute as
- * returned by \ref get_training_attribute .
+ * returned by \ref MapObject::get_training_attribute .
  */
 struct Requirements {
 private:

@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-12-10 13:43+0000\n"
-"PO-Revision-Date: 2015-12-10 20:04+0000\n"
+"POT-Creation-Date: 2015-12-11 07:41+0000\n"
+"PO-Revision-Date: 2015-12-11 07:58+0000\n"
 "Last-Translator: Lyubomir Vasilev\n"
 "Language-Team: Bulgarian (http://www.transifex.com/widelands/widelands/language/bg/)\n"
 "MIME-Version: 1.0\n"
@@ -937,7 +937,7 @@ msgstr "Максимална: %u"
 msgid "Set value: %u"
 msgstr "Задаване на ст.: %u"
 
-#: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:93
+#: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:96
 msgid "Terrain Select"
 msgstr "Избиране на терен"
 
@@ -1437,7 +1437,7 @@ msgstr "обработваем"
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/logic/world/terrain_description.cc:81
 msgid "navigable"
-msgstr ""
+msgstr "плаваемо"
 
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/logic/world/terrain_description.cc:86

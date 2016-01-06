@@ -25,6 +25,7 @@
 #include <vector>
 
 #include <SDL.h>
+#include <boost/algorithm/string.hpp>
 #include <boost/format.hpp>
 
 #include "graphic/text/rt_errors_impl.h"
@@ -138,8 +139,11 @@ void Tag::m_parse_content(TextStream & ts, TagConstraints & tcs, const TagSet & 
 		size_t line = ts.line(), col = ts.col();
 		std::string text = ts.till_any("<");
 		if (text != "") {
-			if (!tc.text_allowed)
+			if (!tc.text_allowed) {
 				throw SyntaxErrorImpl(line, col, "no text, as only tags are allowed here", text, ts.peek(100));
+			}
+			boost::replace_all(text, "&gt;", ">");
+			boost::replace_all(text, "&lt;", "<");
 			m_childs.push_back(new Child(text));
 		}
 
@@ -181,6 +185,7 @@ Parser::Parser() {
 		tc.allowed_attrs.insert("padding_b");
 		tc.allowed_attrs.insert("padding_t");
 		tc.allowed_attrs.insert("db_show_spaces");
+		tc.allowed_attrs.insert("keep_spaces"); // Keeps blank spaces intact for text editing
 		tc.allowed_attrs.insert("background");
 
 		tc.allowed_childs.insert("p");

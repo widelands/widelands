@@ -643,8 +643,7 @@ MapObject::Loader * WareInstance::load
 	} catch (const std::exception & e) {
 		throw wexception("WareInstance: %s", e.what());
 	}
-
-	return nullptr; // Should never be reached
+	throw wexception("Never here.");
 }
 
 }

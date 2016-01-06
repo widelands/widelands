@@ -20,23 +20,26 @@
 #ifndef WL_GRAPHIC_TEXT_BIDI_H
 #define WL_GRAPHIC_TEXT_BIDI_H
 
+#include <limits>
 #include <string>
 #include <vector>
 
 #include <unicode/uchar.h>
-
-#include "graphic/text/font_set.h"
+#include <unicode/unistr.h>
 
 // BiDi support for RTL languages
 namespace i18n {
-	std::string make_ligatures(const char* input);
-	std::string line2bidi(const char* input);
-	std::vector<std::string> split_cjk_word(const char* input);
-	bool has_rtl_character(const char* input, int32_t limit = std::numeric_limits<int32_t>::max());
-	bool has_rtl_character(std::vector<std::string> input);
-	bool has_cjk_character(const char* input);
-	bool cannot_start_line(const UChar& c);
-	bool cannot_end_line(const UChar& c);
+std::string make_ligatures(const char* input);
+std::string line2bidi(const char* input);
+std::vector<std::string> split_cjk_word(const char* input);
+bool has_rtl_character(const char* input, int32_t limit = std::numeric_limits<int32_t>::max());
+bool has_rtl_character(std::vector<std::string> input);
+std::string icustring2string(const UnicodeString& convertme);
+std::string icuchar2string(const UChar& convertme);
+bool has_cjk_character(const char* input);
+bool cannot_start_line(const UChar& c);
+bool cannot_end_line(const UChar& c);
+bool is_diacritic(const UChar& c);
 
 } // namespace UI
 

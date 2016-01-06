@@ -29,6 +29,7 @@
 #include "graphic/text/font_set.h"
 #include "graphic/text_constants.h"
 #include "graphic/text_layout.h"
+#include "graphic/texture.h"
 #include "ui_basic/button.h"
 #include "ui_basic/mouse_constants.h"
 #include "ui_basic/scrollbar.h"
@@ -298,9 +299,12 @@ void Table<void *>::draw(RenderTarget & dst)
 
 				int draw_x = point.x;
 
-				if (pich > 0 && pich > lineheight) {
+				// We want a bit of margin
+				int max_pic_height = lineheight - 3;
+
+				if (pich > 0 && pich > max_pic_height) {
 					// Scale image to fit lineheight
-					double image_scale = static_cast<double>(lineheight) / pich;
+					double image_scale = static_cast<double>(max_pic_height) / pich;
 					int blit_width = image_scale * picw;
 
 					if (entry_string.empty()) {
@@ -315,16 +319,25 @@ void Table<void *>::draw(RenderTarget & dst)
 						draw_x += curw - blit_width;
 					}
 
-					dst.blitrect_scale(
-								// Center align if text is empty
-								Rect(draw_x,
-									  point.y,
-									  blit_width,
-									  lineheight),
-								entry_picture,
-								Rect(0, 0, picw, pich),
-								1.,
-								BlendMode::UseAlpha);
+					// Temporary texture for the scaled image
+					Texture* scaled_texture = new Texture(blit_width, max_pic_height);
+
+					// Initialize the rectangle
+					::fill_rect(Rect(0, 0, blit_width, max_pic_height),
+									RGBAColor(255, 255, 255, 0), scaled_texture);
+
+					// Create the scaled image
+					::blit(Rect(0, 0, blit_width, max_pic_height),
+							 *entry_picture,
+							 Rect(0, 0, picw, pich),
+							 1.,
+							 BlendMode::UseAlpha,
+							 scaled_texture);
+
+					// This will now blit with any appropriate cropping
+					dst.blit(Point(draw_x, point.y + 1), scaled_texture);
+
+					// For text alignment below
 					picw = blit_width;
 				} else {
 					if (entry_string.empty()) {

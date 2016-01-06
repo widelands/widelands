@@ -172,11 +172,14 @@ ImmovableDescr const* World::get_immovable_descr(DescriptionIndex const index) c
 }
 
 DescriptionIndex World::get_resource(const char* const name) const {
-	return resources_->get_index(name);
+	return strcmp(name, "none") ? resources_->get_index(name): Widelands::kNoResource;
 }
 
+/***
+ * @return The ResourceDescription for the given index. Returns Nullptr for kNoResource.
+ */
 ResourceDescription const* World::get_resource(DescriptionIndex const res) const {
-	assert(res < resources_->size());
+	assert(res < resources_->size() || res == Widelands::kNoResource);
 	return resources_->get_mutable(res);
 }
 

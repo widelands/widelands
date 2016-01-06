@@ -518,9 +518,11 @@ public:
 	void set_ai_data(int32_t value, uint32_t position);
 	void set_ai_data(uint32_t value, uint32_t position);
 	void set_ai_data(int16_t value, uint32_t position);
+	void set_ai_data(bool value, uint32_t position);
 	void get_ai_data(int32_t * value, uint32_t position);
 	void get_ai_data(uint32_t * value, uint32_t position);
 	void get_ai_data(int16_t * value, uint32_t position);
+	void get_ai_data(bool * value, uint32_t position);
 
 private:
 	BuildingStatsVector* get_mutable_building_statistics(const DescriptionIndex& i);

@@ -2,14 +2,12 @@ dirname = path.dirname(__file__)
 
 animations = {
    idle = {
-      template = "idle_??",
-      directory = dirname,
+      pictures = path.list_files(dirname .. "idle_??.png"),
       hotspot = { 89, 86 },
       fps = 10
    },
    sinking = {
-      template = "sinking_??",
-      directory = dirname,
+      pictures = path.list_files(dirname .. "sinking_??.png"),
       hotspot = { 89, 86 },
       fps = 7
    }

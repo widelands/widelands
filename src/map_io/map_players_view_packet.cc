@@ -176,12 +176,6 @@ namespace {
 
 
 // Errors for the Read* functions.
-struct TribeNonexistent : public FileRead::DataError {
-	TribeNonexistent(char const* const Name)
-	   : DataError("tribe \"%s\" does not exist", Name), name(Name) {
-	}
-	char const* const name;
-};
 struct TribeImmovableNonexistent : public FileRead::DataError {
 	TribeImmovableNonexistent(const std::string& Name)
 	   : DataError("immovable type \"%s\" does not seem to be a tribe immovable", Name.c_str()),

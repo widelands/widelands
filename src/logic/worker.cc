@@ -945,26 +945,23 @@ bool Worker::run_geologist_find(Game & game, State & state, const Action &)
 	BaseImmovable const * const imm = position.field->get_immovable();
 	const World & world = game.world();
 
-	if (imm && imm->get_size() > BaseImmovable::NONE) {
-		//NoLog("  Field is no longer empty\n");
-	} else if
-		(const ResourceDescription * const rdescr =
-			world.get_resource(position.field->get_resources()))
-	{
+	if (!(imm && imm->get_size() > BaseImmovable::NONE)) {
+
+		const ResourceDescription * const rdescr =
+				world.get_resource(position.field->get_resources());
 		const TribeDescr & t = owner().tribe();
 		const Immovable& ri = game.create_immovable
-			(position,
-			 t.get_resource_indicator
-				(rdescr,
-				rdescr->detectable() ?
-				position.field->get_resources_amount() : 0),
-			 MapObjectDescr::OwnerType::kTribe);
+				(position,
+				 t.get_resource_indicator
+						 (rdescr,
+						  (rdescr && rdescr->detectable()) ?
+						  position.field->get_resources_amount() : 0),
+				 MapObjectDescr::OwnerType::kTribe);
 
 		// Geologist also sends a message notifying the player
-		if (rdescr->detectable() && position.field->get_resources_amount()) {
+		if (rdescr && rdescr->detectable() && position.field->get_resources_amount()) {
 			const std::string message =
-					(boost::format("<rt image=%s>"
-										"<p font-face=serif font-size=14>%s</p></rt>")
+					(boost::format("<rt image=%s><p font-face=serif font-size=14>%s</p></rt>")
 					 % rdescr->get_editor_pic(rdescr->max_amount())
 					 % _("A geologist found resources.")).str();
 
@@ -983,18 +980,17 @@ bool Worker::run_geologist_find(Game & game, State & state, const Action &)
 			//  We should add a message to the player's message queue - but only,
 			//  if there is not already a similar one in list.
 			owner().add_message_with_timeout
-				(game,
-				 *new Message
-					(message_type,
-					 game.get_gametime(),
-					 rdescr->descname(),
-					 ri.descr().representative_image_filename(),
-					 rdescr->descname(),
-					 message,
-					 position,
-					 m_serial
-					),
-				 300000, 8);
+					(game,
+					 *new Message
+							 (message_type,
+							  game.get_gametime(),
+							  rdescr->descname(),
+							  ri.descr().representative_image_filename(),
+							  rdescr->descname(),
+							  message,
+							  position,
+							  m_serial),
+					 300000, 8);
 		}
 	}
 
