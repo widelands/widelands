@@ -1191,7 +1191,7 @@ bool Panel::draw_tooltip(RenderTarget & dst, const std::string & text)
 	Rect r
 		(WLApplication::get()->get_mouse_position() + Point(2, 32),
 		 tip_width, tip_height);
-	const Point tooltip_bottom_right = r.bottom_right();
+	const Point tooltip_bottom_right = r.opposite_of_origin();
 	const Point screen_bottom_right(g_gr->get_xres(), g_gr->get_yres());
 	if (screen_bottom_right.x < tooltip_bottom_right.x)
 		r.x -=  4 + r.w;
@@ -1200,7 +1200,7 @@ bool Panel::draw_tooltip(RenderTarget & dst, const std::string & text)
 
 	dst.fill_rect(r, RGBColor(63, 52, 34));
 	dst.draw_rect(r, RGBColor(0, 0, 0));
-	dst.blit(r.top_left() + Point(2, 2), rendered_text);
+	dst.blit(r.origin() + Point(2, 2), rendered_text);
 	return true;
 }
 

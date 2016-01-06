@@ -38,9 +38,16 @@ public:
 	// Draws the terrain.
 	void draw(uint32_t gametime,
 	          const DescriptionMaintainer<Widelands::TerrainDescription>& terrains,
-	          const FieldsToDraw& fields_to_draw);
+	          const FieldsToDraw& fields_to_draw,
+	          float z_value);
 
 private:
+	enum class TrianglePoint {
+		kTopLeft,
+		kTopRight,
+		kBottomMiddle,
+	};
+
 	// Adds the triangle between the indexes (which index 'fields_to_draw') to
 	// vertices_ if the my_terrain != other_terrain and the dither_layer()
 	// agree.
@@ -57,7 +64,9 @@ private:
 	// Adds the 'field' as an vertex to the 'vertices_'. The 'order_index'
 	// defines which texture position in the dithering texture will be used for
 	// this vertex.
-	void add_vertex(const FieldsToDraw::Field& field, int order_index, const FloatPoint& texture_offset);
+	void add_vertex(const FieldsToDraw::Field& field,
+	                TrianglePoint triangle_point,
+	                const FloatPoint& texture_offset);
 
 	struct PerVertexData {
 		float gl_x;
@@ -72,13 +81,13 @@ private:
 	};
 
 	// Call through to GL.
-	void gl_draw(int gl_texture, float texture_w, float texture_h);
+	void gl_draw(int gl_texture, float texture_w, float texture_h, float z_value);
 
 	// The program used for drawing the terrain.
 	Gl::Program gl_program_;
 
 	// The buffer that contains the data to be rendered.
-	Gl::Buffer gl_array_buffer_;
+	Gl::Buffer<PerVertexData> gl_array_buffer_;
 
 	// Attributes.
 	GLint attr_brightness_;
@@ -91,6 +100,7 @@ private:
 	GLint u_dither_texture_;
 	GLint u_terrain_texture_;
 	GLint u_texture_dimensions_;
+	GLint u_z_value_;
 
 	// The texture mask for the dithering step.
 	std::unique_ptr<Texture> dither_mask_;

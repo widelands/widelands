@@ -610,6 +610,7 @@ void EditorInteractive::run_editor(const std::string& filename, const std::strin
 
 		eia.select_tool(eia.tools.increase_height, EditorTool::First);
 		editor.postload();
+
 		eia.start();
 
 		if (!script_to_run.empty()) {

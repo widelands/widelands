@@ -20,6 +20,8 @@
 #ifndef WL_WUI_MINIMAP_H
 #define WL_WUI_MINIMAP_H
 
+#include <memory>
+
 #include <boost/signals2.hpp>
 
 #include "graphic/minimap_renderer.h"
@@ -76,13 +78,17 @@ private:
 
 		void set_zoom(int32_t z);
 
-
 	private:
 		InteractiveBase & m_ibase;
 		int32_t                m_viewx, m_viewy;
 		const Image* m_pic_map_spot;
+
+		// This needs to be owned since it will be rendered by the RenderQueue
+		// later, so it must be valid for the whole frame.
+		std::unique_ptr<Texture> minimap_image_;
+
 	public:
-		MiniMapLayer * m_flags;
+		MiniMapLayer* m_flags;
 	};
 
 	uint32_t number_of_buttons_per_row() const;

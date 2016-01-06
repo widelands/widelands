@@ -20,19 +20,19 @@
 #define WL_GRAPHIC_GL_UTILS_H
 
 #include <memory>
+#include <vector>
 
 #include <stdint.h>
 
+#include "base/log.h"
 #include "base/macros.h"
+#include "base/wexception.h"
 #include "graphic/gl/system_headers.h"
-
-struct SDL_PixelFormat;
 
 namespace Gl {
 
 class Shader;
 
-const SDL_PixelFormat & gl_rgba_format();
 GLenum _handle_glerror(const char * file, unsigned int line);
 
 // Thin wrapper around a OpenGL program object to ensure proper cleanup. Throws
@@ -59,21 +59,53 @@ private:
 };
 
 // Thin wrapper around a OpenGL buffer object to ensure proper cleanup. Throws
-// on all errors.
+// on all errors. Also grows the server memory only when needed.
+template<typename T>
 class Buffer {
 public:
-	Buffer();
-	~Buffer();
+	Buffer() : buffer_size_(0) {
+		glGenBuffers(1, &object_);
+		if (!object_) {
+			throw wexception("Could not create GL program.");
+		}
+	}
 
-	GLuint object() const {
-		return buffer_object_;
+	~Buffer() {
+		if (object_) {
+			glDeleteBuffers(1, &object_);
+		}
+	}
+
+	// Calls glBindBuffer on the underlying buffer data.
+	void bind() const {
+		glBindBuffer(GL_ARRAY_BUFFER, object_);
+	}
+
+
+	// Copies 'elements' into the buffer. If the buffer is too small to hold the
+	// data, it is reallocated. Does not check if the buffer is already bound.
+	void update(const std::vector<T>& items) {
+		if (buffer_size_ < items.size()) {
+			glBufferData(GL_ARRAY_BUFFER, items.size() * sizeof(T), items.data(), GL_DYNAMIC_DRAW);
+			buffer_size_ = items.size();
+		} else {
+			glBufferSubData(GL_ARRAY_BUFFER, 0, items.size() * sizeof(T), items.data());
+		}
 	}
 
 private:
-	const GLuint buffer_object_;
+	GLuint object_;
+	size_t buffer_size_;  // In number of elements.
 
 	DISALLOW_COPY_AND_ASSIGN(Buffer);
 };
+
+// Calls glVertexAttribPointer.
+void vertex_attrib_pointer(int vertex_index, int num_items, int stride, int offset);
+
+// Swap order of rows in m_pixels, to compensate for the upside-down nature of the
+// OpenGL coordinate system.
+void swap_rows(int width, int height, int pitch, int bpp, uint8_t* pixels);
 
 }  // namespace Gl
 

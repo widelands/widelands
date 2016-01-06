@@ -70,12 +70,8 @@ public:
 	int width() const override {return texture()->width();}
 	int height() const override {return texture()->height();}
 
-	int get_gl_texture() const override {
-		return texture()->get_gl_texture();
-	}
-
-	const FloatRect& texture_coordinates() const override {
-		return texture()->texture_coordinates();
+	const BlitData& blit_data() const override {
+		return texture()->blit_data();
 	}
 
 private:
