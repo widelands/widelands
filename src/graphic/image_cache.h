@@ -55,10 +55,6 @@ public:
 	// Returns true if the given hash is stored in the cache.
 	bool has(const std::string& hash) const;
 
-	// For debug only: Takes all images that are in the ImageCache right now and
-	// puts them into one huge texture atlas.
-	void compactify();
-
 private:
 	// We return a wrapped Image so that we can swap out the pointer to the
 	// image under our user. This can happen when we move an Image from a stand

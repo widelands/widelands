@@ -57,19 +57,19 @@ struct PackInfo {
 	};
 
 	Type type;
+	int texture_atlas;
 	Rect rect;
 };
 
-// NOCOM(#sirver): needs modification
 int parse_arguments(
-   int argc, char** argv, std::string* input_directory)
+   int argc, char** argv, int* max_size)
 {
 	if (argc < 2) {
-		std::cout << "Usage: wl_make_texture_atlas <input directory>" << std::endl << std::endl
+		std::cout << "Usage: wl_make_texture_atlas [max_size]" << std::endl << std::endl
 		          << "Will write output.png in the current directory." << std::endl;
 		return 1;
 	}
-	*input_directory = argv[1];
+	*max_size = atoi(argv[1]);
 	return 0;
 }
 
@@ -119,15 +119,18 @@ void find_all_images(std::vector<std::string>* all_images,
 
 	// Add all other images, we do not really cares about the order now.
 	find_images("pics", &image_set, all_images);
-	// NOCOM(#sirver): bring back
-	// find_images("world", &image_set, all_images);
-	// find_images("tribes", &image_set, all_images);
+	find_images("world", &image_set, all_images);
+	find_images("tribes", &image_set, all_images);
 }
 
-void dump_result(const std::map<std::string, PackInfo>& pack_info, Texture* packed_texture, FileSystem* fs) {
-	{
-		std::unique_ptr<StreamWrite> sw(fs->open_stream_write("output.png"));
-		save_to_png(packed_texture, sw.get(), ColorType::RGBA);
+void dump_result(const std::map<std::string, PackInfo>& pack_info,
+                 std::vector<std::unique_ptr<Texture>>* texture_atlases,
+                 FileSystem* fs) {
+
+	for (size_t i = 0; i < texture_atlases->size(); ++i) {
+		std::unique_ptr<StreamWrite> sw(
+		   fs->open_stream_write((boost::format("output_%02i.png") % i).str()));
+		save_to_png(texture_atlases->at(i).get(), sw.get(), ColorType::RGBA);
 	}
 
 	{
@@ -141,6 +144,8 @@ void dump_result(const std::map<std::string, PackInfo>& pack_info, Texture* pack
 			switch (pair.second.type) {
 			case PackInfo::Type::kPacked:
 				sw->text("       type = \"packed\",\n");
+				sw->text(
+				   (boost::format("       texture_atlas = %d,\n") % pair.second.texture_atlas).str());
 				sw->text((boost::format("       rect = { %d, %d, %d, %d },\n") % pair.second.rect.x %
 				          pair.second.rect.y % pair.second.rect.w % pair.second.rect.h).str());
 				break;
@@ -158,8 +163,8 @@ void dump_result(const std::map<std::string, PackInfo>& pack_info, Texture* pack
 }  // namespace
 
 int main(int argc, char** argv) {
-	std::string input_directory;
-	if (parse_arguments(argc, argv, &input_directory))
+	int max_size;
+	if (parse_arguments(argc, argv, &max_size))
 		return 1;
 
 	if (SDL_Init(SDL_INIT_VIDEO) < 0) {
@@ -168,6 +173,7 @@ int main(int argc, char** argv) {
 	}
 	initialize();
 
+	// NOCOM(#sirver): that does not quite work like this. rethink images in first atlas.
 	std::vector<std::string> all_images, images_that_must_be_in_first_atlas;
 	find_all_images(&all_images, &images_that_must_be_in_first_atlas);
 
@@ -180,7 +186,7 @@ int main(int argc, char** argv) {
 			to_be_packed.push_back(std::make_pair(filename, std::move(image)));
 		} else {
 			pack_info[filename] = PackInfo{
-			   PackInfo::Type::kUnpacked, Rect(),
+			   PackInfo::Type::kUnpacked, 0, Rect(),
 			};
 		}
 	}
@@ -190,16 +196,18 @@ int main(int argc, char** argv) {
 		atlas.add(*pair.second);
 	}
 
-	// NOCOM(#sirver): figure out max size
-	std::vector<std::unique_ptr<Texture>> new_textures;
-	auto packed_texture = atlas.pack(&new_textures);
-	for (size_t i = 0; i < new_textures.size(); ++i) {
-		const BlitData& blit_data = new_textures[i]->blit_data();
-		pack_info[to_be_packed[i].first] = PackInfo{PackInfo::Type::kPacked, blit_data.rect};
+	std::vector<std::unique_ptr<Texture>> texture_atlases;
+	std::vector<TextureAtlas::PackedTexture> packed_textures;
+	atlas.pack(max_size, &texture_atlases, &packed_textures);
+	for (size_t i = 0; i < packed_textures.size(); ++i) {
+		const auto& packed_texture = packed_textures.at(i);
+		pack_info[to_be_packed[i].first] = PackInfo{PackInfo::Type::kPacked,
+		                                            packed_texture.texture_atlas,
+		                                            packed_texture.texture->blit_data().rect};
 	}
 
 	std::unique_ptr<FileSystem> output_fs(&FileSystem::create("."));
-	dump_result(pack_info, packed_texture.get(), output_fs.get());
+	dump_result(pack_info, &texture_atlases, output_fs.get());
 
 	SDL_Quit();
 	return 0;

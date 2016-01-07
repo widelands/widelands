@@ -31,11 +31,6 @@
 #include "graphic/image_io.h"
 #include "graphic/texture.h"
 
-namespace  {
-
-constexpr int kBiggestAreaForCompactification = 250 * 250;
-
-}  // namespace
 ImageCache::ProxyImage::ProxyImage(std::unique_ptr<const Image> image) : image_(std::move(image)) {
 }
 
@@ -84,31 +79,4 @@ const Image* ImageCache::get(const std::string& hash) {
 		return get(hash);
 	}
 	return it->second.get();
-}
-
-void ImageCache::compactify() {
-	TextureAtlas texture_atlas;
-
-	std::vector<std::string> hashes;
-	for (const auto& pair : images_) {
-		const auto& image = pair.second->image();
-		if (image.width() * image.height() > kBiggestAreaForCompactification) {
-			continue;
-		}
-
-		texture_atlas.add(image);
-		hashes.push_back(pair.first);
-	}
-
-	std::vector<std::unique_ptr<Texture>> new_textures;
-
-	// TODO(sirver): Limit the size of the texture atlas to a max GL texture
-	// size. This might return more than one packed image. Make sure that the
-	// code works also for small max texture sizes.
-	texture_atlases_.emplace_back(texture_atlas.pack(&new_textures));
-
-	assert(new_textures.size() == hashes.size());
-	for (size_t i = 0; i < hashes.size(); ++i) {
-		images_[hashes[i]]->set_image(std::move(new_textures[i]));
-	}
 }

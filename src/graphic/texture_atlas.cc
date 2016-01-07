@@ -24,6 +24,7 @@
 #include <memory>
 
 #include "base/wexception.h"
+#include "base/log.h" // NOCOM(#sirver): remove again
 
 TextureAtlas::Node::Node(const Rect& init_r) : used(false), r(init_r) {
 }
@@ -68,22 +69,15 @@ TextureAtlas::Node* TextureAtlas::find_node(Node* node, int w, int h) {
 	return nullptr;
 }
 
-std::unique_ptr<Texture> TextureAtlas::pack(std::vector<std::unique_ptr<Texture>>* textures) {
-	if (blocks_.empty()) {
-		throw wexception("Called pack() without blocks.");
-	}
+std::unique_ptr<Texture> TextureAtlas::pack_as_many_as_possible(const int max_dimension,
+                                                                const int texture_atlas_index,
+                                                                std::vector<PackedTexture>* pack_info) {
+	log("#sirver max_dimension: %d,texture_atlas_index: %d\n", max_dimension, texture_atlas_index);
 
-	// Sort blocks by their biggest side length. This heuristically gives the
-	// best packing.
-	std::sort(blocks_.begin(), blocks_.end(), [](const Block& i, const Block& j) {
-		return std::max(i.texture->width(), i.texture->height()) >
-		       std::max(j.texture->width(), j.texture->height());
-	});
 
 	std::unique_ptr<Node> root(
 	   new Node(Rect(0, 0, blocks_.begin()->texture->width(), blocks_.begin()->texture->height())));
 
-	// TODO(sirver): when growing, keep maximum size of gl textures in mind.
 	const auto grow_right = [&root](int delta_w) {
 		std::unique_ptr<Node> new_root(new Node(Rect(0, 0, root->r.w + delta_w, root->r.h)));
 		new_root->used = true;
@@ -100,6 +94,7 @@ std::unique_ptr<Texture> TextureAtlas::pack(std::vector<std::unique_ptr<Texture>
 		root.reset(new_root.release());
 	};
 
+	std::vector<Block> packed, not_packed;
 	for (Block& block : blocks_) {
 		const int block_width = block.texture->width();
 		const int block_height = block.texture->height();
@@ -107,8 +102,10 @@ std::unique_ptr<Texture> TextureAtlas::pack(std::vector<std::unique_ptr<Texture>
 		Node* fitting_node = find_node(root.get(), block_width, block_height);
 		if (fitting_node == nullptr) {
 			// Atlas is not big enough to contain this. Grow it and try again.
-			bool can_grow_down = (block_width <= root->r.w);
-			bool can_grow_right = (block_height <= root->r.h);
+			bool can_grow_down =
+			   (block_width <= root->r.w) && (block_height + root->r.h < max_dimension);
+			bool can_grow_right =
+			   (block_height <= root->r.h) && (block_width + root->r.w < max_dimension);
 
 			// Attempt to keep the texture square-ish.
 			bool should_grow_right = can_grow_right && (root->r.h >= root->r.w + block_width);
@@ -125,34 +122,59 @@ std::unique_ptr<Texture> TextureAtlas::pack(std::vector<std::unique_ptr<Texture>
 			}
 			fitting_node = find_node(root.get(), block_width, block_height);
 		}
-		if (!fitting_node) {
-			throw wexception("Unable to fit node in texture atlas.");
+		if (fitting_node) {
+			fitting_node->split(block_width, block_height);
+			block.node = fitting_node;
+			packed.push_back(block);
+		} else {
+			not_packed.push_back(block);
 		}
-		fitting_node->split(block_width, block_height);
-		block.node = fitting_node;
 	}
 
-	std::unique_ptr<Texture> packed_texture(new Texture(root->r.w, root->r.h));
-	packed_texture->fill_rect(Rect(0, 0, root->r.w, root->r.h), RGBAColor(0, 0, 0, 0));
+	std::unique_ptr<Texture> texture_atlas(new Texture(root->r.w, root->r.h));
+	texture_atlas->fill_rect(Rect(0, 0, root->r.w, root->r.h), RGBAColor(0, 0, 0, 0));
 
-	// Sort blocks by index so that they come back in the correct ordering.
-	std::sort(blocks_.begin(), blocks_.end(), [](const Block& i, const Block& j) {
-		return i.index < j.index;
-	});
-
-	const auto packed_texture_id = packed_texture->blit_data().texture_id;
-	for (Block& block : blocks_) {
-		packed_texture->blit(
+	const auto packed_texture_id = texture_atlas->blit_data().texture_id;
+	for (Block& block : packed) {
+		texture_atlas->blit(
 		   Rect(block.node->r.x, block.node->r.y, block.texture->width(), block.texture->height()),
 		   *block.texture,
 		   Rect(0, 0, block.texture->width(), block.texture->height()),
 		   1.,
 		   BlendMode::UseAlpha);
 
-		textures->emplace_back(
-		   new Texture(packed_texture_id,
-		               Rect(block.node->r.origin(), block.texture->width(), block.texture->height()),
-		               root->r.w, root->r.h));
+		pack_info->emplace_back(PackedTexture(
+		   texture_atlas_index, block.index,
+		   std::unique_ptr<Texture>(new Texture(
+		      packed_texture_id,
+		      Rect(block.node->r.origin(), block.texture->width(), block.texture->height()),
+		      root->r.w, root->r.h))));
 	}
-	return packed_texture;
+	blocks_ = not_packed;
+	return texture_atlas;
+}
+
+void TextureAtlas::pack(const int max_dimension,
+		std::vector<std::unique_ptr<Texture>>* texture_atlases,
+		std::vector<PackedTexture>* pack_info) {
+	if (blocks_.empty()) {
+		throw wexception("Called pack() without blocks.");
+	}
+
+	// Sort blocks by their biggest side length. This heuristically gives the
+	// best packing.
+	std::sort(blocks_.begin(), blocks_.end(), [](const Block& i, const Block& j) {
+		return std::max(i.texture->width(), i.texture->height()) >
+		       std::max(j.texture->width(), j.texture->height());
+	});
+
+	while (blocks_.size()) {
+		texture_atlases->emplace_back(
+		   pack_as_many_as_possible(max_dimension, texture_atlases->size(), pack_info));
+	}
+
+	// Sort pack info by index so that they come back in the correct ordering.
+	std::sort(pack_info->begin(), pack_info->end(), [](const PackedTexture& i, const PackedTexture& j) {
+		return i.index_ < j.index_;
+	});
 }
