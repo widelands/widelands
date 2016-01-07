@@ -22,10 +22,12 @@
 #include <memory>
 #include <set>
 #include <string>
+#include <unordered_set>
 #include <vector>
 
 #include <SDL.h>
 #include <boost/algorithm/string/predicate.hpp>
+#include <boost/format.hpp>
 
 #undef main // No, we do not want SDL_main
 
@@ -41,6 +43,24 @@
 
 namespace {
 
+// This is chosen so that all graphics for tribes are still well inside this
+// threshold, but not background pictures.
+constexpr int kMaxAreaForTextureAtlas = 240 * 240;
+
+// An image can either be Type::kPacked inside a texture atlas, in which case
+// we need to keep track which one and where inside of that one. It can also be
+// Type::kUnpacked if it is to be loaded from disk.
+struct PackInfo {
+	enum class Type {
+		kUnpacked,
+		kPacked,
+	};
+
+	Type type;
+	Rect rect;
+};
+
+// NOCOM(#sirver): needs modification
 int parse_arguments(
    int argc, char** argv, std::string* input_directory)
 {
@@ -62,6 +82,79 @@ void initialize() {
 	g_gr = new Graphic(1, 1, false);
 }
 
+// Returns true if 'filename' is ends with a image extension.
+bool is_image(const std::string& filename) {
+	return boost::ends_with(filename, ".png") || boost::ends_with(filename, ".jpg");
+}
+
+// Recursively adds all images in 'directory' to 'ordered_images' and
+// 'handled_images'. We keep track of the images twice because we want to make
+// sure that some end up in the same (first) texture atlas, so we add them
+// first and we use the set to know that we already added an image.
+void find_images(const std::string& directory,
+                 std::unordered_set<std::string>* images,
+                 std::vector<std::string>* ordered_images) {
+	for (const std::string& filename : g_fs->list_directory(directory)) {
+		if (g_fs->is_directory(filename)) {
+			find_images(filename, images, ordered_images);
+			continue;
+		}
+		if (is_image(filename) && !images->count(filename)) {
+			images->insert(filename);
+			ordered_images->push_back(filename);
+		}
+	}
+}
+
+void find_all_images(std::vector<std::string>* all_images,
+                     std::vector<std::string>* images_that_must_be_in_first_atlas) {
+	std::unordered_set<std::string> image_set;
+	// The first texture atlas should contain all terrain textures and all road
+	// textures, so we make sure we add them nice and early.
+	find_images("world/terrains", &image_set, all_images);
+	find_images("tribes/images", &image_set, all_images);
+
+	// Make a copy, so we can check that they are indeed all in the first texture atlas.
+	*images_that_must_be_in_first_atlas = *all_images;
+
+	// Add all other images, we do not really cares about the order now.
+	find_images("pics", &image_set, all_images);
+	// NOCOM(#sirver): bring back
+	// find_images("world", &image_set, all_images);
+	// find_images("tribes", &image_set, all_images);
+}
+
+void dump_result(const std::map<std::string, PackInfo>& pack_info, Texture* packed_texture, FileSystem* fs) {
+	{
+		std::unique_ptr<StreamWrite> sw(fs->open_stream_write("output.png"));
+		save_to_png(packed_texture, sw.get(), ColorType::RGBA);
+	}
+
+	{
+		std::unique_ptr<StreamWrite> sw(fs->open_stream_write("output.lua"));
+		sw->text("return {\n");
+		for (const auto& pair : pack_info) {
+			sw->text("   [\"");
+			sw->text(pair.first);
+			sw->text("\"] = {\n");
+
+			switch (pair.second.type) {
+			case PackInfo::Type::kPacked:
+				sw->text("       type = \"packed\",\n");
+				sw->text((boost::format("       rect = { %d, %d, %d, %d },\n") % pair.second.rect.x %
+				          pair.second.rect.y % pair.second.rect.w % pair.second.rect.h).str());
+				break;
+
+			case PackInfo::Type::kUnpacked:
+				sw->text("       type = \"unpacked\",\n");
+				break;
+			}
+			sw->text("   },\n");
+		}
+		sw->text("}\n");
+	}
+}
+
 }  // namespace
 
 int main(int argc, char** argv) {
@@ -75,26 +168,38 @@ int main(int argc, char** argv) {
 	}
 	initialize();
 
-	std::vector<std::unique_ptr<Texture>> images;
-	std::unique_ptr<FileSystem> input_fs(&FileSystem::create(input_directory));
-	std::vector<std::string> png_filenames;
-	for (const std::string& filename : input_fs->list_directory("")) {
-		if (boost::ends_with(filename, ".png")) {
-			png_filenames.push_back(filename);
-			images.emplace_back(load_image(filename, input_fs.get()));
+	std::vector<std::string> all_images, images_that_must_be_in_first_atlas;
+	find_all_images(&all_images, &images_that_must_be_in_first_atlas);
+
+	std::map<std::string, PackInfo> pack_info;
+	std::vector<std::pair<std::string, std::unique_ptr<Texture>>> to_be_packed;
+	for (const auto& filename : all_images) {
+		std::unique_ptr<Texture> image = load_image(filename, g_fs);
+		const auto area = image->width() * image->height();
+		if (area < kMaxAreaForTextureAtlas) {
+			to_be_packed.push_back(std::make_pair(filename, std::move(image)));
+		} else {
+			pack_info[filename] = PackInfo{
+			   PackInfo::Type::kUnpacked, Rect(),
+			};
 		}
 	}
 
 	TextureAtlas atlas;
-	for (auto& image : images) {
-		atlas.add(*image);
+	for (auto& pair : to_be_packed) {
+		atlas.add(*pair.second);
 	}
+
+	// NOCOM(#sirver): figure out max size
 	std::vector<std::unique_ptr<Texture>> new_textures;
 	auto packed_texture = atlas.pack(&new_textures);
+	for (size_t i = 0; i < new_textures.size(); ++i) {
+		const BlitData& blit_data = new_textures[i]->blit_data();
+		pack_info[to_be_packed[i].first] = PackInfo{PackInfo::Type::kPacked, blit_data.rect};
+	}
 
 	std::unique_ptr<FileSystem> output_fs(&FileSystem::create("."));
-	std::unique_ptr<StreamWrite> sw(output_fs->open_stream_write("output.png"));
-	save_to_png(packed_texture.get(), sw.get(), ColorType::RGBA);
+	dump_result(pack_info, packed_texture.get(), output_fs.get());
 
 	SDL_Quit();
 	return 0;
