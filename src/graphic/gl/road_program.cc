@@ -111,7 +111,7 @@ void RoadProgram::add_road(const int renderbuffer_width,
 	const float road_thickness_x = (-delta_y / vector_length) * kRoadThicknessInPixels;
 	const float road_thickness_y = (delta_x / vector_length) * kRoadThicknessInPixels;
 
-	const Texture& texture =
+	const Image& texture =
 	   road_type == Widelands::RoadType::kNormal ?
 	      start.road_textures->get_normal_texture(start.fx, start.fy, direction) :
 	      start.road_textures->get_busy_texture(start.fx, start.fy, direction);

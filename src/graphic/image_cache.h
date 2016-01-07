@@ -54,6 +54,9 @@ public:
 	// Returns true if the given hash is stored in the cache.
 	bool has(const std::string& hash) const;
 
+	// Loads the cache from texture atlases on disk.
+	void load_from_disk();
+
 private:
 	std::vector<std::unique_ptr<Texture>> texture_atlases_;
 	std::map<std::string, std::unique_ptr<const Image>> images_;

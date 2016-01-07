@@ -78,6 +78,10 @@ wl_library(graphic_image_cache
     graphic_image_io
     graphic_surface
     graphic_texture_atlas
+    io_fileread
+    io_filesystem
+    scripting_lua_table
+    scripting_lua_interface
 )
 
 wl_library(graphic_sdl_utils

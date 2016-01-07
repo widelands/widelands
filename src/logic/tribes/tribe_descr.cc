@@ -319,12 +319,12 @@ const std::vector<std::string>& TribeDescr::busy_road_paths() const {
 	return busy_road_paths_;
 }
 
-void TribeDescr::add_normal_road_texture(std::unique_ptr<Texture> texture) {
-	road_textures_.add_normal_road_texture(std::move(texture));
+void TribeDescr::add_normal_road_texture(const Image* texture) {
+	road_textures_.add_normal_road_texture(texture);
 }
 
-void TribeDescr::add_busy_road_texture(std::unique_ptr<Texture> texture) {
-	road_textures_.add_busy_road_texture(std::move(texture));
+void TribeDescr::add_busy_road_texture(const Image* texture) {
+	road_textures_.add_busy_road_texture(texture);
 }
 
 const RoadTextures& TribeDescr::road_textures() const {

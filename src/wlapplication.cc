@@ -801,6 +801,7 @@ bool WLApplication::init_hardware() {
 	g_gr = new Graphic(s.get_int("xres", DEFAULT_RESOLUTION_W),
 	                   s.get_int("yres", DEFAULT_RESOLUTION_H),
 	                   s.get_bool("fullscreen", false));
+	g_gr->images().load_from_disk();
 
 	g_sound_handler.init(); //  TODO(unknown): memory leak!
 

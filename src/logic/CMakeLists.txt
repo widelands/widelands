@@ -240,7 +240,6 @@ wl_library(logic
     graphic_surface
     graphic_text
     graphic_text_layout
-    graphic_texture_atlas
     helper
     io_fileread
     io_filesystem

@@ -28,7 +28,6 @@
 
 class LuaInterface;
 class LuaTable;
-class Texture;
 
 namespace Widelands {
 
@@ -99,7 +98,6 @@ private:
 	std::unique_ptr<DescriptionMaintainer<ResourceDescription>> resources_;
 	std::unique_ptr<DescriptionMaintainer<EditorCategory>> editor_terrain_categories_;
 	std::unique_ptr<DescriptionMaintainer<EditorCategory>> editor_immovable_categories_;
-	std::unique_ptr<Texture> terrain_texture_;
 
 	DISALLOW_COPY_AND_ASSIGN(World);
 };

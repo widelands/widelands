@@ -21,18 +21,18 @@
 
 #include <memory>
 
-const Texture& RoadTextures::get_normal_texture(int x, int y, int direction) const {
+const Image& RoadTextures::get_normal_texture(int x, int y, int direction) const {
 	return *normal_textures_.at((x + y + direction) % normal_textures_.size());
 }
 
-const Texture& RoadTextures::get_busy_texture(int x, int y, int direction) const {
+const Image& RoadTextures::get_busy_texture(int x, int y, int direction) const {
 	return *busy_textures_.at((x + y + direction) % busy_textures_.size());
 }
 
-void RoadTextures::add_normal_road_texture(std::unique_ptr<Texture> texture) {
-	normal_textures_.emplace_back(std::move(texture));
+void RoadTextures::add_normal_road_texture(const Image* image) {
+	normal_textures_.emplace_back(image);
 }
 
-void RoadTextures::add_busy_road_texture(std::unique_ptr<Texture> texture) {
-	busy_textures_.emplace_back(std::move(texture));
+void RoadTextures::add_busy_road_texture(const Image* image) {
+	busy_textures_.emplace_back(image);
 }

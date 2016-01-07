@@ -51,7 +51,7 @@ UI::Checkbox* create_terrain_checkbox(UI::Panel* parent,
 	std::vector<std::string> tooltips;
 
 	// Blit the main terrain image
-	const Texture& terrain_texture = terrain_descr.get_texture(0);
+	const Image& terrain_texture = terrain_descr.get_texture(0);
 	Texture* texture = new Texture(terrain_texture.width(), terrain_texture.height());
 	texture->blit(Rect(0, 0, terrain_texture.width(), terrain_texture.height()),
 					  terrain_texture,

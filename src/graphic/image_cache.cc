@@ -37,8 +37,6 @@
 #include "scripting/lua_table.h"
 #include "scripting/lua_interface.h"
 
-static bool _initialized = false;
-
 ImageCache::ImageCache() {
 }
 
@@ -56,42 +54,39 @@ const Image* ImageCache::insert(const std::string& hash, std::unique_ptr<const I
 	return return_value;
 }
 
-const Image* ImageCache::get(const std::string& image_hash) {
-	// NOCOM(#sirver): ugly hack.
-	if (!_initialized) {
-		_initialized = true;
-		LuaInterface lua;
+void ImageCache::load_from_disk() {
+	LuaInterface lua;
 
-		for (int i = 0; i < 100; ++i) {
-			const auto filename = (boost::format("cache/output_%02d.png") % i).str();
-			if (!g_fs->file_exists(filename)) {
-				break;
-			}
-			texture_atlases_.emplace_back(load_image(filename));
+	for (int i = 0; i < 100; ++i) {
+		const auto filename = (boost::format("cache/output_%02d.png") % i).str();
+		if (!g_fs->file_exists(filename)) {
+			break;
 		}
+		texture_atlases_.emplace_back(load_image(filename));
+	}
 
-		// NOCOM(#sirver): output is a rather stupid name.
-		auto config = lua.run_script("cache/output.lua");
-		for (const auto& hash : config->keys<std::string>()) {
-			auto image_config = config->get_table(hash);
-			if (image_config->get_string("type") == "unpacked") {
-				images_.emplace(hash, load_image(hash));
-			} else {
-				int texture_atlas_index = image_config->get_int("texture_atlas");
-				const auto& parent = texture_atlases_[texture_atlas_index]->blit_data();
-				auto rect_config = image_config->get_table("rect");
-				const Rect subrect(rect_config->get_int(1), rect_config->get_int(2),
-						rect_config->get_int(3), rect_config->get_int(4));
-				images_.emplace(hash, std::unique_ptr<Texture>(new Texture(
-								parent.texture_id, subrect, parent.rect.w, parent.rect.h)));
-			}
+	// NOCOM(#sirver): output is a rather stupid name.
+	auto config = lua.run_script("cache/output.lua");
+	for (const auto& hash : config->keys<std::string>()) {
+		auto image_config = config->get_table(hash);
+		if (image_config->get_string("type") == "unpacked") {
+			images_.emplace(hash, load_image(hash));
+		} else {
+			int texture_atlas_index = image_config->get_int("texture_atlas");
+			const auto& parent = texture_atlases_[texture_atlas_index]->blit_data();
+			auto rect_config = image_config->get_table("rect");
+			const Rect subrect(rect_config->get_int(1), rect_config->get_int(2),
+			                   rect_config->get_int(3), rect_config->get_int(4));
+			images_.emplace(hash, std::unique_ptr<Texture>(new Texture(
+			                         parent.texture_id, subrect, parent.rect.w, parent.rect.h)));
 		}
 	}
-	auto it = images_.find(image_hash);
+}
+
+const Image* ImageCache::get(const std::string& hash) {
+	auto it = images_.find(hash);
 	if (it == images_.end()) {
-		log("#sirver not found :(hash: %s\n", image_hash.c_str());
-		images_.emplace(image_hash, std::move(load_image(image_hash)));
-		return get(image_hash);
+		throw wexception("Image with hash %s not found.", hash.c_str());
 	}
 	return it->second.get();
 }

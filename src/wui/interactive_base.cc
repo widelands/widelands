@@ -378,6 +378,9 @@ void InteractiveBase::draw_overlay(RenderTarget& dst) {
 			UI::Align_BottomRight);
 	}
 
+	const auto fps = (1000.0 / m_frametime);
+	const auto average = (1000.0 / (m_avg_usframetime / 1000));
+	log("#sirver fps;: %5.1f, %5.1f\n", fps, average);
 	// Blit FPS when in debug mode.
 	if (get_display_flag(dfDebug)) {
 		static boost::format fps_format("%5.1f fps (avg: %5.1f fps)");

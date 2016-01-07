@@ -73,8 +73,8 @@ public:
 	const std::vector<std::string>& texture_paths() const;
 
 	/// Returns the texture for the given gametime.
-	const Texture& get_texture(uint32_t gametime) const;
-	void add_texture(std::unique_ptr<Texture> texture);
+	const Image& get_texture(uint32_t gametime) const;
+	void add_texture(const Image* texture);
 
 	// Sets the base minimap color.
 	void set_minimap_color(const RGBColor& color);
@@ -140,7 +140,7 @@ private:
 	double fertility_;
 	double humidity_;
 	std::vector<std::string> texture_paths_;
-	std::vector<std::unique_ptr<Texture>> textures_;
+	std::vector<const Image*> textures_;
 	RGBColor    minimap_colors_[256];
 
 	DISALLOW_COPY_AND_ASSIGN(TerrainDescription);
