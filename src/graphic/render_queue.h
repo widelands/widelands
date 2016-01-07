@@ -29,7 +29,6 @@
 #include "base/rect.h"
 #include "graphic/blend_mode.h"
 #include "graphic/color.h"
-#include "graphic/gl/blit_source.h"
 #include "graphic/gl/fields_to_draw.h"
 #include "logic/description_maintainer.h"
 #include "logic/world/terrain_description.h"
@@ -79,30 +78,30 @@ class TerrainProgram;
 class RenderQueue {
 public:
 	enum Program {
-		TERRAIN_BASE,
-		TERRAIN_DITHER,
-		TERRAIN_ROAD,
-		BLIT,
-		BLIT_MONOCHROME,
-		BLIT_BLENDED,
-		RECT,
-		LINE,
-		HIGHEST_PROGRAM_ID,
+		kTerrainBase,
+		kTerrainDither,
+		kTerrainRoad,
+		kBlit,
+		kBlitMonochrome,
+		kBlitBlended,
+		kRect,
+		kLine,
+		kHighestProgramId,
 	};
 
 	struct VanillaBlitArguments {
-		BlitSource texture;
+		BlitData texture;
 		float opacity;
 	};
 
 	struct MonochromeBlitArguments {
-		BlitSource texture;
+		BlitData texture;
 		RGBAColor blend;
 	};
 
 	struct BlendedBlitArguments {
-		BlitSource texture;
-		BlitSource mask;
+		BlitData texture;
+		BlitData mask;
 		RGBAColor blend;
 	};
 

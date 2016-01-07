@@ -31,14 +31,14 @@ abilities = {
       p(_[[Take a look at the soldiers that are on their way to our military buildings. They look different from normal workers: they have a health bar over their head that displays their remaining health, and they have four symbols, which symbolize the individual soldier’s current levels in the four different categories: health, attack, defense and evade.]]) ..
       p(_[[If a Barbarian soldier is fully trained, he has level 3 health, level 5 attack, level 0 defense and level 2 evade. This is one fearsome warrior then! The individual abilities have the following meaning:]])
    ) ..
-   rt("image=tribes/barbarians/soldier/hp_level0.png", h2(_"Health:"))..
+   rt("image=tribes/workers/barbarians/soldier/hp_level0.png", h2(_"Health:"))..
    rt(p(_[[The total life of a soldier. A Barbarian soldier starts with 130 health, and he will gain 28 health with each health level.]])) ..
-   rt("image=tribes/barbarians/soldier/attack_level0.png", h2(_"Attack:")) ..
+   rt("image=tribes/workers/barbarians/soldier/attack_level0.png", h2(_"Attack:")) ..
    rt(p(_[[The amount of damage a soldier will inflict on the enemy when an attack is successful. A Barbarian soldier with attack level 0 inflicts ~14 points of health damage when he succeeds in hitting an enemy. For each attack level, he gains 7 damage points.]])) ..
    -- The Atlanteans' image, because the Barbarian one has a white background
-   rt("image=tribes/atlanteans/soldier/defense_level0.png", h2(_"Defense:")) ..
+   rt("image=tribes/workers/atlanteans/soldier/defense_level0.png", h2(_"Defense:")) ..
    rt(p(_[[The defense is the percentage that is subtracted from the attack value. The Barbarians cannot train in this skill and therefore have always defense level 0, which means that the damage is always reduced by 3%. If an attacker with an attack value of 35 points hits a Barbarian soldier, the Barbarian will lose 35·0.97 = 34 health.]])) ..
-   rt("image=tribes/barbarians/soldier/evade_level0.png", h2(_"Evade:")) ..
+   rt("image=tribes/workers/barbarians/soldier/evade_level0.png", h2(_"Evade:")) ..
    rt(p(_[[Evade is the chance that the soldier is able to dodge an attack. A level 0 Barbarian has a 25% chance to evade an attack, and this increases in steps of 15% for each level.]]))
 }
 
@@ -48,17 +48,19 @@ battlearena1 = {
    body = rt(
       p(_[[Now I have talked about training and levels. Let me elaborate on that.]]) ..
       p(_[[A newly created soldier has no experience and is not very good at fighting. To make him stronger, you can build training sites.]]) ..
-      p(_[[One of these training sites is the battle arena. It is a big and expensive building, and it trains soldiers in evade. Since soldiers get very hungry during their workout, this building needs a lot of food and strongbeer. In a real game, you should have a good infrastructure before you build it.]]) ..
+      p(_[[One of these training sites is the battle arena. It is a big and expensive building, and it trains soldiers in evade. Since soldiers get very hungry during their workout, this building needs a lot of food and strong beer. In a real game, you should have a good infrastructure before you build it.]]) ..
       paragraphdivider() ..
-      listitem_bullet(_[[To see evade training in action, build a battle arena.]])
+      listitem_bullet(_[[To see evade training in action, build a battle arena.]]) ..
+      "</p><p font-size=8><br></p>" ..
+      p(_[[While we’re waiting for the battle arena, you’ll probably notice some soldiers walking around. They are automatically exchanged from time to time. I’ll teach you about that later.]])
    ),
-   h = 350,
+   h = 400,
    obj_name = "build_battlearena",
    obj_title = _"Build a battle arena",
    obj_body = rt(
       paragraphdivider() ..
       listitem_bullet(_[[Build a battle arena. It is a big building.]]) ..
-      listitem_arrow(_[[Since the construction will take some time, you can change the game speed using PAGE UP and PAGE DOWN.]])
+      listitem_arrow(_[[Since the construction will take some time, you can change the game speed using Page Up and Page Down.]])
    )
 }
 
@@ -69,13 +71,13 @@ battlearena2 = {
       h1(_"The Battle Arena Has Been Constructed") ..
       p(_[[Very good. Our battle arena has been finished, and the soldiers are already walking towards it.]]) ..
       -- Not perfectly correct (some training steps need either bread or meat), but we do not want to confuse new players
-      p(_[[The needed wares are also delivered there. For successful training, you need pitta bread and strongbeer. Most steps additionally require either fish or meat.]] .. " " ..
-		_[[For more information, you can have a look at the building’s help window, accessible via the question mark in every building’s window.]]) ..
+      p(_[[The needed wares are also delivered there. For successful training, you need pitta bread and strong beer, as well as either fish or meat.]] .. " " ..
+      _[[For more information, you can have a look at the building’s help window, accessible via the question mark in every building’s window.]]) ..
       p(_[[To learn how far your soldiers have progressed in their training, you can have a look at their icons. They are modified by red dots:]])
    ) ..
-   rt("image=tribes/barbarians/soldier/evade_level0.png", p(_[[No red dots means that the soldier is not trained, so he has level 0. All your new recruits have this.]])) ..
-   rt("image=tribes/barbarians/soldier/evade_level1.png", p(_[[With every successful training step, your soldier becomes stronger. This is indicated by a red dot. This soldier is on level 1 in evade training.]])) ..
-   rt("image=tribes/barbarians/soldier/evade_level2.png", p(_[[When your soldier has reached the highest possible level (in this case level 2), this is indicated by a white background color.]])),
+   rt("image=tribes/workers/barbarians/soldier/evade_level0.png", p(_[[No red dots means that the soldier is not trained, so he has level 0. All your new recruits have this.]])) ..
+   rt("image=tribes/workers/barbarians/soldier/evade_level1.png", p(_[[With every successful training step, your soldier becomes stronger. This is indicated by a red dot. This soldier is on level 1 in evade training.]])) ..
+   rt("image=tribes/workers/barbarians/soldier/evade_level2.png", p(_[[When your soldier has reached the highest possible level (in this case level 2), this is indicated by a white background color.]])),
    h = 450
 }
 
@@ -103,7 +105,7 @@ trainingcamp2 = {
    title = _"The Training Camp",
    body = rt(
       p(_[[Great, our training camp has now been finished, too. Now nothing will hinder us from getting the strongest warriors the world has ever seen.]]) ..
-      p(_[[To train in the training camp, our soldiers need food like in the battle arena, but no strongbeer. Instead, they need different axes for attack training and helmets for health training.]]) ..
+      p(_[[To train in the training camp, our soldiers need food like in the battle arena, but no strong beer. Instead, they need different axes for attack training and helmets for health training.]]) ..
       p(_[[This equipment is produced in smithies out of coal, iron, and sometimes gold. You will learn more about this in the second scenario of the Barbarian campaign.]]) ..
       p(_[[You should also keep in mind that each of the three tribes in Widelands has its own way of training, so the buildings and wares are different. Also, the ability levels cannot be compared: an Imperial soldier with evade level 0 has a 30% chance of evading, while a Barbarian soldier at the same level only has a 25% chance.]])
    )
@@ -115,7 +117,7 @@ heroes_rookies = {
    body = rt(
       h1(_"Heroes and Rookies") ..
       p(_[[While our soldiers are training, let me tell you what we can do with them.]]) ..
-      p(_[[In every military building, you can set the preference for heroes (trained soldiers) or rookies. From time to time, a soldier will walk out of the building and be replaced by a stronger/weaker one automatically.]]) ..
+      p(_[[In every military building, you can set the preference for heroes (trained soldiers) or rookies. From time to time, a soldier will walk out of the building and be replaced by a stronger/weaker one automatically – this is what you saw earlier.]]) ..
       p(_[[The initial setting depends on the type of the building. For the Barbarians, the sentry is the only building that prefers rookies by default. You should change this setting to fit your current needs.]]) ..
       p(_[[When you are expanding into no man’s land, you can make your buildings prefer rookies. When you are planning to attack, send heroes into that region. Conquered buildings always prefer heroes.]])
    )
@@ -210,4 +212,3 @@ conclude_tutorial = {
       p(_[[You are now ready to play the campaigns. They will teach you about the different economies of the tribes. You can also play the remaining tutorials, but they are not crucial for succeeding in the campaigns.]])
    )
 }
-

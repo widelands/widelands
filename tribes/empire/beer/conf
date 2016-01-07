@@ -1,8 +1,0 @@
-help=_This beer is produced in a brewery out of wheat and water. It is consumed by miners in coal and iron ore mines.
-
-default_target_quantity=15
-preciousness=5
-
-[idle]
-pics=idle.png
-hotspot=5 9

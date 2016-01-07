@@ -30,7 +30,7 @@
 #include "logic/maphollowregion.h"
 #include "logic/player.h"
 #include "logic/soldier.h"
-#include "logic/tribe.h"
+#include "logic/tribes/tribe_descr.h"
 #include "logic/warehouse.h"
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
@@ -46,7 +46,7 @@
 #include "wui/waresdisplay.h"
 #include "wui/watchwindow.h"
 
-namespace Widelands {struct BuildingDescr;}
+namespace Widelands {class BuildingDescr;}
 using Widelands::Building;
 using Widelands::EditorGameBase;
 using Widelands::Game;
@@ -56,16 +56,16 @@ constexpr int kBuildGridCellSize = 50;
 // The BuildGrid presents a selection of buildable buildings
 struct BuildGrid : public UI::IconGrid {
 	BuildGrid(UI::Panel* parent,
-	          const Widelands::TribeDescr& tribe,
+				 Widelands::Player* plr,
 	          int32_t x,
 	          int32_t y,
 	          int32_t cols);
 
-	boost::signals2::signal<void(Widelands::BuildingIndex)> buildclicked;
-	boost::signals2::signal<void(Widelands::BuildingIndex)> buildmouseout;
-	boost::signals2::signal<void(Widelands::BuildingIndex)> buildmousein;
+	boost::signals2::signal<void(Widelands::DescriptionIndex)> buildclicked;
+	boost::signals2::signal<void(Widelands::DescriptionIndex)> buildmouseout;
+	boost::signals2::signal<void(Widelands::DescriptionIndex)> buildmousein;
 
-	void add(Widelands::BuildingIndex);
+	void add(Widelands::DescriptionIndex);
 
 private:
 	void click_slot(int32_t idx);
@@ -73,14 +73,14 @@ private:
 	void mousein_slot(int32_t idx);
 
 private:
-	const Widelands::TribeDescr& tribe_;
+	Widelands::Player* plr_;
 };
 
 BuildGrid::BuildGrid(
-		UI::Panel* parent, const Widelands::TribeDescr& tribe,
+		UI::Panel* parent, Widelands::Player* plr,
 		int32_t x, int32_t y, int32_t cols) :
 	UI::IconGrid(parent, x, y, kBuildGridCellSize, kBuildGridCellSize, cols),
-	tribe_(tribe)
+	plr_(plr)
 {
 	clicked.connect(boost::bind(&BuildGrid::click_slot, this, _1));
 	mouseout.connect(boost::bind(&BuildGrid::mouseout_slot, this, _1));
@@ -92,20 +92,19 @@ BuildGrid::BuildGrid(
 Add a new building to the list of buildable buildings
 ===============
 */
-void BuildGrid::add(Widelands::BuildingIndex id)
+void BuildGrid::add(Widelands::DescriptionIndex id)
 {
 	const Widelands::BuildingDescr & descr =
-		*tribe_.get_building_descr(Widelands::BuildingIndex(id));
+		*plr_->tribe().get_building_descr(Widelands::DescriptionIndex(id));
+
 	// TODO(sirver): change this to take a Button subclass instead of
 	// parameters. This will allow overriding the way it is rendered
 	// to bring back player colors.
 	UI::IconGrid::add(descr.name(),
-	                  &g_gr->animations()
-	                      .get_animation(descr.get_animation("idle"))
-	                      .representative_image_from_disk(),
+							descr.representative_image(&plr_->get_playercolor()),
 	                  reinterpret_cast<void*>(id),
 	                  descr.descname() + "<br><font size=11>" + _("Construction costs:") +
-	                     "</font><br>" + waremap_to_richtext(tribe_, descr.buildcost()));
+								"</font><br>" + waremap_to_richtext(plr_->tribe(), descr.buildcost()));
 }
 
 
@@ -189,9 +188,9 @@ public:
 	void act_buildroad();
 	void act_abort_buildroad();
 	void act_removeroad();
-	void act_build              (Widelands::BuildingIndex);
-	void building_icon_mouse_out(Widelands::BuildingIndex);
-	void building_icon_mouse_in (Widelands::BuildingIndex);
+	void act_build              (Widelands::DescriptionIndex);
+	void building_icon_mouse_out(Widelands::DescriptionIndex);
+	void building_icon_mouse_in (Widelands::DescriptionIndex);
 	void act_geologist();
 	void act_attack();      /// Launch the attack
 
@@ -499,38 +498,35 @@ void FieldActionWindow::add_buttons_build(int32_t buildcaps)
 
 	m_fastclick = false;
 
-	const Widelands::BuildingIndex nr_buildings = tribe.get_nrbuildings();
-	for
-		(Widelands::BuildingIndex id = 0;
-		 id < nr_buildings;
-		 ++id)
-	{
-		const Widelands::BuildingDescr & descr = *tribe.get_building_descr(id);
+	for (const Widelands::DescriptionIndex& building_index : tribe.buildings()) {
+		const Widelands::BuildingDescr* building_descr = tribe.get_building_descr(building_index);
 		BuildGrid * * ppgrid;
 
 		//  Some building types cannot be built (i.e. construction site) and not
 		//  allowed buildings.
 		if (dynamic_cast<const Game *>(&ibase().egbase())) {
-			if (!descr.is_buildable() || !m_plr->is_building_type_allowed(id))
+			if (!building_descr->is_buildable() || !m_plr->is_building_type_allowed(building_index))
 				continue;
-		} else if (!descr.is_buildable() && !descr.is_enhanced())
+			if (building_descr->needs_seafaring() && ibase().egbase().map().get_port_spaces().size() < 2)
+				continue;
+		} else if (!building_descr->is_buildable() && !building_descr->is_enhanced())
 			continue;
 
 		// Figure out if we can build it here, and in which tab it belongs
-		if (descr.get_ismine()) {
+		if (building_descr->get_ismine()) {
 			if (!(buildcaps & Widelands::BUILDCAPS_MINE))
 				continue;
 
 			ppgrid = &bbg_mine;
 		} else {
-			int32_t size = descr.get_size() - Widelands::BaseImmovable::SMALL;
+			int32_t size = building_descr->get_size() - Widelands::BaseImmovable::SMALL;
 
 			if ((buildcaps & Widelands::BUILDCAPS_SIZEMASK) < size + 1)
 				continue;
-			if (descr.get_isport() && !(buildcaps & Widelands::BUILDCAPS_PORT))
+			if (building_descr->get_isport() && !(buildcaps & Widelands::BUILDCAPS_PORT))
 				continue;
 
-			if (descr.get_isport())
+			if (building_descr->get_isport())
 				ppgrid = &bbg_house[3];
 			else
 				ppgrid = &bbg_house[size];
@@ -538,7 +534,7 @@ void FieldActionWindow::add_buttons_build(int32_t buildcaps)
 
 		// Allocate the tab's grid if necessary
 		if (!*ppgrid) {
-			*ppgrid = new BuildGrid(&m_tabpanel, tribe, 0, 0, 5);
+			*ppgrid = new BuildGrid(&m_tabpanel, m_plr, 0, 0, 5);
 			(*ppgrid)->buildclicked.connect(boost::bind(&FieldActionWindow::act_build, this, _1));
 			(*ppgrid)->buildmouseout.connect
 				(boost::bind(&FieldActionWindow::building_icon_mouse_out, this, _1));
@@ -548,7 +544,7 @@ void FieldActionWindow::add_buttons_build(int32_t buildcaps)
 		}
 
 		// Add it to the grid
-		(*ppgrid)->add(id);
+		(*ppgrid)->add(building_index);
 	}
 
 	// Add all necessary tabs
@@ -798,12 +794,12 @@ void FieldActionWindow::act_removeroad()
 Start construction of the building with the give description index
 ===============
 */
-void FieldActionWindow::act_build(Widelands::BuildingIndex idx)
+void FieldActionWindow::act_build(Widelands::DescriptionIndex idx)
 {
 	upcast(Game, game, &ibase().egbase());
 	upcast(InteractivePlayer, iaplayer, &ibase());
 
-	game->send_player_build(iaplayer->player_number(), m_node, Widelands::BuildingIndex(idx));
+	game->send_player_build(iaplayer->player_number(), m_node, Widelands::DescriptionIndex(idx));
 	ibase().reference_player_tribe(m_plr->player_number(), &m_plr->tribe());
 	iaplayer->set_flag_to_connect(game->map().br_n(m_node));
 	okdialog();
@@ -811,7 +807,7 @@ void FieldActionWindow::act_build(Widelands::BuildingIndex idx)
 
 
 void FieldActionWindow::building_icon_mouse_out
-	(Widelands::BuildingIndex)
+	(Widelands::DescriptionIndex)
 {
 	if (m_workarea_preview_overlay_id) {
 		m_field_overlay_manager.remove_overlay(m_workarea_preview_overlay_id);
@@ -821,11 +817,11 @@ void FieldActionWindow::building_icon_mouse_out
 
 
 void FieldActionWindow::building_icon_mouse_in
-	(const Widelands::BuildingIndex idx)
+	(const Widelands::DescriptionIndex idx)
 {
 	if (ibase().m_show_workarea_preview && !m_workarea_preview_overlay_id) {
 		const WorkareaInfo & workarea_info =
-			m_plr->tribe().get_building_descr(Widelands::BuildingIndex(idx))
+			m_plr->tribe().get_building_descr(Widelands::DescriptionIndex(idx))
 			->m_workarea_info;
 		m_workarea_preview_overlay_id = ibase().show_work_area(workarea_info, m_node);
 	}

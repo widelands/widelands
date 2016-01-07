@@ -72,8 +72,7 @@ private:
 
 		int width() const override;
 		int height() const override;
-		int get_gl_texture() const override;
-		const FloatRect& texture_coordinates() const override;
+		const BlitData& blit_data() const override;
 
 	private:
 		std::unique_ptr<const Image> image_;

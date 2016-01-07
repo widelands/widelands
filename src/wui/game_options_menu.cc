@@ -32,27 +32,33 @@
 #include "wui/game_options_sound_menu.h"
 #include "wui/unique_window_handler.h"
 
+#define width 200
+#define margin 10
+#define vspacing 5
+#define vgap 3
+
 class GameOptionsMenuExitConfirmBox : public UI::WLMessageBox {
 public:
+	// TODO(GunChleoc): Arabic: Buttons need more height for Arabic
 	GameOptionsMenuExitConfirmBox(UI::Panel& parent, InteractiveGameBase& gb)
 		: UI::WLMessageBox(&parent,
 								 /** TRANSLATORS: Window label when "Exit game" has been pressed */
 								 _("Exit Game Confirmation"),
 								 _("Are you sure you wish to exit this game?"),
-								 YESNO),
-		  m_gb(gb) {
+								 MBoxType::kOkCancel),
+		  igb_(gb) {
 	}
 
-	void pressed_yes() override {
-		m_gb.end_modal(0);
+	void clicked_ok() override {
+		igb_.end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack);
 	}
 
-	void pressed_no() override {
+	void clicked_back() override {
 		die();
 	}
 
 private:
-	InteractiveGameBase& m_gb;
+	InteractiveGameBase& igb_;
 };
 
 GameOptionsMenu::GameOptionsMenu
@@ -60,133 +66,122 @@ GameOptionsMenu::GameOptionsMenu
 	 UI::UniqueWindow::Registry               & registry,
 	 InteractiveGameBase::GameMainMenuWindows & windows)
 :
-	UI::UniqueWindow
-		(&gb, "options", &registry,
-		 145,
-		 vmargin()
-		 + 4 * (20 + vspacing()) + 2 * vgap() +
-		 35 + vspacing() + 35 +
-		 vmargin(),
-		 _("Options")),
-	m_gb(gb),
-	m_windows(windows),
-	readme
-		(this, "readme",
-		 posx(0, 1),
-		 vmargin() + 0 * (20 + vspacing()) + 0 * vgap(),
-		 buttonw(1), 20,
+	UI::UniqueWindow(&gb, "options", &registry, 2 * margin + width, 0, _("Options")),
+	igb_(gb),
+	windows_(windows),
+	box_(this, margin, margin, UI::Box::Vertical,
+		  width, get_h() - 2 * margin, vspacing),
+	readme_
+		(&box_, "readme",
+		 0, 0, width, 0,
 		 g_gr->images().get("pics/but4.png"),
 		 _("README"),
 		/** TRANSLATORS: Button tooltip */
 		_("Show general information about Widelands and keyboard shortcuts")),
-	license
-		(this, "license",
-		 posx(0, 1),
-		 vmargin() + 1 * (20 + vspacing()) + 0 * vgap(),
-		 buttonw(1), 20,
+	license_
+		(&box_, "license",
+		 0, 0, width, 0,
 		 g_gr->images().get("pics/but4.png"),
 		 _("License"),
 		/** TRANSLATORS: Button tooltip */
 		_("Show the distribution licence document")),
-	authors
-		(this, "authors",
-		 posx(0, 1),
-		 vmargin() + 2 * (20 + vspacing()) + 0 * vgap(),
-		 buttonw(1), 20,
+	authors_
+		(&box_, "authors",
+		 0, 0, width, 0,
 		 g_gr->images().get("pics/but4.png"),
 		 _("Authors"),
 		/** TRANSLATORS: Button tooltip */
 		_("Show information about the Widelands Development Team")),
-	sound
-		(this, "sound_options",
-		 posx(0, 1),
-		 vmargin() + 3 * (20 + vspacing()) + 1 * vgap(),
-		 buttonw(1), 20,
+	sound_
+		(&box_, "sound_options",
+		 0, 0, width, 0,
 		 g_gr->images().get("pics/but4.png"),
 		 _("Sound Options"),
 		/** TRANSLATORS: Button tooltip */
 		_("Set sound effect and music options")),
-	save_game
-		(this, "save_game",
-		 posx(0, 1),
-		 vmargin() + 4 * (20 + vspacing()) + 2 * vgap(),
-		 buttonw(1), 35,
+	save_game_
+		(&box_, "save_game",
+		 0, 0, width, 35,
 		 g_gr->images().get("pics/but4.png"),
 		 g_gr->images().get("pics/menu_save_game.png"),
 		 /** TRANSLATORS: Button tooltip */
 		 _("Save Game")),
-	exit_game
-		(this, "exit_game",
-		 posx(0, 1),
-		 vmargin() + 4 * (20 + vspacing()) + 2 * vgap() +
-		 35 + vspacing(),
-		 buttonw(1), 35,
+	exit_game_
+		(&box_, "exit_game",
+		 0, 0, width, 35,
 		 g_gr->images().get("pics/but4.png"),
 		 g_gr->images().get("pics/menu_exit_game.png"),
 		 /** TRANSLATORS: Button tooltip */
 		 _("Exit Game"))
 {
-	readme.sigclicked.connect
-		(boost::bind(&UI::UniqueWindow::Registry::toggle, boost::ref(m_windows.readme)));
-	license.sigclicked.connect
-		(boost::bind(&UI::UniqueWindow::Registry::toggle, boost::ref(m_windows.license)));
-	authors.sigclicked.connect
-		(boost::bind(&UI::UniqueWindow::Registry::toggle, boost::ref(m_windows.authors)));
-	sound.sigclicked.connect(boost::bind(&GameOptionsMenu::clicked_sound, boost::ref(*this)));
-	save_game.sigclicked.connect(boost::bind(&GameOptionsMenu::clicked_save_game, boost::ref(*this)));
-	exit_game.sigclicked.connect(boost::bind(&GameOptionsMenu::clicked_exit_game, boost::ref(*this)));
+	box_.add(&readme_, UI::Box::AlignCenter);
+	box_.add(&license_, UI::Box::AlignCenter);
+	box_.add(&authors_, UI::Box::AlignCenter);
+	box_.add_space(vgap);
+	box_.add(&sound_, UI::Box::AlignCenter);
+	box_.add_space(vgap);
+	box_.add(&save_game_, UI::Box::AlignCenter);
+	box_.add(&exit_game_, UI::Box::AlignCenter);
+	box_.set_size(width, 4 * readme_.get_h() + 2 * save_game_.get_h() + 2 * vgap + 7 * vspacing);
+	set_inner_size(get_inner_w(), box_.get_h() + 2 * margin);
+
+	readme_.sigclicked.connect
+		(boost::bind(&UI::UniqueWindow::Registry::toggle, boost::ref(windows_.readme)));
+	license_.sigclicked.connect
+		(boost::bind(&UI::UniqueWindow::Registry::toggle, boost::ref(windows_.license)));
+	authors_.sigclicked.connect
+		(boost::bind(&UI::UniqueWindow::Registry::toggle, boost::ref(windows_.authors)));
+	sound_.sigclicked.connect(boost::bind(&GameOptionsMenu::clicked_sound, boost::ref(*this)));
+	save_game_.sigclicked.connect(boost::bind(&GameOptionsMenu::clicked_save_game, boost::ref(*this)));
+	exit_game_.sigclicked.connect(boost::bind(&GameOptionsMenu::clicked_exit_game, boost::ref(*this)));
 
 
-	m_windows.readme.open_window = boost::bind
-		(&fileview_window, boost::ref(m_gb),
-		 boost::ref(m_windows.readme),
+	windows_.readme.open_window = boost::bind
+		(&fileview_window, boost::ref(igb_),
+		 boost::ref(windows_.readme),
 		 "txts/README.lua");
-	m_windows.license.open_window = boost::bind
-		(&fileview_window, boost::ref(m_gb),
-		 boost::ref(m_windows.license),
-		 "txts/license");
-	m_windows.authors.open_window = boost::bind
-		(&fileview_window, boost::ref(m_gb),
-		 boost::ref(m_windows.authors),
-		 "txts/developers");
+	windows_.license.open_window = boost::bind
+		(&fileview_window, boost::ref(igb_),
+		 boost::ref(windows_.license),
+		 "txts/LICENSE.lua");
+	windows_.authors.open_window = boost::bind
+		(&fileview_window, boost::ref(igb_),
+		 boost::ref(windows_.license),
+		 "txts/AUTHORS.lua");
 
 #define INIT_BTN_HOOKS(registry, btn)                                        \
  registry.on_create = std::bind(&UI::Button::set_perm_pressed, &btn, true);  \
  registry.on_delete = std::bind(&UI::Button::set_perm_pressed, &btn, false); \
  if (registry.window) btn.set_perm_pressed(true);                            \
 
-	INIT_BTN_HOOKS(m_windows.readme, readme)
-	INIT_BTN_HOOKS(m_windows.license, license)
-	INIT_BTN_HOOKS(m_windows.authors, authors)
-	INIT_BTN_HOOKS(m_windows.sound_options, sound)
+	INIT_BTN_HOOKS(windows_.readme, readme_)
+	INIT_BTN_HOOKS(windows_.license, license_)
+	INIT_BTN_HOOKS(windows_.authors, authors_)
+	INIT_BTN_HOOKS(windows_.sound_options, sound_)
 
-	set_inner_size
-		(hmargin() + hmargin() +
-		 std::max<int32_t>(get_inner_w(), readme.get_w()),
-		 get_inner_h());
 	if (get_usedefaultpos())
 		center_to_parent();
 }
 
 
 void GameOptionsMenu::clicked_sound() {
-	if (m_windows.sound_options.window)
-		delete m_windows.sound_options.window;
+	if (windows_.sound_options.window)
+		delete windows_.sound_options.window;
 	else
-		new GameOptionsSoundMenu(m_gb, m_windows.sound_options);
+		new GameOptionsSoundMenu(igb_, windows_.sound_options);
 }
 
 void GameOptionsMenu::clicked_save_game() {
-	new GameMainMenuSaveGame(m_gb, m_windows.savegame);
+	new GameMainMenuSaveGame(igb_, windows_.savegame);
 	die();
 }
 
 void GameOptionsMenu::clicked_exit_game() {
 	if (get_key_state(SDL_SCANCODE_LCTRL) || get_key_state(SDL_SCANCODE_RCTRL)) {
-		m_gb.end_modal(0);
+		igb_.end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack);
 	}
 	else {
-		new GameOptionsMenuExitConfirmBox(*get_parent(), m_gb);
+		new GameOptionsMenuExitConfirmBox(*get_parent(), igb_);
 		die();
 	}
 }

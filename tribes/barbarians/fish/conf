@@ -1,8 +1,0 @@
-help=_Besides pitta bread and meat, fish is also a foodstuff for the barbarians. It is used in the taverns, inns and big inns and at the training sites (training camp and battle arena).
-
-default_target_quantity=20 # currently not used
-preciousness=3
-
-[idle]
-pics=idle.png
-hotspot=8 6

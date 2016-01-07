@@ -22,12 +22,21 @@
 #include <map>
 
 #include <SDL_ttf.h>
+#include <boost/algorithm/string.hpp>
 #include <boost/format.hpp>
 
 #include "base/utf8.h"
 #include "graphic/font_handler1.h"
+#include "graphic/text/bidi.h"
 #include "graphic/text/font_set.h"
 #include "graphic/text_constants.h"
+
+std::string richtext_escape(const std::string& given_text) {
+	std::string text = given_text;
+	boost::replace_all(text, ">", "&gt;");
+	boost::replace_all(text, "<", "&lt;");
+	return text;
+}
 
 std::string as_game_tip(const std::string& txt) {
 	static boost::format f
@@ -39,36 +48,36 @@ std::string as_game_tip(const std::string& txt) {
 }
 
 std::string as_window_title(const std::string& txt) {
-	static boost::format f("<rt><p><font face=serif size=13 bold=1 color=%02x%02x%02x>%s</font></p></rt>");
+	static boost::format f("<rt><p><font face=serif size=13 bold=1 color=%s>%s</font></p></rt>");
 
-	f % int(UI_FONT_CLR_FG.r) % int(UI_FONT_CLR_FG.g) % int(UI_FONT_CLR_FG.b);
+	f % UI_FONT_CLR_FG.hex_value();
 	f % txt;
 	return f.str();
 }
 std::string as_uifont(const std::string & txt, int size, const RGBColor& clr) {
 	// UI Text is always bold due to historic reasons
 	static boost::format
-			f("<rt><p><font face=serif size=%i bold=1 shadow=1 color=%02x%02x%02x>%s</font></p></rt>");
+			f("<rt><p><font face=serif size=%i bold=1 shadow=1 color=%s>%s</font></p></rt>");
 
 	f % size;
-	f % int(clr.r) % int(clr.g) % int(clr.b);
+	f % clr.hex_value();
 	f % txt;
 	return f.str();
 }
 
 std::string as_tooltip(const std::string & txt) {
-	static boost::format f("<rt><p><font face=serif size=%i bold=1 color=%02x%02x%02x>%s</font></p></rt>");
+	static boost::format f("<rt><p><font face=serif size=%i bold=1 color=%s>%s</font></p></rt>");
 
 	f % UI_FONT_SIZE_SMALL;
-	f % int(UI_FONT_TOOLTIP_CLR.r) % int(UI_FONT_TOOLTIP_CLR.g) % int(UI_FONT_TOOLTIP_CLR.b);
+	f % UI_FONT_TOOLTIP_CLR.hex_value();
 	f % txt;
 	return f.str();
 }
 
 std::string as_waresinfo(const std::string & txt) {
 	static boost::format f
-		("<rt><p><font face=condensed size=10 bold=0 color=%02x%02x%02x>%s</font></p></rt>");
-	f % int(UI_FONT_TOOLTIP_CLR.r) % int(UI_FONT_TOOLTIP_CLR.g) % int(UI_FONT_TOOLTIP_CLR.b);
+		("<rt><p><font face=condensed size=10 bold=0 color=%s>%s</font></p></rt>");
+	f % UI_FONT_TOOLTIP_CLR.hex_value();
 	f % txt;
 	return f.str();
 }
@@ -93,12 +102,38 @@ void TextStyle::setup() const
 }
 
 /**
+ * Get a width estimate for text wrapping.
+ */
+uint32_t TextStyle::calc_width_for_wrapping(const UChar& c) const {
+	int result = 0;
+	TTF_GlyphMetrics(font->get_ttf_font(), c, nullptr, nullptr, nullptr, nullptr, &result);
+	return result;
+}
+
+/**
+ * Get a width estimate for text wrapping.
+ */
+uint32_t TextStyle::calc_width_for_wrapping(const std::string & text) const
+{
+	int result = 0;
+	const icu::UnicodeString parseme(text.c_str());
+	for (int i = 0; i < parseme.length(); ++i) {
+		UChar c = parseme.charAt(i);
+		if (!i18n::is_diacritic(c)) {
+			result += calc_width_for_wrapping(c);
+		}
+	}
+	return result;
+}
+
+/**
  * Compute the bare width (without caret padding) of the given string.
  */
 uint32_t TextStyle::calc_bare_width(const std::string & text) const
 {
 	int w, h;
 	setup();
+
 	TTF_SizeUTF8(font->get_ttf_font(), text.c_str(), &w, &h);
 	return w;
 }

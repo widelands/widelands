@@ -2,6 +2,8 @@ add_subdirectory(test)
 
 wl_library(graphic_text
   SRCS
+    bidi.cc
+    bidi.h
     font_io.cc
     font_io.h
     font_set.cc
@@ -18,12 +20,14 @@ wl_library(graphic_text
     textstream.h
   USES_SDL2
   USES_SDL2_TTF
+  USES_ICU
   DEPENDS
     base_exceptions
     base_geometry
     base_i18n
     base_log
     base_macros
+    graphic
     graphic_color
     graphic_image_cache
     graphic_image_io

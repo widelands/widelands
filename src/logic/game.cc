@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2012 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2012, 2015 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -56,10 +56,9 @@
 #include "logic/single_player_game_controller.h"
 #include "logic/soldier.h"
 #include "logic/trainingsite.h"
-#include "logic/tribe.h"
+#include "logic/tribes/tribe_descr.h"
 #include "map_io/widelands_map_loader.h"
 #include "network/network.h"
-#include "profile/profile.h"
 #include "scripting/logic.h"
 #include "scripting/lua_table.h"
 #include "sound/sound_handler.h"
@@ -226,17 +225,21 @@ bool Game::run_splayer_scenario_direct(char const * const mapname, const std::st
 		throw wexception("could not load \"%s\"", mapname);
 	UI::ProgressWindow loaderUI;
 
-	loaderUI.step (_("Preloading a map"));
+	loaderUI.step (_("Preloading map"));
 	maploader->preload_map(true);
 	std::string const background = map().get_background();
 	if (!background.empty()) {
 		loaderUI.set_background(background);
 	}
+	loaderUI.step(_("Loading world"));
+	world();
+	loaderUI.step(_("Loading tribes"));
+	tribes();
 
 	// We have to create the players here.
 	PlayerNumber const nr_players = map().get_nrplayers();
 	iterate_player_numbers(p, nr_players) {
-		loaderUI.stepf (_("Adding player %u"), p);
+		loaderUI.stepf(_("Adding player %u"), p);
 		add_player
 			(p,
 			 0,
@@ -250,7 +253,7 @@ bool Game::run_splayer_scenario_direct(char const * const mapname, const std::st
 		(new InteractivePlayer
 		 	(*this, g_options.pull_section("global"), 1, false));
 
-	loaderUI.step (_("Loading a map"));
+	loaderUI.step(_("Loading map"));
 	maploader->load_map_complete(*this, true);
 	maploader.reset();
 
@@ -286,6 +289,17 @@ void Game::init_newgame
 	std::unique_ptr<MapLoader> maploader
 		(map().get_correct_loader(settings.mapfilename));
 	maploader->preload_map(settings.scenario);
+
+	if (loaderUI) {
+		loaderUI->step(_("Loading world"));
+	}
+	world();
+
+	if (loaderUI) {
+		loaderUI->step(_("Loading tribes"));
+	}
+	tribes();
+
 	std::string const background = map().get_background();
 	if (loaderUI) {
 		if (!background.empty()) {
@@ -346,7 +360,7 @@ void Game::init_newgame
  * Initialize the savegame based on the given settings.
  * At return the game is at the same state like a map loaded with Game::init()
  * Only difference is, that players are already initialized.
- * run() takes care about this difference.
+ * run<Returncode>() takes care about this difference.
  *
  * \note loaderUI can be nullptr, if this is run as dedicated server.
  */
@@ -394,6 +408,7 @@ bool Game::run_load_game(std::string filename, const std::string& script_to_run)
 		Widelands::GamePreloadPacket gpdp;
 		gl.preload_game(gpdp);
 		std::string background(gpdp.get_background());
+		m_win_condition_displayname = gpdp.get_win_condition();
 		loaderUI.set_background(background);
 		player_nr = gpdp.get_player_nr();
 		set_ibase
@@ -487,7 +502,7 @@ bool Game::run
 					 	 "no starting position.\n"
 					 	 "You can manually add a starting position with the Widelands "
 					 	 "Editor to fix this problem."),
-					 p);
+					 static_cast<unsigned int>(p));
 			}
 		}
 
@@ -563,7 +578,7 @@ bool Game::run
 
 		m_state = gs_running;
 
-		get_ibase()->run();
+		get_ibase()->run<UI::Panel::Returncodes>();
 
 		m_state = gs_ending;
 
@@ -614,7 +629,7 @@ void Game::think()
 		cmdqueue().run_queue(m_ctrl->get_frametime(), get_gametime_pointer());
 
 		// check if autosave is needed
-		m_savehandler.think(*this, WLApplication::get()->get_time());
+		m_savehandler.think(*this);
 	}
 }
 
@@ -636,11 +651,6 @@ void Game::cleanup_for_load()
 
 	EditorGameBase::cleanup_for_load();
 
-	for (TribeDescr* tribe : tribes_) {
-		delete tribe;
-	}
-
-	tribes_.clear();
 	cmdqueue().flush();
 
 	// Statistics
@@ -740,9 +750,9 @@ void Game::send_player_dismantle (PlayerImmovable & pi)
 
 
 void Game::send_player_build
-	(int32_t const pid, Coords const coords, BuildingIndex const id)
+	(int32_t const pid, Coords const coords, DescriptionIndex const id)
 {
-	assert(id != INVALID_INDEX);
+	assert(tribes().building_exists(id));
 	send_player_command (*new CmdBuild(get_gametime(), pid, coords, id));
 }
 
@@ -785,9 +795,9 @@ void Game::send_player_start_or_cancel_expedition (Building & building)
 }
 
 void Game::send_player_enhance_building
-	(Building & building, BuildingIndex const id)
+	(Building & building, DescriptionIndex const id)
 {
-	assert(id != INVALID_INDEX);
+	assert(building.owner().tribe().has_building(id));
 
 	send_player_command
 		(*new CmdEnhanceBuilding
@@ -804,7 +814,7 @@ void Game::send_player_evict_worker(Worker & worker)
 void Game::send_player_set_ware_priority
 	(PlayerImmovable &       imm,
 	 int32_t           const type,
-	 WareIndex        const index,
+	 DescriptionIndex        const index,
 	 int32_t           const prio)
 {
 	send_player_command
@@ -819,7 +829,7 @@ void Game::send_player_set_ware_priority
 
 void Game::send_player_set_ware_max_fill
 	(PlayerImmovable &       imm,
-	 WareIndex        const index,
+	 DescriptionIndex        const index,
 	 uint32_t          const max_fill)
 {
 	send_player_command
@@ -874,7 +884,7 @@ void Game::send_player_enemyflagaction
 }
 
 
-void Game::send_player_ship_scout_direction(Ship & ship, uint8_t direction)
+void Game::send_player_ship_scouting_direction(Ship & ship, WalkingDir direction)
 {
 	send_player_command
 		(*new CmdShipScoutDirection
@@ -888,7 +898,7 @@ void Game::send_player_ship_construct_port(Ship & ship, Coords coords)
 			(get_gametime(), ship.get_owner()->player_number(), ship.serial(), coords));
 }
 
-void Game::send_player_ship_explore_island(Ship & ship, ScoutingDirection direction)
+void Game::send_player_ship_explore_island(Ship & ship, IslandExploreDirection direction)
 {
 	send_player_command
 		(*new CmdShipExploreIsland
@@ -983,22 +993,16 @@ void Game::sample_statistics()
 		for (uint32_t j = 0; j < plr->get_nr_economies(); ++j) {
 			Economy * const eco = plr->get_economy_by_number(j);
 			const TribeDescr & tribe = plr->tribe();
-			WareIndex const tribe_wares = tribe.get_nrwares();
-			for
-				(WareIndex wareid = 0;
-				 wareid < tribe_wares;
-				 ++wareid)
-				wastock += eco->stock_ware(wareid);
-			WareIndex const tribe_workers = tribe.get_nrworkers();
-			for
-				(WareIndex workerid = 0;
-				 workerid < tribe_workers;
-				 ++workerid)
-				if
-					(!
-					 dynamic_cast<CarrierDescr const *>
-					 	(tribe.get_worker_descr(workerid)))
-					wostock += eco->stock_worker(workerid);
+
+			for (const DescriptionIndex& ware_index : tribe.wares()) {
+				wastock += eco->stock_ware(ware_index);
+			}
+
+			for (const DescriptionIndex& worker_index : tribe.workers()) {
+				if (tribe.get_worker_descr(worker_index)->type() != MapObjectType::CARRIER) {
+					wostock += eco->stock_worker(worker_index);
+				}
+			}
 		}
 		nr_wares  [p - 1] = wastock;
 		nr_workers[p - 1] = wostock;
@@ -1063,56 +1067,49 @@ void Game::sample_statistics()
  * Read statistics data from a file.
  *
  * \param fr file to read from
- * \param version indicates the kind of statistics file; the current version
- *   is 4, support for older versions (used in widelands build <= 12) was
- *   dropped after the release of build 15
  */
-void Game::read_statistics(FileRead & fr, uint32_t const version)
+void Game::read_statistics(FileRead & fr)
 {
-	if (version >= 3) {
-		fr.unsigned_32(); // used to be last stats update time
+	fr.unsigned_32(); // used to be last stats update time
 
-		// Read general statistics
-		uint32_t entries = fr.unsigned_16();
-		const PlayerNumber nr_players = map().get_nrplayers();
-		m_general_stats.resize(nr_players);
+	// Read general statistics
+	uint32_t entries = fr.unsigned_16();
+	const PlayerNumber nr_players = map().get_nrplayers();
+	m_general_stats.resize(nr_players);
 
-		iterate_players_existing_novar(p, nr_players, *this) {
-			m_general_stats[p - 1].land_size       .resize(entries);
-			m_general_stats[p - 1].nr_workers      .resize(entries);
-			m_general_stats[p - 1].nr_buildings    .resize(entries);
-			m_general_stats[p - 1].nr_wares        .resize(entries);
-			m_general_stats[p - 1].productivity    .resize(entries);
-			m_general_stats[p - 1].nr_casualties   .resize(entries);
-			m_general_stats[p - 1].nr_kills        .resize(entries);
-			m_general_stats[p - 1].nr_msites_lost        .resize(entries);
-			m_general_stats[p - 1].nr_msites_defeated    .resize(entries);
-			m_general_stats[p - 1].nr_civil_blds_lost    .resize(entries);
-			m_general_stats[p - 1].nr_civil_blds_defeated.resize(entries);
-			m_general_stats[p - 1].miltary_strength.resize(entries);
-			m_general_stats[p - 1].custom_statistic.resize(entries);
+	iterate_players_existing_novar(p, nr_players, *this) {
+		m_general_stats[p - 1].land_size       .resize(entries);
+		m_general_stats[p - 1].nr_workers      .resize(entries);
+		m_general_stats[p - 1].nr_buildings    .resize(entries);
+		m_general_stats[p - 1].nr_wares        .resize(entries);
+		m_general_stats[p - 1].productivity    .resize(entries);
+		m_general_stats[p - 1].nr_casualties   .resize(entries);
+		m_general_stats[p - 1].nr_kills        .resize(entries);
+		m_general_stats[p - 1].nr_msites_lost        .resize(entries);
+		m_general_stats[p - 1].nr_msites_defeated    .resize(entries);
+		m_general_stats[p - 1].nr_civil_blds_lost    .resize(entries);
+		m_general_stats[p - 1].nr_civil_blds_defeated.resize(entries);
+		m_general_stats[p - 1].miltary_strength.resize(entries);
+		m_general_stats[p - 1].custom_statistic.resize(entries);
+	}
+
+	iterate_players_existing_novar(p, nr_players, *this)
+		for (uint32_t j = 0; j < m_general_stats[p - 1].land_size.size(); ++j)
+		{
+			m_general_stats[p - 1].land_size       [j] = fr.unsigned_32();
+			m_general_stats[p - 1].nr_workers      [j] = fr.unsigned_32();
+			m_general_stats[p - 1].nr_buildings    [j] = fr.unsigned_32();
+			m_general_stats[p - 1].nr_wares        [j] = fr.unsigned_32();
+			m_general_stats[p - 1].productivity    [j] = fr.unsigned_32();
+			m_general_stats[p - 1].nr_casualties   [j] = fr.unsigned_32();
+			m_general_stats[p - 1].nr_kills        [j] = fr.unsigned_32();
+			m_general_stats[p - 1].nr_msites_lost        [j] = fr.unsigned_32();
+			m_general_stats[p - 1].nr_msites_defeated    [j] = fr.unsigned_32();
+			m_general_stats[p - 1].nr_civil_blds_lost    [j] = fr.unsigned_32();
+			m_general_stats[p - 1].nr_civil_blds_defeated[j] = fr.unsigned_32();
+			m_general_stats[p - 1].miltary_strength[j] = fr.unsigned_32();
+			m_general_stats[p - 1].custom_statistic[j] = fr.unsigned_32();
 		}
-
-		iterate_players_existing_novar(p, nr_players, *this)
-			for (uint32_t j = 0; j < m_general_stats[p - 1].land_size.size(); ++j)
-			{
-				m_general_stats[p - 1].land_size       [j] = fr.unsigned_32();
-				m_general_stats[p - 1].nr_workers      [j] = fr.unsigned_32();
-				m_general_stats[p - 1].nr_buildings    [j] = fr.unsigned_32();
-				m_general_stats[p - 1].nr_wares        [j] = fr.unsigned_32();
-				m_general_stats[p - 1].productivity    [j] = fr.unsigned_32();
-				m_general_stats[p - 1].nr_casualties   [j] = fr.unsigned_32();
-				m_general_stats[p - 1].nr_kills        [j] = fr.unsigned_32();
-				m_general_stats[p - 1].nr_msites_lost        [j] = fr.unsigned_32();
-				m_general_stats[p - 1].nr_msites_defeated    [j] = fr.unsigned_32();
-				m_general_stats[p - 1].nr_civil_blds_lost    [j] = fr.unsigned_32();
-				m_general_stats[p - 1].nr_civil_blds_defeated[j] = fr.unsigned_32();
-				m_general_stats[p - 1].miltary_strength[j] = fr.unsigned_32();
-				if (version == 4)
-					m_general_stats[p - 1].custom_statistic[j] = fr.unsigned_32();
-			}
-	} else
-		throw wexception("Unsupported version %i", version);
 }
 
 

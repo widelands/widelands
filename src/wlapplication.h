@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2012 by the Widelands Development Team
+ * Copyright (C) 2006-2012, 2015 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -142,8 +142,6 @@ struct WLApplication {
 	/// \warning true if an external entity wants us to quit
 	bool should_die() const {return m_should_die;}
 
-	int32_t get_time();
-
 	/// Get the state of the current KeyBoard Button
 	/// \warning This function doesn't check for dumbness
 	bool get_key_state(SDL_Scancode const key) const {return SDL_GetKeyboardState(nullptr)[key];}
@@ -207,7 +205,7 @@ private:
 
 	// Handle the given pressed key. Returns true when key was
 	// handled.
-	bool handle_key(const SDL_Keycode& keycode, int modifiers);
+	bool handle_key(bool down, const SDL_Keycode& keycode, int modifiers);
 
 	/**
 	 * The commandline, conveniently repackaged.

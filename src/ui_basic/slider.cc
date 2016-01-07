@@ -20,7 +20,7 @@
 
 #include <cmath>
 
-#include "graphic/font_handler.h"
+#include "graphic/font_handler1.h"
 #include "graphic/rendertarget.h"
 #include "graphic/text_layout.h"
 #include "ui_basic/mouse_constants.h"
@@ -71,7 +71,7 @@ Slider::Slider
 	m_cursor_size (cursor_size)
 {
 	set_thinks(false);
-	calc_cursor_pos();
+	calculate_cursor_position();
 }
 
 void Slider::set_value(int32_t new_value)
@@ -80,13 +80,13 @@ void Slider::set_value(int32_t new_value)
 
 	if (new_value != m_value) {
 		m_value = new_value;
-		calc_cursor_pos();
+		calculate_cursor_position();
 		send_value_changed();
 		update();
 	}
 }
 
-void Slider::calc_cursor_pos() {
+void Slider::calculate_cursor_position() {
 	if (m_max_value == m_min_value) {
 		m_cursor_pos = m_min_value;
 	} else if (m_value == m_min_value) {
@@ -103,7 +103,7 @@ void Slider::calc_cursor_pos() {
 
 void Slider::layout() {
 	Panel::layout();
-	calc_cursor_pos();
+	calculate_cursor_position();
 }
 
 /**
@@ -113,8 +113,10 @@ void Slider::layout() {
  */
 void Slider::set_max_value(int32_t new_max) {
 	assert(m_min_value <= new_max);
-	if (m_max_value != new_max)
+	if (m_max_value != new_max) {
+		calculate_cursor_position();
 		update();
+	}
 	m_max_value = new_max;
 	set_value(m_value);
 }
@@ -126,8 +128,10 @@ void Slider::set_max_value(int32_t new_max) {
  */
 void Slider::set_min_value(int32_t new_min) {
 	assert(m_max_value >= new_min);
-	if (m_min_value != new_min)
+	if (m_min_value != new_min) {
+		calculate_cursor_position();
 		update();
+	}
 	m_min_value = new_min;
 	set_value(m_value);
 }
@@ -255,7 +259,7 @@ bool Slider::handle_mouserelease(const uint8_t btn, int32_t, int32_t) {
 		m_pressed = false;
 
 		//  cursor position: align to integer value
-		calc_cursor_pos();
+		calculate_cursor_position();
 
 		update();
 	}
@@ -563,7 +567,7 @@ DiscreteSlider::DiscreteSlider
 		 // here, we take into account the h_gap introduced by HorizontalSlider
 		 w / (2 * labels_in.size()) - cursor_size / 2, 0,
 		 w - (w / labels_in.size()) + cursor_size,
-		 h - UI::TextStyle::ui_small().font->lineskip() - 2,
+		 h - UI::g_fh1->render(as_uifont("."))->height() - 2,
 		 0, labels_in.size() - 1, m_value,
 		 background_picture_id,
 		 tooltip_text,
@@ -584,16 +588,14 @@ void DiscreteSlider::draw(RenderTarget & dst)
 {
 	Panel::draw(dst);
 
-	UI::TextStyle ts = UI::TextStyle::ui_small();
-
 	uint32_t gap_1 = get_w() / (2 * labels.size());
 	uint32_t gap_n = get_w() / labels.size();
 
 	for (uint32_t i = 0; i < labels.size(); i++) {
-		UI::g_fh->draw_text
-			(dst, ts,
-			 Point(gap_1 + i * gap_n, get_h() + 2),
-			 labels[i], UI::Align_BottomCenter);
+		dst.blit(Point(gap_1 + i * gap_n, get_h() + 2),
+				 UI::g_fh1->render(as_uifont(labels[i])),
+				 BlendMode::UseAlpha,
+				 Align_BottomCenter);
 	}
 
 }
@@ -611,7 +613,7 @@ void DiscreteSlider::layout() {
 	slider.set_pos(Point(w / (2 * labels.size()) - slider.m_cursor_size / 2, 0));
 	slider.set_size
 		(w - (w / labels.size()) + slider.m_cursor_size,
-		 h - UI::TextStyle::ui_small().font->lineskip() - 2);
+		 h - UI::g_fh1->render(as_uifont("."))->height() - 2);
 	Panel::layout();
 }
 

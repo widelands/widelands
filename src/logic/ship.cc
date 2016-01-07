@@ -21,6 +21,8 @@
 
 #include <memory>
 
+#include <boost/format.hpp>
+
 #include "base/macros.h"
 #include "economy/economy.h"
 #include "economy/flag.h"
@@ -39,35 +41,25 @@
 #include "logic/mapregion.h"
 #include "logic/path.h"
 #include "logic/player.h"
-#include "logic/tribe.h"
+#include "logic/tribes/tribe_descr.h"
 #include "logic/warehouse.h"
 #include "logic/widelands_geometry_io.h"
 #include "map_io/map_object_loader.h"
 #include "map_io/map_object_saver.h"
-#include "profile/profile.h"
 #include "wui/interactive_gamebase.h"
 
 namespace Widelands {
 
-ShipDescr::ShipDescr(const char* given_name,
-                     const char* gdescname,
-                     const std::string& directory,
-                     Profile& prof,
-                     Section& global_s,
-                     const TribeDescr& gtribe)
-   : BobDescr(MapObjectType::SHIP, given_name, gdescname, &gtribe) {
-	{  //  global options
-		Section& idle_s = prof.get_safe_section("idle");
-		add_animation("idle", g_gr->animations().load(directory, idle_s));
-	}
-	m_sail_anims.parse(*this, directory, prof, "sail");
+ShipDescr::ShipDescr(const std::string& init_descname, const LuaTable& table)
+	:
+	BobDescr(init_descname, MapObjectType::SHIP, MapObjectDescr::OwnerType::kTribe, table) {
 
-	Section* sinking_s = prof.get_section("sinking");
-	if (sinking_s)
-		add_animation("sinking", g_gr->animations().load(directory, *sinking_s));
+	i18n::Textdomain td("tribes");
 
-	m_capacity = global_s.get_natural("capacity", 20);
-	m_vision_range = global_s.get_natural("vision_range", 7);
+	// Read the sailing animations
+	add_directional_animation(&m_sail_anims, "sail");
+
+	m_capacity = table.has_key("capacity") ? table.get_int("capacity") : 20;
 }
 
 uint32_t ShipDescr::movecaps() const {
@@ -237,23 +229,13 @@ void Ship::ship_update(Game& game, Bob::State& state) {
 }
 
 /// updates a ships tasks in transport mode \returns false if failed to update tasks
-bool Ship::ship_update_transport(Game& game, Bob::State&) {
+bool Ship::ship_update_transport(Game& game, Bob::State& state) {
 	Map& map = game.map();
 
 	PortDock* dst = get_destination(game);
 	if (!dst) {
-		molog("ship_update: No destination anymore.\n");
-		if (m_items.empty())
-			return false;
-		molog("but it has wares....\n");
-		pop_task(game);
-		PortDock* other_dock = m_fleet->get_arbitrary_dock();
-		// TODO(sirver): What happens if there is no port anymore?
-		if (other_dock) {
-			set_destination(game, *other_dock);
-		} else {
-			start_task_idle(game, descr().main_animation(), 2000);
-		}
+		// The ship has no destination, so let it sleep
+		ship_update_idle(game, state);
 		return true;
 	}
 
@@ -448,9 +430,12 @@ void Ship::ship_update_expedition(Game& game, Bob::State&) {
 		if (new_port_space) {
 			m_ship_state = EXP_FOUNDPORTSPACE;
 			// Send a message to the player, that a new port space was found
-			std::string msg_head = _("Port Space Found");
-			std::string msg_body = _("An expedition ship found a new port build space.");
-			send_message(game, msg_head, msg_body, "port.png");
+			send_message(
+						game,
+						_("Port Space"),
+						_("Port Space Found"),
+						_("An expedition ship found a new port build space."),
+						"fsel_editor_set_port_space.png");
 		}
 		m_expedition->seen_port_buildspaces.swap(temp_port_buildspaces);
 		if (new_port_space) {
@@ -461,6 +446,7 @@ void Ship::ship_update_expedition(Game& game, Bob::State&) {
 }
 
 void Ship::ship_update_idle(Game& game, Bob::State& state) {
+
 	if (state.ivar1) {
 		// We've just completed one step, so give neighbours
 		// a chance to move away first
@@ -550,24 +536,27 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 	case EXP_SCOUTING: {
 		if (m_expedition->island_exploration) {  // Exploration of the island
 			if (exp_close_to_coast()) {
-				if (m_expedition->direction == 0) {
+				if (m_expedition->scouting_direction == WalkingDir::IDLE) {
 					// Make sure we know the location of the coast and use it as initial direction we
 					// come from
-					m_expedition->direction = WALK_SE;
-					for (uint8_t secure = 0; exp_dir_swimable(m_expedition->direction); ++secure) {
+					m_expedition->scouting_direction = WALK_SE;
+					for (uint8_t secure = 0; exp_dir_swimable(m_expedition->scouting_direction); ++secure) {
 						assert(secure < 6);
-						m_expedition->direction = get_cw_neighbour(m_expedition->direction);
+						m_expedition->scouting_direction = get_cw_neighbour(m_expedition->scouting_direction);
 					}
-					m_expedition->direction = get_backward_dir(m_expedition->direction);
+					m_expedition->scouting_direction = get_backward_dir(m_expedition->scouting_direction);
 					// Save the position - this is where we start
 					m_expedition->exploration_start = get_position();
 				} else {
 					// Check whether the island was completely surrounded
 					if (get_position() == m_expedition->exploration_start) {
-						std::string msg_head = _("Island Circumnavigated");
-						std::string msg_body = _("An expedition ship sailed around its"
-						                         " island without any events.");
-						send_message(game, msg_head, msg_body, "ship_explore_island_cw.png");
+						send_message(
+									game,
+									/** TRANSLATORS: A ship has circumnavigated an island and is waiting for orders */
+									pgettext("ship", "Waiting"),
+									_("Island Circumnavigated"),
+									_("An expedition ship sailed around its island without any events."),
+									"ship_explore_island_cw.png");
 						m_ship_state = EXP_WAITING;
 
 						Notifications::publish(
@@ -579,18 +568,18 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 				// The ship is supposed to follow the coast as close as possible, therefore the check
 				// for
 				// a swimable field begins at the neighbour field of the direction we came from.
-				m_expedition->direction = get_backward_dir(m_expedition->direction);
-				if (m_expedition->scouting_direction == ScoutingDirection::kClockwise) {
+				m_expedition->scouting_direction = get_backward_dir(m_expedition->scouting_direction);
+				if (m_expedition->island_explore_direction == IslandExploreDirection::kClockwise) {
 					do {
-						m_expedition->direction = get_ccw_neighbour(m_expedition->direction);
-					} while (!exp_dir_swimable(m_expedition->direction));
+						m_expedition->scouting_direction = get_ccw_neighbour(m_expedition->scouting_direction);
+					} while (!exp_dir_swimable(m_expedition->scouting_direction));
 				} else {
 					do {
-						m_expedition->direction = get_cw_neighbour(m_expedition->direction);
-					} while (!exp_dir_swimable(m_expedition->direction));
+						m_expedition->scouting_direction = get_cw_neighbour(m_expedition->scouting_direction);
+					} while (!exp_dir_swimable(m_expedition->scouting_direction));
 				}
 				state.ivar1 = 1;
-				return start_task_move(game, m_expedition->direction, descr().get_sail_anims(), false);
+				return start_task_move(game, m_expedition->scouting_direction, descr().get_sail_anims(), false);
 			} else {
 				// The ship got the command to scout around an island, but is not close to any island
 				// Most likely the command was send as the ship was on an exploration and just leaving
@@ -615,20 +604,23 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 				return start_task_idle(game, descr().main_animation(), 1500);
 			}
 		} else {  // scouting towards a specific direction
-			if (exp_dir_swimable(m_expedition->direction)) {
+			if (exp_dir_swimable(m_expedition->scouting_direction)) {
 				// the scouting direction is still free to move
 				state.ivar1 = 1;
-				start_task_move(game, m_expedition->direction, descr().get_sail_anims(), false);
+				start_task_move(game, m_expedition->scouting_direction, descr().get_sail_anims(), false);
 				return;
 			}
 			// coast reached
 			m_ship_state = EXP_WAITING;
 			start_task_idle(game, descr().main_animation(), 1500);
 			// Send a message to the player, that a new coast was reached
-			std::string msg_head = _("Coast Reached");
-			std::string msg_body =
-			   _("An expedition ship reached a coast and is waiting for further commands.");
-			send_message(game, msg_head, msg_body, "ship_explore_island_cw.png");
+			send_message(
+						game,
+						/** TRANSLATORS: A ship has discovered land */
+						_("Land Ahoy!"),
+						_("Coast Reached"),
+						_("An expedition ship reached a coast and is waiting for further commands."),
+						"ship_scout_ne.png");
 
 			Notifications::publish(
 			   NoteShipMessage(this, NoteShipMessage::Message::kWaitingForCommand));
@@ -670,9 +662,12 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 			}
 		} else {  // it seems that port constructionsite has dissapeared
 			// Send a message to the player, that a port constructionsite is gone
-			std::string msg_head = _("New port constructionsite is gone");
-			std::string msg_body = _("Unloading of wares failed, expedition is cancelled now.");
-			send_message(game, msg_head, msg_body, "port.png");
+			send_message(
+						game,
+						_("Port Lost!"),
+						_("New port construction site is gone"),
+						_("Unloading of wares failed, expedition is cancelled now."),
+						"menu_ship_cancel_expedition.png");
 			send_signal(game, "cancel_expedition");
 		}
 
@@ -728,7 +723,8 @@ void Ship::set_economy(Game& game, Economy* e) {
  * @note This is supposed to be called only from the scheduling code of @ref Fleet.
  */
 void Ship::set_destination(Game& game, PortDock& pd) {
-	molog("set_destination to %u (currently %" PRIuS " items)\n", pd.serial(), m_items.size());
+	molog("set_destination / sending to portdock %u (carrying %" PRIuS " items)\n",
+	pd.serial(), m_items.size());
 	m_destination = &pd;
 	send_signal(game, "wakeup");
 }
@@ -754,9 +750,9 @@ void Ship::withdraw_items(Game& game, PortDock& pd, std::vector<ShippingItem>& i
 }
 
 /**
- * Find a path to the dock @p pd and follow it without using precomputed paths.
+ * Find a path to the dock @p pd, returns its length, and the path optionally.
  */
-void Ship::start_task_movetodock(Game& game, PortDock& pd) {
+uint32_t Ship::calculate_sea_route(Game& game, PortDock& pd, Path* finalpath){
 	Map& map = game.map();
 	StepEvalAStar se(pd.get_warehouse()->get_position());
 	se.m_swim = true;
@@ -771,15 +767,47 @@ void Ship::start_task_movetodock(Game& game, PortDock& pd) {
 	FCoords cur;
 	while (astar.step(cur, cost)) {
 		if (cur.field->get_immovable() == &pd) {
-			Path path;
-			astar.pathto(cur, path);
-			start_task_movepath(game, path, descr().get_sail_anims());
-			return;
+			if (finalpath){
+				astar.pathto(cur, *finalpath);
+				return finalpath->get_nsteps();
+			} else {
+				Path path;
+				astar.pathto(cur, path);
+				return path.get_nsteps();
+			}
 		}
 	}
 
-	molog("start_task_movedock: Failed to find path!\n");
-	start_task_idle(game, descr().main_animation(), 5000);
+	molog("   calculate_sea_distance: Failed to find path!\n");
+	return std::numeric_limits<uint32_t>::max();
+
+}
+
+/**
+ * Find a path to the dock @p pd and follow it without using precomputed paths.
+ */
+void Ship::start_task_movetodock(Game& game, PortDock& pd) {
+	Path path;
+
+	uint32_t const distance = calculate_sea_route(game, pd, &path);
+
+	// if we get a meaningfull result
+	if (distance < std::numeric_limits<uint32_t>::max()) {
+		start_task_movepath(game, path, descr().get_sail_anims());
+		return;
+	} else {
+		log("start_task_movedock: Failed to find a path: ship at %3dx%3d to port at: %3dx%3d\n",
+		get_position().x,
+		get_position().y,
+		pd.get_positions(game)[0].x,
+		pd.get_positions(game)[0].y);
+		//this should not happen, but in theory there could be some inconstinency
+		//I (tiborb) failed to invoke this situation when testing so
+		//I am not sure if following line behaves allright
+		get_fleet()->update(game);
+		start_task_idle(game, descr().main_animation(), 5000);
+	}
+
 }
 
 /// Prepare everything for the coming exploration
@@ -790,9 +818,9 @@ void Ship::start_task_expedition(Game& game) {
 	m_expedition.reset(new Expedition());
 	m_expedition->seen_port_buildspaces.reset(new std::list<Coords>());
 	m_expedition->island_exploration = false;
-	m_expedition->direction = 0;
+	m_expedition->scouting_direction = WalkingDir::IDLE;
 	m_expedition->exploration_start = Coords(0, 0);
-	m_expedition->scouting_direction = ScoutingDirection::kClockwise;
+	m_expedition->island_explore_direction = IslandExploreDirection::kClockwise;
 	m_expedition->economy.reset(new Economy(*get_owner()));
 
 	// We are no longer in any other economy, but instead are an economy of our
@@ -815,39 +843,58 @@ void Ship::start_task_expedition(Game& game) {
 	}
 
 	// Send a message to the player, that an expedition is ready to go
-	const std::string msg_head = _("Expedition Ready");
-	const std::string msg_body = _("An expedition ship is waiting for your commands.");
-	send_message(game, msg_head, msg_body, "start_expedition.png");
+	send_message(
+				game,
+				/** TRANSLATORS: Ship expedition ready */
+				pgettext("ship", "Expedition"),
+				_("Expedition Ready"),
+				_("An expedition ship is waiting for your commands."),
+				"start_expedition.png");
 	Notifications::publish(NoteShipMessage(this, NoteShipMessage::Message::kWaitingForCommand));
 }
 
 /// Initializes / changes the direction of scouting to @arg direction
 /// @note only called via player command
-void Ship::exp_scout_direction(Game&, uint8_t direction) {
+void Ship::exp_scouting_direction(Game&, WalkingDir scouting_direction) {
 	assert(m_expedition);
 	m_ship_state = EXP_SCOUTING;
-	m_expedition->direction = direction;
+	m_expedition->scouting_direction = scouting_direction;
 	m_expedition->island_exploration = false;
+}
+
+WalkingDir Ship::get_scouting_direction() {
+	if (m_expedition && m_ship_state == EXP_SCOUTING && !m_expedition->island_exploration) {
+		return m_expedition->scouting_direction;
+	}
+	return WalkingDir::IDLE;
 }
 
 /// Initializes the construction of a port at @arg c
 /// @note only called via player command
 void Ship::exp_construct_port(Game&, const Coords& c) {
 	assert(m_expedition);
-	BuildingIndex port_idx = get_owner()->tribe().safe_building_index("port");
+	DescriptionIndex port_idx = get_owner()->tribe().port();
 	get_owner()->force_csite(c, port_idx);
 	m_ship_state = EXP_COLONIZING;
 }
 
-/// Initializes / changes the direction the island exploration in @arg scouting_direction direction
+/// Initializes / changes the direction the island exploration in @arg island_explore_direction direction
 /// @note only called via player command
-void Ship::exp_explore_island(Game&, ScoutingDirection scouting_direction) {
+void Ship::exp_explore_island(Game&, IslandExploreDirection island_explore_direction) {
 	assert(m_expedition);
 	m_ship_state = EXP_SCOUTING;
-	m_expedition->scouting_direction = scouting_direction;
-	m_expedition->direction = 0;
+	m_expedition->island_explore_direction = island_explore_direction;
+	m_expedition->scouting_direction = WalkingDir::IDLE;
 	m_expedition->island_exploration = true;
 }
+
+IslandExploreDirection Ship::get_island_explore_direction() {
+	if (m_expedition && m_ship_state == EXP_SCOUTING && m_expedition->island_exploration) {
+		return m_expedition->island_explore_direction;
+	}
+	return IslandExploreDirection::kNotSet;
+}
+
 
 /// Cancels a currently running expedition
 /// @note only called via player command
@@ -929,7 +976,8 @@ void Ship::log_general_info(const EditorGameBase& egbase) {
  * \param picture picture name relative to the pics directory
  */
 void Ship::send_message(Game& game,
-                        const std::string& title,
+								const std::string& title,
+								const std::string& heading,
                         const std::string& description,
                         const std::string& picture) {
 	std::string rt_description;
@@ -945,6 +993,8 @@ void Ship::send_message(Game& game,
 	Message* msg = new Message(Message::Type::kSeafaring,
 	                           game.get_gametime(),
 	                           title,
+										(boost::format("pics/%s") % picture).str(),
+										heading,
 	                           rt_description,
 	                           get_position(),
 	                           m_serial);
@@ -960,7 +1010,7 @@ Load / Save implementation
 ==============================
 */
 
-#define SHIP_SAVEGAME_VERSION 4
+constexpr uint8_t kCurrentPacketVersion = 5;
 
 Ship::Loader::Loader() : m_lastdock(0), m_destination(0) {
 }
@@ -971,45 +1021,43 @@ const Bob::Task* Ship::Loader::get_task(const std::string& name) {
 	return Bob::Loader::get_task(name);
 }
 
-void Ship::Loader::load(FileRead& fr, uint8_t version) {
+void Ship::Loader::load(FileRead & fr)
+{
 	Bob::Loader::load(fr);
 
-	if (version >= 2) {
-		// The state the ship is in
-		if (version >= 3) {
-			m_ship_state = fr.unsigned_8();
+	// The state the ship is in
+	m_ship_state = fr.unsigned_8();
 
-			// Expedition specific data
-			if (m_ship_state == EXP_SCOUTING || m_ship_state == EXP_WAITING ||
-			    m_ship_state == EXP_FOUNDPORTSPACE || m_ship_state == EXP_COLONIZING) {
-				m_expedition.reset(new Expedition());
-				// Currently seen port build spaces
-				m_expedition->seen_port_buildspaces.reset(new std::list<Coords>());
-				uint8_t numofports = fr.unsigned_8();
-				for (uint8_t i = 0; i < numofports; ++i)
-					m_expedition->seen_port_buildspaces->push_back(read_coords_32(&fr));
-				// Swimability of the directions
-				for (uint8_t i = 0; i < LAST_DIRECTION; ++i)
-					m_expedition->swimable[i] = (fr.unsigned_8() == 1);
-				// whether scouting or exploring
-				m_expedition->island_exploration = fr.unsigned_8() == 1;
-				// current direction
-				m_expedition->direction = fr.unsigned_8();
-				// Start coordinates of an island exploration
-				m_expedition->exploration_start = read_coords_32(&fr);
-				// Whether the exploration is done clockwise or counter clockwise
-				m_expedition->scouting_direction = static_cast<ScoutingDirection>(fr.unsigned_8());
-			}
-		} else
-			m_ship_state = TRANSPORT;
+	// Expedition specific data
+	if (m_ship_state == EXP_SCOUTING || m_ship_state == EXP_WAITING ||
+		 m_ship_state == EXP_FOUNDPORTSPACE || m_ship_state == EXP_COLONIZING) {
+		m_expedition.reset(new Expedition());
+		// Currently seen port build spaces
+		m_expedition->seen_port_buildspaces.reset(new std::list<Coords>());
+		uint8_t numofports = fr.unsigned_8();
+		for (uint8_t i = 0; i < numofports; ++i)
+			m_expedition->seen_port_buildspaces->push_back(read_coords_32(&fr));
+		// Swimability of the directions
+		for (uint8_t i = 0; i < LAST_DIRECTION; ++i)
+			m_expedition->swimable[i] = (fr.unsigned_8() == 1);
+		// whether scouting or exploring
+		m_expedition->island_exploration = fr.unsigned_8() == 1;
+		// current direction
+		m_expedition->scouting_direction = static_cast<WalkingDir>(fr.unsigned_8());
+		// Start coordinates of an island exploration
+		m_expedition->exploration_start = read_coords_32(&fr);
+		// Whether the exploration is done clockwise or counter clockwise
+		m_expedition->island_explore_direction = static_cast<IslandExploreDirection>(fr.unsigned_8());
+	} else {
+		m_ship_state = TRANSPORT;
+	}
 
-		m_lastdock = fr.unsigned_32();
-		m_destination = fr.unsigned_32();
+	m_lastdock = fr.unsigned_32();
+	m_destination = fr.unsigned_32();
 
-		m_items.resize(fr.unsigned_32());
-		for (ShippingItem::Loader& item_loader : m_items) {
-			item_loader.load(fr);
-		}
+	m_items.resize(fr.unsigned_32());
+	for (ShippingItem::Loader& item_loader : m_items) {
+		item_loader.load(fr);
 	}
 }
 
@@ -1059,25 +1107,33 @@ MapObject::Loader* Ship::load(EditorGameBase& egbase, MapObjectLoader& mol, File
 
 	try {
 		// The header has been peeled away by the caller
-
-		uint8_t const version = fr.unsigned_8();
-		if (1 <= version && version <= SHIP_SAVEGAME_VERSION) {
-			std::string owner = fr.c_string();
-			std::string name = fr.c_string();
-			const ShipDescr* descr = nullptr;
-
-			egbase.manually_load_tribe(owner);
-
-			if (const TribeDescr* tribe = egbase.get_tribe(owner))
-				descr = dynamic_cast<const ShipDescr*>(tribe->get_bob_descr(name));
-
-			if (!descr)
-				throw GameDataError("undefined ship %s/%s", owner.c_str(), name.c_str());
-
-			loader->init(egbase, mol, descr->create_object());
-			loader->load(fr, version);
-		} else
-			throw GameDataError("unknown/unhandled version %u", version);
+		uint8_t const packet_version = fr.unsigned_8();
+		if (1 <= packet_version && packet_version <= kCurrentPacketVersion) {
+			try {
+				const ShipDescr* descr = nullptr;
+				// Removing this will break the test suite
+				if (packet_version < 5) {
+					std::string tribe_name = fr.c_string();
+					fr.c_string(); // This used to be the ship's name, which we don't need any more.
+					if (!(egbase.tribes().tribe_exists(tribe_name))) {
+						throw GameDataError("Tribe %s does not exist for ship", tribe_name.c_str());
+					}
+					const DescriptionIndex& tribe_index = egbase.tribes().tribe_index(tribe_name);
+					const TribeDescr& tribe_descr = *egbase.tribes().get_tribe_descr(tribe_index);
+					descr = egbase.tribes().get_ship_descr(tribe_descr.ship());
+				} else {
+					std::string name = fr.c_string();
+					const DescriptionIndex& ship_index = egbase.tribes().safe_ship_index(name);
+					descr = egbase.tribes().get_ship_descr(ship_index);
+				}
+				loader->init(egbase, mol, descr->create_object());
+				loader->load(fr);
+			} catch (const WException& e) {
+				throw GameDataError("Failed to load ship: %s", e.what());
+			}
+		} else {
+			throw UnhandledVersionError("Ship", packet_version, kCurrentPacketVersion);
+		}
 	} catch (const std::exception& e) {
 		throw wexception("loading ship: %s", e.what());
 	}
@@ -1087,9 +1143,7 @@ MapObject::Loader* Ship::load(EditorGameBase& egbase, MapObjectLoader& mol, File
 
 void Ship::save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw) {
 	fw.unsigned_8(HeaderShip);
-	fw.unsigned_8(SHIP_SAVEGAME_VERSION);
-
-	fw.c_string(descr().get_owner_tribe()->name());
+	fw.unsigned_8(kCurrentPacketVersion);
 	fw.c_string(descr().name());
 
 	Bob::save(egbase, mos, fw);
@@ -1113,11 +1167,11 @@ void Ship::save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw) {
 		// whether scouting or exploring
 		fw.unsigned_8(m_expedition->island_exploration ? 1 : 0);
 		// current direction
-		fw.unsigned_8(m_expedition->direction);
+		fw.unsigned_8(static_cast<uint8_t>(m_expedition->scouting_direction));
 		// Start coordinates of an island exploration
 		write_coords_32(&fw, m_expedition->exploration_start);
 		// Whether the exploration is done clockwise or counter clockwise
-		fw.unsigned_8(static_cast<uint8_t>(m_expedition->scouting_direction));
+		fw.unsigned_8(static_cast<uint8_t>(m_expedition->island_explore_direction));
 	}
 
 	fw.unsigned_32(mos.get_object_file_index_or_zero(m_lastdock.get(egbase)));

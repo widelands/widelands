@@ -20,9 +20,10 @@
 #ifndef WL_WUI_INTERACTIVE_GAMEBASE_H
 #define WL_WUI_INTERACTIVE_GAMEBASE_H
 
+#include "logic/game.h"
+#include "profile/profile.h"
 #include "wui/general_statistics_menu.h"
 #include "wui/interactive_base.h"
-#include "logic/game.h"
 
 struct ChatProvider;
 

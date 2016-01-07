@@ -3,6 +3,21 @@ add_subdirectory(text)
 # TODO(sirver): Separate this directory into a base directory and one
 # that is Widelands aware (can include logic stuff).
 
+# A binary that creates and writes out a texture atlas of all images in
+# a directory.
+wl_binary(wl_make_texture_atlas
+  SRCS
+    make_texture_atlas_main.cc
+  DEPENDS
+    base_log
+    graphic
+    graphic_image_io
+    graphic_texture_atlas
+    helper
+    io_filesystem
+    io_stream
+)
+
 wl_library(graphic_color
   SRCS
     color.h
@@ -74,6 +89,7 @@ wl_library(graphic_sdl_utils
 
 wl_library(graphic_gl_utils
   SRCS
+    gl/blit_data.h
     gl/coordinate_conversion.h
     gl/system_headers.h
     gl/utils.cc
@@ -114,7 +130,6 @@ wl_library(graphic_draw_programs
     blend_mode.h
     gl/blit_program.cc
     gl/blit_program.h
-    gl/blit_source.h
     gl/draw_line_program.cc
     gl/draw_line_program.h
     gl/fill_rect_program.cc
@@ -246,7 +261,6 @@ wl_library(graphic
     io_stream
     logic
     notifications
-    profile
     scripting_lua_table
     sound
 )

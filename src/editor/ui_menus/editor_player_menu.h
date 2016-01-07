@@ -21,6 +21,7 @@
 #define WL_EDITOR_UI_MENUS_EDITOR_PLAYER_MENU_H
 
 #include <cstring>
+#include <map>
 #include <string>
 #include <vector>
 
@@ -54,7 +55,11 @@ private:
 		* m_plr_make_infrastructure_buts[MAX_PLAYERS],
 		* m_plr_set_pos_buts            [MAX_PLAYERS],
 		* m_plr_set_tribes_buts         [MAX_PLAYERS];
-	std::vector<std::string> m_tribes;
+
+	std::vector<std::string> m_tribenames;
+
+	/// List of the tribes currently selected for all players
+	std::string m_selected_tribes[MAX_PLAYERS];
 
 	int32_t m_posy;
 

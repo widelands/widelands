@@ -15,7 +15,7 @@ function filled_buildings_one_soldier(p, ...)
          if bdescr.soldiers then
             b:set_soldiers(bdescr.soldiers)
          else
-            -- TODO(wl-zocker): this creates "1 soldier (+4)", but I want a capacity of 1 (i.e. "1 soldier")
+            -- TODO(wl-zocker): this creates "1 soldier (+4)", but I want a capacity of 1 (i.e. "1 soldier"). See https://bugs.launchpad.net/widelands/+bug/1387310
             b:set_soldiers({0,0,0,0}, 1)
          end
       elseif bdescr.soldiers then -- Must be a warehouse
@@ -26,4 +26,3 @@ function filled_buildings_one_soldier(p, ...)
       elseif b.valid_wares then b:set_wares(b.valid_wares) end
    end
 end
-

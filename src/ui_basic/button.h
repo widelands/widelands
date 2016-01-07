@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006, 2008-2011 by the Widelands Development Team
+ * Copyright (C) 2002, 2006, 2008-2011, 2015 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -40,20 +40,22 @@ struct Button : public NamedPanel {
 		(Panel * const parent,
 		 const std::string & name,
 		 int32_t const x, int32_t const y, uint32_t const w, uint32_t const h,
-		 const Image* background_pictute_id,
+		 const Image* background_picture_id,
 		 const std::string & title_text,
 		 const std::string & tooltip_text = std::string(),
 		 bool const _enabled = true,
 		 bool const flat    = false);
+	// TODO(GunChleoc): We have a lot of bools here. Introduce an enum class.
 	Button /// for pictorial buttons
 		(Panel * const parent,
 		 const std::string & name,
 		 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
-		 const Image* background_pictute_id,
+		 const Image* background_picture_id,
 		 const Image* foreground_picture_id,
 		 const std::string & tooltip_text = std::string(),
 		 bool const _enabled = true,
-		 bool const flat     = false);
+		 bool const flat     = false,
+		 bool const keep_image_size = false);
 	~Button();
 
 	void set_pic(const Image* pic);
@@ -63,9 +65,6 @@ struct Button : public NamedPanel {
 	bool enabled() const {return m_enabled;}
 	void set_enabled(bool on);
 	void set_repeating(bool const on) {m_repeating = on;}
-	void set_draw_caret(bool draw_caret) {m_draw_caret = draw_caret;}
-	void set_font(Font * font) {m_textstyle.font = font;}
-	void set_textstyle(const UI::TextStyle& textstyle) {m_textstyle = textstyle;}
 	bool is_snap_target() const override {return true;}
 
 	// Drawing and event handlers
@@ -99,18 +98,17 @@ protected:
 	bool        m_enabled;
 	bool        m_repeating;
 	bool        m_flat;
+	bool        m_keep_image_size; // Keep image's original size and center it
 	bool        m_draw_flat_background;
 
-	int32_t     m_time_nextact;
+	uint32_t     m_time_nextact;
 
 	std::string m_title;          //  title string used when _mypic == 0
 
 	const Image* m_pic_background; //  background texture (picture ID)
 	const Image* m_pic_custom;     //  custom icon on the button
-	UI::TextStyle m_textstyle;
 
 	RGBColor    m_clr_down; //  color of border while a flat button is "down"
-	bool        m_draw_caret;
 };
 
 } // namespace UI

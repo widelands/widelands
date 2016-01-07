@@ -29,8 +29,7 @@
 
 namespace Widelands {
 
-#define CURRENT_PACKET_VERSION 2
-
+constexpr int32_t kCurrentPacketVersion = 2;
 
 MapPlayerNamesAndTribesPacket::
 ~MapPlayerNamesAndTribesPacket
@@ -64,7 +63,8 @@ void MapPlayerNamesAndTribesPacket::pre_read
 	try {
 		int32_t const packet_version =
 			prof.get_safe_section("global").get_int("packet_version");
-		if (packet_version <= CURRENT_PACKET_VERSION) {
+		// Supporting older versions for map loading
+		if (1 <= packet_version && packet_version <= kCurrentPacketVersion) {
 			PlayerNumber const nr_players = map->get_nrplayers();
 			iterate_player_numbers(p, nr_players) {
 				Section & s = prof.get_safe_section((boost::format("player_%u")
@@ -74,9 +74,9 @@ void MapPlayerNamesAndTribesPacket::pre_read
 				map->set_scenario_player_ai       (p, s.get_string("ai",    ""));
 				map->set_scenario_player_closeable(p, s.get_bool  ("closeable", false));
 			}
-		} else
-			throw GameDataError
-				("unknown/unhandled version %i", packet_version);
+		} else {
+			throw UnhandledVersionError("MapPlayerNamesAndTribesPacket", packet_version, kCurrentPacketVersion);
+		}
 	} catch (const WException & e) {
 		throw GameDataError("player names and tribes: %s", e.what());
 	}
@@ -89,7 +89,7 @@ void MapPlayerNamesAndTribesPacket::write
 	Profile prof;
 
 	prof.create_section("global").set_int
-		("packet_version", CURRENT_PACKET_VERSION);
+		("packet_version", kCurrentPacketVersion);
 
 	const Map & map = egbase.map();
 	PlayerNumber const nr_players = map.get_nrplayers();

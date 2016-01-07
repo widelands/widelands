@@ -22,187 +22,261 @@
 #include <algorithm>
 #include <cstring>
 #include <map>
+#include <memory>
 #include <set>
 #include <string>
-#include <typeinfo>
 #include <vector>
 
+#include <boost/format.hpp>
+
 #include "base/i18n.h"
-#include "base/macros.h"
-#include "economy/economy.h"
 #include "graphic/graphic.h"
+#include "io/filesystem/layered_filesystem.h"
 #include "logic/building.h"
 #include "logic/player.h"
-#include "logic/production_program.h"
-#include "logic/productionsite.h"
-#include "logic/tribe.h"
-#include "logic/warelist.h"
-#include "ui_basic/table.h"
-#include "ui_basic/unique_window.h"
-#include "ui_basic/window.h"
+#include "logic/tribes/tribe_descr.h"
+#include "logic/tribes/tribes.h"
+#include "logic/ware_descr.h"
+#include "logic/worker_descr.h"
+#include "scripting/lua_interface.h"
+#include "scripting/lua_table.h"
 #include "wui/interactive_player.h"
 
 #define WINDOW_WIDTH std::min(700, g_gr->get_xres() - 40)
 #define WINDOW_HEIGHT std::min(550, g_gr->get_yres() - 40)
-constexpr uint32_t quantityColumnWidth = 100;
-constexpr uint32_t wareColumnWidth = 250;
-#define PRODSITE_GROUPS_WIDTH (WINDOW_WIDTH - wareColumnWidth - quantityColumnWidth - 10)
+
+constexpr int kPadding = 5;
+constexpr int kTabHeight = 35;
 
 using namespace Widelands;
 
-inline InteractivePlayer & EncyclopediaWindow::iaplayer() const {
+inline InteractivePlayer& EncyclopediaWindow::iaplayer() const {
 	return dynamic_cast<InteractivePlayer&>(*get_parent());
 }
 
+namespace {
 
-EncyclopediaWindow::EncyclopediaWindow
-	(InteractivePlayer & parent, UI::UniqueWindow::Registry & registry)
-:
-	UI::UniqueWindow
-		(&parent, "encyclopedia",
-		 &registry,
-		 WINDOW_WIDTH, WINDOW_HEIGHT,
-		 _("Tribal Ware Encyclopedia")),
-	wares            (this, 5, 5, WINDOW_WIDTH - 10, WINDOW_HEIGHT - 250),
-	prodSites        (this, 5, WINDOW_HEIGHT - 150, PRODSITE_GROUPS_WIDTH, 145),
-	condTable
-		(this,
-		 PRODSITE_GROUPS_WIDTH + 5, WINDOW_HEIGHT - 150, WINDOW_WIDTH - PRODSITE_GROUPS_WIDTH - 5, 145),
-	descrTxt         (this, 5, WINDOW_HEIGHT - 240, WINDOW_WIDTH - 10, 80, "")
-{
-	wares.selected.connect(boost::bind(&EncyclopediaWindow::ware_selected, this, _1));
+struct EncyclopediaTab {
+	EncyclopediaTab(const std::string& _key,
+	                const std::string& _image_filename,
+	                const std::string& _tooltip,
+	                const std::string& _script_path,
+	                const Widelands::MapObjectType _type)
+	   : key(_key),
+	     image_filename(_image_filename),
+	     tooltip(_tooltip),
+	     script_path(_script_path),
+	     type(_type) {
+	}
+	const std::string key;
+	const std::string image_filename;
+	const std::string tooltip;
+	const std::string script_path;
+	const Widelands::MapObjectType type;
+};
 
-	prodSites.selected.connect(boost::bind(&EncyclopediaWindow::prod_site_selected, this, _1));
-	condTable.add_column
-			/** TRANSLATORS: Column title in the Tribal Wares Encyclopedia */
-			(wareColumnWidth, ngettext("Consumed Ware Type", "Consumed Ware Types", 0));
-	condTable.add_column (quantityColumnWidth, _("Quantity"));
-	condTable.focus();
+const std::string heading(const std::string& text) {
+	return ((boost::format("<rt><p font-size=18 font-weight=bold font-color=D1D1D1>"
+	                       "%s<br></p><p font-size=8> <br></p></rt>") %
+	         text).str());
+}
+}  // namespace
 
+EncyclopediaWindow::EncyclopediaWindow(InteractivePlayer& parent, UI::UniqueWindow::Registry& registry)
+	: UI::UniqueWindow(
+        &parent, "encyclopedia", &registry, WINDOW_WIDTH, WINDOW_HEIGHT, _("Tribal Encyclopedia")),
+     tabs_(this, 0, 0, nullptr) {
+
+	const int contents_height = WINDOW_HEIGHT - kTabHeight - 2 * kPadding;
+	const int contents_width = WINDOW_WIDTH / 2 - 1.5 * kPadding;
+
+	std::vector<std::unique_ptr<EncyclopediaTab>> tab_definitions;
+
+	tab_definitions.push_back(
+	   std::unique_ptr<EncyclopediaTab>(new EncyclopediaTab("wares",
+	                                                        "pics/menu_tab_wares.png",
+	                                                        _("Wares"),
+	                                                        "tribes/scripting/help/ware_help.lua",
+	                                                        Widelands::MapObjectType::WARE)));
+
+	tab_definitions.push_back(
+	   std::unique_ptr<EncyclopediaTab>(new EncyclopediaTab("workers",
+	                                                        "pics/menu_tab_workers.png",
+	                                                        _("Workers"),
+	                                                        "tribes/scripting/help/worker_help.lua",
+	                                                        Widelands::MapObjectType::WORKER)));
+
+	tab_definitions.push_back(std::unique_ptr<EncyclopediaTab>(
+	   new EncyclopediaTab("buildings",
+	                       "pics/genstats_nrbuildings.png",
+	                       _("Buildings"),
+	                       "tribes/scripting/help/building_help.lua",
+	                       Widelands::MapObjectType::BUILDING)));
+
+	for (const auto& tab : tab_definitions) {
+		// Make sure that all paths exist
+		if (!g_fs->file_exists(tab->script_path)) {
+			throw wexception("Script path %s for tab %s does not exist!",
+			                 tab->script_path.c_str(),
+			                 tab->key.c_str());
+		}
+		if (!g_fs->file_exists(tab->image_filename)) {
+			throw wexception("Image path %s for tab %s does not exist!",
+			                 tab->image_filename.c_str(),
+			                 tab->key.c_str());
+		}
+
+		wrapper_boxes_.insert(std::make_pair(
+		   tab->key, std::unique_ptr<UI::Box>(new UI::Box(&tabs_, 0, 0, UI::Box::Horizontal))));
+
+		boxes_.insert(
+		   std::make_pair(tab->key,
+		                  std::unique_ptr<UI::Box>(new UI::Box(
+		                     wrapper_boxes_.at(tab->key).get(), 0, 0, UI::Box::Horizontal))));
+
+		lists_.insert(
+		   std::make_pair(tab->key,
+		                  std::unique_ptr<UI::Listselect<Widelands::DescriptionIndex>>(
+		                     new UI::Listselect<Widelands::DescriptionIndex>(
+		                        boxes_.at(tab->key).get(), 0, 0, contents_width, contents_height))));
+		lists_.at(tab->key)->selected.connect(boost::bind(
+		   &EncyclopediaWindow::entry_selected, this, tab->key, tab->script_path, tab->type));
+
+		contents_.insert(
+		   std::make_pair(tab->key,
+		                  std::unique_ptr<UI::MultilineTextarea>(new UI::MultilineTextarea(
+		                     boxes_.at(tab->key).get(), 0, 0, contents_width, contents_height))));
+
+		boxes_.at(tab->key)->add(lists_.at(tab->key).get(), UI::Align_Left);
+		boxes_.at(tab->key)->add_space(kPadding);
+		boxes_.at(tab->key)->add(contents_.at(tab->key).get(), UI::Align_Left);
+
+		wrapper_boxes_.at(tab->key)->add_space(kPadding);
+		wrapper_boxes_.at(tab->key)->add(boxes_.at(tab->key).get(), UI::Align_Left);
+
+		tabs_.add("encyclopedia_" + tab->key,
+		          g_gr->images().get(tab->image_filename),
+		          wrapper_boxes_.at(tab->key).get(),
+		          tab->tooltip);
+	}
+	tabs_.set_size(WINDOW_WIDTH, WINDOW_HEIGHT);
+
+	fill_buildings();
 	fill_wares();
+	fill_workers();
 
-	if (get_usedefaultpos())
+	if (get_usedefaultpos()) {
 		center_to_parent();
+	}
+}
+
+void EncyclopediaWindow::fill_entries(const char* key, std::vector<EncyclopediaEntry>& entries) {
+	std::sort(entries.begin(), entries.end());
+	for (uint32_t i = 0; i < entries.size(); i++) {
+		EncyclopediaEntry cur = entries[i];
+		lists_.at(key)->add(cur.descname, cur.index, cur.icon);
+	}
+	lists_.at(key)->select(0);
+}
+
+void EncyclopediaWindow::fill_buildings() {
+	const Tribes& tribes = iaplayer().egbase().tribes();
+	const TribeDescr& tribe = iaplayer().player().tribe();
+	std::vector<EncyclopediaEntry> entries;
+
+	for (Widelands::DescriptionIndex i = 0; i < tribes.nrbuildings(); ++i) {
+		const BuildingDescr* building = tribes.get_building_descr(i);
+		if (tribe.has_building(i) || building->type() == MapObjectType::MILITARYSITE) {
+			EncyclopediaEntry entry(i, building->descname(), building->icon());
+			entries.push_back(entry);
+		}
+	}
+	fill_entries("buildings", entries);
 }
 
 void EncyclopediaWindow::fill_wares() {
-	const TribeDescr & tribe = iaplayer().player().tribe();
-	WareIndex const nr_wares = tribe.get_nrwares();
-	std::vector<Ware> ware_vec;
+	const TribeDescr& tribe = iaplayer().player().tribe();
+	std::vector<EncyclopediaEntry> entries;
 
-	for (WareIndex i = 0; i < nr_wares; ++i) {
-		WareDescr const * ware = tribe.get_ware_descr(i);
-		Ware w(i, ware);
-		ware_vec.push_back(w);
+	for (const Widelands::DescriptionIndex& i : tribe.wares()) {
+		const WareDescr* ware = tribe.get_ware_descr(i);
+		EncyclopediaEntry entry(i, ware->descname(), ware->icon());
+		entries.push_back(entry);
 	}
-
-	std::sort(ware_vec.begin(), ware_vec.end());
-
-	for (uint32_t i = 0; i < ware_vec.size(); i++) {
-		Ware cur = ware_vec[i];
-		wares.add(cur.m_descr->descname(), cur.m_i, cur.m_descr->icon());
-	}
+	fill_entries("wares", entries);
 }
 
-void EncyclopediaWindow::ware_selected(uint32_t) {
-	const TribeDescr & tribe = iaplayer().player().tribe();
-	selectedWare = tribe.get_ware_descr(wares.get_selected());
+void EncyclopediaWindow::fill_workers() {
+	const TribeDescr& tribe = iaplayer().player().tribe();
+	std::vector<EncyclopediaEntry> entries;
 
-	descrTxt.set_text(selectedWare->helptext());
-
-	prodSites.clear();
-	condTable.clear();
-
-	bool found = false;
-
-	BuildingIndex const nr_buildings = tribe.get_nrbuildings();
-	for (BuildingIndex i = 0; i < nr_buildings; ++i) {
-		const BuildingDescr & descr = *tribe.get_building_descr(i);
-		if (upcast(ProductionSiteDescr const, de, &descr)) {
-
-			if
-				((descr.is_buildable() || descr.is_enhanced())
-				 &&
-				 de->output_ware_types().count(wares.get_selected()))
-			{
-				prodSites.add(de->descname(), i, de->get_icon());
-				found = true;
-			}
-		}
+	for (const Widelands::DescriptionIndex& i : tribe.workers()) {
+		const WorkerDescr* worker = tribe.get_worker_descr(i);
+		EncyclopediaEntry entry(i, worker->descname(), worker->icon());
+		entries.push_back(entry);
 	}
-	if (found)
-		prodSites.select(0);
-
+	fill_entries("workers", entries);
 }
 
-void EncyclopediaWindow::prod_site_selected(uint32_t) {
-	assert(prodSites.has_selection());
-	size_t no_of_wares = 0;
-	condTable.clear();
-	const TribeDescr & tribe = iaplayer().player().tribe();
+void EncyclopediaWindow::entry_selected(const std::string& key,
+                                        const std::string& script_path,
+                                        const Widelands::MapObjectType& type) {
+	const TribeDescr& tribe = iaplayer().player().tribe();
+	try {
+		std::unique_ptr<LuaTable> table(iaplayer().egbase().lua().run_script(script_path));
+		std::unique_ptr<LuaCoroutine> cr(table->get_coroutine("func"));
+		cr->push_arg(tribe.name());
 
-	upcast(ProductionSiteDescr const, descr, tribe.get_building_descr(prodSites.get_selected()));
-	const ProductionSiteDescr::Programs & programs = descr->programs();
+		std::string descname = "";
 
-	//  TODO(unknown): This needs reworking. A program can indeed produce iron even if
-	//  the program name is not any of produce_iron, smelt_iron, prog_iron
-	//  or work. What matters is whether the program has a statement such
-	//  as "produce iron" or "createware iron". The program name is not
-	//  supposed to have any meaning to the game logic except to uniquely
-	//  identify the program.
-	//  Only shows information from the first program that has a name indicating
-	//  that it produces the considered ware type.
-	std::map<std::string, ProductionProgram *>::const_iterator programIt =
-		programs.find(std::string("produce_") + selectedWare->name());
-
-	if (programIt == programs.end())
-		programIt = programs.find(std::string("smelt_")  + selectedWare->name());
-
-	if (programIt == programs.end())
-		programIt = programs.find(std::string("smoke_")  + selectedWare->name());
-
-	if (programIt == programs.end())
-		programIt = programs.find(std::string("mine_")   + selectedWare->name());
-
-	if (programIt == programs.end())
-		programIt = programs.find("work");
-
-	if (programIt != programs.end()) {
-		const ProductionProgram::Actions & actions =
-			programIt->second->actions();
-
-		for (const ProductionProgram::Action * temp_action : actions) {
-			if (upcast(ProductionProgram::ActConsume const, action, temp_action)) {
-				const ProductionProgram::ActConsume::Groups & groups =
-					action->groups();
-
-				for (const ProductionProgram::WareTypeGroup& temp_group : groups) {
-					const std::set<WareIndex> & ware_types = temp_group.first;
-					assert(ware_types.size());
-					std::vector<std::string> ware_type_descnames;
-					for (const WareIndex& ware_index : ware_types) {
-						ware_type_descnames.push_back(tribe.get_ware_descr(ware_index)->descname());
-					}
-					no_of_wares = no_of_wares + ware_types.size();
-
-					std::string ware_type_names =
-							i18n::localize_list(ware_type_descnames, i18n::ConcatenateWith::OR);
-
-					//  Make sure to detect if someone changes the type so that it
-					//  needs more than 3 decimal digits to represent.
-					static_assert(sizeof(temp_group.second) == 1, "Number is too big for 3 char string.");
-
-					//  picture only of first ware type in group
-					UI::Table<uintptr_t>::EntryRecord & tableEntry =
-						condTable.add(0);
-					tableEntry.set_picture
-						(0, tribe.get_ware_descr(*ware_types.begin())->icon(), ware_type_names);
-					tableEntry.set_string(1, std::to_string(static_cast<unsigned int>(temp_group.second)));
-					condTable.set_sort_column(0);
-					condTable.sort();
-				}
-			}
+		switch (type) {
+		case (Widelands::MapObjectType::BUILDING):
+		case (Widelands::MapObjectType::CONSTRUCTIONSITE):
+		case (Widelands::MapObjectType::DISMANTLESITE):
+		case (Widelands::MapObjectType::WAREHOUSE):
+		case (Widelands::MapObjectType::PRODUCTIONSITE):
+		case (Widelands::MapObjectType::MILITARYSITE):
+		case (Widelands::MapObjectType::TRAININGSITE): {
+			const Widelands::BuildingDescr* descr =
+			   tribe.get_building_descr(lists_.at(key)->get_selected());
+			descname = descr->descname();
+			cr->push_arg(descr);
+			break;
 		}
+		case (Widelands::MapObjectType::WARE): {
+			const Widelands::WareDescr* descr = tribe.get_ware_descr(lists_.at(key)->get_selected());
+			descname = descr->descname();
+			cr->push_arg(descr);
+			break;
+		}
+		case (Widelands::MapObjectType::WORKER):
+		case (Widelands::MapObjectType::CARRIER):
+		case (Widelands::MapObjectType::SOLDIER): {
+			const Widelands::WorkerDescr* descr =
+			   tribe.get_worker_descr(lists_.at(key)->get_selected());
+			descname = descr->descname();
+			cr->push_arg(descr);
+			break;
+		}
+		case (Widelands::MapObjectType::MAPOBJECT):
+		case (Widelands::MapObjectType::BATTLE):
+		case (Widelands::MapObjectType::FLEET):
+		case (Widelands::MapObjectType::BOB):
+		case (Widelands::MapObjectType::CRITTER):
+		case (Widelands::MapObjectType::SHIP):
+		case (Widelands::MapObjectType::IMMOVABLE):
+		case (Widelands::MapObjectType::FLAG):
+		case (Widelands::MapObjectType::ROAD):
+		case (Widelands::MapObjectType::PORTDOCK):
+		default:
+			throw wexception("EncyclopediaWindow: No MapObjectType defined for tab.");
+		}
+
+		cr->resume();
+		const std::string help_text = cr->pop_string();
+		contents_.at(key)->set_text((boost::format("%s%s") % heading(descname) % help_text).str());
+	} catch (LuaError& err) {
+		contents_.at(key)->set_text(err.what());
 	}
-	condTable.set_column_title(0, ngettext("Consumed Ware Type", "Consumed Ware Types", no_of_wares));
+	contents_.at(key)->scroll_to_top();
 }

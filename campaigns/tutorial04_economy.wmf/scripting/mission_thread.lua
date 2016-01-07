@@ -3,7 +3,7 @@
 -- ===============
 
 function introduction()
-   sleep(500)
+   sleep(1000)
    message_box_objective(plr, intro1)
    message_box_objective(plr, intro2)
 
@@ -19,9 +19,25 @@ function burn_tavern_down()
    message_box_objective(plr, tavern_burnt_down)
    sleep(2000)
    local o = message_box_objective(plr, building_stat)
-   -- wait for the window to open and close
    while not mv.windows.building_statistics do sleep(100) end
-   -- we cannot check whether the user scrolled, so let's hope he does it
+   o.done = true
+
+   sleep(wl.Game().real_speed) -- The building statistics window needs some time to build up
+   o = message_box_objective(plr,explain_building_stat)
+   -- We cannot create several objectives with the same name. Therefore, we create o2 here once and change its visibility
+   local o2 = add_campaign_objective(reopen_building_stat_obj)
+   o2.visible = false
+   local medium_tab_active = false
+   while not medium_tab_active do
+      if not mv.windows.building_statistics then
+         o2.visible = true
+         message_box_objective(plr, reopen_building_stat)
+         while not mv.windows.building_statistics do sleep(200) end
+         o2.visible = false
+      end
+      if mv.windows.building_statistics.tabs["building_stats_medium"].active then medium_tab_active = true end
+      sleep(200)
+   end
    while mv.windows.building_statistics do sleep(100) end
    o.done = true
 
@@ -32,7 +48,7 @@ function burn_tavern_down()
 
    o = message_box_objective(plr, inventory2)
    -- We cannot create several objectives with the same name. Therefore, we create o2 here once and change its visibility
-   local o2 = add_campaign_objective(reopen_stock_menu_obj)
+   o2 = add_campaign_objective(reopen_stock_menu_obj)
    o2.visible = false
    while not o.done do
       if not mv.windows.stock_menu then
@@ -53,7 +69,7 @@ function burn_tavern_down()
    sleep(100*1000)
    message_box_objective(plr, ware_encyclopedia) -- a small insert
 
-   while #plr:get_buildings("tavern") < 2 do sleep(500) end
+   while #plr:get_buildings("empire_tavern") < 2 do sleep(500) end
    o.done = true
 
    plan_the_future()
@@ -108,7 +124,7 @@ function plan_the_future()
    message_box_objective(plr, economy_settings2)
    o = message_box_objective(plr, economy_settings3)
 
-   while sf.immovable:get_wares("marblecolumn") < 12 do sleep(500) end
+   while sf.immovable:get_wares("marble_column") < 12 do sleep(500) end
    -- wait that the player has really changed the target quantity
 
    o.visible = false
@@ -117,8 +133,9 @@ function plan_the_future()
 
    local enough_wares = false
    while not enough_wares do
-      if (warehouse_field.immovable and (warehouse_field.immovable.descr.name == "warehouse")) then
-         if warehouse_field.immovable:get_wares("marblecolumn") >= 20 then
+      if (warehouse_field.immovable and
+          (warehouse_field.immovable.descr.name == "empire_warehouse")) then
+         if warehouse_field.immovable:get_wares("marble_column") >= 20 then
             enough_wares = true
          end
       end
@@ -137,4 +154,3 @@ end
 
 run(init_player)
 run(introduction)
-

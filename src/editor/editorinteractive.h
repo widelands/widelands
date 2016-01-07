@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2008, 2011 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2008, 2011, 2015 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -80,7 +80,8 @@ public:
 			place_immovable(delete_immovable),
 			place_bob(delete_bob),
 			increase_resources(decrease_resources, set_resources),
-			set_port_space(unset_port_space)
+			set_port_space(unset_port_space),
+			set_origin()
 		{}
 		EditorTool & current() const {return *current_pointer;}
 		using ToolVector = std::vector<EditorTool *>;
@@ -134,7 +135,7 @@ private:
 	};
 	std::vector<PlayerReferences> m_player_tribe_references;
 
-	int32_t m_realtime;
+	uint32_t m_realtime;
 	bool m_left_mouse_button_is_down;
 
 	EditorHistory m_history;

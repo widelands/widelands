@@ -19,40 +19,83 @@
 
 #include "logic/ware_descr.h"
 
+#include <memory>
+
+#include <boost/format.hpp>
+
 #include "base/i18n.h"
 #include "graphic/animation.h"
 #include "graphic/graphic.h"
-#include "logic/tribe.h"
-#include "profile/profile.h"
+#include "logic/game_data_error.h"
+#include "logic/tribes/tribe_descr.h"
 
 namespace Widelands {
 
-WareDescr::WareDescr
-	(const TribeDescr & gtribe, char const * const _name,
-	 char const * const _descname,
-	 const std::string & directory, Profile & prof, Section & global_s)
-	:
-	MapObjectDescr(MapObjectType::WARE, _name, _descname),
-	m_tribe         (gtribe),
-	m_helptext      (global_s.get_string("help", "")),
-	m_icon_fname    (directory + "/menu.png"),
-	m_icon(g_gr->images().get("pics/but0.png"))
-{
-	m_default_target_quantity =
-		global_s.get_positive("default_target_quantity", std::numeric_limits<uint32_t>::max());
+WareDescr::WareDescr(const std::string& init_descname, const LuaTable& table) :
+	MapObjectDescr(MapObjectType::WARE, table.get_string("name"), init_descname, table) {
 
-	add_animation("idle", g_gr->animations().load(directory, prof.get_safe_section("idle")));
+	if (!is_animation_known("idle")) {
+		throw GameDataError("Ware %s has no idle animation", table.get_string("name").c_str());
+	}
+	if (icon_filename().empty()) {
+		throw GameDataError("Ware %s has no menu icon", table.get_string("name").c_str());
+	}
+	i18n::Textdomain td("tribes");
 
-	m_preciousness =
-		static_cast<uint8_t>(global_s.get_natural("preciousness", 0));
+	helptext_script_ = table.get_string("helptext_script");
+
+	std::unique_ptr<LuaTable> items_table = table.get_table("default_target_quantity");
+	for (const std::string& key : items_table->keys<std::string>()) {
+		default_target_quantities_.emplace(key, items_table->get_int(key));
+	}
+
+	items_table = table.get_table("preciousness");
+	for (const std::string& key : items_table->keys<std::string>()) {
+		preciousnesses_.emplace(key, items_table->get_int(key));
+	}
 }
 
-/**
- * Load all static graphics
- */
-void WareDescr::load_graphics()
-{
-	m_icon = g_gr->images().get(m_icon_fname);
+int WareDescr::preciousness(const std::string& tribename) const {
+	if (preciousnesses_.count(tribename) > 0) {
+		return preciousnesses_.at(tribename);
+	}
+	return kInvalidWare;
 }
+
+
+DescriptionIndex WareDescr::default_target_quantity(const std::string& tribename) const {
+	if (default_target_quantities_.count(tribename) > 0) {
+		return default_target_quantities_.at(tribename);
+	}
+	return kInvalidWare;
+}
+
+bool WareDescr::has_demand_check(const std::string& tribename) const {
+	return default_target_quantity(tribename) != kInvalidWare;
+}
+
+void WareDescr::set_has_demand_check(const std::string& tribename) {
+	if (default_target_quantities_.count(tribename) > 0
+		 && default_target_quantities_.at(tribename) == kInvalidWare) {
+		default_target_quantities_.at(tribename) = 1;
+	}
+}
+
+void WareDescr::add_consumer(const DescriptionIndex& building_index) {
+	consumers_.insert(building_index);
+}
+
+void WareDescr::add_producer(const DescriptionIndex& building_index) {
+	producers_.insert(building_index);
+}
+
+const std::set<DescriptionIndex>& WareDescr::consumers() const {
+	return consumers_;
+}
+
+const std::set<DescriptionIndex>& WareDescr::producers() const {
+	return producers_;
+}
+
 
 }

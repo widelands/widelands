@@ -22,6 +22,7 @@
 
 #include <cstring>
 #include <map>
+#include <memory>
 #include <set>
 #include <string>
 #include <vector>
@@ -31,13 +32,14 @@
 #include "logic/building.h"
 #include "logic/production_program.h"
 #include "logic/program_result.h"
+#include "scripting/lua_table.h"
 
 namespace Widelands {
 
-struct WareDescr;
 struct ProductionProgram;
-class Soldier;
 class Request;
+class Soldier;
+class WareDescr;
 class WaresQueue;
 class WorkerDescr;
 
@@ -52,14 +54,14 @@ class WorkerDescr;
  * A production site can have one (or more) input wares types. Every input
  * wares type has an associated store.
  */
-struct ProductionSiteDescr : public BuildingDescr {
+class ProductionSiteDescr : public BuildingDescr {
+public:
 	friend struct ProductionProgram; // To add animations
 
-	ProductionSiteDescr
-		(MapObjectType type, char const * name, char const * descname,
-		 const std::string & directory, Profile &, Section & global_s,
-		 const TribeDescr &, const World&);
-	~ProductionSiteDescr() override;
+	ProductionSiteDescr(const std::string& init_descname, const char* msgctxt, MapObjectType type,
+							  const LuaTable& t, const EditorGameBase& egbase);
+	ProductionSiteDescr(const std::string& init_descname, const char* msgctxt,
+							  const LuaTable& t, const EditorGameBase& egbase);
 
 	Building & create_object() const override;
 
@@ -73,29 +75,33 @@ struct ProductionSiteDescr : public BuildingDescr {
 	const BillOfMaterials & working_positions() const {
 		return m_working_positions;
 	}
-	bool is_output_ware_type  (const WareIndex& i) const {
+	bool is_output_ware_type  (const DescriptionIndex& i) const {
 		return m_output_ware_types  .count(i);
 	}
-	bool is_output_worker_type(const WareIndex& i) const {
+	bool is_output_worker_type(const DescriptionIndex& i) const {
 		return m_output_worker_types.count(i);
 	}
 	const BillOfMaterials & inputs() const {return m_inputs;}
-	using Output = std::set<WareIndex>;
+	using Output = std::set<DescriptionIndex>;
 	const Output   & output_ware_types  () const {return m_output_ware_types;}
 	const Output   & output_worker_types() const {return m_output_worker_types;}
 	const ProductionProgram * get_program(const std::string &) const;
-	using Programs = std::map<std::string, ProductionProgram *>;
+	using Programs = std::map<std::string, std::unique_ptr<ProductionProgram>>;
 	const Programs & programs() const {return m_programs;}
 
 	const std::string& out_of_resource_title() const {
 		return m_out_of_resource_title;
 	}
 
+	const std::string& out_of_resource_heading() const {
+		return m_out_of_resource_heading;
+	}
+
 	const std::string& out_of_resource_message() const {
 		return m_out_of_resource_message;
 	}
-	uint32_t out_of_resource_delay_attempts() const {
-		return m_out_of_resource_delay_attempts;
+	uint32_t out_of_resource_productivity_threshold() const {
+		return out_of_resource_productivity_threshold_;
 	}
 
 private:
@@ -105,8 +111,9 @@ private:
 	Output   m_output_worker_types;
 	Programs m_programs;
 	std::string m_out_of_resource_title;
+	std::string m_out_of_resource_heading;
 	std::string m_out_of_resource_message;
-	uint32_t    m_out_of_resource_delay_attempts;
+	int         out_of_resource_productivity_threshold_;
 
 	DISALLOW_COPY_AND_ASSIGN(ProductionSiteDescr);
 };
@@ -151,7 +158,7 @@ public:
 		return m_working_positions;
 	}
 
-	virtual bool has_workers(BuildingIndex targetSite, Game & game);
+	virtual bool has_workers(DescriptionIndex targetSite, Game & game);
 	uint8_t get_statistics_percent() {return m_last_stat_percent;}
 	uint8_t get_crude_statistics() {return (m_crude_percent + 5000) / 10000;}
 
@@ -165,7 +172,7 @@ public:
 		m_production_result = text;
 	}
 
-	WaresQueue & waresqueue(WareIndex) override;
+	WaresQueue & waresqueue(DescriptionIndex) override;
 
 	void init(EditorGameBase &) override;
 	void cleanup(EditorGameBase &) override;
@@ -203,7 +210,7 @@ protected:
 protected:
 	struct State {
 		const ProductionProgram * program; ///< currently running program
-		int32_t  ip; ///< instruction pointer
+		size_t  ip; ///< instruction pointer
 		uint32_t phase; ///< micro-step index (instruction dependent)
 		uint32_t flags; ///< pfXXX flags
 
@@ -223,9 +230,9 @@ protected:
 			coord(Coords::null()) {}
 	};
 
-	Request & request_worker(WareIndex);
+	Request & request_worker(DescriptionIndex);
 	static void request_worker_callback
-		(Game &, Request &, WareIndex, Worker *, PlayerImmovable &);
+		(Game &, Request &, DescriptionIndex, Worker *, PlayerImmovable &);
 
 	/**
 	 * Determine the next program to be run when the last program has finished.
@@ -271,8 +278,8 @@ protected:  // TrainingSite must have access to this stuff
 	int32_t      m_program_time; ///< timer time
 	int32_t      m_post_timer;    ///< Time to schedule after ends
 
-	ProductionProgram::ActProduce::Items m_produced_wares;
-	ProductionProgram::ActProduce::Items m_recruited_workers;
+	BillOfMaterials m_produced_wares;
+	BillOfMaterials m_recruited_workers;
 	InputQueues m_input_queues; ///< input queues for all inputs
 	std::vector<bool>        m_statistics;
 	uint8_t                  m_last_stat_percent;
@@ -281,9 +288,10 @@ protected:  // TrainingSite must have access to this stuff
 	std::string              m_default_anim; // normally "idle", "empty", if empty mine.
 
 private:
+	enum class Trend {kUnchanged, kRising, kFalling};
+	Trend                    trend_;
 	std::string              m_statistics_string_on_changed_statistics;
 	std::string              m_production_result; // hover tooltip text
-	uint32_t                 m_out_of_resource_delay_counter;
 
 	DISALLOW_COPY_AND_ASSIGN(ProductionSite);
 };
@@ -295,15 +303,15 @@ private:
  * releasing some wares out of a building
 */
 struct Input {
-	Input(const WareIndex& Ware, uint8_t const Max) : m_ware(Ware), m_max(Max)
+	Input(const DescriptionIndex& Ware, uint8_t const Max) : m_ware(Ware), m_max(Max)
 	{}
 	~Input() {}
 
-	WareIndex ware() const {return m_ware;}
+	DescriptionIndex ware() const {return m_ware;}
 	uint8_t     max() const {return m_max;}
 
 private:
-	WareIndex m_ware;
+	DescriptionIndex m_ware;
 	uint8_t    m_max;
 };
 
@@ -312,7 +320,7 @@ private:
  */
 // A note we're using to notify the AI
 struct NoteProductionSiteOutOfResources {
-	CAN_BE_SEND_AS_NOTE(NoteId::ProductionSiteOutOfResources)
+	CAN_BE_SENT_AS_NOTE(NoteId::ProductionSiteOutOfResources)
 
 	// The production site that is out of resources.
 	ProductionSite* ps;

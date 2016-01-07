@@ -4,7 +4,8 @@ cmake_minimum_required (VERSION 2.8.7)
 
 include("${CMAKE_SOURCE_DIR}/cmake/WlFunctions.cmake")
 
-option(OPTION_USE_GLBINDING "USe glbinding instead of GLEW" OFF)
+option(OPTION_USE_GLBINDING "Use glbinding instead of GLEW" OFF)
+option(OPTION_GLEW_STATIC "Use static GLEW Library" OFF)
 
 if (CMAKE_SOURCE_DIR STREQUAL CMAKE_BINARY_DIR)
   message(FATAL_ERROR "Build directory and source directory must not be the same.")
@@ -30,7 +31,11 @@ endif()
 
 SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake/Modules)
 
-set (Boost_USE_STATIC_LIBS  OFF)
+if (WIN32)
+  set (Boost_USE_STATIC_LIBS  ON)
+else()
+  set (Boost_USE_STATIC_LIBS  OFF)
+endif()
 set (Boost_USE_MULTITHREADED ON)
 set (Boost_DETAILED_FAILURE_MSG ON)
 find_package(Boost 1.48
@@ -50,6 +55,7 @@ find_package(SDL2_mixer REQUIRED)
 find_package(SDL2_net REQUIRED)
 find_package(SDL2_ttf REQUIRED)
 find_package(ZLIB REQUIRED)
+find_package(ICU REQUIRED)
 if(OPTION_USE_GLBINDING)
   find_package(glbinding REQUIRED)
 else()
@@ -237,7 +243,6 @@ install(
   DIRECTORY
     campaigns
     i18n
-    global
     tribes
     txts
     world

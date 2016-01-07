@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2013 by the Widelands Development Team
+ * Copyright (C) 2008-2013, 2015 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -38,12 +38,12 @@
 #include "logic/player.h"
 #include "logic/playercommand.h"
 #include "logic/playersmanager.h"
+#include "logic/tribes/tribes.h"
 #include "map_io/widelands_map_loader.h"
 #include "network/internet_gaming.h"
 #include "network/network_gaming_messages.h"
 #include "network/network_protocol.h"
 #include "network/network_system.h"
-#include "profile/profile.h"
 #include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
 #include "ui_basic/messagebox.h"
@@ -82,8 +82,8 @@ struct NetClientImpl {
 	bool server_is_waiting;
 
 	/// Data for the last time message we sent.
-	int32_t lasttimestamp;
-	int32_t lasttimestamp_realtime;
+	uint32_t lasttimestamp;
+	uint32_t lasttimestamp_realtime;
 
 	/// The real target speed, in milliseconds per second.
 	/// This is always set by the server
@@ -155,19 +155,20 @@ void NetClient::run ()
 		FullscreenMenuLaunchMPG lgm(this, this);
 		lgm.set_chat_provider(*this);
 		d->modal = &lgm;
-		int32_t code = lgm.run();
+		FullscreenMenuBase::MenuTarget code = lgm.run<FullscreenMenuBase::MenuTarget>();
 		d->modal = nullptr;
-		if (code == 1) { // Only possible if server is dedicated - client pressed "start game" button
+		 // Only possible if server is dedicated - client pressed "start game" button
+		if (code == FullscreenMenuBase::MenuTarget::kNormalGame) {
 			SendPacket subs;
 			subs.unsigned_8(NETCMD_LAUNCH);
 			subs.send(d->sock);
 
 			// Reopen the menu - perhaps the start is denied or other problems occur
 			d->modal = &lgm;
-			code = lgm.run();
+			code = lgm.run<FullscreenMenuBase::MenuTarget>();
 			d->modal = nullptr;
 		}
-		if (code <= 0) {
+		if (code == FullscreenMenuBase::MenuTarget::kBack) {
 			// if this is an internet game, tell the metaserver that client is back in the lobby.
 			if (m_internet)
 				InternetGaming::ref().set_game_done();
@@ -215,7 +216,7 @@ void NetClient::run ()
 			game.init_savegame(loaderUI, d->settings);
 		d->time.reset(game.get_gametime());
 		d->lasttimestamp = game.get_gametime();
-		d->lasttimestamp_realtime = WLApplication::get()->get_time();
+		d->lasttimestamp_realtime = SDL_GetTicks();
 
 		d->modal = game.get_ibase();
 		game.run
@@ -252,12 +253,12 @@ void NetClient::think()
 
 		if
 			(d->server_is_waiting &&
-			 d->game->get_gametime() == d->time.networktime())
+			 d->game->get_gametime() == static_cast<uint32_t>(d->time.networktime()))
 		{
 			send_time();
 			d->server_is_waiting = false;
 		} else if (d->game->get_gametime() != d->lasttimestamp) {
-			int32_t curtime = WLApplication::get()->get_time();
+			uint32_t curtime = SDL_GetTicks();
 			if (curtime - d->lasttimestamp_realtime > CLIENT_TIMESTAMP_INTERVAL)
 				send_time();
 		}
@@ -282,7 +283,7 @@ void NetClient::send_player_command(Widelands::PlayerCommand & pc)
 	s.send(d->sock);
 
 	d->lasttimestamp = d->game->get_gametime();
-	d->lasttimestamp_realtime = WLApplication::get()->get_time();
+	d->lasttimestamp_realtime = SDL_GetTicks();
 
 	delete &pc;
 }
@@ -650,7 +651,7 @@ void NetClient::send_time()
 	s.send(d->sock);
 
 	d->lasttimestamp = d->game->get_gametime();
-	d->lasttimestamp_realtime = WLApplication::get()->get_time();
+	d->lasttimestamp_realtime = SDL_GetTicks();
 }
 
 void NetClient::syncreport()
@@ -894,17 +895,17 @@ void NetClient::handle_packet(RecvPacket & packet)
 	case NETCMD_SETTING_TRIBES: {
 		d->settings.tribes.clear();
 		for (uint8_t i = packet.unsigned_8(); i; --i) {
-			TribeBasicInfo info;
-			info.name = packet.string();
+			TribeBasicInfo info = Widelands::Tribes::tribeinfo(packet.string());
 
 			// Get initializations (we have to do this locally, for translations)
 			LuaInterface lua;
+			info.initializations.clear();
 			for (uint8_t j = packet.unsigned_8(); j; --j) {
 				std::string const initialization_script = packet.string();
 				std::unique_ptr<LuaTable> t = lua.run_script(initialization_script);
 				t->do_not_warn_about_unaccessed_keys();
 				info.initializations.push_back
-					(TribeBasicInfo::Initialization(initialization_script, t->get_string("name")));
+					(TribeBasicInfo::Initialization(initialization_script, t->get_string("descname")));
 			}
 			d->settings.tribes.push_back(info);
 		}
@@ -945,9 +946,10 @@ void NetClient::handle_packet(RecvPacket & packet)
 	}
 
 	case NETCMD_LAUNCH: {
-		if (!d->modal || d->game)
+		if (!d->modal || d->game) {
 			throw DisconnectException("UNEXPECTED_LAUNCH");
-		d->modal->end_modal(2);
+		}
+		d->modal->end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kOk);
 		break;
 	}
 	case NETCMD_SETSPEED:
@@ -1091,22 +1093,24 @@ void NetClient::disconnect
 		else
 			msg = NetworkGamingMessages::get_message(reason, arg);
 
-		if (trysave)
-			msg += _(" An automatic savegame will be created.");
+		if (trysave) {
+			/** TRANSLATORS: %s contains an error message. */
+			msg = (boost::format(_("%s An automatic savegame will be created.")) % msg).str();
+		}
 
 		UI::WLMessageBox mmb
 			(d->modal,
 			 _("Disconnected from Host"),
 			 msg,
-			 UI::WLMessageBox::OK);
-		mmb.run();
+			 UI::WLMessageBox::MBoxType::kOk);
+		mmb.run<UI::Panel::Returncodes>();
 	}
 
 	if (trysave)
 		WLApplication::emergency_save(*d->game);
 
 	if (d->modal) {
-		d->modal->end_modal(0);
+		d->modal->end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kBack);
 		d->modal = nullptr;
 	}
 }

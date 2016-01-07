@@ -42,67 +42,61 @@
  */
 FullscreenMenuCampaignSelect::FullscreenMenuCampaignSelect() :
 	FullscreenMenuLoadMapOrGame(),
+	m_table(this, tablex_, tabley_, tablew_, tableh_, false),
 
 	// Main Title
 	m_title
-		(this, get_w() / 2, m_tabley / 3,
+		(this, get_w() / 2, tabley_ / 3,
 		 _("Choose a campaign"),
 		 UI::Align_HCenter),
 
 	// Campaign description
 	m_label_campname
-		(this, m_right_column_x, m_tabley,
+		(this, right_column_x_, tabley_,
 		 "",
 		 UI::Align_Left),
 	m_ta_campname(this,
-					  m_right_column_x + m_indent, get_y_from_preceding(m_label_campname) + m_padding,
-					  get_right_column_w(m_right_column_x) - m_indent, m_label_height),
+					  right_column_x_ + indent_, get_y_from_preceding(m_label_campname) + padding_,
+					  get_right_column_w(right_column_x_) - indent_, m_label_height),
 
 	m_label_tribename
-		(this, m_right_column_x, get_y_from_preceding(m_ta_campname) + 2 * m_padding,
+		(this, right_column_x_, get_y_from_preceding(m_ta_campname) + 2 * padding_,
 		 "",
 		 UI::Align_Left),
 	m_ta_tribename(this,
-						 m_right_column_x + m_indent, get_y_from_preceding(m_label_tribename) + m_padding,
-						 get_right_column_w(m_right_column_x + m_indent), m_label_height),
+						 right_column_x_ + indent_, get_y_from_preceding(m_label_tribename) + padding_,
+						 get_right_column_w(right_column_x_ + indent_), m_label_height),
 
 	m_label_difficulty
-		(this, m_right_column_x, get_y_from_preceding(m_ta_tribename) + 2 * m_padding,
+		(this, right_column_x_, get_y_from_preceding(m_ta_tribename) + 2 * padding_,
 		 "",
 		 UI::Align_Left),
 	m_ta_difficulty(this,
-						 m_right_column_x + m_indent, get_y_from_preceding(m_label_difficulty) + m_padding,
-						 get_right_column_w(m_right_column_x + m_indent), 2 * m_label_height - m_padding),
+						 right_column_x_ + indent_, get_y_from_preceding(m_label_difficulty) + padding_,
+						 get_right_column_w(right_column_x_ + indent_), 2 * m_label_height - padding_),
 
 	m_label_description
-		(this, m_right_column_x, get_y_from_preceding(m_ta_difficulty) + 2 * m_padding,
+		(this, right_column_x_, get_y_from_preceding(m_ta_difficulty) + 2 * padding_,
 		 _("Description:"),
 		 UI::Align_Left),
 	m_ta_description
 		(this,
-		 m_right_column_x + m_indent,
-		 get_y_from_preceding(m_label_description) + m_padding,
-		 get_right_column_w(m_right_column_x + m_indent),
-		 m_buty - get_y_from_preceding(m_label_description) - 4 * m_padding)
+		 right_column_x_ + indent_,
+		 get_y_from_preceding(m_label_description) + padding_,
+		 get_right_column_w(right_column_x_ + indent_),
+		 m_buty - get_y_from_preceding(m_label_description) - 4 * padding_)
 {
 	m_title.set_textstyle(UI::TextStyle::ui_big());
-	m_back.set_tooltip(_("Return to the main menu"));
-	m_ok.set_tooltip(_("Play this campaign"));
+	back_.set_tooltip(_("Return to the main menu"));
+	ok_.set_tooltip(_("Play this campaign"));
 	m_ta_campname.set_tooltip(_("The name of this campaign"));
 	m_ta_tribename.set_tooltip(_("The tribe you will be playing"));
 	m_ta_difficulty.set_tooltip(_("The difficulty of this campaign"));
-	m_ta_description.set_tooltip(_("Story and hints"));
 
-	m_ok.sigclicked.connect
-		(boost::bind
-			 (&FullscreenMenuCampaignSelect::clicked_ok, boost::ref(*this)));
-	m_back.sigclicked.connect
-		(boost::bind
-			 (&FullscreenMenuCampaignSelect::clicked_back, boost::ref(*this)));
-	m_table.selected.connect
-		(boost::bind(&FullscreenMenuCampaignSelect::entry_selected, this));
-	m_table.double_clicked.connect
-		(boost::bind(&FullscreenMenuCampaignSelect::clicked_ok, boost::ref(*this)));
+	ok_.sigclicked.connect(boost::bind(&FullscreenMenuCampaignSelect::clicked_ok, boost::ref(*this)));
+	back_.sigclicked.connect(boost::bind(&FullscreenMenuCampaignSelect::clicked_back, boost::ref(*this)));
+	m_table.selected.connect(boost::bind(&FullscreenMenuCampaignSelect::entry_selected, this));
+	m_table.double_clicked.connect(boost::bind(&FullscreenMenuCampaignSelect::clicked_ok, boost::ref(*this)));
 
 	/** TRANSLATORS: Campaign difficulty table header */
 	m_table.add_column(45, _("Diff."), _("Difficulty"), UI::Align_Left);
@@ -123,7 +117,7 @@ FullscreenMenuCampaignSelect::FullscreenMenuCampaignSelect() :
 void FullscreenMenuCampaignSelect::clicked_ok()
 {
 	get_campaign();
-	end_modal(1);
+	end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kOk);
 }
 
 int32_t FullscreenMenuCampaignSelect::get_campaign()
@@ -143,7 +137,7 @@ static char const * const difficulty_picture_filenames[] = {
 bool FullscreenMenuCampaignSelect::set_has_selection()
 {
 	bool has_selection = m_table.has_selection();
-	FullscreenMenuLoadMapOrGame::set_has_selection();
+	ok_.set_enabled(has_selection);
 
 	if (!has_selection) {
 		m_label_campname.set_text(std::string());
@@ -260,7 +254,6 @@ void FullscreenMenuCampaignSelect::fill_table()
 	if (m_table.size()) {
 		m_table.select(0);
 	}
-	set_has_selection();
 }
 
 bool FullscreenMenuCampaignSelect::compare_difficulty
@@ -288,65 +281,65 @@ bool FullscreenMenuCampaignSelect::compare_difficulty
  */
 FullscreenMenuCampaignMapSelect::FullscreenMenuCampaignMapSelect(bool is_tutorial) :
 	FullscreenMenuLoadMapOrGame(),
+	m_table(this, tablex_, tabley_, tablew_, tableh_, false),
 
 	// Main title
 	m_title
-		(this, get_w() / 2, m_tabley / 3,
+		(this, get_w() / 2, tabley_ / 3,
 		 is_tutorial ? _("Choose a tutorial") : _("Choose a scenario"),
 		 UI::Align_HCenter),
 	m_subtitle
-		(this, get_w() / 6, get_y_from_preceding(m_title) + 6 * m_padding,
+		(this, get_w() / 6, get_y_from_preceding(m_title) + 6 * padding_,
 		 get_w() * 2 / 3, 4 * m_label_height,
 		 "",
 		 UI::Align_HCenter),
 
 	// Map description
 	m_label_mapname
-		(this, m_right_column_x, m_tabley,
+		(this, right_column_x_, tabley_,
 		 "",
 		 UI::Align_Left),
 	m_ta_mapname(this,
-					 m_right_column_x + m_indent, get_y_from_preceding(m_label_mapname) + m_padding,
-					 get_right_column_w(m_right_column_x + m_indent), m_label_height),
+					 right_column_x_ + indent_, get_y_from_preceding(m_label_mapname) + padding_,
+					 get_right_column_w(right_column_x_ + indent_), m_label_height),
 
 	m_label_author
 		(this,
-		 m_right_column_x, get_y_from_preceding(m_ta_mapname) + 2 * m_padding,
+		 right_column_x_, get_y_from_preceding(m_ta_mapname) + 2 * padding_,
 		 "",
 		 UI::Align_Left),
 	m_ta_author(this,
-					m_right_column_x + m_indent, get_y_from_preceding(m_label_author) + m_padding,
-					get_right_column_w(m_right_column_x + m_indent), 2 * m_label_height),
+					right_column_x_ + indent_, get_y_from_preceding(m_label_author) + padding_,
+					get_right_column_w(right_column_x_ + indent_), 2 * m_label_height),
 
 	m_label_description
-		(this, m_right_column_x, get_y_from_preceding(m_ta_author) + m_padding,
+		(this, right_column_x_, get_y_from_preceding(m_ta_author) + padding_,
 		 "",
 		 UI::Align_Left),
 	m_ta_description
 		(this,
-		 m_right_column_x + m_indent,
-		 get_y_from_preceding(m_label_description) + m_padding,
-		 get_right_column_w(m_right_column_x + m_indent),
-		 m_buty - get_y_from_preceding(m_label_description) - 4 * m_padding),
+		 right_column_x_ + indent_,
+		 get_y_from_preceding(m_label_description) + padding_,
+		 get_right_column_w(right_column_x_ + indent_),
+		 m_buty - get_y_from_preceding(m_label_description) - 4 * padding_),
 
 	m_is_tutorial(is_tutorial)
 {
 	m_title.set_textstyle(UI::TextStyle::ui_big());
-	m_back.set_tooltip(_("Return to the main menu"));
+	back_.set_tooltip(_("Return to the main menu"));
 	if (m_is_tutorial) {
-		m_ok.set_tooltip(_("Play this tutorial"));
+		ok_.set_tooltip(_("Play this tutorial"));
 		m_ta_mapname.set_tooltip(_("The name of this tutorial"));
 		m_ta_description.set_tooltip(_("What you will learn in this tutorial"));
 	} else {
-		m_ok.set_tooltip(_("Play this scenario"));
+		ok_.set_tooltip(_("Play this scenario"));
 		m_ta_mapname.set_tooltip(_("The name of this scenario"));
-		m_ta_description.set_tooltip(_("Story and hints"));
 	}
 
-	m_ok.sigclicked.connect
+	ok_.sigclicked.connect
 		(boost::bind
 			 (&FullscreenMenuCampaignMapSelect::clicked_ok, boost::ref(*this)));
-	m_back.sigclicked.connect
+	back_.sigclicked.connect
 		(boost::bind
 			 (&FullscreenMenuCampaignMapSelect::clicked_back, boost::ref(*this)));
 	m_table.selected.connect(boost::bind(&FullscreenMenuCampaignMapSelect::entry_selected, this));
@@ -387,7 +380,7 @@ void FullscreenMenuCampaignMapSelect::set_campaign(uint32_t const i) {
 bool FullscreenMenuCampaignMapSelect::set_has_selection()
 {
 	bool has_selection = m_table.has_selection();
-	FullscreenMenuLoadMapOrGame::set_has_selection();
+	ok_.set_enabled(has_selection);
 
 	if (!has_selection) {
 		m_label_mapname.set_text(std::string());
@@ -421,8 +414,7 @@ void FullscreenMenuCampaignMapSelect::entry_selected() {
 		map.set_filename(campmapfile);
 		ml->preload_map(true);
 
-		MapAuthorData authors;
-		authors.parse(map.get_author());
+		MapAuthorData authors(map.get_author());
 
 		m_ta_author.set_text(authors.get_names());
 		if (m_is_tutorial) {
@@ -440,6 +432,11 @@ void FullscreenMenuCampaignMapSelect::entry_selected() {
 			m_ta_description.set_text(_(map.get_description()));
 		}
 		m_ta_description.scroll_to_top();
+
+		// The dummy scenario can't be played, so we disable the OK button.
+		if (campmapfile == "campaigns/dummy.wmf") {
+			ok_.set_enabled(false);
+		}
 	}
 }
 
@@ -516,5 +513,4 @@ void FullscreenMenuCampaignMapSelect::fill_table()
 	if (m_table.size()) {
 		m_table.select(0);
 	}
-	set_has_selection();
 }

@@ -25,7 +25,7 @@
 #include "graphic/diranimations.h"
 
 class LuaTable;
-class OneWorldLegacyLookupTable;
+class WorldLegacyLookupTable;
 
 namespace Widelands {
 
@@ -36,14 +36,7 @@ struct CritterProgram;
 // Description
 //
 struct CritterDescr : BobDescr {
-	CritterDescr
-		(char const* const _name,
-		 char const* const _descname,
-		 const std::string& directory,
-		 Profile& prof,
-		 Section& global_s,
-		 TribeDescr & _tribe);
-	CritterDescr(const LuaTable&);
+	CritterDescr(const std::string& init_descname, const LuaTable&);
 	~CritterDescr() override;
 
 	Bob & create_object() const override;
@@ -78,7 +71,7 @@ public:
 	void save(EditorGameBase &, MapObjectSaver &, FileWrite &) override;
 
 	static MapObject::Loader*
-	load(EditorGameBase&, MapObjectLoader&, FileRead&, const OneWorldLegacyLookupTable& lookup_table);
+	load(EditorGameBase&, MapObjectLoader&, FileRead&, const WorldLegacyLookupTable& lookup_table);
 
 protected:
 	struct Loader : Bob::Loader {

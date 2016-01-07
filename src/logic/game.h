@@ -41,6 +41,7 @@ namespace Widelands {
 struct Flag;
 struct Path;
 struct PlayerImmovable;
+enum class IslandExploreDirection;
 enum class ScoutingDirection;
 struct Ship;
 struct PlayerEndStatus;
@@ -161,7 +162,7 @@ public:
 
 	void send_player_bulldoze   (PlayerImmovable &, bool recurse = false);
 	void send_player_dismantle  (PlayerImmovable &);
-	void send_player_build      (int32_t, Coords, BuildingIndex);
+	void send_player_build      (int32_t, Coords, DescriptionIndex);
 	void send_player_build_flag (int32_t, Coords);
 	void send_player_build_road (int32_t, Path &);
 	void send_player_flagaction (Flag &);
@@ -169,21 +170,21 @@ public:
 	void send_player_militarysite_set_soldier_preference (Building &, uint8_t preference);
 	void send_player_start_or_cancel_expedition    (Building &);
 
-	void send_player_enhance_building (Building &, BuildingIndex);
+	void send_player_enhance_building (Building &, DescriptionIndex);
 	void send_player_evict_worker (Worker &);
 	void send_player_set_ware_priority
-		(PlayerImmovable &, int32_t type, WareIndex index, int32_t prio);
+		(PlayerImmovable &, int32_t type, DescriptionIndex index, int32_t prio);
 	void send_player_set_ware_max_fill
-		(PlayerImmovable &, WareIndex index, uint32_t);
+		(PlayerImmovable &, DescriptionIndex index, uint32_t);
 	void send_player_change_training_options(TrainingSite &, int32_t, int32_t);
 	void send_player_drop_soldier(Building &, int32_t);
 	void send_player_change_soldier_capacity(Building &, int32_t);
 	void send_player_enemyflagaction
 		(const Flag &, PlayerNumber, uint32_t count);
 
-	void send_player_ship_scout_direction(Ship &, uint8_t);
+	void send_player_ship_scouting_direction(Ship &, WalkingDir);
 	void send_player_ship_construct_port(Ship &, Coords);
-	void send_player_ship_explore_island(Ship &, ScoutingDirection);
+	void send_player_ship_explore_island(Ship &, IslandExploreDirection);
 	void send_player_sink_ship(Ship &);
 	void send_player_cancel_expedition_ship(Ship &);
 
@@ -196,7 +197,7 @@ public:
 		return m_general_stats;
 	}
 
-	void read_statistics(FileRead &, uint32_t version);
+	void read_statistics(FileRead &);
 	void write_statistics(FileWrite &);
 
 	void sample_statistics();

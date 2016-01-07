@@ -67,7 +67,7 @@ protected:
 	void configure_workarea_button();
 	void act_start_stop();
 	void act_start_or_cancel_expedition();
-	void act_enhance(Widelands::BuildingIndex);
+	void act_enhance(Widelands::DescriptionIndex);
 	void clicked_goto();
 
 	void create_ware_queue_panel

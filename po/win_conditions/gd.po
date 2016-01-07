@@ -4,87 +4,162 @@
 # Translators:
 # GunChleoc, 2015
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2013
-# GunChleoc, 2013-2014
+# GunChleoc, 2015
+# GunChleoc, 2013-2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-02-20 11:38+0000\n"
-"PO-Revision-Date: 2015-02-23 08:59+0000\n"
+"POT-Creation-Date: 2015-12-03 09:55+0000\n"
+"PO-Revision-Date: 2015-12-03 14:36+0000\n"
 "Last-Translator: GunChleoc\n"
-"Language-Team: Gaelic, Scottish (http://www.transifex.com/projects/p/widelands/language/gd/)\n"
+"Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: gd\n"
 "Plural-Forms: nplurals=4; plural=(n==1 || n==11) ? 0 : (n==2 || n==12) ? 1 : (n > 2 && n < 20) ? 2 : 3;\n"
 
-#: ../../scripting/win_condition_texts.lua:2
+#: ../../scripting/win_condition_texts.lua:4
 msgid "Congratulations!"
 msgstr "Meal do naidheachd!"
 
-#: ../../scripting/win_condition_texts.lua:3
+#: ../../scripting/win_condition_texts.lua:5
 msgid "You have won this game!"
 msgstr "Bhuannaich thu an geama seo!"
 
-#: ../../scripting/win_condition_texts.lua:7
+#: ../../scripting/win_condition_texts.lua:9
 msgid "You are defeated!"
 msgstr "Chaidh ruaig a chur ort!"
 
-#: ../../scripting/win_condition_texts.lua:8
+#: ../../scripting/win_condition_texts.lua:10
 msgid ""
 "You lost your last warehouse and are therefore defeated. You may continue as"
 " spectator if you want."
 msgstr "Chaill thu an taigh-stòrais mu dheireadh agad is chaidh ruaig a chur ort mar sin. Faodaidh tu leantainn air adhart ’nad amharc ma thogras tu."
 
-#: ../../scripting/win_condition_texts.lua:12
+#: ../../scripting/win_condition_texts.lua:14
 msgid "You won"
 msgstr "Bhuannaich thu"
 
-#: ../../scripting/win_condition_texts.lua:13
+#: ../../scripting/win_condition_texts.lua:15
 msgid "You are the winner!"
 msgstr "Bhuannaich thu!"
 
-#: ../../scripting/win_condition_texts.lua:17
+#: ../../scripting/win_condition_texts.lua:19
 msgid "You lost"
 msgstr "Chaill thu"
 
-#: ../../scripting/win_condition_texts.lua:18
+#: ../../scripting/win_condition_texts.lua:20
 msgid "You’ve lost this game!"
 msgstr "Chaill thu an geama seo!"
 
-#: ../../scripting/win_condition_texts.lua:22
+#: ../../scripting/win_condition_texts.lua:24
 msgid "Status"
 msgstr "Staid"
 
-#: ../../scripting/win_condition_texts.lua:23
+#: ../../scripting/win_condition_texts.lua:25
 msgid "Player overview:"
 msgstr "Foir-shealladh a’ chluicheadair:"
 
-#: ../../scripting/win_conditions/collectors.lua:15
+#: ../../scripting/win_conditions/artifacts.lua:16
+msgid "Artifacts"
+msgstr "Fuighill"
+
+#: ../../scripting/win_conditions/artifacts.lua:18
+msgid ""
+"Search for ancient artifacts. Once all of them are found, the team who owns "
+"most of them will win the game."
+msgstr "Lorg fuighill àrsaidh. Nuair a bhios iad uile air an lorg, buannaichidh an sgioba aig a bheil barrachd na aig càich."
+
+#: ../../scripting/win_conditions/artifacts.lua:55
+msgid "No Artifacts"
+msgstr "Chan eil fuigheall ann"
+
+#: ../../scripting/win_conditions/artifacts.lua:55
+msgid ""
+"There are no artifacts on this map. This should not happen. Please file a "
+"bug report on https://launchpad.net/widelands and specify your Widelands "
+"version and the map you tried to load."
+msgstr "Chan eil fuigheall air a’ mhapa seo. Dèan aithris air buga air https://launchpad.net/widelands ag innse dè an tionndadh de Widelands a th’ agad is dè am mapa a dh’fheuch thu ri luchdadh."
+
+#: ../../scripting/win_conditions/artifacts.lua:61
+msgid "New Artifact Found"
+msgstr "Chaidh fuigheall ùr a lorg"
+
+#: ../../scripting/win_conditions/artifacts.lua:62
+msgid "Your team found a new artifact."
+msgstr "Lorg an sgioba agad fuigheall ùr."
+
+#: ../../scripting/win_conditions/artifacts.lua:65
+msgid "Artifact Lost"
+msgstr "Chaidh fuigheall a chall"
+
+#: ../../scripting/win_conditions/artifacts.lua:66
+msgid "One of your team’s artifacts was stolen by an enemy."
+msgstr "Chaidh aon dhe na fuighill aig an sgioba agad a ghoid le nàmhaid."
+
+#: ../../scripting/win_conditions/artifacts.lua:69
+msgid "Artifact Conquered"
+msgstr "Chaidh fuigheall a bhuannachd"
+
+#: ../../scripting/win_conditions/artifacts.lua:70
+msgid "Your team stole an artifact from an enemy."
+msgstr "Ghoid an sgioba agad fuigheall o nàmhaid."
+
+#. TRANSLATORS: This is used to seperate players’ names in a list, e.g.
+#. "Steve, Robert, David"
+#: ../../scripting/win_conditions/artifacts.lua:140
+msgid ", "
+msgstr ", "
+
+#: ../../scripting/win_conditions/artifacts.lua:147
+msgid "Overview:"
+msgstr "Foir-shealladh:"
+
+#: ../../scripting/win_conditions/artifacts.lua:150
+#: ../../scripting/win_conditions/artifacts.lua:162
+msgid "%i artifact"
+msgid_plural "%i artifacts"
+msgstr[0] "%i fhuigheall"
+msgstr[1] "%i fhuigheall"
+msgstr[2] "%i fuighill"
+msgstr[3] "%i fuigheall"
+
+#: ../../scripting/win_conditions/artifacts.lua:151
+msgid "%1$s owns %2$s."
+msgstr "Tha %2$s aig %1$s."
+
+#. TRANSLATORS: %1$i is the team's number; %2$s is a list of team members
+#. (e.g. "Steve, Robert, David"), %3$s is something like "x artifact(s)"
+#: ../../scripting/win_conditions/artifacts.lua:164
+msgid "Team %1$i (%2$s) owns %3$s."
+msgstr "Tha %3$s aig sgioba %1$i (%2$s)."
+
+#: ../../scripting/win_conditions/collectors.lua:19
 msgid "Collectors"
 msgstr "Cruinnichean"
 
-#: ../../scripting/win_conditions/collectors.lua:18
+#: ../../scripting/win_conditions/collectors.lua:22
 msgid ""
 "You get points for precious wares in your warehouses. The player with the "
 "highest number of wares at the end of 4 hours wins the game."
 msgstr "Gheibh thu puingean airson bathar luachail sna taighean-stòrais agad. Buannaichidh an cluicheadair aig a bheil barrachd bhatharan na aig càch an ceann 4 uairean."
 
-#: ../../scripting/win_conditions/collectors.lua:21
+#: ../../scripting/win_conditions/collectors.lua:25
 msgid "Points"
 msgstr "Puingean"
 
-#: ../../scripting/win_conditions/collectors.lua:100
+#: ../../scripting/win_conditions/collectors.lua:104
 msgid "Status for %s"
 msgstr "An staid airson %s"
 
-#: TRANSLATORS For example 'gold (3 P) x 4 = 12 P", P meaning "Points'
-#: ../../scripting/win_conditions/collectors.lua:110
-msgid "  %1$s (%2$i P) x %3$i = %4$i P"
-msgstr "  %1$s (%2$i P) x %3$i = %4$i P"
+#. TRANSLATORS: For example: 'gold (3 P) x 4 = 12 P', P meaning 'Points'
+#: ../../scripting/win_conditions/collectors.lua:116
+msgid "%1$s (%2$i P) x %3$i = %4$i P"
+msgstr "%1$s (%2$i P) x %3$i = %4$i P"
 
-#: ../../scripting/win_conditions/collectors.lua:114
+#: ../../scripting/win_conditions/collectors.lua:120
 msgid "Total: %i point"
 msgid_plural "Total: %i points"
 msgstr[0] "Iomlan: %i phuing"
@@ -92,12 +167,8 @@ msgstr[1] "Iomlan: %i phuing"
 msgstr[2] "Iomlan: %i puingean"
 msgstr[3] "Iomlan: %i puing"
 
-#: TRANSLATORS Context 'The game will end in %s.'
-#: ../../scripting/win_conditions/collectors.lua:128
-msgid "%1$ih%2$02im"
-msgstr "%1$i uair(ean) ’s  %2$02i mionaid(ean)"
-
-#: ../../scripting/win_conditions/collectors.lua:130
+#. TRANSLATORS: Context: 'The game will end in (2 hours and) 30 minutes.'
+#: ../../scripting/win_conditions/collectors.lua:134
 msgid "%i minute"
 msgid_plural "%i minutes"
 msgstr[0] "%i mhionaid"
@@ -105,57 +176,76 @@ msgstr[1] "%i mhionaid"
 msgstr[2] "%i mionaidean"
 msgstr[3] "%i mionaid"
 
-#: ../../scripting/win_conditions/collectors.lua:132
+#. TRANSLATORS: Context: 'The game will end in 2 hours and 30 minutes.'
+#: ../../scripting/win_conditions/collectors.lua:139
+msgid "%1% hour and %2%"
+msgid_plural "%1% hours and %2%"
+msgstr[0] "%1% uair ’s %2%"
+msgstr[1] "%1% uair ’s %2%"
+msgstr[2] "%1% uairean ’s %2%"
+msgstr[3] "%1% uair ’s %2%"
+
+#. TRANSLATORS: Context: 'The game will end in 2 hours.'
+#: ../../scripting/win_conditions/collectors.lua:142
+msgid "%1% hour"
+msgid_plural "%1% hours"
+msgstr[0] "%1% uair"
+msgstr[1] "%1% uair"
+msgstr[2] "%1% uairean"
+msgstr[3] "%1% uair"
+
+#. TRANSLATORS: Context: 'The game will end in 2 hours and 30 minutes.'
+#: ../../scripting/win_conditions/collectors.lua:146
 msgid "The game will end in %s."
 msgstr "Thig an geama gu crìch an ceann %s."
 
-#: ../../scripting/win_conditions/defeat_all.lua:12
+#: ../../scripting/win_conditions/defeat_all.lua:15
 msgid "Autocrat"
 msgstr "Fèin-fhlaitheach"
 
-#: ../../scripting/win_conditions/defeat_all.lua:14
+#: ../../scripting/win_conditions/defeat_all.lua:17
 msgid "The tribe or team that can defeat all others wins the game!"
 msgstr "Buannaichidh an treubh no sgioba a chuireas ruaig air càch!"
 
-#: ../../scripting/win_conditions/endless_game.lua:12
+#: ../../scripting/win_conditions/endless_game.lua:15
 msgid "Endless Game"
 msgstr "Gun chrìch"
 
-#: ../../scripting/win_conditions/endless_game.lua:14
+#: ../../scripting/win_conditions/endless_game.lua:17
 msgid "This is an endless game without rules."
 msgstr "Seo geama gun chrìch is gun riaghailtean."
 
-#: ../../scripting/win_conditions/endless_game_fogless.lua:12
+#: ../../scripting/win_conditions/endless_game_fogless.lua:15
 msgid "Endless Game (no fog)"
 msgstr "Gun chrìch no ceò"
 
-#: ../../scripting/win_conditions/endless_game_fogless.lua:13
+#: ../../scripting/win_conditions/endless_game_fogless.lua:16
 msgid "This is an endless game without rules. Fog of war is disabled."
 msgstr "Seo geama gun chrìch is gun riaghailtean. Tha ceò a’ chogaidh à comas."
 
-#: ../../scripting/win_conditions/territorial_lord.lua:14
+#: ../../scripting/win_conditions/territorial_lord.lua:17
 msgid "Territorial Lord"
 msgstr "Tighearna dùthcha"
 
-#: ../../scripting/win_conditions/territorial_lord.lua:17
+#: ../../scripting/win_conditions/territorial_lord.lua:20
 msgid ""
 "Each player or team tries to obtain more than half of the map’s area. The "
 "winner will be the player or the team that is able to keep that area for at "
 "least 20 minutes."
 msgstr "Feuchaidh gach cluicheadair no sgioba barrachd air an dàrna leth de roinn a’ mhapa a cheannsachadh. Buannaichidh an cluicheadair no sgioba a chumas an roinn seo fad co-dhiù 20 mionaid."
 
-#: ../../scripting/win_conditions/territorial_lord.lua:152
-#: ../../scripting/win_conditions/territorial_time.lua:24
+#: ../../scripting/win_conditions/territorial_lord.lua:155
+#: ../../scripting/win_conditions/territorial_time.lua:27
 msgid "Team %i"
 msgstr "Sgioba %i"
 
-#: ../../scripting/win_conditions/territorial_lord.lua:154
-#: ../../scripting/win_conditions/territorial_time.lua:198
+#: ../../scripting/win_conditions/territorial_lord.lua:157
+#: ../../scripting/win_conditions/territorial_time.lua:201
 msgid "%s owns more than half of the map’s area."
 msgstr "Tha barrachd air an dàrna leth de roinn a’ mhapa aig %s."
 
-#: ../../scripting/win_conditions/territorial_lord.lua:156
-#: ../../scripting/win_conditions/territorial_time.lua:200
+#: ../../scripting/win_conditions/territorial_lord.lua:159
+#: ../../scripting/win_conditions/territorial_time.lua:203
 msgid "You’ve still got %i minute to prevent a victory."
 msgid_plural "You’ve still got %i minutes to prevent a victory."
 msgstr[0] "Tha %i mhionaid agad fhathast gus casg a chur air buaidh."
@@ -163,13 +253,13 @@ msgstr[1] "Tha %i mhionaid agad fhathast gus casg a chur air buaidh."
 msgstr[2] "Tha %i mionaidean agad fhathast gus casg a chur air buaidh."
 msgstr[3] "Tha %i mionaid agad fhathast gus casg a chur air buaidh."
 
-#: ../../scripting/win_conditions/territorial_lord.lua:161
-#: ../../scripting/win_conditions/territorial_time.lua:205
+#: ../../scripting/win_conditions/territorial_lord.lua:164
+#: ../../scripting/win_conditions/territorial_time.lua:208
 msgid "You own more than half of the map’s area."
 msgstr "Tha barrachd air an dàrna leth de roinn a’ mhapa agad."
 
-#: ../../scripting/win_conditions/territorial_lord.lua:163
-#: ../../scripting/win_conditions/territorial_time.lua:207
+#: ../../scripting/win_conditions/territorial_lord.lua:166
+#: ../../scripting/win_conditions/territorial_time.lua:210
 msgid "Keep it for %i more minute to win the game."
 msgid_plural "Keep it for %i more minutes to win the game."
 msgstr[0] "Cum e fad %i mhionaid a bharrachd gus an geama a bhuannachd."
@@ -177,11 +267,11 @@ msgstr[1] "Cum e fad %i mhionaid a bharrachd gus an geama a bhuannachd."
 msgstr[2] "Cum e fad %i mionaidean a bharrachd gus an geama a bhuannachd."
 msgstr[3] "Cum e fad %i mionaid a bharrachd gus an geama a bhuannachd."
 
-#: ../../scripting/win_conditions/territorial_time.lua:14
+#: ../../scripting/win_conditions/territorial_time.lua:17
 msgid "Territorial Time"
 msgstr "Dùthaich ri àm"
 
-#: ../../scripting/win_conditions/territorial_time.lua:17
+#: ../../scripting/win_conditions/territorial_time.lua:20
 msgid ""
 "Each player or team tries to obtain more than half of the map’s area. The "
 "winner will be the player or the team that is able to keep that area for at "
@@ -189,15 +279,15 @@ msgid ""
 "whichever comes first."
 msgstr "Feuchaidh gach cluicheadair no sgioba barrachd air an dàrna leth de roinn a’ mhapa a cheannsachadh. Buannaichidh an cluicheadair no sgioba a chumas an roinn seo fad co-dhiù 20 mionaid no am fear aig a bheil barrachd tìre na aig càch an ceann 4 uairean, ge b’ e dè dhiubh a thachras an toiseach."
 
-#: ../../scripting/win_conditions/territorial_time.lua:22
+#: ../../scripting/win_conditions/territorial_time.lua:25
 msgid "%1$s has %2$3.0f%% of the land (%3$i of %4$i)."
 msgstr "Tha %2$3.0f%% dhen tìr aig %1$s (%3$i de %4$i)."
 
-#: ../../scripting/win_conditions/territorial_time.lua:23
+#: ../../scripting/win_conditions/territorial_time.lua:26
 msgid "%1$s had %2$3.0f%% of the land (%3$i of %4$i)."
 msgstr "Bha %2$3.0f%% dhen tìr aig %1$s (%3$i de %4$i)."
 
-#: ../../scripting/win_conditions/territorial_time.lua:221
+#: ../../scripting/win_conditions/territorial_time.lua:224
 msgid "Otherwise the game will end in %i minute."
 msgid_plural "Otherwise the game will end in %i minutes."
 msgstr[0] "Air neo thig an geama gu crìch an ceann %i mhionaid."
@@ -205,8 +295,8 @@ msgstr[1] "Air neo thig an geama gu crìch an ceann %i mhionaid."
 msgstr[2] "Air neo thig an geama gu crìch an ceann %i mionaidean."
 msgstr[3] "Air neo thig an geama gu crìch an ceann %i mionaid."
 
-#: ../../scripting/win_conditions/territorial_time.lua:226
-#: ../../scripting/win_conditions/wood_gnome.lua:83
+#: ../../scripting/win_conditions/territorial_time.lua:229
+#: ../../scripting/win_conditions/wood_gnome.lua:86
 msgid "The game will end in %i minute."
 msgid_plural "The game will end in %i minutes."
 msgstr[0] "Thig an geama gu crìch an ceann %i mhionaid."
@@ -214,24 +304,24 @@ msgstr[1] "Thig an geama gu crìch an ceann %i mhionaid."
 msgstr[2] "Thig an geama gu crìch an ceann %i mionaidean."
 msgstr[3] "Thig an geama gu crìch an ceann %i mionaid."
 
-#: ../../scripting/win_conditions/wood_gnome.lua:13
+#: ../../scripting/win_conditions/wood_gnome.lua:16
 msgid "Wood Gnome"
 msgstr "Gille-dubh"
 
-#: ../../scripting/win_conditions/wood_gnome.lua:16
+#: ../../scripting/win_conditions/wood_gnome.lua:19
 msgid ""
 "As wood gnome you like big forests, so your task is to have more trees on "
 "your territory than any other player. The game will end after 4 hours of "
 "playing. The one with the most trees at that point will win the game."
 msgstr "On a tha thu ’nad ghille-dubh, tha thu measail air coilltean mòra. Mar sin, is an t-amas agad gum bi barrachd chraobhan air an tìr agad na air tìr càich. Thig an geama gu crìch an ceann 4 uairean. Buannaichidh an cluicheadair aig a bheil barrachd chraobhan na aig càch aig an deireadh."
 
-#: ../../scripting/win_conditions/wood_gnome.lua:19
+#: ../../scripting/win_conditions/wood_gnome.lua:22
 msgid "Trees owned"
 msgstr "Na craobhan a th’ agad"
 
-#: ../../scripting/win_conditions/wood_gnome.lua:89
-#: ../../scripting/win_conditions/wood_gnome.lua:141
-#: ../../scripting/win_conditions/wood_gnome.lua:145
+#: ../../scripting/win_conditions/wood_gnome.lua:92
+#: ../../scripting/win_conditions/wood_gnome.lua:143
+#: ../../scripting/win_conditions/wood_gnome.lua:147
 msgid "%i tree"
 msgid_plural "%i trees"
 msgstr[0] "%i chraobh"
@@ -239,14 +329,14 @@ msgstr[1] "%i chraobh"
 msgstr[2] "%i craobhan"
 msgstr[3] "%i craobh"
 
-#: ../../scripting/win_conditions/wood_gnome.lua:91
+#: ../../scripting/win_conditions/wood_gnome.lua:94
 msgid "%1$s has %2$s at the moment."
 msgstr "Tha %2$s aig %1$s an-dràsta."
 
-#: ../../scripting/win_conditions/wood_gnome.lua:142
+#: ../../scripting/win_conditions/wood_gnome.lua:144
 msgid "%1$s had %2$s."
 msgstr "Bha %2$s aig %1$s."
 
-#: ../../scripting/win_conditions/wood_gnome.lua:147
+#: ../../scripting/win_conditions/wood_gnome.lua:149
 msgid "The winner is %1$s with %2$s."
 msgstr "Bhuannaich %1$s is %2$s aige."

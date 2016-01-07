@@ -24,6 +24,7 @@
 #include "logic/building.h"
 #include "logic/partially_finished_building.h"
 #include "logic/player.h"
+#include "scripting/lua_table.h"
 
 namespace Widelands {
 
@@ -42,13 +43,9 @@ the destructed building.
 */
 class DismantleSite;
 
-struct DismantleSiteDescr : public BuildingDescr {
-	DismantleSiteDescr(char const* name,
-	                    char const* descname,
-	                    const std::string& directory,
-	                    Profile&,
-	                    Section& global_s,
-							  const TribeDescr& tribe);
+class DismantleSiteDescr : public BuildingDescr {
+public:
+	DismantleSiteDescr(const std::string& init_descname, const LuaTable& t, const EditorGameBase& egbase);
 	~DismantleSiteDescr() override {}
 
 	Building& create_object() const override;
@@ -75,7 +72,7 @@ public:
 
 	bool get_building_work(Game &, Worker &, bool success) override;
 
-	static void count_returned_wares(Building* building, std::map<WareIndex, uint8_t> & res);
+	static void count_returned_wares(Building* building, std::map<DescriptionIndex, uint8_t> & res);
 
 protected:
 	void update_statistics_string(std::string*) override;

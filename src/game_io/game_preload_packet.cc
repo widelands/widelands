@@ -25,6 +25,7 @@
 #include <boost/format.hpp>
 
 #include "base/time_string.h"
+#include "build_info.h"
 #include "graphic/graphic.h"
 #include "graphic/minimap_renderer.h"
 #include "logic/game.h"
@@ -42,10 +43,8 @@
 
 namespace Widelands {
 
-#define CURRENT_PACKET_VERSION 5
-#define PLAYERS_AMOUNT_KEY_V4 "player_amount"
-#define MINIMAP_FILENAME "minimap.png"
-
+constexpr uint16_t kCurrentPacketVersion = 6;
+constexpr const char* kMinimapFilename = "minimap.png";
 
 void GamePreloadPacket::read
 	(FileSystem & fs, Game &, MapObjectLoader * const)
@@ -56,22 +55,22 @@ void GamePreloadPacket::read
 		Section & s = prof.get_safe_section("global");
 		int32_t const packet_version = s.get_int("packet_version");
 
-		if (packet_version == CURRENT_PACKET_VERSION) {
+		if (packet_version == kCurrentPacketVersion) {
 			m_gametime = s.get_safe_int("gametime");
 			m_mapname = s.get_safe_string("mapname");
 
 			m_background = s.get_safe_string("background");
 			m_player_nr = s.get_safe_int("player_nr");
 			m_win_condition = s.get_safe_string("win_condition");
-			m_number_of_players = s.get_safe_int(PLAYERS_AMOUNT_KEY_V4);
-			if (fs.file_exists(MINIMAP_FILENAME)) {
-				m_minimap_path = MINIMAP_FILENAME;
+			m_number_of_players = s.get_safe_int("player_amount");
+			m_version = s.get_safe_string("widelands_version");
+			if (fs.file_exists(kMinimapFilename)) {
+				m_minimap_path = kMinimapFilename;
 			}
 			m_savetimestamp = static_cast<time_t>(s.get_natural("savetimestamp"));
 			m_gametype = static_cast<GameController::GameType>(s.get_natural("gametype"));
 		} else {
-			throw GameDataError
-				("unknown/unhandled version %i", packet_version);
+			throw UnhandledVersionError("GamePreloadPacket", packet_version, kCurrentPacketVersion);
 		}
 	} catch (const WException & e) {
 		throw GameDataError("preload: %s", e.what());
@@ -88,7 +87,7 @@ void GamePreloadPacket::write
 
 	InteractivePlayer const * const ipl = game.get_ipl();
 
-	s.set_int   ("packet_version", CURRENT_PACKET_VERSION);
+	s.set_int   ("packet_version", kCurrentPacketVersion);
 
 	//  save some kind of header.
 	s.set_int   ("gametime",       game.get_gametime());
@@ -107,8 +106,8 @@ void GamePreloadPacket::write
 			}
 		}
 	}
-	s.set_int(PLAYERS_AMOUNT_KEY_V4, game.player_manager()->get_number_of_players());
-
+	s.set_int("player_amount", game.player_manager()->get_number_of_players());
+	s.set_string("widelands_version", build_id());
 	s.set_string("background", map.get_background());
 	s.set_string("win_condition", game.get_win_condition_displayname());
 	s.set_int("savetimestamp", static_cast<uint32_t>(time(nullptr)));
@@ -123,7 +122,7 @@ void GamePreloadPacket::write
 	if (ipl != nullptr) {
 		const MiniMapLayer flags = MiniMapLayer::Owner | MiniMapLayer::Building | MiniMapLayer::Terrain;
 		const Point& vp = ipl->get_viewpoint();
-		std::unique_ptr< ::StreamWrite> sw(fs.open_stream_write(MINIMAP_FILENAME));
+		std::unique_ptr< ::StreamWrite> sw(fs.open_stream_write(kMinimapFilename));
 		if (sw.get() != nullptr) {
 			write_minimap_image(game, &ipl->player(), vp, flags, sw.get());
 			sw->flush();

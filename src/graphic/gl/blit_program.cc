@@ -22,6 +22,8 @@
 #include <vector>
 
 #include "base/log.h"
+#include "graphic/gl/blit_data.h"
+#include "graphic/gl/coordinate_conversion.h"
 #include "graphic/gl/utils.h"
 
 namespace  {
@@ -108,8 +110,8 @@ void main() {
 struct DrawBatch {
 	int offset;
 	int count;
-	int texture;
-	int mask;
+	uint32_t texture;
+	uint32_t mask;
 	BlendMode blend_mode;
 };
 
@@ -120,8 +122,8 @@ public:
 	struct Arguments {
 		FloatRect destination_rect;
 		float z_value;
-		BlitSource texture;
-		BlitSource mask;
+		BlitData texture;
+		BlitData mask;
 		RGBAColor blend;
 		BlendMode blend_mode;
 	};
@@ -169,7 +171,7 @@ private:
 	static_assert(sizeof(PerVertexData) == 44, "Wrong padding.");
 
 	// The buffer that will contain the quad for rendering.
-	Gl::NewBuffer<PerVertexData> gl_array_buffer_;
+	Gl::Buffer<PerVertexData> gl_array_buffer_;
 
 	// The program.
 	Gl::Program gl_program_;
@@ -239,8 +241,8 @@ void BlitProgram::draw_and_deactivate(const std::vector<Arguments>& arguments) {
 		while (i < arguments.size()) {
 			const Arguments& current_args = arguments[i];
 			if (current_args.blend_mode != template_args.blend_mode ||
-					current_args.texture.name != template_args.texture.name ||
-					current_args.mask.name != template_args.mask.name) {
+					current_args.texture.texture_id != template_args.texture.texture_id ||
+					current_args.mask.texture_id != template_args.mask.texture_id) {
 				break;
 			}
 
@@ -249,13 +251,15 @@ void BlitProgram::draw_and_deactivate(const std::vector<Arguments>& arguments) {
 			const float blend_b = current_args.blend.b / 255.;
 			const float blend_a = current_args.blend.a / 255.;
 
+			const FloatRect texture_rect = to_gl_texture(current_args.texture);
+			const FloatRect mask_rect = to_gl_texture(current_args.mask);
 			vertices_.emplace_back(current_args.destination_rect.x,
 					current_args.destination_rect.y,
 					current_args.z_value,
-					current_args.texture.source_rect.x,
-					current_args.texture.source_rect.y,
-					current_args.mask.source_rect.x,
-					current_args.mask.source_rect.y,
+					texture_rect.x,
+					texture_rect.y,
+					mask_rect.x,
+					mask_rect.y,
 					blend_r,
 					blend_g,
 					blend_b,
@@ -264,10 +268,10 @@ void BlitProgram::draw_and_deactivate(const std::vector<Arguments>& arguments) {
 			vertices_.emplace_back(current_args.destination_rect.x + current_args.destination_rect.w,
 					current_args.destination_rect.y,
 					current_args.z_value,
-					current_args.texture.source_rect.x + current_args.texture.source_rect.w,
-					current_args.texture.source_rect.y,
-					current_args.mask.source_rect.x + current_args.mask.source_rect.w,
-					current_args.mask.source_rect.y,
+					texture_rect.x + texture_rect.w,
+					texture_rect.y,
+					mask_rect.x + mask_rect.w,
+					mask_rect.y,
 					blend_r,
 					blend_g,
 					blend_b,
@@ -276,10 +280,10 @@ void BlitProgram::draw_and_deactivate(const std::vector<Arguments>& arguments) {
 			vertices_.emplace_back(current_args.destination_rect.x,
 					current_args.destination_rect.y + current_args.destination_rect.h,
 					current_args.z_value,
-					current_args.texture.source_rect.x,
-					current_args.texture.source_rect.y + current_args.texture.source_rect.h,
-					current_args.mask.source_rect.x,
-					current_args.mask.source_rect.y + current_args.mask.source_rect.h,
+					texture_rect.x,
+					texture_rect.y + texture_rect.h,
+					mask_rect.x,
+					mask_rect.y + mask_rect.h,
 					blend_r,
 					blend_g,
 					blend_b,
@@ -291,10 +295,10 @@ void BlitProgram::draw_and_deactivate(const std::vector<Arguments>& arguments) {
 			vertices_.emplace_back(current_args.destination_rect.x + current_args.destination_rect.w,
 					current_args.destination_rect.y + current_args.destination_rect.h,
 					current_args.z_value,
-					current_args.texture.source_rect.x + current_args.texture.source_rect.w,
-					current_args.texture.source_rect.y + current_args.texture.source_rect.h,
-					current_args.mask.source_rect.x + current_args.mask.source_rect.w,
-					current_args.mask.source_rect.y + current_args.mask.source_rect.h,
+					texture_rect.x + texture_rect.w,
+					texture_rect.y + texture_rect.h,
+					mask_rect.x + mask_rect.w,
+					mask_rect.y + mask_rect.h,
 					blend_r,
 					blend_g,
 					blend_b,
@@ -304,8 +308,8 @@ void BlitProgram::draw_and_deactivate(const std::vector<Arguments>& arguments) {
 
 		draw_batches.emplace_back(DrawBatch{offset,
 		                                    static_cast<int>(vertices_.size() - offset),
-		                                    template_args.texture.name,
-		                                    template_args.mask.name,
+		                                    template_args.texture.texture_id,
+		                                    template_args.mask.texture_id,
 		                                    template_args.blend_mode});
 		offset = vertices_.size();
 	}
@@ -357,7 +361,7 @@ VanillaBlitProgram::VanillaBlitProgram() {
 
 void VanillaBlitProgram::draw(const FloatRect& gl_dest_rect,
                               const float z_value,
-										const BlitSource& texture,
+										const BlitData& texture,
                               const float opacity,
                               const BlendMode blend_mode) {
 	draw({Arguments{gl_dest_rect, z_value, texture, opacity, blend_mode}});
@@ -370,7 +374,7 @@ void VanillaBlitProgram::draw(const std::vector<Arguments>& arguments) {
 		   arg.destination_rect,
 		   arg.z_value,
 		   arg.texture,
-		   BlitSource{FloatRect(), 0},
+		   BlitData{0, 0, 0, Rect()},
 		   RGBAColor(255, 255, 255, arg.opacity * 255),
 		   arg.blend_mode,
 		});
@@ -396,7 +400,7 @@ MonochromeBlitProgram::MonochromeBlitProgram() {
 
 void MonochromeBlitProgram::draw(const FloatRect& dest_rect,
                                  const float z_value,
-											const BlitSource& texture,
+											const BlitData& texture,
                                  const RGBAColor& blend) {
 	draw({Arguments{dest_rect, z_value, texture, blend, BlendMode::UseAlpha}});
 }
@@ -408,7 +412,7 @@ void MonochromeBlitProgram::draw(const std::vector<Arguments>& arguments) {
 		   arg.destination_rect,
 		   arg.z_value,
 		   arg.texture,
-		   BlitSource{FloatRect(), 0},
+		   BlitData{0, 0, 0, Rect()},
 		   arg.blend,
 		   arg.blend_mode,
 		});
@@ -433,8 +437,8 @@ BlendedBlitProgram::BlendedBlitProgram() {
 
 void BlendedBlitProgram::draw(const FloatRect& gl_dest_rect,
                               const float z_value,
-										const BlitSource& texture,
-										const BlitSource& mask,
+										const BlitData& texture,
+										const BlitData& mask,
                               const RGBAColor& blend) {
 	draw({Arguments{gl_dest_rect, z_value, texture, mask, blend, BlendMode::UseAlpha}});
 }

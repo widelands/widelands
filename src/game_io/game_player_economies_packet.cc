@@ -32,8 +32,7 @@
 
 namespace Widelands {
 
-#define CURRENT_PACKET_VERSION 3
-
+constexpr uint16_t kCurrentPacketVersion = 3;
 
 void GamePlayerEconomiesPacket::read
 	(FileSystem & fs, Game & game, MapObjectLoader *)
@@ -46,7 +45,7 @@ void GamePlayerEconomiesPacket::read
 		FileRead fr;
 		fr.open(fs, "binary/player_economies");
 		uint16_t const packet_version = fr.unsigned_16();
-		if (3 <= packet_version && packet_version <= CURRENT_PACKET_VERSION) {
+		if (packet_version == kCurrentPacketVersion) {
 			iterate_players_existing(p, nr_players, game, player)
 				try {
 					Player::Economies & economies = player->m_economies;
@@ -65,10 +64,15 @@ void GamePlayerEconomiesPacket::read
 							Bob* bob = map[read_map_index_32(&fr, max_index)].get_first_bob();
 							while (bob) {
 								if (upcast(Ship const, ship, bob)) {
-									assert(ship->get_economy());
-									EconomyDataPacket d(ship->get_economy());
-									d.read(fr);
-									read_this_economy = true;
+
+									// We are interested only in current player's ships
+									if (ship->get_owner() == player) {
+										assert(ship->get_economy());
+										EconomyDataPacket d(ship->get_economy());
+										d.read(fr);
+										read_this_economy = true;
+										break;
+									}
 								}
 								bob = bob->get_next_bob();
 							}
@@ -80,9 +84,9 @@ void GamePlayerEconomiesPacket::read
 				} catch (const WException & e) {
 					throw GameDataError("player %u: %s", p, e.what());
 				}
-		} else
-			throw GameDataError
-				("unknown/unhandled version %u", packet_version);
+		} else {
+			throw UnhandledVersionError("GamePlayerEconomiesPacket", packet_version, kCurrentPacketVersion);
+		}
 	} catch (const WException & e) {
 		throw GameDataError("economies: %s", e.what());
 	}
@@ -96,7 +100,7 @@ void GamePlayerEconomiesPacket::write
 {
 	FileWrite fw;
 
-	fw.unsigned_16(CURRENT_PACKET_VERSION);
+	fw.unsigned_16(kCurrentPacketVersion);
 
 	const Map & map = game.map();
 	const Field & field_0 = map[0];
@@ -133,10 +137,10 @@ void GamePlayerEconomiesPacket::write
 								// TODO(sirver): the 0xffffffff is ugly and fragile.
 								fw.unsigned_32(0xffffffff); // Sentinel value.
 								fw.unsigned_32(field - &field_0);
-
 								EconomyDataPacket d(ship->get_economy());
 								d.write(fw);
 								wrote_this_economy = true;
+								break;
 							}
 						}
 						bob = bob->get_next_bob();

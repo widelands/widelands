@@ -19,7 +19,39 @@
 
 #include "graphic/align.h"
 
+#include "graphic/font_handler1.h"
+#include "graphic/text/font_set.h"
+
 namespace UI {
+
+// This mirrors the horizontal alignment for RTL languages.
+Align mirror_alignment(Align alignment) {
+	if (UI::g_fh1->fontset().is_rtl()) {
+		switch (alignment) {
+			case Align::Align_BottomLeft:
+				alignment = Align::Align_BottomRight;
+				break;
+			case Align::Align_BottomRight:
+				alignment = Align::Align_BottomLeft;
+				break;
+			case Align::Align_CenterLeft:
+				alignment = Align::Align_CenterRight;
+				break;
+			case Align::Align_CenterRight:
+				alignment = Align::Align_CenterLeft;
+				break;
+			case Align::Align_TopLeft:
+				alignment = Align::Align_TopRight;
+				break;
+			case Align::Align_TopRight:
+				alignment = Align::Align_TopLeft;
+				break;
+			default:
+				break;
+		}
+	}
+	return alignment;
+}
 
 void correct_for_align(Align align, uint32_t w, uint32_t h, Point* pt) {
 	//Vertical Align

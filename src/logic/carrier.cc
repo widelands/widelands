@@ -586,7 +586,7 @@ Load/save support
 ==============================
 */
 
-#define CARRIER_SAVEGAME_VERSION 1
+constexpr uint8_t kCurrentPacketVersion = 1;
 
 Carrier::Loader::Loader()
 {
@@ -596,12 +596,18 @@ void Carrier::Loader::load(FileRead & fr)
 {
 	Worker::Loader::load(fr);
 
-	uint8_t version = fr.unsigned_8();
-	if (version != CARRIER_SAVEGAME_VERSION)
-		throw GameDataError("unknown/unhandled version %u", version);
+	try {
 
-	Carrier & carrier = get<Carrier>();
-	carrier.m_promised_pickup_to = fr.signed_32();
+		uint8_t packet_version = fr.unsigned_8();
+		if (packet_version == kCurrentPacketVersion) {
+			Carrier & carrier = get<Carrier>();
+			carrier.m_promised_pickup_to = fr.signed_32();
+		} else {
+			throw UnhandledVersionError("Carrier", packet_version, kCurrentPacketVersion);
+		}
+	} catch (const WException & e) {
+		throw wexception("loading carrier: %s", e.what());
+	}
 }
 
 const Bob::Task * Carrier::Loader::get_task(const std::string & name)
@@ -621,7 +627,7 @@ void Carrier::do_save
 {
 	Worker::do_save(egbase, mos, fw);
 
-	fw.unsigned_8(CARRIER_SAVEGAME_VERSION);
+	fw.unsigned_8(kCurrentPacketVersion);
 	fw.signed_32(m_promised_pickup_to);
 }
 

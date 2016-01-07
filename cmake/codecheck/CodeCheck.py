@@ -73,7 +73,6 @@ $)
         if fn in self._stripped_comments_and_strings:
             return self._stripped_comments_and_strings[fn]
 
-        in_comment = False
         new_lines = []
         for line in lines:
             # Strings are replaced with blanks

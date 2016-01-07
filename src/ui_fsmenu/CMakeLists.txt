@@ -6,6 +6,8 @@ wl_library(ui_fsmenu
     campaign_select.h
     fileview.cc
     fileview.h
+    helpwindow.cc
+    helpwindow.h
     internet_lobby.cc
     internet_lobby.h
     intro.cc
@@ -32,8 +34,6 @@ wl_library(ui_fsmenu
     options.h
     singleplayer.cc
     singleplayer.h
-    suggested_teams_box.cc
-    suggested_teams_box.h
   DEPENDS
     base_exceptions
     base_i18n
@@ -56,6 +56,7 @@ wl_library(ui_fsmenu
     map_io_map_loader
     network
     profile
+    scripting_coroutine
     scripting_lua_interface
     scripting_lua_table
     sound
@@ -63,4 +64,5 @@ wl_library(ui_fsmenu
     widelands_ball_of_mud
     wui
     wui_chat_ui
+    wui_common
 )

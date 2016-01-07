@@ -8,8 +8,6 @@ wl_library(ui_basic
     checkbox.h
     editbox.cc
     editbox.h
-    helpwindow.cc
-    helpwindow.h
     icon.cc
     icon.h
     icongrid.cc
@@ -61,11 +59,7 @@ wl_library(ui_basic
     graphic_text
     graphic_text_layout
     io_filesystem
-    # TODO(sirver): should not depend on logic
-    logic
     profile
-    scripting_lua_interface
-    scripting_lua_table
     sound
     widelands_ball_of_mud
 )

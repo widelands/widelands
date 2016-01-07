@@ -1,9 +1,0 @@
-help=_Spidercloth is made out of spideryarn in a weaving mill. It is used in the toolsmithy and the shipyard. Also some higher developed buildings need spidercloth for their construction.
-
-default_target_quantity=20
-preciousness=5
-
-[idle]
-pics=idle.png
-hotspot=6 9
-

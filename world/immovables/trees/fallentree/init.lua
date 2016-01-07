@@ -2,7 +2,7 @@ dirname = path.dirname(__file__)
 
 animations = {
    idle = {
-      pictures = { dirname .. "fallentree_idle.png" },
+      pictures = path.list_files(dirname .. "fallentree_idle.png"),
       hotspot = { 2, 31 },
    },
 }
@@ -15,8 +15,8 @@ world:new_immovable_type{
    attributes = {},
    programs = {
       program = {
-	     "animate=idle 30000",
-		 "remove="
+        "animate=idle 30000",
+       "remove="
       }
    },
    animations = animations,

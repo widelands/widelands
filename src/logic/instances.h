@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2013 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2013, 2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -32,8 +32,11 @@
 
 #include "base/log.h"
 #include "base/macros.h"
+#include "graphic/color.h"
+#include "graphic/image.h"
 #include "logic/cmd_queue.h"
 #include "logic/widelands.h"
+#include "scripting/lua_table.h"
 
 class FileRead;
 class RenderTarget;
@@ -89,12 +92,19 @@ std::string to_string(MapObjectType type);
  */
 struct MapObjectDescr {
 
+	enum class OwnerType {
+		kWorld,
+		kTribe
+	};
+
 	MapObjectDescr(const MapObjectType init_type,
-	                 const std::string& init_name,
-	                 const std::string& init_descname)
-		: m_type(init_type), m_name(init_name), m_descname(init_descname) {
-	}
-	virtual ~MapObjectDescr() {m_anims.clear();}
+						const std::string& init_name,
+						const std::string& init_descname);
+	MapObjectDescr(const MapObjectType init_type,
+						const std::string& init_name,
+						const std::string& init_descname,
+						const LuaTable& table);
+	virtual ~MapObjectDescr();
 
 	const std::string &     name() const {return m_name;}
 	const std::string &     descname() const {return m_descname;}
@@ -114,16 +124,31 @@ struct MapObjectDescr {
 	}
 
 	uint32_t main_animation() const {
-		return m_anims.begin() != m_anims.end() ? m_anims.begin()->second : 0;
+		return !m_anims.empty()? m_anims.begin()->second : 0;
 	}
 
 	std::string get_animation_name(uint32_t) const; ///< needed for save, debug
 	bool has_attribute(uint32_t) const;
-	static uint32_t get_attribute_id(const std::string & name);
+	static uint32_t get_attribute_id(const std::string & name, bool add_if_not_exists = false);
 	static std::string get_attribute_name(uint32_t id);
 
 	bool is_animation_known(const std::string & name) const;
 	void add_animation(const std::string & name, uint32_t anim);
+
+	/// Sets the directional animations in 'anims' with the animations '&lt;prefix&gt;_(ne|e|se|sw|w|nw)'.
+	void add_directional_animation(DirAnimations* anims, const std::string& prefix);
+
+	/// Returns the image for the first frame of the idle animation if the MapObject has animations,
+	/// nullptr otherwise
+	const Image* representative_image(const RGBColor* player_color = nullptr) const;
+	/// Returns the image fileneme for first frame of the idle animation if the MapObject has animations,
+	/// is empty otherwise
+	const std::string& representative_image_filename() const;
+
+	/// Returns the menu image if the MapObject has one, nullptr otherwise
+	const Image* icon() const;
+	/// Returns the image fileneme for the menu image if the MapObject has one, is empty otherwise
+	const std::string& icon_filename() const;
 
 protected:
 	// Add all the special attributes to the attribute list. Only the 'allowed_special'
@@ -143,6 +168,8 @@ private:
 	Anims               m_anims;
 	static uint32_t     s_dyn_attribhigh; ///< highest attribute ID used
 	static AttribMap    s_dyn_attribs;
+	std::string representative_image_filename_; // Image for big represenations, e.g. on buttons
+	std::string icon_filename_; // Filename for the menu icon
 
 	DISALLOW_COPY_AND_ASSIGN(MapObjectDescr);
 };
@@ -211,6 +238,8 @@ public:
 
 	virtual void load_finish(EditorGameBase &) {}
 
+	virtual const Image* representative_image() const;
+
 protected:
 	MapObject(MapObjectDescr const * descr);
 	virtual ~MapObject() {}
@@ -223,7 +252,7 @@ public:
 	 * the game. No conncetion is handled in this class.
 	 * \param serial : the object serial
 	 */
-	boost::signals2::signal<void(uint32_t)> removed;
+	boost::signals2::signal<void(uint32_t serial)> removed;
 
 	/**
 	 * Attributes are fixed boolean properties of an object.
@@ -277,6 +306,19 @@ public:
 		HeaderPortDock = 10,
 		HeaderFleet = 11,
 	};
+
+	public:
+
+	/**
+	 * Returns whether this immovable was reserved by a worker.
+	 */
+	bool is_reserved_by_worker() const;
+
+	/**
+	 * Change whether this immovable is marked as reserved by a worker.
+	 */
+	void set_reserved_by_worker(bool reserve);
+
 
 	/**
 	 * Static load functions of derived classes will return a pointer to
@@ -342,6 +384,14 @@ protected:
 	const MapObjectDescr * m_descr;
 	Serial                   m_serial;
 	LogSink                * m_logsink;
+
+	/**
+	 * MapObjects like trees are reserved by a worker that is walking
+	 * towards them, so that e.g. two lumberjacks don't attempt to
+	 * work on the same tree simultaneously or two hunters try to hunt
+	 * the same animal.
+	 */
+	bool m_reserved_by_worker;
 
 private:
 	DISALLOW_COPY_AND_ASSIGN(MapObject);
@@ -464,13 +514,13 @@ private:
 
 struct CmdDestroyMapObject : public GameLogicCommand {
 	CmdDestroyMapObject() : GameLogicCommand(0), obj_serial(0) {} ///< For savegame loading
-	CmdDestroyMapObject (int32_t t, MapObject &);
+	CmdDestroyMapObject (uint32_t t, MapObject &);
 	void execute (Game &) override;
 
 	void write(FileWrite &, EditorGameBase &, MapObjectSaver  &) override;
 	void read (FileRead  &, EditorGameBase &, MapObjectLoader &) override;
 
-	uint8_t id() const override {return QUEUE_CMD_DESTROY_MAPOBJECT;}
+	QueueCommandTypes id() const override {return QueueCommandTypes::kDestroyMapObject;}
 
 private:
 	Serial obj_serial;
@@ -478,14 +528,14 @@ private:
 
 struct CmdAct : public GameLogicCommand {
 	CmdAct() : GameLogicCommand(0), obj_serial(0), arg(0) {} ///< For savegame loading
-	CmdAct (int32_t t, MapObject &, int32_t a);
+	CmdAct (uint32_t t, MapObject &, int32_t a);
 
 	void execute (Game &) override;
 
 	void write(FileWrite &, EditorGameBase &, MapObjectSaver  &) override;
 	void read (FileRead  &, EditorGameBase &, MapObjectLoader &) override;
 
-	uint8_t id() const override {return QUEUE_CMD_ACT;}
+	QueueCommandTypes id() const override {return QueueCommandTypes::kAct;}
 
 private:
 	Serial obj_serial;

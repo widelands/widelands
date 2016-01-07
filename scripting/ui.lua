@@ -293,7 +293,7 @@ end
 -- RST
 -- .. function:: click_building(p, building_name[, T = 1000])
 --
--- 	Click on the first building of the given name for the given player.
+--    Click on the first building of the given name for the given player.
 --
 --    :arg p: Player to search building for.
 --    :type p: :class:`wl.game.Player`
@@ -302,7 +302,7 @@ end
 --    :arg T: Time in ms to take for the transition.
 --    :type T: :class:`integer`
 --
--- 	:returns: :const:`true` if a building was clicked
+--    :returns: :const:`true` if a building was clicked
 --
 function click_building(p, building_name, g_T)
    local building = p:get_buildings(building_name)[1]
@@ -314,13 +314,13 @@ end
 -- RST
 -- .. function:: click_button(name)
 --
--- 	Goes through all open windows and searches for a button of the given name
--- 	and, if found, clicks it.
+--    Goes through all open windows and searches for a button of the given name
+--    and, if found, clicks it.
 --
--- 	:arg name: Name of the button to click.
--- 	:type name: :class:`string`.
+--    :arg name: Name of the button to click.
+--    :type name: :class:`string`.
 --
--- 	:returns: :const:`true` if a button was clicked
+--    :returns: :const:`true` if a button was clicked
 --
 function click_button(name)
    for button_name, button in pairs(wl.ui.MapView().buttons) do
@@ -333,7 +333,6 @@ function click_button(name)
    for window_name, window in pairs(wl.ui.MapView().windows) do
       for button_name, button in pairs(window.buttons) do
          if button_name == name then
-            print(window_name, button_name)
             button:click()
             return true
          end
@@ -345,9 +344,9 @@ end
 -- RST
 -- .. function:: close_windows()
 --
--- 	Closes all currently open windows.
+--    Closes all currently open windows.
 --
--- 	:returns: :const:`nil`
+--    :returns: :const:`nil`
 --
 function close_windows()
    for k,v in pairs(wl.ui.MapView().windows) do
@@ -359,24 +358,24 @@ end
 -- RST
 -- .. function:: wait_for_roadbuilding()
 --
--- 	Sleeps while player is in roadbuilding mode.
+--    Sleeps while player is in roadbuilding mode.
 --
--- 	:returns: :const:`nil`
+--    :returns: :const:`nil`
 --
 function wait_for_roadbuilding()
-	while (wl.ui.MapView().is_building_road) do sleep(2000) end
+   while (wl.ui.MapView().is_building_road) do sleep(2000) end
 end
 
 
 -- RST
 -- .. function:: wait_for_roadbuilding_and_scroll(f[, T = 1000])
 --
--- 	Sleeps while player is in roadbuilding mode, then calls
--- 	scroll_smoothly_to(f[, T = 1000]).
+--    Sleeps while player is in roadbuilding mode, then calls
+--    scroll_smoothly_to(f[, T = 1000]).
 --
 --    :returns: an :class:`array` with the intermediate points that
 --       were targeted
 function wait_for_roadbuilding_and_scroll(f, g_T)
-	wait_for_roadbuilding()
-	return scroll_smoothly_to(f, g_T)
+   wait_for_roadbuilding()
+   return scroll_smoothly_to(f, g_T)
 end

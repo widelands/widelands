@@ -58,6 +58,7 @@ struct SavegameData {
 
 	uint32_t gametime;
 	uint32_t nrplayers;
+	std::string version;
 	time_t savetimestamp;
 	GameController::GameType gametype;
 
@@ -76,7 +77,7 @@ public:
 
 	const std::string & filename() {return m_filename;}
 
-	void think();
+	void think() override;
 
 	bool handle_key(bool down, SDL_Keysym code) override;
 
@@ -84,12 +85,14 @@ protected:
 	void clicked_ok() override;
 	void entry_selected() override;
 	void fill_table() override;
-	bool set_has_selection() override;
-
 
 private:
+	/// Updates buttons and text labels and returns whether a table entry is selected.
+	bool set_has_selection();
 	bool compare_date_descending(uint32_t, uint32_t);
 	void clicked_delete();
+
+	UI::Table<uintptr_t const>    m_table;
 
 	bool                          m_is_replay;
 
@@ -100,6 +103,8 @@ private:
 	UI::MultilineTextarea         m_ta_gametime; // Multiline because we want tooltips
 	UI::Textarea                  m_label_players;
 	UI::MultilineTextarea         m_ta_players;
+	UI::Textarea                  m_label_version;
+	UI::Textarea                  m_ta_version;
 	UI::Textarea                  m_label_win_condition;
 	UI::MultilineTextarea         m_ta_win_condition;
 

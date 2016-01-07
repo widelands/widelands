@@ -28,6 +28,7 @@
 #include "logic/editor_game_base.h"
 #include "logic/map.h"
 #include "notifications/notifications.h"
+#include "profile/profile.h"
 #include "ui_basic/box.h"
 #include "ui_basic/textarea.h"
 #include "ui_basic/unique_window.h"
@@ -103,8 +104,6 @@ public:
 	void move_view_to(Widelands::Coords);
 	void move_view_to_point(Point pos);
 
-	virtual void start() = 0;
-
 	//  display flags
 	uint32_t get_display_flags() const;
 	void set_display_flags(uint32_t flags);
@@ -150,6 +149,7 @@ protected:
 	void toggle_buildhelp();
 	void toggle_minimap();
 	void hide_minimap();
+
 	UI::UniqueWindow::Registry & minimap_registry();
 
 	void mainview_move(int32_t x, int32_t y);

@@ -58,7 +58,3 @@ function check_for_buildings(plr, which, region)
    end
    return true
 end
-
-
-
-

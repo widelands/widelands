@@ -70,12 +70,8 @@ public:
 	int width() const override {return texture()->width();}
 	int height() const override {return texture()->height();}
 
-	int get_gl_texture() const override {
-		return texture()->get_gl_texture();
-	}
-
-	const FloatRect& texture_coordinates() const override {
-		return texture()->texture_coordinates();
+	const BlitData& blit_data() const override {
+		return texture()->blit_data();
 	}
 
 private:
@@ -128,10 +124,11 @@ public:
 		return image_cache_->insert(hash, std::move(image));
 	}
 
-	UI::FontSet& fontset() const {return *fontset_.get();}
+	UI::FontSet& fontset() const override {return *fontset_.get();}
 
-	void reinitialize_fontset() {
+	void reinitialize_fontset() override {
 		fontset_.reset(new UI::FontSet(i18n::get_locale()));
+		texture_cache_.get()->flush();
 		rt_renderer_.reset(new RT::Renderer(image_cache_, texture_cache_.get(), fontset_.get()));
 	}
 

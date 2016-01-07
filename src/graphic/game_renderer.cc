@@ -212,7 +212,7 @@ void GameRenderer::draw(RenderTarget& dst,
 
 	// Enqueue the drawing of the terrain.
 	RenderQueue::Item i;
-	i.program_id = RenderQueue::Program::TERRAIN_BASE;
+	i.program_id = RenderQueue::Program::kTerrainBase;
 	i.blend_mode = BlendMode::Copy;
 	i.destination_rect =
 	   FloatRect(bounding_rect.x,
@@ -227,12 +227,12 @@ void GameRenderer::draw(RenderTarget& dst,
 	RenderQueue::instance().enqueue(i);
 
 	// Enqueue the drawing of the dither layer.
-	i.program_id = RenderQueue::Program::TERRAIN_DITHER;
+	i.program_id = RenderQueue::Program::kTerrainDither;
 	i.blend_mode = BlendMode::UseAlpha;
 	RenderQueue::instance().enqueue(i);
 
 	// Enqueue the drawing of the road layer.
-	i.program_id = RenderQueue::Program::TERRAIN_ROAD;
+	i.program_id = RenderQueue::Program::kTerrainRoad;
 	RenderQueue::instance().enqueue(i);
 
 	draw_objects(dst, egbase, view_offset, player, minfx, maxfx, minfy, maxfy);
@@ -326,7 +326,7 @@ void GameRenderer::draw_objects(RenderTarget& dst,
 					if
 						(f_pl.constructionsite.becomes)
 					{
-						const Player::ConstructionsiteInformation & csinf = f_pl.constructionsite;
+						const ConstructionsiteInformation & csinf = f_pl.constructionsite;
 						// draw the partly finished constructionsite
 						uint32_t anim_idx;
 						try {

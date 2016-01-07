@@ -23,14 +23,14 @@
 
 #include <boost/format.hpp>
 
+#include "ai/computer_player.h"
 #include "base/i18n.h"
 #include "base/wexception.h"
 #include "graphic/graphic.h"
 #include "graphic/text_constants.h"
 #include "logic/game_settings.h"
 #include "logic/player.h"
-#include "logic/tribe.h"
-#include "profile/profile.h"
+#include "logic/tribes/tribe_descr.h"
 #include "ui_basic/button.h"
 #include "ui_basic/checkbox.h"
 #include "ui_basic/textarea.h"
@@ -65,8 +65,7 @@ d(new PlayerDescriptionGroupImpl)
 	int32_t xplayertribe = w * 80 / 125;
 	int32_t xplayerinit = w * 55 / 125;
 	d->plr_name = new UI::Textarea(this, xplrname, 0, xplayertype - xplrname, h);
-	d->plr_name->set_textstyle(UI::TextStyle::ui_small());
-	d->btnEnablePlayer = new UI::Checkbox(this, Point(xplayertype - 23, 0));
+	d->btnEnablePlayer = new UI::Checkbox(this, Point(xplayertype - 23, 0), "");
 	d->btnEnablePlayer->changedto.connect
 		(boost::bind(&PlayerDescriptionGroup::enable_player, this, _1));
 	d->btnPlayerType = new UI::Button
@@ -168,39 +167,41 @@ void PlayerDescriptionGroup::refresh()
 					title = _("Computer");
 				else {
 					if (player.random_ai) {
-						title += _("AI: Random");
+						title += _("Random AI");
 					} else {
-						/** TRANSLATORS %s = AI type, e.g. 'Agressive' */
-						title += (boost::format(_("AI: %s")) % _(player.ai)).str();
+						const ComputerPlayer::Implementation* impl =
+								ComputerPlayer::get_implementation(player.ai);
+						title = impl->descname;
 					}
 				}
 			} else { // PlayerSettings::stateHuman
 				title = _("Human");
 			}
 			d->btnPlayerType->set_title(title);
-			std::string tribepath("tribes/" + player.tribe);
+
+			TribeBasicInfo info = Widelands::Tribes::tribeinfo(player.tribe);
 			if (!m_tribenames[player.tribe].size()) {
-				// get translated tribesname
-				Profile prof
-					((tribepath + "/conf").c_str(), nullptr, "tribe_" + player.tribe);
-				Section & global = prof.get_safe_section("tribe");
-				m_tribenames[player.tribe] = global.get_safe_string("name");
+				// Tribe's localized name
+				m_tribenames[player.tribe] = info.descname;
 			}
 			if (player.random_tribe) {
-				d->btnPlayerTribe->set_title(_("Random"));
+				d->btnPlayerTribe->set_title(pgettext("tribe", "Random"));
+				d->btnPlayerTribe->set_tooltip(_("The tribe will be set at random."));
 			} else {
-				d->btnPlayerTribe->set_title(m_tribenames[player.tribe]);
+				i18n::Textdomain td("tribes");
+				d->btnPlayerTribe->set_title(_(m_tribenames[player.tribe]));
+				d->btnPlayerTribe->set_tooltip(info.tooltip);
 			}
 
 			{
-				i18n::Textdomain td(tribepath); // for translated initialisation
+				i18n::Textdomain td("tribes"); // for translated initialisation
 				for (const TribeBasicInfo& tribeinfo : settings.tribes) {
 					if (tribeinfo.name == player.tribe) {
 						d->btnPlayerInit->set_title
 							(_
 								(tribeinfo.initializations.at
 									(player.initialization_index)
-								 .second));
+								 .descname));
 						break;
 					}
 				}

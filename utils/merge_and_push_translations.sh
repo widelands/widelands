@@ -2,6 +2,7 @@
 
 ## This script will pull new translations from Transifex into local trunk
 ## and fix the line breaks.
+## It then updates the developers/authors file.
 ## Afterwards, the catalogs will be updated and the result pushed to
 ## trunk on Launchpad.
 
@@ -22,7 +23,8 @@ fi
 
 # Make sure we have a local trunk branch.
 PARENT=$(bzr config parent_location)
-if [ "$PARENT" != "bzr+ssh://bazaar.launchpad.net/~widelands-dev/widelands/trunk/" || "$PARENT" != "bzr+ssh://bazaar.launchpad.net/+branch/widelands/" ]; then
+if [[ "$PARENT" != "bzr+ssh://bazaar.launchpad.net/~widelands-dev/widelands/trunk/" &&
+      "$PARENT" != "bzr+ssh://bazaar.launchpad.net/+branch/widelands/" ]]; then
 	echo "The current bzr branch is not trunk.";
 	exit 1;
 fi
@@ -33,7 +35,17 @@ set -x
 # Pull translations from Transifex into local trunk and add new translation files
 bzr pull
 tx pull -a
-bzr add po/*/*.po || true
+bzr add po/*/*.po i18n/locales/*.json || true
+
+# Update authors file
+utils/update_authors.py
+if [ $? -eq 0 ]
+then
+  echo "Updated authors";
+else
+  echo "Failed updating authors";
+  exit 1;
+fi
 
 # Fix line breaks.
 # TODO(GunChleoc): We hope that Transifex will fix these already.

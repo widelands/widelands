@@ -47,13 +47,13 @@
 #include "logic/mapfringeregion.h"
 #include "logic/player.h"
 #include "logic/terrain_affinity.h"
-#include "logic/tribe.h"
+#include "logic/tribes/tribe_descr.h"
 #include "logic/widelands_geometry_io.h"
 #include "logic/worker.h"
 #include "logic/world/world.h"
-#include "map_io/one_world_legacy_lookup_table.h"
+#include "map_io/tribes_legacy_lookup_table.h"
+#include "map_io/world_legacy_lookup_table.h"
 #include "notifications/notifications.h"
-#include "profile/profile.h"
 #include "scripting/lua_table.h"
 #include "sound/sound_handler.h"
 #include "wui/interactive_base.h"
@@ -134,51 +134,8 @@ ImmovableProgram IMPLEMENTATION
 ==============================================================================
 */
 
-ImmovableProgram::ImmovableProgram(const std::string& directory,
-                                   Profile& prof,
-                                   const std::string& _name,
-											  ImmovableDescr& immovable)
-   : m_name(_name) {
-	Section& program_s = prof.get_safe_section(_name.c_str());
-	while (Section::Value* const v = program_s.get_next_val()) {
-		Action* action;
-		if (!strcmp(v->get_name(), "animate")) {
-			// Copying, as next_word() modifies the string..... Awful design.
-			std::unique_ptr<char []> arguments(new char[strlen(v->get_string()) + 1]);
-			strncpy(arguments.get(), v->get_string(), strlen(v->get_string()) + 1);
-
-			char* full_line = arguments.get();
-			bool reached_end;
-			char * const animation_name = next_word(full_line, reached_end);
-			if (!immovable.is_animation_known(animation_name)) {
-				immovable.add_animation(
-				   animation_name,
-				   g_gr->animations().load(directory, prof.get_safe_section(animation_name)));
-			}
-			action = new ActAnimate(v->get_string(), immovable);
-		} else if (!strcmp(v->get_name(), "transform")) {
-			action = new ActTransform(v->get_string(), immovable);
-		} else if (!strcmp(v->get_name(), "grow")) {
-			action = new ActGrow(v->get_string(), immovable);
-		} else if (!strcmp(v->get_name(), "remove")) {
-			action = new ActRemove(v->get_string(), immovable);
-		} else if (!strcmp(v->get_name(), "seed")) {
-			action = new ActSeed(v->get_string(), immovable);
-		} else if (!strcmp(v->get_name(), "playFX")) {
-			action = new ActPlayFX(directory, v->get_string(), immovable);
-		} else if (!strcmp(v->get_name(), "construction")) {
-			action = new ActConstruction(v->get_string(), immovable, directory, prof);
-		} else {
-			throw GameDataError("unknown command type \"%s\"", v->get_name());
-		}
-		m_actions.push_back(action);
-	}
-	if (m_actions.empty())
-		throw GameDataError("no actions");
-}
-
 ImmovableProgram::ImmovableProgram(const std::string& init_name,
-                                   const std::vector<std::string>& lines,
+								   const std::vector<std::string>& lines,
 											  ImmovableDescr* immovable)
    : m_name(init_name) {
 	for (const std::string& line : lines) {
@@ -201,9 +158,13 @@ ImmovableProgram::ImmovableProgram(const std::string& init_name,
 			action = new ActRemove(arguments.get(), *immovable);
 		} else if (parts[0] == "seed") {
 			action = new ActSeed(arguments.get(), *immovable);
+		} else if (parts[0] == "playFX") {
+			action = new ActPlayFX(arguments.get(), *immovable);
+		} else if (parts[0] == "construction") {
+			action = new ActConstruction(arguments.get(), *immovable);
 		} else {
 			throw GameDataError(
-			   "unknown or (here)not support command type \"%s\"", parts[0].c_str());
+				"unknown command type \"%s\" in immovable \"%s\"", parts[0].c_str(), immovable->name().c_str());
 		}
 		m_actions.push_back(action);
 	}
@@ -220,89 +181,30 @@ ImmovableDescr IMPLEMENTATION
 */
 
 /**
- * Parse an immovable from its conf file.
+ * Parse a common immovable functions from init file.
  */
-ImmovableDescr::ImmovableDescr
-	(char const * const _name, char const * const _descname,
-	 const std::string & directory, Profile & prof, Section & global_s,
-	 TribeDescr const * const owner_tribe)
-:
-	MapObjectDescr(MapObjectType::IMMOVABLE, _name, _descname),
-	m_size          (BaseImmovable::NONE),
-	m_owner_tribe   (owner_tribe)
-{
-	using boost::iequals;
-
-	if (global_s.has_val("size")) {
-		const auto& size = global_s.get_string("size");
-		try {
-			if      (iequals(size, "small"))
-				m_size = BaseImmovable::SMALL;
-			else if (iequals(size, "medium"))
-				m_size = BaseImmovable::MEDIUM;
-			else if (iequals(size, "big"))
-				m_size = BaseImmovable::BIG;
-			else
-				throw GameDataError
-					("expected %s but found \"%s\"",
-					 "{\"small\"|\"medium\"|\"big\"}", size);
-		} catch (const WException & e) {
-			throw GameDataError("size: %s", e.what());
-		}
-	}
-
-	// parse attributes
-	{
-		std::vector<std::string> attributes;
-		while (Section::Value const * const v = global_s.get_next_val("attrib")) {
-			attributes.emplace_back(v->get_string());
-		}
-		add_attributes(attributes, {MapObject::Attribute::RESI});
-	}
-
-	//  parse the programs
-	while (Section::Value const * const v = global_s.get_next_val("program")) {
-		std::string program_name = v->get_string();
-		std::transform
-			(program_name.begin(), program_name.end(), program_name.begin(),
-			 tolower);
-		try {
-			if (m_programs.count(program_name))
-				throw GameDataError("this program has already been declared");
-			m_programs[program_name] =
-				new ImmovableProgram(directory, prof, program_name, *this);
-		} catch (const std::exception & e) {
-			throw GameDataError
-				("program %s: %s", program_name.c_str(), e.what());
-		}
-	}
-
-	make_sure_default_program_is_there();
-
-	if (owner_tribe) {
-		// shipconstruction has a cost associated.
-		if (Section * buildcost_s = prof.get_section("buildcost")) {
-			m_buildcost.parse(*owner_tribe, *buildcost_s);
-		}
-	}
-}
-
-ImmovableDescr::ImmovableDescr(const LuaTable& table, const World& world) :
+ImmovableDescr::ImmovableDescr(const std::string& init_descname,
+										 const LuaTable& table,
+										 MapObjectDescr::OwnerType input_type) :
 	MapObjectDescr(
-	MapObjectType::IMMOVABLE, table.get_string("name"), table.get_string("descname")),
+	MapObjectType::IMMOVABLE, table.get_string("name"), init_descname, table),
 	m_size(BaseImmovable::NONE),
-	m_owner_tribe(nullptr)  // Can only parse world immovables for now.
-{
-	m_size = string_to_size(table.get_string("size"));
-	add_attributes(table.get_table("attributes")->array_entries<std::string>(), {MapObject::Attribute::RESI});
+	owner_type_(input_type) {
+	if (!is_animation_known("idle")) {
+		throw GameDataError("Immovable %s has no idle animation", table.get_string("name").c_str());
+	}
 
-	std::unique_ptr<LuaTable> anims(table.get_table("animations"));
-	for (const std::string& animation : anims->keys<std::string>()) {
-		add_animation(animation, g_gr->animations().load(*anims->get_table(animation)));
+	if (table.has_key("size")) {
+		m_size = string_to_size(table.get_string("size"));
 	}
 
 	if (table.has_key("terrain_affinity")) {
 		terrain_affinity_.reset(new TerrainAffinity(*table.get_table("terrain_affinity"), name()));
+	}
+
+	if (table.has_key("attributes")) {
+		add_attributes(table.get_table("attributes")->
+							array_entries<std::string>(), {MapObject::Attribute::RESI});
 	}
 
 	std::unique_ptr<LuaTable> programs = table.get_table("programs");
@@ -315,15 +217,34 @@ ImmovableDescr::ImmovableDescr(const LuaTable& table, const World& world) :
 		}
 	}
 
-	int editor_category_index =
-	   world.editor_immovable_categories().get_index(table.get_string("editor_category"));
-	if (editor_category_index < 0) {
-		throw GameDataError("Unknown editor_category: %s\n",
-		                      table.get_string("editor_category").c_str());
-	}
-	editor_category_ = world.editor_immovable_categories().get(editor_category_index);
-
 	make_sure_default_program_is_there();
+}
+
+/**
+ * Parse a world immovable from its init file.
+ */
+ImmovableDescr::ImmovableDescr(const std::string& init_descname, const LuaTable& table, const World& world) :
+	ImmovableDescr(init_descname, table, MapObjectDescr::OwnerType::kWorld) {
+
+	int editor_category_index =
+			world.editor_immovable_categories().get_index(table.get_string("editor_category"));
+	if (editor_category_index == Widelands::INVALID_INDEX) {
+		throw GameDataError("Unknown editor_category: %s\n",
+							  table.get_string("editor_category").c_str());
+	}
+	editor_category_ = world.editor_immovable_categories().get_mutable(editor_category_index);
+}
+
+/**
+ * Parse a tribes immovable from its init file.
+ */
+ImmovableDescr::ImmovableDescr(const std::string& init_descname,
+										 const LuaTable& table,
+										 const Tribes& tribes) :
+	ImmovableDescr(init_descname, table, MapObjectDescr::OwnerType::kTribe) {
+	if (table.has_key("buildcost")) {
+		m_buildcost = Buildcost(table.get_table("buildcost"), tribes);
+	}
 }
 
 const EditorCategory& ImmovableDescr::editor_category() const {
@@ -407,8 +328,7 @@ m_program     (nullptr),
 m_program_ptr (0),
 m_anim_construction_total(0),
 m_anim_construction_done(0),
-m_program_step(0),
-m_reserved_by_worker(false)
+m_program_step(0)
 {}
 
 Immovable::~Immovable()
@@ -535,7 +455,7 @@ void Immovable::draw_construction
 		constructionact = dynamic_cast<const ImmovableProgram::ActConstruction *>
 			(&(*m_program)[m_program_ptr]);
 
-	const int32_t steptime = constructionact ? constructionact->buildtime() : 5000;
+	const uint32_t steptime = constructionact ? constructionact->buildtime() : 5000;
 
 	uint32_t done = 0;
 	if (m_anim_construction_done > 0) {
@@ -559,7 +479,7 @@ void Immovable::draw_construction
 
 	if (current_frame > 0) {
 		// Not the first pic, so draw the previous one in the back
-		dst.drawanim(pos, m_anim, (current_frame-1) * frametime, get_owner());
+		dst.drawanim(pos, m_anim, (current_frame - 1) * frametime, get_owner());
 	}
 
 	assert(lines <= curh);
@@ -571,32 +491,18 @@ void Immovable::draw_construction
 		unsigned int percent = (100 * done / total);
 		m_construct_string =
 			(boost::format("<font color=%s>%s</font>")
-			 % UI_FONT_CLR_DARK_HEX % (boost::format(_("%i%% built")) % percent).str())
+			 % UI_FONT_CLR_DARK.hex_value() % (boost::format(_("%i%% built")) % percent).str())
 			 .str();
 		m_construct_string = as_uifont(m_construct_string);
 		dst.blit(pos - Point(0, 48),
-		         UI::g_fh1->render(m_construct_string),
-		         BlendMode::UseAlpha,
-		         UI::Align_Center);
+				 UI::g_fh1->render(m_construct_string),
+				 BlendMode::UseAlpha,
+				 UI::Align_Center);
 	}
 }
 
 
-/**
- * Returns whether this immovable was reserved by a worker.
- */
-bool Immovable::is_reserved_by_worker() const
-{
-	return m_reserved_by_worker;
-}
 
-/**
- * Change whether this immovable is marked as reserved by a worker.
- */
-void Immovable::set_reserved_by_worker(bool reserve)
-{
-	m_reserved_by_worker = reserve;
-}
 
 /**
  * Set the current action's data to \p data.
@@ -617,15 +523,16 @@ Load/save support
 ==============================
 */
 
-#define IMMOVABLE_SAVEGAME_VERSION 5
+constexpr uint8_t kCurrentPacketVersionImmovable = 7;
 
-void Immovable::Loader::load(FileRead & fr, uint8_t const version)
+// Supporting older versions for map loading
+void Immovable::Loader::load(FileRead & fr, uint8_t const packet_version)
 {
 	BaseImmovable::Loader::load(fr);
 
 	Immovable & imm = dynamic_cast<Immovable&>(*get_object());
 
-	if (version >= 5) {
+	if (packet_version >= 5) {
 		PlayerNumber pn = fr.unsigned_8();
 		if (pn && pn <= MAX_PLAYERS) {
 			Player * plr = egbase().get_player(pn);
@@ -650,7 +557,7 @@ void Immovable::Loader::load(FileRead & fr, uint8_t const version)
 			 imm.descr().name().c_str(), animname, imm.descr().get_animation_name(imm.m_anim).c_str());
 	}
 	imm.m_animstart = fr.signed_32();
-	if (version >= 4) {
+	if (packet_version >= 4) {
 		imm.m_anim_construction_total = fr.unsigned_32();
 		if (imm.m_anim_construction_total)
 			imm.m_anim_construction_done = fr.unsigned_32();
@@ -658,7 +565,7 @@ void Immovable::Loader::load(FileRead & fr, uint8_t const version)
 
 	{ //  program
 		std::string program_name;
-		if (1 == version) {
+		if (1 == packet_version) {
 			program_name = fr.unsigned_8() ? fr.c_string() : "program";
 			std::transform
 				(program_name.begin(), program_name.end(), program_name.begin(),
@@ -688,12 +595,16 @@ void Immovable::Loader::load(FileRead & fr, uint8_t const version)
 		}
 	}
 
-	imm.m_program_step = fr.signed_32();
+	if (packet_version > 6) {
+		imm.m_program_step = fr.unsigned_32();
+	} else {
+		imm.m_program_step = fr.signed_32();
+	}
 
-	if (version >= 3)
-		imm.m_reserved_by_worker = fr.unsigned_8();
-
-	if (version >= 4) {
+	if (packet_version >= 3 && packet_version <= 5) {
+	        imm.m_reserved_by_worker = fr.unsigned_8();
+	}
+	if (packet_version >= 4) {
 		std::string dataname = fr.c_string();
 		if (!dataname.empty()) {
 			imm.set_action_data(ImmovableActionData::load(fr, imm, dataname));
@@ -725,12 +636,14 @@ void Immovable::save
 	// This is in front because it is required to obtain the description
 	// necessary to create the Immovable
 	fw.unsigned_8(HeaderImmovable);
-	fw.unsigned_8(IMMOVABLE_SAVEGAME_VERSION);
+	fw.unsigned_8(kCurrentPacketVersionImmovable);
 
-	if (const TribeDescr * const tribe = descr().get_owner_tribe())
-		fw.string(tribe->name());
-	else
+	if (descr().owner_type() == MapObjectDescr::OwnerType::kTribe) {
+		if (get_owner() == nullptr) log(" Tribe immovable has no owner!! ");
+		fw.c_string("tribes");
+	} else {
 		fw.c_string("world");
+	}
 
 	fw.string(descr().name());
 
@@ -751,63 +664,63 @@ void Immovable::save
 	fw.string(m_program ? m_program->name() : "");
 
 	fw.unsigned_32(m_program_ptr);
-	fw.signed_32(m_program_step);
-
-	fw.unsigned_8(m_reserved_by_worker);
+	fw.unsigned_32(m_program_step);
 
 	if (m_action_data) {
-		fw.c_string(m_action_data->name());
-		m_action_data->save(fw, *this);
+	  fw.c_string(m_action_data->name());
+	  m_action_data->save(fw, *this);
 	} else {
 		fw.c_string("");
 	}
 }
 
 MapObject::Loader * Immovable::load
-	(EditorGameBase & egbase, MapObjectLoader & mol,
-	 FileRead & fr, const OneWorldLegacyLookupTable& lookup_table)
+	(EditorGameBase & egbase, MapObjectLoader & mol, FileRead & fr,
+	 const WorldLegacyLookupTable& world_lookup_table,
+	 const TribesLegacyLookupTable& tribes_lookup_table)
 {
 	std::unique_ptr<Loader> loader(new Loader);
 
 	try {
 		// The header has been peeled away by the caller
-		uint8_t const version = fr.unsigned_8();
-		if (1 <= version && version <= IMMOVABLE_SAVEGAME_VERSION) {
+		uint8_t const packet_version = fr.unsigned_8();
+		// Supporting older versions for map loading
+		if (1 <= packet_version && packet_version <= kCurrentPacketVersionImmovable) {
 
-			const std::string owner_name = fr.c_string();
-			const std::string old_name = fr.c_string();
+			const std::string owner_type = fr.c_string();
+			std::string name = fr.c_string();
 			Immovable * imm = nullptr;
 
-			if (owner_name != "world") { //  It is a tribe immovable.
-				egbase.manually_load_tribe(owner_name);
-
-				if (TribeDescr const * const tribe = egbase.get_tribe(owner_name)) {
-					int32_t const idx = tribe->get_immovable_index(old_name);
-					if (idx != -1)
-						imm = new Immovable(*tribe->get_immovable_descr(idx));
-					else
-						throw GameDataError
-							("tribe %s does not define immovable type \"%s\"",
-							 owner_name.c_str(), old_name.c_str());
-				} else
-					throw wexception("unknown tribe %s", owner_name.c_str());
+			if (owner_type != "world") { //  It is a tribe immovable.
+				// Needed for map compatibility
+				if (packet_version < 7) {
+					name = tribes_lookup_table.lookup_immovable(owner_type, name);
+				}
+				const DescriptionIndex idx = egbase.tribes().immovable_index(name);
+				if (idx != Widelands::INVALID_INDEX) {
+					imm = new Immovable(*egbase.tribes().get_immovable_descr(idx));
+				} else {
+					throw GameDataError
+						("tribes do not define immovable type \"%s\"", name.c_str());
+				}
 			} else { //  world immovable
 				const World & world = egbase.world();
-				const std::string new_name = lookup_table.lookup_immovable(old_name);
-				int32_t const idx = world.get_immovable_index(new_name.c_str());
-				if (idx == -1)
-					throw wexception
-						("world does not define immovable type \"%s\"", new_name.c_str());
-
+				name = world_lookup_table.lookup_immovable(name);
+				const DescriptionIndex idx = world.get_immovable_index(name.c_str());
+				if (idx == Widelands::INVALID_INDEX) {
+					throw GameDataError
+						("world does not define immovable type \"%s\"", name.c_str());
+				}
 				imm = new Immovable(*world.get_immovable_descr(idx));
 			}
 
 			loader->init(egbase, mol, *imm);
-			loader->load(fr, version);
-		} else
-			throw GameDataError("unknown/unhandled version %u", version);
+			loader->load(fr, packet_version);
+		} else {
+			throw UnhandledVersionError("Immovable", packet_version, kCurrentPacketVersionImmovable);
+		}
 	} catch (const std::exception & e) {
-		throw wexception("immovable type %s", e.what());
+		throw wexception("immovable type: %s", e.what());
 	}
 
 	return loader.release();
@@ -851,13 +764,10 @@ void ImmovableProgram::ActAnimate::execute
 }
 
 
-ImmovableProgram::ActPlayFX::ActPlayFX
-	(const std::string & directory, char * parameters, const ImmovableDescr &)
-{
+ImmovableProgram::ActPlayFX::ActPlayFX(char* parameters, const ImmovableDescr&) {
 	try {
 		bool reached_end;
-		std::string filename = next_word(parameters, reached_end);
-		name = directory + "/" + filename;
+		name = next_word(parameters, reached_end);
 
 		if (!reached_end) {
 			char * endp;
@@ -869,7 +779,9 @@ ImmovableProgram::ActPlayFX::ActPlayFX
 		} else
 			priority = 127;
 
-		g_sound_handler.load_fx_if_needed(directory, filename, name);
+		g_sound_handler.load_fx_if_needed(FileSystem::fs_dirname(name),
+													 FileSystem::fs_filename(name.c_str()),
+													 name);
 	} catch (const WException & e) {
 		throw GameDataError("playFX: %s", e.what());
 	}
@@ -916,8 +828,8 @@ ImmovableProgram::ActTransform::ActTransform
 					if (segments[0] == "world")
 						tribe = false;
 					else if (segments[0] == "tribe") {
-						if (!descr.get_owner_tribe())
-							throw GameDataError("scope \"tribe\", but have no owner tribe");
+						if (descr.owner_type() != MapObjectDescr::OwnerType::kTribe)
+							throw GameDataError("scope \"tribe\" does not match the immovable type");
 						tribe = true;
 					} else
 						throw GameDataError
@@ -945,14 +857,13 @@ void ImmovableProgram::ActTransform::execute
 	if (probability == 0 || game.logic_rand() % 256 < probability) {
 		Player * player = immovable.get_owner();
 		Coords const c = immovable.get_position();
-		TribeDescr const * const owner_tribe =
-			tribe ? immovable.descr().get_owner_tribe() : nullptr;
+		MapObjectDescr::OwnerType owner_type = immovable.descr().owner_type();
 		immovable.remove(game); //  Now immovable is a dangling reference!
 
 		if (bob) {
-			game.create_bob(c, type_name, owner_tribe, player);
+			game.create_ship(c, type_name, player);
 		} else {
-			Immovable & imm = game.create_immovable(c, type_name, owner_tribe);
+			Immovable & imm = game.create_immovable(c, type_name, owner_type);
 			if (player)
 				imm.set_owner(player);
 		}
@@ -976,11 +887,10 @@ ImmovableProgram::ActGrow::ActGrow
 			case ':': {
 				*p = '\0';
 				++p;
-				TribeDescr const * const owner_tribe = descr.get_owner_tribe();
-				if (!owner_tribe)
+				if (descr.owner_type() != MapObjectDescr::OwnerType::kTribe)
 					throw GameDataError
 						(
-						 "immovable type not in tribe but target type has scope "
+						 "immovable type not in tribes but target type has scope "
 						 "(\"%s\")",
 						 parameters);
 				else if (strcmp(parameters, "world"))
@@ -1012,10 +922,10 @@ void ImmovableProgram::ActGrow::execute(Game& game, Immovable& immovable) const 
 	const ImmovableDescr& descr = immovable.descr();
 
 	if (logic_rand_as_double(&game) <
-	    probability_to_grow(descr.terrain_affinity(), f, map, game.world().terrains())) {
-		TribeDescr const* const owner_tribe = tribe ? descr.get_owner_tribe() : nullptr;
+		 probability_to_grow(descr.terrain_affinity(), f, map, game.world().terrains())) {
+		MapObjectDescr::OwnerType owner_type = descr.owner_type();
 		immovable.remove(game);  //  Now immovable is a dangling reference!
-		game.create_immovable(f, type_name, owner_tribe);
+		game.create_immovable(f, type_name, owner_type);
 	} else {
 		immovable.program_step(game);
 	}
@@ -1054,18 +964,16 @@ void ImmovableProgram::ActRemove::execute
 ImmovableProgram::ActSeed::ActSeed(char * parameters, ImmovableDescr & descr)
 {
 	try {
-		tribe = true;
 		probability = 0;
 		for (char * p = parameters;;)
 			switch (*p) {
 			case ':': {
 				*p = '\0';
 				++p;
-				TribeDescr const * const owner_tribe = descr.get_owner_tribe();
-				if (!owner_tribe)
+				if (descr.owner_type() != MapObjectDescr::OwnerType::kTribe)
 					throw GameDataError
 						(
-						 "immovable type not in tribe but target type has scope "
+						 "immovable type not in tribes but target type has scope "
 						 "(\"%s\")",
 						 parameters);
 				else if (strcmp(parameters, "world"))
@@ -1074,7 +982,6 @@ ImmovableProgram::ActSeed::ActSeed(char * parameters, ImmovableDescr & descr)
 						 "scope \"%s\" given for target type (must be "
 						 "\"world\")",
 						 parameters);
-				tribe = false;
 				parameters = p;
 				break;
 			}
@@ -1112,7 +1019,7 @@ void ImmovableProgram::ActSeed::execute
 	const ImmovableDescr& descr = immovable.descr();
 
 	if (logic_rand_as_double(&game) <
-	    probability_to_grow(descr.terrain_affinity(), f, map, game.world().terrains())) {
+		probability_to_grow(descr.terrain_affinity(), f, map, game.world().terrains())) {
 		// Seed a new tree.
 		MapFringeRegion<> mr(map, Area<>(f, 0));
 		uint32_t fringe_size = 0;
@@ -1131,19 +1038,16 @@ void ImmovableProgram::ActSeed::execute
 		    logic_rand_as_double(&game) <
 		       probability_to_grow(
 		          descr.terrain_affinity(), new_location, map, game.world().terrains())) {
-			game.create_immovable(
-			   mr.location(), type_name, tribe ? immovable.descr().get_owner_tribe() : nullptr);
+			game.create_immovable(mr.location(), type_name, descr.owner_type());
 		}
 	}
 
 	immovable.program_step(game);
 }
 
-ImmovableProgram::ActConstruction::ActConstruction
-	(char * parameters, ImmovableDescr & descr, const std::string & directory, Profile & prof)
-{
+ImmovableProgram::ActConstruction::ActConstruction(char* parameters, ImmovableDescr& descr) {
 	try {
-		if (!descr.get_owner_tribe())
+		if (descr.owner_type() != MapObjectDescr::OwnerType::kTribe)
 			throw GameDataError("only usable for tribe immovable");
 
 		std::vector<std::string> params = split_string(parameters, " ");
@@ -1155,37 +1059,37 @@ ImmovableProgram::ActConstruction::ActConstruction
 		m_decaytime = atoi(params[2].c_str());
 
 		std::string animation_name = params[0];
-		if (descr.is_animation_known(animation_name))
-			m_animid = descr.get_animation(animation_name);
-		else {
-			m_animid =
-				g_gr->animations().load(directory, prof.get_safe_section(animation_name));
-
-			descr.add_animation(animation_name, m_animid);
+		if (!descr.is_animation_known(animation_name)) {
+			throw GameDataError("unknown animation \"%s\" in immovable program for immovable \"%s\"",
+									  animation_name.c_str(), descr.name().c_str());
 		}
+		m_animid = descr.get_animation(animation_name);
+
 	} catch (const WException & e) {
 		throw GameDataError("construction: %s", e.what());
 	}
 }
 
-#define CONSTRUCTION_DATA_VERSION 1
+constexpr uint8_t kCurrentPacketVersionConstructionData = 1;
 
 struct ActConstructionData : ImmovableActionData {
 	const char * name() const override {return "construction";}
 	void save(FileWrite & fw, Immovable & imm) override {
-		fw.unsigned_8(CONSTRUCTION_DATA_VERSION);
-		delivered.save(fw, *imm.descr().get_owner_tribe());
+		fw.unsigned_8(kCurrentPacketVersionConstructionData);
+		delivered.save(fw, imm.get_owner()->tribe());
 	}
 
 	static ActConstructionData * load(FileRead & fr, Immovable & imm) {
 		ActConstructionData * d = new ActConstructionData;
 
 		try {
-			uint8_t version = fr.unsigned_8();
-			if (version == CONSTRUCTION_DATA_VERSION) {
-				d->delivered.load(fr, *imm.descr().get_owner_tribe());
-			} else
-				throw GameDataError("unknown version %u", version);
+			uint8_t packet_version = fr.unsigned_8();
+			if (packet_version == kCurrentPacketVersionConstructionData) {
+				d->delivered.load(fr, imm.get_owner()->tribe());
+			} else {
+				throw UnhandledVersionError("ActConstructionData",
+													 packet_version, kCurrentPacketVersionConstructionData);
+			}
 		} catch (const WException & e) {
 			delete d;
 			d = nullptr;
@@ -1271,7 +1175,7 @@ bool Immovable::construct_remaining_buildcost(Game & /* game */, Buildcost * bui
  *
  * If the immovable is not currently in construction mode, return \c false.
  */
-bool Immovable::construct_ware(Game & game, WareIndex index)
+bool Immovable::construct_ware(Game & game, DescriptionIndex index)
 {
 	ActConstructionData * d = get_action_data<ActConstructionData>();
 	if (!d)
@@ -1424,7 +1328,7 @@ void PlayerImmovable::cleanup(EditorGameBase & egbase)
  * We are the destination of the given ware's transfer, which is not associated
  * with any request.
  */
-void PlayerImmovable::receive_ware(Game &, WareIndex ware)
+void PlayerImmovable::receive_ware(Game &, DescriptionIndex ware)
 {
 	throw wexception
 		("MO(%u): Received a ware(%u), do not know what to do with it",
@@ -1456,7 +1360,7 @@ void PlayerImmovable::log_general_info(const EditorGameBase & egbase)
 	molog("m_economy: %p\n", m_economy);
 }
 
-#define PLAYERIMMOVABLE_SAVEGAME_VERSION 1
+constexpr uint8_t kCurrentPacketVersionPlayerImmovable = 1;
 
 PlayerImmovable::Loader::Loader()
 {
@@ -1469,9 +1373,9 @@ void PlayerImmovable::Loader::load(FileRead & fr)
 	PlayerImmovable & imm = get<PlayerImmovable>();
 
 	try {
-		uint8_t version = fr.unsigned_8();
+		uint8_t packet_version = fr.unsigned_8();
 
-		if (1 <= version && version <= PLAYERIMMOVABLE_SAVEGAME_VERSION) {
+		if (packet_version == kCurrentPacketVersionPlayerImmovable) {
 			PlayerNumber owner_number = fr.unsigned_8();
 
 			if (!owner_number || owner_number > egbase().map().get_nrplayers())
@@ -1484,8 +1388,9 @@ void PlayerImmovable::Loader::load(FileRead & fr)
 				throw GameDataError("owning player %u does not exist", owner_number);
 
 			imm.m_owner = owner;
-		} else
-			throw GameDataError("unknown/unhandled version %u", version);
+		} else {
+			throw UnhandledVersionError("PlayerImmovable", packet_version, kCurrentPacketVersionPlayerImmovable);
+		}
 	} catch (const std::exception & e) {
 		throw wexception("loading player immovable: %s", e.what());
 	}
@@ -1495,7 +1400,7 @@ void PlayerImmovable::save(EditorGameBase & egbase, MapObjectSaver & mos, FileWr
 {
 	BaseImmovable::save(egbase, mos, fw);
 
-	fw.unsigned_8(PLAYERIMMOVABLE_SAVEGAME_VERSION);
+	fw.unsigned_8(kCurrentPacketVersionPlayerImmovable);
 	fw.unsigned_8(owner().player_number());
 }
 

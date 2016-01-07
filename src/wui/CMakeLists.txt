@@ -10,6 +10,7 @@ wl_library(wui_chat_ui
     chat_msg_layout.cc
   DEPENDS
     base_i18n
+    base_macros
     chat
     graphic
     graphic_color
@@ -52,6 +53,29 @@ wl_library(wui_mapview_pixelfunctions
     logic_widelands_geometry
 )
 
+wl_library(wui_common
+  SRCS
+    mapdetails.cc
+    mapdetails.h
+    mapdata.h
+    maptable.cc
+    maptable.h
+    suggested_teams_box.cc
+    suggested_teams_box.h
+  DEPENDS
+    base_exceptions
+    base_i18n
+    base_log
+    graphic
+    graphic_text_layout
+    io_filesystem
+    logic
+    logic_game_controller
+    logic_game_settings
+    map_io_map_loader
+    ui_basic
+)
+
 wl_library(wui
   SRCS
     actionconfirm.cc
@@ -91,6 +115,8 @@ wl_library(wui
     game_tips.h
     general_statistics_menu.cc
     general_statistics_menu.h
+    helpwindow.cc
+    helpwindow.h
     interactive_base.cc
     interactive_base.h
     interactive_gamebase.cc
@@ -146,6 +172,7 @@ wl_library(wui
     watchwindow.h
   USES_SDL2
   DEPENDS
+    ai
     base_exceptions
     base_geometry
     base_i18n

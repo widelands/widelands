@@ -1,14 +1,11 @@
 #!/usr/bin/python
 
-import re
-
 strip_comments_and_strings = True
 
 def evaluate_matches(lines, fn):
    errors = []
 
    for lineno, line in enumerate(lines):
-
       if line.count("typedef"):
          errors.append((fn, lineno+1, "Do not use \"typedef\". Use \"using\" instead."))
 

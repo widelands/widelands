@@ -42,6 +42,12 @@ public:
 	          float z_value);
 
 private:
+	enum class TrianglePoint {
+		kTopLeft,
+		kTopRight,
+		kBottomMiddle,
+	};
+
 	// Adds the triangle between the indexes (which index 'fields_to_draw') to
 	// vertices_ if the my_terrain != other_terrain and the dither_layer()
 	// agree.
@@ -58,7 +64,9 @@ private:
 	// Adds the 'field' as an vertex to the 'vertices_'. The 'order_index'
 	// defines which texture position in the dithering texture will be used for
 	// this vertex.
-	void add_vertex(const FieldsToDraw::Field& field, int order_index, const FloatPoint& texture_offset);
+	void add_vertex(const FieldsToDraw::Field& field,
+	                TrianglePoint triangle_point,
+	                const FloatPoint& texture_offset);
 
 	struct PerVertexData {
 		float gl_x;
@@ -79,7 +87,7 @@ private:
 	Gl::Program gl_program_;
 
 	// The buffer that contains the data to be rendered.
-	Gl::NewBuffer<PerVertexData> gl_array_buffer_;
+	Gl::Buffer<PerVertexData> gl_array_buffer_;
 
 	// Attributes.
 	GLint attr_brightness_;

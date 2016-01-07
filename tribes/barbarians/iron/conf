@@ -1,8 +1,0 @@
-help=_Iron is obtained out of iron ore in the smelting works. It is used to produce weapons and tools in the metal workshop, axfactory, war mill and in the helm smithy.
-
-default_target_quantity=20
-preciousness=4
-
-[idle]
-pics=idle.png
-hotspot=7 9

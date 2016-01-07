@@ -21,6 +21,7 @@
 
 #include <cstdio>
 #include <list>
+#include <memory>
 
 #include <boost/format.hpp>
 
@@ -47,84 +48,53 @@
 #include "logic/message_queue.h"
 #include "logic/militarysite.h"
 #include "logic/player.h"
-#include "logic/tribe.h"
+#include "logic/tribes/tribe_descr.h"
 #include "logic/warehouse.h"
 #include "map_io/map_object_loader.h"
 #include "map_io/map_object_saver.h"
-#include "profile/profile.h"
 #include "wui/mapviewpixelconstants.h"
 
 namespace Widelands {
 
 namespace  {
 
-/**
- * remove spaces at the beginning or the end of a string
- */
-void remove_spaces(std::string& s) {
-	while (s[0] == ' ' || s[0] == '\t' || s[0] == '\n')
-		s.erase(0, 1);
-
-	while (*s.rbegin() == ' ' || * s.rbegin() == '\t' || * s.rbegin() == '\n')
-		s.erase(s.size() - 1, 1);
-}
-
-
 constexpr int kRetreatWhenHealthDropsBelowThisPercentage = 50;
 }  // namespace
 
-SoldierDescr::SoldierDescr
-	(char const * const _name, char const * const _descname,
-	 const std::string & directory, Profile & prof, Section & global_s,
-	 const TribeDescr & _tribe)
-	:
-	WorkerDescr(MapObjectType::SOLDIER, _name, _descname, directory, prof, global_s, _tribe)
+SoldierDescr::SoldierDescr(const std::string& init_descname,
+									const LuaTable& table,
+									const EditorGameBase& egbase) :
+	WorkerDescr(init_descname, MapObjectType::SOLDIER, table, egbase)
 {
 	add_attribute(MapObject::Attribute::SOLDIER);
 
-	m_base_hp = global_s.get_safe_positive("hp");
+	m_base_hp = table.get_int("hp");
 
-	try { //  parse attack
-		const char * const attack = global_s.get_safe_string("attack");
-		std::vector<std::string> list(split_string(attack, "-"));
-		if (list.size() != 2)
-			throw GameDataError
-				("expected %s but found \"%s\"", "\"min-max\"", attack);
-		for (std::string& temp_str : list) {
-			remove_spaces(temp_str);
-		}
-		char * endp;
-		m_min_attack = strtol(list[0].c_str(), &endp, 0);
-		if (*endp || 0 == m_min_attack)
-			throw GameDataError
-				("expected %s but found \"%s\"",
-				 "positive integer", list[0].c_str());
-		m_max_attack = strtol(list[1].c_str(), &endp, 0);
-		if (*endp || m_max_attack < m_min_attack)
-			throw GameDataError
-				("expected positive integer >= %u but found \"%s\"",
-				 m_min_attack, list[1].c_str());
-	} catch (const WException & e) {
-		throw GameDataError("attack: %s", e.what());
+	// Parse attack
+	std::unique_ptr<LuaTable> items_table = table.get_table("attack");
+	m_min_attack = items_table->get_int("minimum");
+	m_max_attack = items_table->get_int("maximum");
+	if (m_min_attack > m_max_attack) {
+		throw GameDataError("Minimum attack %d is greater than maximum attack %d.", m_min_attack, m_max_attack);
 	}
 
 	// Parse defend
-	m_defense           = global_s.get_safe_int("defense");
+	m_defense           = table.get_int("defense");
 
 	// Parse evade
-	m_evade             = global_s.get_safe_int("evade");
+	m_evade             = table.get_int("evade");
 
 	// Parse increases per level
-	m_hp_incr           = global_s.get_safe_int("hp_incr_per_level");
-	m_attack_incr       = global_s.get_safe_int("attack_incr_per_level");
-	m_defense_incr      = global_s.get_safe_int("defense_incr_per_level");
-	m_evade_incr        = global_s.get_safe_int("evade_incr_per_level");
+	m_hp_incr           = table.get_int("hp_incr_per_level");
+	m_attack_incr       = table.get_int("attack_incr_per_level");
+	m_defense_incr      = table.get_int("defense_incr_per_level");
+	m_evade_incr        = table.get_int("evade_incr_per_level");
 
 	// Parse max levels
-	m_max_hp_level      = global_s.get_safe_int("max_hp_level");
-	m_max_attack_level  = global_s.get_safe_int("max_attack_level");
-	m_max_defense_level = global_s.get_safe_int("max_defense_level");
-	m_max_evade_level   = global_s.get_safe_int("max_evade_level");
+	m_max_hp_level      = table.get_int("max_hp_level");
+	m_max_attack_level  = table.get_int("max_attack_level");
+	m_max_defense_level = table.get_int("max_defense_level");
+	m_max_evade_level   = table.get_int("max_evade_level");
 
 	// Load the filenames
 	m_hp_pics_fn     .resize(m_max_hp_level      + 1);
@@ -132,105 +102,41 @@ SoldierDescr::SoldierDescr
 	m_defense_pics_fn.resize(m_max_defense_level + 1);
 	m_evade_pics_fn  .resize(m_max_evade_level   + 1);
 
-	std::string dir = directory;
-	dir += "/";
 	for (uint32_t i = 0; i <= m_max_hp_level;      ++i) {
-		m_hp_pics_fn[i] = dir;
-		m_hp_pics_fn[i] += global_s.get_safe_string((boost::format("hp_level_%u_pic")
-																	% i).str());
-
+		m_hp_pics_fn[i] = table.get_string((boost::format("hp_level_%u_pic") % i).str());
 	}
 	for (uint32_t i = 0; i <= m_max_attack_level;  ++i) {
-		m_attack_pics_fn[i] = dir;
-		m_attack_pics_fn[i] += global_s.get_safe_string((boost::format("attack_level_%u_pic")
-																		 % i).str());
+		m_attack_pics_fn[i] = table.get_string((boost::format("attack_level_%u_pic") % i).str());
 	}
 	for (uint32_t i = 0; i <= m_max_defense_level; ++i) {
-		m_defense_pics_fn[i] = dir;
-		m_defense_pics_fn[i] += global_s.get_safe_string((boost::format("defense_level_%u_pic")
-																		  % i).str());
+		m_defense_pics_fn[i] = table.get_string((boost::format("defense_level_%u_pic") % i).str());
 	}
 	for (uint32_t i = 0; i <= m_max_evade_level;   ++i) {
-		m_evade_pics_fn[i] = dir;
-		m_evade_pics_fn[i] += global_s.get_safe_string((boost::format("evade_level_%u_pic")
-																		% i).str());
+		m_evade_pics_fn[i] = table.get_string((boost::format("evade_level_%u_pic") % i).str());
 	}
 
-	{  ///  Battle animations
-		/// attack_success_*-> soldier is attacking and hit his opponent
-		/// attack_failure_*-> soldier is attacking and miss hit, defender evades
-		/// evade_success_* -> soldier is defending and opponent misses
-		/// evade_failure_* -> soldier is defending and opponent hits
-		/// die_*           -> soldier is dying
-		m_attack_success_w_name =
-			load_animations_from_string
-				(directory, prof, global_s, "attack_success_w");
-		m_attack_success_e_name =
-			load_animations_from_string
-				(directory, prof, global_s, "attack_success_e");
-		m_attack_failure_w_name =
-			load_animations_from_string
-				(directory, prof, global_s, "attack_failure_w");
-		m_attack_failure_e_name =
-			load_animations_from_string
-				(directory, prof, global_s, "attack_failure_e");
-		m_evade_success_w_name =
-			load_animations_from_string
-				(directory, prof, global_s, "evade_success_w");
-		m_evade_success_e_name =
-			load_animations_from_string
-				(directory, prof, global_s, "evade_success_e");
-		m_evade_failure_w_name =
-			load_animations_from_string
-				(directory, prof, global_s, "evade_failure_w");
-		m_evade_failure_e_name =
-			load_animations_from_string
-				(directory, prof, global_s, "evade_failure_e");
-		m_die_w_name =
-			load_animations_from_string
-				(directory, prof, global_s, "die_w");
-		m_die_e_name =
-			load_animations_from_string
-				(directory, prof, global_s, "die_e");
-	}
+	//  Battle animations
+	// attack_success_*-> soldier is attacking and hit his opponent
+	add_battle_animation(table.get_table("attack_success_w"), &m_attack_success_w_name);
+	add_battle_animation(table.get_table("attack_success_e"), &m_attack_success_e_name);
 
-}
+	// attack_failure_*-> soldier is attacking and miss hit, defender evades
+	add_battle_animation(table.get_table("attack_failure_w"), &m_attack_failure_w_name);
+	add_battle_animation(table.get_table("attack_failure_e"), &m_attack_failure_e_name);
 
-std::vector<std::string> SoldierDescr::load_animations_from_string
-	(const std::string & directory, Profile & prof,
-	 Section & global_s, const char * anim_name)
-{
-	std::vector<std::string> list;
-	try {
-		const char * anim_string = global_s.get_safe_string(anim_name);
-		list = split_string(anim_string, ",");
-		if (list.size() < 1)
-			throw GameDataError
-				("expected %s but found \"%s\"",
-				 "\"anim_name[,another_anim,...]\"", anim_string);
+	// evade_success_* -> soldier is defending and opponent misses
+	add_battle_animation(table.get_table("evade_success_w"), &m_evade_success_w_name);
+	add_battle_animation(table.get_table("evade_success_e"), &m_evade_success_e_name);
 
-		// Sanitation
-		for (std::string& temp_str : list) {
-			remove_spaces(temp_str);
+	// evade_failure_* -> soldier is defending and opponent hits
+	add_battle_animation(table.get_table("evade_failure_w"), &m_evade_failure_w_name);
+	add_battle_animation(table.get_table("evade_failure_e"), &m_evade_failure_e_name);
 
-			// Check that section exists
-			Section &
-				anim_s = prof.get_safe_section(temp_str.c_str());
+	// die_*           -> soldier is dying
+	add_battle_animation(table.get_table("die_w"), &m_die_w_name);
+	add_battle_animation(table.get_table("die_e"), &m_die_e_name);
 
-			add_animation
-				(temp_str.c_str(), g_gr->animations().load(directory, anim_s));
-		}
-	} catch (const WException & e) {
-		throw GameDataError("%s : %s", anim_name, e.what());
-	}
-
-	return list;
-}
-
-/**
- * Load the graphics
- */
-void SoldierDescr::load_graphics() {
+	// Load Graphics
 	m_hp_pics     .resize(m_max_hp_level      + 1);
 	m_attack_pics .resize(m_max_attack_level  + 1);
 	m_defense_pics.resize(m_max_defense_level + 1);
@@ -246,9 +152,7 @@ void SoldierDescr::load_graphics() {
 	for (uint32_t i = 0; i <= m_max_evade_level;   ++i)
 		m_evade_pics[i] =
 			g_gr->images().get(m_evade_pics_fn[i]);
-	WorkerDescr::load_graphics();
 }
-
 
 /**
  * Get random animation of specified type
@@ -316,14 +220,26 @@ uint32_t SoldierDescr::get_rand_anim
 		uint32_t i = game.logic_rand() % m_die_e_name.size();
 		run = m_die_e_name[i];
 	}
-
-	return get_animation(run.c_str());
+	if (!is_animation_known(run)) {
+		log("Missing animation '%s' for soldier %s. Reverting to idle.\n", run.c_str(), name().c_str());
+		run = "idle";
+	}
+	return get_animation(run);
 }
 
 /**
  * Create a new soldier
  */
 Bob & SoldierDescr::create_object() const {return *new Soldier(*this);}
+
+void SoldierDescr::add_battle_animation(std::unique_ptr<LuaTable> table, std::vector<std::string>* result) {
+	for (const std::string& anim_name: table->array_entries<std::string>()) {
+		if (!is_animation_known(anim_name)) {
+			throw GameDataError("Trying to add unknown battle animation: %s", anim_name.c_str());
+		}
+		result->push_back(anim_name);
+	}
+}
 
 /*
 ==============================
@@ -598,7 +514,7 @@ void Soldier::draw_info_icon
 {
 	// Gather information to determine coordinates
 	uint32_t w;
-	w = SOLDIER_HP_BAR_WIDTH;
+	w = kSoldierHpBarWidth;
 
 	const Image* hppic = get_hp_level_pic();
 	const Image* attackpic = get_attack_level_pic();
@@ -661,7 +577,7 @@ void Soldier::calc_info_icon_size
 	(const TribeDescr & tribe, uint32_t & w, uint32_t & h)
 {
 	const SoldierDescr * soldierdesc = static_cast<const SoldierDescr *>
-		(tribe.get_worker_descr(tribe.worker_index("soldier")));
+		(tribe.get_worker_descr(tribe.soldier()));
 	const Image* hppic = soldierdesc->get_hp_level_pic(0);
 	const Image* attackpic = soldierdesc->get_attack_level_pic(0);
 	const Image* defensepic = soldierdesc->get_defense_level_pic(0);
@@ -676,7 +592,7 @@ void Soldier::calc_info_icon_size
 	uint16_t evh = evadepic->height();
 
 	uint16_t animw;
-	animw = SOLDIER_HP_BAR_WIDTH;
+	animw = kSoldierHpBarWidth;
 
 	w = std::max(std::max(atw + dew, hpw + evw), 2 * animw);
 	h = 5 + std::max(hph + ath, evh + deh);
@@ -813,7 +729,8 @@ void Soldier::start_task_attack
 	State & state  = top_state();
 	state.objvar1  = &building;
 	state.coords   = building.get_position();
-	state.ivar2    = 0; // Thre return state 1=go home 2=go back in known land
+	state.ivar2    = 0; // The return state 1=go home 2=go back in known land
+	state.ivar3    = 0; // Counts how often the soldier is blocked in a row
 
 	state.ivar1    |= CF_RETREAT_WHEN_INJURED;
 	state.ui32var3 = kRetreatWhenHealthDropsBelowThisPercentage * get_max_hitpoints() / 100;
@@ -830,11 +747,15 @@ void Soldier::attack_update(Game & game, State & state)
 	uint32_t    defenders = 0;
 
 	if (signal.size()) {
-		if
-			(signal == "blocked" || signal == "battle" || signal == "wakeup" ||
-			 signal == "sleep")
+		if (signal == "battle" || signal == "wakeup" || signal == "sleep") {
+			state.ivar3 = 0;
 			signal_handled();
+		} else if (signal == "blocked") {
+			state.ivar3++;
+			signal_handled();
+		}
 		else if (signal == "fail") {
+			state.ivar3 = 0;
 			signal_handled();
 			if (state.objvar1.get(game)) {
 				molog("[attack] failed to reach enemy\n");
@@ -845,6 +766,7 @@ void Soldier::attack_update(Game & game, State & state)
 			}
 		} else if (signal == "location") {
 			molog("[attack] Location destroyed\n");
+			state.ivar3 = 0;
 			signal_handled();
 			if (state.ivar2 == 0) {
 				state.ivar2 = 1;
@@ -854,6 +776,9 @@ void Soldier::attack_update(Game & game, State & state)
 				("[attack] cancelled by unexpected signal '%s'\n", signal.c_str());
 			return pop_task(game);
 		}
+	} else {
+		// no signals means no consecutive block -> we're not stuck anymore
+		state.ivar3 = 0;
 	}
 
 	//  We are at enemy building flag, and a defender is coming, sleep until he
@@ -894,12 +819,15 @@ void Soldier::attack_update(Game & game, State & state)
 				return start_task_leavebuilding(game, false);
 			}
 			// Head to home
-			if
-				(start_task_movepath
+			if (state.ivar3 > kBockCountIsStuck)
+				molog("[attack] soldier is stuck, blocked nodes will be ignored\n");
+
+			if (start_task_movepath
 					(game,
 						baseflag.get_position(),
 						4, // use larger persist when returning home
-						descr().get_right_walk_anims(does_carry_ware())))
+						descr().get_right_walk_anims(does_carry_ware()),
+						false, -1, state.ivar3 > kBockCountIsStuck))
 				return;
 			else {
 				molog("[attack] failed to return home\n");
@@ -978,7 +906,7 @@ void Soldier::attack_update(Game & game, State & state)
 		if (upcast(Warehouse, wh, enemy)) {
 			Requirements noreq;
 			defenders = wh->count_workers
-				(game, wh->descr().tribe().worker_index("soldier"), noreq);
+				(game, wh->owner().tribe().soldier(), noreq);
 		}
 		//  Any enemy soldier at baseflag count as defender.
 		std::vector<Bob *> soldiers;
@@ -1389,7 +1317,7 @@ void Soldier::start_task_move_in_battle(Game & game, CombatWalkingDir dir)
 
 void Soldier::move_in_battle_update(Game & game, State &)
 {
-	if (static_cast<int32_t>(game.get_gametime() - m_combat_walkend) >= 0) {
+	if (game.get_gametime() >= m_combat_walkend) {
 		switch (m_combat_walking) {
 			case CD_NONE:
 				break;
@@ -1573,7 +1501,9 @@ void Soldier::battle_update(Game & game, State &)
 						 *new Message
 							(Message::Type::kGameLogic,
 							 game.get_gametime(),
-						 	 _("Logic error"),
+							 descr().descname(),
+							 "pics/menu_help.png",
+							 _("Logic error"),
 							 messagetext,
 						 	 get_position(),
 							 m_serial));
@@ -1582,7 +1512,9 @@ void Soldier::battle_update(Game & game, State &)
 						 *new Message
 							(Message::Type::kGameLogic,
 							 game.get_gametime(),
-						 	 _("Logic error"),
+							 descr().descname(),
+							 "pics/menu_help.png",
+							 _("Logic error"),
 							 messagetext,
 						 	 opponent.get_position(),
 							 m_serial));
@@ -1662,7 +1594,7 @@ void Soldier::die_update(Game & game, State & state)
 		signal_handled();
 	}
 
-	if (state.ivar1 > game.get_gametime())
+	if ((state.ivar1 >= 0) && (static_cast<uint32_t>(state.ivar1) > game.get_gametime()))
 		return schedule_act(game, state.ivar1 - game.get_gametime());
 
 	// When task updated, dead is near!
@@ -1844,7 +1776,7 @@ Load/save support
 ==============================
 */
 
-#define SOLDIER_SAVEGAME_VERSION 2
+constexpr uint8_t kCurrentPacketVersion = 2;
 
 Soldier::Loader::Loader() :
 		m_battle(0)
@@ -1855,34 +1787,38 @@ void Soldier::Loader::load(FileRead & fr)
 {
 	Worker::Loader::load(fr);
 
-	uint8_t version = fr.unsigned_8();
-	if (version > SOLDIER_SAVEGAME_VERSION)
-		throw GameDataError("unknown/unhandled version %u", version);
+	try {
+		uint8_t packet_version = fr.unsigned_8();
+		if (packet_version == kCurrentPacketVersion) {
 
-	Soldier & soldier = get<Soldier>();
-	soldier.m_hp_current = fr.unsigned_32();
-	if (SOLDIER_SAVEGAME_VERSION < 2) // Hitpoints multiplied to make balance easier
-		soldier.m_hp_current *= 100;
+			Soldier & soldier = get<Soldier>();
+			soldier.m_hp_current = fr.unsigned_32();
 
-	soldier.m_hp_level =
-		std::min(fr.unsigned_32(), soldier.descr().get_max_hp_level());
-	soldier.m_attack_level =
-		std::min(fr.unsigned_32(), soldier.descr().get_max_attack_level());
-	soldier.m_defense_level =
-		std::min(fr.unsigned_32(), soldier.descr().get_max_defense_level());
-	soldier.m_evade_level =
-		std::min(fr.unsigned_32(), soldier.descr().get_max_evade_level());
+			soldier.m_hp_level =
+				std::min(fr.unsigned_32(), soldier.descr().get_max_hp_level());
+			soldier.m_attack_level =
+				std::min(fr.unsigned_32(), soldier.descr().get_max_attack_level());
+			soldier.m_defense_level =
+				std::min(fr.unsigned_32(), soldier.descr().get_max_defense_level());
+			soldier.m_evade_level =
+				std::min(fr.unsigned_32(), soldier.descr().get_max_evade_level());
 
-	if (soldier.m_hp_current > soldier.get_max_hitpoints())
-		soldier.m_hp_current = soldier.get_max_hitpoints();
+			if (soldier.m_hp_current > soldier.get_max_hitpoints())
+				soldier.m_hp_current = soldier.get_max_hitpoints();
 
-	soldier.m_combat_walking = static_cast<CombatWalkingDir>(fr.unsigned_8());
-	if (soldier.m_combat_walking != CD_NONE) {
-		soldier.m_combat_walkstart = fr.signed_32();
-		soldier.m_combat_walkend = fr.signed_32();
+			soldier.m_combat_walking = static_cast<CombatWalkingDir>(fr.unsigned_8());
+			if (soldier.m_combat_walking != CD_NONE) {
+				soldier.m_combat_walkstart = fr.unsigned_32();
+				soldier.m_combat_walkend = fr.unsigned_32();
+			}
+
+			m_battle = fr.unsigned_32();
+		} else {
+			throw UnhandledVersionError("Soldier", packet_version, kCurrentPacketVersion);
+		}
+	} catch (const std::exception & e) {
+		throw wexception("loading soldier: %s", e.what());
 	}
-
-	m_battle = fr.unsigned_32();
 }
 
 void Soldier::Loader::load_pointers()
@@ -1915,7 +1851,7 @@ void Soldier::do_save
 {
 	Worker::do_save(egbase, mos, fw);
 
-	fw.unsigned_8(SOLDIER_SAVEGAME_VERSION);
+	fw.unsigned_8(kCurrentPacketVersion);
 	fw.unsigned_32(m_hp_current);
 	fw.unsigned_32(m_hp_level);
 	fw.unsigned_32(m_attack_level);
@@ -1924,8 +1860,8 @@ void Soldier::do_save
 
 	fw.unsigned_8(m_combat_walking);
 	if (m_combat_walking != CD_NONE) {
-		fw.signed_32(m_combat_walkstart);
-		fw.signed_32(m_combat_walkend);
+		fw.unsigned_32(m_combat_walkstart);
+		fw.unsigned_32(m_combat_walkend);
 	}
 
 	fw.unsigned_32(mos.get_object_file_index_or_zero(m_battle));

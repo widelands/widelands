@@ -1,183 +1,188 @@
-# Catalan translation for widelands
-# Copyright (c) 2011 Rosetta Contributors and Canonical Ltd 2011
-# This file is distributed under the same license as the widelands package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2011.
-#
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Widelands Development Team
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# Juanjo, 2015
 msgid ""
 msgstr ""
-"Project-Id-Version: widelands\n"
-"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2015-02-07 14:46+0000\n"
-"PO-Revision-Date: 2011-04-19 21:11+0000\n"
-"Last-Translator: Juanjo Navarro <Unknown>\n"
-"Language-Team: Catalan <ca@li.org>\n"
+"Project-Id-Version: Widelands\n"
+"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
+"POT-Creation-Date: 2015-07-04 16:22+0200\n"
+"PO-Revision-Date: 2015-07-14 19:40+0000\n"
+"Last-Translator: Juanjo\n"
+"Language-Team: Catalan (http://www.transifex.com/projects/p/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-02-08 05:43+0000\n"
-"X-Generator: Launchpad (build 17331)\n"
+"Language: ca\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. * TRANSLATORS: %s = version information
 #: ../../src/wlapplication_messages.cc:40
 #, c-format
 msgid "This is Widelands Build %s"
-msgstr ""
+msgstr "Esteu emprant Widelands - Build %s."
 
 #: ../../src/wlapplication_messages.cc:43
 msgid "Usage: widelands <option0>=<value0> ... <optionN>=<valueN>"
-msgstr ""
+msgstr "Ús: widelands <opció0>=<valor0> ... <opcióN>=<valorN>"
 
 #: ../../src/wlapplication_messages.cc:44
 msgid "Options:"
-msgstr ""
+msgstr "Opcions:"
 
 #: ../../src/wlapplication_messages.cc:46
 msgid " --<config-entry-name>=value overwrites any config file setting"
-msgstr ""
+msgstr " --<config-entry-name>=VALOR reemplaça el valor de l'ajustament a l'arxiu de configuració"
 
 #: ../../src/wlapplication_messages.cc:47
 msgid ""
 " --logfile=FILENAME   Log output to file FILENAME instead of \n"
 "                      terminal output"
-msgstr ""
+msgstr " --logfile=NOMARXIU   Escriure el registre a l'arxiu NOMARXIU \n                      en lloc de fer-ho a la consola"
 
 #: ../../src/wlapplication_messages.cc:49
 msgid ""
 " --datadir=DIRNAME    Use specified directory for the widelands\n"
 "                      data files"
-msgstr ""
+msgstr " --datadir=DIRNAME    Usa el directori indicat per als arxius\n                      de dades del Widelands"
 
 #: ../../src/wlapplication_messages.cc:51
 msgid ""
 " --homedir=DIRNAME    Use specified directory for widelands config\n"
 "                      files, savegames and replays"
-msgstr ""
+msgstr " --homedir=DIRNAME    Usa el directori indicat per desar\n                      arxius del Widelands de configuració,\n                      partides desades i repeticions"
 
 #: ../../src/wlapplication_messages.cc:54
 msgid "                      Default is ~/.widelands"
-msgstr ""
+msgstr "                      Per defecte és ~/.widelands"
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
-#. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the widelands textdomain
+#. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
+#. widelands textdomain
 #: ../../src/wlapplication_messages.cc:59
 msgid ""
 " --coredump=[true|false]\n"
 "                      Generates a core dump on segfaults instead of\n"
 "                      using the SDL"
-msgstr ""
+msgstr " --coredump=[true|false]\n                      Genera un bolcat del nucli en segfaults\n                      en lloc d'emprar l'SDL"
 
 #: ../../src/wlapplication_messages.cc:62
 msgid ""
 " --language=[de_DE|sv_SE|...]\n"
 "                      The locale to use."
-msgstr ""
+msgstr " --language=[de_DE|sv_SE|...]\n                      La configuració regional a emprar."
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
-#. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the widelands textdomain
+#. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
+#. widelands textdomain
 #: ../../src/wlapplication_messages.cc:66
 msgid ""
 " --remove_syncstreams=[true|false]\n"
 "                      Remove syncstream files on startup"
-msgstr ""
+msgstr " --remove_syncstreams=[true|false]\n                      Eliminar els arxius de flux de sincronització a l'inici"
 
 #: ../../src/wlapplication_messages.cc:68
 msgid ""
 " --remove_replays=[...]\n"
 "                      Remove replays after this number of days.\n"
 "                      If this is 0, replays are not deleted."
-msgstr ""
+msgstr " --remove_replays=[...]\n                      Elimina les repeticions al cap d'aquests dies.\n                      Si aquesta variable és 0, les repeticions\n                      no s'esborraran."
 
 #: ../../src/wlapplication_messages.cc:71
 msgid " --autosave=[...]     Automatically save each n minutes"
-msgstr ""
+msgstr " --autosave=[...]     Desa automàticament cada n minuts"
 
 #: ../../src/wlapplication_messages.cc:72
 msgid ""
 " --rolling_autosave=[...]\n"
 "                      Use this many files for rolling autosaves"
-msgstr ""
+msgstr " --rolling_autosave=[...]\n                      Usa aquests arxius per a les partides\n                      desades automàticament"
 
 #: ../../src/wlapplication_messages.cc:75
 msgid "Sound options:"
-msgstr ""
+msgstr "Opcions de so:"
 
 #: ../../src/wlapplication_messages.cc:76
 msgid " --nosound            Starts the game with sound disabled."
-msgstr ""
+msgstr " --nosound            Inicia el programa amb el so desactivat."
 
 #: ../../src/wlapplication_messages.cc:77
 msgid " --disable_fx         Disable sound effects."
-msgstr ""
+msgstr " --disable_fx         Desactiva els efectes de so."
 
 #: ../../src/wlapplication_messages.cc:78
 msgid " --disable_music      Disable music."
-msgstr ""
+msgstr " --disable_music      Desactiva la música."
 
 #: ../../src/wlapplication_messages.cc:79
 msgid " --nozip              Do not save files as binary zip archives."
-msgstr ""
+msgstr " --nozip              No guarda els arxius com a binaris zip."
 
 #: ../../src/wlapplication_messages.cc:80
 msgid ""
 " --editor             Directly starts the Widelands editor.\n"
 "                      You can add a =FILENAME to directly load\n"
 "                      the map FILENAME in editor."
-msgstr ""
+msgstr " --editor             Comença directament a l'editor del\n                      Widelands. Podeu afegir =NOMARXIU\n                      per carregar directament el mapa a l'editor."
 
 #: ../../src/wlapplication_messages.cc:83
 msgid ""
 " --scenario=FILENAME  Directly starts the map FILENAME as scenario\n"
 "                      map."
-msgstr ""
+msgstr " --scenario=ARXMAPA  Comença directament el mapa \n                      ARXMAPA com a mapa de la partida."
 
 #: ../../src/wlapplication_messages.cc:85
 msgid " --loadgame=FILENAME  Directly loads the savegame FILENAME."
-msgstr ""
+msgstr " --loadgame=NOMPARTIDA  Directament carrega la partida guardada amb el nom «NOMPARTIDA»."
 
 #: ../../src/wlapplication_messages.cc:86
 msgid ""
 " --script=FILENAME    Run the given Lua script after initialization.\n"
 "                      Only valid with --scenario, --loadgame, or --editor."
-msgstr ""
+msgstr " --script=ARXSCRIPT    Executa l'script Lua donat\n                      després de l'inici. Només vàlid amb\n                      --scenario, --loadgame o --editor."
 
 #: ../../src/wlapplication_messages.cc:88
 msgid " --dedicated=FILENAME Starts a dedicated server with FILENAME as map"
-msgstr ""
+msgstr " --dedicated=ARXMAPA Inicia un servidor dedicat\n                      amb el mapa ARXMAPA"
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
-#. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the widelands textdomain
+#. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
+#. widelands textdomain
 #: ../../src/wlapplication_messages.cc:91
 msgid ""
 " --auto_roadbuild_mode=[true|false]\n"
 "                      Whether to enter roadbuilding mode\n"
 "                      automatically after placing a flag that is\n"
 "                      not connected to a road."
-msgstr ""
+msgstr " --auto_roadbuild_mode=[true|false]\n                      Habilita/deshabilita l'entrada automàtica\n                      al mode de construcció de camins\n                      quan es planta una bandera."
 
 #: ../../src/wlapplication_messages.cc:95
 msgid "Graphic options:"
-msgstr ""
+msgstr "Opcions gràfiques:"
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
-#. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the widelands textdomain
+#. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
+#. widelands textdomain
 #: ../../src/wlapplication_messages.cc:98
 msgid ""
 " --fullscreen=[true|false]\n"
 "                      Whether to use the whole display for the\n"
 "                      game screen."
-msgstr ""
+msgstr " --fullscreen=[true|false]\n                      Empra o no la pantalla sencera per\n                      al joc."
 
 #: ../../src/wlapplication_messages.cc:101
 msgid " --xres=[...]         Width of the window in pixel."
-msgstr ""
+msgstr " --xres=[...]         Amplada de la finestra en píxels."
 
 #: ../../src/wlapplication_messages.cc:102
 msgid " --yres=[...]         Height of the window in pixel."
-msgstr ""
+msgstr " --yres=[...]         Alçada de la finestra en píxels."
 
 #: ../../src/wlapplication_messages.cc:106
 msgid "Options for the internal window manager:"
-msgstr ""
+msgstr "Opcions per al gestor de finestres intern:"
 
 #: ../../src/wlapplication_messages.cc:107
 msgid ""
@@ -185,17 +190,18 @@ msgid ""
 "                      Move a window to the edge of the screen\n"
 "                      when the edge of the window comes within\n"
 "                      this distance from the edge of the screen."
-msgstr ""
+msgstr " --border_snap_distance=[0 ...]\n                      Acobla la finestra a la vora de la pantalla\n                      quan les seves vores estiguin a una\n                      distància menor que l'escollida."
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
-#. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the widelands textdomain
+#. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
+#. widelands textdomain
 #: ../../src/wlapplication_messages.cc:113
 msgid ""
 " --dock_windows_to_edges=[true|false]\n"
 "                      Eliminate a window's border towards the\n"
 "                      edge of the screen when the edge of the\n"
 "                      window is next to the edge of the screen."
-msgstr ""
+msgstr " --dock_windows_to_edges=[true|false]\n                      Habilita/deshabilita l'acoblament a la vora\n                      de la pantalla quan la vora d'alguna finestra\n                      estigui a prop de la vora de la pantalla."
 
 #: ../../src/wlapplication_messages.cc:117
 msgid ""
@@ -203,7 +209,7 @@ msgid ""
 "                      Move a window to the edge of the panel when\n"
 "                      the edge of the window comes within this\n"
 "                      distance from the edge of the panel."
-msgstr ""
+msgstr " --panel_snap_distance=[0 ...]\n                      Moure una finestra cap a la vora del panell\n                      quan la vora i el panell estigui a menys\n                      distància de la definida per aquesta opció."
 
 #: ../../src/wlapplication_messages.cc:121
 msgid ""
@@ -211,15 +217,15 @@ msgid ""
 "                      Only move a window to the edge of a panel\n"
 "                      if the window is overlapping with the\n"
 "                      panel."
-msgstr ""
+msgstr " --snap_windows_only_when_overlapping=[yes|no]\n                      Habilita/deshabilita l'acoblament de\n                      finestres al panell quan la finestra i el\n                      panell estiguin prou a prop o es solapin."
 
 #: ../../src/wlapplication_messages.cc:126
 msgid " --verbose            Enable verbose debug messages"
-msgstr ""
+msgstr " --verbose            Habilita els missatges de\n                      depuració descriptius"
 
 #: ../../src/wlapplication_messages.cc:128
 msgid " --help               Show this help"
-msgstr ""
+msgstr " --help               Mostra aquesta ajuda"
 
 #: ../../src/wlapplication_messages.cc:130
 msgid ""
@@ -227,4 +233,4 @@ msgid ""
 "        https://launchpad.net/widelands\n"
 "\n"
 "Hope you enjoy this game!"
-msgstr ""
+msgstr "Informes d'errors? Suggeriments? Visiteu el lloc web del projecte:\n https://launchpad.net/widelands\nEsperem que us agradi aquest joc!"

@@ -48,6 +48,7 @@ public:
 	/*
 	 * Properties
 	 */
+	int get_real_speed(lua_State * L);
 	int get_time(lua_State *);
 	int get_desired_speed(lua_State *);
 	int set_desired_speed(lua_State *);
@@ -116,6 +117,43 @@ public:
 	int new_immovable_type(lua_State* L);
 	int new_resource_type(lua_State* L);
 	int new_terrain_type(lua_State* L);
+
+	/*
+	 * C methods
+	 */
+};
+
+class LuaTribes : public LuaRootModuleClass {
+public:
+	LUNA_CLASS_HEAD(LuaTribes);
+	const char * get_modulename() override {return "";}
+
+	LuaTribes() {}
+	LuaTribes(lua_State * L);
+
+	void __persist(lua_State * L) override;
+	void __unpersist(lua_State * L) override;
+
+	/*
+	 * Properties
+	 */
+
+	/*
+	 * Lua methods
+	 */
+	int new_constructionsite_type(lua_State* L);
+	int new_dismantlesite_type(lua_State* L);
+	int new_militarysite_type(lua_State* L);
+	int new_productionsite_type(lua_State* L);
+	int new_trainingsite_type(lua_State* L);
+	int new_warehouse_type(lua_State* L);
+	int new_immovable_type(lua_State* L);
+	int new_ship_type(lua_State* L);
+	int new_ware_type(lua_State* L);
+	int new_carrier_type(lua_State* L);
+	int new_soldier_type(lua_State* L);
+	int new_worker_type(lua_State* L);
+	int new_tribe(lua_State* L);
 
 	/*
 	 * C methods

@@ -61,17 +61,17 @@ EditorSetStartingPosTool::EditorSetStartingPosTool()
 	strcpy(fsel_picsname, FSEL_PIC_FILENAME);
 }
 
-int32_t EditorSetStartingPosTool::handle_click_impl(Widelands::Map& map,
-                                                    const Widelands::World&,
+int32_t EditorSetStartingPosTool::handle_click_impl(const Widelands::World&,
                                                     Widelands::NodeAndTriangle<> const center,
-                                                    EditorInteractive& parent,
-                                                    EditorActionArgs&) {
+                                                    EditorInteractive& eia,
+                                                    EditorActionArgs*,
+													Widelands::Map* map) {
 	assert(0 <= center.node.x);
-	assert(center.node.x < map.get_width());
+	assert(center.node.x < map->get_width());
 	assert(0 <= center.node.y);
-	assert(center.node.y < map.get_height());
+	assert(center.node.y < map->get_height());
 	if (m_current_player) {
-		if (map.get_nrplayers() < m_current_player) {
+		if (map->get_nrplayers() < m_current_player) {
 			//  Mmh, my current player is not valid. Maybe the user has loaded a
 			//  new map while this tool was active. We set the new player to a
 			//  valid one. The sel pointer is the only thing that stays wrong, but
@@ -79,7 +79,7 @@ int32_t EditorSetStartingPosTool::handle_click_impl(Widelands::Map& map,
 			m_current_player = 1;
 		}
 
-		Widelands::Coords const old_sp = map.get_starting_pos(m_current_player);
+		Widelands::Coords const old_sp = map->get_starting_pos(m_current_player);
 
 		char picname[] = "pics/editor_player_00_starting_pos.png";
 		picname[19] += m_current_player / 10;
@@ -87,18 +87,17 @@ int32_t EditorSetStartingPosTool::handle_click_impl(Widelands::Map& map,
 		const Image* pic = g_gr->images().get(picname);
 
 		//  check if field is valid
-		if (editor_tool_set_starting_pos_callback(map.get_fcoords(center.node), map)) {
-			FieldOverlayManager& overlay_manager = *parent.mutable_field_overlay_manager();
+		if (editor_tool_set_starting_pos_callback(map->get_fcoords(center.node), *map)) {
+			FieldOverlayManager * overlay_manager = eia.mutable_field_overlay_manager();
 			//  remove old overlay if any
-			overlay_manager.remove_overlay(old_sp, pic);
+			overlay_manager->remove_overlay(old_sp, pic);
 
 			//  add new overlay
-			overlay_manager.register_overlay
-			(center.node, pic, 8, Point(pic->width() / 2, STARTING_POS_HOTSPOT_Y));
+			overlay_manager->register_overlay(
+			   center.node, pic, 8, Point(pic->width() / 2, STARTING_POS_HOTSPOT_Y));
 
 			//  set new player pos
-			map.set_starting_pos(m_current_player, center.node);
-
+			map->set_starting_pos(m_current_player, center.node);
 		}
 	}
 	return 1;

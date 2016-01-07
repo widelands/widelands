@@ -29,8 +29,6 @@
 #include "logic/walkingdir.h"
 #include "logic/widelands_geometry.h"
 
-class Profile;
-
 namespace Widelands {
 class Map;
 struct Route;
@@ -50,21 +48,24 @@ struct BobProgramBase {
 
 class Bob;
 
-// Description for the Bob class.
+/**
+ * Implement MapObjectDescr for the following \ref Bob class.
+ */
 class BobDescr : public MapObjectDescr {
 public:
 	friend struct MapBobdataPacket;
 
-	BobDescr(MapObjectType type,
-	         const std::string& init_name,
-	         const std::string& init_descname,
-	         TribeDescr const* tribe);
+	BobDescr(const std::string& init_descname,
+				const MapObjectType type,
+				MapObjectDescr::OwnerType owner_type,
+				const LuaTable& table);
+
 	~BobDescr() override {}
 
 	Bob& create(EditorGameBase&, Player* owner, const Coords&) const;
 
-	TribeDescr const* get_owner_tribe() const {
-		return owner_tribe_;
+	MapObjectDescr::OwnerType get_owner_type() const {
+		return owner_type_;
 	}
 
 	virtual uint32_t movecaps() const {
@@ -76,7 +77,8 @@ protected:
 	virtual Bob& create_object() const = 0;
 
 private:
-	const TribeDescr* const owner_tribe_;  //  nullptr if world bob
+	const MapObjectDescr::OwnerType owner_type_;
+	const uint32_t vision_range_;
 	DISALLOW_COPY_AND_ASSIGN(BobDescr);
 };
 
@@ -255,6 +257,8 @@ public:
 
 	// default tasks
 	void reset_tasks(Game &);
+
+	// TODO(feature-Hasi50): correct (?) Send a signal that may switch to some other \ref Task
 	void send_signal(Game &, char const *);
 	void start_task_idle(Game &, uint32_t anim, int32_t timeout);
 
@@ -267,7 +271,8 @@ public:
 		 const int32_t         persist,
 		 const DirAnimations &,
 		 const bool            forceonlast = false,
-		 const int32_t         only_step = -1)
+		 const int32_t         only_step = -1,
+		 const bool            forceall = false)
 		__attribute__((warn_unused_result));
 
 	/// This can fail (and return false). Therefore the caller must check the

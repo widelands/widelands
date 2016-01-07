@@ -51,6 +51,8 @@ wl_library(editor
     ui_menus/editor_main_menu.h
     ui_menus/editor_main_menu_load_map.cc
     ui_menus/editor_main_menu_load_map.h
+    ui_menus/editor_main_menu_load_or_save_map.cc
+    ui_menus/editor_main_menu_load_or_save_map.h
     ui_menus/editor_main_menu_map_options.cc
     ui_menus/editor_main_menu_map_options.h
     ui_menus/editor_main_menu_new_map.cc
@@ -94,7 +96,6 @@ wl_library(editor
     logic_widelands_geometry
     map_io
     map_io_map_loader
-    profile
     random
     scripting_lua_interface
     scripting_lua_table
@@ -102,6 +103,7 @@ wl_library(editor
     ui_fsmenu
     widelands_ball_of_mud
     wui
-    wui_field_overlay_manager
+    wui_common
     wui_mapview_pixelfunctions
+    wui_overlay_manager
 )

@@ -28,9 +28,9 @@ economic infrastructure, explore the land around you and face rivaling
 tribes.]]
    ) .. h3(_
 [[Check out the Widelands project homepage:]]
-   ) .. p(
-[[http://wl.widelands.org]]
-   ) .. p(_
+   ) .. p(a(
+[[https://wl.widelands.org]]
+   )) .. p(_
 [[Widelands is licensed under the GNU General Public License (GPL). For more
 information, see the file ‘COPYING’.]]
    ) .. h3(_
@@ -44,62 +44,59 @@ creating new maps – get in touch on our homepage.]])
    .. h2(_
 [[General game control]]
    ) .. p(_
-[[To close an open window, right-click on it. To minimize/maximize a window, click
-on the title bar of that window either with the middle mouse button or with the left
-mouse button while holding down CTRL.]]
+[[To close an open window, right-click on it. To minimize/maximize a window, click on it with the middle mouse button or with the left mouse button while holding down Ctrl.]]
    ) .. p(_
-[[If you hold CTRL while building a road, flags will be placed automatically.
-If you hold CTRL while removing a road, all flags up to the first junction are
+[[If you hold Ctrl while building a road, flags will be placed automatically.
+If you hold Ctrl while removing a road, all flags up to the first junction are
 removed.]]
    ) .. p(_
-[[You can skip confirmation windows for irreversible actions if you hold CTRL
+[[You can skip confirmation windows for irreversible actions if you hold Ctrl
 while clicking on the action button.]]
    ) .. h2(_
 [[Keyboard shortcuts (in-game)]]
    ) .. p(
-_"PAGEUP: increases game speed" .. "<br>"
-.. _"PAGEDOWN: decreases game speed" .. "<br>"
-.. _"PAUSE: pauses the game" .. "<br>"
-.. _"SPACE: toggles if building spaces are shown" .. "<br>"
+_" Page Up: increases game speed" .. "<br>"
+.. _" Page Down: decreases game speed" .. "<br>"
+.. _"Pause: pauses the game" .. "<br>"
+.. _"Space: toggles if building spaces are shown" .. "<br>"
 .. _"M: toggles minimap" .. "<br>"
 .. _"N: toggles messages (‘news’)" .. "<br>"
 .. _"C: toggles census" .. "<br>"
 .. _"S: toggles statistics" .. "<br>"
 .. _"I: toggles stock inventory" .. "<br>"
 .. _"O: toggles objectives" .. "<br>"
+.. _"B: toggles building statistics" .. "<br>"
 .. _"F: toggles fullscreen (if supported by the OS)" .. "<br>"
 .. _"Home: centers main mapview on starting location" .. "<br>"
-.. _"(CTRL+) 0-9: Remember and go to previously remembered locations" .. "<br>"
+.. _"(Ctrl +) 0-9: Remember and go to previously remembered locations" .. "<br>"
 .. _",: goes to the previous location" .. "<br>"
 .. _".: goes to the next location" .. "<br>"
 .. _"F6: shows the debug console (only in debug-builds)" .. "<br>"
-.. _"CTRL+F10: quits the game immediately" .. "<br>"
-.. _"CTRL+Leftclick: skips confirmation dialogs" .. "<br>"
-.. _"CTRL+F11: takes a screenshot"
+.. _"Ctrl + F10: quits the game immediately" .. "<br>"
+.. _"Ctrl + Leftclick: skips confirmation dialogs" .. "<br>"
+.. _"Ctrl + F11: takes a screenshot"
    ) .. p(_
 [[In the message window, the following additional shortcuts are available:]]
    ) .. p(
 _ "0: shows all messages" .. "<br>"
-.. _ "1: shows geologists' messages only" .. "<br>"
+.. _ "1: shows geologists’ messages only" .. "<br>"
 .. _ "2: shows economy messages only" .. "<br>"
 .. _ "3: shows seafaring messages only" .. "<br>"
 .. _ "4: shows warfare messages only" .. "<br>"
 .. _ "5: shows scenario messages only" .. "<br>"
 .. _ "G: jumps to the location corresponding to the current message" .. "<br>"
-.. _"DELETE: archives/restores the current message"
+.. _"Delete: archives/restores the current message"
    ) .. h2(_
 [[Online Help]]
-   ) .. p( _
-[[If you need documentation or help for Widelands or the Widelands Editor, be
-sure to visit our homepage. You can find an up to date online help in our Wiki
-and a detailed description of the tribe economies in our online encyclopedia.]]
+   ) .. p(_"A detailed description of the tribes’ economies is available in the in-game Tribal Encyclopedia." .. " " ..
+(_[[If you need more documentation or help for Widelands or the Widelands Editor, be sure to visit our homepage at %s. You can find online help in our Wiki there.]]):bformat(a("https://wl.widelands.org/"))
    ) .. h2(_
 [[Reporting Bugs]]
    ) .. p(_
 [[If you encounter a bug, please report it to our bugtracker:]]
-   ) .. p(
+   ) .. p(a(
 [[https://bugs.launchpad.net/widelands]]
-   ) .. p(_
+   )) .. p(_
 [[Please provide enough background information. Tell us:]]
    ) .. p(_
 [[- Detailed steps on how to trigger the bug, if possible.]]

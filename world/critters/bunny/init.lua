@@ -2,7 +2,7 @@ dirname = path.dirname(__file__)
 
 animations = {
    idle = {
-      pictures = { dirname .. "bunny_idle.png" },
+      pictures = path.list_files(dirname .. "bunny_idle.png"),
       hotspot = { 4, 9 },
    },
 }

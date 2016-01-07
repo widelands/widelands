@@ -61,16 +61,16 @@ private:
 // Thin wrapper around a OpenGL buffer object to ensure proper cleanup. Throws
 // on all errors. Also grows the server memory only when needed.
 template<typename T>
-class NewBuffer {
+class Buffer {
 public:
-	NewBuffer() : buffer_size_(0) {
+	Buffer() : buffer_size_(0) {
 		glGenBuffers(1, &object_);
 		if (!object_) {
 			throw wexception("Could not create GL program.");
 		}
 	}
 
-	~NewBuffer() {
+	~Buffer() {
 		if (object_) {
 			glDeleteBuffers(1, &object_);
 		}
@@ -97,7 +97,7 @@ private:
 	GLuint object_;
 	size_t buffer_size_;  // In number of elements.
 
-	DISALLOW_COPY_AND_ASSIGN(NewBuffer);
+	DISALLOW_COPY_AND_ASSIGN(Buffer);
 };
 
 // Calls glVertexAttribPointer.

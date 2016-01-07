@@ -2,31 +2,99 @@
 # Copyright (C) 2005-2015 Widelands Development Team
 # 
 # Translators:
+# Lyubomir Vasilev, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-03-06 16:48+0000\n"
-"PO-Revision-Date: 2015-03-06 16:49+0000\n"
-"Last-Translator: GunChleoc\n"
-"Language-Team: Bulgarian (http://www.transifex.com/projects/p/widelands/language/bg/)\n"
+"POT-Creation-Date: 2015-12-03 09:55+0000\n"
+"PO-Revision-Date: 2015-12-03 10:11+0000\n"
+"Last-Translator: Lyubomir Vasilev\n"
+"Language-Team: Bulgarian (http://www.transifex.com/widelands/widelands/language/bg/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: bg\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
+#: ../../txts/AUTHORS.lua:40
+msgid "Authors"
+msgstr "Автори"
+
+#: ../../txts/AUTHORS.lua:42
+msgid "Widelands Development Team"
+msgstr "Екипът по разработката на Widelands"
+
+#: ../../txts/LICENSE.lua:18
+msgid "License"
+msgstr "Лиценз"
+
+#: ../../txts/LICENSE.lua:20
+msgid "Licensing information for Widelands"
+msgstr "Информация за лиценза на Widelands"
+
+#: ../../txts/LICENSE.lua:23
+msgid "Copyright 2002 - 2015 by the Widelands Development Team."
+msgstr "Copyright 2002 - 2015 от екипа по разработката на Widelands"
+
+#: ../../txts/LICENSE.lua:24
+msgid ""
+"This game is Free and Open Source (FOSS), licensed under the GNU General "
+"Public License (GPL) V2.0."
+msgstr "Тази игра е безплатна и с отворен код (FOSS), лицензирана под Общия публичен лиценз на ГНУ (GPL) версия 2.0."
+
+#: ../../txts/LICENSE.lua:26
+msgid ""
+"You can find more information on FOSS and the GPL by visiting the following "
+"webpage:  %s"
+msgstr "Можете да намерите повече информация относно софтуера с отворен код и ОПЛ като посетите следната страница: %s"
+
+#: ../../txts/LICENSE.lua:27
+msgid ""
+"You can find the full text of the license there as well as further "
+"information about its philosophy and the legal implications."
+msgstr "Там ще откриете пълния текст на лиценза, както и още информация относно философията му и правните подробности."
+
+#: ../../txts/LICENSE.lua:29
+msgid "We are also shipping the GPL as a text document with Widelands itself."
+msgstr "Ние сме включили ОПЛ като текстов документ в Widelands."
+
+#: ../../txts/LICENSE.lua:30
+msgid ""
+"On Linux, you can find the file called COPYING in the root of the source or "
+"standalone binary package, or in the installation directory (like ‘%1%’)."
+msgstr "На Линукс, можете да откриете файла COPYING в главната папка на двоичния пакет или този с изходния код, или в инсталационната папка (напр. „%1%“)."
+
+#: ../../txts/LICENSE.lua:31
+msgid ""
+"On Windows, you can find the file called COPYING.txt in the installation "
+"folder, and the Widelands Start menu entry provides a link to this file."
+msgstr "На Windows, можете да откриете файла COPYING.txt в инсталационната папка. В папката на Widelands в менюто Старт също има връзка към този файл."
+
+#: ../../txts/LICENSE.lua:32
+msgid ""
+"On MacOS, you can find the file called COPYING in the archive you downloaded"
+" from the website."
+msgstr "На MacOS, можете да откриете файла COPYING в архива, който сте изтеглили от уеб сайта."
+
+#: ../../txts/LICENSE.lua:34
+msgid ""
+"This game comes as-is and without any warranty. For more information and "
+"support you can find us at %1% (Website, Wiki, Forum for questions or "
+"general support), %2% (Bugtracker), and %3% (Translations)."
+msgstr "Тази игра се предоставя във вида, в който е и без никакви гаранции. За повече информация и поддръжка, можете да ни откриете на %1% (уеб сайт, уики, форум за въпроси и обща поддръжка), %2% (система за докладване на грешки) и %3% (преводи)."
+
 #: ../../txts/README.lua:6
 msgid "README"
-msgstr ""
+msgstr "ПРОЧЕТИ МЕ"
 
 #: ../../txts/README.lua:13
 msgid "an open source strategy game"
-msgstr ""
+msgstr "стратегическа игра с отворен код"
 
-#: ../../txts/README.lua:17 ../../txts/editor_readme:7
+#: ../../txts/README.lua:17 ../../txts/editor_readme.lua:10
 msgid "Introduction"
-msgstr ""
+msgstr "Въведение"
 
 #: ../../txts/README.lua:19
 msgid ""
@@ -34,7 +102,7 @@ msgid ""
 "campaigns and a multiplayer mode. The game was inspired by Settlers II but has\n"
 "significantly more variety and depth to it. Still, it is easy to get started\n"
 "through playable tutorials."
-msgstr ""
+msgstr "Widelands е безплатна игра от тип стратегия в реално време и е с отворен\nкод. Тя включва кампании за самостоятелна игра и режим за игра в мрежа.\nИграта е вдъхновена от Settlers II, но има значително повече разнообразие\nи дълбочина. Въпреки това е лесно да навлезете чрез игрите за обучение."
 
 #: ../../txts/README.lua:24
 msgid ""
@@ -43,21 +111,21 @@ msgid ""
 "inhabitants. On your way towards this goal, you will have to establish an\n"
 "economic infrastructure, explore the land around you and face rivaling\n"
 "tribes."
-msgstr ""
+msgstr "В тази игра Вие започвате с малка площ и само няколко ресурса.\nИзползвайки ги, ще създадете империя с хиляди жители население.\nПо пътя към тази цел ще трябва да създадете икономическа инфраструктура,\nда проучите земята около Вас и да се изправите срещу съперничещите\nплемена."
 
 #: ../../txts/README.lua:30
 msgid "Check out the Widelands project homepage:"
-msgstr ""
+msgstr "Вижте страницата на проекта „Widelands“:"
 
 #: ../../txts/README.lua:34
 msgid ""
 "Widelands is licensed under the GNU General Public License (GPL). For more\n"
 "information, see the file ‘COPYING’."
-msgstr ""
+msgstr "Widelands е лицензирана под Общия публичен лиценз на ГНУ (GPL). За повече \nинформация, погледнете файла „COPYING“."
 
 #: ../../txts/README.lua:37
 msgid "Status"
-msgstr ""
+msgstr "Състояние"
 
 #: ../../txts/README.lua:39
 msgid ""
@@ -66,225 +134,235 @@ msgid ""
 "all areas. If you are interested in contributing – be it by making graphics,\n"
 "fixing bugs or adding new features, translating the game into your language or\n"
 "creating new maps – get in touch on our homepage."
-msgstr ""
+msgstr "Widelands е почти завършена и е много забавна за самостоятелна игри и дори\nповече за мрежова игра. И все пак, винаги има какво да се добави във\nвсички области. Ако имате интерес да помогнете – било то с графики,\nпоправки или добавяне на нови функционалности, превод на играта или\nсъздаване на нови карти – свържете се с нас чрез нашия уеб сайт."
 
 #: ../../txts/README.lua:45
 msgid "General game control"
-msgstr ""
+msgstr "Общо управление на играта"
 
 #: ../../txts/README.lua:47
 msgid ""
-"To close an open window, right-click on it. To minimize/maximize a window, click\n"
-"on the title bar of that window either with the middle mouse button or with the left\n"
-"mouse button while holding down CTRL."
-msgstr ""
+"To close an open window, right-click on it. To minimize/maximize a window, "
+"click on it with the middle mouse button or with the left mouse button while"
+" holding down Ctrl."
+msgstr "За да затворите прозорец, щракнете в него с десен бутон. За да намалите/увеличите\nпрозорец, щракнете върху него със средния бутон на мишката или с левия такъв,\nдокато натискате бутона Контрол."
 
-#: ../../txts/README.lua:51
+#: ../../txts/README.lua:49
 msgid ""
-"If you hold CTRL while building a road, flags will be placed automatically.\n"
-"If you hold CTRL while removing a road, all flags up to the first junction are\n"
+"If you hold Ctrl while building a road, flags will be placed automatically.\n"
+"If you hold Ctrl while removing a road, all flags up to the first junction are\n"
 "removed."
-msgstr ""
+msgstr "Ако задържите Контрол, докато строите път, флаговете ще се поставят автоматично.\nАко задържите Контрол, докато премахвате път, всички флагове до първото кръстовище ще\nбъдат премахнати."
 
-#: ../../txts/README.lua:55
+#: ../../txts/README.lua:53
 msgid ""
-"You can skip confirmation windows for irreversible actions if you hold CTRL\n"
+"You can skip confirmation windows for irreversible actions if you hold Ctrl\n"
 "while clicking on the action button."
-msgstr ""
+msgstr "Можете да пропуснете прозорците за потвърждение на необратимите действия,\nако задържите Контрол, докато натискате бутона за съответното действие."
+
+#: ../../txts/README.lua:56
+msgid "Keyboard shortcuts (in-game)"
+msgstr "Клавиши и комбинации (в игра)"
 
 #: ../../txts/README.lua:58
-msgid "Keyboard shortcuts (in-game)"
-msgstr ""
+msgid " Page Up: increases game speed"
+msgstr "Page Up: увеличава скоростта на играта"
+
+#: ../../txts/README.lua:59
+msgid " Page Down: decreases game speed"
+msgstr "Page Down: намалява скоростта на играта"
 
 #: ../../txts/README.lua:60
-msgid "PAGEUP: increases game speed"
-msgstr ""
+msgid "Pause: pauses the game"
+msgstr "Pause: спира играта на пауза"
 
 #: ../../txts/README.lua:61
-msgid "PAGEDOWN: decreases game speed"
-msgstr ""
+msgid "Space: toggles if building spaces are shown"
+msgstr "Интервал: превключва показването на местата за строеж"
 
 #: ../../txts/README.lua:62
-msgid "PAUSE: pauses the game"
-msgstr ""
-
-#: ../../txts/README.lua:63 ../../txts/editor_readme:21
-msgid "SPACE: toggles if building spaces are shown"
-msgstr ""
-
-#: ../../txts/README.lua:64 ../../txts/editor_readme:29
 msgid "M: toggles minimap"
-msgstr ""
+msgstr "M: превключва миникартата"
+
+#: ../../txts/README.lua:63
+msgid "N: toggles messages (‘news’)"
+msgstr "N: превключва съобщенията („новините“)"
+
+#: ../../txts/README.lua:64
+msgid "C: toggles census"
+msgstr "C: превключва преброяването"
 
 #: ../../txts/README.lua:65
-msgid "N: toggles messages (‘news’)"
-msgstr ""
+msgid "S: toggles statistics"
+msgstr "S: превключва статистиките"
 
-#: ../../txts/README.lua:66 ../../txts/editor_readme:23
-msgid "C: toggles census"
-msgstr ""
+#: ../../txts/README.lua:66
+msgid "I: toggles stock inventory"
+msgstr "I: превключва инвентара на запасите"
 
 #: ../../txts/README.lua:67
-msgid "S: toggles statistics"
-msgstr ""
+msgid "O: toggles objectives"
+msgstr "O: превключва задачите"
 
 #: ../../txts/README.lua:68
-msgid "I: toggles stock inventory"
-msgstr ""
+msgid "B: toggles building statistics"
+msgstr "B: превключва статистиките за сградите"
 
 #: ../../txts/README.lua:69
-msgid "O: toggles objectives"
-msgstr ""
+msgid "F: toggles fullscreen (if supported by the OS)"
+msgstr "F: превключва режима на цял екран (ако това се поддържа от ОС)"
 
 #: ../../txts/README.lua:70
-msgid "F: toggles fullscreen (if supported by the OS)"
-msgstr ""
+msgid "Home: centers main mapview on starting location"
+msgstr "HOME: центрира картата върху началната позиция"
 
 #: ../../txts/README.lua:71
-msgid "Home: centers main mapview on starting location"
-msgstr ""
+msgid "(Ctrl +) 0-9: Remember and go to previously remembered locations"
+msgstr "(Контрол +) 0-9: запомня и Ви връща към запомнените местоположения"
 
 #: ../../txts/README.lua:72
-msgid "(CTRL+) 0-9: Remember and go to previously remembered locations"
-msgstr ""
+msgid ",: goes to the previous location"
+msgstr ",: към предходното местоположение"
 
 #: ../../txts/README.lua:73
-msgid ",: goes to the previous location"
-msgstr ""
+msgid ".: goes to the next location"
+msgstr ".: към следващото местоположение"
 
 #: ../../txts/README.lua:74
-msgid ".: goes to the next location"
-msgstr ""
+msgid "F6: shows the debug console (only in debug-builds)"
+msgstr "F6: показва конзолата за отстраняване на грешки (само ако играта е компилирана в такъв режим)"
 
 #: ../../txts/README.lua:75
-msgid "F6: shows the debug console (only in debug-builds)"
-msgstr ""
+msgid "Ctrl + F10: quits the game immediately"
+msgstr "Контрол + F10: излиза от играта моментално"
 
 #: ../../txts/README.lua:76
-msgid "CTRL+F10: quits the game immediately"
-msgstr ""
+msgid "Ctrl + Leftclick: skips confirmation dialogs"
+msgstr "Контрол + щракване с левия бутон: пропуска прозорците за потвърждение"
 
 #: ../../txts/README.lua:77
-msgid "CTRL+Leftclick: skips confirmation dialogs"
-msgstr ""
+msgid "Ctrl + F11: takes a screenshot"
+msgstr "Контрол + F11: прави снимка на екрана"
 
-#: ../../txts/README.lua:78
-msgid "CTRL+F11: takes a screenshot"
-msgstr ""
-
-#: ../../txts/README.lua:80
+#: ../../txts/README.lua:79
 msgid ""
 "In the message window, the following additional shortcuts are available:"
-msgstr ""
+msgstr "Следните допълнителни клавиши могат да бъдат използвани в прозореца със съобщения:"
+
+#: ../../txts/README.lua:81
+msgid "0: shows all messages"
+msgstr "0: показва всички съобщения"
 
 #: ../../txts/README.lua:82
-msgid "0: shows all messages"
-msgstr ""
+msgid "1: shows geologists’ messages only"
+msgstr "1: показва само съобщенията от геолозите"
 
 #: ../../txts/README.lua:83
-msgid "1: shows geologists' messages only"
-msgstr ""
+msgid "2: shows economy messages only"
+msgstr "2: показва само съобщенията за икономиката"
 
 #: ../../txts/README.lua:84
-msgid "2: shows economy messages only"
-msgstr ""
+msgid "3: shows seafaring messages only"
+msgstr "3: показва само съобщенията за мореплаването"
 
 #: ../../txts/README.lua:85
-msgid "3: shows seafaring messages only"
-msgstr ""
+msgid "4: shows warfare messages only"
+msgstr "4: показва само военните съобщения"
 
 #: ../../txts/README.lua:86
-msgid "4: shows warfare messages only"
-msgstr ""
+msgid "5: shows scenario messages only"
+msgstr "5: показва само съобщенията за сценария"
 
 #: ../../txts/README.lua:87
-msgid "5: shows scenario messages only"
-msgstr ""
+msgid "G: jumps to the location corresponding to the current message"
+msgstr "G: преминава към местоположението, свързано с текущото съобщение"
 
 #: ../../txts/README.lua:88
-msgid "G: jumps to the location corresponding to the current message"
-msgstr ""
+msgid "Delete: archives/restores the current message"
+msgstr "De.ete: архивира/възстановява текущото съобщение"
 
-#: ../../txts/README.lua:89
-msgid "DELETE: archives/restores the current message"
-msgstr ""
+#: ../../txts/README.lua:90
+msgid "Online Help"
+msgstr "Помощ в Интернет"
 
 #: ../../txts/README.lua:91
-msgid "Online Help"
-msgstr ""
-
-#: ../../txts/README.lua:93
 msgid ""
-"If you need documentation or help for Widelands or the Widelands Editor, be\n"
-"sure to visit our homepage. You can find an up to date online help in our Wiki\n"
-"and a detailed description of the tribe economies in our online encyclopedia."
-msgstr ""
+"A detailed description of the tribes’ economies is available in the in-game "
+"Tribal Encyclopedia."
+msgstr "Можете да намерите подробно описание на всяка от икономиките на племената в Енциклопедията на племената, достъпна от играта."
 
-#: ../../txts/README.lua:97
+#: ../../txts/README.lua:92
+msgid ""
+"If you need more documentation or help for Widelands or the Widelands "
+"Editor, be sure to visit our homepage at %s. You can find online help in our"
+" Wiki there."
+msgstr "Ако имате нужда от повече документация или помощ за Widelands или редактора, посетете нашия уеб сайт: %s. Можете да получите повече информация от нашето уики там."
+
+#: ../../txts/README.lua:94
 msgid "Reporting Bugs"
-msgstr ""
+msgstr "Докладване на грешки"
 
-#: ../../txts/README.lua:99
+#: ../../txts/README.lua:96
 msgid "If you encounter a bug, please report it to our bugtracker:"
-msgstr ""
+msgstr "Ако срещнете проблем, моля докладвайте го в нашата система за грешки:"
 
-#: ../../txts/README.lua:103
+#: ../../txts/README.lua:100
 msgid "Please provide enough background information. Tell us:"
-msgstr ""
+msgstr "Моля, осигурете достатъчно информация. Кажете ни:"
 
-#: ../../txts/README.lua:105
+#: ../../txts/README.lua:102
 msgid "- Detailed steps on how to trigger the bug, if possible."
-msgstr ""
+msgstr "– как да възпроизведем проблема, стъпка по стъпка, колкото е възможно по-подробно;"
 
-#: ../../txts/README.lua:107
+#: ../../txts/README.lua:104
 msgid ""
 "- What you expected to happen when performing the steps and what actually "
 "happened."
-msgstr ""
+msgstr "– какво очаквате да се случи, след като бъдат изпълнени стъпките, и какво се е случило всъщност;"
 
-#: ../../txts/README.lua:109
+#: ../../txts/README.lua:106
 msgid ""
 "- Which version of Widelands you are running (i.e. either the build number or\n"
 "the revision number if you are running a development version or a daily build.)"
-msgstr ""
+msgstr "– коя версия на Widelands използвате (напр. номера на компилацията или\nна ревизията, ако използвате версия за разработчици или ежедневна компилация);"
 
-#: ../../txts/README.lua:112
+#: ../../txts/README.lua:109
 msgid ""
 "- Please also include which operating system you are running Widelands on as\n"
 "some bugs can be platform specific."
-msgstr ""
+msgstr "– моля, отбележете каква операционна система използвате, тъй като някои\nгрешки може да се проявяват само на дадена система;"
 
-#: ../../txts/README.lua:115
+#: ../../txts/README.lua:112
 msgid "- Which map you were playing when the bug occurred."
-msgstr ""
+msgstr "– на коя карта играехте, когато проблемът се появи;"
 
-#: ../../txts/README.lua:117
+#: ../../txts/README.lua:114
 msgid ""
 "- If the bug concerns something not being displayed correctly or if it helps\n"
 "demonstrate the issue, please include one or more screenshots."
-msgstr ""
+msgstr "– ако проблемът е свързан с нещо, което не се показва правилно или ако\nсмятате, че ще е от полза, моля, добавете една или повече снимки на екрана;"
 
-#: ../../txts/README.lua:120
+#: ../../txts/README.lua:117
 msgid ""
 "- If you have a save game or replay demonstrating the issue (for instance\n"
 "crashes where it can be hard to tell exactly what is triggering it), please\n"
 "include that too. For more information, see the section on Replays below."
-msgstr ""
+msgstr "– ако имате запазена игра или повторение, където проблемът се вижда\n(например при сривове, за които е трудно да се определи причината), моля,\nвключете и това. За повече информация, вижте раздела за повторенията по-долу."
 
-#: ../../txts/README.lua:124
+#: ../../txts/README.lua:121
 msgid "Replays"
-msgstr ""
+msgstr "Повторения"
 
-#: ../../txts/README.lua:126
+#: ../../txts/README.lua:123
 msgid ""
 "Widelands records every game you play in two files. One of these files has a\n"
 ".wrpl.wgf extension and contains an initial savegame. The other file has a\n"
 ".wrpl extension and contains all commands that were issued by all players, such\n"
 "as building a road or attacking an enemy. The rest of the filenames will tell\n"
 "you the time you started the game."
-msgstr ""
+msgstr "Widelands записва всяка игра, която играете, в два файла. Единият има\nразширение .wrpl.wgf и съдържа първоначалната запазена игра. Другият има\nразширение .wrpl и съдържа всички команди, издадени от играча, като\nнапример строеж на път или нападение на враг. Останалата част от имената\nпоказва датата и часа, когато играта е започната."
 
-#: ../../txts/README.lua:132
+#: ../../txts/README.lua:129
 msgid ""
 "Using the Watch Replay option in the main menu, a previously played game will\n"
 "be precisely reconstructed for you to watch. Note, however, that even small\n"
@@ -292,516 +370,469 @@ msgid ""
 "to become incompatible and to ‘go out of sync’. This is similar to how network\n"
 "games will suffer from desynchronization problems if one of the players has a\n"
 "different version of the game."
-msgstr ""
+msgstr "Чрез бутона „Гледане на повторение“ в главното меню можете да гледате вече\nизиграна игра, която ще бъде пресъздадена за Вас. Имайте предвид, че дори\nдребни промени във файловете с данни на играта или изпълнимия файл може\nда направят повторението несъвместимо или „несинхронизирано“. Това е\nсъщият проблем, от който страдат мрежовите игри, ако един от играчите има\nразлична версия на играта."
 
-#: ../../txts/README.lua:139
+#: ../../txts/README.lua:136
 msgid ""
 "Replays are a very useful tool to find bugs in the game logic, so they\n"
 "can be useful as attachments to bug reports. The replay files are saved in the\n"
 "~/.widelands/replays directory on Linux and Mac OS X. On Windows,\n"
 "they are in the ‘replays’ subdirectory of your Widelands installation."
-msgstr ""
+msgstr "Повторенията са много полезно средство за откриване на грешки в играта, \nтака че понякога е добре да бъдат прикачени към докладите за грешки. Файловете\nс повторенията се съхраняват в папката ~/.widelands/replays directory на Линукс\nи Mac OS X. На Windows, те са в подпапката „replays“ в инсталационата папка на Widelands."
 
-#: ../../txts/developers:1
-msgid "Authors"
-msgstr ""
-
-#: ../../txts/developers:3
-msgid "Widelands Development Team"
-msgstr ""
-
-#: ../../txts/developers:8
-msgid "Chieftain"
-msgstr ""
-
-#: ../../txts/developers:14
-msgid "Elders"
-msgstr ""
-
-#: ../../txts/developers:18 ../../txts/developers:366
-msgid "Graphics"
-msgstr ""
-
-#: ../../txts/developers:23 ../../txts/developers:359
-msgid "Homepage"
-msgstr ""
-
-#: ../../txts/developers:28 ../../txts/developers:373
-msgid "Sound"
-msgstr ""
-
-#: ../../txts/developers:33
-msgid "Tongues"
-msgstr ""
-
-#: ../../txts/developers:38
-msgid "Coders"
-msgstr ""
-
-#: ../../txts/developers:96
-msgid "Graphicians"
-msgstr ""
-
-#: ../../txts/developers:126
-msgid "Musicians"
-msgstr ""
-
-#: ../../txts/developers:138
-msgid "Sound Effects"
-msgstr ""
-
-#: ../../txts/developers:148
-msgid "Maps and Missions"
-msgstr ""
-
-#: ../../txts/developers:169
-msgid "Campaign Story"
-msgstr ""
-
-#: ../../txts/developers:172
-msgid "Barbarian"
-msgstr ""
-
-#: ../../txts/developers:178
-msgid "Empire"
-msgstr ""
-
-#: ../../txts/developers:182
+#: ../../txts/developers.lua:3
 msgid "Atlantean"
-msgstr ""
+msgstr "Атландци"
 
-#: ../../txts/developers:189
-msgid "Translators"
-msgstr ""
+#: ../../txts/developers.lua:3
+msgid "Barbarian"
+msgstr "Варвари"
 
-#: ../../txts/developers:192
-msgid ""
-"NOTE: this list holds people that translated Widelands before we moved to "
-"launchpad.net. "
-msgstr ""
+#: ../../txts/developers.lua:3
+msgid "Campaign Story"
+msgstr "Кампании и история"
 
-#: ../../txts/developers:193
-msgid ""
-"See https://translations.launchpad.net/widelands for a list of people that "
-"helped to translate Widelands via launchpad.net."
-msgstr ""
+#: ../../txts/developers.lua:3
+msgid "Chieftain"
+msgstr "Вожд"
 
-#: ../../txts/developers:197
-msgid "Czech"
-msgstr ""
+#: ../../txts/developers.lua:3
+msgid "Coders"
+msgstr "Програмисти"
 
-#: ../../txts/developers:204
-msgid "Dansk"
-msgstr ""
+#: ../../txts/developers.lua:3
+msgid "Debian Linux"
+msgstr "Debian Linux"
 
-#: ../../txts/developers:210
-msgid "Dutch"
-msgstr ""
-
-#: ../../txts/developers:217
-msgid "Finnish"
-msgstr ""
-
-#: ../../txts/developers:223
-msgid "French"
-msgstr ""
-
-#: ../../txts/developers:230
-msgid "Galician"
-msgstr ""
-
-#: ../../txts/developers:235
-msgid "German"
-msgstr ""
-
-#: ../../txts/developers:247
-msgid "Hebrew"
-msgstr ""
-
-#: ../../txts/developers:252
-msgid "Hungarian"
-msgstr ""
-
-#: ../../txts/developers:257
-msgid "Italian"
-msgstr ""
-
-#: ../../txts/developers:262
-msgid "Polish"
-msgstr ""
-
-#: ../../txts/developers:270
-msgid "Russian"
-msgstr ""
-
-#: ../../txts/developers:275
-msgid "Slovak"
-msgstr ""
-
-#: ../../txts/developers:280
-msgid "Spanish"
-msgstr ""
-
-#: ../../txts/developers:285
-msgid "Swedish"
-msgstr ""
-
-#: ../../txts/developers:292
-msgid "Packagers"
-msgstr ""
-
-#: ../../txts/developers:296
-msgid "Linux Distributions"
-msgstr ""
-
-#: ../../txts/developers:307
-msgid "Other Unix Distributions"
-msgstr ""
-
-#: ../../txts/developers:318
-msgid "Non Unix Distributions"
-msgstr ""
-
-#: ../../txts/developers:330
-msgid "Homepage Coders"
-msgstr ""
-
-#: ../../txts/developers:340
+#: ../../txts/developers.lua:3
 msgid "Documentation, Help and Wiki"
-msgstr ""
+msgstr "Документация, помощ и уики"
 
-#: ../../txts/developers:355
-msgid "Former elders"
-msgstr ""
+#: ../../txts/developers.lua:3
+msgid "Elders"
+msgstr "Старейшини"
 
-#: ../../txts/developers:378
-msgid "Translation"
-msgstr ""
+#: ../../txts/developers.lua:3
+msgid "Empire"
+msgstr "Империя"
 
-#: ../../txts/developers:385
+#: ../../txts/developers.lua:3
+msgid "Fedora Linux"
+msgstr "Fedora Linux"
+
+#: ../../txts/developers.lua:3
+msgid "Former Elders"
+msgstr "Предишни старейшини"
+
+#: ../../txts/developers.lua:3
+msgid "FreeBSD"
+msgstr "FreeBSD"
+
+#: ../../txts/developers.lua:3
+msgid "Graphicians"
+msgstr "Художници"
+
+#: ../../txts/developers.lua:3 ../../txts/developers.lua:3
+msgid "Graphics"
+msgstr "Графика"
+
+#: ../../txts/developers.lua:3 ../../txts/developers.lua:3
+#: ../../txts/developers.lua:3
+msgid "Homepage"
+msgstr "Уеб сайт"
+
+#: ../../txts/developers.lua:3
+msgid "Homepage Coders"
+msgstr "Програмисти на уеб сайта"
+
+#: ../../txts/developers.lua:3
+msgid "Mac OS X"
+msgstr "Mac OS X"
+
+#: ../../txts/developers.lua:3
+msgid "Mandriva Linux"
+msgstr "Mandriva Linux"
+
+#: ../../txts/developers.lua:3
+msgid "Maps and Missions"
+msgstr "Карти и мисии"
+
+#: ../../txts/developers.lua:3
+msgid "Musicians"
+msgstr "Музиканти"
+
+#: ../../txts/developers.lua:3
 msgid "Other"
-msgstr ""
+msgstr "Други"
 
-#: ../../txts/editor_readme:1
+#: ../../txts/developers.lua:3
+msgid "Packagers"
+msgstr "Пакетиране"
+
+#: ../../txts/developers.lua:3 ../../txts/developers.lua:3
+msgid "Sound"
+msgstr "Звук"
+
+#: ../../txts/developers.lua:3
+msgid "Sound Effects"
+msgstr "Звукови ефекти"
+
+#: ../../txts/developers.lua:3
+msgid "Tongues"
+msgstr "Езици"
+
+#: ../../txts/developers.lua:3
+msgid "Translation"
+msgstr "Превод"
+
+#: ../../txts/developers.lua:3
+msgid "Translators"
+msgstr "Преводачи"
+
+#: ../../txts/developers.lua:3
+msgid "Windows"
+msgstr "Windows"
+
+#: ../../txts/developers.lua:3
+msgid "ZetaOS"
+msgstr "ZetaOS"
+
+#: ../../txts/editor_readme.lua:6
 msgid "README for the Widelands Editor"
-msgstr ""
+msgstr "ПРОЧЕТИ МЕ за редактора на Widelands"
 
-#: ../../txts/editor_readme:4
-msgid "README for the Editor"
-msgstr ""
+#: ../../txts/editor_readme.lua:8
+msgid "The Widelands Editor"
+msgstr "Редакторът на Widelands"
 
-#: ../../txts/editor_readme:10
+#: ../../txts/editor_readme.lua:12
 msgid ""
-"This Editor is intended for players who would like to design their own maps "
-"to use with Widelands.<br>As you can see, this Editor is heavy work in "
-"progress and as the Editor becomes better and better, this text will also "
-"get longer and more complete."
-msgstr ""
+"This editor is intended for players who would like to design their own maps "
+"to use with Widelands."
+msgstr "Този редактор е предназначен за играчите, които биха искали да проектират свои собствени карти за Widelands."
 
-#: ../../txts/editor_readme:12
-msgid "Please have a look at our enduser manuals on our wiki pages at:"
-msgstr ""
+#: ../../txts/editor_readme.lua:13
+msgid ""
+"As you can see, this editor is heavy work in progress and as the editor "
+"becomes better and better, this text will also get longer and more complete."
+msgstr "Както виждате, редакторът е в процес на разработка и с развитието му този текст ще става все по-дълъг."
 
-#: ../../txts/editor_readme:14
+#: ../../txts/editor_readme.lua:14
+msgid "Please have a look at our enduser manuals on our wiki pages at: %s"
+msgstr "Моля, погледнете ръководствата ни за крайния потребител на страниците на нашето уики тук: %s"
+
+#: ../../txts/editor_readme.lua:15
 msgid ""
 "Those pages might be more complete and up to date than this file, and you "
 "will also find a short tutorial about building a map there."
-msgstr ""
+msgstr "Тези страници може да са по-завършени и актуални от този файл, а и там ще намерите кратко обяснение относно това как се създава карта."
 
-#: ../../txts/editor_readme:18
+#: ../../txts/editor_readme.lua:17
 msgid "Keyboard shortcuts"
-msgstr ""
+msgstr "Клавиши и комбинации"
 
-#: ../../txts/editor_readme:25
-msgid "F: toggles fullscreen"
-msgstr ""
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:21
+msgid "Space:"
+msgstr "Интервал:"
 
-#: ../../txts/editor_readme:27
-msgid "H: toggles main menu"
-msgstr ""
+#: ../../txts/editor_readme.lua:21
+msgid "toggles if building spaces are shown"
+msgstr "превключва показването на местата за строеж"
 
-#: ../../txts/editor_readme:31
-msgid "P: toggles player menu"
-msgstr ""
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:23
+msgid "C:"
+msgstr "C:"
 
-#: ../../txts/editor_readme:33
-msgid "T: toggles tools menu"
-msgstr ""
+#: ../../txts/editor_readme.lua:23
+msgid "toggles census"
+msgstr "превключва преброяването"
 
-#: ../../txts/editor_readme:35
-msgid "I: activates information tool"
-msgstr ""
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:25
+msgid "F:"
+msgstr "F:"
 
-#: ../../txts/editor_readme:37
-msgid "CTRL+L: load map"
-msgstr ""
+#: ../../txts/editor_readme.lua:25
+msgid "toggles fullscreen"
+msgstr "превключва режима на цял екран"
 
-#: ../../txts/editor_readme:39
-msgid "CTRL+S: save map"
-msgstr ""
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:27
+msgid "H:"
+msgstr "H:"
 
-#: ../../txts/editor_readme:41
-msgid "1-0: changes tool size"
-msgstr ""
+#: ../../txts/editor_readme.lua:27
+msgid "toggles main menu"
+msgstr "превключва главното меню"
 
-#: ../../txts/editor_readme:43
-msgid "SHIFT (Hold): selects first alternative tool while pressed"
-msgstr ""
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:29
+msgid "M:"
+msgstr "M:"
 
-#: ../../txts/editor_readme:45
-msgid "ALT (Hold): Selects second alternative tool while pressed"
-msgstr ""
+#: ../../txts/editor_readme.lua:29
+msgid "toggles minimap"
+msgstr "превключва миникартата"
 
-#: ../../txts/license:1
-msgid "License"
-msgstr ""
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:31
+msgid "P:"
+msgstr "P:"
 
-#: ../../txts/license:4
-msgid "Licensing information for Widelands"
-msgstr ""
+#: ../../txts/editor_readme.lua:31
+msgid "toggles player menu"
+msgstr "превключва менюто за играча"
 
-#: ../../txts/license:7
-msgid "Copyright 2002 - 2015 by the Widelands Development Team."
-msgstr ""
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:33
+msgid "T:"
+msgstr "T:"
 
-#: ../../txts/license:9
-msgid ""
-"This game is Free and Open Source (FOSS), licensed under the GNU General "
-"Public License (GPL) V2.0."
-msgstr ""
+#: ../../txts/editor_readme.lua:33
+msgid "toggles tools menu"
+msgstr "превключва менюто за инструменти"
 
-#: ../../txts/license:11
-msgid ""
-"You can find more information on FOSS and the GPL by visiting the following "
-"webpage: "
-msgstr ""
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:35
+msgid "I:"
+msgstr "I:"
 
-#: ../../txts/license:12
-msgid "http://www.gnu.org/licenses/old-licenses/gpl-2.0"
-msgstr ""
+#: ../../txts/editor_readme.lua:35
+msgid "activates information tool"
+msgstr "включва инструмента за информация"
 
-#: ../../txts/license:14
-msgid ""
-"You can find the full text of the license there as well as further "
-"information about its philosophy and the legal implications."
-msgstr ""
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:37
+msgid "Ctrl + L:"
+msgstr "Контрол + L:"
 
-#: ../../txts/license:16
-msgid "We are also shipping the GPL as a text document with Widelands itself."
-msgstr ""
+#: ../../txts/editor_readme.lua:37
+msgid "load map"
+msgstr "зарежда карта"
 
-#: ../../txts/license:18
-msgid ""
-"On Linux, you can find the file called COPYING in the root of the source or "
-"standalone binary package, or in the installation directory (like "
-"/usr/share/games/widelands)."
-msgstr ""
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:39
+msgid "Ctrl + S:"
+msgstr "Контрол + S:"
 
-#: ../../txts/license:19
-msgid ""
-"On Windows, you can find the file called COPYING.txt in the installation "
-"folder, and the Widelands Start menu entry provides a link to this file."
-msgstr ""
+#: ../../txts/editor_readme.lua:39
+msgid "save map"
+msgstr "запазва картата"
 
-#: ../../txts/license:20
-msgid ""
-"On MacOS, you can find the file called COPYING in the archive you downloaded"
-" from the website."
-msgstr ""
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:41
+msgid "1-0:"
+msgstr "1-0:"
 
-#: ../../txts/license:22
-msgid ""
-"This game comes as-is and without any warranty. For more information and "
-"support you can find us at http://wl.widelands.org (Website, Wiki, Forum for"
-" questions or general support) or https://launchpad.net/widelands "
-"(Bugtracker, Translations)."
-msgstr ""
+#: ../../txts/editor_readme.lua:41
+msgid "changes tool size"
+msgstr "променя размера на инструмента"
+
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:43
+msgid "Shift (Hold):"
+msgstr "Шифт (задържан):"
+
+#: ../../txts/editor_readme.lua:43
+msgid "selects first alternative tool while pressed"
+msgstr "избира първия алтернативен инструмент, докато е задържан"
+
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:45
+msgid "Alt (Hold):"
+msgstr "Алт (задържан):"
+
+#: ../../txts/editor_readme.lua:45
+msgid "Selects second alternative tool while pressed"
+msgstr "избира втория алтернативен инструмент, докато е задържан"
 
 #: ../../txts/tips/atlanteans.tip:2 ../../txts/tips/barbarians.tip:2
 #: ../../txts/tips/empire.tip:2
 msgid ""
-"Some buildings, such as the farm, have a very small working area. If the "
+"Some buildings, such as the farm, have a very small work area. If the "
 "building is surrounded with trees or roads, production will stop."
-msgstr ""
+msgstr "Някои сгради, като например фермата, имат много малка работната област. Ако сградата е заобиколена от дървета или пътища, производството ще спре."
 
 #: ../../txts/tips/atlanteans.tip:6
 msgid ""
 "Always build a forester’s and a fish breeder’s house, so you will not run "
 "out of logs or food."
-msgstr ""
+msgstr "Винаги стройте лесничейска и рибовъдска къщи, за да не останете без дървени трупи или храна."
 
 #: ../../txts/tips/barbarians.tip:6 ../../txts/tips/empire.tip:6
 msgid ""
 "Keep an eye on your fishers. After fish resources are exhausted in their "
-"working area, they will stop fishing."
-msgstr ""
+"work area, they will stop fishing."
+msgstr "Наглеждайте рибарите си. След като рибните ресурси в работната им област се изчерпат, те ще спрат да работят."
 
 #: ../../txts/tips/barbarians.tip:10
 msgid ""
 "Always build a ranger’s and a gamekeeper’s hut, so you will not run out of "
 "logs or food."
-msgstr ""
+msgstr "Винаги стройте лесничейска и дивечовъдска хижи, за да не останете без дървени трупи или храна."
 
 #: ../../txts/tips/editor.tip:2
 msgid ""
 "You can find general help for the editor as well as a short tutorial on our "
 "wiki at www.widelands.org"
-msgstr ""
+msgstr "Ще откриете помощ за редактора, както и кратко обучение в уикито ни на www.widelands.org"
 
 #: ../../txts/tips/editor.tip:6
 msgid ""
-"You can select multiple animal types if you hold down CTRL during selection."
+"You can select multiple animal types if you hold down Ctrl during selection."
 " If you then click on the map, an instance of one of the selected animal "
 "types will be placed."
-msgstr ""
+msgstr "Можете да изберете повече от един вид животни, ако задържите Контрол докато избирате. Ако след това щракнете върху картата, там ще бъде поставено животно от един от избраните видове."
 
 #: ../../txts/tips/editor.tip:10
 msgid ""
 "Just like with animals, you can also select multiple immovables or ground "
-"textures with CTRL + mouse click."
-msgstr ""
+"textures with Ctrl + mouse click."
+msgstr "Също както при животните, можете да избирате повече от един неподвижни обекти или теренни текстури чрез Контрол + щракване с ляв бутон."
 
 #: ../../txts/tips/editor.tip:14
 msgid ""
-"Holding down SHIFT switches the first alternative tool on. This tool is in "
+"Holding down Shift switches the first alternative tool on. This tool is in "
 "most cases the complete opposite of the normal tool (for example deletion of"
 " an object instead of placing one)."
-msgstr ""
+msgstr "Задържането на Шифт включва първия алтернативен инструмент. В повечето случаи, това е този, който върши обратното действие (напр. изтриване на обект, вместо поставяне)."
 
 #: ../../txts/tips/editor.tip:18
 msgid ""
-"Holding down ALT switches the second alternative tool on (if it exists)."
-msgstr ""
+"Holding down Alt switches the second alternative tool on (if it exists)."
+msgstr "Задържането на Алт включва втория алтернативен инструмент (ако има такъв)."
 
 #: ../../txts/tips/editor.tip:22
 msgid ""
 "The number keys (1 - 0) allow you to directly set the size of the selected "
 "area around your mouse cursor."
-msgstr ""
+msgstr "Клавишите с цифри (1 – 0) Ви позволяват да зададете конкретен размер на избраната област около курсора."
 
 #: ../../txts/tips/editor.tip:26
 msgid ""
-"SPACE key behaves like in normal game. It switches if building spaces are "
+"Space key behaves like in normal game. It switches if building spaces are "
 "shown on or off."
-msgstr ""
+msgstr "Клавишът Интервал работи по същия начин, като в игра. Той превключва показването на местата за строеж."
 
 #: ../../txts/tips/empire.tip:10
 msgid "Always build a forester’s house so you will not run out of logs."
-msgstr ""
+msgstr "Винаги стройте лесничейска къща, за да не останете без дървени трупи."
 
 #: ../../txts/tips/general_game.tip:2
 msgid ""
 "The building process will only start after a road is built to the "
 "construction site."
-msgstr ""
+msgstr "Строителният процес ще започне само след като до строителната площадка бъде построен път."
 
 #: ../../txts/tips/general_game.tip:6
 msgid ""
 "Be sure to send a geologist to survey sites before building a well or a "
 "mine."
-msgstr ""
+msgstr "Преди да построите кладенец или мина, задължително изпратете геолог да проучи района."
 
 #: ../../txts/tips/general_game.tip:10
 msgid ""
 "Your territory can be expanded by building various military buildings – "
-"Sentry, Fortress, Barracks, etc."
-msgstr ""
+"Sentry, Fortress, Blockhouse, etc."
+msgstr "Територията Ви може да бъде разширена чрез построяване на различни военни сгради – караулна, крепост, блокпост и т.н."
 
 #: ../../txts/tips/general_game.tip:14
 msgid "Miners will work only if supplied with food."
-msgstr ""
+msgstr "Миньорите работят само ако са снабдени с храна."
 
 #: ../../txts/tips/general_game.tip:18
 msgid ""
 "Split your roads into shorter sections by planting some flags. This will "
 "speed up transportation of your wares."
-msgstr ""
+msgstr "Разделяйте пътищата си на по-къси отсечки, като поставяте флагове. Това ще ускори преноса на стоките Ви."
 
 #: ../../txts/tips/general_game.tip:22
 msgid ""
 "Any further questions? Our FAQ, the wiki and of course our community forums "
 "can be found at www.widelands.org."
-msgstr ""
+msgstr "Имате още въпроси? Нашите ЧЗВ, уики и разбира се, обществените форуми, могат да бъдат намерени на www.widelands.org."
 
 #: ../../txts/tips/general_game.tip:26
 msgid ""
 "Use the priority buttons in building windows to adjust delivery of a "
 "specific ware."
-msgstr ""
+msgstr "Използвайте бутоните за приоритет в прозорците на сградите, за да настроите доставките на различните стоки."
 
 #: ../../txts/tips/general_game.tip:30
 msgid ""
 "Use the ‘configure economy’ menu to adjust the target quantity of wares. It "
 "can be accessed via the flag menu."
-msgstr ""
+msgstr "Използвайте менюто „Настройки на икономиката“, за да настроите целевите количества на стоките. Можете да го откриете в менютата на флаговете."
 
 #: ../../txts/tips/general_game.tip:34
 msgid ""
 "Manage your messages more efficiently: press ‘N’ for News to access the "
 "messages window, then use ‘G’ for Go To, and the Delete key to archive "
 "messages."
-msgstr ""
+msgstr "Управлявайте съобщенията си по-ефективно: натиснете „N“, за да отворите прозореца със съобщения, а след това „G“ за превключване и DELETE за архивиране на съобщения."
 
 #: ../../txts/tips/general_game.tip:38
 msgid ""
 "Use the ‘,’ (comma) and ‘.’ (period) keys to go back and forth between "
 "recently visited places in the world."
-msgstr ""
+msgstr "Използвайте клавишите „,“ (запетая) и „.“ (точка), за да преминавате назад и напред между наскоро посетените места в света."
 
 #: ../../txts/tips/general_game.tip:42
 msgid ""
 "Press Ctrl+(0-9) to store important locations, then press 0-9 to recall "
 "them."
-msgstr ""
+msgstr "Натиснете Контрол+(0-9), за да запазите важните местоположения, а след това 0-9, за да ги видите отново."
 
 #: ../../txts/tips/general_game.tip:46
 msgid ""
 "Removing a road while holding Ctrl lets you remove all flags up to the first"
 " junction."
-msgstr ""
+msgstr "Ако премахнете път, докато натискате Контрол, ще премахнете всички флагове до първото кръстовище."
 
 #: ../../txts/tips/general_game.tip:50
 msgid ""
 "New soldiers are recruited in the headquarters or a warehouse if all needed "
 "tools are available. Training sites are for improving their abilities."
-msgstr ""
+msgstr "Новите войници се появяват в щаба или в някой склад, ако всички нужни инструменти са налични. Тренировъчните сгради служат за подобряване на уменията им."
 
 #: ../../txts/tips/general_game.tip:54
 msgid ""
 "If you like to live dangerously, pressing Ctrl while clicking the enhance, "
 "dismantle or destroy building buttons will skip the confirmation."
-msgstr ""
+msgstr "Ако обичате да живеете на ръба, можете да задържите Ctrl докато натискате бутоните за надграждане, демонтиране или разрушаване на сграда. Така ще пропуснете въпроса за потвърждение."
 
 #: ../../txts/tips/general_game.tip:58
 msgid "Press I to quickly toggle the display of your stock inventory."
-msgstr ""
+msgstr "Натиснете I, за да превключите показването на инвентара на запасите си."
 
 #: ../../txts/tips/general_game.tip:62
 msgid ""
 "An economy consists of all buildings and flags connected by roads. The "
 "supplies and demands of buildings are handled in its economy."
-msgstr ""
+msgstr "Икономиката се състои от сгради и флагове, свързани с пътища. Търсеното и предлаганото от сградите се управлява от икономиката."
 
 #: ../../txts/tips/multiplayer.tip:2
 msgid ""
 "You can use the ’Page up’ and ‘Page down’ keys to adjust your desired speed "
 "– the real speed is then democratically set."
-msgstr ""
+msgstr "Можете да използвате клавишите „Page up“ и „Page down“, за да промените скоростта на играта – истинската скорост е избрана по демократичен начин."
 
 #: ../../txts/tips/multiplayer.tip:6
 msgid ""
 "You can use ‘/me’ at the beginning of a chatmessage: ‘/me is tired’ will be "
 "printed as ‘-> Nickname is tired’."
-msgstr ""
+msgstr "Можете да започнете чат съобщение с „/me“: „/me е уморен“. Така ще се изпише „-> Псевдоним е уморен“."
 
 #: ../../txts/tips/multiplayer.tip:10
 msgid ""
 "Use ‘@name’ at the beginning of a chat message to send it to only one "
 "player."
-msgstr ""
+msgstr "Започнете чат съобщение с „@name“, за да го изпратите само на един играч."
 
 #: ../../txts/tips/singleplayer.tip:2
 msgid ""
 "Our computer players are too boring? Visit our website at www.widelands.org "
 "and meet other players to play online."
-msgstr ""
+msgstr "Компютърните ни играчи са твърде скучни? Посетете уеб сайта ни на www.widelands.org, където можете да се срещнете с други играчи, с които да играете по Интернет."

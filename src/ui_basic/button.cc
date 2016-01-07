@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2011, 2015 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,8 +19,7 @@
 
 #include "ui_basic/button.h"
 
-#include "base/log.h"
-#include "graphic/font_handler.h"
+#include "graphic/font_handler1.h"
 #include "graphic/image.h"
 #include "graphic/rendertarget.h"
 #include "graphic/text_constants.h"
@@ -33,7 +32,7 @@ namespace UI {
 // Margin around image. The image will be scaled down to fit into this rectangle with preserving size.
 constexpr int kButtonImageMargin = 2;
 
-Button::Button //  for textual buttons
+Button::Button //  for textual buttons. If h = 0, h will resize according to the font's height.
 	(Panel * const parent,
 	 const std::string & name,
 	 int32_t const x, int32_t const y, uint32_t const w, uint32_t const h,
@@ -54,10 +53,14 @@ Button::Button //  for textual buttons
 	m_title         (title_text),
 	m_pic_background(bg_pic),
 	m_pic_custom    (nullptr),
-	m_textstyle(UI::TextStyle::ui_small()),
-	m_clr_down      (229, 161, 2),
-	m_draw_caret    (false)
+	m_clr_down      (229, 161, 2)
 {
+	// Automatically resize for font height and give it a margin.
+	if (h < 1) {
+		int new_height = UI::g_fh1->render(as_uifont("."))->height() + 4;
+		set_desired_size(w, new_height);
+		set_size(w, new_height);
+	}
 	set_thinks(false);
 }
 
@@ -68,7 +71,7 @@ Button::Button //  for pictorial buttons
 	 const Image* bg_pic,
 	 const Image* fg_pic,
 	 const std::string & tooltip_text,
-	 bool const _enabled, bool const flat)
+	 bool const _enabled, bool const flat, const bool keep_image_size)
 	:
 	NamedPanel      (parent, name, x, y, w, h, tooltip_text),
 	m_highlighted   (false),
@@ -77,13 +80,12 @@ Button::Button //  for pictorial buttons
 	m_enabled       (_enabled),
 	m_repeating     (false),
 	m_flat          (flat),
+	m_keep_image_size(keep_image_size),
 	m_draw_flat_background(false),
 	m_time_nextact  (0),
 	m_pic_background(bg_pic),
 	m_pic_custom    (fg_pic),
-	m_textstyle(UI::TextStyle::ui_small()),
-	m_clr_down      (229, 161, 2),
-	m_draw_caret    (false)
+	m_clr_down      (229, 161, 2)
 {
 	set_thinks(false);
 }
@@ -165,41 +167,61 @@ void Button::draw(RenderTarget & dst)
 		dst.brighten_rect
 			(Rect(Point(0, 0), get_w(), get_h()), MOUSE_OVER_BRIGHT_FACTOR);
 
-	//  if we got a picture, draw it centered
+	//  If we've got a picture, draw it centered
 	if (m_pic_custom) {
-		const int max_image_w = get_w() - 2 * kButtonImageMargin;
-		const int max_image_h = get_h() - 2 * kButtonImageMargin;
-		double image_scale =
-		   std::min(1.,
-		            std::min(static_cast<double>(max_image_w) / m_pic_custom->width(),
-		                     static_cast<double>(max_image_h) / m_pic_custom->height()));
-		int blit_width = image_scale * m_pic_custom->width();
-		int blit_height = image_scale * m_pic_custom->height();
-
-		if (m_enabled) {
-		dst.blitrect_scale(
-		   Rect((get_w() - blit_width) / 2, (get_h() - blit_height) / 2, blit_width, blit_height),
-		   m_pic_custom,
-		   Rect(0, 0, m_pic_custom->width(), m_pic_custom->height()),
-		   1.,
-		   BlendMode::UseAlpha);
+		if (m_keep_image_size) {
+			if (m_enabled) {
+				//  ">> 1" is almost like "/ 2", but simpler for signed types (difference
+				//  is that -1 >> 1 is -1 but -1 / 2 is 0).
+				dst.blit(
+							Point(
+								(get_w() - static_cast<int32_t>(m_pic_custom->width())) >> 1,
+								(get_h() - static_cast<int32_t>(m_pic_custom->height())) >> 1),
+							m_pic_custom);
+			} else {
+				//  ">> 1" is almost like "/ 2", but simpler for signed types (difference
+				//  is that -1 >> 1 is -1 but -1 / 2 is 0).
+				dst.blit_monochrome(
+							Point(
+								(get_w() - static_cast<int32_t>(m_pic_custom->width())) >> 1,
+								(get_h() - static_cast<int32_t>(m_pic_custom->height())) >> 1),
+							m_pic_custom,
+							RGBAColor(255, 255, 255, 127));
+			}
 		} else {
-			dst.blitrect_scale_monochrome(
-			   Rect((get_w() - blit_width) / 2, (get_h() - blit_height) / 2, blit_width, blit_height),
-			   m_pic_custom,
-			   Rect(0, 0, m_pic_custom->width(), m_pic_custom->height()),
-			   RGBAColor(255, 255, 255, 127));
+			const int max_image_w = get_w() - 2 * kButtonImageMargin;
+			const int max_image_h = get_h() - 2 * kButtonImageMargin;
+			double image_scale =
+				std::min(1.,
+							std::min(static_cast<double>(max_image_w) / m_pic_custom->width(),
+										static_cast<double>(max_image_h) / m_pic_custom->height()));
+			int blit_width = image_scale * m_pic_custom->width();
+			int blit_height = image_scale * m_pic_custom->height();
+
+			if (m_enabled) {
+				dst.blitrect_scale(
+					Rect((get_w() - blit_width) / 2, (get_h() - blit_height) / 2, blit_width, blit_height),
+					m_pic_custom,
+					Rect(0, 0, m_pic_custom->width(), m_pic_custom->height()),
+					1.,
+					BlendMode::UseAlpha);
+			} else {
+				dst.blitrect_scale_monochrome(
+					Rect((get_w() - blit_width) / 2, (get_h() - blit_height) / 2, blit_width, blit_height),
+					m_pic_custom,
+					Rect(0, 0, m_pic_custom->width(), m_pic_custom->height()),
+					RGBAColor(255, 255, 255, 127));
+			}
 		}
 
 	} else if (m_title.length()) {
-		//  otherwise draw title string centered
-
-		m_textstyle.fg = m_enabled ? UI_FONT_CLR_FG : UI_FONT_CLR_DISABLED;
-
-		UI::g_fh->draw_text
-			(dst, m_textstyle, Point(get_w() / 2, get_h() / 2),
-			 m_title, Align_Center,
-			 m_draw_caret ? m_title.length() : std::numeric_limits<uint32_t>::max());
+		//  Otherwise draw title string centered
+		const Image* entry_text_im = UI::g_fh1->render(
+												  as_uifont(m_title,
+																UI_FONT_SIZE_SMALL,
+																m_enabled ? UI_FONT_CLR_FG : UI_FONT_CLR_DISABLED));
+		dst.blit(Point((get_w() - entry_text_im->width()) / 2, (get_h() - entry_text_im->height()) / 2),
+					entry_text_im);
 	}
 
 	//  draw border
@@ -266,7 +288,7 @@ void Button::think()
 	Panel::think();
 
 	if (m_highlighted) {
-		int32_t const time = WLApplication::get()->get_time();
+		uint32_t const time = SDL_GetTicks();
 		if (m_time_nextact <= time) {
 			m_time_nextact += MOUSE_BUTTON_AUTOREPEAT_TICK; //  schedule next tick
 			if (m_time_nextact < time)
@@ -314,7 +336,7 @@ bool Button::handle_mousepress(uint8_t const btn, int32_t, int32_t) {
 		m_pressed = true;
 		if (m_repeating) {
 			m_time_nextact =
-				WLApplication::get()->get_time() + MOUSE_BUTTON_AUTOREPEAT_DELAY;
+				SDL_GetTicks() + MOUSE_BUTTON_AUTOREPEAT_DELAY;
 			set_thinks(true);
 		}
 	}

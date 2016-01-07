@@ -24,7 +24,7 @@
 #include "economy/wares_queue.h"
 #include "logic/game.h"
 #include "logic/player.h"
-#include "logic/tribe.h"
+#include "logic/tribes/tribe_descr.h"
 #include "logic/worker.h"
 #include "sound/sound_handler.h"
 
@@ -112,7 +112,7 @@ void PartiallyFinishedBuilding::request_builder(Game &) {
 	m_builder_request =
 		new Request
 			(*this,
-			 descr().tribe().safe_worker_index("builder"),
+			 owner().tribe().builder(),
 			 PartiallyFinishedBuilding::request_builder_callback,
 			 wwWORKER);
 }
@@ -147,9 +147,9 @@ Return the animation for the building that is in construction, as this
 should be more useful to the player.
 ===============
 */
-uint32_t PartiallyFinishedBuilding::get_ui_anim() const
+const Image* PartiallyFinishedBuilding::representative_image() const
 {
-	return m_building->get_animation("idle");
+	return m_building->representative_image(&owner().get_playercolor());
 }
 
 
@@ -195,7 +195,7 @@ Called by transfer code when the builder has arrived on site.
 void PartiallyFinishedBuilding::request_builder_callback
 	(Game            &       game,
 	 Request         &       rq,
-	 WareIndex,
+	 DescriptionIndex,
 	 Worker          * const w,
 	 PlayerImmovable &       target)
 {

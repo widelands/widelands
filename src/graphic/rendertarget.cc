@@ -25,7 +25,7 @@
 #include "graphic/graphic.h"
 #include "graphic/surface.h"
 #include "logic/player.h"
-#include "logic/tribe.h"
+#include "logic/tribes/tribe_descr.h"
 
 using Widelands::BaseImmovable;
 using Widelands::Coords;
@@ -176,6 +176,21 @@ void RenderTarget::blit(const Point& dst, const Image* image, BlendMode blend_mo
 		                srcrc,
 		                1.,
 		                blend_mode);
+	}
+}
+
+void RenderTarget::blit_monochrome(const Point& dst,
+									  const Image* image,
+									  const RGBAColor& blend_mode, UI::Align align) {
+	Point destination_point(dst);
+
+	UI::correct_for_align(align, image->width(), image->height(), &destination_point);
+
+	Rect srcrc(Point(0, 0), image->width(), image->height());
+
+	if (to_surface_geometry(&destination_point, &srcrc)) {
+		m_surface->blit_monochrome(Rect(destination_point.x, destination_point.y, srcrc.w, srcrc.h),
+		                           *image, srcrc, blend_mode);
 	}
 }
 

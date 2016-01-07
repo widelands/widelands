@@ -29,10 +29,11 @@
 #include "graphic/graphic.h"
 #include "logic/map.h"
 #include "logic/widelands.h"
+#include "logic/widelands_geometry.h"
 #include "logic/world/resource_description.h"
 #include "logic/world/world.h"
 #include "ui_basic/button.h"
-#include "wui/field_overlay_manager.h"
+#include "wui/overlay_manager.h"
 
 const static int BUTTON_WIDTH = 20;
 const static int BUTTON_HEIGHT = 20;
@@ -132,11 +133,11 @@ EditorToolChangeResourcesOptionsMenu
 	m_set_to_increase   .set_repeating(true);
 	m_set_to_decrease   .set_repeating(true);
 	const Widelands::World & world = parent.egbase().world();
-	Widelands::ResourceIndex const nr_resources = world.get_nr_resources();
+	Widelands::DescriptionIndex const nr_resources = world.get_nr_resources();
 
 	//  Find the maximal width and height for the resource pictures.
 	int resource_pic_max_width = 0, resource_pic_max_height = 0;
-	for (Widelands::ResourceIndex i = 0; i < nr_resources; ++i) {
+	for (Widelands::DescriptionIndex i = 0; i < nr_resources; ++i) {
 		const Image* pic = g_gr->images().get(world.get_resource(i)->get_editor_pic(100000));
 		resource_pic_max_width  = std::max(resource_pic_max_width,  pic->width());
 		resource_pic_max_height = std::max(resource_pic_max_height, pic->height());
@@ -156,7 +157,7 @@ EditorToolChangeResourcesOptionsMenu
 	Point pos
 		(hmargin(), m_set_to_value.get_y() + m_set_to_value.get_h() + vspacing());
 	for
-		(Widelands::ResourceIndex i = 0;
+		(Widelands::DescriptionIndex i = 0;
 		 i < nr_resources;
 		 pos.x += resource_pic_max_width + hspacing(), ++cur_x, ++i)
 	{
@@ -212,17 +213,18 @@ void EditorToolChangeResourcesOptionsMenu::clicked_button(Button const n)
  * called when a resource has been selected
  */
 void EditorToolChangeResourcesOptionsMenu::selected() {
-	const int32_t n = m_radiogroup.get_state();
+	const int32_t resIx = m_radiogroup.get_state();
 
-	m_increase_tool.set_tool().set_cur_res(n);
-	m_increase_tool.set_cur_res(n);
-	m_increase_tool.decrease_tool().set_cur_res(n);
+	m_increase_tool.set_tool().set_cur_res(resIx);
+	m_increase_tool.set_cur_res(resIx);
+	m_increase_tool.decrease_tool().set_cur_res(resIx);
 
-	EditorInteractive& editor_interactive = eia();
-	Widelands::EditorGameBase& egbase = editor_interactive.egbase();
+	Widelands::EditorGameBase& egbase = eia().egbase();
 	Widelands::Map & map = egbase.map();
-	editor_interactive.mutable_field_overlay_manager()->register_overlay_callback_function(boost::bind(
-	   &editor_change_resource_tool_callback, _1, boost::ref(map), boost::ref(egbase.world()), n));
+	map.overlay_manager().register_overlay_callback_function(
+			[&] (const Widelands::TCoords<Widelands::FCoords>& coords)
+			{return map.is_resource_valid(egbase.world(), coords, resIx);});
+
 	map.recalc_whole_map(egbase.world());
 	select_correct_tool();
 

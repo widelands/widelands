@@ -84,12 +84,12 @@ CategorizedItemSelectionMenu<DescriptionType, ToolType>::CategorizedItemSelectio
 	UI::TabPanel* tab_panel = new UI::TabPanel(this, 0, 0, nullptr);
 	add(tab_panel, UI::Align_Center);
 
-	for (uint32_t category_index = 0; category_index < categories.get_nitems(); ++category_index) {
-		const Widelands::EditorCategory& category = *categories.get(category_index);
+	for (uint32_t category_index = 0; category_index < categories.size(); ++category_index) {
+		const Widelands::EditorCategory& category = categories.get(category_index);
 
 		std::vector<int> item_indices;
-		for (size_t j = 0; j < descriptions_.get_nitems(); ++j) {
-			if (descriptions_.get(j)->editor_category().name() != category.name()) {
+		for (size_t j = 0; j < descriptions_.size(); ++j) {
+			if (descriptions_.get(j).editor_category().name() != category.name()) {
 				continue;
 			}
 			item_indices.push_back(j);
@@ -113,7 +113,7 @@ CategorizedItemSelectionMenu<DescriptionType, ToolType>::CategorizedItemSelectio
 			}
 			assert(horizontal != nullptr);
 
-			UI::Checkbox* cb = create_checkbox(horizontal, *descriptions_.get(i));
+			UI::Checkbox* cb = create_checkbox(horizontal, descriptions_.get(i));
 			cb->set_state(tool_->is_enabled(i));
 			cb->changedto.connect(boost::bind(&CategorizedItemSelectionMenu::selected, this, i, _1));
 			checkboxes_[i] = cb;
@@ -165,7 +165,7 @@ void CategorizedItemSelectionMenu<DescriptionType, ToolType>::update_label() {
 	for (int i = 0; j; ++i) {
 		if (tool_->is_enabled(i)) {
 			buf += " ";
-			buf += descriptions_.get(i)->descname();
+			buf += descriptions_.get(i).descname();
 			--j;
 		}
 	}

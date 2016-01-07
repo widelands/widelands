@@ -149,19 +149,23 @@ void draw_minimap_int(Texture* texture,
 
 	Point ptopleft;  // top left point of the current display frame
 	ptopleft.x = viewpoint.x + mapwidth / 2 - xsize;
-	if (ptopleft.x < 0)
+	if (ptopleft.x < 0) {
 		ptopleft.x += mapwidth;
+	}
 	ptopleft.y = viewpoint.y + mapheight / 2 - ysize;
-	if (ptopleft.y < 0)
+	if (ptopleft.y < 0) {
 		ptopleft.y += mapheight;
+	}
 
 	Point pbottomright;  // bottom right point of the current display frame
 	pbottomright.x = viewpoint.x + mapwidth / 2 + xsize;
-	if (pbottomright.x >= mapwidth)
+	if (pbottomright.x >= mapwidth) {
 		pbottomright.x -= mapwidth;
+	}
 	pbottomright.y = viewpoint.y + mapheight / 2 + ysize;
-	if (pbottomright.y >= mapheight)
+	if (pbottomright.y >= mapheight) {
 		pbottomright.y -= mapheight;
+	}
 
 	uint32_t modx = pbottomright.x % 2;
 	uint32_t mody = pbottomright.y % 2;
@@ -173,8 +177,9 @@ void draw_minimap_int(Texture* texture,
 		f.field = &map[f];
 		Widelands::MapIndex i = Widelands::Map::get_index(f, mapwidth);
 		for (uint32_t x = 0; x < surface_w; ++x) {
-			if (x % 2 || !(layers & MiniMapLayer::Zoom2))
+			if (x % 2 || !(layers & MiniMapLayer::Zoom2)) {
 				move_r(mapwidth, f, i);
+			}
 
 			RGBColor pixel_color;
 			if ((layers & MiniMapLayer::ViewWindow) &&
@@ -244,11 +249,13 @@ void write_minimap_image
 	const int32_t maxy = MapviewPixelFunctions::get_map_end_screen_y(egbase.get_map());
 	// adjust the viewpoint top topleft in map coords
 	viewpoint.x += g_gr->get_xres() / 2;
-	if (viewpoint.x >= maxx)
+	if (viewpoint.x >= maxx) {
 		viewpoint.x -= maxx;
+	}
 	viewpoint.y += g_gr->get_yres() / 2;
-	if (viewpoint.y >= maxy)
+	if (viewpoint.y >= maxy) {
 		viewpoint.y -= maxy;
+	}
 	viewpoint.x /= TRIANGLE_WIDTH;
 	viewpoint.y /= TRIANGLE_HEIGHT;
 	viewpoint.x -= map_w / 2;

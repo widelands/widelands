@@ -2,14 +2,15 @@
 # Copyright (C) 2005-2015 Widelands Development Team
 # 
 # Translators:
+# Juanjo, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-02-16 11:18+0000\n"
-"PO-Revision-Date: 2015-02-16 10:38+0000\n"
-"Last-Translator: GunChleoc\n"
-"Language-Team: Catalan (http://www.transifex.com/projects/p/widelands/language/ca/)\n"
+"POT-Creation-Date: 2015-11-28 11:19+0000\n"
+"PO-Revision-Date: 2015-11-28 17:39+0000\n"
+"Last-Translator: Juanjo\n"
+"Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -18,11 +19,11 @@ msgstr ""
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:17
 msgid "Introduction"
-msgstr ""
+msgstr "Introducció"
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:19
 msgid "Soldiers, Training and Warfare"
-msgstr ""
+msgstr "Soldats, entrenament i guerra"
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:20
 msgid ""
@@ -31,18 +32,18 @@ msgid ""
 "burning down, there is an enemy you sometimes have to defeat. Yet warfare is"
 " mainly focused on economics, not on military strategies, and its mechanics "
 "deserve explanation."
-msgstr ""
+msgstr "En aquest escenari, us parlaré dels soldats, el seu entrenament i la seva professió: la guerra. Encara que el Widelands es basa en la construcció i no en la destrucció, a vegades us trobareu que cal derrotar algun adversari. A més a més, la guerra està principalment enfocada en l'economia, no en les estratègies militars, i les seves mecàniques mereixen una explicació."
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:21
 msgid ""
 "I’ve set up a small village that contains the most important buildings. You "
 "also have enough wares, so you do not have to take care of your weapons "
 "production. In a real game, you will not have this luxury."
-msgstr ""
+msgstr "He aixecat una petita aldea que conté els edificis més importants. També hi ha prou béns com per no haver-vos de preocupar de la producció d'armament. En una partida real no tindreu aquest luxe."
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:28
 msgid "Soldiers’ abilities"
-msgstr ""
+msgstr "Habilitats dels soldats"
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:30
 msgid ""
@@ -50,7 +51,7 @@ msgid ""
 "soldier, a carrier grabs the needed weapons and armor from a warehouse (or "
 "your headquarters) and walks up the road to your new building. Basic "
 "Barbarian soldiers do not use armor, they only need an ax."
-msgstr ""
+msgstr "Un soldat es crea com un nou treballador: quan un edifici militar necessita un soldat, un colon transportista agafa les armes i armadura que necessiti d'un magatzem (o del vostre quarter principal) i es posa de camí cap a l'edifici que el necessita. Els soldats bàrbars novells no utilitzen armadura: només necessiten una destral."
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:31
 msgid ""
@@ -59,28 +60,28 @@ msgid ""
 "head that displays their remaining health, and they have four symbols, which"
 " symbolize the individual soldier’s current levels in the four different "
 "categories: health, attack, defense and evade."
-msgstr ""
+msgstr "Doneu un cop d'ull als soldats que estan en camí als nostres edificis militars. El seu aspecte és diferent al dels treballadors normals. Per començar, tenen una barra de salut al damunt del seu cap que mostra la salut que tenen. També tenen quatre icones que representen els nivells individuals actuals del soldat en quatre categories diferents: salut, atac, defensa i evasió."
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:32
 msgid ""
 "If a Barbarian soldier is fully trained, he has level 3 health, level 5 "
 "attack, level 0 defense and level 2 evade. This is one fearsome warrior "
 "then! The individual abilities have the following meaning:"
-msgstr ""
+msgstr "Si un soldat bàrbar estés entrenat al màxim, tindria nivell 3 de salut, nivell 5 d'atac, nivell 0 de defensa i nivell 2 d'evasió. Seria un guerrer aterrador! Les habilitats tenen el següent significat:"
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:34
 msgid "Health:"
-msgstr ""
+msgstr "Salut:"
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:35
 msgid ""
 "The total life of a soldier. A Barbarian soldier starts with 130 health, and"
 " he will gain 28 health with each health level."
-msgstr ""
+msgstr "La salut total d'un soldat. Un soldat bàrbar comença amb 130 punts de salut i en guanya 28 per cada nivell de salut addicional."
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:36
 msgid "Attack:"
-msgstr ""
+msgstr "Atac:"
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:37
 msgid ""
@@ -88,11 +89,11 @@ msgid ""
 "successful. A Barbarian soldier with attack level 0 inflicts ~14 points of "
 "health damage when he succeeds in hitting an enemy. For each attack level, "
 "he gains 7 damage points."
-msgstr ""
+msgstr "El dany que un soldat infringeix a l'enemic quan l'atac té èxit depèn del seu nivell d'atac. Si un soldat bàrbar amb nivell 0 d'atac ataca amb èxit un enemic, li farà perdre a aquest enemic uns 14 punts de salut. Per cada nivell d'atac addicional, cal afegir 7 punts més al dany que s'infringeix."
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:39
 msgid "Defense:"
-msgstr ""
+msgstr "Defensa:"
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:40
 msgid ""
@@ -101,263 +102,270 @@ msgid ""
 "level 0, which means that the damage is always reduced by 3%. If an attacker"
 " with an attack value of 35 points hits a Barbarian soldier, the Barbarian "
 "will lose 35·0.97 = 34 health."
-msgstr ""
+msgstr "La defensa és el percentatge de punts d'atac en què es redueix el dany rebut. Els bàrbars no poden entrenar aquesta habilitat i per tant sempre tenen un nivell de defensa 0, el que significa que el dany rebut sempre es redueix un 3%. Si un atacant amb un valor d'atac de 35 punts ataca amb èxit un soldat bàrbar, el bàrbar perdrà 35·0,97 = 34 punts de salut."
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:41
 msgid "Evade:"
-msgstr ""
+msgstr "Evasió:"
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:42
 msgid ""
 "Evade is the chance that the soldier is able to dodge an attack. A level 0 "
 "Barbarian has a 25% chance to evade an attack, and this increases in steps "
 "of 15% for each level."
-msgstr ""
+msgstr "L'evasió és la possibilitat que un soldat sigui capaç d'esquivar un atac. Un bàrbar amb nivell d'evasió 0 té un 25% de probabilitats d'esquivar un atac. Per cada nivell addicional, s'incrementa un 15% aquesta probabilitat."
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:47
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:67
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:69
 msgid "The Battle Arena"
-msgstr ""
+msgstr "Palestra d'entrenament"
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:49
 msgid "Now I have talked about training and levels. Let me elaborate on that."
-msgstr ""
+msgstr "Ja he parlat una mica sobre entrenaments i nivells, però cal explicar aquests conceptes amb més profunditat."
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:50
 msgid ""
 "A newly created soldier has no experience and is not very good at fighting. "
 "To make him stronger, you can build training sites."
-msgstr ""
+msgstr "Un soldat creat recentment no té experiència i no és molt bo lluitant. Per fer-lo més fort, heu d'entrenar-lo en llocs d'entrenament."
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:51
 msgid ""
 "One of these training sites is the battle arena. It is a big and expensive "
 "building, and it trains soldiers in evade. Since soldiers get very hungry "
-"during their workout, this building needs a lot of food and strongbeer. In a"
-" real game, you should have a good infrastructure before you build it."
-msgstr ""
+"during their workout, this building needs a lot of food and strong beer. In "
+"a real game, you should have a good infrastructure before you build it."
+msgstr "Una d'aquestes zones d'entrenament és la palestra. És un edifici gran i car i entrena els soldats en l'evasió. Com els soldats acaben amb molta gana després de l'entrenament, aquest edifici necessita molt menjar i cervesa negra. En una partida real hauríeu de tenir una molt bona indústria d'alimentació abans de construir-lo."
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:53
 msgid "To see evade training in action, build a battle arena."
-msgstr ""
+msgstr "Per a veure l'entrenament en evasió en viu, construïu una nova palestra."
 
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:57
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:55
+msgid ""
+"While we’re waiting for the battle arena, you’ll probably notice some "
+"soldiers walking around. They are automatically exchanged from time to time."
+" I’ll teach you about that later."
+msgstr "Mentre esperàvem que s'acabés de construir la palestra d'entrenament, haureu observat alguns soldats anant d'una banda a l'altra. Aquests moviments de tropes es fan de forma automàtica i després us explicaré per què es produeixen."
+
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:59
 msgid "Build a battle arena"
-msgstr ""
+msgstr "Construïu una palestra d'entrenament"
 
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:60
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:62
 msgid "Build a battle arena. It is a big building."
-msgstr ""
+msgstr "Construïu una palestra d'entrenament. És un edifici gran."
 
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:61
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:63
 msgid ""
 "Since the construction will take some time, you can change the game speed "
-"using PAGE UP and PAGE DOWN."
-msgstr ""
+"using Page Up and Page Down."
+msgstr "Com la construcció tardarà una mica, pots canviar la velocitat de la partida usant les tecles «Av Pàg» i «Re Pàg»."
 
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:69
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:71
 msgid "The Battle Arena Has Been Constructed"
-msgstr ""
-
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:70
-msgid ""
-"Very good. Our battle arena has been finished, and the soldiers are already "
-"walking towards it."
-msgstr ""
+msgstr "S'ha completat la palestra d'entrenament"
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:72
 msgid ""
-"The needed wares are also delivered there. For successful training, you need"
-" pitta bread and strongbeer. Most steps additionally require either fish or "
-"meat."
-msgstr ""
-
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:73
-msgid ""
-"For more information, you can have a look at the building’s help window, "
-"accessible via the question mark in every building’s window."
-msgstr ""
+"Very good. Our battle arena has been finished, and the soldiers are already "
+"walking towards it."
+msgstr "Molt bé! La nostra palestra d'entrenament s'ha completat i els soldats ja s'hi dirigeixen."
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:74
 msgid ""
-"To learn how far your soldiers have progressed in their training, you can "
-"have a look at their icons. They are modified by red dots:"
-msgstr ""
+"The needed wares are also delivered there. For successful training, you need"
+" pitta bread and strong beer, as well as either fish or meat."
+msgstr "S'enviaran automàticament els béns necessaris. Per un entrenament amb èxit es necessita pita i cervesa negra, així com peix o carn."
+
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:75
+msgid ""
+"For more information, you can have a look at the building’s help window, "
+"accessible via the question mark in every building’s window."
+msgstr "Per més informació, podeu consultar la finestra d'ajuda de l'edifici, accessible via el símbol «?» en cadascuna de les finestres d'edici."
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:76
 msgid ""
-"No red dots means that the soldier is not trained, so he has level 0. All "
-"your new recruits have this."
-msgstr ""
-
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:77
-msgid ""
-"With every successful training step, your soldier becomes stronger. This is "
-"indicated by a red dot. This soldier is on level 1 in evade training."
-msgstr ""
+"To learn how far your soldiers have progressed in their training, you can "
+"have a look at their icons. They are modified by red dots:"
+msgstr "Per comprovar fins on han progressat els vostres soldats amb els entrenaments, podeu mirar les seves icones. Es modifiquen amb punts roijos:"
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:78
 msgid ""
+"No red dots means that the soldier is not trained, so he has level 0. All "
+"your new recruits have this."
+msgstr "Si no hi ha punts rojos, indica que el soldat no s'ha entrenat i per això té nivell 0. És el nivell que tenen tots els nous reclutes."
+
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:79
+msgid ""
+"With every successful training step, your soldier becomes stronger. This is "
+"indicated by a red dot. This soldier is on level 1 in evade training."
+msgstr "Per cada entrenament que faci, el soldat serà més fort. Això s'indicarà amb un punt vermell. Aquest soldat és de nivell 1 d'evasió."
+
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:80
+msgid ""
 "When your soldier has reached the highest possible level (in this case level"
 " 2), this is indicated by a white background color."
-msgstr ""
+msgstr "Quan el teu soldat arribi al nivell màxim possible (en aquest cas, nivell 2), s'indicarà mitjançant un fons blanc."
 
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:84
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:86
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:103
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:88
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:105
 msgid "The Training Camp"
-msgstr ""
+msgstr "El camp d'entrenament"
 
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:87
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:89
 msgid ""
 "There is a second training site: the training camp. It is a big building "
 "too, and to complement the battle arena, it trains attack and health "
 "(remember, the Barbarian soldiers cannot be trained in defense)."
-msgstr ""
+msgstr "Hi ha una segona zona d'entrenament: el camp d'entrenament. És també un edifici gran i, complementant la palestra, entrena la salut i l'atac. Recordeu que els bàrbars no es poden entrenar en defensa."
 
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:89
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:97
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:91
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:99
 msgid "Build a training camp."
-msgstr ""
-
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:93
-msgid "Build a training camp"
-msgstr ""
+msgstr "Construïu un camp d'entrenament."
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:95
+msgid "Build a training camp"
+msgstr "Construïu un camp d'entrenament"
+
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:97
 msgid ""
 "The battle arena only trains the soldiers in evade. To get the strongest "
 "possible soldier, you also need to build a training camp, which trains them "
 "in attack and health."
-msgstr ""
+msgstr "La palestra només entrena els soldats en evasió. Per aconseguir soldats encara més forts, necessiteu construir un camp d'entrenament, on s'entrenen l'atac i la salut."
 
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:105
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:107
 msgid ""
 "Great, our training camp has now been finished, too. Now nothing will hinder"
 " us from getting the strongest warriors the world has ever seen."
-msgstr ""
+msgstr "Genial. S'ha acabat de construir el camp d'entrenament. Ara res ens impedirà aconseguir els soldats més forts que el món mai ha vist."
 
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:106
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:108
 msgid ""
 "To train in the training camp, our soldiers need food like in the battle "
-"arena, but no strongbeer. Instead, they need different axes for attack "
+"arena, but no strong beer. Instead, they need different axes for attack "
 "training and helmets for health training."
-msgstr ""
+msgstr "Per entrenar al camp d'entrenament, els nostres soldats necessiten menjar com a la palestra. Però no necessiten cervesa negra. En el seu lloc, necessiten diferents destrals per entrenar l'atac i cascos per entrenar la salut."
 
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:107
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:109
 msgid ""
 "This equipment is produced in smithies out of coal, iron, and sometimes "
 "gold. You will learn more about this in the second scenario of the Barbarian"
 " campaign."
-msgstr ""
+msgstr "Aquest equipament el produeixen les ferreries i tallers a partir de carbó, ferro i, a vegades, or. Aprendreu més de tot això al segon escenari de la campanya bàrbara."
 
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:108
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:110
 msgid ""
 "You should also keep in mind that each of the three tribes in Widelands has "
 "its own way of training, so the buildings and wares are different. Also, the"
 " ability levels cannot be compared: an Imperial soldier with evade level 0 "
 "has a 30% chance of evading, while a Barbarian soldier at the same level "
 "only has a 25% chance."
-msgstr ""
+msgstr "També heu de tenir en compte que cadascuna de les tres cultures del Widelands té la seva manera pròpia d'entrenar, així com els edifics i béns, que també són diferents per cada cultura. Tampoc es poden comparar els nivells: un soldat imperial amb nivell d'evasió 0 té un 30% de probabilitat d'esquivar, mentre que un soldat bàrbar amb el mateix nivell d'evasió només en té un 25%."
 
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:114
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:116
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:118
 msgid "Heroes and Rookies"
-msgstr ""
+msgstr "Herois i novells"
 
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:117
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:119
 msgid ""
 "While our soldiers are training, let me tell you what we can do with them."
-msgstr ""
+msgstr "Mentre els nostres soldats s'estan entrenant, deixeu-me dir-vos què podeu fer amb ells."
 
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:118
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:120
 msgid ""
 "In every military building, you can set the preference for heroes (trained "
 "soldiers) or rookies. From time to time, a soldier will walk out of the "
-"building and be replaced by a stronger/weaker one automatically."
-msgstr ""
+"building and be replaced by a stronger/weaker one automatically – this is "
+"what you saw earlier."
+msgstr "En tots els edificis militars, podeu escollir si preferiu enviar-hi herois (soldats entrenats) o bé novells (soldats poc entrenats). Cada cert temps, si és possible, es reemplaçarà un soldat de l'edifici per un de més apropiat, segons com haguéssiu escollit. Aquests són els moviments de tropes automàtics que hem vist anteriorment."
 
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:119
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:121
 msgid ""
 "The initial setting depends on the type of the building. For the Barbarians,"
 " the sentry is the only building that prefers rookies by default. You should"
 " change this setting to fit your current needs."
-msgstr ""
+msgstr "La preferència inicial depèn del tipus d'edifici. Per als bàrbars, la guarda sentinella és l'únic edifici que prefereix soldats novells per defecte. Hauríeu de canviar-ho segons les necessitats en cada moment."
 
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:120
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:122
 msgid ""
 "When you are expanding into no man’s land, you can make your buildings "
 "prefer rookies. When you are planning to attack, send heroes into that "
 "region. Conquered buildings always prefer heroes."
-msgstr ""
-
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:126
-msgid "Soldier capacity"
-msgstr ""
+msgstr "Quan expandiu en terra de ningú, podeu emprar els soldats novells. Però quan planegeu un atac o voleu defensar la frontera de l'enemic, envieu-hi herois. Els edificis conquerits sempre prefereixen herois."
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:128
-msgid "Adjusting the number of soldiers"
-msgstr ""
+msgid "Soldier capacity"
+msgstr "Capacitat de soldats"
 
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:129
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:130
+msgid "Adjusting the number of soldiers"
+msgstr "Ajust del nombre de soldats"
+
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:131
 msgid ""
 "There is another way how you can control the strength of a military "
 "building: by the number of soldiers stationed there. Just click on the arrow"
 " buttons to decrease or increase the desired number of soldiers. Every "
 "building has a maximum capacity. In case of the barrier, it is five, for "
 "example."
-msgstr ""
+msgstr "Hi ha una altra forma per controlar les forces d'un edifici militar: pel nombre de soldats que hi ha guarnint-lo. Cliqueu els botons amb fletxes per incrementar o reduir el nombre desitjat de soldats. Tots els edificis tenen una capacitat de soldats màxima. Per exemple, en cas de la caserna és cinc soldats."
 
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:130
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:132
 msgid ""
 "If you wish to send a certain soldier away, you can simply click on it. It "
 "will then be replaced by another soldier."
-msgstr ""
+msgstr "Si voleu fer fora un soldat en concret, només cal fer clic damunt d'ell. Serà substituït per un altre soldat."
 
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:131
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:133
 msgid ""
 "Let me also describe what the numbers in the statistics string mean. This "
 "string can contain up to three numbers, e.g. ‘1 (+5) soldier (+2)’."
-msgstr ""
+msgstr "Deixeu que us expliqui el significat d'aquests números. El text pot contenir fins a tres números, per exemple «1 (+5) soldats (+2)»."
 
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:133
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:135
 msgid ""
 "The first number describes how many soldiers are currently in this building."
 " In this example, only one soldier is left inside (each military building is"
 " always guarded by at least one soldier)."
-msgstr ""
+msgstr "El primer número indica quants soldats hi ha actualment a l'edifici. En aquest exemple només hi ha un soldat guarnint l'edifici."
 
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:134
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:136
 msgid ""
 "The second number tells you how many additional soldiers reside in this "
 "building, but are currently outside. The five soldiers may be attacking an "
 "enemy. They will return when they have been successful."
-msgstr ""
+msgstr "El segon número indica quants soldats addicionals guarneixen l'edifici, però que ara mateix estan a fora. Els cinc soldats podrien estar atacant l'enemic o defensant-nos a nosaltres. Tornaran si resulten victoriosos."
 
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:135
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:137
 msgid ""
 "The third number indicates the missing soldiers. From the eight soldiers (1 "
 "+ 5 + 2) you wish to have here, two may have died. They will be replaced by "
 "new soldiers from your warehouse, if possible."
-msgstr ""
-
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:141
-msgid "Dismantle your sentry"
-msgstr ""
+msgstr "El tercer nombre indica el nombre de soldats que falten. Dels 8 soldats (1 + 5 + 2) que voldríeu tenir aquí, dos poden haver mort. Seran substituïts tan aviat com sigui possible amb soldats que no tinguin assignats."
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:143
-msgid "Dismantling military buildings"
-msgstr ""
+msgid "Dismantle your sentry"
+msgstr "Desmantelleu la guarda sentinella"
 
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:144
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:145
+msgid "Dismantling military buildings"
+msgstr "Desmantellament d'edificis militars"
+
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:146
 msgid ""
 "You can only reduce the number of soldiers to one. The last soldier of a "
 "building will never come out (unless this building is attacked). If you want"
 " to have your soldier elsewhere, you will have to dismantle the building "
 "(buildings of an alien tribe cannot be dismantled, only be burned down)."
-msgstr ""
+msgstr "Només es pot reduir el nombre de soldats fins a un. L'últim soldat de l'edifici no podrà sortir-ne (excepte si l'edifici és atacat). Si voleu el soldat per a alguna altra tasca, haureu de desmantellar l'edifici (no podreu desmantellar els edificis ocupats d'una altra cultura: els haureu de desmantellar)."
 
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:145
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:147
 msgid ""
 "However, destroying a military building is always linked with a risk: the "
 "land is still yours, but it is no longer protected. Any enemy that builds "
@@ -366,179 +374,179 @@ msgid ""
 " be hidden under the fog of war. You should therefore only dismantle "
 "military buildings deep inside your territory where you are safe from "
 "enemies."
-msgstr ""
+msgstr "No obstant, destruir un edifici militar té un risc: el terreny encara serà teu, però ja no estarà protegit. Qualsevol altre clan que hi tingui un edifici militar ocupat a prop pot reclamar les terres properes sense cap lluita, causant que es cremin tots els edificis que hi tinguis. És més, algunes parts de la terra podrien estar ocultes per la boira de guerra. Per tant, només hauríeu de destruir els edificis militars que estiguin molt endins del vostre territori, on el terreny no corri perill de caure en mans enemigues."
 
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:146
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:148
 msgid ""
 "Have you seen your sentry? Since it cannot contain many soldiers and is next"
 " to a stronger barrier, it is rather useless."
-msgstr ""
+msgstr "Heu vist la guarda sentinella? Donat que no pot contenir molts soldats i està al costat d'una caserna més forta, és més aviat inútil."
 
-#: TRANSLATORS 'it' refers to the Barbarian sentry
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:149
-msgid "Dismantle it."
-msgstr ""
-
+#. TRANSLATORS: 'it' refers to the Barbarian sentry
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:151
+msgid "Dismantle it."
+msgstr "Desmantelleu-ho."
+
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:153
 msgid ""
 "You can also use this opportunity to become familiar with the other options:"
 " the heroes/rookies preference and the capacity."
-msgstr ""
-
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:153
-msgid "Dismantle your north-western sentry"
-msgstr ""
+msgstr "Aprofiteu aquesta oportunitat per familiaritzar-vos amb les altres opcions: la capacitat de l'edifici i la preferència d'herois/novells."
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:155
+msgid "Dismantle your north-western sentry"
+msgstr "Desmantelleu la guarda sentinella del nord-oest"
+
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:157
 msgid ""
 "You can control the number of soldiers stationed at a military site with the"
 " arrow buttons. If you want to get even your last soldier out, you will have"
 " to destroy it. However, it then will no longer protect your territory, "
 "which will make it vulnerable to hostile attacks."
-msgstr ""
+msgstr "Podeu controlar el nombre de soldats guarnint un edifici militar amb els botons amb fletxes. Si voleu treure l'últim soldat, haureu de destruir l'edifici, desmantellant-lo o cremant-lo. No obstant, l'edifici ja no controlarà més el territori, de manera que el perdreu si a prop hi ha forces d'altres clans."
 
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:157
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:159
 msgid "Dismantle your sentry in the north-west, next to the barrier."
-msgstr ""
-
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:163
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:175
-msgid "Enhance Your Fortress"
-msgstr ""
+msgstr "Desmantelleu la guarda sentinella del nord-oest, al costat de la caserna."
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:165
-msgid "Enhancing Buildings"
-msgstr ""
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:177
+msgid "Enhance Your Fortress"
+msgstr "Milloreu la fortalesa"
 
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:166
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:167
+msgid "Enhancing Buildings"
+msgstr "Millorant els edificis"
+
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:168
 msgid ""
 "Well done. Now you know how to draw back your soldiers from the places where"
 " you don’t need them. It is time to tell you how to reinforce your front "
 "line."
-msgstr ""
+msgstr "Ben fet. Ara ja sabeu com retirar els soldats dels llocs on no els necessiteu. És hora d'explicar-vos com reforçar el front."
 
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:167
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:169
 msgid ""
 "Your fortress is already quite strong and conquers a lot of space. But there"
 " is an even bigger building: the citadel."
-msgstr ""
+msgstr "La vostra fortalesa és ja bastant forta i controla molt de terreny. Però hi ha un edifici encara més gran i fort: la ciutadella."
 
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:168
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:170
 msgid ""
 "Citadels can’t be built directly. Instead, you’ll have to construct a "
 "fortress first and then enhance it to a citadel. To do so, click on the "
 "fortress, then choose the ‘Enhance to Citadel’ button."
-msgstr ""
+msgstr "Les ciutadelles no es poden construir directament: s'ha de construir primer una fortalesa i després millorar-la a ciutadella. Per fer-ho, cliqueu la fortalesa i després escolliu el botó «Millora a ciutadella»."
 
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:169
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:171
 msgid ""
 "Your soldiers will leave the fortress while the construction is going on. "
 "This means that your fortress will lose its military influence, as I "
 "described above."
-msgstr ""
+msgstr "Els vostres soldats abandonaran la fortalesa mentre es realitza l'obra. Això significa que la fortalesa perdrà la seva influència militar com he descrit anteriorment."
 
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:170
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:172
 msgid "Enhance your fortress to a citadel now."
-msgstr ""
+msgstr "Ara, milloreu la fortalesa a ciutadella."
 
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:173
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:175
 msgid "Enhance your fortress to a citadel"
-msgstr ""
+msgstr "Milloreu la fortalesa a ciutadella."
 
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:177
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:179
 msgid "Enhance your fortress to a mighty citadel."
-msgstr ""
+msgstr "Milloreu la fortalesa a una imponent ciutadella."
 
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:178
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:180
 msgid ""
 "The citadel can house 12 soldiers, and it is the biggest military building "
 "the Barbarians can build. It also costs a lot of resources and takes a long "
 "time to build. It is most suited to guard strategically important points "
 "like constricted points or mountains."
-msgstr ""
-
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:185
-msgid "Defeat your Enemy"
-msgstr ""
+msgstr "La ciutadella pot guarnir 12 soldats i és l'edifici militar més gran que poden construir els bàrbars. També necessita molts de recursos i molt de temps per construir-la. Aquesta construcció és apropiada per a defensar punts estratègics importants com ara passos estrets o de muntanya."
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:187
-msgid "Defeat the Enemy"
-msgstr ""
+msgid "Defeat your Enemy"
+msgstr "Derroteu l'enemic"
 
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:188
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:189
+msgid "Defeat the Enemy"
+msgstr "Derroteu l'enemic"
+
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:190
 msgid ""
 "Great work, the citadel is finished. But what’s that? A hostile tribe has "
 "settled next to us while the citadel was under construction! Do you see how "
 "they took away a part of our land? And our lumberjack has now lost his place"
 " of work. This is what I was talking about. Let’s take our land back and "
 "defeat the enemy!"
-msgstr ""
+msgstr "Ben fet! Però, què és allò? Un clan hostil s'ha assentat al nostre costat mentre construíem la ciutadella! Veieu com s'han apropiat de gran part de les nostres terres? I el nostre llenyataire ha perdut el seu lloc de treball. Això és del que parlava. Recuperem les nostres terres i derrotem a l'enemic!"
 
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:189
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:200
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:191
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:202
 msgid ""
 "To attack a building, click on its doors, choose the number of soldiers that"
 " you wish to send and click on the ‘Attack’ button."
-msgstr ""
+msgstr "Per atacar un edifici feu-hi clic a les seves portes, escolliu el nombre de soldats que voleu enviar-hi i confirmeu l'atac amb el botó «Ataca»,"
 
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:189
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:191
 msgid ""
 "Your soldiers will come from all nearby military buildings. Likewise, the "
 "defenders will come from all nearby military buildings of the enemy and "
 "intercept your forces."
-msgstr ""
+msgstr "Els vostres soldats sortiran dels edificis militars propers. Igualment, sortiran soldats defensors dels edificis militars enemics propers i interceptaran les teves tropes."
 
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:191
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:193
 msgid ""
 "Attack and conquer all military buildings of the enemy and destroy their "
 "headquarters."
-msgstr ""
-
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:195
-msgid "Defeat the enemy tribe"
-msgstr ""
+msgstr "Ataca i conquereix tots els edificis militars de l'enemic i destrueix el seu quarter general."
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:197
-msgid "Defeat Your Enemy"
-msgstr ""
+msgid "Defeat the enemy tribe"
+msgstr "Derroteu el clan enemic"
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:199
+msgid "Defeat Your Enemy"
+msgstr "Derroteu el vostre enemic"
+
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:201
 msgid "Defeat the nearby enemy."
-msgstr ""
+msgstr "Derroteu l'enemic proper."
 
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:205
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:207
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:209
 msgid "Conclusion"
-msgstr ""
+msgstr "Conclusió"
 
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:208
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:210
 msgid ""
 "Thank you for playing this tutorial. I hope you enjoyed it and you learned "
 "how to create and train soldiers, how to control where they go and how to "
 "defeat an enemy. Did you see how easily you could overwhelm your enemy? "
 "Having trained soldiers is a huge advantage."
-msgstr ""
+msgstr "Gràcies per jugar aquest tutorial. Esperem que ho haguéssiu gaudit i que haguéssiu aprés com crear i entrenar soldats, controlar-los i véncer l'enemic. Heu vist com de fàcil podeu sobrepassar l'enemic? Disposar de soldats entrenats pot significar la diferència entre la victòria i la derrota."
 
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:209
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:211
 msgid ""
 "But a war is expensive, and not always the path leading to the goal. When "
 "setting up a new game, you can also choose peaceful win conditions. You "
 "should definitely try them out, they’re worth it."
-msgstr ""
+msgstr "Però la guerra és cara i no sempre és el camí per aconseguir els objectius. Quan inicieu una partida nova, també podeu escollir condicions de victòria pacífiques. Les hauríeu de provar: valen la pena."
 
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:210
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:212
 msgid ""
 "You are now ready to play the campaigns. They will teach you about the "
 "different economies of the tribes. You can also play the remaining "
 "tutorials, but they are not crucial for succeeding in the campaigns."
-msgstr ""
+msgstr "Ja esteu preparats per jugar les campanyes. T'ensenyaran les economies de cada cultura. També podeu jugar els altres tutorials, però no són fonamentals per realitzar les campanyes."
 
 #: ../../scripting/format_scenario.lua:36
 msgid "“%s”"
-msgstr ""
+msgstr "“%s”"
 
 #: ../../scripting/format_scenario.lua:146
 msgid "New Objective"
 msgid_plural "New Objectives"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Objectiu"
+msgstr[1] "Objectius"

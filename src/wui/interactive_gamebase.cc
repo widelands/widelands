@@ -187,6 +187,7 @@ bool InteractiveGameBase::try_show_ship_window()
 
 void InteractiveGameBase::show_game_summary()
 {
+	game().game_controller()->set_desired_speed(0);
 	if (m_game_summary.window) {
 		m_game_summary.window->set_visible(true);
 		m_game_summary.window->think();

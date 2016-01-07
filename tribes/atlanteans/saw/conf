@@ -1,7 +1,0 @@
-help=_The saw is needed by the woodcutter and the toolsmith. It is produced by the toolsmith.
-
-default_target_quantity=2
-
-[idle]
-pics=idle.png
-hotspot=7 5

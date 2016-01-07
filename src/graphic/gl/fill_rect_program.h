@@ -79,7 +79,7 @@ private:
 	std::vector<PerVertexData> vertices_;
 
 	// The buffer that will contain the quad for rendering.
-	Gl::NewBuffer<PerVertexData> gl_array_buffer_;
+	Gl::Buffer<PerVertexData> gl_array_buffer_;
 
 	// The program.
 	Gl::Program gl_program_;

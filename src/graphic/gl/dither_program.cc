@@ -20,6 +20,7 @@
 #include "graphic/gl/dither_program.h"
 
 #include "base/wexception.h"
+#include "graphic/gl/coordinate_conversion.h"
 #include "graphic/gl/fields_to_draw.h"
 #include "graphic/image_io.h"
 #include "graphic/texture.h"
@@ -99,18 +100,18 @@ DitherProgram::DitherProgram() {
 
 	dither_mask_.reset(new Texture(load_image_as_sdl_surface("world/pics/edge.png", g_fs), true));
 
-	glBindTexture(GL_TEXTURE_2D, dither_mask_->get_gl_texture());
+	glBindTexture(GL_TEXTURE_2D, dither_mask_->blit_data().texture_id);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, static_cast<GLint>(GL_CLAMP_TO_EDGE));
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, static_cast<GLint>(GL_CLAMP_TO_EDGE));
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, static_cast<GLint>(GL_LINEAR));
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, static_cast<GLint>(GL_LINEAR));
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, static_cast<GLint>(GL_NEAREST));
 	glBindTexture(GL_TEXTURE_2D, 0);
 }
 
 DitherProgram::~DitherProgram() {}
 
 void DitherProgram::add_vertex(const FieldsToDraw::Field& field,
-                               const int order_index,
+                               const TrianglePoint triangle_point,
                                const FloatPoint& texture_offset) {
 	vertices_.emplace_back();
 	PerVertexData& back = vertices_.back();
@@ -123,16 +124,16 @@ void DitherProgram::add_vertex(const FieldsToDraw::Field& field,
 	back.texture_offset_x = texture_offset.x;
 	back.texture_offset_y = texture_offset.y;
 
-	switch (order_index) {
-	case 0:
+	switch (triangle_point) {
+	case TrianglePoint::kTopRight:
 		back.dither_texture_x = 1.;
 		back.dither_texture_y = 1.;
 		break;
-	case 1:
+	case TrianglePoint::kTopLeft:
 		back.dither_texture_x = 0.;
 		back.dither_texture_y = 1.;
 		break;
-	case 2:
+	case TrianglePoint::kBottomMiddle:
 		back.dither_texture_x = 0.5;
 		back.dither_texture_y = 0.;
 		break;
@@ -154,14 +155,14 @@ void DitherProgram::maybe_add_dithering_triangle(
 		return;
 	}
 	const Widelands::TerrainDescription& other_terrain_description =
-	   terrains.get_unmutable(other_terrain);
-	if (terrains.get_unmutable(my_terrain).dither_layer() <
+	   terrains.get(other_terrain);
+	if (terrains.get(my_terrain).dither_layer() <
 	    other_terrain_description.dither_layer()) {
 		const FloatPoint texture_offset =
-		   other_terrain_description.get_texture(gametime).texture_coordinates().origin();
-		add_vertex(fields_to_draw.at(idx1), 0, texture_offset);
-		add_vertex(fields_to_draw.at(idx2), 1, texture_offset);
-		add_vertex(fields_to_draw.at(idx3), 2, texture_offset);
+		   to_gl_texture(other_terrain_description.get_texture(gametime).blit_data()).origin();
+		add_vertex(fields_to_draw.at(idx1), TrianglePoint::kTopRight, texture_offset);
+		add_vertex(fields_to_draw.at(idx2), TrianglePoint::kTopLeft, texture_offset);
+		add_vertex(fields_to_draw.at(idx3), TrianglePoint::kBottomMiddle, texture_offset);
 	}
 }
 
@@ -193,7 +194,7 @@ void DitherProgram::gl_draw(int gl_texture, float texture_w, float texture_h, co
 
 	// Set the sampler texture unit to 0
 	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, dither_mask_->get_gl_texture());
+	glBindTexture(GL_TEXTURE_2D, dither_mask_->blit_data().texture_id);
 
 	glActiveTexture(GL_TEXTURE1);
 	glBindTexture(GL_TEXTURE_2D, gl_texture);
@@ -276,9 +277,10 @@ void DitherProgram::draw(const uint32_t gametime,
 		}
 	}
 
-	const Texture& texture = terrains.get_unmutable(0).get_texture(0);
-	gl_draw(texture.get_gl_texture(),
-	        texture.texture_coordinates().w,
-	        texture.texture_coordinates().h,
+	const BlitData& blit_data = terrains.get(0).get_texture(0).blit_data();
+	const FloatRect texture_coordinates = to_gl_texture(blit_data);
+	gl_draw(blit_data.texture_id,
+	        texture_coordinates.w,
+	        texture_coordinates.h,
 	        z_value);
 }

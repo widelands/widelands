@@ -26,7 +26,7 @@
 #include "logic/constructionsite.h"
 #include "logic/militarysite.h"
 #include "logic/trainingsite.h"
-#include "logic/tribe.h"
+#include "logic/tribes/tribe_descr.h"
 #include "logic/worker.h"
 #include "ui_basic/listselect.h"
 #include "ui_basic/tabpanel.h"
@@ -84,10 +84,10 @@ ProductionSiteWindow::ProductionSiteWindow
 		m_worker_table->add_column(60, _("Exp"));
 		m_worker_table->add_column(150, _("Next Level"));
 
-		for
-			(unsigned int i = 0;
-			 i < productionsite().descr().nr_working_positions(); ++i)
+		for (unsigned int i = 0; i < productionsite().descr().nr_working_positions(); ++i) {
 			m_worker_table->add(i);
+		}
+		m_worker_table->fit_height();
 
 		if (igbase().can_act(building().owner().player_number())) {
 			m_worker_caps->add_inf_space();
@@ -102,6 +102,7 @@ ProductionSiteWindow::ProductionSiteWindow
 		}
 
 		worker_box->add(m_worker_table, UI::Box::AlignLeft, true);
+		worker_box->add_space(4);
 		worker_box->add(m_worker_caps, UI::Box::AlignLeft, true);
 		get_tabs()->add
 			("workers", g_gr->images().get(pic_tab_workers),
@@ -167,12 +168,11 @@ void ProductionSiteWindow::update_worker_table()
 		if (worker) {
 			er.set_picture(0, worker->descr().icon(), worker->descr().descname());
 
-			if
-				(worker->get_current_experience() != -1
+			if (worker->get_current_experience() != Widelands::INVALID_INDEX
 					&&
-				 worker->descr().get_needed_experience () != -1)
-			{
+				 worker->descr().get_needed_experience () != Widelands::INVALID_INDEX) {
 				assert(worker->descr().becomes() != Widelands::INVALID_INDEX);
+				assert(worker->owner().tribe().has_worker(worker->descr().becomes()));
 
 				// Fill upgrade status
 				/** TRANSLATORS: %1% = the experience a worker has */
@@ -181,7 +181,7 @@ void ProductionSiteWindow::update_worker_table()
 										% worker->get_current_experience()
 										% worker->descr().get_needed_experience()).str());
 				er.set_string
-					(2, worker->descr().tribe().get_worker_descr
+					(2, worker->owner().tribe().get_worker_descr
 						(worker->descr().becomes())->descname());
 			} else {
 				// Worker is not upgradeable
@@ -190,7 +190,7 @@ void ProductionSiteWindow::update_worker_table()
 			}
 		} else if (request) {
 			const Widelands::WorkerDescr * desc =
-				productionsite().descr().tribe().get_worker_descr(request->get_index());
+				productionsite().owner().tribe().get_worker_descr(request->get_index());
 			er.set_picture
 				(0, desc->icon(),
 					request->is_open() ? _("(vacant)") : _("(coming)"));

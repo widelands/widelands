@@ -20,11 +20,11 @@
 #ifndef WL_LOGIC_SOLDIER_H
 #define WL_LOGIC_SOLDIER_H
 
+#include <memory>
+
 #include "base/macros.h"
 #include "logic/training_attribute.h"
 #include "logic/worker.h"
-
-#define SOLDIER_HP_BAR_WIDTH 13
 
 struct RGBColor;
 
@@ -39,15 +39,13 @@ class Battle;
 
 #define HP_FRAMECOLOR RGBColor(255, 255, 255)
 
-struct SoldierDescr : public WorkerDescr {
+class SoldierDescr : public WorkerDescr {
+public:
 	friend class Economy;
-	SoldierDescr
-		(char const * const _name, char const * const _descname,
-		 const std::string & directory, Profile &, Section & global_s,
-		 const TribeDescr &);
-	~SoldierDescr() override {}
 
-	void load_graphics() override;
+	SoldierDescr(const std::string& init_descname,
+					 const LuaTable& t, const EditorGameBase& egbase);
+	~SoldierDescr() override {}
 
 	uint32_t get_max_hp_level          () const {return m_max_hp_level;}
 	uint32_t get_max_attack_level      () const {return m_max_attack_level;}
@@ -125,11 +123,10 @@ protected:
 	std::vector<std::string> m_evade_failure_e_name;
 	std::vector<std::string> m_die_e_name;
 
-	std::vector<std::string> load_animations_from_string
-			(const std::string & directory, Profile & prof, Section & global_s,
-			 const char * anim_name);
-
 private:
+	// Reads list of animation names from the table and pushes them into result.
+	void add_battle_animation(std::unique_ptr<LuaTable> table, std::vector<std::string>* result);
+
 	DISALLOW_COPY_AND_ASSIGN(SoldierDescr);
 };
 
@@ -178,6 +175,7 @@ public:
 	uint32_t get_attack_level () const {return m_attack_level;}
 	uint32_t get_defense_level() const {return m_defense_level;}
 	uint32_t get_evade_level  () const {return m_evade_level;}
+	uint32_t get_total_level () const {return m_hp_level + m_attack_level + m_defense_level + m_evade_level;}
 
 	/// Automatically select a task.
 	void init_auto_task(Game &) override;
@@ -278,14 +276,19 @@ private:
 	/// the new states. I thought that it is cleaner to have this variable
 	/// separate.
 	CombatWalkingDir m_combat_walking;
-	int32_t  m_combat_walkstart;
-	int32_t  m_combat_walkend;
+	uint32_t  m_combat_walkstart;
+	uint32_t  m_combat_walkend;
 
 	/**
 	 * If the soldier is involved in a challenge, it is assigned a battle
 	 * object.
 	 */
 	Battle * m_battle;
+
+	static constexpr uint8_t kSoldierHpBarWidth = 13;
+
+	/// Number of consecutive blocked signals until the soldiers are considered permanently stuck
+	static constexpr uint8_t kBockCountIsStuck = 10;
 
 	// saving and loading
 protected:

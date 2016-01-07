@@ -3,29 +3,98 @@
 # 
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2011
+# Juanjo, 2015
+# Juanjo, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-03-06 16:48+0000\n"
-"PO-Revision-Date: 2015-03-06 16:49+0000\n"
-"Last-Translator: GunChleoc\n"
-"Language-Team: Catalan (http://www.transifex.com/projects/p/widelands/language/ca/)\n"
+"POT-Creation-Date: 2015-12-03 09:55+0000\n"
+"PO-Revision-Date: 2015-12-03 21:46+0000\n"
+"Last-Translator: Juanjo\n"
+"Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: ca\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
+#: ../../txts/AUTHORS.lua:40
+msgid "Authors"
+msgstr "Autors"
+
+#: ../../txts/AUTHORS.lua:42
+msgid "Widelands Development Team"
+msgstr "L'equip de desenvolupament del Widelands"
+
+#: ../../txts/LICENSE.lua:18
+msgid "License"
+msgstr "Llicència"
+
+#: ../../txts/LICENSE.lua:20
+msgid "Licensing information for Widelands"
+msgstr "Informació de la llicència del Widelands"
+
+#: ../../txts/LICENSE.lua:23
+msgid "Copyright 2002 - 2015 by the Widelands Development Team."
+msgstr "Copyright 2002 - 2015 de l'equip de desenvolupament del Widelands."
+
+#: ../../txts/LICENSE.lua:24
+msgid ""
+"This game is Free and Open Source (FOSS), licensed under the GNU General "
+"Public License (GPL) V2.0."
+msgstr "Aquest joc és lliure i de codi obert (FOSS, Free and Open Source), distribuït sota llicència pública general (GPL) GNU v2.0."
+
+#: ../../txts/LICENSE.lua:26
+msgid ""
+"You can find more information on FOSS and the GPL by visiting the following "
+"webpage:  %s"
+msgstr "Podeu trobar més informació de FOSS i de la GPL visitant la següent pàgina web (en anglès): %s"
+
+#: ../../txts/LICENSE.lua:27
+msgid ""
+"You can find the full text of the license there as well as further "
+"information about its philosophy and the legal implications."
+msgstr "Podeu trobar-hi el text complet de la llicència, així com més informació sobre la filosofia i les condicions legals."
+
+#: ../../txts/LICENSE.lua:29
+msgid "We are also shipping the GPL as a text document with Widelands itself."
+msgstr "També distribuïm la GPL com a un document de text junt amb el Widelands."
+
+#: ../../txts/LICENSE.lua:30
+msgid ""
+"On Linux, you can find the file called COPYING in the root of the source or "
+"standalone binary package, or in the installation directory (like ‘%1%’)."
+msgstr "En Linux, podreu trobar un arxiu anomenat «COPYING» en l'arrel del codi o del paquet binari de la instal·lació, o també en el directori de la instal·lació (com ara «%1%»)."
+
+#: ../../txts/LICENSE.lua:31
+msgid ""
+"On Windows, you can find the file called COPYING.txt in the installation "
+"folder, and the Widelands Start menu entry provides a link to this file."
+msgstr "En Windows, podreu trobar l'arxiu anomenat «COPYING.txt» en el directori d'instal·lació. El menú d'inici del Widelands també disposa d'un enllaç a aquest arxiu."
+
+#: ../../txts/LICENSE.lua:32
+msgid ""
+"On MacOS, you can find the file called COPYING in the archive you downloaded"
+" from the website."
+msgstr "En MacOS, podreu trobar l'arxiu «COPYING» en l'arxiu que us vau baixar del lloc web."
+
+#: ../../txts/LICENSE.lua:34
+msgid ""
+"This game comes as-is and without any warranty. For more information and "
+"support you can find us at %1% (Website, Wiki, Forum for questions or "
+"general support), %2% (Bugtracker), and %3% (Translations)."
+msgstr "Aquest joc es presenta sense cap garantia. Per més informació i suport ens podeu trobar a (en anglès):\n%1% (lloc web, wiki i fòrum per preguntes o suport general)\n%2% (seguiment d'errors)\n%3% (traduccions)"
+
 #: ../../txts/README.lua:6
 msgid "README"
-msgstr ""
+msgstr "LLEGEIX-ME"
 
 #: ../../txts/README.lua:13
 msgid "an open source strategy game"
-msgstr ""
+msgstr "Un joc d'estratègia de codi obert"
 
-#: ../../txts/README.lua:17 ../../txts/editor_readme:7
+#: ../../txts/README.lua:17 ../../txts/editor_readme.lua:10
 msgid "Introduction"
 msgstr "Introducció"
 
@@ -35,7 +104,7 @@ msgid ""
 "campaigns and a multiplayer mode. The game was inspired by Settlers II but has\n"
 "significantly more variety and depth to it. Still, it is easy to get started\n"
 "through playable tutorials."
-msgstr ""
+msgstr "El Widelands és un joc d'estratègia en temps real, lliure i de codi obert amb\ncampanyes d'un jugador i mode multijugador. El joc s'inspira en el Settlers II, però\nté alguns canvis que el milloren en varietat i profunditat de joc. Tot i això,\nés fàcil començar de zero jugant els tutorials."
 
 #: ../../txts/README.lua:24
 msgid ""
@@ -44,21 +113,21 @@ msgid ""
 "inhabitants. On your way towards this goal, you will have to establish an\n"
 "economic infrastructure, explore the land around you and face rivaling\n"
 "tribes."
-msgstr ""
+msgstr "En aquesta partida, comenceu amb un petit tros de terra amb\npocs recursos. Haureu de crear un imperi amb milers d'habitants.\nPer aconseguir-ho, cal establir una infraestructura econòmica,\nexplorar les terres del voltant i enfrontar-vos als clans rivals."
 
 #: ../../txts/README.lua:30
 msgid "Check out the Widelands project homepage:"
-msgstr ""
+msgstr "Visita la pàgina principal del Widelands (en anglès):"
 
 #: ../../txts/README.lua:34
 msgid ""
 "Widelands is licensed under the GNU General Public License (GPL). For more\n"
 "information, see the file ‘COPYING’."
-msgstr ""
+msgstr "El Widelands es distribueix sota la llicència pública general (GPL). Per més\ninformació, llegiu l'arxiu «COPYING»."
 
 #: ../../txts/README.lua:37
 msgid "Status"
-msgstr ""
+msgstr "Estat"
 
 #: ../../txts/README.lua:39
 msgid ""
@@ -67,225 +136,235 @@ msgid ""
 "all areas. If you are interested in contributing – be it by making graphics,\n"
 "fixing bugs or adding new features, translating the game into your language or\n"
 "creating new maps – get in touch on our homepage."
-msgstr ""
+msgstr "El Widelands té acabades pràcticament totes les funcions, és entretingut\njugar-hi sol i encara més en mode multijugador. Encara hi ha feina per fer en\ntotes les àrees. Si esteu interessat en contribuir-hi, sigui fent gràfics, corregint errors,\nafegint-hi noves funcions, traduint el joc o bé creant nous mapes, poseu-vos en\ncontacte al nostre lloc web."
 
 #: ../../txts/README.lua:45
 msgid "General game control"
-msgstr ""
+msgstr "Control general del joc"
 
 #: ../../txts/README.lua:47
 msgid ""
-"To close an open window, right-click on it. To minimize/maximize a window, click\n"
-"on the title bar of that window either with the middle mouse button or with the left\n"
-"mouse button while holding down CTRL."
-msgstr ""
+"To close an open window, right-click on it. To minimize/maximize a window, "
+"click on it with the middle mouse button or with the left mouse button while"
+" holding down Ctrl."
+msgstr "Per tancar una finestra oberta, cliqueu amb el botó dret. Per minimitzar/maximitzar una finestra,\ncliqueu la barra de títol amb el botó del mig o amb l'esquerre mentre\nmanteniu premuda la tecla «Ctrl»."
 
-#: ../../txts/README.lua:51
+#: ../../txts/README.lua:49
 msgid ""
-"If you hold CTRL while building a road, flags will be placed automatically.\n"
-"If you hold CTRL while removing a road, all flags up to the first junction are\n"
+"If you hold Ctrl while building a road, flags will be placed automatically.\n"
+"If you hold Ctrl while removing a road, all flags up to the first junction are\n"
 "removed."
-msgstr ""
+msgstr "Si manteniu premuda la tecla «Ctrl» mentre construïu un camí, automàticament\nes plantaran banderes al llarg d'aquest. Si ho feu mentre retireu un camí,\nes destruiran tots els camins i banderes fins a trobar una cruïlla."
 
-#: ../../txts/README.lua:55
+#: ../../txts/README.lua:53
 msgid ""
-"You can skip confirmation windows for irreversible actions if you hold CTRL\n"
+"You can skip confirmation windows for irreversible actions if you hold Ctrl\n"
 "while clicking on the action button."
-msgstr ""
+msgstr "Podeu saltar-vos les finestres de confirmació d'accions irreversibles\nsi manteniu la tecla «Ctrl» premuda mentre cliqueu el botó d'acció."
+
+#: ../../txts/README.lua:56
+msgid "Keyboard shortcuts (in-game)"
+msgstr "Dreceres de teclat (durant la partida)"
 
 #: ../../txts/README.lua:58
-msgid "Keyboard shortcuts (in-game)"
-msgstr ""
+msgid " Page Up: increases game speed"
+msgstr "Re Pàg: incrementa la velocitat de la partida"
+
+#: ../../txts/README.lua:59
+msgid " Page Down: decreases game speed"
+msgstr "Av Pàg: redueix la velocitat de la partida"
 
 #: ../../txts/README.lua:60
-msgid "PAGEUP: increases game speed"
-msgstr ""
+msgid "Pause: pauses the game"
+msgstr "Pausa: fer una pausa"
 
 #: ../../txts/README.lua:61
-msgid "PAGEDOWN: decreases game speed"
-msgstr ""
+msgid "Space: toggles if building spaces are shown"
+msgstr "Espai: commuta entre mostrar o no els espais on es pot construir"
 
 #: ../../txts/README.lua:62
-msgid "PAUSE: pauses the game"
-msgstr ""
-
-#: ../../txts/README.lua:63 ../../txts/editor_readme:21
-msgid "SPACE: toggles if building spaces are shown"
-msgstr ""
-
-#: ../../txts/README.lua:64 ../../txts/editor_readme:29
 msgid "M: toggles minimap"
-msgstr ""
+msgstr "M: commuta el minimapa"
+
+#: ../../txts/README.lua:63
+msgid "N: toggles messages (‘news’)"
+msgstr "N: commuta els missatges (com en «Notícies»)"
+
+#: ../../txts/README.lua:64
+msgid "C: toggles census"
+msgstr "C: commuta la finestra del cens"
 
 #: ../../txts/README.lua:65
-msgid "N: toggles messages (‘news’)"
-msgstr ""
+msgid "S: toggles statistics"
+msgstr "S: commuta la finestra d'estadístiques"
 
-#: ../../txts/README.lua:66 ../../txts/editor_readme:23
-msgid "C: toggles census"
-msgstr ""
+#: ../../txts/README.lua:66
+msgid "I: toggles stock inventory"
+msgstr "I: commuta l'inventari de l'estoc"
 
 #: ../../txts/README.lua:67
-msgid "S: toggles statistics"
-msgstr ""
+msgid "O: toggles objectives"
+msgstr "O: commuta els objectius"
 
 #: ../../txts/README.lua:68
-msgid "I: toggles stock inventory"
-msgstr ""
+msgid "B: toggles building statistics"
+msgstr "B: commuta les estadístiques d'edificis"
 
 #: ../../txts/README.lua:69
-msgid "O: toggles objectives"
-msgstr ""
+msgid "F: toggles fullscreen (if supported by the OS)"
+msgstr "F: commuta el mode pantalla completa (si el sistema operatiu ho permet)"
 
 #: ../../txts/README.lua:70
-msgid "F: toggles fullscreen (if supported by the OS)"
-msgstr ""
+msgid "Home: centers main mapview on starting location"
+msgstr "Inici: centra la vista del mapa en la posició inicial"
 
 #: ../../txts/README.lua:71
-msgid "Home: centers main mapview on starting location"
-msgstr ""
+msgid "(Ctrl +) 0-9: Remember and go to previously remembered locations"
+msgstr "0-9: vés a les posicions recordades anteriorment (pulsant un número i mantenint Ctrl premuda, recorda la posició)"
 
 #: ../../txts/README.lua:72
-msgid "(CTRL+) 0-9: Remember and go to previously remembered locations"
-msgstr ""
+msgid ",: goes to the previous location"
+msgstr ", (coma): vés a la posició anterior"
 
 #: ../../txts/README.lua:73
-msgid ",: goes to the previous location"
-msgstr ""
+msgid ".: goes to the next location"
+msgstr ". (punt): vés a la posició següent"
 
 #: ../../txts/README.lua:74
-msgid ".: goes to the next location"
-msgstr ""
+msgid "F6: shows the debug console (only in debug-builds)"
+msgstr "F6: mostra la consola de depuració (només en muntatges de depuració)"
 
 #: ../../txts/README.lua:75
-msgid "F6: shows the debug console (only in debug-builds)"
-msgstr ""
+msgid "Ctrl + F10: quits the game immediately"
+msgstr "Ctrl+F10: surt del programa immediatament"
 
 #: ../../txts/README.lua:76
-msgid "CTRL+F10: quits the game immediately"
-msgstr ""
+msgid "Ctrl + Leftclick: skips confirmation dialogs"
+msgstr "Ctrl+Clic esquerre: salta els diàlegs de confirmació"
 
 #: ../../txts/README.lua:77
-msgid "CTRL+Leftclick: skips confirmation dialogs"
-msgstr ""
+msgid "Ctrl + F11: takes a screenshot"
+msgstr "Ctrl+F11: pren una captura de pantalla"
 
-#: ../../txts/README.lua:78
-msgid "CTRL+F11: takes a screenshot"
-msgstr ""
-
-#: ../../txts/README.lua:80
+#: ../../txts/README.lua:79
 msgid ""
 "In the message window, the following additional shortcuts are available:"
-msgstr ""
+msgstr "A la finestra de missatges també estan disponibles aquestes dreceres de teclat:"
+
+#: ../../txts/README.lua:81
+msgid "0: shows all messages"
+msgstr "0: mostra tots els missatges"
 
 #: ../../txts/README.lua:82
-msgid "0: shows all messages"
-msgstr ""
+msgid "1: shows geologists’ messages only"
+msgstr "1: mostra només els missatges dels geòlegs"
 
 #: ../../txts/README.lua:83
-msgid "1: shows geologists' messages only"
-msgstr ""
+msgid "2: shows economy messages only"
+msgstr "2: mostra només els missatges de l'economia"
 
 #: ../../txts/README.lua:84
-msgid "2: shows economy messages only"
-msgstr ""
+msgid "3: shows seafaring messages only"
+msgstr "3: mostra només els missatges de navegació marítima"
 
 #: ../../txts/README.lua:85
-msgid "3: shows seafaring messages only"
-msgstr ""
+msgid "4: shows warfare messages only"
+msgstr "4: mostra només els missatges militars"
 
 #: ../../txts/README.lua:86
-msgid "4: shows warfare messages only"
-msgstr ""
+msgid "5: shows scenario messages only"
+msgstr "5: mostra només els missatges d'escenari"
 
 #: ../../txts/README.lua:87
-msgid "5: shows scenario messages only"
-msgstr ""
+msgid "G: jumps to the location corresponding to the current message"
+msgstr "G: salta a la posició corresponent del missatge actual"
 
 #: ../../txts/README.lua:88
-msgid "G: jumps to the location corresponding to the current message"
-msgstr ""
+msgid "Delete: archives/restores the current message"
+msgstr "Supr: arxiva/restaura el missatge actual"
 
-#: ../../txts/README.lua:89
-msgid "DELETE: archives/restores the current message"
-msgstr ""
+#: ../../txts/README.lua:90
+msgid "Online Help"
+msgstr "Ajuda en línia"
 
 #: ../../txts/README.lua:91
-msgid "Online Help"
-msgstr ""
-
-#: ../../txts/README.lua:93
 msgid ""
-"If you need documentation or help for Widelands or the Widelands Editor, be\n"
-"sure to visit our homepage. You can find an up to date online help in our Wiki\n"
-"and a detailed description of the tribe economies in our online encyclopedia."
-msgstr ""
+"A detailed description of the tribes’ economies is available in the in-game "
+"Tribal Encyclopedia."
+msgstr "Una descripció detallada de les economies està disponible a l'enciclopèdia tribal. Es pot consultar mentre s'està jugant."
 
-#: ../../txts/README.lua:97
+#: ../../txts/README.lua:92
+msgid ""
+"If you need more documentation or help for Widelands or the Widelands "
+"Editor, be sure to visit our homepage at %s. You can find online help in our"
+" Wiki there."
+msgstr "Si necessiteu ajuda o informació per al Widelands p el seu editor,\nvisiteu el nostre lloc web en %s. A la wiki, trobareu ajuda actualitzada."
+
+#: ../../txts/README.lua:94
 msgid "Reporting Bugs"
-msgstr ""
+msgstr "Com comunicar errors"
 
-#: ../../txts/README.lua:99
+#: ../../txts/README.lua:96
 msgid "If you encounter a bug, please report it to our bugtracker:"
-msgstr ""
+msgstr "Si trobeu un error, per favor comunica-ho al nostre registre d'errors (en anglès):"
 
-#: ../../txts/README.lua:103
+#: ../../txts/README.lua:100
 msgid "Please provide enough background information. Tell us:"
-msgstr ""
+msgstr "Si us plau, doneu-nos prou informació del context, com ara:"
 
-#: ../../txts/README.lua:105
+#: ../../txts/README.lua:102
 msgid "- Detailed steps on how to trigger the bug, if possible."
-msgstr ""
+msgstr "- Passos detallats per poder reproduir l'error, si és possible."
 
-#: ../../txts/README.lua:107
+#: ../../txts/README.lua:104
 msgid ""
 "- What you expected to happen when performing the steps and what actually "
 "happened."
-msgstr ""
+msgstr "- Què esperàveu que passés quan feu els passos i què va passar realment."
 
-#: ../../txts/README.lua:109
+#: ../../txts/README.lua:106
 msgid ""
 "- Which version of Widelands you are running (i.e. either the build number or\n"
 "the revision number if you are running a development version or a daily build.)"
-msgstr ""
+msgstr "- Quina versió del Widelands esteu usant (és a dir, el número de versió o\nel número de revisió que esteu emprant si feu servir una versió de\ndesenvolupament o un muntatge diari). Normalment, podreu trobar la versió al menú inicial."
 
-#: ../../txts/README.lua:112
+#: ../../txts/README.lua:109
 msgid ""
 "- Please also include which operating system you are running Widelands on as\n"
 "some bugs can be platform specific."
-msgstr ""
+msgstr "- Per favor, incloeu també el sistema operatiu que feu servir per jugar al Widelands\nja que alguns errors poden ser específics de la plataforma."
 
-#: ../../txts/README.lua:115
+#: ../../txts/README.lua:112
 msgid "- Which map you were playing when the bug occurred."
-msgstr ""
+msgstr "- En quin mapa estàveu jugant quan va ocórrer l'error."
 
-#: ../../txts/README.lua:117
+#: ../../txts/README.lua:114
 msgid ""
 "- If the bug concerns something not being displayed correctly or if it helps\n"
 "demonstrate the issue, please include one or more screenshots."
-msgstr ""
+msgstr "- Podeu afegir captures de pantalla o imatges per descriure millor l'error."
 
-#: ../../txts/README.lua:120
+#: ../../txts/README.lua:117
 msgid ""
 "- If you have a save game or replay demonstrating the issue (for instance\n"
 "crashes where it can be hard to tell exactly what is triggering it), please\n"
 "include that too. For more information, see the section on Replays below."
-msgstr ""
+msgstr "- Si disposeu d'alguna partida desada o repetició on s'observi el problema\n(per exemple fallades on és difícil saber què les produeix), adjunteu-les.\nPer més informació, veure la secció de repeticions que hi ha més avall."
 
-#: ../../txts/README.lua:124
+#: ../../txts/README.lua:121
 msgid "Replays"
-msgstr ""
+msgstr "Repeticions"
 
-#: ../../txts/README.lua:126
+#: ../../txts/README.lua:123
 msgid ""
 "Widelands records every game you play in two files. One of these files has a\n"
 ".wrpl.wgf extension and contains an initial savegame. The other file has a\n"
 ".wrpl extension and contains all commands that were issued by all players, such\n"
 "as building a road or attacking an enemy. The rest of the filenames will tell\n"
 "you the time you started the game."
-msgstr ""
+msgstr "El Widelands grava totes les partides que jugueu en dos arxius. El que té\nextensió .wrpl.wgf conté les dades inicials de la partida i el que té extensió .wrpl\nconté totes les ordres executades pels jugadors, com ara construcció de\ncamins i edificis o atacs a l'enemic. La resta del nom dels arxius us pot ajudar\na saber quan es va començar la partida."
 
-#: ../../txts/README.lua:132
+#: ../../txts/README.lua:129
 msgid ""
 "Using the Watch Replay option in the main menu, a previously played game will\n"
 "be precisely reconstructed for you to watch. Note, however, that even small\n"
@@ -293,516 +372,469 @@ msgid ""
 "to become incompatible and to ‘go out of sync’. This is similar to how network\n"
 "games will suffer from desynchronization problems if one of the players has a\n"
 "different version of the game."
-msgstr ""
+msgstr "Usant l'opció de veure la repetició del menú principal podreu reconstruir i veure\nperfectament una partida jugada anteriorment. Cal tenir en compte que els petits\ncanvis en el codi del Widelands poden fer que partides desades amb altres versions\nsiguin incompatibles i es dessincronitzin. Això també passa amb partides\nmultijugador quan els jugadors tenen diferents versions del joc."
 
-#: ../../txts/README.lua:139
+#: ../../txts/README.lua:136
 msgid ""
 "Replays are a very useful tool to find bugs in the game logic, so they\n"
 "can be useful as attachments to bug reports. The replay files are saved in the\n"
 "~/.widelands/replays directory on Linux and Mac OS X. On Windows,\n"
 "they are in the ‘replays’ subdirectory of your Widelands installation."
-msgstr ""
+msgstr "Les repeticions són una eina útil per trobar errors del programa,\naixí que pot ser útil adjuntar-les en informes d'errors. En Linux i Mac OS X,\nels arxius de repetició es desen al directori «~/.widelands/replays» .\nEn Windows, al directori «replays» on està instal·lat el Widelands."
 
-#: ../../txts/developers:1
-msgid "Authors"
-msgstr ""
+#: ../../txts/developers.lua:3
+msgid "Atlantean"
+msgstr "Atlant"
 
-#: ../../txts/developers:3
-msgid "Widelands Development Team"
-msgstr ""
+#: ../../txts/developers.lua:3
+msgid "Barbarian"
+msgstr "Els bàrbars"
 
-#: ../../txts/developers:8
+#: ../../txts/developers.lua:3
+msgid "Campaign Story"
+msgstr "Històries de les campanyes"
+
+#: ../../txts/developers.lua:3
 msgid "Chieftain"
-msgstr ""
+msgstr "Cap"
 
-#: ../../txts/developers:14
+#: ../../txts/developers.lua:3
+msgid "Coders"
+msgstr "Programadors"
+
+#: ../../txts/developers.lua:3
+msgid "Debian Linux"
+msgstr "Debian"
+
+#: ../../txts/developers.lua:3
+msgid "Documentation, Help and Wiki"
+msgstr "Documentació, ajuda i wiki"
+
+#: ../../txts/developers.lua:3
 msgid "Elders"
-msgstr ""
+msgstr "Ancians"
 
-#: ../../txts/developers:18 ../../txts/developers:366
+#: ../../txts/developers.lua:3
+msgid "Empire"
+msgstr "L'Imperi"
+
+#: ../../txts/developers.lua:3
+msgid "Fedora Linux"
+msgstr "Fedora"
+
+#: ../../txts/developers.lua:3
+msgid "Former Elders"
+msgstr "Primers ancians"
+
+#: ../../txts/developers.lua:3
+msgid "FreeBSD"
+msgstr "FreeBSD"
+
+#: ../../txts/developers.lua:3
+msgid "Graphicians"
+msgstr "Grafistes"
+
+#: ../../txts/developers.lua:3 ../../txts/developers.lua:3
 msgid "Graphics"
 msgstr "Gràfics"
 
-#: ../../txts/developers:23 ../../txts/developers:359
+#: ../../txts/developers.lua:3 ../../txts/developers.lua:3
+#: ../../txts/developers.lua:3
 msgid "Homepage"
-msgstr "Pàgina d'inici"
+msgstr "Pàgina inicial"
 
-#: ../../txts/developers:28 ../../txts/developers:373
-msgid "Sound"
-msgstr ""
-
-#: ../../txts/developers:33
-msgid "Tongues"
-msgstr ""
-
-#: ../../txts/developers:38
-msgid "Coders"
-msgstr ""
-
-#: ../../txts/developers:96
-msgid "Graphicians"
-msgstr ""
-
-#: ../../txts/developers:126
-msgid "Musicians"
-msgstr ""
-
-#: ../../txts/developers:138
-msgid "Sound Effects"
-msgstr ""
-
-#: ../../txts/developers:148
-msgid "Maps and Missions"
-msgstr ""
-
-#: ../../txts/developers:169
-msgid "Campaign Story"
-msgstr ""
-
-#: ../../txts/developers:172
-msgid "Barbarian"
-msgstr ""
-
-#: ../../txts/developers:178
-msgid "Empire"
-msgstr ""
-
-#: ../../txts/developers:182
-msgid "Atlantean"
-msgstr ""
-
-#: ../../txts/developers:189
-msgid "Translators"
-msgstr ""
-
-#: ../../txts/developers:192
-msgid ""
-"NOTE: this list holds people that translated Widelands before we moved to "
-"launchpad.net. "
-msgstr ""
-
-#: ../../txts/developers:193
-msgid ""
-"See https://translations.launchpad.net/widelands for a list of people that "
-"helped to translate Widelands via launchpad.net."
-msgstr ""
-
-#: ../../txts/developers:197
-msgid "Czech"
-msgstr ""
-
-#: ../../txts/developers:204
-msgid "Dansk"
-msgstr ""
-
-#: ../../txts/developers:210
-msgid "Dutch"
-msgstr ""
-
-#: ../../txts/developers:217
-msgid "Finnish"
-msgstr ""
-
-#: ../../txts/developers:223
-msgid "French"
-msgstr ""
-
-#: ../../txts/developers:230
-msgid "Galician"
-msgstr ""
-
-#: ../../txts/developers:235
-msgid "German"
-msgstr ""
-
-#: ../../txts/developers:247
-msgid "Hebrew"
-msgstr ""
-
-#: ../../txts/developers:252
-msgid "Hungarian"
-msgstr ""
-
-#: ../../txts/developers:257
-msgid "Italian"
-msgstr ""
-
-#: ../../txts/developers:262
-msgid "Polish"
-msgstr ""
-
-#: ../../txts/developers:270
-msgid "Russian"
-msgstr ""
-
-#: ../../txts/developers:275
-msgid "Slovak"
-msgstr ""
-
-#: ../../txts/developers:280
-msgid "Spanish"
-msgstr ""
-
-#: ../../txts/developers:285
-msgid "Swedish"
-msgstr ""
-
-#: ../../txts/developers:292
-msgid "Packagers"
-msgstr ""
-
-#: ../../txts/developers:296
-msgid "Linux Distributions"
-msgstr ""
-
-#: ../../txts/developers:307
-msgid "Other Unix Distributions"
-msgstr ""
-
-#: ../../txts/developers:318
-msgid "Non Unix Distributions"
-msgstr ""
-
-#: ../../txts/developers:330
+#: ../../txts/developers.lua:3
 msgid "Homepage Coders"
-msgstr ""
+msgstr "Programadors de la pàgina d'inici"
 
-#: ../../txts/developers:340
-msgid "Documentation, Help and Wiki"
-msgstr "Documentació, Ajuda i Wiki"
+#: ../../txts/developers.lua:3
+msgid "Mac OS X"
+msgstr "Mac OS X"
 
-#: ../../txts/developers:355
-msgid "Former elders"
-msgstr ""
+#: ../../txts/developers.lua:3
+msgid "Mandriva Linux"
+msgstr "Mandriva"
 
-#: ../../txts/developers:378
-msgid "Translation"
-msgstr ""
+#: ../../txts/developers.lua:3
+msgid "Maps and Missions"
+msgstr "Mapes i missions"
 
-#: ../../txts/developers:385
+#: ../../txts/developers.lua:3
+msgid "Musicians"
+msgstr "Músics"
+
+#: ../../txts/developers.lua:3
 msgid "Other"
 msgstr "Altres"
 
-#: ../../txts/editor_readme:1
+#: ../../txts/developers.lua:3
+msgid "Packagers"
+msgstr "Empaquetadors"
+
+#: ../../txts/developers.lua:3 ../../txts/developers.lua:3
+msgid "Sound"
+msgstr "So"
+
+#: ../../txts/developers.lua:3
+msgid "Sound Effects"
+msgstr "Efectes de so"
+
+#: ../../txts/developers.lua:3
+msgid "Tongues"
+msgstr "Idiomes"
+
+#: ../../txts/developers.lua:3
+msgid "Translation"
+msgstr "Traducció"
+
+#: ../../txts/developers.lua:3
+msgid "Translators"
+msgstr "Traductors"
+
+#: ../../txts/developers.lua:3
+msgid "Windows"
+msgstr "Windows"
+
+#: ../../txts/developers.lua:3
+msgid "ZetaOS"
+msgstr "ZetaOS"
+
+#: ../../txts/editor_readme.lua:6
 msgid "README for the Widelands Editor"
-msgstr ""
+msgstr "LLEGEIX-ME de l'editor del Widelands"
 
-#: ../../txts/editor_readme:4
-msgid "README for the Editor"
-msgstr ""
+#: ../../txts/editor_readme.lua:8
+msgid "The Widelands Editor"
+msgstr "L'editor del Widelands"
 
-#: ../../txts/editor_readme:10
+#: ../../txts/editor_readme.lua:12
 msgid ""
-"This Editor is intended for players who would like to design their own maps "
-"to use with Widelands.<br>As you can see, this Editor is heavy work in "
-"progress and as the Editor becomes better and better, this text will also "
-"get longer and more complete."
-msgstr ""
+"This editor is intended for players who would like to design their own maps "
+"to use with Widelands."
+msgstr "L'editor és per als jugadors que volen dissenyar els seus propis mapes per a jugar al Widelands."
 
-#: ../../txts/editor_readme:12
-msgid "Please have a look at our enduser manuals on our wiki pages at:"
-msgstr ""
+#: ../../txts/editor_readme.lua:13
+msgid ""
+"As you can see, this editor is heavy work in progress and as the editor "
+"becomes better and better, this text will also get longer and more complete."
+msgstr "Tal i com podeu veure, l'editor està encara en procés de construcció. Conforme millori l'editor, aquests textos també s'aniran completant."
 
-#: ../../txts/editor_readme:14
+#: ../../txts/editor_readme.lua:14
+msgid "Please have a look at our enduser manuals on our wiki pages at: %s"
+msgstr "Per favor, doneu un cop d'ull al manual de l'usuari en les nostres pàgines wiki en: %s"
+
+#: ../../txts/editor_readme.lua:15
 msgid ""
 "Those pages might be more complete and up to date than this file, and you "
 "will also find a short tutorial about building a map there."
-msgstr ""
+msgstr "Les pàgines s'aniran completant i mantenint actualitzades més sovint que aquest arxiu i potser hi trobareu un breu tutorial sobre com construir un mapa."
 
-#: ../../txts/editor_readme:18
+#: ../../txts/editor_readme.lua:17
 msgid "Keyboard shortcuts"
-msgstr ""
+msgstr "Dreceres de teclat"
 
-#: ../../txts/editor_readme:25
-msgid "F: toggles fullscreen"
-msgstr ""
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:21
+msgid "Space:"
+msgstr "Espai:"
 
-#: ../../txts/editor_readme:27
-msgid "H: toggles main menu"
-msgstr ""
+#: ../../txts/editor_readme.lua:21
+msgid "toggles if building spaces are shown"
+msgstr "commuta entre mostrar o no mostrar els espais per construir"
 
-#: ../../txts/editor_readme:31
-msgid "P: toggles player menu"
-msgstr ""
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:23
+msgid "C:"
+msgstr "C:"
 
-#: ../../txts/editor_readme:33
-msgid "T: toggles tools menu"
-msgstr ""
+#: ../../txts/editor_readme.lua:23
+msgid "toggles census"
+msgstr "commuta el cens"
 
-#: ../../txts/editor_readme:35
-msgid "I: activates information tool"
-msgstr ""
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:25
+msgid "F:"
+msgstr "F:"
 
-#: ../../txts/editor_readme:37
-msgid "CTRL+L: load map"
-msgstr ""
+#: ../../txts/editor_readme.lua:25
+msgid "toggles fullscreen"
+msgstr "commuta el mode de pantalla completa"
 
-#: ../../txts/editor_readme:39
-msgid "CTRL+S: save map"
-msgstr ""
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:27
+msgid "H:"
+msgstr "H:"
 
-#: ../../txts/editor_readme:41
-msgid "1-0: changes tool size"
-msgstr ""
+#: ../../txts/editor_readme.lua:27
+msgid "toggles main menu"
+msgstr "commuta el menú principal"
 
-#: ../../txts/editor_readme:43
-msgid "SHIFT (Hold): selects first alternative tool while pressed"
-msgstr ""
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:29
+msgid "M:"
+msgstr "M:"
 
-#: ../../txts/editor_readme:45
-msgid "ALT (Hold): Selects second alternative tool while pressed"
-msgstr ""
+#: ../../txts/editor_readme.lua:29
+msgid "toggles minimap"
+msgstr "commuta el minimapa"
 
-#: ../../txts/license:1
-msgid "License"
-msgstr "Llicència"
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:31
+msgid "P:"
+msgstr "P:"
 
-#: ../../txts/license:4
-msgid "Licensing information for Widelands"
-msgstr ""
+#: ../../txts/editor_readme.lua:31
+msgid "toggles player menu"
+msgstr "commuta el menú del jugador"
 
-#: ../../txts/license:7
-msgid "Copyright 2002 - 2015 by the Widelands Development Team."
-msgstr ""
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:33
+msgid "T:"
+msgstr "T:"
 
-#: ../../txts/license:9
-msgid ""
-"This game is Free and Open Source (FOSS), licensed under the GNU General "
-"Public License (GPL) V2.0."
-msgstr ""
+#: ../../txts/editor_readme.lua:33
+msgid "toggles tools menu"
+msgstr "commuta el menú d'eines"
 
-#: ../../txts/license:11
-msgid ""
-"You can find more information on FOSS and the GPL by visiting the following "
-"webpage: "
-msgstr ""
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:35
+msgid "I:"
+msgstr "I:"
 
-#: ../../txts/license:12
-msgid "http://www.gnu.org/licenses/old-licenses/gpl-2.0"
-msgstr ""
+#: ../../txts/editor_readme.lua:35
+msgid "activates information tool"
+msgstr "activa l'eina d'informació"
 
-#: ../../txts/license:14
-msgid ""
-"You can find the full text of the license there as well as further "
-"information about its philosophy and the legal implications."
-msgstr ""
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:37
+msgid "Ctrl + L:"
+msgstr "Ctrl+L:"
 
-#: ../../txts/license:16
-msgid "We are also shipping the GPL as a text document with Widelands itself."
-msgstr ""
+#: ../../txts/editor_readme.lua:37
+msgid "load map"
+msgstr "carrega un mapa"
 
-#: ../../txts/license:18
-msgid ""
-"On Linux, you can find the file called COPYING in the root of the source or "
-"standalone binary package, or in the installation directory (like "
-"/usr/share/games/widelands)."
-msgstr ""
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:39
+msgid "Ctrl + S:"
+msgstr "Ctrl+S:"
 
-#: ../../txts/license:19
-msgid ""
-"On Windows, you can find the file called COPYING.txt in the installation "
-"folder, and the Widelands Start menu entry provides a link to this file."
-msgstr ""
+#: ../../txts/editor_readme.lua:39
+msgid "save map"
+msgstr "desa el mapa"
 
-#: ../../txts/license:20
-msgid ""
-"On MacOS, you can find the file called COPYING in the archive you downloaded"
-" from the website."
-msgstr ""
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:41
+msgid "1-0:"
+msgstr "1-0:"
 
-#: ../../txts/license:22
-msgid ""
-"This game comes as-is and without any warranty. For more information and "
-"support you can find us at http://wl.widelands.org (Website, Wiki, Forum for"
-" questions or general support) or https://launchpad.net/widelands "
-"(Bugtracker, Translations)."
-msgstr ""
+#: ../../txts/editor_readme.lua:41
+msgid "changes tool size"
+msgstr "canvia la mida d'eina"
+
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:43
+msgid "Shift (Hold):"
+msgstr "Maj. (mantinguda premuda):"
+
+#: ../../txts/editor_readme.lua:43
+msgid "selects first alternative tool while pressed"
+msgstr "selecciona la funció alternativa quan es manté premuda"
+
+#. TRANSLATORS: This is a hotkey
+#: ../../txts/editor_readme.lua:45
+msgid "Alt (Hold):"
+msgstr "Alt (mantinguda premuda):"
+
+#: ../../txts/editor_readme.lua:45
+msgid "Selects second alternative tool while pressed"
+msgstr "Mentre es prem aquesta tecla, s'activa la funció alternativa de l'eina"
 
 #: ../../txts/tips/atlanteans.tip:2 ../../txts/tips/barbarians.tip:2
 #: ../../txts/tips/empire.tip:2
 msgid ""
-"Some buildings, such as the farm, have a very small working area. If the "
+"Some buildings, such as the farm, have a very small work area. If the "
 "building is surrounded with trees or roads, production will stop."
-msgstr ""
+msgstr "Alguns edificis, com les granges, tenen una àrea de treball molt petita. Si l'edifici està envoltat d'arbres, banderes, camins i altres, l'edifici no serà productiu."
 
 #: ../../txts/tips/atlanteans.tip:6
 msgid ""
 "Always build a forester’s and a fish breeder’s house, so you will not run "
 "out of logs or food."
-msgstr ""
+msgstr "Construïu sempre cases de guarda forestal i criador de peixos, per a no quedar-vos sense troncs ni aliment."
 
 #: ../../txts/tips/barbarians.tip:6 ../../txts/tips/empire.tip:6
 msgid ""
 "Keep an eye on your fishers. After fish resources are exhausted in their "
-"working area, they will stop fishing."
-msgstr ""
+"work area, they will stop fishing."
+msgstr "Vigileu els pescadors. Quan s'esgotin els recursos pesquers en la seva àrea de treball, ja no us seran útils."
 
 #: ../../txts/tips/barbarians.tip:10
 msgid ""
 "Always build a ranger’s and a gamekeeper’s hut, so you will not run out of "
 "logs or food."
-msgstr ""
+msgstr "Construïu sempre cabanes de guarda forestal i del guarda de caça, per a no quedar-vos sense troncs ni aliment."
 
 #: ../../txts/tips/editor.tip:2
 msgid ""
 "You can find general help for the editor as well as a short tutorial on our "
 "wiki at www.widelands.org"
-msgstr ""
+msgstr "Podeu trobar ajuda general per a l'editor i un breu tutorial a la nostra wiki en www.widelands.org (en anglès)."
 
 #: ../../txts/tips/editor.tip:6
 msgid ""
-"You can select multiple animal types if you hold down CTRL during selection."
+"You can select multiple animal types if you hold down Ctrl during selection."
 " If you then click on the map, an instance of one of the selected animal "
 "types will be placed."
-msgstr ""
+msgstr "Podeu seleccionar diversos tipus d'animals si manteniu premuda la tecla «Ctrl» durant la selecció. Si després cliqueu al mapa, es posarà al mapa un dels animals seleccionats."
 
 #: ../../txts/tips/editor.tip:10
 msgid ""
 "Just like with animals, you can also select multiple immovables or ground "
-"textures with CTRL + mouse click."
-msgstr ""
+"textures with Ctrl + mouse click."
+msgstr "Igual que amb els animals, podeu seleccionar diversos objectes inamovibles o textures de terreny amb la combinació «Ctrl+clic»."
 
 #: ../../txts/tips/editor.tip:14
 msgid ""
-"Holding down SHIFT switches the first alternative tool on. This tool is in "
+"Holding down Shift switches the first alternative tool on. This tool is in "
 "most cases the complete opposite of the normal tool (for example deletion of"
 " an object instead of placing one)."
-msgstr ""
+msgstr "Mantenint premuda la tecla Maj, s'executarà la funció alternativa. Aquesta alternativa molts cops realitzen l'acció contrària de la funció normal (per exemple, treure un objecte del mapa en lloc de posar-lo)."
 
 #: ../../txts/tips/editor.tip:18
 msgid ""
-"Holding down ALT switches the second alternative tool on (if it exists)."
-msgstr ""
+"Holding down Alt switches the second alternative tool on (if it exists)."
+msgstr "Mantenint premuda la tecla «Alt», s'executarà la segona funció alternativa (si està definida)."
 
 #: ../../txts/tips/editor.tip:22
 msgid ""
 "The number keys (1 - 0) allow you to directly set the size of the selected "
 "area around your mouse cursor."
-msgstr ""
+msgstr "Les tecles de números (0...9) permeten seleccionar la mida de l'àrea al voltant del cursor."
 
 #: ../../txts/tips/editor.tip:26
 msgid ""
-"SPACE key behaves like in normal game. It switches if building spaces are "
+"Space key behaves like in normal game. It switches if building spaces are "
 "shown on or off."
-msgstr ""
+msgstr "La tecla «Espai» es comporta com en una partida normal: commuta entre mostrar o no els espais disponibles per construir-hi."
 
 #: ../../txts/tips/empire.tip:10
 msgid "Always build a forester’s house so you will not run out of logs."
-msgstr ""
+msgstr "Construïu sempre una casa de guarda forestal per no quedar-vos sense troncs."
 
 #: ../../txts/tips/general_game.tip:2
 msgid ""
 "The building process will only start after a road is built to the "
 "construction site."
-msgstr ""
+msgstr "La construcció començarà després que es construeixi un camí fins a l'obra."
 
 #: ../../txts/tips/general_game.tip:6
 msgid ""
 "Be sure to send a geologist to survey sites before building a well or a "
 "mine."
-msgstr ""
+msgstr "Assegureu-vos d'enviar un geòleg abans de construir un pou o una mina."
 
 #: ../../txts/tips/general_game.tip:10
 msgid ""
 "Your territory can be expanded by building various military buildings – "
-"Sentry, Fortress, Barracks, etc."
-msgstr ""
+"Sentry, Fortress, Blockhouse, etc."
+msgstr "El vostre territori es pot expandir construint diferents edificis militars: guardes sentinella, fortaleses, barracons, etc."
 
 #: ../../txts/tips/general_game.tip:14
 msgid "Miners will work only if supplied with food."
-msgstr ""
+msgstr "Els miners només treballaran si se'ls subministra aliment."
 
 #: ../../txts/tips/general_game.tip:18
 msgid ""
 "Split your roads into shorter sections by planting some flags. This will "
 "speed up transportation of your wares."
-msgstr ""
+msgstr "Dividiu els camins en seccions més curtes plantant-hi algunes banderes. Això farà més curts els temps de transport de béns."
 
 #: ../../txts/tips/general_game.tip:22
 msgid ""
 "Any further questions? Our FAQ, the wiki and of course our community forums "
 "can be found at www.widelands.org."
-msgstr ""
+msgstr "Teniu algun dubte? Podeu trobar les nostres PMF, la wiki i el fòrum de la comunitat en www.widelands.org (en anglès)."
 
 #: ../../txts/tips/general_game.tip:26
 msgid ""
 "Use the priority buttons in building windows to adjust delivery of a "
 "specific ware."
-msgstr ""
+msgstr "Useu els botons de prioritat en les finestres d'edifici per ajustar el subministrament d'un bé específic."
 
 #: ../../txts/tips/general_game.tip:30
 msgid ""
 "Use the ‘configure economy’ menu to adjust the target quantity of wares. It "
 "can be accessed via the flag menu."
-msgstr ""
+msgstr "Useu el menú «Configurar economia» per ajustar la quantitat desitjada de béns. S'hi pot accedir per la finestra de bandera."
 
 #: ../../txts/tips/general_game.tip:34
 msgid ""
 "Manage your messages more efficiently: press ‘N’ for News to access the "
 "messages window, then use ‘G’ for Go To, and the Delete key to archive "
 "messages."
-msgstr ""
+msgstr "Gestioneu els vostres missatges eficientment: premeu «n» (\"News\", en anglès) per obrir la finestra de missatges, la tecla «g» (\"go to\", en anglès) per anar al lloc relacionat amb el missatge i la tecla «Supr» per arxivar missatges."
 
 #: ../../txts/tips/general_game.tip:38
 msgid ""
 "Use the ‘,’ (comma) and ‘.’ (period) keys to go back and forth between "
 "recently visited places in the world."
-msgstr ""
+msgstr "Useu les tecles «,» (coma) i «.» (punt) per tornar cap enrere i cap avant entre llocs del mapa recentment visitats."
 
 #: ../../txts/tips/general_game.tip:42
 msgid ""
 "Press Ctrl+(0-9) to store important locations, then press 0-9 to recall "
 "them."
-msgstr ""
+msgstr "Useu Ctrl+(0-9) per guardar ubicacions importants i premeu 0-9 per tornar-hi ràpidament."
 
 #: ../../txts/tips/general_game.tip:46
 msgid ""
 "Removing a road while holding Ctrl lets you remove all flags up to the first"
 " junction."
-msgstr ""
+msgstr "Si destrueixes una bandera o camí mentre mantens premuda la tecla Ctrl, elimina totes les banderes fins a la primera cruïlla."
 
 #: ../../txts/tips/general_game.tip:50
 msgid ""
 "New soldiers are recruited in the headquarters or a warehouse if all needed "
 "tools are available. Training sites are for improving their abilities."
-msgstr ""
+msgstr "Els nous soldats es recluten en el quarter general, magatzems o ports si disposen de tots els elements necessaris. Els llocs d'entrenament en milloren les característiques."
 
 #: ../../txts/tips/general_game.tip:54
 msgid ""
 "If you like to live dangerously, pressing Ctrl while clicking the enhance, "
 "dismantle or destroy building buttons will skip the confirmation."
-msgstr ""
+msgstr "Si us agrada viure al límit, prement la tecla «Ctrl» mentre cliqueu millorar, desmantellar o destruir l'edifici, es realitzarà l'acció directament sense demanar-vos confirmació."
 
 #: ../../txts/tips/general_game.tip:58
 msgid "Press I to quickly toggle the display of your stock inventory."
-msgstr ""
+msgstr "Premeu la tecla «i» (inventari) per obrir o tancar la finestra d'estoc."
 
 #: ../../txts/tips/general_game.tip:62
 msgid ""
 "An economy consists of all buildings and flags connected by roads. The "
 "supplies and demands of buildings are handled in its economy."
-msgstr ""
+msgstr "Una economia consisteix d'edificis, treballadors, béns i xarxa de comunicació. Els subministraments i les demandes dels edificis es realitzen segons les necessitats de la colònia."
 
 #: ../../txts/tips/multiplayer.tip:2
 msgid ""
 "You can use the ’Page up’ and ‘Page down’ keys to adjust your desired speed "
 "– the real speed is then democratically set."
-msgstr ""
+msgstr "Podeu usar les tecles «Av Pàg» i «Re Pàg» per ajustar la velocitat de la partida."
 
 #: ../../txts/tips/multiplayer.tip:6
 msgid ""
 "You can use ‘/me’ at the beginning of a chatmessage: ‘/me is tired’ will be "
 "printed as ‘-> Nickname is tired’."
-msgstr ""
+msgstr "Podeu escriure «/me» al principi del missatge de xat: si el vostre àlies és \"Abcd\", el missatge «/me està cansat» es mostrarà com «Abcd està cansat»."
 
 #: ../../txts/tips/multiplayer.tip:10
 msgid ""
 "Use ‘@name’ at the beginning of a chat message to send it to only one "
 "player."
-msgstr ""
+msgstr "Afegiu «@nom» al principi del missatge de xat per enviar-li només al jugador desitjat."
 
 #: ../../txts/tips/singleplayer.tip:2
 msgid ""
 "Our computer players are too boring? Visit our website at www.widelands.org "
 "and meet other players to play online."
-msgstr ""
+msgstr "Els jugadors controlats per les IA són massa avorrits? Visiteu la nostra pàgina web en www.widelands.org (en anglès) i conegueu altres jugadors per jugar en línia."

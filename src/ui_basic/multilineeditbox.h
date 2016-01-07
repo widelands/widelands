@@ -24,6 +24,7 @@
 
 #include <boost/signals2.hpp>
 
+#include "graphic/graphic.h"
 #include "ui_basic/panel.h"
 
 namespace UI {
@@ -36,7 +37,8 @@ struct TextStyle;
  */
 struct MultilineEditbox : public Panel {
 	MultilineEditbox
-		(Panel *, int32_t x, int32_t y, uint32_t w, uint32_t h, const std::string & text);
+		(Panel *, int32_t x, int32_t y, uint32_t w, uint32_t h,
+		 const std::string & text, const Image* background = g_gr->images().get("pics/but2.png"));
 
 	boost::signals2::signal<void ()> changed;
 
@@ -53,7 +55,7 @@ protected:
 	void draw(RenderTarget &) override;
 
 	bool handle_key(bool down, SDL_Keysym) override;
-	bool handle_textinput(const std::string& text);
+	bool handle_textinput(const std::string& text) override;
 
 private:
 	void scrollpos_changed(int32_t);

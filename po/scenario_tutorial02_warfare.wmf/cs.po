@@ -9,10 +9,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-03-06 16:48+0000\n"
-"PO-Revision-Date: 2015-03-11 22:57+0000\n"
-"Last-Translator: Matej Svrcek <mmatej@yahoo.com>\n"
-"Language-Team: Czech (http://www.transifex.com/projects/p/widelands/language/cs/)\n"
+"POT-Creation-Date: 2015-11-28 11:19+0000\n"
+"PO-Revision-Date: 2015-11-28 11:21+0000\n"
+"Last-Translator: GunChleoc\n"
+"Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -118,7 +118,7 @@ msgid ""
 msgstr "Únik je šance, že se voják vyhne útoku. Barbar na úrovni 0 má 25% se útoku vyhnout a při každné úrovni se zvýší o 15% (p.b.)"
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:47
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:67
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:69
 msgid "The Battle Arena"
 msgstr "Bojová aréna"
 
@@ -136,125 +136,131 @@ msgstr "Nově vytvoření voják nemá žádné zkušenosti a v boji není vůbe
 msgid ""
 "One of these training sites is the battle arena. It is a big and expensive "
 "building, and it trains soldiers in evade. Since soldiers get very hungry "
-"during their workout, this building needs a lot of food and strongbeer. In a"
-" real game, you should have a good infrastructure before you build it."
-msgstr "Jeden typ výcvikového centra je bojová aréna. Je to velká a drahá stavba a vojáci zde cvičí únik. Protože vojáci při cvičení pořádně vyhladoví, potřebuje tato stavba hromady jídla a silného piva. Při ostré hře musíš mít silnou infrastrukturu, než ji postavíš."
+"during their workout, this building needs a lot of food and strong beer. In "
+"a real game, you should have a good infrastructure before you build it."
+msgstr ""
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:53
 msgid "To see evade training in action, build a battle arena."
 msgstr "Aby sis vyzkoušel výcvik úniku, postav bojovou arénu."
 
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:57
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:55
+msgid ""
+"While we’re waiting for the battle arena, you’ll probably notice some "
+"soldiers walking around. They are automatically exchanged from time to time."
+" I’ll teach you about that later."
+msgstr "Mezitím, co budeš čekat na bitevní arénu, všimneš si nejspíše vojáků, kteří se kolem pohybují. Čas od času se vymění. O tomto si povíme později."
+
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:59
 msgid "Build a battle arena"
 msgstr "Postavit bojovou arénu"
 
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:60
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:62
 msgid "Build a battle arena. It is a big building."
 msgstr "Postavit bojovou arénu. Je to velká stavba."
 
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:61
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:63
 msgid ""
 "Since the construction will take some time, you can change the game speed "
-"using PAGE UP and PAGE DOWN."
-msgstr "Protože stavba potřebuje svůj čas, můžeš hru zrychlit nebo zpomalit pomocí PAGE UP a PAGE DOWN."
+"using Page Up and Page Down."
+msgstr ""
 
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:69
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:71
 msgid "The Battle Arena Has Been Constructed"
 msgstr "Bojová aréna byla dokončena"
 
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:70
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:72
 msgid ""
 "Very good. Our battle arena has been finished, and the soldiers are already "
 "walking towards it."
 msgstr "Velmi dobře. Naše bojová aréna byla dokončena a vojáci k ní už míří."
 
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:72
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:74
 msgid ""
 "The needed wares are also delivered there. For successful training, you need"
-" pitta bread and strongbeer. Most steps additionally require either fish or "
-"meat."
-msgstr "Potřebné suroviny jsou také k dispozici. K úspěšnému výcviku je potřeba pita chléb a silné pivo. Další kroky potřebují také buď ryby nevo maso."
+" pitta bread and strong beer, as well as either fish or meat."
+msgstr ""
 
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:73
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:75
 msgid ""
 "For more information, you can have a look at the building’s help window, "
 "accessible via the question mark in every building’s window."
 msgstr "Více informací lze najít v nápovědě stavby, která je přístupná přes otazník v každém okně stavby."
 
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:74
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:76
 msgid ""
 "To learn how far your soldiers have progressed in their training, you can "
 "have a look at their icons. They are modified by red dots:"
 msgstr "Aby si zjistil, jak tví vojáci pokročili s výcvikem, můžeš se podívat na jejich ikony. Jsou na nich červené značky:"
 
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:76
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:78
 msgid ""
 "No red dots means that the soldier is not trained, so he has level 0. All "
 "your new recruits have this."
 msgstr "Bez značky znamená, že voják ještě nebyl vycvičen, takže má úroveň 0. Takhle vypadají noví rekruti."
 
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:77
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:79
 msgid ""
 "With every successful training step, your soldier becomes stronger. This is "
 "indicated by a red dot. This soldier is on level 1 in evade training."
 msgstr "Po každém úspěšném výcvikovém kroku voják se stane silnější. To je indikováno červenou značkou. Tento voják je na úrovni 1 úniku."
 
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:78
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:80
 msgid ""
 "When your soldier has reached the highest possible level (in this case level"
 " 2), this is indicated by a white background color."
 msgstr "Když tvůj voják dosáhne nejvyšší dostupné úrovně (v tomto případě úrovně 2), barva pozadí se změní na bílou."
 
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:84
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:86
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:103
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:88
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:105
 msgid "The Training Camp"
 msgstr "Výcvikové centrum"
 
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:87
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:89
 msgid ""
 "There is a second training site: the training camp. It is a big building "
 "too, and to complement the battle arena, it trains attack and health "
 "(remember, the Barbarian soldiers cannot be trained in defense)."
 msgstr "Druhé výcvikové centrum je výcvikový tábor. Je to velká staké velká stavba a doplňuje bojovou arénu. Trénuje útok a zdraví (nezapomeň, barbarští vojáci nemohou trénovat obranu)."
 
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:89
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:97
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:91
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:99
 msgid "Build a training camp."
 msgstr "Postavit výcvikový tábor."
 
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:93
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:95
 msgid "Build a training camp"
 msgstr "Postavit výcvikový tábor"
 
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:95
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:97
 msgid ""
 "The battle arena only trains the soldiers in evade. To get the strongest "
 "possible soldier, you also need to build a training camp, which trains them "
 "in attack and health."
 msgstr "Bojová aréna trénuje pouze únik. Aby byli vojáci co nejsilnější, je potřeba postavit také tréninkový tábor, který cvičí útork a zdraví."
 
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:105
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:107
 msgid ""
 "Great, our training camp has now been finished, too. Now nothing will hinder"
 " us from getting the strongest warriors the world has ever seen."
 msgstr "Skvěle, náš výcvikový tábor je už také dokončený. Teď už nás nic nezastaví, abychom vytrénovali ty nejsilnější vojáky na celém světě."
 
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:106
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:108
 msgid ""
 "To train in the training camp, our soldiers need food like in the battle "
-"arena, but no strongbeer. Instead, they need different axes for attack "
+"arena, but no strong beer. Instead, they need different axes for attack "
 "training and helmets for health training."
-msgstr "Pro trénink ve výcvikovém táboru potřebují vojáci jídlo, podobně jako v bojové aréně, ale není potřeba silné pivo. Místo toho jsou potřeba různé sekery pro trénink útoku a helmice pro vývik zdraví."
+msgstr ""
 
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:107
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:109
 msgid ""
 "This equipment is produced in smithies out of coal, iron, and sometimes "
 "gold. You will learn more about this in the second scenario of the Barbarian"
 " campaign."
 msgstr "Toto vybavení je vyráběho v kovárně z uhlí, železa a někdy zlata. Více se o tom dozvíš v druhém scénáři barbarské kampaně."
 
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:108
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:110
 msgid ""
 "You should also keep in mind that each of the three tribes in Widelands has "
 "its own way of training, so the buildings and wares are different. Also, the"
@@ -263,46 +269,47 @@ msgid ""
 "only has a 25% chance."
 msgstr "Neměl by si také zapomenout, že každý ze tří kmenů ve Widelands má svůj vlastní výcvik, takže stavby a  suroviny jsou odlišné: imperiální voják s únikem 0 má 30% šanci úniku, zatímto barbarský voják na stejné úrovni má pouze 25%."
 
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:114
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:116
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:118
 msgid "Heroes and Rookies"
 msgstr "Hrdinové a zelenáši"
 
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:117
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:119
 msgid ""
 "While our soldiers are training, let me tell you what we can do with them."
 msgstr "Zatímco naši vojáci trénují si můžeme říci, co s nimi budeme podnikat."
 
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:118
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:120
 msgid ""
 "In every military building, you can set the preference for heroes (trained "
 "soldiers) or rookies. From time to time, a soldier will walk out of the "
-"building and be replaced by a stronger/weaker one automatically."
-msgstr "V každé vojenské stavbě lze nastavit předvolby pro hrdiny (vycvičené vojáky) nebo zelenáče. Čas od času voják vyjde z budovy a bude automaticky vyměněn silnějším/slabším vojákem."
+"building and be replaced by a stronger/weaker one automatically – this is "
+"what you saw earlier."
+msgstr "V každé vojenské stavbě lze nastavit předvolby pro hrdiny (vycvičené vojáky) nebo zelenáče. Čas od času voják vyjde z budovy a bude automaticky vyměněn silnějším/slabším vojákem - tak, jak si viděl dříve."
 
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:119
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:121
 msgid ""
 "The initial setting depends on the type of the building. For the Barbarians,"
 " the sentry is the only building that prefers rookies by default. You should"
 " change this setting to fit your current needs."
 msgstr "Úvodní nastavení záleží na typu stavby. U Barbarů je strážnice jediná stavba, která preferuje zelenáče před hrdiny. Nastavení můžeš změnit dle své vůle."
 
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:120
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:122
 msgid ""
 "When you are expanding into no man’s land, you can make your buildings "
 "prefer rookies. When you are planning to attack, send heroes into that "
 "region. Conquered buildings always prefer heroes."
 msgstr "Když postoupíš do země nikoho, můžeš nastavit preferenci vojnských budov na rookue. Když plánuješ útočit, pošli do toho regionu hrdiny. Dobité stavby vždy preferují hrdiny."
 
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:126
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:128
 msgid "Soldier capacity"
 msgstr "Maximální kapacita vojáků"
 
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:128
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:130
 msgid "Adjusting the number of soldiers"
 msgstr "Úprava počtu vojáků"
 
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:129
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:131
 msgid ""
 "There is another way how you can control the strength of a military "
 "building: by the number of soldiers stationed there. Just click on the arrow"
@@ -311,56 +318,56 @@ msgid ""
 "example."
 msgstr "Tohle je ještě jiná cesta, jak můžeš pracovat se sílou vojenské stavby: velikostí vojenské posádky, počtem vojáků ve stavbě. Stačí kliknout na symboly šipky pro zvýšení nebo snížení požadovaný počet vojáků. Každá stavba má maximální kapacitu. V případě hradby je to například pět."
 
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:130
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:132
 msgid ""
 "If you wish to send a certain soldier away, you can simply click on it. It "
 "will then be replaced by another soldier."
-msgstr ""
+msgstr "Když budeš chtít poslat určitého vojáka pryč, jen na něj klikni. Bude pak vyměněn jiným vojákem."
 
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:131
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:133
 msgid ""
 "Let me also describe what the numbers in the statistics string mean. This "
 "string can contain up to three numbers, e.g. ‘1 (+5) soldier (+2)’."
-msgstr ""
+msgstr "Dovol mi také vysvětlit, co znamenají čísla ve statistikách. Řetězec může obsahovat až tři údaje, t.j. ‘1 (+5) vojáků (+2)’."
 
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:133
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:135
 msgid ""
 "The first number describes how many soldiers are currently in this building."
 " In this example, only one soldier is left inside (each military building is"
 " always guarded by at least one soldier)."
-msgstr ""
+msgstr "První číslo označuje, kolik vojáků je v současné chvíli na základně. V tomto případě to je jen jeden voják (každá základna je hlídána alespoň jedním vojákem)."
 
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:134
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:136
 msgid ""
 "The second number tells you how many additional soldiers reside in this "
 "building, but are currently outside. The five soldiers may be attacking an "
 "enemy. They will return when they have been successful."
-msgstr ""
+msgstr "Druhé číslo určuje, kolik dalších vojáků patří k této základně, ale jsou v současné chvíli venku. Pět vojáků možná útoči na nepřítele. Vrátí se, až dosáhnou úspěchu."
 
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:135
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:137
 msgid ""
 "The third number indicates the missing soldiers. From the eight soldiers (1 "
 "+ 5 + 2) you wish to have here, two may have died. They will be replaced by "
 "new soldiers from your warehouse, if possible."
-msgstr ""
-
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:141
-msgid "Dismantle your sentry"
-msgstr ""
+msgstr "Třetí číslo ukazuje počet chybějících vojáků. Z osmi vojáků (1 + 5 + 2), kteří zde mohou pobývat, dva možná padli. Budou nahrazeni novými ze tvého skladu, pokud je to možné."
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:143
-msgid "Dismantling military buildings"
-msgstr ""
+msgid "Dismantle your sentry"
+msgstr "Rozebrat strážnici."
 
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:144
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:145
+msgid "Dismantling military buildings"
+msgstr "Rušení vojenských základen."
+
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:146
 msgid ""
 "You can only reduce the number of soldiers to one. The last soldier of a "
 "building will never come out (unless this building is attacked). If you want"
 " to have your soldier elsewhere, you will have to dismantle the building "
 "(buildings of an alien tribe cannot be dismantled, only be burned down)."
-msgstr ""
+msgstr "Počet vojáků lze snížit až na jednoho. Poslední voják základnu neopustí (pokud na základnu někdo nezaútočí). Jestliže je potřeba vojáka jinde, budeš muset základnu zrušit a rozebrat (základny nepřátelského klanu nelze rozebrat, lze je pouze vypálit)."
 
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:145
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:147
 msgid ""
 "However, destroying a military building is always linked with a risk: the "
 "land is still yours, but it is no longer protected. Any enemy that builds "
@@ -369,172 +376,172 @@ msgid ""
 " be hidden under the fog of war. You should therefore only dismantle "
 "military buildings deep inside your territory where you are safe from "
 "enemies."
-msgstr ""
+msgstr "Avšak zrušení vojenské základy je vždy spojeno s rizikem: území zůstává pod tvojí nadvládou, ale už není chráněno. Nepřítel, který si na území vystaví své základny, území převezme bez boje a tvé budovy skončí v plamenech. Navíc některé části území se mohou ukrýt v mlze války. Základy proto ruš jen hluboko uvnitř tvého území, kde je bezpečnost před nepřáteli."
 
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:146
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:148
 msgid ""
 "Have you seen your sentry? Since it cannot contain many soldiers and is next"
 " to a stronger barrier, it is rather useless."
-msgstr ""
+msgstr "Už ses díval na svou strážnici? No nemůže ubytovat zrovna hodně vojáků a je to jen slabé vylepšení silnější hradby. Dalo by se říci skoro k ničemu."
 
-#: TRANSLATORS 'it' refers to the Barbarian sentry
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:149
-msgid "Dismantle it."
-msgstr ""
-
+#. TRANSLATORS: 'it' refers to the Barbarian sentry
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:151
+msgid "Dismantle it."
+msgstr "Rozeber ji."
+
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:153
 msgid ""
 "You can also use this opportunity to become familiar with the other options:"
 " the heroes/rookies preference and the capacity."
-msgstr ""
-
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:153
-msgid "Dismantle your north-western sentry"
-msgstr ""
+msgstr "Při této příležitost se také můžeš lépe seznámi s dalšími volbami: nastavení hrdinů/zelenáčů a kapacitou."
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:155
+msgid "Dismantle your north-western sentry"
+msgstr "Rozeber svou severo-západní strážnici."
+
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:157
 msgid ""
 "You can control the number of soldiers stationed at a military site with the"
 " arrow buttons. If you want to get even your last soldier out, you will have"
 " to destroy it. However, it then will no longer protect your territory, "
 "which will make it vulnerable to hostile attacks."
-msgstr ""
+msgstr "Počet vojáků přidělených na základnu můžeš změnit pomocí zelených tlačítek s šipkou. Pokud chceš poslat pryč i posledního vojáka, musíš základnu zrušit. Pak ale nebude tvé území nadále chráněno, což ho dává všanc útokům nepřátel."
 
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:157
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:159
 msgid "Dismantle your sentry in the north-west, next to the barrier."
-msgstr ""
+msgstr "Rozeber strážnici na severo-západě, vedle hradby."
 
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:163
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:175
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:165
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:177
 msgid "Enhance Your Fortress"
 msgstr "Vylepši svou pevnost"
 
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:165
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:167
 msgid "Enhancing Buildings"
 msgstr "Vylepšování budov"
 
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:166
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:168
 msgid ""
 "Well done. Now you know how to draw back your soldiers from the places where"
 " you don’t need them. It is time to tell you how to reinforce your front "
 "line."
-msgstr ""
+msgstr "Výborně. Teď už víš, jak stáhnout své vojáky z míst, kde jich není potřeba. Teď si povíme, jak posílit frontovou linii."
 
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:167
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:169
 msgid ""
 "Your fortress is already quite strong and conquers a lot of space. But there"
 " is an even bigger building: the citadel."
-msgstr ""
+msgstr "Tvá pevnost je už dosti odolná základna a obsadí tak spoustu území. Existuje ale dokonce větší stavba: citadela."
 
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:168
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:170
 msgid ""
 "Citadels can’t be built directly. Instead, you’ll have to construct a "
 "fortress first and then enhance it to a citadel. To do so, click on the "
 "fortress, then choose the ‘Enhance to Citadel’ button."
-msgstr ""
+msgstr "Citadely nelze jednoduše vystavět. Místo toho je nutné nejdříve vybudovat pevnost a teprve pak pevnost vylepšit na citadelu. To lze provést tak, že klikneš na pevnost a pak vybereš volbu 'Vylepšít na citadelu'."
 
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:169
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:171
 msgid ""
 "Your soldiers will leave the fortress while the construction is going on. "
 "This means that your fortress will lose its military influence, as I "
 "described above."
-msgstr ""
+msgstr "Tví vojáci pevnost po dobu výstavby opustí. To způsobí, že pevnost ztratí svůj vojenstvý význam, jak bylo popisováno výše."
 
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:170
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:172
 msgid "Enhance your fortress to a citadel now."
 msgstr "Vylepši nyní svou pevnost na tvrz."
 
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:173
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:175
 msgid "Enhance your fortress to a citadel"
 msgstr "Vylepši svou pevnost na tvrz"
 
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:177
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:179
 msgid "Enhance your fortress to a mighty citadel."
 msgstr "Vylepši si svou pevnost na mocnou citadelu."
 
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:178
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:180
 msgid ""
 "The citadel can house 12 soldiers, and it is the biggest military building "
 "the Barbarians can build. It also costs a lot of resources and takes a long "
 "time to build. It is most suited to guard strategically important points "
 "like constricted points or mountains."
-msgstr ""
-
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:185
-msgid "Defeat your Enemy"
-msgstr ""
+msgstr "V citadele může být umístěno až 12 vojáků a je to tak největší vojenská základna, kterou mohou Barbaři vystavět. Stojí také mnoho zdrojů a její stavba trvá dlouho. Nejvhodnější je na ochranu a stráž strategicky důležitých bodů jako průsmyky nebo hory."
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:187
+msgid "Defeat your Enemy"
+msgstr "Poraž svého nepřítele"
+
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:189
 msgid "Defeat the Enemy"
 msgstr "Poraž nepřítele"
 
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:188
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:190
 msgid ""
 "Great work, the citadel is finished. But what’s that? A hostile tribe has "
 "settled next to us while the citadel was under construction! Do you see how "
 "they took away a part of our land? And our lumberjack has now lost his place"
 " of work. This is what I was talking about. Let’s take our land back and "
 "defeat the enemy!"
-msgstr ""
+msgstr "Skvělá práce, citadela je hotova. Co se to ale děje? Nepřátelské klany se usídlily hned vedle, zatímco byla citadela ve výstavbě! Všiml sis, že dokonce obsadili část našeho území? A naši dřevorubci teď ztratili své místo na práci. O tom jsem mluvil. Teď si vezmeme naši zemi zpět a nepřítele rozdrtíme!"
 
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:189
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:200
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:191
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:202
 msgid ""
 "To attack a building, click on its doors, choose the number of soldiers that"
 " you wish to send and click on the ‘Attack’ button."
-msgstr ""
+msgstr "K útoku na budovu klikni na jeho dveře, vyber počet vojáků, které chceš do útoku poslat a vyber tlačítko 'Útok'."
 
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:189
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:191
 msgid ""
 "Your soldiers will come from all nearby military buildings. Likewise, the "
 "defenders will come from all nearby military buildings of the enemy and "
 "intercept your forces."
-msgstr ""
+msgstr "Tví vojáci vytáhnou ze všech okolo stojících vojenských základen. Nápodobně, i obránci přispěchají z okolních základen nepřítele a napadnou tvé útočící síly."
 
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:191
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:193
 msgid ""
 "Attack and conquer all military buildings of the enemy and destroy their "
 "headquarters."
 msgstr "Zaútoč a znič všechny vojenské budovy nepřítele i s jeho základnou."
 
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:195
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:197
 msgid "Defeat the enemy tribe"
 msgstr "Zdolej nepřátelský kmen"
 
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:197
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:199
 msgid "Defeat Your Enemy"
 msgstr "Zdolej svého nepřítele"
 
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:199
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:201
 msgid "Defeat the nearby enemy."
 msgstr "Zdolej nedalekého nepřítele."
 
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:205
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:207
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:209
 msgid "Conclusion"
 msgstr "Shrnutí"
 
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:208
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:210
 msgid ""
 "Thank you for playing this tutorial. I hope you enjoyed it and you learned "
 "how to create and train soldiers, how to control where they go and how to "
 "defeat an enemy. Did you see how easily you could overwhelm your enemy? "
 "Having trained soldiers is a huge advantage."
-msgstr ""
+msgstr "Děkuji za odehrání tohoto tutorialu. Snad se ti líbil a naučil si se, jak vytvářet a trénovat vojáky, jak ovládat, kam mají jít a jak porazit nepřítele. Viděl si, jak snad můžeš nepřítele zničit? Trénovaní vojáci k dispozici je obrovská výhoda."
 
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:209
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:211
 msgid ""
 "But a war is expensive, and not always the path leading to the goal. When "
 "setting up a new game, you can also choose peaceful win conditions. You "
 "should definitely try them out, they’re worth it."
-msgstr ""
+msgstr "Ale vedení války je velmi drahé a ne vždy je to cesta k cíli. Při zakládání nové hry lze také nastavit mírové výherní podmínky. Určitě to vyzkoušej, stojí za to."
 
-#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:210
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:212
 msgid ""
 "You are now ready to play the campaigns. They will teach you about the "
 "different economies of the tribes. You can also play the remaining "
 "tutorials, but they are not crucial for succeeding in the campaigns."
-msgstr ""
+msgstr "Jsi teď připraven odehrát kampaně. Naučíš se v nich o odlišnostech hospodářství jednotlivých klanů. Můžeš také odehrát zbývající tutoriály, ale ty už nejsou nezbytné pro úspěšné splnění kampaní."
 
 #: ../../scripting/format_scenario.lua:36
 msgid "“%s”"

@@ -172,9 +172,12 @@ void FieldOverlayManager::register_overlay
 	} while (it->first == c);
 }
 
-void FieldOverlayManager::remove_overlay
-	(Widelands::TCoords<> const c, const Image* pic)
-{
+/**
+ * remove one (or many) overlays from a node or triangle
+ *
+ * @param pic    The overlay to remove. If null, all overlays are removed.
+ */
+void FieldOverlayManager::remove_overlay(Widelands::TCoords<> const c, const Image* pic) {
 	assert(c.t <= 2);
 
 	RegisteredOverlaysMap & overlay_map = m_overlays[c.t];
@@ -182,7 +185,7 @@ void FieldOverlayManager::remove_overlay
 	if (overlay_map.count(c)) {
 		RegisteredOverlaysMap::iterator it = overlay_map.lower_bound(c);
 		do {
-			if (pic && it->second.pic == pic) {
+			if (!pic || it->second.pic == pic) {
 				overlay_map.erase(it);
 				it = overlay_map.lower_bound(c);
 			} else {

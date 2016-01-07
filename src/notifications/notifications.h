@@ -30,11 +30,11 @@ namespace Notifications {
 // The Notification framework is build around a singleton that dispatches
 // 'Note'. A Note is any class that has a uint32_t note_id() member that must
 // return something unique throughout the whole system. Use the macro
-// CAN_BE_SEND_AS_NOTE to define that method easily.
+// CAN_BE_SENT_AS_NOTE to define that method easily.
 //
 // The only public interface for the framework are the two functions below.
 
-#define CAN_BE_SEND_AS_NOTE(id)                                                                    \
+#define CAN_BE_SENT_AS_NOTE(id)                                                                    \
 	static uint32_t note_id() {                                                                     \
 		return static_cast<uint32_t>(id);                                                            \
 	}

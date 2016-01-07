@@ -1,10 +1,10 @@
 dirname = path.dirname(__file__)
 
 terrain_affinity = {
-   preferred_temperature = 308.87244819948864,
-   preferred_humidity = 0.37172291715567279,
-   preferred_fertility = 0.30300445222969019,
-   pickiness = 0.84727340115725847,
+   preferred_temperature = 80,
+   preferred_humidity = 0.35,
+   preferred_fertility = 0.85,
+   pickiness = 0.6,
 }
 
 world:new_immovable_type{
@@ -24,7 +24,7 @@ world:new_immovable_type{
    },
    animations = {
       idle = {
-         pictures = path.list_directory(dirname .. "sapling/", "idle_\\d+.png"),
+         pictures = path.list_files(dirname .. "sapling/idle_?.png"),
          hotspot = { 5, 12 },
          fps = 8,
       },
@@ -48,7 +48,7 @@ world:new_immovable_type{
    },
    animations = {
       idle = {
-         pictures = path.list_directory(dirname .. "pole/", "idle_\\d+.png"),
+         pictures = path.list_files(dirname .. "pole/idle_?.png"),
          hotspot = { 12, 28 },
          fps = 8,
       },
@@ -75,7 +75,7 @@ world:new_immovable_type{
    },
    animations = {
       idle = {
-         pictures = path.list_directory(dirname .. "mature/", "idle_\\d+.png"),
+         pictures = path.list_files(dirname .. "mature/idle_?.png"),
          hotspot = { 18, 48 },
          fps = 8,
       },
@@ -102,7 +102,7 @@ world:new_immovable_type{
    },
    animations = {
       idle = {
-         pictures = path.list_directory(dirname .. "old/", "idle_\\d+.png"),
+         pictures = path.list_files(dirname .. "old/idle_?.png"),
          hotspot = { 24, 60 },
          fps = 10,
       },

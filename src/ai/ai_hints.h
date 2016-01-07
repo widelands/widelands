@@ -20,13 +20,13 @@
 #ifndef WL_AI_AI_HINTS_H
 #define WL_AI_AI_HINTS_H
 
+#include <memory>
 #include <stdint.h>
 #include <string>
 
-#include "base/macros.h"
 #include "base/log.h"
-
-class Section;
+#include "base/macros.h"
+#include "scripting/lua_table.h"
 
 enum class TrainingSiteType : uint8_t {kNoTS = 0, kBasic = 1, kAdvanced = 2};
 
@@ -34,7 +34,8 @@ enum class TrainingSiteType : uint8_t {kNoTS = 0, kBasic = 1, kAdvanced = 2};
 /// buildings conf file. It is used to tell the computer player about the
 /// special properties of a building.
 struct BuildingHints {
-	BuildingHints(Section*);
+	BuildingHints(std::unique_ptr<LuaTable>);
+	~BuildingHints() {}
 
 	bool renews_map_resource() const {
 		return !renews_map_resource_.empty();
@@ -56,8 +57,8 @@ struct BuildingHints {
 		return log_producer_;
 	}
 
-	bool is_stoneproducer() const {
-		return stone_producer_;
+	bool is_graniteproducer() const {
+		return granite_producer_;
 	}
 
 	bool mines_water() const {
@@ -85,6 +86,10 @@ struct BuildingHints {
 		return mountain_conqueror_;
 	}
 
+	bool is_shipyard() const {
+		return shipyard_;
+	}
+
 	uint32_t get_prohibited_till() const {
 		return prohibited_till_;
 	}
@@ -97,6 +102,14 @@ struct BuildingHints {
 		return mines_percent_;
 	}
 
+	int16_t get_very_weak_ai_limit() const {
+		return very_weak_ai_limit_;
+	}
+
+	int16_t get_weak_ai_limit() const {
+		return weak_ai_limit_;
+	}
+
 	TrainingSiteType get_trainingsite_type() const {
 		return trainingsite_type_;
 	}
@@ -105,7 +118,7 @@ private:
 	std::string renews_map_resource_;
 	std::string mines_;
 	bool log_producer_;
-	bool stone_producer_;
+	bool granite_producer_;
 	bool needs_water_;
 	bool mines_water_;
 	bool recruitment_;  // whether building recruits special workers
@@ -113,9 +126,12 @@ private:
 	bool expansion_;
 	bool fighting_;
 	bool mountain_conqueror_;
+	bool shipyard_;
 	int32_t prohibited_till_;
 	int32_t forced_after_;
-	uint8_t mines_percent_;
+	int8_t mines_percent_;
+	int16_t very_weak_ai_limit_;
+	int16_t weak_ai_limit_;
 	TrainingSiteType trainingsite_type_;
 
 	DISALLOW_COPY_AND_ASSIGN(BuildingHints);

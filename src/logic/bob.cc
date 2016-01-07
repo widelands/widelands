@@ -20,6 +20,7 @@
 #include "logic/bob.h"
 
 #include <cstdlib>
+#include <memory>
 
 #include <stdint.h>
 
@@ -27,6 +28,7 @@
 #include "base/wexception.h"
 #include "economy/route.h"
 #include "economy/transfer.h"
+#include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
@@ -40,42 +42,37 @@
 #include "logic/player.h"
 #include "logic/ship.h"
 #include "logic/soldier.h"
-#include "logic/tribe.h"
+#include "logic/tribes/tribe_descr.h"
 #include "logic/widelands_geometry_io.h"
 #include "map_io/map_object_loader.h"
 #include "map_io/map_object_saver.h"
-#include "profile/profile.h"
 #include "wui/mapviewpixelconstants.h"
 
 
 namespace Widelands {
 
-BobDescr::BobDescr(MapObjectType object_type, const std::string& init_name,
-                  const std::string& init_descname,
-                  TribeDescr const* tribe)
+BobDescr::BobDescr(const std::string& init_descname, const MapObjectType init_type,
+						 MapObjectDescr::OwnerType owner_type, const LuaTable& table)
 	:
-	MapObjectDescr(object_type, init_name, init_descname),
-	owner_tribe_    (tribe)
+	MapObjectDescr(init_type,  table.get_string("name"), init_descname, table),
+	owner_type_   (owner_type),
+	// Only tribe bobs have a vision range, since it would be irrelevant for world bobs.
+	vision_range_ (owner_type == MapObjectDescr::OwnerType::kTribe ? table.get_int("vision_range") : 0)
 {
+	if (!is_animation_known("idle")) {
+		throw GameDataError("Bob %s has no idle animation", table.get_string("name").c_str());
+	}
 }
 
 /**
  * Only tribe bobs have a vision range, since it would be irrelevant
  * for world bobs.
  *
- * Currently, all bobs use the tribe's default vision range.
- *
  * \returns radius (in fields) of area that the bob can see
  */
 uint32_t BobDescr::vision_range() const
 {
-	if (owner_tribe_) {
-		if (upcast(const ShipDescr, ship, this))
-			return ship->vision_range();
-		return owner_tribe_->get_bob_vision_range();
-	}
-
-	return 0;
+	return vision_range_;
 }
 
 /**
@@ -571,7 +568,8 @@ bool Bob::start_task_movepath
 	 int32_t         const persist,
 	 const DirAnimations & anims,
 	 bool            const forceonlast,
-	 int32_t         const only_step)
+	 int32_t         const only_step,
+	 bool            const forceall)
 {
 	Path path;
 	BlockedTracker tracker(game, *this, dest);
@@ -582,6 +580,9 @@ bool Bob::start_task_movepath
 	else
 		cstep.add(CheckStepDefault(descr().movecaps()));
 	cstep.add(CheckStepBlocked(tracker));
+
+	if (forceall)
+		tracker.disabled = true;
 
 	Map & map = game.map();
 	if (map.findpath(m_position, dest, persist, path, cstep) < 0) {
@@ -603,7 +604,7 @@ bool Bob::start_task_movepath
 	State & state  = top_state();
 	state.path     = new Path(path);
 	state.ivar1    = 0; // step #
-	state.ivar2    = forceonlast ? 1 : 0;
+	state.ivar2    = forceonlast ? 1 : (forceall ? 2 : 0);
 	state.ivar3    = only_step;
 	state.diranims = anims;
 	return true;
@@ -679,7 +680,6 @@ bool Bob::start_task_movepath
 	return false;
 }
 
-
 void Bob::movepath_update(Game & game, State & state)
 {
 	if (get_signal().size()) {
@@ -721,12 +721,11 @@ void Bob::movepath_update(Game & game, State & state)
 	}
 
 	++state.ivar1;
-	return start_task_move(game, dir, state.diranims, forcemove);
+	return start_task_move(game, dir, state.diranims, state.ivar2 == 2 ? true : forcemove);
 	// Note: state pointer is invalid beyond this point
 }
 
-
-/**
+	/**
  * Move into one direction for one step.
  * \li ivar1: direction
  * \li ivar2: non-zero if the move should be forced
@@ -763,7 +762,7 @@ void Bob::start_task_move
 
 void Bob::move_update(Game & game, State &)
 {
-	if (m_walkend <= game.get_gametime()) {
+	if (static_cast<uint32_t>(m_walkend) <= game.get_gametime()) {
 		end_walk();
 		return pop_task(game);
 	} else
@@ -825,7 +824,7 @@ Point Bob::calc_drawpos(const EditorGameBase & game, const Point pos) const
 		spos.y += end.field->get_height() * HEIGHT_FACTOR;
 		spos.y -= start.field->get_height() * HEIGHT_FACTOR;
 
-		assert(m_walkstart <= game.get_gametime());
+		assert(static_cast<uint32_t>(m_walkstart) <= game.get_gametime());
 		assert(m_walkstart < m_walkend);
 		float f =
 			static_cast<float>(game.get_gametime() - m_walkstart)
@@ -871,7 +870,7 @@ void Bob::set_animation(EditorGameBase & egbase, uint32_t const anim)
 
 
 /**
- * Cause the object to walk, honoring passable/impassable parts of the map
+ * Cause the object to walk, honoring passable/unwalkable parts of the map
  * using movecaps. If force is true, the passability check is skipped.
  *
  * \return the number of milliseconds after which the walk has ended. You must
@@ -1066,7 +1065,7 @@ Load/save support
 ==============================
 */
 
-#define BOB_SAVEGAME_VERSION 1
+constexpr uint8_t kCurrentPacketVersion = 1;
 
 Bob::Loader::Loader()
 {
@@ -1076,74 +1075,80 @@ void Bob::Loader::load(FileRead & fr)
 {
 	MapObject::Loader::load(fr);
 
-	uint8_t version = fr.unsigned_8();
-	if (version != BOB_SAVEGAME_VERSION)
-		throw GameDataError("unknown/unhandled version: %u", version);
+	try {
+		uint8_t packet_version = fr.unsigned_8();
+		if (packet_version == kCurrentPacketVersion) {
 
-	Bob & bob = get<Bob>();
+			Bob & bob = get<Bob>();
 
-	if (PlayerNumber owner_number = fr.unsigned_8()) {
-		if (owner_number > egbase().map().get_nrplayers())
-			throw GameDataError
-				("owner number is %u but there are only %u players",
-				 owner_number, egbase().map().get_nrplayers());
+			if (PlayerNumber owner_number = fr.unsigned_8()) {
+				if (owner_number > egbase().map().get_nrplayers())
+					throw GameDataError
+						("owner number is %u but there are only %u players",
+						 owner_number, egbase().map().get_nrplayers());
 
-		Player * owner = egbase().get_player(owner_number);
-		if (!owner)
-			throw GameDataError("owning player %u does not exist", owner_number);
+				Player * owner = egbase().get_player(owner_number);
+				if (!owner)
+					throw GameDataError("owning player %u does not exist", owner_number);
 
-		bob.set_owner(owner);
-	}
+				bob.set_owner(owner);
+			}
 
-	bob.set_position(egbase(), read_coords_32(&fr));
+			bob.set_position(egbase(), read_coords_32(&fr));
 
-	std::string animname = fr.c_string();
-	bob.m_anim = animname.size() ? bob.descr().get_animation(animname) : 0;
-	bob.m_animstart = fr.signed_32();
-	bob.m_walking = static_cast<WalkingDir>(read_direction_8_allow_null(&fr));
-	if (bob.m_walking) {
-		bob.m_walkstart = fr.signed_32();
-		bob.m_walkend = fr.signed_32();
-	}
+			std::string animname = fr.c_string();
+			bob.m_anim = animname.size() ? bob.descr().get_animation(animname) : 0;
+			bob.m_animstart = fr.signed_32();
+			bob.m_walking = static_cast<WalkingDir>(read_direction_8_allow_null(&fr));
+			if (bob.m_walking) {
+				bob.m_walkstart = fr.signed_32();
+				bob.m_walkend = fr.signed_32();
+			}
 
-	bob.m_actid = fr.unsigned_32();
-	bob.m_signal = fr.c_string();
+			bob.m_actid = fr.unsigned_32();
+			bob.m_signal = fr.c_string();
 
-	uint32_t stacksize = fr.unsigned_32();
-	bob.m_stack.resize(stacksize);
-	states.resize(stacksize);
-	for (uint32_t i = 0; i < stacksize; ++i) {
-		State & state = bob.m_stack[i];
-		LoadState & loadstate = states[i];
+			uint32_t stacksize = fr.unsigned_32();
+			bob.m_stack.resize(stacksize);
+			states.resize(stacksize);
+			for (uint32_t i = 0; i < stacksize; ++i) {
+				State & state = bob.m_stack[i];
+				LoadState & loadstate = states[i];
 
-		state.task = get_task(fr.c_string());
-		state.ivar1 = fr.signed_32();
-		state.ivar2 = fr.signed_32();
-		state.ivar3 = fr.signed_32();
-		loadstate.objvar1 = fr.unsigned_32();
-		state.svar1 = fr.c_string();
-		state.coords = read_coords_32_allow_null(&fr, egbase().map().extent());
+				state.task = get_task(fr.c_string());
+				state.ivar1 = fr.signed_32();
+				state.ivar2 = fr.signed_32();
+				state.ivar3 = fr.signed_32();
+				loadstate.objvar1 = fr.unsigned_32();
+				state.svar1 = fr.c_string();
+				state.coords = read_coords_32_allow_null(&fr, egbase().map().extent());
 
-		if (fr.unsigned_8()) {
-			uint32_t anims[6];
-			for (int j = 0; j < 6; ++j)
-				anims[j] = bob.descr().get_animation(fr.c_string());
-			state.diranims = DirAnimations(anims[0], anims[1], anims[2], anims[3], anims[4], anims[5]);
+				if (fr.unsigned_8()) {
+					uint32_t anims[6];
+					for (int j = 0; j < 6; ++j)
+						anims[j] = bob.descr().get_animation(fr.c_string());
+					state.diranims = DirAnimations(anims[0], anims[1], anims[2], anims[3], anims[4], anims[5]);
+				}
+
+				if (fr.unsigned_8()) {
+					state.path = new Path;
+					state.path->load(fr, egbase().map());
+				}
+
+				if (fr.unsigned_8()) {
+					state.route = new Route;
+					state.route->load(loadstate.route, fr);
+				}
+
+				std::string programname = fr.c_string();
+				if (programname.size())
+					state.program = get_program(programname);
+			}
+		} else {
+			throw UnhandledVersionError("Bob", packet_version, kCurrentPacketVersion);
 		}
-
-		if (fr.unsigned_8()) {
-			state.path = new Path;
-			state.path->load(fr, egbase().map());
-		}
-
-		if (fr.unsigned_8()) {
-			state.route = new Route;
-			state.route->load(loadstate.route, fr);
-		}
-
-		std::string programname = fr.c_string();
-		if (programname.size())
-			state.program = get_program(programname);
+	} catch (const WException & e) {
+		throw wexception("loading bob: %s", e.what());
 	}
 }
 
@@ -1199,7 +1204,7 @@ void Bob::save
 {
 	MapObject::save(eg, mos, fw);
 
-	fw.unsigned_8(BOB_SAVEGAME_VERSION);
+	fw.unsigned_8(kCurrentPacketVersion);
 
 	fw.unsigned_8(m_owner ? m_owner->player_number() : 0);
 	write_coords_32(&fw, m_position);

@@ -26,30 +26,19 @@
 #include <SDL.h>
 
 #include "base/macros.h"
+#include "base/rect.h"
 #include "graphic/gl/coordinate_conversion.h"
 #include "graphic/gl/utils.h"
 
-namespace  {
+namespace {
 
-// Convert 'srcrc' from pixel space into opengl space, taking into account that
-// it might be a subtexture in a bigger texture.
-BlitSource to_blit_source(const Image& image, const Rect& src_rect) {
-	// Source Rectangle. We have to take into account that the texture might be
-	// a subtexture in another bigger texture. So we first figure out the pixel
-	// coordinates given it is a full texture (values between 0 and 1) and then
-	// adjust these for the texture coordinates in the parent texture.
-
-	const FloatRect rc(src_rect.x, src_rect.y, src_rect.w, src_rect.h);
-	const FloatRect in_texture = rect_to_gl_texture(image.width(), image.height(), rc);
-	const FloatRect& texture_coordinates = image.texture_coordinates();
-	const float left = texture_coordinates.x + in_texture.x * texture_coordinates.w;
-	const float bottom = texture_coordinates.y + in_texture.y * texture_coordinates.h;
-	const float right = texture_coordinates.x + (in_texture.x + in_texture.w) * texture_coordinates.w;
-	const float top = texture_coordinates.y + (in_texture.y + in_texture.h) * texture_coordinates.h;
-
-	return BlitSource{
-	   FloatRect(left, bottom, right - left, top - bottom), image.get_gl_texture(),
-	};
+// Adjust 'original' so that only 'src_rect' is actually blitted.
+BlitData adjust_for_src(BlitData blit_data, const Rect& src_rect) {
+	blit_data.rect.x += src_rect.x;
+	blit_data.rect.y += src_rect.y;
+	blit_data.rect.w = src_rect.w;
+	blit_data.rect.h = src_rect.h;
+	return blit_data;
 }
 
 }  // namespace
@@ -98,9 +87,8 @@ void Surface::blit_monochrome(const Rect& dst_rect,
                               const Image& image,
                               const Rect& src_rect,
                               const RGBAColor& blend) {
-	const BlitSource texture = to_blit_source(image, src_rect);
 	const FloatRect rect = rect_to_gl_renderbuffer(width(), height(), dst_rect);
-	do_blit_monochrome(rect, texture, blend);
+	do_blit_monochrome(rect, adjust_for_src(image.blit_data(), src_rect), blend);
 }
 
 void Surface::blit_blended(const Rect& dst_rect,
@@ -108,10 +96,9 @@ void Surface::blit_blended(const Rect& dst_rect,
                            const Image& texture_mask,
                            const Rect& src_rect,
                            const RGBColor& blend) {
-	const BlitSource texture = to_blit_source(image, src_rect);
-	const BlitSource mask = to_blit_source(texture_mask, src_rect);
 	const FloatRect rect = rect_to_gl_renderbuffer(width(), height(), dst_rect);
-	do_blit_blended(rect, texture, mask, blend);
+	do_blit_blended(rect, adjust_for_src(image.blit_data(), src_rect),
+	                adjust_for_src(texture_mask.blit_data(), src_rect), blend);
 }
 
 void Surface::blit(const Rect& dst_rect,
@@ -119,7 +106,6 @@ void Surface::blit(const Rect& dst_rect,
                    const Rect& src_rect,
                    float opacity,
                    BlendMode blend_mode) {
-	const BlitSource texture = to_blit_source(image, src_rect);
 	const FloatRect rect = rect_to_gl_renderbuffer(width(), height(), dst_rect);
-	do_blit(rect, texture, opacity, blend_mode);
+	do_blit(rect, adjust_for_src(image.blit_data(), src_rect), opacity, blend_mode);
 }

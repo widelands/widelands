@@ -1,27 +1,29 @@
-# Catalan translation for widelands
-# Copyright (c) 2011 Rosetta Contributors and Canonical Ltd 2011
-# This file is distributed under the same license as the widelands package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2011.
-#
+# Widelands PATH/TO/FILE.PO
+# Copyright (C) 2005-2015 Widelands Development Team
+# 
+# Translators:
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2011
+# Juanjo, 2015
+# Juanjo, 2015
 msgid ""
 msgstr ""
-"Project-Id-Version: widelands\n"
-"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2015-02-07 14:46+0000\n"
-"PO-Revision-Date: 2011-04-19 20:23+0000\n"
-"Last-Translator: Juanjo Navarro <Unknown>\n"
-"Language-Team: Catalan <ca@li.org>\n"
+"Project-Id-Version: Widelands\n"
+"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
+"POT-Creation-Date: 2015-07-04 14:22+0000\n"
+"PO-Revision-Date: 2015-07-04 15:24+0000\n"
+"Last-Translator: Juanjo\n"
+"Language-Team: Catalan (http://www.transifex.com/projects/p/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-02-08 05:44+0000\n"
-"X-Generator: Launchpad (build 17331)\n"
+"Language: ca\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../../maps/Plateau.wmf/scripting/texts.lua:15
 #: ../../maps/Plateau.wmf/scripting/texts.lua:17
 #: ../../maps/Plateau.wmf/scripting/texts.lua:68
 msgid "The Forbidden Island"
-msgstr ""
+msgstr "L'illa prohibida"
 
 #: ../../maps/Plateau.wmf/scripting/texts.lua:18
 #: ../../maps/Plateau.wmf/scripting/texts.lua:69
@@ -29,51 +31,52 @@ msgid ""
 "Finally! We have just taken our first step towards victory! Last night, we "
 "landed on the forbidden island and defeated the few guards that were "
 "watching the north-western part of the island. I am quite sure that none of "
-"the other warlords has detected us so far, so we should keep quiet and build "
-"up our infrastructure. Soon we will be strong enough to raid their positions."
-msgstr ""
+"the other warlords has detected us so far, so we should keep quiet and build"
+" up our infrastructure. Soon we will be strong enough to raid their "
+"positions."
+msgstr "Per fi! Hem donat el primer pas cap a la victòria! La passada nit vam desembarcar a l'illa prohibida i vam vèncer els pocs guàrdies que estaven vigilant la part nord-est de l'illa. Estic bastant segur que fins ara cap dels altres cabdills ens ha detectat. Així que hauríem de continuar passant inadvertits i construir una infraestructura sòlida. Aviat serem prou forts per atacar l'enemic."
 
 #: ../../maps/Plateau.wmf/scripting/texts.lua:26
 #: ../../maps/Plateau.wmf/scripting/texts.lua:28
 msgid "Capture the Ancient Castle"
-msgstr ""
+msgstr "Captureu el castell antic"
 
 #: ../../maps/Plateau.wmf/scripting/texts.lua:29
 msgid "Defeat Lanissa and capture the ancient castle."
-msgstr ""
+msgstr "Derroteu a la Lanissa i captureu el castell antic"
 
 #: ../../maps/Plateau.wmf/scripting/texts.lua:35
 #: ../../maps/Plateau.wmf/scripting/texts.lua:37
 msgid "Defeat Erwyn"
-msgstr "Derrota l'Erwyn"
+msgstr "Derroteu l'Erwyn"
 
 #: ../../maps/Plateau.wmf/scripting/texts.lua:38
 msgid ""
-"Defeat Erwyn. He commands the strongest opposing military force left on this "
-"island."
-msgstr ""
+"Defeat Erwyn. He commands the strongest opposing military force left on this"
+" island."
+msgstr "Derroteu l'Erwyn, que comanda la força militar més poderosa que queda en aquesta illa."
 
 #: ../../maps/Plateau.wmf/scripting/texts.lua:43
 #: ../../maps/Plateau.wmf/scripting/texts.lua:45
 msgid "Defeat Jomo"
-msgstr "Derrota en Jomo"
+msgstr "Derroteu en Jomo"
 
 #: ../../maps/Plateau.wmf/scripting/texts.lua:46
 msgid "Defeat Jomo. He is taking care of the soldiers’ food supply."
-msgstr ""
+msgstr "Derroteu en Jomo. S'encarrega del subministrament d'aliments dels soldats."
 
 #: ../../maps/Plateau.wmf/scripting/texts.lua:64
 msgid "First Briefing"
-msgstr "Primera Reunió Informativa"
+msgstr "Primer informe"
 
 #: ../../maps/Plateau.wmf/scripting/texts.lua:74
 #: ../../maps/Plateau.wmf/scripting/texts.lua:85
 msgid "Second Briefing"
-msgstr "Segona Reunió Informativa"
+msgstr "Segon informe"
 
 #: ../../maps/Plateau.wmf/scripting/texts.lua:78
 msgid "An Ancient Castle"
-msgstr ""
+msgstr "Un castell antic"
 
 #: ../../maps/Plateau.wmf/scripting/texts.lua:79
 msgid ""
@@ -81,7 +84,7 @@ msgid ""
 "of the old plateau. The castle must be quite old and seems to have been "
 "built in a foreign style. It’s quite obvious that this is not barbarian "
 "craft."
-msgstr ""
+msgstr "Pels déus! Un dels nostres exploradors ha descobert un castell enorme al centre de l'antic altiplà. El castell deu ser bastant vell i pareix haver-se construït en un estil  estranger. És bastant obvi que no és obra dels bàrbars."
 
 #: ../../maps/Plateau.wmf/scripting/texts.lua:80
 msgid ""
@@ -89,59 +92,59 @@ msgid ""
 "not discovered our movements yet. Perhaps we have a chance of conquering "
 "that mighty building without a bigger fight! However, it is essential that "
 "we capture it. It will be the key to our reign over this island!"
-msgstr ""
+msgstr "Esperem que la Lanissa, la cabdill que domina aquell castell, encara no hagi descobert els nostres moviments. Potser tenim una oportunitat de conquerir aquell castell imponent sense una gran lluita! Sigui com sigui, és essencial capturar-lo. Serà clau per al nostre regnat en aquesta illa!"
 
 #: ../../maps/Plateau.wmf/scripting/texts.lua:89
 msgid "Ancient Castle Captured"
-msgstr ""
+msgstr "S'ha capturat el castell antic"
 
 #: ../../maps/Plateau.wmf/scripting/texts.lua:90
 msgid ""
 "Wonderful! Our troops have finally defeated Lanissa and her soldiers. The "
 "ancient castle is ours!"
-msgstr ""
+msgstr "Meravellós! Les nostres tropes finalment han vençut la Lanissa i els seus soldats. L'antic castell és nostre!"
 
 #: ../../maps/Plateau.wmf/scripting/texts.lua:91
 msgid ""
 "It is amazing how far one can see from the highest tower of the castle. We "
 "can watch the whole island. So now I wonder why Lanissa did not see us and "
 "thus did not prepare. Be that as it may, some things will never come to the "
-"light of day. The only important issue at the moment are the opposing troops "
-"still left. We have discovered enemy positions held by Erwyn to the north "
+"light of day. The only important issue at the moment are the opposing troops"
+" still left. We have discovered enemy positions held by Erwyn to the north "
 "and east of the castle. He is known to be a strong warlord and surely "
 "commands the strongest warriors. In the south, we caught sight of some food "
 "infrastructures guarded by Jomo – a younger warlord – and we should take "
 "care of those infrastructures so we can cut off our enemies’ food supply."
-msgstr ""
+msgstr "És increïble quant lluny hom pot veure des de la torre més alta del castell. Podem veure tota l'illa. Em pregunto per què la Lanissa no ens va veure i es va preparar. Sigui com sigui, mai ho sabrem. L'únic problema important per ara són les tropes opositores que encara queden. Al nord-est del castell, hem descobert posicions enemigues controlades per l'Erwyn. Se'l coneix per ser un cabdill fort i comandar els millors guerrers. Al sud, hem vist algunes infraestructures d'aliments vigilades per en Jomo – un cabdill jove – i hauríem d'ocupar-nos-en per tal de tallar els subministraments d'aliments dels nostres enemics."
 
 #: ../../maps/Plateau.wmf/scripting/texts.lua:96
 #: ../../maps/Plateau.wmf/scripting/texts.lua:105
 msgid "Another Briefing"
-msgstr "Una Altra Reunió Informativa"
+msgstr "Un altre informe"
 
 #: ../../maps/Plateau.wmf/scripting/texts.lua:100
 msgid "Erwyn Defeated"
-msgstr ""
+msgstr "Hem vençut l'Erwyn"
 
 #: ../../maps/Plateau.wmf/scripting/texts.lua:101
 msgid ""
-"Great! Erwyn gave up when he saw his last buildings burning down. That’s one "
-"less strong warlord on this island!"
-msgstr ""
+"Great! Erwyn gave up when he saw his last buildings burning down. That’s one"
+" less strong warlord on this island!"
+msgstr "Bé! L'Erwyn s'ha rendit quan ha vist cremar els seus últims edificis. Un cabdill menys a l'illa pel qual preocupar-nos!"
 
 #: ../../maps/Plateau.wmf/scripting/texts.lua:109
 msgid "Jomo Defeated"
-msgstr ""
+msgstr "Hem vençut en Jomo"
 
 #: ../../maps/Plateau.wmf/scripting/texts.lua:110
 msgid ""
 "Great! Jomo gave up when he saw his last buildings burning down. That’s one "
 "less warlord on this island!"
-msgstr ""
+msgstr "Genial! En Jomo s'ha rendit quan ha vist els seus últims edificis arrasats pel foc. Un cabdill menys a l'illa!"
 
 #: ../../maps/Plateau.wmf/scripting/texts.lua:114
 msgid "Last Briefing"
-msgstr "Úlrima Reunió Informativa"
+msgstr "Últim informe"
 
 #: ../../maps/Plateau.wmf/scripting/texts.lua:118
 msgid "Victory!"
@@ -149,12 +152,12 @@ msgstr "Victòria!"
 
 #: ../../maps/Plateau.wmf/scripting/texts.lua:119
 msgid ""
-"Finally! The island is completely ours. Now we just have to defend it better "
-"than the warlords did."
-msgstr ""
+"Finally! The island is completely ours. Now we just have to defend it better"
+" than the warlords did."
+msgstr "Per fi! L'illa és completament nostra. Ara només caldrà defensar-la millor que els anteriors cabdills."
 
 #: ../../maps/Plateau.wmf/scripting/texts.lua:120
 msgid ""
 "Congratulations! You have mastered this scenario. You may play on if you "
 "like!"
-msgstr ""
+msgstr "Felicitats! Heu aconseguit l'objectiu d'aquest escenari. Podeu continuar jugant-hi si voleu!"

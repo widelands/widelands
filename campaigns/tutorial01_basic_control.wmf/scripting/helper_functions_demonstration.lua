@@ -55,16 +55,16 @@ function click_on_panel(panel, g_T, g_sleeptime)
 
    sleep(sleeptime)
    if panel ~= nil then
-		if not panel.active then -- If this is a tab and already on, do nothing
-			mouse_smoothly_to_panel(panel, g_T)
-			sleep(sleeptime)
-			if panel.press then panel:press() sleep(250) end
-			if panel.click then panel:click() end
-			sleep(sleeptime)
-		end
+      if not panel.active then -- If this is a tab and already on, do nothing
+         mouse_smoothly_to_panel(panel, g_T)
+         sleep(sleeptime)
+         if panel.press then panel:press() sleep(250) end
+         if panel.click then panel:click() end
+         sleep(sleeptime)
+      end
    else
       print('Attempt to click on a non-existing panel.')
-	end
+   end
    blocker:lift_blocks()
 end
 
@@ -118,9 +118,9 @@ function bad_boy_sentry()
                -- Give the callback a chance to veto the deletion. Maybe
                -- we expect the player to build something at the moment
                if not immovable_is_legal(f.immovable) then
-                  -- scould the player
+                  -- scold the player
                   if not sent_msg then
-                     message_box_objective(plr, scould_player)
+                     message_box_objective(plr, scold_player)
                      sent_msg = true
                   end
 
