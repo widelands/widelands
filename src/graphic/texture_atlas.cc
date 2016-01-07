@@ -137,7 +137,7 @@ std::unique_ptr<Texture> TextureAtlas::pack_as_many_as_possible(const int max_di
 		   *block.texture,
 		   Rect(0, 0, block.texture->width(), block.texture->height()),
 		   1.,
-		   BlendMode::UseAlpha);
+		   BlendMode::Copy);
 
 		pack_info->emplace_back(PackedTexture(
 		   texture_atlas_index, block.index,
