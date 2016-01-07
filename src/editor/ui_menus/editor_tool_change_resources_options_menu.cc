@@ -222,8 +222,12 @@ void EditorToolChangeResourcesOptionsMenu::selected() {
 	Widelands::EditorGameBase& egbase = eia().egbase();
 	Widelands::Map & map = egbase.map();
 	map.overlay_manager().register_overlay_callback_function(
-			[&] (const Widelands::TCoords<Widelands::FCoords>& coords)
-			{return map.is_resource_valid(egbase.world(), coords, resIx);});
+		[resIx, &map, &egbase](const Widelands::TCoords<Widelands::FCoords>& coords) -> uint32_t {
+			if (map.is_resource_valid(egbase.world(), coords, resIx)) {
+				return coords.field->nodecaps();
+			}
+			return 0;
+		});
 
 	map.recalc_whole_map(egbase.world());
 	select_correct_tool();
