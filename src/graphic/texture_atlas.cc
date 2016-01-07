@@ -24,7 +24,6 @@
 #include <memory>
 
 #include "base/wexception.h"
-#include "base/log.h" // NOCOM(#sirver): remove again
 
 TextureAtlas::Node::Node(const Rect& init_r) : used(false), r(init_r) {
 }
@@ -72,9 +71,6 @@ TextureAtlas::Node* TextureAtlas::find_node(Node* node, int w, int h) {
 std::unique_ptr<Texture> TextureAtlas::pack_as_many_as_possible(const int max_dimension,
                                                                 const int texture_atlas_index,
                                                                 std::vector<PackedTexture>* pack_info) {
-	log("#sirver max_dimension: %d,texture_atlas_index: %d\n", max_dimension, texture_atlas_index);
-
-
 	std::unique_ptr<Node> root(
 	   new Node(Rect(0, 0, blocks_.begin()->texture->width(), blocks_.begin()->texture->height())));
 

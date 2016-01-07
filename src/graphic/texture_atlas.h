@@ -31,6 +31,8 @@
 class TextureAtlas {
 public:
 	struct PackedTexture {
+		PackedTexture() : texture_atlas(-1), texture(nullptr), index_(-1) {}
+
 		// The index of the returned texture atlas that contains this image.
 		int texture_atlas;
 
