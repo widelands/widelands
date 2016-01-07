@@ -693,8 +693,6 @@ Supply * Economy::_find_best_supply
 		// std::map quarantees uniqueness, practically it means that if more wares are on the same flag, only
 		// first one will be inserted into available_supplies
 		available_supplies.insert(std::make_pair(ud, &m_supplies[i]));
-		//available_supplies.insert(std::pair<UniqueDistance, Supply*>(ud, &m_supplies[i])); NOCOM remove
-
 	}
 
 	// Now available supplies have been sorted by distance to requestor
