@@ -71,6 +71,11 @@ bool IdleWorkerSupply::is_active() const
 	return true;
 }
 
+SupplyProviders IdleWorkerSupply::provider_type(Game *) const
+{
+	return SupplyProviders::kFlagOrRoad;
+}
+
 bool IdleWorkerSupply::has_storage() const
 {
 	return m_worker.get_transfer();

@@ -33,6 +33,8 @@ class Warehouse;
 class WareInstance;
 class Worker;
 
+enum class SupplyProviders {kWarehouse, kFlagOrRoad, kShip};
+
 /**
  * A Supply is a virtual base class representing something that can offer
  * wares of any type for any purpose.
@@ -55,6 +57,12 @@ struct Supply : public Trackable {
 	 * on the road network).
 	 */
 	virtual bool is_active() const = 0;
+
+	/**
+	 * Return the type of player im/movable where the ware is now (warehouse,
+	 * flag or ship).
+	 */
+	virtual SupplyProviders provider_type(Game *) const = 0;
 
 	/**
 	 * Indicates whether this supply is in storage or on its way to
