@@ -65,8 +65,11 @@ struct OverlayManager {
 		Point hotspot;
 	};
 
+	// The function used to calculate overlays for the build help. The function
+	// needs to return the nodecaps of the field that correspond to the image
+	// that should be used.
 	using CallbackFn =
-		boost::function<bool(const Widelands::TCoords<Widelands::FCoords>& coordinates)>;
+		boost::function<int32_t(const Widelands::TCoords<Widelands::FCoords>& coordinates)>;
 
 	OverlayManager();
 

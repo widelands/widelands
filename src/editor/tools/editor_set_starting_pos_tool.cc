@@ -95,7 +95,7 @@ int32_t EditorSetStartingPosTool::handle_click_impl(const Widelands::World&,
 
 			//  add new overlay
 			overlay_manager.register_overlay
-			(center.node, pic, 8, Point(pic->width() / 2, STARTING_POS_HOTSPOT_Y));
+			(center.node, pic, 4, Point(pic->width() / 2, STARTING_POS_HOTSPOT_Y));
 
 			//  set new player pos
 			map->set_starting_pos(m_current_player, center.node);
