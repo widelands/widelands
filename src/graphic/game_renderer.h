@@ -24,17 +24,14 @@
 
 #include "base/macros.h"
 #include "base/point.h"
+#include "graphic/gl/fields_to_draw.h"
 
 namespace Widelands {
 	class Player;
 	class EditorGameBase;
 }
 
-class DitherProgram;
 class RenderTarget;
-class RoadProgram;
-class TerrainProgram;
-
 
 /**
  * This abstract base class renders the main game view into an
@@ -64,10 +61,6 @@ public:
 	void rendermap(RenderTarget& dst, const Widelands::EditorGameBase& egbase, const Point& view_offset);
 
 private:
-	static std::unique_ptr<TerrainProgram> terrain_program_;
-	static std::unique_ptr<DitherProgram> dither_program_;
-	static std::unique_ptr<RoadProgram> road_program_;
-
 	// Draw the map for the given parameters (see rendermap). 'player'
 	// can be nullptr in which case the whole map is drawn.
 	void draw(RenderTarget& dst,
@@ -84,6 +77,10 @@ private:
 	                  int maxfx,
 	                  int minfy,
 	                  int maxfy);
+
+	// This is owned and handled by us, but handed to the RenderQueue, so we
+	// basically promise that this stays valid for one frame.
+	FieldsToDraw fields_to_draw_;
 
 	DISALLOW_COPY_AND_ASSIGN(GameRenderer);
 };

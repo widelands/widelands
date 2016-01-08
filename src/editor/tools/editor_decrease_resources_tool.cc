@@ -56,9 +56,9 @@ EditorDecreaseResourcesTool::handle_click_impl(const Widelands::World& world,
 			map->is_resource_valid(world, mr.location(), args->cur_res)) {
 			args->orgResT.push_back(mr.location().field->get_resources());
 			args->orgRes.push_back(mr.location().field->get_resources_amount());
-			EditorSetResourcesTool::set_res_and_overlay(world, amount, args->cur_res, &mr, args, map);
+			EditorSetResourcesTool::set_res_and_overlay(
+			   world, amount, args->cur_res, mr.location(), map);
 		}
-
 
 	} while (mr.advance(*map));
 	return mr.radius();

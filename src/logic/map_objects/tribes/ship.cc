@@ -640,12 +640,11 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 				Worker* worker;
 				m_items.at(i).get(game, &ware, &worker);
 				if (ware) {
-					// no, we don't transfer the wares, we create new ones out of air and remove the old
-					// ones ;)
-					WaresQueue& wq = cs->waresqueue(ware->descr_index());
-					const uint32_t max = wq.get_max_fill();
+					// no, we don't transfer the wares, we create new ones out of
+					// air and remove the old ones ;)
+					WaresQueue & wq = cs->waresqueue(ware->descr_index());
 					const uint32_t cur = wq.get_filled();
-					assert(max > cur);
+					assert(wq.get_max_fill() > cur);
 					wq.set_filled(cur + 1);
 					m_items.at(i).remove(game);
 					m_items.resize(i);

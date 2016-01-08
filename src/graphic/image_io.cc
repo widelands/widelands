@@ -25,6 +25,7 @@
 #include <SDL_image.h>
 #include <png.h>
 
+#include "base/log.h"
 #include "base/wexception.h"
 #include "graphic/texture.h"
 #include "io/fileread.h"
@@ -130,7 +131,6 @@ bool save_to_png(Texture* texture, StreamWrite* sw, ColorType color_type) {
 		std::unique_ptr<png_byte[]> row(new png_byte[row_size]);
 
 		// Write each row
-		const SDL_PixelFormat& fmt = texture->format();
 		texture->lock();
 
 		// Write each row
@@ -138,7 +138,7 @@ bool save_to_png(Texture* texture, StreamWrite* sw, ColorType color_type) {
 		if (color_type == ColorType::RGB) {
 			for (uint32_t y = 0; y < surf_h; ++y) {
 				for (uint32_t x = 0; x < surf_w; ++x) {
-					color.set(fmt, texture->get_pixel(x, y));
+					color = texture->get_pixel(x, y);
 					row[3 * x] = color.r;
 					row[3 * x + 1] = color.g;
 					row[3 * x + 2] = color.b;
@@ -148,7 +148,7 @@ bool save_to_png(Texture* texture, StreamWrite* sw, ColorType color_type) {
 		} else {
 			for (uint32_t y = 0; y < surf_h; ++y) {
 				for (uint32_t x = 0; x < surf_w; ++x) {
-					color.set(fmt, texture->get_pixel(x, y));
+					color = texture->get_pixel(x, y);
 					row[4 * x] = color.r;
 					row[4 * x + 1] = color.g;
 					row[4 * x + 2] = color.b;

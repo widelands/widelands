@@ -55,6 +55,7 @@ struct WarehouseSupply : public Supply {
 	// Supply implementation
 	PlayerImmovable * get_position(Game &) override;
 	bool is_active() const override;
+	SupplyProviders provider_type(Game *) const override;
 	bool has_storage() const override;
 	void get_ware_type(WareWorker & type, DescriptionIndex & ware) const override;
 

@@ -21,11 +21,9 @@
 
 #include <memory>
 
-#include "graphic/gl/dither_program.h"
-#include "graphic/gl/fields_to_draw.h"
-#include "graphic/gl/road_program.h"
-#include "graphic/gl/terrain_program.h"
+#include "graphic/gl/coordinate_conversion.h"
 #include "graphic/graphic.h"
+#include "graphic/render_queue.h"
 #include "graphic/rendertarget.h"
 #include "graphic/surface.h"
 #include "logic/editor_game_base.h"
@@ -65,10 +63,6 @@
 // The dither triangle is the triangle that should be partially (either r or
 // d). Example: if r and d have different textures and r.dither_layer >
 // d.dither_layer, then we will repaint d with the dither texture as mask.
-
-std::unique_ptr<TerrainProgram> GameRenderer::terrain_program_;
-std::unique_ptr<DitherProgram> GameRenderer::dither_program_;
-std::unique_ptr<RoadProgram> GameRenderer::road_program_;
 
 namespace {
 
@@ -142,12 +136,6 @@ void GameRenderer::draw(RenderTarget& dst,
                         const EditorGameBase& egbase,
                         const Point& view_offset,
                         const Player* player) {
-	if (terrain_program_ == nullptr) {
-		terrain_program_.reset(new TerrainProgram());
-		dither_program_.reset(new DitherProgram());
-		road_program_.reset(new RoadProgram());
-	}
-
 	Point tl_map = dst.get_offset() + view_offset;
 
 	assert(tl_map.x >= 0); // divisions involving negative numbers are bad
@@ -170,22 +158,18 @@ void GameRenderer::draw(RenderTarget& dst,
 		return;
 
 	const Rect& bounding_rect = dst.get_rect();
-	const Point surface_offset = bounding_rect.top_left() + dst.get_offset() - view_offset;
-
-	glScissor(bounding_rect.x,
-	          surface->height() - bounding_rect.y - bounding_rect.h,
-	          bounding_rect.w,
-	          bounding_rect.h);
-	glEnable(GL_SCISSOR_TEST);
+	const Point surface_offset = bounding_rect.origin() + dst.get_offset() - view_offset;
+	const int surface_width = surface->width();
+	const int surface_height = surface->height();
 
 	Map& map = egbase.map();
 	const uint32_t gametime = egbase.get_gametime();
 
-	FieldsToDraw fields_to_draw(minfx, maxfx, minfy, maxfy);
+	fields_to_draw_.reset(minfx, maxfx, minfy, maxfy);
 	for (int32_t fy = minfy; fy <= maxfy; ++fy) {
 		for (int32_t fx = minfx; fx <= maxfx; ++fx) {
 			FieldsToDraw::Field& f =
-			   *fields_to_draw.mutable_field(fields_to_draw.calculate_index(fx, fy));
+			   *fields_to_draw_.mutable_field(fields_to_draw_.calculate_index(fx, fy));
 
 			f.fx = fx;
 			f.fy = fy;
@@ -202,7 +186,7 @@ void GameRenderer::draw(RenderTarget& dst,
 
 			f.gl_x = f.pixel_x = x + surface_offset.x;
 			f.gl_y = f.pixel_y = y + surface_offset.y - fcoords.field->get_height() * HEIGHT_FACTOR;
-			surface->pixel_to_gl(&f.gl_x, &f.gl_y);
+			pixel_to_gl_renderbuffer(surface_width, surface_height, &f.gl_x, &f.gl_y);
 
 			f.ter_d = fcoords.field->terrain_d();
 			f.ter_r = fcoords.field->terrain_r();
@@ -220,14 +204,32 @@ void GameRenderer::draw(RenderTarget& dst,
 		}
 	}
 
-	const World& world = egbase.world();
-	terrain_program_->draw(gametime, world.terrains(), fields_to_draw);
-	dither_program_->draw(gametime, world.terrains(), fields_to_draw);
-	road_program_->draw(*surface, fields_to_draw);
+	// Enqueue the drawing of the terrain.
+	RenderQueue::Item i;
+	i.program_id = RenderQueue::Program::kTerrainBase;
+	i.blend_mode = BlendMode::Copy;
+	i.destination_rect =
+	   FloatRect(bounding_rect.x,
+	             surface_height - bounding_rect.y - bounding_rect.h,
+	             bounding_rect.w,
+	             bounding_rect.h);
+	i.terrain_arguments.gametime = gametime;
+	i.terrain_arguments.renderbuffer_width = surface_width;
+	i.terrain_arguments.renderbuffer_height = surface_height;
+	i.terrain_arguments.terrains = &egbase.world().terrains();
+	i.terrain_arguments.fields_to_draw = &fields_to_draw_;
+	RenderQueue::instance().enqueue(i);
+
+	// Enqueue the drawing of the dither layer.
+	i.program_id = RenderQueue::Program::kTerrainDither;
+	i.blend_mode = BlendMode::UseAlpha;
+	RenderQueue::instance().enqueue(i);
+
+	// Enqueue the drawing of the road layer.
+	i.program_id = RenderQueue::Program::kTerrainRoad;
+	RenderQueue::instance().enqueue(i);
 
 	draw_objects(dst, egbase, view_offset, player, minfx, maxfx, minfy, maxfy);
-
-	glDisable(GL_SCISSOR_TEST);
 }
 
 void GameRenderer::draw_objects(RenderTarget& dst,

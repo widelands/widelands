@@ -26,6 +26,7 @@
 
 struct RGBColor {
 	RGBColor(uint8_t R, uint8_t G, uint8_t B);
+	RGBColor(const RGBColor& other) = default;
 
 	// Initializes the color to black.
 	RGBColor();
@@ -39,14 +40,16 @@ struct RGBColor {
 	// Set it to the given 'clr' which is interpretes through 'fmt'.
 	void set(SDL_PixelFormat * fmt, uint32_t clr);
 
-	bool operator == (const RGBColor& other) const;
+	RGBColor& operator = (const RGBColor& other) = default;
 	bool operator != (const RGBColor& other) const;
+	bool operator == (const RGBColor& other) const;
 
 	uint8_t r, g, b;
 };
 
 struct RGBAColor {
 	RGBAColor(uint8_t R, uint8_t G, uint8_t B, uint8_t A);
+	RGBAColor(const RGBAColor& other) = default;
 
 	// Initializes the color to black.
 	RGBAColor();
@@ -63,8 +66,9 @@ struct RGBAColor {
 	// Set it to the given 'clr' which is interpretes through 'fmt'.
 	void set(const SDL_PixelFormat & fmt, uint32_t clr);
 
-	bool operator == (const RGBAColor& other) const;
+	RGBAColor& operator = (const RGBAColor& other) = default;
 	bool operator != (const RGBAColor& other) const;
+	bool operator == (const RGBAColor& other) const;
 
 	uint8_t r;
 	uint8_t g;
