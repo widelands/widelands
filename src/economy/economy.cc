@@ -34,10 +34,10 @@
 #include "economy/router.h"
 #include "economy/warehousesupply.h"
 #include "logic/game.h"
+#include "logic/map_objects/tribes/soldier.h"
+#include "logic/map_objects/tribes/tribe_descr.h"
+#include "logic/map_objects/tribes/warehouse.h"
 #include "logic/player.h"
-#include "logic/soldier.h"
-#include "logic/tribes/tribe_descr.h"
-#include "logic/warehouse.h"
 
 namespace Widelands {
 

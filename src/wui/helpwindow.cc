@@ -25,7 +25,7 @@
 #include <boost/format.hpp>
 
 #include "base/i18n.h"
-#include "logic/building.h"
+#include "logic/map_objects/tribes/building.h"
 #include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
 

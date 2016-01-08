@@ -24,14 +24,14 @@
 
 #include "base/macros.h"
 #include "graphic/color.h"
-#include "logic/building.h"
 #include "logic/constants.h"
-#include "logic/constructionsite.h"
 #include "logic/editor_game_base.h"
+#include "logic/map_objects/tribes/building.h"
+#include "logic/map_objects/tribes/constructionsite.h"
+#include "logic/map_objects/tribes/tribe_descr.h"
+#include "logic/map_objects/tribes/warehouse.h"
 #include "logic/mapregion.h"
 #include "logic/message_queue.h"
-#include "logic/tribes/tribe_descr.h"
-#include "logic/warehouse.h"
 #include "logic/widelands.h"
 
 // there are three arrays to be used by AI

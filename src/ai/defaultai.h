@@ -28,10 +28,10 @@
 #include "ai/ai_help_structs.h"
 #include "ai/computer_player.h"
 #include "base/i18n.h"
-#include "logic/immovable.h"
-#include "logic/ship.h"
-#include "logic/soldier.h"
-#include "logic/trainingsite.h"
+#include "logic/map_objects/immovable.h"
+#include "logic/map_objects/tribes/ship.h"
+#include "logic/map_objects/tribes/soldier.h"
+#include "logic/map_objects/tribes/trainingsite.h"
 
 namespace Widelands {
 struct Road;

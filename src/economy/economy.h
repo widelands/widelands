@@ -28,11 +28,11 @@
 #include <boost/utility.hpp>
 
 #include "base/macros.h"
-#include "logic/instances.h"
-#include "logic/warelist.h"
-#include "logic/wareworker.h"
 #include "economy/supply.h"
 #include "economy/supply_list.h"
+#include "logic/map_objects/map_object.h"
+#include "logic/map_objects/tribes/warelist.h"
+#include "logic/map_objects/tribes/wareworker.h"
 #include "ui_basic/unique_window.h"
 
 

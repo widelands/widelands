@@ -20,8 +20,8 @@
 #ifndef WL_ECONOMY_WAREHOUSESUPPLY_H
 #define WL_ECONOMY_WAREHOUSESUPPLY_H
 
-#include "logic/warelist.h"
-#include "logic/wareworker.h"
+#include "logic/map_objects/tribes/warelist.h"
+#include "logic/map_objects/tribes/wareworker.h"
 #include "economy/supply.h"
 
 namespace Widelands {

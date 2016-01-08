@@ -30,8 +30,8 @@
 #include "logic/game.h"
 #include "logic/game_controller.h"
 #include "logic/map.h"
+#include "logic/map_objects/tribes/ship.h"
 #include "logic/player.h"
-#include "logic/ship.h"
 #include "profile/profile.h"
 #include "wui/game_summary.h"
 
