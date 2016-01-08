@@ -77,11 +77,6 @@ make_key_blended(const uint64_t program_id, const uint64_t z_value, const uint64
 }
 
 // Construct 'args' used by the individual programs out of 'item'.
-inline void from_item(const RenderQueue::Item& item, VanillaBlitProgram::Arguments* args) {
-	args->texture = item.vanilla_blit_arguments.texture;
-	args->opacity = item.vanilla_blit_arguments.opacity;
-}
-
 inline void from_item(const RenderQueue::Item& item, MonochromeBlitProgram::Arguments* args) {
 	args->texture = item.monochrome_blit_arguments.texture;
 	args->blend = item.monochrome_blit_arguments.blend;
@@ -123,6 +118,7 @@ std::vector<T> batch_up(const RenderQueue::Program program_id,
 		from_item(current_item, &args);
 		++(*index);
 	}
+	// log("#sirver program_id: %d,all_args.size(): %lu\n", program_id, all_args.size());
 	return all_args;
 }
 
@@ -166,10 +162,6 @@ void RenderQueue::enqueue(const Item& given_item) {
 	uint32_t extra_value = 0;
 
 	switch (given_item.program_id) {
-		case Program::kBlit:
-		   extra_value = given_item.vanilla_blit_arguments.texture.texture_id;
-		 break;
-
 		case Program::kBlitMonochrome:
 		   extra_value = given_item.monochrome_blit_arguments.texture.texture_id;
 			break;
@@ -208,6 +200,7 @@ void RenderQueue::enqueue(const Item& given_item) {
 }
 
 void RenderQueue::draw(const int screen_width, const int screen_height) {
+	// log("#sirver Starting frame.\n");
 	if (next_z_ >= kMaximumZValue) {
 		throw wexception("Too many drawn layers. Ran out of z-values.");
 	}
@@ -231,7 +224,7 @@ void RenderQueue::draw(const int screen_width, const int screen_height) {
 	blended_items_.clear();
 
 	glDepthMask(GL_TRUE);
-
+	// log("#sirver End of frame.\n");
 	next_z_ = 1;
 }
 
@@ -240,11 +233,6 @@ void RenderQueue::draw_items(const std::vector<Item>& items) {
 	while (i < items.size()) {
 		const Item& item = items[i];
 		switch (item.program_id) {
-		case Program::kBlit:
-			VanillaBlitProgram::instance().draw(
-			   batch_up<VanillaBlitProgram::Arguments>(Program::kBlit, items, &i));
-		 break;
-
 		case Program::kBlitMonochrome:
 			MonochromeBlitProgram::instance().draw(
 			   batch_up<MonochromeBlitProgram::Arguments>(Program::kBlitMonochrome, items, &i));

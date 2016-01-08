@@ -81,17 +81,11 @@ public:
 		kTerrainBase,
 		kTerrainDither,
 		kTerrainRoad,
-		kBlit,
 		kBlitMonochrome,
 		kBlitBlended,
 		kRect,
 		kLine,
 		kHighestProgramId,
-	};
-
-	struct VanillaBlitArguments {
-		BlitData texture;
-		float opacity;
 	};
 
 	struct MonochromeBlitArguments {
@@ -154,7 +148,6 @@ public:
 		BlendMode blend_mode;
 
 		union {
-			VanillaBlitArguments vanilla_blit_arguments;
 			MonochromeBlitArguments monochrome_blit_arguments;
 			BlendedBlitArguments blended_blit_arguments;
 			TerrainArguments terrain_arguments;

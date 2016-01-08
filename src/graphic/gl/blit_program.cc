@@ -49,20 +49,6 @@ void main() {
 }
 )";
 
-const char kVanillaBlitFragmentShader[] = R"(
-#version 120
-
-uniform sampler2D u_texture;
-
-varying vec2 out_texture_coordinate;
-varying vec4 out_blend;
-
-void main() {
-	vec4 color = texture2D(u_texture, out_texture_coordinate);
-	gl_FragColor = color * out_blend;
-}
-)";
-
 const char kMonochromeBlitFragmentShader[] = R"(
 #version 120
 
@@ -347,45 +333,6 @@ void BlitProgram::draw_and_deactivate(const std::vector<Arguments>& arguments) {
 }
 
 // static
-VanillaBlitProgram& VanillaBlitProgram::instance() {
-	static VanillaBlitProgram blit_program;
-	return blit_program;
-}
-
-VanillaBlitProgram::~VanillaBlitProgram() {
-}
-
-VanillaBlitProgram::VanillaBlitProgram() {
-	blit_program_.reset(new BlitProgram(kVanillaBlitFragmentShader));
-}
-
-void VanillaBlitProgram::draw(const FloatRect& gl_dest_rect,
-                              const float z_value,
-										const BlitData& texture,
-                              const float opacity,
-                              const BlendMode blend_mode) {
-	draw({Arguments{gl_dest_rect, z_value, texture, opacity, blend_mode}});
-}
-
-void VanillaBlitProgram::draw(const std::vector<Arguments>& arguments) {
-	std::vector<BlitProgram::Arguments> blit_arguments;
-	for (const Arguments arg : arguments) {
-		blit_arguments.emplace_back(BlitProgram::Arguments{
-		   arg.destination_rect,
-		   arg.z_value,
-		   arg.texture,
-		   BlitData{0, 0, 0, Rect()},
-		   RGBAColor(255, 255, 255, arg.opacity * 255),
-		   arg.blend_mode,
-		});
-	}
-
-	blit_program_->activate();
-	blit_program_->draw_and_deactivate(blit_arguments);
-}
-
-
-// static
 MonochromeBlitProgram& MonochromeBlitProgram::instance() {
 	static MonochromeBlitProgram blit_program;
 	return blit_program;
@@ -439,8 +386,9 @@ void BlendedBlitProgram::draw(const FloatRect& gl_dest_rect,
                               const float z_value,
 										const BlitData& texture,
 										const BlitData& mask,
-                              const RGBAColor& blend) {
-	draw({Arguments{gl_dest_rect, z_value, texture, mask, blend, BlendMode::UseAlpha}});
+                              const RGBAColor& blend,
+										const BlendMode& blend_mode) {
+	draw({Arguments{gl_dest_rect, z_value, texture, mask, blend, blend_mode}});
 }
 
 void BlendedBlitProgram::draw(const std::vector<Arguments>& arguments) {
