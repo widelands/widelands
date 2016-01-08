@@ -28,6 +28,7 @@
 #include "base/macros.h"
 #include "base/rect.h"
 #include "graphic/blend_mode.h"
+#include "graphic/blit_type.h"
 #include "graphic/color.h"
 #include "graphic/gl/fields_to_draw.h"
 #include "logic/description_maintainer.h"
@@ -81,7 +82,6 @@ public:
 		kTerrainBase,
 		kTerrainDither,
 		kTerrainRoad,
-		kBlitMonochrome,
 		kBlitBlended,
 		kRect,
 		kLine,
@@ -94,6 +94,7 @@ public:
 	};
 
 	struct BlendedBlitArguments {
+		BlitType type;
 		BlitData texture;
 		BlitData mask;
 		RGBAColor blend;
@@ -148,7 +149,6 @@ public:
 		BlendMode blend_mode;
 
 		union {
-			MonochromeBlitArguments monochrome_blit_arguments;
 			BlendedBlitArguments blended_blit_arguments;
 			TerrainArguments terrain_arguments;
 			RectArguments rect_arguments;

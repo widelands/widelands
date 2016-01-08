@@ -76,12 +76,6 @@ make_key_blended(const uint64_t program_id, const uint64_t z_value, const uint64
 	return (z_value << 40) | (program_id << 36) | extra_value;
 }
 
-// Construct 'args' used by the individual programs out of 'item'.
-inline void from_item(const RenderQueue::Item& item, MonochromeBlitProgram::Arguments* args) {
-	args->texture = item.monochrome_blit_arguments.texture;
-	args->blend = item.monochrome_blit_arguments.blend;
-}
-
 inline void from_item(const RenderQueue::Item& item, FillRectProgram::Arguments* args) {
 	args->color = item.rect_arguments.color;
 }
@@ -90,6 +84,7 @@ inline void from_item(const RenderQueue::Item& item, BlendedBlitProgram::Argumen
 	args->texture = item.blended_blit_arguments.texture;
 	args->blend = item.blended_blit_arguments.blend;
 	args->mask = item.blended_blit_arguments.mask;
+	args->type = item.blended_blit_arguments.type;
 }
 
 inline void from_item(const RenderQueue::Item& item, DrawLineProgram::Arguments* args) {
@@ -162,10 +157,6 @@ void RenderQueue::enqueue(const Item& given_item) {
 	uint32_t extra_value = 0;
 
 	switch (given_item.program_id) {
-		case Program::kBlitMonochrome:
-		   extra_value = given_item.monochrome_blit_arguments.texture.texture_id;
-			break;
-
 		case Program::kBlitBlended:
 		   extra_value = given_item.blended_blit_arguments.texture.texture_id;
 			break;
@@ -233,11 +224,6 @@ void RenderQueue::draw_items(const std::vector<Item>& items) {
 	while (i < items.size()) {
 		const Item& item = items[i];
 		switch (item.program_id) {
-		case Program::kBlitMonochrome:
-			MonochromeBlitProgram::instance().draw(
-			   batch_up<MonochromeBlitProgram::Arguments>(Program::kBlitMonochrome, items, &i));
-			break;
-
 		case Program::kBlitBlended:
 			BlendedBlitProgram::instance().draw(
 			   batch_up<BlendedBlitProgram::Arguments>(Program::kBlitBlended, items, &i));

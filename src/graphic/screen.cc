@@ -81,6 +81,7 @@ void Screen::do_blit(const FloatRect& dst_rect,
 	i.blended_blit_arguments.texture = texture;
 	i.blended_blit_arguments.mask.texture_id = 0;
 	i.blended_blit_arguments.blend = RGBAColor(0, 0, 0, 255 * opacity);
+	i.blended_blit_arguments.type = BlitType::kVanilla;
 	RenderQueue::instance().enqueue(i);
 }
 
@@ -95,6 +96,7 @@ void Screen::do_blit_blended(const FloatRect& dst_rect,
 	i.blended_blit_arguments.texture = texture;
 	i.blended_blit_arguments.mask = mask;
 	i.blended_blit_arguments.blend = blend;
+	i.blended_blit_arguments.type = BlitType::kBlended;
 	RenderQueue::instance().enqueue(i);
 }
 
@@ -102,11 +104,14 @@ void Screen::do_blit_monochrome(const FloatRect& dst_rect,
                                 const BlitData& texture,
                                 const RGBAColor& blend) {
 	RenderQueue::Item i;
-	i.program_id = RenderQueue::Program::kBlitMonochrome;
-	i.blend_mode = BlendMode::UseAlpha;
 	i.destination_rect = dst_rect;
-	i.monochrome_blit_arguments.texture = texture;
-	i.monochrome_blit_arguments.blend = blend;
+	i.program_id = RenderQueue::Program::kBlitBlended;
+	i.blend_mode = BlendMode::UseAlpha;
+	i.blended_blit_arguments.texture = texture;
+	i.blended_blit_arguments.blend = blend;
+	i.blended_blit_arguments.mask.texture_id = 0;
+	i.blended_blit_arguments.blend = blend;
+	i.blended_blit_arguments.type = BlitType::kMonochrome;
 	RenderQueue::instance().enqueue(i);
 }
 

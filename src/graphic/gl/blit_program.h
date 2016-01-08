@@ -26,46 +26,14 @@
 #include "base/macros.h"
 #include "base/rect.h"
 #include "graphic/blend_mode.h"
+#include "graphic/blit_type.h"
 #include "graphic/color.h"
 #include "graphic/gl/blit_data.h"
 #include "graphic/gl/system_headers.h"
 
 class BlitProgram;
 
-class MonochromeBlitProgram {
-public:
-	struct Arguments {
-		FloatRect destination_rect;
-		float z_value;
-		BlitData texture;
-		RGBAColor blend;
-		BlendMode blend_mode;
-	};
-
-	// Returns the (singleton) instance of this class.
-	static MonochromeBlitProgram& instance();
-	~MonochromeBlitProgram();
-
-	// Draws the rectangle 'gl_src_rect' from the texture with the name
-	// 'texture' to 'gl_dest_rect' in the currently bound framebuffer. All
-	// coordinates are in the OpenGL frame. The image is first converted to
-	// luminance, then all values are multiplied with blend.
-	void draw(const FloatRect& gl_dest_rect,
-				 const float z_value,
-				 const BlitData& blit_source,
-				 const RGBAColor& blend);
-
-	// Draws a bunch of items at once.
-	void draw(const std::vector<Arguments>& arguments);
-
-private:
-	MonochromeBlitProgram();
-
-	std::unique_ptr<BlitProgram> blit_program_;
-
-	DISALLOW_COPY_AND_ASSIGN(MonochromeBlitProgram);
-};
-
+// NOCOM(#sirver): rename
 class BlendedBlitProgram {
 public:
 	struct Arguments {
@@ -75,6 +43,7 @@ public:
 		BlitData mask;
 		RGBAColor blend;
 		BlendMode blend_mode;
+		BlitType type;
 	};
 
 	// Returns the (singleton) instance of this class.
@@ -91,6 +60,16 @@ public:
 				 const BlitData& mask,
 	          const RGBAColor& blend,
 				 const BlendMode& blend_mode);
+
+	// Draws the rectangle 'gl_src_rect' from the texture with the name
+	// 'texture' to 'gl_dest_rect' in the currently bound framebuffer. All
+	// coordinates are in the OpenGL frame. The image is first converted to
+	// luminance, then all values are multiplied with blend.
+	void draw_monochrome(const FloatRect& gl_dest_rect,
+				 const float z_value,
+				 const BlitData& blit_source,
+				 const RGBAColor& blend);
+
 
 	// Draws a bunch of items at once.
 	void draw(const std::vector<Arguments>& arguments);

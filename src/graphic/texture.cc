@@ -294,7 +294,7 @@ void Texture::do_blit_monochrome(const FloatRect& dst_rect,
                                  const BlitData& texture,
                                  const RGBAColor& blend) {
 	setup_gl();
-	MonochromeBlitProgram::instance().draw(dst_rect, 0.f, texture, blend);
+	BlendedBlitProgram::instance().draw_monochrome(dst_rect, 0.f, texture, blend);
 }
 
 void
