@@ -50,7 +50,6 @@ void World::load_graphics() {
 	for (size_t i = 0; i < terrains_->size(); ++i) {
 		TerrainDescription* terrain = terrains_->get_mutable(i);
 		for (size_t j = 0; j < terrain->texture_paths().size(); ++j) {
-			// NOCOM(#sirver): is that really needed?
 			SDL_Surface* sdl_surface = load_image_as_sdl_surface(terrain->texture_paths()[j]);
 
 			// Set the minimap color on the first loaded image.

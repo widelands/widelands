@@ -17,13 +17,20 @@
  *
  */
 
-#ifndef WL_GRAPHIC_BLIT_TYPE_H
-#define WL_GRAPHIC_BLIT_TYPE_H
+#ifndef WL_GRAPHIC_BLIT_MODE_H
+#define WL_GRAPHIC_BLIT_MODE_H
 
-enum class BlitType {
-	kVanilla,
+// The type of blit performed.
+enum class BlitMode {
+	// Blit texture unchanged.
+	kDirect,
+
+	// Blit texture desaturated and maybe tinted with a color.
 	kMonochrome,
-	kBlended,
+
+	// Blit texture tinted with a color everywhere where a mask is not
+	// transparent,
+	kBlendedWithMask,
 };
 
-#endif  // end of include guard: WL_GRAPHIC_BLIT_TYPE_H
+#endif  // end of include guard: WL_GRAPHIC_BLIT_MODE_H

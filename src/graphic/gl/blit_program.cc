@@ -22,7 +22,7 @@
 #include <vector>
 
 #include "base/log.h"
-#include "graphic/blit_type.h"
+#include "graphic/blit_mode.h"
 #include "graphic/gl/blit_data.h"
 #include "graphic/gl/coordinate_conversion.h"
 #include "graphic/gl/utils.h"
@@ -53,7 +53,7 @@ void main() {
 }
 )";
 
-const char kBlendedBlitFragmentShader[] = R"(
+const char kBlitFragmentShader[] = R"(
 #version 120
 
 uniform sampler2D u_texture;
@@ -96,6 +96,7 @@ struct DrawBatch {
 	BlendMode blend_mode;
 };
 
+// NOCOM(#sirver): use this everywhere and have the same for glEnableVertexAttribArray.
 class TextureBinder {
 public:
 	TextureBinder() : current_bindings_(10, 255), last_target_(0) {}
@@ -122,79 +123,8 @@ private:
 
 }  // namespace
 
-class BlitProgram {
-public:
-	BlitProgram(const std::string& fragment_shader);
-
-	void activate();
-
-	void draw_and_deactivate(const std::vector<BlendedBlitProgram::Arguments>& arguments);
-
-	int program_object() const {
-		return gl_program_.object();
-	}
-
-private:
-	struct PerVertexData {
-		PerVertexData(float init_gl_x,
-		              float init_gl_y,
-		              float init_gl_z,
-		              float init_texture_x,
-		              float init_texture_y,
-		              float init_mask_texture_x,
-		              float init_mask_texture_y,
-		              float init_blend_r,
-		              float init_blend_g,
-		              float init_blend_b,
-		              float init_blend_a,
-		              float init_program_flavor)
-		   : gl_x(init_gl_x),
-		     gl_y(init_gl_y),
-		     gl_z(init_gl_z),
-		     texture_x(init_texture_x),
-		     texture_y(init_texture_y),
-		     mask_texture_x(init_mask_texture_x),
-		     mask_texture_y(init_mask_texture_y),
-		     blend_r(init_blend_r),
-		     blend_g(init_blend_g),
-		     blend_b(init_blend_b),
-		     blend_a(init_blend_a),
-		     program_flavor(init_program_flavor) {
-		}
-
-		float gl_x, gl_y, gl_z;
-		float texture_x, texture_y;
-		float mask_texture_x, mask_texture_y;
-		float blend_r, blend_g, blend_b, blend_a;
-		float program_flavor;
-	};
-	static_assert(sizeof(PerVertexData) == 48, "Wrong padding.");
-
-	// The buffer that will contain the quad for rendering.
-	Gl::Buffer<PerVertexData> gl_array_buffer_;
-
-	// The program.
-	Gl::Program gl_program_;
-
-	// Attributes.
-	GLint attr_blend_;
-	GLint attr_mask_texture_position_;
-	GLint attr_position_;
-	GLint attr_texture_position_;
-	GLint attr_program_flavor_;
-
-	// Uniforms.
-	GLint u_texture_;
-	GLint u_mask_;
-
-	// Cached for efficiency.
-	std::vector<PerVertexData> vertices_;
-
-	DISALLOW_COPY_AND_ASSIGN(BlitProgram);
-};
-
-BlitProgram::BlitProgram(const std::string& fragment_shader) {
-	gl_program_.build(kBlitVertexShader, fragment_shader.c_str());
+BlitProgram::BlitProgram() {
+	gl_program_.build(kBlitVertexShader, kBlitFragmentShader);
 
 	attr_blend_ = glGetAttribLocation(gl_program_.object(), "attr_blend");
 	attr_mask_texture_position_ = glGetAttribLocation(gl_program_.object(), "attr_mask_texture_position");
@@ -206,7 +136,9 @@ BlitProgram::BlitProgram(const std::string& fragment_shader) {
 	u_mask_ = glGetUniformLocation(gl_program_.object(), "u_mask");
 }
 
-void BlitProgram::activate() {
+BlitProgram::~BlitProgram() {}
+
+void BlitProgram::draw(const std::vector<Arguments>& arguments) {
 	glUseProgram(gl_program_.object());
 
 	glEnableVertexAttribArray(attr_blend_);
@@ -214,10 +146,6 @@ void BlitProgram::activate() {
 	glEnableVertexAttribArray(attr_position_);
 	glEnableVertexAttribArray(attr_texture_position_);
 	glEnableVertexAttribArray(attr_program_flavor_);
-}
-
-void BlitProgram::draw_and_deactivate(const std::vector<BlendedBlitProgram::Arguments>& arguments) {
-	size_t i = 0;
 
 	gl_array_buffer_.bind();
 
@@ -239,6 +167,8 @@ void BlitProgram::draw_and_deactivate(const std::vector<BlendedBlitProgram::Argu
 	std::vector<DrawBatch> draw_batches;
 	int offset = 0;
 	vertices_.clear();
+
+	size_t i = 0;
 	while (i < arguments.size()) {
 		const auto& template_args = arguments[i];
 
@@ -259,16 +189,16 @@ void BlitProgram::draw_and_deactivate(const std::vector<BlendedBlitProgram::Argu
 			const FloatRect texture_rect = to_gl_texture(current_args.texture);
 			const FloatRect mask_rect = to_gl_texture(current_args.mask);
 			float program_flavor;
-			switch (current_args.type) {
-				case BlitType::kVanilla:
+			switch (current_args.blit_mode) {
+				case BlitMode::kDirect:
 					program_flavor = 0.;
 					break;
 
-				case BlitType::kMonochrome:
+				case BlitMode::kMonochrome:
 					program_flavor = 1.;
 					break;
 
-				case BlitType::kBlended:
+				case BlitMode::kBlendedWithMask:
 					program_flavor = 2.;
 					break;
 			}
@@ -367,20 +297,7 @@ void BlitProgram::draw_and_deactivate(const std::vector<BlendedBlitProgram::Argu
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
-// static
-BlendedBlitProgram& BlendedBlitProgram::instance() {
-	static BlendedBlitProgram blit_program;
-	return blit_program;
-}
-
-BlendedBlitProgram::~BlendedBlitProgram() {
-}
-
-BlendedBlitProgram::BlendedBlitProgram() {
-	blit_program_.reset(new BlitProgram(kBlendedBlitFragmentShader));
-}
-
-void BlendedBlitProgram::draw(const FloatRect& gl_dest_rect,
+void BlitProgram::draw(const FloatRect& gl_dest_rect,
                               const float z_value,
 										const BlitData& texture,
 										const BlitData& mask,
@@ -392,10 +309,10 @@ void BlendedBlitProgram::draw(const FloatRect& gl_dest_rect,
 	                mask,
 	                blend,
 	                blend_mode,
-	                mask.texture_id != 0 ? BlitType::kBlended : BlitType::kVanilla}});
+	                mask.texture_id != 0 ? BlitMode::kBlendedWithMask : BlitMode::kDirect}});
 }
 
-void BlendedBlitProgram::draw_monochrome(const FloatRect& dest_rect,
+void BlitProgram::draw_monochrome(const FloatRect& dest_rect,
                                  const float z_value,
 											const BlitData& texture,
                                  const RGBAColor& blend) {
@@ -405,10 +322,11 @@ void BlendedBlitProgram::draw_monochrome(const FloatRect& dest_rect,
 	                BlitData{0, 0, 0, Rect()},
 	                blend,
 	                BlendMode::UseAlpha,
-	                BlitType::kMonochrome}});
+	                BlitMode::kMonochrome}});
 }
 
-void BlendedBlitProgram::draw(const std::vector<Arguments>& arguments) {
-	blit_program_->activate();
-	blit_program_->draw_and_deactivate(arguments);
+// static
+BlitProgram& BlitProgram::instance() {
+	static BlitProgram blit_program;
+	return blit_program;
 }

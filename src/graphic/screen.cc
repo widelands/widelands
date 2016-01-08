@@ -64,24 +64,14 @@ void Screen::do_blit(const FloatRect& dst_rect,
                      const BlitData& texture,
                      float opacity,
                      BlendMode blend_mode) {
-	if (blend_mode  != BlendMode::UseAlpha) {
-		log("#sirver blend_mode: %d\n", blend_mode);
-	}
-
 	RenderQueue::Item i;
-	i.program_id = RenderQueue::Program::kBlitBlended;
-	// i.blend_mode = blend_mode;
-	// i.destination_rect = dst_rect;
-	// i.vanilla_blit_arguments.texture = texture;
-	// i.vanilla_blit_arguments.opacity = opacity;
-
 	i.destination_rect = dst_rect;
-	i.program_id = RenderQueue::Program::kBlitBlended;
-	i.blend_mode = BlendMode::UseAlpha;
-	i.blended_blit_arguments.texture = texture;
-	i.blended_blit_arguments.mask.texture_id = 0;
-	i.blended_blit_arguments.blend = RGBAColor(0, 0, 0, 255 * opacity);
-	i.blended_blit_arguments.type = BlitType::kVanilla;
+	i.program_id = RenderQueue::Program::kBlit;
+	i.blend_mode = blend_mode;
+	i.blit_arguments.texture = texture;
+	i.blit_arguments.mask.texture_id = 0;
+	i.blit_arguments.blend = RGBAColor(0, 0, 0, 255 * opacity);
+	i.blit_arguments.mode = BlitMode::kDirect;
 	RenderQueue::instance().enqueue(i);
 }
 
@@ -91,12 +81,12 @@ void Screen::do_blit_blended(const FloatRect& dst_rect,
                              const RGBColor& blend) {
 	RenderQueue::Item i;
 	i.destination_rect = dst_rect;
-	i.program_id = RenderQueue::Program::kBlitBlended;
+	i.program_id = RenderQueue::Program::kBlit;
 	i.blend_mode = BlendMode::UseAlpha;
-	i.blended_blit_arguments.texture = texture;
-	i.blended_blit_arguments.mask = mask;
-	i.blended_blit_arguments.blend = blend;
-	i.blended_blit_arguments.type = BlitType::kBlended;
+	i.blit_arguments.texture = texture;
+	i.blit_arguments.mask = mask;
+	i.blit_arguments.blend = blend;
+	i.blit_arguments.mode = BlitMode::kBlendedWithMask;
 	RenderQueue::instance().enqueue(i);
 }
 
@@ -105,13 +95,12 @@ void Screen::do_blit_monochrome(const FloatRect& dst_rect,
                                 const RGBAColor& blend) {
 	RenderQueue::Item i;
 	i.destination_rect = dst_rect;
-	i.program_id = RenderQueue::Program::kBlitBlended;
+	i.program_id = RenderQueue::Program::kBlit;
 	i.blend_mode = BlendMode::UseAlpha;
-	i.blended_blit_arguments.texture = texture;
-	i.blended_blit_arguments.blend = blend;
-	i.blended_blit_arguments.mask.texture_id = 0;
-	i.blended_blit_arguments.blend = blend;
-	i.blended_blit_arguments.type = BlitType::kMonochrome;
+	i.blit_arguments.texture = texture;
+	i.blit_arguments.mask.texture_id = 0;
+	i.blit_arguments.blend = blend;
+	i.blit_arguments.mode = BlitMode::kMonochrome;
 	RenderQueue::instance().enqueue(i);
 }
 

@@ -48,15 +48,14 @@ public:
 	          const float opacity,
 	          BlendMode blend_mode);
 
-	// NOCOM(#sirver): fix docus here.
-	/// This draws a playercolor blended image. See BlendedBlitProgram.
+	/// This draws a playercolor blended image.
 	void blit_blended(const Rect& dst,
 	                  const Image& image,
 	                  const Image& texture_mask,
 	                  const Rect& srcrc,
 	                  const RGBColor& blend);
 
-	/// This draws a grayed out version. See MonochromeBlitProgram.
+	/// This draws a grayed out version.
 	void
 	blit_monochrome(const Rect& dst, const Image&, const Rect& srcrc, const RGBAColor& multiplier);
 

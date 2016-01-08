@@ -32,7 +32,6 @@ wl_library(graphic_render_queue
   DEPENDS
     base_exceptions
     base_geometry
-    base_log
     base_macros
     graphic_color
     graphic_terrain_programs
@@ -132,6 +131,7 @@ wl_library(graphic_terrain_programs
 wl_library(graphic_draw_programs
   SRCS
     blend_mode.h
+    blit_mode.h
     gl/blit_program.cc
     gl/blit_program.h
     gl/draw_line_program.cc

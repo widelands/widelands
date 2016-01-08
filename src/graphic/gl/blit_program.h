@@ -26,15 +26,14 @@
 #include "base/macros.h"
 #include "base/rect.h"
 #include "graphic/blend_mode.h"
-#include "graphic/blit_type.h"
+#include "graphic/blit_mode.h"
 #include "graphic/color.h"
 #include "graphic/gl/blit_data.h"
 #include "graphic/gl/system_headers.h"
+#include "graphic/gl/utils.h"
 
-class BlitProgram;
-
-// NOCOM(#sirver): rename
-class BlendedBlitProgram {
+// Blits images. Can blend them with PlayerColor or make the monochrome.
+class BlitProgram {
 public:
 	struct Arguments {
 		FloatRect destination_rect;
@@ -43,12 +42,12 @@ public:
 		BlitData mask;
 		RGBAColor blend;
 		BlendMode blend_mode;
-		BlitType type;
+		BlitMode blit_mode;
 	};
 
 	// Returns the (singleton) instance of this class.
-	static BlendedBlitProgram& instance();
-	~BlendedBlitProgram();
+	static BlitProgram& instance();
+	~BlitProgram();
 
 	// Draws the rectangle 'gl_src_rect' from the texture with the name
 	// 'gl_texture_image' to 'gl_dest_rect' in the currently bound framebuffer. All
@@ -75,11 +74,64 @@ public:
 	void draw(const std::vector<Arguments>& arguments);
 
 private:
-	BlendedBlitProgram();
+	BlitProgram();
 
-	std::unique_ptr<BlitProgram> blit_program_;
+	struct PerVertexData {
+		PerVertexData(float init_gl_x,
+		              float init_gl_y,
+		              float init_gl_z,
+		              float init_texture_x,
+		              float init_texture_y,
+		              float init_mask_texture_x,
+		              float init_mask_texture_y,
+		              float init_blend_r,
+		              float init_blend_g,
+		              float init_blend_b,
+		              float init_blend_a,
+		              float init_program_flavor)
+		   : gl_x(init_gl_x),
+		     gl_y(init_gl_y),
+		     gl_z(init_gl_z),
+		     texture_x(init_texture_x),
+		     texture_y(init_texture_y),
+		     mask_texture_x(init_mask_texture_x),
+		     mask_texture_y(init_mask_texture_y),
+		     blend_r(init_blend_r),
+		     blend_g(init_blend_g),
+		     blend_b(init_blend_b),
+		     blend_a(init_blend_a),
+		     program_flavor(init_program_flavor) {
+		}
 
-	DISALLOW_COPY_AND_ASSIGN(BlendedBlitProgram);
+		float gl_x, gl_y, gl_z;
+		float texture_x, texture_y;
+		float mask_texture_x, mask_texture_y;
+		float blend_r, blend_g, blend_b, blend_a;
+		float program_flavor;
+	};
+	static_assert(sizeof(PerVertexData) == 48, "Wrong padding.");
+
+	// The buffer that will contain the quad for rendering.
+	Gl::Buffer<PerVertexData> gl_array_buffer_;
+
+	// The program.
+	Gl::Program gl_program_;
+
+	// Attributes.
+	GLint attr_blend_;
+	GLint attr_mask_texture_position_;
+	GLint attr_position_;
+	GLint attr_texture_position_;
+	GLint attr_program_flavor_;
+
+	// Uniforms.
+	GLint u_texture_;
+	GLint u_mask_;
+
+	// Cached for efficiency.
+	std::vector<PerVertexData> vertices_;
+
+	DISALLOW_COPY_AND_ASSIGN(BlitProgram);
 };
 
 #endif  // end of include guard: WL_GRAPHIC_GL_BLIT_PROGRAM_H

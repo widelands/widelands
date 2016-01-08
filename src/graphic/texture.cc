@@ -275,10 +275,8 @@ void Texture::do_blit(const FloatRect& dst_rect,
                      float opacity,
                      BlendMode blend_mode) {
 	setup_gl();
-	BlitData mask = texture;
-	mask.texture_id = 0;
-	BlendedBlitProgram::instance().draw(
-	   dst_rect, 0.f, texture, mask, RGBAColor(0, 0, 0, 255 * opacity), blend_mode);
+	BlitProgram::instance().draw(dst_rect, 0.f, texture, BlitData{0, 0, 0, Rect()},
+	                             RGBAColor(0, 0, 0, 255 * opacity), blend_mode);
 }
 
 void Texture::do_blit_blended(const FloatRect& dst_rect,
@@ -287,14 +285,14 @@ void Texture::do_blit_blended(const FloatRect& dst_rect,
                               const RGBColor& blend) {
 
 	setup_gl();
-	BlendedBlitProgram::instance().draw(dst_rect, 0.f, texture, mask, blend, BlendMode::UseAlpha);
+	BlitProgram::instance().draw(dst_rect, 0.f, texture, mask, blend, BlendMode::UseAlpha);
 }
 
 void Texture::do_blit_monochrome(const FloatRect& dst_rect,
                                  const BlitData& texture,
                                  const RGBAColor& blend) {
 	setup_gl();
-	BlendedBlitProgram::instance().draw_monochrome(dst_rect, 0.f, texture, blend);
+	BlitProgram::instance().draw_monochrome(dst_rect, 0.f, texture, blend);
 }
 
 void
