@@ -25,6 +25,7 @@
 #include "base/log.h"
 #include "graphic/gl/coordinate_conversion.h"
 #include "graphic/gl/fields_to_draw.h"
+#include "graphic/gl/utils.h"
 #include "graphic/graphic.h"
 #include "graphic/image_io.h"
 #include "graphic/texture.h"
@@ -234,9 +235,10 @@ void RoadProgram::draw(const int renderbuffer_width,
 
 	glUseProgram(gl_program_.object());
 
-	glEnableVertexAttribArray(attr_position_);
-	glEnableVertexAttribArray(attr_texture_position_);
-	glEnableVertexAttribArray(attr_brightness_);
+	auto& gl_state = Gl::State::instance();
+	gl_state.enable_vertex_attrib_array({
+		attr_position_, attr_texture_position_, attr_brightness_
+	});
 
 	gl_array_buffer_.bind();
 	gl_array_buffer_.update(vertices_);
@@ -248,19 +250,9 @@ void RoadProgram::draw(const int renderbuffer_width,
 	Gl::vertex_attrib_pointer(
 	   attr_brightness_, 1, sizeof(PerVertexData), offsetof(PerVertexData, brightness));
 
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
-
-	// Bind the textures.
-	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, gl_texture);
-
+	gl_state.bind(GL_TEXTURE0, gl_texture);
 	glUniform1i(u_texture_, 0);
-
 	glUniform1f(u_z_value_, z_value);
 
 	glDrawArrays(GL_TRIANGLES, 0, vertices_.size());
-
-	glDisableVertexAttribArray(attr_position_);
-	glDisableVertexAttribArray(attr_texture_position_);
-	glDisableVertexAttribArray(attr_brightness_);
 }

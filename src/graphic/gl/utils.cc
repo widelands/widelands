@@ -166,6 +166,78 @@ void Program::build(const char* vertex_shader_source, const char* fragment_shade
 	}
 }
 
+State::State()
+   : last_active_texture_(0), current_framebuffer_(0), current_framebuffer_texture_(0) {
+}
+
+void State::bind(const GLenum target, const GLuint texture) {
+	if (texture == 0)  {
+		return;
+	}
+	do_bind(target, texture);
+}
+
+void State::do_bind(const GLenum target, const GLuint texture) {
+	const auto currently_bound_texture = target_to_texture_[target];
+	if (currently_bound_texture == texture) {
+		return;
+	}
+	if (last_active_texture_ != target) {
+		glActiveTexture(target);
+		last_active_texture_ = target;
+	}
+	glBindTexture(GL_TEXTURE_2D, texture);
+
+	target_to_texture_[target] = texture;
+	texture_to_target_[currently_bound_texture] = 0;
+	texture_to_target_[texture] = target;
+}
+
+void State::unbind_texture_if_bound(const GLuint texture) {
+	if (texture == 0) {
+		return;
+	}
+	const auto target = texture_to_target_[texture];
+	if (target != 0) {
+		do_bind(target, 0);
+	}
+}
+
+void State::bind_framebuffer(const GLuint framebuffer, const GLuint texture) {
+	if (current_framebuffer_ == framebuffer && current_framebuffer_texture_ == texture) {
+		return;
+	}
+
+	glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);
+	if (framebuffer != 0) {
+		unbind_texture_if_bound(texture);
+		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, texture, 0);
+	}
+	current_framebuffer_ = framebuffer;
+	current_framebuffer_texture_ = texture;
+}
+
+void State::enable_vertex_attrib_array(std::unordered_set<GLint> entries) {
+	for (const auto e : entries) {
+		if (!enabled_attrib_arrays_.count(e)) {
+			glEnableVertexAttribArray(e);
+		}
+	}
+	for (const auto e : enabled_attrib_arrays_) {
+		if (!entries.count(e)) {
+			glDisableVertexAttribArray(e);
+		}
+	}
+	enabled_attrib_arrays_ = entries;
+}
+
+// static
+State& State::instance() {
+	static State binder;
+	return binder;
+}
+
+
 void vertex_attrib_pointer(int vertex_index, int num_items, int stride, int offset) {
 	glVertexAttribPointer(
 	   vertex_index, num_items, GL_FLOAT, GL_FALSE, stride, reinterpret_cast<void*>(offset));

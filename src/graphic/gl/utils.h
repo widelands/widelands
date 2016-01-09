@@ -20,6 +20,8 @@
 #define WL_GRAPHIC_GL_UTILS_H
 
 #include <memory>
+#include <unordered_map>
+#include <unordered_set>
 #include <vector>
 
 #include <stdint.h>
@@ -98,6 +100,45 @@ private:
 	size_t buffer_size_;  // In number of elements.
 
 	DISALLOW_COPY_AND_ASSIGN(Buffer);
+};
+
+// Some GL drivers do not remember the current pipeline state. If you rebind a
+// texture that has already bound to the same target, they will happily stall
+// the pipeline. We therefore cache the state of the GL driver in this class
+// and skip unneeded GL calls.
+class State {
+public:
+	static State& instance();
+
+	void bind_framebuffer(GLuint framebuffer, GLuint texture);
+
+	// Wrapper around glActiveTexture() and glBindTexture(). We never unbind a
+	// texture, i.e. calls with texture == 0 are ignored. It costs only time and
+	// is only needed when the bounded texture is rendered on - see
+	// 'unbind_texture_if_bound'.
+	void bind(GLenum target, GLuint texture);
+
+	// Checks if the texture is bound to any target. If so, unbinds it. This is
+	// needed before the texture is used as target for rendering.
+	void unbind_texture_if_bound(GLuint texture);
+
+	// Calls glEnableVertexAttribArray on all 'entries' and disables all others
+	// that are activated. 'entries' is taken by value on purpose.
+	void enable_vertex_attrib_array(std::unordered_set<GLint> entries);
+
+private:
+	std::unordered_map<GLenum, GLuint> target_to_texture_;
+	std::unordered_map<GLuint, GLenum> texture_to_target_;
+	std::unordered_set<GLint> enabled_attrib_arrays_;
+	GLenum last_active_texture_;
+	GLuint current_framebuffer_;
+	GLuint current_framebuffer_texture_;
+
+	State();
+
+	void do_bind(GLenum target, GLuint texture);
+
+	DISALLOW_COPY_AND_ASSIGN(State);
 };
 
 // Calls glVertexAttribPointer.

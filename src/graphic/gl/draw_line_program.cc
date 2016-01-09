@@ -89,8 +89,11 @@ void DrawLineProgram::draw(std::vector<Arguments> arguments) {
 	size_t i = 0;
 
 	glUseProgram(gl_program_.object());
-	glEnableVertexAttribArray(attr_position_);
-	glEnableVertexAttribArray(attr_color_);
+
+	auto& gl_state = Gl::State::instance();
+	gl_state.enable_vertex_attrib_array({
+	   attr_position_, attr_color_,
+	});
 
 	gl_array_buffer_.bind();
 
@@ -140,11 +143,4 @@ void DrawLineProgram::draw(std::vector<Arguments> arguments) {
 		glLineWidth(draw_arg.line_width);
 		glDrawArrays(GL_LINES, draw_arg.offset, draw_arg.count);
 	}
-
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
-
-	glDisableVertexAttribArray(attr_position_);
-	glDisableVertexAttribArray(attr_color_);
-
-	glUseProgram(0);
 }

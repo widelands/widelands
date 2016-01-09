@@ -96,31 +96,6 @@ struct DrawBatch {
 	BlendMode blend_mode;
 };
 
-// NOCOM(#sirver): use this everywhere and have the same for glEnableVertexAttribArray.
-class TextureBinder {
-public:
-	TextureBinder() : current_bindings_(10, 255), last_target_(0) {}
-
-	void bind(GLenum target, GLuint texture)  {
-		const int idx = target - GL_TEXTURE0;
-		if (current_bindings_[idx] == texture) {
-			return;
-		}
-		if (last_target_ != target) {
-			glActiveTexture(target);
-		}
-		glBindTexture(GL_TEXTURE_2D, texture);
-		current_bindings_[idx] = texture;
-		last_target_ = target;
-	}
-
-private:
-	std::vector<GLuint> current_bindings_;
-	GLenum last_target_;
-
-	DISALLOW_COPY_AND_ASSIGN(TextureBinder);
-};
-
 }  // namespace
 
 BlitProgram::BlitProgram() {
@@ -141,11 +116,13 @@ BlitProgram::~BlitProgram() {}
 void BlitProgram::draw(const std::vector<Arguments>& arguments) {
 	glUseProgram(gl_program_.object());
 
-	glEnableVertexAttribArray(attr_blend_);
-	glEnableVertexAttribArray(attr_mask_texture_position_);
-	glEnableVertexAttribArray(attr_position_);
-	glEnableVertexAttribArray(attr_texture_position_);
-	glEnableVertexAttribArray(attr_program_flavor_);
+	auto& gl_state = Gl::State::instance();
+
+	gl_state.enable_vertex_attrib_array({attr_blend_,
+	                                   attr_mask_texture_position_,
+	                                   attr_position_,
+	                                   attr_texture_position_,
+	                                   attr_program_flavor_});
 
 	gl_array_buffer_.bind();
 
@@ -177,7 +154,8 @@ void BlitProgram::draw(const std::vector<Arguments>& arguments) {
 			const auto& current_args = arguments[i];
 			if (current_args.blend_mode != template_args.blend_mode ||
 			    current_args.texture.texture_id != template_args.texture.texture_id ||
-			    (current_args.mask.texture_id != 0 && current_args.mask.texture_id != template_args.mask.texture_id)) {
+			    (current_args.mask.texture_id != 0 &&
+			     current_args.mask.texture_id != template_args.mask.texture_id)) {
 				break;
 			}
 
@@ -265,14 +243,12 @@ void BlitProgram::draw(const std::vector<Arguments>& arguments) {
 	}
 	gl_array_buffer_.update(vertices_);
 
-	TextureBinder binder;
-
 	// Now do the draw calls.
+	int last = 0;
 	for (const auto& draw_arg : draw_batches) {
-		binder.bind(GL_TEXTURE0, draw_arg.texture);
-		if (draw_arg.mask != 0) {
-			binder.bind(GL_TEXTURE1, draw_arg.mask);
-		}
+		gl_state.bind(GL_TEXTURE0, draw_arg.texture);
+		last = draw_arg.texture;
+		gl_state.bind(GL_TEXTURE1, draw_arg.mask);
 
 		if (draw_arg.blend_mode == BlendMode::Copy) {
 			glBlendFunc(GL_ONE, GL_ZERO);
@@ -283,18 +259,6 @@ void BlitProgram::draw(const std::vector<Arguments>& arguments) {
 			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		}
 	}
-
-	glDisableVertexAttribArray(attr_blend_);
-	glDisableVertexAttribArray(attr_mask_texture_position_);
-	glDisableVertexAttribArray(attr_position_);
-	glDisableVertexAttribArray(attr_texture_position_);
-
-	glBindTexture(GL_TEXTURE_2D, 0);
-
-	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, 0);
-
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
 void BlitProgram::draw(const FloatRect& gl_dest_rect,

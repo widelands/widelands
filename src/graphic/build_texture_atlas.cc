@@ -17,6 +17,8 @@
  *
  */
 
+#include "graphic/build_texture_atlas.h"
+
 #include <fstream>
 #include <iostream>
 #include <memory>
@@ -25,13 +27,10 @@
 #include <unordered_set>
 #include <vector>
 
-#include <SDL.h>
 #include <boost/algorithm/string/predicate.hpp>
 #include <boost/format.hpp>
 
-#undef main // No, we do not want SDL_main
-
-#include "base/log.h"
+#include "build_info.h"
 #include "config.h"
 #include "graphic/graphic.h"
 #include "graphic/image_io.h"
@@ -40,6 +39,8 @@
 #include "io/filesystem/filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "io/streamwrite.h"
+#include "scripting/lua_interface.h"
+#include "scripting/lua_table.h"
 
 namespace {
 
@@ -47,6 +48,8 @@ namespace {
 // threshold, but not background pictures.
 constexpr int kMaxAreaForTextureAtlas = 240 * 240;
 
+// A graphics card must at least support this size for texture for Widelands to
+// run.
 constexpr int kMinimumSizeForTextures = 2048;
 
 // An image can either be Type::kPacked inside a texture atlas, in which case
@@ -62,31 +65,6 @@ struct PackInfo {
 	int texture_atlas;
 	Rect rect;
 };
-
-int parse_arguments(
-   int argc, char** argv, int* max_size)
-{
-	if (argc < 2) {
-		std::cout << "Usage: wl_make_texture_atlas [max_size]" << std::endl << std::endl
-		          << "Will write output.png in the current directory." << std::endl;
-		return 1;
-	}
-	*max_size = atoi(argv[1]);
-	if (*max_size < kMinimumSizeForTextures) {
-		std::cout << "Widelands requires at least 2048 for the smallest texture size." << std::endl;
-		return 1;
-	}
-	return 0;
-}
-
-// Setup the static objects Widelands needs to operate and initializes systems.
-void initialize() {
-	SDL_Init(SDL_INIT_VIDEO);
-
-	g_fs = new LayeredFileSystem();
-	g_fs->add_file_system(&FileSystem::create(INSTALL_DATADIR));
-	g_gr = new Graphic(1, 1, false);
-}
 
 // Returns true if 'filename' is ends with a image extension.
 bool is_image(const std::string& filename) {
@@ -116,16 +94,23 @@ void find_images(const std::string& directory,
 void dump_result(const std::map<std::string, PackInfo>& pack_info,
                  std::vector<std::unique_ptr<Texture>>* texture_atlases,
                  FileSystem* fs) {
+	// TODO(sirver): Maybe we want to use the cache directory for other things
+	// in the future too, so nuking it here is probably rather extreme.
+	if (fs->is_directory("cache")) {
+		fs->fs_unlink("cache");
+	}
+	fs->ensure_directory_exists("cache");
 
 	for (size_t i = 0; i < texture_atlases->size(); ++i) {
 		std::unique_ptr<StreamWrite> sw(
-		   fs->open_stream_write((boost::format("output_%02i.png") % i).str()));
+		   fs->open_stream_write((boost::format("cache/texture_atlas_%02i.png") % i).str()));
 		save_to_png(texture_atlases->at(i).get(), sw.get(), ColorType::RGBA);
 	}
 
 	{
-		std::unique_ptr<StreamWrite> sw(fs->open_stream_write("output.lua"));
+		std::unique_ptr<StreamWrite> sw(fs->open_stream_write("cache/texture_atlas.lua"));
 		sw->text("return {\n");
+		sw->text((boost::format("   build_id = \"%s\",\n") % build_id()).str());
 		for (const auto& pair : pack_info) {
 			sw->text("   [\"");
 			sw->text(pair.first);
@@ -200,18 +185,11 @@ std::vector<std::unique_ptr<Texture>> pack_images(const std::vector<std::string>
 
 }  // namespace
 
-int main(int argc, char** argv) {
-	int max_size;
-	if (parse_arguments(argc, argv, &max_size))
-		return 1;
-
-	if (SDL_Init(SDL_INIT_VIDEO) < 0) {
-		std::cerr << "SDLInit did not succeed: " << SDL_GetError() << std::endl;
-		return 1;
+void make_texture_atlas(const int max_size) {
+	if (max_size < kMinimumSizeForTextures) {
+		throw wexception("The texture atlas must use at least %d as size (%d was given)",
+		                 kMinimumSizeForTextures, max_size);
 	}
-	initialize();
-
-
 	// For performance reasons, we need to have some images in the first texture
 	// atlas, so that OpenGL texture switches do not happen during (for example)
 	// terrain or road rendering. To ensure this, we separate all images into
@@ -242,9 +220,8 @@ int main(int argc, char** argv) {
 	auto first_texture_atlas = pack_images(images_that_must_be_in_first_atlas, max_size,
 	                                       &first_texture_atlas_pack_info, nullptr, nullptr);
 	if (first_texture_atlas.size() != 1) {
-		std::cout << "Not all images that should fit in the first texture atlas did actually fit."
-		          << std::endl;
-		return 1;
+		throw wexception("Not all images that should fit in the first texture atlas did actually "
+		                 "fit. Widelands has now more images than before.");
 	}
 
 	std::map<std::string, PackInfo> pack_info;
@@ -266,10 +243,16 @@ int main(int argc, char** argv) {
 
 	// Make sure we have all images.
 	assert(all_images.size() == pack_info.size());
+	dump_result(pack_info, &texture_atlases, g_fs);
+}
 
-	std::unique_ptr<FileSystem> output_fs(&FileSystem::create("."));
-	dump_result(pack_info, &texture_atlases, output_fs.get());
+bool is_texture_atlas_current() {
+	if (!g_fs->file_exists("cache/texture_atlas.lua")) {
+		return false;
+	}
 
-	SDL_Quit();
-	return 0;
+	LuaInterface lua;
+	auto config = lua.run_script("cache/texture_atlas.lua");
+	config->do_not_warn_about_unaccessed_keys();
+	return config->get_string("build_id") == build_id();
 }

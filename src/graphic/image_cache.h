@@ -55,7 +55,7 @@ public:
 	bool has(const std::string& hash) const;
 
 	// Loads the cache from texture atlases on disk.
-	void load_from_disk();
+	void fill_with_texture_atlas();
 
 private:
 	std::vector<std::unique_ptr<Texture>> texture_atlases_;

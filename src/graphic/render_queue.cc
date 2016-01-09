@@ -193,7 +193,7 @@ void RenderQueue::draw(const int screen_width, const int screen_height) {
 		throw wexception("Too many drawn layers. Ran out of z-values.");
 	}
 
-	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+	Gl::State::instance().bind_framebuffer(0, 0);
 	glViewport(0, 0, screen_width, screen_height);
 
 	glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);

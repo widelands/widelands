@@ -28,14 +28,13 @@
 #include <boost/format.hpp>
 
 #include "graphic/image.h"
-#include "base/log.h" // NOCOM(#sirver): remove again
 #include "graphic/image_io.h"
 #include "graphic/texture.h"
 #include "io/fileread.h"
 #include "io/filesystem/filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
-#include "scripting/lua_table.h"
 #include "scripting/lua_interface.h"
+#include "scripting/lua_table.h"
 
 ImageCache::ImageCache() {
 }
@@ -54,20 +53,24 @@ const Image* ImageCache::insert(const std::string& hash, std::unique_ptr<const I
 	return return_value;
 }
 
-void ImageCache::load_from_disk() {
+void ImageCache::fill_with_texture_atlas() {
 	LuaInterface lua;
 
 	for (int i = 0; i < 100; ++i) {
-		const auto filename = (boost::format("cache/output_%02d.png") % i).str();
+		const auto filename = (boost::format("cache/texture_atlas_%02d.png") % i).str();
 		if (!g_fs->file_exists(filename)) {
 			break;
 		}
 		texture_atlases_.emplace_back(load_image(filename));
 	}
 
-	// NOCOM(#sirver): output is a rather stupid name.
-	auto config = lua.run_script("cache/output.lua");
+	auto config = lua.run_script("cache/texture_atlas.lua");
 	for (const auto& hash : config->keys<std::string>()) {
+		if (hash == "build_id") {
+			// do not warn about unused keys.
+			config->get_string("build_id");
+			continue;
+		}
 		auto image_config = config->get_table(hash);
 		if (image_config->get_string("type") == "unpacked") {
 			images_.emplace(hash, load_image(hash));

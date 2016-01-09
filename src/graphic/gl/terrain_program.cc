@@ -21,6 +21,7 @@
 
 #include "graphic/gl/coordinate_conversion.h"
 #include "graphic/gl/fields_to_draw.h"
+#include "graphic/gl/utils.h"
 #include "graphic/texture.h"
 
 namespace  {
@@ -103,10 +104,9 @@ TerrainProgram::TerrainProgram() {
 void TerrainProgram::gl_draw(int gl_texture, float texture_w, float texture_h, float z_value) {
 	glUseProgram(gl_program_.object());
 
-	glEnableVertexAttribArray(attr_brightness_);
-	glEnableVertexAttribArray(attr_position_);
-	glEnableVertexAttribArray(attr_texture_offset_);
-	glEnableVertexAttribArray(attr_texture_position_);
+	auto& gl_state = Gl::State::instance();
+	gl_state.enable_vertex_attrib_array(
+	   {attr_brightness_, attr_position_, attr_texture_offset_, attr_texture_position_});
 
 	gl_array_buffer_.bind();
 	gl_array_buffer_.update(vertices_);
@@ -119,23 +119,13 @@ void TerrainProgram::gl_draw(int gl_texture, float texture_w, float texture_h, f
 	Gl::vertex_attrib_pointer(
 	   attr_texture_position_, 2, sizeof(PerVertexData), offsetof(PerVertexData, texture_x));
 
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
-
-	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, gl_texture);
+	gl_state.bind(GL_TEXTURE0, gl_texture);
 
 	glUniform1f(u_z_value_, z_value);
 	glUniform1i(u_terrain_texture_, 0);
 	glUniform2f(u_texture_dimensions_, texture_w, texture_h);
 
 	glDrawArrays(GL_TRIANGLES, 0, vertices_.size());
-
-	glBindTexture(GL_TEXTURE_2D, 0);
-
-	glDisableVertexAttribArray(attr_brightness_);
-	glDisableVertexAttribArray(attr_position_);
-	glDisableVertexAttribArray(attr_texture_offset_);
-	glDisableVertexAttribArray(attr_texture_position_);
 }
 
 void TerrainProgram::add_vertex(const FieldsToDraw::Field& field,
