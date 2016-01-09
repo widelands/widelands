@@ -65,10 +65,10 @@ private:
 template<typename T>
 class Buffer {
 public:
-	Buffer() : buffer_size_(0) {
+	Buffer() {
 		glGenBuffers(1, &object_);
 		if (!object_) {
-			throw wexception("Could not create GL program.");
+			throw wexception("Could not create GL buffer.");
 		}
 	}
 
@@ -84,20 +84,17 @@ public:
 	}
 
 
-	// Copies 'elements' into the buffer. If the buffer is too small to hold the
-	// data, it is reallocated. Does not check if the buffer is already bound.
+	// Copies 'elements' into the buffer, overwriting what was there before.
+	// Does not check if the buffer is already bound.
 	void update(const std::vector<T>& items) {
-		if (buffer_size_ < items.size()) {
-			glBufferData(GL_ARRAY_BUFFER, items.size() * sizeof(T), items.data(), GL_DYNAMIC_DRAW);
-			buffer_size_ = items.size();
-		} else {
-			glBufferSubData(GL_ARRAY_BUFFER, 0, items.size() * sizeof(T), items.data());
-		}
+		// Always re-allocate the buffer. This ends up being much more
+		// efficient than trying to do a partial update, because partial
+		// updates tend to force the driver to do command buffer flushes.
+		glBufferData(GL_ARRAY_BUFFER, items.size() * sizeof(T), items.data(), GL_DYNAMIC_DRAW);
 	}
 
 private:
 	GLuint object_;
-	size_t buffer_size_;  // In number of elements.
 
 	DISALLOW_COPY_AND_ASSIGN(Buffer);
 };

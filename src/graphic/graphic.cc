@@ -158,7 +158,7 @@ void Graphic::initialize(int window_mode_w, int window_mode_h, bool init_fullscr
 	if (!is_texture_atlas_current()) {
 		if (UI::g_fh && UI::g_fh1) {
 			show_preload_text(
-			   _("Building texture atlas...\nThis one time operation can take up to 5 minutes."));
+			   _("Building texture atlas... This one time operation can take up to 5 minutes."));
 		}
 		make_texture_atlas(max_texture_size);
 	}
