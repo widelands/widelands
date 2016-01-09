@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2013, 2016 by the Widelands Development Team
+ * Copyright (C) 2002-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -250,7 +250,8 @@ public:
 	/**
 	 * Is called right before the object will be removed from
 	 * the game. No conncetion is handled in this class.
-	 * \param serial : the object serial
+	 * 
+         * param serial : the object serial (cannot use param comment as this is a callback)
 	 */
 	boost::signals2::signal<void(uint32_t serial)> removed;
 
