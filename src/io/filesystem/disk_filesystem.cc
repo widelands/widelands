@@ -278,11 +278,8 @@ void RealFSImpl::m_unlink_directory(const std::string & file) {
 #ifndef _WIN32
 	rmdir(fspath.c_str());
 #else
-	if (!RemoveDirectory(fspath.c_str())) {
-		throw wexception
-				("%s could not be deleted.",
-				fspath.c_str());
-	}
+	if (!RemoveDirectory(fspath.c_str()))
+		throw wexception("%s could not be deleted.", fspath.c_str());
 #endif
 }
 
