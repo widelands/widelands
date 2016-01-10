@@ -45,7 +45,7 @@ class Image;
  *     the overlay_id can be given to the register function, whenever
  *     the job is finished or canceled, a simple remove_overlay
  *     with the overlay_id can be called and all overlays created in the
- *     job are removed. This is useful for interactive road building.
+ *     job are removed.
  */
 constexpr int kLevelForBuildHelp = 5;
 struct FieldOverlayManager {

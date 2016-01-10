@@ -48,7 +48,7 @@ inline float to_opengl_z(const int z) {
 //   - we batch up by program to have maximal batching.
 //   - and we want to render frontmost objects first, so that we do not render
 //     any pixel more than once.
-static_assert(RenderQueue::Program::kHighestProgramId <= 8, "Please fix make_key_*.");
+static_assert(RenderQueue::Program::kHighestProgramId <= 8, "Need to change sorting keys.");  // 4 bits.
 
 uint64_t
 make_key_opaque(const uint64_t program_id, const uint64_t z_value, const uint64_t extra_value) {
