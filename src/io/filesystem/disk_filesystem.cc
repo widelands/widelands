@@ -282,6 +282,7 @@ void RealFSImpl::m_unlink_directory(const std::string & file) {
 		throw wexception
 				("%s could not be deleted.",
 				fspath.c_str());
+	}
 #endif
 }
 
