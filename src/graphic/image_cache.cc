@@ -49,7 +49,7 @@ bool ImageCache::has(const std::string& hash) const {
 const Image* ImageCache::insert(const std::string& hash, std::unique_ptr<const Image> image) {
 	assert(!has(hash));
 	const Image* return_value = image.get();
-	images_.emplace(hash, std::move(image));
+	images_.insert(std::make_pair(hash, std::move(image)));
 	return return_value;
 }
 
@@ -73,15 +73,16 @@ void ImageCache::fill_with_texture_atlas() {
 		}
 		auto image_config = config->get_table(hash);
 		if (image_config->get_string("type") == "unpacked") {
-			images_.emplace(hash, load_image(hash));
+			images_.insert(std::make_pair(hash, std::move(load_image(hash))));
 		} else {
 			int texture_atlas_index = image_config->get_int("texture_atlas");
 			const auto& parent = texture_atlases_[texture_atlas_index]->blit_data();
 			auto rect_config = image_config->get_table("rect");
 			const Rect subrect(rect_config->get_int(1), rect_config->get_int(2),
 			                   rect_config->get_int(3), rect_config->get_int(4));
-			images_.emplace(hash, std::unique_ptr<Texture>(new Texture(
-			                         parent.texture_id, subrect, parent.rect.w, parent.rect.h)));
+			images_.insert(
+			   std::make_pair(hash, std::unique_ptr<Texture>(new Texture(
+			                           parent.texture_id, subrect, parent.rect.w, parent.rect.h))));
 		}
 	}
 }

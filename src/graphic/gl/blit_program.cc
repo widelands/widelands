@@ -166,7 +166,7 @@ void BlitProgram::draw(const std::vector<Arguments>& arguments) {
 
 			const FloatRect texture_rect = to_gl_texture(current_args.texture);
 			const FloatRect mask_rect = to_gl_texture(current_args.mask);
-			float program_flavor;
+			float program_flavor = 0;
 			switch (current_args.blit_mode) {
 				case BlitMode::kDirect:
 					program_flavor = 0.;
@@ -244,10 +244,8 @@ void BlitProgram::draw(const std::vector<Arguments>& arguments) {
 	gl_array_buffer_.update(vertices_);
 
 	// Now do the draw calls.
-	int last = 0;
 	for (const auto& draw_arg : draw_batches) {
 		gl_state.bind(GL_TEXTURE0, draw_arg.texture);
-		last = draw_arg.texture;
 		gl_state.bind(GL_TEXTURE1, draw_arg.mask);
 
 		if (draw_arg.blend_mode == BlendMode::Copy) {
