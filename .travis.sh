@@ -1,10 +1,5 @@
 set -ex
 
-# NOCOM(#sirver): remove
-echo "CXX: $CXX"
-echo "CLANG_VERSION: $CLANG_VERSION"
-echo "GCC_VERSION: $GCC_VERSION"
-
 # Some of these commands fail transiently. We keep retrying them until they
 # succeed.
 if [ "$CXX" = "g++" ]; then 
