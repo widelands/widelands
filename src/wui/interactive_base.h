@@ -142,12 +142,13 @@ public:
 		return *m_edge_overlay_manager;
 	}
 
+	void toggle_minimap();
+
 protected:
 	// Will be called whenever the buildhelp is changed with the new 'value'.
 	virtual void on_buildhelp_changed(bool value);
 
 	void toggle_buildhelp();
-	void toggle_minimap();
 	void hide_minimap();
 
 	UI::UniqueWindow::Registry & minimap_registry();

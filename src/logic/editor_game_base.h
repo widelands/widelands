@@ -26,8 +26,8 @@
 #include <vector>
 
 #include "base/macros.h"
-#include "logic/bob.h"
-#include "logic/building.h"
+#include "logic/map_objects/bob.h"
+#include "logic/map_objects/tribes/building.h"
 #include "logic/map.h"
 #include "logic/player_area.h"
 #include "notifications/notifications.h"

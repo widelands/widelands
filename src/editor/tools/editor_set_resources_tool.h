@@ -20,9 +20,10 @@
 #ifndef WL_EDITOR_TOOLS_EDITOR_SET_RESOURCES_TOOL_H
 #define WL_EDITOR_TOOLS_EDITOR_SET_RESOURCES_TOOL_H
 
+#include "editor/tools/editor_tool.h"
 #include "logic/mapregion.h"
 #include "logic/widelands.h"
-#include "editor/tools/editor_tool.h"
+#include "wui/field_overlay_manager.h"
 
 ///  Decreases the resources of a node by a value.
 struct EditorSetResourcesTool : public EditorTool {
@@ -50,9 +51,12 @@ struct EditorSetResourcesTool : public EditorTool {
 	/**
 	 * Sets the resource amount and updates the overlay.
 	 */
-	static void set_res_and_overlay(const Widelands::World& world, int32_t amount, uint8_t resIx,
-			Widelands::MapRegion<Widelands::Area<Widelands::FCoords> > *mr,
-			EditorActionArgs* args, Widelands::Map* map);
+	static void set_res_and_overlay(const Widelands::World& world,
+	                                int32_t amount,
+	                                uint8_t resIx,
+	                                const Widelands::FCoords& fcoords,
+	                                FieldOverlayManager* field_overlay_manager,
+	                                Widelands::Map* map);
 
 	char const * get_sel_impl() const override {
 		return "pics/fsel_editor_set_resources.png";

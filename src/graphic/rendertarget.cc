@@ -25,7 +25,6 @@
 #include "graphic/graphic.h"
 #include "graphic/surface.h"
 #include "logic/player.h"
-#include "logic/tribes/tribe_descr.h"
 
 using Widelands::BaseImmovable;
 using Widelands::Coords;
