@@ -135,6 +135,25 @@ void dump_result(const std::map<std::string, PackInfo>& pack_info,
 	}
 }
 
+// If 'filename' should end up in the texture atlas, will load it into 'image'
+// and return true.
+bool should_be_packed(const std::string& filename, std::unique_ptr<Texture>* image) {
+	// TODO(sirver): Maps should be self contained, i.e. come with everything
+	// they need in their own directory. Unfortunately we reference the
+	// background images in the elemental files by full path so that we can
+	// reuse them for different campaigns. So we need to mention them in the
+	// pack info file, but we do not want to have them in the texture atlas.
+	if (boost::ends_with(filename, ".jpg") || boost::starts_with(filename, "campaigns/")) {
+		return false;
+	}
+	*image = load_image(filename, g_fs);
+	const auto area = (*image)->width() * (*image)->height();
+	if (area > kMaxAreaForTextureAtlas) {
+		return false;
+	}
+	return true;
+}
+
 // Pack the images in 'filenames' into texture atlases.
 std::vector<std::unique_ptr<Texture>> pack_images(const std::vector<std::string>& filenames,
                                                   const int max_size,
@@ -143,9 +162,8 @@ std::vector<std::unique_ptr<Texture>> pack_images(const std::vector<std::string>
 																  TextureAtlas::PackedTexture* first_atlas_packed_texture) {
 	std::vector<std::pair<std::string, std::unique_ptr<Texture>>> to_be_packed;
 	for (const auto& filename : filenames) {
-		std::unique_ptr<Texture> image = load_image(filename, g_fs);
-		const auto area = image->width() * image->height();
-		if (area < kMaxAreaForTextureAtlas) {
+		std::unique_ptr<Texture> image;
+		if (should_be_packed(filename, &image)) {
 			to_be_packed.push_back(std::make_pair(filename, std::move(image)));
 		} else {
 			pack_info->insert(std::make_pair(filename, PackInfo{
@@ -211,9 +229,14 @@ void make_texture_atlas(const int max_size) {
 	find_images("pics", &all_images, &images_that_must_be_in_first_atlas);
 
 	// Add all other images, we do not really cares about the order for these.
+	// TODO(sirver): having all assets in an assets/ sub directory would future
+	// proof this a bit better.
+	find_images("campaigns", &all_images, &other_images);
 	find_images("pics", &all_images, &other_images);
-	find_images("world", &all_images, &other_images);
 	find_images("tribes", &all_images, &other_images);
+	find_images("world", &all_images, &other_images);
+
+
 	assert(images_that_must_be_in_first_atlas.size() + other_images.size() == all_images.size());
 
 	std::map<std::string, PackInfo> first_texture_atlas_pack_info;
