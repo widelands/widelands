@@ -250,8 +250,8 @@ public:
 	/**
 	 * Is called right before the object will be removed from
 	 * the game. No conncetion is handled in this class.
-	 * 
-         * param serial : the object serial (cannot use param comment as this is a callback)
+	 *
+	 * param serial : the object serial (cannot use param comment as this is a callback)
 	 */
 	boost::signals2::signal<void(uint32_t serial)> removed;
 
