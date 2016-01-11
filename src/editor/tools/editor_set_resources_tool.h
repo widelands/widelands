@@ -50,9 +50,11 @@ struct EditorSetResourcesTool : public EditorTool {
 	/**
 	 * Sets the resource amount and updates the overlay.
 	 */
-	static void set_res_and_overlay(const Widelands::World& world, int32_t amount, uint8_t resIx,
-			Widelands::MapRegion<Widelands::Area<Widelands::FCoords> > *mr,
-			EditorActionArgs* args, Widelands::Map* map);
+	static void set_res_and_overlay(const Widelands::World& world,
+	                                int32_t amount,
+	                                uint8_t resIx,
+	                                const Widelands::FCoords& fcoords,
+	                                Widelands::Map* map);
 
 	char const * get_sel_impl() const override {
 		return "pics/fsel_editor_set_resources.png";

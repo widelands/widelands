@@ -21,8 +21,8 @@
 #define WL_ECONOMY_REQUEST_H
 
 #include "economy/trackptr.h"
-#include "logic/requirements.h"
-#include "logic/wareworker.h"
+#include "logic/map_objects/tribes/requirements.h"
+#include "logic/map_objects/tribes/wareworker.h"
 #include "logic/widelands.h"
 
 class FileRead;

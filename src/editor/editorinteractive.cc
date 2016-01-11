@@ -38,10 +38,10 @@
 #include "editor/ui_menus/editor_toolsize_menu.h"
 #include "graphic/graphic.h"
 #include "logic/map.h"
+#include "logic/map_objects/tribes/tribes.h"
+#include "logic/map_objects/world/resource_description.h"
+#include "logic/map_objects/world/world.h"
 #include "logic/player.h"
-#include "logic/tribes/tribes.h"
-#include "logic/world/resource_description.h"
-#include "logic/world/world.h"
 #include "map_io/widelands_map_loader.h"
 #include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
@@ -610,6 +610,7 @@ void EditorInteractive::run_editor(const std::string& filename, const std::strin
 
 		eia.select_tool(eia.tools.increase_height, EditorTool::First);
 		editor.postload();
+
 		eia.start();
 
 		if (!script_to_run.empty()) {

@@ -183,35 +183,34 @@ void draw_diagram
 
 	// Draw coordinate system
 	// X Axis
-	dst.draw_line
-		(spacing,                        inner_h - space_at_bottom,
-		 inner_w - space_at_right, inner_h - space_at_bottom,
-		 LINE_COLOR, 2);
+	dst.draw_line(Point(spacing, inner_h - space_at_bottom),
+	              Point(inner_w - space_at_right, inner_h - space_at_bottom),
+	              LINE_COLOR,
+	              2);
 	// Arrow
-	dst.draw_line
-		(spacing,     inner_h - space_at_bottom,
-		 spacing + 5, inner_h - space_at_bottom - 3,
-		 LINE_COLOR, 2);
-	dst.draw_line
-		(spacing,     inner_h - space_at_bottom,
-		 spacing + 5, inner_h - space_at_bottom + 3,
-		 LINE_COLOR, 2);
+	dst.draw_line(Point(spacing, inner_h - space_at_bottom),
+	              Point(spacing + 5, inner_h - space_at_bottom - 3),
+	              LINE_COLOR,
+	              2);
+	dst.draw_line(Point(spacing, inner_h - space_at_bottom),
+	              Point(spacing + 5, inner_h - space_at_bottom + 3),
+	              LINE_COLOR,
+	              2);
 	//  Y Axis
-	dst.draw_line
-		(inner_w - space_at_right, spacing,
-		 inner_w - space_at_right,
-		 inner_h - space_at_bottom,
-		 LINE_COLOR, 2);
+	dst.draw_line(Point(inner_w - space_at_right, spacing),
+	              Point(inner_w - space_at_right, inner_h - space_at_bottom),
+	              LINE_COLOR,
+	              2);
 	//  No Arrow here, since this doesn't continue.
 
 	float sub = (xline_length - space_left_of_label) / how_many_ticks;
 	float posx = inner_w - space_at_right;
 
 	for (uint32_t i = 0; i <= how_many_ticks; ++i) {
-		dst.draw_line
-			(static_cast<int32_t>(posx), inner_h - space_at_bottom,
-			 static_cast<int32_t>(posx), inner_h - space_at_bottom + 3,
-			 LINE_COLOR, 2);
+		dst.draw_line(Point(static_cast<int32_t>(posx), inner_h - space_at_bottom),
+		              Point(static_cast<int32_t>(posx), inner_h - space_at_bottom + 3),
+		              LINE_COLOR,
+		              2);
 
 		// The space at the end is intentional to have the tick centered
 		// over the number, not to the left
@@ -225,16 +224,15 @@ void draw_diagram
 	}
 
 	//  draw yticks, one at full, one at half
-	dst.draw_line
-		(inner_w - space_at_right,    spacing,
-		 inner_w - space_at_right -3, spacing,
-		 LINE_COLOR, 2);
-	dst.draw_line
-		(inner_w - space_at_right,
-		 spacing + ((inner_h - space_at_bottom) - spacing) / 2,
-		 inner_w - space_at_right - 3,
-		 spacing + ((inner_h - space_at_bottom) - spacing) / 2,
-		 LINE_COLOR, 2);
+	dst.draw_line(Point(inner_w - space_at_right, spacing),
+	              Point(inner_w - space_at_right - 3, spacing),
+	              LINE_COLOR,
+	              2);
+	dst.draw_line(
+	   Point(inner_w - space_at_right, spacing + ((inner_h - space_at_bottom) - spacing) / 2),
+	   Point(inner_w - space_at_right - 3, spacing + ((inner_h - space_at_bottom) - spacing) / 2),
+	   LINE_COLOR,
+	   2);
 
 	//  print the used unit
 	const Image* xtick = UI::g_fh1->render(xtick_text_style((boost::format(get_unit_name(unit)) % "").str()));
@@ -433,7 +431,7 @@ void WuiPlotArea::draw_plot_line
 			cury -= static_cast<int32_t>(length_y);
 		}
 
-		dst.draw_line(lx, ly, curx, cury, color, 2);
+		dst.draw_line(Point(lx, ly), Point(curx, cury), color, 2);
 
 		posx -= sub;
 
@@ -512,12 +510,10 @@ void DifferentialPlotArea::draw(RenderTarget & dst) {
 	draw_diagram(time_ms, get_inner_w(), get_inner_h(), xline_length, dst);
 
 	// draw zero line
-	dst.draw_line
-		(get_inner_w() - space_at_right,
-		 yoffset,
-		 get_inner_w() - space_at_right - xline_length,
-		 yoffset,
-		 ZERO_LINE_COLOR, 2);
+	dst.draw_line(Point(get_inner_w() - space_at_right, yoffset),
+	              Point(get_inner_w() - space_at_right - xline_length, yoffset),
+	              ZERO_LINE_COLOR,
+	              2);
 
 	// How many do we take together when relative ploting
 	const int32_t how_many = calc_how_many(time_ms, m_sample_rate);

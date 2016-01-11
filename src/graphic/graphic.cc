@@ -29,6 +29,7 @@
 #include "graphic/gl/system_headers.h"
 #include "graphic/image.h"
 #include "graphic/image_io.h"
+#include "graphic/render_queue.h"
 #include "graphic/rendertarget.h"
 #include "graphic/screen.h"
 #include "graphic/texture.h"
@@ -70,6 +71,7 @@ Graphic::Graphic(int window_mode_w, int window_mode_h, bool init_fullscreen)
 	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 2);
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 1);
+	SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
 
 	log("Graphics: Try to set Videomode %ux%u\n", m_window_mode_width, m_window_mode_height);
 	m_sdl_window = SDL_CreateWindow("Widelands Window",
@@ -111,12 +113,11 @@ Graphic::Graphic(int window_mode_w, int window_mode_h, bool init_fullscreen)
 	glGetIntegerv(GL_MAX_TEXTURE_SIZE, &glInt);
 	log("Graphics: OpenGL: Max texture size: %u\n", glInt);
 
-	SDL_GL_SetSwapInterval(1);
-
 	glDrawBuffer(GL_BACK);
 
-	glDisable(GL_DEPTH_TEST);
-	glEnable(GL_TEXTURE_2D);
+	glEnable(GL_DEPTH_TEST);
+	glDepthFunc(GL_LEQUAL);
+
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
@@ -244,9 +245,8 @@ void Graphic::update() {
 /**
  * Returns true if parts of the screen have been marked for refreshing.
 */
-bool Graphic::need_update() const
-{
-	return  m_update;
+bool Graphic::need_update() const {
+	return m_update;
 }
 
 /**
@@ -256,6 +256,8 @@ bool Graphic::need_update() const
 */
 void Graphic::refresh()
 {
+	RenderQueue::instance().draw(screen_->width(), screen_->height());
+
 	// Setting the window size immediately after going out of fullscreen does
 	// not work properly. We work around this issue by resizing the window in
 	// refresh() when in window mode.

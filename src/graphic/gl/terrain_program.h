@@ -26,7 +26,7 @@
 #include "graphic/gl/fields_to_draw.h"
 #include "graphic/gl/utils.h"
 #include "logic/description_maintainer.h"
-#include "logic/world/terrain_description.h"
+#include "logic/map_objects/world/terrain_description.h"
 
 
 class TerrainProgram {
@@ -35,8 +35,10 @@ public:
 	TerrainProgram();
 
 	// Draws the terrain.
-	void draw(uint32_t gametime, const DescriptionMaintainer<Widelands::TerrainDescription>& terrains,
-	          const FieldsToDraw& fields_to_draw);
+	void draw(uint32_t gametime,
+	          const DescriptionMaintainer<Widelands::TerrainDescription>& terrains,
+	          const FieldsToDraw& fields_to_draw,
+	          float z_value);
 
 private:
 	struct PerVertexData {
@@ -50,7 +52,7 @@ private:
 	};
 	static_assert(sizeof(PerVertexData) == 28, "Wrong padding.");
 
-	void gl_draw(int gl_texture, float texture_w, float texture_h);
+	void gl_draw(int gl_texture, float texture_w, float texture_h, float z_value);
 
 	// Adds a vertex to the end of vertices with data from 'field' and 'texture_coordinates'.
 	void add_vertex(const FieldsToDraw::Field& field, const FloatPoint& texture_coordinates);
@@ -59,7 +61,7 @@ private:
 	Gl::Program gl_program_;
 
 	// The buffer that will contain 'vertices_' for rendering.
-	Gl::Buffer gl_array_buffer_;
+	Gl::Buffer<PerVertexData> gl_array_buffer_;
 
 	// Attributes.
 	GLint attr_brightness_;
@@ -70,6 +72,7 @@ private:
 	// Uniforms.
 	GLint u_terrain_texture_;
 	GLint u_texture_dimensions_;
+	GLint u_z_value_;
 
 	// Objects below are kept around to avoid memory allocations on each frame.
 	// They could theoretically also be recreated.

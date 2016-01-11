@@ -22,10 +22,10 @@
 #include "editor/editorinteractive.h"
 #include "graphic/graphic.h"
 #include "logic/field.h"
+#include "logic/map_objects/world/resource_description.h"
+#include "logic/map_objects/world/terrain_description.h"
+#include "logic/map_objects/world/world.h"
 #include "logic/mapregion.h"
-#include "logic/world/resource_description.h"
-#include "logic/world/terrain_description.h"
-#include "logic/world/world.h"
 #include "wui/overlay_manager.h"
 
 using Widelands::TCoords;
@@ -54,10 +54,9 @@ EditorIncreaseResourcesTool::handle_click_impl(const Widelands::World& world,
 				map->is_resource_valid(world, mr.location(), args->cur_res)) {
 			args->orgResT.push_back(mr.location().field->get_resources());
 			args->orgRes.push_back(mr.location().field->get_resources_amount());
-			EditorSetResourcesTool::set_res_and_overlay(world, amount, args->cur_res, &mr, args, map);
+			EditorSetResourcesTool::set_res_and_overlay(
+			   world, amount, args->cur_res, mr.location(), map);
 		}
-
-
 	} while (mr.advance(*map));
 	return mr.radius();
 }

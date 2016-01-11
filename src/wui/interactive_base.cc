@@ -34,15 +34,15 @@
 #include "graphic/rendertarget.h"
 #include "graphic/text_constants.h"
 #include "graphic/text_layout.h"
-#include "logic/checkstep.h"
 #include "logic/cmd_queue.h"
 #include "logic/game.h"
 #include "logic/game_controller.h"
-#include "logic/immovable.h"
+#include "logic/map_objects/checkstep.h"
+#include "logic/map_objects/immovable.h"
+#include "logic/map_objects/tribes/productionsite.h"
 #include "logic/maphollowregion.h"
 #include "logic/maptriangleregion.h"
 #include "logic/player.h"
-#include "logic/productionsite.h"
 #include "profile/profile.h"
 #include "scripting/lua_interface.h"
 #include "wlapplication.h"
@@ -902,10 +902,8 @@ bool InteractiveBase::handle_key(bool const down, SDL_Keysym const code)
 			return true;
 #ifndef NDEBUG  //  only in debug builds
 		case SDLK_F6:
-			if (get_display_flag(dfDebug)) {
-				GameChatMenu::create_script_console(
-				   this, m_debugconsole, *DebugConsole::get_chat_provider());
-			}
+			GameChatMenu::create_script_console(
+				this, m_debugconsole, *DebugConsole::get_chat_provider());
 			return true;
 #endif
 		default:
