@@ -353,7 +353,7 @@ void Table<void *>::draw(RenderTarget & dst)
 				point.x += picw;
 			}
 
-			++picw; // A bit or margin between image and text
+			++picw; // A bit of margin between image and text
 
 			if (entry_string.empty()) {
 				curx += curw;
