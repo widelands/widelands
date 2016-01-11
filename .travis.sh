@@ -41,4 +41,4 @@ until sudo apt-get install -qq \
 mkdir build
 cd build
 cmake .. -DCMAKE_BUILD_TYPE:STRING="$BUILD_TYPE"
-make -j1
+make -k -j1
