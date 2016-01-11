@@ -27,7 +27,6 @@
 #include "logic/player.h"
 #include "wui/interactive_player.h"
 #include "wui/mapview.h"
-#include "wui/overlay_manager.h"
 
 namespace Widelands {
 

@@ -192,8 +192,10 @@ wl_library(graphic_game_renderer
     graphic_surface
     graphic_terrain_programs
     logic
+    wui
+    wui_edge_overlay_manager
+    wui_field_overlay_manager
     wui_mapview_pixelfunctions
-    wui_overlay_manager
 )
 
 wl_library(graphic_minimap_renderer
@@ -261,5 +263,4 @@ wl_library(graphic
     notifications
     scripting_lua_table
     sound
-    wui_overlay_manager
 )

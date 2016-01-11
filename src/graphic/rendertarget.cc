@@ -24,9 +24,7 @@
 #include "graphic/animation.h"
 #include "graphic/graphic.h"
 #include "graphic/surface.h"
-#include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/player.h"
-#include "wui/overlay_manager.h"
 
 using Widelands::BaseImmovable;
 using Widelands::Coords;

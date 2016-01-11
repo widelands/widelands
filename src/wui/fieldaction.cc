@@ -40,9 +40,9 @@
 #include "ui_basic/unique_window.h"
 #include "wui/actionconfirm.h"
 #include "wui/attack_box.h"
+#include "wui/field_overlay_manager.h"
 #include "wui/game_debug_ui.h"
 #include "wui/interactive_player.h"
-#include "wui/overlay_manager.h"
 #include "wui/waresdisplay.h"
 #include "wui/watchwindow.h"
 
@@ -214,14 +214,14 @@ private:
 
 	Widelands::Player * m_plr;
 	Widelands::Map    * m_map;
-	OverlayManager & m_overlay_manager;
+	FieldOverlayManager & m_field_overlay_manager;
 
 	Widelands::FCoords  m_node;
 
 	UI::TabPanel      m_tabpanel;
 	bool m_fastclick; // if true, put the mouse over first button in first tab
 	uint32_t m_best_tab;
-	OverlayManager::JobId m_workarea_preview_job_id;
+	FieldOverlayManager::OverlayId m_workarea_preview_overlay_id;
 
 	/// Variables to use with attack dialog.
 	AttackBox * m_attack_box;
@@ -274,12 +274,12 @@ FieldActionWindow::FieldActionWindow
 	UI::UniqueWindow(ib, "field_action", registry, 68, 34, _("Action")),
 	m_plr(plr),
 	m_map(&ib->egbase().map()),
-	m_overlay_manager(*m_map->get_overlay_manager()),
+	m_field_overlay_manager(*ib->mutable_field_overlay_manager()),
 	m_node(ib->get_sel_pos().node, &(*m_map)[ib->get_sel_pos().node]),
 	m_tabpanel(this, 0, 0, g_gr->images().get("pics/but1.png")),
 	m_fastclick(true),
 	m_best_tab(0),
-	m_workarea_preview_job_id(0),
+	m_workarea_preview_overlay_id(0),
 	m_attack_box(nullptr)
 {
 	ib->set_sel_freeze(true);
@@ -291,8 +291,8 @@ FieldActionWindow::FieldActionWindow
 
 FieldActionWindow::~FieldActionWindow()
 {
-	if (m_workarea_preview_job_id)
-		m_overlay_manager.remove_overlay(m_workarea_preview_job_id);
+	if (m_workarea_preview_overlay_id)
+		m_field_overlay_manager.remove_overlay(m_workarea_preview_overlay_id);
 	ibase().set_sel_freeze(false);
 	delete m_attack_box;
 }
@@ -809,9 +809,9 @@ void FieldActionWindow::act_build(Widelands::DescriptionIndex idx)
 void FieldActionWindow::building_icon_mouse_out
 	(Widelands::DescriptionIndex)
 {
-	if (m_workarea_preview_job_id) {
-		m_overlay_manager.remove_overlay(m_workarea_preview_job_id);
-		m_workarea_preview_job_id = 0;
+	if (m_workarea_preview_overlay_id) {
+		m_field_overlay_manager.remove_overlay(m_workarea_preview_overlay_id);
+		m_workarea_preview_overlay_id = 0;
 	}
 }
 
@@ -819,11 +819,11 @@ void FieldActionWindow::building_icon_mouse_out
 void FieldActionWindow::building_icon_mouse_in
 	(const Widelands::DescriptionIndex idx)
 {
-	if (ibase().m_show_workarea_preview && !m_workarea_preview_job_id) {
+	if (ibase().m_show_workarea_preview && !m_workarea_preview_overlay_id) {
 		const WorkareaInfo & workarea_info =
 			m_plr->tribe().get_building_descr(Widelands::DescriptionIndex(idx))
 			->m_workarea_info;
-		m_workarea_preview_job_id = ibase().show_work_area(workarea_info, m_node);
+		m_workarea_preview_overlay_id = ibase().show_work_area(workarea_info, m_node);
 	}
 }
 

@@ -33,7 +33,7 @@
 #include "logic/widelands.h"
 #include "logic/widelands_geometry.h"
 #include "ui_basic/button.h"
-#include "wui/overlay_manager.h"
+#include "wui/field_overlay_manager.h"
 
 const static int BUTTON_WIDTH = 20;
 const static int BUTTON_HEIGHT = 20;
@@ -221,9 +221,9 @@ void EditorToolChangeResourcesOptionsMenu::selected() {
 
 	Widelands::EditorGameBase& egbase = eia().egbase();
 	Widelands::Map & map = egbase.map();
-	map.overlay_manager().register_overlay_callback_function(
-		[resIx, &map, &egbase](const Widelands::TCoords<Widelands::FCoords>& coords) -> uint32_t {
-			if (map.is_resource_valid(egbase.world(), coords, resIx)) {
+	eia().mutable_field_overlay_manager()->register_overlay_callback_function(
+	   [resIx, &map, &egbase](const Widelands::TCoords<Widelands::FCoords>& coords) -> uint32_t {
+		   if (map.is_resource_valid(egbase.world(), coords, resIx)) {
 				return coords.field->nodecaps();
 			}
 			return 0;

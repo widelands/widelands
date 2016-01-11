@@ -28,19 +28,17 @@
 #include "logic/map_objects/world/world.h"
 #include "logic/mapregion.h"
 #include "logic/widelands_geometry.h"
-#include "wui/overlay_manager.h"
 
 
 /**
  * Decrease the resources of the current field by one if
  * there is not already another resource there.
 */
-int32_t
-EditorDecreaseResourcesTool::handle_click_impl(const Widelands::World& world,
-                                               Widelands::NodeAndTriangle<> const center,
-                                               EditorInteractive& /* parent */,
-                                               EditorActionArgs* args,
-											   Widelands::Map* map) {
+int32_t EditorDecreaseResourcesTool::handle_click_impl(const Widelands::World& world,
+                                                       Widelands::NodeAndTriangle<> const center,
+                                                       EditorInteractive& parent,
+                                                       EditorActionArgs* args,
+                                                       Widelands::Map* map) {
 	Widelands::MapRegion<Widelands::Area<Widelands::FCoords> > mr
 	(*map,
 	Widelands::Area<Widelands::FCoords>
@@ -56,8 +54,8 @@ EditorDecreaseResourcesTool::handle_click_impl(const Widelands::World& world,
 			map->is_resource_valid(world, mr.location(), args->cur_res)) {
 			args->orgResT.push_back(mr.location().field->get_resources());
 			args->orgRes.push_back(mr.location().field->get_resources_amount());
-			EditorSetResourcesTool::set_res_and_overlay(
-			   world, amount, args->cur_res, mr.location(), map);
+			EditorSetResourcesTool::set_res_and_overlay(world, amount, args->cur_res, mr.location(),
+			                                            parent.mutable_field_overlay_manager(), map);
 		}
 
 	} while (mr.advance(*map));

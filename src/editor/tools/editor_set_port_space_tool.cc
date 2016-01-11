@@ -25,7 +25,6 @@
 #include "logic/map_objects/tribes/building.h"
 #include "logic/mapfringeregion.h"
 #include "logic/mapregion.h"
-#include "wui/overlay_manager.h"
 
 using namespace Widelands;
 

@@ -34,7 +34,7 @@
 #include "ui_basic/editbox.h"
 #include "ui_basic/messagebox.h"
 #include "ui_basic/textarea.h"
-#include "wui/overlay_manager.h"
+#include "wui/field_overlay_manager.h"
 
 #define UNDEFINED_TRIBE_NAME "<undefined>"
 
@@ -230,8 +230,7 @@ void EditorPlayerMenu::clicked_remove_last_player() {
 			char picsname[] = "pics/editor_player_00_starting_pos.png";
 			picsname[19] += old_nr_players / 10;
 			picsname[20] += old_nr_players % 10;
-			map.overlay_manager().remove_overlay
-				(sp, g_gr->images().get(picsname));
+			menu.mutable_field_overlay_manager()->remove_overlay(sp, g_gr->images().get(picsname));
 		}
 		// if removed player was selected switch to the next highest player
 		if (old_nr_players == menu.tools.set_starting_pos.get_current_player())
@@ -299,7 +298,7 @@ void EditorPlayerMenu::set_starting_pos_clicked(uint8_t n) {
 
 	//  Register callback function to make sure that only valid locations are
 	//  selected.
-	map.overlay_manager().register_overlay_callback_function(
+	menu.mutable_field_overlay_manager()->register_overlay_callback_function(
 	   boost::bind(&editor_tool_set_starting_pos_callback, _1, boost::ref(map)));
 	map.recalc_whole_map(menu.egbase().world());
 	update();
@@ -332,7 +331,7 @@ void EditorPlayerMenu::make_infrastructure_clicked(uint8_t n) {
    // so must be true)
 	Widelands::EditorGameBase & egbase = parent.egbase();
 	Widelands::Map & map = egbase.map();
-	OverlayManager & overlay_manager = map.overlay_manager();
+	auto* overlay_manager = parent.mutable_field_overlay_manager();
 	const Widelands::Coords start_pos = map.get_starting_pos(n);
 	assert(start_pos);
 
@@ -376,13 +375,13 @@ void EditorPlayerMenu::make_infrastructure_clicked(uint8_t n) {
 		picsname += static_cast<char>((n / 10) + 0x30);
 		picsname += static_cast<char>((n % 10) + 0x30);
 		picsname += "_starting_pos.png";
-		overlay_manager.remove_overlay
+		overlay_manager->remove_overlay
 			(start_pos, g_gr->images().get(picsname));
 	}
 
 	parent.select_tool(parent.tools.make_infrastructure, EditorTool::First);
 	parent.tools.make_infrastructure.set_player(n);
-	overlay_manager.register_overlay_callback_function(
+	overlay_manager->register_overlay_callback_function(
 	   boost::bind(&editor_make_infrastructure_tool_callback, _1, boost::ref(egbase), n));
 	map.recalc_whole_map(egbase.world());
 }

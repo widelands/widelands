@@ -23,8 +23,7 @@
 #include "editor/tools/editor_tool.h"
 #include "graphic/graphic.h"
 #include "logic/map.h"
-#include "logic/map_objects/tribes/building.h"
-#include "wui/overlay_manager.h"
+#include "wui/field_overlay_manager.h"
 
 // global variable to pass data from callback to class
 static int32_t m_current_player;
@@ -64,7 +63,7 @@ EditorSetStartingPosTool::EditorSetStartingPosTool()
 
 int32_t EditorSetStartingPosTool::handle_click_impl(const Widelands::World&,
                                                     Widelands::NodeAndTriangle<> const center,
-                                                    EditorInteractive&,
+                                                    EditorInteractive& eia,
                                                     EditorActionArgs*,
 													Widelands::Map* map) {
 	assert(0 <= center.node.x);
@@ -89,17 +88,16 @@ int32_t EditorSetStartingPosTool::handle_click_impl(const Widelands::World&,
 
 		//  check if field is valid
 		if (editor_tool_set_starting_pos_callback(map->get_fcoords(center.node), *map)) {
-			OverlayManager & overlay_manager = map->overlay_manager();
+			FieldOverlayManager * overlay_manager = eia.mutable_field_overlay_manager();
 			//  remove old overlay if any
-			overlay_manager.remove_overlay(old_sp, pic);
+			overlay_manager->remove_overlay(old_sp, pic);
 
 			//  add new overlay
-			overlay_manager.register_overlay
-			(center.node, pic, 4, Point(pic->width() / 2, STARTING_POS_HOTSPOT_Y));
+			overlay_manager->register_overlay(
+			   center.node, pic, 4, Point(pic->width() / 2, STARTING_POS_HOTSPOT_Y));
 
 			//  set new player pos
 			map->set_starting_pos(m_current_player, center.node);
-
 		}
 	}
 	return 1;

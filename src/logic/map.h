@@ -41,7 +41,6 @@
 
 class FileSystem;
 class Image;
-struct OverlayManager;
 struct S2MapLoader;
 
 namespace Widelands {
@@ -162,11 +161,6 @@ public:
 
 	Map ();
 	virtual ~Map();
-
-	OverlayManager * get_overlay_manager()       {return m_overlay_manager.get();}
-	OverlayManager * get_overlay_manager() const {return m_overlay_manager.get();}
-	const OverlayManager & overlay_manager() const {return *m_overlay_manager;}
-	OverlayManager       & overlay_manager()       {return *m_overlay_manager;}
 
 	/// Returns the correct initialized loader for the given mapfile
 	std::unique_ptr<MapLoader> get_correct_loader(const std::string& filename);
@@ -447,8 +441,6 @@ private:
 	std::vector<Coords> m_starting_pos;    //  players' starting positions
 
 	std::unique_ptr<Field[]> m_fields;
-
-	std::unique_ptr<OverlayManager> m_overlay_manager;
 
 	std::unique_ptr<PathfieldManager> m_pathfieldmgr;
 	std::vector<std::string> m_scenario_tribes;

@@ -105,5 +105,5 @@ wl_library(editor
     wui
     wui_common
     wui_mapview_pixelfunctions
-    wui_overlay_manager
+    wui_field_overlay_manager
 )
