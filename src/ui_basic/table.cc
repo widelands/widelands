@@ -282,8 +282,8 @@ void Table<void *>::draw(RenderTarget & dst)
 
 		Columns::size_type const nr_columns = m_columns.size();
 		for (uint32_t i = 0, curx = 0; i < nr_columns; ++i) {
-			const Column & column    = m_columns[i];
-			uint32_t const curw      = column.width;
+			const Column& column = m_columns[i];
+			int const curw  = column.width;
 			Align alignment = mirror_alignment(column.alignment);
 
 			const Image* entry_picture = er.get_picture(i);
@@ -369,14 +369,14 @@ void Table<void *>::draw(RenderTarget & dst)
 			}
 
 			// Add an offset for rightmost column when the scrollbar is shown.
-			uint16_t text_width = entry_text_im->width();
+			int text_width = entry_text_im->width();
 			if (i == nr_columns - 1 && m_scrollbar->is_enabled()) {
 				text_width = text_width + m_scrollbar->get_w();
 			}
 			UI::correct_for_align(alignment, text_width, entry_text_im->height(), &point);
 
 			// Crop to column width while blitting
-			if (((static_cast<int32_t>(curw) + picw) < text_width)) {
+			if ((curw + picw) < text_width) {
 				// Fix positioning for BiDi languages.
 				if (UI::g_fh1->fontset().is_rtl()) {
 					point.x = alignment & Align_Right ? curx : curx + picw;
