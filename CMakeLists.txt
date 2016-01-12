@@ -157,7 +157,6 @@ else()
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wpacked")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wpointer-arith")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wredundant-decls")
-  wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wshadow")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wsign-promo")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wswitch-default")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wsync-nand")
@@ -168,8 +167,9 @@ else()
 endif()
 
 # Turn some warnings into errors.
-wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Werror=uninitialized")
 wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Werror=return-type")
+wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Werror=shadow")
+wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Werror=uninitialized")
 
 
 IF (WIN32)
