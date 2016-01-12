@@ -102,6 +102,9 @@ protected:
 	UI::UniqueWindow::Registry m_game_summary;
 
 	UI::Button m_toggle_buildhelp;
+
+private:
+	void on_buildhelp_changed(const bool value) override;
 };
 
 #endif  // end of include guard: WL_WUI_INTERACTIVE_GAMEBASE_H

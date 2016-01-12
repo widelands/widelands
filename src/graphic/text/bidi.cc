@@ -480,6 +480,7 @@ const std::map<std::string, std::set<UBlockCode>> kRTLCodeBlocks = {
 	 }},
 };
 
+// True if 'c' is included in one of the kRTLCodeBlocks.
 bool is_rtl_character(UChar32 c) {
 	UBlockCode code = ublock_getCode(c);
 	for (std::string script : kRTLScripts) {
@@ -555,11 +556,12 @@ UChar find_arabic_letter_form(UChar c, UChar previous, UChar next) {
 namespace i18n {
 
 
-// True if a string does not contain Latin characters
-bool has_rtl_character(const char* input) {
+// True if one of te first 'limit' characters in 'input' as UnicodeString is an RTL character
+// according to is_rtl_character(UChar32 c)
+bool has_rtl_character(const char* input, int32_t limit) {
 	bool result = false;
 	const icu::UnicodeString parseme(input);
-	for (int32_t i = 0; i < parseme.length(); ++i) {
+	for (int32_t i = 0; i < parseme.length() && i < limit; ++i) {
 		if (is_rtl_character(parseme.char32At(i))) {
 			result = true;
 			break;

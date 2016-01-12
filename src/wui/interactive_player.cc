@@ -30,16 +30,16 @@
 #include "base/macros.h"
 #include "economy/flag.h"
 #include "game_io/game_loader.h"
-#include "logic/building.h"
 #include "logic/cmd_queue.h"
 #include "logic/constants.h"
-#include "logic/constructionsite.h"
-#include "logic/immovable.h"
+#include "logic/map_objects/immovable.h"
+#include "logic/map_objects/tribes/building.h"
+#include "logic/map_objects/tribes/constructionsite.h"
+#include "logic/map_objects/tribes/productionsite.h"
+#include "logic/map_objects/tribes/soldier.h"
+#include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/message_queue.h"
 #include "logic/player.h"
-#include "logic/productionsite.h"
-#include "logic/soldier.h"
-#include "logic/tribes/tribe_descr.h"
 #include "profile/profile.h"
 #include "ui_basic/unique_window.h"
 #include "wui/building_statistics_menu.h"
@@ -53,7 +53,6 @@
 #include "wui/game_objectives_menu.h"
 #include "wui/game_options_menu.h"
 #include "wui/general_statistics_menu.h"
-#include "wui/overlay_manager.h"
 #include "wui/stock_menu.h"
 #include "wui/ware_statistics_menu.h"
 
@@ -404,22 +403,11 @@ void InteractivePlayer::cmdSwitchPlayer(const std::vector<std::string> & args)
 		return;
 	}
 
-	DebugConsole::write
-		(str
-			(boost::format("Switching from #%1% to #%2%.")
-		 	 % static_cast<int>(m_player_number) % n));
+	DebugConsole::write(
+	   str(boost::format("Switching from #%1% to #%2%.") % static_cast<int>(m_player_number) % n));
 	m_player_number = n;
-	Map              &       map             = egbase().map();
-	OverlayManager  &       overlay_manager = map.overlay_manager();
-	Widelands::Extent  const extent          = map.extent         ();
-	for (uint16_t y = 0; y < extent.h; ++y)
-		for (uint16_t x = 0; x < extent.w; ++x)
-			overlay_manager.recalc_field_overlays
-				(map.get_fcoords(Widelands::Coords(x, y)));
-	if
-		(UI::UniqueWindow * const building_statistics_window =
-		 	m_mainm_windows.building_stats.window)
-		dynamic_cast<BuildingStatisticsMenu&>
-			(*building_statistics_window)
-			.update();
+
+	if (UI::UniqueWindow* const building_statistics_window = m_mainm_windows.building_stats.window) {
+		dynamic_cast<BuildingStatisticsMenu&>(*building_statistics_window).update();
+	}
 }

@@ -148,8 +148,8 @@ void EditorToolMenu::changed_to() {
 	if (current_tool_pointer == &parent.tools.set_port_space) {
 		// Set correct overlay
 		Widelands::Map & map = parent.egbase().map();
-		map.overlay_manager().register_overlay_callback_function(
-				boost::bind(&editor_Tool_set_port_space_callback, _1, boost::ref(map)));
+		parent.mutable_field_overlay_manager()->register_overlay_callback_function(
+		   boost::bind(&editor_Tool_set_port_space_callback, _1, boost::ref(map)));
 		map.recalc_whole_map(parent.egbase().world());
 		update();
 	}

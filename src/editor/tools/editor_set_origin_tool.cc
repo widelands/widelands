@@ -22,7 +22,6 @@
 #include "editor/editorinteractive.h"
 #include "logic/map.h"
 #include "wui/mapviewpixelconstants.h"
-#include "wui/overlay_manager.h"
 
 int32_t EditorSetOriginTool::handle_click_impl(const Widelands::World&,
                                                Widelands::NodeAndTriangle<> const center,

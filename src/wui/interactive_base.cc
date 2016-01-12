@@ -34,18 +34,20 @@
 #include "graphic/rendertarget.h"
 #include "graphic/text_constants.h"
 #include "graphic/text_layout.h"
-#include "logic/checkstep.h"
 #include "logic/cmd_queue.h"
 #include "logic/game.h"
 #include "logic/game_controller.h"
-#include "logic/immovable.h"
+#include "logic/map_objects/checkstep.h"
+#include "logic/map_objects/immovable.h"
+#include "logic/map_objects/tribes/productionsite.h"
 #include "logic/maphollowregion.h"
 #include "logic/maptriangleregion.h"
 #include "logic/player.h"
-#include "logic/productionsite.h"
 #include "profile/profile.h"
 #include "scripting/lua_interface.h"
 #include "wlapplication.h"
+#include "wui/edge_overlay_manager.h"
+#include "wui/field_overlay_manager.h"
 #include "wui/game_chat_menu.h"
 #include "wui/game_debug_ui.h"
 #include "wui/interactive_player.h"
@@ -53,7 +55,6 @@
 #include "wui/mapviewpixelconstants.h"
 #include "wui/mapviewpixelfunctions.h"
 #include "wui/minimap.h"
-#include "wui/overlay_manager.h"
 #include "wui/quicknavigation.h"
 #include "wui/unique_window_handler.h"
 
@@ -85,6 +86,8 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
      m_chatOverlay(new ChatOverlay(this, 10, 25, get_w() / 2, get_h() - 25)),
      m_toolbar(this, 0, 0, UI::Box::Horizontal),
      m(new InteractiveBaseInternals(new QuickNavigation(the_egbase, get_w(), get_h()))),
+	  m_field_overlay_manager(new FieldOverlayManager()),
+	  m_edge_overlay_manager(new EdgeOverlayManager()),
      m_egbase(the_egbase),
 #ifndef NDEBUG //  not in releases
      m_display_flags(dfDebug),
@@ -156,13 +159,12 @@ UniqueWindowHandler& InteractiveBase::unique_windows() {
 void InteractiveBase::set_sel_pos(Widelands::NodeAndTriangle<> const center)
 {
 	Map & map = egbase().map();
-	OverlayManager & overlay_manager = map.overlay_manager();
 
 	// Remove old sel pointer
 	if (m_sel.jobid)
-		overlay_manager.remove_overlay(m_sel.jobid);
-	const OverlayManager::JobId jobid =
-		m_sel.jobid = overlay_manager.get_a_job_id();
+		m_field_overlay_manager->remove_overlay(m_sel.jobid);
+	const FieldOverlayManager::OverlayId jobid =
+		m_sel.jobid = m_field_overlay_manager->next_overlay_id();
 
 	m_sel.pos = center;
 
@@ -174,13 +176,13 @@ void InteractiveBase::set_sel_pos(Widelands::NodeAndTriangle<> const center)
 		Widelands::MapTriangleRegion<> mr
 			(map, Area<TCoords<> >(center.triangle, m_sel.radius));
 		do
-			overlay_manager.register_overlay
+			m_field_overlay_manager->register_overlay
 				(mr.location(), m_sel.pic, 7, Point::invalid(), jobid);
 		while (mr.advance(map));
 	} else {
 		Widelands::MapRegion<> mr(map, Area<>(center.node, m_sel.radius));
 		do
-			overlay_manager.register_overlay
+			m_field_overlay_manager->register_overlay
 				(mr.location(), m_sel.pic, 7, Point::invalid(), jobid);
 		while (mr.advance(map));
 		if (upcast(InteractiveGameBase const, igbase, this))
@@ -232,21 +234,25 @@ void InteractiveBase::unset_sel_picture() {
 	set_sel_picture("pics/fsel.png");
 }
 
+bool InteractiveBase::buildhelp() const {
+	return m_field_overlay_manager->buildhelp();
+}
+
+void InteractiveBase::show_buildhelp(bool t) {
+	m_field_overlay_manager->show_buildhelp(t);
+	on_buildhelp_changed(t);
+}
 
 void InteractiveBase::toggle_buildhelp() {
-	egbase().map().overlay_manager().toggle_buildhelp();
+	m_field_overlay_manager->show_buildhelp(!m_field_overlay_manager->buildhelp());
 }
-bool InteractiveBase::buildhelp() {
-	return egbase().map().overlay_manager().buildhelp();
-}
-void InteractiveBase::show_buildhelp(bool t) {
-	egbase().map().overlay_manager().show_buildhelp(t);
+
+void InteractiveBase::on_buildhelp_changed(bool /* value */) {
 }
 
 // Show the given workareas at the given coords and returns the overlay job id associated
-OverlayManager::JobId InteractiveBase::show_work_area
-	(const WorkareaInfo & workarea_info, Widelands::Coords coords)
-{
+FieldOverlayManager::OverlayId InteractiveBase::show_work_area(const WorkareaInfo& workarea_info,
+                                                               Widelands::Coords coords) {
 	const uint8_t workareas_nrs = workarea_info.size();
 	WorkareaInfo::size_type wa_index;
 	switch (workareas_nrs) {
@@ -258,8 +264,7 @@ OverlayManager::JobId InteractiveBase::show_work_area
 			throw wexception("Encountered unexpected WorkareaInfo size %i", workareas_nrs);
 	}
 	Widelands::Map & map = m_egbase.map();
-	OverlayManager & overlay_manager = map.overlay_manager();
-	OverlayManager::JobId job_id = overlay_manager.get_a_job_id();
+	FieldOverlayManager::OverlayId overlay_id = m_field_overlay_manager->next_overlay_id();
 
 	Widelands::HollowArea<> hollow_area(Widelands::Area<>(coords, 0), 0);
 
@@ -269,23 +274,21 @@ OverlayManager::JobId InteractiveBase::show_work_area
 		hollow_area.radius = it->first;
 		Widelands::MapHollowRegion<> mr(map, hollow_area);
 		do
-			overlay_manager.register_overlay
+			m_field_overlay_manager->register_overlay
 				(mr.location(),
 					m_workarea_pics[wa_index],
 					0,
 					Point::invalid(),
-					job_id);
+					overlay_id);
 		while (mr.advance(map));
 		wa_index++;
 		hollow_area.hole_radius = hollow_area.radius;
 	}
-	return job_id;
+	return overlay_id;
 }
 
-void InteractiveBase::hide_work_area(OverlayManager::JobId job_id) {
-	Widelands::Map & map = m_egbase.map();
-	OverlayManager & overlay_manager = map.overlay_manager();
-	overlay_manager.remove_overlay(job_id);
+void InteractiveBase::hide_work_area(FieldOverlayManager::OverlayId overlay_id) {
+	m_field_overlay_manager->remove_overlay(overlay_id);
 }
 
 
@@ -749,11 +752,10 @@ void InteractiveBase::roadb_add_overlay()
 	//log("Add overlay\n");
 
 	Map & map = egbase().map();
-	OverlayManager & overlay_manager = map.overlay_manager();
 
 	// preview of the road
 	assert(!m_jobid);
-	m_jobid = overlay_manager.get_a_job_id();
+	m_jobid = m_field_overlay_manager->next_overlay_id();
 	const CoordPath::StepVector::size_type nr_steps = m_buildroad->get_nsteps();
 	for (CoordPath::StepVector::size_type idx = 0; idx < nr_steps; ++idx) {
 		Widelands::Direction dir = (*m_buildroad)[idx];
@@ -766,16 +768,16 @@ void InteractiveBase::roadb_add_overlay()
 
 		int32_t const shift = 2 * (dir - Widelands::WALK_E);
 
-		uint8_t set_to = overlay_manager.get_road_overlay(c);
+		uint8_t set_to = m_edge_overlay_manager->get_overlay(c);
 		set_to |=  Widelands::RoadType::kNormal << shift;
-		overlay_manager.register_road_overlay(c, set_to, m_jobid);
+		m_edge_overlay_manager->register_overlay(c, set_to, m_jobid);
 	}
 
 	// build hints
 	Widelands::FCoords endpos = map.get_fcoords(m_buildroad->get_end());
 
 	assert(!m_road_buildhelp_overlay_jobid);
-	m_road_buildhelp_overlay_jobid = overlay_manager.get_a_job_id();
+	m_road_buildhelp_overlay_jobid = m_field_overlay_manager->next_overlay_id();
 	for (int32_t dir = 1; dir <= 6; ++dir) {
 		Widelands::FCoords neighb;
 		int32_t caps;
@@ -828,7 +830,7 @@ void InteractiveBase::roadb_add_overlay()
 		else
 			name = "pics/roadb_red.png";
 
-		egbase().map().overlay_manager().register_overlay
+		m_field_overlay_manager->register_overlay
 			(neighb,
 			 g_gr->images().get(name),
 			 7,
@@ -849,14 +851,15 @@ void InteractiveBase::roadb_remove_overlay()
 	//log("Remove overlay\n");
 
 	//  preview of the road
-	OverlayManager & overlay_manager = egbase().map().overlay_manager();
-	if (m_jobid)
-		overlay_manager.remove_road_overlay(m_jobid);
+	if (m_jobid) {
+		m_edge_overlay_manager->remove_overlay(m_jobid);
+	}
 	m_jobid = 0;
 
 	// build hints
-	if (m_road_buildhelp_overlay_jobid)
-		overlay_manager.remove_overlay(m_road_buildhelp_overlay_jobid);
+	if (m_road_buildhelp_overlay_jobid) {
+		m_field_overlay_manager->remove_overlay(m_road_buildhelp_overlay_jobid);
+	}
 	m_road_buildhelp_overlay_jobid = 0;
 }
 

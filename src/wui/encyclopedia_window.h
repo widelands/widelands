@@ -23,8 +23,8 @@
 #include <map>
 #include <memory>
 
-#include "logic/instances.h"
-#include "logic/tribes/tribe_descr.h"
+#include "logic/map_objects/map_object.h"
+#include "logic/map_objects/tribes/tribe_descr.h"
 #include "ui_basic/box.h"
 #include "ui_basic/listselect.h"
 #include "ui_basic/multilinetextarea.h"
