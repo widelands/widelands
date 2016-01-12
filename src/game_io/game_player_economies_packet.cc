@@ -26,8 +26,8 @@
 #include "io/filewrite.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
+#include "logic/map_objects/tribes/ship.h"
 #include "logic/player.h"
-#include "logic/ship.h"
 #include "logic/widelands_geometry_io.h"
 
 namespace Widelands {

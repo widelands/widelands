@@ -36,15 +36,17 @@ namespace  {
 constexpr int kBiggestAreaForCompactification = 250 * 250;
 
 }  // namespace
-ImageCache::ProxyImage::ProxyImage(std::unique_ptr<const Image> image) : image_(std::move(image)) {
+
+ImageCache::ProxyImage::ProxyImage(std::unique_ptr<const Image> original_image)
+   : image_(std::move(original_image)) {
 }
 
 const Image& ImageCache::ProxyImage::image() {
 	return *image_;
 }
 
-void ImageCache::ProxyImage::set_image(std::unique_ptr<const Image> image) {
-	image_ = std::move(image);
+void ImageCache::ProxyImage::set_image(std::unique_ptr<const Image> original_image) {
+	image_ = std::move(original_image);
 }
 
 int ImageCache::ProxyImage::width() const {

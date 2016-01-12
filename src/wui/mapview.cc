@@ -29,7 +29,6 @@
 #include "wui/interactive_base.h"
 #include "wui/interactive_player.h"
 #include "wui/mapviewpixelfunctions.h"
-#include "wui/overlay_manager.h"
 
 MapView::MapView(
    UI::Panel* parent, int32_t x, int32_t y, uint32_t w, uint32_t h, InteractiveBase& player)
@@ -85,8 +84,6 @@ void MapView::draw(RenderTarget & dst)
 		if (!game->is_loaded())
 			return;
 	}
-
-	egbase.map().overlay_manager().load_graphics();
 
 	if (upcast(InteractivePlayer const, interactive_player, &intbase())) {
 		m_renderer->rendermap(dst, egbase, m_viewpoint, interactive_player->player());
