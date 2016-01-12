@@ -53,9 +53,9 @@ public:
 		max_fy_ = maxfy;
 		w_ = max_fx_ - min_fx_ + 1;
 		h_ = max_fy_ - min_fy_ + 1;
-		const size_t size = w_ * h_;
-		if (fields_.size() != size) {
-			fields_.resize(size);
+		const size_t dimension = w_ * h_;
+		if (fields_.size() != dimension) {
+			fields_.resize(dimension);
 		}
 	}
 
