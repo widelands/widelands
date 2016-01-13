@@ -20,8 +20,8 @@
 #ifndef WL_ECONOMY_WAREHOUSESUPPLY_H
 #define WL_ECONOMY_WAREHOUSESUPPLY_H
 
-#include "logic/warelist.h"
-#include "logic/wareworker.h"
+#include "logic/map_objects/tribes/warelist.h"
+#include "logic/map_objects/tribes/wareworker.h"
 #include "economy/supply.h"
 
 namespace Widelands {
@@ -55,6 +55,7 @@ struct WarehouseSupply : public Supply {
 	// Supply implementation
 	PlayerImmovable * get_position(Game &) override;
 	bool is_active() const override;
+	SupplyProviders provider_type(Game *) const override;
 	bool has_storage() const override;
 	void get_ware_type(WareWorker & type, DescriptionIndex & ware) const override;
 

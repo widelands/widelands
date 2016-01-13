@@ -61,14 +61,14 @@ void MiniMap::View::set_view_pos(const int32_t x, const int32_t y)
 
 void MiniMap::View::draw(RenderTarget & dst)
 {
-	std::unique_ptr<Texture> texture(
+	minimap_image_ =
 	   draw_minimap(m_ibase.egbase(),
 	                m_ibase.get_player(),
 	                (*m_flags) & (MiniMapLayer::Zoom2) ?
 	                   Point((m_viewx - get_w() / 4), (m_viewy - get_h() / 4)) :
 	                   Point((m_viewx - get_w() / 2), (m_viewy - get_h() / 2)),
-	                *m_flags | MiniMapLayer::ViewWindow));
-	dst.blit(Point(), texture.get());
+	                *m_flags | MiniMapLayer::ViewWindow);
+	dst.blit(Point(), minimap_image_.get());
 }
 
 

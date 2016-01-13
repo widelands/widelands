@@ -23,11 +23,13 @@
 #include <map>
 #include <memory>
 #include <string>
+#include <vector>
 
 #include <boost/utility.hpp>
 
 #include "base/macros.h"
 #include "graphic/image.h"
+#include "graphic/texture_atlas.h"
 
 // For historic reasons, most part of the Widelands code base expect that an
 // Image stays valid for the whole duration of the program run. This class is
@@ -54,8 +56,27 @@ public:
 	bool has(const std::string& hash) const;
 
 private:
-	using ImageMap = std::map<std::string, std::unique_ptr<const Image>>;
+	// We return a wrapped Image so that we can swap out the pointer to the
+	// image under our user. This can happen when we move an Image from a stand
+	// alone texture into being a subrect of a texture atlas.
+	class ProxyImage : public Image {
+	public:
+		ProxyImage(std::unique_ptr<const Image> image);
 
+		const Image& image();
+		void set_image(std::unique_ptr<const Image> image);
+
+		int width() const override;
+		int height() const override;
+		const BlitData& blit_data() const override;
+
+	private:
+		std::unique_ptr<const Image> image_;
+	};
+
+	using ImageMap = std::map<std::string, std::unique_ptr<ProxyImage>>;
+
+	std::vector<std::unique_ptr<Texture>> texture_atlases_;
 	ImageMap images_;  /// hash of cached filename/image pairs
 
 	DISALLOW_COPY_AND_ASSIGN(ImageCache);

@@ -20,16 +20,51 @@
 
 #include <cassert>
 
+#include <SDL.h>
+
 #include "base/log.h"
 #include "base/macros.h"
 #include "base/wexception.h"
 #include "graphic/gl/blit_program.h"
+#include "graphic/gl/coordinate_conversion.h"
+#include "graphic/gl/draw_line_program.h"
+#include "graphic/gl/fill_rect_program.h"
 #include "graphic/gl/utils.h"
 #include "graphic/graphic.h"
 #include "graphic/sdl_utils.h"
 #include "graphic/surface.h"
 
 namespace  {
+
+namespace  {
+
+/**
+ * \return the standard 32-bit RGBA format that we use for our textures.
+ */
+const SDL_PixelFormat & rgba_format()
+{
+	static SDL_PixelFormat format;
+	static bool init = false;
+	if (init)
+		return format;
+
+	init = true;
+	memset(&format, 0, sizeof(format));
+	format.BitsPerPixel = 32;
+	format.BytesPerPixel = 4;
+	format.Rmask = 0x000000ff;
+	format.Gmask = 0x0000ff00;
+	format.Bmask = 0x00ff0000;
+	format.Amask = 0xff000000;
+	format.Rshift = 0;
+	format.Gshift = 8;
+	format.Bshift = 16;
+	format.Ashift = 24;
+	return format;
+}
+
+}  // namespace
+
 
 class GlFramebuffer {
 public:
@@ -68,11 +103,11 @@ Texture::Texture(int w, int h)
 {
 	init(w, h);
 
-	if (m_w <= 0 || m_h <= 0) {
+	if (width() <= 0 || height() <= 0) {
 		return;
 	}
 	glTexImage2D
-		(GL_TEXTURE_2D, 0, static_cast<GLint>(GL_RGBA), m_w, m_h, 0, GL_RGBA,
+		(GL_TEXTURE_2D, 0, static_cast<GLint>(GL_RGBA), width(), height(), 0, GL_RGBA,
 			GL_UNSIGNED_BYTE, nullptr);
 }
 
@@ -87,9 +122,9 @@ Texture::Texture(SDL_Surface * surface, bool intensity)
 	// use freetype directly we might be able to avoid that.
 	uint8_t bpp = surface->format->BytesPerPixel;
 
-	if (surface->format->palette || m_w != surface->w || m_h != surface->h ||
+	if (surface->format->palette || width() != surface->w || height() != surface->h ||
 	    (bpp != 3 && bpp != 4) || is_bgr_surface(*surface->format)) {
-		SDL_Surface* converted = empty_sdl_surface(m_w, m_h);
+		SDL_Surface* converted = empty_sdl_surface(width(), height());
 		assert(converted);
 		SDL_SetSurfaceAlphaMod(converted,  SDL_ALPHA_OPAQUE);
 		SDL_SetSurfaceBlendMode(converted, SDL_BLENDMODE_NONE);
@@ -105,8 +140,10 @@ Texture::Texture(SDL_Surface * surface, bool intensity)
 
 	SDL_LockSurface(surface);
 
+	Gl::swap_rows(width(), height(), surface->pitch, bpp, static_cast<uint8_t*>(surface->pixels));
+
 	glTexImage2D
-        (GL_TEXTURE_2D, 0, static_cast<GLint>(intensity ? GL_INTENSITY : GL_RGBA), m_w, m_h, 0,
+        (GL_TEXTURE_2D, 0, static_cast<GLint>(intensity ? GL_INTENSITY : GL_RGBA), width(), height(), 0,
 		 pixels_format, GL_UNSIGNED_BYTE, surface->pixels);
 
 	SDL_UnlockSurface(surface);
@@ -118,72 +155,54 @@ Texture::Texture(const GLuint texture, const Rect& subrect, int parent_w, int pa
 		throw wexception("Created a sub Texture with zero height and width parent.");
 	}
 
-	m_w = subrect.w;
-	m_h = subrect.h;
-
-	m_texture = texture;
 	m_owns_texture = false;
 
-	m_texture_coordinates.w = static_cast<float>(m_w - 1) / parent_w;
-	m_texture_coordinates.h = static_cast<float>(m_h - 1) / parent_h;
-	m_texture_coordinates.x = (static_cast<float>(subrect.x) + 0.5) / parent_w;
-	m_texture_coordinates.y = (static_cast<float>(subrect.y) + 0.5) / parent_h;
+	m_blit_data = BlitData {
+		texture,
+		parent_w, parent_h,
+		subrect,
+	};
 }
 
 Texture::~Texture()
 {
 	if (m_owns_texture) {
-		glDeleteTextures(1, &m_texture);
+		glDeleteTextures(1, &m_blit_data.texture_id);
 	}
 }
 
 int Texture::width() const {
-	return m_w;
+	return m_blit_data.rect.w;
 }
 
 int Texture::height() const {
-	return m_h;
-}
-
-int Texture::get_gl_texture() const {
-	return m_texture;
-}
-
-const FloatRect& Texture::texture_coordinates() const {
-	return m_texture_coordinates;
-}
-
-void Texture::pixel_to_gl(float* x, float* y) const {
-	*x = (*x / m_w) * 2. - 1.;
-	*y = (*y / m_h) * 2. - 1.;
+	return m_blit_data.rect.h;
 }
 
 void Texture::init(uint16_t w, uint16_t h)
 {
-	m_w = w;
-	m_h = h;
-	if (m_w <= 0 || m_h <= 0) {
+	m_blit_data = {
+		0, // initialized below
+		w, h,
+		Rect(0, 0, w, h),
+	};
+	if (width() <= 0 || height() <= 0) {
 		return;
 	}
 
 	m_owns_texture = true;
-	m_texture_coordinates.x = 0.f;
-	m_texture_coordinates.y = 0.f;
-	m_texture_coordinates.w = 1.f;
-	m_texture_coordinates.h = 1.f;
-
-	glGenTextures(1, &m_texture);
-	glBindTexture(GL_TEXTURE_2D, m_texture);
+	glGenTextures(1, &m_blit_data.texture_id);
+	glBindTexture(GL_TEXTURE_2D, m_blit_data.texture_id);
 
 	// set texture filter to use linear filtering. This looks nicer for resized
 	// texture. Most textures and images are not resized so the filtering
 	// makes no difference
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, static_cast<GLint>(GL_LINEAR));
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, static_cast<GLint>(GL_LINEAR));
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, static_cast<GLint>(GL_NEAREST));
 }
 
 void Texture::lock() {
-	if (m_w <= 0 || m_h <= 0) {
+	if (width() <= 0 || height() <= 0) {
 		return;
 	}
 
@@ -194,23 +213,23 @@ void Texture::lock() {
 		throw wexception("A surface that does not own its pixels can not be locked..");
 	}
 
-	m_pixels.reset(new uint8_t[m_w * m_h * 4]);
+	m_pixels.reset(new uint8_t[width() * height() * 4]);
 
-	glBindTexture(GL_TEXTURE_2D, m_texture);
+	glBindTexture(GL_TEXTURE_2D, m_blit_data.texture_id);
 	glGetTexImage(GL_TEXTURE_2D, 0, GL_RGBA, GL_UNSIGNED_BYTE, m_pixels.get());
 	glBindTexture(GL_TEXTURE_2D, 0);
 }
 
 void Texture::unlock(UnlockMode mode) {
-	if (m_w <= 0 || m_h <= 0) {
+	if (width() <= 0 || height() <= 0) {
 		return;
 	}
 	assert(m_pixels);
 
 	if (mode == Unlock_Update) {
-		glBindTexture(GL_TEXTURE_2D, m_texture);
+		glBindTexture(GL_TEXTURE_2D, m_blit_data.texture_id);
 		glTexImage2D
-            (GL_TEXTURE_2D, 0, static_cast<GLint>(GL_RGBA), m_w, m_h, 0, GL_RGBA,
+            (GL_TEXTURE_2D, 0, static_cast<GLint>(GL_RGBA), width(), height(), 0, GL_RGBA,
 			 GL_UNSIGNED_BYTE,  m_pixels.get());
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
@@ -218,40 +237,75 @@ void Texture::unlock(UnlockMode mode) {
 	m_pixels.reset(nullptr);
 }
 
-uint8_t * Texture::get_pixels() const
-{
-	return m_pixels.get();
-}
-
-uint32_t Texture::get_pixel(uint16_t x, uint16_t y) {
+RGBAColor Texture::get_pixel(uint16_t x, uint16_t y) {
 	assert(m_pixels);
-	assert(x < m_w);
-	assert(y < m_h);
+	assert(x < width());
+	assert(y < height());
 
-	uint8_t * data = &m_pixels[y * get_pitch() + 4 * x];
-	return *(reinterpret_cast<uint32_t *>(data));
+	RGBAColor color;
+
+	SDL_GetRGBA(*reinterpret_cast<uint32_t*>(&m_pixels[(height() - y - 1) * 4 * width() + 4 * x]),
+	            &rgba_format(),
+	            &color.r,
+	            &color.g,
+	            &color.b,
+	            &color.a);
+	return color;
 }
 
-uint16_t Texture::get_pitch() const {
-	return 4 * m_w;
-}
-
-const SDL_PixelFormat & Texture::format() const {
-	return Gl::gl_rgba_format();
-}
-
-
-void Texture::set_pixel(uint16_t x, uint16_t y, uint32_t clr) {
+void Texture::set_pixel(uint16_t x, uint16_t y, const RGBAColor& color) {
 	assert(m_pixels);
-	assert(x < m_w);
-	assert(y < m_h);
+	assert(x < width());
+	assert(y < height());
 
-	uint8_t * data = &m_pixels[y * get_pitch() + 4 * x];
-	*(reinterpret_cast<uint32_t *>(data)) = clr;
+	uint8_t* data = &m_pixels[(height() - y - 1) * 4 * width() + 4 * x];
+	uint32_t packed_color = SDL_MapRGBA(&rgba_format(), color.r, color.g, color.b, color.a);
+	*(reinterpret_cast<uint32_t *>(data)) = packed_color;
 }
 
 
 void Texture::setup_gl() {
 	glBindFramebuffer(GL_FRAMEBUFFER, GlFramebuffer::instance().id());
-	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, m_texture, 0);
+	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, m_blit_data.texture_id, 0);
+	glViewport(0, 0, width(), height());
+}
+
+void Texture::do_blit(const FloatRect& dst_rect,
+                     const BlitData& texture,
+                     float opacity,
+                     BlendMode blend_mode) {
+	setup_gl();
+	VanillaBlitProgram::instance().draw(dst_rect, 0.f, texture, opacity, blend_mode);
+}
+
+void Texture::do_blit_blended(const FloatRect& dst_rect,
+                              const BlitData& texture,
+                              const BlitData& mask,
+                              const RGBColor& blend) {
+
+	setup_gl();
+	BlendedBlitProgram::instance().draw(dst_rect, 0.f, texture, mask, blend);
+}
+
+void Texture::do_blit_monochrome(const FloatRect& dst_rect,
+                                 const BlitData& texture,
+                                 const RGBAColor& blend) {
+	setup_gl();
+	MonochromeBlitProgram::instance().draw(dst_rect, 0.f, texture, blend);
+}
+
+void
+Texture::do_draw_line(const FloatPoint& start, const FloatPoint& end, const RGBColor& color, int line_width) {
+	setup_gl();
+	DrawLineProgram::instance().draw(start, end, 0.f, color, line_width);
+}
+
+void
+Texture::do_fill_rect(const FloatRect& dst_rect, const RGBAColor& color, BlendMode blend_mode) {
+	setup_gl();
+	FillRectProgram::instance().draw(dst_rect, 0.f, color, blend_mode);
+}
+
+const BlitData& Texture::blit_data() const {
+	return m_blit_data;
 }

@@ -21,8 +21,6 @@
 #include <memory>
 #include <string>
 
-#include <SDL_video.h>
-
 #include "base/log.h"
 #include "base/wexception.h"
 
@@ -41,39 +39,7 @@ std::string shader_to_string(GLenum type) {
 	return "unknown";
 }
 
-// Creates one OpenGL buffer.
-GLuint create_buffer() {
-	GLuint buffer = 0;
-	glGenBuffers(1, &buffer);
-	return buffer;
-}
-
 }  // namespace
-
-/**
- * \return the standard 32-bit RGBA format that we use in OpenGL
- */
-const SDL_PixelFormat & gl_rgba_format()
-{
-	static SDL_PixelFormat format;
-	static bool init = false;
-	if (init)
-		return format;
-
-	init = true;
-	memset(&format, 0, sizeof(format));
-	format.BitsPerPixel = 32;
-	format.BytesPerPixel = 4;
-	format.Rmask = 0x000000ff;
-	format.Gmask = 0x0000ff00;
-	format.Bmask = 0x00ff0000;
-	format.Amask = 0xff000000;
-	format.Rshift = 0;
-	format.Gshift = 8;
-	format.Bshift = 16;
-	format.Ashift = 24;
-	return format;
-}
 
 GLenum _handle_glerror(const char * file, unsigned int line)
 {
@@ -162,18 +128,6 @@ void Shader::compile(const char* source) {
 	}
 }
 
-Buffer::Buffer() : buffer_object_(create_buffer()) {
-	if (!buffer_object_) {
-		throw wexception("Could not create GL program.");
-	}
-}
-
-Buffer::~Buffer() {
-	if (buffer_object_) {
-		glDeleteBuffers(1, &buffer_object_);
-	}
-}
-
 Program::Program() : program_object_(glCreateProgram()) {
 	if (!program_object_) {
 		throw wexception("Could not create GL program.");
@@ -209,6 +163,23 @@ void Program::build(const char* vertex_shader_source, const char* fragment_shade
 			glGetProgramInfoLog(program_object_, infoLen, NULL, infoLog.get());
 			throw wexception("Error linking:\n%s", infoLog.get());
 		}
+	}
+}
+
+void vertex_attrib_pointer(int vertex_index, int num_items, int stride, int offset) {
+	glVertexAttribPointer(
+	   vertex_index, num_items, GL_FLOAT, GL_FALSE, stride, reinterpret_cast<void*>(offset));
+}
+
+void swap_rows(const int width, const int height, const int pitch, const int bpp, uint8_t* pixels) {
+	uint8_t* begin_row = pixels;
+	uint8_t* end_row = pixels + pitch * (height - 1);
+	while (begin_row < end_row) {
+		for (int x = 0; x < width * bpp; ++x) {
+			std::swap(begin_row[x], end_row[x]);
+		}
+		begin_row += pitch;
+		end_row -= pitch;
 	}
 }
 

@@ -21,9 +21,9 @@
 
 #include "base/macros.h"
 #include "economy/flag.h"
-#include "logic/attackable.h"
-#include "logic/immovable.h"
-#include "logic/militarysite.h"
+#include "logic/map_objects/attackable.h"
+#include "logic/map_objects/immovable.h"
+#include "logic/map_objects/tribes/militarysite.h"
 
 namespace Widelands {
 

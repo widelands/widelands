@@ -24,7 +24,7 @@
 #include <boost/function.hpp>
 #include <stdint.h>
 
-#include "logic/wareworker.h"
+#include "logic/map_objects/tribes/wareworker.h"
 
 namespace Widelands {
 class ITransportCostCalculator;

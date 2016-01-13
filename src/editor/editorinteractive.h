@@ -122,7 +122,6 @@ public:
 	void set_need_save(bool const t) {m_need_save = t;}
 
 private:
-	void toggle_buildhelp();
 	void tool_menu_btn();
 	void toolsize_menu_btn();
 	void toggle_mainmenu();

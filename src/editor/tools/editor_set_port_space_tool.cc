@@ -21,17 +21,16 @@
 
 #include "editor/editorinteractive.h"
 #include "editor/tools/editor_tool.h"
-#include "logic/building.h"
 #include "logic/map.h"
+#include "logic/map_objects/tribes/building.h"
 #include "logic/mapfringeregion.h"
 #include "logic/mapregion.h"
-#include "wui/overlay_manager.h"
 
 using namespace Widelands;
 
 /// static callback function for overlay calculation
 int32_t editor_Tool_set_port_space_callback
-	(const Widelands::TCoords<Widelands::FCoords>& c, Map& map)
+	(const Widelands::TCoords<Widelands::FCoords>& c, const Map& map)
 {
 	NodeCaps const caps = c.field->nodecaps();
 	FCoords f = map.get_fcoords(*c.field);
@@ -55,72 +54,72 @@ EditorUnsetPortSpaceTool::EditorUnsetPortSpaceTool()
 	EditorTool(*this, *this)
 {}
 
-int32_t EditorSetPortSpaceTool::handle_click_impl(Map& map,
-                                                      const Widelands::World& world,
-                                                      Widelands::NodeAndTriangle<> const center,
-                                                      EditorInteractive&,
-                                                      EditorActionArgs& args) {
+int32_t EditorSetPortSpaceTool::handle_click_impl(const Widelands::World& world,
+                                                  Widelands::NodeAndTriangle<> const center,
+                                                  EditorInteractive&,
+                                                  EditorActionArgs* args,
+												  Map* map) {
 	assert(0 <= center.node.x);
-	assert(center.node.x < map.get_width());
+	assert(center.node.x < map->get_width());
 	assert(0 <= center.node.y);
-	assert(center.node.y < map.get_height());
+	assert(center.node.y < map->get_height());
 
 	uint32_t nr = 0;
 
 	Widelands::MapRegion<Widelands::Area<Widelands::FCoords> > mr
-		(map, Widelands::Area<Widelands::FCoords>(map.get_fcoords(center.node), args.sel_radius));
+		(*map, Widelands::Area<Widelands::FCoords>(map->get_fcoords(center.node), args->sel_radius));
 	do {
 		//  check if field is valid
-		if (editor_Tool_set_port_space_callback(mr.location(), map)) {
-			map.set_port_space(mr.location(), true);
+		if (editor_Tool_set_port_space_callback(mr.location(), *map)) {
+			map->set_port_space(mr.location(), true);
 			Area<FCoords> a(mr.location(), 0);
-			map.recalc_for_field_area(world, a);
+			map->recalc_for_field_area(world, a);
 			++nr;
 		}
-	} while (mr.advance(map));
+	} while (mr.advance(*map));
 
 	return nr;
 }
 
-int32_t EditorSetPortSpaceTool::handle_undo_impl(Map& map,
-                                                     const Widelands::World& world,
-                                                     NodeAndTriangle<Coords> center,
-                                                     EditorInteractive& parent,
-                                                     EditorActionArgs& args) {
-	return parent.tools.unset_port_space.handle_click_impl(map, world, center, parent, args);
+int32_t EditorSetPortSpaceTool::handle_undo_impl(const Widelands::World& world,
+                                                 NodeAndTriangle<Coords> center,
+                                                 EditorInteractive& parent,
+                                                 EditorActionArgs* args,
+												 Map* map) {
+	return parent.tools.unset_port_space.handle_click_impl(world, center, parent, args, map);
 }
 
-int32_t EditorUnsetPortSpaceTool::handle_click_impl(Map& map,
-                                                        const Widelands::World& world,
-                                                        NodeAndTriangle<> const center,
-                                                        EditorInteractive&,
-                                                        EditorActionArgs& args) {
+int32_t EditorUnsetPortSpaceTool::handle_click_impl(const Widelands::World& world,
+                                                    NodeAndTriangle<> const center,
+                                                    EditorInteractive&,
+                                                    EditorActionArgs* args,
+													Map* map) {
 	assert(0 <= center.node.x);
-	assert(center.node.x < map.get_width());
+	assert(center.node.x < map->get_width());
 	assert(0 <= center.node.y);
-	assert(center.node.y < map.get_height());
+	assert(center.node.y < map->get_height());
 
 	uint32_t nr = 0;
 
 	Widelands::MapRegion<Widelands::Area<Widelands::FCoords> > mr
-		(map, Widelands::Area<Widelands::FCoords>(map.get_fcoords(center.node), args.sel_radius));
+		(*map, Widelands::Area<Widelands::FCoords>(map->get_fcoords(center.node), args->sel_radius));
 	do {
 		//  check if field is valid
-		if (editor_Tool_set_port_space_callback(mr.location(), map)) {
-			map.set_port_space(mr.location(), false);
+		if (editor_Tool_set_port_space_callback(mr.location(), *map)) {
+			map->set_port_space(mr.location(), false);
 			Area<FCoords> a(mr.location(), 0);
-			map.recalc_for_field_area(world, a);
+			map->recalc_for_field_area(world, a);
 			++nr;
 		}
-	} while (mr.advance(map));
+	} while (mr.advance(*map));
 
 	return nr;
 }
 
-int32_t EditorUnsetPortSpaceTool::handle_undo_impl(Map& map,
-                                                       const Widelands::World& world,
-                                                       NodeAndTriangle<Coords> center,
-                                                       EditorInteractive& parent,
-                                                       EditorActionArgs& args) {
-	return parent.tools.set_port_space.handle_click_impl(map, world, center, parent, args);
+int32_t EditorUnsetPortSpaceTool::handle_undo_impl(const Widelands::World& world,
+                                                   NodeAndTriangle<Coords> center,
+                                                   EditorInteractive& parent,
+                                                   EditorActionArgs* args,
+												   Map* map) {
+	return parent.tools.set_port_space.handle_click_impl(world, center, parent, args, map);
 }

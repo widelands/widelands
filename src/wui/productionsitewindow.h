@@ -21,7 +21,7 @@
 #define WL_WUI_PRODUCTIONSITEWINDOW_H
 
 #include "wui/buildingwindow.h"
-#include "logic/productionsite.h"
+#include "logic/map_objects/tribes/productionsite.h"
 #include "ui_basic/table.h"
 
 struct ProductionSiteWindow : public BuildingWindow {

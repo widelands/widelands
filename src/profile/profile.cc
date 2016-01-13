@@ -36,9 +36,7 @@
 #include "build_info.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
-#include "logic/player.h"
-#include "logic/tribes/tribe_descr.h"
-#include "logic/world/world.h"
+
 
 #define TRUE_WORDS 7
 static char const * trueWords[TRUE_WORDS] =

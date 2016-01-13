@@ -25,6 +25,7 @@
 #include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
+#include "graphic/text/bidi.h"
 #include "graphic/text/font_set.h"
 #include "graphic/text_constants.h"
 #include "graphic/text_layout.h"
@@ -281,8 +282,8 @@ void Table<void *>::draw(RenderTarget & dst)
 
 		Columns::size_type const nr_columns = m_columns.size();
 		for (uint32_t i = 0, curx = 0; i < nr_columns; ++i) {
-			const Column & column    = m_columns[i];
-			uint32_t const curw      = column.width;
+			const Column& column = m_columns[i];
+			int const curw  = column.width;
 			Align alignment = mirror_alignment(column.alignment);
 
 			const Image* entry_picture = er.get_picture(i);
@@ -314,20 +315,23 @@ void Table<void *>::draw(RenderTarget & dst)
 						}
 					}
 
+					if (alignment & Align_Right) {
+						draw_x += curw - blit_width;
+					}
+
 					// Temporary texture for the scaled image
 					Texture* scaled_texture = new Texture(blit_width, max_pic_height);
 
 					// Initialize the rectangle
-					::fill_rect(Rect(0, 0, blit_width, max_pic_height),
-									RGBAColor(255, 255, 255, 0), scaled_texture);
+					scaled_texture->fill_rect(Rect(0, 0, blit_width, max_pic_height),
+									RGBAColor(255, 255, 255, 0));
 
 					// Create the scaled image
-					::blit(Rect(0, 0, blit_width, max_pic_height),
+					scaled_texture->blit(Rect(0, 0, blit_width, max_pic_height),
 							 *entry_picture,
 							 Rect(0, 0, picw, pich),
 							 1.,
-							 BlendMode::UseAlpha,
-							 scaled_texture);
+							 BlendMode::UseAlpha);
 
 					// This will now blit with any appropriate cropping
 					dst.blit(Point(draw_x, point.y + 1), scaled_texture);
@@ -341,11 +345,15 @@ void Table<void *>::draw(RenderTarget & dst)
 						} else {
 							draw_x = point.x + (curw - picw) / 2;
 						}
+					} else if (alignment & Align_Right) {
+						draw_x += curw - picw;
 					}
 					dst.blit(Point(draw_x, point.y + (lineheight - pich) / 2), entry_picture);
 				}
 				point.x += picw;
 			}
+
+			++picw; // A bit of margin between image and text
 
 			if (entry_string.empty()) {
 				curx += curw;
@@ -354,19 +362,36 @@ void Table<void *>::draw(RenderTarget & dst)
 			const Image* entry_text_im = UI::g_fh1->render(as_uifont(entry_string, m_fontsize));
 
 			if (alignment & Align_Right) {
-				point.x += curw - picw;
+				point.x += curw - 2 * picw;
 			} else if (alignment & Align_HCenter) {
 				point.x += (curw - picw) / 2;
 			}
 
 			// Add an offset for rightmost column when the scrollbar is shown.
-			uint16_t text_width = entry_text_im->width();
+			int text_width = entry_text_im->width();
 			if (i == nr_columns - 1 && m_scrollbar->is_enabled()) {
 				text_width = text_width + m_scrollbar->get_w();
 			}
 			UI::correct_for_align(alignment, text_width, entry_text_im->height(), &point);
-			// Crop to column width
-			dst.blitrect(point, entry_text_im, Rect(0, 0, curw - picw, lineheight));
+
+			// Crop to column width while blitting
+			if ((curw + picw) < text_width) {
+				// Fix positioning for BiDi languages.
+				if (UI::g_fh1->fontset().is_rtl()) {
+					point.x = alignment & Align_Right ? curx : curx + picw;
+				}
+				// We want this always on, e.g. for mixed language savegame filenames
+				if (i18n::has_rtl_character(entry_string.c_str(), 20)) { // Restrict check for efficiency
+					dst.blitrect(point,
+									 entry_text_im,
+									 Rect(text_width - curw + picw, 0, text_width, lineheight));
+				}
+				else {
+					dst.blitrect(point, entry_text_im, Rect(0, 0, curw - picw, lineheight));
+				}
+			} else {
+				dst.blitrect(point, entry_text_im, Rect(0, 0, curw - picw, lineheight));
+			}
 			curx += curw;
 		}
 

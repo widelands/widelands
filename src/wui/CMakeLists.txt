@@ -21,14 +21,23 @@ wl_library(wui_chat_ui
     wui
 )
 
-wl_library(wui_overlay_manager
+wl_library(wui_field_overlay_manager
   SRCS
-    overlay_manager.cc
-    overlay_manager.h
+    field_overlay_manager.cc
+    field_overlay_manager.h
   DEPENDS
     base_geometry
     graphic
     logic
+    logic_widelands_geometry
+)
+
+wl_library(wui_edge_overlay_manager
+  SRCS
+    edge_overlay_manager.cc
+    edge_overlay_manager.h
+  DEPENDS
+    base_macros
     logic_widelands_geometry
 )
 
@@ -163,6 +172,7 @@ wl_library(wui
     watchwindow.h
   USES_SDL2
   DEPENDS
+    ai
     base_exceptions
     base_geometry
     base_i18n
@@ -195,6 +205,7 @@ wl_library(wui
     ui_fsmenu
     widelands_ball_of_mud
     wui_chat_ui
+    wui_edge_overlay_manager
+    wui_field_overlay_manager
     wui_mapview_pixelfunctions
-    wui_overlay_manager
 )

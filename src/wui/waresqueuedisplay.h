@@ -24,8 +24,8 @@
 
 #include <stdint.h>
 
-#include "logic/ware_descr.h"
-#include "logic/wareworker.h"
+#include "logic/map_objects/tribes/ware_descr.h"
+#include "logic/map_objects/tribes/wareworker.h"
 #include "ui_basic/button.h"
 #include "ui_basic/panel.h"
 #include "ui_basic/radiobutton.h"
