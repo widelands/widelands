@@ -360,17 +360,21 @@ void Tribes::load_graphics()
 		}
 	}
 
-	std::vector<std::unique_ptr<Texture>> textures;
-	road_texture_ = ta.pack(&textures);
+	std::vector<TextureAtlas::PackedTexture> packed_texture;
+	std::vector<std::unique_ptr<Texture>> texture_atlases;
+	ta.pack(1024, &texture_atlases, &packed_texture);
+
+	assert(texture_atlases.size() == 1);
+	road_texture_ = std::move(texture_atlases[0]);
 
 	size_t next_texture_to_move = 0;
 	for (size_t tribeindex = 0; tribeindex < nrtribes(); ++tribeindex) {
 		TribeDescr* tribe = tribes_->get_mutable(tribeindex);
 		for (size_t i = 0; i < tribe->normal_road_paths().size(); ++i) {
-			tribe->add_normal_road_texture(std::move(textures.at(next_texture_to_move++)));
+			tribe->add_normal_road_texture(std::move(packed_texture.at(next_texture_to_move++).texture));
 		}
 		for (size_t i = 0; i < tribe->busy_road_paths().size(); ++i) {
-			tribe->add_busy_road_texture(std::move(textures.at(next_texture_to_move++)));
+			tribe->add_busy_road_texture(std::move(packed_texture.at(next_texture_to_move++).texture));
 		}
 	}
 }

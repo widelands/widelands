@@ -30,6 +30,26 @@
 // http://codeincomplete.com/posts/2011/5/7/bin_packing/.
 class TextureAtlas {
 public:
+	struct PackedTexture {
+		PackedTexture() : texture_atlas(-1), texture(nullptr), index_(-1) {}
+
+		// The index of the returned texture atlas that contains this image.
+		int texture_atlas;
+
+		// The newly packed texture.
+		std::unique_ptr<Texture> texture;
+
+	private:
+		friend class TextureAtlas;
+
+		PackedTexture(int init_texture_atlas, int index, std::unique_ptr<Texture> init_texture)
+		   : texture_atlas(init_texture_atlas), texture(std::move(init_texture)), index_(index) {
+		}
+
+		// The position the images was 'add'()ed into the packing queue. Purely internal.
+		int index_;
+	};
+
 	TextureAtlas();
 
 	// Add 'texture' as one of the textures to be packed. Ownership is
@@ -37,10 +57,13 @@ public:
 	// called.
 	void add(const Image& texture);
 
-	// Packs the textures and returns the packed texture. 'textures'
-	// contains the individual sub textures (that do not own their
-	// memory) in the order they have been added by 'add'.
-	std::unique_ptr<Texture> pack(std::vector<std::unique_ptr<Texture>>* textures);
+	// Packs the textures into as many texture atlases as needed, so that none
+	// of them will be larger than 'max_dimension' x 'max_dimension'. The
+	// returned 'textures' contains the individual sub textures (that do not own
+	// their memory) in the order they have been added by 'add'.
+	void pack(int max_dimension,
+	          std::vector<std::unique_ptr<Texture>>* texture_atlases,
+	          std::vector<PackedTexture>* textures);
 
 private:
 	struct Node {
@@ -57,14 +80,24 @@ private:
 
 	struct Block {
 		Block(int init_index, const Image* init_texture)
-		   : index(init_index), texture(init_texture) {
+		   : index(init_index), texture(init_texture), done(false) {
 		}
 
+		// The index in the order the blocks have been added.
 		int index;
 		const Image* texture;
 		Node* node;
+
+		// True if this block has already been packed into a texture atlas.
+		bool done;
 	};
 
+	// Packs as many blocks from 'blocks_' that still have done = false into a
+	// fresh texture atlas that will not grow bigger than 'max_size' x
+	// 'max_size'.
+	std::unique_ptr<Texture> pack_as_many_as_possible(const int max_dimension,
+	                                                  const int texture_atlas_index,
+	                                                  std::vector<PackedTexture>* pack_info);
 	static Node* find_node(Node* root, int w, int h);
 
 	int next_index_;
