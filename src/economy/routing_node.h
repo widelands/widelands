@@ -23,7 +23,7 @@
 #include <vector>
 
 #include "logic/cookie_priority_queue.h"
-#include "logic/wareworker.h"
+#include "logic/map_objects/tribes/wareworker.h"
 #include "logic/widelands_geometry.h"
 
 namespace Widelands {

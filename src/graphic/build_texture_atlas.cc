@@ -66,7 +66,7 @@ struct PackInfo {
 	Rect rect;
 };
 
-// Returns true if 'filename' is ends with a image extension.
+// Returns true if 'filename' ends with an image extension.
 bool is_image(const std::string& filename) {
 	return boost::ends_with(filename, ".png") || boost::ends_with(filename, ".jpg");
 }
@@ -212,9 +212,9 @@ void make_texture_atlas(const int max_size) {
 	// atlas, so that OpenGL texture switches do not happen during (for example)
 	// terrain or road rendering. To ensure this, we separate all images into
 	// two disjunct sets. We than pack all images that should go into the first
-	// texture atlas into a texture atlas. Than, we pack all remaining textures
+	// texture atlas into a texture atlas. Then, we pack all remaining textures
 	// into a texture atlas, but including the first texture atlas as a singular
-	// image (which will probaby be the biggest we allow).
+	// image (which will probably be the biggest we allow).
 	//
 	// We have to adjust the sub rectangle rendering for the images in the first
 	// texture atlas in 'pack_info' later, before dumping the results.
@@ -232,10 +232,8 @@ void make_texture_atlas(const int max_size) {
 	// TODO(sirver): having all assets in an assets/ sub directory would future
 	// proof this a bit better.
 	find_images("campaigns", &all_images, &other_images);
-	find_images("pics", &all_images, &other_images);
 	find_images("tribes", &all_images, &other_images);
 	find_images("world", &all_images, &other_images);
-
 
 	assert(images_that_must_be_in_first_atlas.size() + other_images.size() == all_images.size());
 

@@ -68,7 +68,6 @@
 #include "logic/replay_game_controller.h"
 #include "logic/single_player_game_controller.h"
 #include "logic/single_player_game_settings_provider.h"
-#include "logic/tribes/tribe_descr.h"
 #include "map_io/map_loader.h"
 #include "network/internet_gaming.h"
 #include "network/netclient.h"

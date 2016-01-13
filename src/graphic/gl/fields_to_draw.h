@@ -26,7 +26,7 @@
 
 #include <stdint.h>
 
-#include "logic/road_textures.h"
+#include "logic/map_objects/tribes/road_textures.h"
 
 // Helper struct that contains the data needed for drawing all fields. All
 // methods are inlined for performance reasons.
@@ -53,9 +53,9 @@ public:
 		max_fy_ = maxfy;
 		w_ = max_fx_ - min_fx_ + 1;
 		h_ = max_fy_ - min_fy_ + 1;
-		const size_t container_size = w_ * h_;
-		if (fields_.size() != container_size) {
-			fields_.resize(container_size);
+		const size_t dimension = w_ * h_;
+		if (fields_.size() != dimension) {
+			fields_.resize(dimension);
 		}
 	}
 

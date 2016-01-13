@@ -22,8 +22,8 @@
 #include "base/i18n.h"
 #include "base/log.h"
 #include "logic/game_settings.h"
+#include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/player.h"
-#include "logic/tribes/tribe_descr.h"
 
 
 /// Toggle through the types

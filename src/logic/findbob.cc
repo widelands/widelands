@@ -20,8 +20,8 @@
 #include "logic/findbob.h"
 
 #include "base/macros.h"
+#include "logic/map_objects/tribes/soldier.h"
 #include "logic/player.h"
-#include "logic/soldier.h"
 
 namespace Widelands {
 

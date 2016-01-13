@@ -40,5 +40,4 @@ wl_library(game_io
     scripting_lua_table
     wui
     wui_mapview_pixelfunctions
-    wui_overlay_manager
 )

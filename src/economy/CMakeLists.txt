@@ -6,6 +6,8 @@ wl_library(economy
     economy.h
     economy_data_packet.cc
     economy_data_packet.h
+    expedition_bootstrap.cc
+    expedition_bootstrap.h
     flag.cc
     flag.h
     fleet.cc

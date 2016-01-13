@@ -20,11 +20,11 @@
 #include "editor/tools/editor_place_bob_tool.h"
 
 #include "editor/editorinteractive.h"
-#include "logic/bob.h"
 #include "logic/editor_game_base.h"
 #include "logic/field.h"
+#include "logic/map_objects/bob.h"
+#include "logic/map_objects/world/world.h"
 #include "logic/mapregion.h"
-#include "logic/world/world.h"
 
 /**
  * Choses an object to place randomly from all enabled
