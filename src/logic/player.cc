@@ -194,9 +194,9 @@ Player::Player
 			}
 		});
 
-	// Subscribe to NoteFieldTransformed.
-	field_transformed_subscriber_ =
-		Notifications::subscribe<NoteFieldTransformed>([this](const NoteFieldTransformed& note) {
+	// Subscribe to NoteFieldTerrainChanged.
+	field_terrain_changed_subscriber_ =
+		Notifications::subscribe<NoteFieldTerrainChanged>([this](const NoteFieldTerrainChanged& note) {
 			if (vision(note.map_index) > 1) {
 				rediscover_node(egbase().map(), egbase().map()[0], note.fc);
 			}

@@ -62,6 +62,27 @@ void load_all_tribes(Widelands::EditorGameBase* egbase, UI::ProgressWindow* load
 	egbase->tribes();
 }
 
+// Updates the resources overlays after a field has changed.
+void update_resource_overlay(const Widelands::NoteFieldResourceChanged& note,
+                             const Widelands::World& world,
+                             FieldOverlayManager* field_overlay_manager) {
+	//  Ok, we're doing something. First remove the current overlays.
+	if (note.old_resource != Widelands::kNoResource) {
+		const std::string str =
+		   world.get_resource(note.old_resource)->get_editor_pic(note.old_amount);
+		const Image* pic = g_gr->images().get(str);
+		field_overlay_manager->remove_overlay(note.fc, pic);
+	}
+
+	const auto amount = note.fc.field->get_resources_amount();
+	if (amount > 0) {
+		const std::string str =
+		   world.get_resource(note.fc.field->get_resources())->get_editor_pic(amount);
+		const Image* pic = g_gr->images().get(str);
+		field_overlay_manager->register_overlay(note.fc, pic, 0);
+	}
+}
+
 }  // namespace
 
 EditorInteractive::EditorInteractive(Widelands::EditorGameBase & e) :
@@ -134,6 +155,13 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase & e) :
 #endif
 
 	fieldclicked.connect(boost::bind(&EditorInteractive::map_clicked, this, false));
+
+	// Subscribe to changes of the resource type on a field..
+	field_resource_changed_subscriber_ =
+	   Notifications::subscribe<Widelands::NoteFieldResourceChanged>(
+	      [this](const Widelands::NoteFieldResourceChanged& note) {
+		      update_resource_overlay(note, egbase().world(), mutable_field_overlay_manager());
+		   });
 }
 
 void EditorInteractive::register_overlays() {

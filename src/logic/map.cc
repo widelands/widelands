@@ -250,11 +250,9 @@ void Map::recalc_default_resources(const World& world) {
 			amount /= 6;
 
 			if (res == -1 || !amount) {
-				f.field->set_resources(Widelands::kNoResource, 0);
-				f.field->set_initial_res_amount(0);
+				clear_resources(f);
 			} else {
-				f.field->set_resources(res, amount);
-				f.field->set_initial_res_amount(amount);
+				initialize_resources(f, res, amount);
 			}
 
 		}
@@ -322,12 +320,13 @@ void Map::create_empty_map
 		Field::Terrains default_terrains;
 		default_terrains.d = default_terrain;
 		default_terrains.r = default_terrain;
-		Field * field = m_fields.get();
-		const Field * const fields_end = field + max_index();
-		for (; field < fields_end; ++field) {
-			field->set_height(10);
-			field->set_terrains(default_terrains);
-			field->set_resources(Widelands::kNoResource, 0);
+		for (int16_t y = 0; y < m_height; ++y) {
+			for (int16_t x = 0; x < m_width; ++x) {
+				auto f = get_fcoords(Coords(x, y));
+				f.field->set_height(10);
+				f.field->set_terrains(default_terrains);
+				clear_resources(f);
+			}
 		}
 	}
 	recalc_whole_map(world);
@@ -1837,24 +1836,25 @@ int32_t Map::change_terrain
 	// remove invalid resources if necessary
 	// check vertex to which the triangle belongs
 	if (!is_resource_valid(world, c, c.field->get_resources())){
-		c.field->set_resources(Widelands::kNoResource, 0);
+		clear_resources(c);
 	}
 
 	// always check south-east vertex
 	Widelands::FCoords f_se(c, c.field);
 	get_neighbour(f_se, Widelands::WALK_SE, &f_se);
 	if (!is_resource_valid(world, f_se, f_se.field->get_resources())){
-		f_se.field->set_resources(Widelands::kNoResource, 0);
+		clear_resources(f_se);
 	}
 
 	// check south-west vertex if d-Triangle is changed, check east vertex if r-Triangle is changed
 	Widelands::FCoords f_sw_e(c, c.field);
 	get_neighbour(f_sw_e, c.t == TCoords<FCoords>::D ? Widelands::WALK_SW : Widelands::WALK_E, &f_sw_e);
 	if (!is_resource_valid(world, f_sw_e, f_sw_e.field->get_resources())){
-		f_sw_e.field->set_resources(Widelands::kNoResource, 0);
+		clear_resources(f_sw_e);
 	}
 
-	Notifications::publish(NoteFieldTransformed(c, c.field - &m_fields[0]));
+	Notifications::publish(
+	   NoteFieldTerrainChanged{c, static_cast<MapIndex>(c.field - &m_fields[0])});
 
 	recalc_for_field_area(world, Area<FCoords>(c, 2));
 
@@ -1895,11 +1895,40 @@ bool Map::is_resource_valid
 
 void Map::ensure_resource_consistency(const World& world)
 {
-	for (MapIndex i = 0; i < max_index(); ++i)
-		if (!is_resource_valid(world, get_fcoords(m_fields[i]), m_fields[i].get_resources()))
-			m_fields[i].set_resources(Widelands::kNoResource, 0);
+	for (MapIndex i = 0; i < max_index(); ++i) {
+		auto fcords = get_fcoords(m_fields[i]);
+		if (!is_resource_valid(world, fcords, fcords.field->get_resources())) {
+			clear_resources(fcords);
+		}
+	}
 }
 
+void Map::initialize_resources(const FCoords& c,
+                               const DescriptionIndex resource_type,
+                               const uint8_t amount) {
+	const auto note = NoteFieldResourceChanged{
+	   c, c.field->m_resources, c.field->m_initial_res_amount, c.field->m_res_amount,
+	};
+
+	c.field->m_resources = resource_type;
+	c.field->m_initial_res_amount = amount;
+	c.field->m_res_amount = amount;
+	Notifications::publish(note);
+}
+
+void Map::set_resources(const FCoords& c, uint8_t amount) {
+	assert(c.field->m_resources != Widelands::kNoResource);
+	assert(amount <= c.field->m_initial_res_amount);
+	const auto note = NoteFieldResourceChanged{
+	   c, c.field->m_resources, c.field->m_initial_res_amount, c.field->m_res_amount,
+	};
+	c.field->m_res_amount = amount;
+	Notifications::publish(note);
+}
+
+void Map::clear_resources(const FCoords& c) {
+	initialize_resources(c, Widelands::kNoResource, 0);
+}
 
 uint32_t Map::set_height(const World& world, const FCoords fc, uint8_t const new_value) {
 	assert(new_value <= MAX_FIELD_HEIGHT);

@@ -36,7 +36,7 @@
 */
 int32_t EditorDecreaseResourcesTool::handle_click_impl(const Widelands::World& world,
                                                        Widelands::NodeAndTriangle<> const center,
-                                                       EditorInteractive& parent,
+                                                       EditorInteractive& /* parent */,
                                                        EditorActionArgs* args,
                                                        Widelands::Map* map) {
 	Widelands::MapRegion<Widelands::Area<Widelands::FCoords> > mr
@@ -54,8 +54,7 @@ int32_t EditorDecreaseResourcesTool::handle_click_impl(const Widelands::World& w
 			map->is_resource_valid(world, mr.location(), args->cur_res)) {
 			args->orgResT.push_back(mr.location().field->get_resources());
 			args->orgRes.push_back(mr.location().field->get_resources_amount());
-			EditorSetResourcesTool::set_res_and_overlay(world, amount, args->cur_res, mr.location(),
-			                                            parent.mutable_field_overlay_manager(), map);
+			map->initialize_resources(mr.location(), args->cur_res, amount);
 		}
 
 	} while (mr.advance(*map));

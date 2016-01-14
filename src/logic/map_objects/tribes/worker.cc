@@ -176,7 +176,7 @@ bool Worker::run_mine(Game & game, State & state, const Action & action)
 			assert(amount > 0);
 
 			--amount;
-			mr.location().field->set_resources(res, amount);
+			map.set_resources(mr.location(), amount);
 			break;
 		}
 	} while (mr.advance(map));
@@ -286,9 +286,7 @@ bool Worker::run_breed(Game & game, State & state, const Action & action)
 			assert(amount > 0);
 
 			--amount;
-
-			mr.location().field->set_resources
-				(res, mr.location().field->get_initial_res_amount() - amount);
+			map.set_resources(mr.location(), mr.location().field->get_initial_res_amount() - amount);
 			break;
 		}
 	} while (mr.advance(map));

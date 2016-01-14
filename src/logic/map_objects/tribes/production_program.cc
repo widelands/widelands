@@ -1309,8 +1309,7 @@ void ProductionProgram::ActMine::execute
 					assert(amount > 0);
 
 					--amount;
-
-					mr.location().field->set_resources(m_resource, amount);
+					map.set_resources(mr.location(), amount);
 					break;
 				}
 			} while (mr.advance(map));

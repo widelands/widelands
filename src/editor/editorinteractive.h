@@ -20,6 +20,8 @@
 #ifndef WL_EDITOR_EDITORINTERACTIVE_H
 #define WL_EDITOR_EDITORINTERACTIVE_H
 
+#include <memory>
+
 #include "editor/tools/editor_history.h"
 #include "editor/tools/editor_increase_height_tool.h"
 #include "editor/tools/editor_increase_resources_tool.h"
@@ -32,6 +34,8 @@
 #include "editor/tools/editor_set_port_space_tool.h"
 #include "editor/tools/editor_set_starting_pos_tool.h"
 #include "editor/tools/editor_set_terrain_tool.h"
+#include "logic/map.h"
+#include "notifications/notifications.h"
 #include "ui_basic/button.h"
 #include "ui_basic/unique_window.h"
 #include "wui/interactive_base.h"
@@ -140,6 +144,8 @@ private:
 
 	EditorHistory m_history;
 
+	std::unique_ptr<Notifications::Subscriber<Widelands::NoteFieldResourceChanged>>
+	   field_resource_changed_subscriber_;
 	UI::UniqueWindow::Registry m_toolmenu;
 
 	UI::UniqueWindow::Registry m_toolsizemenu;
