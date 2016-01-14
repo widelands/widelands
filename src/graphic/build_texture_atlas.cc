@@ -231,9 +231,10 @@ void make_texture_atlas(const int max_size) {
 	// Add all other images, we do not really cares about the order for these.
 	// TODO(sirver): having all assets in an assets/ sub directory would future
 	// proof this a bit better.
-	find_images("campaigns", &all_images, &other_images);
-	find_images("tribes", &all_images, &other_images);
-	find_images("world", &all_images, &other_images);
+	// NOCOM(#sirver): what
+	// find_images("campaigns", &all_images, &other_images);
+	// find_images("tribes", &all_images, &other_images);
+	// find_images("world", &all_images, &other_images);
 
 	assert(images_that_must_be_in_first_atlas.size() + other_images.size() == all_images.size());
 

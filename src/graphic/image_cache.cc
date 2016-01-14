@@ -27,6 +27,7 @@
 #include <SDL.h>
 #include <boost/format.hpp>
 
+#include "base/log.h" // NOCOM(#sirver): remove again
 #include "graphic/image.h"
 #include "graphic/image_io.h"
 #include "graphic/texture.h"
@@ -90,7 +91,10 @@ void ImageCache::fill_with_texture_atlas() {
 const Image* ImageCache::get(const std::string& hash) {
 	auto it = images_.find(hash);
 	if (it == images_.end()) {
-		throw wexception("Image with hash %s not found.", hash.c_str());
+		// NOCOM(#sirver): Is this what we want?
+		log("Image with hash %s not found. Loading from disk.\n", hash.c_str());
+		images_.insert(std::make_pair(hash, std::move(load_image(hash))));
+		return get(hash);
 	}
 	return it->second.get();
 }
