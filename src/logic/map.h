@@ -368,11 +368,11 @@ public:
 	/// Changes the height of the nodes in an Area by a difference.
 	uint32_t change_height(const World& world, Area<FCoords>, int16_t difference);
 
-	/// Initializes the initial_resources on 'coords' to the 'resource_type'
-	/// with the given amount.
+	/// Initializes the 'initial_resources' on 'coords' to the 'resource_type'
+	/// with the given 'amount'.
 	void initialize_resources(const FCoords& coords, DescriptionIndex resource_type, uint8_t amount);
 
-	/// Sets the resource of the field to the current value. The type of the
+	/// Sets the number of resources of the field to 'amount'. The type of the
 	/// resource on this field is not changed.
 	void set_resources(const FCoords& coords, uint8_t amount);
 
