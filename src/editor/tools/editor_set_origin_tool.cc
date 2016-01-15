@@ -29,7 +29,7 @@ int32_t EditorSetOriginTool::handle_click_impl(const Widelands::World&,
                                                EditorActionArgs* /* args */,
 											   Widelands::Map* map) {
 	map->set_origin(center.node);
-	eia.register_overlays();
+	eia.map_changed();
 	eia.set_rel_viewpoint
 	(Point
 	 (-(center.node.x * 2 + (center.node.y & 1)) * (TRIANGLE_WIDTH / 2),
@@ -48,7 +48,7 @@ EditorSetOriginTool::handle_undo_impl(const Widelands::World&,
 		(map->get_width()  - center.node.x,
 		 map->get_height() - center.node.y);
 	map->set_origin(nc);
-	parent.register_overlays();
+	parent.map_changed();
 	parent.set_rel_viewpoint
 	(Point
 	 (- (nc.x * 2 + (nc.y & 1)) *(TRIANGLE_WIDTH / 2),

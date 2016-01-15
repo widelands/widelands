@@ -58,7 +58,6 @@ private:
 	EditorInteractive(Widelands::EditorGameBase &);
 
 public:
-	void register_overlays();
 	void load(const std::string & filename);
 
 	// leaf functions from base class
@@ -125,7 +124,17 @@ public:
 	bool is_player_tribe_referenced(Widelands::PlayerNumber);
 	void set_need_save(bool const t) {m_need_save = t;}
 
+	// Signalizes that the egbase().map has changed. Closes all windows and resets the
+	// EditorGameBase.
+	// Note: If this is called from a child, it must not delete itself (for
+	// example through die(), since this function will delete all child
+	// windows()).
+	void map_changed();
+
 private:
+	// Registers the overlays for player starting positions.
+	void register_overlays();
+
 	void tool_menu_btn();
 	void toolsize_menu_btn();
 	void toggle_mainmenu();

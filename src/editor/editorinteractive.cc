@@ -230,12 +230,8 @@ void EditorInteractive::load(const std::string & filename) {
 	}
 
 	ml->load_map_complete(egbase(), true);
-
 	egbase().load_graphics(loader_ui);
-
-	register_overlays();
-
-	set_need_save(false);
+	map_changed();
 }
 
 
@@ -642,4 +638,19 @@ void EditorInteractive::run_editor(const std::string& filename, const std::strin
 	eia.run<UI::Panel::Returncodes>();
 
 	editor.cleanup_objects();
+}
+
+void EditorInteractive::map_changed() {
+	// Close all windows.
+	const Panel* child = get_first_child();
+	while (child) {
+		const Panel* next = child->get_next_sibling();
+		if (is_a(UI::Window, child)) {
+			delete child;
+		}
+		child = next;
+	}
+	mutable_field_overlay_manager()->remove_all_overlays();
+	register_overlays();
+	set_need_save(false);
 }

@@ -474,13 +474,7 @@ void InteractiveBase::move_view_to_point(Point pos)
 }
 
 
-/*
-===========
-InteractiveBase::toggle_minimap()
-
-Open the minimap or close it if it's open
-===========
-*/
+// Open the minimap or close it if it's open
 void InteractiveBase::toggle_minimap() {
 	if (m->minimap.window) {
 		delete m->minimap.window;

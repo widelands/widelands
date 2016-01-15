@@ -207,6 +207,12 @@ void FieldOverlayManager::remove_overlay(const OverlayId overlay_id) {
 		}
 }
 
+void FieldOverlayManager::remove_all_overlays() {
+	m_overlays[0].clear();
+	m_overlays[1].clear();
+	m_overlays[2].clear();
+}
+
 void FieldOverlayManager::register_overlay_callback_function(CallbackFn function) {
 	m_callback = function;
 }

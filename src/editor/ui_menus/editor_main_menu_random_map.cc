@@ -449,13 +449,8 @@ void MainMenuNewRandomMap::clicked_create_map() {
 	egbase.load_graphics(loader);
 
 	map.recalc_whole_map(egbase.world());
-
-	eia.set_need_save(true);
-	eia.register_overlays();
-	eia.toggle_minimap();
-	eia.toggle_minimap();
-
-	die();
+	eia.map_changed();
+	// map_changed() will delete us.
 }
 
 void MainMenuNewRandomMap::clicked_cancel() {
