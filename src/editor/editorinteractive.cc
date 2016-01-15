@@ -642,14 +642,12 @@ void EditorInteractive::run_editor(const std::string& filename, const std::strin
 
 void EditorInteractive::map_changed() {
 	// Close all windows.
-	const Panel* child = get_first_child();
-	while (child) {
-		const Panel* next = child->get_next_sibling();
+	for (Panel* child = get_first_child(); child; child = child->get_next_sibling()) {
 		if (is_a(UI::Window, child)) {
-			delete child;
+			child->die();
 		}
-		child = next;
 	}
+
 	mutable_field_overlay_manager()->remove_all_overlays();
 	register_overlays();
 	set_need_save(false);

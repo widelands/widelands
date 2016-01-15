@@ -124,11 +124,8 @@ public:
 	bool is_player_tribe_referenced(Widelands::PlayerNumber);
 	void set_need_save(bool const t) {m_need_save = t;}
 
-	// Signalizes that the egbase().map has changed. Closes all windows and resets the
-	// EditorGameBase.
-	// Note: If this is called from a child, it must not delete itself (for
-	// example through die(), since this function will delete all child
-	// windows()).
+	// Signalizes that the egbase().map has changed. Closes all windows and
+	// resets the EditorGameBase.
 	void map_changed();
 
 private:

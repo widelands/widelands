@@ -450,7 +450,7 @@ void MainMenuNewRandomMap::clicked_create_map() {
 
 	map.recalc_whole_map(egbase.world());
 	eia.map_changed();
-	// map_changed() will delete us.
+	die();
 }
 
 void MainMenuNewRandomMap::clicked_cancel() {
