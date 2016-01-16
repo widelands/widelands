@@ -113,7 +113,9 @@ pack_images(const std::vector<std::string>& filenames,
 
 }  // namespace
 
-std::vector<std::unique_ptr<Texture>> build_texture_atlas(const int max_size, std::map<std::string, std::unique_ptr<Texture>>* textures_in_atlas) {
+std::vector<std::unique_ptr<Texture>>
+build_texture_atlas(const int max_size,
+                    std::map<std::string, std::unique_ptr<Texture>>* textures_in_atlas) {
 	if (max_size < kMinimumSizeForTextures) {
 		throw wexception("The texture atlas must use at least %d as size (%d was given)",
 		                 kMinimumSizeForTextures, max_size);

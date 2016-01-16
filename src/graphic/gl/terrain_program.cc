@@ -106,7 +106,7 @@ void TerrainProgram::gl_draw(int gl_texture, float texture_w, float texture_h, f
 
 	auto& gl_state = Gl::State::instance();
 	gl_state.enable_vertex_attrib_array(
-	   {attr_brightness_, attr_position_, attr_texture_offset_, attr_texture_position_});
+		{attr_brightness_, attr_position_, attr_texture_offset_, attr_texture_position_});
 
 	gl_array_buffer_.bind();
 	gl_array_buffer_.update(vertices_);

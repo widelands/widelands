@@ -32,7 +32,7 @@
 // and fills in 'textures_in_atlas' which is a map from filename to Texture in
 // the atlas.
 std::vector<std::unique_ptr<Texture>>
-build_texture_atlas(const int max_size,
-                    std::map<std::string, std::unique_ptr<Texture>>* textures_in_atlas);
+build_texture_atlas(
+		const int max_size, std::map<std::string, std::unique_ptr<Texture>>* textures_in_atlas);
 
 #endif  // end of include guard: WL_GRAPHIC_BUILD_TEXTURE_ATLAS_H
