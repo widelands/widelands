@@ -27,7 +27,7 @@
 #include "editor/ui_menus/editor_tool_options_menu.h"
 #include "editor/tools/editor_place_immovable_tool.h"
 
-struct EditorInteractive;
+class EditorInteractive;
 
 struct EditorToolPlaceImmovableOptionsMenu : public EditorToolOptionsMenu {
 	EditorToolPlaceImmovableOptionsMenu(EditorInteractive&,

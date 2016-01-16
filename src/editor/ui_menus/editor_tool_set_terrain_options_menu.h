@@ -29,7 +29,7 @@
 #include "logic/map_objects/world/terrain_description.h"
 #include "ui_basic/textarea.h"
 
-struct EditorInteractive;
+class EditorInteractive;
 struct EditorSetTerrainTool;
 
 struct EditorToolSetTerrainOptionsMenu : public EditorToolOptionsMenu {

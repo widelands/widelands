@@ -233,7 +233,7 @@ void EditorPlayerMenu::clicked_remove_last_player() {
 			menu.mutable_field_overlay_manager()->remove_overlay(sp, g_gr->images().get(picsname));
 		}
 		// if removed player was selected switch to the next highest player
-		if (old_nr_players == menu.tools.set_starting_pos.get_current_player())
+		if (old_nr_players == menu.tools()->set_starting_pos.get_current_player())
 			set_starting_pos_clicked(nr_players);
 	}
 	map.set_nrplayers(nr_players);
@@ -290,11 +290,11 @@ void EditorPlayerMenu::set_starting_pos_clicked(uint8_t n) {
 		menu.move_view_to(sp);
 
 	//  select tool set mplayer
-	menu.select_tool(menu.tools.set_starting_pos, EditorTool::First);
-	menu.tools.set_starting_pos.set_current_player(n);
+	menu.select_tool(menu.tools()->set_starting_pos, EditorTool::First);
+	menu.tools()->set_starting_pos.set_current_player(n);
 
 	//  reselect tool, so everything is in a defined state
-	menu.select_tool(menu.tools.current(), EditorTool::First);
+	menu.select_tool(menu.tools()->current(), EditorTool::First);
 
 	//  Register callback function to make sure that only valid locations are
 	//  selected.
@@ -379,8 +379,8 @@ void EditorPlayerMenu::make_infrastructure_clicked(uint8_t n) {
 			(start_pos, g_gr->images().get(picsname));
 	}
 
-	parent.select_tool(parent.tools.make_infrastructure, EditorTool::First);
-	parent.tools.make_infrastructure.set_player(n);
+	parent.select_tool(parent.tools()->make_infrastructure, EditorTool::First);
+	parent.tools()->make_infrastructure.set_player(n);
 	overlay_manager->register_overlay_callback_function(
 	   boost::bind(&editor_make_infrastructure_tool_callback, _1, boost::ref(egbase), n));
 	map.recalc_whole_map(egbase.world());

@@ -29,7 +29,7 @@ int32_t EditorSetOriginTool::handle_click_impl(const Widelands::World&,
                                                EditorActionArgs* /* args */,
 											   Widelands::Map* map) {
 	map->set_origin(center.node);
-	eia.register_overlays();
+	eia.map_changed(EditorInteractive::MapWas::kGloballyMutated);
 	eia.set_rel_viewpoint
 	(Point
 	 (-(center.node.x * 2 + (center.node.y & 1)) * (TRIANGLE_WIDTH / 2),
@@ -41,15 +41,15 @@ int32_t EditorSetOriginTool::handle_click_impl(const Widelands::World&,
 int32_t
 EditorSetOriginTool::handle_undo_impl(const Widelands::World&,
                                       Widelands::NodeAndTriangle<Widelands::Coords> center,
-                                      EditorInteractive& parent,
+                                      EditorInteractive& eia,
                                       EditorActionArgs* /* args */,
 									  Widelands::Map* map) {
 	Widelands::Coords nc
 		(map->get_width()  - center.node.x,
 		 map->get_height() - center.node.y);
 	map->set_origin(nc);
-	parent.register_overlays();
-	parent.set_rel_viewpoint
+	eia.map_changed(EditorInteractive::MapWas::kGloballyMutated);
+	eia.set_rel_viewpoint
 	(Point
 	 (- (nc.x * 2 + (nc.y & 1)) *(TRIANGLE_WIDTH / 2),
 	  - nc.y * TRIANGLE_HEIGHT),
@@ -57,7 +57,7 @@ EditorSetOriginTool::handle_undo_impl(const Widelands::World&,
 	return 0;
 }
 
-EditorActionArgs EditorSetOriginTool::format_args_impl(EditorInteractive & parent)
+EditorActionArgs EditorSetOriginTool::format_args_impl(EditorInteractive & eia)
 {
-	return EditorTool::format_args_impl(parent);
+	return EditorTool::format_args_impl(eia);
 }

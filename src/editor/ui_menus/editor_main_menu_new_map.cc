@@ -125,11 +125,7 @@ void MainMenuNewMap::clicked_create_map() {
 	egbase.load_graphics(loader);
 
 	map.recalc_whole_map(egbase.world());
-
-	parent.set_need_save(true);
-	parent.toggle_minimap();
-	parent.toggle_minimap();
-
+	parent.map_changed(EditorInteractive::MapWas::kReplaced);
 	die();
 }
 

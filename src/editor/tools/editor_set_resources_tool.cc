@@ -27,11 +27,10 @@
 #include "logic/map_objects/world/resource_description.h"
 #include "logic/map_objects/world/world.h"
 #include "logic/mapregion.h"
-#include "wui/field_overlay_manager.h"
 
 int32_t EditorSetResourcesTool::handle_click_impl(const Widelands::World& world,
                                                   Widelands::NodeAndTriangle<> const center,
-                                                  EditorInteractive& parent,
+                                                  EditorInteractive& /* parent */,
                                                   EditorActionArgs* args,
                                                   Widelands::Map* map) {
 	Widelands::MapRegion<Widelands::Area<Widelands::FCoords> > mr
@@ -50,8 +49,7 @@ int32_t EditorSetResourcesTool::handle_click_impl(const Widelands::World& world,
 		if (map->is_resource_valid(world, mr.location(), args->cur_res)) {
 			args->orgResT.push_back(mr.location().field->get_resources());
 			args->orgRes.push_back(mr.location().field->get_resources_amount());
-			set_res_and_overlay(world, amount, args->cur_res, mr.location(),
-			                    parent.mutable_field_overlay_manager(), map);
+			map->initialize_resources(mr.location(), args->cur_res, amount);
 		}
 	} while (mr.advance(*map));
 	return mr.radius();
@@ -60,7 +58,7 @@ int32_t EditorSetResourcesTool::handle_click_impl(const Widelands::World& world,
 int32_t
 EditorSetResourcesTool::handle_undo_impl(const Widelands::World& world,
                                          Widelands::NodeAndTriangle<Widelands::Coords> center,
-                                         EditorInteractive& parent,
+                                         EditorInteractive& /* parent */,
                                          EditorActionArgs* args,
                                          Widelands::Map* map) {
 	Widelands::MapRegion<Widelands::Area<Widelands::FCoords> > mr
@@ -77,9 +75,7 @@ EditorSetResourcesTool::handle_undo_impl(const Widelands::World& world,
 		if (amount > max_amount)
 			amount = max_amount;
 
-		set_res_and_overlay(
-		   world, amount, *ir, mr.location(), parent.mutable_field_overlay_manager(), map);
-
+		map->initialize_resources(mr.location(), *it, amount);
 		++ir;
 		++it;
 	} while (mr.advance(*map));
@@ -94,34 +90,4 @@ EditorActionArgs EditorSetResourcesTool::format_args_impl(EditorInteractive & pa
 	a.cur_res = m_cur_res;
 	a.set_to = m_set_to;
 	return a;
-}
-
-void EditorSetResourcesTool::set_res_and_overlay(const Widelands::World& world,
-											int32_t amount, uint8_t new_res,
-											const Widelands::FCoords& fcoords,
-											FieldOverlayManager* field_overlay_manager,
-											Widelands::Map* map) {
-	int32_t old_res = fcoords.field->get_resources();
-
-
-	//  Ok, we're doing something. First remove the current overlays.
-	if (old_res != Widelands::kNoResource) {
-		std::string str = world.get_resource(old_res)->get_editor_pic(
-				fcoords.field->get_resources_amount());
-		const Image* pic = g_gr->images().get(str);
-		field_overlay_manager->remove_overlay(fcoords, pic);
-	}
-
-	if (!amount) {
-		fcoords.field->set_resources(Widelands::kNoResource, 0);
-		fcoords.field->set_initial_res_amount(0);
-	} else {
-		fcoords.field->set_resources(new_res, amount);
-		fcoords.field->set_initial_res_amount(amount);
-		//  set new overlay
-		std::string str = world.get_resource(new_res)->get_editor_pic(amount);
-		const Image* pic = g_gr->images().get(str);
-		field_overlay_manager->register_overlay(fcoords, pic, 0);
-		map->recalc_for_field_area(world, Widelands::Area<Widelands::FCoords>(fcoords, 0));
-	}
 }

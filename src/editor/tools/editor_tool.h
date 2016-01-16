@@ -26,7 +26,7 @@
 #include "editor/tools/editor_action_args.h"
 #include "logic/widelands_geometry.h"
 
-struct EditorInteractive;
+class EditorInteractive;
 namespace Widelands {
 class Map;
 class World;

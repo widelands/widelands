@@ -27,7 +27,7 @@
 #include "ui_basic/spinbox.h"
 #include "ui_basic/window.h"
 
-struct EditorInteractive;
+class EditorInteractive;
 
 /**
  * This is the new map selection menu. It offers

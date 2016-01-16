@@ -64,10 +64,10 @@ public:
 	InteractiveBase(Widelands::EditorGameBase &, Section & global_s);
 	virtual ~InteractiveBase();
 
-	Widelands::EditorGameBase & egbase() const {return m_egbase;}
+	Widelands::EditorGameBase & egbase() const {return egbase_;}
 	virtual void reference_player_tribe(Widelands::PlayerNumber, const void * const) {}
 
-	bool m_show_workarea_preview;
+	bool show_workarea_preview_;
 	FieldOverlayManager::OverlayId show_work_area(const WorkareaInfo& workarea_info,
 	                                              Widelands::Coords coords);
 	void hide_work_area(FieldOverlayManager::OverlayId overlay_id);
@@ -79,9 +79,9 @@ public:
 	virtual void postload();
 
 	const Widelands::NodeAndTriangle<> & get_sel_pos() const {
-		return m_sel.pos;
+		return sel_.pos;
 	}
-	bool get_sel_freeze() const {return m_sel.freeze;}
+	bool get_sel_freeze() const {return sel_.freeze;}
 
 	// Returns true if the buildhelp is currently displayed.
 	bool buildhelp() const;
@@ -93,12 +93,12 @@ public:
 	 * sel_triangles determines whether the mouse pointer selects triangles.
 	 * (False meas that it selects nodes.)
 	 */
-	bool get_sel_triangles() const {return m_sel.triangles;}
-	void set_sel_triangles(const bool yes) {m_sel.triangles = yes;}
+	bool get_sel_triangles() const {return sel_.triangles;}
+	void set_sel_triangles(const bool yes) {sel_.triangles = yes;}
 
-	uint32_t get_sel_radius() const {return m_sel.radius;}
+	uint32_t get_sel_radius() const {return sel_.radius;}
 	virtual void set_sel_pos(Widelands::NodeAndTriangle<>);
-	void set_sel_freeze(const bool yes) {m_sel.freeze = yes;}
+	void set_sel_freeze(const bool yes) {sel_.freeze = yes;}
 	void set_sel_radius(uint32_t);
 
 	void move_view_to(Widelands::Coords);
@@ -111,8 +111,8 @@ public:
 	void set_display_flag(uint32_t flag, bool on);
 
 	//  road building
-	bool is_building_road() const {return m_buildroad;}
-	Widelands::CoordPath * get_build_road() {return m_buildroad;}
+	bool is_building_road() const {return buildroad_;}
+	Widelands::CoordPath * get_build_road() {return buildroad_;}
 	void start_build_road
 		(Widelands::Coords start, Widelands::PlayerNumber player);
 		void abort_build_road();
@@ -132,14 +132,14 @@ public:
 	}
 
 	const FieldOverlayManager& field_overlay_manager() const {
-		return *m_field_overlay_manager;
+		return *field_overlay_manager_;
 	}
 	FieldOverlayManager* mutable_field_overlay_manager() {
-		return m_field_overlay_manager.get();
+		return field_overlay_manager_.get();
 	}
 
 	const EdgeOverlayManager& edge_overlay_manager() const {
-		return *m_edge_overlay_manager;
+		return *edge_overlay_manager_;
 	}
 
 	void toggle_minimap();
@@ -162,13 +162,13 @@ protected:
 	void unset_sel_picture();
 	void set_sel_picture(const char * const);
 	void adjust_toolbar_position() {
-		m_toolbar.set_pos
-			(Point((get_inner_w() - m_toolbar.get_w()) >> 1, get_inner_h() - 34));
+		toolbar_.set_pos
+			(Point((get_inner_w() - toolbar_.get_w()) >> 1, get_inner_h() - 34));
 	}
 
 	// TODO(sirver): why are these protected?
-	ChatOverlay     * m_chatOverlay;
-	UI::Box           m_toolbar;
+	ChatOverlay     * chat_overlay_;
+	UI::Box           toolbar_;
 
 private:
 	void roadb_add_overlay   ();
@@ -191,39 +191,39 @@ private:
 			freeze(Freeze), triangles(Triangles), pos(Pos), radius(Radius),
 			pic(Pic), jobid(Jobid)
 		{}
-		bool              freeze; // don't change m_sel even if mouse moves
+		bool              freeze; // don't change sel _even if mouse moves
 		bool              triangles; //  otherwise nodes
 		Widelands::NodeAndTriangle<>     pos;
 		uint32_t              radius;
 		const Image* pic;
 		FieldOverlayManager::OverlayId jobid;
-	} m_sel;
+	} sel_;
 
 	std::unique_ptr<InteractiveBaseInternals> m;
 
-	std::unique_ptr<FieldOverlayManager> m_field_overlay_manager;
-	std::unique_ptr<EdgeOverlayManager> m_edge_overlay_manager;
+	std::unique_ptr<FieldOverlayManager> field_overlay_manager_;
+	std::unique_ptr<EdgeOverlayManager> edge_overlay_manager_;
 
 	std::unique_ptr<Notifications::Subscriber<GraphicResolutionChanged>>
 	   graphic_resolution_changed_subscriber_;
-	Widelands::EditorGameBase & m_egbase;
-	uint32_t m_display_flags;
-	uint32_t          m_lastframe;         //  system time (milliseconds)
-	uint32_t          m_frametime;         //  in millseconds
-	uint32_t          m_avg_usframetime;   //  in microseconds!
+	Widelands::EditorGameBase & egbase_;
+	uint32_t display_flags_;
+	uint32_t          lastframe_;         //  system time (milliseconds)
+	uint32_t          frametime_;         //  in millseconds
+	uint32_t          avg_usframetime_;   //  in microseconds!
 
-	EdgeOverlayManager::OverlayId m_jobid;
-	FieldOverlayManager::OverlayId m_road_buildhelp_overlay_jobid;
-	Widelands::CoordPath  * m_buildroad;         //  path for the new road
-	Widelands::PlayerNumber m_road_build_player;
+	EdgeOverlayManager::OverlayId jobid_;
+	FieldOverlayManager::OverlayId road_buildhelp_overlay_jobid_;
+	Widelands::CoordPath  * buildroad_;         //  path for the new road
+	Widelands::PlayerNumber road_build_player_;
 
-	UI::UniqueWindow::Registry m_debugconsole;
+	UI::UniqueWindow::Registry debugconsole_;
 	std::unique_ptr<UniqueWindowHandler> unique_window_handler_;
-	std::vector<const Image*> m_workarea_pics;
+	std::vector<const Image*> workarea_pics_;
 };
 
 #define PIC2 g_gr->images().get("pics/but2.png")
 #define TOOLBAR_BUTTON_COMMON_PARAMETERS(name) \
-    &m_toolbar, name, 0, 0, 34U, 34U, PIC2
+    &toolbar_, name, 0, 0, 34U, 34U, PIC2
 
 #endif  // end of include guard: WL_WUI_INTERACTIVE_BASE_H

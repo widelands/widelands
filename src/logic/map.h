@@ -68,15 +68,21 @@ const std::vector<int32_t> kMapDimensions = {
 struct Path;
 class Immovable;
 
-struct NoteFieldTransformed {
-	CAN_BE_SENT_AS_NOTE(NoteId::FieldTransformed)
+struct NoteFieldTerrainChanged {
+	CAN_BE_SENT_AS_NOTE(NoteId::FieldTerrainChanged)
 
 	FCoords fc;
 	MapIndex map_index;
+};
 
-	NoteFieldTransformed(const FCoords& init_fc, const MapIndex init_map_index)
-	   : fc(init_fc), map_index(init_map_index) {
-	}
+/// Send when the resource of a field is changed.
+struct NoteFieldResourceChanged {
+	CAN_BE_SENT_AS_NOTE(NoteId::FieldResourceTypeChanged)
+
+	FCoords fc;
+	DescriptionIndex old_resource;
+	uint8_t old_initial_amount;
+	uint8_t old_amount;
 };
 
 struct ImmovableFound {
@@ -361,6 +367,18 @@ public:
 
 	/// Changes the height of the nodes in an Area by a difference.
 	uint32_t change_height(const World& world, Area<FCoords>, int16_t difference);
+
+	/// Initializes the 'initial_resources' on 'coords' to the 'resource_type'
+	/// with the given 'amount'.
+	void initialize_resources(const FCoords& coords, DescriptionIndex resource_type, uint8_t amount);
+
+	/// Sets the number of resources of the field to 'amount'. The type of the
+	/// resource on this field is not changed.
+	void set_resources(const FCoords& coords, uint8_t amount);
+
+	/// Clears the resources, i.e. the amount will be set to 0 and the type of
+	/// resources will be kNoResource.
+	void clear_resources(const FCoords& coords);
 
 	/**
 	 * Ensures that the height of each node within radius from fc is in

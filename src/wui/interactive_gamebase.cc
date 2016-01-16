@@ -51,7 +51,7 @@ InteractiveGameBase::InteractiveGameBase
 	 PlayerType pt, bool const chatenabled, bool const multiplayer)
 	:
 	InteractiveBase(_game, global_s),
-	m_chatProvider(nullptr),
+	chat_provider_(nullptr),
 	m_building_census_format
 		(global_s.get_string("building_census_format",       "%N")),
 	m_building_statistics_format
@@ -87,15 +87,15 @@ Widelands::Game & InteractiveGameBase::    game() const
 
 void InteractiveGameBase::set_chat_provider(ChatProvider & chat)
 {
-	m_chatProvider = &chat;
-	m_chatOverlay->set_chat_provider(chat);
+	chat_provider_ = &chat;
+	chat_overlay_->set_chat_provider(chat);
 
 	m_chatenabled = true;
 }
 
 ChatProvider * InteractiveGameBase::get_chat_provider()
 {
-	return m_chatProvider;
+	return chat_provider_;
 }
 
 void InteractiveGameBase::draw_overlay(RenderTarget& dst) {
