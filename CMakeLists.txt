@@ -117,7 +117,6 @@ if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
   # a warning for GCC (which is not as clever and does not figure out that all
   # cases are handled). Therefore we disable the warning and the unreachable as
   # they always come in pairs in these cases.
-  wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-covered-switch-default")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-unreachable-code")
 
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Werror=non-pod-varargs")
@@ -158,7 +157,6 @@ else()
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wpointer-arith")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wredundant-decls")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wsign-promo")
-  wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wswitch-default")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wsync-nand")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wtrampolines")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wundef")
