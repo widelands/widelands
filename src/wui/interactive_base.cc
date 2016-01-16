@@ -553,11 +553,11 @@ Begin building a road
 ===============
 */
 void InteractiveBase::start_build_road
-	(Coords start, Widelands::PlayerNumber const player)
+	(Coords road_start, Widelands::PlayerNumber const player)
 {
 	// create an empty path
 	assert(!buildroad_);
-	buildroad_ = new CoordPath(start);
+	buildroad_ = new CoordPath(road_start);
 
 	road_build_player_ = player;
 
