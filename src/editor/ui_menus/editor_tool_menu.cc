@@ -55,7 +55,7 @@ UI::UniqueWindow(&parent, "tool_menu", &registry, 350, 400, _("Tools"))
 
 	int32_t const num_tools = 8;
 #define ADD_BUTTON(pic, tooltip)                                              \
-   m_radioselect.add_button                                                   \
+   radioselect_.add_button                                                   \
       (this,                                                                  \
        pos,                                                                   \
        g_gr->images().get("pics/editor_menu_tool_" pic ".png"),       \
@@ -77,7 +77,7 @@ UI::UniqueWindow(&parent, "tool_menu", &registry, 350, 400, _("Tools"))
 
 	{
 		const EditorTool & current = parent.tools()->current();
-		m_radioselect.set_state
+		radioselect_.set_state
 			(&current == &parent.tools()->noise_height       ? 1 :
 			 &current == &parent.tools()->set_terrain        ? 2 :
 			 &current == &parent.tools()->place_immovable    ? 3 :
@@ -88,8 +88,8 @@ UI::UniqueWindow(&parent, "tool_menu", &registry, 350, 400, _("Tools"))
 			 0);
 	}
 
-	m_radioselect.changed.connect(boost::bind(&EditorToolMenu::changed_to, this));
-	m_radioselect.clicked.connect(boost::bind(&EditorToolMenu::changed_to, this));
+	radioselect_.changed.connect(boost::bind(&EditorToolMenu::changed_to, this));
+	radioselect_.clicked.connect(boost::bind(&EditorToolMenu::changed_to, this));
 
 	if (get_usedefaultpos())
 		center_to_parent();
@@ -99,7 +99,7 @@ UI::UniqueWindow(&parent, "tool_menu", &registry, 350, 400, _("Tools"))
  * Called when the radiogroup changes or is reclicked
 */
 void EditorToolMenu::changed_to() {
-	const int32_t n = m_radioselect.get_state();
+	const int32_t n = radioselect_.get_state();
 
 	EditorInteractive & parent =
 		dynamic_cast<EditorInteractive&>(*get_parent());
@@ -109,27 +109,27 @@ void EditorToolMenu::changed_to() {
 	switch (n) {
 	case 0:
 		current_tool_pointer     = &parent.tools()->increase_height;
-		current_registry_pointer = &parent.m_heightmenu;
+		current_registry_pointer = &parent.heightmenu_;
 		break;
 	case 1:
 		current_tool_pointer     = &parent.tools()->noise_height;
-		current_registry_pointer = &parent.m_noise_heightmenu;
+		current_registry_pointer = &parent.noise_heightmenu_;
 		break;
 	case 2:
 		current_tool_pointer     = &parent.tools()->set_terrain;
-		current_registry_pointer = &parent.m_terrainmenu;
+		current_registry_pointer = &parent.terrainmenu_;
 		break;
 	case 3:
 		current_tool_pointer     = &parent.tools()->place_immovable;
-		current_registry_pointer = &parent.m_immovablemenu;
+		current_registry_pointer = &parent.immovablemenu_;
 		break;
 	case 4:
 		current_tool_pointer     = &parent.tools()->place_bob;
-		current_registry_pointer = &parent.m_bobmenu;
+		current_registry_pointer = &parent.bobmenu_;
 		break;
 	case 5:
 		current_tool_pointer     = &parent.tools()->increase_resources;
-		current_registry_pointer = &parent.m_resourcesmenu;
+		current_registry_pointer = &parent.resourcesmenu_;
 		break;
 	case 6:
 		current_tool_pointer     = &parent.tools()->set_port_space;

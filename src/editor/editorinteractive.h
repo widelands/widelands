@@ -119,7 +119,7 @@ public:
 	void   reference_player_tribe(Widelands::PlayerNumber, void const * const) override;
 	void unreference_player_tribe(Widelands::PlayerNumber, void const * const);
 	bool is_player_tribe_referenced(Widelands::PlayerNumber);
-	void set_need_save(bool const t) {m_need_save = t;}
+	void set_need_save(bool const t) {need_save_ = t;}
 
 	// Signalizes that the egbase().map has changed. This can happen when a new
 	// map is created or loaded, in which case all windows should be closed and
@@ -152,37 +152,36 @@ private:
 	void toggle_playermenu();
 
 	//  state variables
-	bool m_need_save;
-	std::vector<PlayerReferences> m_player_tribe_references;
+	bool need_save_;
+	std::vector<PlayerReferences> player_tribe_references_;
+	uint32_t realtime_;
+	bool left_mouse_button_is_down_;
 
-	uint32_t m_realtime;
-	bool m_left_mouse_button_is_down;
-
-	std::unique_ptr<Tools> m_tools;
-	std::unique_ptr<EditorHistory> m_history;
+	std::unique_ptr<Tools> tools_;
+	std::unique_ptr<EditorHistory> history_;
 
 	std::unique_ptr<Notifications::Subscriber<Widelands::NoteFieldResourceChanged>>
 	   field_resource_changed_subscriber_;
-	UI::UniqueWindow::Registry m_toolmenu;
+	UI::UniqueWindow::Registry toolmenu_;
 
-	UI::UniqueWindow::Registry m_toolsizemenu;
-	UI::UniqueWindow::Registry m_playermenu;
-	UI::UniqueWindow::Registry m_mainmenu;
-	UI::UniqueWindow::Registry m_heightmenu;
-	UI::UniqueWindow::Registry m_noise_heightmenu;
-	UI::UniqueWindow::Registry m_terrainmenu;
-	UI::UniqueWindow::Registry m_immovablemenu;
-	UI::UniqueWindow::Registry m_bobmenu;
-	UI::UniqueWindow::Registry m_resourcesmenu;
+	UI::UniqueWindow::Registry toolsizemenu_;
+	UI::UniqueWindow::Registry playermenu_;
+	UI::UniqueWindow::Registry mainmenu_;
+	UI::UniqueWindow::Registry heightmenu_;
+	UI::UniqueWindow::Registry noise_heightmenu_;
+	UI::UniqueWindow::Registry terrainmenu_;
+	UI::UniqueWindow::Registry immovablemenu_;
+	UI::UniqueWindow::Registry bobmenu_;
+	UI::UniqueWindow::Registry resourcesmenu_;
 
-	UI::Button m_toggle_main_menu;
-	UI::Button m_toggle_tool_menu;
-	UI::Button m_toggle_toolsize_menu;
-	UI::Button m_toggle_minimap;
-	UI::Button m_toggle_buildhelp;
-	UI::Button m_toggle_player_menu;
-	UI::Button m_undo;
-	UI::Button m_redo;
+	UI::Button toggle_main_menu_;
+	UI::Button toggle_tool_menu_;
+	UI::Button toggle_toolsize_menu_;
+	UI::Button toggle_minimap_;
+	UI::Button toggle_buildhelp_;
+	UI::Button toggle_player_menu_;
+	UI::Button undo_;
+	UI::Button redo_;
 };
 
 #endif  // end of include guard: WL_EDITOR_EDITORINTERACTIVE_H

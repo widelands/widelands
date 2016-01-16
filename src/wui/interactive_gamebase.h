@@ -91,7 +91,7 @@ protected:
 	virtual int32_t calculate_buildcaps(const Widelands::TCoords<Widelands::FCoords> c) = 0;
 
 	GameMainMenuWindows m_mainm_windows;
-	ChatProvider           * m_chatProvider;
+	ChatProvider           * chat_provider_;
 	std::string              m_building_census_format;
 	std::string              m_building_statistics_format;
 	std::string              m_building_tooltip_format;
