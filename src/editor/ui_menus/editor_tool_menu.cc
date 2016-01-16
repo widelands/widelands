@@ -76,15 +76,15 @@ UI::UniqueWindow(&parent, "tool_menu", &registry, 350, 400, _("Tools"))
 		(offs.x + (width + spacing) * num_tools, offs.y + (height + spacing));
 
 	{
-		const EditorTool & current = parent.tools.current();
+		const EditorTool & current = parent.tools()->current();
 		m_radioselect.set_state
-			(&current == &parent.tools.noise_height       ? 1 :
-			 &current == &parent.tools.set_terrain        ? 2 :
-			 &current == &parent.tools.place_immovable    ? 3 :
-			 &current == &parent.tools.place_bob          ? 4 :
-			 &current == &parent.tools.increase_resources ? 5 :
-			 &current == &parent.tools.set_port_space     ? 6 :
-			 &current == &parent.tools.set_origin         ? 7 :
+			(&current == &parent.tools()->noise_height       ? 1 :
+			 &current == &parent.tools()->set_terrain        ? 2 :
+			 &current == &parent.tools()->place_immovable    ? 3 :
+			 &current == &parent.tools()->place_bob          ? 4 :
+			 &current == &parent.tools()->increase_resources ? 5 :
+			 &current == &parent.tools()->set_port_space     ? 6 :
+			 &current == &parent.tools()->set_origin         ? 7 :
 			 0);
 	}
 
@@ -108,35 +108,35 @@ void EditorToolMenu::changed_to() {
 	UI::UniqueWindow::Registry * current_registry_pointer = nullptr;
 	switch (n) {
 	case 0:
-		current_tool_pointer     = &parent.tools.increase_height;
+		current_tool_pointer     = &parent.tools()->increase_height;
 		current_registry_pointer = &parent.m_heightmenu;
 		break;
 	case 1:
-		current_tool_pointer     = &parent.tools.noise_height;
+		current_tool_pointer     = &parent.tools()->noise_height;
 		current_registry_pointer = &parent.m_noise_heightmenu;
 		break;
 	case 2:
-		current_tool_pointer     = &parent.tools.set_terrain;
+		current_tool_pointer     = &parent.tools()->set_terrain;
 		current_registry_pointer = &parent.m_terrainmenu;
 		break;
 	case 3:
-		current_tool_pointer     = &parent.tools.place_immovable;
+		current_tool_pointer     = &parent.tools()->place_immovable;
 		current_registry_pointer = &parent.m_immovablemenu;
 		break;
 	case 4:
-		current_tool_pointer     = &parent.tools.place_bob;
+		current_tool_pointer     = &parent.tools()->place_bob;
 		current_registry_pointer = &parent.m_bobmenu;
 		break;
 	case 5:
-		current_tool_pointer     = &parent.tools.increase_resources;
+		current_tool_pointer     = &parent.tools()->increase_resources;
 		current_registry_pointer = &parent.m_resourcesmenu;
 		break;
 	case 6:
-		current_tool_pointer     = &parent.tools.set_port_space;
+		current_tool_pointer     = &parent.tools()->set_port_space;
 		current_registry_pointer = nullptr; // no need for a window
 		break;
 	case 7:
-		current_tool_pointer     = &parent.tools.set_origin;
+		current_tool_pointer     = &parent.tools()->set_origin;
 		current_registry_pointer = nullptr; // no need for a window
 		break;
 	default:
@@ -145,7 +145,7 @@ void EditorToolMenu::changed_to() {
 	}
 
 	parent.select_tool(*current_tool_pointer, EditorTool::First);
-	if (current_tool_pointer == &parent.tools.set_port_space) {
+	if (current_tool_pointer == &parent.tools()->set_port_space) {
 		// Set correct overlay
 		Widelands::Map & map = parent.egbase().map();
 		parent.mutable_field_overlay_manager()->register_overlay_callback_function(
@@ -166,37 +166,37 @@ void EditorToolMenu::changed_to() {
 			case 0:
 				new EditorToolChangeHeightOptionsMenu
 					(parent,
-					parent.tools.increase_height,
+					parent.tools()->increase_height,
 					*current_registry_pointer);
 				break;
 			case 1:
 				new EditorToolNoiseHeightOptionsMenu
 					(parent,
-					parent.tools.noise_height,
+					parent.tools()->noise_height,
 					*current_registry_pointer);
 				break;
 			case 2:
 				new EditorToolSetTerrainOptionsMenu
 					(parent,
-					parent.tools.set_terrain,
+					parent.tools()->set_terrain,
 					*current_registry_pointer);
 				break;
 			case 3:
 				new EditorToolPlaceImmovableOptionsMenu
 					(parent,
-					parent.tools.place_immovable,
+					parent.tools()->place_immovable,
 					*current_registry_pointer);
 				break;
 			case 4:
 				new EditorToolPlaceBobOptionsMenu
 					(parent,
-					parent.tools.place_bob,
+					parent.tools()->place_bob,
 					*current_registry_pointer);
 				break;
 			case 5:
 				new EditorToolChangeResourcesOptionsMenu
 					(parent,
-					parent.tools.increase_resources,
+					parent.tools()->increase_resources,
 					*current_registry_pointer);
 				break;
 			default:

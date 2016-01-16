@@ -25,7 +25,7 @@
 
 class EditorTool;
 namespace Widelands {class map;}
-struct EditorInteractive;
+class EditorInteractive;
 
 
 /// Class to save an action done by an editor tool

@@ -31,7 +31,7 @@
 #include "ui_basic/unique_window.h"
 
 
-struct EditorInteractive;
+class EditorInteractive;
 namespace UI {
 struct Textarea;
 struct EditBox;

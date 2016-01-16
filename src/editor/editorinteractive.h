@@ -47,32 +47,8 @@ class EditorTool;
  * This is the EditorInteractive. It is like the InteractivePlayer class,
  * but for the Editor instead of the game
  */
-struct EditorInteractive : public InteractiveBase {
-	friend struct EditorToolMenu;
-
-	// Runs the Editor via the commandline --editor flag. Will load 'filename' as a
-	// map and run 'script_to_run' directly after all initialization is done.
-	static void run_editor(const std::string & filename, const std::string& script_to_run);
-
-private:
-	EditorInteractive(Widelands::EditorGameBase &);
-
+class EditorInteractive : public InteractiveBase {
 public:
-	void load(const std::string & filename);
-
-	// leaf functions from base class
-	void start() override;
-	void think() override;
-
-	void map_clicked(bool draw = false);
-	void set_sel_pos(Widelands::NodeAndTriangle<>) override;
-	void set_sel_radius_and_update_menu(uint32_t);
-
-	//  Handle UI elements.
-	bool handle_key(bool down, SDL_Keysym) override;
-	bool handle_mousepress(uint8_t btn, int32_t x, int32_t y) override;
-	bool handle_mouserelease(uint8_t btn, int32_t x, int32_t y) override;
-
 	struct Tools {
 		Tools()
 			:
@@ -109,7 +85,28 @@ public:
 		EditorUnsetPortSpaceTool    unset_port_space;
 		EditorSetOriginTool          set_origin;
 		EditorMakeInfrastructureTool make_infrastructure;
-	} tools;
+	};
+	EditorInteractive(Widelands::EditorGameBase &);
+
+	// Runs the Editor via the commandline --editor flag. Will load 'filename' as a
+	// map and run 'script_to_run' directly after all initialization is done.
+	static void run_editor(const std::string & filename, const std::string& script_to_run);
+
+	void load(const std::string & filename);
+
+	// leaf functions from base class
+	void start() override;
+	void think() override;
+
+	void map_clicked(bool draw = false);
+	void set_sel_pos(Widelands::NodeAndTriangle<>) override;
+	void set_sel_radius_and_update_menu(uint32_t);
+
+	//  Handle UI elements.
+	bool handle_key(bool down, SDL_Keysym) override;
+	bool handle_mousepress(uint8_t btn, int32_t x, int32_t y) override;
+	bool handle_mouserelease(uint8_t btn, int32_t x, int32_t y) override;
+
 
 	void select_tool(EditorTool &, EditorTool::ToolIndex);
 
@@ -124,11 +121,28 @@ public:
 	bool is_player_tribe_referenced(Widelands::PlayerNumber);
 	void set_need_save(bool const t) {m_need_save = t;}
 
-	// Signalizes that the egbase().map has changed. Closes all windows and
-	// resets the EditorGameBase.
-	void map_changed();
+	// Signalizes that the egbase().map has changed. This can happen when a new
+	// map is created or loaded, in which case all windows should be closed and
+	// all tools should be reset. Otherwise, something else happened that
+	// requires the UI to be completely recalculated, for example the origin of
+	// the map has changed.
+	enum class MapWas {
+		kGloballyMutated,
+		kReplaced,
+	};
+	void map_changed(const MapWas& action);
+
+	// Access to the tools.
+	Tools* tools();
 
 private:
+	friend struct EditorToolMenu;
+
+	struct PlayerReferences {
+		int32_t      player;
+		void const * object;
+	};
+
 	// Registers the overlays for player starting positions.
 	void register_overlays();
 
@@ -139,16 +153,13 @@ private:
 
 	//  state variables
 	bool m_need_save;
-	struct PlayerReferences {
-		int32_t      player;
-		void const * object;
-	};
 	std::vector<PlayerReferences> m_player_tribe_references;
 
 	uint32_t m_realtime;
 	bool m_left_mouse_button_is_down;
 
-	EditorHistory m_history;
+	std::unique_ptr<Tools> m_tools;
+	std::unique_ptr<EditorHistory> m_history;
 
 	std::unique_ptr<Notifications::Subscriber<Widelands::NoteFieldResourceChanged>>
 	   field_resource_changed_subscriber_;

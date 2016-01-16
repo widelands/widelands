@@ -13,7 +13,7 @@ end
 function field_resources_tests:test_initial_resource_in_editor()
    -- making sure that (set_) resource_amount sets also initial resource in the editor
    -- the resource has to be set to something different than 'none', as none has no amount
-   self.f.resource = "coal"
+   self.f.resource = "water"
    self.f.resource_amount=10
    assert_equal(self.f.initial_resource_amount, self.f.resource_amount)
    assert_equal(10, self.f.initial_resource_amount)

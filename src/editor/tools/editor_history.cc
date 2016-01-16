@@ -133,12 +133,3 @@ uint32_t EditorHistory::do_action(EditorTool& tool,
 	}
 	return tool.handle_click(ind, world, center, parent, ac.args, &map);
 }
-
-
-void EditorHistory::reset()
-{
-	undo_stack.clear();
-	redo_stack.clear();
-	m_undo_button.set_enabled(false);
-	m_redo_button.set_enabled(false);
-}

@@ -449,7 +449,7 @@ void MainMenuNewRandomMap::clicked_create_map() {
 	egbase.load_graphics(loader);
 
 	map.recalc_whole_map(egbase.world());
-	eia.map_changed();
+	eia.map_changed(EditorInteractive::MapWas::kReplaced);
 	die();
 }
 

@@ -1905,7 +1905,11 @@ void Map::ensure_resource_consistency(const World& world)
 
 void Map::initialize_resources(const FCoords& c,
                                const DescriptionIndex resource_type,
-                               const uint8_t amount) {
+                               uint8_t amount) {
+	// You cannot have an amount of nothing.
+	if (resource_type == Widelands::kNoResource) {
+		amount = 0;
+	}
 	const auto note = NoteFieldResourceChanged{
 	   c, c.field->m_resources, c.field->m_initial_res_amount, c.field->m_res_amount,
 	};
@@ -1917,7 +1921,10 @@ void Map::initialize_resources(const FCoords& c,
 }
 
 void Map::set_resources(const FCoords& c, uint8_t amount) {
-	assert(c.field->m_resources != Widelands::kNoResource);
+	// You cannot change the amount of resources on a field without resources.
+	if (c.field->m_resources == Widelands::kNoResource) {
+		return;
+	}
 	assert(amount <= c.field->m_initial_res_amount);
 	const auto note = NoteFieldResourceChanged{
 	   c, c.field->m_resources, c.field->m_initial_res_amount, c.field->m_res_amount,

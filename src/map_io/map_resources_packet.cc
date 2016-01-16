@@ -85,7 +85,9 @@ void MapResourcesPacket::read
 
 					if (0xa < set_id)
 						throw "Unknown resource in map file. It is not in world!\n";
-					map.initialize_resources(map.get_fcoords(Coords(x, y)), set_id, set_amount);
+					const auto fcoords = map.get_fcoords(Coords(x, y));
+					map.initialize_resources(fcoords, set_id, set_start_amount);
+					map.set_resources(fcoords, set_amount);
 				}
 			}
 		} else {

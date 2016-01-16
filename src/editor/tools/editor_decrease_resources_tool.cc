@@ -66,7 +66,7 @@ int32_t EditorDecreaseResourcesTool::handle_undo_impl(const Widelands::World& wo
 													  EditorInteractive& parent,
 													  EditorActionArgs* args,
 													  Widelands::Map* map) {
-	return parent.tools.set_resources.handle_undo_impl(world, center, parent, args, map);
+	return parent.tools()->set_resources.handle_undo_impl(world, center, parent, args, map);
 }
 
 EditorActionArgs EditorDecreaseResourcesTool::format_args_impl(EditorInteractive & parent)
