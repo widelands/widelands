@@ -105,18 +105,11 @@ if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-global-constructors")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-padded")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-sign-conversion")
-  wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-switch-enum")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-missing-noreturn")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-implicit-fallthrough")
 
   # TODO(sirver): weak-vtables should be enabled, but leads to lot of errors right now.
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-weak-vtables")
-
-  # This warning warns when a default case is at a switch that handles all
-  # cases. While this is super nice, silencing this warning for clang will add
-  # a warning for GCC (which is not as clever and does not figure out that all
-  # cases are handled). Therefore we disable the warning and the unreachable as
-  # they always come in pairs in these cases.
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-unreachable-code")
 
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Werror=non-pod-varargs")
