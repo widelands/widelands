@@ -358,14 +358,19 @@ void FieldDebugWindow::think()
 		}
 	}
 	{
-		Widelands::DescriptionIndex ridx = m_coords.field->get_resources();
-		int ramount = m_coords.field->get_resources_amount();
-		int initial_amount = m_coords.field->get_initial_res_amount();
+		const Widelands::DescriptionIndex ridx = m_coords.field->get_resources();
 
-		str += (boost::format("Resource: %s\n")
-				  % ibase().egbase().world().get_resource(ridx)->name().c_str()).str();
+		if (ridx == Widelands::kNoResource) {
+			str += "Resource: None\n";
+		} else {
+			const int ramount = m_coords.field->get_resources_amount();
+			const int initial_amount = m_coords.field->get_initial_res_amount();
 
-		str += (boost::format("  Amount: %i/%i\n") % ramount % initial_amount).str();
+			str += (boost::format("Resource: %s\n")
+					  % ibase().egbase().world().get_resource(ridx)->name().c_str()).str();
+
+			str += (boost::format("  Amount: %i/%i\n") % ramount % initial_amount).str();
+		}
 	}
 
 	m_ui_field.set_text(str.c_str());
