@@ -1,10 +1,17 @@
 pics_dir = path.dirname(__file__) .. "pics/"
 
 world:new_resource_type{
+   -- Internal name, must be unique
    name = "coal",
+   -- The name that will be used in UI and translated.
    descname = _ "Coal",
+   -- Maximum possible amount
    max_amount = 20,
+   -- A geologist can find it, otherwise false (see Fish)
    detectable = true,
+   -- Picture that is used to indicate the amount of resource on the map
+   -- [5] means amount 0 to 5; next line means amount 6 to 10 and so on
+   -- The picture with highest number is additionally used in ui
    editor_pictures = {
       [5] = pics_dir .. "coal1.png",
       [10] = pics_dir .. "coal2.png",
@@ -58,7 +65,10 @@ world:new_resource_type{
    max_amount = 50,
    detectable = true,
    editor_pictures = {
-      [1000] = pics_dir .. "water.png",
+      [10] = pics_dir .."water1.png",
+      [20] = pics_dir .."water2.png",
+      [30] = pics_dir .."water3.png",
+      [1000] = pics_dir .. "water4.png",
    }
 }
 
