@@ -819,10 +819,9 @@ void FieldActionWindow::building_icon_mouse_out
 void FieldActionWindow::building_icon_mouse_in
 	(const Widelands::DescriptionIndex idx)
 {
-	if (ibase().m_show_workarea_preview && !m_workarea_preview_overlay_id) {
-		const WorkareaInfo & workarea_info =
-			m_plr->tribe().get_building_descr(Widelands::DescriptionIndex(idx))
-			->m_workarea_info;
+	if (ibase().show_workarea_preview_ && !m_workarea_preview_overlay_id) {
+		const WorkareaInfo& workarea_info =
+		   m_plr->tribe().get_building_descr(Widelands::DescriptionIndex(idx))->m_workarea_info;
 		m_workarea_preview_overlay_id = ibase().show_work_area(workarea_info, m_node);
 	}
 }

@@ -9,13 +9,14 @@ function field_resources_tests:test_default_resource_in_game()
    assert_equal(5, self.f.resource_amount)
 end
 
-
-
 function field_resources_tests:test_initial_resources_in_game()
    -- Changing a resource in game should not change the
    -- initial_resources.
-   assert_equal("water", self.f.resource)
-   assert_equal(5, self.f.initial_resource_amount)
-   self.f.resource_amount = 1
-   assert_equal(5, self.f.initial_resource_amount)
+   local f = map:get_field(61,40)
+   assert_equal("water", f.resource)
+   assert_equal(5, f.initial_resource_amount)
+   assert_equal(5, f.resource_amount)
+   f.resource_amount = 1
+   assert_equal(5, f.initial_resource_amount)
+   assert_equal(1, f.resource_amount)
 end

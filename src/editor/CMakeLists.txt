@@ -96,6 +96,7 @@ wl_library(editor
     logic_widelands_geometry
     map_io
     map_io_map_loader
+    notifications
     random
     scripting_lua_interface
     scripting_lua_table
@@ -104,6 +105,6 @@ wl_library(editor
     widelands_ball_of_mud
     wui
     wui_common
-    wui_mapview_pixelfunctions
     wui_field_overlay_manager
+    wui_mapview_pixelfunctions
 )

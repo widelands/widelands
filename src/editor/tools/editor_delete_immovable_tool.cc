@@ -58,7 +58,7 @@ int32_t EditorDeleteImmovableTool::handle_undo_impl(const Widelands::World& worl
 													EditorInteractive& parent,
 													EditorActionArgs* args,
 													Widelands::Map* map) {
-	return parent.tools.place_immovable.handle_undo_impl(world, center, parent, args, map);
+	return parent.tools()->place_immovable.handle_undo_impl(world, center, parent, args, map);
 }
 
 EditorActionArgs EditorDeleteImmovableTool::format_args_impl(EditorInteractive & parent)

@@ -199,18 +199,10 @@ public:
 		roads |= type << dir;
 	}
 
+	// Resources can be set through Map::set_resources()
 	// TODO(unknown): This should return DescriptionIndex
 	uint8_t get_resources() const {return m_resources;}
 	uint8_t get_resources_amount() const {return m_res_amount;}
-	void set_resources(uint8_t const res, uint8_t const amount) {
-		m_resources  = res;
-		m_res_amount = amount;
-	}
-
-	// TODO(unknown): This should take uint8_t
-	void set_initial_res_amount(int32_t const amount) {
-		m_initial_res_amount = amount;
-	}
 	// TODO(unknown): This should return uint8_t
 	int32_t get_initial_res_amount() const {return m_initial_res_amount;}
 
