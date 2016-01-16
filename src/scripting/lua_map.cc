@@ -4480,7 +4480,7 @@ int LuaField::set_resource_amount(lua_State * L) {
 
 	EditorGameBase & egbase = get_egbase(L);
 	auto& map = egbase.map();
-	if(is_a(Game, &egbase)) {
+	if (is_a(Game, &egbase)) {
 		map.set_resources(c, amount);
 	} else {
 		// in editor, reset also initial amount
