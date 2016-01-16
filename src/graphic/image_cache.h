@@ -42,20 +42,23 @@ public:
 	ImageCache();
 	~ImageCache();
 
-	// Insert the given Image into the cache.
-	// Will return a pointer to the freshly inserted image for convenience.
+	// Insert the 'image' into the cache and returns a pointer to the inserted
+	// image for convenience.
 	const Image* insert(const std::string& hash, std::unique_ptr<const Image> image);
 
-	// Returns the image associated with the given hash. If no image by this
-	// hash is known, it will try to load one from disk with the filename =
-	// hash. If this fails, it will throw an error.
+	// Returns the image associated with the 'hash'. If no image by this hash is
+	// known, it will try to load one from disk with the filename = hash. If
+	// this fails, it will throw an error.
 	const Image* get(const std::string& hash);
 
-	// Returns true if the given hash is stored in the cache.
+	// Returns true if the 'hash' is stored in the cache.
 	bool has(const std::string& hash) const;
 
-	// Loads the cache from texture atlases on disk.
-	void fill_with_texture_atlas();
+	// Fills the image cache with the hash -> Texture map 'textures_in_atlas'
+	// and take ownership of 'texture_atlases' so that the textures stay valid.
+	void
+	fill_with_texture_atlases(std::vector<std::unique_ptr<Texture>> texture_atlases,
+	                          std::map<std::string, std::unique_ptr<Texture>> textures_in_atlas);
 
 private:
 	std::vector<std::unique_ptr<Texture>> texture_atlases_;

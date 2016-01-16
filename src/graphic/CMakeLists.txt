@@ -8,15 +8,11 @@ wl_library(graphic_build_texture_atlas
     build_texture_atlas.h
     build_texture_atlas.cc
   DEPENDS
-    build_info
     graphic
     graphic_image_io
+    graphic_surface
     graphic_texture_atlas
-    helper
     io_filesystem
-    io_stream
-    scripting_lua_interface
-    scripting_lua_table
 )
 
 wl_library(graphic_color
@@ -78,10 +74,6 @@ wl_library(graphic_image_cache
     graphic_image_io
     graphic_surface
     graphic_texture_atlas
-    io_fileread
-    io_filesystem
-    scripting_lua_table
-    scripting_lua_interface
 )
 
 wl_library(graphic_sdl_utils

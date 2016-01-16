@@ -61,18 +61,6 @@ void set_icon(SDL_Window* sdl_window) {
 	SDL_FreeSurface(s);
 }
 
-void show_preload_text(const std::string& text) {
-		if (UI::g_fh && UI::g_fh1) {
-			auto *target = g_gr->get_render_target();
-			UI::g_fh->draw_text(
-					*target, UI::TextStyle::makebold(UI::Font::get(UI::g_fh1->fontset().serif(), 15),
-						RGBColor(204, 204, 0)),
-					Point(target->width() / 2, target->height() / 2),
-					text, UI::Align_Center);
-		   g_gr->refresh();
-	   }
-}
-
 }  // namespace
 
 Graphic::Graphic() : image_cache_(new ImageCache()), animation_manager_(new AnimationManager()) {
@@ -155,15 +143,11 @@ void Graphic::initialize(int window_mode_w, int window_mode_h, bool init_fullscr
 		assert(SDL_BYTESPERPIXEL(disp_mode.format) == 4);
 	}
 
-	if (!is_texture_atlas_current()) {
-		if (UI::g_fh && UI::g_fh1) {
-			show_preload_text(
-			   _("Building texture atlas... This one time operation can take up to 5 minutes."));
-		}
-		make_texture_atlas(max_texture_size);
-	}
-	show_preload_text(_("Loading images..."));
-	image_cache_->fill_with_texture_atlas();
+
+	std::map<std::string, std::unique_ptr<Texture>> textures_in_atlas;
+	auto texture_atlases = build_texture_atlas(max_texture_size, &textures_in_atlas);
+	image_cache_->fill_with_texture_atlases(
+	   std::move(texture_atlases), std::move(textures_in_atlas));
 }
 
 Graphic::~Graphic()

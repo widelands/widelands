@@ -20,13 +20,19 @@
 #ifndef WL_GRAPHIC_BUILD_TEXTURE_ATLAS_H
 #define WL_GRAPHIC_BUILD_TEXTURE_ATLAS_H
 
-// Builds a texture atlas where no texture is bigger than 'max_size' x
-// 'max_size' using the images that ship with Widelands and dump them into a
-// 'cache' directory in the writable path.
-void make_texture_atlas(int max_size);
+#include <map>
+#include <memory>
+#include <vector>
 
-// Returns true if there is a texture atlas on disk and it has the same
-// build_id() as the running binary.
-bool is_texture_atlas_current();
+#include "graphic/texture.h"
+
+// Builds a texture atlas where no texture is bigger than 'max_size' x
+// 'max_size' using the most commonly used images like UI elements, roads and
+// textures. Returns the texture_atlases which must be kept around in memory
+// and fills in 'textures_in_atlas' which is a map from filename to Texture in
+// the atlas.
+std::vector<std::unique_ptr<Texture>>
+build_texture_atlas(const int max_size,
+                    std::map<std::string, std::unique_ptr<Texture>>* textures_in_atlas);
 
 #endif  // end of include guard: WL_GRAPHIC_BUILD_TEXTURE_ATLAS_H

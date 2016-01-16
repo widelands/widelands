@@ -25,17 +25,10 @@
 #include <string>
 
 #include <SDL.h>
-#include <boost/format.hpp>
 
-#include "base/log.h" // NOCOM(#sirver): remove again
 #include "graphic/image.h"
 #include "graphic/image_io.h"
 #include "graphic/texture.h"
-#include "io/fileread.h"
-#include "io/filesystem/filesystem.h"
-#include "io/filesystem/layered_filesystem.h"
-#include "scripting/lua_interface.h"
-#include "scripting/lua_table.h"
 
 ImageCache::ImageCache() {
 }
@@ -54,47 +47,19 @@ const Image* ImageCache::insert(const std::string& hash, std::unique_ptr<const I
 	return return_value;
 }
 
-void ImageCache::fill_with_texture_atlas() {
-	LuaInterface lua;
-
-	for (int i = 0; i < 100; ++i) {
-		const auto filename = (boost::format("cache/texture_atlas_%02d.png") % i).str();
-		if (!g_fs->file_exists(filename)) {
-			break;
-		}
-		texture_atlases_.emplace_back(load_image(filename));
-	}
-
-	auto config = lua.run_script("cache/texture_atlas.lua");
-	for (const auto& hash : config->keys<std::string>()) {
-		if (hash == "build_id") {
-			// do not warn about unused keys.
-			config->get_string("build_id");
-			continue;
-		}
-		auto image_config = config->get_table(hash);
-		if (image_config->get_string("type") == "unpacked") {
-			images_.insert(std::make_pair(hash, std::move(load_image(hash))));
-		} else {
-			int texture_atlas_index = image_config->get_int("texture_atlas");
-			const auto& parent = texture_atlases_[texture_atlas_index]->blit_data();
-			auto rect_config = image_config->get_table("rect");
-			const Rect subrect(rect_config->get_int(1), rect_config->get_int(2),
-			                   rect_config->get_int(3), rect_config->get_int(4));
-			images_.insert(
-			   std::make_pair(hash, std::unique_ptr<Texture>(new Texture(
-			                           parent.texture_id, subrect, parent.rect.w, parent.rect.h))));
-		}
+void ImageCache::fill_with_texture_atlases(
+   std::vector<std::unique_ptr<Texture>> texture_atlases,
+   std::map<std::string, std::unique_ptr<Texture>> textures_in_atlas) {
+	texture_atlases_ = std::move(texture_atlases);
+	for (auto& pair : textures_in_atlas) {
+		images_.insert(std::move(pair));
 	}
 }
 
 const Image* ImageCache::get(const std::string& hash) {
 	auto it = images_.find(hash);
 	if (it == images_.end()) {
-		// NOCOM(#sirver): Is this what we want?
-		log("Image with hash %s not found. Loading from disk.\n", hash.c_str());
-		images_.insert(std::make_pair(hash, std::move(load_image(hash))));
-		return get(hash);
+		return images_.insert(std::make_pair(hash, std::move(load_image(hash)))).first->second.get();
 	}
 	return it->second.get();
 }

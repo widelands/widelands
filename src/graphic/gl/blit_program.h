@@ -32,7 +32,7 @@
 #include "graphic/gl/system_headers.h"
 #include "graphic/gl/utils.h"
 
-// Blits images. Can blend them with PlayerColor or make the monochrome.
+// Blits images. Can blend them with player color or make them monochrome.
 class BlitProgram {
 public:
 	struct Arguments {
