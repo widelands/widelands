@@ -108,6 +108,7 @@ def main():
         Tool("pngrewrite", ""),
         Tool("optipng", "-q -zc1-9 -zm1-9 -zs0-3 -f0-5", True),
         Tool("advpng", "-z4", True),
+        Tool("pngcrush", "-reduce -brute"),
     ])
 
     pngs = collect_pngs(o.directory)
