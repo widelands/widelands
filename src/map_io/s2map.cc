@@ -221,8 +221,6 @@ std::string get_world_name(S2MapLoader::WorldType world) {
 		case S2MapLoader::GREENLAND: return "greenland";
 		case S2MapLoader::BLACKLAND: return "blackland";
 		case S2MapLoader::WINTERLAND: return "winterland";
-		default:
-			throw wexception("Unknown World in map file.");
 	}
 }
 

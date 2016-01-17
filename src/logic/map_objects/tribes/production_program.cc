@@ -697,8 +697,6 @@ void ProductionProgram::ActCall::execute
 		ps.m_program_timer   = true;
 		ps.m_program_time    = ps.schedule_act(game, 10);
 		break;
-	default:
-		throw wexception("ProductionProgram call: bad result handling method");
 	}
 }
 

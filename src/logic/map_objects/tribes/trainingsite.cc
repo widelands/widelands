@@ -121,7 +121,7 @@ int32_t TrainingSiteDescr::get_min_level(const TrainingAttribute at) const {
 		return m_min_defense;
 	case atrEvade:
 		return m_min_evade;
-	default:
+	case atrTotal:
 		throw wexception("Unknown attribute value!");
 	}
 }
@@ -142,7 +142,7 @@ int32_t TrainingSiteDescr::get_max_level(const TrainingAttribute at) const {
 		return m_max_defense;
 	case atrEvade:
 		return m_max_evade;
-	default:
+	case atrTotal:
 		throw wexception("Unknown attribute value!");
 	}
 }

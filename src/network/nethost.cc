@@ -205,7 +205,6 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 					newstate = PlayerSettings::stateClosed;
 				break;
 			}
-		default:;
 		}
 
 		h->set_player_state(number, newstate, true);

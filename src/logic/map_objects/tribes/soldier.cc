@@ -344,8 +344,6 @@ uint32_t Soldier::get_level(TrainingAttribute const at) const {
 	case atrEvade:   return m_evade_level;
 	case atrTotal:
 		return m_hp_level + m_attack_level + m_defense_level + m_evade_level;
-	default:
-		throw wexception ("Soldier::get_level attribute %d not identified.", at);
 	}
 }
 
@@ -465,8 +463,6 @@ Point Soldier::calc_drawpos
 			break;
 		case CD_NONE:
 			break;
-		default:
-			assert(false);
 	}
 
 	if (moving) {
@@ -1297,7 +1293,9 @@ void Soldier::start_task_move_in_battle(Game & game, CombatWalkingDir dir)
 		case CD_RETURN_W:
 			mapdir = WALK_E;
 			break;
-		default:
+		case CD_NONE:
+		case CD_COMBAT_E:
+		case CD_COMBAT_W:
 			throw GameDataError("bad direction '%d'", dir);
 	}
 
@@ -1333,8 +1331,6 @@ void Soldier::move_in_battle_update(Game & game, State &)
 			case CD_COMBAT_E:
 				m_combat_walking = CD_NONE;
 				break;
-			default:
-				assert(false);
 		}
 		return pop_task(game);
 	} else

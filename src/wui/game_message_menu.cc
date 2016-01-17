@@ -471,8 +471,6 @@ void GameMessageMenu::archive_or_restore()
 					(gametime, plnum, MessageId(list->get_selected())));
 		}
 		break;
-	default:
-		assert(false); // there is nothing but Archive and Inbox
 	}
 }
 
@@ -510,7 +508,19 @@ void GameMessageMenu::filter_messages(Widelands::Message::Type const msgtype) {
 		case Widelands::Message::Type::kScenario:
 			toggle_filter_messages_button(*m_scenariobtn, msgtype);
 			break;
-		default:
+
+		case Widelands::Message::Type::kNoMessages:
+		case Widelands::Message::Type::kAllMessages:
+		case Widelands::Message::Type::kGameLogic:
+		case Widelands::Message::Type::kGeologistsCoal:
+		case Widelands::Message::Type::kGeologistsGold:
+		case Widelands::Message::Type::kGeologistsStones:
+		case Widelands::Message::Type::kGeologistsIron:
+		case Widelands::Message::Type::kGeologistsWater:
+		case Widelands::Message::Type::kEconomySiteOccupied:
+		case Widelands::Message::Type::kWarfareSiteDefeated:
+		case Widelands::Message::Type::kWarfareSiteLost:
+		case Widelands::Message::Type::kWarfareUnderAttack:
 			set_filter_messages_tooltips();
 			m_message_filter = Widelands::Message::Type::kAllMessages;
 			m_geologistsbtn->set_perm_pressed(false);
@@ -518,6 +528,7 @@ void GameMessageMenu::filter_messages(Widelands::Message::Type const msgtype) {
 			m_seafaringbtn->set_perm_pressed(false);
 			m_warfarebtn->set_perm_pressed(false);
 			m_scenariobtn->set_perm_pressed(false);
+			break;
 	}
 	think();
 }
@@ -590,7 +601,17 @@ std::string GameMessageMenu::display_message_type_icon(Widelands::Message messag
 			return "pics/menu_objectives.png";
 		case Widelands::Message::Type::kGameLogic:
 			return "pics/menu_help.png";
-		default:
+		case Widelands::Message::Type::kNoMessages:
+		case Widelands::Message::Type::kAllMessages:
+		case Widelands::Message::Type::kGeologistsCoal:
+		case Widelands::Message::Type::kGeologistsGold:
+		case Widelands::Message::Type::kGeologistsStones:
+		case Widelands::Message::Type::kGeologistsIron:
+		case Widelands::Message::Type::kGeologistsWater:
+		case Widelands::Message::Type::kEconomySiteOccupied:
+		case Widelands::Message::Type::kWarfareSiteDefeated:
+		case Widelands::Message::Type::kWarfareSiteLost:
+		case Widelands::Message::Type::kWarfareUnderAttack:
 			return "pics/message_new.png";
 	}
 }
@@ -622,7 +643,5 @@ void GameMessageMenu::toggle_mode()
 		m_togglemodebtn->set_pic(g_gr->images().get("pics/message_archived.png"));
 		m_togglemodebtn->set_tooltip(_("Show Archive"));
 		break;
-	default:
-		assert(false); // there is nothing but Archive and Inbox
 	}
 }

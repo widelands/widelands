@@ -79,7 +79,6 @@ bool FindNodeSize::accept(const Map &, const FCoords & coord) const {
 	case sizeBig:
 		return (nodecaps & BUILDCAPS_SIZEMASK) >= BUILDCAPS_BIG;
 	case sizeAny:
-	default:
 		return true;
 	}
 }

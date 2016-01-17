@@ -36,7 +36,7 @@ WalkingDir get_cw_neighbour(WalkingDir dir) {
 			return WalkingDir::WALK_NW;
 		case WalkingDir::WALK_NW:
 			return WalkingDir::WALK_NE;
-		default:
+		case WalkingDir::IDLE:
 			return WalkingDir::IDLE;
 	}
 }
@@ -56,7 +56,7 @@ WalkingDir get_ccw_neighbour(WalkingDir dir) {
 			return WalkingDir::WALK_SE;
 		case WalkingDir::WALK_SE:
 			return WalkingDir::WALK_E;
-		default:
+		case WalkingDir::IDLE:
 			return WalkingDir::IDLE;
 	}
 }
@@ -75,7 +75,7 @@ WalkingDir get_backward_dir(WalkingDir dir) {
 			return WalkingDir::WALK_NE;
 		case WalkingDir::WALK_SE:
 			return WalkingDir::WALK_NW;
-		default:
+		case WalkingDir::IDLE:
 			return WalkingDir::IDLE;
 	}
 }

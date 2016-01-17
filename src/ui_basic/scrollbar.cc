@@ -239,7 +239,8 @@ void Scrollbar::action(Area const area)
 	case MinusPage: diff = -m_pagesize; break;
 	case Plus: diff = m_singlestepsize; break;
 	case PlusPage: diff = m_pagesize; break;
-	default:
+	case Knob:
+	case None:
 		return;
 	}
 

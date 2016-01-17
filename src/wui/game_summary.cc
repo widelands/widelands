@@ -190,10 +190,11 @@ void GameSummaryScreen::fill_data()
 				/** TRANSLATORS: This is shown in the game summary for the players who have resigned. */
 				 stat_str = _("Resigned");
 				 break;
-			default:
+			case Widelands::PlayerEndResult::UNDEFINED:
 				/** TRANSLATORS: This is shown in the game summary when we don't know */
 				/** TRANSLATORS: if the player has lost or won. */
 				stat_str = pgettext("player_won", "Unknown");
+				break;
 		}
 		te.set_string(2, stat_str);
 		// Time

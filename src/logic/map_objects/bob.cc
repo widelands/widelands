@@ -814,9 +814,8 @@ Point Bob::calc_drawpos(const EditorGameBase & game, const Point pos) const
 		spos.y -= TRIANGLE_HEIGHT;
 		break;
 
-	case IDLE: start.field = nullptr; break;
-	default:
-		assert(false);
+	case IDLE:
+		start.field = nullptr;
 		break;
 	}
 

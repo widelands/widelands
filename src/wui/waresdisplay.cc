@@ -296,8 +296,6 @@ const Widelands::TribeDescr::WaresOrder & AbstractWaresDisplay::icons_order() co
 		return m_tribe.wares_order();
 	case Widelands::wwWORKER:
 		return m_tribe.workers_order();
-	default:
-		throw wexception("Invalid m_type %d", m_type);
 	}
 }
 
@@ -308,8 +306,6 @@ const Widelands::TribeDescr::WaresOrderCoords & AbstractWaresDisplay::icons_orde
 		return m_tribe.wares_order_coords();
 	case Widelands::wwWORKER:
 		return m_tribe.workers_order_coords();
-	default:
-		throw wexception("Invalid m_type %d", m_type);
 	}
 }
 
