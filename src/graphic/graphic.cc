@@ -21,17 +21,23 @@
 
 #include <memory>
 
+#include "base/i18n.h"
 #include "base/log.h"
 #include "base/wexception.h"
 #include "build_info.h"
+#include "graphic/align.h"
 #include "graphic/animation.h"
+#include "graphic/build_texture_atlas.h"
+#include "graphic/font.h"
 #include "graphic/font_handler.h"
+#include "graphic/font_handler1.h"
 #include "graphic/gl/system_headers.h"
 #include "graphic/image.h"
 #include "graphic/image_io.h"
 #include "graphic/render_queue.h"
 #include "graphic/rendertarget.h"
 #include "graphic/screen.h"
+#include "graphic/text_layout.h"
 #include "graphic/texture.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "io/streamwrite.h"
@@ -57,16 +63,17 @@ void set_icon(SDL_Window* sdl_window) {
 
 }  // namespace
 
+Graphic::Graphic() : image_cache_(new ImageCache()), animation_manager_(new AnimationManager()) {
+}
+
 /**
  * Initialize the SDL video mode.
-*/
-Graphic::Graphic(int window_mode_w, int window_mode_h, bool init_fullscreen)
-   : m_window_mode_width(window_mode_w),
-     m_window_mode_height(window_mode_h),
-     m_update(true),
-     image_cache_(new ImageCache()),
-     animation_manager_(new AnimationManager())
-{
+ */
+void Graphic::initialize(int window_mode_w, int window_mode_h, bool init_fullscreen) {
+	m_window_mode_width = window_mode_w;
+	m_window_mode_height = window_mode_h;
+	m_requires_update = true;
+
 	// Request an OpenGL 2 context with double buffering.
 	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 2);
@@ -74,12 +81,10 @@ Graphic::Graphic(int window_mode_w, int window_mode_h, bool init_fullscreen)
 	SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
 
 	log("Graphics: Try to set Videomode %ux%u\n", m_window_mode_width, m_window_mode_height);
-	m_sdl_window = SDL_CreateWindow("Widelands Window",
-	                                SDL_WINDOWPOS_UNDEFINED,
-	                                SDL_WINDOWPOS_UNDEFINED,
-	                                m_window_mode_width,
-	                                m_window_mode_height,
-	                                SDL_WINDOW_OPENGL);
+	m_sdl_window =
+	   SDL_CreateWindow("Widelands Window", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
+	                    m_window_mode_width, m_window_mode_height, SDL_WINDOW_OPENGL);
+
 	resolution_changed();
 	set_fullscreen(init_fullscreen);
 
@@ -96,22 +101,22 @@ Graphic::Graphic(int window_mode_w, int window_mode_h, bool init_fullscreen)
 	glewExperimental = GL_TRUE;
 	GLenum err = glewInit();
 	if (err != GLEW_OK) {
-		log("glewInit returns %i\nYour OpenGL installation must be __very__ broken. %s\n",
-			 err, glewGetErrorString(err));
+		log("glewInit returns %i\nYour OpenGL installation must be __very__ broken. %s\n", err,
+		    glewGetErrorString(err));
 		throw wexception("glewInit returns %i: Broken OpenGL installation.", err);
 	}
 #endif
 
-	log("Graphics: OpenGL: Version \"%s\"\n",
-		 reinterpret_cast<const char*>(glGetString(GL_VERSION)));
+	log(
+	   "Graphics: OpenGL: Version \"%s\"\n", reinterpret_cast<const char*>(glGetString(GL_VERSION)));
 
 	GLboolean glBool;
 	glGetBooleanv(GL_DOUBLEBUFFER, &glBool);
 	log("Graphics: OpenGL: Double buffering %s\n", (glBool == GL_TRUE) ? "enabled" : "disabled");
 
-	GLint glInt;
-	glGetIntegerv(GL_MAX_TEXTURE_SIZE, &glInt);
-	log("Graphics: OpenGL: Max texture size: %u\n", glInt);
+	GLint max_texture_size;
+	glGetIntegerv(GL_MAX_TEXTURE_SIZE, &max_texture_size);
+	log("Graphics: OpenGL: Max texture size: %u\n", max_texture_size);
 
 	glDrawBuffer(GL_BACK);
 
@@ -134,12 +139,15 @@ Graphic::Graphic(int window_mode_w, int window_mode_h, bool init_fullscreen)
 		    " pixel fmt %u\n"
 		    " size %d %d\n"
 		    "**** END GRAPHICS REPORT ****\n",
-		    SDL_GetCurrentVideoDriver(),
-		    disp_mode.format,
-		    disp_mode.w,
-		    disp_mode.h);
+		    SDL_GetCurrentVideoDriver(), disp_mode.format, disp_mode.w, disp_mode.h);
 		assert(SDL_BYTESPERPIXEL(disp_mode.format) == 4);
 	}
+
+
+	std::map<std::string, std::unique_ptr<Texture>> textures_in_atlas;
+	auto texture_atlases = build_texture_atlas(max_texture_size, &textures_in_atlas);
+	image_cache_->fill_with_texture_atlases(
+	   std::move(texture_atlases), std::move(textures_in_atlas));
 }
 
 Graphic::~Graphic()
@@ -239,14 +247,14 @@ void Graphic::set_fullscreen(const bool value)
 
 
 void Graphic::update() {
-	m_update = true;
+	m_requires_update = true;
 }
 
 /**
  * Returns true if parts of the screen have been marked for refreshing.
 */
 bool Graphic::need_update() const {
-	return m_update;
+	return m_requires_update;
 }
 
 /**
@@ -270,7 +278,7 @@ void Graphic::refresh()
 	}
 
 	SDL_GL_SwapWindow(m_sdl_window);
-	m_update = false;
+	m_requires_update = false;
 }
 
 

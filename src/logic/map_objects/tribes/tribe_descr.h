@@ -114,10 +114,9 @@ public:
 	const std::vector<std::string>& normal_road_paths() const;
 	const std::vector<std::string>& busy_road_paths() const;
 
-	// Add the corresponding texture (which probably resides in a
-	// texture atlas) for roads.
-	void add_normal_road_texture(std::unique_ptr<Texture> texture);
-	void add_busy_road_texture(std::unique_ptr<Texture> texture);
+	// Add the corresponding texture for roads.
+	void add_normal_road_texture(const Image* texture);
+	void add_busy_road_texture(const Image* texture);
 
 	// The road textures used for drawing roads.
 	const RoadTextures& road_textures() const;

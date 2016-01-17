@@ -154,8 +154,6 @@ private:
 	std::unique_ptr<DescriptionMaintainer<WorkerDescr>> workers_;
 	std::unique_ptr<DescriptionMaintainer<TribeDescr>> tribes_;
 
-	std::unique_ptr<Texture> road_texture_; // Used in loading the road texture graphics
-
 	DISALLOW_COPY_AND_ASSIGN(Tribes);
 };
 

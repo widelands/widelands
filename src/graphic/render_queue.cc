@@ -22,7 +22,6 @@
 #include <algorithm>
 #include <limits>
 
-#include "base/log.h"
 #include "base/rect.h"
 #include "base/wexception.h"
 #include "graphic/gl/blit_program.h"
@@ -76,25 +75,15 @@ make_key_blended(const uint64_t program_id, const uint64_t z_value, const uint64
 	return (z_value << 40) | (program_id << 36) | extra_value;
 }
 
-// Construct 'args' used by the individual programs out of 'item'.
-inline void from_item(const RenderQueue::Item& item, VanillaBlitProgram::Arguments* args) {
-	args->texture = item.vanilla_blit_arguments.texture;
-	args->opacity = item.vanilla_blit_arguments.opacity;
-}
-
-inline void from_item(const RenderQueue::Item& item, MonochromeBlitProgram::Arguments* args) {
-	args->texture = item.monochrome_blit_arguments.texture;
-	args->blend = item.monochrome_blit_arguments.blend;
-}
-
 inline void from_item(const RenderQueue::Item& item, FillRectProgram::Arguments* args) {
 	args->color = item.rect_arguments.color;
 }
 
-inline void from_item(const RenderQueue::Item& item, BlendedBlitProgram::Arguments* args) {
-	args->texture = item.blended_blit_arguments.texture;
-	args->blend = item.blended_blit_arguments.blend;
-	args->mask = item.blended_blit_arguments.mask;
+inline void from_item(const RenderQueue::Item& item, BlitProgram::Arguments* args) {
+	args->texture = item.blit_arguments.texture;
+	args->blend = item.blit_arguments.blend;
+	args->mask = item.blit_arguments.mask;
+	args->blit_mode = item.blit_arguments.mode;
 }
 
 inline void from_item(const RenderQueue::Item& item, DrawLineProgram::Arguments* args) {
@@ -167,15 +156,7 @@ void RenderQueue::enqueue(const Item& given_item) {
 
 	switch (given_item.program_id) {
 		case Program::kBlit:
-		   extra_value = given_item.vanilla_blit_arguments.texture.texture_id;
-		 break;
-
-		case Program::kBlitMonochrome:
-		   extra_value = given_item.monochrome_blit_arguments.texture.texture_id;
-			break;
-
-		case Program::kBlitBlended:
-		   extra_value = given_item.blended_blit_arguments.texture.texture_id;
+		   extra_value = given_item.blit_arguments.texture.texture_id;
 			break;
 
 		case Program::kLine:
@@ -212,7 +193,7 @@ void RenderQueue::draw(const int screen_width, const int screen_height) {
 		throw wexception("Too many drawn layers. Ran out of z-values.");
 	}
 
-	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+	Gl::State::instance().bind_framebuffer(0, 0);
 	glViewport(0, 0, screen_width, screen_height);
 
 	glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
@@ -231,7 +212,6 @@ void RenderQueue::draw(const int screen_width, const int screen_height) {
 	blended_items_.clear();
 
 	glDepthMask(GL_TRUE);
-
 	next_z_ = 1;
 }
 
@@ -241,18 +221,8 @@ void RenderQueue::draw_items(const std::vector<Item>& items) {
 		const Item& item = items[i];
 		switch (item.program_id) {
 		case Program::kBlit:
-			VanillaBlitProgram::instance().draw(
-			   batch_up<VanillaBlitProgram::Arguments>(Program::kBlit, items, &i));
-		 break;
-
-		case Program::kBlitMonochrome:
-			MonochromeBlitProgram::instance().draw(
-			   batch_up<MonochromeBlitProgram::Arguments>(Program::kBlitMonochrome, items, &i));
-			break;
-
-		case Program::kBlitBlended:
-			BlendedBlitProgram::instance().draw(
-			   batch_up<BlendedBlitProgram::Arguments>(Program::kBlitBlended, items, &i));
+			BlitProgram::instance().draw(
+			   batch_up<BlitProgram::Arguments>(Program::kBlit, items, &i));
 			break;
 
 		case Program::kLine:

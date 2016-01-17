@@ -139,8 +139,8 @@ private:
 	ImageCache* const image_cache_;  // not owned
 };
 
-IFontHandler1 * create_fonthandler(Graphic* gr) {
-	return new FontHandler1(&gr->images());
+IFontHandler1 * create_fonthandler(ImageCache* image_cache) {
+	return new FontHandler1(image_cache);
 }
 
 IFontHandler1 * g_fh1 = nullptr;
