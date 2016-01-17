@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2015 by the Widelands Development Team
+ * Copyright (C) 2006-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,22 +17,20 @@
  *
  */
 
-#include "logic/map_objects/tribes/road_textures.h"
+#ifndef WL_GRAPHIC_BLIT_MODE_H
+#define WL_GRAPHIC_BLIT_MODE_H
 
-#include <memory>
+// The type of blit performed.
+enum class BlitMode {
+	// Blit texture unchanged.
+	kDirect,
 
-const Image& RoadTextures::get_normal_texture(int x, int y, int direction) const {
-	return *normal_textures_.at((x + y + direction) % normal_textures_.size());
-}
+	// Blit texture desaturated and maybe tinted with a color.
+	kMonochrome,
 
-const Image& RoadTextures::get_busy_texture(int x, int y, int direction) const {
-	return *busy_textures_.at((x + y + direction) % busy_textures_.size());
-}
+	// Blit texture tinted with a color everywhere where a mask is not
+	// transparent,
+	kBlendedWithMask,
+};
 
-void RoadTextures::add_normal_road_texture(const Image* image) {
-	normal_textures_.emplace_back(image);
-}
-
-void RoadTextures::add_busy_road_texture(const Image* image) {
-	busy_textures_.emplace_back(image);
-}
+#endif  // end of include guard: WL_GRAPHIC_BLIT_MODE_H

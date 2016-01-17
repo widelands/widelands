@@ -22,6 +22,7 @@
 #include "base/wexception.h"
 #include "graphic/gl/coordinate_conversion.h"
 #include "graphic/gl/fields_to_draw.h"
+#include "graphic/gl/utils.h"
 #include "graphic/image_io.h"
 #include "graphic/texture.h"
 #include "io/filesystem/layered_filesystem.h"
@@ -100,12 +101,11 @@ DitherProgram::DitherProgram() {
 
 	dither_mask_.reset(new Texture(load_image_as_sdl_surface("world/pics/edge.png", g_fs), true));
 
-	glBindTexture(GL_TEXTURE_2D, dither_mask_->blit_data().texture_id);
+	Gl::State::instance().bind(GL_TEXTURE0, dither_mask_->blit_data().texture_id);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, static_cast<GLint>(GL_CLAMP_TO_EDGE));
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, static_cast<GLint>(GL_CLAMP_TO_EDGE));
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, static_cast<GLint>(GL_LINEAR));
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, static_cast<GLint>(GL_NEAREST));
-	glBindTexture(GL_TEXTURE_2D, 0);
 }
 
 DitherProgram::~DitherProgram() {}
@@ -167,11 +167,12 @@ void DitherProgram::maybe_add_dithering_triangle(
 void DitherProgram::gl_draw(int gl_texture, float texture_w, float texture_h, const float z_value) {
 	glUseProgram(gl_program_.object());
 
-	glEnableVertexAttribArray(attr_brightness_);
-	glEnableVertexAttribArray(attr_dither_texture_position_);
-	glEnableVertexAttribArray(attr_position_);
-	glEnableVertexAttribArray(attr_texture_offset_);
-	glEnableVertexAttribArray(attr_texture_position_);
+	auto& gl_state = Gl::State::instance();
+	gl_state.enable_vertex_attrib_array({attr_brightness_,
+	                                   attr_dither_texture_position_,
+	                                   attr_position_,
+	                                   attr_texture_offset_,
+	                                   attr_texture_position_});
 
 	gl_array_buffer_.bind();
 	gl_array_buffer_.update(vertices_);
@@ -188,14 +189,8 @@ void DitherProgram::gl_draw(int gl_texture, float texture_w, float texture_h, co
 	Gl::vertex_attrib_pointer(
 	   attr_texture_position_, 2, sizeof(PerVertexData), offsetof(PerVertexData, texture_x));
 
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
-
-	// Set the sampler texture unit to 0
-	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, dither_mask_->blit_data().texture_id);
-
-	glActiveTexture(GL_TEXTURE1);
-	glBindTexture(GL_TEXTURE_2D, gl_texture);
+	gl_state.bind(GL_TEXTURE0, dither_mask_->blit_data().texture_id);
+	gl_state.bind(GL_TEXTURE1, gl_texture);
 
 	glUniform1f(u_z_value_, z_value);
 	glUniform1i(u_dither_texture_, 0);
@@ -203,16 +198,6 @@ void DitherProgram::gl_draw(int gl_texture, float texture_w, float texture_h, co
 	glUniform2f(u_texture_dimensions_, texture_w, texture_h);
 
 	glDrawArrays(GL_TRIANGLES, 0, vertices_.size());
-
-	glBindTexture(GL_TEXTURE_2D, 0);
-	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, 0);
-
-	glDisableVertexAttribArray(attr_brightness_);
-	glDisableVertexAttribArray(attr_dither_texture_position_);
-	glDisableVertexAttribArray(attr_position_);
-	glDisableVertexAttribArray(attr_texture_offset_);
-	glDisableVertexAttribArray(attr_texture_position_);
 }
 
 void DitherProgram::draw(const uint32_t gametime,

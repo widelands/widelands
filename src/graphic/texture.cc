@@ -167,6 +167,7 @@ Texture::Texture(const GLuint texture, const Rect& subrect, int parent_w, int pa
 Texture::~Texture()
 {
 	if (m_owns_texture) {
+		Gl::State::instance().unbind_texture_if_bound(m_blit_data.texture_id);
 		glDeleteTextures(1, &m_blit_data.texture_id);
 	}
 }
@@ -192,7 +193,7 @@ void Texture::init(uint16_t w, uint16_t h)
 
 	m_owns_texture = true;
 	glGenTextures(1, &m_blit_data.texture_id);
-	glBindTexture(GL_TEXTURE_2D, m_blit_data.texture_id);
+	Gl::State::instance().bind(GL_TEXTURE0, m_blit_data.texture_id);
 
 	// set texture filter to use linear filtering. This looks nicer for resized
 	// texture. Most textures and images are not resized so the filtering
@@ -215,9 +216,8 @@ void Texture::lock() {
 
 	m_pixels.reset(new uint8_t[width() * height() * 4]);
 
-	glBindTexture(GL_TEXTURE_2D, m_blit_data.texture_id);
+	Gl::State::instance().bind(GL_TEXTURE0, m_blit_data.texture_id);
 	glGetTexImage(GL_TEXTURE_2D, 0, GL_RGBA, GL_UNSIGNED_BYTE, m_pixels.get());
-	glBindTexture(GL_TEXTURE_2D, 0);
 }
 
 void Texture::unlock(UnlockMode mode) {
@@ -227,11 +227,9 @@ void Texture::unlock(UnlockMode mode) {
 	assert(m_pixels);
 
 	if (mode == Unlock_Update) {
-		glBindTexture(GL_TEXTURE_2D, m_blit_data.texture_id);
-		glTexImage2D
-            (GL_TEXTURE_2D, 0, static_cast<GLint>(GL_RGBA), width(), height(), 0, GL_RGBA,
-			 GL_UNSIGNED_BYTE,  m_pixels.get());
-		glBindTexture(GL_TEXTURE_2D, 0);
+		Gl::State::instance().bind(GL_TEXTURE0, m_blit_data.texture_id);
+		glTexImage2D(GL_TEXTURE_2D, 0, static_cast<GLint>(GL_RGBA), width(), height(), 0, GL_RGBA,
+		             GL_UNSIGNED_BYTE, m_pixels.get());
 	}
 
 	m_pixels.reset(nullptr);
@@ -265,8 +263,8 @@ void Texture::set_pixel(uint16_t x, uint16_t y, const RGBAColor& color) {
 
 
 void Texture::setup_gl() {
-	glBindFramebuffer(GL_FRAMEBUFFER, GlFramebuffer::instance().id());
-	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, m_blit_data.texture_id, 0);
+	Gl::State::instance().bind_framebuffer(
+	   GlFramebuffer::instance().id(), m_blit_data.texture_id);
 	glViewport(0, 0, width(), height());
 }
 
@@ -275,7 +273,8 @@ void Texture::do_blit(const FloatRect& dst_rect,
                      float opacity,
                      BlendMode blend_mode) {
 	setup_gl();
-	VanillaBlitProgram::instance().draw(dst_rect, 0.f, texture, opacity, blend_mode);
+	BlitProgram::instance().draw(dst_rect, 0.f, texture, BlitData{0, 0, 0, Rect()},
+	                             RGBAColor(0, 0, 0, 255 * opacity), blend_mode);
 }
 
 void Texture::do_blit_blended(const FloatRect& dst_rect,
@@ -284,14 +283,14 @@ void Texture::do_blit_blended(const FloatRect& dst_rect,
                               const RGBColor& blend) {
 
 	setup_gl();
-	BlendedBlitProgram::instance().draw(dst_rect, 0.f, texture, mask, blend);
+	BlitProgram::instance().draw(dst_rect, 0.f, texture, mask, blend, BlendMode::UseAlpha);
 }
 
 void Texture::do_blit_monochrome(const FloatRect& dst_rect,
                                  const BlitData& texture,
                                  const RGBAColor& blend) {
 	setup_gl();
-	MonochromeBlitProgram::instance().draw(dst_rect, 0.f, texture, blend);
+	BlitProgram::instance().draw_monochrome(dst_rect, 0.f, texture, blend);
 }
 
 void

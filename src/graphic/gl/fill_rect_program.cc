@@ -109,8 +109,10 @@ void FillRectProgram::draw(const std::vector<Arguments>& arguments) {
 
 		gl_array_buffer_.bind();
 
-		glEnableVertexAttribArray(attr_position_);
-		glEnableVertexAttribArray(attr_color_);
+		auto& gl_state = Gl::State::instance();
+		gl_state.enable_vertex_attrib_array({
+		   attr_position_, attr_color_,
+		});
 
 		// Batch common rectangles up.
 		while (i < arguments.size()) {
@@ -193,8 +195,4 @@ void FillRectProgram::draw(const std::vector<Arguments>& arguments) {
 			break;
 		}
 	}
-
-	glDisableVertexAttribArray(attr_position_);
-	glDisableVertexAttribArray(attr_color_);
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
 }

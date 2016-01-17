@@ -158,15 +158,15 @@ TerrainDescription::TerrainDescription(const LuaTable& table, const Widelands::W
 TerrainDescription::~TerrainDescription() {
 }
 
-const Texture& TerrainDescription::get_texture(uint32_t gametime) const {
+const Image& TerrainDescription::get_texture(uint32_t gametime) const {
 	return *textures_.at((gametime / frame_length_) % textures_.size());
 }
 
-void TerrainDescription::add_texture(std::unique_ptr<Texture> texture) {
+void TerrainDescription::add_texture(const Image* texture) {
 	if (texture->width() != kTextureSideLength || texture->height() != kTextureSideLength) {
 		throw wexception("Tried to add a texture with wrong size.");
 	}
-	textures_.emplace_back(std::move(texture));
+	textures_.emplace_back(texture);
 }
 
 const std::vector<std::string>& TerrainDescription::texture_paths() const {
