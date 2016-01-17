@@ -296,14 +296,14 @@ void GameRenderer::draw_objects(RenderTarget& dst,
 				const Player & owner = egbase.player(owner_number[F]);
 				uint32_t const anim_idx = owner.tribe().frontier_animation();
 				if (vision[F])
-					dst.drawanim(pos[F], anim_idx, 0, &owner);
+					dst.blit_animation(pos[F], anim_idx, 0, owner.get_playercolor());
 				for (uint32_t d = 1; d < 4; ++d) {
 					if
 						((vision[F] || vision[d]) &&
 						 isborder[d] &&
 						 (owner_number[d] == owner_number[F] || !owner_number[d]))
 					{
-						dst.drawanim(middle(pos[F], pos[d]), anim_idx, 0, &owner);
+						dst.blit_animation(middle(pos[F], pos[d]), anim_idx, 0, owner.get_playercolor());
 					}
 				}
 			}
@@ -354,8 +354,8 @@ void GameRenderer::draw_objects(RenderTarget& dst,
 
 						if (cur_frame) // not the first frame
 							// draw the prev frame from top to where next image will be drawing
-							dst.drawanimrect
-								(pos[F], anim_idx, tanim - FRAME_LENGTH, owner, Rect(Point(0, 0), w, h - lines));
+							dst.blit_animation(pos[F], anim_idx, tanim - FRAME_LENGTH,
+							                   owner->get_playercolor(), Rect(Point(0, 0), w, h - lines));
 						else if (csinf.was) {
 							// Is the first frame, but there was another building here before,
 							// get its last build picture and draw it instead.
@@ -365,11 +365,12 @@ void GameRenderer::draw_objects(RenderTarget& dst,
 							} catch (MapObjectDescr::AnimationNonexistent &) {
 								a = csinf.was->get_animation("idle");
 							}
-							dst.drawanimrect
-								(pos[F], a, tanim - FRAME_LENGTH, owner, Rect(Point(0, 0), w, h - lines));
+							dst.blit_animation(pos[F], a, tanim - FRAME_LENGTH, owner->get_playercolor(),
+							                   Rect(Point(0, 0), w, h - lines));
 						}
 						assert(lines <= h);
-						dst.drawanimrect(pos[F], anim_idx, tanim, owner, Rect(Point(0, h - lines), w, lines));
+						dst.blit_animation(pos[F], anim_idx, tanim, owner->get_playercolor(),
+						                   Rect(Point(0, h - lines), w, lines));
 					} else if (upcast(const BuildingDescr, building, map_object_descr)) {
 						// this is a building therefore we either draw unoccupied or idle animation
 						uint32_t pic;
@@ -378,11 +379,12 @@ void GameRenderer::draw_objects(RenderTarget& dst,
 						} catch (MapObjectDescr::AnimationNonexistent &) {
 							pic = building->get_animation("idle");
 						}
-						dst.drawanim(pos[F], pic, 0, owner);
+						dst.blit_animation(pos[F], pic, 0, owner->get_playercolor());
 					} else if (const uint32_t pic = map_object_descr->main_animation()) {
-						dst.drawanim(pos[F], pic, 0, owner);
+						dst.blit_animation(pos[F], pic, 0, owner->get_playercolor());
 					} else if (map_object_descr->type() == MapObjectType::FLAG) {
-						dst.drawanim(pos[F], owner->tribe().flag_animation(), 0, owner);
+						dst.blit_animation(
+						   pos[F], owner->tribe().flag_animation(), 0, owner->get_playercolor());
 					}
 				}
 			}

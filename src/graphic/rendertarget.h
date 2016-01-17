@@ -28,11 +28,8 @@
 #include "graphic/color.h"
 #include "graphic/image.h"
 
+class Animation;
 class Surface;
-
-namespace Widelands {
-class Player;
-}
 
 /**
  * This class represents anything that can be rendered to.
@@ -103,9 +100,15 @@ public:
 	          const Point& ofs,
 	          BlendMode blend_mode = BlendMode::UseAlpha);
 
-	void drawanim(const Point& dst, uint32_t animation, uint32_t time, const Widelands::Player* = 0);
-	void drawanimrect
-		(const Point& dst, uint32_t animation, uint32_t time, const Widelands::Player*, const Rect& srcrc);
+	// Draw the 'animation' as it should appear at 'time' in this target ad 'dst'. Optionally, the animation is
+	// tinted with 'player_color' and cropped to 'source_rect'.
+	void blit_animation(const Point& dst, uint32_t animation, uint32_t time);
+	void blit_animation(const Point& dst, uint32_t animation, uint32_t time, const RGBColor& player_color);
+	void blit_animation(const Point& dst,
+	                    uint32_t animation,
+	                    uint32_t time,
+	                    const RGBColor& player_color,
+	                    const Rect& source_rect);
 
 	void reset();
 
@@ -116,6 +119,13 @@ public:
 protected:
 	bool clip(Rect & r) const;
 	bool to_surface_geometry(Point* dst, Rect* srcrc) const;
+
+	// Does the actual blitting.
+	void do_blit_animation(const Point& dst,
+	                       const Animation& animation,
+	                       uint32_t time,
+	                       const RGBColor* player_color,
+	                       const Rect& source_rect);
 
 	///The target surface
 	Surface* m_surface;
