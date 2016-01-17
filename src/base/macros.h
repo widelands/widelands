@@ -79,4 +79,7 @@ dynamic_cast<type *>(source)
 #define is_a(type, source) \
 (dynamic_cast<const type *>(source) != nullptr)
 
+// Throws a wexception for unreachable code.
+#define NEVER_HERE() throw WException(__FILE__, __LINE__, "Unreachable code was reached.")
+
 #endif  // end of include guard: WL_BASE_MACROS_H

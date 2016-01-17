@@ -297,6 +297,7 @@ const Widelands::TribeDescr::WaresOrder & AbstractWaresDisplay::icons_order() co
 	case Widelands::wwWORKER:
 		return m_tribe.workers_order();
 	}
+	NEVER_HERE();
 }
 
 const Widelands::TribeDescr::WaresOrderCoords & AbstractWaresDisplay::icons_order_coords() const
@@ -307,6 +308,7 @@ const Widelands::TribeDescr::WaresOrderCoords & AbstractWaresDisplay::icons_orde
 	case Widelands::wwWORKER:
 		return m_tribe.workers_order_coords();
 	}
+	NEVER_HERE();
 }
 
 

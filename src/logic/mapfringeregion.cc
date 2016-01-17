@@ -39,8 +39,7 @@ bool MapFringeRegion<Area<FCoords> >::advance(const Map & map) {
 	case 5: map.get_brn(m_area, &m_area); break;
 	case 6: map. get_rn(m_area, &m_area); break;
 	default:
-		assert(false);
-		break;
+	  NEVER_HERE();
 	}
 	if (--m_remaining_in_phase == 0) {
 		m_remaining_in_phase = m_area.radius;
@@ -67,8 +66,7 @@ bool MapFringeRegion<Area<> >::advance(const Map & map) {
 	case 5: map.get_brn(m_area, &m_area); break;
 	case 6: map. get_rn(m_area, &m_area); break;
 	default:
-		assert(false);
-		break;
+		NEVER_HERE();
 	}
 	if (--m_remaining_in_phase == 0) {
 		m_remaining_in_phase = m_area.radius;

@@ -623,7 +623,7 @@ std::string make_ligatures(const char* input) {
 				}
 			} catch (std::out_of_range e) {
 				log("Error trying to fetch Arabic diacritic form: %s\n", e.what());
-				assert(false);
+				NEVER_HERE();
 			}
 		} else if (kArabicFinalChars.count(c) == 1) { // All Arabic characters have a final form
 			try {
@@ -649,7 +649,7 @@ std::string make_ligatures(const char* input) {
 				c = find_arabic_letter_form(c, previous, next);
 			} catch (std::out_of_range e) {
 				log("Error trying to fetch Arabic character form: %s\n", e.what());
-				assert(false);
+				NEVER_HERE();
 			}
 		}
 

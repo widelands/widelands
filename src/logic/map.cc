@@ -1603,8 +1603,7 @@ void Map::get_neighbour
 	case WALK_SW: get_bln(f, o); break;
 	case WALK_W:  get_ln (f, o); break;
 	default:
-		assert(false);
-		break;
+		NEVER_HERE();
 	}
 }
 
@@ -1619,8 +1618,7 @@ void Map::get_neighbour
 	case WALK_SW: get_bln(f, o); break;
 	case WALK_W:  get_ln (f, o); break;
 	default:
-		assert(false);
-		break;
+		NEVER_HERE();
 	}
 }
 

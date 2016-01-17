@@ -1679,7 +1679,7 @@ void NetHost::set_player_init(uint8_t const number, uint8_t const index)
 			return;
 		}
 	}
-	assert(false);
+	NEVER_HERE();
 }
 
 

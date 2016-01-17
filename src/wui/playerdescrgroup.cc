@@ -329,5 +329,5 @@ void PlayerDescriptionGroup::toggle_playerinit()
 					 tribeinfo.initializations.size());
 		}
 	}
-	assert(false);
+	NEVER_HERE();
 }

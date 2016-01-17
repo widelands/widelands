@@ -155,8 +155,7 @@ void ChatOverlay::Impl::recompute()
 			}
 			chat_idx--;
 		} else {
-			// Shoudn't happen
-			assert(false);
+			NEVER_HERE();
 		}
 		havemessages_ = true;
 	}

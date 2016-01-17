@@ -115,7 +115,7 @@ void NetworkPlayerSettingsBackend::toggle_init(uint8_t id) {
 					 temp_tribeinfo.initializations.size());
 		}
 	}
-	assert(false);
+	NEVER_HERE();
 }
 
 /// Toggle through the teams

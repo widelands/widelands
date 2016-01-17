@@ -614,6 +614,7 @@ std::string GameMessageMenu::display_message_type_icon(Widelands::Message messag
 		case Widelands::Message::Type::kWarfareUnderAttack:
 			return "pics/message_new.png";
 	}
+	NEVER_HERE();
 }
 
 

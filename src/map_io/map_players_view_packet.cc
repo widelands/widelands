@@ -881,7 +881,7 @@ inline static void write_unseen_immovable
 			typeid(*map_object_descr).name(),
 			map_object_descr->name().c_str(),
 			map_object_descr->descname().c_str());
-		assert(false);
+		NEVER_HERE();
 	}
 	immovable_kinds_file.unsigned_8(immovable_kind);
 }

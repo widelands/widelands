@@ -140,7 +140,7 @@ void EditorToolMenu::changed_to() {
 		current_registry_pointer = nullptr; // no need for a window
 		break;
 	default:
-		assert(false);
+		NEVER_HERE();
 		break;
 	}
 
@@ -200,7 +200,7 @@ void EditorToolMenu::changed_to() {
 					*current_registry_pointer);
 				break;
 			default:
-				assert(false);
+				NEVER_HERE();
 			}
 	}
 }

@@ -423,8 +423,7 @@ public:
 	uint16_t width() override {return INFINITE_WIDTH; }
 	uint16_t hotspot_y() override {return 0;}
 	Texture* render(TextureCache* /* texture_cache */) override {
-		assert(false);
-		throw RenderError("This should never be called. This is a bug, please submit a report.");
+		NEVER_HERE();
 	}
 	bool is_non_mandatory_space() override {return true;}
 };

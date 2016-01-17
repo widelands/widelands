@@ -110,6 +110,7 @@ std::string get_unit_name(UNIT unit) {
 	/** TRANSLATOR: minute(s). Used in statistics. */
 	case UNIT_MIN:  return _("%1% min");
 	}
+	NEVER_HERE();
 }
 
 uint32_t ms_to_unit(UNIT unit, uint32_t ms) {
@@ -118,6 +119,7 @@ uint32_t ms_to_unit(UNIT unit, uint32_t ms) {
 	case UNIT_HOUR: return ms / hours;
 	case UNIT_MIN: return ms / minutes;
 	}
+	NEVER_HERE();
 }
 
 /**

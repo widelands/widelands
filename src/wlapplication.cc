@@ -1165,8 +1165,7 @@ void WLApplication::mainmenu_singleplayer()
 				return;
 			break;
 		default:
-			assert(false);
-			break;
+			NEVER_HERE();
 		}
 	}
 
@@ -1190,8 +1189,7 @@ void WLApplication::mainmenu_multiplayer()
 			case FullscreenMenuBase::MenuTarget::kLan:
 				break;
 			default:
-				assert(false);
-				break;
+				NEVER_HERE();
 		}
 
 		if (internet) {

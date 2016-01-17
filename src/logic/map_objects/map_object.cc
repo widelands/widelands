@@ -304,10 +304,7 @@ std::string MapObjectDescr::get_animation_name(uint32_t const anim) const {
 			return temp_anim.first;
 		}
 	}
-
-	// Never here
-	assert(false);
-	return "";
+	NEVER_HERE();
 }
 
 const Image* MapObjectDescr::representative_image(const RGBColor* player_color) const {

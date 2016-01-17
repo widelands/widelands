@@ -356,7 +356,7 @@ void MainMenuNewRandomMap::button_clicked(MainMenuNewRandomMap::ButtonId n) {
 		normalize_landmass(n);
 		break;
 	default:
-		assert(false);
+		NEVER_HERE();
 	}
 	nr_edit_box_changed();  // Update ID String
 }

@@ -287,7 +287,7 @@ void ProductionProgram::parse_ware_type_group
 			break;
 		default:
 			// scan for terminator should ensure that this cannot happen
-			assert(false);
+			NEVER_HERE();
 		}
 	}
 }
@@ -816,8 +816,7 @@ void ProductionProgram::ActCheckMap::execute(Game& game, ProductionSite& ps) con
 			}
 		}
 		default:
-			assert(false);
-			break;
+			NEVER_HERE();
 	}
 }
 
