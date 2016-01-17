@@ -874,7 +874,7 @@ inline static void write_unseen_immovable
 		immovable_kind = UNSEEN_PORTDOCK;
 	else
 	{
-		// We should never get here.. debugging code until assert(false)
+		// We should never get here.. output some information about the situation.
 		log ("\nwidelands_map_players_view_data_packet.cc::write_unseen_immovable(): ");
 		log
 		("%s %s (%s) was not expected.\n",
