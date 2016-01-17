@@ -1925,7 +1925,6 @@ void Map::set_resources(const FCoords& c, uint8_t amount) {
 	if (c.field->m_resources == Widelands::kNoResource) {
 		return;
 	}
-	assert(amount <= c.field->m_initial_res_amount);
 	const auto note = NoteFieldResourceChanged{
 	   c, c.field->m_resources, c.field->m_initial_res_amount, c.field->m_res_amount,
 	};
