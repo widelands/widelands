@@ -25,6 +25,7 @@
 #include <unicode/utypes.h>
 
 #include "base/log.h"
+#include "base/wexception.h"
 #include "graphic/text/font_set.h"
 
 namespace {

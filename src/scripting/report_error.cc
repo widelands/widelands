@@ -21,6 +21,7 @@
 
 #include <cassert>
 
+#include "base/wexception.h"
 #include "scripting/lua_errors.h"
 
 /*

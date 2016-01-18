@@ -19,6 +19,8 @@
 
 #include "logic/mapdifferenceregion.h"
 
+#include "base/wexception.h"
+
 namespace Widelands {
 
 template <> bool MapDifferenceRegion<Area<FCoords> >::advance(const Map & map)

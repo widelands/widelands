@@ -19,6 +19,8 @@
 
 #include "logic/mapfringeregion.h"
 
+#include "base/wexception.h"
+
 namespace Widelands {
 
 template <>

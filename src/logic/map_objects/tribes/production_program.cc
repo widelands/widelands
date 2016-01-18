@@ -27,6 +27,7 @@
 
 #include "base/i18n.h"
 #include "base/macros.h"
+#include "base/wexception.h"
 #include "config.h"
 #include "economy/economy.h"
 #include "economy/flag.h"

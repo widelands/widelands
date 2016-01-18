@@ -33,6 +33,7 @@
 #include "base/macros.h"
 #include "base/point.h"
 #include "base/rect.h"
+#include "base/wexception.h"
 #include "graphic/align.h"
 #include "graphic/image_cache.h"
 #include "graphic/image_io.h"

@@ -27,6 +27,7 @@
 #include <boost/format.hpp>
 
 #include "base/i18n.h"
+#include "base/wexception.h"
 #include "editor/editorinteractive.h"
 #include "editor/map_generator.h"
 #include "graphic/font_handler1.h"

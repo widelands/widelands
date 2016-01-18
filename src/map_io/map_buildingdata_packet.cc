@@ -23,6 +23,7 @@
 #include <memory>
 
 #include "base/macros.h"
+#include "base/wexception.h"
 #include "economy/expedition_bootstrap.h"
 #include "economy/flag.h"
 #include "economy/portdock.h"

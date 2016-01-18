@@ -22,6 +22,7 @@
 #include <memory>
 
 #include "base/macros.h"
+#include "base/wexception.h"
 #include "chat/chat.h"
 #include "graphic/font_handler1.h"
 #include "graphic/rendertarget.h"

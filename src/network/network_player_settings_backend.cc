@@ -21,6 +21,7 @@
 
 #include "base/i18n.h"
 #include "base/log.h"
+#include "base/wexception.h"
 #include "logic/game_settings.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/player.h"

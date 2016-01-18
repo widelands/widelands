@@ -22,6 +22,7 @@
 #include <boost/format.hpp>
 
 #include "ai/computer_player.h"
+#include "base/wexception.h"
 #include "logic/map_objects/tribes/tribes.h"
 
 

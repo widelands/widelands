@@ -17,8 +17,9 @@
  *
  */
 
-#include "base/macros.h"
 #include "logic/map_objects/walkingdir.h"
+
+#include "base/wexception.h"
 
 namespace Widelands {
 

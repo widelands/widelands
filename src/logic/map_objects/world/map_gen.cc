@@ -23,6 +23,7 @@
 #include <string>
 #include <vector>
 
+#include "base/wexception.h"
 #include "logic/game_data_error.h"
 #include "logic/map_objects/world/world.h"
 #include "scripting/lua_table.h"

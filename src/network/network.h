@@ -26,6 +26,7 @@
 
 #include <SDL_net.h>
 
+#include "base/wexception.h"
 #include "io/streamread.h"
 #include "io/streamwrite.h"
 #include "logic/cmd_queue.h"

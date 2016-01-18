@@ -22,6 +22,7 @@
 #include <memory>
 
 #include "base/macros.h"
+#include "base/wexception.h"
 #include "economy/portdock.h"
 #include "io/filewrite.h"
 #include "logic/map_objects/tribes/warehouse.h"

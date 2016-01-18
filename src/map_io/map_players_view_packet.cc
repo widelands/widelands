@@ -26,6 +26,7 @@
 
 #include "base/log.h"
 #include "base/macros.h"
+#include "base/wexception.h"
 #include "economy/flag.h"
 #include "economy/road.h"
 #include "io/fileread.h"

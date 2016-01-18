@@ -23,6 +23,7 @@
 #include <string>
 
 #include "base/i18n.h"
+#include "base/wexception.h"
 #include "editor/editorinteractive.h"
 #include "editor/tools/editor_increase_resources_tool.h"
 #include "editor/tools/editor_set_resources_tool.h"
