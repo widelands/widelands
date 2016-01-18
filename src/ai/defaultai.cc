@@ -3214,7 +3214,6 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 					}
 
 					if (en_bo.total_count() == 1) {
-
 						//if the upgrade itself can be upgraded futher, we are more willing to upgrade 2nd building
 						if (en_bo.upgrade_extends_ || en_bo.upgrade_substitutes_) {
 							if (en_bo.current_stats_ > 30) {
