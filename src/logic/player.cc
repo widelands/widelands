@@ -153,7 +153,6 @@ Player::Player
 	m_msites_defeated    (0),
 	m_civil_blds_lost    (0),
 	m_civil_blds_defeated(0),
-	m_next_ship_id       (1),
 	m_fields            (nullptr),
 	m_allowed_worker_types(the_egbase.tribes().nrworkers(), true),
 	m_allowed_building_types(the_egbase.tribes().nrbuildings(), true),
@@ -1362,13 +1361,6 @@ void Player::get_ai_data(bool * value, uint32_t position) {
 	} else {
 		*value = false;
 	}
-}
-
-uint32_t Player::next_ship_id (bool increase){
-	if (increase) {
-		return m_next_ship_id++;
-	}
-	return m_next_ship_id;
 }
 
 /**

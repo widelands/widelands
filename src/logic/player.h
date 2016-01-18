@@ -479,8 +479,6 @@ public:
 	uint32_t msites_defeated    () const {return m_msites_defeated;}
 	uint32_t civil_blds_lost    () const {return m_civil_blds_lost;}
 	uint32_t civil_blds_defeated() const {return m_civil_blds_defeated;}
-	uint32_t next_ship_id       (bool increase);
-	uint32_t next_ship_id       () const {return m_next_ship_id;}
 	void count_casualty          () {++m_casualties;}
 	void count_kill              () {++m_kills;}
 	void count_msite_lost        () {++m_msites_lost;}
@@ -563,7 +561,6 @@ private:
 	uint32_t               m_casualties, m_kills;
 	uint32_t               m_msites_lost,     m_msites_defeated;
 	uint32_t               m_civil_blds_lost, m_civil_blds_defeated;
-	uint32_t               m_next_ship_id;
 	std::unordered_set<uint32_t>  m_remaining_shipname_indexes;
 
 	Field *               m_fields;

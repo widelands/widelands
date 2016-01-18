@@ -70,7 +70,6 @@ void GamePlayerInfoPacket::read
 					player.m_msites_defeated     = fr.unsigned_32();
 					player.m_civil_blds_lost     = fr.unsigned_32();
 					player.m_civil_blds_defeated = fr.unsigned_32();
-					player.m_next_ship_id = fr.unsigned_32();
 					for (int32_t ai_pos = 0; ai_pos < kAIDataSize; ++ai_pos) {
 						player.m_ai_data_int32[ai_pos] = fr.signed_32();
 						player.m_ai_data_uint32[ai_pos] = fr.unsigned_32();
@@ -124,7 +123,6 @@ void GamePlayerInfoPacket::write
 		fw.unsigned_32(plr->msites_defeated    ());
 		fw.unsigned_32(plr->civil_blds_lost    ());
 		fw.unsigned_32(plr->civil_blds_defeated());
-		fw.unsigned_32(plr->next_ship_id());
 		for (int32_t ai_pos = 0; ai_pos < kAIDataSize; ++ai_pos) {
 			fw.signed_32(plr->m_ai_data_int32[ai_pos]);
 			fw.unsigned_32(plr->m_ai_data_uint32[ai_pos]);
