@@ -20,7 +20,9 @@
 #include "graphic/gl/dither_program.h"
 
 #include "base/wexception.h"
+#include "graphic/gl/coordinate_conversion.h"
 #include "graphic/gl/fields_to_draw.h"
+#include "graphic/gl/utils.h"
 #include "graphic/image_io.h"
 #include "graphic/texture.h"
 #include "io/filesystem/layered_filesystem.h"
@@ -37,6 +39,8 @@ attribute vec2 attr_position;
 attribute vec2 attr_texture_offset;
 attribute vec2 attr_texture_position;
 
+uniform float u_z_value;
+
 // Output of vertex shader.
 varying float var_brightness;
 varying vec2 var_dither_texture_position;
@@ -48,7 +52,7 @@ void main() {
 	var_dither_texture_position = attr_dither_texture_position;
 	var_texture_offset = attr_texture_offset;
 	var_texture_position = attr_texture_position;
-	gl_Position = vec4(attr_position, 0., 1.);
+	gl_Position = vec4(attr_position, u_z_value, 1.);
 }
 )";
 
@@ -64,12 +68,18 @@ varying vec2 var_dither_texture_position;
 varying vec2 var_texture_position;
 varying vec2 var_texture_offset;
 
+// TODO(sirver): This is a hack to make sure we are sampling inside of the
+// terrain texture. This is a common problem with OpenGL and texture atlases.
+#define MARGIN 1e-2
+
 void main() {
-	vec4 clr = texture2D(u_terrain_texture,
-			var_texture_offset + u_texture_dimensions * fract(var_texture_position));
-	clr.rgb *= var_brightness;
-	clr.a = 1. - texture2D(u_dither_texture, var_dither_texture_position).a;
-	gl_FragColor = clr;
+	vec2 texture_fract = clamp(
+			fract(var_texture_position),
+			vec2(MARGIN, MARGIN),
+			vec2(1. - MARGIN, 1. - MARGIN));
+	vec4 clr = texture2D(u_terrain_texture, var_texture_offset + u_texture_dimensions * texture_fract);
+	gl_FragColor = vec4(clr.rgb * var_brightness,
+			1. - texture2D(u_dither_texture, var_dither_texture_position).a);
 }
 )";
 
@@ -87,21 +97,21 @@ DitherProgram::DitherProgram() {
 	u_dither_texture_ = glGetUniformLocation(gl_program_.object(), "u_dither_texture");
 	u_terrain_texture_ = glGetUniformLocation(gl_program_.object(), "u_terrain_texture");
 	u_texture_dimensions_ = glGetUniformLocation(gl_program_.object(), "u_texture_dimensions");
+	u_z_value_ = glGetUniformLocation(gl_program_.object(), "u_z_value");
 
 	dither_mask_.reset(new Texture(load_image_as_sdl_surface("world/pics/edge.png", g_fs), true));
 
-	glBindTexture(GL_TEXTURE_2D, dither_mask_->get_gl_texture());
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, static_cast<GLint>(GL_CLAMP));
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, static_cast<GLint>(GL_CLAMP));
+	Gl::State::instance().bind(GL_TEXTURE0, dither_mask_->blit_data().texture_id);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, static_cast<GLint>(GL_CLAMP_TO_EDGE));
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, static_cast<GLint>(GL_CLAMP_TO_EDGE));
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, static_cast<GLint>(GL_LINEAR));
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, static_cast<GLint>(GL_LINEAR));
-	glBindTexture(GL_TEXTURE_2D, 0);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, static_cast<GLint>(GL_NEAREST));
 }
 
 DitherProgram::~DitherProgram() {}
 
 void DitherProgram::add_vertex(const FieldsToDraw::Field& field,
-                               const int order_index,
+                               const TrianglePoint triangle_point,
                                const FloatPoint& texture_offset) {
 	vertices_.emplace_back();
 	PerVertexData& back = vertices_.back();
@@ -114,18 +124,18 @@ void DitherProgram::add_vertex(const FieldsToDraw::Field& field,
 	back.texture_offset_x = texture_offset.x;
 	back.texture_offset_y = texture_offset.y;
 
-	switch (order_index) {
-	case 0:
-		back.dither_texture_x = 0.;
-		back.dither_texture_y = 0.;
-		break;
-	case 1:
+	switch (triangle_point) {
+	case TrianglePoint::kTopRight:
 		back.dither_texture_x = 1.;
-		back.dither_texture_y = 0.;
-		break;
-	case 2:
-		back.dither_texture_x = 0.5;
 		back.dither_texture_y = 1.;
+		break;
+	case TrianglePoint::kTopLeft:
+		back.dither_texture_x = 0.;
+		back.dither_texture_y = 1.;
+		break;
+	case TrianglePoint::kBottomMiddle:
+		back.dither_texture_x = 0.5;
+		back.dither_texture_y = 0.;
 		break;
 	default:
 		throw wexception("Never here.");
@@ -149,71 +159,53 @@ void DitherProgram::maybe_add_dithering_triangle(
 	if (terrains.get(my_terrain).dither_layer() <
 	    other_terrain_description.dither_layer()) {
 		const FloatPoint texture_offset =
-		   other_terrain_description.get_texture(gametime).texture_coordinates().top_left();
-		add_vertex(fields_to_draw.at(idx1), 0, texture_offset);
-		add_vertex(fields_to_draw.at(idx2), 1, texture_offset);
-		add_vertex(fields_to_draw.at(idx3), 2, texture_offset);
+		   to_gl_texture(other_terrain_description.get_texture(gametime).blit_data()).origin();
+		add_vertex(fields_to_draw.at(idx1), TrianglePoint::kTopRight, texture_offset);
+		add_vertex(fields_to_draw.at(idx2), TrianglePoint::kTopLeft, texture_offset);
+		add_vertex(fields_to_draw.at(idx3), TrianglePoint::kBottomMiddle, texture_offset);
 	}
 }
 
-void DitherProgram::gl_draw(int gl_texture, float texture_w, float texture_h) {
+void DitherProgram::gl_draw(int gl_texture, float texture_w, float texture_h, const float z_value) {
 	glUseProgram(gl_program_.object());
 
-	glEnableVertexAttribArray(attr_brightness_);
-	glEnableVertexAttribArray(attr_dither_texture_position_);
-	glEnableVertexAttribArray(attr_position_);
-	glEnableVertexAttribArray(attr_texture_offset_);
-	glEnableVertexAttribArray(attr_texture_position_);
+	auto& gl_state = Gl::State::instance();
+	gl_state.enable_vertex_attrib_array({attr_brightness_,
+	                                   attr_dither_texture_position_,
+	                                   attr_position_,
+	                                   attr_texture_offset_,
+	                                   attr_texture_position_});
 
-	glBindBuffer(GL_ARRAY_BUFFER, gl_array_buffer_.object());
-	glBufferData(GL_ARRAY_BUFFER,
-	             sizeof(PerVertexData) * vertices_.size(),
-	             vertices_.data(),
-	             GL_STREAM_DRAW);
+	gl_array_buffer_.bind();
+	gl_array_buffer_.update(vertices_);
 
-	const auto set_attrib_pointer = [](const int vertex_index, int num_items, int offset) {
-		glVertexAttribPointer(vertex_index,
-		                      num_items,
-		                      GL_FLOAT,
-		                      GL_FALSE,
-		                      sizeof(PerVertexData),
-		                      reinterpret_cast<void*>(offset));
-	};
-	set_attrib_pointer(attr_brightness_, 1, offsetof(PerVertexData, brightness));
-	set_attrib_pointer(attr_dither_texture_position_, 2, offsetof(PerVertexData, dither_texture_x));
-	set_attrib_pointer(attr_position_, 2, offsetof(PerVertexData, gl_x));
-	set_attrib_pointer(attr_texture_offset_, 2, offsetof(PerVertexData, texture_offset_x));
-	set_attrib_pointer(attr_texture_position_, 2, offsetof(PerVertexData, texture_x));
+	Gl::vertex_attrib_pointer(
+	   attr_brightness_, 1, sizeof(PerVertexData), offsetof(PerVertexData, brightness));
+	Gl::vertex_attrib_pointer(attr_dither_texture_position_,
+	                       2,
+	                       sizeof(PerVertexData),
+	                       offsetof(PerVertexData, dither_texture_x));
+	Gl::vertex_attrib_pointer(attr_position_, 2, sizeof(PerVertexData), offsetof(PerVertexData, gl_x));
+	Gl::vertex_attrib_pointer(
+	   attr_texture_offset_, 2, sizeof(PerVertexData), offsetof(PerVertexData, texture_offset_x));
+	Gl::vertex_attrib_pointer(
+	   attr_texture_position_, 2, sizeof(PerVertexData), offsetof(PerVertexData, texture_x));
 
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	gl_state.bind(GL_TEXTURE0, dither_mask_->blit_data().texture_id);
+	gl_state.bind(GL_TEXTURE1, gl_texture);
 
-	// Set the sampler texture unit to 0
-	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, dither_mask_->get_gl_texture());
-
-	glActiveTexture(GL_TEXTURE1);
-	glBindTexture(GL_TEXTURE_2D, gl_texture);
-
+	glUniform1f(u_z_value_, z_value);
 	glUniform1i(u_dither_texture_, 0);
 	glUniform1i(u_terrain_texture_, 1);
 	glUniform2f(u_texture_dimensions_, texture_w, texture_h);
 
 	glDrawArrays(GL_TRIANGLES, 0, vertices_.size());
-
-	glBindTexture(GL_TEXTURE_2D, 0);
-	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, 0);
-
-	glDisableVertexAttribArray(attr_brightness_);
-	glDisableVertexAttribArray(attr_dither_texture_position_);
-	glDisableVertexAttribArray(attr_position_);
-	glDisableVertexAttribArray(attr_texture_offset_);
-	glDisableVertexAttribArray(attr_texture_position_);
 }
 
 void DitherProgram::draw(const uint32_t gametime,
                          const DescriptionMaintainer<Widelands::TerrainDescription>& terrains,
-                         const FieldsToDraw& fields_to_draw) {
+                         const FieldsToDraw& fields_to_draw,
+                         const float z_value) {
 	// This method expects that all terrains have the same dimensions and that
 	// all are packed into the same texture atlas, i.e. all are in the same GL
 	// texture. It does not check for this invariance for speeds sake.
@@ -270,6 +262,10 @@ void DitherProgram::draw(const uint32_t gametime,
 		}
 	}
 
-	const Texture& texture = terrains.get(0).get_texture(0);
-	gl_draw(texture.get_gl_texture(), texture.texture_coordinates().w, texture.texture_coordinates().h);
+	const BlitData& blit_data = terrains.get(0).get_texture(0).blit_data();
+	const FloatRect texture_coordinates = to_gl_texture(blit_data);
+	gl_draw(blit_data.texture_id,
+	        texture_coordinates.w,
+	        texture_coordinates.h,
+	        z_value);
 }

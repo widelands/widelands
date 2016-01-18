@@ -95,7 +95,7 @@ public:
 	 * by the win_condition scripts.
 	 * \param player : the player idx;
 	 * \param result : the player result
-	 * \param info : The info string (\see \struct PlayerEndStatus) 
+	 * \param info : The info string (\see \struct PlayerEndStatus)
 	 */
 	virtual void report_result
 	    (uint8_t /* player */,

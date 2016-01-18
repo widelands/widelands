@@ -70,12 +70,8 @@ public:
 	int width() const override {return texture()->width();}
 	int height() const override {return texture()->height();}
 
-	int get_gl_texture() const override {
-		return texture()->get_gl_texture();
-	}
-
-	const FloatRect& texture_coordinates() const override {
-		return texture()->texture_coordinates();
+	const BlitData& blit_data() const override {
+		return texture()->blit_data();
 	}
 
 private:
@@ -143,8 +139,8 @@ private:
 	ImageCache* const image_cache_;  // not owned
 };
 
-IFontHandler1 * create_fonthandler(Graphic* gr) {
-	return new FontHandler1(&gr->images());
+IFontHandler1 * create_fonthandler(ImageCache* image_cache) {
+	return new FontHandler1(image_cache);
 }
 
 IFontHandler1 * g_fh1 = nullptr;

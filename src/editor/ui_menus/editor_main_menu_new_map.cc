@@ -33,8 +33,8 @@
 #include "graphic/texture.h"
 #include "logic/editor_game_base.h"
 #include "logic/map.h"
-#include "logic/world/terrain_description.h"
-#include "logic/world/world.h"
+#include "logic/map_objects/world/terrain_description.h"
+#include "logic/map_objects/world/world.h"
 #include "ui_basic/progresswindow.h"
 
 inline EditorInteractive& MainMenuNewMap::eia() {
@@ -125,11 +125,7 @@ void MainMenuNewMap::clicked_create_map() {
 	egbase.load_graphics(loader);
 
 	map.recalc_whole_map(egbase.world());
-
-	parent.set_need_save(true);
-	parent.toggle_minimap();
-	parent.toggle_minimap();
-
+	parent.map_changed(EditorInteractive::MapWas::kReplaced);
 	die();
 }
 

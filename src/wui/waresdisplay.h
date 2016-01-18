@@ -24,9 +24,9 @@
 
 #include <boost/signals2.hpp>
 
-#include "logic/tribes/tribe_descr.h"
-#include "logic/warelist.h"
-#include "logic/wareworker.h"
+#include "logic/map_objects/tribes/tribe_descr.h"
+#include "logic/map_objects/tribes/warelist.h"
+#include "logic/map_objects/tribes/wareworker.h"
 #include "ui_basic/textarea.h"
 
 namespace UI {struct Textarea;}

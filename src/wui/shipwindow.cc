@@ -17,15 +17,15 @@
  *
  */
 
-#include "logic/ship.h"
+#include "logic/map_objects/tribes/ship.h"
 
 #include "base/macros.h"
 #include "economy/portdock.h"
 #include "economy/ware_instance.h"
 #include "graphic/graphic.h"
+#include "logic/map_objects/tribes/warehouse.h"
+#include "logic/map_objects/tribes/worker.h"
 #include "logic/player.h"
-#include "logic/warehouse.h"
-#include "logic/worker.h"
 #include "ui_basic/box.h"
 #include "wui/actionconfirm.h"
 #include "wui/interactive_gamebase.h"

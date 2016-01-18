@@ -91,7 +91,7 @@ protected:
 	virtual int32_t calculate_buildcaps(const Widelands::TCoords<Widelands::FCoords> c) = 0;
 
 	GameMainMenuWindows m_mainm_windows;
-	ChatProvider           * m_chatProvider;
+	ChatProvider           * chat_provider_;
 	std::string              m_building_census_format;
 	std::string              m_building_statistics_format;
 	std::string              m_building_tooltip_format;
@@ -102,6 +102,9 @@ protected:
 	UI::UniqueWindow::Registry m_game_summary;
 
 	UI::Button m_toggle_buildhelp;
+
+private:
+	void on_buildhelp_changed(const bool value) override;
 };
 
 #endif  // end of include guard: WL_WUI_INTERACTIVE_GAMEBASE_H

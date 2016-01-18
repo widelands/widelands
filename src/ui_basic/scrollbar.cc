@@ -263,7 +263,7 @@ void Scrollbar::draw_button(RenderTarget & dst, const Area area, const Rect r) {
 		uint16_t cpw = pic->width();
 		uint16_t cph = pic->height();
 
-		dst.blit(r.top_left() + Point((r.w - cpw) / 2, (r.h - cph) / 2), pic);
+		dst.blit(r.origin() + Point((r.w - cpw) / 2, (r.h - cph) / 2), pic);
 	}
 
 	// Draw border
@@ -271,35 +271,35 @@ void Scrollbar::draw_button(RenderTarget & dst, const Area area, const Rect r) {
 
 	if (area != m_pressed) {
 		// top edge
-		dst.brighten_rect(Rect(r.top_left(), r.w, 2), BUTTON_EDGE_BRIGHT_FACTOR);
+		dst.brighten_rect(Rect(r.origin(), r.w, 2), BUTTON_EDGE_BRIGHT_FACTOR);
 		// left edge
 		dst.brighten_rect
-			(Rect(r.top_left() + Point(0, 2), 2, r.h - 2), BUTTON_EDGE_BRIGHT_FACTOR);
+			(Rect(r.origin() + Point(0, 2), 2, r.h - 2), BUTTON_EDGE_BRIGHT_FACTOR);
 		// bottom edge
-		dst.fill_rect(Rect(r.top_left() + Point(2, r.h - 2), r.w - 2, 1), black);
-		dst.fill_rect(Rect(r.top_left() + Point(1, r.h - 1), r.w - 1, 1), black);
+		dst.fill_rect(Rect(r.origin() + Point(2, r.h - 2), r.w - 2, 1), black);
+		dst.fill_rect(Rect(r.origin() + Point(1, r.h - 1), r.w - 1, 1), black);
 		// right edge
-		dst.fill_rect(Rect(r.top_left() + Point(r.w - 2, 2), 1, r.h - 2), black);
-		dst.fill_rect(Rect(r.top_left() + Point(r.w - 1, 1), 1, r.h - 1), black);
+		dst.fill_rect(Rect(r.origin() + Point(r.w - 2, 2), 1, r.h - 2), black);
+		dst.fill_rect(Rect(r.origin() + Point(r.w - 1, 1), 1, r.h - 1), black);
 	} else {
 		// bottom edge
 		dst.brighten_rect
-			(Rect(r.top_left() + Point(0, r.h - 2), r.w, 2), BUTTON_EDGE_BRIGHT_FACTOR);
+			(Rect(r.origin() + Point(0, r.h - 2), r.w, 2), BUTTON_EDGE_BRIGHT_FACTOR);
 		// right edge
 		dst.brighten_rect
-			(Rect(r.top_left() + Point(r.w - 2, 0), 2, r.h - 2), BUTTON_EDGE_BRIGHT_FACTOR);
+			(Rect(r.origin() + Point(r.w - 2, 0), 2, r.h - 2), BUTTON_EDGE_BRIGHT_FACTOR);
 		// top edge
-		dst.fill_rect(Rect(r.top_left(), r.w - 1, 1), black);
-		dst.fill_rect(Rect(r.top_left() + Point(0, 1), r.w - 2, 1), black);
+		dst.fill_rect(Rect(r.origin(), r.w - 1, 1), black);
+		dst.fill_rect(Rect(r.origin() + Point(0, 1), r.w - 2, 1), black);
 		// left edge
-		dst.fill_rect(Rect(r.top_left(), 1, r.h - 1), black);
-		dst.fill_rect(Rect(r.top_left() + Point(1, 0), 1, r.h - 2), black);
+		dst.fill_rect(Rect(r.origin(), 1, r.h - 1), black);
+		dst.fill_rect(Rect(r.origin() + Point(1, 0), 1, r.h - 2), black);
 	}
 }
 
 
 void Scrollbar::draw_area(RenderTarget & dst, const Area area, const Rect r) {
-	dst.tile(r, m_pic_background, Point(get_x(), get_y()) + r.top_left());
+	dst.tile(r, m_pic_background, Point(get_x(), get_y()) + r.origin());
 
 	if (area == m_pressed)
 		dst.brighten_rect(r, BUTTON_EDGE_BRIGHT_FACTOR);

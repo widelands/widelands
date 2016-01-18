@@ -26,7 +26,7 @@
 #include "base/i18n.h"
 #include "graphic/image.h"
 #include "logic/description_maintainer.h"
-#include "logic/world/editor_category.h"
+#include "logic/map_objects/world/editor_category.h"
 #include "ui_basic/box.h"
 #include "ui_basic/checkbox.h"
 #include "ui_basic/panel.h"

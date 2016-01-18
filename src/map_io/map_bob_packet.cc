@@ -20,9 +20,9 @@
 #include "map_io/map_bob_packet.h"
 
 #include "io/fileread.h"
+#include "logic/map_objects/tribes/tribe_descr.h"
+#include "logic/map_objects/world/world.h"
 #include "logic/player.h"
-#include "logic/tribes/tribe_descr.h"
-#include "logic/world/world.h"
 #include "map_io/map_object_loader.h"
 #include "map_io/map_object_saver.h"
 #include "map_io/world_legacy_lookup_table.h"

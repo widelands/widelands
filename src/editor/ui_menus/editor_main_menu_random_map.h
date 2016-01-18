@@ -34,7 +34,7 @@ namespace Widelands {
 	struct UniqueRandomMapInfo;
 }
 
-struct EditorInteractive;
+class EditorInteractive;
 namespace UI {
 template <typename T, typename ID> struct IDButton;
 }

@@ -50,10 +50,13 @@ struct GraphicResolutionChanged {
  */
 class Graphic {
 public:
-	// Creates a new graphic mode with the given resolution if fullscreen is
-	// false, otherwise a window that fills the screen.
-	Graphic(int window_mode_w, int window_mode_height, bool fullscreen);
+	// Creates a new Graphic object. Must call initialize before first use.
+	Graphic();
 	~Graphic();
+
+	// Initializes with the given resolution if fullscreen is false, otherwise a
+	// window that fills the screen.
+	void initialize(int window_mode_w, int window_mode_height, bool fullscreen);
 
 	// Gets and sets the resolution.
 	void change_resolution(int w, int h);
@@ -96,7 +99,7 @@ private:
 	/// A RenderTarget for screen_. This is initialized during init()
 	std::unique_ptr<RenderTarget> m_rendertarget;
 	/// This marks the complete screen for updating.
-	bool m_update;
+	bool m_requires_update;
 
 	/// Non-volatile cache of independent images.
 	std::unique_ptr<ImageCache> image_cache_;

@@ -25,7 +25,7 @@
 #include "economy/road.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/editor_game_base.h"
-#include "logic/instances.h"
+#include "logic/map_objects/map_object.h"
 #include "logic/player.h"
 
 namespace Widelands {

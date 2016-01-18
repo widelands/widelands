@@ -26,7 +26,7 @@
 
 #include <stdint.h>
 
-#include "logic/road_textures.h"
+#include "logic/map_objects/tribes/road_textures.h"
 
 // Helper struct that contains the data needed for drawing all fields. All
 // methods are inlined for performance reasons.
@@ -43,14 +43,20 @@ public:
 		const RoadTextures* road_textures; // Road Textures to use for drawing.
 	};
 
-	FieldsToDraw(int minfx, int maxfx, int minfy, int maxfy)
-	   : min_fx_(minfx),
-	     max_fx_(maxfx),
-	     min_fy_(minfy),
-	     max_fy_(maxfy),
-	     w_(max_fx_ - min_fx_ + 1),
-	     h_(max_fy_ - min_fy_ + 1) {
-		fields_.resize(w_ * h_);
+	FieldsToDraw() = default;
+
+	// Resize this fields to draw for reuse.
+	void reset(int minfx, int maxfx, int minfy, int maxfy) {
+		min_fx_ = minfx;
+		max_fx_ = maxfx;
+		min_fy_ = minfy;
+		max_fy_ = maxfy;
+		w_ = max_fx_ - min_fx_ + 1;
+		h_ = max_fy_ - min_fy_ + 1;
+		const size_t dimension = w_ * h_;
+		if (fields_.size() != dimension) {
+			fields_.resize(dimension);
+		}
 	}
 
 	// Calculates the index of the given field with ('fx', 'fy') being geometric
@@ -84,14 +90,14 @@ public:
 
 private:
 	// Minimum and maximum field coordinates (geometric) to render. Can be negative.
-	const int min_fx_;
-	const int max_fx_;
-	const int min_fy_;
-	const int max_fy_;
+	int min_fx_;
+	int max_fx_;
+	int min_fy_;
+	int max_fy_;
 
 	// Width and height in number of fields.
-	const int w_;
-	const int h_;
+	int w_;
+	int h_;
 
 	std::vector<Field> fields_;
 };

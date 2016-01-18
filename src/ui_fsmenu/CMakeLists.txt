@@ -56,6 +56,7 @@ wl_library(ui_fsmenu
     map_io_map_loader
     network
     profile
+    scripting_coroutine
     scripting_lua_interface
     scripting_lua_table
     sound

@@ -35,22 +35,22 @@
 #include "economy/portdock.h"
 #include "economy/road.h"
 #include "economy/wares_queue.h"
-#include "logic/constructionsite.h"
 #include "logic/findbob.h"
 #include "logic/findimmovable.h"
 #include "logic/findnode.h"
 #include "logic/map.h"
-#include "logic/militarysite.h"
+#include "logic/map_objects/tribes/constructionsite.h"
+#include "logic/map_objects/tribes/militarysite.h"
+#include "logic/map_objects/tribes/productionsite.h"
+#include "logic/map_objects/tribes/ship.h"
+#include "logic/map_objects/tribes/soldier.h"
+#include "logic/map_objects/tribes/trainingsite.h"
+#include "logic/map_objects/tribes/tribe_descr.h"
+#include "logic/map_objects/tribes/tribes.h"
+#include "logic/map_objects/tribes/warehouse.h"
+#include "logic/map_objects/world/world.h"
 #include "logic/player.h"
 #include "logic/playercommand.h"
-#include "logic/productionsite.h"
-#include "logic/ship.h"
-#include "logic/soldier.h"
-#include "logic/trainingsite.h"
-#include "logic/tribes/tribe_descr.h"
-#include "logic/tribes/tribes.h"
-#include "logic/warehouse.h"
-#include "logic/world/world.h"
 
 // following is in miliseconds (widelands counts time in ms)
 constexpr int kFieldInfoExpiration = 12 * 1000;
@@ -5471,6 +5471,8 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 	uint32_t best_target = std::numeric_limits<uint32_t>::max();
 	uint8_t best_score = 0;
 	uint32_t count = 0;
+	// sites that were either conquered or destroyed
+	std::vector<uint32_t> disappeared_sites;
 
 	for (std::map<uint32_t, EnemySiteObserver>::iterator site = enemy_sites.begin();
 	     site != enemy_sites.end();
@@ -5630,9 +5632,13 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 		}
 
 		if (site_to_be_removed < std::numeric_limits<uint32_t>::max()) {
-			enemy_sites.erase(site_to_be_removed);
-			continue;
+			disappeared_sites.push_back(site_to_be_removed);
 		}
+	}
+
+	while (!disappeared_sites.empty()) {
+		enemy_sites.erase(disappeared_sites.back());
+		disappeared_sites.pop_back();
 	}
 
 	// modifying enemysites_check_delay_,this depends on the count
@@ -5648,6 +5654,8 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 	if (best_target == std::numeric_limits<uint32_t>::max()) {
 		return false;
 	}
+
+	assert(enemy_sites.count(best_target) > 0);
 
 	// attacking
 	FCoords f = map.get_fcoords(coords_unhash(best_target));
