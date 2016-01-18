@@ -81,6 +81,7 @@ bool FindNodeSize::accept(const Map &, const FCoords & coord) const {
 	case sizeAny:
 		return true;
 	}
+	NEVER_HERE();
 }
 
 bool FindNodeImmovableSize::accept(const Map &, const FCoords & coord) const {

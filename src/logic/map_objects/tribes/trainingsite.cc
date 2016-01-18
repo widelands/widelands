@@ -124,6 +124,7 @@ int32_t TrainingSiteDescr::get_min_level(const TrainingAttribute at) const {
 	case atrTotal:
 		throw wexception("Unknown attribute value!");
 	}
+	NEVER_HERE();
 }
 
 /**
@@ -145,6 +146,7 @@ int32_t TrainingSiteDescr::get_max_level(const TrainingAttribute at) const {
 	case atrTotal:
 		throw wexception("Unknown attribute value!");
 	}
+	NEVER_HERE();
 }
 
 int32_t

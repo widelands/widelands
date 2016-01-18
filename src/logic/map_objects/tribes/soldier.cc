@@ -345,6 +345,7 @@ uint32_t Soldier::get_level(TrainingAttribute const at) const {
 	case atrTotal:
 		return m_hp_level + m_attack_level + m_defense_level + m_evade_level;
 	}
+	NEVER_HERE();
 }
 
 

@@ -114,6 +114,7 @@ GameLogicCommand & QueueCmdFactory::create_correct_queue_command
 	case QueueCommandTypes::kNone:
 		throw wexception("Unknown Queue_Cmd_Id in file: %u", id);
 	}
+	NEVER_HERE();
 }
 
 }

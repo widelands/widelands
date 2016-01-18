@@ -55,6 +55,7 @@ MapGenLandResource::get_bob_category(MapGenAreaInfo::MapGenTerrainType terrType)
 	case MapGenAreaInfo::ttMountainsSnow:
 		return nullptr;
 	}
+	NEVER_HERE();
 }
 
 MapGenLandResource::MapGenLandResource(const LuaTable& table, MapGenInfo& mapGenInfo) {
@@ -146,6 +147,7 @@ size_t MapGenAreaInfo::get_num_terrains(MapGenTerrainType const terrType) const 
 	case ttMountainsSnow:
 		return terrains3_.size();
 	}
+	NEVER_HERE();
 }
 
 DescriptionIndex MapGenAreaInfo::get_terrain(MapGenTerrainType const terrType,
@@ -177,6 +179,7 @@ DescriptionIndex MapGenAreaInfo::get_terrain(MapGenTerrainType const terrType,
 	case ttMountainsSnow:
 		return terrains3_[index];
 	}
+	NEVER_HERE();
 }
 
 uint32_t MapGenInfo::get_sum_land_weight() const {
@@ -224,6 +227,7 @@ size_t MapGenInfo::get_num_areas(MapGenAreaInfo::MapGenAreaType const areaType) 
 	case MapGenAreaInfo::atWasteland:
 		return wasteland_areas_.size();
 	}
+	NEVER_HERE();
 }
 
 const MapGenAreaInfo& MapGenInfo::get_area(MapGenAreaInfo::MapGenAreaType const areaType,
@@ -238,6 +242,7 @@ const MapGenAreaInfo& MapGenInfo::get_area(MapGenAreaInfo::MapGenAreaType const 
 	case MapGenAreaInfo::atWasteland:
 		return wasteland_areas_.at(index);
 	}
+	NEVER_HERE();
 }
 
 const MapGenBobCategory* MapGenInfo::get_bob_category(const std::string& bobCategory) const {

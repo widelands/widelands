@@ -684,6 +684,7 @@ std::string to_string(const MapObjectType type) {
 	case MapObjectType::MAPOBJECT:
 		throw wexception("Unknown MapObjectType %d.", static_cast<int>(type));
 	}
+	NEVER_HERE();
 }
 
 }
