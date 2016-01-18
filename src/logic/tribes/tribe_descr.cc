@@ -333,11 +333,8 @@ const RoadTextures& TribeDescr::road_textures() const {
 	return road_textures_;
 }
 
-const std::string TribeDescr::get_shipname_by_index(const uint32_t pos, const uint32_t id) const {
-	if (pos >= ship_names_.size()) {
-		// We dont have name for this pos, returning default
-		return (boost::format("Ship %i") % id).str();
-	}
+const std::string& TribeDescr::get_shipname_by_index(const uint32_t pos) const {
+	assert(pos < ship_names_.size());
 	return ship_names_[pos];
 }
 

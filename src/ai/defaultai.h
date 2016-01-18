@@ -228,6 +228,7 @@ private:
 	void gain_building(Widelands::Building&);
 	void lose_building(const Widelands::Building&);
 	void gain_ship(Widelands::Ship&, NewShip);
+	void check_ship_in_expedition(ShipObserver&, uint32_t);
 	void expedition_management(ShipObserver&);
 	void out_of_resources_site(const Widelands::ProductionSite&);
 	void soldier_trained(const Widelands::TrainingSite&);
@@ -359,7 +360,7 @@ private:
 
 	enum {kReprioritize, kStopShipyard, kStapShipyard};
 
-	std::vector<int16_t> marineTaskQueue_;
+	std::vector<int16_t> marine_task_queue;
 
 	std::unique_ptr<Notifications::Subscriber<Widelands::NoteFieldPossession>>
 	   field_possession_subscriber_;

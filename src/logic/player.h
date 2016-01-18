@@ -502,6 +502,8 @@ public:
 
 	void read_statistics(FileRead &);
 	void write_statistics(FileWrite &) const;
+	void read_remaining_shipidx(FileRead &);
+	void write_remaining_shipidx(FileWrite &) const;
 	void sample_statistics();
 	void ware_produced(DescriptionIndex);
 
@@ -526,8 +528,7 @@ public:
 	void get_ai_data(uint32_t * value, uint32_t position);
 	void get_ai_data(int16_t * value, uint32_t position);
 	void get_ai_data(bool * value, uint32_t position);
-	uint32_t pick_shipname_index(uint32_t);
-	void set_shipname_used(uint32_t);
+	const std::string pick_shipname();
 
 private:
 	BuildingStatsVector* get_mutable_building_statistics(const DescriptionIndex& i);

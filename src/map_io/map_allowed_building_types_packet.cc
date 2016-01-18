@@ -57,16 +57,12 @@ void MapAllowedBuildingTypesPacket::read
 		int32_t const packet_version =
 			prof.get_safe_section("global").get_safe_int("packet_version");
 		if (packet_version == kCurrentPacketVersion) {
-			
 			PlayerNumber const nr_players = egbase.map().get_nrplayers();
-			printf ("DEBUG: reading buildings for %d players\n", nr_players);
 			upcast(Game const, game, &egbase);
 
 			//  Now read all players and buildings.
 			iterate_players_existing(p, nr_players, egbase, player) {
-				
-				printf (" player: %s\n", (boost::format("player_%u") % static_cast<unsigned int>(p)).str().c_str());
-				
+
 				const TribeDescr & tribe = player->tribe();
 				//  All building types default to false in the game (not in the
 				//  editor).
@@ -112,10 +108,8 @@ void MapAllowedBuildingTypesPacket::write
 		("packet_version", kCurrentPacketVersion);
 
 	PlayerNumber const nr_players = egbase.map().get_nrplayers();
-	printf ("DEBUG: writing buildings for %d players\n", nr_players);
 	iterate_players_existing_const(p, nr_players, egbase, player) {
 		const TribeDescr & tribe = player->tribe();
-		printf (" creating section for player: %s\n", (boost::format("player_%u") % static_cast<unsigned int>(p)).str().c_str());
 		const std::string section_key = (boost::format("player_%u")
 													% static_cast<unsigned int>(p)).str();
 		Section & section = prof.create_section(section_key.c_str());

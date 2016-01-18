@@ -52,7 +52,7 @@ namespace Widelands {
  * Display information about a ship.
  */
 struct ShipWindow : UI::Window {
-	ShipWindow(InteractiveGameBase & igb, Ship & ship, std::string & title);
+	ShipWindow(InteractiveGameBase & igb, Ship & ship, const std::string & title);
 	virtual ~ShipWindow();
 
 	void think() override;
@@ -87,7 +87,7 @@ private:
 	ItemWaresDisplay * m_display;
 };
 
-ShipWindow::ShipWindow(InteractiveGameBase & igb, Ship & ship, std::string & title) :
+ShipWindow::ShipWindow(InteractiveGameBase & igb, Ship & ship, const std::string & title) :
 	Window(&igb, "shipwindow", 0, 0, 0, 0, title),
 	m_igbase(igb),
 	m_ship(ship)
@@ -357,7 +357,7 @@ void Ship::show_window(InteractiveGameBase & igb, bool avoid_fastclick)
 			m_window->restore();
 		m_window->move_to_top();
 	} else {
-		std::string title = get_owner()->tribe().get_shipname_by_index(get_shipname_index(), get_ship_id());
+		const std::string& title = get_shipname();
 		new ShipWindow(igb, *this, title);
 		if (!avoid_fastclick)
 			m_window->warp_mouse_to_fastclick_panel();

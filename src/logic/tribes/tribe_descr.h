@@ -144,7 +144,7 @@ public:
 
 	void resize_ware_orders(size_t maxLength);
 
-	const std::string get_shipname_by_index(const uint32_t, const uint32_t id = 0) const;
+	const std::string& get_shipname_by_index(uint32_t) const;
 	uint32_t count_defined_shipnames() const {return ship_names_.size();}
 
 private:

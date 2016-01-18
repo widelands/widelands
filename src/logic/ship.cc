@@ -100,11 +100,9 @@ void Ship::init(EditorGameBase& egbase) {
 	Notifications::publish(NoteShipMessage(this, NoteShipMessage::Message::kGained));
 	assert(get_owner());
 
-	// Assigning ship id and index of ship name (the ship name itself is not stored here)
-	m_id = get_owner()->next_ship_id(true);
-	m_shipname_index = get_owner()->pick_shipname_index(egbase.get_gametime());
-	get_owner()->set_shipname_used(m_shipname_index);
-	molog("New ship: %s\n", get_owner()->tribe().get_shipname_by_index(m_shipname_index, m_id).c_str());
+	// Assigning a ship name
+	m_shipname = get_owner()->pick_shipname();
+	molog("New ship: %s\n", m_shipname.c_str());
 }
 
 /**
@@ -1072,8 +1070,7 @@ void Ship::Loader::load(FileRead & fr)
 		m_ship_state = TRANSPORT;
 	}
 
-	m_id = fr.unsigned_32();
-	m_shipname_index = fr.unsigned_32();
+	m_shipname = fr.c_string();
 	m_lastdock = fr.unsigned_32();
 	m_destination = fr.unsigned_32();
 
@@ -1107,12 +1104,8 @@ void Ship::Loader::load_finish() {
 	// restore the state the ship is in
 	ship.m_ship_state = m_ship_state;
 
-	// Marking the name as used
-	ship.get_owner()->set_shipname_used(m_shipname_index);
-
 	// restore the  ship id and name
-	ship.m_id = m_id;
-	ship.m_shipname_index = m_shipname_index;
+	ship.m_shipname = m_shipname;
 
 	// if the ship is on an expedition, restore the expedition specific data
 	if (m_expedition) {
@@ -1203,8 +1196,7 @@ void Ship::save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw) {
 		fw.unsigned_8(static_cast<uint8_t>(m_expedition->island_explore_direction));
 	}
 
-	fw.unsigned_32(m_id);
-	fw.unsigned_32(m_shipname_index);
+	fw.string(m_shipname);
 	fw.unsigned_32(mos.get_object_file_index_or_zero(m_lastdock.get(egbase)));
 	fw.unsigned_32(mos.get_object_file_index_or_zero(m_destination.get(egbase)));
 

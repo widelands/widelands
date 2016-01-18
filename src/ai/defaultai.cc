@@ -87,7 +87,6 @@ constexpr int kColonyScan      = 3;
 constexpr int kTreesAround     = 4;
 constexpr int kEarlyMilitary   = 5;
 constexpr int kExpStartTime    = 6;
-constexpr int kExpShip         = 7;
 constexpr int kWoodDiff        = 0; //int32_t
 constexpr int kTargetMilit     = 1;
 constexpr int kLeastMilit      = 2;
@@ -899,7 +898,6 @@ void DefaultAI::late_initialization() {
 		player_->set_ai_data(last_attacked_player_, kLastAttack);
 		player_->set_ai_data(least_military_score_, kLeastMilit);
 		player_->set_ai_data(target_military_score_, kTargetMilit);
-		player_->set_ai_data(expedition_ship_, kExpShip);		
 
 	} else {
 		log (" %d: restoring saved AI data...\n", player_number());
@@ -945,8 +943,6 @@ void DefaultAI::late_initialization() {
 
 		player_->get_ai_data(&target_military_score_, kTargetMilit);
 		check_range<uint32_t>(target_military_score_, least_military_score_, 1000, "target_military_score_");
-		
-		player_->get_ai_data(&expedition_ship_, kExpShip);
 	}
 }
 
@@ -3586,11 +3582,11 @@ bool DefaultAI::marine_main_decisions() {
 	FleetStatus enough_ships = FleetStatus::kDoNothing;
 	if (shipyards_count == 0 || !idle_shipyard_stocked || ports_count == 0) {
 		enough_ships = FleetStatus::kDoNothing;
-	// We allways need at least one ship in transport mode
 	} else if (allships.size() - expeditions_in_progress == 0) {
+		// We allways need at least one ship in transport mode
 		enough_ships = FleetStatus::kNeedShip;
-	// Otherwise depending on currents ships utilization
 	} else if (ships_utilization_ > 5000) {
+		// If ships utilization is too high
 		enough_ships = FleetStatus::kNeedShip;
 	} else {
 		enough_ships = FleetStatus::kEnoughShips;
@@ -3659,60 +3655,20 @@ bool DefaultAI::check_ships(uint32_t const gametime) {
 			    ship_state == Widelands::Ship::EXP_SCOUTING ||
 				ship_state == Widelands::Ship::EXP_FOUNDPORTSPACE) {
 
-					// consistency check
-					assert (expedition_ship_ == i->ship->get_ship_id() || expedition_ship_ == kNoShip);
-
-					// This is obviously new expedition
-					if (expedition_ship_ == kNoShip) {
-						assert (expedition_start_time_ == kNoExpedition);
-						expedition_start_time_ = gametime;
-						player_->set_ai_data(gametime, kExpStartTime);
-						expedition_ship_ = i->ship->get_ship_id();
-						player_->set_ai_data(expedition_ship_, kExpShip);
-
-					// Already known expedition, all we do now, is decreasing colony_scan_area_
-					// based on lapsed time
-					} else if (gametime - expedition_start_time_ < kExpeditionMaxDuration) {
-						assert (expedition_start_time_ > kNoExpedition);
-						// remaining_time is a percent so in range 0-100
-						const uint32_t remaining_time
-							= 100 - ((gametime - expedition_start_time_) / (kExpeditionMaxDuration / 100));
-						assert (remaining_time <= 100);
-
-						// We calculate expected value and actual value (colony_scan_area_
-						// is changed only when needed)
-						const uint32_t expected_colony_scan = kColonyScanMinArea
-							+
-							(kColonyScanStartArea - kColonyScanMinArea) * remaining_time / 100;
-						assert (expected_colony_scan >= kColonyScanMinArea
-							&&
-							expected_colony_scan <= kColonyScanStartArea);
-
-						// So changing it if needed
-						if (expected_colony_scan < colony_scan_area_) {
-							colony_scan_area_ = expected_colony_scan;
-							player_->set_ai_data(colony_scan_area_, kColonyScan);
-						}
-
-					// Expedition overdue. Setting no_more_expeditions_=true
-					// But we do not cancel it, the code for cancellation does not work properly now
-					} else if (gametime - expedition_start_time_ >= kExpeditionMaxDuration) {
-						assert (expedition_start_time_ > 0);
-						colony_scan_area_ = kColonyScanMinArea;
-						player_->set_ai_data(kColonyScanMinArea, kColonyScan);
-						no_more_expeditions_ = true;
-						player_->set_ai_data(true, kNoExpeditions);
-					}
-
+					// the function below will take care of variables like
+					// - expedition_ship_
+					// - expedition_start_time_
+					// - expected_colony_scan
+					// - no_more_expeditions_
+					check_ship_in_expedition(*i, gametime);
 
 			// We are not in expedition mode (or perhaps building a colonisation port)
 			// so resetting start time
-			} else if (expedition_ship_ == i->ship->get_ship_id()) {
+			} else if (expedition_ship_ == i->ship->serial()) {
 				// Obviously expedition just ended
 				expedition_start_time_ = kNoExpedition;
 				expedition_ship_ = kNoShip;
 				player_->set_ai_data(kNoExpedition, kExpStartTime);
-				player_->set_ai_data(expedition_ship_, kExpShip);
 			}
 
 			// only two states need an attention
@@ -3737,12 +3693,11 @@ bool DefaultAI::check_ships(uint32_t const gametime) {
 
 			// Checking utilization
 			if (i->ship->get_ship_state() == Widelands::Ship::TRANSPORT) {
-
 				// Good utilization is 10 pieces of ware onboard, to track utilization we use range 0-10000
 				// to avoid float or rounding errors if integers in range 0-100
 				const int16_t tmp_util = (i->ship->get_nritems() > 10) ? 10000 : i->ship->get_nritems() * 1000;
 				// This number is kind of average
-				ships_utilization_ = ships_utilization_ / 20 * 19 + tmp_util / 20;
+				ships_utilization_ = ships_utilization_ * 19 / 20 + tmp_util / 20;
 				player_->set_ai_data(ships_utilization_, kShipUtil);
 
 				// Arithmetics check
@@ -3751,9 +3706,9 @@ bool DefaultAI::check_ships(uint32_t const gametime) {
 		}
 	}
 
-	// processing marineTaskQueue_
-	while (!marineTaskQueue_.empty()) {
-		if (marineTaskQueue_.back() == kStopShipyard) {
+	// processing marine_task_queue
+	while (!marine_task_queue.empty()) {
+		if (marine_task_queue.back() == kStopShipyard) {
 			// iterate over all production sites searching for shipyard
 			for (std::list<ProductionSiteObserver>::iterator site = productionsites.begin();
 			     site != productionsites.end();
@@ -3766,7 +3721,7 @@ bool DefaultAI::check_ships(uint32_t const gametime) {
 			}
 		}
 
-		if (marineTaskQueue_.back() == kReprioritize) {
+		if (marine_task_queue.back() == kReprioritize) {
 			for (std::list<ProductionSiteObserver>::iterator site = productionsites.begin();
 			     site != productionsites.end();
 			     ++site) {
@@ -3779,13 +3734,64 @@ bool DefaultAI::check_ships(uint32_t const gametime) {
 			}
 		}
 
-		marineTaskQueue_.pop_back();
+		marine_task_queue.pop_back();
 	}
 
 	if (action_taken) {
 		set_taskpool_task_time(gametime + kShipCheckInterval, SchedulerTaskId::kCheckShips);
 	}
 	return true;
+}
+
+/**
+ * This is part of check_ships() function separated due to readibility purpuses
+ */
+void DefaultAI::check_ship_in_expedition(ShipObserver& so, uint32_t const gametime) {
+	// consistency check
+	assert (expedition_ship_ == so.ship->serial() || expedition_ship_ == kNoShip);
+
+	// This is obviously new expedition
+	if (expedition_ship_ == kNoShip) {
+		assert (expedition_start_time_ == kNoExpedition);
+		expedition_start_time_ = gametime;
+		player_->set_ai_data(gametime, kExpStartTime);
+		expedition_ship_ = so.ship->serial();
+
+	// Already known expedition, all we do now, is decreasing colony_scan_area_
+	// based on lapsed time
+	} else if (gametime - expedition_start_time_ < kExpeditionMaxDuration) {
+		assert (expedition_start_time_ > kNoExpedition);
+		// remaining_time is a percent so in range 0-100
+		const uint32_t remaining_time
+			= 100 - ((gametime - expedition_start_time_) / (kExpeditionMaxDuration / 100));
+		assert (remaining_time <= 100);
+
+		// We calculate expected value and actual value (colony_scan_area_
+		// is changed only when needed)
+		const uint32_t expected_colony_scan = kColonyScanMinArea
+			+
+			(kColonyScanStartArea - kColonyScanMinArea) * remaining_time / 100;
+		assert (expected_colony_scan >= kColonyScanMinArea
+			&&
+			expected_colony_scan <= kColonyScanStartArea);
+
+		// So changing it if needed
+		if (expected_colony_scan < colony_scan_area_) {
+			colony_scan_area_ = expected_colony_scan;
+			player_->set_ai_data(colony_scan_area_, kColonyScan);
+		}
+
+	// Expedition overdue. Setting no_more_expeditions_=true
+	// But we do not cancel it, the code for cancellation does not work properly now
+	// TODO(unknown): - expedition code for cancellation needs to be fixed and afterwareds
+	// AI can be changed to cancel overdue expedition
+	} else if (gametime - expedition_start_time_ >= kExpeditionMaxDuration) {
+		assert (expedition_start_time_ > 0);
+		colony_scan_area_ = kColonyScanMinArea;
+		player_->set_ai_data(kColonyScanMinArea, kColonyScan);
+		no_more_expeditions_ = true;
+		player_->set_ai_data(true, kNoExpeditions);
+	}
 }
 
 /**
@@ -4657,13 +4663,12 @@ void DefaultAI::gain_ship(Ship& ship, NewShip type) {
 	}
 
 	if (type == NewShip::kBuilt) {
-		marineTaskQueue_.push_back(kStopShipyard);
+		marine_task_queue.push_back(kStopShipyard);
 	} else {
 		seafaring_economy = true;
 		if (ship.state_is_expedition()) {
 			assert (expedition_ship_ == kNoShip);
-			expedition_ship_ = ship.get_ship_id();
-			player_->set_ai_data(expedition_ship_, kExpShip);
+			expedition_ship_ = ship.serial();
 		}
 	}
 }
@@ -5027,8 +5032,8 @@ void DefaultAI::gain_building(Building& b) {
 			productionsites.back().no_resources_since_ =  std::numeric_limits<uint32_t>::max();
 			productionsites.back().bo->unoccupied_count_ += 1;
 			if (bo.is_shipyard_) {
-				marineTaskQueue_.push_back(kStopShipyard);
-				marineTaskQueue_.push_back(kReprioritize);
+				marine_task_queue.push_back(kStopShipyard);
+				marine_task_queue.push_back(kReprioritize);
 			}
 
 			for (uint32_t i = 0; i < bo.outputs_.size(); ++i)

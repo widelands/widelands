@@ -1371,28 +1371,33 @@ uint32_t Player::next_ship_id (bool increase){
 	return m_next_ship_id;
 }
 
-// Mark shipname as used = remove particular index from m_remaining_shipname_indexes
-void Player::set_shipname_used(uint32_t index) {
-	for (auto it = m_remaining_shipname_indexes.begin(); it != m_remaining_shipname_indexes.end(); ++it) {
-		if (*it == index) {
-			m_remaining_shipname_indexes.erase(it);
-			return;
-		}
-	}
-	// Should never get here, but not a serious problem
-	return;
-}
-
-// Pick random index (=ship name) from m_remaining_shipname_indexes
-uint32_t Player::pick_shipname_index(uint32_t gametime) {
+/**
+ * Pick random name (first it picks random index from remaining indexes)
+ */
+const std::string Player::pick_shipname() {
 	if (!m_remaining_shipname_indexes.empty()) {
-		const uint32_t index = gametime % m_remaining_shipname_indexes.size();
+		Game & game = dynamic_cast<Game&>(egbase());
+		assert (is_a(Game, &egbase()));
+		const uint32_t index = game.logic_rand() % m_remaining_shipname_indexes.size();
 		std::unordered_set<uint32_t>::iterator it = m_remaining_shipname_indexes.begin();
 		std::advance(it, index);
 		uint32_t name_index = *it;
-		return name_index;
+		m_remaining_shipname_indexes.erase(it);
+		return tribe().get_shipname_by_index(name_index).c_str();
 	}
-	return std::numeric_limits<uint32_t>::max();
+	return "Ship";
+}
+
+/**
+ * Read remaining ship indexes to the give file
+ *
+ * \param fr source stream
+ */
+void Player::read_remaining_shipidx(FileRead & fr) {
+	const uint16_t count = fr.unsigned_16();
+	for (uint16_t i = 0; i < count; ++i) {
+		m_remaining_shipname_indexes.insert(fr.unsigned_32());
+	}
 }
 
 /**
@@ -1476,6 +1481,15 @@ void Player::read_statistics(FileRead & fr)
 	assert(m_ware_productions[0].size() == m_ware_stocks[0].size());
 }
 
+/**
+ * Write remaining ship indexes to the give file
+ */
+void Player::write_remaining_shipidx(FileWrite & fw) const {
+	fw.unsigned_16(m_remaining_shipname_indexes.size());
+	for (auto idx : m_remaining_shipname_indexes){
+		fw.unsigned_32(idx);
+	}
+}
 
 /**
  * Write statistics data to the give file
