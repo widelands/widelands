@@ -319,19 +319,16 @@ void GameRenderer::draw_objects(RenderTarget& dst,
 			} else if (vision[F] == 1) {
 				const Player::Field & f_pl = player->fields()[map.get_index(coords[F], map.get_width())];
 				const Player * owner = owner_number[F] ? egbase.get_player(owner_number[F]) : nullptr;
-				if
-					(const MapObjectDescr * const map_object_descr =
-						f_pl.map_object_descr[TCoords<>::None])
-				{
-					if
-						(f_pl.constructionsite.becomes)
-					{
-						const ConstructionsiteInformation & csinf = f_pl.constructionsite;
+				if (const MapObjectDescr* const map_object_descr =
+				       f_pl.map_object_descr[TCoords<>::None]) {
+					if (f_pl.constructionsite.becomes) {
+						assert(owner != nullptr);
+						const ConstructionsiteInformation& csinf = f_pl.constructionsite;
 						// draw the partly finished constructionsite
 						uint32_t anim_idx;
 						try {
 							anim_idx = csinf.becomes->get_animation("build");
-						} catch (MapObjectDescr::AnimationNonexistent &) {
+						} catch (MapObjectDescr::AnimationNonexistent&) {
 							try {
 								anim_idx = csinf.becomes->get_animation("unoccupied");
 							} catch (MapObjectDescr::AnimationNonexistent) {
@@ -341,7 +338,7 @@ void GameRenderer::draw_objects(RenderTarget& dst,
 						const Animation& anim = g_gr->animations().get_animation(anim_idx);
 						const size_t nr_frames = anim.nr_frames();
 						uint32_t cur_frame =
-							csinf.totaltime ? csinf.completedtime * nr_frames / csinf.totaltime : 0;
+						   csinf.totaltime ? csinf.completedtime * nr_frames / csinf.totaltime : 0;
 						uint32_t tanim = cur_frame * FRAME_LENGTH;
 
 						const uint16_t w = anim.width();
@@ -352,17 +349,17 @@ void GameRenderer::draw_objects(RenderTarget& dst,
 						assert(h * cur_frame <= lines);
 						lines -= h * cur_frame;
 
-						if (cur_frame) // not the first frame
+						if (cur_frame) {  // not the first frame
 							// draw the prev frame from top to where next image will be drawing
 							dst.blit_animation(pos[F], anim_idx, tanim - FRAME_LENGTH,
 							                   owner->get_playercolor(), Rect(Point(0, 0), w, h - lines));
-						else if (csinf.was) {
+						} else if (csinf.was) {
 							// Is the first frame, but there was another building here before,
 							// get its last build picture and draw it instead.
 							uint32_t a;
 							try {
 								a = csinf.was->get_animation("unoccupied");
-							} catch (MapObjectDescr::AnimationNonexistent &) {
+							} catch (MapObjectDescr::AnimationNonexistent&) {
 								a = csinf.was->get_animation("idle");
 							}
 							dst.blit_animation(pos[F], a, tanim - FRAME_LENGTH, owner->get_playercolor(),
@@ -372,19 +369,25 @@ void GameRenderer::draw_objects(RenderTarget& dst,
 						dst.blit_animation(pos[F], anim_idx, tanim, owner->get_playercolor(),
 						                   Rect(Point(0, h - lines), w, lines));
 					} else if (upcast(const BuildingDescr, building, map_object_descr)) {
+						assert(owner != nullptr);
 						// this is a building therefore we either draw unoccupied or idle animation
 						uint32_t pic;
 						try {
 							pic = building->get_animation("unoccupied");
-						} catch (MapObjectDescr::AnimationNonexistent &) {
+						} catch (MapObjectDescr::AnimationNonexistent&) {
 							pic = building->get_animation("idle");
 						}
 						dst.blit_animation(pos[F], pic, 0, owner->get_playercolor());
-					} else if (const uint32_t pic = map_object_descr->main_animation()) {
-						dst.blit_animation(pos[F], pic, 0, owner->get_playercolor());
-					} else if (map_object_descr->type() == MapObjectType::FLAG) {
+					}  else if (map_object_descr->type() == MapObjectType::FLAG) {
+						assert(owner != nullptr);
 						dst.blit_animation(
 						   pos[F], owner->tribe().flag_animation(), 0, owner->get_playercolor());
+					} else if (const uint32_t pic = map_object_descr->main_animation()) {
+						if (owner != nullptr) {
+							dst.blit_animation(pos[F], pic, 0, owner->get_playercolor());
+						} else {
+							dst.blit_animation(pos[F], pic, 0);
+						}
 					}
 				}
 			}
