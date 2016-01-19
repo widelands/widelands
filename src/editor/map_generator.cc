@@ -134,8 +134,7 @@ void MapGenerator::generate_resources(uint32_t const* const random1,
 		res_val *= static_cast<uint8_t>(map_info_.resource_amount) + 1;
 		res_val /= 3;
 		if (map_.is_resource_valid(world, fc, res_idx)) {
-			fc.field->set_resources(res_idx, res_val);
-			fc.field->set_initial_res_amount(res_val);
+			map_.initialize_resources(fc, res_idx, res_val);
 		}
 	};
 

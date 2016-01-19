@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2015 by the Widelands Development Team
+ * Copyright (C) 2006-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,26 +17,20 @@
  *
  */
 
-#ifndef WL_NOTIFICATIONS_NOTE_IDS_H
-#define WL_NOTIFICATIONS_NOTE_IDS_H
+#ifndef WL_GRAPHIC_BLIT_MODE_H
+#define WL_GRAPHIC_BLIT_MODE_H
 
-#include <stdint.h>
+// The type of blit performed.
+enum class BlitMode {
+	// Blit texture unchanged.
+	kDirect,
 
-// List all note ids here. They must be unique in the running
-// system, this is easier to guarantee when they are all listed in
-// one place.
-enum class NoteId : uint32_t {
-	ChatMessage,
-	LogMessage,
-	Immovable,
-	FieldPossession,
-	FieldTerrainChanged,
-	FieldResourceTypeChanged,
-	ProductionSiteOutOfResources,
-	TrainingSiteSoldierTrained,
-	ShipMessage,
-	GraphicResolutionChanged,
+	// Blit texture desaturated and maybe tinted with a color.
+	kMonochrome,
 
+	// Blit texture tinted with a color everywhere where a mask is not
+	// transparent,
+	kBlendedWithMask,
 };
 
-#endif  // end of include guard: WL_NOTIFICATIONS_NOTE_IDS_H
+#endif  // end of include guard: WL_GRAPHIC_BLIT_MODE_H

@@ -25,8 +25,7 @@
 #include "editor/tools/editor_draw_tool.h"
 #include "editor/tools/editor_tool.h"
 
-//struct EditorActionArgs;
-struct EditorInteractive;
+class EditorInteractive;
 namespace UI {struct Button;}
 
 /**
@@ -35,7 +34,6 @@ namespace UI {struct Button;}
  * Do all tool action you want to make "undoable" using this class.
  */
 struct EditorHistory {
-
 	EditorHistory(UI::Button & undo, UI::Button & redo):
 		m_undo_button(undo), m_redo_button(redo) {}
 
@@ -49,11 +47,7 @@ struct EditorHistory {
 	uint32_t undo_action(const Widelands::World& world);
 	uint32_t redo_action(const Widelands::World& world);
 
-	/// Must be called after every change of map, world, or ... to avoid undo errors
-	void reset();
-
 private:
-
 	UI::Button & m_undo_button;
 	UI::Button & m_redo_button;
 
@@ -61,7 +55,6 @@ private:
 
 	std::deque<EditorToolAction> undo_stack;
 	std::deque<EditorToolAction> redo_stack;
-
 };
 
 

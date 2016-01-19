@@ -271,18 +271,31 @@ m_redirected_stdio(false)
 	changedir_on_mac();
 	cleanup_replays();
 
-	// handling of graphics
-	init_hardware();
+	Section & config = g_options.pull_section("global");
 
-	// This might grab the input.
-	refresh_graphics();
+	//Start the SDL core
+	if (SDL_Init(SDL_INIT_VIDEO) == -1)
+		throw wexception("Failed to initialize SDL, no valid video driver: %s", SDL_GetError());
+
+	SDL_ShowCursor(SDL_DISABLE);
+	g_gr = new Graphic();
 
 	if (TTF_Init() == -1)
 		throw wexception
 			("True Type library did not initialize: %s\n", TTF_GetError());
 
-	UI::g_fh1 = UI::create_fonthandler(g_gr); // This will create the fontset, so loading it first.
+	UI::g_fh1 =
+	   UI::create_fonthandler(&g_gr->images());  // This will create the fontset, so loading it first.
 	UI::g_fh = new UI::FontHandler();
+
+	g_gr->initialize(config.get_int("xres", DEFAULT_RESOLUTION_W),
+	                 config.get_int("yres", DEFAULT_RESOLUTION_H),
+	                 config.get_bool("fullscreen", false));
+	g_sound_handler.init(); //  TODO(unknown): memory leak!
+
+
+	// This might grab the input.
+	refresh_graphics();
 
 	if (SDLNet_Init() == -1)
 		throw wexception("SDLNet_Init failed: %s\n", SDLNet_GetError());
@@ -777,33 +790,6 @@ void WLApplication::shutdown_settings()
 	} catch (...)                      {
 		log("WARNING: could not save configuration");
 	}
-}
-
-/**
- * Start the hardware: switch to graphics mode, start sound handler
- *
- * \pre The locale must be known before calling this
- *
- * \return true if there were no fatal errors that prevent the game from running
- */
-bool WLApplication::init_hardware() {
-	Section & s = g_options.pull_section("global");
-
-	//Start the SDL core
-	if (SDL_Init(SDL_INIT_VIDEO) == -1)
-		throw wexception
-			("Failed to initialize SDL, no valid video driver: %s",
-			 SDL_GetError());
-
-	SDL_ShowCursor(SDL_DISABLE);
-
-	g_gr = new Graphic(s.get_int("xres", DEFAULT_RESOLUTION_W),
-	                   s.get_int("yres", DEFAULT_RESOLUTION_H),
-	                   s.get_bool("fullscreen", false));
-
-	g_sound_handler.init(); //  TODO(unknown): memory leak!
-
-	return true;
 }
 
 void WLApplication::shutdown_hardware()

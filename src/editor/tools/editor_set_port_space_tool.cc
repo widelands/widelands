@@ -86,7 +86,7 @@ int32_t EditorSetPortSpaceTool::handle_undo_impl(const Widelands::World& world,
                                                  EditorInteractive& parent,
                                                  EditorActionArgs* args,
 												 Map* map) {
-	return parent.tools.unset_port_space.handle_click_impl(world, center, parent, args, map);
+	return parent.tools()->unset_port_space.handle_click_impl(world, center, parent, args, map);
 }
 
 int32_t EditorUnsetPortSpaceTool::handle_click_impl(const Widelands::World& world,
@@ -121,5 +121,5 @@ int32_t EditorUnsetPortSpaceTool::handle_undo_impl(const Widelands::World& world
                                                    EditorInteractive& parent,
                                                    EditorActionArgs* args,
 												   Map* map) {
-	return parent.tools.set_port_space.handle_click_impl(world, center, parent, args, map);
+	return parent.tools()->set_port_space.handle_click_impl(world, center, parent, args, map);
 }

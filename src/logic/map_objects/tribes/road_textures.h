@@ -23,23 +23,23 @@
 #include <memory>
 #include <vector>
 
-#include "graphic/texture.h"
+#include "graphic/image.h"
 
 // Simple container to give access of the road textures of a tribe.
 class RoadTextures {
 public:
 	// Returns the road texture that should be used for the Cooordinate x, y and
 	// the road going into direction 'direction' (which can be any number).
-	const Texture& get_normal_texture(int x, int y, int direction) const;
-	const Texture& get_busy_texture(int x, int y, int direction) const;
+	const Image& get_normal_texture(int x, int y, int direction) const;
+	const Image& get_busy_texture(int x, int y, int direction) const;
 
 	// Adds a new road texture.
-	void add_normal_road_texture(std::unique_ptr<Texture> texture);
-	void add_busy_road_texture(std::unique_ptr<Texture> texture);
+	void add_normal_road_texture(const Image* texture);
+	void add_busy_road_texture(const Image* texture);
 
 private:
-	std::vector<std::unique_ptr<Texture>> normal_textures_;
-	std::vector<std::unique_ptr<Texture>> busy_textures_;
+	std::vector<const Image*> normal_textures_;
+	std::vector<const Image*> busy_textures_;
 };
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_TRIBES_ROAD_TEXTURES_H

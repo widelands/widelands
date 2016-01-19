@@ -97,6 +97,10 @@ struct FieldOverlayManager {
 	/// remove all overlays with this overlay_id
 	void remove_overlay(OverlayId overlay_id);
 
+	/// Removes all overlays.
+	// TODO(sirver): It would be preferable to just delete and recreate the object.
+	void remove_all_overlays();
+
 	/// Returns the currently registered overlays and the buildhelp for a node.
 	void get_overlays(Widelands::FCoords c, std::vector<OverlayInfo>* result) const;
 

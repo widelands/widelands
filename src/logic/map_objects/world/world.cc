@@ -23,8 +23,6 @@
 
 #include "base/i18n.h"
 #include "graphic/image_io.h"
-#include "graphic/texture.h"
-#include "graphic/texture_atlas.h"
 #include "logic/game_data_error.h"
 #include "logic/map_objects/bob.h"
 #include "logic/map_objects/immovable.h"
@@ -49,11 +47,6 @@ World::~World() {
 }
 
 void World::load_graphics() {
-	TextureAtlas ta;
-
-	// These will be deleted at the end of the method.
-	std::vector<std::unique_ptr<Texture>> individual_textures_;
-
 	for (size_t i = 0; i < terrains_->size(); ++i) {
 		TerrainDescription* terrain = terrains_->get_mutable(i);
 		for (size_t j = 0; j < terrain->texture_paths().size(); ++j) {
@@ -67,23 +60,7 @@ void World::load_graphics() {
 				terrain->set_minimap_color(
 				   RGBColor(top_left_pixel_color.r, top_left_pixel_color.g, top_left_pixel_color.b));
 			}
-			individual_textures_.emplace_back(new Texture(sdl_surface));
-			ta.add(*individual_textures_.back());
-		}
-	}
-
-	std::vector<TextureAtlas::PackedTexture> packed_texture;
-	std::vector<std::unique_ptr<Texture>> texture_atlases;
-	ta.pack(1024, &texture_atlases, &packed_texture);
-
-	assert(texture_atlases.size() == 1);
-	terrain_texture_ = std::move(texture_atlases[0]);
-
-	int next_texture_to_move = 0;
-	for (size_t i = 0; i < terrains_->size(); ++i) {
-		TerrainDescription* terrain = terrains_->get_mutable(i);
-		for (size_t j = 0; j < terrain->texture_paths().size(); ++j) {
-			terrain->add_texture(std::move(packed_texture.at(next_texture_to_move++).texture));
+			terrain->add_texture(g_gr->images().get(terrain->texture_paths()[j]));
 		}
 	}
 }

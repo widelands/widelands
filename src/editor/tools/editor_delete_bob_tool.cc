@@ -57,7 +57,7 @@ EditorDeleteBobTool::handle_undo_impl(const Widelands::World& world,
                                       EditorActionArgs* args,
 									  Widelands::Map* map) {
 
-	uint32_t ret = parent.tools.place_bob.handle_undo_impl(world, center, parent, args, map);
+	uint32_t ret = parent.tools()->place_bob.handle_undo_impl(world, center, parent, args, map);
 	args->obob_type.clear();
 	return ret;
 }
