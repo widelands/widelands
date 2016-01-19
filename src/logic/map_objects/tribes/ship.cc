@@ -651,14 +651,18 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 					const uint32_t cur = wq.get_filled();
 
 					// This is to help to debug the situation when colonization fails
+					// Can the reason be that worker was not unloaded as the last one?
 					if (wq.get_max_fill() <= cur) {
-						log ("  %d: Colonization error: filling wares to future %s (owner %d) failed."
-						" Unloded wares: %d, capacity: %d\n",
+						log ("  %d: Colonization error: unloading wares to constructionsite of %s"
+						" (owner %d) failed.\n"
+						" Wares unloaded to the site: %d, max capacity: %d, remaining to unload: %d\n"
+						" No free capacity to unload another ware\n",
 						get_owner()->player_number(),
 						cs->get_info().becomes->name().c_str(),
 						cs->get_owner()->player_number(),
 						cur,
-						wq.get_max_fill());
+						wq.get_max_fill(),
+						i);
 					}
 
 					assert(wq.get_max_fill() > cur);

@@ -1813,13 +1813,15 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 		} else if (bo.type == BuildingObserver::MILITARYSITE) {
 			bo.new_building_ = check_building_necessity(bo.desc->get_size(), gametime);
 		} else if  (bo.type == BuildingObserver::TRAININGSITE){
-			if (bo.forced_after_ < gametime && bo.total_count() == 0) {
+			if (bo.aimode_limit_achieved()) {
+				bo.new_building_ = BuildingNecessity::kNotNeeded;
+			} else if (bo.forced_after_ < gametime && bo.total_count() == 0) {
 				bo.new_building_ = BuildingNecessity::kForced;
 			} else if (ts_without_trainers_ || (ts_basic_const_count_ + ts_advanced_const_count_) > 0) {
 				bo.new_building_ = BuildingNecessity::kNotNeeded;
 			} else if (bo.prohibited_till_ > gametime) {
 				bo.new_building_ = BuildingNecessity::kNotNeeded;
-			} else if (bo.build_material_shortage_ || bo.aimode_limit_achieved()) {
+			} else if (bo.build_material_shortage_) {
 				bo.new_building_ = BuildingNecessity::kNotNeeded;
 			} else {
 				bo.new_building_ = BuildingNecessity::kAllowed;
@@ -1876,6 +1878,8 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 			assert (bo.new_building_ == BuildingNecessity::kForced ||
 			bo.new_building_ == BuildingNecessity::kNeeded ||
 			bo.new_building_ == BuildingNecessity::kAllowed);
+
+			assert(!bo.aimode_limit_achieved());
 
 			// if current field is not big enough
 			if (bo.desc->get_size() > maxsize) {
@@ -4331,8 +4335,6 @@ bool DefaultAI::check_trainingsites(uint32_t gametime) {
 
 	TrainingSite* ts = trainingsites.front().site;
 	TrainingSiteObserver& tso = trainingsites.front();
-
-	assert(tso.bo->total_count() <= tso.bo->cnt_limit_by_aimode_);
 
 	const DescriptionIndex enhancement = ts->descr().enhancement();
 
