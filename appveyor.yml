@@ -3,7 +3,7 @@ install:
   - choco install -y InnoSetup
   - set PATH=C:\msys64\mingw64\bin;C:\msys64\usr\bin;"C:\Program Files (x86)\Inno Setup 5";%PATH%
   # Switch from SF to msys2.org (default, much faster)
-  - cmd:  "bash --login -c \"pacman --sync pacman-mirrors\""
+  - cmd:  "bash --login -c \"pacman --noconfirm --sync pacman-mirrors\""
   # Update complete msys2 distribution
   # fails most of the time due slow data transfer
   #- cmd: "bash --login -c \"update-core\""
