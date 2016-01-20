@@ -255,14 +255,14 @@ private:
 	uint32_t num_prod_constructionsites;
 	uint32_t num_ports;
 
-	int16_t last_attacked_player_;
+	//int16_t last_attacked_player_;
 	uint32_t last_attack_time_;
 	// check ms in this interval - will auto-adjust
 	uint32_t enemysites_check_delay_;
 
 	// helping scores for building new military sites
-	int32_t target_military_score_;
-	int32_t least_military_score_;
+	//int32_t target_military_score_;
+	//int32_t least_military_score_;
 
 	WoodPolicy wood_policy_;
 
@@ -318,19 +318,14 @@ private:
 	bool resource_necessity_water_needed_;  // unless atlanteans
 
 	// average count of trees around cutters
-	uint32_t trees_around_cutters_;
+	//uint32_t trees_around_cutters_;
 
 	uint16_t military_last_dismantle_;
 	uint32_t military_last_build_;  // sometimes expansions just stops, this is time of last military
 	                                // building build
 
 	bool seafaring_economy;          // false by default, until first port space is found
-	uint32_t colony_scan_area_;  // distance from a possible port that is scanned for owned territory
-	// it decreases with failed scans
-	uint32_t expedition_start_time_;
-	bool no_more_expeditions_;
 	uint32_t expedition_ship_;
-	int16_t ships_utilization_; //0-10000 to avoid floats, used for decision for building new ships
 
 	int32_t spots_;  // sum of buildable fields
 	int32_t vacant_mil_positions_;  // sum of vacant positions in militarysites and training sites
@@ -353,6 +348,9 @@ private:
 	int32_t ai_personality_wood_difference_;
 	uint32_t ai_productionsites_ratio_;
 	uint32_t ai_personality_early_militarysites;
+
+	//this points to persistent data stored in Player object
+	Widelands::Player::AiPersistentState* persistent_data;
 
 	// this is a bunch of patterns that have to identify weapons and armors for input queues of trainingsites
 	std::vector<std::string> const armors_and_weapons =

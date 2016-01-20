@@ -77,6 +77,7 @@ public:
 	friend class EditorGameBase;
 	friend struct GamePlayerInfoPacket;
 	friend struct GamePlayerEconomiesPacket;
+	friend struct GamePlayerAiPersistentPacket;
 	friend class MapBuildingdataPacket;
 	friend class MapPlayersViewPacket;
 	friend class MapExplorationPacket;
@@ -134,6 +135,27 @@ public:
 	// For cheating
 	void set_see_all(bool const t) {m_see_all = t; m_view_changed = true;}
 	bool see_all() const {return m_see_all;}
+
+	/// AI data NOCOM
+	struct AiPersistentState {
+		AiPersistentState() : initialized(0){};
+
+		//was initialized
+		uint8_t initialized;
+		uint32_t colony_scan_area;
+		uint32_t trees_around_cutters;
+		uint32_t expedition_start_time;
+		int16_t ships_utilization; //0-10000 to avoid floats, used for decision for building new ships
+		uint8_t no_more_expeditions;
+		int16_t last_attacked_player;
+		int32_t least_military_score;
+		int32_t target_military_score;
+		
+	} ai_data;
+	
+	AiPersistentState* get_mutable_ai_persistent_state(){
+		return &ai_data;
+	};
 
 	/// Per-player field information.
 	struct Field {

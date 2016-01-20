@@ -25,6 +25,7 @@
 #include "game_io/game_cmd_queue_packet.h"
 #include "game_io/game_interactive_player_packet.h"
 #include "game_io/game_map_packet.h"
+#include "game_io/game_player_ai_persistent_packet.h"
 #include "game_io/game_player_economies_packet.h"
 #include "game_io/game_player_info_packet.h"
 #include "game_io/game_preload_packet.h"
@@ -65,6 +66,10 @@ void GameSaver::save() {
 
 	log("Game: Writing Player Economies Info ... ");
 	{GamePlayerEconomiesPacket           p; p.write(m_fs, m_game, mos);}
+	log("took %ums\n", timer.ms_since_last_query());
+
+	log("Game: Writing ai persistent data ... ");
+	{GamePlayerAiPersistentPacket           p; p.write(m_fs, m_game, mos);}
 	log("took %ums\n", timer.ms_since_last_query());
 
 	log("Game: Writing Command Queue Data ... ");
