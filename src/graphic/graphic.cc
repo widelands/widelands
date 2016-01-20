@@ -120,7 +120,7 @@ void Graphic::initialize(int window_mode_w, int window_mode_h, bool init_fullscr
 
 	glDrawBuffer(GL_BACK);
 
-	glEnable(GL_DEPTH_TEST);
+	glDisable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LEQUAL);
 
 	glEnable(GL_BLEND);
