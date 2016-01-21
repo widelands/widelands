@@ -188,7 +188,7 @@ void GameRenderer::draw(RenderTarget& dst,
 			const FCoords& fcoords = map.get_fcoords(coords);
 
 			f.texture_x = float(x) / kTextureSideLength;
-			f.texture_y = float(y) / kTextureSideLength;
+			f.texture_y = -float(y) / kTextureSideLength;
 
 			f.gl_x = f.pixel_x = x + surface_offset.x;
 			f.gl_y = f.pixel_y = y + surface_offset.y - fcoords.field->get_height() * HEIGHT_FACTOR;
