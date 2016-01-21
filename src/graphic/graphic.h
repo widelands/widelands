@@ -71,41 +71,48 @@ public:
 	void update();
 	bool need_update() const;
 	void refresh();
-	SDL_Window* get_sdlwindow() {return m_sdl_window;}
+	SDL_Window* get_sdlwindow() {return sdl_window_;}
 
 	ImageCache& images() const {return *image_cache_.get();}
 	AnimationManager& animations() const {return *animation_manager_.get();}
 
-	void save_png(Texture*, StreamWrite*) const;
-
-	void screenshot(const std::string& fname) const;
+	// Requests a screenshot being taken on the next frame.
+	void screenshot(const std::string& fname);
 
 private:
 	// Called when the resolution (might) have changed.
 	void resolution_changed();
 
 	// The height & width of the window should we be in window mode.
-	int m_window_mode_width;
-	int m_window_mode_height;
+	int window_mode_width_;
+	int window_mode_height_;
 
 	/// This is the main screen Surface.
 	/// A RenderTarget for this can be retrieved with get_render_target()
 	std::unique_ptr<Screen> screen_;
+
 	/// This saves a copy of the screen SDL_Surface. This is needed for
 	/// opengl rendering as the SurfaceOpenGL does not use it. It allows
 	/// manipulation the screen context.
-	SDL_Window * m_sdl_window;
-	SDL_GLContext m_glcontext;
+	SDL_Window* sdl_window_;
+	SDL_GLContext gl_context_;
+
 	/// A RenderTarget for screen_. This is initialized during init()
-	std::unique_ptr<RenderTarget> m_rendertarget;
+	std::unique_ptr<RenderTarget> render_target_;
+
 	/// This marks the complete screen for updating.
-	bool m_requires_update;
+	bool requires_update_;
 
 	/// Non-volatile cache of independent images.
 	std::unique_ptr<ImageCache> image_cache_;
 
 	/// This holds all animations.
 	std::unique_ptr<AnimationManager> animation_manager_;
+
+	/// Screenshot filename. If a screenshot is requested, this will be set to
+	/// the requested filename. On the next frame the screenshot will be written
+	/// out and this will be clear()ed again.
+	std::string screenshot_filename_;
 };
 
 extern Graphic * g_gr;

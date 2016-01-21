@@ -204,6 +204,7 @@ wl_library(graphic_minimap_renderer
     base_macros
     economy
     graphic
+    graphic_image_io
     graphic_surface
     logic
     wui_mapview_pixelfunctions
