@@ -11,6 +11,10 @@ world:new_immovable_type{
       idle = {
          pictures = path.list_files(dirname .. "idle.png"),
          hotspot = { 10, 20 },
+         sound_effect = {
+            directory = "sound/animals",
+            name = "frog1",
+         },
       },
    }
 }
