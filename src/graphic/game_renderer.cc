@@ -187,6 +187,10 @@ void GameRenderer::draw(RenderTarget& dst,
 			map.normalize_coords(coords);
 			const FCoords& fcoords = map.get_fcoords(coords);
 
+			// Texture coordinates for pseudo random tiling of terrain and road
+			// graphics. Since screen space X increases top-to-bottom and OpenGL
+			// increases bottom-to-top we flip the y coordinate to not have
+			// terrains and road graphics vertically mirrorerd.
 			f.texture_x = float(x) / kTextureSideLength;
 			f.texture_y = -float(y) / kTextureSideLength;
 
