@@ -22,6 +22,103 @@ License: GPL-2+
  On Debian systems, the complete text of the GNU General Public
  License version 2 can be found in "/usr/share/common-licenses/GPL-2".
   
+Files: src/third_party/eris/*
+Copyright: 2013 Florian Nücke, 1994–2013 Lua.org, PUC-Rio.
+License:
+Eris
+Copyright (c) 2013 Florian Nücke.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+
+-----------------------------------------------------------------------------
+
+Lua 5.2.2 from http://www.lua.org/ with patches http://www.lua.org/bugs.html
+slightly modified to access internal library functions for persistence.
+
+Copyright © 1994–2013 Lua.org, PUC-Rio.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+
+Files: i18n/fonts/Culmus/*
+Copyright: 2010 by Yoram Gnat (gyoramg@users.sourceforge.net).
+License: This package is distributed under the terms of GNU General Public License
+version 2 (see file GNU-GPL).
+---------------------------------------------------------------------
+
+"Taamey Frank CLM" fonts are copyright (C) 2010 by Yoram Gnat
+(gyoramg@users.sourceforge.net). All rights reserved.
+
+As a special exception, if you create a document which uses 
+this font, and embed this font or unaltered portions of this
+font into the document, this font does not by itself cause
+the resulting document to be covered by the 
+GNU General Public License. This exception does not however
+invalidate any other reasons why the document might be covered
+by the GNU General Public License. If you modify this font,
+you may extend this exception to your version of the font,
+but you are not obligated to do so. If you do not wish to do so,
+delete this exception statement from your version. 
+
+Files: i18n/fonts/Nakula/*
+Copyright: Nakula Devanagari font © 2006 University of Cambridge. Designed and developed by  IMRC, India. Latin and Cyrillic glyphs from the font Nimbus Roman No9 L Regular, © 1999 (URW)++ Design & Development; Cyrillic glyphs by Valek Filippov © 2001-2002.
+License:
+These fonts are free software; you can redistribute them and/or modify them under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
+
+These fonts are distributed in the hope that they will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+
+Files: i18n/fonts/Sinhala/*
+Copyright: 2004,2008 Anuradha Ratnaweera and Harshani Devadithya, 2006 Harshula Jayasuriya, 1994, The Wellcome Trust, London
+License:
+  LKLUG font is free software; you can redistribute it and/or modify
+  it under the terms of the GNU General Public License, version 2, as
+  published by the Free Software Foundation.
+
+  This program is distributed in the hope that it will be useful, but
+  WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+  General Public License, version 2, for more details.
+
+  The Debian packaging is (C) 2004,2008, Anuradha Ratnaweera, and is
+  licensed under the GNU General Public License, version 2.
+
+  You should have received a copy of the GNU General Public License,
+  version 2, in the file `COPYING', or on Debian based systems in the
+  file `/usr/share/common-licenses/GPL-2'; if not, write to the Free
+  Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+  MA 02110-1301 USA.
+
 Files: i18n/fonts/Widelands/Widelands.ttf
 Copyright: 2006-2010, Peter Schwanemann (Peter (AT) drehatlas (DOT) de)
 License: SIL Open Font License, Version 1.1 (http://scripts.sil.org/OFL)
