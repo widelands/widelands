@@ -143,8 +143,7 @@ public:
 
 	void resize_ware_orders(size_t maxLength);
 
-	const std::string& get_shipname_by_index(uint32_t) const;
-	uint32_t count_defined_shipnames() const {return ship_names_.size();}
+	const std::vector<std::string>* get_ship_names() const {return &ship_names_;};
 
 private:
 	// Helper function for adding a special worker type (carriers etc.)

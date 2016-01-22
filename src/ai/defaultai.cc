@@ -75,22 +75,6 @@ const uint32_t kNoExpedition = 0;
 // this is intended for map developers, by default should be off
 constexpr bool kPrintStats = false;
 
-constexpr int kPersistentData  = 0; //int16_t & bools
-constexpr int kMilitLoneliness = 1;
-constexpr int kAttacker        = 2;
-//constexpr int kShipUtil        = 3;
-//constexpr int kNoExpeditions   = 4;
-constexpr int kAttackMargin    = 0; //uint32_t
-//constexpr int kLastAttack      = 1;
-constexpr int kProdRatio       = 2;
-//constexpr int kColonyScan      = 3;
-//constexpr int kTreesAround     = 4;
-constexpr int kEarlyMilitary   = 5;
-//constexpr int kExpStartTime    = 6;
-constexpr int kWoodDiff        = 0; //int32_t
-//constexpr int kTargetMilit     = 1;
-//constexpr int kLeastMilit      = 2;
-
 constexpr int8_t kUncalculated = -1;
 constexpr uint8_t kFalse = 0;
 constexpr uint8_t kTrue = 1;
@@ -135,10 +119,7 @@ DefaultAI::DefaultAI(Game& ggame, PlayerNumber const pid, DefaultAI::Type const 
      military_last_dismantle_(0),
      military_last_build_(0),
      seafaring_economy(false),
-     //expedition_start_time_(kNoExpedition),
-     //no_more_expeditions_(false),
      expedition_ship_(kNoShip),
-     //ships_utilization_(200),
      spots_(0),
      vacant_mil_positions_(0),
      ts_basic_count_(0),
@@ -147,12 +128,7 @@ DefaultAI::DefaultAI(Game& ggame, PlayerNumber const pid, DefaultAI::Type const 
      ts_advanced_const_count_(0),
      ts_without_trainers_(0),
      highest_nonmil_prio_(0),
-     scheduler_delay_counter_(0),
-     ai_personality_military_loneliness_(0),
-     ai_personality_attack_margin_(0),
-     ai_personality_wood_difference_(0),
-     ai_productionsites_ratio_(0),
-	  ai_personality_early_militarysites(0) {
+     scheduler_delay_counter_(0) {
 
 	// Subscribe to NoteFieldPossession.
 	field_possession_subscriber_ =
@@ -863,88 +839,39 @@ void DefaultAI::late_initialization() {
 		}
 	}
 
-	// "Attaching" to 
+	// The data struct below is owned by Player object, the purpose is to have them saved therein
 	persistent_data = player_->get_mutable_ai_persistent_state();
-	
+
 	if (persistent_data->initialized == kFalse) {
-		printf (" initializing persistend data\n");
+		// As all data are initialized without given values, they must be populated with reasonable values first
 		persistent_data->colony_scan_area = kColonyScanStartArea;
 		persistent_data->trees_around_cutters = 0;
-		persistent_data->initialized = 1;
+		persistent_data->initialized = kTrue;
 		persistent_data->last_attacked_player = std::numeric_limits<int16_t>::max();
 		persistent_data->expedition_start_time = kNoExpedition;
 		persistent_data->ships_utilization = 200;
 		persistent_data->no_more_expeditions = kFalse;
 		persistent_data->target_military_score = 0;
 		persistent_data->least_military_score = 100;
+		persistent_data->ai_personality_military_loneliness = std::rand() % 5 * 30 - 60;
+		persistent_data->ai_personality_attack_margin = std::max(std::rand() % 20 - 5, 0);
+		persistent_data->ai_productionsites_ratio = std::rand() % 5 + 7;
+		persistent_data->ai_personality_wood_difference = std::rand() % 40 - 20;
+		persistent_data->ai_personality_early_militarysites = std::rand() % 20 + 20;
 	} else if (persistent_data->initialized == kTrue) {
-		printf (" restoring AI: %d, %d, %d, %d, %d, %d, %d, %d\n", //NOCOM remove
-		persistent_data->colony_scan_area,
-		persistent_data->trees_around_cutters,
-		persistent_data->last_attacked_player,
-		persistent_data->expedition_start_time,
-		persistent_data->ships_utilization = 200,
-		persistent_data->no_more_expeditions,
-		persistent_data->target_military_score,
-		persistent_data->least_military_score);
-		
+		// Doing some consistency checks
 		check_range<uint32_t>(persistent_data->expedition_start_time, gametime, "expedition_start_time");
 		check_range<uint16_t>(persistent_data->ships_utilization, 0, 10000, "ships_utilization_");
-		check_range<int16_t>(persistent_data->last_attacked_player, 0, 8, "last_attacked_player");
-		
-	} else {
-		assert(false);
-	}
-		
-	
-
-	// Here the AI persistent data either exists - then they are read
-	// or does not exist, then they are created and saved
-	bool persistent_data_exists_;
-	player_->get_ai_data(&persistent_data_exists_, kPersistentData);
-
-	// if false, generate new values
-	if (!persistent_data_exists_) {
-		player_->set_ai_data(true, kPersistentData);
-
-		// these random values to make some small differences between players
-		// they are immediately saved
-		// these values are never changed
-		ai_personality_military_loneliness_ = std::rand() % 5 * 30 - 60;
-		player_->set_ai_data(ai_personality_military_loneliness_, kMilitLoneliness);
-
-		ai_personality_attack_margin_ = std::max(std::rand() % 20 - 5, 0);
-		player_->set_ai_data(ai_personality_attack_margin_, kAttackMargin);
-
-		ai_personality_wood_difference_ = std::rand() % 40 - 20;
-		player_->set_ai_data(ai_personality_wood_difference_, kWoodDiff);
-
-		ai_productionsites_ratio_ = std::rand() % 5 + 7;
-		player_->set_ai_data(ai_productionsites_ratio_, kProdRatio);
-
-		ai_personality_early_militarysites = std::rand() % 20 + 20;
-		player_->set_ai_data(ai_personality_early_militarysites, kEarlyMilitary);
-
-	} else {
-		log (" %d: restoring saved AI data...\n", player_number());
-
-		// Restoring data and doing some basic check
-		player_->get_ai_data(&ai_personality_military_loneliness_, kMilitLoneliness);
 		check_range<int16_t>
-			(ai_personality_military_loneliness_, -60, 60, "ai_personality_military_loneliness_");
-
-		player_->get_ai_data(&ai_personality_attack_margin_, kAttackMargin);
-		check_range<uint32_t>(ai_personality_attack_margin_, 15, "ai_personality_attack_margin_");
-
-		player_->get_ai_data(&ai_personality_wood_difference_, kWoodDiff);
-		check_range<int32_t>(ai_personality_wood_difference_, -20, 19, "ai_personality_wood_difference_");
-
-		player_->get_ai_data(&ai_productionsites_ratio_, kProdRatio);
-		check_range<uint32_t>(ai_productionsites_ratio_, 5, 15, "ai_productionsites_ratio_");
-
-		player_->get_ai_data(&ai_personality_early_militarysites, kEarlyMilitary);
-		check_range<uint32_t>(ai_personality_early_militarysites, 20, 40, "ai_personality_early_militarysites");
-
+			(persistent_data->ai_personality_military_loneliness, -60, 60, "ai_personality_military_loneliness");
+		check_range<int32_t>(persistent_data->ai_personality_attack_margin, 15, "ai_personality_attack_margin");
+		check_range<uint32_t>(persistent_data->ai_productionsites_ratio, 5, 15, "ai_productionsites_ratio");
+		check_range<int32_t>
+			(persistent_data->ai_personality_wood_difference, -20, 19, "ai_personality_wood_difference");
+		check_range<uint32_t>
+			(persistent_data->ai_personality_early_militarysites, 20, 40, "ai_personality_early_militarysites");
+	} else {
+		throw wexception("Corrupted AI data");
 	}
 }
 
@@ -1593,8 +1520,10 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 	} else {
 		persistent_data->least_military_score -= 4;
 		// do not get bellow 100 if there is at least one ms in construction
-		if ((msites_in_constr() > 0 || too_many_vacant_mil) && persistent_data->least_military_score < kBottomLimit) {
-			persistent_data->least_military_score = kBottomLimit;
+		if ((msites_in_constr() > 0 || too_many_vacant_mil)
+			&&
+			persistent_data->least_military_score < kBottomLimit) {
+				persistent_data->least_military_score = kBottomLimit;
 		}
 		if (persistent_data->least_military_score < 0) {
 			persistent_data->least_military_score = 0;
@@ -1618,7 +1547,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 		>
 		(productionsites.size() + mines_built())
 		/
-		ai_productionsites_ratio_ + 2) {
+		persistent_data->ai_productionsites_ratio + 2) {
 			new_buildings_stop_ = true;
 	}
 	// 2. to not exhaust all free spots
@@ -1643,7 +1572,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 	const int32_t stocked_wood_margin = get_warehoused_stock(wood_index) -
 		productionsites.size() * 2 -
 		num_prod_constructionsites +
-		ai_personality_wood_difference_;
+		persistent_data->ai_personality_wood_difference;
 	if (gametime < 15 * 60 * 1000) {
 		wood_policy_ = WoodPolicy::kAllowRangers;
 	} else if (stocked_wood_margin > 80) {
@@ -3259,7 +3188,8 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 
 		// generally, trees_around_cutters = remaining_trees + 9 * persistent_data->trees_around_cutters
 		// but keep in mind that trees_around_cutters is multiplied by 10
-		persistent_data->trees_around_cutters = (remaining_trees * 10 + 9 * persistent_data->trees_around_cutters) / 10;
+		persistent_data->trees_around_cutters =
+			(remaining_trees * 10 + 9 * persistent_data->trees_around_cutters) / 10;
 
 		// Do not destruct the last few lumberjacks
 		if (site.bo->cnt_built_ <= site.bo->cnt_target_) {
@@ -4233,9 +4163,9 @@ BuildingNecessity DefaultAI::check_building_necessity(const uint8_t size,
 		mines_.size() > 2) { // if enemies were nearby in last 30 minutes
 			// we allow more big buidings
 			limit *= 2;
-	} else if (msites_total < ai_personality_early_militarysites) {
+	} else if (msites_total < persistent_data->ai_personality_early_militarysites) {
 		// for the beginning of the game (first 30 military sites)
-		limit = limit * msites_total / ai_personality_early_militarysites;
+		limit = limit * msites_total / persistent_data->ai_personality_early_militarysites;
 	}
 
 	if (big_buildings_score + size - 1  > limit) {
@@ -4481,7 +4411,7 @@ bool DefaultAI::check_militarysites(uint32_t gametime) {
 				score += (bf.area_military_capacity_ > 6);
 				score += (bf.area_military_capacity_ > 22);
 				score += (bf.area_military_presence_ > 4);
-				score += (bf.military_loneliness_ < (180 + ai_personality_military_loneliness_));
+				score += (bf.military_loneliness_ < (180 + persistent_data->ai_personality_military_loneliness));
 				score += (bf.military_stationed_ > 2);
 				score -= size_penalty;
 				score += ((bf.unowned_land_nearby_ + allyOwnedFields) < 10);
@@ -4660,8 +4590,15 @@ void DefaultAI::gain_ship(Ship& ship, NewShip type) {
 	} else {
 		seafaring_economy = true;
 		if (ship.state_is_expedition()) {
-			assert (expedition_ship_ == kNoShip);
-			expedition_ship_ = ship.serial();
+			if (expedition_ship_ == kNoShip) {
+				// OK, this ship is in expedition
+				expedition_ship_ = ship.serial();
+			} else {
+				// What? Another ship in expedition? AI is not able to manage two expedition ships...
+				log (" %d: AI will not control ship %s, as there is already another one in expedition\n",
+					player_number(),
+					ship.get_shipname().c_str());
+				}
 		}
 	}
 }
@@ -4849,7 +4786,7 @@ uint8_t DefaultAI::spot_scoring(Widelands::Coords candidate_spot) {
 
 	Map& map = game().map();
 	// If the available area (island) is too small...
-	// persistent_data->colony_scan_area is a radius (distance) and has no direct relevance to the size of area,
+	// colony_scan_area is a radius (distance) and has no direct relevance to the size of area,
 	// but it seems a good measurement
 	if (tested_fields < persistent_data->colony_scan_area) {
 		return 0;
@@ -5362,7 +5299,7 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 	// note - AI is not aware of duration of attacks
 	// everywhere we consider time when an attack is ordered.
 	if (last_attack_time_ < gametime - kCampaignDuration) {
-		treshold_ratio += ai_personality_attack_margin_;
+		treshold_ratio += persistent_data->ai_personality_attack_margin;
 	}
 
 	uint32_t my_power = 0;

@@ -20,15 +20,11 @@
 #include "game_io/game_player_ai_persistent_packet.h"
 
 #include "base/macros.h"
-//#include "economy/economy_data_packet.h" //NOCOM
-//#include "economy/flag.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
-//#include "logic/map_objects/tribes/ship.h"
 #include "logic/player.h"
-#include "logic/widelands_geometry_io.h"
 
 namespace Widelands {
 
@@ -38,7 +34,7 @@ void GamePlayerAiPersistentPacket::read
 	(FileSystem & fs, Game & game, MapObjectLoader *)
 {
 	try {
-		const Map   &       map        = game.map(); //NOCOM needed?
+		const Map   &       map        = game.map();
 		PlayerNumber const nr_players = map.get_nrplayers();
 
 		FileRead fr;
@@ -55,7 +51,13 @@ void GamePlayerAiPersistentPacket::read
 					player->ai_data.no_more_expeditions = fr.unsigned_8();
 					player->ai_data.last_attacked_player = fr.signed_16();					
 					player->ai_data.least_military_score = fr.unsigned_32();	
-					player->ai_data.target_military_score = fr.unsigned_32();											
+					player->ai_data.target_military_score = fr.unsigned_32();
+					player->ai_data.ai_personality_military_loneliness = fr.signed_16();	
+					player->ai_data.ai_personality_attack_margin = fr.signed_32();	
+					player->ai_data.ai_productionsites_ratio = fr.unsigned_32();
+					player->ai_data.ai_personality_wood_difference = fr.signed_32();	
+					player->ai_data.ai_personality_early_militarysites = fr.unsigned_32();	
+																
 				} catch (const WException & e) {
 					throw GameDataError("player %u: %s", p, e.what());
 				}
@@ -88,7 +90,12 @@ void GamePlayerAiPersistentPacket::write
 		fw.unsigned_8(player->ai_data.no_more_expeditions);
 		fw.signed_16(player->ai_data.last_attacked_player);					
 		fw.unsigned_32(player->ai_data.least_military_score);
-		fw.unsigned_32(player->ai_data.target_military_score);				
+		fw.unsigned_32(player->ai_data.target_military_score);
+		fw.signed_16(player->ai_data.ai_personality_military_loneliness);
+		fw.signed_32(player->ai_data.ai_personality_attack_margin);	
+		fw.unsigned_32(player->ai_data.ai_productionsites_ratio);	
+		fw.signed_32(player->ai_data.ai_personality_wood_difference);	
+		fw.unsigned_32(player->ai_data.ai_personality_early_militarysites);			
 	}
 
 	fw.write(fs, "binary/player_ai");

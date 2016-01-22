@@ -343,12 +343,6 @@ private:
 	// the purpose is to print out a warning that the game is pacing too fast
 	int32_t scheduler_delay_counter_;
 
-	int16_t ai_personality_military_loneliness_;
-	uint32_t ai_personality_attack_margin_;
-	int32_t ai_personality_wood_difference_;
-	uint32_t ai_productionsites_ratio_;
-	uint32_t ai_personality_early_militarysites;
-
 	//this points to persistent data stored in Player object
 	Widelands::Player::AiPersistentState* persistent_data;
 

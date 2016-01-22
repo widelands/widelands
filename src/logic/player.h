@@ -136,7 +136,7 @@ public:
 	void set_see_all(bool const t) {m_see_all = t; m_view_changed = true;}
 	bool see_all() const {return m_see_all;}
 
-	/// AI data NOCOM
+	/// Data that are used and managed by AI. They are here to have it saved as a port of player's data
 	struct AiPersistentState {
 		AiPersistentState() : initialized(0){};
 
@@ -150,9 +150,13 @@ public:
 		int16_t last_attacked_player;
 		int32_t least_military_score;
 		int32_t target_military_score;
-		
+		int16_t ai_personality_military_loneliness;
+		int32_t ai_personality_attack_margin;
+		uint32_t ai_productionsites_ratio;
+		int32_t ai_personality_wood_difference;
+		uint32_t ai_personality_early_militarysites;
 	} ai_data;
-	
+
 	AiPersistentState* get_mutable_ai_persistent_state(){
 		return &ai_data;
 	};
@@ -522,8 +526,8 @@ public:
 
 	void read_statistics(FileRead &);
 	void write_statistics(FileWrite &) const;
-	void read_remaining_shipidx(FileRead &);
-	void write_remaining_shipidx(FileWrite &) const;
+	void read_remaining_shipnames(FileRead &);
+	void write_remaining_shipnames(FileWrite &) const;
 	void sample_statistics();
 	void ware_produced(DescriptionIndex);
 
@@ -539,15 +543,6 @@ public:
 		m_further_initializations .push_back(init);
 	}
 
-	// set of functions to be used by AI to save and read own data within this class
-	void set_ai_data(int32_t value, uint32_t position);
-	void set_ai_data(uint32_t value, uint32_t position);
-	void set_ai_data(int16_t value, uint32_t position);
-	void set_ai_data(bool value, uint32_t position);
-	void get_ai_data(int32_t * value, uint32_t position);
-	void get_ai_data(uint32_t * value, uint32_t position);
-	void get_ai_data(int16_t * value, uint32_t position);
-	void get_ai_data(bool * value, uint32_t position);
 	const std::string pick_shipname();
 
 private:
@@ -583,7 +578,7 @@ private:
 	uint32_t               m_casualties, m_kills;
 	uint32_t               m_msites_lost,     m_msites_defeated;
 	uint32_t               m_civil_blds_lost, m_civil_blds_defeated;
-	std::unordered_set<uint32_t>  m_remaining_shipname_indexes;
+	std::unordered_set<std::string>  m_remaining_shipnames;
 
 	Field *               m_fields;
 	std::vector<bool>     m_allowed_worker_types;
@@ -620,15 +615,6 @@ private:
 	 * m_ware_stocks[ware_id][time_index]
 	 */
 	std::vector< std::vector<uint32_t> > m_ware_stocks;
-
-
-	/**
-	 * AI internal data. These will be ignored by human player
-	 * AI is managing the content of these arrays
-	 */
-	int32_t m_ai_data_int32 [kAIDataSize];
-	uint32_t m_ai_data_uint32 [kAIDataSize];
-	int16_t m_ai_data_int16 [kAIDataSize];
 
 	PlayerBuildingStats m_building_stats;
 

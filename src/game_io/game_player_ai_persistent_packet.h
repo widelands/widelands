@@ -25,7 +25,7 @@
 namespace Widelands {
 
 /*
- * how many and which economies does a player have?
+ * stores data that are needed for AI
  */
 struct GamePlayerAiPersistentPacket : public GameDataPacket {
 	void read (FileSystem &, Game &, MapObjectLoader * = nullptr) override;

@@ -333,11 +333,6 @@ const RoadTextures& TribeDescr::road_textures() const {
 	return road_textures_;
 }
 
-const std::string& TribeDescr::get_shipname_by_index(const uint32_t pos) const {
-	assert(pos < ship_names_.size());
-	return ship_names_[pos];
-}
-
 /*
 ==============
 Find the best matching indicator for the given amount.
