@@ -103,7 +103,7 @@ world:new_immovable_type{
          fps = 10,
          sound_effect = {
             directory = "sound/animals",
-            name = "crickets2",
+            name = "crickets1",
          },
       },
    },
