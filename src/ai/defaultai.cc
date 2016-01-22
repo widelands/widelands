@@ -99,11 +99,8 @@ DefaultAI::DefaultAI(Game& ggame, PlayerNumber const pid, DefaultAI::Type const 
      tribe_(nullptr),
      num_prod_constructionsites(0),
      num_ports(0),
-     //last_attacked_player_(std::numeric_limits<uint16_t>::max()),
      last_attack_time_(0),
      enemysites_check_delay_(60),
-     //target_military_score_(0),
-     //least_military_score_(100),
      wood_policy_(WoodPolicy::kAllowRangers),
      next_ai_think_(0),
      next_mine_construction_due_(0),
@@ -1645,7 +1642,6 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 		for (uint32_t m = 0; m < bo.critical_built_mat_.size(); ++m) {
 			DescriptionIndex wt(static_cast<size_t>(bo.critical_built_mat_.at(m)));
 			uint32_t treshold = 3;
-
 			// generally trainingsites are more important
 			if (bo.type == BuildingObserver::TRAININGSITE) {
 				treshold = 2;
