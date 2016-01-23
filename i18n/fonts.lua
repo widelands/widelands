@@ -46,7 +46,8 @@ return {
 
    devanagari = {
       serif = "Nakula/nakula.ttf",
-      direction = "rtl"
+      direction = "rtl",
+      size_offset = 2
    },
 
    hebrew = {
@@ -56,11 +57,13 @@ return {
       sans = "Culmus/TaameyFrankCLM-Medium.ttf",
       sans_bold = "TaameyFrankCLM-Bold.ttf",
       sans_italic = "Culmus/TaameyFrankCLM-MediumOblique.ttf",
-      direction = "rtl"
+      direction = "rtl",
+      size_offset = 4
    },
 
    myanmar = {
       serif = "mmrCensus/mmrCensus.ttf",
+      size_offset = 2
    },
 
    sinhala = {
