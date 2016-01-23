@@ -255,14 +255,9 @@ private:
 	uint32_t num_prod_constructionsites;
 	uint32_t num_ports;
 
-	//int16_t last_attacked_player_;
 	uint32_t last_attack_time_;
 	// check ms in this interval - will auto-adjust
 	uint32_t enemysites_check_delay_;
-
-	// helping scores for building new military sites
-	//int32_t target_military_score_;
-	//int32_t least_military_score_;
 
 	WoodPolicy wood_policy_;
 

@@ -70,7 +70,7 @@ constexpr int kColonyScanStartArea = 35;
 constexpr int kColonyScanMinArea = 10;
 constexpr int kExpeditionMaxDuration = 90 * 60 * 1000;
 constexpr uint32_t kNoShip = std::numeric_limits<uint32_t>::max();
-const uint32_t kNoExpedition = 0;
+constexpr uint32_t kNoExpedition = 0;
 
 // this is intended for map developers, by default should be off
 constexpr bool kPrintStats = false;

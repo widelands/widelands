@@ -143,7 +143,7 @@ public:
 
 	void resize_ware_orders(size_t maxLength);
 
-	const std::vector<std::string>* get_ship_names() const {return &ship_names_;};
+	const std::vector<std::string>& get_ship_names() const {return ship_names_;};
 
 private:
 	// Helper function for adding a special worker type (carriers etc.)

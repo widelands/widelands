@@ -46,18 +46,18 @@ void GamePlayerAiPersistentPacket::read
 					player->ai_data.initialized = fr.unsigned_8();
 					player->ai_data.colony_scan_area = fr.unsigned_32();
 					player->ai_data.trees_around_cutters = fr.unsigned_32();
-					player->ai_data.expedition_start_time = fr.unsigned_32();					
-					player->ai_data.ships_utilization = fr.unsigned_16();						
+					player->ai_data.expedition_start_time = fr.unsigned_32();
+					player->ai_data.ships_utilization = fr.unsigned_16();
 					player->ai_data.no_more_expeditions = fr.unsigned_8();
-					player->ai_data.last_attacked_player = fr.signed_16();					
-					player->ai_data.least_military_score = fr.unsigned_32();	
+					player->ai_data.last_attacked_player = fr.signed_16();
+					player->ai_data.least_military_score = fr.unsigned_32();
 					player->ai_data.target_military_score = fr.unsigned_32();
-					player->ai_data.ai_personality_military_loneliness = fr.signed_16();	
-					player->ai_data.ai_personality_attack_margin = fr.signed_32();	
+					player->ai_data.ai_personality_military_loneliness = fr.signed_16();
+					player->ai_data.ai_personality_attack_margin = fr.signed_32();
 					player->ai_data.ai_productionsites_ratio = fr.unsigned_32();
-					player->ai_data.ai_personality_wood_difference = fr.signed_32();	
-					player->ai_data.ai_personality_early_militarysites = fr.unsigned_32();	
-																
+					player->ai_data.ai_personality_wood_difference = fr.signed_32();
+					player->ai_data.ai_personality_early_militarysites = fr.unsigned_32();
+
 				} catch (const WException & e) {
 					throw GameDataError("player %u: %s", p, e.what());
 				}
@@ -86,16 +86,16 @@ void GamePlayerAiPersistentPacket::write
 		fw.unsigned_32(player->ai_data.colony_scan_area);
 		fw.unsigned_32(player->ai_data.trees_around_cutters);
 		fw.unsigned_32(player->ai_data.expedition_start_time);
-		fw.unsigned_16(player->ai_data.ships_utilization);		
+		fw.unsigned_16(player->ai_data.ships_utilization);
 		fw.unsigned_8(player->ai_data.no_more_expeditions);
-		fw.signed_16(player->ai_data.last_attacked_player);					
+		fw.signed_16(player->ai_data.last_attacked_player);
 		fw.unsigned_32(player->ai_data.least_military_score);
 		fw.unsigned_32(player->ai_data.target_military_score);
 		fw.signed_16(player->ai_data.ai_personality_military_loneliness);
-		fw.signed_32(player->ai_data.ai_personality_attack_margin);	
-		fw.unsigned_32(player->ai_data.ai_productionsites_ratio);	
-		fw.signed_32(player->ai_data.ai_personality_wood_difference);	
-		fw.unsigned_32(player->ai_data.ai_personality_early_militarysites);			
+		fw.signed_32(player->ai_data.ai_personality_attack_margin);
+		fw.unsigned_32(player->ai_data.ai_productionsites_ratio);
+		fw.signed_32(player->ai_data.ai_personality_wood_difference);
+		fw.unsigned_32(player->ai_data.ai_personality_early_militarysites);
 	}
 
 	fw.write(fs, "binary/player_ai");

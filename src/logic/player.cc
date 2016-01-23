@@ -200,7 +200,7 @@ Player::Player
 		});
 
 	//Populating remaining_shipnames vector
-	for (auto shipname : *tribe_descr.get_ship_names()) {
+	for (const auto& shipname : tribe_descr.get_ship_names()) {
 		m_remaining_shipnames.insert(shipname);
 	}
 
@@ -1427,7 +1427,7 @@ void Player::read_statistics(FileRead & fr)
  */
 void Player::write_remaining_shipnames(FileWrite & fw) const {
 	fw.unsigned_16(m_remaining_shipnames.size());
-	for (auto shipname : m_remaining_shipnames){
+	for (const auto& shipname : m_remaining_shipnames){
 		fw.string(shipname);
 	}
 }
