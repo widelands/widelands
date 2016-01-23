@@ -27,6 +27,7 @@ wl_library(logic_game_settings
     single_player_game_settings_provider.h
   DEPENDS
     ai
+    base_exceptions
     io_filesystem
     logic
     scripting_lua_interface

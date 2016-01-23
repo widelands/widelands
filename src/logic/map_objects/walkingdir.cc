@@ -19,6 +19,8 @@
 
 #include "logic/map_objects/walkingdir.h"
 
+#include "base/wexception.h"
+
 namespace Widelands {
 
 /// \returns the neighbour direction in clockwise
@@ -36,9 +38,10 @@ WalkingDir get_cw_neighbour(WalkingDir dir) {
 			return WalkingDir::WALK_NW;
 		case WalkingDir::WALK_NW:
 			return WalkingDir::WALK_NE;
-		default:
+		case WalkingDir::IDLE:
 			return WalkingDir::IDLE;
 	}
+	NEVER_HERE();
 }
 
 /// \returns the neighbour direction in counterclockwise
@@ -56,9 +59,10 @@ WalkingDir get_ccw_neighbour(WalkingDir dir) {
 			return WalkingDir::WALK_SE;
 		case WalkingDir::WALK_SE:
 			return WalkingDir::WALK_E;
-		default:
+		case WalkingDir::IDLE:
 			return WalkingDir::IDLE;
 	}
+	NEVER_HERE();
 }
 
 WalkingDir get_backward_dir(WalkingDir dir) {
@@ -75,9 +79,10 @@ WalkingDir get_backward_dir(WalkingDir dir) {
 			return WalkingDir::WALK_NE;
 		case WalkingDir::WALK_SE:
 			return WalkingDir::WALK_NW;
-		default:
+		case WalkingDir::IDLE:
 			return WalkingDir::IDLE;
 	}
+	NEVER_HERE();
 }
 
 }

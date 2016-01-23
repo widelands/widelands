@@ -27,6 +27,7 @@
 #include <boost/format.hpp>
 
 #include "base/i18n.h"
+#include "base/wexception.h"
 #include "editor/editorinteractive.h"
 #include "editor/map_generator.h"
 #include "graphic/font_handler1.h"
@@ -356,7 +357,7 @@ void MainMenuNewRandomMap::button_clicked(MainMenuNewRandomMap::ButtonId n) {
 		normalize_landmass(n);
 		break;
 	default:
-		assert(false);
+		NEVER_HERE();
 	}
 	nr_edit_box_changed();  // Update ID String
 }
