@@ -10,9 +10,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-18 08:43+0000\n"
-"PO-Revision-Date: 2015-11-18 08:43+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2015-12-14 05:31+0000\n"
+"PO-Revision-Date: 2015-12-28 15:23+0000\n"
+"Last-Translator: Renaud Bouchard\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,13 +20,21 @@ msgstr ""
 "Language: fr\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: ../../campaigns/atl01.wmf/scripting/init.lua:71
+#. TRANSLATORS: Short message title. Translate as "Lost!" if you don't have
+#. enough space.
+#: ../../campaigns/atl01.wmf/scripting/init.lua:74
+msgctxt "message_short_title"
 msgid "Building lost!"
 msgstr "Bâtiment perdu !"
 
-#: ../../campaigns/atl01.wmf/scripting/init.lua:73
+#: ../../campaigns/atl01.wmf/scripting/init.lua:76
 msgid "We lost a building to the ocean!"
 msgstr "Nous avons perdu un bâtiment dans l'océan!"
+
+#: ../../campaigns/atl01.wmf/scripting/init.lua:82
+msgctxt "message_heading"
+msgid "Building lost!"
+msgstr "Bâtiment perdu !"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:32
 msgid "Ensure the supply of building wares"
@@ -107,7 +115,7 @@ msgstr "Construisez une ferme et une ferme de racines noires"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:61
 msgid "Build a mill to make cornmeal and blackroot flour"
-msgstr ""
+msgstr "Construisez un moulin pour faire de la farine de maïs et de racines noires"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:62
 msgid "Build a well"
@@ -115,7 +123,7 @@ msgstr "Construisez un puits"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:63
 msgid "Build a bakery to bake bread from cornmeal, blackroot flour and water"
-msgstr ""
+msgstr "Construisez une boulangerie pour faire du pain à partir de farine de maïs ou de racine noire et d'eau"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:64
 msgid "Build a hunter’s house to get raw meat"
@@ -150,7 +158,7 @@ msgid ""
 "tabards are the uniforms of soldiers. The weaving mill needs gold thread and"
 " spider silk as raw material. Spider silk is produced by the spider farm, "
 "while gold thread is produced by the gold spinning mill out of gold."
-msgstr ""
+msgstr "Les tisserands produisent de l'étoffe de soie d'araignée et des tabards dans le moulin à tisser. L'étoffe de soie d'araignée est nécessaire à la construction de certains bâtiments et vêtements. alors que les tabards sont les uniformes des soldats. Le moulin à tisser nécessite du fil doré et de la soie d'araignée comme matériaux de base.\nLa soie d'araignée est produite dans les fermes aracnéïcoles, alors que le fil d'or est produit dans le moulin à filer l'or à partir d'or."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:77
 msgid "Build a weaving mill"
@@ -178,7 +186,7 @@ msgid ""
 "mine will dig for quartz and diamonds – all of them are precious materials "
 "and very rarely found. It will produce a lot of stone while searching for "
 "them."
-msgstr ""
+msgstr "Le minerai de fer, d'or et le charbon sont extraits de leurs mines respectives. La mine de cristal extrait du quartz et des diamants, tous sont des matériaux précieux et très rarement trouvés. Leur recherche ors de leur exploitation, beaucoup de pierre est extraite."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:89
 msgid ""
@@ -449,7 +457,7 @@ msgid ""
 " most buildings can’t be made out of logs alone. Stronger buildings also "
 "need granite, but there is plenty to the north-east of here; we just need to"
 " build a quarry, and my stonemasons will go to work promptly."
-msgstr ""
+msgstr "Que Satul te réchauffe, Jundlina ! Les choses les plus importantes pour construire un camp de base sont les matériaux de construction. Il y a des arbres ici, donc nous devrions construire des maisons pour quelques coupeurs de bois et également le garde forestier, ainsi nous ne manquerons pas d'arbres. Oh, et nous ne devons pas oublier la scierie, la plupart des constructions ont besoin d'autres matériaux que des troncs seuls. Les constructions plus solides nécessitent aussi des pierres, mais il y en a beaucoup au nord-est d'ici; nous devons juste construire une carrière et mes tailleurs de pierre se mettront aussitôt au travail."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:197
 msgid "Sidolus Speaks"
@@ -633,7 +641,7 @@ msgid ""
 "find an ample supply of those commodities, we could start producing weapons "
 "and tools; this would help enormously. Of course, we would need smelters, a "
 "weapon smithy, an armor smithy and a toolsmithy. And maybe even more."
-msgstr ""
+msgstr "Que Satul te réchauffe, Jundlina. As-tu pensé à miner dans les montagnes autours de nous ? Nous allons manquer de quartz, de cristal et de diamants pour nos constructions. Nous pourrions aussi utiliser plus de fer, d'or et particulièrement plus de charbon. Si nous trouvions une grande quantité de ces matériaux de base, nous pourrions commencer à produire des armes et des outils; ceci nous aiderait grandement. Bien sûr, nous aurons besoin de fonderies, une fabrique d'armes, une fabrique d'armures et une fabrique d'outils. Et peut être même plus."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:298
 msgid "Jundlina Nods"
@@ -886,6 +894,7 @@ msgid ""
 msgstr "Vous avez gagné cette mission. Continuez avec la suivante ou poursuivez votre jeu aussi longtemps qu'il vous plaira."
 
 #: ../../scripting/format_scenario.lua:36
+#, lua-format
 msgid "“%s”"
 msgstr "“%s”"
 

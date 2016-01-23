@@ -2,7 +2,7 @@
 
 function immovable_helptext(tribe)
    local helptext = {
-      -- #TRANSLATORS: Helptext for a resource: No resources
+      -- TRANSLATORS#: Helptext for a resource: No resources
       default = "There are no resources in the ground here."
    }
    local result = ""

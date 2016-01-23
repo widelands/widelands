@@ -9,9 +9,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-23 09:42+0000\n"
-"PO-Revision-Date: 2015-11-25 11:56+0000\n"
-"Last-Translator: Venatrix\n"
+"POT-Creation-Date: 2015-12-14 05:31+0000\n"
+"PO-Revision-Date: 2015-12-20 15:58+0000\n"
+"Last-Translator: wl-zocker\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -32,18 +32,19 @@ msgid "15 minutes"
 msgstr "15 Minuten"
 
 #: ../../maps/MP Scenarios/Island
-#: Hopping.wmf/scripting/multiplayer_init.lua:98
-msgid "Game Status"
-msgstr "Spielstatus"
+#: Hopping.wmf/scripting/multiplayer_init.lua:99 ../../maps/MP
+#: Scenarios/Island Hopping.wmf/scripting/multiplayer_init.lua:101
+msgid "Status"
+msgstr "Status"
 
 #. TRANSLATORS: number + resource name, e.g. '1x Log'
 #: ../../maps/MP Scenarios/Island
-#: Hopping.wmf/scripting/multiplayer_init.lua:108
+#: Hopping.wmf/scripting/multiplayer_init.lua:112
 msgid "%1$dx %2$s"
 msgstr "%1$dx %2$s"
 
 #: ../../maps/MP Scenarios/Island
-#: Hopping.wmf/scripting/multiplayer_init.lua:219 ../../maps/MP
+#: Hopping.wmf/scripting/multiplayer_init.lua:223 ../../maps/MP
 #: Scenarios/Island Hopping.wmf/scripting/texts.lua:6
 msgid "Rules"
 msgstr "Regeln"
@@ -119,40 +120,43 @@ msgstr "4. Platz"
 msgid "Second Island"
 msgstr "Zweite Insel"
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:43
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:42
 msgid "%1$s was the first to reach Island number %2$i."
 msgstr "%1$s war der Erste, der Insel Nummer %2$i erreicht hat."
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:44
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:43
 msgid "%1$s was the second to reach Island number %2$i."
 msgstr "%1$s war der Zweite, der Insel Nummer %2$i erreicht hat."
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:45
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:44
 msgid "%1$s was the third to reach Island number %2$i."
 msgstr "%1$s war der Dritte, der Insel Nummer %2$i erreicht hat."
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:46
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:45
 msgid "%1$s was the fourth to reach Island number %2$i."
 msgstr "%1$s war der Vierte, der Insel Nummer %2$i erreicht hat."
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:48
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:47
 msgid "The reward for this feat amounts to:"
 msgstr "Die Prämie für diese Leistung beträgt:"
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:51
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:50
+#, lua-format
 msgid ""
 "%s is now King of the Hill and will win the game in 20 minutes, if nobody "
 "takes over the hill before then."
 msgstr "%s ist nun König des Hügels und wird das Spiel in 20 Minuten gewinnen, falls ihm niemand vorher die Herrschaft über den Hügel nimmt."
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:54
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:53
+#, lua-format
 msgid "%s lost control of the hill."
 msgstr "%s hat die Herrschaft über den Hügel verloren."
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:56
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:55
 msgid "%1$s has been King of the Hill for %2$s!"
 msgstr "%1$s ist seit %2$s König des Hügels!"
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:57
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:56
+#, lua-format
 msgid "%s has won the game. Congratulations!"
 msgstr "%s hat das Spiel gewonnen. Herzlichen Glückwunsch!"

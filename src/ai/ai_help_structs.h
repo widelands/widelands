@@ -26,15 +26,16 @@
 #include "ai/ai_hints.h"
 #include "economy/flag.h"
 #include "economy/road.h"
-#include "logic/checkstep.h"
 #include "logic/findnode.h"
 #include "logic/game.h"
-#include "logic/instances.h"
 #include "logic/map.h"
+#include "logic/map_objects/checkstep.h"
+#include "logic/map_objects/map_object.h"
+#include "logic/map_objects/tribes/ship.h"
+#include "logic/map_objects/world/terrain_description.h"
+#include "logic/map_objects/world/world.h"
 #include "logic/player.h"
-#include "logic/ship.h"
-#include "logic/world/terrain_description.h"
-#include "logic/world/world.h"
+
 
 namespace Widelands {
 
@@ -187,9 +188,9 @@ struct FindNodeWater {
 
 	bool accept(const Map& /* map */, const FCoords& coord) const {
 		return (world_.terrain_descr(coord.field->terrain_d()).get_is() &
-		        TerrainDescription::Type::kWater) ||
+		        TerrainDescription::Is::kWater) ||
 		       (world_.terrain_descr(coord.field->terrain_r()).get_is() &
-		        TerrainDescription::Type::kWater);
+		        TerrainDescription::Is::kWater);
 	}
 
 private:

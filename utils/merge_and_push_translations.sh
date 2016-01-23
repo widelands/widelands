@@ -35,7 +35,7 @@ set -x
 # Pull translations from Transifex into local trunk and add new translation files
 bzr pull
 tx pull -a
-bzr add po/*/*.po txts/translators/*.json || true
+bzr add po/*/*.po i18n/locales/*.json || true
 
 # Update authors file
 utils/update_authors.py
@@ -46,7 +46,6 @@ else
   echo "Failed updating authors";
   exit 1;
 fi
-bzr add txts/
 
 # Fix line breaks.
 # TODO(GunChleoc): We hope that Transifex will fix these already.

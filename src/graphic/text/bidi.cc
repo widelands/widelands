@@ -22,10 +22,10 @@
 #include <map>
 #include <string>
 
-#include <unicode/unistr.h>
 #include <unicode/utypes.h>
 
 #include "base/log.h"
+#include "graphic/text/font_set.h"
 
 namespace {
 // TODO(GunChleoc): Have a look at the ICU API to see which helper functions can be gained from there.
@@ -480,6 +480,7 @@ const std::map<std::string, std::set<UBlockCode>> kRTLCodeBlocks = {
 	 }},
 };
 
+// True if 'c' is included in one of the kRTLCodeBlocks.
 bool is_rtl_character(UChar32 c) {
 	UBlockCode code = ublock_getCode(c);
 	for (std::string script : kRTLScripts) {
@@ -555,11 +556,12 @@ UChar find_arabic_letter_form(UChar c, UChar previous, UChar next) {
 namespace i18n {
 
 
-// True if a string does not contain Latin characters
-bool has_rtl_character(const char* input) {
+// True if one of te first 'limit' characters in 'input' as UnicodeString is an RTL character
+// according to is_rtl_character(UChar32 c)
+bool has_rtl_character(const char* input, int32_t limit) {
 	bool result = false;
 	const icu::UnicodeString parseme(input);
-	for (int32_t i = 0; i < parseme.length(); ++i) {
+	for (int32_t i = 0; i < parseme.length() && i < limit; ++i) {
 		if (is_rtl_character(parseme.char32At(i))) {
 			result = true;
 			break;
@@ -710,6 +712,17 @@ std::string line2bidi(const char* input) {
 	return result;
 }
 
+// Helper to convert ICU strings to C++ strings
+std::string icustring2string(const icu::UnicodeString& convertme) {
+	std::string result;
+	convertme.toUTF8String(result);
+	return result;
+}
+std::string icuchar2string(const UChar& convertme) {
+	const icu::UnicodeString temp(convertme);
+	return icustring2string(temp);
+}
+
 // True if a string contains a character from a CJK code block
 bool has_cjk_character(const char* input) {
 	bool result = false;
@@ -745,11 +758,16 @@ std::vector<std::string> split_cjk_word(const char* input) {
 }
 
 bool cannot_start_line(const UChar& c) {
-	return kCannottStartLineJapanese.count(c) == 1;
+	return is_diacritic(c) || is_punctuation_char(c) || kCannottStartLineJapanese.count(c) == 1;
 }
 
 bool cannot_end_line(const UChar& c) {
 	return kCannotEndLineJapanese.count(c) == 1;
 }
+
+bool is_diacritic(const UChar& c) {
+	return kArabicDiacritics.count(c) == 1;
+}
+
 
 } // namespace UI

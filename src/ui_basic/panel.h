@@ -247,6 +247,8 @@ public:
 	///\return the current set UI font
 	std::string ui_fn();
 
+	virtual void die();
+
 protected:
 	// This panel will never receive keypresses (do_key), instead
 	// textinput will be passed on (do_textinput).
@@ -258,7 +260,6 @@ protected:
 	void set_thinks(bool yes);
 
 
-	virtual void die();
 	bool keyboard_free() {return !(_focus);}
 
 	virtual void update_desired_size();

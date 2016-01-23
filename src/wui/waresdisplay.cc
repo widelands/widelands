@@ -31,10 +31,10 @@
 #include "graphic/rendertarget.h"
 #include "graphic/text_layout.h"
 #include "logic/editor_game_base.h"
+#include "logic/map_objects/tribes/tribe_descr.h"
+#include "logic/map_objects/tribes/ware_descr.h"
+#include "logic/map_objects/tribes/worker.h"
 #include "logic/player.h"
-#include "logic/tribes/tribe_descr.h"
-#include "logic/ware_descr.h"
-#include "logic/worker.h"
 
 const int WARE_MENU_INFO_SIZE = 12;
 

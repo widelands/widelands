@@ -5,7 +5,7 @@ tribes:new_warehouse_type {
    name = "atlanteans_port",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("atlanteans_building", "Port"),
-   directory = dirname,
+   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "port",
 
@@ -28,16 +28,13 @@ tribes:new_warehouse_type {
 
    animations = {
       idle = {
-         template = "idle_??",
-         directory = dirname,
+         pictures = path.list_files(dirname .. "idle_??.png"),
          hotspot = { 74, 70 },
          fps = 10
       },
       build = {
-         template = "build_??",
-         directory = dirname,
+         pictures = path.list_files(dirname .. "build_??.png"),
          hotspot = { 74, 70 },
-         fps = 1
       }
    },
 

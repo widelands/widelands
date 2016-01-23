@@ -30,8 +30,8 @@
 #include "logic/game.h"
 #include "logic/game_controller.h"
 #include "logic/map.h"
+#include "logic/map_objects/tribes/ship.h"
 #include "logic/player.h"
-#include "logic/ship.h"
 #include "profile/profile.h"
 #include "wui/game_summary.h"
 
@@ -51,7 +51,7 @@ InteractiveGameBase::InteractiveGameBase
 	 PlayerType pt, bool const chatenabled, bool const multiplayer)
 	:
 	InteractiveBase(_game, global_s),
-	m_chatProvider(nullptr),
+	chat_provider_(nullptr),
 	m_building_census_format
 		(global_s.get_string("building_census_format",       "%N")),
 	m_building_statistics_format
@@ -87,15 +87,15 @@ Widelands::Game & InteractiveGameBase::    game() const
 
 void InteractiveGameBase::set_chat_provider(ChatProvider & chat)
 {
-	m_chatProvider = &chat;
-	m_chatOverlay->set_chat_provider(chat);
+	chat_provider_ = &chat;
+	chat_overlay_->set_chat_provider(chat);
 
 	m_chatenabled = true;
 }
 
 ChatProvider * InteractiveGameBase::get_chat_provider()
 {
-	return m_chatProvider;
+	return chat_provider_;
 }
 
 void InteractiveGameBase::draw_overlay(RenderTarget& dst) {
@@ -135,18 +135,13 @@ void InteractiveGameBase::draw_overlay(RenderTarget& dst) {
  */
 void InteractiveGameBase::postload() {
 	Widelands::Map & map = egbase().map();
-	OverlayManager & overlay_manager = map.overlay_manager();
-	overlay_manager.show_buildhelp(false);
-	overlay_manager.register_overlay_callback_function
+	auto* overlay_manager = mutable_field_overlay_manager();
+	show_buildhelp(false);
+	m_toggle_buildhelp.set_perm_pressed(buildhelp());
+
+	overlay_manager->register_overlay_callback_function
 			(boost::bind(&InteractiveGameBase::calculate_buildcaps, this, _1));
 
-	// Connect buildhelp button to reflect build help state. Needs to be
-	// done here rather than in the constructor as the map is not present then.
-	// This code assumes that the InteractivePlayer object lives longer than
-	// the overlay_manager. Otherwise remove the hook in the deconstructor.
-	egbase().map().overlay_manager().onBuildHelpToggle =
-		boost::bind(&UI::Button::set_perm_pressed, &m_toggle_buildhelp, _1);
-	m_toggle_buildhelp.set_perm_pressed(buildhelp());
 
 	// Recalc whole map for changed owner stuff
 	map.recalc_whole_map(egbase().world());
@@ -158,6 +153,9 @@ void InteractiveGameBase::postload() {
 	hide_minimap();
 }
 
+void InteractiveGameBase::on_buildhelp_changed(const bool value) {
+	m_toggle_buildhelp.set_perm_pressed(value);
+}
 
 /**
  * See if we can reasonably open a ship window at the current selection position.

@@ -5,7 +5,7 @@ tribes:new_trainingsite_type {
    name = "atlanteans_labyrinth",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("atlanteans_building", "Labyrinth"),
-   directory = dirname,
+   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "big",
 
@@ -28,17 +28,17 @@ tribes:new_trainingsite_type {
 
    animations = {
       idle = {
-         template = "idle_??",
-         directory = dirname,
+         pictures = path.list_files(dirname .. "idle_??.png"),
          hotspot = { 80, 88 },
       }
    },
 
    aihints = {
       prohibited_till=900,
+      forced_after_=1500,
       trainingsite_type = "basic",
-      weak_ai_limit = 1,
-      normal_ai_limit = 2
+      very_weak_ai_limit = 1,
+      weak_ai_limit = 2
    },
 
    working_positions = {

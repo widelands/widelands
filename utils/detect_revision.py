@@ -44,7 +44,11 @@ def detect_debian_version():
 def detect_git_revision():
     if not sys.platform.startswith('linux') and \
        not sys.platform.startswith('darwin'):
-        return None
+        git_revnum=os.popen('git show --pretty=format:%h | head -n 1').read().rstrip()
+        if git_revnum:
+            return 'unofficial-git-%s' % (git_revnum,)
+        else:
+            return None
 
     is_git_workdir=os.system('git show >/dev/null 2>&1')==0
     if is_git_workdir:

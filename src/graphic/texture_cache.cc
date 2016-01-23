@@ -19,117 +19,68 @@
 
 #include "graphic/texture_cache.h"
 
-#include <cassert>
-#include <list>
-#include <map>
-#include <memory>
+#include <stdint.h>
 
 #include <SDL.h>
 
 #include "graphic/texture.h"
+#include "base/log.h" // NOCOM(#sirver): remove again
 
-using namespace std;
+// The implementation took inspiration from
+// http://timday.bitbucket.org/lru.html, but our use case here is a little
+// different.
 
-// I took inspiration from http://timday.bitbucket.org/lru.html, but our use
-// case here is a little different.
-namespace  {
-class TextureCacheImpl : public TextureCache {
-public:
-	TextureCacheImpl(uint32_t max_transient_memory) :
-		max_transient_memory_(max_transient_memory), used_transient_memory_(0) {}
-	virtual ~TextureCacheImpl();
+TextureCache::TextureCache(uint32_t max_size_in_bytes) :
+	max_size_in_bytes_(max_size_in_bytes), size_in_bytes_(0) {}
 
-	// Implements TextureCache.
-	void flush() override;
-	Texture* get(const string& hash) override;
-	Texture* insert(const string& hash, Texture*, bool) override;
-
-private:
-	void drop();
-
-	using AccessHistory = list<string>;
-	struct Entry {
-		Entry(Texture* gs, const AccessHistory::iterator& it, bool transient) :
-			texture(gs), is_transient(transient), last_access(SDL_GetTicks()), list_iterator(it) {}
-
-		std::unique_ptr<Texture> texture;
-		bool is_transient;
-		uint32_t last_access;  // Mainly for debugging and analysis.
-		const AccessHistory::iterator list_iterator;  // Only valid if is_transient is true.
-	};
-	using Container = map<string, Entry*>;
-
-	uint32_t max_transient_memory_;
-	uint32_t used_transient_memory_;
-	Container entries_;
-	AccessHistory access_history_;
-};
-
-TextureCacheImpl::~TextureCacheImpl() {
+TextureCache::~TextureCache() {
 	flush();
 }
 
-void TextureCacheImpl::flush() {
-	for (Container::iterator it = entries_.begin(); it != entries_.end(); ++it) {
-		delete it->second;
-	}
+void TextureCache::flush() {
 	entries_.clear();
 	access_history_.clear();
-	used_transient_memory_ = 0;
+	size_in_bytes_ = 0;
 }
 
-Texture* TextureCacheImpl::get(const string& hash) {
-	const Container::iterator it = entries_.find(hash);
+Texture* TextureCache::get(const std::string& hash) {
+	const auto it = entries_.find(hash);
 	if (it == entries_.end())
 		return nullptr;
 
 	// Move this to the back of the access list to signal that we have used this
 	// recently and update last access time.
-	if (it->second->is_transient) {
-		access_history_.splice(access_history_.end(), access_history_, it->second->list_iterator);
-		it->second->last_access = SDL_GetTicks();
-	}
-	return it->second->texture.get();
+	access_history_.splice(access_history_.end(), access_history_, it->second.list_iterator);
+	it->second.last_access = SDL_GetTicks();
+	return it->second.texture.get();
 }
 
-Texture* TextureCacheImpl::insert(const string& hash, Texture* texture, bool transient) {
+Texture* TextureCache::insert(const std::string& hash, std::unique_ptr<Texture> texture) {
 	assert(entries_.find(hash) == entries_.end());
 
-	if (transient) {
-		const uint32_t texture_size = texture->width() * texture->height() * 4;
-		while (used_transient_memory_ + texture_size > max_transient_memory_) {
-			drop();
-		}
-
-		// Record hash as most-recently-used.
-		AccessHistory::iterator it = access_history_.insert(access_history_.end(), hash);
-		used_transient_memory_ += texture_size;
-		entries_.insert(make_pair(hash, new Entry(texture, it, true)));
-	} else {
-		entries_.insert(make_pair(hash, new Entry(texture, access_history_.end(), false)));
+	const uint32_t texture_size = texture->width() * texture->height() * 4;
+	while (size_in_bytes_ + texture_size > max_size_in_bytes_) {
+		drop();
 	}
-	return texture;
+
+	// Record hash as most-recently-used.
+	AccessHistory::iterator it = access_history_.insert(access_history_.end(), hash);
+	size_in_bytes_ += texture_size;
+	return entries_.insert(make_pair(hash, Entry{std::move(texture), SDL_GetTicks(), it}))
+	   .first->second.texture.get();
 }
 
-void TextureCacheImpl::drop() {
+void TextureCache::drop() {
 	assert(!access_history_.empty());
 
 	// Identify least recently used key
-	const Container::iterator it = entries_.find(access_history_.front());
+	const auto it = entries_.find(access_history_.front());
 	assert(it != entries_.end());
-	assert(it->second->is_transient);
 
-	const uint32_t texture_size = it->second->texture->width() * it->second->texture->height() * 4;
-	used_transient_memory_ -= texture_size;
+	const uint32_t texture_size = it->second.texture->width() * it->second.texture->height() * 4;
+	size_in_bytes_ -= texture_size;
 
 	// Erase both elements to completely purge record
-	delete it->second;
 	entries_.erase(it);
 	access_history_.pop_front();
-}
-
-}  // namespace
-
-TextureCache* create_texture_cache(uint32_t transient_memory_in_bytes) {
-	return new TextureCacheImpl(transient_memory_in_bytes);
 }

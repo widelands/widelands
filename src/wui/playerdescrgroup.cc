@@ -23,13 +23,14 @@
 
 #include <boost/format.hpp>
 
+#include "ai/computer_player.h"
 #include "base/i18n.h"
 #include "base/wexception.h"
 #include "graphic/graphic.h"
 #include "graphic/text_constants.h"
 #include "logic/game_settings.h"
+#include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/player.h"
-#include "logic/tribes/tribe_descr.h"
 #include "ui_basic/button.h"
 #include "ui_basic/checkbox.h"
 #include "ui_basic/textarea.h"
@@ -166,10 +167,11 @@ void PlayerDescriptionGroup::refresh()
 					title = _("Computer");
 				else {
 					if (player.random_ai) {
-						title += _("AI: Random");
+						title += _("Random AI");
 					} else {
-						/** TRANSLATORS %s = AI type, e.g. 'Agressive' */
-						title += (boost::format(_("AI: %s")) % _(player.ai)).str();
+						const ComputerPlayer::Implementation* impl =
+								ComputerPlayer::get_implementation(player.ai);
+						title = impl->descname;
 					}
 				}
 			} else { // PlayerSettings::stateHuman

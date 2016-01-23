@@ -2,15 +2,17 @@
 # Copyright (C) 2005-2015 Widelands Development Team
 # 
 # Translators:
+# adrien vigneron <adrienvigneron@ml1.net>, 2015
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2011
 # GunChleoc, 2014
+# Renaud Bouchard, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-18 08:43+0000\n"
-"PO-Revision-Date: 2015-11-18 08:43+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2015-12-14 05:31+0000\n"
+"PO-Revision-Date: 2015-12-23 00:48+0000\n"
+"Last-Translator: adrien vigneron <adrienvigneron@ml1.net>\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -31,18 +33,19 @@ msgid "15 minutes"
 msgstr "15 minutes"
 
 #: ../../maps/MP Scenarios/Island
-#: Hopping.wmf/scripting/multiplayer_init.lua:98
-msgid "Game Status"
-msgstr "État de la partie"
+#: Hopping.wmf/scripting/multiplayer_init.lua:99 ../../maps/MP
+#: Scenarios/Island Hopping.wmf/scripting/multiplayer_init.lua:101
+msgid "Status"
+msgstr "Etat"
 
 #. TRANSLATORS: number + resource name, e.g. '1x Log'
 #: ../../maps/MP Scenarios/Island
-#: Hopping.wmf/scripting/multiplayer_init.lua:108
+#: Hopping.wmf/scripting/multiplayer_init.lua:112
 msgid "%1$dx %2$s"
-msgstr ""
+msgstr "%1$dx %2$s"
 
 #: ../../maps/MP Scenarios/Island
-#: Hopping.wmf/scripting/multiplayer_init.lua:219 ../../maps/MP
+#: Hopping.wmf/scripting/multiplayer_init.lua:223 ../../maps/MP
 #: Scenarios/Island Hopping.wmf/scripting/texts.lua:6
 msgid "Rules"
 msgstr "Règles"
@@ -80,7 +83,7 @@ msgid ""
 " only meadows and resources. The economies you leave behind will continue to"
 " work for you, but you will only reap the benefits at the moment you reach a"
 " new island."
-msgstr ""
+msgstr "Le fait est que la première île n'offre que des pierres et du bois, la seconde seulement des prairies et des ressources. Les économies que vous laissez derrière continueront à travailler pour vous, mais vous ne récoltez les bénéfices que lorsque vous atteignez une nouvelle île."
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:26
 msgid "Finally, be careful not to waste your quartz and diamonds."
@@ -118,40 +121,43 @@ msgstr "Quatrième à finir"
 msgid "Second Island"
 msgstr "Deuxième île"
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:43
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:42
 msgid "%1$s was the first to reach Island number %2$i."
 msgstr "%1$s était le premier à atteindre l'île numéro %2$s."
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:44
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:43
 msgid "%1$s was the second to reach Island number %2$i."
 msgstr "%1$s était le deuxième à atteindre l'ïle numéro %2$s."
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:45
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:44
 msgid "%1$s was the third to reach Island number %2$i."
 msgstr "%1$s était le troisième à atteindre l'ïle numéro %2$s."
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:46
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:45
 msgid "%1$s was the fourth to reach Island number %2$i."
 msgstr "%1$s était le quatrième à atteindre l'ïle numéro %2$s."
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:48
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:47
 msgid "The reward for this feat amounts to:"
 msgstr "La récompense pour cet exploit s'élève à:"
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:51
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:50
+#, lua-format
 msgid ""
 "%s is now King of the Hill and will win the game in 20 minutes, if nobody "
 "takes over the hill before then."
 msgstr "%s est maintenant Roi de la Colline et gagnera la partie dans 20 minutes si personne ne reprend la colline jusque là."
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:54
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:53
+#, lua-format
 msgid "%s lost control of the hill."
 msgstr "%s a perdu le contrôle de la colline."
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:56
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:55
 msgid "%1$s has been King of the Hill for %2$s!"
 msgstr "%1$s a été Roi de la Colline depuis %2$s!"
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:57
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:56
+#, lua-format
 msgid "%s has won the game. Congratulations!"
 msgstr "%s a gagné la partie. Félicitations!"

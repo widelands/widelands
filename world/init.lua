@@ -67,6 +67,8 @@ world:new_editor_immovable_category{
 }
 
 include "world/immovables/grass1/init.lua"
+include "world/immovables/grass2/init.lua"
+include "world/immovables/grass3/init.lua"
 include "world/immovables/bush1/init.lua"
 include "world/immovables/bush2/init.lua"
 include "world/immovables/bush3/init.lua"
@@ -76,8 +78,6 @@ include "world/immovables/cactus1/init.lua"
 include "world/immovables/cactus2/init.lua"
 include "world/immovables/cactus3/init.lua"
 include "world/immovables/cactus4/init.lua"
-include "world/immovables/grass2/init.lua"
-include "world/immovables/grass3/init.lua"
 include "world/immovables/manmade/artifacts/artifact00/init.lua"
 include "world/immovables/manmade/artifacts/artifact01/init.lua"
 include "world/immovables/manmade/artifacts/artifact02/init.lua"
@@ -196,8 +196,7 @@ include "world/immovables/trees/umbrella_red/init.lua"
 function add_walking_animations(table, dirname, basename, hotspot, fps)
    for idx, dir in ipairs{ "ne", "e", "se", "sw", "w", "nw" } do
       table["walk_" .. dir] = {
-         template = basename .. "_" .. dir .. "_??",
-         directory = dirname,
+         pictures = path.list_files(dirname .. basename .. "_" .. dir ..  "_??.png"),
          hotspot = hotspot,
          fps = fps,
       }

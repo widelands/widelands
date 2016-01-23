@@ -2,8 +2,7 @@ dirname = path.dirname(__file__)
 
 animations = {
    idle = {
-      template = "duck_??",
-      directory = dirname,
+      pictures = path.list_files(dirname .. "duck_??.png"),
       sound_effect = {
          directory = dirname,
          name = "duck",

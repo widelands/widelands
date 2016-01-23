@@ -120,7 +120,7 @@ const Texture& SdlTtfFont::render
 	if (!text_surface)
 		throw RenderError((format("Rendering '%s' gave the error: %s") % txt % TTF_GetError()).str());
 
-	return *texture_cache->insert(hash, new Texture(text_surface), true);
+	return *texture_cache->insert(hash, std::unique_ptr<Texture>(new Texture(text_surface)));
 }
 
 uint16_t SdlTtfFont::ascent(int style) const {

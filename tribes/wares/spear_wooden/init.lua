@@ -5,7 +5,7 @@ tribes:new_ware_type {
    name = "spear_wooden",
    -- TRANSLATORS: This is a ware name used in lists of wares
    descname = pgettext("ware", "Wooden Spear"),
-   directory = dirname,
+   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    default_target_quantity = {
       empire = 30
@@ -16,8 +16,7 @@ tribes:new_ware_type {
 
    animations = {
       idle = {
-         template = "idle",
-         directory = dirname,
+         pictures = path.list_files(dirname .. "idle.png"),
          hotspot = { 4, 11 },
       },
    }

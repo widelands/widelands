@@ -4,7 +4,7 @@ function building_helptext_lore()
 end
 
 function building_helptext_lore_author()
-   -- #TRANSLATORS: Lore author helptext for a building
+   -- TRANSLATORS#: Lore author helptext for a building
    return ""
 end
 

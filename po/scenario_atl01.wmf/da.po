@@ -4,13 +4,14 @@
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # Joe Hansen <joedalton2@yahoo.dk>, 2015
+# Ole Laursen <ole.laursen@gmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-18 08:43+0000\n"
-"PO-Revision-Date: 2015-11-18 08:43+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2015-12-14 05:31+0000\n"
+"PO-Revision-Date: 2016-01-16 21:54+0000\n"
+"Last-Translator: Ole Laursen <ole.laursen@gmail.com>\n"
 "Language-Team: Danish (http://www.transifex.com/widelands/widelands/language/da/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -18,13 +19,21 @@ msgstr ""
 "Language: da\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../../campaigns/atl01.wmf/scripting/init.lua:71
+#. TRANSLATORS: Short message title. Translate as "Lost!" if you don't have
+#. enough space.
+#: ../../campaigns/atl01.wmf/scripting/init.lua:74
+msgctxt "message_short_title"
 msgid "Building lost!"
 msgstr "Bygning tabt!"
 
-#: ../../campaigns/atl01.wmf/scripting/init.lua:73
+#: ../../campaigns/atl01.wmf/scripting/init.lua:76
 msgid "We lost a building to the ocean!"
 msgstr "Vi mistede en bygning til havet!"
+
+#: ../../campaigns/atl01.wmf/scripting/init.lua:82
+msgctxt "message_heading"
+msgid "Building lost!"
+msgstr "Bygning tabt!"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:32
 msgid "Ensure the supply of building wares"
@@ -32,11 +41,11 @@ msgstr "Sikr forsyningen af byggematerialer"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:34
 msgid "Supply Building Wares"
-msgstr "Forsyn byggematerialer"
+msgstr "Skaf byggematerialer"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:35
 msgid "Supply basic building material for your economy:"
-msgstr "Forsyn grundlæggende byggematerialer for din økonomi:"
+msgstr "Skaf grundlæggende byggematerialer til din økonomi:"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:36
 msgid "Build a quarry"
@@ -44,7 +53,7 @@ msgstr "Byg et stenbrud"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:37
 msgid "Build two woodcutter’s houses"
-msgstr "Byg to brændehuggerhuse"
+msgstr "Byg to skovhuggerhuse"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:38
 msgid "Build two forester’s houses"
@@ -67,7 +76,7 @@ msgid ""
 "The island is huge and as long as we are not sure that we are alone here, we"
 " cannot relax. Explore and conquer it, this is the only way to protect us "
 "from threats on the island and from Atlantis."
-msgstr "Øen er meget stor og så længe vi ikke er sikre på, at vi er alene, så kan vi ikke slappe af. Udforsk og erobrer den, hvis det er den eneste måde vi kan beskytte os mod trusler på øen og fra Atlantis."
+msgstr "Øen er kæmpestor og så længe vi ikke er sikre på, at vi er alene, får vi aldrig fred. Udforsk og erobrer den, hvis det er den eneste måde vi kan beskytte os mod trusler på øen og fra Atlantis."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:49
 msgid "Build military sites to expand your territory"
@@ -75,7 +84,7 @@ msgstr "Byg militæranlæg og udvid dit territorium"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:55
 msgid "Establish a solid food production"
-msgstr "Etabler en god fødevareproduktion"
+msgstr "Etabler en solid fødevareproduktion"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:57
 msgid "Food Production"
@@ -105,7 +114,7 @@ msgstr "Byg et landbrug og et rodfrugtlandbrug"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:61
 msgid "Build a mill to make cornmeal and blackroot flour"
-msgstr ""
+msgstr "Byg en mølle til at lave majsmel og rodfrugtmel"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:62
 msgid "Build a well"
@@ -117,7 +126,7 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:64
 msgid "Build a hunter’s house to get raw meat"
-msgstr "Byg et jægerhus for at få råt kød"
+msgstr "Byg en jagthytte for at få råt kød"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:65
 msgid "Build a fisher’s house close to water to get raw fish"
@@ -127,19 +136,19 @@ msgstr "Byg et fiskerhus tæt på vandet for at få rå fisk"
 msgid ""
 "Build a fish breeder’s house close to the fisher to make sure the fish do "
 "not die out"
-msgstr "Byg et fiskeopdræt tæt på fiskerne for at sikre at fisken ikke uddør."
+msgstr "Byg et fiskeopdræt tæt på fiskerne for at sikre at fiskene ikke uddør."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:67
 msgid "Build two smokeries to smoke raw meat and fish"
-msgstr "Byg to røgeri for at ryge råt kød og rå fisk"
+msgstr "Byg to røgerier for at røge råt kød og rå fisk"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:73
 msgid "Build a spider farm and a weaving mill"
-msgstr "Byg et edderkoplandbrug og et væveri"
+msgstr "Byg et silkebrug og et væveri"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:75
 msgid "Spidercloth Production"
-msgstr "Produktion af edderkoptøj"
+msgstr "Produktion af silketøj"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:76
 msgid ""
@@ -156,7 +165,7 @@ msgstr "Byg et væveri"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:78
 msgid "Build a spider farm"
-msgstr "Byg et edderkoplandbrug"
+msgstr "Byg et silkebrug"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:79
 msgid "Build a gold spinning mill"
@@ -201,7 +210,7 @@ msgstr "Byg en rustningssmedje og en våbensmedje"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:93
 msgid "Build a toolsmithy"
-msgstr "Byg en værktøjssmedje"
+msgstr "Byg en klejnsmed"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:99
 msgid "Build training sites for soldiers"
@@ -217,11 +226,11 @@ msgid ""
 "dungeon trains attack – the major attribute of the Atlanteans – and the "
 "labyrinth trains evasion, health and defense. The items produced by the "
 "industry are used to train better soldiers in the two training sites."
-msgstr "Som alle andre stammer er atlanteanerne også i stand til at træne soldater; forhindringsbanen træner angreb - den vigtigste egenskab for alanteanerne - og labyrinten træner undvigelse, helbred og forsvar. Produkterne fra industrien bruges til at træne bedre soldater i de to træningsanlæg."
+msgstr "Som alle andre stammer er atlanterne også i stand til at træne soldater; fangekælderen træner angreb - den vigtigste egenskab for atlanterne - og labyrinten træner undvigelse, helbred og forsvar. Produkterne fra industrien bruges til at træne bedre soldater i de to træningsanlæg."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:103
 msgid "Build a dungeon and a labyrinth"
-msgstr "Byg en forhindringsbane og en labyrint"
+msgstr "Byg en fangekælder og en labyrint"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:109
 msgid "Build a warehouse and a horse farm"
@@ -237,7 +246,7 @@ msgid ""
 "horses to help out your carriers. Horses are bred at horse farms using water"
 " and corn. A warehouse will also help to ensure that your transportation "
 "system does not collapse."
-msgstr "Efterhånden som dit vejnetværk bliver længere og mere kompliceret, så kan du bruge heste til at hjælpe dine fragtmænd. Heste avles på stutterier med vand og korn. Et lager vil også hjælpe dig med at sikre, at transportsystemet ikke bryder ned."
+msgstr "Efterhånden som dit vejnetværk bliver længere og mere kompliceret, så kan du bruge heste til at hjælpe dine fragtmænd. Heste avles på stutterier med vand og korn. Et lager vil også hjælpe dig med at sikre, at transportsystemet ikke bryder sammen."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:113
 msgid "Build a warehouse"
@@ -884,6 +893,7 @@ msgid ""
 msgstr "Du har vundet denne mission. Fortsæt med den næste eller bliv ved med at spille så længe du ønsker det."
 
 #: ../../scripting/format_scenario.lua:36
+#, lua-format
 msgid "“%s”"
 msgstr "»%s«"
 

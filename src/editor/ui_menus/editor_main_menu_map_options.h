@@ -30,7 +30,7 @@
 #include "ui_basic/textarea.h"
 #include "ui_basic/window.h"
 
-struct EditorInteractive;
+class EditorInteractive;
 
 /**
  * This is the Main Options Menu. Here, information

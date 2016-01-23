@@ -5,7 +5,7 @@ tribes:new_trainingsite_type {
    name = "atlanteans_dungeon",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("atlanteans_building", "Dungeon"),
-   directory = dirname,
+   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",
 
@@ -29,16 +29,16 @@ tribes:new_trainingsite_type {
 
    animations = {
       idle = {
-         template = "idle_??",
-         directory = dirname,
+         pictures = path.list_files(dirname .. "idle_??.png"),
          hotspot = { 47, 47 },
       }
    },
 
    aihints = {
       trainingsite_type = "advanced",
-      weak_ai_limit = 0,
-      normal_ai_limit = 1
+      prohibited_till = 1500,
+      very_weak_ai_limit = 0,
+      weak_ai_limit = 1
    },
 
    working_positions = {

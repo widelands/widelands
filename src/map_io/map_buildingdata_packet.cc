@@ -23,6 +23,7 @@
 #include <memory>
 
 #include "base/macros.h"
+#include "economy/expedition_bootstrap.h"
 #include "economy/flag.h"
 #include "economy/portdock.h"
 #include "economy/request.h"
@@ -30,22 +31,21 @@
 #include "economy/wares_queue.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
-#include "logic/constructionsite.h"
-#include "logic/dismantlesite.h"
 #include "logic/editor_game_base.h"
-#include "logic/expedition_bootstrap.h"
 #include "logic/game.h"
 #include "logic/map.h"
-#include "logic/militarysite.h"
+#include "logic/map_objects/tribes/constructionsite.h"
+#include "logic/map_objects/tribes/dismantlesite.h"
+#include "logic/map_objects/tribes/militarysite.h"
+#include "logic/map_objects/tribes/production_program.h"
+#include "logic/map_objects/tribes/productionsite.h"
+#include "logic/map_objects/tribes/soldier.h"
+#include "logic/map_objects/tribes/trainingsite.h"
+#include "logic/map_objects/tribes/tribe_descr.h"
+#include "logic/map_objects/tribes/warehouse.h"
+#include "logic/map_objects/tribes/worker.h"
 #include "logic/player.h"
-#include "logic/production_program.h"
-#include "logic/productionsite.h"
-#include "logic/soldier.h"
-#include "logic/trainingsite.h"
-#include "logic/tribes/tribe_descr.h"
-#include "logic/warehouse.h"
 #include "logic/widelands_geometry_io.h"
-#include "logic/worker.h"
 #include "map_io/map_object_loader.h"
 #include "map_io/map_object_saver.h"
 
@@ -59,7 +59,7 @@ constexpr uint16_t kCurrentPacketVersionDismantlesite = 1;
 constexpr uint16_t kCurrentPacketVersionConstructionsite = 3;
 constexpr uint16_t kCurrentPacketPFBuilding = 1;
 constexpr uint16_t kCurrentPacketVersionWarehouse = 6;
-constexpr uint16_t kCurrentPacketVersionMilitarysite = 4;
+constexpr uint16_t kCurrentPacketVersionMilitarysite = 5;
 constexpr uint16_t kCurrentPacketVersionProductionsite = 5;
 constexpr uint16_t kCurrentPacketVersionTrainingsite = 4;
 
@@ -187,12 +187,12 @@ void MapBuildingdataPacket::read
 						read_constructionsite(*constructionsite, fr, game, mol);
 					} else if (upcast(DismantleSite, dms, &building)) {
 						read_dismantlesite(*dms, fr, game, mol);
+					} else if (upcast(MilitarySite, militarysite, &building)) {
+						read_militarysite(*militarysite, fr, game, mol);
 					} else if (upcast(Warehouse, warehouse, &building)) {
 						read_warehouse(*warehouse, fr, game, mol);
 					} else if (upcast(ProductionSite, productionsite, &building)) {
-						if (upcast(MilitarySite, militarysite, productionsite)) {
-							read_militarysite(*militarysite, fr, game, mol);
-						} else if (upcast(TrainingSite, trainingsite, productionsite)) {
+						if (upcast(TrainingSite, trainingsite, productionsite)) {
 							read_trainingsite(*trainingsite, fr, game, mol);
 						} else {
 							read_productionsite(*productionsite, fr, game, mol);
@@ -509,8 +509,6 @@ void MapBuildingdataPacket::read_militarysite
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
 		if (packet_version == kCurrentPacketVersionMilitarysite) {
-			read_productionsite(militarysite, fr, game, mol);
-
 			militarysite.m_normal_soldier_request.reset();
 
 			if (fr.unsigned_8()) {
@@ -946,13 +944,12 @@ void MapBuildingdataPacket::write
 				write_constructionsite(*constructionsite, fw, game, mos);
 			} else if (upcast(DismantleSite const, dms, building)) {
 				write_dismantlesite(*dms, fw, game, mos);
+			} else if (upcast(MilitarySite const, militarysite, building)) {
+				write_militarysite(*militarysite, fw, game, mos);
 			} else if (upcast(Warehouse const, warehouse, building)) {
 				write_warehouse (*warehouse, fw, game, mos);
 			} else if (upcast(ProductionSite const, productionsite, building)) {
-				if (upcast(MilitarySite const, militarysite, productionsite)) {
-					write_militarysite(*militarysite, fw, game, mos);
-				}
-				else if (upcast(TrainingSite const, trainingsite, productionsite)) {
+				if (upcast(TrainingSite const, trainingsite, productionsite)) {
 					write_trainingsite(*trainingsite, fw, game, mos);
 				}
 				else {
@@ -1135,7 +1132,6 @@ void MapBuildingdataPacket::write_militarysite
 	 MapObjectSaver & mos)
 {
 	fw.unsigned_16(kCurrentPacketVersionMilitarysite);
-	write_productionsite(militarysite, fw, game, mos);
 
 	if (militarysite.m_normal_soldier_request) {
 		fw.unsigned_8(1);

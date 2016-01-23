@@ -102,12 +102,12 @@ struct BuildingHints {
 		return mines_percent_;
 	}
 
-	int16_t get_weak_ai_limit() const {
-		return weak_ai_limit_;
+	int16_t get_very_weak_ai_limit() const {
+		return very_weak_ai_limit_;
 	}
 
-	int16_t get_normal_ai_limit() const {
-		return normal_ai_limit_;
+	int16_t get_weak_ai_limit() const {
+		return weak_ai_limit_;
 	}
 
 	TrainingSiteType get_trainingsite_type() const {
@@ -130,8 +130,8 @@ private:
 	int32_t prohibited_till_;
 	int32_t forced_after_;
 	int8_t mines_percent_;
+	int16_t very_weak_ai_limit_;
 	int16_t weak_ai_limit_;
-	int16_t normal_ai_limit_;
 	TrainingSiteType trainingsite_type_;
 
 	DISALLOW_COPY_AND_ASSIGN(BuildingHints);

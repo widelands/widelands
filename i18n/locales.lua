@@ -131,7 +131,7 @@ return {
    fr = {
       name = "Français",
       sort_name = "Francais",
-      font = "default"
+      font = "défaut"
    },
 
    gd = {

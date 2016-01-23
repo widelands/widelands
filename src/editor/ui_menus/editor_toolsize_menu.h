@@ -25,7 +25,7 @@
 #include "ui_basic/unique_window.h"
 
 
-struct EditorInteractive;
+class EditorInteractive;
 
 
 /// The tool size window/menu.

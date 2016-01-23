@@ -34,22 +34,22 @@
 #include "economy/road.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
-#include "logic/building.h"
-#include "logic/checkstep.h"
 #include "logic/cmd_delete_message.h"
 #include "logic/cmd_luacoroutine.h"
 #include "logic/constants.h"
-#include "logic/constructionsite.h"
 #include "logic/findimmovable.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
-#include "logic/militarysite.h"
+#include "logic/map_objects/checkstep.h"
+#include "logic/map_objects/tribes/building.h"
+#include "logic/map_objects/tribes/constructionsite.h"
+#include "logic/map_objects/tribes/militarysite.h"
+#include "logic/map_objects/tribes/soldier.h"
+#include "logic/map_objects/tribes/soldiercontrol.h"
+#include "logic/map_objects/tribes/trainingsite.h"
+#include "logic/map_objects/tribes/tribe_descr.h"
+#include "logic/map_objects/tribes/warehouse.h"
 #include "logic/playercommand.h"
-#include "logic/soldier.h"
-#include "logic/soldiercontrol.h"
-#include "logic/trainingsite.h"
-#include "logic/tribes/tribe_descr.h"
-#include "logic/warehouse.h"
 #include "scripting/lua_table.h"
 #include "sound/sound_handler.h"
 #include "wui/interactive_player.h"
@@ -194,9 +194,9 @@ Player::Player
 			}
 		});
 
-	// Subscribe to NoteFieldTransformed.
-	field_transformed_subscriber_ =
-		Notifications::subscribe<NoteFieldTransformed>([this](const NoteFieldTransformed& note) {
+	// Subscribe to NoteFieldTerrainChanged.
+	field_terrain_changed_subscriber_ =
+		Notifications::subscribe<NoteFieldTerrainChanged>([this](const NoteFieldTerrainChanged& note) {
 			if (vision(note.map_index) > 1) {
 				rediscover_node(egbase().map(), egbase().map()[0], note.fc);
 			}
@@ -1324,6 +1324,15 @@ void Player::set_ai_data(int16_t value, uint32_t position) {
 	m_ai_data_int16[position] = value;
 }
 
+void Player::set_ai_data(bool value, uint32_t position) {
+	assert(position < kAIDataSize);
+	if (value) {
+		m_ai_data_int16[position] = 1;
+	} else {
+		m_ai_data_int16[position] = 0;
+	}
+}
+
 void Player::get_ai_data(int32_t * value, uint32_t position) {
 	assert(position < kAIDataSize);
 	*value = m_ai_data_int32[position];
@@ -1337,6 +1346,16 @@ void Player::get_ai_data(uint32_t * value, uint32_t position) {
 void Player::get_ai_data(int16_t * value, uint32_t position) {
 	assert(position < kAIDataSize);
 	*value = m_ai_data_int16[position];
+}
+
+void Player::get_ai_data(bool * value, uint32_t position) {
+	assert(position < kAIDataSize);
+	assert(m_ai_data_int16[position] == 0 || m_ai_data_int16[position] == 1);
+	if (m_ai_data_int16[position] == 1) {
+		*value = true;
+	} else {
+		*value = false;
+	}
 }
 
 /**

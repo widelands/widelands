@@ -33,10 +33,10 @@
 #include "logic/editor_game_base.h"
 #include "logic/field.h"
 #include "logic/game.h"
-#include "logic/instances.h"
 #include "logic/map.h"
+#include "logic/map_objects/map_object.h"
+#include "logic/map_objects/world/world.h"
 #include "logic/mapregion.h"
-#include "logic/world/world.h"
 #include "map_io/map_loader.h"
 #include "map_io/world_legacy_lookup_table.h"
 #include "scripting/lua_interface.h"
@@ -617,19 +617,19 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase & egbase)
 	if (!section)
 		throw wexception("Section 12 (Resources) not found");
 
-	f = m_map.m_fields.get();
 	pc = section.get();
 	char const * res;
 	int32_t amount = 0;
-	for (uint16_t y = 0; y < mapheight; ++y)
-		for (uint16_t x = 0; x < mapwidth; ++x, ++f, ++pc) {
-			uint8_t c = *pc;
+	for (uint16_t y = 0; y < mapheight; ++y) {
+		for (uint16_t x = 0; x < mapwidth; ++x, ++pc) {
+			auto c = m_map.get_fcoords(Widelands::Coords(x, y));
+			uint8_t value = *pc;
 
-			switch (c & 0xF8) {
-			case 0x40: res = "coal";    amount = c & 7; break;
-			case 0x48: res = "iron";    amount = c & 7; break;
-			case 0x50: res = "gold";    amount = c & 7; break;
-			case 0x59: res = "granite"; amount = c & 7; break;
+			switch (value & 0xF8) {
+			case 0x40: res = "coal";    amount = value & 7; break;
+			case 0x48: res = "iron";    amount = value & 7; break;
+			case 0x50: res = "gold";    amount = value & 7; break;
+			case 0x59: res = "granite"; amount = value & 7; break;
 			default:   res = "";        amount = 0; break;
 			};
 
@@ -644,9 +644,9 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase & egbase)
 			}
 			const int32_t real_amount = static_cast<int32_t>
 				(2.86 * static_cast<float>(amount));
-			f->set_resources(nres, real_amount);
-			f->set_initial_res_amount(real_amount);
+			m_map.initialize_resources(c, nres, real_amount);
 		}
+	}
 
 
 

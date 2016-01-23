@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-18 08:43+0000\n"
-"PO-Revision-Date: 2015-11-18 08:43+0000\n"
+"POT-Creation-Date: 2015-12-03 09:55+0000\n"
+"PO-Revision-Date: 2015-12-03 09:56+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Ukrainian (http://www.transifex.com/widelands/widelands/language/uk/)\n"
 "MIME-Version: 1.0\n"
@@ -29,18 +29,19 @@ msgid "15 minutes"
 msgstr ""
 
 #: ../../maps/MP Scenarios/Island
-#: Hopping.wmf/scripting/multiplayer_init.lua:98
-msgid "Game Status"
+#: Hopping.wmf/scripting/multiplayer_init.lua:99 ../../maps/MP
+#: Scenarios/Island Hopping.wmf/scripting/multiplayer_init.lua:101
+msgid "Status"
 msgstr ""
 
 #. TRANSLATORS: number + resource name, e.g. '1x Log'
 #: ../../maps/MP Scenarios/Island
-#: Hopping.wmf/scripting/multiplayer_init.lua:108
+#: Hopping.wmf/scripting/multiplayer_init.lua:112
 msgid "%1$dx %2$s"
 msgstr ""
 
 #: ../../maps/MP Scenarios/Island
-#: Hopping.wmf/scripting/multiplayer_init.lua:219 ../../maps/MP
+#: Hopping.wmf/scripting/multiplayer_init.lua:223 ../../maps/MP
 #: Scenarios/Island Hopping.wmf/scripting/texts.lua:6
 msgid "Rules"
 msgstr ""
@@ -116,40 +117,40 @@ msgstr ""
 msgid "Second Island"
 msgstr ""
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:43
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:42
 msgid "%1$s was the first to reach Island number %2$i."
 msgstr ""
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:44
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:43
 msgid "%1$s was the second to reach Island number %2$i."
 msgstr ""
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:45
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:44
 msgid "%1$s was the third to reach Island number %2$i."
 msgstr ""
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:46
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:45
 msgid "%1$s was the fourth to reach Island number %2$i."
 msgstr ""
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:48
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:47
 msgid "The reward for this feat amounts to:"
 msgstr ""
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:51
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:50
 msgid ""
 "%s is now King of the Hill and will win the game in 20 minutes, if nobody "
 "takes over the hill before then."
 msgstr ""
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:54
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:53
 msgid "%s lost control of the hill."
 msgstr ""
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:56
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:55
 msgid "%1$s has been King of the Hill for %2$s!"
 msgstr ""
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:57
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:56
 msgid "%s has won the game. Congratulations!"
 msgstr ""

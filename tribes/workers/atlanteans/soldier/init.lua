@@ -2,68 +2,57 @@ dirname = path.dirname(__file__)
 
 animations = {
    idle = {
-      template = "idle_??",
-      directory = dirname,
+      pictures = path.list_files(dirname .. "idle_??.png"),
       hotspot = { 10, 36 },
       fps = 5
    },
    atk_ok_e = {
-      template = "atk_ok_e_??",
-      directory = dirname,
+      pictures = path.list_files(dirname .. "atk_ok_e_??.png"),
       hotspot = { 36, 40 },
       fps = 10
    },
    atk_fail_e = {
-      template = "atk_fail_e_??",
-      directory = dirname,
+      pictures = path.list_files(dirname .. "atk_fail_e_??.png"),
       hotspot = { 36, 40 },
       fps = 10
    },
    eva_ok_e = {
-      template = "eva_ok_e_??",
-      directory = dirname,
+      pictures = path.list_files(dirname .. "eva_ok_e_??.png"),
       hotspot = { 36, 40 },
       fps = 20
    },
    eva_fail_e = {
-      template = "eva_fail_e_??",
-      directory = dirname,
+      pictures = path.list_files(dirname .. "eva_fail_e_??.png"),
       hotspot = { 36, 40 },
       fps = 10
    },
    atk_ok_w = {
-      template = "atk_ok_w_??",
-      directory = dirname,
+      pictures = path.list_files(dirname .. "atk_ok_w_??.png"),
       hotspot = { 36, 40 },
       fps = 10
    },
    atk_fail_w = {
-      template = "atk_fail_w_??",
-      directory = dirname,
+      pictures = path.list_files(dirname .. "atk_fail_w_??.png"),
       hotspot = { 36, 40 },
       fps = 10
    },
    eva_ok_w = {
-      template = "eva_ok_w_??",
-      directory = dirname,
+      pictures = path.list_files(dirname .. "eva_ok_w_??.png"),
       hotspot = { 36, 40 },
       fps = 20
    },
    eva_fail_w = {
-      template = "eva_fail_w_??",
-      directory = dirname,
+      pictures = path.list_files(dirname .. "eva_fail_w_??.png"),
       hotspot = { 36, 40 },
       fps = 10
    },
    die_w = {
-      template = "die_??",
-      directory = dirname,
+      pictures = path.list_files(dirname .. "die_??.png"),
       hotspot = { 10, 36 },
       fps = 10
    },
    die_e = {
-      template = "die_??",
-      directory = dirname,
+      pictures = path.list_files(dirname .. "die_??.png"),
       hotspot = { 10, 36 },
       fps = 10
    }
@@ -76,7 +65,7 @@ tribes:new_soldier_type {
    name = "atlanteans_soldier",
    -- TRANSLATORS: This is a worker name used in lists of workers
    descname = pgettext("atlanteans_worker", "Soldier"),
-   directory = dirname,
+   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    vision_range = 2,
 

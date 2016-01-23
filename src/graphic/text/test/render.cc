@@ -35,7 +35,7 @@ StandaloneRenderer::StandaloneRenderer() {
 	g_fs->add_file_system(&FileSystem::create(WIDELANDS_DATA_DIR));
 	g_fs->add_file_system(&FileSystem::create(RICHTEXT_DATA_DIR));
 
-	texture_cache_.reset(create_texture_cache(500 << 20));  // 500 MB
+	texture_cache_.reset(new TextureCache(500 << 20));  // 500 MB
 	image_cache_.reset(new ImageCache());
 	renderer_.reset(new RT::Renderer(image_cache_.get(), texture_cache_.get(), new UI::FontSet("en")));
 }
