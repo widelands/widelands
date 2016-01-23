@@ -25,6 +25,7 @@
 
 #include "base/i18n.h"
 #include "base/warning.h"
+#include "base/wexception.h"
 #include "graphic/graphic.h"
 #include "graphic/text_constants.h"
 #include "io/filesystem/layered_filesystem.h"
@@ -349,13 +350,12 @@ void FullscreenMenuLaunchMPG::change_map_or_save() {
 	auto result = selection_window.run<FullscreenMenuBase::MenuTarget>();
 	assert(result == FullscreenMenuBase::MenuTarget::kNormalGame ||
 	       result == FullscreenMenuBase::MenuTarget::kScenarioGame);
-	switch (result) {
-		case FullscreenMenuBase::MenuTarget::kNormalGame:
-			select_map();
-			break;
-		case FullscreenMenuBase::MenuTarget::kScenarioGame:
-			select_saved_game();
-			break;
+	if (result == FullscreenMenuBase::MenuTarget::kNormalGame) {
+		select_map();
+	} else if (result == FullscreenMenuBase::MenuTarget::kScenarioGame) {
+		select_saved_game();
+	} else {
+		NEVER_HERE();
 	}
 }
 
