@@ -67,6 +67,8 @@ world:new_editor_immovable_category{
 }
 
 include "world/immovables/grass1/init.lua"
+include "world/immovables/grass2/init.lua"
+include "world/immovables/grass3/init.lua"
 include "world/immovables/bush1/init.lua"
 include "world/immovables/bush2/init.lua"
 include "world/immovables/bush3/init.lua"
@@ -76,8 +78,6 @@ include "world/immovables/cactus1/init.lua"
 include "world/immovables/cactus2/init.lua"
 include "world/immovables/cactus3/init.lua"
 include "world/immovables/cactus4/init.lua"
-include "world/immovables/grass2/init.lua"
-include "world/immovables/grass3/init.lua"
 include "world/immovables/manmade/artifacts/artifact00/init.lua"
 include "world/immovables/manmade/artifacts/artifact01/init.lua"
 include "world/immovables/manmade/artifacts/artifact02/init.lua"
