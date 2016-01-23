@@ -24,7 +24,6 @@
 #include <SDL.h>
 
 #include "graphic/texture.h"
-#include "base/log.h" // NOCOM(#sirver): remove again
 
 // The implementation took inspiration from
 // http://timday.bitbucket.org/lru.html, but our use case here is a little
