@@ -100,7 +100,7 @@ public:
 	          const Point& ofs,
 	          BlendMode blend_mode = BlendMode::UseAlpha);
 
-	// Draw the 'animation' as it should appear at 'time' in this target ad 'dst'. Optionally, the animation is
+	// Draw the 'animation' as it should appear at 'time' in this target at 'dst'. Optionally, the animation is
 	// tinted with 'player_color' and cropped to 'source_rect'.
 	void blit_animation(const Point& dst, uint32_t animation, uint32_t time);
 	void blit_animation(const Point& dst, uint32_t animation, uint32_t time, const RGBColor& player_color);
