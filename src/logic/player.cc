@@ -852,8 +852,7 @@ Player::Economies::size_type Player::get_economy_number
 		 ++it)
 		if (*it == economy)
 			return it - economies_begin;
-	assert(false); // never here
-	return 0;
+	NEVER_HERE();
 }
 
 /************  Military stuff  **********/

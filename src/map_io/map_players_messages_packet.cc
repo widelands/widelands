@@ -195,8 +195,6 @@ void MapPlayersMessagesPacket::write
 				break;
 			case Message::Status::kArchived: //  The default status. Do not write.
 				break;
-			default:
-				assert(false);
 			}
 			if (message.serial()) {
 				const MapObject* mo = egbase.objects().get_object(message.serial());

@@ -24,6 +24,7 @@
 #include <boost/format.hpp>
 
 #include "base/macros.h"
+#include "base/wexception.h"
 #include "economy/economy.h"
 #include "economy/flag.h"
 #include "economy/fleet.h"
@@ -220,8 +221,6 @@ void Ship::ship_update(Game& game, Bob::State& state) {
 		pop_task(game);
 		remove(game);
 		return;
-	default:
-		assert(false);  // never here
 	}
 
 	// if the real update function failed (e.g. nothing to transport), the ship goes idle
@@ -702,9 +701,7 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 		return;
 	}
 	}
-
-	// never here
-	assert(false);
+	NEVER_HERE();
 }
 
 void Ship::set_economy(Game& game, Economy* e) {

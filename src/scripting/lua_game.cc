@@ -1209,7 +1209,6 @@ int LuaMessage::get_status(lua_State * L) {
 		case Message::Status::kNew: lua_pushstring(L, "new"); break;
 		case Message::Status::kRead: lua_pushstring(L, "read"); break;
 		case Message::Status::kArchived: lua_pushstring(L, "archived"); break;
-		default: report_error(L, "Unknown Message status encountered!");
 	}
 	return 1;
 }

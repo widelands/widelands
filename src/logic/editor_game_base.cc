@@ -521,8 +521,7 @@ void EditorGameBase::set_road
 		mask = RoadType::kMask << RoadType::kEast;
 		break;
 	default:
-		assert(false);
-		break;
+		NEVER_HERE();
 	}
 	uint8_t const road = f.field->get_roads() & mask;
 	MapIndex const           i = f        .field - &first_field;
