@@ -106,30 +106,30 @@ end
 
 --function cancel_expedition_or_sink_in_shipwindow()
     --if second_ship then
-	--ship_to_click=second_ship
-	--elseif first_ship then
-	--ship_to_click=first_ship
-	--else
-		--assert(false)
-		--end
+   --ship_to_click=second_ship
+   --elseif first_ship then
+   --ship_to_click=first_ship
+   --else
+      --assert(false)
+      --end
 
    --click_on_ship(ship_to_click)
    --if click_button("cancel_expedition") then
-		--sleep(100)
-		--assert_true(click_button("ok"))
-		--sleep(100)
-		--close_windows()
-		--sleep(100)
-		--print (" DEBUG expedition cancelled")
+      --sleep(100)
+      --assert_true(click_button("ok"))
+      --sleep(100)
+      --close_windows()
+      --sleep(100)
+      --print (" DEBUG expedition cancelled")
    --else
-		--click_on_ship(ship_to_click)
-		--assert_true(click_button("sink"))
-		--sleep(100)
-		--assert_true(click_button("ok"))
-		--sleep(100)
-		--close_windows()
-		--sleep(100)
-		--print (" DEBUG ship sunk")
+      --click_on_ship(ship_to_click)
+      --assert_true(click_button("sink"))
+      --sleep(100)
+      --assert_true(click_button("ok"))
+      --sleep(100)
+      --close_windows()
+      --sleep(100)
+      --print (" DEBUG ship sunk")
    --end
 --end
 
@@ -197,7 +197,7 @@ function test_cancel_started_expedition_on_ship(needs_second_ship)
 
    -- Start a new expedition.
    port:start_expedition()
-   wait_for_message("Expedition Ready")
+   wait_for_message("Expedition")
 
    --if current test requires second ship...
    if needs_second_ship then
@@ -234,7 +234,7 @@ function test_cancel_started_expedition_underway()
 
    -- Start a new expedition.
    port:start_expedition()
-   wait_for_message("Expedition Ready")
+   wait_for_message("Expedition")
    game.desired_speed = 10 * 1000
    sleep(10000)
 
@@ -273,18 +273,25 @@ function test_cancel_when_port_space_was_reached()
 
    -- Send expedition to port space.
    port:start_expedition()
-   wait_for_message("Expedition Ready")
+   wait_for_message("Expedition")
    assert_equal(1, p1:get_workers("barbarians_builder"))
    sleep(500)
 
    first_ship.island_explore_direction="ccw"
    sleep(2000)
    assert_equal("ccw",first_ship.island_explore_direction)
-   wait_for_message("Port Space Found")
+   wait_for_message("Port Space")
+   assert_equal("exp_found_port_space", first_ship.state)
    sleep(500)
    assert_equal(1, p1:get_workers("barbarians_builder"))
 
    stable_save("reached_port_space")
+   sleep(5000)
+   ships = p1:get_ships()
+   --ships table should contain 1-2 items (1-2 ships)
+   assert_true(#ships >= 1)
+   assert_true(#ships <= 2)
+   assert_equal("exp_found_port_space", first_ship.state)
    assert_equal(1, p1:get_workers("barbarians_builder"))
 
    cancel_expedition_in_shipwindow(first_ship)
@@ -311,7 +318,7 @@ function test_transporting_works()
 
 
    port:start_expedition()
-   wait_for_message("Expedition Ready")
+   wait_for_message("Expedition")
 
    if first_ship.state=="exp_waiting" then
       expedition_ship=first_ship
@@ -324,7 +331,7 @@ function test_transporting_works()
    expedition_ship.island_explore_direction="ccw"
    sleep(2000)
    assert_equal("ccw",expedition_ship.island_explore_direction)
-   wait_for_message("Port Space Found")
+   wait_for_message("Port Space")
    expedition_ship:build_colonization_port()
    sleep(500)
    assert_equal(1, p1:get_workers("barbarians_builder"))

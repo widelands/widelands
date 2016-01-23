@@ -7,15 +7,15 @@ tribes:new_immovable_type {
    descname = pgettext("immovable", "A Lot of Stones"),
    attributes = { "resi" },
    programs = {
-		program = {
-			"animate=idle 600000",
-			"remove="
+      program = {
+         "animate=idle 600000",
+         "remove="
       }
    },
 
    animations = {
       idle = {
-         pictures = path.list_directory(dirname, "idle_\\d+.png"),
+         pictures = path.list_files(dirname .. "idle_??.png"),
          hotspot = { 7, 10 },
       },
    }

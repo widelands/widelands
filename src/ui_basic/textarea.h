@@ -68,7 +68,13 @@ struct Textarea : public Panel {
 		 const std::string & text = std::string(),
 		 Align align = Align_Left);
 
-	void set_fixed_size(const std::string & text);
+	/**
+	 * If fixed_width > 0, the Textarea will not change its width.
+	 * Use this if you need a Textarea that keeps changing its contents, but you don't want the
+	 * surrounding elements to shift, e.g. in a Box.
+	 */
+	void set_fixed_width(uint32_t w);
+
 	void set_text(const std::string &);
 	const std::string& get_text();
 
@@ -96,9 +102,10 @@ private:
 
 	LayoutMode m_layoutmode;
 	std::string m_text;
-	const Image* m_text_image;
+	const Image* rendered_text_;
 	Align m_align;
 	UI::TextStyle m_textstyle;
+	uint32_t fixed_width_;
 };
 
 }

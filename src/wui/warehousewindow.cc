@@ -19,9 +19,9 @@
 
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
+#include "logic/map_objects/tribes/warehouse.h"
 #include "logic/player.h"
 #include "logic/playercommand.h"
-#include "logic/warehouse.h"
 #include "ui_basic/tabpanel.h"
 #include "wui/buildingwindow.h"
 #include "wui/portdockwaresdisplay.h"
@@ -49,7 +49,7 @@ public:
 		 Warehouse & wh, Widelands::WareWorker type, bool selectable);
 
 protected:
-	void draw_ware(RenderTarget & dst, Widelands::WareIndex ware) override;
+	void draw_ware(RenderTarget & dst, Widelands::DescriptionIndex ware) override;
 
 private:
 	Warehouse & m_warehouse;
@@ -66,7 +66,7 @@ m_warehouse(wh)
 	add_warelist(type == Widelands::wwWORKER ? m_warehouse.get_workers() : m_warehouse.get_wares());
 	if (type == Widelands::wwWORKER)
 	{
-		const std::vector<Widelands::WareIndex> & worker_types_without_cost =
+		const std::vector<Widelands::DescriptionIndex> & worker_types_without_cost =
 			m_warehouse.owner().tribe().worker_types_without_cost();
 		for (size_t i = 0; i < worker_types_without_cost.size(); ++i)
 		{
@@ -75,7 +75,7 @@ m_warehouse(wh)
 	}
 }
 
-void WarehouseWaresDisplay::draw_ware(RenderTarget & dst, Widelands::WareIndex ware)
+void WarehouseWaresDisplay::draw_ware(RenderTarget & dst, Widelands::DescriptionIndex ware)
 {
 	WaresDisplay::draw_ware(dst, ware);
 
@@ -151,12 +151,11 @@ WarehouseWaresPanel::WarehouseWaresPanel
  */
 void WarehouseWaresPanel::set_policy(Warehouse::StockPolicy newpolicy) {
 	if (m_gb.can_act(m_wh.owner().player_number())) {
-
 		bool is_workers = m_type == Widelands::wwWORKER;
-		const std::set<Widelands::WareIndex> indices =
+		const std::set<Widelands::DescriptionIndex> indices =
 				is_workers ? m_wh.owner().tribe().workers() : m_wh.owner().tribe().wares();
 
-		for (const Widelands::WareIndex& index : indices) {
+		for (const Widelands::DescriptionIndex& index : indices) {
 			if (m_display.ware_selected(index)) {
 				m_gb.game().send_player_command
 					(*new Widelands::CmdSetStockPolicy
@@ -217,12 +216,12 @@ WarehouseWindow::WarehouseWindow
 			("dock_wares",
 			 g_gr->images().get(pic_tab_dock_wares),
 			 create_portdock_wares_display(get_tabs(), Width, *pd, Widelands::wwWARE),
-			 _("Wares in dock"));
+			 _("Wares waiting to be shipped"));
 		get_tabs()->add
 			("dock_workers",
 			 g_gr->images().get(pic_tab_dock_workers),
 			 create_portdock_wares_display(get_tabs(), Width, *pd, Widelands::wwWORKER),
-			 _("Workers in dock"));
+			 _("Workers waiting to embark"));
 		if (pd->expedition_started()) {
 			get_tabs()->add
 				("expedition_wares_queue",

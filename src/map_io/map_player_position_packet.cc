@@ -29,8 +29,7 @@
 
 namespace Widelands {
 
-#define CURRENT_PACKET_VERSION 2
-
+constexpr uint32_t kCurrentPacketVersion = 2;
 
 void MapPlayerPositionPacket::read
 	(FileSystem & fs, EditorGameBase & egbase, bool, MapObjectLoader &)
@@ -41,7 +40,7 @@ void MapPlayerPositionPacket::read
 
 	try {
 		uint32_t const packet_version = s.get_safe_positive("packet_version");
-		if (2 <= packet_version && packet_version <= CURRENT_PACKET_VERSION) {
+		if (packet_version == kCurrentPacketVersion) {
 			//  Read all the positions
 			//  This could bring trouble if one player position/ is not set (this
 			//  is possible in the editor), is also -1, -1.
@@ -58,9 +57,9 @@ void MapPlayerPositionPacket::read
 					throw GameDataError("player %u: %s", p, e.what());
 				}
 			}
-		} else
-			throw GameDataError
-				("unknown/unhandled version %u", packet_version);
+		} else {
+			throw UnhandledVersionError("MapPlayerPositionPacket", packet_version, kCurrentPacketVersion);
+		}
 	} catch (const WException & e) {
 		throw GameDataError("player positions: %s", e.what());
 	}
@@ -73,7 +72,7 @@ void MapPlayerPositionPacket::write
 	Profile prof;
 	Section & s = prof.create_section("global");
 
-	s.set_int("packet_version", CURRENT_PACKET_VERSION);
+	s.set_int("packet_version", kCurrentPacketVersion);
 
 	// Now, all positions in order
 	const Map & map = egbase.map();

@@ -2,12 +2,12 @@ dirname = path.dirname(__file__)
 
 animations = {
    idle = {
-      pictures = path.list_directory(dirname, "idle_\\d+.png"),
+      pictures = path.list_files(dirname .. "idle_??.png"),
       hotspot = { 9, 21 },
       fps = 10
    },
    hacking = {
-      pictures = path.list_directory(dirname, "hacking_\\d+.png"),
+      pictures = path.list_files(dirname .. "hacking_??.png"),
       hotspot = { 11, 18 },
       fps = 10
    }
@@ -21,31 +21,31 @@ tribes:new_worker_type {
    name = "empire_geologist",
    -- TRANSLATORS: This is a worker name used in lists of workers
    descname = pgettext("empire_worker", "Geologist"),
-   directory = dirname,
+   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    vision_range = 2,
 
    buildcost = {
-		empire_carrier = 1,
-		hammer = 1
-	},
+      empire_carrier = 1,
+      hammer = 1
+   },
 
-	programs = {
-		-- Expedition is the main program
-		-- The specialized geologist command walks the geologist around his starting
-		-- location, executing the search program from time to time.
-		expedition = {
-			"geologist 15 5 search"
-		},
-		-- Search program, executed when we have found a place to hack on
-		search = {
-			"animation hacking 5000",
-			"animation idle 2000",
-			"playFX sound/hammering/geologist_hammer 192",
-			"animation hacking 3000",
-			"geologist-find"
-		}
-	},
+   programs = {
+      -- Expedition is the main program
+      -- The specialized geologist command walks the geologist around his starting
+      -- location, executing the search program from time to time.
+      expedition = {
+         "geologist 15 5 search"
+      },
+      -- Search program, executed when we have found a place to hack on
+      search = {
+         "animation hacking 5000",
+         "animation idle 2000",
+         "playFX sound/hammering geologist_hammer 192",
+         "animation hacking 3000",
+         "geologist-find"
+      }
+   },
 
    animations = animations,
 }

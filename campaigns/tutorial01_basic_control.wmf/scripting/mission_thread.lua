@@ -306,7 +306,7 @@ function messages()
    -- Teach the player about receiving messages
    sleep(10)
 
-   send_message(plr, teaching_about_messages.title, teaching_about_messages.body, teaching_about_messages)
+   send_message(plr, teaching_about_messages.title, teaching_about_messages.body, teaching_about_messages, {heading = teaching_about_messages.heading})
    local o = add_campaign_objective(teaching_about_messages)
 
    while #plr.inbox > 0 do sleep(200) end
@@ -358,11 +358,11 @@ function expansion()
    local soldier_inside = false
    while not soldier_inside do
       local military_buildings = array_combine(
-			plr:get_buildings("barbarians_sentry"),
-			plr:get_buildings("barbarians_tower"),
-			plr:get_buildings("barbarians_barrier"),
-			plr:get_buildings("barbarians_fortress"),
-			plr:get_buildings("barbarians_citadel"))
+         plr:get_buildings("barbarians_sentry"),
+         plr:get_buildings("barbarians_tower"),
+         plr:get_buildings("barbarians_barrier"),
+         plr:get_buildings("barbarians_fortress"),
+         plr:get_buildings("barbarians_citadel"))
       for i = 1,#military_buildings do
          for k,v in pairs(military_buildings[i]:get_soldiers("all")) do
             soldier_inside = true
@@ -390,4 +390,3 @@ end
 
 run(bad_boy_sentry)
 run(starting_infos)
-

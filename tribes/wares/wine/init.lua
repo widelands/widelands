@@ -5,18 +5,18 @@ tribes:new_ware_type {
    name = "wine",
    -- TRANSLATORS: This is a ware name used in lists of wares
    descname = pgettext("ware", "Wine"),
-   directory = dirname,
+   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    default_target_quantity = {
-		empire = 20
+      empire = 20
    },
    preciousness = {
-		empire = 8
+      empire = 8
    },
 
    animations = {
       idle = {
-         pictures = { dirname .. "idle.png" },
+         pictures = path.list_files(dirname .. "idle.png"),
          hotspot = { 4, 14 },
       },
    }

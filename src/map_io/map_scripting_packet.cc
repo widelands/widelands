@@ -31,14 +31,13 @@
 #include "logic/game.h"
 #include "logic/game_data_error.h"
 #include "logic/map.h"
-#include "logic/world/world.h"
-#include "profile/profile.h"
+#include "logic/map_objects/world/world.h"
 #include "scripting/logic.h"
 
 namespace Widelands {
 
 namespace {
-const uint32_t SCRIPTING_DATA_PACKET_VERSION = 1;
+constexpr uint32_t kCurrentPacketVersion = 2;
 }  // namespace
 /*
  * ========================================================================
@@ -46,10 +45,10 @@ const uint32_t SCRIPTING_DATA_PACKET_VERSION = 1;
  * ========================================================================
  */
 void MapScriptingPacket::read
-	(FileSystem            &       fs,
-	 EditorGameBase      &       egbase,
+	(FileSystem& fs,
+	 EditorGameBase& egbase,
 	 bool,
-	 MapObjectLoader &       mol)
+	 MapObjectLoader& mol)
 {
 	// Always try to load the global State: even in a normal game, some lua
 	// coroutines could run. But make sure that this is really a game, other
@@ -58,14 +57,17 @@ void MapScriptingPacket::read
 	FileRead fr;
 	if (g && fr.try_open(fs, "scripting/globals.dump"))
 	{
-		const uint32_t sentinel = fr.unsigned_32();
-		const uint32_t packet_version = fr.unsigned_32();
-		if (sentinel != 0xDEADBEEF && packet_version != SCRIPTING_DATA_PACKET_VERSION) {
-			throw GameDataError(
-			   "This savegame is from an older version of Widelands and can not be loaded any more.");
+		try {
+			const uint32_t packet_version = fr.unsigned_32();
+			if (packet_version == kCurrentPacketVersion) {
+				upcast(LuaGameInterface, lgi, &g->lua());
+				lgi->read_global_env(fr, mol, fr.unsigned_32());
+			} else {
+				throw UnhandledVersionError("MapScriptingPacket", packet_version, kCurrentPacketVersion);
+			}
+		} catch (const WException & e) {
+			throw GameDataError("scripting: %s", e.what());
 		}
-		upcast(LuaGameInterface, lgi, &g->lua());
-		lgi->read_global_env(fr, mol, fr.unsigned_32());
 	}
 }
 
@@ -92,8 +94,7 @@ void MapScriptingPacket::write
 	// Dump the global environment if this is a game and not in the editor
 	if (upcast(Game, g, &egbase)) {
 		FileWrite fw;
-		fw.unsigned_32(0xDEADBEEF);  // Sentinel, because there was no packet version.
-		fw.unsigned_32(SCRIPTING_DATA_PACKET_VERSION);
+		fw.unsigned_32(kCurrentPacketVersion);
 		const FileWrite::Pos pos = fw.get_pos();
 		fw.unsigned_32(0); // N bytes written, follows below
 

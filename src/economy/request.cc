@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2011, 2015 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,14 +26,14 @@
 #include "economy/ware_instance.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
-#include "logic/constructionsite.h"
 #include "logic/game.h"
+#include "logic/map_objects/tribes/constructionsite.h"
+#include "logic/map_objects/tribes/productionsite.h"
+#include "logic/map_objects/tribes/soldier.h"
+#include "logic/map_objects/tribes/tribe_descr.h"
+#include "logic/map_objects/tribes/warehouse.h"
+#include "logic/map_objects/tribes/worker.h"
 #include "logic/player.h"
-#include "logic/productionsite.h"
-#include "logic/soldier.h"
-#include "logic/tribes/tribe_descr.h"
-#include "logic/warehouse.h"
-#include "logic/worker.h"
 #include "map_io/map_object_loader.h"
 #include "map_io/map_object_saver.h"
 
@@ -50,7 +50,7 @@ Request IMPLEMENTATION
 
 Request::Request
 	(PlayerImmovable & _target,
-	 WareIndex const index,
+	 DescriptionIndex const index,
 	 CallbackFn const cbfn,
 	 WareWorker const w)
 	:
@@ -69,7 +69,6 @@ Request::Request
 	m_last_request_time(m_required_time)
 {
 	assert(m_type == wwWARE || m_type == wwWORKER);
-
 	if (w == wwWARE && !_target.owner().egbase().tribes().ware_exists(index))
 		throw wexception
 			("creating ware request with index %u, but the ware for this index doesn't exist",
@@ -94,7 +93,7 @@ Request::~Request()
 }
 
 // Modified to allow Requirements and SoldierRequests
-#define REQUEST_VERSION 6
+constexpr uint16_t kCurrentPacketVersion = 6;
 
 /**
  * Read this request from a file
@@ -108,16 +107,16 @@ void Request::read
 	(FileRead & fr, Game & game, MapObjectLoader & mol)
 {
 	try {
-		uint16_t const version = fr.unsigned_16();
-		if (version == 6) {
+		uint16_t const packet_version = fr.unsigned_16();
+		if (packet_version == kCurrentPacketVersion) {
 			const TribeDescr& tribe = m_target.owner().tribe();
 			char const* const type_name = fr.c_string();
-			WareIndex const wai = tribe.ware_index(type_name);
+			DescriptionIndex const wai = tribe.ware_index(type_name);
 			if (tribe.has_ware(wai)) {
 				m_type = wwWARE;
 				m_index = wai;
 			} else {
-				WareIndex const woi = tribe.worker_index(type_name);
+				DescriptionIndex const woi = tribe.worker_index(type_name);
 				if (tribe.has_worker(woi)) {
 					m_type = wwWORKER;
 					m_index = woi;
@@ -166,8 +165,9 @@ void Request::read
 			m_requirements.read (fr, game, mol);
 			if (!is_open() && m_economy)
 				m_economy->remove_request(*this);
-		} else
-			throw GameDataError("unknown/unhandled version %u", version);
+		} else {
+			throw UnhandledVersionError("Request", packet_version, kCurrentPacketVersion);
+		}
 	} catch (const WException & e) {
 		throw wexception("request: %s", e.what());
 	}
@@ -179,9 +179,10 @@ void Request::read
 void Request::write
 	(FileWrite & fw, Game & game, MapObjectSaver & mos) const
 {
-	fw.unsigned_16(REQUEST_VERSION);
+	fw.unsigned_16(kCurrentPacketVersion);
 
 	//  Target and economy should be set. Same is true for callback stuff.
+
 	assert(m_type == wwWARE || m_type == wwWORKER);
 	if (m_type == wwWARE) {
 		assert(game.tribes().ware_exists(m_index));
@@ -309,7 +310,7 @@ int32_t Request::get_priority (int32_t cost) const
 		MAX_IDLE_PRIORITY
 		+
 		std::max
-			(1,
+			(uint32_t(1),
 			 ((m_economy->owner().egbase().get_gametime() -
 			   (is_construction_site ?
 			    get_required_time() : get_last_request_time()))

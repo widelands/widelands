@@ -8,7 +8,7 @@
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+rnrnrn * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
@@ -30,25 +30,24 @@
 #include "economy/flag.h"
 #include "economy/road.h"
 #include "graphic/color.h"
-#include "graphic/font_handler.h"
 #include "graphic/graphic.h"
-#include "logic/battle.h"
-#include "logic/building.h"
 #include "logic/constants.h"
-#include "logic/dismantlesite.h"
 #include "logic/findimmovable.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
-#include "logic/instances.h"
+#include "logic/map_objects/map_object.h"
+#include "logic/map_objects/tribes/battle.h"
+#include "logic/map_objects/tribes/building.h"
+#include "logic/map_objects/tribes/dismantlesite.h"
+#include "logic/map_objects/tribes/tribe_descr.h"
+#include "logic/map_objects/tribes/tribes.h"
+#include "logic/map_objects/tribes/ware_descr.h"
+#include "logic/map_objects/tribes/worker.h"
+#include "logic/map_objects/world/world.h"
 #include "logic/mapregion.h"
 #include "logic/player.h"
 #include "logic/playersmanager.h"
 #include "logic/roadtype.h"
-#include "logic/tribes/tribe_descr.h"
-#include "logic/tribes/tribes.h"
-#include "logic/ware_descr.h"
-#include "logic/worker.h"
-#include "logic/world/world.h"
 #include "scripting/logic.h"
 #include "scripting/lua_table.h"
 #include "sound/sound_handler.h"
@@ -138,7 +137,7 @@ Tribes* EditorGameBase::mutable_tribes() {
 		// tribe immediately though, because the lua scripts need to have access
 		// to tribes through this method already.
 		ScopedTimer timer("Loading the tribes took %ums");
-		tribes_.reset(new Tribes(*this));
+		tribes_.reset(new Tribes());
 
 		try {
 			lua_->run_script("tribes/init.lua");
@@ -262,7 +261,7 @@ void EditorGameBase::load_graphics(UI::ProgressWindow& loader_ui)
  * \li former_buildings is the list of former buildings
  */
 Building & EditorGameBase::warp_building
-	(Coords const c, PlayerNumber const owner, BuildingIndex const idx,
+	(Coords const c, PlayerNumber const owner, DescriptionIndex const idx,
 		Building::FormerBuildings former_buildings)
 {
 	Player & plr = player(owner);
@@ -282,7 +281,7 @@ Building & EditorGameBase::warp_building
  */
 Building & EditorGameBase::warp_constructionsite
 	(Coords const c, PlayerNumber const owner,
-	 BuildingIndex idx, bool loading,
+	 DescriptionIndex idx, bool loading,
 	 Building::FormerBuildings former_buildings)
 {
 	Player            & plr   = player(owner);
@@ -327,10 +326,9 @@ Bob & EditorGameBase::create_bob(Coords c, const BobDescr & descr, Player * owne
 /**
  * Instantly create a critter at the given x/y location.
  *
- * idx is the bob type.
  */
 
-Bob& EditorGameBase::create_critter(Coords const c, int const bob_type_idx, Player* owner) {
+Bob& EditorGameBase::create_critter(Coords const c, DescriptionIndex const bob_type_idx, Player* owner) {
 	return create_bob(c, *world().get_bob_descr(bob_type_idx), owner);
 }
 
@@ -341,6 +339,7 @@ Bob& EditorGameBase::create_critter(Coords c, const std::string& name, Player* o
 		                    owner->get_name().c_str());
 	return create_bob(c, *descr, owner);
 }
+
 
 /*
 ===============
@@ -368,7 +367,7 @@ Immovable & EditorGameBase::create_immovable
 Immovable & EditorGameBase::create_immovable
 	(Coords const c, const std::string & name, MapObjectDescr::OwnerType type)
 {
-	WareIndex idx;
+	DescriptionIndex idx;
 	if (type == MapObjectDescr::OwnerType::kTribe) {
 		idx = tribes().immovable_index(name.c_str());
 		if (!tribes().immovable_exists(idx)) {

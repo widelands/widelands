@@ -33,10 +33,10 @@
 #include "logic/editor_game_base.h"
 #include "logic/field.h"
 #include "logic/game.h"
-#include "logic/instances.h"
 #include "logic/map.h"
+#include "logic/map_objects/map_object.h"
+#include "logic/map_objects/world/world.h"
 #include "logic/mapregion.h"
-#include "logic/world/world.h"
 #include "map_io/map_loader.h"
 #include "map_io/world_legacy_lookup_table.h"
 #include "scripting/lua_interface.h"
@@ -232,10 +232,10 @@ std::string get_world_name(S2MapLoader::WorldType world) {
 class TerrainConverter {
 public:
 	TerrainConverter(const Widelands::World& world, const WorldLegacyLookupTable& lookup_table);
-	Widelands::TerrainIndex lookup(S2MapLoader::WorldType world, int8_t c) const;
+	Widelands::DescriptionIndex lookup(S2MapLoader::WorldType world, int8_t c) const;
 
 protected:
-	const WorldLegacyLookupTable& one_world_legacy_lookup_table_;
+	const WorldLegacyLookupTable& world_legacy_lookup_table_;
 	const Widelands::World& world_;
 	const std::map<S2MapLoader::WorldType, std::vector<std::string>> table_;
 
@@ -245,7 +245,7 @@ private:
 
 TerrainConverter::TerrainConverter
 		(const Widelands::World& world, const WorldLegacyLookupTable& lookup_table) :
-	one_world_legacy_lookup_table_(lookup_table),
+	world_legacy_lookup_table_(lookup_table),
 	world_(world),
 	table_
 	{
@@ -270,7 +270,7 @@ TerrainConverter::TerrainConverter
 	}
 {}
 
-Widelands::TerrainIndex TerrainConverter::lookup(S2MapLoader::WorldType world, int8_t c) const {
+Widelands::DescriptionIndex TerrainConverter::lookup(S2MapLoader::WorldType world, int8_t c) const {
 	switch (c) {
 	// the following comments are valid for greenland - blackland and winterland have equivalents
 	// source: http://bazaar.launchpad.net/~xaser/s25rttr/s25edit/view/head:/WLD_reference.txt
@@ -303,7 +303,7 @@ Widelands::TerrainIndex TerrainConverter::lookup(S2MapLoader::WorldType world, i
 
 	const std::string& old_terrain_name = table_.at(world)[c];
 	return world_.terrains().get_index(
-	   one_world_legacy_lookup_table_.lookup_terrain(old_terrain_name));
+	   world_legacy_lookup_table_.lookup_terrain(old_terrain_name));
 }
 
 }  // namespace
@@ -555,11 +555,11 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase & egbase)
 			}
 
 			if (!bobname.empty()) {
-				int32_t const idx = world.get_bob(bobname.c_str());
+				Widelands::DescriptionIndex const idx = world.get_bob(bobname.c_str());
 				if (idx == Widelands::INVALID_INDEX) {
 					throw wexception("Missing bob type %s", bobname.c_str());
 				}
-				egbase.create_ship(Widelands::Coords(x, y), idx);
+				egbase.create_critter(Widelands::Coords(x, y), idx);
 			}
 		}
 	}
@@ -617,20 +617,20 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase & egbase)
 	if (!section)
 		throw wexception("Section 12 (Resources) not found");
 
-	f = m_map.m_fields.get();
 	pc = section.get();
 	char const * res;
 	int32_t amount = 0;
-	for (uint16_t y = 0; y < mapheight; ++y)
-		for (uint16_t x = 0; x < mapwidth; ++x, ++f, ++pc) {
-			uint8_t c = *pc;
+	for (uint16_t y = 0; y < mapheight; ++y) {
+		for (uint16_t x = 0; x < mapwidth; ++x, ++pc) {
+			auto c = m_map.get_fcoords(Widelands::Coords(x, y));
+			uint8_t value = *pc;
 
-			switch (c & 0xF8) {
-			case 0x40: res = "coal";   amount = c & 7; break;
-			case 0x48: res = "iron";   amount = c & 7; break;
-			case 0x50: res = "gold";   amount = c & 7; break;
-			case 0x59: res = "stones"; amount = c & 7; break;
-			default:   res = "";       amount = 0; break;
+			switch (value & 0xF8) {
+			case 0x40: res = "coal";    amount = value & 7; break;
+			case 0x48: res = "iron";    amount = value & 7; break;
+			case 0x50: res = "gold";    amount = value & 7; break;
+			case 0x59: res = "granite"; amount = value & 7; break;
+			default:   res = "";        amount = 0; break;
 			};
 
 			int32_t nres = 0;
@@ -644,9 +644,9 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase & egbase)
 			}
 			const int32_t real_amount = static_cast<int32_t>
 				(2.86 * static_cast<float>(amount));
-			f->set_resources(nres, real_amount);
-			f->set_initial_res_amount(real_amount);
+			m_map.initialize_resources(c, nres, real_amount);
 		}
+	}
 
 
 
@@ -684,7 +684,7 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase & egbase)
 	auto place_immovable = [&egbase, &lookup_table, &world](
 	   const Widelands::Coords& location, const std::string& old_immovable_name) {
 		const std::string new_immovable_name = lookup_table->lookup_immovable(old_immovable_name);
-		Widelands::WareIndex const idx = world.get_immovable_index(new_immovable_name.c_str());
+		Widelands::DescriptionIndex const idx = world.get_immovable_index(new_immovable_name.c_str());
 		if (idx == Widelands::INVALID_INDEX) {
 			throw wexception("Missing immovable type %s", new_immovable_name.c_str());
 		}
@@ -701,13 +701,12 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase & egbase)
 			std::string bobname;
 			if (buildings[index] == 0x78) {
 				switch (c) {
-					// NOCOM(GunChleoc): Need somebody to test an S2 map.
-				case BOB_STONE1:        bobname = "rocks1"; break;
-				case BOB_STONE2:        bobname = "rocks2"; break;
-				case BOB_STONE3:        bobname = "rocks3"; break;
-				case BOB_STONE4:        bobname = "rocks4"; break;
-				case BOB_STONE5:        bobname = "rocks5"; break;
-				case BOB_STONE6:        bobname = "rocks6"; break;
+				case BOB_STONE1:        bobname = "stones1"; break;
+				case BOB_STONE2:        bobname = "stones2"; break;
+				case BOB_STONE3:        bobname = "stones3"; break;
+				case BOB_STONE4:        bobname = "stones4"; break;
+				case BOB_STONE5:        bobname = "stones5"; break;
+				case BOB_STONE6:        bobname = "stones6"; break;
 				default:
 					break;
 				}

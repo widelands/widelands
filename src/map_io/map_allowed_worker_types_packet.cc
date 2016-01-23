@@ -24,19 +24,19 @@
 #include "base/macros.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
+#include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/player.h"
-#include "logic/tribes/tribe_descr.h"
 #include "profile/profile.h"
 
 namespace Widelands {
 
-#define CURRENT_PACKET_VERSION 1
+constexpr int32_t kCurrentPacketVersion = 1;
 
 void MapAllowedWorkerTypesPacket::read
-	(FileSystem            &       fs,
-	 EditorGameBase      &       egbase,
-	 bool                    skip,
-	 MapObjectLoader &)
+	(FileSystem& fs,
+	 EditorGameBase& egbase,
+	 bool skip,
+	 MapObjectLoader&)
 {
 	if (skip)
 		return;
@@ -55,7 +55,7 @@ void MapAllowedWorkerTypesPacket::read
 	try {
 		const int32_t packet_version =
 			prof.get_safe_section("global").get_safe_int("packet_version");
-		if (packet_version == CURRENT_PACKET_VERSION) {
+		if (packet_version == kCurrentPacketVersion) {
 			iterate_players_existing(p, egbase.map().get_nrplayers(), egbase, player) {
 				const TribeDescr & tribe = player->tribe();
 				try {
@@ -66,7 +66,7 @@ void MapAllowedWorkerTypesPacket::read
 
 					// Only allow workers that the player's tribe has.
 					for (size_t i = 0; i < egbase.tribes().nrworkers(); ++i) {
-						const WareIndex& worker_index = static_cast<WareIndex>(i);
+						const DescriptionIndex& worker_index = static_cast<DescriptionIndex>(i);
 						const WorkerDescr& worker_descr = *egbase.tribes().get_worker_descr(worker_index);
 						if (worker_descr.is_buildable() && player->tribe().has_worker(worker_index)) {
 							player->allow_worker_type(worker_index, s->get_bool(worker_descr.name().c_str(), true));
@@ -74,15 +74,14 @@ void MapAllowedWorkerTypesPacket::read
 							player->allow_worker_type(worker_index, false);
 						}
 					}
-
 				} catch (const WException & e) {
 					throw GameDataError
 						("player %u (%s): %s", p, tribe.name().c_str(), e.what());
 				}
 			}
-		} else
-			throw GameDataError
-				("unknown/unhandled version %i", packet_version);
+		} else {
+			throw UnhandledVersionError("MapAllowedWorkerTypesPacket", packet_version, kCurrentPacketVersion);
+		}
 	} catch (const WException & e) {
 		throw GameDataError("allowed worker types: %s", e.what());
 	}
@@ -94,7 +93,7 @@ void MapAllowedWorkerTypesPacket::write
 {
 	Profile prof;
 	prof.create_section("global").set_int
-		("packet_version", CURRENT_PACKET_VERSION);
+		("packet_version", kCurrentPacketVersion);
 
 	bool forbidden_worker_seen = false;
 	iterate_players_existing_const(p, egbase.map().get_nrplayers(), egbase, player) {
@@ -104,7 +103,7 @@ void MapAllowedWorkerTypesPacket::write
 		Section & section = prof.create_section(section_key.c_str());
 
 		// Only write the workers which are disabled.
-		for (const WareIndex& worker_index : tribe.workers()) {
+		for (const DescriptionIndex& worker_index : tribe.workers()) {
 			if (!player->is_worker_type_allowed(worker_index)) {
 				const WorkerDescr* worker_descr = egbase.tribes().get_worker_descr(worker_index);
 				section.set_bool(worker_descr->name().c_str(), false);

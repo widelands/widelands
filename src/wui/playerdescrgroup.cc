@@ -23,13 +23,14 @@
 
 #include <boost/format.hpp>
 
+#include "ai/computer_player.h"
 #include "base/i18n.h"
 #include "base/wexception.h"
 #include "graphic/graphic.h"
 #include "graphic/text_constants.h"
 #include "logic/game_settings.h"
+#include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/player.h"
-#include "logic/tribes/tribe_descr.h"
 #include "ui_basic/button.h"
 #include "ui_basic/checkbox.h"
 #include "ui_basic/textarea.h"
@@ -64,8 +65,7 @@ d(new PlayerDescriptionGroupImpl)
 	int32_t xplayertribe = w * 80 / 125;
 	int32_t xplayerinit = w * 55 / 125;
 	d->plr_name = new UI::Textarea(this, xplrname, 0, xplayertype - xplrname, h);
-	d->plr_name->set_textstyle(UI::TextStyle::ui_small());
-	d->btnEnablePlayer = new UI::Checkbox(this, Point(xplayertype - 23, 0));
+	d->btnEnablePlayer = new UI::Checkbox(this, Point(xplayertype - 23, 0), "");
 	d->btnEnablePlayer->changedto.connect
 		(boost::bind(&PlayerDescriptionGroup::enable_player, this, _1));
 	d->btnPlayerType = new UI::Button
@@ -167,10 +167,11 @@ void PlayerDescriptionGroup::refresh()
 					title = _("Computer");
 				else {
 					if (player.random_ai) {
-						title += _("AI: Random");
+						title += _("Random AI");
 					} else {
-						/** TRANSLATORS %s = AI type, e.g. 'Agressive' */
-						title += (boost::format(_("AI: %s")) % _(player.ai)).str();
+						const ComputerPlayer::Implementation* impl =
+								ComputerPlayer::get_implementation(player.ai);
+						title = impl->descname;
 					}
 				}
 			} else { // PlayerSettings::stateHuman
@@ -262,7 +263,6 @@ void PlayerDescriptionGroup::toggle_playertribe()
 	const PlayerSettings & player = settings.players.at(d->plnum);
 	const std::string & currenttribe = player.tribe;
 	std::string nexttribe = settings.tribes.at(0).name;
-
 	bool random_tribe = false;
 	uint32_t num_tribes = settings.tribes.size();
 

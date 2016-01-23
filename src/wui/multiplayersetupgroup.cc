@@ -23,6 +23,7 @@
 
 #include <boost/format.hpp>
 
+#include "ai/computer_player.h"
 #include "base/i18n.h"
 #include "base/log.h"
 #include "base/wexception.h"
@@ -31,9 +32,8 @@
 #include "logic/constants.h"
 #include "logic/game.h"
 #include "logic/game_settings.h"
+#include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/player.h"
-#include "logic/tribes/tribe_descr.h"
-#include "profile/profile.h"
 #include "ui_basic/button.h"
 #include "ui_basic/checkbox.h"
 #include "ui_basic/icon.h"
@@ -69,7 +69,6 @@ struct MultiPlayerClientGroup : public UI::Box {
 			type->sigclicked.connect
 				(boost::bind
 					 (&MultiPlayerClientGroup::toggle_type, boost::ref(*this)));
-			type->set_font(font);
 			add(type, UI::Box::AlignCenter);
 		} else { // just a shown client
 			type_icon = new UI::Icon
@@ -156,7 +155,6 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		 int32_t const /* x */, int32_t const /* y */, int32_t const w, int32_t const h,
 		 GameSettingsProvider * const settings,
 		 NetworkPlayerSettingsBackend * const npsb,
-		 UI::Font * font,
 		 std::map<std::string, const Image* > & tp,
 		 std::map<std::string, std::string> & tn)
 		 :
@@ -186,7 +184,6 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		type->sigclicked.connect
 			(boost::bind
 				 (&MultiPlayerPlayerGroup::toggle_type, boost::ref(*this)));
-		type->set_font(font);
 		add(type, UI::Box::AlignCenter);
 		tribe = new UI::Button
 			(this, "player_tribe",
@@ -196,7 +193,6 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		tribe->sigclicked.connect
 			(boost::bind
 				 (&MultiPlayerPlayerGroup::toggle_tribe, boost::ref(*this)));
-		tribe->set_font(font);
 		add(tribe, UI::Box::AlignCenter);
 		tribe->set_draw_flat_background(true);
 		init = new UI::Button
@@ -207,7 +203,6 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		init->sigclicked.connect
 			(boost::bind
 				 (&MultiPlayerPlayerGroup::toggle_init, boost::ref(*this)));
-		init->set_font(font);
 		add(init, UI::Box::AlignCenter);
 		team = new UI::Button
 			(this, "player_team",
@@ -217,7 +212,6 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		team->sigclicked.connect
 			(boost::bind
 				 (&MultiPlayerPlayerGroup::toggle_team, boost::ref(*this)));
-		team->set_font(font);
 		add(team, UI::Box::AlignCenter);
 	}
 
@@ -308,11 +302,14 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 					pic += "novalue.png";
 				} else {
 					if (player_setting.random_ai) {
-						title = (boost::format(_("AI: %s")) % pgettext("ai_name", "Random")).str();
-						pic += "ai_Random.png";
+						/** TRANSLATORS: This is the name of an AI used in the game setup screens */
+						title = _("Random AI");
+						pic += "ai_random.png";
 					} else {
-						title = (boost::format(_("AI: %s")) % _(player_setting.ai)).str();
-						pic += "ai_" + player_setting.ai + ".png";
+						const ComputerPlayer::Implementation* impl =
+								ComputerPlayer::get_implementation(player_setting.ai);
+						title = impl->descname;
+						pic = impl->icon_filename;
 					}
 				}
 			} else { // PlayerSettings::stateHuman
@@ -464,7 +461,7 @@ m_fname(fname)
 		multi_player_player_groups.at(i) = new MultiPlayerPlayerGroup
 			(&playerbox, i,
 			 0, 0, playerbox.get_w(), buth,
-			 s, npsb.get(), UI::Font::get(fname, fsize),
+			 s, npsb.get(),
 			 m_tribepics, m_tribenames);
 		playerbox.add(multi_player_player_groups.at(i), 1);
 	}

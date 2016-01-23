@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-09-12 10:50+0000\n"
-"PO-Revision-Date: 2015-09-12 10:51+0000\n"
+"POT-Creation-Date: 2015-11-28 11:19+0000\n"
+"PO-Revision-Date: 2015-11-28 11:21+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Portuguese (http://www.transifex.com/widelands/widelands/language/pt/)\n"
 "MIME-Version: 1.0\n"
@@ -137,8 +137,8 @@ msgstr ""
 msgid ""
 "One of these training sites is the battle arena. It is a big and expensive "
 "building, and it trains soldiers in evade. Since soldiers get very hungry "
-"during their workout, this building needs a lot of food and strongbeer. In a"
-" real game, you should have a good infrastructure before you build it."
+"during their workout, this building needs a lot of food and strong beer. In "
+"a real game, you should have a good infrastructure before you build it."
 msgstr ""
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:53
@@ -163,7 +163,7 @@ msgstr ""
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:63
 msgid ""
 "Since the construction will take some time, you can change the game speed "
-"using PAGE UP and PAGE DOWN."
+"using Page Up and Page Down."
 msgstr ""
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:71
@@ -179,7 +179,7 @@ msgstr ""
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:74
 msgid ""
 "The needed wares are also delivered there. For successful training, you need"
-" pitta bread and strongbeer, as well as either fish or meat."
+" pitta bread and strong beer, as well as either fish or meat."
 msgstr ""
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:75
@@ -250,7 +250,7 @@ msgstr ""
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:108
 msgid ""
 "To train in the training camp, our soldiers need food like in the battle "
-"arena, but no strongbeer. Instead, they need different axes for attack "
+"arena, but no strong beer. Instead, they need different axes for attack "
 "training and helmets for health training."
 msgstr ""
 

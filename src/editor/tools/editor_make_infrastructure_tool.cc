@@ -46,11 +46,11 @@ editor_make_infrastructure_tool_callback
  *
  * Obviously, this function ignores the sel radius
 */
-int32_t EditorMakeInfrastructureTool::handle_click_impl(Widelands::Map&,
-                                                           const Widelands::World&,
-                                                           Widelands::NodeAndTriangle<> const,
-                                                           EditorInteractive& parent,
-                                                           EditorActionArgs& /* args */) {
+int32_t EditorMakeInfrastructureTool::handle_click_impl(const Widelands::World&,
+                                                        Widelands::NodeAndTriangle<> const,
+                                                        EditorInteractive& parent,
+                                                        EditorActionArgs* /* args */,
+														Widelands::Map*) {
 	show_field_action
 	(&parent, parent.egbase().get_player(m_player), &m_registry);
 

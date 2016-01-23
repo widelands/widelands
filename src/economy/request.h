@@ -21,8 +21,8 @@
 #define WL_ECONOMY_REQUEST_H
 
 #include "economy/trackptr.h"
-#include "logic/requirements.h"
-#include "logic/wareworker.h"
+#include "logic/map_objects/tribes/requirements.h"
+#include "logic/map_objects/tribes/wareworker.h"
 #include "logic/widelands.h"
 
 class FileRead;
@@ -64,13 +64,13 @@ public:
 	friend class RequestList;
 
 	using CallbackFn = void (*)
-		(Game &, Request &, WareIndex, Worker *, PlayerImmovable &);
+		(Game &, Request &, DescriptionIndex, Worker *, PlayerImmovable &);
 
-	Request(PlayerImmovable & target, WareIndex, CallbackFn, WareWorker);
+	Request(PlayerImmovable & target, DescriptionIndex, CallbackFn, WareWorker);
 	~Request();
 
 	PlayerImmovable & target() const {return m_target;}
-	WareIndex get_index() const {return m_index;}
+	DescriptionIndex get_index() const {return m_index;}
 	WareWorker get_type() const {return m_type;}
 	uint32_t get_count() const {return m_count;}
 	uint32_t get_open_count() const {return m_count - m_transfers.size();}
@@ -126,7 +126,7 @@ private:
 	ConstructionSite * m_target_constructionsite;
 
 	Economy         * m_economy;
-	WareIndex        m_index;             //  the index of the ware descr
+	DescriptionIndex        m_index;             //  the index of the ware descr
 	uint32_t          m_count;             //  how many do we need in total
 
 	CallbackFn        m_callbackfn;        //  called on request success

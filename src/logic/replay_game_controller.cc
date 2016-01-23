@@ -28,7 +28,7 @@
 
 ReplayGameController::ReplayGameController(Widelands::Game & game, const std::string & filename) :
 	m_game(game),
-	m_lastframe(WLApplication::get()->get_time()),
+	m_lastframe(SDL_GetTicks()),
 	m_time(m_game.get_gametime()),
 	m_speed(1000),
 	m_paused(false)
@@ -41,7 +41,7 @@ ReplayGameController::ReplayGameController(Widelands::Game & game, const std::st
 }
 
 void ReplayGameController::think() {
-	int32_t curtime = WLApplication::get()->get_time();
+	uint32_t curtime = SDL_GetTicks();
 	int32_t frametime = curtime - m_lastframe;
 	m_lastframe = curtime;
 
@@ -113,6 +113,6 @@ void ReplayGameController::CmdReplayEnd::execute (Widelands::Game & game) {
 	mmb.run<UI::Panel::Returncodes>();
 }
 
-uint8_t ReplayGameController::CmdReplayEnd::id() const {
-	return QUEUE_CMD_REPLAYEND;
+Widelands::QueueCommandTypes ReplayGameController::CmdReplayEnd::id() const {
+	return Widelands::QueueCommandTypes::kReplayEnd;
 }

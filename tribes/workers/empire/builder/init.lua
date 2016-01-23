@@ -2,12 +2,12 @@ dirname = path.dirname(__file__)
 
 animations = {
    idle = {
-      pictures = path.list_directory(dirname, "waiting_\\d+.png"),
+      pictures = path.list_files(dirname .. "waiting_???.png"),
       hotspot = { 13, 21 },
       fps = 10
    },
    work = {
-      pictures = path.list_directory(dirname, "work_\\d+.png"),
+      pictures = path.list_files(dirname .. "work_??.png"),
       sound_effect = {
             directory = "sound/hammering",
             name = "hammering",
@@ -25,14 +25,14 @@ tribes:new_worker_type {
    name = "empire_builder",
    -- TRANSLATORS: This is a worker name used in lists of workers
    descname = pgettext("empire_worker", "Builder"),
-   directory = dirname,
+   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    vision_range = 2,
 
    buildcost = {
-		empire_carrier = 1,
-		hammer = 1
-	},
+      empire_carrier = 1,
+      hammer = 1
+   },
 
    animations = animations,
 }

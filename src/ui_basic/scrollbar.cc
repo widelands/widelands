@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2011, 2013 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2011, 2013, 2015 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -263,7 +263,7 @@ void Scrollbar::draw_button(RenderTarget & dst, const Area area, const Rect r) {
 		uint16_t cpw = pic->width();
 		uint16_t cph = pic->height();
 
-		dst.blit(r.top_left() + Point((r.w - cpw) / 2, (r.h - cph) / 2), pic);
+		dst.blit(r.origin() + Point((r.w - cpw) / 2, (r.h - cph) / 2), pic);
 	}
 
 	// Draw border
@@ -271,35 +271,35 @@ void Scrollbar::draw_button(RenderTarget & dst, const Area area, const Rect r) {
 
 	if (area != m_pressed) {
 		// top edge
-		dst.brighten_rect(Rect(r.top_left(), r.w, 2), BUTTON_EDGE_BRIGHT_FACTOR);
+		dst.brighten_rect(Rect(r.origin(), r.w, 2), BUTTON_EDGE_BRIGHT_FACTOR);
 		// left edge
 		dst.brighten_rect
-			(Rect(r.top_left() + Point(0, 2), 2, r.h - 2), BUTTON_EDGE_BRIGHT_FACTOR);
+			(Rect(r.origin() + Point(0, 2), 2, r.h - 2), BUTTON_EDGE_BRIGHT_FACTOR);
 		// bottom edge
-		dst.fill_rect(Rect(r.top_left() + Point(2, r.h - 2), r.w - 2, 1), black);
-		dst.fill_rect(Rect(r.top_left() + Point(1, r.h - 1), r.w - 1, 1), black);
+		dst.fill_rect(Rect(r.origin() + Point(2, r.h - 2), r.w - 2, 1), black);
+		dst.fill_rect(Rect(r.origin() + Point(1, r.h - 1), r.w - 1, 1), black);
 		// right edge
-		dst.fill_rect(Rect(r.top_left() + Point(r.w - 2, 2), 1, r.h - 2), black);
-		dst.fill_rect(Rect(r.top_left() + Point(r.w - 1, 1), 1, r.h - 1), black);
+		dst.fill_rect(Rect(r.origin() + Point(r.w - 2, 2), 1, r.h - 2), black);
+		dst.fill_rect(Rect(r.origin() + Point(r.w - 1, 1), 1, r.h - 1), black);
 	} else {
 		// bottom edge
 		dst.brighten_rect
-			(Rect(r.top_left() + Point(0, r.h - 2), r.w, 2), BUTTON_EDGE_BRIGHT_FACTOR);
+			(Rect(r.origin() + Point(0, r.h - 2), r.w, 2), BUTTON_EDGE_BRIGHT_FACTOR);
 		// right edge
 		dst.brighten_rect
-			(Rect(r.top_left() + Point(r.w - 2, 0), 2, r.h - 2), BUTTON_EDGE_BRIGHT_FACTOR);
+			(Rect(r.origin() + Point(r.w - 2, 0), 2, r.h - 2), BUTTON_EDGE_BRIGHT_FACTOR);
 		// top edge
-		dst.fill_rect(Rect(r.top_left(), r.w - 1, 1), black);
-		dst.fill_rect(Rect(r.top_left() + Point(0, 1), r.w - 2, 1), black);
+		dst.fill_rect(Rect(r.origin(), r.w - 1, 1), black);
+		dst.fill_rect(Rect(r.origin() + Point(0, 1), r.w - 2, 1), black);
 		// left edge
-		dst.fill_rect(Rect(r.top_left(), 1, r.h - 1), black);
-		dst.fill_rect(Rect(r.top_left() + Point(1, 0), 1, r.h - 2), black);
+		dst.fill_rect(Rect(r.origin(), 1, r.h - 1), black);
+		dst.fill_rect(Rect(r.origin() + Point(1, 0), 1, r.h - 2), black);
 	}
 }
 
 
 void Scrollbar::draw_area(RenderTarget & dst, const Area area, const Rect r) {
-	dst.tile(r, m_pic_background, Point(get_x(), get_y()) + r.top_left());
+	dst.tile(r, m_pic_background, Point(get_x(), get_y()) + r.origin());
 
 	if (area == m_pressed)
 		dst.brighten_rect(r, BUTTON_EDGE_BRIGHT_FACTOR);
@@ -315,7 +315,7 @@ void Scrollbar::draw(RenderTarget & dst)
 	uint32_t knobsize = get_knob_size();
 
 	if (!is_enabled()) {
-		return; // don't draw a not doing scrollbar
+		return; // Don't draw a scrollbar that doesn't do anything
 	}
 
 	if (m_horizontal) {
@@ -384,7 +384,7 @@ void Scrollbar::think()
 	if (m_pressed == None || m_pressed == Knob)
 		return;
 
-	int32_t const time = WLApplication::get()->get_time();
+	uint32_t const time = SDL_GetTicks();
 	if (time < m_time_nextact)
 		return;
 
@@ -417,9 +417,7 @@ bool Scrollbar::handle_mousepress(const uint8_t btn, int32_t x, int32_t y) {
 			grab_mouse(true);
 			if (m_pressed != Knob) {
 				action(m_pressed);
-				m_time_nextact =
-					WLApplication::get()->get_time() +
-					MOUSE_BUTTON_AUTOREPEAT_DELAY;
+				m_time_nextact = SDL_GetTicks() + MOUSE_BUTTON_AUTOREPEAT_DELAY;
 			} else
 				m_knob_grabdelta = (m_horizontal ? x : y) - get_knob_pos();
 		}

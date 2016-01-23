@@ -18,13 +18,12 @@
  */
 
 #include "economy/economy.h"
-#include "graphic/font_handler.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
+#include "logic/map_objects/tribes/tribe_descr.h"
+#include "logic/map_objects/tribes/ware_descr.h"
 #include "logic/player.h"
 #include "logic/playercommand.h"
-#include "logic/tribes/tribe_descr.h"
-#include "logic/ware_descr.h"
 #include "ui_basic/button.h"
 #include "ui_basic/tabpanel.h"
 #include "ui_basic/unique_window.h"
@@ -37,7 +36,7 @@ using Widelands::Economy;
 using Widelands::EditorGameBase;
 using Widelands::Game;
 using Widelands::WareDescr;
-using Widelands::WareIndex;
+using Widelands::DescriptionIndex;
 using Widelands::WorkerDescr;
 
 
@@ -83,14 +82,14 @@ private:
 		{
 			const Widelands::TribeDescr& owner_tribe = m_economy.owner().tribe();
 			if (type == Widelands::wwWORKER) {
-				for (const WareIndex& worker_index : owner_tribe.workers()) {
+				for (const DescriptionIndex& worker_index : owner_tribe.workers()) {
 					const WorkerDescr* worker_descr = owner_tribe.get_worker_descr(worker_index);
 					if (!worker_descr->has_demand_check()) {
 						hide_ware(worker_index);
 					}
 				}
 			} else {
-				for (const WareIndex& ware_index : owner_tribe.wares()) {
+				for (const DescriptionIndex& ware_index : owner_tribe.wares()) {
 					const WareDescr* ware_descr = owner_tribe.get_ware_descr(ware_index);
 					if (!ware_descr->has_demand_check(owner_tribe.name())) {
 						hide_ware(ware_index);
@@ -99,7 +98,7 @@ private:
 			}
 		}
 	protected:
-		std::string info_for_ware(Widelands::WareIndex const ware) override {
+		std::string info_for_ware(Widelands::DescriptionIndex const ware) override {
 			return
 				boost::lexical_cast<std::string>
 				(get_type() == Widelands::wwWORKER ?
@@ -150,7 +149,7 @@ private:
 
 		void decrease_target() {
 
-			for (const WareIndex& ware_index : m_economy.owner().tribe().wares()) {
+			for (const DescriptionIndex& ware_index : m_economy.owner().tribe().wares()) {
 				if (m_display.ware_selected(ware_index)) {
 					const Economy::TargetQuantity & tq =
 						m_economy.ware_target_quantity(ware_index);
@@ -168,7 +167,7 @@ private:
 		}
 
 		void increase_target() {
-			for (const WareIndex& ware_index : m_economy.owner().tribe().wares()) {
+			for (const DescriptionIndex& ware_index : m_economy.owner().tribe().wares()) {
 				if (m_display.ware_selected(ware_index)) {
 					const Economy::TargetQuantity & tq =
 						m_economy.ware_target_quantity(ware_index);
@@ -185,7 +184,7 @@ private:
 
 		void reset_target() {
 
-			for (const WareIndex& ware_index : m_economy.owner().tribe().wares()) {
+			for (const DescriptionIndex& ware_index : m_economy.owner().tribe().wares()) {
 				if (m_display.ware_selected(ware_index)) {
 					Widelands::Player & player = m_economy.owner();
 					Game & game = dynamic_cast<Game&>(player.egbase());
@@ -201,6 +200,7 @@ private:
 		bool m_can_act;
 		TargetWaresDisplay m_display;
 		Economy & m_economy;
+
 		EconomyOptionsWorkerPanel(UI::Panel * parent, InteractiveGameBase & igbase, Economy & economy) :
 			UI::Box(parent, 0, 0, UI::Box::Vertical),
 			m_can_act(igbase.can_act(economy.owner().player_number())),
@@ -232,7 +232,7 @@ private:
 
 
 		void decrease_target() {
-			for (const WareIndex& worker_index :  m_economy.owner().tribe().workers()) {
+			for (const DescriptionIndex& worker_index :  m_economy.owner().tribe().workers()) {
 				if (m_display.ware_selected(worker_index)) {
 					const Economy::TargetQuantity & tq =
 						m_economy.worker_target_quantity(worker_index);
@@ -250,7 +250,7 @@ private:
 		}
 
 		void increase_target() {
-			for (const WareIndex& worker_index :  m_economy.owner().tribe().workers()) {
+			for (const DescriptionIndex& worker_index :  m_economy.owner().tribe().workers()) {
 				if (m_display.ware_selected(worker_index)) {
 					const Economy::TargetQuantity & tq =
 						m_economy.worker_target_quantity(worker_index);
@@ -266,7 +266,7 @@ private:
 		}
 
 		void reset_target() {
-			for (const WareIndex& worker_index :  m_economy.owner().tribe().workers()) {
+			for (const DescriptionIndex& worker_index :  m_economy.owner().tribe().workers()) {
 				if (m_display.ware_selected(worker_index)) {
 					Widelands::Player & player = m_economy.owner();
 					Game & game = dynamic_cast<Game&>(player.egbase());

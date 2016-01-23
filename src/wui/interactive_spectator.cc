@@ -25,6 +25,7 @@
 #include "graphic/graphic.h"
 #include "logic/game_controller.h"
 #include "logic/player.h"
+#include "profile/profile.h"
 #include "ui_basic/editbox.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/textarea.h"
@@ -68,16 +69,16 @@ InteractiveSpectator::InteractiveSpectator
 	m_toggle_statistics.sigclicked.connect(boost::bind(&InteractiveSpectator::toggle_statistics, this));
 	m_toggle_minimap.sigclicked.connect(boost::bind(&InteractiveSpectator::toggle_minimap, this));
 
-	m_toolbar.set_layout_toplevel(true);
+	toolbar_.set_layout_toplevel(true);
 	if (!is_multiplayer()) {
-		m_toolbar.add(&m_exit,                UI::Box::AlignLeft);
-		m_toolbar.add(&m_save,                UI::Box::AlignLeft);
+		toolbar_.add(&m_exit,                UI::Box::AlignLeft);
+		toolbar_.add(&m_save,                UI::Box::AlignLeft);
 	} else
-		m_toolbar.add(&m_toggle_options_menu, UI::Box::AlignLeft);
-	m_toolbar.add(&m_toggle_statistics,      UI::Box::AlignLeft);
-	m_toolbar.add(&m_toggle_minimap,         UI::Box::AlignLeft);
-	m_toolbar.add(&m_toggle_buildhelp,       UI::Box::AlignLeft);
-	m_toolbar.add(&m_toggle_chat,            UI::Box::AlignLeft);
+		toolbar_.add(&m_toggle_options_menu, UI::Box::AlignLeft);
+	toolbar_.add(&m_toggle_statistics,      UI::Box::AlignLeft);
+	toolbar_.add(&m_toggle_minimap,         UI::Box::AlignLeft);
+	toolbar_.add(&m_toggle_buildhelp,       UI::Box::AlignLeft);
+	toolbar_.add(&m_toggle_chat,            UI::Box::AlignLeft);
 
 	// TODO(unknown): instead of making unneeded buttons invisible after generation,
 	// they should not at all be generated. -> implement more dynamic toolbar UI
@@ -161,8 +162,8 @@ void InteractiveSpectator::toggle_chat()
 {
 	if (m_chat.window)
 		delete m_chat.window;
-	else if (m_chatProvider)
-		GameChatMenu::create_chat_console(this, m_chat, *m_chatProvider);
+	else if (chat_provider_)
+		GameChatMenu::create_chat_console(this, m_chat, *chat_provider_);
 }
 
 
@@ -269,11 +270,11 @@ bool InteractiveSpectator::handle_key(bool const down, SDL_Keysym const code)
 
 		case SDLK_RETURN:
 		case SDLK_KP_ENTER:
-			if (!m_chatProvider | !m_chatenabled)
+			if (!chat_provider_ | !m_chatenabled)
 				break;
 
 			if (!m_chat.window)
-				GameChatMenu::create_chat_console(this, m_chat, *m_chatProvider);
+				GameChatMenu::create_chat_console(this, m_chat, *chat_provider_);
 
 			dynamic_cast<GameChatMenu*>(m_chat.window)->enter_chat_message();
 			return true;

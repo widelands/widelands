@@ -26,8 +26,8 @@
 #include <vector>
 
 #include "base/macros.h"
-#include "logic/bob.h"
-#include "logic/building.h"
+#include "logic/map_objects/bob.h"
+#include "logic/map_objects/tribes/building.h"
 #include "logic/map.h"
 #include "logic/player_area.h"
 #include "notifications/notifications.h"
@@ -106,7 +106,7 @@ public:
 	void remove_player(PlayerNumber);
 	Player* add_player(PlayerNumber,
 	                   uint8_t initialization_index,
-							 const std::string& tribes,
+	                   const std::string& tribe,
 	                   const std::string& name,
 	                   TeamNumber team = 0);
 	Player* get_player(int32_t n) const;
@@ -125,12 +125,12 @@ public:
 	Building&
 	warp_building(Coords,
 					  PlayerNumber,
-					  BuildingIndex,
+					  DescriptionIndex,
 	              Building::FormerBuildings former_buildings = Building::FormerBuildings());
 	Building&
 	warp_constructionsite(Coords,
 								 PlayerNumber,
-								 BuildingIndex,
+								 DescriptionIndex,
 	                      bool loading = false,
 	                      Building::FormerBuildings former_buildings = Building::FormerBuildings());
 	Building&
@@ -138,9 +138,7 @@ public:
 							 PlayerNumber,
 	                   bool loading = false,
 	                   Building::FormerBuildings former_buildings = Building::FormerBuildings());
-
-	Bob& create_bob(Coords, const BobDescr&, Player* owner = nullptr);
-	Bob& create_critter(Coords, int bob_type_idx, Player* owner = nullptr);
+	Bob& create_critter(Coords, DescriptionIndex bob_type_idx, Player* owner = nullptr);
 	Bob& create_critter(Coords, const std::string& name, Player* owner = nullptr);
 	Immovable& create_immovable(Coords,
 										 uint32_t idx,
@@ -151,7 +149,7 @@ public:
 	Bob& create_ship(Coords, int ship_type_idx, Player* owner = nullptr);
 	Bob& create_ship(Coords, const std::string& name, Player* owner = nullptr);
 
-	int32_t get_gametime() const {
+	uint32_t get_gametime() const {
 		return gametime_;
 	}
 	InteractiveBase* get_ibase() const {
@@ -179,7 +177,7 @@ public:
 
 	// next function is used to update the current gametime,
 	// for queue runs e.g.
-	int32_t& get_gametime_pointer() {
+	uint32_t& get_gametime_pointer() {
 		return gametime_;
 	}
 	void set_ibase(InteractiveBase* const b) {
@@ -210,6 +208,9 @@ public:
 	Tribes* mutable_tribes();
 
 private:
+	/// Common function for create_critter and create_ship.
+	Bob& create_bob(Coords, const BobDescr&, Player* owner = nullptr);
+
 	/// \param preferred_player
 	///  When conquer is false, this can be used to prefer a player over other
 	///  players, when lost land is reassigned. This can for example be used to
@@ -246,9 +247,7 @@ private:
 	// sends notifications about this.
 	void change_field_owner(const FCoords& fc, PlayerNumber new_owner);
 
-	// TODO(unknown): -- SDL returns time as uint32. Why do I have int32 ? Please comment or change this to
-	// uint32.
-	int32_t gametime_;
+	uint32_t gametime_;
 	ObjectManager objects_;
 
 	std::unique_ptr<LuaInterface> lua_;

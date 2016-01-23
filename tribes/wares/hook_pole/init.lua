@@ -5,18 +5,18 @@ tribes:new_ware_type {
    name = "hook_pole",
    -- TRANSLATORS: This is a ware name used in lists of wares
    descname = pgettext("ware", "Hook Pole"),
-   directory = dirname,
+   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    default_target_quantity = {
-		atlanteans = 1
-	},
+      atlanteans = 1
+   },
    preciousness = {
-		atlanteans = 0
-	},
+      atlanteans = 0
+   },
 
    animations = {
       idle = {
-         pictures = { dirname .. "idle.png" },
+         pictures = path.list_files(dirname .. "idle.png"),
          hotspot = { 9, 14 },
       },
    }

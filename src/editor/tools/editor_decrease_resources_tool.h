@@ -28,17 +28,17 @@ struct EditorDecreaseResourcesTool : public EditorTool {
 		: EditorTool(*this, *this), m_cur_res(0), m_change_by(1)
 	{}
 
-	int32_t handle_click_impl(Widelands::Map& map,
-	                          const Widelands::World& world,
+	int32_t handle_click_impl(const Widelands::World& world,
 	                          Widelands::NodeAndTriangle<> center,
 	                          EditorInteractive& parent,
-	                          EditorActionArgs& args) override;
+	                          EditorActionArgs* args,
+							  Widelands::Map* map) override;
 
-	int32_t handle_undo_impl(Widelands::Map& map,
-	                         const Widelands::World& world,
+	int32_t handle_undo_impl(const Widelands::World& world,
 	                         Widelands::NodeAndTriangle<> center,
 	                         EditorInteractive& parent,
-	                         EditorActionArgs& args) override;
+	                         EditorActionArgs* args,
+							 Widelands::Map* map) override;
 
 	EditorActionArgs format_args_impl(EditorInteractive & parent) override;
 
@@ -48,13 +48,13 @@ struct EditorDecreaseResourcesTool : public EditorTool {
 
 	int32_t get_change_by() const        {return m_change_by;}
 	void set_change_by(const int32_t n)  {m_change_by = n;}
-	Widelands::ResourceIndex get_cur_res() const {return m_cur_res;}
-	void set_cur_res(Widelands::ResourceIndex const res) {
+	Widelands::DescriptionIndex get_cur_res() const {return m_cur_res;}
+	void set_cur_res(Widelands::DescriptionIndex const res) {
 		m_cur_res = res;
 	}
 
 private:
-	Widelands::ResourceIndex m_cur_res;
+	Widelands::DescriptionIndex m_cur_res;
 	int32_t m_change_by;
 };
 

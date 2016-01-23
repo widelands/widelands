@@ -27,7 +27,7 @@
 #include "economy/itransport_cost_calculator.h"
 #include "economy/router.h"
 #include "economy/routing_node.h"
-#include "logic/wareworker.h"
+#include "logic/map_objects/tribes/wareworker.h"
 #include "logic/widelands_geometry.h"
 
 using namespace Widelands;

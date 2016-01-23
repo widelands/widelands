@@ -20,6 +20,10 @@
 #ifndef WL_GRAPHIC_TEXTURE_CACHE_H
 #define WL_GRAPHIC_TEXTURE_CACHE_H
 
+#include <cassert>
+#include <list>
+#include <map>
+#include <memory>
 #include <string>
 
 #include <boost/utility.hpp>
@@ -28,39 +32,49 @@
 
 class Texture;
 
-// Caches Surfaces. It contains surfaces which must not be deleted and
-// transient surfaces that are always free to be deleted - somebody else must
-// then recreate them when they are needed again.
+// Caches transient Surfaces, i.e. those that are always free to be deleted
+// because they can be regenerated - somebody else must then recreate them when
+// they are needed again.
 //
-// Nobody in Widelands should hold onto a Surface they get from this class,
+// Nothing in Widelands should hold onto a Surface they get from this class,
 // instead, they should use it only temporarily and rerequest it whenever they
 // need it.
 class TextureCache {
 public:
-	TextureCache() {}
-	virtual ~TextureCache() {}
+	// Create a new Cache whichs combined pixels data in all transient surfaces
+	// are always below the 'max_size_in_bytes'.
+	TextureCache(uint32_t max_size_in_bytes);
+	~TextureCache();
 
 	/// Deletes all surfaces in the cache leaving it as if it were just created.
-	virtual void flush() = 0;
+	void flush();
 
 	/// Returns an entry if it is cached, nullptr otherwise.
-	virtual Texture* get(const std::string& hash) = 0;
+	Texture* get(const std::string& hash);
 
 	// Inserts this entry into the TextureCache. asserts() that there is no
 	// entry with this hash already cached. Returns the given Surface for
 	// convenience. If 'transient' is false, this surface will not be deleted
 	// automatically - use this if surfaces are around for a long time and
 	// recreation is expensive (i.e. images loaded from disk).
-	virtual Texture* insert(const std::string& hash, Texture*, bool transient) = 0;
+	Texture* insert(const std::string& hash, std::unique_ptr<Texture> texture);
 
 private:
+	void drop();
+
+	using AccessHistory = std::list<std::string>;
+	struct Entry {
+		std::unique_ptr<Texture> texture;
+		uint32_t last_access;  // Mainly for debugging and analysis.
+		const AccessHistory::iterator list_iterator;
+	};
+
+	uint32_t max_size_in_bytes_;
+	uint32_t size_in_bytes_;
+	std::map<std::string, Entry> entries_;
+	AccessHistory access_history_;
+
 	DISALLOW_COPY_AND_ASSIGN(TextureCache);
 };
-
-// Create a new Cache whichs combined pixels in all transient surfaces are
-// always below the given limit (Note: there is overhead for class members
-// which is not counted as the pixels make up the bulk of the size of a
-// surface).
-TextureCache* create_texture_cache(uint32_t transient_memory_in_bytes);
 
 #endif  // end of include guard: WL_GRAPHIC_TEXTURE_CACHE_H

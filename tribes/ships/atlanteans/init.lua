@@ -1,16 +1,16 @@
 dirname = path.dirname(__file__)
 
 animations = {
-	idle = {
-		pictures = path.list_directory(dirname, "idle_\\d+.png"),
-		hotspot = { 89, 86 },
-		fps = 10
-	},
-	sinking = {
-		pictures = path.list_directory(dirname, "sinking_\\d+.png"),
-		hotspot = { 89, 86 },
-		fps = 7
-	}
+   idle = {
+      pictures = path.list_files(dirname .. "idle_??.png"),
+      hotspot = { 89, 86 },
+      fps = 10
+   },
+   sinking = {
+      pictures = path.list_files(dirname .. "sinking_??.png"),
+      hotspot = { 89, 86 },
+      fps = 7
+   }
 }
 add_worker_animations(animations, "sail", dirname, "sail", {89, 86}, 10)
 

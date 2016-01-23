@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef WL_MAP_IO_ONE_TRIBE_LEGACY_LOOKUP_TABLE_H
-#define WL_MAP_IO_ONE_TRIBE_LEGACY_LOOKUP_TABLE_H
+#ifndef WL_MAP_IO_TRIBES_LEGACY_LOOKUP_TABLE_H
+#define WL_MAP_IO_TRIBES_LEGACY_LOOKUP_TABLE_H
 
 #include <map>
 #include <string>
@@ -30,13 +30,13 @@ public:
 	TribesLegacyLookupTable();
 
 	/// Looks up the new name for the 'worker'.
-	std::string lookup_worker(const std::string& tribe, const std::string& worker) const;
+	const std::string& lookup_worker(const std::string& tribe, const std::string& worker) const;
 
 	/// Looks up the new name for the 'ware'.
-	std::string lookup_ware(const std::string& tribe, const std::string& ware) const;
+	const std::string& lookup_ware(const std::string& tribe, const std::string& ware) const;
 
 	/// Looks up the new name for the 'immovable'.
-	std::string lookup_immovable(const std::string& tribe, const std::string& immovable) const;
+	const std::string& lookup_immovable(const std::string& tribe, const std::string& immovable) const;
 
 
 private:
@@ -48,4 +48,4 @@ private:
 	DISALLOW_COPY_AND_ASSIGN(TribesLegacyLookupTable);
 };
 
-#endif  // end of include guard: WL_MAP_IO_ONE_TRIBE_LEGACY_LOOKUP_TABLE_H
+#endif  // end of include guard: WL_MAP_IO_TRIBES_LEGACY_LOOKUP_TABLE_H

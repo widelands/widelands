@@ -24,24 +24,21 @@
 #include "logic/constants.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
+#include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/player.h"
-#include "logic/tribes/tribe_descr.h"
 #include "wui/interactive_player.h"
 
 namespace Widelands {
 
-// NOCOM(GunChleoc): Increase packet version when we're done.
-#define CURRENT_PACKET_VERSION 15
-
+constexpr uint16_t kCurrentPacketVersion = 18;
 
 void GamePlayerInfoPacket::read
-	(FileSystem & fs, Game & game, MapObjectLoader *)
-{
+	(FileSystem & fs, Game & game, MapObjectLoader *) {
 	try {
 		FileRead fr;
 		fr.open(fs, "binary/player_info");
 		uint16_t const packet_version = fr.unsigned_16();
-		if (5 <= packet_version && packet_version <= CURRENT_PACKET_VERSION) {
+		if (packet_version == kCurrentPacketVersion) {
 			uint32_t const max_players = fr.unsigned_16();
 			for (uint32_t i = 1; i < max_players + 1; ++i) {
 				game.remove_player(i);
@@ -53,10 +50,8 @@ void GamePlayerInfoPacket::read
 						throw GameDataError
 							("player number (%i) is out of range (1 .. %u)",
 							 plnum, MAX_PLAYERS);
-					Widelands::TeamNumber team = 0;
-					if (packet_version >= 9)
-						team = fr.unsigned_8();
 
+					Widelands::TeamNumber team = fr.unsigned_8();
 					char const * const tribe_name = fr.c_string();
 
 					std::string const name = fr.c_string();
@@ -66,15 +61,7 @@ void GamePlayerInfoPacket::read
 					player.set_see_all(see_all);
 
 					player.set_ai(fr.c_string());
-
-					if (packet_version >= 15)
-						player.read_statistics(fr, 3);
-					else if (packet_version >= 14)
-						player.read_statistics(fr, 2);
-					else if (packet_version >= 12)
-						player.read_statistics(fr, 1);
-					else
-						player.read_statistics(fr, 0);
+					player.read_statistics(fr);
 
 					player.m_casualties = fr.unsigned_32();
 					player.m_kills      = fr.unsigned_32();
@@ -82,16 +69,17 @@ void GamePlayerInfoPacket::read
 					player.m_msites_defeated     = fr.unsigned_32();
 					player.m_civil_blds_lost     = fr.unsigned_32();
 					player.m_civil_blds_defeated = fr.unsigned_32();
+					for (int32_t ai_pos = 0; ai_pos < kAIDataSize; ++ai_pos) {
+						player.m_ai_data_int32[ai_pos] = fr.signed_32();
+						player.m_ai_data_uint32[ai_pos] = fr.unsigned_32();
+						player.m_ai_data_int16[ai_pos] = fr.unsigned_16();
+					}
 				}
 			}
-
-			if (packet_version <= 10)
-				game.read_statistics(fr, 3);
-			else
-				game.read_statistics(fr, 4);
-		} else
-			throw GameDataError
-				("unknown/unhandled version %u", packet_version);
+			game.read_statistics(fr);
+		} else {
+			throw UnhandledVersionError("GamePlayerInfoPacket", packet_version, kCurrentPacketVersion);
+		}
 	} catch (const WException & e) {
 		throw GameDataError("player info: %s", e.what());
 	}
@@ -103,8 +91,7 @@ void GamePlayerInfoPacket::write
 {
 	FileWrite fw;
 
-	// Now packet version
-	fw.unsigned_16(CURRENT_PACKET_VERSION);
+	fw.unsigned_16(kCurrentPacketVersion);
 
 	// Number of (potential) players
 	PlayerNumber const nr_players = game.map().get_nrplayers();
@@ -134,6 +121,11 @@ void GamePlayerInfoPacket::write
 		fw.unsigned_32(plr->msites_defeated    ());
 		fw.unsigned_32(plr->civil_blds_lost    ());
 		fw.unsigned_32(plr->civil_blds_defeated());
+		for (int32_t ai_pos = 0; ai_pos < kAIDataSize; ++ai_pos) {
+			fw.signed_32(plr->m_ai_data_int32[ai_pos]);
+			fw.unsigned_32(plr->m_ai_data_uint32[ai_pos]);
+			fw.unsigned_16(plr->m_ai_data_int16[ai_pos]);
+		}
 	} else
 		fw.unsigned_8(0); //  Player is NOT in game.
 

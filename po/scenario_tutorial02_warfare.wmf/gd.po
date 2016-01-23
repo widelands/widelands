@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-09-14 07:52+0000\n"
-"PO-Revision-Date: 2015-09-15 11:49+0000\n"
+"POT-Creation-Date: 2015-11-28 11:19+0000\n"
+"PO-Revision-Date: 2015-11-28 12:23+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -136,8 +136,8 @@ msgstr "Chan eil eòlas sam bith air saighdear air ùr-chruthachadh agus chan ei
 msgid ""
 "One of these training sites is the battle arena. It is a big and expensive "
 "building, and it trains soldiers in evade. Since soldiers get very hungry "
-"during their workout, this building needs a lot of food and strongbeer. In a"
-" real game, you should have a good infrastructure before you build it."
+"during their workout, this building needs a lot of food and strong beer. In "
+"a real game, you should have a good infrastructure before you build it."
 msgstr "Is an raon catha aon dhe na làraichean trèanaidh ud. ’S e togalach daor mòr a th’ ann agus trèanaidh e teàrnadh nan saighdearan. Air sgàth ’s gun dig an t-acras air na saighdearan leis an obair chruaidh a nì iad ann, bidh an togalach seo feumach air mòran bìdh agus leanna làidir. Ann an geama dearbh, bu chòir do bhun-structar math a bhith agad mus tog thu fear."
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:53
@@ -162,8 +162,8 @@ msgstr "Tog raon catha. ’S e togalach mòr a th’ ann."
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:63
 msgid ""
 "Since the construction will take some time, you can change the game speed "
-"using PAGE UP and PAGE DOWN."
-msgstr "On a bheir an togail beagan ùine, ’s urrainn dhut luaths a’ gheama atharrachadh leis na putanan PAGE UP agus PAGE DOWN."
+"using Page Up and Page Down."
+msgstr "On a bheir an togail beagan ùine, ’s urrainn dhut luaths a’ gheama atharrachadh leis na putanan Page Up agus Page Down."
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:71
 msgid "The Battle Arena Has Been Constructed"
@@ -178,7 +178,7 @@ msgstr "Glè mhath. Chaidh an raon catha againn a thogail agus tha na saighdeara
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:74
 msgid ""
 "The needed wares are also delivered there. For successful training, you need"
-" pitta bread and strongbeer, as well as either fish or meat."
+" pitta bread and strong beer, as well as either fish or meat."
 msgstr "Tha am bathar air a bheil feum ’ga ghiùlan an-siud cuideachd. Bidh feum agad air aran tur agus leann làidir cho math ri iasg no feòil ach an soirbhich leis an trèanadh."
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:75
@@ -249,7 +249,7 @@ msgstr "Taghta, cha an campa trèanaidh againn deiseil a-nis cuideachd. Chan eil
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:108
 msgid ""
 "To train in the training camp, our soldiers need food like in the battle "
-"arena, but no strongbeer. Instead, they need different axes for attack "
+"arena, but no strong beer. Instead, they need different axes for attack "
 "training and helmets for health training."
 msgstr "Gus trèanadh a dhèanamh sa champa trèanaidh, bidh na saighdearan againn feumach air biadh mar a tha san raon catha ach cha bhi feum aca air leann làidir. Bidh iad feumach air diofar seòrsa de thuaghan ’na àite airson trèanadh ionnsaighe agus air clogaidean airson trèanadh slàinte."
 

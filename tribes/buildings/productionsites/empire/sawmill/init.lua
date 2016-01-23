@@ -5,59 +5,61 @@ tribes:new_productionsite_type {
    name = "empire_sawmill",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("empire_building", "Sawmill"),
-   directory = dirname,
+   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",
 
    buildcost = {
-		log = 2,
-		granite = 1,
-		planks = 1
-	},
-	return_on_dismantle = {
-		log = 1,
-		granite = 1
-	},
+      log = 2,
+      granite = 1,
+      planks = 1
+   },
+   return_on_dismantle = {
+      log = 1,
+      granite = 1
+   },
 
    animations = {
-		idle = {
-			pictures = path.list_directory(dirname, "idle_\\d+.png"),
-			hotspot = { 54, 70 },
-		},
-		working = {
-			pictures = path.list_directory(dirname, "idle_\\d+.png"), -- TODO(GunChleoc): No animation yet.
-			hotspot = { 54, 70 },
-		},
-	},
+      idle = {
+         pictures = path.list_files(dirname .. "idle_??.png"),
+         hotspot = { 54, 70 },
+      },
+      working = {
+         pictures = path.list_files(dirname .. "idle_??.png"), -- TODO(GunChleoc): No animation yet.
+         hotspot = { 54, 70 },
+      },
+   },
 
    aihints = {
-		forced_after = 60,
-		prohibited_till = 60
+      forced_after = 250,
+      prohibited_till = 250,
+      very_weak_ai_limit = 1,
+      weak_ai_limit = 2
    },
 
-	working_positions = {
-		empire_carpenter = 1
-	},
+   working_positions = {
+      empire_carpenter = 1
+   },
 
    inputs = {
-		log = 8
-	},
+      log = 8
+   },
    outputs = {
-		"planks"
+      "planks"
    },
 
-	programs = {
-		work = {
-			-- TRANSLATORS: Completed/Skipped/Did not start sawing logs because ...
-			descname = _"sawing logs",
-			actions = {
-				"sleep=16500", -- Much faster than barbarians' wood hardener
-				"return=skipped unless economy needs planks",
-				"consume=log:2",
-				"playFX=sound/sawmill/sawmill 180",
-				"animate=working 20000", -- Much faster than barbarians' wood hardener
-				"produce=planks"
-			}
-		},
-	},
+   programs = {
+      work = {
+         -- TRANSLATORS: Completed/Skipped/Did not start sawing logs because ...
+         descname = _"sawing logs",
+         actions = {
+            "sleep=16500", -- Much faster than barbarians' wood hardener
+            "return=skipped unless economy needs planks",
+            "consume=log:2",
+            "playFX=sound/sawmill sawmill 180",
+            "animate=working 20000", -- Much faster than barbarians' wood hardener
+            "produce=planks"
+         }
+      },
+   },
 }

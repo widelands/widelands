@@ -5,18 +5,18 @@ tribes:new_ware_type {
    name = "smoked_meat",
    -- TRANSLATORS: This is a ware name used in lists of wares
    descname = pgettext("ware", "Smoked Meat"),
-   directory = dirname,
+   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    default_target_quantity = {
-		atlanteans = 20
-	},
+      atlanteans = 20
+   },
    preciousness = {
-		atlanteans = 2
-	},
+      atlanteans = 2
+   },
 
    animations = {
       idle = {
-         pictures = { dirname .. "idle.png" },
+         pictures = path.list_files(dirname .. "idle.png"),
          hotspot = { 9, 16 },
       },
    }

@@ -313,23 +313,23 @@ function field_owner_tests:_owner_ship_helper_func(p1, p2)
    assert_equal(p2, o[2])
    assert_equal(p1, map:get_field(10,10).owner)
 
-	-- player 2 has now more influence, but player 1 still owns it
+   -- player 2 has now more influence, but player 1 still owns it
    local f = map:get_field(14, 12)
    local s3 = p2:place_building("empire_sentry", f, false, true)
    s3:set_soldiers({0,0,0,0}, 1)
    self.pis[#self.pis + 1] = f.brn.immovable
 
    local o = map:get_field(10,10).claimers
-	assert_equal(2, #o)
+   assert_equal(2, #o)
    assert_equal(p2, o[1])
    assert_equal(p1, o[2])
    assert_equal(p1, map:get_field(10,10).owner)
 end
 function field_owner_tests:test_blue_first()
-	self:_owner_ship_helper_func(player1, player2)
+   self:_owner_ship_helper_func(player1, player2)
 end
 function field_owner_tests:test_red_first()
-	self:_owner_ship_helper_func(player2, player1)
+   self:_owner_ship_helper_func(player2, player1)
 end
 
 function field_owner_tests:test_no_military_influence()

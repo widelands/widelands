@@ -24,7 +24,7 @@
 #include <vector>
 
 #include "base/macros.h"
-#include "logic/immovable.h"
+#include "logic/map_objects/immovable.h"
 #include "economy/routing_node.h"
 
 namespace Widelands {
@@ -126,7 +126,7 @@ struct Flag : public PlayerImmovable, public RoutingNode {
 
 	void remove_ware(EditorGameBase &, WareInstance * const);
 
-	void add_flag_job(Game &, WareIndex workerware, const std::string & programname);
+	void add_flag_job(Game &, DescriptionIndex workerware, const std::string & programname);
 
 	void log_general_info(const EditorGameBase &) override;
 
@@ -138,7 +138,7 @@ protected:
 
 	void wake_up_capacity_queue(Game &);
 
-	static void flag_job_request_callback(Game &, Request &, WareIndex, Worker *, PlayerImmovable &);
+	static void flag_job_request_callback(Game &, Request &, DescriptionIndex, Worker *, PlayerImmovable &);
 
 	void set_flag_position(Coords coords);
 

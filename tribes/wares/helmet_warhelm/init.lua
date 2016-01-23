@@ -5,18 +5,18 @@ tribes:new_ware_type {
    name = "helmet_warhelm",
    -- TRANSLATORS: This is a ware name used in lists of wares
    descname = pgettext("ware", "Warhelm"),
-   directory = dirname,
+   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    default_target_quantity = {
-		barbarians = 1
-	},
+      barbarians = 1
+   },
    preciousness = {
-		barbarians = 2
-	},
+      barbarians = 2
+   },
 
    animations = {
       idle = {
-         pictures = { dirname .. "idle.png" },
+         pictures = path.list_files(dirname .. "idle.png"),
          hotspot = { 7, 12 },
       },
    }

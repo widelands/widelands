@@ -10,8 +10,6 @@
 -- Also, enhanced/upgraded units need to come before their basic units.
 --
 
-set_textdomain("tribes")
-
 tribes = wl.Tribes()
 
 
@@ -22,21 +20,21 @@ tribes = wl.Tribes()
 -- 'animationname' is the name of the animation, e.g. "walkload"
 -- 'fps' are the frames per second. Only use this if the animation has more than 1 frame.
 function add_worker_animations(table, animationname, dirname, basename, hotspot, fps)
-	if (fps ~= nil) then
-		for idx, dir in ipairs{ "ne", "e", "se", "sw", "w", "nw" } do
-			table[animationname .. "_" .. dir] = {
-				pictures = path.list_directory(dirname, basename .. "_" .. dir .. "_\\d+.png"),
-				hotspot = hotspot,
-				fps = fps,
-			}
-		end
-	else
-		for idx, dir in ipairs{ "ne", "e", "se", "sw", "w", "nw" } do
-			table[animationname .. "_" .. dir] = {
-				pictures = path.list_directory(dirname, basename .. "_" .. dir .. "_\\d+.png"),
-				hotspot = hotspot,
-			}
-		end
+   if (fps ~= nil) then
+      for idx, dir in ipairs{ "ne", "e", "se", "sw", "w", "nw" } do
+         table[animationname .. "_" .. dir] = {
+            pictures = path.list_files(dirname .. basename .. "_" .. dir ..  "_??.png"),
+            hotspot = hotspot,
+            fps = fps,
+         }
+      end
+   else
+      for idx, dir in ipairs{ "ne", "e", "se", "sw", "w", "nw" } do
+         table[animationname .. "_" .. dir] = {
+            pictures = path.list_files(dirname .. basename .. "_" .. dir ..  "_??.png"),
+            hotspot = hotspot,
+         }
+      end
    end
 end
 
@@ -44,6 +42,9 @@ end
 -- ===================================
 --    Ships
 -- ===================================
+
+-- TODO(sirver): Adding timing informations here would be really useful, also
+-- for world/. This needs some sort of wrapping for the ScopedTimer class.
 
 print("Loading Ships")
 include "tribes/ships/atlanteans/init.lua"
@@ -68,6 +69,7 @@ include "tribes/wares/ax_sharp/init.lua"
 include "tribes/wares/ax_warriors/init.lua"
 include "tribes/wares/basket/init.lua"
 include "tribes/wares/beer/init.lua"
+include "tribes/wares/beer_strong/init.lua"
 include "tribes/wares/blackroot/init.lua"
 include "tribes/wares/blackroot_flour/init.lua"
 include "tribes/wares/blackwood/init.lua"
@@ -128,7 +130,6 @@ include "tribes/wares/spear_war/init.lua"
 include "tribes/wares/spear_wooden/init.lua"
 include "tribes/wares/spidercloth/init.lua"
 include "tribes/wares/spider_silk/init.lua"
-include "tribes/wares/stout/init.lua"
 include "tribes/wares/tabard/init.lua"
 include "tribes/wares/tabard_golden/init.lua"
 include "tribes/wares/thatch_reed/init.lua"
@@ -285,6 +286,7 @@ include "tribes/workers/empire/stonemason/init.lua"
 include "tribes/workers/empire/toolsmith/init.lua"
 include "tribes/workers/empire/trainer/init.lua"
 include "tribes/workers/empire/vinefarmer/init.lua"
+include "tribes/workers/empire/vintner/init.lua"
 include "tribes/workers/empire/weaponsmith/init.lua"
 include "tribes/workers/empire/weaver/init.lua"
 
@@ -334,6 +336,7 @@ include "tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua"
 include "tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua"
 include "tribes/buildings/productionsites/atlanteans/armorsmithy/init.lua"
 include "tribes/buildings/productionsites/atlanteans/barracks/init.lua"
+
 -- Atlanteans big
 include "tribes/buildings/productionsites/atlanteans/horsefarm/init.lua"
 include "tribes/buildings/productionsites/atlanteans/farm/init.lua"
@@ -369,9 +372,10 @@ include "tribes/buildings/productionsites/barbarians/charcoal_kiln/init.lua"
 include "tribes/buildings/productionsites/barbarians/smelting_works/init.lua"
 include "tribes/buildings/productionsites/barbarians/shipyard/init.lua"
 include "tribes/buildings/productionsites/barbarians/warmill/init.lua"
-include "tribes/buildings/productionsites/barbarians/axfactory/init.lua"
+include "tribes/buildings/productionsites/barbarians/ax_workshop/init.lua"
 include "tribes/buildings/productionsites/barbarians/metal_workshop/init.lua"
 include "tribes/buildings/productionsites/barbarians/barracks/init.lua"
+
 -- Barbarians big
 include "tribes/buildings/productionsites/barbarians/cattlefarm/init.lua"
 include "tribes/buildings/productionsites/barbarians/farm/init.lua"
@@ -419,6 +423,7 @@ include "tribes/buildings/productionsites/empire/sheepfarm/init.lua"
 include "tribes/buildings/productionsites/empire/weaving_mill/init.lua"
 include "tribes/buildings/productionsites/empire/weaponsmithy/init.lua"
 include "tribes/buildings/productionsites/empire/barracks/init.lua"
+
 -- Empire mines
 include "tribes/buildings/productionsites/empire/coalmine_deep/init.lua"
 include "tribes/buildings/productionsites/empire/coalmine/init.lua"

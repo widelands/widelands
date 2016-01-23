@@ -27,18 +27,18 @@
 #include "base/i18n.h"
 #include "editor/editorinteractive.h"
 #include "logic/map.h"
-#include "logic/world/editor_category.h"
-#include "logic/world/terrain_description.h"
-#include "logic/world/world.h"
+#include "logic/map_objects/world/editor_category.h"
+#include "logic/map_objects/world/terrain_description.h"
+#include "logic/map_objects/world/world.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/window.h"
 
 /// Show a window with information about the pointed at node and triangle.
-int32_t EditorInfoTool::handle_click_impl(Widelands::Map& map,
-					    const Widelands::World& world,
-					    Widelands::NodeAndTriangle<> center,
-					    EditorInteractive& parent,
-					    EditorActionArgs& /* args */) {
+int32_t EditorInfoTool::handle_click_impl(const Widelands::World& world,
+										 Widelands::NodeAndTriangle<> center,
+										 EditorInteractive& parent,
+										 EditorActionArgs* /* args */,
+										 Widelands::Map* map) {
 	UI::Window * const w =
 	    new UI::Window
 	(&parent, "field_information", 30, 30, 400, 200,
@@ -47,7 +47,7 @@ int32_t EditorInfoTool::handle_click_impl(Widelands::Map& map,
 	    new UI::MultilineTextarea
 	(w, 0, 0, w->get_inner_w(), w->get_inner_h());
 
-	Widelands::Field & f = map[center.node];
+	Widelands::Field & f = (*map)[center.node];
 
 	// *** Node info
 	std::string buf = _("Node:");
@@ -92,7 +92,7 @@ int32_t EditorInfoTool::handle_click_impl(Widelands::Map& map,
 	}
 
 	std::string temp = "";
-	temp = f.get_immovable() ? _("Has base immovable") : _("No base immovable");
+	temp = f.get_immovable() ? _("Has immovable") : _("No immovable");
 	buf += "• " + temp + "\n";
 
 	temp = f.get_first_bob() ? _("Has animals") : _("No animals");
@@ -101,41 +101,26 @@ int32_t EditorInfoTool::handle_click_impl(Widelands::Map& map,
 	// *** Terrain info
 	buf += std::string("\n") + _("Terrain:") + "\n";
 
-	const Widelands::Field         & tf  = map[center.triangle];
+	const Widelands::Field         & tf  = (*map)[center.triangle];
 	const Widelands::TerrainDescription& ter = world.terrain_descr(
 	   center.triangle.t == Widelands::TCoords<>::D ? tf.terrain_d() : tf.terrain_r());
 
 	buf += "• " + (boost::format(pgettext("terrain_name", "Name: %s")) % ter.descname()).str() + "\n";
 
-	Widelands::TerrainDescription::Type terrain_is = ter.get_is();
 	std::vector<std::string> terrain_is_strings;
-
-	if (terrain_is == Widelands::TerrainDescription::Type::kGreen) {
-		terrain_is_strings.push_back(_("arable"));
+	for (const Widelands::TerrainDescription::Type& terrain_type : ter.get_types()) {
+		terrain_is_strings.push_back(terrain_type.descname);
 	}
-	if (terrain_is & Widelands::TerrainDescription::Type::kDry) {
-		terrain_is_strings.push_back(_("treeless"));
-	}
-	if (terrain_is & Widelands::TerrainDescription::Type::kWater) {
-		terrain_is_strings.push_back(_("aquatic"));
-	}
-	if (terrain_is & Widelands::TerrainDescription::Type::kDead) {
-		terrain_is_strings.push_back(_("dead"));
-	}
-	if (terrain_is & Widelands::TerrainDescription::Type::kMountain) {
-		terrain_is_strings.push_back(_("mountainous"));
-	}
-	if (terrain_is & Widelands::TerrainDescription::Type::kImpassable) {
-		terrain_is_strings.push_back(_("impassable"));
-	}
-	buf += "• " + (boost::format(_("Category: %s"))
+	/** TRANSLATORS: "Is" is a list of terrain properties, e.g. "arable", "unreachable and unwalkable" */
+	/** TRANSLATORS: You can also translate this as "Category: %s" or "Property: %s" */
+	buf += "• " + (boost::format(_("Is: %s"))
 						% i18n::localize_list(terrain_is_strings, i18n::ConcatenateWith::AMPERSAND)).str() + "\n";
 	buf += "• " + (boost::format(_("Editor Category: %s")) % ter.editor_category().descname()).str() + "\n";
 
 	// *** Resources info
 	buf += std::string("\n") + _("Resources:") + "\n";
 
-	Widelands::ResourceIndex ridx = f.get_resources();
+	Widelands::DescriptionIndex ridx = f.get_resources();
 	int ramount = f.get_resources_amount();
 
 	if (ramount > 0) {
@@ -150,20 +135,20 @@ int32_t EditorInfoTool::handle_click_impl(Widelands::Map& map,
 
 	// *** Map info
 	buf += std::string("\n") + _("Map:") + "\n";
-	buf += "• " + (boost::format(pgettext("map_name", "Name: %s")) % map.get_name().c_str()).str() + "\n";
+	buf += "• " + (boost::format(pgettext("map_name", "Name: %s")) % map->get_name().c_str()).str() + "\n";
 	buf += "• " + (boost::format(_("Size: %1$ix%2$i"))
-					 % map.get_width() % map.get_height()).str() + "\n";
+					 % map->get_width() % map->get_height()).str() + "\n";
 
-	if (map.get_nrplayers() > 0) {
+	if (map->get_nrplayers() > 0) {
 		buf += "• " +
-				 (boost::format(_("Players: %u")) % static_cast<unsigned int>(map.get_nrplayers())).str() + "\n";
+				 (boost::format(_("Players: %u")) % static_cast<unsigned int>(map->get_nrplayers())).str() + "\n";
 	}
 	else {
 		buf += "• " + std::string(_("Players: -")) + "\n";
 	}
 
-	buf += "• " + (boost::format(_("Author: %s")) % map.get_author()).str() + "\n";
-	buf += "• " + (boost::format(_("Descr: %s")) % map.get_description().c_str()).str() + "\n";
+	buf += "• " + (boost::format(_("Author: %s")) % map->get_author()).str() + "\n";
+	buf += "• " + (boost::format(_("Descr: %s")) % map->get_description().c_str()).str() + "\n";
 
 	multiline_textarea->set_text(buf.c_str());
 

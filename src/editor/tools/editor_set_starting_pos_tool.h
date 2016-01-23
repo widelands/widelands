@@ -34,11 +34,11 @@
 struct EditorSetStartingPosTool : public EditorTool {
 	EditorSetStartingPosTool();
 
-	int32_t handle_click_impl(Widelands::Map&,
-	                          const Widelands::World& world,
+	int32_t handle_click_impl(const Widelands::World& world,
 	                          Widelands::NodeAndTriangle<>,
 	                          EditorInteractive&,
-	                          EditorActionArgs&) override;
+	                          EditorActionArgs*,
+							  Widelands::Map*) override;
 	char const * get_sel_impl() const override
 		{return m_current_sel_pic;}
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008, 2010 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008, 2010, 2015 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,28 +26,30 @@
 #include "graphic/graphic.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
-#include "logic/constructionsite.h"
 #include "logic/editor_game_base.h"
 #include "logic/map.h"
+#include "logic/map_objects/tribes/constructionsite.h"
+#include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/player.h"
-#include "logic/tribes/tribe_descr.h"
 #include "map_io/map_object_loader.h"
 #include "map_io/map_object_saver.h"
 #include "wui/interactive_base.h"
 
 namespace Widelands {
 
-#define LOWEST_SUPPORTED_VERSION           1
-#define PRIORITIES_INTRODUCED_IN_VERSION   2
-#define CURRENT_PACKET_VERSION             3
+constexpr uint16_t kCurrentPacketVersion = 3;
+constexpr uint16_t kLowestSupportedVersion = 1;
+constexpr uint16_t kPrioritiesIntroducedInVersion = 2;
 
+// constants to handle special building types
+constexpr uint8_t kTypeBuilding = 0;
+constexpr uint8_t kTypeConstructionSite = 1;
+constexpr uint8_t kTypeDismantleSite = 2;
 
-void MapBuildingPacket::read
-	(FileSystem            &       fs,
-	 EditorGameBase      &       egbase,
-	 bool                    const skip,
-	 MapObjectLoader &       mol)
-{
+void MapBuildingPacket::read(FileSystem& fs,
+									  EditorGameBase& egbase,
+									  bool const skip,
+									  MapObjectLoader& mol) {
 	if (skip)
 		return;
 	FileRead fr;
@@ -55,7 +57,7 @@ void MapBuildingPacket::read
 	InteractiveBase & ibase = *egbase.get_ibase();
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
-		if (packet_version >= LOWEST_SUPPORTED_VERSION) {
+		if (packet_version >= kLowestSupportedVersion && packet_version <= kCurrentPacketVersion) {
 			Map & map = egbase.map();
 			uint16_t const width  = map.get_width ();
 			uint16_t const height = map.get_height();
@@ -63,18 +65,21 @@ void MapBuildingPacket::read
 			for (c.y = 0; c.y < height; ++c.y) {
 				for (c.x = 0; c.x < width; ++c.x) {
 					if (fr.unsigned_8()) {
-						PlayerNumber const p                   = fr.unsigned_8 ();
+						PlayerNumber  const p                   = fr.unsigned_8 ();
 						Serial        const serial              = fr.unsigned_32();
 						char  const * const name                = fr.c_string   ();
-						uint8_t       const special_type        = fr.unsigned_8 ();
+						uint8_t const building_type             = fr.unsigned_8 ();
 
 						//  No building lives on more than one main place.
 
 						//  Get the tribe and the building index.
 						if (Player * const player = egbase.get_safe_player(p)) {
 							const TribeDescr & tribe = player->tribe();
-							const BuildingIndex index = tribe.building_index(name);
-							if (!tribe.has_building(index)) {
+							const DescriptionIndex index = tribe.building_index(name);
+							const BuildingDescr* bd = tribe.get_building_descr(index);
+							// Check if tribe has this building itself
+							// OR alternatively if this building might be a conquered militarysite
+							if (!tribe.has_building(index) && !(bd && bd->type() == MapObjectType::MILITARYSITE)) {
 								throw GameDataError
 									("tribe %s does not define building type \"%s\"",
 									 tribe.name().c_str(), name);
@@ -83,9 +88,9 @@ void MapBuildingPacket::read
 							//  Now, create this Building, take extra special care for
 							//  constructionsites. All data is read later.
 							Building * building;
-							if (special_type == 1) { // Constructionsite
+							if (building_type == kTypeConstructionSite) {
 								building = &egbase.warp_constructionsite(c, p, index, true);
-							} else if (special_type == 2) {// DismantleSite
+							} else if (building_type == kTypeDismantleSite) {
 								Building::FormerBuildings formers = {index};
 								building = &egbase.warp_dismantlesite(c, p, true, formers);
 							} else {
@@ -94,8 +99,9 @@ void MapBuildingPacket::read
 
 							mol.register_object<Building> (serial, *building);
 
-							if (packet_version >= PRIORITIES_INTRODUCED_IN_VERSION)
+							if (packet_version >= kPrioritiesIntroducedInVersion) {
 								read_priorities (*building, fr);
+							}
 
 							//  Reference the players tribe if in editor.
 							if (g_gr) // but not on dedicated servers ;)
@@ -105,9 +111,9 @@ void MapBuildingPacket::read
 					}
 				}
 			}
-		} else
-			throw GameDataError
-				("unknown/unhandled version %u", packet_version);
+		} else {
+			throw UnhandledVersionError("MapBuildingPacket", packet_version, kCurrentPacketVersion);
+		}
 	} catch (const WException & e) {
 		throw GameDataError("buildings: %s", e.what());
 	}
@@ -123,7 +129,7 @@ void MapBuildingPacket::write
 	FileWrite fw;
 
 	// now packet version
-	fw.unsigned_16(CURRENT_PACKET_VERSION);
+	fw.unsigned_16(kCurrentPacketVersion);
 
 	// Write buildings and owner, register this with the map_object_saver so that
 	// it's data can be saved later.
@@ -140,18 +146,19 @@ void MapBuildingPacket::write
 			fw.unsigned_8(building->owner().player_number());
 			fw.unsigned_32(mos.register_object(*building));
 
-			upcast(PartiallyFinishedBuilding const, pfb, building);
-			fw.c_string
-				((pfb ? *pfb->m_building : building->descr())
-				 .name().c_str());
+			if (building->descr().type() == MapObjectType::CONSTRUCTIONSITE) {
+				upcast(PartiallyFinishedBuilding const, pfb, building);
+				fw.c_string((*pfb->m_building).name().c_str());
+				fw.unsigned_8(kTypeConstructionSite);
 
-			if (!pfb)
-				fw.unsigned_8(0);
-			else {
-				if (is_a(ConstructionSite, pfb))
-					fw.unsigned_8(1);
-				else // DismantleSite
-					fw.unsigned_8(2);
+			} else if (building->descr().type() == MapObjectType::DISMANTLESITE) {
+				upcast(PartiallyFinishedBuilding const, pfb, building);
+				fw.c_string((*pfb->m_building).name().c_str());
+				fw.unsigned_8(kTypeDismantleSite);
+
+			} else {
+				fw.c_string(building->descr().name().c_str());
+				fw.unsigned_8(kTypeBuilding);
 			}
 
 			write_priorities(*building, fw);
@@ -170,8 +177,8 @@ void MapBuildingPacket::write_priorities
 	// Used to be base_priority which is no longer used. Remove after b20.
 	fw.unsigned_32(0);
 
-	std::map<int32_t, std::map<WareIndex, int32_t> > type_to_priorities;
-	std::map<int32_t, std::map<WareIndex, int32_t> >::iterator it;
+	std::map<int32_t, std::map<DescriptionIndex, int32_t> > type_to_priorities;
+	std::map<int32_t, std::map<DescriptionIndex, int32_t> >::iterator it;
 
 	const TribeDescr & tribe = building.owner().tribe();
 	building.collect_priorities(type_to_priorities);
@@ -185,11 +192,11 @@ void MapBuildingPacket::write_priorities
 		fw.unsigned_8(ware_type);
 		fw.unsigned_8(it->second.size());
 
-		std::map<WareIndex, int32_t>::iterator it2;
+		std::map<DescriptionIndex, int32_t>::iterator it2;
 		for (it2 = it->second.begin(); it2 != it->second.end(); ++it2)
 		{
 			std::string name;
-			WareIndex const ware_index = it2->first;
+			DescriptionIndex const ware_index = it2->first;
 			if (wwWARE == ware_type)
 				name = tribe.get_ware_descr(ware_index)->name();
 			else if (wwWORKER == ware_type)
@@ -214,13 +221,13 @@ void MapBuildingPacket::read_priorities
 	fr.unsigned_32(); // unused, was base_priority which is unused. Remove after b20.
 
 	const TribeDescr & tribe = building.owner().tribe();
-	int32_t ware_type = -1;
+	Widelands::DescriptionIndex ware_type = INVALID_INDEX;
 	// read ware type
 	while (0xff != (ware_type = fr.unsigned_8())) {
 		// read count of priorities assigned for this ware type
 		const uint8_t count = fr.unsigned_8();
 		for (uint8_t i = 0; i < count; ++i) {
-			WareIndex idx;
+			DescriptionIndex idx;
 			if (wwWARE == ware_type)
 				idx = tribe.safe_ware_index(fr.c_string());
 			else if (wwWORKER == ware_type)

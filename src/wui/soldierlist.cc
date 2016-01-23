@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2011, 2015 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,13 +23,14 @@
 #include <boost/format.hpp>
 
 #include "base/macros.h"
+#include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
-#include "logic/building.h"
-#include "logic/militarysite.h"
+#include "logic/map_objects/tribes/building.h"
+#include "logic/map_objects/tribes/militarysite.h"
+#include "logic/map_objects/tribes/soldier.h"
+#include "logic/map_objects/tribes/soldiercontrol.h"
 #include "logic/player.h"
-#include "logic/soldier.h"
-#include "logic/soldiercontrol.h"
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
 #include "wlapplication.h"
@@ -234,7 +235,7 @@ void SoldierPanel::think()
 	}
 
 	// Third pass: animate icons
-	int32_t curtime = WLApplication::get()->get_time();
+	int32_t curtime = SDL_GetTicks();
 	int32_t dt = std::min(std::max(curtime - m_last_animate_time, 0), 1000);
 	int32_t maxdist = dt * AnimateSpeed / 1000;
 	m_last_animate_time = curtime;
@@ -398,18 +399,17 @@ m_infotext(this, _("Click soldier to send away"))
 	m_soldierpanel.set_mouseover(boost::bind(&SoldierList::mouseover, this, _1));
 	m_soldierpanel.set_click(boost::bind(&SoldierList::eject, this, _1));
 
-	const UI::TextStyle & style = UI::TextStyle::ui_small();
 	// We don't want translators to translate this twice, so it's a bit involved.
-	uint32_t maxtextwidth = std::max
-		(style.calc_bare_width(_("Click soldier to send away")),
-		 style.calc_bare_width(
-			 (boost::format("%s ") // We need some extra space to fix bug 724169
-			  /** TRANSLATORS: Health, Attack, Defense, Evade */
-			  % (boost::format(_("HP: %1$u/%2$u  AT: %3$u/%4$u  DE: %5$u/%6$u  EV: %7$u/%8$u"))
-				  % 8 % 8
-				  % 8 % 8
-				  % 8 % 8
-				  % 8 % 8)).str()));
+	int w = UI::g_fh1->render(
+				  as_uifont((boost::format("%s ") // We need some extra space to fix bug 724169
+								 /** TRANSLATORS: Health, Attack, Defense, Evade */
+								 % (boost::format(_("HP: %1$u/%2$u  AT: %3$u/%4$u  DE: %5$u/%6$u  EV: %7$u/%8$u"))
+									 % 8 % 8
+									 % 8 % 8
+									 % 8 % 8
+									 % 8 % 8)).str()))->width();
+	uint32_t maxtextwidth = std::max(w,
+												UI::g_fh1->render(as_uifont(_("Click soldier to send away")))->width());
 	set_min_desired_breadth(maxtextwidth + 4);
 
 	UI::Box * buttons = new UI::Box(this, 0, 0, UI::Box::Horizontal);
@@ -500,8 +500,10 @@ void SoldierList::eject(const Soldier * soldier)
 }
 
 void SoldierList::set_soldier_preference(int32_t changed_to) {
+#ifndef NDEBUG
 	upcast(Widelands::MilitarySite, ms, &m_building);
 	assert(ms);
+#endif
 	m_igb.game().send_player_militarysite_set_soldier_preference
 		(m_building, changed_to == 0 ?
 			Widelands::MilitarySite::kPrefersRookies:

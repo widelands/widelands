@@ -5,12 +5,13 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # MiroslavR <miroslavr256@gmail.com>, 2015
 # Miroslav Remák <Unknown>, 2014
+# MiroslavR <miroslavr256@gmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-10-04 07:51+0000\n"
-"PO-Revision-Date: 2015-10-07 15:36+0000\n"
+"POT-Creation-Date: 2015-12-03 09:55+0000\n"
+"PO-Revision-Date: 2015-12-05 22:23+0000\n"
 "Last-Translator: MiroslavR <miroslavr256@gmail.com>\n"
 "Language-Team: Slovak (http://www.transifex.com/widelands/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
@@ -19,11 +20,19 @@ msgstr ""
 "Language: sk\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
-#: ../../campaigns/atl01.wmf/scripting/init.lua:71
+#. TRANSLATORS: Short message title. Translate as "Lost!" if you don't have
+#. enough space.
+#: ../../campaigns/atl01.wmf/scripting/init.lua:74
+msgctxt "message_short_title"
 msgid "Building lost!"
 msgstr "Strata budovy"
 
-#: ../../campaigns/atl01.wmf/scripting/init.lua:73
+#: ../../campaigns/atl01.wmf/scripting/init.lua:82
+msgctxt "message_heading"
+msgid "Building lost!"
+msgstr "Strata budovy"
+
+#: ../../campaigns/atl01.wmf/scripting/init.lua:76
 msgid "We lost a building to the ocean!"
 msgstr "Prišli sme o budovu v boji s oceánom!"
 
@@ -105,16 +114,16 @@ msgid "Build a farm and a blackroot farm"
 msgstr "Postavte farmu a čiernokoreňovú farmu"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:61
-msgid "Build a mill to make cornflour and blackroot flour"
-msgstr "Postavte mlyn na výrobu kukuričnej múky a prášku z čierneho koreňa"
+msgid "Build a mill to make cornmeal and blackroot flour"
+msgstr "Postavte mlyn na výrobu kukuričnej múky a čiernokoreňovej múky"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:62
 msgid "Build a well"
 msgstr "Postavte studňu"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:63
-msgid "Build a bakery to bake bread from cornflour, blackroot flour and water"
-msgstr "Postavte pekáreň na výrobu chleba z kukuričnej múky, prášku z čierneho koreňa a vody."
+msgid "Build a bakery to bake bread from cornmeal, blackroot flour and water"
+msgstr "Postavte pekáreň na výrobu chleba z kukuričnej múky, čiernokoreňovej múky a vody."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:64
 msgid "Build a hunter’s house to get raw meat"
@@ -146,10 +155,10 @@ msgstr "Produkcia pavúčej látky"
 msgid ""
 "The weavers produce spidercloth and tabards in the weaving mill. Spidercloth"
 " is needed for the construction of some buildings and clothing, while "
-"tabards are the uniforms of soldiers. The weaving mill needs gold yarn and "
-"spideryarn as raw material. Spideryarn is produced by the spider farm, while"
-" gold yarn is produced by the gold spinning mill out of gold."
-msgstr "Tkáči vyrábajú v tkáčovni pavúčiu látku a kabátce. Pavúčia látka je potrebná na zhotovenie niektorých budov a oblečení a kabátce slúžia ako uniformy vojakov. Na stavbu tkáčovne je potrebná zlatá priadza a pavúčie vlákno. Pavúčie vlákno sa produkuje na pavúčej farme, kým zlatá priadza sa vyrába zo zlata v pradiarni zlata."
+"tabards are the uniforms of soldiers. The weaving mill needs gold thread and"
+" spider silk as raw material. Spider silk is produced by the spider farm, "
+"while gold thread is produced by the gold spinning mill out of gold."
+msgstr "Tkáči vyrábajú v tkáčovni pavúčiu látku a kabátce. Pavúčia látka je potrebná na zhotovenie niektorých budov a oblečení a kabátce slúžia ako uniformy vojakov. Tkáčovňa potrebuje ako suroviny zlatú niť a pavúčí hodváb. Pavúčí hodváb sa produkuje na pavúčej farme, kým zlatá niť sa vyrába zo zlata v pradiarni zlata."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:77
 msgid "Build a weaving mill"
@@ -446,9 +455,9 @@ msgid ""
 "should build housings for some woodcutters and of course also for foresters,"
 " so we will not run out of trees. Oh, and we mustn’t forget the sawmill, for"
 " most buildings can’t be made out of logs alone. Stronger buildings also "
-"need stone, but there is plenty to the north-east of here; we just need to "
-"build a quarry, and my stonemasons will go to work promptly."
-msgstr "Nech vás hreje Satul, Jundlína! Na postavenie osady sú najdôležitejšie stavebné materiály. V okolí sa nachádzajú nejaké stromy, takže by sme mali postaviť pár obydlí pre drevorubačov a, prirodzene, lesníkov, aby nám nedošli stromy. Och, a nesmieme zabudnúť na pílu, pretože na stavbu väčšiny budov samotné kmene nepostačia. Silnejšie budovy si tiež vyžadujú kameň, ktorého je ale na severovýchod odtiaľto hojne; potrebujeme len postaviť kameňolom a moji kamenári začnú okamžite pracovať."
+"need granite, but there is plenty to the north-east of here; we just need to"
+" build a quarry, and my stonemasons will go to work promptly."
+msgstr "Nech vás hreje Satul, Jundlína! Pri budovaní osady hrajú najdôležitejšiu rolu stavebné materiály. V okolí je niekoľko stromov, takže by sme mali postaviť pár obydlí pre drevorubačov a, prirodzene, aj pre lesníkov, aby nám nedošli stromy. Och, a nesmieme zabudnúť na pílu, pretože na postavenie väčšiny budov samotné kmene nepostačia. Silnejšie budovy tiež vyžadujú žulu, ktorej je však na severovýchod odtiaľto hojne; potrebujeme len postaviť kameňolom a moji kamenári začnú okamžite pracovať."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:197
 msgid "Sidolus Speaks"
@@ -597,7 +606,7 @@ msgid ""
 "but I understand your urgency. Your suggestion sounds fair to me, I will "
 "build your weaving mill and spider farm. I will also build a gold spinning "
 "mill so that the golden tabards you make will not be golden by name alone."
-msgstr "Nech vás hreje Satul tiež, Opol. Pôvodne som chcela odložiť produkciu pavúčej látky, ale chápem, že je to pre vás naliehavé. Váš návrh znie férovo, postavím vám tkáčovňu a pavúčiu farmu. Taktiež postavím pradiareň zlata, aby zlaté kabátce, ktoré vyrábate, neboli zlaté len v názve."
+msgstr "Nech vás hreje Satul tiež, Opol. Pôvodne som chcela produkciu pavúčej látky odložiť, ale chápem, že je to pre vás naliehavé. Váš návrh znie férovo, postavím vám tkáčovňu a pavúčiu farmu. Taktiež nechám postaviť pradiareň zlata, aby zlaté kabátce, ktoré vyrábate, neboli zlaté len v názve."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:275
 msgid "Opol Seeks Out Jundlina"

@@ -24,7 +24,7 @@
 #include "ui_basic/button.h"
 #include "ui_basic/unique_window.h"
 
-struct EditorInteractive;
+class EditorInteractive;
 
 /**
  * This represents the main menu

@@ -5,20 +5,20 @@ tribes:new_ware_type {
    name = "ration",
    -- TRANSLATORS: This is a ware name used in lists of wares
    descname = pgettext("ware", "Ration"),
-   directory = dirname,
+   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    default_target_quantity = {
-		barbarians = 20,
-		empire = 20
-	},
+      barbarians = 20,
+      empire = 20
+   },
    preciousness = {
-		barbarians = 5,
-		empire = 4
-	},
+      barbarians = 5,
+      empire = 4
+   },
 
    animations = {
       idle = {
-         pictures = { dirname .. "idle.png" },
+         pictures = path.list_files(dirname .. "idle.png"),
          hotspot = { 3, 5 },
       },
    }

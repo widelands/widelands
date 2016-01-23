@@ -8,18 +8,18 @@ tribes:new_immovable_type {
    size = "small",
    attributes = { "ripe_blackroot", "field" },
    programs = {
-		program = {
-			"animate=idle 50000",
-			"remove=",
+      program = {
+         "animate=idle 500000",
+         "remove=",
       },
-		harvest = {
-			"transform=blackrootfield_harvested",
+      harvest = {
+         "transform=blackrootfield_harvested",
       }
    },
 
    animations = {
       idle = {
-         pictures = path.list_directory(dirname, "idle_\\d+.png"),
+         pictures = path.list_files(dirname .. "idle_??.png"),
          hotspot = { 28, 45 },
       },
    }

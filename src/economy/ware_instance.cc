@@ -32,10 +32,10 @@
 #include "io/fileread.h"
 #include "io/filewrite.h"
 #include "logic/game.h"
-#include "logic/ship.h"
-#include "logic/tribes/tribe_descr.h"
-#include "logic/warehouse.h"
-#include "logic/worker.h"
+#include "logic/map_objects/tribes/ship.h"
+#include "logic/map_objects/tribes/tribe_descr.h"
+#include "logic/map_objects/tribes/warehouse.h"
+#include "logic/map_objects/tribes/worker.h"
 #include "map_io/map_object_loader.h"
 #include "map_io/map_object_saver.h"
 
@@ -55,8 +55,9 @@ struct IdleWareSupply : public Supply {
 	//  implementation of Supply
 	PlayerImmovable * get_position(Game &) override;
 	bool is_active() const override;
+	SupplyProviders provider_type(Game *) const override;
 	bool has_storage() const override;
-	void get_ware_type(WareWorker & type, WareIndex & ware) const override;
+	void get_ware_type(WareWorker & type, DescriptionIndex & ware) const override;
 	void send_to_storage(Game &, Warehouse * wh) override;
 
 	uint32_t nr_supplies(const Game &, const Request &) const override;
@@ -126,12 +127,22 @@ bool IdleWareSupply::is_active() const
 	return true;
 }
 
+SupplyProviders IdleWareSupply::provider_type(Game* game) const
+{
+	MapObject * const loc = m_ware.get_location(*game);
+	if (is_a(Ship, loc)) {
+		return SupplyProviders::kShip;
+	}
+
+	return SupplyProviders::kFlagOrRoad;
+}
+
 bool IdleWareSupply::has_storage()  const
 {
 	return m_ware.is_moving();
 }
 
-void IdleWareSupply::get_ware_type(WareWorker & type, WareIndex & ware) const
+void IdleWareSupply::get_ware_type(WareWorker & type, DescriptionIndex & ware) const
 {
 	type = wwWARE;
 	ware = m_ware.descr_index();
@@ -183,7 +194,7 @@ void IdleWareSupply::send_to_storage(Game & game, Warehouse * wh)
 /*                     Ware Instance Implementation                      */
 /*************************************************************************/
 WareInstance::WareInstance
-	(WareIndex const i, const WareDescr * const ware_descr)
+	(DescriptionIndex const i, const WareDescr * const ware_descr)
 :
 MapObject   (ware_descr),
 m_economy    (nullptr),
@@ -544,7 +555,7 @@ Load/save support
 ==============================
 */
 
-#define WAREINSTANCE_SAVEGAME_VERSION 2
+constexpr uint8_t kCurrentPacketVersion = 2;
 
 WareInstance::Loader::Loader() :
 	m_location(0),
@@ -599,7 +610,7 @@ void WareInstance::save
 	(EditorGameBase & egbase, MapObjectSaver & mos, FileWrite & fw)
 {
 	fw.unsigned_8(HeaderWareInstance);
-	fw.unsigned_8(WAREINSTANCE_SAVEGAME_VERSION);
+	fw.unsigned_8(kCurrentPacketVersion);
 	fw.c_string(descr().name());
 
 	MapObject::save(egbase, mos, fw);
@@ -620,29 +631,30 @@ MapObject::Loader * WareInstance::load
 	 const TribesLegacyLookupTable& lookup_table)
 {
 	try {
-		uint8_t version = fr.unsigned_8();
+		uint8_t packet_version = fr.unsigned_8();
 
 		// Some maps may contain ware info, so we need compatibility here.
-		if (!(1 <= version && version <= WAREINSTANCE_SAVEGAME_VERSION))
-			throw wexception("unknown/unhandled version %i", version);
-		std::string warename = fr.c_string();
-		if (version == 1) {
-			warename = lookup_table.lookup_ware(warename, fr.c_string());
+		if (1 <= packet_version && packet_version <= kCurrentPacketVersion) {
+			std::string warename = fr.c_string();
+			if (packet_version == 1) {
+				warename = lookup_table.lookup_ware(warename, fr.c_string());
+			}
+
+			DescriptionIndex wareindex = egbase.tribes().ware_index(warename);
+			const WareDescr * descr = egbase.tribes().get_ware_descr(wareindex);
+
+			std::unique_ptr<Loader> loader(new Loader);
+			loader->init(egbase, mol, *new WareInstance(wareindex, descr));
+			loader->load(fr);
+
+			return loader.release();
+		} else {
+			throw UnhandledVersionError("WareInstance", packet_version, kCurrentPacketVersion);
 		}
-
-		WareIndex wareindex = egbase.tribes().ware_index(warename);
-		const WareDescr * descr = egbase.tribes().get_ware_descr(wareindex);
-
-		std::unique_ptr<Loader> loader(new Loader);
-		loader->init(egbase, mol, *new WareInstance(wareindex, descr));
-		loader->load(fr);
-
-		return loader.release();
 	} catch (const std::exception & e) {
 		throw wexception("WareInstance: %s", e.what());
 	}
-
-	return nullptr; // Should never be reached
+	throw wexception("Never here.");
 }
 
 }

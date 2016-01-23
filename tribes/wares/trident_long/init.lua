@@ -5,18 +5,18 @@ tribes:new_ware_type {
    name = "trident_long",
    -- TRANSLATORS: This is a ware name used in lists of wares
    descname = pgettext("ware", "Long Trident"),
-   directory = dirname,
+   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    default_target_quantity = {
-		atlanteans = 1
-	},
+      atlanteans = 1
+   },
    preciousness = {
-		atlanteans = 1
-	},
+      atlanteans = 1
+   },
 
    animations = {
       idle = {
-         pictures = { dirname .. "idle.png" },
+         pictures = path.list_files(dirname .. "idle.png"),
          hotspot = { 10, 17 },
       },
    }

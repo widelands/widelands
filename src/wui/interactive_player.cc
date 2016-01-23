@@ -30,17 +30,16 @@
 #include "base/macros.h"
 #include "economy/flag.h"
 #include "game_io/game_loader.h"
-#include "graphic/font_handler.h"
-#include "logic/building.h"
 #include "logic/cmd_queue.h"
 #include "logic/constants.h"
-#include "logic/constructionsite.h"
-#include "logic/immovable.h"
+#include "logic/map_objects/immovable.h"
+#include "logic/map_objects/tribes/building.h"
+#include "logic/map_objects/tribes/constructionsite.h"
+#include "logic/map_objects/tribes/productionsite.h"
+#include "logic/map_objects/tribes/soldier.h"
+#include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/message_queue.h"
 #include "logic/player.h"
-#include "logic/productionsite.h"
-#include "logic/soldier.h"
-#include "logic/tribes/tribe_descr.h"
 #include "profile/profile.h"
 #include "ui_basic/unique_window.h"
 #include "wui/building_statistics_menu.h"
@@ -54,7 +53,6 @@
 #include "wui/game_objectives_menu.h"
 #include "wui/game_options_menu.h"
 #include "wui/general_statistics_menu.h"
-#include "wui/overlay_manager.h"
 #include "wui/stock_menu.h"
 #include "wui/ware_statistics_menu.h"
 
@@ -71,7 +69,7 @@ InteractivePlayer::InteractivePlayer
 	m_auto_roadbuild_mode(global_s.get_bool("auto_roadbuild_mode", true)),
 	m_flag_to_connect(Widelands::Coords::null()),
 
-// Chat is different, as m_chatProvider needs to be checked when toggling
+// Chat is different, as chat_provider_ needs to be checked when toggling
 // Minimap is different as it warps and stuff
 
 #define INIT_BTN_this(picture, name, tooltip)                       \
@@ -126,19 +124,19 @@ m_toggle_help
 
 	// TODO(unknown): instead of making unneeded buttons invisible after generation,
 	// they should not at all be generated. -> implement more dynamic toolbar UI
-	m_toolbar.add(&m_toggle_options_menu,    UI::Box::AlignLeft);
-	m_toolbar.add(&m_toggle_statistics_menu, UI::Box::AlignLeft);
-	m_toolbar.add(&m_toggle_minimap,         UI::Box::AlignLeft);
-	m_toolbar.add(&m_toggle_buildhelp,       UI::Box::AlignLeft);
+	toolbar_.add(&m_toggle_options_menu,    UI::Box::AlignLeft);
+	toolbar_.add(&m_toggle_statistics_menu, UI::Box::AlignLeft);
+	toolbar_.add(&m_toggle_minimap,         UI::Box::AlignLeft);
+	toolbar_.add(&m_toggle_buildhelp,       UI::Box::AlignLeft);
 	if (multiplayer) {
-		m_toolbar.add(&m_toggle_chat,            UI::Box::AlignLeft);
+		toolbar_.add(&m_toggle_chat,            UI::Box::AlignLeft);
 		m_toggle_chat.set_visible(false);
 		m_toggle_chat.set_enabled(false);
 	}
 
-	m_toolbar.add(&m_toggle_help,            UI::Box::AlignLeft);
-	m_toolbar.add(&m_toggle_objectives,      UI::Box::AlignLeft);
-	m_toolbar.add(&m_toggle_message_menu,    UI::Box::AlignLeft);
+	toolbar_.add(&m_toggle_help,            UI::Box::AlignLeft);
+	toolbar_.add(&m_toggle_objectives,      UI::Box::AlignLeft);
+	toolbar_.add(&m_toggle_message_menu,    UI::Box::AlignLeft);
 
 	set_player_number(plyn);
 	fieldclicked.connect(boost::bind(&InteractivePlayer::node_action, this));
@@ -251,8 +249,8 @@ void InteractivePlayer::popup_message
 void InteractivePlayer::toggle_chat() {
 	if (m_chat.window)
 		delete m_chat.window;
-	else if (m_chatProvider)
-		GameChatMenu::create_chat_console(this, m_chat, *m_chatProvider);
+	else if (chat_provider_)
+		GameChatMenu::create_chat_console(this, m_chat, *chat_provider_);
 }
 
 bool InteractivePlayer::can_see(Widelands::PlayerNumber const p) const
@@ -362,11 +360,11 @@ bool InteractivePlayer::handle_key(bool const down, SDL_Keysym const code)
 
 		case SDLK_KP_ENTER:
 		case SDLK_RETURN:
-			if (!m_chatProvider | !m_chatenabled || !is_multiplayer())
+			if (!chat_provider_ | !m_chatenabled || !is_multiplayer())
 				break;
 
 			if (!m_chat.window)
-				GameChatMenu::create_chat_console(this, m_chat, *m_chatProvider);
+				GameChatMenu::create_chat_console(this, m_chat, *chat_provider_);
 
 			return true;
 		default:
@@ -405,22 +403,11 @@ void InteractivePlayer::cmdSwitchPlayer(const std::vector<std::string> & args)
 		return;
 	}
 
-	DebugConsole::write
-		(str
-			(boost::format("Switching from #%1% to #%2%.")
-		 	 % static_cast<int>(m_player_number) % n));
+	DebugConsole::write(
+	   str(boost::format("Switching from #%1% to #%2%.") % static_cast<int>(m_player_number) % n));
 	m_player_number = n;
-	Map              &       map             = egbase().map();
-	OverlayManager  &       overlay_manager = map.overlay_manager();
-	Widelands::Extent  const extent          = map.extent         ();
-	for (uint16_t y = 0; y < extent.h; ++y)
-		for (uint16_t x = 0; x < extent.w; ++x)
-			overlay_manager.recalc_field_overlays
-				(map.get_fcoords(Widelands::Coords(x, y)));
-	if
-		(UI::UniqueWindow * const building_statistics_window =
-		 	m_mainm_windows.building_stats.window)
-		dynamic_cast<BuildingStatisticsMenu&>
-			(*building_statistics_window)
-			.update();
+
+	if (UI::UniqueWindow* const building_statistics_window = m_mainm_windows.building_stats.window) {
+		dynamic_cast<BuildingStatisticsMenu&>(*building_statistics_window).update();
+	}
 }

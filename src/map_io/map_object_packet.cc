@@ -24,20 +24,19 @@
 #include "economy/portdock.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
-#include "logic/battle.h"
-#include "logic/critter.h"
 #include "logic/editor_game_base.h"
-#include "logic/immovable.h"
 #include "logic/map.h"
-#include "logic/ship.h"
-#include "logic/worker.h"
+#include "logic/map_objects/immovable.h"
+#include "logic/map_objects/tribes/battle.h"
+#include "logic/map_objects/tribes/ship.h"
+#include "logic/map_objects/tribes/worker.h"
+#include "logic/map_objects/world/critter.h"
 #include "map_io/map_object_loader.h"
 #include "map_io/map_object_saver.h"
 
 namespace Widelands {
 
-#define CURRENT_PACKET_VERSION 2
-
+constexpr uint8_t kCurrentPacketVersion = 2;
 
 MapObjectPacket::~MapObjectPacket() {
 	while (loaders.size()) {
@@ -57,10 +56,9 @@ void MapObjectPacket::read
 		fr.open(fs, "binary/mapobjects");
 
 		const uint8_t packet_version = fr.unsigned_8();
+
 		// Some maps contain ware/worker info, so we need compatibility here.
-		if (!(1 <= packet_version && packet_version <= CURRENT_PACKET_VERSION))
-			throw GameDataError
-				("unknown/unhandled version %u", packet_version);
+		if (1 <= packet_version && packet_version <= kCurrentPacketVersion) {
 
 		// Initial loading stage
 		for (;;)
@@ -104,6 +102,9 @@ void MapObjectPacket::read
 			default:
 				throw GameDataError("unknown object header %u", header);
 			}
+		} else {
+			throw UnhandledVersionError("MapObjectPacket", packet_version, kCurrentPacketVersion);
+		}
 	} catch (const std::exception & e) {
 		throw GameDataError("map objects: %s", e.what());
 	}
@@ -141,7 +142,7 @@ void MapObjectPacket::write
 {
 	FileWrite fw;
 
-	fw.unsigned_8(CURRENT_PACKET_VERSION);
+	fw.unsigned_8(kCurrentPacketVersion);
 
 	std::vector<Serial> obj_serials = egbase.objects().all_object_serials_ordered();
 	for

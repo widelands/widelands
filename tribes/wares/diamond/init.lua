@@ -5,18 +5,18 @@ tribes:new_ware_type {
    name = "diamond",
    -- TRANSLATORS: This is a ware name used in lists of wares
    descname = pgettext("ware", "Diamond"),
-   directory = dirname,
+   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    default_target_quantity = {
-		atlanteans = 5
-	},
+      atlanteans = 5
+   },
    preciousness = {
-		atlanteans = 2
-	},
+      atlanteans = 2
+   },
 
    animations = {
       idle = {
-         pictures = { dirname .. "idle.png" },
+         pictures = path.list_files(dirname .. "idle.png"),
          hotspot = { 4, 7 },
       },
    }

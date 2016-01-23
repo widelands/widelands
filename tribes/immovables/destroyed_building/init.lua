@@ -7,15 +7,15 @@ tribes:new_immovable_type {
    descname = pgettext("immovable", "Destroyed building"),
    size = "big",
    programs = {
-		program = {
-			"animate=idle 30000",
-			"transform=ashes",
+      program = {
+         "animate=idle 30000",
+         "transform=ashes",
       }
    },
 
    animations = {
       idle = {
-         pictures = path.list_directory(dirname, "burn_\\d+.png"),
+         pictures = path.list_files(dirname .. "burn_??.png"),
          hotspot = { 40, 57 },
          fps = 10,
       },

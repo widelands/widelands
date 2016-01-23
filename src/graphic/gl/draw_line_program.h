@@ -20,37 +20,76 @@
 #ifndef WL_GRAPHIC_GL_DRAW_LINE_PROGRAM_H
 #define WL_GRAPHIC_GL_DRAW_LINE_PROGRAM_H
 
+#include <vector>
+
+#include "base/point.h"
+#include "base/rect.h"
+#include "graphic/blend_mode.h"
 #include "graphic/color.h"
 #include "graphic/gl/utils.h"
 
 class DrawLineProgram {
 public:
+	struct Arguments {
+		// The line is drawn from the top left to the bottom right of
+		// this rectangle.
+		FloatRect destination_rect;
+		float z_value;
+		RGBAColor color;
+		uint8_t line_width;
+		BlendMode blend_mode;
+	};
+
 	// Returns the (singleton) instance of this class.
 	static DrawLineProgram& instance();
 
 	// Draws a line from (x1, y1) to (x2, y2) which are in gl
 	// coordinates in 'color' with a 'line_width' in pixels.
-	void draw(float x1, float y1, float x2, float y2, const RGBColor& color, int line_width);
+	void draw(const FloatPoint& start,
+	          const FloatPoint& end,
+	          const float z_value,
+	          const RGBColor& color,
+	          const int line_width);
+
+	void draw(std::vector<Arguments> arguments);
+
 
 private:
 	DrawLineProgram();
 
 	struct PerVertexData {
-		float gl_x, gl_y;
+		PerVertexData(float init_gl_x,
+		              float init_gl_y,
+		              float init_gl_z,
+		              float init_color_r,
+		              float init_color_g,
+		              float init_color_b)
+		   : gl_x(init_gl_x),
+		     gl_y(init_gl_y),
+		     gl_z(init_gl_z),
+		     color_r(init_color_r),
+		     color_g(init_color_g),
+		     color_b(init_color_b) {
+		}
+
+		float gl_x, gl_y, gl_z;
+		float color_r, color_g, color_b;
 	};
-	static_assert(sizeof(PerVertexData) == 8, "Wrong padding.");
+	static_assert(sizeof(PerVertexData) == 24, "Wrong padding.");
+
+	// This is only kept around so that we do not constantly
+	// allocate memory for it.
+	std::vector<PerVertexData> vertices_;
 
 	// The buffer that contains the vertices for rendering.
-	Gl::Buffer gl_array_buffer_;
+	Gl::Buffer<PerVertexData> gl_array_buffer_;
 
 	// The program.
 	Gl::Program gl_program_;
 
 	// Attributes.
 	GLint attr_position_;
-
-	// Uniforms.
-	GLint u_color_;
+	GLint attr_color_;
 
 	DISALLOW_COPY_AND_ASSIGN(DrawLineProgram);
 };

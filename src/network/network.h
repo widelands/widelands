@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2008, 2012 by the Widelands Development Team
+ * Copyright (C) 2004-2008, 2012, 2015 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -45,11 +45,11 @@ struct SyncCallback {
  * to schedule taking a synchronization hash.
  */
 struct CmdNetCheckSync : public Widelands::Command {
-	CmdNetCheckSync (int32_t dt, SyncCallback *);
+	CmdNetCheckSync (uint32_t dt, SyncCallback *);
 
 	void execute (Widelands::Game &) override;
 
-	uint8_t id() const override {return QUEUE_CMD_NETCHECKSYNC;}
+	Widelands::QueueCommandTypes id() const override {return Widelands::QueueCommandTypes::kNetCheckSync;}
 
 private:
 	SyncCallback * m_callback;
@@ -81,7 +81,7 @@ private:
 	int32_t m_networktime;
 	int32_t m_time;
 
-	int32_t m_lastframe;
+	uint32_t m_lastframe;
 
 	/// This is an attempt to measure how far behind the network time we are.
 	uint32_t m_latency;

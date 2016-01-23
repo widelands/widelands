@@ -2,11 +2,11 @@ dirname = path.dirname(__file__)
 
 animations = {
    idle = {
-      pictures = path.list_directory(dirname, "idle_\\d+.png"),
+      pictures = path.list_files(dirname .. "idle_??.png"),
       hotspot = { 11, 23 },
    },
    work = {
-      pictures = path.list_directory(dirname, "work_\\d+.png"),
+      pictures = path.list_files(dirname .. "work_??.png"),
       sound_effect = {
             directory = "sound/hammering",
             name = "hammering",
@@ -24,26 +24,26 @@ tribes:new_worker_type {
    name = "barbarians_shipwright",
    -- TRANSLATORS: This is a worker name used in lists of workers
    descname = pgettext("barbarians_worker", "Shipwright"),
-   directory = dirname,
+   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    vision_range = 2,
 
    buildcost = {
-		barbarians_carrier = 1,
-		hammer = 1
-	},
+      barbarians_carrier = 1,
+      hammer = 1
+   },
 
-	programs = {
-		buildship = {
-			"walk object-or-coords",
-			"plant tribe:barbarians_shipconstruction unless object",
-			"playFX sound/sawmill/sawmill 230",
-			"animation work 500",
-			"construct",
-			"animation work 5000",
-			"return"
-		}
-	},
+   programs = {
+      buildship = {
+         "walk object-or-coords",
+         "plant tribe:barbarians_shipconstruction unless object",
+         "playFX sound/sawmill sawmill 230",
+         "animation work 500",
+         "construct",
+         "animation work 5000",
+         "return"
+      }
+   },
 
    animations = animations,
 }

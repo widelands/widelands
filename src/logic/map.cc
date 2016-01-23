@@ -34,21 +34,20 @@
 #include "economy/road.h"
 #include "editor/tools/editor_increase_resources_tool.h"
 #include "io/filesystem/layered_filesystem.h"
-#include "logic/checkstep.h"
 #include "logic/findimmovable.h"
 #include "logic/findnode.h"
+#include "logic/map_objects/checkstep.h"
+#include "logic/map_objects/tribes/soldier.h"
+#include "logic/map_objects/tribes/tribe_descr.h"
+#include "logic/map_objects/world/terrain_description.h"
+#include "logic/map_objects/world/world.h"
 #include "logic/mapfringeregion.h"
 #include "logic/objective.h"
 #include "logic/pathfield.h"
 #include "logic/player.h"
-#include "logic/soldier.h"
-#include "logic/tribes/tribe_descr.h"
-#include "logic/world/terrain_description.h"
-#include "logic/world/world.h"
 #include "map_io/s2map.h"
 #include "map_io/widelands_map_loader.h"
 #include "notifications/notifications.h"
-#include "wui/overlay_manager.h"
 
 namespace Widelands {
 
@@ -115,7 +114,6 @@ void Map::recalc_for_field_area(const World& world, const Area<FCoords> area) {
 	assert(area.y < m_height);
 	assert(m_fields.get() <= area.field);
 	assert            (area.field < m_fields.get() + max_index());
-	assert(m_overlay_manager);
 
 	{ //  First pass.
 		MapRegion<Area<FCoords> > mr(*this, area);
@@ -129,12 +127,6 @@ void Map::recalc_for_field_area(const World& world, const Area<FCoords> area) {
 	{ //  Second pass.
 		MapRegion<Area<FCoords> > mr(*this, area);
 		do recalc_nodecaps_pass2(world, mr.location()); while (mr.advance(*this));
-	}
-
-	{ //  Now only recaluclate the overlays.
-		OverlayManager & om = overlay_manager();
-		MapRegion<Area<FCoords> > mr(*this, area);
-		do om.recalc_field_overlays(mr.location()); while (mr.advance(*this));
 	}
 }
 
@@ -150,8 +142,6 @@ the overlays have completely changed.
 */
 void Map::recalc_whole_map(const World& world)
 {
-	assert(m_overlay_manager);
-
 	//  Post process the map in the necessary two passes to calculate
 	//  brightness and building caps
 	FCoords f;
@@ -171,27 +161,15 @@ void Map::recalc_whole_map(const World& world)
 			f = get_fcoords(Coords(x, y));
 			recalc_nodecaps_pass2(world, f);
 		}
-
-	//  Now only recaluclate the overlays.
-	for (int16_t y = 0; y < m_height; ++y)
-		for (int16_t x = 0; x < m_width; ++x)
-			overlay_manager().recalc_field_overlays(get_fcoords(Coords(x, y)));
 }
 
-/*
- * recalculates all default resources.
- *
- * This just needed for the game, not for
- * the editor. Since there, default resources
- * are not shown.
- */
 void Map::recalc_default_resources(const World& world) {
 	for (int16_t y = 0; y < m_height; ++y)
 		for (int16_t x = 0; x < m_width; ++x) {
 			FCoords f, f1;
 			f = get_fcoords(Coords(x, y));
 			//  only on unset nodes
-			if (f.field->get_resources() != 0 || f.field->get_resources_amount())
+			if (f.field->get_resources() != Widelands::kNoResource || f.field->get_resources_amount())
 				continue;
 			std::map<int32_t, int32_t> m;
 			int32_t amount = 0;
@@ -208,7 +186,7 @@ void Map::recalc_default_resources(const World& world) {
 				amount += terd.get_default_resource_amount();
 			}
 
-			//  If one of the neighbours is impassable, count its resource
+			//  If one of the neighbours is unwalkable, count its resource
 			//  stronger
 			//  top left neigbour
 			get_neighbour(f, WALK_NW, &f1);
@@ -216,7 +194,7 @@ void Map::recalc_default_resources(const World& world) {
 				const TerrainDescription& terr = world.terrain_descr(f1.field->terrain_r());
 				const int8_t resr = terr.get_default_resource();
 				const int default_amount = terr.get_default_resource_amount();
-				if ((terr.get_is() & TerrainDescription::Type::kImpassable) && default_amount > 0)
+				if ((terr.get_is() & TerrainDescription::Is::kUnwalkable) && default_amount > 0)
 					m[resr] += 3;
 				else
 					++m[resr];
@@ -226,7 +204,7 @@ void Map::recalc_default_resources(const World& world) {
 				const TerrainDescription& terd = world.terrain_descr(f1.field->terrain_d());
 				const int8_t resd = terd.get_default_resource();
 				const int default_amount = terd.get_default_resource_amount();
-				if ((terd.get_is() & TerrainDescription::Type::kImpassable) && default_amount > 0)
+				if ((terd.get_is() & TerrainDescription::Is::kUnwalkable) && default_amount > 0)
 					m[resd] += 3;
 				else
 					++m[resd];
@@ -239,7 +217,7 @@ void Map::recalc_default_resources(const World& world) {
 				const TerrainDescription& terd = world.terrain_descr(f1.field->terrain_d());
 				const int8_t resd = terd.get_default_resource();
 				const int default_amount = terd.get_default_resource_amount();
-				if ((terd.get_is() & TerrainDescription::Type::kImpassable) && default_amount > 0)
+				if ((terd.get_is() & TerrainDescription::Is::kUnwalkable) && default_amount > 0)
 					m[resd] += 3;
 				else
 					++m[resd];
@@ -252,7 +230,7 @@ void Map::recalc_default_resources(const World& world) {
 				const TerrainDescription& terr = world.terrain_descr(f1.field->terrain_r());
 				const int8_t resr = terr.get_default_resource();
 				const int default_amount = terr.get_default_resource_amount();
-				if ((terr.get_is() & TerrainDescription::Type::kImpassable) && default_amount > 0)
+				if ((terr.get_is() & TerrainDescription::Is::kUnwalkable) && default_amount > 0)
 					m[resr] += 3;
 				else
 					++m[resr];
@@ -272,11 +250,9 @@ void Map::recalc_default_resources(const World& world) {
 			amount /= 6;
 
 			if (res == -1 || !amount) {
-				f.field->set_resources(0, 0);
-				f.field->set_initial_res_amount(0);
+				clear_resources(f);
 			} else {
-				f.field->set_resources(res, amount);
-				f.field->set_initial_res_amount(amount);
+				initialize_resources(f, res, amount);
 			}
 
 		}
@@ -304,7 +280,6 @@ void Map::cleanup() {
 	m_hint = std::string();
 	m_background = std::string();
 
-	m_overlay_manager.reset();
 	objectives_.clear();
 
 	m_port_spaces.clear();
@@ -323,6 +298,7 @@ the given data
 */
 void Map::create_empty_map
 	(const World& world, uint32_t const w, uint32_t const h,
+	 const Widelands::DescriptionIndex default_terrain,
 	 const std::string& name,
 	 const std::string& author,
 	 const std::string& description)
@@ -342,13 +318,15 @@ void Map::create_empty_map
 
 	{
 		Field::Terrains default_terrains;
-		default_terrains.d = 0;
-		default_terrains.r = 0;
-		Field * field = m_fields.get();
-		const Field * const fields_end = field + max_index();
-		for (; field < fields_end; ++field) {
-			field->set_height(10);
-			field->set_terrains(default_terrains);
+		default_terrains.d = default_terrain;
+		default_terrains.r = default_terrain;
+		for (int16_t y = 0; y < m_height; ++y) {
+			for (int16_t x = 0; x < m_width; ++x) {
+				auto f = get_fcoords(Coords(x, y));
+				f.field->set_height(10);
+				f.field->set_terrains(default_terrains);
+				clear_resources(f);
+			}
 		}
 	}
 	recalc_whole_map(world);
@@ -419,8 +397,6 @@ void Map::set_origin(Coords const new_origin) {
 		new_port_spaces.insert(temp);
 	}
 	m_port_spaces = new_port_spaces;
-
-	m_overlay_manager.reset(new OverlayManager());
 }
 
 
@@ -442,8 +418,6 @@ void Map::set_size(const uint32_t w, const uint32_t h)
 	memset(m_fields.get(), 0, sizeof(Field) * w * h);
 
 	m_pathfieldmgr->set_size(w * h);
-
-	m_overlay_manager.reset(new OverlayManager());
 }
 
 /*
@@ -1040,51 +1014,51 @@ NodeCaps Map::_calc_nodecaps_pass1(const World& world, FCoords const f, bool con
 	const FCoords tl = tl_n(f);
 	const FCoords  l =  l_n(f);
 
-	const TerrainDescription::Type tr_d_terrain_is =
+	const TerrainDescription::Is tr_d_terrain_is =
 		world.terrain_descr(tr.field->terrain_d()).get_is();
-	const TerrainDescription::Type tl_r_terrain_is =
+	const TerrainDescription::Is tl_r_terrain_is =
 		world.terrain_descr(tl.field->terrain_r()).get_is();
-	const TerrainDescription::Type tl_d_terrain_is =
+	const TerrainDescription::Is tl_d_terrain_is =
 		world.terrain_descr(tl.field->terrain_d()).get_is();
-	const TerrainDescription::Type  l_r_terrain_is =
+	const TerrainDescription::Is  l_r_terrain_is =
 		world.terrain_descr (l.field->terrain_r()).get_is();
-	const TerrainDescription::Type  f_d_terrain_is =
+	const TerrainDescription::Is  f_d_terrain_is =
 		world.terrain_descr (f.field->terrain_d()).get_is();
-	const TerrainDescription::Type  f_r_terrain_is =
+	const TerrainDescription::Is  f_r_terrain_is =
 		world.terrain_descr (f.field->terrain_r()).get_is();
 
 	//  1b) Collect some information about the neighbours
-	uint8_t cnt_impassable = 0;
+	uint8_t cnt_unwalkable = 0;
 	uint8_t cnt_water = 0;
-	uint8_t cnt_dead = 0;
+	uint8_t cnt_unreachable = 0;
 
-	if  (tr_d_terrain_is & TerrainDescription::Type::kImpassable) ++cnt_impassable;
-	if  (tl_r_terrain_is & TerrainDescription::Type::kImpassable) ++cnt_impassable;
-	if  (tl_d_terrain_is & TerrainDescription::Type::kImpassable) ++cnt_impassable;
-	if   (l_r_terrain_is & TerrainDescription::Type::kImpassable) ++cnt_impassable;
-	if   (f_d_terrain_is & TerrainDescription::Type::kImpassable) ++cnt_impassable;
-	if   (f_r_terrain_is & TerrainDescription::Type::kImpassable) ++cnt_impassable;
+	if  (tr_d_terrain_is & TerrainDescription::Is::kUnwalkable) ++cnt_unwalkable;
+	if  (tl_r_terrain_is & TerrainDescription::Is::kUnwalkable) ++cnt_unwalkable;
+	if  (tl_d_terrain_is & TerrainDescription::Is::kUnwalkable) ++cnt_unwalkable;
+	if   (l_r_terrain_is & TerrainDescription::Is::kUnwalkable) ++cnt_unwalkable;
+	if   (f_d_terrain_is & TerrainDescription::Is::kUnwalkable) ++cnt_unwalkable;
+	if   (f_r_terrain_is & TerrainDescription::Is::kUnwalkable) ++cnt_unwalkable;
 
-	if  (tr_d_terrain_is & TerrainDescription::Type::kWater)      ++cnt_water;
-	if  (tl_r_terrain_is & TerrainDescription::Type::kWater)      ++cnt_water;
-	if  (tl_d_terrain_is & TerrainDescription::Type::kWater)      ++cnt_water;
-	if   (l_r_terrain_is & TerrainDescription::Type::kWater)      ++cnt_water;
-	if   (f_d_terrain_is & TerrainDescription::Type::kWater)      ++cnt_water;
-	if   (f_r_terrain_is & TerrainDescription::Type::kWater)      ++cnt_water;
+	if  (tr_d_terrain_is & TerrainDescription::Is::kWater)      ++cnt_water;
+	if  (tl_r_terrain_is & TerrainDescription::Is::kWater)      ++cnt_water;
+	if  (tl_d_terrain_is & TerrainDescription::Is::kWater)      ++cnt_water;
+	if   (l_r_terrain_is & TerrainDescription::Is::kWater)      ++cnt_water;
+	if   (f_d_terrain_is & TerrainDescription::Is::kWater)      ++cnt_water;
+	if   (f_r_terrain_is & TerrainDescription::Is::kWater)      ++cnt_water;
 
-	if  (tr_d_terrain_is & TerrainDescription::Type::kDead)       ++cnt_dead;
-	if  (tl_r_terrain_is & TerrainDescription::Type::kDead)       ++cnt_dead;
-	if  (tl_d_terrain_is & TerrainDescription::Type::kDead)       ++cnt_dead;
-	if   (l_r_terrain_is & TerrainDescription::Type::kDead)       ++cnt_dead;
-	if   (f_d_terrain_is & TerrainDescription::Type::kDead)       ++cnt_dead;
-	if   (f_r_terrain_is & TerrainDescription::Type::kDead)       ++cnt_dead;
+	if  (tr_d_terrain_is & TerrainDescription::Is::kUnreachable)       ++cnt_unreachable;
+	if  (tl_r_terrain_is & TerrainDescription::Is::kUnreachable)       ++cnt_unreachable;
+	if  (tl_d_terrain_is & TerrainDescription::Is::kUnreachable)       ++cnt_unreachable;
+	if   (l_r_terrain_is & TerrainDescription::Is::kUnreachable)       ++cnt_unreachable;
+	if   (f_d_terrain_is & TerrainDescription::Is::kUnreachable)       ++cnt_unreachable;
+	if   (f_r_terrain_is & TerrainDescription::Is::kUnreachable)       ++cnt_unreachable;
 
 
 	//  2) Passability
 
 	//  2a) If any of the neigbouring triangles is walkable this node is
 	//  walkable.
-	if (cnt_impassable < 6)
+	if (cnt_unwalkable < 6)
 		caps |= MOVECAPS_WALK;
 
 	//  2b) If all neighbouring triangles are water, the node is swimable.
@@ -1094,7 +1068,7 @@ NodeCaps Map::_calc_nodecaps_pass1(const World& world, FCoords const f, bool con
 
 	// 2c) [OVERRIDE] If any of the neighbouring triangles is really "bad" (such
 	// as lava), we can neither walk nor swim to this node.
-	if (cnt_dead)
+	if (cnt_unreachable)
 		caps &= ~(MOVECAPS_WALK | MOVECAPS_SWIM);
 
 	//  === everything below is used to check buildability ===
@@ -1109,7 +1083,7 @@ NodeCaps Map::_calc_nodecaps_pass1(const World& world, FCoords const f, bool con
 				&&
 				imm->get_size() >= BaseImmovable::SMALL)
 			{
-				// 3b) [OVERRIDE] check for "impassable" MapObjects
+				// 3b) [OVERRIDE] check for "unwalkable" MapObjects
 				if (!imm->get_passable())
 					caps &= ~(MOVECAPS_WALK | MOVECAPS_SWIM);
 				return static_cast<NodeCaps>(caps);
@@ -1272,7 +1246,7 @@ int Map::calc_buildsize
 	const FCoords tl = tl_n(f);
 	const FCoords  l =  l_n(f);
 
-	const TerrainDescription::Type terrains[6] = {
+	const TerrainDescription::Is terrains[6] = {
 		world.terrain_descr(tr.field->terrain_d()).get_is(),
 		world.terrain_descr(tl.field->terrain_r()).get_is(),
 		world.terrain_descr(tl.field->terrain_d()).get_is(),
@@ -1281,21 +1255,22 @@ int Map::calc_buildsize
 		world.terrain_descr (f.field->terrain_r()).get_is()
 	};
 
-	uint32_t cnt_mountain = 0;
-	uint32_t cnt_dry = 0;
+	uint32_t cnt_mineable = 0;
+	uint32_t cnt_walkable = 0;
 	for (uint32_t i = 0; i < 6; ++i) {
-		if (terrains[i] & TerrainDescription::Type::kWater)
+		if (terrains[i] & TerrainDescription::Is::kWater ||
+			 terrains[i] & TerrainDescription::Is::kUnwalkable)
 			return BaseImmovable::NONE;
-		if (terrains[i] & TerrainDescription::Type::kMountain) ++cnt_mountain;
-		if (terrains[i] & TerrainDescription::Type::kDry) ++cnt_dry;
+		if (terrains[i] & TerrainDescription::Is::kMineable) ++cnt_mineable;
+		if (terrains[i] & TerrainDescription::Is::kWalkable) ++cnt_walkable;
 	}
 
-	if (cnt_mountain == 6) {
+	if (cnt_mineable == 6) {
 		if (ismine)
 			*ismine = true;
 		return BaseImmovable::SMALL;
 	}
-	if (cnt_mountain || cnt_dry)
+	if (cnt_mineable || cnt_walkable)
 		return BaseImmovable::NONE;
 
 	// Adjust size based on neighbouring immovables
@@ -1853,29 +1828,114 @@ bool Map::can_reach_by_water(const Coords field) const
 	return false;
 }
 
-/*
-===========
-changes the given triangle's terrain.
-this happens in the editor and might happen in the game
-too if some kind of land increasement is implemented (like
-drying swamps).
-The nodecaps need to be recalculated
-
-returns the radius of changes (which are always 2)
-===========
-*/
 int32_t Map::change_terrain
-	(const World& world, TCoords<FCoords> const c, TerrainIndex const terrain)
+	(const World& world, TCoords<FCoords> const c, DescriptionIndex const terrain)
 {
 	c.field->set_terrain(c.t, terrain);
 
-	Notifications::publish(NoteFieldTransformed(c, c.field - &m_fields[0]));
+	// remove invalid resources if necessary
+	// check vertex to which the triangle belongs
+	if (!is_resource_valid(world, c, c.field->get_resources())){
+		clear_resources(c);
+	}
+
+	// always check south-east vertex
+	Widelands::FCoords f_se(c, c.field);
+	get_neighbour(f_se, Widelands::WALK_SE, &f_se);
+	if (!is_resource_valid(world, f_se, f_se.field->get_resources())){
+		clear_resources(f_se);
+	}
+
+	// check south-west vertex if d-Triangle is changed, check east vertex if r-Triangle is changed
+	Widelands::FCoords f_sw_e(c, c.field);
+	get_neighbour(f_sw_e, c.t == TCoords<FCoords>::D ? Widelands::WALK_SW : Widelands::WALK_E, &f_sw_e);
+	if (!is_resource_valid(world, f_sw_e, f_sw_e.field->get_resources())){
+		clear_resources(f_sw_e);
+	}
+
+	Notifications::publish(
+	   NoteFieldTerrainChanged{c, static_cast<MapIndex>(c.field - &m_fields[0])});
 
 	recalc_for_field_area(world, Area<FCoords>(c, 2));
 
 	return 2;
 }
 
+bool Map::is_resource_valid
+	(const Widelands::World& world, const TCoords<Widelands::FCoords>& c, int32_t const curres)
+{
+	if (curres == Widelands::kNoResource)
+		return true;
+
+	Widelands::FCoords f(c, c.field);
+	Widelands::FCoords f1;
+
+	int32_t count = 0;
+
+	//  this field
+	count += world.terrain_descr(f.field->terrain_r()).is_resource_valid(curres);
+	count += world.terrain_descr(f.field->terrain_d()).is_resource_valid(curres);
+
+	//  If one of the neighbours is impassable, count its resource stronger.
+	//  top left neigbour
+	get_neighbour(f, Widelands::WALK_NW, &f1);
+	count += world.terrain_descr(f1.field->terrain_r()).is_resource_valid(curres);
+	count += world.terrain_descr(f1.field->terrain_d()).is_resource_valid(curres);
+
+	//  top right neigbour
+	get_neighbour(f, Widelands::WALK_NE, &f1);
+	count += world.terrain_descr(f1.field->terrain_d()).is_resource_valid(curres);
+
+	//  left neighbour
+	get_neighbour(f, Widelands::WALK_W, &f1);
+	count += world.terrain_descr(f1.field->terrain_r()).is_resource_valid(curres);
+
+	return count > 1;
+}
+
+void Map::ensure_resource_consistency(const World& world)
+{
+	for (MapIndex i = 0; i < max_index(); ++i) {
+		auto fcords = get_fcoords(m_fields[i]);
+		if (!is_resource_valid(world, fcords, fcords.field->get_resources())) {
+			clear_resources(fcords);
+		}
+	}
+}
+
+void Map::initialize_resources(const FCoords& c,
+                               const DescriptionIndex resource_type,
+                               uint8_t amount) {
+	// You cannot have an amount of nothing.
+	if (resource_type == Widelands::kNoResource) {
+		amount = 0;
+	}
+	const auto note = NoteFieldResourceChanged{
+	   c, c.field->m_resources, c.field->m_initial_res_amount, c.field->m_res_amount,
+	};
+
+	c.field->m_resources = resource_type;
+	c.field->m_initial_res_amount = amount;
+	c.field->m_res_amount = amount;
+	Notifications::publish(note);
+}
+
+void Map::set_resources(const FCoords& c, uint8_t amount) {
+	// You cannot change the amount of resources on a field without resources.
+	if (c.field->m_resources == Widelands::kNoResource) {
+		return;
+	}
+	assert(amount <= c.field->m_initial_res_amount);
+	const auto note = NoteFieldResourceChanged{
+	   c, c.field->m_resources, c.field->m_initial_res_amount, c.field->m_res_amount,
+	};
+	c.field->m_res_amount = amount;
+	Notifications::publish(note);
+}
+
+void Map::clear_resources(const FCoords& c) {
+	initialize_resources(c, Widelands::kNoResource, 0);
+}
 
 uint32_t Map::set_height(const World& world, const FCoords fc, uint8_t const new_value) {
 	assert(new_value <= MAX_FIELD_HEIGHT);
@@ -2059,6 +2119,16 @@ bool Map::allows_seafaring() {
 				swim_coords.insert(swim_coord);
 			else
 				return true;
+	}
+	return false;
+}
+
+bool Map::has_artifacts(const World& world) {
+	for (int32_t i = 0; i < world.get_nr_immovables(); ++i) {
+		const ImmovableDescr& descr = *world.get_immovable_descr(i);
+		if (descr.has_attribute(descr.get_attribute_id("artifact"))) {
+			return true;
+		}
 	}
 	return false;
 }

@@ -52,8 +52,6 @@ private:
 		(DismantleSite       &, FileRead  &, Game &, MapObjectLoader &);
 	void read_partially_finished_building
 		(PartiallyFinishedBuilding   &, FileRead  &, Game &, MapObjectLoader &);
-	void read_constructionsite_v1
-		(ConstructionSite       &, FileRead  &, Game &, MapObjectLoader &);
 	void read_warehouse
 		(Warehouse              &, FileRead  &, Game &, MapObjectLoader &);
 	void read_militarysite
@@ -62,8 +60,6 @@ private:
 		(TrainingSite           &, FileRead  &, Game &, MapObjectLoader &);
 	void read_productionsite
 		(ProductionSite         &, FileRead  &, Game &, MapObjectLoader &);
-	void read_formerbuildings_v2
-		(Building               &, FileRead  &, Game& game, MapObjectLoader &);
 
 	void write_constructionsite
 		(const ConstructionSite &, FileWrite &, Game &, MapObjectSaver  &);

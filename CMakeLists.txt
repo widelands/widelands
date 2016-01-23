@@ -4,7 +4,8 @@ cmake_minimum_required (VERSION 2.8.7)
 
 include("${CMAKE_SOURCE_DIR}/cmake/WlFunctions.cmake")
 
-option(OPTION_USE_GLBINDING "USe glbinding instead of GLEW" OFF)
+option(OPTION_USE_GLBINDING "Use glbinding instead of GLEW" OFF)
+option(OPTION_GLEW_STATIC "Use static GLEW Library" OFF)
 
 if (CMAKE_SOURCE_DIR STREQUAL CMAKE_BINARY_DIR)
   message(FATAL_ERROR "Build directory and source directory must not be the same.")
@@ -30,7 +31,11 @@ endif()
 
 SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake/Modules)
 
-set (Boost_USE_STATIC_LIBS  OFF)
+if (WIN32)
+  set (Boost_USE_STATIC_LIBS  ON)
+else()
+  set (Boost_USE_STATIC_LIBS  OFF)
+endif()
 set (Boost_USE_MULTITHREADED ON)
 set (Boost_DETAILED_FAILURE_MSG ON)
 find_package(Boost 1.48
@@ -152,7 +157,6 @@ else()
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wpacked")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wpointer-arith")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wredundant-decls")
-  wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wshadow")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wsign-promo")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wswitch-default")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wsync-nand")
@@ -163,8 +167,9 @@ else()
 endif()
 
 # Turn some warnings into errors.
-wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Werror=uninitialized")
 wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Werror=return-type")
+wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Werror=shadow")
+wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Werror=uninitialized")
 
 
 IF (WIN32)
@@ -238,7 +243,6 @@ install(
   DIRECTORY
     campaigns
     i18n
-    global
     tribes
     txts
     world

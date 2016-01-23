@@ -5,22 +5,22 @@ tribes:new_ware_type {
    name = "fish",
    -- TRANSLATORS: This is a ware name used in lists of wares
    descname = pgettext("ware", "Fish"),
-   directory = dirname,
+   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    default_target_quantity = {
-		atlanteans = 20,
-		barbarians = 20,
-		empire = 10
-	},
+      atlanteans = 20,
+      barbarians = 20,
+      empire = 10
+   },
    preciousness = {
-		atlanteans = 4,
-		barbarians = 3,
-		empire = 3
-	},
+      atlanteans = 4,
+      barbarians = 3,
+      empire = 3
+   },
 
    animations = {
       idle = {
-         pictures = { dirname .. "idle.png" },
+         pictures = path.list_files(dirname .. "idle.png"),
          hotspot = { 8, 6 },
       },
    }

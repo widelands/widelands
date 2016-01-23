@@ -24,8 +24,8 @@
 
 #include <stdint.h>
 
-#include "logic/ware_descr.h"
-#include "logic/wareworker.h"
+#include "logic/map_objects/tribes/ware_descr.h"
+#include "logic/map_objects/tribes/wareworker.h"
 #include "ui_basic/button.h"
 #include "ui_basic/panel.h"
 #include "ui_basic/radiobutton.h"
@@ -75,7 +75,7 @@ private:
 	UI::Radiogroup        * m_priority_radiogroup;
 	UI::Button   * m_increase_max_fill;
 	UI::Button   * m_decrease_max_fill;
-	Widelands::WareIndex   m_ware_index;
+	Widelands::DescriptionIndex   m_ware_index;
 	Widelands::WareWorker m_ware_type;
 	const Image* m_icon;            //< Index to ware's picture
 	const Image* m_max_fill_indicator;

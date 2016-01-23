@@ -64,7 +64,7 @@ end
 function ui_tests:test_descendant_position()
    self.mv.buttons.messages:click()
    local w = self.mv.windows.messages
-   local b = w.buttons.invert_selection
+   local b = w.buttons.toggle_between_inbox_or_archive
 
    w.position_x = 50
    w.position_y = 50
@@ -188,5 +188,3 @@ function mv_tests:test_statistics()
    assert_equal(true, self.mv.statistics)
    assert_equal(false, self.mv.census)
 end
-
-

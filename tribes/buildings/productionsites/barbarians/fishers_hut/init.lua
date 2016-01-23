@@ -5,57 +5,59 @@ tribes:new_productionsite_type {
    name = "barbarians_fishers_hut",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("barbarians_building", "Fisher’s Hut"),
-   directory = dirname,
+   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "small",
 
    buildcost = {
-		log = 4
-	},
-	return_on_dismantle = {
-		log = 2
-	},
+      log = 4
+   },
+   return_on_dismantle = {
+      log = 2
+   },
 
    animations = {
-		idle = {
-			pictures = path.list_directory(dirname, "idle_\\d+.png"),
-			hotspot = { 39, 52 },
-		},
-		build = {
-			pictures = path.list_directory(dirname, "build_\\d+.png"),
-			hotspot = { 39, 52 },
-		},
-		unoccupied = {
-			pictures = path.list_directory(dirname, "unoccupied_\\d+.png"),
-			hotspot = { 39, 52 },
-		},
-	},
+      idle = {
+         pictures = path.list_files(dirname .. "idle_??.png"),
+         hotspot = { 39, 52 },
+      },
+      build = {
+         pictures = path.list_files(dirname .. "build_??.png"),
+         hotspot = { 39, 52 },
+      },
+      unoccupied = {
+         pictures = path.list_files(dirname .. "unoccupied_??.png"),
+         hotspot = { 39, 52 },
+      },
+   },
 
    aihints = {
-		needs_water = true,
-		prohibited_till = 900
+      needs_water = true,
+      prohibited_till = 900
    },
 
-	working_positions = {
-		barbarians_fisher = 1
-	},
+   working_positions = {
+      barbarians_fisher = 1
+   },
 
    outputs = {
-		"fish"
+      "fish"
    },
 
-	programs = {
-		work = {
-			-- TRANSLATORS: Completed/Skipped/Did not start fishing because ...
-			descname = _"fishing",
-			actions = {
-				"sleep=18000",
-				"worker=fish"
-			}
-		},
-	},
-	out_of_resource_notification = {
-		title = _"Out of Fish",
-		message = pgettext("barbarians_building", "The fisher working out of this fisher’s hut can’t find any fish in his work area."),
-	},
+   programs = {
+      work = {
+         -- TRANSLATORS: Completed/Skipped/Did not start fishing because ...
+         descname = _"fishing",
+         actions = {
+            "sleep=18000",
+            "worker=fish"
+         }
+      },
+   },
+   out_of_resource_notification = {
+      -- Translators: Short for "Out of ..." for a resource
+      title = _"No Fish",
+      heading = _"Out of Fish",
+      message = pgettext("barbarians_building", "The fisher working out of this fisher’s hut can’t find any fish in his work area."),
+   },
 }

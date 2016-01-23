@@ -7,15 +7,15 @@ tribes:new_immovable_type {
    descname = pgettext("immovable", "Cornfield (harvested)"),
    attributes = { "field" },
    programs = {
-		disappear = {
-			"animate=idle 50000",
-			"remove=",
+      disappear = {
+         "animate=idle 50000",
+         "remove=",
       }
    },
 
    animations = {
       idle = {
-         pictures = path.list_directory(dirname, "idle_\\d+.png"),
+         pictures = path.list_files(dirname .. "idle_??.png"),
          hotspot = { 31, 30 },
       },
    }

@@ -5,22 +5,22 @@ tribes:new_ware_type {
    name = "granite",
    -- TRANSLATORS: This is a ware name used in lists of wares
    descname = pgettext("ware", "Granite"),
-   directory = dirname,
+   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    default_target_quantity = {
-		atlanteans = 20,
-		barbarians = 20,
-		empire = 30
-	},
+      atlanteans = 20,
+      barbarians = 20,
+      empire = 30
+   },
    preciousness = {
-		atlanteans = 5,
-		barbarians = 5,
-		empire = 0
-	},
+      atlanteans = 5,
+      barbarians = 5,
+      empire = 0
+   },
 
    animations = {
       idle = {
-         pictures = { dirname .. "idle.png" },
+         pictures = path.list_files(dirname .. "idle.png"),
          hotspot = { 7, 8 },
       },
    }

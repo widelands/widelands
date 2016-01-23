@@ -7,9 +7,9 @@ tribes:new_immovable_type {
    descname = pgettext("immovable", "Ship Under Construction"),
    size = "small",
    programs = {
-		program = {
-			"construction=idle 5000 210000",
-			"transform=bob tribe:barbarians_ship",
+      program = {
+         "construction=idle 5000 210000",
+         "transform=bob tribe:barbarians_ship",
       }
    },
    buildcost = {
@@ -20,7 +20,7 @@ tribes:new_immovable_type {
 
    animations = {
       idle = {
-         pictures = path.list_directory(dirname, "build_\\d+.png"),
+         pictures = path.list_files(dirname .. "build_??.png"),
          hotspot = { 115, 82 },
          fps = 1
       },

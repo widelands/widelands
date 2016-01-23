@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2012 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2012, 2015 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -43,23 +43,22 @@
 #include "io/fileread.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "io/filewrite.h"
-#include "logic/carrier.h"
 #include "logic/cmd_calculate_statistics.h"
 #include "logic/cmd_luacoroutine.h"
 #include "logic/cmd_luascript.h"
 #include "logic/game_settings.h"
-#include "logic/militarysite.h"
+#include "logic/map_objects/tribes/carrier.h"
+#include "logic/map_objects/tribes/militarysite.h"
+#include "logic/map_objects/tribes/ship.h"
+#include "logic/map_objects/tribes/soldier.h"
+#include "logic/map_objects/tribes/trainingsite.h"
+#include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/player.h"
 #include "logic/playercommand.h"
 #include "logic/replay.h"
-#include "logic/ship.h"
 #include "logic/single_player_game_controller.h"
-#include "logic/soldier.h"
-#include "logic/trainingsite.h"
-#include "logic/tribes/tribe_descr.h"
 #include "map_io/widelands_map_loader.h"
 #include "network/network.h"
-#include "profile/profile.h"
 #include "scripting/logic.h"
 #include "scripting/lua_table.h"
 #include "sound/sound_handler.h"
@@ -630,7 +629,7 @@ void Game::think()
 		cmdqueue().run_queue(m_ctrl->get_frametime(), get_gametime_pointer());
 
 		// check if autosave is needed
-		m_savehandler.think(*this, WLApplication::get()->get_time());
+		m_savehandler.think(*this);
 	}
 }
 
@@ -751,7 +750,7 @@ void Game::send_player_dismantle (PlayerImmovable & pi)
 
 
 void Game::send_player_build
-	(int32_t const pid, Coords const coords, BuildingIndex const id)
+	(int32_t const pid, Coords const coords, DescriptionIndex const id)
 {
 	assert(tribes().building_exists(id));
 	send_player_command (*new CmdBuild(get_gametime(), pid, coords, id));
@@ -796,7 +795,7 @@ void Game::send_player_start_or_cancel_expedition (Building & building)
 }
 
 void Game::send_player_enhance_building
-	(Building & building, BuildingIndex const id)
+	(Building & building, DescriptionIndex const id)
 {
 	assert(building.owner().tribe().has_building(id));
 
@@ -815,7 +814,7 @@ void Game::send_player_evict_worker(Worker & worker)
 void Game::send_player_set_ware_priority
 	(PlayerImmovable &       imm,
 	 int32_t           const type,
-	 WareIndex        const index,
+	 DescriptionIndex        const index,
 	 int32_t           const prio)
 {
 	send_player_command
@@ -830,7 +829,7 @@ void Game::send_player_set_ware_priority
 
 void Game::send_player_set_ware_max_fill
 	(PlayerImmovable &       imm,
-	 WareIndex        const index,
+	 DescriptionIndex        const index,
 	 uint32_t          const max_fill)
 {
 	send_player_command
@@ -995,11 +994,11 @@ void Game::sample_statistics()
 			Economy * const eco = plr->get_economy_by_number(j);
 			const TribeDescr & tribe = plr->tribe();
 
-			for (const WareIndex& ware_index : tribe.wares()) {
+			for (const DescriptionIndex& ware_index : tribe.wares()) {
 				wastock += eco->stock_ware(ware_index);
 			}
 
-			for (const WareIndex& worker_index : tribe.workers()) {
+			for (const DescriptionIndex& worker_index : tribe.workers()) {
 				if (tribe.get_worker_descr(worker_index)->type() != MapObjectType::CARRIER) {
 					wostock += eco->stock_worker(worker_index);
 				}
@@ -1068,56 +1067,49 @@ void Game::sample_statistics()
  * Read statistics data from a file.
  *
  * \param fr file to read from
- * \param version indicates the kind of statistics file; the current version
- *   is 4, support for older versions (used in widelands build <= 12) was
- *   dropped after the release of build 15
  */
-void Game::read_statistics(FileRead & fr, uint32_t const version)
+void Game::read_statistics(FileRead & fr)
 {
-	if (version >= 3) {
-		fr.unsigned_32(); // used to be last stats update time
+	fr.unsigned_32(); // used to be last stats update time
 
-		// Read general statistics
-		uint32_t entries = fr.unsigned_16();
-		const PlayerNumber nr_players = map().get_nrplayers();
-		m_general_stats.resize(nr_players);
+	// Read general statistics
+	uint32_t entries = fr.unsigned_16();
+	const PlayerNumber nr_players = map().get_nrplayers();
+	m_general_stats.resize(nr_players);
 
-		iterate_players_existing_novar(p, nr_players, *this) {
-			m_general_stats[p - 1].land_size       .resize(entries);
-			m_general_stats[p - 1].nr_workers      .resize(entries);
-			m_general_stats[p - 1].nr_buildings    .resize(entries);
-			m_general_stats[p - 1].nr_wares        .resize(entries);
-			m_general_stats[p - 1].productivity    .resize(entries);
-			m_general_stats[p - 1].nr_casualties   .resize(entries);
-			m_general_stats[p - 1].nr_kills        .resize(entries);
-			m_general_stats[p - 1].nr_msites_lost        .resize(entries);
-			m_general_stats[p - 1].nr_msites_defeated    .resize(entries);
-			m_general_stats[p - 1].nr_civil_blds_lost    .resize(entries);
-			m_general_stats[p - 1].nr_civil_blds_defeated.resize(entries);
-			m_general_stats[p - 1].miltary_strength.resize(entries);
-			m_general_stats[p - 1].custom_statistic.resize(entries);
+	iterate_players_existing_novar(p, nr_players, *this) {
+		m_general_stats[p - 1].land_size       .resize(entries);
+		m_general_stats[p - 1].nr_workers      .resize(entries);
+		m_general_stats[p - 1].nr_buildings    .resize(entries);
+		m_general_stats[p - 1].nr_wares        .resize(entries);
+		m_general_stats[p - 1].productivity    .resize(entries);
+		m_general_stats[p - 1].nr_casualties   .resize(entries);
+		m_general_stats[p - 1].nr_kills        .resize(entries);
+		m_general_stats[p - 1].nr_msites_lost        .resize(entries);
+		m_general_stats[p - 1].nr_msites_defeated    .resize(entries);
+		m_general_stats[p - 1].nr_civil_blds_lost    .resize(entries);
+		m_general_stats[p - 1].nr_civil_blds_defeated.resize(entries);
+		m_general_stats[p - 1].miltary_strength.resize(entries);
+		m_general_stats[p - 1].custom_statistic.resize(entries);
+	}
+
+	iterate_players_existing_novar(p, nr_players, *this)
+		for (uint32_t j = 0; j < m_general_stats[p - 1].land_size.size(); ++j)
+		{
+			m_general_stats[p - 1].land_size       [j] = fr.unsigned_32();
+			m_general_stats[p - 1].nr_workers      [j] = fr.unsigned_32();
+			m_general_stats[p - 1].nr_buildings    [j] = fr.unsigned_32();
+			m_general_stats[p - 1].nr_wares        [j] = fr.unsigned_32();
+			m_general_stats[p - 1].productivity    [j] = fr.unsigned_32();
+			m_general_stats[p - 1].nr_casualties   [j] = fr.unsigned_32();
+			m_general_stats[p - 1].nr_kills        [j] = fr.unsigned_32();
+			m_general_stats[p - 1].nr_msites_lost        [j] = fr.unsigned_32();
+			m_general_stats[p - 1].nr_msites_defeated    [j] = fr.unsigned_32();
+			m_general_stats[p - 1].nr_civil_blds_lost    [j] = fr.unsigned_32();
+			m_general_stats[p - 1].nr_civil_blds_defeated[j] = fr.unsigned_32();
+			m_general_stats[p - 1].miltary_strength[j] = fr.unsigned_32();
+			m_general_stats[p - 1].custom_statistic[j] = fr.unsigned_32();
 		}
-
-		iterate_players_existing_novar(p, nr_players, *this)
-			for (uint32_t j = 0; j < m_general_stats[p - 1].land_size.size(); ++j)
-			{
-				m_general_stats[p - 1].land_size       [j] = fr.unsigned_32();
-				m_general_stats[p - 1].nr_workers      [j] = fr.unsigned_32();
-				m_general_stats[p - 1].nr_buildings    [j] = fr.unsigned_32();
-				m_general_stats[p - 1].nr_wares        [j] = fr.unsigned_32();
-				m_general_stats[p - 1].productivity    [j] = fr.unsigned_32();
-				m_general_stats[p - 1].nr_casualties   [j] = fr.unsigned_32();
-				m_general_stats[p - 1].nr_kills        [j] = fr.unsigned_32();
-				m_general_stats[p - 1].nr_msites_lost        [j] = fr.unsigned_32();
-				m_general_stats[p - 1].nr_msites_defeated    [j] = fr.unsigned_32();
-				m_general_stats[p - 1].nr_civil_blds_lost    [j] = fr.unsigned_32();
-				m_general_stats[p - 1].nr_civil_blds_defeated[j] = fr.unsigned_32();
-				m_general_stats[p - 1].miltary_strength[j] = fr.unsigned_32();
-				if (version == 4)
-					m_general_stats[p - 1].custom_statistic[j] = fr.unsigned_32();
-			}
-	} else
-		throw wexception("Unsupported version %i", version);
 }
 
 

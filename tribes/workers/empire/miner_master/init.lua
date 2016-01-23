@@ -2,7 +2,7 @@ dirname = path.dirname(__file__)
 
 animations = {
    idle = {
-      pictures = path.list_directory(dirname, "idle_\\d+.png"),
+      pictures = path.list_files(dirname .. "idle_??.png"),
       hotspot = { 7, 22 }
    }
 }
@@ -15,7 +15,7 @@ tribes:new_worker_type {
    name = "empire_miner_master",
    -- TRANSLATORS: This is a worker name used in lists of workers
    descname = pgettext("empire_worker", "Master Miner"),
-   directory = dirname,
+   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    vision_range = 2,
 

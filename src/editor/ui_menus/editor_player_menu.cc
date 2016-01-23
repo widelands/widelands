@@ -28,14 +28,13 @@
 #include "graphic/graphic.h"
 #include "logic/constants.h"
 #include "logic/map.h"
+#include "logic/map_objects/tribes/tribes.h"
+#include "logic/map_objects/tribes/warehouse.h"
 #include "logic/player.h"
-#include "logic/tribes/tribes.h"
-#include "logic/warehouse.h"
-#include "profile/profile.h"
 #include "ui_basic/editbox.h"
 #include "ui_basic/messagebox.h"
 #include "ui_basic/textarea.h"
-#include "wui/overlay_manager.h"
+#include "wui/field_overlay_manager.h"
 
 #define UNDEFINED_TRIBE_NAME "<undefined>"
 
@@ -231,11 +230,10 @@ void EditorPlayerMenu::clicked_remove_last_player() {
 			char picsname[] = "pics/editor_player_00_starting_pos.png";
 			picsname[19] += old_nr_players / 10;
 			picsname[20] += old_nr_players % 10;
-			map.overlay_manager().remove_overlay
-				(sp, g_gr->images().get(picsname));
+			menu.mutable_field_overlay_manager()->remove_overlay(sp, g_gr->images().get(picsname));
 		}
 		// if removed player was selected switch to the next highest player
-		if (old_nr_players == menu.tools.set_starting_pos.get_current_player())
+		if (old_nr_players == menu.tools()->set_starting_pos.get_current_player())
 			set_starting_pos_clicked(nr_players);
 	}
 	map.set_nrplayers(nr_players);
@@ -254,18 +252,18 @@ void EditorPlayerMenu::clicked_remove_last_player() {
 void EditorPlayerMenu::player_tribe_clicked(uint8_t n) {
 	EditorInteractive& menu = eia();
 	if (!menu.is_player_tribe_referenced(n + 1)) {
-		if (!Widelands::Tribes::tribe_exists(m_selected_tribes[n + 1])) {
+		if (!Widelands::Tribes::tribe_exists(m_selected_tribes[n])) {
 			throw wexception
-				("Map defines tribe %s, but it does not exist!", m_selected_tribes[n + 1].c_str());
+				("Map defines tribe %s, but it does not exist!", m_selected_tribes[n].c_str());
 		}
 		uint32_t i;
 		for (i = 0; i < m_tribenames.size(); ++i) {
-			if (m_tribenames[i] == m_selected_tribes[n + 1]) {
+			if (m_tribenames[i] == m_selected_tribes[n]) {
 				break;
 			}
 		}
-		m_selected_tribes[n + 1] = i == m_tribenames.size() - 1 ? m_tribenames[0] : m_tribenames[++i];
-		menu.egbase().map().set_scenario_player_tribe(n + 1, m_selected_tribes[n + 1]);
+		m_selected_tribes[n] = i == m_tribenames.size() - 1 ? m_tribenames[0] : m_tribenames[++i];
+		menu.egbase().map().set_scenario_player_tribe(n + 1, m_selected_tribes[n]);
 		menu.set_need_save(true);
 	} else {
 		UI::WLMessageBox mmb
@@ -292,15 +290,15 @@ void EditorPlayerMenu::set_starting_pos_clicked(uint8_t n) {
 		menu.move_view_to(sp);
 
 	//  select tool set mplayer
-	menu.select_tool(menu.tools.set_starting_pos, EditorTool::First);
-	menu.tools.set_starting_pos.set_current_player(n);
+	menu.select_tool(menu.tools()->set_starting_pos, EditorTool::First);
+	menu.tools()->set_starting_pos.set_current_player(n);
 
 	//  reselect tool, so everything is in a defined state
-	menu.select_tool(menu.tools.current(), EditorTool::First);
+	menu.select_tool(menu.tools()->current(), EditorTool::First);
 
 	//  Register callback function to make sure that only valid locations are
 	//  selected.
-	map.overlay_manager().register_overlay_callback_function(
+	menu.mutable_field_overlay_manager()->register_overlay_callback_function(
 	   boost::bind(&editor_tool_set_starting_pos_callback, _1, boost::ref(map)));
 	map.recalc_whole_map(menu.egbase().world());
 	update();
@@ -333,7 +331,7 @@ void EditorPlayerMenu::make_infrastructure_clicked(uint8_t n) {
    // so must be true)
 	Widelands::EditorGameBase & egbase = parent.egbase();
 	Widelands::Map & map = egbase.map();
-	OverlayManager & overlay_manager = map.overlay_manager();
+	auto* overlay_manager = parent.mutable_field_overlay_manager();
 	const Widelands::Coords start_pos = map.get_starting_pos(n);
 	assert(start_pos);
 
@@ -359,7 +357,7 @@ void EditorPlayerMenu::make_infrastructure_clicked(uint8_t n) {
 	if (!imm) {
       // place HQ
 		const Widelands::TribeDescr & tribe = p->tribe();
-		const Widelands::BuildingIndex idx = tribe.headquarters();
+		const Widelands::DescriptionIndex idx = tribe.headquarters();
 		if (!tribe.has_building(idx))
 			throw wexception("Tribe %s lacks headquarters", tribe.name().c_str());
 		// Widelands::Warehouse & headquarter = dynamic_cast<Widelands::Warehouse &>
@@ -377,13 +375,13 @@ void EditorPlayerMenu::make_infrastructure_clicked(uint8_t n) {
 		picsname += static_cast<char>((n / 10) + 0x30);
 		picsname += static_cast<char>((n % 10) + 0x30);
 		picsname += "_starting_pos.png";
-		overlay_manager.remove_overlay
+		overlay_manager->remove_overlay
 			(start_pos, g_gr->images().get(picsname));
 	}
 
-	parent.select_tool(parent.tools.make_infrastructure, EditorTool::First);
-	parent.tools.make_infrastructure.set_player(n);
-	overlay_manager.register_overlay_callback_function(
+	parent.select_tool(parent.tools()->make_infrastructure, EditorTool::First);
+	parent.tools()->make_infrastructure.set_player(n);
+	overlay_manager->register_overlay_callback_function(
 	   boost::bind(&editor_make_infrastructure_tool_callback, _1, boost::ref(egbase), n));
 	map.recalc_whole_map(egbase.world());
 }

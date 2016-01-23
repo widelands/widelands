@@ -5,58 +5,58 @@ tribes:new_productionsite_type {
    name = "atlanteans_charcoal_kiln",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("atlanteans_building", "Charcoal Kiln"),
-   directory = dirname,
+   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",
 
    buildcost = {
-		log = 2,
-		granite = 3,
-		planks = 1
-	},
-	return_on_dismantle = {
-		log = 2,
-		granite = 2
-	},
+      log = 2,
+      granite = 3,
+      planks = 1
+   },
+   return_on_dismantle = {
+      log = 2,
+      granite = 2
+   },
 
    animations = {
-		idle = {
-			pictures = path.list_directory(dirname, "idle_\\d+.png"),
-			hotspot = { 47, 57 },
-		},
-		working = {
-			pictures = path.list_directory(dirname, "working_\\d+.png"),
-			hotspot = { 47, 60 },
-		},
-	},
+      idle = {
+         pictures = path.list_files(dirname .. "idle_??.png"),
+         hotspot = { 47, 57 },
+      },
+      working = {
+         pictures = path.list_files(dirname .. "working_??.png"),
+         hotspot = { 47, 60 },
+      },
+   },
 
    aihints = {
-		prohibited_till = 1200
+      prohibited_till = 1200
    },
 
-	working_positions = {
-		atlanteans_charcoal_burner = 1
-	},
+   working_positions = {
+      atlanteans_charcoal_burner = 1
+   },
 
    inputs = {
-		log = 8
-	},
+      log = 8
+   },
    outputs = {
-		"coal"
+      "coal"
    },
 
-	programs = {
-		work = {
-			-- TRANSLATORS: Completed/Skipped/Did not start producing coal because ...
-			descname = _"producing coal",
-			actions = {
-				"sleep=30000",
-				"return=skipped unless economy needs coal",
-				"consume=log:6",
-				"animate=working 90000", -- Charcoal fires will burn for some days in real life
-				"produce=coal"
-			}
-		},
+   programs = {
+      work = {
+         -- TRANSLATORS: Completed/Skipped/Did not start producing coal because ...
+         descname = _"producing coal",
+         actions = {
+            "sleep=30000",
+            "return=skipped unless economy needs coal",
+            "consume=log:6",
+            "animate=working 90000", -- Charcoal fires will burn for some days in real life
+            "produce=coal"
+         }
+      },
 
-	},
+   },
 }

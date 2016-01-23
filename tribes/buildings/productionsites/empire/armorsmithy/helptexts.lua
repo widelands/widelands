@@ -2,26 +2,26 @@
 include "tribes/scripting/help/global_helptexts.lua"
 
 function building_helptext_lore()
-	-- #TRANSLATORS: Lore helptext for a building
-	return no_lore_text_yet()
+   -- TRANSLATORS#: Lore helptext for a building
+   return no_lore_text_yet()
 end
 
 function building_helptext_lore_author()
-	-- #TRANSLATORS: Lore author helptext for a building
-	return no_lore_author_text_yet()
+   -- TRANSLATORS#: Lore author helptext for a building
+   return no_lore_author_text_yet()
 end
 
 function building_helptext_purpose()
-	-- #TRANSLATORS: Purpose helptext for a building
-	return no_purpose_text_yet()
+   -- TRANSLATORS: Purpose helptext for a building
+   return pgettext("empire_building", "Forges armor and helmets that are used for training soldiers’ health in the training camp.")
 end
 
 function building_helptext_note()
-	-- #TRANSLATORS: Note helptext for a building
-	return ""
+   -- TRANSLATORS#: Note helptext for a building
+   return ""
 end
 
 function building_helptext_performance()
-	-- #TRANSLATORS: Performance helptext for a building
-	return no_performance_text_yet()
+   -- TRANSLATORS#: Performance helptext for a building
+   return no_performance_text_yet()
 end

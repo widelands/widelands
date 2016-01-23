@@ -5,18 +5,18 @@ tribes:new_ware_type {
    name = "corn",
    -- TRANSLATORS: This is a ware name used in lists of wares
    descname = pgettext("ware", "Corn"),
-   directory = dirname,
+   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    default_target_quantity = {
-		atlanteans = 25
-	},
+      atlanteans = 25
+   },
    preciousness = {
-		atlanteans = 12
-	},
+      atlanteans = 12
+   },
 
    animations = {
       idle = {
-         pictures = { dirname .. "idle.png" },
+         pictures = path.list_files(dirname .. "idle.png"),
          hotspot = { 6, 11 },
       },
    }

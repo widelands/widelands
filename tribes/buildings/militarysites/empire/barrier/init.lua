@@ -5,57 +5,53 @@ tribes:new_militarysite_type {
    name = "empire_barrier",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("empire_building", "Barrier"),
-   directory = dirname,
+   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",
 
    buildcost = {
-		log = 2,
-		planks = 2,
-		granite = 2,
-		marble = 1
-	},
-	return_on_dismantle = {
-		log = 1,
-		planks = 1,
-		granite = 1
-	},
+      log = 2,
+      planks = 2,
+      granite = 2,
+      marble = 1
+   },
+   return_on_dismantle = {
+      log = 1,
+      planks = 1,
+      granite = 1
+   },
    enhancement_cost = {
-		log = 1,
-		planks = 2,
-		granite = 1,
-		marble = 1
-	},
-	return_on_dismantle_on_enhanced = {
-		planks = 1,
-		granite = 1
-	},
+      log = 1,
+      planks = 2,
+      granite = 1,
+      marble = 1
+   },
+   return_on_dismantle_on_enhanced = {
+      planks = 1,
+      granite = 1
+   },
 
    animations = {
-		idle = {
-			pictures = path.list_directory(dirname, "idle_\\d+.png"),
-			hotspot = { 49, 77 }
-		}
-	},
+      idle = {
+         pictures = path.list_files(dirname .. "idle_??.png"),
+         hotspot = { 49, 77 }
+      }
+   },
 
    aihints = {
-		fighting = true
+      fighting = true
    },
 
-	outputs = {
-		"empire_soldier",
-   },
-
-	max_soldiers = 5,
+   max_soldiers = 5,
    heal_per_second = 130,
    conquers = 8,
    prefer_heroes = true,
 
    messages = {
-		occupied = _"Your soldiers have occupied your barrier.",
-		aggressor = _"Your barrier discovered an aggressor.",
-		attack = _"Your barrier is under attack.",
-		defeated_enemy = _"The enemy defeated your soldiers at the barrier.",
-		defeated_you = _"Your soldiers defeated the enemy at the barrier."
+      occupied = _"Your soldiers have occupied your barrier.",
+      aggressor = _"Your barrier discovered an aggressor.",
+      attack = _"Your barrier is under attack.",
+      defeated_enemy = _"The enemy defeated your soldiers at the barrier.",
+      defeated_you = _"Your soldiers defeated the enemy at the barrier."
    },
 }

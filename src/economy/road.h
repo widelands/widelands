@@ -23,7 +23,7 @@
 #include <vector>
 
 #include "base/macros.h"
-#include "logic/immovable.h"
+#include "logic/map_objects/immovable.h"
 #include "logic/path.h"
 #include "logic/roadtype.h"
 
@@ -126,7 +126,7 @@ private:
 
 	void _request_carrier(CarrierSlot &);
 	static void _request_carrier_callback
-		(Game &, Request &, WareIndex, Worker *, PlayerImmovable &);
+		(Game &, Request &, DescriptionIndex, Worker *, PlayerImmovable &);
 
 private:
 

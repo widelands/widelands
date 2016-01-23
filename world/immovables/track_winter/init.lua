@@ -10,7 +10,7 @@ world:new_immovable_type{
    programs = {},
    animations = {
       idle = {
-         pictures = { dirname .. "idle.png" },
+         pictures = path.list_files(dirname .. "idle.png"),
          hotspot = { 30, 15 },
       },
    }

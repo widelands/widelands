@@ -35,7 +35,7 @@ public:
 
 	/// Sets the background image and assigns values
 	/// for alignment and size, depending on screen size
-	FullscreenMenuMainMenu(char const * background_image);
+	FullscreenMenuMainMenu(const char* background_image);
 
 protected:
 	const uint32_t m_box_x, m_box_y;

@@ -8,18 +8,18 @@ tribes:new_immovable_type {
    size = "small",
    attributes = { "ripe_corn", "field" },
    programs = {
-		program = {
-			"animate=idle 50000",
-			"remove=",
+      program = {
+         "animate=idle 500000",
+         "remove=",
       },
-		harvest = {
-			"transform=cornfield_harvested",
+      harvest = {
+         "transform=cornfield_harvested",
       }
    },
 
    animations = {
       idle = {
-         pictures = path.list_directory(dirname, "idle_\\d+.png"),
+         pictures = path.list_files(dirname .. "idle_??.png"),
          hotspot = { 31, 41 },
       },
    }

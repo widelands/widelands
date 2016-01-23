@@ -22,9 +22,10 @@
 
 #include <cstdlib>
 
-#include "wui/interactive_gamebase.h"
 #include "ui_basic/button.h"
 #include "ui_basic/window.h"
+#include "wui/field_overlay_manager.h"
+#include "wui/interactive_gamebase.h"
 #include "wui/waresdisplay.h"
 
 /**
@@ -66,7 +67,7 @@ protected:
 	void configure_workarea_button();
 	void act_start_stop();
 	void act_start_or_cancel_expedition();
-	void act_enhance(Widelands::BuildingIndex);
+	void act_enhance(Widelands::DescriptionIndex);
 	void clicked_goto();
 
 	void create_ware_queue_panel
@@ -89,7 +90,7 @@ private:
 	Widelands::PlayerNumber m_capscache_player_number;
 	bool m_caps_setup;
 
-	OverlayManager::JobId m_workarea_job_id;
+	FieldOverlayManager::OverlayId m_workarea_overlay_id;
 	bool m_avoid_fastclick;
 };
 

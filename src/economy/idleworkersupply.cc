@@ -23,12 +23,12 @@
 #include "economy/economy.h"
 #include "economy/request.h"
 #include "logic/game.h"
+#include "logic/map_objects/tribes/requirements.h"
+#include "logic/map_objects/tribes/soldier.h"
+#include "logic/map_objects/tribes/tribe_descr.h"
+#include "logic/map_objects/tribes/warehouse.h"
+#include "logic/map_objects/tribes/worker.h"
 #include "logic/player.h"
-#include "logic/requirements.h"
-#include "logic/soldier.h"
-#include "logic/tribes/tribe_descr.h"
-#include "logic/warehouse.h"
-#include "logic/worker.h"
 
 namespace Widelands {
 
@@ -71,12 +71,17 @@ bool IdleWorkerSupply::is_active() const
 	return true;
 }
 
+SupplyProviders IdleWorkerSupply::provider_type(Game *) const
+{
+	return SupplyProviders::kFlagOrRoad;
+}
+
 bool IdleWorkerSupply::has_storage() const
 {
 	return m_worker.get_transfer();
 }
 
-void IdleWorkerSupply::get_ware_type(WareWorker & type, WareIndex & ware) const
+void IdleWorkerSupply::get_ware_type(WareWorker & type, DescriptionIndex & ware) const
 {
 	type = wwWORKER;
 	ware = m_worker.descr().worker_index();

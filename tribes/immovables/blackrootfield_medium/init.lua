@@ -8,15 +8,15 @@ tribes:new_immovable_type {
    size = "small",
    attributes = { "field" },
    programs = {
-		program = {
-			"animate=idle 50000",
-			"transform=blackrootfield_ripe",
+      program = {
+         "animate=idle 50000",
+         "transform=blackrootfield_ripe",
       }
    },
 
    animations = {
       idle = {
-         pictures = path.list_directory(dirname, "idle_\\d+.png"),
+         pictures = path.list_files(dirname .. "idle_??.png"),
          hotspot = { 26, 30 },
       },
    }

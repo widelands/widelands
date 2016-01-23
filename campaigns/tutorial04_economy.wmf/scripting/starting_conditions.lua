@@ -138,7 +138,7 @@ function init_player()
       {"empire_fortress",71,66},
       {"empire_fortress",75,72}
    )
-   plr:place_building("quarry", map:get_field(87,36), true, true) -- a construction site
+   plr:place_building("empire_quarry", map:get_field(87,36), true, true) -- a construction site
 
    plr:conquer(map:get_field(111,34),3) -- some remaining fields inside
 
@@ -170,4 +170,3 @@ function init_player()
    connected_road(plr,map:get_field(115,25).immovable,"bl,bl")
    connected_road(plr,map:get_field(97,54).immovable,"r,r,tr")
 end
-

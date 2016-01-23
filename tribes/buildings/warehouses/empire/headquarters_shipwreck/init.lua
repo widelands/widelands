@@ -5,19 +5,20 @@ tribes:new_warehouse_type {
    name = "empire_headquarters_shipwreck",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("empire_building", "Headquarters Shipwreck"),
-   directory = dirname,
+   helptext_script = dirname .. "helptexts.lua",
+   icon = dirname .. "menu.png",
    size = "big",
    destructible = false,
 
    animations = {
-		idle = {
-			pictures = path.list_directory(dirname, "idle_\\d+.png"),
-			hotspot = { 93, 40 },
-		},
-	},
+      idle = {
+         pictures = path.list_files(dirname .. "idle_??.png"),
+         hotspot = { 93, 40 },
+      },
+   },
 
-	aihints = {},
+   aihints = {},
 
-	heal_per_second = 170,
-	conquers = 9,
+   heal_per_second = 170,
+   conquers = 9,
 }

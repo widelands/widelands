@@ -24,9 +24,9 @@
 #include "base/macros.h"
 #include "economy/economy.h"
 #include "graphic/graphic.h"
-#include "logic/building.h"
+#include "logic/map_objects/tribes/building.h"
+#include "logic/map_objects/tribes/ship.h"
 #include "logic/player.h"
-#include "logic/ship.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/window.h"
 #include "wui/interactive_player.h"
@@ -102,14 +102,14 @@ struct EnhanceConfirm : public ActionConfirm {
 	EnhanceConfirm
 		(InteractivePlayer & parent,
 		 Widelands::Building & building,
-		 const Widelands::BuildingIndex & id);
+		 const Widelands::DescriptionIndex & id);
 
 	void think() override;
 	void ok() override;
 
 private:
     // Do not make this a reference - it is a stack variable in the caller
-	const Widelands::BuildingIndex m_id;
+	const Widelands::DescriptionIndex m_id;
 };
 
 
@@ -339,7 +339,7 @@ Create the panels for enhancement confirmation.
 EnhanceConfirm::EnhanceConfirm
 	(InteractivePlayer & parent,
 	 Widelands::Building & building,
-	 const Widelands::BuildingIndex & id)
+	 const Widelands::DescriptionIndex & id)
 	:
 	ActionConfirm
 		(parent,
@@ -522,7 +522,7 @@ void show_dismantle_confirm
 void show_enhance_confirm
 	(InteractivePlayer & player,
 	 Widelands::Building & building,
-	 const Widelands::BuildingIndex & id)
+	 const Widelands::DescriptionIndex & id)
 {
 	new EnhanceConfirm(player, building, id);
 }

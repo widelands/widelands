@@ -19,11 +19,7 @@
 
 #include "ui_basic/icongrid.h"
 
-#include "base/log.h"
-#include "graphic/font_handler.h"
-#include "graphic/rendertarget.h"
 #include "ui_basic/button.h"
-#include "ui_basic/mouse_constants.h"
 
 namespace UI {
 
