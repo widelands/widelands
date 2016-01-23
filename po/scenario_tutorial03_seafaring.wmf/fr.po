@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-12-11 07:41+0000\n"
-"PO-Revision-Date: 2015-12-13 19:22+0000\n"
+"POT-Creation-Date: 2015-12-14 05:31+0000\n"
+"PO-Revision-Date: 2015-12-28 15:23+0000\n"
 "Last-Translator: Jaypad <ju-ju@nataju.fr>\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -415,6 +415,7 @@ msgid ""
 msgstr "Sur cette carte, il n'y avait aucun ennemi à craindre. Comme toujours, vous pouvez continuer à jouer et ainsi regarder la façon dont les navires acheminent les marchandises sur l'île lorsque vous construisez des bâtiments. Il y a aussi une autre île où vous pourrez construire un port."
 
 #: ../../scripting/format_scenario.lua:36
+#, lua-format
 msgid "“%s”"
 msgstr "“%s”"
 

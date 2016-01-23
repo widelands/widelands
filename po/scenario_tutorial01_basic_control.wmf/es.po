@@ -2,6 +2,7 @@
 # Copyright (C) 2005-2015 Widelands Development Team
 # 
 # Translators:
+# Diego Alberto Pereyra <diego.96.pereyra@gmail.com>, 2015-2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # Javier Mora <morehash@gmail.com>, 2015
 # Thadah <juchuf@gmail.com>, 2015
@@ -12,9 +13,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-12-03 09:55+0000\n"
-"PO-Revision-Date: 2015-12-03 09:57+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2015-12-14 05:31+0000\n"
+"PO-Revision-Date: 2016-01-06 02:36+0000\n"
+"Last-Translator: Diego Alberto Pereyra <diego.96.pereyra@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -88,7 +89,7 @@ msgid ""
 "either by clicking on the ‘Show Building Spaces’ button at the bottom of the"
 " screen, which is the fourth one from the left. Or you can use the Space key"
 " to toggle it."
-msgstr ""
+msgstr "Tenemos que encontrar un lugar agradable para la cabaña del leñador. Para hacer esto más fácil, podemos activar 'Mostrar Zonas de Construcción'. Hay dos maneras para poder hacer esto, ya sea haciendo clic en el botón 'Mostrar Zonas de Construcción' en la parte inferior de la pantalla, que es el cuarto desde la izquierda. O puede utilizar la BARRA ESPACIADORA para activarlo."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:46
 msgid "Left-click the ‘OK’ button to close this box and then try it."
@@ -113,7 +114,7 @@ msgid ""
 "Do so now, either by pressing Space or by clicking the fourth button from "
 "the left at the very bottom of the screen. Right-click on this window and "
 "then give it a try."
-msgstr ""
+msgstr "Hazlo ahora, ya sea presionando ESPACIO o haciendo clic en el cuarto botón desde la izquierda en la parte inferior de la pantalla. Haz clic derecho en esta ventana e inténtalo tú."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:59
 msgid "Lumberjack’s Spot"
@@ -238,7 +239,7 @@ msgid ""
 "If you want things to go faster, simply use the Page Up key on your keyboard"
 " to increase the game speed. You can use Page Down to make the game slower "
 "again."
-msgstr ""
+msgstr "Si quieres que las cosas vayan más rápido, simplemente usa la tecla RePág del teclado para aumentar la velocidad del juego. Puedes utilizar AvPág para hacer el juego más lento otra vez."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:145
 msgid "Waiting for the Hut to be Finished"
@@ -498,7 +499,7 @@ msgid ""
 "The quarry is a small building like the lumberjack’s hut. You can therefore "
 "build it on any field that shows a red, yellow or green house when the "
 "building spaces symbols are enabled (Press Space for that)."
-msgstr ""
+msgstr "La cantera es un edificio pequeño como la cabaña del leñador. Puedes, por tanto, construirla en cualquier parcela que muestre una casa roja, amarilla o verde mientras los símbolos de las zonas de construcción estén activados (Pulsa Barra Espaciadora para eso)."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:269
 msgid ""
@@ -748,17 +749,17 @@ msgid ""
 "reading, and the one that informed you that a new headquarters was added to "
 "your economy. Let’s learn how to archive messages: first, select the message"
 " that you wish to archive by clicking on it in the list. Then, click the"
-msgstr ""
+msgstr "Tienes dos mensajes en este momento. Este, que estás leyendo ahora mismo, y el que te informó de que un nuevo Cuartel General se añadió a tu economía. Vamos a aprender cómo archivar mensajes: primero, selecciona el mensaje que quieres archivar haciendo click en el en la lista. Luego, haz click en"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:404
 msgid "‘Archive selected message’ button to move it into your archive."
-msgstr ""
+msgstr "el botón \"Archivar mensaje seleccionado\" para moverlo a tu archivo."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:406
 msgid ""
 "Once you have deleted a message, another message will be selected "
 "automatically from the list."
-msgstr ""
+msgstr "Una vez que haya borrado un mensaje, otro mensaje se seleccionará automáticamente de la lista."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:408
 msgid ""
@@ -791,7 +792,7 @@ msgid ""
 "button at the very bottom of the screen. The newest message will be marked "
 "for you automatically. Keep clicking the ‘Archive selected message’ button "
 "until all messages have been archived and the list is empty."
-msgstr ""
+msgstr "Para hacerlo, abre la ventana de mensajes pulsando la tecla \"n\" o haciendo click en el botón más a la derecha de la parte inferior de la pantalla. El mensaje más nuevo se marcarán automáticamente. Siga haciendo click en el botón \"Archivar mensaje seleccionado\" hasta que todos los mensajes se hayan archivado y la lista esté vacía."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:424
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:445
@@ -927,7 +928,7 @@ msgid ""
 "The sentry is the only military site that fits on a small building plot. If "
 "your lumberjack has cleared enough space, you can also build another "
 "military building."
-msgstr "El centinela es el único local militar que cabe en una parcela de edificio pequeño. Si tu leñador ha despejado suficiente espacio puedes construir también otro edificio militar."
+msgstr "El centinela es el único sitio militar que cabe en una parcela de edificio pequeño. Si tu leñador ha despejado suficiente espacio puedes construir también otro edificio militar."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:485
 msgid "Expand your territory"
@@ -961,7 +962,7 @@ msgstr "Recuerda que los edificios grandes (icono verde) no pueden construirse e
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:497
 msgid "Military Site Occupied"
-msgstr "Edificio militar ocupado"
+msgstr "Sitio militar ocupado"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:499
 msgid "Your territory has just grown!"
@@ -1018,6 +1019,7 @@ msgid ""
 msgstr "Gracias por jugar este tutorial. Disfruta Widelands y recuerda visitarnos en"
 
 #: ../../scripting/format_scenario.lua:36
+#, lua-format
 msgid "“%s”"
 msgstr "“%s”"
 

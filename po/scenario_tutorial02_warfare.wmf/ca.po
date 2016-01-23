@@ -2,13 +2,13 @@
 # Copyright (C) 2005-2015 Widelands Development Team
 # 
 # Translators:
-# Juanjo, 2015
+# Juanjo, 2015-2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-28 11:19+0000\n"
-"PO-Revision-Date: 2015-11-28 17:39+0000\n"
+"POT-Creation-Date: 2015-12-14 05:31+0000\n"
+"PO-Revision-Date: 2016-01-01 15:09+0000\n"
 "Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -347,7 +347,7 @@ msgid ""
 "The third number indicates the missing soldiers. From the eight soldiers (1 "
 "+ 5 + 2) you wish to have here, two may have died. They will be replaced by "
 "new soldiers from your warehouse, if possible."
-msgstr "El tercer nombre indica el nombre de soldats que falten. Dels 8 soldats (1 + 5 + 2) que voldríeu tenir aquí, dos poden haver mort. Seran substituïts tan aviat com sigui possible amb soldats que no tinguin assignats."
+msgstr "El tercer nombre indica el nombre de soldats que falten. Dels 8 soldats (1+5+2) que voldríeu tenir aquí, dos poden haver mort. Seran substituïts tan aviat com sigui possible amb soldats que no tinguin assignats."
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:143
 msgid "Dismantle your sentry"
@@ -542,6 +542,7 @@ msgid ""
 msgstr "Ja esteu preparats per jugar les campanyes. T'ensenyaran les economies de cada cultura. També podeu jugar els altres tutorials, però no són fonamentals per realitzar les campanyes."
 
 #: ../../scripting/format_scenario.lua:36
+#, lua-format
 msgid "“%s”"
 msgstr "“%s”"
 

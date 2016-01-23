@@ -3,13 +3,14 @@
 # 
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2012
+# Gonta Ulti <ultgonta@gmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-12-03 09:55+0000\n"
-"PO-Revision-Date: 2015-12-03 09:57+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2015-12-14 05:31+0000\n"
+"PO-Revision-Date: 2016-01-11 16:06+0000\n"
+"Last-Translator: Gonta Ulti <ultgonta@gmail.com>\n"
 "Language-Team: Japanese (http://www.transifex.com/widelands/widelands/language/ja/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -42,7 +43,7 @@ msgid ""
 "Widelands is a slow-paced build-up strategy game with an emphasis on "
 "construction rather than destruction. This tutorial will guide you through "
 "the basics of the game."
-msgstr ""
+msgstr "Wilderlandは破壊ではなく建設的な事に重点を置いた建築ストラテジーです。このチュートリアルではゲームの基本的な部分を紹介します。"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:31
 msgid "Dismiss this box by left-clicking on the button below."
@@ -1013,6 +1014,7 @@ msgid ""
 msgstr "このチュートリアルをプレイしてくれてありがとうございます。Widelandsを楽しみ、サイトに訪れることを忘れないでください。"
 
 #: ../../scripting/format_scenario.lua:36
+#, lua-format
 msgid "“%s”"
 msgstr "『%s』"
 

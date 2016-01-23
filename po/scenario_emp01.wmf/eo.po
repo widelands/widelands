@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-18 08:43+0000\n"
-"PO-Revision-Date: 2015-11-18 08:43+0000\n"
+"POT-Creation-Date: 2015-12-14 05:31+0000\n"
+"PO-Revision-Date: 2015-12-29 11:40+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Esperanto (http://www.transifex.com/widelands/widelands/language/eo/)\n"
 "MIME-Version: 1.0\n"
@@ -64,7 +64,7 @@ msgstr ""
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:57
 msgid "Forester’s House"
-msgstr ""
+msgstr "Arbarist-kabano"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:58
 msgid ""
@@ -77,7 +77,7 @@ msgstr ""
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:66
 msgid "Quarry"
-msgstr ""
+msgstr "Ŝtonminejo"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:67
 msgid ""
@@ -426,6 +426,7 @@ msgid ""
 msgstr ""
 
 #: ../../scripting/format_scenario.lua:36
+#, lua-format
 msgid "“%s”"
 msgstr ""
 
