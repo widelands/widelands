@@ -40,8 +40,9 @@ void Flag::draw
 		{8, -3}
 	};
 
-	dst.drawanim
-		(pos, owner().tribe().flag_animation(), game.get_gametime() - m_animstart, &owner());
+	const RGBColor& player_color = owner().get_playercolor();
+	dst.blit_animation(
+	   pos, owner().tribe().flag_animation(), game.get_gametime() - m_animstart, player_color);
 
 	const uint32_t ware_filled = m_ware_filled;
 	for (uint32_t i = 0; i < ware_filled; ++i) { //  draw wares
@@ -51,11 +52,7 @@ void Flag::draw
 			warepos.y += ware_offsets[i].y;
 		} else
 			warepos.y -= 6 + (i - 8) * 3;
-		dst.drawanim
-			(warepos,
-			 m_wares[i].ware->descr().get_animation("idle"),
-			 0,
-			 get_owner());
+		dst.blit_animation(warepos, m_wares[i].ware->descr().get_animation("idle"), 0, player_color);
 	}
 }
 

@@ -329,7 +329,8 @@ void ConstructionSite::draw
 		return; // draw big buildings only once
 
 	// Draw the construction site marker
-	dst.drawanim(pos, m_anim, tanim, get_owner());
+	const RGBColor& player_color = get_owner()->get_playercolor();
+	dst.blit_animation(pos, m_anim, tanim, player_color);
 
 	// Draw the partially finished building
 
@@ -371,10 +372,11 @@ void ConstructionSite::draw
 	assert(h * cur_frame <= lines);
 	lines -= h * cur_frame; //  This won't work if pictures have various sizes.
 
-	if (cur_frame) //  not the first pic
+	if (cur_frame) { //  not the first pic
 		//  draw the prev pic from top to where next image will be drawing
-		dst.drawanimrect(pos, anim_idx, tanim - FRAME_LENGTH, get_owner(), Rect(Point(0, 0), w, h - lines));
-	else if (!m_old_buildings.empty()) {
+		dst.blit_animation(pos, anim_idx, tanim - FRAME_LENGTH, player_color,
+		                   Rect(Point(0, 0), w, h - lines));
+	} else if (!m_old_buildings.empty()) {
 		DescriptionIndex prev_idx = m_old_buildings.back();
 		const BuildingDescr* prev_building = owner().tribe().get_building_descr(prev_idx);
 		//  Is the first picture but there was another building here before,
@@ -386,14 +388,13 @@ void ConstructionSite::draw
 			prev_building_anim_idx = prev_building->get_animation("idle");
 		}
 		const Animation& prev_building_anim = g_gr->animations().get_animation(prev_building_anim_idx);
-		dst.drawanimrect
-			(pos, prev_building_anim_idx, tanim - FRAME_LENGTH, get_owner(),
-			 Rect
-			 (Point(0, 0), prev_building_anim.width(), std::min<int>(prev_building_anim.height(), h - lines)));
+		dst.blit_animation(pos, prev_building_anim_idx, tanim - FRAME_LENGTH, player_color,
+		                   Rect(Point(0, 0), prev_building_anim.width(),
+		                        std::min<int>(prev_building_anim.height(), h - lines)));
 	}
 
 	assert(lines <= h);
-	dst.drawanimrect(pos, anim_idx, tanim, get_owner(), Rect(Point(0, h - lines), w, lines));
+	dst.blit_animation(pos, anim_idx, tanim, player_color, Rect(Point(0, h - lines), w, lines));
 
 	// Draw help strings
 	draw_help(game, dst, coords, pos);
