@@ -23,12 +23,12 @@
 #include "economy/economy.h"
 #include "economy/flag.h"
 #include "economy/request.h"
-#include "logic/carrier.h"
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
-#include "logic/instances.h"
+#include "logic/map_objects/map_object.h"
+#include "logic/map_objects/tribes/carrier.h"
+#include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/player.h"
-#include "logic/tribes/tribe_descr.h"
 
 namespace Widelands {
 

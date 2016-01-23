@@ -35,8 +35,6 @@ public:
 	// Implements Surface.
 	int width() const override;
 	int height() const override;
-	void setup_gl() override;
-	void pixel_to_gl(float* x, float* y) const override;
 
 	// Reads out the current pixels in the framebuffer and returns
 	// them as a texture for screenshots. This is a very slow process,
@@ -44,6 +42,24 @@ public:
 	std::unique_ptr<Texture> to_texture() const;
 
 private:
+	void do_blit(const FloatRect& dst_rect,
+	             const BlitData& texture,
+	             float opacity,
+	             BlendMode blend_mode) override;
+	void do_blit_blended(const FloatRect& dst_rect,
+	                     const BlitData& texture,
+	                     const BlitData& mask,
+	                     const RGBColor& blend) override;
+	void do_blit_monochrome(const FloatRect& dst_rect,
+	                        const BlitData& texture,
+	                        const RGBAColor& blend) override;
+	void do_draw_line(const FloatPoint& start,
+	                  const FloatPoint& end,
+	                  const RGBColor& color,
+	                  int width) override;
+	void
+	do_fill_rect(const FloatRect& dst_rect, const RGBAColor& color, BlendMode blend_mode) override;
+
 	const int m_w, m_h;
 
 	DISALLOW_COPY_AND_ASSIGN(Screen);

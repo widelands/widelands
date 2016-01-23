@@ -25,8 +25,8 @@
 #include "logic/editor_game_base.h"
 #include "logic/game_data_error.h"
 #include "logic/map.h"
-#include "logic/world/resource_description.h"
-#include "logic/world/world.h"
+#include "logic/map_objects/world/resource_description.h"
+#include "logic/map_objects/world/world.h"
 #include "map_io/world_legacy_lookup_table.h"
 
 namespace Widelands {
@@ -85,8 +85,9 @@ void MapResourcesPacket::read
 
 					if (0xa < set_id)
 						throw "Unknown resource in map file. It is not in world!\n";
-					map[Coords(x, y)].set_resources(set_id, set_amount);
-					map[Coords(x, y)].set_initial_res_amount(set_start_amount);
+					const auto fcoords = map.get_fcoords(Coords(x, y));
+					map.initialize_resources(fcoords, set_id, set_start_amount);
+					map.set_resources(fcoords, set_amount);
 				}
 			}
 		} else {

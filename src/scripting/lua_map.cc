@@ -27,21 +27,21 @@
 #include "base/macros.h"
 #include "economy/wares_queue.h"
 #include "graphic/graphic.h"
-#include "logic/carrier.h"
-#include "logic/checkstep.h"
 #include "logic/findimmovable.h"
-#include "logic/immovable.h"
+#include "logic/map_objects/checkstep.h"
+#include "logic/map_objects/immovable.h"
+#include "logic/map_objects/tribes/carrier.h"
+#include "logic/map_objects/tribes/ship.h"
+#include "logic/map_objects/tribes/soldier.h"
+#include "logic/map_objects/tribes/tribes.h"
+#include "logic/map_objects/tribes/warelist.h"
+#include "logic/map_objects/world/resource_description.h"
+#include "logic/map_objects/world/terrain_description.h"
+#include "logic/map_objects/world/world.h"
 #include "logic/maphollowregion.h"
 #include "logic/mapregion.h"
 #include "logic/player.h"
-#include "logic/ship.h"
-#include "logic/soldier.h"
-#include "logic/tribes/tribes.h"
-#include "logic/warelist.h"
 #include "logic/widelands_geometry.h"
-#include "logic/world/resource_description.h"
-#include "logic/world/terrain_description.h"
-#include "logic/world/world.h"
 #include "scripting/factory.h"
 #include "scripting/globals.h"
 #include "scripting/lua_errors.h"
@@ -4432,22 +4432,28 @@ int LuaField::get_viewpoint_y(lua_State * L) {
 		:see also: :attr:`resource_amount`
 */
 int LuaField::get_resource(lua_State * L) {
+
+	const ResourceDescription* rDesc = get_egbase(L).world().get_resource
+			(fcoords(L).field->get_resources());
+
 	lua_pushstring
-		(L, get_egbase(L).world().get_resource
-			 (fcoords(L).field->get_resources())->name().c_str());
+		(L, rDesc ? rDesc->name().c_str() : "none");
 
 	return 1;
 }
 int LuaField::set_resource(lua_State * L) {
-	Field * field = fcoords(L).field;
+	auto& egbase = get_egbase(L);
 	int32_t res = get_egbase(L).world().get_resource
 		(luaL_checkstring(L, -1));
 
 	if (res == Widelands::INVALID_INDEX)
 		report_error(L, "Illegal resource: '%s'", luaL_checkstring(L, -1));
 
-	field->set_resources(res, field->get_resources_amount());
-
+	auto c = fcoords(L);
+	const auto current_amount = c.field->get_resources_amount();
+	auto& map = egbase.map();
+	map.initialize_resources(c, res, c.field->get_initial_res_amount());
+	map.set_resources(c, current_amount);
 	return 0;
 }
 
@@ -4463,22 +4469,23 @@ int LuaField::get_resource_amount(lua_State * L) {
 	return 1;
 }
 int LuaField::set_resource_amount(lua_State * L) {
-	Field * field = fcoords(L).field;
-	int32_t res = field->get_resources();
+	auto c  = fcoords(L);
+	int32_t res = c.field->get_resources();
 	int32_t amount = luaL_checkint32(L, -1);
-	int32_t max_amount = get_egbase(L).world().get_resource(res)->max_amount();
+	const ResourceDescription * resDesc = get_egbase(L).world().get_resource(res);
+	int32_t max_amount = resDesc ? resDesc->max_amount() : 0;
 
 	if (amount < 0 || amount > max_amount)
 		report_error(L, "Illegal amount: %i, must be >= 0 and <= %i", amount, max_amount);
 
-	field->set_resources(res, amount);
-	//in editor, reset also initial amount
 	EditorGameBase & egbase = get_egbase(L);
-	upcast(Game, game, &egbase);
-	if (!game) {
-		field->set_initial_res_amount(amount);
+	auto& map = egbase.map();
+	if (is_a(Game, &egbase)) {
+		map.set_resources(c, amount);
+	} else {
+		// in editor, reset also initial amount
+		map.initialize_resources(c, res, amount);
 	}
-
 	return 0;
 }
 /* RST
@@ -4938,7 +4945,6 @@ void luaopen_wlmap(lua_State * L) {
 	lua_pop(L, 1); // Pop the meta table
 
 	register_class<LuaMilitarySiteDescription>(L, "map", true);
-	add_parent<LuaMilitarySiteDescription, LuaProductionSiteDescription>(L);
 	add_parent<LuaMilitarySiteDescription, LuaBuildingDescription>(L);
 	add_parent<LuaMilitarySiteDescription, LuaMapObjectDescription>(L);
 	lua_pop(L, 1); // Pop the meta table

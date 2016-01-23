@@ -32,10 +32,10 @@
 #include "io/fileread.h"
 #include "io/filewrite.h"
 #include "logic/game.h"
-#include "logic/ship.h"
-#include "logic/tribes/tribe_descr.h"
-#include "logic/warehouse.h"
-#include "logic/worker.h"
+#include "logic/map_objects/tribes/ship.h"
+#include "logic/map_objects/tribes/tribe_descr.h"
+#include "logic/map_objects/tribes/warehouse.h"
+#include "logic/map_objects/tribes/worker.h"
 #include "map_io/map_object_loader.h"
 #include "map_io/map_object_saver.h"
 
@@ -55,6 +55,7 @@ struct IdleWareSupply : public Supply {
 	//  implementation of Supply
 	PlayerImmovable * get_position(Game &) override;
 	bool is_active() const override;
+	SupplyProviders provider_type(Game *) const override;
 	bool has_storage() const override;
 	void get_ware_type(WareWorker & type, DescriptionIndex & ware) const override;
 	void send_to_storage(Game &, Warehouse * wh) override;
@@ -124,6 +125,16 @@ PlayerImmovable * IdleWareSupply::get_position(Game & game)
 bool IdleWareSupply::is_active() const
 {
 	return true;
+}
+
+SupplyProviders IdleWareSupply::provider_type(Game* game) const
+{
+	MapObject * const loc = m_ware.get_location(*game);
+	if (is_a(Ship, loc)) {
+		return SupplyProviders::kShip;
+	}
+
+	return SupplyProviders::kFlagOrRoad;
 }
 
 bool IdleWareSupply::has_storage()  const
@@ -643,8 +654,7 @@ MapObject::Loader * WareInstance::load
 	} catch (const std::exception & e) {
 		throw wexception("WareInstance: %s", e.what());
 	}
-
-	return nullptr; // Should never be reached
+	throw wexception("Never here.");
 }
 
 }

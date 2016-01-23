@@ -21,9 +21,11 @@
 
 #include <cassert>
 #include <memory>
+#include <set>
 #include <string>
 
-#include "base/log.h"
+#include <SDL.h>
+
 #include "graphic/image.h"
 #include "graphic/image_io.h"
 #include "graphic/texture.h"
@@ -41,15 +43,23 @@ bool ImageCache::has(const std::string& hash) const {
 const Image* ImageCache::insert(const std::string& hash, std::unique_ptr<const Image> image) {
 	assert(!has(hash));
 	const Image* return_value = image.get();
-	images_.insert(make_pair(hash, std::move(image)));
+	images_.insert(std::make_pair(hash, std::move(image)));
 	return return_value;
 }
 
+void ImageCache::fill_with_texture_atlases(
+   std::vector<std::unique_ptr<Texture>> texture_atlases,
+   std::map<std::string, std::unique_ptr<Texture>> textures_in_atlas) {
+	texture_atlases_ = std::move(texture_atlases);
+	for (auto& pair : textures_in_atlas) {
+		images_.insert(std::move(pair));
+	}
+}
+
 const Image* ImageCache::get(const std::string& hash) {
-	ImageMap::const_iterator it = images_.find(hash);
+	auto it = images_.find(hash);
 	if (it == images_.end()) {
-		images_.insert(make_pair(hash, load_image(hash)));
-		return get(hash);
+		return images_.insert(std::make_pair(hash, std::move(load_image(hash)))).first->second.get();
 	}
 	return it->second.get();
 }

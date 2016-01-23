@@ -2,6 +2,7 @@
 # Copyright (C) 2005-2015 Widelands Development Team
 # 
 # Translators:
+# adrien vigneron <adrienvigneron@ml1.net>, 2015
 # Peter Schwanemann <nasenbaer_peter@sourceforge.net.TLD>, 2008
 # Renaud Bouchard, 2015
 # Tubuntu <tubuntu@testimonium.be>, 2015
@@ -9,9 +10,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-28 11:19+0000\n"
-"PO-Revision-Date: 2015-11-28 11:21+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2015-12-14 05:31+0000\n"
+"PO-Revision-Date: 2015-12-23 03:03+0000\n"
+"Last-Translator: adrien vigneron <adrienvigneron@ml1.net>\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -46,10 +47,11 @@ msgid ""
 msgstr "Ce jeu est gratuit et Open Source (FOSS), sous la licence GNU General Public (GPL) V2.0."
 
 #: ../../txts/LICENSE.lua:26
+#, lua-format
 msgid ""
 "You can find more information on FOSS and the GPL by visiting the following "
 "webpage:  %s"
-msgstr ""
+msgstr "Vous pouvez trouver plus d'informations sur les logiciels libres et la GPL en visitant le site web suivant: %s"
 
 #: ../../txts/LICENSE.lua:27
 msgid ""
@@ -65,7 +67,7 @@ msgstr "Nous livrons aussi la GPL en tant que document texte avec Widelands."
 msgid ""
 "On Linux, you can find the file called COPYING in the root of the source or "
 "standalone binary package, or in the installation directory (like ‘%1%’)."
-msgstr ""
+msgstr "Sous GNU/Linux, vous pouvez trouver le fichier appelé COPYING soit à la racine de la source, du paquet binaire ou dans le répertoire d'installation (comme ‘%1%’)."
 
 #: ../../txts/LICENSE.lua:31
 msgid ""
@@ -84,7 +86,7 @@ msgid ""
 "This game comes as-is and without any warranty. For more information and "
 "support you can find us at %1% (Website, Wiki, Forum for questions or "
 "general support), %2% (Bugtracker), and %3% (Translations)."
-msgstr ""
+msgstr "Ce jeu est livré tel-quel et sans aucune garantie. Pour plus d'information et de support vous pouvez nous trouver à %1% (Site web, Wiki, Forum pour les questions ou une assistance générale), %2% (Suivi des bugs), et %3% (Traductions)."
 
 #: ../../txts/README.lua:6
 msgid "README"
@@ -147,20 +149,20 @@ msgid ""
 "To close an open window, right-click on it. To minimize/maximize a window, "
 "click on it with the middle mouse button or with the left mouse button while"
 " holding down Ctrl."
-msgstr ""
+msgstr "Pour fermer une fenêtre ouverte, clic droit sur celle-ci. Pour minimiser/maximiser une fenêtre, cliquez sur celle-ci avec le bouton du milieu de la souris. Vous pouvez également maintenir la touche Contrôle puis cliquer sur le bouton gauche de la souris."
 
 #: ../../txts/README.lua:49
 msgid ""
 "If you hold Ctrl while building a road, flags will be placed automatically.\n"
 "If you hold Ctrl while removing a road, all flags up to the first junction are\n"
 "removed."
-msgstr ""
+msgstr "Si vous maintenez Ctrl lorsque vous construisez une route, les drapeaux seront placés automatiquement.\nSi vous maintenez Ctrl lorsque vous supprimez une route, tout les drapeaux à partir de la première jonction sont supprimés."
 
 #: ../../txts/README.lua:53
 msgid ""
 "You can skip confirmation windows for irreversible actions if you hold Ctrl\n"
 "while clicking on the action button."
-msgstr ""
+msgstr "Il est possible de passer la fenêtre de confirmation des actions irréversibles si vous maintenez la touche Ctrl lorsque vous cliquez sur le bouton d'action."
 
 #: ../../txts/README.lua:56
 msgid "Keyboard shortcuts (in-game)"
@@ -168,19 +170,19 @@ msgstr "Raccourcis clavier (dans le jeu)"
 
 #: ../../txts/README.lua:58
 msgid " Page Up: increases game speed"
-msgstr ""
+msgstr "Page Haut: augmente la vitesse du jeu"
 
 #: ../../txts/README.lua:59
 msgid " Page Down: decreases game speed"
-msgstr ""
+msgstr "Page Bas: diminue la vitesse du jeu"
 
 #: ../../txts/README.lua:60
 msgid "Pause: pauses the game"
-msgstr ""
+msgstr "Pause: Mets le jeu en pause"
 
 #: ../../txts/README.lua:61
 msgid "Space: toggles if building spaces are shown"
-msgstr ""
+msgstr "Espace: Montre les espaces contructibles"
 
 #: ../../txts/README.lua:62
 msgid "M: toggles minimap"
@@ -220,7 +222,7 @@ msgstr "Home: centre la vue principale de la carte sur l'emplacement de départ"
 
 #: ../../txts/README.lua:71
 msgid "(Ctrl +) 0-9: Remember and go to previously remembered locations"
-msgstr ""
+msgstr "(Ctrl +) 0-9: Mémorisez et se rendre aux endroits mémorisés précédemment"
 
 #: ../../txts/README.lua:72
 msgid ",: goes to the previous location"
@@ -236,15 +238,15 @@ msgstr "F6: affiche la console de déboguage (seulement dans les compilations de
 
 #: ../../txts/README.lua:75
 msgid "Ctrl + F10: quits the game immediately"
-msgstr ""
+msgstr "Ctrl + F10: quitte le jeu immédiatement"
 
 #: ../../txts/README.lua:76
 msgid "Ctrl + Leftclick: skips confirmation dialogs"
-msgstr ""
+msgstr "Ctrl + Leftclick: passe les fenêtres de confirmation"
 
 #: ../../txts/README.lua:77
 msgid "Ctrl + F11: takes a screenshot"
-msgstr ""
+msgstr "Ctrl + F11: Prend une capture d'écran"
 
 #: ../../txts/README.lua:79
 msgid ""
@@ -257,7 +259,7 @@ msgstr "0: montre tous les messages"
 
 #: ../../txts/README.lua:82
 msgid "1: shows geologists’ messages only"
-msgstr ""
+msgstr "1: montre uniquement les messages des géologistes"
 
 #: ../../txts/README.lua:83
 msgid "2: shows economy messages only"
@@ -281,7 +283,7 @@ msgstr "G: saute vers la location du message actuel"
 
 #: ../../txts/README.lua:88
 msgid "Delete: archives/restores the current message"
-msgstr ""
+msgstr "Supprimer: archive/restaure le message courant"
 
 #: ../../txts/README.lua:90
 msgid "Online Help"
@@ -291,14 +293,15 @@ msgstr "Aide en Ligne"
 msgid ""
 "A detailed description of the tribes’ economies is available in the in-game "
 "Tribal Encyclopedia."
-msgstr ""
+msgstr "Une description détaillée des économies relatives aux tribus est disponible en jeu dans l'Encyclopédie Tribale."
 
 #: ../../txts/README.lua:92
+#, lua-format
 msgid ""
 "If you need more documentation or help for Widelands or the Widelands "
 "Editor, be sure to visit our homepage at %s. You can find online help in our"
 " Wiki there."
-msgstr ""
+msgstr "Si vous avez besoin de plus de documentation ou d'aide pour Widelands ou pour l'éditeur de Widelands, visitez notre page d'accueil: %s. Vous pouvez trouver une aide en ligne au sein du Wiki."
 
 #: ../../txts/README.lua:94
 msgid "Reporting Bugs"
@@ -404,7 +407,7 @@ msgstr "Développeurs"
 
 #: ../../txts/developers.lua:3
 msgid "Debian Linux"
-msgstr ""
+msgstr "Debian Linux"
 
 #: ../../txts/developers.lua:3
 msgid "Documentation, Help and Wiki"
@@ -420,25 +423,24 @@ msgstr "Empire"
 
 #: ../../txts/developers.lua:3
 msgid "Fedora Linux"
-msgstr ""
+msgstr "Fedora Linux"
 
 #: ../../txts/developers.lua:3
 msgid "Former Elders"
-msgstr ""
+msgstr "Anciens Formateurs"
 
 #: ../../txts/developers.lua:3
 msgid "FreeBSD"
-msgstr ""
+msgstr "FreeBSD"
 
 #: ../../txts/developers.lua:3
 msgid "Graphicians"
 msgstr "Graphistes"
 
-#: ../../txts/developers.lua:3 ../../txts/developers.lua:3
+#: ../../txts/developers.lua:3
 msgid "Graphics"
 msgstr "Graphismes"
 
-#: ../../txts/developers.lua:3 ../../txts/developers.lua:3
 #: ../../txts/developers.lua:3
 msgid "Homepage"
 msgstr "Page d'accueil"
@@ -449,11 +451,11 @@ msgstr "Page d'accueil des développeurs"
 
 #: ../../txts/developers.lua:3
 msgid "Mac OS X"
-msgstr ""
+msgstr "Mac OS X"
 
 #: ../../txts/developers.lua:3
 msgid "Mandriva Linux"
-msgstr ""
+msgstr "Mandriva Linux"
 
 #: ../../txts/developers.lua:3
 msgid "Maps and Missions"
@@ -471,7 +473,7 @@ msgstr "Autre"
 msgid "Packagers"
 msgstr "Empaqueteurs"
 
-#: ../../txts/developers.lua:3 ../../txts/developers.lua:3
+#: ../../txts/developers.lua:3
 msgid "Sound"
 msgstr "Son"
 
@@ -493,11 +495,11 @@ msgstr "Traducteurs"
 
 #: ../../txts/developers.lua:3
 msgid "Windows"
-msgstr ""
+msgstr "Windows"
 
 #: ../../txts/developers.lua:3
 msgid "ZetaOS"
-msgstr ""
+msgstr "ZetaOS"
 
 #: ../../txts/editor_readme.lua:6
 msgid "README for the Widelands Editor"
@@ -505,23 +507,24 @@ msgstr "LISEZ-MOI de l'Editeur de Widelands"
 
 #: ../../txts/editor_readme.lua:8
 msgid "The Widelands Editor"
-msgstr ""
+msgstr "L'éditeur de Widelands"
 
 #: ../../txts/editor_readme.lua:12
 msgid ""
 "This editor is intended for players who would like to design their own maps "
 "to use with Widelands."
-msgstr ""
+msgstr "Cet éditeur est prévu pour les joueurs désirant créer leur propres cartes utilisable dans Widelands."
 
 #: ../../txts/editor_readme.lua:13
 msgid ""
 "As you can see, this editor is heavy work in progress and as the editor "
 "becomes better and better, this text will also get longer and more complete."
-msgstr ""
+msgstr "Comme vous pouvez le voir, cet éditeur est en développement et celui-ci devient meilleur de jour en jour, ce texte deviendra aussi plus long et plus complet."
 
 #: ../../txts/editor_readme.lua:14
+#, lua-format
 msgid "Please have a look at our enduser manuals on our wiki pages at: %s"
-msgstr ""
+msgstr "Merci de jetez un œil à notre manuel utilisateur présent sur les pages du Wiki %s"
 
 #: ../../txts/editor_readme.lua:15
 msgid ""
@@ -536,126 +539,126 @@ msgstr "Raccourcis Clavier"
 #. TRANSLATORS: This is a hotkey
 #: ../../txts/editor_readme.lua:21
 msgid "Space:"
-msgstr ""
+msgstr "Espace:"
 
 #: ../../txts/editor_readme.lua:21
 msgid "toggles if building spaces are shown"
-msgstr ""
+msgstr "Montre les espaces constructibles"
 
 #. TRANSLATORS: This is a hotkey
 #: ../../txts/editor_readme.lua:23
 msgid "C:"
-msgstr ""
+msgstr "C:"
 
 #: ../../txts/editor_readme.lua:23
 msgid "toggles census"
-msgstr ""
+msgstr "Montrer le recensement"
 
 #. TRANSLATORS: This is a hotkey
 #: ../../txts/editor_readme.lua:25
 msgid "F:"
-msgstr ""
+msgstr "F:"
 
 #: ../../txts/editor_readme.lua:25
 msgid "toggles fullscreen"
-msgstr ""
+msgstr "Basculer en plein-écran"
 
 #. TRANSLATORS: This is a hotkey
 #: ../../txts/editor_readme.lua:27
 msgid "H:"
-msgstr ""
+msgstr "H:"
 
 #: ../../txts/editor_readme.lua:27
 msgid "toggles main menu"
-msgstr ""
+msgstr "Menu principal"
 
 #. TRANSLATORS: This is a hotkey
 #: ../../txts/editor_readme.lua:29
 msgid "M:"
-msgstr ""
+msgstr "M:"
 
 #: ../../txts/editor_readme.lua:29
 msgid "toggles minimap"
-msgstr ""
+msgstr "Montrer la minicarte"
 
 #. TRANSLATORS: This is a hotkey
 #: ../../txts/editor_readme.lua:31
 msgid "P:"
-msgstr ""
+msgstr "P:"
 
 #: ../../txts/editor_readme.lua:31
 msgid "toggles player menu"
-msgstr ""
+msgstr "Montrer le menu du joueur"
 
 #. TRANSLATORS: This is a hotkey
 #: ../../txts/editor_readme.lua:33
 msgid "T:"
-msgstr ""
+msgstr "T:"
 
 #: ../../txts/editor_readme.lua:33
 msgid "toggles tools menu"
-msgstr ""
+msgstr "Montrer le menu des outils"
 
 #. TRANSLATORS: This is a hotkey
 #: ../../txts/editor_readme.lua:35
 msgid "I:"
-msgstr ""
+msgstr "I:"
 
 #: ../../txts/editor_readme.lua:35
 msgid "activates information tool"
-msgstr ""
+msgstr "Activer l'information d'outil"
 
 #. TRANSLATORS: This is a hotkey
 #: ../../txts/editor_readme.lua:37
 msgid "Ctrl + L:"
-msgstr ""
+msgstr "Ctrl + L:"
 
 #: ../../txts/editor_readme.lua:37
 msgid "load map"
-msgstr ""
+msgstr "Charger une carte"
 
 #. TRANSLATORS: This is a hotkey
 #: ../../txts/editor_readme.lua:39
 msgid "Ctrl + S:"
-msgstr ""
+msgstr "Ctrl + S:"
 
 #: ../../txts/editor_readme.lua:39
 msgid "save map"
-msgstr ""
+msgstr "Sauvegarder la carte"
 
 #. TRANSLATORS: This is a hotkey
 #: ../../txts/editor_readme.lua:41
 msgid "1-0:"
-msgstr ""
+msgstr "1-0:"
 
 #: ../../txts/editor_readme.lua:41
 msgid "changes tool size"
-msgstr ""
+msgstr "Changer la taille de l'outil"
 
 #. TRANSLATORS: This is a hotkey
 #: ../../txts/editor_readme.lua:43
 msgid "Shift (Hold):"
-msgstr ""
+msgstr "Shift (Maintenir):"
 
 #: ../../txts/editor_readme.lua:43
 msgid "selects first alternative tool while pressed"
-msgstr ""
+msgstr "Sélectionner le premier outil alternatif quand la touche est pressée"
 
 #. TRANSLATORS: This is a hotkey
 #: ../../txts/editor_readme.lua:45
 msgid "Alt (Hold):"
-msgstr ""
+msgstr "Alt (Maintenir):"
 
 #: ../../txts/editor_readme.lua:45
 msgid "Selects second alternative tool while pressed"
-msgstr ""
+msgstr "Sélectionner le second outil alternatif lorsque la touche est pressée"
 
 #: ../../txts/tips/atlanteans.tip:2 ../../txts/tips/barbarians.tip:2
 #: ../../txts/tips/empire.tip:2
 msgid ""
 "Some buildings, such as the farm, have a very small work area. If the "
 "building is surrounded with trees or roads, production will stop."
-msgstr ""
+msgstr "Quelques constructions comme les fermes on une zone de travail très réduite. Si la construction est entourée d'arbres ou de routes, la production stoppera."
 
 #: ../../txts/tips/atlanteans.tip:6
 msgid ""
@@ -667,7 +670,7 @@ msgstr "Toujours construire une maison de  garde forestier et une cabane de pisc
 msgid ""
 "Keep an eye on your fishers. After fish resources are exhausted in their "
 "work area, they will stop fishing."
-msgstr ""
+msgstr "Garder un œil sur vos pêcheurs. Lorsque les ressources de poissons sont épuisés dans la zone de pêche, ils arrêtent automatiquement la pêche."
 
 #: ../../txts/tips/barbarians.tip:10
 msgid ""
@@ -686,25 +689,25 @@ msgid ""
 "You can select multiple animal types if you hold down Ctrl during selection."
 " If you then click on the map, an instance of one of the selected animal "
 "types will be placed."
-msgstr ""
+msgstr "Il est possible de sélectionner plusieurs types d'animaux si vous maintenez la touche Ctrl durant la sélection. Si ensuite vous cliquez sur la carte, une instance d'un type d'animal sélectionné sera placée."
 
 #: ../../txts/tips/editor.tip:10
 msgid ""
 "Just like with animals, you can also select multiple immovables or ground "
 "textures with Ctrl + mouse click."
-msgstr ""
+msgstr "Comme avec les animaux, vous pouvez également sélectionner plusieurs bâtiments ou textures de terrain avec Ctrl + clic de souris."
 
 #: ../../txts/tips/editor.tip:14
 msgid ""
 "Holding down Shift switches the first alternative tool on. This tool is in "
 "most cases the complete opposite of the normal tool (for example deletion of"
 " an object instead of placing one)."
-msgstr ""
+msgstr "Maintenir Shift active le premier outil alternatif. Cet outil est dans la plupart des cas l'opposé complet de l'outil normal (par exemple la suppression d'un objet en lieu et place du placement d'objet)."
 
 #: ../../txts/tips/editor.tip:18
 msgid ""
 "Holding down Alt switches the second alternative tool on (if it exists)."
-msgstr ""
+msgstr "Maintenir Alt active le second outil alternatif (si celui-ci existe)."
 
 #: ../../txts/tips/editor.tip:22
 msgid ""
@@ -716,7 +719,7 @@ msgstr "Les touches numériques (1 - 0) vous permettent de définir directement 
 msgid ""
 "Space key behaves like in normal game. It switches if building spaces are "
 "shown on or off."
-msgstr ""
+msgstr "La touche espace se comporte de la même façon qu'en jeu. Elle montre/cache les espaces constructibles disponibles. "
 
 #: ../../txts/tips/empire.tip:10
 msgid "Always build a forester’s house so you will not run out of logs."
@@ -738,7 +741,7 @@ msgstr "Assurez-vous d'envoyer un géologue étudier les sites avant de construi
 msgid ""
 "Your territory can be expanded by building various military buildings – "
 "Sentry, Fortress, Blockhouse, etc."
-msgstr ""
+msgstr "Votre territoire peut être étendu par différents bâtiments militaires - Tour, Forteresse, Caserne, etc."
 
 #: ../../txts/tips/general_game.tip:14
 msgid "Miners will work only if supplied with food."

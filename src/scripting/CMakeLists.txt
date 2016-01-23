@@ -64,9 +64,9 @@ wl_library(scripting_lua_interface
     lua_path.h
     run_script.cc
     run_script.h
-  USES_BOOST_REGEX
   DEPENDS
     base_i18n
+    base_macros
     build_info
     helper
     io_filesystem

@@ -3,6 +3,7 @@
 # 
 # Translators:
 # Bananasoft <bananasoftservice@yahoo.it>, 2015
+# Cristiano, 2015
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # GunChleoc, 2014
 # GunChleoc, 2014
@@ -11,9 +12,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-12-07 20:16+0000\n"
-"PO-Revision-Date: 2015-12-09 17:41+0000\n"
-"Last-Translator: Bananasoft <bananasoftservice@yahoo.it>\n"
+"POT-Creation-Date: 2015-12-14 05:31+0000\n"
+"PO-Revision-Date: 2015-12-28 15:28+0000\n"
+"Last-Translator: Cristiano\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -28,14 +29,14 @@ msgctxt "message_short_title"
 msgid "Building lost!"
 msgstr "Edificio perso!"
 
+#: ../../campaigns/atl01.wmf/scripting/init.lua:76
+msgid "We lost a building to the ocean!"
+msgstr "Abbiamo perso un edificio per colpa dell'oceano!"
+
 #: ../../campaigns/atl01.wmf/scripting/init.lua:82
 msgctxt "message_heading"
 msgid "Building lost!"
 msgstr "Edificio perso!"
-
-#: ../../campaigns/atl01.wmf/scripting/init.lua:76
-msgid "We lost a building to the ocean!"
-msgstr "Abbiamo perso un edificio per colpa dell'oceano!"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:32
 msgid "Ensure the supply of building wares"
@@ -124,7 +125,7 @@ msgstr "Costruisci un pozzo"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:63
 msgid "Build a bakery to bake bread from cornmeal, blackroot flour and water"
-msgstr ""
+msgstr "Costruisci un forno per produrre del pane partendo da farina di mais, farina di radici nere e acqua."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:64
 msgid "Build a hunter’s house to get raw meat"
@@ -187,7 +188,7 @@ msgid ""
 "mine will dig for quartz and diamonds – all of them are precious materials "
 "and very rarely found. It will produce a lot of stone while searching for "
 "them."
-msgstr ""
+msgstr "Il ferro grezzo, l'oro grezzo e il carbone sono estratti nelle rispettive miniere. Dalle miniere di cristallo si estraggono quarzi e diamanti - sono tutti materiali preziosi e trovati molto raramente. Mentre li si ricerca, vengono prodotte molte pietre."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:89
 msgid ""
@@ -895,6 +896,7 @@ msgid ""
 msgstr "Hai vinto questa missione. Continua con la prossima o continua a giocare per quanto tempo vuoi."
 
 #: ../../scripting/format_scenario.lua:36
+#, lua-format
 msgid "“%s”"
 msgstr "“%s”"
 

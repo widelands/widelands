@@ -25,16 +25,16 @@
 #include "economy/flag.h"
 #include "economy/portdock.h"
 #include "economy/road.h"
-#include "logic/constructionsite.h"
-#include "logic/dismantlesite.h"
+#include "logic/map_objects/tribes/constructionsite.h"
+#include "logic/map_objects/tribes/dismantlesite.h"
 #include "logic/game.h"
-#include "logic/militarysite.h"
-#include "logic/productionsite.h"
-#include "logic/ship.h"
-#include "logic/soldier.h"
-#include "logic/trainingsite.h"
-#include "logic/warehouse.h"
-#include "logic/worker.h"
+#include "logic/map_objects/tribes/militarysite.h"
+#include "logic/map_objects/tribes/productionsite.h"
+#include "logic/map_objects/tribes/ship.h"
+#include "logic/map_objects/tribes/soldier.h"
+#include "logic/map_objects/tribes/trainingsite.h"
+#include "logic/map_objects/tribes/warehouse.h"
+#include "logic/map_objects/tribes/worker.h"
 #include "scripting/lua.h"
 #include "scripting/luna.h"
 
@@ -328,17 +328,17 @@ private:
 };
 
 
-class LuaMilitarySiteDescription : public LuaProductionSiteDescription {
+class LuaMilitarySiteDescription : public LuaBuildingDescription {
 public:
 	LUNA_CLASS_HEAD(LuaMilitarySiteDescription);
 
 	virtual ~LuaMilitarySiteDescription() {}
 
 	LuaMilitarySiteDescription() {}
-	LuaMilitarySiteDescription(const Widelands::ProductionSiteDescr* const militarysitedescr)
-		: LuaProductionSiteDescription(militarysitedescr) {
+	LuaMilitarySiteDescription(const Widelands::MilitarySiteDescr* const militarysitedescr)
+		: LuaBuildingDescription(militarysitedescr) {
 	}
-	LuaMilitarySiteDescription(lua_State* L) : LuaProductionSiteDescription(L) {
+	LuaMilitarySiteDescription(lua_State* L) : LuaBuildingDescription(L) {
 	}
 
 	/*
@@ -367,7 +367,7 @@ public:
 	virtual ~LuaTrainingSiteDescription() {}
 
 	LuaTrainingSiteDescription() {}
-	LuaTrainingSiteDescription(const Widelands::ProductionSiteDescr* const trainingsitedescr)
+	LuaTrainingSiteDescription(const Widelands::TrainingSiteDescr* const trainingsitedescr)
 		: LuaProductionSiteDescription(trainingsitedescr) {
 	}
 	LuaTrainingSiteDescription(lua_State* L) : LuaProductionSiteDescription(L) {

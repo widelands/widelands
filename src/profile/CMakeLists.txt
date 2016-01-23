@@ -11,5 +11,4 @@ wl_library(profile
     build_info
     io_fileread
     io_filesystem
-    logic
  )

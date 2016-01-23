@@ -52,7 +52,7 @@ def print_error(filename, line_index, message):
         message = '%s%s%s%s' % (
             ANSI_COLORS["yellow"], ANSI_COLORS["bold"],
             message, ANSI_COLORS["reset"])
-    print "%s:%s: %s" % (filename, line_index, message)
+    print("%s:%s: %s" % (filename, line_index, message))
 
 __INCLUDE = re.compile(r'#include "([^"]+)"')
 def extract_includes(srcdir, source):
@@ -201,7 +201,7 @@ def main():
     for lib in targets.values():
         for src in lib.srcs:
             if src in owners_of_src:
-                print "%s:1 is owned by more than one target." % src
+                print("%s:1 is owned by more than one target." % src)
             owners_of_src[src] = lib
 
 

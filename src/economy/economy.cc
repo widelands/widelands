@@ -20,6 +20,7 @@
 #include "economy/economy.h"
 
 #include <memory>
+#include <unordered_set>
 
 #include <boost/bind.hpp>
 
@@ -33,10 +34,10 @@
 #include "economy/router.h"
 #include "economy/warehousesupply.h"
 #include "logic/game.h"
+#include "logic/map_objects/tribes/soldier.h"
+#include "logic/map_objects/tribes/tribe_descr.h"
+#include "logic/map_objects/tribes/warehouse.h"
 #include "logic/player.h"
-#include "logic/soldier.h"
-#include "logic/tribes/tribe_descr.h"
-#include "logic/warehouse.h"
 
 namespace Widelands {
 
@@ -664,13 +665,39 @@ Supply * Economy::_find_best_supply
 	Route  * best_route  = nullptr;
 	int32_t  best_cost   = -1;
 	Flag & target_flag = req.target_flag();
+	Map & map = game.map();
+
+	available_supplies.clear();
 
 	for (size_t i = 0; i < m_supplies.get_nrsupplies(); ++i) {
 		Supply & supp = m_supplies[i];
 
-		// Check requirements
+		// Just skip if supply does not provide required ware
 		if (!supp.nr_supplies(game, req))
 			continue;
+
+		const SupplyProviders provider = supp.provider_type(&game);
+
+		// We generally ignore disponible wares on ship as it is not possible to reliably
+		// calculate route (transportation time)
+		if (provider == SupplyProviders::kShip) {
+			continue;
+		}
+
+		const Widelands::Coords provider_position = supp.get_position(game)->base_flag().get_position();
+
+		const uint32_t dist = map.calc_distance(target_flag.get_position(), provider_position);
+
+		UniqueDistance ud = {dist, supp.get_position(game)->serial(), provider};
+
+		// std::map quarantees uniqueness, practically it means that if more wares are on the same flag, only
+		// first one will be inserted into available_supplies
+		available_supplies.insert(std::make_pair(ud, &m_supplies[i]));
+	}
+
+	// Now available supplies have been sorted by distance to requestor
+	for (auto& supplypair : available_supplies) {
+		Supply & supp = *supplypair.second;
 
 		Route * const route =
 			best_route != &buf_route0 ? &buf_route0 : &buf_route1;
@@ -685,11 +712,17 @@ Supply * Economy::_find_best_supply
 			 	 req.get_type(),
 			 	 best_cost))
 		{
-			if (!best_route)
-			log ("Economy::find_best_supply: Error, COULD NOT FIND A ROUTE!");
+			if (!best_route) {
+				log ("Economy::find_best_supply: Error, COULD NOT FIND A ROUTE!");
+				// To help to debug this a bit:
+				log (" ... ware at: %3dx%3d, requestor at: %3dx%3d!",
+					supp.get_position(game)->base_flag().get_position().x,
+					supp.get_position(game)->base_flag().get_position().y,
+					target_flag.get_position().x,
+					target_flag.get_position().y);
+			}
 			continue;
 		}
-
 		best_supply = &supp;
 		best_route = route;
 		best_cost = route->get_totalcost();
@@ -776,8 +809,9 @@ void Economy::_process_requests(Game & game, RSPairStruct & s)
 		}
 
 		int32_t const priority = req.get_priority(cost);
-		if (priority < 0)
+		if (priority < 0) {
 			continue;
+		}
 
 		// Otherwise, consider this request/supply pair for queueing
 		RequestSupplyPair rsp;
@@ -825,8 +859,9 @@ void Economy::_balance_requestsupply(Game & game)
 			rsps.nexttimer = 200;
 	}
 
-	if (rsps.nexttimer > 0) //  restart the timer, if necessary
+	if (rsps.nexttimer > 0) { //  restart the timer, if necessary
 		_start_request_timer(rsps.nexttimer);
+	}
 }
 
 
@@ -1037,12 +1072,30 @@ void Economy::_handle_active_supplies(Game & game)
 
 		bool haveprefer = false;
 		bool havenormal = false;
+
+		// One of preferred warehouses (if any) with lowest stock of ware/worker
+		Warehouse * preferred_wh = nullptr;
+		// Stock of particular ware in preferred warehouse
+		uint32_t preferred_wh_stock = std::numeric_limits<uint32_t>::max();
+
 		for (uint32_t nwh = 0; nwh < m_warehouses.size(); ++nwh) {
 			Warehouse * wh = m_warehouses[nwh];
 			Warehouse::StockPolicy policy = wh->get_stock_policy(type, ware);
 			if (policy == Warehouse::SP_Prefer) {
 				haveprefer = true;
-				break;
+
+				// Getting count of worker/ware
+				uint32_t current_stock;
+				if (type == WareWorker::wwWARE) {
+					current_stock = wh->get_wares().stock(ware);
+				} else {
+					current_stock = wh->get_workers().stock(ware);
+				}
+				// Stocks lower then in previous one?
+				if (current_stock < preferred_wh_stock) {
+					preferred_wh = wh;
+					preferred_wh_stock = current_stock;
+				}
 			}
 			if (policy == Warehouse::SP_Normal)
 				havenormal = true;
@@ -1050,17 +1103,22 @@ void Economy::_handle_active_supplies(Game & game)
 		if (!havenormal && !haveprefer && type == wwWARE)
 			continue;
 
-		Warehouse * wh = find_closest_warehouse
-			(supply.get_position(game)->base_flag(), type, nullptr, 0,
-			 (!haveprefer && !havenormal)
-			 ?
-			 WarehouseAcceptFn()
-			 :
-			 boost::bind
-				(&accept_warehouse_if_policy,
-				 _1, type, ware,
-				 haveprefer ? Warehouse::SP_Prefer : Warehouse::SP_Normal));
-
+		// We either have one preferred warehouse picked up or walk on roads to find nearest one
+		Warehouse * wh = nullptr;
+		if (preferred_wh) {
+			wh = preferred_wh;
+		} else {
+			wh = find_closest_warehouse
+				(supply.get_position(game)->base_flag(), type, nullptr, 0,
+				 (!havenormal)
+				 ?
+				 WarehouseAcceptFn()
+				 :
+				 boost::bind
+					(&accept_warehouse_if_policy,
+					 _1, type, ware,
+					 Warehouse::SP_Normal));
+		}
 		if (!wh) {
 			log
 				("Warning: Economy::_handle_active_supplies "

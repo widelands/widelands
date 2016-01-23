@@ -2,18 +2,20 @@
 # Copyright (C) 2005-2015 Widelands Development Team
 # 
 # Translators:
+# Cristiano, 2015
 # Davide Nicolini <davide97@gmail.com>, 2015
 # FIRST AUTHOR <gabriel.rota@gmail.com>, 2009
 # Gabriel Rota <gabriel.rota@gmail.com>, 2009
 # GunChleoc, 2014
 # Guybrush88 <erpizzo@alice.it>, 2015
+# Luigi Lain <lainluigi86@tiscali.it>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-12-07 20:16+0000\n"
-"PO-Revision-Date: 2015-12-08 16:35+0000\n"
-"Last-Translator: Davide Nicolini <davide97@gmail.com>\n"
+"POT-Creation-Date: 2015-12-14 05:31+0000\n"
+"PO-Revision-Date: 2016-01-11 19:14+0000\n"
+"Last-Translator: Luigi Lain <lainluigi86@tiscali.it>\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -48,10 +50,11 @@ msgid ""
 msgstr "Questo gioco è Free and Open Source (FOSS), rilasciato sotto licenza GNU General Public License (GPL) V2.0."
 
 #: ../../txts/LICENSE.lua:26
+#, lua-format
 msgid ""
 "You can find more information on FOSS and the GPL by visiting the following "
 "webpage:  %s"
-msgstr ""
+msgstr "Puoi trovare maggiori informazioni sulla FOSS e la GPL visitando la pagina seguente: %s"
 
 #: ../../txts/LICENSE.lua:27
 msgid ""
@@ -61,19 +64,19 @@ msgstr "Lì puoi trovare il testo completo della licenza ed ulteriori informazio
 
 #: ../../txts/LICENSE.lua:29
 msgid "We are also shipping the GPL as a text document with Widelands itself."
-msgstr ""
+msgstr "Abbiamo distribuito la GPL come documento di testo insieme a Widelands stesso."
 
 #: ../../txts/LICENSE.lua:30
 msgid ""
 "On Linux, you can find the file called COPYING in the root of the source or "
 "standalone binary package, or in the installation directory (like ‘%1%’)."
-msgstr ""
+msgstr "Su Linux, puoi trovare il file chiamato COPYING nella cartella principale dei sorgenti o del pacchetto binario, o nella cartella di installazione (esempio: '%1%')."
 
 #: ../../txts/LICENSE.lua:31
 msgid ""
 "On Windows, you can find the file called COPYING.txt in the installation "
 "folder, and the Widelands Start menu entry provides a link to this file."
-msgstr ""
+msgstr "Su Windows, puoi trovare il file chiamato COPYING nella cartella di installazione, e nello Star menu Widelands c'è un link che punta a questo file."
 
 #: ../../txts/LICENSE.lua:32
 msgid ""
@@ -86,7 +89,7 @@ msgid ""
 "This game comes as-is and without any warranty. For more information and "
 "support you can find us at %1% (Website, Wiki, Forum for questions or "
 "general support), %2% (Bugtracker), and %3% (Translations)."
-msgstr ""
+msgstr "Questo gioco è così com'è, senza alcuna garanzia. Per maggiori informazioni e supporto puoi trovarci a %1% (Website, Wiki, Forum per domande o supporto in genere), %2% (Bugtracker), e %3% (Traduzioni)."
 
 #: ../../txts/README.lua:6
 msgid "README"
@@ -149,20 +152,20 @@ msgid ""
 "To close an open window, right-click on it. To minimize/maximize a window, "
 "click on it with the middle mouse button or with the left mouse button while"
 " holding down Ctrl."
-msgstr ""
+msgstr "Per chiudere una finestra aperta, clicca con il tasto destro al suo interno. Per massimizzare o minimizzare una finestra, clicca nella finestra con il tasto centrale del mouse o con il tasto sinistro mentre tieni premuto Ctrl."
 
 #: ../../txts/README.lua:49
 msgid ""
 "If you hold Ctrl while building a road, flags will be placed automatically.\n"
 "If you hold Ctrl while removing a road, all flags up to the first junction are\n"
 "removed."
-msgstr ""
+msgstr "Se tieni premuto Ctrl mentre costruisci una strada, le bandiere verranno posizionate automaticamente.\nSe tieni premuto Ctrl mentre rimuovi una strada, tutte le bandiere fino\nal primo incrocio saranno rimosse."
 
 #: ../../txts/README.lua:53
 msgid ""
 "You can skip confirmation windows for irreversible actions if you hold Ctrl\n"
 "while clicking on the action button."
-msgstr ""
+msgstr "Puoi saltare la finestra di conferma per le azioni irreversibili se tieni premuto Ctrl\nmentre clicchi il pulsante dell'azione."
 
 #: ../../txts/README.lua:56
 msgid "Keyboard shortcuts (in-game)"
@@ -296,6 +299,7 @@ msgid ""
 msgstr "Una descrizione dettagliata dell' economia delle tribù è disponibile nel Enciclopedia Tribale presente nel gioco."
 
 #: ../../txts/README.lua:92
+#, lua-format
 msgid ""
 "If you need more documentation or help for Widelands or the Widelands "
 "Editor, be sure to visit our homepage at %s. You can find online help in our"
@@ -328,7 +332,7 @@ msgstr "- Cosa ti aspettavi avvenisse quando hai eseguito i passaggi e cosa inve
 msgid ""
 "- Which version of Widelands you are running (i.e. either the build number or\n"
 "the revision number if you are running a development version or a daily build.)"
-msgstr ""
+msgstr "- Quale versione di Widelands stai usando (es. il numero della build oppure \nil numero della revisione se stai usando una versione di sviluppo o una release giornaliera.)"
 
 #: ../../txts/README.lua:109
 msgid ""
@@ -426,7 +430,7 @@ msgstr "Fedora Linux"
 
 #: ../../txts/developers.lua:3
 msgid "Former Elders"
-msgstr ""
+msgstr "precedenti Anziani"
 
 #: ../../txts/developers.lua:3
 msgid "FreeBSD"
@@ -436,11 +440,10 @@ msgstr "FreeBSD"
 msgid "Graphicians"
 msgstr "Grafici"
 
-#: ../../txts/developers.lua:3 ../../txts/developers.lua:3
+#: ../../txts/developers.lua:3
 msgid "Graphics"
 msgstr "Grafica"
 
-#: ../../txts/developers.lua:3 ../../txts/developers.lua:3
 #: ../../txts/developers.lua:3
 msgid "Homepage"
 msgstr "Pagina iniziale"
@@ -473,7 +476,7 @@ msgstr "Altro"
 msgid "Packagers"
 msgstr "Pacchettizzatori"
 
-#: ../../txts/developers.lua:3 ../../txts/developers.lua:3
+#: ../../txts/developers.lua:3
 msgid "Sound"
 msgstr "Suono"
 
@@ -522,6 +525,7 @@ msgid ""
 msgstr "Come puoi vedere, questo Editor è fortemente sotto sviluppo e può essere migliorato e migliorerà, questo testo inoltre diventerà più lungo e più completo."
 
 #: ../../txts/editor_readme.lua:14
+#, lua-format
 msgid "Please have a look at our enduser manuals on our wiki pages at: %s"
 msgstr "Guarda nel nostro manuale per l'utente finale nelle nostre pagine wiki a:"
 
@@ -641,7 +645,7 @@ msgstr "SHIFT (Tieni premuto):"
 
 #: ../../txts/editor_readme.lua:43
 msgid "selects first alternative tool while pressed"
-msgstr ""
+msgstr "seleziona il primo strumento alternativo mentre premuto"
 
 #. TRANSLATORS: This is a hotkey
 #: ../../txts/editor_readme.lua:45
@@ -650,14 +654,14 @@ msgstr "ALT (Tieni premuto):"
 
 #: ../../txts/editor_readme.lua:45
 msgid "Selects second alternative tool while pressed"
-msgstr ""
+msgstr "Seleziona il secondo strumento alternativo mentre premuto"
 
 #: ../../txts/tips/atlanteans.tip:2 ../../txts/tips/barbarians.tip:2
 #: ../../txts/tips/empire.tip:2
 msgid ""
 "Some buildings, such as the farm, have a very small work area. If the "
 "building is surrounded with trees or roads, production will stop."
-msgstr ""
+msgstr "Alcuni edifici, come le fattorie, hanno un'area di lavoro molto piccola. Se l'edificio è circondato da alberi o strade, la produzione si fermerà."
 
 #: ../../txts/tips/atlanteans.tip:6
 msgid ""
@@ -669,13 +673,13 @@ msgstr "Bisogna sempre costruire una casa della guardia forestale e una casa del
 msgid ""
 "Keep an eye on your fishers. After fish resources are exhausted in their "
 "work area, they will stop fishing."
-msgstr ""
+msgstr "Tieni sotto controllo i tuoi pescatori. Dopo che i pesci della loro area di lavoro sono finiti, smetteranno di pescare."
 
 #: ../../txts/tips/barbarians.tip:10
 msgid ""
 "Always build a ranger’s and a gamekeeper’s hut, so you will not run out of "
 "logs or food."
-msgstr ""
+msgstr "Bisogna sempre costruire una casa della guardia forestale e una casa del guardia caccia, se non vuoi esaurire il legname e il cibo."
 
 #: ../../txts/tips/editor.tip:2
 msgid ""
@@ -688,25 +692,25 @@ msgid ""
 "You can select multiple animal types if you hold down Ctrl during selection."
 " If you then click on the map, an instance of one of the selected animal "
 "types will be placed."
-msgstr ""
+msgstr "Puoi selezionare più animali se tieni premuto Ctrl durante la selezione. Quando poi clicchi sulla mappa, verrà posizionato un animale scelto a caso fra quelli selezionati."
 
 #: ../../txts/tips/editor.tip:10
 msgid ""
 "Just like with animals, you can also select multiple immovables or ground "
 "textures with Ctrl + mouse click."
-msgstr ""
+msgstr "Come con gli animali, puoi selezionare anche molteplici immobili o terreni con Ctrl + click del mouse."
 
 #: ../../txts/tips/editor.tip:14
 msgid ""
 "Holding down Shift switches the first alternative tool on. This tool is in "
 "most cases the complete opposite of the normal tool (for example deletion of"
 " an object instead of placing one)."
-msgstr ""
+msgstr "Tenendo premuto Shift si seleziona il primo strumento alternativo. Nella maggior parte dei casi questo è l'esatto opposto delllo strumento normale (per esempio, cancella un oggetto anzichè inserirlo)"
 
 #: ../../txts/tips/editor.tip:18
 msgid ""
 "Holding down Alt switches the second alternative tool on (if it exists)."
-msgstr ""
+msgstr "Tenendo premuto Alt si seleziona il secondo strumento alternatiivo (se esiste)"
 
 #: ../../txts/tips/editor.tip:22
 msgid ""
@@ -718,7 +722,7 @@ msgstr "I tasti numerici (1-0) ti consentono di impostare direttamente l'area de
 msgid ""
 "Space key behaves like in normal game. It switches if building spaces are "
 "shown on or off."
-msgstr ""
+msgstr "Il tasto SPAZIO si comporta come in una partita normale. Attiva e disattiva la visualizzazione degli spazi di costruzione."
 
 #: ../../txts/tips/empire.tip:10
 msgid "Always build a forester’s house so you will not run out of logs."
@@ -740,7 +744,7 @@ msgstr "Assicurati di mandare un geologo ad esaminare i luoghi prima di costruir
 msgid ""
 "Your territory can be expanded by building various military buildings – "
 "Sentry, Fortress, Blockhouse, etc."
-msgstr ""
+msgstr "Il tuo territorio può essere esteso costruendo vari edifici militari - guardiole, fortezze, caserme, ecc."
 
 #: ../../txts/tips/general_game.tip:14
 msgid "Miners will work only if supplied with food."
@@ -762,26 +766,26 @@ msgstr "Qualche domanda? La nostra FAQ, la wiki e ovviamente il nostra community
 msgid ""
 "Use the priority buttons in building windows to adjust delivery of a "
 "specific ware."
-msgstr ""
+msgstr "Usa i pulsanti di priorità nella finestra dell'edificio per calibrare la consegna di una merce specifica"
 
 #: ../../txts/tips/general_game.tip:30
 msgid ""
 "Use the ‘configure economy’ menu to adjust the target quantity of wares. It "
 "can be accessed via the flag menu."
-msgstr ""
+msgstr "Usa il menu 'configura economia' per cambiare la quantità desiderata di merci. Questo menu può essere aperto dal menu di una bandiera."
 
 #: ../../txts/tips/general_game.tip:34
 msgid ""
 "Manage your messages more efficiently: press ‘N’ for News to access the "
 "messages window, then use ‘G’ for Go To, and the Delete key to archive "
 "messages."
-msgstr ""
+msgstr "Gestisci i tuoi messaggi in maniera efficiente: premi 'N' per aprire la finestra dei messaggi, poi usa il tasto 'G' per andare sul posto, premi il tasto Delete per archiviare il messaggio."
 
 #: ../../txts/tips/general_game.tip:38
 msgid ""
 "Use the ‘,’ (comma) and ‘.’ (period) keys to go back and forth between "
 "recently visited places in the world."
-msgstr ""
+msgstr "Usa i tasti ',' (virgola) e '.' (punto) per tornare indietro e avanti nei posti visitati di recente nella mappa."
 
 #: ../../txts/tips/general_game.tip:42
 msgid ""
@@ -793,7 +797,7 @@ msgstr "Premi Ctrl+(0-9) per memorizzare posizioni importanti, poi premi 0-9 per
 msgid ""
 "Removing a road while holding Ctrl lets you remove all flags up to the first"
 " junction."
-msgstr ""
+msgstr "Rimuovendo una strada mentre tieni premuto Ctrl, ti consente di rimuovere tutte le bandiere fino al primo incrocio."
 
 #: ../../txts/tips/general_game.tip:50
 msgid ""

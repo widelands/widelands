@@ -28,10 +28,10 @@
 #include "ai/ai_help_structs.h"
 #include "ai/computer_player.h"
 #include "base/i18n.h"
-#include "logic/immovable.h"
-#include "logic/ship.h"
-#include "logic/soldier.h"
-#include "logic/trainingsite.h"
+#include "logic/map_objects/immovable.h"
+#include "logic/map_objects/tribes/ship.h"
+#include "logic/map_objects/tribes/soldier.h"
+#include "logic/map_objects/tribes/trainingsite.h"
 
 namespace Widelands {
 struct Road;
@@ -329,11 +329,14 @@ private:
 	int32_t spots_;  // sum of buildable fields
 	int32_t vacant_mil_positions_;  // sum of vacant positions in militarysites and training sites
 	// statistics for training sites per type
-	uint8_t ts_basic_count_;
-	uint8_t ts_basic_const_count_;
-	uint8_t ts_advanced_count_;
-	uint8_t ts_advanced_const_count_;
-	uint8_t ts_without_trainers_;
+	int16_t ts_basic_count_;
+	int16_t ts_basic_const_count_;
+	int16_t ts_advanced_count_;
+	int16_t ts_advanced_const_count_;
+	int16_t ts_without_trainers_;
+
+	// This stores highest priority for new buildings except for militarysites
+	int32_t highest_nonmil_prio_;
 
 	// this is helping counter to track how many scheduler tasks are too delayed
 	// the purpose is to print out a warning that the game is pacing too fast

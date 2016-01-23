@@ -20,7 +20,7 @@
 #ifndef WL_SCRIPTING_LUA_GAME_H
 #define WL_SCRIPTING_LUA_GAME_H
 
-#include "logic/building.h"
+#include "logic/map_objects/tribes/building.h"
 #include "logic/message_id.h"
 #include "scripting/lua.h"
 #include "scripting/lua_bases.h"

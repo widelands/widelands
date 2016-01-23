@@ -25,15 +25,9 @@ tribes:new_militarysite_type {
 
    animations = {
       idle = {
-         template = "idle_??",
-         directory = dirname,
+         pictures = path.list_files(dirname .. "idle_??.png"),
          hotspot = { 33, 41 },
       }
-   },
-
-   -- TODO(GunChleoc): Get rid of this when we inherit from BuildingDescr directly.
-   outputs = {
-      "atlanteans_soldier",
    },
 
    max_soldiers = 2,

@@ -3,13 +3,14 @@
 # 
 # Translators:
 # Joe Hansen <joedalton2@yahoo.dk>, 2015
+# Ole Laursen <ole.laursen@gmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-12-03 09:55+0000\n"
-"PO-Revision-Date: 2015-12-03 09:57+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2015-12-14 05:31+0000\n"
+"PO-Revision-Date: 2016-01-03 22:55+0000\n"
+"Last-Translator: Ole Laursen <ole.laursen@gmail.com>\n"
 "Language-Team: Danish (http://www.transifex.com/widelands/widelands/language/da/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,7 +20,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:16
 msgid "Nice And Easy Does It All the Time"
-msgstr "Stille og roligt får arbejdet udført"
+msgstr "Stille og roligt gør det hver gang"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:18
 msgid ""
@@ -27,7 +28,7 @@ msgid ""
 " here later on. If I am too slow for you, you might want to play a real game"
 " and just find everything out for yourself. Otherwise, please bear with me, "
 "I am not the youngest and quickest anymore."
-msgstr "Jeg beklager, men jeg må rive det her ned igen. Vi skal sandsynligvis bruge pladsen her senere. Hvis jeg er for langsom, så kan du eventuelt spille et rigtigt spil og selv finde ud af styringen. Ellers, så bær over med mig, jeg er ikke mere den yngste eller den hurtigste."
+msgstr "Jeg beklager, men jeg må rive det her ned igen. Vi skal sandsynligvis bruge pladsen her senere. Hvis jeg er for langsom, så kan du eventuelt spille et rigtigt spil og selv finde ud af styringen. Ellers, så bær over med mig, jeg er ikke længere den yngste eller den hurtigste."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:26
 msgid "Welcome to the Widelands Tutorial!"
@@ -42,7 +43,7 @@ msgid ""
 "Widelands is a slow-paced build-up strategy game with an emphasis on "
 "construction rather than destruction. This tutorial will guide you through "
 "the basics of the game."
-msgstr "Widelands er et langsomt opbyggende strategispil med vægt på konstruktion frem for ødelæggelse. Denne introduktion vil gennemgå de grundlæggende aspekter af spillet."
+msgstr "Widelands er et strategispil der tager sig tid med vægt på opbygning frem for ødelæggelse. Denne introduktion gennemgår de grundlæggende aspekter af spillet."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:31
 msgid "Dismiss this box by left-clicking on the button below."
@@ -62,7 +63,7 @@ msgid ""
 "and the Atlanteans. All tribes have a different economy, strength and "
 "weaknesses, but the general gameplay is the same for all. We will play the "
 "Barbarians for now."
-msgstr "Der er tre forskellige stammer i Widelands: barbarerne, imperiet og atlanteanerne. Alle stammer har forskellig økonomi, styrker og svagheder, men den generelle spilide er ens for alle. Vi spiller nu som barbarerne."
+msgstr "Der er tre forskellige stammer i Widelands: barbarerne, imperiet og atlantenerne. Alle stammer har forskellig infrastrukter, styrker og svagheder, men det generelle spil er ens for alle. Vi spiller nu som barbarerne."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:43
 msgid ""
@@ -91,17 +92,17 @@ msgstr "Venstreklik på knappen »O.k.« for at lukke boksen og prøv så selv."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:49
 msgid "Enable the showing of building spaces"
-msgstr "Aktiver visning af byggepladser"
+msgstr "Aktivér visning af mulige byggeplaceringer"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:51
 msgid "Show Building Spaces"
-msgstr "Vis byggepladser"
+msgstr "Vis byggeplaceringer"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:52
 msgid ""
 "It is easier to understand what type of buildings can be built on which "
 "field when the symbols for the building spaces are enabled."
-msgstr "Det er nemmere at forstå hvilke bygningstyper, der kan bygges på hvilke områder, når symbolerne for byggepladserne er aktiveret."
+msgstr "Det er nemmere at forstå hvilke bygningstyper, der kan bygges på hvilke områder, når symbolerne for byggeplaceringer er aktiveret."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:54
 msgid ""
@@ -196,28 +197,28 @@ msgstr "Prøv du denne gang: Klik på det gule flagsymbol imellem de to blå fla
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:120
 msgid "build flag symbol."
-msgstr "byg flagsymbol."
+msgstr "sæt flag-symbolet."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:124
 msgid "Build a flag to divide the road to the lumberjack"
-msgstr "Byg et flag for at opdele vejen til skovhuggerhytten"
+msgstr "Sæt et flag for at opdele vejen til skovhuggerhytten"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:126
 msgid "Build a Flag on the Road"
-msgstr "Byg et flag på vejen"
+msgstr "Sæt et flag på vejen"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:127
 msgid ""
 "The shorter your road segments are, the faster your wares will be "
 "transported. You should therefore make sure that your roads have as many "
 "flags as possible."
-msgstr "Jo kortere dine vejstrækninger er, jo hurtigere vil dine varer blive transporteret. Du skal derfor sikre dig, at dine veje har så mange flag som muligt."
+msgstr "Jo kortere dine vejstrækninger er, jo mere effektivt vil dine varer blive transporteret. Du bør derfor sikre dig at dine veje har så mange flag som muligt."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:129
 msgid ""
 "Build a blue flag now in the middle of the road that connects your "
 "headquarters to your lumberjack’s hut."
-msgstr "Byg et blå flag nu i midten af vejen, som forbinder dit hovedkvarter til skovhuggerhytten."
+msgstr "Byg et blå flag nu i midt på vejen som forbinder dit hovedkvarter til skovhuggerhytten."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:134
 msgid "Waiting For the Hut to be Finished"
@@ -280,7 +281,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:169
 msgid "Lumberjack is Done"
-msgstr ""
+msgstr "Skovhugger er færdig"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:172
 msgid ""
@@ -291,11 +292,11 @@ msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:179
 msgid "Some Rocks Were Found"
-msgstr ""
+msgstr "Nogle sten blev fundet"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:180
 msgid "Getting a Quarry Up"
-msgstr ""
+msgstr "Få et stenbrud op"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:182
 msgid ""
@@ -303,7 +304,7 @@ msgid ""
 "quarry next to some rocks lying around. As it happens, there is a pile of "
 "them just to the west (left) of your headquarters. I will teach you now how "
 "to move your view over there."
-msgstr ""
+msgstr "Sten kan hugges ud af granitminer, men den nemmeste måde er at bygge et stenbrud ved siden af nogle klipper. Tilfældigvis er der et område med klipper lige vest (til venstre) for hovedkvarteret. Jeg vil nu lære dig hvordan du flytter kortet derover."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:184
 msgid ""
@@ -317,11 +318,11 @@ msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:189
 msgid "Move your view with the cursor keys"
-msgstr ""
+msgstr "Flytte på kortet med piletasterne"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:191
 msgid "Moving Your View"
-msgstr ""
+msgstr "Flytte rundt på kortet"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:192
 msgid ""
@@ -716,11 +717,11 @@ msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:397
 msgid "Messages"
-msgstr ""
+msgstr "Meddelelser"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:398
 msgid "Introducing Messages"
-msgstr ""
+msgstr "Introduktion til meddelelser"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:400
 msgid ""
@@ -977,7 +978,7 @@ msgstr ""
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:508
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:510
 msgid "Conclusion"
-msgstr ""
+msgstr "Konklusion"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:511
 msgid ""
@@ -1013,8 +1014,9 @@ msgid ""
 msgstr ""
 
 #: ../../scripting/format_scenario.lua:36
+#, lua-format
 msgid "“%s”"
-msgstr ""
+msgstr "“%s”"
 
 #: ../../scripting/format_scenario.lua:146
 msgid "New Objective"

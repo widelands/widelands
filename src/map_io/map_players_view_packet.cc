@@ -33,10 +33,9 @@
 #include "logic/editor_game_base.h"
 #include "logic/field.h"
 #include "logic/game_data_error.h"
+#include "logic/map_objects/tribes/tribe_descr.h"
+#include "logic/map_objects/world/world.h"
 #include "logic/player.h"
-#include "logic/tribes/tribe_descr.h"
-#include "logic/world/world.h"
-
 
 namespace Widelands {
 
@@ -176,12 +175,6 @@ namespace {
 
 
 // Errors for the Read* functions.
-struct TribeNonexistent : public FileRead::DataError {
-	TribeNonexistent(char const* const Name)
-	   : DataError("tribe \"%s\" does not exist", Name), name(Name) {
-	}
-	char const* const name;
-};
 struct TribeImmovableNonexistent : public FileRead::DataError {
 	TribeImmovableNonexistent(const std::string& Name)
 	   : DataError("immovable type \"%s\" does not seem to be a tribe immovable", Name.c_str()),
