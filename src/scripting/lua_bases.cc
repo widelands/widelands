@@ -84,6 +84,7 @@ const MethodType<LuaEditorGameBase> LuaEditorGameBase::Methods[] = {
 	METHOD(LuaEditorGameBase, get_tribe_description),
 	METHOD(LuaEditorGameBase, get_ware_description),
 	METHOD(LuaEditorGameBase, get_worker_description),
+	METHOD(LuaEditorGameBase, get_resource_description),
 	METHOD(LuaEditorGameBase, get_terrain_description),
 	{nullptr, nullptr},
 };
@@ -272,7 +273,32 @@ int LuaEditorGameBase::get_worker_description(lua_State* L) {
 }
 
 /* RST
-	.. function:: get_terrain_description(tribe_name)
+	.. function:: get_resource_description(resource_name)
+
+		:arg resource_name: the name of the resource
+
+		Registers a resource description so Lua can reference it from the editor.
+
+		(RO) The :class:`~wl.Game.Resource_description`.
+*/
+int LuaEditorGameBase::get_resource_description(lua_State* L) {
+	if (lua_gettop(L) != 2) {
+		report_error(L, "Wrong number of arguments");
+	}
+	const std::string resource_name = luaL_checkstring(L, 2);
+	const World& world = get_egbase(L).world();
+	DescriptionIndex idx = world.get_resource(resource_name.c_str());
+
+	if (idx == INVALID_INDEX) {
+		report_error(L, "Resource %s does not exist", resource_name.c_str());
+	}
+
+	const ResourceDescription* descr = world.get_resource(idx);
+	return to_lua<LuaMaps::LuaResourceDescription>(L, new LuaMaps::LuaResourceDescription(descr));
+}
+
+/* RST
+	.. function:: get_terrain_description(terrain_name)
 
 		:arg terrain_name: the name of the terrain
 

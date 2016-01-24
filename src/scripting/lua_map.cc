@@ -2644,6 +2644,65 @@ int LuaWorkerDescription::get_needed_experience(lua_State * L) {
  ==========================================================
  */
 
+/* RST
+ResourceDescription
+--------------------
+.. class:: ResourceDescription
+
+	A static description of a resource.
+*/
+// NOCOM write tests
+const char LuaResourceDescription::className[] = "ResourceDescription";
+const MethodType<LuaResourceDescription> LuaResourceDescription::Methods[] = {
+	{nullptr, nullptr},
+};
+const PropertyType<LuaResourceDescription> LuaResourceDescription::Properties[] = {
+	PROP_RO(LuaResourceDescription, name),
+	PROP_RO(LuaResourceDescription, descname),
+	{nullptr, nullptr, nullptr},
+};
+
+void LuaResourceDescription::__persist(lua_State* L) {
+	const Widelands::ResourceDescription* descr = get();
+	PERS_STRING("name", descr->name());
+}
+
+void LuaResourceDescription::__unpersist(lua_State* L) {
+	std::string name;
+	UNPERS_STRING("name", name);
+	const World& world = get_egbase(L).world();
+	const ResourceDescription* descr = world.get_resource(world.safe_resource_index(name.c_str()));
+	set_description_pointer(descr);
+}
+
+/*
+ ==========================================================
+ PROPERTIES
+ ==========================================================
+ */
+
+/* RST
+	.. attribute:: name
+
+			(RO) the :class:`string` internal name of this resource
+*/
+
+int LuaResourceDescription::get_name(lua_State * L) {
+	lua_pushstring(L, get()->name());
+	return 1;
+}
+
+/* RST
+	.. attribute:: descname
+
+			(RO) the :class:`string` display name of this resource
+*/
+
+int LuaResourceDescription::get_descname(lua_State * L) {
+	lua_pushstring(L, get()->descname());
+	return 1;
+}
+
 
 
 /* RST
@@ -2662,14 +2721,14 @@ const MethodType<LuaTerrainDescription> LuaTerrainDescription::Methods[] = {
 const PropertyType<LuaTerrainDescription> LuaTerrainDescription::Properties[] = {
 	PROP_RO(LuaTerrainDescription, name),
 	PROP_RO(LuaTerrainDescription, descname),
-	PROP_RO(LuaTerrainDescription, default_resource_descname),
+	PROP_RO(LuaTerrainDescription, default_resource_name),
 	PROP_RO(LuaTerrainDescription, default_resource_amount),
 	PROP_RO(LuaTerrainDescription, editor_category),
 	PROP_RO(LuaTerrainDescription, fertility),
 	PROP_RO(LuaTerrainDescription, humidity),
 	PROP_RO(LuaTerrainDescription, representative_image),
 	PROP_RO(LuaTerrainDescription, temperature),
-	PROP_RO(LuaTerrainDescription, valid_resources_descnames),
+	PROP_RO(LuaTerrainDescription, valid_resources_names),
 	{nullptr, nullptr, nullptr},
 };
 
@@ -2719,11 +2778,11 @@ int LuaTerrainDescription::get_descname(lua_State * L) {
 				  nil if the terrain has no default resource.
 */
 
-int LuaTerrainDescription::get_default_resource_descname(lua_State * L) {
+int LuaTerrainDescription::get_default_resource_name(lua_State * L) {
 	int res_index = get()->get_default_resource();
 	const World& world = get_egbase(L).world();
 	if (res_index != Widelands::kNoResource && res_index < world.get_nr_resources()) {
-		lua_pushstring(L, world.get_resource(res_index)->descname());
+		lua_pushstring(L, world.get_resource(res_index)->name());
 	} else {
 		lua_pushnil(L);
 	}
@@ -2809,19 +2868,19 @@ int LuaTerrainDescription::get_temperature(lua_State * L) {
 
 
 /* RST
-	.. attribute:: valid_resources_descnames
+	.. attribute:: valid_resources_names
 
-			(RO) a list of the descnames for all valid resources for this terrain.
+			(RO) a list of the names for all valid resources for this terrain.
 */
 
-int LuaTerrainDescription::get_valid_resources_descnames(lua_State * L) {
+int LuaTerrainDescription::get_valid_resources_names(lua_State * L) {
 	const World& world = get_egbase(L).world();
 	lua_newtable(L);
 	int index = 1;
 	for (uint8_t res_index : get()->valid_resources()) {
 		if (res_index != Widelands::kNoResource && res_index < world.get_nr_resources()) {
 			lua_pushint32(L, index++);
-			lua_pushstring(L, world.get_resource(res_index)->descname());
+			lua_pushstring(L, world.get_resource(res_index)->name());
 			lua_settable(L, -3);
 		}
 	}
@@ -5360,6 +5419,7 @@ void luaopen_wlmap(lua_State * L) {
 	add_parent<LuaWorkerDescription, LuaMapObjectDescription>(L);
 	lua_pop(L, 1); // Pop the meta table
 
+	register_class<LuaResourceDescription>(L, "map");
 	register_class<LuaTerrainDescription>(L, "map");
 
 	register_class<LuaField>(L, "map");

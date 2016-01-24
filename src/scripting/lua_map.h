@@ -44,6 +44,7 @@ namespace Widelands {
 	class SoldierDescr;
 	class BuildingDescr;
 	class Bob;
+	class ResourceDescription;
 	class WareDescr;
 	class WorkerDescr;
 	class TerrainDescription;
@@ -561,6 +562,51 @@ private:
 #undef CASTED_GET_DESCRIPTION
 
 
+class LuaResourceDescription : public LuaMapModuleClass {
+public:
+	LUNA_CLASS_HEAD(LuaResourceDescription);
+
+	virtual ~LuaResourceDescription() {}
+
+	LuaResourceDescription() : resourcedescr_(nullptr) {}
+	LuaResourceDescription(const Widelands::ResourceDescription* const resourcedescr)
+		: resourcedescr_(resourcedescr) {}
+	LuaResourceDescription(lua_State* L) : resourcedescr_(nullptr) {
+		report_error(L, "Cannot instantiate a 'LuaResourceDescription' directly!");
+	}
+
+	void __persist(lua_State * L) override;
+	void __unpersist(lua_State * L) override;
+
+	/*
+	 * Properties
+	 */
+	int get_name(lua_State *);
+	int get_descname(lua_State *);
+
+	/*
+	 * Lua methods
+	 */
+
+	/*
+	 * C methods
+	 */
+protected:
+	const Widelands::ResourceDescription* get() const {
+		assert(resourcedescr_ != nullptr);
+		return resourcedescr_;
+	}
+	// For persistence.
+	void set_description_pointer(const Widelands::ResourceDescription* pointer) {
+		resourcedescr_ = pointer;
+	}
+
+private:
+	const Widelands::ResourceDescription* resourcedescr_;
+};
+
+
+
 class LuaTerrainDescription : public LuaMapModuleClass {
 public:
 	LUNA_CLASS_HEAD(LuaTerrainDescription);
@@ -582,14 +628,14 @@ public:
 	 */
 	int get_name(lua_State *);
 	int get_descname(lua_State *);
-	int get_default_resource_descname(lua_State *);
+	int get_default_resource_name(lua_State *);
 	int get_default_resource_amount(lua_State *);
 	int get_editor_category(lua_State *);
 	int get_fertility(lua_State *);
 	int get_humidity(lua_State *);
 	int get_representative_image(lua_State *);
 	int get_temperature(lua_State *);
-	int get_valid_resources_descnames(lua_State *);
+	int get_valid_resources_names(lua_State *);
 
 	/*
 	 * Lua methods
