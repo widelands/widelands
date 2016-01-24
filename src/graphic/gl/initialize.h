@@ -29,7 +29,7 @@ namespace Gl {
 // Initializes OpenGL. Creates a context for 'window' using SDL and loads the
 // GL library. Fills in 'max_texture_size' and returns the created SDL_Context
 // which must be closed by the caller.
-// If we are build against glbinding, 'trace' will set up tracing for
+// If we are built against glbinding, 'trace' will set up tracing for
 // OpenGL and output every single opengl call ever made, together with it's
 // arguments, return values and the result from glGetError.
 enum class Trace {

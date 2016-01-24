@@ -44,6 +44,10 @@ initialize(const Trace& trace, SDL_Window* sdl_window, GLint* max_texture_size) 
 #ifdef USE_GLBINDING
 	glbinding::Binding::initialize();
 
+	// The undocumented command line argument --debug_gl_trace will set
+	// Trace::kYes. This will log every OpenGL call that is made, together with
+	// arguments, return values and glError status. This requires that Widelands
+	// is built using -DOPTION_USE_GLBINDING:BOOL=ON. It is a NoOp for GLEW.
 	if (trace == Trace::kYes) {
 		setCallbackMaskExcept(
 				glbinding::CallbackMask::After | glbinding::CallbackMask::ParametersAndReturnValue,
