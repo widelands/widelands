@@ -59,5 +59,7 @@ protected:
 
 #define wexception(...) WException(__FILE__, __LINE__, __VA_ARGS__)
 
+// Throws a wexception for unreachable code.
+#define NEVER_HERE() throw WException(__FILE__, __LINE__, "Unreachable code was reached.")
 
 #endif  // end of include guard: WL_BASE_WEXCEPTION_H

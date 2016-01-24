@@ -20,6 +20,7 @@
 #include "editor/ui_menus/editor_tool_menu.h"
 
 #include "base/i18n.h"
+#include "base/wexception.h"
 #include "editor/editorinteractive.h"
 #include "editor/tools/editor_decrease_height_tool.h"
 #include "editor/tools/editor_decrease_resources_tool.h"
@@ -140,7 +141,7 @@ void EditorToolMenu::changed_to() {
 		current_registry_pointer = nullptr; // no need for a window
 		break;
 	default:
-		assert(false);
+		NEVER_HERE();
 		break;
 	}
 
@@ -200,7 +201,7 @@ void EditorToolMenu::changed_to() {
 					*current_registry_pointer);
 				break;
 			default:
-				assert(false);
+				NEVER_HERE();
 			}
 	}
 }

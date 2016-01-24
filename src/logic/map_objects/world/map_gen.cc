@@ -23,6 +23,7 @@
 #include <string>
 #include <vector>
 
+#include "base/wexception.h"
 #include "logic/game_data_error.h"
 #include "logic/map_objects/world/world.h"
 #include "scripting/lua_table.h"
@@ -47,9 +48,15 @@ MapGenLandResource::get_bob_category(MapGenAreaInfo::MapGenTerrainType terrType)
 		return wasteland_inner_bob_category_;
 	case MapGenAreaInfo::ttWastelandOuter:
 		return wasteland_outer_bob_category_;
-	default:
+	case MapGenAreaInfo::ttWaterOcean:
+	case MapGenAreaInfo::ttWaterShelf:
+	case MapGenAreaInfo::ttWaterShallow:
+	case MapGenAreaInfo::ttMountainsFoot:
+	case MapGenAreaInfo::ttMountainsMountain:
+	case MapGenAreaInfo::ttMountainsSnow:
 		return nullptr;
-	};
+	}
+	NEVER_HERE();
 }
 
 MapGenLandResource::MapGenLandResource(const LuaTable& table, MapGenInfo& mapGenInfo) {
@@ -110,8 +117,6 @@ MapGenAreaInfo::MapGenAreaInfo(const LuaTable& table,
 		read_terrains("inner_terrains", &terrains1_);
 		read_terrains("outer_terrains", &terrains2_);
 		break;
-	default:
-		throw wexception("bad areaType");
 	}
 }
 
@@ -142,10 +147,8 @@ size_t MapGenAreaInfo::get_num_terrains(MapGenTerrainType const terrType) const 
 		return terrains2_.size();
 	case ttMountainsSnow:
 		return terrains3_.size();
-
-	default:
-		return 0;
 	}
+	NEVER_HERE();
 }
 
 DescriptionIndex MapGenAreaInfo::get_terrain(MapGenTerrainType const terrType,
@@ -176,10 +179,8 @@ DescriptionIndex MapGenAreaInfo::get_terrain(MapGenTerrainType const terrType,
 		return terrains2_[index];
 	case ttMountainsSnow:
 		return terrains3_[index];
-
-	default:
-		return 0;
 	}
+	NEVER_HERE();
 }
 
 uint32_t MapGenInfo::get_sum_land_weight() const {
@@ -226,9 +227,8 @@ size_t MapGenInfo::get_num_areas(MapGenAreaInfo::MapGenAreaType const areaType) 
 		return mountain_areas_.size();
 	case MapGenAreaInfo::atWasteland:
 		return wasteland_areas_.size();
-	default:
-		throw wexception("invalid MapGenAreaType %u", areaType);
 	}
+	NEVER_HERE();
 }
 
 const MapGenAreaInfo& MapGenInfo::get_area(MapGenAreaInfo::MapGenAreaType const areaType,
@@ -242,9 +242,8 @@ const MapGenAreaInfo& MapGenInfo::get_area(MapGenAreaInfo::MapGenAreaType const 
 		return mountain_areas_.at(index);
 	case MapGenAreaInfo::atWasteland:
 		return wasteland_areas_.at(index);
-	default:
-		throw wexception("invalid MapGenAreaType %u", areaType);
 	}
+	NEVER_HERE();
 }
 
 const MapGenBobCategory* MapGenInfo::get_bob_category(const std::string& bobCategory) const {

@@ -1,7 +1,7 @@
 function ware_helptext(tribe)
    local helptext = {
       -- TRANSLATORS: Helptext for a ware: Battle Ax
-      barbarians = pgettext("barbarians_ware", "This is a dangerous weapon the Barbarians are able to produce. It is produced in the ax workshop. Only trained soldiers are able to wield such a weapon. It is used – together with food – in the training camp to train soldiers from attack level 3 to 4.")
+      barbarians = pgettext("barbarians_ware", "This is a dangerous weapon the Barbarians are able to produce. It is produced in the war mill. Only trained soldiers are able to wield such a weapon. It is used – together with food – in the training camp to train soldiers from attack level 3 to 4.")
    }
    local result = ""
    if tribe then

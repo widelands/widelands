@@ -205,7 +205,6 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 					newstate = PlayerSettings::stateClosed;
 				break;
 			}
-		default:;
 		}
 
 		h->set_player_state(number, newstate, true);
@@ -1680,7 +1679,7 @@ void NetHost::set_player_init(uint8_t const number, uint8_t const index)
 			return;
 		}
 	}
-	assert(false);
+	NEVER_HERE();
 }
 
 

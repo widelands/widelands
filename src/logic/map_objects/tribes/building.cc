@@ -686,8 +686,8 @@ void Building::draw
 	(const EditorGameBase& game, RenderTarget& dst, const FCoords& coords, const Point& pos)
 {
 	if (coords == m_position) { // draw big buildings only once
-		dst.drawanim
-			(pos, m_anim, game.get_gametime() - m_animstart, get_owner());
+		dst.blit_animation(
+		   pos, m_anim, game.get_gametime() - m_animstart, get_owner()->get_playercolor());
 
 		//  door animation?
 

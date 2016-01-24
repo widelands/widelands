@@ -268,7 +268,6 @@ void EncyclopediaWindow::entry_selected(const std::string& key,
 		case (Widelands::MapObjectType::FLAG):
 		case (Widelands::MapObjectType::ROAD):
 		case (Widelands::MapObjectType::PORTDOCK):
-		default:
 			throw wexception("EncyclopediaWindow: No MapObjectType defined for tab.");
 		}
 

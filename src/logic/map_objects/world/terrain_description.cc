@@ -96,8 +96,6 @@ TerrainDescription::Type::Type(TerrainDescription::Is _is) : is(_is) {
 		descname = _("unwalkable");
 		icon = g_gr->images().get("pics/terrain_unwalkable.png");
 		break;
-	default:
-		throw wexception("Unknown TerrainDescription::Is in TerrainDescription::Type");
 	}
 }
 
