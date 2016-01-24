@@ -2662,6 +2662,8 @@ const MethodType<LuaTerrainDescription> LuaTerrainDescription::Methods[] = {
 const PropertyType<LuaTerrainDescription> LuaTerrainDescription::Properties[] = {
 	PROP_RO(LuaTerrainDescription, name),
 	PROP_RO(LuaTerrainDescription, descname),
+	PROP_RO(LuaTerrainDescription, default_resource_descname),
+	PROP_RO(LuaTerrainDescription, default_resource_amount),
 	PROP_RO(LuaTerrainDescription, editor_category),
 	PROP_RO(LuaTerrainDescription, fertility),
 	PROP_RO(LuaTerrainDescription, humidity),
@@ -2708,6 +2710,31 @@ int LuaTerrainDescription::get_descname(lua_State * L) {
 	lua_pushstring(L, get()->descname());
 	return 1;
 }
+
+/* RST
+	.. attribute:: get_default_resource_descname
+
+			(RO) the :class:`string` description name of the default resource provided by this terrain.
+*/
+
+int LuaTerrainDescription::get_default_resource_descname(lua_State * L) {
+	int res_index = get()->get_default_resource();
+	const World& world = get_egbase(L).world();
+	lua_pushstring(L, world.get_resource(res_index)->descname());
+	return 1;
+}
+
+/* RST
+	.. attribute:: default_resource_amount
+
+			(RO) the int amount of the default resource provided by this terrain.
+*/
+
+int LuaTerrainDescription::get_default_resource_amount(lua_State * L) {
+	lua_pushinteger(L, get()->get_default_resource_amount());
+	return 1;
+}
+
 
 /* RST
 	.. attribute:: the name and descname of the editor category of this terrain
