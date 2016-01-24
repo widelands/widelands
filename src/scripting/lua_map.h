@@ -589,6 +589,7 @@ public:
 	int get_humidity(lua_State *);
 	int get_representative_image(lua_State *);
 	int get_temperature(lua_State *);
+	int get_valid_resources_descnames(lua_State *);
 
 	/*
 	 * Lua methods

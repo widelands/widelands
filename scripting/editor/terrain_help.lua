@@ -40,11 +40,21 @@ return {
 		local result = picture_li(terrain.representative_image, "")
 
 		-- Resources
-		local default_resource_name = terrain.default_resource_descname
-		if (default_resource_name ~= nil) then
+		local valid_resources = terrain.valid_resources_descnames
+		if (#valid_resources > 0) then
 			result = result .. rt(h2(_"Resources"))
-			-- TRANSLATORS: e.g. "5x Water"
-			result = result .. text_line(_"Default Resource:", _"%1%x %2%":bformat(terrain.default_resource_amount, default_resource_name))
+			if (#valid_resources > 0) then
+				result = result .. rt(h3(ngettext("Possible Resource:", "Possible Resources:", #valid_resources)))
+				for count, resourcename in pairs(valid_resources) do
+					result = result .. rt(p(resourcename))
+				end
+			end
+
+			local default_resource_name = terrain.default_resource_descname
+			if (default_resource_name ~= nil) then
+				-- TRANSLATORS: e.g. "5x Water"
+				result = result .. text_line(_"Default:", _"%1%x %2%":bformat(terrain.default_resource_amount, default_resource_name))
+			end
 		end
 
 		-- Trees

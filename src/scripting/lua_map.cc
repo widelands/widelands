@@ -2669,6 +2669,7 @@ const PropertyType<LuaTerrainDescription> LuaTerrainDescription::Properties[] = 
 	PROP_RO(LuaTerrainDescription, humidity),
 	PROP_RO(LuaTerrainDescription, representative_image),
 	PROP_RO(LuaTerrainDescription, temperature),
+	PROP_RO(LuaTerrainDescription, valid_resources_descnames),
 	{nullptr, nullptr, nullptr},
 };
 
@@ -2805,6 +2806,28 @@ int LuaTerrainDescription::get_temperature(lua_State * L) {
 	lua_pushnumber(L, get()->temperature());
 	return 1;
 }
+
+
+/* RST
+	.. attribute:: valid_resources_descnames
+
+			(RO) a list of the descnames for all valid resources for this terrain.
+*/
+
+int LuaTerrainDescription::get_valid_resources_descnames(lua_State * L) {
+	const World& world = get_egbase(L).world();
+	lua_newtable(L);
+	int index = 1;
+	for (uint8_t res_index : get()->valid_resources()) {
+		if (res_index != Widelands::kNoResource && res_index < world.get_nr_resources()) {
+			lua_pushint32(L, index++);
+			lua_pushstring(L, world.get_resource(res_index)->descname());
+			lua_settable(L, -3);
+		}
+	}
+	return 1;
+}
+
 
 /*
  ==========================================================

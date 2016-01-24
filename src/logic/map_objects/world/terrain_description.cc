@@ -222,6 +222,10 @@ int TerrainDescription::get_num_valid_resources() const {
 	return valid_resources_.size();
 }
 
+std::vector<uint8_t> TerrainDescription::valid_resources() const {
+	return valid_resources_;
+}
+
 bool TerrainDescription::is_resource_valid(const int res) const {
 	for (const uint8_t resource_index : valid_resources_) {
 		if (resource_index == res) {
