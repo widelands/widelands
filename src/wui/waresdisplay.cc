@@ -31,10 +31,10 @@
 #include "graphic/rendertarget.h"
 #include "graphic/text_layout.h"
 #include "logic/editor_game_base.h"
+#include "logic/map_objects/tribes/tribe_descr.h"
+#include "logic/map_objects/tribes/ware_descr.h"
+#include "logic/map_objects/tribes/worker.h"
 #include "logic/player.h"
-#include "logic/tribes/tribe_descr.h"
-#include "logic/ware_descr.h"
-#include "logic/worker.h"
 
 const int WARE_MENU_INFO_SIZE = 12;
 
@@ -296,9 +296,8 @@ const Widelands::TribeDescr::WaresOrder & AbstractWaresDisplay::icons_order() co
 		return m_tribe.wares_order();
 	case Widelands::wwWORKER:
 		return m_tribe.workers_order();
-	default:
-		throw wexception("Invalid m_type %d", m_type);
 	}
+	NEVER_HERE();
 }
 
 const Widelands::TribeDescr::WaresOrderCoords & AbstractWaresDisplay::icons_order_coords() const
@@ -308,9 +307,8 @@ const Widelands::TribeDescr::WaresOrderCoords & AbstractWaresDisplay::icons_orde
 		return m_tribe.wares_order_coords();
 	case Widelands::wwWORKER:
 		return m_tribe.workers_order_coords();
-	default:
-		throw wexception("Invalid m_type %d", m_type);
 	}
+	NEVER_HERE();
 }
 
 

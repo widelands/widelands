@@ -115,7 +115,6 @@ private:
 	BaseImmovable * immovable;
 
 	uint8_t caps                    : 7;
-	uint8_t buildhelp_overlay_index : 3;
 	uint8_t roads                   : 6;
 
 	Height height;
@@ -193,11 +192,6 @@ public:
 			(owner_info_and_selections & ~Border_Bitmask) | (b << Border_Bit);
 	}
 
-	uint8_t get_buildhelp_overlay_index() const {return buildhelp_overlay_index;}
-	void set_buildhelp_overlay_index(BuildhelpIndex const i) {
-		buildhelp_overlay_index = i;
-	}
-
 	int32_t get_roads() const {return roads;}
 	int32_t get_road(int32_t const dir) const {
 		return (roads >> dir) & RoadType::kMask;
@@ -207,18 +201,10 @@ public:
 		roads |= type << dir;
 	}
 
+	// Resources can be set through Map::set_resources()
 	// TODO(unknown): This should return DescriptionIndex
 	uint8_t get_resources() const {return m_resources;}
 	uint8_t get_resources_amount() const {return m_res_amount;}
-	void set_resources(uint8_t const res, uint8_t const amount) {
-		m_resources  = res;
-		m_res_amount = amount;
-	}
-
-	// TODO(unknown): This should take uint8_t
-	void set_initial_res_amount(int32_t const amount) {
-		m_initial_res_amount = amount;
-	}
 	// TODO(unknown): This should return uint8_t
 	int32_t get_initial_res_amount() const {return m_initial_res_amount;}
 

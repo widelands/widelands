@@ -2,18 +2,20 @@
 # Copyright (C) 2005-2015 Widelands Development Team
 # 
 # Translators:
+# adrien vigneron <adrienvigneron@ml1.net>, 2015
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # GunChleoc, 2014
 # GunChleoc, 2014
 # hugues martin, 2015
+# Jaypad <ju-ju@nataju.fr>, 2015
 # Tubuntu <tubuntu@testimonium.be>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-18 08:43+0000\n"
-"PO-Revision-Date: 2015-11-19 02:04+0000\n"
-"Last-Translator: hugues martin\n"
+"POT-Creation-Date: 2015-12-14 05:31+0000\n"
+"PO-Revision-Date: 2015-12-29 12:35+0000\n"
+"Last-Translator: Jaypad <ju-ju@nataju.fr>\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -34,7 +36,7 @@ msgstr "Construisez une cabane de garde sylviculteur à côté de chaque cabane 
 msgid ""
 "Naturally, trees only grow at a slow rate. To make sure you have enough "
 "logs, you have to build rangers."
-msgstr ""
+msgstr "Naturellement, les arbres poussent lentement. Pour être sur d'avoir assez de bois, vous devez produire des gardes sylviculteur."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:33
 msgid "Expand north-east and build a quarry"
@@ -42,7 +44,7 @@ msgstr "Développez-vous vers le nord est et construisez une carrière"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:35
 msgid "Expand north-east to the rocks"
-msgstr ""
+msgstr "S'étendre au nord-est vers les rochers"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:36
 msgid ""
@@ -60,11 +62,11 @@ msgstr "Commencez à construire des mines dans la montagne"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:44
 msgid "Build coal and iron mines"
-msgstr ""
+msgstr "Construisez des mines de charbon et de fer"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:45
 msgid "Build a coal mine and an iron mine."
-msgstr ""
+msgstr "Construisez une mine de charbon et une mine de fer."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:46
 msgid ""
@@ -74,7 +76,7 @@ msgid ""
 " will search for ores; otherwise, they would search for water. Then build a "
 "mine for both kinds of resources that they will find, choosing the "
 "appropriate mine to be built:"
-msgstr ""
+msgstr "Pour ce faire, placez un drapeau sur le flanc de la montagne à l'Est (sur le terrain montagneux, pas sur la prairie !). En cliquant sur ce drapeau, vous pourrez y envoyer des géologues. Comme le drapeau se situe sur une montagne, les géologues chercheront du minerai ; sinon ils auraient cherché de l'eau. \nEnsuite, construisez une mine pour chaque type de ressource qu'ils trouveront, en choisissant la mine appropriée :"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:48
 msgid "a bit of coal"
@@ -161,7 +163,7 @@ msgid ""
 "farms. The wheat of the farms has to be processed with water in a bakery "
 "before it becomes edible. You can obtain water by building a well on a spot "
 "where your geologists have found a water source."
-msgstr ""
+msgstr "Il est possible de produire d'autres types de nourriture, comme les pêcheurs et les fermiers.\nLe blé produit par les fermes doit être traité avec l'eau dans une boulangerie avant qu'il ne devienne comestible. Vous pouvez obtenir de l'eau en construisant un puits sur un emplacement où les géologues ont signalé une source."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:82
 msgid "Refine your mined resources"
@@ -183,13 +185,13 @@ msgstr "Améliorez vos bâtiments et construisez une petite brasserie"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:92
 msgid "Enhance a mine and the tavern, and build a micro brewery."
-msgstr ""
+msgstr "Améliorez une mine et la taverne, puis construisez une petite brasserie."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:93
 msgid ""
 "Enhance the coal mine or the iron mine to a deep mine, and enhance the "
 "tavern to an inn."
-msgstr ""
+msgstr "Améliorez la mine de charbon ou la mine de fer vers une mine profonde et améliorez la taverne en auberge."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:94
 msgid "Also build a micro brewery."
@@ -201,7 +203,7 @@ msgid ""
 "beneath it; then it must be enhanced to a deep mine in order to keep it "
 "working properly. To enhance a building, choose it and then click the "
 "appropriate button in the appearing window."
-msgstr ""
+msgstr "Une mine normale ne peut obtenir que le tiers des ressources du sous-sol. Il faut ensuite l'améliorer en mine profonde pour qu'elle continue à extraire correctement le minerai.\nPour améliorer un bâtiment, sélectionnez-le et cliquez sur le bouton approprié dans sa fenêtre d'informations."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:96
 msgid ""
@@ -239,7 +241,7 @@ msgid ""
 "to be refined to blackwood by a wood hardener first. Always remember to "
 "build a wood hardener before you run out of blackwood, as without it you "
 "cannot expand."
-msgstr ""
+msgstr "Les plus grands et meilleurs bâtiments, y compris les bâtiments militaires, nécessitent de meilleurs matériaux de construction. Ils ne peuvent être construits à partir de simples troncs, ceux-ci doivent être transformés en bois dur par un durcisseur de bois avant que vos réserves ne s'épuisent, sinon, vous ne pourrez pas étendre votre territoire."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:113
 msgid "Build a lime kiln and coal economy"
@@ -248,41 +250,41 @@ msgstr "Construisez un four à chaux et une économie du charbon"
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:115
 msgid ""
 "Build a lime kiln fed by a well, and by a charcoal kiln or by a coal mine"
-msgstr ""
+msgstr "Construisez un four à chaux, approvisionné par un puits et un four ou une mine de charbon"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:116
 msgid ""
 "Better buildings may also require other improved materials besides "
 "blackwood. One of these is grout, which is produced out of granite, water "
 "and coal by a lime-burner."
-msgstr ""
+msgstr "Les meilleurs bâtiments peuvent aussi nécessiter d'autres matériaux améliorés que le bois dur. Un de ceux-ci est la chaux, qui est produite à partir de granite, d'eau et de charbon par un brûleur de chaux."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:118
 msgid ""
 "You can obtain water by building a well upon a water source, which your "
 "geologists can discover when you send them to any flag that is not on a "
 "mountain."
-msgstr ""
+msgstr "Vous pouvez obtenir de l'eau en construisant un puits sur une source, que vos géologues peuvent découvrir quand vous les envoyez sur un drapeau qui ne se trouve pas sur une montagne."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:121
 msgid ""
 "In order to call a geologist to search for water, click on a flag in the "
 "area that you want him to search and then on the button labeled ‘Send "
 "geologist to explore site’."
-msgstr ""
+msgstr "Pour demander à un géologue de chercher de l'eau, cliquez sur un drapeau dans la zone de recherche puis sur le bouton \"Envoyer un géologue explorer ce site\"."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:123
 msgid ""
 "Coal can be obtained by building a charcoal kiln or a coal mine. Burning "
 "charcoal out of logs is slow. You should only build a charcoal kiln when no "
 "coal is available."
-msgstr ""
+msgstr "Le charbon peut être obtenu en construisant un four à charbon ou une mine de charbon. Transformer les troncs en charbon est lent. Vous ne devriez construire un four à charbon que lorsque vous n'avez pas la possibilité de construire une mine."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:125
 msgid ""
 "Build a lime kiln and a well. Additionally, build either a charcoal kiln or "
 "a coal mine for coal supply."
-msgstr ""
+msgstr "Construisez un four à chaux et un puits. Assurez également l'approvisionnement en charbon à l'aide d'un four ou d'une mine."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:130
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:132
@@ -309,7 +311,7 @@ msgid ""
 "enough to transport goods swiftly. Traffic jams are the consequence. Such "
 "roads therefore employ a second carrier: an ox that helps to carry the "
 "wares. This doubles the transport capacity."
-msgstr ""
+msgstr "Lorsque les routes sont fortement sollicitées pendant une longue période, un porteur n'est généralement pas suffisant pour transporter les marchandises rapidement. Il en résulte des embouteillages.\nCes routes emploient donc un deuxième porteur : un bœuf aide au transport des marchandises, ce qui double leur capacité de transport. "
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:145
 msgid "Oxen are bred in cattle farms out of wheat and water."
@@ -327,7 +329,7 @@ msgstr "L'histoire commence"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:157
 msgid "Thron sighs…"
-msgstr ""
+msgstr "Thron soupire..."
 
 #. TRANSLATORS: Thron
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:159
@@ -379,18 +381,18 @@ msgid ""
 "As father told me, there are times to fight and times to lie and wait, "
 "trying not to fall asleep or die before the right time comes. And so I do "
 "wait."
-msgstr ""
+msgstr "Comme Père me le disait, il y a un temps pour la guerre et un temps pour se reposer, en essayant de ne pas s'endormir et mourir avant que le moment soit venu. Donc j'attends."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:204
 msgid "Thron is shaking his head…"
-msgstr ""
+msgstr "Thron bouge sa tête de gauche à droite ..."
 
 #. TRANSLATORS: Thron
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:206
 msgid ""
 "Yet the war goes on. More and more of our brothers and sisters flee the "
 "brutal war raging in the capital beneath the trees."
-msgstr ""
+msgstr "Pourtant, la guerre continue. De plus en plus de nos frères et sœurs fuient la brutalité de la guerre qui fait rage dans la capitale, derrière les arbres."
 
 #. TRANSLATORS: Thron
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:209
@@ -412,14 +414,14 @@ msgid ""
 "brothers will ever gain and hold control over the wooden throne, none of the"
 " tribes will be strong enough to subdue the other. There will be no end to "
 "this slaughter, unless… is this it? As father told me?"
-msgstr ""
+msgstr "Aujourd'hui, mes chasseurs ont amené devant moi des hommes, des femmes et de jeunes enfants qui s'étaient cachés dans nos forêts, essayant d'échapper à la guerre, la haine et la revanche qui fait rage entre des tribus qui se battent entre elles depuis la nuit des temps, lorsque nous n'étions rien de plus que des bêtes dirigées par leur instinct. \nAucun de mes frères ne gagnera et conservera le contrôle du trône de bois, aucune des tribus ne sera assez forte pour surpasser les autres. Il n'y aura pas de fin à ce massacre, à moins que... est ce cela ? Comme Père me l'a dit ?"
 
 #. TRANSLATORS: Thron
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:221
 msgid ""
 "To rise against whoever threatens our very existence, even though it may be "
 "one of your own blood or mind?"
-msgstr ""
+msgstr "Devrons-nous nous soulever contre quiconque menace notre existence, même s'il est de notre sang ?"
 
 #. TRANSLATORS: Thron
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:229
@@ -438,7 +440,7 @@ msgid ""
 " it’s time to give those who still live and think united a new home, "
 "replacing what is now lost to us? Until we can return to the place we once "
 "called our home…"
-msgstr ""
+msgstr "Peut-être est-il temps de faire le nécessaire pour nous sentir plus à l'aise ici. Peut-être est-il temps de donner un nouveau foyer à ceux qui restent en vie, pour remplacer celui que nous avons perdu ? Jusqu'à ce que nous puissions retourner à l'endroit que nous appelions notre foyer..."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:237
 msgid "Somebody Comes up to You"
@@ -446,7 +448,7 @@ msgstr "Quelqu'un se présente à vous"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:238
 msgid "An old man says…"
-msgstr ""
+msgstr "Un vieil homme dit..."
 
 #. TRANSLATORS: Khantrukh
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:240
@@ -461,7 +463,7 @@ msgid ""
 "Only the gods know for how long we have to remain hidden here. The warriors "
 "hope we may march back gloriously any day now, but I strongly doubt that "
 "will happen soon. And the days are short and cold…"
-msgstr ""
+msgstr "Seuls les Dieux savent combien de temps nous devrons rester cachés ici. Les guerriers espèrent que nous pourrons revenir vainqueurs un jour prochain, mais je doute fortement que cela arrive bientôt. En plus, les jours sont courts et froids..."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:248
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:321
@@ -478,14 +480,14 @@ msgstr "Le conseiller"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:249
 msgid "Khantrukh notes…"
-msgstr ""
+msgstr "Khantrukh note…"
 
 #. TRANSLATORS: Khantrukh
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:251
 msgid ""
 "I see you have already built a quarry and two lumberjack’s huts. That is a "
 "good beginning if we want to stay here longer."
-msgstr ""
+msgstr "Je vois que vous avez déjà construit une carrière et deux cabanes de bûcheron. C'est un bon début si on souhaite rester ici un peu plus longtemps."
 
 #. TRANSLATORS: Khantrukh
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:254
@@ -500,7 +502,7 @@ msgstr "Mais n'oublions jamais, ces forêts sont notre héritage, nos ancêtres 
 msgid ""
 "So, in order to replace the trees we chop down, we should build some "
 "ranger’s huts, preferably close to the lumberjack’s huts."
-msgstr ""
+msgstr "Donc, pour remplacer les arbres que nous abattons, nous devrions construire des cabanes de sylviculteur, de préférence proches des cabanes de bûcheron."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:263
 msgid "In the Night"
@@ -509,7 +511,7 @@ msgstr "Pendant la nuit"
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:264
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:278
 msgid "Thron says…"
-msgstr ""
+msgstr "Thron dit..."
 
 #. TRANSLATORS: Thron
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:266
@@ -524,7 +526,7 @@ msgstr "Lors d'une autre nuit blanche, je suis allé en haut de la colline et j'
 msgid ""
 "They are a constant reminder of why we have to hide here… and why we must "
 "return in the end!"
-msgstr ""
+msgstr "Ils sont un souvenir permanent des raisons qui font que nous nous cachons ici... et pourquoi nous devrons revenir à la fin !"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:277
 msgid "At the Tomb"
@@ -536,14 +538,14 @@ msgid ""
 "Once again, I went up to my father’s tomb, in a sacred grove at the foot of "
 "the great spire of Kal’mavrath. I just stood there and felt neither the "
 "hours pass nor the cold rain pouring down from the darkened sky…"
-msgstr ""
+msgstr "Encore une fois, je me suis rendu sur la tombe de mon père, dans un bosquet sacré au pied de la grande flèche de Kal'mavrath. Je me suis tenu là, ne sentant ni la neige froide tomber du ciel assombri ni les heures passer..."
 
 #. TRANSLATORS: Thron
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:283
 msgid ""
 "Somehow, it felt like a farewell. For the first time, I wondered what the "
 "future might hold for me…"
-msgstr ""
+msgstr "D'une certaine manière, cela ressemblai à des adieux. Pour la première fois, je me suis demandé ce que l'avenir pouvait me réserver..."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:291
 msgid "The Other Day"
@@ -551,7 +553,7 @@ msgstr "L'autre jour"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:292
 msgid "Thron says thoughtfully…"
-msgstr ""
+msgstr "Thron dit pensivement..."
 
 #. TRANSLATORS: Thron
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:294
@@ -567,7 +569,7 @@ msgid ""
 "sky. I know – it is too early yet, and what he hopes for will not happen any"
 " time soon. He might still be right, but I fear the bloodshed that returning"
 " too fast would cause on both sides…"
-msgstr ""
+msgstr "Mais quand je regarde au-delà des forêts, je peux toujours voir la fumée noire qui s'élève dans le ciel. Je sais qu'il est encore trop tôt, et ce qu'il espère n'arrivera pas de sitôt. Il pourrait avoir raison, mais j'ai peur de la quantité de sang qu'un retour trop rapide ferait couler des deux côtés..."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:302
 msgid "The Oath"
@@ -575,7 +577,7 @@ msgstr "Le serment"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:303
 msgid "Thron looks furious…"
-msgstr ""
+msgstr "Thron paraît furieux..."
 
 #. TRANSLATORS: Thron
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:305
@@ -604,7 +606,7 @@ msgstr "Votre loyal compagnon"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:314
 msgid "Brave Boldreth steps to your side…"
-msgstr ""
+msgstr "Le brave Boldreth se tient à vos côtés..."
 
 #. TRANSLATORS: Boldreth
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:316
@@ -617,7 +619,7 @@ msgstr "Alors tu veux nous préparer pour un plus long séjour dans ces forêts,
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:322
 msgid "Khantrukh joins in…"
-msgstr ""
+msgstr "Kantruckh nous rejoint..."
 
 #. TRANSLATORS: Khantrukh
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:324
@@ -629,7 +631,7 @@ msgstr "J'implore votre pardon, seigneur, mais un sujet m'inquiète et je dois e
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:330
 msgid "Boldreth jumps up…"
-msgstr ""
+msgstr "Boldreth bondit..."
 
 #. TRANSLATORS: Boldreth
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:332
@@ -638,11 +640,11 @@ msgid ""
 " to do! Thron, what would you say about my taking a few of our most restless"
 " warriors and venturing somewhat closer to the great mountain of Kal’mavrath"
 " – maybe we will find some more big rocks to please the old man?"
-msgstr ""
+msgstr "Bien que ce ne soit certainement pas une tâche de guerrier, ceci doit être fait ! Thron, que pensez-vous de prendre quelques uns de nos guerriers les plus impatients et de les envoyer explorer à proximité de la grande montagne de Kal'mavrath. Nous y trouverons sûrement quelques gros rochers supplémentaires pour faire plaisir au vieillard ?"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:339
 msgid "Khantrukh grumbles…"
-msgstr ""
+msgstr "Khantrukh grogne..."
 
 #. TRANSLATORS: Khantrukh
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:341
@@ -652,7 +654,7 @@ msgstr "Vieil homme ? Jeune insolent !"
 #. TRANSLATORS: Khantrukh
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:347
 msgid "Khantrukh nods satisfied…"
-msgstr ""
+msgstr "Khantrukh acquiesce, satisfait..."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:348
 msgid "At last! These rocks should last for a while."
@@ -660,7 +662,7 @@ msgstr "Enfin ! Ces rochers devraient durer un bon moment."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:353
 msgid "Boldreth exclaims…"
-msgstr ""
+msgstr "Boldreth s'exclame..."
 
 #. TRANSLATORS: Boldreth
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:355
@@ -679,7 +681,7 @@ msgstr "Étendons nous à l'est. Nos anciens auront la chance de se rendre utile
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:364
 msgid "Boldreth laughs…"
-msgstr ""
+msgstr "Boldreth rit..."
 
 #. TRANSLATORS: Boldreth
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:366
@@ -691,11 +693,11 @@ msgstr "Par la barbe de Chat'Karuth, c'est impressionnant ! Imagine ce que nous 
 #. TRANSLATORS: Boldreth
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:369
 msgid "It might even be enough to…"
-msgstr ""
+msgstr "Il pourrait y en avoir assez pour..."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:374
 msgid "Khantrukh interrupts…"
-msgstr ""
+msgstr "Khantrukh s’interrompt..."
 
 #. TRANSLATORS: Khantrukh
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:376
@@ -708,7 +710,7 @@ msgstr "Bien que ce soit vrai, nous devrions y penser plus tard, car dès à pr�
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:382
 msgid "Boldreth nods…"
-msgstr ""
+msgstr "Boldreth acquiesce..."
 
 #. TRANSLATORS: Boldreth
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:384
@@ -725,7 +727,7 @@ msgstr "Il semble y avoir du gibier en abondance dans ces forêts, nous pourrion
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:393
 msgid "The elder jumps into the air…"
-msgstr ""
+msgstr "L'ancien fait un bond en l'air..."
 
 #. TRANSLATORS: Khantrukh
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:395
@@ -738,7 +740,7 @@ msgid ""
 "North of the great mountain is a large plain – why don’t we use the space "
 "Mother Nature gave us and build a farm? I sure would enjoy a freshly baked "
 "pitta bread for a change…"
-msgstr ""
+msgstr "Le nord de la grande montagne est une vaste plaine, pourquoi n'utiliserions-nous pas l'espace que Mère Nature nous a offert pour y construire une ferme ? J'apprécierai certainement de manger un pain pita encore chaud pour changer..."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:404
 msgid "Boldreth cheers up…"
@@ -758,7 +760,7 @@ msgstr "Je te promet qu'avant le levé du soleil tu auras un magnifique repas di
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:414
 msgid "Khantrukh gazes over the plains…"
-msgstr ""
+msgstr "Khantrukh regarde par-delà les plaines..."
 
 #. TRANSLATORS: Khantrukh
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:416
@@ -774,7 +776,7 @@ msgstr "Un beau matin"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:421
 msgid "Thron recognizes…"
-msgstr ""
+msgstr "Thron reconnais..."
 
 #. TRANSLATORS: Thron
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:423
@@ -789,11 +791,11 @@ msgstr "Une taverne a ouvert pour notre peuple hier. Bien que peu enclin à fair
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:426
 msgid ""
 "Maybe we actually are slowly creating a place here which we can… call home."
-msgstr ""
+msgstr "Peut-être que doucement, nous créons ici un endroit que nous pourrions appeler... maison."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:431
 msgid "Boldreth remarks…"
-msgstr ""
+msgstr "Boldreth remarque..."
 
 #. TRANSLATORS: Boldreth
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:433
@@ -843,7 +845,7 @@ msgstr "Nous avons besoin d'un durcisseur de bois, et maintenant !"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:461
 msgid "Boldreth smiles…"
-msgstr ""
+msgstr "Boldreth sourit..."
 
 #. TRANSLATORS: Boldreth
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:463
@@ -881,7 +883,7 @@ msgstr "C'est un problème dont nous devons nous occuper maintenant !"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:483
 msgid "Khantrukh seems relieved…"
-msgstr ""
+msgstr "Khantrukh semble soulagé..."
 
 #. TRANSLATORS: Khantrukh
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:485
@@ -940,7 +942,7 @@ msgstr "En regardant autour de moi, j'ai vu des visages fidèles, certains que j
 #. TRANSLATORS: Thron
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:509
 msgid "The news he brought changed everything…"
-msgstr ""
+msgstr "Les nouvelles qu'il nous a rapporté changent tout..."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:510
 msgid "Victory"
@@ -978,7 +980,7 @@ msgstr "Un autre jour de froid"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:526
 msgid "Thron looks worried…"
-msgstr ""
+msgstr "Thron semble inquiet..."
 
 #. TRANSLATORS: Thron
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:528
@@ -1016,16 +1018,17 @@ msgstr "Nous avons trouvé un village peuplé de personnes amicales et travaille
 msgid ""
 "They have lived simply, yet blithely, from hunting and farming. They have "
 "not been involved in any conflict so far, and are not ready for fighting."
-msgstr ""
+msgstr "Ils ont vécu simplement, de la chasse et de l'agriculture. Ils n'ont été impliqués dans aucun conflit ni aucune guerre, et n'étaient pas préparés au combat."
 
 #. TRANSLATORS: Thron
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:547
 msgid ""
 "But they fear that the war around Al’thunran will set an end to this life. "
 "Therefore, they have decided to join us, hoping that we can help each other."
-msgstr ""
+msgstr "Mais ils ont eu peur que la guerre autour d'Al'thunran mette un terme à cette vie. Aussi, ils ont décidé de nous rejoindre, dans l'espoir que nous puissions nous entraider."
 
 #: ../../scripting/format_scenario.lua:36
+#, lua-format
 msgid "“%s”"
 msgstr "“%s”"
 

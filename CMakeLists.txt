@@ -31,7 +31,11 @@ endif()
 
 SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake/Modules)
 
-set (Boost_USE_STATIC_LIBS  OFF)
+if (WIN32)
+  set (Boost_USE_STATIC_LIBS  ON)
+else()
+  set (Boost_USE_STATIC_LIBS  OFF)
+endif()
 set (Boost_USE_MULTITHREADED ON)
 set (Boost_DETAILED_FAILURE_MSG ON)
 find_package(Boost 1.48
@@ -101,20 +105,13 @@ if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-global-constructors")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-padded")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-sign-conversion")
-  wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-switch-enum")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-missing-noreturn")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-implicit-fallthrough")
 
   # TODO(sirver): weak-vtables should be enabled, but leads to lot of errors right now.
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-weak-vtables")
-
-  # This warning warns when a default case is at a switch that handles all
-  # cases. While this is super nice, silencing this warning for clang will add
-  # a warning for GCC (which is not as clever and does not figure out that all
-  # cases are handled). Therefore we disable the warning and the unreachable as
-  # they always come in pairs in these cases.
-  wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-covered-switch-default")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-unreachable-code")
+  wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-documentation")
 
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Werror=non-pod-varargs")
 
@@ -153,9 +150,7 @@ else()
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wpacked")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wpointer-arith")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wredundant-decls")
-  wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wshadow")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wsign-promo")
-  wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wswitch-default")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wsync-nand")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wtrampolines")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wundef")
@@ -164,8 +159,9 @@ else()
 endif()
 
 # Turn some warnings into errors.
-wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Werror=uninitialized")
 wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Werror=return-type")
+wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Werror=shadow")
+wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Werror=uninitialized")
 
 
 IF (WIN32)

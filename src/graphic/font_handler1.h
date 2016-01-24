@@ -32,7 +32,7 @@
 
 class FileSystem;
 class Image;
-class Graphic;
+class ImageCache;
 
 namespace UI {
 
@@ -61,8 +61,8 @@ public:
 	DISALLOW_COPY_AND_ASSIGN(IFontHandler1);
 };
 
-// Create a new FontHandler1. Ownership for the objects is not taken.
-IFontHandler1 * create_fonthandler(Graphic* gr);
+// Create a new FontHandler1.
+IFontHandler1 * create_fonthandler(ImageCache* image_cache);
 
 extern IFontHandler1 * g_fh1;
 

@@ -25,10 +25,10 @@
 #include "economy/portdock.h"
 #include "economy/road.h"
 #include "economy/ware_instance.h"
-#include "logic/battle.h"
-#include "logic/bob.h"
-#include "logic/building.h"
-#include "logic/ware_descr.h"
+#include "logic/map_objects/bob.h"
+#include "logic/map_objects/tribes/battle.h"
+#include "logic/map_objects/tribes/building.h"
+#include "logic/map_objects/tribes/ware_descr.h"
 
 namespace Widelands {
 

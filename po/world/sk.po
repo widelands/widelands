@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-12-11 07:41+0000\n"
-"PO-Revision-Date: 2015-12-11 07:42+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2015-12-14 05:31+0000\n"
+"PO-Revision-Date: 2015-12-18 19:32+0000\n"
+"Last-Translator: MiroslavR <miroslavr256@gmail.com>\n"
 "Language-Team: Slovak (http://www.transifex.com/widelands/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -735,7 +735,7 @@ msgstr "Lúka"
 #: ../../world/terrains/init.lua:1084 ../../world/terrains/init.lua:1167
 #: ../../world/terrains/init.lua:1186
 msgid "likes trees"
-msgstr ""
+msgstr "umožňuje rast stromov"
 
 #: ../../world/terrains/init.lua:147 ../../world/terrains/init.lua:1019
 msgid "Steppe"
@@ -765,7 +765,7 @@ msgstr "Hora"
 #: ../../world/terrains/init.lua:863 ../../world/terrains/init.lua:882
 #: ../../world/terrains/init.lua:1162 ../../world/terrains/init.lua:1181
 msgid "Forested Mountain"
-msgstr ""
+msgstr "Zalesnená hora"
 
 #: ../../world/terrains/init.lua:299
 msgid "Swamp"

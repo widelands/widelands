@@ -28,12 +28,12 @@
 #include "io/filewrite.h"
 #include "io/streamwrite.h"
 #include "logic/game.h"
-#include "logic/instances.h"
-#include "logic/militarysite.h"
+#include "logic/map_objects/map_object.h"
+#include "logic/map_objects/tribes/militarysite.h"
+#include "logic/map_objects/tribes/ship.h"
+#include "logic/map_objects/tribes/soldier.h"
+#include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/player.h"
-#include "logic/ship.h"
-#include "logic/soldier.h"
-#include "logic/tribes/tribe_descr.h"
 #include "logic/widelands_geometry_io.h"
 #include "map_io/map_object_loader.h"
 #include "map_io/map_object_saver.h"
@@ -1929,11 +1929,6 @@ void CmdSetStockPolicy::execute(Game & game)
 			case Warehouse::SP_DontStock:
 			case Warehouse::SP_Remove:
 				break;
-			default:
-				log
-					("Cmd_SetStockPolicy: sender %u, bad policy %u\n",
-					 sender(), m_policy);
-				return;
 			}
 
 			if (m_isworker) {

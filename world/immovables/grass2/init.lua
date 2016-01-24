@@ -9,9 +9,12 @@ world:new_immovable_type{
    programs = {},
    animations = {
       idle = {
-         template = "idle",
-         directory = dirname,
+         pictures = path.list_files(dirname .. "idle.png"),
          hotspot = { 10, 16 },
+         sound_effect = {
+            directory = "sound/animals",
+            name = "frog1",
+         },
       },
    }
 }

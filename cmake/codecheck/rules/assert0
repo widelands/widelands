@@ -3,19 +3,18 @@
 #
 
 """
-The purpouse of this is simply to encourage the use "assert(false)" everywhere
-when an unconditional assert is desired, for consistency, instead of
-intermixing it with assert(0) here and there.
+Use a descriptive macro instead of assert(false);
 """
 
-error_msg="Use assert(false) here."
+error_msg="Use NEVER_HERE() from base/macros.h here."
 
-regexp = r"""assert *\( *0 *\)"""
+regexp = r"""assert *\( *(0|false) *\)"""
 
 forbidden = [
     "assert(0)",
+    "assert(false)",
 ]
 
 allowed = [
-    "assert(false)",
+    "NEVER_HERE()",
 ]

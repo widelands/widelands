@@ -20,6 +20,8 @@
 #ifndef WL_GRAPHIC_GL_SYSTEM_HEADERS_H
 #define WL_GRAPHIC_GL_SYSTEM_HEADERS_H
 
+#include "base/macros.h"
+
 // This includes the correct OpenGL headers for us. Use this
 // instead of including any system OpenGL headers yourself.
 
@@ -39,7 +41,9 @@
 #   include <glbinding/gl/gl.h>
 #   include <glbinding/Binding.h>
 // This fakes that most other gl bindings define gl functions in the public namespace.
+CLANG_DIAG_OFF("-Wheader-hygiene")
 using namespace gl;
+CLANG_DIAG_ON("-Wheader-hygiene")
 #else
 #   include <GL/glew.h>
 #endif

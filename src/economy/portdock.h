@@ -23,8 +23,8 @@
 #include <memory>
 
 #include "base/macros.h"
-#include "logic/immovable.h"
-#include "logic/wareworker.h"
+#include "logic/map_objects/immovable.h"
+#include "logic/map_objects/tribes/wareworker.h"
 #include "economy/shippingitem.h"
 
 namespace Widelands {
@@ -54,7 +54,7 @@ private:
  * transported by ship are stored in the PortDock instead of
  * the associated @ref WareHouse.
  *
- * @paragraph Lifetime
+ * @paragraph PortDockLifetime
  *
  * The PortDock is created and removed by its owning warehouse.
  * Throughout the life of the PortDock, the corresponding @ref Warehouse

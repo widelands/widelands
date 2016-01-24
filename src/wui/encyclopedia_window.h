@@ -23,8 +23,8 @@
 #include <map>
 #include <memory>
 
-#include "logic/instances.h"
-#include "logic/tribes/tribe_descr.h"
+#include "logic/map_objects/map_object.h"
+#include "logic/map_objects/tribes/tribe_descr.h"
 #include "ui_basic/box.h"
 #include "ui_basic/listselect.h"
 #include "ui_basic/multilinetextarea.h"
@@ -40,9 +40,8 @@ struct EncyclopediaWindow : public UI::UniqueWindow {
 
 private:
 	struct EncyclopediaEntry {
-		EncyclopediaEntry(const EncyclopediaEntry& other)
-		   : EncyclopediaEntry(other.index, other.descname, other.icon) {
-		}
+		EncyclopediaEntry(const EncyclopediaEntry&) = default;
+		EncyclopediaEntry& operator = (const EncyclopediaEntry&) = default;
 		EncyclopediaEntry(const Widelands::DescriptionIndex _index,
 		                  const std::string& _descname,
 		                  const Image* _icon)

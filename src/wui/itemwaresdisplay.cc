@@ -20,8 +20,8 @@
 #include "wui/itemwaresdisplay.h"
 
 #include "graphic/rendertarget.h"
+#include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/player.h"
-#include "logic/tribes/tribe_descr.h"
 
 namespace {
 
@@ -119,9 +119,9 @@ void ItemWaresDisplay::draw(RenderTarget & dst)
 
 		if (it.worker) {
 			y += IWD_WorkerBaseline;
-			dst.drawanim
-				(Point(x + (IWD_ItemWidth / 2), y + (IWD_ItemHeight / 2)),
-				 tribe.get_worker_descr(it.index)->main_animation(), 0, &player());
+			dst.blit_animation(Point(x + (IWD_ItemWidth / 2), y + (IWD_ItemHeight / 2)),
+			                   tribe.get_worker_descr(it.index)->main_animation(), 0,
+			                   player().get_playercolor());
 		} else {
 			y += IWD_WareBaseLine;
 			if (tribe.get_ware_descr(it.index)->icon())

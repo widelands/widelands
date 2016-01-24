@@ -27,14 +27,14 @@ tribes:new_trainingsite_type {
 
    animations = {
       idle = {
-         template = "idle_??",
-         directory = dirname,
+         pictures = path.list_files(dirname .. "idle_??.png"),
          hotspot = { 81, 106 }
       }
    },
 
    aihints = {
       trainingsite_type = "basic",
+      prohibited_till = 1200,
       very_weak_ai_limit = 1,
       weak_ai_limit = 2
    },

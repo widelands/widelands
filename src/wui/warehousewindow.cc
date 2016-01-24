@@ -19,9 +19,9 @@
 
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
+#include "logic/map_objects/tribes/warehouse.h"
 #include "logic/player.h"
 #include "logic/playercommand.h"
-#include "logic/warehouse.h"
 #include "ui_basic/tabpanel.h"
 #include "wui/buildingwindow.h"
 #include "wui/portdockwaresdisplay.h"
@@ -80,16 +80,22 @@ void WarehouseWaresDisplay::draw_ware(RenderTarget & dst, Widelands::Description
 	WaresDisplay::draw_ware(dst, ware);
 
 	Warehouse::StockPolicy policy = m_warehouse.get_stock_policy(get_type(), ware);
-	const Image* pic;
-
+	const Image* pic = nullptr;
 	switch (policy) {
-	case Warehouse::SP_Prefer: pic = g_gr->images().get(pic_policy_prefer); break;
-	case Warehouse::SP_DontStock: pic = g_gr->images().get(pic_policy_dontstock); break;
-	case Warehouse::SP_Remove: pic = g_gr->images().get(pic_policy_remove); break;
-	default:
+	case Warehouse::SP_Prefer:
+		pic = g_gr->images().get(pic_policy_prefer);
+		break;
+	case Warehouse::SP_DontStock:
+		pic = g_gr->images().get(pic_policy_dontstock);
+		break;
+	case Warehouse::SP_Remove:
+		pic = g_gr->images().get(pic_policy_remove);
+		break;
+	case Warehouse::SP_Normal:
 		// don't draw anything for the normal policy
 		return;
 	}
+	assert(pic != nullptr);
 
 	dst.blit(ware_position(ware), pic);
 }

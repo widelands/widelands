@@ -24,10 +24,14 @@
 enum class BlendMode {
 	// Perform a normal blitting operation that respects the alpha channel if
 	// present.
-	UseAlpha = 0,
+	UseAlpha,
+
+	// Used internally for Surface::brighten_rect() if the rect is actually to
+	// be darkened.
+	Subtract,
 
 	// Copy all pixel information, including alpha channel information.
-	Copy
+	Copy,
 };
 
 #endif  // end of include guard: WL_GRAPHIC_BLEND_MODE_H

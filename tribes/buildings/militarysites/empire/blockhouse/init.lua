@@ -20,17 +20,12 @@ tribes:new_militarysite_type {
 
    animations = {
       idle = {
-         template = "idle_??",
-         directory = dirname,
+         pictures = path.list_files(dirname .. "idle_??.png"),
          hotspot = { 37, 58 }
       }
    },
 
    aihints = {},
-
-   outputs = {
-      "empire_soldier",
-   },
 
    max_soldiers = 1,
    heal_per_second = 60, -- very low -> smallest building

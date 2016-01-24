@@ -19,6 +19,7 @@
 
 #include "editor/ui_menus/editor_help.h"
 
+#include <algorithm>
 #include <map>
 #include <memory>
 #include <string>
@@ -31,9 +32,9 @@
 #include "graphic/graphic.h"
 #include "graphic/texture.h"
 #include "io/filesystem/layered_filesystem.h"
-#include "logic/world/editor_category.h"
-#include "logic/world/terrain_description.h"
-#include "logic/world/world.h"
+#include "logic/map_objects/world/editor_category.h"
+#include "logic/map_objects/world/terrain_description.h"
+#include "logic/map_objects/world/world.h"
 #include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
 

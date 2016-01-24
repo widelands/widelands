@@ -20,7 +20,7 @@
 #ifndef WL_ECONOMY_WARES_QUEUE_H
 #define WL_ECONOMY_WARES_QUEUE_H
 
-#include "logic/immovable.h"
+#include "logic/map_objects/immovable.h"
 #include "logic/widelands.h"
 
 namespace Widelands {

@@ -29,11 +29,11 @@
 #include "io/fileread.h"
 #include "io/filewrite.h"
 #include "logic/game.h"
+#include "logic/map_objects/tribes/ship.h"
+#include "logic/map_objects/tribes/warehouse.h"
 #include "logic/mapastar.h"
 #include "logic/path.h"
 #include "logic/player.h"
-#include "logic/ship.h"
-#include "logic/warehouse.h"
 #include "map_io/map_object_loader.h"
 #include "map_io/map_object_saver.h"
 
@@ -580,7 +580,7 @@ void Fleet::remove_port(EditorGameBase & egbase, PortDock * port)
 
 	if (m_ships.empty() && m_ports.empty()) {
 		remove(egbase);
-	} else if (upcast(Game, game, &egbase)) {
+	} else if (is_a(Game, &egbase)) {
 		// Some ship perhaps lose their destination now, so new a destination must be appointed (if any)
 		molog("Port removed from fleet, triggering fleet update\n");
 		update(egbase);

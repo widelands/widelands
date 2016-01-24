@@ -24,7 +24,7 @@
 #include <memory>
 #include <vector>
 
-#include "logic/instances.h"
+#include "logic/map_objects/map_object.h"
 #include "ui_basic/box.h"
 #include "ui_basic/listselect.h"
 #include "ui_basic/multilinetextarea.h"

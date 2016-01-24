@@ -191,7 +191,6 @@ private:
 	void init_language();
 	void shutdown_settings();
 
-	bool init_hardware();
 	void shutdown_hardware();
 
 	void parse_commandline(int argc, char const * const * argv);

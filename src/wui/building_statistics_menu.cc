@@ -26,10 +26,10 @@
 
 #include "base/i18n.h"
 #include "graphic/font_handler1.h"
-#include "logic/militarysite.h"
+#include "logic/map_objects/tribes/militarysite.h"
+#include "logic/map_objects/tribes/productionsite.h"
+#include "logic/map_objects/tribes/tribes.h"
 #include "logic/player.h"
-#include "logic/productionsite.h"
-#include "logic/tribes/tribes.h"
 
 constexpr int kBuildGridCellHeight = 50;
 constexpr int kBuildGridCellWidth = 55;
@@ -541,9 +541,6 @@ void BuildingStatisticsMenu::jump_building(JumpTarget target, bool reverse) {
 		}
 		break;
 	}
-	default:
-		assert(false);
-		break;
 	}
 
 	if (found) {
