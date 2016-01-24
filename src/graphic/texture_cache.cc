@@ -20,9 +20,9 @@
 #include "graphic/texture_cache.h"
 
 #include <memory>
-#include <stdint.h>
 
 #include <SDL.h>
+#include <stdint.h>
 
 #include "graphic/texture.h"
 
