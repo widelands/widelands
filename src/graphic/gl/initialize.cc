@@ -28,8 +28,14 @@
 
 namespace Gl {
 
-SDL_GLContext
-initialize(const Trace& trace, SDL_Window* sdl_window, GLint* max_texture_size) {
+SDL_GLContext initialize(
+#ifdef USE_GLBINDING
+   const Trace& trace,
+#else
+   const Trace&,
+#endif
+   SDL_Window* sdl_window,
+   GLint* max_texture_size) {
 	// Request an OpenGL 2 context with double buffering.
 	SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 2);
