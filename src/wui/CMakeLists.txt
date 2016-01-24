@@ -9,6 +9,7 @@ wl_library(wui_chat_ui
     chat_msg_layout.h
     chat_msg_layout.cc
   DEPENDS
+    base_exceptions
     base_i18n
     base_macros
     chat

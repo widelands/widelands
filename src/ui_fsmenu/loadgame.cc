@@ -583,8 +583,9 @@ void FullscreenMenuLoadGame::fill_table() {
 							gametypestring = (boost::format(_("MP (%1%)"))
 												% static_cast<unsigned int>(gamedata->nrplayers)).str();
 							break;
-						default:
+						case GameController::GameType::REPLAY:
 							gametypestring = "";
+							break;
 					}
 					te.set_string(1, gametypestring);
 					te.set_string(2, map_filename(gamedata->filename, gamedata->mapname));

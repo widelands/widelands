@@ -131,7 +131,7 @@ Source: c:\msys64\mingw64\bin\libsndfile-1.dll;             DestDir: {app};     
 Source: c:\msys64\mingw64\bin\libspeex-1.dll;               DestDir: {app};            Flags: ignoreversion;                                                       Components: "Widelands"
 Source: c:\msys64\mingw64\bin\libvorbisenc-2.dll;           DestDir: {app};            Flags: ignoreversion;                                                       Components: "Widelands"
 Source: c:\msys64\mingw64\bin\libmodplug-1.dll;             DestDir: {app};            Flags: ignoreversion;                                                       Components: "Widelands"
-Source: c:\msys64\mingw64\bin\libmad-0.dll;
+Source: c:\msys64\mingw64\bin\libmad-0.dll;                 DestDir: {app};            Flags: ignoreversion;                                                       Components: "Widelands"
 Source: c:\msys64\mingw64\bin\libintl-8.dll;                DestDir: {app};            Flags: ignoreversion;                                                       Components: "Widelands"
 Source: c:\msys64\mingw64\bin\libiconv-2.dll;               DestDir: {app};            Flags: ignoreversion;                                                       Components: "Widelands"
 Source: ..\..\..\..\build\src\widelands.exe;                DestDir: {app};            Flags: ignoreversion;                                                       Components: "Widelands"

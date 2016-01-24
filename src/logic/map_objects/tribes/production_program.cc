@@ -27,6 +27,7 @@
 
 #include "base/i18n.h"
 #include "base/macros.h"
+#include "base/wexception.h"
 #include "config.h"
 #include "economy/economy.h"
 #include "economy/flag.h"
@@ -287,7 +288,7 @@ void ProductionProgram::parse_ware_type_group
 			break;
 		default:
 			// scan for terminator should ensure that this cannot happen
-			assert(false);
+			NEVER_HERE();
 		}
 	}
 }
@@ -697,8 +698,6 @@ void ProductionProgram::ActCall::execute
 		ps.m_program_timer   = true;
 		ps.m_program_time    = ps.schedule_act(game, 10);
 		break;
-	default:
-		throw wexception("ProductionProgram call: bad result handling method");
 	}
 }
 
@@ -818,8 +817,7 @@ void ProductionProgram::ActCheckMap::execute(Game& game, ProductionSite& ps) con
 			}
 		}
 		default:
-			assert(false);
-			break;
+			NEVER_HERE();
 	}
 }
 

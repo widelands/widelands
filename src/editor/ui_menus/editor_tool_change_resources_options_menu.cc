@@ -23,6 +23,7 @@
 #include <string>
 
 #include "base/i18n.h"
+#include "base/wexception.h"
 #include "editor/editorinteractive.h"
 #include "editor/tools/editor_increase_resources_tool.h"
 #include "editor/tools/editor_set_resources_tool.h"
@@ -198,7 +199,7 @@ void EditorToolChangeResourcesOptionsMenu::clicked_button(Button const n)
 	case    Set_To_Increase: set_to    += set_to    < 63; break;
 	case    Set_To_Decrease: set_to    -= 0 < set_to;     break;
 	default:
-		assert(false);
+		NEVER_HERE();
 		break;
 	}
 	m_increase_tool.set_change_by(change_by);

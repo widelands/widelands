@@ -23,6 +23,7 @@
 
 #include <stdint.h>
 
+#include "base/wexception.h"
 #include "editor/tools/editor_increase_resources_tool.h"
 #include "logic/editor_game_base.h"
 #include "logic/findnode.h"
@@ -410,7 +411,7 @@ uint32_t * MapGenerator::generate_random_value_map
 		delete[] values;
 		throw;
 	}
-	// Never here.
+	NEVER_HERE();
 }
 
 

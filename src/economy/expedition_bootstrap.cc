@@ -22,6 +22,7 @@
 #include <memory>
 
 #include "base/macros.h"
+#include "base/wexception.h"
 #include "economy/portdock.h"
 #include "io/filewrite.h"
 #include "logic/map_objects/tribes/warehouse.h"
@@ -103,7 +104,7 @@ void ExpeditionBootstrap::handle_worker_callback(Game& game, Request& request, W
 	}
 	// Never here, otherwise we would have a callback for a request we know
 	// nothing about.
-	assert(false);
+	NEVER_HERE();
 }
 
 void ExpeditionBootstrap::start() {
@@ -180,7 +181,7 @@ WaresQueue& ExpeditionBootstrap::waresqueue(DescriptionIndex index) const {
 			return *wq.get();
 		}
 	}
-	throw wexception("Never here.");
+	NEVER_HERE();
 }
 
 std::vector<WaresQueue*> ExpeditionBootstrap::wares() const {

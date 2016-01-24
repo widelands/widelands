@@ -336,9 +336,6 @@ void Box::get_item_desired_size
 		depth   = it.u.space;
 		breadth = 0;
 		break;
-
-	default:
-		throw wexception("Box::get_item_size: bad type %u", it.type);
 	}
 }
 
@@ -419,8 +416,6 @@ void Box::set_item_pos(uint32_t idx, int32_t pos)
 
 	case Item::ItemSpace:
 		break; //  no need to do anything
-	default:
-		assert(false);
 	};
 }
 

@@ -100,6 +100,7 @@ wl_library(scripting_logic
     persistence.h
     eris.h
   DEPENDS
+    base_exceptions
     base_log
     base_macros
     economy

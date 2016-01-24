@@ -21,6 +21,7 @@
 
 #include <memory>
 
+#include "base/wexception.h"
 #include "graphic/graphic.h"
 #include "logic/game_data_error.h"
 
@@ -66,7 +67,7 @@ TribeBasicInfo Tribes::tribeinfo(const std::string& tribename) {
 		}
 	}
 	throw GameDataError("The tribe '%s'' does not exist.", tribename.c_str());
-	assert(false); // A TribeBasicInfo should have been found
+	NEVER_HERE();
 }
 
 bool Tribes::tribe_exists(const std::string& tribename) {
