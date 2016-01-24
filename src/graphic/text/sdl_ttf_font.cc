@@ -19,6 +19,8 @@
 
 #include "graphic/text/sdl_ttf_font.h"
 
+#include <memory>
+
 #include <SDL.h>
 #include <SDL_ttf.h>
 #include <boost/format.hpp>

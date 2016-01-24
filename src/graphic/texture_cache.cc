@@ -19,9 +19,10 @@
 
 #include "graphic/texture_cache.h"
 
-#include <stdint.h>
+#include <memory>
 
 #include <SDL.h>
+#include <stdint.h>
 
 #include "graphic/texture.h"
 

@@ -148,6 +148,7 @@ return {
       for idx, p in ipairs(plrs) do
          if p.team == 0 then
             local artifacts = (ngettext("%i artifact", "%i artifacts", artifacts_per_team[_getkey(p)])):format(artifacts_per_team[_getkey(p)])
+            -- TRANSLATORS: e.g. Team 1 owns 5 artifacts.
             msg = msg .. "\n" .. (_"%1$s owns %2$s."):bformat(p.name, artifacts)
          else
             if teams[p.team] then
