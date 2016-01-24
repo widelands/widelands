@@ -87,6 +87,8 @@ wl_library(graphic_gl_utils
   SRCS
     gl/blit_data.h
     gl/coordinate_conversion.h
+    gl/initialize.cc
+    gl/initialize.h
     gl/system_headers.h
     gl/utils.cc
     gl/utils.h
