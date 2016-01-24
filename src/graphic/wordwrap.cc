@@ -148,7 +148,7 @@ void WordWrap::compute_end_of_line
 	 uint32_t safety_margin)
 {
 	std::string::size_type minimum_chars = 1; // So we won't get empty lines
-	assert(m_wrapwidth > safety_margin);
+	assert(text.empty() || m_wrapwidth > safety_margin);
 
 	std::string::size_type orig_end = text.find('\n', line_start);
 	if (orig_end == std::string::npos)
