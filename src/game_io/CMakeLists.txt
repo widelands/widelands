@@ -7,6 +7,8 @@ wl_library(game_io
     game_class_packet.h
     game_interactive_player_packet.cc
     game_interactive_player_packet.h
+    game_player_ai_persistent_packet.cc
+    game_player_ai_persistent_packet.h    
     game_loader.cc
     game_loader.h
     game_map_packet.cc

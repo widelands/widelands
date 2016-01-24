@@ -17,34 +17,21 @@
  *
  */
 
-#ifndef WL_GAME_IO_GAME_DATA_PACKET_H
-#define WL_GAME_IO_GAME_DATA_PACKET_H
+#ifndef WL_GAME_IO_GAME_PLAYER_AI_PERSISTENT_PACKET_H
+#define WL_GAME_IO_GAME_PLAYER_AI_PERSISTENT_PACKET_H
 
-#include "base/wexception.h"
-
-class FileSystem;
+#include "game_io/game_data_packet.h"
 
 namespace Widelands {
 
-class Game;
-class MapObjectLoader;
-struct MapObjectSaver;
-
 /*
-========================================
-
-This class represents a data packet in a widelands
-saved game file. it is an abstract base class
-
-========================================
-*/
-class GameDataPacket {
-public:
-	virtual ~GameDataPacket() {}
-	virtual void read (FileSystem &, Game &, MapObjectLoader * = nullptr) = 0;
-	virtual void write(FileSystem &, Game &, MapObjectSaver  * = nullptr) = 0;
+ * stores data that are needed for AI
+ */
+struct GamePlayerAiPersistentPacket : public GameDataPacket {
+	void read (FileSystem &, Game &, MapObjectLoader * = nullptr) override;
+	void write(FileSystem &, Game &, MapObjectSaver  * = nullptr) override;
 };
 
 }
 
-#endif  // end of include guard: WL_GAME_IO_GAME_DATA_PACKET_H
+#endif  // end of include guard: WL_GAME_IO_GAME_PLAYER_AI_PERSISTENT_PACKET_H

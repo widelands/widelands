@@ -99,6 +99,11 @@ void Ship::init(EditorGameBase& egbase) {
 	Bob::init(egbase);
 	init_fleet(egbase);
 	Notifications::publish(NoteShipMessage(this, NoteShipMessage::Message::kGained));
+	assert(get_owner());
+
+	// Assigning a ship name
+	m_shipname = get_owner()->pick_shipname();
+	molog("New ship: %s\n", m_shipname.c_str());
 }
 
 /**
@@ -643,6 +648,22 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 					// air and remove the old ones ;)
 					WaresQueue & wq = cs->waresqueue(ware->descr_index());
 					const uint32_t cur = wq.get_filled();
+
+					// This is to help to debug the situation when colonization fails
+					// Can the reason be that worker was not unloaded as the last one?
+					if (wq.get_max_fill() <= cur) {
+						log ("  %d: Colonization error: unloading wares to constructionsite of %s"
+						" (owner %d) failed.\n"
+						" Wares unloaded to the site: %d, max capacity: %d, remaining to unload: %d\n"
+						" No free capacity to unload another ware\n",
+						get_owner()->player_number(),
+						cs->get_info().becomes->name().c_str(),
+						cs->get_owner()->player_number(),
+						cur,
+						wq.get_max_fill(),
+						i);
+					}
+
 					assert(wq.get_max_fill() > cur);
 					wq.set_filled(cur + 1);
 					m_items.at(i).remove(game);
@@ -1007,7 +1028,7 @@ Load / Save implementation
 ==============================
 */
 
-constexpr uint8_t kCurrentPacketVersion = 5;
+constexpr uint8_t kCurrentPacketVersion = 6;
 
 Ship::Loader::Loader() : m_lastdock(0), m_destination(0) {
 }
@@ -1049,6 +1070,7 @@ void Ship::Loader::load(FileRead & fr)
 		m_ship_state = TRANSPORT;
 	}
 
+	m_shipname = fr.c_string();
 	m_lastdock = fr.unsigned_32();
 	m_destination = fr.unsigned_32();
 
@@ -1082,6 +1104,9 @@ void Ship::Loader::load_finish() {
 	// restore the state the ship is in
 	ship.m_ship_state = m_ship_state;
 
+	// restore the  ship id and name
+	ship.m_shipname = m_shipname;
+
 	// if the ship is on an expedition, restore the expedition specific data
 	if (m_expedition) {
 		ship.m_expedition.swap(m_expedition);
@@ -1110,7 +1135,7 @@ MapObject::Loader* Ship::load(EditorGameBase& egbase, MapObjectLoader& mol, File
 				const ShipDescr* descr = nullptr;
 				// Removing this will break the test suite
 				if (packet_version < 5) {
-					std::string tribe_name = fr.c_string();
+					std::string tribe_name = fr.string();
 					fr.c_string(); // This used to be the ship's name, which we don't need any more.
 					if (!(egbase.tribes().tribe_exists(tribe_name))) {
 						throw GameDataError("Tribe %s does not exist for ship", tribe_name.c_str());
@@ -1171,6 +1196,7 @@ void Ship::save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw) {
 		fw.unsigned_8(static_cast<uint8_t>(m_expedition->island_explore_direction));
 	}
 
+	fw.string(m_shipname);
 	fw.unsigned_32(mos.get_object_file_index_or_zero(m_lastdock.get(egbase)));
 	fw.unsigned_32(mos.get_object_file_index_or_zero(m_destination.get(egbase)));
 

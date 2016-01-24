@@ -153,6 +153,9 @@ struct Ship : Bob {
 	/// \returns the current state the ship is in
 	uint8_t get_ship_state() {return m_ship_state;}
 
+	/// \returns the current name of ship
+	const std::string & get_shipname() {return m_shipname;}
+
 	/// \returns whether the ship is currently on an expedition
 	bool state_is_expedition() {
 		return
@@ -248,6 +251,7 @@ private:
 	OPtr<PortDock> m_destination;
 	std::vector<ShippingItem> m_items;
 	uint8_t m_ship_state;
+	std::string m_shipname;
 
 	struct Expedition {
 		std::unique_ptr<std::list<Coords> > seen_port_buildspaces;
@@ -275,6 +279,8 @@ protected:
 		uint32_t m_lastdock;
 		uint32_t m_destination;
 		uint8_t  m_ship_state;
+		std::string m_shipname;
+		uint32_t m_shipname_index;
 		std::unique_ptr<Expedition> m_expedition;
 		std::vector<ShippingItem::Loader> m_items;
 	};

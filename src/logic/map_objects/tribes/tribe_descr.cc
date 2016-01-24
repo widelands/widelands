@@ -150,6 +150,8 @@ TribeDescr::TribeDescr
 			}
 		}
 
+		ship_names_ = table.get_table("ship_names")->array_entries<std::string>();
+
 		for (const std::string& buildingname : table.get_table("buildings")->array_entries<std::string>()) {
 			try {
 				DescriptionIndex index = tribes_.safe_building_index(buildingname);
