@@ -25,6 +25,7 @@
 
 #include "base/log.h"
 #include "base/macros.h"
+#include "base/wexception.h"
 #include "economy/wares_queue.h"
 #include "graphic/graphic.h"
 #include "logic/findimmovable.h"
@@ -1335,11 +1336,11 @@ const PropertyType<LuaMapObjectDescription> LuaMapObjectDescription::Properties[
 
 // Only base classes can be persisted.
 void LuaMapObjectDescription::__persist(lua_State*) {
-	assert(false);
+	NEVER_HERE();
 }
 
 void LuaMapObjectDescription::__unpersist(lua_State*) {
-	assert(false);
+	NEVER_HERE();
 }
 
 /*
@@ -3952,7 +3953,7 @@ int LuaShip::get_scouting_direction(lua_State* L) {
 			case WalkingDir::WALK_NW:
 				lua_pushstring(L, "nw");
 				break;
-			default:
+			case WalkingDir::IDLE:
 				return 0;
 			}
 		return 1;
@@ -4003,7 +4004,7 @@ int LuaShip::get_island_explore_direction(lua_State* L) {
 			case IslandExploreDirection::kClockwise:
 				lua_pushstring(L, "cw");
 				break;
-			default:
+			case IslandExploreDirection::kNotSet:
 				return 0;
 		}
 		return 1;

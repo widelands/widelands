@@ -26,8 +26,6 @@
 
 #include "logic/widelands.h"
 
-namespace Widelands {struct MapObjectDescr;}
-
 /// Manages a set of 6 animations, one for each possible direction.
 struct DirAnimations {
 	DirAnimations

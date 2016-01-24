@@ -19,20 +19,10 @@
 
 #include "graphic/rendertarget.h"
 
-#include "base/log.h"
 #include "base/macros.h"
 #include "graphic/animation.h"
 #include "graphic/graphic.h"
 #include "graphic/surface.h"
-#include "logic/player.h"
-
-using Widelands::BaseImmovable;
-using Widelands::Coords;
-using Widelands::FCoords;
-using Widelands::Map;
-using Widelands::MapObjectDescr;
-using Widelands::Player;
-using Widelands::TCoords;
 
 /**
  * Build a render target for the given surface.
@@ -330,38 +320,45 @@ void RenderTarget::tile(const Rect& rect, const Image* image, const Point& gofs,
 // TODO(unknown): Correctly calculate the stereo position for sound effects
 // TODO(unknown): The chosen semantics of animation sound effects is problematic:
 // What if the game runs very slowly or very quickly?
-void RenderTarget::drawanim
-	(const Point& dst, uint32_t animation, uint32_t time, const Player* player)
-{
+void RenderTarget::blit_animation(const Point& dst, uint32_t animation, uint32_t time) {
 	const Animation& anim = g_gr->animations().get_animation(animation);
-
-	Point destination_point = dst - anim.hotspot();
-
-	Rect srcrc(Point(0, 0), anim.width(), anim.height());
-
-	if (to_surface_geometry(&destination_point, &srcrc))
-		anim.blit(time, destination_point, srcrc, player ? &player->get_playercolor() : NULL, m_surface);
-
-	//  Look if there is a sound effect registered for this frame and trigger
-	//  the effect (see SoundHandler::stereo_position).
-	anim.trigger_soundfx(time, 128);
+	do_blit_animation(dst, anim, time, nullptr, Rect(Point(0, 0), anim.width(), anim.height()));
 }
 
-/**
- * Draws a part of a frame of an animation at the given location
- */
-void RenderTarget::drawanimrect
-	(const Point& dst, uint32_t animation, uint32_t time, const Player* player, const Rect& gsrcrc)
-{
+void RenderTarget::blit_animation(const Point& dst,
+                                  uint32_t animation,
+                                  uint32_t time,
+                                  const RGBColor& player_color) {
 	const Animation& anim = g_gr->animations().get_animation(animation);
+	do_blit_animation(dst, anim, time, &player_color, Rect(Point(0, 0), anim.width(), anim.height()));
+}
 
-	Point destination_point = dst - anim.hotspot();
-	destination_point += gsrcrc.origin();
+void RenderTarget::blit_animation(const Point& dst,
+                                  uint32_t animation,
+                                  uint32_t time,
+                                  const RGBColor& player_color,
+                                  const Rect& source_rect) {
+	do_blit_animation(
+	   dst, g_gr->animations().get_animation(animation), time, &player_color, source_rect);
+}
 
-	Rect srcrc(gsrcrc);
+void RenderTarget::do_blit_animation(const Point& dst,
+                                     const Animation& animation,
+                                     uint32_t time,
+                                     const RGBColor* player_color,
+                                     const Rect& source_rect) {
+	Point destination_point = dst - animation.hotspot();
+	destination_point += source_rect.origin();
 
+	Rect srcrc(source_rect);
 	if (to_surface_geometry(&destination_point, &srcrc))
-		anim.blit(time, destination_point, srcrc, player ? &player->get_playercolor() : NULL, m_surface);
+		animation.blit(time, destination_point, srcrc, player_color, m_surface);
+
+	// Look if there is a sound effect registered for this frame and trigger the
+	// effect (see SoundHandler::stereo_position).
+	// TODO(sirver): Playing a sound effect in here is rather silly. What if
+	// this animation is used in the menus?
+	animation.trigger_soundfx(time, 128);
 }
 
 /**

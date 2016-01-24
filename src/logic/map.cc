@@ -1603,8 +1603,7 @@ void Map::get_neighbour
 	case WALK_SW: get_bln(f, o); break;
 	case WALK_W:  get_ln (f, o); break;
 	default:
-		assert(false);
-		break;
+		NEVER_HERE();
 	}
 }
 
@@ -1619,8 +1618,7 @@ void Map::get_neighbour
 	case WALK_SW: get_bln(f, o); break;
 	case WALK_W:  get_ln (f, o); break;
 	default:
-		assert(false);
-		break;
+		NEVER_HERE();
 	}
 }
 
@@ -1925,7 +1923,6 @@ void Map::set_resources(const FCoords& c, uint8_t amount) {
 	if (c.field->m_resources == Widelands::kNoResource) {
 		return;
 	}
-	assert(amount <= c.field->m_initial_res_amount);
 	const auto note = NoteFieldResourceChanged{
 	   c, c.field->m_resources, c.field->m_initial_res_amount, c.field->m_res_amount,
 	};
