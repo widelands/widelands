@@ -2714,13 +2714,18 @@ int LuaTerrainDescription::get_descname(lua_State * L) {
 /* RST
 	.. attribute:: get_default_resource_descname
 
-			(RO) the :class:`string` description name of the default resource provided by this terrain.
+			(RO) the :class:`string` description name of the default resource provided by this terrain, or
+				  nil if the terrain has no default resource.
 */
 
 int LuaTerrainDescription::get_default_resource_descname(lua_State * L) {
 	int res_index = get()->get_default_resource();
 	const World& world = get_egbase(L).world();
-	lua_pushstring(L, world.get_resource(res_index)->descname());
+	if (res_index != Widelands::kNoResource && res_index < world.get_nr_resources()) {
+		lua_pushstring(L, world.get_resource(res_index)->descname());
+	} else {
+		lua_pushnil(L);
+	}
 	return 1;
 }
 
