@@ -814,9 +814,8 @@ Point Bob::calc_drawpos(const EditorGameBase & game, const Point pos) const
 		spos.y -= TRIANGLE_HEIGHT;
 		break;
 
-	case IDLE: start.field = nullptr; break;
-	default:
-		assert(false);
+	case IDLE:
+		start.field = nullptr;
 		break;
 	}
 
@@ -850,12 +849,15 @@ Point Bob::calc_drawpos(const EditorGameBase & game, const Point pos) const
 void Bob::draw
 	(const EditorGameBase & egbase, RenderTarget & dst, const Point& pos) const
 {
-	if (m_anim)
-		dst.drawanim
-			(calc_drawpos(egbase, pos),
-			 m_anim,
-			 egbase.get_gametime() - m_animstart,
-			 get_owner());
+	if (m_anim) {
+		auto* const owner = get_owner();
+		if (owner != nullptr) {
+			dst.blit_animation(calc_drawpos(egbase, pos), m_anim, egbase.get_gametime() - m_animstart,
+			                   owner->get_playercolor());
+		} else {
+			dst.blit_animation(calc_drawpos(egbase, pos), m_anim, egbase.get_gametime() - m_animstart);
+		}
+	}
 }
 
 

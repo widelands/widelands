@@ -4,6 +4,7 @@
 # 
 # Translators:
 # Antonio Trueba <atrueba@users.sourceforge.net>, 2007,2009
+# Diego Alberto Pereyra <diego.96.pereyra@gmail.com>, 2015-2016
 # Javier Mora <morehash@gmail.com>, 2015
 # Thadah <juchuf@gmail.com>, 2015
 # Kiba Gasteiz <kibafang@gmail.com>, 2015
@@ -15,9 +16,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-12-10 13:43+0000\n"
-"PO-Revision-Date: 2015-12-10 13:44+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2015-12-14 05:31+0000\n"
+"PO-Revision-Date: 2016-01-06 21:09+0000\n"
+"Last-Translator: Diego Alberto Pereyra <diego.96.pereyra@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -43,13 +44,13 @@ msgstr "Opciones del cliente."
 msgid ""
 "On the left side is a list of all clients including you. You can set your "
 "role with the button following your nickname. Available roles are:"
-msgstr "En la izquierda hay una lista de clientes incluyendote. Puedes establecer tu rol con el botón que esta al lado de tu nickname. Los roles disponibles son:"
+msgstr "En la izquierda hay una lista de clientes incluyendote. Puedes establecer tu rol con el botón que esta al lado de tu alias. Los roles disponibles son:"
 
 #: ../../scripting/widelands/multiplayer_help.lua:16
 msgid ""
 "The player with the color of the flag. If more than one client selected the "
 "same color, these share control over the player (‘shared kingdom mode’)."
-msgstr "El jugador con el color de la bandera. Si mas de un cliente selecciona el mismo color, compartirá el control del jugador ('modo de reino compartido')."
+msgstr "El jugador con el color de la bandera. Si mas de un cliente selecciona el mismo color, compartirá el control del jugador (\"modo de reino compartido\")."
 
 #: ../../scripting/widelands/multiplayer_help.lua:17
 msgid ""
@@ -69,7 +70,7 @@ msgstr "En medio están las opciones para los jugadores. Para iniciar un juego, 
 
 #: ../../scripting/widelands/multiplayer_help.lua:21
 msgid "Connected to one or more clients (see ‘Client settings’)."
-msgstr "Conectado a uno o más clientes (ver 'Configuración de clientes')"
+msgstr "Conectado a uno o más clientes (ver \"Opciones de cliente\")."
 
 #: ../../scripting/widelands/multiplayer_help.lua:22
 msgid ""
@@ -115,22 +116,22 @@ msgstr "Puedes ver información sobre el mapa o partida salvada seleccionados en
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
 #: ../../src/ai/computer_player.cc:42
 msgid "No AI"
-msgstr ""
+msgstr "No IA"
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
 #: ../../src/ai/defaultai.h:102
 msgid "Normal AI"
-msgstr ""
+msgstr "IA normal"
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
 #: ../../src/ai/defaultai.h:115
 msgid "Weak AI"
-msgstr ""
+msgstr "IA débil"
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
 #: ../../src/ai/defaultai.h:128
 msgid "Very Weak AI"
-msgstr ""
+msgstr "IA muy débil"
 
 #. * TRANSLATORS: Concatenate the last 2 items on a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
@@ -297,7 +298,7 @@ msgstr "Minimapa"
 #: ../../src/editor/editorinteractive.cc:94
 #: ../../src/wui/interactive_gamebase.cc:71
 msgid "Show Building Spaces (on/off)"
-msgstr "Mostrar espacios para edificios (sí/no)"
+msgstr "Mostrar Zonas de Construcción (sí/no)"
 
 #: ../../src/editor/editorinteractive.cc:97
 #: ../../src/ui_fsmenu/launch_mpg.cc:171
@@ -431,11 +432,11 @@ msgstr "Propiedad de: —"
 
 #: ../../src/editor/tools/editor_info_tool.cc:95
 msgid "Has immovable"
-msgstr ""
+msgstr "Tiene inmovilidad"
 
 #: ../../src/editor/tools/editor_info_tool.cc:95
 msgid "No immovable"
-msgstr ""
+msgstr "No inamovible"
 
 #: ../../src/editor/tools/editor_info_tool.cc:98
 msgid "Has animals"
@@ -462,7 +463,7 @@ msgstr "Nombre: %s"
 #: ../../src/editor/tools/editor_info_tool.cc:116
 #, c-format
 msgid "Is: %s"
-msgstr ""
+msgstr "Es: %s"
 
 #: ../../src/editor/tools/editor_info_tool.cc:118
 #, c-format
@@ -523,7 +524,7 @@ msgstr "Autor: %s"
 #: ../../src/editor/tools/editor_info_tool.cc:151
 #, c-format
 msgid "Descr: %s"
-msgstr "Descripción: %s"
+msgstr "Descrip: %s"
 
 #: ../../src/editor/ui_menus/categorized_item_selection_menu.h:163
 msgid "Current:"
@@ -551,7 +552,7 @@ msgstr "Cargar mapa"
 #: ../../src/editor/ui_menus/editor_main_menu.cc:68
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:52
 msgid "Save Map"
-msgstr "Salvar mapa"
+msgstr "Guardar mapa"
 
 #: ../../src/editor/ui_menus/editor_main_menu.cc:73
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:50
@@ -790,7 +791,7 @@ msgstr "Crear directorio"
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:75
 #: ../../src/ui_fsmenu/loadgame.cc:276 ../../src/ui_fsmenu/loadgame.cc:408
 msgid "Filename:"
-msgstr "Nombre del Archivo"
+msgstr "Nombre del Archivo:"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:156
 msgid "unnamed"
@@ -890,7 +891,7 @@ msgstr "Selección actual"
 
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:65
 msgid "Change height"
-msgstr "Cambiar altura:"
+msgstr "Cambiar altura"
 
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:66
 msgid "Noise height"
@@ -913,7 +914,7 @@ msgstr "Animales"
 
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:71
 msgid "Set port space"
-msgstr "Establecer el espacio del puerto"
+msgstr "Establecer espacio para puerto"
 
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:72
 msgid ""
@@ -940,7 +941,7 @@ msgstr "Máximo: %u"
 msgid "Set value: %u"
 msgstr "Fijar valor: %u"
 
-#: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:93
+#: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:96
 msgid "Terrain Select"
 msgstr "Seleccionar terreno"
 
@@ -1024,7 +1025,7 @@ msgstr "Creando infraestructura de jugador"
 
 #: ../../src/logic/game.cc:499 ../../src/logic/player.cc:242
 msgid "Missing starting position"
-msgstr "No se ha encontrado la posición inicial"
+msgstr "Posición inicial ausente"
 
 #: ../../src/logic/game.cc:501 ../../src/logic/player.cc:244
 #, c-format
@@ -1081,18 +1082,18 @@ msgstr[1] "%1%(+%2%) soldados"
 #: ../../src/logic/militarysite.cc:867
 msgctxt "building"
 msgid "Lost!"
-msgstr ""
+msgstr "¡Perdido!"
 
 #: ../../src/logic/militarysite.cc:869
 msgid "Militarysite lost!"
-msgstr "¡Construcción militar perdida!"
+msgstr "¡Sitio militar perdido!"
 
 #. * TRANSLATORS: Message title.
 #. * TRANSLATORS: If you run out of space, you can also translate this as
 #. "Success!"
 #: ../../src/logic/militarysite.cc:912
 msgid "Enemy Defeated!"
-msgstr ""
+msgstr "¡Enemigo derrotado!"
 
 #: ../../src/logic/militarysite.cc:914
 msgid "Enemy at site defeated!"
@@ -1102,7 +1103,7 @@ msgstr "¡Enemigo derrotado en este lugar!"
 #: ../../src/logic/militarysite.cc:965
 msgctxt "building"
 msgid "Attack!"
-msgstr ""
+msgstr "¡Ataque!"
 
 #: ../../src/logic/militarysite.cc:967
 msgid "You are under attack"
@@ -1117,28 +1118,28 @@ msgstr "El objetivo no tiene descripción"
 #: ../../src/logic/production_program.cc:331
 #, c-format
 msgid "the economy needs the ware ‘%s’"
-msgstr "la economía necesita la mercancía ‘%s’"
+msgstr "la economía necesita la mercancía \"%s\""
 
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy
 #. doesn’t need the ware ‘%s’
 #: ../../src/logic/production_program.cc:339
 #, c-format
 msgid "the economy doesn’t need the ware ‘%s’"
-msgstr "la economía no necesita la mercancía ‘%s’"
+msgstr "la economía no necesita la mercancía \"%s\""
 
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy
 #. needs the worker ‘%s’
 #: ../../src/logic/production_program.cc:353
 #, c-format
 msgid "the economy needs the worker ‘%s’"
-msgstr "la economía necesita al trabajador ‘%s’"
+msgstr "la economía necesita el trabajador \"%s\""
 
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ...
 #. * TRANSLATORS:      ... because the economy doesn’t need the worker ‘%s’
 #: ../../src/logic/production_program.cc:363
 #, c-format
 msgid "the economy doesn’t need the worker ‘%s’"
-msgstr "la economía no necesita al trabajador ‘%s’"
+msgstr "la economía no necesita el trabajador \"%s\""
 
 #. * TRANSLATORS: This is an item in a list of wares, e.g. "3x water":
 #. * TRANSLATORS:    %1$s = "3"
@@ -1261,7 +1262,7 @@ msgstr "¡No hay soldados para entrenar!"
 #: ../../src/logic/production_program.cc:1399
 #: ../../src/logic/production_program.cc:1484
 msgid "No soldier found for this training level!"
-msgstr "No se han encontrado soldados para este nivel de entrenamiento!"
+msgstr "¡No se han encontrado soldados para este nivel de entrenamiento!"
 
 #: ../../src/logic/productionsite.cc:269
 msgid "(not occupied)"
@@ -1313,7 +1314,7 @@ msgstr "Partida guardada"
 
 #: ../../src/logic/ship.cc:435
 msgid "Port Space"
-msgstr ""
+msgstr "Espacio para puerto"
 
 #: ../../src/logic/ship.cc:436
 msgid "Port Space Found"
@@ -1328,7 +1329,7 @@ msgstr "Un barco de expedición ha encontrado un espacio de construcción para u
 #: ../../src/logic/ship.cc:556
 msgctxt "ship"
 msgid "Waiting"
-msgstr ""
+msgstr "Esperando"
 
 #: ../../src/logic/ship.cc:557
 msgid "Island Circumnavigated"
@@ -1341,7 +1342,7 @@ msgstr "Un barco de expedición ha navegado alrededor de su isla sin eventos."
 #. * TRANSLATORS: A ship has discovered land
 #: ../../src/logic/ship.cc:620
 msgid "Land Ahoy!"
-msgstr ""
+msgstr "¡Tierra Ahoy!"
 
 #: ../../src/logic/ship.cc:621
 msgid "Coast Reached"
@@ -1354,11 +1355,11 @@ msgstr "Un barco de expedición ha llegado a la costa y espera ordenes."
 
 #: ../../src/logic/ship.cc:668
 msgid "Port Lost!"
-msgstr ""
+msgstr "¡Puerto perdido!"
 
 #: ../../src/logic/ship.cc:669
 msgid "New port construction site is gone"
-msgstr "La nueva obra del puerto ha terminado"
+msgstr "La zona de construcción del nuevo puerto ya no existe"
 
 #: ../../src/logic/ship.cc:670
 msgid "Unloading of wares failed, expedition is cancelled now."
@@ -1368,7 +1369,7 @@ msgstr "Descarga de mercancías fallida, expedición cancelada."
 #: ../../src/logic/ship.cc:850
 msgctxt "ship"
 msgid "Expedition"
-msgstr ""
+msgstr "Expedición"
 
 #: ../../src/logic/ship.cc:851
 msgid "Expedition Ready"
@@ -1380,7 +1381,7 @@ msgstr "Un barco de expedición espera tus ordenes."
 
 #: ../../src/logic/soldier.cc:1504 ../../src/logic/soldier.cc:1515
 msgid "Soldier"
-msgstr ""
+msgstr "Soldado"
 
 #: ../../src/logic/soldier.cc:1506 ../../src/logic/soldier.cc:1517
 msgid "Logic error"
@@ -1440,22 +1441,22 @@ msgstr "cultivable"
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/logic/world/terrain_description.cc:81
 msgid "navigable"
-msgstr ""
+msgstr "navegable"
 
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/logic/world/terrain_description.cc:86
 msgid "unreachable"
-msgstr ""
+msgstr "inalcanzable"
 
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/logic/world/terrain_description.cc:91
 msgid "mineable"
-msgstr ""
+msgstr "explotable"
 
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/logic/world/terrain_description.cc:96
 msgid "unwalkable"
-msgstr ""
+msgstr "intransitable"
 
 #: ../../src/map_io/s2map.cc:403
 msgid "Bluebyte Settlers II Map. No comment defined!"
@@ -1483,7 +1484,7 @@ msgstr "Widelands no pudo establecer una conexión con la dirección indicada. \
 
 #: ../../src/network/internet_gaming.cc:170
 msgid "For hosting a game, please take a look at the notes at:"
-msgstr "Para hospedar un juego, por favor eche un vistazo a las notas en:"
+msgstr "Para hospedar un juego, por favor echa un vistazo a las notas en:"
 
 #: ../../src/network/internet_gaming.cc:303
 msgid "Something went wrong: "
@@ -1610,7 +1611,7 @@ msgstr "¡La versión del protocolo que está utilizando no está soportada!"
 
 #: ../../src/network/internet_gaming_messages.cc:45
 msgid "You are already logged in!"
-msgstr "¡Ya está conectado!"
+msgstr "¡Ya estás conectado!"
 
 #: ../../src/network/internet_gaming_messages.cc:48
 msgid ""
@@ -3496,7 +3497,7 @@ msgstr "Título"
 #: ../../src/wui/game_message_menu.cc:73
 msgctxt "message"
 msgid "Type"
-msgstr ""
+msgstr "Tipo"
 
 #: ../../src/wui/game_message_menu.cc:74 ../../src/wui/game_summary.cc:108
 msgid "Status"
@@ -3509,7 +3510,7 @@ msgstr "Estado"
 #: ../../src/wui/game_message_menu.cc:77
 msgctxt "message"
 msgid "Sent"
-msgstr ""
+msgstr "Enviado"
 
 #. * TRANSLATORS: %s is a tooltip, Del is the corresponding hotkey
 #: ../../src/wui/game_message_menu.cc:147
@@ -3523,7 +3524,7 @@ msgstr "Supr: %s"
 #: ../../src/wui/game_message_menu.cc:149
 #: ../../src/wui/game_message_menu.cc:621
 msgid "Archive selected message"
-msgstr ""
+msgstr "Archivar mensaje seleccionado"
 
 #: ../../src/wui/game_message_menu.cc:162
 #: ../../src/wui/game_message_menu.cc:623
@@ -3588,7 +3589,7 @@ msgstr "Mensajes: Archivo"
 #. * TRANSLATORS: Tooltip in the messages window
 #: ../../src/wui/game_message_menu.cc:610
 msgid "Restore selected message"
-msgstr ""
+msgstr "Restaurar mensajes seleccionados"
 
 #: ../../src/wui/game_message_menu.cc:612
 msgid "Show Inbox"
@@ -3938,7 +3939,7 @@ msgstr "Ordenador"
 #: ../../src/wui/multiplayersetupgroup.cc:306
 #: ../../src/wui/playerdescrgroup.cc:170
 msgid "Random AI"
-msgstr ""
+msgstr "IA aleatoria"
 
 #: ../../src/wui/multiplayersetupgroup.cc:316
 #: ../../src/wui/playerdescrgroup.cc:178
@@ -4165,11 +4166,11 @@ msgstr "Eliminar de aquí mercancías seleccionadas"
 
 #: ../../src/wui/warehousewindow.cc:219
 msgid "Wares waiting to be shipped"
-msgstr ""
+msgstr "Mercancías esperando ser embarcadas"
 
 #: ../../src/wui/warehousewindow.cc:224
 msgid "Workers waiting to embark"
-msgstr ""
+msgstr "Trabajadores esperando embarcar"
 
 #: ../../src/wui/warehousewindow.cc:230
 msgid "Expedition"

@@ -37,8 +37,6 @@
 #include "graphic/surface.h"
 #include "graphic/texture.h"
 #include "io/filesystem/layered_filesystem.h"
-#include "logic/map_objects/bob.h"
-#include "logic/map_objects/map_object.h"
 #include "scripting/lua_table.h"
 #include "sound/sound_handler.h"
 
@@ -229,13 +227,11 @@ Image* NonPackedAnimation::representative_image(const RGBColor* clr) const {
 	int h = image->height();
 
 	Texture* rv = new Texture(w, h);
-
-	// Initialize the rectangle
-	rv->fill_rect(Rect(Point(0, 0), w, h), RGBAColor(255, 255, 255, 0));
-
 	if (!hasplrclrs_ || clr == nullptr) {
-		rv->blit(Rect(Point(0, 0), w, h), *image, Rect(Point(0, 0), w, h), 1., BlendMode::UseAlpha);
+		// No player color means we simply want an exact copy of the original image.
+		rv->blit(Rect(Point(0, 0), w, h), *image, Rect(Point(0, 0), w, h), 1., BlendMode::Copy);
 	} else {
+		rv->fill_rect(Rect(Point(0, 0), w, h), RGBAColor(0, 0, 0, 0));
 		rv->blit_blended(Rect(Point(0, 0), w, h), *image,
 		                 *g_gr->images().get(pc_mask_image_files_[0]), Rect(Point(0, 0), w, h), *clr);
 	}

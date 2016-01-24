@@ -1,0 +1,70 @@
+Source: widelands
+Section: games
+Priority: extra
+Maintainer: Debian Games Team <pkg-games-devel@lists.alioth.debian.org>
+Uploaders: 
+  Martin Quinson <mquinson@debian.org>,
+  Enrico Tassi <gareuselesinge@debian.org> 
+Standards-Version: 3.9.5
+Build-Depends: debhelper (>= 9), 
+  libsdl2-dev, 
+  libsdl2-image-dev, 
+  libsdl2-mixer-dev, 
+  libsdl2-net-dev, 
+  libsdl2-ttf-dev, 
+  python, 
+  libboost1.48-dev | libboost-dev, 
+  libboost-regex1.48-dev | libboost-regex-dev, 
+  libboost-test1.48-dev | libboost-test-dev, 
+  doxygen, 
+  cmake, 
+  imagemagick,
+  libglew1.6-dev | libglew-dev,
+  libpng-dev, 
+  zlib1g-dev
+Vcs-Git: git://git.debian.org/git/pkg-games/widelands.git
+Vcs-Browser: http://anonscm.debian.org/gitweb/?p=pkg-games/widelands.git
+#Vcs-Svn: svn://svn.debian.org/svn/collab-maint/deb-maint/widelands/ <-- Old location of packaging
+Homepage: http://www.widelands.org/
+
+Package: widelands
+Architecture: any
+Depends: widelands-data (= ${source:Version}), 
+  ${shlibs:Depends}, 
+  ${misc:Depends}, 
+Description: fantasy real-time strategy game
+ Widelands is a strategy game aiming for gameplay similar to Settlers II by
+ BlueByte.
+ .
+ In this game, you start out on a small piece of land with nothing more than
+ a few of useful resources. Using those, you can build yourself an empire
+ with many thousands of inhabitants. On your way towards this goal, you will
+ have to build up an economic infrastructure, explore the lands around you
+ and face enemies who are trying to rule the world just like you do.
+
+Package: widelands-data
+Architecture: all
+Depends: ${misc:Depends}
+Description: fantasy real-time strategy game (data files)
+ This package contains the graphics and levels for Widelands.
+ .
+ Widelands is a strategy game aiming for gameplay similar to Settlers II by
+ BlueByte.
+ .
+ In this game, you start out on a small piece of land with nothing more than
+ a few of useful resources. Using those, you can build yourself an empire
+ with many thousands of inhabitants. On your way towards this goal, you will
+ have to build up an economic infrastructure, explore the lands around you
+ and face enemies who are trying to rule the world just like you do.
+
+Package: widelands-dbg
+Architecture: any
+Section: debug
+Depends: widelands (= ${binary:Version}), 
+ ${misc:Depends}
+Description: fantasy real-time strategy game (debug cruft)
+ This package contains the debugging symbols associated to widelands.
+ .
+ If you don't want to debug widelands (nor report bugs against it), you
+ don't need it. 
+   

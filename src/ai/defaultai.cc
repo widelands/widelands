@@ -30,6 +30,7 @@
 #include "base/log.h"
 #include "base/macros.h"
 #include "base/time_string.h"
+#include "base/wexception.h"
 #include "economy/economy.h"
 #include "economy/flag.h"
 #include "economy/portdock.h"
@@ -454,8 +455,7 @@ void DefaultAI::think() {
 				set_taskpool_task_time(gametime +   19 * 1000, SchedulerTaskId::kCheckEnemySites);
 				break;
 			default:
-				assert(false);
-				;
+				NEVER_HERE();
 			}
 	}
 }
@@ -4118,7 +4118,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			return BuildingNecessity::kNotNeeded;
 		}
 	}
-	throw wexception("Never here.");
+	NEVER_HERE();
 }
 
 // Now we can prohibit some militarysites, based on size, the goal is not to
@@ -5226,7 +5226,7 @@ int32_t DefaultAI::calculate_strength(const std::vector<Widelands::Soldier*> sol
 				el += static_cast<float>(70 - 16 * soldier->get_evade_level()) / 100;
 				break;
 			default:
-				assert (false);
+				NEVER_HERE();
 		}
 
 		final += (al * hp) / (dl * el);
@@ -5663,8 +5663,7 @@ void DefaultAI::set_taskpool_task_time(const uint32_t gametime, const Widelands:
 			return;
 		}
 	}
-
-	assert(false);
+	NEVER_HERE();
 }
 
 // Retrieves due time of the task based on its ID

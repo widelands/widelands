@@ -27,6 +27,7 @@
 #include <boost/lexical_cast.hpp>
 
 #include "base/i18n.h"
+#include "base/wexception.h"
 #include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
@@ -109,8 +110,8 @@ std::string get_unit_name(UNIT unit) {
 	case UNIT_HOUR: return _("%1% h");
 	/** TRANSLATOR: minute(s). Used in statistics. */
 	case UNIT_MIN:  return _("%1% min");
-	default: return "%1% invalid";
 	}
+	NEVER_HERE();
 }
 
 uint32_t ms_to_unit(UNIT unit, uint32_t ms) {
@@ -118,8 +119,8 @@ uint32_t ms_to_unit(UNIT unit, uint32_t ms) {
 	case UNIT_DAY: return ms / days;
 	case UNIT_HOUR: return ms / hours;
 	case UNIT_MIN: return ms / minutes;
-	default: return -1;
 	}
+	NEVER_HERE();
 }
 
 /**

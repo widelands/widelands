@@ -21,6 +21,7 @@
 
 #include <memory>
 
+#include "base/wexception.h"
 #include "graphic/graphic.h"
 #include "logic/game_data_error.h"
 
@@ -66,7 +67,7 @@ TribeBasicInfo Tribes::tribeinfo(const std::string& tribename) {
 		}
 	}
 	throw GameDataError("The tribe '%s'' does not exist.", tribename.c_str());
-	assert(false); // A TribeBasicInfo should have been found
+	NEVER_HERE();
 }
 
 bool Tribes::tribe_exists(const std::string& tribename) {
@@ -107,10 +108,10 @@ void Tribes::add_militarysite_type(const LuaTable& table, const EditorGameBase& 
 
 void Tribes::add_productionsite_type(const LuaTable& table, const EditorGameBase& egbase) {
 	i18n::Textdomain td("tribes");
-	const char* msgctxt = table.get_string("msgctxt").c_str();
+	const std::string msgctxt = table.get_string("msgctxt");
 	buildings_->add(
 				new ProductionSiteDescr(
-					pgettext_expr(msgctxt, table.get_string("descname").c_str()),
+					pgettext_expr(msgctxt.c_str(), table.get_string("descname").c_str()),
 					msgctxt,
 					table,
 					egbase));

@@ -189,7 +189,7 @@ FullscreenMenuOptions::FullscreenMenuOptions
 
 	// Saving options
 	sb_autosave_
-		(&box_saving_, 0, 0, column_width_, 240,
+		(&box_saving_, 0, 0, column_width_, 250,
 		 opt.autosave / 60, 0, 100, _("Save game automatically every"),
 		 /** TRANSLATORS: Options: Save game automatically every: */
 		 /** TRANSLATORS: This will have a number added in front of it */
@@ -197,13 +197,13 @@ FullscreenMenuOptions::FullscreenMenuOptions
 		 g_gr->images().get("pics/but3.png"), UI::SpinBox::Type::kBig),
 
 	sb_rolling_autosave_
-		(&box_saving_, 0, 0, column_width_, 240,
+		(&box_saving_, 0, 0, column_width_, 250,
 		 opt.rolling_autosave, 1, 20, _("Maximum number of autosave files"),
 		 "",
 		 g_gr->images().get("pics/but3.png"), UI::SpinBox::Type::kBig),
 
 	sb_remove_replays_
-		(&box_saving_, 0, 0, column_width_, 240,
+		(&box_saving_, 0, 0, column_width_, 250,
 		 opt.remove_replays, 0, 365, _("Remove replays older than:"),
 		 /** TRANSLATORS: Options: Remove Replays older than: */
 		 /** TRANSLATORS: This will have a number added in front of it */

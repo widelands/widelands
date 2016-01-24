@@ -70,29 +70,31 @@ Graphic::Graphic() : image_cache_(new ImageCache()), animation_manager_(new Anim
  * Initialize the SDL video mode.
  */
 void Graphic::initialize(int window_mode_w, int window_mode_h, bool init_fullscreen) {
-	m_window_mode_width = window_mode_w;
-	m_window_mode_height = window_mode_h;
-	m_requires_update = true;
+	window_mode_width_ = window_mode_w;
+	window_mode_height_ = window_mode_h;
+	requires_update_ = true;
 
 	// Request an OpenGL 2 context with double buffering.
-	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
+	SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 2);
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 1);
-	SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
+	SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_COMPATIBILITY);
+	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 
-	log("Graphics: Try to set Videomode %ux%u\n", m_window_mode_width, m_window_mode_height);
-	m_sdl_window =
+
+	log("Graphics: Try to set Videomode %ux%u\n", window_mode_width_, window_mode_height_);
+	sdl_window_ =
 	   SDL_CreateWindow("Widelands Window", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
-	                    m_window_mode_width, m_window_mode_height, SDL_WINDOW_OPENGL);
+	                    window_mode_width_, window_mode_height_, SDL_WINDOW_OPENGL);
 
 	resolution_changed();
 	set_fullscreen(init_fullscreen);
 
-	SDL_SetWindowTitle(m_sdl_window, ("Widelands " + build_id() + '(' + build_type() + ')').c_str());
-	set_icon(m_sdl_window);
+	SDL_SetWindowTitle(sdl_window_, ("Widelands " + build_id() + '(' + build_type() + ')').c_str());
+	set_icon(sdl_window_);
 
-	m_glcontext = SDL_GL_CreateContext(m_sdl_window);
-	SDL_GL_MakeCurrent(m_sdl_window, m_glcontext);
+	gl_context_ = SDL_GL_CreateContext(sdl_window_);
+	SDL_GL_MakeCurrent(sdl_window_, gl_context_);
 
 #ifdef USE_GLBINDING
 	glbinding::Binding::initialize();
@@ -118,9 +120,12 @@ void Graphic::initialize(int window_mode_w, int window_mode_h, bool init_fullscr
 	glGetIntegerv(GL_MAX_TEXTURE_SIZE, &max_texture_size);
 	log("Graphics: OpenGL: Max texture size: %u\n", max_texture_size);
 
+	log("Graphics: OpenGL: ShadingLanguage: \"%s\"\n",
+	    reinterpret_cast<const char*>(glGetString(GL_SHADING_LANGUAGE_VERSION)));
+
 	glDrawBuffer(GL_BACK);
 
-	glEnable(GL_DEPTH_TEST);
+	glDisable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LEQUAL);
 
 	glEnable(GL_BLEND);
@@ -128,12 +133,12 @@ void Graphic::initialize(int window_mode_w, int window_mode_h, bool init_fullscr
 
 	glClear(GL_COLOR_BUFFER_BIT);
 
-	SDL_GL_SwapWindow(m_sdl_window);
+	SDL_GL_SwapWindow(sdl_window_);
 
 	/* Information about the video capabilities. */
 	{
 		SDL_DisplayMode disp_mode;
-		SDL_GetWindowDisplayMode(m_sdl_window, &disp_mode);
+		SDL_GetWindowDisplayMode(sdl_window_, &disp_mode);
 		log("**** GRAPHICS REPORT ****\n"
 		    " VIDEO DRIVER %s\n"
 		    " pixel fmt %u\n"
@@ -156,13 +161,13 @@ Graphic::~Graphic()
 	if (UI::g_fh)
 		UI::g_fh->flush();
 
-	if (m_sdl_window) {
-		SDL_DestroyWindow(m_sdl_window);
-		m_sdl_window = nullptr;
+	if (sdl_window_) {
+		SDL_DestroyWindow(sdl_window_);
+		sdl_window_ = nullptr;
 	}
-	if (m_glcontext) {
-		SDL_GL_DeleteContext(m_glcontext);
-		m_glcontext = nullptr;
+	if (gl_context_) {
+		SDL_GL_DeleteContext(gl_context_);
+		gl_context_ = nullptr;
 	}
 }
 
@@ -183,21 +188,21 @@ int Graphic::get_yres()
 }
 
 void Graphic::change_resolution(int w, int h) {
-	m_window_mode_width = w;
-	m_window_mode_height = h;
+	window_mode_width_ = w;
+	window_mode_height_ = h;
 
 	if (!fullscreen()) {
-		SDL_SetWindowSize(m_sdl_window, w, h);
+		SDL_SetWindowSize(sdl_window_, w, h);
 		resolution_changed();
 	}
 }
 
 void Graphic::resolution_changed() {
 	int new_w, new_h;
-	SDL_GetWindowSize(m_sdl_window, &new_w, &new_h);
+	SDL_GetWindowSize(sdl_window_, &new_w, &new_h);
 
 	screen_.reset(new Screen(new_w, new_h));
-	m_rendertarget.reset(new RenderTarget(screen_.get()));
+	render_target_.reset(new RenderTarget(screen_.get()));
 
 	Notifications::publish(GraphicResolutionChanged{new_w, new_h});
 
@@ -209,13 +214,13 @@ void Graphic::resolution_changed() {
 */
 RenderTarget * Graphic::get_render_target()
 {
-	m_rendertarget->reset();
-	return m_rendertarget.get();
+	render_target_->reset();
+	return render_target_.get();
 }
 
 bool Graphic::fullscreen()
 {
-	uint32_t flags = SDL_GetWindowFlags(m_sdl_window);
+	uint32_t flags = SDL_GetWindowFlags(sdl_window_);
 	return (flags & SDL_WINDOW_FULLSCREEN) || (flags & SDL_WINDOW_FULLSCREEN_DESKTOP);
 }
 
@@ -232,35 +237,33 @@ void Graphic::set_fullscreen(const bool value)
 	// whet fullscreen, we do it when in windowed mode.
 	if (value) {
 		SDL_DisplayMode display_mode;
-		SDL_GetDesktopDisplayMode(SDL_GetWindowDisplayIndex(m_sdl_window), &display_mode);
-		SDL_SetWindowSize(m_sdl_window, display_mode.w, display_mode.h);
+		SDL_GetDesktopDisplayMode(SDL_GetWindowDisplayIndex(sdl_window_), &display_mode);
+		SDL_SetWindowSize(sdl_window_, display_mode.w, display_mode.h);
 
-		SDL_SetWindowFullscreen(m_sdl_window, SDL_WINDOW_FULLSCREEN_DESKTOP);
+		SDL_SetWindowFullscreen(sdl_window_, SDL_WINDOW_FULLSCREEN_DESKTOP);
 	} else {
-		SDL_SetWindowFullscreen(m_sdl_window, 0);
+		SDL_SetWindowFullscreen(sdl_window_, 0);
 
 		// Next line does not work. See comment in refresh().
-		SDL_SetWindowSize(m_sdl_window, m_window_mode_width, m_window_mode_height);
+		SDL_SetWindowSize(sdl_window_, window_mode_width_, window_mode_height_);
 	}
 	resolution_changed();
 }
 
 
 void Graphic::update() {
-	m_requires_update = true;
+	requires_update_ = true;
 }
 
 /**
  * Returns true if parts of the screen have been marked for refreshing.
 */
 bool Graphic::need_update() const {
-	return m_requires_update;
+	return requires_update_;
 }
 
 /**
  * Bring the screen uptodate.
- *
- * \param force update whole screen
 */
 void Graphic::refresh()
 {
@@ -271,33 +274,33 @@ void Graphic::refresh()
 	// refresh() when in window mode.
 	if (!fullscreen()) {
 		int true_width, true_height;
-		SDL_GetWindowSize(m_sdl_window, &true_width, &true_height);
-		if (true_width != m_window_mode_width || true_height != m_window_mode_height) {
-			SDL_SetWindowSize(m_sdl_window, m_window_mode_width, m_window_mode_height);
+		SDL_GetWindowSize(sdl_window_, &true_width, &true_height);
+		if (true_width != window_mode_width_ || true_height != window_mode_height_) {
+			SDL_SetWindowSize(sdl_window_, window_mode_width_, window_mode_height_);
 		}
 	}
 
-	SDL_GL_SwapWindow(m_sdl_window);
-	m_requires_update = false;
-}
+	// The backbuffer now contains the current frame. If we want a screenshot,
+	// we should better take it now, before this is swapped out to the
+	// frontbuffer and becomes inaccessible to us.
+	if (!screenshot_filename_.empty()) {
+		log("Save screenshot to %s\n", screenshot_filename_.c_str());
+		std::unique_ptr<StreamWrite> sw(g_fs->open_stream_write(screenshot_filename_));
+		save_to_png(screen_->to_texture().get(), sw.get(), ColorType::RGB);
+		screenshot_filename_.clear();
+	}
 
-
-/**
- * Saves a pixel region to a png. This can be a file or part of a stream.
- *
- * @param surf The Surface to save
- * @param sw a StreamWrite where the png is written to
- */
-void Graphic::save_png(Texture* texture, StreamWrite * sw) const {
-	save_to_png(texture, sw, ColorType::RGBA);
+	SDL_GL_SwapWindow(sdl_window_);
+	requires_update_ = false;
 }
 
 /**
  * Save a screenshot to the given file.
 */
-void Graphic::screenshot(const string& fname) const
+void Graphic::screenshot(const string& fname)
 {
-	log("Save screenshot to %s\n", fname.c_str());
-	std::unique_ptr<StreamWrite> sw(g_fs->open_stream_write(fname));
-	save_to_png(screen_->to_texture().get(), sw.get(), ColorType::RGB);
+	screenshot_filename_ = fname;
+
+	// Force a redraw of the screen soon.
+	update();
 }

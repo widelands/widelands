@@ -152,17 +152,20 @@ struct MapData {
 		std::string this_name;
 		std::string other_name;
 		switch (displaytype) {
-			case MapData::DisplayType::kFilenames:
-				this_name = filename;
-				other_name = other.filename;
-				break;
-			case MapData::DisplayType::kMapnames:
-				this_name = name;
-				other_name = other.name;
+		case MapData::DisplayType::kFilenames:
+			this_name = filename;
+			other_name = other.filename;
 			break;
-			default:
-				this_name = localized_name;
-				other_name = other.localized_name;
+
+		case MapData::DisplayType::kMapnames:
+			this_name = name;
+			other_name = other.name;
+			break;
+
+		case MapData::DisplayType::kMapnamesLocalized:
+			this_name = localized_name;
+			other_name = other.localized_name;
+			break;
 		}
 
 		// If there is no width, we have a directory - we want them first.

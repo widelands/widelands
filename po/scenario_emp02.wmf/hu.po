@@ -2,14 +2,15 @@
 # Copyright (C) 2005-2015 Widelands Development Team
 # 
 # Translators:
+# Balázs Meskó <meskobalazs@gmail.com>, 2016
 # GunChleoc, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-28 11:19+0000\n"
-"PO-Revision-Date: 2015-11-28 11:21+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2015-12-14 05:31+0000\n"
+"PO-Revision-Date: 2016-01-13 00:24+0000\n"
+"Last-Translator: Balázs Meskó <meskobalazs@gmail.com>\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -113,7 +114,7 @@ msgid ""
 "It’s up to you what you want to build. But remember – coal and iron ore "
 "mines need beer, marble and gold mines need wine and all mines need at least"
 " rations, which are produced out of bread OR meat OR fish."
-msgstr "Szükség lehet még egy vadászházra, sertéstelepre, szőlőskertre és néhány kútra is. Rajtad áll, mit építesz. De ne feledd: a szén- és vasércbányákba sör kell, a márvány- és aranybányákba bor, és minden bányába legalább harapnivaló, ami kenyérből VAGY húsból VAGY halból készül."
+msgstr "Szükség lehet még egy vadászházra, sertéstelepre, szőlőskertre és néhány kútra is. Rajtad áll, mit építesz. De ne feledd: a szén- és vasércbányákba sör kell, a márvány- és aranybányákba bor, és minden bányába legalább harapnivalók kellenek, ami kenyérből VAGY húsból VAGY halból készül."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:85
 msgid "Protect your eastern frontier"
@@ -322,7 +323,7 @@ msgstr "A többi hegy"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:191
 msgid "Saledus is excited"
-msgstr ""
+msgstr "Saledus izgatott"
 
 #. TRANSLATORS: Saledus
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:193
@@ -353,7 +354,7 @@ msgstr "Étel a bányászoknak"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:205
 msgid "Amalea enters…"
-msgstr ""
+msgstr "Amalea belép…"
 
 #. TRANSLATORS: Amalea
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:207
@@ -476,7 +477,7 @@ msgstr "Ahogy az idő telik"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:271
 msgid "7 days later…"
-msgstr ""
+msgstr "7 nappal később…"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:275
 msgid "A Message"
@@ -505,11 +506,12 @@ msgid ""
 msgstr "Befejezted ezt a küldetést. Ha szeretnél, játszhatsz tovább itt is, máskülönben folytasd a következő küldetéssel."
 
 #: ../../scripting/format_scenario.lua:36
+#, lua-format
 msgid "“%s”"
 msgstr "„%s”"
 
 #: ../../scripting/format_scenario.lua:146
 msgid "New Objective"
 msgid_plural "New Objectives"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Új célkitűzés"
+msgstr[1] "Új célkitűzések"

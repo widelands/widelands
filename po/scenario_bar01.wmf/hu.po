@@ -2,6 +2,7 @@
 # Copyright (C) 2005-2015 Widelands Development Team
 # 
 # Translators:
+# Balázs Meskó <meskobalazs@gmail.com>, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2011
 # GunChleoc, 2014
 # GunChleoc, 2014
@@ -10,9 +11,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-18 08:43+0000\n"
-"PO-Revision-Date: 2015-11-18 08:43+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2015-12-14 05:31+0000\n"
+"PO-Revision-Date: 2016-01-13 00:12+0000\n"
+"Last-Translator: Balázs Meskó <meskobalazs@gmail.com>\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -300,7 +301,7 @@ msgstr "A fejlettebb épületekhez szükséges harmadik anyag a nád, mellyel a 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:142
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:147
 msgid "Build a cattle farm"
-msgstr ""
+msgstr "Építs egy marhafarmot"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:143
 msgid ""
@@ -326,7 +327,7 @@ msgstr "A történet elkezdődik"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:157
 msgid "Thron sighs…"
-msgstr ""
+msgstr "Thron sóhajt…"
 
 #. TRANSLATORS: Thron
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:159
@@ -382,7 +383,7 @@ msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:204
 msgid "Thron is shaking his head…"
-msgstr ""
+msgstr "Thron a fejét rázza…"
 
 #. TRANSLATORS: Thron
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:206
@@ -445,7 +446,7 @@ msgstr "Valaki megszólít"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:238
 msgid "An old man says…"
-msgstr ""
+msgstr "Egy öreg ember azt mondja…"
 
 #. TRANSLATORS: Khantrukh
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:240
@@ -477,7 +478,7 @@ msgstr "A tanácsadó"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:249
 msgid "Khantrukh notes…"
-msgstr ""
+msgstr "Khantrukh megjegyzi…"
 
 #. TRANSLATORS: Khantrukh
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:251
@@ -508,7 +509,7 @@ msgstr "Éjjel"
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:264
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:278
 msgid "Thron says…"
-msgstr ""
+msgstr "Thron azt mondja…"
 
 #. TRANSLATORS: Thron
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:266
@@ -550,7 +551,7 @@ msgstr "A minap"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:292
 msgid "Thron says thoughtfully…"
-msgstr ""
+msgstr "Thron azt mondja elgondolkodva…"
 
 #. TRANSLATORS: Thron
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:294
@@ -574,7 +575,7 @@ msgstr "Az eskü"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:303
 msgid "Thron looks furious…"
-msgstr ""
+msgstr "Thron dühösnek tűnik…"
 
 #. TRANSLATORS: Thron
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:305
@@ -603,7 +604,7 @@ msgstr "A hű társad"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:314
 msgid "Brave Boldreth steps to your side…"
-msgstr ""
+msgstr "Bátor Boldreth az oldaladhoz lép…"
 
 #. TRANSLATORS: Boldreth
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:316
@@ -616,7 +617,7 @@ msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:322
 msgid "Khantrukh joins in…"
-msgstr ""
+msgstr "Khantrukh csatlakozik…"
 
 #. TRANSLATORS: Khantrukh
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:324
@@ -628,7 +629,7 @@ msgstr "Bocsánatodat kérem, törzsfőnök, de egy fontos dolgot kell megbeszé
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:330
 msgid "Boldreth jumps up…"
-msgstr ""
+msgstr "Boldreth felugrik…"
 
 #. TRANSLATORS: Boldreth
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:332
@@ -641,7 +642,7 @@ msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:339
 msgid "Khantrukh grumbles…"
-msgstr ""
+msgstr "Khantrukh morog…"
 
 #. TRANSLATORS: Khantrukh
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:341
@@ -651,7 +652,7 @@ msgstr "Öreg? Tiszteletlen kölke!"
 #. TRANSLATORS: Khantrukh
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:347
 msgid "Khantrukh nods satisfied…"
-msgstr ""
+msgstr "Khantrukh elégedetten bólint…"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:348
 msgid "At last! These rocks should last for a while."
@@ -659,7 +660,7 @@ msgstr "Végre! Ezek a sziklák ki kell, hogy tartsanak egy darabig."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:353
 msgid "Boldreth exclaims…"
-msgstr ""
+msgstr "Boldreth felkiált…"
 
 #. TRANSLATORS: Boldreth
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:355
@@ -678,7 +679,7 @@ msgstr "Terjeszkedjünk keletre! Így néha az öregeknek is hasznát vehetjük.
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:364
 msgid "Boldreth laughs…"
-msgstr ""
+msgstr "Boldreth nevet…"
 
 #. TRANSLATORS: Boldreth
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:366
@@ -690,11 +691,11 @@ msgstr "Chat'Karuth szakállára, ez remek! Képzeld csak el, mi mindenre lesz j
 #. TRANSLATORS: Boldreth
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:369
 msgid "It might even be enough to…"
-msgstr ""
+msgstr "Lehet hogy elég lesz…"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:374
 msgid "Khantrukh interrupts…"
-msgstr ""
+msgstr "Khantrukh közbevág…"
 
 #. TRANSLATORS: Khantrukh
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:376
@@ -707,7 +708,7 @@ msgstr "Noha ez igaz, később gondolkodjunk ezen, most más gondunk is van. A b
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:382
 msgid "Boldreth nods…"
-msgstr ""
+msgstr "Boldreth bólint…"
 
 #. TRANSLATORS: Boldreth
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:384
@@ -724,7 +725,7 @@ msgstr "Úgy látom, elég sok állat van itt az erdőben, vadásszunk le belől
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:393
 msgid "The elder jumps into the air…"
-msgstr ""
+msgstr "A vén felugrik a levegőbe…"
 
 #. TRANSLATORS: Khantrukh
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:395
@@ -741,7 +742,7 @@ msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:404
 msgid "Boldreth cheers up…"
-msgstr ""
+msgstr "Boldreth felvidul…"
 
 #. TRANSLATORS: Boldreth
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:406
@@ -757,7 +758,7 @@ msgstr "Ígérem, mire lemegy a nap, minden klán törzsfőnökéhez méltó pom
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:414
 msgid "Khantrukh gazes over the plains…"
-msgstr ""
+msgstr "Khantrukh végigtekint a síkságon…"
 
 #. TRANSLATORS: Khantrukh
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:416
@@ -773,7 +774,7 @@ msgstr "Egy gyönyörű reggel"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:421
 msgid "Thron recognizes…"
-msgstr ""
+msgstr "Thron felismeri…"
 
 #. TRANSLATORS: Thron
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:423
@@ -792,7 +793,7 @@ msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:431
 msgid "Boldreth remarks…"
-msgstr ""
+msgstr "Boldreth megjegyzi…"
 
 #. TRANSLATORS: Boldreth
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:433
@@ -806,7 +807,7 @@ msgstr "Most, hogy bányáink is vannak, meg élelmünk is, amivel fenntarthatju
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:439
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:490
 msgid "Khantrukh speaks…"
-msgstr ""
+msgstr "Khantrukh beszél…"
 
 #. TRANSLATORS: Khantrukh
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:441
@@ -825,7 +826,7 @@ msgstr "Persze olyan mélységben már sötét és hideg van, és csak kevesen m
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:450
 msgid "Boldreth seems concerned…"
-msgstr ""
+msgstr "Boldreth nyugtalannak látszik…"
 
 #. TRANSLATORS: Boldreth
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:452
@@ -842,7 +843,7 @@ msgstr "Szükségünk van egy faedző műhelyre, mégpedig máris!"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:461
 msgid "Boldreth smiles…"
-msgstr ""
+msgstr "Boldreth mosolyog…"
 
 #. TRANSLATORS: Boldreth
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:463
@@ -861,7 +862,7 @@ msgstr "Mégsem ártana némi cementet is felhalmozni a további hadjáratunkra;
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:472
 msgid "Khantrukh steps in…"
-msgstr ""
+msgstr "Khantrukh belép…"
 
 #. TRANSLATORS: Khantrukh
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:474
@@ -880,7 +881,7 @@ msgstr "Ez ellen tennünk kell valamit!"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:483
 msgid "Khantrukh seems relieved…"
-msgstr ""
+msgstr "Khantrukh megkönnyebbültnek tűnik…"
 
 #. TRANSLATORS: Khantrukh
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:485
@@ -918,7 +919,7 @@ msgstr "Küldetés teljesítve"
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:516
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:539
 msgid "Thron speaks…"
-msgstr ""
+msgstr "Thron beszél…"
 
 #. TRANSLATORS: Thron
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:503
@@ -939,7 +940,7 @@ msgstr "Mikor körülnéztem, hűséges arcokat láttam, melyek hitet sugározta
 #. TRANSLATORS: Thron
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:509
 msgid "The news he brought changed everything…"
-msgstr ""
+msgstr "A hírek amit hozott megváltoztatott mindent…"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:510
 msgid "Victory"
@@ -977,7 +978,7 @@ msgstr "Egy újabb hideg nap"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:526
 msgid "Thron looks worried…"
-msgstr ""
+msgstr "Thron aggódottnak nűnik…"
 
 #. TRANSLATORS: Thron
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:528
@@ -1025,11 +1026,12 @@ msgid ""
 msgstr ""
 
 #: ../../scripting/format_scenario.lua:36
+#, lua-format
 msgid "“%s”"
 msgstr "„%s”"
 
 #: ../../scripting/format_scenario.lua:146
 msgid "New Objective"
 msgid_plural "New Objectives"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Új célkitűzés"
+msgstr[1] "Új célkitűzések"

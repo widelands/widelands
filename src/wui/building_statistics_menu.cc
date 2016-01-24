@@ -541,9 +541,6 @@ void BuildingStatisticsMenu::jump_building(JumpTarget target, bool reverse) {
 		}
 		break;
 	}
-	default:
-		assert(false);
-		break;
 	}
 
 	if (found) {

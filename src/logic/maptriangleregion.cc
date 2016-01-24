@@ -138,9 +138,6 @@ template <> bool MapTriangleRegion<>::advance(const Map & map) {
 		if (m_remaining_in_row)
 			map.get_rn(m_location, &m_location);
 		break;
-	default:
-		assert(false);
-		break;
 	}
 	assert(m_remaining_in_row < 10000); //  Catch wrapping (integer underflow)
 	return true;
@@ -268,9 +265,6 @@ bool MapTriangleRegion<TCoords<FCoords> >::advance(const Map & map)
 	case Bottom:
 		if (m_remaining_in_row)
 			map.get_rn(m_location, &m_location);
-		break;
-	default:
-		assert(false);
 		break;
 	}
 	assert(m_remaining_in_row < 10000); //  Catch wrapping (integer underflow)

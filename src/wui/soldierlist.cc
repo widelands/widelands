@@ -464,7 +464,7 @@ void SoldierList::think()
 			case Widelands::MilitarySite::kPrefersHeroes:
 				m_soldier_preference.set_state(1);
 				break;
-			default:
+			case Widelands::MilitarySite::kNoPreference:
 				m_soldier_preference.set_state(-1);
 				break;
 		}
