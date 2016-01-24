@@ -231,15 +231,16 @@ uint32_t Scrollbar::get_knob_size()
 /// Perform the action for clicking on the given area.
 void Scrollbar::action(Area const area)
 {
-	int32_t diff;
-	int32_t pos;
+	int32_t diff = 0;
+	int32_t pos = 0;
 
 	switch (area) {
 	case Minus: diff = -m_singlestepsize; break;
 	case MinusPage: diff = -m_pagesize; break;
 	case Plus: diff = m_singlestepsize; break;
 	case PlusPage: diff = m_pagesize; break;
-	default:
+	case Knob:
+	case None:
 		return;
 	}
 

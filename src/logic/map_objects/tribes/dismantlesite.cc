@@ -238,8 +238,10 @@ void DismantleSite::draw
 	if (coords != m_position)
 		return; // draw big buildings only once
 
+	const RGBColor& player_color = get_owner()->get_playercolor();
+
 	// Draw the construction site marker
-	dst.drawanim(pos, m_anim, tanim, get_owner());
+	dst.blit_animation(pos, m_anim, tanim, player_color);
 
 	// Draw the partially dismantled building
 	static_assert(0 <= DISMANTLESITE_STEP_TIME, "assert(0 <= DISMANTLESITE_STEP_TIME) failed.");
@@ -261,7 +263,7 @@ void DismantleSite::draw
 
 	uint32_t lines = h * completed_time / total_time;
 
-	dst.drawanimrect(pos, anim_idx, tanim, get_owner(), Rect(Point(0, lines), w, h - lines));
+	dst.blit_animation(pos, anim_idx, tanim, player_color, Rect(Point(0, lines), w, h - lines));
 
 	// Draw help strings
 	draw_help(game, dst, coords, pos);

@@ -963,8 +963,6 @@ void ProductionSite::program_end(Game & game, ProgramResult const result)
 		break;
 	case None:
 		break;
-	default:
-		throw wexception("[ProductionSite::program_end]: impossible result");
 	}
 
 	m_program_timer = true;

@@ -215,8 +215,8 @@ public:
 	// Get the portdock if this is a port.
 	PortDock * get_portdock() const {return m_portdock;}
 
-	// Returns the waresqueue of the expedition if this is a port. Will
-	// assert(false) otherwise.
+	// Returns the waresqueue of the expedition if this is a port.
+	// Will throw an exception otherwise.
 	WaresQueue& waresqueue(DescriptionIndex) override;
 
 	void log_general_info(const EditorGameBase &) override;
