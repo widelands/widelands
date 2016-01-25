@@ -55,8 +55,11 @@ public:
 	~Graphic();
 
 	// Initializes with the given resolution if fullscreen is false, otherwise a
-	// window that fills the screen.
-	void initialize(int window_mode_w, int window_mode_height, bool fullscreen);
+	// window that fills the screen. The 'trace_gl' parameter gets passed on to
+	// 'Gl::initialize'.
+	enum class TraceGl {kNo, kYes};
+	void
+	initialize(const TraceGl& trace_gl, int window_mode_w, int window_mode_height, bool fullscreen);
 
 	// Gets and sets the resolution.
 	void change_resolution(int w, int h);
