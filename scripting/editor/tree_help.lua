@@ -1,4 +1,3 @@
--- NOCOM localize
 include "scripting/formatting.lua"
 
 function picture_li(imagepath, text)
@@ -13,7 +12,7 @@ return {
       local result = picture_li(tree.representative_image, "")
 
       -- TRANSLATORS: A header in the editor help. Terrains preferred by a type of tree.
-      result = result .. rt(p("font-size=3", "")) .. rt(h2("Preferred terrains")) .. rt(p("font-size=3", ""))
+      result = result .. rt(p("font-size=3", "")) .. rt(h2(_"Preferred terrains")) .. rt(p("font-size=3", ""))
 		terrain_list = {}
       for i, terrain_name in ipairs(world:terrain_descriptions()) do
 			local terrain = wl.Editor():get_terrain_description(terrain_name)

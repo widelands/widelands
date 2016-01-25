@@ -1,5 +1,3 @@
--- NOCOM localize
--- NOCOM tree names are in English
 include "scripting/formatting.lua"
 
 function picture_li(imagepath, text)
@@ -79,12 +77,12 @@ return {
 		end
 
 		-- TRANSLATORS: A header in the editor help
-		result = result .. rt(p("font-size=3", "")) .. rt(h2("Probability of trees growing")) .. rt(p("font-size=3", ""))
+		result = result .. rt(p("font-size=3", "")) .. rt(h2(_"Probability of trees growing")) .. rt(p("font-size=3", ""))
 
 		if (tree_string ~="") then
 			result = result .. tree_string
 		else
-			result = result .. rt(p("No trees will grow here."))
+			result = result .. rt(p(_"No trees will grow here."))
 		end
       return result
    end
