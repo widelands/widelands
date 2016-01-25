@@ -126,19 +126,19 @@ private:
 	                                                      RegisteredOverlays,
 	                                                      Widelands::Coords::OrderingFunctor>;
 
-	// Returns the index into m_buildhelp_infos for the correct fieldcaps for
-	// 'fc' according to the current 'm_callback'.
+	// Returns the index into buildhelp_infos_ for the correct fieldcaps for
+	// 'fc' according to the current 'callback_'.
 	int get_buildhelp_overlay(const Widelands::FCoords& fc) const;
 
 	//  indexed by TCoords<>::TriangleIndex
-	RegisteredOverlaysMap m_overlays[3];
+	RegisteredOverlaysMap overlays_[3];
 
-	OverlayInfo m_buildhelp_infos[Widelands::Field::Buildhelp_None];
-	bool m_buildhelp;
+	OverlayInfo buildhelp_infos_[Widelands::Field::Buildhelp_None];
+	bool buildhelp_;
 
 	// this callback is used to define where overlays are drawn.
-	CallbackFn m_callback;
-	OverlayId m_current_overlay_id;
+	CallbackFn callback_;
+	OverlayId current_overlay_id_;
 };
 
 #endif  // end of include guard: WL_WUI_FIELD_OVERLAY_MANAGER_H

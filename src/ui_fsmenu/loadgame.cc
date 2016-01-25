@@ -435,16 +435,16 @@ void FullscreenMenuLoadGame::fill_table() {
 	m_games_data.clear();
 	m_table.clear();
 
-	SavegameData* gamedata = new SavegameData();
 
 	if (m_settings && !m_settings->settings().saved_games.empty()) {
+		SavegameData gamedata;
 		for (uint32_t i = 0; i < m_settings->settings().saved_games.size(); ++i) {
-			gamedata->filename = m_settings->settings().saved_games.at(i).path;
-			m_games_data.push_back(*gamedata);
+			gamedata.filename = m_settings->settings().saved_games.at(i).path;
+			m_games_data.push_back(gamedata);
 
 			UI::Table<uintptr_t const>::EntryRecord & te =
 				m_table.add(m_games_data.size() - 1);
-			te.set_string(0, FileSystem::filename_without_ext(gamedata->filename.c_str()).c_str());
+			te.set_string(0, FileSystem::filename_without_ext(gamedata.filename.c_str()).c_str());
 		}
 	} else { // Normal case
 		// Fill it with all files we find.
@@ -465,7 +465,7 @@ void FullscreenMenuLoadGame::fill_table() {
 				continue;
 			}
 
-			gamedata = new SavegameData();
+			SavegameData gamedata;
 
 			std::string savename = gamefilename;
 			if (m_is_replay) savename += WLGF_SUFFIX;
@@ -474,30 +474,30 @@ void FullscreenMenuLoadGame::fill_table() {
 				continue;
 			}
 
-			gamedata->filename = gamefilename;
+			gamedata.filename = gamefilename;
 
 			try {
 				Widelands::GameLoader gl(savename.c_str(), m_game);
 				gl.preload_game(gpdp);
 
-				gamedata->gametype = gpdp.get_gametype();
+				gamedata.gametype = gpdp.get_gametype();
 
 				if (!m_is_replay) {
 					if (m_settings->settings().multiplayer) {
-						if (gamedata->gametype == GameController::GameType::SINGLEPLAYER) {
+						if (gamedata.gametype == GameController::GameType::SINGLEPLAYER) {
 							continue;
 						}
-					} else if (gamedata->gametype > GameController::GameType::SINGLEPLAYER) {
+					} else if (gamedata.gametype > GameController::GameType::SINGLEPLAYER) {
 						continue;
 					}
 				}
 
-				gamedata->mapname = gpdp.get_mapname();
-				gamedata->gametime = gpdp.get_gametime();
-				gamedata->nrplayers = gpdp.get_number_of_players();
-				gamedata->version = gpdp.get_version();
+				gamedata.mapname = gpdp.get_mapname();
+				gamedata.gametime = gpdp.get_gametime();
+				gamedata.nrplayers = gpdp.get_number_of_players();
+				gamedata.version = gpdp.get_version();
 
-				gamedata->savetimestamp = gpdp.get_savetimestamp();
+				gamedata.savetimestamp = gpdp.get_savetimestamp();
 				time_t t;
 				time(&t);
 				struct tm * currenttime  = localtime(&t);
@@ -506,9 +506,9 @@ void FullscreenMenuLoadGame::fill_table() {
 				int8_t current_month = currenttime->tm_mon;
 				int8_t current_day = currenttime->tm_mday;
 
-				struct tm * savedate  = localtime(&gamedata->savetimestamp);
+				struct tm * savedate  = localtime(&gamedata.savetimestamp);
 
-				if (gamedata->savetimestamp > 0) {
+				if (gamedata.savetimestamp > 0) {
 					if (savedate->tm_year == current_year &&
 						 savedate->tm_mon == current_month &&
 						 savedate->tm_mday == current_day) {  // Today
@@ -518,7 +518,7 @@ void FullscreenMenuLoadGame::fill_table() {
 
 						/** TRANSLATORS: Display date for choosing a savegame/replay */
 						/** TRANSLATORS: hour:minute */
-						gamedata->savedatestring = (boost::format(_("Today, %1%:%2%"))
+						gamedata.savedatestring = (boost::format(_("Today, %1%:%2%"))
 															 % savedate->tm_hour % minute).str();
 					} else if ((savedate->tm_year == current_year &&
 									savedate->tm_mon == current_month &&
@@ -531,13 +531,13 @@ void FullscreenMenuLoadGame::fill_table() {
 
 						/** TRANSLATORS: Display date for choosing a savegame/replay */
 						/** TRANSLATORS: hour:minute */
-						gamedata->savedatestring = (boost::format(_("Yesterday, %1%:%2%"))
+						gamedata.savedatestring = (boost::format(_("Yesterday, %1%:%2%"))
 															 % savedate->tm_hour % minute).str();
 					} else {  // Older
 
 						/** TRANSLATORS: Display date for choosing a savegame/replay */
 						/** TRANSLATORS: month day, year */
-						gamedata->savedatestring = (boost::format(_("%2% %1%, %3%"))
+						gamedata.savedatestring = (boost::format(_("%2% %1%, %3%"))
 							 % savedate->tm_mday
 							 % localize_month(savedate->tm_mon)
 							 % (1900 + savedate->tm_year)).str();
@@ -546,18 +546,18 @@ void FullscreenMenuLoadGame::fill_table() {
 
 				{
 					i18n::Textdomain td("win_conditions");
-					gamedata->wincondition = _(gpdp.get_win_condition());
+					gamedata.wincondition = _(gpdp.get_win_condition());
 				}
-				gamedata->minimap_path = gpdp.get_minimap_path();
-				m_games_data.push_back(*gamedata);
+				gamedata.minimap_path = gpdp.get_minimap_path();
+				m_games_data.push_back(gamedata);
 
 				UI::Table<uintptr_t const>::EntryRecord & te =
 					m_table.add(m_games_data.size() - 1);
-				te.set_string(0, gamedata->savedatestring);
+				te.set_string(0, gamedata.savedatestring);
 
 				if (m_is_replay || m_settings->settings().multiplayer) {
 					std::string gametypestring;
-					switch (gamedata->gametype) {
+					switch (gamedata.gametype) {
 						case GameController::GameType::SINGLEPLAYER:
 							/** TRANSLATORS: "Single Player" entry in the Game Mode table column. */
 							/** TRANSLATORS: "Keep this to 6 letters maximum. */
@@ -572,7 +572,7 @@ void FullscreenMenuLoadGame::fill_table() {
 							/** TRANSLATORS: Make sure that this translation is consistent with the tooltip. */
 							/** TRANSLATORS: %1% is the number of players */
 							gametypestring = (boost::format(_("H (%1%)"))
-												 % static_cast<unsigned int>(gamedata->nrplayers)).str();
+												 % static_cast<unsigned int>(gamedata.nrplayers)).str();
 							break;
 						case GameController::GameType::NETCLIENT:
 							/** TRANSLATORS: "Multiplayer" entry in the Game Mode table column. */
@@ -581,20 +581,20 @@ void FullscreenMenuLoadGame::fill_table() {
 							/** TRANSLATORS: Make sure that this translation is consistent with the tooltip. */
 							/** TRANSLATORS: %1% is the number of players */
 							gametypestring = (boost::format(_("MP (%1%)"))
-												% static_cast<unsigned int>(gamedata->nrplayers)).str();
+												% static_cast<unsigned int>(gamedata.nrplayers)).str();
 							break;
 						case GameController::GameType::REPLAY:
 							gametypestring = "";
 							break;
 					}
 					te.set_string(1, gametypestring);
-					te.set_string(2, map_filename(gamedata->filename, gamedata->mapname));
+					te.set_string(2, map_filename(gamedata.filename, gamedata.mapname));
 				} else {
-					te.set_string(1, map_filename(gamedata->filename, gamedata->mapname));
+					te.set_string(1, map_filename(gamedata.filename, gamedata.mapname));
 				}
 			} catch (const WException & e) {
 				//  we simply skip illegal entries
-				gamedata->errormessage =
+				gamedata.errormessage =
 						((boost::format("%s\n\n%s\n\n%s"))
 						 /** TRANSLATORS: Error message introduction for when an old savegame can't be loaded */
 						 % _("This file has the wrong format and can’t be loaded."
@@ -603,9 +603,9 @@ void FullscreenMenuLoadGame::fill_table() {
 						 % _("Error message:")
 						 % e.what()).str();
 
-				const std::string fs_filename = FileSystem::filename_without_ext(gamedata->filename.c_str());
-				gamedata->mapname = fs_filename;
-				m_games_data.push_back(*gamedata);
+				const std::string fs_filename = FileSystem::filename_without_ext(gamedata.filename.c_str());
+				gamedata.mapname = fs_filename;
+				m_games_data.push_back(gamedata);
 
 				UI::Table<uintptr_t const>::EntryRecord & te =
 					m_table.add(m_games_data.size() - 1);

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006, 2008, 2010 by the Widelands Development Team
+ * Copyright (C) 2002-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -55,7 +55,7 @@ private:
 	void toggle_playerteam();
 
 	PlayerDescriptionGroupImpl * d;
-	std::map<std::string, std::string> m_tribenames;
+	std::map<std::string, std::string> tribenames_;
 };
 
 

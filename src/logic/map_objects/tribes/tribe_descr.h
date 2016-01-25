@@ -143,6 +143,8 @@ public:
 
 	void resize_ware_orders(size_t maxLength);
 
+	const std::vector<std::string>& get_ship_names() const {return ship_names_;}
+
 private:
 	// Helper function for adding a special worker type (carriers etc.)
 	DescriptionIndex add_special_worker(const std::string& workername);
@@ -161,6 +163,7 @@ private:
 
 	std::vector<DescriptionIndex>  buildings_;
 	std::set<DescriptionIndex>         immovables_;  // The player immovables
+	std::vector<std::string>           ship_names_;
 	std::set<DescriptionIndex>         workers_;
 	std::set<DescriptionIndex>         wares_;
 	// The wares that are used by construction sites

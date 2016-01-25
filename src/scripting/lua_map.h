@@ -1126,6 +1126,7 @@ public:
 	int set_scouting_direction(lua_State* L);
 	int get_island_explore_direction(lua_State* L);
 	int set_island_explore_direction(lua_State* L);
+	int get_shipname(lua_State* L);
 	/*
 	 * Lua methods
 	 */

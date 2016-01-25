@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2016 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,26 +17,21 @@
  *
  */
 
-#ifndef WL_WUI_STORY_MESSAGE_BOX_H
-#define WL_WUI_STORY_MESSAGE_BOX_H
+#ifndef WL_GAME_IO_GAME_PLAYER_AI_PERSISTENT_PACKET_H
+#define WL_GAME_IO_GAME_PLAYER_AI_PERSISTENT_PACKET_H
 
-#include <vector>
+#include "game_io/game_data_packet.h"
 
-#include "ui_basic/window.h"
+namespace Widelands {
 
-struct StoryMessageBox : public UI::Window {
-	StoryMessageBox
-		(UI::Panel *,
-		 const std::string &, const std::string &, const std::string &,
-		 int32_t gposx, int32_t gposy, uint32_t w, uint32_t h);
-
-	bool handle_mousepress(uint8_t btn, int32_t mx, int32_t my) override;
-
-	/// Handle keypresses
-	bool handle_key(bool down, SDL_Keysym code) override;
-
-private:
-	void clicked_ok();
+/*
+ * stores data that are needed for AI
+ */
+struct GamePlayerAiPersistentPacket : public GameDataPacket {
+	void read (FileSystem &, Game &, MapObjectLoader * = nullptr) override;
+	void write(FileSystem &, Game &, MapObjectSaver  * = nullptr) override;
 };
 
-#endif  // end of include guard: WL_WUI_STORY_MESSAGE_BOX_H
+}
+
+#endif  // end of include guard: WL_GAME_IO_GAME_PLAYER_AI_PERSISTENT_PACKET_H

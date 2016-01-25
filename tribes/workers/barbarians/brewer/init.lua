@@ -6,7 +6,7 @@ animations = {
       hotspot = { 7, 22 },
    }
 }
-add_worker_animations(animations, "walk", dirname, "walk", {23, 23}, 10)
+add_worker_animations(animations, "walk", dirname, "walk", {12, 23}, 10)
 add_worker_animations(animations, "walkload", dirname, "walkload", {11, 24}, 10)
 
 
