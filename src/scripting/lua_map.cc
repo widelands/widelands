@@ -1483,8 +1483,8 @@ int LuaImmovableDescription::get_build_cost(lua_State * L) {
 			(RO) a table with "name" and "descname" entries for the editor category, or nil if it has none.
 */
 int LuaImmovableDescription::get_editor_category(lua_State * L) {
-	const EditorCategory& editor_category = get()->editor_category();
-	if (&editor_category) {
+	if (get()->has_editor_category()) {
+		const EditorCategory& editor_category = get()->editor_category();
 		lua_newtable(L);
 		lua_pushstring(L, "name");
 		lua_pushstring(L, editor_category.name());

@@ -189,7 +189,8 @@ ImmovableDescr::ImmovableDescr(const std::string& init_descname,
 	MapObjectDescr(
 	MapObjectType::IMMOVABLE, table.get_string("name"), init_descname, table),
 	m_size(BaseImmovable::NONE),
-	owner_type_(input_type) {
+	owner_type_(input_type),
+	editor_category_(nullptr) {
 	if (!is_animation_known("idle")) {
 		throw GameDataError("Immovable %s has no idle animation", table.get_string("name").c_str());
 	}
@@ -260,6 +261,10 @@ ImmovableDescr::ImmovableDescr(const std::string& init_descname,
 	if (table.has_key("buildcost")) {
 		m_buildcost = Buildcost(table.get_table("buildcost"), tribes);
 	}
+}
+
+bool ImmovableDescr::has_editor_category() const {
+	return editor_category_ != nullptr;
 }
 
 const EditorCategory& ImmovableDescr::editor_category() const {

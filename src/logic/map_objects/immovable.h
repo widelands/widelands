@@ -129,6 +129,8 @@ public:
 
 	const Buildcost & buildcost() const {return m_buildcost;}
 
+	// Returns whether this immovable has an editor category. E.g. Tribe immovables never have one.
+	bool has_editor_category() const;
 
 	// Returns the editor category.
 	const EditorCategory& editor_category() const;

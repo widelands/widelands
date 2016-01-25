@@ -42,6 +42,7 @@ end
 function test_descr:test_immovable_editor_category()
    assert_equal("plants", egbase:get_immovable_description("bush1").editor_category.name)
    assert_equal(_"Plants", egbase:get_immovable_description("bush1").editor_category.descname)
+   assert_equal(nil, egbase:get_immovable_description("cornfield_ripe").editor_category)
    assert_equal("trees_deciduous", egbase:get_immovable_description("alder_summer_sapling").editor_category.name)
    assert_equal(_"Deciduous Trees", egbase:get_immovable_description("alder_summer_sapling").editor_category.descname)
    assert_equal("trees_deciduous", egbase:get_immovable_description("alder_summer_old").editor_category.name)
