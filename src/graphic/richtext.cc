@@ -19,6 +19,8 @@
 
 #include "graphic/richtext.h"
 
+#include <boost/algorithm/string/replace.hpp>
+
 #include "base/rect.h"
 #include "graphic/font.h"
 #include "graphic/font_handler.h"
@@ -34,6 +36,14 @@ namespace UI {
 
 namespace {
 int32_t const h_space = 3;
+
+// TODO(GunChleoc): This function is mirrored in rt_render. Keep them identical.
+void replace_entities(std::string* text) {
+	boost::replace_all(*text, "&gt;", ">");
+	boost::replace_all(*text, "&lt;", "<");
+	boost::replace_all(*text, "&nbsp;", " ");
+}
+
 } // namespace
 
 /**
@@ -85,7 +95,8 @@ struct TextlineElement : Element {
 			std::string previous_word;
 			for (std::vector<std::string>::iterator source_it = words.begin();
 				  source_it != words.end(); ++source_it) {
-				const std::string& word = *source_it;
+				std::string& word = *source_it;
+				replace_entities(&word);
 				if (source_it != words.end()) {
 					if (i18n::has_rtl_character(word.c_str()) || i18n::has_rtl_character(previous_word.c_str())) {
 						it = result_words.insert(result_words.begin(), word);
@@ -99,7 +110,8 @@ struct TextlineElement : Element {
 				}
 			}
 		} else {
-			for (const std::string& word: words) {
+			for (std::string& word: words) {
+				replace_entities(&word);
 				result_words.push_back(word);
 			}
 		}

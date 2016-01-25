@@ -50,6 +50,7 @@ using namespace std;
 
 namespace {
 
+// TODO(GunChleoc): This function is mirrored in richtext. Keep them identical.
 void replace_entities(std::string* text) {
 	boost::replace_all(*text, "&gt;", ">");
 	boost::replace_all(*text, "&lt;", "<");
