@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006, 2008 by the Widelands Development Team
+ * Copyright (C) 2002-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -33,8 +33,8 @@ struct GameMainMenu : public UI::UniqueWindow {
 	~GameMainMenu();
 
 private:
-	InteractivePlayer                         & m_player;
-	InteractivePlayer::GameMainMenuWindows & m_windows;
+	InteractivePlayer                      & player_;
+	InteractivePlayer::GameMainMenuWindows & windows_;
 	UI::Button general_stats;
 	UI::Button ware_stats;
 	UI::Button building_stats;

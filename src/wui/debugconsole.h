@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2010 by the Widelands Development Team
+ * Copyright (C) 2008-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -60,7 +60,7 @@ protected:
 	void setDefaultCommand(const HandlerFn &);
 
 private:
-	std::vector<std::string> m_commands;
+	std::vector<std::string> commands_;
 };
 
 /**

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006, 2008-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -70,17 +70,17 @@ private:
 
 	UI::Table<uintptr_t> * list;
 	UI::MultilineTextarea message_body;
-	UI::Button * m_archivebtn;
-	UI::Button * m_togglemodebtn;
-	UI::Button * m_centerviewbtn;
+	UI::Button * archivebtn_;
+	UI::Button * togglemodebtn_;
+	UI::Button * centerviewbtn_;
 	Mode mode;
 	// Buttons for message types
-	UI::Button * m_geologistsbtn;
-	UI::Button * m_economybtn;
-	UI::Button * m_seafaringbtn;
-	UI::Button * m_warfarebtn;
-	UI::Button * m_scenariobtn;
-	Widelands::Message::Type m_message_filter;
+	UI::Button * geologistsbtn_;
+	UI::Button * economybtn_;
+	UI::Button * seafaringbtn_;
+	UI::Button * warfarebtn_;
+	UI::Button * scenariobtn_;
+	Widelands::Message::Type message_filter_;
 };
 
 #endif  // end of include guard: WL_WUI_GAME_MESSAGE_MENU_H

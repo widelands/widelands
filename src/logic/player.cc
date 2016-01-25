@@ -161,10 +161,7 @@ Player::Player
 	m_current_consumed_statistics(the_egbase.tribes().nrwares()),
 	m_ware_productions(the_egbase.tribes().nrwares()),
 	m_ware_consumptions(the_egbase.tribes().nrwares()),
-	m_ware_stocks(the_egbase.tribes().nrwares()),
-	m_ai_data_int32          (),
-	m_ai_data_uint32         (),
-	m_ai_data_int16          ()
+	m_ware_stocks(the_egbase.tribes().nrwares())
 {
 	set_name(name);
 
@@ -201,6 +198,12 @@ Player::Player
 				rediscover_node(egbase().map(), egbase().map()[0], note.fc);
 			}
 		});
+
+	//Populating remaining_shipnames vector
+	for (const auto& shipname : tribe_descr.get_ship_names()) {
+		m_remaining_shipnames.insert(shipname);
+	}
+
 }
 
 
@@ -1308,52 +1311,32 @@ const std::string & Player::get_ai() const {
 	return m_ai;
 }
 
-void Player::set_ai_data(int32_t value, uint32_t position) {
-	assert(position < kAIDataSize);
-	m_ai_data_int32[position] = value;
-}
-
-void Player::set_ai_data(uint32_t value, uint32_t position) {
-	assert(position < kAIDataSize);
-	m_ai_data_uint32[position] = value;
-}
-
-void Player::set_ai_data(int16_t value, uint32_t position) {
-	assert(position < kAIDataSize);
-	m_ai_data_int16[position] = value;
-}
-
-void Player::set_ai_data(bool value, uint32_t position) {
-	assert(position < kAIDataSize);
-	if (value) {
-		m_ai_data_int16[position] = 1;
-	} else {
-		m_ai_data_int16[position] = 0;
+/**
+ * Pick random name from remaining names (if any)
+ */
+const std::string Player::pick_shipname() {
+	if (!m_remaining_shipnames.empty()) {
+		Game & game = dynamic_cast<Game&>(egbase());
+		assert (is_a(Game, &egbase()));
+		const uint32_t index = game.logic_rand() % m_remaining_shipnames.size();
+		std::unordered_set<std::string>::iterator it = m_remaining_shipnames.begin();
+		std::advance(it, index);
+		std::string new_name = *it;
+		m_remaining_shipnames.erase(it);
+		return new_name;
 	}
+	return "Ship";
 }
 
-void Player::get_ai_data(int32_t * value, uint32_t position) {
-	assert(position < kAIDataSize);
-	*value = m_ai_data_int32[position];
-}
-
-void Player::get_ai_data(uint32_t * value, uint32_t position) {
-	assert(position < kAIDataSize);
-	*value = m_ai_data_uint32[position];
-}
-
-void Player::get_ai_data(int16_t * value, uint32_t position) {
-	assert(position < kAIDataSize);
-	*value = m_ai_data_int16[position];
-}
-
-void Player::get_ai_data(bool * value, uint32_t position) {
-	assert(position < kAIDataSize);
-	assert(m_ai_data_int16[position] == 0 || m_ai_data_int16[position] == 1);
-	if (m_ai_data_int16[position] == 1) {
-		*value = true;
-	} else {
-		*value = false;
+/**
+ * Read remaining ship indexes to the give file
+ *
+ * \param fr source stream
+ */
+void Player::read_remaining_shipnames(FileRead & fr) {
+	const uint16_t count = fr.unsigned_16();
+	for (uint16_t i = 0; i < count; ++i) {
+		m_remaining_shipnames.insert(fr.string());
 	}
 }
 
@@ -1438,6 +1421,15 @@ void Player::read_statistics(FileRead & fr)
 	assert(m_ware_productions[0].size() == m_ware_stocks[0].size());
 }
 
+/**
+ * Write remaining ship indexes to the give file
+ */
+void Player::write_remaining_shipnames(FileWrite & fw) const {
+	fw.unsigned_16(m_remaining_shipnames.size());
+	for (const auto& shipname : m_remaining_shipnames){
+		fw.string(shipname);
+	}
+}
 
 /**
  * Write statistics data to the give file

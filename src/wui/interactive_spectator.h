@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2003, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -58,16 +58,16 @@ private:
 	void node_action() override;
 
 private:
-	UI::Button m_toggle_chat;
-	UI::Button m_exit;
-	UI::Button m_save;
-	UI::Button m_toggle_options_menu;
-	UI::Button m_toggle_statistics;
-	UI::Button m_toggle_minimap;
+	UI::Button toggle_chat_;
+	UI::Button exit_;
+	UI::Button save_;
+	UI::Button toggle_options_menu_;
+	UI::Button toggle_statistics_;
+	UI::Button toggle_minimap_;
 
 
-	UI::UniqueWindow::Registry m_chat;
-	UI::UniqueWindow::Registry m_options;
+	UI::UniqueWindow::Registry chat_;
+	UI::UniqueWindow::Registry options_;
 };
 
 
