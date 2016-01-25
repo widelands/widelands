@@ -10,18 +10,18 @@ if [ "$CXX" = "clang++" ]; then
   wget -O - http://llvm.org/apt/llvm-snapshot.gpg.key | sudo apt-key add -
 fi
 until sudo add-apt-repository ppa:zoogie/sdl2-snapshots -y; do sleep 10; done
-until sudo apt-get update -qq; do sleep 10; done
+until sudo apt-get update -qq --force-yes -y; do sleep 10; done
 
 if [ "$CXX" = "g++" ]; then
-   sudo apt-get install -qq g++-$GCC_VERSION;
+   sudo apt-get install -qq --force-yes -y g++-$GCC_VERSION;
    export CXX="g++-$GCC_VERSION" CC="gcc-$GCC_VERSION";
 fi
 if [ "$CXX" = "clang++" ]; then
-   sudo apt-get install -qq clang-$CLANG_VERSION;
+   sudo apt-get install -qq --force-yes -y clang-$CLANG_VERSION;
    export CXX="clang++-$CLANG_VERSION" CC="clang-$CLANG_VERSION";
 fi
 
-until sudo apt-get install -qq \
+until sudo apt-get install -qq --force-yes -y \
    cmake \
    libboost-all-dev \
    libglew-dev \
