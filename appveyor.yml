@@ -8,7 +8,7 @@ install:
   # fails most of the time due slow data transfer
   - cmd: "bash --login -c \"update-core\""
   - cmd: "bash --login -c \"pacman -Su --noconfirm\""
-  - cmd: "bash --login -c \"pacman --noconfirm -S mingw-w64-x86_64-boost mingw-w64-x86_64-SDL2_net mingw-w64-x86_64-SDL2_ttf mingw-w64-x86_64-SDL2_mixer mingw-w64-x86_64-SDL2_image mingw-w64-x86_64-glew\""
+  - cmd: "bash --login -c \"pacman --noconfirm -S mingw-w64-x86_64-glbinding mingw-w64-x86_64-boost mingw-w64-x86_64-SDL2_net mingw-w64-x86_64-SDL2_ttf mingw-w64-x86_64-SDL2_mixer mingw-w64-x86_64-SDL2_image\""
   # Hack, there are wrong dependencies atm in the msys2 packages (SDL_image, libwebp)  
   #- cmd: copy c:\msys64\mingw64\bin\libwebp-6.dll c:\msys64\mingw64\bin\libwebp-5.dll
 
@@ -22,7 +22,7 @@ build_script:
   - cmd: md build
   - cmd: cd build
   - cmd: echo %APPVEYOR_BUILD_VERSION% > c:\projects\widelands\WL_RELEASE
-  - cmd: cmake -G "Ninja" -DCMAKE_BUILD_TYPE=Release ..\widelands
+  - cmd: cmake -G "Ninja" -DCMAKE_BUILD_TYPE=Release -DOPTION_USE_GLBINDING=ON ..\widelands
   - cmd: ninja
   - cmd: strip -sv src\widelands.exe
   - cmd: ISCC /q /fWidelands-%APPVEYOR_BUILD_VERSION%-win64 ..\widelands\utils\win32\innosetup\Widelands.iss
