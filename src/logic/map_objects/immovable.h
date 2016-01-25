@@ -133,7 +133,7 @@ public:
 	// Returns the editor category.
 	const EditorCategory& editor_category() const;
 
-	// A basic licalized name for the immovable, used by trees
+	// A basic localized name for the immovable, used by trees
 	const std::string& basename() const {return basename_;}
 
 	// Every immovable that can 'grow' needs to have terrain affinity defined,

@@ -1421,7 +1421,6 @@ BuildingDescription
 	without having to access an actual immovalbe on the map.
 	See also class MapObjectDescription for more properties.
 */
-// NOCOM write tests
 const char LuaImmovableDescription::className[] = "ImmovableDescription";
 const MethodType<LuaImmovableDescription> LuaImmovableDescription::Methods[] = {
 	{nullptr, nullptr},

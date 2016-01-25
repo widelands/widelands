@@ -167,13 +167,21 @@ int LuaEditorGameBase::get_immovable_description(lua_State* L) {
 		report_error(L, "Wrong number of arguments");
 	}
 	const std::string immovable_name = luaL_checkstring(L, 2);
-	DescriptionIndex idx = get_egbase(L).world().get_immovable_index(immovable_name);
-	if (idx == INVALID_INDEX) {
-		report_error(L, "Terrain %s does not exist", immovable_name.c_str());
+	const World& world = get_egbase(L).world();
+	DescriptionIndex idx = world.get_immovable_index(immovable_name);
+	if (idx != INVALID_INDEX) {
+		const ImmovableDescr* descr = world.get_immovable_descr(idx);
+		return to_lua<LuaMaps::LuaImmovableDescription>(L, new LuaMaps::LuaImmovableDescription(descr));
+	} else {
+		const Tribes& tribes = get_egbase(L).tribes();
+		idx = tribes.immovable_index(immovable_name);
+		if (!tribes.immovable_exists(idx)) {
+			report_error(L, "Immovable %s does not exist", immovable_name.c_str());
+		}
+		const ImmovableDescr* descr = tribes.get_immovable_descr(idx);
+		return to_lua<LuaMaps::LuaImmovableDescription>(L, new LuaMaps::LuaImmovableDescription(descr));
 	}
-	const ImmovableDescr* descr = get_egbase(L).world().get_immovable_descr(idx);
-
-	return to_lua<LuaMaps::LuaImmovableDescription>(L, new LuaMaps::LuaImmovableDescription(descr));
+	return 0;
 }
 
 
