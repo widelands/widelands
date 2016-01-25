@@ -44,10 +44,9 @@ return {
 		if (#valid_resources > 0) then
 			result = result .. rt(h2(_"Resources"))
 			if (#valid_resources > 0) then
-				result = result .. rt(h3(ngettext("Possible Resource:", "Possible Resources:", #valid_resources)))
 				for count, resourcename in pairs(valid_resources) do
 					local valid_resource = wl.Editor():get_resource_description(resourcename)
-					result = result .. rt(p(valid_resource.descname))
+					result = result .. picture_li(valid_resource.representative_image, valid_resource.descname)
 				end
 			end
 
@@ -55,7 +54,7 @@ return {
 			if (default_resource_name ~= nil) then
 				local default_resource = wl.Editor():get_resource_description(default_resource_name)
 				-- TRANSLATORS: e.g. "5x Water"
-				result = result .. text_line(_"Default:", _"%1%x %2%":bformat(terrain.default_resource_amount, default_resource.descname))
+				result = result .. text_line(_"Default:", _"%1%x %2%":bformat(terrain.default_resource_amount, default_resource.descname), default_resource:editor_image(terrain.default_resource_amount))
 			end
 		end
 

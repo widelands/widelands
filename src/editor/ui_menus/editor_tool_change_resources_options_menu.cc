@@ -139,7 +139,7 @@ EditorToolChangeResourcesOptionsMenu
 	//  Find the maximal width and height for the resource pictures.
 	int resource_pic_max_width = 0, resource_pic_max_height = 0;
 	for (Widelands::DescriptionIndex i = 0; i < nr_resources; ++i) {
-		const Image* pic = g_gr->images().get(world.get_resource(i)->get_editor_pic(100000));
+		const Image* pic = g_gr->images().get(world.get_resource(i)->representative_image());
 		resource_pic_max_width  = std::max(resource_pic_max_width,  pic->width());
 		resource_pic_max_height = std::max(resource_pic_max_height, pic->height());
 	}
@@ -170,7 +170,7 @@ EditorToolChangeResourcesOptionsMenu
 		m_radiogroup.add_button
 			(this,
 			 pos,
-			 g_gr->images().get(world.get_resource(i)->get_editor_pic(100000)));
+			 g_gr->images().get(world.get_resource(i)->representative_image()));
 	}
 	pos.y += resource_pic_max_height + vspacing();
 

@@ -960,7 +960,7 @@ bool Worker::run_geologist_find(Game & game, State & state, const Action &)
 		if (rdescr && rdescr->detectable() && position.field->get_resources_amount()) {
 			const std::string message =
 					(boost::format("<rt image=%s><p font-face=serif font-size=14>%s</p></rt>")
-					 % rdescr->get_editor_pic(rdescr->max_amount())
+					 % rdescr->representative_image()
 					 % _("A geologist found resources.")).str();
 
 			Message::Type message_type = Message::Type::kGeologists;

@@ -583,10 +583,15 @@ public:
 	 */
 	int get_name(lua_State *);
 	int get_descname(lua_State *);
+	int get_is_detectable(lua_State *);
+	int get_max_amount(lua_State *);
+	int get_representative_image(lua_State *);
 
 	/*
 	 * Lua methods
 	 */
+
+	int editor_image(lua_State *);
 
 	/*
 	 * C methods

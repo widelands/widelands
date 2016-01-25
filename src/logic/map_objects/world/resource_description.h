@@ -53,7 +53,11 @@ public:
 
 	/// Returns the path to the image that should be used in the editor to
 	/// represent an 'amount' of this resource.
-	const std::string& get_editor_pic(uint32_t amount) const;
+	const std::string& editor_image(uint32_t amount) const;
+
+	const std::string& representative_image() const {
+		return editor_image(max_amount());
+	}
 
 private:
 	const std::string name_;

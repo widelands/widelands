@@ -70,7 +70,7 @@ void update_resource_overlay(const Widelands::NoteFieldResourceChanged& note,
 	//  Ok, we're doing something. First remove the current overlays.
 	if (note.old_resource != Widelands::kNoResource) {
 		const std::string str =
-		   world.get_resource(note.old_resource)->get_editor_pic(note.old_amount);
+		   world.get_resource(note.old_resource)->editor_image(note.old_amount);
 		const Image* pic = g_gr->images().get(str);
 		field_overlay_manager->remove_overlay(note.fc, pic);
 	}
@@ -79,7 +79,7 @@ void update_resource_overlay(const Widelands::NoteFieldResourceChanged& note,
 	const auto resource_type = note.fc.field->get_resources();
 	if (amount > 0 && resource_type != Widelands::kNoResource) {
 		const std::string str =
-		   world.get_resource(note.fc.field->get_resources())->get_editor_pic(amount);
+		   world.get_resource(note.fc.field->get_resources())->editor_image(amount);
 		const Image* pic = g_gr->images().get(str);
 		field_overlay_manager->register_overlay(note.fc, pic, 0);
 	}
@@ -190,7 +190,7 @@ void EditorInteractive::register_overlays() {
 	iterate_Map_FCoords(map, extent, fc) {
 		if (uint8_t const amount = fc.field->get_resources_amount()) {
 			const std::string& immname =
-			   egbase().world().get_resource(fc.field->get_resources())->get_editor_pic(amount);
+			   egbase().world().get_resource(fc.field->get_resources())->editor_image(amount);
 			if (immname.size())
 				mutable_field_overlay_manager()->register_overlay(fc, g_gr->images().get(immname), 4);
 		}

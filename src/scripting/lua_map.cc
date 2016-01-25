@@ -2654,11 +2654,15 @@ ResourceDescription
 // NOCOM write tests
 const char LuaResourceDescription::className[] = "ResourceDescription";
 const MethodType<LuaResourceDescription> LuaResourceDescription::Methods[] = {
+	METHOD(LuaResourceDescription, editor_image),
 	{nullptr, nullptr},
 };
 const PropertyType<LuaResourceDescription> LuaResourceDescription::Properties[] = {
 	PROP_RO(LuaResourceDescription, name),
 	PROP_RO(LuaResourceDescription, descname),
+	PROP_RO(LuaResourceDescription, is_detectable),
+	PROP_RO(LuaResourceDescription, max_amount),
+	PROP_RO(LuaResourceDescription, representative_image),
 	{nullptr, nullptr, nullptr},
 };
 
@@ -2703,7 +2707,62 @@ int LuaResourceDescription::get_descname(lua_State * L) {
 	return 1;
 }
 
+/* RST
+	.. attribute:: is_detectable
 
+			(RO) true if geologists can find this resource
+*/
+
+int LuaResourceDescription::get_is_detectable(lua_State * L) {
+	lua_pushboolean(L, get()->detectable());
+	return 1;
+}
+
+/* RST
+	.. attribute:: max_amount
+
+			(RO) the maximum amount of this resource that a terrain can have
+*/
+
+int LuaResourceDescription::get_max_amount(lua_State * L) {
+	lua_pushinteger(L, get()->max_amount());
+	return 1;
+}
+
+/* RST
+	.. attribute:: representative_image
+
+			(RO) the :class:`string` path to the image representing this resource in the GUI
+*/
+
+int LuaResourceDescription::get_representative_image(lua_State * L) {
+	lua_pushstring(L, get()->representative_image());
+	return 1;
+}
+
+
+/*
+ ==========================================================
+ METHODS
+ ==========================================================
+ */
+
+/* RST
+	.. method:: editor_image
+
+		:arg treename: The tree that we are checking the probability for.
+		:type treename: :class:`string`
+
+		(RO) A double describing the probability that the given tree will grow on this terrain.
+*/
+int LuaResourceDescription::editor_image(lua_State * L) {
+	if (lua_gettop(L) != 2) {
+		report_error(L, "Takes only one argument.");
+	}
+	const int amount = luaL_checkint(L, 2);
+	lua_pushstring(L, get()->editor_image(amount));
+	return 1;
+}
 
 /* RST
 TerrainDescription

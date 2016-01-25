@@ -44,7 +44,7 @@ ResourceDescription::ResourceDescription(const LuaTable& table)
 	}
 }
 
-const std::string & ResourceDescription::get_editor_pic
+const std::string & ResourceDescription::editor_image
 	(uint32_t const amount) const
 {
 	uint32_t bestmatch = 0;
