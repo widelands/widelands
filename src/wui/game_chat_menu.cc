@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008, 2011 by the Widelands Development Team
+ * Copyright (C) 2002-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -36,17 +36,17 @@ GameChatMenu::GameChatMenu
 	 const std::string          & title)
 :
 UI::UniqueWindow(parent, "chat", &registry, 440, 235, title),
-m_chat(this, 5, 5, get_inner_w() - 10, get_inner_h() - 10, chat)
+chat_(this, 5, 5, get_inner_w() - 10, get_inner_h() - 10, chat)
 {
 	if (get_usedefaultpos())
 		center_to_parent();
 
-	m_close_on_send = false;
+	close_on_send_ = false;
 
-	m_chat.sent.connect(boost::bind(&GameChatMenu::acknowledge, this));
-	m_chat.aborted.connect(boost::bind(&GameChatMenu::acknowledge, this));
+	chat_.sent.connect(boost::bind(&GameChatMenu::acknowledge, this));
+	chat_.aborted.connect(boost::bind(&GameChatMenu::acknowledge, this));
 
-	enter_chat_message(m_close_on_send);
+	enter_chat_message(close_on_send_);
 }
 
 GameChatMenu* GameChatMenu::create_chat_console(
@@ -67,13 +67,13 @@ GameChatMenu* GameChatMenu::create_script_console(
 
 void GameChatMenu::enter_chat_message(bool close_on_send)
 {
-	m_chat.focus_edit();
-	m_close_on_send = close_on_send;
+	chat_.focus_edit();
+	close_on_send_ = close_on_send;
 }
 
 
 void GameChatMenu::acknowledge()
 {
-	if (m_close_on_send)
+	if (close_on_send_)
 		die();
 }

@@ -180,16 +180,16 @@ void PlayerDescriptionGroup::refresh()
 			d->btnPlayerType->set_title(title);
 
 			TribeBasicInfo info = Widelands::Tribes::tribeinfo(player.tribe);
-			if (!m_tribenames[player.tribe].size()) {
+			if (!tribenames_[player.tribe].size()) {
 				// Tribe's localized name
-				m_tribenames[player.tribe] = info.descname;
+				tribenames_[player.tribe] = info.descname;
 			}
 			if (player.random_tribe) {
 				d->btnPlayerTribe->set_title(pgettext("tribe", "Random"));
 				d->btnPlayerTribe->set_tooltip(_("The tribe will be set at random."));
 			} else {
 				i18n::Textdomain td("tribes");
-				d->btnPlayerTribe->set_title(_(m_tribenames[player.tribe]));
+				d->btnPlayerTribe->set_title(_(tribenames_[player.tribe]));
 				d->btnPlayerTribe->set_tooltip(info.tooltip);
 			}
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2015 by the Widelands Development Team
+ * Copyright (C) 2006-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,21 +19,21 @@
 
 #include "wui/edge_overlay_manager.h"
 
-EdgeOverlayManager::EdgeOverlayManager() : m_current_overlay_id(0) {
+EdgeOverlayManager::EdgeOverlayManager() : current_overlay_id_(0) {
 }
 
 EdgeOverlayManager::OverlayId EdgeOverlayManager::next_overlay_id() {
-	++m_current_overlay_id;
-	return m_current_overlay_id;
+	++current_overlay_id_;
+	return current_overlay_id_;
 }
 
 void EdgeOverlayManager::register_overlay
 	(Widelands::Coords const c, uint8_t const where, OverlayId const overlay_id)
 {
 	const RegisteredRoadOverlays overlay = {overlay_id, where};
-	RegisteredRoadOverlaysMap::iterator it = m_overlays.find(c);
-	if (it == m_overlays.end())
-		m_overlays.insert
+	RegisteredRoadOverlaysMap::iterator it = overlays_.find(c);
+	if (it == overlays_.end())
+		overlays_.insert
 			(std::pair<const Widelands::Coords,
 			 RegisteredRoadOverlays>(c, overlay));
 	else
@@ -41,25 +41,25 @@ void EdgeOverlayManager::register_overlay
 }
 
 void EdgeOverlayManager::remove_overlay(const Widelands::Coords c) {
-	const RegisteredRoadOverlaysMap::iterator it = m_overlays.find(c);
-	if (it != m_overlays.end())
-		m_overlays.erase(it);
+	const RegisteredRoadOverlaysMap::iterator it = overlays_.find(c);
+	if (it != overlays_.end())
+		overlays_.erase(it);
 }
 
 void EdgeOverlayManager::remove_overlay(OverlayId const overlay_id) {
-	RegisteredRoadOverlaysMap::iterator it = m_overlays.begin();
+	RegisteredRoadOverlaysMap::iterator it = overlays_.begin();
 	const RegisteredRoadOverlaysMap::const_iterator end =
-		m_overlays.end();
+		overlays_.end();
 	while (it != end)
 		if (it->second.overlay_id == overlay_id)
-			m_overlays.erase(it++); //  Necessary!
+			overlays_.erase(it++); //  Necessary!
 		else
 			++it;
 }
 
 uint8_t EdgeOverlayManager::get_overlay(const Widelands::Coords c) const {
-	RegisteredRoadOverlaysMap::const_iterator const it = m_overlays.find(c);
-	if (it != m_overlays.end())
+	RegisteredRoadOverlaysMap::const_iterator const it = overlays_.find(c);
+	if (it != overlays_.end())
 		return it->second.where;
 	return 0;
 }

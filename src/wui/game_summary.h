@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2008 by the Widelands Development Team
+ * Copyright (C) 2007-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -47,15 +47,15 @@ private:
 	void player_selected(uint32_t idx);
 	std::string parse_player_info(std::string info);
 
-	Widelands::Game & m_game;
-	UI::Textarea *  m_title_area;
-	UI::Textarea *  m_gametime_label;
-	UI::Textarea *  m_gametime_value;
-	UI::Textarea *  m_info_area_label;
-	UI::MultilineTextarea *  m_info_area;
-	UI::Button *    m_continue_button;
-	UI::Button *    m_stop_button;
-	UI::Table<uintptr_t const> *     m_players_table;
+	Widelands::Game & game_;
+	UI::Textarea *  title_area_;
+	UI::Textarea *  gametime_label_;
+	UI::Textarea *  gametime_value_;
+	UI::Textarea *  info_area_label_;
+	UI::MultilineTextarea *  info_area_;
+	UI::Button *    continue_button_;
+	UI::Button *    stop_button_;
+	UI::Table<uintptr_t const> *     players_table_;
 };
 
 #endif  // end of include guard: WL_WUI_GAME_SUMMARY_H
