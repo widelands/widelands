@@ -2650,7 +2650,6 @@ ResourceDescription
 
 	A static description of a resource.
 */
-// NOCOM write tests
 const char LuaResourceDescription::className[] = "ResourceDescription";
 const MethodType<LuaResourceDescription> LuaResourceDescription::Methods[] = {
 	METHOD(LuaResourceDescription, editor_image),
@@ -2733,7 +2732,6 @@ int LuaResourceDescription::get_max_amount(lua_State * L) {
 
 			(RO) the :class:`string` path to the image representing this resource in the GUI
 */
-
 int LuaResourceDescription::get_representative_image(lua_State * L) {
 	lua_pushstring(L, get()->representative_image());
 	return 1;
@@ -2747,18 +2745,17 @@ int LuaResourceDescription::get_representative_image(lua_State * L) {
  */
 
 /* RST
-	.. method:: editor_image
+	.. method:: representative_image(amount)
 
-		:arg treename: The tree that we are checking the probability for.
-		:type treename: :class:`string`
+		:arg amount: The amount of the resource what we want an overlay image for
 
-		(RO) A double describing the probability that the given tree will grow on this terrain.
+			(RO) the :class:`string` path to the image representing the specified amount of this resource
 */
 int LuaResourceDescription::editor_image(lua_State * L) {
 	if (lua_gettop(L) != 2) {
 		report_error(L, "Takes only one argument.");
 	}
-	const int amount = luaL_checkint(L, 2);
+	const uint32_t amount = luaL_checkuint32(L, 2);
 	lua_pushstring(L, get()->editor_image(amount));
 	return 1;
 }

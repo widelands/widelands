@@ -31,7 +31,8 @@ ResourceDescription::ResourceDescription(const LuaTable& table)
    : name_(table.get_string("name")),
      descname_(table.get_string("descname")),
      detectable_(table.get_bool("detectable")),
-     max_amount_(table.get_int("max_amount")) {
+	  max_amount_(table.get_int("max_amount")),
+	  representative_image_(table.get_string("representative_image")) {
 
 	std::unique_ptr<LuaTable> st = table.get_table("editor_pictures");
 	const std::set<int> keys = st->keys<int>();
