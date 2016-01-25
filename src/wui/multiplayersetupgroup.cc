@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010-2011 by the Widelands Development Team
+ * Copyright (C) 2010-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -51,8 +51,8 @@ struct MultiPlayerClientGroup : public UI::Box {
 		 type_icon(nullptr),
 		 type(nullptr),
 		 s(settings),
-		 m_id(id),
-		 m_save(-2)
+		 id_(id),
+		 save_(-2)
 	{
 		set_size(w, h);
 		name = new UI::Textarea
@@ -81,7 +81,7 @@ struct MultiPlayerClientGroup : public UI::Box {
 
 	/// Switch human players and spectator
 	void toggle_type() {
-		UserSettings us = s->settings().users.at(m_id);
+		UserSettings us = s->settings().users.at(id_);
 		int16_t p = us.position;
 		if (p == UserSettings::none())
 			p = -1;
@@ -101,7 +101,7 @@ struct MultiPlayerClientGroup : public UI::Box {
 
 	/// Care about visibility and current values
 	void refresh() {
-		UserSettings us = s->settings().users.at(m_id);
+		UserSettings us = s->settings().users.at(id_);
 		if (us.position == UserSettings::not_connected()) {
 			std::string free_i18n = _("free");
 			std::string free_text =
@@ -113,7 +113,7 @@ struct MultiPlayerClientGroup : public UI::Box {
 				type_icon->set_visible(false);
 		} else {
 			name->set_text(us.name);
-			if (m_save != us.position) {
+			if (save_ != us.position) {
 				std::string pic;
 				std::string temp_tooltip;
 				if (us.position < UserSettings::highest_playernum()) {
@@ -127,7 +127,7 @@ struct MultiPlayerClientGroup : public UI::Box {
 				}
 
 				// Either Button if changeable OR text if not
-				if (m_id == s->settings().usernum) {
+				if (id_ == s->settings().usernum) {
 					type->set_pic(g_gr->images().get(pic));
 					type->set_tooltip(temp_tooltip);
 					type->set_visible(true);
@@ -136,7 +136,7 @@ struct MultiPlayerClientGroup : public UI::Box {
 					type_icon->set_tooltip(temp_tooltip);
 					type_icon->set_visible(true);
 				}
-				m_save = us.position;
+				save_ = us.position;
 			}
 		}
 	}
@@ -145,8 +145,8 @@ struct MultiPlayerClientGroup : public UI::Box {
 	UI::Icon               * type_icon;
 	UI::Button             * type;
 	GameSettingsProvider   * const s;
-	uint8_t                  const m_id;
-	int16_t                  m_save; // saved position to check rewrite need.
+	uint8_t                  const id_;
+	int16_t                  save_; // saved position to check rewrite need.
 };
 
 struct MultiPlayerPlayerGroup : public UI::Box {
@@ -165,9 +165,9 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		 init(nullptr),
 		 s(settings),
 		 n(npsb),
-		 m_id(id),
-		 m_tribepics(tp),
-		 m_tribenames(tn)
+		 id_(id),
+		 tribepics_(tp),
+		 tribenames_(tn)
 	{
 		set_size(w, h);
 
@@ -217,42 +217,42 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 
 	/// Toggle through the types
 	void toggle_type() {
-		n->toggle_type(m_id);
+		n->toggle_type(id_);
 	}
 
 	/// Toggle through the tribes + handle shared in players
 	void toggle_tribe() {
-		n->toggle_tribe(m_id);
+		n->toggle_tribe(id_);
 	}
 
 	/// Toggle through the initializations
 	void toggle_init() {
-		n->toggle_init(m_id);
+		n->toggle_init(id_);
 	}
 
 	/// Toggle through the teams
 	void toggle_team() {
-		n->toggle_team(m_id);
+		n->toggle_team(id_);
 	}
 
 	/// Refresh all user interfaces
 	void refresh() {
 		const GameSettings & settings = s->settings();
 
-		if (m_id >= settings.players.size()) {
+		if (id_ >= settings.players.size()) {
 			set_visible(false);
 			return;
 		}
 
-		n->refresh(m_id);
+		n->refresh(id_);
 
 		set_visible(true);
 
-		const PlayerSettings & player_setting = settings.players[m_id];
-		bool typeaccess       = s->can_change_player_state(m_id);
-		bool tribeaccess      = s->can_change_player_tribe(m_id);
-		bool const initaccess = s->can_change_player_init(m_id);
-		bool teamaccess       = s->can_change_player_team(m_id);
+		const PlayerSettings & player_setting = settings.players[id_];
+		bool typeaccess       = s->can_change_player_state(id_);
+		bool tribeaccess      = s->can_change_player_tribe(id_);
+		bool const initaccess = s->can_change_player_init(id_);
+		bool teamaccess       = s->can_change_player_team(id_);
 
 		type->set_enabled(typeaccess);
 		if (player_setting.state == PlayerSettings::stateClosed) {
@@ -320,21 +320,21 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 			type->set_pic(g_gr->images().get(pic));
 			if (player_setting.random_tribe) {
 				std::string random = pgettext("tribe", "Random");
-				if (!m_tribenames["random"].size())
-					m_tribepics[random] = g_gr->images().get("pics/random.png");
+				if (!tribenames_["random"].size())
+					tribepics_[random] = g_gr->images().get("pics/random.png");
 				tribe->set_tooltip(random.c_str());
-				tribe->set_pic(m_tribepics[random]);
+				tribe->set_pic(tribepics_[random]);
 			} else {
-				if (!m_tribenames[player_setting.tribe].size()) {
+				if (!tribenames_[player_setting.tribe].size()) {
 					// get tribes name and picture
 					i18n::Textdomain td("tribes");
 					for (const TribeBasicInfo& tribeinfo : settings.tribes) {
-						m_tribenames[tribeinfo.name] = _(tribeinfo.descname);
-						m_tribepics[tribeinfo.name] = g_gr->images().get(tribeinfo.icon);
+						tribenames_[tribeinfo.name] = _(tribeinfo.descname);
+						tribepics_[tribeinfo.name] = g_gr->images().get(tribeinfo.icon);
 					}
 				}
-				tribe->set_tooltip(m_tribenames[player_setting.tribe].c_str());
-				tribe->set_pic(m_tribepics[player_setting.tribe]);
+				tribe->set_tooltip(tribenames_[player_setting.tribe].c_str());
+				tribe->set_pic(tribepics_[player_setting.tribe]);
 			}
 			tribe->set_flat(false);
 
@@ -375,9 +375,9 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	UI::Button                   *       team;
 	GameSettingsProvider         * const s;
 	NetworkPlayerSettingsBackend * const n;
-	uint8_t                        const m_id;
-	std::map<std::string, const Image* >   & m_tribepics;
-	std::map<std::string, std::string> & m_tribenames;
+	uint8_t                        const id_;
+	std::map<std::string, const Image* >   & tribepics_;
+	std::map<std::string, std::string> & tribenames_;
 };
 
 MultiPlayerSetupGroup::MultiPlayerSetupGroup
@@ -392,9 +392,9 @@ s(settings),
 npsb(new NetworkPlayerSettingsBackend(s)),
 clientbox(this, 0, buth, UI::Box::Vertical, w / 3, h - buth),
 playerbox(this, w * 6 / 15, buth, UI::Box::Vertical, w * 9 / 15, h - buth),
-m_buth(buth),
-m_fsize(fsize),
-m_fname(fname)
+buth_(buth),
+fsize_(fsize),
+fname_(fname)
 {
 	UI::TextStyle tsmaller(UI::TextStyle::makebold(UI::Font::get(fname, fsize * 3 / 4), UI_FONT_CLR_FG));
 
@@ -462,7 +462,7 @@ m_fname(fname)
 			(&playerbox, i,
 			 0, 0, playerbox.get_w(), buth,
 			 s, npsb.get(),
-			 m_tribepics, m_tribenames);
+			 tribepics_, tribenames_);
 		playerbox.add(multi_player_player_groups.at(i), 1);
 	}
 	refresh();
@@ -488,7 +488,7 @@ void MultiPlayerSetupGroup::refresh()
 	for (uint32_t i = 0; i < settings.users.size(); ++i) {
 		if (!multi_player_client_groups.at(i)) {
 			multi_player_client_groups.at(i) = new MultiPlayerClientGroup(
-			   &clientbox, i, 0, 0, clientbox.get_w(), m_buth, s, UI::Font::get(m_fname, m_fsize));
+			   &clientbox, i, 0, 0, clientbox.get_w(), buth_, s, UI::Font::get(fname_, fsize_));
 			clientbox.add(&*multi_player_client_groups.at(i), 1);
 		}
 		multi_player_client_groups.at(i)->refresh();

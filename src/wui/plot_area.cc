@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2008-2013 by the Widelands Development Team
+ * Copyright (C) 2002-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -247,10 +247,10 @@ WuiPlotArea::WuiPlotArea
 	 int32_t const x, int32_t const y, int32_t const w, int32_t const h)
 :
 UI::Panel (parent, x, y, w, h),
-m_plotmode(PLOTMODE_ABSOLUTE),
-m_sample_rate(0),
-m_time    (TIME_GAME),
-m_game_time_id(0)
+plotmode_(PLOTMODE_ABSOLUTE),
+sample_rate_(0),
+time_    (TIME_GAME),
+game_time_id_(0)
 {}
 
 
@@ -258,15 +258,15 @@ uint32_t WuiPlotArea::get_game_time() {
 	uint32_t game_time = 0;
 
 	// Find running time of the game, based on the plot data
-	for (uint32_t plot = 0; plot < m_plotdata.size(); ++plot)
-		if (game_time < m_plotdata[plot].dataset->size() * m_sample_rate)
-			game_time = m_plotdata[plot].dataset->size() * m_sample_rate;
+	for (uint32_t plot = 0; plot < plotdata_.size(); ++plot)
+		if (game_time < plotdata_[plot].dataset->size() * sample_rate_)
+			game_time = plotdata_[plot].dataset->size() * sample_rate_;
 	return game_time;
 }
 
 std::vector<std::string> WuiPlotArea::get_labels() {
 	std::vector<std::string> labels;
-	for (int32_t i = 0; i < m_game_time_id; i++) {
+	for (int32_t i = 0; i < game_time_id_; i++) {
 		UNIT unit = get_suggested_unit(time_in_ms[i]);
 		uint32_t val = ms_to_unit(unit, time_in_ms[i]);
 		labels.push_back((boost::format(get_unit_name(unit)) % boost::lexical_cast<std::string>(val)).str());
@@ -276,7 +276,7 @@ std::vector<std::string> WuiPlotArea::get_labels() {
 }
 
 uint32_t WuiPlotArea::get_plot_time() {
-	if (m_time == TIME_GAME) {
+	if (time_ == TIME_GAME) {
 		// Start with the game time
 		uint32_t time_ms = get_game_time();
 
@@ -297,7 +297,7 @@ uint32_t WuiPlotArea::get_plot_time() {
 		}
 		return time_ms;
 	} else {
-		return time_in_ms[m_time];
+		return time_in_ms[time_];
 	}
 }
 
@@ -316,8 +316,8 @@ int32_t WuiPlotArea::get_game_time_id() {
 	uint32_t i;
 	for (i = 1; i < 7 && time_in_ms[i] <= game_time; i++) {
 	}
-	m_game_time_id = i;
-	return m_game_time_id;
+	game_time_id_ = i;
+	return game_time_id_;
 }
 
 /*
@@ -331,22 +331,22 @@ void WuiPlotArea::draw(RenderTarget & dst) {
 	draw_diagram(time_ms, get_inner_w(), get_inner_h(), xline_length, dst);
 
 	// How many do we take together when relative ploting
-	const int32_t how_many = calc_how_many(time_ms, m_sample_rate);
+	const int32_t how_many = calc_how_many(time_ms, sample_rate_);
 
 	uint32_t max = 0;
 	//  Find the maximum value.
-	if (m_plotmode == PLOTMODE_ABSOLUTE)  {
-		for (uint32_t i = 0; i < m_plotdata.size(); ++i)
-			if (m_plotdata[i].showplot) {
-				for (uint32_t l = 0; l < m_plotdata[i].dataset->size(); ++l)
-					if (max < (*m_plotdata[i].dataset)[l])
-						max = (*m_plotdata[i].dataset)[l];
+	if (plotmode_ == PLOTMODE_ABSOLUTE)  {
+		for (uint32_t i = 0; i < plotdata_.size(); ++i)
+			if (plotdata_[i].showplot) {
+				for (uint32_t l = 0; l < plotdata_[i].dataset->size(); ++l)
+					if (max < (*plotdata_[i].dataset)[l])
+						max = (*plotdata_[i].dataset)[l];
 			}
 	} else {
-		for (uint32_t plot = 0; plot < m_plotdata.size(); ++plot)
-			if (m_plotdata[plot].showplot) {
+		for (uint32_t plot = 0; plot < plotdata_.size(); ++plot)
+			if (plotdata_[plot].showplot) {
 
-				const std::vector<uint32_t> & dataset = *m_plotdata[plot].dataset;
+				const std::vector<uint32_t> & dataset = *plotdata_[plot].dataset;
 
 				uint32_t add = 0;
 				//  Relative data, first entry is always zero.
@@ -372,27 +372,27 @@ void WuiPlotArea::draw(RenderTarget & dst) {
 		/
 		(static_cast<float>(time_ms)
 		 /
-		 static_cast<float>(m_sample_rate));
-	for (uint32_t plot = 0; plot < m_plotdata.size(); ++plot)
-		if (m_plotdata[plot].showplot) {
+		 static_cast<float>(sample_rate_));
+	for (uint32_t plot = 0; plot < plotdata_.size(); ++plot)
+		if (plotdata_[plot].showplot) {
 
-			RGBColor color = m_plotdata[plot].plotcolor;
-			std::vector<uint32_t> const * dataset = m_plotdata[plot].dataset;
+			RGBColor color = plotdata_[plot].plotcolor;
+			std::vector<uint32_t> const * dataset = plotdata_[plot].dataset;
 
-			std::vector<uint32_t> m_data;
-			if (m_plotmode == PLOTMODE_RELATIVE) {
+			std::vector<uint32_t> data_;
+			if (plotmode_ == PLOTMODE_RELATIVE) {
 				uint32_t add = 0;
 				// Relative data, first entry is always zero
-				m_data.push_back(0);
+				data_.push_back(0);
 				for (uint32_t i = 0; i < dataset->size(); ++i) {
 					add += (*dataset)[i];
 					if (0 == ((i + 1) % how_many)) {
-						m_data.push_back(add);
+						data_.push_back(add);
 						add = 0;
 					}
 				}
 
-				dataset = &m_data;
+				dataset = &data_;
 				sub = (xline_length - space_left_of_label) / static_cast<float>(nr_samples);
 			}
 
@@ -449,12 +449,12 @@ void WuiPlotArea::register_plot_data
 	 std::vector<uint32_t> const * const data,
 	 RGBColor const color)
 {
-	if (id >= m_plotdata.size())
-		m_plotdata.resize(id + 1);
+	if (id >= plotdata_.size())
+		plotdata_.resize(id + 1);
 
-	m_plotdata[id].dataset   = data;
-	m_plotdata[id].showplot  = false;
-	m_plotdata[id].plotcolor = color;
+	plotdata_[id].dataset   = data;
+	plotdata_[id].showplot  = false;
+	plotdata_[id].plotcolor = color;
 
 	get_game_time_id();
 }
@@ -463,33 +463,33 @@ void WuiPlotArea::register_plot_data
  * Change the plot color of a registed data stream
  */
 void WuiPlotArea::set_plotcolor(uint32_t id, RGBColor color) {
-	if (id > m_plotdata.size()) return;
+	if (id > plotdata_.size()) return;
 
-	m_plotdata[id].plotcolor = color;
+	plotdata_[id].plotcolor = color;
 }
 
 /*
  * Show this plot data?
  */
 void WuiPlotArea::show_plot(uint32_t const id, bool const t) {
-	assert(id < m_plotdata.size());
-	m_plotdata[id].showplot = t;
+	assert(id < plotdata_.size());
+	plotdata_[id].showplot = t;
 }
 
 /*
  * Set sample rate the data uses
  */
 void WuiPlotArea::set_sample_rate(uint32_t const id) {
-	m_sample_rate = id;
+	sample_rate_ = id;
 }
 
 
 void WuiPlotAreaSlider::draw(RenderTarget & dst) {
-	int32_t new_game_time_id = m_plot_area.get_game_time_id();
-	if (new_game_time_id != m_last_game_time_id) {
-		m_last_game_time_id = new_game_time_id;
-		set_labels(m_plot_area.get_labels());
-		slider.set_value(m_plot_area.get_time_id());
+	int32_t new_game_time_id = plot_area_.get_game_time_id();
+	if (new_game_time_id != last_game_time_id_) {
+		last_game_time_id_ = new_game_time_id;
+		set_labels(plot_area_.get_labels());
+		slider.set_value(plot_area_.get_time_id());
 	}
 	UI::DiscreteSlider::draw(dst);
 }
@@ -517,28 +517,28 @@ void DifferentialPlotArea::draw(RenderTarget & dst) {
 	              2);
 
 	// How many do we take together when relative ploting
-	const int32_t how_many = calc_how_many(time_ms, m_sample_rate);
+	const int32_t how_many = calc_how_many(time_ms, sample_rate_);
 
 	//find max and min value
 	int32_t max = 0;
 	int32_t min = 0;
 
-	if (m_plotmode == PLOTMODE_ABSOLUTE)  {
-		for (uint32_t i = 0; i < m_plotdata.size(); ++i)
-			if (m_plotdata[i].showplot) {
-				for (uint32_t l = 0; l < m_plotdata[i].dataset->size(); ++l) {
-					int32_t temp = (*m_plotdata[i].dataset)[l] -
-								   (*m_negative_plotdata[i].dataset)[l];
+	if (plotmode_ == PLOTMODE_ABSOLUTE)  {
+		for (uint32_t i = 0; i < plotdata_.size(); ++i)
+			if (plotdata_[i].showplot) {
+				for (uint32_t l = 0; l < plotdata_[i].dataset->size(); ++l) {
+					int32_t temp = (*plotdata_[i].dataset)[l] -
+								   (*negative_plotdata_[i].dataset)[l];
 					if (max < temp) max = temp;
 					if (min > temp) min = temp;
 				}
 			}
 	} else {
-		for (uint32_t plot = 0; plot < m_plotdata.size(); ++plot)
-			if (m_plotdata[plot].showplot) {
+		for (uint32_t plot = 0; plot < plotdata_.size(); ++plot)
+			if (plotdata_[plot].showplot) {
 
-				const std::vector<uint32_t> & dataset = *m_plotdata[plot].dataset;
-				const std::vector<uint32_t> & ndataset = *m_negative_plotdata[plot].dataset;
+				const std::vector<uint32_t> & dataset = *plotdata_[plot].dataset;
+				const std::vector<uint32_t> & ndataset = *negative_plotdata_[plot].dataset;
 
 				int32_t add = 0;
 				//  Relative data, first entry is always zero.
@@ -577,28 +577,28 @@ void DifferentialPlotArea::draw(RenderTarget & dst) {
 		/
 		(static_cast<float>(time_ms)
 		 /
-		 static_cast<float>(m_sample_rate));
-	for (uint32_t plot = 0; plot < m_plotdata.size(); ++plot)
-		if (m_plotdata[plot].showplot) {
+		 static_cast<float>(sample_rate_));
+	for (uint32_t plot = 0; plot < plotdata_.size(); ++plot)
+		if (plotdata_[plot].showplot) {
 
-			RGBColor color = m_plotdata[plot].plotcolor;
-			std::vector<uint32_t> const * dataset = m_plotdata[plot].dataset;
-			std::vector<uint32_t> const * ndataset = m_negative_plotdata[plot].dataset;
+			RGBColor color = plotdata_[plot].plotcolor;
+			std::vector<uint32_t> const * dataset = plotdata_[plot].dataset;
+			std::vector<uint32_t> const * ndataset = negative_plotdata_[plot].dataset;
 
-			std::vector<uint32_t> m_data;
-			if (m_plotmode == PLOTMODE_RELATIVE) {
+			std::vector<uint32_t> data_;
+			if (plotmode_ == PLOTMODE_RELATIVE) {
 				int32_t add = 0;
 				// Relative data, first entry is always zero
-				m_data.push_back(0);
+				data_.push_back(0);
 				for (uint32_t i = 0; i < dataset->size(); ++i) {
 					add += (*dataset)[i] - (*ndataset)[i];
 					if (0 == ((i + 1) % how_many)) {
-						m_data.push_back(add);
+						data_.push_back(add);
 						add = 0;
 					}
 				}
 
-				dataset = &m_data;
+				dataset = &data_;
 				sub = xline_length / static_cast<float>(nr_samples);
 			}
 
@@ -615,8 +615,8 @@ void DifferentialPlotArea::draw(RenderTarget & dst) {
 void DifferentialPlotArea::register_negative_plot_data
 	(uint32_t const id, std::vector<uint32_t> const * const data) {
 
-	if (id >= m_negative_plotdata.size())
-		m_negative_plotdata.resize(id + 1);
+	if (id >= negative_plotdata_.size())
+		negative_plotdata_.resize(id + 1);
 
-	m_negative_plotdata[id].dataset   = data;
+	negative_plotdata_[id].dataset   = data;
 }

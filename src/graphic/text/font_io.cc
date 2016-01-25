@@ -40,7 +40,7 @@ IFont* load_font(const std::string& face, int ptsize) {
 	// this class is destroyed.
 	std::unique_ptr<std::string> memory;
 	{
-		FileRead* fr = new FileRead();
+		std::unique_ptr<FileRead> fr(new FileRead());
 		fr->open(*g_fs, filename);
 		memory.reset(new std::string(fr->data(0), fr->get_size()));
 	}
