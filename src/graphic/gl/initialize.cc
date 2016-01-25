@@ -59,7 +59,7 @@ SDL_GLContext initialize(
 				glbinding::CallbackMask::After | glbinding::CallbackMask::ParametersAndReturnValue,
 				{"glGetError"});
 		glbinding::setAfterCallback([](const glbinding::FunctionCall& call) {
-			log("%s(", call.function.name());
+			log("%s(", call.function->name());
 			for (size_t i = 0; i < call.parameters.size(); ++i) {
 				log("%s", call.parameters[i]->asString().c_str());
 				if (i < call.parameters.size() - 1)
