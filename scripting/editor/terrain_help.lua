@@ -1,4 +1,5 @@
 -- NOCOM localize
+-- NOCOM tree names are in English
 include "scripting/formatting.lua"
 
 function picture_li(imagepath, text)
@@ -29,21 +30,15 @@ return {
       local world = wl.World();
       local terrain = wl.Editor():get_terrain_description(terrain_name)
 
---[[ NOCOM
-      local result = picture_li(terrain.representative_image,
-			"Fertility:" .. " " .. ("%2.1f%%"):bformat(100 * terrain.fertility) .. "<br>" ..
-			"Humidity:" .. " " .. ("%2.1f%%"):bformat(100 * terrain.humidity) .. "<br>" ..
-			"Temperature:" .. " " .. terrain.temperature
-		)
-		]]
-
 		local result = picture_li(terrain.representative_image, "")
 
 		-- Resources
 		local valid_resources = terrain.valid_resources_names
 		if (#valid_resources > 0) then
-			result = result .. rt(h2(_"Resources"))
+			result = result .. rt(p("font-size=3", "")) .. rt(h2(_"Resources"))
 			if (#valid_resources > 0) then
+				-- TRANSLATORS: A header in the editor help
+				result = result .. rt(h3(ngettext("Valid Resource:", "Valid Resources:", #valid_resources)))
 				for count, resourcename in pairs(valid_resources) do
 					local valid_resource = wl.Editor():get_resource_description(resourcename)
 					result = result .. picture_li(valid_resource.representative_image, valid_resource.descname)
@@ -79,11 +74,15 @@ return {
 		local tree_string = ""
 		for k,v in ipairs(tree_list) do
 			local tree = wl.Editor():get_immovable_description(v.tree_name_)
-			tree_string = tree_string .. picture_li(tree.representative_image, tree.basename .. ("<br>Probability to grow: %2.1f%%"):bformat(100 * v.probability_))
+			tree_string = tree_string .. picture_li(tree.representative_image, tree.basename .. ("<br>%2.1f%%"):bformat(100 * v.probability_))
+				.. rt(p("font-size=3", ""))
 		end
 
+		-- TRANSLATORS: A header in the editor help
+		result = result .. rt(p("font-size=3", "")) .. rt(h2("Probability of trees growing")) .. rt(p("font-size=3", ""))
+
 		if (tree_string ~="") then
-			result = result .. rt(h2("Trees that may grow")) .. tree_string
+			result = result .. tree_string
 		else
 			result = result .. rt(p("No trees will grow here."))
 		end
