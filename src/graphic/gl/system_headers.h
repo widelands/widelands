@@ -32,10 +32,7 @@
 // http://stackoverflow.com/questions/13558073/program-crash-on-glgenvertexarrays-call.
 //
 // TODO(sirver): glbinding seems to be a sane solution to the GL
-// loading problem. (https://github.com/hpicgs/glbinding).
-
-// GLEW must be first. Do not include any other GL headers, it
-// should define all functions.
+// loading problem. Switch to it everywhere. (https://github.com/hpicgs/glbinding).
 
 #ifdef USE_GLBINDING
 #   include <glbinding/gl/gl.h>
@@ -45,6 +42,8 @@ CLANG_DIAG_OFF("-Wheader-hygiene")
 using namespace gl;
 CLANG_DIAG_ON("-Wheader-hygiene")
 #else
+// GLEW must be first. Do not include any other GL headers, it
+// should define all functions.
 #   include <GL/glew.h>
 #endif
 
