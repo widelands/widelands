@@ -1,8 +1,4 @@
-include "scripting/formatting.lua"
-
-function picture_li(imagepath, text)
-   return "<rt image=" .. imagepath .. " image-align=left>" .. p(text) .. "</rt>"
-end
+include "scripting/editor/format_editor.lua"
 
 return {
    func = function(tree_name)
@@ -12,7 +8,7 @@ return {
       local result = picture_li(tree.representative_image, "")
 
       -- TRANSLATORS: A header in the editor help. Terrains preferred by a type of tree.
-      result = result .. rt(p("font-size=3", "")) .. rt(h2(_"Preferred terrains")) .. rt(p("font-size=3", ""))
+      result = result .. rt(p("font-size=3", "")) .. rt(h2(_"Preferred terrains")) .. spacer()
 		terrain_list = {}
       for i, terrain_name in ipairs(world:terrain_descriptions()) do
 			local terrain = wl.Editor():get_terrain_description(terrain_name)
@@ -34,8 +30,7 @@ return {
 		for k,v in ipairs(terrain_list) do
 			local terrain = wl.Editor():get_terrain_description(v.terrain_name_)
 			-- TRANSLATORS: Terrain name (Climate)
-			result = result .. picture_li(terrain.representative_image, (_"%1% (%2%)"):bformat(terrain.descname, terrain.editor_category.descname) .. "<br>" .. ("%2.1f%%"):bformat(100 * v.probability_))
-				.. rt(p("font-size=3", ""))
+			result = result .. picture_li(terrain.representative_image, (_"%1% (%2%)"):bformat(terrain.descname, terrain.editor_category.descname) .. "<br>" .. ("%2.1f%%"):bformat(100 * v.probability_)) .. spacer()
 		end
 
       return result

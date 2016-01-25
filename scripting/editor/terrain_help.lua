@@ -1,26 +1,4 @@
-include "scripting/formatting.lua"
-
-function picture_li(imagepath, text)
-   return "<rt image=" .. imagepath .. " image-align=left>" .. p(text) .. "</rt>"
-end
-
--- RST
--- .. function text_line(t1, t2[, imgstr = nil])
---
---    Creates a line of h3 formatted text followed by normal text and an image.
---
---    :arg t1: text in h3 format.
---    :arg t2: text in p format.
---    :arg imgstr: image aligned right.
---    :returns: header followed by normal text and image.
---
-function text_line(t1, t2, imgstr)
-   if imgstr then
-      return "<rt text-align=left image=" .. imgstr .. " image-align=right><p font-size=13 font-color=D1D1D1>" ..  t1 .. "</p><p line-spacing=3 font-size=12>" .. t2 .. "<br></p><p font-size=8> <br></p></rt>"
-   else
-      return "<rt text-align=left><p font-size=13 font-color=D1D1D1>" ..  t1 .. "</p><p line-spacing=3 font-size=12>" .. t2 .. "<br></p><p font-size=8> <br></p></rt>"
-   end
-end
+include "scripting/editor/format_editor.lua"
 
 return {
    func = function(terrain_name)
@@ -33,7 +11,7 @@ return {
 		-- Resources
 		local valid_resources = terrain.valid_resources_names
 		if (#valid_resources > 0) then
-			result = result .. rt(p("font-size=3", "")) .. rt(h2(_"Resources"))
+			result = result .. spacer() .. rt(h2(_"Resources"))
 			if (#valid_resources > 0) then
 				-- TRANSLATORS: A header in the editor help
 				result = result .. rt(h3(ngettext("Valid Resource:", "Valid Resources:", #valid_resources)))
@@ -72,12 +50,11 @@ return {
 		local tree_string = ""
 		for k,v in ipairs(tree_list) do
 			local tree = wl.Editor():get_immovable_description(v.tree_name_)
-			tree_string = tree_string .. picture_li(tree.representative_image, tree.basename .. ("<br>%2.1f%%"):bformat(100 * v.probability_))
-				.. rt(p("font-size=3", ""))
+			tree_string = tree_string .. picture_li(tree.representative_image, tree.basename .. ("<br>%2.1f%%"):bformat(100 * v.probability_)) .. spacer()
 		end
 
 		-- TRANSLATORS: A header in the editor help
-		result = result .. rt(p("font-size=3", "")) .. rt(h2(_"Probability of trees growing")) .. rt(p("font-size=3", ""))
+		result = result .. spacer() .. rt(h2(_"Probability of trees growing")) .. spacer()
 
 		if (tree_string ~="") then
 			result = result .. tree_string
