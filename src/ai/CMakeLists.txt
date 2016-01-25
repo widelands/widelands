@@ -9,9 +9,11 @@ wl_library(ai
     defaultai.cc
     defaultai.h
   DEPENDS
+    base_exceptions
     base_i18n
     base_log
     base_macros
+    base_time_string
     economy
     logic
     scripting_lua_table

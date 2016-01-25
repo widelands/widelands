@@ -75,10 +75,12 @@ void Graphic::initialize(int window_mode_w, int window_mode_h, bool init_fullscr
 	requires_update_ = true;
 
 	// Request an OpenGL 2 context with double buffering.
-	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
+	SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 2);
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 1);
-	SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
+	SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_COMPATIBILITY);
+	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
+
 
 	log("Graphics: Try to set Videomode %ux%u\n", window_mode_width_, window_mode_height_);
 	sdl_window_ =
@@ -118,9 +120,12 @@ void Graphic::initialize(int window_mode_w, int window_mode_h, bool init_fullscr
 	glGetIntegerv(GL_MAX_TEXTURE_SIZE, &max_texture_size);
 	log("Graphics: OpenGL: Max texture size: %u\n", max_texture_size);
 
+	log("Graphics: OpenGL: ShadingLanguage: \"%s\"\n",
+	    reinterpret_cast<const char*>(glGetString(GL_SHADING_LANGUAGE_VERSION)));
+
 	glDrawBuffer(GL_BACK);
 
-	glEnable(GL_DEPTH_TEST);
+	glDisable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LEQUAL);
 
 	glEnable(GL_BLEND);

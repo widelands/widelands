@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-28 11:19+0000\n"
-"PO-Revision-Date: 2015-11-28 11:21+0000\n"
+"POT-Creation-Date: 2015-12-14 05:31+0000\n"
+"PO-Revision-Date: 2016-01-02 18:10+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Portuguese (http://www.transifex.com/widelands/widelands/language/pt/)\n"
 "MIME-Version: 1.0\n"
@@ -44,6 +44,7 @@ msgid ""
 msgstr "Este jogo é Grátis e de Código Aberto (FOSS), licenciado com a Licença Pública Geral GNU (GPL) V2.0."
 
 #: ../../txts/LICENSE.lua:26
+#, lua-format
 msgid ""
 "You can find more information on FOSS and the GPL by visiting the following "
 "webpage:  %s"
@@ -292,6 +293,7 @@ msgid ""
 msgstr ""
 
 #: ../../txts/README.lua:92
+#, lua-format
 msgid ""
 "If you need more documentation or help for Widelands or the Widelands "
 "Editor, be sure to visit our homepage at %s. You can find online help in our"
@@ -432,11 +434,10 @@ msgstr ""
 msgid "Graphicians"
 msgstr "Gráficos"
 
-#: ../../txts/developers.lua:3 ../../txts/developers.lua:3
+#: ../../txts/developers.lua:3
 msgid "Graphics"
 msgstr "Gráficos"
 
-#: ../../txts/developers.lua:3 ../../txts/developers.lua:3
 #: ../../txts/developers.lua:3
 msgid "Homepage"
 msgstr "Página web"
@@ -469,7 +470,7 @@ msgstr "Outros"
 msgid "Packagers"
 msgstr "Criadores dos pacotes"
 
-#: ../../txts/developers.lua:3 ../../txts/developers.lua:3
+#: ../../txts/developers.lua:3
 msgid "Sound"
 msgstr "Som"
 
@@ -518,6 +519,7 @@ msgid ""
 msgstr ""
 
 #: ../../txts/editor_readme.lua:14
+#, lua-format
 msgid "Please have a look at our enduser manuals on our wiki pages at: %s"
 msgstr ""
 

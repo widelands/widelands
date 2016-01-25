@@ -23,6 +23,7 @@
 #include <memory>
 
 #include "base/macros.h"
+#include "base/wexception.h"
 #include "economy/expedition_bootstrap.h"
 #include "economy/flag.h"
 #include "economy/portdock.h"
@@ -200,7 +201,7 @@ void MapBuildingdataPacket::read
 					} else {
 						//  type of building is not one of (or derived from)
 						//  {ConstructionSite, Warehouse, ProductionSite}
-						assert(false);
+						NEVER_HERE();
 					}
 					mol.mark_object_as_loaded(building);
 				} catch (const WException & e) {
@@ -956,7 +957,7 @@ void MapBuildingdataPacket::write
 					write_productionsite(*productionsite, fw, game, mos);
 				}
 			} else {
-				assert(false);
+				NEVER_HERE();
 				//  type of building is not one of (or derived from)
 				//  {ConstructionSite, Warehouse, ProductionSite}
 			}

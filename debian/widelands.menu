@@ -1,0 +1,7 @@
+?package(widelands):\
+	needs="X11" \
+	section="Games/Strategy" \
+	title="widelands" \
+	longtitle="Fantasy real-time strategy game" \
+	command="/usr/games/widelands" \
+	icon="/usr/share/icons/hicolor/32x32/apps/widelands.xpm"

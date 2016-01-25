@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010 by the Widelands Development Team
+ * Copyright (C) 2010-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -64,11 +64,11 @@ private:
 	UI::Box                  clientbox, playerbox;
 	std::vector<UI::Textarea *> labels;
 
-	uint32_t    m_buth, m_fsize;
-	std::string m_fname;
+	uint32_t    buth_, fsize_;
+	std::string fname_;
 
-	std::map<std::string, const Image* > m_tribepics;
-	std::map<std::string, std::string> m_tribenames;
+	std::map<std::string, const Image* > tribepics_;
+	std::map<std::string, std::string> tribenames_;
 };
 
 

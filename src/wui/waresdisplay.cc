@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003, 2006-2013 by the Widelands Development Team
+ * Copyright (C) 2003-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -47,36 +47,36 @@ AbstractWaresDisplay::AbstractWaresDisplay
 	 boost::function<void(Widelands::DescriptionIndex, bool)> callback_function,
 	 bool horizontal)
 	:
-	// Size is set when add_warelist is called, as it depends on the m_type.
+	// Size is set when add_warelist is called, as it depends on the type_.
 	UI::Panel(parent, x, y, 0, 0),
-	m_tribe (tribe),
+	tribe_ (tribe),
 
-	m_type (type),
-	m_indices(m_type == Widelands::wwWORKER ? m_tribe.workers() : m_tribe.wares()),
-	m_curware
+	type_ (type),
+	indices_(type_ == Widelands::wwWORKER ? tribe_.workers() : tribe_.wares()),
+	curware_
 		(this,
 		 0, get_inner_h() - 25, get_inner_w(), 20,
 		 "", UI::Align_Center),
 
-	m_selectable(selectable),
-	m_horizontal(horizontal),
-	m_selection_anchor(Widelands::INVALID_INDEX),
-	m_callback_function(callback_function)
+	selectable_(selectable),
+	horizontal_(horizontal),
+	selection_anchor_(Widelands::INVALID_INDEX),
+	callback_function_(callback_function)
 {
-	for (const Widelands::DescriptionIndex& index : m_indices) {
-		m_selected.insert(std::make_pair(index, false));
-		m_hidden.insert(std::make_pair(index, false));
-		m_in_selection.insert(std::make_pair(index, false));
+	for (const Widelands::DescriptionIndex& index : indices_) {
+		selected_.insert(std::make_pair(index, false));
+		hidden_.insert(std::make_pair(index, false));
+		in_selection_.insert(std::make_pair(index, false));
 
 		// Prerender all texts to avoid flickering with mouseover
-		m_curware.set_text(index != Widelands::INVALID_INDEX ?
-									 (m_type == Widelands::wwWORKER ?
-										  m_tribe.get_worker_descr(index)->descname() :
-										  m_tribe.get_ware_descr(index)->descname()) :
+		curware_.set_text(index != Widelands::INVALID_INDEX ?
+									 (type_ == Widelands::wwWORKER ?
+										  tribe_.get_worker_descr(index)->descname() :
+										  tribe_.get_ware_descr(index)->descname()) :
 									 "");
 	}
 
-	m_curware.set_text(_("Stock"));
+	curware_.set_text(_("Stock"));
 
 	// Find out geometry from icons_order
 	unsigned int columns = icons_order().size();
@@ -84,13 +84,13 @@ AbstractWaresDisplay::AbstractWaresDisplay
 	for (unsigned int i = 0; i < icons_order().size(); i++)
 		if (icons_order()[i].size() > rows)
 			rows = icons_order()[i].size();
-	if (m_horizontal) {
+	if (horizontal_) {
 		unsigned int s = columns;
 		columns = rows;
 		rows = s;
 	}
 
-	// 25 is height of m_curware text
+	// 25 is height of curware_ text
 	set_desired_size
 		(columns * (WARE_MENU_PIC_WIDTH  + WARE_MENU_PIC_PAD_X) + 1,
 		 rows * (WARE_MENU_PIC_HEIGHT + WARE_MENU_INFO_SIZE + WARE_MENU_PIC_PAD_Y) + 1 + 25);
@@ -102,12 +102,12 @@ bool AbstractWaresDisplay::handle_mousemove
 {
 	const Widelands::DescriptionIndex index = ware_at_point(x, y);
 
-	m_curware.set_text(index != Widelands::INVALID_INDEX ?
-	                      (m_type == Widelands::wwWORKER ?
-	                          m_tribe.get_worker_descr(index)->descname() :
-	                          m_tribe.get_ware_descr(index)->descname()) :
+	curware_.set_text(index != Widelands::INVALID_INDEX ?
+	                      (type_ == Widelands::wwWORKER ?
+	                          tribe_.get_worker_descr(index)->descname() :
+	                          tribe_.get_ware_descr(index)->descname()) :
 	                      "");
-	if (m_selection_anchor != Widelands::INVALID_INDEX) {
+	if (selection_anchor_ != Widelands::INVALID_INDEX) {
 		// Ensure mouse button is still pressed as some
 		// mouse release events do not reach us
 		if (state ^ SDL_BUTTON_LMASK) {
@@ -127,17 +127,17 @@ bool AbstractWaresDisplay::handle_mousepress
 	if (btn == SDL_BUTTON_LEFT) {
 		Widelands::DescriptionIndex ware = ware_at_point(x, y);
 
-		if (!m_tribe.has_ware(ware) && !m_tribe.has_worker(ware)) {
+		if (!tribe_.has_ware(ware) && !tribe_.has_worker(ware)) {
 			return false;
 		}
-		if (!m_selectable) {
+		if (!selectable_) {
 			return true;
 		}
-		if (m_selection_anchor == Widelands::INVALID_INDEX) {
+		if (selection_anchor_ == Widelands::INVALID_INDEX) {
 			// Create the selection anchor to be able to select
 			// multiple ware by dragging.
-			m_selection_anchor = ware;
-			m_in_selection[ware] = true;
+			selection_anchor_ = ware;
+			in_selection_[ware] = true;
 		} else {
 			// A mouse release has been missed
 		}
@@ -149,14 +149,14 @@ bool AbstractWaresDisplay::handle_mousepress
 
 bool AbstractWaresDisplay::handle_mouserelease(uint8_t btn, int32_t x, int32_t y)
 {
-	if (btn != SDL_BUTTON_LEFT || m_selection_anchor == Widelands::INVALID_INDEX) {
+	if (btn != SDL_BUTTON_LEFT || selection_anchor_ == Widelands::INVALID_INDEX) {
 		return UI::Panel::handle_mouserelease(btn, x, y);
 	}
 
-	bool to_be_selected = !ware_selected(m_selection_anchor);
+	bool to_be_selected = !ware_selected(selection_anchor_);
 
-	for (const Widelands::DescriptionIndex& index : m_indices) {
-		if (m_in_selection[index]) {
+	for (const Widelands::DescriptionIndex& index : indices_) {
+		if (in_selection_[index]) {
 			if (to_be_selected) {
 				select_ware(index);
 			} else {
@@ -166,9 +166,9 @@ bool AbstractWaresDisplay::handle_mouserelease(uint8_t btn, int32_t x, int32_t y
 	}
 
 	// Release anchor, empty selection
-	m_selection_anchor = Widelands::INVALID_INDEX;
-	for (std::pair<const Widelands::DescriptionIndex&, bool> resetme : m_in_selection) {
-		m_in_selection[resetme.first] = false;
+	selection_anchor_ = Widelands::INVALID_INDEX;
+	for (std::pair<const Widelands::DescriptionIndex&, bool> resetme : in_selection_) {
+		in_selection_[resetme.first] = false;
 	}
 	return true;
 }
@@ -186,15 +186,15 @@ Widelands::DescriptionIndex AbstractWaresDisplay::ware_at_point(int32_t x, int32
 
 	unsigned int i = x / (WARE_MENU_PIC_WIDTH + WARE_MENU_PIC_PAD_X);
 	unsigned int j = y / (WARE_MENU_PIC_HEIGHT + WARE_MENU_INFO_SIZE + WARE_MENU_PIC_PAD_Y);
-	if (m_horizontal) {
+	if (horizontal_) {
 		unsigned int s = i;
 		i = j;
 		j = s;
 	}
 	if (i < icons_order().size() && j < icons_order()[i].size()) {
 		const Widelands::DescriptionIndex& ware = icons_order()[i][j];
-		assert(m_hidden.count(ware) == 1);
-		if (!(m_hidden.find(ware)->second)) {
+		assert(hidden_.count(ware) == 1);
+		if (!(hidden_.find(ware)->second)) {
 			return ware;
 		}
 	}
@@ -208,15 +208,15 @@ Widelands::DescriptionIndex AbstractWaresDisplay::ware_at_point(int32_t x, int32
 // and current pos to allow their selection on mouse release
 void AbstractWaresDisplay::update_anchor_selection(int32_t x, int32_t y)
 {
-	if (m_selection_anchor == Widelands::INVALID_INDEX || x < 0 || y < 0) {
+	if (selection_anchor_ == Widelands::INVALID_INDEX || x < 0 || y < 0) {
 		return;
 	}
 
-	for (std::pair<const Widelands::DescriptionIndex&, bool> resetme : m_in_selection) {
-		m_in_selection[resetme.first] = false;
+	for (std::pair<const Widelands::DescriptionIndex&, bool> resetme : in_selection_) {
+		in_selection_[resetme.first] = false;
 	}
 
-	Point anchor_pos = ware_position(m_selection_anchor);
+	Point anchor_pos = ware_position(selection_anchor_);
 	// Add an offset to make sure the anchor line and column will be
 	// selected when selecting in topleft direction
 	int32_t anchor_x = anchor_pos.x + WARE_MENU_PIC_WIDTH / 2;
@@ -225,36 +225,36 @@ void AbstractWaresDisplay::update_anchor_selection(int32_t x, int32_t y)
 	unsigned int left_ware_idx = anchor_x / (WARE_MENU_PIC_WIDTH + WARE_MENU_PIC_PAD_X);
 	unsigned int top_ware_idx = anchor_y / (WARE_MENU_PIC_HEIGHT + WARE_MENU_INFO_SIZE + WARE_MENU_PIC_PAD_Y);
 	unsigned int right_ware_idx = x / (WARE_MENU_PIC_WIDTH + WARE_MENU_PIC_PAD_X);
-	unsigned int bottom_ware_idx = y / (WARE_MENU_PIC_HEIGHT + WARE_MENU_INFO_SIZE + WARE_MENU_PIC_PAD_Y);
+	unsigned int bottoware_idx_ = y / (WARE_MENU_PIC_HEIGHT + WARE_MENU_INFO_SIZE + WARE_MENU_PIC_PAD_Y);
 	unsigned int tmp;
 
 	// Reverse col/row and anchor/endpoint if needed
-	if (m_horizontal) {
+	if (horizontal_) {
 		tmp = left_ware_idx;
 		left_ware_idx = top_ware_idx;
 		top_ware_idx = tmp;
 		tmp = right_ware_idx;
-		right_ware_idx = bottom_ware_idx;
-		bottom_ware_idx = tmp;
+		right_ware_idx = bottoware_idx_;
+		bottoware_idx_ = tmp;
 	}
 	if (left_ware_idx > right_ware_idx) {
 		tmp = left_ware_idx;
 		left_ware_idx = right_ware_idx;
 		right_ware_idx = tmp;
 	}
-	if (top_ware_idx > bottom_ware_idx) {
+	if (top_ware_idx > bottoware_idx_) {
 		tmp = top_ware_idx;
-		top_ware_idx = bottom_ware_idx;
-		bottom_ware_idx = tmp;
+		top_ware_idx = bottoware_idx_;
+		bottoware_idx_ = tmp;
 	}
 
 	for (unsigned int cur_ware_x = left_ware_idx; cur_ware_x <= right_ware_idx; cur_ware_x++) {
 		if (cur_ware_x < icons_order().size()) {
-			for (unsigned cur_ware_y = top_ware_idx; cur_ware_y <= bottom_ware_idx; cur_ware_y++) {
+			for (unsigned cur_ware_y = top_ware_idx; cur_ware_y <= bottoware_idx_; cur_ware_y++) {
 				if (cur_ware_y < icons_order()[cur_ware_x].size()) {
 					Widelands::DescriptionIndex ware = icons_order()[cur_ware_x][cur_ware_y];
-					if (!m_hidden[ware]) {
-						m_in_selection[ware] = true;
+					if (!hidden_[ware]) {
+						in_selection_[ware] = true;
 					}
 				}
 			}
@@ -267,12 +267,12 @@ void AbstractWaresDisplay::update_anchor_selection(int32_t x, int32_t y)
 
 void AbstractWaresDisplay::layout()
 {
-	m_curware.set_pos(Point(0, get_inner_h() - 25));
-	m_curware.set_size(get_inner_w(), 20);
+	curware_.set_pos(Point(0, get_inner_h() - 25));
+	curware_.set_size(get_inner_w(), 20);
 }
 
 void WaresDisplay::remove_all_warelists() {
-	m_warelists.clear();
+	warelists_.clear();
 	for (boost::signals2::connection& c : connections_)
 		c.disconnect();
 	connections_.clear();
@@ -282,8 +282,8 @@ void WaresDisplay::remove_all_warelists() {
 
 void AbstractWaresDisplay::draw(RenderTarget & dst)
 {
-	for (const Widelands::DescriptionIndex& index : m_indices) {
-		if (!m_hidden[index]) {
+	for (const Widelands::DescriptionIndex& index : indices_) {
+		if (!hidden_[index]) {
 			draw_ware(dst, index);
 		}
 	}
@@ -291,33 +291,31 @@ void AbstractWaresDisplay::draw(RenderTarget & dst)
 
 const Widelands::TribeDescr::WaresOrder & AbstractWaresDisplay::icons_order() const
 {
-	switch (m_type) {
+	switch (type_) {
 	case Widelands::wwWARE:
-		return m_tribe.wares_order();
+		return tribe_.wares_order();
 	case Widelands::wwWORKER:
-		return m_tribe.workers_order();
-	default:
-		throw wexception("Invalid m_type %d", m_type);
+		return tribe_.workers_order();
 	}
+	NEVER_HERE();
 }
 
 const Widelands::TribeDescr::WaresOrderCoords & AbstractWaresDisplay::icons_order_coords() const
 {
-	switch (m_type) {
+	switch (type_) {
 	case Widelands::wwWARE:
-		return m_tribe.wares_order_coords();
+		return tribe_.wares_order_coords();
 	case Widelands::wwWORKER:
-		return m_tribe.workers_order_coords();
-	default:
-		throw wexception("Invalid m_type %d", m_type);
+		return tribe_.workers_order_coords();
 	}
+	NEVER_HERE();
 }
 
 
 Point AbstractWaresDisplay::ware_position(Widelands::DescriptionIndex id) const
 {
 	Point p(2, 2);
-	if (m_horizontal) {
+	if (horizontal_) {
 		p.x += icons_order_coords()[id].second  *
 			(WARE_MENU_PIC_WIDTH + WARE_MENU_PIC_PAD_X);
 		p.y += icons_order_coords()[id].first *
@@ -344,15 +342,15 @@ void AbstractWaresDisplay::draw_ware
 {
 	Point p = ware_position(id);
 
-	bool draw_selected = m_selected[id];
-	if (m_selection_anchor != Widelands::INVALID_INDEX) {
+	bool draw_selected = selected_[id];
+	if (selection_anchor_ != Widelands::INVALID_INDEX) {
 		// Draw the temporary selected wares as if they were
 		// selected.
 		// TODO(unknown): Use another pic for the temporary selection
-		if (!ware_selected(m_selection_anchor)) {
-			draw_selected |= m_in_selection[id];
+		if (!ware_selected(selection_anchor_)) {
+			draw_selected |= in_selection_[id];
 		} else {
-			draw_selected &= !m_in_selection[id];
+			draw_selected &= !in_selection_[id];
 		}
 	}
 
@@ -363,8 +361,8 @@ void AbstractWaresDisplay::draw_ware
 
 	dst.blit(p, bgpic);
 
-	const Image* icon = m_type == Widelands::wwWORKER ? m_tribe.get_worker_descr(id)->icon()
-		: m_tribe.get_ware_descr(id)->icon();
+	const Image* icon = type_ == Widelands::wwWORKER ? tribe_.get_worker_descr(id)->icon()
+		: tribe_.get_ware_descr(id)->icon();
 
 	dst.blit(p + Point((w - WARE_MENU_PIC_WIDTH) / 2, 1), icon);
 
@@ -382,51 +380,51 @@ void AbstractWaresDisplay::draw_ware
 // Wares highlighting/selecting
 void AbstractWaresDisplay::select_ware(Widelands::DescriptionIndex ware)
 {
-	if (m_selected[ware])
+	if (selected_[ware])
 		return;
 
-	m_selected[ware] = true;
+	selected_[ware] = true;
 	update();
-	if (m_callback_function)
-			m_callback_function(ware, true);
+	if (callback_function_)
+			callback_function_(ware, true);
 }
 
 void AbstractWaresDisplay::unselect_ware(Widelands::DescriptionIndex ware)
 {
-	if (!m_selected[ware])
+	if (!selected_[ware])
 		return;
 
-	m_selected[ware] = false;
+	selected_[ware] = false;
 	update();
-	if (m_callback_function)
-			m_callback_function(ware, false);
+	if (callback_function_)
+			callback_function_(ware, false);
 }
 
 bool AbstractWaresDisplay::ware_selected(Widelands::DescriptionIndex ware) {
-	return m_selected[ware];
+	return selected_[ware];
 }
 
 // Wares hiding
 void AbstractWaresDisplay::hide_ware(Widelands::DescriptionIndex ware)
 {
-	if (m_hidden[ware])
+	if (hidden_[ware])
 		return;
 
-	m_hidden[ware] = true;
+	hidden_[ware] = true;
 	update();
 }
 
 void AbstractWaresDisplay::unhide_ware(Widelands::DescriptionIndex ware)
 {
-	if (!m_hidden[ware])
+	if (!hidden_[ware])
 		return;
 
-	m_hidden[ware] = false;
+	hidden_[ware] = false;
 	update();
 }
 
 bool AbstractWaresDisplay::ware_hidden(Widelands::DescriptionIndex ware) {
-	return m_hidden[ware];
+	return hidden_[ware];
 }
 
 WaresDisplay::WaresDisplay
@@ -449,7 +447,7 @@ WaresDisplay::~WaresDisplay()
 
 std::string WaresDisplay::info_for_ware(Widelands::DescriptionIndex ware) {
 	int totalstock = 0;
-	for (const Widelands::WareList* warelist : m_warelists) {
+	for (const Widelands::WareList* warelist : warelists_) {
 		totalstock += warelist->stock(ware);
 	}
 	return boost::lexical_cast<std::string>(totalstock);
@@ -464,7 +462,7 @@ void WaresDisplay::add_warelist
 	(const Widelands::WareList & wares)
 {
 	//  If you register something twice, it is counted twice. Not my problem.
-	m_warelists.push_back(&wares);
+	warelists_.push_back(&wares);
 
 	connections_.push_back(wares.changed.connect(boost::bind(&WaresDisplay::update, boost::ref(*this))));
 	update();

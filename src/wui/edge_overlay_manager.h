@@ -54,8 +54,8 @@ private:
 	using RegisteredRoadOverlaysMap =
 	   std::map<const Widelands::Coords, RegisteredRoadOverlays, Widelands::Coords::OrderingFunctor>;
 
-	OverlayId m_current_overlay_id;
-	RegisteredRoadOverlaysMap m_overlays;
+	OverlayId current_overlay_id_;
+	RegisteredRoadOverlaysMap overlays_;
 
 	DISALLOW_COPY_AND_ASSIGN(EdgeOverlayManager);
 };

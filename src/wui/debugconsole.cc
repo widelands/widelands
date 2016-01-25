@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2009 by the Widelands Development Team
+ * Copyright (C) 2008-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -136,7 +136,7 @@ Handler::~Handler()
 	// This check is an evil hack to account for the singleton-nature
 	// of the Console
 	if (this != &g_console) {
-		for (const auto& command : m_commands) {
+		for (const auto& command : commands_) {
 			g_console.commands.erase(command);
 		}
 	}
@@ -145,7 +145,7 @@ Handler::~Handler()
 void Handler::addCommand(const std::string & cmd, const HandlerFn & fun)
 {
 	g_console.commands[cmd] = fun;
-	m_commands.push_back(cmd);
+	commands_.push_back(cmd);
 }
 
 void Handler::setDefaultCommand(const HandlerFn & fun)

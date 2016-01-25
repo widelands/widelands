@@ -116,8 +116,8 @@ class WidelandsTestCase(unittest.TestCase):
             self.verify_success(stdout, stdout_filename)
 
     def verify_success(self, stdout, stdout_filename):
-        common_msg = "Analyze the files in %s to see why this test case failed. Stdout is\n  %s\n" % (
-                self.run_dir, stdout_filename)
+        common_msg = "Analyze the files in %s to see why this test case failed. Stdout is\n  %s\n\nstdout:\n%s" % (
+                self.run_dir, stdout_filename, stdout)
         self.assertTrue(self.widelands_returncode == 0,
             "Widelands exited abnormally. %s" % common_msg
         )

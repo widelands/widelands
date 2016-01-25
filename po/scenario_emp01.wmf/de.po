@@ -12,9 +12,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-12-07 20:16+0000\n"
-"PO-Revision-Date: 2015-12-09 13:37+0000\n"
-"Last-Translator: Jürgen Eberlein <juergen.eberlein@web.de>\n"
+"POT-Creation-Date: 2015-12-14 05:31+0000\n"
+"PO-Revision-Date: 2015-12-20 16:22+0000\n"
+"Last-Translator: wl-zocker\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -432,6 +432,7 @@ msgid ""
 msgstr "Herr, Ihr habt diese Halbinsel zu einem sicheren Ort gemacht. Es ist Zeit fortzufahren!"
 
 #: ../../scripting/format_scenario.lua:36
+#, lua-format
 msgid "“%s”"
 msgstr "„%s“"
 

@@ -28,6 +28,8 @@ namespace Gl {
 
 namespace {
 
+constexpr GLenum NONE = static_cast<GLenum>(0);
+
 // Returns a readable string for a GL_*_SHADER 'type' for debug output.
 std::string shader_to_string(GLenum type) {
 	if (type == GL_VERTEX_SHADER) {
@@ -167,7 +169,7 @@ void Program::build(const char* vertex_shader_source, const char* fragment_shade
 }
 
 State::State()
-   : last_active_texture_(0), current_framebuffer_(0), current_framebuffer_texture_(0) {
+   : last_active_texture_(NONE), current_framebuffer_(0), current_framebuffer_texture_(0) {
 }
 
 void State::bind(const GLenum target, const GLuint texture) {
@@ -189,7 +191,7 @@ void State::do_bind(const GLenum target, const GLuint texture) {
 	glBindTexture(GL_TEXTURE_2D, texture);
 
 	target_to_texture_[target] = texture;
-	texture_to_target_[currently_bound_texture] = 0;
+	texture_to_target_[currently_bound_texture] = NONE;
 	texture_to_target_[texture] = target;
 }
 

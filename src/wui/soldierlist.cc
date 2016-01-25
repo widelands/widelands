@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2011, 2015 by the Widelands Development Team
+ * Copyright (C) 2002-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -464,7 +464,7 @@ void SoldierList::think()
 			case Widelands::MilitarySite::kPrefersHeroes:
 				m_soldier_preference.set_state(1);
 				break;
-			default:
+			case Widelands::MilitarySite::kNoPreference:
 				m_soldier_preference.set_state(-1);
 				break;
 		}

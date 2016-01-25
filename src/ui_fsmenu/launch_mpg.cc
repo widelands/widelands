@@ -346,15 +346,14 @@ void FullscreenMenuLaunchMPG::win_condition_load() {
 void FullscreenMenuLaunchMPG::change_map_or_save() {
 	MapOrSaveSelectionWindow selection_window
 		(this, m_ctrl, get_w() / 3, get_h() / 4);
-	switch (selection_window.run<FullscreenMenuBase::MenuTarget>()) {
-		case FullscreenMenuBase::MenuTarget::kNormalGame:
-			select_map();
-			break;
-		case FullscreenMenuBase::MenuTarget::kScenarioGame:
-			select_saved_game();
-			break;
-		default:
-			return;
+	auto result = selection_window.run<FullscreenMenuBase::MenuTarget>();
+	assert(result == FullscreenMenuBase::MenuTarget::kNormalGame ||
+	       result == FullscreenMenuBase::MenuTarget::kScenarioGame ||
+	       result == FullscreenMenuBase::MenuTarget::kBack);
+	if (result == FullscreenMenuBase::MenuTarget::kNormalGame) {
+		select_map();
+	} else if (result == FullscreenMenuBase::MenuTarget::kScenarioGame) {
+		select_saved_game();
 	}
 }
 

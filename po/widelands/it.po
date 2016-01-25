@@ -8,15 +8,16 @@
 # SecondCloud500 <eddieven2000@gmail.com>, 2015
 # Gabriel Rota <gabriel.rota@gmail.com>, 2009
 # GunChleoc, 2014
-# Guybrush88 <erpizzo@alice.it>, 2015
+# Guybrush88 <erpizzo@alice.it>, 2015-2016
+# Luigi Lain <lainluigi86@tiscali.it>, 2015
 # Tommaso Amici <tommaso.amici@gmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-12-10 13:43+0000\n"
-"PO-Revision-Date: 2015-12-10 13:44+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2015-12-14 05:31+0000\n"
+"PO-Revision-Date: 2016-01-11 18:35+0000\n"
+"Last-Translator: Guybrush88 <erpizzo@alice.it>\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -461,7 +462,7 @@ msgstr "Nome: %s"
 #: ../../src/editor/tools/editor_info_tool.cc:116
 #, c-format
 msgid "Is: %s"
-msgstr ""
+msgstr "È: %s"
 
 #: ../../src/editor/tools/editor_info_tool.cc:118
 #, c-format
@@ -939,7 +940,7 @@ msgstr "Massimo: %u"
 msgid "Set value: %u"
 msgstr "Impostare il valore: %u"
 
-#: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:93
+#: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:96
 msgid "Terrain Select"
 msgstr "Selezione del terreno"
 
@@ -1439,22 +1440,22 @@ msgstr "arabile"
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/logic/world/terrain_description.cc:81
 msgid "navigable"
-msgstr ""
+msgstr "navigabile"
 
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/logic/world/terrain_description.cc:86
 msgid "unreachable"
-msgstr ""
+msgstr "irraggiungibile"
 
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/logic/world/terrain_description.cc:91
 msgid "mineable"
-msgstr ""
+msgstr "terreno per miniere"
 
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/logic/world/terrain_description.cc:96
 msgid "unwalkable"
-msgstr ""
+msgstr "non attraversabile"
 
 #: ../../src/map_io/s2map.cc:403
 msgid "Bluebyte Settlers II Map. No comment defined!"
