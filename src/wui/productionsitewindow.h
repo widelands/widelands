@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -39,8 +39,8 @@ protected:
 	void evict_worker();
 
 private:
-	UI::Table<uintptr_t> * m_worker_table;
-	UI::Box * m_worker_caps;
+	UI::Table<uintptr_t> * worker_table_;
+	UI::Box * worker_caps_;
 };
 
 #endif  // end of include guard: WL_WUI_PRODUCTIONSITEWINDOW_H

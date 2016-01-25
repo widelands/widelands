@@ -3846,6 +3846,7 @@ const PropertyType<LuaShip> LuaShip::Properties[] = {
 	PROP_RO(LuaShip, state),
 	PROP_RW(LuaShip, scouting_direction),
 	PROP_RW(LuaShip, island_explore_direction),
+	PROP_RO(LuaShip, shipname),
 	{nullptr, nullptr, nullptr},
 };
 
@@ -4026,6 +4027,22 @@ int LuaShip::set_island_explore_direction(lua_State* L) {
 		return 1;
 	}
 	return 0;
+}
+
+/* RST
+	.. attribute:: NAME
+
+	Get name of ship:
+
+		(RO) returns the :class:`string` ship's name.
+
+
+*/
+int LuaShip::get_shipname(lua_State* L) {
+	EditorGameBase& egbase = get_egbase(L);
+	Ship* ship = get(L, egbase);
+	lua_pushstring(L, ship->get_shipname().c_str());
+	return 1;
 }
 
 /*

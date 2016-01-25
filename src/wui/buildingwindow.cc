@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2013 by the Widelands Development Team
+ * Copyright (C) 2002-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -55,27 +55,27 @@ BuildingWindow::BuildingWindow
 		(&parent, "building_window",
 		 0, 0, Width, 0,
 		 b.descr().descname()),
-	m_registry(registry),
-	m_building       (b),
-	m_workarea_overlay_id(0),
-	m_avoid_fastclick(false)
+	registry_(registry),
+	building_       (b),
+	workarea_overlay_id_(0),
+	avoid_fastclick_(false)
 {
-	delete m_registry;
-	m_registry = this;
+	delete registry_;
+	registry_ = this;
 
-	m_capscache_player_number = 0;
-	m_capsbuttons = nullptr;
-	m_capscache = 0;
-	m_caps_setup = false;
-	m_toggle_workarea = nullptr;
+	capscache_player_number_ = 0;
+	capsbuttons_ = nullptr;
+	capscache_ = 0;
+	caps_setup_ = false;
+	toggle_workarea_ = nullptr;
 
 	UI::Box * vbox = new UI::Box(this, 0, 0, UI::Box::Vertical);
 
-	m_tabs = new UI::TabPanel(vbox, 0, 0, nullptr);
-	vbox->add(m_tabs, UI::Box::AlignLeft, true);
+	tabs_ = new UI::TabPanel(vbox, 0, 0, nullptr);
+	vbox->add(tabs_, UI::Box::AlignLeft, true);
 
-	m_capsbuttons = new UI::Box(vbox, 0, 0, UI::Box::Horizontal);
-	vbox->add(m_capsbuttons, UI::Box::AlignLeft, true);
+	capsbuttons_ = new UI::Box(vbox, 0, 0, UI::Box::Horizontal);
+	vbox->add(capsbuttons_, UI::Box::AlignLeft, true);
 	// actually create buttons on the first call to think(),
 	// so that overriding create_capsbuttons() works
 
@@ -86,7 +86,7 @@ BuildingWindow::BuildingWindow
 	show_workarea();
 
 	// Title for construction site
-	if (upcast(Widelands::ConstructionSite, csite, &m_building)) {
+	if (upcast(Widelands::ConstructionSite, csite, &building_)) {
 		// Show name in parenthesis as it may take all width already
 		const std::string title = (boost::format("(%s)") % csite->building().descname()).str();
 		set_title(title);
@@ -96,10 +96,10 @@ BuildingWindow::BuildingWindow
 
 BuildingWindow::~BuildingWindow()
 {
-	if (m_workarea_overlay_id) {
-		igbase().mutable_field_overlay_manager()->remove_overlay(m_workarea_overlay_id);
+	if (workarea_overlay_id_) {
+		igbase().mutable_field_overlay_manager()->remove_overlay(workarea_overlay_id_);
 	}
-	m_registry = nullptr;
+	registry_ = nullptr;
 }
 
 namespace Widelands {class BuildingDescr;}
@@ -138,18 +138,18 @@ void BuildingWindow::think()
 		die();
 
 	if
-		(!m_caps_setup
+		(!caps_setup_
 		 ||
-		 m_capscache_player_number != igbase().player_number()
+		 capscache_player_number_ != igbase().player_number()
 		 ||
-		 building().get_playercaps() != m_capscache)
+		 building().get_playercaps() != capscache_)
 	{
-		m_capsbuttons->free_children();
-		create_capsbuttons(m_capsbuttons);
+		capsbuttons_->free_children();
+		create_capsbuttons(capsbuttons_);
 		move_out_of_the_way();
-		if (!m_avoid_fastclick)
+		if (!avoid_fastclick_)
 			warp_mouse_to_fastclick_panel();
-		m_caps_setup = true;
+		caps_setup_ = true;
 	}
 
 
@@ -165,8 +165,8 @@ void BuildingWindow::think()
  */
 void BuildingWindow::create_capsbuttons(UI::Box * capsbuttons)
 {
-	m_capscache = building().get_playercaps();
-	m_capscache_player_number = igbase().player_number();
+	capscache_ = building().get_playercaps();
+	capscache_player_number_ = igbase().player_number();
 
 	const Widelands::Player & owner = building().owner();
 	const Widelands::PlayerNumber owner_number = owner.player_number();
@@ -176,7 +176,7 @@ void BuildingWindow::create_capsbuttons(UI::Box * capsbuttons)
 	bool requires_destruction_separator = false;
 	if (can_act) {
 		// Check if this is a port building and if yes show expedition button
-		if (upcast(Widelands::Warehouse const, warehouse, &m_building)) {
+		if (upcast(Widelands::Warehouse const, warehouse, &building_)) {
 			if (Widelands::PortDock * pd = warehouse->get_portdock()) {
 				if (pd->expedition_started()) {
 					UI::Button * expeditionbtn =
@@ -202,7 +202,7 @@ void BuildingWindow::create_capsbuttons(UI::Box * capsbuttons)
 			}
 		}
 		else
-		if (upcast(const Widelands::ProductionSite, productionsite, &m_building)) {
+		if (upcast(const Widelands::ProductionSite, productionsite, &building_)) {
 			if (!is_a(Widelands::MilitarySite, productionsite)) {
 				const bool is_stopped = productionsite->is_stopped();
 				UI::Button * stopbtn =
@@ -227,9 +227,9 @@ void BuildingWindow::create_capsbuttons(UI::Box * capsbuttons)
 			}
 		} // upcast to productionsite
 
-		if (m_capscache & Widelands::Building::PCap_Enhancable) {
+		if (capscache_ & Widelands::Building::PCap_Enhancable) {
 			const Widelands::DescriptionIndex & enhancement =
-				m_building.descr().enhancement();
+				building_.descr().enhancement();
 			const Widelands::TribeDescr & tribe  = owner.tribe();
 			if (owner.is_building_type_allowed(enhancement)) {
 					const Widelands::BuildingDescr & building_descr =
@@ -256,7 +256,7 @@ void BuildingWindow::create_capsbuttons(UI::Box * capsbuttons)
 				}
 		}
 
-		if (m_capscache & Widelands::Building::PCap_Bulldoze) {
+		if (capscache_ & Widelands::Building::PCap_Bulldoze) {
 			UI::Button * destroybtn =
 				new UI::Button
 					(capsbuttons, "destroy", 0, 0, 34, 34,
@@ -272,9 +272,9 @@ void BuildingWindow::create_capsbuttons(UI::Box * capsbuttons)
 			requires_destruction_separator = true;
 		}
 
-		if (m_capscache & Widelands::Building::PCap_Dismantle) {
+		if (capscache_ & Widelands::Building::PCap_Dismantle) {
 			std::map<Widelands::DescriptionIndex, uint8_t> wares;
-			Widelands::DismantleSite::count_returned_wares(&m_building, wares);
+			Widelands::DismantleSite::count_returned_wares(&building_, wares);
 			UI::Button * dismantlebtn =
 				new UI::Button
 					(capsbuttons, "dismantle", 0, 0, 34, 34,
@@ -301,24 +301,24 @@ void BuildingWindow::create_capsbuttons(UI::Box * capsbuttons)
 
 	if (can_see) {
 		WorkareaInfo wa_info;
-		if (upcast(Widelands::ConstructionSite, csite, &m_building)) {
+		if (upcast(Widelands::ConstructionSite, csite, &building_)) {
 			wa_info = csite->building().m_workarea_info;
 		} else {
-			wa_info = m_building.descr().m_workarea_info;
+			wa_info = building_.descr().m_workarea_info;
 		}
 		if (!wa_info.empty()) {
-			m_toggle_workarea = new UI::Button
+			toggle_workarea_ = new UI::Button
 				(capsbuttons, "workarea",
 				 0, 0, 34, 34,
 				 g_gr->images().get("pics/but4.png"),
 				 g_gr->images().get("pics/workarea123.png"),
 				 _("Hide work area"));
-			m_toggle_workarea->sigclicked.connect
+			toggle_workarea_->sigclicked.connect
 				(boost::bind(&BuildingWindow::toggle_workarea, boost::ref(*this)));
 
-			capsbuttons->add(m_toggle_workarea, UI::Box::AlignCenter);
+			capsbuttons->add(toggle_workarea_, UI::Box::AlignCenter);
 			configure_workarea_button();
-			set_fastclick_panel(m_toggle_workarea);
+			set_fastclick_panel(toggle_workarea_);
 		}
 
 		if (igbase().get_display_flag(InteractiveBase::dfDebug)) {
@@ -358,10 +358,10 @@ void BuildingWindow::create_capsbuttons(UI::Box * capsbuttons)
 				 _("Help"));
 
 		UI::UniqueWindow::Registry& registry =
-			igbase().unique_windows().get_registry(m_building.descr().name() + "_help");
+			igbase().unique_windows().get_registry(building_.descr().name() + "_help");
 		registry.open_window = [this, &registry] {
 			new UI::BuildingHelpWindow(
-				&igbase(), registry, m_building.descr(), m_building.owner().tribe(), &igbase().egbase().lua());
+				&igbase(), registry, building_.descr(), building_.owner().tribe(), &igbase().egbase().lua());
 		};
 
 		helpbtn->sigclicked.connect(boost::bind(&UI::UniqueWindow::Registry::toggle, boost::ref(registry)));
@@ -377,11 +377,11 @@ Callback for bulldozing request
 void BuildingWindow::act_bulldoze()
 {
 	if (get_key_state(SDL_SCANCODE_LCTRL) || get_key_state(SDL_SCANCODE_RCTRL)) {
-		if (m_building.get_playercaps() & Widelands::Building::PCap_Bulldoze)
-			igbase().game().send_player_bulldoze(m_building);
+		if (building_.get_playercaps() & Widelands::Building::PCap_Bulldoze)
+			igbase().game().send_player_bulldoze(building_);
 	}
 	else {
-		show_bulldoze_confirm(dynamic_cast<InteractivePlayer&>(igbase()), m_building);
+		show_bulldoze_confirm(dynamic_cast<InteractivePlayer&>(igbase()), building_);
 	}
 }
 
@@ -393,11 +393,11 @@ Callback for dismantling request
 void BuildingWindow::act_dismantle()
 {
 	if (get_key_state(SDL_SCANCODE_LCTRL) || get_key_state(SDL_SCANCODE_RCTRL)) {
-		if (m_building.get_playercaps() & Widelands::Building::PCap_Dismantle)
-			igbase().game().send_player_dismantle(m_building);
+		if (building_.get_playercaps() & Widelands::Building::PCap_Dismantle)
+			igbase().game().send_player_dismantle(building_);
 	}
 	else {
-		show_dismantle_confirm(dynamic_cast<InteractivePlayer&>(igbase()), m_building);
+		show_dismantle_confirm(dynamic_cast<InteractivePlayer&>(igbase()), building_);
 	}
 }
 
@@ -407,8 +407,8 @@ Callback for starting / stoping the production site request
 ===============
 */
 void BuildingWindow::act_start_stop() {
-	if (dynamic_cast<const Widelands::ProductionSite *>(&m_building))
-		igbase().game().send_player_start_stop_building (m_building);
+	if (dynamic_cast<const Widelands::ProductionSite *>(&building_))
+		igbase().game().send_player_start_stop_building (building_);
 
 	die();
 }
@@ -420,9 +420,9 @@ Callback for starting an expedition request
 ===============
 */
 void BuildingWindow::act_start_or_cancel_expedition() {
-	if (upcast(Widelands::Warehouse const, warehouse, &m_building))
+	if (upcast(Widelands::Warehouse const, warehouse, &building_))
 		if (warehouse->get_portdock())
-			igbase().game().send_player_start_or_cancel_expedition(m_building);
+			igbase().game().send_player_start_or_cancel_expedition(building_);
 
 	// No need to die here - as soon as the request is handled, the UI will get updated by the portdock
 	//die();
@@ -436,13 +436,13 @@ Callback for enhancement request
 void BuildingWindow::act_enhance(Widelands::DescriptionIndex id)
 {
 	if (get_key_state(SDL_SCANCODE_LCTRL) || get_key_state(SDL_SCANCODE_RCTRL)) {
-		if (m_building.get_playercaps() & Widelands::Building::PCap_Enhancable)
-			igbase().game().send_player_enhance_building(m_building, id);
+		if (building_.get_playercaps() & Widelands::Building::PCap_Enhancable)
+			igbase().game().send_player_enhance_building(building_, id);
 	}
 	else {
 		show_enhance_confirm
 			(dynamic_cast<InteractivePlayer&>(igbase()),
-			 m_building,
+			 building_,
 			 id);
 	}
 }
@@ -456,7 +456,7 @@ void BuildingWindow::act_debug()
 {
 	show_field_debug
 		(igbase(),
-		 igbase().game().map().get_fcoords(m_building.get_position()));
+		 igbase().game().map().get_fcoords(building_.get_position()));
 }
 
 /**
@@ -464,19 +464,19 @@ void BuildingWindow::act_debug()
  */
 void BuildingWindow::show_workarea()
 {
-	if (m_workarea_overlay_id) {
+	if (workarea_overlay_id_) {
 		return; // already shown, nothing to be done
 	}
 	WorkareaInfo workarea_info;
-	if (upcast(Widelands::ConstructionSite, csite, &m_building)) {
+	if (upcast(Widelands::ConstructionSite, csite, &building_)) {
 		workarea_info = csite->building().m_workarea_info;
 	} else {
-		workarea_info = m_building.descr().m_workarea_info;
+		workarea_info = building_.descr().m_workarea_info;
 	}
 	if (workarea_info.empty()) {
 		return;
 	}
-	m_workarea_overlay_id = igbase().show_work_area(workarea_info, m_building.get_position());
+	workarea_overlay_id_ = igbase().show_work_area(workarea_info, building_.get_position());
 
 	configure_workarea_button();
 }
@@ -486,33 +486,33 @@ void BuildingWindow::show_workarea()
  */
 void BuildingWindow::hide_workarea()
 {
-	if (m_workarea_overlay_id) {
-		igbase().hide_work_area(m_workarea_overlay_id);
-		m_workarea_overlay_id = 0;
+	if (workarea_overlay_id_) {
+		igbase().hide_work_area(workarea_overlay_id_);
+		workarea_overlay_id_ = 0;
 
 		configure_workarea_button();
 	}
 }
 
 /**
- * Sets the perm_pressed state and the tooltip.
+ * Sets the perpressed_ state and the tooltip.
  */
 void BuildingWindow::configure_workarea_button()
 {
-	if (m_toggle_workarea) {
-		if (m_workarea_overlay_id) {
-			m_toggle_workarea->set_tooltip(_("Hide work area"));
-			m_toggle_workarea->set_perm_pressed(true);
+	if (toggle_workarea_) {
+		if (workarea_overlay_id_) {
+			toggle_workarea_->set_tooltip(_("Hide work area"));
+			toggle_workarea_->set_perm_pressed(true);
 		} else {
-			m_toggle_workarea->set_tooltip(_("Show work area"));
-			m_toggle_workarea->set_perm_pressed(false);
+			toggle_workarea_->set_tooltip(_("Show work area"));
+			toggle_workarea_->set_perm_pressed(false);
 		}
 	}
 }
 
 
 void BuildingWindow::toggle_workarea() {
-	if (m_workarea_overlay_id) {
+	if (workarea_overlay_id_) {
 		hide_workarea();
 	} else {
 		show_workarea();

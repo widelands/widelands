@@ -62,6 +62,7 @@ void MapAllowedBuildingTypesPacket::read
 
 			//  Now read all players and buildings.
 			iterate_players_existing(p, nr_players, egbase, player) {
+
 				const TribeDescr & tribe = player->tribe();
 				//  All building types default to false in the game (not in the
 				//  editor).

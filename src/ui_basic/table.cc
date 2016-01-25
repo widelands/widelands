@@ -283,7 +283,7 @@ void Table<void *>::draw(RenderTarget & dst)
 		Columns::size_type const nr_columns = m_columns.size();
 		for (uint32_t i = 0, curx = 0; i < nr_columns; ++i) {
 			const Column& column = m_columns[i];
-			int const curw  = column.width;
+			int const curw = column.width;
 			Align alignment = mirror_alignment(column.alignment);
 
 			const Image* entry_picture = er.get_picture(i);
@@ -291,11 +291,10 @@ void Table<void *>::draw(RenderTarget & dst)
 
 			Point point(curx, y);
 			int picw = 0;
-			int pich = 0;
 
-			if (entry_picture) {
+			if (entry_picture != nullptr) {
 				picw = entry_picture->width();
-				pich = entry_picture->height();
+				const int pich = entry_picture->height();
 
 				int draw_x = point.x;
 
@@ -319,22 +318,9 @@ void Table<void *>::draw(RenderTarget & dst)
 						draw_x += curw - blit_width;
 					}
 
-					// Temporary texture for the scaled image
-					Texture* scaled_texture = new Texture(blit_width, max_pic_height);
-
-					// Initialize the rectangle
-					scaled_texture->fill_rect(Rect(0, 0, blit_width, max_pic_height),
-									RGBAColor(255, 255, 255, 0));
-
 					// Create the scaled image
-					scaled_texture->blit(Rect(0, 0, blit_width, max_pic_height),
-							 *entry_picture,
-							 Rect(0, 0, picw, pich),
-							 1.,
-							 BlendMode::UseAlpha);
-
-					// This will now blit with any appropriate cropping
-					dst.blit(Point(draw_x, point.y + 1), scaled_texture);
+					dst.blitrect_scale(Rect(draw_x, point.y + 1, blit_width, max_pic_height),
+					                   entry_picture, Rect(0, 0, picw, pich), 1., BlendMode::UseAlpha);
 
 					// For text alignment below
 					picw = blit_width;

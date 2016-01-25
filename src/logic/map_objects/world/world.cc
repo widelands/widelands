@@ -50,15 +50,15 @@ void World::load_graphics() {
 	for (size_t i = 0; i < terrains_->size(); ++i) {
 		TerrainDescription* terrain = terrains_->get_mutable(i);
 		for (size_t j = 0; j < terrain->texture_paths().size(); ++j) {
-			SDL_Surface* sdl_surface = load_image_as_sdl_surface(terrain->texture_paths()[j]);
-
 			// Set the minimap color on the first loaded image.
 			if (j == 0) {
+				SDL_Surface* sdl_surface = load_image_as_sdl_surface(terrain->texture_paths()[j]);
 				uint8_t top_left_pixel = static_cast<uint8_t*>(sdl_surface->pixels)[0];
 				const SDL_Color top_left_pixel_color =
 				   sdl_surface->format->palette->colors[top_left_pixel];
 				terrain->set_minimap_color(
 				   RGBColor(top_left_pixel_color.r, top_left_pixel_color.g, top_left_pixel_color.b));
+				SDL_FreeSurface(sdl_surface);
 			}
 			terrain->add_texture(g_gr->images().get(terrain->texture_paths()[j]));
 		}

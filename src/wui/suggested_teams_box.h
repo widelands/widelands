@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 by the Widelands Development Team
+ * Copyright (C) 2015-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -45,14 +45,14 @@ struct SuggestedTeamsBox : public UI::Box {
 	void show(const std::vector<Widelands::Map::SuggestedTeamLineup>& suggested_teams);
 
 private:
-	int32_t const m_padding;
-	int32_t const m_indent;
-	int32_t const m_label_height;
-	UI::Textarea * m_suggested_teams_box_label;
-	UI::Box* m_lineup_box;
-	std::vector<UI::Icon*> m_player_icons;
-	std::vector<UI::Textarea*> m_vs_labels;
-	std::vector<Widelands::Map::SuggestedTeamLineup> m_suggested_teams;
+	int32_t const padding_;
+	int32_t const indent_;
+	int32_t const label_height_;
+	UI::Textarea * suggested_teams_box_label_;
+	UI::Box* lineup_box_;
+	std::vector<UI::Icon*> player_icons_;
+	std::vector<UI::Textarea*> vs_labels_;
+	std::vector<Widelands::Map::SuggestedTeamLineup> suggested_teams_;
 };
 
 }
