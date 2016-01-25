@@ -2767,7 +2767,6 @@ TerrainDescription
 
 	A static description of a terrain.
 */
-// NOCOM write tests
 const char LuaTerrainDescription::className[] = "TerrainDescription";
 const MethodType<LuaTerrainDescription> LuaTerrainDescription::Methods[] = {
 	METHOD(LuaTerrainDescription, probability_to_grow),
