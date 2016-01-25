@@ -24,7 +24,6 @@ fi
 until sudo apt-get install -qq \
    cmake \
    libboost-all-dev \
-   libglew-dev \
    libicu-dev \
    libpng-dev \
    libxml2-dev \
@@ -40,7 +39,7 @@ until sudo apt-get install -qq \
 # Configure the build
 mkdir build
 cd build
-cmake .. -DCMAKE_BUILD_TYPE:STRING="$BUILD_TYPE"
+cmake .. -DCMAKE_BUILD_TYPE:STRING="$BUILD_TYPE" -DOPTION_USE_GLBINDING:BOOL=ON
 
 # Any codecheck warning is an error in Debug builds. Keep the codebase clean!!
 if [ "$BUILD_TYPE" == "Debug" ]; then
