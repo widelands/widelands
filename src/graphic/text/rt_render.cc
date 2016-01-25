@@ -27,6 +27,7 @@
 
 #include <SDL.h>
 #include <boost/algorithm/string/predicate.hpp>
+#include <boost/algorithm/string/replace.hpp>
 #include <boost/format.hpp>
 
 #include "base/log.h"
@@ -46,6 +47,16 @@
 #include "io/filesystem/filesystem_exceptions.h"
 
 using namespace std;
+
+namespace {
+
+void replace_entities(std::string* text) {
+	boost::replace_all(*text, "&gt;", ">");
+	boost::replace_all(*text, "&lt;", "<");
+	boost::replace_all(*text, "&nbsp;", " ");
+}
+
+} // namespace
 
 namespace RT {
 
@@ -726,6 +737,7 @@ void TagHandler::m_make_text_nodes(const string& txt, vector<RenderNode*>& nodes
 
 			word = ts.till_any_or_end(" \t\n\r");
 			if (!word.empty()) {
+				replace_entities(&word);
 				bool word_is_bidi = i18n::has_rtl_character(word.c_str());
 				word = i18n::make_ligatures(word.c_str());
 				if (word_is_bidi || i18n::has_rtl_character(previous_word.c_str())) {
@@ -766,6 +778,7 @@ void TagHandler::m_make_text_nodes(const string& txt, vector<RenderNode*>& nodes
 			}
 			word = ts.till_any_or_end(" \t\n\r");
 			if (!word.empty()) {
+				replace_entities(&word);
 				word = i18n::make_ligatures(word.c_str());
 				if (i18n::has_cjk_character(word.c_str())) {
 					std::vector<std::string> units = i18n::split_cjk_word(word.c_str());
