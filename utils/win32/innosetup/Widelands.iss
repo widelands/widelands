@@ -100,7 +100,6 @@ Source: ..\..\..\tribes\*;                                  DestDir: {app}\tribe
 Source: ..\..\..\txts\*;                                    DestDir: {app}\txts\;      Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: "Widelands"
 Source: ..\..\..\world\*;                                   DestDir: {app}\world\;     Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: "Widelands"
 Source: ..\..\..\scripting\*;                               DestDir: {app}\scripting\; Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: "Widelands"
-Source: c:\msys64\mingw64\bin\libwinpthread-1.dll;          DestDir: {app};            Flags: ignoreversion;                                                       Components: "Widelands"
 Source: c:\msys64\mingw64\bin\libglbinding.dll;             DestDir: {app};            Flags: ignoreversion;                                                       Components: "Widelands"
 Source: c:\msys64\mingw64\bin\libicuuc56.dll;               DestDir: {app};            Flags: ignoreversion;                                                       Components: "Widelands"
 Source: c:\msys64\mingw64\bin\libbz2-1.dll;                 DestDir: {app};            Flags: ignoreversion;                                                       Components: "Widelands"
