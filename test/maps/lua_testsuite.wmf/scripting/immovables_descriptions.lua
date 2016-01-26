@@ -37,6 +37,15 @@ function test_descr:test_immovable_build_cost()
    assert_equal(2, build_cost["log"])
    assert_equal(4, build_cost["spidercloth"])
    assert_equal(nil, build_cost["wine"])
+
+   local total_cost = function(t)
+      local cost = 0
+      for name, count in pairs(t) do
+         cost = cost + count
+      end
+      return cost
+   end
+   assert_equal(16, total_cost(build_cost))
 end
 
 function test_descr:test_immovable_editor_category()

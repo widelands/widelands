@@ -1412,13 +1412,13 @@ int LuaMapObjectDescription::get_type_name(lua_State * L) {
 
 
 /* RST
-BuildingDescription
+ImmovableDescription
 -------------------
 
 .. class:: LuaImmovableDescription
 
 	A static description of a base immovable, so it can be used in help files
-	without having to access an actual immovalbe on the map.
+	without having to access an actual immovable on the map.
 	See also class MapObjectDescription for more properties.
 */
 const char LuaImmovableDescription::className[] = "ImmovableDescription";
@@ -2745,7 +2745,7 @@ int LuaResourceDescription::get_representative_image(lua_State * L) {
  */
 
 /* RST
-	.. method:: representative_image(amount)
+	.. method:: editor_image(amount)
 
 		:arg amount: The amount of the resource what we want an overlay image for
 
@@ -2826,9 +2826,9 @@ int LuaTerrainDescription::get_descname(lua_State * L) {
 }
 
 /* RST
-	.. attribute:: get_default_resource_descname
+	.. attribute:: get_default_resource_name
 
-			(RO) the :class:`string` description name of the default resource provided by this terrain, or
+			(RO) the :class:`string` internal name of the default resource provided by this terrain, or
 				  nil if the terrain has no default resource.
 */
 
@@ -2862,7 +2862,7 @@ int LuaTerrainDescription::get_default_resource_amount(lua_State * L) {
 */
 int LuaTerrainDescription::get_editor_category(lua_State * L) {
 	const EditorCategory& editor_category = get()->editor_category();
-	if (&editor_category) {
+	if (&editor_category != nullptr) {
 		lua_newtable(L);
 		lua_pushstring(L, "name");
 		lua_pushstring(L, editor_category.name());
@@ -2955,6 +2955,7 @@ int LuaTerrainDescription::get_valid_resources_names(lua_State * L) {
 		:type treename: :class:`string`
 
 		(RO) A double describing the probability that the given tree will grow on this terrain.
+			  Returns nil if the tree given has no terrain affinity or doesn't exist.
 */
 int LuaTerrainDescription::probability_to_grow(lua_State * L) {
 	if (lua_gettop(L) != 2) {

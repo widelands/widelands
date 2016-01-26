@@ -363,7 +363,7 @@ int LuaWorld::immovable_descriptions(lua_State* L) {
 	int index = 1;
 	for (DescriptionIndex i = 0; i < world.get_nr_immovables(); ++i) {
 		const ImmovableDescr* immovable = world.get_immovable_descr(i);
-		uint32_t attribute_id = immovable->get_attribute_id(attribute_name);
+		const uint32_t attribute_id = immovable->get_attribute_id(attribute_name);
 		if (immovable->has_attribute(attribute_id)) {
 			lua_pushint32(L, index++);
 			lua_pushstring(L, immovable->name());
@@ -377,7 +377,7 @@ int LuaWorld::immovable_descriptions(lua_State* L) {
 /* RST
 	.. method:: terrain_descriptions()
 
-		Returns a list of names with the terrains that are available in the worls.
+		Returns a list of names with the terrains that are available in the world.
 
 		(RO) a list of terrain names, e.g. {"wiese1", "wiese2", ...}
 */
