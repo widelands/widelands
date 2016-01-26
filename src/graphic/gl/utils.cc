@@ -18,6 +18,7 @@
 
 #include "graphic/gl/utils.h"
 
+#include <cassert>
 #include <memory>
 #include <string>
 
@@ -43,41 +44,24 @@ std::string shader_to_string(GLenum type) {
 
 }  // namespace
 
-GLenum _handle_glerror(const char * file, unsigned int line)
-{
-	GLenum err = glGetError();
-	if (err == GL_NO_ERROR)
-		return err;
-
-	log("%s:%d: OpenGL ERROR: ", file, line);
-
-	switch (err)
-	{
-	case GL_INVALID_VALUE:
-		log("invalid value\n");
-		break;
-	case GL_INVALID_ENUM:
-		log("invalid enum\n");
-		break;
-	case GL_INVALID_OPERATION:
-		log("invalid operation\n");
-		break;
-	case GL_STACK_OVERFLOW:
-		log("stack overflow\n");
-		break;
-	case GL_STACK_UNDERFLOW:
-		log("stack undeflow\n");
-		break;
-	case GL_OUT_OF_MEMORY:
-		log("out of memory\n");
-		break;
-	case GL_TABLE_TOO_LARGE:
-		log("table too large\n");
-		break;
+const char* gl_error_to_string(const GLenum err) {
+	CLANG_DIAG_OFF("-Wswitch-enum");
+#define LOG(a) case a: return #a
+	switch (err) {
+		LOG(GL_INVALID_ENUM);
+		LOG(GL_INVALID_OPERATION);
+		LOG(GL_INVALID_VALUE);
+		LOG(GL_NO_ERROR);
+		LOG(GL_OUT_OF_MEMORY);
+		LOG(GL_STACK_OVERFLOW);
+		LOG(GL_STACK_UNDERFLOW);
+		LOG(GL_TABLE_TOO_LARGE);
 	default:
-		log("unknown\n");
+		break;
 	}
-	return err;
+#undef LOG
+	CLANG_DIAG_ON("-Wswitch-enum");
+	return "unknown";
 }
 
 // Thin wrapper around a Shader object to ensure proper cleanup.
@@ -214,6 +198,7 @@ void State::bind_framebuffer(const GLuint framebuffer, const GLuint texture) {
 	if (framebuffer != 0) {
 		unbind_texture_if_bound(texture);
 		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, texture, 0);
+		assert(glCheckFramebufferStatus(GL_FRAMEBUFFER) == GL_FRAMEBUFFER_COMPLETE);
 	}
 	current_framebuffer_ = framebuffer;
 	current_framebuffer_texture_ = texture;
