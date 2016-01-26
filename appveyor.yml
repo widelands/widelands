@@ -16,7 +16,7 @@ shallow_clone: true
 
 branches:
   except:
-    _widelands_dev_widelands_trunk
+    - _widelands_dev_widelands_trunk
 
 build: 
   verbosity: detailed
