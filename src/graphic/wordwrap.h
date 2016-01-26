@@ -33,11 +33,6 @@ namespace UI {
  * Helper struct that provides word wrapping and related functionality.
  */
 struct WordWrap {
-	enum class Mode {
-		kDisplay,
-		kEditor
-	};
-
 	WordWrap();
 	WordWrap(const TextStyle & style, uint32_t wrapwidth = std::numeric_limits<uint32_t>::max());
 
@@ -46,7 +41,7 @@ struct WordWrap {
 
 	uint32_t wrapwidth() const;
 
-	void wrap(const std::string & text, WordWrap::Mode mode = WordWrap::Mode::kDisplay);
+	void wrap(const std::string & text);
 
 	uint32_t width() const;
 	uint32_t height() const;
@@ -81,8 +76,6 @@ private:
 	TextStyle m_style;
 	uint32_t m_wrapwidth;
 	bool m_draw_caret;
-
-	WordWrap::Mode mode_;
 
 	std::vector<LineData> m_lines;
 };

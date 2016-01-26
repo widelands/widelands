@@ -824,11 +824,11 @@ public:
 		if (a.has("align")) {
 			const std::string align = a["align"].get_string();
 			if (align == "right") {
-				m_ns.halign = UI::Align::Align_Left;
+				m_ns.halign = UI::Align::Align_Right;
 			} else if (align == "center" || align == "middle") {
 				m_ns.halign = UI::Align::Align_Center;
 			} else {
-				m_ns.halign = UI::Align::Align_Right;
+				m_ns.halign = UI::Align::Align_Left;
 			}
 		}
 		m_ns.halign = mirror_alignment(m_ns.halign);

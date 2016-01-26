@@ -566,7 +566,7 @@ void MultilineEditbox::Data::refresh_ww()
 	ww.set_style(textstyle);
 	ww.set_wrapwidth(owner.get_w() - ms_scrollbar_w);
 
-	ww.wrap(text, WordWrap::Mode::kEditor);
+	ww.wrap(text);
 	ww_valid = true;
 
 	int32_t textheight = ww.height();
