@@ -156,9 +156,9 @@ struct MapData {
 
 	bool compare_names(const MapData& other) {
 		// The parent directory gets special treatment.
-		if (localized_name == parent_name()) {
+		if (localized_name == parent_name() && maptype == MapData::MapType::kDirectory) {
 			return true;
-		} else if (other.localized_name == parent_name())  {
+		} else if (other.localized_name == parent_name() && other.maptype == MapData::MapType::kDirectory)  {
 			return false;
 		}
 
