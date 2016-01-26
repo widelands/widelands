@@ -6,24 +6,21 @@ Uploaders:
   Martin Quinson <mquinson@debian.org>,
   Enrico Tassi <gareuselesinge@debian.org> 
 Standards-Version: 3.9.5
-# glbinding is packaged in PPA: ~cginternals/+archive/ubuntu/ppa. For now it is not 
-# a strict requirement, but we'd like our PPA to be build using it. If you do not want to use it
-# install libglew1.6-dev | libglew-dev and disable OPTION_USE_GLBINDING in rules.
 Build-Depends: debhelper (>= 9), 
-  cmake, 
-  doxygen, 
-  glbinding,
-  imagemagick,
-  libboost-regex1.48-dev | libboost-regex-dev, 
-  libboost-test1.48-dev | libboost-test-dev, 
-  libboost1.48-dev | libboost-dev, 
-  libpng-dev, 
   libsdl2-dev, 
   libsdl2-image-dev, 
   libsdl2-mixer-dev, 
   libsdl2-net-dev, 
   libsdl2-ttf-dev, 
   python, 
+  libboost1.48-dev | libboost-dev, 
+  libboost-regex1.48-dev | libboost-regex-dev, 
+  libboost-test1.48-dev | libboost-test-dev, 
+  doxygen, 
+  cmake, 
+  imagemagick,
+  libglew1.6-dev | libglew-dev,
+  libpng-dev, 
   zlib1g-dev
 Vcs-Git: git://git.debian.org/git/pkg-games/widelands.git
 Vcs-Browser: http://anonscm.debian.org/gitweb/?p=pkg-games/widelands.git
