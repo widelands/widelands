@@ -87,8 +87,9 @@ void MultilineTextarea::recompute()
 	for (int i = 0; i < 2; ++i) {
 		if (m_text.compare(0, 3, "<rt")) {
 			isrichtext = false;
-			boost::replace_all(m_text, "\n", "<br>");
-			const Image* text_im = UI::g_fh1->render(as_uifont(m_text, m_style.font->size(), m_style.fg),
+			std::string text_to_render = richtext_escape(m_text);
+			boost::replace_all(text_to_render, "\n", "<br>");
+			const Image* text_im = UI::g_fh1->render(as_uifont(text_to_render, m_style.font->size(), m_style.fg),
 																  get_eff_w() - 2 * RICHTEXT_MARGIN);
 			height = text_im->height();
 		} else {
@@ -152,8 +153,11 @@ void MultilineTextarea::draw(RenderTarget & dst)
 	if (isrichtext) {
 		rt.draw(dst, Point(RICHTEXT_MARGIN, RICHTEXT_MARGIN - m_scrollbar.get_scrollpos()));
 	} else {
-		const Image* text_im = UI::g_fh1->render(as_aligned(m_text, m_align, m_style.font->size(), m_style.fg),
-															  get_eff_w() - 2 * RICHTEXT_MARGIN);
+		std::string text_to_render = richtext_escape(m_text);
+		boost::replace_all(text_to_render, "\n", "<br>");
+		const Image* text_im =
+				UI::g_fh1->render(as_aligned(text_to_render, m_align, m_style.font->size(), m_style.fg),
+										get_eff_w() - 2 * RICHTEXT_MARGIN);
 
 		uint32_t blit_width = std::min(text_im->width(), static_cast<int>(get_eff_w()));
 		uint32_t blit_height = std::min(text_im->height(), static_cast<int>(get_inner_h()));
