@@ -103,9 +103,10 @@ Texture::Texture(int w, int h)
 {
 	init(w, h);
 
-	if (width() <= 0 || height() <= 0) {
+	if (m_blit_data.texture_id == 0) {
 		return;
 	}
+
 	glTexImage2D
 		(GL_TEXTURE_2D, 0, static_cast<GLint>(GL_RGBA), width(), height(), 0, GL_RGBA,
 			GL_UNSIGNED_BYTE, nullptr);
@@ -187,7 +188,7 @@ void Texture::init(uint16_t w, uint16_t h)
 		w, h,
 		Rect(0, 0, w, h),
 	};
-	if (width() <= 0 || height() <= 0) {
+	if (w * h == 0) {
 		return;
 	}
 
@@ -203,7 +204,7 @@ void Texture::init(uint16_t w, uint16_t h)
 }
 
 void Texture::lock() {
-	if (width() <= 0 || height() <= 0) {
+	if (m_blit_data.texture_id == 0) {
 		return;
 	}
 
@@ -263,6 +264,7 @@ void Texture::set_pixel(uint16_t x, uint16_t y, const RGBAColor& color) {
 
 
 void Texture::setup_gl() {
+	assert(m_blit_data.texture_id != 0);
 	Gl::State::instance().bind_framebuffer(
 	   GlFramebuffer::instance().id(), m_blit_data.texture_id);
 	glViewport(0, 0, width(), height());
@@ -272,6 +274,9 @@ void Texture::do_blit(const FloatRect& dst_rect,
                      const BlitData& texture,
                      float opacity,
                      BlendMode blend_mode) {
+	if (m_blit_data.texture_id == 0) {
+		return;
+	}
 	setup_gl();
 	BlitProgram::instance().draw(dst_rect, 0.f, texture, BlitData{0, 0, 0, Rect()},
 	                             RGBAColor(0, 0, 0, 255 * opacity), blend_mode);
@@ -282,6 +287,9 @@ void Texture::do_blit_blended(const FloatRect& dst_rect,
                               const BlitData& mask,
                               const RGBColor& blend) {
 
+	if (m_blit_data.texture_id == 0) {
+		return;
+	}
 	setup_gl();
 	BlitProgram::instance().draw(dst_rect, 0.f, texture, mask, blend, BlendMode::UseAlpha);
 }
@@ -289,18 +297,27 @@ void Texture::do_blit_blended(const FloatRect& dst_rect,
 void Texture::do_blit_monochrome(const FloatRect& dst_rect,
                                  const BlitData& texture,
                                  const RGBAColor& blend) {
+	if (m_blit_data.texture_id == 0) {
+		return;
+	}
 	setup_gl();
 	BlitProgram::instance().draw_monochrome(dst_rect, 0.f, texture, blend);
 }
 
 void
 Texture::do_draw_line(const FloatPoint& start, const FloatPoint& end, const RGBColor& color, int line_width) {
+	if (m_blit_data.texture_id == 0) {
+		return;
+	}
 	setup_gl();
 	DrawLineProgram::instance().draw(start, end, 0.f, color, line_width);
 }
 
 void
 Texture::do_fill_rect(const FloatRect& dst_rect, const RGBAColor& color, BlendMode blend_mode) {
+	if (m_blit_data.texture_id == 0) {
+		return;
+	}
 	setup_gl();
 	FillRectProgram::instance().draw(dst_rect, 0.f, color, blend_mode);
 }

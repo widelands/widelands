@@ -20,6 +20,7 @@
 #define WL_GRAPHIC_GL_UTILS_H
 
 #include <memory>
+#include <string>
 #include <unordered_map>
 #include <unordered_set>
 #include <vector>
@@ -35,7 +36,8 @@ namespace Gl {
 
 class Shader;
 
-GLenum _handle_glerror(const char * file, unsigned int line);
+// Returns the name of the 'error'.
+const char* gl_error_to_string(GLenum error);
 
 // Thin wrapper around a OpenGL program object to ensure proper cleanup. Throws
 // on all errors.
@@ -146,11 +148,5 @@ void vertex_attrib_pointer(int vertex_index, int num_items, int stride, int offs
 void swap_rows(int width, int height, int pitch, int bpp, uint8_t* pixels);
 
 }  // namespace Gl
-
-/**
- * handle_glerror() is intended to make debugging of OpenGL easier. It logs the
- * error code returned by glGetError and returns the error code.
- */
-#define handle_glerror() Gl::_handle_glerror(__FILE__, __LINE__)
 
 #endif  // end of include guard: WL_GRAPHIC_GL_UTILS_H
