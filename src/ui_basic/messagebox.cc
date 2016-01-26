@@ -21,6 +21,7 @@
 
 #include "base/i18n.h"
 #include "graphic/font_handler.h"
+#include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
 #include "ui_basic/button.h"
 #include "ui_basic/multilinetextarea.h"
@@ -61,8 +62,8 @@ WLMessageBox::WLMessageBox
 		 text.c_str(), align);
 
 	uint32_t width, height;
-	std::string font = d->textarea->get_font_name();
-	int32_t fontsize = d->textarea->get_font_size();
+	std::string font = UI::g_fh1->fontset().serif();
+	int32_t fontsize = UI_FONT_SIZE_SMALL;
 
 	UI::g_fh->get_size(font, fontsize, text, width, height, maxwidth);
 	// stupid heuristic to avoid excessively long lines
