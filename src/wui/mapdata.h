@@ -112,6 +112,12 @@ struct MapData {
 		maptype = MapData::MapType::kDirectory;
 	}
 
+	/// The localized name of the parent directory
+	static const std::string parent_name() {
+		/** TRANSLATORS: Parent directory/folder */
+		return (boost::format("\\<%s\\>") % _("parent")).str();
+	}
+
 	/// Get the ".." directory
 	static MapData create_parent_dir(const std::string& current_dir) {
 #ifndef _WIN32
@@ -119,7 +125,7 @@ struct MapData {
 #else
 		const std::string filename = current_dir.substr(0, current_dir.rfind('\\'));
 #endif
-		return MapData(filename, (boost::format("\\<%s\\>") % _("parent")).str());
+		return MapData(filename, parent_name());
 	}
 
 	/// Create a subdirectory
@@ -149,6 +155,13 @@ struct MapData {
 	MapData::DisplayType displaytype;
 
 	bool compare_names(const MapData& other) {
+		// The parent directory gets special treatment.
+		if (localized_name == parent_name()) {
+			return true;
+		} else if (other.localized_name == parent_name())  {
+			return false;
+		}
+
 		std::string this_name;
 		std::string other_name;
 		switch (displaytype) {
