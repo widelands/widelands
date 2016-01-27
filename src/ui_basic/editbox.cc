@@ -468,12 +468,17 @@ void EditBox::draw(RenderTarget & odst)
 	const int margin = 4;
 	const int max_width = get_w() - 2 * margin;
 
-	Point point(0, get_h() >> 1);
+	// TODO(GunChleoc): Hacking the fontsize until we have fully dynamic layout
+	const Image* entry_text_im =
+			UI::g_fh1->render(as_editorfont(m->text,
+													  m->fontsize - UI::g_fh1->fontset().size_offset(),
+													  m->fontcolor));
 
-	// NOCOM point.x += m->scrolloffset;
+	int linewidth = entry_text_im->width();
+	int lineheight = entry_text_im->height();
 
-	const Image* entry_text_im = UI::g_fh1->render(as_editorfont(m->text, m->fontsize, m->fontcolor));
 	Align alignment = mirror_alignment(m->align);
+	Point point(0, lineheight >> 1);
 
 	if (alignment & Align_Right) {
 		point.x += max_width;
@@ -481,9 +486,7 @@ void EditBox::draw(RenderTarget & odst)
 		point.x += max_width / 2;
 	}
 
-	// Add an offset for rightmost column when the scrollbar is shown.
-	int linewidth = entry_text_im->width();
-	int lineheight = entry_text_im->height();
+
 
 	UI::correct_for_align(alignment, linewidth, entry_text_im->height(), &point);
 
@@ -491,16 +494,19 @@ void EditBox::draw(RenderTarget & odst)
 	if (max_width < linewidth) {
 		// We want this always on, e.g. for mixed language savegame filenames
 		if (i18n::has_rtl_character(m->text.c_str(), 20)) { // Restrict check for efficiency
+			log("NOCOM rtl %d %d, %d %d\n", point.x, point.y, linewidth - max_width, point.y);
 			dst.blitrect(point,
 							 entry_text_im,
-							 Rect(linewidth - max_width, 0, linewidth, lineheight));
+							 Rect(linewidth - max_width, point.y, linewidth, lineheight));
 		}
 		else {
+			log("NOCOM ltr %d %d, %d %d\n", point.x+ margin, point.y, point.x - m->scrolloffset, point.y);
 			dst.blitrect(Point(point.x + margin, point.y),
 							 entry_text_im,
 							 Rect(Point(point.x - m->scrolloffset, point.y), max_width, lineheight));
 		}
 	} else {
+		log("NOCOM short %d %d, %d %d\n", point.x + margin, point.y, point.x, point.y);
 		dst.blitrect(Point(point.x + margin, point.y), entry_text_im, Rect(point, max_width, lineheight));
 	}
 
