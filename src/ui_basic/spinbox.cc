@@ -24,6 +24,7 @@
 #include <boost/format.hpp>
 
 #include "base/i18n.h"
+#include "base/log.h"
 #include "base/wexception.h"
 #include "graphic/font_handler1.h"
 #include "graphic/text/font_set.h"
@@ -119,12 +120,12 @@ SpinBox::SpinBox
 					w, unit_w, no_padding, padding);
 	}
 
-#ifndef NDEBUG //  only in debug builds
-	if (unit_w < (is_big ? 7 * texth : 3 * buttonh)) {
-		throw wexception("Not enough space to draw spinbox. Width %d is smaller than required width %d",
-							  unit_w, (is_big ? 7 * texth : 3 * buttonh));
+	if (unit_w < (is_big ? 7 * buttonh : 3 * buttonh)) {
+		log("Not enough space to draw spinbox \"%s\".\n"
+			 "Width %d is smaller than required width %d."
+			 "Please report as a bug.\n",
+			 label_text.c_str(), unit_w, (is_big ? 7 * buttonh : 3 * buttonh));
 	}
-#endif
 
 	box_ = new UI::Box(this, 0, 0, UI::Box::Horizontal, actual_w, texth, padding);
 
