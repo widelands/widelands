@@ -345,7 +345,7 @@ void Table<void *>::draw(RenderTarget & dst)
 				curx += curw;
 				continue;
 			}
-			const Image* entry_text_im = UI::g_fh1->render(as_uifont(entry_string, m_fontsize));
+			const Image* entry_text_im = UI::g_fh1->render(as_uifont(richtext_escape(entry_string), m_fontsize));
 
 			if (alignment & Align_Right) {
 				point.x += curw - 2 * picw;
