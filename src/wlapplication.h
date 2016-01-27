@@ -253,6 +253,7 @@ private:
 
 	/// Absolute path to the data directory.
 	std::string m_datadir;
+	std::string m_datadir_for_testing;
 
 	///Holds this process' one and only instance of WLApplication, if it was
 	///created already. nullptr otherwise.
