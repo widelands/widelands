@@ -280,7 +280,6 @@ protected:
 		uint32_t m_destination;
 		uint8_t  m_ship_state;
 		std::string m_shipname;
-		uint32_t m_shipname_index;
 		std::unique_ptr<Expedition> m_expedition;
 		std::vector<ShippingItem::Loader> m_items;
 	};
