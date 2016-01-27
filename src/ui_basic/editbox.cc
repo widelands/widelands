@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003, 2006-2008, 2010-2011 by the Widelands Development Team
+ * Copyright (C) 2003-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,16 +21,47 @@
 
 #include <limits>
 
+#include <boost/format.hpp>
 #include <SDL_keycode.h>
 
-#include "graphic/font_handler.h"
+#include "base/log.h"
+#include "graphic/font_handler.h" // NOCOM get rid
 #include "graphic/font_handler1.h"
 #include "graphic/rendertarget.h"
+#include "graphic/text/bidi.h"
 #include "graphic/text/font_set.h"
 #include "graphic/text_constants.h"
 #include "ui_basic/mouse_constants.h"
 
 // TODO(GunChleoc): Arabic: Fix positioning for Arabic
+
+namespace {
+// NOCOM copied from wordwrap - consolidate?
+std::string as_editorfont(const std::string& text,
+								  int ptsize = UI_FONT_SIZE_SMALL,
+								  const RGBColor& clr = UI_FONT_CLR_FG) {
+	// UI Text is always bold due to historic reasons
+	static boost::format
+			f("<rt keep_spaces=1><p><font face=serif size=%i bold=1 shadow=1 color=%s>%s</font></p></rt>");
+	f % ptsize;
+	f % clr.hex_value();
+	f % richtext_escape(text);
+	return f.str();
+}
+
+// This is inefficient; only call when we need the exact width.
+uint32_t text_width(const std::string& text, int ptsize) {
+	return UI::g_fh1->render(as_editorfont(text, ptsize - UI::g_fh1->fontset().size_offset()))->width();
+}
+
+// This is inefficient; only call when we need the exact height.
+uint32_t text_height(const std::string& text, int ptsize) {
+	return UI::g_fh1->render(as_editorfont(text.empty() ? "." : text,
+														ptsize - UI::g_fh1->fontset().size_offset()))->height();
+}
+
+} // namespace
+
 
 namespace UI {
 
@@ -429,32 +460,64 @@ void EditBox::draw(RenderTarget & odst)
 		dst.fill_rect(Rect(Point(1, 0), 1, get_h() - 2), black);
 	}
 
-	if (has_focus())
+	if (has_focus()) {
 		dst.brighten_rect
 			(Rect(Point(0, 0), get_w(), get_h()), MOUSE_OVER_BRIGHT_FACTOR);
-
-	Point pos(4, get_h() >> 1);
-
-	switch (m->align & Align_Horizontal) {
-	case Align_HCenter:
-		pos.x = get_w() >> 1;
-		break;
-	case Align_Right:
-		pos.x = get_w() - 4;
-		break;
-	default:
-		break;
 	}
 
-	pos.x += m->scrolloffset;
+	const int margin = 4;
+	const int max_width = get_w() - 2 * margin;
 
-	UI::g_fh->draw_text
-		(dst,
-		 TextStyle::makebold(Font::get(m->fontname, m->fontsize), m->fontcolor),
-		 pos,
-		 m->text,
-		 align(),
-		 has_focus() ? static_cast<int32_t>(m->caret) : std::numeric_limits<uint32_t>::max());
+	Point point(0, get_h() >> 1);
+
+	// NOCOM point.x += m->scrolloffset;
+
+	const Image* entry_text_im = UI::g_fh1->render(as_editorfont(m->text, m->fontsize, m->fontcolor));
+	Align alignment = mirror_alignment(m->align);
+
+	if (alignment & Align_Right) {
+		point.x += max_width;
+	} else if (alignment & Align_HCenter) {
+		point.x += max_width / 2;
+	}
+
+	// Add an offset for rightmost column when the scrollbar is shown.
+	int linewidth = entry_text_im->width();
+	int lineheight = entry_text_im->height();
+
+	UI::correct_for_align(alignment, linewidth, entry_text_im->height(), &point);
+
+	// Crop to field width while blitting
+	if (max_width < linewidth) {
+		// We want this always on, e.g. for mixed language savegame filenames
+		if (i18n::has_rtl_character(m->text.c_str(), 20)) { // Restrict check for efficiency
+			dst.blitrect(point,
+							 entry_text_im,
+							 Rect(linewidth - max_width, 0, linewidth, lineheight));
+		}
+		else {
+			dst.blitrect(Point(point.x + margin, point.y),
+							 entry_text_im,
+							 Rect(Point(point.x - m->scrolloffset, point.y), max_width, lineheight));
+		}
+	} else {
+		dst.blitrect(Point(point.x + margin, point.y), entry_text_im, Rect(point, max_width, lineheight));
+	}
+
+	if (has_focus()) {
+		// Draw the caret
+		std::string line_to_caret = m->text.substr(0, m->caret);
+		// TODO(GunChleoc): Arabic: Fix cursor position for BIDI text.
+		int caret_x = text_width(line_to_caret, m->fontsize);
+
+		const uint16_t fontheight = text_height(m->text, m->fontsize);
+
+		const Image* caret_image = g_gr->images().get("pics/caret.png");
+		Point caretpt;
+		caretpt.x = point.x + margin + m->scrolloffset + caret_x - caret_image->width() + LINE_MARGIN;
+		caretpt.y = point.y + (fontheight - caret_image->height()) / 2;
+		dst.blit(caretpt, caret_image);
+	}
 }
 
 /**
