@@ -248,9 +248,9 @@ void Table<void *>::fit_height(uint32_t entries) {
 	if (entries == 0) {
 		entries = size();
 	}
-	uint32_t tablewidth;
-	uint32_t tableheight;
-	get_desired_size(tablewidth, tableheight);
+	int tablewidth;
+	int tableheight;
+	get_desired_size(&tablewidth, &tableheight);
 	tableheight = m_headerheight + 2 + get_lineheight() * entries;
 	set_desired_size(tablewidth, tableheight);
 }
