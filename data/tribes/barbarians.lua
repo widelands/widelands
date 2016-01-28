@@ -253,7 +253,7 @@ tribes:new_tribe {
       "Hrothgar",
       "Ingeld",
       "Karl Hundason",
-      "Khantrukh",  
+      "Khantrukh",
       "Lynx",
       "Mani",
       "Odin",
