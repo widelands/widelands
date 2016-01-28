@@ -54,12 +54,24 @@ std::string as_window_title(const std::string& txt) {
 	f % txt;
 	return f.str();
 }
+
 std::string as_uifont(const std::string & txt, int size, const RGBColor& clr) {
+	return as_aligned(txt, UI::Align::Align_Left, size, clr);
+}
+
+std::string as_aligned(const std::string & txt, UI::Align align, int ptsize, const RGBColor& clr) {
+	std::string alignment = "left";
+	if ((align & UI::Align_Horizontal) == UI::Align::Align_Right) {
+		alignment = "right";
+	} else if ((align & UI::Align_Horizontal) == UI::Align::Align_HCenter) {
+		alignment = "center";
+	}
+
 	// UI Text is always bold due to historic reasons
 	static boost::format
-			f("<rt><p><font face=serif size=%i bold=1 shadow=1 color=%s>%s</font></p></rt>");
-
-	f % size;
+			f("<rt><p align=%s><font face=serif size=%i bold=1 shadow=1 color=%s>%s</font></p></rt>");
+	f % alignment;
+	f % ptsize;
 	f % clr.hex_value();
 	f % txt;
 	return f.str();

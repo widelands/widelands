@@ -115,8 +115,8 @@ public:
 		 AbstractWaresDisplay(parent, x, y, tribe, Widelands::wwWARE, true, callback_function),
 		 color_map_(color_map)
 	{
-		uint32_t w, h;
-		get_desired_size(w, h);
+		int w, h;
+		get_desired_size(&w, &h);
 		set_size(w, h);
 	}
 protected:
