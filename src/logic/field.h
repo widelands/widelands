@@ -74,10 +74,10 @@ struct Field {
 	using ResourceAmount = uint8_t;
 
 	struct Terrains {
-		TerrainIndex d, r;
+		DescriptionIndex d, r;
 	};
 	static_assert(sizeof(Terrains) == 2, "assert(sizeof(Terrains) == 2) failed.");
-	struct Resources        {ResourceIndex  d : 4, r : 4;};
+	struct Resources        {DescriptionIndex  d : 4, r : 4;};
 	static_assert(sizeof(Resources) == 1, "assert(sizeof(Resources) == 1) failed.");
 	struct ResourceAmounts {ResourceAmount d : 4, r : 4;};
 	static_assert(sizeof(ResourceAmounts) == 1, "assert(sizeof(ResourceAmounts) == 1) failed.");
@@ -115,7 +115,6 @@ private:
 	BaseImmovable * immovable;
 
 	uint8_t caps                    : 7;
-	uint8_t buildhelp_overlay_index : 3;
 	uint8_t roads                   : 6;
 
 	Height height;
@@ -123,7 +122,7 @@ private:
 
 	OwnerInfoAndSelectionsType owner_info_and_selections;
 
-	ResourceIndex m_resources; ///< Resource type on this field, if any
+	DescriptionIndex m_resources; ///< Resource type on this field, if any
 	uint8_t m_initial_res_amount; ///< Initial amount of m_resources
 	uint8_t m_res_amount; ///< Current amount of m_resources
 
@@ -135,18 +134,18 @@ public:
 	uint16_t get_caps()     const {return caps;}
 
 	Terrains      get_terrains() const {return terrains;}
-	TerrainIndex terrain_d   () const {return terrains.d;}
-	TerrainIndex terrain_r   () const {return terrains.r;}
+	DescriptionIndex terrain_d   () const {return terrains.d;}
+	DescriptionIndex terrain_r   () const {return terrains.r;}
 	void          set_terrains(const Terrains & i) {terrains = i;}
 	void set_terrain
-		(const TCoords<FCoords>::TriangleIndex& t, TerrainIndex const i)
+		(const TCoords<FCoords>::TriangleIndex& t, DescriptionIndex const i)
 
 	{
 		if (t == TCoords<FCoords>::D) set_terrain_d(i);
 		else set_terrain_r(i);
 	}
-	void set_terrain_d(TerrainIndex const i) {terrains.d = i;}
-	void set_terrain_r(TerrainIndex const i) {terrains.r = i;}
+	void set_terrain_d(DescriptionIndex const i) {terrains.d = i;}
+	void set_terrain_r(DescriptionIndex const i) {terrains.r = i;}
 
 	Bob * get_first_bob() const {return bobs;}
 	const BaseImmovable * get_immovable() const {return immovable;}
@@ -191,11 +190,6 @@ public:
 			(owner_info_and_selections & ~Border_Bitmask) | (b << Border_Bit);
 	}
 
-	uint8_t get_buildhelp_overlay_index() const {return buildhelp_overlay_index;}
-	void set_buildhelp_overlay_index(BuildhelpIndex const i) {
-		buildhelp_overlay_index = i;
-	}
-
 	int32_t get_roads() const {return roads;}
 	int32_t get_road(int32_t const dir) const {
 		return (roads >> dir) & RoadType::kMask;
@@ -205,18 +199,10 @@ public:
 		roads |= type << dir;
 	}
 
-	// TODO(unknown): This should return ResourceIndex
+	// Resources can be set through Map::set_resources()
+	// TODO(unknown): This should return DescriptionIndex
 	uint8_t get_resources() const {return m_resources;}
 	uint8_t get_resources_amount() const {return m_res_amount;}
-	void set_resources(uint8_t const res, uint8_t const amount) {
-		m_resources  = res;
-		m_res_amount = amount;
-	}
-
-	// TODO(unknown): This should take uint8_t
-	void set_initial_res_amount(int32_t const amount) {
-		m_initial_res_amount = amount;
-	}
 	// TODO(unknown): This should return uint8_t
 	int32_t get_initial_res_amount() const {return m_initial_res_amount;}
 

@@ -20,10 +20,11 @@
 #ifndef WL_EDITOR_UI_MENUS_EDITOR_MAIN_MENU_H
 #define WL_EDITOR_UI_MENUS_EDITOR_MAIN_MENU_H
 
+#include "ui_basic/box.h"
 #include "ui_basic/button.h"
 #include "ui_basic/unique_window.h"
 
-struct EditorInteractive;
+class EditorInteractive;
 
 /**
  * This represents the main menu
@@ -33,15 +34,16 @@ struct EditorMainMenu : public UI::UniqueWindow {
 
 private:
 	EditorInteractive & eia();
-	UI::Button m_button_new_map;
-	UI::Button m_button_new_random_map;
-	UI::Button m_button_load_map;
-	UI::Button m_button_save_map;
-	UI::Button m_button_map_options;
-	UI::Button m_button_view_readme;
-	UI::Button m_button_exit_editor;
+	UI::Box box_;
+	UI::Button button_new_map_;
+	UI::Button button_new_random_map_;
+	UI::Button button_load_map_;
+	UI::Button button_save_map_;
+	UI::Button button_map_options_;
+	UI::Button button_view_readme_;
+	UI::Button button_exit_editor_;
 
-	UI::UniqueWindow::Registry m_window_readme;
+	UI::UniqueWindow::Registry window_readme_;
 
 	void exit_btn       ();
 	void load_btn       ();

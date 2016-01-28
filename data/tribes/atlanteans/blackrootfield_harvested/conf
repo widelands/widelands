@@ -1,9 +1,0 @@
-program=disappear
-
-[disappear]
-animate=idle 50000
-remove=
-
-[idle]
-pics=blackrootfield_harvested_??.png
-hotspot=26 16

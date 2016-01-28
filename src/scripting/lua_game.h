@@ -20,7 +20,7 @@
 #ifndef WL_SCRIPTING_LUA_GAME_H
 #define WL_SCRIPTING_LUA_GAME_H
 
-#include "logic/building.h"
+#include "logic/map_objects/tribes/building.h"
 #include "logic/message_id.h"
 #include "scripting/lua.h"
 #include "scripting/lua_bases.h"
@@ -65,6 +65,7 @@ public:
 	int get_defeated(lua_State * L);
 	int get_inbox(lua_State * L);
 	int get_team(lua_State * L);
+	int get_tribe(lua_State * L);
 	int set_team(lua_State * L);
 	int get_see_all(lua_State * L);
 	int set_see_all(lua_State * L);
@@ -95,7 +96,7 @@ public:
 private:
 	void m_parse_building_list
 		(lua_State *, const Widelands::TribeDescr &,
-		 std::vector<Widelands::BuildingIndex> &);
+		 std::vector<Widelands::DescriptionIndex> &);
 	int m_allow_forbid_buildings(lua_State * L, bool);
 
 };
@@ -168,6 +169,8 @@ public:
 	int get_field(lua_State * L);
 	int get_status(lua_State * L);
 	int set_status(lua_State * L);
+	int get_heading(lua_State * L);
+	int get_icon_name(lua_State * L);
 
 	/*
 	 * Lua Methods

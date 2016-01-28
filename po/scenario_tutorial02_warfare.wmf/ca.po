@@ -2,13 +2,13 @@
 # Copyright (C) 2005-2015 Widelands Development Team
 # 
 # Translators:
-# Juanjo, 2015
+# Juanjo, 2015-2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-09-12 10:50+0000\n"
-"PO-Revision-Date: 2015-09-12 13:47+0000\n"
+"POT-Creation-Date: 2015-12-14 05:31+0000\n"
+"PO-Revision-Date: 2016-01-01 15:09+0000\n"
 "Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -134,8 +134,8 @@ msgstr "Un soldat creat recentment no té experiència i no és molt bo lluitant
 msgid ""
 "One of these training sites is the battle arena. It is a big and expensive "
 "building, and it trains soldiers in evade. Since soldiers get very hungry "
-"during their workout, this building needs a lot of food and strongbeer. In a"
-" real game, you should have a good infrastructure before you build it."
+"during their workout, this building needs a lot of food and strong beer. In "
+"a real game, you should have a good infrastructure before you build it."
 msgstr "Una d'aquestes zones d'entrenament és la palestra. És un edifici gran i car i entrena els soldats en l'evasió. Com els soldats acaben amb molta gana després de l'entrenament, aquest edifici necessita molt menjar i cervesa negra. En una partida real hauríeu de tenir una molt bona indústria d'alimentació abans de construir-lo."
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:53
@@ -160,7 +160,7 @@ msgstr "Construïu una palestra d'entrenament. És un edifici gran."
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:63
 msgid ""
 "Since the construction will take some time, you can change the game speed "
-"using PAGE UP and PAGE DOWN."
+"using Page Up and Page Down."
 msgstr "Com la construcció tardarà una mica, pots canviar la velocitat de la partida usant les tecles «Av Pàg» i «Re Pàg»."
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:71
@@ -176,8 +176,8 @@ msgstr "Molt bé! La nostra palestra d'entrenament s'ha completat i els soldats 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:74
 msgid ""
 "The needed wares are also delivered there. For successful training, you need"
-" pitta bread and strongbeer, as well as either fish or meat."
-msgstr "S'enviaran automàticament els béns necessaris. Per a un entrenament amb èxit es necessita pita i cervesa negra, així com peix o carn."
+" pitta bread and strong beer, as well as either fish or meat."
+msgstr "S'enviaran automàticament els béns necessaris. Per un entrenament amb èxit es necessita pita i cervesa negra, així com peix o carn."
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:75
 msgid ""
@@ -247,7 +247,7 @@ msgstr "Genial. S'ha acabat de construir el camp d'entrenament. Ara res ens impe
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:108
 msgid ""
 "To train in the training camp, our soldiers need food like in the battle "
-"arena, but no strongbeer. Instead, they need different axes for attack "
+"arena, but no strong beer. Instead, they need different axes for attack "
 "training and helmets for health training."
 msgstr "Per entrenar al camp d'entrenament, els nostres soldats necessiten menjar com a la palestra. Però no necessiten cervesa negra. En el seu lloc, necessiten diferents destrals per entrenar l'atac i cascos per entrenar la salut."
 
@@ -347,7 +347,7 @@ msgid ""
 "The third number indicates the missing soldiers. From the eight soldiers (1 "
 "+ 5 + 2) you wish to have here, two may have died. They will be replaced by "
 "new soldiers from your warehouse, if possible."
-msgstr "El tercer nombre indica el nombre de soldats que falten. Dels 8 soldats (1 + 5 + 2) que voldríeu tenir aquí, dos poden haver mort. Seran substituïts tan aviat com sigui possible amb soldats que no tinguin assignats."
+msgstr "El tercer nombre indica el nombre de soldats que falten. Dels 8 soldats (1+5+2) que voldríeu tenir aquí, dos poden haver mort. Seran substituïts tan aviat com sigui possible amb soldats que no tinguin assignats."
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:143
 msgid "Dismantle your sentry"
@@ -542,6 +542,7 @@ msgid ""
 msgstr "Ja esteu preparats per jugar les campanyes. T'ensenyaran les economies de cada cultura. També podeu jugar els altres tutorials, però no són fonamentals per realitzar les campanyes."
 
 #: ../../scripting/format_scenario.lua:36
+#, lua-format
 msgid "“%s”"
 msgstr "“%s”"
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006-2009, 2011-2013 by the Widelands Development Team
+ * Copyright (C) 2004, 2006-2009, 2011-2013, 2015 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -130,7 +130,6 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby
 	servername  .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 
 	// prepare the lists
-	clientsonline .set_font(m_fn, m_fs);
 	std::string t_tip = (boost::format("%s%s%s%s%s%s%s%s%s%s")
 		% "<rt><p><font underline=yes>"
 		% _("User Status")
@@ -432,11 +431,18 @@ DIAG_ON("-Wold-style-cast")
 /// called when the 'host game' button was clicked
 void FullscreenMenuInternetLobby::clicked_hostgame()
 {
-	// Save selected servername as default for next time.
-	g_options.pull_section("global").set_string("servername", servername.text());
+	// Save selected servername as default for next time and during that take care that the name is not empty.
+	std::string servername_ui = servername.text();
+	if (servername_ui.empty()) {
+		/** TRANSLATORS: This is shown for multiplayer games when no host */
+		/** TRANSLATORS: server to connect to has been specified yet. */
+		servername_ui = pgettext("server_name", "unnamed");
+	}
+
+	g_options.pull_section("global").set_string("servername", servername_ui);
 
 	// Set up the game
-	InternetGaming::ref().set_local_servername(servername.text());
+	InternetGaming::ref().set_local_servername(servername_ui);
 
 	// Start the game
 	NetHost netgame(InternetGaming::ref().get_local_clientname(), true);

@@ -23,12 +23,13 @@
 
 #include <stdint.h>
 
+#include "base/wexception.h"
 #include "editor/tools/editor_increase_resources_tool.h"
 #include "logic/editor_game_base.h"
 #include "logic/findnode.h"
 #include "logic/map.h"
-#include "logic/world/map_gen.h"
-#include "logic/world/world.h"
+#include "logic/map_objects/world/map_gen.h"
+#include "logic/map_objects/world/world.h"
 #include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
 
@@ -105,16 +106,13 @@ void MapGenerator::generate_bobs
 			(fc,
 			 bobCategory->get_immovable
 			 	(static_cast<size_t>(rng.rand() / (kMaxElevation / num))),
-			 nullptr);
+			 MapObjectDescr::OwnerType::kWorld);
 
 	if (set_moveable && (num = bobCategory->num_critters()))
-		egbase_.create_bob
-			(fc,
-			 egbase_.world().get_bob
-			 	(bobCategory->get_critter
-			 	 	(static_cast<size_t>(rng.rand() / (kMaxElevation / num)))
-			 	 .c_str()),
-			 nullptr);
+		egbase_.create_critter(
+		   fc, egbase_.world().get_bob(
+		          bobCategory->get_critter(static_cast<size_t>(rng.rand() / (kMaxElevation / num)))
+		             .c_str()));
 }
 
 void MapGenerator::generate_resources(uint32_t const* const random1,
@@ -126,19 +124,18 @@ void MapGenerator::generate_resources(uint32_t const* const random1,
 	// TODO(unknown): Check how the editor handles this...
 
 	const World& world = egbase_.world();
-	TerrainIndex const tix = fc.field->get_terrains().d;
+	DescriptionIndex const tix = fc.field->get_terrains().d;
 	const TerrainDescription& terrain_description = egbase_.world().terrain_descr(tix);
 
 	const auto set_resource_helper = [this, &world, &terrain_description, &fc] (
 	   const uint32_t random_value, const int valid_resource_index) {
-		const ResourceIndex  res_idx = terrain_description.get_valid_resource(valid_resource_index);
+		const DescriptionIndex  res_idx = terrain_description.get_valid_resource(valid_resource_index);
 		const uint32_t max_amount = world.get_resource(res_idx)->max_amount();
 		uint8_t res_val = static_cast<uint8_t>(random_value / (kMaxElevation / max_amount));
 		res_val *= static_cast<uint8_t>(map_info_.resource_amount) + 1;
 		res_val /= 3;
-		if (editor_change_resource_tool_callback(fc, map_, world, res_idx)) {
-			fc.field->set_resources(res_idx, res_val);
-			fc.field->set_initial_res_amount(res_val);
+		if (map_.is_resource_valid(world, fc, res_idx)) {
+			map_.initialize_resources(fc, res_idx, res_val);
 		}
 	};
 
@@ -414,7 +411,7 @@ uint32_t * MapGenerator::generate_random_value_map
 		delete[] values;
 		throw;
 	}
-	// Never here.
+	NEVER_HERE();
 }
 
 
@@ -442,7 +439,7 @@ rng:         is the random number generator to be used.
 terrType:    Returns the terrain-Type fpor this triangle
 ===============
 */
-TerrainIndex MapGenerator::figure_out_terrain
+DescriptionIndex MapGenerator::figure_out_terrain
 	(uint32_t                  * const random2,
 	 uint32_t                  * const random3,
 	 uint32_t                  * const random4,
@@ -836,7 +833,7 @@ void MapGenerator::create_random_map()
 			 &coords, functor);
 
 		// Take the nearest ones
-		uint32_t min_distance = -1;
+		uint32_t min_distance = 0;
 		Coords coords2;
 		for (uint16_t i = 0; i < coords.size(); ++i) {
 			uint32_t test = map_.calc_distance(coords[i], playerstart);

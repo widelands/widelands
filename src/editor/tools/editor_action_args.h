@@ -30,7 +30,7 @@ namespace Widelands {
 class BobDescr;
 }  // namespace Widelands
 
-struct EditorInteractive;
+class EditorInteractive;
 struct EditorToolAction;
 
 /// Class to save important and changeable properties of classes needed for actions
@@ -56,7 +56,7 @@ struct EditorActionArgs {
 	std::list<std::string> oimmov_types;                            // immovable change tools
 	std::list<int32_t> nimmov_types;                                // immovable change tools
 	Widelands::HeightInterval m_interval;                  // noise hight tool
-	std::list<Widelands::TerrainIndex> terrainType, origTerrainType; // set terrain tool
+	std::list<Widelands::DescriptionIndex> terrainType, origTerrainType; // set terrain tool
 
 	std::list<EditorToolAction *> draw_actions;                   // draw tool
 

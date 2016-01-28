@@ -6,6 +6,44 @@
 -- Most of these functions are simple wrapper functions that make working with
 -- widelands rich text formatting system more bearable.
 
+
+-- RST
+-- .. function:: localize_list(items, listtype)
+--
+--    Turns an array of string items into a localized string list with
+--    appropriate concatenation.
+--
+--    e.g. localize_list({"foo", "bar", baz"}, "or") will return _"foo, bar or baz"
+--
+--    :arg items:    An array of strings
+--    :arg listtype: The type of concatenation to use.
+--                   Legal values are "&", "and", "or", and ";"
+--    :returns: The concatenated list string, using localized concatenation operators.
+--
+-- Same algorithm as in src/base/i18n
+function localize_list(items, listtype)
+   local result = ""
+   for i, item in pairs(items) do
+      if (i == 1) then
+         result = item
+      elseif (i == #items) then
+         if (listtype == "&") then
+            result = _"%1$s & %2$s":bformat(result, item)
+         elseif (listtype == "or") then
+            result = _"%1$s or %2$s":bformat(result, item)
+         elseif (listtype == ",") then
+            result = _"%1$s, %2$s":bformat(result, item)
+         else
+            result = _"%1$s and %2$s":bformat(result, item)
+      end
+      else
+         result = _"%1$s, %2$s":bformat(result, item)
+      end
+   end
+   return result
+end
+
+
 -- RST
 -- .. function:: rt(text_or_options[, text = nil])
 --
@@ -94,4 +132,14 @@ function p(text_or_opts, text)
 
    return ("<p %s>"):format(opts) .. text .. "<br></p>" ..
       "<p font-size=8> <br></p>"
+end
+
+-- RST
+-- .. function:: a(text)
+--
+--    Underlines the text to show links. Only words with default paragraph text style.
+--
+--    :returns: Underlined text within a default paragraph
+function a(text)
+   return "</p><p font-size=12 font-decoration=underline>" .. text .. "</p><p font-size=12>"
 end

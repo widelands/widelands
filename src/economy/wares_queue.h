@@ -20,7 +20,7 @@
 #ifndef WL_ECONOMY_WARES_QUEUE_H
 #define WL_ECONOMY_WARES_QUEUE_H
 
-#include "logic/immovable.h"
+#include "logic/map_objects/immovable.h"
 #include "logic/widelands.h"
 
 namespace Widelands {
@@ -40,15 +40,15 @@ class Worker;
 class WaresQueue {
 public:
 	using CallbackFn = void
-		(Game &, WaresQueue *, WareIndex ware, void * data);
+		(Game &, WaresQueue *, DescriptionIndex ware, void * data);
 
-	WaresQueue(PlayerImmovable &, WareIndex, uint8_t size);
+	WaresQueue(PlayerImmovable &, DescriptionIndex, uint8_t size);
 
 #ifndef NDEBUG
 	~WaresQueue() {assert(m_ware == INVALID_INDEX);}
 #endif
 
-	WareIndex get_ware()    const {return m_ware;}
+	DescriptionIndex get_ware()    const {return m_ware;}
 	uint32_t get_max_fill() const {return m_max_fill;}
 	uint32_t get_max_size() const {return m_max_size;}
 	uint32_t get_filled()   const {return m_filled;}
@@ -72,11 +72,11 @@ public:
 
 private:
 	static void request_callback
-		(Game &, Request &, WareIndex, Worker *, PlayerImmovable &);
+		(Game &, Request &, DescriptionIndex, Worker *, PlayerImmovable &);
 	void update();
 
 	PlayerImmovable & m_owner;
-	WareIndex         m_ware;    ///< ware ID
+	DescriptionIndex         m_ware;    ///< ware ID
 	uint32_t m_max_size;         ///< nr of items that fit into the queue maximum
 	uint32_t m_max_fill;         ///< nr of wares that should be ideally in this queue
 	uint32_t m_filled;           ///< nr of items that are currently in the queue

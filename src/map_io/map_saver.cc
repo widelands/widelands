@@ -31,8 +31,8 @@
 #include "io/filewrite.h"
 #include "logic/editor_game_base.h"
 #include "logic/map.h"
+#include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/player.h"
-#include "logic/tribe.h"
 #include "map_io/map_allowed_building_types_packet.h"
 #include "map_io/map_allowed_worker_types_packet.h"
 #include "map_io/map_building_packet.h"
@@ -139,18 +139,22 @@ void MapSaver::save() {
 	{MapAllowedWorkerTypesPacket p; p.write(m_fs, m_egbase, *m_mos);}
 	log("took %ums\n ", timer.ms_since_last_query());
 
- //  allowed building types
-	iterate_players_existing_const(plnum, nr_players, m_egbase, player) {
-		BuildingIndex const nr_buildings = player->tribe().get_nrbuildings();
-		for (BuildingIndex i = 0; i < nr_buildings; ++i)
-			if (!player->is_building_type_allowed(i)) {
-				log("Writing Allowed Building Types Data ... ");
-				MapAllowedBuildingTypesPacket p;
-				p                                  .write(m_fs, m_egbase, *m_mos);
-				log("took %ums\n ", timer.ms_since_last_query());
-				goto end_find_a_forbidden_building_type_loop;
+    //  allowed building types
+    // Not saving this when in editor - it causes issues when changing tribe
+    // after next load in editor
+	if (is_a(Game, &m_egbase)) {
+		iterate_players_existing_const(plnum, nr_players, m_egbase, player) {
+			for (DescriptionIndex i = 0; i < m_egbase.tribes().nrbuildings(); ++i) {
+				if (!player->is_building_type_allowed(i)) {
+					log("Writing Allowed Building Types Data ... ");
+					MapAllowedBuildingTypesPacket p;
+					p                                  .write(m_fs, m_egbase, *m_mos);
+					log("took %ums\n ", timer.ms_since_last_query());
+					goto end_find_a_forbidden_building_type_loop;
+				}
 			}
-	} end_find_a_forbidden_building_type_loop:;
+		} end_find_a_forbidden_building_type_loop:;
+	}
 
 	// !!!!!!!!!! NOTE
 	// This packet must be before any building or road packet. So do not

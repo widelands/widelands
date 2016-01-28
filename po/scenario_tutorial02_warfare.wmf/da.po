@@ -3,13 +3,14 @@
 # 
 # Translators:
 # Erik Soe Sorensen <eriksoe@daimi.au.dk>, 2007
+# Ole Laursen <ole.laursen@gmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-09-12 10:50+0000\n"
-"PO-Revision-Date: 2015-09-12 10:51+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2015-12-14 05:31+0000\n"
+"PO-Revision-Date: 2016-01-03 22:57+0000\n"
+"Last-Translator: Ole Laursen <ole.laursen@gmail.com>\n"
 "Language-Team: Danish (http://www.transifex.com/widelands/widelands/language/da/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,11 +20,11 @@ msgstr ""
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:17
 msgid "Introduction"
-msgstr ""
+msgstr "Introduktion"
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:19
 msgid "Soldiers, Training and Warfare"
-msgstr ""
+msgstr "Soldater, optræning og krigsførsel"
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:20
 msgid ""
@@ -43,7 +44,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:28
 msgid "Soldiers’ abilities"
-msgstr ""
+msgstr "Soldaters evner"
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:30
 msgid ""
@@ -71,7 +72,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:34
 msgid "Health:"
-msgstr ""
+msgstr "Helbred:"
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:35
 msgid ""
@@ -81,7 +82,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:36
 msgid "Attack:"
-msgstr ""
+msgstr "Angreb:"
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:37
 msgid ""
@@ -93,7 +94,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:39
 msgid "Defense:"
-msgstr ""
+msgstr "Forsvar:"
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:40
 msgid ""
@@ -106,7 +107,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:41
 msgid "Evade:"
-msgstr ""
+msgstr "Undvigelse:"
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:42
 msgid ""
@@ -118,7 +119,7 @@ msgstr ""
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:47
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:69
 msgid "The Battle Arena"
-msgstr ""
+msgstr "Kamparenaen"
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:49
 msgid "Now I have talked about training and levels. Let me elaborate on that."
@@ -134,8 +135,8 @@ msgstr ""
 msgid ""
 "One of these training sites is the battle arena. It is a big and expensive "
 "building, and it trains soldiers in evade. Since soldiers get very hungry "
-"during their workout, this building needs a lot of food and strongbeer. In a"
-" real game, you should have a good infrastructure before you build it."
+"during their workout, this building needs a lot of food and strong beer. In "
+"a real game, you should have a good infrastructure before you build it."
 msgstr ""
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:53
@@ -160,7 +161,7 @@ msgstr ""
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:63
 msgid ""
 "Since the construction will take some time, you can change the game speed "
-"using PAGE UP and PAGE DOWN."
+"using Page Up and Page Down."
 msgstr ""
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:71
@@ -176,7 +177,7 @@ msgstr ""
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:74
 msgid ""
 "The needed wares are also delivered there. For successful training, you need"
-" pitta bread and strongbeer, as well as either fish or meat."
+" pitta bread and strong beer, as well as either fish or meat."
 msgstr ""
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:75
@@ -213,7 +214,7 @@ msgstr ""
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:88
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:105
 msgid "The Training Camp"
-msgstr ""
+msgstr "Træningslejren"
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:89
 msgid ""
@@ -247,7 +248,7 @@ msgstr ""
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:108
 msgid ""
 "To train in the training camp, our soldiers need food like in the battle "
-"arena, but no strongbeer. Instead, they need different axes for attack "
+"arena, but no strong beer. Instead, they need different axes for attack "
 "training and helmets for health training."
 msgstr ""
 
@@ -504,20 +505,20 @@ msgstr ""
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:197
 msgid "Defeat the enemy tribe"
-msgstr ""
+msgstr "Besejr den fjendtlige stamme"
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:199
 msgid "Defeat Your Enemy"
-msgstr ""
+msgstr "Besejr fjenden"
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:201
 msgid "Defeat the nearby enemy."
-msgstr ""
+msgstr "Overvind den nærliggende fjende."
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:207
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:209
 msgid "Conclusion"
-msgstr ""
+msgstr "Konklusion"
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:210
 msgid ""
@@ -525,28 +526,29 @@ msgid ""
 "how to create and train soldiers, how to control where they go and how to "
 "defeat an enemy. Did you see how easily you could overwhelm your enemy? "
 "Having trained soldiers is a huge advantage."
-msgstr ""
+msgstr "Tak fordi du spillede denne introduktion. Jeg håber du nød det, og at du lærte hvordan man laver og træner soldater, hvordan man kontrollerer hvor de skal gå hen og hvordan man besejrer en fjende. Så du hvor let du kunne overvælde din fjende? Optrænede soldater er en kæmpe fordel."
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:211
 msgid ""
 "But a war is expensive, and not always the path leading to the goal. When "
 "setting up a new game, you can also choose peaceful win conditions. You "
 "should definitely try them out, they’re worth it."
-msgstr ""
+msgstr "Men krigsførsel er dyrt og ikke altid den vej der fører til målet. Når du sætter et nyt spil op, kan du også vælge fredelige sejrsbetingelserne. Du bør afgjort prøve dem, de er det hele værd."
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:212
 msgid ""
 "You are now ready to play the campaigns. They will teach you about the "
 "different economies of the tribes. You can also play the remaining "
 "tutorials, but they are not crucial for succeeding in the campaigns."
-msgstr ""
+msgstr "Du er nu parat til at spille kampagnerne som vil lade dig lære stammernes forskellige infrastrukturer at kende. Du kan også spille de tilbageværende introduktionsspil, men de er ikke vitale for at kunne komme gennem kampagnerne."
 
 #: ../../scripting/format_scenario.lua:36
+#, lua-format
 msgid "“%s”"
-msgstr ""
+msgstr "“%s”"
 
 #: ../../scripting/format_scenario.lua:146
 msgid "New Objective"
 msgid_plural "New Objectives"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Nyt mål"
+msgstr[1] "Nye mål"

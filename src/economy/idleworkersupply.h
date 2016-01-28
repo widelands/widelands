@@ -34,8 +34,9 @@ struct IdleWorkerSupply : public Supply {
 	PlayerImmovable * get_position(Game &) override;
 
 	bool is_active() const override;
+	SupplyProviders provider_type(Game *) const override;
 	bool has_storage() const override;
-	void get_ware_type(WareWorker & type, WareIndex & ware) const override;
+	void get_ware_type(WareWorker & type, DescriptionIndex & ware) const override;
 	void send_to_storage(Game &, Warehouse * wh) override;
 
 	uint32_t nr_supplies(const Game &, const Request &) const override;

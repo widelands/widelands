@@ -3,13 +3,14 @@
 # 
 # Translators:
 # Joe Hansen <joedalton2@yahoo.dk>, 2009
+# Ole Laursen <ole.laursen@gmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-09-05 09:36+0000\n"
-"PO-Revision-Date: 2015-09-05 09:37+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2015-12-14 05:31+0000\n"
+"PO-Revision-Date: 2016-01-03 23:49+0000\n"
+"Last-Translator: Ole Laursen <ole.laursen@gmail.com>\n"
 "Language-Team: Danish (http://www.transifex.com/widelands/widelands/language/da/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,17 +20,17 @@ msgstr ""
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:18
 msgid "Your Economy and its Settings"
-msgstr ""
+msgstr "Din økonomi og dens indstillinger"
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:20
 msgid "Economy"
-msgstr ""
+msgstr "Økonomi"
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:21
 msgid ""
 "Welcome back. In this tutorial, I’ll tell you what you can do to check how "
 "well your economy works."
-msgstr ""
+msgstr "Velkommen tilbage. I denne introduktion vil jeg fortælle dig hvad du kan gøre for at tjekke at hvordan din økonomi klarer sig."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:22
 msgid ""
@@ -70,7 +71,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:42
 msgid "The Tavern is Burning!"
-msgstr ""
+msgstr "Traktørstedet brænder!"
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:44
 msgid "An accident"
@@ -85,11 +86,11 @@ msgstr ""
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:53
 msgid "Building statistics"
-msgstr ""
+msgstr "Bygningsstatistik"
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:55
 msgid "Check out your taverns"
-msgstr ""
+msgstr "Tag et kig på dine traktørsteder"
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:56
 msgid ""
@@ -210,7 +211,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:98
 msgid "Look up how many taverns you have."
-msgstr ""
+msgstr "Slå op hvor mange traktørsteder du har."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:99
 msgid ""
@@ -376,11 +377,11 @@ msgstr ""
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:205
 msgid "New taverns"
-msgstr ""
+msgstr "Nye traktørsteder"
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:207
 msgid "We need new taverns"
-msgstr ""
+msgstr "Vi har brug for nye traktørsteder"
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:208
 msgid ""
@@ -393,11 +394,11 @@ msgstr ""
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:210
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:218
 msgid "Build at least two taverns."
-msgstr ""
+msgstr "Byg mindst to traktørsteder."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:214
 msgid "Build new taverns."
-msgstr ""
+msgstr "Byg nye traktørsteder."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:216
 msgid "To make our mines work, we need rations again – the more, the better."
@@ -432,8 +433,8 @@ msgstr ""
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:230
 msgid ""
-"If you want, you can try it out. A soldier needs a wood lance and a helm – "
-"from there on out, you can search backwards."
+"If you want, you can try it out. A soldier needs a wooden spear and a helmet"
+" – from there on out, you can search backwards."
 msgstr ""
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:237
@@ -835,8 +836,9 @@ msgid ""
 msgstr ""
 
 #: ../../scripting/format_scenario.lua:36
+#, lua-format
 msgid "“%s”"
-msgstr ""
+msgstr "“%s”"
 
 #: ../../scripting/format_scenario.lua:146
 msgid "New Objective"

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010-2011 by the Widelands Development Team
+ * Copyright (C) 2010-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,6 +23,7 @@
 
 #include <boost/format.hpp>
 
+#include "ai/computer_player.h"
 #include "base/i18n.h"
 #include "base/log.h"
 #include "base/wexception.h"
@@ -31,9 +32,8 @@
 #include "logic/constants.h"
 #include "logic/game.h"
 #include "logic/game_settings.h"
+#include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/player.h"
-#include "logic/tribe.h"
-#include "profile/profile.h"
 #include "ui_basic/button.h"
 #include "ui_basic/checkbox.h"
 #include "ui_basic/icon.h"
@@ -74,8 +74,8 @@ struct MultiPlayerClientGroup : public UI::Box {
 		 type_icon(nullptr),
 		 type(nullptr),
 		 s(settings),
-		 m_id(id),
-		 m_save(-2)
+		 id_(id),
+		 save_(-2)
 	{
 		set_size(w, h);
 		name = new UI::Textarea
@@ -92,7 +92,6 @@ struct MultiPlayerClientGroup : public UI::Box {
 			type->sigclicked.connect
 				(boost::bind
 					 (&MultiPlayerClientGroup::toggle_type, boost::ref(*this)));
-			type->set_font(font);
 			add(type, UI::Box::AlignCenter);
 		} else { // just a shown client
 			type_icon = new UI::Icon
@@ -105,7 +104,7 @@ struct MultiPlayerClientGroup : public UI::Box {
 
 	/// Switch human players and spectator
 	void toggle_type() {
-		UserSettings us = s->settings().users.at(m_id);
+		UserSettings us = s->settings().users.at(id_);
 		int16_t p = us.position;
 		if (p == UserSettings::none())
 			p = -1;
@@ -125,7 +124,7 @@ struct MultiPlayerClientGroup : public UI::Box {
 
 	/// Care about visibility and current values
 	void refresh() {
-		UserSettings us = s->settings().users.at(m_id);
+		UserSettings us = s->settings().users.at(id_);
 		if (us.position == UserSettings::not_connected()) {
 			std::string free_i18n = _("free");
 			std::string free_text =
@@ -137,7 +136,7 @@ struct MultiPlayerClientGroup : public UI::Box {
 				type_icon->set_visible(false);
 		} else {
 			name->set_text(us.name);
-			if (m_save != us.position) {
+			if (save_ != us.position) {
 				std::string pic;
 				std::string temp_tooltip;
 				if (us.position < UserSettings::highest_playernum()) {
@@ -150,7 +149,7 @@ struct MultiPlayerClientGroup : public UI::Box {
 				}
 
 				// Either Button if changeable OR text if not
-				if (m_id == s->settings().usernum) {
+				if (id_ == s->settings().usernum) {
 					type->set_pic(g_gr->images().get(pic));
 					type->set_tooltip(temp_tooltip);
 					type->set_visible(true);
@@ -159,7 +158,7 @@ struct MultiPlayerClientGroup : public UI::Box {
 					type_icon->set_tooltip(temp_tooltip);
 					type_icon->set_visible(true);
 				}
-				m_save = us.position;
+				save_ = us.position;
 			}
 		}
 	}
@@ -168,8 +167,8 @@ struct MultiPlayerClientGroup : public UI::Box {
 	UI::Icon               * type_icon;
 	UI::Button             * type;
 	GameSettingsProvider   * const s;
-	uint8_t                  const m_id;
-	int16_t                  m_save; // saved position to check rewrite need.
+	uint8_t                  const id_;
+	int16_t                  save_; // saved position to check rewrite need.
 };
 
 struct MultiPlayerPlayerGroup : public UI::Box {
@@ -178,7 +177,6 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		 int32_t const /* x */, int32_t const /* y */, int32_t const w, int32_t const h,
 		 GameSettingsProvider * const settings,
 		 NetworkPlayerSettingsBackend * const npsb,
-		 UI::Font * font,
 		 std::map<std::string, const Image* > & tp,
 		 std::map<std::string, std::string> & tn)
 		 :
@@ -189,9 +187,9 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		 init(nullptr),
 		 s(settings),
 		 n(npsb),
-		 m_id(id),
-		 m_tribepics(tp),
-		 m_tribenames(tn)
+		 id_(id),
+		 tribepics_(tp),
+		 tribenames_(tn)
 	{
 		set_size(w, h);
 		const Image* player_image = g_gr->images().get(player_pictures_small[id]);
@@ -206,7 +204,6 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		type->sigclicked.connect
 			(boost::bind
 				 (&MultiPlayerPlayerGroup::toggle_type, boost::ref(*this)));
-		type->set_font(font);
 		add(type, UI::Box::AlignCenter);
 		tribe = new UI::Button
 			(this, "player_tribe",
@@ -216,7 +213,6 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		tribe->sigclicked.connect
 			(boost::bind
 				 (&MultiPlayerPlayerGroup::toggle_tribe, boost::ref(*this)));
-		tribe->set_font(font);
 		add(tribe, UI::Box::AlignCenter);
 		tribe->set_draw_flat_background(true);
 		init = new UI::Button
@@ -227,7 +223,6 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		init->sigclicked.connect
 			(boost::bind
 				 (&MultiPlayerPlayerGroup::toggle_init, boost::ref(*this)));
-		init->set_font(font);
 		add(init, UI::Box::AlignCenter);
 		team = new UI::Button
 			(this, "player_team",
@@ -237,48 +232,47 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		team->sigclicked.connect
 			(boost::bind
 				 (&MultiPlayerPlayerGroup::toggle_team, boost::ref(*this)));
-		team->set_font(font);
 		add(team, UI::Box::AlignCenter);
 	}
 
 	/// Toggle through the types
 	void toggle_type() {
-		n->toggle_type(m_id);
+		n->toggle_type(id_);
 	}
 
 	/// Toggle through the tribes + handle shared in players
 	void toggle_tribe() {
-		n->toggle_tribe(m_id);
+		n->toggle_tribe(id_);
 	}
 
 	/// Toggle through the initializations
 	void toggle_init() {
-		n->toggle_init(m_id);
+		n->toggle_init(id_);
 	}
 
 	/// Toggle through the teams
 	void toggle_team() {
-		n->toggle_team(m_id);
+		n->toggle_team(id_);
 	}
 
 	/// Refresh all user interfaces
 	void refresh() {
 		const GameSettings & settings = s->settings();
 
-		if (m_id >= settings.players.size()) {
+		if (id_ >= settings.players.size()) {
 			set_visible(false);
 			return;
 		}
 
-		n->refresh(m_id);
+		n->refresh(id_);
 
 		set_visible(true);
 
-		const PlayerSettings & player_setting = settings.players[m_id];
-		bool typeaccess       = s->can_change_player_state(m_id);
-		bool tribeaccess      = s->can_change_player_tribe(m_id);
-		bool const initaccess = s->can_change_player_init(m_id);
-		bool teamaccess       = s->can_change_player_team(m_id);
+		const PlayerSettings & player_setting = settings.players[id_];
+		bool typeaccess       = s->can_change_player_state(id_);
+		bool tribeaccess      = s->can_change_player_tribe(id_);
+		bool const initaccess = s->can_change_player_init(id_);
+		bool teamaccess       = s->can_change_player_team(id_);
 
 		type->set_enabled(typeaccess);
 		if (player_setting.state == PlayerSettings::stateClosed) {
@@ -326,11 +320,14 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 					pic += "novalue.png";
 				} else {
 					if (player_setting.random_ai) {
-						title = (boost::format(_("AI: %s")) % pgettext("ai_name", "Random")).str();
-						pic += "ai/Random.png";
+						/** TRANSLATORS: This is the name of an AI used in the game setup screens */
+						title = _("Random AI");
+						pic += "ai/ai_random.png";
 					} else {
-						title = (boost::format(_("AI: %s")) % _(player_setting.ai)).str();
-						pic += "ai/" + player_setting.ai + ".png";
+						const ComputerPlayer::Implementation* impl =
+								ComputerPlayer::get_implementation(player_setting.ai);
+						title = impl->descname;
+						pic = impl->icon_filename;
 					}
 				}
 			} else { // PlayerSettings::stateHuman
@@ -341,22 +338,21 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 			type->set_pic(g_gr->images().get(pic));
 			if (player_setting.random_tribe) {
 				std::string random = pgettext("tribe", "Random");
-				if (!m_tribenames["random"].size())
-					m_tribepics[random] = g_gr->images().get("images/ui_fsmenu/random.png");
+				if (!tribenames_["random"].size())
+					tribepics_[random] = g_gr->images().get("images/ui_fsmenu/random.png");
 				tribe->set_tooltip(random.c_str());
-				tribe->set_pic(m_tribepics[random]);
+				tribe->set_pic(tribepics_[random]);
 			} else {
-				std::string tribepath("tribes/" + player_setting.tribe);
-				if (!m_tribenames[player_setting.tribe].size()) {
+				if (!tribenames_[player_setting.tribe].size()) {
 					// get tribes name and picture
-					Profile prof((tribepath + "/conf").c_str(), nullptr, "tribe_" + player_setting.tribe);
-					Section & global = prof.get_safe_section("tribe");
-					m_tribenames[player_setting.tribe] = global.get_safe_string("name");
-					m_tribepics[player_setting.tribe] =
-						g_gr->images().get((tribepath + "/") + global.get_safe_string("icon"));
+					i18n::Textdomain td("tribes");
+					for (const TribeBasicInfo& tribeinfo : settings.tribes) {
+						tribenames_[tribeinfo.name] = _(tribeinfo.descname);
+						tribepics_[tribeinfo.name] = g_gr->images().get(tribeinfo.icon);
+					}
 				}
-				tribe->set_tooltip(m_tribenames[player_setting.tribe].c_str());
-				tribe->set_pic(m_tribepics[player_setting.tribe]);
+				tribe->set_tooltip(tribenames_[player_setting.tribe].c_str());
+				tribe->set_pic(tribepics_[player_setting.tribe]);
 			}
 			tribe->set_flat(false);
 
@@ -379,11 +375,10 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 			/** Translators: This is a game type */
 			init->set_title(_("Saved Game"));
 		else {
-			// for translated initialisation
-			i18n::Textdomain td(textdomain(std::string("tribe_" + player_setting.tribe).c_str()));
+			i18n::Textdomain td("tribes"); // for translated initialisation
 			for (const TribeBasicInfo& tribeinfo : settings.tribes) {
 				if (tribeinfo.name == player_setting.tribe) {
-					init->set_title(_(tribeinfo.initializations.at(player_setting.initialization_index).second));
+					init->set_title(_(tribeinfo.initializations.at(player_setting.initialization_index).descname));
 					break;
 				}
 			}
@@ -398,9 +393,9 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	UI::Button                   *       team;
 	GameSettingsProvider         * const s;
 	NetworkPlayerSettingsBackend * const n;
-	uint8_t                        const m_id;
-	std::map<std::string, const Image* >   & m_tribepics;
-	std::map<std::string, std::string> & m_tribenames;
+	uint8_t                        const id_;
+	std::map<std::string, const Image* >   & tribepics_;
+	std::map<std::string, std::string> & tribenames_;
 };
 
 MultiPlayerSetupGroup::MultiPlayerSetupGroup
@@ -415,9 +410,9 @@ s(settings),
 npsb(new NetworkPlayerSettingsBackend(s)),
 clientbox(this, 0, buth, UI::Box::Vertical, w / 3, h - buth),
 playerbox(this, w * 6 / 15, buth, UI::Box::Vertical, w * 9 / 15, h - buth),
-m_buth(buth),
-m_fsize(fsize),
-m_fname(fname)
+buth_(buth),
+fsize_(fsize),
+fname_(fname)
 {
 	UI::TextStyle tsmaller(UI::TextStyle::makebold(UI::Font::get(fname, fsize * 3 / 4), UI_FONT_CLR_FG));
 
@@ -484,8 +479,8 @@ m_fname(fname)
 		multi_player_player_groups.at(i) = new MultiPlayerPlayerGroup
 			(&playerbox, i,
 			 0, 0, playerbox.get_w(), buth,
-			 s, npsb.get(), UI::Font::get(fname, fsize),
-			 m_tribepics, m_tribenames);
+			 s, npsb.get(),
+			 tribepics_, tribenames_);
 		playerbox.add(multi_player_player_groups.at(i), 1);
 	}
 	refresh();
@@ -511,7 +506,7 @@ void MultiPlayerSetupGroup::refresh()
 	for (uint32_t i = 0; i < settings.users.size(); ++i) {
 		if (!multi_player_client_groups.at(i)) {
 			multi_player_client_groups.at(i) = new MultiPlayerClientGroup(
-			   &clientbox, i, 0, 0, clientbox.get_w(), m_buth, s, UI::Font::get(m_fname, m_fsize));
+			   &clientbox, i, 0, 0, clientbox.get_w(), buth_, s, UI::Font::get(fname_, fsize_));
 			clientbox.add(&*multi_player_client_groups.at(i), 1);
 		}
 		multi_player_client_groups.at(i)->refresh();

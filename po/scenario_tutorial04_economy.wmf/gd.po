@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-09-14 07:52+0000\n"
-"PO-Revision-Date: 2015-09-15 11:47+0000\n"
+"POT-Creation-Date: 2015-11-28 11:19+0000\n"
+"PO-Revision-Date: 2015-11-30 10:45+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -157,7 +157,7 @@ msgstr "Mìnichidh mi dhut dè as ciall dha na h-àireamhan uile ud:"
 msgid ""
 "‘2/1’ below the quarry: This means that you have two quarries, plus another "
 "one which is under construction."
-msgstr "“2/1” fon choireall: Is ciall dha seo gu bheil dà choireall agad is fear eile a tha ’ga thogail."
+msgstr "“2/1” fon chuaraidh: Is ciall dha seo gu bheil dà chuaraidh agad is fear eile a tha ’ga thogail."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:84
 msgid ""
@@ -435,9 +435,9 @@ msgstr "putan na cobharach air bonn na sgrìn. Airson gach bathar do threubha, s
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:230
 msgid ""
-"If you want, you can try it out. A soldier needs a wood lance and a helm – "
-"from there on out, you can search backwards."
-msgstr "Feuch ris ma thogras tu. Bidh saighdear feumach air lannsa fiodha agus clogaid – ’s urrainn dhut rannsachadh deireadh air thoiseach o seo a-mach."
+"If you want, you can try it out. A soldier needs a wooden spear and a helmet"
+" – from there on out, you can search backwards."
+msgstr "Feuch ris ma thogras tu. Bidh saighdear feumach air sleagh fiodha agus clogaid – ’s urrainn dhut rannsachadh deireadh air thoiseach o seo a-mach."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:237
 msgid "Priority Settings"
@@ -473,7 +473,7 @@ msgid ""
 "because they supply our taverns, so you could set water to the highest "
 "priority for them. The other buildings (for example the donkey farm) would "
 "then get less water, but the bakery could work faster."
-msgstr "San t-suidheachadh sa bheil sinn an-dràsta, ’s dòcha gu bheil thu airson ’s gun obraich na taighean-fuine cho luath ’s a ghabhas air sgàth ’s gun lìbhrig iad bathar dha na taighean-tàirn, mar sin b’ urrainn dhut am prìomhachas as àirde a thoirt air an uisge dhaibh. Gheibheadh gach togalach eile (an tuathanas asalan mar eisimpleir) nas lugha dhe dh’uisge ach rinneadh an taigh-fuine obair na bu luaithe."
+msgstr "San t-suidheachadh sa bheil sinn an-dràsta, ’s dòcha gu bheil thu airson ’s gun obraich na taighean-fuine cho luath ’s a ghabhas air sgàth ’s gun lìbhrig iad bathar dha na taighean-tàirn, mar sin b’ urrainn dhut am prìomhachas as àirde a thoirt air an uisge dhaibh. Gheibheadh gach togalach eile (an stàball mar eisimpleir) nas lugha dhe dh’uisge ach rinneadh an taigh-fuine obair na bu luaithe."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:251
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:270

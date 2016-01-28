@@ -45,7 +45,7 @@ public:
 		kOk = static_cast<int>(UI::Panel::Returncodes::kOk),
 
 		// Options
-		kRestart,
+		kApplyOptions,
 
 		// Main menu
 		kTutorial,

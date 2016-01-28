@@ -25,7 +25,7 @@
 #include "ui_basic/radiobutton.h"
 #include "ui_basic/textarea.h"
 
-struct EditorInteractive;
+class EditorInteractive;
 struct EditorIncreaseResourcesTool;
 
 struct EditorToolChangeResourcesOptionsMenu :

@@ -22,6 +22,8 @@
 
 #include <stdint.h>
 
+#include "logic/queue_cmd_ids.h"
+
 namespace Widelands {
 
 struct GameLogicCommand;
@@ -31,7 +33,7 @@ struct GameLogicCommand;
  * from the queue command file ids
  */
 namespace QueueCmdFactory {
-	GameLogicCommand & create_correct_queue_command(uint32_t id);
+	GameLogicCommand & create_correct_queue_command(Widelands::QueueCommandTypes id);
 }
 
 }

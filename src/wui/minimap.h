@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006, 2008-2011 by the Widelands Development Team
+ * Copyright (C) 2002-20116 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,6 +19,8 @@
 
 #ifndef WL_WUI_MINIMAP_H
 #define WL_WUI_MINIMAP_H
+
+#include <memory>
 
 #include <boost/signals2.hpp>
 
@@ -44,7 +46,7 @@ struct MiniMap : public UI::UniqueWindow {
 	boost::signals2::signal<void (int32_t, int32_t)> warpview;
 
 	void set_view_pos(int32_t const x, int32_t const y) {
-		m_view.set_view_pos(x, y);
+		view_.set_view_pos(x, y);
 	}
 
 private:
@@ -76,13 +78,17 @@ private:
 
 		void set_zoom(int32_t z);
 
-
 	private:
-		InteractiveBase & m_ibase;
-		int32_t                m_viewx, m_viewy;
-		const Image* m_pic_map_spot;
+		InteractiveBase & ibase_;
+		int32_t                viewx_, viewy_;
+		const Image* pic_map_spot_;
+
+		// This needs to be owned since it will be rendered by the RenderQueue
+		// later, so it must be valid for the whole frame.
+		std::unique_ptr<Texture> minimap_image_;
+
 	public:
-		MiniMapLayer * m_flags;
+		MiniMapLayer* flags_;
 	};
 
 	uint32_t number_of_buttons_per_row() const;
@@ -90,7 +96,7 @@ private:
 	uint32_t but_w                    () const;
 	uint32_t but_h                    () const;
 
-	View     m_view;
+	View     view_;
 	UI::Button button_terrn;
 	UI::Button button_owner;
 	UI::Button button_flags;

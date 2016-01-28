@@ -27,17 +27,17 @@
 #include "logic/editor_game_base.h"
 #include "logic/game_data_error.h"
 #include "logic/map.h"
-#include "logic/world/terrain_description.h"
-#include "logic/world/world.h"
-#include "map_io/one_world_legacy_lookup_table.h"
+#include "logic/map_objects/world/terrain_description.h"
+#include "logic/map_objects/world/world.h"
+#include "map_io/world_legacy_lookup_table.h"
 
 namespace Widelands {
 
-#define CURRENT_PACKET_VERSION 1
+constexpr uint16_t kCurrentPacketVersion = 1;
 
 void MapTerrainPacket::read(FileSystem& fs,
                                    EditorGameBase& egbase,
-                                   const OneWorldLegacyLookupTable& lookup_table) {
+                                   const WorldLegacyLookupTable& lookup_table) {
 	FileRead fr;
 	fr.open(fs, "binary/terrain");
 
@@ -46,10 +46,10 @@ void MapTerrainPacket::read(FileSystem& fs,
 
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
-		if (packet_version == CURRENT_PACKET_VERSION) {
+		if (packet_version == kCurrentPacketVersion) {
 			uint16_t const nr_terrains = fr.unsigned_16();
 
-			using TerrainIdMap = std::map<const uint16_t, TerrainIndex>;
+			using TerrainIdMap = std::map<const uint16_t, DescriptionIndex>;
 			TerrainIdMap smap;
 			for (uint16_t i = 0; i < nr_terrains; ++i) {
 				const uint16_t id = fr.unsigned_16();
@@ -74,7 +74,7 @@ void MapTerrainPacket::read(FileSystem& fs,
 				f.set_terrain_d(smap[fr.unsigned_8()]);
 			}
 		} else {
-			throw GameDataError("unknown/unhandled version %u", packet_version);
+			throw UnhandledVersionError("MapTerrainPacket", packet_version, kCurrentPacketVersion);
 		}
 	} catch (const WException & e) {
 		throw GameDataError("terrain: %s", e.what());
@@ -88,17 +88,17 @@ void MapTerrainPacket::write
 
 	FileWrite fw;
 
-	fw.unsigned_16(CURRENT_PACKET_VERSION);
+	fw.unsigned_16(kCurrentPacketVersion);
 
 	//  This is a bit more complicated saved so that the order of loading of the
 	//  terrains at run time does not matter. This is slow like hell.
 	const Map & map = egbase.map();
 	const World & world = egbase.world();
-	TerrainIndex const nr_terrains = world.terrains().get_nitems();
+	DescriptionIndex const nr_terrains = world.terrains().size();
 	fw.unsigned_16(nr_terrains);
 
-	std::map<const char * const, TerrainIndex> smap;
-	for (TerrainIndex i = 0; i < nr_terrains; ++i) {
+	std::map<const char * const, DescriptionIndex> smap;
+	for (DescriptionIndex i = 0; i < nr_terrains; ++i) {
 		const char * const name = world.terrain_descr(i).name().c_str();
 		smap[name] = i;
 		fw.unsigned_16(i);

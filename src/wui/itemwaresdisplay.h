@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011 by the Widelands Development Team
+ * Copyright (C) 2011-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -36,31 +36,31 @@ class Player;
 struct ItemWaresDisplay : UI::Panel {
 	ItemWaresDisplay(UI::Panel * parent, const Widelands::Player & player);
 
-	const Widelands::Player & player() const {return m_player;}
+	const Widelands::Player & player() const {return player_;}
 
-	uint32_t capacity() const {return m_capacity;}
+	uint32_t capacity() const {return capacity_;}
 	void set_capacity(uint32_t cap);
 
-	uint32_t items_per_row() const {return m_items_per_row;}
+	uint32_t items_per_row() const {return items_per_row_;}
 	void set_items_per_row(uint32_t nr);
 
 	void clear();
-	void add(bool worker, Widelands::WareIndex index);
+	void add(bool worker, Widelands::DescriptionIndex index);
 
 	void draw(RenderTarget &) override;
 
 private:
 	struct Item {
 		bool worker;
-		Widelands::WareIndex index;
+		Widelands::DescriptionIndex index;
 	};
 
 	void recalc_desired_size();
 
-	const Widelands::Player & m_player;
-	uint32_t m_capacity;
-	uint32_t m_items_per_row;
-	std::vector<Item> m_items;
+	const Widelands::Player & player_;
+	uint32_t capacity_;
+	uint32_t items_per_row_;
+	std::vector<Item> items_;
 };
 
 #endif  // end of include guard: WL_WUI_ITEMWARESDISPLAY_H

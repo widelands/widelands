@@ -24,12 +24,11 @@
 #include "logic/editor_game_base.h"
 #include "logic/game_data_error.h"
 #include "logic/map.h"
-#include "logic/world/world.h"
+#include "logic/map_objects/world/world.h"
 
 namespace Widelands {
 
-#define CURRENT_PACKET_VERSION 1
-
+constexpr uint16_t kCurrentPacketVersion = 1;
 
 void MapHeightsPacket::read
 	(FileSystem & fs, EditorGameBase & egbase, bool, MapObjectLoader &)
@@ -40,14 +39,14 @@ void MapHeightsPacket::read
 
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
-		if (packet_version == CURRENT_PACKET_VERSION) {
+		if (packet_version == kCurrentPacketVersion) {
 			Map & map = egbase.map();
 			MapIndex const max_index = map.max_index();
 			for (MapIndex i = 0; i < max_index; ++i)
 				map[i].set_height(fr.unsigned_8());
-		} else
-			throw GameDataError
-				("unknown/unhandled version %u", packet_version);
+		} else {
+			throw UnhandledVersionError("MapHeightsPacket", packet_version, kCurrentPacketVersion);
+		}
 	} catch (const WException & e) {
 		throw GameDataError("heights: %s", e.what());
 	}
@@ -63,7 +62,7 @@ void MapHeightsPacket::write
 {
 	FileWrite fw;
 
-	fw.unsigned_16(CURRENT_PACKET_VERSION);
+	fw.unsigned_16(kCurrentPacketVersion);
 
 	Map & map = egbase.map();
 	MapIndex const max_index = map.max_index();

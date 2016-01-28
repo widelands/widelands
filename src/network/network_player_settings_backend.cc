@@ -21,10 +21,10 @@
 
 #include "base/i18n.h"
 #include "base/log.h"
+#include "base/wexception.h"
 #include "logic/game_settings.h"
+#include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/player.h"
-#include "logic/tribe.h"
-#include "profile/profile.h"
 
 
 /// Toggle through the types
@@ -116,7 +116,7 @@ void NetworkPlayerSettingsBackend::toggle_init(uint8_t id) {
 					 temp_tribeinfo.initializations.size());
 		}
 	}
-	assert(false);
+	NEVER_HERE();
 }
 
 /// Toggle through the teams

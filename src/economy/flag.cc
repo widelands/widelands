@@ -26,14 +26,14 @@
 #include "economy/request.h"
 #include "economy/road.h"
 #include "economy/ware_instance.h"
-#include "logic/building.h"
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
-#include "logic/instances.h"
+#include "logic/map_objects/map_object.h"
+#include "logic/map_objects/tribes/building.h"
+#include "logic/map_objects/tribes/tribe_descr.h"
+#include "logic/map_objects/tribes/warehouse.h"
+#include "logic/map_objects/tribes/worker.h"
 #include "logic/player.h"
-#include "logic/tribe.h"
-#include "logic/warehouse.h"
-#include "logic/worker.h"
 
 namespace Widelands {
 
@@ -772,7 +772,7 @@ void Flag::destroy(EditorGameBase & egbase)
  * the given program once it's completed.
 */
 void Flag::add_flag_job
-	(Game &, WareIndex const workerware, const std::string & programname)
+	(Game &, DescriptionIndex const workerware, const std::string & programname)
 {
 	FlagJob j;
 
@@ -791,7 +791,7 @@ void Flag::add_flag_job
 void Flag::flag_job_request_callback
 	(Game            &       game,
 	 Request         &       rq,
-	 WareIndex,
+	 DescriptionIndex,
 	 Worker          * const w,
 	 PlayerImmovable &       target)
 {

@@ -23,7 +23,7 @@
 #include <boost/shared_ptr.hpp>
 
 #include "base/macros.h"
-#include "logic/instances.h"
+#include "logic/map_objects/map_object.h"
 #include "logic/widelands_geometry.h"
 
 namespace Widelands {
@@ -138,7 +138,7 @@ protected:
 	struct Loader : MapObject::Loader {
 		Loader();
 
-		void load(FileRead &, uint8_t version);
+		void load(FileRead &);
 		void load_pointers() override;
 		void load_finish() override;
 

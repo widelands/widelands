@@ -38,7 +38,6 @@
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/game.h"
 #include "logic/map.h"
-#include "profile/profile.h"
 #include "sound/songset.h"
 #include "wui/interactive_base.h"
 #include "wui/mapview.h"
@@ -246,36 +245,33 @@ void SoundHandler::load_system_sounds()
 */
 void SoundHandler::load_fx_if_needed
 	(const std::string & dir,
-	 const std::string & filename,
+	 const std::string & basename,
 	 const std::string & fx_name)
 {
-	FilenameSet files;
-	FilenameSet::const_iterator i;
-
 	assert(g_fs);
+
+	if (!g_fs->is_directory(dir)) {
+		throw wexception("SoundHandler: Can't load files from %s, not a directory!", dir.c_str());
+	}
 
 	if (nosound_ || fxs_.count(fx_name) > 0)
 		return;
 
 	fxs_.insert(std::make_pair(fx_name, std::unique_ptr<FXset>(new FXset())));
 
-	// filename can be relative to dir.
-	const std::string full_path = dir + "/" + filename;
-	const std::string basename = FileSystem::fs_filename(full_path.c_str());
-	const std::string dirname = FileSystem::fs_dirname(full_path);
 	boost::regex re(basename + "_\\d+\\.ogg");
-	files = filter(g_fs->list_directory(dirname), [&re](const std::string& fn) {
+	FilenameSet files = filter(g_fs->list_directory(dir), [&re](const std::string& fn) {
 		return boost::regex_match(FileSystem::fs_filename(fn.c_str()), re);
 	});
 
-	for (i = files.begin(); i != files.end(); ++i) {
-		assert(!g_fs->is_directory(*i));
-		load_one_fx(i->c_str(), fx_name);
+	for (const std::string& path : files) {
+		assert(!g_fs->is_directory(path));
+		load_one_fx(path, fx_name);
 	}
 }
 
 /** Add exactly one file to the given fxset.
- * \param filename  the effect to be loaded
+ * \param path      the effect to be loaded
  * \param fx_name   the fxset to add the file to
  * The file format must be ogg. Otherwise this call will complain and
  * not load the file.
@@ -283,15 +279,14 @@ void SoundHandler::load_fx_if_needed
  * until the game is finished.
 */
 void SoundHandler::load_one_fx
-	(char const * const path, const std::string & fx_name)
+	(const std::string& path, const std::string& fx_name)
 {
-	FileRead fr;
-
 	if (nosound_)
 		return;
 
+	FileRead fr;
 	if (!fr.try_open(*g_fs, path)) {
-		log("WARNING: Could not open %s for reading!\n", path);
+		log("WARNING: Could not open %s for reading!\n", path.c_str());
 		return;
 	}
 
@@ -308,7 +303,7 @@ void SoundHandler::load_one_fx
 		log
 			("SoundHandler: loading sound effect \"%s\" for FXset \"%s\" "
 			 "failed: %s\n",
-			 path, fx_name.c_str(), Mix_GetError());
+			 path.c_str(), fx_name.c_str(), Mix_GetError());
 }
 
 /** Calculate  the position of an effect in relation to the visible part of the

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2012 by the Widelands Development Team
+ * Copyright (C) 2006-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -140,9 +140,7 @@ struct WLApplication {
 	void run();
 
 	/// \warning true if an external entity wants us to quit
-	bool should_die() const {return m_should_die;}
-
-	int32_t get_time();
+	bool should_die() const {return should_die_;}
 
 	/// Get the state of the current KeyBoard Button
 	/// \warning This function doesn't check for dumbness
@@ -153,16 +151,16 @@ struct WLApplication {
 	void set_input_grab(bool grab);
 
 	/// The mouse's current coordinates
-	Point get_mouse_position() const {return m_mouse_position;}
+	Point get_mouse_position() const {return mouse_position_;}
 	//
 	/// Find out whether the mouse is currently pressed
 	bool is_mouse_pressed() const {return SDL_GetMouseState(nullptr, nullptr); }
 
 	/// Swap left and right mouse key?
-	void set_mouse_swap(const bool swap) {m_mouse_swapped = swap;}
+	void set_mouse_swap(const bool swap) {mouse_swapped_ = swap;}
 
 	/// Lock the mouse cursor into place (e.g., for scrolling the map)
-	void set_mouse_lock(const bool locked) {m_mouse_locked = locked;}
+	void set_mouse_lock(const bool locked) {mouse_locked_ = locked;}
 	//@}
 
 
@@ -193,7 +191,6 @@ private:
 	void init_language();
 	void shutdown_settings();
 
-	bool init_hardware();
 	void shutdown_hardware();
 
 	void parse_commandline(int argc, char const * const * argv);
@@ -212,48 +209,48 @@ private:
 	/**
 	 * The commandline, conveniently repackaged.
 	 */
-	std::map<std::string, std::string> m_commandline;
+	std::map<std::string, std::string> commandline_;
 
-	std::string m_filename;
+	std::string filename_;
 
 	/// Script to be run after the game was started with --editor,
 	/// --scenario or --loadgame.
-	std::string m_script_to_run;
+	std::string script_to_run_;
 
 	//Log all output to this file if set, otherwise use cout
-	std::string m_logfile;
+	std::string logfile_;
 
-	GameType m_game_type;
+	GameType game_type_;
 
 	///True if left and right mouse button should be swapped
-	bool  m_mouse_swapped;
+	bool  mouse_swapped_;
 
 	/// When apple is involved, the middle mouse button is sometimes send, even
 	/// if it wasn't pressed. We try to revert this and this helps.
-	bool  m_faking_middle_mouse_button;
+	bool  faking_middle_mouse_button_;
 
 	///The current position of the mouse pointer
-	Point m_mouse_position;
+	Point mouse_position_;
 
 	///If true, the mouse cursor will \e not move with a mousemotion event:
 	///instead, the map will be scrolled
-	bool  m_mouse_locked;
+	bool  mouse_locked_;
 
 	///If the mouse needs to be moved in warp_mouse(), this Point is
 	///used to cancel the resulting SDL_MouseMotionEvent.
-	Point m_mouse_compensate_warp;
+	Point mouse_compensate_warp_;
 
 	///true if an external entity wants us to quit
-	bool   m_should_die;
+	bool   should_die_;
 
-	std::string m_homedir;
+	std::string homedir_;
 
 	/// flag indicating if stdout and stderr have been redirected
-	bool m_redirected_stdio;
+	bool redirected_stdio_;
 
 	/// Absolute path to the data directory.
-	std::string m_datadir;
-	std::string m_datadir_for_testing;
+	std::string datadir_;
+	std::string datadir_for_testing_;
 
 	///Holds this process' one and only instance of WLApplication, if it was
 	///created already. nullptr otherwise.

@@ -21,17 +21,24 @@
 #define WL_LOGIC_PLAYER_H
 
 #include <memory>
+#include <unordered_set>
 
 #include "base/macros.h"
 #include "graphic/color.h"
-#include "logic/building.h"
 #include "logic/constants.h"
 #include "logic/editor_game_base.h"
+#include "logic/map_objects/tribes/building.h"
+#include "logic/map_objects/tribes/constructionsite.h"
+#include "logic/map_objects/tribes/tribe_descr.h"
+#include "logic/map_objects/tribes/warehouse.h"
 #include "logic/mapregion.h"
 #include "logic/message_queue.h"
-#include "logic/tribe.h"
-#include "logic/warehouse.h"
 #include "logic/widelands.h"
+
+// there are three arrays to be used by AI
+// their size is defined here
+// (all are of the same size)
+constexpr int kAIDataSize = 8;
 
 class Node;
 namespace Widelands {
@@ -70,6 +77,7 @@ public:
 	friend class EditorGameBase;
 	friend struct GamePlayerInfoPacket;
 	friend struct GamePlayerEconomiesPacket;
+	friend struct GamePlayerAiPersistentPacket;
 	friend class MapBuildingdataPacket;
 	friend class MapPlayersViewPacket;
 	friend class MapExplorationPacket;
@@ -128,14 +136,30 @@ public:
 	void set_see_all(bool const t) {m_see_all = t; m_view_changed = true;}
 	bool see_all() const {return m_see_all;}
 
-	/// Per-player and per-field constructionsite information
-	struct ConstructionsiteInformation {
-		ConstructionsiteInformation() : becomes(nullptr), was(nullptr), totaltime(0), completedtime(0) {}
-		const BuildingDescr * becomes; // Also works as a marker telling whether there is a construction site.
-		const BuildingDescr * was; // only valid if "becomes" is an enhanced building.
-		uint32_t               totaltime;
-		uint32_t               completedtime;
-	};
+	/// Data that are used and managed by AI. They are here to have it saved as a port of player's data
+	struct AiPersistentState {
+		AiPersistentState() : initialized(0){}
+
+		//was initialized
+		uint8_t initialized;
+		uint32_t colony_scan_area;
+		uint32_t trees_around_cutters;
+		uint32_t expedition_start_time;
+		int16_t ships_utilization; //0-10000 to avoid floats, used for decision for building new ships
+		uint8_t no_more_expeditions;
+		int16_t last_attacked_player;
+		int32_t least_military_score;
+		int32_t target_military_score;
+		int16_t ai_personality_military_loneliness;
+		int32_t ai_personality_attack_margin;
+		uint32_t ai_productionsites_ratio;
+		int32_t ai_personality_wood_difference;
+		uint32_t ai_personality_early_militarysites;
+	} ai_data;
+
+	AiPersistentState* get_mutable_ai_persistent_state(){
+		return &ai_data;
+	}
 
 	/// Per-player field information.
 	struct Field {
@@ -419,16 +443,16 @@ public:
 		return m_fields[i].military_influence;
 	}
 
-	bool is_worker_type_allowed(const WareIndex& i) const {
+	bool is_worker_type_allowed(const DescriptionIndex& i) const {
 		return m_allowed_worker_types.at(i);
 	}
-	void allow_worker_type(WareIndex, bool allow);
+	void allow_worker_type(DescriptionIndex, bool allow);
 
 	// Allowed buildings
-	bool is_building_type_allowed(const BuildingIndex& i) const {
+	bool is_building_type_allowed(const DescriptionIndex& i) const {
 		return m_allowed_building_types[i];
 	}
-	void allow_building_type(BuildingIndex, bool allow);
+	void allow_building_type(DescriptionIndex, bool allow);
 
 	// Player commands
 	// Only to be called indirectly via CmdQueue
@@ -441,16 +465,16 @@ public:
 		 const Building::FormerBuildings &);
 	Building & force_csite
 		(const Coords,
-		 BuildingIndex,
+		 DescriptionIndex,
 		 const Building::FormerBuildings & = Building::FormerBuildings());
-	Building * build(Coords, BuildingIndex, bool, Building::FormerBuildings &);
+	Building * build(Coords, DescriptionIndex, bool, Building::FormerBuildings &);
 	void bulldoze(PlayerImmovable &, bool recurse = false);
 	void flagaction(Flag &);
 	void start_stop_building(PlayerImmovable &);
 	void military_site_set_soldier_preference(PlayerImmovable &, uint8_t m_soldier_preference);
 	void start_or_cancel_expedition(Warehouse &);
 	void enhance_building
-		(Building *, BuildingIndex index_of_new_building);
+		(Building *, DescriptionIndex index_of_new_building);
 	void dismantle_building (Building *);
 
 	// Economy stuff
@@ -489,23 +513,25 @@ public:
 	void count_civil_bld_defeated() {++m_civil_blds_defeated;}
 
 	// Statistics
-	const BuildingStatsVector& get_building_statistics(const BuildingIndex& i) const;
+	const BuildingStatsVector& get_building_statistics(const DescriptionIndex& i) const;
 
 	std::vector<uint32_t> const * get_ware_production_statistics
-		(WareIndex const) const;
+		(DescriptionIndex const) const;
 
 	std::vector<uint32_t> const * get_ware_consumption_statistics
-		(WareIndex const) const;
+		(DescriptionIndex const) const;
 
 	std::vector<uint32_t> const * get_ware_stock_statistics
-		(WareIndex const) const;
+		(DescriptionIndex const) const;
 
-	void read_statistics(FileRead &, uint32_t version);
+	void read_statistics(FileRead &);
 	void write_statistics(FileWrite &) const;
+	void read_remaining_shipnames(FileRead &);
+	void write_remaining_shipnames(FileWrite &) const;
 	void sample_statistics();
-	void ware_produced(WareIndex);
+	void ware_produced(DescriptionIndex);
 
-	void ware_consumed(WareIndex, uint8_t);
+	void ware_consumed(DescriptionIndex, uint8_t);
 	void next_ware_production_period();
 
 	void set_ai(const std::string &);
@@ -517,13 +543,15 @@ public:
 		m_further_initializations .push_back(init);
 	}
 
+	const std::string pick_shipname();
+
 private:
-	BuildingStatsVector* get_mutable_building_statistics(const BuildingIndex& i);
+	BuildingStatsVector* get_mutable_building_statistics(const DescriptionIndex& i);
 	void update_building_statistics(Building &, NoteImmovable::Ownership ownership);
 	void update_team_players();
 	void play_message_sound(const Message::Type & msgtype);
 	void _enhance_or_dismantle
-		(Building *, BuildingIndex const index_of_new_building);
+		(Building *, DescriptionIndex const index_of_new_building);
 
 	// Called when a node becomes seen or has changed.  Discovers the node and
 	// those of the 6 surrounding edges/triangles that are not seen from another
@@ -531,7 +559,8 @@ private:
 	void rediscover_node(const Map&, const Widelands::Field&, FCoords);
 
 	std::unique_ptr<Notifications::Subscriber<NoteImmovable>> immovable_subscriber_;
-	std::unique_ptr<Notifications::Subscriber<NoteFieldTransformed>> field_transformed_subscriber_;
+	std::unique_ptr<Notifications::Subscriber<NoteFieldTerrainChanged>>
+	   field_terrain_changed_subscriber_;
 
 	MessageQueue           m_messages;
 
@@ -549,6 +578,7 @@ private:
 	uint32_t               m_casualties, m_kills;
 	uint32_t               m_msites_lost,     m_msites_defeated;
 	uint32_t               m_civil_blds_lost, m_civil_blds_defeated;
+	std::unordered_set<std::string>  m_remaining_shipnames;
 
 	Field *               m_fields;
 	std::vector<bool>     m_allowed_worker_types;
@@ -592,7 +622,7 @@ private:
 };
 
 void find_former_buildings
-	(const TribeDescr & tribe_descr, const BuildingIndex bi,
+	(const Tribes& tribes, const DescriptionIndex bi,
 	 Building::FormerBuildings* former_buildings);
 
 }

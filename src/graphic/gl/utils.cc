@@ -18,10 +18,9 @@
 
 #include "graphic/gl/utils.h"
 
+#include <cassert>
 #include <memory>
 #include <string>
-
-#include <SDL_video.h>
 
 #include "base/log.h"
 #include "base/wexception.h"
@@ -29,6 +28,8 @@
 namespace Gl {
 
 namespace {
+
+constexpr GLenum NONE = static_cast<GLenum>(0);
 
 // Returns a readable string for a GL_*_SHADER 'type' for debug output.
 std::string shader_to_string(GLenum type) {
@@ -41,75 +42,26 @@ std::string shader_to_string(GLenum type) {
 	return "unknown";
 }
 
-// Creates one OpenGL buffer.
-GLuint create_buffer() {
-	GLuint buffer = 0;
-	glGenBuffers(1, &buffer);
-	return buffer;
-}
-
 }  // namespace
 
-/**
- * \return the standard 32-bit RGBA format that we use in OpenGL
- */
-const SDL_PixelFormat & gl_rgba_format()
-{
-	static SDL_PixelFormat format;
-	static bool init = false;
-	if (init)
-		return format;
-
-	init = true;
-	memset(&format, 0, sizeof(format));
-	format.BitsPerPixel = 32;
-	format.BytesPerPixel = 4;
-	format.Rmask = 0x000000ff;
-	format.Gmask = 0x0000ff00;
-	format.Bmask = 0x00ff0000;
-	format.Amask = 0xff000000;
-	format.Rshift = 0;
-	format.Gshift = 8;
-	format.Bshift = 16;
-	format.Ashift = 24;
-	return format;
-}
-
-GLenum _handle_glerror(const char * file, unsigned int line)
-{
-	GLenum err = glGetError();
-	if (err == GL_NO_ERROR)
-		return err;
-
-	log("%s:%d: OpenGL ERROR: ", file, line);
-
-	switch (err)
-	{
-	case GL_INVALID_VALUE:
-		log("invalid value\n");
-		break;
-	case GL_INVALID_ENUM:
-		log("invalid enum\n");
-		break;
-	case GL_INVALID_OPERATION:
-		log("invalid operation\n");
-		break;
-	case GL_STACK_OVERFLOW:
-		log("stack overflow\n");
-		break;
-	case GL_STACK_UNDERFLOW:
-		log("stack undeflow\n");
-		break;
-	case GL_OUT_OF_MEMORY:
-		log("out of memory\n");
-		break;
-	case GL_TABLE_TOO_LARGE:
-		log("table too large\n");
-		break;
+const char* gl_error_to_string(const GLenum err) {
+	CLANG_DIAG_OFF("-Wswitch-enum");
+#define LOG(a) case a: return #a
+	switch (err) {
+		LOG(GL_INVALID_ENUM);
+		LOG(GL_INVALID_OPERATION);
+		LOG(GL_INVALID_VALUE);
+		LOG(GL_NO_ERROR);
+		LOG(GL_OUT_OF_MEMORY);
+		LOG(GL_STACK_OVERFLOW);
+		LOG(GL_STACK_UNDERFLOW);
+		LOG(GL_TABLE_TOO_LARGE);
 	default:
-		log("unknown\n");
+		break;
 	}
-	return err;
+#undef LOG
+	CLANG_DIAG_ON("-Wswitch-enum");
+	return "unknown";
 }
 
 // Thin wrapper around a Shader object to ensure proper cleanup.
@@ -162,18 +114,6 @@ void Shader::compile(const char* source) {
 	}
 }
 
-Buffer::Buffer() : buffer_object_(create_buffer()) {
-	if (!buffer_object_) {
-		throw wexception("Could not create GL program.");
-	}
-}
-
-Buffer::~Buffer() {
-	if (buffer_object_) {
-		glDeleteBuffers(1, &buffer_object_);
-	}
-}
-
 Program::Program() : program_object_(glCreateProgram()) {
 	if (!program_object_) {
 		throw wexception("Could not create GL program.");
@@ -209,6 +149,96 @@ void Program::build(const char* vertex_shader_source, const char* fragment_shade
 			glGetProgramInfoLog(program_object_, infoLen, NULL, infoLog.get());
 			throw wexception("Error linking:\n%s", infoLog.get());
 		}
+	}
+}
+
+State::State()
+   : last_active_texture_(NONE), current_framebuffer_(0), current_framebuffer_texture_(0) {
+}
+
+void State::bind(const GLenum target, const GLuint texture) {
+	if (texture == 0)  {
+		return;
+	}
+	do_bind(target, texture);
+}
+
+void State::do_bind(const GLenum target, const GLuint texture) {
+	const auto currently_bound_texture = target_to_texture_[target];
+	if (currently_bound_texture == texture) {
+		return;
+	}
+	if (last_active_texture_ != target) {
+		glActiveTexture(target);
+		last_active_texture_ = target;
+	}
+	glBindTexture(GL_TEXTURE_2D, texture);
+
+	target_to_texture_[target] = texture;
+	texture_to_target_[currently_bound_texture] = NONE;
+	texture_to_target_[texture] = target;
+}
+
+void State::unbind_texture_if_bound(const GLuint texture) {
+	if (texture == 0) {
+		return;
+	}
+	const auto target = texture_to_target_[texture];
+	if (target != 0) {
+		do_bind(target, 0);
+	}
+}
+
+void State::bind_framebuffer(const GLuint framebuffer, const GLuint texture) {
+	if (current_framebuffer_ == framebuffer && current_framebuffer_texture_ == texture) {
+		return;
+	}
+
+	glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);
+	if (framebuffer != 0) {
+		unbind_texture_if_bound(texture);
+		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, texture, 0);
+		assert(glCheckFramebufferStatus(GL_FRAMEBUFFER) == GL_FRAMEBUFFER_COMPLETE);
+	}
+	current_framebuffer_ = framebuffer;
+	current_framebuffer_texture_ = texture;
+}
+
+void State::enable_vertex_attrib_array(std::unordered_set<GLint> entries) {
+	for (const auto e : entries) {
+		if (!enabled_attrib_arrays_.count(e)) {
+			glEnableVertexAttribArray(e);
+		}
+	}
+	for (const auto e : enabled_attrib_arrays_) {
+		if (!entries.count(e)) {
+			glDisableVertexAttribArray(e);
+		}
+	}
+	enabled_attrib_arrays_ = entries;
+}
+
+// static
+State& State::instance() {
+	static State binder;
+	return binder;
+}
+
+
+void vertex_attrib_pointer(int vertex_index, int num_items, int stride, int offset) {
+	glVertexAttribPointer(
+	   vertex_index, num_items, GL_FLOAT, GL_FALSE, stride, reinterpret_cast<void*>(offset));
+}
+
+void swap_rows(const int width, const int height, const int pitch, const int bpp, uint8_t* pixels) {
+	uint8_t* begin_row = pixels;
+	uint8_t* end_row = pixels + pitch * (height - 1);
+	while (begin_row < end_row) {
+		for (int x = 0; x < width * bpp; ++x) {
+			std::swap(begin_row[x], end_row[x]);
+		}
+		begin_row += pitch;
+		end_row -= pitch;
 	}
 }
 

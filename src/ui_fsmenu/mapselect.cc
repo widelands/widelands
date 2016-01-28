@@ -32,6 +32,9 @@
 #include "logic/game_settings.h"
 #include "map_io/widelands_map_loader.h"
 
+// TODO(GunChleoc): Arabic: line height broken for descriptions for Arabic.
+// Fix align for table headings & entries and for wordwrap.
+
 using Widelands::WidelandsMapLoader;
 
 FullscreenMenuMapSelect::FullscreenMenuMapSelect
@@ -54,8 +57,7 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect
 	basedir_("maps"),
 	settings_(settings),
 	ctrl_(ctrl),
-	has_translated_mapname_(false),
-	is_scenario_(false)
+	has_translated_mapname_(false)
 {
 	curdir_ = basedir_,
 	title_.set_textstyle(UI::TextStyle::ui_big());
@@ -77,7 +79,7 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect
 										 UI::Box::Horizontal, checkbox_space_, get_w());
 
 	// Must be initialized before tag checkboxes
-	cb_dont_localize_mapnames_ = new UI::Checkbox(vbox, Point(0, 0));
+	cb_dont_localize_mapnames_ = new UI::Checkbox(vbox, Point(0, 0), _("Show original map names"));
 	cb_dont_localize_mapnames_->set_state(false);
 	cb_dont_localize_mapnames_->changedto.connect
 			(boost::bind(&FullscreenMenuMapSelect::fill_table, boost::ref(*this)));
@@ -87,12 +89,6 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect
 	cb_show_all_maps_->set_state(true);
 
 	vbox->add(cb_dont_localize_mapnames_, UI::Box::AlignLeft, true);
-	UI::Textarea * ta_dont_localize_mapnames =
-			/** TRANSLATORS: Checkbox title. If this checkbox is enabled, map names aren't translated. */
-			new UI::Textarea(vbox, _("Show original map names"), UI::Align_CenterLeft);
-	vbox->add_space(padding_);
-	vbox->add(ta_dont_localize_mapnames, UI::Box::AlignLeft);
-	vbox->add_space(checkbox_space_);
 	vbox->set_size(get_w() - 2 * tablex_, checkbox_space_);
 
 	vbox = new UI::Box(this,
@@ -101,6 +97,7 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect
 	_add_tag_checkbox(vbox, "official", _("Official"));
 	_add_tag_checkbox(vbox, "unbalanced", _("Unbalanced"));
 	_add_tag_checkbox(vbox, "seafaring", _("Seafaring"));
+	_add_tag_checkbox(vbox, "artifacts", _("Artifacts"));
 	_add_tag_checkbox(vbox, "scenario", _("Scenario"));
 	vbox->set_size(get_w() - 2 * tablex_, checkbox_space_);
 
@@ -128,7 +125,6 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect
 	// We don't need the unlocalizing option if there is nothing to unlocalize.
 	// We know this after the list is filled.
 	cb_dont_localize_mapnames_->set_visible(has_translated_mapname_);
-	ta_dont_localize_mapnames->set_visible(has_translated_mapname_);
 }
 
 void FullscreenMenuMapSelect::think()
@@ -157,12 +153,6 @@ bool FullscreenMenuMapSelect::compare_size(uint32_t rowa, uint32_t rowb)
 }
 
 
-bool FullscreenMenuMapSelect::is_scenario()
-{
-	return is_scenario_;
-}
-
-
 MapData const * FullscreenMenuMapSelect::get_map() const
 {
 	if (!table_.has_selection()) {
@@ -181,7 +171,7 @@ void FullscreenMenuMapSelect::clicked_ok()
 		curdir_ = mapdata.filename;
 		fill_table();
 	} else {
-		if (is_scenario()) {
+		if (maps_data_[table_.get_selected()].maptype == MapData::MapType::kScenario) {
 			end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kScenarioGame);
 		} else {
 			end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kNormalGame);
@@ -257,43 +247,41 @@ void FullscreenMenuMapSelect::fill_table()
 
 		for (const std::string& mapfilename : files) {
 			// Add map file (compressed) or map directory (uncompressed)
-			if (Widelands::WidelandsMapLoader::is_widelands_map(mapfilename)) {
-				std::unique_ptr<Widelands::MapLoader> ml = map.get_correct_loader(mapfilename);
-				if (ml.get() != nullptr) {
-					try {
-						map.set_filename(mapfilename);
-						ml->preload_map(true);
+			std::unique_ptr<Widelands::MapLoader> ml = map.get_correct_loader(mapfilename);
+			if (ml != nullptr) {
+				try {
+					map.set_filename(mapfilename);
+					ml->preload_map(true);
 
-						if (!map.get_width() || !map.get_height()) {
-							continue;
-						}
-
-						MapData::MapType maptype;
-						if (map.scenario_types() & scenario_types_) {
-							maptype = MapData::MapType::kScenario;
-						} else if (dynamic_cast<WidelandsMapLoader*>(ml.get())) {
-							maptype = MapData::MapType::kNormal;
-						} else {
-							maptype = MapData::MapType::kSettlers2;
-						}
-
-						MapData mapdata(map, mapfilename, maptype, display_type);
-
-						has_translated_mapname_ =
-								has_translated_mapname_ || (mapdata.name != mapdata.localized_name);
-
-						bool has_all_tags = true;
-						for (std::set<uint32_t>::const_iterator it = req_tags_.begin(); it != req_tags_.end(); ++it)
-							has_all_tags &= mapdata.tags.count(tags_ordered_[*it]);
-						if (!has_all_tags) {
-							continue;
-						}
-						maps_data_.push_back(mapdata);
-					} catch (const std::exception & e) {
-						log("Mapselect: Skip %s due to preload error: %s\n", mapfilename.c_str(), e.what());
-					} catch (...) {
-						log("Mapselect: Skip %s due to unknown exception\n", mapfilename.c_str());
+					if (!map.get_width() || !map.get_height()) {
+						continue;
 					}
+
+					MapData::MapType maptype;
+					if (map.scenario_types() & scenario_types_) {
+						maptype = MapData::MapType::kScenario;
+					} else if (dynamic_cast<WidelandsMapLoader*>(ml.get())) {
+						maptype = MapData::MapType::kNormal;
+					} else {
+						maptype = MapData::MapType::kSettlers2;
+					}
+
+					MapData mapdata(map, mapfilename, maptype, display_type);
+
+					has_translated_mapname_ =
+							has_translated_mapname_ || (mapdata.name != mapdata.localized_name);
+
+					bool has_all_tags = true;
+					for (std::set<uint32_t>::const_iterator it = req_tags_.begin(); it != req_tags_.end(); ++it)
+						has_all_tags &= mapdata.tags.count(tags_ordered_[*it]);
+					if (!has_all_tags) {
+						continue;
+					}
+					maps_data_.push_back(mapdata);
+				} catch (const std::exception & e) {
+					log("Mapselect: Skip %s due to preload error: %s\n", mapfilename.c_str(), e.what());
+				} catch (...) {
+					log("Mapselect: Skip %s due to unknown exception\n", mapfilename.c_str());
 				}
 			} else if (g_fs->is_directory(mapfilename)) {
 				// Add subdirectory to the list
@@ -375,6 +363,11 @@ void FullscreenMenuMapSelect::fill_table()
 		}
 	}
 	table_.fill(maps_data_, display_type);
+	if (!table_.empty()) {
+		table_.select(0);
+	} else {
+		ok_.set_enabled(false);
+	}
 }
 
 /*
@@ -386,16 +379,12 @@ UI::Checkbox * FullscreenMenuMapSelect::_add_tag_checkbox
 	int32_t id = tags_ordered_.size();
 	tags_ordered_.push_back(tag);
 
-	UI::Checkbox * cb = new UI::Checkbox(box, Point(0, 0));
+	UI::Checkbox * cb = new UI::Checkbox(box, Point(0, 0), displ_name);
 	cb->changedto.connect
 		(boost::bind(&FullscreenMenuMapSelect::_tagbox_changed, this, id, _1));
 
 	box->add(cb, UI::Box::AlignLeft, true);
-	UI::Textarea * ta = new UI::Textarea(box, displ_name, UI::Align_CenterLeft);
-	box->add_space(padding_);
-	box->add(ta, UI::Box::AlignLeft);
 	box->add_space(checkbox_space_);
-
 	tags_checkboxes_.push_back(cb);
 
 	return cb;

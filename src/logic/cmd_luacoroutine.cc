@@ -50,18 +50,24 @@ void CmdLuaCoroutine::execute (Game & game) {
 		for (int i = 1; i <= game.map().get_nrplayers(); i++) {
 			Widelands::Message & msg =
 				*new Widelands::Message
-				(Message::Type::kGameLogic, game.get_gametime(), "Lua Coroutine Failed", e.what());
+				(Message::Type::kGameLogic,
+				 game.get_gametime(),
+				 "images/ui_basic/menu_help.png",
+				 "Coroutine",
+				 "Lua Coroutine Failed",
+				 e.what());
 			game.player(i).add_message(game, msg, true);
 		}
 		game.game_controller()->set_desired_speed(0);
 	}
 }
 
-#define CMD_LUACOROUTINE_VERSION 3
+constexpr uint16_t kCurrentPacketVersion = 3;
+
 void CmdLuaCoroutine::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& mol) {
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
-		if (packet_version == CMD_LUACOROUTINE_VERSION) {
+		if (packet_version == kCurrentPacketVersion) {
 			GameLogicCommand::read(fr, egbase, mol);
 
 			// This function is only called when saving/loading savegames. So save
@@ -70,9 +76,9 @@ void CmdLuaCoroutine::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader
 			assert(lgi); // If this is not true, this is not a game.
 
 			m_cr = lgi->read_coroutine(fr);
-		} else
-			throw GameDataError
-				("unknown/unhandled version %u", packet_version);
+		} else {
+			throw UnhandledVersionError("CmdLuaCoroutine", packet_version, kCurrentPacketVersion);
+		}
 	} catch (const WException & e) {
 		throw GameDataError("lua function: %s", e.what());
 	}
@@ -80,7 +86,7 @@ void CmdLuaCoroutine::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader
 void CmdLuaCoroutine::write
 	(FileWrite & fw, EditorGameBase & egbase, MapObjectSaver & mos)
 {
-	fw.unsigned_16(CMD_LUACOROUTINE_VERSION);
+	fw.unsigned_16(kCurrentPacketVersion);
 	GameLogicCommand::write(fw, egbase, mos);
 
 	// This function is only called when saving/loading savegames. So save to

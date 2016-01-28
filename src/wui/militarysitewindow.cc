@@ -18,7 +18,7 @@
  */
 
 #include "graphic/graphic.h"
-#include "logic/militarysite.h"
+#include "logic/map_objects/tribes/militarysite.h"
 #include "ui_basic/tabpanel.h"
 #include "wui/buildingwindow.h"
 #include "wui/soldiercapacitycontrol.h"

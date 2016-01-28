@@ -113,7 +113,6 @@ FullscreenMenuNetSetupLAN::FullscreenMenuNetSetupLAN () :
 	playername  .changed.connect
 		(boost::bind(&FullscreenMenuNetSetupLAN::change_playername, this));
 	playername  .set_font(ui_fn(), fs_small(), UI_FONT_CLR_FG);
-	opengames   .set_font(ui_fn(), fs_small());
 	opengames   .add_column(m_lisw * 2 / 5, _("Host"));
 	opengames   .add_column(m_lisw * 2 / 5, _("Map"));
 	opengames   .add_column(m_lisw     / 5, _("State"));

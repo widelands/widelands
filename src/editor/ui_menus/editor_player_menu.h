@@ -31,7 +31,7 @@
 #include "ui_basic/unique_window.h"
 
 
-struct EditorInteractive;
+class EditorInteractive;
 namespace UI {
 struct Textarea;
 struct EditBox;
@@ -57,9 +57,6 @@ private:
 		* m_plr_set_tribes_buts         [MAX_PLAYERS];
 
 	std::vector<std::string> m_tribenames;
-
-	/// tribename, descname
-	std::map<std::string, std::string> m_tribe_descnames;
 
 	/// List of the tribes currently selected for all players
 	std::string m_selected_tribes[MAX_PLAYERS];

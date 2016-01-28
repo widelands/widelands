@@ -1,19 +1,22 @@
-# Automatically created by Widelands bzr5243[lua] (Debug)
+# Automatically created by Widelands bzr7436[trunk] (Debug)
 
 [global]
-packet_version="1"
+packet_version="2"
 
 [player_1]
 name="Barbarian Bouncer"
 tribe="barbarians"
 ai=
+closeable="false"
 
 [player_2]
 name="Epic Empire"
 tribe="empire"
-ai="Defensive"
+ai="very_weak"
+closeable="false"
 
 [player_3]
 name="Awesome Atlantean"
 tribe="atlanteans"
-ai="Defensive"
+ai="very_weak"
+closeable="false"

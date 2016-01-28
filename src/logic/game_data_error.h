@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009 by the Widelands Development Team
+ * Copyright (C) 2009, 2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -32,6 +32,26 @@ struct GameDataError : public WException {
 	char const * what() const noexcept override {return m_what.c_str();}
 protected:
 	GameDataError() {}
+};
+
+/** This exception's message compiles information for the user when an old savegame could not be
+ * loaded due to packet version mismatch.
+ *
+ * The main message is localizeable, the technical information is not.
+ */
+struct UnhandledVersionError : public GameDataError {
+
+	/** CTor
+	 *
+	 * @param packet_version         The version of the packet that Widelands is trying to load.
+ 	 * @param current_packet_version The packet version that Widelands is currently using.
+	 */
+	explicit UnhandledVersionError(const char* packet_name, int32_t packet_version,
+									 int32_t current_packet_version);
+
+	char const * what() const noexcept override {return m_what.c_str();}
+protected:
+	UnhandledVersionError() {}
 };
 
 }

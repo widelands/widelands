@@ -98,7 +98,8 @@ void initialize() {
 	g_fs = new LayeredFileSystem();
 	g_fs->add_file_system(&FileSystem::create(INSTALL_DATADIR));
 
-	g_gr = new Graphic(1, 1, false);
+	g_gr = new Graphic();
+	g_gr->initialize(Graphic::TraceGl::kNo, 1, 1, false);
 }
 
 }  // namespace

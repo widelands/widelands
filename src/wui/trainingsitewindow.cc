@@ -18,7 +18,7 @@
  */
 
 #include "graphic/graphic.h"
-#include "logic/trainingsite.h"
+#include "logic/map_objects/tribes/trainingsite.h"
 #include "ui_basic/tabpanel.h"
 #include "wui/productionsitewindow.h"
 #include "wui/soldiercapacitycontrol.h"

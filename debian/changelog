@@ -1,0 +1,546 @@
+widelands (1:18-3) unstable; urgency=medium
+
+  Packaging cleanup version only, no user-visible changes.
+
+  * d/rules: massive cleanups to follow the debhelper way of life
+    As a side effect, the package can now build in parallel.
+  * d/rules: don't include another version of GPL-2 text file
+  * d/widelands.6: update the contact information to launchpad
+  * d/patches: various cosmetics before proposing our patches upstream
+
+ -- Martin Quinson <mquinson@debian.org>  Tue, 11 Mar 2014 19:09:57 +0100
+
+widelands (1:18-2) unstable; urgency=medium
+
+  * Reduce optimization level to -02 on mips, as "gcc -03" spits ICE.
+    Thanks to Teppo Maenpaa for the hint about how to solve that FTBFS.
+
+ -- Martin Quinson <mquinson@debian.org>  Fri, 28 Feb 2014 22:33:11 +0100
+
+widelands (1:18-1) unstable; urgency=medium
+
+  * New upstream release. Upstream changes:
+    - Seafaring enhancements: expeditions and colonization.
+    - Eviction of workers from production sites.
+    - Soldier preference selection in military sites.
+    - Better in-game stock charts with new information.
+    - New maps, sounds, music, graphics & animations.
+    - On demand loading of graphics improves startup time.
+    - Better performance: Widelands needs less CPU and memory.
+  * Only use system-wide fonts if they exist (portability for older
+    systems).
+
+ -- Martin Quinson <mquinson@debian.org>  Sun, 23 Feb 2014 21:45:49 +0100
+
+widelands (1:18~rc1-3) unstable; urgency=medium
+
+  [Hans Joachim Desserud]
+  * Drop buildep on libboost-signals-dev: signal2 are within boost now
+  * Bump buildep to libglew1.6-dev, fallback on versionless libglew-dev
+
+  [Martin Quinson]
+  * d/watch: point on launchpad instead of sourceforge (at least)
+
+ -- Martin Quinson <mquinson@debian.org>  Thu, 20 Feb 2014 21:58:26 +0100
+
+widelands (1:18~rc1-2) unstable; urgency=medium
+
+  * Rework the kfreebsd patch to fix the FTBFS [Teppo Maenpaa]
+
+ -- Martin Quinson <mquinson@debian.org>  Thu, 13 Feb 2014 16:46:39 +0100
+
+widelands (1:18~rc1-1) unstable; urgency=medium
+
+  * New upstream release (release candidate)
+    - Update our patches, drop the ones that were integrated upstream 
+      (gcc4.7, Werror, boost-linking-4.7)
+    - The following bugs were fixed upstream (Closes: #668894, #678310)
+  * d/control: Move build-deps to boost 1.54
+  * d/control: Bump standards-version to 3.9.5 (no change mandated)
+  * Depend on fonts-dejavu-core, fonts-dejavu-extra to not embeed these fonts
+  * Depend on fonts-freefont-ttf instead of ttf-freefont as the
+    package got renamed recently (Closes: #738257, #738258)
+
+ -- Martin Quinson <mquinson@debian.org>  Mon, 10 Feb 2014 21:24:51 +0100
+
+widelands (1:17-5) unstable; urgency=low
+
+  * Team upload.
+  * d/control: Add Build-Depends on imagemagick. (Closes: #707489)
+
+ -- Ansgar Burchardt <ansgar@debian.org>  Sat, 11 May 2013 15:55:39 +0200
+
+widelands (1:17-4) unstable; urgency=low
+
+  * d/rules: Move to packaging to git VCS
+  * d/rules: Enable parallel build of the package
+  * d/rules: List uninstalled files at build time
+  * d/rules: Install logos in various sizes under /usr/share/icons
+  * d/rules: Manually define CPPFLAGS and friends with hardening flags
+    Seems mandated because we are overloading dh_auto_build
+  * d/compat: Bump to version 9 of debhelper
+  * d/control: Bump standards-version to 3.9.4 (no change mandated)
+  * d/control: Put pkg-game as a maintainer and myself as an uploader
+  * d/widelands.menu: add a longtitle and an icon (Closes: #703255)
+  * d/copyright: convert to Machine-readable format
+  * d/copyright: specify where the source of media is (Closes: #702070)
+
+ -- Martin Quinson <mquinson@debian.org>  Mon, 06 May 2013 16:20:14 +0200
+
+widelands (1:17-3) unstable; urgency=low
+
+  * add debian/compat (7)
+  * add patch boost-linking-4.7 to fix linking error with boost
+    and gcc 4.7. This also links widelands dinamically with
+    boost, as per policy (Closes: #672034)
+  * add patch Werror to fix compilation with gcc 4.7 and the
+    -Werror=format-security flag
+
+ -- Enrico Tassi <gareuselesinge@debian.org>  Wed, 02 May 2012 15:03:59 +0200
+
+widelands (1:17-2) unstable; urgency=low
+
+  * define PATH_MAX if not defined (i.e. on hurd)
+  * re-enable patch for s390 but not on s390x
+
+ -- Enrico Tassi <gareuselesinge@debian.org>  Wed, 02 May 2012 13:46:11 +0200
+
+widelands (1:17-1) experimental; urgency=low
+
+  * new upstream release
+  * disable patches/s390
+  * debian/rules: use && istead of ; so that failures are reported correctly 
+  * we go to experimental to see if s390 is happy and not to disturb
+    transitions for libpng15 and boost
+
+ -- Enrico Tassi <gareuselesinge@debian.org>  Tue, 24 Apr 2012 17:27:19 +0200
+
+widelands (1:17~rc2-3) unstable; urgency=low
+
+  * on kfreebsd, the execinfo library cannot be found for an unkown reason.
+    Try to survive this fact to fix the resulting FTBFS.
+
+ -- Martin Quinson <mquinson@debian.org>  Fri, 13 Apr 2012 22:37:25 -1000
+
+widelands (1:17~rc2-2) unstable; urgency=low
+
+  * call make and not make all
+
+ -- Enrico Tassi <gareuselesinge@debian.org>  Thu, 12 Apr 2012 14:24:14 +0200
+
+widelands (1:17~rc2-1) unstable; urgency=low
+
+  * New upstream release candidate
+  * Add patches/dbg_symbols to compile -g to generate the -dbg package
+  * Update build dependencies, including the removal of GGZ (Closes: #655402)
+  * Fixed flags passed to cmake for locales (Closes: #645127, LP: #872777)
+
+ -- Enrico Tassi <gareuselesinge@debian.org>  Wed, 11 Apr 2012 14:58:00 +0200
+
+widelands (1:16-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Enrico Tassi <gareuselesinge@debian.org>  Tue, 19 Apr 2011 21:50:15 +0200
+
+widelands (1:16~rc1-1) unstable; urgency=low
+
+  * New upsteram release candidate 
+  * Updated Standards-Version to 3.9.1, no changes required 
+  * Removed patches/secfix-617960 since part of the new release 
+  * Do not override widelands version number in debian/rules
+
+ -- Enrico Tassi <gareuselesinge@debian.org>  Wed, 06 Apr 2011 10:02:21 +0200
+
+widelands (1:15-3) unstable; urgency=high
+
+  * Closes a potential security issue in internet games.
+    Added: patches/secfix-617960 (Closes: #617960)
+
+ -- Enrico Tassi <gareuselesinge@debian.org>  Wed, 23 Mar 2011 09:47:28 +0100
+
+widelands (1:15-2) unstable; urgency=low
+
+  * add patch s390 to fix FTBFS on s390. The patch defines
+    explicit _Index(uintptr_t  const I), so that it's call
+    is not ambiguous.
+
+ -- Enrico Tassi <gareuselesinge@debian.org>  Mon, 10 May 2010 15:57:07 +0200
+
+widelands (1:15-1) unstable; urgency=low
+
+  * New upstream release
+  * source format 3.0 (quilt) 
+
+ -- Enrico Tassi <gareuselesinge@debian.org>  Sat, 17 Apr 2010 16:43:43 +0200
+
+widelands (1:15~rc2-1) unstable; urgency=low
+
+  * New upstream release candidate: tag:build15-rc2 on lp:widelands/build15
+
+ -- Enrico Tassi <gareuselesinge@debian.org>  Fri, 26 Mar 2010 11:25:10 +0100
+
+widelands (1:15~rc1-2) unstable; urgency=low
+
+  * fix typo in package description, thanks Erik Esterer (Closes: #566267) 
+  * fixed paths passed to cmake, locale are working (Closes: #472406) 
+
+ -- Enrico Tassi <gareuselesinge@debian.org>  Wed, 17 Mar 2010 22:28:04 +0100
+
+widelands (1:15~rc1-1) unstable; urgency=low
+
+  * new upstream release candidate, tag:build15-rc1 on lp:widelands/build15
+  * new build-dependencies over lua5.1 and cmake
+  * all debian/patches were obsolete and are thus have been removed
+  * switched from CDBS to dh
+  * standard versions to 3.8.4, no changes 
+  * get rid of duplicate fonts in ttf-freefont, install symlinks instead
+
+ -- Enrico Tassi <gareuselesinge@debian.org>  Tue, 16 Mar 2010 20:34:24 +0100
+
+widelands (1:14-3) unstable; urgency=low
+
+  * more prcise build-depends to ease backporting, thanks Romain Chantereau
+    (Closes: #546840) 
+
+ -- Enrico Tassi <gareuselesinge@debian.org>  Mon, 12 Oct 2009 22:24:26 +0200
+
+widelands (1:14-2) unstable; urgency=low
+
+  * install the global directory (Closes: #550158)
+
+ -- Enrico Tassi <gareuselesinge@debian.org>  Fri, 09 Oct 2009 22:51:43 +0200
+
+widelands (1:14-1) unstable; urgency=low
+
+  * New upstream release
+  * Disable no optimization patch for amd64, the upstream does the same
+  * Disable no-unroll-loops on arm, was for an old gcc version
+  * Added README.source pointing to dpatch instructions
+  * Standards-version to 3.8.3, no changes
+
+ -- Enrico Tassi <gareuselesinge@debian.org>  Sat, 03 Oct 2009 22:13:33 +0200
+
+widelands (1:14~rc1-2) unstable; urgency=low
+
+  * build-depend on scons
+
+ -- Enrico Tassi <gareuselesinge@debian.org>  Mon, 14 Sep 2009 10:29:39 +0200
+
+widelands (1:14~rc1-1) unstable; urgency=low
+
+  * New upstream pre-release
+
+ -- Enrico Tassi <gareuselesinge@debian.org>  Sun, 15 Feb 2009 14:53:21 +0100
+
+widelands (1:13-2) unstable; urgency=low
+
+  * Uploaded to unstable
+
+ -- Enrico Tassi <gareuselesinge@debian.org>  Sun, 15 Feb 2009 14:05:21 +0100
+
+widelands (1:13-1) experimental; urgency=low
+
+  * New upstream release (build-13)
+
+ -- Enrico Tassi <gareuselesinge@debian.org>  Sun, 23 Nov 2008 18:05:31 +0100
+
+widelands (1:13~3516-1) experimental; urgency=low
+
+  * Second release candidate for version 13
+
+ -- Enrico Tassi <gareuselesinge@debian.org>  Sun, 16 Nov 2008 11:34:03 +0100
+
+widelands (1:13~3472-1) experimental; urgency=low
+
+  * First release candidate for version 13
+
+ -- Enrico Tassi <gareuselesinge@debian.org>  Sun, 02 Nov 2008 20:46:38 +0100
+
+widelands (1:13~3230-1) experimental; urgency=low
+
+  * Svn snapshot with many bugfixes, most notably the game is not using 
+    100% of CPU time anymore (Closes: #370528) 
+
+ -- Enrico Tassi <gareuselesinge@debian.org>  Thu, 31 Jul 2008 09:29:23 +0200
+
+widelands (1:12-3) unstable; urgency=low
+
+  * fixed previous patch that was using the incriminated flag only on
+    arm and armel
+
+ -- Enrico Tassi <gareuselesinge@debian.org>  Wed, 14 May 2008 10:25:05 +0200
+
+widelands (1:12-2) unstable; urgency=low
+
+  * added a patch to disable -funroll-loops on arm, thanks Aurelien Jarno
+    for the hint
+
+ -- Enrico Tassi <gareuselesinge@debian.org>  Thu, 08 May 2008 15:57:15 +0200
+
+widelands (1:12-1) unstable; urgency=low
+
+  * New upstream release featuring some improved graphics, multiplayer
+    (network) support and a first glimpse of a new tribe (Atlantidis).
+
+ -- Enrico Tassi <gareuselesinge@debian.org>  Sat, 05 Apr 2008 16:12:17 +0200
+
+widelands (1:12~rc-1) experimental; urgency=low
+
+  * New upstream release featuring some improved graphics and network gameplay
+  * Ack NMU, g++-4.3 patch applied upstream.
+  * Fixed rules to use nice CDBS hooks
+  * Updated copyright file mentioning that Widelands.ttf is distributed under
+    the SIL open font license version 1.1.
+
+ -- Enrico Tassi <gareuselesinge@debian.org>  Sun, 30 Mar 2008 18:46:24 +0200
+
+widelands (1:11-1.1) unstable; urgency=low
+
+  * Non-maintainer upload for the gcc-4.3 release goal, with a patch
+    provided by Cyril Brulebois.  (Closes: #417760)
+
+ -- Philipp Kern <pkern@debian.org>  Sun, 16 Mar 2008 21:43:17 +0100
+
+widelands (1:11-1) unstable; urgency=low
+
+  * New upstream release. Most relevant features are: fog of war,  autosave,
+    replay, better UI, new animations.
+  * Enrico Tassi <gareuselesinge@debian.org> added to Uploaders
+  * moved to cdbs debian/rules
+  * version number must (according to policy 5.6.12) start with a digit, thus
+    the version is now 11
+  * versions must be strictly increasing, thus use epoch 1 to make
+    11 greater than build10
+  * Standards-Version bumped to 3.7.3, no modifications needed
+  * debian/ directory put under vcs on svn.d.o/collab-maint 
+
+ -- Enrico Tassi <gareuselesinge@debian.org>  Sat, 19 Jan 2008 17:02:26 +0100
+
+widelands (build10-1) unstable; urgency=low
+
+  * New upstream release.
+    - closes #388406: Core dump during second mission.
+      Fixed in upstream svn rev 1078.
+    - closes #345451: Segfault on victory.
+      Forwarded upstream and solved at some point.
+    - closes #345217: save dialog box counter-intuitive
+      Forwarded upstream and solved at some point.
+    - closes #345386: --coredump option use is not intuitive.
+      Was marked fixed-upstream in debian since a while
+    - The building mecanism was completely changed upstream. 
+      Completely redo the packaging.
+  * Drop the most of the patches since they were integrated upstream.
+    Only locale is still there, but this is because upstream hardcoded
+    a path in the game...    
+
+ -- Martin Quinson <mquinson@debian.org>  Wed, 21 Mar 2007 10:11:56 +0100
+
+widelands (build9half-10) unstable; urgency=low
+
+  * Include a freedesktop complient desktop file, even if I personnaly
+    think it dupplicates the debian menu system (Closes: #359286).
+
+ -- Martin Quinson <mquinson@debian.org>  Fri, 14 Apr 2006 09:29:36 +0200
+
+widelands (build9half-9) unstable; urgency=low
+
+  * Remove source data of localization (po & pot files)
+  * Rework the README to let it fit better the debian reality
+    (Closes: #359175)
+
+ -- Martin Quinson <mquinson@debian.org>  Mon, 27 Mar 2006 09:00:07 +0200
+
+widelands (build9half-8) unstable; urgency=low
+
+  * New patch: locale_path
+    Do lookup the locale data in the right directory [Eckhart Wörner]
+    (Closes: #357801)
+
+ -- Martin Quinson <mquinson@debian.org>  Sun, 26 Mar 2006 20:29:17 +0200
+
+widelands (build9half-7) unstable; urgency=low
+
+  * Fix a conflict between widelands and widelands-date, stupid me
+    (Closes: #358517)
+
+ -- Martin Quinson <mquinson@debian.org>  Fri, 24 Mar 2006 23:06:01 +0100
+
+widelands (build9half-6) unstable; urgency=low
+
+  * Do compile the locale data before distributing them (sorry)
+
+ -- Martin Quinson <mquinson@debian.org>  Tue, 21 Mar 2006 22:22:58 +0100
+
+widelands (build9half-5) unstable; urgency=low
+
+  * Add locale and music data to the package. (Closes: #357801)
+
+ -- Martin Quinson <mquinson@debian.org>  Sun, 19 Mar 2006 19:41:53 +0100
+
+widelands (build9half-4) unstable; urgency=low
+
+  * New patch: default_resolution (backported from upstream CVS)
+    Set a default screen resolution when the user fails to choose one.
+    (Closes: #345299)
+  * New patch: gcc41 (from Martin Michlmayr in BTS)
+    Allow to compile with gcc 4.1 (Closes: #357614)
+
+ -- Martin Quinson <mquinson@debian.org>  Sat, 18 Mar 2006 21:41:05 +0100
+
+widelands (build9half-3) unstable; urgency=low
+
+  * New patch: std::string:npos_is_negative by Sami Liedes
+    This solves a segfault on some non-x86 arches (Closes: #345384)
+  * Do add some content to the -dbg package. erm. (Closes: #345867)
+  * Droped patch:
+    - mips: portability now sanitized, no need for this anymore
+    - amd64: commited upstream, so no need to keep it for reference
+      (it only patched a commented line for the day it went uncommented)
+    - alpha: commited upstream (wasn't used since a while, kill it)
+
+ -- Martin Quinson <mquinson@debian.org>  Sat,  7 Jan 2006 22:37:41 +0100
+
+widelands (build9half-2) unstable; urgency=low
+
+  * Sanitize architecture checks using SDL facilities [Falk Hueffner]
+    (Closes: #346011)
+  * Rewrite the usage summary [Florian Weber] (Closes: #345386)
+
+ -- Martin Quinson <mquinson@debian.org>  Thu,  5 Jan 2006 00:18:27 +0100
+
+widelands (build9half-1) unstable; urgency=low
+
+  * New upstream release (Closes: #342263).
+  * Changed patches:
+    - ppc and Knight applied upstream and thus droped.
+    - amd64 almost applied upstream and thus only kept the unapplied parts
+  * New patches:
+    - mips: portability patch by Thiemo Seufer (Closes: #333465)
+    - congested_road [Florian Weber] to make sure that overloaded
+      road are more expensive and thus less taken
+    - lowering_requested_soldiers [Nanne Wams] (bug fix)
+    - Fisher_run_mine_bug_1196918 [Ted Carlson] (bug fix)
+  * Debian packaging: 
+    - let -data depend on ttf-bitstream-vera which provide the Vera.ttf
+      font, and don't include our own copy (Closes: #302054)
+    
+ -- Martin Quinson <mquinson@debian.org>  Sun,  20 Dec 2005 11:17:27 +0200
+
+widelands (build9-7) unstable; urgency=low
+
+  * Rebuild for G++ 4.x transition
+  * debian/patch/gcc4: actually port to this compiler (Closes: #322780)
+  * Do not let cdbs touch our control file since it's considered RC now, and
+    we already have enough of them.
+
+ -- Martin Quinson <mquinson@debian.org>  Fri, 12 Aug 2005 21:59:01 +0200
+
+widelands (build9-6) unstable; urgency=low
+
+  * Move into the /usr/game gettho (Closes: #295183)
+  * Argh! Add the AUTHORS file to the usual location for the usual
+    reason. I'm so stupid! (Closes: #294918) again.
+    Thanks to Gerfried Fuchs for not laughing while reporting.
+  * Add a man page (Closes: #295182)
+
+ -- Martin Quinson <mquinson@debian.org>  Mon, 14 Feb 2005 10:41:12 +0100
+
+widelands (build9-5) unstable; urgency=low
+
+  * Remove libggzcore-dev, libggzdmod-dev, libggz-dev from build-deps since
+    we do not use it right now and since they can't be fulfilled in sarge.
+
+ -- Martin Quinson <mquinson@debian.org>  Sun, 13 Feb 2005 22:27:11 +0100
+
+widelands (build9-4) unstable; urgency=low
+
+  * Include COPYING in /usr/share/widelands so that the 'Licence' button
+    works (Closes: #294918). Stupid me, I fixed README in previous release,
+    and forgot about this one. Thanks to Christopher Zimmermann for reporting.
+
+ -- Martin Quinson <mquinson@debian.org>  Sun, 13 Feb 2005 16:45:03 +0100
+
+widelands (build9-3) unstable; urgency=low
+
+  * Port to alpha architecture, fix all warnings there (Closes: #291371).
+  * Copy the README file into the usr/share path so that it can be
+    retrieved at run time.
+
+ -- Martin Quinson <mquinson@debian.org>  Sun, 30 Jan 2005 23:05:51 +0100
+
+widelands (build9-2) unstable; urgency=low
+
+  * Patch to port to PowerPC (big endian char unsigned-by-default issues).
+    [Christof Petig]
+
+ -- Martin Quinson <mquinson@debian.org>  Fri, 14 Jan 2005 23:55:23 +0100
+
+widelands (build9-1) unstable; urgency=low
+
+  * New upstream release.
+  * Remove the Knights.ttf font for licencing reasons (Thanks to Josh
+    Triplett for noticing and sorry for not having checked myself).
+    Vera.ttf is used instead, as done upstream. 
+    (Closes: #289750)
+  * Add patch to port to AMD64 from Andreas Jochens (Thanks!).
+    (Closes: #289678)
+
+ -- Martin Quinson <mquinson@debian.org>  Fri, 14 Jan 2005 12:19:20 +0100
+
+widelands (build8.cvs050107-1) unstable; urgency=low
+
+  * The "Let's make CVS builds really usefull to devel"
+  * Update to the lastest CVS state.
+  * Add a wrapper to the CVS builds which captures all informations
+    developpers need to debug the problem the users will run into:
+     - any core generated
+     - the prog output
+     - the record file (mouse movements, key press, etc. during the game)
+     - package version (as reported by dpkg)
+     - architecture (uname -a)
+    Those information are placed in /tmp and when widelands exits with
+    errcode, the user is prompted to report those information to the right
+    BTS. They are not sent automatically.
+  * To help Holger and friends tracking the issues, also generate a
+    widelands-dbg package for CVS builds. It contains the debugging symbol,
+    so that gdb can find them when the package is installed.
+  * Please note that none of those CVS build features are used while building
+    a release version (difference: "cvs" in version name).
+    For that, debian/control is now generated by cdbs.
+
+ -- Martin Quinson <mquinson@debian.org>  Fri,  7 Jan 2005 21:54:06 +0100
+
+widelands (build8.cvs050101-1) unstable; urgency=low
+
+  * Packaging the content of the CVS to help finding the last bugs before
+    build9.
+
+ -- Martin Quinson <mquinson@debian.org>  Sat,  1 Jan 2005 21:28:04 +0100
+
+widelands (build8-2) unstable; urgency=low
+
+  [Matti Peltomaki]
+  * Fix a typo in postinst (s/urge/purge)
+  * Rename {menu,postinst,postrm} to widelands.{menu,postinst,postrm} since
+    we build more than one package.
+    
+  [Martin Quinson]
+  * Fix the versionning scheme. This is not a native package.
+
+ -- Martin Quinson <martin.quinson@tuxfamily.org>  Mon, 27 Sep 2004 13:04:05 +0200
+
+widelands (build8) unstable; urgency=low
+
+  * New upstream release.
+  * Add a menu entry (thanks Matti Peltomaki)
+  * New patch: Mask the fps rate (thanks Matti Peltomaki).
+
+ -- Martin Quinson <martin.quinson@tuxfamily.org>  Thu, 23 Sep 2004 17:37:55 +0200
+
+widelands (build7.cvs040917-1) unstable; urgency=low
+
+  * Initial release.
+
+ -- Martin Quinson <martin.quinson@tuxfamily.org>  Thu, 16 Sep 2004 22:40:16 +0200
+

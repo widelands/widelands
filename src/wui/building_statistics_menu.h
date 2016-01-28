@@ -23,7 +23,7 @@
 #include <vector>
 
 #include "graphic/color.h"
-#include "logic/building.h"
+#include "logic/map_objects/tribes/building.h"
 #include "logic/widelands.h"
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
@@ -68,7 +68,7 @@ private:
 	/// Adds a button for the building type belonging to the id and descr to the tab.
 	/// Returns true when a new row needs to be created.
 	bool add_button(
-		Widelands::BuildingIndex id, const Widelands::BuildingDescr& descr, int tab_index,
+		Widelands::DescriptionIndex id, const Widelands::BuildingDescr& descr, int tab_index,
 		UI::Box& row, int* column);
 
 	/// Jumps to the next / previous appropriate building
@@ -80,7 +80,7 @@ private:
 	                            const RGBColor& color);
 
 	/// Sets the current building type for the bottom navigation
-	void set_current_building_type(Widelands::BuildingIndex id);
+	void set_current_building_type(Widelands::DescriptionIndex id);
 
 	/// Change the percentage where buildings are deemed unproductive
 	void low_production_changed();
@@ -119,13 +119,15 @@ private:
 	UI::Textarea no_unproductive_label_;
 
 	/// The building type we are currently navigating
-	Widelands::BuildingIndex current_building_type_;
+	Widelands::DescriptionIndex current_building_type_;
 	/// The last building that was jumped to
 	int32_t last_building_index_;
 	/// The type of last building that was jumped to
-	Widelands::BuildingIndex last_building_type_;
+	Widelands::DescriptionIndex last_building_type_;
 	/// The last time the information in this Panel got updated
 	uint32_t lastupdate_;
+	/// Whether the window was minimized the last time that think() was executed
+	uint32_t was_minimized_;
 
 	/// At which percent to deem buildings as unproductive
 	int low_production_;

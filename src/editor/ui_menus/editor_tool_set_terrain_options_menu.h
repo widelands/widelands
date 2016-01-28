@@ -26,10 +26,10 @@
 
 #include "editor/ui_menus/categorized_item_selection_menu.h"
 #include "editor/ui_menus/editor_tool_options_menu.h"
-#include "logic/world/terrain_description.h"
+#include "logic/map_objects/world/terrain_description.h"
 #include "ui_basic/textarea.h"
 
-struct EditorInteractive;
+class EditorInteractive;
 struct EditorSetTerrainTool;
 
 struct EditorToolSetTerrainOptionsMenu : public EditorToolOptionsMenu {

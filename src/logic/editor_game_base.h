@@ -26,9 +26,8 @@
 #include <vector>
 
 #include "base/macros.h"
-#include "graphic/texture.h"
-#include "logic/bob.h"
-#include "logic/building.h"
+#include "logic/map_objects/bob.h"
+#include "logic/map_objects/tribes/building.h"
 #include "logic/map.h"
 #include "logic/player_area.h"
 #include "notifications/notifications.h"
@@ -44,12 +43,13 @@ class PlayersManager;
 
 class Battle;
 class Bob;
-struct BuildingDescr;
+class BuildingDescr;
 class Immovable;
 class Map;
 struct ObjectManager;
 class Player;
 struct PlayerImmovable;
+class Tribes;
 class TribeDescr;
 struct Flag;
 struct AttackController;
@@ -125,12 +125,12 @@ public:
 	Building&
 	warp_building(Coords,
 					  PlayerNumber,
-					  BuildingIndex,
+					  DescriptionIndex,
 	              Building::FormerBuildings former_buildings = Building::FormerBuildings());
 	Building&
 	warp_constructionsite(Coords,
 								 PlayerNumber,
-								 BuildingIndex,
+								 DescriptionIndex,
 	                      bool loading = false,
 	                      Building::FormerBuildings former_buildings = Building::FormerBuildings());
 	Building&
@@ -138,16 +138,18 @@ public:
 							 PlayerNumber,
 	                   bool loading = false,
 	                   Building::FormerBuildings former_buildings = Building::FormerBuildings());
-	Bob& create_bob(Coords, const BobDescr&, Player* owner = nullptr);
-	Bob& create_bob(Coords, int, TribeDescr const* const = nullptr, Player* owner = nullptr);
-	Bob& create_bob(Coords,
-	                const std::string& name,
-						 TribeDescr const* const = nullptr,
-	                Player* owner = nullptr);
-	Immovable& create_immovable(Coords, uint32_t idx, TribeDescr const*);
-	Immovable& create_immovable(Coords, const std::string& name, TribeDescr const*);
+	Bob& create_critter(Coords, DescriptionIndex bob_type_idx, Player* owner = nullptr);
+	Bob& create_critter(Coords, const std::string& name, Player* owner = nullptr);
+	Immovable& create_immovable(Coords,
+										 uint32_t idx,
+										 MapObjectDescr::OwnerType = MapObjectDescr::OwnerType::kWorld);
+	Immovable& create_immovable(Coords,
+										 const std::string& name,
+										 MapObjectDescr::OwnerType = MapObjectDescr::OwnerType::kWorld);
+	Bob& create_ship(Coords, int ship_type_idx, Player* owner = nullptr);
+	Bob& create_ship(Coords, const std::string& name, Player* owner = nullptr);
 
-	int32_t get_gametime() const {
+	uint32_t get_gametime() const {
 		return gametime_;
 	}
 	InteractiveBase* get_ibase() const {
@@ -160,14 +162,6 @@ public:
 	uint32_t add_trackpointer(void*);
 	void* get_trackpointer(uint32_t serial);
 	void remove_trackpointer(uint32_t serial);
-
-	// Manually load a tribe into memory. Used by the editor
-	const TribeDescr& manually_load_tribe(const std::string& tribe);
-	const TribeDescr& manually_load_tribe(PlayerNumber const p) {
-		return manually_load_tribe(map().get_scenario_player_tribe(p));
-	}
-	// Get a tribe from the loaded list, when known or nullptr.
-	TribeDescr const* get_tribe(const std::string& name) const;
 
 	void inform_players_about_ownership(MapIndex, PlayerNumber);
 	void inform_players_about_immovable(MapIndex, MapObjectDescr const*);
@@ -183,7 +177,7 @@ public:
 
 	// next function is used to update the current gametime,
 	// for queue runs e.g.
-	int32_t& get_gametime_pointer() {
+	uint32_t& get_gametime_pointer() {
 		return gametime_;
 	}
 	void set_ibase(InteractiveBase* const b) {
@@ -207,11 +201,16 @@ public:
 	// Returns the world that can be modified. Prefer world() whenever possible.
 	World* mutable_world();
 
-protected:
-	using TribeVector = std::vector<TribeDescr*>;
-	TribeVector tribes_;
+	// Returns the tribes.
+	const Tribes& tribes() const;
+
+	// Returns the mutable tribes. Prefer tribes() whenever possible.
+	Tribes* mutable_tribes();
 
 private:
+	/// Common function for create_critter and create_ship.
+	Bob& create_bob(Coords, const BobDescr&, Player* owner = nullptr);
+
 	/// \param preferred_player
 	///  When conquer is false, this can be used to prefer a player over other
 	///  players, when lost land is reassigned. This can for example be used to
@@ -248,22 +247,19 @@ private:
 	// sends notifications about this.
 	void change_field_owner(const FCoords& fc, PlayerNumber new_owner);
 
-	// TODO(unknown): -- SDL returns time as uint32. Why do I have int32 ? Please comment or change this to
-	// uint32.
-	int32_t gametime_;
+	uint32_t gametime_;
 	ObjectManager objects_;
 
 	std::unique_ptr<LuaInterface> lua_;
 	std::unique_ptr<PlayersManager> player_manager_;
 
 	std::unique_ptr<World> world_;
+	std::unique_ptr<Tribes> tribes_;
 	InteractiveBase* ibase_;
 	Map* map_;
 
 	uint32_t lasttrackserial_;
 	std::map<uint32_t, void*> trackpointers_;
-
-	std::unique_ptr<Texture> road_texture_;
 
 	DISALLOW_COPY_AND_ASSIGN(EditorGameBase);
 };

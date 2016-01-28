@@ -4,7 +4,8 @@ cmake_minimum_required (VERSION 2.8.7)
 
 include("${CMAKE_SOURCE_DIR}/cmake/WlFunctions.cmake")
 
-option(OPTION_USE_GLBINDING "USe glbinding instead of GLEW" OFF)
+option(OPTION_USE_GLBINDING "Use glbinding instead of GLEW" OFF)
+option(OPTION_GLEW_STATIC "Use static GLEW Library" OFF)
 
 if (CMAKE_SOURCE_DIR STREQUAL CMAKE_BINARY_DIR)
   message(FATAL_ERROR "Build directory and source directory must not be the same.")
@@ -38,7 +39,11 @@ endif()
 
 SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake/Modules)
 
-set (Boost_USE_STATIC_LIBS  OFF)
+if (WIN32)
+  set (Boost_USE_STATIC_LIBS  ON)
+else()
+  set (Boost_USE_STATIC_LIBS  OFF)
+endif()
 set (Boost_USE_MULTITHREADED ON)
 set (Boost_DETAILED_FAILURE_MSG ON)
 find_package(Boost 1.48
@@ -58,6 +63,7 @@ find_package(SDL2_mixer REQUIRED)
 find_package(SDL2_net REQUIRED)
 find_package(SDL2_ttf REQUIRED)
 find_package(ZLIB REQUIRED)
+find_package(ICU REQUIRED)
 if(OPTION_USE_GLBINDING)
   find_package(glbinding REQUIRED)
 else()
@@ -107,20 +113,13 @@ if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-global-constructors")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-padded")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-sign-conversion")
-  wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-switch-enum")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-missing-noreturn")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-implicit-fallthrough")
 
   # TODO(sirver): weak-vtables should be enabled, but leads to lot of errors right now.
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-weak-vtables")
-
-  # This warning warns when a default case is at a switch that handles all
-  # cases. While this is super nice, silencing this warning for clang will add
-  # a warning for GCC (which is not as clever and does not figure out that all
-  # cases are handled). Therefore we disable the warning and the unreachable as
-  # they always come in pairs in these cases.
-  wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-covered-switch-default")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-unreachable-code")
+  wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-documentation")
 
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Werror=non-pod-varargs")
 
@@ -159,9 +158,7 @@ else()
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wpacked")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wpointer-arith")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wredundant-decls")
-  wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wshadow")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wsign-promo")
-  wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wswitch-default")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wsync-nand")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wtrampolines")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wundef")
@@ -170,8 +167,9 @@ else()
 endif()
 
 # Turn some warnings into errors.
-wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Werror=uninitialized")
 wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Werror=return-type")
+wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Werror=shadow")
+wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Werror=uninitialized")
 
 
 IF (WIN32)
@@ -244,7 +242,6 @@ add_subdirectory(src)
 install(
   DIRECTORY
     data/campaigns
-    data/global
     data/i18n
     data/images
     data/scripting

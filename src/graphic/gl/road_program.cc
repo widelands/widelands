@@ -23,7 +23,9 @@
 #include <cmath>
 
 #include "base/log.h"
+#include "graphic/gl/coordinate_conversion.h"
 #include "graphic/gl/fields_to_draw.h"
+#include "graphic/gl/utils.h"
 #include "graphic/graphic.h"
 #include "graphic/image_io.h"
 #include "graphic/texture.h"
@@ -40,6 +42,8 @@ attribute vec2 attr_position;
 attribute vec2 attr_texture_position;
 attribute float attr_brightness;
 
+uniform float u_z_value;
+
 // Outputs.
 varying vec2 out_texture_position;
 varying float out_brightness;
@@ -47,7 +51,7 @@ varying float out_brightness;
 void main() {
 	out_texture_position = attr_texture_position;
 	out_brightness = attr_brightness;
-	gl_Position = vec4(attr_position, 0., 1.);
+	gl_Position = vec4(attr_position, u_z_value, 1.);
 }
 )";
 
@@ -73,22 +77,23 @@ RoadProgram::RoadProgram() {
 	gl_program_.build(kRoadVertexShader, kRoadFragmentShader);
 
 	attr_position_ = glGetAttribLocation(gl_program_.object(), "attr_position");
-	attr_texture_position_ =
-		glGetAttribLocation(gl_program_.object(), "attr_texture_position");
+	attr_texture_position_ = glGetAttribLocation(gl_program_.object(), "attr_texture_position");
 	attr_brightness_ = glGetAttribLocation(gl_program_.object(), "attr_brightness");
 
+	u_z_value_ = glGetUniformLocation(gl_program_.object(), "u_z_value");
 	u_texture_ = glGetUniformLocation(gl_program_.object(), "u_texture");
 }
 
 RoadProgram::~RoadProgram() {
 }
 
-void RoadProgram::add_road(const Surface& surface,
+void RoadProgram::add_road(const int renderbuffer_width,
+                           const int renderbuffer_height,
                            const FieldsToDraw::Field& start,
                            const FieldsToDraw::Field& end,
                            const Widelands::RoadType road_type,
                            const Direction direction,
-                           int* gl_texture) {
+                           uint32_t* gl_texture) {
 	// The thickness of the road in pixels on screen.
 	static constexpr float kRoadThicknessInPixels = 5.;
 
@@ -107,18 +112,18 @@ void RoadProgram::add_road(const Surface& surface,
 	const float road_thickness_x = (-delta_y / vector_length) * kRoadThicknessInPixels;
 	const float road_thickness_y = (delta_x / vector_length) * kRoadThicknessInPixels;
 
-	const Texture& texture =
+	const Image& texture =
 	   road_type == Widelands::RoadType::kNormal ?
 	      start.road_textures->get_normal_texture(start.fx, start.fy, direction) :
 	      start.road_textures->get_busy_texture(start.fx, start.fy, direction);
-	if (*gl_texture == -1) {
-		*gl_texture = texture.get_gl_texture();
+	if (*gl_texture == 0) {
+		*gl_texture = texture.blit_data().texture_id;
 	}
 	// We assume that all road textures are in the same OpenGL texture, i.e. in
 	// one texture atlas.
-	assert(*gl_texture == texture.get_gl_texture());
+	assert(*gl_texture == texture.blit_data().texture_id);
 
-	const auto& texture_rect = texture.texture_coordinates();
+	const FloatRect texture_rect = to_gl_texture(texture.blit_data());
 
 	vertices_.emplace_back(PerVertexData{
 	   start.pixel_x - road_overshoot_x + road_thickness_x,
@@ -127,16 +132,18 @@ void RoadProgram::add_road(const Surface& surface,
 	   texture_rect.y,
 	   start.brightness,
 	});
-	surface.pixel_to_gl(&vertices_.back().gl_x, &vertices_.back().gl_y);
+	pixel_to_gl_renderbuffer(
+	   renderbuffer_width, renderbuffer_height, &vertices_.back().gl_x, &vertices_.back().gl_y);
 
 	vertices_.emplace_back(PerVertexData{
 	   start.pixel_x - road_overshoot_x - road_thickness_x,
 	   start.pixel_y - road_overshoot_y - road_thickness_y,
 	   texture_rect.x,
-		texture_rect.y + texture_rect.h,
+	   texture_rect.y + texture_rect.h,
 	   start.brightness,
 	});
-	surface.pixel_to_gl(&vertices_.back().gl_x, &vertices_.back().gl_y);
+	pixel_to_gl_renderbuffer(
+	   renderbuffer_width, renderbuffer_height, &vertices_.back().gl_x, &vertices_.back().gl_y);
 
 	vertices_.emplace_back(PerVertexData{
 	   end.pixel_x + road_overshoot_x + road_thickness_x,
@@ -145,7 +152,8 @@ void RoadProgram::add_road(const Surface& surface,
 	   texture_rect.y,
 	   end.brightness,
 	});
-	surface.pixel_to_gl(&vertices_.back().gl_x, &vertices_.back().gl_y);
+	pixel_to_gl_renderbuffer(
+	   renderbuffer_width, renderbuffer_height, &vertices_.back().gl_x, &vertices_.back().gl_y);
 
 	// As OpenGl does not support drawing quads in modern days and we have a
 	// bunch of roads that might not be neighbored, we need to add two triangles
@@ -161,13 +169,17 @@ void RoadProgram::add_road(const Surface& surface,
 	   texture_rect.y + texture_rect.h,
 	   end.brightness,
 	});
-	surface.pixel_to_gl(&vertices_.back().gl_x, &vertices_.back().gl_y);
+	pixel_to_gl_renderbuffer(
+	   renderbuffer_width, renderbuffer_height, &vertices_.back().gl_x, &vertices_.back().gl_y);
 }
 
-void RoadProgram::draw(const Surface& surface, const FieldsToDraw& fields_to_draw) {
+void RoadProgram::draw(const int renderbuffer_width,
+                       const int renderbuffer_height,
+                       const FieldsToDraw& fields_to_draw,
+                       float z_value) {
 	vertices_.clear();
 
-	int gl_texture = -1;
+	uint32_t gl_texture = 0;
 	for (size_t current_index = 0; current_index < fields_to_draw.size(); ++current_index) {
 		const FieldsToDraw::Field& field = fields_to_draw.at(current_index);
 
@@ -175,9 +187,15 @@ void RoadProgram::draw(const Surface& surface, const FieldsToDraw& fields_to_dra
 		const int rn_index = fields_to_draw.calculate_index(field.fx + 1, field.fy);
 		if (rn_index != -1) {
 			const Widelands::RoadType road =
-				static_cast<Widelands::RoadType>(field.roads & Widelands::RoadType::kMask);
+			   static_cast<Widelands::RoadType>(field.roads & Widelands::RoadType::kMask);
 			if (road != Widelands::RoadType::kNone) {
-				add_road(surface, field, fields_to_draw.at(rn_index), road, kEast, &gl_texture);
+				add_road(renderbuffer_width,
+				         renderbuffer_height,
+				         field,
+				         fields_to_draw.at(rn_index),
+				         road,
+				         kEast,
+				         &gl_texture);
 			}
 		}
 
@@ -185,9 +203,15 @@ void RoadProgram::draw(const Surface& surface, const FieldsToDraw& fields_to_dra
 		const int brn_index = fields_to_draw.calculate_index(field.fx + (field.fy & 1), field.fy + 1);
 		if (brn_index != -1) {
 			const Widelands::RoadType road =
-				static_cast<Widelands::RoadType>((field.roads >> 2) & Widelands::RoadType::kMask);
+			   static_cast<Widelands::RoadType>((field.roads >> 2) & Widelands::RoadType::kMask);
 			if (road != Widelands::RoadType::kNone) {
-				add_road(surface, field, fields_to_draw.at(brn_index), road, kSouthEast, &gl_texture);
+				add_road(renderbuffer_width,
+				         renderbuffer_height,
+				         field,
+				         fields_to_draw.at(brn_index),
+				         road,
+				         kSouthEast,
+				         &gl_texture);
 			}
 		}
 
@@ -196,46 +220,39 @@ void RoadProgram::draw(const Surface& surface, const FieldsToDraw& fields_to_dra
 		   fields_to_draw.calculate_index(field.fx + (field.fy & 1) - 1, field.fy + 1);
 		if (bln_index != -1) {
 			const Widelands::RoadType road =
-				static_cast<Widelands::RoadType>((field.roads >> 4) & Widelands::RoadType::kMask);
+			   static_cast<Widelands::RoadType>((field.roads >> 4) & Widelands::RoadType::kMask);
 			if (road != Widelands::RoadType::kNone) {
-				add_road(surface, field, fields_to_draw.at(bln_index), road, kSouthWest, &gl_texture);
+				add_road(renderbuffer_width,
+				         renderbuffer_height,
+				         field,
+				         fields_to_draw.at(bln_index),
+				         road,
+				         kSouthWest,
+				         &gl_texture);
 			}
 		}
 	}
 
 	glUseProgram(gl_program_.object());
 
-	glEnableVertexAttribArray(attr_position_);
-	glEnableVertexAttribArray(attr_texture_position_);
-	glEnableVertexAttribArray(attr_brightness_);
+	auto& gl_state = Gl::State::instance();
+	gl_state.enable_vertex_attrib_array({
+		attr_position_, attr_texture_position_, attr_brightness_
+	});
 
-	glBindBuffer(GL_ARRAY_BUFFER, gl_array_buffer_.object());
-	glBufferData(
-	   GL_ARRAY_BUFFER, sizeof(PerVertexData) * vertices_.size(), vertices_.data(), GL_STREAM_DRAW);
+	gl_array_buffer_.bind();
+	gl_array_buffer_.update(vertices_);
 
-	const auto set_attrib_pointer = [](const int vertex_index, int num_items, int offset) {
-		glVertexAttribPointer(vertex_index,
-		                      num_items,
-		                      GL_FLOAT,
-		                      GL_FALSE,
-		                      sizeof(PerVertexData),
-		                      reinterpret_cast<void*>(offset));
-	};
-	set_attrib_pointer(attr_position_, 2, offsetof(PerVertexData, gl_x));
-	set_attrib_pointer(attr_texture_position_, 2, offsetof(PerVertexData, texture_x));
-	set_attrib_pointer(attr_brightness_, 1, offsetof(PerVertexData, brightness));
+	Gl::vertex_attrib_pointer(
+	   attr_position_, 2, sizeof(PerVertexData), offsetof(PerVertexData, gl_x));
+	Gl::vertex_attrib_pointer(
+	   attr_texture_position_, 2, sizeof(PerVertexData), offsetof(PerVertexData, texture_x));
+	Gl::vertex_attrib_pointer(
+	   attr_brightness_, 1, sizeof(PerVertexData), offsetof(PerVertexData, brightness));
 
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
-
-	// Bind the textures.
-	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, gl_texture);
-
+	gl_state.bind(GL_TEXTURE0, gl_texture);
 	glUniform1i(u_texture_, 0);
+	glUniform1f(u_z_value_, z_value);
 
 	glDrawArrays(GL_TRIANGLES, 0, vertices_.size());
-
-	glDisableVertexAttribArray(attr_position_);
-	glDisableVertexAttribArray(attr_texture_position_);
-	glDisableVertexAttribArray(attr_brightness_);
 }

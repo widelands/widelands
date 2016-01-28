@@ -22,15 +22,14 @@
 #include "editor/editorinteractive.h"
 #include "logic/map.h"
 #include "wui/mapviewpixelconstants.h"
-#include "wui/overlay_manager.h"
 
-int32_t EditorSetOriginTool::handle_click_impl(Widelands::Map& map,
-                                                  const Widelands::World&,
-                                                  Widelands::NodeAndTriangle<> const center,
-                                                  EditorInteractive& eia,
-                                                  EditorActionArgs& /* args */) {
-	map.set_origin(center.node);
-	eia.register_overlays();
+int32_t EditorSetOriginTool::handle_click_impl(const Widelands::World&,
+                                               Widelands::NodeAndTriangle<> const center,
+                                               EditorInteractive& eia,
+                                               EditorActionArgs* /* args */,
+											   Widelands::Map* map) {
+	map->set_origin(center.node);
+	eia.map_changed(EditorInteractive::MapWas::kGloballyMutated);
 	eia.set_rel_viewpoint
 	(Point
 	 (-(center.node.x * 2 + (center.node.y & 1)) * (TRIANGLE_WIDTH / 2),
@@ -40,17 +39,17 @@ int32_t EditorSetOriginTool::handle_click_impl(Widelands::Map& map,
 }
 
 int32_t
-EditorSetOriginTool::handle_undo_impl(Widelands::Map& map,
-                                         const Widelands::World&,
-                                         Widelands::NodeAndTriangle<Widelands::Coords> center,
-                                         EditorInteractive& parent,
-                                         EditorActionArgs& /* args */) {
+EditorSetOriginTool::handle_undo_impl(const Widelands::World&,
+                                      Widelands::NodeAndTriangle<Widelands::Coords> center,
+                                      EditorInteractive& eia,
+                                      EditorActionArgs* /* args */,
+									  Widelands::Map* map) {
 	Widelands::Coords nc
-		(map.get_width()  - center.node.x,
-		 map.get_height() - center.node.y);
-	map.set_origin(nc);
-	parent.register_overlays();
-	parent.set_rel_viewpoint
+		(map->get_width()  - center.node.x,
+		 map->get_height() - center.node.y);
+	map->set_origin(nc);
+	eia.map_changed(EditorInteractive::MapWas::kGloballyMutated);
+	eia.set_rel_viewpoint
 	(Point
 	 (- (nc.x * 2 + (nc.y & 1)) *(TRIANGLE_WIDTH / 2),
 	  - nc.y * TRIANGLE_HEIGHT),
@@ -58,7 +57,7 @@ EditorSetOriginTool::handle_undo_impl(Widelands::Map& map,
 	return 0;
 }
 
-EditorActionArgs EditorSetOriginTool::format_args_impl(EditorInteractive & parent)
+EditorActionArgs EditorSetOriginTool::format_args_impl(EditorInteractive & eia)
 {
-	return EditorTool::format_args_impl(parent);
+	return EditorTool::format_args_impl(eia);
 }

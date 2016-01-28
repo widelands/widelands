@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006, 2008-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -48,39 +48,39 @@ struct GameMessageMenu : public UI::UniqueWindow {
 	bool handle_key(bool down, SDL_Keysym code) override;
 
 private:
-	enum Cols {ColSelect, ColStatus, ColTitle, ColTimeSent};
+	enum Cols {ColTitle, ColType, ColStatus, ColTimeSent};
 	enum class ReadUnread: uint8_t {allMessages, readMessages, newMessages};
 
 	InteractivePlayer & iplayer() const;
 	void selected(uint32_t);
 	void double_clicked(uint32_t);
 
-	bool status_compare(uint32_t a, uint32_t b);
-	void do_clear_selection();
-	void do_invert_selection();
+	bool compare_title(uint32_t a, uint32_t b);
+	bool compare_status(uint32_t a, uint32_t b);
+	bool compare_type(uint32_t a, uint32_t b);
+	bool compare_time_sent(uint32_t a, uint32_t b);
 	void archive_or_restore();
 	void toggle_mode();
 	void center_view();
 	void filter_messages(Widelands::Message::Type);
 	void toggle_filter_messages_button(UI::Button &, Widelands::Message::Type);
 	void set_filter_messages_tooltips();
-	void set_display_message_type_label(Widelands::Message::Type);
+	std::string display_message_type_icon(Widelands::Message);
 	void update_record(UI::Table<uintptr_t>::EntryRecord & er, const Widelands::Message &);
 
 	UI::Table<uintptr_t> * list;
 	UI::MultilineTextarea message_body;
-	UI::Button * m_archivebtn;
-	UI::Button * m_togglemodebtn;
-	UI::Button * m_centerviewbtn;
+	UI::Button * archivebtn_;
+	UI::Button * togglemodebtn_;
+	UI::Button * centerviewbtn_;
 	Mode mode;
 	// Buttons for message types
-	UI::Button * m_geologistsbtn;
-	UI::Button * m_economybtn;
-	UI::Button * m_seafaringbtn;
-	UI::Button * m_warfarebtn;
-	UI::Button * m_scenariobtn;
-	Widelands::Message::Type m_message_filter;
-	UI::MultilineTextarea * m_display_message_type_label;
+	UI::Button * geologistsbtn_;
+	UI::Button * economybtn_;
+	UI::Button * seafaringbtn_;
+	UI::Button * warfarebtn_;
+	UI::Button * scenariobtn_;
+	Widelands::Message::Type message_filter_;
 };
 
 #endif  // end of include guard: WL_WUI_GAME_MESSAGE_MENU_H

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010-2013 by the Widelands Development Team
+ * Copyright (C) 2010-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,8 +24,8 @@
 
 #include <stdint.h>
 
-#include "logic/ware_descr.h"
-#include "logic/wareworker.h"
+#include "logic/map_objects/tribes/ware_descr.h"
+#include "logic/map_objects/tribes/wareworker.h"
 #include "ui_basic/button.h"
 #include "ui_basic/panel.h"
 #include "ui_basic/radiobutton.h"
@@ -69,23 +69,23 @@ public:
 	void draw(RenderTarget &) override;
 
 private:
-	InteractiveGameBase  & m_igb;
-	Widelands::Building   & m_building;
-	Widelands::WaresQueue * m_queue;
-	UI::Radiogroup        * m_priority_radiogroup;
-	UI::Button   * m_increase_max_fill;
-	UI::Button   * m_decrease_max_fill;
-	Widelands::WareIndex   m_ware_index;
-	Widelands::WareWorker m_ware_type;
-	const Image* m_icon;            //< Index to ware's picture
-	const Image* m_max_fill_indicator;
+	InteractiveGameBase  & igb_;
+	Widelands::Building   & building_;
+	Widelands::WaresQueue * queue_;
+	UI::Radiogroup        * priority_radiogroup_;
+	UI::Button   * increase_max_fill_;
+	UI::Button   * decrease_max_fill_;
+	Widelands::DescriptionIndex   ware_index_;
+	Widelands::WareWorker ware_type_;
+	const Image* icon_;            //< Index to ware's picture
+	const Image* max_fill_indicator_;
 
 
-	uint32_t         m_cache_size;
-	uint32_t         m_cache_filled;
-	uint32_t         m_cache_max_fill;
-	uint32_t         m_total_height;
-	bool             m_show_only;
+	uint32_t         cache_size_;
+	uint32_t         cache_filled_;
+	uint32_t         cache_max_fill_;
+	uint32_t         total_height_;
+	bool             show_only_;
 
 	virtual void max_size_changed();
 	void update_priority_buttons();

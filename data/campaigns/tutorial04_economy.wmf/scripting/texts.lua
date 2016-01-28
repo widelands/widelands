@@ -227,7 +227,7 @@ ware_encyclopedia = {
       p(_[[This encyclopedia can be accessed via]])
    ) ..
    rt("image=images/ui_basic/menu_help.png",p(_[[the help button at the bottom. For all your tribe’s wares, it shows a short help text, a list of buildings that produces the ware and the needed wares.]]) ..
-      p(_[[If you want, you can try it out. A soldier needs a wood lance and a helm – from there on out, you can search backwards.]])
+      p(_[[If you want, you can try it out. A soldier needs a wooden spear and a helmet – from there on out, you can search backwards.]])
    ),
    h = 350
 }
@@ -454,4 +454,3 @@ conclusion = {
    ) ..
    rt("text-align=center", "<p font-size=24 font-decoration=underline>http://www.widelands.org</p>")
 }
-

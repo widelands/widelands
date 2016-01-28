@@ -80,15 +80,11 @@ MainMenuLoadOrSaveMap::MainMenuLoadOrSaveMap(EditorInteractive& parent,
 	                                _("Show Map Names"));
 	vbox->add(show_mapnames_, UI::Box::AlignLeft, true);
 
-	cb_dont_localize_mapnames_ = new UI::Checkbox(vbox, Point(0, 0));
+	/** TRANSLATORS: Checkbox title. If this checkbox is enabled, map names aren't translated. */
+	cb_dont_localize_mapnames_ = new UI::Checkbox(vbox, Point(0, 0), _("Show original map names"));
 	cb_dont_localize_mapnames_->set_state(false);
 	vbox->add_space(2 * padding_);
 	vbox->add(cb_dont_localize_mapnames_, UI::Box::AlignLeft, true);
-	vbox->add_space(padding_);
-	UI::Textarea* ta_dont_localize_mapnames =
-	   /** TRANSLATORS: Checkbox title. If this checkbox is enabled, map names aren't translated. */
-	   new UI::Textarea(vbox, _("Show original map names"), UI::Align_CenterLeft);
-	vbox->add(ta_dont_localize_mapnames, UI::Box::AlignLeft);
 	vbox->set_size(get_inner_w(), buth_);
 
 	table_.set_column_compare(0, boost::bind(&MainMenuLoadOrSaveMap::compare_players, this, _1, _2));
@@ -102,8 +98,6 @@ MainMenuLoadOrSaveMap::MainMenuLoadOrSaveMap(EditorInteractive& parent,
 	// We don't need the unlocalizing option if there is nothing to unlocalize.
 	// We know this after the list is filled.
 	cb_dont_localize_mapnames_->set_visible(has_translated_mapname_);
-	ta_dont_localize_mapnames->set_visible(has_translated_mapname_);
-
 	cb_dont_localize_mapnames_->changedto.connect(
 	   boost::bind(&MainMenuLoadOrSaveMap::fill_table, boost::ref(*this)));
 	show_mapnames_->sigclicked.connect(
@@ -171,39 +165,36 @@ void MainMenuLoadOrSaveMap::fill_table() {
 	Widelands::Map map;
 
 	for (const std::string& mapfilename : files) {
-
 		// Add map file (compressed) or map directory (uncompressed)
-		if (Widelands::WidelandsMapLoader::is_widelands_map(mapfilename)) {
-			std::unique_ptr<Widelands::MapLoader> ml = map.get_correct_loader(mapfilename);
-			if (ml.get() != nullptr) {
-				try {
-					ml->preload_map(true);
+		std::unique_ptr<Widelands::MapLoader> ml = map.get_correct_loader(mapfilename);
+		if (ml != nullptr) {
+			try {
+				ml->preload_map(true);
 
-					if (!map.get_width() || !map.get_height()) {
-						continue;
-					}
+				if (!map.get_width() || !map.get_height()) {
+					continue;
+				}
 
-					MapData::MapType maptype;
+				MapData::MapType maptype;
 
-					if (map.scenario_types() & Widelands::Map::MP_SCENARIO ||
-					    map.scenario_types() & Widelands::Map::SP_SCENARIO) {
-						maptype = MapData::MapType::kScenario;
-					} else if (dynamic_cast<Widelands::WidelandsMapLoader*>(ml.get())) {
-						maptype = MapData::MapType::kNormal;
-					} else {
-						maptype = MapData::MapType::kSettlers2;
-					}
+				if (map.scenario_types() & Widelands::Map::MP_SCENARIO ||
+					 map.scenario_types() & Widelands::Map::SP_SCENARIO) {
+					maptype = MapData::MapType::kScenario;
+				} else if (dynamic_cast<Widelands::WidelandsMapLoader*>(ml.get())) {
+					maptype = MapData::MapType::kNormal;
+				} else {
+					maptype = MapData::MapType::kSettlers2;
+				}
 
-					MapData mapdata(map, mapfilename, maptype, display_type);
+				MapData mapdata(map, mapfilename, maptype, display_type);
 
-					has_translated_mapname_ =
-					   has_translated_mapname_ || (mapdata.name != mapdata.localized_name);
+				has_translated_mapname_ =
+					has_translated_mapname_ || (mapdata.name != mapdata.localized_name);
 
-					maps_data_.push_back(mapdata);
+				maps_data_.push_back(mapdata);
 
-				} catch (const WException&) {
-				}  //  we simply skip illegal entries
-			}
+			} catch (const WException&) {
+			}  //  we simply skip illegal entries
 		} else if (g_fs->is_directory(mapfilename)) {
 			// Add subdirectory to the list
 			const char* fs_filename = FileSystem::fs_filename(mapfilename.c_str());
@@ -214,5 +205,9 @@ void MainMenuLoadOrSaveMap::fill_table() {
 	}
 
 	table_.fill(maps_data_, display_type);
-	ok_.set_enabled(false);
+	if (!table_.empty()) {
+		table_.select(0);
+	} else {
+		ok_.set_enabled(false);
+	}
 }

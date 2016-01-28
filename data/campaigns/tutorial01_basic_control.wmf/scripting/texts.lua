@@ -12,7 +12,7 @@ include "scripting/format_scenario.lua"
 -- =============
 -- Texts below
 -- =============
-scould_player = {
+scold_player = {
    title = _"Nice And Easy Does It All the Time",
    body = rt(
       p(_[[I am sorry, but will I have to tear this down again. We might need the space here later on. If I am too slow for you, you might want to play a real game and just find everything out for yourself. Otherwise, please bear with me, I am not the youngest and quickest anymore.]]
@@ -40,8 +40,8 @@ initial_message_02 = {
    body = rt(
       h1(_"Let’s dive right in!") ..
       p(_[[There are three different tribes in Widelands: the Barbarians, the Empire and the Atlanteans. All tribes have a different economy, strength and weaknesses, but the general gameplay is the same for all. We will play the Barbarians for now.]]) ..
-      p(_[[You will usually start the game with one headquarters. This is the big building with the blue flag in front of it. The headquarters is a warehouse that stores wares, workers and soldiers. Some wares are needed for building houses, others for making other wares. Obviously, the wares in the headquarters will not last forever, so you must make sure to replace them. The most important wares in the early game are the basic construction wares: logs and raw stone. Let’s make sure that we do not run out of logs. For this, we need a lumberjack and a hut for him to stay in.]]) ..
-      p(_[[We need to find a nice place for the lumberjack’s hut. To make this easier, we can activate ‘Show Building Spaces’. There are two ways you can do this, either by clicking on the ‘Show Building Spaces’ button at the bottom of the screen, which is the fourth one from the left. Or you can use the SPACE key to toggle it.]]) ..
+      p(_[[You will usually start the game with one headquarters. This is the big building with the blue flag in front of it. The headquarters is a warehouse that stores wares, workers and soldiers. Some wares are needed for building houses, others for making other wares. Obviously, the wares in the headquarters will not last forever, so you must make sure to replace them. The most important wares in the early game are the basic construction wares: logs and granite. Let’s make sure that we do not run out of logs. For this, we need a lumberjack and a hut for him to stay in.]]) ..
+      p(_[[We need to find a nice place for the lumberjack’s hut. To make this easier, we can activate ‘Show Building Spaces’. There are two ways you can do this, either by clicking on the ‘Show Building Spaces’ button at the bottom of the screen, which is the fourth one from the left. Or you can use the Space key to toggle it.]]) ..
       paragraphdivider() ..
       listitem_bullet(_[[Left-click the ‘OK’ button to close this box and then try it.]])
    ),
@@ -51,7 +51,7 @@ initial_message_02 = {
       h1(_"Show Building Spaces") ..
       p(_[[It is easier to understand what type of buildings can be built on which field when the symbols for the building spaces are enabled.]]) ..
       paragraphdivider() ..
-      listitem_bullet(_[[Do so now, either by pressing SPACE or by clicking the fourth button from the left at the very bottom of the screen. Right-click on this window and then give it a try.]])
+      listitem_bullet(_[[Do so now, either by pressing Space or by clicking the fourth button from the left at the very bottom of the screen. Right-click on this window and then give it a try.]])
    )
 }
 
@@ -135,7 +135,7 @@ lumberjack_message_06 = {
    position = "topright",
    body = rt(
       p(_[[Well done! Let’s wait till the hut is finished.]]) ..
-      p(_[[If you want things to go faster, simply use the PAGE UP key on your keyboard to increase the game speed. You can use PAGE DOWN to make the game slower again.]])
+      p(_[[If you want things to go faster, simply use the Page Up key on your keyboard to increase the game speed. You can use Page Down to make the game slower again.]])
    ),
    h = 300,
    w = 350
@@ -148,7 +148,7 @@ flag_built = {
       p(_[[I wanted to teach you how to build new flags, but it seems you have already found out on your own. Well done!]]) ..
       p(_[[Now you have split the road in two parts with a carrier each. This means less work for him and higher efficiency for us. You should therefore always place as many flags as possible on your roads.]]) ..
       p(_[[Now we only have to wait till the hut is finished.]]) ..
-      p(_[[If you want things to go faster, simply use the PAGE UP key on your keyboard to increase the game speed. You can use PAGE DOWN to make the game slower again.]])
+      p(_[[If you want things to go faster, simply use the Page Up key on your keyboard to increase the game speed. You can use Page Down to make the game slower again.]])
    ),
    h = 350
 }
@@ -169,7 +169,7 @@ lumberjack_message_07 = {
    title = _"Lumberjack is Done",
    position = "topright",
    body = rt(
-      p(_[[Excellent. The lumberjack’s hut is done. A lumberjack will now move in and start chopping down trees, so our log income is secured for now. Now on to the raw stone.]])
+      p(_[[Excellent. The lumberjack’s hut is done. A lumberjack will now move in and start chopping down trees, so our log income is secured for now. Now on to the granite.]])
    ),
    h = 300,
    w = 350
@@ -179,7 +179,7 @@ inform_about_rocks = {
    title = _"Some Rocks Were Found",
    body = rt(h1(_"Getting a Quarry Up")) ..
    rt(
-      p(_[[Stones can be mined in granite mines, but the easier way is to build a quarry next to some rocks lying around. As it happens, there is a pile of them just to the west (left) of your headquarters. I will teach you now how to move your view over there.]]) ..
+      p(_[[Granite can be mined in granite mines, but the easier way is to build a quarry next to some rocks lying around. As it happens, there is a pile of them just to the west (left) of your headquarters. I will teach you now how to move your view over there.]]) ..
       paragraphdivider() ..
       listitem_arrow(_[[There are three ways to move your view. The first one is using the cursor keys on your keyboard. Go ahead and try this out.]]) ..
       listitem_bullet(_[[Click the ‘OK’ button and then move the view using the cursor keys]])
@@ -265,7 +265,7 @@ order_quarry_recap_how_to_build = {
       h1(_"Build a Quarry") ..
       paragraphdivider() ..
       listitem_bullet(_[[There are some rocks to the west of your headquarters. Build a quarry right next to them.]]) ..
-      listitem_arrow(_[[The quarry is a small building like the lumberjack’s hut. You can therefore build it on any field that shows a red, yellow or green house when the building spaces symbols are enabled (Press SPACE for that).]]) ..
+      listitem_arrow(_[[The quarry is a small building like the lumberjack’s hut. You can therefore build it on any field that shows a red, yellow or green house when the building spaces symbols are enabled (Press Space for that).]]) ..
       listitem_arrow(_[[Just click on any house symbol next to the rocks, select the small buildings tab in the window that opens up, then click on the quarry symbol.]])
    )
 }
@@ -350,7 +350,7 @@ quarry_not_connected = {
 quarry_illegally_destroyed = {
    title = _"You Destroyed the Construction Site!",
    body = rt(
-      p(_[[It seems like you destroyed a construction site for a quarry we wanted to build. Since we need the stones, I suggest you reload the game from a previous savegame. Luckily, these are created from time to time. To do so, you have to go back to the main menu and choose ‘Single Player’ → ‘Load Game’. And please be a bit more careful next time.]])
+      p(_[[It seems like you destroyed a construction site for a quarry we wanted to build. Since we need the granite, I suggest you reload the game from a previous savegame. Luckily, these are created from time to time. To do so, you have to go back to the main menu and choose ‘Single Player’ → ‘Load Game’. And please be a bit more careful next time.]])
    ),
    w = 350,
    h = 250
@@ -360,7 +360,7 @@ build_second_quarry = {
    position = "topright",
    title = _"Build a second quarry",
    body = rt(
-      p(_[[When there are many rocks, you can consider building another quarry. This will make the stone production faster.]]) ..
+      p(_[[When there are many rocks, you can consider building another quarry. This will make the granite production faster.]]) ..
       paragraphdivider() ..
       listitem_bullet(_[[Build a second quarry near the rocks and connect it to your road network.]])
    ),
@@ -394,15 +394,16 @@ census_and_statistics_01 = {
 
 teaching_about_messages = {
    popup = true,
-   title = _"Introducing Messages",
+   title = _"Messages",
+   heading = _"Introducing Messages",
    body = rt(
-      h1(_"Messages") ..
       p(_[[Hi, it’s me again! This time, I have sent you a message. Messages are sent to you by Widelands to inform you about important events: empty mines, attacks on your tribe, won or lost military buildings, resources found…]]) ..
       p(_[[The message window can be toggled by the button on the very right at the bottom of the screen. This button will also change appearance whenever new messages are available, but there is also a bell sound played whenever you receive a new message.]]) ..
-      p(_[[You have two messages at the moment. This one, which you are currently reading, and the one that informed you that a new headquarters was added to your economy. Let’s learn how to archive messages: You can check them off in your inbox so that they get a tick-symbol in front of them. Then, you can click the]])
+      p(_[[You have two messages at the moment. This one, which you are currently reading, and the one that informed you that a new headquarters was added to your economy. Let’s learn how to archive messages: first, select the message that you wish to archive by clicking on it in the list. Then, click the]])
    ) ..
-   rt("image=images/wui/messages/message_archive.png", p(_[[archive message button to move them into your archive.]])) ..
+   rt("image=images/wui/messages/message_archive.png", p(_[[‘Archive selected message’ button to move it into your archive.]])) ..
    rt(
+      p(_[[Once you have deleted a message, another message will be selected automatically from the list.]]) ..
       paragraphdivider() ..
       listitem_bullet(_[[Archive all messages that you currently have in your inbox, including this one.]])
    ),
@@ -413,7 +414,7 @@ teaching_about_messages = {
       p(_[[The message window is central to fully controlling your tribe’s fortune. However, you will get a lot of messages in a real game. To keep your head straight, you should try to keep the inbox empty.]]) ..
       paragraphdivider() ..
       listitem_bullet(_[[Archive all your messages in your inbox now.]]) ..
-      listitem_arrow(_[[To do so, open the message window by pressing ‘n’ or clicking the rightmost button at the very bottom of the screen. Then mark all messages by checking the check box in front of them. Then, click the ‘Archive All’ button.]])
+      listitem_arrow(_[[To do so, open the message window by pressing ‘n’ or clicking the rightmost button at the very bottom of the screen. The newest message will be marked for you automatically. Keep clicking the ‘Archive selected message’ button until all messages have been archived and the list is empty.]])
    )
 }
 
@@ -443,7 +444,7 @@ closing_msg_window_01 = {
    field = first_quarry_field,
    title = _"Closing Windows",
    body = rt(
-      p(_[[Well done! Let’s see how messages work in a real game, shall we? For this, I’ll take all rocks away from the poor stonemasons in the quarries. They will then send a message each that they can’t find any in their working areas the next time they try to do some work.]])
+      p(_[[Well done! Let’s see how messages work in a real game, shall we? For this, I’ll take all rocks away from the poor stonemasons in the quarries. They will then send a message each that they can’t find any in their work areas the next time they try to do some work.]])
    ),
    h = 300,
    w = 350
@@ -474,7 +475,7 @@ introduce_expansion = {
    title = _"Expanding Your Territory!",
    body = rt(
       p(_[[There is one more thing I’d like to teach you now: Expanding your territory. The place that we started with around our headquarters is barely enough for a basic building infrastructure, and we do not have access to mountains, which we need to mine minerals and coal. So, we have to expand our territory.]]) ..
-      p(_[[Expanding is as simple as building a military building at the edge of your territory. The Barbarians have a selection of different military buildings: sentries, barriers, donjons, fortresses and citadels. The bigger the building, the more expensive it is to build, but the more land it will conquer around itself and the more soldiers can be stationed there. The buildings also vary in their vision range: buildings with a tower see farther than others.]]) ..
+      p(_[[Expanding is as simple as building a military building at the edge of your territory. The Barbarians have a selection of different military buildings: sentries, barriers, towers, fortresses and citadels. The bigger the building, the more expensive it is to build, but the more land it will conquer around itself and the more soldiers can be stationed there. The buildings also vary in their vision range: buildings with a tower see farther than others.]]) ..
       p(_[[As soon as a military building is manned, it will extend your land. I will tell your more about military buildings in another tutorial.]]) ..
       paragraphdivider() ..
       listitem_bullet(_[[Let’s try it out now: build a military building on your border.]]) ..
@@ -486,7 +487,7 @@ introduce_expansion = {
       h1(_"Make your territory grow") ..
       p(_[[In Widelands, it is necessary to build many buildings, which take up a lot of space. To expand your territory, you have to build military buildings next to your border. Every tribe has several military buildings.]]) ..
       paragraphdivider() ..
-      listitem_bullet(_[[The Barbarians have four different military buildings you can build: the sentry (small), the barrier and the donjon (both medium) and the fortress (big). Just choose the one you like most.]]) ..
+      listitem_bullet(_[[The Barbarians have four different military buildings you can build: the sentry (small), the barrier and the tower (both medium) and the fortress (big). Just choose the one you like most.]]) ..
       listitem_arrow(_[[Remember that big buildings (green icon) cannot be built on small (red) or medium (yellow) building plots, but buildings can be built on a building plot that provides more space than they need. You should always keep that in mind when you search for a suitable place.]])
    )
 }

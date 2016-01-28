@@ -45,9 +45,14 @@ using namespace boost;
 
 namespace {
 
-/// The size of the richtext surface cache in bytes. All work that the richtext
-/// renderer does is / cached in this cache until it overflows.
-const uint32_t RICHTEXT_SURFACE_CACHE = 160 << 20;   // shifting converts to MB
+// The size of the richtext surface cache in bytes. All work that the richtext
+// renderer does is / cached in this cache until it overflows. The idea is that
+// this is big enough to cache the text that is used on a typical screen - so
+// that we do not need to lay out text every frame. Last benchmarked at r7712,
+// 30 MB was enough to cache texts for many frames (> 1000), while it is
+// quickly overflowing in the map selection menu.
+// This might need reevaluation is the new font handler is used for more stuff.
+const uint32_t RICHTEXT_TEXTURE_CACHE = 30 << 20;   // shifting converts to MB
 
 // An Image implementation that recreates a rich text texture when needed on
 // the fly. It is meant to be saved into the ImageCache.
@@ -70,12 +75,8 @@ public:
 	int width() const override {return texture()->width();}
 	int height() const override {return texture()->height();}
 
-	int get_gl_texture() const override {
-		return texture()->get_gl_texture();
-	}
-
-	const FloatRect& texture_coordinates() const override {
-		return texture()->texture_coordinates();
+	const BlitData& blit_data() const override {
+		return texture()->blit_data();
 	}
 
 private:
@@ -84,9 +85,8 @@ private:
 		if (surf)
 			return surf;
 
-		surf = get_renderer_()->render(text_, width_);
-		texture_cache_->insert(hash_, surf, true);
-		return surf;
+		return texture_cache_->insert(
+		   hash_, std::unique_ptr<Texture>(get_renderer_()->render(text_, width_)));
 	}
 
 	const string hash_;
@@ -108,7 +108,7 @@ namespace UI {
 class FontHandler1 : public IFontHandler1 {
 public:
 	FontHandler1(ImageCache* image_cache)
-	   : texture_cache_(create_texture_cache(RICHTEXT_SURFACE_CACHE)),
+	   : texture_cache_(new TextureCache(RICHTEXT_TEXTURE_CACHE)),
 	     fontset_(new UI::FontSet(i18n::get_locale())),
 	     rt_renderer_(new RT::Renderer(image_cache, texture_cache_.get(), fontset_.get())),
 	     image_cache_(image_cache) {
@@ -132,6 +132,7 @@ public:
 
 	void reinitialize_fontset() override {
 		fontset_.reset(new UI::FontSet(i18n::get_locale()));
+		texture_cache_.get()->flush();
 		rt_renderer_.reset(new RT::Renderer(image_cache_, texture_cache_.get(), fontset_.get()));
 	}
 
@@ -142,8 +143,8 @@ private:
 	ImageCache* const image_cache_;  // not owned
 };
 
-IFontHandler1 * create_fonthandler(Graphic* gr) {
-	return new FontHandler1(&gr->images());
+IFontHandler1 * create_fonthandler(ImageCache* image_cache) {
+	return new FontHandler1(image_cache);
 }
 
 IFontHandler1 * g_fh1 = nullptr;

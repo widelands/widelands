@@ -48,8 +48,9 @@ void MainMenuLoadMap::clicked_ok() {
 		curdir_ = mapdata.filename;
 		fill_table();
 	} else {
-		dynamic_cast<EditorInteractive&>(*get_parent()).load(mapdata.filename);
-		die();
+		EditorInteractive& eia = dynamic_cast<EditorInteractive&>(*get_parent());
+		eia.load(mapdata.filename);
+		// load() will delete us.
 	}
 }
 

@@ -31,9 +31,10 @@ class FileWrite;
 
 namespace Widelands {
 class Player;
-struct BuildingDescr;
+class BuildingDescr;
+class WareDescr;
+class WorkerDescr;
 struct Coords;
-struct WorkerDescr;
 }  // namespace Widelands
 
 // Easy handling of function objects and coroutines.
@@ -62,7 +63,9 @@ public:
 	void push_arg(const Widelands::Player*);
 	void push_arg(const Widelands::Coords&);
 	void push_arg(const Widelands::BuildingDescr*);
+	void push_arg(const Widelands::WareDescr*);
 	void push_arg(const Widelands::WorkerDescr*);
+	void push_arg(const std::string&);
 
 	// Accesses the returned values from the run of the coroutine.
 	uint32_t pop_uint32();

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2013 by the Widelands Development Team
+ * Copyright (C) 2002-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,8 +23,9 @@
 #include <boost/format.hpp>
 
 #include "base/time_string.h"
+#include "base/wexception.h"
 #include "graphic/graphic.h"
-#include "logic/instances.h"
+#include "logic/map_objects/map_object.h"
 #include "logic/message_queue.h"
 #include "logic/player.h"
 #include "logic/playercommand.h"
@@ -38,135 +39,135 @@ inline InteractivePlayer & GameMessageMenu::iplayer() const {
 	return dynamic_cast<InteractivePlayer&>(*get_parent());
 }
 
+constexpr int kWindowWidth = 355;
+constexpr int kWindowHeight = 375;
+constexpr int kTableHeight = 125;
+constexpr int kPadding = 5;
+constexpr int kButtonSize = 34;
+constexpr int kMessageBodyY = kButtonSize + 3 * kPadding + kTableHeight;
+
 
 GameMessageMenu::GameMessageMenu
 	(InteractivePlayer & plr, UI::UniqueWindow::Registry & registry)
 	:
 	UI::UniqueWindow
-		(&plr, "messages", &registry, 580, 375, _("Messages: Inbox")),
+		(&plr, "messages", &registry, kWindowWidth, kWindowHeight, _("Messages: Inbox")),
 	message_body
 		(this,
-		 5, 154, 570, 216 - 5 - 34, // Subtracting height for message type icon
+		 kPadding,
+		 kMessageBodyY,
+		 kWindowWidth - 2 * kPadding,
+		 get_inner_h() - kMessageBodyY - 2 * kPadding - kButtonSize,
 		 "", UI::Align_Left, 1),
 	mode(Inbox)
 {
 
-	list = new UI::Table<uintptr_t>(this, 5, message_body.get_y() - 110, 570, 110);
+	list = new UI::Table<uintptr_t>(
+				 this,
+				 kPadding,
+				 kButtonSize + 2 * kPadding,
+				 kWindowWidth - 2 * kPadding,
+				 kTableHeight);
 	list->selected.connect(boost::bind(&GameMessageMenu::selected, this, _1));
 	list->double_clicked.connect(boost::bind(&GameMessageMenu::double_clicked, this, _1));
-	list->add_column (60, _("Select"), "", UI::Align_HCenter, true);
+	list->add_column(kWindowWidth - 2 * kPadding - 60 - 60 - 75, _("Title"));
+	list->add_column (60, pgettext("message", "Type"), "", UI::Align_HCenter, true);
 	list->add_column (60, _("Status"), "", UI::Align_HCenter);
-	list->add_column(330, _("Title"));
-	list->add_column(120, _("Time sent"));
+	/** TRANSLATORS: We have very little space here. You can also translate this as "Time" or "Time Sent" */
+	/** TRANSLATORS: This is used in the game messages menu - please open an issue if you need more space. */
+	list->add_column(75, pgettext("message", "Sent"), "", UI::Align_Right);
 	list->focus();
 
 	// Buttons for message types
-	m_geologistsbtn =
+	geologistsbtn_ =
 			new UI::Button
 				(this, "filter_geologists_messages",
-				 5, 5, 34, 34,
+				 kPadding, kPadding, kButtonSize, kButtonSize,
 				 g_gr->images().get("images/ui_basic/but0.png"),
 				 g_gr->images().get("images/wui/fieldaction/menu_geologist.png"),
 				 "",
 				 true);
-	m_geologistsbtn->sigclicked.connect
+	geologistsbtn_->sigclicked.connect
 			(boost::bind(&GameMessageMenu::filter_messages, this, Widelands::Message::Type::kGeologists));
 
-	m_economybtn =
+	economybtn_ =
 			new UI::Button
 				(this, "filter_economy_messages",
-				 2 * 5 + 34, 5, 34, 34,
+				 2 * kPadding + kButtonSize, kPadding, kButtonSize, kButtonSize,
 				 g_gr->images().get("images/ui_basic/but0.png"),
-				 g_gr->images().get("images/wui/fieldaction/menu_build_flag.png"),
+				 g_gr->images().get("images/wui/stats/genstats_nrwares.png"),
 				 "",
 				 true);
-	m_economybtn->sigclicked.connect
+	economybtn_->sigclicked.connect
 			(boost::bind(&GameMessageMenu::filter_messages, this, Widelands::Message::Type::kEconomy));
 
-	m_seafaringbtn =
+	seafaringbtn_ =
 			new UI::Button
 				(this, "filter_seafaring_messages",
-				 3 * 5 + 2 * 34, 5, 34, 34,
+				 3 * kPadding + 2 * kButtonSize, kPadding, kButtonSize, kButtonSize,
 				 g_gr->images().get("images/ui_basic/but0.png"),
 				 g_gr->images().get("images/wui/buildings/start_expedition.png"),
 				 "",
 				 true);
-	m_seafaringbtn->sigclicked.connect
+	seafaringbtn_->sigclicked.connect
 			(boost::bind(&GameMessageMenu::filter_messages, this, Widelands::Message::Type::kSeafaring));
 
-	m_warfarebtn =
+	warfarebtn_ =
 			new UI::Button
 				(this, "filter_warfare_messages",
-				 4 * 5 + 3 * 34, 5, 34, 34,
+				 4 * kPadding + 3 * kButtonSize, kPadding, kButtonSize, kButtonSize,
 				 g_gr->images().get("images/ui_basic/but0.png"),
 				 g_gr->images().get("images/wui/messages/messages_warfare.png"),
 				 "",
 				 true);
-	m_warfarebtn->sigclicked.connect
+	warfarebtn_->sigclicked.connect
 			(boost::bind(&GameMessageMenu::filter_messages, this, Widelands::Message::Type::kWarfare));
 
-	m_scenariobtn =
+	scenariobtn_ =
 			new UI::Button
 				(this, "filter_scenario_messages",
-				 5 * 5 + 4 * 34, 5, 34, 34,
+				 5 * kPadding + 4 * kButtonSize, kPadding, kButtonSize, kButtonSize,
 				 g_gr->images().get("images/ui_basic/but0.png"),
 				 g_gr->images().get("images/wui/menus/menu_objectives.png"),
 				 "",
 				 true);
-	m_scenariobtn->sigclicked.connect
+	scenariobtn_->sigclicked.connect
 			(boost::bind(&GameMessageMenu::filter_messages, this, Widelands::Message::Type::kScenario));
 
-	m_message_filter = Widelands::Message::Type::kAllMessages;
+	message_filter_ = Widelands::Message::Type::kAllMessages;
 	set_filter_messages_tooltips();
 	// End: Buttons for message types
 
-	UI::Button * clearselectionbtn =
-		new UI::Button
-			(this, "clear_selection",
-			 5 * 5 + 6 * 34 + 17, 5, 34, 34,
-			 g_gr->images().get("images/ui_basic/but2.png"),
-			 g_gr->images().get("images/wui/messages/message_clear_selection.png"),
-			 _("Clear selection"));
-	clearselectionbtn->sigclicked.connect
-		(boost::bind(&GameMessageMenu::do_clear_selection, this));
-
-	UI::Button * invertselectionbtn =
-		new UI::Button
-			(this, "invert_selection",
-			 6 * 5 + 7 * 34 + 17, 5, 34, 34,
-			 g_gr->images().get("images/ui_basic/but2.png"),
-			 g_gr->images().get("images/wui/messages/message_selection_invert.png"),
-			 _("Invert selection"));
-	invertselectionbtn->sigclicked.connect
-		(boost::bind(&GameMessageMenu::do_invert_selection, this));
-
-	m_archivebtn =
+	archivebtn_ =
 		new UI::Button
 			(this, "archive_or_restore_selected_messages",
-			 6 * 5 + 9 * 34 + 34, 5, 34, 34,
+			 kPadding, kWindowHeight - kPadding - kButtonSize, kButtonSize, kButtonSize,
 			 g_gr->images().get("images/ui_basic/but2.png"),
 			 g_gr->images().get("images/wui/messages/message_archive.png"),
 			 /** TRANSLATORS: %s is a tooltip, Del is the corresponding hotkey */
 			 (boost::format(_("Del: %s"))
 			  /** TRANSLATORS: Tooltip in the messages window */
-			  % _("Archive selected messages")).str());
-	m_archivebtn->sigclicked.connect
+			  % _("Archive selected message")).str());
+	archivebtn_->sigclicked.connect
 		(boost::bind(&GameMessageMenu::archive_or_restore, this));
 
-	m_togglemodebtn =
+	togglemodebtn_ =
 		new UI::Button
 			(this, "toggle_between_inbox_or_archive",
-			 7 * 5 + 10 * 34 + 34, 5, 34, 34,
+			 archivebtn_->get_x() + archivebtn_->get_w() + kPadding,
+			 archivebtn_->get_y(),
+			 kButtonSize,
+			 kButtonSize,
 			 g_gr->images().get("images/ui_basic/but2.png"),
 			 g_gr->images().get("images/wui/messages/message_archived.png"),
 			 _("Show Archive"));
-	m_togglemodebtn->sigclicked.connect
+	togglemodebtn_->sigclicked.connect
 		(boost::bind(&GameMessageMenu::toggle_mode, this));
 
-	m_centerviewbtn =
+	centerviewbtn_ =
 		new UI::Button
 			(this, "center_main_mapview_on_location",
-			 580 - 5 - 34, 5, 34, 34,
+			 kWindowWidth - kPadding - kButtonSize, archivebtn_->get_y(), kButtonSize, kButtonSize,
 			 g_gr->images().get("images/ui_basic/but2.png"),
 			 g_gr->images().get("images/wui/menus/menu_goto.png"),
 			 /** TRANSLATORS: %s is a tooltip, G is the corresponding hotkey */
@@ -174,42 +175,102 @@ GameMessageMenu::GameMessageMenu
 			  /** TRANSLATORS: Tooltip in the messages window */
 			  % _("Center main mapview on location")).str(),
 			 false);
-	m_centerviewbtn->sigclicked.connect(boost::bind(&GameMessageMenu::center_view, this));
-
-
-	m_display_message_type_label =
-		new UI::MultilineTextarea
-			(this,
-			 5, 375 - 5 - 34, 5 * 34, 40,
-			 "<rt image=images/wui/messages/message_new.png></rt>",
-			 UI::Align::Align_BottomLeft, false);
+	centerviewbtn_->sigclicked.connect(boost::bind(&GameMessageMenu::center_view, this));
 
 	if (get_usedefaultpos())
 		center_to_parent();
 
 	list->set_column_compare
-		(ColStatus, boost::bind(&GameMessageMenu::status_compare, this, _1, _2));
+		(ColTitle, boost::bind(&GameMessageMenu::compare_title, this, _1, _2));
+	list->set_column_compare
+		(ColStatus, boost::bind(&GameMessageMenu::compare_status, this, _1, _2));
+	list->set_column_compare
+		(ColType,
+		 boost::bind(&GameMessageMenu::compare_type, this, _1, _2));
+	list->set_column_compare
+		(ColTimeSent,
+		 boost::bind(&GameMessageMenu::compare_time_sent, this, _1, _2));
+
 	list->set_sort_column(ColTimeSent);
-	list->set_sort_descending(true);
 
 	set_can_focus(true);
 	focus();
 }
 
 /**
- * When comparing messages by status, new messages come before others.
+ * When comparing messages by title, order is alphabetical.
+ * If both are identical, sort by time sent.
  */
-bool GameMessageMenu::status_compare(uint32_t a, uint32_t b)
+bool GameMessageMenu::compare_title(uint32_t a, uint32_t b)
 {
 	MessageQueue & mq = iplayer().player().messages();
 	const Message * msga = mq[MessageId((*list)[a])];
 	const Message * msgb = mq[MessageId((*list)[b])];
 
 	if (msga && msgb) {
+		if (msga->title() == msgb->title()) {
+			return compare_time_sent(a, b);
+		}
+		return msga->title() < msgb->title();
+	}
+	return false; // shouldn't happen
+}
+
+/**
+ * When comparing messages by status, new messages come before others.
+ * If both are identical, sort by time sent.
+ */
+bool GameMessageMenu::compare_status(uint32_t a, uint32_t b)
+{
+	MessageQueue & mq = iplayer().player().messages();
+	const Message * msga = mq[MessageId((*list)[a])];
+	const Message * msgb = mq[MessageId((*list)[b])];
+
+	if (msga && msgb) {
+		if (msga->status() == msgb->status()) {
+			return compare_time_sent(a, b);
+		}
 		return msga->status() == Message::Status::kNew && msgb->status() != Message::Status::kNew;
 	}
 	return false; // shouldn't happen
 }
+
+/**
+ * When comparing messages by type, order is the same as in the enum class.
+ * If both are identical, sort by time sent.
+ */
+bool GameMessageMenu::compare_type(uint32_t a, uint32_t b)
+{
+	MessageQueue & mq = iplayer().player().messages();
+	const Message * msga = mq[MessageId((*list)[a])];
+	const Message * msgb = mq[MessageId((*list)[b])];
+
+	if (msga && msgb) {
+		const Widelands::Message::Type cat_a = msga->message_type_category();
+		const Widelands::Message::Type cat_b = msgb->message_type_category();
+		if (cat_a == cat_b) {
+			return compare_time_sent(a, b);
+		}
+		return static_cast<int>(cat_a) < static_cast<int>(cat_b);
+	}
+	return false; // shouldn't happen
+}
+
+/**
+ * When comparing messages by time sent, older messages come before others.
+ */
+bool GameMessageMenu::compare_time_sent(uint32_t a, uint32_t b)
+{
+	MessageQueue & mq = iplayer().player().messages();
+	const Message * msga = mq[MessageId((*list)[a])];
+	const Message * msgb = mq[MessageId((*list)[b])];
+
+	if (msga && msgb) {
+		return msga->sent() > msgb->sent();
+	}
+	return false; // shouldn't happen
+}
+
 
 static char const * const status_picture_filename[] = {
 	"images/wui/messages/message_new.png",
@@ -227,6 +288,7 @@ void GameMessageMenu::show_new_message
 		toggle_mode();
 	UI::Table<uintptr_t>::EntryRecord & te = list->add(id.value(), true);
 	update_record(te, message);
+	list->sort();
 }
 
 void GameMessageMenu::think()
@@ -236,8 +298,8 @@ void GameMessageMenu::think()
 	// Update messages in the list and remove messages
 	// that should no longer be shown
 	for (uint32_t j = list->size(); j; --j) {
-		MessageId m_id((*list)[j - 1]);
-		if (Message const * const message = mq[m_id]) {
+		MessageId id_((*list)[j - 1]);
+		if (Message const * const message = mq[id_]) {
 			if ((mode == Archive) != (message->status() == Message::Status::kArchived)) {
 				list->remove(j - 1);
 			} else {
@@ -263,12 +325,11 @@ void GameMessageMenu::think()
 	}
 
 	// Filter message type
-	if (m_message_filter != Message::Type::kAllMessages) {
-		set_display_message_type_label(m_message_filter);
+	if (message_filter_ != Message::Type::kAllMessages) {
 		for (uint32_t j = list->size(); j; --j) {
-			MessageId m_id((*list)[j - 1]);
-			if (Message const * const message = mq[m_id]) {
-				if (message->message_type_category() != m_message_filter) {
+			MessageId id_((*list)[j - 1]);
+			if (Message const * const message = mq[id_]) {
+				if (message->message_type_category() != message_filter_) {
 					list->remove(j - 1);
 				}
 			}
@@ -282,23 +343,21 @@ void GameMessageMenu::think()
 			// be a solution without this extra update().
 			list->update();
 	} else {
-		m_centerviewbtn->set_enabled(false);
+		centerviewbtn_->set_enabled(false);
 		message_body.set_text(std::string());
-		set_display_message_type_label(Widelands::Message::Type::kNoMessages);
 	}
 }
 
-void GameMessageMenu::update_record
-	(UI::Table<uintptr_t>::EntryRecord & er,
-	 const Widelands::Message & message)
+void GameMessageMenu::update_record(UI::Table<uintptr_t>::EntryRecord& er, const Widelands::Message& message)
 {
+	er.set_picture(ColType, g_gr->images().get(display_message_type_icon(message)));
 	er.set_picture
 		(ColStatus,
 		 g_gr->images().get(status_picture_filename[static_cast<int>(message.status())]));
-	er.set_string(ColTitle, message.title());
+	er.set_picture(ColTitle, message.icon(), message.title());
 
 	const uint32_t time = message.sent();
-	er.set_string(ColTimeSent, gamestring_with_leading_zeros(time));
+	er.set_string(ColTimeSent, gametimestring(time));
 }
 
 /*
@@ -317,13 +376,17 @@ void GameMessageMenu::selected(uint32_t const t) {
 					(*new Widelands::CmdMessageSetStatusRead
 					 	(game.get_gametime(), player.player_number(), id));
 			}
-			m_centerviewbtn->set_enabled(message->position());
-			message_body.set_text(message->body    ());
-			set_display_message_type_label(message->message_type_category());
+			centerviewbtn_->set_enabled(message->position());
+
+			message_body.set_text(
+						(boost::format("<rt><p font-size=18 font-weight=bold font-color=D1D1D1>%s<br></p>"
+											"<p font-size=8> <br></p></rt>%s")
+						 % message->heading()
+						 % message->body()).str());
 			return;
 		}
 	}
-	m_centerviewbtn->set_enabled(false);
+	centerviewbtn_->set_enabled(false);
 	message_body.set_text(std::string());
 }
 
@@ -331,7 +394,7 @@ void GameMessageMenu::selected(uint32_t const t) {
  * a message was double clicked
  */
 void GameMessageMenu::double_clicked(uint32_t const /* t */) {
-	if (m_centerviewbtn->enabled()) center_view();
+	if (centerviewbtn_->enabled()) center_view();
 }
 
 /**
@@ -343,7 +406,7 @@ bool GameMessageMenu::handle_key(bool down, SDL_Keysym code)
 		switch (code.sym) {
 		// Don't forget to change the tooltips if any of these get reassigned
 		case SDLK_g:
-			if (m_centerviewbtn->enabled())
+			if (centerviewbtn_->enabled())
 				center_view();
 			return true;
 		case SDLK_0:
@@ -390,17 +453,7 @@ void GameMessageMenu::archive_or_restore()
 
 	switch (mode) {
 	case Inbox:
-		//archive selected messages
-		for (size_t i = 0; i < list->size(); ++i)
-			if (list->get_record(i).is_checked(ColSelect))
-			{
-				work_done = true;
-				game.send_player_command
-					(*new Widelands::CmdMessageSetStatusArchived
-					 	(gametime, plnum, MessageId((*list)[i])));
-			}
-
-		//archive highlighted message, if nothing was selected
+		//archive highlighted message
 		if (!work_done) {
 			if (!list->has_selection()) return;
 
@@ -410,17 +463,7 @@ void GameMessageMenu::archive_or_restore()
 		}
 		break;
 	case Archive:
-		//restore selected messages
-		for (size_t i = 0; i < list->size(); ++i)
-			if (list->get_record(i).is_checked(ColSelect))
-			{
-				work_done = true;
-				game.send_player_command
-					(*new Widelands::CmdMessageSetStatusRead
-					 	(gametime, plnum, MessageId((*list)[i])));
-			}
-
-		//restore highlighted message, if nothing was selected
+		//restore highlighted message
 		if (!work_done) {
 			if (!list->has_selection()) return;
 
@@ -429,8 +472,6 @@ void GameMessageMenu::archive_or_restore()
 					(gametime, plnum, MessageId(list->get_selected())));
 		}
 		break;
-	default:
-		assert(false); // there is nothing but Archive and Inbox
 	}
 }
 
@@ -454,28 +495,41 @@ void GameMessageMenu::center_view()
 void GameMessageMenu::filter_messages(Widelands::Message::Type const msgtype) {
 	switch (msgtype) {
 		case Widelands::Message::Type::kGeologists:
-			toggle_filter_messages_button(*m_geologistsbtn, msgtype);
+			toggle_filter_messages_button(*geologistsbtn_, msgtype);
 			break;
 		case Widelands::Message::Type::kEconomy:
-			toggle_filter_messages_button(*m_economybtn, msgtype);
+			toggle_filter_messages_button(*economybtn_, msgtype);
 			break;
 		case Widelands::Message::Type::kSeafaring:
-			toggle_filter_messages_button(*m_seafaringbtn, msgtype);
+			toggle_filter_messages_button(*seafaringbtn_, msgtype);
 			break;
 		case Widelands::Message::Type::kWarfare:
-			toggle_filter_messages_button(*m_warfarebtn, msgtype);
+			toggle_filter_messages_button(*warfarebtn_, msgtype);
 			break;
 		case Widelands::Message::Type::kScenario:
-			toggle_filter_messages_button(*m_scenariobtn, msgtype);
+			toggle_filter_messages_button(*scenariobtn_, msgtype);
 			break;
-		default:
+
+		case Widelands::Message::Type::kNoMessages:
+		case Widelands::Message::Type::kAllMessages:
+		case Widelands::Message::Type::kGameLogic:
+		case Widelands::Message::Type::kGeologistsCoal:
+		case Widelands::Message::Type::kGeologistsGold:
+		case Widelands::Message::Type::kGeologistsStones:
+		case Widelands::Message::Type::kGeologistsIron:
+		case Widelands::Message::Type::kGeologistsWater:
+		case Widelands::Message::Type::kEconomySiteOccupied:
+		case Widelands::Message::Type::kWarfareSiteDefeated:
+		case Widelands::Message::Type::kWarfareSiteLost:
+		case Widelands::Message::Type::kWarfareUnderAttack:
 			set_filter_messages_tooltips();
-			m_message_filter = Widelands::Message::Type::kAllMessages;
-			m_geologistsbtn->set_perm_pressed(false);
-			m_economybtn->set_perm_pressed(false);
-			m_seafaringbtn->set_perm_pressed(false);
-			m_warfarebtn->set_perm_pressed(false);
-			m_scenariobtn->set_perm_pressed(false);
+			message_filter_ = Widelands::Message::Type::kAllMessages;
+			geologistsbtn_->set_perm_pressed(false);
+			economybtn_   ->set_perm_pressed(false);
+			seafaringbtn_ ->set_perm_pressed(false);
+			warfarebtn_   ->set_perm_pressed(false);
+			scenariobtn_  ->set_perm_pressed(false);
+			break;
 	}
 	think();
 }
@@ -487,15 +541,15 @@ void GameMessageMenu::toggle_filter_messages_button(UI::Button & button, Widelan
 	set_filter_messages_tooltips();
 	if (button.get_perm_pressed()) {
 		button.set_perm_pressed(false);
-		m_message_filter = Widelands::Message::Type::kAllMessages;
+		message_filter_ = Widelands::Message::Type::kAllMessages;
 	} else {
-		m_geologistsbtn->set_perm_pressed(false);
-		m_economybtn->set_perm_pressed(false);
-		m_seafaringbtn->set_perm_pressed(false);
-		m_warfarebtn->set_perm_pressed(false);
-		m_scenariobtn->set_perm_pressed(false);
+		geologistsbtn_->set_perm_pressed(false);
+		economybtn_->set_perm_pressed(false);
+		seafaringbtn_->set_perm_pressed(false);
+		warfarebtn_->set_perm_pressed(false);
+		scenariobtn_->set_perm_pressed(false);
 		button.set_perm_pressed(true);
-		m_message_filter = msgtype;
+		message_filter_ = msgtype;
 		/** TRANSLATORS: %1% is a tooltip, %2% is the corresponding hotkey */
 		button.set_tooltip((boost::format(_("%1% (Hotkey: %2%)"))
 								  /** TRANSLATORS: Tooltip in the messages window */
@@ -508,95 +562,62 @@ void GameMessageMenu::toggle_filter_messages_button(UI::Button & button, Widelan
  * Helper for filter_messages
  */
 void GameMessageMenu::set_filter_messages_tooltips() {
-	m_geologistsbtn->set_tooltip((boost::format(_("%1% (Hotkey: %2%)"))
+	geologistsbtn_->set_tooltip((boost::format(_("%1% (Hotkey: %2%)"))
 											/** TRANSLATORS: Tooltip in the messages window */
 											% _("Show geologists' messages only")
 											% "1").str());
-	m_economybtn->set_tooltip((boost::format(_("%1% (Hotkey: %2%)"))
+	economybtn_->set_tooltip((boost::format(_("%1% (Hotkey: %2%)"))
 										/** TRANSLATORS: Tooltip in the messages window */
 										% _("Show economy messages only")
 										% "2").str());
-	m_seafaringbtn->set_tooltip((boost::format(_("%1% (Hotkey: %2%)"))
+	seafaringbtn_->set_tooltip((boost::format(_("%1% (Hotkey: %2%)"))
 										  /** TRANSLATORS: Tooltip in the messages window */
 										  % _("Show seafaring messages only")
 										  % "3").str());
-	m_warfarebtn->set_tooltip((boost::format(_("%1% (Hotkey: %2%)"))
+	warfarebtn_->set_tooltip((boost::format(_("%1% (Hotkey: %2%)"))
 										/** TRANSLATORS: Tooltip in the messages window */
 										% _("Show warfare messages only")
 										% "4").str());
-	m_scenariobtn->set_tooltip((boost::format(_("%1% (Hotkey: %2%)"))
+	scenariobtn_->set_tooltip((boost::format(_("%1% (Hotkey: %2%)"))
 										 /** TRANSLATORS: Tooltip in the messages window */
 										 % _("Show scenario messages only")
 										 % "5").str());
 }
 
-/**
- * Update image and tooltip for message category label
- */
-void GameMessageMenu::set_display_message_type_label(Widelands::Message::Type msgtype) {
-	std::string message_type_tooltip = "";
-	std::string message_type_image = "";
 
-	switch (msgtype) {
+/**
+ * Get the filename for a message category's icon
+ */
+std::string GameMessageMenu::display_message_type_icon(Widelands::Message message) {
+	switch (message.message_type_category()) {
 		case Widelands::Message::Type::kGeologists:
-			/** TRANSLATORS: This is a message's type */
-			message_type_tooltip =  _("Geologists");
-			message_type_image =  "<rt image=images/wui/fieldaction/menu_geologist.png></rt>";
-			break;
+			return "images/wui/fieldaction/menu_geologist.png";
 		case Widelands::Message::Type::kEconomy:
-			/** TRANSLATORS: This is a message's type */
-			message_type_tooltip =  _("Economy");
-			message_type_image =  "<rt image=images/wui/fieldaction/menu_build_flag.png></rt>";
-			break;
+			return "images/wui/stats/genstats_nrwares.png";
 		case Widelands::Message::Type::kSeafaring:
-			/** TRANSLATORS: This is a message's type */
-			message_type_tooltip =  _("Seafaring");
-			message_type_image =  "<rt image=images/wui/buildings/start_expedition.png></rt>";
-			break;
+			return "images/wui/buildings/start_expedition.png";
 		case Widelands::Message::Type::kWarfare:
-			/** TRANSLATORS: This is a message's type */
-			message_type_tooltip =  _("Warfare");
-			message_type_image =  "<rt image=images/wui/messages/messages_warfare.png></rt>";
-			break;
+			return "images/wui/messages/messages_warfare.png";
 		case Widelands::Message::Type::kScenario:
-			/** TRANSLATORS: This is a message's type */
-			message_type_tooltip =  _("Scenario");
-			message_type_image =  "<rt image=images/wui/menus/menu_objectives.png></rt>";
-			break;
+			return "images/wui/menus/menu_objectives.png";
+		case Widelands::Message::Type::kGameLogic:
+			return "images/ui_basic/menu_help.png";
 		case Widelands::Message::Type::kNoMessages:
-			/** TRANSLATORS: This show up instead of a message's type when there are no messages found */
-			message_type_tooltip =  _("No message found");
-			break;
-		default:
-			/** TRANSLATORS: This is the default message type */
-			message_type_tooltip = _("General");
-			message_type_image =  "<rt image=images/wui/messages/message_new.png></rt>";
+		case Widelands::Message::Type::kAllMessages:
+		case Widelands::Message::Type::kGeologistsCoal:
+		case Widelands::Message::Type::kGeologistsGold:
+		case Widelands::Message::Type::kGeologistsStones:
+		case Widelands::Message::Type::kGeologistsIron:
+		case Widelands::Message::Type::kGeologistsWater:
+		case Widelands::Message::Type::kEconomySiteOccupied:
+		case Widelands::Message::Type::kWarfareSiteDefeated:
+		case Widelands::Message::Type::kWarfareSiteLost:
+		case Widelands::Message::Type::kWarfareUnderAttack:
+			return "images/wui/messages/message_new.png";
 	}
-
-	m_display_message_type_label->set_tooltip(
-				 /** TRANSLATORS: %s is a message's type */
-				 (boost::format(_("Type of this message: %s"))
-				  /** TRANSLATORS: Tooltip in the messages window */
-				  % message_type_tooltip).str());
-	m_display_message_type_label->set_text(message_type_image);
+	NEVER_HERE();
 }
 
-
-/**
- * Clear the current selection of messages.
- */
-void GameMessageMenu::do_clear_selection()
-{
-	for (size_t i = 0; i < list->size(); ++i)
-		list->get_record(i).set_checked
-			(ColSelect, false);
-}
-
-void GameMessageMenu::do_invert_selection()
-{
-	for (size_t i = 0; i < list->size(); ++i)
-		list->get_record(i).toggle(ColSelect);
-}
 
 void GameMessageMenu::toggle_mode()
 {
@@ -605,26 +626,24 @@ void GameMessageMenu::toggle_mode()
 	case Inbox:
 		mode = Archive;
 		set_title(_("Messages: Archive"));
-		m_archivebtn->set_pic(g_gr->images().get("images/wui/messages/message_restore.png"));
+		archivebtn_->set_pic(g_gr->images().get("images/wui/messages/message_restore.png"));
 		/** TRANSLATORS: %s is a tooltip, Del is the corresponding hotkey */
-		m_archivebtn->set_tooltip((boost::format(_("Del: %s"))
+		archivebtn_->set_tooltip((boost::format(_("Del: %s"))
 											/** TRANSLATORS: Tooltip in the messages window */
-											% _("Restore selected messages")).str());
-		m_togglemodebtn->set_pic(g_gr->images().get("images/wui/messages/message_new.png"));
-		m_togglemodebtn->set_tooltip(_("Show Inbox"));
+											% _("Restore selected message")).str());
+		togglemodebtn_->set_pic(g_gr->images().get("images/wui/messages/message_new.png"));
+		togglemodebtn_->set_tooltip(_("Show Inbox"));
 		break;
 	case Archive:
 		mode = Inbox;
 		set_title(_("Messages: Inbox"));
-		m_archivebtn->set_pic(g_gr->images().get("images/wui/messages/message_archive.png"));
+		archivebtn_->set_pic(g_gr->images().get("images/wui/messages/message_archive.png"));
 		/** TRANSLATORS: %s is a tooltip, Del is the corresponding hotkey */
-		m_archivebtn->set_tooltip((boost::format(_("Del: %s"))
+		archivebtn_->set_tooltip((boost::format(_("Del: %s"))
 											/** TRANSLATORS: Tooltip in the messages window */
-											% _("Archive selected messages")).str());
-		m_togglemodebtn->set_pic(g_gr->images().get("images/wui/messages/message_archived.png"));
-		m_togglemodebtn->set_tooltip(_("Show Archive"));
+											% _("Archive selected message")).str());
+		togglemodebtn_->set_pic(g_gr->images().get("images/wui/messages/message_archived.png"));
+		togglemodebtn_->set_tooltip(_("Show Archive"));
 		break;
-	default:
-		assert(false); // there is nothing but Archive and Inbox
 	}
 }

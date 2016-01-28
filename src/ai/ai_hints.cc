@@ -19,39 +19,36 @@
 
 #include "ai/ai_hints.h"
 
-#include "profile/profile.h"
+#include <memory>
 
-BuildingHints::BuildingHints(Section* const section)
-   : log_producer_(section ? section->get_bool("logproducer") : false),
-     stone_producer_(section ? section->get_bool("stoneproducer") : false),
-     needs_water_(section ? section->get_bool("needs_water") : false),
-     mines_water_(section ? section->get_bool("mines_water") : false),
-     recruitment_(section ? section->get_bool("recruitment") : false),
-     space_consumer_(section ? section->get_bool("space_consumer") : false),
-     expansion_(section ? section->get_bool("expansion") : false),
-     fighting_(section ? section->get_bool("fighting") : false),
-     mountain_conqueror_(section ? section->get_bool("mountain_conqueror") : false),
-     prohibited_till_(section ? section->get_natural("prohibited_till", 0) : 0),
-     forced_after_(section ? section->get_natural("forced_after", 864000) : 0),  // 10 days default
-     mines_percent_(section ? section->get_int("mines_percent", 100) : 0),
-     trainingsite_type_(TrainingSiteType::kNoTS)
+BuildingHints::BuildingHints(std::unique_ptr<LuaTable> table)
+	: renews_map_resource_(table->has_key("renews_map_resource") ?
+									  table->get_string("renews_map_resource") : ""),
+	  mines_(table->has_key("mines") ? table->get_string("mines") : ""),
+	  log_producer_(table->has_key("logproducer") ? table->get_bool("logproducer") : false),
+	  granite_producer_(table->has_key("graniteproducer") ? table->get_bool("graniteproducer") : false),
+	  needs_water_(table->has_key("needs_water") ? table->get_bool("needs_water") : false),
+	  mines_water_(table->has_key("mines_water") ? table->get_bool("mines_water") : false),
+	  recruitment_(table->has_key("recruitment") ? table->get_bool("recruitment") : false),
+	  space_consumer_(table->has_key("space_consumer") ? table->get_bool("space_consumer") : false),
+	  expansion_(table->has_key("expansion") ? table->get_bool("expansion") : false),
+	  fighting_(table->has_key("fighting") ? table->get_bool("fighting") : false),
+	  mountain_conqueror_(table->has_key("mountain_conqueror") ?
+									 table->get_bool("mountain_conqueror") : false),
+	  shipyard_(table->has_key("shipyard") ? table->get_bool("shipyard") : false),
+	  prohibited_till_(table->has_key("prohibited_till") ? table->get_int("prohibited_till") : 0),
+	  // 10 days default
+	  forced_after_(table->has_key("forced_after") ? table->get_int("forced_after") : 864000),
+	  mines_percent_(table->has_key("mines_percent") ? table->get_int("mines_percent") : 100),
+		very_weak_ai_limit_(table->has_key("very_weak_ai_limit") ? table->get_int("very_weak_ai_limit") : -1),
+		weak_ai_limit_(table->has_key("weak_ai_limit") ? table->get_int("weak_ai_limit") : -1),
+	  trainingsite_type_(TrainingSiteType::kNoTS) {
 
-{
-	if (section) {
-		if (section->has_val("renews_map_resource"))
-			renews_map_resource_ = section->get_string("renews_map_resource");
-		if (section->has_val("mines"))
-			mines_ = section->get_string("mines");
-	}
-	if (section) {
-		if (!section->has_val("trainingsite_type")) {
-			trainingsite_type_ =  TrainingSiteType::kNoTS;
-		} else {
-			if (!strcmp(section->get_string("trainingsite_type", "basic"), "basic")) {
-				trainingsite_type_ =  TrainingSiteType::kBasic;
-			} else {
-				trainingsite_type_ =  TrainingSiteType::kAdvanced;
-			}
+	if (table->has_key("trainingsite_type")) {
+		if (table->get_string("trainingsite_type") == "basic") {
+			trainingsite_type_ =  TrainingSiteType::kBasic;
+		} else if (table->get_string("trainingsite_type") == "advanced") {
+			trainingsite_type_ =  TrainingSiteType::kAdvanced;
 		}
 	}
 }

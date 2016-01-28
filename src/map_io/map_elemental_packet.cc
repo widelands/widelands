@@ -29,7 +29,7 @@
 
 namespace Widelands {
 
-#define CURRENT_PACKET_VERSION 1
+constexpr int32_t kCurrentPacketVersion = 1;
 
 void MapElementalPacket::pre_read(FileSystem & fs, Map * map)
 {
@@ -39,7 +39,7 @@ void MapElementalPacket::pre_read(FileSystem & fs, Map * map)
 
 	try {
 		int32_t const packet_version = s.get_int("packet_version");
-		if (packet_version == CURRENT_PACKET_VERSION) {
+		if (packet_version == kCurrentPacketVersion) {
 			map->m_width       = s.get_int   ("map_w");
 			map->m_height      = s.get_int   ("map_h");
 			map->set_nrplayers  (s.get_int   ("nr_players"));
@@ -103,8 +103,7 @@ void MapElementalPacket::pre_read(FileSystem & fs, Map * map)
 				teamsection_key = (boost::format("teams%02i") % team_section_id).str().c_str();
 			}
 		} else
-			throw GameDataError
-				("unknown/unhandled version %i", packet_version);
+			throw UnhandledVersionError("MapElementalPacket", packet_version, kCurrentPacketVersion);
 	} catch (const WException & e) {
 		throw GameDataError("elemental data: %s", e.what());
 	}
@@ -125,7 +124,7 @@ void MapElementalPacket::write
 	Profile prof;
 	Section & s = prof.create_section("global");
 
-	s.set_int   ("packet_version", CURRENT_PACKET_VERSION);
+	s.set_int   ("packet_version", kCurrentPacketVersion);
 	const Map & map = egbase.map();
 	s.set_int   ("map_w",          map.get_width      ());
 	s.set_int   ("map_h",          map.get_height     ());

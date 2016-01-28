@@ -2,16 +2,20 @@
 # Copyright (C) 2005-2015 Widelands Development Team
 # 
 # Translators:
+# Balázs Meskó <meskobalazs@gmail.com>, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # GunChleoc, 2014
+# GunChleoc, 2014
+# Szűcs Kornél Géza <sz.kornelgeza@gmail.com>, 2015
+# zone <z-one@freemail.hu>, 2015
 # zone <z-one@freemail.hu>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-08-04 07:49+0000\n"
-"PO-Revision-Date: 2015-08-04 07:49+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2015-12-14 05:31+0000\n"
+"PO-Revision-Date: 2016-01-13 00:26+0000\n"
+"Last-Translator: Balázs Meskó <meskobalazs@gmail.com>\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,13 +23,21 @@ msgstr ""
 "Language: hu\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../../campaigns/atl01.wmf/scripting/init.lua:71
+#. TRANSLATORS: Short message title. Translate as "Lost!" if you don't have
+#. enough space.
+#: ../../campaigns/atl01.wmf/scripting/init.lua:74
+msgctxt "message_short_title"
 msgid "Building lost!"
 msgstr "Egy épület elveszett!"
 
-#: ../../campaigns/atl01.wmf/scripting/init.lua:73
+#: ../../campaigns/atl01.wmf/scripting/init.lua:76
 msgid "We lost a building to the ocean!"
 msgstr "Egy épületünket elnyelte az óceán!"
+
+#: ../../campaigns/atl01.wmf/scripting/init.lua:82
+msgctxt "message_heading"
+msgid "Building lost!"
+msgstr "Egy épület elveszett!"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:32
 msgid "Ensure the supply of building wares"
@@ -37,7 +49,7 @@ msgstr "Biztosítsd az építőanyagok utánpótlását"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:35
 msgid "Supply basic building material for your economy:"
-msgstr ""
+msgstr "Biztosítsd az alapvető építőanyagokat a gazdaságodhoz:"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:36
 msgid "Build a quarry"
@@ -53,11 +65,11 @@ msgstr "Építs két erdészházat"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:39
 msgid "Build a sawmill"
-msgstr ""
+msgstr "Építs egy fűrészmalmot"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:45
 msgid "Expand your territory and explore"
-msgstr "Terjeszd ki területedet, és fedezd fel a szigetet"
+msgstr "Terjeszd ki területedet, és fedezd fel"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:47
 msgid "Expand and Explore"
@@ -72,7 +84,7 @@ msgstr "A sziget hatalmas, és nem nyugodhatunk, míg nem bizonyosodunk meg arr�
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:49
 msgid "Build military sites to expand your territory"
-msgstr ""
+msgstr "Építs katonai támaszpontokat a területed növeléséhez"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:55
 msgid "Establish a solid food production"
@@ -80,7 +92,7 @@ msgstr "Létesíts egy stabil élelemtermelő gazdaságot"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:57
 msgid "Food Production"
-msgstr ""
+msgstr "Élelemtermelés"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:58
 msgid ""
@@ -105,16 +117,16 @@ msgid "Build a farm and a blackroot farm"
 msgstr "Építs egy tanyát és egy feketegyökérkertet"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:61
-msgid "Build a mill to make cornflour and blackroot flour"
-msgstr ""
+msgid "Build a mill to make cornmeal and blackroot flour"
+msgstr "Építs egy malmot hogy kukoricalisztet és feketegyökér lisztet készíthess"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:62
 msgid "Build a well"
 msgstr "Építs egy kutat"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:63
-msgid "Build a bakery to bake bread from cornflour, blackroot flour and water"
-msgstr ""
+msgid "Build a bakery to bake bread from cornmeal, blackroot flour and water"
+msgstr "Építs egy pékséget hogy kenyeret süss kukoricalisztből, feketegyökér lisztből és vízből"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:64
 msgid "Build a hunter’s house to get raw meat"
@@ -146,14 +158,14 @@ msgstr "Indíts el pókszövettermelést"
 msgid ""
 "The weavers produce spidercloth and tabards in the weaving mill. Spidercloth"
 " is needed for the construction of some buildings and clothing, while "
-"tabards are the uniforms of soldiers. The weaving mill needs gold yarn and "
-"spideryarn as raw material. Spideryarn is produced by the spider farm, while"
-" gold yarn is produced by the gold spinning mill out of gold."
+"tabards are the uniforms of soldiers. The weaving mill needs gold thread and"
+" spider silk as raw material. Spider silk is produced by the spider farm, "
+"while gold thread is produced by the gold spinning mill out of gold."
 msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:77
 msgid "Build a weaving mill"
-msgstr ""
+msgstr "Építs egy szövőmalmot"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:78
 msgid "Build a spider farm"
@@ -161,7 +173,7 @@ msgstr "Építs egy póktenyészetet"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:79
 msgid "Build a gold spinning mill"
-msgstr ""
+msgstr "Építs egy aranyszálfonó malmot"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:85
 msgid "Build industry and mines"
@@ -184,7 +196,7 @@ msgid ""
 "The ores have to be smelted at a smelting works before they can be used. The"
 " refined materials are then used in the weapon smithy, the armor smithy and "
 "the toolsmithy."
-msgstr "Az ércekből először egy kohóban ki kell nyerni a fémeket. Az így nyert anyagokat aztán a fegyver-, a páncél- és a szerszámkovácsműhelyben használják fel."
+msgstr "Az ércekből először egy kohóban ki kell nyerni a fémeket. Az így nyert anyagokat aztán a fegyver-, a páncél- és a szerszámkovács műhelyben használják fel."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:90
 msgid ""
@@ -198,19 +210,19 @@ msgstr "Építs egy kohót"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:92
 msgid "Build an armor smithy and a weapon smithy"
-msgstr "Építs egy páncél-, illetve egy fegyverkovácsműhelyet"
+msgstr "Építs egy páncél-, illetve egy fegyverkovács műhelyet"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:93
 msgid "Build a toolsmithy"
-msgstr "Építs egy szerszámkovácsműhelyet."
+msgstr "Építs egy szerszámkovács műhelyt."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:99
 msgid "Build training sites for soldiers"
-msgstr ""
+msgstr "Építs kiképzőhelyeket a katonáidnak"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:101
 msgid "Soldier Training Sites"
-msgstr ""
+msgstr "Katona kiképzőhelyek"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:102
 msgid ""
@@ -242,7 +254,7 @@ msgstr "Ahogy úthálózatod egyre hosszabbá és bonyolultabbá válik, kíván
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:113
 msgid "Build a warehouse"
-msgstr ""
+msgstr "Építs egy raktárat"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:114
 msgid "Build a horse farm"
@@ -275,7 +287,8 @@ msgstr "Kevély mindhalálig"
 msgid "Favored by the God"
 msgstr "Az isten kegyeltje"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:138
+#. TRANSLATORS: Foreword
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:139
 msgid ""
 "On the hidden and lost island of Atlantis, a proud tribe settled since the "
 "world was very young. Ruled by the bloodline of King Ajanthul – the first "
@@ -284,7 +297,8 @@ msgid ""
 " civilized."
 msgstr "Atlantisz rejtett és elveszett szigetén egy büszke törzs lakott, mióta világ a világ. Ajanthul király – az első ember, akit Lutas tengeristen a víz fölötti légzés képességével ruházott fel – vérvonalának uralma alatt, és a bölcs papok segítségével, kik kapcsolatban voltak Lutasszal, gyarapodtak és fejletté váltak."
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:139
+#. TRANSLATORS: Foreword
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:141
 msgid ""
 "This story is taking place during the reign of King Askandor, the 43rd "
 "successor of King Ajanthul. He had been a good king, ruling Atlantis with "
@@ -294,15 +308,16 @@ msgid ""
 "seek for it was forbidden."
 msgstr "Ez a történet Askandor király idejéből való, aki Ajanthul király negyvenharmadik utódja volt. Sokáig jó király volt, bölcsen és körültekintően kormányozta Atlantiszt. De ahogy korosodott, félni kezdett a haláltól, és ellenszert kezdett keresni, noha a legtöbb pap óva intette őt ettől. Némelyek mondták neki, hogy az örök élet csak az isteneké, embernek nem szabad azt keresnie."
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:143
-msgid "Disgraced Before the God"
-msgstr ""
-
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:145
+msgid "Disgraced Before the God"
+msgstr "Kegyvesztés isten előtt"
+
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:147
 msgid "The God’s Punishment"
 msgstr "Az isten büntetése"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:146
+#. TRANSLATORS: Foreword
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:149
 msgid ""
 "But all seemed well. Only the horses seemed to feel something was wrong. "
 "During the nights, they went crazy and were full of fear. It was not long "
@@ -310,7 +325,8 @@ msgid ""
 " level in front of their stable was rising with ever increasing speed."
 msgstr "De úgy tűnt, minden rendben. Csupán a lovak érezték úgy, hogy valami baj van. Éjjelente megháborodtak és rettegés töltötte el őket. Nemsokára Xydra, a lovász felfedezte, mi bajuk van: istállójukkal szemben a tenger szintje emelkedett, egyre gyorsuló ütemben."
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:147
+#. TRANSLATORS: Foreword
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:151
 msgid ""
 "The clerics retreated into meditation and the reason for the rising water "
 "was soon to be found: the god Lutas had lost faith in the Atlanteans because"
@@ -319,15 +335,16 @@ msgid ""
 " the sea again."
 msgstr "A papok elvonultak, és hamarosan megfejtették a víz emelkedésének okát: Lutas isten kiábrándult az atlantisziakból, királyuk vakmerősége miatt. Úgy döntött, megfosztja őt azon jogoktól, melyekkel Ajanthul királyt és gyermekeit felruházta. Egyúttal visszahívta őket ismét a víz alá."
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:151
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:155
 msgid "Uproar and Confusion"
 msgstr "Hangzavar és zűrzavar"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:153
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:157
 msgid "Emerging Chaos..."
 msgstr ""
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:154
+#. TRANSLATORS: Foreword
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:159
 msgid ""
 "Guilt-ridden, the king committed suicide. Without a monarch, the people "
 "turned to the clerics, but they had no substantial help to offer. Most "
@@ -335,7 +352,8 @@ msgid ""
 "animals in his temple. But to no avail..."
 msgstr ""
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:155
+#. TRANSLATORS: Foreword
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:161
 msgid ""
 "Jundlina, the late king’s daughter and the highest priestess of the god was "
 "the most determined cleric. As countless offerings didn’t change the "
@@ -344,7 +362,8 @@ msgid ""
 " the father of her only child."
 msgstr "Jundlina, a hajdani király leánya és egyben az isten főpapnője volt a legelszántabb a papságban. Mivel számtalan áldozat sem változtatott a helyzeten, arra jutott, hogy az istent kiengesztelendő, egy igazán nagylelkű áldozatra van szükség. Így felajánlotta neki a számára legkedvesebbet: férjét, egy szem gyermekének apját."
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:156
+#. TRANSLATORS: Foreword
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:163
 msgid ""
 "But not even this changed the mind of the god. The water kept on rising. "
 "Nearly driven insane by guilt, pain and anger, Jundlina became a heretic: "
@@ -355,21 +374,23 @@ msgid ""
 "the worst enemy of Lutas."
 msgstr "De még ez sem hatott az istenre. A víz csak tovább emelkedett. Jundlina, csaknem beleőrülve a bűntudatba, fájdalomba és haragba, eretnekké lett. Titokban embereket toborzott a köznépből, olyanokat, akik nem osztották a papság azon döntését, hogy elfogadják az isten akaratát. Segítségükkel felgyújtotta a templomot, és elkötött egy hajót, hogy megszökjenek az isten atlantiszi befolyása alól. Ez a kis csoport Satulhoz kezdett fohászkodni, a tűz istenéhez, aki Lutas legnagyobb ellensége volt."
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:157
+#. TRANSLATORS: Foreword
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:165
 msgid ""
 "Leaving the dying Atlantis and their past behind, they started on a quest to"
 " find a place sheltered by the fire and protected from the sea."
 msgstr "Hátrahagyva a pusztuló Atlantiszt és múltjukat, útra keltek egy olyan helyet keresni, melyet a tűz oltalmaz, és védett a tengertől."
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:164
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:172
 msgid "The Princess’ Memoir"
 msgstr "A hercegnő emlékirata"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:165
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:173
 msgid "Jundlina Writes Down Her Memories"
 msgstr "Jundlina leírja emlékeit"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:166
+#. TRANSLATORS: Jundlina - Diary
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:175
 msgid ""
 "We left Atlantis and sailed east. We entered the forbidden sea on the sixth "
 "day without noticing any pursuers from Atlantis and without Lutas having "
@@ -378,7 +399,8 @@ msgid ""
 "deemed this a sign from the fire god and we landed on its shore."
 msgstr "Elhagytuk Atlantiszt, és keletre hajóztunk. A hatodik napon beléptünk a tiltott tengerre anélkül, hogy atlantiszi üldözőket észleltünk volna, vagy hogy Lutas összetörte volna a hajónkat. Most már nem érhet el minket. Egy napra rá észrevettünk egy szigetet, melyen, úgy tűnik, egy amolyan tűzhányó hegy van. Ezt a tűzisten adta jelnek véltem, így kikötöttünk a sziget partján."
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:168
+#. TRANSLATORS: Jundlina - Diary
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:178
 msgid ""
 "We spent the last week building two watchtowers on the mountains close to "
 "our landing area; and, of course, a hall for us all. We have very talented "
@@ -388,7 +410,8 @@ msgid ""
 "inhabited, we will see attackers a long time before they arrive."
 msgstr "Az elmúlt hetet azzal töltöttük, hogy két őrtornyot építettünk a hegyekre, közel partot érésünk helyéhez; és persze egy kastélyt is építettünk magunknak. Nagyon tehetséges építészek vannak csoportunkban – az épületek mégsem olyanok, mint amilyenek Atlantiszban voltak. Remélem, kibírják a következő esőt. Legalább a tornyok figyelmeztetnek, ha egy atlantiszi hajó követne minket; és ha a sziget lakott, támadóinkat már jóval érkezésük előtt észrevesszük."
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:170
+#. TRANSLATORS: Jundlina - Diary
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:181
 msgid ""
 "We have established ourselves on this island. The next step is now to make "
 "it a home. I reckon we need to establish a sustainable economy and to "
@@ -396,25 +419,26 @@ msgid ""
 "advice."
 msgstr "Megvetettük a lábunkat a szigeten. A következő lépés most az, hogy otthonunkká tegyük. Úgy vélem, ki kell alakítanunk egy fenntartható gazdaságot, és fel kell fedeznünk a környéket. Szakértőket rendeltem, és követem tanácsukat."
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:173
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:184
 msgid "Loftomor and Sidolus Arrive"
 msgstr "Loftomor és Sidolus megérkezik"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:174
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:204
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:242
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:256
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:289
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:298
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:306
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:359
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:369
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:387
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:398
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:185
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:220
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:266
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:282
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:320
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:330
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:339
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:399
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:411
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:431
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:444
 msgid "Jundlina"
 msgstr "Jundlina"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:175
+#. TRANSLATORS: Jundlina
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:187
 msgid ""
 "May Satul warm you both. Loftomor, you have been the island’s most renowned "
 "architect. Sidolus, you are a seasoned warrior and strategist. I have called"
@@ -422,26 +446,28 @@ msgid ""
 "new home?"
 msgstr "Satul melegítsen titeket. Loftomor, te voltál a sziget leghíresebb építésze. Sidolus, te tapasztalt harcos és stratéga vagy. Magamhoz kértelek titeket, hogy tanácsotokat vegyem: mit kell tenni, hogy ez a hely az új otthonunk legyen?"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:178
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:190
 msgid "Loftomor Speaks"
 msgstr "Loftomor szól"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:180
+#. TRANSLATORS: Loftomor
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:193
 msgid ""
 "May Satul warm you, Jundlina! The most important things for building a "
 "settlement are the building materials. There are some trees here, so we "
 "should build housings for some woodcutters and of course also for foresters,"
 " so we will not run out of trees. Oh, and we mustn’t forget the sawmill, for"
 " most buildings can’t be made out of logs alone. Stronger buildings also "
-"need stone, but there is plenty to the north-east of here; we just need to "
-"build a quarry, and my stonemasons will go to work promptly."
-msgstr "Satul melegítsen, Jundlina! A legfontosabbak egy település építéséhez az építőanyagok. Van itt pár fa, így építhetnénk házakat favágóknak, és persze erdészeknek is, hogy ne fogyjunk ki a fákból. Óh, és nem feledkezhetünk meg a fűrészmalomról sem, hiszen a legtöbb épülethez nem elég a farönk. Az erősebb épületekhez kő is kell, de van is belőle bőven innen északkeletre; csak építenünk kell egy kőfejtőt, és kőfaragóim azonnal indulnak is dolgukra."
+"need granite, but there is plenty to the north-east of here; we just need to"
+" build a quarry, and my stonemasons will go to work promptly."
+msgstr ""
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:184
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:197
 msgid "Sidolus Speaks"
 msgstr "Sidolus szól"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:186
+#. TRANSLATORS: Sidolus
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:200
 msgid ""
 "May Satul warm you, Jundlina! I agree with what Loftomor proposes. We need a"
 " good supply of building materials for we have to expand our territory "
@@ -450,16 +476,17 @@ msgid ""
 "might is available. We only need some housing to live in."
 msgstr ""
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:193
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:226
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:207
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:247
 msgid "Jundlina is Satisfied"
 msgstr "Jundlina elégedett"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:194
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:208
 msgid "Jundlina’s Memoirs"
 msgstr "Jundlina feljegyzései"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:195
+#. TRANSLATORS: Jundlina
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:210
 msgid ""
 "Our building infrastructure is finished and I spent some days making sure "
 "that everybody is working well together. Now, there are other pressing "
@@ -467,26 +494,28 @@ msgid ""
 "with sorting some things out."
 msgstr "Építőanyag-gazdaságunk elkészült, és néhány napot azzal töltöttem, hogy megbizonyosodjak: összhangban működnek. Most pedig más sürgős teendőink vannak. Magamhoz hívattam Coliondert, személyi szakácsomat, hogy segítsen tisztázni néhány dolgot."
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:198
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:213
 msgid "Colionder Arrives"
 msgstr "Colionder megérkezik"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:200
+#. TRANSLATORS: Colionder
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:216
 msgid ""
 "May Satul warm you, Jundlina. Can I be of any service to you or the god?"
 msgstr "Satul melegítsen, Jundlina! Szolgálhatok bármivel neked vagy az\nistennek?"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:203
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:241
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:255
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:269
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:288
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:368
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:386
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:219
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:265
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:281
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:297
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:319
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:410
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:430
 msgid "Jundlina Replies"
 msgstr "Jundlina válaszol"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:205
+#. TRANSLATORS: Jundlina
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:222
 msgid ""
 "May Satul warm you too, Colionder. Yes, I wondered if there is a way that we"
 " could centralize our food production. We lose a lot of productivity because"
@@ -495,11 +524,12 @@ msgid ""
 "on this."
 msgstr "Satul melegítsen téged is, Colionder. Igen, azon tűnődtem, nincs-e mód arra, hogy központosítsuk élelemtermelésünket. Nagy termelékenységet veszítünk amiatt, hogy embereink hozzászoktak ahhoz, hogy maguk készítik ételeiket. Úgy érzem, ha el tudnánk osztani a felelősségi köröket, az mindnyájunknak jobb lenne. Tudni szeretném, mit gondolsz erről."
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:208
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:225
 msgid "Colionder is in Thought"
 msgstr "Colionder elmélkedik"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:210
+#. TRANSLATORS: Colionder
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:228
 msgid ""
 "Ahh, but I think this is impossible to change. The preparing and eating of "
 "food is something deeply ingrained in us Atlanteans – it is a ceremony that "
@@ -507,7 +537,8 @@ msgid ""
 "the individuals completely."
 msgstr "Ó, de ezt szerintem nem lehet megváltoztatni. Az étel elkészítése és elköltése valami olyasmi, ami belénk, atlantisziakba mélyen beivódott – egy szertartás, ami kell az életünkbe. Szóval úgy gondolom, ezt nem vehetjük el teljesen az egyénektől."
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:212
+#. TRANSLATORS: Colionder
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:231
 msgid ""
 "But we might find a compromise in between: for me, making bread is a "
 "troublesome task. Grinding the blackroot and corn to flour and then baking "
@@ -516,7 +547,8 @@ msgid ""
 "house every day."
 msgstr "De találhatunk egy köztes megoldást. Számomra például a kenyérsütés elég nehéz feladat: lisztté őrölni a feketegyökeret és a kukoricát, majd megsütni a kenyeret fárasztó és unalmas – úgy érzem, egy iparibb szemlélet itt sokat segítene. Én például örülnék, ha minden nap házhoz hoznák a friss kenyeret."
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:214
+#. TRANSLATORS: Colionder
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:234
 msgid ""
 "Oooh and even more important: the smoking of fish and meat to cleanse them "
 "and improve their taste is terrible. My house is full of smoke and stinks "
@@ -526,30 +558,33 @@ msgid ""
 "taking away the ritual."
 msgstr "Óó, és ami még fontosabb: borzasztó a füstölés, ami a halat és a húst megtisztítja, és az ízük javítja. A házam tele lesz füsttel, és hetekig bűzlik utána. Nem gondolod, hogy ezt egy külön épületben kéne végezni, ahol a mellékhatás nem számít? Úgy gondolom, ezt elfogadnák az emberek, és lerövidítené a főzést anélkül, hogy az a szertartásosságából veszítene."
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:217
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:218
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:237
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:238
 msgid "Jundlina Agrees"
 msgstr "Jundlina egyetért"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:219
+#. TRANSLATORS: Jundlina
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:240
 msgid "Your words sound wise to me, Colionder. So be it then."
 msgstr "Szavaid bölcsnek hatnak számomra, Colionder. Legyen hát így."
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:227
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:248
 msgid "Jundlina is Reviewing the Reports"
 msgstr "Jundlina áttekinti a jelentéseket"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:228
+#. TRANSLATORS: Jundlina
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:250
 msgid ""
 "Seems like our food production is finished and everybody is working together"
 " nicely. It is really starting to feel like home here."
 msgstr "Úgy látom, élelemtermelő gazdaságunk elkészült, és mindenki szépen együtt dolgozik. Most már igazán kezd ez a hely otthonossá válni."
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:234
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:256
 msgid "A Man Comes to Jundlina"
 msgstr "Egy férfi keresi fel Jundlinát"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:236
+#. TRANSLATORS: Opol
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:259
 msgid ""
 "May Satul warm you, Jundlina. My name is Opol, and I am the highest weaver "
 "of the guild abandoning Atlantis and Lutas with you. I come with sad news "
@@ -559,14 +594,16 @@ msgid ""
 " silk and we will produce the finest spidercloth from it."
 msgstr ""
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:238
+#. TRANSLATORS: Opol
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:262
 msgid ""
 "We offer to also produce the tabards for young soldiers and the golden "
 "tabards for officers for you in exchange. You will need them for sure as "
 "soon as you want to recruit new soldiers."
 msgstr "Cserébe felajánljuk, hogy elkészítjük az új katonák köntöseit és a tisztek aranyköntöseit is. Szükséged lesz ezekre, amint új katonákat toborzol."
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:243
+#. TRANSLATORS: Jundlina
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:268
 msgid ""
 "May Satul warm you too, Opol. I wanted to delay production of spidercloth, "
 "but I understand your urgency. Your suggestion sounds fair to me, I will "
@@ -574,11 +611,12 @@ msgid ""
 "mill so that the golden tabards you make will not be golden by name alone."
 msgstr ""
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:250
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:275
 msgid "Opol Seeks Out Jundlina"
 msgstr "Opol felkeresi Jundlinát"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:252
+#. TRANSLATORS: Opol
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:278
 msgid ""
 "May Satul warm you, Jundlina! The weaving mill, gold spinning mill and "
 "spider farm buildings are complete and are starting their work at this very "
@@ -586,17 +624,19 @@ msgid ""
 "stand by our word and deliver the first tabard very soon."
 msgstr ""
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:257
+#. TRANSLATORS: Jundlina
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:284
 msgid ""
 "This is good news indeed, Opol. Our economy is developing very well. Go back"
 " to your work now, Opol, and may Satul warm you and all your guild members!"
 msgstr "Ez igazán jó hír, Opol. Gazdaságunk nagyon szépen fejlődik. Most térj meg munkádhoz, Opol, és Satul melegítsen téged és céhed összes tagját!"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:264
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:291
 msgid "Sidolus Seeks Out Jundlina"
 msgstr "Sidolus felkeresi Jundlinát"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:266
+#. TRANSLATORS: Sidolus
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:294
 msgid ""
 "May Satul warm you, Jundlina. Have you considered mining for resources in "
 "the mountains around us? We are running short of quartz and diamonds for our"
@@ -606,25 +646,27 @@ msgid ""
 "weapon smithy, an armor smithy and a toolsmithy. And maybe even more."
 msgstr ""
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:270
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:298
 msgid "Jundlina Nods"
 msgstr "Jundlina bólint"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:271
+#. TRANSLATORS: Jundlina
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:300
 msgid ""
 "I have considered this, Sidolus. I think  it is about time. We will make "
 "this a priority for now. You shall get your industry soon!"
 msgstr "Gondoltam rá, Sidolus. Azt hiszem, itt az ideje. Ez lesz most az elsődleges célunk. Hamarosan felépül az ipar amit kérsz!"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:278
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:307
 msgid "Jundlina Summons Sidolus"
 msgstr "Jundlina beidézi Sidolust"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:279
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:308
 msgid "Jundlina is Angry"
 msgstr "Jundlina dühös"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:280
+#. TRANSLATORS: Jundlina
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:310
 msgid ""
 "What is this I hear, Sidolus? I received words about your soldiers "
 "misbehaving and bullying the common folk. What is this nonsense all about? "
@@ -632,11 +674,12 @@ msgid ""
 " is inexcusable! Explain this, if you will!"
 msgstr "Miket hallok, Sidolus? Az hírlik, hogy a katonáid rosszul viselik magukat és zaklatják a köznépet. Hogy történhet ez? Mindnyájan a közjó szolgálatában állnak, és nem élhetnek vissza erejükkel. Ez megbocsáthatatlan! Magyarázd meg, ha tudod!"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:283
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:313
 msgid "Sidolus Seems Contrite"
 msgstr "Sidolus bűnbánónak tűnik"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:285
+#. TRANSLATORS: Sidolus
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:316
 msgid ""
 "I agree with you and I have punished the troublemakers severely. But it is "
 "very difficult to keep my men quiet: they are bored and have nothing to do. "
@@ -646,7 +689,8 @@ msgid ""
 "come cheap."
 msgstr "Egyetértek, és keményen megbüntettem a bajkeverőket. De nagyon nehéz nyugodtan tartani embereimet: unatkoznak és nincs mit csinálniuk. Én fokoznám a kiképzésüket. Úgy gondolom, a nagyobb rendszeresség lekötné őket, és a feladataikra terelné a figyelmüket. Szükségem lenne ehhez egy kazamatára és egy labirintusra. Készen vannak a tervek, de attól tartok, nem lesznek olcsók."
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:290
+#. TRANSLATORS: Jundlina
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:322
 msgid ""
 "I do not fear the cost and labor as long as it keeps your people at bay. You"
 " shall get your buildings. But note that I will not tolerate any rogue "
@@ -654,11 +698,12 @@ msgid ""
 "them. Dismissed."
 msgstr "Nem sajnálom a költséget és a munkát, ha ezzel kordában tarthatom embereidet. Megkapod az épületeket. De figyelmeztetlek, hogy nem tűrök meg egy latort sem: ha még egyszer ilyen történik, téged vonlak felelősségre. Elmehetsz."
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:297
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:329
 msgid "Jundlina Received a Letter"
 msgstr "Jundlina levelet kapott"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:299
+#. TRANSLATORS: Jundlina
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:332
 msgid ""
 "I received an invitation from Sidolus. The first day of training in the "
 "newly finished labyrinth will be tomorrow. The dungeon is done as well and "
@@ -667,34 +712,37 @@ msgid ""
 "workload will keep them from bullying the civilian population."
 msgstr "Meghívást kaptam Sidolustól. Holnap lesz a kiképzés első napja az újonnan felépült labirintusban. A kazamaták is elkészült, és hamarosan elkezdi működését. Várom a holnapot. Nagyon érdekel, hogyan képzik ki a katonáinkat, és kíváncsi vagyok, vajon ez visszatartja-e majd őket a civil lakosság zaklatásától?"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:305
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:338
 msgid "Jundlina Considers the Economy"
 msgstr "Jundlina szemléli a gazdaságot"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:307
+#. TRANSLATORS: Jundlina
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:341
 msgid ""
 "People are complaining about crowded streets and slow transportation. We "
 "need to help out our carriers on the roads. I have decided to build a horse "
 "farm so that the horses can help with the heavy wares."
 msgstr "Az emberek panaszkodnak, hogy zsúfoltak az utcák, és hogy lassú a szállítás. Segítenünk kell az utakon hordárainknak. Úgy döntöttem, hogy építünk egy lovardát, hogy a lovak segíthessenek cipelni a nehéz árut."
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:309
+#. TRANSLATORS: Jundlina
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:344
 msgid ""
 "Another way to take load from our roads is to build warehouses. We have "
 "claimed the mountain now, it seems a good idea to have a warehouse on the "
 "plateau to avoid having to transport everything up and down the slopes."
 msgstr "Egy másik mód a zsúfoltság csökkentésére, hogy raktárakat építünk. Immár miénk a hegy, célszerű lenne a fennsíkon egy raktárat létesíteni, hogy ne kelljen mindent fel- és levinni az emelkedőkön."
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:321
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:356
 msgid "A Dangerous Discovery"
 msgstr "Egy vészjósló felfedezés"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:322
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:346
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:357
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:385
 msgid "Jundlina is in Thought"
 msgstr "Jundlina elmélkedik"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:323
+#. TRANSLATORS: Jundlina
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:359
 msgid ""
 "We found an old building, destroyed and burned by flames. I am very worried "
 "about this discovery. The building is not of any kind I’ve ever seen. It is "
@@ -704,7 +752,8 @@ msgid ""
 "before it was used as building material – it is hard as stone."
 msgstr "Találtunk egy régi épületet, mely lángoktól pusztult el. Nagyon aggaszt ez a felfedezés. Ilyen épületet még sosem láttam. Kizárt, hogy olyan atlantiszi építész tervezte volna, akiről valaha is hallottam. Faragása durva, összeszerelése hanyag. Ugyanakkor az építőelemek igen ellenállóak: úgy tűnik, faanyagát valamilyen különös módon kiégették, mielőtt felhasználták volna – kemény, akár a kő."
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:325
+#. TRANSLATORS: Jundlina
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:362
 msgid ""
 "The implications frighten me. Are there others on this island? Where are "
 "they then? They work with fire, are they praying to Satul too? Are they "
@@ -712,22 +761,24 @@ msgid ""
 "war? Is a war being waged on it right now?"
 msgstr "A kilátások félelmetesek. Mások is vannak a szigeten? És akkor hol vannak? Tűzzel dolgoznak, hát ők is Satult imádják? Barátok vagy ellenségek? És miért égett le az épület? Háború sújtotta a szigetet? Vagy épp most vívják?"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:327
+#. TRANSLATORS: Jundlina
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:365
 msgid ""
 "We must improve our military capabilities. If there are foes on the island, "
 "we have to be prepared when we meet them. We should also enforce the "
 "fortification of our borders."
 msgstr "Növelnünk kell katonai erőnket. Ha ellenségek vannak a szigeten, fel kell készülnünk a velük való találkozásra. Meg kell erősítenünk határaink védelmét is."
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:335
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:373
 msgid "Another Building"
 msgstr "Még egy épület"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:336
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:374
 msgid "Jundlina is Worried"
 msgstr "Jundlina aggódik"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:337
+#. TRANSLATORS: Jundlina
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:376
 msgid ""
 "We found one more building of this strange making. We have yet to see any of"
 " its builders. But obviously there has been a community on this island "
@@ -736,11 +787,12 @@ msgid ""
 "us unprepared."
 msgstr "Még egy ilyen különös készítésű épületre leltünk. Már csak az építőit kellene megtalálnunk. Nyilván élt itt korábban egy közösség a szigeten, amely aztán felfegyverkezett. Tudakozódnom kell katonai felkészültségünkről hadvezéreimtől. Nem engedem, hogy egy esetleges ellenség felkészületlenül találjon minket."
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:345
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:384
 msgid "One More Building"
 msgstr "Még egy épület"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:347
+#. TRANSLATORS: Jundlina
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:387
 msgid ""
 "And yet another of these buildings. We know now that the tribe that built "
 "them once had complete control over the island. But I am no longer so scared"
@@ -750,11 +802,12 @@ msgid ""
 " without obvious dangers, I am feeling very much at home here already."
 msgstr "És még egy újabb azokból az épületekből. Most már tudjuk, hogy a nép, mely építette ezeket, egykor teljesen uralta a szigetet. De immár nem félek annyira az esetleges ellenségtől. Már akkora részét ismerjük a szigetnek, és mégsincs más nyoma ennek a régi gazdaságnak. Hagyom magam ellazulni, ám nem így az őröket, amíg folytatjuk e gyönyörű sziget felfedezését. De minthogy nem fenyeget nyilvánvaló veszély, már igazán otthon érzem magam."
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:358
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:398
 msgid "The Water is Rising!"
 msgstr "Emelkedik a víz!"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:360
+#. TRANSLATORS: Jundlina
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:401
 msgid ""
 "May Satul save us! Lutas is still trying to get to us. A scout informed me "
 "that the ocean is rising quickly. We have to reach higher ground and "
@@ -762,11 +815,12 @@ msgid ""
 "mountains. How can we escape?"
 msgstr "Satul óvjon minket! Lutas még mindig próbál elérni minket. Egy felderítő tájékoztatott, hogy az óceán gyorsan emelkedik. Magasabb területre kell mennünk, mindenkit fel kell juttatnunk a hegyre és kimenteni a főhadiszállásról annyi árut, amennyit csak lehet. Hogy menekülhetünk meg?"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:363
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:404
 msgid "A Young Man Approaches"
 msgstr "Megjelenik egy fiatalember"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:365
+#. TRANSLATORS: Ostur
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:407
 msgid ""
 "May Satul warm you, Jundlina. My name is Ostur and I construct ships. I have"
 " invented a new kind of ship: smaller than those we are used to, but much "
@@ -774,18 +828,20 @@ msgid ""
 " longer distance with them and maybe escape from Lutas’ influence."
 msgstr "Satul melegítsen, Jundlina. Ostur vagyok, és hajókat építek. Feltaláltam egy újfajta hajót: kisebb, mint amikhez szoktunk, de sokkal erősebb. Ha jól építjük meg őket, biztos vagyok benne, hogy sokkal messzebbre juthatunk velük, és talán megszökhetünk Lutas befolyása elől."
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:370
+#. TRANSLATORS: Jundlina
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:413
 msgid ""
 "Ostur, we have no time. The water rises too fast, and if we build the ships "
 "on the shore they will vanish in the sea before they can float. I fear we "
 "are doomed!"
 msgstr "Ostur, nincs időnk. A víz túl gyorsan emelkedik, és ha a parton építjük a hajókat, még azelőtt a tengerbe vesznek, hogy megállnának a vízen. Attól félek, végünk!"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:375
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:418
 msgid "Ostur Seems Confident"
 msgstr "Ostur magabiztosnak látszik"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:383
+#. TRANSLATORS: Ostur
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:427
 msgid ""
 "A friend of mine explored the island on his own and he told me of a big lake"
 " at the top of the mountain. I suggest we build the ships in this lake and "
@@ -793,13 +849,15 @@ msgid ""
 " plan, but I think it could work."
 msgstr "Egy barátom felfedezőutat tett a szigeten, és mesélt egy nagy tóról a hegy tetején. Azt javaslom, építsük a hajókat azon a tavon, és várjuk meg, míg a sziget elsüllyed alattunk. Azután elhajózhatunk. Merész terv, de szerintem működhet."
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:388
+#. TRANSLATORS: Jundlina
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:433
 msgid ""
 "Your red hair is a signal from the fire god. I will trust you and support "
 "your plan. Our survival lies in your hands now, Ostur."
 msgstr "Vörös hajad a tűzisten jele. Bizalmat adok hát neked, és támogatom a tervedet. Túlélésünk immár a te kezedben van, Ostur."
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:390
+#. TRANSLATORS: Jundlina
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:436
 msgid ""
 "Swift now, we need a house for Ostur next to the lake, and we need planks, "
 "logs and spidercloth for the construction there. Forget about everything "
@@ -807,11 +865,12 @@ msgid ""
 "all swallowed by the sea."
 msgstr "Hamar építenünk kell egy házat Osturnak a tó mellett, és deszka, farönk, valamint pókfonal kell az ottani hajóépítéshez. Minden mást feledve a hegytetőre kell juttatnunk ezeket az anyagokat, még mielőtt raktárainkat elnyeli a tenger."
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:397
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:443
 msgid "Jundlina is Relieved"
 msgstr "Jundlina megkönnyebbült"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:399
+#. TRANSLATORS: Jundlina
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:446
 msgid ""
 "Praise Satul! Ostur, the young ship builder did it. We have three ships – "
 "never have I seen sturdier ones – with enough room to carry all of us and "
@@ -820,25 +879,27 @@ msgid ""
 "make our escape now and start over in some country farther away..."
 msgstr ""
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:401
+#. TRANSLATORS: Jundlina
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:449
 msgid ""
 "I expect a long journey, but we will find the land of Satul in the end. This"
 " is what I promised my people. And myself."
 msgstr ""
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:402
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:450
 msgid "Congratulations"
 msgstr "Gratulálok"
 
-#: ../../campaigns/atl01.wmf/scripting/texts.lua:403
+#: ../../campaigns/atl01.wmf/scripting/texts.lua:451
 msgid ""
 "You have won this mission. Continue with the next one or keep playing for as"
 " long as you like."
 msgstr "Megnyerted ezt a küldetést. Folytasd a következővel, vagy játssz itt, ameddig szeretnél."
 
 #: ../../scripting/format_scenario.lua:36
+#, lua-format
 msgid "“%s”"
-msgstr ""
+msgstr "„%s”"
 
 #: ../../scripting/format_scenario.lua:146
 msgid "New Objective"

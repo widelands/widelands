@@ -39,11 +39,11 @@ struct EditorMakeInfrastructureTool : public EditorTool {
 	Widelands::PlayerNumber get_player() const
 		{return m_player;}
 
-	int32_t handle_click_impl(Widelands::Map& map,
-	                          const Widelands::World& world,
+	int32_t handle_click_impl(const Widelands::World& world,
 	                          Widelands::NodeAndTriangle<> center,
 	                          EditorInteractive& parent,
-	                          EditorActionArgs& args) override;
+	                          EditorActionArgs* args,
+							  Widelands::Map* map) override;
 
 	const char * get_sel_impl() const override
 		{return "images/ui_basic/fsel.png";} //  Standard sel icon, most complex tool of all

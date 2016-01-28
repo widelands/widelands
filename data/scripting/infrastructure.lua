@@ -47,7 +47,7 @@ function connected_road(p, start, cmd, g_create_carriers)
          r = p:place_road(start, table.unpack(moves))
          start = r.end_flag
          if create_carriers then
-            r:set_workers("carrier", 1)
+            r:set_workers(p.tribe.carrier, 1)
          end
          moves = {}
       end
@@ -90,6 +90,7 @@ end
 --          are filled with workers by default.
 --    :type b1_descr: :class:`array`
 function prefilled_buildings(p, ...)
+   -- TODO(GunChleoc) this should produce an error message if a building/ware/worker doesn't exist.
    for idx,bdescr in ipairs({...}) do
       b = p:place_building(bdescr[1], wl.Game().map:get_field(bdescr[2],bdescr[3]), false, true)
       -- Fill with workers
@@ -169,8 +170,8 @@ end
 --
 --    :returns: true if the immovable is a building
 function is_building(immovable)
-	return immovable.descr.type_name == "productionsite" or
-		immovable.descr.type_name == "warehouse" or
-		immovable.descr.type_name == "militarysite" or
-		immovable.descr.type_name == "trainingsite"
+   return immovable.descr.type_name == "productionsite" or
+      immovable.descr.type_name == "warehouse" or
+      immovable.descr.type_name == "militarysite" or
+      immovable.descr.type_name == "trainingsite"
 end

@@ -23,6 +23,7 @@
 #include <string>
 #include <boost/signals2.hpp>
 
+#include "graphic/graphic.h"
 #include "logic/widelands.h"
 #include "logic/widelands_geometry.h"
 
@@ -37,7 +38,7 @@ struct Message {
 		kGeologists,
 		kGeologistsCoal,
 		kGeologistsGold,
-		kGeologistsGranite,
+		kGeologistsStones,
 		kGeologistsIron,
 		kGeologistsWater,
 		kScenario,
@@ -52,68 +53,79 @@ struct Message {
 
 	/**
 	 * A new message to be displayed to the player
-	 * \param msgtype The type of message (economy, geologists, etc.)
-	 * \param sent_time The (game) time at which the message is sent
-	 * \param t The message title
-	 * \param b The message body
-	 * \param c The message coords. The player will be able to taken there.
-	 * Defaults to Coords::null()
-	 * \param ser A MapObject serial. If non null, the message will be deleted once
-	 * the object is removed from the game. Defaults to 0
-	 * \param s The message status. Defaults to Status::New
+	 * \param msgtype    The type of message (economy, geologists, etc.)
+	 * \param sent_time  The (game) time at which the message is sent
+	 * \param init_title The intial message title
+	 * \param init_body  The initial message body
+	 * \param c          The message coords. The player will be able to position its view there.
+	 *                   Defaults to Coords::null()
+	 * \param ser        A MapObject serial. If non null, the message will be deleted once
+	 *                   the object is removed from the game. Defaults to 0
+	 * \param s          The message status. Defaults to Status::New
 	 */
 	Message
 		(Message::Type             msgtype,
 		 uint32_t                  sent_time,
-		 const std::string &       t,
-		 const std::string &       b,
+		 const std::string&        init_title,
+		 const std::string&        init_icon_filename,
+		 const std::string&        init_heading,
+		 const std::string&        init_body,
 		 Widelands::Coords   const c = Coords::null(),
 		 Widelands::Serial         ser = 0,
 		 Status                    s = Status::kNew)
 		:
-		m_type    (msgtype),
-		m_title   (t),
-		m_body    (b),
-		m_sent    (sent_time),
-		m_position(c),
-		m_serial  (ser),
-		m_status  (s)
+		type_    (msgtype),
+		title_   (init_title),
+		icon_filename_(init_icon_filename),
+		icon_    (g_gr->images().get(init_icon_filename)),
+		heading_ (init_heading),
+		body_    (init_body),
+		sent_    (sent_time),
+		position_(c),
+		serial_  (ser),
+		status_  (s)
 	{}
 
-	Message::Type         type    () const   {return m_type;}
-	uint32_t              sent    () const   {return m_sent;}
-	const std::string &   title   () const   {return m_title;}
-	const std::string &   body    () const   {return m_body;}
-	Widelands::Coords     position() const   {return m_position;}
-	Widelands::Serial     serial  () const   {return m_serial;}
-	Status                status  () const   {return m_status;}
-	Status set_status(Status const s)        {return m_status = s;}
+	Message::Type         type    () const   {return type_;}
+	uint32_t              sent    () const   {return sent_;}
+	const std::string &   title   () const   {return title_;}
+	const std::string& icon_filename() const {return icon_filename_;}
+	const Image*          icon    () const   {return icon_;}
+	const std::string &   heading () const   {return heading_;}
+	const std::string &   body    () const   {return body_;}
+	Widelands::Coords     position() const   {return position_;}
+	Widelands::Serial     serial  () const   {return serial_;}
+	Status                status  () const   {return status_;}
+	Status set_status(Status const s)        {return status_ = s;}
 
 	/**
 	 * Returns the main type for the message's sub type
 	 */
 	Message::Type message_type_category() const {
-		if (m_type >=  Widelands::Message::Type::kWarfare) {
+		if (type_ >=  Widelands::Message::Type::kWarfare) {
 			return Widelands::Message::Type::kWarfare;
 
-		} else if (m_type >= Widelands::Message::Type::kEconomy &&
-					  m_type <= Widelands::Message::Type::kEconomySiteOccupied) {
+		} else if (type_ >= Widelands::Message::Type::kEconomy &&
+					  type_ <= Widelands::Message::Type::kEconomySiteOccupied) {
 			return Widelands::Message::Type::kEconomy;
-		} else if (m_type >= Widelands::Message::Type::kGeologists &&
-					 m_type <= Widelands::Message::Type::kGeologistsWater) {
+		} else if (type_ >= Widelands::Message::Type::kGeologists &&
+					 type_ <= Widelands::Message::Type::kGeologistsWater) {
 		  return Widelands::Message::Type::kGeologists;
 	  }
-		return m_type;
+		return type_;
 	}
 
 private:
-	Message::Type     m_type;
-	std::string       m_title;
-	std::string       m_body;
-	uint32_t          m_sent;
-	Widelands::Coords m_position;
-	Widelands::Serial m_serial; // serial to map object
-	Status            m_status;
+	Message::Type     type_;
+	const std::string title_;
+	const std::string icon_filename_;
+	const Image     * icon_;   // Pointer to icon into picture stack
+	const std::string heading_;
+	const std::string body_;
+	uint32_t          sent_;
+	Widelands::Coords position_;
+	Widelands::Serial serial_; // serial to map object
+	Status            status_;
 };
 
 }

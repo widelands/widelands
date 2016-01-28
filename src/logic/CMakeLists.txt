@@ -27,6 +27,7 @@ wl_library(logic_game_settings
     single_player_game_settings_provider.h
   DEPENDS
     ai
+    base_exceptions
     io_filesystem
     logic
     scripting_lua_interface
@@ -61,22 +62,8 @@ wl_library(logic_campaign_visibility
 
 wl_library(logic
   SRCS
-    attackable.h
     backtrace.cc
     backtrace.h
-    battle.cc
-    battle.h
-    bill_of_materials.h
-    bob.cc
-    bob.h
-    buildcost.cc
-    buildcost.h
-    building.cc
-    building.h
-    carrier.cc
-    carrier.h
-    checkstep.cc
-    checkstep.h
     cmd_calculate_statistics.cc
     cmd_calculate_statistics.h
     cmd_delete_message.cc
@@ -90,19 +77,10 @@ wl_library(logic
     cmd_queue.cc
     cmd_queue.h
     constants.h
-    constructionsite.cc
-    constructionsite.h
     cookie_priority_queue.h
-	 critter.cc
-	 critter.h
-	 critter_program.h
     description_maintainer.h
-    dismantlesite.cc
-    dismantlesite.h
     editor_game_base.cc
     editor_game_base.h
-    expedition_bootstrap.cc
-    expedition_bootstrap.h
     field.cc
     field.h
     findbob.cc
@@ -111,21 +89,14 @@ wl_library(logic
     findimmovable.h
     findnode.cc
     findnode.h
-    game.cc
-    game.h
     game_data_error.cc
     game_data_error.h
-    immovable.cc
-    immovable.h
-    immovable_program.h
-    terrain_affinity.cc
-    terrain_affinity.h
-    instances.cc
-    instances.h
-    map.cc
-    map.h
+    game.cc
+    game.h
     map_revision.cc
     map_revision.h
+    map.cc
+    map.h
     mapastar.cc
     mapastar.h
     mapdifferenceregion.cc
@@ -137,85 +108,114 @@ wl_library(logic
     mapregion.h
     maptriangleregion.cc
     maptriangleregion.h
-    message.h
     message_id.h
     message_queue.h
-    militarysite.cc
-    militarysite.h
+    message.h
     nodecaps.h
     objective.h
-    parse_map_object_types.h
-    partially_finished_building.cc
-    partially_finished_building.h
     path.cc
     path.h
     pathfield.cc
     pathfield.h
+    player_area.h
     player.cc
     player.h
-    player_area.h
     playercommand.cc
     playercommand.h
     playersmanager.cc
     playersmanager.h
-    production_program.cc
-    production_program.h
-    productionsite.cc
-    productionsite.h
-    program_result.h
     queue_cmd_factory.cc
     queue_cmd_factory.h
     queue_cmd_ids.h
     replay.cc
     replay.h
-    requirements.cc
-    requirements.h
-    road_textures.cc
-    road_textures.h
     roadtype.h
     save_handler.cc
     save_handler.h
-    ship.cc
-    ship.h
-    soldier.cc
-    soldier.h
-    soldier_counts.h
-    soldiercontrol.h
-    training_attribute.h
-    trainingsite.cc
-    trainingsite.h
-    tribe.cc
-    tribe.h
-    tribe_basic_info.h
-    walkingdir.cc
-    walkingdir.h
-    ware_descr.cc
-    ware_descr.h
-    warehouse.cc
-    warehouse.h
-    warelist.cc
-    warelist.h
-    wareworker.h
-    widelands.h
     widelands_geometry_io.cc
     widelands_geometry_io.h
-    workarea_info.h
-    worker.cc
-    worker.h
-    worker_descr.cc
-    worker_descr.h
-    worker_program.cc
-    worker_program.h
-    world/editor_category.cc
-    world/editor_category.h
-    world/map_gen.cc
-    world/map_gen.h
-    world/resource_description.cc
-    world/resource_description.h
-    world/terrain_description.cc
-    world/terrain_description.h
-    world/world.cc
-    world/world.h
+    widelands.h
+    map_objects/attackable.h
+    map_objects/bob.cc
+    map_objects/bob.h
+    map_objects/buildcost.cc
+    map_objects/buildcost.h
+    map_objects/checkstep.cc
+    map_objects/checkstep.h
+    map_objects/immovable_program.h
+    map_objects/immovable.cc
+    map_objects/immovable.h
+    map_objects/map_object.cc
+    map_objects/map_object.h
+    map_objects/terrain_affinity.cc
+    map_objects/terrain_affinity.h
+    map_objects/walkingdir.cc
+    map_objects/walkingdir.h
+    map_objects/tribes/battle.cc
+    map_objects/tribes/battle.h
+    map_objects/tribes/bill_of_materials.h
+    map_objects/tribes/building.cc
+    map_objects/tribes/building.h
+    map_objects/tribes/carrier.cc
+    map_objects/tribes/carrier.h
+    map_objects/tribes/constructionsite.cc
+    map_objects/tribes/constructionsite.h
+    map_objects/tribes/dismantlesite.cc
+    map_objects/tribes/dismantlesite.h
+    map_objects/tribes/militarysite.cc
+    map_objects/tribes/militarysite.h
+    map_objects/tribes/partially_finished_building.cc
+    map_objects/tribes/partially_finished_building.h
+    map_objects/tribes/production_program.cc
+    map_objects/tribes/production_program.h
+    map_objects/tribes/productionsite.cc
+    map_objects/tribes/productionsite.h
+    map_objects/tribes/program_result.h
+    map_objects/tribes/requirements.cc
+    map_objects/tribes/requirements.h
+    map_objects/tribes/road_textures.cc
+    map_objects/tribes/road_textures.h
+    map_objects/tribes/ship.cc
+    map_objects/tribes/ship.h
+    map_objects/tribes/soldier.cc
+    map_objects/tribes/soldier.h
+    map_objects/tribes/soldiercontrol.h
+    map_objects/tribes/training_attribute.h
+    map_objects/tribes/trainingsite.cc
+    map_objects/tribes/trainingsite.h
+    map_objects/tribes/tribe_basic_info.cc
+    map_objects/tribes/tribe_basic_info.h
+    map_objects/tribes/tribe_descr.cc
+    map_objects/tribes/tribe_descr.h
+    map_objects/tribes/tribes.cc
+    map_objects/tribes/tribes.h
+    map_objects/tribes/ware_descr.cc
+    map_objects/tribes/ware_descr.h
+    map_objects/tribes/warehouse.cc
+    map_objects/tribes/warehouse.h
+    map_objects/tribes/warelist.cc
+    map_objects/tribes/warelist.h
+    map_objects/tribes/wareworker.h
+    map_objects/tribes/workarea_info.h
+    map_objects/tribes/worker_descr.cc
+    map_objects/tribes/worker_descr.h
+    map_objects/tribes/worker_program.cc
+    map_objects/tribes/worker_program.h
+    map_objects/tribes/worker.cc
+    map_objects/tribes/worker.h
+    map_objects/world/critter_program.h
+    map_objects/world/critter.cc
+    map_objects/world/critter.h
+    map_objects/world/editor_category.cc
+    map_objects/world/editor_category.h
+    map_objects/world/map_gen.cc
+    map_objects/world/map_gen.h
+    map_objects/world/resource_description.cc
+    map_objects/world/resource_description.h
+    map_objects/world/terrain_description.cc
+    map_objects/world/terrain_description.h
+    map_objects/world/world.cc
+    map_objects/world/world.h
   # TODO(sirver): Uses SDL2 only on WIN32 for a dirty hack.
   USES_SDL2
   DEPENDS
@@ -238,7 +238,6 @@ wl_library(logic
     graphic_surface
     graphic_text
     graphic_text_layout
-    graphic_texture_atlas
     helper
     io_fileread
     io_filesystem
@@ -250,7 +249,6 @@ wl_library(logic
     map_io_map_loader
     network
     notifications
-    profile
     random
     scripting_coroutine
     scripting_logic
@@ -261,5 +259,4 @@ wl_library(logic
     widelands_ball_of_mud
     wui
     wui_mapview_pixelfunctions
-    wui_overlay_manager
 )

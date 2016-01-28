@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2011, 2015 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -136,14 +136,11 @@ void BaseListselect::add
 	er->name    = name;
 	er->tooltip = tooltip_text;
 	er->font_face = fontname;
-	uint32_t entry_height = 0;
-	if (!pic) {
-		entry_height = g_fh->get_fontheight(fontname.empty() ? m_fontname : fontname, m_fontsize);
-	} else {
+	uint32_t entry_height = g_fh->get_fontheight(fontname.empty() ? m_fontname : fontname, m_fontsize);
+	if (pic) {
 		uint16_t w = pic->width();
 		uint16_t h = pic->height();
-		entry_height = (h >= g_fh->get_fontheight(fontname.empty() ? m_fontname : fontname, m_fontsize))
-			? h : g_fh->get_fontheight(fontname.empty() ? m_fontname : fontname, m_fontsize);
+		entry_height = (h >= entry_height) ? h : entry_height;
 		if (m_max_pic_width < w)
 			m_max_pic_width = w;
 	}
@@ -155,7 +152,7 @@ void BaseListselect::add
 
 	m_scrollbar.set_steps(m_entry_records.size() * get_lineheight() - get_h());
 
-	update(0, 0, get_eff_w(), get_h());
+	update(0, 0, get_w(), get_h());
 
 	if (sel)
 		select(m_entry_records.size() - 1);
@@ -181,14 +178,11 @@ void BaseListselect::add_front
 	er->tooltip = tooltip_text;
 	er->font_face = fontname;
 
-	uint32_t entry_height = 0;
-	if (!pic)
-		entry_height = g_fh->get_fontheight(fontname.empty() ? m_fontname : fontname, m_fontsize);
-	else {
+	uint32_t entry_height = g_fh->get_fontheight(fontname.empty() ? m_fontname : fontname, m_fontsize);
+	if (pic) {
 		uint16_t w = pic->width();
 		uint16_t h = pic->height();
-		entry_height = (h >= g_fh->get_fontheight(fontname.empty() ? m_fontname : fontname, m_fontsize))
-			? h : g_fh->get_fontheight(fontname.empty() ? m_fontname : fontname, m_fontsize);
+		entry_height = (h >= entry_height) ? h : entry_height;
 		if (m_max_pic_width < w)
 			m_max_pic_width = w;
 	}
@@ -200,7 +194,7 @@ void BaseListselect::add_front
 
 	m_scrollbar.set_steps(m_entry_records.size() * get_lineheight() - get_h());
 
-	update(0, 0, get_eff_w(), get_h());
+	update(0, 0, get_w(), get_h());
 
 	if (sel)
 		select(0);
@@ -261,7 +255,7 @@ void BaseListselect::set_scrollpos(const int32_t i)
 
 	m_scrollpos = i;
 
-	update(0, 0, get_eff_w(), get_h());
+	update(0, 0, get_w(), get_h());
 }
 
 
@@ -297,7 +291,7 @@ void BaseListselect::select(const uint32_t i)
 	m_selection = i;
 
 	selected(m_selection);
-	update(0, 0, get_eff_w(), get_h());
+	update(0, 0, get_w(), get_h());
 }
 
 /**
@@ -345,7 +339,7 @@ uint32_t BaseListselect::get_lineheight() const
 
 uint32_t BaseListselect::get_eff_w() const
 {
-	return get_w();
+	return m_scrollbar.is_enabled() ? get_w() - m_scrollbar.get_w() : get_w();
 }
 
 /**
@@ -388,29 +382,30 @@ void BaseListselect::draw(RenderTarget & dst)
 			}
 		}
 
+		Align draw_alignment = mirror_alignment(m_align);
 
 		int32_t const x =
-			m_align & Align_Right   ? get_eff_w() -      1 :
-			m_align & Align_HCenter ? get_eff_w() >>     1 :
+			draw_alignment & Align_Right   ? get_eff_w() -      1 :
+			draw_alignment & Align_HCenter ? get_eff_w() >>     1 :
 
 			// Pictures are always left aligned, leave some space here
 			m_max_pic_width         ? m_max_pic_width + 10 :
 			1;
 
+		std::string font_face = er.font_face.empty() ? m_fontname : er.font_face;
+
 		// Horizontal center the string
 		UI::g_fh->draw_text
 			(dst,
-			 TextStyle::makebold(Font::get(er.font_face.empty() ? m_fontname : er.font_face, m_fontsize),
-										er.use_clr ? er.clr : UI_FONT_CLR_FG),
+			 TextStyle::makebold(Font::get(font_face, m_fontsize), er.use_clr ? er.clr : UI_FONT_CLR_FG),
 			 Point
 			 	(x,
 			 	 y +
-				 (get_lineheight() - g_fh->get_fontheight(er.font_face.empty() ? m_fontname : er.font_face,
-																		m_fontsize))
+				 (get_lineheight() - g_fh->get_fontheight(font_face, m_fontsize))
 			 	 /
 			 	 2),
 			 er.name,
-			 m_align);
+			 draw_alignment);
 
 		// Now draw pictures
 		if (er.pic) {
@@ -438,11 +433,11 @@ bool BaseListselect::handle_mousepress(const uint8_t btn, int32_t, int32_t y)
 	switch (btn) {
 
 	case SDL_BUTTON_LEFT: {
-		int32_t const time = WLApplication::get()->get_time();
+		uint32_t const time = SDL_GetTicks();
 
 		//  This hick hack is needed if any of the callback functions calls clear
 		//  to forget the last clicked time.
-		int32_t const real_last_click_time = m_last_click_time;
+		uint32_t const real_last_click_time = m_last_click_time;
 
 		m_last_selection  = m_selection;
 		m_last_click_time = time;

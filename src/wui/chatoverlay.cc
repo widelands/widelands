@@ -21,6 +21,8 @@
 
 #include <memory>
 
+#include "base/macros.h"
+#include "base/wexception.h"
 #include "chat/chat.h"
 #include "graphic/font_handler1.h"
 #include "graphic/rendertarget.h"
@@ -67,6 +69,15 @@ struct ChatOverlay::Impl {
 	}
 
 	void recompute();
+
+private:
+	bool has_chat_provider() {
+		if (chat_ == nullptr) return false;
+		// The chat provider might not have been assigned a specific subclass,
+		// e.g. if there was an exception thrown.
+		if (is_a(ChatProvider, chat_)) return false;
+		return true;
+	}
 };
 
 ChatOverlay::ChatOverlay
@@ -116,7 +127,7 @@ void ChatOverlay::Impl::recompute()
 
 	// Parse the chat message list as well as the log message list
 	// and display them in chronological order
-	int32_t chat_idx = chat_ != nullptr ? chat_->get_messages().size() - 1 : -1;
+	int32_t chat_idx = has_chat_provider() ? chat_->get_messages().size() - 1 : -1;
 	int32_t log_idx = log_messages_.empty() ? -1 : log_messages_.size() - 1;
 	std::string richtext;
 
@@ -145,8 +156,7 @@ void ChatOverlay::Impl::recompute()
 			}
 			chat_idx--;
 		} else {
-			// Shoudn't happen
-			assert(false);
+			NEVER_HERE();
 		}
 		havemessages_ = true;
 	}

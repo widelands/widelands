@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2004-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,7 +23,7 @@
 
 ComputerPlayer::ComputerPlayer
 	(Widelands::Game & g, Widelands::PlayerNumber const pid)
-	: m_game(g), m_player_number(pid)
+	: game_(g), player_number_(pid)
 {
 }
 
@@ -36,8 +36,12 @@ struct EmptyAI : ComputerPlayer {
 	void think() override {}
 
 	struct EmptyAIImpl : Implementation {
-		/** TRANSLATORS: This is the name of an AI used in the game setup screens */
-		EmptyAIImpl() {name = pgettext("ai_name", "None");}
+		EmptyAIImpl() {
+			name = "empty";
+			/** TRANSLATORS: This is the name of an AI used in the game setup screens */
+			descname = _("No AI");
+			icon_filename = "images/ai/ai_empty.png";
+		}
 		ComputerPlayer * instantiate
 			(Widelands::Game & g, Widelands::PlayerNumber const pid) const override
 		{
@@ -56,9 +60,9 @@ ComputerPlayer::get_implementations()
 	static std::vector<ComputerPlayer::Implementation const *> impls;
 
 	if (impls.empty()) {
-		impls.push_back(&DefaultAI::aggressiveImpl);
-		impls.push_back(&DefaultAI::normalImpl);
-		impls.push_back(&DefaultAI::defensiveImpl);
+		impls.push_back(&DefaultAI::normal_impl);
+		impls.push_back(&DefaultAI::weak_impl);
+		impls.push_back(&DefaultAI::very_weak_impl);
 		impls.push_back(&EmptyAI::implementation);
 	}
 

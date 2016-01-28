@@ -25,7 +25,7 @@
 #include "economy/road.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/editor_game_base.h"
-#include "logic/instances.h"
+#include "logic/map_objects/map_object.h"
 #include "logic/player.h"
 
 namespace Widelands {
@@ -100,7 +100,7 @@ BOOST_FIXTURE_TEST_CASE(CorrectSizeTest, SimpleRoadTestsFixture) {
 	BOOST_CHECK_EQUAL(r.get_size(), static_cast<int32_t>(BaseImmovable::SMALL));
 }
 BOOST_FIXTURE_TEST_CASE(InstantiateEditorGameBase, SimpleRoadTestsFixture) {
-	BOOST_MESSAGE
+	BOOST_TEST_MESSAGE
 		(start->get_position().x << ',' << start->get_position().y <<
 		 "   " << end->get_position().x << ',' << end->get_position().y <<
 		 "   " << path.get_start().x << ',' << path.get_start().y);

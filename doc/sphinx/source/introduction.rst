@@ -40,7 +40,7 @@ order in which the starting conditions are listed. Let's write the script:
 
    -- Set the textdomain, so that all strings given to the _() function are
    -- properly translated.
-   set_textdomain("tribe_barbarians")
+   set_textdomain("tribes")
 
    -- Now for the array we must return
    return {
@@ -50,7 +50,7 @@ order in which the starting conditions are listed. Let's write the script:
          player:allow_workers("all")
 
          -- Place the hq
-         local hq = player:place_building("headquarters", player.starting_field)
+         local hq = player:place_building("barbarians_headquarters", player.starting_field)
 
          -- Now add one log to the hq every 250 ms
          for i=1,80 do
@@ -154,7 +154,7 @@ objects that are in the global scope:
    print("Hello World!")
    map = wl.Game().map
    hq = map.player_slots[1].starting_field.immovable -- If this is a normal map
-   hq:set_workers("builder", 100)
+   hq:set_workers("barbarians_builder", 100)
 
 This makes for excellent cheating in debug builds, but note that this is for
 debug purposes only -- in network games running Lua commands this way will

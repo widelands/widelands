@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006, 2008-2011 by the Widelands Development Team
+ * Copyright (C) 2002, 2006, 2008-2011, 2015-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -80,6 +80,7 @@ public:
 	EntryRecord & add(void * const entry, const bool select_this = false);
 
 	uint32_t size() const;
+	bool empty() const;
 	Entry operator[](uint32_t) const;
 	static uint32_t no_selection_index();
 	bool has_selection() const;
@@ -152,7 +153,7 @@ public:
 	/**
 	 * Compare the two items at the given indices in the list.
 	 *
-	 * \return \c true if the first item is strictly less than the second
+	 * return true if the first item is strictly less than the second
 	 */
 	using CompareFn = boost::function<bool (uint32_t, uint32_t)>;
 
@@ -185,11 +186,6 @@ public:
 	void set_sort_descending(bool const descending) {
 		m_sort_descending = descending;
 	}
-	void set_font(const std::string & fontname, int32_t const fontsize) {
-		m_fontname = fontname;
-		m_fontsize = fontsize;
-		m_headerheight = fontsize * 8 / 5;
-	}
 
 	void sort
 		(uint32_t Begin = 0,
@@ -199,6 +195,7 @@ public:
 	EntryRecord & add(void * entry = nullptr, bool select = false);
 
 	uint32_t size() const {return m_entry_records.size();}
+	bool empty() const {return m_entry_records.empty();}
 	void * operator[](uint32_t const i) const {
 		assert(i < m_entry_records.size());
 		return m_entry_records[i]->entry();
@@ -240,6 +237,10 @@ public:
 	uint32_t get_lineheight() const {return m_lineheight + 2;}
 	uint32_t get_eff_w     () const {return get_w();}
 
+	/// Adjust the desired size to fit the height needed for the number of entries.
+	/// If entries == 0, the current entries are used.
+	void fit_height(uint32_t entries = 0);
+
 	// Drawing and event handling
 	void draw(RenderTarget &) override;
 	bool handle_mousepress  (uint8_t btn, int32_t x, int32_t y) override;
@@ -256,24 +257,23 @@ private:
 	using Columns = std::vector<Column>;
 	struct Column {
 		Button                 * btn;
-		uint32_t                              width;
-		Align                                 alignment;
-		bool                                           is_checkbox_column;
-		CompareFn compare;
+		uint32_t                 width;
+		Align                    alignment;
+		bool                     is_checkbox_column;
+		CompareFn                compare;
 	};
 
 	static const int32_t ms_darken_value = -20;
 
 	Columns            m_columns;
 	uint32_t           m_total_width;
-	std::string        m_fontname;
 	uint32_t           m_fontsize;
 	uint32_t           m_headerheight;
 	int32_t            m_lineheight;
 	Scrollbar        * m_scrollbar;
 	int32_t            m_scrollpos; //  in pixels
 	uint32_t           m_selection;
-	int32_t            m_last_click_time;
+	uint32_t           m_last_click_time;
 	uint32_t           m_last_selection;  // for double clicks
 	Columns::size_type m_sort_column;
 	bool               m_sort_descending;

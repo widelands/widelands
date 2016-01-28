@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2003-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,9 +24,9 @@
 
 #include <boost/signals2.hpp>
 
-#include "logic/tribe.h"
-#include "logic/warelist.h"
-#include "logic/wareworker.h"
+#include "logic/map_objects/tribes/tribe_descr.h"
+#include "logic/map_objects/tribes/warelist.h"
+#include "logic/map_objects/tribes/wareworker.h"
 #include "ui_basic/textarea.h"
 
 namespace UI {struct Textarea;}
@@ -50,7 +50,7 @@ public:
 		 const Widelands::TribeDescr &,
 		 Widelands::WareWorker type,
 		 bool selectable,
-		 boost::function<void(Widelands::WareIndex, bool)> callback_function = 0,
+		 boost::function<void(Widelands::DescriptionIndex, bool)> callback_function = 0,
 		 bool horizontal = false);
 
 	bool handle_mousemove
@@ -59,62 +59,63 @@ public:
 	bool handle_mouserelease(uint8_t btn, int32_t x, int32_t y) override;
 
 	// Wares may be selected (highlighted)
-	void select_ware(Widelands::WareIndex);
-	void unselect_ware(Widelands::WareIndex);
-	bool ware_selected(Widelands::WareIndex);
+	void select_ware(Widelands::DescriptionIndex);
+	void unselect_ware(Widelands::DescriptionIndex);
+	bool ware_selected(Widelands::DescriptionIndex);
 
 	// Wares may be hidden
-	void hide_ware(Widelands::WareIndex);
-	void unhide_ware(Widelands::WareIndex);
-	bool ware_hidden(Widelands::WareIndex);
+	void hide_ware(Widelands::DescriptionIndex);
+	void unhide_ware(Widelands::DescriptionIndex);
+	bool ware_hidden(Widelands::DescriptionIndex);
 
-	Widelands::WareIndex ware_at_point(int32_t x, int32_t y) const;
-	Widelands::WareWorker get_type() const {return m_type;}
+	Widelands::DescriptionIndex ware_at_point(int32_t x, int32_t y) const;
+	Widelands::WareWorker get_type() const {return type_;}
 
 protected:
 	void layout() override;
 
-	virtual std::string info_for_ware(Widelands::WareIndex) = 0;
+	virtual std::string info_for_ware(Widelands::DescriptionIndex) = 0;
 
-	virtual RGBColor info_color_for_ware(Widelands::WareIndex);
+	virtual RGBColor info_color_for_ware(Widelands::DescriptionIndex);
 
 	const Widelands::TribeDescr::WaresOrder & icons_order() const;
 	const Widelands::TribeDescr::WaresOrderCoords & icons_order_coords() const;
-	virtual Point ware_position(Widelands::WareIndex) const;
+	virtual Point ware_position(Widelands::DescriptionIndex) const;
 	void draw(RenderTarget &) override;
 	virtual void draw_ware
 		(RenderTarget &,
-		 Widelands::WareIndex);
+		 Widelands::DescriptionIndex);
 
 private:
 	using WareListVector = std::vector<const Widelands::WareList *>;
-	using WareListSelectionType = std::vector<bool>;
+	using WareListSelectionType = std::map<const Widelands::DescriptionIndex, bool>;
 
 	/**
 	 * Update the anchored selection. When first mouse button is pressed on a
-	 * ware, it is stored in @ref m_selection_anchor. Mouse moves trigger this
+	 * ware, it is stored in @ref selection_anchor_. Mouse moves trigger this
 	 * function to select all wares in the rectangle between the anchor and the
-	 * mouse position. They are temporary stored in @ref m_in_selection.
+	 * mouse position. They are temporary stored in @ref in_selection_.
 	 * Releasing the mouse button will performs the selection. This allows
 	 * selection of multiple wares by dragging.
 	 */
 	void update_anchor_selection(int32_t x, int32_t y);
 
-	const Widelands::TribeDescr & m_tribe;
-	Widelands::WareWorker m_type;
-	UI::Textarea        m_curware;
-	WareListSelectionType      m_selected;
-	WareListSelectionType      m_hidden;
-	WareListSelectionType      m_in_selection;  //Wares in temporary anchored selection
-	bool                m_selectable;
-	bool                m_horizontal;
+	const Widelands::TribeDescr & tribe_;
+	Widelands::WareWorker type_;
+	const std::set<Widelands::DescriptionIndex> indices_;
+	UI::Textarea        curware_;
+	WareListSelectionType      selected_;
+	WareListSelectionType      hidden_;
+	WareListSelectionType      in_selection_;  //Wares in temporary anchored selection
+	bool                selectable_;
+	bool                horizontal_;
 
 	/**
 	 * The ware on which the mouse press has been performed.
 	 * It is not selected directly, but will be on mouse release.
 	 */
-	Widelands::WareIndex m_selection_anchor;
-	boost::function<void(Widelands::WareIndex, bool)> m_callback_function;
+	Widelands::DescriptionIndex selection_anchor_;
+	boost::function<void(Widelands::DescriptionIndex, bool)> callback_function_;
 };
 
 /*
@@ -138,16 +139,16 @@ public:
 	void remove_all_warelists();
 
 protected:
-	std::string info_for_ware(Widelands::WareIndex) override;
+	std::string info_for_ware(Widelands::DescriptionIndex) override;
 
 private:
 	using WareListVector = std::vector<const Widelands::WareList *>;
-	WareListVector         m_warelists;
+	WareListVector         warelists_;
 	std::vector<boost::signals2::connection> connections_;
 };
 
 std::string waremap_to_richtext
 		(const Widelands::TribeDescr & tribe,
-		 const std::map<Widelands::WareIndex, uint8_t> & map);
+		 const std::map<Widelands::DescriptionIndex, uint8_t> & map);
 
 #endif  // end of include guard: WL_WUI_WARESDISPLAY_H

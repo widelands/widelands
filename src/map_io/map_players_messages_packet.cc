@@ -31,9 +31,10 @@
 
 namespace Widelands {
 
-#define CURRENT_PACKET_VERSION 1
-#define PLAYERDIRNAME_TEMPLATE "player/%u"
-#define FILENAME_TEMPLATE PLAYERDIRNAME_TEMPLATE "/messages"
+constexpr uint32_t kCurrentPacketVersion = 2;
+
+constexpr const char* kPlayerDirnameTemplate = "player/%u";
+constexpr const char* kFilenameTemplate = "player/%u/messages";
 
 void MapPlayersMessagesPacket::read
 	(FileSystem & fs, EditorGameBase & egbase, bool, MapObjectLoader & mol)
@@ -48,95 +49,113 @@ void MapPlayersMessagesPacket::read
 			Profile prof;
 			try {
 				const std::string profile_filename =
-						(boost::format(FILENAME_TEMPLATE) % static_cast<unsigned int>(p)).str();
+						(boost::format(kFilenameTemplate) % static_cast<unsigned int>(p)).str();
 				prof.read(profile_filename.c_str(), nullptr, fs);
 			} catch (...) {continue;}
-			prof.get_safe_section("global").get_positive
-				("packet_version", CURRENT_PACKET_VERSION);
-			MessageQueue & messages = player->messages();
+			uint32_t packet_version = prof.get_safe_section("global").get_positive("packet_version");
+			if (1 <= packet_version && packet_version <= kCurrentPacketVersion) {
+				MessageQueue & messages = player->messages();
 
-			{
-				MessageQueue::const_iterator const begin = messages.begin();
-				if (begin != messages.end()) {
-					log
-						("ERROR: The message queue for player %u contains a message "
-						 "before any messages have been loaded into it. This is a bug "
-						 "in the savegame loading code. It created a new message and "
-						 "added it to the queue. This is only allowed during "
-						 "simulation, not at load. The following messge will be "
-						 "removed when the queue is reset:\n"
-						 "\tstype   : %u\n"
-						 "\ttitle   : %s\n"
-						 "\tsent    : %u\n"
-						 "\tposition: (%i, %i)\n"
-						 "\tstatus  : %u\n"
-						 "\tbody    : %s\n",
-						 p,
-						 begin->second->type    (),
-						 begin->second->title   ().c_str(),
-						 begin->second->sent    (),
-						 begin->second->position().x, begin->second->position().y,
-						 begin->second->status  (),
-						 begin->second->body    ().c_str());
-					messages.clear();
+				{
+					MessageQueue::const_iterator const begin = messages.begin();
+					if (begin != messages.end()) {
+					   log("ERROR: The message queue for player %u contains a message "
+					       "before any messages have been loaded into it. This is a bug "
+					       "in the savegame loading code. It created a new message and "
+					       "added it to the queue. This is only allowed during "
+					       "simulation, not at load. The following messge will be "
+					       "removed when the queue is reset:\n"
+					       "\tstype   : %u\n"
+					       "\ttitle   : %s\n"
+					       "\tsent    : %u\n"
+					       "\tposition: (%i, %i)\n"
+					       "\tstatus  : %u\n"
+					       "\tbody    : %s\n",
+					       p, static_cast<int>(begin->second->type()), begin->second->title().c_str(),
+					       begin->second->sent(), begin->second->position().x,
+					       begin->second->position().y, static_cast<int>(begin->second->status()),
+					       begin->second->body().c_str());
+					   messages.clear();
+					}
 				}
-			}
 
-			uint32_t previous_message_sent = 0;
-			while (Section * const s = prof.get_next_section())
-				try {
-					uint32_t const sent    = s->get_safe_int("sent");
-					if (sent < previous_message_sent)
-						throw GameDataError
-							(
-							 "messages are not ordered: sent at %u but previous "
-							 "message sent at %u",
-							 sent, previous_message_sent);
-					if (gametime < sent)
-						throw GameDataError
-							(
-							 "message is sent in the future: sent at %u but "
-							 "gametime is only %u",
-							 sent, gametime);
+				uint32_t previous_message_sent = 0;
+				while (Section * const s = prof.get_next_section()) {
+					try {
+						uint32_t const sent    = s->get_safe_int("sent");
+						if (sent < previous_message_sent)
+							throw GameDataError
+								(
+								 "messages are not ordered: sent at %u but previous "
+								 "message sent at %u",
+								 sent, previous_message_sent);
+						if (gametime < sent)
+							throw GameDataError
+								(
+								 "message is sent in the future: sent at %u but "
+								 "gametime is only %u",
+								 sent, gametime);
 
-					Message::Status status = Message::Status::kArchived; //  default status
-					if (char const * const status_string = s->get_string("status")) {
-						try {
-							if      (!strcmp(status_string, "new"))
-								status = Message::Status::kNew;
-							else if (!strcmp(status_string, "read"))
-								status = Message::Status::kRead;
-							else
-								throw GameDataError
-									("expected %s but found \"%s\"",
-									 "{new|read}", status_string);
-						} catch (const WException & e) {
-							throw GameDataError("status: %s", e.what());
+						Message::Status status = Message::Status::kArchived; //  default status
+						if (char const * const status_string = s->get_string("status")) {
+							try {
+								if      (!strcmp(status_string, "new"))
+									status = Message::Status::kNew;
+								else if (!strcmp(status_string, "read"))
+									status = Message::Status::kRead;
+								else
+									throw GameDataError
+										("expected %s but found \"%s\"",
+										 "{new|read}", status_string);
+							} catch (const WException & e) {
+								throw GameDataError("status: %s", e.what());
+							}
 						}
-					}
-					Serial serial = s->get_int("serial", 0);
-					if (serial > 0) {
-						assert(mol.is_object_known(serial));
-						MapObject & mo = mol.get<MapObject>(serial);
-						assert(mol.is_object_loaded(mo));
-						serial = mo.serial();
-					}
+						Serial serial = s->get_int("serial", 0);
+						if (serial > 0) {
+							assert(mol.is_object_known(serial));
+							MapObject & mo = mol.get<MapObject>(serial);
+							assert(mol.is_object_loaded(mo));
+							serial = mo.serial();
+						}
+						// Compatibility code needed for map loading.
+						if (packet_version == 1) {
+							const std::string name = s->get_name();
+							messages.add_message
+								(*new Message
+									(static_cast<Message::Type>(s->get_natural("type")),
+									 sent,
+									 name,
+									 "images/wui/fieldaction/menu_build_flag.png",
+									 name,
+									 s->get_safe_string("body"),
+									 get_coords("position", extent, Coords::null(), s),
+									 serial,
+									 status));
+						} else {
 
-					messages.add_message
-						(*new Message
-							(static_cast<Message::Type>(s->get_natural("type")),
-						 	 sent,
-						 	 s->get_name       (),
-						 	 s->get_safe_string("body"),
-							 get_coords("position", extent, Coords::null(), s),
-							 serial,
-						 	 status));
-					previous_message_sent = sent;
-				} catch (const WException & e) {
-					throw GameDataError
-						("\"%s\": %s", s->get_name(), e.what());
+							messages.add_message
+								(*new Message
+									(static_cast<Message::Type>(s->get_natural("type")),
+									 sent,
+									 s->get_name       (),
+									 s->get_safe_string("icon"),
+									 s->get_safe_string("heading"),
+									 s->get_safe_string("body"),
+									 get_coords("position", extent, Coords::null(), s),
+									 serial,
+									 status));
+						}
+						previous_message_sent = sent;
+					} catch (const WException & e) {
+						throw GameDataError
+							("\"%s\": %s", s->get_name(), e.what());
+					}
 				}
 				prof.check_used();
+			} else {
+				throw UnhandledVersionError("MapPlayersMessagesPacket", packet_version, kCurrentPacketVersion);
+			}
 		} catch (const WException & e) {
 			throw GameDataError
 				("messages for player %u: %s", p, e.what());
@@ -151,7 +170,7 @@ void MapPlayersMessagesPacket::write
 	iterate_players_existing_const(p, nr_players, egbase, player) {
 		Profile prof;
 		prof.create_section("global").set_int
-			("packet_version", CURRENT_PACKET_VERSION);
+			("packet_version", kCurrentPacketVersion);
 		const MessageQueue & messages = player->messages();
 		MapMessageSaver & message_saver = mos.message_savers[p - 1];
 		for (const std::pair<MessageId, Message *>& temp_message : messages) {
@@ -161,6 +180,8 @@ void MapPlayersMessagesPacket::write
 
 			Section & s = prof.create_section_duplicate(message.title().c_str());
 			s.set_int    ("type",      static_cast<int32_t>(message.type()));
+			s.set_string ("heading",   message.heading());
+			s.set_string ("icon",      message.icon_filename());
 			s.set_int    ("sent",      message.sent    ());
 			s.set_string ("body",      message.body    ());
 			if (Coords const c =       message.position())
@@ -174,8 +195,6 @@ void MapPlayersMessagesPacket::write
 				break;
 			case Message::Status::kArchived: //  The default status. Do not write.
 				break;
-			default:
-				assert(false);
 			}
 			if (message.serial()) {
 				const MapObject* mo = egbase.objects().get_object(message.serial());
@@ -183,11 +202,11 @@ void MapPlayersMessagesPacket::write
 				s.set_int       ("serial",    fileindex);
 			}
 		}
-		fs.ensure_directory_exists((boost::format(PLAYERDIRNAME_TEMPLATE)
+		fs.ensure_directory_exists((boost::format(kPlayerDirnameTemplate)
 										  % static_cast<unsigned int>(p)).str());
 
 		const std::string profile_filename =
-				(boost::format(FILENAME_TEMPLATE) % static_cast<unsigned int>(p)).str();
+				(boost::format(kFilenameTemplate) % static_cast<unsigned int>(p)).str();
 		prof.write(profile_filename.c_str(), false, fs);
 	}
 }

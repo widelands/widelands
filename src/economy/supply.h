@@ -21,7 +21,7 @@
 #define WL_ECONOMY_SUPPLY_H
 
 #include "economy/trackptr.h"
-#include "logic/wareworker.h"
+#include "logic/map_objects/tribes/wareworker.h"
 #include "logic/widelands.h"
 
 namespace Widelands {
@@ -32,6 +32,8 @@ class Request;
 class Warehouse;
 class WareInstance;
 class Worker;
+
+enum class SupplyProviders {kWarehouse, kFlagOrRoad, kShip};
 
 /**
  * A Supply is a virtual base class representing something that can offer
@@ -57,6 +59,12 @@ struct Supply : public Trackable {
 	virtual bool is_active() const = 0;
 
 	/**
+	 * Return the type of player im/movable where the ware is now (warehouse,
+	 * flag or ship).
+	 */
+	virtual SupplyProviders provider_type(Game *) const = 0;
+
+	/**
 	 * Indicates whether this supply is in storage or on its way to
 	 * storage.
 	 *
@@ -69,7 +77,7 @@ struct Supply : public Trackable {
 	 *
 	 * \note This is only valid if \ref has_storage returns \c false.
 	 */
-	virtual void get_ware_type(WareWorker & type, WareIndex & ware) const = 0;
+	virtual void get_ware_type(WareWorker & type, DescriptionIndex & ware) const = 0;
 
 	/**
 	 * Send this to the given warehouse.

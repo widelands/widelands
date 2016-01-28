@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2013 by the Widelands Development Team
+ * Copyright (C) 2008-2013, 2015 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -44,10 +44,10 @@
 #include "io/fileread.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/game.h"
+#include "logic/map_objects/tribes/tribes.h"
 #include "logic/player.h"
 #include "logic/playercommand.h"
 #include "logic/playersmanager.h"
-#include "logic/tribe.h"
 #include "map_io/widelands_map_loader.h"
 #include "network/constants.h"
 #include "network/internet_gaming.h"
@@ -58,7 +58,6 @@
 #include "network/network_system.h"
 #include "profile/profile.h"
 #include "scripting/lua_interface.h"
-#include "scripting/lua_table.h"
 #include "ui_basic/progresswindow.h"
 #include "ui_fsmenu/launch_mpg.h"
 #include "wlapplication.h"
@@ -206,7 +205,6 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 					newstate = PlayerSettings::stateClosed;
 				break;
 			}
-		default:;
 		}
 
 		h->set_player_state(number, newstate, true);
@@ -567,7 +565,7 @@ struct NetHostImpl {
 
 	/// Whether we're waiting for all clients to report back.
 	bool    waiting;
-	int32_t lastframe;
+	uint32_t lastframe;
 
 	/**
 	 * The speed, in milliseconds per second, that is effective as long
@@ -642,7 +640,7 @@ NetHost::NetHost (const std::string & playername, bool internet)
 	d->syncreport_pending = false;
 	d->syncreport_time = 0;
 
-	d->settings.tribes = Widelands::TribeDescr::get_all_tribe_infos();
+	d->settings.tribes = Widelands::Tribes::get_all_tribeinfos();
 	set_multiplayer_game_settings();
 	d->settings.playernum = UserSettings::none();
 	d->settings.usernum = 0;
@@ -870,7 +868,7 @@ void NetHost::run(bool const autorun)
 			game.init_savegame(loaderUI.get(), d->settings);
 		d->pseudo_networktime = game.get_gametime();
 		d->time.reset(d->pseudo_networktime);
-		d->lastframe = WLApplication::get()->get_time();
+		d->lastframe = SDL_GetTicks();
 		d->last_heartbeat = d->lastframe;
 
 		d->committed_networktime = d->pseudo_networktime;
@@ -935,7 +933,7 @@ void NetHost::think()
 	handle_network();
 
 	if (d->game) {
-		int32_t curtime = WLApplication::get()->get_time();
+		uint32_t curtime = SDL_GetTicks();
 		int32_t delta = curtime - d->lastframe;
 		d->lastframe = curtime;
 
@@ -1681,7 +1679,7 @@ void NetHost::set_player_init(uint8_t const number, uint8_t const index)
 			return;
 		}
 	}
-	assert(false);
+	NEVER_HERE();
 }
 
 
@@ -2104,7 +2102,7 @@ void NetHost::welcome_client (uint32_t const number, std::string & playername)
 			d->settings.tribes[i].initializations.size();
 		s.unsigned_8(nr_initializations);
 		for (uint8_t j = 0; j < nr_initializations; ++j)
-			s.string(d->settings.tribes[i].initializations[j].first);
+			s.string(d->settings.tribes[i].initializations[j].script);
 	}
 	s.send(client.sock);
 
@@ -2459,7 +2457,7 @@ void NetHost::check_sync_reports()
 
 void NetHost::syncreport()
 {
-	assert(d->game->get_gametime() == d->syncreport_time);
+	assert(d->game->get_gametime() == static_cast<uint32_t>(d->syncreport_time));
 
 	d->syncreport = d->game->get_sync_hash();
 	d->syncreport_arrived = true;
@@ -2650,7 +2648,7 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket & r)
 					Widelands::Map   map;
 					i18n::Textdomain td("maps");
 					std::unique_ptr<Widelands::MapLoader> ml = map.get_correct_loader(path);
-					if (ml.get() != nullptr) {
+					if (ml != nullptr) {
 						// Yes it is a map file :)
 						map.set_filename(path);
 						ml->preload_map(true);

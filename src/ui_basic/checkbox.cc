@@ -19,8 +19,12 @@
 
 #include "ui_basic/checkbox.h"
 
+#include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
+#include "graphic/text_layout.h"
+
+constexpr int kPadding = 4;
 
 namespace UI {
 /**
@@ -34,22 +38,42 @@ Statebox::Statebox
 	 const Image* pic,
 	 const std::string &       tooltip_text)
 	:
-	Panel  (parent, p.x, p.y, STATEBOX_WIDTH, STATEBOX_HEIGHT, tooltip_text),
-	m_flags(Is_Enabled)
+	Panel  (parent, p.x, p.y, kStateboxSize, kStateboxSize, tooltip_text),
+	m_flags(Is_Enabled),
+	rendered_text_(nullptr)
 {
-	if (pic) {
-		uint16_t w = pic->width();
-		uint16_t h = pic->height();
-		set_desired_size(w, h);
-		set_size(w, h);
+	uint16_t w = pic->width();
+	uint16_t h = pic->height();
+	set_desired_size(w, h);
+	set_size(w, h);
 
-		set_flags(Has_Custom_Picture, true);
-		m_pic_graphics = pic;
-	} else
-		m_pic_graphics =
-			g_gr->images().get("images/ui_basic/checkbox_light.png");
+	set_flags(Has_Custom_Picture, true);
+	m_pic_graphics = pic;
 }
 
+Statebox::Statebox
+	(Panel             * const parent,
+	 Point               const p,
+	 const std::string& label_text,
+	 const std::string &       tooltip_text,
+	 uint32_t width)
+	:
+	Panel  (parent, p.x, p.y, kStateboxSize, kStateboxSize, tooltip_text),
+	m_flags(Is_Enabled),
+	rendered_text_(
+		label_text.empty() ?
+			nullptr :
+			UI::g_fh1->render(as_uifont(label_text),
+									width > (kStateboxSize + kPadding) ? width - kStateboxSize - kPadding : 0))
+{
+	m_pic_graphics = g_gr->images().get("images/ui_basic/checkbox_light.png");
+	if (rendered_text_) {
+		int w = rendered_text_->width() + kPadding + m_pic_graphics->width() / 2;
+		int h = std::max(rendered_text_->height(), m_pic_graphics->height());
+		set_desired_size(w, h);
+		set_size(w, h);
+	}
+}
 
 Statebox::~Statebox()
 {
@@ -116,18 +140,30 @@ void Statebox::draw(RenderTarget & dst)
 				(Rect(Point(0, 0), get_w(), get_h()), RGBColor(100, 100,  80));
 		}
 	} else {
-		static_assert(0 <= STATEBOX_WIDTH, "assert(0 <= STATEBOX_WIDTH) failed.");
-		static_assert(0 <= STATEBOX_HEIGHT, "assert(0 <= STATEBOX_HEIGHT) failed.");
+		static_assert(0 <= kStateboxSize, "assert(0 <= STATEBOX_WIDTH) failed.");
+		static_assert(0 <= kStateboxSize, "assert(0 <= STATEBOX_HEIGHT) failed.");
+		Point image_anchor(0, 0);
+		Point text_anchor(kStateboxSize + kPadding, 0);
+
+		if (rendered_text_) {
+			if (UI::g_fh1->fontset().is_rtl()) {
+				text_anchor.x = 0;
+				image_anchor.x = rendered_text_->width() + kPadding;
+				image_anchor.y = (get_h() - kStateboxSize) / 2;
+			}
+			dst.blit(text_anchor, rendered_text_, BlendMode::UseAlpha, UI::Align::Align_Left);
+		}
+
 		dst.blitrect
-			(Point(0, 0),
+			(image_anchor,
 			 m_pic_graphics,
 			 Rect
-			 	(Point(m_flags & Is_Checked ? STATEBOX_WIDTH : 0, 0),
-			 	 STATEBOX_WIDTH, STATEBOX_HEIGHT));
+				(Point(m_flags & Is_Checked ? kStateboxSize : 0, 0),
+				 kStateboxSize, kStateboxSize));
 
 		if (m_flags & Is_Highlighted)
 			dst.draw_rect
-				(Rect(Point(0, 0), STATEBOX_WIDTH + 1, STATEBOX_HEIGHT + 1), RGBColor(100, 100,  80));
+				(Rect(image_anchor, kStateboxSize + 1, kStateboxSize + 1), RGBColor(100, 100,  80));
 	}
 }
 

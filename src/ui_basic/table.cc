@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2011, 2015 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,13 +22,14 @@
 #include <boost/bind.hpp>
 
 #include "graphic/font.h"
-#include "graphic/font_handler.h"
 #include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
+#include "graphic/text/bidi.h"
 #include "graphic/text/font_set.h"
 #include "graphic/text_constants.h"
 #include "graphic/text_layout.h"
+#include "graphic/texture.h"
 #include "ui_basic/button.h"
 #include "ui_basic/mouse_constants.h"
 #include "ui_basic/scrollbar.h"
@@ -50,10 +51,9 @@ Table<void *>::Table
 :
 	Panel             (parent, x, y, w, h),
 	m_total_width     (0),
-	m_fontname        (UI::g_fh1->fontset().serif()),
 	m_fontsize        (UI_FONT_SIZE_SMALL),
-	m_headerheight    (UI_FONT_SIZE_SMALL * 8 / 5),
-	m_lineheight      (g_fh->get_fontheight(m_fontname, m_fontsize)),
+	m_headerheight    (UI::g_fh1->render(as_uifont(".", m_fontsize))->height() + 4),
+	m_lineheight      (UI::g_fh1->render(as_uifont(".", m_fontsize))->height()),
 	m_scrollbar       (nullptr),
 	m_scrollpos       (0),
 	m_selection       (no_selection_index()),
@@ -108,7 +108,6 @@ void Table<void *>::add_column
 					 title, tooltip_string, true, false);
 			c.btn->sigclicked.connect
 				(boost::bind(&Table::header_button_clicked, boost::ref(*this), m_columns.size()));
-			c.btn->set_font(Font::get(m_fontname, m_fontsize));
 		}
 		c.width = width;
 		c.alignment = alignment;
@@ -135,9 +134,8 @@ void Table<void *>::add_column
 				 false);
 		m_scrollbar->moved.connect(boost::bind(&Table::set_scrollpos, this, _1));
 		m_scrollbar->set_steps(1);
-		uint32_t const lineheight = g_fh->get_fontheight(m_fontname, m_fontsize);
-		m_scrollbar->set_singlestepsize(lineheight);
-		m_scrollbar->set_pagesize(get_h() - lineheight);
+		m_scrollbar->set_singlestepsize(m_lineheight);
+		m_scrollbar->set_pagesize(get_h() - m_lineheight);
 	}
 }
 
@@ -157,7 +155,6 @@ void Table<void *>::set_column_title(uint8_t const col, const std::string & titl
 				 title, "", true, false);
 		column.btn->sigclicked.connect
 			(boost::bind(&Table::header_button_clicked, boost::ref(*this), col));
-		column.btn->set_font(Font::get(m_fontname, m_fontsize));
 	} else if (title.empty()) { //  had title before, not now
 		if (column.btn) {
 			delete column.btn;
@@ -248,6 +245,18 @@ void Table<void *>::clear()
 	m_last_selection = no_selection_index();
 }
 
+
+void Table<void *>::fit_height(uint32_t entries) {
+	if (entries == 0) {
+		entries = size();
+	}
+	int tablewidth;
+	int tableheight;
+	get_desired_size(&tablewidth, &tableheight);
+	tableheight = m_headerheight + 2 + get_lineheight() * entries;
+	set_desired_size(tablewidth, tableheight);
+}
+
 /**
  * Redraw the table
 */
@@ -275,46 +284,102 @@ void Table<void *>::draw(RenderTarget & dst)
 
 		Columns::size_type const nr_columns = m_columns.size();
 		for (uint32_t i = 0, curx = 0; i < nr_columns; ++i) {
-			const Column & column    = m_columns[i];
-			uint32_t const curw      = column.width;
-			Align    const alignment = column.alignment;
+			const Column& column = m_columns[i];
+			int const curw = column.width;
+			Align alignment = mirror_alignment(column.alignment);
 
 			const Image* entry_picture = er.get_picture(i);
-			const std::string &       entry_string  = er.get_string (i);
-			uint32_t picw = 0;
-			uint32_t pich = 0;
+			const std::string& entry_string = er.get_string(i);
 
-			if (entry_picture) {
-				picw = entry_picture->width();
-				pich = entry_picture->height();
-			}
 			Point point(curx, y);
-			if (entry_picture) {
-				dst.blit
-					(point +
-					 Point
-					 	(0,
-					 	 (static_cast<int32_t>(lineheight) -
-					 	  static_cast<int32_t>(pich))
-					 	 / 2),
-					 entry_picture);
+			int picw = 0;
+
+			if (entry_picture != nullptr) {
+				picw = entry_picture->width();
+				const int pich = entry_picture->height();
+
+				int draw_x = point.x;
+
+				// We want a bit of margin
+				int max_pic_height = lineheight - 3;
+
+				if (pich > 0 && pich > max_pic_height) {
+					// Scale image to fit lineheight
+					double image_scale = static_cast<double>(max_pic_height) / pich;
+					int blit_width = image_scale * picw;
+
+					if (entry_string.empty()) {
+						if (i == nr_columns - 1 && m_scrollbar->is_enabled()) {
+							draw_x = point.x + (curw - blit_width - m_scrollbar->get_w()) / 2;
+						} else {
+							draw_x = point.x + (curw - blit_width) / 2;
+						}
+					}
+
+					if (alignment & Align_Right) {
+						draw_x += curw - blit_width;
+					}
+
+					// Create the scaled image
+					dst.blitrect_scale(Rect(draw_x, point.y + 1, blit_width, max_pic_height),
+					                   entry_picture, Rect(0, 0, picw, pich), 1., BlendMode::UseAlpha);
+
+					// For text alignment below
+					picw = blit_width;
+				} else {
+					if (entry_string.empty()) {
+						if (i == nr_columns - 1 && m_scrollbar->is_enabled()) {
+							draw_x = point.x + (curw - picw - m_scrollbar->get_w()) / 2;
+						} else {
+							draw_x = point.x + (curw - picw) / 2;
+						}
+					} else if (alignment & Align_Right) {
+						draw_x += curw - picw;
+					}
+					dst.blit(Point(draw_x, point.y + (lineheight - pich) / 2), entry_picture);
+				}
 				point.x += picw;
 			}
+
+			++picw; // A bit of margin between image and text
 
 			if (entry_string.empty()) {
 				curx += curw;
 				continue;
 			}
-			const Image* entry_text_im = UI::g_fh1->render(as_uifont(entry_string, m_fontsize));
-			uint16_t text_width = entry_text_im->width();
+			const Image* entry_text_im = UI::g_fh1->render(as_uifont(richtext_escape(entry_string), m_fontsize));
+
 			if (alignment & Align_Right) {
-				point.x += curw - picw;
+				point.x += curw - 2 * picw;
 			} else if (alignment & Align_HCenter) {
 				point.x += (curw - picw) / 2;
 			}
+
+			// Add an offset for rightmost column when the scrollbar is shown.
+			int text_width = entry_text_im->width();
+			if (i == nr_columns - 1 && m_scrollbar->is_enabled()) {
+				text_width = text_width + m_scrollbar->get_w();
+			}
 			UI::correct_for_align(alignment, text_width, entry_text_im->height(), &point);
-			// Crop to column width
-			dst.blitrect(point, entry_text_im, Rect(0, 0, curw - picw, lineheight));
+
+			// Crop to column width while blitting
+			if ((curw + picw) < text_width) {
+				// Fix positioning for BiDi languages.
+				if (UI::g_fh1->fontset().is_rtl()) {
+					point.x = alignment & Align_Right ? curx : curx + picw;
+				}
+				// We want this always on, e.g. for mixed language savegame filenames
+				if (i18n::has_rtl_character(entry_string.c_str(), 20)) { // Restrict check for efficiency
+					dst.blitrect(point,
+									 entry_text_im,
+									 Rect(text_width - curw + picw, 0, text_width, lineheight));
+				}
+				else {
+					dst.blitrect(point, entry_text_im, Rect(0, 0, curw - picw, lineheight));
+				}
+			} else {
+				dst.blitrect(point, entry_text_im, Rect(0, 0, curw - picw, lineheight));
+			}
 			curx += curw;
 		}
 
@@ -364,11 +429,11 @@ bool Table<void *>::handle_mousepress
 
 	switch (btn) {
 	case SDL_BUTTON_LEFT: {
-		int32_t const time = WLApplication::get()->get_time();
+		uint32_t const time = SDL_GetTicks();
 
 		//  This hick hack is needed if any of the callback functions calls clear
 		//  to forget the last clicked time.
-		int32_t const real_last_click_time = m_last_click_time;
+		uint32_t const real_last_click_time = m_last_click_time;
 
 		m_last_selection  = m_selection;
 		m_last_click_time = time;
@@ -455,7 +520,7 @@ void Table<void *>::move_selection(const int32_t offset)
  */
 void Table<void *>::select(const uint32_t i)
 {
-	if (m_selection == i)
+	if (empty() || m_selection == i)
 		return;
 
 	m_selection = i;
@@ -470,10 +535,6 @@ void Table<void *>::select(const uint32_t i)
 Table<void *>::EntryRecord & Table<void *>::add
 	(void * const entry, const bool do_select)
 {
-	int32_t entry_height = g_fh->get_fontheight(m_fontname, m_fontsize);
-	if (entry_height > m_lineheight)
-		m_lineheight = entry_height;
-
 	EntryRecord & result = *new EntryRecord(entry);
 	m_entry_records.push_back(&result);
 	result.m_data.resize(m_columns.size());

@@ -278,7 +278,8 @@ void RealFSImpl::m_unlink_directory(const std::string & file) {
 #ifndef _WIN32
 	rmdir(fspath.c_str());
 #else
-	RemoveDirectory(fspath.c_str());
+	if (!RemoveDirectory(fspath.c_str()))
+		throw wexception("%s could not be deleted.", fspath.c_str());
 #endif
 }
 
@@ -327,14 +328,11 @@ void RealFSImpl::make_directory(const std::string & dirname) {
 			("a file with the name \"%s\" already exists", dirname.c_str());
 
 	if
-		(mkdir
 #ifdef _WIN32
-		 	(fspath.c_str())
+		(!CreateDirectory(fspath.c_str(), NULL))
 #else
-		 	(fspath.c_str(), 0x1FF)
+		(mkdir(fspath.c_str(), 0x1FF) == -1)
 #endif
-		 ==
-		 -1)
 		throw DirectoryCannotCreateError
 			("RealFSImpl::make_directory",
 			 dirname,

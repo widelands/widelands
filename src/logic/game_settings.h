@@ -25,7 +25,7 @@
 #include <vector>
 
 #include "io/filesystem/layered_filesystem.h"
-#include "logic/tribe_basic_info.h"
+#include "logic/map_objects/tribes/tribe_basic_info.h"
 #include "logic/widelands.h"
 #include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"

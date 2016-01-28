@@ -133,8 +133,8 @@ void Window::set_center_panel(Panel * panel)
 void Window::update_desired_size()
 {
 	if (m_center_panel) {
-		uint32_t innerw, innerh;
-		m_center_panel->get_desired_size(innerw, innerh);
+		int innerw, innerh;
+		m_center_panel->get_desired_size(&innerw, &innerh);
 		set_desired_size
 			(innerw + get_lborder() + get_rborder(),
 			 innerh + get_tborder() + get_bborder());
@@ -201,22 +201,20 @@ void Window::move_inside_parent() {
 	if (Panel * const parent = get_parent()) {
 		int32_t px = get_x();
 		int32_t py = get_y();
+		if ((parent->get_inner_w() < get_w()) && (px + get_w() <= parent->get_inner_w() || px >= 0))
+			px = (parent->get_inner_w() - get_w()) / 2;
 		if
-			((parent->get_inner_w() < static_cast<uint32_t>(get_w())) &&
-			(px + get_w() <= static_cast<int32_t>(parent->get_inner_w()) || px >= 0))
-			px = (static_cast<int32_t>(parent->get_inner_w()) - get_w()) / 2;
-		if
-			((parent->get_inner_h() < static_cast<uint32_t>(get_h())) &&
-			(py + get_h() < static_cast<int32_t>(parent->get_inner_h()) || py > 0))
+			((parent->get_inner_h() < get_h()) &&
+			(py + get_h() < parent->get_inner_h() || py > 0))
 				py = 0;
 
-		if (parent->get_inner_w() >= static_cast<uint32_t>(get_w())) {
+		if (parent->get_inner_w() >= get_w()) {
 			if (px < 0) {
 				px = 0;
 				if (parent->get_dock_windows_to_edges() && !_docked_left)
 					_docked_left =  true;
-			} else if (px + static_cast<uint32_t>(get_w()) >= parent->get_inner_w()) {
-				px = static_cast<int32_t>(parent->get_inner_w()) - get_w();
+			} else if (px + get_w() >= parent->get_inner_w()) {
+				px = parent->get_inner_w() - get_w();
 				if (parent->get_dock_windows_to_edges() && !_docked_right)
 					_docked_right = true;
 			}
@@ -225,11 +223,11 @@ void Window::move_inside_parent() {
 			else if (_docked_right)
 				px += VT_B_PIXMAP_THICKNESS;
 		}
-		if (parent->get_inner_h() >= static_cast<uint32_t>(get_h())) {
+		if (parent->get_inner_h() >= get_h()) {
 			if (py < 0)
 				py = 0;
-			else if (py + static_cast<uint32_t>(get_h()) > parent->get_inner_h()) {
-				py = static_cast<int32_t>(parent->get_inner_h()) - get_h();
+			else if (py + get_h() > parent->get_inner_h()) {
+				py = parent->get_inner_h() - get_h();
 				if
 					(!_is_minimal
 					&&

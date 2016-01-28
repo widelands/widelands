@@ -25,9 +25,9 @@
 #include "base/i18n.h"
 #include "base/macros.h"
 #include "graphic/graphic.h"
-#include "logic/bob.h"
 #include "logic/game.h"
 #include "logic/map.h"
+#include "logic/map_objects/bob.h"
 #include "logic/player.h"
 #include "profile/profile.h"
 #include "ui_basic/button.h"
@@ -306,7 +306,7 @@ void WatchWindow::do_follow()
 			if (map.find_bobs(area, &bobs))
 				break;
 		//  Find the bob closest to us
-		int32_t closest_dist = -1;
+		uint32_t closest_dist = 0;
 		Widelands::Bob * closest = nullptr;
 		for (uint32_t i = 0; i < bobs.size(); ++i) {
 			Widelands::Bob * const bob = bobs[i];
@@ -314,7 +314,7 @@ void WatchWindow::do_follow()
 			MapviewPixelFunctions::get_pix
 				(map, bob->get_position(), p.x, p.y);
 			p = bob->calc_drawpos(g, p);
-			int32_t const dist =
+			uint32_t const dist =
 				MapviewPixelFunctions::calc_pix_distance(map, p, pos);
 			InteractivePlayer* ipl = game().get_ipl();
 			if

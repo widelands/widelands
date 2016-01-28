@@ -42,8 +42,8 @@ struct ComputerPlayer {
 
 	virtual void think () = 0;
 
-	Widelands::Game & game() const {return m_game;}
-	Widelands::PlayerNumber player_number() {return m_player_number;}
+	Widelands::Game & game() const {return game_;}
+	Widelands::PlayerNumber player_number() {return player_number_;}
 
 	/**
 	 * Interface to a concrete implementation, used to instantiate AIs.
@@ -52,6 +52,8 @@ struct ComputerPlayer {
 	 */
 	struct Implementation {
 		std::string name;
+		std::string descname;
+		std::string icon_filename;
 		virtual ~Implementation() {}
 		virtual ComputerPlayer * instantiate
 			(Widelands::Game &, Widelands::PlayerNumber) const = 0;
@@ -69,8 +71,8 @@ struct ComputerPlayer {
 	static const Implementation * get_implementation(const std::string & name);
 
 private:
-	Widelands::Game & m_game;
-	Widelands::PlayerNumber const m_player_number;
+	Widelands::Game & game_;
+	Widelands::PlayerNumber const player_number_;
 
 	DISALLOW_COPY_AND_ASSIGN(ComputerPlayer);
 };

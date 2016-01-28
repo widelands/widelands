@@ -8,13 +8,13 @@ world:new_immovable_type{
    attributes = {},
    programs = {
       program = {
-	     "animate=idle 20000",
-		 "remove=12"
+        "animate=idle 20000",
+       "remove=12"
       }
    },
    animations = {
       idle = {
-         pictures = { dirname .. "idle.png" },
+         pictures = path.list_files(dirname .. "idle.png"),
          hotspot = { 27, 56 },
       },
    }

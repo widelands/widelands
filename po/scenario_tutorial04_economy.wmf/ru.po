@@ -3,13 +3,14 @@
 # 
 # Translators:
 # Anton Khabarov <2233009@gmail.com>, 2015
+# Федор <Lunar-energy@ya.ru>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-09-05 09:36+0000\n"
-"PO-Revision-Date: 2015-09-05 09:37+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2015-12-11 07:41+0000\n"
+"PO-Revision-Date: 2015-12-12 13:37+0000\n"
+"Last-Translator: Федор <Lunar-energy@ya.ru>\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -36,7 +37,7 @@ msgid ""
 "Building your economy up and making it work well and grow is the main part "
 "of Widelands. But you can’t control the workers directly – they will follow "
 "the general conditions you set."
-msgstr ""
+msgstr "Создайте свою экономику и сделайте так, чтобы она была на высшем уровне. Расти и продвигаться - это основная часть Widelands. Вы не можете контролировать работников напрямую – они будут следовать своим требованиям."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:23
 msgid ""
@@ -46,13 +47,13 @@ msgstr ""
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:31
 msgid "A Peaceful Land"
-msgstr ""
+msgstr "Мирная земля"
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:33
 msgid ""
 "Now about the map: you have settled in a nice valley between two mountains, "
 "rich in marble, iron ore and coal. All were hoping for a peaceful life."
-msgstr ""
+msgstr "Теперь немного о карте: вы поселились в красивой долине между двумя горами, богатыми мрамором, железной рудой и углём. Все надеялись на мирную жизнь."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:34
 msgid ""
@@ -60,74 +61,74 @@ msgid ""
 "the east. A strange aura came from there, and no one wanted to set foot "
 "there. But the border could not be left undefended, and so you constructed "
 "three castles."
-msgstr ""
+msgstr "Но в один прекрасный день, вы обнаружили бесплодную пустошь с заброшенными зданиями на востоке. Странная аура пришла оттуда, и никто не хотел ступить туда. Но границы не могли быть оставлены без защиты, и поэтому вы построили три замка."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:35
 msgid ""
 "You had not been prepared for war, and you have to hurry now to build up an "
 "army."
-msgstr ""
+msgstr "Вы еще не были подготовлены к войне, и вы должны поспешить чтобы создать армию."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:42
 msgid "The Tavern is Burning!"
-msgstr ""
+msgstr "Таверна горит!"
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:44
 msgid "An accident"
-msgstr ""
+msgstr "Несчастный случай"
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:45
 msgid ""
 "Oh no, look at this: our tavern is burning! In all the hurry, our innkeeper "
 "accidentally dropped a torch. She is fine, but we could not extinguish the "
 "fire in time."
-msgstr ""
+msgstr "Только не это, взгляните: наша таверна горит! В спешке, наш трактирщик случайно уронил факел. Таверна в порядке, но мы не могли потушить пожар вовремя."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:53
 msgid "Building statistics"
-msgstr ""
+msgstr "Статистика построек"
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:55
 msgid "Check out your taverns"
-msgstr ""
+msgstr "Проверьте ваши таверны"
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:56
 msgid ""
 "At first, we should find out how many taverns we currently have. Widelands "
 "offers you a window where you can easily check this."
-msgstr ""
+msgstr "Сначала, мы должны выяснить, сколько таверн в настоящее время мы имеем. Widelands предлагает Вам окно, где вы можете легко проверить это."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:58
 msgid ""
 "First, you will have to open the statistics menu (you can find the "
 "corresponding button at the bottom). We will need this menu several times."
-msgstr ""
+msgstr "Во-первых, вам нужно открыть меню статистики (вы можете найти соответствующую кнопку внизу). Мы будем использовать это меню не один раз."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:59
 msgid "Afterwards, choose the ‘Building statistics’."
-msgstr ""
+msgstr "После этого, выберите  \"Статистика построек\"."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:61
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:66
 msgid "Open the building statistics window."
-msgstr ""
+msgstr "Откройте окно \"Статистика построек\"."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:62
 msgid "You can also use the hotkey ‘b’."
-msgstr ""
+msgstr "Вы также можете использовать горячую клавишу \"b\"."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:68
 msgid ""
 "The building statistics window gives you an overview over the buildings you "
 "have."
-msgstr ""
+msgstr "Окно \"Статистика построек\" содержит обзор на здания, которые у вас есть."
 
 #. TRANSLATORS: "it" refers to the building statistics window
 #. TRANSLATORS: "it" refers to the stock menu window
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:72
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:145
 msgid "Open it. You can access it from the statistics menu."
-msgstr ""
+msgstr "Откройте это. Вы можете это открыть из меню статистики."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:73
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:146
@@ -138,7 +139,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:78
 msgid "Building Statistics"
-msgstr ""
+msgstr "Статистика построек"
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:80
 msgid ""
@@ -432,8 +433,8 @@ msgstr ""
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:230
 msgid ""
-"If you want, you can try it out. A soldier needs a wood lance and a helm – "
-"from there on out, you can search backwards."
+"If you want, you can try it out. A soldier needs a wooden spear and a helmet"
+" – from there on out, you can search backwards."
 msgstr ""
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:237
@@ -836,7 +837,7 @@ msgstr ""
 
 #: ../../scripting/format_scenario.lua:36
 msgid "“%s”"
-msgstr ""
+msgstr "“%s”"
 
 #: ../../scripting/format_scenario.lua:146
 msgid "New Objective"

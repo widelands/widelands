@@ -22,12 +22,13 @@
 #include <boost/bind.hpp>
 
 #include "base/utf8.h"
-#include "graphic/font_handler.h"
 #include "graphic/rendertarget.h"
 #include "graphic/text_layout.h"
 #include "graphic/wordwrap.h"
 #include "ui_basic/mouse_constants.h"
 #include "ui_basic/scrollbar.h"
+
+// TODO(GunChleoc): Arabic: Fix positioning for Arabic
 
 namespace UI {
 
@@ -219,6 +220,7 @@ uint32_t MultilineEditbox::Data::prev_char(uint32_t cursor)
 
 	do {
 		--cursor;
+		// TODO(GunChleoc): When switchover to g_fh1 is complete, see if we can go full ICU here.
 	} while (cursor > 0 && Utf8::is_utf8_extended(text[cursor]));
 
 	return cursor;
@@ -480,6 +482,8 @@ void MultilineEditbox::draw(RenderTarget & dst)
 			(Rect(Point(0, 0), get_w(), get_h()), MOUSE_OVER_BRIGHT_FACTOR);
 
 	d->refresh_ww();
+
+	d->ww.set_draw_caret(has_focus());
 
 	d->ww.draw
 		(dst, Point(0, -int32_t(d->scrollbar.get_scrollpos())), Align_Left,

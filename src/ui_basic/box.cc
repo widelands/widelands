@@ -88,12 +88,12 @@ void Box::set_min_desired_breadth(uint32_t min)
  */
 void Box::update_desired_size()
 {
-	uint32_t totaldepth = 0;
-	uint32_t maxbreadth = m_mindesiredbreadth;
+	int totaldepth = 0;
+	int maxbreadth = m_mindesiredbreadth;
 
 	for (uint32_t idx = 0; idx < m_items.size(); ++idx) {
-		uint32_t depth, breadth;
-		get_item_desired_size(idx, depth, breadth);
+		int depth, breadth;
+		get_item_desired_size(idx, &depth, &breadth);
 
 		totaldepth += depth;
 		if (breadth > maxbreadth)
@@ -131,11 +131,11 @@ void Box::update_desired_size()
 void Box::layout()
 {
 	// First pass: compute the depth and adjust whether we have a scrollbar
-	uint32_t totaldepth = 0;
+	int totaldepth = 0;
 
-	for (uint32_t idx = 0; idx < m_items.size(); ++idx) {
-		uint32_t depth, tmp;
-		get_item_desired_size(idx, depth, tmp);
+	for (size_t idx = 0; idx < m_items.size(); ++idx) {
+		int depth, tmp;
+		get_item_desired_size(idx, &depth, &tmp);
 
 		totaldepth += depth;
 	}
@@ -223,8 +223,8 @@ void Box::update_positions()
 		totalbreadth -= Scrollbar::Size;
 
 	for (uint32_t idx = 0; idx < m_items.size(); ++idx) {
-		uint32_t depth, breadth;
-		get_item_size(idx, depth, breadth);
+		int depth, breadth;
+		get_item_size(idx, &depth, &breadth);
 
 		if (m_items[idx].type == Item::ItemPanel) {
 			set_item_size
@@ -317,7 +317,7 @@ void Box::add_inf_space()
  * to the orientation axis.
 */
 void Box::get_item_desired_size
-	(uint32_t const idx, uint32_t & depth, uint32_t & breadth)
+	(uint32_t const idx, int* depth, int* breadth)
 {
 	assert(idx < m_items.size());
 
@@ -333,12 +333,9 @@ void Box::get_item_desired_size
 		break;
 
 	case Item::ItemSpace:
-		depth   = it.u.space;
+		*depth = it.u.space;
 		breadth = 0;
 		break;
-
-	default:
-		throw wexception("Box::get_item_size: bad type %u", it.type);
 	}
 }
 
@@ -347,7 +344,7 @@ void Box::get_item_desired_size
  * for expanding items, at least for now.
  */
 void Box::get_item_size
-	(uint32_t const idx, uint32_t & depth, uint32_t & breadth)
+	(uint32_t const idx, int* depth, int* breadth)
 {
 	assert(idx < m_items.size());
 
@@ -360,7 +357,7 @@ void Box::get_item_size
 /**
  * Set the given items actual size.
  */
-void Box::set_item_size(uint32_t idx, uint32_t depth, uint32_t breadth)
+void Box::set_item_size(uint32_t idx, int depth, int breadth)
 {
 	assert(idx < m_items.size());
 
@@ -419,8 +416,6 @@ void Box::set_item_pos(uint32_t idx, int32_t pos)
 
 	case Item::ItemSpace:
 		break; //  no need to do anything
-	default:
-		assert(false);
 	};
 }
 

@@ -27,14 +27,14 @@
 
 #include "base/i18n.h"
 #include "graphic/graphic.h"
-#include "logic/bob.h"
-#include "logic/building.h"
 #include "logic/field.h"
-#include "logic/instances.h"
 #include "logic/map.h"
+#include "logic/map_objects/bob.h"
+#include "logic/map_objects/map_object.h"
+#include "logic/map_objects/tribes/building.h"
+#include "logic/map_objects/world/resource_description.h"
+#include "logic/map_objects/world/world.h"
 #include "logic/player.h"
-#include "logic/world/resource_description.h"
-#include "logic/world/world.h"
 #include "ui_basic/button.h"
 #include "ui_basic/listselect.h"
 #include "ui_basic/multilinetextarea.h"
@@ -233,20 +233,20 @@ private:
 FieldDebugWindow::FieldDebugWindow
 	(InteractiveBase & parent, Widelands::Coords const coords)
 :
-	UI::Window(&parent, "field_debug", 0, 60, 214, 400, _("Debug Field")),
+	UI::Window(&parent, "field_debug", 0, 60, 300, 400, _("Debug Field")),
 	m_map     (parent.egbase().map()),
 	m_coords  (m_map.get_fcoords(coords)),
 
 	//  setup child panels
-	m_ui_field(this, 0, 0, 214, 280, ""),
+	m_ui_field(this, 0, 0, 300, 280, ""),
 
 	m_ui_immovable
 		(this, "immovable",
-		 0, 280, 214, 24,
+		 0, 280, 300, 24,
 		 g_gr->images().get("images/ui_basic/but0.png"),
 		 ""),
 
-	m_ui_bobs(this, 0, 304, 214, 96)
+	m_ui_bobs(this, 0, 304, 300, 96)
 {
 	m_ui_immovable.sigclicked.connect(boost::bind(&FieldDebugWindow::open_immovable, this));
 
@@ -358,14 +358,19 @@ void FieldDebugWindow::think()
 		}
 	}
 	{
-		Widelands::ResourceIndex ridx = m_coords.field->get_resources();
-		int ramount = m_coords.field->get_resources_amount();
-		int initial_amount = m_coords.field->get_initial_res_amount();
+		const Widelands::DescriptionIndex ridx = m_coords.field->get_resources();
 
-		str += (boost::format("Resource: %s\n")
-				  % ibase().egbase().world().get_resource(ridx)->name().c_str()).str();
+		if (ridx == Widelands::kNoResource) {
+			str += "Resource: None\n";
+		} else {
+			const int ramount = m_coords.field->get_resources_amount();
+			const int initial_amount = m_coords.field->get_initial_res_amount();
 
-		str += (boost::format("  Amount: %i/%i\n") % ramount % initial_amount).str();
+			str += (boost::format("Resource: %s\n")
+					  % ibase().egbase().world().get_resource(ridx)->name().c_str()).str();
+
+			str += (boost::format("  Amount: %i/%i\n") % ramount % initial_amount).str();
+		}
 	}
 
 	m_ui_field.set_text(str.c_str());
