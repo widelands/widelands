@@ -1,5 +1,3 @@
-# NOCOM(GunChleoc): Test this
-
 ; ===================================== ;
 ; Widelands-Inno-Setup-Script           ;
 ; ===================================== ;
