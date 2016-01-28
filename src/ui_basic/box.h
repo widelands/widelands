@@ -20,12 +20,13 @@
 #ifndef WL_UI_BASIC_BOX_H
 #define WL_UI_BASIC_BOX_H
 
+#include <memory>
 #include <vector>
 
 #include "ui_basic/panel.h"
+#include "ui_basic/scrollbar.h"
 
 namespace UI {
-struct Scrollbar;
 
 /**
  * A layouting panel that holds a number of child panels.
@@ -104,7 +105,7 @@ private:
 	};
 
 	bool m_scrolling;
-	Scrollbar * m_scrollbar;
+	std::unique_ptr<Scrollbar> m_scrollbar;
 	uint32_t m_orientation;
 	uint32_t m_mindesiredbreadth;
 	uint32_t m_inner_spacing;
