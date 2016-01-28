@@ -33,32 +33,6 @@
 #include "graphic/rendertarget.h"
 #include "graphic/text/bidi.h"
 
-namespace {
-std::string as_editorfont(const std::string& text,
-								  int ptsize = UI_FONT_SIZE_SMALL,
-								  const RGBColor& clr = UI_FONT_CLR_FG) {
-	// UI Text is always bold due to historic reasons
-	static boost::format
-			f("<rt keep_spaces=1><p><font face=serif size=%i bold=1 shadow=1 color=%s>%s</font></p></rt>");
-	f % ptsize;
-	f % clr.hex_value();
-	f % richtext_escape(text);
-	return f.str();
-}
-
-// This is inefficient; only call when we need the exact width.
-uint32_t text_width(const std::string& text, int ptsize) {
-	return UI::g_fh1->render(as_editorfont(text, ptsize - UI::g_fh1->fontset().size_offset()))->width();
-}
-
-// This is inefficient; only call when we need the exact height.
-uint32_t text_height(const std::string& text, int ptsize) {
-	return UI::g_fh1->render(as_editorfont(text.empty() ? "." : text,
-														ptsize - UI::g_fh1->fontset().size_offset()))->height();
-}
-
-} // namespace
-
 namespace UI {
 
 /**
