@@ -13,7 +13,6 @@ import sys
 # and writes the translator and developer credits to ./txts/developers.lua
 # The locale information is written to ../data/i18n/locales.lua.
 
-# NOCOM(GunChleoc): Test this!
 base_path = os.path.abspath(os.path.join(os.path.dirname(__file__),os.path.pardir))
 
 print("Reading locales from JSON:")
