@@ -979,7 +979,7 @@ void Ship::log_general_info(const EditorGameBase& egbase) {
 		      shipping_item.m_destination_dock.serial());
 	}
 }
-// NOCOM(GunChleoc): Test all ship messages.
+
 /**
  * Send a message to the owning player.
  *

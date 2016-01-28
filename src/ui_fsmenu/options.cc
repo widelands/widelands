@@ -432,7 +432,6 @@ void FullscreenMenuOptions::add_languages_to_list(const std::string& current_loc
 
 		// We start with the locale directory so we can pick up locales
 		// that don't have a configuration file yet.
-		// NOCOM(GunChleoc): Review this
 		std::unique_ptr<FileSystem> fs(&FileSystem::create(i18n::get_localedir()));
 		FilenameSet files = fs->list_directory(".");
 

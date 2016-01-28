@@ -1,3 +1,5 @@
+# NOCOM(GunChleoc): Review this
+
 project (widelands)
 
 cmake_minimum_required (VERSION 2.8.7)
@@ -11,14 +13,12 @@ if (CMAKE_SOURCE_DIR STREQUAL CMAKE_BINARY_DIR)
   message(FATAL_ERROR "Build directory and source directory must not be the same.")
 endif (CMAKE_SOURCE_DIR STREQUAL CMAKE_BINARY_DIR)
 
-# NOCOM(GunChleoc): Review this
 # Define the directory structure for installation - will be hardcoded in WL bin
 # (through config.h). If not specified, we are going to use the directory where
 # the executable is in. Also on Linux.
 # Packagers (or people using make install) have to set this variable to an absolute path.
 wl_set_if_unset(WL_INSTALL_BASEDIR ".")
 
-# NOCOM(GunChleoc): Review this
 # Define the directory structure for installation of the data files - will be hardcoded
 # in WL bin (through config.h). If not specified, we are going to use the "data" directory
 # below the directory where the executable is in. Also on Linux.

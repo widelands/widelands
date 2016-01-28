@@ -146,14 +146,18 @@ SpinBox::SpinBox
 			(box_, "-",
 			 0, 0, buttonh, buttonh,
 			 sbi_->background,
-			 g_gr->images().get(is_big ? "images/ui_basic/scrollbar_left.png" : "images/ui_basic/scrollbar_down.png"),
+			 g_gr->images().get(is_big ?
+										  "images/ui_basic/scrollbar_left.png" :
+										  "images/ui_basic/scrollbar_down.png"),
 			 _("Decrease the value"));
 	sbi_->button_plus =
 		new Button
 			(box_, "+",
 			 0, 0, buttonh, buttonh,
 			 sbi_->background,
-			 g_gr->images().get(is_big ? "images/ui_basic/scrollbar_right.png" : "images/ui_basic/scrollbar_up.png"),
+			 g_gr->images().get(is_big ?
+										  "images/ui_basic/scrollbar_right.png" :
+										  "images/ui_basic/scrollbar_up.png"),
 			 _("Increase the value"));
 
 	if (is_big) {
