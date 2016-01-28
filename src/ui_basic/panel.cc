@@ -50,7 +50,7 @@ const Image* Panel::s_default_cursor_click = nullptr;
  */
 Panel::Panel
 	(Panel * const nparent,
-	 const int32_t nx, const int32_t ny, const uint32_t nw, const uint32_t nh,
+	 const int nx, const int ny, const int nw, const int nh,
 	 const std::string & tooltip_text)
 	:
 	_parent(nparent), _fchild(nullptr), _lchild(nullptr), _mousein(nullptr), _focus(nullptr),
@@ -154,7 +154,7 @@ int Panel::do_run()
 
 	uint32_t minTime;
 	{
-		int32_t maxfps = g_options.pull_section("global").get_int("maxfps", 25);
+		int maxfps = g_options.pull_section("global").get_int("maxfps", 25);
 		if (maxfps < 5)
 			maxfps = 5;
 		minTime = 1000 / maxfps;
@@ -237,13 +237,13 @@ void Panel::end() {}
  * \note NEVER override this function. If you feel the urge to override this
  * function, you probably want to override \ref layout.
  */
-void Panel::set_size(const uint32_t nw, const uint32_t nh)
+void Panel::set_size(const int nw, const int nh)
 {
 	if (nw == _w && nh == _h)
 		return;
 
-	uint32_t const upw = std::min(nw, _w);
-	uint32_t const uph = std::min(nh, _h);
+	int const upw = std::min(nw, _w);
+	int const uph = std::min(nh, _h);
 	_w = nw;
 	_h = nh;
 
@@ -269,10 +269,10 @@ void Panel::set_pos(const Point n) {
  * Set \p w and \p h to the desired
  * width and height of this panel, respectively.
  */
-void Panel::get_desired_size(uint32_t & w, uint32_t & h) const
+void Panel::get_desired_size(int* w, int* h) const
 {
-	w = _desired_w;
-	h = _desired_h;
+	*w = _desired_w;
+	*h = _desired_h;
 }
 
 /**
@@ -285,7 +285,7 @@ void Panel::get_desired_size(uint32_t & w, uint32_t & h) const
  *
  * \note NEVER override this function
  */
-void Panel::set_desired_size(uint32_t w, uint32_t h)
+void Panel::set_desired_size(int w, int h)
 {
 	if (_desired_w == w && _desired_h == h)
 		return;
@@ -367,7 +367,7 @@ void Panel::layout()
 /**
  * Set the size of the inner area (total area minus border)
  */
-void Panel::set_inner_size(uint32_t const nw, uint32_t const nh)
+void Panel::set_inner_size(int const nw, int const nh)
 {
 	set_size(nw + _lborder + _rborder, nh + _tborder + _bborder);
 }
@@ -377,7 +377,7 @@ void Panel::set_inner_size(uint32_t const nw, uint32_t const nh)
  * Note that since position and total size aren't changed, so that the size
  * and position of the inner area will change.
  */
-void Panel::set_border(uint32_t l, uint32_t r, uint32_t t, uint32_t b)
+void Panel::set_border(int l, int r, int t, int b)
 {
 	_lborder = l;
 	_rborder = r;
@@ -451,12 +451,12 @@ void Panel::draw_overlay(RenderTarget &) {}
 /**
  * Mark a part of a panel for updating.
  */
-void Panel::update(int32_t x, int32_t y, int32_t w, int32_t h)
+void Panel::update(int x, int y, int w, int h)
 {
 	if
-		(x >= static_cast<int32_t>(_w) || x + w <= 0
+		(x >= _w || x + w <= 0
 		 ||
-		 y >= static_cast<int32_t>(_h) || y + h <= 0)
+		 y >= _h || y + h <= 0)
 		return;
 
 	if (_parent) {

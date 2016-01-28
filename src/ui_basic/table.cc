@@ -248,9 +248,9 @@ void Table<void *>::fit_height(uint32_t entries) {
 	if (entries == 0) {
 		entries = size();
 	}
-	uint32_t tablewidth;
-	uint32_t tableheight;
-	get_desired_size(tablewidth, tableheight);
+	int tablewidth;
+	int tableheight;
+	get_desired_size(&tablewidth, &tableheight);
 	tableheight = m_headerheight + 2 + get_lineheight() * entries;
 	set_desired_size(tablewidth, tableheight);
 }
@@ -345,7 +345,7 @@ void Table<void *>::draw(RenderTarget & dst)
 				curx += curw;
 				continue;
 			}
-			const Image* entry_text_im = UI::g_fh1->render(as_uifont(entry_string, m_fontsize));
+			const Image* entry_text_im = UI::g_fh1->render(as_uifont(richtext_escape(entry_string), m_fontsize));
 
 			if (alignment & Align_Right) {
 				point.x += curw - 2 * picw;

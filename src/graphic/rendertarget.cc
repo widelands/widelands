@@ -329,10 +329,10 @@ void RenderTarget::do_blit_animation(const Point& dst,
 	Rect destination_rect(dst.x - animation.hotspot().x + source_rect.x,
 	                      dst.y - animation.hotspot().y + source_rect.y, source_rect.w,
 	                      source_rect.h);
-
 	Rect srcrc(source_rect);
-	if (to_surface_geometry(&destination_rect, &srcrc))
+	if (to_surface_geometry(&destination_rect, &srcrc)) {
 		animation.blit(time, destination_rect.origin(), srcrc, player_color, m_surface);
+	}
 
 	// Look if there is a sound effect registered for this frame and trigger the
 	// effect (see SoundHandler::stereo_position).
