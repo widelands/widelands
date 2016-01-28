@@ -24,13 +24,13 @@
 #include "logic/constants.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
+#include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/player.h"
-#include "logic/tribes/tribe_descr.h"
 #include "wui/interactive_player.h"
 
 namespace Widelands {
 
-constexpr uint16_t kCurrentPacketVersion = 18;
+constexpr uint16_t kCurrentPacketVersion = 19;
 
 void GamePlayerInfoPacket::read
 	(FileSystem & fs, Game & game, MapObjectLoader *) {
@@ -62,6 +62,7 @@ void GamePlayerInfoPacket::read
 
 					player.set_ai(fr.c_string());
 					player.read_statistics(fr);
+					player.read_remaining_shipnames(fr);
 
 					player.m_casualties = fr.unsigned_32();
 					player.m_kills      = fr.unsigned_32();
@@ -69,11 +70,6 @@ void GamePlayerInfoPacket::read
 					player.m_msites_defeated     = fr.unsigned_32();
 					player.m_civil_blds_lost     = fr.unsigned_32();
 					player.m_civil_blds_defeated = fr.unsigned_32();
-					for (int32_t ai_pos = 0; ai_pos < kAIDataSize; ++ai_pos) {
-						player.m_ai_data_int32[ai_pos] = fr.signed_32();
-						player.m_ai_data_uint32[ai_pos] = fr.unsigned_32();
-						player.m_ai_data_int16[ai_pos] = fr.unsigned_16();
-					}
 				}
 			}
 			game.read_statistics(fr);
@@ -115,17 +111,13 @@ void GamePlayerInfoPacket::write
 		fw.c_string(plr->m_ai.c_str());
 
 		plr->write_statistics(fw);
+		plr->write_remaining_shipnames(fw);
 		fw.unsigned_32(plr->casualties());
 		fw.unsigned_32(plr->kills     ());
 		fw.unsigned_32(plr->msites_lost        ());
 		fw.unsigned_32(plr->msites_defeated    ());
 		fw.unsigned_32(plr->civil_blds_lost    ());
 		fw.unsigned_32(plr->civil_blds_defeated());
-		for (int32_t ai_pos = 0; ai_pos < kAIDataSize; ++ai_pos) {
-			fw.signed_32(plr->m_ai_data_int32[ai_pos]);
-			fw.unsigned_32(plr->m_ai_data_uint32[ai_pos]);
-			fw.unsigned_16(plr->m_ai_data_int16[ai_pos]);
-		}
 	} else
 		fw.unsigned_8(0); //  Player is NOT in game.
 

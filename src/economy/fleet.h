@@ -23,7 +23,7 @@
 #include <boost/shared_ptr.hpp>
 
 #include "base/macros.h"
-#include "logic/instances.h"
+#include "logic/map_objects/map_object.h"
 #include "logic/widelands_geometry.h"
 
 namespace Widelands {

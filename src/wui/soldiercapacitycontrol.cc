@@ -20,8 +20,8 @@
 #include "wui/soldiercapacitycontrol.h"
 
 #include "graphic/graphic.h"
+#include "logic/map_objects/tribes/soldiercontrol.h"
 #include "logic/player.h"
-#include "logic/soldiercontrol.h"
 #include "ui_basic/button.h"
 #include "ui_basic/radiobutton.h"
 #include "wui/interactive_gamebase.h"

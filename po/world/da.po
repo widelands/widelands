@@ -3,13 +3,14 @@
 # 
 # Translators:
 # Joe Hansen <joedalton2@yahoo.dk>, 2009,2015
+# Ole Laursen <ole.laursen@gmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-12-11 07:41+0000\n"
-"PO-Revision-Date: 2015-12-11 07:42+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2015-12-14 05:31+0000\n"
+"PO-Revision-Date: 2016-01-03 23:07+0000\n"
+"Last-Translator: Ole Laursen <ole.laursen@gmail.com>\n"
 "Language-Team: Danish (http://www.transifex.com/widelands/widelands/language/da/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -107,7 +108,7 @@ msgstr "Græs"
 #: ../../world/immovables/manmade/artifacts/artifact02/init.lua:5
 #: ../../world/immovables/manmade/artifacts/artifact03/init.lua:5
 msgid "Artifact"
-msgstr ""
+msgstr "Artefakt"
 
 #: ../../world/immovables/manmade/bar-ruin00/init.lua:5
 #: ../../world/immovables/manmade/bar-ruin01/init.lua:5
@@ -150,42 +151,42 @@ msgstr "Grus"
 #: ../../world/immovables/rocks/greenland_rocks1/init.lua:13
 #: ../../world/immovables/rocks/winterland_rocks1/init.lua:13
 msgid "Rocks 1"
-msgstr ""
+msgstr "Sten 1"
 
 #: ../../world/immovables/rocks/blackland_rocks2/init.lua:13
 #: ../../world/immovables/rocks/desert_rocks2/init.lua:13
 #: ../../world/immovables/rocks/greenland_rocks2/init.lua:13
 #: ../../world/immovables/rocks/winterland_rocks2/init.lua:13
 msgid "Rocks 2"
-msgstr ""
+msgstr "Sten 2"
 
 #: ../../world/immovables/rocks/blackland_rocks3/init.lua:13
 #: ../../world/immovables/rocks/desert_rocks3/init.lua:13
 #: ../../world/immovables/rocks/greenland_rocks3/init.lua:13
 #: ../../world/immovables/rocks/winterland_rocks3/init.lua:13
 msgid "Rocks 3"
-msgstr ""
+msgstr "Sten 3"
 
 #: ../../world/immovables/rocks/blackland_rocks4/init.lua:13
 #: ../../world/immovables/rocks/desert_rocks4/init.lua:13
 #: ../../world/immovables/rocks/greenland_rocks4/init.lua:13
 #: ../../world/immovables/rocks/winterland_rocks4/init.lua:13
 msgid "Rocks 4"
-msgstr ""
+msgstr "Sten 4"
 
 #: ../../world/immovables/rocks/blackland_rocks5/init.lua:13
 #: ../../world/immovables/rocks/desert_rocks5/init.lua:13
 #: ../../world/immovables/rocks/greenland_rocks5/init.lua:13
 #: ../../world/immovables/rocks/winterland_rocks5/init.lua:13
 msgid "Rocks 5"
-msgstr ""
+msgstr "Sten 5"
 
 #: ../../world/immovables/rocks/blackland_rocks6/init.lua:13
 #: ../../world/immovables/rocks/desert_rocks6/init.lua:13
 #: ../../world/immovables/rocks/greenland_rocks6/init.lua:13
 #: ../../world/immovables/rocks/winterland_rocks6/init.lua:13
 msgid "Rocks 6"
-msgstr ""
+msgstr "Sten 6"
 
 #: ../../world/immovables/skeleton1/init.lua:5
 #: ../../world/immovables/skeleton3/init.lua:5
@@ -454,83 +455,83 @@ msgstr "Eg (gammelt træ)"
 
 #: ../../world/immovables/trees/palm_borassus/init.lua:12
 msgid "Borassus Palm (Sapling)"
-msgstr "Borassus (ung palme)"
+msgstr "Borassuspalme (ung palme)"
 
 #: ../../world/immovables/trees/palm_borassus/init.lua:36
 msgid "Borassus Palm (Pole)"
-msgstr "Borassus (pæl)"
+msgstr "Borassuspalme (pæl)"
 
 #: ../../world/immovables/trees/palm_borassus/init.lua:60
 msgid "Borassus Palm (Mature)"
-msgstr "Borassus (voksen palme)"
+msgstr "Borassuspalme (voksen palme)"
 
 #: ../../world/immovables/trees/palm_borassus/init.lua:84
 msgid "Borassus Palm (Old)"
-msgstr "Borassus (gammel palme)"
+msgstr "Borassuspalme (gammel palme)"
 
 #: ../../world/immovables/trees/palm_coconut/init.lua:12
 msgid "Coconut Palm (Sapling)"
-msgstr "Kokos (ung palme)"
+msgstr "Kokospalme (ung palme)"
 
 #: ../../world/immovables/trees/palm_coconut/init.lua:36
 msgid "Coconut Palm (Pole)"
-msgstr "Kokus (pæl)"
+msgstr "Kokospalme (pæl)"
 
 #: ../../world/immovables/trees/palm_coconut/init.lua:60
 msgid "Coconut Palm (Mature)"
-msgstr "Kokus (voksen palme)"
+msgstr "Kokospalme(voksen palme)"
 
 #: ../../world/immovables/trees/palm_coconut/init.lua:84
 msgid "Coconut Palm (Old)"
-msgstr "Kokus (gammel palme)"
+msgstr "Kokospalme (gammel palme)"
 
 #: ../../world/immovables/trees/palm_date/init.lua:12
 msgid "Date Palm (Sapling)"
-msgstr "Daddel (ung palme)"
+msgstr "Daddelpalme (ung palme)"
 
 #: ../../world/immovables/trees/palm_date/init.lua:36
 msgid "Date Palm (Pole)"
-msgstr "Daddel (pæl)"
+msgstr "Daddelpalme (pæl)"
 
 #: ../../world/immovables/trees/palm_date/init.lua:60
 msgid "Date Palm (Mature)"
-msgstr "Daddel (voksen palme)"
+msgstr "Daddelpalme (voksen palme)"
 
 #: ../../world/immovables/trees/palm_date/init.lua:87
 msgid "Date Palm (Old)"
-msgstr "Daddel (gammel palme)"
+msgstr "Daddelpalme (gammel palme)"
 
 #: ../../world/immovables/trees/palm_oil/init.lua:12
 msgid "Oil Palm (Sapling)"
-msgstr "Olie (ung palme)"
+msgstr "Oliepalme (ung palme)"
 
 #: ../../world/immovables/trees/palm_oil/init.lua:36
 msgid "Oil Palm (Pole)"
-msgstr "Olie (palmepæl)"
+msgstr "Oliepalme (palmepæl)"
 
 #: ../../world/immovables/trees/palm_oil/init.lua:60
 msgid "Oil Palm (Mature)"
-msgstr "Olie (voksen palme)"
+msgstr "Oliepalme (voksen palme)"
 
 #: ../../world/immovables/trees/palm_oil/init.lua:88
 msgid "Oil Palm (Old)"
-msgstr "Olie (gammel palme)"
+msgstr "Oliepalme (gammel palme)"
 
 #: ../../world/immovables/trees/palm_roystonea/init.lua:12
 msgid "Roystonea regia Palm (Sapling)"
-msgstr "Roystonea regia (ung palme)"
+msgstr "Roystonea regia-palme (ung palme)"
 
 #: ../../world/immovables/trees/palm_roystonea/init.lua:36
 msgid "Roystonea regia Palm (Pole)"
-msgstr "Roystonea regia (palmepæl)"
+msgstr "Roystonea regia-palme (palmepæl)"
 
 #: ../../world/immovables/trees/palm_roystonea/init.lua:60
 msgid "Roystonea regia Palm (Mature)"
-msgstr "Roysonea regia (voksen palme)"
+msgstr "Roystonea regia-palme (voksen palme)"
 
 #: ../../world/immovables/trees/palm_roystonea/init.lua:84
 msgid "Roystonea regia Palm (Old)"
-msgstr "Roysonea regia (gammel palme)"
+msgstr "Roystonea regia-palme (gammel palme)"
 
 #: ../../world/immovables/trees/rowan/init.lua:12
 msgid "Rowan (Sapling)"
@@ -630,11 +631,11 @@ msgstr "Diverse"
 
 #: ../../world/init.lua:17
 msgid "Artifacts"
-msgstr ""
+msgstr "Artefakter"
 
 #: ../../world/init.lua:17
 msgid "These immovables are used by the win condition “Artifacts”."
-msgstr ""
+msgstr "Disse faste ting bruges af sejrsbetingelsen \"Artefakter\"."
 
 #: ../../world/init.lua:23
 msgid "Plants"
@@ -646,7 +647,7 @@ msgstr "Stensætning"
 
 #: ../../world/init.lua:35
 msgid "Rocks"
-msgstr ""
+msgstr "Klipper"
 
 #: ../../world/init.lua:41
 msgid "Coniferous Trees"
@@ -734,7 +735,7 @@ msgstr "Eng"
 #: ../../world/terrains/init.lua:1084 ../../world/terrains/init.lua:1167
 #: ../../world/terrains/init.lua:1186
 msgid "likes trees"
-msgstr ""
+msgstr "kan lide træer"
 
 #: ../../world/terrains/init.lua:147 ../../world/terrains/init.lua:1019
 msgid "Steppe"
@@ -764,7 +765,7 @@ msgstr "Bjerg"
 #: ../../world/terrains/init.lua:863 ../../world/terrains/init.lua:882
 #: ../../world/terrains/init.lua:1162 ../../world/terrains/init.lua:1181
 msgid "Forested Mountain"
-msgstr ""
+msgstr "Skovdækket bjerg"
 
 #: ../../world/terrains/init.lua:299
 msgid "Swamp"
@@ -807,7 +808,7 @@ msgstr "Tundra"
 
 #: ../../world/terrains/init.lua:752
 msgid "Tundra Taiga"
-msgstr "Tundra/sneskove"
+msgstr "Tundra/sneskov"
 
 #: ../../world/terrains/init.lua:768
 msgid "Taiga"

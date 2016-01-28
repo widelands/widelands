@@ -65,7 +65,7 @@ EditorToolsizeMenu::EditorToolsizeMenu
 	m_decrease.set_repeating(true);
 	update(parent.get_sel_radius());
 
-	if (eia().tools.current().has_size_one()) {
+	if (eia().tools()->current().has_size_one()) {
 		set_buttons_enabled(false);
 	}
 

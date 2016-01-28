@@ -5,13 +5,11 @@ tribes:new_tribe {
 
    animations = {
       frontier = {
-         template = "frontier_??",
-         directory = dirname .. "images/barbarians/",
+         pictures = path.list_files(dirname .. "images/barbarians/frontier_??.png"),
          hotspot = { 1, 19 },
       },
       flag = {
-         template = "flag_??",
-         directory = dirname .. "images/barbarians/",
+         pictures = path.list_files(dirname .. "images/barbarians/flag_??.png"),
          hotspot = { 10, 38 },
          fps = 5
       }
@@ -236,6 +234,43 @@ tribes:new_tribe {
       -- Partially Finished Buildings - these are the same 2 buildings for all tribes
       "constructionsite",
       "dismantlesite",
+   },
+
+   ship_names = {
+      "Agilaz",
+      "Aslaug",
+      "Baldr",
+      "Bear",
+      "Beowulf",
+      "Boldreth",
+      "Dellingr",
+      "Fulla",
+      "Gersemi",
+      "Hagbard",
+      "Heidrek",
+      "Heimdallr",
+      "Hnoss",
+      "Hrothgar",
+      "Ingeld",
+      "Karl Hundason",
+      "Khantrukh",  
+      "Lynx",
+      "Mani",
+      "Odin",
+      "Red Fox",
+      "Saxnot",
+      "Sigmund",
+      "Sigurd",
+      "Snotra",
+      "Thor",
+      "Thron",
+      "Ullr",
+      "Valdar",
+      "Vili",
+      "Volf",
+      "Wild Boar",
+      "Wolverine",
+      "Yrsa",
    },
 
    -- Special types

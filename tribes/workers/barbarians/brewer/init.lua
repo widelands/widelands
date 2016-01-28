@@ -2,12 +2,11 @@ dirname = path.dirname(__file__)
 
 animations = {
    idle = {
-      template = "idle_??",
-      directory = dirname,
+      pictures = path.list_files(dirname .. "idle_??.png"),
       hotspot = { 7, 22 },
    }
 }
-add_worker_animations(animations, "walk", dirname, "walk", {23, 23}, 10)
+add_worker_animations(animations, "walk", dirname, "walk", {12, 23}, 10)
 add_worker_animations(animations, "walkload", dirname, "walkload", {11, 24}, 10)
 
 

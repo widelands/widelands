@@ -34,22 +34,22 @@
 #include "economy/road.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
-#include "logic/building.h"
-#include "logic/checkstep.h"
 #include "logic/cmd_delete_message.h"
 #include "logic/cmd_luacoroutine.h"
 #include "logic/constants.h"
-#include "logic/constructionsite.h"
 #include "logic/findimmovable.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
-#include "logic/militarysite.h"
+#include "logic/map_objects/checkstep.h"
+#include "logic/map_objects/tribes/building.h"
+#include "logic/map_objects/tribes/constructionsite.h"
+#include "logic/map_objects/tribes/militarysite.h"
+#include "logic/map_objects/tribes/soldier.h"
+#include "logic/map_objects/tribes/soldiercontrol.h"
+#include "logic/map_objects/tribes/trainingsite.h"
+#include "logic/map_objects/tribes/tribe_descr.h"
+#include "logic/map_objects/tribes/warehouse.h"
 #include "logic/playercommand.h"
-#include "logic/soldier.h"
-#include "logic/soldiercontrol.h"
-#include "logic/trainingsite.h"
-#include "logic/tribes/tribe_descr.h"
-#include "logic/warehouse.h"
 #include "scripting/lua_table.h"
 #include "sound/sound_handler.h"
 #include "wui/interactive_player.h"
@@ -161,10 +161,7 @@ Player::Player
 	m_current_consumed_statistics(the_egbase.tribes().nrwares()),
 	m_ware_productions(the_egbase.tribes().nrwares()),
 	m_ware_consumptions(the_egbase.tribes().nrwares()),
-	m_ware_stocks(the_egbase.tribes().nrwares()),
-	m_ai_data_int32          (),
-	m_ai_data_uint32         (),
-	m_ai_data_int16          ()
+	m_ware_stocks(the_egbase.tribes().nrwares())
 {
 	set_name(name);
 
@@ -194,13 +191,19 @@ Player::Player
 			}
 		});
 
-	// Subscribe to NoteFieldTransformed.
-	field_transformed_subscriber_ =
-		Notifications::subscribe<NoteFieldTransformed>([this](const NoteFieldTransformed& note) {
+	// Subscribe to NoteFieldTerrainChanged.
+	field_terrain_changed_subscriber_ =
+		Notifications::subscribe<NoteFieldTerrainChanged>([this](const NoteFieldTerrainChanged& note) {
 			if (vision(note.map_index) > 1) {
 				rediscover_node(egbase().map(), egbase().map()[0], note.fc);
 			}
 		});
+
+	//Populating remaining_shipnames vector
+	for (const auto& shipname : tribe_descr.get_ship_names()) {
+		m_remaining_shipnames.insert(shipname);
+	}
+
 }
 
 
@@ -852,8 +855,7 @@ Player::Economies::size_type Player::get_economy_number
 		 ++it)
 		if (*it == economy)
 			return it - economies_begin;
-	assert(false); // never here
-	return 0;
+	NEVER_HERE();
 }
 
 /************  Military stuff  **********/
@@ -1309,34 +1311,33 @@ const std::string & Player::get_ai() const {
 	return m_ai;
 }
 
-void Player::set_ai_data(int32_t value, uint32_t position) {
-	assert(position < kAIDataSize);
-	m_ai_data_int32[position] = value;
+/**
+ * Pick random name from remaining names (if any)
+ */
+const std::string Player::pick_shipname() {
+	if (!m_remaining_shipnames.empty()) {
+		Game & game = dynamic_cast<Game&>(egbase());
+		assert (is_a(Game, &egbase()));
+		const uint32_t index = game.logic_rand() % m_remaining_shipnames.size();
+		std::unordered_set<std::string>::iterator it = m_remaining_shipnames.begin();
+		std::advance(it, index);
+		std::string new_name = *it;
+		m_remaining_shipnames.erase(it);
+		return new_name;
+	}
+	return "Ship";
 }
 
-void Player::set_ai_data(uint32_t value, uint32_t position) {
-	assert(position < kAIDataSize);
-	m_ai_data_uint32[position] = value;
-}
-
-void Player::set_ai_data(int16_t value, uint32_t position) {
-	assert(position < kAIDataSize);
-	m_ai_data_int16[position] = value;
-}
-
-void Player::get_ai_data(int32_t * value, uint32_t position) {
-	assert(position < kAIDataSize);
-	*value = m_ai_data_int32[position];
-}
-
-void Player::get_ai_data(uint32_t * value, uint32_t position) {
-	assert(position < kAIDataSize);
-	*value = m_ai_data_uint32[position];
-}
-
-void Player::get_ai_data(int16_t * value, uint32_t position) {
-	assert(position < kAIDataSize);
-	*value = m_ai_data_int16[position];
+/**
+ * Read remaining ship indexes to the give file
+ *
+ * \param fr source stream
+ */
+void Player::read_remaining_shipnames(FileRead & fr) {
+	const uint16_t count = fr.unsigned_16();
+	for (uint16_t i = 0; i < count; ++i) {
+		m_remaining_shipnames.insert(fr.string());
+	}
 }
 
 /**
@@ -1420,6 +1421,15 @@ void Player::read_statistics(FileRead & fr)
 	assert(m_ware_productions[0].size() == m_ware_stocks[0].size());
 }
 
+/**
+ * Write remaining ship indexes to the give file
+ */
+void Player::write_remaining_shipnames(FileWrite & fw) const {
+	fw.unsigned_16(m_remaining_shipnames.size());
+	for (const auto& shipname : m_remaining_shipnames){
+		fw.string(shipname);
+	}
+}
 
 /**
  * Write statistics data to the give file

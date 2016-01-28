@@ -33,7 +33,7 @@ GameChatPanel::GameChatPanel
 	 ChatProvider & chat)
 	:
 	UI::Panel(parent, x, y, w, h),
-	m_chat   (chat),
+	chat_   (chat),
 	chatbox  (this, 0, 0, w, h - 25, "", UI::Align::kLeft, 1),
 	editbox  (this, 0, h - 20, w,  20),
 	chat_message_counter(std::numeric_limits<uint32_t>::max())
@@ -57,7 +57,7 @@ GameChatPanel::GameChatPanel
  */
 void GameChatPanel::recalculate()
 {
-	const std::vector<ChatMessage> msgs = m_chat.get_messages();
+	const std::vector<ChatMessage> msgs = chat_.get_messages();
 
 	std::string str = "<rt>";
 	for (uint32_t i = 0; i < msgs.size(); ++i) {
@@ -75,7 +75,7 @@ void GameChatPanel::recalculate()
 		// Note: if many messages arrive simultaneously,
 		// the latest is a system message and some others
 		// are not, then this act wrong!
-		if (!msgs.back().sender.empty() && !m_chat.sound_off())
+		if (!msgs.back().sender.empty() && !chat_.sound_off())
 		{
 			// The latest message is not a system message
 			if (std::string::npos == msgs.back().sender.find("(IRC)") && chat_message_counter < msgs.size())
@@ -104,7 +104,7 @@ void GameChatPanel::key_enter()
 	const std::string & str = editbox.text();
 
 	if (str.size())
-		m_chat.send(str);
+		chat_.send(str);
 
 	editbox.set_text("");
 	sent();

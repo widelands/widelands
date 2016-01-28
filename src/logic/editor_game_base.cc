@@ -31,23 +31,23 @@ rnrnrn * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #include "economy/road.h"
 #include "graphic/color.h"
 #include "graphic/graphic.h"
-#include "logic/battle.h"
-#include "logic/building.h"
 #include "logic/constants.h"
-#include "logic/dismantlesite.h"
 #include "logic/findimmovable.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
-#include "logic/instances.h"
+#include "logic/map_objects/map_object.h"
+#include "logic/map_objects/tribes/battle.h"
+#include "logic/map_objects/tribes/building.h"
+#include "logic/map_objects/tribes/dismantlesite.h"
+#include "logic/map_objects/tribes/tribe_descr.h"
+#include "logic/map_objects/tribes/tribes.h"
+#include "logic/map_objects/tribes/ware_descr.h"
+#include "logic/map_objects/tribes/worker.h"
+#include "logic/map_objects/world/world.h"
 #include "logic/mapregion.h"
 #include "logic/player.h"
 #include "logic/playersmanager.h"
 #include "logic/roadtype.h"
-#include "logic/tribes/tribe_descr.h"
-#include "logic/tribes/tribes.h"
-#include "logic/ware_descr.h"
-#include "logic/worker.h"
-#include "logic/world/world.h"
 #include "scripting/logic.h"
 #include "scripting/lua_table.h"
 #include "sound/sound_handler.h"
@@ -521,8 +521,7 @@ void EditorGameBase::set_road
 		mask = RoadType::kMask << RoadType::kEast;
 		break;
 	default:
-		assert(false);
-		break;
+		NEVER_HERE();
 	}
 	uint8_t const road = f.field->get_roads() & mask;
 	MapIndex const           i = f        .field - &first_field;
@@ -635,9 +634,8 @@ void EditorGameBase::conquer_area_no_building
 	assert     (player_area.x < map().get_width());
 	assert(0 <= player_area.y);
 	assert     (player_area.y < map().get_height());
-	const Field & first_field = map()[0];
-	assert(&first_field <= player_area.field);
-	assert(player_area.field < &first_field + map().max_index());
+	assert(&map()[0] <= player_area.field);
+	assert(player_area.field < &map()[0] + map().max_index());
 	assert(0 < player_area.player_number);
 	assert    (player_area.player_number <= map().get_nrplayers());
 	MapRegion<Area<FCoords> > mr(map(), player_area);

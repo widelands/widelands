@@ -53,15 +53,15 @@ struct Message {
 
 	/**
 	 * A new message to be displayed to the player
-	 * \param msgtype The type of message (economy, geologists, etc.)
-	 * \param sent_time The (game) time at which the message is sent
-	 * \param t The message title
-	 * \param b The message body
-	 * \param c The message coords. The player will be able to taken there.
-	 * Defaults to Coords::null()
-	 * \param ser A MapObject serial. If non null, the message will be deleted once
-	 * the object is removed from the game. Defaults to 0
-	 * \param s The message status. Defaults to Status::New
+	 * \param msgtype    The type of message (economy, geologists, etc.)
+	 * \param sent_time  The (game) time at which the message is sent
+	 * \param init_title The intial message title
+	 * \param init_body  The initial message body
+	 * \param c          The message coords. The player will be able to position its view there.
+	 *                   Defaults to Coords::null()
+	 * \param ser        A MapObject serial. If non null, the message will be deleted once
+	 *                   the object is removed from the game. Defaults to 0
+	 * \param s          The message status. Defaults to Status::New
 	 */
 	Message
 		(Message::Type             msgtype,

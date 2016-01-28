@@ -22,18 +22,13 @@ tribes:new_militarysite_type {
 
    animations = {
       idle = {
-         template = "idle_??",
-         directory = dirname,
+         pictures = path.list_files(dirname .. "idle_??.png"),
          hotspot = { 42, 65 },
       }
    },
 
    aihints = {
       fighting = true
-   },
-
-   outputs = {
-      "atlanteans_soldier",
    },
 
    max_soldiers = 3,

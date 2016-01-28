@@ -3,17 +3,19 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
+# adrien vigneron <adrienvigneron@ml1.net>, 2015
 # Bouchard Renaud <renaud.bouchard@gmail.com>, 2014
 # hugues martin, 2015
-# Jaypad <ju-ju@nataju.fr>, 2015
+# Jaypad <ju-ju@nataju.fr>, 2015-2016
+# Renaud Bouchard, 2015
 # Tubuntu <tubuntu@testimonium.be>, 2015
 # wl-zocker, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-12-11 07:41+0000\n"
-"PO-Revision-Date: 2015-12-13 20:24+0000\n"
+"POT-Creation-Date: 2015-12-14 05:31+0000\n"
+"PO-Revision-Date: 2016-01-03 16:38+0000\n"
 "Last-Translator: Jaypad <ju-ju@nataju.fr>\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -166,7 +168,7 @@ msgstr "%1$s et %2$s"
 #. * TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:95
 msgid "Jan"
-msgstr "Jan"
+msgstr "Janv"
 
 #. * TRANSLATORS: February. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
@@ -175,7 +177,7 @@ msgstr "Jan"
 #. * TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:101
 msgid "Feb"
-msgstr "Féb"
+msgstr "Févr"
 
 #. * TRANSLATORS: March. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
@@ -184,7 +186,7 @@ msgstr "Féb"
 #. * TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:107
 msgid "Mar"
-msgstr "Mar"
+msgstr "Mars"
 
 #. * TRANSLATORS: April. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
@@ -211,7 +213,7 @@ msgstr "Mai"
 #. * TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:125
 msgid "Jun"
-msgstr "Jun"
+msgstr "Juin"
 
 #. * TRANSLATORS: July. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
@@ -220,7 +222,7 @@ msgstr "Jun"
 #. * TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:131
 msgid "Jul"
-msgstr "Jul"
+msgstr "Juil"
 
 #. * TRANSLATORS: August. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
@@ -229,7 +231,7 @@ msgstr "Jul"
 #. * TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:137
 msgid "Aug"
-msgstr "Aoù"
+msgstr "Août"
 
 #. * TRANSLATORS: September. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
@@ -238,7 +240,7 @@ msgstr "Aoù"
 #. * TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:143
 msgid "Sep"
-msgstr "Sep"
+msgstr "Sept"
 
 #. * TRANSLATORS: October. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
@@ -264,7 +266,7 @@ msgstr "Nov"
 #. * TRANSLATORS: definition if there is one for your language.
 #: ../../src/base/time_string.cc:160
 msgid "Dec"
-msgstr "Dec"
+msgstr "Déc"
 
 #: ../../src/editor/editorinteractive.cc:61 ../../src/logic/game.cc:236
 #: ../../src/logic/game.cc:299
@@ -415,7 +417,7 @@ msgstr "navigable"
 #: ../../src/editor/tools/editor_info_tool.cc:82
 #, c-format
 msgid "Caps: %s"
-msgstr ""
+msgstr "Limites:%s"
 
 #: ../../src/editor/tools/editor_info_tool.cc:88
 #, c-format
@@ -459,7 +461,7 @@ msgstr "Nom: %s"
 #: ../../src/editor/tools/editor_info_tool.cc:116
 #, c-format
 msgid "Is: %s"
-msgstr ""
+msgstr "Descr: %s"
 
 #: ../../src/editor/tools/editor_info_tool.cc:118
 #, c-format
@@ -619,7 +621,7 @@ msgstr "Description:"
 
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:102
 msgid "Hint (optional):"
-msgstr ""
+msgstr "Astuce (optionnel):"
 
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:112
 msgid "Tags:"
@@ -1239,8 +1241,8 @@ msgstr[1] "%s sont manquants"
 #, c-format
 msgid "Produced %s"
 msgid_plural "Produced %s"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Produit %s"
+msgstr[1] "Produits %s"
 
 #. * TRANSLATORS: %s is a list of workers. String is fetched according to
 #. total amount of workers.
@@ -1248,8 +1250,8 @@ msgstr[1] ""
 #, c-format
 msgid "Recruited %s"
 msgid_plural "Recruited %s"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Recruté %s"
+msgstr[1] "Recrutés %s"
 
 #: ../../src/logic/production_program.cc:1391
 msgid "No soldier to train!"
@@ -1377,7 +1379,7 @@ msgstr "Un navire d'expédition attend vos ordres."
 
 #: ../../src/logic/soldier.cc:1504 ../../src/logic/soldier.cc:1515
 msgid "Soldier"
-msgstr ""
+msgstr "Soldat"
 
 #: ../../src/logic/soldier.cc:1506 ../../src/logic/soldier.cc:1517
 msgid "Logic error"
@@ -2625,21 +2627,21 @@ msgstr "La date de sauvegarde de ce jeu"
 #. * TRANSLATORS: Make sure that you keep consistency in your translation.
 #: ../../src/ui_fsmenu/loadgame.cc:187
 msgid "SP = Single Player"
-msgstr ""
+msgstr "SP = Un Joueur"
 
 #. * TRANSLATORS: Tooltip for the "Mode" column when choosing a game/replay to
 #. load.
 #. * TRANSLATORS: Make sure that you keep consistency in your translation.
 #: ../../src/ui_fsmenu/loadgame.cc:191
 msgid "MP = Multiplayer"
-msgstr ""
+msgstr "MP = Multijoueur"
 
 #. * TRANSLATORS: Tooltip for the "Mode" column when choosing a game/replay to
 #. load.
 #. * TRANSLATORS: Make sure that you keep consistency in your translation.
 #: ../../src/ui_fsmenu/loadgame.cc:194
 msgid "H = Multiplayer (Host)"
-msgstr ""
+msgstr "H = Multijoueur (Hôte)"
 
 #. * TRANSLATORS: Tooltip for the "Mode" column when choosing a game/replay to
 #. load.
@@ -2843,7 +2845,7 @@ msgstr "Transports maritimes"
 
 #: ../../src/ui_fsmenu/mapselect.cc:100
 msgid "Artifacts"
-msgstr ""
+msgstr "Artefacts"
 
 #: ../../src/ui_fsmenu/mapselect.cc:342
 msgid "Nobody"
@@ -4118,7 +4120,7 @@ msgstr "Soldats en cours d'entraînement"
 
 #: ../../src/wui/transport_ui.cc:51
 msgid "Economy options"
-msgstr "Options concernant l'économie"
+msgstr "Options de production"
 
 #: ../../src/wui/transport_ui.cc:142 ../../src/wui/transport_ui.cc:225
 msgid "Decrease target"

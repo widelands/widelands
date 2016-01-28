@@ -32,12 +32,12 @@
 #include "base/i18n.h"
 #include "graphic/graphic.h"
 #include "io/filesystem/layered_filesystem.h"
-#include "logic/building.h"
+#include "logic/map_objects/tribes/building.h"
+#include "logic/map_objects/tribes/tribe_descr.h"
+#include "logic/map_objects/tribes/tribes.h"
+#include "logic/map_objects/tribes/ware_descr.h"
+#include "logic/map_objects/tribes/worker_descr.h"
 #include "logic/player.h"
-#include "logic/tribes/tribe_descr.h"
-#include "logic/tribes/tribes.h"
-#include "logic/ware_descr.h"
-#include "logic/worker_descr.h"
 #include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
 #include "wui/interactive_player.h"
@@ -268,7 +268,6 @@ void EncyclopediaWindow::entry_selected(const std::string& key,
 		case (Widelands::MapObjectType::FLAG):
 		case (Widelands::MapObjectType::ROAD):
 		case (Widelands::MapObjectType::PORTDOCK):
-		default:
 			throw wexception("EncyclopediaWindow: No MapObjectType defined for tab.");
 		}
 

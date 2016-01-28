@@ -24,6 +24,8 @@
 
 #include "graphic/align.h"
 #include "graphic/color.h"
+#include "graphic/richtext.h"
+#include "graphic/text_layout.h"
 #include "ui_basic/panel.h"
 #include "ui_basic/scrollbar.h"
 
@@ -46,7 +48,6 @@ struct MultilineTextarea : public Panel {
 		 const std::string & text         = std::string(),
 		 const Align                      = UI::Align::kLeft,
 		 const bool always_show_scrollbar = false);
-	~MultilineTextarea();
 
 	const std::string & get_text() const {return m_text;}
 	ScrollMode get_scrollmode() const {return m_scrollmode;}
@@ -54,12 +55,10 @@ struct MultilineTextarea : public Panel {
 	void set_text(const std::string &);
 	void set_scrollmode(ScrollMode mode);
 
-	void set_font(std::string name, int32_t size, RGBColor fg);
-
 	uint32_t scrollbar_w() const {return 24;}
-	uint32_t get_eff_w() const {return get_w() - scrollbar_w();}
+	uint32_t get_eff_w() const {return m_scrollbar.is_enabled() ? get_w() - scrollbar_w() : get_w();}
 
-	void set_color(RGBColor fg) {m_fcolor = fg;}
+	void set_color(RGBColor fg) {m_style.fg = fg;}
 
 	// Drawing and event handlers
 	void draw(RenderTarget &) override;
@@ -67,29 +66,22 @@ struct MultilineTextarea : public Panel {
 	bool handle_mousewheel(uint32_t which, int32_t x, int32_t y) override;
 	void scroll_to_top();
 
-	const char *  get_font_name() {return m_fontname.c_str();}
-	int32_t       get_font_size() {return m_fontsize;}
-	RGBColor &    get_font_clr () {return m_fcolor;}
+protected:
+	void layout() override;
 
 private:
-	struct Impl;
-
-	std::unique_ptr<Impl> m;
-
 	void recompute();
 	void scrollpos_changed(int32_t pixels);
 
 	std::string m_text;
+	UI::TextStyle m_style;
+	Align m_align;
+
+	bool isrichtext;
+	RichText rt;
+
 	Scrollbar   m_scrollbar;
 	ScrollMode  m_scrollmode;
-
-protected:
-	void layout() override;
-
-	Align        m_align;
-	std::string  m_fontname;
-	int32_t  m_fontsize;
-	RGBColor m_fcolor;
 };
 
 }

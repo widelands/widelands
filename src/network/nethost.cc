@@ -44,10 +44,10 @@
 #include "io/fileread.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/game.h"
+#include "logic/map_objects/tribes/tribes.h"
 #include "logic/player.h"
 #include "logic/playercommand.h"
 #include "logic/playersmanager.h"
-#include "logic/tribes/tribes.h"
 #include "map_io/widelands_map_loader.h"
 #include "network/constants.h"
 #include "network/internet_gaming.h"
@@ -205,7 +205,6 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 					newstate = PlayerSettings::stateClosed;
 				break;
 			}
-		default:;
 		}
 
 		h->set_player_state(number, newstate, true);
@@ -1680,7 +1679,7 @@ void NetHost::set_player_init(uint8_t const number, uint8_t const index)
 			return;
 		}
 	}
-	assert(false);
+	NEVER_HERE();
 }
 
 

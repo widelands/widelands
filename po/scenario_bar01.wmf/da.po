@@ -3,13 +3,14 @@
 # 
 # Translators:
 # Joe Hansen <joedalton2@yahoo.dk>, 2015
+# Ole Laursen <ole.laursen@gmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-18 08:43+0000\n"
-"PO-Revision-Date: 2015-11-18 08:43+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2015-12-14 05:31+0000\n"
+"PO-Revision-Date: 2016-01-03 22:28+0000\n"
+"Last-Translator: Ole Laursen <ole.laursen@gmail.com>\n"
 "Language-Team: Danish (http://www.transifex.com/widelands/widelands/language/da/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,17 +21,17 @@ msgstr ""
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:23
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:25
 msgid "Build two ranger’s huts"
-msgstr "Byg to skovridderhytter"
+msgstr "Byg to skovfogedhuse"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:26
 msgid "Build a ranger’s hut next to each lumberjack’s hut."
-msgstr "Byg en skovridderhytte ved siden af hver skovhuggerhytte."
+msgstr "Byg et skovfogedhus ved siden af hver skovhuggerhytte."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:27
 msgid ""
 "Naturally, trees only grow at a slow rate. To make sure you have enough "
 "logs, you have to build rangers."
-msgstr "Træer gror naturligt i et langsomt tempo. For at sikre at du har nok logge, så skal du understøtte skovriddere."
+msgstr "Træer gror naturligt i et langsomt tempo. For at sikre at du har nok træstamer så skal du bygge boliger til skovfogeder."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:33
 msgid "Expand north-east and build a quarry"
@@ -38,29 +39,29 @@ msgstr "Udvid mod nordøst og byg et stenbrud"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:35
 msgid "Expand north-east to the rocks"
-msgstr "Udvid mod nordøst til stenområdet"
+msgstr "Udvid mod nordøst til området med sten"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:36
 msgid ""
 "Build military buildings (like sentries or barriers) to expand your "
 "territory."
-msgstr "Byg militære bygninger (såsom vagttårne eller barrierer) for at udvide dit territorium."
+msgstr "Byg militære bygninger (f.eks. forposter eller fort) for at udvide dit territorium."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:37
 msgid "Get to the rocks north-east from you and build a quarry there."
-msgstr "Nå frem til stenressourcerne nordøst for dig og byg et stenbrud der."
+msgstr "Nå frem til området med sten nordøst for dig og byg et stenbrud der."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:42
 msgid "Start building mines on the mountain"
-msgstr "Start med at bygge miner på bjerget"
+msgstr "Byg miner på bjerget"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:44
 msgid "Build coal and iron mines"
-msgstr ""
+msgstr "Byg kul- og jernminer"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:45
 msgid "Build a coal mine and an iron mine."
-msgstr ""
+msgstr "Byg en kulmine og en jernmine."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:46
 msgid ""
@@ -70,7 +71,7 @@ msgid ""
 " will search for ores; otherwise, they would search for water. Then build a "
 "mine for both kinds of resources that they will find, choosing the "
 "appropriate mine to be built:"
-msgstr ""
+msgstr "Plant et flag på bjergets side mod øst - på bjergterræn, ikke bjergeng. Når du klikker på det nye flag, kan du sende geologer dertil. Fordi flaget er på et bjerg, vil de lede efter malm - ellers leder de efter vand. Byg så en mine for hver af de to typer af resurser som de finder. Vælg den rigtige mine at bygge:"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:48
 msgid "a bit of coal"
@@ -124,7 +125,7 @@ msgstr "Leverer mad til dine minearbejdere"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:66
 msgid "Build a hunter, a gamekeeper and a tavern"
-msgstr "Byg en jæger, en jagtbestyrer og en kro"
+msgstr "Byg en jæger, en vildtforvalter og et traktørsted"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:67
 msgid "In order to work, your miners need food."
@@ -135,13 +136,13 @@ msgid ""
 "A hunter can hunt down animals, while a gamekeeper prevents them from "
 "becoming extinct. The meat is then processed in a tavern into lunches for "
 "your miners."
-msgstr "En jæger kan skyde dyr, mens en jagtbestyrer forhindrer at de bliver udryddet. Kødet behandles så i en kro til måltider for minearbejderne."
+msgstr "En jæger kan jage dyr, mens en vildforvalter forhindrer at dyrene bliver udryddet. Kødet tilbederedes på et traktørsted til minearbejderne."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:69
 msgid ""
 "This is only the first example of a ware which has to be refined before "
 "being used in a secondary building – others will follow."
-msgstr "Dette er kun det første eksempel på en vare, som skal forarbejdes før den bruges i en anden bygning - flere vil følge."
+msgstr "Dette er kun det første eksempel på en vare, som skal forarbejdes før den bruges et andet sted - flere vil følge."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:74
 msgid "Bake bread"
@@ -149,7 +150,7 @@ msgstr "Bag brød"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:76
 msgid "Build a well, a farm and a bakery"
-msgstr "Byg en brønd, et landbrug og et bageri"
+msgstr "Byg en brønd, en gård og et bageri"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:77
 msgid ""
@@ -161,7 +162,7 @@ msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:82
 msgid "Refine your mined resources"
-msgstr "Refiner dine mineressourcer"
+msgstr "Raffiner dine mineresurser"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:84
 msgid "Build a smelting works"
@@ -171,7 +172,7 @@ msgstr "Byg et smelteværk"
 msgid ""
 "The iron ore your miners dig up is not usable yet – it has to be melted into"
 " iron first."
-msgstr "Jernmalem dine minearbejdere graver op er endnu ikke brugbar - den skal først smeltes til jern."
+msgstr "Jernmalmem dine minearbejdere graver op er endnu ikke brugbar - den skal først smeltes om til jern."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:90
 msgid "Enhance buildings and build a micro brewery"
@@ -179,17 +180,17 @@ msgstr "Udvid bygninger og byg et mikrobryggeri"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:92
 msgid "Enhance a mine and the tavern, and build a micro brewery."
-msgstr "Udvid en mine og værtshuset, og byg et mikrobyggeri."
+msgstr "Opgrader en mine og traktørstedet og byg et mikrobyggeri."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:93
 msgid ""
 "Enhance the coal mine or the iron mine to a deep mine, and enhance the "
 "tavern to an inn."
-msgstr "Udvid kulminen eller jernminen til en dybere mine, og udvid værtshuset til en kro."
+msgstr "Opgrader kulminen eller jernminen til en dybere mine, og udvid traktørstedet til en kro."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:94
 msgid "Also build a micro brewery."
-msgstr "Byg også et mikrobryggeri"
+msgstr "Byg også et mikrobryggeri."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:95
 msgid ""
@@ -197,7 +198,7 @@ msgid ""
 "beneath it; then it must be enhanced to a deep mine in order to keep it "
 "working properly. To enhance a building, choose it and then click the "
 "appropriate button in the appearing window."
-msgstr "En normal mine kan kun grave omkring en tredjedel af ressourcerne op, som ligger under den; den skal udvides til en dyb mine for at holde den ordentlig i gang. For at udvide en bygning, vælges den og der klikkes på den passende knap i vinduet."
+msgstr "En almindelig mine kan kun grave omkring en tredjedel af de resurser op som ligger under den; den skal udvides til en dyb mine for at holde den i gang. For at udvide en bygning: vælg den og der klik på knappen i vinduet."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:96
 msgid ""
@@ -205,7 +206,7 @@ msgid ""
 "become more advanced workers, who are necessary to operate the enhanced "
 "buildings. Do not enhance a building before you have enough advanced workers"
 " to operate the advanced building!"
-msgstr "Arbejdere opnår erfaring ved succesfuld arbejde. Med nok erfaring, bliver de mere avancerede arbejdere, som er nødvendige for at betjene de udvidede bygninger. Udvid ikke en bygning før du har nok avancerede arbejdere til at betjene den avancerede bygning!"
+msgstr "Arbejdere opnår erfaring ved at arbejde. Med nok erfaring bliver de mere avancerede arbejdere som er nødvendige for at betjene de opgraderede bygninger. Opgrader ikke en bygning før du har nok avancerede arbejdere til at betjene den opgraderede bygning!"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:97
 msgid ""
@@ -213,7 +214,7 @@ msgid ""
 "building – for instance, deep mines need snacks instead of rations. You will"
 " have to enhance your tavern to an inn in order to produce snacks out of "
 "pitta bread AND a second kind of food (meat or fish) AND beer."
-msgstr "Sådanne bygninger har normalt større krav end de mere basale bygninger - for eksempel, kræver dybe miner mellemmåltider i stedet for rationer. Du skal udvide værtshustet til en kro for at kunne fremstille mellemmåltider ud af pittabrød OG en anden slags fødevare (kød eller fisk) OG øl."
+msgstr "Sådanne bygninger har normalt større krav end de mere enkle bygninger - for eksempel, kræver dybe miner mellemmåltider i stedet for rationer. Du skal udvide traktørstedet til en kro for at kunne fremstille mellemmåltider ud af fladbrød OG en anden slags fødevare (kød eller fisk) OG øl."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:98
 msgid ""
@@ -244,14 +245,14 @@ msgstr "Byg en kalkovn og en kuløkonomi"
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:115
 msgid ""
 "Build a lime kiln fed by a well, and by a charcoal kiln or by a coal mine"
-msgstr "Byg en kalkovn ved en brønd og ved en trækulsovn eller ved en kulmine"
+msgstr "Byg en kalkovn som modtager materiale fra en brønd og en trækulsovn eller en kulmine"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:116
 msgid ""
 "Better buildings may also require other improved materials besides "
 "blackwood. One of these is grout, which is produced out of granite, water "
 "and coal by a lime-burner."
-msgstr ""
+msgstr "Bedre bygninger kan også kræve andre materialer end hårdttræ. Et af disse er mørtel som produceres af sten, vand og kul af en kalkbrænder."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:118
 msgid ""
@@ -284,14 +285,14 @@ msgstr "Byg en kalkovn og en brønd. Derudover, byg enten en trækulsovn eller e
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:132
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:135
 msgid "Build a reed yard"
-msgstr "Byg en stråfabrik"
+msgstr "Byg et stråbrug"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:133
 msgid ""
 "The third material necessary for improved buildings is thatch reed, used to "
 "cover roofs. Thatch reed is planted by a gardener around his building, the "
 "reed yard."
-msgstr "Det tredje materiale nødvendigt for forbedrede bygninger er strå, brugt til at dække tage med. Strå plantes af en gartner omkring hans bygning, stråfabrikken."
+msgstr "Det tredje materiale som er nødvendigt for forbedrede bygninger er strå til at tække tage. Strå plantes af en gartner omkring hans bygning, stråbruget."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:140
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:142
@@ -305,11 +306,11 @@ msgid ""
 "enough to transport goods swiftly. Traffic jams are the consequence. Such "
 "roads therefore employ a second carrier: an ox that helps to carry the "
 "wares. This doubles the transport capacity."
-msgstr "Når veje kommer under tung belastning i lang tid, så er en fragmand normalt ikke nok til at transportere varer hurtigt. Trafikkøer bliver konsekvensen. Sådanne veje bruger derfor en anden fragtmetode: en okse kan hjælpe med at bære varerne. Dette fordobler transportkapaciteten."
+msgstr "Når en vej kommer under tung belastning i lang tid, så er en bærer normalt ikke nok til at transportere varer hurtigt. Resultatet er trafikpropper. Sådanne veje bruger derfor en anden fragtmetode: en okse kan hjælpe med at bære varerne. Dette fordobler transportkapaciteten."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:145
 msgid "Oxen are bred in cattle farms out of wheat and water."
-msgstr "Okse avles i kvægbrug ud fra hvede og vand."
+msgstr "Okser avles i kvægbrug ud fra hvede og vand."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:156
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:168
@@ -470,11 +471,11 @@ msgstr ""
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:471
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:482
 msgid "The Advisor"
-msgstr ""
+msgstr "Rådgiveren"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:249
 msgid "Khantrukh notes…"
-msgstr ""
+msgstr "Khantrukh bemærker…"
 
 #. TRANSLATORS: Khantrukh
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:251
@@ -500,7 +501,7 @@ msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:263
 msgid "In the Night"
-msgstr ""
+msgstr "Om natten"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:264
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:278
@@ -524,7 +525,7 @@ msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:277
 msgid "At the Tomb"
-msgstr ""
+msgstr "Ved graven"
 
 #. TRANSLATORS: Thron
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:280
@@ -734,7 +735,7 @@ msgid ""
 "North of the great mountain is a large plain – why don’t we use the space "
 "Mother Nature gave us and build a farm? I sure would enjoy a freshly baked "
 "pitta bread for a change…"
-msgstr ""
+msgstr "Nord for det store bjerg en er en bred slette - hvorfor udnytter vi ikke den plads moder jord har givet os og bygger en gård? Jeg kunne tænke mig et friskbagt fladbrød til en forandring..."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:404
 msgid "Boldreth cheers up…"
@@ -940,7 +941,7 @@ msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:510
 msgid "Victory"
-msgstr ""
+msgstr "Sejr"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:511
 msgid ""
@@ -974,7 +975,7 @@ msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:526
 msgid "Thron looks worried…"
-msgstr ""
+msgstr "Thron ser bekymret ud..."
 
 #. TRANSLATORS: Thron
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:528
@@ -998,7 +999,7 @@ msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:538
 msgid "A friendly village has joined us!"
-msgstr ""
+msgstr "En venligsindet landsby har sluttet sig til os!"
 
 #. TRANSLATORS: Thron
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:541
@@ -1022,11 +1023,12 @@ msgid ""
 msgstr ""
 
 #: ../../scripting/format_scenario.lua:36
+#, lua-format
 msgid "“%s”"
-msgstr ""
+msgstr "“%s”"
 
 #: ../../scripting/format_scenario.lua:146
 msgid "New Objective"
 msgid_plural "New Objectives"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Nyt mål"
+msgstr[1] "Nye mål"

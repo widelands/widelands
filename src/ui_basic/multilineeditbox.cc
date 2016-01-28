@@ -220,6 +220,7 @@ uint32_t MultilineEditbox::Data::prev_char(uint32_t cursor)
 
 	do {
 		--cursor;
+		// TODO(GunChleoc): When switchover to g_fh1 is complete, see if we can go full ICU here.
 	} while (cursor > 0 && Utf8::is_utf8_extended(text[cursor]));
 
 	return cursor;
@@ -481,6 +482,8 @@ void MultilineEditbox::draw(RenderTarget & dst)
 			(Rect(Point(0, 0), get_w(), get_h()), MOUSE_OVER_BRIGHT_FACTOR);
 
 	d->refresh_ww();
+
+	d->ww.set_draw_caret(has_focus());
 
 	d->ww.draw
 		(dst, Point(0, -int32_t(d->scrollbar.get_scrollpos())), UI::Align::kLeft,

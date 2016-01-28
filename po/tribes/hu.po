@@ -2,15 +2,16 @@
 # Copyright (C) 2005-2015 Widelands Development Team
 # 
 # Translators:
+# Balázs Meskó <meskobalazs@gmail.com>, 2016
 # Dániel Varga <vargad88@gmail.com>, 2007
 # GunChleoc, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-12-03 09:55+0000\n"
-"PO-Revision-Date: 2015-12-03 09:57+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2015-12-14 05:31+0000\n"
+"PO-Revision-Date: 2016-01-13 00:26+0000\n"
+"Last-Translator: Balázs Meskó <meskobalazs@gmail.com>\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -21,12 +22,6 @@ msgstr ""
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/militarysites/atlanteans/castle/init.lua:7
 msgctxt "atlanteans_building"
-msgid "Castle"
-msgstr "Vár"
-
-#. TRANSLATORS: This is a building name used in lists of buildings
-#: ../../tribes/buildings/militarysites/empire/castle/init.lua:7
-msgctxt "empire_building"
 msgid "Castle"
 msgstr "Vár"
 
@@ -110,18 +105,6 @@ msgstr ""
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/militarysites/atlanteans/tower/init.lua:7
 msgctxt "atlanteans_building"
-msgid "Tower"
-msgstr "Torony"
-
-#. TRANSLATORS: This is a building name used in lists of buildings
-#: ../../tribes/buildings/militarysites/barbarians/tower/init.lua:7
-msgctxt "barbarians_building"
-msgid "Tower"
-msgstr "Torony"
-
-#. TRANSLATORS: This is a building name used in lists of buildings
-#: ../../tribes/buildings/militarysites/empire/tower/init.lua:7
-msgctxt "empire_building"
 msgid "Tower"
 msgstr "Torony"
 
@@ -213,12 +196,6 @@ msgctxt "barbarians_building"
 msgid "Barrier"
 msgstr "Határőrház"
 
-#. TRANSLATORS: This is a building name used in lists of buildings
-#: ../../tribes/buildings/militarysites/empire/barrier/init.lua:7
-msgctxt "empire_building"
-msgid "Barrier"
-msgstr "Határőrház"
-
 #: ../../tribes/buildings/militarysites/barbarians/barrier/init.lua:52
 #: ../../tribes/buildings/militarysites/empire/barrier/init.lua:56
 msgid "Your soldiers have occupied your barrier."
@@ -276,12 +253,6 @@ msgctxt "barbarians_building"
 msgid "Fortress"
 msgstr "Erőd"
 
-#. TRANSLATORS: This is a building name used in lists of buildings
-#: ../../tribes/buildings/militarysites/empire/fortress/init.lua:7
-msgctxt "empire_building"
-msgid "Fortress"
-msgstr "Erőd"
-
 #: ../../tribes/buildings/militarysites/barbarians/fortress/init.lua:62
 #: ../../tribes/buildings/militarysites/empire/fortress/init.lua:58
 msgid "Your soldiers have occupied your fortress."
@@ -313,12 +284,6 @@ msgctxt "barbarians_building"
 msgid "Sentry"
 msgstr "Őrház"
 
-#. TRANSLATORS: This is a building name used in lists of buildings
-#: ../../tribes/buildings/militarysites/empire/sentry/init.lua:7
-msgctxt "empire_building"
-msgid "Sentry"
-msgstr "Őrház"
-
 #: ../../tribes/buildings/militarysites/barbarians/sentry/init.lua:54
 #: ../../tribes/buildings/militarysites/empire/sentry/init.lua:53
 msgid "Your soldiers have occupied your sentry."
@@ -345,30 +310,54 @@ msgid "Your soldiers defeated the enemy at the sentry."
 msgstr ""
 
 #. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/militarysites/barbarians/tower/init.lua:7
+msgctxt "barbarians_building"
+msgid "Tower"
+msgstr "Torony"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/militarysites/empire/barrier/init.lua:7
+msgctxt "empire_building"
+msgid "Barrier"
+msgstr "Határőrház"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/militarysites/empire/blockhouse/init.lua:7
 msgctxt "empire_building"
 msgid "Blockhouse"
-msgstr ""
+msgstr "Erődház"
 
 #: ../../tribes/buildings/militarysites/empire/blockhouse/init.lua:41
 msgid "Your soldiers have occupied your blockhouse."
-msgstr ""
+msgstr "A katonáid elfoglalták az erődházad."
 
 #: ../../tribes/buildings/militarysites/empire/blockhouse/init.lua:42
 msgid "Your blockhouse discovered an aggressor."
-msgstr ""
+msgstr "Az erődházad felfedezett egy támadót."
 
 #: ../../tribes/buildings/militarysites/empire/blockhouse/init.lua:43
 msgid "Your blockhouse is under attack."
-msgstr ""
+msgstr "Az erődházadat megtámadták."
 
 #: ../../tribes/buildings/militarysites/empire/blockhouse/init.lua:44
 msgid "The enemy defeated your soldiers at the blockhouse."
-msgstr ""
+msgstr "Az ellenség legyőzte a katonáidat az erődházadnál."
 
 #: ../../tribes/buildings/militarysites/empire/blockhouse/init.lua:45
 msgid "Your soldiers defeated the enemy at the blockhouse."
-msgstr ""
+msgstr "A katonáid legyőzték az ellenséget az erődháznál."
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/militarysites/empire/castle/init.lua:7
+msgctxt "empire_building"
+msgid "Castle"
+msgstr "Vár"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/militarysites/empire/fortress/init.lua:7
+msgctxt "empire_building"
+msgid "Fortress"
+msgstr "Erőd"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/militarysites/empire/outpost/init.lua:7
@@ -378,23 +367,35 @@ msgstr "Előőrs"
 
 #: ../../tribes/buildings/militarysites/empire/outpost/init.lua:47
 msgid "Your soldiers have occupied your outpost."
-msgstr ""
+msgstr "A katonáid elfoglalták az előörsöt."
 
 #: ../../tribes/buildings/militarysites/empire/outpost/init.lua:48
 msgid "Your outpost discovered an aggressor."
-msgstr ""
+msgstr "Az előörsöd felfedezett egy támadót."
 
 #: ../../tribes/buildings/militarysites/empire/outpost/init.lua:49
 msgid "Your outpost is under attack."
-msgstr ""
+msgstr "Az előörsöd megtámadták."
 
 #: ../../tribes/buildings/militarysites/empire/outpost/init.lua:50
 msgid "The enemy defeated your soldiers at the outpost."
-msgstr ""
+msgstr "Az ellenség legyőzte a katonáid az előörsnél."
 
 #: ../../tribes/buildings/militarysites/empire/outpost/init.lua:51
 msgid "Your soldiers defeated the enemy at the outpost."
-msgstr ""
+msgstr "A katonáid legyőzték az ellenséget az előörsnél."
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/militarysites/empire/sentry/init.lua:7
+msgctxt "empire_building"
+msgid "Sentry"
+msgstr "Őrház"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/militarysites/empire/tower/init.lua:7
+msgctxt "empire_building"
+msgid "Tower"
+msgstr "Torony"
 
 #. TRANSLATORS: This is a name used in lists of buildings for buildings under
 #. construction
@@ -414,13 +415,7 @@ msgstr "Épület lebontása"
 #: ../../tribes/buildings/productionsites/atlanteans/armorsmithy/init.lua:7
 msgctxt "atlanteans_building"
 msgid "Armor Smithy"
-msgstr "Páncélkovácsműhely"
-
-#. TRANSLATORS: This is a building name used in lists of buildings
-#: ../../tribes/buildings/productionsites/empire/armorsmithy/init.lua:7
-msgctxt "empire_building"
-msgid "Armor Smithy"
-msgstr "Páncélkovácsműhely"
+msgstr "Páncélkovács műhely"
 
 #. TRANSLATORS: Completed/Skipped/Did not start working because ...
 #: ../../tribes/buildings/productionsites/atlanteans/armorsmithy/init.lua:58
@@ -462,35 +457,23 @@ msgstr "Páncélkovácsműhely"
 #: ../../tribes/buildings/productionsites/empire/weaponsmithy/init.lua:69
 #: ../../tribes/buildings/productionsites/empire/well/init.lua:52
 msgid "working"
-msgstr ""
+msgstr "működik"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a steel shield because
 #. ...
 #: ../../tribes/buildings/productionsites/atlanteans/armorsmithy/init.lua:67
 msgid "forging a steel shield"
-msgstr ""
+msgstr "acélpajzs kovácsolása"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging an advanced shield
 #. because ...
 #: ../../tribes/buildings/productionsites/atlanteans/armorsmithy/init.lua:78
 msgid "forging an advanced shield"
-msgstr ""
+msgstr "fejlesztett pajzs kovácsolása"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/atlanteans/bakery/init.lua:7
 msgctxt "atlanteans_building"
-msgid "Bakery"
-msgstr "Pékség"
-
-#. TRANSLATORS: This is a building name used in lists of buildings
-#: ../../tribes/buildings/productionsites/barbarians/bakery/init.lua:7
-msgctxt "barbarians_building"
-msgid "Bakery"
-msgstr "Pékség"
-
-#. TRANSLATORS: This is a building name used in lists of buildings
-#: ../../tribes/buildings/productionsites/empire/bakery/init.lua:7
-msgctxt "empire_building"
 msgid "Bakery"
 msgstr "Pékség"
 
@@ -499,7 +482,7 @@ msgstr "Pékség"
 #: ../../tribes/buildings/productionsites/barbarians/bakery/init.lua:61
 #: ../../tribes/buildings/productionsites/empire/bakery/init.lua:61
 msgid "baking bread"
-msgstr ""
+msgstr "kenyér sütése"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:7
@@ -510,13 +493,13 @@ msgstr "Feketegyökér-termesztő"
 #. TRANSLATORS: Completed/Skipped/Did not start planting blackroot because ...
 #: ../../tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:57
 msgid "planting blackroot"
-msgstr ""
+msgstr "feketegyökér ültetése"
 
 #. TRANSLATORS: Completed/Skipped/Did not start harvesting blackroot because
 #. ...
 #: ../../tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:65
 msgid "harvesting blackroot"
-msgstr ""
+msgstr "feketegyökér betakarítása"
 
 #: ../../tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:74
 #: ../../tribes/buildings/productionsites/atlanteans/farm/init.lua:77
@@ -525,7 +508,7 @@ msgstr ""
 #: ../../tribes/buildings/productionsites/empire/farm/init.lua:75
 #: ../../tribes/buildings/productionsites/empire/vineyard/init.lua:73
 msgid "No Fields"
-msgstr ""
+msgstr "Nincs mező"
 
 #: ../../tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:75
 #: ../../tribes/buildings/productionsites/atlanteans/farm/init.lua:78
@@ -534,7 +517,7 @@ msgstr ""
 #: ../../tribes/buildings/productionsites/empire/farm/init.lua:76
 #: ../../tribes/buildings/productionsites/empire/vineyard/init.lua:74
 msgid "Out of Fields"
-msgstr ""
+msgstr "A mezők kifogytak"
 
 #: ../../tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:76
 msgctxt "atlanteans_building"
@@ -547,42 +530,18 @@ msgstr ""
 #: ../../tribes/buildings/productionsites/atlanteans/charcoal_kiln/init.lua:7
 msgctxt "atlanteans_building"
 msgid "Charcoal Kiln"
-msgstr "Szénbánya"
-
-#. TRANSLATORS: This is a building name used in lists of buildings
-#: ../../tribes/buildings/productionsites/barbarians/charcoal_kiln/init.lua:7
-msgctxt "barbarians_building"
-msgid "Charcoal Kiln"
-msgstr "Szénbánya"
-
-#. TRANSLATORS: This is a building name used in lists of buildings
-#: ../../tribes/buildings/productionsites/empire/charcoal_kiln/init.lua:7
-msgctxt "empire_building"
-msgid "Charcoal Kiln"
-msgstr "Szénbánya"
+msgstr "Faszénégető kemence"
 
 #. TRANSLATORS: Completed/Skipped/Did not start producing coal because ...
 #: ../../tribes/buildings/productionsites/atlanteans/charcoal_kiln/init.lua:53
 #: ../../tribes/buildings/productionsites/barbarians/charcoal_kiln/init.lua:58
 #: ../../tribes/buildings/productionsites/empire/charcoal_kiln/init.lua:54
 msgid "producing coal"
-msgstr ""
+msgstr "szén termelése"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/atlanteans/coalmine/init.lua:7
 msgctxt "atlanteans_building"
-msgid "Coal Mine"
-msgstr "Szénbánya"
-
-#. TRANSLATORS: This is a building name used in lists of buildings
-#: ../../tribes/buildings/productionsites/barbarians/coalmine/init.lua:7
-msgctxt "barbarians_building"
-msgid "Coal Mine"
-msgstr "Szénbánya"
-
-#. TRANSLATORS: This is a building name used in lists of buildings
-#: ../../tribes/buildings/productionsites/empire/coalmine/init.lua:7
-msgctxt "empire_building"
 msgid "Coal Mine"
 msgstr "Szénbánya"
 
@@ -594,7 +553,7 @@ msgstr "Szénbánya"
 #: ../../tribes/buildings/productionsites/empire/coalmine/init.lua:62
 #: ../../tribes/buildings/productionsites/empire/coalmine_deep/init.lua:60
 msgid "mining coal"
-msgstr ""
+msgstr "szén bányászata"
 
 #: ../../tribes/buildings/productionsites/atlanteans/coalmine/init.lua:80
 #: ../../tribes/buildings/productionsites/barbarians/coalmine/init.lua:78
@@ -603,7 +562,7 @@ msgstr ""
 #: ../../tribes/buildings/productionsites/empire/coalmine/init.lua:78
 #: ../../tribes/buildings/productionsites/empire/coalmine_deep/init.lua:76
 msgid "No Coal"
-msgstr ""
+msgstr "Nincs szén"
 
 #: ../../tribes/buildings/productionsites/atlanteans/coalmine/init.lua:81
 #: ../../tribes/buildings/productionsites/barbarians/coalmine/init.lua:79
@@ -612,7 +571,7 @@ msgstr ""
 #: ../../tribes/buildings/productionsites/empire/coalmine/init.lua:79
 #: ../../tribes/buildings/productionsites/empire/coalmine_deep/init.lua:77
 msgid "Main Coal Vein Exhausted"
-msgstr ""
+msgstr "Fő szén telér kimerült"
 
 #: ../../tribes/buildings/productionsites/atlanteans/coalmine/init.lua:83
 msgctxt "atlanteans_building"
@@ -632,25 +591,25 @@ msgstr "Kristálybánya"
 #: ../../tribes/buildings/productionsites/barbarians/granitemine/init.lua:63
 #: ../../tribes/buildings/productionsites/empire/marblemine/init.lua:87
 msgid "mining granite"
-msgstr ""
+msgstr "gránit bányászata"
 
 #. TRANSLATORS: Completed/Skipped/Did not start mining quartz because ...
 #: ../../tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:94
 msgid "mining quartz"
-msgstr ""
+msgstr "kvarc bányászata"
 
 #. TRANSLATORS: Completed/Skipped/Did not start mining diamonds because ...
 #: ../../tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:112
 msgid "mining diamonds"
-msgstr ""
+msgstr "gyémántok bányászata"
 
 #: ../../tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:131
 msgid "No Crystal"
-msgstr ""
+msgstr "Nincs kristály"
 
 #: ../../tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:132
 msgid "Main Crystal Vein Exhausted"
-msgstr ""
+msgstr "Fő kristály telér kimerült"
 
 #: ../../tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:134
 msgctxt "atlanteans_building"
@@ -665,42 +624,18 @@ msgctxt "atlanteans_building"
 msgid "Farm"
 msgstr "Farm"
 
-#. TRANSLATORS: This is a building name used in lists of buildings
-#: ../../tribes/buildings/productionsites/barbarians/farm/init.lua:7
-msgctxt "barbarians_building"
-msgid "Farm"
-msgstr "Farm"
-
-#. TRANSLATORS: This is a building name used in lists of buildings
-#: ../../tribes/buildings/productionsites/empire/farm/init.lua:7
-msgctxt "empire_building"
-msgid "Farm"
-msgstr "Farm"
-
 #. TRANSLATORS: Completed/Skipped/Did not start planting corn because ...
 #: ../../tribes/buildings/productionsites/atlanteans/farm/init.lua:60
 msgid "planting corn"
-msgstr ""
+msgstr "kukorica vetése"
 
 #. TRANSLATORS: Completed/Skipped/Did not start harvesting corn because ...
 #: ../../tribes/buildings/productionsites/atlanteans/farm/init.lua:68
 msgid "harvesting corn"
-msgstr ""
+msgstr "kukorica betakarítása"
 
 #: ../../tribes/buildings/productionsites/atlanteans/farm/init.lua:79
 msgctxt "atlanteans_building"
-msgid ""
-"The farmer working at this farm has no cleared soil to plant his seeds."
-msgstr ""
-
-#: ../../tribes/buildings/productionsites/barbarians/farm/init.lua:91
-msgctxt "barbarians_building"
-msgid ""
-"The farmer working at this farm has no cleared soil to plant his seeds."
-msgstr ""
-
-#: ../../tribes/buildings/productionsites/empire/farm/init.lua:77
-msgctxt "empire_building"
 msgid ""
 "The farmer working at this farm has no cleared soil to plant his seeds."
 msgstr ""
@@ -714,17 +649,11 @@ msgstr "Haltenyésztőház"
 #. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
 #: ../../tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:43
 msgid "breeding fish"
-msgstr ""
+msgstr "halakat tenyészt"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/atlanteans/fishers_house/init.lua:7
 msgctxt "atlanteans_building"
-msgid "Fisher’s House"
-msgstr "Halászház"
-
-#. TRANSLATORS: This is a building name used in lists of buildings
-#: ../../tribes/buildings/productionsites/empire/fishers_house/init.lua:7
-msgctxt "empire_building"
 msgid "Fisher’s House"
 msgstr "Halászház"
 
@@ -733,19 +662,19 @@ msgstr "Halászház"
 #: ../../tribes/buildings/productionsites/barbarians/fishers_hut/init.lua:53
 #: ../../tribes/buildings/productionsites/empire/fishers_house/init.lua:45
 msgid "fishing"
-msgstr ""
+msgstr "horgászik"
 
 #: ../../tribes/buildings/productionsites/atlanteans/fishers_house/init.lua:54
 #: ../../tribes/buildings/productionsites/barbarians/fishers_hut/init.lua:62
 #: ../../tribes/buildings/productionsites/empire/fishers_house/init.lua:54
 msgid "No Fish"
-msgstr ""
+msgstr "Nincs hal"
 
 #: ../../tribes/buildings/productionsites/atlanteans/fishers_house/init.lua:55
 #: ../../tribes/buildings/productionsites/barbarians/fishers_hut/init.lua:63
 #: ../../tribes/buildings/productionsites/empire/fishers_house/init.lua:55
 msgid "Out of Fish"
-msgstr ""
+msgstr "A halak elfogytak"
 
 #: ../../tribes/buildings/productionsites/atlanteans/fishers_house/init.lua:56
 msgctxt "atlanteans_building"
@@ -761,45 +690,27 @@ msgctxt "atlanteans_building"
 msgid "Forester’s House"
 msgstr "Erdészház"
 
-#. TRANSLATORS: This is a building name used in lists of buildings
-#: ../../tribes/buildings/productionsites/empire/foresters_house/init.lua:7
-msgctxt "empire_building"
-msgid "Forester’s House"
-msgstr "Erdészház"
-
 #. TRANSLATORS: Completed/Skipped/Did not start planting trees because ...
 #: ../../tribes/buildings/productionsites/atlanteans/foresters_house/init.lua:43
 #: ../../tribes/buildings/productionsites/barbarians/rangers_hut/init.lua:50
 #: ../../tribes/buildings/productionsites/empire/foresters_house/init.lua:43
 msgid "planting trees"
-msgstr ""
+msgstr "fákat ültet"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/atlanteans/gold_spinning_mill/init.lua:7
 msgctxt "atlanteans_building"
 msgid "Gold Spinning Mill"
-msgstr ""
+msgstr "Aranyszálfonó malom"
 
 #. TRANSLATORS: Completed/Skipped/Did not start spinning gold because ...
 #: ../../tribes/buildings/productionsites/atlanteans/gold_spinning_mill/init.lua:53
 msgid "spinning gold"
-msgstr ""
+msgstr "aranyszál készítése"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/atlanteans/goldmine/init.lua:7
 msgctxt "atlanteans_building"
-msgid "Gold Mine"
-msgstr "Aranybánya"
-
-#. TRANSLATORS: This is a building name used in lists of buildings
-#: ../../tribes/buildings/productionsites/barbarians/goldmine/init.lua:7
-msgctxt "barbarians_building"
-msgid "Gold Mine"
-msgstr "Aranybánya"
-
-#. TRANSLATORS: This is a building name used in lists of buildings
-#: ../../tribes/buildings/productionsites/empire/goldmine/init.lua:7
-msgctxt "empire_building"
 msgid "Gold Mine"
 msgstr "Aranybánya"
 
@@ -811,7 +722,7 @@ msgstr "Aranybánya"
 #: ../../tribes/buildings/productionsites/empire/goldmine/init.lua:62
 #: ../../tribes/buildings/productionsites/empire/goldmine_deep/init.lua:60
 msgid "mining gold"
-msgstr ""
+msgstr "arany bányászata"
 
 #: ../../tribes/buildings/productionsites/atlanteans/goldmine/init.lua:80
 #: ../../tribes/buildings/productionsites/barbarians/goldmine/init.lua:78
@@ -820,7 +731,7 @@ msgstr ""
 #: ../../tribes/buildings/productionsites/empire/goldmine/init.lua:78
 #: ../../tribes/buildings/productionsites/empire/goldmine_deep/init.lua:76
 msgid "No Gold"
-msgstr ""
+msgstr "Nincs arany"
 
 #: ../../tribes/buildings/productionsites/atlanteans/goldmine/init.lua:81
 #: ../../tribes/buildings/productionsites/barbarians/goldmine/init.lua:79
@@ -829,7 +740,7 @@ msgstr ""
 #: ../../tribes/buildings/productionsites/empire/goldmine/init.lua:79
 #: ../../tribes/buildings/productionsites/empire/goldmine_deep/init.lua:77
 msgid "Main Gold Vein Exhausted"
-msgstr ""
+msgstr "Fő arany telér kimerült"
 
 #: ../../tribes/buildings/productionsites/atlanteans/goldmine/init.lua:83
 msgctxt "atlanteans_building"
@@ -847,17 +758,11 @@ msgstr "Lovarda"
 #. TRANSLATORS: Completed/Skipped/Did not start breeding horses because ...
 #: ../../tribes/buildings/productionsites/atlanteans/horsefarm/init.lua:54
 msgid "breeding horses"
-msgstr ""
+msgstr "lovakat tenyészt"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/atlanteans/hunters_house/init.lua:7
 msgctxt "atlanteans_building"
-msgid "Hunter’s House"
-msgstr "Vadászház"
-
-#. TRANSLATORS: This is a building name used in lists of buildings
-#: ../../tribes/buildings/productionsites/empire/hunters_house/init.lua:7
-msgctxt "empire_building"
 msgid "Hunter’s House"
 msgstr "Vadászház"
 
@@ -866,20 +771,20 @@ msgstr "Vadászház"
 #: ../../tribes/buildings/productionsites/barbarians/hunters_hut/init.lua:54
 #: ../../tribes/buildings/productionsites/empire/hunters_house/init.lua:42
 msgid "hunting"
-msgstr ""
+msgstr "vadászik"
 
 #: ../../tribes/buildings/productionsites/atlanteans/hunters_house/init.lua:53
 #: ../../tribes/buildings/productionsites/barbarians/hunters_hut/init.lua:63
 #: ../../tribes/buildings/productionsites/empire/hunters_house/init.lua:51
 msgid "No Game"
-msgstr ""
+msgstr "Nincsenek vadak"
 
 #. TRANSLATORS: "Game" means animals that you can hunt
 #: ../../tribes/buildings/productionsites/atlanteans/hunters_house/init.lua:55
 #: ../../tribes/buildings/productionsites/barbarians/hunters_hut/init.lua:65
 #: ../../tribes/buildings/productionsites/empire/hunters_house/init.lua:53
 msgid "Out of Game"
-msgstr ""
+msgstr "A vadak elfogytak"
 
 #. TRANSLATORS: "game" means animals that you can hunt
 #: ../../tribes/buildings/productionsites/atlanteans/hunters_house/init.lua:57
@@ -889,31 +794,11 @@ msgid ""
 "work area."
 msgstr ""
 
-#. TRANSLATORS: "game" means animals that you can hunt
-#: ../../tribes/buildings/productionsites/empire/hunters_house/init.lua:55
-msgctxt "empire_building"
-msgid ""
-"The hunter working out of this hunter’s house can’t find any game in his "
-"work area."
-msgstr ""
-
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/atlanteans/ironmine/init.lua:7
 msgctxt "atlanteans_building"
 msgid "Iron Mine"
-msgstr ""
-
-#. TRANSLATORS: This is a building name used in lists of buildings
-#: ../../tribes/buildings/productionsites/barbarians/ironmine/init.lua:7
-msgctxt "barbarians_building"
-msgid "Iron Mine"
-msgstr ""
-
-#. TRANSLATORS: This is a building name used in lists of buildings
-#: ../../tribes/buildings/productionsites/empire/ironmine/init.lua:7
-msgctxt "empire_building"
-msgid "Iron Mine"
-msgstr ""
+msgstr "Vasércbánya"
 
 #. TRANSLATORS: Completed/Skipped/Did not start mining iron because ...
 #: ../../tribes/buildings/productionsites/atlanteans/ironmine/init.lua:61
@@ -923,7 +808,7 @@ msgstr ""
 #: ../../tribes/buildings/productionsites/empire/ironmine/init.lua:62
 #: ../../tribes/buildings/productionsites/empire/ironmine_deep/init.lua:60
 msgid "mining iron"
-msgstr ""
+msgstr "vas bányászása"
 
 #: ../../tribes/buildings/productionsites/atlanteans/ironmine/init.lua:80
 #: ../../tribes/buildings/productionsites/barbarians/ironmine/init.lua:78
@@ -932,7 +817,7 @@ msgstr ""
 #: ../../tribes/buildings/productionsites/empire/ironmine/init.lua:78
 #: ../../tribes/buildings/productionsites/empire/ironmine_deep/init.lua:76
 msgid "No Iron"
-msgstr ""
+msgstr "Nincs vas"
 
 #: ../../tribes/buildings/productionsites/atlanteans/ironmine/init.lua:81
 #: ../../tribes/buildings/productionsites/barbarians/ironmine/init.lua:79
@@ -941,7 +826,7 @@ msgstr ""
 #: ../../tribes/buildings/productionsites/empire/ironmine/init.lua:79
 #: ../../tribes/buildings/productionsites/empire/ironmine_deep/init.lua:77
 msgid "Main Iron Vein Exhausted"
-msgstr ""
+msgstr "Fő vas telér kimerült"
 
 #: ../../tribes/buildings/productionsites/atlanteans/ironmine/init.lua:83
 msgctxt "atlanteans_building"
@@ -956,37 +841,19 @@ msgctxt "atlanteans_building"
 msgid "Mill"
 msgstr "Malom"
 
-#. TRANSLATORS: This is a building name used in lists of buildings
-#: ../../tribes/buildings/productionsites/empire/mill/init.lua:7
-msgctxt "empire_building"
-msgid "Mill"
-msgstr "Malom"
-
 #. TRANSLATORS: Completed/Skipped/Did not start grinding corn because ...
 #: ../../tribes/buildings/productionsites/atlanteans/mill/init.lua:66
 msgid "grinding corn"
-msgstr ""
+msgstr "kukorica őrlése"
 
 #. TRANSLATORS: Completed/Skipped/Did not start grinding blackrootbecause ...
 #: ../../tribes/buildings/productionsites/atlanteans/mill/init.lua:78
 msgid "grinding blackroot"
-msgstr ""
+msgstr "feketegyökér őrlése"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/atlanteans/quarry/init.lua:7
 msgctxt "atlanteans_building"
-msgid "Quarry"
-msgstr "Kőfejtő"
-
-#. TRANSLATORS: This is a building name used in lists of buildings
-#: ../../tribes/buildings/productionsites/barbarians/quarry/init.lua:7
-msgctxt "barbarians_building"
-msgid "Quarry"
-msgstr "Kőfejtő"
-
-#. TRANSLATORS: This is a building name used in lists of buildings
-#: ../../tribes/buildings/productionsites/empire/quarry/init.lua:7
-msgctxt "empire_building"
 msgid "Quarry"
 msgstr "Kőfejtő"
 
@@ -995,19 +862,19 @@ msgstr "Kőfejtő"
 #: ../../tribes/buildings/productionsites/barbarians/quarry/init.lua:64
 #: ../../tribes/buildings/productionsites/empire/quarry/init.lua:60
 msgid "quarrying granite"
-msgstr ""
+msgstr "gránit kifejtése"
 
 #: ../../tribes/buildings/productionsites/atlanteans/quarry/init.lua:66
 #: ../../tribes/buildings/productionsites/barbarians/quarry/init.lua:75
 #: ../../tribes/buildings/productionsites/empire/quarry/init.lua:81
 msgid "No Rocks"
-msgstr ""
+msgstr "Nincs kő"
 
 #: ../../tribes/buildings/productionsites/atlanteans/quarry/init.lua:67
 #: ../../tribes/buildings/productionsites/barbarians/quarry/init.lua:76
 #: ../../tribes/buildings/productionsites/empire/quarry/init.lua:82
 msgid "Out of Rocks"
-msgstr ""
+msgstr "A kő elfogyott"
 
 #: ../../tribes/buildings/productionsites/atlanteans/quarry/init.lua:68
 msgctxt "atlanteans_building"
@@ -1022,27 +889,15 @@ msgctxt "atlanteans_building"
 msgid "Sawmill"
 msgstr "Fűrészmalom"
 
-#. TRANSLATORS: This is a building name used in lists of buildings
-#: ../../tribes/buildings/productionsites/empire/sawmill/init.lua:7
-msgctxt "empire_building"
-msgid "Sawmill"
-msgstr "Fűrészmalom"
-
 #. TRANSLATORS: Completed/Skipped/Did not start sawing logs because ...
 #: ../../tribes/buildings/productionsites/atlanteans/sawmill/init.lua:56
 #: ../../tribes/buildings/productionsites/empire/sawmill/init.lua:56
 msgid "sawing logs"
-msgstr ""
+msgstr "farönkök fűrészelése"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/atlanteans/scouts_house/init.lua:7
 msgctxt "atlanteans_building"
-msgid "Scout’s House"
-msgstr "Felderítőház"
-
-#. TRANSLATORS: This is a building name used in lists of buildings
-#: ../../tribes/buildings/productionsites/empire/scouts_house/init.lua:7
-msgctxt "empire_building"
 msgid "Scout’s House"
 msgstr "Felderítőház"
 
@@ -1051,23 +906,11 @@ msgstr "Felderítőház"
 #: ../../tribes/buildings/productionsites/barbarians/scouts_hut/init.lua:52
 #: ../../tribes/buildings/productionsites/empire/scouts_house/init.lua:47
 msgid "scouting"
-msgstr ""
+msgstr "felderítés"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/atlanteans/shipyard/init.lua:7
 msgctxt "atlanteans_building"
-msgid "Shipyard"
-msgstr "Hajógyár"
-
-#. TRANSLATORS: This is a building name used in lists of buildings
-#: ../../tribes/buildings/productionsites/barbarians/shipyard/init.lua:7
-msgctxt "barbarians_building"
-msgid "Shipyard"
-msgstr "Hajógyár"
-
-#. TRANSLATORS: This is a building name used in lists of buildings
-#: ../../tribes/buildings/productionsites/empire/shipyard/init.lua:7
-msgctxt "empire_building"
 msgid "Shipyard"
 msgstr "Hajógyár"
 
@@ -1077,23 +920,11 @@ msgstr "Hajógyár"
 #: ../../tribes/buildings/productionsites/barbarians/shipyard/init.lua:76
 #: ../../tribes/buildings/productionsites/empire/shipyard/init.lua:76
 msgid "constructing a ship"
-msgstr ""
+msgstr "hajó építése"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/atlanteans/smelting_works/init.lua:7
 msgctxt "atlanteans_building"
-msgid "Smelting Works"
-msgstr "Kohó"
-
-#. TRANSLATORS: This is a building name used in lists of buildings
-#: ../../tribes/buildings/productionsites/barbarians/smelting_works/init.lua:7
-msgctxt "barbarians_building"
-msgid "Smelting Works"
-msgstr "Kohó"
-
-#. TRANSLATORS: This is a building name used in lists of buildings
-#: ../../tribes/buildings/productionsites/empire/smelting_works/init.lua:7
-msgctxt "empire_building"
 msgid "Smelting Works"
 msgstr "Kohó"
 
@@ -1102,14 +933,14 @@ msgstr "Kohó"
 #: ../../tribes/buildings/productionsites/barbarians/smelting_works/init.lua:71
 #: ../../tribes/buildings/productionsites/empire/smelting_works/init.lua:74
 msgid "smelting iron"
-msgstr ""
+msgstr "vas olvasztása"
 
 #. TRANSLATORS: Completed/Skipped/Did not start smelting gold because ...
 #: ../../tribes/buildings/productionsites/atlanteans/smelting_works/init.lua:79
 #: ../../tribes/buildings/productionsites/barbarians/smelting_works/init.lua:82
 #: ../../tribes/buildings/productionsites/empire/smelting_works/init.lua:85
 msgid "smelting gold"
-msgstr ""
+msgstr "arany olvasztása"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/atlanteans/smokery/init.lua:7
@@ -1120,12 +951,12 @@ msgstr "Füstölő"
 #. TRANSLATORS: Completed/Skipped/Did not start smoking meat because ...
 #: ../../tribes/buildings/productionsites/atlanteans/smokery/init.lua:70
 msgid "smoking meat"
-msgstr ""
+msgstr "hús füstölése"
 
 #. TRANSLATORS: Completed/Skipped/Did not start smoking fish because ...
 #: ../../tribes/buildings/productionsites/atlanteans/smokery/init.lua:82
 msgid "smoking fish"
-msgstr ""
+msgstr "hal füstölése"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/atlanteans/spiderfarm/init.lua:7
@@ -1137,13 +968,7 @@ msgstr "Póktenyészet"
 #: ../../tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:7
 msgctxt "atlanteans_building"
 msgid "Toolsmithy"
-msgstr "Szerszámkovácsműhely"
-
-#. TRANSLATORS: This is a building name used in lists of buildings
-#: ../../tribes/buildings/productionsites/empire/toolsmithy/init.lua:7
-msgctxt "empire_building"
-msgid "Toolsmithy"
-msgstr "Szerszámkovácsműhely"
+msgstr "Szerszámkovács műhely"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a bread paddle because
 #. ...
@@ -1151,154 +976,136 @@ msgstr "Szerszámkovácsműhely"
 #: ../../tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:96
 #: ../../tribes/buildings/productionsites/empire/toolsmithy/init.lua:110
 msgid "making a bread paddle"
-msgstr ""
+msgstr "péklapát készítése"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a pair of buckets
 #. because ...
 #: ../../tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:98
 msgid "making a pair of buckets"
-msgstr ""
+msgstr "egy pár vödör készítése"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making fire tongs because ...
 #: ../../tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:109
 #: ../../tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:120
 #: ../../tribes/buildings/productionsites/empire/toolsmithy/init.lua:122
 msgid "making fire tongs"
-msgstr ""
+msgstr "parázsfogó készítése"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a fishing net because
 #. ...
 #: ../../tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:120
 msgid "making a fishing net"
-msgstr ""
+msgstr "halászháló készítése"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
 #: ../../tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:131
 #: ../../tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:144
 #: ../../tribes/buildings/productionsites/empire/toolsmithy/init.lua:146
 msgid "making a hammer"
-msgstr ""
+msgstr "kalapács készítése"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a hook pole because ...
 #: ../../tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:142
 msgid "making a hook pole"
-msgstr ""
+msgstr "kampós rudat készít"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a hunting bow because
 #. ...
 #: ../../tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:153
 msgid "making a hunting bow"
-msgstr ""
+msgstr "vadászíj készítése"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making milking tongs because
 #. ...
 #: ../../tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:164
 msgid "making milking tongs"
-msgstr ""
+msgstr "fejőfogó készítése"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
 #: ../../tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:175
 #: ../../tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:180
 #: ../../tribes/buildings/productionsites/empire/toolsmithy/init.lua:182
 msgid "making a pick"
-msgstr ""
+msgstr "csákány készítése"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a saw because ...
 #: ../../tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:186
 #: ../../tribes/buildings/productionsites/empire/toolsmithy/init.lua:194
 msgid "making a saw"
-msgstr ""
+msgstr "fűrész készítése"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a scythe because ...
 #: ../../tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:197
 #: ../../tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:192
 #: ../../tribes/buildings/productionsites/empire/toolsmithy/init.lua:206
 msgid "making a scythe"
-msgstr ""
+msgstr "kasza készítése"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
 #: ../../tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:208
 #: ../../tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:204
 #: ../../tribes/buildings/productionsites/empire/toolsmithy/init.lua:218
 msgid "making a shovel"
-msgstr ""
+msgstr "lapát készítése"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua:7
 msgctxt "atlanteans_building"
 msgid "Weapon Smithy"
-msgstr "Fegyverkovácsműhely"
-
-#. TRANSLATORS: This is a building name used in lists of buildings
-#: ../../tribes/buildings/productionsites/empire/weaponsmithy/init.lua:7
-msgctxt "empire_building"
-msgid "Weapon Smithy"
-msgstr "Fegyverkovácsműhely"
+msgstr "Fegyverkovács műhely"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a light trident
 #. because ...
 #: ../../tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua:75
 msgid "forging a light trident"
-msgstr ""
+msgstr "könnyű szigony kovácsolása"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a long trident because
 #. ...
 #: ../../tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua:88
 msgid "forging a long trident"
-msgstr ""
+msgstr "hosszú szigony kovácsolása"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a steel trident
 #. because ...
 #: ../../tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua:101
 msgid "forging a steel trident"
-msgstr ""
+msgstr "acélszigony kovácsolása"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a double trident
 #. because ...
 #: ../../tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua:114
 msgid "forging a double trident"
-msgstr ""
+msgstr "kétvégű szigony kovácsolása"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a heavy double trident
 #. because ...
 #: ../../tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua:127
 msgid "forging a heavy double trident"
-msgstr ""
+msgstr "nehéz kétvégű szigony kovácsolása"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/atlanteans/weaving_mill/init.lua:7
 msgctxt "atlanteans_building"
 msgid "Weaving Mill"
-msgstr "Fegyverkészítő műhely"
-
-#. TRANSLATORS: This is a building name used in lists of buildings
-#: ../../tribes/buildings/productionsites/barbarians/weaving_mill/init.lua:7
-msgctxt "barbarians_building"
-msgid "Weaving Mill"
-msgstr "Fegyverkészítő műhely"
-
-#. TRANSLATORS: This is a building name used in lists of buildings
-#: ../../tribes/buildings/productionsites/empire/weaving_mill/init.lua:7
-msgctxt "empire_building"
-msgid "Weaving Mill"
-msgstr "Fegyverkészítő műhely"
+msgstr "Szövőmalom"
 
 #. TRANSLATORS: Completed/Skipped/Did not start weaving spidercloth because
 #. ...
 #: ../../tribes/buildings/productionsites/atlanteans/weaving_mill/init.lua:70
 msgid "weaving spidercloth"
-msgstr ""
+msgstr "pókszövet szövése"
 
 #. TRANSLATORS: Completed/Skipped/Did not start tailoring a tabard because ...
 #: ../../tribes/buildings/productionsites/atlanteans/weaving_mill/init.lua:81
 msgid "tailoring a tabard"
-msgstr ""
+msgstr "köntös szabása"
 
 #. TRANSLATORS: Completed/Skipped/Did not start tailoring a golden tabard
 #. because ...
 #: ../../tribes/buildings/productionsites/atlanteans/weaving_mill/init.lua:92
 msgid "tailoring a golden tabard"
-msgstr ""
+msgstr "aranyköntös szabása"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/atlanteans/well/init.lua:7
@@ -1306,47 +1113,23 @@ msgctxt "atlanteans_building"
 msgid "Well"
 msgstr "Kút"
 
-#. TRANSLATORS: This is a building name used in lists of buildings
-#: ../../tribes/buildings/productionsites/barbarians/well/init.lua:7
-msgctxt "barbarians_building"
-msgid "Well"
-msgstr "Kút"
-
-#. TRANSLATORS: This is a building name used in lists of buildings
-#: ../../tribes/buildings/productionsites/empire/well/init.lua:7
-msgctxt "empire_building"
-msgid "Well"
-msgstr "Kút"
-
 #: ../../tribes/buildings/productionsites/atlanteans/well/init.lua:63
 #: ../../tribes/buildings/productionsites/barbarians/well/init.lua:66
 #: ../../tribes/buildings/productionsites/empire/well/init.lua:63
 msgid "No Water"
-msgstr ""
+msgstr "Nincs víz"
 
 #: ../../tribes/buildings/productionsites/atlanteans/well/init.lua:64
 #: ../../tribes/buildings/productionsites/barbarians/well/init.lua:67
 #: ../../tribes/buildings/productionsites/empire/well/init.lua:64
 msgid "Out of Water"
-msgstr ""
+msgstr "Kifogyott a víz"
 
 #: ../../tribes/buildings/productionsites/atlanteans/well/init.lua:65
 msgctxt "atlanteans_building"
 msgid ""
 "The carrier working at this well can’t find any water in his work area."
-msgstr ""
-
-#: ../../tribes/buildings/productionsites/barbarians/well/init.lua:68
-msgctxt "barbarians_building"
-msgid ""
-"The carrier working at this well can’t find any water in his work area."
-msgstr ""
-
-#: ../../tribes/buildings/productionsites/empire/well/init.lua:65
-msgctxt "empire_building"
-msgid ""
-"The carrier working at this well can’t find any water in his work area."
-msgstr ""
+msgstr "A hordár aki ennél a kútnál dolgozik nem talál vizet a munkaterületén."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/atlanteans/woodcutters_house/init.lua:7
@@ -1359,19 +1142,19 @@ msgstr "Favágóház"
 #: ../../tribes/buildings/productionsites/barbarians/lumberjacks_hut/init.lua:54
 #: ../../tribes/buildings/productionsites/empire/lumberjacks_house/init.lua:46
 msgid "felling trees"
-msgstr ""
+msgstr "fa kivágása"
 
 #: ../../tribes/buildings/productionsites/atlanteans/woodcutters_house/init.lua:55
 #: ../../tribes/buildings/productionsites/barbarians/lumberjacks_hut/init.lua:63
 #: ../../tribes/buildings/productionsites/empire/lumberjacks_house/init.lua:55
 msgid "No Trees"
-msgstr ""
+msgstr "Nincs fa"
 
 #: ../../tribes/buildings/productionsites/atlanteans/woodcutters_house/init.lua:56
 #: ../../tribes/buildings/productionsites/barbarians/lumberjacks_hut/init.lua:64
 #: ../../tribes/buildings/productionsites/empire/lumberjacks_house/init.lua:56
 msgid "Out of Trees"
-msgstr ""
+msgstr "Kifogyott a fa"
 
 #: ../../tribes/buildings/productionsites/atlanteans/woodcutters_house/init.lua:57
 msgctxt "atlanteans_building"
@@ -1385,25 +1168,31 @@ msgstr ""
 #: ../../tribes/buildings/productionsites/barbarians/ax_workshop/init.lua:7
 msgctxt "barbarians_building"
 msgid "Ax Workshop"
-msgstr ""
+msgstr "Fejszekészítő műhely"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging an ax because ...
 #: ../../tribes/buildings/productionsites/barbarians/ax_workshop/init.lua:79
 #: ../../tribes/buildings/productionsites/barbarians/warmill/init.lua:86
 msgid "forging an ax"
-msgstr ""
+msgstr "fejsze kovácsolása"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a sharp ax because ...
 #: ../../tribes/buildings/productionsites/barbarians/ax_workshop/init.lua:92
 #: ../../tribes/buildings/productionsites/barbarians/warmill/init.lua:99
 msgid "forging a sharp ax"
-msgstr ""
+msgstr "éles fejsze kovácsolása"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a broad ax because ...
 #: ../../tribes/buildings/productionsites/barbarians/ax_workshop/init.lua:105
 #: ../../tribes/buildings/productionsites/barbarians/warmill/init.lua:112
 msgid "forging a broad ax"
-msgstr ""
+msgstr "széles fejsze kovácsolása"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/barbarians/bakery/init.lua:7
+msgctxt "barbarians_building"
+msgid "Bakery"
+msgstr "Pékség"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/barbarians/big_inn/init.lua:7
@@ -1418,19 +1207,19 @@ msgstr "Nagy fogadó"
 #: ../../tribes/buildings/productionsites/empire/inn/init.lua:66
 #: ../../tribes/buildings/productionsites/empire/tavern/init.lua:58
 msgid "preparing a ration"
-msgstr ""
+msgstr "harapnivaló készítése"
 
 #. TRANSLATORS: Completed/Skipped/Did not start preparing a snack because ...
 #: ../../tribes/buildings/productionsites/barbarians/big_inn/init.lua:83
 #: ../../tribes/buildings/productionsites/barbarians/inn/init.lua:81
 msgid "preparing a snack"
-msgstr ""
+msgstr "uzsonna készítése"
 
 #. TRANSLATORS: Completed/Skipped/Did not start preparing a meal because ...
 #: ../../tribes/buildings/productionsites/barbarians/big_inn/init.lua:93
 #: ../../tribes/buildings/productionsites/empire/inn/init.lua:77
 msgid "preparing a meal"
-msgstr ""
+msgstr "ebéd készítése"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/barbarians/brewery/init.lua:7
@@ -1438,17 +1227,11 @@ msgctxt "barbarians_building"
 msgid "Brewery"
 msgstr "Sörfőzde"
 
-#. TRANSLATORS: This is a building name used in lists of buildings
-#: ../../tribes/buildings/productionsites/empire/brewery/init.lua:7
-msgctxt "empire_building"
-msgid "Brewery"
-msgstr "Sörfőzde"
-
 #. TRANSLATORS: Completed/Skipped/Did not start brewing strong beer because
 #. ...
 #: ../../tribes/buildings/productionsites/barbarians/brewery/init.lua:55
 msgid "brewing strong beer"
-msgstr ""
+msgstr "erős sör főzése"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/barbarians/cattlefarm/init.lua:7
@@ -1459,7 +1242,19 @@ msgstr "Marhafarm"
 #. TRANSLATORS: Completed/Skipped/Did not start rearing cattle because ...
 #: ../../tribes/buildings/productionsites/barbarians/cattlefarm/init.lua:54
 msgid "rearing cattle"
-msgstr ""
+msgstr "marhák nevelése"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/barbarians/charcoal_kiln/init.lua:7
+msgctxt "barbarians_building"
+msgid "Charcoal Kiln"
+msgstr "Faszénégető kemence"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/barbarians/coalmine/init.lua:7
+msgctxt "barbarians_building"
+msgid "Coal Mine"
+msgstr "Szénbánya"
 
 #: ../../tribes/buildings/productionsites/barbarians/coalmine/init.lua:81
 #: ../../tribes/buildings/productionsites/barbarians/coalmine_deep/init.lua:84
@@ -1469,22 +1264,9 @@ msgid ""
 "on investment. You should consider enhancing, dismantling or destroying it."
 msgstr ""
 
-#: ../../tribes/buildings/productionsites/empire/coalmine/init.lua:81
-msgctxt "empire_building"
-msgid ""
-"This coal mine’s main vein is exhausted. Expect strongly diminished returns "
-"on investment. You should consider enhancing, dismantling or destroying it."
-msgstr ""
-
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/barbarians/coalmine_deep/init.lua:7
 msgctxt "barbarians_building"
-msgid "Deep Coal Mine"
-msgstr "Mély szénbánya"
-
-#. TRANSLATORS: This is a building name used in lists of buildings
-#: ../../tribes/buildings/productionsites/empire/coalmine_deep/init.lua:7
-msgctxt "empire_building"
 msgid "Deep Coal Mine"
 msgstr "Mély szénbánya"
 
@@ -1502,24 +1284,28 @@ msgid ""
 "consider dismantling or destroying it."
 msgstr ""
 
-#: ../../tribes/buildings/productionsites/empire/coalmine_deep/init.lua:79
-msgctxt "empire_building"
-msgid ""
-"This coal mine’s main vein is exhausted. Expect strongly diminished returns "
-"on investment. This mine can’t be enhanced any further, so you should "
-"consider dismantling or destroying it."
-msgstr ""
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/barbarians/farm/init.lua:7
+msgctxt "barbarians_building"
+msgid "Farm"
+msgstr "Farm"
 
 #. TRANSLATORS: Completed/Skipped/Did not start planting wheat because ...
 #: ../../tribes/buildings/productionsites/barbarians/farm/init.lua:71
 #: ../../tribes/buildings/productionsites/empire/farm/init.lua:58
 msgid "planting wheat"
-msgstr ""
+msgstr "búza vetése"
 
 #. TRANSLATORS: Completed/Skipped/Did not start harvesting wheat because ...
 #: ../../tribes/buildings/productionsites/barbarians/farm/init.lua:79
 #: ../../tribes/buildings/productionsites/empire/farm/init.lua:66
 msgid "harvesting wheat"
+msgstr "búza aratása"
+
+#: ../../tribes/buildings/productionsites/barbarians/farm/init.lua:91
+msgctxt "barbarians_building"
+msgid ""
+"The farmer working at this farm has no cleared soil to plant his seeds."
 msgstr ""
 
 #. TRANSLATORS: This is a building name used in lists of buildings
@@ -1541,6 +1327,12 @@ msgctxt "barbarians_building"
 msgid "Gamekeeper’s Hut"
 msgstr "Vadőrkunyhó"
 
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/barbarians/goldmine/init.lua:7
+msgctxt "barbarians_building"
+msgid "Gold Mine"
+msgstr "Aranybánya"
+
 #: ../../tribes/buildings/productionsites/barbarians/goldmine/init.lua:81
 #: ../../tribes/buildings/productionsites/barbarians/goldmine_deep/init.lua:84
 msgctxt "barbarians_building"
@@ -1549,22 +1341,9 @@ msgid ""
 "on investment. You should consider enhancing, dismantling or destroying it."
 msgstr ""
 
-#: ../../tribes/buildings/productionsites/empire/goldmine/init.lua:81
-msgctxt "empire_building"
-msgid ""
-"This gold mine’s main vein is exhausted. Expect strongly diminished returns "
-"on investment. You should consider enhancing, dismantling or destroying it."
-msgstr ""
-
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/barbarians/goldmine_deep/init.lua:7
 msgctxt "barbarians_building"
-msgid "Deep Gold Mine"
-msgstr "Mély aranybánya"
-
-#. TRANSLATORS: This is a building name used in lists of buildings
-#: ../../tribes/buildings/productionsites/empire/goldmine_deep/init.lua:7
-msgctxt "empire_building"
 msgid "Deep Gold Mine"
 msgstr "Mély aranybánya"
 
@@ -1582,14 +1361,6 @@ msgid ""
 "consider dismantling or destroying it."
 msgstr ""
 
-#: ../../tribes/buildings/productionsites/empire/goldmine_deep/init.lua:79
-msgctxt "empire_building"
-msgid ""
-"This gold mine’s main vein is exhausted. Expect strongly diminished returns "
-"on investment. This mine can’t be enhanced any further, so you should "
-"consider dismantling or destroying it."
-msgstr ""
-
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/barbarians/granitemine/init.lua:7
 msgctxt "barbarians_building"
@@ -1598,11 +1369,11 @@ msgstr "Gránitbánya"
 
 #: ../../tribes/buildings/productionsites/barbarians/granitemine/init.lua:76
 msgid "No Granite"
-msgstr ""
+msgstr "Nincs gránit"
 
 #: ../../tribes/buildings/productionsites/barbarians/granitemine/init.lua:77
 msgid "Main Granite Vein Exhausted"
-msgstr ""
+msgstr "Fő gránit érc kimerült"
 
 #: ../../tribes/buildings/productionsites/barbarians/granitemine/init.lua:79
 msgctxt "barbarians_building"
@@ -1622,17 +1393,17 @@ msgstr "Sisakkészítő műhely"
 #: ../../tribes/buildings/productionsites/barbarians/helmsmithy/init.lua:82
 #: ../../tribes/buildings/productionsites/empire/armorsmithy/init.lua:84
 msgid "forging a helmet"
-msgstr ""
+msgstr "sisak kovácsolása"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a mask because ...
 #: ../../tribes/buildings/productionsites/barbarians/helmsmithy/init.lua:93
 msgid "forging a mask"
-msgstr ""
+msgstr "maszk kovácsolása"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a warhelm because ...
 #: ../../tribes/buildings/productionsites/barbarians/helmsmithy/init.lua:104
 msgid "forging a warhelm"
-msgstr ""
+msgstr "harci sisak kovácsolása"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/barbarians/hunters_hut/init.lua:7
@@ -1656,10 +1427,10 @@ msgid "Inn"
 msgstr "Fogadó"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
-#: ../../tribes/buildings/productionsites/empire/inn/init.lua:7
-msgctxt "empire_building"
-msgid "Inn"
-msgstr "Fogadó"
+#: ../../tribes/buildings/productionsites/barbarians/ironmine/init.lua:7
+msgctxt "barbarians_building"
+msgid "Iron Mine"
+msgstr "Vasércbánya"
 
 #: ../../tribes/buildings/productionsites/barbarians/ironmine/init.lua:81
 #: ../../tribes/buildings/productionsites/barbarians/ironmine_deep/init.lua:84
@@ -1669,41 +1440,20 @@ msgid ""
 "on investment. You should consider enhancing, dismantling or destroying it."
 msgstr ""
 
-#: ../../tribes/buildings/productionsites/empire/ironmine/init.lua:81
-msgctxt "empire_building"
-msgid ""
-"This iron mine’s main vein is exhausted. Expect strongly diminished returns "
-"on investment. You should consider enhancing, dismantling or destroying it."
-msgstr ""
-
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/barbarians/ironmine_deep/init.lua:7
 msgctxt "barbarians_building"
 msgid "Deep Iron Mine"
-msgstr ""
-
-#. TRANSLATORS: This is a building name used in lists of buildings
-#: ../../tribes/buildings/productionsites/empire/ironmine_deep/init.lua:7
-msgctxt "empire_building"
-msgid "Deep Iron Mine"
-msgstr ""
+msgstr "Mély vasércbánya"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/barbarians/ironmine_deeper/init.lua:7
 msgctxt "barbarians_building"
 msgid "Deeper Iron Mine"
-msgstr ""
+msgstr "Mélyebb vasércbánya"
 
 #: ../../tribes/buildings/productionsites/barbarians/ironmine_deeper/init.lua:86
 msgctxt "barbarians_building"
-msgid ""
-"This iron mine’s main vein is exhausted. Expect strongly diminished returns "
-"on investment. This mine can’t be enhanced any further, so you should "
-"consider dismantling or destroying it."
-msgstr ""
-
-#: ../../tribes/buildings/productionsites/empire/ironmine_deep/init.lua:79
-msgctxt "empire_building"
 msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. This mine can’t be enhanced any further, so you should "
@@ -1719,7 +1469,7 @@ msgstr "Mészégető"
 #. TRANSLATORS: Completed/Skipped/Did not start mixing grout because ...
 #: ../../tribes/buildings/productionsites/barbarians/lime_kiln/init.lua:57
 msgid "mixing grout"
-msgstr ""
+msgstr "habarcs keverése"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/barbarians/lumberjacks_hut/init.lua:7
@@ -1746,28 +1496,28 @@ msgstr "Szerszámkészítő műhely"
 #: ../../tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:108
 #: ../../tribes/buildings/productionsites/empire/toolsmithy/init.lua:86
 msgid "making a felling ax"
-msgstr ""
+msgstr "favágó balta készítése"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a fishing rod because
 #. ...
 #: ../../tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:132
 #: ../../tribes/buildings/productionsites/empire/toolsmithy/init.lua:134
 msgid "making a fishing rod"
-msgstr ""
+msgstr "horgászbot készítése"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a hunting spear because
 #. ...
 #: ../../tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:156
 #: ../../tribes/buildings/productionsites/empire/toolsmithy/init.lua:158
 msgid "making a hunting spear"
-msgstr ""
+msgstr "vadászlándzsa készítése"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
 #. ...
 #: ../../tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:168
 #: ../../tribes/buildings/productionsites/empire/toolsmithy/init.lua:170
 msgid "making kitchen tools"
-msgstr ""
+msgstr "konyhai eszközök készítése"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/barbarians/micro_brewery/init.lua:7
@@ -1779,16 +1529,16 @@ msgstr "Kis sörfőzde"
 #: ../../tribes/buildings/productionsites/barbarians/micro_brewery/init.lua:57
 #: ../../tribes/buildings/productionsites/empire/brewery/init.lua:57
 msgid "brewing beer"
-msgstr ""
+msgstr "sör főzése"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/barbarians/quarry/init.lua:7
+msgctxt "barbarians_building"
+msgid "Quarry"
+msgstr "Kőfejtő"
 
 #: ../../tribes/buildings/productionsites/barbarians/quarry/init.lua:77
 msgctxt "barbarians_building"
-msgid ""
-"The stonemason working at this quarry can’t find any rocks in his work area."
-msgstr ""
-
-#: ../../tribes/buildings/productionsites/empire/quarry/init.lua:83
-msgctxt "empire_building"
 msgid ""
 "The stonemason working at this quarry can’t find any rocks in his work area."
 msgstr ""
@@ -1808,12 +1558,12 @@ msgstr "Nádudvar"
 #. TRANSLATORS: Completed/Skipped/Did not start planting reed because ...
 #: ../../tribes/buildings/productionsites/barbarians/reed_yard/init.lua:55
 msgid "planting reed"
-msgstr ""
+msgstr "nád ültetése"
 
 #. TRANSLATORS: Completed/Skipped/Did not start harvesting reed because ...
 #: ../../tribes/buildings/productionsites/barbarians/reed_yard/init.lua:63
 msgid "harvesting reed"
-msgstr ""
+msgstr "nád betakarítása"
 
 #: ../../tribes/buildings/productionsites/barbarians/reed_yard/init.lua:74
 msgctxt "barbarians_building"
@@ -1829,14 +1579,20 @@ msgid "Scout’s Hut"
 msgstr "Felderítő kunyhója"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
-#: ../../tribes/buildings/productionsites/barbarians/tavern/init.lua:7
+#: ../../tribes/buildings/productionsites/barbarians/shipyard/init.lua:7
 msgctxt "barbarians_building"
-msgid "Tavern"
-msgstr "Kocsma"
+msgid "Shipyard"
+msgstr "Hajógyár"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
-#: ../../tribes/buildings/productionsites/empire/tavern/init.lua:7
-msgctxt "empire_building"
+#: ../../tribes/buildings/productionsites/barbarians/smelting_works/init.lua:7
+msgctxt "barbarians_building"
+msgid "Smelting Works"
+msgstr "Kohó"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/barbarians/tavern/init.lua:7
+msgctxt "barbarians_building"
 msgid "Tavern"
 msgstr "Kocsma"
 
@@ -1850,25 +1606,43 @@ msgstr "Fegyverkészítő műhely"
 #. ...
 #: ../../tribes/buildings/productionsites/barbarians/warmill/init.lua:125
 msgid "forging a bronze ax"
-msgstr ""
+msgstr "bronz fejsze kovácsolása"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a battle ax because
 #. ...
 #: ../../tribes/buildings/productionsites/barbarians/warmill/init.lua:138
 msgid "forging a battle ax"
-msgstr ""
+msgstr "csatabalta kovácsolása"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a warrior’s ax because
 #. ...
 #: ../../tribes/buildings/productionsites/barbarians/warmill/init.lua:151
 msgid "forging a warrior’s ax"
-msgstr ""
+msgstr "harci fejsze kovácsolása"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/barbarians/weaving_mill/init.lua:7
+msgctxt "barbarians_building"
+msgid "Weaving Mill"
+msgstr "Szövőmalom"
 
 #. TRANSLATORS: Completed/Skipped/Did not start weaving because ...
 #: ../../tribes/buildings/productionsites/barbarians/weaving_mill/init.lua:59
 #: ../../tribes/buildings/productionsites/empire/weaving_mill/init.lua:64
 msgid "weaving"
-msgstr ""
+msgstr "szövés"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/barbarians/well/init.lua:7
+msgctxt "barbarians_building"
+msgid "Well"
+msgstr "Kút"
+
+#: ../../tribes/buildings/productionsites/barbarians/well/init.lua:68
+msgctxt "barbarians_building"
+msgid ""
+"The carrier working at this well can’t find any water in his work area."
+msgstr "A hordár aki ennél a kútnál dolgozik nem talál vizet a munkaterületén."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/barbarians/wood_hardener/init.lua:7
@@ -1879,36 +1653,105 @@ msgstr "Faedző műhely"
 #. TRANSLATORS: Completed/Skipped/Did not start hardening wood because ...
 #: ../../tribes/buildings/productionsites/barbarians/wood_hardener/init.lua:65
 msgid "hardening wood"
-msgstr ""
+msgstr "fa megedzése"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/empire/armorsmithy/init.lua:7
+msgctxt "empire_building"
+msgid "Armor Smithy"
+msgstr "Páncélkovács műhely"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a suit of armor
 #. because ...
 #: ../../tribes/buildings/productionsites/empire/armorsmithy/init.lua:95
 msgid "forging a suit of armor"
-msgstr ""
+msgstr "páncél kovácsolása"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a suit of chain armor
 #. because ...
 #: ../../tribes/buildings/productionsites/empire/armorsmithy/init.lua:106
 msgid "forging a suit of chain armor"
-msgstr ""
+msgstr "lánc páncél kovácsolása"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a suit of gilded armor
 #. because ...
 #: ../../tribes/buildings/productionsites/empire/armorsmithy/init.lua:117
 msgid "forging a suit of gilded armor"
+msgstr "aranyozott páncél kovácsolása"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/empire/bakery/init.lua:7
+msgctxt "empire_building"
+msgid "Bakery"
+msgstr "Pékség"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/empire/brewery/init.lua:7
+msgctxt "empire_building"
+msgid "Brewery"
+msgstr "Sörfőzde"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/empire/charcoal_kiln/init.lua:7
+msgctxt "empire_building"
+msgid "Charcoal Kiln"
+msgstr "Faszénégető kemence"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/empire/coalmine/init.lua:7
+msgctxt "empire_building"
+msgid "Coal Mine"
+msgstr "Szénbánya"
+
+#: ../../tribes/buildings/productionsites/empire/coalmine/init.lua:81
+msgctxt "empire_building"
+msgid ""
+"This coal mine’s main vein is exhausted. Expect strongly diminished returns "
+"on investment. You should consider enhancing, dismantling or destroying it."
+msgstr ""
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/empire/coalmine_deep/init.lua:7
+msgctxt "empire_building"
+msgid "Deep Coal Mine"
+msgstr "Mély szénbánya"
+
+#: ../../tribes/buildings/productionsites/empire/coalmine_deep/init.lua:79
+msgctxt "empire_building"
+msgid ""
+"This coal mine’s main vein is exhausted. Expect strongly diminished returns "
+"on investment. This mine can’t be enhanced any further, so you should "
+"consider dismantling or destroying it."
 msgstr ""
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/empire/donkeyfarm/init.lua:7
 msgctxt "empire_building"
 msgid "Donkey Farm"
-msgstr ""
+msgstr "Szamárfarm"
 
 #. TRANSLATORS: Completed/Skipped/Did not start rearing donkeys because ...
 #: ../../tribes/buildings/productionsites/empire/donkeyfarm/init.lua:54
 msgid "rearing donkeys"
+msgstr "szamarak nevelése"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/empire/farm/init.lua:7
+msgctxt "empire_building"
+msgid "Farm"
+msgstr "Farm"
+
+#: ../../tribes/buildings/productionsites/empire/farm/init.lua:77
+msgctxt "empire_building"
+msgid ""
+"The farmer working at this farm has no cleared soil to plant his seeds."
 msgstr ""
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/empire/fishers_house/init.lua:7
+msgctxt "empire_building"
+msgid "Fisher’s House"
+msgstr "Halászház"
 
 #: ../../tribes/buildings/productionsites/empire/fishers_house/init.lua:56
 msgctxt "empire_building"
@@ -1918,10 +1761,90 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/empire/foresters_house/init.lua:7
+msgctxt "empire_building"
+msgid "Forester’s House"
+msgstr "Erdészház"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/empire/goldmine/init.lua:7
+msgctxt "empire_building"
+msgid "Gold Mine"
+msgstr "Aranybánya"
+
+#: ../../tribes/buildings/productionsites/empire/goldmine/init.lua:81
+msgctxt "empire_building"
+msgid ""
+"This gold mine’s main vein is exhausted. Expect strongly diminished returns "
+"on investment. You should consider enhancing, dismantling or destroying it."
+msgstr ""
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/empire/goldmine_deep/init.lua:7
+msgctxt "empire_building"
+msgid "Deep Gold Mine"
+msgstr "Mély aranybánya"
+
+#: ../../tribes/buildings/productionsites/empire/goldmine_deep/init.lua:79
+msgctxt "empire_building"
+msgid ""
+"This gold mine’s main vein is exhausted. Expect strongly diminished returns "
+"on investment. This mine can’t be enhanced any further, so you should "
+"consider dismantling or destroying it."
+msgstr ""
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/empire/hunters_house/init.lua:7
+msgctxt "empire_building"
+msgid "Hunter’s House"
+msgstr "Vadászház"
+
+#. TRANSLATORS: "game" means animals that you can hunt
+#: ../../tribes/buildings/productionsites/empire/hunters_house/init.lua:55
+msgctxt "empire_building"
+msgid ""
+"The hunter working out of this hunter’s house can’t find any game in his "
+"work area."
+msgstr ""
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/empire/inn/init.lua:7
+msgctxt "empire_building"
+msgid "Inn"
+msgstr "Fogadó"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/empire/ironmine/init.lua:7
+msgctxt "empire_building"
+msgid "Iron Mine"
+msgstr "Vasércbánya"
+
+#: ../../tribes/buildings/productionsites/empire/ironmine/init.lua:81
+msgctxt "empire_building"
+msgid ""
+"This iron mine’s main vein is exhausted. Expect strongly diminished returns "
+"on investment. You should consider enhancing, dismantling or destroying it."
+msgstr ""
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/empire/ironmine_deep/init.lua:7
+msgctxt "empire_building"
+msgid "Deep Iron Mine"
+msgstr "Mély vasércbánya"
+
+#: ../../tribes/buildings/productionsites/empire/ironmine_deep/init.lua:79
+msgctxt "empire_building"
+msgid ""
+"This iron mine’s main vein is exhausted. Expect strongly diminished returns "
+"on investment. This mine can’t be enhanced any further, so you should "
+"consider dismantling or destroying it."
+msgstr ""
+
+#. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/empire/lumberjacks_house/init.lua:7
 msgctxt "empire_building"
 msgid "Lumberjack’s House"
-msgstr ""
+msgstr "Favágóház"
 
 #: ../../tribes/buildings/productionsites/empire/lumberjacks_house/init.lua:57
 msgctxt "empire_building"
@@ -1935,23 +1858,23 @@ msgstr ""
 #: ../../tribes/buildings/productionsites/empire/marblemine/init.lua:7
 msgctxt "empire_building"
 msgid "Marble Mine"
-msgstr ""
+msgstr "Márványbánya"
 
 #. TRANSLATORS: Completed/Skipped/Did not start mining marble because ...
 #: ../../tribes/buildings/productionsites/empire/marblemine/init.lua:72
 #: ../../tribes/buildings/productionsites/empire/marblemine_deep/init.lua:61
 msgid "mining marble"
-msgstr ""
+msgstr "márvány kifejtése"
 
 #: ../../tribes/buildings/productionsites/empire/marblemine/init.lua:103
 #: ../../tribes/buildings/productionsites/empire/marblemine_deep/init.lua:77
 msgid "No Marble"
-msgstr ""
+msgstr "Nincs márvány"
 
 #: ../../tribes/buildings/productionsites/empire/marblemine/init.lua:104
 #: ../../tribes/buildings/productionsites/empire/marblemine_deep/init.lua:78
 msgid "Main Marble Vein Exhausted"
-msgstr ""
+msgstr "Fő márvány telér kimerült"
 
 #: ../../tribes/buildings/productionsites/empire/marblemine/init.lua:106
 msgctxt "empire_building"
@@ -1965,7 +1888,7 @@ msgstr ""
 #: ../../tribes/buildings/productionsites/empire/marblemine_deep/init.lua:7
 msgctxt "empire_building"
 msgid "Deep Marble Mine"
-msgstr ""
+msgstr "Mély márványbánya"
 
 #: ../../tribes/buildings/productionsites/empire/marblemine_deep/init.lua:80
 msgctxt "empire_building"
@@ -1975,72 +1898,126 @@ msgid ""
 "should consider dismantling or destroying it."
 msgstr ""
 
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/empire/mill/init.lua:7
+msgctxt "empire_building"
+msgid "Mill"
+msgstr "Malom"
+
 #. TRANSLATORS: Completed/Skipped/Did not start grinding wheat because ...
 #: ../../tribes/buildings/productionsites/empire/mill/init.lua:55
 msgid "grinding wheat"
-msgstr ""
+msgstr "búza őrlése"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/empire/piggery/init.lua:7
 msgctxt "empire_building"
 msgid "Piggery"
-msgstr ""
+msgstr "Sertéstelep"
 
 #. TRANSLATORS: Completed/Skipped/Did not start raising pigs because ...
 #: ../../tribes/buildings/productionsites/empire/piggery/init.lua:56
 msgid "raising pigs"
-msgstr ""
+msgstr "sertések nevelése"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/empire/quarry/init.lua:7
+msgctxt "empire_building"
+msgid "Quarry"
+msgstr "Kőfejtő"
 
 #. TRANSLATORS: Completed/Skipped/Did not start quarrying marble because ...
 #: ../../tribes/buildings/productionsites/empire/quarry/init.lua:70
 msgid "quarrying marble"
+msgstr "márvány kifejtése"
+
+#: ../../tribes/buildings/productionsites/empire/quarry/init.lua:83
+msgctxt "empire_building"
+msgid ""
+"The stonemason working at this quarry can’t find any rocks in his work area."
 msgstr ""
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/empire/sawmill/init.lua:7
+msgctxt "empire_building"
+msgid "Sawmill"
+msgstr "Fűrészmalom"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/empire/scouts_house/init.lua:7
+msgctxt "empire_building"
+msgid "Scout’s House"
+msgstr "Felderítőház"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/empire/sheepfarm/init.lua:7
 msgctxt "empire_building"
 msgid "Sheep Farm"
-msgstr ""
+msgstr "Juhtelep"
 
 #. TRANSLATORS: Completed/Skipped/Did not start breeding sheep because ...
 #: ../../tribes/buildings/productionsites/empire/sheepfarm/init.lua:54
 msgid "breeding sheep"
-msgstr ""
+msgstr "juhok tenyésztése"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/empire/shipyard/init.lua:7
+msgctxt "empire_building"
+msgid "Shipyard"
+msgstr "Hajógyár"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/empire/smelting_works/init.lua:7
+msgctxt "empire_building"
+msgid "Smelting Works"
+msgstr "Kohó"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/empire/stonemasons_house/init.lua:7
 msgctxt "empire_building"
 msgid "Stonemason’s House"
-msgstr ""
+msgstr "Kőfaragóház"
 
 #. TRANSLATORS: Completed/Skipped/Did not start sculpting a marble column
 #. because ...
 #: ../../tribes/buildings/productionsites/empire/stonemasons_house/init.lua:57
 msgid "sculpting a marble column"
-msgstr ""
+msgstr "márványoszlop faragása"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/empire/tavern/init.lua:7
+msgctxt "empire_building"
+msgid "Tavern"
+msgstr "Kocsma"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/empire/toolsmithy/init.lua:7
+msgctxt "empire_building"
+msgid "Toolsmithy"
+msgstr "Szerszámkovács műhely"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a basket because ...
 #: ../../tribes/buildings/productionsites/empire/toolsmithy/init.lua:98
 msgid "making a basket"
-msgstr ""
+msgstr "kosár fonása"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/empire/vineyard/init.lua:7
 msgctxt "empire_building"
 msgid "Vineyard"
-msgstr ""
+msgstr "Szőlőskert"
 
 #. TRANSLATORS: Completed/Skipped/Did not start planting grapevines because
 #. ...
 #: ../../tribes/buildings/productionsites/empire/vineyard/init.lua:56
 msgid "planting grapevines"
-msgstr ""
+msgstr "szőlőtőkék ültetése"
 
 #. TRANSLATORS: Completed/Skipped/Did not start harvesting grapevines because
 #. ...
 #: ../../tribes/buildings/productionsites/empire/vineyard/init.lua:64
 msgid "harvesting grapes"
-msgstr ""
+msgstr "szőlő szüretelése"
 
 #: ../../tribes/buildings/productionsites/empire/vineyard/init.lua:75
 msgctxt "empire_building"
@@ -2049,45 +2026,69 @@ msgid ""
 "grapevines."
 msgstr ""
 
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/empire/weaponsmithy/init.lua:7
+msgctxt "empire_building"
+msgid "Weapon Smithy"
+msgstr "Fegyverkovács műhely"
+
 #. TRANSLATORS: Completed/Skipped/Did not start forging a wooden spear because
 #. ...
 #: ../../tribes/buildings/productionsites/empire/weaponsmithy/init.lua:81
 msgid "forging a wooden spear"
-msgstr ""
+msgstr "fa lándzsa kovácsolása"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a spear because ...
 #: ../../tribes/buildings/productionsites/empire/weaponsmithy/init.lua:94
 msgid "forging a spear"
-msgstr ""
+msgstr "lándzsa kovácsolása"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging an advanced spear
 #. because ...
 #: ../../tribes/buildings/productionsites/empire/weaponsmithy/init.lua:107
 msgid "forging an advanced spear"
-msgstr ""
+msgstr "fejlesztett lándzsa kovácsolása"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a heavy spear because
 #. ...
 #: ../../tribes/buildings/productionsites/empire/weaponsmithy/init.lua:120
 msgid "forging a heavy spear"
-msgstr ""
+msgstr "nehéz lándzsa kovácsolása"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a war spear because
 #. ...
 #: ../../tribes/buildings/productionsites/empire/weaponsmithy/init.lua:133
 msgid "forging a war spear"
-msgstr ""
+msgstr "harci lándzsa kovácsolása"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/empire/weaving_mill/init.lua:7
+msgctxt "empire_building"
+msgid "Weaving Mill"
+msgstr "Szövőmalom"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/productionsites/empire/well/init.lua:7
+msgctxt "empire_building"
+msgid "Well"
+msgstr "Kút"
+
+#: ../../tribes/buildings/productionsites/empire/well/init.lua:65
+msgctxt "empire_building"
+msgid ""
+"The carrier working at this well can’t find any water in his work area."
+msgstr "A hordár aki ennél a kútnál dolgozik nem talál vizet a munkaterületén."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/productionsites/empire/winery/init.lua:7
 msgctxt "empire_building"
 msgid "Winery"
-msgstr ""
+msgstr "Borászat"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making wine because ...
 #: ../../tribes/buildings/productionsites/empire/winery/init.lua:58
 msgid "making wine"
-msgstr ""
+msgstr "bort készít"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:7
@@ -2104,35 +2105,35 @@ msgstr "Kazamata"
 #: ../../tribes/buildings/trainingsites/empire/colosseum/init.lua:67
 #: ../../tribes/buildings/trainingsites/empire/trainingcamp/init.lua:97
 msgid "sleeping"
-msgstr ""
+msgstr "alszik"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:87
 #: ../../tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:114
 #: ../../tribes/buildings/trainingsites/empire/trainingcamp/init.lua:105
 msgid "upgrading soldier attack from level 0 to level 1"
-msgstr ""
+msgstr "katona támadásának fejlesztése 0-sról 1-es szintre"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:98
 #: ../../tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:125
 #: ../../tribes/buildings/trainingsites/empire/trainingcamp/init.lua:116
 msgid "upgrading soldier attack from level 1 to level 2"
-msgstr ""
+msgstr "katona támadásának fejlesztése 1-esről 2-es szintre"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:109
 #: ../../tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:136
 #: ../../tribes/buildings/trainingsites/empire/trainingcamp/init.lua:127
 msgid "upgrading soldier attack from level 2 to level 3"
-msgstr ""
+msgstr "katona támadásának fejlesztése 2-esről 3-as szintre"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:120
 #: ../../tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:147
 #: ../../tribes/buildings/trainingsites/empire/trainingcamp/init.lua:138
 msgid "upgrading soldier attack from level 3 to level 4"
-msgstr ""
+msgstr "katona támadásának feljesztése 3-asról 4-es szintre"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:7
@@ -2143,19 +2144,19 @@ msgstr "Labirintus"
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:102
 msgid "upgrading soldier defense from level 0 to level 1"
-msgstr ""
+msgstr "katona védelmének fejlesztése 0-sról 1-es szintre"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:113
 msgid "upgrading soldier defense from level 1 to level 2"
-msgstr ""
+msgstr "katona védelmének feljesztése 1-esről 2-es szintre"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:124
 #: ../../tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:169
 #: ../../tribes/buildings/trainingsites/empire/trainingcamp/init.lua:149
 msgid "upgrading soldier health from level 0 to level 1"
-msgstr ""
+msgstr "katona életerejének feljesztése 0-sról 1-es szintre"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:135
@@ -2163,14 +2164,14 @@ msgstr ""
 #: ../../tribes/buildings/trainingsites/empire/arena/init.lua:82
 #: ../../tribes/buildings/trainingsites/empire/colosseum/init.lua:75
 msgid "upgrading soldier evade from level 0 to level 1"
-msgstr ""
+msgstr "katona kitérésének feljesztése 0-sról 1-es szintre"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:146
 #: ../../tribes/buildings/trainingsites/barbarians/battlearena/init.lua:107
 #: ../../tribes/buildings/trainingsites/empire/colosseum/init.lua:86
 msgid "upgrading soldier evade from level 1 to level 2"
-msgstr ""
+msgstr "katona kitérésének feljesztése 1-esről 2-es szintre"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/trainingsites/barbarians/battlearena/init.lua:7
@@ -2184,6 +2185,35 @@ msgctxt "barbarians_building"
 msgid "Training Camp"
 msgstr "Kiképzőtábor"
 
+#. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
+#: ../../tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:158
+msgid "upgrading soldier attack from level 4 to level 5"
+msgstr "katona életerejének feljesztése 4-esről 5-ös szintre"
+
+#. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
+#: ../../tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:180
+#: ../../tribes/buildings/trainingsites/empire/trainingcamp/init.lua:160
+msgid "upgrading soldier health from level 1 to level 2"
+msgstr "katona életerejének feljesztése 1-esről 2-es szintre"
+
+#. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
+#: ../../tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:191
+#: ../../tribes/buildings/trainingsites/empire/trainingcamp/init.lua:171
+msgid "upgrading soldier health from level 2 to level 3"
+msgstr "katona életerejének feljesztése 2-esről 3-as szintre"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/trainingsites/empire/arena/init.lua:7
+msgctxt "empire_building"
+msgid "Arena"
+msgstr "Aréna"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/trainingsites/empire/colosseum/init.lua:7
+msgctxt "empire_building"
+msgid "Colosseum"
+msgstr "Kolosszeum"
+
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/trainingsites/empire/trainingcamp/init.lua:7
 msgctxt "empire_building"
@@ -2191,44 +2221,27 @@ msgid "Training Camp"
 msgstr "Kiképzőtábor"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:158
-msgid "upgrading soldier attack from level 4 to level 5"
-msgstr ""
-
-#. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:180
-#: ../../tribes/buildings/trainingsites/empire/trainingcamp/init.lua:160
-msgid "upgrading soldier health from level 1 to level 2"
-msgstr ""
-
-#. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:191
-#: ../../tribes/buildings/trainingsites/empire/trainingcamp/init.lua:171
-msgid "upgrading soldier health from level 2 to level 3"
-msgstr ""
-
-#. TRANSLATORS: This is a building name used in lists of buildings
-#: ../../tribes/buildings/trainingsites/empire/arena/init.lua:7
-msgctxt "empire_building"
-msgid "Arena"
-msgstr ""
-
-#. TRANSLATORS: This is a building name used in lists of buildings
-#: ../../tribes/buildings/trainingsites/empire/colosseum/init.lua:7
-msgctxt "empire_building"
-msgid "Colosseum"
-msgstr ""
-
-#. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../tribes/buildings/trainingsites/empire/trainingcamp/init.lua:182
 msgid "upgrading soldier health from level 3 to level 4"
-msgstr ""
+msgstr "katona életerejének feljesztése 3-asról 4-es szintre"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/warehouses/atlanteans/headquarters/init.lua:7
 msgctxt "atlanteans_building"
 msgid "Headquarters"
 msgstr "Főhadiszállás"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/warehouses/atlanteans/port/init.lua:7
+msgctxt "atlanteans_building"
+msgid "Port"
+msgstr "Kikötő"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/warehouses/atlanteans/warehouse/init.lua:7
+msgctxt "atlanteans_building"
+msgid "Warehouse"
+msgstr "Raktár"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/warehouses/barbarians/headquarters/init.lua:7
@@ -2238,40 +2251,10 @@ msgid "Headquarters"
 msgstr "Főhadiszállás"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
-#: ../../tribes/buildings/warehouses/empire/headquarters/init.lua:7
-msgctxt "empire_building"
-msgid "Headquarters"
-msgstr "Főhadiszállás"
-
-#: ../../tribes/scripting/starting_conditions/atlanteans/headquarters.lua:10
-#: ../../tribes/scripting/starting_conditions/barbarians/headquarters.lua:10
-#: ../../tribes/scripting/starting_conditions/empire/headquarters.lua:10
-msgid "Headquarters"
-msgstr ""
-
-#. TRANSLATORS: This is a building name used in lists of buildings
-#: ../../tribes/buildings/warehouses/atlanteans/port/init.lua:7
-msgctxt "atlanteans_building"
-msgid "Port"
-msgstr "Kapu"
-
-#. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/warehouses/barbarians/port/init.lua:7
 msgctxt "barbarians_building"
 msgid "Port"
-msgstr "Kapu"
-
-#. TRANSLATORS: This is a building name used in lists of buildings
-#: ../../tribes/buildings/warehouses/empire/port/init.lua:7
-msgctxt "empire_building"
-msgid "Port"
-msgstr "Kapu"
-
-#. TRANSLATORS: This is a building name used in lists of buildings
-#: ../../tribes/buildings/warehouses/atlanteans/warehouse/init.lua:7
-msgctxt "atlanteans_building"
-msgid "Warehouse"
-msgstr "Raktár"
+msgstr "Kikőtő"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/warehouses/barbarians/warehouse/init.lua:7
@@ -2280,16 +2263,28 @@ msgid "Warehouse"
 msgstr "Raktár"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
-#: ../../tribes/buildings/warehouses/empire/warehouse/init.lua:7
+#: ../../tribes/buildings/warehouses/empire/headquarters/init.lua:7
 msgctxt "empire_building"
-msgid "Warehouse"
-msgstr "Raktár"
+msgid "Headquarters"
+msgstr "Főhadiszállás"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../tribes/buildings/warehouses/empire/headquarters_shipwreck/init.lua:7
 msgctxt "empire_building"
 msgid "Headquarters Shipwreck"
-msgstr ""
+msgstr "Főhadiszállás hajóroncs"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/warehouses/empire/port/init.lua:7
+msgctxt "empire_building"
+msgid "Port"
+msgstr "Kapu"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../tribes/buildings/warehouses/empire/warehouse/init.lua:7
+msgctxt "empire_building"
+msgid "Warehouse"
+msgstr "Raktár"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../tribes/immovables/ashes/init.lua:7
@@ -2397,25 +2392,25 @@ msgstr "Vetés (pici)"
 #: ../../tribes/immovables/grapevine_medium/init.lua:7
 msgctxt "immovable"
 msgid "Grapevine (medium)"
-msgstr ""
+msgstr "Szőlőtőke (közepes)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../tribes/immovables/grapevine_ripe/init.lua:7
 msgctxt "immovable"
 msgid "Grapevine (ripe)"
-msgstr ""
+msgstr "Szőlőtőke (érett)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../tribes/immovables/grapevine_small/init.lua:7
 msgctxt "immovable"
 msgid "Grapevine (small)"
-msgstr ""
+msgstr "Szőlőtőke (kicsi)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../tribes/immovables/grapevine_tiny/init.lua:7
 msgctxt "immovable"
 msgid "Grapevine (tiny)"
-msgstr ""
+msgstr "Szőlőtőke (pici)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../tribes/immovables/reed_medium/init.lua:7
@@ -2445,61 +2440,61 @@ msgstr "Nád (pici)"
 #: ../../tribes/immovables/resi_coal1/init.lua:7
 msgctxt "immovable"
 msgid "Coal Vein"
-msgstr ""
+msgstr "Szén telér"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../tribes/immovables/resi_coal2/init.lua:7
 msgctxt "immovable"
 msgid "Main Coal Vein"
-msgstr ""
+msgstr "Fő szén telér"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../tribes/immovables/resi_gold1/init.lua:7
 msgctxt "immovable"
 msgid "Gold Vein"
-msgstr ""
+msgstr "Arany telér"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../tribes/immovables/resi_gold2/init.lua:7
 msgctxt "immovable"
 msgid "Main Gold Vein"
-msgstr ""
+msgstr "Fő arany telér"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../tribes/immovables/resi_iron1/init.lua:7
 msgctxt "immovable"
 msgid "Iron Vein"
-msgstr ""
+msgstr "Vas telér"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../tribes/immovables/resi_iron2/init.lua:7
 msgctxt "immovable"
 msgid "Main Iron Vein"
-msgstr ""
+msgstr "Fő vas telér"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../tribes/immovables/resi_none/init.lua:7
 msgctxt "immovable"
 msgid "No Resources"
-msgstr ""
+msgstr "Nincsenek nyersanyagok"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../tribes/immovables/resi_stones1/init.lua:7
 msgctxt "immovable"
 msgid "Some Stones"
-msgstr ""
+msgstr "Némi kő"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../tribes/immovables/resi_stones2/init.lua:7
 msgctxt "immovable"
 msgid "A Lot of Stones"
-msgstr ""
+msgstr "Sok kő"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../tribes/immovables/resi_water1/init.lua:7
 msgctxt "immovable"
 msgid "Water Vein"
-msgstr ""
+msgstr "Víz ér"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../tribes/immovables/shipconstruction_atlanteans/init.lua:7
@@ -2512,49 +2507,49 @@ msgstr "Hajóépítési terület"
 #: ../../tribes/preload.lua:12 ../../tribes/preload.lua:27
 #: ../../tribes/preload.lua:42
 msgid "The Widelands Development Team"
-msgstr ""
+msgstr "A Widelands fejlesztőcsapat"
 
 #. TRANSLATORS: This is a tribe name
 #: ../../tribes/preload.lua:14
 msgid "Barbarians"
-msgstr ""
+msgstr "Barbárok"
 
 #: ../../tribes/preload.lua:15
 msgid "The mighty tribes of the east-lands."
-msgstr ""
+msgstr "A keleti földek hatalmas törzsei."
 
 #. TRANSLATORS: This is a tribe name
 #: ../../tribes/preload.lua:29
 msgid "Empire"
-msgstr ""
+msgstr "Birodalom"
 
 #: ../../tribes/preload.lua:30
 msgid "This is the culture of the Roman Empire."
-msgstr ""
+msgstr "Ez a Római Birodalom kultúrája."
 
 #. TRANSLATORS: This is a tribe name
 #: ../../tribes/preload.lua:44
 msgid "Atlanteans"
-msgstr ""
+msgstr "Atlantisziak"
 
 #: ../../tribes/preload.lua:45
 msgid ""
 "This tribe is known from the oldest tales. The sons and daughters of "
 "Atlantis."
-msgstr ""
+msgstr "Ez a törzs a legrégebbi mesékből ismert. Atlantisz fiai és leányai."
 
 #: ../../tribes/scripting/starting_conditions/atlanteans/fortified_village.lua:10
 #: ../../tribes/scripting/starting_conditions/barbarians/fortified_village.lua:10
 #: ../../tribes/scripting/starting_conditions/empire/fortified_village.lua:10
 msgid "Fortified Village"
-msgstr ""
+msgstr "Erődített falu"
 
 #. TRANSLATORS: Short for "Not enough space"
 #: ../../tribes/scripting/starting_conditions/atlanteans/fortified_village.lua:103
 #: ../../tribes/scripting/starting_conditions/barbarians/fortified_village.lua:96
 #: ../../tribes/scripting/starting_conditions/empire/fortified_village.lua:121
 msgid "Space"
-msgstr ""
+msgstr "Hely"
 
 #: ../../tribes/scripting/starting_conditions/atlanteans/fortified_village.lua:104
 #: ../../tribes/scripting/starting_conditions/barbarians/fortified_village.lua:97
@@ -2563,13 +2558,19 @@ msgid ""
 "Some of your starting buildings didn’t have enough room and weren’t built. "
 "You are at a disadvantage with this; consider restarting this map with a "
 "fair starting condition."
-msgstr ""
+msgstr "Néhány kezdőépületednek nincs elég hely és nem épült fel. Emiatt hátrányban vagy; fontold meg a térkép újraindítását fair kezdeti feltételekkel."
 
 #: ../../tribes/scripting/starting_conditions/atlanteans/fortified_village.lua:105
 #: ../../tribes/scripting/starting_conditions/barbarians/fortified_village.lua:98
 #: ../../tribes/scripting/starting_conditions/empire/fortified_village.lua:123
 msgid "Not enough space"
-msgstr ""
+msgstr "Nincs elég hely"
+
+#: ../../tribes/scripting/starting_conditions/atlanteans/headquarters.lua:10
+#: ../../tribes/scripting/starting_conditions/barbarians/headquarters.lua:10
+#: ../../tribes/scripting/starting_conditions/empire/headquarters.lua:10
+msgid "Headquarters"
+msgstr "Főhadiszállás"
 
 #. TRANSLATORS: This is the ship's name used in lists of units
 #: ../../tribes/ships/atlanteans/init.lua:22
@@ -2582,29 +2583,23 @@ msgstr "Hajó"
 #: ../../tribes/wares/armor/init.lua:7
 msgctxt "ware"
 msgid "Armor"
-msgstr ""
+msgstr "Páncél"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../tribes/wares/armor_chain/init.lua:7
 msgctxt "ware"
 msgid "Chain Armor"
-msgstr ""
+msgstr "Lánc páncél"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../tribes/wares/armor_gilded/init.lua:7
 msgctxt "ware"
 msgid "Gilded Armor"
-msgstr ""
+msgstr "Aranyozott páncél"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../tribes/wares/armor_helmet/init.lua:7
 msgctxt "empire_ware"
-msgid "Helmet"
-msgstr "Sisak"
-
-#. TRANSLATORS: This is a ware name used in lists of wares
-#: ../../tribes/wares/helmet/init.lua:7
-msgctxt "barbarians_ware"
 msgid "Helmet"
 msgstr "Sisak"
 
@@ -2648,7 +2643,7 @@ msgstr "Harci fejsze"
 #: ../../tribes/wares/basket/init.lua:7
 msgctxt "ware"
 msgid "Basket"
-msgstr ""
+msgstr "Kosár"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../tribes/wares/beer/init.lua:7
@@ -2687,15 +2682,15 @@ msgid "Bread"
 msgstr "Pita"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
-#: ../../tribes/wares/bread_empire/init.lua:7
-msgctxt "empire_ware"
-msgid "Bread"
-msgstr "Pita"
-
-#. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../tribes/wares/bread_barbarians/init.lua:7
 msgctxt "barbarians_ware"
 msgid "Pitta Bread"
+msgstr "Pita"
+
+#. TRANSLATORS: This is a ware name used in lists of wares
+#: ../../tribes/wares/bread_empire/init.lua:7
+msgctxt "empire_ware"
+msgid "Bread"
 msgstr "Pita"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
@@ -2732,7 +2727,7 @@ msgstr "Kukorica"
 #: ../../tribes/wares/cornmeal/init.lua:7
 msgctxt "ware"
 msgid "Cornmeal"
-msgstr ""
+msgstr "Kukoricaliszt"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../tribes/wares/diamond/init.lua:7
@@ -2774,7 +2769,7 @@ msgstr "Horgászbot"
 #: ../../tribes/wares/flour/init.lua:7
 msgctxt "ware"
 msgid "Flour"
-msgstr ""
+msgstr "Liszt"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../tribes/wares/gold/init.lua:7
@@ -2792,19 +2787,19 @@ msgstr "Aranyérc"
 #: ../../tribes/wares/gold_thread/init.lua:7
 msgctxt "ware"
 msgid "Gold Thread"
-msgstr ""
+msgstr "Aranyszál"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../tribes/wares/granite/init.lua:7
 msgctxt "ware"
 msgid "Granite"
-msgstr ""
+msgstr "Gránit"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../tribes/wares/grape/init.lua:7
 msgctxt "ware"
 msgid "Grape"
-msgstr ""
+msgstr "Szőlő"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../tribes/wares/grout/init.lua:7
@@ -2819,6 +2814,12 @@ msgid "Hammer"
 msgstr "Kalapács"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
+#: ../../tribes/wares/helmet/init.lua:7
+msgctxt "barbarians_ware"
+msgid "Helmet"
+msgstr "Sisak"
+
+#. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../tribes/wares/helmet_mask/init.lua:7
 msgctxt "ware"
 msgid "Mask"
@@ -2828,7 +2829,7 @@ msgstr "Álarc"
 #: ../../tribes/wares/helmet_warhelm/init.lua:7
 msgctxt "ware"
 msgid "Warhelm"
-msgstr ""
+msgstr "Harci sisak"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../tribes/wares/hook_pole/init.lua:7
@@ -2876,13 +2877,13 @@ msgstr "Farönk"
 #: ../../tribes/wares/marble/init.lua:7
 msgctxt "ware"
 msgid "Marble"
-msgstr ""
+msgstr "Márvány"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../tribes/wares/marble_column/init.lua:7
 msgctxt "ware"
 msgid "Marble Column"
-msgstr ""
+msgstr "Márványoszlop"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../tribes/wares/meal/init.lua:7
@@ -2978,37 +2979,37 @@ msgstr "Uzsonna"
 #: ../../tribes/wares/spear/init.lua:7
 msgctxt "ware"
 msgid "Spear"
-msgstr ""
+msgstr "Lándzsa"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../tribes/wares/spear_advanced/init.lua:7
 msgctxt "ware"
 msgid "Advanced Spear"
-msgstr ""
+msgstr "Fejlesztett lándzsa"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../tribes/wares/spear_heavy/init.lua:7
 msgctxt "ware"
 msgid "Heavy Spear"
-msgstr ""
+msgstr "Nehéz lándzsa"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../tribes/wares/spear_war/init.lua:7
 msgctxt "ware"
 msgid "War Spear"
-msgstr ""
+msgstr "Harci lándzsa"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../tribes/wares/spear_wooden/init.lua:7
 msgctxt "ware"
 msgid "Wooden Spear"
-msgstr ""
+msgstr "Fa lándzsa"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../tribes/wares/spider_silk/init.lua:7
 msgctxt "ware"
 msgid "Spider Silk"
-msgstr ""
+msgstr "Pókselyem"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../tribes/wares/spidercloth/init.lua:7
@@ -3080,13 +3081,13 @@ msgstr "Búza"
 #: ../../tribes/wares/wine/init.lua:7
 msgctxt "ware"
 msgid "Wine"
-msgstr ""
+msgstr "Bor"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../tribes/wares/wool/init.lua:7
 msgctxt "ware"
 msgid "Wool"
-msgstr ""
+msgstr "Gyapjú"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/atlanteans/armorsmith/init.lua:18
@@ -3095,26 +3096,8 @@ msgid "Armorsmith"
 msgstr "Páncélkovács"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../tribes/workers/empire/armorsmith/init.lua:18
-msgctxt "empire_worker"
-msgid "Armorsmith"
-msgstr "Páncélkovács"
-
-#. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/atlanteans/baker/init.lua:18
 msgctxt "atlanteans_worker"
-msgid "Baker"
-msgstr "Pék"
-
-#. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../tribes/workers/barbarians/baker/init.lua:18
-msgctxt "barbarians_worker"
-msgid "Baker"
-msgstr "Pék"
-
-#. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../tribes/workers/empire/baker/init.lua:18
-msgctxt "empire_worker"
 msgid "Baker"
 msgstr "Pék"
 
@@ -3131,32 +3114,8 @@ msgid "Builder"
 msgstr "Építész"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../tribes/workers/barbarians/builder/init.lua:29
-msgctxt "barbarians_worker"
-msgid "Builder"
-msgstr "Építész"
-
-#. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../tribes/workers/empire/builder/init.lua:29
-msgctxt "empire_worker"
-msgid "Builder"
-msgstr "Építész"
-
-#. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/atlanteans/carrier/init.lua:20
 msgctxt "atlanteans_worker"
-msgid "Carrier"
-msgstr "Hordár"
-
-#. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../tribes/workers/barbarians/carrier/init.lua:19
-msgctxt "barbarians_worker"
-msgid "Carrier"
-msgstr "Hordár"
-
-#. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../tribes/workers/empire/carrier/init.lua:19
-msgctxt "empire_worker"
 msgid "Carrier"
 msgstr "Hordár"
 
@@ -3164,35 +3123,11 @@ msgstr "Hordár"
 #: ../../tribes/workers/atlanteans/charcoal_burner/init.lua:18
 msgctxt "atlanteans_worker"
 msgid "Charcoal Burner"
-msgstr ""
-
-#. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../tribes/workers/barbarians/charcoal_burner/init.lua:18
-msgctxt "barbarians_worker"
-msgid "Charcoal Burner"
-msgstr ""
-
-#. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../tribes/workers/empire/charcoal_burner/init.lua:18
-msgctxt "empire_worker"
-msgid "Charcoal Burner"
-msgstr ""
+msgstr "Faszénégető"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/atlanteans/farmer/init.lua:36
 msgctxt "atlanteans_worker"
-msgid "Farmer"
-msgstr "Földműves"
-
-#. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../tribes/workers/barbarians/farmer/init.lua:36
-msgctxt "barbarians_worker"
-msgid "Farmer"
-msgstr "Földműves"
-
-#. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../tribes/workers/empire/farmer/init.lua:36
-msgctxt "empire_worker"
 msgid "Farmer"
 msgstr "Földműves"
 
@@ -3209,44 +3144,14 @@ msgid "Fisher"
 msgstr "Halász"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../tribes/workers/barbarians/fisher/init.lua:24
-msgctxt "barbarians_worker"
-msgid "Fisher"
-msgstr "Halász"
-
-#. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../tribes/workers/empire/fisher/init.lua:23
-msgctxt "empire_worker"
-msgid "Fisher"
-msgstr "Halász"
-
-#. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/atlanteans/forester/init.lua:36
 msgctxt "atlanteans_worker"
 msgid "Forester"
 msgstr "Erdész"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../tribes/workers/empire/forester/init.lua:36
-msgctxt "empire_worker"
-msgid "Forester"
-msgstr "Erdész"
-
-#. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/atlanteans/geologist/init.lua:25
 msgctxt "atlanteans_worker"
-msgid "Geologist"
-msgstr "Geológus"
-
-#. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../tribes/workers/barbarians/geologist/init.lua:25
-msgctxt "barbarians_worker"
-msgid "Geologist"
-msgstr "Geológus"
-
-#. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../tribes/workers/empire/geologist/init.lua:25
-msgctxt "empire_worker"
 msgid "Geologist"
 msgstr "Geológus"
 
@@ -3269,44 +3174,14 @@ msgid "Hunter"
 msgstr "Vadász"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../tribes/workers/barbarians/hunter/init.lua:19
-msgctxt "barbarians_worker"
-msgid "Hunter"
-msgstr "Vadász"
-
-#. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../tribes/workers/empire/hunter/init.lua:19
-msgctxt "empire_worker"
-msgid "Hunter"
-msgstr "Vadász"
-
-#. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/atlanteans/miller/init.lua:18
 msgctxt "atlanteans_worker"
 msgid "Miller"
 msgstr "Molnár"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../tribes/workers/empire/miller/init.lua:18
-msgctxt "empire_worker"
-msgid "Miller"
-msgstr "Molnár"
-
-#. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/atlanteans/miner/init.lua:18
 msgctxt "atlanteans_worker"
-msgid "Miner"
-msgstr "Bányász"
-
-#. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../tribes/workers/barbarians/miner/init.lua:18
-msgctxt "barbarians_worker"
-msgid "Miner"
-msgstr "Bányász"
-
-#. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../tribes/workers/empire/miner/init.lua:18
-msgctxt "empire_worker"
 msgid "Miner"
 msgstr "Bányász"
 
@@ -3323,50 +3198,14 @@ msgid "Scout"
 msgstr "Felderítő"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../tribes/workers/barbarians/scout/init.lua:18
-msgctxt "barbarians_worker"
-msgid "Scout"
-msgstr "Felderítő"
-
-#. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../tribes/workers/empire/scout/init.lua:18
-msgctxt "empire_worker"
-msgid "Scout"
-msgstr "Felderítő"
-
-#. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/atlanteans/shipwright/init.lua:23
 msgctxt "atlanteans_worker"
 msgid "Shipwright"
 msgstr "Hajóács"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../tribes/workers/barbarians/shipwright/init.lua:28
-msgctxt "barbarians_worker"
-msgid "Shipwright"
-msgstr "Hajóács"
-
-#. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../tribes/workers/empire/shipwright/init.lua:28
-msgctxt "empire_worker"
-msgid "Shipwright"
-msgstr "Hajóács"
-
-#. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/atlanteans/smelter/init.lua:18
 msgctxt "atlanteans_worker"
-msgid "Smelter"
-msgstr "Kohász"
-
-#. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../tribes/workers/barbarians/smelter/init.lua:18
-msgctxt "barbarians_worker"
-msgid "Smelter"
-msgstr "Kohász"
-
-#. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../tribes/workers/empire/smelter/init.lua:18
-msgctxt "empire_worker"
 msgid "Smelter"
 msgstr "Kohász"
 
@@ -3379,18 +3218,6 @@ msgstr "Füstölő"
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/atlanteans/soldier/init.lua:78
 msgctxt "atlanteans_worker"
-msgid "Soldier"
-msgstr "Katona"
-
-#. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../tribes/workers/barbarians/soldier/init.lua:78
-msgctxt "barbarians_worker"
-msgid "Soldier"
-msgstr "Katona"
-
-#. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../tribes/workers/empire/soldier/init.lua:78
-msgctxt "empire_worker"
 msgid "Soldier"
 msgstr "Katona"
 
@@ -3413,26 +3240,8 @@ msgid "Toolsmith"
 msgstr "Szerszámkovács"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../tribes/workers/empire/toolsmith/init.lua:18
-msgctxt "empire_worker"
-msgid "Toolsmith"
-msgstr "Szerszámkovács"
-
-#. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/atlanteans/trainer/init.lua:18
 msgctxt "atlanteans_worker"
-msgid "Trainer"
-msgstr "Kiképző"
-
-#. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../tribes/workers/barbarians/trainer/init.lua:17
-msgctxt "barbarians_worker"
-msgid "Trainer"
-msgstr "Kiképző"
-
-#. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../tribes/workers/empire/trainer/init.lua:18
-msgctxt "empire_worker"
 msgid "Trainer"
 msgstr "Kiképző"
 
@@ -3443,26 +3252,8 @@ msgid "Weaponsmith"
 msgstr "Fegyverkovács"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../tribes/workers/empire/weaponsmith/init.lua:18
-msgctxt "empire_worker"
-msgid "Weaponsmith"
-msgstr "Fegyverkovács"
-
-#. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/atlanteans/weaver/init.lua:18
 msgctxt "atlanteans_worker"
-msgid "Weaver"
-msgstr "Takács"
-
-#. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../tribes/workers/barbarians/weaver/init.lua:18
-msgctxt "barbarians_worker"
-msgid "Weaver"
-msgstr "Takács"
-
-#. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../tribes/workers/empire/weaver/init.lua:18
-msgctxt "empire_worker"
 msgid "Weaver"
 msgstr "Takács"
 
@@ -3471,6 +3262,12 @@ msgstr "Takács"
 msgctxt "atlanteans_worker"
 msgid "Woodcutter"
 msgstr "Favágó"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/barbarians/baker/init.lua:18
+msgctxt "barbarians_worker"
+msgid "Baker"
+msgstr "Pék"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/barbarians/blacksmith/init.lua:18
@@ -3482,17 +3279,11 @@ msgstr "Kovács"
 #: ../../tribes/workers/barbarians/blacksmith_master/init.lua:18
 msgctxt "barbarians_worker"
 msgid "Master Blacksmith"
-msgstr "Mesterkovács"
+msgstr "Kovács mester"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/barbarians/brewer/init.lua:18
 msgctxt "barbarians_worker"
-msgid "Brewer"
-msgstr "Sörfőző"
-
-#. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../tribes/workers/empire/brewer/init.lua:18
-msgctxt "empire_worker"
 msgid "Brewer"
 msgstr "Sörfőző"
 
@@ -3503,10 +3294,40 @@ msgid "Master Brewer"
 msgstr "Sörfőző mester"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/barbarians/builder/init.lua:29
+msgctxt "barbarians_worker"
+msgid "Builder"
+msgstr "Építész"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/barbarians/carrier/init.lua:19
+msgctxt "barbarians_worker"
+msgid "Carrier"
+msgstr "Hordár"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/barbarians/cattlebreeder/init.lua:18
 msgctxt "barbarians_worker"
 msgid "Cattle Breeder"
 msgstr "Gulyás"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/barbarians/charcoal_burner/init.lua:18
+msgctxt "barbarians_worker"
+msgid "Charcoal Burner"
+msgstr "Faszénégető"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/barbarians/farmer/init.lua:36
+msgctxt "barbarians_worker"
+msgid "Farmer"
+msgstr "Földműves"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/barbarians/fisher/init.lua:24
+msgctxt "barbarians_worker"
+msgid "Fisher"
+msgstr "Halász"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/barbarians/gamekeeper/init.lua:30
@@ -3521,20 +3342,26 @@ msgid "Gardener"
 msgstr "Kertész"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/barbarians/geologist/init.lua:25
+msgctxt "barbarians_worker"
+msgid "Geologist"
+msgstr "Geológus"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/barbarians/helmsmith/init.lua:18
 msgctxt "barbarians_worker"
 msgid "Helmsmith"
-msgstr "Páncélkovács"
+msgstr "Sisakkovács"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/barbarians/hunter/init.lua:19
+msgctxt "barbarians_worker"
+msgid "Hunter"
+msgstr "Vadász"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/barbarians/innkeeper/init.lua:18
 msgctxt "barbarians_worker"
-msgid "Innkeeper"
-msgstr "Kocsmáros"
-
-#. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../tribes/workers/empire/innkeeper/init.lua:18
-msgctxt "empire_worker"
 msgid "Innkeeper"
 msgstr "Kocsmáros"
 
@@ -3551,10 +3378,10 @@ msgid "Lumberjack"
 msgstr "Favágó"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../tribes/workers/empire/lumberjack/init.lua:25
-msgctxt "empire_worker"
-msgid "Lumberjack"
-msgstr "Favágó"
+#: ../../tribes/workers/barbarians/miner/init.lua:18
+msgctxt "barbarians_worker"
+msgid "Miner"
+msgstr "Bányász"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/barbarians/miner_chief/init.lua:18
@@ -3566,13 +3393,7 @@ msgstr "Főbányász"
 #: ../../tribes/workers/barbarians/miner_master/init.lua:18
 msgctxt "barbarians_worker"
 msgid "Master Miner"
-msgstr "Mesterbányász"
-
-#. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../tribes/workers/empire/miner_master/init.lua:18
-msgctxt "empire_worker"
-msgid "Master Miner"
-msgstr "Mesterbányász"
+msgstr "Bányász mester"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/barbarians/ox/init.lua:20
@@ -3587,10 +3408,196 @@ msgid "Ranger"
 msgstr "Erdőőr"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/barbarians/scout/init.lua:18
+msgctxt "barbarians_worker"
+msgid "Scout"
+msgstr "Felderítő"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/barbarians/shipwright/init.lua:28
+msgctxt "barbarians_worker"
+msgid "Shipwright"
+msgstr "Hajóács"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/barbarians/smelter/init.lua:18
+msgctxt "barbarians_worker"
+msgid "Smelter"
+msgstr "Kohász"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/barbarians/soldier/init.lua:78
+msgctxt "barbarians_worker"
+msgid "Soldier"
+msgstr "Katona"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/barbarians/stonemason/init.lua:25
 msgctxt "barbarians_worker"
 msgid "Stonemason"
 msgstr "Kőfaragó"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/barbarians/trainer/init.lua:17
+msgctxt "barbarians_worker"
+msgid "Trainer"
+msgstr "Kiképző"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/barbarians/weaver/init.lua:18
+msgctxt "barbarians_worker"
+msgid "Weaver"
+msgstr "Takács"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/empire/armorsmith/init.lua:18
+msgctxt "empire_worker"
+msgid "Armorsmith"
+msgstr "Páncélkovács"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/empire/baker/init.lua:18
+msgctxt "empire_worker"
+msgid "Baker"
+msgstr "Pék"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/empire/brewer/init.lua:18
+msgctxt "empire_worker"
+msgid "Brewer"
+msgstr "Sörfőző"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/empire/builder/init.lua:29
+msgctxt "empire_worker"
+msgid "Builder"
+msgstr "Építész"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/empire/carpenter/init.lua:18
+msgctxt "empire_worker"
+msgid "Carpenter"
+msgstr "Ács"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/empire/carrier/init.lua:19
+msgctxt "empire_worker"
+msgid "Carrier"
+msgstr "Hordár"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/empire/charcoal_burner/init.lua:18
+msgctxt "empire_worker"
+msgid "Charcoal Burner"
+msgstr "Faszénégető"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/empire/donkey/init.lua:19
+msgctxt "empire_worker"
+msgid "Donkey"
+msgstr "Szamár"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/empire/donkeybreeder/init.lua:18
+msgctxt "empire_worker"
+msgid "Donkey Breeder"
+msgstr "Szamártenyésztő"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/empire/farmer/init.lua:36
+msgctxt "empire_worker"
+msgid "Farmer"
+msgstr "Földműves"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/empire/fisher/init.lua:23
+msgctxt "empire_worker"
+msgid "Fisher"
+msgstr "Halász"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/empire/forester/init.lua:36
+msgctxt "empire_worker"
+msgid "Forester"
+msgstr "Erdész"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/empire/geologist/init.lua:25
+msgctxt "empire_worker"
+msgid "Geologist"
+msgstr "Geológus"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/empire/hunter/init.lua:19
+msgctxt "empire_worker"
+msgid "Hunter"
+msgstr "Vadász"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/empire/innkeeper/init.lua:18
+msgctxt "empire_worker"
+msgid "Innkeeper"
+msgstr "Kocsmáros"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/empire/lumberjack/init.lua:25
+msgctxt "empire_worker"
+msgid "Lumberjack"
+msgstr "Favágó"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/empire/miller/init.lua:18
+msgctxt "empire_worker"
+msgid "Miller"
+msgstr "Molnár"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/empire/miner/init.lua:18
+msgctxt "empire_worker"
+msgid "Miner"
+msgstr "Bányász"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/empire/miner_master/init.lua:18
+msgctxt "empire_worker"
+msgid "Master Miner"
+msgstr "Bányász mester"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/empire/pigbreeder/init.lua:18
+msgctxt "empire_worker"
+msgid "Pig Breeder"
+msgstr "Kondás"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/empire/scout/init.lua:18
+msgctxt "empire_worker"
+msgid "Scout"
+msgstr "Felderítő"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/empire/shepherd/init.lua:18
+msgctxt "empire_worker"
+msgid "Shepherd"
+msgstr "Juhász"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/empire/shipwright/init.lua:28
+msgctxt "empire_worker"
+msgid "Shipwright"
+msgstr "Hajóács"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/empire/smelter/init.lua:18
+msgctxt "empire_worker"
+msgid "Smelter"
+msgstr "Kohász"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/empire/soldier/init.lua:78
+msgctxt "empire_worker"
+msgid "Soldier"
+msgstr "Katona"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/empire/stonemason/init.lua:25
@@ -3599,43 +3606,37 @@ msgid "Stonemason"
 msgstr "Kőfaragó"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../tribes/workers/empire/carpenter/init.lua:18
+#: ../../tribes/workers/empire/toolsmith/init.lua:18
 msgctxt "empire_worker"
-msgid "Carpenter"
-msgstr ""
+msgid "Toolsmith"
+msgstr "Szerszámkovács"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../tribes/workers/empire/donkey/init.lua:19
+#: ../../tribes/workers/empire/trainer/init.lua:18
 msgctxt "empire_worker"
-msgid "Donkey"
-msgstr ""
-
-#. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../tribes/workers/empire/donkeybreeder/init.lua:18
-msgctxt "empire_worker"
-msgid "Donkey Breeder"
-msgstr ""
-
-#. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../tribes/workers/empire/pigbreeder/init.lua:18
-msgctxt "empire_worker"
-msgid "Pig Breeder"
-msgstr ""
-
-#. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../tribes/workers/empire/shepherd/init.lua:18
-msgctxt "empire_worker"
-msgid "Shepherd"
-msgstr ""
+msgid "Trainer"
+msgstr "Kiképző"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/empire/vinefarmer/init.lua:36
 msgctxt "empire_worker"
 msgid "Vine Farmer"
-msgstr ""
+msgstr "Szőlősgazda"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../tribes/workers/empire/vintner/init.lua:19
 msgctxt "empire_worker"
 msgid "Vintner"
-msgstr ""
+msgstr "Borász"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/empire/weaponsmith/init.lua:18
+msgctxt "empire_worker"
+msgid "Weaponsmith"
+msgstr "Fegyverkovács"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../tribes/workers/empire/weaver/init.lua:18
+msgctxt "empire_worker"
+msgid "Weaver"
+msgstr "Takács"

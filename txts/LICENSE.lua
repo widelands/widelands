@@ -20,7 +20,7 @@ return {
       "<rt text-align=center><p font-size=28 font-decoration=bold font-face=serif font-color=2F9131>" .. _"Licensing information for Widelands" .. "</p></rt>" ..
 
       "<rt><p font-size=14><br><br>" ..
-      _"Copyright 2002 - 2015 by the Widelands Development Team." .. "<br>" ..
+      _"Copyright 2002 - 2016 by the Widelands Development Team." .. "<br>" ..
       _"This game is Free and Open Source (FOSS), licensed under the GNU General Public License (GPL) V2.0." .. "<br><br></p>" ..
 
       p(_"You can find more information on FOSS and the GPL by visiting the following webpage:  %s"):bformat(a("http://www.gnu.org/licenses/old-licenses/gpl-2.0")) ..

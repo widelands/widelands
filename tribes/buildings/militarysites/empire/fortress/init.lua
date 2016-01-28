@@ -27,19 +27,13 @@ tribes:new_militarysite_type {
 
    animations = {
       idle = {
-         template = "idle_??",
-         directory = dirname,
+         pictures = path.list_files(dirname .. "idle_??.png"),
          hotspot = { 90, 105 }
       },
       build = {
-         template = "build_??",
-         directory = dirname,
+         pictures = path.list_files(dirname .. "build_??.png"),
          hotspot = { 90, 105 },
       }
-   },
-
-   outputs = {
-      "empire_soldier",
    },
 
    aihints = {

@@ -27,8 +27,8 @@
 #include "io/filesystem/filesystem.h"
 #include "logic/editor_game_base.h"
 #include "logic/map.h"
+#include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/player.h"
-#include "logic/tribes/tribe_descr.h"
 #include "map_io/map_allowed_building_types_packet.h"
 #include "map_io/map_allowed_worker_types_packet.h"
 #include "map_io/map_bob_packet.h"
@@ -289,6 +289,8 @@ int32_t WidelandsMapLoader::load_map_complete
 			 m_mol->get_nr_unloaded_objects());
 
 	m_map.recalc_whole_map(egbase.world());
+
+	m_map.ensure_resource_consistency(egbase.world());
 
 	set_state(STATE_LOADED);
 

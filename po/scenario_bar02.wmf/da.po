@@ -3,13 +3,14 @@
 # 
 # Translators:
 # Joe Hansen <joedalton2@yahoo.dk>, 2015
+# Ole Laursen <ole.laursen@gmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-04 07:08+0000\n"
-"PO-Revision-Date: 2015-11-04 07:11+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2015-12-14 05:31+0000\n"
+"PO-Revision-Date: 2016-01-03 22:32+0000\n"
+"Last-Translator: Ole Laursen <ole.laursen@gmail.com>\n"
 "Language-Team: Danish (http://www.transifex.com/widelands/widelands/language/da/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,11 +21,11 @@ msgstr ""
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:21
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:23
 msgid "Build up a small food economy"
-msgstr "Byg en lille madøkonomi"
+msgstr "Opbyg en lille infrastruktur til mad"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:24
 msgid "Build up a basic food economy to provide your people with food."
-msgstr "Byg en grundlæggende madøkonomi så dit folk får mad."
+msgstr "Byg en grundlæggende infrastruktere til at producere mad så dit folk får noget at spise."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:26
 msgid "Build a fisher’s hut"
@@ -32,7 +33,7 @@ msgstr "Byg en fiskerhytte"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:27
 msgid "Build a hunter’s hut"
-msgstr "Byg en jægerhytte"
+msgstr "Byg en jagthytte"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:28
 msgid "Build a well"
@@ -40,7 +41,7 @@ msgstr "Byg en brønd"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:29
 msgid "Build a farm"
-msgstr "Byg et landbrug"
+msgstr "Byg en gård"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:30
 msgid "Build a bakery"
@@ -53,24 +54,24 @@ msgstr "Byg et kvægbrug"
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:37
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:40
 msgid "Remember to build a cattle farm"
-msgstr "Husk at bygge en kvægfarm"
+msgstr "Husk at bygge et kvægbrug"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:38
 msgid ""
 "As your roads grow longer and your economy bigger, you should make good use "
 "of your oxen to help transport wares more quickly."
-msgstr "Efterhånden som dine veje bliver længere og din økonomi større, så skal du gøre god brug af dine okser som hjælp til at transportere dine varer hurtigt."
+msgstr "Efterhånden som dine veje bliver længere og din økonomi større, bør du gøre brug af okser til at transportere dine varer effektivt."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:46
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:48
 msgid "Build a tower"
-msgstr ""
+msgstr "Byg et tårn"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:49
 msgid ""
 "Build a tower at the north-east border of your territory to get greater "
 "visual range and to protect your people from sudden attacks by enemies."
-msgstr ""
+msgstr "Byg et tårn ved den nordøstlige grænse af dit territorium for at få en større visuel rækkevidde og for at beskytte dit folk mod overraskelsesangreb af fjenden."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:54
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:56
@@ -81,19 +82,19 @@ msgstr "Udforsk yderligere"
 msgid ""
 "Build more military buildings to explore the area around the headquarters "
 "and to ensure the safety of your people."
-msgstr "Byg flere militærbygninger for at udforske området omkring hovedkvarteret og sikre sikkerheden for dine folk."
+msgstr "Byg flere militærbygninger for at udforske området omkring hovedkvarteret og sikre dit folk."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:62
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:64
 msgid "Build a mining infrastructure"
-msgstr "Byg en minedriftinfrastruktur"
+msgstr "Byg en infrastruktur til minedrift"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:65
 msgid ""
 "Expand your territory to the mountains, send geologists to search for ore "
 "and coal and build a mining economy with mines, taverns, smelting works and "
 "metal workshop."
-msgstr "Udvid dit territorium til bjergene, send geologer ud for at søge efter malm og kul og byg en minedriftøkonomi med miner, værtshuse, smelteværker og metalfabrikker."
+msgstr "Udvid dit territorium mod bjergene, send geologer ud for at søge efter malm og kul og byg en infrastruktur til minedrift med miner, traktørsteder, smelteværker og en klejnsmed."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:70
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:72
@@ -107,7 +108,7 @@ msgstr "Byg en fæstning øst for bjergene."
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:78
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:80
 msgid "Build a training infrastructure"
-msgstr "Byg en træningsinfrastruktur"
+msgstr "Byg en infrastruktur til optræning"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:81
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:101
@@ -122,7 +123,7 @@ msgid ""
 " the blacksmith reaches his next level (master blacksmith), you can even "
 "enhance the ax workshop to a war mill, which will produce additional "
 "weapons."
-msgstr ""
+msgstr "Opgrader din klejnsmed til en øksesmedje for producere våben og byg en ekstra klejnsmed for at sikre produktionen af værktøj. Når smeden når sit næste niveau (mestersmed), kan du endda opgradere øksesmedjen til en våbenfabrik for at producere flere typer våben."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:83
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:120
@@ -134,11 +135,11 @@ msgstr "Byg en hjelmsmedje vest for bjergene for at fremstille bedre rustninger 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:89
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:91
 msgid "Build a warehouse"
-msgstr "Byg et varehus"
+msgstr "Byg et lager"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:92
 msgid "Build a warehouse to the west of the mountains."
-msgstr "Byg et varehus vest for bjergene"
+msgstr "Byg et lager vest for bjergene."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:93
 msgid ""
@@ -146,7 +147,7 @@ msgid ""
 "they aren’t defended by soldiers. It is often wise to build a warehouse when"
 " your territory is growing and the paths to your headquarters get longer and"
 " longer."
-msgstr "Varehuse svare til dine hovedkvarterer, med den eneste forskel, at de ikke er forsvaret af soldater. Det er ofte klogt at bygge et varehus, når dit territorium vokser og stierne til dine hovedkvarterer bliver længere og længere."
+msgstr "Et lager svarer til dit hovedkvarter, med den eneste forskel at de ikke er forsvaret af soldater. Det er ofte klogt at bygge et lager når dit territorium vokser og vejene til dit hovedkvarter bliver længere og længere."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:98
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:100
@@ -158,16 +159,16 @@ msgid ""
 "Training sites like a training camp or a battle arena are used for training "
 "soldiers in their different attributes. These attributes are important in "
 "fights and the better a soldier is, the higher is the chance to win a fight."
-msgstr "Træningsanlæg som en træningslejr eller en kamparena bruges til at træne soldaterne i deres forskellige attributter. Disse attributter er vigtige i kamp og jo bedre en soldat er, jo højere er sandsynligheden for at vinde en kamp."
+msgstr "Træningsanlæg som en træningslejr eller en kamparena bruges til at træne soldaternes forskellige evner. Disse evner er vigtige i kamp - jo bedre en soldat er, jo højere er sandsynligheden for at vinde en kamp."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:104
 msgid "The attributes are: health, attack, defense and evade."
-msgstr "Attributterne er: helbred, angreb, forsvar og undvig."
+msgstr "Evnerne er: helbred, angreb, forsvar og undvigelse."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:109
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:111
 msgid "Build weapons production"
-msgstr "Byg våbensproduktion"
+msgstr "Byg våbenproduktion"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:117
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:119
@@ -199,7 +200,7 @@ msgstr "Militært angreb på Al'thunran"
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:137
 msgid ""
 "Destroy all forces of Thron’s two brothers to liberate the throne-circle."
-msgstr ""
+msgstr "Ødelæg alle Thron's to brødres styrker for at befri troncirklen."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:145
 msgid "Close to Home"
@@ -452,7 +453,7 @@ msgstr ""
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:266
 msgid "Mountains Found"
-msgstr ""
+msgstr "Bjerge fundet"
 
 #. TRANSLATORS: Khantrukh
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:269
@@ -466,7 +467,7 @@ msgstr ""
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:275
 msgid "Mining Economy Completed"
-msgstr ""
+msgstr "Mineinfrastuktur fuldført"
 
 #. TRANSLATORS: Thron
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:278
@@ -478,7 +479,7 @@ msgstr ""
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:283
 msgid "Fortress Needed"
-msgstr ""
+msgstr "Fæstning nødvendig"
 
 #. TRANSLATORS: Thron
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:286
@@ -493,7 +494,7 @@ msgstr ""
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:292
 msgid "Fortress Completed"
-msgstr ""
+msgstr "Fæstning fuldført"
 
 #. TRANSLATORS: Thron
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:295
@@ -550,7 +551,7 @@ msgstr ""
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:319
 msgid "Victory"
-msgstr ""
+msgstr "Sejr"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:320
 msgid ""
@@ -586,7 +587,7 @@ msgstr ""
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:339
 msgid "Faster Transportation"
-msgstr ""
+msgstr "Mere effektiv transport"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:340
 msgid "Khantrukh says:"
@@ -598,14 +599,15 @@ msgid ""
 "Chieftain, remember the poor carriers: Our roads get longer and longer and "
 "the burden on their shoulders never gets lighter. We should breed more oxen "
 "to make their work lighter and our transportation more efficient."
-msgstr ""
+msgstr "Høvding, husk på vores stakkels bærere. Vores veje bliver længere og længere, og byrden på deres skuldre bliver aldrig lettere. Vi bør opdrætte flere okser for at lette deres arbejde og gøre vores transport mere effektiv."
 
 #: ../../scripting/format_scenario.lua:36
+#, lua-format
 msgid "“%s”"
-msgstr ""
+msgstr "“%s”"
 
 #: ../../scripting/format_scenario.lua:146
 msgid "New Objective"
 msgid_plural "New Objectives"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Nyt mål"
+msgstr[1] "Nye mål"

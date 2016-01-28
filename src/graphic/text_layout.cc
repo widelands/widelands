@@ -22,6 +22,7 @@
 #include <map>
 
 #include <SDL_ttf.h>
+#include <boost/algorithm/string.hpp>
 #include <boost/format.hpp>
 
 #include "base/utf8.h"
@@ -29,6 +30,13 @@
 #include "graphic/text/bidi.h"
 #include "graphic/text/font_set.h"
 #include "graphic/text_constants.h"
+
+std::string richtext_escape(const std::string& given_text) {
+	std::string text = given_text;
+	boost::replace_all(text, ">", "&gt;");
+	boost::replace_all(text, "<", "&lt;");
+	return text;
+}
 
 std::string as_game_tip(const std::string& txt) {
 	static boost::format f
@@ -46,12 +54,24 @@ std::string as_window_title(const std::string& txt) {
 	f % txt;
 	return f.str();
 }
+
 std::string as_uifont(const std::string & txt, int size, const RGBColor& clr) {
+	return as_aligned(txt, UI::Align::kLeft, size, clr);
+}
+
+std::string as_aligned(const std::string & txt, UI::Align align, int ptsize, const RGBColor& clr) {
+	std::string alignment = "left";
+	if ((align & UI::Align::kHorizontal) == UI::Align::kRight) {
+		alignment = "right";
+	} else if ((align & UI::Align::kHorizontal) == UI::Align::kHCenter) {
+		alignment = "center";
+	}
+
 	// UI Text is always bold due to historic reasons
 	static boost::format
-			f("<rt><p><font face=serif size=%i bold=1 shadow=1 color=%s>%s</font></p></rt>");
-
-	f % size;
+			f("<rt><p align=%s><font face=serif size=%i bold=1 shadow=1 color=%s>%s</font></p></rt>");
+	f % alignment;
+	f % ptsize;
 	f % clr.hex_value();
 	f % txt;
 	return f.str();
@@ -91,6 +111,31 @@ void TextStyle::setup() const
 	if (underline)
 		font_style |= TTF_STYLE_UNDERLINE;
 	TTF_SetFontStyle(font->get_ttf_font(), font_style);
+}
+
+/**
+ * Get a width estimate for text wrapping.
+ */
+uint32_t TextStyle::calc_width_for_wrapping(const UChar& c) const {
+	int result = 0;
+	TTF_GlyphMetrics(font->get_ttf_font(), c, nullptr, nullptr, nullptr, nullptr, &result);
+	return result;
+}
+
+/**
+ * Get a width estimate for text wrapping.
+ */
+uint32_t TextStyle::calc_width_for_wrapping(const std::string & text) const
+{
+	int result = 0;
+	const icu::UnicodeString parseme(text.c_str());
+	for (int i = 0; i < parseme.length(); ++i) {
+		UChar c = parseme.charAt(i);
+		if (!i18n::is_diacritic(c)) {
+			result += calc_width_for_wrapping(c);
+		}
+	}
+	return result;
 }
 
 /**

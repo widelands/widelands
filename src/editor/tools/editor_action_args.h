@@ -30,7 +30,7 @@ namespace Widelands {
 class BobDescr;
 }  // namespace Widelands
 
-struct EditorInteractive;
+class EditorInteractive;
 struct EditorToolAction;
 
 /// Class to save important and changeable properties of classes needed for actions

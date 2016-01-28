@@ -29,7 +29,7 @@
 #include "graphic/graphic.h"
 #include "graphic/text/font_set.h"
 #include "graphic/text_constants.h"
-#include "logic/soldier.h"
+#include "logic/map_objects/tribes/soldier.h"
 
 constexpr int32_t kUpdateTimeInGametimeMs = 1000;  //  1 second, gametime
 

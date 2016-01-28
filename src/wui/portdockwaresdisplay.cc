@@ -21,8 +21,8 @@
 
 #include <boost/lexical_cast.hpp>
 
+#include "economy/expedition_bootstrap.h"
 #include "economy/portdock.h"
-#include "logic/expedition_bootstrap.h"
 #include "logic/player.h"
 #include "wui/waresdisplay.h"
 #include "wui/waresqueuedisplay.h"

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2011, 2015 by the Widelands Development Team
+ * Copyright (C) 2002-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,11 +26,11 @@
 #include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
-#include "logic/building.h"
-#include "logic/militarysite.h"
+#include "logic/map_objects/tribes/building.h"
+#include "logic/map_objects/tribes/militarysite.h"
+#include "logic/map_objects/tribes/soldier.h"
+#include "logic/map_objects/tribes/soldiercontrol.h"
 #include "logic/player.h"
-#include "logic/soldier.h"
-#include "logic/soldiercontrol.h"
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
 #include "wlapplication.h"
@@ -464,7 +464,7 @@ void SoldierList::think()
 			case Widelands::MilitarySite::kPrefersHeroes:
 				m_soldier_preference.set_state(1);
 				break;
-			default:
+			case Widelands::MilitarySite::kNoPreference:
 				m_soldier_preference.set_state(-1);
 				break;
 		}
@@ -500,8 +500,10 @@ void SoldierList::eject(const Soldier * soldier)
 }
 
 void SoldierList::set_soldier_preference(int32_t changed_to) {
+#ifndef NDEBUG
 	upcast(Widelands::MilitarySite, ms, &m_building);
 	assert(ms);
+#endif
 	m_igb.game().send_player_militarysite_set_soldier_preference
 		(m_building, changed_to == 0 ?
 			Widelands::MilitarySite::kPrefersRookies:

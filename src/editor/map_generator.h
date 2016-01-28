@@ -23,7 +23,7 @@
 #include <memory>
 
 #include "logic/widelands_geometry.h"
-#include "logic/world/map_gen.h"
+#include "logic/map_objects/world/map_gen.h"
 
 struct RNG;
 

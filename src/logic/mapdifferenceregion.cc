@@ -19,6 +19,8 @@
 
 #include "logic/mapdifferenceregion.h"
 
+#include "base/wexception.h"
+
 namespace Widelands {
 
 template <> bool MapDifferenceRegion<Area<FCoords> >::advance(const Map & map)
@@ -61,7 +63,8 @@ void MapDifferenceRegion<Area<FCoords> >::move_to_other_side(const Map & map)
 	DIRECTION_CASE(WALK_SE, get_brn);
 	DIRECTION_CASE(WALK_SW, get_bln);
 	DIRECTION_CASE(WALK_W,  get_ln);
-	default: assert(false);
+	default:
+			NEVER_HERE();
 	}
 	--m_direction; if (!m_direction) m_direction = 6;
 	m_remaining_in_edge = m_area.radius;

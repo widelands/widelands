@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008, 2010 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008, 2010, 2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,8 +24,8 @@
 #include "base/macros.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
+#include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/player.h"
-#include "logic/tribes/tribe_descr.h"
 #include "profile/profile.h"
 
 namespace Widelands {
@@ -62,6 +62,7 @@ void MapAllowedBuildingTypesPacket::read
 
 			//  Now read all players and buildings.
 			iterate_players_existing(p, nr_players, egbase, player) {
+
 				const TribeDescr & tribe = player->tribe();
 				//  All building types default to false in the game (not in the
 				//  editor).

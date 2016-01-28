@@ -24,7 +24,7 @@
 #include "ui_basic/button.h"
 #include "ui_basic/textarea.h"
 
-struct EditorInteractive;
+class EditorInteractive;
 struct EditorNoiseHeightTool;
 
 struct EditorToolNoiseHeightOptionsMenu : public EditorToolOptionsMenu {

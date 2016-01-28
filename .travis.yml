@@ -1,47 +1,44 @@
 language: cpp
+script: bash -e .travis.sh
+sudo: required
+dist: trusty
 
-# TODO(sirver): figure out how to install a modern clang
+before_script:
+  - "export DISPLAY=:99.0"
+  - "sh -e /etc/init.d/xvfb start"
+  - sleep 3 # give xvfb some time to start
+
 matrix:
   include:
-  - compiler: gcc
-    env: GCC_VERSION="4.7" BUILD_TYPE="Debug"
-  - compiler: gcc
-    env: GCC_VERSION="4.8" BUILD_TYPE="Debug"
-  - compiler: gcc
-    env: GCC_VERSION="4.9" BUILD_TYPE="Debug"
-  - compiler: gcc
-    env: GCC_VERSION="5" BUILD_TYPE="Debug"
-  - compiler: gcc
-    env: GCC_VERSION="4.7" BUILD_TYPE="Release"
-  - compiler: gcc
-    env: GCC_VERSION="4.8" BUILD_TYPE="Release"
-  - compiler: gcc
-    env: GCC_VERSION="4.9" BUILD_TYPE="Release"
-  - compiler: gcc
-    env: GCC_VERSION="5" BUILD_TYPE="Release"
-
-install:
-   # Some of these commands fail transiently. We keep retrying them until they succeed.
-   - until sudo add-apt-repository ppa:zoogie/sdl2-snapshots -y; do sleep 10; done
-   - until sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y; do sleep 10; done
-   - until sudo add-apt-repository ppa:kubuntu-ppa/backports -y; do sleep 10; done
-   - until sudo add-apt-repository ppa:boost-latest/ppa -y; do sleep 10; done
-   - until sudo apt-get update -qq; do sleep 10; done
-   - until sudo apt-get install -qq -y --force-yes cmake gettext ninja-build libboost1.54-all-dev libglew-dev libpng-dev libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-net-dev libsdl2-ttf-dev zlib1g-dev ninja-build; do sleep 10; done
-   - if [ "$CXX" = "g++" ]; then sudo apt-get install -qq g++-$GCC_VERSION; fi
-   - if [ "$CXX" = "g++" ]; then export CXX="g++-$GCC_VERSION" CC="gcc-$GCC_VERSION"; fi
-
-script: 
-   - mkdir build
-   - cd build
-   - cmake .. -G Ninja -DCMAKE_BUILD_TYPE:STRING="$BUILD_TYPE"
-   - ninja -j4
-
-# TODO(sirver): This will be useful in the future.
-# notifications:
-# email:
-# recipients:
-# - one@example.com
-# - other@example.com
-# on_success: [always|never|change] # default: change
-# on_failure: [always|never|change] # default: always
+     - compiler: clang
+       env: CLANG_VERSION="3.4" BUILD_TYPE="Debug"
+     - compiler: clang
+       env: CLANG_VERSION="3.5" BUILD_TYPE="Debug"
+     - compiler: clang
+       env: CLANG_VERSION="3.6" BUILD_TYPE="Debug"
+     - compiler: clang
+       env: CLANG_VERSION="3.7" BUILD_TYPE="Debug"
+     - compiler: clang
+       env: CLANG_VERSION="3.4" BUILD_TYPE="Release"
+     - compiler: clang
+       env: CLANG_VERSION="3.5" BUILD_TYPE="Release"
+     - compiler: clang
+       env: CLANG_VERSION="3.6" BUILD_TYPE="Release"
+     - compiler: clang
+       env: CLANG_VERSION="3.7" BUILD_TYPE="Release"
+     - compiler: gcc
+       env: GCC_VERSION="4.7" BUILD_TYPE="Debug"
+     - compiler: gcc
+       env: GCC_VERSION="4.8" BUILD_TYPE="Debug"
+     - compiler: gcc
+       env: GCC_VERSION="4.9" BUILD_TYPE="Debug"
+     - compiler: gcc
+       env: GCC_VERSION="5" BUILD_TYPE="Debug"
+     - compiler: gcc
+       env: GCC_VERSION="4.7" BUILD_TYPE="Release"
+     - compiler: gcc
+       env: GCC_VERSION="4.8" BUILD_TYPE="Release"
+     - compiler: gcc
+       env: GCC_VERSION="4.9" BUILD_TYPE="Release"
+     - compiler: gcc
+       env: GCC_VERSION="5" BUILD_TYPE="Release"

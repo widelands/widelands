@@ -26,14 +26,14 @@
 #include "economy/request.h"
 #include "economy/road.h"
 #include "economy/ware_instance.h"
-#include "logic/building.h"
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
-#include "logic/instances.h"
+#include "logic/map_objects/map_object.h"
+#include "logic/map_objects/tribes/building.h"
+#include "logic/map_objects/tribes/tribe_descr.h"
+#include "logic/map_objects/tribes/warehouse.h"
+#include "logic/map_objects/tribes/worker.h"
 #include "logic/player.h"
-#include "logic/tribes/tribe_descr.h"
-#include "logic/warehouse.h"
-#include "logic/worker.h"
 
 namespace Widelands {
 

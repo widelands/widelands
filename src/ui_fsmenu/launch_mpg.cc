@@ -32,8 +32,8 @@
 #include "logic/game.h"
 #include "logic/game_controller.h"
 #include "logic/game_settings.h"
-#include "logic/instances.h"
 #include "logic/map.h"
+#include "logic/map_objects/map_object.h"
 #include "logic/player.h"
 #include "map_io/map_loader.h"
 #include "profile/profile.h"
@@ -209,8 +209,6 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG
 	m_clients    .set_font(m_fn, m_fs, RGBColor(0, 255, 0));
 	m_players    .set_font(m_fn, m_fs, RGBColor(0, 255, 0));
 	m_map        .set_font(m_fn, m_fs, RGBColor(0, 255, 0));
-	m_client_info.set_font(m_fn, m_fs, UI_FONT_CLR_FG);
-	m_map_info   .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 
 	m_mapname .set_text(_("(no map)"));
 	m_map_info.set_text(_("The host has not yet selected a map or saved game."));
@@ -346,15 +344,14 @@ void FullscreenMenuLaunchMPG::win_condition_load() {
 void FullscreenMenuLaunchMPG::change_map_or_save() {
 	MapOrSaveSelectionWindow selection_window
 		(this, m_ctrl, get_w() / 3, get_h() / 4);
-	switch (selection_window.run<FullscreenMenuBase::MenuTarget>()) {
-		case FullscreenMenuBase::MenuTarget::kNormalGame:
-			select_map();
-			break;
-		case FullscreenMenuBase::MenuTarget::kScenarioGame:
-			select_saved_game();
-			break;
-		default:
-			return;
+	auto result = selection_window.run<FullscreenMenuBase::MenuTarget>();
+	assert(result == FullscreenMenuBase::MenuTarget::kNormalGame ||
+	       result == FullscreenMenuBase::MenuTarget::kScenarioGame ||
+	       result == FullscreenMenuBase::MenuTarget::kBack);
+	if (result == FullscreenMenuBase::MenuTarget::kNormalGame) {
+		select_map();
+	} else if (result == FullscreenMenuBase::MenuTarget::kScenarioGame) {
+		select_saved_game();
 	}
 }
 
@@ -481,13 +478,13 @@ void FullscreenMenuLaunchMPG::refresh()
 
 	if (settings.mapfilename != m_filename_proof) {
 		if (!g_fs->file_exists(settings.mapfilename)) {
-			m_client_info.set_font(m_fn, m_fs, UI_FONT_CLR_WARNING);
+			m_client_info.set_color(UI_FONT_CLR_WARNING);
 			m_client_info.set_text
 				(_("The selected file can not be found. If it is not automatically "
 				   "transferred to you, please write to the host about this problem."));
 		} else {
 			// Reset font color
-			m_client_info.set_font(m_fn, m_fs, UI_FONT_CLR_FG);
+			m_client_info.set_color(UI_FONT_CLR_FG);
 
 			// Update local nr of players - needed for the client UI
 			m_nr_players = settings.players.size();

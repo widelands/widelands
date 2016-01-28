@@ -20,41 +20,41 @@
 #include "editor/tools/editor_place_bob_tool.h"
 
 #include "editor/editorinteractive.h"
-#include "logic/bob.h"
 #include "logic/editor_game_base.h"
 #include "logic/field.h"
+#include "logic/map_objects/bob.h"
+#include "logic/map_objects/world/world.h"
 #include "logic/mapregion.h"
-#include "logic/world/world.h"
 
 /**
  * Choses an object to place randomly from all enabled
  * and places this on the current field
 */
-int32_t EditorPlaceBobTool::handle_click_impl(Widelands::Map& map,
-                                                 const Widelands::World& world,
-                                                 Widelands::NodeAndTriangle<> const center,
-                                                 EditorInteractive& parent,
-                                                 EditorActionArgs& args) {
+int32_t EditorPlaceBobTool::handle_click_impl(const Widelands::World& world,
+                                              Widelands::NodeAndTriangle<> const center,
+                                              EditorInteractive& parent,
+                                              EditorActionArgs* args,
+											  Widelands::Map* map) {
 
-	if (get_nr_enabled() && args.obob_type.empty()) {
+	if (get_nr_enabled() && args->obob_type.empty()) {
 		Widelands::MapRegion<Widelands::Area<Widelands::FCoords> > mr
-		(map,
+		(*map,
 		 Widelands::Area<Widelands::FCoords>
-		 (map.get_fcoords(center.node), args.sel_radius));
+		 (map->get_fcoords(center.node), args->sel_radius));
 		do {
 			Widelands::Bob * const mbob = mr.location().field->get_first_bob();
-			args.obob_type.push_back((mbob ? &mbob->descr() : nullptr));
-			args.nbob_type.push_back(world.get_bob_descr(get_random_enabled()));
-		} while (mr.advance(map));
+			args->obob_type.push_back((mbob ? &mbob->descr() : nullptr));
+			args->nbob_type.push_back(world.get_bob_descr(get_random_enabled()));
+		} while (mr.advance(*map));
 	}
 
-	if (!args.nbob_type.empty()) {
+	if (!args->nbob_type.empty()) {
 		Widelands::EditorGameBase & egbase = parent.egbase();
 		Widelands::MapRegion<Widelands::Area<Widelands::FCoords> > mr
-		(map,
+		(*map,
 		 Widelands::Area<Widelands::FCoords>
-		 (map.get_fcoords(center.node), args.sel_radius));
-		std::list< const Widelands::BobDescr * >::iterator i = args.nbob_type.begin();
+		 (map->get_fcoords(center.node), args->sel_radius));
+		std::list< const Widelands::BobDescr * >::iterator i = args->nbob_type.begin();
 		do {
 			const Widelands::BobDescr & descr = *(*i);
 			if (mr.location().field->nodecaps() & descr.movecaps()) {
@@ -63,25 +63,25 @@ int32_t EditorPlaceBobTool::handle_click_impl(Widelands::Map& map,
 				descr.create(egbase, nullptr, mr.location());
 			}
 			++i;
-		} while (mr.advance(map));
+		} while (mr.advance(*map));
 		return mr.radius() + 2;
 	} else
 		return 0;
 }
 
 int32_t
-EditorPlaceBobTool::handle_undo_impl(Widelands::Map& map,
-                                        const Widelands::World&,
-                                        Widelands::NodeAndTriangle<Widelands::Coords> center,
-                                        EditorInteractive& parent,
-                                        EditorActionArgs& args) {
-	if (!args.nbob_type.empty()) {
+EditorPlaceBobTool::handle_undo_impl(const Widelands::World&,
+                                     Widelands::NodeAndTriangle<Widelands::Coords> center,
+                                     EditorInteractive& parent,
+                                     EditorActionArgs* args,
+									 Widelands::Map* map) {
+	if (!args->nbob_type.empty()) {
 		Widelands::EditorGameBase & egbase = parent.egbase();
 		Widelands::MapRegion<Widelands::Area<Widelands::FCoords> > mr
-		(map,
+		(*map,
 		 Widelands::Area<Widelands::FCoords>
-		 (map.get_fcoords(center.node), args.sel_radius));
-		std::list<const Widelands::BobDescr *>::iterator i = args.obob_type.begin();
+		 (map->get_fcoords(center.node), args->sel_radius));
+		std::list<const Widelands::BobDescr *>::iterator i = args->obob_type.begin();
 		do {
 			if (*i) {
 				const Widelands::BobDescr & descr = *(*i);
@@ -94,7 +94,7 @@ EditorPlaceBobTool::handle_undo_impl(Widelands::Map& map,
 				bob->remove(egbase);
 			}
 			++i;
-		} while (mr.advance(map));
+		} while (mr.advance(*map));
 		return mr.radius() + 2;
 	} else
 		return 0;

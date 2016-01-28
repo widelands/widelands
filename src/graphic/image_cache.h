@@ -23,40 +23,46 @@
 #include <map>
 #include <memory>
 #include <string>
+#include <vector>
 
 #include <boost/utility.hpp>
 
 #include "base/macros.h"
 #include "graphic/image.h"
+#include "graphic/texture_atlas.h"
 
 // For historic reasons, most part of the Widelands code base expect that an
 // Image stays valid for the whole duration of the program run. This class is
-// the one that keeps ownership of all Images to ensure that this is true. Also
-// for historic reasons, this class will try to load in Image from disk when
-// its hash is not found. Other parts of Widelands will create images when they
-// do not exist in the cache yet and then put it into the cache and therefore
-// releasing their ownership.
+// the one that keeps ownership of all Images to ensure that this is true.
+// Other parts of Widelands will create images when they do not exist in the
+// cache yet and then put it into the cache and therefore releasing their
+// ownership.
 class ImageCache {
 public:
 	ImageCache();
 	~ImageCache();
 
-	// Insert the given Image into the cache.
-	// Will return a pointer to the freshly inserted image for convenience.
+	// Insert the 'image' into the cache and returns a pointer to the inserted
+	// image for convenience.
 	const Image* insert(const std::string& hash, std::unique_ptr<const Image> image);
 
-	// Returns the image associated with the given hash. If no image by this
-	// hash is known, it will try to load one from disk with the filename =
-	// hash. If this fails, it will throw an error.
+	// Returns the image associated with the 'hash'. If no image by this hash is
+	// known, it will try to load one from disk with the filename = hash. If
+	// this fails, it will throw an error.
 	const Image* get(const std::string& hash);
 
-	// Returns true if the given hash is stored in the cache.
+	// Returns true if the 'hash' is stored in the cache.
 	bool has(const std::string& hash) const;
 
-private:
-	using ImageMap = std::map<std::string, std::unique_ptr<const Image>>;
+	// Fills the image cache with the hash -> Texture map 'textures_in_atlas'
+	// and take ownership of 'texture_atlases' so that the textures stay valid.
+	void
+	fill_with_texture_atlases(std::vector<std::unique_ptr<Texture>> texture_atlases,
+	                          std::map<std::string, std::unique_ptr<Texture>> textures_in_atlas);
 
-	ImageMap images_;  /// hash of cached filename/image pairs
+private:
+	std::vector<std::unique_ptr<Texture>> texture_atlases_;
+	std::map<std::string, std::unique_ptr<const Image>> images_;
 
 	DISALLOW_COPY_AND_ASSIGN(ImageCache);
 };

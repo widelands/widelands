@@ -515,7 +515,7 @@ void RichText::draw(RenderTarget & dst, const Point& offset, bool background)
 	{
 		Rect oldbox;
 		Point oldofs;
-		Rect bbox((*elt)->bbox.top_left() + offset, (*elt)->bbox.w, (*elt)->bbox.h);
+		Rect bbox((*elt)->bbox.origin() + offset, (*elt)->bbox.w, (*elt)->bbox.h);
 
 		if (dst.enter_window(bbox, &oldbox, &oldofs)) {
 			if (background)

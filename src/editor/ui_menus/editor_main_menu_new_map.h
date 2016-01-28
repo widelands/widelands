@@ -20,15 +20,14 @@
 #ifndef WL_EDITOR_UI_MENUS_EDITOR_MAIN_MENU_NEW_MAP_H
 #define WL_EDITOR_UI_MENUS_EDITOR_MAIN_MENU_NEW_MAP_H
 
-#include <vector>
-
+#include "logic/description_maintainer.h"
+#include "ui_basic/box.h"
+#include "ui_basic/button.h"
+#include "ui_basic/listselect.h"
+#include "ui_basic/spinbox.h"
 #include "ui_basic/window.h"
 
-struct EditorInteractive;
-namespace UI {
-struct Button;
-struct Textarea;
-}
+class EditorInteractive;
 
 /**
  * This is the new map selection menu. It offers
@@ -39,11 +38,23 @@ struct MainMenuNewMap : public UI::Window {
 	MainMenuNewMap(EditorInteractive &);
 
 private:
-	UI::Textarea * m_width, * m_height;
-	int32_t m_w, m_h;
-
-	void button_clicked(int32_t);
+	EditorInteractive& eia();
 	void clicked_create_map();
+	void clicked_cancel();
+	void fill_list();
+
+	int32_t margin_;
+	int32_t box_width_;
+	UI::Box box_;
+	UI::SpinBox width_;
+	UI::SpinBox height_;
+
+	// Terrains list
+	UI::Listselect<Widelands::DescriptionIndex> list_;
+
+	// Buttons
+	UI::Box button_box_;
+	UI::Button ok_button_, cancel_button_;
 };
 
 #endif  // end of include guard: WL_EDITOR_UI_MENUS_EDITOR_MAIN_MENU_NEW_MAP_H

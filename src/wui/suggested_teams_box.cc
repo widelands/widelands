@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 by the Widelands Development Team
+ * Copyright (C) 2015-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -35,17 +35,16 @@ SuggestedTeamsBox::SuggestedTeamsBox(Panel * parent,
 							int32_t max_x, int32_t max_y,
 							uint32_t inner_spacing) :
 	UI::Box(parent, x, y, orientation, max_x, max_y, inner_spacing),
-	m_padding(padding),
-	m_indent(indent),
-	m_label_height(label_height)
+	padding_(padding),
+	indent_(indent),
+	label_height_(label_height)
 {
-	m_player_icons.clear();
-	m_suggested_teams.clear();
+	player_icons_.clear();
+	suggested_teams_.clear();
 	set_size(max_x, max_y);
 
-	m_suggested_teams_box_label =
-			new UI::Textarea(this, "", UI::Align::kCenterLeft);
-	add(m_suggested_teams_box_label, UI::Align::kLeft);
+	suggested_teams_box_label_ = new UI::Textarea(this, "", UI::Align::kCenterLeft);
+	add(suggested_teams_box_label_, UI::Align::kLeft);
 }
 SuggestedTeamsBox::~SuggestedTeamsBox() {
 	SuggestedTeamsBox::hide();
@@ -53,63 +52,63 @@ SuggestedTeamsBox::~SuggestedTeamsBox() {
 
 void SuggestedTeamsBox::hide() {
 	// Delete former images
-	for (UI::Icon* player_icon : m_player_icons) {
+	for (UI::Icon* player_icon : player_icons_) {
 		player_icon->set_icon(nullptr);
 		player_icon->set_visible(false);
 		player_icon->set_no_frame();
 	}
-	m_player_icons.clear();
+	player_icons_.clear();
 
 	// Delete vs. labels
-	for (UI::Textarea* vs_label : m_vs_labels) {
+	for (UI::Textarea* vs_label : vs_labels_) {
 		vs_label->set_visible(false);
 	}
-	m_vs_labels.clear();
+	vs_labels_.clear();
 
 	set_visible(false);
-	m_suggested_teams_box_label->set_visible(false);
-	m_suggested_teams_box_label->set_text("");
+	suggested_teams_box_label_->set_visible(false);
+	suggested_teams_box_label_->set_text("");
 }
 
 
 void SuggestedTeamsBox::show(const std::vector<Widelands::Map::SuggestedTeamLineup>& suggested_teams)
 {
 	hide();
-	m_suggested_teams = suggested_teams;
+	suggested_teams_ = suggested_teams;
 
-	if (!m_suggested_teams.empty()) {
+	if (!suggested_teams_.empty()) {
 
 		// Initialize
 		uint8_t lineup_counter = 0;
 		set_visible(true);
-		m_suggested_teams_box_label->set_visible(true);
+		suggested_teams_box_label_->set_visible(true);
 		/** TRANSLATORS: Label for the list of suggested teams when choosing a map */
-		m_suggested_teams_box_label->set_text(_("Suggested Teams:"));
-		int32_t teamlist_offset = m_suggested_teams_box_label->get_y() +
-										  m_suggested_teams_box_label->get_h() +
-										  m_padding;
+		suggested_teams_box_label_->set_text(_("Suggested Teams:"));
+		int32_t teamlist_offset = suggested_teams_box_label_->get_y() +
+										  suggested_teams_box_label_->get_h() +
+										  padding_;
 
 		// Parse suggested teams
 		UI::Icon* player_icon;
 		UI::Textarea * vs_label;
-		for (const Widelands::Map::SuggestedTeamLineup& lineup : m_suggested_teams) {
+		for (const Widelands::Map::SuggestedTeamLineup& lineup : suggested_teams_) {
 
-			m_lineup_box =
-					new UI::Box(this, m_indent, teamlist_offset + lineup_counter * (m_label_height + m_padding),
-									UI::Box::Horizontal, get_w() - m_indent);
+			lineup_box_ =
+					new UI::Box(this, indent_, teamlist_offset + lineup_counter * (label_height_ + padding_),
+									UI::Box::Horizontal, get_w() - indent_);
 
-			m_lineup_box->set_size(get_w(), m_label_height + m_padding);
+			lineup_box_->set_size(get_w(), label_height_ + padding_);
 
 			bool is_first = true;
 			for (const Widelands::Map::SuggestedTeam& team : lineup) {
 
 				if (!is_first) {
-					m_lineup_box->add_space(m_padding);
-					vs_label = new UI::Textarea(m_lineup_box, "x", UI::Align::kBottomCenter);
-					m_lineup_box->add(vs_label, UI::Align::kLeft);
+					lineup_box_->add_space(padding_);
+					vs_label = new UI::Textarea(lineup_box_, "x", UI::Align::kBottomCenter);
+					lineup_box_->add(vs_label, UI::Align::kLeft);
 					vs_label->set_visible(true);
-					m_vs_labels.push_back(vs_label);
-					m_lineup_box->add_space(m_padding);
+					vs_labels_.push_back(vs_label);
+					lineup_box_->add_space(padding_);
 				}
 				is_first = false;
 
@@ -117,19 +116,19 @@ void SuggestedTeamsBox::show(const std::vector<Widelands::Map::SuggestedTeamLine
 					assert(player < MAX_PLAYERS);
 					const std::string player_filename = (boost::format("pics/fsel_editor_set_player_0%i_pos.png")
 																	 % (++player)).str().c_str();
-					player_icon = new UI::Icon(m_lineup_box, 0, 0, 20, 20,
+					player_icon = new UI::Icon(lineup_box_, 0, 0, 20, 20,
 																	 g_gr->images().get(player_filename));
 					player_icon->set_visible(true);
 					player_icon->set_no_frame();
-					m_lineup_box->add(player_icon, UI::Align::kLeft);
-					m_player_icons.push_back(player_icon);
+					lineup_box_->add(player_icon, UI::Align::kLeft);
+					player_icons_.push_back(player_icon);
 				} // Players in team
 			} // Teams in lineup
 			++lineup_counter;
 		} // All lineups
 
 		// Adjust size to content
-		set_size(get_w(), teamlist_offset + lineup_counter * (m_label_height + m_padding));
+		set_size(get_w(), teamlist_offset + lineup_counter * (label_height_ + padding_));
 	}
 }
 

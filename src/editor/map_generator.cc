@@ -23,12 +23,13 @@
 
 #include <stdint.h>
 
+#include "base/wexception.h"
 #include "editor/tools/editor_increase_resources_tool.h"
 #include "logic/editor_game_base.h"
 #include "logic/findnode.h"
 #include "logic/map.h"
-#include "logic/world/map_gen.h"
-#include "logic/world/world.h"
+#include "logic/map_objects/world/map_gen.h"
+#include "logic/map_objects/world/world.h"
 #include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
 
@@ -133,9 +134,8 @@ void MapGenerator::generate_resources(uint32_t const* const random1,
 		uint8_t res_val = static_cast<uint8_t>(random_value / (kMaxElevation / max_amount));
 		res_val *= static_cast<uint8_t>(map_info_.resource_amount) + 1;
 		res_val /= 3;
-		if (editor_change_resource_tool_callback(fc, map_, world, res_idx)) {
-			fc.field->set_resources(res_idx, res_val);
-			fc.field->set_initial_res_amount(res_val);
+		if (map_.is_resource_valid(world, fc, res_idx)) {
+			map_.initialize_resources(fc, res_idx, res_val);
 		}
 	};
 
@@ -411,7 +411,7 @@ uint32_t * MapGenerator::generate_random_value_map
 		delete[] values;
 		throw;
 	}
-	// Never here.
+	NEVER_HERE();
 }
 
 
