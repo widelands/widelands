@@ -42,11 +42,10 @@ InteractiveGameBase & GameMainMenuSaveGame::igbase() {
 #define VMARGIN                                                               5
 #define VSPACING                                                              5
 #define HSPACING                                                              5
-#define EDITBOX_HEIGHT                                                       20
 #define BUTTON_HEIGHT                                                        20
 #define LIST_WIDTH                                                          280
-#define LIST_HEIGHT   (WINDOW_HEIGHT - 2 * VMARGIN - VSPACING - EDITBOX_HEIGHT)
-#define EDITBOX_Y                    (WINDOW_HEIGHT - EDITBOX_HEIGHT - VMARGIN)
+#define LIST_HEIGHT                    (WINDOW_HEIGHT - 2 * VMARGIN - VSPACING)
+#define EDITBOX_Y                                (WINDOW_HEIGHT - 24 - VMARGIN)
 #define DESCRIPTION_X                         (VMARGIN + LIST_WIDTH + VSPACING)
 #define DESCRIPTION_WIDTH              (WINDOW_WIDTH - DESCRIPTION_X - VMARGIN)
 #define CANCEL_Y                      (WINDOW_HEIGHT - BUTTON_HEIGHT - VMARGIN)
@@ -59,7 +58,8 @@ GameMainMenuSaveGame::GameMainMenuSaveGame
 	UI::UniqueWindow
 		(&parent, "save_game", &registry,
 		 WINDOW_WIDTH, WINDOW_HEIGHT, _("Save Game")),
-	ls_     (this, HSPACING, VSPACING,  LIST_WIDTH, LIST_HEIGHT),
+	editbox_(this, HSPACING, EDITBOX_Y, LIST_WIDTH, g_gr->images().get("pics/but1.png")),
+	ls_     (this, HSPACING, VSPACING,  LIST_WIDTH, LIST_HEIGHT - editbox_.get_h()),
 	name_label_
 		(this, DESCRIPTION_X,  5, 0, 20, _("Map Name:"),  UI::Align_CenterLeft),
 	mapname_
@@ -76,12 +76,8 @@ GameMainMenuSaveGame::GameMainMenuSaveGame
 		(this, DESCRIPTION_X, 125, 0, 20, " ",             UI::Align_CenterLeft),
 	curdir_(SaveHandler::get_base_dir())
 {
-	editbox_ =
-		new UI::EditBox
-			(this, HSPACING, EDITBOX_Y, LIST_WIDTH, EDITBOX_HEIGHT,
-			 g_gr->images().get("pics/but1.png"));
-	editbox_->changed.connect(boost::bind(&GameMainMenuSaveGame::edit_box_changed, this));
-	editbox_->ok.connect(boost::bind(&GameMainMenuSaveGame::ok, this));
+	editbox_.changed.connect(boost::bind(&GameMainMenuSaveGame::edit_box_changed, this));
+	editbox_.ok.connect(boost::bind(&GameMainMenuSaveGame::ok, this));
 
 	button_ok_ =
 		new UI::Button
@@ -139,7 +135,7 @@ GameMainMenuSaveGame::GameMainMenuSaveGame
 		}
 	}
 
-	editbox_->focus();
+	editbox_.focus();
 	pause_game(true);
 }
 
@@ -154,7 +150,7 @@ void GameMainMenuSaveGame::selected(uint32_t) {
 	Widelands::GamePreloadPacket gpdp;
 	gl.preload_game(gpdp); //  This has worked before, no problem
 	{
-		editbox_->set_text(FileSystem::filename_without_ext(name.c_str()));
+		editbox_.set_text(FileSystem::filename_without_ext(name.c_str()));
 	}
 	button_ok_->set_enabled(true);
 
@@ -228,7 +224,7 @@ void GameMainMenuSaveGame::select_by_name(std::string name)
  * The editbox was changed. Enable ok button
  */
 void GameMainMenuSaveGame::edit_box_changed() {
-	button_ok_->set_enabled(editbox_->text().size());
+	button_ok_->set_enabled(editbox_.text().size());
 }
 
 static void dosave
@@ -289,12 +285,12 @@ private:
  */
 void GameMainMenuSaveGame::ok()
 {
-	if (editbox_->text().empty())
+	if (editbox_.text().empty())
 		return;
 
 	std::string const complete_filename =
 		igbase().game().save_handler().create_file_name
-			(curdir_, editbox_->text());
+			(curdir_, editbox_.text());
 
 	//  Check if file exists. If it does, show a warning.
 	if (g_fs->file_exists(complete_filename)) {
@@ -351,7 +347,7 @@ void GameMainMenuSaveGame::delete_clicked()
 {
 	std::string const complete_filename =
 		igbase().game().save_handler().create_file_name
-			(curdir_, editbox_->text());
+			(curdir_, editbox_.text());
 
 	//  Check if file exists. If it does, let the user confirm the deletion.
 	if (g_fs->file_exists(complete_filename))

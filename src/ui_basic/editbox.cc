@@ -72,7 +72,6 @@ struct EditBoxImpl {
 	/*@{*/
 	std::string fontname;
 	uint32_t fontsize;
-	RGBColor fontcolor;
 	/*@}*/
 
 	/// Background tile style.
@@ -96,11 +95,12 @@ struct EditBoxImpl {
 
 EditBox::EditBox
 	(Panel * const parent,
-	 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
+	 const int32_t x, const int32_t y, const uint32_t w,
 	 const Image* background,
+	 int font_size,
 	 Align _align)
 	:
-	Panel(parent, x, y, w, h),
+	Panel(parent, x, y, w, UI::g_fh1->render(as_uifont("."), font_size)->height() + 2),
 	m(new EditBoxImpl),
 	m_history_active(false),
 	m_history_position(-1)
@@ -109,8 +109,7 @@ EditBox::EditBox
 
 	m->background = background;
 	m->fontname = UI::g_fh1->fontset().serif();
-	m->fontsize = UI_FONT_SIZE_SMALL;
-	m->fontcolor = UI_FONT_CLR_FG;
+	m->fontsize = font_size;
 
 	m->align = static_cast<Align>((_align & Align_Horizontal) | Align_VCenter);
 	m->caret = 0;
@@ -138,16 +137,6 @@ EditBox::~EditBox()
 const std::string & EditBox::text() const
 {
 	return m->text;
-}
-
-/**
- * Set the font used by the edit box.
- */
-void EditBox::set_font(const std::string & name, int32_t size, RGBColor color)
-{
-	m->fontname = name;
-	m->fontsize = size;
-	m->fontcolor = color;
 }
 
 /**
@@ -468,26 +457,21 @@ void EditBox::draw(RenderTarget & odst)
 	const int margin = 4;
 	const int max_width = get_w() - 2 * margin;
 
-	// TODO(GunChleoc): Hacking the fontsize until we have fully dynamic layout
 	const Image* entry_text_im =
 			UI::g_fh1->render(as_editorfont(m->text,
-													  m->fontsize - UI::g_fh1->fontset().size_offset(),
-													  m->fontcolor));
+													  m->fontsize,
+													  UI_FONT_CLR_FG));
 
 	int linewidth = entry_text_im->width();
 	int lineheight = entry_text_im->height();
-
-	Align alignment = mirror_alignment(m->align);
 	Point point(0, lineheight >> 1);
 
+	Align alignment = mirror_alignment(m->align);
 	if (alignment & Align_Right) {
 		point.x += max_width;
 	} else if (alignment & Align_HCenter) {
 		point.x += max_width / 2;
 	}
-
-
-
 	UI::correct_for_align(alignment, linewidth, entry_text_im->height(), &point);
 
 	// Crop to field width while blitting
