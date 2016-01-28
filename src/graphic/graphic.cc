@@ -78,6 +78,10 @@ void Graphic::initialize(const TraceGl& trace_gl,
 	window_mode_height_ = window_mode_h;
 	requires_update_ = true;
 
+	if (SDL_GL_LoadLibrary(nullptr) == -1) {
+		throw wexception("SDL_GL_LoadLibrary failed: %s", SDL_GetError());
+	}
+
 	log("Graphics: Try to set Videomode %ux%u\n", window_mode_width_, window_mode_height_);
 	sdl_window_ =
 	   SDL_CreateWindow("Widelands Window", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
