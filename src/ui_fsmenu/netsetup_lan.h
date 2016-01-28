@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2004-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -57,12 +57,12 @@ protected:
 	void clicked_ok() override;
 
 private:
-	uint32_t m_butx;
-	uint32_t m_butw;
-	uint32_t m_buth;
-	uint32_t m_lisw;
-	UI::Textarea title, m_opengames;
-	UI::Textarea m_playername, m_hostname;
+	uint32_t butx_;
+	uint32_t butw_;
+	uint32_t buth_;
+	uint32_t lisw_;
+	UI::Textarea title, opengames_;
+	UI::Textarea playername_, hostname_;
 	UI::Button joingame, hostgame, back, loadlasthost;
 	UI::EditBox playername;
 	UI::EditBox hostname;

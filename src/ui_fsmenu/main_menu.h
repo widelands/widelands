@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -38,12 +38,12 @@ public:
 	FullscreenMenuMainMenu(const char* background_image);
 
 protected:
-	const uint32_t m_box_x, m_box_y;
-	const uint32_t m_butw, m_buth;
-	const uint32_t m_title_y;
-	const uint32_t m_padding;
+	const uint32_t box_x_, box_y_;
+	const uint32_t butw_, buth_;
+	const uint32_t title_y_;
+	const uint32_t padding_;
 
-	const std::string m_button_background;
+	const std::string button_background_;
 };
 
 #endif  // end of include guard: WL_UI_FSMENU_MAIN_MENU_H

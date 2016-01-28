@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2013 by the Widelands Development Team
+ * Copyright (C) 2002-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -81,107 +81,107 @@ std::string map_filename(const std::string& filename, const std::string& mapname
 FullscreenMenuLoadGame::FullscreenMenuLoadGame
 	(Widelands::Game & g, GameSettingsProvider * gsp, GameController * gc, bool is_replay) :
 	FullscreenMenuLoadMapOrGame(),
-	m_table(this, tablex_, tabley_, tablew_, tableh_, true),
+	table_(this, tablex_, tabley_, tablew_, tableh_, true),
 
-	m_is_replay(is_replay),
+	is_replay_(is_replay),
 	// Main title
-	m_title
+	title_
 		(this, get_w() / 2, tabley_ / 3,
-		 m_is_replay ? _("Choose a replay") : _("Choose a saved game"), UI::Align_HCenter),
+		 is_replay_ ? _("Choose a replay") : _("Choose a saved game"), UI::Align_HCenter),
 
 	// Savegame description
-	m_label_mapname
+	label_mapname_
 		(this, right_column_x_, tabley_, "", UI::Align_Left),
-	m_ta_mapname(this,
-					 right_column_x_ + indent_, get_y_from_preceding(m_label_mapname) + padding_,
-					 get_right_column_w(right_column_x_ + indent_), 2 * m_label_height - padding_),
+	ta_mapname_(this,
+					 right_column_x_ + indent_, get_y_fropreceding_(label_mapname_) + padding_,
+					 get_right_column_w(right_column_x_ + indent_), 2 * label_height_ - padding_),
 
-	m_label_gametime
-		(this, right_column_x_, get_y_from_preceding(m_ta_mapname) + 2 * padding_,
+	label_gametime_
+		(this, right_column_x_, get_y_fropreceding_(ta_mapname_) + 2 * padding_,
 		 "",
 		 UI::Align_Left),
-	m_ta_gametime(this,
-					  m_right_column_tab, m_label_gametime.get_y(),
-					  get_right_column_w(m_right_column_tab), m_label_height),
+	ta_gametime_(this,
+					  right_column_tab_, label_gametime_.get_y(),
+					  get_right_column_w(right_column_tab_), label_height_),
 
-	m_label_players
-		(this, right_column_x_, get_y_from_preceding(m_ta_gametime),
+	label_players_
+		(this, right_column_x_, get_y_fropreceding_(ta_gametime_),
 		 "",
 		 UI::Align_Left),
-	m_ta_players(this,
-					 m_right_column_tab, m_label_players.get_y(),
-					 get_right_column_w(m_right_column_tab), m_label_height),
+	ta_players_(this,
+					 right_column_tab_, label_players_.get_y(),
+					 get_right_column_w(right_column_tab_), label_height_),
 
-	m_label_version
-		(this, right_column_x_, get_y_from_preceding(m_ta_players),
+	label_version_
+		(this, right_column_x_, get_y_fropreceding_(ta_players_),
 		 "",
 		 UI::Align_Left),
-	m_ta_version(this,
-					 m_right_column_tab, m_label_version.get_y(), "", UI::Align_Left),
+	ta_version_(this,
+					 right_column_tab_, label_version_.get_y(), "", UI::Align_Left),
 
-	m_label_win_condition
-		(this, right_column_x_, get_y_from_preceding(m_ta_version) + 3 * padding_,
+	label_win_condition_
+		(this, right_column_x_, get_y_fropreceding_(ta_version_) + 3 * padding_,
 		 "",
 		 UI::Align_Left),
-	m_ta_win_condition(this,
-							 right_column_x_ + indent_, get_y_from_preceding(m_label_win_condition) + padding_,
-							 get_right_column_w(right_column_x_ + indent_), m_label_height),
+	ta_win_condition_(this,
+							 right_column_x_ + indent_, get_y_fropreceding_(label_win_condition_) + padding_,
+							 get_right_column_w(right_column_x_ + indent_), label_height_),
 
-	m_delete
+	delete_
 		(this, "delete",
-		 right_column_x_, m_buty - buth_ - 2 * padding_,
-		 m_butw, buth_,
+		 right_column_x_, buty_ - buth_ - 2 * padding_,
+		 butw_, buth_,
 		 g_gr->images().get("pics/but0.png"),
 		 _("Delete"), std::string(), false, false),
 
-	m_ta_errormessage
+	ta_errormessage_
 		(this,
 		 right_column_x_,
-		 get_y_from_preceding(m_ta_mapname) + 2 * padding_,
+		 get_y_fropreceding_(ta_mapname_) + 2 * padding_,
 		 get_right_column_w(right_column_x_),
-		 m_delete.get_y() - get_y_from_preceding(m_ta_mapname) - 6 * padding_),
+		 delete_.get_y() - get_y_fropreceding_(ta_mapname_) - 6 * padding_),
 
-	m_minimap_y(get_y_from_preceding(m_ta_win_condition) + 3 * padding_),
-	m_minimap_w(get_right_column_w(right_column_x_)),
-	m_minimap_h(m_delete.get_y() - get_y_from_preceding(m_ta_win_condition) - 6 * padding_),
-	m_minimap_icon(this,
-						right_column_x_, get_y_from_preceding(m_ta_win_condition) + 3 * padding_,
-						m_minimap_w, m_minimap_h, nullptr),
+	minimap_y_(get_y_fropreceding_(ta_win_condition_) + 3 * padding_),
+	minimap_w_(get_right_column_w(right_column_x_)),
+	minimap_h_(delete_.get_y() - get_y_fropreceding_(ta_win_condition_) - 6 * padding_),
+	minimap_icon_(this,
+						right_column_x_, get_y_fropreceding_(ta_win_condition_) + 3 * padding_,
+						minimap_w_, minimap_h_, nullptr),
 
 	// "Data container" for the savegame information
-	m_game(g),
-	m_settings(gsp),
-	m_ctrl(gc)
+	game_(g),
+	settings_(gsp),
+	ctrl_(gc)
 {
-	m_title.set_textstyle(UI::TextStyle::ui_big());
-	m_ta_gametime.set_tooltip(_("The time that elapsed inside this game"));
-	m_ta_players.set_tooltip(_("The number of players"));
-	m_ta_version.set_tooltip(_("The version of Widelands that this game was played under"));
-	m_ta_win_condition.set_tooltip(_("The win condition that was set for this game"));
+	title_.set_textstyle(UI::TextStyle::ui_big());
+	ta_gametime_.set_tooltip(_("The time that elapsed inside this game"));
+	ta_players_.set_tooltip(_("The number of players"));
+	ta_version_.set_tooltip(_("The version of Widelands that this game was played under"));
+	ta_win_condition_.set_tooltip(_("The win condition that was set for this game"));
 
-	if (m_is_replay) {
+	if (is_replay_) {
 		back_.set_tooltip(_("Return to the main menu"));
 		ok_.set_tooltip(_("Load this replay"));
-		m_ta_mapname.set_tooltip(_("The map that this replay is based on"));
-		m_delete.set_tooltip(_("Delete this replay"));
+		ta_mapname_.set_tooltip(_("The map that this replay is based on"));
+		delete_.set_tooltip(_("Delete this replay"));
 	} else {
 		back_.set_tooltip(_("Return to the single player menu"));
 		ok_.set_tooltip(_("Load this game"));
-		m_ta_mapname.set_tooltip(_("The map that this game is based on"));
-		m_delete.set_tooltip(_("Delete this game"));
+		ta_mapname_.set_tooltip(_("The map that this game is based on"));
+		delete_.set_tooltip(_("Delete this game"));
 	}
-	m_minimap_icon.set_visible(false);
+	minimap_icon_.set_visible(false);
 
 	back_.sigclicked.connect(boost::bind(&FullscreenMenuLoadGame::clicked_back, boost::ref(*this)));
 	ok_.sigclicked.connect(boost::bind(&FullscreenMenuLoadGame::clicked_ok, boost::ref(*this)));
-	m_delete.sigclicked.connect
+	delete_.sigclicked.connect
 		(boost::bind
 			 (&FullscreenMenuLoadGame::clicked_delete, boost::ref(*this)));
-	m_table.add_column(130, _("Save Date"), _("The date this game was saved"), UI::Align_Left);
+	table_.add_column(130, _("Save Date"), _("The date this game was saved"), UI::Align_Left);
 	int used_width = 130;
-	if (m_is_replay || m_settings->settings().multiplayer) {
+	if (is_replay_ || settings_->settings().multiplayer) {
 		std::vector<std::string> modes;
-		if (m_is_replay) {
+		if (is_replay_) {
 			/** TRANSLATORS: Tooltip for the "Mode" column when choosing a game/replay to load. */
 			/** TRANSLATORS: Make sure that you keep consistency in your translation. */
 			modes.push_back(_("SP = Single Player"));
@@ -200,7 +200,7 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame
 		const std::string mode_tooltip_2 =
 				_("Numbers are the number of players.");
 
-		m_table.add_column(65,
+		table_.add_column(65,
 								 /** TRANSLATORS: Game Mode table column when choosing a game/replay to load. */
 								 /** TRANSLATORS: Keep this to 5 letters maximum. */
 								 /** TRANSLATORS: A tooltip will explain if you need to use an abbreviation. */
@@ -209,33 +209,33 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame
 								 UI::Align_Left);
 		used_width += 65;
 	}
-	m_table.add_column(m_table.get_w() - used_width,
+	table_.add_column(table_.get_w() - used_width,
 							 _("Description"),
 							 _("The filename that the game was saved under followed by the map’s name, "
 								"or the map’s name followed by the last objective achieved."),
 								 UI::Align_Left);
-	m_table.set_column_compare
+	table_.set_column_compare
 		(0,
 		 boost::bind(&FullscreenMenuLoadGame::compare_date_descending, this, _1, _2));
-	m_table.selected.connect(boost::bind(&FullscreenMenuLoadGame::entry_selected, this));
-	m_table.double_clicked.connect(boost::bind(&FullscreenMenuLoadGame::clicked_ok, boost::ref(*this)));
-	m_table.set_sort_column(0);
-	m_table.focus();
+	table_.selected.connect(boost::bind(&FullscreenMenuLoadGame::entry_selected, this));
+	table_.double_clicked.connect(boost::bind(&FullscreenMenuLoadGame::clicked_ok, boost::ref(*this)));
+	table_.set_sort_column(0);
+	table_.focus();
 	fill_table();
 }
 
 void FullscreenMenuLoadGame::think()
 {
-	if (m_ctrl) {
-		m_ctrl->think();
+	if (ctrl_) {
+		ctrl_->think();
 	}
 }
 
 // Reverse default sort order for save date column
 bool FullscreenMenuLoadGame::compare_date_descending(uint32_t rowa, uint32_t rowb)
 {
-	const SavegameData & r1 = m_games_data[m_table[rowa]];
-	const SavegameData & r2 = m_games_data[m_table[rowb]];
+	const SavegameData & r1 = games_data_[table_[rowa]];
+	const SavegameData & r2 = games_data_[table_[rowb]];
 
 	return r1.savetimestamp < r2.savetimestamp;
 }
@@ -243,39 +243,39 @@ bool FullscreenMenuLoadGame::compare_date_descending(uint32_t rowa, uint32_t row
 
 void FullscreenMenuLoadGame::clicked_ok()
 {
-	const SavegameData & gamedata = m_games_data[m_table.get_selected()];
+	const SavegameData & gamedata = games_data_[table_.get_selected()];
 	if (gamedata.errormessage.empty()) {
-		m_filename = gamedata.filename;
+		filename_ = gamedata.filename;
 		end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kOk);
 	}
 }
 
 void FullscreenMenuLoadGame::clicked_delete()
 {
-	if (!m_table.has_selection()) {
+	if (!table_.has_selection()) {
 		return;
 	}
-	const SavegameData & gamedata = m_games_data[m_table.get_selected()];
+	const SavegameData & gamedata = games_data_[table_.get_selected()];
 
 	std::string message = (boost::format("%s %s\n")
-				  % m_label_mapname.get_text() % gamedata.mapname).str();
+				  % label_mapname_.get_text() % gamedata.mapname).str();
 
 	message = (boost::format("%s %s %s\n") % message
-				  % m_label_win_condition.get_text() % gamedata.wincondition).str();
+				  % label_win_condition_.get_text() % gamedata.wincondition).str();
 
 	message = (boost::format("%s %s %s\n") % message
 				  % _("Save Date:") % gamedata.savedatestring).str();
 
 	message = (boost::format("%s %s %s\n") % message
-				  % m_label_gametime.get_text() % gametimestring(gamedata.gametime)).str();
+				  % label_gametime_.get_text() % gametimestring(gamedata.gametime)).str();
 
 	message = (boost::format("%s %s %s\n\n") % message
-				  % m_label_players.get_text() % gamedata.nrplayers).str();
+				  % label_players_.get_text() % gamedata.nrplayers).str();
 
 	message = (boost::format("%s %s %s\n") % message
 				  % _("Filename:") % gamedata.filename).str();
 
-	if (m_is_replay) {
+	if (is_replay_) {
 		message = (boost::format("%s\n\n%s")
 					  % _("Do you really want to delete this replay?") % message).str();
 	} else {
@@ -287,7 +287,7 @@ void FullscreenMenuLoadGame::clicked_delete()
 		(this, _("Confirm deleting file"), message, UI::WLMessageBox::MBoxType::kOkCancel);
 	if (confirmationBox.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk) {
 		g_fs->fs_unlink(gamedata.filename);
-		if (m_is_replay) {
+		if (is_replay_) {
 			g_fs->fs_unlink(gamedata.filename + WLGF_SUFFIX);
 		}
 		fill_table();
@@ -297,31 +297,31 @@ void FullscreenMenuLoadGame::clicked_delete()
 
 bool FullscreenMenuLoadGame::set_has_selection()
 {
-	bool has_selection = m_table.has_selection();
+	bool has_selection = table_.has_selection();
 	ok_.set_enabled(has_selection);
-	m_delete.set_enabled(has_selection);
+	delete_.set_enabled(has_selection);
 
 	if (!has_selection) {
-		m_label_mapname .set_text(std::string());
-		m_label_gametime.set_text(std::string());
-		m_label_players.set_text(std::string());
-		m_label_version.set_text(std::string());
-		m_label_win_condition.set_text(std::string());
+		label_mapname_ .set_text(std::string());
+		label_gametime_.set_text(std::string());
+		label_players_.set_text(std::string());
+		label_version_.set_text(std::string());
+		label_win_condition_.set_text(std::string());
 
-		m_ta_mapname .set_text(std::string());
-		m_ta_gametime.set_text(std::string());
-		m_ta_players.set_text(std::string());
-		m_ta_version.set_text(std::string());
-		m_ta_win_condition.set_text(std::string());
-		m_minimap_icon.set_icon(nullptr);
-		m_minimap_icon.set_visible(false);
-		m_minimap_icon.set_no_frame();
-		m_minimap_image.reset();
+		ta_mapname_ .set_text(std::string());
+		ta_gametime_.set_text(std::string());
+		ta_players_.set_text(std::string());
+		ta_version_.set_text(std::string());
+		ta_win_condition_.set_text(std::string());
+		minimap_icon_.set_icon(nullptr);
+		minimap_icon_.set_visible(false);
+		minimap_icon_.set_no_frame();
+		minimap_image_.reset();
 	} else {
-		m_label_mapname .set_text(_("Map Name:"));
-		m_label_gametime.set_text(_("Gametime:"));
-		m_label_players.set_text(_("Players:"));
-		m_label_win_condition.set_text(_("Win Condition:"));
+		label_mapname_ .set_text(_("Map Name:"));
+		label_gametime_.set_text(_("Gametime:"));
+		label_players_.set_text(_("Players:"));
+		label_win_condition_.set_text(_("Win Condition:"));
 	}
 	return has_selection;
 }
@@ -331,97 +331,97 @@ void FullscreenMenuLoadGame::entry_selected()
 {
 	if (set_has_selection()) {
 
-		const SavegameData & gamedata = m_games_data[m_table.get_selected()];
-		m_ta_errormessage.set_text(gamedata.errormessage);
+		const SavegameData & gamedata = games_data_[table_.get_selected()];
+		ta_errormessage_.set_text(gamedata.errormessage);
 
 		if (gamedata.errormessage.empty()) {
-			m_ta_errormessage.set_visible(false);
-			m_ta_mapname.set_text(gamedata.mapname);
-			m_ta_gametime.set_text(gametimestring(gamedata.gametime));
+			ta_errormessage_.set_visible(false);
+			ta_mapname_.set_text(gamedata.mapname);
+			ta_gametime_.set_text(gametimestring(gamedata.gametime));
 
 			uint8_t number_of_players = gamedata.nrplayers;
 			if (number_of_players > 0) {
-				m_ta_players.set_text((boost::format("%u") % static_cast<unsigned int>(number_of_players)).str());
+				ta_players_.set_text((boost::format("%u") % static_cast<unsigned int>(number_of_players)).str());
 			} else {
-				m_label_players.set_text("");
-				m_ta_players.set_text("");
+				label_players_.set_text("");
+				ta_players_.set_text("");
 			}
 
 			if (gamedata.version.empty()) {
-				m_label_version.set_text("");
-				m_ta_version.set_text("");
+				label_version_.set_text("");
+				ta_version_.set_text("");
 			} else {
-				m_label_version.set_text(_("Widelands Version:"));
-				m_ta_version.set_text(gamedata.version);
+				label_version_.set_text(_("Widelands Version:"));
+				ta_version_.set_text(gamedata.version);
 			}
 
 			{
 				i18n::Textdomain td("win_conditions");
-				m_ta_win_condition.set_text(_(gamedata.wincondition));
+				ta_win_condition_.set_text(_(gamedata.wincondition));
 			}
 
 			std::string minimap_path = gamedata.minimap_path;
 			// Delete former image
-			m_minimap_icon.set_icon(nullptr);
-			m_minimap_icon.set_visible(false);
-			m_minimap_icon.set_no_frame();
-			m_minimap_image.reset();
+			minimap_icon_.set_icon(nullptr);
+			minimap_icon_.set_visible(false);
+			minimap_icon_.set_no_frame();
+			minimap_image_.reset();
 			// Load the new one
 			if (!minimap_path.empty()) {
 				try {
 					// Load the image
-					m_minimap_image = load_image(
+					minimap_image_ = load_image(
 					   minimap_path,
 					   std::unique_ptr<FileSystem>(g_fs->make_sub_file_system(gamedata.filename)).get());
 
 					// Scale it
-					double scale = double(m_minimap_w) / m_minimap_image->width();
-					double scaleY = double(m_minimap_h) / m_minimap_image->height();
+					double scale = double(minimap_w_) / minimap_image_->width();
+					double scaleY = double(minimap_h_) / minimap_image_->height();
 					if (scaleY < scale) {
 						scale = scaleY;
 					}
 					if (scale > 1.0) scale = 1.0; // Don't make the image too big; fuzziness will result
-					uint16_t w = scale * m_minimap_image->width();
-					uint16_t h = scale * m_minimap_image->height();
+					uint16_t w = scale * minimap_image_->width();
+					uint16_t h = scale * minimap_image_->height();
 
 					// Center the minimap in the available space
-					int32_t xpos = right_column_x_ + (get_w() - m_right_column_margin - w - right_column_x_) / 2;
-					int32_t ypos = m_minimap_y;
+					int32_t xpos = right_column_x_ + (get_w() - right_column_margin_ - w - right_column_x_) / 2;
+					int32_t ypos = minimap_y_;
 
 					// Set small minimaps higher up for a more harmonious look
-					if (h < m_minimap_h * 2 / 3) {
-						ypos += (m_minimap_h - h) / 3;
+					if (h < minimap_h_ * 2 / 3) {
+						ypos += (minimap_h_ - h) / 3;
 					} else {
-						ypos += (m_minimap_h - h) / 2;
+						ypos += (minimap_h_ - h) / 2;
 					}
 
-					m_minimap_icon.set_size(w, h);
-					m_minimap_icon.set_pos(Point(xpos, ypos));
-					m_minimap_icon.set_frame(UI_FONT_CLR_FG);
-					m_minimap_icon.set_visible(true);
-					m_minimap_icon.set_icon(m_minimap_image.get());
+					minimap_icon_.set_size(w, h);
+					minimap_icon_.set_pos(Point(xpos, ypos));
+					minimap_icon_.set_frame(UI_FONT_CLR_FG);
+					minimap_icon_.set_visible(true);
+					minimap_icon_.set_icon(minimap_image_.get());
 				} catch (const std::exception & e) {
 					log("Failed to load the minimap image : %s\n", e.what());
 				}
 			}
 		} else {
-			m_label_mapname.set_text(_("Filename:"));
-			m_ta_mapname.set_text(gamedata.mapname);
-			m_label_gametime.set_text("");
-			m_ta_gametime.set_text("");
-			m_label_players.set_text("");
-			m_ta_players.set_text("");
-			m_label_version.set_text("");
-			m_ta_version.set_text("");
-			m_label_win_condition.set_text("");
-			m_ta_win_condition.set_text("");
+			label_mapname_.set_text(_("Filename:"));
+			ta_mapname_.set_text(gamedata.mapname);
+			label_gametime_.set_text("");
+			ta_gametime_.set_text("");
+			label_players_.set_text("");
+			ta_players_.set_text("");
+			label_version_.set_text("");
+			ta_version_.set_text("");
+			label_win_condition_.set_text("");
+			ta_win_condition_.set_text("");
 
-			m_minimap_icon.set_icon(nullptr);
-			m_minimap_icon.set_visible(false);
-			m_minimap_icon.set_no_frame();
-			m_minimap_image.reset();
+			minimap_icon_.set_icon(nullptr);
+			minimap_icon_.set_visible(false);
+			minimap_icon_.set_no_frame();
+			minimap_image_.reset();
 
-			m_ta_errormessage.set_visible(true);
+			ta_errormessage_.set_visible(true);
 			ok_.set_enabled(false);
 		}
 	}
@@ -432,18 +432,18 @@ void FullscreenMenuLoadGame::entry_selected()
  */
 void FullscreenMenuLoadGame::fill_table() {
 
-	m_games_data.clear();
-	m_table.clear();
+	games_data_.clear();
+	table_.clear();
 
 
-	if (m_settings && !m_settings->settings().saved_games.empty()) {
+	if (settings_ && !settings_->settings().saved_games.empty()) {
 		SavegameData gamedata;
-		for (uint32_t i = 0; i < m_settings->settings().saved_games.size(); ++i) {
-			gamedata.filename = m_settings->settings().saved_games.at(i).path;
-			m_games_data.push_back(gamedata);
+		for (uint32_t i = 0; i < settings_->settings().saved_games.size(); ++i) {
+			gamedata.filename = settings_->settings().saved_games.at(i).path;
+			games_data_.push_back(gamedata);
 
 			UI::Table<uintptr_t const>::EntryRecord & te =
-				m_table.add(m_games_data.size() - 1);
+				table_.add(games_data_.size() - 1);
 			te.set_string(0, FileSystem::filename_without_ext(gamedata.filename.c_str()).c_str());
 		}
 	} else { // Normal case
@@ -451,7 +451,7 @@ void FullscreenMenuLoadGame::fill_table() {
 
 		FilenameSet gamefiles;
 
-		if (m_is_replay) {
+		if (is_replay_) {
 			gamefiles = filter(g_fs->list_directory(REPLAY_DIR),
 								[](const std::string& fn) {return boost::ends_with(fn, REPLAY_SUFFIX);});
 		} else {
@@ -468,7 +468,7 @@ void FullscreenMenuLoadGame::fill_table() {
 			SavegameData gamedata;
 
 			std::string savename = gamefilename;
-			if (m_is_replay) savename += WLGF_SUFFIX;
+			if (is_replay_) savename += WLGF_SUFFIX;
 
 			if (!g_fs->file_exists(savename.c_str())) {
 				continue;
@@ -477,13 +477,13 @@ void FullscreenMenuLoadGame::fill_table() {
 			gamedata.filename = gamefilename;
 
 			try {
-				Widelands::GameLoader gl(savename.c_str(), m_game);
+				Widelands::GameLoader gl(savename.c_str(), game_);
 				gl.preload_game(gpdp);
 
 				gamedata.gametype = gpdp.get_gametype();
 
-				if (!m_is_replay) {
-					if (m_settings->settings().multiplayer) {
+				if (!is_replay_) {
+					if (settings_->settings().multiplayer) {
 						if (gamedata.gametype == GameController::GameType::SINGLEPLAYER) {
 							continue;
 						}
@@ -502,16 +502,16 @@ void FullscreenMenuLoadGame::fill_table() {
 				time(&t);
 				struct tm * currenttime  = localtime(&t);
 				// We need to put these into variables because of a sideeffect of the localtime function.
-				int8_t current_year = currenttime->tm_year;
+				int8_t current_year  = currenttime->tm_year;
 				int8_t current_month = currenttime->tm_mon;
-				int8_t current_day = currenttime->tm_mday;
+				int8_t current_day   = currenttime->tm_mday;
 
 				struct tm * savedate  = localtime(&gamedata.savetimestamp);
 
 				if (gamedata.savetimestamp > 0) {
-					if (savedate->tm_year == current_year &&
-						 savedate->tm_mon == current_month &&
-						 savedate->tm_mday == current_day) {  // Today
+					if (savedate->tm_year == current_year  &&
+						savedate->tm_mon  == current_month &&
+						savedate->tm_mday == current_day) {  // Today
 
 						// Adding the 0 padding in a separate statement so translators won't have to deal with it
 						const std::string minute = (boost::format("%02u") % savedate->tm_min).str();
@@ -521,11 +521,11 @@ void FullscreenMenuLoadGame::fill_table() {
 						gamedata.savedatestring = (boost::format(_("Today, %1%:%2%"))
 															 % savedate->tm_hour % minute).str();
 					} else if ((savedate->tm_year == current_year &&
-									savedate->tm_mon == current_month &&
-									savedate->tm_mday == current_day - 1) ||
+								savedate->tm_mon == current_month &&
+								savedate->tm_mday == current_day - 1) ||
 								  (savedate->tm_year == current_year - 1 &&
-									savedate->tm_mon == 11 && current_month == 0 &&
-									savedate->tm_mday == 31 && current_day == 1)) {  // Yesterday
+								   savedate->tm_mon  == 11 && current_month == 0 &&
+								   savedate->tm_mday == 31 && current_day == 1)) {  // Yesterday
 						// Adding the 0 padding in a separate statement so translators won't have to deal with it
 						const std::string minute = (boost::format("%02u") % savedate->tm_min).str();
 
@@ -549,13 +549,13 @@ void FullscreenMenuLoadGame::fill_table() {
 					gamedata.wincondition = _(gpdp.get_win_condition());
 				}
 				gamedata.minimap_path = gpdp.get_minimap_path();
-				m_games_data.push_back(gamedata);
+				games_data_.push_back(gamedata);
 
 				UI::Table<uintptr_t const>::EntryRecord & te =
-					m_table.add(m_games_data.size() - 1);
+					table_.add(games_data_.size() - 1);
 				te.set_string(0, gamedata.savedatestring);
 
-				if (m_is_replay || m_settings->settings().multiplayer) {
+				if (is_replay_ || settings_->settings().multiplayer) {
 					std::string gametypestring;
 					switch (gamedata.gametype) {
 						case GameController::GameType::SINGLEPLAYER:
@@ -605,12 +605,12 @@ void FullscreenMenuLoadGame::fill_table() {
 
 				const std::string fs_filename = FileSystem::filename_without_ext(gamedata.filename.c_str());
 				gamedata.mapname = fs_filename;
-				m_games_data.push_back(gamedata);
+				games_data_.push_back(gamedata);
 
 				UI::Table<uintptr_t const>::EntryRecord & te =
-					m_table.add(m_games_data.size() - 1);
+					table_.add(games_data_.size() - 1);
 				te.set_string(0, "");
-				if (m_is_replay || m_settings->settings().multiplayer) {
+				if (is_replay_ || settings_->settings().multiplayer) {
 					te.set_string(1, "");
 					/** TRANSLATORS: Prefix for incompatible files in load game screens */
 					te.set_string(2, (boost::format(_("Incompatible: %s")) % fs_filename).str());
@@ -620,10 +620,10 @@ void FullscreenMenuLoadGame::fill_table() {
 			}
 		}
 	}
-	m_table.sort();
+	table_.sort();
 
-	if (m_table.size()) {
-		m_table.select(0);
+	if (table_.size()) {
+		table_.select(0);
 	}
 }
 
