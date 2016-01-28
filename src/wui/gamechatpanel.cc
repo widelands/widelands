@@ -41,7 +41,6 @@ GameChatPanel::GameChatPanel
 	chatbox.set_scrollmode(UI::MultilineTextarea::ScrollLog);
 	editbox.ok.connect(boost::bind(&GameChatPanel::key_enter, this));
 	editbox.cancel.connect(boost::bind(&GameChatPanel::key_escape, this));
-	editbox.set_align(UI::Align_Left);
 	editbox.activate_history(true);
 
 	set_handle_mouse(true);

@@ -43,8 +43,7 @@ struct EditBox : public Panel {
 		(Panel *,
 		 int32_t x, int32_t y, uint32_t w,
 		 const Image* background = g_gr->images().get("pics/but2.png"),
-		 int font_size = UI_FONT_SIZE_SMALL,
-		 Align align = Align_Center);
+		 int font_size = UI_FONT_SIZE_SMALL);
 	virtual ~EditBox();
 
 	boost::signals2::signal<void ()> changed;
@@ -55,8 +54,6 @@ struct EditBox : public Panel {
 	void set_text(const std::string &);
 	uint32_t max_length() const;
 	void set_max_length(uint32_t);
-	Align align() const;
-	void set_align(Align);
 
 	void activate_history(bool activate) {m_history_active = activate;}
 

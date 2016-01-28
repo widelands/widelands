@@ -36,6 +36,9 @@
 // TODO(GunChleoc): Arabic: Fix positioning for Arabic
 
 namespace {
+
+constexpr int kMargin = 4;
+
 // NOCOM copied from wordwrap - consolidate?
 std::string as_editorfont(const std::string& text,
 								  int ptsize = UI_FONT_SIZE_SMALL,
@@ -97,8 +100,7 @@ EditBox::EditBox
 	(Panel * const parent,
 	 const int32_t x, const int32_t y, const uint32_t w,
 	 const Image* background,
-	 int font_size,
-	 Align _align)
+	 int font_size)
 	:
 	Panel(parent, x, y, w, UI::g_fh1->render(as_uifont("."), font_size)->height() + 2),
 	m(new EditBoxImpl),
@@ -111,7 +113,8 @@ EditBox::EditBox
 	m->fontname = UI::g_fh1->fontset().serif();
 	m->fontsize = font_size;
 
-	m->align = static_cast<Align>((_align & Align_Horizontal) | Align_VCenter);
+	// Set alignment to the UI language's principal writing direction
+	m->align = UI::g_fh1->fontset().is_rtl() ? UI::Align::Align_CenterRight : UI::Align::Align_CenterLeft;
 	m->caret = 0;
 	m->scrolloffset = 0;
 	// yes, use *signed* max as maximum length; just a small safe-guard.
@@ -186,33 +189,6 @@ void EditBox::set_max_length(uint32_t const n)
 		if (m->caret > m->text.size())
 			m->caret = m->text.size();
 
-		check_caret();
-		update();
-	}
-}
-
-
-/**
- * \return the text alignment
- */
-Align EditBox::align() const
-{
-	return m->align;
-}
-
-
-/**
- * Set the new alignment.
- *
- * Note that vertical alignment is always centered, independent of what
- * you select here.
- */
-void EditBox::set_align(Align _align)
-{
-	_align = static_cast<Align>((_align & Align_Horizontal) | Align_VCenter);
-	if (_align != m->align) {
-		m->align = _align;
-		m->scrolloffset = 0;
 		check_caret();
 		update();
 	}
@@ -430,7 +406,7 @@ void EditBox::draw(RenderTarget & odst)
 		 Point(get_x(), get_y()));
 
 	// Draw border.
-	if (get_w() >= 4 && get_h() >= 4) {
+	if (get_w() >= kMargin && get_h() >= kMargin) {
 		static const RGBColor black(0, 0, 0);
 
 		// bottom edge
@@ -454,44 +430,38 @@ void EditBox::draw(RenderTarget & odst)
 			(Rect(Point(0, 0), get_w(), get_h()), MOUSE_OVER_BRIGHT_FACTOR);
 	}
 
-	const int margin = 4;
-	const int max_width = get_w() - 2 * margin;
+	const int max_width = get_w() - 2 * kMargin;
 
-	const Image* entry_text_im =
-			UI::g_fh1->render(as_editorfont(m->text,
-													  m->fontsize,
-													  UI_FONT_CLR_FG));
+	const Image* entry_text_im = UI::g_fh1->render(as_editorfont(m->text, m->fontsize));
 
 	int linewidth = entry_text_im->width();
 	int lineheight = entry_text_im->height();
-	Point point(0, lineheight >> 1);
 
-	Align alignment = mirror_alignment(m->align);
-	if (alignment & Align_Right) {
+	Point point(kMargin, get_h() / 2);
+
+	if (m->align & Align_Right) {
 		point.x += max_width;
-	} else if (alignment & Align_HCenter) {
-		point.x += max_width / 2;
 	}
-	UI::correct_for_align(alignment, linewidth, entry_text_im->height(), &point);
 
-	// Crop to field width while blitting
+	UI::correct_for_align(m->align, linewidth, lineheight, &point);
+
+	// Crop to max_width while blitting
 	if (max_width < linewidth) {
+		// Fix positioning for BiDi languages.
+		if (UI::g_fh1->fontset().is_rtl()) {
+			point.x = 0;
+		}
 		// We want this always on, e.g. for mixed language savegame filenames
-		if (i18n::has_rtl_character(m->text.c_str(), 20)) { // Restrict check for efficiency
-			log("NOCOM rtl %d %d, %d %d\n", point.x, point.y, linewidth - max_width, point.y);
+		if (i18n::has_rtl_character(m->text.c_str(), 100)) { // Restrict check for efficiency
 			dst.blitrect(point,
 							 entry_text_im,
-							 Rect(linewidth - max_width, point.y, linewidth, lineheight));
+							 Rect(linewidth - max_width, 0, linewidth, lineheight));
 		}
 		else {
-			log("NOCOM ltr %d %d, %d %d\n", point.x+ margin, point.y, point.x - m->scrolloffset, point.y);
-			dst.blitrect(Point(point.x + margin, point.y),
-							 entry_text_im,
-							 Rect(Point(point.x - m->scrolloffset, point.y), max_width, lineheight));
+			dst.blitrect(point, entry_text_im, Rect(point.x - m->scrolloffset - kMargin, point.y, max_width, lineheight));
 		}
 	} else {
-		log("NOCOM short %d %d, %d %d\n", point.x + margin, point.y, point.x, point.y);
-		dst.blitrect(Point(point.x + margin, point.y), entry_text_im, Rect(point, max_width, lineheight));
+		dst.blitrect(point, entry_text_im, Rect(0, 0, max_width, lineheight));
 	}
 
 	if (has_focus()) {
@@ -504,7 +474,7 @@ void EditBox::draw(RenderTarget & odst)
 
 		const Image* caret_image = g_gr->images().get("pics/caret.png");
 		Point caretpt;
-		caretpt.x = point.x + margin + m->scrolloffset + caret_x - caret_image->width() + LINE_MARGIN;
+		caretpt.x = point.x + m->scrolloffset + caret_x - caret_image->width() + LINE_MARGIN;
 		caretpt.y = point.y + (fontheight - caret_image->height()) / 2;
 		dst.blit(caretpt, caret_image);
 	}
@@ -527,22 +497,18 @@ void EditBox::check_caret()
 	int32_t caretpos;
 
 	switch (m->align & Align_Horizontal) {
-	case Align_HCenter:
-		caretpos  = (get_w() - static_cast<int32_t>(leftw + rightw)) / 2;
-		caretpos += m->scrolloffset + leftw;
-		break;
 	case Align_Right:
-		caretpos = get_w() - 4 + m->scrolloffset - rightw;
+		caretpos = get_w() - kMargin + m->scrolloffset - rightw;
 		break;
 	default:
-		caretpos = 4 + m->scrolloffset + leftw;
+		caretpos = kMargin + m->scrolloffset + leftw;
 		break;
 	}
 
-	if (caretpos < 4)
-		m->scrolloffset += 4 - caretpos + get_w() / 5;
-	else if (caretpos > get_w() - 4)
-		m->scrolloffset -= caretpos - get_w() + 4 + get_w() / 5;
+	if (caretpos < kMargin)
+		m->scrolloffset += kMargin - caretpos + get_w() / 5;
+	else if (caretpos > get_w() - kMargin)
+		m->scrolloffset -= caretpos - get_w() + kMargin + get_w() / 5;
 
 	if ((m->align & Align_Horizontal) == Align_Left) {
 		if (m->scrolloffset > 0)
