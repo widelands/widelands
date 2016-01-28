@@ -453,12 +453,18 @@ void EditBox::draw(RenderTarget & odst)
 		}
 		// We want this always on, e.g. for mixed language savegame filenames
 		if (i18n::has_rtl_character(m->text.c_str(), 100)) { // Restrict check for efficiency
+			// TODO(GunChleoc): Arabic: Fix scrolloffset
 			dst.blitrect(point,
 							 entry_text_im,
 							 Rect(linewidth - max_width, 0, linewidth, lineheight));
 		}
 		else {
-			dst.blitrect(point, entry_text_im, Rect(point.x - m->scrolloffset - kMargin, point.y, max_width, lineheight));
+			if (m->align & Align_Right) {
+				// TODO(GunChleoc): Arabic: Fix scrolloffset
+				dst.blitrect(point, entry_text_im, Rect(point.x + m->scrolloffset + kMargin, point.y, max_width, lineheight));
+			} else {
+				dst.blitrect(point, entry_text_im, Rect(point.x - m->scrolloffset - kMargin, point.y, max_width, lineheight));
+			}
 		}
 	} else {
 		dst.blitrect(point, entry_text_im, Rect(0, 0, max_width, lineheight));
