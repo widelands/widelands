@@ -206,8 +206,8 @@ void Textarea::expand()
 	int32_t y = get_y();
 
 	update_desired_size();
-	uint32_t w, h;
-	get_desired_size(w, h);
+	int w, h;
+	get_desired_size(&w, &h);
 
 	if      (m_align & Align_HCenter)
 		x -= w >> 1;

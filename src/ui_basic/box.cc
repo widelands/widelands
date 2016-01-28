@@ -88,12 +88,12 @@ void Box::set_min_desired_breadth(uint32_t min)
  */
 void Box::update_desired_size()
 {
-	uint32_t totaldepth = 0;
-	uint32_t maxbreadth = m_mindesiredbreadth;
+	int totaldepth = 0;
+	int maxbreadth = m_mindesiredbreadth;
 
 	for (uint32_t idx = 0; idx < m_items.size(); ++idx) {
-		uint32_t depth, breadth;
-		get_item_desired_size(idx, depth, breadth);
+		int depth, breadth;
+		get_item_desired_size(idx, &depth, &breadth);
 
 		totaldepth += depth;
 		if (breadth > maxbreadth)
@@ -131,17 +131,17 @@ void Box::update_desired_size()
 void Box::layout()
 {
 	// First pass: compute the depth and adjust whether we have a scrollbar
-	uint32_t totaldepth = 0;
+	int totaldepth = 0;
 
-	for (uint32_t idx = 0; idx < m_items.size(); ++idx) {
-		uint32_t depth, tmp;
-		get_item_desired_size(idx, depth, tmp);
-
+	for (size_t idx = 0; idx < m_items.size(); ++idx) {
+		int depth, unused;
+		get_item_desired_size(idx, &depth, &unused);
 		totaldepth += depth;
 	}
 
-	if (!m_items.empty())
+	if (!m_items.empty()) {
 		totaldepth += (m_items.size() - 1) * m_inner_spacing;
+	}
 
 	bool needscrollbar = false;
 	if (m_orientation == Horizontal) {
@@ -170,27 +170,24 @@ void Box::layout()
 			sb_h = get_inner_h();
 			pagesize = get_inner_h() - Scrollbar::Size;
 		}
-		if (!m_scrollbar) {
-			m_scrollbar = new Scrollbar
-					(this, sb_x, sb_y, sb_w,
-					 sb_h, m_orientation == Horizontal);
+		if (m_scrollbar == nullptr) {
+			m_scrollbar.reset(
+			   new Scrollbar(this, sb_x, sb_y, sb_w, sb_h, m_orientation == Horizontal));
 			m_scrollbar->moved.connect(boost::bind(&Box::scrollbar_moved, this, _1));
 		} else {
 			m_scrollbar->set_pos(Point(sb_x, sb_y));
 			m_scrollbar->set_size(sb_w, sb_h);
 		}
-
 		m_scrollbar->set_steps(totaldepth - pagesize);
 		m_scrollbar->set_singlestepsize(Scrollbar::Size);
 		m_scrollbar->set_pagesize(pagesize);
 	} else {
-		delete m_scrollbar;
-		m_scrollbar = nullptr;
+		m_scrollbar.reset();
 	}
 
 	// Second pass: Count number of infinite spaces
-	uint32_t infspace_count = 0;
-	for (uint32_t idx = 0; idx < m_items.size(); ++idx)
+	int infspace_count = 0;
+	for (size_t idx = 0; idx < m_items.size(); ++idx)
 		if (m_items[idx].fillspace)
 			infspace_count++;
 
@@ -198,9 +195,8 @@ void Box::layout()
 	// avoid having some pixels left at the end due to rounding errors, we
 	// divide the remaining space by the number of remaining infinite
 	// spaces every time, and not just one.
-	uint32_t max_depths =
-		m_orientation == Horizontal ? get_inner_w() : get_inner_h();
-	for (uint32_t idx = 0; idx < m_items.size(); ++idx)
+	int max_depths = m_orientation == Horizontal ? get_inner_w() : get_inner_h();
+	for (size_t idx = 0; idx < m_items.size(); ++idx)
 		if (m_items[idx].fillspace) {
 			assert(infspace_count > 0);
 			m_items[idx].assigned_var_depth =
@@ -223,8 +219,8 @@ void Box::update_positions()
 		totalbreadth -= Scrollbar::Size;
 
 	for (uint32_t idx = 0; idx < m_items.size(); ++idx) {
-		uint32_t depth, breadth;
-		get_item_size(idx, depth, breadth);
+		int depth, breadth;
+		get_item_size(idx, &depth, &breadth);
 
 		if (m_items[idx].type == Item::ItemPanel) {
 			set_item_size
@@ -317,7 +313,7 @@ void Box::add_inf_space()
  * to the orientation axis.
 */
 void Box::get_item_desired_size
-	(uint32_t const idx, uint32_t & depth, uint32_t & breadth)
+	(uint32_t const idx, int* depth, int* breadth)
 {
 	assert(idx < m_items.size());
 
@@ -333,8 +329,8 @@ void Box::get_item_desired_size
 		break;
 
 	case Item::ItemSpace:
-		depth   = it.u.space;
-		breadth = 0;
+		*depth = it.u.space;
+		*breadth = 0;
 		break;
 	}
 }
@@ -344,7 +340,7 @@ void Box::get_item_desired_size
  * for expanding items, at least for now.
  */
 void Box::get_item_size
-	(uint32_t const idx, uint32_t & depth, uint32_t & breadth)
+	(uint32_t const idx, int* depth, int* breadth)
 {
 	assert(idx < m_items.size());
 
@@ -357,7 +353,7 @@ void Box::get_item_size
 /**
  * Set the given items actual size.
  */
-void Box::set_item_size(uint32_t idx, uint32_t depth, uint32_t breadth)
+void Box::set_item_size(uint32_t idx, int depth, int breadth)
 {
 	assert(idx < m_items.size());
 

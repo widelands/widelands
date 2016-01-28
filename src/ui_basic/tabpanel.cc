@@ -139,19 +139,16 @@ void TabPanel::layout()
  */
 void TabPanel::update_desired_size()
 {
-	uint32_t w;
-	uint32_t h;
-
 	// size of button row
-	w = kTabPanelButtonHeight * tabs_.size();
-	h = kTabPanelButtonHeight + kTabPanelSeparatorHeight;
+	int w = kTabPanelButtonHeight * tabs_.size();
+	int h = kTabPanelButtonHeight + kTabPanelSeparatorHeight;
 
 	// size of contents
 	if (active_ < tabs_.size()) {
 		Panel * const panel = tabs_[active_]->panel;
-		uint32_t panelw, panelh;
+		int panelw, panelh;
 
-		panel->get_desired_size(panelw, panelh);
+		panel->get_desired_size(&panelw, &panelh);
 		// TODO(unknown):  the panel might be bigger -> add a scrollbar in that case
 		//panel->set_size(panelw, panelh);
 
