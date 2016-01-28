@@ -6,8 +6,6 @@
 ## Afterwards, the catalogs will be updated and the result pushed to
 ## trunk on Launchpad.
 
-# NOCOM(GunChleoc): Test this!
-
 # Exit as soon as any line in the bash script fails.
 set -e
 
