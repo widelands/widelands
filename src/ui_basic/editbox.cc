@@ -24,8 +24,6 @@
 #include <boost/format.hpp>
 #include <SDL_keycode.h>
 
-#include "base/log.h"
-#include "graphic/font_handler.h" // NOCOM get rid
 #include "graphic/font_handler1.h"
 #include "graphic/rendertarget.h"
 #include "graphic/text/bidi.h"
@@ -53,12 +51,12 @@ std::string as_editorfont(const std::string& text,
 }
 
 // This is inefficient; only call when we need the exact width.
-uint32_t text_width(const std::string& text, int ptsize) {
+int32_t text_width(const std::string& text, int ptsize) {
 	return UI::g_fh1->render(as_editorfont(text, ptsize - UI::g_fh1->fontset().size_offset()))->width();
 }
 
 // This is inefficient; only call when we need the exact height.
-uint32_t text_height(const std::string& text, int ptsize) {
+int32_t text_height(const std::string& text, int ptsize) {
 	return UI::g_fh1->render(as_editorfont(text.empty() ? "." : text,
 														ptsize - UI::g_fh1->fontset().size_offset()))->height();
 }
@@ -493,12 +491,8 @@ void EditBox::check_caret()
 {
 	std::string leftstr(m->text, 0, m->caret);
 	std::string rightstr(m->text, m->caret, std::string::npos);
-	uint32_t leftw;
-	uint32_t rightw;
-	uint32_t tmp;
-
-	UI::g_fh->get_size(m->fontname, m->fontsize, leftstr, leftw, tmp);
-	UI::g_fh->get_size(m->fontname, m->fontsize, rightstr, rightw, tmp);
+	int32_t leftw = text_width(leftstr, m->fontsize);
+	int32_t rightw = text_width(rightstr, m->fontsize);
 
 	int32_t caretpos;
 
