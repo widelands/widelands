@@ -1,8 +1,6 @@
 #!/usr/bin/env python
 # encoding: utf-8
 
-# NOCOM(GunChleoc): Test this!
-
 ##############################################################################
 #
 # This script holds the common functions for locale handling & generation.
@@ -106,10 +104,10 @@ ITERATIVEPOTS = [
           "../../data/scripting/format_scenario.lua"
          ]
     ),
-    ("map_%(name)s/map_%(name)s", "maps/",
+    ("map_%(name)s/map_%(name)s", "data/maps/",
          [ "../../data/maps/%(name)s/scripting/*.lua", ]
     ),
-    ("mp_scenario_%(name)s/mp_scenario_%(name)s", "maps/MP_Scenarios/",
+    ("mp_scenario_%(name)s/mp_scenario_%(name)s", "data/maps/MP_Scenarios/",
          [ "../../data/maps/MP_Scenarios/%(name)s/scripting/*.lua", ]
     ),
 ]
@@ -174,9 +172,9 @@ def pot_modify_header( potfile_in, potfile_out, header ):
     """
     Modify the header of a translation catalog read from potfile_in to
     the given header and write out the modified catalog to potfile_out.
-    
+
     Returns whether or not the header was successfully modified.
-    
+
     Note: potfile_in and potfile_out must not point to the same file!
     """
     class State:
@@ -184,12 +182,12 @@ def pot_modify_header( potfile_in, potfile_out, header ):
          possibly_empty_msgid,
          search_for_empty_line,
          header_traversed) = range(4)
-        
+
     st = State.start
     with open(potfile_in, "rt") as potin:
         for line in potin:
             line = line.strip()
-            
+
             if st == State.start:
                 if line.startswith("msgid \"\""):
                     st = State.possibly_empty_msgid
@@ -209,16 +207,16 @@ def pot_modify_header( potfile_in, potfile_out, header ):
                 if not line:
                     st = State.header_traversed
                     break;
-        
+
         if st != State.header_traversed:
             return False
-        
+
         with open(potfile_out, "wt") as potout:
             potout.write(header)
             potout.writelines(potin)
 
         return True
-    
+
 def run_msguniq(potfile):
     msguniq_rv = os.system("msguniq \"%s\" -F --output-file=\"%s\"" % (potfile, potfile))
     if (msguniq_rv):
@@ -239,11 +237,11 @@ def do_compile( potfile, srcfiles ):
     lua_files = set([ f for f in files if
         os.path.splitext(f)[-1].lower() == '.lua' ])
     conf_files = files - lua_files
-    
+
     temp_potfile = potfile + ".tmp"
-    
+
     if (os.path.exists(temp_potfile)): os.remove(temp_potfile)
-    
+
     # Find translatable strings in Lua files using xgettext
     xgettext = subprocess.Popen("xgettext %s --files-from=- --output=\"%s\"" % \
         (LUAXGETTEXTOPTS, temp_potfile), shell=True, stdin=subprocess.PIPE, universal_newlines=True)
@@ -254,46 +252,46 @@ def do_compile( potfile, srcfiles ):
     except IOError as err_msg:
         sys.stderr.write("Failed to call xgettext: %s\n" % err_msg)
         return False
-    
+
     xgettext_status = xgettext.wait()
     if (xgettext_status != 0):
         sys.stderr.write("xgettext exited with errorcode %i\n" % xgettext_status)
         return False
-        
+
     xgettext_found_something_to_translate = os.path.exists(temp_potfile)
-    
+
     # Find translatable strings in configuration files
     conf = Conf_GetText()
     conf.parse(conf_files)
-    
+
     if not (xgettext_found_something_to_translate or conf.found_something_to_translate):
         # Found no translatable strings
         return False
-    
+
     if (xgettext_found_something_to_translate):
         header_fixed = pot_modify_header(temp_potfile, potfile, HEAD)
         os.remove(temp_potfile)
-        
+
         if not header_fixed:
             return False
-        
+
         if (conf.found_something_to_translate):
             # Merge the conf POT with Lua POT
             with open(potfile, "at") as p:
                 p.write("\n" + conf.toString())
-                
+
             if not run_msguniq(potfile):
                 return False
     elif (conf.found_something_to_translate):
         with open(potfile, "wt") as p:
             p.write(HEAD + conf.toString())
-            
+
         # Msguniq is run here only to sort POT entries by file
         if not run_msguniq(potfile):
             return False
 
     return True
-    
+
 
 
 def do_compile_src( potfile, srcfiles ):
