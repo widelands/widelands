@@ -773,7 +773,6 @@ void WLApplication::init_language() {
 	// Initialize locale and grab "widelands" textdomain
 	i18n::init_locale();
 
-	// NOCOM(GunChleoc): Todo: Move locale into data
 	i18n::set_localedir(datadir_ + "/locale");
 	i18n::grab_textdomain("widelands");
 

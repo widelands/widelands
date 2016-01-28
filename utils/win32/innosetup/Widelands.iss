@@ -93,7 +93,7 @@ Name: quicklaunchicon; Description: {cm:CreateQuickLaunchIcon}; GroupDescription
 [Files]
 Source: ..\..\..\data\campaigns\*;                               DestDir: {app}\data\campaigns\; Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: "Widelands"
 Source: ..\..\..\data\i18n\*;                                    DestDir: {app}\data\i18n\;      Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: "Widelands"
-Source: ..\..\..\..\build\locale\*;                         DestDir: {app}\locale\;    Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: "Widelands"
+Source: ..\..\..\..\build\locale\*;                         DestDir: {app}\data\locale\;    Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: "Widelands"
 Source: ..\..\..\data\maps\*;                                    DestDir: {app}\data\maps\;      Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ;                  Components: "Widelands"
 Source: ..\..\..\data\music\*;                                   DestDir: {app}\data\music\;     Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ;                  Components: "Music"
 Source: ..\..\..\data\images\*;                                    DestDir: {app}\data\images\;      Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: "Widelands"
@@ -163,7 +163,6 @@ Filename: {app}\{#ExeName}; Description: {cm:LaunchProgram,{#Name}}; Flags: nowa
 
 [InstallDelete]
 Type: filesandordirs; Name: {app}\data\*
-Type: filesandordirs; Name: {app}\locale\*
 
 [UninstallDelete]
 Type: files; Name: {app}\{#UrlName}

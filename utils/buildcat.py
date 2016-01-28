@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # encoding: utf-8
 
+# NOCOM(GunChleoc): Test this!
+
 ##############################################################################
 #
 # This script holds the common functions for locale handling & generation.

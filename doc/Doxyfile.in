@@ -694,7 +694,6 @@ EXCLUDE_PATTERNS       = */.svn/* \
                          build \
                          data \
                          doc \
-                         locale \
                          po \
                          utils \
                          .git

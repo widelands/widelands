@@ -11,9 +11,9 @@ import sys
 # It then collects all other contributors from ../txts/developers.json,
 # adds the translators at the hook "Translators"
 # and writes the translator and developer credits to ./txts/developers.lua
-# The locale information is written to ../i18n/locales.lua.
+# The locale information is written to ../data/i18n/locales.lua.
 
-
+# NOCOM(GunChleoc): Test this!
 base_path = os.path.abspath(os.path.join(os.path.dirname(__file__),os.path.pardir))
 
 print("Reading locales from JSON:")

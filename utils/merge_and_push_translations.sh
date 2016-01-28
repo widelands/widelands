@@ -6,6 +6,8 @@
 ## Afterwards, the catalogs will be updated and the result pushed to
 ## trunk on Launchpad.
 
+# NOCOM(GunChleoc): Test this!
+
 # Exit as soon as any line in the bash script fails.
 set -e
 
@@ -35,7 +37,7 @@ set -x
 # Pull translations from Transifex into local trunk and add new translation files
 bzr pull
 tx pull -a
-bzr add po/*/*.po i18n/locales/*.json || true
+bzr add po/*/*.po data/i18n/locales/*.json || true
 
 # Update authors file
 utils/update_authors.py
