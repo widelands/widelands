@@ -45,14 +45,14 @@ struct MultilineTextarea : public Panel {
 	MultilineTextarea
 		(Panel * const parent,
 		 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
-		 const std::string & text         = std::string(),
+		 const std::string& text          = std::string(),
 		 const Align                      = Align_Left,
 		 const bool always_show_scrollbar = false);
 
-	const std::string & get_text() const {return m_text;}
+	const std::string& get_text() const {return m_text;}
 	ScrollMode get_scrollmode() const {return m_scrollmode;}
 
-	void set_text(const std::string &);
+	void set_text(const std::string&);
 	void set_scrollmode(ScrollMode mode);
 
 	uint32_t scrollbar_w() const {return 24;}
@@ -61,7 +61,7 @@ struct MultilineTextarea : public Panel {
 	void set_color(RGBColor fg) {m_style.fg = fg;}
 
 	// Drawing and event handlers
-	void draw(RenderTarget &) override;
+	void draw(RenderTarget&) override;
 
 	bool handle_mousewheel(uint32_t which, int32_t x, int32_t y) override;
 	void scroll_to_top();

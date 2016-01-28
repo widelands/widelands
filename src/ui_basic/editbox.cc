@@ -21,8 +21,8 @@
 
 #include <limits>
 
-#include <boost/format.hpp>
 #include <SDL_keycode.h>
+#include <boost/format.hpp>
 
 #include "graphic/font_handler1.h"
 #include "graphic/rendertarget.h"
@@ -435,9 +435,13 @@ void EditBox::draw(RenderTarget & odst)
 		else {
 			if (m->align & Align_Right) {
 				// TODO(GunChleoc): Arabic: Fix scrolloffset
-				dst.blitrect(point, entry_text_im, Rect(point.x + m->scrolloffset + kMargin, point.y, max_width, lineheight));
+				dst.blitrect(point,
+								 entry_text_im,
+								 Rect(point.x + m->scrolloffset + kMargin, point.y, max_width, lineheight));
 			} else {
-				dst.blitrect(point, entry_text_im, Rect(point.x - m->scrolloffset - kMargin, point.y, max_width, lineheight));
+				dst.blitrect(point,
+								 entry_text_im,
+								 Rect(point.x - m->scrolloffset - kMargin, point.y, max_width, lineheight));
 			}
 		}
 	} else {

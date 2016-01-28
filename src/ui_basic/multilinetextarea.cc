@@ -34,7 +34,7 @@ static const uint32_t RICHTEXT_MARGIN = 2;
 MultilineTextarea::MultilineTextarea
 	(Panel * const parent,
 	 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
-	 const std::string & text,
+	 const std::string& text,
 	 const Align align,
 	 const bool always_show_scrollbar)
 	:
@@ -68,7 +68,7 @@ MultilineTextarea::MultilineTextarea
  * Replace the current text with a new one.
  * Fix up scrolling state if necessary.
  */
-void MultilineTextarea::set_text(const std::string & text)
+void MultilineTextarea::set_text(const std::string& text)
 {
 	m_text = text;
 	recompute();
@@ -148,7 +148,7 @@ void MultilineTextarea::layout()
 /**
  * Redraw the textarea
  */
-void MultilineTextarea::draw(RenderTarget & dst)
+void MultilineTextarea::draw(RenderTarget& dst)
 {
 	if (isrichtext) {
 		rt.draw(dst, Point(RICHTEXT_MARGIN, RICHTEXT_MARGIN - m_scrollbar.get_scrollpos()));
