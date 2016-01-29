@@ -3,7 +3,7 @@
 -- ==========================
 function _wait_for_castle_on_finish_area(plr, island_idx)
    local finish_area = _finish_areas[island_idx][plr.number]
-   while not check_for_buildings(plr, {castle=1}, finish_area) do
+   while not check_for_buildings(plr, {atlanteans_castle=1}, finish_area) do
       sleep(1237)
    end
 end
