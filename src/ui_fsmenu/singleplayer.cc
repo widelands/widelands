@@ -30,7 +30,7 @@ FullscreenMenuSinglePlayer::FullscreenMenuSinglePlayer() :
 	title
 		(this,
 		 get_w() / 2, m_title_y,
-		 _("Single Player"), UI::Align_HCenter),
+		 _("Single Player"), UI::Align::kHCenter),
 
 // Buttons
 	vbox(this, m_box_x, m_box_y, UI::Box::Vertical,
@@ -71,16 +71,16 @@ FullscreenMenuSinglePlayer::FullscreenMenuSinglePlayer() :
 
 	title.set_font(ui_fn(), fs_big(), UI_FONT_CLR_FG);
 
-	vbox.add(&new_game, UI::Box::AlignCenter);
-	vbox.add(&campaign, UI::Box::AlignCenter);
+	vbox.add(&new_game, UI::Align::kHCenter);
+	vbox.add(&campaign, UI::Align::kHCenter);
 
 	vbox.add_space(m_buth);
 
-	vbox.add(&load_game, UI::Box::AlignCenter);
+	vbox.add(&load_game, UI::Align::kHCenter);
 
 	vbox.add_space(6 * m_buth);
 
-	vbox.add(&back, UI::Box::AlignCenter);
+	vbox.add(&back, UI::Align::kHCenter);
 
 	vbox.set_size(m_butw, get_h() - vbox.get_y());
 }
