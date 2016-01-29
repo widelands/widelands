@@ -23,7 +23,7 @@ wl_set_if_unset(WL_INSTALL_BASEDIR ".")
 # in WL bin (through config.h). If not specified, we are going to use the "data" directory
 # below the directory where the executable is in. Also on Linux.
 # Packagers (or people using make install) have to set this variable to an absolute path.
-wl_set_if_unset(WL_INSTALL_DATADIR "./data/")
+wl_set_if_unset(WL_INSTALL_DATADIR "data/")
 
 if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
   if (CMAKE_CXX_COMPILER_VERSION VERSION_LESS 4.7)
