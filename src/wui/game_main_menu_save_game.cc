@@ -61,19 +61,19 @@ GameMainMenuSaveGame::GameMainMenuSaveGame
 	editbox_(this, HSPACING, EDITBOX_Y, LIST_WIDTH, g_gr->images().get("pics/but1.png")),
 	ls_     (this, HSPACING, VSPACING,  LIST_WIDTH, LIST_HEIGHT - editbox_.get_h()),
 	name_label_
-		(this, DESCRIPTION_X,  5, 0, 20, _("Map Name:"),  UI::Align_CenterLeft),
+		(this, DESCRIPTION_X,  5, 0, 20, _("Map Name:"),  UI::Align::kCenterLeft),
 	mapname_
-		(this, DESCRIPTION_X, 20, 0, 20, " ",              UI::Align_CenterLeft),
+		(this, DESCRIPTION_X, 20, 0, 20, " ",              UI::Align::kCenterLeft),
 	gametime_label_
-		(this, DESCRIPTION_X, 45, 0, 20, _("Game Time:"), UI::Align_CenterLeft),
+		(this, DESCRIPTION_X, 45, 0, 20, _("Game Time:"), UI::Align::kCenterLeft),
 	gametime_
-		(this, DESCRIPTION_X, 60, 0, 20, " ",              UI::Align_CenterLeft),
+		(this, DESCRIPTION_X, 60, 0, 20, " ",              UI::Align::kCenterLeft),
 	players_label_
-		(this, DESCRIPTION_X, 85, 0, 20, " ",              UI::Align_CenterLeft),
+		(this, DESCRIPTION_X, 85, 0, 20, " ",              UI::Align::kCenterLeft),
 	win_condition_label_
-		(this, DESCRIPTION_X, 110, 0, 20, _("Win condition:"), UI::Align_CenterLeft),
+		(this, DESCRIPTION_X, 110, 0, 20, _("Win condition:"), UI::Align::kCenterLeft),
 	win_condition_
-		(this, DESCRIPTION_X, 125, 0, 20, " ",             UI::Align_CenterLeft),
+		(this, DESCRIPTION_X, 125, 0, 20, " ",             UI::Align::kCenterLeft),
 	curdir_(SaveHandler::get_base_dir())
 {
 	editbox_.changed.connect(boost::bind(&GameMainMenuSaveGame::edit_box_changed, this));

@@ -42,7 +42,7 @@ Window(&parent, "login_box", 0, 0, 500, 220, _("Metaserver login"))
 		new UI::MultilineTextarea
 			(this, margin, 65, 505, 50,
 			 _("WARNING: Password will be shown and saved readable!"),
-			 UI::Align_Left);
+			 UI::Align::kLeft);
 
 	cb_register = new UI::Checkbox(this, Point(margin, 110),
 											 _("Log in to a registered account"),

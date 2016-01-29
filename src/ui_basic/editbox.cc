@@ -88,7 +88,7 @@ EditBox::EditBox
 	m->fontsize = font_size;
 
 	// Set alignment to the UI language's principal writing direction
-	m->align = UI::g_fh1->fontset().is_rtl() ? UI::Align::Align_CenterRight : UI::Align::Align_CenterLeft;
+	m->align = UI::g_fh1->fontset().is_rtl() ? UI::Align::kCenterRight : UI::Align::kCenterLeft;
 	m->caret = 0;
 	m->scrolloffset = 0;
 	// yes, use *signed* max as maximum length; just a small safe-guard.
@@ -413,7 +413,7 @@ void EditBox::draw(RenderTarget & odst)
 
 	Point point(kMargin, get_h() / 2);
 
-	if (m->align & Align_Right) {
+	if (static_cast<int>(m->align & UI::Align::kRight)) {
 		point.x += max_width;
 	}
 
@@ -433,7 +433,7 @@ void EditBox::draw(RenderTarget & odst)
 							 Rect(linewidth - max_width, 0, linewidth, lineheight));
 		}
 		else {
-			if (m->align & Align_Right) {
+			if (static_cast<int>(m->align & UI::Align::kRight)) {
 				// TODO(GunChleoc): Arabic: Fix scrolloffset
 				dst.blitrect(point,
 								 entry_text_im,
@@ -476,8 +476,8 @@ void EditBox::check_caret()
 
 	int32_t caretpos;
 
-	switch (m->align & Align_Horizontal) {
-	case Align_Right:
+	switch (m->align & UI::Align::kHorizontal) {
+	case UI::Align::kRight:
 		caretpos = get_w() - kMargin + m->scrolloffset - rightw;
 		break;
 	default:
@@ -490,10 +490,10 @@ void EditBox::check_caret()
 	else if (caretpos > get_w() - kMargin)
 		m->scrolloffset -= caretpos - get_w() + kMargin + get_w() / 5;
 
-	if ((m->align & Align_Horizontal) == Align_Left) {
+	if ((m->align & UI::Align::kHorizontal) == UI::Align::kLeft) {
 		if (m->scrolloffset > 0)
 			m->scrolloffset = 0;
-	} else if ((m->align & Align_Horizontal) == Align_Right) {
+	} else if ((m->align & UI::Align::kHorizontal) == UI::Align::kRight) {
 		if (m->scrolloffset < 0)
 			m->scrolloffset = 0;
 	}

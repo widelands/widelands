@@ -52,7 +52,7 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby
 	title
 		(this,
 		 get_w() / 2, get_h() / 20,
-		 _("Metaserver Lobby"), UI::Align_HCenter),
+		 _("Metaserver Lobby"), UI::Align::kHCenter),
 	m_clients
 		(this,
 		 get_w() * 4 / 125, get_h() * 15 / 100,
@@ -389,7 +389,7 @@ void FullscreenMenuInternetLobby::clicked_joingame()
 											_("Connection timed out"),
 											warning,
 											UI::WLMessageBox::MBoxType::kOk,
-											UI::Align_Left);
+											UI::Align::kLeft);
 				mmb.run<UI::Panel::Returncodes>();
 				return InternetGaming::ref().set_error();
 			}
@@ -415,7 +415,8 @@ DIAG_ON("-Wold-style-cast")
 			// Show a popup warning message
 			std::string warningheader(_("Connection problem"));
 			std::string warning(_("Widelands was unable to connect to the host."));
-			UI::WLMessageBox mmb(this, warningheader, warning, UI::WLMessageBox::MBoxType::kOk, UI::Align_Left);
+				UI::WLMessageBox mmb(this, warningheader, warning, UI::WLMessageBox::MBoxType::kOk,
+											UI::Align::kLeft);
 			mmb.run<UI::Panel::Returncodes>();
 		}
 		SDLNet_ResolveHost (&peer, ip.c_str(), WIDELANDS_PORT);

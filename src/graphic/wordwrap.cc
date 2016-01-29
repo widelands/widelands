@@ -326,10 +326,10 @@ void WordWrap::draw(RenderTarget & dst, Point where, Align align, uint32_t caret
 
 	calc_wrapped_pos(caret, caretline, caretpos);
 
-	if ((align & Align_Vertical) != Align_Top) {
+	if ((align & UI::Align::kVertical) != UI::Align::kTop) {
 		uint32_t h = height();
 
-		if ((align & Align_Vertical) == Align_VCenter)
+		if ((align & UI::Align::kVertical) == UI::Align::kVCenter)
 			where.y -= (h + 1) / 2;
 		else
 			where.y -= h;
@@ -346,7 +346,7 @@ void WordWrap::draw(RenderTarget & dst, Point where, Align align, uint32_t caret
 
 		Point point(where.x, where.y);
 
-		if (alignment & Align_Right) {
+		if (static_cast<int>(alignment & UI::Align::kRight)) {
 			point.x += m_wrapwidth - LINE_MARGIN;
 		}
 

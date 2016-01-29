@@ -148,7 +148,7 @@ ActionConfirm::ActionConfirm
 		(this,
 		 0, 0, 200, 74,
 		 (boost::format(message) % building.descr().descname()).str(),
-		 UI::Align_Center);
+		 UI::Align::kCenter);
 
 	UI::Button * okbtn =
 		new UI::Button
@@ -184,7 +184,7 @@ ActionConfirm::ActionConfirm
 		(this,
 		 0, 0, 200, 74,
 		 message,
-		 UI::Align_Center);
+		 UI::Align::kCenter);
 
 	UI::Button * okbtn =
 		new UI::Button

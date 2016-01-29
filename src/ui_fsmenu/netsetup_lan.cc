@@ -40,7 +40,7 @@ FullscreenMenuNetSetupLAN::FullscreenMenuNetSetupLAN () :
 	title
 		(this,
 		 get_w() / 2, get_h() / 10,
-		 _("Begin Network Game"), UI::Align_HCenter),
+		 _("Begin Network Game"), UI::Align::kHCenter),
 	m_opengames
 		(this,
 		 get_w() * 3 / 50, get_h() * 27 / 100,

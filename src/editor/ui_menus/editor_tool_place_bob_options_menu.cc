@@ -97,7 +97,7 @@ m_click_recursion_protect(false)
 		cb.set_state(m_pit.is_enabled(i));
 		cb.changedto.connect(boost::bind(&EditorToolPlaceBobOptionsMenu::clicked, this, i, _1));
 		m_checkboxes.push_back(&cb);
-		box->add(&cb, UI::Align_Left);
+		box->add(&cb, UI::Align::kLeft);
 		box->add_space(space);
 		pos.x += width + 1 + space;
 		++cur_x;

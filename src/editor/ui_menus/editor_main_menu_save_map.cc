@@ -73,7 +73,7 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive& parent)
                     butw_,
                     buth_,
                     _("Filename:"),
-                    UI::Align::Align_Left) {
+                    UI::Align::kLeft) {
 
 	// Make room for edit_options_
 	map_details_.set_size(map_details_.get_w(), map_details_.get_h() - buth_ - padding_);
