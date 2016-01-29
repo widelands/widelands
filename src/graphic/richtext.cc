@@ -303,7 +303,8 @@ struct TextBuilder {
 			int32_t alignref_right = rti.width;
 
 			if (text_y < rti.height + images_height) {
-				if ((mirror_alignment(richtext->get_image_align()) & Align_Horizontal) == Align_Right) {
+				if ((mirror_alignment(richtext->get_image_align()) & UI::Align::kHorizontal)
+					 == UI::Align::kRight) {
 					alignref_right -= images_width + h_space;
 				} else {
 					// Note: center image alignment with text is not properly supported
@@ -314,11 +315,11 @@ struct TextBuilder {
 
 			int32_t textleft;
 
-			switch (mirror_alignment(richtext->get_text_align()) & Align_Horizontal) {
-			case Align_Right:
+			switch (mirror_alignment(richtext->get_text_align()) & UI::Align::kHorizontal) {
+			case UI::Align::kRight:
 				textleft = alignref_right - int32_t(linewidth);
 				break;
-			case Align_HCenter:
+			case UI::Align::kHCenter:
 				textleft = alignref_left + (alignref_right - alignref_left - int32_t(linewidth)) / 2;
 				break;
 			default:
@@ -398,10 +399,12 @@ void RichText::parse(const std::string & rtext)
 		// Fix up the alignment
 		int32_t imagealigndelta = 0;
 
-		if ((text.richtext->get_image_align() & Align_Horizontal) == Align_HCenter)
+		if ((text.richtext->get_image_align() & UI::Align::kHorizontal) == UI::Align::kHCenter) {
 			imagealigndelta = (int32_t(m->width) - int32_t(text.images_width)) / 2;
-		else if ((mirror_alignment(text.richtext->get_image_align()) & Align_Horizontal) == Align_Right)
+		} else if ((mirror_alignment(text.richtext->get_image_align()) & UI::Align::kHorizontal)
+					  == UI::Align::kRight) {
 			imagealigndelta = int32_t(m->width) - int32_t(text.images_width);
+		}
 
 		for (uint32_t idx = firstimageelement; idx < m->elements.size(); ++idx)
 			m->elements[idx]->bbox.x += imagealigndelta;

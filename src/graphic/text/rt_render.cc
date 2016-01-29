@@ -232,8 +232,8 @@ uint16_t Layout::m_fit_line(uint16_t w, const Borders& p, vector<RenderNode*>* r
 		}
 	} else {
 		// Take last elements style in this line and check horizontal alignment
-		if (!rv->empty() && (*rv->rbegin())->halign() != UI::Align::Align_Left) {
-			if ((*rv->rbegin())->halign() == UI::Align::Align_Center) {
+		if (!rv->empty() && (*rv->rbegin())->halign() != UI::Align::kLeft) {
+			if ((*rv->rbegin())->halign() == UI::Align::kCenter) {
 				rem_space /= 2;  // Otherwise, we align right
 			}
 			for (RenderNode* node : *rv)  {
@@ -279,9 +279,9 @@ uint16_t Layout::fit_nodes(vector<RenderNode*>& rv, uint16_t w, Borders p, bool 
 		// Go over again and adjust position for VALIGN
 		for (RenderNode* n : nodes_in_line) {
 			uint16_t space = line_height - n->height();
-			if (!space || n->valign() == UI::Align::Align_Bottom)
+			if (!space || n->valign() == UI::Align::kBottom)
 				continue;
-			if (n->valign() == UI::Align::Align_Center)
+			if (n->valign() == UI::Align::kCenter)
 				space /= 2;
 			n->set_y(n->y() - space);
 		}
@@ -838,22 +838,22 @@ public:
 		if (a.has("align")) {
 			const std::string align = a["align"].get_string();
 			if (align == "right") {
-				m_ns.halign = UI::Align::Align_Right;
+				m_ns.halign = UI::Align::kRight;
 			} else if (align == "center" || align == "middle") {
-				m_ns.halign = UI::Align::Align_Center;
+				m_ns.halign = UI::Align::kCenter;
 			} else {
-				m_ns.halign = UI::Align::Align_Left;
+				m_ns.halign = UI::Align::kLeft;
 			}
 		}
 		m_ns.halign = mirror_alignment(m_ns.halign);
 		if (a.has("valign")) {
 			const string align = a["valign"].get_string();
 			if (align == "bottom") {
-				m_ns.valign = UI::Align::Align_Bottom;
+				m_ns.valign = UI::Align::kBottom;
 			} else if (align == "center" || align == "middle") {
-				m_ns.valign = UI::Align::Align_Center;
+				m_ns.valign = UI::Align::kCenter;
 			} else {
-				m_ns.valign = UI::Align::Align_Top;
+				m_ns.valign = UI::Align::kTop;
 			}
 		}
 		if (a.has("spacing"))
@@ -1045,9 +1045,9 @@ public:
 				m_rn->add_reference(rn->x() + r.dim.x, rn->y() + r.dim.y, r.dim.w, r.dim.h, r.ref);
 			}
 			if (shrink_to_fit_) {
-				if (rn->halign() == UI::Align::Align_Center) {
+				if (rn->halign() == UI::Align::kCenter) {
 					rn->set_x(rn->x() - m_extra_width / 2);
-				} else if (rn->halign() == UI::Align::Align_Right) {
+				} else if (rn->halign() == UI::Align::kRight) {
 					rn->set_x(rn->x() - m_extra_width);
 				}
 			}
@@ -1093,9 +1093,9 @@ public:
 		}
 		if (a.has("valign")) {
 			const string align = a["valign"].get_string();
-			if (align == "top") m_rn->set_valign(UI::Align::Align_Top);
-			else if (align == "bottom") m_rn->set_valign(UI::Align::Align_Bottom);
-			else if (align == "center" || align == "middle") m_rn->set_valign(UI::Align::Align_Center);
+			if (align == "top") m_rn->set_valign(UI::Align::kTop);
+			else if (align == "bottom") m_rn->set_valign(UI::Align::kBottom);
+			else if (align == "center" || align == "middle") m_rn->set_valign(UI::Align::kCenter);
 		}
 	}
 protected:
@@ -1175,7 +1175,7 @@ RenderNode* Renderer::layout_(const string& text, uint16_t width, const TagSet& 
 		fontset_,
 		renderer_style_.font_face, renderer_style_.font_size,
 		RGBColor(255, 255, 0), IFont::DEFAULT, fontset_->is_rtl(), 0,
-		UI::Align::Align_Left, UI::Align::Align_Top,
+		UI::Align::kLeft, UI::Align::kTop,
 		""
 	};
 

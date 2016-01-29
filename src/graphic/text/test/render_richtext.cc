@@ -93,8 +93,6 @@ int parse_arguments(
 
 // Setup the static objects Widelands needs to operate and initializes systems.
 void initialize() {
-	SDL_Init(SDL_INIT_VIDEO);
-
 	g_fs = new LayeredFileSystem();
 	g_fs->add_file_system(&FileSystem::create(INSTALL_DATADIR));
 

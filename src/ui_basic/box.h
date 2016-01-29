@@ -23,6 +23,7 @@
 #include <memory>
 #include <vector>
 
+#include "graphic/align.h"
 #include "ui_basic/panel.h"
 #include "ui_basic/scrollbar.h"
 
@@ -37,14 +38,8 @@ struct Box : public Panel {
 	enum {
 		Horizontal = 0,
 		Vertical = 1,
-
-		AlignLeft = 0,
-		AlignTop = 0,
-		AlignCenter = 1,
-		AlignRight = 2,
-		AlignBottom = 2,
 	};
-public:
+
 	Box
 		(Panel * parent,
 		 int32_t x, int32_t y,
@@ -58,7 +53,7 @@ public:
 
 	void add
 		(Panel * panel,
-		uint32_t align,
+		UI::Align align,
 		bool fullsize = false,
 		bool fillspace = false);
 	void add_space(uint32_t space);
@@ -82,7 +77,6 @@ private:
 	//don't resize beyond this size
 	int m_max_x, m_max_y;
 
-private:
 	struct Item {
 		enum Type {
 			ItemPanel,
@@ -94,7 +88,7 @@ private:
 		union {
 			struct {
 				Panel * panel;
-				int align;
+				UI::Align align;
 				bool fullsize;
 			} panel;
 			int space;

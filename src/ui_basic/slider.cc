@@ -595,7 +595,7 @@ void DiscreteSlider::draw(RenderTarget & dst)
 		dst.blit(Point(gap_1 + i * gap_n, get_h() + 2),
 				 UI::g_fh1->render(as_uifont(labels[i])),
 				 BlendMode::UseAlpha,
-				 Align_BottomCenter);
+				 UI::Align::kBottomCenter);
 	}
 
 }
