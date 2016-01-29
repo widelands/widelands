@@ -56,14 +56,14 @@ std::string as_window_title(const std::string& txt) {
 }
 
 std::string as_uifont(const std::string & txt, int size, const RGBColor& clr) {
-	return as_aligned(txt, UI::Align::Align_Left, size, clr);
+	return as_aligned(txt, UI::Align::kLeft, size, clr);
 }
 
 std::string as_aligned(const std::string & txt, UI::Align align, int ptsize, const RGBColor& clr) {
 	std::string alignment = "left";
-	if ((align & UI::Align_Horizontal) == UI::Align::Align_Right) {
+	if ((align & UI::Align::kHorizontal) == UI::Align::kRight) {
 		alignment = "right";
-	} else if ((align & UI::Align_Horizontal) == UI::Align::Align_HCenter) {
+	} else if ((align & UI::Align::kHorizontal) == UI::Align::kHCenter) {
 		alignment = "center";
 	}
 

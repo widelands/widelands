@@ -71,14 +71,14 @@ InteractiveSpectator::InteractiveSpectator
 
 	toolbar_.set_layout_toplevel(true);
 	if (!is_multiplayer()) {
-		toolbar_.add(&exit_,                UI::Box::AlignLeft);
-		toolbar_.add(&save_,                UI::Box::AlignLeft);
+		toolbar_.add(&exit_,                UI::Align::kLeft);
+		toolbar_.add(&save_,                UI::Align::kLeft);
 	} else
-		toolbar_.add(&toggle_options_menu_, UI::Box::AlignLeft);
-	toolbar_.add(&toggle_statistics_,      UI::Box::AlignLeft);
-	toolbar_.add(&toggle_minimap_,         UI::Box::AlignLeft);
-	toolbar_.add(&toggle_buildhelp_,       UI::Box::AlignLeft);
-	toolbar_.add(&toggle_chat_,            UI::Box::AlignLeft);
+	toolbar_.add(&toggle_options_menu_,    UI::Align::kLeft);
+	toolbar_.add(&toggle_statistics_,      UI::Align::kLeft);
+	toolbar_.add(&toggle_minimap_,         UI::Align::kLeft);
+	toolbar_.add(&toggle_buildhelp_,       UI::Align::kLeft);
+	toolbar_.add(&toggle_chat_,            UI::Align::kLeft);
 
 	// TODO(unknown): instead of making unneeded buttons invisible after generation,
 	// they should not at all be generated. -> implement more dynamic toolbar UI

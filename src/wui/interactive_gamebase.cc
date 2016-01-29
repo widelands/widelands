@@ -123,7 +123,7 @@ void InteractiveGameBase::draw_overlay(RenderTarget& dst) {
 			dst.blit(Point(get_w() - 5,  5),
 						UI::g_fh1->render(game_speed),
 						BlendMode::UseAlpha,
-						UI::Align_TopRight);
+						UI::Align::kTopRight);
 		}
 	}
 }

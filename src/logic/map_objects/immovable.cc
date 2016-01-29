@@ -519,7 +519,7 @@ void Immovable::draw_construction
 		dst.blit(pos - Point(0, 48),
 				 UI::g_fh1->render(m_construct_string),
 				 BlendMode::UseAlpha,
-				 UI::Align_Center);
+				 UI::Align::kCenter);
 	}
 }
 
