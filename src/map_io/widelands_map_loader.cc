@@ -184,6 +184,7 @@ int32_t WidelandsMapLoader::load_map_complete
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	//  NON MANDATORY PACKETS BELOW THIS POINT
+	// Do not load unneeded packages in the editor
 	if (load_type != MapLoader::LoadType::kEditor) {
 		log("Reading Map Extra Data ... ");
 		{MapExtradataPacket      p; p.read(*m_fs, !scenario);}
@@ -275,16 +276,18 @@ int32_t WidelandsMapLoader::load_map_complete
 			p.read(*m_fs, egbase, !scenario, *m_mol);
 		}
 		log("took %ums\n ", timer.ms_since_last_query());
+	} // load_type != MapLoader::LoadType::kEditor
 
-		//  Objectives
-		log("Reading Objective Data ... ");
-		{MapObjectivePacket      p; p.read(*m_fs, egbase, !scenario, *m_mol);}
-		log("took %ums\n ", timer.ms_since_last_query());
+	//  Objectives
+	log("Reading Objective Data ... ");
+	{MapObjectivePacket      p; p.read(*m_fs, egbase, !scenario, *m_mol);}
+	log("took %ums\n ", timer.ms_since_last_query());
 
-		log("Reading Scripting Data ... ");
-		{MapScriptingPacket      p; p.read(*m_fs, egbase, !scenario, *m_mol);}
-		log("took %ums\n ", timer.ms_since_last_query());
+	log("Reading Scripting Data ... ");
+	{MapScriptingPacket      p; p.read(*m_fs, egbase, !scenario, *m_mol);}
+	log("took %ums\n ", timer.ms_since_last_query());
 
+	if (load_type != MapLoader::LoadType::kEditor) {
 		if (m_mol->get_nr_unloaded_objects()) {
 			log
 				("WARNING: There are %i unloaded objects. This is a bug, please "
