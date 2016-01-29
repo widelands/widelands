@@ -90,8 +90,7 @@ void MapSaver::save() {
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	log("Writing Player Names And Tribe Data ... ");
-	{MapPlayerNamesAndTribesPacket p; p.write(m_fs, m_egbase, *m_mos);
-	}
+	{MapPlayerNamesAndTribesPacket p; p.write(m_fs, m_egbase, *m_mos);}
 	log("took %ums\n ", timer.ms_since_last_query());
 	//  PRELOAD DATA END
 
