@@ -111,7 +111,7 @@ FullscreenMenuOptions::FullscreenMenuOptions
 	title_
 	(this,
 	 get_w() / 2, buth_,
-	 _("Options"), UI::Align_HCenter),
+	 _("Options"), UI::Align::kHCenter),
 
 	// Buttons
 	cancel_
@@ -149,8 +149,8 @@ FullscreenMenuOptions::FullscreenMenuOptions
 	box_language_(&tabs_, 0, 0, UI::Box::Vertical, 0, 0, padding_),
 
 	// Interface options
-	label_resolution_(&box_interface_, _("In-game resolution"), UI::Align_Left),
-	resolution_list_(&box_interface_, 0, 0, column_width_ / 2, 80, UI::Align_Left, true),
+	label_resolution_(&box_interface_, _("In-game resolution"), UI::Align::kLeft),
+	resolution_list_(&box_interface_, 0, 0, column_width_ / 2, 80, UI::Align::kLeft, true),
 
 	fullscreen_ (&box_interface_, Point(0, 0), _("Fullscreen"), "", column_width_),
 	inputgrab_ (&box_interface_, Point(0, 0), _("Grab Input"), "", column_width_),
@@ -226,10 +226,10 @@ FullscreenMenuOptions::FullscreenMenuOptions
 	single_watchwin_(&box_game_, Point(0, 0), _("Use single watchwindow mode")),
 
 	// Language options
-	label_language_(&box_language_, _("Language"), UI::Align_Left),
+	label_language_(&box_language_, _("Language"), UI::Align::kLeft),
 	language_list_(&box_language_, 0, 0, column_width_ / 2,
 						get_inner_h() - tab_panel_y_ - buth_ - hmargin_ - 5 * padding_,
-						UI::Align_Left, true),
+						UI::Align::kLeft, true),
 
 	os_(opt)
 {
@@ -258,39 +258,39 @@ FullscreenMenuOptions::FullscreenMenuOptions
 	box_language_.set_size(tabs_.get_inner_w(), tabs_.get_inner_h());
 
 	// Interface
-	box_interface_.add(&label_resolution_, UI::Align_Left);
-	box_interface_.add(&resolution_list_, UI::Align_Left);
-	box_interface_.add(&fullscreen_, UI::Align_Left);
-	box_interface_.add(&inputgrab_, UI::Align_Left);
-	box_interface_.add(&sb_maxfps_, UI::Align_Left);
+	box_interface_.add(&label_resolution_, UI::Align::kLeft);
+	box_interface_.add(&resolution_list_, UI::Align::kLeft);
+	box_interface_.add(&fullscreen_, UI::Align::kLeft);
+	box_interface_.add(&inputgrab_, UI::Align::kLeft);
+	box_interface_.add(&sb_maxfps_, UI::Align::kLeft);
 
 	// Windows
-	box_windows_.add(&snap_win_overlap_only_, UI::Align_Left);
-	box_windows_.add(&dock_windows_to_edges_, UI::Align_Left);
-	box_windows_.add(&sb_dis_panel_, UI::Align_Left);
-	box_windows_.add(&sb_dis_border_, UI::Align_Left);
+	box_windows_.add(&snap_win_overlap_only_, UI::Align::kLeft);
+	box_windows_.add(&dock_windows_to_edges_, UI::Align::kLeft);
+	box_windows_.add(&sb_dis_panel_, UI::Align::kLeft);
+	box_windows_.add(&sb_dis_border_, UI::Align::kLeft);
 
 	// Sound
-	box_sound_.add(&music_, UI::Align_Left);
-	box_sound_.add(&fx_, UI::Align_Left);
-	box_sound_.add(&message_sound_, UI::Align_Left);
+	box_sound_.add(&music_, UI::Align::kLeft);
+	box_sound_.add(&fx_, UI::Align::kLeft);
+	box_sound_.add(&message_sound_, UI::Align::kLeft);
 
 	// Saving
-	box_saving_.add(&sb_autosave_, UI::Align_Left);
-	box_saving_.add(&sb_rolling_autosave_, UI::Align_Left);
-	box_saving_.add(&sb_remove_replays_, UI::Align_Left);
-	box_saving_.add(&nozip_, UI::Align_Left);
-	box_saving_.add(&remove_syncstreams_, UI::Align_Left);
+	box_saving_.add(&sb_autosave_, UI::Align::kLeft);
+	box_saving_.add(&sb_rolling_autosave_, UI::Align::kLeft);
+	box_saving_.add(&sb_remove_replays_, UI::Align::kLeft);
+	box_saving_.add(&nozip_, UI::Align::kLeft);
+	box_saving_.add(&remove_syncstreams_, UI::Align::kLeft);
 
 	// Game
-	box_game_.add(&auto_roadbuild_mode_, UI::Align_Left);
-	box_game_.add(&show_workarea_preview_, UI::Align_Left);
-	box_game_.add(&transparent_chat_, UI::Align_Left);
-	box_game_.add(&single_watchwin_, UI::Align_Left);
+	box_game_.add(&auto_roadbuild_mode_, UI::Align::kLeft);
+	box_game_.add(&show_workarea_preview_, UI::Align::kLeft);
+	box_game_.add(&transparent_chat_, UI::Align::kLeft);
+	box_game_.add(&single_watchwin_, UI::Align::kLeft);
 
 	// Language
-	box_language_.add(&label_language_, UI::Align_Left);
-	box_language_.add(&language_list_, UI::Align_Left);
+	box_language_.add(&label_language_, UI::Align::kLeft);
+	box_language_.add(&language_list_, UI::Align::kLeft);
 
 
 	// Bind actions

@@ -49,13 +49,13 @@ EditorToolNoiseHeightOptionsMenu::EditorToolNoiseHeightOptionsMenu
 		 hmargin(),
 		 vmargin(),
 		 width, height,
-		 UI::Align_Left),
+		 UI::Align::kLeft),
 	m_upper_label
 		(this,
 		 hmargin(),
 		 m_lower_label.get_y() + m_lower_label.get_h() + 2 * vspacing(),
 		 width, height,
-		 UI::Align_Left),
+		 UI::Align::kLeft),
 	m_lower_decrease
 		(this, "decr_lower",
 		 get_inner_w() - 2 * width - hspacing(),
@@ -97,7 +97,7 @@ EditorToolNoiseHeightOptionsMenu::EditorToolNoiseHeightOptionsMenu
 		 hmargin(),
 		 m_upper_label.get_y() + m_upper_label.get_h() + 2 * vspacing(),
 		 width, height,
-		 UI::Align_Left),
+		 UI::Align::kLeft),
 	m_setto_decrease
 		(this, "decr_set_to",
 		 get_inner_w() - 2 * width - hspacing(),

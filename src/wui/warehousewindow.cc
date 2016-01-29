@@ -128,12 +128,12 @@ WarehouseWaresPanel::WarehouseWaresPanel
 	type_(type),
 	display_(this, width, wh_, type_, can_act_)
 {
-	add(&display_, UI::Box::AlignLeft, true);
+	add(&display_, UI::Align::kLeft, true);
 
 	if (can_act_) {
 		UI::Box * buttons = new UI::Box(this, 0, 0, UI::Box::Horizontal);
 		UI::Button * b;
-		add(buttons, UI::Box::AlignLeft);
+		add(buttons, UI::Align::kLeft);
 
 #define ADD_POLICY_BUTTON(policy, policyname, tooltip)                                           \
 		b = new UI::Button                                                             \
@@ -143,7 +143,7 @@ WarehouseWaresPanel::WarehouseWaresPanel
 			 tooltip),                                                                        \
 		b->sigclicked.connect \
 			(boost::bind(&WarehouseWaresPanel::set_policy, this, Warehouse::SP_##policyname)), \
-		buttons->add(b, UI::Box::AlignCenter);
+        buttons->add(b, UI::Align::kHCenter);
 
 		ADD_POLICY_BUTTON(normal, Normal, _("Normal policy"))
 		ADD_POLICY_BUTTON(prefer, Prefer, _("Preferably store selected wares here"))

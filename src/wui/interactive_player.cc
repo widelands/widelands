@@ -124,19 +124,19 @@ toggle_help_
 
 	// TODO(unknown): instead of making unneeded buttons invisible after generation,
 	// they should not at all be generated. -> implement more dynamic toolbar UI
-	toolbar_.add(&toggle_options_menu_,    UI::Box::AlignLeft);
-	toolbar_.add(&toggle_statistics_menu_, UI::Box::AlignLeft);
-	toolbar_.add(&toggle_minimap_,         UI::Box::AlignLeft);
-	toolbar_.add(&toggle_buildhelp_,       UI::Box::AlignLeft);
+	toolbar_.add(&toggle_options_menu_,    UI::Align::kLeft);
+	toolbar_.add(&toggle_statistics_menu_, UI::Align::kLeft);
+	toolbar_.add(&toggle_minimap_,         UI::Align::kLeft);
+	toolbar_.add(&toggle_buildhelp_,       UI::Align::kLeft);
 	if (multiplayer) {
-		toolbar_.add(&toggle_chat_,            UI::Box::AlignLeft);
+		toolbar_.add(&toggle_chat_,            UI::Align::kLeft);
 		toggle_chat_.set_visible(false);
 		toggle_chat_.set_enabled(false);
 	}
 
-	toolbar_.add(&toggle_help_,            UI::Box::AlignLeft);
-	toolbar_.add(&toggle_objectives_,      UI::Box::AlignLeft);
-	toolbar_.add(&toggle_message_menu_,    UI::Box::AlignLeft);
+	toolbar_.add(&toggle_help_,            UI::Align::kLeft);
+	toolbar_.add(&toggle_objectives_,      UI::Align::kLeft);
+	toolbar_.add(&toggle_message_menu_,    UI::Align::kLeft);
 
 	set_player_number(plyn);
 	fieldclicked.connect(boost::bind(&InteractivePlayer::node_action, this));

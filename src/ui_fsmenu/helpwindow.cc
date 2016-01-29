@@ -40,7 +40,7 @@ FullscreenHelpWindow::FullscreenHelpWindow
 	 uint32_t width, uint32_t height)
 	:
 	Window(parent, "help_window", 0, 0, width, height, (boost::format(_("Help: %s")) % caption).str()),
-	textarea_(new MultilineTextarea(this, 5, 5, width - 10, height - 30, std::string(), Align_Left))
+	textarea_(new MultilineTextarea(this, 5, 5, width - 10, height - 30, std::string(), UI::Align::kLeft))
 {
 	int margin = 5;
 

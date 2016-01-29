@@ -198,9 +198,9 @@ void Texture::init(uint16_t w, uint16_t h)
 
 	// set texture filter to use linear filtering. This looks nicer for resized
 	// texture. Most textures and images are not resized so the filtering
-	// makes no difference
+	// makes no difference.
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, static_cast<GLint>(GL_LINEAR));
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, static_cast<GLint>(GL_NEAREST));
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, static_cast<GLint>(GL_LINEAR));
 }
 
 void Texture::lock() {

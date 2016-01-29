@@ -466,7 +466,7 @@ void FieldActionWindow::add_buttons_attack ()
 			 attackable->can_attack())
 		{
 			m_attack_box = new AttackBox(&a_box, m_plr, &m_node, 0, 0);
-			a_box.add(m_attack_box, UI::Box::AlignTop);
+			a_box.add(m_attack_box, UI::Align::kTop);
 
 			set_fastclick_panel
 				(&add_button
@@ -619,7 +619,7 @@ UI::Button & FieldActionWindow::add_button
 	button.sigclicked.connect(boost::bind(fn, this));
 	button.set_repeating(repeating);
 	box->add
-		(&button, UI::Box::AlignTop);
+		(&button, UI::Align::kTop);
 
 	return button;
 }

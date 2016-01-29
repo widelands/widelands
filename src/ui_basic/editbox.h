@@ -42,7 +42,8 @@ struct EditBox : public Panel {
 	EditBox
 		(Panel *,
 		 int32_t x, int32_t y, uint32_t w, uint32_t h,
-		 const Image* background = g_gr->images().get("images/ui_basic/but2.png"), Align align = Align_Center);
+		 const Image* background = g_gr->images().get("images/ui_basic/but2.png"),
+		 Align align = UI::Align::kCenter);
 	virtual ~EditBox();
 
 	boost::signals2::signal<void ()> changed;

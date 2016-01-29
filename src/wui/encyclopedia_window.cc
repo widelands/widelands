@@ -148,12 +148,12 @@ EncyclopediaWindow::EncyclopediaWindow(InteractivePlayer& parent, UI::UniqueWind
 		                  std::unique_ptr<UI::MultilineTextarea>(new UI::MultilineTextarea(
 		                     boxes_.at(tab->key).get(), 0, 0, contents_width, contents_height))));
 
-		boxes_.at(tab->key)->add(lists_.at(tab->key).get(), UI::Align_Left);
+		boxes_.at(tab->key)->add(lists_.at(tab->key).get(), UI::Align::kLeft);
 		boxes_.at(tab->key)->add_space(kPadding);
-		boxes_.at(tab->key)->add(contents_.at(tab->key).get(), UI::Align_Left);
+		boxes_.at(tab->key)->add(contents_.at(tab->key).get(), UI::Align::kLeft);
 
 		wrapper_boxes_.at(tab->key)->add_space(kPadding);
-		wrapper_boxes_.at(tab->key)->add(boxes_.at(tab->key).get(), UI::Align_Left);
+		wrapper_boxes_.at(tab->key)->add(boxes_.at(tab->key).get(), UI::Align::kLeft);
 
 		tabs_.add("encyclopedia_" + tab->key,
 		          g_gr->images().get(tab->image_filename),

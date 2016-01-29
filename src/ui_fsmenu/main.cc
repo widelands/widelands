@@ -68,17 +68,17 @@ FullscreenMenuMain::FullscreenMenuMain() :
 		(this, get_w(), get_h(),
 		 /** TRANSLATORS: %1$s = version string, %2%s = "Debug" or "Release" */
 		 (boost::format(_("Version %1$s (%2$s)")) % build_id().c_str() % build_type().c_str()).str(),
-		 UI::Align_BottomRight),
+		 UI::Align::kBottomRight),
 	copyright
 		(this, 0, get_h() - 0.5 * m_buth,
 		 /** TRANSLATORS: Placeholders are the copyright years */
 		 (boost::format(_("(C) %1%-%2% by the Widelands Development Team"))
 		  % kWidelandsCopyrightStart % kWidelandsCopyrightEnd).str(),
-		 UI::Align_BottomLeft),
+		 UI::Align::kBottomLeft),
 	gpl
 		(this, 0, get_h(),
 		 _("Licensed under the GNU General Public License V2.0"),
-		 UI::Align_BottomLeft)
+		 UI::Align::kBottomLeft)
 {
 	playtutorial.sigclicked.connect
 		(boost::bind
@@ -121,31 +121,31 @@ FullscreenMenuMain::FullscreenMenuMain() :
 			 (&FullscreenMenuMain::end_modal<FullscreenMenuBase::MenuTarget>, boost::ref(*this),
 			  FullscreenMenuBase::MenuTarget::kExit));
 
-	vbox.add(&playtutorial, UI::Box::AlignCenter);
+	vbox.add(&playtutorial, UI::Align::kHCenter);
 
 	vbox.add_space(m_padding);
 
-	vbox.add(&singleplayer, UI::Box::AlignCenter);
-	vbox.add(&multiplayer, UI::Box::AlignCenter);
-	vbox.add(&replay, UI::Box::AlignCenter);
+	vbox.add(&singleplayer, UI::Align::kHCenter);
+	vbox.add(&multiplayer, UI::Align::kHCenter);
+	vbox.add(&replay, UI::Align::kHCenter);
 
 	vbox.add_space(m_padding);
 
-	vbox.add(&editor, UI::Box::AlignCenter);
+	vbox.add(&editor, UI::Align::kHCenter);
 
 	vbox.add_space(m_padding);
 
-	vbox.add(&options, UI::Box::AlignCenter);
+	vbox.add(&options, UI::Align::kHCenter);
 
 	vbox.add_space(m_padding);
 
-	vbox.add(&readme, UI::Box::AlignCenter);
-	vbox.add(&license, UI::Box::AlignCenter);
-	vbox.add(&authors, UI::Box::AlignCenter);
+	vbox.add(&readme, UI::Align::kHCenter);
+	vbox.add(&license, UI::Align::kHCenter);
+	vbox.add(&authors, UI::Align::kHCenter);
 
 	vbox.add_space(m_padding);
 
-	vbox.add(&exit, UI::Box::AlignCenter);
+	vbox.add(&exit, UI::Align::kHCenter);
 
 	vbox.set_size(m_butw, get_h() - vbox.get_y());
 }

@@ -151,7 +151,7 @@ void Statebox::draw(RenderTarget & dst)
 				image_anchor.x = rendered_text_->width() + kPadding;
 				image_anchor.y = (get_h() - kStateboxSize) / 2;
 			}
-			dst.blit(text_anchor, rendered_text_, BlendMode::UseAlpha, UI::Align::Align_Left);
+			dst.blit(text_anchor, rendered_text_, BlendMode::UseAlpha, UI::Align::kLeft);
 		}
 
 		dst.blitrect

@@ -82,13 +82,13 @@ EditorMainMenu::EditorMainMenu
 		 g_gr->images().get("images/ui_basic/but5.png"),
 		 _("Exit Editor"))
 {
-	box_.add(&button_new_map_, UI::Box::AlignCenter);
-	box_.add(&button_new_random_map_, UI::Box::AlignCenter);
-	box_.add(&button_load_map_, UI::Box::AlignCenter);
-	box_.add(&button_save_map_, UI::Box::AlignCenter);
-	box_.add(&button_map_options_, UI::Box::AlignCenter);
-	box_.add(&button_view_readme_, UI::Box::AlignCenter);
-	box_.add(&button_exit_editor_, UI::Box::AlignCenter);
+	box_.add(&button_new_map_, UI::Align::kHCenter);
+	box_.add(&button_new_random_map_, UI::Align::kHCenter);
+	box_.add(&button_load_map_, UI::Align::kHCenter);
+	box_.add(&button_save_map_, UI::Align::kHCenter);
+	box_.add(&button_map_options_, UI::Align::kHCenter);
+	box_.add(&button_view_readme_, UI::Align::kHCenter);
+	box_.add(&button_exit_editor_, UI::Align::kHCenter);
 	box_.set_size(width, 7 * button_new_map_.get_h()+ 6 * vspacing);
 	set_inner_size(get_inner_w(), box_.get_h() + 2 * margin);
 

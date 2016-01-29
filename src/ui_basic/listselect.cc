@@ -64,7 +64,7 @@ BaseListselect::BaseListselect
 	set_thinks(false);
 
 	//  do not allow vertical alignment as it does not make sense
-	m_align = static_cast<Align>(align & Align_Horizontal);
+	m_align = align & UI::Align::kHorizontal;
 
 	m_scrollbar.moved.connect(boost::bind(&BaseListselect::set_scrollpos, this, _1));
 	m_scrollbar.set_singlestepsize(g_fh->get_fontheight(m_fontname, m_fontsize));
@@ -382,8 +382,8 @@ void BaseListselect::draw(RenderTarget & dst)
 		Align draw_alignment = mirror_alignment(m_align);
 
 		int32_t const x =
-			draw_alignment & Align_Right   ? get_eff_w() -      1 :
-			draw_alignment & Align_HCenter ? get_eff_w() >>     1 :
+			(static_cast<int>(draw_alignment & UI::Align::kRight))   ? get_eff_w() -      1 :
+			(static_cast<int>(draw_alignment & UI::Align::kHCenter)) ? get_eff_w() >>     1 :
 
 			// Pictures are always left aligned, leave some space here
 			m_max_pic_width         ? m_max_pic_width + 10 :

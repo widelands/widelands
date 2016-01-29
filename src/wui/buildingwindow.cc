@@ -72,10 +72,10 @@ BuildingWindow::BuildingWindow
 	UI::Box * vbox = new UI::Box(this, 0, 0, UI::Box::Vertical);
 
 	tabs_ = new UI::TabPanel(vbox, 0, 0, nullptr);
-	vbox->add(tabs_, UI::Box::AlignLeft, true);
+	vbox->add(tabs_, UI::Align::kLeft, true);
 
 	capsbuttons_ = new UI::Box(vbox, 0, 0, UI::Box::Horizontal);
-	vbox->add(capsbuttons_, UI::Box::AlignLeft, true);
+	vbox->add(capsbuttons_, UI::Align::kLeft, true);
 	// actually create buttons on the first call to think(),
 	// so that overriding create_capsbuttons() works
 
@@ -187,7 +187,7 @@ void BuildingWindow::create_capsbuttons(UI::Box * capsbuttons)
 							_("Cancel the expedition"));
 					expeditionbtn->sigclicked.connect
 						(boost::bind(&BuildingWindow::act_start_or_cancel_expedition, boost::ref(*this)));
-					capsbuttons->add(expeditionbtn, UI::Box::AlignCenter);
+					capsbuttons->add(expeditionbtn, UI::Align::kHCenter);
 				} else {
 					UI::Button * expeditionbtn =
 						new UI::Button
@@ -197,7 +197,7 @@ void BuildingWindow::create_capsbuttons(UI::Box * capsbuttons)
 							_("Start an expedition"));
 					expeditionbtn->sigclicked.connect
 						(boost::bind(&BuildingWindow::act_start_or_cancel_expedition, boost::ref(*this)));
-					capsbuttons->add(expeditionbtn, UI::Box::AlignCenter);
+					capsbuttons->add(expeditionbtn, UI::Align::kHCenter);
 				}
 			}
 		}
@@ -217,7 +217,7 @@ void BuildingWindow::create_capsbuttons(UI::Box * capsbuttons)
 				stopbtn->sigclicked.connect(boost::bind(&BuildingWindow::act_start_stop, boost::ref(*this)));
 				capsbuttons->add
 					(stopbtn,
-					 UI::Box::AlignCenter);
+					 UI::Align::kHCenter);
 
 
 				// Add a fixed width separator rather than infinite space so the
@@ -225,7 +225,7 @@ void BuildingWindow::create_capsbuttons(UI::Box * capsbuttons)
 				// and not subject to the number of buttons on the right of the
 				// panel.
 				UI::Panel * spacer = new UI::Panel(capsbuttons, 0, 0, 17, 34);
-				capsbuttons->add(spacer, UI::Box::AlignCenter);
+				capsbuttons->add(spacer, UI::Align::kHCenter);
 			}
 		} // upcast to productionsite
 
@@ -253,7 +253,7 @@ void BuildingWindow::create_capsbuttons(UI::Box * capsbuttons)
 				   enhancebtn->sigclicked.connect([this, enhancement] {act_enhance(enhancement);});
 				   capsbuttons->add
 						(enhancebtn,
-						 UI::Box::AlignCenter);
+						 UI::Align::kHCenter);
 					requires_destruction_separator = true;
 				}
 		}
@@ -269,7 +269,7 @@ void BuildingWindow::create_capsbuttons(UI::Box * capsbuttons)
 				(boost::bind(&BuildingWindow::act_bulldoze, boost::ref(*this)));
 			capsbuttons->add
 				(destroybtn,
-				 UI::Box::AlignCenter);
+				 UI::Align::kHCenter);
 
 			requires_destruction_separator = true;
 		}
@@ -287,7 +287,7 @@ void BuildingWindow::create_capsbuttons(UI::Box * capsbuttons)
 			dismantlebtn->sigclicked.connect(boost::bind(&BuildingWindow::act_dismantle, boost::ref(*this)));
 			capsbuttons->add
 				(dismantlebtn,
-				 UI::Box::AlignCenter);
+				 UI::Align::kHCenter);
 
 			requires_destruction_separator = true;
 		}
@@ -296,7 +296,7 @@ void BuildingWindow::create_capsbuttons(UI::Box * capsbuttons)
 			// Need this as well as the infinite space from the can_see section
 			// to ensure there is a separation.
 			UI::Panel * spacer = new UI::Panel(capsbuttons, 0, 0, 17, 34);
-			capsbuttons->add(spacer, UI::Box::AlignCenter);
+			capsbuttons->add(spacer, UI::Align::kHCenter);
 			capsbuttons->add_inf_space();
 		}
 	}
@@ -318,7 +318,7 @@ void BuildingWindow::create_capsbuttons(UI::Box * capsbuttons)
 			toggle_workarea_->sigclicked.connect
 				(boost::bind(&BuildingWindow::toggle_workarea, boost::ref(*this)));
 
-			capsbuttons->add(toggle_workarea_, UI::Box::AlignCenter);
+			capsbuttons->add(toggle_workarea_, UI::Align::kHCenter);
 			configure_workarea_button();
 			set_fastclick_panel(toggle_workarea_);
 		}
@@ -333,7 +333,7 @@ void BuildingWindow::create_capsbuttons(UI::Box * capsbuttons)
 			debugbtn->sigclicked.connect(boost::bind(&BuildingWindow::act_debug, boost::ref(*this)));
 			capsbuttons->add
 				(debugbtn,
-				 UI::Box::AlignCenter);
+				 UI::Align::kHCenter);
 		}
 
 		UI::Button * gotobtn =
@@ -344,7 +344,7 @@ void BuildingWindow::create_capsbuttons(UI::Box * capsbuttons)
 		gotobtn->sigclicked.connect(boost::bind(&BuildingWindow::clicked_goto, boost::ref(*this)));
 		capsbuttons->add
 			(gotobtn,
-			 UI::Box::AlignCenter);
+			 UI::Align::kHCenter);
 
 		if (!requires_destruction_separator) {
 			// When there was no separation of destruction buttons put
@@ -367,7 +367,7 @@ void BuildingWindow::create_capsbuttons(UI::Box * capsbuttons)
 		};
 
 		helpbtn->sigclicked.connect(boost::bind(&UI::UniqueWindow::Registry::toggle, boost::ref(registry)));
-		capsbuttons->add(helpbtn, UI::Box::AlignCenter);
+		capsbuttons->add(helpbtn, UI::Align::kHCenter);
 	}
 }
 
@@ -528,7 +528,7 @@ void BuildingWindow::create_ware_queue_panel
 	 bool show_only)
 {
 	// The *max* width should be larger than the default width
-	box->add(new WaresQueueDisplay(box, 0, 0, igbase(), b, wq, show_only), UI::Box::AlignLeft);
+	box->add(new WaresQueueDisplay(box, 0, 0, igbase(), b, wq, show_only), UI::Align::kLeft);
 }
 
 /**
