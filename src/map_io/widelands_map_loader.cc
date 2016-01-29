@@ -106,9 +106,11 @@ int32_t WidelandsMapLoader::preload_map(bool const scenario) {
  * Load the complete map and make sure that it runs without problems
  */
 int32_t WidelandsMapLoader::load_map_complete
-	(EditorGameBase & egbase, bool const scenario)
+	(EditorGameBase & egbase, MapLoader::LoadType load_type)
 {
 	ScopedTimer timer("WidelandsMapLoader::load_map_complete() took %ums");
+
+	bool scenario = load_type != MapLoader::LoadType::kGame;
 
 	preload_map(scenario);
 	m_map.set_size(m_map.m_width, m_map.m_height);
@@ -182,111 +184,114 @@ int32_t WidelandsMapLoader::load_map_complete
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	//  NON MANDATORY PACKETS BELOW THIS POINT
-	log("Reading Map Extra Data ... ");
-	{MapExtradataPacket      p; p.read(*m_fs, !scenario);}
-	log("took %ums\n ", timer.ms_since_last_query());
+	if (load_type != MapLoader::LoadType::kEditor) {
+		log("Reading Map Extra Data ... ");
+		{MapExtradataPacket      p; p.read(*m_fs, !scenario);}
+		log("took %ums\n ", timer.ms_since_last_query());
 
-	log("Reading Map Version Data ... ");
-	{MapVersionPacket      p; p.read(*m_fs, egbase, !scenario, *m_mol);}
-	log("took %ums\n ", timer.ms_since_last_query());
+		log("Reading Map Version Data ... ");
+		{MapVersionPacket      p; p.read(*m_fs, egbase, !scenario, *m_mol);}
+		log("took %ums\n ", timer.ms_since_last_query());
 
 
-	log("Reading Allowed Worker Types Data ... ");
-	{
-		MapAllowedWorkerTypesPacket p;
-		p.read(*m_fs, egbase, !scenario, *m_mol);
-	}
-	log("took %ums\n ", timer.ms_since_last_query());
+		log("Reading Allowed Worker Types Data ... ");
+		{
+			MapAllowedWorkerTypesPacket p;
+			p.read(*m_fs, egbase, !scenario, *m_mol);
+		}
+		log("took %ums\n ", timer.ms_since_last_query());
 
-	log("Reading Allowed Building Types Data ... ");
-	{
-		MapAllowedBuildingTypesPacket p;
-		p.read(*m_fs, egbase, !scenario, *m_mol);
-	}
-	log("took %ums\n ", timer.ms_since_last_query());
+		log("Reading Allowed Building Types Data ... ");
+		{
+			MapAllowedBuildingTypesPacket p;
+			p.read(*m_fs, egbase, !scenario, *m_mol);
+		}
+		log("took %ums\n ", timer.ms_since_last_query());
 
-	log("Reading Node Ownership Data ... ");
-	{MapNodeOwnershipPacket p; p.read(*m_fs, egbase, !scenario, *m_mol);}
-	log("took %ums\n ", timer.ms_since_last_query());
+		log("Reading Node Ownership Data ... ");
+		{MapNodeOwnershipPacket p; p.read(*m_fs, egbase, !scenario, *m_mol);}
+		log("took %ums\n ", timer.ms_since_last_query());
 
-	log("Reading Exploration Data ... ");
-	{MapExplorationPacket    p; p.read(*m_fs, egbase, !scenario, *m_mol);}
-	log("took %ums\n ", timer.ms_since_last_query());
+		log("Reading Exploration Data ... ");
+		{MapExplorationPacket    p; p.read(*m_fs, egbase, !scenario, *m_mol);}
+		log("took %ums\n ", timer.ms_since_last_query());
 
-	//  !!!!!!!!!! NOTE
-	//  This packet must be before any building or road packet. So do not change
-	//  this order without knowing what you do
-	//  EXISTENT PACKETS
-	log("Reading Flag Data ... ");
-	{MapFlagPacket           p; p.read(*m_fs, egbase, !scenario, *m_mol);}
-	log("took %ums\n ", timer.ms_since_last_query());
+		//  !!!!!!!!!! NOTE
+		//  This packet must be before any building or road packet. So do not change
+		//  this order without knowing what you do
+		//  EXISTENT PACKETS
+		log("Reading Flag Data ... ");
+		{MapFlagPacket           p; p.read(*m_fs, egbase, !scenario, *m_mol);}
+		log("took %ums\n ", timer.ms_since_last_query());
 
-	log("Reading Road Data ... ");
-	{MapRoadPacket           p; p.read(*m_fs, egbase, !scenario, *m_mol);}
-	log("took %ums\n ", timer.ms_since_last_query());
+		log("Reading Road Data ... ");
+		{MapRoadPacket           p; p.read(*m_fs, egbase, !scenario, *m_mol);}
+		log("took %ums\n ", timer.ms_since_last_query());
 
-	log("Reading Building Data ... ");
-	{MapBuildingPacket       p; p.read(*m_fs, egbase, !scenario, *m_mol);}
-	log("took %ums\n ", timer.ms_since_last_query());
+		log("Reading Building Data ... ");
+		{MapBuildingPacket       p; p.read(*m_fs, egbase, !scenario, *m_mol);}
+		log("took %ums\n ", timer.ms_since_last_query());
 
-	//  DATA PACKETS
-	log("Reading Flagdata Data ... ");
-	{MapFlagdataPacket       p; p.read(*m_fs, egbase, !scenario, *m_mol);}
-	log("took %ums\n ", timer.ms_since_last_query());
+		//  DATA PACKETS
+		log("Reading Flagdata Data ... ");
+		{MapFlagdataPacket       p; p.read(*m_fs, egbase, !scenario, *m_mol);}
+		log("took %ums\n ", timer.ms_since_last_query());
 
-	log("Reading Roaddata Data ... ");
-	{MapRoaddataPacket       p; p.read(*m_fs, egbase, !scenario, *m_mol);}
-	log("took %ums\n ", timer.ms_since_last_query());
+		log("Reading Roaddata Data ... ");
+		{MapRoaddataPacket       p; p.read(*m_fs, egbase, !scenario, *m_mol);}
+		log("took %ums\n ", timer.ms_since_last_query());
 
-	log("Reading Buildingdata Data ... ");
-	{MapBuildingdataPacket   p; p.read(*m_fs, egbase, !scenario, *m_mol);}
-	log("took %ums\n ", timer.ms_since_last_query());
+		log("Reading Buildingdata Data ... ");
+		{MapBuildingdataPacket   p; p.read(*m_fs, egbase, !scenario, *m_mol);}
+		log("took %ums\n ", timer.ms_since_last_query());
 
-	log("Second and third phase loading Map Objects ... ");
-	mapobjects.load_finish();
-	{
-		const Field & fields_end = map()[map().max_index()];
-		for (Field * field = &map()[0]; field < &fields_end; ++field)
-			if (BaseImmovable * const imm = field->get_immovable()) {
-				if (upcast(Building const, building, imm))
-					if (field != &map()[building->get_position()])
-						continue; //  not the building's main position
-				imm->load_finish(egbase);
-			}
-	}
-	log("took %ums\n ", timer.ms_since_last_query());
+		log("Second and third phase loading Map Objects ... ");
+		mapobjects.load_finish();
+		{
+			const Field & fields_end = map()[map().max_index()];
+			for (Field * field = &map()[0]; field < &fields_end; ++field)
+				if (BaseImmovable * const imm = field->get_immovable()) {
+					if (upcast(Building const, building, imm))
+						if (field != &map()[building->get_position()])
+							continue; //  not the building's main position
+					imm->load_finish(egbase);
+				}
+		}
+		log("took %ums\n ", timer.ms_since_last_query());
 
-	//  This should be at least after loading Soldiers (Bobs).
-	//  NOTE DO NOT CHANGE THE PLACE UNLESS YOU KNOW WHAT ARE YOU DOING
-	//  Must be loaded after every kind of object that can see.
-	log("Reading Players View Data ... ");
-	{MapPlayersViewPacket   p; p.read(*m_fs, egbase, !scenario, *m_mol);}
-	log("took %ums\n ", timer.ms_since_last_query());
+		//  This should be at least after loading Soldiers (Bobs).
+		//  NOTE DO NOT CHANGE THE PLACE UNLESS YOU KNOW WHAT ARE YOU DOING
+		//  Must be loaded after every kind of object that can see.
+		log("Reading Players View Data ... ");
+		{MapPlayersViewPacket   p; p.read(*m_fs, egbase, !scenario, *m_mol);}
+		log("took %ums\n ", timer.ms_since_last_query());
 
-	//  This must come before anything that references messages, such as:
-	//    * command queue (PlayerMessageCommand, inherited by
-	//      Cmd_MessageSetStatusRead and Cmd_MessageSetStatusArchived)
-	log("Reading Player Message Data ... ");
-	{
-		MapPlayersMessagesPacket p;
-		p.read(*m_fs, egbase, !scenario, *m_mol);
-	}
-	log("took %ums\n ", timer.ms_since_last_query());
+		//  This must come before anything that references messages, such as:
+		//    * command queue (PlayerMessageCommand, inherited by
+		//      Cmd_MessageSetStatusRead and Cmd_MessageSetStatusArchived)
+		log("Reading Player Message Data ... ");
+		{
+			MapPlayersMessagesPacket p;
+			p.read(*m_fs, egbase, !scenario, *m_mol);
+		}
+		log("took %ums\n ", timer.ms_since_last_query());
 
-	//  Objectives
-	log("Reading Objective Data ... ");
-	{MapObjectivePacket      p; p.read(*m_fs, egbase, !scenario, *m_mol);}
-	log("took %ums\n ", timer.ms_since_last_query());
+		//  Objectives
+		log("Reading Objective Data ... ");
+		{MapObjectivePacket      p; p.read(*m_fs, egbase, !scenario, *m_mol);}
+		log("took %ums\n ", timer.ms_since_last_query());
 
-	log("Reading Scripting Data ... ");
-	{MapScriptingPacket      p; p.read(*m_fs, egbase, !scenario, *m_mol);}
-	log("took %ums\n ", timer.ms_since_last_query());
+		log("Reading Scripting Data ... ");
+		{MapScriptingPacket      p; p.read(*m_fs, egbase, !scenario, *m_mol);}
+		log("took %ums\n ", timer.ms_since_last_query());
 
-	if (m_mol->get_nr_unloaded_objects())
-		log
-			("WARNING: There are %i unloaded objects. This is a bug, please "
-			 "consider committing!\n",
-			 m_mol->get_nr_unloaded_objects());
+		if (m_mol->get_nr_unloaded_objects()) {
+			log
+				("WARNING: There are %i unloaded objects. This is a bug, please "
+				 "consider committing!\n",
+				 m_mol->get_nr_unloaded_objects());
+		}
+	} // load_type != MapLoader::LoadType::kEditor
 
 	m_map.recalc_whole_map(egbase.world());
 
