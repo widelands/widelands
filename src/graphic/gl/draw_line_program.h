@@ -58,24 +58,11 @@ private:
 	DrawLineProgram();
 
 	struct PerVertexData {
-		PerVertexData(float init_gl_x,
-		              float init_gl_y,
-		              float init_gl_z,
-		              float init_color_r,
-		              float init_color_g,
-		              float init_color_b)
-		   : gl_x(init_gl_x),
-		     gl_y(init_gl_y),
-		     gl_z(init_gl_z),
-		     color_r(init_color_r),
-		     color_g(init_color_g),
-		     color_b(init_color_b) {
-		}
-
 		float gl_x, gl_y, gl_z;
+		float normal_x, normal_y, normal_z;
 		float color_r, color_g, color_b;
 	};
-	static_assert(sizeof(PerVertexData) == 24, "Wrong padding.");
+	static_assert(sizeof(PerVertexData) == 36, "Wrong padding.");
 
 	// This is only kept around so that we do not constantly
 	// allocate memory for it.
@@ -90,6 +77,7 @@ private:
 	// Attributes.
 	GLint attr_position_;
 	GLint attr_color_;
+	GLint attr_normal_;
 
 	DISALLOW_COPY_AND_ASSIGN(DrawLineProgram);
 };

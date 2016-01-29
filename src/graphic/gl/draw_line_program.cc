@@ -33,11 +33,14 @@ const char kDrawLineVertexShader[] = R"(
 // Attributes.
 attribute vec3 attr_position;
 attribute vec3 attr_color;
+attribute vec3 attr_normal;
 
 varying vec3 var_color;
+varying vec3 var_normal;
 
 void main() {
 	var_color = attr_color;
+	var_normal = attr_normal;
 	gl_Position = vec4(attr_position, 1.);
 }
 )";
@@ -46,9 +49,17 @@ const char kDrawLineFragmentShader[] = R"(
 #version 120
 
 varying vec3 var_color;
+varying vec3 var_normal;
+
+// The percentage of the line that should be solid, i.e. not feathered into
+// alpha = 0.
+#define SOLID 0.8
 
 void main() {
-	gl_FragColor = vec4(var_color.rgb, 1.);
+	float len = length(var_normal);
+	// This means till SOLID we want full alpha, then a linear falloff.
+	float alpha = 1. - step(SOLID, len) * ((len - SOLID) / (1. - SOLID));
+	gl_FragColor = vec4(var_color.rgb, alpha);
 }
 )";
 
@@ -71,6 +82,7 @@ DrawLineProgram::DrawLineProgram() {
 
 	attr_position_ = glGetAttribLocation(gl_program_.object(), "attr_position");
 	attr_color_ = glGetAttribLocation(gl_program_.object(), "attr_color");
+	attr_normal_ = glGetAttribLocation(gl_program_.object(), "attr_normal");
 }
 
 void DrawLineProgram::draw(const FloatPoint& start,
@@ -82,7 +94,7 @@ void DrawLineProgram::draw(const FloatPoint& start,
 	                z_value,
 	                color,
 						 static_cast<uint8_t>(line_width),
-	                BlendMode::Copy}});
+	                BlendMode::UseAlpha}});
 }
 
 void DrawLineProgram::draw(std::vector<Arguments> arguments) {
@@ -92,13 +104,16 @@ void DrawLineProgram::draw(std::vector<Arguments> arguments) {
 
 	auto& gl_state = Gl::State::instance();
 	gl_state.enable_vertex_attrib_array({
-	   attr_position_, attr_color_,
+	   attr_position_, attr_color_, attr_normal_
 	});
 
 	gl_array_buffer_.bind();
 
 	Gl::vertex_attrib_pointer(attr_position_, 3, sizeof(PerVertexData), offsetof(PerVertexData, gl_x));
-	Gl::vertex_attrib_pointer(attr_color_, 3, sizeof(PerVertexData), offsetof(PerVertexData, color_r));
+	Gl::vertex_attrib_pointer(
+	   attr_normal_, 3, sizeof(PerVertexData), offsetof(PerVertexData, normal_x));
+	Gl::vertex_attrib_pointer(
+	   attr_color_, 3, sizeof(PerVertexData), offsetof(PerVertexData, color_r));
 
 	vertices_.clear();
 
@@ -113,21 +128,68 @@ void DrawLineProgram::draw(std::vector<Arguments> arguments) {
 				break;
 			}
 			// We do not support anything else for drawing lines, really.
-			assert(current_args.blend_mode == BlendMode::Copy);
+			assert(current_args.blend_mode == BlendMode::UseAlpha);
 
-			vertices_.emplace_back(current_args.destination_rect.x,
-			                       current_args.destination_rect.y,
-			                       current_args.z_value,
-			                       current_args.color.r / 255.,
-			                       current_args.color.g / 255.,
-			                       current_args.color.b / 255.);
+			const float normal_length =
+			   std::hypot(current_args.destination_rect.h, current_args.destination_rect.w);
+			float normal_x = -current_args.destination_rect.h / normal_length;
+			float normal_y = current_args.destination_rect.w / normal_length;
 
-			vertices_.emplace_back(current_args.destination_rect.x + current_args.destination_rect.w,
-			                       current_args.destination_rect.y + current_args.destination_rect.h,
-			                       current_args.z_value,
-			                       current_args.color.r / 255.,
-			                       current_args.color.g / 255.,
-			                       current_args.color.b / 255.);
+			float line_thickness = 5e-2;
+
+			float r = current_args.color.r / 255.;
+			float g = current_args.color.g / 255.;
+			float b = current_args.color.b / 255.;
+			vertices_.emplace_back(
+			   PerVertexData{current_args.destination_rect.x + line_thickness * normal_x,
+			                 current_args.destination_rect.y + line_thickness * normal_y,
+			                 current_args.z_value,
+			                 normal_x,
+			                 normal_y,
+			                 0.f,
+			                 r,
+			                 g,
+			                 b});
+
+			vertices_.emplace_back(
+			   PerVertexData{current_args.destination_rect.x + current_args.destination_rect.w +
+			                    line_thickness * normal_x,
+			                 current_args.destination_rect.y + current_args.destination_rect.h +
+			                    line_thickness * normal_y,
+			                 current_args.z_value,
+			                 normal_x,
+			                 normal_y,
+			                 0.f,
+			                 r,
+			                 g,
+			                 b});
+
+			vertices_.emplace_back(
+			   PerVertexData{current_args.destination_rect.x - line_thickness * normal_x,
+			                 current_args.destination_rect.y - line_thickness * normal_y,
+			                 current_args.z_value,
+			                 -normal_x,
+			                 -normal_y,
+			                 0.f,
+			                 r,
+			                 g,
+			                 b});
+
+			vertices_.emplace_back(vertices_[vertices_.size()-2]);
+			vertices_.emplace_back(vertices_[vertices_.size()-2]);
+
+			vertices_.emplace_back(
+			   PerVertexData{current_args.destination_rect.x + current_args.destination_rect.w -
+			                    line_thickness * normal_x,
+			                 current_args.destination_rect.y + current_args.destination_rect.h -
+			                    line_thickness * normal_y,
+			                 current_args.z_value,
+			                 -normal_x,
+			                 -normal_y,
+			                 0.f,
+			                 r,
+			                 g,
+			                 b});
 			++i;
 		}
 
@@ -140,7 +202,8 @@ void DrawLineProgram::draw(std::vector<Arguments> arguments) {
 
 	// Now do the draw calls.
 	for (const auto& draw_arg : draw_batches) {
-		glLineWidth(draw_arg.line_width);
-		glDrawArrays(GL_LINES, draw_arg.offset, draw_arg.count);
+		// NOCOM(#sirver): what
+		// glLineWidth(draw_arg.line_width);
+		glDrawArrays(GL_TRIANGLES, draw_arg.offset, draw_arg.count);
 	}
 }
