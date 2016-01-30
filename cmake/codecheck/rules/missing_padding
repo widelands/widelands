@@ -2,6 +2,8 @@
 # encoding: utf-8
 #
 
+# NOCOM: This can't handle char*& p in helper.h/cc
+
 """
 Checking for forbidden padding.
 TypeName* and TypeName& are okay, as are TypeName * and TypeName &.
