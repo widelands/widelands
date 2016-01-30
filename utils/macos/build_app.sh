@@ -88,21 +88,7 @@ function MakeAppPackage {
 EOF
 
    echo "Copying data files ..."
-   rsync -Ca $SOURCE_DIR/ $DESTINATION/Widelands.app/Contents/MacOS/ \
-      --exclude "build" \
-      --exclude "cmake" \
-      --exclude "doc" \
-      --exclude "locale" \
-      --exclude "manual_test" \
-      --exclude "po" \
-      --exclude "src" \
-      --exclude "test" \
-      --exclude "utils" \
-      --exclude "*.cmake" \
-      --exclude "*.py" \
-      --exclude "*.sh" \
-      --exclude ".*" \
-      --exclude "CMakeLists*"
+   rsync -Ca $SOURCE_DIR/data $DESTINATION/Widelands.app/Contents/MacOS/
 
    echo "Copying locales ..."
    rsync -Ca locale $DESTINATION/Widelands.app/Contents/MacOS/
