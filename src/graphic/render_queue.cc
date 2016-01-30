@@ -160,6 +160,7 @@ void RenderQueue::enqueue(const Item& given_item) {
 		   extra_value = given_item.blit_arguments.texture.texture_id;
 			break;
 
+		case Program::kLine:
 		case Program::kRect:
 		case Program::kTerrainBase:
 		case Program::kTerrainDither:
