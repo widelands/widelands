@@ -96,7 +96,9 @@ void Surface::draw_line_strip(const LineStripMode& line_strip_mode,
                      std::vector<Point> points,
                      const RGBColor& color,
                      float line_width) {
-	assert(points.size() > 1);
+	if (points.size() < 2) {
+		return;
+	}
 
 	// Figure out the tesselation for the line. The normal for a point is the
 	// average of the up to two lines it is part of.
