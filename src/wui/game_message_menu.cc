@@ -339,9 +339,6 @@ void GameMessageMenu::think()
 	if (list->size()) {
 		if (!list->has_selection())
 			list->select(0);
-			// TODO(unknown): Workaround for bug #691928: There should
-			// be a solution without this extra update().
-			list->update();
 	} else {
 		centerviewbtn_->set_enabled(false);
 		message_body.set_text(std::string());

@@ -152,7 +152,6 @@ void EditorToolMenu::changed_to() {
 		parent.mutable_field_overlay_manager()->register_overlay_callback_function(
 		   boost::bind(&editor_Tool_set_port_space_callback, _1, boost::ref(map)));
 		map.recalc_whole_map(parent.egbase().world());
-		update();
 	}
 
 	if (current_registry_pointer) {

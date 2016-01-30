@@ -448,7 +448,6 @@ bool Table<void *>::handle_mousepress
 					if (column.is_checkbox_column) {
 						play_click();
 						m_entry_records.at(row)->toggle(col);
-						update(0, 0, get_eff_w(), get_h());
 					}
 					break;
 				}
@@ -524,7 +523,6 @@ void Table<void *>::select(const uint32_t i)
 	m_selection = i;
 
 	selected(m_selection);
-	update(0, 0, get_eff_w(), get_h());
 }
 
 /**
@@ -551,8 +549,6 @@ Table<void *>::EntryRecord & Table<void *>::add
 		select(m_entry_records.size() - 1);
 		m_scrollbar->set_scrollpos(std::numeric_limits<int32_t>::max());
 	}
-
-	update(0, 0, get_eff_w(), get_h());
 	return result;
 }
 
@@ -562,8 +558,6 @@ Table<void *>::EntryRecord & Table<void *>::add
 void Table<void *>::set_scrollpos(int32_t const i)
 {
 	m_scrollpos = i;
-
-	update(0, 0, get_eff_w(), get_h());
 }
 
 /**
@@ -631,8 +625,6 @@ void Table<void *>::sort(const uint32_t Begin, uint32_t End)
 			newselection = i;
 	}
 	m_selection = newselection;
-
-	update();
 }
 
 /**

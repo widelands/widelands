@@ -110,7 +110,6 @@ Window::Window
 void Window::set_title(const string & text)
 {
 	m_title = is_richtext(text) ? text : as_window_title(text);
-	update(0, 0, get_w(), TP_B_PIXMAP_THICKNESS);
 }
 
 /**

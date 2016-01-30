@@ -137,8 +137,6 @@ void EditBox::set_text(const std::string & t)
 		m->text.erase(m->text.begin() + m->maxLength, m->text.end());
 	if (caretatend || m->caret > m->text.size())
 		m->caret = m->text.size();
-
-	update();
 }
 
 
@@ -167,7 +165,6 @@ void EditBox::set_max_length(uint32_t const n)
 			m->caret = m->text.size();
 
 		check_caret();
-		update();
 	}
 }
 
@@ -194,7 +191,6 @@ void EditBox::set_align(Align _align)
 		m->align = _align;
 		m->scrolloffset = 0;
 		check_caret();
-		update();
 	}
 }
 
@@ -206,7 +202,6 @@ bool EditBox::handle_mousepress(const uint8_t btn, int32_t, int32_t)
 {
 	if (btn == SDL_BUTTON_LEFT && get_can_focus()) {
 		focus();
-		update();
 		return true;
 	}
 
@@ -268,7 +263,6 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code)
 				m->text.erase(m->text.begin() + m->caret);
 				check_caret();
 				changed();
-				update();
 			}
 			return true;
 
@@ -286,8 +280,6 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code)
 							break;
 
 				check_caret();
-
-				update();
 			}
 			return true;
 
@@ -311,7 +303,6 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code)
 						}
 
 				check_caret();
-				update();
 			}
 			return true;
 
@@ -325,7 +316,6 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code)
 				m->caret = 0;
 
 				check_caret();
-				update();
 			}
 			return true;
 
@@ -338,7 +328,6 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code)
 			if (m->caret != m->text.size()) {
 				m->caret = m->text.size();
 				check_caret();
-				update();
 			}
 			return true;
 
@@ -356,7 +345,6 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code)
 					m->text = m_history[m_history_position];
 					m->caret = m->text.size();
 					check_caret();
-					update();
 				}
 			}
 			return true;
@@ -375,7 +363,6 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code)
 					m->text = m_history[m_history_position];
 					m->caret = m->text.size();
 					check_caret();
-					update();
 				}
 			}
 			return true;
@@ -394,7 +381,6 @@ bool EditBox::handle_textinput(const std::string& input_text) {
 		m->caret += input_text.length();
 		check_caret();
 		changed();
-		update();
 	}
 	return true;
 }

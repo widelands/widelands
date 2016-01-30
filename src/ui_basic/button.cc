@@ -107,8 +107,6 @@ void Button::set_pic(const Image* pic)
 		return;
 
 	m_pic_custom = pic;
-
-	update();
 }
 
 
@@ -121,8 +119,6 @@ void Button::set_title(const std::string & title) {
 
 	m_pic_custom = nullptr;
 	m_title      = title;
-
-	update();
 }
 
 
@@ -147,7 +143,6 @@ void Button::set_enabled(bool const on)
 		m_enabled = false;
 		m_highlighted = false;
 	}
-	update();
 }
 
 
@@ -319,8 +314,6 @@ void Button::handle_mousein(bool const inside)
 		sigmousein();
 	else
 		sigmouseout();
-
-	update();
 }
 
 
@@ -340,10 +333,9 @@ bool Button::handle_mousepress(uint8_t const btn, int32_t, int32_t) {
 			set_thinks(true);
 		}
 	}
-	update();
-
 	return true;
 }
+
 bool Button::handle_mouserelease(uint8_t const btn, int32_t, int32_t) {
 	if (btn != SDL_BUTTON_LEFT)
 		return false;
@@ -352,7 +344,6 @@ bool Button::handle_mouserelease(uint8_t const btn, int32_t, int32_t) {
 		m_pressed = false;
 		set_thinks(false);
 		grab_mouse(false);
-		update();
 		if (m_highlighted && m_enabled) {
 			play_click();
 			sigclicked();
@@ -372,7 +363,6 @@ bool Button::handle_mousemove(const uint8_t, int32_t, int32_t, int32_t, int32_t)
 void Button::set_perm_pressed(bool state) {
 	if (state != m_permpressed) {
 		m_permpressed = state;
-		update();
 	}
 }
 
