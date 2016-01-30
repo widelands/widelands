@@ -117,6 +117,8 @@ void ProgressWindow::update(bool const repaint) {
 	for (IProgressVisualization * visualization : m_visualizations) {
 		visualization->update(repaint); //  let visualizations do their work
 	}
+	g_gr->refresh();
+
 }
 
 /**
