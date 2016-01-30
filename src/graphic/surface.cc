@@ -57,10 +57,10 @@ FloatPoint calculate_line_normal(const PointType& start, const PointType& end) {
 // this algorithm is here
 // https://forum.libcinder.org/topic/smooth-thick-lines-using-geometry-shader#23286000001269127
 FloatPoint calculate_pseudo_normal(const Point& p0, const Point& p1, const Point& p2) {
-	FloatPoint tangent = normalize(normalize(p2 - p1) + normalize(p1 - p0));
-	FloatPoint miter(-tangent.y, tangent.x);
-	float len = 1. / dot(miter, calculate_line_normal(p0, p1));
-	return FloatPoint(miter.x * len, miter.y * len);
+	FloatPoint n1 = calculate_line_normal(p0, p1);
+	FloatPoint pseudo_normal = n1 + calculate_line_normal(p1, p2);
+	float scale = 1. / dot(pseudo_normal, n1);
+	return FloatPoint(pseudo_normal.x * scale, pseudo_normal.y * scale);
 }
 
 }  // namespace
