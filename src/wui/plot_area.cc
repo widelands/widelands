@@ -230,10 +230,10 @@ void draw_diagram
 	                                           Point(inner_w - space_at_right - 3, spacing)},
 	                    kAxisLineColor, kAxisLinesWidth);
 	dst.draw_line_strip(
-		LineStripMode::kOpen, {
-		Point(inner_w - space_at_right, spacing + ((inner_h - space_at_bottom) - spacing) / 2),
-			Point(inner_w - space_at_right - 3, spacing + ((inner_h - space_at_bottom) - spacing) / 2),
-		}, kAxisLineColor, kAxisLinesWidth);
+		LineStripMode::kOpen,
+		{Point(inner_w - space_at_right, spacing + ((inner_h - space_at_bottom) - spacing) / 2),
+		 Point(inner_w - space_at_right - 3, spacing + ((inner_h - space_at_bottom) - spacing) / 2)},
+		kAxisLineColor, kAxisLinesWidth);
 
 	//  print the used unit
 	const Image* xtick = UI::g_fh1->render(xtick_text_style((boost::format(get_unit_name(unit)) % "").str()));
