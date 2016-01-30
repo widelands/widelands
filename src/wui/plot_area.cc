@@ -185,34 +185,34 @@ void draw_diagram
 
 	// Draw coordinate system
 	// X Axis
-	dst.draw_line_strip(LineStripMode::kOpen,
-	                    {Point(spacing, inner_h - space_at_bottom),
-	                     Point(inner_w - space_at_right, inner_h - space_at_bottom)},
-	                    kAxisLineColor, kAxisLinesWidth);
+	dst.draw_line_strip(LineStripMode::kOpen, {
+		Point(spacing, inner_h - space_at_bottom),
+		Point(inner_w - space_at_right, inner_h - space_at_bottom)},
+		kAxisLineColor, kAxisLinesWidth);
 	// Arrow
 	dst.draw_line_strip(LineStripMode::kOpen,
-	                    {
-	                     Point(spacing + 5, inner_h - space_at_bottom - 3),
-	                     Point(spacing, inner_h - space_at_bottom),
-	                     Point(spacing + 5, inner_h - space_at_bottom + 3),
-	                    },
-	                    kAxisLineColor, kAxisLinesWidth);
+		{
+		Point(spacing + 5, inner_h - space_at_bottom - 3),
+		Point(spacing, inner_h - space_at_bottom),
+		Point(spacing + 5, inner_h - space_at_bottom + 3),
+		},
+		kAxisLineColor, kAxisLinesWidth);
 
 	//  Y Axis
-	dst.draw_line_strip(LineStripMode::kOpen,
-	                    {Point(inner_w - space_at_right, spacing),
-	                     Point(inner_w - space_at_right, inner_h - space_at_bottom)},
-	                    kAxisLineColor, kAxisLinesWidth);
+	dst.draw_line_strip(LineStripMode::kOpen, {
+		Point(inner_w - space_at_right, spacing),
+		Point(inner_w - space_at_right, inner_h - space_at_bottom)},
+		kAxisLineColor, kAxisLinesWidth);
 	//  No Arrow here, since this doesn't continue.
 
 	float sub = (xline_length - space_left_of_label) / how_many_ticks;
 	float posx = inner_w - space_at_right;
 
 	for (uint32_t i = 0; i <= how_many_ticks; ++i) {
-		dst.draw_line_strip(LineStripMode::kOpen,
-		                    {Point(static_cast<int32_t>(posx), inner_h - space_at_bottom),
-		                     Point(static_cast<int32_t>(posx), inner_h - space_at_bottom + 3)},
-		                    kAxisLineColor, kAxisLinesWidth);
+		dst.draw_line_strip(LineStripMode::kOpen, {
+			Point(static_cast<int32_t>(posx), inner_h - space_at_bottom),
+			Point(static_cast<int32_t>(posx), inner_h - space_at_bottom + 3)},
+			kAxisLineColor, kAxisLinesWidth);
 
 		// The space at the end is intentional to have the tick centered
 		// over the number, not to the left
@@ -230,12 +230,10 @@ void draw_diagram
 	                                           Point(inner_w - space_at_right - 3, spacing)},
 	                    kAxisLineColor, kAxisLinesWidth);
 	dst.draw_line_strip(
-	   LineStripMode::kOpen,
-	   {
-	    Point(inner_w - space_at_right, spacing + ((inner_h - space_at_bottom) - spacing) / 2),
-	    Point(inner_w - space_at_right - 3, spacing + ((inner_h - space_at_bottom) - spacing) / 2),
-	   },
-	   kAxisLineColor, kAxisLinesWidth);
+		LineStripMode::kOpen, {
+		Point(inner_w - space_at_right, spacing + ((inner_h - space_at_bottom) - spacing) / 2),
+			Point(inner_w - space_at_right - 3, spacing + ((inner_h - space_at_bottom) - spacing) / 2),
+		}, kAxisLineColor, kAxisLinesWidth);
 
 	//  print the used unit
 	const Image* xtick = UI::g_fh1->render(xtick_text_style((boost::format(get_unit_name(unit)) % "").str()));
@@ -509,10 +507,10 @@ void DifferentialPlotArea::draw(RenderTarget & dst) {
 	draw_diagram(time_ms, get_inner_w(), get_inner_h(), xline_length, dst);
 
 	// draw zero line
-	dst.draw_line_strip(LineStripMode::kOpen,
-	                    {Point(get_inner_w() - space_at_right, yoffset),
-	                     Point(get_inner_w() - space_at_right - xline_length, yoffset)},
-	                    kZeroLineColor, kPlotLinesWidth);
+	dst.draw_line_strip(LineStripMode::kOpen, {
+		Point(get_inner_w() - space_at_right, yoffset),
+		Point(get_inner_w() - space_at_right - xline_length, yoffset)},
+		kZeroLineColor, kPlotLinesWidth);
 
 	// How many do we take together when relative ploting
 	const int32_t how_many = calc_how_many(time_ms, sample_rate_);

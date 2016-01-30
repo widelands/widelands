@@ -20,6 +20,8 @@
 #ifndef WL_GRAPHIC_LINE_STRIP_MODE_H
 #define WL_GRAPHIC_LINE_STRIP_MODE_H
 
+// A line strip can either be closed, which draws a line between the last and
+// the first line again or open which does not do that.
 enum class LineStripMode {
 	kClose,
 	kOpen,

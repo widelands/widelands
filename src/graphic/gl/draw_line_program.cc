@@ -56,7 +56,8 @@ varying float var_distance_from_center;
 #define SOLID 0.3
 
 void main() {
-	// This means till SOLID we want full alpha, then a linear falloff.
+	// This means till SOLID we want full alpha, then a (1 - t**2) with t [0, 1]
+	// falloff.
 	float d = abs(var_distance_from_center);
 	float opaqueness =
 		step(SOLID, d) * ((d - SOLID) / (1. - SOLID));

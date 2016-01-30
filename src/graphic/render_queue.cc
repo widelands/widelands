@@ -160,10 +160,6 @@ void RenderQueue::enqueue(const Item& given_item) {
 		   extra_value = given_item.blit_arguments.texture.texture_id;
 			break;
 
-		case Program::kLine:
-		   extra_value = given_item.line_arguments.line_width;
-			break;
-
 		case Program::kRect:
 		case Program::kTerrainBase:
 		case Program::kTerrainDither:
@@ -176,12 +172,12 @@ void RenderQueue::enqueue(const Item& given_item) {
 	}
 
 	if (given_item.blend_mode == BlendMode::Copy) {
-		opaque_items_.push_back(std::move(given_item));
+		opaque_items_.emplace_back(given_item);
 		item = &opaque_items_.back();
 		item->z_value = to_opengl_z(next_z_);
 		item->key = make_key_opaque(static_cast<uint64_t>(item->program_id), next_z_, extra_value);
 	} else {
-		blended_items_.push_back(std::move(given_item));
+		blended_items_.emplace_back(given_item);
 		item = &blended_items_.back();
 		item->z_value = to_opengl_z(next_z_);
 		item->key = make_key_blended(static_cast<uint64_t>(item->program_id), next_z_, extra_value);

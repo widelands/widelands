@@ -310,8 +310,8 @@ void Texture::do_draw_line_strip(const std::vector<FloatPoint>& gl_points,
 		return;
 	}
 	setup_gl();
-	DrawLineProgram::instance().draw(
-	   {DrawLineProgram::Arguments{gl_points, color, 0.f, BlendMode::UseAlpha}});
+	DrawLineProgram::instance().draw({
+		DrawLineProgram::Arguments{gl_points, color, 0.f, BlendMode::UseAlpha}});
 }
 
 void

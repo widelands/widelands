@@ -67,7 +67,7 @@ public:
 
 	// Draw a 'width' pixel wide line to the destination. If 'line_strip_mode' is
 	// kClosed, the last point will be connected to the first one again.
-	// Points are taken by value on purpose.
+	// 'points' are taken by value on purpose.
 	void draw_line_strip(const LineStripMode& line_strip_mode,
 	                     std::vector<Point> points,
 	                     const RGBColor& color,

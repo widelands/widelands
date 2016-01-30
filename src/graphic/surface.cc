@@ -59,21 +59,19 @@ FloatPoint calculate_line_normal(const PointType& start, const PointType& end) {
 FloatPoint calculate_pseudo_normal(const Point& p0, const Point& p1, const Point& p2) {
 	FloatPoint tangent = normalize(normalize(p2 - p1) + normalize(p1 - p0));
 	FloatPoint miter(-tangent.y, tangent.x);
-	float len = 1./ dot(miter, calculate_line_normal(p0, p1));
+	float len = 1. / dot(miter, calculate_line_normal(p0, p1));
 	return FloatPoint(miter.x * len, miter.y * len);
 }
 
 }  // namespace
 
 void draw_rect(const Rect& rc, const RGBColor& clr, Surface* surface) {
-	surface->draw_line_strip(LineStripMode::kClose,
-	                         {
-	                          Point(rc.x, rc.y),
-	                          Point(rc.x + rc.w, rc.y),
-	                          Point(rc.x + rc.w, rc.y + rc.h),
-	                          Point(rc.x, rc.y + rc.h),
-	                         },
-	                         clr, 1);
+	surface->draw_line_strip(LineStripMode::kClose, {
+		Point(rc.x, rc.y),
+		Point(rc.x + rc.w, rc.y),
+		Point(rc.x + rc.w, rc.y + rc.h),
+		Point(rc.x, rc.y + rc.h),
+		}, clr, 1);
 }
 
 void Surface::fill_rect(const Rect& rc, const RGBAColor& clr) {
@@ -94,11 +92,6 @@ void Surface::brighten_rect(const Rect& rc, const int32_t factor)
 	do_fill_rect(rect, color, blend_mode);
 }
 
-FloatPoint normalized(const FloatPoint& p) {
-	const float len = std::hypot(p.x, p.y);
-	return FloatPoint(p.x / len, p.y / len);
-}
-
 void Surface::draw_line_strip(const LineStripMode& line_strip_mode,
                      std::vector<Point> points,
                      const RGBColor& color,
@@ -111,23 +104,23 @@ void Surface::draw_line_strip(const LineStripMode& line_strip_mode,
 	for (size_t i = 0; i < points.size(); ++i) {
 		if (i == 0) {
 			switch (line_strip_mode) {
-				case LineStripMode::kOpen:
-				   normals.push_back(calculate_line_normal(points.front(), points[1]));
+			case LineStripMode::kOpen:
+				normals.push_back(calculate_line_normal(points.front(), points[1]));
 				break;
 
-			   case LineStripMode::kClose:
-				   normals.push_back(calculate_pseudo_normal(points.back(), points.front(), points[1]));
+			case LineStripMode::kClose:
+				normals.push_back(calculate_pseudo_normal(points.back(), points.front(), points[1]));
 				break;
 			}
 		} else if (i == points.size() - 1) {
 			switch (line_strip_mode) {
-				case LineStripMode::kOpen:
-				   normals.push_back(calculate_line_normal(points[points.size() - 2], points.back()));
+			case LineStripMode::kOpen:
+				normals.push_back(calculate_line_normal(points[points.size() - 2], points.back()));
 				break;
 
-				case LineStripMode::kClose:
-				   normals.push_back(calculate_pseudo_normal(
-				      points[points.size() - 2], points.back(), points.front()));
+			case LineStripMode::kClose:
+				normals.push_back(
+				   calculate_pseudo_normal(points[points.size() - 2], points.back(), points.front()));
 				break;
 			}
 		} else {

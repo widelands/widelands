@@ -109,7 +109,6 @@ public:
 	struct LineArguments {
 		std::vector<FloatPoint> points;
 		RGBColor color;
-		float line_width;
 	};
 
 	struct TerrainArguments {
