@@ -48,7 +48,6 @@ const int32_t space_at_right = 10;
 const int32_t space_left_of_label = 15;
 const uint32_t nr_samples = 30;   // How many samples per diagramm when relative plotting
 
-
 const uint32_t time_in_ms[] = {
 	15 * minutes,
 	30 * minutes,
@@ -60,8 +59,10 @@ const uint32_t time_in_ms[] = {
 };
 
 const char BG_PIC[] = "pics/plot_area_bg.png";
-const RGBColor LINE_COLOR(0, 0, 0);
-const RGBColor ZERO_LINE_COLOR(255, 255, 255);
+const RGBColor kAxisLineColor(0, 0, 0);
+constexpr float kAxisLinesWidth = 1.5f;
+constexpr float kPlotLinesWidth = 2.5f;
+const RGBColor kZeroLineColor(255, 255, 255);
 
 enum UNIT {
 	UNIT_MIN,
@@ -184,34 +185,34 @@ void draw_diagram
 
 	// Draw coordinate system
 	// X Axis
-	dst.draw_line(Point(spacing, inner_h - space_at_bottom),
-	              Point(inner_w - space_at_right, inner_h - space_at_bottom),
-	              LINE_COLOR,
-	              2);
+	dst.draw_line_strip(LineStripMode::kOpen,
+	                    {Point(spacing, inner_h - space_at_bottom),
+	                     Point(inner_w - space_at_right, inner_h - space_at_bottom)},
+	                    kAxisLineColor, kAxisLinesWidth);
 	// Arrow
-	dst.draw_line(Point(spacing, inner_h - space_at_bottom),
-	              Point(spacing + 5, inner_h - space_at_bottom - 3),
-	              LINE_COLOR,
-	              2);
-	dst.draw_line(Point(spacing, inner_h - space_at_bottom),
-	              Point(spacing + 5, inner_h - space_at_bottom + 3),
-	              LINE_COLOR,
-	              2);
+	dst.draw_line_strip(LineStripMode::kOpen,
+	                    {
+	                     Point(spacing + 5, inner_h - space_at_bottom - 3),
+	                     Point(spacing, inner_h - space_at_bottom),
+	                     Point(spacing + 5, inner_h - space_at_bottom + 3),
+	                    },
+	                    kAxisLineColor, kAxisLinesWidth);
+
 	//  Y Axis
-	dst.draw_line(Point(inner_w - space_at_right, spacing),
-	              Point(inner_w - space_at_right, inner_h - space_at_bottom),
-	              LINE_COLOR,
-	              2);
+	dst.draw_line_strip(LineStripMode::kOpen,
+	                    {Point(inner_w - space_at_right, spacing),
+	                     Point(inner_w - space_at_right, inner_h - space_at_bottom)},
+	                    kAxisLineColor, kAxisLinesWidth);
 	//  No Arrow here, since this doesn't continue.
 
 	float sub = (xline_length - space_left_of_label) / how_many_ticks;
 	float posx = inner_w - space_at_right;
 
 	for (uint32_t i = 0; i <= how_many_ticks; ++i) {
-		dst.draw_line(Point(static_cast<int32_t>(posx), inner_h - space_at_bottom),
-		              Point(static_cast<int32_t>(posx), inner_h - space_at_bottom + 3),
-		              LINE_COLOR,
-		              2);
+		dst.draw_line_strip(LineStripMode::kOpen,
+		                    {Point(static_cast<int32_t>(posx), inner_h - space_at_bottom),
+		                     Point(static_cast<int32_t>(posx), inner_h - space_at_bottom + 3)},
+		                    kAxisLineColor, kAxisLinesWidth);
 
 		// The space at the end is intentional to have the tick centered
 		// over the number, not to the left
@@ -225,15 +226,16 @@ void draw_diagram
 	}
 
 	//  draw yticks, one at full, one at half
-	dst.draw_line(Point(inner_w - space_at_right, spacing),
-	              Point(inner_w - space_at_right - 3, spacing),
-	              LINE_COLOR,
-	              2);
-	dst.draw_line(
-	   Point(inner_w - space_at_right, spacing + ((inner_h - space_at_bottom) - spacing) / 2),
-	   Point(inner_w - space_at_right - 3, spacing + ((inner_h - space_at_bottom) - spacing) / 2),
-	   LINE_COLOR,
-	   2);
+	dst.draw_line_strip(LineStripMode::kOpen, {Point(inner_w - space_at_right, spacing),
+	                                           Point(inner_w - space_at_right - 3, spacing)},
+	                    kAxisLineColor, kAxisLinesWidth);
+	dst.draw_line_strip(
+	   LineStripMode::kOpen,
+	   {
+	    Point(inner_w - space_at_right, spacing + ((inner_h - space_at_bottom) - spacing) / 2),
+	    Point(inner_w - space_at_right - 3, spacing + ((inner_h - space_at_bottom) - spacing) / 2),
+	   },
+	   kAxisLineColor, kAxisLinesWidth);
 
 	//  print the used unit
 	const Image* xtick = UI::g_fh1->render(xtick_text_style((boost::format(get_unit_name(unit)) % "").str()));
@@ -410,16 +412,17 @@ void WuiPlotArea::draw_plot_line
 		(RenderTarget & dst, std::vector<uint32_t> const * dataset, float const yline_length,
 		 uint32_t const highest_scale, float const sub, RGBColor const color, int32_t const yoffset)
 {
-
 	float posx = get_inner_w() - space_at_right;
-
-	int32_t lx = get_inner_w() - space_at_right;
-	int32_t ly = yoffset;
-	//init start point of the plot line with the first data value.
-	//this prevent that the plot start always at zero
-	if (int32_t value = (*dataset)[dataset->size() - 1]) {
+	const int lx = get_inner_w() - space_at_right;
+	int ly = yoffset;
+	// init start point of the plot line with the first data value.
+	// this prevent that the plot start always at zero
+	if (int value = (*dataset)[dataset->size() - 1]) {
 		ly -= static_cast<int32_t>(scale_value(yline_length, highest_scale, value));
 	}
+
+	std::vector<Point> points;
+	points.emplace_back(lx, ly);
 
 	for (int32_t i = dataset->size() - 1; i > 0 && posx > spacing; --i) {
 		int32_t const curx = static_cast<int32_t>(posx);
@@ -428,17 +431,12 @@ void WuiPlotArea::draw_plot_line
 		//scale the line to the available space
 		if (int32_t value = (*dataset)[i]) {
 			const float length_y = scale_value(yline_length, highest_scale, value);
-
 			cury -= static_cast<int32_t>(length_y);
 		}
-
-		dst.draw_line(Point(lx, ly), Point(curx, cury), color, 2);
-
+		points.emplace_back(curx, cury);
 		posx -= sub;
-
-		lx = curx;
-		ly = cury;
 	}
+	dst.draw_line_strip(LineStripMode::kOpen, points, color, kPlotLinesWidth);
 }
 
 /*
@@ -511,10 +509,10 @@ void DifferentialPlotArea::draw(RenderTarget & dst) {
 	draw_diagram(time_ms, get_inner_w(), get_inner_h(), xline_length, dst);
 
 	// draw zero line
-	dst.draw_line(Point(get_inner_w() - space_at_right, yoffset),
-	              Point(get_inner_w() - space_at_right - xline_length, yoffset),
-	              ZERO_LINE_COLOR,
-	              2);
+	dst.draw_line_strip(LineStripMode::kOpen,
+	                    {Point(get_inner_w() - space_at_right, yoffset),
+	                     Point(get_inner_w() - space_at_right - xline_length, yoffset)},
+	                    kZeroLineColor, kPlotLinesWidth);
 
 	// How many do we take together when relative ploting
 	const int32_t how_many = calc_how_many(time_ms, sample_rate_);

@@ -31,38 +31,29 @@
 class DrawLineProgram {
 public:
 	struct Arguments {
-		// The line is drawn from the top left to the bottom right of
-		// this rectangle.
-		FloatRect destination_rect;
+		// Vertices of the quads that make up the lines plus. That means
+		// points.size() == <number of lines> * 4.
+		std::vector<FloatPoint> points;
+		RGBColor color;
 		float z_value;
-		RGBAColor color;
-		uint8_t line_width;
-		BlendMode blend_mode;
+		BlendMode blend_mode;  // Always BlendMode::kUseAlpha.
 	};
 
 	// Returns the (singleton) instance of this class.
 	static DrawLineProgram& instance();
 
-	// Draws a line from (x1, y1) to (x2, y2) which are in gl
-	// coordinates in 'color' with a 'line_width' in pixels.
-	void draw(const FloatPoint& start,
-	          const FloatPoint& end,
-	          const float z_value,
-	          const RGBColor& color,
-	          const int line_width);
-
-	void draw(std::vector<Arguments> arguments);
-
+	void draw(const std::vector<Arguments>& arguments);
 
 private:
-	DrawLineProgram();
-
 	struct PerVertexData {
 		float gl_x, gl_y, gl_z;
-		float normal_x, normal_y, normal_z;
 		float color_r, color_g, color_b;
+		// This value is changing from -1 to 1 and is used for alpha blending.
+		float distance_from_center;
 	};
-	static_assert(sizeof(PerVertexData) == 36, "Wrong padding.");
+	static_assert(sizeof(PerVertexData) == 28, "Wrong padding.");
+
+	DrawLineProgram();
 
 	// This is only kept around so that we do not constantly
 	// allocate memory for it.
@@ -77,7 +68,7 @@ private:
 	// Attributes.
 	GLint attr_position_;
 	GLint attr_color_;
-	GLint attr_normal_;
+	GLint attr_distance_from_center_;
 
 	DISALLOW_COPY_AND_ASSIGN(DrawLineProgram);
 };

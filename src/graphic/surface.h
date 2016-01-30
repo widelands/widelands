@@ -21,12 +21,14 @@
 #define WL_GRAPHIC_SURFACE_H
 
 #include <memory>
+#include <vector>
 
 #include "base/macros.h"
 #include "base/rect.h"
 #include "graphic/blend_mode.h"
 #include "graphic/color.h"
 #include "graphic/image.h"
+#include "graphic/line_strip_mode.h"
 
 class Texture;
 
@@ -63,8 +65,13 @@ public:
 	// in the target are just replaced (i.e. / BlendMode would be BlendMode::Copy).
 	void fill_rect(const Rect&, const RGBAColor&);
 
-	/// draw a line to the destination
-	void draw_line(const Point& start, const Point& end, const RGBColor& color, int width);
+	// Draw a 'width' pixel wide line to the destination. If 'line_strip_mode' is
+	// kClosed, the last point will be connected to the first one again.
+	// Points are taken by value on purpose.
+	void draw_line_strip(const LineStripMode& line_strip_mode,
+	                     std::vector<Point> points,
+	                     const RGBColor& color,
+	                     float width);
 
 	/// makes a rectangle on the destination brighter (or darker).
 	void brighten_rect(const Rect&, int factor);
@@ -85,8 +92,8 @@ private:
 	                                const BlitData& texture,
 	                                const RGBAColor& blend) = 0;
 
-	virtual void
-	do_draw_line(const FloatPoint& start, const FloatPoint& end, const RGBColor& color, int width) = 0;
+	virtual void do_draw_line_strip(const std::vector<FloatPoint>& gl_points,
+	                                const RGBColor& color) = 0;
 
 	virtual void
 	do_fill_rect(const FloatRect& dst_rect, const RGBAColor& color, BlendMode blend_mode) = 0;

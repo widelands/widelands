@@ -98,15 +98,18 @@ public:
 		BlitData texture;
 		BlitData mask;
 		RGBAColor blend;
+		FloatRect destination_rect;
 	};
 
 	struct RectArguments {
 		RGBAColor color;
+		FloatRect destination_rect;
 	};
 
 	struct LineArguments {
+		std::vector<FloatPoint> points;
 		RGBColor color;
-		uint8_t line_width;
+		float line_width;
 	};
 
 	struct TerrainArguments {
@@ -117,14 +120,13 @@ public:
 		int renderbuffer_height;
 		const DescriptionMaintainer<Widelands::TerrainDescription>* terrains;
 		FieldsToDraw* fields_to_draw;
+		FloatRect destination_rect;
 	};
 
 	// The union of all possible program arguments represents an Item that is
 	// enqueued in the Queue. This is on purpose not done with OOP so that the
 	// queue is more cache friendly.
 	struct Item {
-		Item() {}
-
 		inline bool operator<(const Item& other) const {
 			return key < other.key;
 		}
@@ -136,9 +138,6 @@ public:
 		// The z-value in GL space that will be used for drawing.
 		float z_value;
 
-		// The bounding box in the renderbuffer where this draw will change pixels.
-		FloatRect destination_rect;
-
 		// The key for sorting this item in the queue. It depends on the type of
 		// item how this is calculated, but it will contain at least the program,
 		// the z-layer, if it is opaque or transparent and program specific
@@ -148,12 +147,12 @@ public:
 		// If this is opaque or, if not, which blend_mode to use.
 		BlendMode blend_mode;
 
-		union {
-			BlitArguments blit_arguments;
-			TerrainArguments terrain_arguments;
-			RectArguments rect_arguments;
-			LineArguments line_arguments;
-		};
+		// This is a logical union, i.e. only one of these members will be filled
+		// with useful data. It cannot be because some items are non POD.
+		BlitArguments blit_arguments;
+		TerrainArguments terrain_arguments;
+		RectArguments rect_arguments;
+		LineArguments line_arguments;
 	};
 
 	static RenderQueue& instance();

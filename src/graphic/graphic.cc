@@ -231,9 +231,6 @@ bool Graphic::need_update() const {
 */
 void Graphic::refresh()
 {
-	// NOCOM(#sirver): what
-	screen_->draw_line(Point(50, 100), Point(700, 500), RGBColor(255, 0., 0.), 20);
-
 	RenderQueue::instance().draw(screen_->width(), screen_->height());
 
 	// Setting the window size immediately after going out of fullscreen does

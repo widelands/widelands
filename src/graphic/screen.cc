@@ -65,13 +65,13 @@ void Screen::do_blit(const FloatRect& dst_rect,
                      float opacity,
                      BlendMode blend_mode) {
 	RenderQueue::Item i;
-	i.destination_rect = dst_rect;
 	i.program_id = RenderQueue::Program::kBlit;
 	i.blend_mode = blend_mode;
-	i.blit_arguments.texture = texture;
-	i.blit_arguments.mask.texture_id = 0;
 	i.blit_arguments.blend = RGBAColor(0, 0, 0, 255 * opacity);
+	i.blit_arguments.destination_rect = dst_rect;
+	i.blit_arguments.mask.texture_id = 0;
 	i.blit_arguments.mode = BlitMode::kDirect;
+	i.blit_arguments.texture = texture;
 	RenderQueue::instance().enqueue(i);
 }
 
@@ -80,13 +80,13 @@ void Screen::do_blit_blended(const FloatRect& dst_rect,
                              const BlitData& mask,
                              const RGBColor& blend) {
 	RenderQueue::Item i;
-	i.destination_rect = dst_rect;
 	i.program_id = RenderQueue::Program::kBlit;
 	i.blend_mode = BlendMode::UseAlpha;
-	i.blit_arguments.texture = texture;
-	i.blit_arguments.mask = mask;
 	i.blit_arguments.blend = blend;
+	i.blit_arguments.destination_rect = dst_rect;
+	i.blit_arguments.mask = mask;
 	i.blit_arguments.mode = BlitMode::kBlendedWithMask;
+	i.blit_arguments.texture = texture;
 	RenderQueue::instance().enqueue(i);
 }
 
@@ -94,34 +94,31 @@ void Screen::do_blit_monochrome(const FloatRect& dst_rect,
                                 const BlitData& texture,
                                 const RGBAColor& blend) {
 	RenderQueue::Item i;
-	i.destination_rect = dst_rect;
 	i.program_id = RenderQueue::Program::kBlit;
 	i.blend_mode = BlendMode::UseAlpha;
-	i.blit_arguments.texture = texture;
-	i.blit_arguments.mask.texture_id = 0;
 	i.blit_arguments.blend = blend;
+	i.blit_arguments.destination_rect = dst_rect;
+	i.blit_arguments.mask.texture_id = 0;
 	i.blit_arguments.mode = BlitMode::kMonochrome;
+	i.blit_arguments.texture = texture;
 	RenderQueue::instance().enqueue(i);
 }
 
-void Screen::do_draw_line(const FloatPoint& start,
-                          const FloatPoint& end,
-                          const RGBColor& color,
-								  const int line_width) {
+void Screen::do_draw_line_strip(const std::vector<FloatPoint>& gl_points,
+                                const RGBColor& color) {
 	RenderQueue::Item i;
 	i.program_id = RenderQueue::Program::kLine;
 	i.blend_mode = BlendMode::UseAlpha;
-	i.destination_rect = FloatRect(start.x, start.y, end.x - start.x, end.y - start.y);
+	i.line_arguments.points = gl_points;
 	i.line_arguments.color = color;
-	i.line_arguments.line_width = line_width;
 	RenderQueue::instance().enqueue(i);
 }
 
 void Screen::do_fill_rect(const FloatRect& dst_rect, const RGBAColor& color, BlendMode blend_mode) {
 	RenderQueue::Item i;
-	i.program_id = RenderQueue::Program::kRect;
 	i.blend_mode = blend_mode;
-	i.destination_rect = dst_rect;
+	i.program_id = RenderQueue::Program::kRect;
 	i.rect_arguments.color = color;
+	i.rect_arguments.destination_rect = dst_rect;
 	RenderQueue::instance().enqueue(i);
 }

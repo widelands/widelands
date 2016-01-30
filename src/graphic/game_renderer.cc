@@ -218,7 +218,7 @@ void GameRenderer::draw(RenderTarget& dst,
 	RenderQueue::Item i;
 	i.program_id = RenderQueue::Program::kTerrainBase;
 	i.blend_mode = BlendMode::Copy;
-	i.destination_rect =
+	i.terrain_arguments.destination_rect =
 	   FloatRect(bounding_rect.x,
 	             surface_height - bounding_rect.y - bounding_rect.h,
 	             bounding_rect.w,

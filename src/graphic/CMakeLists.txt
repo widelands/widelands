@@ -127,6 +127,7 @@ wl_library(graphic_draw_programs
   SRCS
     blend_mode.h
     blit_mode.h
+    line_strip_mode.h
     gl/blit_program.cc
     gl/blit_program.h
     gl/draw_line_program.cc

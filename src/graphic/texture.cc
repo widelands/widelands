@@ -304,13 +304,14 @@ void Texture::do_blit_monochrome(const FloatRect& dst_rect,
 	BlitProgram::instance().draw_monochrome(dst_rect, 0.f, texture, blend);
 }
 
-void
-Texture::do_draw_line(const FloatPoint& start, const FloatPoint& end, const RGBColor& color, int line_width) {
+void Texture::do_draw_line_strip(const std::vector<FloatPoint>& gl_points,
+                        const RGBColor& color) {
 	if (m_blit_data.texture_id == 0) {
 		return;
 	}
 	setup_gl();
-	DrawLineProgram::instance().draw(start, end, 0.f, color, line_width);
+	DrawLineProgram::instance().draw(
+	   {DrawLineProgram::Arguments{gl_points, color, 0.f, BlendMode::UseAlpha}});
 }
 
 void

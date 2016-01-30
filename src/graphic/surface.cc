@@ -26,9 +26,11 @@
 #include <SDL.h>
 
 #include "base/macros.h"
+#include "base/point.h"
 #include "base/rect.h"
 #include "graphic/gl/coordinate_conversion.h"
 #include "graphic/gl/utils.h"
+#include "graphic/line_strip_mode.h"
 
 namespace {
 
@@ -41,13 +43,37 @@ BlitData adjust_for_src(BlitData blit_data, const Rect& src_rect) {
 	return blit_data;
 }
 
+// Get the normal of the line between 'start' and 'end'.
+template <typename PointType>
+FloatPoint calculate_line_normal(const PointType& start, const PointType& end) {
+	const float dx = end.x - start.x;
+	const float dy = end.y - start.y;
+	const float len = std::hypot(dx, dy);
+	return FloatPoint(-dy / len, dx / len);
+}
+
+// Finds the pseudo-normal of a point at the join of two lines. We construct
+// this like a miter joint from woodworks. The best explanation I found for
+// this algorithm is here
+// https://forum.libcinder.org/topic/smooth-thick-lines-using-geometry-shader#23286000001269127
+FloatPoint calculate_pseudo_normal(const Point& p0, const Point& p1, const Point& p2) {
+	FloatPoint tangent = normalize(normalize(p2 - p1) + normalize(p1 - p0));
+	FloatPoint miter(-tangent.y, tangent.x);
+	float len = 1./ dot(miter, calculate_line_normal(p0, p1));
+	return FloatPoint(miter.x * len, miter.y * len);
+}
+
 }  // namespace
 
 void draw_rect(const Rect& rc, const RGBColor& clr, Surface* surface) {
-	surface->draw_line(Point(rc.x, rc.y), Point(rc.x + rc.w, rc.y), clr, 1);
-	surface->draw_line(Point(rc.x + rc.w, rc.y), Point(rc.x + rc.w, rc.y + rc.h), clr, 1);
-	surface->draw_line(Point(rc.x + rc.w, rc.y + rc.h), Point(rc.x, rc.y + rc.h), clr, 1);
-	surface->draw_line(Point(rc.x, rc.y + rc.h), Point(rc.x, rc.y), clr, 1);
+	surface->draw_line_strip(LineStripMode::kClose,
+	                         {
+	                          Point(rc.x, rc.y),
+	                          Point(rc.x + rc.w, rc.y),
+	                          Point(rc.x + rc.w, rc.y + rc.h),
+	                          Point(rc.x, rc.y + rc.h),
+	                         },
+	                         clr, 1);
 }
 
 void Surface::fill_rect(const Rect& rc, const RGBAColor& clr) {
@@ -68,19 +94,86 @@ void Surface::brighten_rect(const Rect& rc, const int32_t factor)
 	do_fill_rect(rect, color, blend_mode);
 }
 
-void Surface::draw_line
-	(const Point& start, const Point& end, const RGBColor& color, int line_width)
-{
-	float gl_x1 = start.x;
-	float gl_y1 = start.y;
+FloatPoint normalized(const FloatPoint& p) {
+	const float len = std::hypot(p.x, p.y);
+	return FloatPoint(p.x / len, p.y / len);
+}
 
-	// Include the end pixel.
-	float gl_x2 = end.x + 1.;
-	float gl_y2 = end.y + 1.;
-	pixel_to_gl_renderbuffer(width(), height(), &gl_x1, &gl_y1);
-	pixel_to_gl_renderbuffer(width(), height(), &gl_x2, &gl_y2);
+void Surface::draw_line_strip(const LineStripMode& line_strip_mode,
+                     std::vector<Point> points,
+                     const RGBColor& color,
+                     float line_width) {
+	assert(points.size() > 1);
 
-	do_draw_line(FloatPoint(gl_x1, gl_y1), FloatPoint(gl_x2, gl_y2), color, line_width);
+	// Figure out the tesselation for the line. The normal for a point is the
+	// average of the up to two lines it is part of.
+	std::vector<FloatPoint> normals;
+	for (size_t i = 0; i < points.size(); ++i) {
+		if (i == 0) {
+			switch (line_strip_mode) {
+				case LineStripMode::kOpen:
+				   normals.push_back(calculate_line_normal(points.front(), points[1]));
+				break;
+
+			   case LineStripMode::kClose:
+				   normals.push_back(calculate_pseudo_normal(points.back(), points.front(), points[1]));
+				break;
+			}
+		} else if (i == points.size() - 1) {
+			switch (line_strip_mode) {
+				case LineStripMode::kOpen:
+				   normals.push_back(calculate_line_normal(points[points.size() - 2], points.back()));
+				break;
+
+				case LineStripMode::kClose:
+				   normals.push_back(calculate_pseudo_normal(
+				      points[points.size() - 2], points.back(), points.front()));
+				break;
+			}
+		} else {
+			normals.push_back(calculate_pseudo_normal(points[i - 1], points[i], points[i + 1]));
+		}
+	}
+	if (line_strip_mode == LineStripMode::kClose) {
+		// Push the first point as the last point again. For drawing we do not
+		// need to special case closed or open lines anymore.
+		normals.push_back(normals.front());
+		points.push_back(points.front());
+	}
+	assert(points.size() == normals.size());
+	assert(!points.empty());
+
+	std::vector<FloatPoint> gl_points;
+
+	// Iterate over each line segment, i.e. all points but the last, convert
+	// them from pixel space to gl space and draw them.
+	const auto w = width();
+	const auto h = height();
+	for (size_t i = 0; i < points.size() - 1; ++i) {
+		const FloatPoint p1 = FloatPoint(points[i].x, points[i].y);
+		const FloatPoint p2 = FloatPoint(points[i + 1].x, points[i + 1].y);
+		const FloatPoint scaled_n1(0.5 * line_width * normals[i].x, 0.5 * line_width * normals[i].y);
+		const FloatPoint scaled_n2(
+		   0.5 * line_width * normals[i + 1].x, 0.5 * line_width * normals[i + 1].y);
+
+		// Quad points are created in rendering order for OpenGL.
+		FloatPoint quad_a = p1 - scaled_n1;
+		pixel_to_gl_renderbuffer(w, h, &quad_a.x, &quad_a.y);
+		gl_points.emplace_back(quad_a);
+
+		FloatPoint quad_b = p2 - scaled_n2;
+		pixel_to_gl_renderbuffer(w, h, &quad_b.x, &quad_b.y);
+		gl_points.emplace_back(quad_b);
+
+		FloatPoint quad_c = p1 + scaled_n1 + scaled_n1;
+		pixel_to_gl_renderbuffer(w, h, &quad_c.x, &quad_c.y);
+		gl_points.emplace_back(quad_c);
+
+		FloatPoint quad_d = p2 + scaled_n2 + scaled_n2;
+		pixel_to_gl_renderbuffer(w, h, &quad_d.x, &quad_d.y);
+		gl_points.emplace_back(quad_d);
+	}
+	do_draw_line_strip(gl_points, color);
 }
 
 void Surface::blit_monochrome(const Rect& dst_rect,

@@ -53,10 +53,8 @@ private:
 	void do_blit_monochrome(const FloatRect& dst_rect,
 	                        const BlitData& texture,
 	                        const RGBAColor& blend) override;
-	void do_draw_line(const FloatPoint& start,
-	                  const FloatPoint& end,
-	                  const RGBColor& color,
-	                  int width) override;
+	void do_draw_line_strip(const std::vector<FloatPoint>& gl_points,
+	                        const RGBColor& color) override;
 	void
 	do_fill_rect(const FloatRect& dst_rect, const RGBAColor& color, BlendMode blend_mode) override;
 

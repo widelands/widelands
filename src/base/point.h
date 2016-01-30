@@ -20,10 +20,13 @@
 #ifndef WL_BASE_POINT_H
 #define WL_BASE_POINT_H
 
+#include <cmath>
 #include <limits>
 
 #include <stdint.h>
 
+// This class is our 2D vector class. We use it as Points, but also as Vectors
+// in some cases.
 template <typename T> struct GenericPoint {
 	GenericPoint(const T& px, const T& py) : x(px), y(py) {
 	}
@@ -75,5 +78,17 @@ using FloatPoint = GenericPoint<float>;
 /// Returns the point in the middle between a and b (rounded to integer
 /// values).
 Point middle(const Point& a, const Point& b);
+
+// Returns a normalized version of 'v'.
+template <typename Vector> FloatPoint normalize(const Vector& v) {
+	const float len = std::hypot(v.x, v.y);
+	return FloatPoint(v.x / len, v.y / len);
+}
+
+// Returns the dot product of v1 with v2.
+inline float dot(const FloatPoint& v1, const FloatPoint& v2) {
+	return v1.x * v2.x + v1.y * v2.y;
+}
+
 
 #endif  // end of include guard: WL_BASE_POINT_H
