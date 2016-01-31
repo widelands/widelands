@@ -266,7 +266,7 @@ tribes:new_tribe {
       "Kitts",
       "Loftomor",
       "Malachite",
-      "Martinique", 
+      "Martinique",
       "Montserrat",
       "Moonstone",
       "Mystic Quartz",

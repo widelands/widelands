@@ -1,16 +1,16 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2015 Widelands Development Team
+# Copyright (C) 2005-2016 Widelands Development Team
 # 
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2011
-# Juanjo, 2015
+# Juanjo, 2015-2016
 # Juanjo, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-12-03 09:55+0000\n"
-"PO-Revision-Date: 2015-12-03 21:46+0000\n"
+"POT-Creation-Date: 2016-01-23 08:23+0000\n"
+"PO-Revision-Date: 2016-01-24 23:26+0000\n"
 "Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -118,6 +118,7 @@ msgstr "Resum:"
 
 #: ../../scripting/win_conditions/artifacts.lua:150
 #: ../../scripting/win_conditions/artifacts.lua:162
+#, lua-format
 msgid "%i artifact"
 msgid_plural "%i artifacts"
 msgstr[0] "%i artefacte"
@@ -141,13 +142,14 @@ msgstr "Col·leccionistes"
 msgid ""
 "You get points for precious wares in your warehouses. The player with the "
 "highest number of wares at the end of 4 hours wins the game."
-msgstr "Aconseguireu punts per béns valuosos en els teus magatzems. Guanyarà el jugador que tingui el major nombre de béns al cap de 4 hores de partida."
+msgstr "Aconseguireu punts per béns valuosos en els teus magatzems. Guanyarà el jugador que tingui el nombre més gran de béns al cap de 4 hores de partida."
 
 #: ../../scripting/win_conditions/collectors.lua:25
 msgid "Points"
 msgstr "Punts"
 
 #: ../../scripting/win_conditions/collectors.lua:104
+#, lua-format
 msgid "Status for %s"
 msgstr "Estat del %s"
 
@@ -157,6 +159,7 @@ msgid "%1$s (%2$i P) x %3$i = %4$i P"
 msgstr "  %1$s:\t%2$i punts/unitat x %3$i unitats =\t%4$i punts"
 
 #: ../../scripting/win_conditions/collectors.lua:120
+#, lua-format
 msgid "Total: %i point"
 msgid_plural "Total: %i points"
 msgstr[0] "Total: %i punt"
@@ -164,6 +167,7 @@ msgstr[1] "Total: %i punts"
 
 #. TRANSLATORS: Context: 'The game will end in (2 hours and) 30 minutes.'
 #: ../../scripting/win_conditions/collectors.lua:134
+#, lua-format
 msgid "%i minute"
 msgid_plural "%i minutes"
 msgstr[0] "%i minut"
@@ -185,6 +189,7 @@ msgstr[1] "%1% hores"
 
 #. TRANSLATORS: Context: 'The game will end in 2 hours and 30 minutes.'
 #: ../../scripting/win_conditions/collectors.lua:146
+#, lua-format
 msgid "The game will end in %s."
 msgstr "La partida acabarà en %s."
 
@@ -202,7 +207,7 @@ msgstr "Partida sense fi"
 
 #: ../../scripting/win_conditions/endless_game.lua:17
 msgid "This is an endless game without rules."
-msgstr "Aquesta és una partida sense regles ni fi"
+msgstr "Aquesta és una partida sense regles ni fi."
 
 #: ../../scripting/win_conditions/endless_game_fogless.lua:15
 msgid "Endless Game (no fog)"
@@ -225,16 +230,19 @@ msgstr "El guanyador serà el jugador o equip que sigui capaç de mantenir més 
 
 #: ../../scripting/win_conditions/territorial_lord.lua:155
 #: ../../scripting/win_conditions/territorial_time.lua:27
+#, lua-format
 msgid "Team %i"
 msgstr "Equip %i"
 
 #: ../../scripting/win_conditions/territorial_lord.lua:157
 #: ../../scripting/win_conditions/territorial_time.lua:201
+#, lua-format
 msgid "%s owns more than half of the map’s area."
 msgstr "%s controla més de la meitat de l'àrea del mapa."
 
 #: ../../scripting/win_conditions/territorial_lord.lua:159
 #: ../../scripting/win_conditions/territorial_time.lua:203
+#, lua-format
 msgid "You’ve still got %i minute to prevent a victory."
 msgid_plural "You’ve still got %i minutes to prevent a victory."
 msgstr[0] "Encara us queda %i minut per evitar la desfeta."
@@ -247,6 +255,7 @@ msgstr "Controleu més de la meitat de l'àrea del mapa."
 
 #: ../../scripting/win_conditions/territorial_lord.lua:166
 #: ../../scripting/win_conditions/territorial_time.lua:210
+#, lua-format
 msgid "Keep it for %i more minute to win the game."
 msgid_plural "Keep it for %i more minutes to win the game."
 msgstr[0] "Manteniu-ho %i minut més per guanyar la partida."
@@ -273,6 +282,7 @@ msgid "%1$s had %2$3.0f%% of the land (%3$i of %4$i)."
 msgstr "%1$s controlava el %2$3.0f%% del territori (%3$i de %4$i)."
 
 #: ../../scripting/win_conditions/territorial_time.lua:224
+#, lua-format
 msgid "Otherwise the game will end in %i minute."
 msgid_plural "Otherwise the game will end in %i minutes."
 msgstr[0] "Si no, la partida acabarà en %i minut."
@@ -280,6 +290,7 @@ msgstr[1] "Si no, la partida acabarà en %i minuts."
 
 #: ../../scripting/win_conditions/territorial_time.lua:229
 #: ../../scripting/win_conditions/wood_gnome.lua:86
+#, lua-format
 msgid "The game will end in %i minute."
 msgid_plural "The game will end in %i minutes."
 msgstr[0] "La partida acabarà en %i minut."
@@ -294,7 +305,7 @@ msgid ""
 "As wood gnome you like big forests, so your task is to have more trees on "
 "your territory than any other player. The game will end after 4 hours of "
 "playing. The one with the most trees at that point will win the game."
-msgstr "Com a bon gnom de la fusta, us agraden els boscos brans. La vostra tasca és tenir més arbres en el vostre territori que qualsevol altre jugador. Qui tingui més arbres al cap de 4 hores, guanya la partida."
+msgstr "Com a bon gnom de la fusta, us agraden els boscos grans. La vostra tasca és tenir més arbres en el vostre territori que qualsevol altre jugador. Qui tingui més arbres al cap de 4 hores, guanya la partida."
 
 #: ../../scripting/win_conditions/wood_gnome.lua:22
 msgid "Trees owned"
@@ -303,6 +314,7 @@ msgstr "Arbres posseïts"
 #: ../../scripting/win_conditions/wood_gnome.lua:92
 #: ../../scripting/win_conditions/wood_gnome.lua:143
 #: ../../scripting/win_conditions/wood_gnome.lua:147
+#, lua-format
 msgid "%i tree"
 msgid_plural "%i trees"
 msgstr[0] "%i arbre"
