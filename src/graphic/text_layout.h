@@ -35,6 +35,19 @@
 void replace_entities(std::string* text);
 
 /**
+  * Returns the exact width of the text rendered as editorfont for the given font size.
+  * This function is inefficient; only call when we need the exact width.
+  */
+
+uint32_t text_width(const std::string& text, int ptsize);
+
+/**
+  * Returns the exact height of the text rendered as editorfont for the given font size.
+  * This function is inefficient; only call when we need the exact height.
+  */
+uint32_t text_height(const std::string& text, int ptsize);
+
+/**
  * Checks it the given string is RichText or not. Does not do validity checking.
  */
 inline bool is_richtext(const std::string& text) {
@@ -52,6 +65,10 @@ std::string richtext_escape(const std::string& given_text);
  */
 std::string as_uifont
 	(const std::string&, int ptsize = UI_FONT_SIZE_SMALL, const RGBColor& clr = UI_FONT_CLR_FG);
+
+std::string as_editorfont(const std::string& text, int ptsize = UI_FONT_SIZE_SMALL,
+								  const RGBColor& clr = UI_FONT_CLR_FG);
+
 std::string as_aligned(const std::string & txt, UI::Align align, int ptsize = UI_FONT_SIZE_SMALL,
 							  const RGBColor& clr = UI_FONT_CLR_FG);
 
