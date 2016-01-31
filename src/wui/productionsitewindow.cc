@@ -202,7 +202,6 @@ void ProductionSiteWindow::update_worker_table()
 			continue;
 		}
 	}
-	worker_table_->update();
 }
 
 void ProductionSiteWindow::evict_worker() {

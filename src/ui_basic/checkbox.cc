@@ -98,8 +98,6 @@ void Statebox::set_enabled(bool const enabled)
 		set_flags
 			(Is_Highlighted, (m_flags & Is_Highlighted) && (m_flags & Is_Enabled));
 	}
-
-	update();
 }
 
 
@@ -113,7 +111,6 @@ void Statebox::set_state(bool const on) {
 		set_flags(Is_Checked, on);
 		changed();
 		changedto(on);
-		update();
 	}
 }
 
@@ -170,11 +167,7 @@ void Statebox::draw(RenderTarget & dst)
  * Highlight the checkbox when the mouse moves into it
  */
 void Statebox::handle_mousein(bool const inside) {
-	bool oldhl = m_flags & Is_Highlighted;
 	set_flags(Is_Highlighted, inside && (m_flags & Is_Enabled));
-
-	if (oldhl != (m_flags & Is_Highlighted))
-		update();
 }
 
 

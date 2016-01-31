@@ -49,8 +49,6 @@ ProgressBar::ProgressBar
 void ProgressBar::set_state(uint32_t state)
 {
 	m_state = state;
-
-	update();
 }
 
 
@@ -61,8 +59,6 @@ void ProgressBar::set_total(uint32_t total)
 {
 	assert(total);
 	m_total = total;
-
-	update();
 }
 
 

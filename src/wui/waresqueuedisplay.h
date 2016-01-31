@@ -82,7 +82,6 @@ private:
 
 
 	uint32_t         cache_size_;
-	uint32_t         cache_filled_;
 	uint32_t         cache_max_fill_;
 	uint32_t         total_height_;
 	bool             show_only_;

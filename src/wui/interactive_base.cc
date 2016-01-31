@@ -335,12 +335,7 @@ void InteractiveBase::think()
 			set_rel_viewpoint(Point (scrollval, 0), false);
 		}
 	}
-
 	egbase().think(); // Call game logic here. The game advances.
-
-	//  The entire screen needs to be redrawn (unit movement, tile animation,
-	//  etc...)
-	g_gr->update();
 
 	UI::Panel::think();
 }

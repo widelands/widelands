@@ -71,8 +71,6 @@ public:
 	void set_fullscreen(bool);
 
 	RenderTarget * get_render_target();
-	void update();
-	bool need_update() const;
 	void refresh();
 	SDL_Window* get_sdlwindow() {return sdl_window_;}
 
@@ -102,9 +100,6 @@ private:
 
 	/// A RenderTarget for screen_. This is initialized during init()
 	std::unique_ptr<RenderTarget> render_target_;
-
-	/// This marks the complete screen for updating.
-	bool requires_update_;
 
 	/// Non-volatile cache of independent images.
 	std::unique_ptr<ImageCache> image_cache_;

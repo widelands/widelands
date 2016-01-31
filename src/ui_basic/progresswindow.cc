@@ -89,7 +89,6 @@ void ProgressWindow::set_background(const std::string & file_name) {
 		m_background = "pics/progress.png";
 	}
 	draw_background(rt, g_gr->get_xres(), g_gr->get_yres());
-	update(true);
 }
 
 void ProgressWindow::step(const std::string & description) {
@@ -106,13 +105,11 @@ void ProgressWindow::step(const std::string & description) {
 			 UI::g_fh1->render(as_uifont(description, UI_FONT_SIZE_SMALL, PROGRESS_FONT_COLOR_FG)),
 			 BlendMode::UseAlpha,
 			 UI::Align::kCenter);
-	g_gr->update();
 
 #ifdef _WIN32
 		// Pump events to prevent "not responding" on windows
 		SDL_PumpEvents();
 #endif
-
 	update(true);
 }
 
@@ -121,6 +118,7 @@ void ProgressWindow::update(bool const repaint) {
 		visualization->update(repaint); //  let visualizations do their work
 	}
 	g_gr->refresh();
+
 }
 
 /**

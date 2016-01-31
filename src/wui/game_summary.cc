@@ -218,7 +218,6 @@ void GameSummaryScreen::fill_data()
 				  % static_cast<unsigned int>(teawon_)).str());
 		}
 	}
-	players_table_->update();
 	if (!players_status.empty()) {
 		players_table_->select(current_player_position);
 	}
