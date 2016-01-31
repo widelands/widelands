@@ -79,11 +79,11 @@ FullscreenMenuNetSetupLAN::FullscreenMenuNetSetupLAN () :
 
 // Edit boxes
 	playername
-		(this, get_w() * 16 / 25, get_h() * 3333 / 10000, m_butw,       m_buth,
-		 g_gr->images().get("images/ui_basic/but2.png")),
+		(this, get_w() * 16 / 25, get_h() * 3333 / 10000, m_butw,
+		 g_gr->images().get("images/ui_basic/but2.png"), fs_small()),
 	hostname
-		(this, get_w() * 16 / 25, get_h() * 19 / 40,  get_w() * 17 / 80, m_buth,
-		 g_gr->images().get("images/ui_basic/but2.png")),
+		(this, get_w() * 16 / 25, get_h() * 19 / 40,  get_w() * 17 / 80,
+		 g_gr->images().get("images/ui_basic/but2.png"), fs_small()),
 
 // List
 	opengames
@@ -108,11 +108,9 @@ FullscreenMenuNetSetupLAN::FullscreenMenuNetSetupLAN () :
 	title       .set_textstyle(UI::TextStyle::ui_big());
 	hostname    .changed.connect
 		(boost::bind(&FullscreenMenuNetSetupLAN::change_hostname, this));
-	hostname    .set_font(ui_fn(), fs_small(), UI_FONT_CLR_FG);
 	playername  .set_text  (s.get_string("nickname", (_("nobody"))));
 	playername  .changed.connect
 		(boost::bind(&FullscreenMenuNetSetupLAN::change_playername, this));
-	playername  .set_font(ui_fn(), fs_small(), UI_FONT_CLR_FG);
 	opengames   .add_column(m_lisw * 2 / 5, _("Host"));
 	opengames   .add_column(m_lisw * 2 / 5, _("Map"));
 	opengames   .add_column(m_lisw     / 5, _("State"));
