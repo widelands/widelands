@@ -5,6 +5,6 @@
 #define NEW_SDL_MIXER 1
 #define USE_RWOPS 1
 
-#define INSTALL_DATADIR ".\\data\\"
+#define INSTALL_DATADIR "data\\"
 
 #endif
