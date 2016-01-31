@@ -86,9 +86,7 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive& parent)
 	                           editbox_label_.get_x() + editbox_label_.get_w() + padding_,
 	                           editbox_label_.get_y(),
 	                           tablew_ - editbox_label_.get_w() - padding_ + 1,
-	                           buth_,
-	                           g_gr->images().get("pics/but1.png"),
-	                           UI::Align::kLeft);
+										g_gr->images().get("pics/but1.png"));
 
 	editbox_->set_text(parent.egbase().map().get_name());
 	editbox_->changed.connect(boost::bind(&MainMenuSaveMap::edit_box_changed, this));
