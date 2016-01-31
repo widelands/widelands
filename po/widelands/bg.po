@@ -956,6 +956,28 @@ msgstr "Текущ размер: %u"
 msgid "unknown"
 msgstr "неизвестно"
 
+#: ../../src/logic/building.cc:510
+msgid "Mine"
+msgstr "Мина"
+
+#: ../../src/logic/building.cc:511
+msgid "Small"
+msgstr "Малки"
+
+#: ../../src/logic/building.cc:512
+msgid "Big"
+msgstr "Големи"
+
+#: ../../src/logic/constructionsite.cc:77 ../../src/logic/immovable.cc:494
+#, c-format
+msgid "%i%% built"
+msgstr "Построена на %i%%"
+
+#: ../../src/logic/dismantlesite.cc:96
+#, c-format
+msgid "%u%% dismantled"
+msgstr "Демонтирана на %u%%"
+
 #: ../../src/logic/editor_game_base.cc:253
 msgid "Loading graphics"
 msgstr "Зареждане на графиките"
@@ -1029,14 +1051,246 @@ msgstr "Неизвестен"
 msgid "No description defined"
 msgstr "Няма зададено описание"
 
-#: ../../src/logic/map_objects/immovable.cc:494
+#. * TRANSLATORS: %1% is the number of soldiers the plural refers to
+#. * TRANSLATORS: %2% is the maximum number of soldier slots in the building
+#: ../../src/logic/militarysite.cc:126
+msgid "%1% soldier (+%2%)"
+msgid_plural "%1% soldiers (+%2%)"
+msgstr[0] "%1% войник (+%2%)"
+msgstr[1] "%1% войници (+%2%)"
+
+#: ../../src/logic/militarysite.cc:131
 #, c-format
-msgid "%i%% built"
-msgstr "Построена на %i%%"
+msgid "%u soldier"
+msgid_plural "%u soldiers"
+msgstr[0] "%u войник"
+msgstr[1] "%u войници"
+
+#: ../../src/logic/militarysite.cc:140
+msgid "%1%(+%2%) soldier (+%3%)"
+msgid_plural "%1%(+%2%) soldiers (+%3%)"
+msgstr[0] "%1%(+%2%) войник (+%3%)"
+msgstr[1] "%1%(+%2%) войници (+%3%)"
+
+#. * TRANSLATORS: %1% is the number of soldiers the plural refers to
+#. * TRANSLATORS: %2% are currently open soldier slots in the building
+#: ../../src/logic/militarysite.cc:145
+msgid "%1%(+%2%) soldier"
+msgid_plural "%1%(+%2%) soldiers"
+msgstr[0] "%1%(+%2%) войник"
+msgstr[1] "%1%(+%2%) войници"
+
+#. * TRANSLATORS: Militarysite lost (taken/destroyed by enemy)
+#: ../../src/logic/militarysite.cc:867
+msgctxt "building"
+msgid "Lost!"
+msgstr "Загубено!"
+
+#: ../../src/logic/militarysite.cc:869
+msgid "Militarysite lost!"
+msgstr "Загубена военна позиция!"
+
+#. * TRANSLATORS: Message title.
+#. * TRANSLATORS: If you run out of space, you can also translate this as
+#. "Success!"
+#: ../../src/logic/militarysite.cc:912
+msgid "Enemy Defeated!"
+msgstr "Врагът е победен!"
+
+#: ../../src/logic/militarysite.cc:914
+msgid "Enemy at site defeated!"
+msgstr "Врагът на позицията е победен!"
+
+#. * TRANSLATORS: Militarysite is being attacked
+#: ../../src/logic/militarysite.cc:965
+msgctxt "building"
+msgid "Attack!"
+msgstr "Нападение!"
+
+#: ../../src/logic/militarysite.cc:967
+msgid "You are under attack"
+msgstr "Вие сте нападнати"
 
 #: ../../src/logic/objective.h:38
 msgid "This objective has no description."
 msgstr "Тази задача няма описание."
+
+#. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy
+#. needs the ware ‘%s’
+#: ../../src/logic/production_program.cc:331
+#, c-format
+msgid "the economy needs the ware ‘%s’"
+msgstr "икономиката се нуждае от стоката „%s“"
+
+#. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy
+#. doesn’t need the ware ‘%s’
+#: ../../src/logic/production_program.cc:339
+#, c-format
+msgid "the economy doesn’t need the ware ‘%s’"
+msgstr "икономиката не се нуждае от стоката „%s“"
+
+#. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy
+#. needs the worker ‘%s’
+#: ../../src/logic/production_program.cc:353
+#, c-format
+msgid "the economy needs the worker ‘%s’"
+msgstr "икономиката се нуждае от работника „%s“"
+
+#. * TRANSLATORS: e.g. Completed/Skipped/Did not start ...
+#. * TRANSLATORS:      ... because the economy doesn’t need the worker ‘%s’
+#: ../../src/logic/production_program.cc:363
+#, c-format
+msgid "the economy doesn’t need the worker ‘%s’"
+msgstr "икономиката не се нуждае от работника „%s“"
+
+#. * TRANSLATORS: This is an item in a list of wares, e.g. "3x water":
+#. * TRANSLATORS:    %1$s = "3"
+#. * TRANSLATORS:    %2$i = "water"
+#. * TRANSLATORS: This is an item in a list of wares, e.g. "3x water":
+#. * TRANSLATORS:    %1$i = "3"
+#. * TRANSLATORS:    %2$s = "water"
+#. * TRANSLATORS: e.g. 'Did not start working because 3x water and 3x wheat
+#. are missing'
+#. * TRANSLATORS: For this example, this is what's in the place holders:
+#. * TRANSLATORS:    %1$i = "3"
+#. * TRANSLATORS:    %2$s = "water"
+#. * TRANSLATORS: This is an item in a list of wares, e.g. "Produced 2x Coal":
+#. * TRANSLATORS:    %%1$i = "2"
+#. * TRANSLATORS:    %2$s = "Coal"
+#. * TRANSLATORS: This is an item in a list of workers, e.g. "Recruited 2x
+#. Ox":
+#. * TRANSLATORS:    %1$i = "2"
+#. * TRANSLATORS:    %2$s = "Ox"
+#: ../../src/logic/production_program.cc:407
+#: ../../src/logic/production_program.cc:429
+#: ../../src/logic/production_program.cc:944
+#: ../../src/logic/production_program.cc:1062
+#: ../../src/logic/production_program.cc:1158
+#, c-format
+msgid "%1$ix %2$s"
+msgstr "%1$iх %2$s"
+
+#. * TRANSLATORS: %s is a list of wares
+#: ../../src/logic/production_program.cc:413
+#, c-format
+msgid "the building has the following wares: %s"
+msgstr "сградата има следните стоки: %s"
+
+#. * TRANSLATORS: %s is a list of wares
+#: ../../src/logic/production_program.cc:435
+#, c-format
+msgid "the building doesn’t have the following wares: %s"
+msgstr "сградата няма следните стоки: %s"
+
+#. * TRANSLATORS: 'Completed/Skipped/Did not start ... because a worker needs
+#. experience'.
+#: ../../src/logic/production_program.cc:453
+msgid "a worker needs experience"
+msgstr "работник има нужда от опит"
+
+#. * TRANSLATORS: 'Completed/Skipped/Did not start ... because the workers
+#. need no experience'.
+#: ../../src/logic/production_program.cc:460
+msgid "the workers need no experience"
+msgstr "работниците нямат нужда от опит"
+
+#. * TRANSLATORS: "Did not start working because the economy needs the ware
+#. ‘%s’"
+#. * TRANSLATORS: e.g. 'Did not start working because 3x water and 3x wheat
+#. are missing'
+#. * TRANSLATORS: For this example, this is what's in the place holders:
+#. * TRANSLATORS:    %1$s = "working"
+#. * TRANSLATORS:    %2$s = "3x water and 3x wheat are missing"
+#. * TRANSLATORS: This appears in the hover text on buildings. Please test
+#. these in context
+#. * TRANSLATORS: on a development build if you can, and let us know if there
+#. are any issues
+#. * TRANSLATORS: we need to address for your language.
+#: ../../src/logic/production_program.cc:574
+#: ../../src/logic/production_program.cc:967
+#, c-format
+msgid "Did not start %1$s because %2$s"
+msgstr "Не започна да %1$s, тъй като %2$s"
+
+#. * TRANSLATORS: "Completed working because the economy needs the ware ‘%s’"
+#: ../../src/logic/production_program.cc:581
+#, c-format
+msgid "Completed %1$s because %2$s"
+msgstr "Свърши да %1$s, тъй като %2$s"
+
+#. * TRANSLATORS: "Skipped working because the economy needs the ware ‘%s’"
+#: ../../src/logic/production_program.cc:588
+#, c-format
+msgid "Skipped %1$s because %2$s"
+msgstr "Пропусна да %1$s, тъй като %2$s"
+
+#: ../../src/logic/production_program.cc:816
+msgid "No use for ships on this map!"
+msgstr "Корабите са безполезни на тази карта!"
+
+#. * TRANSLATORS: e.g. 'Did not start working because 3x water and 3x wheat
+#. are missing'
+#. * TRANSLATORS: e.g. 'Did not start working because fish, meat or pitta
+#. bread is missing'
+#: ../../src/logic/production_program.cc:955
+#, c-format
+msgid "%s is missing"
+msgid_plural "%s are missing"
+msgstr[0] "%s липсва"
+msgstr[1] "%s липсват"
+
+#. * TRANSLATORS: %s is a list of wares. String is fetched according to total
+#. amount of wares.
+#: ../../src/logic/production_program.cc:1072
+#, c-format
+msgid "Produced %s"
+msgid_plural "Produced %s"
+msgstr[0] "Произведе %s"
+msgstr[1] "Произведе %s"
+
+#. * TRANSLATORS: %s is a list of workers. String is fetched according to
+#. total amount of workers.
+#: ../../src/logic/production_program.cc:1168
+#, c-format
+msgid "Recruited %s"
+msgid_plural "Recruited %s"
+msgstr[0] "Набра %s"
+msgstr[1] "Набра %s"
+
+#: ../../src/logic/production_program.cc:1391
+msgid "No soldier to train!"
+msgstr "Няма войник за обучение!"
+
+#: ../../src/logic/production_program.cc:1399
+#: ../../src/logic/production_program.cc:1484
+msgid "No soldier found for this training level!"
+msgstr "Няма войници за това ниво на обучение!"
+
+#: ../../src/logic/productionsite.cc:269
+msgid "(not occupied)"
+msgstr "(незаето)"
+
+#: ../../src/logic/productionsite.cc:276
+msgid "Worker missing"
+msgid_plural "Workers missing"
+msgstr[0] "Липсва работник"
+msgstr[1] "Липсват работници"
+
+#: ../../src/logic/productionsite.cc:281
+msgid "(stopped)"
+msgstr "(спряно)"
+
+#. * TRANSLATORS: Percent in building statistics window, e.g. 85%
+#. * TRANSLATORS: If you wish to add a space, translate as '%i %%'
+#: ../../src/logic/productionsite.cc:383
+#: ../../src/wui/building_statistics_menu.cc:686
+#, c-format
+msgid "%i%%"
+msgstr "%i%%"
+
+#: ../../src/logic/productionsite.cc:989
+msgid "Can’t find any more resources!"
+msgstr "Не могат да се намерят повече ресурси!"
 
 #: ../../src/logic/replay_game_controller.cc:108
 msgid "End of replay"
@@ -1059,6 +1313,152 @@ msgstr "Запазването беше неуспешно!"
 #: ../../src/logic/save_handler.cc:144
 msgid "Game saved"
 msgstr "Играта е запазена"
+
+#: ../../src/logic/ship.cc:435
+msgid "Port Space"
+msgstr "Място за пристанище"
+
+#: ../../src/logic/ship.cc:436
+msgid "Port Space Found"
+msgstr "Открито е място за пристанище"
+
+#: ../../src/logic/ship.cc:437
+msgid "An expedition ship found a new port build space."
+msgstr "Кораб от експедиция откри ново място за пристанище."
+
+#. * TRANSLATORS: A ship has circumnavigated an island and is waiting for
+#. orders
+#: ../../src/logic/ship.cc:556
+msgctxt "ship"
+msgid "Waiting"
+msgstr "В изчакване"
+
+#: ../../src/logic/ship.cc:557
+msgid "Island Circumnavigated"
+msgstr "Островът е заобиколен"
+
+#: ../../src/logic/ship.cc:558
+msgid "An expedition ship sailed around its island without any events."
+msgstr "Кораб от експедиция обиколи острова си без нищо да се случи."
+
+#. * TRANSLATORS: A ship has discovered land
+#: ../../src/logic/ship.cc:620
+msgid "Land Ahoy!"
+msgstr "Земя на хоризонта!"
+
+#: ../../src/logic/ship.cc:621
+msgid "Coast Reached"
+msgstr "Достигнат е бряг"
+
+#: ../../src/logic/ship.cc:622
+msgid ""
+"An expedition ship reached a coast and is waiting for further commands."
+msgstr "Кораб от експедиция достигна бряг и чака команда."
+
+#: ../../src/logic/ship.cc:668
+msgid "Port Lost!"
+msgstr "Загубено е пристанище!"
+
+#: ../../src/logic/ship.cc:669
+msgid "New port construction site is gone"
+msgstr "Новата строителна площадка за пристанище изчезна"
+
+#: ../../src/logic/ship.cc:670
+msgid "Unloading of wares failed, expedition is cancelled now."
+msgstr "Разтоварването на стоките се провали, експедицията е отменена."
+
+#. * TRANSLATORS: Ship expedition ready
+#: ../../src/logic/ship.cc:850
+msgctxt "ship"
+msgid "Expedition"
+msgstr "Експедиция"
+
+#: ../../src/logic/ship.cc:851
+msgid "Expedition Ready"
+msgstr "Експедицията е готова"
+
+#: ../../src/logic/ship.cc:852
+msgid "An expedition ship is waiting for your commands."
+msgstr "Кораб от експедиция чака Вашата команда."
+
+#: ../../src/logic/soldier.cc:1504 ../../src/logic/soldier.cc:1515
+msgid "Soldier"
+msgstr "Войник"
+
+#: ../../src/logic/soldier.cc:1506 ../../src/logic/soldier.cc:1517
+msgid "Logic error"
+msgstr "Логическа грешка"
+
+#: ../../src/logic/warehouse.cc:457
+msgid "A new port was added to your economy."
+msgstr "Към икономиката Ви беше добавено ново пристанище."
+
+#: ../../src/logic/warehouse.cc:466
+msgid "A new headquarters was added to your economy."
+msgstr "Към икономиката Ви беше добавен нов щаб."
+
+#: ../../src/logic/warehouse.cc:475
+msgid "A new warehouse was added to your economy."
+msgstr "Към икономиката Ви беше добавен нов склад."
+
+#: ../../src/logic/worker.cc:120
+#, c-format
+msgid ""
+"should mine resource %s, which does not exist in world; tribe is not "
+"compatible with world"
+msgstr "трябва да добива ресурса %s, който не е наличен в света; племето не е съвместимо със света"
+
+#: ../../src/logic/worker.cc:225
+#, c-format
+msgid ""
+"should breed resource type %s, which does not exist in world; tribe is not "
+"compatible with world"
+msgstr "трябва да развъжда ресурс от тип %s, който не е наличен в света; племето не е съвместимо със света"
+
+#: ../../src/logic/worker.cc:969
+msgid "A geologist found resources."
+msgstr "Геолог откри ресурси."
+
+#: ../../src/logic/worker.cc:1876
+#, c-format
+msgid "Your %s can't find a way home and will likely die."
+msgstr "Вашият/ата/ето %s не може да намери път към дома и най-вероятно ще умре."
+
+#: ../../src/logic/worker.cc:1884 ../../src/wui/productionsitewindow.cc:82
+#: ../../src/wui/productionsitewindow.cc:110
+msgid "Worker"
+msgid_plural "Workers"
+msgstr[0] "Работник"
+msgstr[1] "Работници"
+
+#: ../../src/logic/worker.cc:1886
+msgid "Worker got lost!"
+msgstr "Работник се загуби!"
+
+#. * TRANSLATORS: This is a terrain type tooltip in the editor
+#: ../../src/logic/world/terrain_description.cc:71
+msgid "arable"
+msgstr "обработваем"
+
+#. * TRANSLATORS: This is a terrain type tooltip in the editor
+#: ../../src/logic/world/terrain_description.cc:81
+msgid "navigable"
+msgstr "плаваемо"
+
+#. * TRANSLATORS: This is a terrain type tooltip in the editor
+#: ../../src/logic/world/terrain_description.cc:86
+msgid "unreachable"
+msgstr "недостъпно"
+
+#. * TRANSLATORS: This is a terrain type tooltip in the editor
+#: ../../src/logic/world/terrain_description.cc:91
+msgid "mineable"
+msgstr "става за копаене на мини"
+
+#. * TRANSLATORS: This is a terrain type tooltip in the editor
+#: ../../src/logic/world/terrain_description.cc:96
+msgid "unwalkable"
+msgstr "непроходимо"
 
 #: ../../src/map_io/s2map.cc:403
 msgid "Bluebyte Settlers II Map. No comment defined!"
