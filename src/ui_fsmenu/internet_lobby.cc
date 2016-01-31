@@ -85,8 +85,8 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby
 
 // Edit boxes
 	servername
-		(this, get_w() * 17 / 25, get_h() * 68 / 100, m_butw, m_buth,
-		 g_gr->images().get("pics/but2.png")),
+		(this, get_w() * 17 / 25, get_h() * 68 / 100, m_butw,
+		 g_gr->images().get("pics/but2.png"), m_fs),
 
 // List
 	clientsonline
@@ -127,7 +127,6 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby
 	servername  .set_text (server);
 	servername  .changed.connect
 		(boost::bind(&FullscreenMenuInternetLobby::change_servername, this));
-	servername  .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 
 	// prepare the lists
 	std::string t_tip = (boost::format("%s%s%s%s%s%s%s%s%s%s")

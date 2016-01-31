@@ -51,10 +51,6 @@ namespace {
 void set_label_font(UI::Textarea* label) {
 	label->set_font(UI::g_fh1->fontset().serif(), kLabelFontSize, UI_FONT_CLR_FG);
 }
-void set_editbox_font(UI::EditBox* editbox) {
-	editbox->set_font(UI::g_fh1->fontset().serif(), kLabelFontSize, UI_FONT_CLR_FG);
-}
-
 }  // namespace
 
 inline InteractivePlayer& BuildingStatisticsMenu::iplayer() const {
@@ -95,7 +91,8 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
 			_("Low Productivity "),
 			UI::Align::kBottomLeft),
 		unproductive_percent_(
-			&unproductive_box_, 0, 0, 35, kLabelHeight, g_gr->images().get("pics/but1.png")),
+			&unproductive_box_, 0, 0, 35, g_gr->images().get("pics/but1.png"),
+			kLabelFontSize - UI::g_fh1->fontset().size_offset()), // We need consistent height here
 		unproductive_label2_(
 			&unproductive_box_,
 			/** TRANSLATORS: This is the second part of productivity with input field */
@@ -260,7 +257,6 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
 	set_label_font(&owned_label_);
 	set_label_font(&construction_label_);
 	set_label_font(&unproductive_label_);
-	set_editbox_font(&unproductive_percent_);
 	set_label_font(&unproductive_label2_);
 	set_label_font(&no_owned_label_);
 	set_label_font(&no_construction_label_);
