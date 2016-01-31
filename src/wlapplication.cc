@@ -898,7 +898,7 @@ void WLApplication::handle_commandline_parameters()
 	} else {
 		datadir_ = is_absolute_path(INSTALL_DATADIR) ?
 		               INSTALL_DATADIR :
-		               get_executable_directory() + INSTALL_DATADIR;
+		               get_executable_directory() + FileSystem::file_separator() + INSTALL_DATADIR;
 	}
 	if (!is_absolute_path(datadir_)) {
 		datadir_ = absolute_path_if_not_windows(FileSystem::get_working_directory() +
