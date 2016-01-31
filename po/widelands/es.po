@@ -1,7 +1,7 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR Widelands Development Team
 # This file is distributed under the same license as the PACKAGE package.
-# 
+#
 # Translators:
 # Antonio Trueba <atrueba@users.sourceforge.net>, 2007,2009
 # Diego Alberto Pereyra <diego.96.pereyra@gmail.com>, 2015-2016
@@ -3237,13 +3237,6 @@ msgstr "Mostrar edificio anterior"
 msgid "Show next building"
 msgstr "Mostrar siguiente edificio"
 
-#. * TRANSLATORS: Percent in building statistics window, e.g. 85%
-#. * TRANSLATORS: If you wish to add a space, translate as '%i %%'
-#: ../../src/wui/building_statistics_menu.cc:686
-#, c-format
-msgid "%i%%"
-msgstr "%i %%"
-
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
 #. * TRANSLATORS Buildings: owned / under construction
@@ -4016,13 +4009,6 @@ msgstr "%1% min"
 #: ../../src/wui/plot_area.cc:273
 msgid "game"
 msgstr "juego"
-
-#: ../../src/wui/productionsitewindow.cc:82
-#: ../../src/wui/productionsitewindow.cc:110
-msgid "Worker"
-msgid_plural "Workers"
-msgstr[0] "Trabajador"
-msgstr[1] "Trabajadores"
 
 #: ../../src/wui/productionsitewindow.cc:84
 msgid "Exp"

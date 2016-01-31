@@ -1,7 +1,7 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR Widelands Development Team
 # This file is distributed under the same license as the PACKAGE package.
-# 
+#
 # Translators:
 # GunChleoc, 2014
 # GunChleoc, 2015-2016
@@ -3270,13 +3270,6 @@ msgstr "Seall an togalach roimhe"
 msgid "Show next building"
 msgstr "Seall an t-ath thogalach"
 
-#. * TRANSLATORS: Percent in building statistics window, e.g. 85%
-#. * TRANSLATORS: If you wish to add a space, translate as '%i %%'
-#: ../../src/wui/building_statistics_menu.cc:686
-#, c-format
-msgid "%i%%"
-msgstr "%i%%"
-
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
 #. * TRANSLATORS Buildings: owned / under construction
@@ -4053,15 +4046,6 @@ msgstr "%1% mion"
 #: ../../src/wui/plot_area.cc:273
 msgid "game"
 msgstr "geama"
-
-#: ../../src/wui/productionsitewindow.cc:82
-#: ../../src/wui/productionsitewindow.cc:110
-msgid "Worker"
-msgid_plural "Workers"
-msgstr[0] "Obraiche"
-msgstr[1] "Obraichean"
-msgstr[2] "Obraichean"
-msgstr[3] "Obraichean"
 
 #: ../../src/wui/productionsitewindow.cc:84
 msgid "Exp"

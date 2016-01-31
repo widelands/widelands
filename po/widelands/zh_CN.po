@@ -1,7 +1,7 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR Widelands Development Team
 # This file is distributed under the same license as the PACKAGE package.
-# 
+#
 # Translators:
 # GunChleoc, 2015
 # GunChleoc, 2015
@@ -3213,13 +3213,6 @@ msgstr ""
 msgid "Show next building"
 msgstr ""
 
-#. * TRANSLATORS: Percent in building statistics window, e.g. 85%
-#. * TRANSLATORS: If you wish to add a space, translate as '%i %%'
-#: ../../src/wui/building_statistics_menu.cc:686
-#, c-format
-msgid "%i%%"
-msgstr "%i%%"
-
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
 #. * TRANSLATORS Buildings: owned / under construction
@@ -3990,12 +3983,6 @@ msgstr ""
 #: ../../src/wui/plot_area.cc:273
 msgid "game"
 msgstr ""
-
-#: ../../src/wui/productionsitewindow.cc:82
-#: ../../src/wui/productionsitewindow.cc:110
-msgid "Worker"
-msgid_plural "Workers"
-msgstr[0] "工人"
 
 #: ../../src/wui/productionsitewindow.cc:84
 msgid "Exp"
