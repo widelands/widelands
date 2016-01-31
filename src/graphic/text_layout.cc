@@ -32,6 +32,12 @@
 #include "graphic/text/font_set.h"
 #include "graphic/text_constants.h"
 
+void replace_entities(std::string* text) {
+	boost::replace_all(*text, "&gt;", ">");
+	boost::replace_all(*text, "&lt;", "<");
+	boost::replace_all(*text, "&nbsp;", " ");
+}
+
 uint32_t text_width(const std::string& text, int ptsize) {
 	return UI::g_fh1->render(as_editorfont(text, ptsize - UI::g_fh1->fontset().size_offset()))->width();
 }
