@@ -43,9 +43,8 @@ SuggestedTeamsBox::SuggestedTeamsBox(Panel * parent,
 	suggested_teams_.clear();
 	set_size(max_x, max_y);
 
-	suggested_teams_box_label_ =
-			new UI::Textarea(this, "", UI::Align_CenterLeft);
-	add(suggested_teams_box_label_, UI::Box::AlignLeft);
+	suggested_teams_box_label_ = new UI::Textarea(this, "", UI::Align::kCenterLeft);
+	add(suggested_teams_box_label_, UI::Align::kLeft);
 }
 SuggestedTeamsBox::~SuggestedTeamsBox() {
 	SuggestedTeamsBox::hide();
@@ -105,8 +104,8 @@ void SuggestedTeamsBox::show(const std::vector<Widelands::Map::SuggestedTeamLine
 
 				if (!is_first) {
 					lineup_box_->add_space(padding_);
-					vs_label = new UI::Textarea(lineup_box_, "x", UI::Align_BottomCenter);
-					lineup_box_->add(vs_label, UI::Box::AlignLeft);
+					vs_label = new UI::Textarea(lineup_box_, "x", UI::Align::kBottomCenter);
+					lineup_box_->add(vs_label, UI::Align::kLeft);
 					vs_label->set_visible(true);
 					vs_labels_.push_back(vs_label);
 					lineup_box_->add_space(padding_);
@@ -121,7 +120,7 @@ void SuggestedTeamsBox::show(const std::vector<Widelands::Map::SuggestedTeamLine
 																	 g_gr->images().get(player_filename));
 					player_icon->set_visible(true);
 					player_icon->set_no_frame();
-					lineup_box_->add(player_icon, UI::Box::AlignLeft);
+					lineup_box_->add(player_icon, UI::Align::kLeft);
 					player_icons_.push_back(player_icon);
 				} // Players in team
 			} // Teams in lineup

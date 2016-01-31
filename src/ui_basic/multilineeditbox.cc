@@ -122,7 +122,6 @@ owner(o)
 void MultilineEditbox::Data::update()
 {
 	ww_valid = false;
-	owner.update();
 }
 
 /**
@@ -443,7 +442,6 @@ bool MultilineEditbox::handle_textinput(const std::string& input_text) {
  */
 void MultilineEditbox::focus(bool topcaller) {
 	Panel::focus(topcaller);
-	update();
 }
 
 /**
@@ -486,7 +484,7 @@ void MultilineEditbox::draw(RenderTarget & dst)
 	d->ww.set_draw_caret(has_focus());
 
 	d->ww.draw
-		(dst, Point(0, -int32_t(d->scrollbar.get_scrollpos())), Align_Left,
+		(dst, Point(0, -int32_t(d->scrollbar.get_scrollpos())), UI::Align::kLeft,
 		 has_focus() ? d->cursor_pos : std::numeric_limits<uint32_t>::max());
 }
 
@@ -499,8 +497,6 @@ void MultilineEditbox::draw(RenderTarget & dst)
 void MultilineEditbox::Data::insert(uint32_t where, const std::string & s)
 {
 	text.insert(where, s);
-	update();
-
 	if (cursor_pos >= where)
 		set_cursor_pos(cursor_pos + s.size());
 }
@@ -517,7 +513,6 @@ void MultilineEditbox::Data::set_cursor_pos(uint32_t newpos)
 		return;
 
 	cursor_pos = newpos;
-	owner.update();
 
 	scroll_cursor_into_view();
 }
@@ -538,10 +533,8 @@ void MultilineEditbox::Data::scroll_cursor_into_view()
 
 	if (top < int32_t(scrollbar.get_scrollpos())) {
 		scrollbar.set_scrollpos(top - lineheight);
-		owner.update();
 	} else if (top + lineheight > int32_t(scrollbar.get_scrollpos()) + owner.get_h()) {
 		scrollbar.set_scrollpos(top - owner.get_h() + 2 * lineheight);
-		owner.update();
 	}
 }
 
@@ -550,7 +543,6 @@ void MultilineEditbox::Data::scroll_cursor_into_view()
  */
 void MultilineEditbox::scrollpos_changed(int32_t)
 {
-	update();
 }
 
 /**

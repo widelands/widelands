@@ -24,6 +24,7 @@
 #include <boost/format.hpp>
 
 #include "base/i18n.h"
+#include "base/log.h"
 #include "base/wexception.h"
 #include "graphic/font_handler1.h"
 #include "graphic/text/font_set.h"
@@ -119,12 +120,12 @@ SpinBox::SpinBox
 					w, unit_w, no_padding, padding);
 	}
 
-#ifndef NDEBUG //  only in debug builds
-	if (unit_w < (is_big ? 7 * texth : 3 * buttonh)) {
-		throw wexception("Not enough space to draw spinbox. Width %d is smaller than required width %d",
-							  unit_w, (is_big ? 7 * texth : 3 * buttonh));
+	if (unit_w < (is_big ? 7 * buttonh : 3 * buttonh)) {
+		log("Not enough space to draw spinbox \"%s\".\n"
+			 "Width %d is smaller than required width %d."
+			 "Please report as a bug.\n",
+			 label_text.c_str(), unit_w, (is_big ? 7 * buttonh : 3 * buttonh));
 	}
-#endif
 
 	box_ = new UI::Box(this, 0, 0, UI::Box::Horizontal, actual_w, texth, padding);
 
@@ -137,9 +138,9 @@ SpinBox::SpinBox
 
 	UI::MultilineTextarea* label = new UI::MultilineTextarea(box_, 0, 0, available_width,
 																				texth * (extra_rows + 1), label_text);
-	box_->add(label, UI::Box::AlignCenter);
+	box_->add(label, UI::Align::kHCenter);
 
-	sbi_->text = new UI::Textarea(box_, "", Align_Center);
+	sbi_->text = new UI::Textarea(box_, "", UI::Align::kCenter);
 
 	sbi_->button_minus =
 		new Button
@@ -188,17 +189,17 @@ SpinBox::SpinBox
 											 - 2 * sbi_->button_minus->get_w()
 											 - 4 * padding);
 
-		box_->add(sbi_->button_ten_minus, UI::Box::AlignTop);
-		box_->add(sbi_->button_minus, UI::Box::AlignTop);
-		box_->add(sbi_->text, UI::Box::AlignTop);
-		box_->add(sbi_->button_plus, UI::Box::AlignTop);
-		box_->add(sbi_->button_ten_plus, UI::Box::AlignTop);
+		box_->add(sbi_->button_ten_minus, UI::Align::kTop);
+		box_->add(sbi_->button_minus, UI::Align::kTop);
+		box_->add(sbi_->text, UI::Align::kTop);
+		box_->add(sbi_->button_plus, UI::Align::kTop);
+		box_->add(sbi_->button_ten_plus, UI::Align::kTop);
 	} else {
 		sbi_->text->set_fixed_width(unit_w - 2 * sbi_->button_minus->get_w() - 2 * padding);
 
-		box_->add(sbi_->button_minus, UI::Box::AlignCenter);
-		box_->add(sbi_->text, UI::Box::AlignCenter);
-		box_->add(sbi_->button_plus, UI::Box::AlignCenter);
+		box_->add(sbi_->button_minus, UI::Align::kHCenter);
+		box_->add(sbi_->text, UI::Align::kHCenter);
+		box_->add(sbi_->button_plus, UI::Align::kHCenter);
 	}
 
 	sbi_->button_plus->sigclicked.connect(boost::bind(&SpinBox::change_value, boost::ref(*this), step_size));

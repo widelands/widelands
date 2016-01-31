@@ -48,7 +48,7 @@ struct WordWrap {
 	void set_draw_caret(bool draw_it) {m_draw_caret = draw_it;}
 
 	void draw
-		(RenderTarget & dst, Point where, Align align = Align_Left,
+		(RenderTarget & dst, Point where, Align align = UI::Align::kLeft,
 		 uint32_t caret = std::numeric_limits<uint32_t>::max());
 
 	void calc_wrapped_pos(uint32_t caret, uint32_t & line, uint32_t & pos) const;

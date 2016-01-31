@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-12-10 13:43+0000\n"
-"PO-Revision-Date: 2015-12-10 13:44+0000\n"
+"POT-Creation-Date: 2016-01-23 08:23+0000\n"
+"PO-Revision-Date: 2016-01-23 08:24+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Turkish (http://www.transifex.com/widelands/widelands/language/tr/)\n"
 "MIME-Version: 1.0\n"
@@ -268,84 +268,84 @@ msgstr "Ara"
 msgid "Loading tribes"
 msgstr "Kabileler yükleniyor"
 
-#: ../../src/editor/editorinteractive.cc:81
+#: ../../src/editor/editorinteractive.cc:104
 msgid "Menu"
 msgstr "Menü"
 
-#: ../../src/editor/editorinteractive.cc:84
+#: ../../src/editor/editorinteractive.cc:107
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:46
 msgid "Tools"
 msgstr "Araçlar"
 
-#: ../../src/editor/editorinteractive.cc:88
+#: ../../src/editor/editorinteractive.cc:111
 #: ../../src/editor/ui_menus/editor_toolsize_menu.cc:43
 msgid "Tool Size"
 msgstr "Araç Boyutu"
 
-#: ../../src/editor/editorinteractive.cc:91
-#: ../../src/wui/interactive_player.cc:102
+#: ../../src/editor/editorinteractive.cc:114
+#: ../../src/wui/interactive_player.cc:101
 #: ../../src/wui/interactive_spectator.cc:63
 msgid "Minimap"
 msgstr "Mini Harita"
 
-#: ../../src/editor/editorinteractive.cc:94
+#: ../../src/editor/editorinteractive.cc:117
 #: ../../src/wui/interactive_gamebase.cc:71
 msgid "Show Building Spaces (on/off)"
 msgstr "Bina Boşluklarını Göster (açık/kapalı)"
 
-#: ../../src/editor/editorinteractive.cc:97
+#: ../../src/editor/editorinteractive.cc:120
 #: ../../src/ui_fsmenu/launch_mpg.cc:171
 msgid "Players"
 msgstr "Oyuncular"
 
-#: ../../src/editor/editorinteractive.cc:100
+#: ../../src/editor/editorinteractive.cc:123
 msgid "Undo"
 msgstr "Geri Al"
 
-#: ../../src/editor/editorinteractive.cc:103
+#: ../../src/editor/editorinteractive.cc:126
 msgid "Redo"
 msgstr "Yinele"
 
-#: ../../src/editor/editorinteractive.cc:184
+#: ../../src/editor/editorinteractive.cc:207
 msgid "Unsupported format"
 msgstr "Desteklenmeyen format"
 
-#: ../../src/editor/editorinteractive.cc:185
+#: ../../src/editor/editorinteractive.cc:208
 #, c-format
 msgid ""
 "Widelands could not load the file \"%s\". The file format seems to be "
 "incompatible."
 msgstr "Widelands \"%s\" dosyasını yükleyemedi. Dosya formatı uyumlu gözükmüyor."
 
-#: ../../src/editor/editorinteractive.cc:200
+#: ../../src/editor/editorinteractive.cc:221
 msgid "Creating players"
 msgstr "Oyuncular yaratılıyor"
 
-#: ../../src/editor/editorinteractive.cc:251
+#: ../../src/editor/editorinteractive.cc:268
 msgid "Unsaved Map"
 msgstr "Kaydedilmemiş Harita"
 
-#: ../../src/editor/editorinteractive.cc:252
+#: ../../src/editor/editorinteractive.cc:269
 msgid "The map has not been saved, do you really want to quit?"
 msgstr "Bu harita henüz kaydedilmedi, gerçekten çıkmak istiyor musun?"
 
 #. * TRANSLATORS: Default name for new map
-#: ../../src/editor/editorinteractive.cc:597
-#: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:147
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:507
+#: ../../src/editor/editorinteractive.cc:608
+#: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:121
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:442
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:140
-#: ../../src/logic/map.h:180
+#: ../../src/logic/map.h:181
 msgid "No Name"
 msgstr "İsimsiz"
 
-#: ../../src/editor/editorinteractive.cc:598
-#: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:148
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:508
+#: ../../src/editor/editorinteractive.cc:609
+#: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:122
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:443
 msgctxt "map_name"
 msgid "Unknown"
 msgstr ""
 
-#: ../../src/editor/map_generator.cc:792
+#: ../../src/editor/map_generator.cc:791
 msgid "Random Player"
 msgstr ""
 
@@ -364,19 +364,16 @@ msgstr "Koordinatlar: (%1$i, %2$i)"
 
 #. * TRANSLATORS: Editor terrain property: small building plot
 #: ../../src/editor/tools/editor_info_tool.cc:63
-#: ../../src/logic/building.cc:506
 msgid "small"
 msgstr "küçük"
 
 #. * TRANSLATORS: Editor terrain property: medium building plot
 #: ../../src/editor/tools/editor_info_tool.cc:65
-#: ../../src/logic/building.cc:507
 msgid "medium"
 msgstr "orta"
 
 #. * TRANSLATORS: Editor terrain property: big building plot
 #: ../../src/editor/tools/editor_info_tool.cc:67
-#: ../../src/logic/building.cc:507
 msgid "big"
 msgstr "büyük"
 
@@ -387,7 +384,6 @@ msgstr ""
 
 #. * TRANSLATORS: Editor terrain property: mine building plot
 #: ../../src/editor/tools/editor_info_tool.cc:73
-#: ../../src/logic/building.cc:505
 msgid "mine"
 msgstr "maden"
 
@@ -397,9 +393,7 @@ msgid "port"
 msgstr ""
 
 #. * TRANSLATORS: Editor terrain property: units can walk on this terrain
-#. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/editor/tools/editor_info_tool.cc:77
-#: ../../src/logic/world/terrain_description.cc:76
 msgid "walkable"
 msgstr ""
 
@@ -440,6 +434,7 @@ msgid "No animals"
 msgstr "Hayvanları yok"
 
 #: ../../src/editor/tools/editor_info_tool.cc:102
+#: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:88
 msgid "Terrain:"
 msgstr "Zemin:"
 
@@ -464,7 +459,7 @@ msgid "Editor Category: %s"
 msgstr "Düzenleyici Kategorisi: %s"
 
 #: ../../src/editor/tools/editor_info_tool.cc:121
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:249
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:87
 msgid "Resources:"
 msgstr "Kaynaklar:"
 
@@ -499,8 +494,6 @@ msgid "Size: %1$ix%2$i"
 msgstr "Boyut: %1$ix%2$i"
 
 #: ../../src/editor/tools/editor_info_tool.cc:144
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:315
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:429
 #, c-format
 msgid "Players: %u"
 msgstr "Oyuncular: %u"
@@ -528,12 +521,12 @@ msgid "Main Menu"
 msgstr "Ana Menü"
 
 #: ../../src/editor/ui_menus/editor_main_menu.cc:53
-#: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:47
+#: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:46
 msgid "New Map"
 msgstr "Yeni Harita"
 
 #: ../../src/editor/ui_menus/editor_main_menu.cc:58
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:52
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:44
 msgid "New Random Map"
 msgstr "Yeni Rastgele Harita"
 
@@ -565,18 +558,21 @@ msgstr "Düzenleyiciden Çık"
 #: ../../src/editor/ui_menus/editor_main_menu_load_or_save_map.cc:58
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:63
 #: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:41
-#: ../../src/scripting/lua_game.cc:426 ../../src/ui_basic/messagebox.cc:90
-#: ../../src/ui_basic/messagebox.cc:97 ../../src/ui_fsmenu/helpwindow.cc:53
+#: ../../src/scripting/lua_game.cc:426 ../../src/ui_basic/messagebox.cc:91
+#: ../../src/ui_basic/messagebox.cc:98 ../../src/ui_fsmenu/helpwindow.cc:53
 #: ../../src/ui_fsmenu/load_map_or_game.cc:64
+#: ../../src/ui_fsmenu/options.cc:137
 #: ../../src/wui/game_main_menu_save_game.cc:91
 msgid "OK"
 msgstr "Tamam"
 
 #: ../../src/editor/ui_menus/editor_main_menu_load_or_save_map.cc:66
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:69
+#: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:64
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:136
 #: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:47
-#: ../../src/ui_basic/messagebox.cc:104 ../../src/ui_fsmenu/launch_mpg.cc:88
-#: ../../src/ui_fsmenu/options.cc:121 ../../src/ui_fsmenu/options.cc:446
+#: ../../src/ui_basic/messagebox.cc:105 ../../src/ui_fsmenu/launch_mpg.cc:88
+#: ../../src/ui_fsmenu/options.cc:123
 #: ../../src/wui/game_main_menu_save_game.cc:101 ../../src/wui/login_box.cc:72
 msgid "Cancel"
 msgstr "İptal"
@@ -683,96 +679,106 @@ msgstr ""
 msgid "Size: %1% x %2%"
 msgstr ""
 
-#: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:64
-#: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:130
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:124
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:423
-#, c-format
-msgid "Width: %u"
-msgstr "Genişlik: %u"
+#: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:52
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:53
+msgid "Width:"
+msgstr ""
 
-#: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:83
-#: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:131
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:132
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:424
-#, c-format
-msgid "Height: %u"
-msgstr "Yükseklik: %u"
+#: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:55
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:56
+msgid "Height:"
+msgstr ""
 
-#: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:108
+#: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:61
 msgid "Create Map"
 msgstr "Harita Oluştur"
 
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:56
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:60
+#: ../../src/ui_fsmenu/loadgame.cc:323
+msgid "Players:"
+msgstr "Oyuncular:"
+
+#. * TRANSLATORS: A world name for the random map generator in the editor
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:65
 msgid "Summer"
 msgstr "Yaz"
 
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:57
+#. * TRANSLATORS: A world name for the random map generator in the editor
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:67
 msgid "Winter"
 msgstr "Kış"
 
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:58
+#. * TRANSLATORS: A world name for the random map generator in the editor
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:69
 msgid "Desert"
 msgstr "Çöl"
 
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:59
+#. * TRANSLATORS: A world name for the random map generator in the editor
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:71
 msgid "Wasteland"
 msgstr ""
 
+#. * TRANSLATORS: Amount of resources in the random map generator in the
+#. editor
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:77
-msgid "Random Number:"
-msgstr "Rastgele Sayı:"
-
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:173
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:425
-#, c-format
-msgid "Water: %i %%"
-msgstr "Su: %%%i"
-
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:198
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:426
-#, c-format
-msgid "Land: %i %%"
-msgstr "Kara: %%%i"
-
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:223
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:427
-#, c-format
-msgid "Wasteland: %i %%"
-msgstr "Çorak arazi: %%%i"
-
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:232
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:428
-#, c-format
-msgid "Mountains: %i %%"
-msgstr "Dağlar: %%%i"
-
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:239
-msgid "Island mode"
-msgstr ""
-
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:252
 msgid "Low"
 msgstr "Düşük"
 
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:253
-#: ../../src/logic/building.cc:512
+#. * TRANSLATORS: Amount of resources in the random map generator in the
+#. editor
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:79
 msgid "Medium"
 msgstr "Orta"
 
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:254
+#. * TRANSLATORS: Amount of resources in the random map generator in the
+#. editor
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:81
 msgid "High"
 msgstr "Yüksek"
 
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:280
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:86
+msgid "Climate:"
+msgstr ""
+
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:105
+msgid "Water:"
+msgstr ""
+
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:108
+msgid "Land:"
+msgstr ""
+
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:111
+msgid "Wasteland:"
+msgstr ""
+
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:113
+msgid "Mountains:"
+msgstr ""
+
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:115
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:412
+#, c-format
+msgid "%i %%"
+msgstr ""
+
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:117
+msgid "Island mode"
+msgstr ""
+
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:120
+msgid "Random Number:"
+msgstr "Rastgele Sayı:"
+
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:125
 msgid "Map ID:"
 msgstr "Harita Kimliği:"
 
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:328
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:133
 msgid "Generate Map"
 msgstr "Haritayı Oluştur"
 
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:510
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:445
 msgid "Generating random map..."
 msgstr "Rastgele harita oluşturuluyor..."
 
@@ -839,7 +845,7 @@ msgstr "Oyuncu Sayısı"
 
 #. * TRANSLATORS: Default player name, e.g. Player 1
 #: ../../src/editor/ui_menus/editor_player_menu.cc:209
-#: ../../src/logic/map.cc:339
+#: ../../src/logic/map.cc:315
 #: ../../src/logic/single_player_game_settings_provider.cc:87
 #: ../../src/network/nethost.cc:2064 ../../src/ui_fsmenu/launch_mpg.cc:591
 #: ../../src/wui/multiplayersetupgroup.cc:122
@@ -848,12 +854,12 @@ msgstr "Oyuncu Sayısı"
 msgid "Player %u"
 msgstr "Oyuncu %u"
 
-#: ../../src/editor/ui_menus/editor_player_menu.cc:272
+#: ../../src/editor/ui_menus/editor_player_menu.cc:271
 #: ../../src/ui_fsmenu/multiplayer.cc:144
 msgid "Error!"
 msgstr "Hata!"
 
-#: ../../src/editor/ui_menus/editor_player_menu.cc:274
+#: ../../src/editor/ui_menus/editor_player_menu.cc:273
 msgid ""
 "Cannot remove player. It is referenced someplace. Remove all buildings and "
 "animals that depend on this player and try again."
@@ -864,21 +870,21 @@ msgid "Height Tools Options"
 msgstr "Yükseklik Araç Seçenekleri"
 
 #: ../../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:46
-#: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:56
+#: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:57
 msgid "Increase/Decrease Value"
 msgstr "Değeri Yükselt/Azalt"
 
 #: ../../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:82
-#: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:87
+#: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:88
 msgid "Set Value"
 msgstr "Değer Ayarla"
 
-#: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:52
+#: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:53
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:70
 msgid "Resources"
 msgstr "Kaynaklar"
 
-#: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:106
+#: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:107
 msgid "Current Selection"
 msgstr "Geçerli Seçim"
 
@@ -934,7 +940,7 @@ msgstr "Azami: %u"
 msgid "Set value: %u"
 msgstr "Değer ayarla: %u"
 
-#: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:93
+#: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:95
 msgid "Terrain Select"
 msgstr "Zemin Seç"
 
@@ -946,28 +952,6 @@ msgstr "Geçerli Boyut: %u"
 #: ../../src/io/dedicated_log.cc:68 ../../src/network/internet_gaming.cc:851
 msgid "unknown"
 msgstr "bilinmeyen"
-
-#: ../../src/logic/building.cc:510
-msgid "Mine"
-msgstr "Maden"
-
-#: ../../src/logic/building.cc:511
-msgid "Small"
-msgstr "Küçük"
-
-#: ../../src/logic/building.cc:512
-msgid "Big"
-msgstr "Büyük"
-
-#: ../../src/logic/constructionsite.cc:77 ../../src/logic/immovable.cc:494
-#, c-format
-msgid "%i%% built"
-msgstr "%%%i inşa edildi"
-
-#: ../../src/logic/dismantlesite.cc:96
-#, c-format
-msgid "%u%% dismantled"
-msgstr "%u%% sökülmüş"
 
 #: ../../src/logic/editor_game_base.cc:253
 msgid "Loading graphics"
@@ -1008,7 +992,7 @@ msgid "Configuring players"
 msgstr "Oyuncular ayarlanıyor"
 
 #: ../../src/logic/game.cc:384 ../../src/logic/game.cc:418
-#: ../../src/wlapplication.cc:1411
+#: ../../src/wlapplication.cc:1396
 msgid "Loading..."
 msgstr "Yükleniyor..."
 
@@ -1033,255 +1017,23 @@ msgid ""
 " anymore, or it's a new version that can't be handled yet."
 msgstr ""
 
-#: ../../src/logic/map.h:181
+#: ../../src/logic/map.h:182
 msgctxt "author_name"
 msgid "Unknown"
 msgstr ""
 
-#: ../../src/logic/map.h:182
+#: ../../src/logic/map.h:183
 msgid "No description defined"
 msgstr "Tanımlanmış açıklama yok"
 
-#. * TRANSLATORS: %1% is the number of soldiers the plural refers to
-#. * TRANSLATORS: %2% is the maximum number of soldier slots in the building
-#: ../../src/logic/militarysite.cc:126
-msgid "%1% soldier (+%2%)"
-msgid_plural "%1% soldiers (+%2%)"
-msgstr[0] "%1% asker (+%2%)"
-msgstr[1] "%1% asker (+%2%)"
-
-#: ../../src/logic/militarysite.cc:131
+#: ../../src/logic/map_objects/immovable.cc:494
 #, c-format
-msgid "%u soldier"
-msgid_plural "%u soldiers"
-msgstr[0] "%u asker"
-msgstr[1] "%u asker"
-
-#: ../../src/logic/militarysite.cc:140
-msgid "%1%(+%2%) soldier (+%3%)"
-msgid_plural "%1%(+%2%) soldiers (+%3%)"
-msgstr[0] "%1%(+%2%) asker (+%3%)"
-msgstr[1] "%1%(+%2%) asker (+%3%)"
-
-#. * TRANSLATORS: %1% is the number of soldiers the plural refers to
-#. * TRANSLATORS: %2% are currently open soldier slots in the building
-#: ../../src/logic/militarysite.cc:145
-msgid "%1%(+%2%) soldier"
-msgid_plural "%1%(+%2%) soldiers"
-msgstr[0] "%1%(+%2%) asker"
-msgstr[1] "%1%(+%2%) asker"
-
-#. * TRANSLATORS: Militarysite lost (taken/destroyed by enemy)
-#: ../../src/logic/militarysite.cc:867
-msgctxt "building"
-msgid "Lost!"
-msgstr ""
-
-#: ../../src/logic/militarysite.cc:869
-msgid "Militarysite lost!"
-msgstr "Askeri saha kaybedildi!"
-
-#. * TRANSLATORS: Message title.
-#. * TRANSLATORS: If you run out of space, you can also translate this as
-#. "Success!"
-#: ../../src/logic/militarysite.cc:912
-msgid "Enemy Defeated!"
-msgstr ""
-
-#: ../../src/logic/militarysite.cc:914
-msgid "Enemy at site defeated!"
-msgstr "Sahada düşman öldürüldü!"
-
-#. * TRANSLATORS: Militarysite is being attacked
-#: ../../src/logic/militarysite.cc:965
-msgctxt "building"
-msgid "Attack!"
-msgstr ""
-
-#: ../../src/logic/militarysite.cc:967
-msgid "You are under attack"
-msgstr "Saldırı altındasın"
+msgid "%i%% built"
+msgstr "%%%i inşa edildi"
 
 #: ../../src/logic/objective.h:38
 msgid "This objective has no description."
 msgstr ""
-
-#. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy
-#. needs the ware ‘%s’
-#: ../../src/logic/production_program.cc:331
-#, c-format
-msgid "the economy needs the ware ‘%s’"
-msgstr "ekonomi ‘%s’ malını gerektiriyor"
-
-#. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy
-#. doesn’t need the ware ‘%s’
-#: ../../src/logic/production_program.cc:339
-#, c-format
-msgid "the economy doesn’t need the ware ‘%s’"
-msgstr "ekonomi ‘%s’ malını gerektirmiyor"
-
-#. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy
-#. needs the worker ‘%s’
-#: ../../src/logic/production_program.cc:353
-#, c-format
-msgid "the economy needs the worker ‘%s’"
-msgstr "ekonomi ‘%s’ işçisini gerektiriyor"
-
-#. * TRANSLATORS: e.g. Completed/Skipped/Did not start ...
-#. * TRANSLATORS:      ... because the economy doesn’t need the worker ‘%s’
-#: ../../src/logic/production_program.cc:363
-#, c-format
-msgid "the economy doesn’t need the worker ‘%s’"
-msgstr "ekonomi ‘%s’ işçisini gerektirmiyor"
-
-#. * TRANSLATORS: This is an item in a list of wares, e.g. "3x water":
-#. * TRANSLATORS:    %1$s = "3"
-#. * TRANSLATORS:    %2$i = "water"
-#. * TRANSLATORS: This is an item in a list of wares, e.g. "3x water":
-#. * TRANSLATORS:    %1$i = "3"
-#. * TRANSLATORS:    %2$s = "water"
-#. * TRANSLATORS: e.g. 'Did not start working because 3x water and 3x wheat
-#. are missing'
-#. * TRANSLATORS: For this example, this is what's in the place holders:
-#. * TRANSLATORS:    %1$i = "3"
-#. * TRANSLATORS:    %2$s = "water"
-#. * TRANSLATORS: This is an item in a list of wares, e.g. "Produced 2x Coal":
-#. * TRANSLATORS:    %%1$i = "2"
-#. * TRANSLATORS:    %2$s = "Coal"
-#. * TRANSLATORS: This is an item in a list of workers, e.g. "Recruited 2x
-#. Ox":
-#. * TRANSLATORS:    %1$i = "2"
-#. * TRANSLATORS:    %2$s = "Ox"
-#: ../../src/logic/production_program.cc:407
-#: ../../src/logic/production_program.cc:429
-#: ../../src/logic/production_program.cc:944
-#: ../../src/logic/production_program.cc:1062
-#: ../../src/logic/production_program.cc:1158
-#, c-format
-msgid "%1$ix %2$s"
-msgstr "%1$ix %2$s"
-
-#. * TRANSLATORS: %s is a list of wares
-#: ../../src/logic/production_program.cc:413
-#, c-format
-msgid "the building has the following wares: %s"
-msgstr "bina şu mallara sahip: %s"
-
-#. * TRANSLATORS: %s is a list of wares
-#: ../../src/logic/production_program.cc:435
-#, c-format
-msgid "the building doesn’t have the following wares: %s"
-msgstr "bina şu mallara sahip değil: %s"
-
-#. * TRANSLATORS: 'Completed/Skipped/Did not start ... because a worker needs
-#. experience'.
-#: ../../src/logic/production_program.cc:453
-msgid "a worker needs experience"
-msgstr "bir işçinin deneyime ihtiyacı var"
-
-#. * TRANSLATORS: 'Completed/Skipped/Did not start ... because the workers
-#. need no experience'.
-#: ../../src/logic/production_program.cc:460
-msgid "the workers need no experience"
-msgstr "işçilerin deneyime ihtiyacı yok"
-
-#. * TRANSLATORS: "Did not start working because the economy needs the ware
-#. ‘%s’"
-#. * TRANSLATORS: e.g. 'Did not start working because 3x water and 3x wheat
-#. are missing'
-#. * TRANSLATORS: For this example, this is what's in the place holders:
-#. * TRANSLATORS:    %1$s = "working"
-#. * TRANSLATORS:    %2$s = "3x water and 3x wheat are missing"
-#. * TRANSLATORS: This appears in the hover text on buildings. Please test
-#. these in context
-#. * TRANSLATORS: on a development build if you can, and let us know if there
-#. are any issues
-#. * TRANSLATORS: we need to address for your language.
-#: ../../src/logic/production_program.cc:574
-#: ../../src/logic/production_program.cc:967
-#, c-format
-msgid "Did not start %1$s because %2$s"
-msgstr "%1$s başlatılmadı çünkü %2$s"
-
-#. * TRANSLATORS: "Completed working because the economy needs the ware ‘%s’"
-#: ../../src/logic/production_program.cc:581
-#, c-format
-msgid "Completed %1$s because %2$s"
-msgstr "%1$s tamamlandı çünkü %2$s"
-
-#. * TRANSLATORS: "Skipped working because the economy needs the ware ‘%s’"
-#: ../../src/logic/production_program.cc:588
-#, c-format
-msgid "Skipped %1$s because %2$s"
-msgstr "%1$s atlandı çünkü %2$s"
-
-#: ../../src/logic/production_program.cc:816
-msgid "No use for ships on this map!"
-msgstr ""
-
-#. * TRANSLATORS: e.g. 'Did not start working because 3x water and 3x wheat
-#. are missing'
-#. * TRANSLATORS: e.g. 'Did not start working because fish, meat or pitta
-#. bread is missing'
-#: ../../src/logic/production_program.cc:955
-#, c-format
-msgid "%s is missing"
-msgid_plural "%s are missing"
-msgstr[0] "%s eksik"
-msgstr[1] "%s eksik"
-
-#. * TRANSLATORS: %s is a list of wares. String is fetched according to total
-#. amount of wares.
-#: ../../src/logic/production_program.cc:1072
-#, c-format
-msgid "Produced %s"
-msgid_plural "Produced %s"
-msgstr[0] ""
-msgstr[1] ""
-
-#. * TRANSLATORS: %s is a list of workers. String is fetched according to
-#. total amount of workers.
-#: ../../src/logic/production_program.cc:1168
-#, c-format
-msgid "Recruited %s"
-msgid_plural "Recruited %s"
-msgstr[0] ""
-msgstr[1] ""
-
-#: ../../src/logic/production_program.cc:1391
-msgid "No soldier to train!"
-msgstr "Eğitilecek asker yok!"
-
-#: ../../src/logic/production_program.cc:1399
-#: ../../src/logic/production_program.cc:1484
-msgid "No soldier found for this training level!"
-msgstr "Bu eğitim seviyesinde hiç asker bulunamadı!"
-
-#: ../../src/logic/productionsite.cc:269
-msgid "(not occupied)"
-msgstr "(kimseye ait değil)"
-
-#: ../../src/logic/productionsite.cc:276
-msgid "Worker missing"
-msgid_plural "Workers missing"
-msgstr[0] "İşçi eksik"
-msgstr[1] "İşçiler eksik"
-
-#: ../../src/logic/productionsite.cc:281
-msgid "(stopped)"
-msgstr "(durdu)"
-
-#. * TRANSLATORS: Percent in building statistics window, e.g. 85%
-#. * TRANSLATORS: If you wish to add a space, translate as '%i %%'
-#: ../../src/logic/productionsite.cc:383
-#: ../../src/wui/building_statistics_menu.cc:686
-#, c-format
-msgid "%i%%"
-msgstr ""
-
-#: ../../src/logic/productionsite.cc:989
-msgid "Can’t find any more resources!"
-msgstr "Daha fazla kaynak bulunamıyor!"
 
 #: ../../src/logic/replay_game_controller.cc:108
 msgid "End of replay"
@@ -1304,152 +1056,6 @@ msgstr "Kaydetme başarısız!"
 #: ../../src/logic/save_handler.cc:144
 msgid "Game saved"
 msgstr "Oyun kaydedildi"
-
-#: ../../src/logic/ship.cc:435
-msgid "Port Space"
-msgstr ""
-
-#: ../../src/logic/ship.cc:436
-msgid "Port Space Found"
-msgstr "Liman Alanı Bulundu"
-
-#: ../../src/logic/ship.cc:437
-msgid "An expedition ship found a new port build space."
-msgstr "Bir sefer gemisi yeni liman inşa alanı buldu."
-
-#. * TRANSLATORS: A ship has circumnavigated an island and is waiting for
-#. orders
-#: ../../src/logic/ship.cc:556
-msgctxt "ship"
-msgid "Waiting"
-msgstr ""
-
-#: ../../src/logic/ship.cc:557
-msgid "Island Circumnavigated"
-msgstr "Adanın Etrafında Dolaşıldı"
-
-#: ../../src/logic/ship.cc:558
-msgid "An expedition ship sailed around its island without any events."
-msgstr "Bir sefer gemisi adayı hiçbir olay olmadan dolaştı."
-
-#. * TRANSLATORS: A ship has discovered land
-#: ../../src/logic/ship.cc:620
-msgid "Land Ahoy!"
-msgstr ""
-
-#: ../../src/logic/ship.cc:621
-msgid "Coast Reached"
-msgstr "Kıyıya Ulaşıldı"
-
-#: ../../src/logic/ship.cc:622
-msgid ""
-"An expedition ship reached a coast and is waiting for further commands."
-msgstr "Bir sefer gemisi kıyıya ulaştı ve sonraki komutları bekliyor."
-
-#: ../../src/logic/ship.cc:668
-msgid "Port Lost!"
-msgstr ""
-
-#: ../../src/logic/ship.cc:669
-msgid "New port construction site is gone"
-msgstr ""
-
-#: ../../src/logic/ship.cc:670
-msgid "Unloading of wares failed, expedition is cancelled now."
-msgstr "Malların boşaltılması başarısız, sefer artık iptal edildi."
-
-#. * TRANSLATORS: Ship expedition ready
-#: ../../src/logic/ship.cc:850
-msgctxt "ship"
-msgid "Expedition"
-msgstr ""
-
-#: ../../src/logic/ship.cc:851
-msgid "Expedition Ready"
-msgstr "Sefer Hazır"
-
-#: ../../src/logic/ship.cc:852
-msgid "An expedition ship is waiting for your commands."
-msgstr "Bir seyir gemisi komutlarını bekliyor."
-
-#: ../../src/logic/soldier.cc:1504 ../../src/logic/soldier.cc:1515
-msgid "Soldier"
-msgstr ""
-
-#: ../../src/logic/soldier.cc:1506 ../../src/logic/soldier.cc:1517
-msgid "Logic error"
-msgstr "Mantık hatası"
-
-#: ../../src/logic/warehouse.cc:457
-msgid "A new port was added to your economy."
-msgstr "Yeni bir liman ekonomine eklendi."
-
-#: ../../src/logic/warehouse.cc:466
-msgid "A new headquarters was added to your economy."
-msgstr "Yeni bir karargah ekonomine eklendi."
-
-#: ../../src/logic/warehouse.cc:475
-msgid "A new warehouse was added to your economy."
-msgstr "Yeni bir depo ekonomine eklendi."
-
-#: ../../src/logic/worker.cc:120
-#, c-format
-msgid ""
-"should mine resource %s, which does not exist in world; tribe is not "
-"compatible with world"
-msgstr "dünyada bulunmayan %s kaynağını kazmalı; sınıf dünyayla uyumlu değil"
-
-#: ../../src/logic/worker.cc:225
-#, c-format
-msgid ""
-"should breed resource type %s, which does not exist in world; tribe is not "
-"compatible with world"
-msgstr "dünyada bulunmayan %s kaynağını üretmeli; sınıf dünyayla uyumlu değil"
-
-#: ../../src/logic/worker.cc:969
-msgid "A geologist found resources."
-msgstr "Bir jeolojist kaynak buldu."
-
-#: ../../src/logic/worker.cc:1876
-#, c-format
-msgid "Your %s can't find a way home and will likely die."
-msgstr "%s eve dönüşü bulamıyor ve muhtemelen ölecek."
-
-#: ../../src/logic/worker.cc:1884 ../../src/wui/productionsitewindow.cc:82
-#: ../../src/wui/productionsitewindow.cc:110
-msgid "Worker"
-msgid_plural "Workers"
-msgstr[0] ""
-msgstr[1] ""
-
-#: ../../src/logic/worker.cc:1886
-msgid "Worker got lost!"
-msgstr "İşçi kayboldu!"
-
-#. * TRANSLATORS: This is a terrain type tooltip in the editor
-#: ../../src/logic/world/terrain_description.cc:71
-msgid "arable"
-msgstr "elverişli"
-
-#. * TRANSLATORS: This is a terrain type tooltip in the editor
-#: ../../src/logic/world/terrain_description.cc:81
-msgid "navigable"
-msgstr ""
-
-#. * TRANSLATORS: This is a terrain type tooltip in the editor
-#: ../../src/logic/world/terrain_description.cc:86
-msgid "unreachable"
-msgstr ""
-
-#. * TRANSLATORS: This is a terrain type tooltip in the editor
-#: ../../src/logic/world/terrain_description.cc:91
-msgid "mineable"
-msgstr ""
-
-#. * TRANSLATORS: This is a terrain type tooltip in the editor
-#: ../../src/logic/world/terrain_description.cc:96
-msgid "unwalkable"
-msgstr ""
 
 #: ../../src/map_io/s2map.cc:403
 msgid "Bluebyte Settlers II Map. No comment defined!"
@@ -1660,7 +1266,7 @@ msgid ""
 msgstr "Widelands verilen adresle bağlantı kuramıyor.\nYa bağlanmaya çalıştığınız portta çalışan Widelands yok ya da\nserver kapanmış."
 
 #: ../../src/network/netclient.cc:196 ../../src/network/nethost.cc:837
-#: ../../src/wlapplication.cc:1301
+#: ../../src/wlapplication.cc:1286
 msgid "Preparing game"
 msgstr "Oyun hazırlanıyor"
 
@@ -2066,42 +1672,42 @@ msgstr ""
 #. * TRANSLATORS: A variant of the commandline parameter "true" value
 #. * TRANSLATORS: Needs to be consistent with the translations in widelands-
 #. console
-#: ../../src/profile/profile.cc:49
+#: ../../src/profile/profile.cc:47
 msgid "true"
 msgstr ""
 
 #. * TRANSLATORS: A variant of the commandline parameter "true" value
 #. * TRANSLATORS: Needs to be consistent with the translations in widelands-
 #. console
-#: ../../src/profile/profile.cc:53
+#: ../../src/profile/profile.cc:51
 msgid "yes"
 msgstr ""
 
 #. * TRANSLATORS: A variant of the commandline parameter "true" value
 #. * TRANSLATORS: Needs to be consistent with the translations in widelands-
 #. console
-#: ../../src/profile/profile.cc:57
+#: ../../src/profile/profile.cc:55
 msgid "on"
 msgstr ""
 
 #. * TRANSLATORS: A variant of the commandline parameter "false" value
 #. * TRANSLATORS: Needs to be consistent with the translations in widelands-
 #. console
-#: ../../src/profile/profile.cc:67
+#: ../../src/profile/profile.cc:65
 msgid "false"
 msgstr ""
 
 #. * TRANSLATORS: A variant of the commandline parameter "false" value
 #. * TRANSLATORS: Needs to be consistent with the translations in widelands-
 #. console
-#: ../../src/profile/profile.cc:71
+#: ../../src/profile/profile.cc:69
 msgid "no"
 msgstr ""
 
 #. * TRANSLATORS: A variant of the commandline parameter "false" value
 #. * TRANSLATORS: Needs to be consistent with the translations in widelands-
 #. console
-#: ../../src/profile/profile.cc:75
+#: ../../src/profile/profile.cc:73
 msgid "off"
 msgstr ""
 
@@ -2116,25 +1722,26 @@ msgstr ""
 msgid "Preparing..."
 msgstr "Hazırlanıyor ..."
 
-#: ../../src/ui_basic/spinbox.cc:139
+#: ../../src/ui_basic/spinbox.cc:149
 msgid "Decrease the value"
 msgstr "Değeri azalt"
 
-#: ../../src/ui_basic/spinbox.cc:146
+#: ../../src/ui_basic/spinbox.cc:156
 msgid "Increase the value"
 msgstr "Değeri yükselt"
 
-#: ../../src/ui_basic/spinbox.cc:155
+#: ../../src/ui_basic/spinbox.cc:165
 msgid "Decrease the value by 10"
 msgstr "Değeri 10 azalt"
 
-#: ../../src/ui_basic/spinbox.cc:162
+#: ../../src/ui_basic/spinbox.cc:172
 msgid "Increase the value by 10"
 msgstr "Değeri 10 arttır"
 
 #. * TRANSLATORS: %i = number, %s = unit, e.g. "5 pixels" in the advanced
 #. options
-#: ../../src/ui_basic/spinbox.cc:223 ../../src/ui_basic/spinbox.cc:337
+#: ../../src/ui_basic/spinbox.cc:243 ../../src/ui_basic/spinbox.cc:251
+#: ../../src/ui_basic/spinbox.cc:381
 #, c-format
 msgid "%1$i %2$s"
 msgstr ""
@@ -2357,6 +1964,7 @@ msgid "Points"
 msgstr ""
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:148
+#: ../../src/ui_fsmenu/options.cc:243
 msgid "Game"
 msgstr ""
 
@@ -2687,10 +2295,6 @@ msgstr ""
 msgid "Gametime:"
 msgstr ""
 
-#: ../../src/ui_fsmenu/loadgame.cc:323
-msgid "Players:"
-msgstr "Oyuncular:"
-
 #: ../../src/ui_fsmenu/loadgame.cc:324
 msgid "Win Condition:"
 msgstr ""
@@ -2785,8 +2389,9 @@ msgstr ""
 msgid "Editor"
 msgstr ""
 
-#: ../../src/ui_fsmenu/main.cc:52 ../../src/wui/game_options_menu.cc:69
-#: ../../src/wui/interactive_player.cc:93
+#: ../../src/ui_fsmenu/main.cc:52 ../../src/ui_fsmenu/options.cc:114
+#: ../../src/wui/game_options_menu.cc:69
+#: ../../src/wui/interactive_player.cc:92
 #: ../../src/wui/interactive_spectator.cc:59
 msgid "Options"
 msgstr ""
@@ -2922,147 +2527,159 @@ msgctxt "game_state"
 msgid "Unknown"
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:116 ../../src/ui_fsmenu/options.cc:457
-msgid "Advanced Options"
-msgstr ""
-
-#: ../../src/ui_fsmenu/options.cc:126 ../../src/ui_fsmenu/options.cc:451
+#: ../../src/ui_fsmenu/options.cc:130
 msgid "Apply"
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:132
-msgid "General Options"
-msgstr ""
-
-#: ../../src/ui_fsmenu/options.cc:138
+#: ../../src/ui_fsmenu/options.cc:152
 msgid "In-game resolution"
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:148
+#: ../../src/ui_fsmenu/options.cc:155
 msgid "Fullscreen"
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:152
+#: ../../src/ui_fsmenu/options.cc:156
 msgid "Grab Input"
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:158
+#: ../../src/ui_fsmenu/options.cc:160
 msgid "Maximum FPS:"
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:165
-msgid "Language"
-msgstr ""
-
-#: ../../src/ui_fsmenu/options.cc:176
-#: ../../src/wui/game_options_sound_menu.cc:30
-msgid "Enable Music"
-msgstr ""
-
-#: ../../src/ui_fsmenu/options.cc:180
-#: ../../src/wui/game_options_sound_menu.cc:31
-msgid "Enable Sound Effects"
-msgstr ""
-
-#: ../../src/ui_fsmenu/options.cc:187
-msgid "In-game Options"
-msgstr ""
-
-#. * TRANSLATORS: A watchwindow is a window where you keep watching an object
-#. or a map region,
-#. * TRANSLATORS: and it also lets you jump to it on the map.
-#: ../../src/ui_fsmenu/options.cc:191
-msgid "Use single watchwindow mode"
-msgstr ""
-
-#: ../../src/ui_fsmenu/options.cc:196
-msgid "Start building road after placing a flag"
-msgstr ""
-
-#: ../../src/ui_fsmenu/options.cc:201
-msgid "Show buildings area preview"
-msgstr ""
-
-#: ../../src/ui_fsmenu/options.cc:207
+#: ../../src/ui_fsmenu/options.cc:164
 msgid "Snap windows only when overlapping"
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:212
+#: ../../src/ui_fsmenu/options.cc:166
 msgid "Dock windows to edges"
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:220
-msgid "Save game automatically every"
-msgstr ""
-
-#. * TRANSLATORS: Options: Save game automatically every:
-#. * TRANSLATORS: This will have a number added in front of it
-#: ../../src/ui_fsmenu/options.cc:223 ../../src/ui_fsmenu/options.cc:322
-msgid "minute"
-msgid_plural "minutes"
-msgstr[0] ""
-msgstr[1] ""
-
-#: ../../src/ui_fsmenu/options.cc:233
-msgid "Remove replays older than:"
-msgstr ""
-
-#. * TRANSLATORS: Options: Remove Replays older than:
-#. * TRANSLATORS: This will have a number added in front of it
-#: ../../src/ui_fsmenu/options.cc:236 ../../src/ui_fsmenu/options.cc:326
-msgid "day"
-msgid_plural "days"
-msgstr[0] ""
-msgstr[1] ""
-
-#. * TRANSLATORS Options: Save game automatically every:
-#: ../../src/ui_fsmenu/options.cc:246
-msgid "Off"
-msgstr ""
-
-#. * TRANSLATORS Options: Remove Replays older than:
-#: ../../src/ui_fsmenu/options.cc:254
-msgid "Never"
-msgstr ""
-
-#. * TRANSLATORS: Screen resolution, e.g. 800 x 600
-#: ../../src/ui_fsmenu/options.cc:301 ../../src/ui_fsmenu/options.cc:307
-msgid "%1% x %2%"
-msgstr ""
-
-#: ../../src/ui_fsmenu/options.cc:340
-msgid "Try system language"
-msgstr ""
-
-#: ../../src/ui_fsmenu/options.cc:465
+#: ../../src/ui_fsmenu/options.cc:171
 msgid "Distance for windows to snap to other panels:"
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:466 ../../src/ui_fsmenu/options.cc:474
-#: ../../src/ui_fsmenu/options.cc:528 ../../src/ui_fsmenu/options.cc:532
+#. * TRANSLATORS: Options: Distance for windows to snap to  other panels:
+#. * TRANSLATORS: This will have a number added in front of it
+#. * TRANSLATORS: Options: Distance for windows to snap to borders:
+#. * TRANSLATORS: This will have a number added in front of it
+#: ../../src/ui_fsmenu/options.cc:174 ../../src/ui_fsmenu/options.cc:182
+#: ../../src/ui_fsmenu/options.cc:411 ../../src/ui_fsmenu/options.cc:415
 msgid "pixel"
 msgid_plural "pixels"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../../src/ui_fsmenu/options.cc:473
+#: ../../src/ui_fsmenu/options.cc:179
 msgid "Distance for windows to snap to borders:"
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:479
-msgid "Show in-game chat with transparent background"
+#: ../../src/ui_fsmenu/options.cc:185
+#: ../../src/wui/game_options_sound_menu.cc:30
+msgid "Enable Music"
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:486
+#: ../../src/ui_fsmenu/options.cc:186
+#: ../../src/wui/game_options_sound_menu.cc:31
+msgid "Enable Sound Effects"
+msgstr ""
+
+#: ../../src/ui_fsmenu/options.cc:187
 msgid "Play a sound at message arrival"
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:492
+#: ../../src/ui_fsmenu/options.cc:193
+msgid "Save game automatically every"
+msgstr ""
+
+#. * TRANSLATORS: Options: Save game automatically every:
+#. * TRANSLATORS: This will have a number added in front of it
+#: ../../src/ui_fsmenu/options.cc:196 ../../src/ui_fsmenu/options.cc:403
+msgid "minute"
+msgid_plural "minutes"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../../src/ui_fsmenu/options.cc:201
+msgid "Maximum number of autosave files"
+msgstr ""
+
+#: ../../src/ui_fsmenu/options.cc:207
+msgid "Remove replays older than:"
+msgstr ""
+
+#. * TRANSLATORS: Options: Remove Replays older than:
+#. * TRANSLATORS: This will have a number added in front of it
+#: ../../src/ui_fsmenu/options.cc:210 ../../src/ui_fsmenu/options.cc:407
+msgid "day"
+msgid_plural "days"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../../src/ui_fsmenu/options.cc:213
 msgid "Do not zip widelands data files (maps, replays and savegames)"
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:498
+#: ../../src/ui_fsmenu/options.cc:215
 msgid "Remove Syncstream dumps on startup"
+msgstr ""
+
+#: ../../src/ui_fsmenu/options.cc:219
+msgid "Start building road after placing a flag"
+msgstr ""
+
+#: ../../src/ui_fsmenu/options.cc:220
+msgid "Show buildings area preview"
+msgstr ""
+
+#: ../../src/ui_fsmenu/options.cc:221
+msgid "Show in-game chat with transparent background"
+msgstr ""
+
+#. * TRANSLATORS: A watchwindow is a window where you keep watching an object
+#. or a map region,
+#. * TRANSLATORS: and it also lets you jump to it on the map.
+#: ../../src/ui_fsmenu/options.cc:226
+msgid "Use single watchwindow mode"
+msgstr ""
+
+#: ../../src/ui_fsmenu/options.cc:229 ../../src/ui_fsmenu/options.cc:244
+msgid "Language"
+msgstr ""
+
+#: ../../src/ui_fsmenu/options.cc:239
+msgid "Interface"
+msgstr ""
+
+#: ../../src/ui_fsmenu/options.cc:240
+msgid "Windows"
+msgstr ""
+
+#: ../../src/ui_fsmenu/options.cc:241
+msgid "Sound"
+msgstr ""
+
+#: ../../src/ui_fsmenu/options.cc:242
+msgid "Saving"
+msgstr ""
+
+#. * TRANSLATORS Options: Save game automatically every:
+#: ../../src/ui_fsmenu/options.cc:302
+msgid "Off"
+msgstr ""
+
+#. * TRANSLATORS Options: Remove Replays older than:
+#: ../../src/ui_fsmenu/options.cc:310
+msgid "Never"
+msgstr ""
+
+#. * TRANSLATORS: Screen resolution, e.g. 800 x 600
+#: ../../src/ui_fsmenu/options.cc:357 ../../src/ui_fsmenu/options.cc:363
+msgid "%1% x %2%"
+msgstr ""
+
+#: ../../src/ui_fsmenu/options.cc:421
+msgid "Try system language"
 msgstr ""
 
 #: ../../src/ui_fsmenu/singleplayer.cc:40
@@ -3077,11 +2694,11 @@ msgstr ""
 msgid "Load Game"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1085
+#: ../../src/wlapplication.cc:1070
 msgid "Game data error"
 msgstr "Oyun veri hatası"
 
-#: ../../src/wlapplication.cc:1095
+#: ../../src/wlapplication.cc:1080
 #, c-format
 msgid ""
 "\n"
@@ -3089,7 +2706,7 @@ msgid ""
 "Please report this problem to help us improve Widelands. You will find related messages in the standard output (stdout.txt on Windows). You are using build %1$s (%2$s). "
 msgstr ""
 
-#: ../../src/wlapplication.cc:1102
+#: ../../src/wlapplication.cc:1087
 msgid ""
 "Please add this information to your report.\n"
 "\n"
@@ -3213,6 +2830,13 @@ msgstr ""
 msgid "Show next building"
 msgstr ""
 
+#. * TRANSLATORS: Percent in building statistics window, e.g. 85%
+#. * TRANSLATORS: If you wish to add a space, translate as '%i %%'
+#: ../../src/wui/building_statistics_menu.cc:686
+#, c-format
+msgid "%i%%"
+msgstr ""
+
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
 #. * TRANSLATORS Buildings: owned / under construction
@@ -3292,7 +2916,7 @@ msgid "Building materials"
 msgstr ""
 
 #: ../../src/wui/encyclopedia_window.cc:87
-#: ../../src/wui/interactive_player.cc:108
+#: ../../src/wui/interactive_player.cc:107
 msgid "Tribal Encyclopedia"
 msgstr ""
 
@@ -3402,7 +3026,7 @@ msgstr ""
 msgid "Build roads"
 msgstr ""
 
-#: ../../src/wui/game_chat_menu.cc:57 ../../src/wui/interactive_player.cc:90
+#: ../../src/wui/game_chat_menu.cc:57 ../../src/wui/interactive_player.cc:89
 #: ../../src/wui/interactive_spectator.cc:53
 msgid "Chat"
 msgstr ""
@@ -3589,7 +3213,7 @@ msgid "Show Inbox"
 msgstr ""
 
 #: ../../src/wui/game_objectives_menu.cc:45
-#: ../../src/wui/interactive_player.cc:99
+#: ../../src/wui/interactive_player.cc:98
 msgid "Objectives"
 msgstr ""
 
@@ -3752,17 +3376,17 @@ msgstr ""
 msgid "%1$s (%2$s)"
 msgstr ""
 
-#: ../../src/wui/interactive_player.cc:96
+#: ../../src/wui/interactive_player.cc:95
 #: ../../src/wui/interactive_spectator.cc:61
 msgid "Statistics"
 msgstr ""
 
-#: ../../src/wui/interactive_player.cc:105
-#: ../../src/wui/interactive_player.cc:224
+#: ../../src/wui/interactive_player.cc:104
+#: ../../src/wui/interactive_player.cc:223
 msgid "Messages"
 msgstr ""
 
-#: ../../src/wui/interactive_player.cc:231
+#: ../../src/wui/interactive_player.cc:230
 #, c-format
 msgid "%u new message"
 msgid_plural "%u new messages"
@@ -3982,9 +3606,16 @@ msgstr ""
 msgid "%1% min"
 msgstr ""
 
-#: ../../src/wui/plot_area.cc:275
+#: ../../src/wui/plot_area.cc:273
 msgid "game"
 msgstr ""
+
+#: ../../src/wui/productionsitewindow.cc:82
+#: ../../src/wui/productionsitewindow.cc:110
+msgid "Worker"
+msgid_plural "Workers"
+msgstr[0] ""
+msgstr[1] ""
 
 #: ../../src/wui/productionsitewindow.cc:84
 msgid "Exp"

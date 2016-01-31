@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-01-23 08:23+0000\n"
+"POT-Creation-Date: 2016-01-31 15:13+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -111,19 +111,20 @@ msgid "Overview:"
 msgstr ""
 
 #: ../../scripting/win_conditions/artifacts.lua:150
-#: ../../scripting/win_conditions/artifacts.lua:162
+#: ../../scripting/win_conditions/artifacts.lua:163
 #, lua-format
 msgid "%i artifact"
 msgid_plural "%i artifacts"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../../scripting/win_conditions/artifacts.lua:151
+#. TRANSLATORS: e.g. Team 1 owns 5 artifacts.
+#: ../../scripting/win_conditions/artifacts.lua:152
 msgid "%1$s owns %2$s."
 msgstr ""
 
 #. TRANSLATORS: %1$i is the team's number; %2$s is a list of team members (e.g. "Steve, Robert, David"), %3$s is something like "x artifact(s)"
-#: ../../scripting/win_conditions/artifacts.lua:164
+#: ../../scripting/win_conditions/artifacts.lua:165
 msgid "Team %1$i (%2$s) owns %3$s."
 msgstr ""
 

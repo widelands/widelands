@@ -51,8 +51,9 @@ private:
 	bool save_game(std::string);
 	void pause_game(bool paused);
 
+	UI::EditBox editbox_;
 	UI::Listselect<std::string> ls_;
-	UI::EditBox * editbox_;
+
 	UI::Textarea name_label_, mapname_, gametime_label_, gametime_, players_label_,
 		win_condition_label_, win_condition_;
 	UI::Button * button_ok_;

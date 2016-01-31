@@ -110,7 +110,6 @@ Window::Window
 void Window::set_title(const string & text)
 {
 	m_title = is_richtext(text) ? text : as_window_title(text);
-	update(0, 0, get_w(), TP_B_PIXMAP_THICKNESS);
 }
 
 /**
@@ -317,7 +316,7 @@ void Window::draw_border(RenderTarget & dst)
 			(Point(get_lborder() + get_inner_w() / 2, TP_B_PIXMAP_THICKNESS / 2),
 				UI::g_fh1->render(m_title),
 				BlendMode::UseAlpha,
-				Align_Center);
+				UI::Align::kCenter);
 	}
 
 	if (!_is_minimal) {

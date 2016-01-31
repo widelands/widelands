@@ -314,7 +314,7 @@ void Table<void *>::draw(RenderTarget & dst)
 						}
 					}
 
-					if (alignment & Align_Right) {
+					if (static_cast<int>(alignment & UI::Align::kRight)) {
 						draw_x += curw - blit_width;
 					}
 
@@ -331,7 +331,7 @@ void Table<void *>::draw(RenderTarget & dst)
 						} else {
 							draw_x = point.x + (curw - picw) / 2;
 						}
-					} else if (alignment & Align_Right) {
+					} else if (static_cast<int>(alignment & UI::Align::kRight)) {
 						draw_x += curw - picw;
 					}
 					dst.blit(Point(draw_x, point.y + (lineheight - pich) / 2), entry_picture);
@@ -347,9 +347,9 @@ void Table<void *>::draw(RenderTarget & dst)
 			}
 			const Image* entry_text_im = UI::g_fh1->render(as_uifont(richtext_escape(entry_string), m_fontsize));
 
-			if (alignment & Align_Right) {
+			if (static_cast<int>(alignment & UI::Align::kRight)) {
 				point.x += curw - 2 * picw;
-			} else if (alignment & Align_HCenter) {
+			} else if (static_cast<int>(alignment & UI::Align::kHCenter)) {
 				point.x += (curw - picw) / 2;
 			}
 
@@ -364,7 +364,7 @@ void Table<void *>::draw(RenderTarget & dst)
 			if ((curw + picw) < text_width) {
 				// Fix positioning for BiDi languages.
 				if (UI::g_fh1->fontset().is_rtl()) {
-					point.x = alignment & Align_Right ? curx : curx + picw;
+					point.x = static_cast<int>(alignment & UI::Align::kRight) ? curx : curx + picw;
 				}
 				// We want this always on, e.g. for mixed language savegame filenames
 				if (i18n::has_rtl_character(entry_string.c_str(), 20)) { // Restrict check for efficiency
@@ -448,7 +448,6 @@ bool Table<void *>::handle_mousepress
 					if (column.is_checkbox_column) {
 						play_click();
 						m_entry_records.at(row)->toggle(col);
-						update(0, 0, get_eff_w(), get_h());
 					}
 					break;
 				}
@@ -524,7 +523,6 @@ void Table<void *>::select(const uint32_t i)
 	m_selection = i;
 
 	selected(m_selection);
-	update(0, 0, get_eff_w(), get_h());
 }
 
 /**
@@ -551,8 +549,6 @@ Table<void *>::EntryRecord & Table<void *>::add
 		select(m_entry_records.size() - 1);
 		m_scrollbar->set_scrollpos(std::numeric_limits<int32_t>::max());
 	}
-
-	update(0, 0, get_eff_w(), get_h());
 	return result;
 }
 
@@ -562,8 +558,6 @@ Table<void *>::EntryRecord & Table<void *>::add
 void Table<void *>::set_scrollpos(int32_t const i)
 {
 	m_scrollpos = i;
-
-	update(0, 0, get_eff_w(), get_h());
 }
 
 /**
@@ -631,8 +625,6 @@ void Table<void *>::sort(const uint32_t Begin, uint32_t End)
 			newselection = i;
 	}
 	m_selection = newselection;
-
-	update();
 }
 
 /**

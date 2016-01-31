@@ -247,7 +247,7 @@ tribes:new_tribe {
 
    ship_names = {
       "Adriaitic Sea",
-      "Alexandria", 
+      "Alexandria",
       "Amalea",
       "Amolius",
       "Apollo",

@@ -52,7 +52,7 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby
 	title
 		(this,
 		 get_w() / 2, get_h() / 20,
-		 _("Metaserver Lobby"), UI::Align_HCenter),
+		 _("Metaserver Lobby"), UI::Align::kHCenter),
 	m_clients
 		(this,
 		 get_w() * 4 / 125, get_h() * 15 / 100,
@@ -85,8 +85,8 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby
 
 // Edit boxes
 	servername
-		(this, get_w() * 17 / 25, get_h() * 68 / 100, m_butw, m_buth,
-		 g_gr->images().get("pics/but2.png")),
+		(this, get_w() * 17 / 25, get_h() * 68 / 100, m_butw,
+		 g_gr->images().get("pics/but2.png"), m_fs),
 
 // List
 	clientsonline
@@ -127,7 +127,6 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby
 	servername  .set_text (server);
 	servername  .changed.connect
 		(boost::bind(&FullscreenMenuInternetLobby::change_servername, this));
-	servername  .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 
 	// prepare the lists
 	std::string t_tip = (boost::format("%s%s%s%s%s%s%s%s%s%s")
@@ -390,7 +389,7 @@ void FullscreenMenuInternetLobby::clicked_joingame()
 											_("Connection timed out"),
 											warning,
 											UI::WLMessageBox::MBoxType::kOk,
-											UI::Align_Left);
+											UI::Align::kLeft);
 				mmb.run<UI::Panel::Returncodes>();
 				return InternetGaming::ref().set_error();
 			}
@@ -416,7 +415,8 @@ DIAG_ON("-Wold-style-cast")
 			// Show a popup warning message
 			std::string warningheader(_("Connection problem"));
 			std::string warning(_("Widelands was unable to connect to the host."));
-			UI::WLMessageBox mmb(this, warningheader, warning, UI::WLMessageBox::MBoxType::kOk, UI::Align_Left);
+				UI::WLMessageBox mmb(this, warningheader, warning, UI::WLMessageBox::MBoxType::kOk,
+											UI::Align::kLeft);
 			mmb.run<UI::Panel::Returncodes>();
 		}
 		SDLNet_ResolveHost (&peer, ip.c_str(), WIDELANDS_PORT);

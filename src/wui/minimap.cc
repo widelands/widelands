@@ -54,8 +54,6 @@ void MiniMap::View::set_view_pos(const int32_t x, const int32_t y)
 {
 	viewx_ = x / TRIANGLE_WIDTH;
 	viewy_ = y / TRIANGLE_HEIGHT;
-
-	update();
 }
 
 

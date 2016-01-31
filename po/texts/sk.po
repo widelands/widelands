@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2015 Widelands Development Team
+# Copyright (C) 2005-2016 Widelands Development Team
 # 
 # Translators:
 # MiroslavR <miroslavr256@gmail.com>, 2015
@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-12-03 09:55+0000\n"
-"PO-Revision-Date: 2015-12-03 16:50+0000\n"
+"POT-Creation-Date: 2016-01-23 08:23+0000\n"
+"PO-Revision-Date: 2016-01-23 22:45+0000\n"
 "Last-Translator: MiroslavR <miroslavr256@gmail.com>\n"
 "Language-Team: Slovak (http://www.transifex.com/widelands/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
@@ -45,6 +45,7 @@ msgid ""
 msgstr "Táto hra je slobodný softvér s otvoreným zdrojovým kódom (FOSS) licencovaný pod Všeobecnou verejnou licenciou GNU (GPL) v. 2.0."
 
 #: ../../txts/LICENSE.lua:26
+#, lua-format
 msgid ""
 "You can find more information on FOSS and the GPL by visiting the following "
 "webpage:  %s"
@@ -293,6 +294,7 @@ msgid ""
 msgstr "Podrobný popis ekonomík kmeňov nájdete v encyklopédii kmeňov, ktorá je zabudovaná do hry."
 
 #: ../../txts/README.lua:92
+#, lua-format
 msgid ""
 "If you need more documentation or help for Widelands or the Widelands "
 "Editor, be sure to visit our homepage at %s. You can find online help in our"
@@ -433,11 +435,10 @@ msgstr "FreeBSD"
 msgid "Graphicians"
 msgstr "Grafici"
 
-#: ../../txts/developers.lua:3 ../../txts/developers.lua:3
+#: ../../txts/developers.lua:3
 msgid "Graphics"
 msgstr "Grafika"
 
-#: ../../txts/developers.lua:3 ../../txts/developers.lua:3
 #: ../../txts/developers.lua:3
 msgid "Homepage"
 msgstr "Domovská stránka"
@@ -470,7 +471,7 @@ msgstr "Ostatní"
 msgid "Packagers"
 msgstr "Správcovia balíčkov"
 
-#: ../../txts/developers.lua:3 ../../txts/developers.lua:3
+#: ../../txts/developers.lua:3
 msgid "Sound"
 msgstr "Zvuk"
 
@@ -519,6 +520,7 @@ msgid ""
 msgstr "Ako si môžete všimnúť, na editore sa stále vo veľkom pracuje a s jeho zdokonaľovaním sa tento text bude predlžovať a dopĺňať."
 
 #: ../../txts/editor_readme.lua:14
+#, lua-format
 msgid "Please have a look at our enduser manuals on our wiki pages at: %s"
 msgstr "Prosím, prečítajte si používateľské manuály na našej wiki na tejto stránke: %s"
 
