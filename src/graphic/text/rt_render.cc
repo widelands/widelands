@@ -27,7 +27,6 @@
 
 #include <SDL.h>
 #include <boost/algorithm/string/predicate.hpp>
-#include <boost/algorithm/string/replace.hpp>
 #include <boost/format.hpp>
 
 #include "base/log.h"
@@ -43,21 +42,11 @@
 #include "graphic/text/font_set.h"
 #include "graphic/text/rt_parse.h"
 #include "graphic/text/textstream.h"
+#include "graphic/text_layout.h"
 #include "graphic/texture.h"
 #include "io/filesystem/filesystem_exceptions.h"
 
 using namespace std;
-
-namespace {
-
-// TODO(GunChleoc): This function is mirrored in richtext. Keep them identical.
-void replace_entities(std::string* text) {
-	boost::replace_all(*text, "&gt;", ">");
-	boost::replace_all(*text, "&lt;", "<");
-	boost::replace_all(*text, "&nbsp;", " ");
-}
-
-} // namespace
 
 namespace RT {
 

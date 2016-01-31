@@ -19,8 +19,6 @@
 
 #include "graphic/richtext.h"
 
-#include <boost/algorithm/string/replace.hpp>
-
 #include "base/rect.h"
 #include "graphic/font.h"
 #include "graphic/font_handler.h"
@@ -36,14 +34,6 @@ namespace UI {
 
 namespace {
 int32_t const h_space = 3;
-
-// TODO(GunChleoc): This function is mirrored in rt_render. Keep them identical.
-void replace_entities(std::string* text) {
-	boost::replace_all(*text, "&gt;", ">");
-	boost::replace_all(*text, "&lt;", "<");
-	boost::replace_all(*text, "&nbsp;", " ");
-}
-
 } // namespace
 
 /**

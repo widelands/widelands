@@ -29,6 +29,12 @@
 #include "graphic/text_constants.h"
 
 /**
+ * This function replaces some HTML entities in strings, e.g. %nbsp;.
+ * It is used by the renderers after the tags have been parsed.
+ */
+void replace_entities(std::string* text);
+
+/**
  * Checks it the given string is RichText or not. Does not do validity checking.
  */
 inline bool is_richtext(const std::string& text) {

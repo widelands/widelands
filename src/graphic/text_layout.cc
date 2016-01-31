@@ -31,6 +31,12 @@
 #include "graphic/text/font_set.h"
 #include "graphic/text_constants.h"
 
+void replace_entities(std::string* text) {
+	boost::replace_all(*text, "&gt;", ">");
+	boost::replace_all(*text, "&lt;", "<");
+	boost::replace_all(*text, "&nbsp;", " ");
+}
+
 std::string richtext_escape(const std::string& given_text) {
 	std::string text = given_text;
 	boost::replace_all(text, ">", "&gt;");
