@@ -20,6 +20,7 @@
 #include "ai/defaultai.h"
 
 #include <algorithm>
+#include <cmath>
 #include <ctime>
 #include <memory>
 #include <queue>
@@ -1434,6 +1435,9 @@ void DefaultAI::update_productionsite_stats() {
 //   Currently more military buildings are built than needed
 //   and "optimization" (dismantling not needed buildings) is done afterwards
 bool DefaultAI::construct_building(uint32_t gametime) {
+	if (buildable_fields.empty()) {
+		return false;
+	}
 	// Just used for easy checking whether a mine or something else was built.
 	bool mine = false;
 	bool field_blocked = false;
@@ -1504,18 +1508,38 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 	highest_nonmil_prio_ = 0;
 
 	const bool too_many_ms_constructionsites =
-		(pow(msites_in_constr(), 2) > militarysites.size());
+		(pow(msites_in_constr(), 2) > militarysites.size() + 2);
 	const bool too_many_vacant_mil =
 		(vacant_mil_positions_ * 3 > static_cast<int32_t>(militarysites.size()));
-	const int32_t kUpperLimit = 275;
+	const int32_t kUpperLimit = 325;
 	const int32_t kBottomLimit = 40; // to prevent too dense militarysites
 	// modifying least_military_score_, down if more military sites are needed and vice versa
 	if (too_many_ms_constructionsites || too_many_vacant_mil || needs_boost_economy) {
-		if (persistent_data->least_military_score < kUpperLimit) { //no sense to let it grow too hight
-			persistent_data->least_military_score += 2;
+		if (persistent_data->least_military_score < kUpperLimit) { //no sense to let it grow too high
+			persistent_data->least_military_score += 20;
 		}
 	} else {
-		persistent_data->least_military_score -= 4;
+		//printf (" fields: %d, log10: %d\n",
+		//buildable_fields.size(),
+		//static_cast<uint32_t>(log10(buildable_fields.size()))); //NOCOM
+		
+		switch (static_cast<uint32_t>(log10(buildable_fields.size()))) {
+			case 0:
+				persistent_data->least_military_score -= 10;
+				break;
+			case 1:
+				persistent_data->least_military_score -= 8;
+				break;			
+			case 2:
+				persistent_data->least_military_score -= 5;
+				break;						
+			case 3:
+				persistent_data->least_military_score -= 3;
+				break;			
+			default:
+				persistent_data->least_military_score -= 2;
+			}
+		//persistent_data->least_military_score -= 5;
 		// do not get bellow 100 if there is at least one ms in construction
 		if ((msites_in_constr() > 0 || too_many_vacant_mil)
 			&&
@@ -1528,7 +1552,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 	}
 
 	// This is effective score, falling down very quickly
-	if (persistent_data->target_military_score > 350) {
+	if (persistent_data->target_military_score > kUpperLimit + 150) {
 		persistent_data->target_military_score = 8 * persistent_data->target_military_score / 10;
 	} else {
 		persistent_data->target_military_score = 9 * persistent_data->target_military_score / 10;
@@ -1594,7 +1618,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 	if (spots_ == 0) {
 		resource_necessity_territory_ = 100;
 	} else {
-		resource_necessity_territory_ = 100 * 5 * (productionsites.size() + 5) / spots_;
+		resource_necessity_territory_ = 100 * 3 * (productionsites.size() + 5) / spots_;
 		resource_necessity_territory_ =
 		   (resource_necessity_territory_ > 100) ? 100 : resource_necessity_territory_;
 		resource_necessity_territory_ =
@@ -1606,6 +1630,10 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 		if (spots_avail.at(BUILDCAPS_MEDIUM) < 4) {
 			resource_necessity_territory_ = 100;
 		}
+	}
+	if (gametime % 60 == 0) {
+		printf (" %d: space necessity: %3d, mine necessity: %3d\n",
+		player_number(), resource_necessity_territory_, resource_necessity_mines_);
 	}
 
 	BuildingObserver* best_building = nullptr;
@@ -2123,7 +2151,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 					continue;
 				}
 
-				if (military_last_build_ > gametime - 10 * 1000) {
+				if (military_last_build_ > gametime - 15 * 1000) {
 					continue;
 				}
 
@@ -2151,7 +2179,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 				// additional bonus is added
 				if (bf->enemy_nearby_) {
 					prio += bf->military_loneliness_ / 3;
-					prio += (20 - bf->area_military_capacity_) * 25;
+					prio += (20 - bf->area_military_capacity_) * 10;//NOCOM changed here
 					prio -= bo.build_material_shortage_  * 50;
 					prio -= (bf->military_in_constr_nearby_ + bf->military_unstationed_) * 50;
 				} else {
@@ -2166,7 +2194,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 				}
 				prio += bf->unowned_land_nearby_ * resource_necessity_territory_ / 100;
 				prio += bf->unowned_mines_spots_nearby_ * resource_necessity_mines_ / 100;
-				prio += ((bf->unowned_mines_spots_nearby_ > 0) ? 20 : 0) *
+				prio += ((bf->unowned_mines_spots_nearby_ > 0) ? 35 : 0) *
 						resource_necessity_mines_ / 100;
 				prio += bf->rocks_nearby_ / 2;
 				prio += bf->water_nearby_;
@@ -2538,6 +2566,17 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 	// set the type of update that is needed
 	if (mine) {
 		next_mine_construction_due_ = gametime + kBusyMineUpdateInterval;
+	}
+
+	//Temporary //NOCOM
+	if (best_building->type == BuildingObserver::MILITARYSITE && too_many_vacant_mil) {
+		printf (" %d/%s: Building militarysite in spite of too_many_..., score: %3d, least score: %3d, target: %3d, BFs: 4%u\n",
+		player_number(),
+		gamestring_with_leading_zeros(gametime),
+		proposed_priority,
+		persistent_data->least_military_score,
+		persistent_data->target_military_score,
+		buildable_fields.size());
 	}
 
 	return true;
