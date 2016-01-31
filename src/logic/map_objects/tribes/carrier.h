@@ -103,8 +103,7 @@ protected:
 	Loader * create_loader() override;
 
 public:
-	virtual void do_save
-		(EditorGameBase &, MapObjectSaver &, FileWrite &) override;
+	void do_save(EditorGameBase&, MapObjectSaver&, FileWrite&) override;
 };
 
 }

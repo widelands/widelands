@@ -460,13 +460,11 @@ public:
 	Flag *   build_flag(Coords);      /// Build a flag if it is allowed.
 	Road & force_road(const Path &);
 	Road * build_road(const Path &); /// Build a road if it is allowed.
-	Building & force_building
-		(const Coords,
-		 const Building::FormerBuildings &);
-	Building & force_csite
-		(const Coords,
+	Building& force_building(Coords, const Building::FormerBuildings&);
+	Building& force_csite
+		(Coords,
 		 DescriptionIndex,
-		 const Building::FormerBuildings & = Building::FormerBuildings());
+		 const Building::FormerBuildings& = Building::FormerBuildings());
 	Building * build(Coords, DescriptionIndex, bool, Building::FormerBuildings &);
 	void bulldoze(PlayerImmovable &, bool recurse = false);
 	void flagaction(Flag &);
@@ -550,8 +548,7 @@ private:
 	void update_building_statistics(Building &, NoteImmovable::Ownership ownership);
 	void update_team_players();
 	void play_message_sound(const Message::Type & msgtype);
-	void _enhance_or_dismantle
-		(Building *, DescriptionIndex const index_of_new_building);
+	void _enhance_or_dismantle(Building*, DescriptionIndex index_of_new_building);
 
 	// Called when a node becomes seen or has changed.  Discovers the node and
 	// those of the 6 surrounding edges/triangles that are not seen from another

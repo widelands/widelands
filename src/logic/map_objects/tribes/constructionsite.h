@@ -99,8 +99,7 @@ protected:
 	void update_statistics_string(std::string* statistics_string) override;
 
 	uint32_t build_step_time() const override {return CONSTRUCTIONSITE_STEP_TIME;}
-	virtual void create_options_window
-		(InteractiveGameBase &, UI::Window * & registry) override;
+	void create_options_window(InteractiveGameBase&, UI::Window*& registry) override;
 
 	static void wares_queue_callback
 		(Game &, WaresQueue *, DescriptionIndex, void * data);

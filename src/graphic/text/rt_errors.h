@@ -36,9 +36,9 @@ private:
 	std::string m_msg;
 };
 
-#define DEF_ERR(name) class name : public Exception { \
+#define DEF_ERR(Name) class Name : public Exception { \
 public: \
-		  name(std::string msg) : Exception(msg) {} \
+		  Name(std::string msg) : Exception(msg) {} \
 };
 
 DEF_ERR(AttributeNotFound)

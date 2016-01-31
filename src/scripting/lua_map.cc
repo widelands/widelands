@@ -852,10 +852,10 @@ HasSoldiers
 
 		.. code-block:: lua
 
-			l:set_soldiers{
+			l:set_soldiers({
 			  [{0,0,0,0}] = 10,
 			  [{1,2,3,4}] = 5,
-			)
+			})
 
 		would add 10 level 0 soldier and 5 soldiers with hit point level 1,
 		attack level 2, defense level 3 and evade level 4 (as long as this is
