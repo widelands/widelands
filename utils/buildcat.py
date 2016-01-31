@@ -30,13 +30,13 @@ from confgettext import Conf_GetText
 # to let .po[t] comments point to somewhere useful
 MAINPOTS = [
     ( "maps/maps", [
-        "../../maps/*/elemental",
-        "../../maps/*/*/elemental",
-        "../../campaigns/*.conf",
-        "../../campaigns/*/elemental"
+        "../../data/maps/*/elemental",
+        "../../data/maps/*/*/elemental",
+        "../../data/campaigns/*.conf",
+        "../../data/campaigns/*/elemental"
     ] ),
-    ( "texts/texts", ["../../txts/*.lua",
-                  "../../txts/tips/*.tip"] ),
+    ( "texts/texts", ["../../data/txts/*.lua",
+                  "../../data/txts/tips/*.tip"] ),
     ( "widelands/widelands", [
                     "../../src/wlapplication.cc",
                     "../../src/*/*.cc",
@@ -57,34 +57,34 @@ MAINPOTS = [
                     "../../src/wlapplication_messages.h",
     ] ),
     ( "win_conditions/win_conditions", [
-        "../../scripting/win_conditions/*.lua",
-        "../../scripting/win_condition_texts.lua",
+        "../../data/scripting/win_conditions/*.lua",
+        "../../data/scripting/win_condition_texts.lua",
     ]),
     ("world/world", [
-        "../../world/*.lua",
-        "../../world/*/*.lua",
-        "../../world/*/*/*.lua",
-        "../../world/*/*/*/*.lua",
-        "../../world/*/*/*/*/*.lua",
-        "../../world/*/*/*/*/*/*.lua",
+        "../../data/world/*.lua",
+        "../../data/world/*/*.lua",
+        "../../data/world/*/*/*.lua",
+        "../../data/world/*/*/*/*.lua",
+        "../../data/world/*/*/*/*/*.lua",
+        "../../data/world/*/*/*/*/*/*.lua",
     ]),
     ("tribes/tribes", [
-        "../../tribes/scripting/starting_conditions/*/*.lua",
-        "../../tribes/*.lua",
-        "../../tribes/*/init.lua",
-        "../../tribes/*/*/init.lua",
-        "../../tribes/*/*/*/init.lua",
-        "../../tribes/*/*/*/*/init.lua",
-        "../../tribes/*/*/*/*/*/init.lua",
+        "../../data/tribes/scripting/starting_conditions/*/*.lua",
+        "../../data/tribes/*.lua",
+        "../../data/tribes/*/init.lua",
+        "../../data/tribes/*/*/init.lua",
+        "../../data/tribes/*/*/*/init.lua",
+        "../../data/tribes/*/*/*/*/init.lua",
+        "../../data/tribes/*/*/*/*/*/init.lua",
     ]),
 
     ("tribes_encyclopedia/tribes_encyclopedia", [
-        "../../tribes/scripting/help/*.lua",
-        "../../tribes/*/helptexts.lua",
-        "../../tribes/*/*/helptexts.lua",
-        "../../tribes/*/*/*/helptexts.lua",
-        "../../tribes/*/*/*/*/helptexts.lua",
-        "../../tribes/*/*/*/*/*/helptexts.lua",
+        "../../data/tribes/scripting/help/*.lua",
+        "../../data/tribes/*/helptexts.lua",
+        "../../data/tribes/*/*/helptexts.lua",
+        "../../data/tribes/*/*/*/helptexts.lua",
+        "../../data/tribes/*/*/*/*/helptexts.lua",
+        "../../data/tribes/*/*/*/*/*/helptexts.lua",
     ]),
 ]
 
@@ -103,18 +103,18 @@ MAINPOTS = [
 # For every instance found of a given type, '%s' in this values is replaced
 # with the name of the instance.
 ITERATIVEPOTS = [
-    ("scenario_%(name)s/scenario_%(name)s", "campaigns/",
-         ["../../campaigns/%(name)s/extra_data",
-          "../../campaigns/%(name)s/objective",
-          "../../campaigns/%(name)s/scripting/*.lua",
-          "../../scripting/format_scenario.lua"
+    ("scenario_%(name)s/scenario_%(name)s", "data/campaigns/",
+         ["../../data/campaigns/%(name)s/extra_data",
+          "../../data/campaigns/%(name)s/objective",
+          "../../data/campaigns/%(name)s/scripting/*.lua",
+          "../../data/scripting/format_scenario.lua"
          ]
     ),
-    ("map_%(name)s/map_%(name)s", "maps/",
-         [ "../../maps/%(name)s/scripting/*.lua", ]
+    ("map_%(name)s/map_%(name)s", "data/maps/",
+         [ "../../data/maps/%(name)s/scripting/*.lua", ]
     ),
-    ("mp_scenario_%(name)s/mp_scenario_%(name)s", "maps/MP_Scenarios/",
-         [ "../../maps/MP_Scenarios/%(name)s/scripting/*.lua", ]
+    ("mp_scenario_%(name)s/mp_scenario_%(name)s", "data/maps/MP_Scenarios/",
+         [ "../../data/maps/MP_Scenarios/%(name)s/scripting/*.lua", ]
     ),
 ]
 

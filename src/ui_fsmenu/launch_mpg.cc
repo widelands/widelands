@@ -63,7 +63,7 @@ struct MapOrSaveSelectionWindow : public UI::Window {
 		UI::Button * btn = new UI::Button
 			(this, "map",
 			 space, y, butw, buth,
-			 g_gr->images().get("pics/but0.png"),
+			 g_gr->images().get("images/ui_basic/but0.png"),
 			 _("Map"), _("Select a map"), true, false);
 		btn->sigclicked.connect
 			(boost::bind
@@ -73,7 +73,7 @@ struct MapOrSaveSelectionWindow : public UI::Window {
 		btn = new UI::Button
 			(this, "saved_game",
 			 space, y + buth + space, butw, buth,
-			 g_gr->images().get("pics/but0.png"),
+			 g_gr->images().get("images/ui_basic/but0.png"),
 			 /** Translators: This is a button to select a savegame */
 			 _("Saved Game"), _("Select a saved game"), true, false);
 		btn->sigclicked.connect
@@ -84,7 +84,7 @@ struct MapOrSaveSelectionWindow : public UI::Window {
 		btn = new UI::Button
 			(this, "cancel",
 			 space + butw / 4, y + 3 * buth + 2 * space, butw / 2, buth,
-			 g_gr->images().get("pics/but1.png"),
+			 g_gr->images().get("images/ui_basic/but1.png"),
 			 _("Cancel"), _("Cancel selection"), true, false);
 		btn->sigclicked.connect
 			(boost::bind
@@ -108,7 +108,7 @@ struct MapOrSaveSelectionWindow : public UI::Window {
 FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG
 	(GameSettingsProvider * const settings, GameController * const ctrl)
 	:
-	FullscreenMenuBase("launchMPGmenu.jpg"),
+	FullscreenMenuBase("images/ui_fsmenu/launch_mpg_menu.jpg"),
 
 // Values for alignment and size
 	m_butw (get_w() / 4),
@@ -126,29 +126,29 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG
 	m_change_map_or_save
 		(this, "change_map_or_save",
 		 m_right_column_x + m_butw - m_buth, get_h() * 3 / 20, m_buth, m_buth,
-		 g_gr->images().get("pics/but1.png"),
-		 g_gr->images().get("pics/menu_toggle_minimap.png"),
+		 g_gr->images().get("images/ui_basic/but1.png"),
+		 g_gr->images().get("images/wui/menus/menu_toggle_minimap.png"),
 		 _("Change map or saved game"), false, false),
 	m_ok
 		(this, "ok",
 		 m_right_column_x, get_h() * 12 / 20 - 2 * m_label_height, m_butw, m_buth,
-		 g_gr->images().get("pics/but2.png"),
+		 g_gr->images().get("images/ui_basic/but2.png"),
 		 _("Start game"), std::string(), false, false),
 	m_back
 		(this, "back",
 		 m_right_column_x, get_h() * 218 / 240, m_butw, m_buth,
-		 g_gr->images().get("pics/but0.png"),
+		 g_gr->images().get("images/ui_basic/but0.png"),
 		 _("Back"), std::string(), true, false),
 	m_wincondition
 		(this, "win_condition",
 		 m_right_column_x, get_h() * 11 / 20 - 2 * m_label_height, m_butw, m_buth,
-		 g_gr->images().get("pics/but1.png"),
+		 g_gr->images().get("images/ui_basic/but1.png"),
 		 "", std::string(), false, false),
 	m_help_button
 		(this, "help",
 		 m_right_column_x + m_butw - m_buth, get_h() / 100, m_buth, m_buth,
-		 g_gr->images().get("pics/but1.png"),
-		 g_gr->images().get("pics/menu_help.png"),
+		 g_gr->images().get("images/ui_basic/but1.png"),
+		 g_gr->images().get("images/ui_basic/menu_help.png"),
 		 _("Show the help window"), true, false),
 
 // Text labels

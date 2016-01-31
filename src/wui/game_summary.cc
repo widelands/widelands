@@ -36,6 +36,19 @@
 #include "wui/interactive_gamebase.h"
 #include "wui/interactive_player.h"
 
+namespace {
+static char const * const flag_pictures[] = {
+	"images/players/genstats_enable_plr_01.png",
+	"images/players/genstats_enable_plr_02.png",
+	"images/players/genstats_enable_plr_03.png",
+	"images/players/genstats_enable_plr_04.png",
+	"images/players/genstats_enable_plr_05.png",
+	"images/players/genstats_enable_plr_06.png",
+	"images/players/genstats_enable_plr_07.png",
+	"images/players/genstats_enable_plr_08.png"
+};
+} // namespace
+
 #define PADDING 4
 
 GameSummaryScreen::GameSummaryScreen
@@ -84,16 +97,16 @@ game_(parent->game())
 	continue_button_ = new UI::Button
 		(bottom_box, "continue_button",
 		 0, 0, 35, 35,
-		 g_gr->images().get("pics/but4.png"),
-		 g_gr->images().get("pics/continue.png"),
+		 g_gr->images().get("images/ui_basic/but4.png"),
+		 g_gr->images().get("images/ui_basic/continue.png"),
 		 _("Continue playing"));
 	bottom_box->add(continue_button_, UI::Align::kHCenter);
 	bottom_box->add_space(PADDING);
 	stop_button_ = new UI::Button
 		(bottom_box, "stop_button",
 		 0, 0, 35, 35,
-		 g_gr->images().get("pics/but4.png"),
-		 g_gr->images().get("pics/menu_exit_game.png"),
+		 g_gr->images().get("images/ui_basic/but4.png"),
+		 g_gr->images().get("images/wui/menus/menu_exit_game.png"),
 		_("Exit Game"));
 	bottom_box->add(stop_button_, UI::Align::kHCenter);
 	bottom_box->add_space(PADDING);
@@ -160,11 +173,9 @@ void GameSummaryScreen::fill_data()
 		Widelands::Player* p = game_.get_player(pes.player);
 		UI::Table<uintptr_t const>::EntryRecord & te = players_table_->add(i);
 		// Player name & pic
-		std::string pic_path =
-			(boost::format("pics/genstats_enable_plr_0%|1$u|.png")
-			 % static_cast<unsigned int>(pes.player)).str();
-		const Image* pic = g_gr->images().get(pic_path);
-		te.set_picture(0, pic, p->get_name());
+		const Image* player_image = g_gr->images().get(flag_pictures[pes.player - 1]);
+		assert(player_image);
+		te.set_picture(0, player_image, p->get_name());
 		// Team
 		std::string teastr_ =
 			(boost::format("%|1$u|")

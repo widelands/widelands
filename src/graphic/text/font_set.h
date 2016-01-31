@@ -53,8 +53,8 @@ struct FontSet {
 
 private:
 	/// Parses font information for the given 'localename' from Lua files.
-	/// Each locale in i18n/locales.lua defines which fontset to use.
-	/// The fontset definitions are in i18n/fonts.lua
+	/// Each locale in data/i18n/locales.lua defines which fontset to use.
+	/// The fontset definitions are in data/i18n/fonts.lua
 	void parse_font_for_locale(const std::string& localename);
 
 	/// Reads and sets the fonts from 'table', using 'fallback' as the fallback font file.

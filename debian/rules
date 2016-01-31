@@ -1,5 +1,7 @@
 #!/usr/bin/make -f
 
+# NOCOM review this
+
 # Hardening flags
 CPPFLAGS:=$(shell dpkg-buildflags --get CPPFLAGS)
 CFLAGS:=$(shell dpkg-buildflags --get CFLAGS) $(CPPFLAGS)
@@ -13,8 +15,9 @@ LDFLAGS:=$(shell dpkg-buildflags --get LDFLAGS)
 override_dh_auto_configure:
 	CFLAGS="$(CFLAGS)" LDFLAGS="$(LDFLAGS)" CPPFLAGS="$(CPPFLAGS)" CXXFLAGS="$(CXXFLAGS)" \
 	  dh_auto_configure -Scmake -- \
-		-DWL_INSTALL_DATADIR=/usr/share/games/widelands \
-		-DCMAKE_BUILD_TYPE=Release 
+		-DWL_INSTALL_BASEDIR=/usr/share/games/widelands \
+		-DWL_INSTALL_DATADIR=/usr/share/games/widelands/data \
+		-DCMAKE_BUILD_TYPE=Release
 
 override_dh_strip:
 	dh_strip --dbg-package=widelands-dbg
@@ -23,8 +26,8 @@ override_dh_auto_install:
 	dh_auto_install --parallel
 	mkdir -p debian/tmp/usr/share/applications/
 	cp debian/widelands.desktop debian/tmp/usr/share/applications/
-	# Probably need to remove other duplicated license files in i18n/fonts
-	rm debian/tmp/usr/share/games/widelands/i18n/fonts/Widelands/LICENSE
+	# Probably need to remove other duplicated license files in data/i18n/fonts
+	rm debian/tmp/usr/share/games/widelands/data/i18n/fonts/Widelands/LICENSE
 	# Do not include the GPL-2 license file again to keep lintian happy
 	# (but the file is listed from the user interface, so dont kill it completely)
 	# (we cannot patch the user interface because that's in a translated text)
@@ -40,7 +43,7 @@ override_dh_auto_install:
 	# Take care of the logo
 	for size in 16 32 48 64 128 ; do \
 	  mkdir -p debian/tmp/usr/share/icons/hicolor/$${size}x$${size}/apps ; \
-	  cp debian/tmp/usr/share/games/widelands/pics/wl-ico-$${size}.png \
+	  cp debian/tmp/usr/share/games/widelands/images/logos/wl-ico-$${size}.png \
 	     debian/tmp/usr/share/icons/hicolor/$${size}x$${size}/apps/widelands.png; \
 	done
 	convert debian/tmp/usr/share/icons/hicolor/32x32/apps/widelands.png \

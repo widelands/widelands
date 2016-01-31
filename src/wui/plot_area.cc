@@ -59,7 +59,7 @@ const uint32_t time_in_ms[] = {
 	30 * hours
 };
 
-const char BG_PIC[] = "pics/plot_area_bg.png";
+const char BG_PIC[] = "images/wui/plot_area_bg.png";
 const RGBColor LINE_COLOR(0, 0, 0);
 const RGBColor ZERO_LINE_COLOR(255, 255, 255);
 

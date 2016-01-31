@@ -53,9 +53,9 @@ namespace  {
 // Sets the icon for the application.
 void set_icon(SDL_Window* sdl_window) {
 #ifndef _WIN32
-	const std::string icon_name = "pics/wl-ico-128.png";
+	const std::string icon_name = "images/logos/wl-ico-128.png";
 #else
-	const std::string icon_name = "pics/wl-ico-32.png";
+	const std::string icon_name = "images/logos/wl-ico-32.png";
 #endif
 	SDL_Surface* s = load_image_as_sdl_surface(icon_name, g_fs);
 	SDL_SetWindowIcon(sdl_window, s);

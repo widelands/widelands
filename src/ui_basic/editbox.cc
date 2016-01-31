@@ -443,7 +443,7 @@ void EditBox::draw(RenderTarget & odst)
 
 		const uint16_t fontheight = text_height(m->text, m->fontsize);
 
-		const Image* caret_image = g_gr->images().get("pics/caret.png");
+		const Image* caret_image = g_gr->images().get("images/ui_basic/caret.png");
 		Point caretpt;
 		caretpt.x = point.x + m->scrolloffset + caret_x - caret_image->width() + LINE_MARGIN;
 		caretpt.y = point.y + (fontheight - caret_image->height()) / 2;

@@ -28,10 +28,10 @@
 #include "logic/player.h"
 #include "wui/interactive_gamebase.h"
 
-static char const * pic_priority_low     = "pics/low_priority_button.png";
-static char const * pic_priority_normal  = "pics/normal_priority_button.png";
-static char const * pic_priority_high    = "pics/high_priority_button.png";
-static char const * pic_max_fill_indicator = "pics/max_fill_indicator.png";
+static char const * pic_priority_low     = "images/wui/buildings/low_priority_button.png";
+static char const * pic_priority_normal  = "images/wui/buildings/normal_priority_button.png";
+static char const * pic_priority_high    = "images/wui/buildings/high_priority_button.png";
+static char const * pic_max_fill_indicator = "images/wui/buildings/max_fill_indicator.png";
 
 WaresQueueDisplay::WaresQueueDisplay
 	(UI::Panel * const parent,
@@ -233,8 +233,8 @@ void WaresQueueDisplay::update_max_fill_buttons() {
 	decrease_max_fill_ = new UI::Button
 		(this, "decrease_max_fill",
 		 x, y, WARE_MENU_PIC_WIDTH, WARE_MENU_PIC_HEIGHT,
-		 g_gr->images().get("pics/but4.png"),
-		 g_gr->images().get("pics/scrollbar_left.png"),
+		 g_gr->images().get("images/ui_basic/but4.png"),
+		 g_gr->images().get("images/ui_basic/scrollbar_left.png"),
 		 _("Decrease the number of wares you want to be stored here."));
 	decrease_max_fill_->sigclicked.connect
 		(boost::bind(&WaresQueueDisplay::decrease_max_fill_clicked, boost::ref(*this)));
@@ -243,8 +243,8 @@ void WaresQueueDisplay::update_max_fill_buttons() {
 	increase_max_fill_ = new UI::Button
 		(this, "increase_max_fill",
 		 x, y, WARE_MENU_PIC_WIDTH, WARE_MENU_PIC_HEIGHT,
-		 g_gr->images().get("pics/but4.png"),
-		 g_gr->images().get("pics/scrollbar_right.png"),
+		 g_gr->images().get("images/ui_basic/but4.png"),
+		 g_gr->images().get("images/ui_basic/scrollbar_right.png"),
 		 _("Increase the number of wares you want to be stored here."));
 	increase_max_fill_->sigclicked.connect
 		(boost::bind(&WaresQueueDisplay::increase_max_fill_clicked, boost::ref(*this)));

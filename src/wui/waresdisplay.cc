@@ -351,7 +351,9 @@ void AbstractWaresDisplay::draw_ware
 
 	//  draw a background
 	const Image* bgpic =
-		g_gr->images().get(draw_selected ?  "pics/ware_list_bg_selected.png" :  "pics/ware_list_bg.png");
+		g_gr->images().get(draw_selected ?
+									 "images/wui/ware_list_bg_selected.png" :
+									 "images/wui/ware_list_bg.png");
 	uint16_t w = bgpic->width();
 
 	dst.blit(p, bgpic);

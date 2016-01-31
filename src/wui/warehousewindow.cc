@@ -29,15 +29,15 @@
 
 using Widelands::Warehouse;
 
-static const char pic_tab_wares[] = "pics/menu_tab_wares.png";
-static const char pic_tab_workers[] = "pics/menu_tab_workers.png";
-static const char pic_tab_dock_wares[] = "pics/menu_tab_wares_dock.png";
-static const char pic_tab_dock_workers[] = "pics/menu_tab_workers_dock.png";
-static const char pic_tab_expedition[] = "pics/start_expedition.png";
+static const char pic_tab_wares[] = "images/wui/buildings/menu_tab_wares.png";
+static const char pic_tab_workers[] = "images/wui/buildings/menu_tab_workers.png";
+static const char pic_tab_dock_wares[] = "images/wui/buildings/menu_tab_wares_dock.png";
+static const char pic_tab_dock_workers[] = "images/wui/buildings/menu_tab_workers_dock.png";
+static const char pic_tab_expedition[] = "images/wui/buildings/start_expedition.png";
 
-static const char pic_policy_prefer[] = "pics/stock_policy_prefer.png";
-static const char pic_policy_dontstock[] = "pics/stock_policy_dontstock.png";
-static const char pic_policy_remove[] = "pics/stock_policy_remove.png";
+static const char pic_policy_prefer[] = "images/wui/buildings/stock_policy_prefer.png";
+static const char pic_policy_dontstock[] = "images/wui/buildings/stock_policy_dontstock.png";
+static const char pic_policy_remove[] = "images/wui/buildings/stock_policy_remove.png";
 
 /**
  * Extends the wares display to show and modify stock policy of items.
@@ -138,8 +138,8 @@ WarehouseWaresPanel::WarehouseWaresPanel
 #define ADD_POLICY_BUTTON(policy, policyname, tooltip)                                           \
 		b = new UI::Button                                                             \
 			(buttons, #policy, 0, 0, 34, 34,                                                  \
-			 g_gr->images().get("pics/but4.png"),                                   \
-			 g_gr->images().get("pics/stock_policy_button_" #policy ".png"),      \
+			 g_gr->images().get("images/ui_basic/but4.png"),                                   \
+			 g_gr->images().get("images/wui/buildings/stock_policy_button_" #policy ".png"),      \
 			 tooltip),                                                                        \
 		b->sigclicked.connect \
 			(boost::bind(&WarehouseWaresPanel::set_policy, this, Warehouse::SP_##policyname)), \

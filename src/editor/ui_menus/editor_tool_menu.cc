@@ -59,7 +59,7 @@ UI::UniqueWindow(&parent, "tool_menu", &registry, 350, 400, _("Tools"))
    radioselect_.add_button                                                   \
       (this,                                                                  \
        pos,                                                                   \
-       g_gr->images().get("pics/editor_menu_tool_" pic ".png"),       \
+       g_gr->images().get("images/wui/editor/editor_menu_tool_" pic ".png"),       \
        tooltip);                                                              \
    pos.x += width + spacing;                                                  \
 

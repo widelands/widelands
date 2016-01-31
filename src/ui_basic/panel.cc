@@ -139,8 +139,8 @@ int Panel::do_run()
 	while (Panel * const p = forefather->_parent)
 		forefather = p;
 
-	s_default_cursor = g_gr->images().get("pics/cursor.png");
-	s_default_cursor_click = g_gr->images().get("pics/cursor_click.png");
+	s_default_cursor = g_gr->images().get("images/ui_basic/cursor.png");
+	s_default_cursor_click = g_gr->images().get("images/ui_basic/cursor_click.png");
 
 	// Loop
 	_running = true;
@@ -692,15 +692,15 @@ void Panel::die()
  */
 void Panel::play_click()
 {
-	g_sound_handler.play_fx("sound/click", 128, PRIO_ALWAYS_PLAY);
+	g_sound_handler.play_fx("click", 128, PRIO_ALWAYS_PLAY);
 }
 void Panel::play_new_chat_message()
 {
-	g_sound_handler.play_fx("sound/lobby_chat", 128, PRIO_ALWAYS_PLAY);
+	g_sound_handler.play_fx("lobby_chat", 128, PRIO_ALWAYS_PLAY);
 }
 void Panel::play_new_chat_member()
 {
-	g_sound_handler.play_fx("sound/lobby_freshmen", 128, PRIO_ALWAYS_PLAY);
+	g_sound_handler.play_fx("lobby_freshmen", 128, PRIO_ALWAYS_PLAY);
 }
 
 

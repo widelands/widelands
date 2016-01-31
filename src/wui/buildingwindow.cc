@@ -41,9 +41,9 @@
 #include "wui/unique_window_handler.h"
 #include "wui/waresqueuedisplay.h"
 
-static const char * pic_bulldoze           = "pics/menu_bld_bulldoze.png";
-static const char * pic_dismantle          = "pics/menu_bld_dismantle.png";
-static const char * pic_debug              = "pics/menu_debug.png";
+static const char * pic_bulldoze           = "images/wui/buildings/menu_bld_bulldoze.png";
+static const char * pic_dismantle          = "images/wui/buildings/menu_bld_dismantle.png";
+static const char * pic_debug              = "images/wui/fieldaction/menu_debug.png";
 
 
 BuildingWindow::BuildingWindow
@@ -182,8 +182,8 @@ void BuildingWindow::create_capsbuttons(UI::Box * capsbuttons)
 					UI::Button * expeditionbtn =
 						new UI::Button
 							(capsbuttons, "cancel_expedition", 0, 0, 34, 34,
-							g_gr->images().get("pics/but4.png"),
-							g_gr->images().get("pics/cancel_expedition.png"),
+							g_gr->images().get("images/ui_basic/but4.png"),
+							g_gr->images().get("images/wui/buildings/cancel_expedition.png"),
 							_("Cancel the expedition"));
 					expeditionbtn->sigclicked.connect
 						(boost::bind(&BuildingWindow::act_start_or_cancel_expedition, boost::ref(*this)));
@@ -192,8 +192,8 @@ void BuildingWindow::create_capsbuttons(UI::Box * capsbuttons)
 					UI::Button * expeditionbtn =
 						new UI::Button
 							(capsbuttons, "start_expedition", 0, 0, 34, 34,
-							g_gr->images().get("pics/but4.png"),
-							g_gr->images().get("pics/start_expedition.png"),
+							g_gr->images().get("images/ui_basic/but4.png"),
+							g_gr->images().get("images/wui/buildings/start_expedition.png"),
 							_("Start an expedition"));
 					expeditionbtn->sigclicked.connect
 						(boost::bind(&BuildingWindow::act_start_or_cancel_expedition, boost::ref(*this)));
@@ -208,8 +208,10 @@ void BuildingWindow::create_capsbuttons(UI::Box * capsbuttons)
 				UI::Button * stopbtn =
 					new UI::Button
 						(capsbuttons, is_stopped ? "continue" : "stop", 0, 0, 34, 34,
-						 g_gr->images().get("pics/but4.png"),
-						 g_gr->images().get((is_stopped ? "pics/continue.png" : "pics/stop.png")),
+						 g_gr->images().get("images/ui_basic/but4.png"),
+						 g_gr->images().get((is_stopped ?
+														"images/ui_basic/continue.png" :
+														"images/ui_basic/stop.png")),
 						 /** TRANSLATORS: Stop/Continue toggle button for production sites. */
 						 is_stopped ? _("Continue") : _("Stop"));
 				stopbtn->sigclicked.connect(boost::bind(&BuildingWindow::act_start_stop, boost::ref(*this)));
@@ -243,7 +245,7 @@ void BuildingWindow::create_capsbuttons(UI::Box * capsbuttons)
 					UI::Button * enhancebtn =
 						new UI::Button
 							(capsbuttons, "enhance", 0, 0, 34, 34,
-							 g_gr->images().get("pics/but4.png"),
+							 g_gr->images().get("images/ui_basic/but4.png"),
 							 building_descr.icon(),
 							 enhance_tooltip);
 
@@ -260,7 +262,7 @@ void BuildingWindow::create_capsbuttons(UI::Box * capsbuttons)
 			UI::Button * destroybtn =
 				new UI::Button
 					(capsbuttons, "destroy", 0, 0, 34, 34,
-					 g_gr->images().get("pics/but4.png"),
+					 g_gr->images().get("images/ui_basic/but4.png"),
 					 g_gr->images().get(pic_bulldoze),
 					 _("Destroy"));
 			destroybtn->sigclicked.connect
@@ -278,7 +280,7 @@ void BuildingWindow::create_capsbuttons(UI::Box * capsbuttons)
 			UI::Button * dismantlebtn =
 				new UI::Button
 					(capsbuttons, "dismantle", 0, 0, 34, 34,
-					 g_gr->images().get("pics/but4.png"),
+					 g_gr->images().get("images/ui_basic/but4.png"),
 					 g_gr->images().get(pic_dismantle),
 					 std::string(_("Dismantle")) + "<br><font size=11>" + _("Returns:") + "</font><br>" +
 						 waremap_to_richtext(owner.tribe(), wares));
@@ -310,8 +312,8 @@ void BuildingWindow::create_capsbuttons(UI::Box * capsbuttons)
 			toggle_workarea_ = new UI::Button
 				(capsbuttons, "workarea",
 				 0, 0, 34, 34,
-				 g_gr->images().get("pics/but4.png"),
-				 g_gr->images().get("pics/workarea123.png"),
+				 g_gr->images().get("images/ui_basic/but4.png"),
+				 g_gr->images().get("images/wui/overlays/workarea123.png"),
 				 _("Hide work area"));
 			toggle_workarea_->sigclicked.connect
 				(boost::bind(&BuildingWindow::toggle_workarea, boost::ref(*this)));
@@ -325,7 +327,7 @@ void BuildingWindow::create_capsbuttons(UI::Box * capsbuttons)
 			UI::Button * debugbtn =
 				new UI::Button
 					(capsbuttons, "debug", 0, 0, 34, 34,
-					 g_gr->images().get("pics/but4.png"),
+					 g_gr->images().get("images/ui_basic/but4.png"),
 					 g_gr->images().get(pic_debug),
 					 _("Debug"));
 			debugbtn->sigclicked.connect(boost::bind(&BuildingWindow::act_debug, boost::ref(*this)));
@@ -337,8 +339,8 @@ void BuildingWindow::create_capsbuttons(UI::Box * capsbuttons)
 		UI::Button * gotobtn =
 			new UI::Button
 				(capsbuttons, "goto", 0, 0, 34, 34,
-				 g_gr->images().get("pics/but4.png"),
-				 g_gr->images().get("pics/menu_goto.png"), _("Center view on this"));
+				 g_gr->images().get("images/ui_basic/but4.png"),
+				 g_gr->images().get("images/wui/menus/menu_goto.png"), _("Center view on this"));
 		gotobtn->sigclicked.connect(boost::bind(&BuildingWindow::clicked_goto, boost::ref(*this)));
 		capsbuttons->add
 			(gotobtn,
@@ -353,8 +355,8 @@ void BuildingWindow::create_capsbuttons(UI::Box * capsbuttons)
 		UI::Button * helpbtn =
 			new UI::Button
 				(capsbuttons, "help", 0, 0, 34, 34,
-				 g_gr->images().get("pics/but4.png"),
-				 g_gr->images().get("pics/menu_help.png"),
+				 g_gr->images().get("images/ui_basic/but4.png"),
+				 g_gr->images().get("images/ui_basic/menu_help.png"),
 				 _("Help"));
 
 		UI::UniqueWindow::Registry& registry =
