@@ -142,7 +142,7 @@ void EditorPlayerMenu::update() {
 		if (!m_plr_names[p - 1]) {
 			m_plr_names[p - 1] =
 				new UI::EditBox
-					(this, posx, posy, 140, size,
+					(this, posx, posy, 140,
 					 g_gr->images().get("pics/but0.png"));
 			m_plr_names[p - 1]->changed.connect
 				(boost::bind(&EditorPlayerMenu::name_changed, this, p - 1));

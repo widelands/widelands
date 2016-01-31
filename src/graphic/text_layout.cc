@@ -27,9 +27,19 @@
 
 #include "base/utf8.h"
 #include "graphic/font_handler1.h"
+#include "graphic/image.h"
 #include "graphic/text/bidi.h"
 #include "graphic/text/font_set.h"
 #include "graphic/text_constants.h"
+
+uint32_t text_width(const std::string& text, int ptsize) {
+	return UI::g_fh1->render(as_editorfont(text, ptsize - UI::g_fh1->fontset().size_offset()))->width();
+}
+
+uint32_t text_height(const std::string& text, int ptsize) {
+	return UI::g_fh1->render(as_editorfont(text.empty() ? "." : text,
+														ptsize - UI::g_fh1->fontset().size_offset()))->height();
+}
 
 std::string richtext_escape(const std::string& given_text) {
 	std::string text = given_text;
@@ -57,6 +67,16 @@ std::string as_window_title(const std::string& txt) {
 
 std::string as_uifont(const std::string & txt, int size, const RGBColor& clr) {
 	return as_aligned(txt, UI::Align::kLeft, size, clr);
+}
+
+std::string as_editorfont(const std::string& text, int ptsize, const RGBColor& clr) {
+	// UI Text is always bold due to historic reasons
+	static boost::format
+			f("<rt keep_spaces=1><p><font face=serif size=%i bold=1 shadow=1 color=%s>%s</font></p></rt>");
+	f % ptsize;
+	f % clr.hex_value();
+	f % richtext_escape(text);
+	return f.str();
 }
 
 std::string as_aligned(const std::string & txt, UI::Align align, int ptsize, const RGBColor& clr) {
