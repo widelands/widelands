@@ -100,6 +100,9 @@ void DrawLineProgram::draw(const std::vector<Arguments>& arguments) {
 	vertices_.clear();
 
 	for (const Arguments& current_args : arguments) {
+		log("#sirver Start drawing line with color (%d, %d, %d) and %ld points.\n",
+		    current_args.color.r, current_args.color.g, current_args.color.b,
+		    current_args.points.size());
 		// We do not support anything else for drawing lines, really.
 		assert(current_args.blend_mode == BlendMode::UseAlpha);
 		assert(current_args.points.size() % 4 == 0);
@@ -122,8 +125,10 @@ void DrawLineProgram::draw(const std::vector<Arguments>& arguments) {
 			vertices_.emplace_back(
 			   PerVertexData{p[i + 3].x, p[i + 3].y, z_value, r, g, b, -1.f});
 		}
+		log("#sirver Done drawing line.\n");
 	}
 	gl_array_buffer_.update(vertices_);
 
+	log("#sirver Dispatching %d vertices.\n", vertices_.size());
 	glDrawArrays(GL_TRIANGLES, 0, vertices_.size());
 }
