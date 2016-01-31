@@ -34,14 +34,13 @@ GameChatPanel::GameChatPanel
 	:
 	UI::Panel(parent, x, y, w, h),
 	chat_   (chat),
-	chatbox  (this, 0, 0, w, h - 25, "", UI::Align_Left, 1),
-	editbox  (this, 0, h - 20, w,  20),
+	chatbox  (this, 0, 0, w, h - 25, "", UI::Align::kLeft, 1),
+	editbox  (this, 0, h - 20, w),
 	chat_message_counter(std::numeric_limits<uint32_t>::max())
 {
 	chatbox.set_scrollmode(UI::MultilineTextarea::ScrollLog);
 	editbox.ok.connect(boost::bind(&GameChatPanel::key_enter, this));
 	editbox.cancel.connect(boost::bind(&GameChatPanel::key_escape, this));
-	editbox.set_align(UI::Align_Left);
 	editbox.activate_history(true);
 
 	set_handle_mouse(true);

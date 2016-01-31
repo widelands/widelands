@@ -45,6 +45,7 @@ wl_library(graphic_text_layout
     base_i18n
     graphic
     graphic_color
+    graphic_surface
     graphic_text
 )
 
