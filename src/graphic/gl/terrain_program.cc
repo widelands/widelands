@@ -23,8 +23,6 @@
 #include "graphic/gl/fields_to_draw.h"
 #include "graphic/gl/utils.h"
 #include "graphic/texture.h"
-#include "io/fileread.h"
-#include "io/filesystem/layered_filesystem.h"
 
 // QuickRef:
 // http://www.cs.unh.edu/~cs770/docs/glsl-1.20-quickref.pdf
@@ -32,23 +30,7 @@
 // http://www.opengl.org/registry/doc/GLSLangSpec.Full.1.20.8.pdf
 // We target OpenGL 2.1 for the desktop here.
 TerrainProgram::TerrainProgram() {
-	FileRead fr;
-	fr.open(*g_fs, "shaders/terrain_program.fp");
-	std::string terrain_fragment_shader;
-	while (char* line = fr.read_line()) {
-		terrain_fragment_shader += line;
-		terrain_fragment_shader += "\n";
-	}
-	fr.close();
-	fr.open(*g_fs, "shaders/terrain_program.vp");
-	std::string terrain_vertex_shader;
-	while (char* line = fr.read_line()) {
-		terrain_vertex_shader += line;
-		terrain_vertex_shader += "\n";
-	}
-	fr.close();
-
-	gl_program_.build(terrain_vertex_shader.c_str(), terrain_fragment_shader.c_str());
+	gl_program_.build("terrain");
 
 	attr_brightness_ = glGetAttribLocation(gl_program_.object(), "attr_brightness");
 	attr_position_ = glGetAttribLocation(gl_program_.object(), "attr_position");

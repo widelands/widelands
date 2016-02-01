@@ -50,9 +50,9 @@ public:
 		return program_object_;
 	}
 
-	// Creates and compiles 'vertex_shader_source' and 'fragment_shader_source'
-	// into shader objects. Then links them into the program.
-	void build(const char* vertex_shader_source, const char* fragment_shader_source);
+	// Creates and compiles shader objects based on the corresponding files in data/shaders,
+	// Then links them into the program.
+	void build(const std::string& program_name);
 
 private:
 	const GLuint program_object_;

@@ -24,6 +24,8 @@
 
 #include "base/log.h"
 #include "base/wexception.h"
+#include "io/fileread.h"
+#include "io/filesystem/layered_filesystem.h"
 
 namespace Gl {
 
@@ -126,13 +128,31 @@ Program::~Program() {
 	}
 }
 
-void Program::build(const char* vertex_shader_source, const char* fragment_shader_source) {
+void Program::build(const std::string& program_name) {
+
+	std::string fragment_shader_source;
+	FileRead fr;
+	fr.open(*g_fs, "shaders/" + program_name + ".fp");
+	while (char* line = fr.read_line()) {
+		fragment_shader_source += line;
+		fragment_shader_source += "\n";
+	}
+	fr.close();
+
+	std::string vertex_shader_source;
+	fr.open(*g_fs, "shaders/" + program_name + ".vp");
+	while (char* line = fr.read_line()) {
+		vertex_shader_source += line;
+		vertex_shader_source += "\n";
+	}
+	fr.close();
+
 	vertex_shader_.reset(new Shader(GL_VERTEX_SHADER));
-	vertex_shader_->compile(vertex_shader_source);
+	vertex_shader_->compile(vertex_shader_source.c_str());
 	glAttachShader(program_object_, vertex_shader_->object());
 
 	fragment_shader_.reset(new Shader(GL_FRAGMENT_SHADER));
-	fragment_shader_->compile(fragment_shader_source);
+	fragment_shader_->compile(fragment_shader_source.c_str());
 	glAttachShader(program_object_, fragment_shader_->object());
 
 	glLinkProgram(program_object_);
