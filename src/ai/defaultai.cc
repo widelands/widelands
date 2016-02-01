@@ -216,7 +216,7 @@ DefaultAI::DefaultAI(Game& ggame, PlayerNumber const pid, DefaultAI::Type const 
 			   }
 			   	break;
 				default:
-					NEVER_HERE();  // NOCOM(GunChleoc) Is this the intended behaviour here?
+					NEVER_HERE();
 		   }
 		});
 }
