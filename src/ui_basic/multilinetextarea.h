@@ -37,9 +37,10 @@ struct Scrollbar;
  * The textarea transparently handles explicit line-breaks and word wrapping.
  */
 struct MultilineTextarea : public Panel {
-	enum ScrollMode {
-		ScrollNormal = 0, ///< (default) only explicit or forced scrolling
-		ScrollLog = 1,    ///< follow the bottom of the text
+	enum class ScrollMode {
+		kNoScrolling,
+		kScrollNormal, ///< (default) only explicit or forced scrolling
+		kScrollLog     ///< follow the bottom of the text
 	};
 
 	MultilineTextarea

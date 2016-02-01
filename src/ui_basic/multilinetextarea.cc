@@ -43,7 +43,7 @@ MultilineTextarea::MultilineTextarea
 	m_style(UI::TextStyle::ui_small()),
 	isrichtext(false),
 	m_scrollbar (this, get_w() - scrollbar_w(), 0, scrollbar_w(), h, false),
-	m_scrollmode(ScrollNormal)
+	m_scrollmode(ScrollMode::kScrollNormal)
 {
 	assert(scrollbar_w() <= w);
 	set_thinks(false);
@@ -99,7 +99,7 @@ void MultilineTextarea::recompute()
 
 		bool setbottom = false;
 
-		if (m_scrollmode == ScrollLog)
+		if (m_scrollmode == ScrollMode::kScrollLog)
 			if (m_scrollbar.get_scrollpos() >= m_scrollbar.get_steps() - 1)
 				setbottom = true;
 

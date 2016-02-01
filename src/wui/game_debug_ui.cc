@@ -72,7 +72,7 @@ m_egbase (egbase),
 m_object (&obj),
 m_log    (this, 0, 0, 350, 200, "")
 {
-	m_log.set_scrollmode(UI::MultilineTextarea::ScrollLog);
+	m_log.set_scrollmode(UI::MultilineTextarea::ScrollMode::kScrollLog);
 	obj.set_logsink(this);
 }
 
