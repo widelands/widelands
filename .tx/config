@@ -68,8 +68,8 @@ source_lang = en
 type = PO
 
 [widelands.map_plateau]
-file_filter = po/map_plateau.wmf/<lang>.po
-source_file = po/map_plateau.wmf/map_plateau.wmf.pot
+file_filter = po/map_the_green_plateau.wmf/<lang>.po
+source_file = po/map_the_green_plateau.wmf/map_the_green_plateau.wmf.pot
 source_lang = en
 type = PO
 
@@ -128,7 +128,7 @@ source_lang = en
 type = PO
 
 [widelands.translators]
-file_filter = i18n/locales/<lang>.json
-source_file = i18n/locales/locales_translators.json
+file_filter = data/i18n/locales/<lang>.json
+source_file = data/i18n/locales/locales_translators.json
 source_lang = en
 type = KEYVALUEJSON

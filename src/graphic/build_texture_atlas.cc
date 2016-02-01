@@ -128,7 +128,7 @@ build_texture_atlas(const int max_size,
 	// For flags and roads.
 	find_images("tribes/images", &all_images, &first_atlas_images);
 	// For UI elements mostly, but we get more than we need really.
-	find_images("pics", &all_images, &first_atlas_images);
+	find_images("images", &all_images, &first_atlas_images);
 
 	auto first_texture_atlas = pack_images(first_atlas_images, max_size, textures_in_atlas);
 	if (first_texture_atlas.size() != 1) {

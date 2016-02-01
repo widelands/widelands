@@ -104,7 +104,7 @@ void Table<void *>::add_column
 				new Button
 					(this, title,
 					 complete_width, 0, width, m_headerheight,
-					 g_gr->images().get("pics/but3.png"),
+					 g_gr->images().get("images/ui_basic/but3.png"),
 					 title, tooltip_string, true, false);
 			c.btn->sigclicked.connect
 				(boost::bind(&Table::header_button_clicked, boost::ref(*this), m_columns.size()));
@@ -151,7 +151,7 @@ void Table<void *>::set_column_title(uint8_t const col, const std::string & titl
 			new Button
 				(this, title,
 				 complete_width, 0, column.width, m_headerheight,
-				 g_gr->images().get("pics/but3.png"),
+				 g_gr->images().get("images/ui_basic/but3.png"),
 				 title, "", true, false);
 		column.btn->sigclicked.connect
 			(boost::bind(&Table::header_button_clicked, boost::ref(*this), col));
@@ -182,7 +182,9 @@ void Table<void *>::EntryRecord::set_checked
 
 	cell.d_checked = checked;
 	cell.d_picture =
-		g_gr->images().get(checked ? "pics/checkbox_checked.png" : "pics/checkbox_empty.png");
+		g_gr->images().get(checked ?
+									 "images/ui_basic/checkbox_checked.png" :
+									 "images/ui_basic/checkbox_empty.png");
 }
 
 void Table<void *>::EntryRecord::toggle(uint8_t const col)
@@ -537,7 +539,7 @@ Table<void *>::EntryRecord & Table<void *>::add
 	for (size_t i = 0; i < m_columns.size(); ++i)
 		if (m_columns.at(i).is_checkbox_column) {
 			result.m_data.at(i).d_picture =
-				g_gr->images().get("pics/checkbox_empty.png");
+				g_gr->images().get("images/ui_basic/checkbox_empty.png");
 		}
 
 	m_scrollbar->set_steps

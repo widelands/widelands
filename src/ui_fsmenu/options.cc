@@ -96,7 +96,7 @@ void find_selected_locale(std::string* selected_locale, const std::string& curre
 FullscreenMenuOptions::FullscreenMenuOptions
 		(OptionsCtrl::OptionsStruct opt)
 	:
-	FullscreenMenuBase("ui_fsmenu.jpg"),
+	FullscreenMenuBase("images/ui_fsmenu/ui_fsmenu.jpg"),
 
 // Values for alignment and size
 	butw_    (get_w() / 5),
@@ -119,26 +119,26 @@ FullscreenMenuOptions::FullscreenMenuOptions
 		 get_w() * 1 / 4 - butw_ / 2,
 		 get_inner_h() - hmargin_,
 		 butw_, buth_,
-		 g_gr->images().get("pics/but0.png"),
+		 g_gr->images().get("images/ui_basic/but0.png"),
 		 _("Cancel"), std::string(), true, false),
 	apply_
 		(this, "apply",
 		 get_w() * 2 / 4 - butw_ / 2,
 		 get_inner_h() - hmargin_,
 		 butw_, buth_,
-		 g_gr->images().get("pics/but0.png"),
+		 g_gr->images().get("images/ui_basic/but0.png"),
 		 _("Apply"), std::string(), true, false),
 	ok_
 		(this, "ok",
 		 get_w() * 3 / 4 - butw_ / 2,
 		 get_inner_h() - hmargin_,
 		 butw_, buth_,
-		 g_gr->images().get("pics/but2.png"),
+		 g_gr->images().get("images/ui_basic/but2.png"),
 		 _("OK"), std::string(), true, false),
 
 	tabs_(this, hmargin_, 0,
 			tab_panel_width_, get_inner_h() - tab_panel_y_ - buth_ - hmargin_,
-			g_gr->images().get("pics/but1.png"),
+			g_gr->images().get("images/ui_basic/but1.png"),
 			UI::TabPanel::Type::kBorder),
 
 	box_interface_(&tabs_, 0, 0, UI::Box::Vertical, 0, 0, padding_),
@@ -194,13 +194,13 @@ FullscreenMenuOptions::FullscreenMenuOptions
 		 /** TRANSLATORS: Options: Save game automatically every: */
 		 /** TRANSLATORS: This will have a number added in front of it */
 		 ngettext("minute", "minutes", opt.autosave / 60),
-		 g_gr->images().get("pics/but3.png"), UI::SpinBox::Type::kBig),
+		 g_gr->images().get("images/ui_basic/but3.png"), UI::SpinBox::Type::kBig),
 
 	sb_rolling_autosave_
 		(&box_saving_, 0, 0, column_width_, 250,
 		 opt.rolling_autosave, 1, 20, _("Maximum number of autosave files"),
 		 "",
-		 g_gr->images().get("pics/but3.png"), UI::SpinBox::Type::kBig),
+		 g_gr->images().get("images/ui_basic/but3.png"), UI::SpinBox::Type::kBig),
 
 	sb_remove_replays_
 		(&box_saving_, 0, 0, column_width_, 250,
@@ -208,7 +208,7 @@ FullscreenMenuOptions::FullscreenMenuOptions
 		 /** TRANSLATORS: Options: Remove Replays older than: */
 		 /** TRANSLATORS: This will have a number added in front of it */
 		 ngettext("day", "days", opt.remove_replays),
-		 g_gr->images().get("pics/but3.png"), UI::SpinBox::Type::kBig),
+		 g_gr->images().get("images/ui_basic/but3.png"), UI::SpinBox::Type::kBig),
 
 	nozip_(&box_saving_, Point(0, 0), _("Do not zip widelands data files (maps, replays and savegames)"),
 			 "", column_width_),
@@ -421,13 +421,8 @@ void FullscreenMenuOptions::add_languages_to_list(const std::string& current_loc
 	language_list_.add(_("Try system language"), "", nullptr, current_locale == "");
 	language_list_.add("English", "en", nullptr, current_locale == "en");
 
-	// We start with the locale directory so we can pick up locales
-	// that don't have a configuration file yet.
-	FilenameSet files = g_fs->list_directory("locale");
-
 	// Add translation directories to the list
 	std::vector<LanguageEntry> entries;
-	std::string localename;
 	std::string selected_locale;
 
 	try {  // Begin read locales table
@@ -435,16 +430,19 @@ void FullscreenMenuOptions::add_languages_to_list(const std::string& current_loc
 		std::unique_ptr<LuaTable> all_locales(lua.run_script("i18n/locales.lua"));
 		all_locales->do_not_warn_about_unaccessed_keys(); // We are only reading partial information as needed
 
-		for (const std::string& filename : files) {  // Begin scan locales directory
-			char const* const path = filename.c_str();
+		// We start with the locale directory so we can pick up locales
+		// that don't have a configuration file yet.
+		std::unique_ptr<FileSystem> fs(&FileSystem::create(i18n::get_localedir()));
+		FilenameSet files = fs->list_directory(".");
+
+		for (const std::string& localename : files) {  // Begin scan locales directory
+			const char* path = localename.c_str();
 			if (!strcmp(FileSystem::fs_filename(path), ".") ||
-				 !strcmp(FileSystem::fs_filename(path), "..") || !g_fs->is_directory(path)) {
+				 !strcmp(FileSystem::fs_filename(path), "..") || !fs->is_directory(path)) {
 				continue;
 			}
 
 			try {  // Begin read locale from table
-				localename = g_fs->filename_without_ext(path);
-
 				std::unique_ptr<LuaTable> table = all_locales->get_table(localename);
 				table->do_not_warn_about_unaccessed_keys();
 
@@ -526,6 +524,7 @@ OptionsCtrl::OptionsStruct FullscreenMenuOptions::get_values() {
 	os_.active_tab            = tabs_.active();
 	return os_;
 }
+
 
 /**
  * Handles communication between window class and options

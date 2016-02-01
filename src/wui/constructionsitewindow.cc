@@ -27,7 +27,7 @@
 #include "ui_basic/progressbar.h"
 #include "ui_basic/tabpanel.h"
 
-static const char pic_tab_wares[] = "pics/menu_tab_wares.png";
+static const char pic_tab_wares[] = "images/wui/buildings/menu_tab_wares.png";
 
 /**
  * Status window for construction sites.

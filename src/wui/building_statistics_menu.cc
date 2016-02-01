@@ -65,7 +65,7 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
 							 kWindowWidth,
 							 kWindowHeight,
 							 _("Building Statistics")),
-		tab_panel_(this, 0, 0, g_gr->images().get("pics/but1.png")),
+		tab_panel_(this, 0, 0, g_gr->images().get("images/ui_basic/but1.png")),
 		navigation_panel_(this, 0, 0, kWindowWidth, 4 * kButtonRowHeight),
 		building_name_(
 			&navigation_panel_, get_inner_w() / 2, 0, 0, kButtonHeight, "", UI::Align::kCenter),
@@ -91,7 +91,7 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
 			_("Low Productivity "),
 			UI::Align::kBottomLeft),
 		unproductive_percent_(
-			&unproductive_box_, 0, 0, 35, g_gr->images().get("pics/but1.png"),
+			&unproductive_box_, 0, 0, 35, g_gr->images().get("images/ui_basic/but1.png"),
 			kLabelFontSize - UI::g_fh1->fontset().size_offset()), // We need consistent height here
 		unproductive_label2_(
 			&unproductive_box_,
@@ -129,26 +129,26 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
 	}
 
 	tab_panel_.add("building_stats_small",
-						g_gr->images().get("pics/menu_tab_buildsmall.png"),
+						g_gr->images().get("images/wui/fieldaction/menu_tab_buildsmall.png"),
 						tabs_[BuildingTab::Small],
 						_("Small Buildings"));
 	tab_panel_.add("building_stats_medium",
-						g_gr->images().get("pics/menu_tab_buildmedium.png"),
+						g_gr->images().get("images/wui/fieldaction/menu_tab_buildmedium.png"),
 						tabs_[BuildingTab::Medium],
 						_("Medium Buildings"));
 	tab_panel_.add("building_stats_big",
-						g_gr->images().get("pics/menu_tab_buildbig.png"),
+						g_gr->images().get("images/wui/fieldaction/menu_tab_buildbig.png"),
 						tabs_[BuildingTab::Big],
 						_("Big Buildings"));
 	tab_panel_.add("building_stats_mines",
-						g_gr->images().get("pics/menu_tab_buildmine.png"),
+						g_gr->images().get("images/wui/fieldaction/menu_tab_buildmine.png"),
 						tabs_[BuildingTab::Mines],
 						_("Mines"));
 
 	// Hide the ports tab for non-seafaring maps
 	if (iplayer().game().map().get_port_spaces().size() > 1) {
 		tab_panel_.add("building_stats_ports",
-							g_gr->images().get("pics/menu_tab_buildport.png"),
+							g_gr->images().get("images/wui/fieldaction/menu_tab_buildport.png"),
 							tabs_[BuildingTab::Ports],
 							_("Ports"));
 	}
@@ -281,8 +281,8 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
 							kButtonRowHeight,
 							kButtonHeight,
 							kButtonHeight,
-							g_gr->images().get("pics/but4.png"),
-							g_gr->images().get("pics/scrollbar_left.png"),
+							g_gr->images().get("images/ui_basic/but4.png"),
+							g_gr->images().get("images/ui_basic/scrollbar_left.png"),
 							_("Show previous building"),
 							false);
 
@@ -293,8 +293,8 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
 							kButtonRowHeight,
 							kButtonHeight,
 							kButtonHeight,
-							g_gr->images().get("pics/but4.png"),
-							g_gr->images().get("pics/scrollbar_right.png"),
+							g_gr->images().get("images/ui_basic/but4.png"),
+							g_gr->images().get("images/ui_basic/scrollbar_right.png"),
 							_("Show next building"),
 							false);
 
@@ -305,8 +305,8 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
 							2 * kButtonRowHeight,
 							kButtonHeight,
 							kButtonHeight,
-							g_gr->images().get("pics/but4.png"),
-							g_gr->images().get("pics/scrollbar_left.png"),
+							g_gr->images().get("images/ui_basic/but4.png"),
+							g_gr->images().get("images/ui_basic/scrollbar_left.png"),
 							_("Show previous building"),
 							false);
 
@@ -317,8 +317,8 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
 							2 * kButtonRowHeight,
 							kButtonHeight,
 							kButtonHeight,
-							g_gr->images().get("pics/but4.png"),
-							g_gr->images().get("pics/scrollbar_right.png"),
+							g_gr->images().get("images/ui_basic/but4.png"),
+							g_gr->images().get("images/ui_basic/scrollbar_right.png"),
 							_("Show next building"),
 							false);
 
@@ -329,8 +329,8 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
 							3 * kButtonRowHeight,
 							kButtonHeight,
 							kButtonHeight,
-							g_gr->images().get("pics/but4.png"),
-							g_gr->images().get("pics/scrollbar_left.png"),
+							g_gr->images().get("images/ui_basic/but4.png"),
+							g_gr->images().get("images/ui_basic/scrollbar_left.png"),
 							_("Show previous building"),
 							false);
 
@@ -341,8 +341,8 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
 							3 * kButtonRowHeight,
 							kButtonHeight,
 							kButtonHeight,
-							g_gr->images().get("pics/but4.png"),
-							g_gr->images().get("pics/scrollbar_right.png"),
+							g_gr->images().get("images/ui_basic/but4.png"),
+							g_gr->images().get("images/ui_basic/scrollbar_right.png"),
 							_("Show next building"),
 							false);
 
@@ -389,7 +389,7 @@ bool BuildingStatisticsMenu::add_button(
 														0,
 														kBuildGridCellWidth,
 														kBuildGridCellHeight,
-														g_gr->images().get("pics/but1.png"),
+														g_gr->images().get("images/ui_basic/but1.png"),
 														descr.representative_image(&iplayer().get_player()
 																							->get_playercolor()),
 														"",
