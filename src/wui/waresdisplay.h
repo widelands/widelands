@@ -22,8 +22,6 @@
 
 #include <vector>
 
-#include <boost/signals2.hpp>
-
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/warelist.h"
 #include "logic/map_objects/tribes/wareworker.h"
@@ -144,7 +142,6 @@ protected:
 private:
 	using WareListVector = std::vector<const Widelands::WareList *>;
 	WareListVector         warelists_;
-	std::vector<boost::signals2::connection> connections_;
 };
 
 std::string waremap_to_richtext

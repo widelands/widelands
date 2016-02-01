@@ -53,9 +53,9 @@ namespace  {
 // Sets the icon for the application.
 void set_icon(SDL_Window* sdl_window) {
 #ifndef _WIN32
-	const std::string icon_name = "pics/wl-ico-128.png";
+	const std::string icon_name = "images/logos/wl-ico-128.png";
 #else
-	const std::string icon_name = "pics/wl-ico-32.png";
+	const std::string icon_name = "images/logos/wl-ico-32.png";
 #endif
 	SDL_Surface* s = load_image_as_sdl_surface(icon_name, g_fs);
 	SDL_SetWindowIcon(sdl_window, s);
@@ -76,7 +76,6 @@ void Graphic::initialize(const TraceGl& trace_gl,
                          bool init_fullscreen) {
 	window_mode_width_ = window_mode_w;
 	window_mode_height_ = window_mode_h;
-	requires_update_ = true;
 
 	if (SDL_GL_LoadLibrary(nullptr) == -1) {
 		throw wexception("SDL_GL_LoadLibrary failed: %s", SDL_GetError());
@@ -169,8 +168,6 @@ void Graphic::resolution_changed() {
 	render_target_.reset(new RenderTarget(screen_.get()));
 
 	Notifications::publish(GraphicResolutionChanged{new_w, new_h});
-
-	update();
 }
 
 /**
@@ -214,18 +211,6 @@ void Graphic::set_fullscreen(const bool value)
 	resolution_changed();
 }
 
-
-void Graphic::update() {
-	requires_update_ = true;
-}
-
-/**
- * Returns true if parts of the screen have been marked for refreshing.
-*/
-bool Graphic::need_update() const {
-	return requires_update_;
-}
-
 /**
  * Bring the screen uptodate.
 */
@@ -255,7 +240,6 @@ void Graphic::refresh()
 	}
 
 	SDL_GL_SwapWindow(sdl_window_);
-	requires_update_ = false;
 }
 
 /**
@@ -264,7 +248,4 @@ void Graphic::refresh()
 void Graphic::screenshot(const string& fname)
 {
 	screenshot_filename_ = fname;
-
-	// Force a redraw of the screen soon.
-	update();
 }

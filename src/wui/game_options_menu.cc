@@ -74,43 +74,43 @@ GameOptionsMenu::GameOptionsMenu
 	readme_
 		(&box_, "readme",
 		 0, 0, width, 0,
-		 g_gr->images().get("pics/but4.png"),
+		 g_gr->images().get("images/ui_basic/but4.png"),
 		 _("README"),
 		/** TRANSLATORS: Button tooltip */
 		_("Show general information about Widelands and keyboard shortcuts")),
 	license_
 		(&box_, "license",
 		 0, 0, width, 0,
-		 g_gr->images().get("pics/but4.png"),
+		 g_gr->images().get("images/ui_basic/but4.png"),
 		 _("License"),
 		/** TRANSLATORS: Button tooltip */
 		_("Show the distribution licence document")),
 	authors_
 		(&box_, "authors",
 		 0, 0, width, 0,
-		 g_gr->images().get("pics/but4.png"),
+		 g_gr->images().get("images/ui_basic/but4.png"),
 		 _("Authors"),
 		/** TRANSLATORS: Button tooltip */
 		_("Show information about the Widelands Development Team")),
 	sound_
 		(&box_, "sound_options",
 		 0, 0, width, 0,
-		 g_gr->images().get("pics/but4.png"),
+		 g_gr->images().get("images/ui_basic/but4.png"),
 		 _("Sound Options"),
 		/** TRANSLATORS: Button tooltip */
 		_("Set sound effect and music options")),
 	save_game_
 		(&box_, "save_game",
 		 0, 0, width, 35,
-		 g_gr->images().get("pics/but4.png"),
-		 g_gr->images().get("pics/menu_save_game.png"),
+		 g_gr->images().get("images/ui_basic/but4.png"),
+		 g_gr->images().get("images/wui/menus/menu_save_game.png"),
 		 /** TRANSLATORS: Button tooltip */
 		 _("Save Game")),
 	exit_game_
 		(&box_, "exit_game",
 		 0, 0, width, 35,
-		 g_gr->images().get("pics/but4.png"),
-		 g_gr->images().get("pics/menu_exit_game.png"),
+		 g_gr->images().get("images/ui_basic/but4.png"),
+		 g_gr->images().get("images/wui/menus/menu_exit_game.png"),
 		 /** TRANSLATORS: Button tooltip */
 		 _("Exit Game"))
 {

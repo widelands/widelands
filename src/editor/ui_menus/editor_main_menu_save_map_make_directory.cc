@@ -32,18 +32,18 @@ MainMenuSaveMapMakeDirectory::MainMenuSaveMapMakeDirectory
 	vbox_(this, padding_, padding_, UI::Box::Vertical,
 		  get_inner_w() - 2 * padding_, get_inner_h() - 3 * padding_ - buth_, padding_ / 2),
 	label_(&vbox_, 0, 0, get_inner_w() - 2 * padding_, buth_, _("Enter Directory Name: "), UI::Align::kLeft),
-	edit_(&vbox_, 0, 0, get_inner_w() - 2 * padding_, buth_, g_gr->images().get("pics/but1.png")),
+	edit_(&vbox_, 0, 0, get_inner_w() - 2 * padding_, g_gr->images().get("images/ui_basic/but1.png")),
 	ok_button_(
 		this, "ok",
 		padding_, get_inner_h() - padding_ - buth_,
 		butw_, buth_,
-		g_gr->images().get("pics/but5.png"),
+		g_gr->images().get("images/ui_basic/but5.png"),
 		_("OK")),
 	cancel_button_(
 		this, "cancel",
 		get_inner_w() - butw_ - padding_, get_inner_h() - padding_ - buth_,
 		butw_, buth_,
-		g_gr->images().get("pics/but1.png"),
+		g_gr->images().get("images/ui_basic/but1.png"),
 		_("Cancel")) {
 
 	vbox_.add(&label_, UI::Align::kLeft);

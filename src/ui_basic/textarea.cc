@@ -137,8 +137,6 @@ void Textarea::set_text(const std::string & text)
 		expand();
 	else if (m_layoutmode == Layouted)
 		update_desired_size();
-
-	update();
 }
 
 const std::string& Textarea::get_text()

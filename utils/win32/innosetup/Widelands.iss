@@ -89,17 +89,17 @@ Name: desktopicon;     Description: {cm:CreateDesktopIcon};     GroupDescription
 Name: quicklaunchicon; Description: {cm:CreateQuickLaunchIcon}; GroupDescription: {cm:AdditionalIcons}; Flags: unchecked
 
 [Files]
-Source: ..\..\..\campaigns\*;                               DestDir: {app}\campaigns\; Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: "Widelands"
-Source: ..\..\..\i18n\*;                                    DestDir: {app}\i18n\;      Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: "Widelands"
-Source: ..\..\..\..\build\locale\*;                         DestDir: {app}\locale\;    Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: "Widelands"
-Source: ..\..\..\maps\*;                                    DestDir: {app}\maps\;      Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ;                  Components: "Widelands"
-Source: ..\..\..\music\*;                                   DestDir: {app}\music\;     Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ;                  Components: "Music"
-Source: ..\..\..\pics\*;                                    DestDir: {app}\pics\;      Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: "Widelands"
-Source: ..\..\..\sound\*;                                   DestDir: {app}\sound\;     Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: "Widelands"
-Source: ..\..\..\tribes\*;                                  DestDir: {app}\tribes\;    Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: "Widelands"
-Source: ..\..\..\txts\*;                                    DestDir: {app}\txts\;      Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: "Widelands"
-Source: ..\..\..\world\*;                                   DestDir: {app}\world\;     Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: "Widelands"
-Source: ..\..\..\scripting\*;                               DestDir: {app}\scripting\; Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: "Widelands"
+Source: ..\..\..\data\campaigns\*;                               DestDir: {app}\data\campaigns\; Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: "Widelands"
+Source: ..\..\..\data\i18n\*;                                    DestDir: {app}\data\i18n\;      Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: "Widelands"
+Source: ..\..\..\..\build\locale\*;                         DestDir: {app}\data\locale\;    Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: "Widelands"
+Source: ..\..\..\data\maps\*;                                    DestDir: {app}\data\maps\;      Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ;                  Components: "Widelands"
+Source: ..\..\..\data\music\*;                                   DestDir: {app}\data\music\;     Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ;                  Components: "Music"
+Source: ..\..\..\data\images\*;                                    DestDir: {app}\data\images\;      Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: "Widelands"
+Source: ..\..\..\data\sound\*;                                   DestDir: {app}\data\sound\;     Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: "Widelands"
+Source: ..\..\..\data\tribes\*;                                  DestDir: {app}\data\tribes\;    Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: "Widelands"
+Source: ..\..\..\data\txts\*;                                    DestDir: {app}\data\txts\;      Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: "Widelands"
+Source: ..\..\..\data\world\*;                                   DestDir: {app}\data\world\;     Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: "Widelands"
+Source: ..\..\..\data\scripting\*;                               DestDir: {app}\data\scripting\; Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: "Widelands"
 Source: c:\msys64\mingw64\bin\glew32.dll;                   DestDir: {app};            Flags: ignoreversion;                                                       Components: "Widelands"
 Source: c:\msys64\mingw64\bin\libicuuc56.dll;               DestDir: {app};            Flags: ignoreversion;                                                       Components: "Widelands"
 Source: c:\msys64\mingw64\bin\libbz2-1.dll;                 DestDir: {app};            Flags: ignoreversion;                                                       Components: "Widelands"
@@ -160,16 +160,7 @@ Name: {group}\{#Copying};                    Filename: {app}\{#Copying}
 Filename: {app}\{#ExeName}; Description: {cm:LaunchProgram,{#Name}}; Flags: nowait postinstall skipifsilent
 
 [InstallDelete]
-Type: filesandordirs; Name: {app}\campaigns\*
-Type: filesandordirs; Name: {app}\global\*
-Type: filesandordirs; Name: {app}\locale\*
-Type: filesandordirs; Name: {app}\maps\*
-Type: filesandordirs; Name: {app}\pics\*
-Type: filesandordirs; Name: {app}\scripting\*
-Type: filesandordirs; Name: {app}\sound\*
-Type: filesandordirs; Name: {app}\tribes\*
-Type: filesandordirs; Name: {app}\txts\*
-Type: filesandordirs; Name: {app}\world\*
+Type: filesandordirs; Name: {app}\data\*
 
 [UninstallDelete]
 Type: files; Name: {app}\{#UrlName}

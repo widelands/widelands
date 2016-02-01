@@ -154,16 +154,16 @@ ActionConfirm::ActionConfirm
 		new UI::Button
 			(this, "ok",
 			 6, 80, 80, 34,
-			 g_gr->images().get("pics/but4.png"),
-			 g_gr->images().get("pics/menu_okay.png"));
+			 g_gr->images().get("images/ui_basic/but4.png"),
+			 g_gr->images().get("images/wui/menu_okay.png"));
 	okbtn->sigclicked.connect(boost::bind(&ActionConfirm::ok, this));
 
 	UI::Button * cancelbtn =
 		new UI::Button
 			(this, "abort",
 			 114, 80, 80, 34,
-			 g_gr->images().get("pics/but4.png"),
-			 g_gr->images().get("pics/menu_abort.png"));
+			 g_gr->images().get("images/ui_basic/but4.png"),
+			 g_gr->images().get("images/wui/menu_abort.png"));
 	cancelbtn->sigclicked.connect(boost::bind(&ActionConfirm::die, this));
 
 	center_to_parent();
@@ -190,16 +190,16 @@ ActionConfirm::ActionConfirm
 		new UI::Button
 			(this, "ok",
 			 6, 80, 80, 34,
-			 g_gr->images().get("pics/but4.png"),
-			 g_gr->images().get("pics/menu_okay.png"));
+			 g_gr->images().get("images/ui_basic/but4.png"),
+			 g_gr->images().get("images/wui/menu_okay.png"));
 	okbtn->sigclicked.connect(boost::bind(&ActionConfirm::ok, this));
 
 	UI::Button * cancelbtn =
 		new UI::Button
 			(this, "abort",
 			 114, 80, 80, 34,
-			 g_gr->images().get("pics/but4.png"),
-			 g_gr->images().get("pics/menu_abort.png"));
+			 g_gr->images().get("images/ui_basic/but4.png"),
+			 g_gr->images().get("images/wui/menu_abort.png"));
 	cancelbtn->sigclicked.connect(boost::bind(&ActionConfirm::die, this));
 
 	center_to_parent();

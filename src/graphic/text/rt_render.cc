@@ -42,6 +42,7 @@
 #include "graphic/text/font_set.h"
 #include "graphic/text/rt_parse.h"
 #include "graphic/text/textstream.h"
+#include "graphic/text_layout.h"
 #include "graphic/texture.h"
 #include "io/filesystem/filesystem_exceptions.h"
 
@@ -726,6 +727,7 @@ void TagHandler::m_make_text_nodes(const string& txt, vector<RenderNode*>& nodes
 
 			word = ts.till_any_or_end(" \t\n\r");
 			if (!word.empty()) {
+				replace_entities(&word);
 				bool word_is_bidi = i18n::has_rtl_character(word.c_str());
 				word = i18n::make_ligatures(word.c_str());
 				if (word_is_bidi || i18n::has_rtl_character(previous_word.c_str())) {
@@ -766,6 +768,7 @@ void TagHandler::m_make_text_nodes(const string& txt, vector<RenderNode*>& nodes
 			}
 			word = ts.till_any_or_end(" \t\n\r");
 			if (!word.empty()) {
+				replace_entities(&word);
 				word = i18n::make_ligatures(word.c_str());
 				if (i18n::has_cjk_character(word.c_str())) {
 					std::vector<std::string> units = i18n::split_cjk_word(word.c_str());

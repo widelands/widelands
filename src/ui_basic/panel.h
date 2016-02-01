@@ -186,9 +186,6 @@ public:
 	virtual void draw        (RenderTarget &);
 	virtual void draw_border (RenderTarget &);
 	virtual void draw_overlay(RenderTarget &);
-	void update(int32_t x, int32_t y, int32_t w, int32_t h);
-	void update();
-	void update_inner(int32_t x, int32_t y, int32_t w, int32_t h);
 
 	// Events
 	virtual void think();

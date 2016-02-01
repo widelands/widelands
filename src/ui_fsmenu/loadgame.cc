@@ -131,7 +131,7 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame
 		(this, "delete",
 		 right_column_x_, m_buty - buth_ - 2 * padding_,
 		 m_butw, buth_,
-		 g_gr->images().get("pics/but0.png"),
+		 g_gr->images().get("images/ui_basic/but0.png"),
 		 _("Delete"), std::string(), false, false),
 
 	m_ta_errormessage

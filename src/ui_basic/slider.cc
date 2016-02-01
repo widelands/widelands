@@ -82,7 +82,6 @@ void Slider::set_value(int32_t new_value)
 		m_value = new_value;
 		calculate_cursor_position();
 		send_value_changed();
-		update();
 	}
 }
 
@@ -115,7 +114,6 @@ void Slider::set_max_value(int32_t new_max) {
 	assert(m_min_value <= new_max);
 	if (m_max_value != new_max) {
 		calculate_cursor_position();
-		update();
 	}
 	m_max_value = new_max;
 	set_value(m_value);
@@ -130,7 +128,6 @@ void Slider::set_min_value(int32_t new_min) {
 	assert(m_max_value >= new_min);
 	if (m_min_value != new_min) {
 		calculate_cursor_position();
-		update();
 	}
 	m_min_value = new_min;
 	set_value(m_value);
@@ -216,13 +213,11 @@ void Slider::set_enabled(const bool enabled)
 		m_highlighted = false;
 		grab_mouse(false);
 	}
-	update();
 }
 
 
 /**
- * Set whether the sliding button should be highlighted,
- * and trigger a draw update when necessary.
+ * Set whether the sliding button should be highlighted.
  */
 void Slider::set_highlighted(bool highlighted)
 {
@@ -230,7 +225,6 @@ void Slider::set_highlighted(bool highlighted)
 		return;
 
 	m_highlighted = highlighted;
-	update();
 }
 
 
@@ -260,8 +254,6 @@ bool Slider::handle_mouserelease(const uint8_t btn, int32_t, int32_t) {
 
 		//  cursor position: align to integer value
 		calculate_cursor_position();
-
-		update();
 	}
 	return true;
 }
@@ -275,8 +267,6 @@ bool Slider::handle_mouserelease(const uint8_t btn, int32_t, int32_t) {
  * \param y The y position of the mouse pointer.
  */
 void Slider::cursor_moved(int32_t pointer, int32_t x, int32_t y) {
-	int32_t o_cursor_pos = m_cursor_pos;
-
 	if (!m_enabled)
 		return;
 
@@ -313,9 +303,6 @@ void Slider::cursor_moved(int32_t pointer, int32_t x, int32_t y) {
 		m_value = new_value;
 		send_value_changed();
 	}
-
-	if (o_cursor_pos != m_cursor_pos)
-		update();
 }
 
 
@@ -334,8 +321,6 @@ void Slider::cursor_pressed(int32_t pointer) {
 	m_relative_move = pointer - m_cursor_pos;
 
 	play_click();
-
-	update();
 }
 
 
@@ -376,7 +361,6 @@ void Slider::bar_pressed(int32_t pointer, int32_t ofs) {
 	send_value_changed();
 
 	m_relative_move = ofs;
-	update();
 }
 
 void VerticalSlider::layout() {

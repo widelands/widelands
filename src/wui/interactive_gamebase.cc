@@ -64,11 +64,11 @@ InteractiveGameBase::InteractiveGameBase
 
 #define INIT_BTN(picture, name, tooltip)                            \
  TOOLBAR_BUTTON_COMMON_PARAMETERS(name),                                      \
- g_gr->images().get("pics/" picture ".png"),                      \
+ g_gr->images().get("images/" picture ".png"),                      \
  tooltip                                                                      \
 
 	toggle_buildhelp_
-		(INIT_BTN("menu_toggle_buildhelp", "buildhelp", _("Show Building Spaces (on/off)")))
+		(INIT_BTN("wui/menus/menu_toggle_buildhelp", "buildhelp", _("Show Building Spaces (on/off)")))
 {
 	toggle_buildhelp_.sigclicked.connect(boost::bind(&InteractiveGameBase::toggle_buildhelp, this));
 }

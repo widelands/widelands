@@ -59,13 +59,13 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive & parent, bool modal)
 		this, "ok",
 		padding_, get_inner_h() - padding_ - buth_,
 		butw_, buth_,
-		g_gr->images().get("pics/but5.png"),
+		g_gr->images().get("images/ui_basic/but5.png"),
 		_("OK")),
 	cancel_(
 		this, "cancel",
 		butw_ + 2 * padding_, get_inner_h() - padding_ - buth_,
 		butw_, buth_,
-		g_gr->images().get("pics/but1.png"),
+		g_gr->images().get("images/ui_basic/but1.png"),
 		_("Cancel")),
 	tab_box_(this, padding_, padding_, UI::Box::Vertical, max_w_, get_inner_h(), 0),
 	tabs_(&tab_box_, 0, 0, nullptr),
@@ -74,8 +74,8 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive & parent, bool modal)
 	tags_box_(&tabs_, padding_, padding_, UI::Box::Vertical, max_w_, get_inner_h(), 0),
 	teams_box_(&tabs_, padding_, padding_, UI::Box::Vertical, max_w_, get_inner_h(), 0),
 
-	name_(&main_box_, 0, 0, max_w_, labelh_, g_gr->images().get("pics/but1.png")),
-	author_(&main_box_, 0, 0, max_w_, labelh_, g_gr->images().get("pics/but1.png")),
+	name_(&main_box_, 0, 0, max_w_, g_gr->images().get("images/ui_basic/but1.png")),
+	author_(&main_box_, 0, 0, max_w_, g_gr->images().get("images/ui_basic/but1.png")),
 	size_(&main_box_, 0, 0, max_w_ - indent_, labelh_, ""),
 
 	teams_list_(&teams_box_, 0, 0, max_w_, 60, UI::Align::kLeft, true),
@@ -83,9 +83,9 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive & parent, bool modal)
 	modal_(modal) {
 
 	descr_ = new UI::MultilineEditbox(
-					&main_box_, 0, 0, max_w_, 9 * labelh_, "", g_gr->images().get("pics/but1.png"));
+					&main_box_, 0, 0, max_w_, 9 * labelh_, "", g_gr->images().get("images/ui_basic/but1.png"));
 	hint_ = new UI::MultilineEditbox(
-				  &main_box_, 0, 0, max_w_, 4 * labelh_, "", g_gr->images().get("pics/but1.png"));
+				  &main_box_, 0, 0, max_w_, 4 * labelh_, "", g_gr->images().get("images/ui_basic/but1.png"));
 
 	main_box_.add(new UI::Textarea(&main_box_, 0, 0, max_w_, labelh_, _("Map Name:")), UI::Align::kLeft);
 	main_box_.add(&name_, UI::Align::kLeft);
@@ -133,9 +133,10 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive & parent, bool modal)
 
 	tab_box_.add(&tabs_, UI::Align::kLeft, true);
 	tabs_.add("main_map_options",
-				 g_gr->images().get("pics/menu_toggle_minimap.png"), &main_box_, _("Main Options"));
-	tabs_.add("map_tags", g_gr->images().get("pics/checkbox_checked.png"), &tags_box_, _("Tags"));
-	tabs_.add("map_teams", g_gr->images().get("pics/editor_menu_player_menu.png"), &teams_box_, _("Teams"));
+				 g_gr->images().get("images/wui/menus/menu_toggle_minimap.png"), &main_box_, _("Main Options"));
+	tabs_.add("map_tags", g_gr->images().get("images/ui_basic/checkbox_checked.png"), &tags_box_, _("Tags"));
+	tabs_.add("map_teams", g_gr->images().get("images/wui/editor/editor_menu_player_menu.png"),
+				 &teams_box_, _("Teams"));
 	tabs_.set_size(max_w_, get_inner_h() - buth_ - 2 * padding_);
 	tab_box_.set_size(max_w_, get_inner_h() - buth_ - 2 * padding_);
 

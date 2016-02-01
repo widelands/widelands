@@ -24,6 +24,7 @@
 #include <boost/format.hpp>
 
 #include "base/i18n.h"
+#include "base/log.h"
 #include "base/wexception.h"
 #include "graphic/font_handler1.h"
 #include "graphic/text/font_set.h"
@@ -119,12 +120,12 @@ SpinBox::SpinBox
 					w, unit_w, no_padding, padding);
 	}
 
-#ifndef NDEBUG //  only in debug builds
-	if (unit_w < (is_big ? 7 * texth : 3 * buttonh)) {
-		throw wexception("Not enough space to draw spinbox. Width %d is smaller than required width %d",
-							  unit_w, (is_big ? 7 * texth : 3 * buttonh));
+	if (unit_w < (is_big ? 7 * buttonh : 3 * buttonh)) {
+		log("Not enough space to draw spinbox \"%s\".\n"
+			 "Width %d is smaller than required width %d."
+			 "Please report as a bug.\n",
+			 label_text.c_str(), unit_w, (is_big ? 7 * buttonh : 3 * buttonh));
 	}
-#endif
 
 	box_ = new UI::Box(this, 0, 0, UI::Box::Horizontal, actual_w, texth, padding);
 
@@ -146,14 +147,18 @@ SpinBox::SpinBox
 			(box_, "-",
 			 0, 0, buttonh, buttonh,
 			 sbi_->background,
-			 g_gr->images().get(is_big ? "pics/scrollbar_left.png" : "pics/scrollbar_down.png"),
+			 g_gr->images().get(is_big ?
+										  "images/ui_basic/scrollbar_left.png" :
+										  "images/ui_basic/scrollbar_down.png"),
 			 _("Decrease the value"));
 	sbi_->button_plus =
 		new Button
 			(box_, "+",
 			 0, 0, buttonh, buttonh,
 			 sbi_->background,
-			 g_gr->images().get(is_big ? "pics/scrollbar_right.png" : "pics/scrollbar_up.png"),
+			 g_gr->images().get(is_big ?
+										  "images/ui_basic/scrollbar_right.png" :
+										  "images/ui_basic/scrollbar_up.png"),
 			 _("Increase the value"));
 
 	if (is_big) {
@@ -162,14 +167,14 @@ SpinBox::SpinBox
 				(box_, "--",
 				 0, 0, 2 * buttonh, buttonh,
 				 sbi_->background,
-				 g_gr->images().get("pics/scrollbar_left_fast.png"),
+				 g_gr->images().get("images/ui_basic/scrollbar_left_fast.png"),
 				 _("Decrease the value by 10"));
 		sbi_->button_ten_plus =
 			new Button
 				(box_, "++",
 				 0, 0, 2 * buttonh, buttonh,
 				 sbi_->background,
-				 g_gr->images().get("pics/scrollbar_right_fast.png"),
+				 g_gr->images().get("images/ui_basic/scrollbar_right_fast.png"),
 				 _("Increase the value by 10"));
 
 		sbi_->button_ten_plus->sigclicked.connect(boost::bind(&SpinBox::change_value,

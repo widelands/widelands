@@ -296,7 +296,7 @@ int LuaPlayer::get_see_all(lua_State * const L) {
 		:type popup: :class:`boolean`
 
 		:arg icon: show a custom icon instead of the standard scenario message icon.
-			Default: "pics/menu_toggle_objectives_menu.png""
+			Default: "images/wui/messages/menu_toggle_objectives_menu.png""
 		:type icon: :class:`string` The icon's file path.
 
 		:arg heading: a longer message heading to be shown within the message.
@@ -312,7 +312,7 @@ int LuaPlayer::send_message(lua_State * L) {
 	std::string title = luaL_checkstring(L, 2);
 	std::string heading = title;
 	std::string body = luaL_checkstring(L, 3);
-	std::string icon = "pics/menu_toggle_objectives_menu.png";
+	std::string icon = "images/wui/messages/menu_toggle_objectives_menu.png";
 	Coords c = Coords::null();
 	Message::Status st = Message::Status::kNew;
 	bool popup = false;

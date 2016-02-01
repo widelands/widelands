@@ -29,12 +29,12 @@
 FieldOverlayManager::FieldOverlayManager() : current_overlay_id_(0) {
 	OverlayInfo * buildhelp_info = buildhelp_infos_;
 	const char * filenames[] = {
-		"pics/set_flag.png",
-		"pics/small.png",
-		"pics/medium.png",
-		"pics/big.png",
-		"pics/mine.png",
-		"pics/port.png"
+		"images/wui/overlays/set_flag.png",
+		"images/wui/overlays/small.png",
+		"images/wui/overlays/medium.png",
+		"images/wui/overlays/big.png",
+		"images/wui/overlays/mine.png",
+		"images/wui/overlays/port.png"
 	};
 	const char * const * filename = filenames;
 
