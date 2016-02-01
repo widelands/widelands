@@ -481,66 +481,28 @@ void Building::destroy(EditorGameBase & egbase)
 		egbase.create_immovable(pos, "destroyed_building", MapObjectDescr::OwnerType::kTribe);
 }
 
-
-#define FORMAT(key, value) case key: result << value; break
-std::string Building::info_string(const std::string & format) {
-	std::ostringstream result;
-
-	for (std::string::const_iterator format_iter = format.begin();
-		  format_iter != format.end();
-		  ++format_iter) {
-
-		if (*format_iter == '%') {
-			if (++format_iter == format.end()) { // unterminated format sequence
-				result << '%';
-				break;
-			}
-
-			switch (*format_iter) {
-			FORMAT('%', '%');
-			FORMAT('i', serial());
-			FORMAT('t', update_and_get_statistics_string());
-			FORMAT
-				('s',
-				 (descr().get_ismine()                  ? _("mine")   :
-				  get_size  () == BaseImmovable::SMALL  ? _("small")  :
-				  get_size  () == BaseImmovable::MEDIUM ? _("medium") : _("big")));
-			FORMAT
-				('S',
-				 (descr().get_ismine()                  ? _("Mine")   :
-				  get_size  () == BaseImmovable::SMALL  ? _("Small")  :
-				  get_size  () == BaseImmovable::MEDIUM ? _("Medium") : _("Big")));
-			FORMAT('x', get_position().x);
-			FORMAT('y', get_position().y);
-			FORMAT
-				('c', '(' << get_position().x << ", " << get_position().y << ')');
-			FORMAT('A', descr().descname());
-			FORMAT('a', descr().name());
-			case 'N':
-				if (upcast(ConstructionSite const, constructionsite, this))
-					result << constructionsite->building().descname();
-				else
-					result << descr().descname();
-				break;
-			case 'n':
-				if (upcast(ConstructionSite const, constructionsite, this))
-					result << constructionsite->building().name();
-				else
-					result << descr().name();
-				break;
-			case 'r':
-				if (upcast(ProductionSite const, productionsite, this))
-					result << productionsite->production_result();
-				break;
-			default: //  invalid format sequence
-				result << '%' << *format_iter;
-				break;
-			}
-		} else
-			result << *format_iter;
+std::string Building::info_string(InfoStringFormat format) {
+	std::string result = "";
+	switch (format) {
+	case InfoStringFormat::kCensus:
+		if (upcast(ConstructionSite const, constructionsite, this)) {
+			result = constructionsite->building().descname();
+		} else {
+			result = descr().descname();
+		}
+		break;
+	case InfoStringFormat::kStatistics:
+		result = update_and_get_statistics_string();
+		break;
+	case InfoStringFormat::kTooltip:
+		if (upcast(ProductionSite const, productionsite, this)) {
+			result = productionsite->production_result();
+		}
+		break;
+	default:
+		NEVER_HERE();
 	}
-	const std::string result_str = result.str();
-	return result_str.empty() ? result_str : as_uifont(result_str);
+	return result.empty() ? result : as_uifont(result);
 }
 
 
@@ -710,7 +672,7 @@ void Building::draw_help
 	uint32_t const dpyflags = igbase.get_display_flags();
 
 	if (dpyflags & InteractiveBase::dfShowCensus) {
-		const std::string info = info_string(igbase.building_census_format());
+		const std::string info = info_string(InfoStringFormat::kCensus);
 		if (!info.empty()) {
 			dst.blit(pos - Point(0, 48), UI::g_fh1->render(info), BlendMode::UseAlpha, UI::Align::kCenter);
 		}
@@ -722,7 +684,7 @@ void Building::draw_help
 				(!iplayer->player().see_all() &&
 				 iplayer->player().is_hostile(*get_owner()))
 				return;
-		const std::string info = info_string(igbase.building_statistics_format());
+		const std::string info = info_string(InfoStringFormat::kStatistics);
 		if (!info.empty()) {
 			dst.blit(pos - Point(0, 35), UI::g_fh1->render(info), BlendMode::UseAlpha, UI::Align::kCenter);
 		}

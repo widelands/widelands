@@ -173,6 +173,12 @@ public:
 	using FormerBuildings = std::vector<DescriptionIndex>;
 
 public:
+	enum class InfoStringFormat {
+		kCensus,
+		kStatistics,
+		kTooltip
+	};
+
 	Building(const BuildingDescr&);
 	virtual ~Building();
 
@@ -187,7 +193,7 @@ public:
 	virtual Coords get_position() const {return m_position;}
 	PositionList get_positions (const EditorGameBase &) const override;
 
-	std::string info_string(const std::string & format);
+	std::string info_string(InfoStringFormat format);
 
 	// Return the overlay string that is displayed on the map view when enabled
 	// by the player.
