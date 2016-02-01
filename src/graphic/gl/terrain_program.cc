@@ -23,73 +23,32 @@
 #include "graphic/gl/fields_to_draw.h"
 #include "graphic/gl/utils.h"
 #include "graphic/texture.h"
-
-namespace  {
-
-using namespace Widelands;
+#include "io/fileread.h"
+#include "io/filesystem/layered_filesystem.h"
 
 // QuickRef:
 // http://www.cs.unh.edu/~cs770/docs/glsl-1.20-quickref.pdf
 // Full specification:
 // http://www.opengl.org/registry/doc/GLSLangSpec.Full.1.20.8.pdf
 // We target OpenGL 2.1 for the desktop here.
-const char kTerrainVertexShader[] = R"(
-#version 120
-
-// Attributes.
-attribute float attr_brightness;
-attribute vec2 attr_position;
-attribute vec2 attr_texture_offset;
-attribute vec2 attr_texture_position;
-
-uniform float u_z_value;
-
-// Output of vertex shader.
-varying float var_brightness;
-varying vec2 var_texture_offset;
-varying vec2 var_texture_position;
-
-void main() {
-	var_texture_position = attr_texture_position;
-	var_brightness = attr_brightness;
-	var_texture_offset = attr_texture_offset;
-	gl_Position = vec4(attr_position, u_z_value, 1.);
-}
-)";
-
-const char kTerrainFragmentShader[] = R"(
-#version 120
-
-uniform sampler2D u_terrain_texture;
-uniform vec2 u_texture_dimensions;
-
-varying float var_brightness;
-varying vec2 var_texture_position;
-varying vec2 var_texture_offset;
-
-// TODO(sirver): This is a hack to make sure we are sampling inside of the
-// terrain texture. This is a common problem with OpenGL and texture atlases.
-#define MARGIN 1e-2
-
-void main() {
-	// The arbitrary multiplication by 0.99 makes sure that we never sample
-	// outside of the texture in the texture atlas - this means non-perfect
-	// pixel mapping of textures to the screen, but we are pretty meh about that
-	// here.
-	vec2 texture_fract = clamp(
-			fract(var_texture_position),
-			vec2(MARGIN, MARGIN),
-			vec2(1. - MARGIN, 1. - MARGIN));
-	vec4 clr = texture2D(u_terrain_texture, var_texture_offset + u_texture_dimensions * texture_fract);
-	clr.rgb *= var_brightness;
-	gl_FragColor = clr;
-}
-)";
-
-}  // namespace
-
 TerrainProgram::TerrainProgram() {
-	gl_program_.build(kTerrainVertexShader, kTerrainFragmentShader);
+	FileRead fr;
+	fr.open(*g_fs, "shaders/terrain_program.fp");
+	std::string terrain_fragment_shader;
+	while (char* line = fr.read_line()) {
+		terrain_fragment_shader += line;
+		terrain_fragment_shader += "\n";
+	}
+	fr.close();
+	fr.open(*g_fs, "shaders/terrain_program.vp");
+	std::string terrain_vertex_shader;
+	while (char* line = fr.read_line()) {
+		terrain_vertex_shader += line;
+		terrain_vertex_shader += "\n";
+	}
+	fr.close();
+
+	gl_program_.build(terrain_vertex_shader.c_str(), terrain_fragment_shader.c_str());
 
 	attr_brightness_ = glGetAttribLocation(gl_program_.object(), "attr_brightness");
 	attr_position_ = glGetAttribLocation(gl_program_.object(), "attr_position");
@@ -143,7 +102,7 @@ void TerrainProgram::add_vertex(const FieldsToDraw::Field& field,
 }
 
 void TerrainProgram::draw(uint32_t gametime,
-                          const DescriptionMaintainer<TerrainDescription>& terrains,
+								  const DescriptionMaintainer<Widelands::TerrainDescription>& terrains,
                           const FieldsToDraw& fields_to_draw,
                           float z_value) {
 	// This method expects that all terrains have the same dimensions and that
