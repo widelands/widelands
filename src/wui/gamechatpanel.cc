@@ -34,7 +34,8 @@ GameChatPanel::GameChatPanel
 	:
 	UI::Panel(parent, x, y, w, h),
 	chat_   (chat),
-	chatbox  (this, 0, 0, w, h - 25, "", UI::Align::kLeft, UI::MultilineTextarea::ScrollMode::kScrollLogForced),
+	chatbox  (this, 0, 0, w, h - 25, "", UI::Align::kLeft,
+				 UI::MultilineTextarea::ScrollMode::kScrollLogForced),
 	editbox  (this, 0, h - 20, w),
 	chat_message_counter(std::numeric_limits<uint32_t>::max())
 {

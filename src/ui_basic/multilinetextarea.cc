@@ -56,7 +56,8 @@ MultilineTextarea::MultilineTextarea
 	m_scrollbar.set_singlestepsize(UI::g_fh1->render(as_uifont(".", UI_FONT_SIZE_SMALL))->height());
 	m_scrollbar.set_pagesize(h - 2 * UI::g_fh1->render(as_uifont(".", UI_FONT_SIZE_BIG))->height());
 	m_scrollbar.set_steps(1);
-	m_scrollbar.set_force_draw(m_scrollmode == ScrollMode::kScrollNormalForced || m_scrollmode == ScrollMode::kScrollLogForced);
+	m_scrollbar.set_force_draw(m_scrollmode == ScrollMode::kScrollNormalForced ||
+										m_scrollmode == ScrollMode::kScrollLogForced);
 
 	recompute();
 }
