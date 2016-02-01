@@ -43,7 +43,7 @@ override_dh_auto_install:
 	# Take care of the logo
 	for size in 16 32 48 64 128 ; do \
 	  mkdir -p debian/tmp/usr/share/icons/hicolor/$${size}x$${size}/apps ; \
-	  cp debian/tmp/usr/share/games/widelands/images/logos/wl-ico-$${size}.png \
+	  cp debian/tmp/usr/share/games/widelands/data/images/logos/wl-ico-$${size}.png \
 	     debian/tmp/usr/share/icons/hicolor/$${size}x$${size}/apps/widelands.png; \
 	done
 	convert debian/tmp/usr/share/icons/hicolor/32x32/apps/widelands.png \
