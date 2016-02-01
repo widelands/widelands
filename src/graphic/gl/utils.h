@@ -51,7 +51,7 @@ public:
 	}
 
 	// Creates and compiles shader objects based on the corresponding files in data/shaders,
-	// Then links them into the program.
+	// then links them into the program.
 	void build(const std::string& program_name);
 
 private:
