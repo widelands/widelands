@@ -70,9 +70,8 @@ MapObjectDebugPanel::MapObjectDebugPanel
 UI::Panel(&parent, 0, 0, 350, 200),
 m_egbase (egbase),
 m_object (&obj),
-m_log    (this, 0, 0, 350, 200, "")
+m_log    (this, 0, 0, 350, 200, "", UI::Align::kLeft, UI::MultilineTextarea::ScrollMode::kScrollLog)
 {
-	m_log.set_scrollmode(UI::MultilineTextarea::ScrollMode::kScrollLog);
 	obj.set_logsink(this);
 }
 

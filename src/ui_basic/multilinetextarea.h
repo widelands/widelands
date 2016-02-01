@@ -38,9 +38,11 @@ struct Scrollbar;
  */
 struct MultilineTextarea : public Panel {
 	enum class ScrollMode {
-		kNoScrolling,
-		kScrollNormal, ///< (default) only explicit or forced scrolling
-		kScrollLog     ///< follow the bottom of the text
+		kNoScrolling,        // Expand the height instead of showing a scroll bar
+		kScrollNormal,       // (default) only explicit scrolling
+		kScrollNormalForced, // forced scrolling
+		kScrollLog,          // follow the bottom of the text
+		kScrollLogForced     // follow the bottom of the text, and forced
 	};
 
 	MultilineTextarea
@@ -48,13 +50,11 @@ struct MultilineTextarea : public Panel {
 		 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
 		 const std::string& text          = std::string(),
 		 const Align                      = UI::Align::kLeft,
-		 const bool always_show_scrollbar = false);
+		 MultilineTextarea::ScrollMode scroll_mode = MultilineTextarea::ScrollMode::kScrollNormal);
 
 	const std::string& get_text() const {return m_text;}
-	ScrollMode get_scrollmode() const {return m_scrollmode;}
 
 	void set_text(const std::string&);
-	void set_scrollmode(ScrollMode mode);
 
 	uint32_t scrollbar_w() const {return 24;}
 	uint32_t get_eff_w() const {return m_scrollbar.is_enabled() ? get_w() - scrollbar_w() : get_w();}
