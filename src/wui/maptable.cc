@@ -48,16 +48,16 @@ void MapTable::fill(const std::vector<MapData>& entries, MapData::DisplayType ty
 
 		if (mapdata.maptype == MapData::MapType::kDirectory) {
 			te.set_string(0, "");
-			te.set_picture(1,  g_gr->images().get("pics/ls_dir.png"), mapdata.localized_name);
+			te.set_picture(1,  g_gr->images().get("images/ui_basic/ls_dir.png"), mapdata.localized_name);
 			te.set_string(2, "");
 		} else {
 			te.set_string(0, (boost::format("(%i)") % mapdata.nrplayers).str());
 
-			std::string picture = "pics/ls_wlmap.png";
+			std::string picture = "images/ui_basic/ls_wlmap.png";
 			if (mapdata.maptype == MapData::MapType::kScenario) {
-				picture = "pics/ls_wlscenario.png";
+				picture = "images/ui_basic/ls_wlscenario.png";
 			} else if (mapdata.maptype == MapData::MapType::kSettlers2) {
-				picture = "pics/ls_s2map.png";
+				picture = "images/ui_basic/ls_s2map.png";
 			}
 
 			if (type == MapData::DisplayType::kFilenames) {

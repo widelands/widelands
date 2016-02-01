@@ -59,8 +59,6 @@ MultilineTextarea::MultilineTextarea
 	m_scrollbar.set_force_draw(always_show_scrollbar);
 
 	recompute();
-
-	update(0, 0, get_eff_w(), get_h());
 }
 
 
@@ -113,8 +111,6 @@ void MultilineTextarea::recompute()
 			break; // No need to wrap twice.
 		}
 	}
-
-	update(0, 0, get_eff_w(), get_h());
 }
 
 /**
@@ -122,7 +118,6 @@ void MultilineTextarea::recompute()
  */
 void MultilineTextarea::scrollpos_changed(int32_t const /* pixels */)
 {
-	update(0, 0, get_eff_w(), get_h());
 }
 
 /**
@@ -194,7 +189,6 @@ bool MultilineTextarea::handle_mousewheel(uint32_t which, int32_t x, int32_t y) 
 
 void MultilineTextarea::scroll_to_top() {
 	m_scrollbar.set_scrollpos(0);
-	update(0, 0, 0, 0);
 }
 
 } // namespace UI

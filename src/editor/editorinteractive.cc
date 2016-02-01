@@ -55,6 +55,18 @@
 
 namespace {
 
+static char const * const player_pictures[] = {
+	"images/players/editor_player_01_starting_pos.png",
+	"images/players/editor_player_02_starting_pos.png",
+	"images/players/editor_player_03_starting_pos.png",
+	"images/players/editor_player_04_starting_pos.png",
+	"images/players/editor_player_05_starting_pos.png",
+	"images/players/editor_player_06_starting_pos.png",
+	"images/players/editor_player_07_starting_pos.png",
+	"images/players/editor_player_08_starting_pos.png"
+};
+
+
 using Widelands::Building;
 
 // Load all tribes from disk.
@@ -97,34 +109,34 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase & e) :
 
 #define INIT_BUTTON(picture, name, tooltip)                         \
 	TOOLBAR_BUTTON_COMMON_PARAMETERS(name),                                      \
-	g_gr->images().get("pics/" picture ".png"),                      \
+	g_gr->images().get("images/wui/" picture ".png"),                      \
 	tooltip                                                                      \
 
 	toggle_main_menu_
 	(INIT_BUTTON
-	 ("menu_toggle_menu", "menu", _("Menu"))),
+	 ("menus/menu_toggle_menu", "menu", _("Menu"))),
 	toggle_tool_menu_
 	(INIT_BUTTON
-	 ("editor_menu_toggle_tool_menu", "tools", _("Tools"))),
+	 ("editor/editor_menu_toggle_tool_menu", "tools", _("Tools"))),
 	toggle_toolsize_menu_
 	(INIT_BUTTON
-	 ("editor_menu_set_toolsize_menu", "toolsize",
+	 ("editor/editor_menu_set_toolsize_menu", "toolsize",
 	  _("Tool Size"))),
 	toggle_minimap_
 	(INIT_BUTTON
-	 ("menu_toggle_minimap", "minimap", _("Minimap"))),
+	 ("menus/menu_toggle_minimap", "minimap", _("Minimap"))),
 	toggle_buildhelp_
 	(INIT_BUTTON
-	 ("menu_toggle_buildhelp", "buildhelp", _("Show Building Spaces (on/off)"))),
+	 ("menus/menu_toggle_buildhelp", "buildhelp", _("Show Building Spaces (on/off)"))),
 	toggle_player_menu_
 	(INIT_BUTTON
-	 ("editor_menu_player_menu", "players", _("Players"))),
+	 ("editor/editor_menu_player_menu", "players", _("Players"))),
 	undo_
 	(INIT_BUTTON
-	 ("editor_undo", "undo", _("Undo"))),
+	 ("editor/editor_undo", "undo", _("Undo"))),
 	redo_
 	(INIT_BUTTON
-	 ("editor_redo", "redo", _("Redo")))
+	 ("editor/editor_redo", "redo", _("Redo")))
 {
 	toggle_main_menu_.sigclicked.connect(boost::bind(&EditorInteractive::toggle_mainmenu, this));
 	toggle_tool_menu_.sigclicked.connect(boost::bind(&EditorInteractive::tool_menu_btn, this));
@@ -167,15 +179,13 @@ void EditorInteractive::register_overlays() {
 
 	//  Starting locations
 	Widelands::PlayerNumber const nr_players = map.get_nrplayers();
-	assert(nr_players <= 99); //  2 decimal digits
-	char fname[] = "pics/editor_player_00_starting_pos.png";
+	assert(nr_players <= MAX_PLAYERS);
 	iterate_player_numbers(p, nr_players) {
-		if (fname[20] == '9') {fname[20] = '0'; ++fname[19];} else ++fname[20];
 		if (Widelands::Coords const sp = map.get_starting_pos(p)) {
-			const Image* pic = g_gr->images().get(fname);
-			assert(pic);
+			const Image* player_image = g_gr->images().get(player_pictures[p - 1]);
+			assert(player_image);
 			mutable_field_overlay_manager()->register_overlay
-				(sp, pic, 8, Point(pic->width() / 2, STARTING_POS_HOTSPOT_Y));
+				(sp, player_image, 8, Point(player_image->width() / 2, STARTING_POS_HOTSPOT_Y));
 		}
 	}
 
@@ -210,7 +220,7 @@ void EditorInteractive::load(const std::string & filename) {
 			 filename.c_str());
 	ml->preload_map(true);
 
-	UI::ProgressWindow loader_ui("pics/editor.jpg");
+	UI::ProgressWindow loader_ui("images/loadscreens/editor.jpg");
 	std::vector<std::string> tipstext;
 	tipstext.push_back("editor");
 
@@ -590,7 +600,7 @@ void EditorInteractive::run_editor(const std::string& filename, const std::strin
 	EditorInteractive eia(egbase);
 	egbase.set_ibase(&eia); // TODO(unknown): get rid of this
 	{
-		UI::ProgressWindow loader_ui("pics/editor.jpg");
+		UI::ProgressWindow loader_ui("images/loadscreens/editor.jpg");
 		std::vector<std::string> tipstext;
 		tipstext.push_back("editor");
 		GameTips editortips(loader_ui, tipstext);

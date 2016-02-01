@@ -121,7 +121,7 @@ bool match_force_skip(char* & candidate, const char* pattern) {
 		} else if (*p != *pattern)
 			return false;
 
-	return false;
+	NEVER_HERE();
 }
 
 ProductionProgram::ActReturn::Condition * create_economy_condition

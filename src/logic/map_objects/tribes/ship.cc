@@ -21,8 +21,6 @@
 
 #include <memory>
 
-#include <boost/format.hpp>
-
 #include "base/macros.h"
 #include "base/wexception.h"
 #include "economy/economy.h"
@@ -439,7 +437,7 @@ void Ship::ship_update_expedition(Game& game, Bob::State&) {
 						_("Port Space"),
 						_("Port Space Found"),
 						_("An expedition ship found a new port build space."),
-						"fsel_editor_set_port_space.png");
+						"images/wui/editor/fsel_editor_set_port_space.png");
 		}
 		m_expedition->seen_port_buildspaces.swap(temp_port_buildspaces);
 		if (new_port_space) {
@@ -560,7 +558,7 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 									pgettext("ship", "Waiting"),
 									_("Island Circumnavigated"),
 									_("An expedition ship sailed around its island without any events."),
-									"ship_explore_island_cw.png");
+									"images/wui/ship/ship_explore_island_cw.png");
 						m_ship_state = EXP_WAITING;
 
 						Notifications::publish(
@@ -624,7 +622,7 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 						_("Land Ahoy!"),
 						_("Coast Reached"),
 						_("An expedition ship reached a coast and is waiting for further commands."),
-						"ship_scout_ne.png");
+						"images/wui/ship/ship_scout_ne.png");
 
 			Notifications::publish(
 			   NoteShipMessage(this, NoteShipMessage::Message::kWaitingForCommand));
@@ -687,7 +685,7 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 						_("Port Lost!"),
 						_("New port construction site is gone"),
 						_("Unloading of wares failed, expedition is cancelled now."),
-						"menu_ship_cancel_expedition.png");
+						"images/wui/ship/menu_ship_cancel_expedition.png");
 			send_signal(game, "cancel_expedition");
 		}
 
@@ -867,7 +865,7 @@ void Ship::start_task_expedition(Game& game) {
 				pgettext("ship", "Expedition"),
 				_("Expedition Ready"),
 				_("An expedition ship is waiting for your commands."),
-				"start_expedition.png");
+				"images/wui/buildings/start_expedition.png");
 	Notifications::publish(NoteShipMessage(this, NoteShipMessage::Message::kWaitingForCommand));
 }
 
@@ -991,7 +989,7 @@ void Ship::log_general_info(const EditorGameBase& egbase) {
  * \param title user-visible title of the message
  * \param description user-visible message body, will be placed in an appropriate rich-text
  *paragraph
- * \param picture picture name relative to the pics directory
+ * \param picture picture name relative to the data/ directory
  */
 void Ship::send_message(Game& game,
 								const std::string& title,
@@ -1000,7 +998,7 @@ void Ship::send_message(Game& game,
                         const std::string& picture) {
 	std::string rt_description;
 	if (picture.size() > 3) {
-		rt_description = "<rt image=pics/";
+		rt_description = "<rt image=";
 		rt_description += picture;
 		rt_description += "><p font-size=14 font-face=DejaVuSerif>";
 	} else
@@ -1010,8 +1008,8 @@ void Ship::send_message(Game& game,
 
 	Message* msg = new Message(Message::Type::kSeafaring,
 	                           game.get_gametime(),
-	                           title,
-										(boost::format("pics/%s") % picture).str(),
+										title,
+										picture,
 										heading,
 	                           rt_description,
 	                           get_position(),

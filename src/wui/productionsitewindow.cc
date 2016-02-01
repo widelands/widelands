@@ -35,8 +35,8 @@
 
 using Widelands::ProductionSite;
 
-static char const * pic_tab_wares  = "pics/menu_tab_wares.png";
-static char const * pic_tab_workers = "pics/menu_list_workers.png";
+static char const * pic_tab_wares = "images/wui/buildings/menu_tab_wares.png";
+static char const * pic_tab_workers = "images/wui/buildings/menu_list_workers.png";
 
 /*
 ===============
@@ -93,8 +93,8 @@ ProductionSiteWindow::ProductionSiteWindow
 			worker_caps_->add_inf_space();
 			UI::Button * evict_button = new UI::Button
 							(worker_caps_, "evict", 0, 0, 34, 34,
-							 g_gr->images().get("pics/but4.png"),
-							 g_gr->images().get("pics/menu_drop_soldier.png"),
+							 g_gr->images().get("images/ui_basic/but4.png"),
+							 g_gr->images().get("images/wui/buildings/menu_drop_soldier.png"),
 							 _("Terminate the employment of the selected worker"));
 			evict_button->sigclicked.connect
 					(boost::bind(&ProductionSiteWindow::evict_worker, boost::ref(*this)));
@@ -202,7 +202,6 @@ void ProductionSiteWindow::update_worker_table()
 			continue;
 		}
 	}
-	worker_table_->update();
 }
 
 void ProductionSiteWindow::evict_worker() {

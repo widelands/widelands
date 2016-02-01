@@ -100,7 +100,7 @@ struct DefaultAI : ComputerPlayer {
 			name = "normal";
 			/** TRANSLATORS: This is the name of an AI used in the game setup screens */
 			descname = _("Normal AI");
-			icon_filename = "pics/ai_normal.png";
+			icon_filename = "images/ai/ai_normal.png";
 		}
 		ComputerPlayer* instantiate(Widelands::Game& game,
 		                            Widelands::PlayerNumber const p) const override {
@@ -113,7 +113,7 @@ struct DefaultAI : ComputerPlayer {
 			name = "weak";
 			/** TRANSLATORS: This is the name of an AI used in the game setup screens */
 			descname = _("Weak AI");
-			icon_filename = "pics/ai_weak.png";
+			icon_filename = "images/ai/ai_weak.png";
 		}
 		ComputerPlayer* instantiate(Widelands::Game& game,
 		                            Widelands::PlayerNumber const p) const override {
@@ -126,7 +126,7 @@ struct DefaultAI : ComputerPlayer {
 			name = "very_weak";
 			/** TRANSLATORS: This is the name of an AI used in the game setup screens */
 			descname = _("Very Weak AI");
-			icon_filename = "pics/ai_very_weak.png";
+			icon_filename = "images/ai/ai_very_weak.png";
 		}
 		ComputerPlayer* instantiate(Widelands::Game& game,
 		                            Widelands::PlayerNumber const p) const override {

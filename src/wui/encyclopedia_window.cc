@@ -80,6 +80,7 @@ const std::string heading(const std::string& text) {
 	                       "%s<br></p><p font-size=8> <br></p></rt>") %
 	         text).str());
 }
+
 }  // namespace
 
 EncyclopediaWindow::EncyclopediaWindow(InteractivePlayer& parent, UI::UniqueWindow::Registry& registry)
@@ -94,21 +95,21 @@ EncyclopediaWindow::EncyclopediaWindow(InteractivePlayer& parent, UI::UniqueWind
 
 	tab_definitions.push_back(
 	   std::unique_ptr<EncyclopediaTab>(new EncyclopediaTab("wares",
-	                                                        "pics/menu_tab_wares.png",
+																			  "images/wui/buildings/menu_tab_wares.png",
 	                                                        _("Wares"),
 	                                                        "tribes/scripting/help/ware_help.lua",
 	                                                        Widelands::MapObjectType::WARE)));
 
 	tab_definitions.push_back(
 	   std::unique_ptr<EncyclopediaTab>(new EncyclopediaTab("workers",
-	                                                        "pics/menu_tab_workers.png",
+																			  "images/wui/buildings/menu_tab_workers.png",
 	                                                        _("Workers"),
 	                                                        "tribes/scripting/help/worker_help.lua",
 	                                                        Widelands::MapObjectType::WORKER)));
 
 	tab_definitions.push_back(std::unique_ptr<EncyclopediaTab>(
 	   new EncyclopediaTab("buildings",
-	                       "pics/genstats_nrbuildings.png",
+								  "images/wui/stats/genstats_nrbuildings.png",
 	                       _("Buildings"),
 	                       "tribes/scripting/help/building_help.lua",
 	                       Widelands::MapObjectType::BUILDING)));

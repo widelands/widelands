@@ -267,6 +267,11 @@ redirected_stdio_(false)
 	log("Adding directory: %s\n", datadir_.c_str());
 	g_fs->add_file_system(&FileSystem::create(datadir_));
 
+	if (!datadir_for_testing_.empty()) {
+		log("Adding directory: %s\n", datadir_for_testing_.c_str());
+		g_fs->add_file_system(&FileSystem::create(datadir_for_testing_));
+	}
+
 	init_language(); // search paths must already be set up
 	changedir_on_mac();
 	cleanup_replays();
@@ -893,11 +898,15 @@ void WLApplication::handle_commandline_parameters()
 	} else {
 		datadir_ = is_absolute_path(INSTALL_DATADIR) ?
 		               INSTALL_DATADIR :
-		               get_executable_directory() + INSTALL_DATADIR;
+		               get_executable_directory() + FileSystem::file_separator() + INSTALL_DATADIR;
 	}
 	if (!is_absolute_path(datadir_)) {
 		datadir_ = absolute_path_if_not_windows(FileSystem::get_working_directory() +
 		                                         FileSystem::file_separator() + datadir_);
+	}
+	if (commandline_.count("datadir_for_testing")) {
+		datadir_for_testing_ = commandline_["datadir_for_testing"];
+		commandline_.erase("datadir_for_testing");
 	}
 
 	if (commandline_.count("verbose")) {

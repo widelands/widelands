@@ -34,7 +34,7 @@ struct EditorInfoTool : public EditorTool {
 							  Widelands::Map* map) override;
 
 	char const* get_sel_impl() const override {
-		return "pics/fsel_editor_info.png";
+		return "images/wui/editor/fsel_editor_info.png";
 	}
 
 	bool has_size_one() const override {return true;}

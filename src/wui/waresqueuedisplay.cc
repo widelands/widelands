@@ -28,10 +28,10 @@
 #include "logic/player.h"
 #include "wui/interactive_gamebase.h"
 
-static char const * pic_priority_low     = "pics/low_priority_button.png";
-static char const * pic_priority_normal  = "pics/normal_priority_button.png";
-static char const * pic_priority_high    = "pics/high_priority_button.png";
-static char const * pic_max_fill_indicator = "pics/max_fill_indicator.png";
+static char const * pic_priority_low     = "images/wui/buildings/low_priority_button.png";
+static char const * pic_priority_normal  = "images/wui/buildings/normal_priority_button.png";
+static char const * pic_priority_high    = "images/wui/buildings/high_priority_button.png";
+static char const * pic_max_fill_indicator = "images/wui/buildings/max_fill_indicator.png";
 
 WaresQueueDisplay::WaresQueueDisplay
 	(UI::Panel * const parent,
@@ -52,7 +52,6 @@ ware_index_(queue->get_ware()),
 ware_type_(Widelands::wwWARE),
 max_fill_indicator_(g_gr->images().get(pic_max_fill_indicator)),
 cache_size_(queue->get_max_size()),
-cache_filled_(queue->get_filled()),
 cache_max_fill_(queue->get_max_fill()),
 total_height_(0),
 show_only_(show_only)
@@ -112,15 +111,11 @@ void WaresQueueDisplay::think()
 	if (static_cast<uint32_t>(queue_->get_max_size()) != cache_size_)
 		max_size_changed();
 
-	if (static_cast<uint32_t>(queue_->get_filled()) != cache_filled_)
-		update();
-
+	// TODO(sirver): It seems cache_max_fill_ is not really useful for anything.
 	if (static_cast<uint32_t>(queue_->get_max_fill()) != cache_max_fill_) {
 		cache_max_fill_ = queue_->get_max_fill();
 		compute_max_fill_buttons_enabled_state();
-		update();
 	}
-
 }
 
 /**
@@ -131,10 +126,9 @@ void WaresQueueDisplay::draw(RenderTarget & dst)
 	if (!cache_size_)
 		return;
 
-	cache_filled_ = queue_->get_filled();
 	cache_max_fill_ = queue_->get_max_fill();
 
-	uint32_t nr_wares_to_draw = std::min(cache_filled_, cache_size_);
+	uint32_t nr_wares_to_draw = std::min(queue_->get_filled(), cache_size_);
 	uint32_t nr_empty_to_draw = cache_size_ - nr_wares_to_draw;
 
 	Point point;
@@ -239,8 +233,8 @@ void WaresQueueDisplay::update_max_fill_buttons() {
 	decrease_max_fill_ = new UI::Button
 		(this, "decrease_max_fill",
 		 x, y, WARE_MENU_PIC_WIDTH, WARE_MENU_PIC_HEIGHT,
-		 g_gr->images().get("pics/but4.png"),
-		 g_gr->images().get("pics/scrollbar_left.png"),
+		 g_gr->images().get("images/ui_basic/but4.png"),
+		 g_gr->images().get("images/ui_basic/scrollbar_left.png"),
 		 _("Decrease the number of wares you want to be stored here."));
 	decrease_max_fill_->sigclicked.connect
 		(boost::bind(&WaresQueueDisplay::decrease_max_fill_clicked, boost::ref(*this)));
@@ -249,8 +243,8 @@ void WaresQueueDisplay::update_max_fill_buttons() {
 	increase_max_fill_ = new UI::Button
 		(this, "increase_max_fill",
 		 x, y, WARE_MENU_PIC_WIDTH, WARE_MENU_PIC_HEIGHT,
-		 g_gr->images().get("pics/but4.png"),
-		 g_gr->images().get("pics/scrollbar_right.png"),
+		 g_gr->images().get("images/ui_basic/but4.png"),
+		 g_gr->images().get("images/ui_basic/scrollbar_right.png"),
 		 _("Increase the number of wares you want to be stored here."));
 	increase_max_fill_->sigclicked.connect
 		(boost::bind(&WaresQueueDisplay::increase_max_fill_clicked, boost::ref(*this)));
@@ -258,7 +252,6 @@ void WaresQueueDisplay::update_max_fill_buttons() {
 	increase_max_fill_->set_repeating(true);
 	decrease_max_fill_->set_repeating(true);
 	compute_max_fill_buttons_enabled_state();
-
 }
 
 /**

@@ -23,7 +23,7 @@
 
 
 FullscreenMenuIntro::FullscreenMenuIntro()
-	: FullscreenMenuBase("splash.jpg"),
+	: FullscreenMenuBase("images/loadscreens/splash.jpg"),
 
 // Text area
 m_message

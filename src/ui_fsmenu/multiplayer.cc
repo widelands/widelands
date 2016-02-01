@@ -81,8 +81,8 @@ FullscreenMenuMultiPlayer::FullscreenMenuMultiPlayer() :
 			new UI::Button
 				(this, "login_dialog",
 				 m_box_x + m_butw + m_buth / 4, get_h() * 6 / 25, m_buth, m_buth,
-				 g_gr->images().get("pics/but1.png"),
-				 g_gr->images().get("pics/continue.png"),
+				 g_gr->images().get("images/ui_basic/but1.png"),
+				 g_gr->images().get("images/ui_basic/continue.png"),
 				 _("Show login dialog"), true, false);
 		showloginbox->sigclicked.connect
 			(boost::bind

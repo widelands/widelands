@@ -1,15 +1,15 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2015 Widelands Development Team
+# Copyright (C) 2005-2016 Widelands Development Team
 # 
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2012
-# Juanjo, 2015
+# Juanjo, 2015-2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-12-03 09:55+0000\n"
-"PO-Revision-Date: 2015-12-03 21:50+0000\n"
+"POT-Creation-Date: 2016-01-23 08:23+0000\n"
+"PO-Revision-Date: 2016-01-24 21:53+0000\n"
 "Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -73,7 +73,7 @@ msgid ""
 "For everything you do on the high seas, you need a port at the shore. Ports "
 "are like headquarters: they can store wares, workers and soldiers. The "
 "soldiers inside will automatically come out when an enemy attacks the port."
-msgstr "Per tot el que hagueu de fer a alta mar cal un port a la costa. Els ports són com un quarter general o un magatzem: poden emmagatzemar béns, treballadors i soldats. Els soldats que hi hagi a dins sortiran automàticament quan un enemic ataqui el port."
+msgstr "Per tot el que hàgiu de fer a alta mar cal un port a la costa. Els ports són com un quarter general o un magatzem: poden emmagatzemar béns, treballadors i soldats. Els soldats que hi hagi a dins sortiran automàticament quan un enemic ataqui el port."
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:47
 msgid ""
@@ -209,7 +209,7 @@ msgstr "El mestre d'aixa portarà els béns que necessita a un lloc lliure de la
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:109
 msgid "We should wait until we have two ships. That should be enough for now."
-msgstr "Hauríem d'esperar fins tenir dos vaixells. De moment, això és tot."
+msgstr "Hauríem d'esperar fins a tenir dos vaixells. De moment, això és tot."
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:110
 msgid ""
@@ -272,7 +272,7 @@ msgstr "Encara que pot trigar molt temps, ser car i comporta perills, qui sap qu
 #. TRANSLATORS: This shall be the beginning of a poem
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:138
 msgid "A trip by the sea, what fun it can be"
-msgstr "Un vaixell per mar; què divertit deu ser!"
+msgstr "Un viatge per mar; com en deu ser de divertit!"
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:140
 msgid "Expeditions"
@@ -313,7 +313,7 @@ msgstr "Inicieu una expedició"
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:153
 msgid "Start an expedition."
-msgstr "Inicieu una expedició"
+msgstr "Inicieu una expedició."
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:155
 msgid ""
@@ -373,7 +373,7 @@ msgstr "Quan feu clic en un vaixell d'expedició, s'obre una finestra des d'on e
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:176
 msgid "When you have found a suitable port space, build a port there."
-msgstr "Quan hagueu trobat un lloc apropiat per al nou port, comenceu-ne la construcció."
+msgstr "Quan hàgiu trobat un lloc apropiat per al nou port, comenceu-ne la construcció."
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:183
 msgid "Conclusion"
@@ -414,6 +414,7 @@ msgid ""
 msgstr "En aquest mapa no hi ha enemics. Com sempre, podeu continuar jugant i veure com els vaixells transporten les mercaderies a l'illa quan comenceu a construir-hi nous edificis. També hi ha una altra illa on podeu construir un port."
 
 #: ../../scripting/format_scenario.lua:36
+#, lua-format
 msgid "“%s”"
 msgstr "“%s”"
 

@@ -824,7 +824,7 @@ void NetHost::run(bool const autorun)
 				set_win_condition_script(gpdp.get_win_condition());
 			}
 		} else {
-			loaderUI.reset(new UI::ProgressWindow ("pics/progress.png"));
+			loaderUI.reset(new UI::ProgressWindow ("images/loadscreens/progress.png"));
 			std::vector<std::string> tipstext;
 			tipstext.push_back("general_game");
 			tipstext.push_back("multiplayer");

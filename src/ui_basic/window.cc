@@ -82,15 +82,15 @@ Window::Window
 		_drag_start_win_x(0), _drag_start_win_y(0),
 		_drag_start_mouse_x(0), _drag_start_mouse_y(0),
 		m_pic_lborder
-			(g_gr->images().get("pics/win_l_border.png")),
+			(g_gr->images().get("images/wui/window_left.png")),
 		m_pic_rborder
-			(g_gr->images().get("pics/win_r_border.png")),
+			(g_gr->images().get("images/wui/window_right.png")),
 		m_pic_top
-			(g_gr->images().get("pics/win_top.png")),
+			(g_gr->images().get("images/wui/window_top.png")),
 		m_pic_bottom
-			(g_gr->images().get("pics/win_bot.png")),
+			(g_gr->images().get("images/wui/window_bottom.png")),
 		m_pic_background
-			(g_gr->images().get("pics/win_bg.png")),
+			(g_gr->images().get("images/wui/window_background.png")),
 		m_center_panel(nullptr),
 		m_fastclick_panel(nullptr)
 {
@@ -110,7 +110,6 @@ Window::Window
 void Window::set_title(const string & text)
 {
 	m_title = is_richtext(text) ? text : as_window_title(text);
-	update(0, 0, get_w(), TP_B_PIXMAP_THICKNESS);
 }
 
 /**

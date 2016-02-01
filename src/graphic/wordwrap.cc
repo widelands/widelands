@@ -362,7 +362,7 @@ void WordWrap::draw(RenderTarget & dst, Point where, Align align, uint32_t caret
 			// TODO(GunChleoc): Arabic: Fix cursor position for BIDI text.
 			int caret_x = text_width(line_to_caret, m_style.font->size());
 
-			const Image* caret_image = g_gr->images().get("pics/caret.png");
+			const Image* caret_image = g_gr->images().get("images/ui_basic/caret.png");
 			Point caretpt;
 			caretpt.x = point.x + caret_x - caret_image->width() + LINE_MARGIN;
 			caretpt.y = point.y + (fontheight - caret_image->height()) / 2;

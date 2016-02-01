@@ -52,10 +52,7 @@ ItemWaresDisplay::ItemWaresDisplay(Panel * parent, const Widelands::Player & gpl
  */
 void ItemWaresDisplay::clear()
 {
-	if (!items_.empty()) {
-		items_.clear();
-		update();
-	}
+	items_.clear();
 }
 
 /**
@@ -100,7 +97,6 @@ void ItemWaresDisplay::add(bool worker, Widelands::DescriptionIndex index)
 	it.worker = worker;
 	it.index = index;
 	items_.push_back(it);
-	update();
 }
 
 void ItemWaresDisplay::draw(RenderTarget & dst)

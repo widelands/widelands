@@ -1,16 +1,16 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2015 Widelands Development Team
+# Copyright (C) 2005-2016 Widelands Development Team
 # 
 # Translators:
 # Juanjo, 2015
-# Juanjo, 2015
+# Juanjo, 2015-2016
 # Juanjo, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-07 08:28+0000\n"
-"PO-Revision-Date: 2015-11-06 17:10+0000\n"
+"POT-Creation-Date: 2016-01-23 08:23+0000\n"
+"PO-Revision-Date: 2016-01-24 21:53+0000\n"
 "Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -191,7 +191,7 @@ msgid ""
 "building. A menu will pop up allowing you to select the number of soldiers "
 "that should attack. When you are ready with setting the number, click on the"
 " cross (‘Start Attack’)."
-msgstr "Per atacar un enemic, heu de clicar a la porta de l'edifici militar de l'adversari. Apareixerà un menú, permetent-vos seleccionar quants soldats han d'atacar. Quan hagueu escollit el nombre, cliqueu la creu («Comença l'atac»)."
+msgstr "Per atacar un enemic, heu de clicar a la porta de l'edifici militar de l'adversari. Apareixerà un menú, permetent-vos seleccionar quants soldats han d'atacar. Quan hàgiu escollit el nombre, cliqueu la creu («Comença l'atac»)."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:134
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:136
@@ -219,7 +219,7 @@ msgid ""
 "These last days, we came closer to our capital. Many people have already "
 "joined us on our march and set their hopes on me. However, I fear that we "
 "are not strong enough to take up the battle against my brothers."
-msgstr "Aquests últims dies ens hem apropat a la nostra capital. Part de la població se'ns ha unit i han posat les seves esperances en la nostra causa. No obstant, em temo que no som prou forts per emprendre la batalla final contra els meus germans."
+msgstr "Aquests últims dies ens hem apropat a la nostra capital. Part de la població se'ns ha unit i han posat les seves esperances en la nostra causa. No obstant això, em temo que no som prou forts per emprendre la batalla final contra els meus germans."
 
 #. TRANSLATORS: Thron
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:151
@@ -243,7 +243,7 @@ msgid ""
 " is the first war leader to leave Al’thunran, thus leaving his side weak and"
 " vulnerable. As my scouts report, he has set foot on the lower grounds "
 "around the capital, securing the outer fortification rings."
-msgstr "Notícies com les que ens ha portat la patrulla no són bones d'escoltar. Els nostres espies diuen que les batalles de la guerra de clans encara continua. Però alguns dels soldats i líders més ancians semblen cansats d'aquesta guerra sense sentit. Kalitath, fill d'en Kun és el primer líder de la guerra en perdre Al'thunran, cosa que deixa aquest flanc dèbil i vulnerable. Tal i com m'informen els exploradors, ell està en els terrenys més baixos al voltant de la capital, assegurant les fortaleses exteriors."
+msgstr "Notícies com les que ens ha portat la patrulla no són bones d'escoltar. Els nostres espies diuen que les batalles de la guerra de clans encara continua. Però alguns dels soldats i líders més ancians semblen cansats d'aquesta guerra sense sentit. Kalitath, fill d'en Kun és el primer líder de la guerra en perdre Al'thunran, cosa que deixa aquest flanc dèbil i vulnerable. Tal com m'informen els exploradors, ell està en els terrenys més baixos al voltant de la capital, assegurant les fortaleses exteriors."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:164
 msgid "Doubts"
@@ -369,7 +369,7 @@ msgid ""
 "of my brothers are in chaos and have barely noticed the new danger that is "
 "about to strike them. However, they would not care if they noticed I guess, "
 "blinded by rage and hate, there is no sense left in them at all I believe."
-msgstr "Però encara hi ha més novetats: els meus exploradors m'han informat que les dues tribus dels meus germans estan lluitant caòticament i no s'han adonat del perill que nosaltres els suposem. No obstant, tampoc es preocuparien si s'adonessin on estem. Estan encegats per l'odi i ràbia i han perdut la raó."
+msgstr "Però encara hi ha més novetats: els meus exploradors m'han informat que les dues tribus dels meus germans estan lluitant caòticament i no s'han adonat del perill que nosaltres els suposem. Encara que tampoc es preocuparien si ens veiessin. Estan encegats per l'odi i ràbia i han perdut la raó."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:220
 msgid "Winter Ahead"
@@ -383,7 +383,7 @@ msgid ""
 "The number of quarrels and disputes keeps growing, and the winter has us "
 "firmly in its grip. We should put food in our storage to survive the long, "
 "cold winter!"
-msgstr "Aquest matí, he trobat en Thron preocupat. Després de tornar de patrullar ahir per la nit i va asseure's i mirà el campament. El nombre de batalles i disputes continua creixent i l'hivern ens té ben agafats. Hem d'omplir els rebostos per sobreviuré el fred hivern."
+msgstr "Aquest matí, he trobat en Thron preocupat. Després de tornar de patrullar ahir a la nit, va asseure's i mirà el campament. El nombre de batalles i disputes continua creixent i l'hivern ens té ben agafats. Hem d'omplir els rebostos per sobreviure el fred hivern."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:228
 msgid "The Advisor"
@@ -504,7 +504,7 @@ msgid ""
 "settlement should be safe for now. For the future, we might think on "
 "building some more fortifications like barriers and towers at the passages, "
 "but for now we can take a deep breath."
-msgstr "Per fi! S'ha completat la fortalesa. L'entrada al nostre assentament hauria de ser segura per ara. De cara al futur, hauríem de pensar en construir més fortificacions com ara casernes i torres als passos estrets. Però per ara podem respirar tranquils."
+msgstr "Per fi! S'ha completat la fortalesa. L'entrada al nostre assentament hauria de ser segura per ara. De cara al futur, hauríem de decidir si cal construir més fortificacions com ara casernes i torres als passos estrets. Però per ara podem respirar tranquils."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:300
 msgid "Enhanced Economy and Training"
@@ -516,7 +516,7 @@ msgid ""
 "Our mining economy seems to work fine, that is already good news! Anyway, "
 "there are still a lot of men and women waiting in our hall to get a task, so"
 " they can help our soldiers to prepare for the war to come."
-msgstr "La nostra economia minera sembla funcionar bé. No obstant, encara hi ha molts homes i dones que necessiten alguna tasca per ajudar a preparar els nostres soldats."
+msgstr "La nostra economia minera sembla funcionar bé. Tanmateix, encara hi ha molts homes i dones que necessiten alguna tasca per ajudar a preparar els nostres soldats."
 
 #. TRANSLATORS: Boldreth
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:306
@@ -579,7 +579,7 @@ msgid ""
 "assault. By dusk, I will celebrate my victory in the wooden halls of the "
 "warlord and sacrifice a newborn lamb in the honor of my father, whose eyes "
 "are set upon me today."
-msgstr "Quan el jove sol s'aixequi demà pel matí, ordenaré l'assalt. Pel capvespre, celebraré la meva victòria en les sales de fusta del senyor de la guerra i sacrificaré un corder en honor del meu pare, els ulls del qual m'estan mirant avui."
+msgstr "Quan el jove sol s'aixequi demà al matí, ordenaré l'assalt. Pel capvespre, celebraré la meva victòria en les sales de fusta del senyor de la guerra i sacrificaré un corder en honor del meu pare, els ulls del qual m'estan mirant avui."
 
 #. TRANSLATORS: Thron
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:334
@@ -603,6 +603,7 @@ msgid ""
 msgstr "Cap, recordeu-vos-en dels pobres transportistes. Els nostres camins s'estan fent massa llargs i la càrrega que suporten no es fa més lleugera. Hauríem de criar bous per alleugerir la seva feina i millorar el sistema de transport."
 
 #: ../../scripting/format_scenario.lua:36
+#, lua-format
 msgid "“%s”"
 msgstr "“%s”"
 

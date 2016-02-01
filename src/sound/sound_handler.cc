@@ -224,22 +224,22 @@ void SoundHandler::read_config()
 */
 void SoundHandler::load_system_sounds()
 {
-	load_fx_if_needed("sound", "click", "sound/click");
-	load_fx_if_needed("sound", "create_construction_site", "sound/create_construction_site");
-	load_fx_if_needed("sound", "message", "sound/message");
-	load_fx_if_needed("sound/military", "under_attack", "sound/military/under_attack");
-	load_fx_if_needed("sound/military", "site_occupied", "sound/military/site_occupied");
-	load_fx_if_needed("sound", "lobby_chat", "sound/lobby_chat");
-	load_fx_if_needed("sound", "lobby_freshmen", "sound/lobby_freshmen");
+	load_fx_if_needed("sound", "click", "click");
+	load_fx_if_needed("sound", "create_construction_site", "create_construction_site");
+	load_fx_if_needed("sound", "message", "message");
+	load_fx_if_needed("sound/military", "under_attack", "military/under_attack");
+	load_fx_if_needed("sound/military", "site_occupied", "military/site_occupied");
+	load_fx_if_needed("sound", "lobby_chat", "lobby_chat");
+	load_fx_if_needed("sound", "lobby_freshmen", "lobby_freshmen");
 }
 
 /** Load a sound effect. One sound effect can consist of several audio files
  * named EFFECT_XX.ogg, where XX is between 00 and 99.
  *
- * Subdirectories of and files under BASENAME_XX can be named anything you want.
+ * Subdirectories of and files under FILENAME_XX can be named anything you want.
  *
- * \param dir        The directory where the audio files reside
- * \param basename   Name from which filenames will be formed
+ * \param dir        The relative directory where the audio files reside in data/sound
+ * \param filename   Name from which filenames will be formed
  *                   (BASENAME_XX.ogg);
  *                   also the name used with \ref play_fx
 */
