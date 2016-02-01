@@ -38,7 +38,7 @@ struct TextStyle;
 struct MultilineEditbox : public Panel {
 	MultilineEditbox
 		(Panel *, int32_t x, int32_t y, uint32_t w, uint32_t h,
-		 const std::string & text, const Image* background = g_gr->images().get("pics/but2.png"));
+		 const std::string & text, const Image* background = g_gr->images().get("images/ui_basic/but2.png"));
 
 	boost::signals2::signal<void ()> changed;
 

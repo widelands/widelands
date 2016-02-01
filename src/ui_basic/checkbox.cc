@@ -66,7 +66,7 @@ Statebox::Statebox
 			UI::g_fh1->render(as_uifont(label_text),
 									width > (kStateboxSize + kPadding) ? width - kStateboxSize - kPadding : 0))
 {
-	m_pic_graphics = g_gr->images().get("pics/checkbox_light.png");
+	m_pic_graphics = g_gr->images().get("images/ui_basic/checkbox_light.png");
 	if (rendered_text_) {
 		int w = rendered_text_->width() + kPadding + m_pic_graphics->width() / 2;
 		int h = std::max(rendered_text_->height(), m_pic_graphics->height());
@@ -94,12 +94,12 @@ void Statebox::set_enabled(bool const enabled)
 	set_flags(Is_Enabled, enabled);
 
 	if (!(m_flags & Has_Custom_Picture)) {
-		m_pic_graphics = g_gr->images().get(enabled ? "pics/checkbox_light.png" : "pics/checkbox.png");
+		m_pic_graphics = g_gr->images().get(enabled ?
+															"images/ui_basic/checkbox_light.png" :
+															"images/ui_basic/checkbox.png");
 		set_flags
 			(Is_Highlighted, (m_flags & Is_Highlighted) && (m_flags & Is_Enabled));
 	}
-
-	update();
 }
 
 
@@ -113,7 +113,6 @@ void Statebox::set_state(bool const on) {
 		set_flags(Is_Checked, on);
 		changed();
 		changedto(on);
-		update();
 	}
 }
 
@@ -170,11 +169,7 @@ void Statebox::draw(RenderTarget & dst)
  * Highlight the checkbox when the mouse moves into it
  */
 void Statebox::handle_mousein(bool const inside) {
-	bool oldhl = m_flags & Is_Highlighted;
 	set_flags(Is_Highlighted, inside && (m_flags & Is_Enabled));
-
-	if (oldhl != (m_flags & Is_Highlighted))
-		update();
 }
 
 

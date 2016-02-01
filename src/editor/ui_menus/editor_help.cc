@@ -69,7 +69,7 @@ EditorHelp::EditorHelp(EditorInteractive& parent, UI::UniqueWindow::Registry& re
 
 	tab_definitions.push_back(
 	   std::unique_ptr<HelpTab>(new HelpTab("terrains",
-	                                        "pics/editor_menu_tool_set_terrain.png",
+	                                        "images/wui/editor/editor_menu_tool_set_terrain.png",
 	                                        _("Terrains"),
 	                                        "scripting/editor/terrain_help.lua",
 	                                        HelpEntry::Type::kTerrain)));

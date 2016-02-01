@@ -260,7 +260,6 @@ void AbstractWaresDisplay::update_anchor_selection(int32_t x, int32_t y)
 			}
 		}
 	}
-	update();
 }
 
 
@@ -273,10 +272,6 @@ void AbstractWaresDisplay::layout()
 
 void WaresDisplay::remove_all_warelists() {
 	warelists_.clear();
-	for (boost::signals2::connection& c : connections_)
-		c.disconnect();
-	connections_.clear();
-	update();
 }
 
 
@@ -356,7 +351,9 @@ void AbstractWaresDisplay::draw_ware
 
 	//  draw a background
 	const Image* bgpic =
-		g_gr->images().get(draw_selected ?  "pics/ware_list_bg_selected.png" :  "pics/ware_list_bg.png");
+		g_gr->images().get(draw_selected ?
+									 "images/wui/ware_list_bg_selected.png" :
+									 "images/wui/ware_list_bg.png");
 	uint16_t w = bgpic->width();
 
 	dst.blit(p, bgpic);
@@ -384,7 +381,6 @@ void AbstractWaresDisplay::select_ware(Widelands::DescriptionIndex ware)
 		return;
 
 	selected_[ware] = true;
-	update();
 	if (callback_function_)
 			callback_function_(ware, true);
 }
@@ -395,7 +391,6 @@ void AbstractWaresDisplay::unselect_ware(Widelands::DescriptionIndex ware)
 		return;
 
 	selected_[ware] = false;
-	update();
 	if (callback_function_)
 			callback_function_(ware, false);
 }
@@ -409,18 +404,14 @@ void AbstractWaresDisplay::hide_ware(Widelands::DescriptionIndex ware)
 {
 	if (hidden_[ware])
 		return;
-
 	hidden_[ware] = true;
-	update();
 }
 
 void AbstractWaresDisplay::unhide_ware(Widelands::DescriptionIndex ware)
 {
 	if (!hidden_[ware])
 		return;
-
 	hidden_[ware] = false;
-	update();
 }
 
 bool AbstractWaresDisplay::ware_hidden(Widelands::DescriptionIndex ware) {
@@ -463,9 +454,6 @@ void WaresDisplay::add_warelist
 {
 	//  If you register something twice, it is counted twice. Not my problem.
 	warelists_.push_back(&wares);
-
-	connections_.push_back(wares.changed.connect(boost::bind(&WaresDisplay::update, boost::ref(*this))));
-	update();
 }
 
 

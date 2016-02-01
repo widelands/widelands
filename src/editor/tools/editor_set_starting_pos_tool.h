@@ -28,8 +28,6 @@
 #define MIN_PLACE_AROUND_PLAYERS 24
 #define STARTING_POS_HOTSPOT_Y 55
 
-#define FSEL_PIC_FILENAME "pics/fsel_editor_set_player_00_pos.png"
-
 /// Sets the starting position of players.
 struct EditorSetStartingPosTool : public EditorTool {
 	EditorSetStartingPosTool();
@@ -47,7 +45,7 @@ struct EditorSetStartingPosTool : public EditorTool {
 	bool has_size_one() const override {return true;}
 
 private:
-	char fsel_picsname[sizeof(FSEL_PIC_FILENAME)];
+	char const * fsel_picsname;
 	char const * m_current_sel_pic;
 };
 

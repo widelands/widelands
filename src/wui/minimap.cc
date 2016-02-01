@@ -39,7 +39,7 @@ MiniMap::View::View
 	ibase_       (ibase),
 	viewx_       (0),
 	viewy_       (0),
-	pic_map_spot_(g_gr->images().get("pics/map_spot.png")),
+	pic_map_spot_(g_gr->images().get("images/wui/overlays/map_spot.png")),
 	flags_       (flags)
 {}
 
@@ -54,8 +54,6 @@ void MiniMap::View::set_view_pos(const int32_t x, const int32_t y)
 {
 	viewx_ = x / TRIANGLE_WIDTH;
 	viewy_ = y / TRIANGLE_HEIGHT;
-
-	update();
 }
 
 
@@ -140,43 +138,43 @@ MiniMap::MiniMap(InteractiveBase & ibase, Registry * const registry)
 	button_terrn
 		(this, "terrain",
 		 but_w() * 0, view_.get_h() + but_h() * 0, but_w(), but_h(),
-		 g_gr->images().get("pics/but0.png"),
-		 g_gr->images().get("pics/button_terrn.png"),
+		 g_gr->images().get("images/ui_basic/but0.png"),
+		 g_gr->images().get("images/wui/minimap/button_terrn.png"),
 		 _("Terrain"),
 		 true, false, true),
 	button_owner
 		(this, "owner",
 		 but_w() * 1, view_.get_h() + but_h() * 0, but_w(), but_h(),
-		 g_gr->images().get("pics/but0.png"),
-		 g_gr->images().get("pics/button_owner.png"),
+		 g_gr->images().get("images/ui_basic/but0.png"),
+		 g_gr->images().get("images/wui/minimap/button_owner.png"),
 		 _("Owner"),
 		 true, false, true),
 	button_flags
 		(this, "flags",
 		 but_w() * 2, view_.get_h() + but_h() * 0, but_w(), but_h(),
-		 g_gr->images().get("pics/but0.png"),
-		 g_gr->images().get("pics/button_flags.png"),
+		 g_gr->images().get("images/ui_basic/but0.png"),
+		 g_gr->images().get("images/wui/minimap/button_flags.png"),
 		 _("Flags"),
 		 true, false, true),
 	button_roads
 		(this, "roads",
 		 but_w() * 0, view_.get_h() + but_h() * 1, but_w(), but_h(),
-		 g_gr->images().get("pics/but0.png"),
-		 g_gr->images().get("pics/button_roads.png"),
+		 g_gr->images().get("images/ui_basic/but0.png"),
+		 g_gr->images().get("images/wui/minimap/button_roads.png"),
 		 _("Roads"),
 		 true, false, true),
 	button_bldns
 		(this, "buildings",
 		 but_w() * 1, view_.get_h() + but_h() * 1, but_w(), but_h(),
-		 g_gr->images().get("pics/but0.png"),
-		 g_gr->images().get("pics/button_bldns.png"),
+		 g_gr->images().get("images/ui_basic/but0.png"),
+		 g_gr->images().get("images/wui/minimap/button_bldns.png"),
 		 _("Buildings"),
 		 true, false, true),
 	button_zoom
 		(this, "zoom",
 		 but_w() * 2, view_.get_h() + but_h() * 1, but_w(), but_h(),
-		 g_gr->images().get("pics/but0.png"),
-		 g_gr->images().get("pics/button_zoom.png"),
+		 g_gr->images().get("images/ui_basic/but0.png"),
+		 g_gr->images().get("images/wui/minimap/button_zoom.png"),
 		 _("Zoom"),
 		 true, false, true)
 {

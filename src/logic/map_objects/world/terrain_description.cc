@@ -69,32 +69,32 @@ TerrainDescription::Type::Type(TerrainDescription::Is _is) : is(_is) {
 	case Is::kArable:
 		/** TRANSLATORS: This is a terrain type tooltip in the editor */
 		descname = _("arable");
-		icon = g_gr->images().get("pics/terrain_arable.png");
+		icon = g_gr->images().get("images/wui/editor/terrain_arable.png");
 		break;
 	case Is::kWalkable:
 		/** TRANSLATORS: This is a terrain type tooltip in the editor */
 		descname = _("walkable");
-		icon = g_gr->images().get("pics/terrain_walkable.png");
+		icon = g_gr->images().get("images/wui/editor/terrain_walkable.png");
 		break;
 	case Is::kWater:
 		/** TRANSLATORS: This is a terrain type tooltip in the editor */
 		descname = _("navigable");
-		icon = g_gr->images().get("pics/terrain_water.png");
+		icon = g_gr->images().get("images/wui/editor/terrain_water.png");
 		break;
 	case Is::kUnreachable:
 		/** TRANSLATORS: This is a terrain type tooltip in the editor */
 		descname = _("unreachable");
-		icon = g_gr->images().get("pics/terrain_unreachable.png");
+		icon = g_gr->images().get("images/wui/editor/terrain_unreachable.png");
 		break;
 	case Is::kMineable:
 		/** TRANSLATORS: This is a terrain type tooltip in the editor */
 		descname = _("mineable");
-		icon = g_gr->images().get("pics/terrain_mineable.png");
+		icon = g_gr->images().get("images/wui/editor/terrain_mineable.png");
 		break;
 	case Is::kUnwalkable:
 		/** TRANSLATORS: This is a terrain type tooltip in the editor */
 		descname = _("unwalkable");
-		icon = g_gr->images().get("pics/terrain_unwalkable.png");
+		icon = g_gr->images().get("images/wui/editor/terrain_unwalkable.png");
 		break;
 	}
 }

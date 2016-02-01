@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2015 Widelands Development Team
+# Copyright (C) 2005-2016 Widelands Development Team
 # 
 # Translators:
 # GunChleoc, 2015
@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-12-03 09:55+0000\n"
-"PO-Revision-Date: 2015-12-03 14:36+0000\n"
+"POT-Creation-Date: 2016-01-23 08:23+0000\n"
+"PO-Revision-Date: 2016-01-23 08:50+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -46,6 +46,7 @@ msgid ""
 msgstr "Seo geama saor is Open Source (FOSS) fo cheadachas GNU General Public License (GPL) V2.0."
 
 #: ../../txts/LICENSE.lua:26
+#, lua-format
 msgid ""
 "You can find more information on FOSS and the GPL by visiting the following "
 "webpage:  %s"
@@ -294,6 +295,7 @@ msgid ""
 msgstr "Gheibh thu mìneachadh mionaideach air eaconamaidhean nan treubhan ann an leabhar-eòlais na treubha am broinn a’ gheama."
 
 #: ../../txts/README.lua:92
+#, lua-format
 msgid ""
 "If you need more documentation or help for Widelands or the Widelands "
 "Editor, be sure to visit our homepage at %s. You can find online help in our"
@@ -434,11 +436,10 @@ msgstr "FreeBSD"
 msgid "Graphicians"
 msgstr "Luchd-grafaigeachd"
 
-#: ../../txts/developers.lua:3 ../../txts/developers.lua:3
+#: ../../txts/developers.lua:3
 msgid "Graphics"
 msgstr "Grafaigeachd"
 
-#: ../../txts/developers.lua:3 ../../txts/developers.lua:3
 #: ../../txts/developers.lua:3
 msgid "Homepage"
 msgstr "Duilleag-dhachaigh"
@@ -471,7 +472,7 @@ msgstr "Eile"
 msgid "Packagers"
 msgstr "Luchd-pacaididh"
 
-#: ../../txts/developers.lua:3 ../../txts/developers.lua:3
+#: ../../txts/developers.lua:3
 msgid "Sound"
 msgstr "Fuaim"
 
@@ -520,6 +521,7 @@ msgid ""
 msgstr "Tha mòran prògramachaidh againn ri dhèanamh fhathast air an deasaiche is nuair a bheir sinn piseach air, nì sinn an teacsa seo nas fhaide is nas coileanta cuideachd."
 
 #: ../../txts/editor_readme.lua:14
+#, lua-format
 msgid "Please have a look at our enduser manuals on our wiki pages at: %s"
 msgstr "Thoir sùil air leabhraichean-mìneachaidh a’ chleachdaiche sna duilleagan uicidh againn air: %s"
 

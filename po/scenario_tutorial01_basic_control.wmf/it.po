@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2015 Widelands Development Team
+# Copyright (C) 2005-2016 Widelands Development Team
 # 
 # Translators:
 # Cristiano, 2015
@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-12-14 05:31+0000\n"
-"PO-Revision-Date: 2016-01-16 06:58+0000\n"
+"POT-Creation-Date: 2016-01-23 08:23+0000\n"
+"PO-Revision-Date: 2016-01-25 20:45+0000\n"
 "Last-Translator: Luigi Lain <lainluigi86@tiscali.it>\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
@@ -409,13 +409,13 @@ msgstr "Apri la minimappa usando il terzo pulsante dalla sinistra dello schermo 
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:232
 msgid "Play around a bit with the different overlays (roads, flags, etc.)"
-msgstr ""
+msgstr "Prova a giocare con le diverse sovrapposizioni (strade, bandiere, ecc.)"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:233
 msgid ""
 "Close the minimap when you are ready to continue by using the same button or"
 " ‘m’ again. Of course, a right-click also works."
-msgstr ""
+msgstr "Chiudi la minimappa quando sei pronto a continuare, usando lo stesso tasto o di nuovo 'm'. Ovviamente, anche un click col destro funziona."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:238
 msgid "Onward to the Quarry"
@@ -440,14 +440,14 @@ msgid ""
 "space were you want the building to be, choose it from the window that "
 "appears, and it is placed. Maybe this is a good time to explain about all "
 "those building space symbols we activated earlier."
-msgstr ""
+msgstr "Assicurati di avere la visualizzazione degli spazi edificabili attivata, poi semplicemente clicca sullo spazio in cui vuoi costruire l'edificio, sceglilo dalla finestra che appare, e verrà collocato.\nOra potrebbe essere un buon momento per spiegare cosa sono tutti quei simboli di spazi edificabili che abbiamo attivato in precedenza."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:251
 msgid ""
 "You can build four things on fields in Widelands: flags, small houses, "
 "medium houses and big houses. But not every field can hold everything. The "
 "build space symbols ease recognition:"
-msgstr ""
+msgstr "Puoi costruire quattro tipi di cose in Widelands: bandiere, edifici piccoli, edifici medi ed edifici grandi. Ma non tutti gli spazi possono accomodare qualsiasi cosa. I simboli degli spazi edificabili rendono più facile il riconoscimento:"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:253
 msgid "Everything can be built on the green house symbol."
@@ -464,7 +464,7 @@ msgstr "I simboli con la casa rossa possono ospitare solo piccoli edifici e band
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:256
 msgid "And finally, the yellow flag symbol only allows for flags."
-msgstr ""
+msgstr "E infine, i simboli con la bandiera gialla possono ospitare solo bandiere."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:258
 msgid ""
@@ -498,13 +498,13 @@ msgid ""
 "The quarry is a small building like the lumberjack’s hut. You can therefore "
 "build it on any field that shows a red, yellow or green house when the "
 "building spaces symbols are enabled (Press Space for that)."
-msgstr ""
+msgstr "La cava è  un edificio piccolo, come la capanna ddel taglialegna. Quindi lo puoi costruire su qualsiasi campo con un simbolo rosso, giallo o verde (premi la barra spaziatrice per visualizzare i simboli)"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:269
 msgid ""
 "Just click on any house symbol next to the rocks, select the small buildings"
 " tab in the window that opens up, then click on the quarry symbol."
-msgstr ""
+msgstr "Clicca su un qualsiasi simbolo di edificio vicino alle rocce, seleziona la linnguetta degli edifici piccoli nella finestra che si apre, e poi clicca sul simbolo della cava."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:276
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:293
@@ -543,7 +543,7 @@ msgid ""
 "you just ordered the quarry. You can either make it longer by one field at a"
 " time by left-clicking multiple times on neighboring fields for perfect "
 "control over the route the road takes, like so:"
-msgstr ""
+msgstr "Ora, riguardo a questa strada. Ricorda: siamo già in modalità  costruzione di strade perchè hai ordinato la costruzione di una cava. Puoi allungare la strada di uno spazio alla volta cliccando col sinistro ogni volta su uno spazio adiacente per avere un controllo perfetto sul percorso della strada, così:"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:295
 msgid ""

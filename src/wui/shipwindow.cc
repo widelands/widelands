@@ -32,19 +32,19 @@
 #include "wui/interactive_player.h"
 #include "wui/itemwaresdisplay.h"
 
-static const char pic_goto[] = "pics/menu_ship_goto.png";
-static const char pic_destination[] = "pics/menu_ship_destination.png";
-static const char pic_sink[]     = "pics/menu_ship_sink.png";
-static const char pic_cancel_expedition[] = "pics/menu_ship_cancel_expedition.png";
-static const char pic_explore_cw[]  = "pics/ship_explore_island_cw.png";
-static const char pic_explore_ccw[] = "pics/ship_explore_island_ccw.png";
-static const char pic_scout_nw[] = "pics/ship_scout_nw.png";
-static const char pic_scout_ne[] = "pics/ship_scout_ne.png";
-static const char pic_scout_w[]  = "pics/ship_scout_w.png";
-static const char pic_scout_e[]  = "pics/ship_scout_e.png";
-static const char pic_scout_sw[] = "pics/ship_scout_sw.png";
-static const char pic_scout_se[] = "pics/ship_scout_se.png";
-static const char pic_construct_port[] = "pics/fsel_editor_set_port_space.png";
+static const char pic_goto[] = "images/wui/ship/menu_ship_goto.png";
+static const char pic_destination[] = "images/wui/ship/menu_ship_destination.png";
+static const char pic_sink[]     = "images/wui/ship/menu_ship_sink.png";
+static const char pic_cancel_expedition[] = "images/wui/ship/menu_ship_cancel_expedition.png";
+static const char pic_explore_cw[]  = "images/wui/ship/ship_explore_island_cw.png";
+static const char pic_explore_ccw[] = "images/wui/ship/ship_explore_island_ccw.png";
+static const char pic_scout_nw[] = "images/wui/ship/ship_scout_nw.png";
+static const char pic_scout_ne[] = "images/wui/ship/ship_scout_ne.png";
+static const char pic_scout_w[]  = "images/wui/ship/ship_scout_w.png";
+static const char pic_scout_e[]  = "images/wui/ship/ship_scout_e.png";
+static const char pic_scout_sw[] = "images/wui/ship/ship_scout_sw.png";
+static const char pic_scout_se[] = "images/wui/ship/ship_scout_se.png";
+static const char pic_construct_port[] = "images/wui/editor/fsel_editor_set_port_space.png";
 
 namespace Widelands {
 
@@ -267,7 +267,7 @@ UI::Button * ShipWindow::make_button
 	UI::Button * btn =
 		new UI::Button
 			(parent, name, 0, 0, 34, 34,
-			 g_gr->images().get("pics/but4.png"),
+			 g_gr->images().get("images/ui_basic/but4.png"),
 			 g_gr->images().get(picname),
 			 title);
 	btn->sigclicked.connect(callback);

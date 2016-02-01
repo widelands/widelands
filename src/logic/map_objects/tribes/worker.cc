@@ -1876,7 +1876,7 @@ void Worker::return_update(Game & game, State & state)
 				(Message::Type::kGameLogic,
 				 game.get_gametime(),
 				 _("Worker"),
-				 "pics/menu_help.png",
+				 "images/ui_basic/menu_help.png",
 				 _("Worker got lost!"),
 				 message,
 				 get_position()),

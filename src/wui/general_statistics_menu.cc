@@ -41,6 +41,19 @@
 #include "ui_basic/textarea.h"
 #include "wui/interactive_player.h"
 
+namespace {
+static char const * const flag_pictures[] = {
+	"images/players/genstats_enable_plr_01.png",
+	"images/players/genstats_enable_plr_02.png",
+	"images/players/genstats_enable_plr_03.png",
+	"images/players/genstats_enable_plr_04.png",
+	"images/players/genstats_enable_plr_05.png",
+	"images/players/genstats_enable_plr_06.png",
+	"images/players/genstats_enable_plr_07.png",
+	"images/players/genstats_enable_plr_08.png"
+};
+} // namespace
+
 using namespace Widelands;
 
 #define PLOT_HEIGHT 130
@@ -146,14 +159,14 @@ UI::UniqueWindow
 	iterate_players_existing_novar(p, nr_players, game) ++plr_in_game;
 
 	iterate_players_existing_const(p, nr_players, game, player) {
-		const std::string pic = (boost::format("pics/genstats_enable_plr_%02u.png")
-										 % static_cast<unsigned int>(p)).str();
+		const Image* player_image = g_gr->images().get(flag_pictures[p - 1]);
+		assert(player_image);
 		UI::Button & cb =
 			*new UI::Button
 				(hbox1, "playerbutton",
 				 0, 0, 25, 25,
-				 g_gr->images().get("pics/but4.png"),
-				 g_gr->images().get(pic),
+				 g_gr->images().get("images/ui_basic/but4.png"),
+				 player_image,
 				 player->get_name().c_str());
 		cb.sigclicked.connect
 			(boost::bind(&GeneralStatisticsMenu::cb_changed_to, this, p));
@@ -174,7 +187,7 @@ UI::UniqueWindow
 	radiogroup_.add_button
 		(hbox2,
 		 Point(0, 0),
-		 g_gr->images().get("pics/genstats_landsize.png"),
+		 g_gr->images().get("images/wui/stats/genstats_landsize.png"),
 		 _("Land"),
 		 &btn);
 	hbox2->add(btn, UI::Align::kLeft, false, true);
@@ -182,7 +195,7 @@ UI::UniqueWindow
 	radiogroup_.add_button
 		(hbox2,
 		 Point(0, 0),
-		 g_gr->images().get("pics/genstats_nrworkers.png"),
+		 g_gr->images().get("images/wui/stats/genstats_nrworkers.png"),
 		 _("Workers"),
 		 &btn);
 	hbox2->add(btn, UI::Align::kLeft, false, true);
@@ -190,7 +203,7 @@ UI::UniqueWindow
 	radiogroup_.add_button
 		(hbox2,
 		 Point(0, 0),
-		 g_gr->images().get("pics/genstats_nrbuildings.png"),
+		 g_gr->images().get("images/wui/stats/genstats_nrbuildings.png"),
 		 _("Buildings"),
 		 &btn);
 	hbox2->add(btn, UI::Align::kLeft, false, true);
@@ -198,7 +211,7 @@ UI::UniqueWindow
 	radiogroup_.add_button
 		(hbox2,
 		 Point(0, 0),
-		 g_gr->images().get("pics/genstats_nrwares.png"),
+		 g_gr->images().get("images/wui/stats/genstats_nrwares.png"),
 		 _("Wares"),
 		 &btn);
 	hbox2->add(btn, UI::Align::kLeft, false, true);
@@ -206,7 +219,7 @@ UI::UniqueWindow
 	radiogroup_.add_button
 		(hbox2,
 		 Point(0, 0),
-		 g_gr->images().get("pics/genstats_productivity.png"),
+		 g_gr->images().get("images/wui/stats/genstats_productivity.png"),
 		 _("Productivity"),
 		 &btn);
 	hbox2->add(btn, UI::Align::kLeft, false, true);
@@ -214,7 +227,7 @@ UI::UniqueWindow
 	radiogroup_.add_button
 		(hbox2,
 		 Point(0, 0),
-		 g_gr->images().get("pics/genstats_casualties.png"),
+		 g_gr->images().get("images/wui/stats/genstats_casualties.png"),
 		 _("Casualties"),
 		 &btn);
 	hbox2->add(btn, UI::Align::kLeft, false, true);
@@ -222,7 +235,7 @@ UI::UniqueWindow
 	radiogroup_.add_button
 		(hbox2,
 		 Point(0, 0),
-		 g_gr->images().get("pics/genstats_kills.png"),
+		 g_gr->images().get("images/wui/stats/genstats_kills.png"),
 		 _("Kills"),
 		 &btn);
 	hbox2->add(btn, UI::Align::kLeft, false, true);
@@ -230,7 +243,7 @@ UI::UniqueWindow
 	radiogroup_.add_button
 		(hbox2,
 		 Point(0, 0),
-		 g_gr->images().get("pics/genstats_msites_lost.png"),
+		 g_gr->images().get("images/wui/stats/genstats_msites_lost.png"),
 		 _("Military buildings lost"),
 		 &btn);
 	hbox2->add(btn, UI::Align::kLeft, false, true);
@@ -238,7 +251,7 @@ UI::UniqueWindow
 	radiogroup_.add_button
 		(hbox2,
 		 Point(0, 0),
-		 g_gr->images().get("pics/genstats_msites_defeated.png"),
+		 g_gr->images().get("images/wui/stats/genstats_msites_defeated.png"),
 		 _("Military buildings defeated"),
 		 &btn);
 	hbox2->add(btn, UI::Align::kLeft, false, true);
@@ -246,7 +259,7 @@ UI::UniqueWindow
 	radiogroup_.add_button
 		(hbox2,
 		 Point(0, 0),
-		 g_gr->images().get("pics/genstats_civil_blds_lost.png"),
+		 g_gr->images().get("images/wui/stats/genstats_civil_blds_lost.png"),
 		 _("Civilian buildings lost"),
 		 &btn);
 	hbox2->add(btn, UI::Align::kLeft, false, true);
@@ -254,7 +267,7 @@ UI::UniqueWindow
 	radiogroup_.add_button
 		(hbox2,
 		 Point(0, 0),
-		 g_gr->images().get("pics/genstats_militarystrength.png"),
+		 g_gr->images().get("images/wui/stats/genstats_militarystrength.png"),
 		 _("Military"),
 		 &btn);
 	hbox2->add(btn, UI::Align::kLeft, false, true);
@@ -278,7 +291,7 @@ UI::UniqueWindow
 	box_.add
 		(new WuiPlotAreaSlider
 			(&box_, plot_, 0, 0, 100, 45,
-			 g_gr->images().get("pics/but1.png"))
+			 g_gr->images().get("images/ui_basic/but1.png"))
 		, UI::Align::kTop
 		, true);
 
