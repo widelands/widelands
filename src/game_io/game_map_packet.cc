@@ -54,7 +54,7 @@ void GameMapPacket::read
 
 
 void GameMapPacket::read_complete(Game & game) {
-	m_wml->load_map_complete(game, true);
+	m_wml->load_map_complete(game, MapLoader::LoadType::kScenario);
 	m_mol = m_wml->get_map_object_loader();
 }
 

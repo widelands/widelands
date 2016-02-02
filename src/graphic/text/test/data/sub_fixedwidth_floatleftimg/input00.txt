@@ -1,7 +1,7 @@
 <rt>
 <sub float=left background=00ff00>
    <p>
-   <img src="pics/wl-ico-128.png">
+   <img src="images/logos/wl-ico-128.png">
    </p>
 </sub>
 <p>

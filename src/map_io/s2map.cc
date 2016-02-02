@@ -359,7 +359,7 @@ int32_t S2MapLoader::preload_map(bool const scenario) {
  * From now on the Map* can't be set to another one.
  */
 int32_t S2MapLoader::load_map_complete
-	(Widelands::EditorGameBase & egbase, bool)
+	(Widelands::EditorGameBase& egbase, MapLoader::LoadType)
 {
 	ScopedTimer timer("S2MapLoader::load_map_complete() took %ums");
 
