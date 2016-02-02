@@ -89,8 +89,7 @@ inline void from_item(const RenderQueue::Item& item, BlitProgram::Arguments* arg
 }
 
 inline void from_item(const RenderQueue::Item& item, DrawLineProgram::Arguments* args) {
-	args->points = item.line_arguments.points;
-	args->color = item.line_arguments.color;
+	args->vertices = std::move(item.line_arguments.vertices);
 }
 
 // Batches up as many items from 'items' that have the same 'program_id'.
@@ -204,13 +203,11 @@ void RenderQueue::draw(const int screen_width, const int screen_height) {
 	opaque_items_.clear();
 
 	glEnable(GL_BLEND);
-	glDepthMask(GL_FALSE);
 
 	std::sort(blended_items_.begin(), blended_items_.end());
 	draw_items(blended_items_);
 	blended_items_.clear();
 
-	glDepthMask(GL_TRUE);
 	glDisable(GL_DEPTH_TEST);
 	next_z_ = 1;
 }

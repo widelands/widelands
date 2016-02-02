@@ -27,8 +27,9 @@
 #include "base/rect.h"
 #include "graphic/blend_mode.h"
 #include "graphic/color.h"
+#include "graphic/gl/draw_line_program.h"
 #include "graphic/image.h"
-#include "graphic/line_strip_mode.h"
+#include "graphic/line_draw_mode.h"
 
 class Texture;
 
@@ -65,13 +66,12 @@ public:
 	// in the target are just replaced (i.e. / BlendMode would be BlendMode::Copy).
 	void fill_rect(const Rect&, const RGBAColor&);
 
-	// Draw a 'width' pixel wide line to the destination. If 'line_strip_mode' is
-	// kClosed, the last point will be connected to the first one again.
-	// 'points' are taken by value on purpose.
-	void draw_line_strip(const LineStripMode& line_strip_mode,
-	                     std::vector<Point> points,
+	// Draw a 'width' pixel wide line to the destination. 'points' are taken by
+	// value on purpose.
+	void draw_line_strip(std::vector<Point> points,
 	                     const RGBColor& color,
-	                     float width);
+	                     float width,
+	                     const LineDrawMode& line_draw_mode);
 
 	/// makes a rectangle on the destination brighter (or darker).
 	void brighten_rect(const Rect&, int factor);
@@ -92,8 +92,9 @@ private:
 	                                const BlitData& texture,
 	                                const RGBAColor& blend) = 0;
 
-	virtual void do_draw_line_strip(const std::vector<FloatPoint>& gl_points,
-	                                const RGBColor& color) = 0;
+	// Takes argument by value for micro optimization: the argument might then
+	// be moved by the compiler instead of copied.
+	virtual void do_draw_line_strip(std::vector<DrawLineProgram::PerVertexData> vertices) = 0;
 
 	virtual void
 	do_fill_rect(const FloatRect& dst_rect, const RGBAColor& color, BlendMode blend_mode) = 0;

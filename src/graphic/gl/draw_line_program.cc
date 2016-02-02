@@ -32,15 +32,12 @@ const char kDrawLineVertexShader[] = R"(
 
 // Attributes.
 attribute vec3 attr_position;
-attribute vec3 attr_color;
-attribute float attr_distance_from_center;
+attribute vec4 attr_color;
 
-varying vec3 var_color;
-varying float var_distance_from_center;
+varying vec4 var_color;
 
 void main() {
 	var_color = attr_color;
-	var_distance_from_center = attr_distance_from_center;
 	gl_Position = vec4(attr_position, 1.);
 }
 )";
@@ -48,20 +45,10 @@ void main() {
 const char kDrawLineFragmentShader[] = R"(
 #version 120
 
-varying vec3 var_color;
-varying float var_distance_from_center;
-
-// The percentage of the line that should be solid, i.e. not feathered into
-// alpha = 0.
-#define SOLID 0.3
+varying vec4 var_color;
 
 void main() {
-	// This means till SOLID we want full alpha, then a (1 - t**2) with t [0, 1]
-	// falloff.
-	float d = abs(var_distance_from_center);
-	float opaqueness =
-		step(SOLID, d) * ((d - SOLID) / (1. - SOLID));
-	gl_FragColor = vec4(var_color.rgb, 1. - pow(opaqueness, 2));
+	gl_FragColor = var_color;
 }
 )";
 
@@ -75,60 +62,37 @@ DrawLineProgram& DrawLineProgram::instance() {
 
 DrawLineProgram::DrawLineProgram() {
 	gl_program_.build(kDrawLineVertexShader, kDrawLineFragmentShader);
-
 	attr_position_ = glGetAttribLocation(gl_program_.object(), "attr_position");
 	attr_color_ = glGetAttribLocation(gl_program_.object(), "attr_color");
-	attr_distance_from_center_ = glGetAttribLocation(gl_program_.object(), "attr_distance_from_center");
 }
 
-void DrawLineProgram::draw(const std::vector<Arguments>& arguments) {
+void DrawLineProgram::draw(std::vector<Arguments> arguments) {
 	glUseProgram(gl_program_.object());
 
 	auto& gl_state = Gl::State::instance();
 	gl_state.enable_vertex_attrib_array({
-	   attr_position_, attr_color_, attr_distance_from_center_
+	   attr_position_, attr_color_,
 	});
 
 	gl_array_buffer_.bind();
 
-	Gl::vertex_attrib_pointer(attr_position_, 3, sizeof(PerVertexData), offsetof(PerVertexData, gl_x));
 	Gl::vertex_attrib_pointer(
-	   attr_color_, 3, sizeof(PerVertexData), offsetof(PerVertexData, color_r));
-	Gl::vertex_attrib_pointer(attr_distance_from_center_, 1, sizeof(PerVertexData),
-	                          offsetof(PerVertexData, distance_from_center));
+	   attr_position_, 3, sizeof(PerVertexData), offsetof(PerVertexData, gl_x));
+	Gl::vertex_attrib_pointer(
+	   attr_color_, 4, sizeof(PerVertexData), offsetof(PerVertexData, color_r));
 
 	vertices_.clear();
 
-	for (const Arguments& current_args : arguments) {
-		log("#sirver Start drawing line with color (%d, %d, %d) and %ld points.\n",
-		    current_args.color.r, current_args.color.g, current_args.color.b,
-		    current_args.points.size());
+	for (Arguments& current_args : arguments) {
 		// We do not support anything else for drawing lines, really.
 		assert(current_args.blend_mode == BlendMode::UseAlpha);
-		assert(current_args.points.size() % 4 == 0);
 
-		const float r = current_args.color.r / 255.;
-		const float g = current_args.color.g / 255.;
-		const float b = current_args.color.b / 255.;
-		const float z_value = current_args.z_value;
-
-		const auto& p = current_args.points;
-		for (size_t i = 0; i < p.size(); i += 4) {
-			vertices_.emplace_back(
-			   PerVertexData{p[i].x, p[i].y, z_value, r, g, b, 1.f});
-			vertices_.emplace_back(
-			   PerVertexData{p[i + 1].x, p[i + 1].y, z_value, r, g, b, 1.f});
-			vertices_.emplace_back(
-			   PerVertexData{p[i + 2].x, p[i + 2].y, z_value, r, g, b, -1.f});
-			vertices_.emplace_back(vertices_[vertices_.size() - 2]);
-			vertices_.emplace_back(vertices_[vertices_.size() - 2]);
-			vertices_.emplace_back(
-			   PerVertexData{p[i + 3].x, p[i + 3].y, z_value, r, g, b, -1.f});
+		for (auto& vertice : current_args.vertices) {
+			vertice.gl_z = current_args.z_value;
 		}
-		log("#sirver Done drawing line.\n");
+		std::move(
+		   current_args.vertices.begin(), current_args.vertices.end(), std::back_inserter(vertices_));
 	}
 	gl_array_buffer_.update(vertices_);
-
-	log("#sirver Dispatching %d vertices.\n", vertices_.size());
 	glDrawArrays(GL_TRIANGLES, 0, vertices_.size());
 }

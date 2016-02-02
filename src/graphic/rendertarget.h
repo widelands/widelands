@@ -27,7 +27,7 @@
 #include "graphic/blend_mode.h"
 #include "graphic/color.h"
 #include "graphic/image.h"
-#include "graphic/line_strip_mode.h"
+#include "graphic/line_draw_mode.h"
 
 class Animation;
 class Surface;
@@ -58,10 +58,10 @@ public:
 	int32_t width() const;
 	int32_t height() const;
 
-	void draw_line_strip(const LineStripMode& line_strip_mode,
-	                     const std::vector<Point>& points,
+	void draw_line_strip(const std::vector<Point>& points,
 	                     const RGBColor& color,
-	                     float width);
+	                     float width,
+	                     const LineDrawMode& line_draw_mode);
 	void draw_rect(const Rect&, const RGBColor&);
 	void fill_rect(const Rect&, const RGBAColor&);
 	void brighten_rect(const Rect&, int32_t factor);

@@ -28,13 +28,22 @@
 #include "graphic/color.h"
 #include "graphic/gl/utils.h"
 
+// TODO(sirver): This program actually now only draws Triangles. Merge with
+// DrawRect program.
 class DrawLineProgram {
 public:
+	struct PerVertexData {
+		float gl_x, gl_y, gl_z;
+		float color_r, color_g, color_b, float_a;
+	};
+	static_assert(sizeof(PerVertexData) == 28, "Wrong padding.");
+
 	struct Arguments {
-		// Vertices of the quads that make up the lines plus. That means
-		// points.size() == <number of lines> * 4.
-		std::vector<FloatPoint> points;
-		RGBColor color;
+		// Vertices of the triangles to draw. We expect everything but 'gl_z' to
+		// be filled in by the caller. We fill up the z value with 'z_value'
+		// before drawing. We directly expose the PerVertexData structure to
+		// avoid a copy.
+		std::vector<PerVertexData> vertices;
 		float z_value;
 		BlendMode blend_mode;  // Always BlendMode::kUseAlpha.
 	};
@@ -42,17 +51,10 @@ public:
 	// Returns the (singleton) instance of this class.
 	static DrawLineProgram& instance();
 
-	void draw(const std::vector<Arguments>& arguments);
+	// Takes the 'arguments' by value on purpose.
+	void draw(std::vector<Arguments> arguments);
 
 private:
-	struct PerVertexData {
-		float gl_x, gl_y, gl_z;
-		float color_r, color_g, color_b;
-		// This value is changing from -1 to 1 and is used for alpha blending.
-		float distance_from_center;
-	};
-	static_assert(sizeof(PerVertexData) == 28, "Wrong padding.");
-
 	DrawLineProgram();
 
 	// This is only kept around so that we do not constantly
@@ -68,7 +70,6 @@ private:
 	// Attributes.
 	GLint attr_position_;
 	GLint attr_color_;
-	GLint attr_distance_from_center_;
 
 	DISALLOW_COPY_AND_ASSIGN(DrawLineProgram);
 };

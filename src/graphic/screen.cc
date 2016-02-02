@@ -104,13 +104,11 @@ void Screen::do_blit_monochrome(const FloatRect& dst_rect,
 	RenderQueue::instance().enqueue(i);
 }
 
-void Screen::do_draw_line_strip(const std::vector<FloatPoint>& gl_points,
-                                const RGBColor& color) {
+void Screen::do_draw_line_strip(std::vector<DrawLineProgram::PerVertexData> vertices) {
 	RenderQueue::Item i;
 	i.program_id = RenderQueue::Program::kLine;
 	i.blend_mode = BlendMode::UseAlpha;
-	i.line_arguments.points = gl_points;
-	i.line_arguments.color = color;
+	i.line_arguments.vertices = std::move(vertices);
 	RenderQueue::instance().enqueue(i);
 }
 

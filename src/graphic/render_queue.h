@@ -30,6 +30,7 @@
 #include "graphic/blend_mode.h"
 #include "graphic/blit_mode.h"
 #include "graphic/color.h"
+#include "graphic/gl/draw_line_program.h"
 #include "graphic/gl/fields_to_draw.h"
 #include "logic/description_maintainer.h"
 #include "logic/map_objects/world/terrain_description.h"
@@ -106,9 +107,9 @@ public:
 		FloatRect destination_rect;
 	};
 
+	// TODO(sirver): these are really triangle arguments.
 	struct LineArguments {
-		std::vector<FloatPoint> points;
-		RGBColor color;
+		std::vector<DrawLineProgram::PerVertexData> vertices;
 	};
 
 	struct TerrainArguments {
