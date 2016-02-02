@@ -481,7 +481,7 @@ void Building::destroy(EditorGameBase & egbase)
 		egbase.create_immovable(pos, "destroyed_building", MapObjectDescr::OwnerType::kTribe);
 }
 
-std::string Building::info_string(InfoStringFormat format) {
+std::string Building::info_string(const InfoStringFormat& format) {
 	std::string result = "";
 	switch (format) {
 	case InfoStringFormat::kCensus:
