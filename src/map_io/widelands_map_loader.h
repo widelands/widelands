@@ -41,7 +41,7 @@ struct WidelandsMapLoader : public MapLoader {
 	virtual ~WidelandsMapLoader();
 
 	int32_t preload_map(bool) override;
-	int32_t load_map_complete(EditorGameBase &, bool) override;
+	int32_t load_map_complete(EditorGameBase &, MapLoader::LoadType load_type) override;
 
 	MapObjectLoader * get_map_object_loader() {return m_mol.get();}
 
