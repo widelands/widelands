@@ -309,8 +309,8 @@ void Texture::do_draw_line_strip(std::vector<DrawLineProgram::PerVertexData> ver
 		return;
 	}
 	setup_gl();
-	DrawLineProgram::instance().draw(
-	   {DrawLineProgram::Arguments{gl_points, shading, color, 0.f, BlendMode::UseAlpha}});
+	DrawLineProgram::instance().draw({
+		DrawLineProgram::Arguments{vertices, 0.f, BlendMode::UseAlpha}});
 }
 
 void

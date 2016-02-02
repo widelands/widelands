@@ -190,13 +190,11 @@ void draw_diagram
 		Point(inner_w - space_at_right, inner_h - space_at_bottom)},
 		kAxisLineColor, kAxisLinesWidth, LineDrawMode::kAntialiased);
 	// Arrow
-	dst.draw_line_strip(
-	   {
-	    Point(spacing + 5, inner_h - space_at_bottom - 3),
-	    Point(spacing, inner_h - space_at_bottom),
-	    Point(spacing + 5, inner_h - space_at_bottom + 3),
-	   },
-	   kAxisLineColor, kAxisLinesWidth, LineDrawMode::kAntialiased);
+	dst.draw_line_strip({
+		Point(spacing + 5, inner_h - space_at_bottom - 3),
+		Point(spacing, inner_h - space_at_bottom),
+		Point(spacing + 5, inner_h - space_at_bottom + 3),
+		}, kAxisLineColor, kAxisLinesWidth, LineDrawMode::kAntialiased);
 
 	//  Y Axis
 	dst.draw_line_strip({Point(inner_w - space_at_right, spacing),
@@ -224,13 +222,13 @@ void draw_diagram
 	}
 
 	//  draw yticks, one at full, one at half
-	dst.draw_line_strip(
-	   {Point(inner_w - space_at_right, spacing), Point(inner_w - space_at_right - 3, spacing)},
-	   kAxisLineColor, kAxisLinesWidth, LineDrawMode::kAntialiased);
-	dst.draw_line_strip(
-	   {Point(inner_w - space_at_right, spacing + ((inner_h - space_at_bottom) - spacing) / 2),
-	    Point(inner_w - space_at_right - 3, spacing + ((inner_h - space_at_bottom) - spacing) / 2)},
-	   kAxisLineColor, kAxisLinesWidth, LineDrawMode::kAntialiased);
+	dst.draw_line_strip({
+		Point(inner_w - space_at_right, spacing), Point(inner_w - space_at_right - 3, spacing)},
+		kAxisLineColor, kAxisLinesWidth, LineDrawMode::kAntialiased);
+	dst.draw_line_strip({
+		Point(inner_w - space_at_right, spacing + ((inner_h - space_at_bottom) - spacing) / 2),
+		Point(inner_w - space_at_right - 3, spacing + ((inner_h - space_at_bottom) - spacing) / 2)},
+		kAxisLineColor, kAxisLinesWidth, LineDrawMode::kAntialiased);
 
 	//  print the used unit
 	const Image* xtick = UI::g_fh1->render(xtick_text_style((boost::format(get_unit_name(unit)) % "").str()));

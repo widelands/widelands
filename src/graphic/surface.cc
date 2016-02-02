@@ -69,8 +69,8 @@ FloatPoint calculate_line_normal(const PointType& start, const PointType& end) {
 
 // Tesselates the line made up of 'points' ino triangles and converts them into OpenGL space for a
 // renderbuffer of dimensions 'w' and 'h'.
-void tesselate_line_strip(const int w,
-                          const int h,
+void tesselate_line_strip(int w,
+                          int h,
                           const RGBAColor& color,
                           float line_width,
                           const std::vector<Point>& points,
