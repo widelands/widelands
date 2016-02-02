@@ -58,7 +58,7 @@ const uint32_t time_in_ms[] = {
 	30 * hours
 };
 
-const char BG_PIC[] = "pics/plot_area_bg.png";
+const char BG_PIC[] = "images/wui/plot_area_bg.png";
 const RGBColor kAxisLineColor(0, 0, 0);
 constexpr float kAxisLinesWidth = 1.5f;
 constexpr float kPlotLinesWidth = 2.f;

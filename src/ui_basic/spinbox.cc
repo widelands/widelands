@@ -147,14 +147,18 @@ SpinBox::SpinBox
 			(box_, "-",
 			 0, 0, buttonh, buttonh,
 			 sbi_->background,
-			 g_gr->images().get(is_big ? "pics/scrollbar_left.png" : "pics/scrollbar_down.png"),
+			 g_gr->images().get(is_big ?
+										  "images/ui_basic/scrollbar_left.png" :
+										  "images/ui_basic/scrollbar_down.png"),
 			 _("Decrease the value"));
 	sbi_->button_plus =
 		new Button
 			(box_, "+",
 			 0, 0, buttonh, buttonh,
 			 sbi_->background,
-			 g_gr->images().get(is_big ? "pics/scrollbar_right.png" : "pics/scrollbar_up.png"),
+			 g_gr->images().get(is_big ?
+										  "images/ui_basic/scrollbar_right.png" :
+										  "images/ui_basic/scrollbar_up.png"),
 			 _("Increase the value"));
 
 	if (is_big) {
@@ -163,14 +167,14 @@ SpinBox::SpinBox
 				(box_, "--",
 				 0, 0, 2 * buttonh, buttonh,
 				 sbi_->background,
-				 g_gr->images().get("pics/scrollbar_left_fast.png"),
+				 g_gr->images().get("images/ui_basic/scrollbar_left_fast.png"),
 				 _("Decrease the value by 10"));
 		sbi_->button_ten_plus =
 			new Button
 				(box_, "++",
 				 0, 0, 2 * buttonh, buttonh,
 				 sbi_->background,
-				 g_gr->images().get("pics/scrollbar_right_fast.png"),
+				 g_gr->images().get("images/ui_basic/scrollbar_right_fast.png"),
 				 _("Increase the value by 10"));
 
 		sbi_->button_ten_plus->sigclicked.connect(boost::bind(&SpinBox::change_value,

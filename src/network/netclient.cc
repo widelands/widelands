@@ -184,7 +184,7 @@ void NetClient::run ()
 #endif
 
 	try {
-		UI::ProgressWindow * loaderUI = new UI::ProgressWindow("pics/progress.png");
+		UI::ProgressWindow * loaderUI = new UI::ProgressWindow("images/loadscreens/progress.png");
 		std::vector<std::string> tipstext;
 		tipstext.push_back("general_game");
 		tipstext.push_back("multiplayer");

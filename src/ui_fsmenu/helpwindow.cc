@@ -49,7 +49,7 @@ FullscreenHelpWindow::FullscreenHelpWindow
 	height = (height == 0) ? g_gr->get_yres() * 4 / 5 : height;
 
 	Button* btn = new Button(this, "ok", width / 3, 0, width / 3, 0,
-									 g_gr->images().get("pics/but5.png"),
+									 g_gr->images().get("images/ui_basic/but5.png"),
 									 _("OK"), "", true, false);
 
 	btn->sigclicked.connect(boost::bind(&FullscreenHelpWindow::clicked_ok, boost::ref(*this)));

@@ -74,7 +74,7 @@ BaseListselect::BaseListselect
 
 	if (show_check) {
 		uint32_t pic_h;
-		m_check_pic = g_gr->images().get("pics/list_selected.png");
+		m_check_pic = g_gr->images().get("images/ui_basic/list_selected.png");
 		m_max_pic_width = m_check_pic->width();
 		pic_h = m_check_pic->height();
 		if (pic_h > m_lineheight)
@@ -152,8 +152,6 @@ void BaseListselect::add
 
 	m_scrollbar.set_steps(m_entry_records.size() * get_lineheight() - get_h());
 
-	update(0, 0, get_w(), get_h());
-
 	if (sel)
 		select(m_entry_records.size() - 1);
 }
@@ -193,8 +191,6 @@ void BaseListselect::add_front
 	m_entry_records.push_front(er);
 
 	m_scrollbar.set_steps(m_entry_records.size() * get_lineheight() - get_h());
-
-	update(0, 0, get_w(), get_h());
 
 	if (sel)
 		select(0);
@@ -254,8 +250,6 @@ void BaseListselect::set_scrollpos(const int32_t i)
 		return;
 
 	m_scrollpos = i;
-
-	update(0, 0, get_w(), get_h());
 }
 
 
@@ -291,7 +285,6 @@ void BaseListselect::select(const uint32_t i)
 	m_selection = i;
 
 	selected(m_selection);
-	update(0, 0, get_w(), get_h());
 }
 
 /**

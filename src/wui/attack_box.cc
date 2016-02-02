@@ -89,7 +89,7 @@ std::unique_ptr<UI::Button> AttackBox::add_button(UI::Box& parent,
                                                   void (AttackBox::*fn)(),
                                                   const std::string& tooltip_text) {
 	std::unique_ptr<UI::Button> button(new UI::Button(
-	   &parent, text, 8, 8, 26, 26, g_gr->images().get("pics/but2.png"), text, tooltip_text));
+		&parent, text, 8, 8, 26, 26, g_gr->images().get("images/ui_basic/but2.png"), text, tooltip_text));
 	button.get()->sigclicked.connect(boost::bind(fn, boost::ref(*this)));
 	parent.add(button.get(), UI::Align::kHCenter);
 	return button;
@@ -161,7 +161,7 @@ void AttackBox::init() {
 	                              0,
 	                              max_attackers,
 	                              max_attackers > 0 ? 1 : 0,
-	                              "pics/but2.png",
+											"images/ui_basic/but2.png",
 	                              _("Number of soldiers"));
 
 	soldiers_slider_->changed.connect(boost::bind(&AttackBox::update_attack, this));

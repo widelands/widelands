@@ -58,7 +58,7 @@ GameMainMenuSaveGame::GameMainMenuSaveGame
 	UI::UniqueWindow
 		(&parent, "save_game", &registry,
 		 WINDOW_WIDTH, WINDOW_HEIGHT, _("Save Game")),
-	editbox_(this, HSPACING, EDITBOX_Y, LIST_WIDTH, g_gr->images().get("pics/but1.png")),
+	editbox_(this, HSPACING, EDITBOX_Y, LIST_WIDTH, g_gr->images().get("images/ui_basic/but1.png")),
 	ls_     (this, HSPACING, VSPACING,  LIST_WIDTH, LIST_HEIGHT - editbox_.get_h()),
 	name_label_
 		(this, DESCRIPTION_X,  5, 0, 20, _("Map Name:"),  UI::Align::kCenterLeft),
@@ -83,7 +83,7 @@ GameMainMenuSaveGame::GameMainMenuSaveGame
 		new UI::Button
 			(this, "ok",
 			 DESCRIPTION_X, OK_Y, DESCRIPTION_WIDTH, BUTTON_HEIGHT,
-			 g_gr->images().get("pics/but4.png"),
+			 g_gr->images().get("images/ui_basic/but4.png"),
 			 _("OK"),
 			 std::string(),
 			 false);
@@ -93,7 +93,7 @@ GameMainMenuSaveGame::GameMainMenuSaveGame
 		new UI::Button
 			(this, "cancel",
 			 DESCRIPTION_X, CANCEL_Y, DESCRIPTION_WIDTH, BUTTON_HEIGHT,
-			 g_gr->images().get("pics/but4.png"),
+			 g_gr->images().get("images/ui_basic/but4.png"),
 			 _("Cancel"));
 	cancelbtn->sigclicked.connect(boost::bind(&GameMainMenuSaveGame::die, this));
 
@@ -101,7 +101,7 @@ GameMainMenuSaveGame::GameMainMenuSaveGame
 		new UI::Button
 			(this, "delete",
 			 DESCRIPTION_X, DELETE_Y, DESCRIPTION_WIDTH, BUTTON_HEIGHT,
-			 g_gr->images().get("pics/but4.png"),
+			 g_gr->images().get("images/ui_basic/but4.png"),
 			 _("Delete"));
 	deletebtn->sigclicked.connect(boost::bind(&GameMainMenuSaveGame::delete_clicked, this));
 

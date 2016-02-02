@@ -3,15 +3,15 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
-# Juanjo, 2015
+# Juanjo, 2015-2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-07-04 16:22+0200\n"
-"PO-Revision-Date: 2015-07-14 19:40+0000\n"
+"POT-Creation-Date: 2016-01-23 08:23+0000\n"
+"PO-Revision-Date: 2016-01-24 23:37+0000\n"
 "Last-Translator: Juanjo\n"
-"Language-Team: Catalan (http://www.transifex.com/projects/p/widelands/language/ca/)\n"
+"Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -209,7 +209,7 @@ msgid ""
 "                      Move a window to the edge of the panel when\n"
 "                      the edge of the window comes within this\n"
 "                      distance from the edge of the panel."
-msgstr " --panel_snap_distance=[0 ...]\n                      Moure una finestra cap a la vora del panell\n                      quan la vora i el panell estigui a menys\n                      distància de la definida per aquesta opció."
+msgstr " --panel_snap_distance=[0 ...]\n                      Moure una finestra cap a la vora del plafó\n                      quan la vora i el plafó estigui a menys\n                      distància de la definida per aquesta opció."
 
 #: ../../src/wlapplication_messages.cc:121
 msgid ""
@@ -217,7 +217,7 @@ msgid ""
 "                      Only move a window to the edge of a panel\n"
 "                      if the window is overlapping with the\n"
 "                      panel."
-msgstr " --snap_windows_only_when_overlapping=[yes|no]\n                      Habilita/deshabilita l'acoblament de\n                      finestres al panell quan la finestra i el\n                      panell estiguin prou a prop o es solapin."
+msgstr " --snap_windows_only_when_overlapping=[yes|no]\n                      Habilita/deshabilita l'acoblament de\n                      finestres al plafó quan la finestra i el\n                      plafó estiguin prou a prop o se superposin."
 
 #: ../../src/wlapplication_messages.cc:126
 msgid " --verbose            Enable verbose debug messages"

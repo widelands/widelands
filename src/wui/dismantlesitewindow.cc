@@ -24,7 +24,7 @@
 #include "ui_basic/tabpanel.h"
 #include "wui/buildingwindow.h"
 
-static const char pic_tab_wares[] = "pics/menu_tab_wares.png";
+static const char pic_tab_wares[] = "images/wui/buildings/menu_tab_wares.png";
 
 /**
  * Status window for dismantle sites.
