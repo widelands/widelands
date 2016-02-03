@@ -55,7 +55,7 @@ GameObjectivesMenu::GameObjectivesMenu
 		 get_inner_w() - 10, FULL_OBJECTIVE_TEXT,
 		 "",
 		 UI::Align::kLeft,
-		 1)
+		 UI::MultilineTextarea::ScrollMode::kScrollNormalForced)
 {
 	list.selected.connect(boost::bind(&GameObjectivesMenu::selected, this, _1));
 	if (get_usedefaultpos())

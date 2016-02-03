@@ -36,14 +36,14 @@ MultilineTextarea::MultilineTextarea
 	 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
 	 const std::string& text,
 	 const Align align,
-	 const bool always_show_scrollbar)
+	 MultilineTextarea::ScrollMode scroll_mode)
 	:
 	Panel       (parent, x, y, w, h),
 	m_text      (text),
 	m_style(UI::TextStyle::ui_small()),
 	isrichtext(false),
 	m_scrollbar (this, get_w() - scrollbar_w(), 0, scrollbar_w(), h, false),
-	m_scrollmode(ScrollNormal)
+	m_scrollmode(scroll_mode)
 {
 	assert(scrollbar_w() <= w);
 	set_thinks(false);
@@ -56,7 +56,8 @@ MultilineTextarea::MultilineTextarea
 	m_scrollbar.set_singlestepsize(UI::g_fh1->render(as_uifont(".", UI_FONT_SIZE_SMALL))->height());
 	m_scrollbar.set_pagesize(h - 2 * UI::g_fh1->render(as_uifont(".", UI_FONT_SIZE_BIG))->height());
 	m_scrollbar.set_steps(1);
-	m_scrollbar.set_force_draw(always_show_scrollbar);
+	m_scrollbar.set_force_draw(m_scrollmode == ScrollMode::kScrollNormalForced ||
+										m_scrollmode == ScrollMode::kScrollLogForced);
 
 	recompute();
 }
@@ -81,7 +82,7 @@ void MultilineTextarea::recompute()
 	uint32_t height;
 
 	// We wrap the text twice. We need to do this to account for the presence/absence of the scollbar.
-	bool scroolbar_was_enabled = m_scrollbar.is_enabled();
+	bool scrollbar_was_enabled = m_scrollbar.is_enabled();
 	for (int i = 0; i < 2; ++i) {
 		if (m_text.compare(0, 3, "<rt")) {
 			isrichtext = false;
@@ -99,15 +100,21 @@ void MultilineTextarea::recompute()
 
 		bool setbottom = false;
 
-		if (m_scrollmode == ScrollLog)
+		if (m_scrollmode == ScrollMode::kScrollLog || m_scrollmode == ScrollMode::kScrollLogForced) {
 			if (m_scrollbar.get_scrollpos() >= m_scrollbar.get_steps() - 1)
 				setbottom = true;
+		} else if (m_scrollmode == ScrollMode::kNoScrolling) {
+			m_scrollbar.set_scrollpos(0);
+			m_scrollbar.set_steps(1);
+			set_desired_size(get_w(), height);
+			set_size(get_w(), height);
+		}
 
 		m_scrollbar.set_steps(height - get_h());
 		if (setbottom)
 			m_scrollbar.set_scrollpos(height - get_h());
 
-		if (m_scrollbar.is_enabled() == scroolbar_was_enabled) {
+		if (m_scrollbar.is_enabled() == scrollbar_was_enabled) {
 			break; // No need to wrap twice.
 		}
 	}
@@ -119,16 +126,6 @@ void MultilineTextarea::recompute()
 void MultilineTextarea::scrollpos_changed(int32_t const /* pixels */)
 {
 }
-
-/**
- * Change the scroll mode. This will not change the current scroll position;
- * it only affects the behaviour of set_text().
- */
-void MultilineTextarea::set_scrollmode(ScrollMode mode)
-{
-	m_scrollmode = mode;
-}
-
 
 /// Take care about scrollbar on resize
 void MultilineTextarea::layout()
