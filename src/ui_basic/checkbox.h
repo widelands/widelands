@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006, 2008-2011 by the Widelands Development Team
+ * Copyright (C) 2004-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -63,12 +63,12 @@ struct Statebox : public Panel {
 
 	void set_enabled(bool enabled);
 
-	bool get_state() const {return m_flags & Is_Checked;}
+	bool get_state() const {return flags_ & Is_Checked;}
 	void set_state(bool on);
 
-	void set_owns_custom_picture() {
-		assert(m_flags & Has_Custom_Picture);
-		set_flags(Owns_Custom_Picture, true);
+	void set_owns_custopicture_() {
+		assert(flags_ & Has_CustoPicture_);
+		set_flags(Owns_CustoPicture_, true);
 	}
 
 	// Drawing and event handlers
@@ -86,16 +86,16 @@ private:
 		Is_Highlighted      = 0x01,
 		Is_Enabled          = 0x02,
 		Is_Checked          = 0x04,
-		Has_Custom_Picture  = 0x08,
-		Owns_Custom_Picture = 0x10
+		Has_CustoPicture_  = 0x08,
+		Owns_CustoPicture_ = 0x10
 	};
-	uint8_t m_flags;
+	uint8_t flags_;
 	void set_flags(uint8_t const flags, bool const enable) {
-		m_flags &= ~flags;
+		flags_ &= ~flags;
 		if (enable)
-			m_flags |= flags;
+			flags_ |= flags;
 	}
-	const Image* m_pic_graphics;
+	const Image* pic_graphics_;
 	const Image* rendered_text_;
 };
 

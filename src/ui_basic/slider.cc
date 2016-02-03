@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -58,17 +58,17 @@ Slider::Slider
 	 const int32_t x_gap, const int32_t y_gap, const int32_t bar_size)
 	:
 	Panel            (parent, x, y, w, h, tooltip_text),
-	m_min_value      (min_value),
-	m_max_value      (max_value),
-	m_value          (value),
-	m_highlighted    (false),
-	m_pressed        (false),
-	m_enabled        (enabled),
-	m_pic_background (background_picture_id),
-	m_x_gap          (x_gap),
-	m_y_gap          (y_gap),
-	m_bar_size       (bar_size),
-	m_cursor_size (cursor_size)
+	min_value_      (min_value),
+	max_value_      (max_value),
+	value_          (value),
+	highlighted_    (false),
+	pressed_        (false),
+	enabled_        (enabled),
+	pic_background_ (background_picture_id),
+	x_gap_          (x_gap),
+	y_gap_          (y_gap),
+	bar_size_       (bar_size),
+	cursor_size_ (cursor_size)
 {
 	set_thinks(false);
 	calculate_cursor_position();
@@ -76,27 +76,27 @@ Slider::Slider
 
 void Slider::set_value(int32_t new_value)
 {
-	new_value = std::max(m_min_value, std::min(new_value, m_max_value));
+	new_value = std::max(min_value_, std::min(new_value, max_value_));
 
-	if (new_value != m_value) {
-		m_value = new_value;
+	if (new_value != value_) {
+		value_ = new_value;
 		calculate_cursor_position();
 		send_value_changed();
 	}
 }
 
 void Slider::calculate_cursor_position() {
-	if (m_max_value == m_min_value) {
-		m_cursor_pos = m_min_value;
-	} else if (m_value == m_min_value) {
-		m_cursor_pos = 0;
-	} else if (m_value == m_max_value) {
-		m_cursor_pos = get_bar_size();
+	if (max_value_ == min_value_) {
+		cursor_pos_ = min_value_;
+	} else if (value_ == min_value_) {
+		cursor_pos_ = 0;
+	} else if (value_ == max_value_) {
+		cursor_pos_ = get_bar_size();
 	} else {
-		m_cursor_pos =
-			(m_value - m_min_value) * get_bar_size()
+		cursor_pos_ =
+			(value_ - min_value_) * get_bar_size()
 			/
-			(m_max_value - m_min_value);
+			(max_value_ - min_value_);
 	}
 }
 
@@ -111,12 +111,12 @@ void Slider::layout() {
  * \param new_max The new max value.
  */
 void Slider::set_max_value(int32_t new_max) {
-	assert(m_min_value <= new_max);
-	if (m_max_value != new_max) {
+	assert(min_value_ <= new_max);
+	if (max_value_ != new_max) {
 		calculate_cursor_position();
 	}
-	m_max_value = new_max;
-	set_value(m_value);
+	max_value_ = new_max;
+	set_value(value_);
 }
 
 /**
@@ -125,12 +125,12 @@ void Slider::set_max_value(int32_t new_max) {
  * \param new_min The new min value.
  */
 void Slider::set_min_value(int32_t new_min) {
-	assert(m_max_value >= new_min);
-	if (m_min_value != new_min) {
+	assert(max_value_ >= new_min);
+	if (min_value_ != new_min) {
 		calculate_cursor_position();
 	}
-	m_min_value = new_min;
-	set_value(m_value);
+	min_value_ = new_min;
+	set_value(value_);
 }
 
 /**
@@ -150,12 +150,12 @@ void Slider::draw_cursor
 	RGBColor black(0, 0, 0);
 
 	dst.tile //  background
-		(Rect(Point(x, y), w, h), m_pic_background, Point(get_x(), get_y()));
+		(Rect(Point(x, y), w, h), pic_background_, Point(get_x(), get_y()));
 
-	if (m_highlighted)
+	if (highlighted_)
 		dst.brighten_rect(Rect(Point(x, y), w, h), MOUSE_OVER_BRIGHT_FACTOR);
 
-	if (m_pressed) { //  draw border
+	if (pressed_) { //  draw border
 		dst.brighten_rect //  bottom edge
 			(Rect(Point(x, y + h - 2), w,     2), BUTTON_EDGE_BRIGHT_FACTOR);
 		dst.brighten_rect //  right edge
@@ -192,7 +192,7 @@ void Slider::draw_cursor
 void Slider::send_value_changed()
 {
 	changed();
-	changedto(m_value);
+	changedto(value_);
 }
 
 
@@ -204,13 +204,13 @@ void Slider::send_value_changed()
 void Slider::set_enabled(const bool enabled)
 {
 	// TODO(unknown): disabled should look different...
-	if (m_enabled == enabled)
+	if (enabled_ == enabled)
 		return;
 
-	m_enabled = enabled;
+	enabled_ = enabled;
 	if (!enabled) {
-		m_pressed = false;
-		m_highlighted = false;
+		pressed_ = false;
+		highlighted_ = false;
 		grab_mouse(false);
 	}
 }
@@ -221,10 +221,10 @@ void Slider::set_enabled(const bool enabled)
  */
 void Slider::set_highlighted(bool highlighted)
 {
-	if (m_highlighted == highlighted)
+	if (highlighted_ == highlighted)
 		return;
 
-	m_highlighted = highlighted;
+	highlighted_ = highlighted;
 }
 
 
@@ -248,9 +248,9 @@ void Slider::handle_mousein(bool inside)
 bool Slider::handle_mouserelease(const uint8_t btn, int32_t, int32_t) {
 	if (btn != SDL_BUTTON_LEFT)
 		return false;
-	if (m_pressed) {
+	if (pressed_) {
 		grab_mouse(false);
-		m_pressed = false;
+		pressed_ = false;
 
 		//  cursor position: align to integer value
 		calculate_cursor_position();
@@ -267,40 +267,40 @@ bool Slider::handle_mouserelease(const uint8_t btn, int32_t, int32_t) {
  * \param y The y position of the mouse pointer.
  */
 void Slider::cursor_moved(int32_t pointer, int32_t x, int32_t y) {
-	if (!m_enabled)
+	if (!enabled_)
 		return;
 
 	set_highlighted
-		(pointer >= m_cursor_pos &&  pointer <= m_cursor_pos + m_cursor_size
+		(pointer >= cursor_pos_ &&  pointer <= cursor_pos_ + cursor_size_
 		 && y >= 0 && y < get_h() && x >= 0 && x < get_w());
 
-	if (!m_pressed)
+	if (!pressed_)
 		return;
 
-	m_cursor_pos = pointer - m_relative_move;
-	if (m_cursor_pos < 0)
-		m_cursor_pos = 0;
-	if (m_cursor_pos > get_bar_size())
-		m_cursor_pos = get_bar_size();
+	cursor_pos_ = pointer - relative_move_;
+	if (cursor_pos_ < 0)
+		cursor_pos_ = 0;
+	if (cursor_pos_ > get_bar_size())
+		cursor_pos_ = get_bar_size();
 
 	//  absolute value
 	int32_t new_value =
 		static_cast<int32_t>
 			(rint
-			 	(static_cast<double>((m_max_value - m_min_value) * m_cursor_pos)
+			 	(static_cast<double>((max_value_ - min_value_) * cursor_pos_)
 			 	 /
 			 	 get_bar_size()));
 
 	//  relative value in bounds
-	new_value += m_min_value;
-	if (new_value < m_min_value)
-		new_value = m_min_value;
-	if (new_value > m_max_value)
-		new_value = m_max_value;
+	new_value += min_value_;
+	if (new_value < min_value_)
+		new_value = min_value_;
+	if (new_value > max_value_)
+		new_value = max_value_;
 
 	//  updating
-	if (new_value != m_value) {
-		m_value = new_value;
+	if (new_value != value_) {
+		value_ = new_value;
 		send_value_changed();
 	}
 }
@@ -312,13 +312,13 @@ void Slider::cursor_moved(int32_t pointer, int32_t x, int32_t y) {
  * \param pointer The relative position of the mouse pointer.
  */
 void Slider::cursor_pressed(int32_t pointer) {
-	if (!m_enabled)
+	if (!enabled_)
 		return;
 
 	grab_mouse(true);
-	m_pressed = true;
-	m_highlighted = true;
-	m_relative_move = pointer - m_cursor_pos;
+	pressed_ = true;
+	highlighted_ = true;
+	relative_move_ = pointer - cursor_pos_;
 
 	play_click();
 }
@@ -331,41 +331,41 @@ void Slider::cursor_pressed(int32_t pointer) {
  * \param ofs The cursor offset.
  */
 void Slider::bar_pressed(int32_t pointer, int32_t ofs) {
-	if (!m_enabled)
+	if (!enabled_)
 		return;
 
 	grab_mouse(true);
-	m_pressed = true;
+	pressed_ = true;
 
-	m_cursor_pos = pointer - ofs;
+	cursor_pos_ = pointer - ofs;
 
 	//  absolute value
 	if (get_bar_size() == 0) {
-		m_value = 0;
+		value_ = 0;
 	} else {
-		m_value =
+		value_ =
 			static_cast<int32_t>
 				(rint
-					(static_cast<double>((m_max_value - m_min_value) * m_cursor_pos)
+					(static_cast<double>((max_value_ - min_value_) * cursor_pos_)
 					 /
 					 get_bar_size()));
 	}
 
 	//  relative value in bounds
-	if (m_value < m_min_value)
-		m_value = m_min_value;
-	if (m_value > m_max_value)
-		m_value = m_max_value;
+	if (value_ < min_value_)
+		value_ = min_value_;
+	if (value_ > max_value_)
+		value_ = max_value_;
 
 	play_click();
 	send_value_changed();
 
-	m_relative_move = ofs;
+	relative_move_ = ofs;
 }
 
 void VerticalSlider::layout() {
-	m_x_gap = get_w() / 2 - 2;
-	m_bar_size = get_h() - m_cursor_size;
+	x_gap_ = get_w() / 2 - 2;
+	bar_size_ = get_h() - cursor_size_;
 	Slider::layout();
 }
 
@@ -402,7 +402,7 @@ void HorizontalSlider::draw(RenderTarget & dst)
 	dst.fill_rect(Rect(Point(get_x_gap(),     get_y_gap()), 1, 4), black);
 	dst.fill_rect(Rect(Point(get_x_gap() + 1, get_y_gap()), 1, 3), black);
 
-	draw_cursor(dst, m_cursor_pos, 0, m_cursor_size, get_h());
+	draw_cursor(dst, cursor_pos_, 0, cursor_size_, get_h());
 }
 
 
@@ -435,7 +435,7 @@ bool HorizontalSlider::handle_mousepress
 		return false;
 
 
-	if (x >= m_cursor_pos && x <= m_cursor_pos + m_cursor_size) {
+	if (x >= cursor_pos_ && x <= cursor_pos_ + cursor_size_) {
 		//  click on cursor
 		cursor_pressed(x);
 		return true;
@@ -451,8 +451,8 @@ bool HorizontalSlider::handle_mousepress
 }
 
 void HorizontalSlider::layout() {
-	m_y_gap = get_h() / 2 - 2;
-	m_bar_size = get_w() - m_cursor_size;
+	y_gap_ = get_h() / 2 - 2;
+	bar_size_ = get_w() - cursor_size_;
 	Slider::layout();
 }
 
@@ -486,7 +486,7 @@ void VerticalSlider::draw(RenderTarget & dst)
 	dst.fill_rect(Rect(Point(get_x_gap(), get_y_gap()),     4, 1), black);
 	dst.fill_rect(Rect(Point(get_x_gap(), get_y_gap() + 1), 3, 1), black);
 
-	draw_cursor(dst, 0, m_cursor_pos, get_w(), m_cursor_size);
+	draw_cursor(dst, 0, cursor_pos_, get_w(), cursor_size_);
 }
 
 
@@ -516,7 +516,7 @@ bool VerticalSlider::handle_mousepress(const uint8_t btn, int32_t x, int32_t y) 
 	if (btn != SDL_BUTTON_LEFT)
 		return false;
 
-	if (y >= m_cursor_pos && y <= m_cursor_pos + m_cursor_size) {
+	if (y >= cursor_pos_ && y <= cursor_pos_ + cursor_size_) {
 		//  click on cursor
 		cursor_pressed(y);
 		return true;
@@ -539,7 +539,7 @@ DiscreteSlider::DiscreteSlider
 	(Panel * const parent,
 	 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
 	 const std::vector<std::string> labels_in,
-	 uint32_t m_value,
+	 uint32_t value_,
 	 const Image* background_picture_id,
 	 const std::string & tooltip_text,
 	 const uint32_t cursor_size,
@@ -552,7 +552,7 @@ DiscreteSlider::DiscreteSlider
 		 w / (2 * labels_in.size()) - cursor_size / 2, 0,
 		 w - (w / labels_in.size()) + cursor_size,
 		 h - UI::g_fh1->render(as_uifont("."))->height() - 2,
-		 0, labels_in.size() - 1, m_value,
+		 0, labels_in.size() - 1, value_,
 		 background_picture_id,
 		 tooltip_text,
 		 cursor_size,
@@ -594,9 +594,9 @@ void DiscreteSlider::layout() {
 	uint32_t w = get_w();
 	uint32_t h = get_h();
 	assert(labels.size());
-	slider.set_pos(Point(w / (2 * labels.size()) - slider.m_cursor_size / 2, 0));
+	slider.set_pos(Point(w / (2 * labels.size()) - slider.cursor_size_ / 2, 0));
 	slider.set_size
-		(w - (w / labels.size()) + slider.m_cursor_size,
+		(w - (w / labels.size()) + slider.cursor_size_,
 		 h - UI::g_fh1->render(as_uifont("."))->height() - 2);
 	Panel::layout();
 }

@@ -148,7 +148,7 @@ int Panel::do_run()
 	// Panel-specific startup code. This might call end_modal()!
 	start();
 
-	const uint32_t minimum_frame_time =
+	const uint32_t minimuframe_time_ =
 	   1000 / std::max(5, g_options.pull_section("global").get_int("maxfps", 30));
 
 	while (_running) {
@@ -181,8 +181,8 @@ int Panel::do_run()
 
 		//  Wait until 1second/maxfps are over.
 		const uint32_t frame_time = SDL_GetTicks() - startTime;
-		if (frame_time < minimum_frame_time) {
-			SDL_Delay(minimum_frame_time - frame_time);
+		if (frame_time < minimuframe_time_) {
+			SDL_Delay(minimuframe_time_ - frame_time);
 		}
 	}
 	end();
@@ -1102,11 +1102,11 @@ bool Panel::draw_tooltip(RenderTarget & dst, const std::string & text)
 	Rect r
 		(WLApplication::get()->get_mouse_position() + Point(2, 32),
 		 tip_width, tip_height);
-	const Point tooltip_bottom_right = r.opposite_of_origin();
-	const Point screen_bottom_right(g_gr->get_xres(), g_gr->get_yres());
-	if (screen_bottom_right.x < tooltip_bottom_right.x)
+	const Point tooltip_bottoright_ = r.opposite_of_origin();
+	const Point screen_bottoright_(g_gr->get_xres(), g_gr->get_yres());
+	if (screen_bottoright_.x < tooltip_bottoright_.x)
 		r.x -=  4 + r.w;
-	if (screen_bottom_right.y < tooltip_bottom_right.y)
+	if (screen_bottoright_.y < tooltip_bottoright_.y)
 		r.y -= 35 + r.h;
 
 	dst.fill_rect(r, RGBColor(63, 52, 34));
