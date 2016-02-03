@@ -20,7 +20,6 @@
 #include "ui_basic/messagebox.h"
 
 #include "base/i18n.h"
-#include "graphic/font_handler.h"
 #include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
 #include "ui_basic/button.h"
@@ -48,64 +47,70 @@ WLMessageBox::WLMessageBox
 {
 	d->type = type;
 
-	const int32_t outerwidth = parent ?
-		parent->get_inner_w() : g_gr->get_xres();
-	const int32_t outerheight = parent ?
-		parent->get_inner_h() : g_gr->get_yres();
-	assert(outerwidth >= 80);
-	assert(outerheight >= 60);
-	const int32_t maxwidth = outerwidth - 80;
-	const int32_t maxheight = outerheight - 60;
-	d->textarea = new MultilineTextarea
-		(this,
-		 5, 5, maxwidth, maxheight,
-		 text.c_str(), align);
+	// Calculate textarea dimensions depending on text size
+	const int outerwidth = parent ? parent->get_inner_w() : g_gr->get_xres();
+	const int outerheight = parent ? parent->get_inner_h() : g_gr->get_yres();
 
-	uint32_t width, height;
-	std::string font = UI::g_fh1->fontset().serif();
-	int32_t fontsize = UI_FONT_SIZE_SMALL;
+	const int button_w = 120;
+	const int minwidth = 3.5 * button_w;
 
-	UI::g_fh->get_size(font, fontsize, text, width, height, maxwidth);
-	// stupid heuristic to avoid excessively long lines
-	if (height < 2U * fontsize)
-		UI::g_fh->get_size(font, fontsize, text, width, height, maxwidth / 2);
+	// Ample space for the buttons, but not hugely wide
+	const int maxwidth = std::min(600, std::max(outerwidth * 2 / 3, minwidth));
+	// Make sure that there is space for buttons + message, but not too tall
+	const int maxheight = std::min(400, std::max(outerheight * 2 / 3, 200));
 
-	width += 10 + 2 * d->textarea->scrollbar_w();
-	if (width < 100)
-		width = 100;
-	if (width > static_cast<uint32_t>(maxwidth))
-		width = maxwidth;
-	height += 50;
-	if (height > static_cast<uint32_t>(maxheight))
-		height = maxheight;
+	const int button_space = 50;
+	const int margin = 5;
+	int width, height = 0;
+	{
+		const Image* temp_rendered_text = g_fh1->render(as_uifont(text), maxwidth);
+		width = temp_rendered_text->width();
+		height = temp_rendered_text->height();
+	}
 
-	set_inner_size(width, height);
-	set_pos(Point((outerwidth - get_w()) / 2, (outerheight - get_h()) / 2));
+	// Stupid heuristic to avoid excessively long lines
+	if (height < 2 * UI_FONT_SIZE_SMALL) {
+		const Image* temp_rendered_text = g_fh1->render(as_uifont(text), maxwidth / 2);
+		width = temp_rendered_text->width();
+		height = temp_rendered_text->height();
+	}
 
-	d->textarea->set_size(width - 10, height - 50);
+	// Make sure that the buttons really fit
+	width = std::max(std::min(width, maxwidth), minwidth);
+	height += button_space;
 
-	if (type == MBoxType::kOk) {
-		UI::Button * okbtn = new Button
-			(this, "ok",
-			 (get_inner_w() - 120) / 2, get_inner_h() - 30, 120, 20,
-			 g_gr->images().get("images/ui_basic/but5.png"),
-			 _("OK"));
-		okbtn->sigclicked.connect(boost::bind(&WLMessageBox::clicked_ok, boost::ref(*this)));
-	} else if (type == MBoxType::kOkCancel) {
-		UI::Button * okbtn = new Button
-			(this, "ok",
-			 (get_inner_w() / 2 - 120) / 2, get_inner_h() - 30, 120, 20,
-			 g_gr->images().get("images/ui_basic/but5.png"),
-			 _("OK"));
-		okbtn->sigclicked.connect(boost::bind(&WLMessageBox::clicked_ok, boost::ref(*this)));
-		UI::Button * cancelbtn = new Button
+	// Find out whether the textarea needs a scrollbar
+	MultilineTextarea::ScrollMode scrollmode = MultilineTextarea::ScrollMode::kNoScrolling;
+	if (height > maxheight) {
+		height = maxheight - button_space;
+		scrollmode = MultilineTextarea::ScrollMode::kScrollNormal;
+	}
+
+	d->textarea =
+			new MultilineTextarea(this, margin, margin, width - 2 * margin, height, text, align, scrollmode);
+
+	// Now add the buttons
+	int button_y = d->textarea->get_y() + d->textarea->get_h() + 2 * margin;
+
+	UI::Button* okbtn = new Button
+		(this, "ok",
+		 type == MBoxType::kOk ? (width - button_w) / 2 : width * 2 / 3 - button_w / 2,
+		 button_y, button_w, 0,
+		 g_gr->images().get("images/ui_basic/but5.png"),
+		 _("OK"));
+	okbtn->sigclicked.connect(boost::bind(&WLMessageBox::clicked_ok, boost::ref(*this)));
+
+	if (type == MBoxType::kOkCancel) {
+		UI::Button* cancelbtn = new Button
 			(this, "no",
-			 (get_inner_w() / 2 - 120) / 2 + get_inner_w() / 2, get_inner_h() - 30,
-			 120, 20,
+			 width / 3 - button_w / 2, button_y, button_w, 0,
 			 g_gr->images().get("images/ui_basic/but1.png"),
 			 _("Cancel"));
 		cancelbtn->sigclicked.connect(boost::bind(&WLMessageBox::clicked_back, boost::ref(*this)));
 	}
+
+	set_inner_size(width, button_y + okbtn->get_h() + margin);
+	center_to_parent();
 	focus();
 }
 
