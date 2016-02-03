@@ -28,10 +28,10 @@
 #include "ai/ai_help_structs.h"
 #include "ai/computer_player.h"
 #include "base/i18n.h"
-#include "logic/immovable.h"
-#include "logic/ship.h"
-#include "logic/soldier.h"
-#include "logic/trainingsite.h"
+#include "logic/map_objects/immovable.h"
+#include "logic/map_objects/tribes/ship.h"
+#include "logic/map_objects/tribes/soldier.h"
+#include "logic/map_objects/tribes/trainingsite.h"
 
 namespace Widelands {
 struct Road;
@@ -100,7 +100,7 @@ struct DefaultAI : ComputerPlayer {
 			name = "normal";
 			/** TRANSLATORS: This is the name of an AI used in the game setup screens */
 			descname = _("Normal AI");
-			icon_filename = "pics/ai_normal.png";
+			icon_filename = "images/ai/ai_normal.png";
 		}
 		ComputerPlayer* instantiate(Widelands::Game& game,
 		                            Widelands::PlayerNumber const p) const override {
@@ -113,7 +113,7 @@ struct DefaultAI : ComputerPlayer {
 			name = "weak";
 			/** TRANSLATORS: This is the name of an AI used in the game setup screens */
 			descname = _("Weak AI");
-			icon_filename = "pics/ai_weak.png";
+			icon_filename = "images/ai/ai_weak.png";
 		}
 		ComputerPlayer* instantiate(Widelands::Game& game,
 		                            Widelands::PlayerNumber const p) const override {
@@ -126,7 +126,7 @@ struct DefaultAI : ComputerPlayer {
 			name = "very_weak";
 			/** TRANSLATORS: This is the name of an AI used in the game setup screens */
 			descname = _("Very Weak AI");
-			icon_filename = "pics/ai_very_weak.png";
+			icon_filename = "images/ai/ai_very_weak.png";
 		}
 		ComputerPlayer* instantiate(Widelands::Game& game,
 		                            Widelands::PlayerNumber const p) const override {
@@ -228,6 +228,7 @@ private:
 	void gain_building(Widelands::Building&);
 	void lose_building(const Widelands::Building&);
 	void gain_ship(Widelands::Ship&, NewShip);
+	void check_ship_in_expedition(ShipObserver&, uint32_t);
 	void expedition_management(ShipObserver&);
 	void out_of_resources_site(const Widelands::ProductionSite&);
 	void soldier_trained(const Widelands::TrainingSite&);
@@ -254,14 +255,9 @@ private:
 	uint32_t num_prod_constructionsites;
 	uint32_t num_ports;
 
-	int16_t last_attacked_player_;
 	uint32_t last_attack_time_;
 	// check ms in this interval - will auto-adjust
 	uint32_t enemysites_check_delay_;
-
-	// helping scores for building new military sites
-	int32_t target_military_score_;
-	int32_t least_military_score_;
 
 	WoodPolicy wood_policy_;
 
@@ -317,33 +313,33 @@ private:
 	bool resource_necessity_water_needed_;  // unless atlanteans
 
 	// average count of trees around cutters
-	uint32_t trees_around_cutters_;
+	//uint32_t trees_around_cutters_;
 
 	uint16_t military_last_dismantle_;
 	uint32_t military_last_build_;  // sometimes expansions just stops, this is time of last military
 	                                // building build
 
 	bool seafaring_economy;          // false by default, until first port space is found
-	uint32_t colony_scan_area_;  // distance from a possible port that is scanned for owned territory
-	// it decreases with failed scans
+	uint32_t expedition_ship_;
+
 	int32_t spots_;  // sum of buildable fields
 	int32_t vacant_mil_positions_;  // sum of vacant positions in militarysites and training sites
 	// statistics for training sites per type
-	uint8_t ts_basic_count_;
-	uint8_t ts_basic_const_count_;
-	uint8_t ts_advanced_count_;
-	uint8_t ts_advanced_const_count_;
-	uint8_t ts_without_trainers_;
+	int16_t ts_basic_count_;
+	int16_t ts_basic_const_count_;
+	int16_t ts_advanced_count_;
+	int16_t ts_advanced_const_count_;
+	int16_t ts_without_trainers_;
+
+	// This stores highest priority for new buildings except for militarysites
+	int32_t highest_nonmil_prio_;
 
 	// this is helping counter to track how many scheduler tasks are too delayed
 	// the purpose is to print out a warning that the game is pacing too fast
 	int32_t scheduler_delay_counter_;
 
-	int16_t ai_personality_military_loneliness_;
-	uint32_t ai_personality_attack_margin_;
-	int32_t ai_personality_wood_difference_;
-	uint32_t ai_productionsites_ratio_;
-	uint32_t ai_personality_early_militarysites;
+	//this points to persistent data stored in Player object
+	Widelands::Player::AiPersistentState* persistent_data;
 
 	// this is a bunch of patterns that have to identify weapons and armors for input queues of trainingsites
 	std::vector<std::string> const armors_and_weapons =
@@ -351,7 +347,7 @@ private:
 
 	enum {kReprioritize, kStopShipyard, kStapShipyard};
 
-	std::vector<int16_t> marineTaskQueue_;
+	std::vector<int16_t> marine_task_queue;
 
 	std::unique_ptr<Notifications::Subscriber<Widelands::NoteFieldPossession>>
 	   field_possession_subscriber_;

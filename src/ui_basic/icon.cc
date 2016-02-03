@@ -38,7 +38,6 @@ Icon::Icon
 
 void Icon::set_icon(const Image* picture_id) {
 	m_pic = picture_id;
-	update();
 }
 
 void Icon::set_frame(const RGBColor& color)

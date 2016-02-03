@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -63,10 +63,10 @@ struct MapView : public UI::Panel {
 	void warp_mouse_to_node(Widelands::Coords);
 
 	void set_viewpoint(Point vp, bool jump);
-	void set_rel_viewpoint(Point r, bool jump) {set_viewpoint(m_viewpoint + r, jump);}
+	void set_rel_viewpoint(Point r, bool jump) {set_viewpoint(viewpoint_ + r, jump);}
 
-	Point get_viewpoint() const {return m_viewpoint;}
-	bool is_dragging() const {return m_dragging;}
+	Point get_viewpoint() const {return viewpoint_;}
+	bool is_dragging() const {return dragging_;}
 
 	// Drawing
 	void draw(RenderTarget &) override;
@@ -80,16 +80,16 @@ struct MapView : public UI::Panel {
 	void track_sel(Point m);
 
 protected:
-	InteractiveBase & intbase() const {return m_intbase;}
+	InteractiveBase & intbase() const {return intbase_;}
 
 private:
 	void stop_dragging();
 
-	std::unique_ptr<GameRenderer> m_renderer;
-	InteractiveBase & m_intbase;
-	ChangeViewFn m_changeview;
-	Point              m_viewpoint;
-	bool               m_dragging;
+	std::unique_ptr<GameRenderer> renderer_;
+	InteractiveBase & intbase_;
+	ChangeViewFn changeview_;
+	Point              viewpoint_;
+	bool               dragging_;
 };
 
 

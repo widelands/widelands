@@ -49,8 +49,6 @@ ProgressBar::ProgressBar
 void ProgressBar::set_state(uint32_t state)
 {
 	m_state = state;
-
-	update();
 }
 
 
@@ -61,8 +59,6 @@ void ProgressBar::set_total(uint32_t total)
 {
 	assert(total);
 	m_total = total;
-
-	update();
 }
 
 
@@ -108,6 +104,6 @@ void ProgressBar::draw(RenderTarget & dst)
 	const std::string progress_text =
 		(boost::format("<font color=%1$s>%2$i%%</font>") % "ffffff" % percent).str();
 	const Point pos(get_w() / 2, get_h() / 2);
-	dst.blit(pos, UI::g_fh1->render(as_uifont(progress_text)), BlendMode::UseAlpha, Align_Center);
+	dst.blit(pos, UI::g_fh1->render(as_uifont(progress_text)), BlendMode::UseAlpha, UI::Align::kCenter);
 }
 }

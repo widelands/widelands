@@ -43,20 +43,20 @@
 #include "io/fileread.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "io/filewrite.h"
-#include "logic/carrier.h"
 #include "logic/cmd_calculate_statistics.h"
 #include "logic/cmd_luacoroutine.h"
 #include "logic/cmd_luascript.h"
 #include "logic/game_settings.h"
-#include "logic/militarysite.h"
+#include "logic/map_objects/tribes/carrier.h"
+#include "logic/map_objects/tribes/militarysite.h"
+#include "logic/map_objects/tribes/ship.h"
+#include "logic/map_objects/tribes/soldier.h"
+#include "logic/map_objects/tribes/trainingsite.h"
+#include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/player.h"
 #include "logic/playercommand.h"
 #include "logic/replay.h"
-#include "logic/ship.h"
 #include "logic/single_player_game_controller.h"
-#include "logic/soldier.h"
-#include "logic/trainingsite.h"
-#include "logic/tribes/tribe_descr.h"
 #include "map_io/widelands_map_loader.h"
 #include "network/network.h"
 #include "scripting/logic.h"
@@ -254,7 +254,7 @@ bool Game::run_splayer_scenario_direct(char const * const mapname, const std::st
 		 	(*this, g_options.pull_section("global"), 1, false));
 
 	loaderUI.step(_("Loading map"));
-	maploader->load_map_complete(*this, true);
+	maploader->load_map_complete(*this, Widelands::MapLoader::LoadType::kScenario);
 	maploader.reset();
 
 	set_game_controller(new SinglePlayerGameController(*this, true, 1));
@@ -340,7 +340,10 @@ void Game::init_newgame
 
 	if (loaderUI)
 		loaderUI->step(_("Loading map"));
-	maploader->load_map_complete(*this, settings.scenario);
+	maploader->load_map_complete(*this,
+										  settings.scenario ?
+											  Widelands::MapLoader::LoadType::kScenario :
+											  Widelands::MapLoader::LoadType::kGame);
 
 	// Check for win_conditions
 	if (!settings.scenario) {

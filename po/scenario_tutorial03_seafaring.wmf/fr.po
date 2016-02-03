@@ -4,14 +4,15 @@
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2011
 # Gilles Aubert <Hellsprings@gmail.com>, 2015
+# Jaypad <ju-ju@nataju.fr>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-06-07 09:12+0000\n"
-"PO-Revision-Date: 2015-06-07 09:13+0000\n"
-"Last-Translator: GunChleoc\n"
-"Language-Team: French (http://www.transifex.com/projects/p/widelands/language/fr/)\n"
+"POT-Creation-Date: 2015-12-14 05:31+0000\n"
+"PO-Revision-Date: 2015-12-28 15:23+0000\n"
+"Last-Translator: Jaypad <ju-ju@nataju.fr>\n"
+"Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -30,7 +31,7 @@ msgstr "Tutoriel de navigation"
 msgid ""
 "Welcome back. In this tutorial, you are going to learn the most important "
 "things about seafaring, that is ships, ports, and expedition."
-msgstr "Bienvenu. Dans ce tutoriel, vous allez apprendre les principaux aspects de la navigation, à propos des navires, des ports et des expéditions."
+msgstr "Bienvenue. Dans ce tutoriel, vous allez apprendre les principaux aspects de la navigation, à propos des navires, des ports et des expéditions."
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:24
 msgid ""
@@ -269,7 +270,7 @@ msgid ""
 "have to undertake an expedition to the unknown seas."
 msgstr "Bien que cela peut prendre longtemps, être coûteux et non sans danger - qui sait quels monstres vivent dans la mer? - Je ne vois pas d'autre possibilité: nous aurons à entreprendre une expédition dans les mers inconnues."
 
-#: TRANSLATORS This shall be the beginning of a poem
+#. TRANSLATORS: This shall be the beginning of a poem
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:138
 msgid "A trip by the sea, what fun it can be"
 msgstr "Un voyage par la mer, ça doit être amusant"
@@ -336,7 +337,7 @@ msgid ""
 " ship in any of the six main directions of the Widelands map. When it has "
 "reached a coastline, you can make it travel around the coast, where it will "
 "look for suitable places for landing."
-msgstr ""
+msgstr "Votre navire est prêt et attend vos ordres au port. Il ne transporte plus de marchandises. Utilisez les boutons pour envoyer le navire dans l'une des six directions principales de la carte de Widelands. Lorsqu'il aura atteint une côte, vous pourrez lui faire suivre afin qu'il trouve des lieux appropriés pour accoster."
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:165
 msgid ""
@@ -414,6 +415,7 @@ msgid ""
 msgstr "Sur cette carte, il n'y avait aucun ennemi à craindre. Comme toujours, vous pouvez continuer à jouer et ainsi regarder la façon dont les navires acheminent les marchandises sur l'île lorsque vous construisez des bâtiments. Il y a aussi une autre île où vous pourrez construire un port."
 
 #: ../../scripting/format_scenario.lua:36
+#, lua-format
 msgid "“%s”"
 msgstr "“%s”"
 

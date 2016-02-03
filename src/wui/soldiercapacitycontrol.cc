@@ -20,8 +20,8 @@
 #include "wui/soldiercapacitycontrol.h"
 
 #include "graphic/graphic.h"
+#include "logic/map_objects/tribes/soldiercontrol.h"
 #include "logic/player.h"
-#include "logic/soldiercontrol.h"
 #include "ui_basic/button.h"
 #include "ui_basic/radiobutton.h"
 #include "wui/interactive_gamebase.h"
@@ -62,21 +62,21 @@ m_igb(igb),
 m_building(building),
 m_decrease
 	(this, "decrease", 0, 0, 32, 32,
-	 g_gr->images().get("pics/but4.png"),
-	 g_gr->images().get("pics/menu_down_train.png"), _("Decrease capacity")),
+	 g_gr->images().get("images/ui_basic/but4.png"),
+	 g_gr->images().get("images/wui/buildings/menu_down_train.png"), _("Decrease capacity")),
 m_increase
 	(this, "increase", 0, 0, 32, 32,
-	 g_gr->images().get("pics/but4.png"),
-	 g_gr->images().get("pics/menu_up_train.png"), _("Increase capacity")),
-m_value(this, "199", UI::Align_Center)
+	 g_gr->images().get("images/ui_basic/but4.png"),
+	 g_gr->images().get("images/wui/buildings/menu_up_train.png"), _("Increase capacity")),
+m_value(this, "199", UI::Align::kCenter)
 {
 	m_decrease.sigclicked.connect(boost::bind(&SoldierCapacityControl::click_decrease, boost::ref(*this)));
 	m_increase.sigclicked.connect(boost::bind(&SoldierCapacityControl::click_increase, boost::ref(*this)));
 
-	add(new UI::Textarea(this, _("Capacity")), AlignCenter);
-	add(&m_decrease, AlignCenter);
-	add(&m_value, AlignCenter);
-	add(&m_increase, AlignCenter);
+	add(new UI::Textarea(this, _("Capacity")), UI::Align::kHCenter);
+	add(&m_decrease, UI::Align::kHCenter);
+	add(&m_value, UI::Align::kHCenter);
+	add(&m_increase, UI::Align::kHCenter);
 
 	m_decrease.set_repeating(true);
 	m_increase.set_repeating(true);

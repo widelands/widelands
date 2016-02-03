@@ -29,7 +29,7 @@
 #include "graphic/graphic.h"
 #include "graphic/text/font_set.h"
 #include "graphic/text_constants.h"
-#include "logic/soldier.h"
+#include "logic/map_objects/tribes/soldier.h"
 
 constexpr int32_t kUpdateTimeInGametimeMs = 1000;  //  1 second, gametime
 
@@ -65,13 +65,13 @@ std::unique_ptr<UI::HorizontalSlider> AttackBox::add_slider(UI::Box& parent,
                                                             char const* hint) {
 	std::unique_ptr<UI::HorizontalSlider> result(new UI::HorizontalSlider(
 	   &parent, 0, 0, width, height, min, max, initial, g_gr->images().get(picname), hint));
-	parent.add(result.get(), UI::Box::AlignCenter);
+	parent.add(result.get(), UI::Align::kHCenter);
 	return result;
 }
 
 UI::Textarea& AttackBox::add_text(UI::Box& parent,
                                   std::string str,
-                                  uint32_t alignment,
+											 UI::Align alignment,
                                   const std::string& fontname,
                                   uint32_t fontsize) {
 	UI::Textarea& result = *new UI::Textarea(&parent, str.c_str());
@@ -89,9 +89,9 @@ std::unique_ptr<UI::Button> AttackBox::add_button(UI::Box& parent,
                                                   void (AttackBox::*fn)(),
                                                   const std::string& tooltip_text) {
 	std::unique_ptr<UI::Button> button(new UI::Button(
-	   &parent, text, 8, 8, 26, 26, g_gr->images().get("pics/but2.png"), text, tooltip_text));
+		&parent, text, 8, 8, 26, 26, g_gr->images().get("images/ui_basic/but2.png"), text, tooltip_text));
 	button.get()->sigclicked.connect(boost::bind(fn, boost::ref(*this)));
-	parent.add(button.get(), Box::AlignCenter);
+	parent.add(button.get(), UI::Align::kHCenter);
 	return button;
 }
 
@@ -135,7 +135,7 @@ void AttackBox::init() {
 	uint32_t max_attackers = get_max_attackers();
 
 	UI::Box& linebox = *new UI::Box(this, 0, 0, UI::Box::Horizontal);
-	add(&linebox, UI::Box::AlignCenter);
+	add(&linebox, UI::Align::kHCenter);
 	add_text(linebox, _("Soldiers:"));
 	linebox.add_space(8);
 
@@ -144,14 +144,14 @@ void AttackBox::init() {
 
 	//  Spliter of soldiers
 	UI::Box& columnbox = *new UI::Box(&linebox, 0, 0, UI::Box::Vertical);
-	linebox.add(&columnbox, UI::Box::AlignCenter);
+	linebox.add(&columnbox, UI::Align::kHCenter);
 
 	const std::string attack_string =
 	   (boost::format(_("%1% / %2%")) % (max_attackers > 0 ? 1 : 0) % max_attackers).str();
 
 	soldiers_text_.reset(&add_text(columnbox,
 	                               attack_string,
-	                               UI::Box::AlignCenter,
+	                               UI::Align::kHCenter,
 											 UI::g_fh1->fontset()->serif(),
 	                               UI_FONT_SIZE_ULTRASMALL));
 
@@ -161,7 +161,7 @@ void AttackBox::init() {
 	                              0,
 	                              max_attackers,
 	                              max_attackers > 0 ? 1 : 0,
-	                              "pics/but2.png",
+											"images/ui_basic/but2.png",
 	                              _("Number of soldiers"));
 
 	soldiers_slider_->changed.connect(boost::bind(&AttackBox::update_attack, this));

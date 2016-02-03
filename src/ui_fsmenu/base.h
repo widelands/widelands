@@ -45,7 +45,7 @@ public:
 		kOk = static_cast<int>(UI::Panel::Returncodes::kOk),
 
 		// Options
-		kRestart,
+		kApplyOptions,
 
 		// Main menu
 		kTutorial,
@@ -76,7 +76,10 @@ public:
 		kJoingame
 	};
 
-	FullscreenMenuBase(char const * bgpic);
+	/// Calls FullscreenMenuBase(const std::string& bgpic)
+	/// with a default background image
+	FullscreenMenuBase();
+	FullscreenMenuBase(const std::string& bgpic);
 	virtual ~FullscreenMenuBase();
 
 	void draw(RenderTarget &) override;

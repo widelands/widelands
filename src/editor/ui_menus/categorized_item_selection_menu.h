@@ -26,7 +26,7 @@
 #include "base/i18n.h"
 #include "graphic/image.h"
 #include "logic/description_maintainer.h"
-#include "logic/world/editor_category.h"
+#include "logic/map_objects/world/editor_category.h"
 #include "ui_basic/box.h"
 #include "ui_basic/checkbox.h"
 #include "ui_basic/panel.h"
@@ -78,11 +78,11 @@ CategorizedItemSelectionMenu<DescriptionType, ToolType>::CategorizedItemSelectio
 	descriptions_(descriptions),
 	select_correct_tool_(select_correct_tool),
 	protect_against_recursive_select_(false),
-	current_selection_names_(this, 0, 0, 0, 20, UI::Align_Center),
+	current_selection_names_(this, 0, 0, 0, 20, UI::Align::kCenter),
 	tool_(tool)
 {
 	UI::TabPanel* tab_panel = new UI::TabPanel(this, 0, 0, nullptr);
-	add(tab_panel, UI::Align_Center);
+	add(tab_panel, UI::Align::kCenter);
 
 	for (uint32_t category_index = 0; category_index < categories.size(); ++category_index) {
 		const Widelands::EditorCategory& category = categories.get(category_index);
@@ -108,7 +108,7 @@ CategorizedItemSelectionMenu<DescriptionType, ToolType>::CategorizedItemSelectio
 				horizontal = new UI::Box(vertical, 0, 0, UI::Box::Horizontal);
 				horizontal->add_space(kSpacing);
 
-				vertical->add(horizontal, UI::Align_Left);
+				vertical->add(horizontal, UI::Align::kLeft);
 				vertical->add_space(kSpacing);
 			}
 			assert(horizontal != nullptr);
@@ -117,13 +117,13 @@ CategorizedItemSelectionMenu<DescriptionType, ToolType>::CategorizedItemSelectio
 			cb->set_state(tool_->is_enabled(i));
 			cb->changedto.connect(boost::bind(&CategorizedItemSelectionMenu::selected, this, i, _1));
 			checkboxes_[i] = cb;
-			horizontal->add(cb, UI::Align_Left);
+			horizontal->add(cb, UI::Align::kLeft);
 			horizontal->add_space(kSpacing);
 			++nitems_handled;
 		}
 		tab_panel->add(category.name(), category.picture(), vertical, category.descname());
 	}
-	add(&current_selection_names_, UI::Align_Center, true);
+	add(&current_selection_names_, UI::Align::kCenter, true);
 }
 
 template <typename DescriptionType, typename ToolType>

@@ -18,7 +18,7 @@
  */
 
 #include "graphic/graphic.h"
-#include "logic/militarysite.h"
+#include "logic/map_objects/tribes/militarysite.h"
 #include "ui_basic/tabpanel.h"
 #include "wui/buildingwindow.h"
 #include "wui/soldiercapacitycontrol.h"
@@ -26,7 +26,7 @@
 
 using Widelands::MilitarySite;
 
-static char const * pic_tab_military = "pics/menu_tab_military.png";
+static char const * pic_tab_military = "images/wui/buildings/menu_tab_military.png";
 
 /**
  * Status window for \ref MilitarySite

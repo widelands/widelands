@@ -1,19 +1,19 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2015 Widelands Development Team
+# Copyright (C) 2005-2016 Widelands Development Team
 # 
 # Translators:
 # wl-zocker, 2014
 # millimarg, 2015
 # Mirian Margiani <mirian.margiani@gmail.com>, 2014
 # Peter Schwanemann <nasenbaer_peter@sourceforge.net>, 2005
-# Venatrix, 2015
-# wl-zocker, 2015
+# Venatrix, 2015-2016
+# wl-zocker, 2015-2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-12-03 09:55+0000\n"
-"PO-Revision-Date: 2015-12-03 10:44+0000\n"
+"POT-Creation-Date: 2016-01-31 20:26+0000\n"
+"PO-Revision-Date: 2016-02-01 14:24+0000\n"
 "Last-Translator: Venatrix\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -39,8 +39,8 @@ msgid "Licensing information for Widelands"
 msgstr "Lizenzinformationen für Widelands"
 
 #: ../../txts/LICENSE.lua:23
-msgid "Copyright 2002 - 2015 by the Widelands Development Team."
-msgstr "Copyright 2002 - 2015 Widelands-Entwicklungsteam."
+msgid "Copyright 2002 - 2016 by the Widelands Development Team."
+msgstr "Copyright 2002 - 2016 durch das Widelands-Entwicklungsteam."
 
 #: ../../txts/LICENSE.lua:24
 msgid ""
@@ -49,6 +49,7 @@ msgid ""
 msgstr "Dieses Spiel ist Freie- und Open-Source-Software (FOSS), lizenziert unter der GNU General Public License (GPL) Version 2.0."
 
 #: ../../txts/LICENSE.lua:26
+#, lua-format
 msgid ""
 "You can find more information on FOSS and the GPL by visiting the following "
 "webpage:  %s"
@@ -294,9 +295,10 @@ msgstr "Onlinehilfe"
 msgid ""
 "A detailed description of the tribes’ economies is available in the in-game "
 "Tribal Encyclopedia."
-msgstr "Eine detaillierte Beschreibung der Stammeswirtschaft findest du im Spiel im Stammeslexikon."
+msgstr "Eine detaillierte Beschreibung der Wirtschaftssysteme der einzelnen Stämme findest du im Spiel im Stammeslexikon."
 
 #: ../../txts/README.lua:92
+#, lua-format
 msgid ""
 "If you need more documentation or help for Widelands or the Widelands "
 "Editor, be sure to visit our homepage at %s. You can find online help in our"
@@ -437,11 +439,10 @@ msgstr "FreeBSD"
 msgid "Graphicians"
 msgstr "Grafiker"
 
-#: ../../txts/developers.lua:3 ../../txts/developers.lua:3
+#: ../../txts/developers.lua:3
 msgid "Graphics"
 msgstr "Grafik"
 
-#: ../../txts/developers.lua:3 ../../txts/developers.lua:3
 #: ../../txts/developers.lua:3
 msgid "Homepage"
 msgstr "Homepage"
@@ -474,7 +475,7 @@ msgstr "Sonstiges"
 msgid "Packagers"
 msgstr "Packer"
 
-#: ../../txts/developers.lua:3 ../../txts/developers.lua:3
+#: ../../txts/developers.lua:3
 msgid "Sound"
 msgstr "Ton"
 
@@ -523,6 +524,7 @@ msgid ""
 msgstr "Wie du sehen kannst, wird am Editor noch hart gearbeitet. Und so wird mit dem immer besser werdenden Editor auch dieser Text schon bald länger und vollständiger werden."
 
 #: ../../txts/editor_readme.lua:14
+#, lua-format
 msgid "Please have a look at our enduser manuals on our wiki pages at: %s"
 msgstr "Bitte schaue in unsere Handbücher in unserem Wiki auf: %s"
 
@@ -776,7 +778,7 @@ msgid ""
 "Manage your messages more efficiently: press ‘N’ for News to access the "
 "messages window, then use ‘G’ for Go To, and the Delete key to archive "
 "messages."
-msgstr "Verwalte deine Nachrichten effizienter: Drücke „N“ für News, um in das Nachrichten-Fenster zu gelangen, verwende dann „G“ für Go To und die ENTF-Taste zum Archivieren von Nachrichten."
+msgstr "Verwalte deine Nachrichten effizienter: Drücke „N“, um in das Nachrichten-Fenster zu gelangen, verwende dann „G“, um zum betreffenden Ort zu gehen, und die ENTF-Taste zum Archivieren von Nachrichten."
 
 #: ../../txts/tips/general_game.tip:38
 msgid ""

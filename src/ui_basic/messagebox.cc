@@ -21,6 +21,7 @@
 
 #include "base/i18n.h"
 #include "graphic/font_handler.h"
+#include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
 #include "ui_basic/button.h"
 #include "ui_basic/multilinetextarea.h"
@@ -46,10 +47,6 @@ WLMessageBox::WLMessageBox
 	d(new WLMessageBoxImpl)
 {
 	d->type = type;
-	d->textarea = new MultilineTextarea
-		(this,
-		 5, 5, 30, 30,
-		 text.c_str(), align);
 
 	const int32_t outerwidth = parent ?
 		parent->get_inner_w() : g_gr->get_xres();
@@ -59,9 +56,14 @@ WLMessageBox::WLMessageBox
 	assert(outerheight >= 60);
 	const int32_t maxwidth = outerwidth - 80;
 	const int32_t maxheight = outerheight - 60;
+	d->textarea = new MultilineTextarea
+		(this,
+		 5, 5, maxwidth, maxheight,
+		 text.c_str(), align);
+
 	uint32_t width, height;
-	std::string font = d->textarea->get_font_name();
-	int32_t fontsize = d->textarea->get_font_size();
+	std::string font = UI::g_fh1->fontset()->serif();
+	int32_t fontsize = UI_FONT_SIZE_SMALL;
 
 	UI::g_fh->get_size(font, fontsize, text, width, height, maxwidth);
 	// stupid heuristic to avoid excessively long lines
@@ -86,21 +88,21 @@ WLMessageBox::WLMessageBox
 		UI::Button * okbtn = new Button
 			(this, "ok",
 			 (get_inner_w() - 120) / 2, get_inner_h() - 30, 120, 20,
-			 g_gr->images().get("pics/but5.png"),
+			 g_gr->images().get("images/ui_basic/but5.png"),
 			 _("OK"));
 		okbtn->sigclicked.connect(boost::bind(&WLMessageBox::clicked_ok, boost::ref(*this)));
 	} else if (type == MBoxType::kOkCancel) {
 		UI::Button * okbtn = new Button
 			(this, "ok",
 			 (get_inner_w() / 2 - 120) / 2, get_inner_h() - 30, 120, 20,
-			 g_gr->images().get("pics/but5.png"),
+			 g_gr->images().get("images/ui_basic/but5.png"),
 			 _("OK"));
 		okbtn->sigclicked.connect(boost::bind(&WLMessageBox::clicked_ok, boost::ref(*this)));
 		UI::Button * cancelbtn = new Button
 			(this, "no",
 			 (get_inner_w() / 2 - 120) / 2 + get_inner_w() / 2, get_inner_h() - 30,
 			 120, 20,
-			 g_gr->images().get("pics/but1.png"),
+			 g_gr->images().get("images/ui_basic/but1.png"),
 			 _("Cancel"));
 		cancelbtn->sigclicked.connect(boost::bind(&WLMessageBox::clicked_back, boost::ref(*this)));
 	}

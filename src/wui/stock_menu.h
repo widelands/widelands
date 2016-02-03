@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -35,11 +35,11 @@ struct StockMenu : public UI::UniqueWindow {
 	void think() override;
 
 private:
-	InteractivePlayer &  m_player;
-	WaresDisplay * m_all_wares;
-	WaresDisplay * m_all_workers;
-	WaresDisplay * m_warehouse_wares;
-	WaresDisplay * m_warehouse_workers;
+	InteractivePlayer &  player_;
+	WaresDisplay * all_wares_;
+	WaresDisplay * all_workers_;
+	WaresDisplay * warehouse_wares_;
+	WaresDisplay * warehouse_workers_;
 
 	void fill_total_waresdisplay(WaresDisplay * waresdisplay, Widelands::WareWorker type);
 	void fill_warehouse_waresdisplay(WaresDisplay * waresdisplay, Widelands::WareWorker type);

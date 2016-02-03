@@ -1,0 +1,40 @@
+install:
+  # Installing various utilities
+  - choco install -y InnoSetup
+  - set PATH=C:\msys64\mingw64\bin;C:\msys64\usr\bin;"C:\Program Files (x86)\Inno Setup 5";%PATH%
+  # Switch from SF to msys2.org (default, much faster)
+  - cmd:  "bash --login -c \"pacman --noconfirm --sync pacman-mirrors\""
+  # Update complete msys2 distribution
+  # fails most of the time due slow data transfer
+  - cmd: "bash --login -c \"update-core\""
+  - cmd: "bash --login -c \"pacman -Su --noconfirm\""
+  - cmd: "bash --login -c \"pacman --noconfirm -S mingw-w64-x86_64-boost mingw-w64-x86_64-SDL2_net mingw-w64-x86_64-SDL2_ttf mingw-w64-x86_64-SDL2_mixer mingw-w64-x86_64-SDL2_image mingw-w64-x86_64-glew\""
+  # Hack, there are wrong dependencies atm in the msys2 packages (SDL_image, libwebp)  
+  #- cmd: copy c:\msys64\mingw64\bin\libwebp-6.dll c:\msys64\mingw64\bin\libwebp-5.dll
+
+shallow_clone: true
+
+branches:
+  except:
+    - _widelands_dev_widelands_trunk
+
+build: 
+  verbosity: detailed
+
+build_script:
+  - cmd: cd c:\projects
+  - cmd: md build
+  - cmd: cd build
+  - cmd: echo %APPVEYOR_BUILD_VERSION% > c:\projects\widelands\WL_RELEASE
+  - cmd: cmake -G "Ninja" -DCMAKE_BUILD_TYPE=Release ..\widelands
+  - cmd: ninja
+  - cmd: strip -sv src\widelands.exe
+  - cmd: ISCC /q /fWidelands-%APPVEYOR_BUILD_VERSION%-win64 ..\widelands\utils\win32\innosetup\Widelands.iss
+  - appveyor PushArtifact c:\projects\Widelands-%APPVEYOR_BUILD_VERSION%-win64.exe
+
+artifacts:
+  - path: Widelands-$(APPVEYOR_BUILD_VERSION)-win64.exe
+    name: Widelands Setup
+
+platform: 
+  - x64

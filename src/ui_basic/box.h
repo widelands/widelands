@@ -20,12 +20,14 @@
 #ifndef WL_UI_BASIC_BOX_H
 #define WL_UI_BASIC_BOX_H
 
+#include <memory>
 #include <vector>
 
+#include "graphic/align.h"
 #include "ui_basic/panel.h"
+#include "ui_basic/scrollbar.h"
 
 namespace UI {
-struct Scrollbar;
 
 /**
  * A layouting panel that holds a number of child panels.
@@ -36,14 +38,8 @@ struct Box : public Panel {
 	enum {
 		Horizontal = 0,
 		Vertical = 1,
-
-		AlignLeft = 0,
-		AlignTop = 0,
-		AlignCenter = 1,
-		AlignRight = 2,
-		AlignBottom = 2,
 	};
-public:
+
 	Box
 		(Panel * parent,
 		 int32_t x, int32_t y,
@@ -57,7 +53,7 @@ public:
 
 	void add
 		(Panel * panel,
-		uint32_t align,
+		UI::Align align,
 		bool fullsize = false,
 		bool fillspace = false);
 	void add_space(uint32_t space);
@@ -71,17 +67,16 @@ protected:
 	void update_desired_size() override;
 
 private:
-	void get_item_desired_size(uint32_t idx, uint32_t & depth, uint32_t & breadth);
-	void get_item_size(uint32_t idx, uint32_t & depth, uint32_t & breadth);
-	void set_item_size(uint32_t idx, uint32_t depth, uint32_t breadth);
+	void get_item_desired_size(uint32_t idx, int* depth, int* breadth);
+	void get_item_size(uint32_t idx, int* depth, int* breadth);
+	void set_item_size(uint32_t idx, int depth, int breadth);
 	void set_item_pos(uint32_t idx, int32_t pos);
 	void scrollbar_moved(int32_t);
 	void update_positions();
 
 	//don't resize beyond this size
-	uint32_t m_max_x, m_max_y;
+	int m_max_x, m_max_y;
 
-private:
 	struct Item {
 		enum Type {
 			ItemPanel,
@@ -93,18 +88,18 @@ private:
 		union {
 			struct {
 				Panel * panel;
-				uint32_t align;
+				UI::Align align;
 				bool fullsize;
 			} panel;
-			uint32_t space;
+			int space;
 		} u;
 
 		bool fillspace;
-		uint32_t assigned_var_depth;
+		int assigned_var_depth;
 	};
 
 	bool m_scrolling;
-	Scrollbar * m_scrollbar;
+	std::unique_ptr<Scrollbar> m_scrollbar;
 	uint32_t m_orientation;
 	uint32_t m_mindesiredbreadth;
 	uint32_t m_inner_spacing;

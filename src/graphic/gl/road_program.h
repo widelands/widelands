@@ -37,9 +37,12 @@ public:
 	RoadProgram();
 	~RoadProgram();
 
-	// Draws the roads. The 'surface' is needed to convert from pixel space to
-	// GL space.
-	void draw(const Surface& surface, const FieldsToDraw& fields_to_draw);
+	// Draws the roads. The dimensions of the renderbuffer are needed to convert from pixel to GL
+	// space.
+	void draw(int renderbuffer_width,
+	          int renderbuffer_height,
+	          const FieldsToDraw& fields_to_draw,
+	          float z_value);
 
 private:
 	struct PerVertexData {
@@ -54,15 +57,16 @@ private:
 	// Adds a road from 'start' to 'end' to be rendered in this frame using the
 	// correct texture for 'road_type'.
 	enum Direction {kEast, kSouthEast, kSouthWest};
-	void add_road(const Surface& surface,
+	void add_road(int renderbuffer_width,
+	              int renderbuffer_height,
 	              const FieldsToDraw::Field& start,
 	              const FieldsToDraw::Field& end,
 	              const Widelands::RoadType road_type,
 	              const Direction direction,
-					  int* gl_texture);
+	              uint32_t* gl_texture);
 
 	// The buffer that will contain 'vertices_' for rendering.
-	Gl::Buffer gl_array_buffer_;
+	Gl::Buffer<PerVertexData> gl_array_buffer_;
 
 	// The program used for drawing the roads.
 	Gl::Program gl_program_;
@@ -74,6 +78,7 @@ private:
 
 	// Uniforms.
 	GLint u_texture_;
+	GLint u_z_value_;
 
 	// All vertices that get rendered this frame.
 	std::vector<PerVertexData> vertices_;

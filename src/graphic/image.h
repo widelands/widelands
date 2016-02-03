@@ -26,6 +26,7 @@
 
 #include "base/macros.h"
 #include "base/rect.h"
+#include "graphic/gl/blit_data.h"
 
 class Texture;
 
@@ -35,6 +36,7 @@ class Texture;
  */
 class Image {
 public:
+
 	Image() = default;
 	virtual ~Image() {}
 
@@ -45,8 +47,7 @@ public:
 	// OpenGL texture and texture coordinates backing this Image. This can
 	// change at any time, so do not hold one to this value for more than one
 	// frame.
-	virtual int get_gl_texture() const = 0;
-	virtual const FloatRect& texture_coordinates() const = 0;
+	virtual const BlitData& blit_data() const = 0;
 
 private:
 	DISALLOW_COPY_AND_ASSIGN(Image);

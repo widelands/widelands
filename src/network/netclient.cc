@@ -35,10 +35,10 @@
 #include "io/fileread.h"
 #include "io/filewrite.h"
 #include "logic/game.h"
+#include "logic/map_objects/tribes/tribes.h"
 #include "logic/player.h"
 #include "logic/playercommand.h"
 #include "logic/playersmanager.h"
-#include "logic/tribes/tribes.h"
 #include "map_io/widelands_map_loader.h"
 #include "network/internet_gaming.h"
 #include "network/network_gaming_messages.h"
@@ -184,7 +184,7 @@ void NetClient::run ()
 #endif
 
 	try {
-		UI::ProgressWindow * loaderUI = new UI::ProgressWindow("pics/progress.png");
+		UI::ProgressWindow * loaderUI = new UI::ProgressWindow("images/loadscreens/progress.png");
 		std::vector<std::string> tipstext;
 		tipstext.push_back("general_game");
 		tipstext.push_back("multiplayer");

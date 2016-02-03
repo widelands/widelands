@@ -26,15 +26,16 @@
 #include "ai/ai_hints.h"
 #include "economy/flag.h"
 #include "economy/road.h"
-#include "logic/checkstep.h"
 #include "logic/findnode.h"
 #include "logic/game.h"
-#include "logic/instances.h"
 #include "logic/map.h"
+#include "logic/map_objects/checkstep.h"
+#include "logic/map_objects/map_object.h"
+#include "logic/map_objects/tribes/ship.h"
+#include "logic/map_objects/world/terrain_description.h"
+#include "logic/map_objects/world/world.h"
 #include "logic/player.h"
-#include "logic/ship.h"
-#include "logic/world/terrain_description.h"
-#include "logic/world/world.h"
+
 
 namespace Widelands {
 
@@ -44,6 +45,8 @@ class MilitarySite;
 enum class ExtendedBool : uint8_t {kUnset, kTrue, kFalse};
 enum class BuildingNecessity : uint8_t
 	{kForced, kNeeded, kNotNeeded, kUnset, kNotBuildable, kAllowed, kNeededPending, kForbidden};
+enum class AiModeBuildings : uint8_t
+	{kAnotherAllowed, kOnLimit, kLimitExceeded};
 enum class SchedulerTaskId : uint8_t {
 		kBbuildableFieldsCheck,
 		kMineableFieldsCheck,
@@ -187,9 +190,9 @@ struct FindNodeWater {
 
 	bool accept(const Map& /* map */, const FCoords& coord) const {
 		return (world_.terrain_descr(coord.field->terrain_d()).get_is() &
-		        TerrainDescription::Type::kWater) ||
+		        TerrainDescription::Is::kWater) ||
 		       (world_.terrain_descr(coord.field->terrain_r()).get_is() &
-		        TerrainDescription::Type::kWater);
+		        TerrainDescription::Is::kWater);
 	}
 
 private:
@@ -458,8 +461,14 @@ struct BuildingObserver {
 	int32_t total_count() const {
 		return cnt_built_ + cnt_under_construction_;
 	}
-	bool aimode_limit_achieved() {
-		return total_count() - unconnected_count_ >= cnt_limit_by_aimode_;
+	Widelands::AiModeBuildings aimode_limit_status() {
+		if (total_count() > cnt_limit_by_aimode_) {
+			return Widelands::AiModeBuildings::kLimitExceeded;
+		} else if (total_count() == cnt_limit_by_aimode_) {
+			return Widelands::AiModeBuildings::kOnLimit;
+		} else {
+			return Widelands::AiModeBuildings::kAnotherAllowed;
+		}
 	}
 	bool buildable(Widelands::Player& player_) {
 		return is_buildable_ && player_.is_building_type_allowed(id);

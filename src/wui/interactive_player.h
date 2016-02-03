@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2003, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -63,11 +63,11 @@ public:
 	bool handle_key(bool down, SDL_Keysym) override;
 
 	Widelands::Player & player() const {
-		return game().player(m_player_number);
+		return game().player(player_number_);
 	}
 	Widelands::Player * get_player() const override {
 		assert(&game());
-		return game().get_player(m_player_number);
+		return game().get_player(player_number_);
 	}
 
 	// for savegames
@@ -78,7 +78,7 @@ public:
 	void think() override;
 
 	void set_flag_to_connect(Widelands::Coords const location) {
-		m_flag_to_connect = location;
+		flag_to_connect_ = location;
 	}
 
 	void popup_message(Widelands::MessageId, const Widelands::Message &);
@@ -87,24 +87,24 @@ public:
 private:
 	void cmdSwitchPlayer(const std::vector<std::string> & args);
 
-	Widelands::PlayerNumber m_player_number;
-	bool                     m_auto_roadbuild_mode;
-	Widelands::Coords        m_flag_to_connect;
+	Widelands::PlayerNumber player_number_;
+	bool                     auto_roadbuild_mode_;
+	Widelands::Coords        flag_to_connect_;
 
-	UI::Button m_toggle_chat;
-	UI::Button m_toggle_options_menu;
-	UI::Button m_toggle_statistics_menu;
-	UI::Button m_toggle_objectives;
-	UI::Button m_toggle_minimap;
-	UI::Button m_toggle_message_menu;
-	UI::Button m_toggle_help;
+	UI::Button toggle_chat_;
+	UI::Button toggle_options_menu_;
+	UI::Button toggle_statistics_menu_;
+	UI::Button toggle_objectives_;
+	UI::Button toggle_minimap_;
+	UI::Button toggle_message_menu_;
+	UI::Button toggle_help_;
 
-	UI::UniqueWindow::Registry m_chat;
-	UI::UniqueWindow::Registry m_options;
-	UI::UniqueWindow::Registry m_statisticsmenu;
-	UI::UniqueWindow::Registry m_objectives;
-	UI::UniqueWindow::Registry m_encyclopedia;
-	UI::UniqueWindow::Registry m_message_menu;
+	UI::UniqueWindow::Registry chat_;
+	UI::UniqueWindow::Registry options_;
+	UI::UniqueWindow::Registry statisticsmenu_;
+	UI::UniqueWindow::Registry objectives_;
+	UI::UniqueWindow::Registry encyclopedia_;
+	UI::UniqueWindow::Registry message_menu_;
 };
 
 

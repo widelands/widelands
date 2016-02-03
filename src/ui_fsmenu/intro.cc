@@ -23,13 +23,13 @@
 
 
 FullscreenMenuIntro::FullscreenMenuIntro()
-	: FullscreenMenuBase("splash.jpg"),
+	: FullscreenMenuBase("images/loadscreens/splash.jpg"),
 
 // Text area
 m_message
 	(this,
 	 get_w() / 2, get_h() * 19 / 20,
-	 _("Press any key or click to continue ..."), UI::Align_HCenter)
+	 _("Press any key or click to continue ..."), UI::Align::kHCenter)
 {
 	m_message.set_font(ui_fn(), fs_small() * 6 / 5, RGBColor(192, 192, 128));
 }

@@ -13,67 +13,78 @@
 from glob import glob
 from itertools import takewhile
 import os
-import string
 import subprocess
 import sys
+from time import strftime,gmtime
 
-from lua_xgettext import Lua_GetText
-import confgettext
+try:
+    maketrans = "".maketrans
+except AttributeError:
+    # fallback for python2
+    from string import maketrans
+
+from confgettext import Conf_GetText
 
 # Holds the names of non-iterative catalogs to build and the
 # corresponding source paths list. Note that paths MUST be relative to po/pot,
 # to let .po[t] comments point to somewhere useful
 MAINPOTS = [
     ( "maps/maps", [
-        "../../maps/*/elemental",
-        "../../maps/*/*/elemental",
-        "../../campaigns/*.conf",
-        "../../campaigns/*/elemental"
+        "../../data/maps/*/elemental",
+        "../../data/maps/*/*/elemental",
+        "../../data/campaigns/*.conf",
+        "../../data/campaigns/*/elemental"
     ] ),
-    ( "texts/texts", ["../../txts/*.lua",
-                  "../../txts/tips/*.tip"] ),
+    ( "texts/texts", ["../../data/txts/*.lua",
+                  "../../data/txts/tips/*.tip"] ),
     ( "widelands/widelands", [
                     "../../src/wlapplication.cc",
                     "../../src/*/*.cc",
                     "../../src/*/*/*.cc",
+                    "../../src/*/*/*/*.cc",
+                    "../../src/*/*/*/*/*.cc",
+                    "../../src/*/*/*/*/*/*.cc",
                     "../../src/wlapplication.h",
                     "../../src/*/*.h",
                     "../../src/*/*/*.h",
-                    "../../scripting/widelands/*.lua",
+                    "../../src/*/*/*/*.h",
+                    "../../src/*/*/*/*/*.h",
+                    "../../src/*/*/*/*/*/*.h",
+                    "../../data/scripting/widelands/*.lua",
     ] ),
     ( "widelands_console/widelands_console", [
                     "../../src/wlapplication_messages.cc",
                     "../../src/wlapplication_messages.h",
     ] ),
     ( "win_conditions/win_conditions", [
-        "../../scripting/win_conditions/*.lua",
-        "../../scripting/win_condition_texts.lua",
+        "../../data/scripting/win_conditions/*.lua",
+        "../../data/scripting/win_condition_texts.lua",
     ]),
     ("world/world", [
-        "../../world/*.lua",
-        "../../world/*/*.lua",
-        "../../world/*/*/*.lua",
-        "../../world/*/*/*/*.lua",
-        "../../world/*/*/*/*/*.lua",
-        "../../world/*/*/*/*/*/*.lua",
+        "../../data/world/*.lua",
+        "../../data/world/*/*.lua",
+        "../../data/world/*/*/*.lua",
+        "../../data/world/*/*/*/*.lua",
+        "../../data/world/*/*/*/*/*.lua",
+        "../../data/world/*/*/*/*/*/*.lua",
     ]),
     ("tribes/tribes", [
-        "../../tribes/scripting/starting_conditions/*/*.lua",
-        "../../tribes/*.lua",
-        "../../tribes/*/init.lua",
-        "../../tribes/*/*/init.lua",
-        "../../tribes/*/*/*/init.lua",
-        "../../tribes/*/*/*/*/init.lua",
-        "../../tribes/*/*/*/*/*/init.lua",
+        "../../data/tribes/scripting/starting_conditions/*/*.lua",
+        "../../data/tribes/*.lua",
+        "../../data/tribes/*/init.lua",
+        "../../data/tribes/*/*/init.lua",
+        "../../data/tribes/*/*/*/init.lua",
+        "../../data/tribes/*/*/*/*/init.lua",
+        "../../data/tribes/*/*/*/*/*/init.lua",
     ]),
 
     ("tribes_encyclopedia/tribes_encyclopedia", [
-        "../../tribes/scripting/help/*.lua",
-        "../../tribes/*/helptexts.lua",
-        "../../tribes/*/*/helptexts.lua",
-        "../../tribes/*/*/*/helptexts.lua",
-        "../../tribes/*/*/*/*/helptexts.lua",
-        "../../tribes/*/*/*/*/*/helptexts.lua",
+        "../../data/tribes/scripting/help/*.lua",
+        "../../data/tribes/*/helptexts.lua",
+        "../../data/tribes/*/*/helptexts.lua",
+        "../../data/tribes/*/*/*/helptexts.lua",
+        "../../data/tribes/*/*/*/*/helptexts.lua",
+        "../../data/tribes/*/*/*/*/*/helptexts.lua",
     ]),
 ]
 
@@ -92,18 +103,18 @@ MAINPOTS = [
 # For every instance found of a given type, '%s' in this values is replaced
 # with the name of the instance.
 ITERATIVEPOTS = [
-    ("scenario_%(name)s/scenario_%(name)s", "campaigns/",
-         ["../../campaigns/%(name)s/extra_data",
-          "../../campaigns/%(name)s/objective",
-          "../../campaigns/%(name)s/scripting/*.lua",
-          "../../scripting/format_scenario.lua"
+    ("scenario_%(name)s/scenario_%(name)s", "data/campaigns/",
+         ["../../data/campaigns/%(name)s/extra_data",
+          "../../data/campaigns/%(name)s/objective",
+          "../../data/campaigns/%(name)s/scripting/*.lua",
+          "../../data/scripting/format_scenario.lua"
          ]
     ),
-    ("map_%(name)s/map_%(name)s", "maps/",
-         [ "../../maps/%(name)s/scripting/*.lua", ]
+    ("map_%(name)s/map_%(name)s", "data/maps/",
+         [ "../../data/maps/%(name)s/scripting/*.lua", ]
     ),
-    ("mp_scenario_%(name)s/mp_scenario_%(name)s", "maps/MP Scenarios/",
-         [ "../../maps/MP Scenarios/%(name)s/scripting/*.lua", ]
+    ("mp_scenario_%(name)s/mp_scenario_%(name)s", "data/maps/MP_Scenarios/",
+         [ "../../data/maps/MP_Scenarios/%(name)s/scripting/*.lua", ]
     ),
 ]
 
@@ -115,6 +126,36 @@ XGETTEXTOPTS+=" -F -c\"* TRANSLATORS\""
 XGETTEXTOPTS+=" --copyright-holder=\"Widelands Development Team\""
 XGETTEXTOPTS+=" --msgid-bugs-address=\"https://bugs.launchpad.net/widelands\""
 
+# Options for xgettext when parsing Lua scripts
+# Official Lua backend of xgettext does not support pgettext and npgettext right
+# off the bat and also expects keywords (besides _) to be prefixed with 'gettext.',
+# so we need to specify the keywords we need ourselves.
+LUAXGETTEXTOPTS ="-k" # Remove known keywords
+LUAXGETTEXTOPTS+=" --keyword=_ --flag=_:1:pass-lua-format"
+LUAXGETTEXTOPTS+=" --keyword=ngettext:1,2 --flag=ngettext:1:pass-lua-format --flag=ngettext:2:pass-lua-format"
+LUAXGETTEXTOPTS+=" --keyword=pgettext:1c,2 --flag=pgettext:2:pass-lua-format"
+LUAXGETTEXTOPTS+=" --keyword=npgettext:1c,2,3 --flag=npgettext:2:pass-lua-format --flag=npgettext:3:pass-lua-format"
+LUAXGETTEXTOPTS+=" --language=Lua --from-code=UTF-8 -F -c\" TRANSLATORS:\""
+
+time_now = gmtime()
+# This is the header used for Lua+conf potfiles.
+# Set it to something sensible, as much as is possible here.
+HEAD =  "# Widelands PATH/TO/FILE.PO\n"
+HEAD += "# Copyright (C) 2005-" + strftime("%Y", time_now) + " Widelands Development Team\n"
+HEAD += "# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.\n"
+HEAD += "#\n"
+HEAD += "msgid \"\"\n"
+HEAD += "msgstr \"\"\n"
+HEAD += "\"Project-Id-Version: Widelands svnVERSION\\n\"\n"
+HEAD += "\"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\\n\"\n"
+HEAD += "\"POT-Creation-Date: " + strftime("%Y-%m-%d %H:%M+0000", time_now) + "\\n\"\n"
+HEAD += "\"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\\n\"\n"
+HEAD += "\"Last-Translator: FULL NAME <EMAIL@ADDRESS>\\n\"\n"
+HEAD += "\"Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\\n\"\n"
+HEAD += "\"MIME-Version: 1.0\\n\"\n"
+HEAD += "\"Content-Type: text/plain; charset=UTF-8\\n\"\n"
+HEAD += "\"Content-Transfer-Encoding: 8bit\\n\"\n"
+HEAD += "\n"
 
 def are_we_in_root_directory():
     """Make sure we are called in the root directory"""
@@ -133,6 +174,61 @@ def do_makedirs( dirs ):
     except:
         pass
 
+def pot_modify_header( potfile_in, potfile_out, header ):
+    """
+    Modify the header of a translation catalog read from potfile_in to
+    the given header and write out the modified catalog to potfile_out.
+
+    Returns whether or not the header was successfully modified.
+
+    Note: potfile_in and potfile_out must not point to the same file!
+    """
+    class State:
+        (start,
+         possibly_empty_msgid,
+         search_for_empty_line,
+         header_traversed) = range(4)
+
+    st = State.start
+    with open(potfile_in, "rt") as potin:
+        for line in potin:
+            line = line.strip()
+
+            if st == State.start:
+                if line.startswith("msgid \"\""):
+                    st = State.possibly_empty_msgid
+                elif line.startswith("msgid"):
+                    # The first entry is not a header entry,
+                    # since msgid is not empty.
+                    return False
+            elif st == State.possibly_empty_msgid:
+                if line.startswith("msgstr"):
+                    # msgstr right after msgid "", which means msgid must
+                    # be empty, therefore we have reached the header entry
+                    st = State.search_for_empty_line
+                else:
+                    # Header check failed.
+                    return False
+            elif st == State.search_for_empty_line:
+                if not line:
+                    st = State.header_traversed
+                    break;
+
+        if st != State.header_traversed:
+            return False
+
+        with open(potfile_out, "wt") as potout:
+            potout.write(header)
+            potout.writelines(potin)
+
+        return True
+
+def run_msguniq(potfile):
+    msguniq_rv = os.system("msguniq \"%s\" -F --output-file=\"%s\"" % (potfile, potfile))
+    if (msguniq_rv):
+        sys.stderr.write("msguniq exited with errorcode %i\n" % msguniq_rv)
+        return False
+    return True
 
 def do_compile( potfile, srcfiles ):
     """
@@ -148,19 +244,60 @@ def do_compile( potfile, srcfiles ):
         os.path.splitext(f)[-1].lower() == '.lua' ])
     conf_files = files - lua_files
 
-    l = Lua_GetText()
-    for fname in lua_files:
-        l.parse(open(fname, "r").read(), fname)
+    temp_potfile = potfile + ".tmp"
 
-    l.merge(confgettext.parse_conf(conf_files))
+    if (os.path.exists(temp_potfile)): os.remove(temp_potfile)
 
-    if not l.found_something_to_translate:
+    # Find translatable strings in Lua files using xgettext
+    xgettext = subprocess.Popen("xgettext %s --files-from=- --output=\"%s\"" % \
+        (LUAXGETTEXTOPTS, temp_potfile), shell=True, stdin=subprocess.PIPE, universal_newlines=True)
+    try:
+        for fname in lua_files:
+            xgettext.stdin.write(os.path.normpath(fname) + "\n")
+        xgettext.stdin.close()
+    except IOError as err_msg:
+        sys.stderr.write("Failed to call xgettext: %s\n" % err_msg)
         return False
 
-    with open(potfile, "w") as potfileobject:
-        potfileobject.write(str(l))
-        potfileobject.close()
+    xgettext_status = xgettext.wait()
+    if (xgettext_status != 0):
+        sys.stderr.write("xgettext exited with errorcode %i\n" % xgettext_status)
+        return False
+
+    xgettext_found_something_to_translate = os.path.exists(temp_potfile)
+
+    # Find translatable strings in configuration files
+    conf = Conf_GetText()
+    conf.parse(conf_files)
+
+    if not (xgettext_found_something_to_translate or conf.found_something_to_translate):
+        # Found no translatable strings
+        return False
+
+    if (xgettext_found_something_to_translate):
+        header_fixed = pot_modify_header(temp_potfile, potfile, HEAD)
+        os.remove(temp_potfile)
+
+        if not header_fixed:
+            return False
+
+        if (conf.found_something_to_translate):
+            # Merge the conf POT with Lua POT
+            with open(potfile, "at") as p:
+                p.write("\n" + conf.toString())
+
+            if not run_msguniq(potfile):
+                return False
+    elif (conf.found_something_to_translate):
+        with open(potfile, "wt") as p:
+            p.write(HEAD + conf.toString())
+
+        # Msguniq is run here only to sort POT entries by file
+        if not run_msguniq(potfile):
+            return False
+
     return True
+
 
 
 def do_compile_src( potfile, srcfiles ):
@@ -170,7 +307,7 @@ def do_compile_src( potfile, srcfiles ):
     """
     # call xgettext and supply source filenames via stdin
     gettext_input = subprocess.Popen("xgettext %s --files-from=- --output=%s" % \
-            (XGETTEXTOPTS, potfile), shell=True, stdin=subprocess.PIPE).stdin
+            (XGETTEXTOPTS, potfile), shell=True, stdin=subprocess.PIPE, universal_newlines=True).stdin
     try:
         for one_pattern in srcfiles:
             # 'normpath' is necessary for windows ('/' vs. '\')
@@ -223,7 +360,7 @@ def do_update_potfiles():
         # Generate .pot catalogs
         dangerous_chars = "'\" " # Those chars are replaced via '_'
         for pot, srcfiles in potfiles:
-            pot = pot.lower().translate(string.maketrans(dangerous_chars, len(dangerous_chars)*"_"))
+            pot = pot.lower().translate(maketrans(dangerous_chars, len(dangerous_chars)*"_"))
             path = os.path.normpath("po/" + os.path.dirname(pot))
             do_makedirs(path)
             oldcwd = os.getcwd()

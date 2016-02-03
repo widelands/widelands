@@ -22,14 +22,14 @@
 #include <boost/format.hpp>
 
 #include "logic/cmd_luacoroutine.h"
-#include "logic/critter.h"
 #include "logic/findimmovable.h"
 #include "logic/game.h"
 #include "logic/game_controller.h"
-#include "logic/immovable.h"
-#include "logic/tribes/tribe_descr.h"
-#include "logic/tribes/tribes.h"
-#include "logic/world/world.h"
+#include "logic/map_objects/immovable.h"
+#include "logic/map_objects/tribes/tribe_descr.h"
+#include "logic/map_objects/tribes/tribes.h"
+#include "logic/map_objects/world/critter.h"
+#include "logic/map_objects/world/world.h"
 #include "scripting/globals.h"
 #include "scripting/lua_coroutine.h"
 #include "scripting/lua_editor.h"
@@ -349,7 +349,7 @@ void LuaWorld::__unpersist(lua_State*) {
 
 		Adds a new resource type that can be in the different maps. Takes a
 		single argument, a table with the descriptions for the resource type. See the
-		files in world/ for usage examples.
+		files in data/world/ for usage examples.
 
 		:returns: :const:`nil`
 */
@@ -372,7 +372,7 @@ int LuaWorld::new_resource_type(lua_State* L) {
 	.. method:: new_terrain_type(table)
 
 		Adds a new terrain type that can be used in maps. Takes a single
-		argument, a table with the descriptions for the terrain type. See the files in world/
+		argument, a table with the descriptions for the terrain type. See the files in data/world/
 		for usage examples.
 
 		:returns: :const:`nil`
@@ -396,7 +396,7 @@ int LuaWorld::new_terrain_type(lua_State * L) {
 	.. method:: new_critter_type(table)
 
 		Adds a new critter type that can be used in maps. Takes a single
-		argument, a table with the description. See the files in world/ for usage
+		argument, a table with the description. See the files in data/world/ for usage
 		examples.
 
 		:returns: :const:`nil`
@@ -419,7 +419,7 @@ int LuaWorld::new_critter_type(lua_State * L) {
 	.. method:: new_immovable_type(table)
 
 		Adds a new immovable type that can be used in maps. Takes a single
-		argument, a table with the description. See the files in world/ for usage
+		argument, a table with the description. See the files in data/world/ for usage
 		examples.
 
 		:returns: :const:`nil`
@@ -443,7 +443,7 @@ int LuaWorld::new_immovable_type(lua_State* L) {
 
 		Adds a new editor category that can be used to classify objects in the
 		world. This will be used to sort them into sub menus in the editor. See
-		usage examples in world/.
+		usage examples in data/world/.
 
 		:returns: :const:`nil`
 */

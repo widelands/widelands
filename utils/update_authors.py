@@ -11,14 +11,13 @@ import sys
 # It then collects all other contributors from ../txts/developers.json,
 # adds the translators at the hook "Translators"
 # and writes the translator and developer credits to ./txts/developers.lua
-# The locale information is written to ../i18n/locales.lua.
-
+# The locale information is written to ../data/i18n/locales.lua.
 
 base_path = os.path.abspath(os.path.join(os.path.dirname(__file__),os.path.pardir))
 
 print("Reading locales from JSON:")
 
-source_path = os.path.normpath(base_path + "/i18n/locales")
+source_path = os.path.normpath(base_path + "/data/i18n/locales")
 
 if (not os.path.isdir(source_path)):
 	print("Error: Path " + source_path + " not found.")
@@ -88,12 +87,12 @@ lua_locales += "}\n"
 
 print("Writing locales\n")
 dest_filename = "locales.lua"
-dest_filepath = os.path.normpath(base_path + "/i18n") + "/" + dest_filename
+dest_filepath = os.path.normpath(base_path + "/data/i18n") + "/" + dest_filename
 dest_file = codecs.open(dest_filepath, encoding='utf-8', mode='w')
 dest_file.write(lua_locales)
 
 print("Reading developers from JSON")
-source_path = os.path.normpath(base_path + "/txts")
+source_path = os.path.normpath(base_path + "/data/txts")
 
 if (not os.path.isdir(source_path)):
 	print("Error: Path " + source_path + " not found.")

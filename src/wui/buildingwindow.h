@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2010, 2012 by the Widelands Development Team
+ * Copyright (C) 2002-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,9 +22,10 @@
 
 #include <cstdlib>
 
-#include "wui/interactive_gamebase.h"
 #include "ui_basic/button.h"
 #include "ui_basic/window.h"
+#include "wui/field_overlay_manager.h"
+#include "wui/interactive_gamebase.h"
 #include "wui/waresdisplay.h"
 
 /**
@@ -44,7 +45,7 @@ struct BuildingWindow : public UI::Window {
 
 	virtual ~BuildingWindow();
 
-	Widelands::Building & building() {return m_building;}
+	Widelands::Building & building() {return building_;}
 
 	InteractiveGameBase & igbase() const {
 		return dynamic_cast<InteractiveGameBase&>(*get_parent());
@@ -52,10 +53,10 @@ struct BuildingWindow : public UI::Window {
 
 	void draw(RenderTarget &) override;
 	void think() override;
-	void set_avoid_fastclick(bool afc) {m_avoid_fastclick = afc;}
+	void set_avoid_fastclick(bool afc) {avoid_fastclick_ = afc;}
 
 protected:
-	UI::TabPanel * get_tabs() {return m_tabs;}
+	UI::TabPanel * get_tabs() {return tabs_;}
 
 	void act_bulldoze();
 	void act_dismantle();
@@ -74,23 +75,23 @@ protected:
 
 	virtual void create_capsbuttons(UI::Box * buttons);
 
-	UI::Window * & m_registry;
+	UI::Window * & registry_;
 
 private:
-	Widelands::Building& m_building;
+	Widelands::Building& building_;
 
-	UI::TabPanel * m_tabs;
+	UI::TabPanel * tabs_;
 
-	UI::Box * m_capsbuttons; ///< \ref UI::Box that contains capabilities buttons
-	UI::Button * m_toggle_workarea;
+	UI::Box * capsbuttons_; ///< \ref UI::Box that contains capabilities buttons
+	UI::Button * toggle_workarea_;
 
 	//  capabilities that were last used in setting up the caps panel
-	uint32_t m_capscache;
-	Widelands::PlayerNumber m_capscache_player_number;
-	bool m_caps_setup;
+	uint32_t capscache_;
+	Widelands::PlayerNumber capscache_player_number_;
+	bool caps_setup_;
 
-	OverlayManager::JobId m_workarea_job_id;
-	bool m_avoid_fastclick;
+	FieldOverlayManager::OverlayId workarea_overlay_id_;
+	bool avoid_fastclick_;
 };
 
 #endif  // end of include guard: WL_WUI_BUILDINGWINDOW_H

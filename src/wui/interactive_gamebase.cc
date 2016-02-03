@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2011 by the Widelands Development Team
+ * Copyright (C) 2007-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -30,8 +30,8 @@
 #include "logic/game.h"
 #include "logic/game_controller.h"
 #include "logic/map.h"
+#include "logic/map_objects/tribes/ship.h"
 #include "logic/player.h"
-#include "logic/ship.h"
 #include "profile/profile.h"
 #include "wui/game_summary.h"
 
@@ -51,26 +51,20 @@ InteractiveGameBase::InteractiveGameBase
 	 PlayerType pt, bool const chatenabled, bool const multiplayer)
 	:
 	InteractiveBase(_game, global_s),
-	m_chatProvider(nullptr),
-	m_building_census_format
-		(global_s.get_string("building_census_format",       "%N")),
-	m_building_statistics_format
-		(global_s.get_string("building_statistics_format",   "%t")),
-	m_building_tooltip_format
-		(global_s.get_string("building_tooltip_format",      "%r")),
-	m_chatenabled(chatenabled),
-	m_multiplayer(multiplayer),
-	m_playertype(pt),
+	chat_provider_(nullptr),
+	chatenabled_(chatenabled),
+	multiplayer_(multiplayer),
+	playertype_(pt),
 
 #define INIT_BTN(picture, name, tooltip)                            \
  TOOLBAR_BUTTON_COMMON_PARAMETERS(name),                                      \
- g_gr->images().get("pics/" picture ".png"),                      \
+ g_gr->images().get("images/" picture ".png"),                      \
  tooltip                                                                      \
 
-	m_toggle_buildhelp
-		(INIT_BTN("menu_toggle_buildhelp", "buildhelp", _("Show Building Spaces (on/off)")))
+	toggle_buildhelp_
+		(INIT_BTN("wui/menus/menu_toggle_buildhelp", "buildhelp", _("Show Building Spaces (on/off)")))
 {
-	m_toggle_buildhelp.sigclicked.connect(boost::bind(&InteractiveGameBase::toggle_buildhelp, this));
+	toggle_buildhelp_.sigclicked.connect(boost::bind(&InteractiveGameBase::toggle_buildhelp, this));
 }
 
 /// \return a pointer to the running \ref Game instance.
@@ -87,15 +81,15 @@ Widelands::Game & InteractiveGameBase::    game() const
 
 void InteractiveGameBase::set_chat_provider(ChatProvider & chat)
 {
-	m_chatProvider = &chat;
-	m_chatOverlay->set_chat_provider(chat);
+	chat_provider_ = &chat;
+	chat_overlay_->set_chat_provider(chat);
 
-	m_chatenabled = true;
+	chatenabled_ = true;
 }
 
 ChatProvider * InteractiveGameBase::get_chat_provider()
 {
-	return m_chatProvider;
+	return chat_provider_;
 }
 
 void InteractiveGameBase::draw_overlay(RenderTarget& dst) {
@@ -123,7 +117,7 @@ void InteractiveGameBase::draw_overlay(RenderTarget& dst) {
 			dst.blit(Point(get_w() - 5,  5),
 						UI::g_fh1->render(game_speed),
 						BlendMode::UseAlpha,
-						UI::Align_TopRight);
+						UI::Align::kTopRight);
 		}
 	}
 }
@@ -135,29 +129,27 @@ void InteractiveGameBase::draw_overlay(RenderTarget& dst) {
  */
 void InteractiveGameBase::postload() {
 	Widelands::Map & map = egbase().map();
-	OverlayManager & overlay_manager = map.overlay_manager();
-	overlay_manager.show_buildhelp(false);
-	overlay_manager.register_overlay_callback_function
+	auto* overlay_manager = mutable_field_overlay_manager();
+	show_buildhelp(false);
+	toggle_buildhelp_.set_perm_pressed(buildhelp());
+
+	overlay_manager->register_overlay_callback_function
 			(boost::bind(&InteractiveGameBase::calculate_buildcaps, this, _1));
 
-	// Connect buildhelp button to reflect build help state. Needs to be
-	// done here rather than in the constructor as the map is not present then.
-	// This code assumes that the InteractivePlayer object lives longer than
-	// the overlay_manager. Otherwise remove the hook in the deconstructor.
-	egbase().map().overlay_manager().onBuildHelpToggle =
-		boost::bind(&UI::Button::set_perm_pressed, &m_toggle_buildhelp, _1);
-	m_toggle_buildhelp.set_perm_pressed(buildhelp());
 
 	// Recalc whole map for changed owner stuff
 	map.recalc_whole_map(egbase().world());
 
 	// Close game-relevant UI windows (but keep main menu open)
-	delete m_fieldaction.window;
-	m_fieldaction.window = nullptr;
+	delete fieldaction_.window;
+	fieldaction_.window = nullptr;
 
 	hide_minimap();
 }
 
+void InteractiveGameBase::on_buildhelp_changed(const bool value) {
+	toggle_buildhelp_.set_perm_pressed(value);
+}
 
 /**
  * See if we can reasonably open a ship window at the current selection position.
@@ -190,10 +182,10 @@ bool InteractiveGameBase::try_show_ship_window()
 void InteractiveGameBase::show_game_summary()
 {
 	game().game_controller()->set_desired_speed(0);
-	if (m_game_summary.window) {
-		m_game_summary.window->set_visible(true);
-		m_game_summary.window->think();
+	if (game_summary_.window) {
+		game_summary_.window->set_visible(true);
+		game_summary_.window->think();
 		return;
 	}
-	new GameSummaryScreen(this, &m_game_summary);
+	new GameSummaryScreen(this, &game_summary_);
 }

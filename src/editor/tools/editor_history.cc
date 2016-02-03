@@ -67,11 +67,11 @@ uint32_t EditorHistory::undo_action(const Widelands::World& world) {
 	m_redo_button.set_enabled(true);
 
 	return uac.tool.handle_undo(static_cast<EditorTool::ToolIndex>(uac.i),
-	                            uac.map,
 	                            world,
 	                            uac.center,
 	                            uac.parent,
-	                            *uac.args);
+	                            uac.args,
+								&(uac.map));
 }
 
 uint32_t EditorHistory::redo_action(const Widelands::World& world) {
@@ -86,11 +86,11 @@ uint32_t EditorHistory::redo_action(const Widelands::World& world) {
 	m_redo_button.set_enabled(!redo_stack.empty());
 
 	return rac.tool.handle_click(static_cast<EditorTool::ToolIndex>(rac.i),
-	                             rac.map,
 	                             world,
 	                             rac.center,
 	                             rac.parent,
-	                             *rac.args);
+	                             rac.args,
+								 &(rac.map));
 }
 
 uint32_t EditorHistory::do_action(EditorTool& tool,
@@ -131,14 +131,5 @@ uint32_t EditorHistory::do_action(EditorTool& tool,
 		m_undo_button.set_enabled(true);
 		m_redo_button.set_enabled(false);
 	}
-	return tool.handle_click(ind, map, world, center, parent, *ac.args);
-}
-
-
-void EditorHistory::reset()
-{
-	undo_stack.clear();
-	redo_stack.clear();
-	m_undo_button.set_enabled(false);
-	m_redo_button.set_enabled(false);
+	return tool.handle_click(ind, world, center, parent, ac.args, &map);
 }

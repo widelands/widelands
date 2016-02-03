@@ -111,7 +111,7 @@ void FontSet::parse_fontset(const std::string& fontset_name) {
 }
 
 
-// The documentation on the fonts fallback scheme is in the 'i18n/fonts.lua' data file.
+// The documentation on the fonts fallback scheme is in the 'data/i18n/fonts.lua' data file.
 void FontSet::set_fonts(const LuaTable& table, const std::string& fallback) {
 	set_font_group(table, "serif", fallback,
 						&serif_, &serif_bold_, &serif_italic_, &serif_bold_italic_);

@@ -28,23 +28,23 @@ namespace UI {
 Align mirror_alignment(Align alignment) {
 	if (UI::g_fh1->fontset()->is_rtl()) {
 		switch (alignment) {
-			case Align::Align_BottomLeft:
-				alignment = Align::Align_BottomRight;
+			case Align::kBottomLeft:
+				alignment = Align::kBottomRight;
 				break;
-			case Align::Align_BottomRight:
-				alignment = Align::Align_BottomLeft;
+			case Align::kBottomRight:
+				alignment = Align::kBottomLeft;
 				break;
-			case Align::Align_CenterLeft:
-				alignment = Align::Align_CenterRight;
+			case Align::kCenterLeft:
+				alignment = Align::kCenterRight;
 				break;
-			case Align::Align_CenterRight:
-				alignment = Align::Align_CenterLeft;
+			case Align::kCenterRight:
+				alignment = Align::kCenterLeft;
 				break;
-			case Align::Align_TopLeft:
-				alignment = Align::Align_TopRight;
+			case Align::kTopLeft:
+				alignment = Align::kTopRight;
 				break;
-			case Align::Align_TopRight:
-				alignment = Align::Align_TopLeft;
+			case Align::kTopRight:
+				alignment = Align::kTopLeft;
 				break;
 			default:
 				break;
@@ -55,18 +55,18 @@ Align mirror_alignment(Align alignment) {
 
 void correct_for_align(Align align, uint32_t w, uint32_t h, Point* pt) {
 	//Vertical Align
-	if (align & (Align_VCenter | Align_Bottom)) {
-		if (align & Align_VCenter)
+	if (static_cast<int>(align & (Align::kVCenter | Align::kBottom))) {
+		if (static_cast<int>(align & Align::kVCenter))
 			pt->y -= h / 2;
 		else
 			pt->y -= h;
 	}
 
 	//Horizontal Align
-	if ((align & Align_Horizontal) != Align_Left) {
-		if (align & Align_HCenter)
+	if ((align & Align::kHorizontal) != Align::kLeft) {
+		if (static_cast<int>(align & Align::kHCenter))
 			pt->x -= w / 2;
-		else if (align & Align_Right)
+		else if (static_cast<int>(align & Align::kRight))
 			pt->x -= w;
 	}
 }

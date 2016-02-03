@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006, 2008-2011, 2015 by the Widelands Development Team
+ * Copyright (C) 2002, 2006, 2008-2011, 2015-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -62,7 +62,7 @@ public:
 		(uint32_t width,
 		 const std::string & title = std::string(),
 		 const std::string & tooltip = std::string(),
-		 Align                                  = Align_Left,
+		 Align                                  = UI::Align::kLeft,
 		 bool                is_checkbox_column = false);
 
 	void set_column_title(uint8_t col, const std::string & title);
@@ -153,7 +153,7 @@ public:
 	/**
 	 * Compare the two items at the given indices in the list.
 	 *
-	 * \return \c true if the first item is strictly less than the second
+	 * return true if the first item is strictly less than the second
 	 */
 	using CompareFn = boost::function<bool (uint32_t, uint32_t)>;
 
@@ -170,7 +170,7 @@ public:
 		(uint32_t width,
 		 const std::string & title = std::string(),
 		 const std::string & tooltip = std::string(),
-		 Align                                  = Align_Left,
+		 Align                                  = UI::Align::kLeft,
 		 bool                is_checkbox_column = false);
 
 	void set_column_title(uint8_t col, const std::string & title);
@@ -257,10 +257,10 @@ private:
 	using Columns = std::vector<Column>;
 	struct Column {
 		Button                 * btn;
-		uint32_t                              width;
-		Align                                 alignment;
-		bool                                           is_checkbox_column;
-		CompareFn compare;
+		uint32_t                 width;
+		Align                    alignment;
+		bool                     is_checkbox_column;
+		CompareFn                compare;
 	};
 
 	static const int32_t ms_darken_value = -20;

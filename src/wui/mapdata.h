@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2009, 2011, 2014-2015 by the Widelands Development Team
+ * Copyright (C) 2002-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -36,8 +36,8 @@
  * Author data for a map or scenario.
  */
 struct MapAuthorData {
-	const std::string& get_names() const {return m_names;}
-	size_t get_number()            const {return m_number;}
+	const std::string& get_names() const {return names_;}
+	size_t get_number()            const {return number_;}
 
 	// Parses author list string into localized contatenated list
 	// string. Use , as list separator and no whitespaces between
@@ -45,13 +45,13 @@ struct MapAuthorData {
 	MapAuthorData(const std::string& author_list) {
 		std::vector<std::string> authors;
 		boost::split(authors, author_list, boost::is_any_of(","));
-		m_names = i18n::localize_list(authors, i18n::ConcatenateWith::AMPERSAND);
-		m_number = authors.size();
+		names_ = i18n::localize_list(authors, i18n::ConcatenateWith::AMPERSAND);
+		number_ = authors.size();
 	}
 
 private:
-	std::string m_names;
-	size_t      m_number;
+	std::string names_;
+	size_t      number_;
 };
 
 /**
@@ -112,6 +112,12 @@ struct MapData {
 		maptype = MapData::MapType::kDirectory;
 	}
 
+	/// The localized name of the parent directory
+	static const std::string parent_name() {
+		/** TRANSLATORS: Parent directory/folder */
+		return (boost::format("\\<%s\\>") % _("parent")).str();
+	}
+
 	/// Get the ".." directory
 	static MapData create_parent_dir(const std::string& current_dir) {
 #ifndef _WIN32
@@ -119,13 +125,13 @@ struct MapData {
 #else
 		const std::string filename = current_dir.substr(0, current_dir.rfind('\\'));
 #endif
-		return MapData(filename, (boost::format("\\<%s\\>") % _("parent")).str());
+		return MapData(filename, parent_name());
 	}
 
 	/// Create a subdirectory
 	static MapData create_directory(const std::string& directory) {
 		std::string localized_name;
-		if (boost::equals(directory, "maps/MP Scenarios")) {
+		if (boost::equals(directory, "maps/MP_Scenarios")) {
 			/** TRANSLATORS: Directory name for MP Scenarios in map selection */
 			localized_name = _("Multiplayer Scenarios");
 		} else {
@@ -149,20 +155,30 @@ struct MapData {
 	MapData::DisplayType displaytype;
 
 	bool compare_names(const MapData& other) {
+		// The parent directory gets special treatment.
+		if (localized_name == parent_name() && maptype == MapData::MapType::kDirectory) {
+			return true;
+		} else if (other.localized_name == parent_name() && other.maptype == MapData::MapType::kDirectory)  {
+			return false;
+		}
+
 		std::string this_name;
 		std::string other_name;
 		switch (displaytype) {
-			case MapData::DisplayType::kFilenames:
-				this_name = filename;
-				other_name = other.filename;
-				break;
-			case MapData::DisplayType::kMapnames:
-				this_name = name;
-				other_name = other.name;
+		case MapData::DisplayType::kFilenames:
+			this_name = filename;
+			other_name = other.filename;
 			break;
-			default:
-				this_name = localized_name;
-				other_name = other.localized_name;
+
+		case MapData::DisplayType::kMapnames:
+			this_name = name;
+			other_name = other.name;
+			break;
+
+		case MapData::DisplayType::kMapnamesLocalized:
+			this_name = localized_name;
+			other_name = other.localized_name;
+			break;
 		}
 
 		// If there is no width, we have a directory - we want them first.

@@ -24,6 +24,7 @@
 #include <boost/format.hpp>
 
 #include "base/i18n.h"
+#include "base/log.h"
 #include "base/wexception.h"
 #include "graphic/font_handler1.h"
 #include "graphic/text/font_set.h"
@@ -49,6 +50,9 @@ struct SpinBoxImpl {
 	/// Minimum and maximum that \ref value may reach
 	int32_t min;
 	int32_t max;
+
+	/// List of possible values for type kValueList
+	std::vector<int32_t> values;
 
 	/// The unit of the value
 	std::string unit;
@@ -82,22 +86,31 @@ SpinBox::SpinBox
 	 const std::string& label_text,
 	 const std::string& unit,
 	 const Image* background,
-	 bool const big)
+	 SpinBox::Type type,
+	 int32_t step_size, int32_t big_step_size)
 	:
 	Panel(parent, x, y, std::max(w, unit_w), 0),
-	big_(big),
+	type_(type),
 	sbi_(new SpinBoxImpl)
 {
+	if (type_ == SpinBox::Type::kValueList) {
+		sbi_->min   = 0;
+		sbi_->max   = 0;
+	} else {
+		sbi_->min   = minval;
+		sbi_->max   = maxval;
+	}
 	sbi_->value = startval;
-	sbi_->min   = minval;
-	sbi_->max   = maxval;
 	sbi_->unit  = unit;
 	sbi_->background = background;
 
+	bool is_big = type_ == SpinBox::Type::kBig;
+
 	uint32_t padding = 2;
 	uint32_t actual_w = std::max(w, unit_w);
-	uint32_t no_padding = (big_ ? 6 : 4);
-	uint32_t texth = UI::g_fh1->render(as_uifont("."))->height();
+	uint32_t no_padding = (is_big ? 6 : 4);
+	// Give some height margin = 2 to keep the label from generating a scrollbar.
+	uint32_t texth = UI::g_fh1->render(as_uifont("."))->height() + 2;
 	uint32_t buttonh = 20;
 
 	// 40 is an ad hoc width estimate for the MultilineTextarea scrollbar + a bit of text.
@@ -107,62 +120,65 @@ SpinBox::SpinBox
 					w, unit_w, no_padding, padding);
 	}
 
-#ifndef NDEBUG //  only in debug builds
-	if (unit_w < (big_ ? 7 * buttonh : 3 * buttonh)) {
-		throw wexception("Not enough space to draw spinbox. Width %d is smaller than required width %d",
-							  unit_w, (big_ ? 7 * buttonh : 3 * buttonh));
+	if (unit_w < (is_big ? 7 * buttonh : 3 * buttonh)) {
+		log("Not enough space to draw spinbox \"%s\".\n"
+			 "Width %d is smaller than required width %d."
+			 "Please report as a bug.\n",
+			 label_text.c_str(), unit_w, (is_big ? 7 * buttonh : 3 * buttonh));
 	}
-#endif
 
 	box_ = new UI::Box(this, 0, 0, UI::Box::Horizontal, actual_w, texth, padding);
 
-	// Find out how much height we need for the label. We give it 6 rows maximum.
-	const Image* rendered_text = UI::g_fh1->render(as_uifont(label_text));
-	uint32_t available_width = w - unit_w - no_padding * padding;
-	uint32_t extra_rows =
-			available_width > 0 ?
-				std::min(static_cast<int>(rendered_text->width() / available_width), 6) : 0;
+	UI::MultilineTextarea* label = new UI::MultilineTextarea(box_, 0, 0,
+																				w - unit_w - no_padding * padding, texth,
+																				label_text,
+																				UI::Align::kLeft,
+																				UI::MultilineTextarea::ScrollMode::kNoScrolling);
+	box_->add(label, UI::Align::kHCenter);
 
-	UI::MultilineTextarea* label = new UI::MultilineTextarea(box_, 0, 0, available_width,
-																				texth * (extra_rows + 1), label_text);
-
-	box_->add(label, UI::Box::AlignCenter);
-
-	sbi_->text = new UI::Textarea(box_, "", Align_Center);
+	sbi_->text = new UI::Textarea(box_, "", UI::Align::kCenter);
 
 	sbi_->button_minus =
 		new Button
 			(box_, "-",
 			 0, 0, buttonh, buttonh,
 			 sbi_->background,
-			 g_gr->images().get(big_? "pics/scrollbar_left.png" : "pics/scrollbar_down.png"),
+			 g_gr->images().get(is_big ?
+										  "images/ui_basic/scrollbar_left.png" :
+										  "images/ui_basic/scrollbar_down.png"),
 			 _("Decrease the value"));
 	sbi_->button_plus =
 		new Button
 			(box_, "+",
 			 0, 0, buttonh, buttonh,
 			 sbi_->background,
-			 g_gr->images().get(big_? "pics/scrollbar_right.png" : "pics/scrollbar_up.png"),
+			 g_gr->images().get(is_big ?
+										  "images/ui_basic/scrollbar_right.png" :
+										  "images/ui_basic/scrollbar_up.png"),
 			 _("Increase the value"));
 
-	if (big_) {
+	if (is_big) {
 		sbi_->button_ten_minus =
 			new Button
 				(box_, "--",
 				 0, 0, 2 * buttonh, buttonh,
 				 sbi_->background,
-				 g_gr->images().get("pics/scrollbar_left_fast.png"),
+				 g_gr->images().get("images/ui_basic/scrollbar_left_fast.png"),
 				 _("Decrease the value by 10"));
 		sbi_->button_ten_plus =
 			new Button
 				(box_, "++",
 				 0, 0, 2 * buttonh, buttonh,
 				 sbi_->background,
-				 g_gr->images().get("pics/scrollbar_right_fast.png"),
+				 g_gr->images().get("images/ui_basic/scrollbar_right_fast.png"),
 				 _("Increase the value by 10"));
 
-		sbi_->button_ten_plus->sigclicked.connect(boost::bind(&SpinBox::change_value, boost::ref(*this), 10));
-		sbi_->button_ten_minus->sigclicked.connect(boost::bind(&SpinBox::change_value, boost::ref(*this), -10));
+		sbi_->button_ten_plus->sigclicked.connect(boost::bind(&SpinBox::change_value,
+																				boost::ref(*this),
+																				big_step_size));
+		sbi_->button_ten_minus->sigclicked.connect(boost::bind(&SpinBox::change_value,
+																				 boost::ref(*this),
+																				 -1 * big_step_size));
 		sbi_->button_ten_plus->set_repeating(true);
 		sbi_->button_ten_minus->set_repeating(true);
 		buttons_.push_back(sbi_->button_ten_minus);
@@ -173,29 +189,33 @@ SpinBox::SpinBox
 											 - 2 * sbi_->button_minus->get_w()
 											 - 4 * padding);
 
-		box_->add(sbi_->button_ten_minus, UI::Box::AlignCenter);
-		box_->add(sbi_->button_minus, UI::Box::AlignCenter);
-		box_->add(sbi_->text, UI::Box::AlignCenter);
-		box_->add(sbi_->button_plus, UI::Box::AlignCenter);
-		box_->add(sbi_->button_ten_plus, UI::Box::AlignCenter);
+		box_->add(sbi_->button_ten_minus, UI::Align::kTop);
+		box_->add(sbi_->button_minus, UI::Align::kTop);
+		box_->add(sbi_->text, UI::Align::kTop);
+		box_->add(sbi_->button_plus, UI::Align::kTop);
+		box_->add(sbi_->button_ten_plus, UI::Align::kTop);
 	} else {
 		sbi_->text->set_fixed_width(unit_w - 2 * sbi_->button_minus->get_w() - 2 * padding);
 
-		box_->add(sbi_->button_minus, UI::Box::AlignCenter);
-		box_->add(sbi_->text, UI::Box::AlignCenter);
-		box_->add(sbi_->button_plus, UI::Box::AlignCenter);
+		box_->add(sbi_->button_minus, UI::Align::kHCenter);
+		box_->add(sbi_->text, UI::Align::kHCenter);
+		box_->add(sbi_->button_plus, UI::Align::kHCenter);
 	}
 
-	sbi_->button_plus->sigclicked.connect(boost::bind(&SpinBox::change_value, boost::ref(*this), 1));
-	sbi_->button_minus->sigclicked.connect(boost::bind(&SpinBox::change_value, boost::ref(*this), -1));
+	sbi_->button_plus->sigclicked.connect(boost::bind(&SpinBox::change_value, boost::ref(*this), step_size));
+	sbi_->button_minus->sigclicked.connect(boost::bind(&SpinBox::change_value,
+																		boost::ref(*this),
+																		-1 * step_size));
 	sbi_->button_plus->set_repeating(true);
 	sbi_->button_minus->set_repeating(true);
 	buttons_.push_back(sbi_->button_minus);
 	buttons_.push_back(sbi_->button_plus);
+
 	uint32_t box_height = std::max(label->get_h(), static_cast<int32_t>(buttonh));
 	box_->set_size(actual_w, box_height);
 	set_desired_size(actual_w, box_height);
 	set_size(actual_w, box_height);
+
 	update();
 }
 
@@ -219,13 +239,24 @@ void SpinBox::update()
 		}
 	}
 	if (!was_in_list) {
-		/** TRANSLATORS: %i = number, %s = unit, e.g. "5 pixels" in the advanced options */
-		sbi_->text->set_text((boost::format(_("%1$i %2$s")) % sbi_->value % sbi_->unit.c_str()).str());
+		if (type_ == SpinBox::Type::kValueList) {
+			if ((sbi_->value >= 0) && (sbi_->values.size() > static_cast<size_t>(sbi_->value))) {
+				/** TRANSLATORS: %i = number, %s = unit, e.g. "5 pixels" in the advanced options */
+				sbi_->text->set_text((boost::format(_("%1$i %2$s"))
+											 % sbi_->values.at(sbi_->value)
+											 % sbi_->unit.c_str()).str());
+			} else {
+				sbi_->text->set_text("undefined"); // The user should never see this, so we're not localizing
+			}
+		} else {
+			/** TRANSLATORS: %i = number, %s = unit, e.g. "5 pixels" in the advanced options */
+			sbi_->text->set_text((boost::format(_("%1$i %2$s")) % sbi_->value % sbi_->unit.c_str()).str());
+		}
 	}
 
 	sbi_->button_minus->set_enabled(sbi_->min < sbi_->value);
 	sbi_->button_plus ->set_enabled(sbi_->value < sbi_->max);
-	if (big_) {
+	if (type_ == SpinBox::Type::kBig) {
 		sbi_->button_ten_minus->set_enabled(sbi_->min < sbi_->value);
 		sbi_->button_ten_plus ->set_enabled(sbi_->value < sbi_->max);
 	}
@@ -251,6 +282,13 @@ void SpinBox::set_value(int32_t const value)
 		sbi_->value = sbi_->max;
 	else if (sbi_->value < sbi_->min)
 		sbi_->value = sbi_->min;
+	update();
+}
+
+void SpinBox::set_value_list(const std::vector<int32_t>& values) {
+	sbi_->values = values;
+	sbi_->min = 0;
+	sbi_->max = values.size() - 1;
 	update();
 }
 
@@ -283,15 +321,23 @@ void SpinBox::set_unit(const std::string & unit)
 /**
  * \returns the value
  */
-int32_t SpinBox::get_value()
+int32_t SpinBox::get_value() const
 {
-	return sbi_->value;
+	if (type_ == SpinBox::Type::kValueList) {
+		if ((sbi_->value >= 0) && (sbi_->values.size() > static_cast<size_t>(sbi_->value))) {
+			return sbi_->values.at(sbi_->value);
+		} else {
+			return -1;
+		}
+	} else {
+		return sbi_->value;
+	}
 }
 
 /**
  * \returns the unit
  */
-std::string SpinBox::get_unit()
+std::string SpinBox::get_unit() const
 {
 	return sbi_->unit;
 }

@@ -23,11 +23,11 @@
 #include "wui/waresqueuedisplay.h"
 
 #include "graphic/graphic.h"
-#include "logic/constructionsite.h"
+#include "logic/map_objects/tribes/constructionsite.h"
 #include "ui_basic/progressbar.h"
 #include "ui_basic/tabpanel.h"
 
-static const char pic_tab_wares[] = "pics/menu_tab_wares.png";
+static const char pic_tab_wares[] = "images/wui/buildings/menu_tab_wares.png";
 
 /**
  * Status window for construction sites.
@@ -61,7 +61,7 @@ ConstructionSiteWindow::ConstructionSiteWindow
 			 UI::ProgressBar::DefaultWidth, UI::ProgressBar::DefaultHeight,
 			 UI::ProgressBar::Horizontal);
 	m_progress->set_total(1 << 16);
-	box.add(m_progress, UI::Box::AlignCenter);
+	box.add(m_progress, UI::Align::kHCenter);
 
 	box.add_space(8);
 
@@ -69,7 +69,7 @@ ConstructionSiteWindow::ConstructionSiteWindow
 	for (uint32_t i = 0; i < cs.get_nrwaresqueues(); ++i)
 		box.add
 			(new WaresQueueDisplay(&box, 0, 0, igbase(), cs, cs.get_waresqueue(i)),
-			 UI::Box::AlignLeft);
+			 UI::Align::kLeft);
 
 
 	get_tabs()->add("wares", g_gr->images().get(pic_tab_wares), &box, _("Building materials"));

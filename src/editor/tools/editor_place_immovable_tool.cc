@@ -25,42 +25,42 @@
 #include "editor/editorinteractive.h"
 #include "logic/editor_game_base.h"
 #include "logic/field.h"
-#include "logic/immovable.h"
+#include "logic/map_objects/immovable.h"
 #include "logic/mapregion.h"
 
 /**
  * Choses an object to place randomly from all enabled
  * and places this on the current field
 */
-int32_t EditorPlaceImmovableTool::handle_click_impl(Widelands::Map& map,
-                                                       const Widelands::World&,
-                                                       Widelands::NodeAndTriangle<> const center,
-                                                       EditorInteractive& parent,
-                                                       EditorActionArgs& args) {
-	const int32_t radius = args.sel_radius;
+int32_t EditorPlaceImmovableTool::handle_click_impl(const Widelands::World&,
+                                                    Widelands::NodeAndTriangle<> const center,
+                                                    EditorInteractive& parent,
+                                                    EditorActionArgs* args,
+													Widelands::Map* map) {
+	const int32_t radius = args->sel_radius;
 	if (!get_nr_enabled())
 		return radius;
 	Widelands::EditorGameBase & egbase = parent.egbase();
-	if (args.oimmov_types.empty())
+	if (args->oimmov_types.empty())
 	{
 		Widelands::MapRegion<Widelands::Area<Widelands::FCoords> > mr
-		(map,
+		(*map,
 		 Widelands::Area<Widelands::FCoords>
-		 (map.get_fcoords(center.node), radius));
+		 (map->get_fcoords(center.node), radius));
 		do {
 			const Widelands::BaseImmovable * im = mr.location().field->get_immovable();
-			args.oimmov_types.push_back((im ? im->descr().name() : ""));
-			args.nimmov_types.push_back(get_random_enabled());
-		} while (mr.advance(map));
+			args->oimmov_types.push_back((im ? im->descr().name() : ""));
+			args->nimmov_types.push_back(get_random_enabled());
+		} while (mr.advance(*map));
 	}
 
-	if (!args.nimmov_types.empty())
+	if (!args->nimmov_types.empty())
 	{
 		Widelands::MapRegion<Widelands::Area<Widelands::FCoords> > mr
-		(map,
+		(*map,
 		 Widelands::Area<Widelands::FCoords>
-		 (map.get_fcoords(center.node), radius));
-		std::list<int32_t>::iterator i = args.nimmov_types.begin();
+		 (map->get_fcoords(center.node), radius));
+		std::list<int32_t>::iterator i = args->nimmov_types.begin();
 		do {
 			if
 			(!mr.location().field->get_immovable()
@@ -68,27 +68,26 @@ int32_t EditorPlaceImmovableTool::handle_click_impl(Widelands::Map& map,
 			        (mr.location().field->nodecaps() & Widelands::MOVECAPS_WALK))
 				egbase.create_immovable(mr.location(), *i);
 			++i;
-		} while (mr.advance(map));
+		} while (mr.advance(*map));
 	}
 	return radius + 2;
 }
 
-int32_t EditorPlaceImmovableTool::handle_undo_impl(
-   Widelands::Map& map,
-   const Widelands::World&,
-   Widelands::NodeAndTriangle<Widelands::Coords> center,
-   EditorInteractive& parent,
-   EditorActionArgs& args) {
-	const int32_t radius = args.sel_radius;
-	if (args.oimmov_types.empty())
+int32_t EditorPlaceImmovableTool::handle_undo_impl(const Widelands::World&,
+												   Widelands::NodeAndTriangle<Widelands::Coords> center,
+												   EditorInteractive& parent,
+												   EditorActionArgs* args,
+												   Widelands::Map* map) {
+	const int32_t radius = args->sel_radius;
+	if (args->oimmov_types.empty())
 		return radius;
 
 	Widelands::EditorGameBase & egbase = parent.egbase();
 	Widelands::MapRegion<Widelands::Area<Widelands::FCoords> > mr
-	(map,
+	(*map,
 	 Widelands::Area<Widelands::FCoords>
-	 (map.get_fcoords(center.node), radius));
-	std::list<std::string>::iterator i = args.oimmov_types.begin();
+	 (map->get_fcoords(center.node), radius));
+	std::list<std::string>::iterator i = args->oimmov_types.begin();
 	do {
 		if
 			(upcast(Widelands::Immovable, immovable,
@@ -100,7 +99,7 @@ int32_t EditorPlaceImmovableTool::handle_undo_impl(
 			egbase.create_immovable(mr.location(), *i);
 
 		++i;
-	} while (mr.advance(map));
+	} while (mr.advance(*map));
 	return radius + 2;
 }
 

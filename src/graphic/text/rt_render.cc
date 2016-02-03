@@ -34,6 +34,7 @@
 #include "base/macros.h"
 #include "base/point.h"
 #include "base/rect.h"
+#include "base/wexception.h"
 #include "graphic/align.h"
 #include "graphic/image_cache.h"
 #include "graphic/image_io.h"
@@ -42,6 +43,7 @@
 #include "graphic/text/font_set.h"
 #include "graphic/text/rt_parse.h"
 #include "graphic/text/textstream.h"
+#include "graphic/text_layout.h"
 #include "graphic/texture.h"
 #include "io/filesystem/filesystem_exceptions.h"
 
@@ -219,8 +221,8 @@ uint16_t Layout::m_fit_line(uint16_t w, const Borders& p, vector<RenderNode*>* r
 		}
 	} else {
 		// Take last elements style in this line and check horizontal alignment
-		if (!rv->empty() && (*rv->rbegin())->halign() != UI::Align::Align_Left) {
-			if ((*rv->rbegin())->halign() == UI::Align::Align_Center) {
+		if (!rv->empty() && (*rv->rbegin())->halign() != UI::Align::kLeft) {
+			if ((*rv->rbegin())->halign() == UI::Align::kCenter) {
 				rem_space /= 2;  // Otherwise, we align right
 			}
 			for (RenderNode* node : *rv)  {
@@ -266,9 +268,9 @@ uint16_t Layout::fit_nodes(vector<RenderNode*>& rv, uint16_t w, Borders p, bool 
 		// Go over again and adjust position for VALIGN
 		for (RenderNode* n : nodes_in_line) {
 			uint16_t space = line_height - n->height();
-			if (!space || n->valign() == UI::Align::Align_Bottom)
+			if (!space || n->valign() == UI::Align::kBottom)
 				continue;
-			if (n->valign() == UI::Align::Align_Center)
+			if (n->valign() == UI::Align::kCenter)
 				space /= 2;
 			n->set_y(n->y() - space);
 		}
@@ -347,15 +349,15 @@ TextNode::TextNode(IFont& font, NodeStyle& ns, const string& txt)
 uint16_t TextNode::hotspot_y() {
 	return m_font.ascent(m_s.font_style);
 }
+
 Texture* TextNode::render(TextureCache* texture_cache) {
 	const Texture& img = m_font.render(m_txt, m_s.font_color, m_s.font_style, texture_cache);
 	Texture* rv = new Texture(img.width(), img.height());
-	blit(Rect(0, 0, img.width(), img.height()),
-	     img,
-	     Rect(0, 0, img.width(), img.height()),
-	     1.,
-	     BlendMode::Copy,
-	     rv);
+	rv->blit(Rect(0, 0, img.width(), img.height()),
+	         img,
+	         Rect(0, 0, img.width(), img.height()),
+	         1.,
+	         BlendMode::Copy);
 	return rv;
 }
 
@@ -383,7 +385,7 @@ Texture* FillingTextNode::render(TextureCache* texture_cache) {
 	Texture* rv = new Texture(m_w, m_h);
 	for (uint16_t curx = 0; curx < m_w; curx += t.width()) {
 		Rect srcrect(Point(0, 0), min<int>(t.width(), m_w - curx), m_h);
-		blit(Rect(curx, 0, srcrect.w, srcrect.h), t, srcrect, 1., BlendMode::Copy, rv);
+		rv->blit(Rect(curx, 0, srcrect.w, srcrect.h), t, srcrect, 1., BlendMode::Copy);
 	}
 	return rv;
 }
@@ -400,7 +402,7 @@ public:
 	Texture* render(TextureCache* texture_cache) override {
 		if (m_show_spaces) {
 			Texture* rv = new Texture(m_w, m_h);
-			fill_rect(Rect(0, 0, m_w, m_h), RGBAColor(0xff, 0, 0, 0xff), rv);
+			rv->fill_rect(Rect(0, 0, m_w, m_h), RGBAColor(0xcc, 0, 0, 0xcc));
 			return rv;
 		}
 		return TextNode::render(texture_cache);
@@ -423,8 +425,7 @@ public:
 	uint16_t width() override {return INFINITE_WIDTH; }
 	uint16_t hotspot_y() override {return 0;}
 	Texture* render(TextureCache* /* texture_cache */) override {
-		assert(false);
-		throw RenderError("This should never be called. This is a bug, please submit a report.");
+		NEVER_HERE();
 	}
 	bool is_non_mandatory_space() override {return true;}
 };
@@ -452,10 +453,10 @@ public:
 				dst.y = 0;
 				srcrect.w = dst.w = min<int>(m_bg->width(), m_w - curx);
 				srcrect.h = dst.h = m_h;
-				blit(dst, *m_bg, srcrect, 1., BlendMode::Copy, rv);
+				rv->blit(dst, *m_bg, srcrect, 1., BlendMode::Copy);
 			}
 		} else {
-			fill_rect(Rect(0, 0, m_w, m_h), RGBAColor(255, 255, 255, 0), rv);
+			rv->fill_rect(Rect(0, 0, m_w, m_h), RGBAColor(255, 255, 255, 0));
 		}
 		return rv;
 	}
@@ -492,12 +493,12 @@ public:
 	uint16_t hotspot_y() override {return height();}
 	Texture* render(TextureCache* texture_cache) override {
 		Texture* rv = new Texture(width(), height());
-		fill_rect(Rect(0, 0, rv->width(), rv->height()), RGBAColor(255, 255, 255, 0), rv);
+		rv->fill_rect(Rect(0, 0, rv->width(), rv->height()), RGBAColor(255, 255, 255, 0));
 
 		// Draw Solid background Color
 		bool set_alpha = true;
 		if (m_bg_clr_set) {
-			fill_rect(Rect(Point(m_margin.left, m_margin.top), m_w, m_h), m_bg_clr, rv);
+			rv->fill_rect(Rect(Point(m_margin.left, m_margin.top), m_w, m_h), m_bg_clr);
 			set_alpha = false;
 		}
 
@@ -512,7 +513,7 @@ public:
 					dst.y = cury;
 					src.w = dst.w = min<int>(m_bg_img->width(), m_w + m_margin.left - curx);
 					src.h = dst.h = min<int>(m_bg_img->height(), m_h + m_margin.top - cury);
-					blit(dst, *m_bg_img, src, 1., BlendMode::Copy, rv);
+					rv->blit(dst, *m_bg_img, src, 1., BlendMode::Copy);
 				}
 			}
 			set_alpha = false;
@@ -527,7 +528,7 @@ public:
 				                node_texture->height());
 				Rect src = Rect(0, 0, node_texture->width(), node_texture->height());
 
-				blit(dst, *node_texture, src, 1., set_alpha ? BlendMode::Copy : BlendMode::UseAlpha, rv);
+				rv->blit(dst, *node_texture, src, 1., set_alpha ? BlendMode::Copy : BlendMode::UseAlpha);
 				delete node_texture;
 			}
 			delete n;
@@ -578,11 +579,11 @@ private:
 
 Texture* ImgRenderNode::render(TextureCache* /* texture_cache */) {
 	Texture* rv = new Texture(m_image.width(), m_image.height());
-	blit(Rect(0, 0, m_image.width(), m_image.height()),
+	rv->blit(Rect(0, 0, m_image.width(), m_image.height()),
 	         m_image,
 	         Rect(0, 0, m_image.width(), m_image.height()),
 				1.,
-	         BlendMode::Copy, rv);
+	         BlendMode::Copy);
 	return rv;
 }
 // End: Helper Stuff
@@ -719,18 +720,28 @@ void TagHandler::m_make_text_nodes(const string& txt, vector<RenderNode*>& nodes
 	if (i18n::has_rtl_character(txt.c_str())) {
 		std::string previous_word;
 		std::vector<RenderNode*>::iterator it = text_nodes.begin();
+		std::vector<WordSpacerNode*> spacer_nodes;
 
 		// Collect the word nodes
 		while (ts.pos() < txt.size()) {
+			std::size_t cpos = ts.pos();
 			ts.skip_ws();
+			spacer_nodes.clear();
+
+			// We only know if the spacer goes to the left or right after having a look at the current word.
+			for (uint16_t ws_indx = 0; ws_indx < ts.pos() - cpos; ws_indx++) {
+				spacer_nodes.push_back(new WordSpacerNode(font_cache_.get_font(&ns), ns));
+			}
+
 			word = ts.till_any_or_end(" \t\n\r");
 			ns.fontset = i18n::find_fontset(word.c_str(), fontsets_);
 			if (!word.empty()) {
+				replace_entities(&word);
 				bool word_is_bidi = i18n::has_rtl_character(word.c_str());
 				word = i18n::make_ligatures(word.c_str());
 				if (word_is_bidi || i18n::has_rtl_character(previous_word.c_str())) {
-					if (!previous_word.empty()) {
-						text_nodes.insert(text_nodes.begin(), new WordSpacerNode(font_cache_.get_font(&ns), ns));
+					for (WordSpacerNode* spacer: spacer_nodes) {
+						it = text_nodes.insert(text_nodes.begin(), spacer);
 					}
 					if (word_is_bidi) {
 						word = i18n::line2bidi(word.c_str());
@@ -741,8 +752,11 @@ void TagHandler::m_make_text_nodes(const string& txt, vector<RenderNode*>& nodes
 					if (it < text_nodes.end()) {
 						++it;
 					}
-					if (!previous_word.empty()) {
-						it = text_nodes.insert(it, new WordSpacerNode(font_cache_.get_font(&ns), ns));
+					for (WordSpacerNode* spacer: spacer_nodes) {
+						it = text_nodes.insert(it, spacer);
+						if (it < text_nodes.end()) {
+							++it;
+						}
 					}
 					it = text_nodes.insert(it, new TextNode(font_cache_.get_font(&ns), ns, word));
 				}
@@ -758,12 +772,13 @@ void TagHandler::m_make_text_nodes(const string& txt, vector<RenderNode*>& nodes
 		while (ts.pos() < txt.size()) {
 			std::size_t cpos = ts.pos();
 			ts.skip_ws();
-			if (ts.pos() != cpos) {
+			for (uint16_t ws_indx = 0; ws_indx < ts.pos() - cpos; ws_indx++) {
 				nodes.push_back(new WordSpacerNode(font_cache_.get_font(&ns), ns));
 			}
 			word = ts.till_any_or_end(" \t\n\r");
 			ns.fontset = i18n::find_fontset(word.c_str(), fontsets_);
 			if (!word.empty()) {
+				replace_entities(&word);
 				word = i18n::make_ligatures(word.c_str());
 				if (i18n::has_script_character(word.c_str(), UI::FontSets::Selector::kCJK)) {
 					std::vector<std::string> units = i18n::split_cjk_word(word.c_str());
@@ -822,22 +837,22 @@ public:
 		if (a.has("align")) {
 			const std::string align = a["align"].get_string();
 			if (align == "right") {
-				m_ns.halign = UI::Align::Align_Left;
+				m_ns.halign = UI::Align::kRight;
 			} else if (align == "center" || align == "middle") {
-				m_ns.halign = UI::Align::Align_Center;
+				m_ns.halign = UI::Align::kCenter;
 			} else {
-				m_ns.halign = UI::Align::Align_Right;
+				m_ns.halign = UI::Align::kLeft;
 			}
 		}
 		m_ns.halign = mirror_alignment(m_ns.halign);
 		if (a.has("valign")) {
 			const string align = a["valign"].get_string();
 			if (align == "bottom") {
-				m_ns.valign = UI::Align::Align_Bottom;
+				m_ns.valign = UI::Align::kBottom;
 			} else if (align == "center" || align == "middle") {
-				m_ns.valign = UI::Align::Align_Center;
+				m_ns.valign = UI::Align::kCenter;
 			} else {
-				m_ns.valign = UI::Align::Align_Top;
+				m_ns.valign = UI::Align::kTop;
 			}
 		}
 		if (a.has("spacing"))
@@ -1029,9 +1044,9 @@ public:
 				m_rn->add_reference(rn->x() + r.dim.x, rn->y() + r.dim.y, r.dim.w, r.dim.h, r.ref);
 			}
 			if (shrink_to_fit_) {
-				if (rn->halign() == UI::Align::Align_Center) {
+				if (rn->halign() == UI::Align::kCenter) {
 					rn->set_x(rn->x() - m_extra_width / 2);
-				} else if (rn->halign() == UI::Align::Align_Right) {
+				} else if (rn->halign() == UI::Align::kRight) {
 					rn->set_x(rn->x() - m_extra_width);
 				}
 			}
@@ -1077,13 +1092,14 @@ public:
 		}
 		if (a.has("valign")) {
 			const string align = a["valign"].get_string();
-			if (align == "top") m_rn->set_valign(UI::Align::Align_Top);
-			else if (align == "bottom") m_rn->set_valign(UI::Align::Align_Bottom);
-			else if (align == "center" || align == "middle") m_rn->set_valign(UI::Align::Align_Center);
+			if (align == "top") m_rn->set_valign(UI::Align::kTop);
+			else if (align == "bottom") m_rn->set_valign(UI::Align::kBottom);
+			else if (align == "center" || align == "middle") m_rn->set_valign(UI::Align::kCenter);
 		}
 	}
-private:
+protected:
 	bool shrink_to_fit_;
+private:
 	uint16_t m_w;
 	SubTagRenderNode* m_rn;
 };
@@ -1099,6 +1115,7 @@ public:
 	void handle_unique_attributes() override {
 		const AttrMap& a = m_tag.attrs();
 		WordSpacerNode::show_spaces(a.has("db_show_spaces") ? a["db_show_spaces"].get_bool() : 0);
+		shrink_to_fit_ = shrink_to_fit_ && (a.has("keep_spaces") ? !a["keep_spaces"].get_bool() : true);
 	}
 };
 
@@ -1158,7 +1175,7 @@ RenderNode* Renderer::layout_(const string& text, uint16_t width, const TagSet& 
 	NodeStyle default_style = {
 		fontset, renderer_style_.font_face, renderer_style_.font_size,
 		RGBColor(255, 255, 0), IFont::DEFAULT,
-		0, UI::Align::Align_Left, UI::Align::Align_Top,
+		0, UI::Align::kLeft, UI::Align::kTop,
 		""
 	};
 

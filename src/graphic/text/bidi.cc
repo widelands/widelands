@@ -22,10 +22,11 @@
 #include <map>
 #include <string>
 
-#include <unicode/unistr.h>
 #include <unicode/utypes.h>
 
 #include "base/log.h"
+#include "base/wexception.h"
+#include "graphic/text/font_set.h"
 
 namespace {
 // TODO(GunChleoc): Have a look at the ICU API to see which helper functions can be gained from there.
@@ -631,7 +632,7 @@ std::string make_ligatures(const char* input) {
 				}
 			} catch (std::out_of_range e) {
 				log("Error trying to fetch Arabic diacritic form: %s\n", e.what());
-				assert(false);
+				NEVER_HERE();
 			}
 		} else if (kArabicFinalChars.count(c) == 1) { // All Arabic characters have a final form
 			try {
@@ -657,7 +658,7 @@ std::string make_ligatures(const char* input) {
 				c = find_arabic_letter_form(c, previous, next);
 			} catch (std::out_of_range e) {
 				log("Error trying to fetch Arabic character form: %s\n", e.what());
-				assert(false);
+				NEVER_HERE();
 			}
 		}
 
@@ -720,6 +721,16 @@ std::string line2bidi(const char* input) {
 	return result;
 }
 
+// Helper to convert ICU strings to C++ strings
+std::string icustring2string(const icu::UnicodeString& convertme) {
+	std::string result;
+	convertme.toUTF8String(result);
+	return result;
+}
+std::string icuchar2string(const UChar& convertme) {
+	const icu::UnicodeString temp(convertme);
+	return icustring2string(temp);
+}
 
 // True if a string contains a character from the script's code blocks
 bool has_script_character(const char* input, UI::FontSets::Selector script) {
@@ -775,11 +786,16 @@ std::vector<std::string> split_cjk_word(const char* input) {
 }
 
 bool cannot_start_line(const UChar& c) {
-	return kCannottStartLineJapanese.count(c) == 1;
+	return is_diacritic(c) || is_punctuation_char(c) || kCannottStartLineJapanese.count(c) == 1;
 }
 
 bool cannot_end_line(const UChar& c) {
 	return kCannotEndLineJapanese.count(c) == 1;
 }
+
+bool is_diacritic(const UChar& c) {
+	return kArabicDiacritics.count(c) == 1;
+}
+
 
 } // namespace UI

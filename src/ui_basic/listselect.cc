@@ -69,7 +69,7 @@ BaseListselect::BaseListselect
 
 	if (show_check) {
 		uint32_t pic_h;
-		m_check_pic = g_gr->images().get("pics/list_selected.png");
+		m_check_pic = g_gr->images().get("images/ui_basic/list_selected.png");
 		m_max_pic_width = m_check_pic->width();
 		pic_h = m_check_pic->height();
 		if (pic_h > m_lineheight)
@@ -145,8 +145,6 @@ void BaseListselect::add
 
 	m_scrollbar.set_steps(m_entry_records.size() * get_lineheight() - get_h());
 
-	update(0, 0, get_w(), get_h());
-
 	if (sel)
 		select(m_entry_records.size() - 1);
 }
@@ -184,8 +182,6 @@ void BaseListselect::add_front
 	m_entry_records.push_front(er);
 
 	m_scrollbar.set_steps(m_entry_records.size() * get_lineheight() - get_h());
-
-	update(0, 0, get_w(), get_h());
 
 	if (sel)
 		select(0);
@@ -245,8 +241,6 @@ void BaseListselect::set_scrollpos(const int32_t i)
 		return;
 
 	m_scrollpos = i;
-
-	update(0, 0, get_w(), get_h());
 }
 
 
@@ -282,7 +276,6 @@ void BaseListselect::select(const uint32_t i)
 	m_selection = i;
 
 	selected(m_selection);
-	update(0, 0, get_w(), get_h());
 }
 
 /**
@@ -346,13 +339,10 @@ void BaseListselect::draw(RenderTarget & dst)
 	dst.brighten_rect(Rect(Point(0, 0), get_w(), get_h()), ms_darken_value);
 
 	while (idx < m_entry_records.size()) {
-		assert
-			(get_h()
-			 <
-			 static_cast<int32_t>(std::numeric_limits<int32_t>::max()));
-
-		if (y >= static_cast<int32_t>(get_h()))
+		assert(get_h() < std::numeric_limits<int32_t>::max());
+		if (y >= get_h()) {
 			break;
+		}
 
 		const EntryRecord & er = *m_entry_records[idx];
 
@@ -388,8 +378,8 @@ void BaseListselect::draw(RenderTarget & dst)
 		const Image* entry_text_im = UI::g_fh1->render(as_uifont(er.name, UI_FONT_SIZE_SMALL,
 																					er.use_clr ? er.clr : UI_FONT_CLR_FG));
 
-		Align alignment = i18n::has_rtl_character(er.name.c_str(), 20) ? UI::Align_Right : Align_Left;
-		if (alignment & Align_Right) {
+		Align alignment = i18n::has_rtl_character(er.name.c_str(), 20) ? UI::Align::kRight : UI::Align::kLeft;
+		if (static_cast<int>(alignment & UI::Align::kRight)) {
 			point.x += maxw - picw;
 		}
 
@@ -408,7 +398,7 @@ void BaseListselect::draw(RenderTarget & dst)
 		}
 
 		// Crop to column width while blitting
-		if (alignment & Align_Right && (maxw  + picw) < static_cast<uint32_t>(entry_text_im->width())) {
+		if (static_cast<int>(alignment & UI::Align::kRight) && (maxw  + picw) < static_cast<uint32_t>(entry_text_im->width())) {
 			// Fix positioning for BiDi languages.
 			point.x = 0;
 

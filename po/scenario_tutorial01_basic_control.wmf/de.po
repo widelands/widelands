@@ -4,16 +4,17 @@
 # Translators:
 # wl-zocker, 2014
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
+# Jürgen Eberlein <juergen.eberlein@web.de>, 2015
 # Mirian Margiani <mirian.margiani@gmail.com>, 2014
 # Venatrix, 2015
-# wl-zocker, 2015
+# wl-zocker, 2015-2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-12-03 09:55+0000\n"
-"PO-Revision-Date: 2015-12-03 10:52+0000\n"
-"Last-Translator: Venatrix\n"
+"POT-Creation-Date: 2015-12-14 05:31+0000\n"
+"PO-Revision-Date: 2016-01-03 18:26+0000\n"
+"Last-Translator: wl-zocker\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -747,11 +748,11 @@ msgid ""
 "reading, and the one that informed you that a new headquarters was added to "
 "your economy. Let’s learn how to archive messages: first, select the message"
 " that you wish to archive by clicking on it in the list. Then, click the"
-msgstr ""
+msgstr "Gegenwärtig hast du zwei Nachrichten. Diese, welche du gerade liest, und eine, die dich benachrichtigte, dass ein neues Hauptquartier deiner Wirtschaft hinzugefügt wurde. Lass uns lernen, wie man Nachrichten ins Archiv verschiebt: Du kannst sie im Nachrichteneingang auswählen, sodass sie ein Hakensymbol erhalten. Dann, klicke auf die"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:404
 msgid "‘Archive selected message’ button to move it into your archive."
-msgstr ""
+msgstr "Schaltfläche „Entf: Ausgewählte Nachrichten archivieren“, um sie ins Archiv zu verschieben."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:406
 msgid ""
@@ -790,7 +791,7 @@ msgid ""
 "button at the very bottom of the screen. The newest message will be marked "
 "for you automatically. Keep clicking the ‘Archive selected message’ button "
 "until all messages have been archived and the list is empty."
-msgstr ""
+msgstr "Um dies zu erreichen, öffne das Nachrichtenfenster mit dem Tastenkürzel „n“ oder mit der Schaltfläche ganz rechts in der unteren Bildschirmleiste. Die neueste Nachricht ist bereits automatisch markiert. Klicke so lange auf die Schaltfläche „Entf: Ausgewählte Nachrichten archivieren“ bis alle Nachrichten archiviert sind und die Liste leer ist."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:424
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:445
@@ -1017,6 +1018,7 @@ msgid ""
 msgstr "Danke, dass du dieses Einführungsspiel gespielt hast. Viel Spaß mit Widelands und besuche uns doch einmal unter"
 
 #: ../../scripting/format_scenario.lua:36
+#, lua-format
 msgid "“%s”"
 msgstr "„%s“"
 

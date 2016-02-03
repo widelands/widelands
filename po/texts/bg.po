@@ -1,14 +1,14 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2015 Widelands Development Team
+# Copyright (C) 2005-2016 Widelands Development Team
 # 
 # Translators:
-# Lyubomir Vasilev, 2015
+# Lyubomir Vasilev, 2015-2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-12-03 09:55+0000\n"
-"PO-Revision-Date: 2015-12-03 10:11+0000\n"
+"POT-Creation-Date: 2016-01-31 20:26+0000\n"
+"PO-Revision-Date: 2016-01-31 21:54+0000\n"
 "Last-Translator: Lyubomir Vasilev\n"
 "Language-Team: Bulgarian (http://www.transifex.com/widelands/widelands/language/bg/)\n"
 "MIME-Version: 1.0\n"
@@ -34,8 +34,8 @@ msgid "Licensing information for Widelands"
 msgstr "Информация за лиценза на Widelands"
 
 #: ../../txts/LICENSE.lua:23
-msgid "Copyright 2002 - 2015 by the Widelands Development Team."
-msgstr "Copyright 2002 - 2015 от екипа по разработката на Widelands"
+msgid "Copyright 2002 - 2016 by the Widelands Development Team."
+msgstr "© 2002-2016 от екипа по разработката на Widelands"
 
 #: ../../txts/LICENSE.lua:24
 msgid ""
@@ -44,6 +44,7 @@ msgid ""
 msgstr "Тази игра е безплатна и с отворен код (FOSS), лицензирана под Общия публичен лиценз на ГНУ (GPL) версия 2.0."
 
 #: ../../txts/LICENSE.lua:26
+#, lua-format
 msgid ""
 "You can find more information on FOSS and the GPL by visiting the following "
 "webpage:  %s"
@@ -292,6 +293,7 @@ msgid ""
 msgstr "Можете да намерите подробно описание на всяка от икономиките на племената в Енциклопедията на племената, достъпна от играта."
 
 #: ../../txts/README.lua:92
+#, lua-format
 msgid ""
 "If you need more documentation or help for Widelands or the Widelands "
 "Editor, be sure to visit our homepage at %s. You can find online help in our"
@@ -432,11 +434,10 @@ msgstr "FreeBSD"
 msgid "Graphicians"
 msgstr "Художници"
 
-#: ../../txts/developers.lua:3 ../../txts/developers.lua:3
+#: ../../txts/developers.lua:3
 msgid "Graphics"
 msgstr "Графика"
 
-#: ../../txts/developers.lua:3 ../../txts/developers.lua:3
 #: ../../txts/developers.lua:3
 msgid "Homepage"
 msgstr "Уеб сайт"
@@ -469,7 +470,7 @@ msgstr "Други"
 msgid "Packagers"
 msgstr "Пакетиране"
 
-#: ../../txts/developers.lua:3 ../../txts/developers.lua:3
+#: ../../txts/developers.lua:3
 msgid "Sound"
 msgstr "Звук"
 
@@ -518,6 +519,7 @@ msgid ""
 msgstr "Както виждате, редакторът е в процес на разработка и с развитието му този текст ще става все по-дълъг."
 
 #: ../../txts/editor_readme.lua:14
+#, lua-format
 msgid "Please have a look at our enduser manuals on our wiki pages at: %s"
 msgstr "Моля, погледнете ръководствата ни за крайния потребител на страниците на нашето уики тук: %s"
 

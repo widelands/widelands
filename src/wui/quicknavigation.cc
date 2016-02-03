@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010 by the Widelands Development Team
+ * Copyright (C) 2010-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -28,67 +28,67 @@ static const uint32_t MaxHistorySize = 32;
 QuickNavigation::QuickNavigation
 	(const Widelands::EditorGameBase & egbase,
 	 uint32_t screenwidth, uint32_t screenheight)
-: m_egbase(egbase)
+: egbase_(egbase)
 {
-	m_screenwidth = screenwidth;
-	m_screenheight = screenheight;
+	screenwidth_ = screenwidth;
+	screenheight_ = screenheight;
 
-	m_havefirst = false;
-	m_update = true;
-	m_history_index = 0;
+	havefirst_ = false;
+	update_ = true;
+	history_index_ = 0;
 }
 
 void QuickNavigation::set_setview(const QuickNavigation::SetViewFn & fn)
 {
-	m_setview = fn;
+	setview_ = fn;
 }
 
 void QuickNavigation::setview(Point where)
 {
-	m_update = false;
-	m_setview(where);
-	m_update = true;
+	update_ = false;
+	setview_(where);
+	update_ = true;
 }
 
 void QuickNavigation::view_changed(Point newpos, bool jump)
 {
-	if (m_havefirst && m_update) {
+	if (havefirst_ && update_) {
 		if (!jump) {
 			Point delta =
 				MapviewPixelFunctions::calc_pix_difference
-					(m_egbase.map(), newpos, m_anchor);
+					(egbase_.map(), newpos, anchor_);
 
 			if
-				(static_cast<uint32_t>(abs(delta.x)) > m_screenwidth ||
-			    	 static_cast<uint32_t>(abs(delta.y)) > m_screenheight)
+				(static_cast<uint32_t>(abs(delta.x)) > screenwidth_ ||
+			    	 static_cast<uint32_t>(abs(delta.y)) > screenheight_)
 				jump = true;
 		}
 
 		if (jump) {
-			if (m_history_index < m_history.size())
-				m_history.erase
-					(m_history.begin() + m_history_index,
-					 m_history.end());
-			m_history.push_back(m_current);
-			if (m_history.size() > MaxHistorySize)
-				m_history.erase
-					(m_history.begin(),
-					 m_history.end() - MaxHistorySize);
-			m_history_index = m_history.size();
+			if (history_index_ < history_.size())
+				history_.erase
+					(history_.begin() + history_index_,
+					 history_.end());
+			history_.push_back(current_);
+			if (history_.size() > MaxHistorySize)
+				history_.erase
+					(history_.begin(),
+					 history_.end() - MaxHistorySize);
+			history_index_ = history_.size();
 		}
 	}
 
-	if (jump || !m_havefirst) {
-		m_anchor = newpos;
+	if (jump || !havefirst_) {
+		anchor_ = newpos;
 	}
 
-	m_current = newpos;
-	m_havefirst = true;
+	current_ = newpos;
+	havefirst_ = true;
 }
 
 bool QuickNavigation::handle_key(bool down, SDL_Keysym key)
 {
-	if (!m_havefirst)
+	if (!havefirst_)
 		return false;
 	if (!down)
 		return false;
@@ -101,30 +101,30 @@ bool QuickNavigation::handle_key(bool down, SDL_Keysym key)
 			WLApplication::get()->get_key_state(SDL_SCANCODE_LCTRL) ||
 			WLApplication::get()->get_key_state(SDL_SCANCODE_RCTRL);
 		if (ctrl) {
-			m_landmarks[which].point = m_current;
-			m_landmarks[which].set = true;
+			landmarks_[which].point = current_;
+			landmarks_[which].set = true;
 		} else {
-			if (m_landmarks[which].set)
-				m_setview(m_landmarks[which].point);
+			if (landmarks_[which].set)
+				setview_(landmarks_[which].point);
 		}
 		return true;
 	}
 
 	if (key.sym == SDLK_COMMA) {
-		if (m_history_index > 0) {
-			if (m_history_index >= m_history.size()) {
-				m_history.push_back(m_current);
+		if (history_index_ > 0) {
+			if (history_index_ >= history_.size()) {
+				history_.push_back(current_);
 			}
-			m_history_index--;
-			setview(m_history[m_history_index]);
+			history_index_--;
+			setview(history_[history_index_]);
 		}
 		return true;
 	}
 
 	if (key.sym == SDLK_PERIOD) {
-		if (m_history_index + 1 < m_history.size()) {
-			m_history_index++;
-			setview(m_history[m_history_index]);
+		if (history_index_ + 1 < history_.size()) {
+			history_index_++;
+			setview(history_[history_index_]);
 		}
 		return true;
 	}

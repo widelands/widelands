@@ -22,7 +22,8 @@
 #include <boost/format.hpp>
 
 #include "ai/computer_player.h"
-#include "logic/tribes/tribes.h"
+#include "base/wexception.h"
+#include "logic/map_objects/tribes/tribes.h"
 
 
 SinglePlayerGameSettingsProvider::SinglePlayerGameSettingsProvider() {
@@ -188,7 +189,7 @@ void SinglePlayerGameSettingsProvider::set_player_init(uint8_t const number, uin
 			return;
 		}
 	}
-	assert(false);
+	NEVER_HERE();
 }
 
 void SinglePlayerGameSettingsProvider::set_player_team(uint8_t number, Widelands::TeamNumber team) {
@@ -240,5 +241,5 @@ void SinglePlayerGameSettingsProvider::set_win_condition_script(std::string wc) 
 
 void SinglePlayerGameSettingsProvider::next_win_condition() {
 	// not implemented - feel free to do so, if you need it.
-	assert(false);
+	NEVER_HERE();
 }

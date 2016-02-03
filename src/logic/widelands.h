@@ -62,6 +62,7 @@ using Serial = uint32_t; /// Serial number for MapObject.
 using Direction = uint8_t;
 constexpr uint8_t INVALID_INDEX = std::numeric_limits<uint8_t>::max();
 constexpr DescriptionIndex kInvalidWare = INVALID_INDEX - 1;
+constexpr DescriptionIndex kNoResource = INVALID_INDEX - 1;
 
 struct SoldierStrength {
 	uint8_t hp, attack, defense, evade;

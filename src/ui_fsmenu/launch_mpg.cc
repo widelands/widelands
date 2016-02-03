@@ -32,8 +32,8 @@
 #include "logic/game.h"
 #include "logic/game_controller.h"
 #include "logic/game_settings.h"
-#include "logic/instances.h"
 #include "logic/map.h"
+#include "logic/map_objects/map_object.h"
 #include "logic/player.h"
 #include "map_io/map_loader.h"
 #include "profile/profile.h"
@@ -63,7 +63,7 @@ struct MapOrSaveSelectionWindow : public UI::Window {
 		UI::Button * btn = new UI::Button
 			(this, "map",
 			 space, y, butw, buth,
-			 g_gr->images().get("pics/but0.png"),
+			 g_gr->images().get("images/ui_basic/but0.png"),
 			 _("Map"), _("Select a map"), true, false);
 		btn->sigclicked.connect
 			(boost::bind
@@ -73,7 +73,7 @@ struct MapOrSaveSelectionWindow : public UI::Window {
 		btn = new UI::Button
 			(this, "saved_game",
 			 space, y + buth + space, butw, buth,
-			 g_gr->images().get("pics/but0.png"),
+			 g_gr->images().get("images/ui_basic/but0.png"),
 			 /** Translators: This is a button to select a savegame */
 			 _("Saved Game"), _("Select a saved game"), true, false);
 		btn->sigclicked.connect
@@ -84,7 +84,7 @@ struct MapOrSaveSelectionWindow : public UI::Window {
 		btn = new UI::Button
 			(this, "cancel",
 			 space + butw / 4, y + 3 * buth + 2 * space, butw / 2, buth,
-			 g_gr->images().get("pics/but1.png"),
+			 g_gr->images().get("images/ui_basic/but1.png"),
 			 _("Cancel"), _("Cancel selection"), true, false);
 		btn->sigclicked.connect
 			(boost::bind
@@ -108,7 +108,7 @@ struct MapOrSaveSelectionWindow : public UI::Window {
 FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG
 	(GameSettingsProvider * const settings, GameController * const ctrl)
 	:
-	FullscreenMenuBase("launchMPGmenu.jpg"),
+	FullscreenMenuBase("images/ui_fsmenu/launch_mpg_menu.jpg"),
 
 // Values for alignment and size
 	m_butw (get_w() / 4),
@@ -126,36 +126,36 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG
 	m_change_map_or_save
 		(this, "change_map_or_save",
 		 m_right_column_x + m_butw - m_buth, get_h() * 3 / 20, m_buth, m_buth,
-		 g_gr->images().get("pics/but1.png"),
-		 g_gr->images().get("pics/menu_toggle_minimap.png"),
+		 g_gr->images().get("images/ui_basic/but1.png"),
+		 g_gr->images().get("images/wui/menus/menu_toggle_minimap.png"),
 		 _("Change map or saved game"), false, false),
 	m_ok
 		(this, "ok",
 		 m_right_column_x, get_h() * 12 / 20 - 2 * m_label_height, m_butw, m_buth,
-		 g_gr->images().get("pics/but2.png"),
+		 g_gr->images().get("images/ui_basic/but2.png"),
 		 _("Start game"), std::string(), false, false),
 	m_back
 		(this, "back",
 		 m_right_column_x, get_h() * 218 / 240, m_butw, m_buth,
-		 g_gr->images().get("pics/but0.png"),
+		 g_gr->images().get("images/ui_basic/but0.png"),
 		 _("Back"), std::string(), true, false),
 	m_wincondition
 		(this, "win_condition",
 		 m_right_column_x, get_h() * 11 / 20 - 2 * m_label_height, m_butw, m_buth,
-		 g_gr->images().get("pics/but1.png"),
+		 g_gr->images().get("images/ui_basic/but1.png"),
 		 "", std::string(), false, false),
 	m_help_button
 		(this, "help",
 		 m_right_column_x + m_butw - m_buth, get_h() / 100, m_buth, m_buth,
-		 g_gr->images().get("pics/but1.png"),
-		 g_gr->images().get("pics/menu_help.png"),
+		 g_gr->images().get("images/ui_basic/but1.png"),
+		 g_gr->images().get("images/ui_basic/menu_help.png"),
 		 _("Show the help window"), true, false),
 
 // Text labels
 	m_title
 		(this,
 		 get_w() / 2, get_h() / 25,
-		 _("Multiplayer Game Setup"), UI::Align_HCenter),
+		 _("Multiplayer Game Setup"), UI::Align::kHCenter),
 	m_mapname
 		(this,
 		 m_right_column_x, get_h() * 3 / 20,
@@ -164,19 +164,19 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG
 		(this,
 		 // (get_w() * 57 / 80) is the width of the MultiPlayerSetupGroup
 		 get_w() / 50, get_h() / 10, (get_w() * 57 / 80) / 3, get_h() / 10,
-		 _("Clients"), UI::Align_HCenter),
+		 _("Clients"), UI::Align::kHCenter),
 	m_players
 		(this,
 		 get_w() / 50 + (get_w() * 57 / 80) * 6 / 15, get_h() / 10, (get_w() * 57 / 80) * 9 / 15, get_h() / 10,
-		 _("Players"), UI::Align_HCenter),
+		 _("Players"), UI::Align::kHCenter),
 	m_map
 		(this,
 		 m_right_column_x, get_h() / 10, m_butw, get_h() / 10,
-		 _("Map"), UI::Align_HCenter),
+		 _("Map"), UI::Align::kHCenter),
 	m_wincondition_type
 		(this,
 		 m_right_column_x + (m_butw / 2), get_h() * 10 / 20 - 1.5 * m_label_height,
-		 _("Type of game"), UI::Align_HCenter),
+		 _("Type of game"), UI::Align::kHCenter),
 
 	m_map_info(this, m_right_column_x, get_h() * 2 / 10, m_butw, get_h() * 23 / 80 - 2 * m_label_height),
 	m_client_info(this, m_right_column_x, get_h() * 13 / 20 - 2 * m_label_height, m_butw, 2 * m_label_height),
@@ -209,8 +209,6 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG
 	m_clients    .set_font(m_fn, m_fs, RGBColor(0, 255, 0));
 	m_players    .set_font(m_fn, m_fs, RGBColor(0, 255, 0));
 	m_map        .set_font(m_fn, m_fs, RGBColor(0, 255, 0));
-	m_client_info.set_font(m_fn, m_fs, UI_FONT_CLR_FG);
-	m_map_info   .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 
 	m_mapname .set_text(_("(no map)"));
 	m_map_info.set_text(_("The host has not yet selected a map or saved game."));
@@ -346,15 +344,14 @@ void FullscreenMenuLaunchMPG::win_condition_load() {
 void FullscreenMenuLaunchMPG::change_map_or_save() {
 	MapOrSaveSelectionWindow selection_window
 		(this, m_ctrl, get_w() / 3, get_h() / 4);
-	switch (selection_window.run<FullscreenMenuBase::MenuTarget>()) {
-		case FullscreenMenuBase::MenuTarget::kNormalGame:
-			select_map();
-			break;
-		case FullscreenMenuBase::MenuTarget::kScenarioGame:
-			select_saved_game();
-			break;
-		default:
-			return;
+	auto result = selection_window.run<FullscreenMenuBase::MenuTarget>();
+	assert(result == FullscreenMenuBase::MenuTarget::kNormalGame ||
+	       result == FullscreenMenuBase::MenuTarget::kScenarioGame ||
+	       result == FullscreenMenuBase::MenuTarget::kBack);
+	if (result == FullscreenMenuBase::MenuTarget::kNormalGame) {
+		select_map();
+	} else if (result == FullscreenMenuBase::MenuTarget::kScenarioGame) {
+		select_saved_game();
 	}
 }
 
@@ -481,13 +478,13 @@ void FullscreenMenuLaunchMPG::refresh()
 
 	if (settings.mapfilename != m_filename_proof) {
 		if (!g_fs->file_exists(settings.mapfilename)) {
-			m_client_info.set_font(m_fn, m_fs, UI_FONT_CLR_WARNING);
+			m_client_info.set_color(UI_FONT_CLR_WARNING);
 			m_client_info.set_text
 				(_("The selected file can not be found. If it is not automatically "
 				   "transferred to you, please write to the host about this problem."));
 		} else {
 			// Reset font color
-			m_client_info.set_font(m_fn, m_fs, UI_FONT_CLR_FG);
+			m_client_info.set_color(UI_FONT_CLR_FG);
 
 			// Update local nr of players - needed for the client UI
 			m_nr_players = settings.players.size();

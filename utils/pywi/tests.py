@@ -97,7 +97,7 @@ class TestAnimation(unittest.TestCase):
         # This needs to be updated when the game data changes
         tests = [
             {
-                'directory': root_dir + '/tribes/barbarians/carrier',
+                'directory': root_dir + '/data/tribes/barbarians/carrier',
                 'animation': 'idle',
                 'shape': (28, 21),
                 'hotspot': (21, 14),

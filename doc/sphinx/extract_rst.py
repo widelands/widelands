@@ -25,7 +25,7 @@ def _find_basedir():
     Widelands. Return the base directory and the source/ directory."""
     curdir = p.abspath(p.dirname(__file__))
     source_dir = p.join(curdir, "source")
-    while not (p.exists(p.join(curdir, "tribes")) and p.exists(p.join(curdir, "world"))):
+    while not (p.exists(p.join(curdir, "data/tribes")) and p.exists(p.join(curdir, "data/world"))):
         curdir = p.abspath(p.join(curdir, p.pardir))
     return source_dir, curdir
 source_dir, base_dir = _find_basedir()
@@ -86,7 +86,7 @@ if __name__ == '__main__':
 
         replace_auxilary_toc(
             filter(lambda a: a, [
-                extract_rst_from_lua(i) for i in glob(p.join(base_dir, "scripting", "*.lua"))
+                extract_rst_from_lua(i) for i in glob(p.join(base_dir, "data/scripting", "*.lua"))
             ])
         )
 

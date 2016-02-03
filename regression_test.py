@@ -12,6 +12,12 @@ import tempfile
 import unittest
 import platform
 
+def datadir():
+    return os.path.join(os.path.dirname(__file__), "data")
+
+def datadir_for_testing():
+    return os.path.join(os.path.dirname(__file__))
+
 def out(string):
     sys.stdout.write(string)
     sys.stdout.flush()
@@ -62,9 +68,14 @@ class WidelandsTestCase(unittest.TestCase):
             os.unlink(stdout_filename)
 
         with open(stdout_filename, 'a') as stdout_file:
-            args = [self.path_to_widelands_binary, '--verbose=true',
-                    '--datadir=%s' % os.path.dirname(__file__), '--homedir=%s' % self.run_dir,
-                    '--disable_fx=true', '--disable_music=true', '--language=en_US' ]
+            args = [self.path_to_widelands_binary,
+                    '--verbose=true',
+                    '--datadir=%s' % datadir(),
+                    '--datadir_for_testing=%s' % datadir_for_testing(),
+                    '--homedir=%s' % self.run_dir,
+                    '--disable_fx=true',
+                    '--disable_music=true',
+                    '--language=en_US' ]
             args += [ "--%s=%s" % (key, value) for key, value in wlargs.iteritems() ]
 
             widelands = subprocess.Popen(
@@ -116,8 +127,8 @@ class WidelandsTestCase(unittest.TestCase):
             self.verify_success(stdout, stdout_filename)
 
     def verify_success(self, stdout, stdout_filename):
-        common_msg = "Analyze the files in %s to see why this test case failed. Stdout is\n  %s\n" % (
-                self.run_dir, stdout_filename)
+        common_msg = "Analyze the files in %s to see why this test case failed. Stdout is\n  %s\n\nstdout:\n%s" % (
+                self.run_dir, stdout_filename, stdout)
         self.assertTrue(self.widelands_returncode == 0,
             "Widelands exited abnormally. %s" % common_msg
         )

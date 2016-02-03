@@ -31,22 +31,22 @@ struct EditorPlaceImmovableTool : public EditorTool, public MultiSelect {
 		: EditorTool(tool, tool)
 	{}
 
-	int32_t handle_click_impl(Widelands::Map& map,
-	                          const Widelands::World& world,
+	int32_t handle_click_impl(const Widelands::World& world,
 	                          Widelands::NodeAndTriangle<> center,
 	                          EditorInteractive& parent,
-	                          EditorActionArgs& args) override;
+	                          EditorActionArgs* args,
+							  Widelands::Map* map) override;
 
-	int32_t handle_undo_impl(Widelands::Map& map,
-	                         const Widelands::World& world,
+	int32_t handle_undo_impl(const Widelands::World& world,
 	                         Widelands::NodeAndTriangle<> center,
 	                         EditorInteractive& parent,
-	                         EditorActionArgs& args) override;
+	                         EditorActionArgs* args,
+							 Widelands::Map* map) override;
 
 	EditorActionArgs format_args_impl(EditorInteractive & parent) override;
 
 	char const * get_sel_impl() const override {
-		return "pics/fsel_editor_place_immovable.png";
+		return "images/wui/editor/fsel_editor_place_immovable.png";
 	}
 };
 
