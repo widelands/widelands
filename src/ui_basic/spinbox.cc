@@ -129,15 +129,11 @@ SpinBox::SpinBox
 
 	box_ = new UI::Box(this, 0, 0, UI::Box::Horizontal, actual_w, texth, padding);
 
-	// Find out how much height we need for the label. We give it 6 rows maximum.
-	const Image* rendered_text = UI::g_fh1->render(as_uifont(label_text));
-	uint32_t available_width = w - unit_w - no_padding * padding;
-	uint32_t extra_rows =
-			available_width > 0 ?
-				std::min(static_cast<int>(rendered_text->width() / available_width), 6) : 0;
-
-	UI::MultilineTextarea* label = new UI::MultilineTextarea(box_, 0, 0, available_width,
-																				texth * (extra_rows + 1), label_text);
+	UI::MultilineTextarea* label = new UI::MultilineTextarea(box_, 0, 0,
+																				w - unit_w - no_padding * padding, texth,
+																				label_text,
+																				UI::Align::kLeft,
+																				UI::MultilineTextarea::ScrollMode::kNoScrolling);
 	box_->add(label, UI::Align::kHCenter);
 
 	sbi_->text = new UI::Textarea(box_, "", UI::Align::kCenter);
