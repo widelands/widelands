@@ -67,82 +67,155 @@ FloatPoint calculate_line_normal(const PointType& start, const PointType& end) {
 	return FloatPoint(-dy / len, dx / len);
 }
 
+float dot(const FloatPoint& p1, const FloatPoint& p2) {
+	return p1.x * p2.x + p1.y * p2.y;
+}
+
+// Finds the pseudo-normal of a point at the join of two lines. We construct
+// this like a miter joint from woodworks. The best explanation I found for
+// this algorithm is here
+// https://forum.libcinder.org/topic/smooth-thick-lines-using-geometry-shader#23286000001269127
+FloatPoint calculate_pseudo_normal(const FloatPoint& p0, const FloatPoint& p1, const FloatPoint& p2) {
+	FloatPoint n1 = calculate_line_normal(p0, p1);
+	FloatPoint pseudo_normal = n1 + calculate_line_normal(p1, p2);
+	float scale = 1. / dot(pseudo_normal, n1);
+	// NOCOM(#sirver): this is not working. Instead, switch the joint to something else when the outer lines get too long?
+	if (scale > 6.) {
+		scale = 1.;
+	}
+	// log("#sirver scale: %f\n", scale);
+	return FloatPoint(pseudo_normal.x * scale, pseudo_normal.y * scale);
+}
+
+template <typename PointType>
+FloatPoint normalize(const PointType& a) {
+	float len = std::hypot(a.x, a.y);
+	return FloatPoint(a.x / len, a.y / len);
+}
+
 // Tesselates the line made up of 'points' ino triangles and converts them into OpenGL space for a
 // renderbuffer of dimensions 'w' and 'h'.
 void tesselate_line_strip(int w,
                           int h,
                           const RGBAColor& color,
                           float line_width,
-                          const std::vector<Point>& points,
+                          std::vector<FloatPoint> points,
                           std::vector<DrawLineProgram::PerVertexData>* vertices) {
-
 	const float r = color.r / 255.;
 	const float g = color.g / 255.;
 	const float b = color.b / 255.;
 	const float a = color.a / 255.;
 
+	const bool closed_loop = points.front() == points.back();
+	if (closed_loop) {
+		points.pop_back();
+	}
+
+	// Figure out the tesselation for the line. The normal for a point is the
+	// average of the up to two lines it is part of.
+	std::vector<FloatPoint> normals;
+	for (size_t i = 0; i < points.size(); ++i) {
+		if (i == 0) {
+			if (closed_loop) {
+				normals.push_back(calculate_pseudo_normal(points.back(), points.front(), points[1]));
+			} else {
+				normals.push_back(calculate_line_normal(points.front(), points[1]));
+			}
+		} else if (i == points.size() - 1) {
+			if (closed_loop) {
+				normals.push_back(
+				   calculate_pseudo_normal(points[points.size() - 2], points.back(), points.front()));
+			} else {
+				normals.push_back(calculate_line_normal(points[points.size() - 2], points.back()));
+			}
+		} else {
+			normals.push_back(calculate_pseudo_normal(points[i - 1], points[i], points[i + 1]));
+		}
+	}
+	if (closed_loop) {
+		points.push_back(points.front());
+		normals.push_back(normals.front());
+	}
+
+	log("#sirver normals.size(): %d,points.size(): %d\n", normals.size(), points.size());
 	// Iterate over each line segment, i.e. all points but the last, convert
 	// them from pixel space to gl space and draw them.
 	for (size_t i = 0; i < points.size() - 1; ++i) {
 		const FloatPoint p1 = FloatPoint(points[i].x, points[i].y);
 		const FloatPoint p2 = FloatPoint(points[i + 1].x, points[i + 1].y);
-		const FloatPoint normal = calculate_line_normal(p1, p2);
-		const FloatPoint scaled_n(0.5 * line_width * normal.x, 0.5 * line_width * normal.y);
+
+		log("#sirver normals.x(): %f, %f\n", normals[i].x, normals[i].y);
+		const FloatPoint n1(0.5 * line_width * normals[i].x, 0.5 * line_width * normals[i].y);
+		const FloatPoint n2(0.5 * line_width * normals[i+1].x, 0.5 * line_width * normals[i+1].y);
 
 		// Quad points are created in rendering order for OpenGL.
-		FloatPoint quad_a = p1 - scaled_n;
-		pixel_to_gl_renderbuffer(w, h, &quad_a.x, &quad_a.y);
-		vertices->emplace_back(DrawLineProgram::PerVertexData{quad_a.x, quad_a.y, 0.f, r, g, b, a});
+		{
+			FloatPoint p = p1 - n1;
+			pixel_to_gl_renderbuffer(w, h, &p.x, &p.y);
+			vertices->emplace_back(
+			   DrawLineProgram::PerVertexData{p.x, p.y, 0.f, r, g, b, a});
+		}
 
-		FloatPoint quad_b = p2 - scaled_n;
-		pixel_to_gl_renderbuffer(w, h, &quad_b.x, &quad_b.y);
-		vertices->emplace_back(DrawLineProgram::PerVertexData{quad_b.x, quad_b.y, 0.f, r, g, b, a});
+		{
+			FloatPoint p = p2 - n2;
+			pixel_to_gl_renderbuffer(w, h, &p.x, &p.y);
+			vertices->emplace_back(
+			   DrawLineProgram::PerVertexData{p.x, p.y, 0.f, r, g, b, a});
+		}
 
-		FloatPoint quad_c = p1 + scaled_n;
-		pixel_to_gl_renderbuffer(w, h, &quad_c.x, &quad_c.y);
-		vertices->emplace_back(DrawLineProgram::PerVertexData{quad_c.x, quad_c.y, 0.f, r, g, b, a});
+		{
+			FloatPoint p = p1 + n1;
+			pixel_to_gl_renderbuffer(w, h, &p.x, &p.y);
+			vertices->emplace_back(
+			   DrawLineProgram::PerVertexData{p.x, p.y, 0.f, r, g, b, a});
+		}
 
 		vertices->push_back(vertices->at(vertices->size() - 2));
 		vertices->push_back(vertices->at(vertices->size() - 2));
 
-		FloatPoint quad_d = p2 + scaled_n;
-		pixel_to_gl_renderbuffer(w, h, &quad_d.x, &quad_d.y);
-		vertices->emplace_back(DrawLineProgram::PerVertexData{quad_d.x, quad_d.y, 0.f, r, g, b, a});
+		{
+			FloatPoint p = p2 + n2;
+			pixel_to_gl_renderbuffer(w, h, &p.x, &p.y);
+			vertices->emplace_back(
+			   DrawLineProgram::PerVertexData{p.x, p.y, 0.f, r, g, b, a});
+		}
 	}
 
 	// Draw a circle around each point, to join the disjunct lines together.
 	// Since Widelands only uses very thin lines, a circle with 5 triangles does
 	// not look worse than one using 60.
-	for (size_t i = 0; i < points.size(); ++i) {
-		const FloatPoint p1 = FloatPoint(points[i].x, points[i].y);
-		for (int j = 0; j < kNumTrianglesForCircle; ++j) {
-			float x1 = p1.x + 0.5 * line_width * kCircleXValues[j];
-			float x2 = p1.x + 0.5 * line_width * kCircleXValues[(j + 1) % kNumTrianglesForCircle];
-			float y1 = p1.y + 0.5 * line_width * kCircleYValues[j];
-			float y2 = p1.y + 0.5 * line_width * kCircleYValues[(j + 1) % kNumTrianglesForCircle];
-			float x = p1.x;
-			float y = p1.y;
-			pixel_to_gl_renderbuffer(w, h, &x1, &y1);
-			pixel_to_gl_renderbuffer(w, h, &x2, &y2);
-			pixel_to_gl_renderbuffer(w, h, &x, &y);
+	// for (size_t i = 0; i < points.size(); ++i) {
+		// const FloatPoint p1 = FloatPoint(points[i].x, points[i].y);
+		// for (int j = 0; j < kNumTrianglesForCircle; ++j) {
+			// float x1 = p1.x + 0.5 * line_width * kCircleXValues[j];
+			// float x2 = p1.x + 0.5 * line_width * kCircleXValues[(j + 1) % kNumTrianglesForCircle];
+			// float y1 = p1.y + 0.5 * line_width * kCircleYValues[j];
+			// float y2 = p1.y + 0.5 * line_width * kCircleYValues[(j + 1) % kNumTrianglesForCircle];
+			// float x = p1.x;
+			// float y = p1.y;
+			// pixel_to_gl_renderbuffer(w, h, &x1, &y1);
+			// pixel_to_gl_renderbuffer(w, h, &x2, &y2);
+			// pixel_to_gl_renderbuffer(w, h, &x, &y);
 
-			vertices->emplace_back(DrawLineProgram::PerVertexData{x, y, 0.f, r, g, b, a});
-			vertices->emplace_back(DrawLineProgram::PerVertexData{x1, y1, 0.f, r, g, b, a});
-			vertices->emplace_back(DrawLineProgram::PerVertexData{x2, y2, 0.f, r, g, b, a});
-		}
-	}
+			// vertices->emplace_back(DrawLineProgram::PerVertexData{x, y, 0.f, r, g, b, a});
+			// vertices->emplace_back(DrawLineProgram::PerVertexData{x1, y1, 0.f, r, g, b, a});
+			// vertices->emplace_back(DrawLineProgram::PerVertexData{x2, y2, 0.f, r, g, b, a});
+		// }
+	// }
 }
 
 }  // namespace
 
+// NOCOM(#sirver): document: draws a rectangle that has length and width as described. Inner span is w - 2, h -2
 void draw_rect(const Rect& rc, const RGBColor& clr, Surface* surface) {
-	surface->draw_line_strip({
-		Point(rc.x, rc.y),
-		Point(rc.x + rc.w, rc.y),
-		Point(rc.x + rc.w, rc.y + rc.h),
-		Point(rc.x, rc.y + rc.h),
-		Point(rc.x, rc.y),
-	}, clr, 1, LineDrawMode::kSharp);
+	log("#sirver rc.w: %d,rc.h: %d\n", rc.w, rc.h);
+	const FloatPoint top_left = FloatPoint(rc.x + 0.5f, rc.y + 0.5f);
+	const FloatPoint top_right = FloatPoint(rc.x + rc.w - 0.5f, rc.y + 0.5f);
+	const FloatPoint bottom_right = FloatPoint(rc.x + rc.w - 0.5f, rc.y + rc.h - 0.5f);
+	const FloatPoint bottom_left = FloatPoint(rc.x + 0.5f, rc.y + rc.h - 0.5f);
+
+	surface->draw_line_strip(
+	   {top_left, top_right, bottom_right, bottom_left, top_left}, clr, 1, LineDrawMode::kSharp);
 }
 
 void Surface::fill_rect(const Rect& rc, const RGBAColor& clr) {
@@ -163,7 +236,7 @@ void Surface::brighten_rect(const Rect& rc, const int32_t factor)
 	do_fill_rect(rect, color, blend_mode);
 }
 
-void Surface::draw_line_strip(std::vector<Point> points,
+void Surface::draw_line_strip(std::vector<FloatPoint> points,
                               const RGBColor& color,
                               float line_width,
                               const LineDrawMode& line_draw_mode) {
@@ -185,7 +258,7 @@ void Surface::draw_line_strip(std::vector<Point> points,
 	tesselate_line_strip(
 	   w, h, RGBAColor(color.r, color.g, color.b, 255), line_width, points, &vertices);
 	if (line_draw_mode == LineDrawMode::kAntialiased) {
-		tesselate_line_strip(w, h, RGBAColor(color.r, color.g, color.b, 52), line_width + 2., points,
+		tesselate_line_strip(w, h, RGBAColor(color.r, color.g, color.b, 100), line_width + 2., points,
 		                     &vertices);
 	}
 	do_draw_line_strip(std::move(vertices));

@@ -68,7 +68,7 @@ public:
 
 	// Draw a 'width' pixel wide line to the destination. 'points' are taken by
 	// value on purpose.
-	void draw_line_strip(std::vector<Point> points,
+	void draw_line_strip(std::vector<FloatPoint> points,
 	                     const RGBColor& color,
 	                     float width,
 	                     const LineDrawMode& line_draw_mode);

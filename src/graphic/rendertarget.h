@@ -58,7 +58,7 @@ public:
 	int32_t width() const;
 	int32_t height() const;
 
-	void draw_line_strip(const std::vector<Point>& points,
+	void draw_line_strip(const std::vector<FloatPoint>& points,
 	                     const RGBColor& color,
 	                     float width,
 	                     const LineDrawMode& line_draw_mode);

@@ -186,19 +186,19 @@ void draw_diagram
 	// Draw coordinate system
 	// X Axis
 	dst.draw_line_strip({
-		Point(spacing, inner_h - space_at_bottom),
-		Point(inner_w - space_at_right, inner_h - space_at_bottom)},
+		FloatPoint(spacing, inner_h - space_at_bottom),
+		FloatPoint(inner_w - space_at_right, inner_h - space_at_bottom)},
 		kAxisLineColor, kAxisLinesWidth, LineDrawMode::kAntialiased);
 	// Arrow
 	dst.draw_line_strip({
-		Point(spacing + 5, inner_h - space_at_bottom - 3),
-		Point(spacing, inner_h - space_at_bottom),
-		Point(spacing + 5, inner_h - space_at_bottom + 3),
+		FloatPoint(spacing + 5, inner_h - space_at_bottom - 3),
+		FloatPoint(spacing, inner_h - space_at_bottom),
+		FloatPoint(spacing + 5, inner_h - space_at_bottom + 3),
 		}, kAxisLineColor, kAxisLinesWidth, LineDrawMode::kAntialiased);
 
 	//  Y Axis
-	dst.draw_line_strip({Point(inner_w - space_at_right, spacing),
-	                     Point(inner_w - space_at_right, inner_h - space_at_bottom)},
+	dst.draw_line_strip({FloatPoint(inner_w - space_at_right, spacing),
+	                     FloatPoint(inner_w - space_at_right, inner_h - space_at_bottom)},
 	                    kAxisLineColor, kAxisLinesWidth, LineDrawMode::kAntialiased);
 	//  No Arrow here, since this doesn't continue.
 
@@ -206,8 +206,8 @@ void draw_diagram
 	float posx = inner_w - space_at_right;
 
 	for (uint32_t i = 0; i <= how_many_ticks; ++i) {
-		dst.draw_line_strip({Point(static_cast<int32_t>(posx), inner_h - space_at_bottom),
-		                     Point(static_cast<int32_t>(posx), inner_h - space_at_bottom + 3)},
+		dst.draw_line_strip({FloatPoint(static_cast<int32_t>(posx), inner_h - space_at_bottom),
+		                     FloatPoint(static_cast<int32_t>(posx), inner_h - space_at_bottom + 3)},
 		                    kAxisLineColor, kAxisLinesWidth, LineDrawMode::kAntialiased);
 
 		// The space at the end is intentional to have the tick centered
@@ -223,11 +223,11 @@ void draw_diagram
 
 	//  draw yticks, one at full, one at half
 	dst.draw_line_strip({
-		Point(inner_w - space_at_right, spacing), Point(inner_w - space_at_right - 3, spacing)},
+		FloatPoint(inner_w - space_at_right, spacing), FloatPoint(inner_w - space_at_right - 3, spacing)},
 		kAxisLineColor, kAxisLinesWidth, LineDrawMode::kAntialiased);
 	dst.draw_line_strip({
-		Point(inner_w - space_at_right, spacing + ((inner_h - space_at_bottom) - spacing) / 2),
-		Point(inner_w - space_at_right - 3, spacing + ((inner_h - space_at_bottom) - spacing) / 2)},
+		FloatPoint(inner_w - space_at_right, spacing + ((inner_h - space_at_bottom) - spacing) / 2),
+		FloatPoint(inner_w - space_at_right - 3, spacing + ((inner_h - space_at_bottom) - spacing) / 2)},
 		kAxisLineColor, kAxisLinesWidth, LineDrawMode::kAntialiased);
 
 	//  print the used unit
@@ -414,7 +414,7 @@ void WuiPlotArea::draw_plot_line
 		ly -= static_cast<int32_t>(scale_value(yline_length, highest_scale, value));
 	}
 
-	std::vector<Point> points;
+	std::vector<FloatPoint> points;
 	points.emplace_back(lx, ly);
 
 	for (int32_t i = dataset->size() - 1; i > 0 && posx > spacing; --i) {
@@ -502,8 +502,8 @@ void DifferentialPlotArea::draw(RenderTarget & dst) {
 	draw_diagram(time_ms, get_inner_w(), get_inner_h(), xline_length, dst);
 
 	// draw zero line
-	dst.draw_line_strip({Point(get_inner_w() - space_at_right, yoffset),
-	                     Point(get_inner_w() - space_at_right - xline_length, yoffset)},
+	dst.draw_line_strip({FloatPoint(get_inner_w() - space_at_right, yoffset),
+	                     FloatPoint(get_inner_w() - space_at_right - xline_length, yoffset)},
 	                    kZeroLineColor, kPlotLinesWidth, LineDrawMode::kAntialiased);
 
 	// How many do we take together when relative ploting
