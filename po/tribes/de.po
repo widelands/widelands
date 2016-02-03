@@ -9,7 +9,7 @@
 # Mirian Margiani <mirian.margiani@gmail.com>, 2014
 # Peter Schwanemann <nasenbaer_peter@sourceforge.net>, 2005
 # Venatrix, 2015
-# Venatrix, 2015
+# Venatrix, 2015-2016
 # w_laenger <ovvv@web.de>, 2015
 # wl-zocker, 2015
 # wl-zocker, 2016
@@ -17,8 +17,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-01-23 08:23+0000\n"
-"PO-Revision-Date: 2016-01-23 20:31+0000\n"
+"POT-Creation-Date: 2016-01-31 20:26+0000\n"
+"PO-Revision-Date: 2016-02-01 14:54+0000\n"
 "Last-Translator: Venatrix\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -2110,7 +2110,7 @@ msgstr "Verlies"
 #: ../../tribes/buildings/trainingsites/barbarians/battlearena/init.lua:83
 #: ../../tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:102
 #: ../../tribes/buildings/trainingsites/empire/arena/init.lua:72
-#: ../../tribes/buildings/trainingsites/empire/colosseum/init.lua:67
+#: ../../tribes/buildings/trainingsites/empire/colosseum/init.lua:68
 #: ../../tribes/buildings/trainingsites/empire/trainingcamp/init.lua:96
 msgid "sleeping"
 msgstr "Das Schlafen"
@@ -2170,14 +2170,14 @@ msgstr "Das Verbessern der Lebenspunkte eines Soldaten von Stufe 0 auf 1"
 #: ../../tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:135
 #: ../../tribes/buildings/trainingsites/barbarians/battlearena/init.lua:91
 #: ../../tribes/buildings/trainingsites/empire/arena/init.lua:80
-#: ../../tribes/buildings/trainingsites/empire/colosseum/init.lua:75
+#: ../../tribes/buildings/trainingsites/empire/colosseum/init.lua:76
 msgid "upgrading soldier evade from level 0 to level 1"
 msgstr "Das Verbessern des Ausweichens eines Soldaten von Stufe 0 auf 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:146
 #: ../../tribes/buildings/trainingsites/barbarians/battlearena/init.lua:103
-#: ../../tribes/buildings/trainingsites/empire/colosseum/init.lua:86
+#: ../../tribes/buildings/trainingsites/empire/colosseum/init.lua:87
 msgid "upgrading soldier evade from level 1 to level 2"
 msgstr "Das Verbessern des Ausweichens eines Soldaten von Stufe 1 auf 2"
 
@@ -2515,7 +2515,7 @@ msgstr "Schiffsbaustelle"
 #: ../../tribes/preload.lua:12 ../../tribes/preload.lua:27
 #: ../../tribes/preload.lua:42
 msgid "The Widelands Development Team"
-msgstr "Das Widelands-Entwicklerteam"
+msgstr "Das Widelands-Entwicklungsteam"
 
 #. TRANSLATORS: This is a tribe name
 #: ../../tribes/preload.lua:14

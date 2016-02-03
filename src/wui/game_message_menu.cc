@@ -58,7 +58,7 @@ GameMessageMenu::GameMessageMenu
 		 kMessageBodyY,
 		 kWindowWidth - 2 * kPadding,
 		 get_inner_h() - kMessageBodyY - 2 * kPadding - kButtonSize,
-		 "", UI::Align::kLeft, 1),
+		 "", UI::Align::kLeft, UI::MultilineTextarea::ScrollMode::kScrollNormalForced),
 	mode(Inbox)
 {
 

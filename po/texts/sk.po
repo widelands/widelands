@@ -2,14 +2,14 @@
 # Copyright (C) 2005-2016 Widelands Development Team
 # 
 # Translators:
-# MiroslavR <miroslavr256@gmail.com>, 2015
+# MiroslavR <miroslavr256@gmail.com>, 2015-2016
 # Miroslav Remák <Unknown>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-01-23 08:23+0000\n"
-"PO-Revision-Date: 2016-01-23 22:45+0000\n"
+"POT-Creation-Date: 2016-01-31 20:26+0000\n"
+"PO-Revision-Date: 2016-02-01 01:21+0000\n"
 "Last-Translator: MiroslavR <miroslavr256@gmail.com>\n"
 "Language-Team: Slovak (http://www.transifex.com/widelands/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
@@ -35,8 +35,8 @@ msgid "Licensing information for Widelands"
 msgstr "Licenčné informácie hry Widelands"
 
 #: ../../txts/LICENSE.lua:23
-msgid "Copyright 2002 - 2015 by the Widelands Development Team."
-msgstr "Copyright 2002 - 2015 od vývojového tímu hry Widelands."
+msgid "Copyright 2002 - 2016 by the Widelands Development Team."
+msgstr "Copyright 2002 - 2016 od vývojového tímu hry Widelands."
 
 #: ../../txts/LICENSE.lua:24
 msgid ""

@@ -206,7 +206,7 @@ void InteractiveBase::set_sel_pos(Widelands::NodeAndTriangle<> const center)
 						   player.is_hostile(*productionsite->get_owner())))
 						return set_tooltip("");
 				}
-				set_tooltip(productionsite->info_string(igbase->building_tooltip_format()));
+				set_tooltip(productionsite->info_string(Widelands::Building::InfoStringFormat::kTooltip));
 				return;
 			}
 	}
