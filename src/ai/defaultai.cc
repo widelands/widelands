@@ -216,8 +216,8 @@ DefaultAI::DefaultAI(Game& ggame, PlayerNumber const pid, DefaultAI::Type const 
 				   }
 			   }
 			   	break;
-		   	default:
-				;
+				default:
+					NEVER_HERE();
 		   }
 		});
 }

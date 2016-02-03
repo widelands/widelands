@@ -499,10 +499,9 @@ void MilitarySite::update_soldier_request(bool incd)
 		{
 			// Somebody is killing my soldiers in the middle of upgrade
 			// or I have kicked out his predecessor already.
-			if
-				((m_upgrade_soldier_request)
-				&& (m_upgrade_soldier_request->is_open() || 0 == m_upgrade_soldier_request->get_count()))
-			{
+			if (m_upgrade_soldier_request && (m_upgrade_soldier_request->is_open() ||
+			                                  0 == m_upgrade_soldier_request->get_count())) {
+
 				// Economy was not able to find the soldiers I need.
 				// I can safely drop the upgrade request and go to fill mode.
 				m_upgrade_soldier_request.reset();
