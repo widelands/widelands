@@ -60,17 +60,6 @@ public:
 	void set_chat_provider(ChatProvider &);
 	ChatProvider * get_chat_provider();
 
-	// TODO(sirver): Remove the use of these methods as the strings are no longer configurable.
-	const std::string & building_census_format      () const {
-		return building_census_format_;
-	}
-	const std::string & building_statistics_format  () const {
-		return building_statistics_format_;
-	}
-	const std::string & building_tooltip_format     () const {
-		return building_tooltip_format_;
-	}
-
 	virtual bool can_see(Widelands::PlayerNumber) const = 0;
 	virtual bool can_act(Widelands::PlayerNumber) const = 0;
 	virtual Widelands::PlayerNumber player_number() const = 0;
@@ -92,9 +81,6 @@ protected:
 
 	GameMainMenuWindows      main_windows_;
 	ChatProvider           * chat_provider_;
-	std::string              building_census_format_;
-	std::string              building_statistics_format_;
-	std::string              building_tooltip_format_;
 	bool                     chatenabled_;
 	bool                     multiplayer_;
 	PlayerType playertype_;

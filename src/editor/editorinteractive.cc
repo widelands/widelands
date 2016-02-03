@@ -43,6 +43,7 @@
 #include "logic/map_objects/world/resource_description.h"
 #include "logic/map_objects/world/world.h"
 #include "logic/player.h"
+#include "map_io/map_loader.h"
 #include "map_io/widelands_map_loader.h"
 #include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
@@ -239,7 +240,7 @@ void EditorInteractive::load(const std::string & filename) {
 		egbase().add_player(p, 0, map.get_scenario_player_tribe(p), map.get_scenario_player_name(p));
 	}
 
-	ml->load_map_complete(egbase(), true);
+	ml->load_map_complete(egbase(), Widelands::MapLoader::LoadType::kEditor);
 	egbase().load_graphics(loader_ui);
 	map_changed(MapWas::kReplaced);
 }

@@ -9,9 +9,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-01-23 08:23+0000\n"
-"PO-Revision-Date: 2016-01-23 08:24+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2016-01-31 20:26+0000\n"
+"PO-Revision-Date: 2016-02-01 08:38+0000\n"
+"Last-Translator: Ole Laursen <ole.laursen@gmail.com>\n"
 "Language-Team: Danish (http://www.transifex.com/widelands/widelands/language/da/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2102,7 +2102,7 @@ msgstr "Fangekælder"
 #: ../../tribes/buildings/trainingsites/barbarians/battlearena/init.lua:83
 #: ../../tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:102
 #: ../../tribes/buildings/trainingsites/empire/arena/init.lua:72
-#: ../../tribes/buildings/trainingsites/empire/colosseum/init.lua:67
+#: ../../tribes/buildings/trainingsites/empire/colosseum/init.lua:68
 #: ../../tribes/buildings/trainingsites/empire/trainingcamp/init.lua:96
 msgid "sleeping"
 msgstr "søvn"
@@ -2162,14 +2162,14 @@ msgstr "optræning af soldats helbred fra niveau 0 til niveau 1"
 #: ../../tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:135
 #: ../../tribes/buildings/trainingsites/barbarians/battlearena/init.lua:91
 #: ../../tribes/buildings/trainingsites/empire/arena/init.lua:80
-#: ../../tribes/buildings/trainingsites/empire/colosseum/init.lua:75
+#: ../../tribes/buildings/trainingsites/empire/colosseum/init.lua:76
 msgid "upgrading soldier evade from level 0 to level 1"
 msgstr "optræning af soldats undvigelsesevne fra niveau 0 til niveau 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:146
 #: ../../tribes/buildings/trainingsites/barbarians/battlearena/init.lua:103
-#: ../../tribes/buildings/trainingsites/empire/colosseum/init.lua:86
+#: ../../tribes/buildings/trainingsites/empire/colosseum/init.lua:87
 msgid "upgrading soldier evade from level 1 to level 2"
 msgstr "optræning af soldats undvigelsesevne fra niveau 1 til niveau 2"
 
@@ -2549,7 +2549,7 @@ msgstr "Befæstet landsby"
 #: ../../tribes/scripting/starting_conditions/barbarians/fortified_village.lua:96
 #: ../../tribes/scripting/starting_conditions/empire/fortified_village.lua:121
 msgid "No Space"
-msgstr ""
+msgstr "Ingen plads"
 
 #: ../../tribes/scripting/starting_conditions/atlanteans/fortified_village.lua:104
 #: ../../tribes/scripting/starting_conditions/barbarians/fortified_village.lua:97

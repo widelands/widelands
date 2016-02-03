@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2015 Widelands Development Team
+# Copyright (C) 2005-2016 Widelands Development Team
 # 
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
@@ -11,9 +11,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-12-14 05:31+0000\n"
-"PO-Revision-Date: 2015-12-20 16:10+0000\n"
-"Last-Translator: wl-zocker\n"
+"POT-Creation-Date: 2016-01-31 20:26+0000\n"
+"PO-Revision-Date: 2016-02-01 14:49+0000\n"
+"Last-Translator: Venatrix\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -119,20 +119,21 @@ msgid "Overview:"
 msgstr "Übersicht:"
 
 #: ../../scripting/win_conditions/artifacts.lua:150
-#: ../../scripting/win_conditions/artifacts.lua:162
+#: ../../scripting/win_conditions/artifacts.lua:163
 #, lua-format
 msgid "%i artifact"
 msgid_plural "%i artifacts"
 msgstr[0] "%i Artefakt"
 msgstr[1] "%i Artefakte"
 
-#: ../../scripting/win_conditions/artifacts.lua:151
+#. TRANSLATORS: e.g. Team 1 owns 5 artifacts.
+#: ../../scripting/win_conditions/artifacts.lua:152
 msgid "%1$s owns %2$s."
 msgstr "%1$s besitzt %2$s."
 
 #. TRANSLATORS: %1$i is the team's number; %2$s is a list of team members
 #. (e.g. "Steve, Robert, David"), %3$s is something like "x artifact(s)"
-#: ../../scripting/win_conditions/artifacts.lua:164
+#: ../../scripting/win_conditions/artifacts.lua:165
 msgid "Team %1$i (%2$s) owns %3$s."
 msgstr "Team %1$i (%2$s) besitzt %3$s."
 

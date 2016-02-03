@@ -8,6 +8,11 @@ before_script:
   - "sh -e /etc/init.d/xvfb start"
   - sleep 3 # give xvfb some time to start
 
+# ignore this branch because it is only a mirror of master
+branches:
+  except:
+    - _widelands_dev_widelands_trunk
+
 matrix:
   include:
      - compiler: clang
