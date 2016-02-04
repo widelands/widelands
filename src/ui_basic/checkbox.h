@@ -67,8 +67,8 @@ struct Statebox : public Panel {
 	void set_state(bool on);
 
 	void set_owns_custopicture_() {
-		assert(flags_ & Has_CustoPicture_);
-		set_flags(Owns_CustoPicture_, true);
+		assert(flags_ & Has_Custom_Picture);
+		set_flags(Owns_Custom_Picture, true);
 	}
 
 	// Drawing and event handlers
@@ -86,8 +86,8 @@ private:
 		Is_Highlighted      = 0x01,
 		Is_Enabled          = 0x02,
 		Is_Checked          = 0x04,
-		Has_CustoPicture_  = 0x08,
-		Owns_CustoPicture_ = 0x10
+		Has_Custom_Picture  = 0x08,
+		Owns_Custom_Picture = 0x10
 	};
 	uint8_t flags_;
 	void set_flags(uint8_t const flags, bool const enable) {

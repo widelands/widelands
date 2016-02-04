@@ -93,7 +93,7 @@ void Box::update_desired_size()
 
 	for (uint32_t idx = 0; idx < items_.size(); ++idx) {
 		int depth, breadth;
-		get_itedesired_size_(idx, &depth, &breadth);
+		get_item_desired_size(idx, &depth, &breadth);
 
 		totaldepth += depth;
 		if (breadth > maxbreadth)
@@ -135,7 +135,7 @@ void Box::layout()
 
 	for (size_t idx = 0; idx < items_.size(); ++idx) {
 		int depth, unused;
-		get_itedesired_size_(idx, &depth, &unused);
+		get_item_desired_size(idx, &depth, &unused);
 		totaldepth += depth;
 	}
 
@@ -220,13 +220,13 @@ void Box::update_positions()
 
 	for (uint32_t idx = 0; idx < items_.size(); ++idx) {
 		int depth, breadth;
-		get_itesize_(idx, &depth, &breadth);
+		get_item_size(idx, &depth, &breadth);
 
 		if (items_[idx].type == Item::ItemPanel) {
-			set_itesize_
+			set_item_size
 				(idx, depth, items_[idx].u.panel.fullsize ?
 				 totalbreadth : breadth);
-			set_itepos_(idx, totaldepth - scrollpos);
+			set_item_pos(idx, totaldepth - scrollpos);
 		}
 
 		totaldepth += depth;
@@ -312,7 +312,7 @@ void Box::add_inf_space()
  * item along the orientation axis, breadth is the size perpendicular
  * to the orientation axis.
 */
-void Box::get_itedesired_size_
+void Box::get_item_desired_size
 	(uint32_t const idx, int* depth, int* breadth)
 {
 	assert(idx < items_.size());
@@ -336,24 +336,24 @@ void Box::get_itedesired_size_
 }
 
 /**
- * Retrieve the given item's size. This differs from get_itedesired_size_ only
+ * Retrieve the given item's size. This differs from get_item_desired_size only
  * for expanding items, at least for now.
  */
-void Box::get_itesize_
+void Box::get_item_size
 	(uint32_t const idx, int* depth, int* breadth)
 {
 	assert(idx < items_.size());
 
 	const Item & it = items_[idx];
 
-	get_itedesired_size_(idx, depth, breadth);
+	get_item_desired_size(idx, depth, breadth);
 	depth += it.assigned_var_depth;
 }
 
 /**
  * Set the given items actual size.
  */
-void Box::set_itesize_(uint32_t idx, int depth, int breadth)
+void Box::set_item_size(uint32_t idx, int depth, int breadth)
 {
 	assert(idx < items_.size());
 
@@ -372,7 +372,7 @@ void Box::set_itesize_(uint32_t idx, int depth, int breadth)
  * pos is the position relative to the parent in the direction of the
  * orientation axis.
 */
-void Box::set_itepos_(uint32_t idx, int32_t pos)
+void Box::set_item_pos(uint32_t idx, int32_t pos)
 {
 	assert(idx < items_.size());
 

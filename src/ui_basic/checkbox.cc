@@ -47,7 +47,7 @@ Statebox::Statebox
 	set_desired_size(w, h);
 	set_size(w, h);
 
-	set_flags(Has_CustoPicture_, true);
+	set_flags(Has_Custom_Picture, true);
 	pic_graphics_ = pic;
 }
 
@@ -93,7 +93,7 @@ void Statebox::set_enabled(bool const enabled)
 
 	set_flags(Is_Enabled, enabled);
 
-	if (!(flags_ & Has_CustoPicture_)) {
+	if (!(flags_ & Has_Custom_Picture)) {
 		pic_graphics_ = g_gr->images().get(enabled ?
 															"images/ui_basic/checkbox_light.png" :
 															"images/ui_basic/checkbox.png");
@@ -122,7 +122,7 @@ void Statebox::set_state(bool const on) {
 */
 void Statebox::draw(RenderTarget & dst)
 {
-	if (flags_ & Has_CustoPicture_) {
+	if (flags_ & Has_Custom_Picture) {
 		// center picture
 		const uint16_t w = pic_graphics_->width();
 		const uint16_t h = pic_graphics_->height();
@@ -180,7 +180,7 @@ bool Statebox::handle_mousepress(const uint8_t btn, int32_t, int32_t) {
 	if (btn == SDL_BUTTON_LEFT && (flags_ & Is_Enabled)) {
 		clicked();
 		return true;
-	} 
+	}
     return false;
 }
 bool Statebox::handle_mouserelease(const uint8_t btn, int32_t, int32_t)

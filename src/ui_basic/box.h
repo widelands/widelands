@@ -67,10 +67,10 @@ protected:
 	void update_desired_size() override;
 
 private:
-	void get_itedesired_size_(uint32_t idx, int* depth, int* breadth);
-	void get_itesize_(uint32_t idx, int* depth, int* breadth);
-	void set_itesize_(uint32_t idx, int depth, int breadth);
-	void set_itepos_(uint32_t idx, int32_t pos);
+	void get_item_desired_size(uint32_t idx, int* depth, int* breadth);
+	void get_item_size(uint32_t idx, int* depth, int* breadth);
+	void set_item_size(uint32_t idx, int depth, int breadth);
+	void set_item_pos(uint32_t idx, int32_t pos);
 	void scrollbar_moved(int32_t);
 	void update_positions();
 
