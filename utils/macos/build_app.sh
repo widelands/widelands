@@ -1,6 +1,3 @@
-# NOCOM(GunChleoc): Test this.
-
-
 #!/bin/bash
 
 set -e
