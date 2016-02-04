@@ -25,11 +25,11 @@
 #include <boost/signals2.hpp>
 
 #include "graphic/align.h"
+#include "ui_basic/button.h"
+#include "ui_basic/multilinetextarea.h"
 #include "ui_basic/window.h"
 
 namespace UI {
-
-struct WLMessageBoxImpl;
 
 /**
  * Shows a standard messagebox. The message box can be used either as a modal
@@ -61,7 +61,6 @@ struct WLMessageBox : public Window {
 		 const std::string & text,
 		 MBoxType,
 		 Align = UI::Align::kCenter);
-	~WLMessageBox();
 
 	boost::signals2::signal<void ()> ok;
 	boost::signals2::signal<void ()> cancel;
@@ -77,7 +76,9 @@ protected:
 	virtual void clicked_back();
 
 private:
-	std::unique_ptr<WLMessageBoxImpl> d;
+	MBoxType type_;
+	std::unique_ptr<Button> ok_button_, cancel_button_;
+	std::unique_ptr<MultilineTextarea> textarea_;
 };
 
 }
