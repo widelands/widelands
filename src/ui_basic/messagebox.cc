@@ -26,16 +26,12 @@
 
 namespace UI {
 
-WLMessageBox::WLMessageBox
-	(Panel * const parent,
-	 const std::string & caption,
-	 const std::string & text,
-	 const MBoxType type,
-	 Align align)
-	:
-	Window(parent, "message_box", 0, 0, 20, 20, caption.c_str()),
-	type_(type)
-{
+WLMessageBox::WLMessageBox(Panel* const parent,
+                           const std::string& caption,
+                           const std::string& text,
+                           const MBoxType type,
+                           Align align)
+   : Window(parent, "message_box", 0, 0, 20, 20, caption.c_str()), type_(type) {
 	// Calculate textarea dimensions depending on text size
 	const int outerwidth = parent ? parent->get_inner_w() : g_gr->get_xres();
 	const int outerheight = parent ? parent->get_inner_h() : g_gr->get_yres();
@@ -75,27 +71,34 @@ WLMessageBox::WLMessageBox
 		scrollmode = MultilineTextarea::ScrollMode::kScrollNormal;
 	}
 
-	textarea_.reset(
-			new MultilineTextarea(this, margin, margin, width - 2 * margin, height, text, align, scrollmode));
+	textarea_.reset(new MultilineTextarea(
+	   this, margin, margin, width - 2 * margin, height, text, align, scrollmode));
 
 	// Now add the buttons
 	int button_y = textarea_->get_y() + textarea_->get_h() + 2 * margin;
 
-	ok_button_.reset(new Button
-		(this, "ok",
-		 type_ == MBoxType::kOk ? (width - button_w) / 2 : width * 2 / 3 - button_w / 2,
-		 button_y, button_w, 0,
-		 g_gr->images().get("images/ui_basic/but5.png"),
-		 _("OK")));
+	ok_button_.reset(
+	   new Button(this,
+	              "ok",
+	              type_ == MBoxType::kOk ? (width - button_w) / 2 : width * 2 / 3 - button_w / 2,
+	              button_y,
+	              button_w,
+	              0,
+	              g_gr->images().get("images/ui_basic/but5.png"),
+	              _("OK")));
 	ok_button_->sigclicked.connect(boost::bind(&WLMessageBox::clicked_ok, boost::ref(*this)));
 
 	if (type_ == MBoxType::kOkCancel) {
-		cancel_button_.reset(new Button
-			(this, "no",
-			 width / 3 - button_w / 2, button_y, button_w, 0,
-			 g_gr->images().get("images/ui_basic/but1.png"),
-			 _("Cancel")));
-		cancel_button_->sigclicked.connect(boost::bind(&WLMessageBox::clicked_back, boost::ref(*this)));
+		cancel_button_.reset(new Button(this,
+		                                "no",
+		                                width / 3 - button_w / 2,
+		                                button_y,
+		                                button_w,
+		                                0,
+		                                g_gr->images().get("images/ui_basic/but1.png"),
+		                                _("Cancel")));
+		cancel_button_->sigclicked.connect(
+		   boost::bind(&WLMessageBox::clicked_back, boost::ref(*this)));
 	}
 
 	set_inner_size(width, button_y + ok_button_->get_h() + margin);
@@ -103,15 +106,13 @@ WLMessageBox::WLMessageBox
 	focus();
 }
 
-
 /**
  * Handle mouseclick.
  *
  * Clicking the right mouse button inside the window acts like pressing
  * Ok or No, depending on the message box type.
  */
-bool WLMessageBox::handle_mousepress(const uint8_t btn, int32_t, int32_t)
-{
+bool WLMessageBox::handle_mousepress(const uint8_t btn, int32_t, int32_t) {
 	if (btn == SDL_BUTTON_RIGHT) {
 		play_click();
 		if (type_ == MBoxType::kOk) {
@@ -123,47 +124,40 @@ bool WLMessageBox::handle_mousepress(const uint8_t btn, int32_t, int32_t)
 	return true;
 }
 
-bool WLMessageBox::handle_mouserelease(const uint8_t, int32_t, int32_t)
-{
+bool WLMessageBox::handle_mouserelease(const uint8_t, int32_t, int32_t) {
 	return true;
 }
 
-bool WLMessageBox::handle_key(bool down, SDL_Keysym code)
-{
+bool WLMessageBox::handle_key(bool down, SDL_Keysym code) {
 	if (down) {
 		switch (code.sym) {
-			case SDLK_KP_ENTER:
-			case SDLK_RETURN:
+		case SDLK_KP_ENTER:
+		case SDLK_RETURN:
+			clicked_ok();
+			return true;
+		case SDLK_ESCAPE:
+			if (type_ == MBoxType::kOk) {
 				clicked_ok();
-				return true;
-			case SDLK_ESCAPE:
-				if (type_ == MBoxType::kOk) {
-					clicked_ok();
-				} else {
-					clicked_back();
-				}
-				return true;
-			default:
-				break; // not handled
+			} else {
+				clicked_back();
+			}
+			return true;
+		default:
+			break;  // not handled
 		}
 	}
 	return UI::Panel::handle_key(down, code);
 }
 
-
-void WLMessageBox::clicked_ok()
-{
+void WLMessageBox::clicked_ok() {
 	ok();
 	if (is_modal())
 		end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kOk);
 }
 
-void WLMessageBox::clicked_back()
-{
+void WLMessageBox::clicked_back() {
 	cancel();
 	if (is_modal())
 		end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack);
 }
-
-
 }
