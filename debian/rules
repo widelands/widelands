@@ -1,7 +1,5 @@
 #!/usr/bin/make -f
 
-# NOCOM review this
-
 # Hardening flags
 CPPFLAGS:=$(shell dpkg-buildflags --get CPPFLAGS)
 CFLAGS:=$(shell dpkg-buildflags --get CFLAGS) $(CPPFLAGS)
