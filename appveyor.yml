@@ -15,8 +15,8 @@ install:
   - cmd: "set PATH=%MINGWPATH%;C:\\msys64\\usr\\bin;C:\\Program Files (x86)\\Inno Setup 5;%PATH%"
   # Update mirrors
   - cmd: "bash --login -c \"pacman --noconfirm --sync pacman-mirrors\""
-  # Update msys2 core
-  - cmd: "bash --login -c \"update-core\""
+  # Update msys2 core with fixed update script (no wait for close window)
+  - cmd: "bash --login -c \"exec 0</dev/null && $APPVEYOR_BUILD_FOLDER/utils/win32/appveyor/update-core.sh\""
   # Update msys2 system
   - cmd: "bash --login -c \"pacman -Su --noconfirm\""
   # Installed required libs
