@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2011 by the Widelands Development Team
+ * Copyright (C) 2007-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -52,25 +52,19 @@ InteractiveGameBase::InteractiveGameBase
 	:
 	InteractiveBase(_game, global_s),
 	chat_provider_(nullptr),
-	m_building_census_format
-		(global_s.get_string("building_census_format",       "%N")),
-	m_building_statistics_format
-		(global_s.get_string("building_statistics_format",   "%t")),
-	m_building_tooltip_format
-		(global_s.get_string("building_tooltip_format",      "%r")),
-	m_chatenabled(chatenabled),
-	m_multiplayer(multiplayer),
-	m_playertype(pt),
+	chatenabled_(chatenabled),
+	multiplayer_(multiplayer),
+	playertype_(pt),
 
 #define INIT_BTN(picture, name, tooltip)                            \
  TOOLBAR_BUTTON_COMMON_PARAMETERS(name),                                      \
- g_gr->images().get("pics/" picture ".png"),                      \
+ g_gr->images().get("images/" picture ".png"),                      \
  tooltip                                                                      \
 
-	m_toggle_buildhelp
-		(INIT_BTN("menu_toggle_buildhelp", "buildhelp", _("Show Building Spaces (on/off)")))
+	toggle_buildhelp_
+		(INIT_BTN("wui/menus/menu_toggle_buildhelp", "buildhelp", _("Show Building Spaces (on/off)")))
 {
-	m_toggle_buildhelp.sigclicked.connect(boost::bind(&InteractiveGameBase::toggle_buildhelp, this));
+	toggle_buildhelp_.sigclicked.connect(boost::bind(&InteractiveGameBase::toggle_buildhelp, this));
 }
 
 /// \return a pointer to the running \ref Game instance.
@@ -90,7 +84,7 @@ void InteractiveGameBase::set_chat_provider(ChatProvider & chat)
 	chat_provider_ = &chat;
 	chat_overlay_->set_chat_provider(chat);
 
-	m_chatenabled = true;
+	chatenabled_ = true;
 }
 
 ChatProvider * InteractiveGameBase::get_chat_provider()
@@ -123,7 +117,7 @@ void InteractiveGameBase::draw_overlay(RenderTarget& dst) {
 			dst.blit(Point(get_w() - 5,  5),
 						UI::g_fh1->render(game_speed),
 						BlendMode::UseAlpha,
-						UI::Align_TopRight);
+						UI::Align::kTopRight);
 		}
 	}
 }
@@ -137,7 +131,7 @@ void InteractiveGameBase::postload() {
 	Widelands::Map & map = egbase().map();
 	auto* overlay_manager = mutable_field_overlay_manager();
 	show_buildhelp(false);
-	m_toggle_buildhelp.set_perm_pressed(buildhelp());
+	toggle_buildhelp_.set_perm_pressed(buildhelp());
 
 	overlay_manager->register_overlay_callback_function
 			(boost::bind(&InteractiveGameBase::calculate_buildcaps, this, _1));
@@ -147,14 +141,14 @@ void InteractiveGameBase::postload() {
 	map.recalc_whole_map(egbase().world());
 
 	// Close game-relevant UI windows (but keep main menu open)
-	delete m_fieldaction.window;
-	m_fieldaction.window = nullptr;
+	delete fieldaction_.window;
+	fieldaction_.window = nullptr;
 
 	hide_minimap();
 }
 
 void InteractiveGameBase::on_buildhelp_changed(const bool value) {
-	m_toggle_buildhelp.set_perm_pressed(value);
+	toggle_buildhelp_.set_perm_pressed(value);
 }
 
 /**
@@ -188,10 +182,10 @@ bool InteractiveGameBase::try_show_ship_window()
 void InteractiveGameBase::show_game_summary()
 {
 	game().game_controller()->set_desired_speed(0);
-	if (m_game_summary.window) {
-		m_game_summary.window->set_visible(true);
-		m_game_summary.window->think();
+	if (game_summary_.window) {
+		game_summary_.window->set_visible(true);
+		game_summary_.window->think();
 		return;
 	}
-	new GameSummaryScreen(this, &m_game_summary);
+	new GameSummaryScreen(this, &game_summary_);
 }

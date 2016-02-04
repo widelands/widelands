@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2015 by the Widelands Development Team
+ * Copyright (C) 2006-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -179,12 +179,12 @@ void changedir_on_mac() {
 
 void WLApplication::setup_homedir() {
 	//If we don't have a home directory don't do anything
-	if (m_homedir.size()) {
+	if (homedir_.size()) {
 		//assume some dir exists
 		try {
-			log ("Set home directory: %s\n", m_homedir.c_str());
+			log ("Set home directory: %s\n", homedir_.c_str());
 
-			std::unique_ptr<FileSystem> home(new RealFSImpl(m_homedir));
+			std::unique_ptr<FileSystem> home(new RealFSImpl(homedir_));
 			home->ensure_directory_exists(".");
 			g_fs->set_home_file_system(home.release());
 		} catch (const std::exception & e) {
@@ -232,40 +232,45 @@ WLApplication * WLApplication::get(int const argc, char const * * argv) {
  * \param argv Array of command line arguments
  */
 WLApplication::WLApplication(int const argc, char const * const * const argv) :
-m_commandline          (std::map<std::string, std::string>()),
-m_game_type            (NONE),
-m_mouse_swapped        (false),
-m_faking_middle_mouse_button(false),
-m_mouse_position       (0, 0),
-m_mouse_locked         (0),
-m_mouse_compensate_warp(0, 0),
-m_should_die           (false),
+commandline_          (std::map<std::string, std::string>()),
+game_type_            (NONE),
+mouse_swapped_        (false),
+faking_middle_mouse_button_(false),
+mouse_position_       (0, 0),
+mouse_locked_         (0),
+mouse_compensate_warp_(0, 0),
+should_die_           (false),
 #ifdef _WIN32
-m_homedir(FileSystem::get_homedir() + "\\.widelands"),
+homedir_(FileSystem::get_homedir() + "\\.widelands"),
 #else
-m_homedir(FileSystem::get_homedir() + "/.widelands"),
+homedir_(FileSystem::get_homedir() + "/.widelands"),
 #endif
-m_redirected_stdio(false)
+redirected_stdio_(false)
 {
 	g_fs = new LayeredFileSystem();
 
 	parse_commandline(argc, argv); //throws ParameterError, handled by main.cc
 
-	if (m_commandline.count("homedir")) {
-		log ("Adding home directory: %s\n", m_commandline["homedir"].c_str());
-		m_homedir = m_commandline["homedir"];
-		m_commandline.erase("homedir");
+	if (commandline_.count("homedir")) {
+		log ("Adding home directory: %s\n", commandline_["homedir"].c_str());
+		homedir_ = commandline_["homedir"];
+		commandline_.erase("homedir");
 	}
 #ifdef REDIRECT_OUTPUT
 	if (!redirect_output())
-		redirect_output(m_homedir);
+		redirect_output(homedir_);
 #endif
 
 	setup_homedir();
 	init_settings();
 
-	log("Adding directory: %s\n", m_datadir.c_str());
-	g_fs->add_file_system(&FileSystem::create(m_datadir));
+	log("Adding directory: %s\n", datadir_.c_str());
+	g_fs->add_file_system(&FileSystem::create(datadir_));
+
+	if (!datadir_for_testing_.empty()) {
+		log("Adding directory: %s\n", datadir_for_testing_.c_str());
+		g_fs->add_file_system(&FileSystem::create(datadir_for_testing_));
+	}
 
 	init_language(); // search paths must already be set up
 	changedir_on_mac();
@@ -288,9 +293,10 @@ m_redirected_stdio(false)
 	   UI::create_fonthandler(&g_gr->images());  // This will create the fontset, so loading it first.
 	UI::g_fh = new UI::FontHandler();
 
-	g_gr->initialize(config.get_int("xres", DEFAULT_RESOLUTION_W),
-	                 config.get_int("yres", DEFAULT_RESOLUTION_H),
-	                 config.get_bool("fullscreen", false));
+	g_gr->initialize(
+	   config.get_bool("debug_gl_trace", false) ? Graphic::TraceGl::kYes : Graphic::TraceGl::kNo,
+	   config.get_int("xres", DEFAULT_RESOLUTION_W), config.get_int("yres", DEFAULT_RESOLUTION_H),
+	   config.get_bool("fullscreen", false));
 	g_sound_handler.init(); //  TODO(unknown): memory leak!
 
 
@@ -334,7 +340,7 @@ WLApplication::~WLApplication()
 	delete g_fs;
 	g_fs = nullptr;
 
-	if (m_redirected_stdio)
+	if (redirected_stdio_)
 	{
 		std::cout.flush();
 		fclose(stdout);
@@ -356,15 +362,15 @@ void WLApplication::run()
 	// This also grabs the mouse cursor if so desired.
 	refresh_graphics();
 
-	if (m_game_type == EDITOR) {
+	if (game_type_ == EDITOR) {
 		g_sound_handler.start_music("ingame");
-		EditorInteractive::run_editor(m_filename, m_script_to_run);
-	} else if (m_game_type == REPLAY)   {
+		EditorInteractive::run_editor(filename_, script_to_run_);
+	} else if (game_type_ == REPLAY)   {
 		replay();
-	} else if (m_game_type == LOADGAME) {
+	} else if (game_type_ == LOADGAME) {
 		Widelands::Game game;
 		try {
-			game.run_load_game(m_filename.c_str(), m_script_to_run);
+			game.run_load_game(filename_.c_str(), script_to_run_);
 		} catch (const Widelands::GameDataError & e) {
 			log("Game not loaded: Game data error: %s\n", e.what());
 		} catch (const std::exception & e) {
@@ -372,10 +378,10 @@ void WLApplication::run()
 			emergency_save(game);
 			throw;
 		}
-	} else if (m_game_type == SCENARIO) {
+	} else if (game_type_ == SCENARIO) {
 		Widelands::Game game;
 		try {
-			game.run_splayer_scenario_direct(m_filename.c_str(), m_script_to_run);
+			game.run_splayer_scenario_direct(filename_.c_str(), script_to_run_);
 		} catch (const Widelands::GameDataError & e) {
 			log("Scenario not started: Game data error: %s\n", e.what());
 		} catch (const std::exception & e) {
@@ -383,7 +389,7 @@ void WLApplication::run()
 			emergency_save(game);
 			throw;
 		}
-	} else if (m_game_type == INTERNET) {
+	} else if (game_type_ == INTERNET) {
 		Widelands::Game game;
 		try {
 			// disable sound completely
@@ -421,13 +427,13 @@ void WLApplication::run()
 
 				// Load the requested map
 				Widelands::Map map;
-				map.set_filename(m_filename);
-				std::unique_ptr<Widelands::MapLoader> ml = map.get_correct_loader(m_filename);
+				map.set_filename(filename_);
+				std::unique_ptr<Widelands::MapLoader> ml = map.get_correct_loader(filename_);
 				if (!ml) {
 					throw WLWarning
 						("Unsupported format",
 						 "Widelands could not load the file \"%s\". The file format seems to be incompatible.",
-						 m_filename.c_str());
+						 filename_.c_str());
 				}
 				ml->preload_map(true);
 
@@ -479,15 +485,15 @@ bool WLApplication::poll_event(SDL_Event& ev) {
 	// settings are invisible to the rest of the code
 	switch (ev.type) {
 	case SDL_MOUSEMOTION:
-		ev.motion.xrel += m_mouse_compensate_warp.x;
-		ev.motion.yrel += m_mouse_compensate_warp.y;
-		m_mouse_compensate_warp = Point(0, 0);
+		ev.motion.xrel += mouse_compensate_warp_.x;
+		ev.motion.yrel += mouse_compensate_warp_.y;
+		mouse_compensate_warp_ = Point(0, 0);
 
-		if (m_mouse_locked) {
-			warp_mouse(m_mouse_position);
+		if (mouse_locked_) {
+			warp_mouse(mouse_position_);
 
-			ev.motion.x = m_mouse_position.x;
-			ev.motion.y = m_mouse_position.y;
+			ev.motion.x = mouse_position_.x;
+			ev.motion.y = mouse_position_.y;
 		}
 		break;
 
@@ -509,7 +515,7 @@ bool WLApplication::handle_key(bool down, const SDL_Keycode& keycode, int modifi
 		case SDLK_F10:
 			// exits the game.
 			if (ctrl) {
-				m_should_die = true;
+				should_die_ = true;
 			}
 			return true;
 
@@ -579,7 +585,7 @@ void WLApplication::handle_input(InputCallback const * cb)
 			}
 			break;
 		case SDL_MOUSEMOTION:
-			m_mouse_position = Point(ev.motion.x, ev.motion.y);
+			mouse_position_ = Point(ev.motion.x, ev.motion.y);
 
 			if ((ev.motion.xrel || ev.motion.yrel) && cb && cb->mouse_move)
 				cb->mouse_move
@@ -588,7 +594,7 @@ void WLApplication::handle_input(InputCallback const * cb)
 					 ev.motion.xrel, ev.motion.yrel);
 			break;
 		case SDL_QUIT:
-			m_should_die = true;
+			should_die_ = true;
 			break;
 		default:;
 		}
@@ -601,7 +607,7 @@ void WLApplication::handle_input(InputCallback const * cb)
 void WLApplication::_handle_mousebutton
 	(SDL_Event & ev, InputCallback const * cb)
 {
-		if (m_mouse_swapped) {
+		if (mouse_swapped_) {
 			switch (ev.button.button) {
 				case SDL_BUTTON_LEFT:
 					ev.button.button = SDL_BUTTON_RIGHT;
@@ -625,7 +631,7 @@ void WLApplication::_handle_mousebutton
 			 (get_key_state(SDL_SCANCODE_LALT) || get_key_state(SDL_SCANCODE_RALT)))
 		{
 			ev.button.button = SDL_BUTTON_LEFT;
-			m_faking_middle_mouse_button = true;
+			faking_middle_mouse_button_ = true;
 		}
 #endif
 
@@ -633,9 +639,9 @@ void WLApplication::_handle_mousebutton
 			cb->mouse_press(ev.button.button, ev.button.x, ev.button.y);
 		else if (ev.type == SDL_MOUSEBUTTONUP) {
 			if (cb && cb->mouse_release) {
-				if (ev.button.button == SDL_BUTTON_MIDDLE && m_faking_middle_mouse_button) {
+				if (ev.button.button == SDL_BUTTON_MIDDLE && faking_middle_mouse_button_) {
 					cb->mouse_release(SDL_BUTTON_LEFT, ev.button.x, ev.button.y);
-					m_faking_middle_mouse_button = false;
+					faking_middle_mouse_button_ = false;
 				}
 				cb->mouse_release(ev.button.button, ev.button.x, ev.button.y);
 			}
@@ -646,18 +652,18 @@ void WLApplication::_handle_mousebutton
 /// Instantaneously move the mouse cursor without creating a motion event.
 ///
 /// SDL_WarpMouseInWindow() *will* create a mousemotion event, which we do not want.
-/// As a workaround, we store the delta in m_mouse_compensate_warp and use that to
+/// As a workaround, we store the delta in mouse_compensate_warp_ and use that to
 /// eliminate the motion event in poll_event()
 ///
 /// \param position The new mouse position
 void WLApplication::warp_mouse(const Point position)
 {
-	m_mouse_position = position;
+	mouse_position_ = position;
 
 	Point cur_position;
 	SDL_GetMouseState(&cur_position.x, &cur_position.y);
 	if (cur_position != position) {
-		m_mouse_compensate_warp += cur_position - position;
+		mouse_compensate_warp_ += cur_position - position;
 		SDL_Window* sdl_window = g_gr->get_sdlwindow();
 		if (sdl_window) {
 			SDL_WarpMouseInWindow(sdl_window, position.x, position.y);
@@ -688,7 +694,7 @@ void WLApplication::set_input_grab(bool grab)
 		if (sdl_window) {
 			SDL_SetWindowGrab(sdl_window, SDL_FALSE);
 		}
-		warp_mouse(m_mouse_position); //TODO(unknown): is this redundant?
+		warp_mouse(mouse_position_); //TODO(unknown): is this redundant?
 	}
 }
 
@@ -767,7 +773,7 @@ void WLApplication::init_language() {
 	// Initialize locale and grab "widelands" textdomain
 	i18n::init_locale();
 
-	i18n::set_localedir(m_datadir + "/locale");
+	i18n::set_localedir(datadir_ + "/locale");
 	i18n::grab_textdomain("widelands");
 
 	// Set locale corresponding to selected language
@@ -852,12 +858,12 @@ void WLApplication::parse_commandline
 			opt.erase(pos, opt.size() - pos);
 		}
 
-		m_commandline[opt] = value;
+		commandline_[opt] = value;
 	}
 }
 
 /**
- * Parse the command line given in m_commandline
+ * Parse the command line given in commandline_
  *
  * \return false if there were errors during parsing \e or if "--help"
  * was given,
@@ -865,105 +871,109 @@ void WLApplication::parse_commandline
 */
 void WLApplication::handle_commandline_parameters()
 {
-	if (m_commandline.count("logfile")) {
-		m_logfile = m_commandline["logfile"];
-		std::cerr << "Redirecting log target to: " <<  m_logfile << std::endl;
-		if (m_logfile.size() != 0) {
+	if (commandline_.count("logfile")) {
+		logfile_ = commandline_["logfile"];
+		std::cerr << "Redirecting log target to: " <<  logfile_ << std::endl;
+		if (logfile_.size() != 0) {
 			//TODO(unknown): (very small) memory leak of 1 ofstream;
 			//swaw the buffers (internally) of the file and wout
-			std::ofstream * widelands_out = new std::ofstream(m_logfile.c_str());
+			std::ofstream * widelands_out = new std::ofstream(logfile_.c_str());
 			std::streambuf * logbuf = widelands_out->rdbuf();
 			wout.rdbuf(logbuf);
 		}
-		m_commandline.erase("logfile");
+		commandline_.erase("logfile");
 	}
-	if (m_commandline.count("nosound")) {
+	if (commandline_.count("nosound")) {
 		g_sound_handler.nosound_ = true;
-		m_commandline.erase("nosound");
+		commandline_.erase("nosound");
 	}
-	if (m_commandline.count("nozip")) {
+	if (commandline_.count("nozip")) {
 		g_options.pull_section("global").create_val("nozip", "true");
-		m_commandline.erase("nozip");
+		commandline_.erase("nozip");
 	}
 
-	if (m_commandline.count("datadir")) {
-		m_datadir = m_commandline["datadir"];
-		m_commandline.erase("datadir");
+	if (commandline_.count("datadir")) {
+		datadir_ = commandline_["datadir"];
+		commandline_.erase("datadir");
 	} else {
-		m_datadir = is_absolute_path(INSTALL_DATADIR) ?
+		datadir_ = is_absolute_path(INSTALL_DATADIR) ?
 		               INSTALL_DATADIR :
-		               get_executable_directory() + INSTALL_DATADIR;
+		               get_executable_directory() + FileSystem::file_separator() + INSTALL_DATADIR;
 	}
-	if (!is_absolute_path(m_datadir)) {
-		m_datadir = absolute_path_if_not_windows(FileSystem::get_working_directory() +
-		                                         FileSystem::file_separator() + m_datadir);
+	if (!is_absolute_path(datadir_)) {
+		datadir_ = absolute_path_if_not_windows(FileSystem::get_working_directory() +
+		                                         FileSystem::file_separator() + datadir_);
+	}
+	if (commandline_.count("datadir_for_testing")) {
+		datadir_for_testing_ = commandline_["datadir_for_testing"];
+		commandline_.erase("datadir_for_testing");
 	}
 
-	if (m_commandline.count("verbose")) {
+	if (commandline_.count("verbose")) {
 		g_verbose = true;
 
-		m_commandline.erase("verbose");
+		commandline_.erase("verbose");
 	}
 
-	if (m_commandline.count("editor")) {
-		m_filename = m_commandline["editor"];
-		if (m_filename.size() && *m_filename.rbegin() == '/')
-			m_filename.erase(m_filename.size() - 1);
-		m_game_type = EDITOR;
-		m_commandline.erase("editor");
+	if (commandline_.count("editor")) {
+		filename_ = commandline_["editor"];
+		if (filename_.size() && *filename_.rbegin() == '/')
+			filename_.erase(filename_.size() - 1);
+		game_type_ = EDITOR;
+		commandline_.erase("editor");
 	}
 
-	if (m_commandline.count("replay")) {
-		if (m_game_type != NONE)
+	if (commandline_.count("replay")) {
+		if (game_type_ != NONE)
 			throw wexception("replay can not be combined with other actions");
-		m_filename = m_commandline["replay"];
-		if (m_filename.size() && *m_filename.rbegin() == '/')
-			m_filename.erase(m_filename.size() - 1);
-		m_game_type = REPLAY;
-		m_commandline.erase("replay");
+		filename_ = commandline_["replay"];
+		if (filename_.size() && *filename_.rbegin() == '/')
+			filename_.erase(filename_.size() - 1);
+		game_type_ = REPLAY;
+		commandline_.erase("replay");
 	}
 
-	if (m_commandline.count("loadgame")) {
-		if (m_game_type != NONE)
+	if (commandline_.count("loadgame")) {
+		if (game_type_ != NONE)
 			throw wexception("loadgame can not be combined with other actions");
-		m_filename = m_commandline["loadgame"];
-		if (m_filename.empty())
+		filename_ = commandline_["loadgame"];
+		if (filename_.empty())
 			throw wexception("empty value of command line parameter --loadgame");
-		if (*m_filename.rbegin() == '/')
-			m_filename.erase(m_filename.size() - 1);
-		m_game_type = LOADGAME;
-		m_commandline.erase("loadgame");
+		if (*filename_.rbegin() == '/')
+			filename_.erase(filename_.size() - 1);
+		game_type_ = LOADGAME;
+		commandline_.erase("loadgame");
 	}
 
-	if (m_commandline.count("scenario")) {
-		if (m_game_type != NONE)
+	if (commandline_.count("scenario")) {
+		if (game_type_ != NONE)
 			throw wexception("scenario can not be combined with other actions");
-		m_filename = m_commandline["scenario"];
-		if (m_filename.empty())
+		filename_ = commandline_["scenario"];
+		if (filename_.empty())
 			throw wexception("empty value of command line parameter --scenario");
-		if (*m_filename.rbegin() == '/')
-			m_filename.erase(m_filename.size() - 1);
-		m_game_type = SCENARIO;
-		m_commandline.erase("scenario");
+		if (*filename_.rbegin() == '/')
+			filename_.erase(filename_.size() - 1);
+		game_type_ = SCENARIO;
+		commandline_.erase("scenario");
 	}
-	if (m_commandline.count("dedicated")) {
-		if (m_game_type != NONE)
+	if (commandline_.count("dedicated")) {
+		if (game_type_ != NONE)
 			throw wexception("dedicated can not be combined with other actions");
-		m_filename = m_commandline["dedicated"];
-		if (m_filename.empty())
+		filename_ = commandline_["dedicated"];
+		if (filename_.empty())
 			throw wexception("empty value of commandline parameter --dedicated");
-		if (*m_filename.rbegin() == '/')
-			m_filename.erase(m_filename.size() - 1);
-		m_game_type = INTERNET;
-		m_commandline.erase("dedicated");
+		if (*filename_.rbegin() == '/')
+			filename_.erase(filename_.size() - 1);
+		game_type_ = INTERNET;
+		commandline_.erase("dedicated");
 	}
-	if (m_commandline.count("script")) {
-		m_script_to_run = m_commandline["script"];
-		if (m_script_to_run.empty())
+	if (commandline_.count("script")) {
+		script_to_run_ = commandline_["script"];
+		if (script_to_run_.empty())
 			throw wexception("empty value of command line parameter --script");
-		if (*m_script_to_run.rbegin() == '/')
-			m_script_to_run.erase(m_script_to_run.size() - 1);
-		m_commandline.erase("script");
+		if (*script_to_run_.rbegin() == '/')
+			script_to_run_.erase(script_to_run_.size() - 1);
+		commandline_.erase("script");
 	}
 
 	//If it hasn't been handled yet it's probably an attempt to
@@ -972,10 +982,10 @@ void WLApplication::handle_commandline_parameters()
 	//will be taken care of (==ignored) when saving the options
 
 	const std::map<std::string, std::string>::const_iterator commandline_end =
-		m_commandline.end();
+		commandline_.end();
 	for
 		(std::map<std::string, std::string>::const_iterator it =
-		 	m_commandline.begin();
+		 	commandline_.begin();
 		 it != commandline_end;
 		 ++it)
 	{
@@ -986,7 +996,7 @@ void WLApplication::handle_commandline_parameters()
 			(it->first.c_str(), it->second.c_str());
 	}
 
-	if (m_commandline.count("help") || m_commandline.count("version")) {
+	if (commandline_.count("help") || commandline_.count("version")) {
 		init_language();
 		throw ParameterError(); //no message on purpose
 	}
@@ -1015,7 +1025,7 @@ void WLApplication::mainmenu()
 				 messagetitle,
 				 message,
 				 UI::WLMessageBox::MBoxType::kOk,
-				 UI::Align_Left);
+				 UI::Align::kLeft);
 			mmb.run<UI::Panel::Returncodes>();
 
 			message.clear();
@@ -1057,7 +1067,7 @@ void WLApplication::mainmenu()
 				break;
 			}
 			case FullscreenMenuBase::MenuTarget::kEditor:
-				EditorInteractive::run_editor(m_filename, m_script_to_run);
+				EditorInteractive::run_editor(filename_, script_to_run_);
 				break;
 			default:
 			case FullscreenMenuBase::MenuTarget::kExit:
@@ -1376,13 +1386,13 @@ bool WLApplication::campaign_game()
 void WLApplication::replay()
 {
 	Widelands::Game game;
-	if (m_filename.empty()) {
+	if (filename_.empty()) {
 		SinglePlayerGameSettingsProvider sp;
 		FullscreenMenuLoadGame rm(game, &sp, nullptr, true);
 		if (rm.run<FullscreenMenuBase::MenuTarget>() == FullscreenMenuBase::MenuTarget::kBack)
 			return;
 
-		m_filename = rm.filename();
+		filename_ = rm.filename();
 	}
 
 	try {
@@ -1396,7 +1406,7 @@ void WLApplication::replay()
 		game.set_ibase
 			(new InteractiveSpectator(game, g_options.pull_section("global")));
 		game.set_write_replay(false);
-		ReplayGameController rgc(game, m_filename);
+		ReplayGameController rgc(game, filename_);
 
 		game.save_handler().set_allow_saving(false);
 
@@ -1404,10 +1414,10 @@ void WLApplication::replay()
 	} catch (const std::exception & e) {
 		log("Fatal Exception: %s\n", e.what());
 		emergency_save(game);
-		m_filename.clear();
+		filename_.clear();
 		throw;
 	}
-	m_filename.clear();
+	filename_.clear();
 }
 
 
@@ -1483,7 +1493,7 @@ void WLApplication::cleanup_replays()
 			memset(&tfile, 0, sizeof(tm));
 
 			tfile.tm_mday = atoi(timestr.substr(8, 2).c_str());
-			tfile.tm_mon = atoi(timestr.substr(5, 2).c_str()) - 1;
+			tfile.tm_mon  = atoi(timestr.substr(5, 2).c_str()) - 1;
 			tfile.tm_year = atoi(timestr.substr(0, 4).c_str()) - 1900;
 
 			double tdiff = std::difftime(tnow, mktime(&tfile)) / 86400;
@@ -1527,6 +1537,6 @@ bool WLApplication::redirect_output(std::string path)
 	/* No buffering */
 	setbuf(stderr, nullptr);
 
-	m_redirected_stdio = true;
+	redirected_stdio_ = true;
 	return true;
 }

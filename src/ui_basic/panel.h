@@ -79,7 +79,7 @@ public:
 	Panel
 		(Panel * const nparent,
 		 int32_t  const nx, int32_t  const ny,
-		 uint32_t const nw, uint32_t const nh,
+		 int const nw, int const nh,
 		 const std::string& tooltip_text = std::string());
 	virtual ~Panel();
 
@@ -114,8 +114,8 @@ public:
 	virtual void end();
 
 	// Geometry
-	void set_size(uint32_t nw, uint32_t nh);
-	void set_desired_size(uint32_t w, uint32_t h);
+	void set_size(int nw, int nh);
+	void set_desired_size(int w, int h);
 	void set_pos(Point);
 	virtual void move_inside_parent();
 	virtual void layout();
@@ -123,7 +123,7 @@ public:
 	void set_layout_toplevel(bool ltl);
 	bool get_layout_toplevel() const;
 
-	void get_desired_size(uint32_t & w, uint32_t & h) const;
+	void get_desired_size(int* w, int* h) const;
 
 	int32_t get_x() const {return _x;}
 	int32_t get_y() const {return _y;}
@@ -151,19 +151,19 @@ public:
 		return _flags & pf_dock_windows_to_edges;
 	}
 	void set_dock_windows_to_edges(const bool on = true);
-	void set_inner_size(uint32_t nw, uint32_t nh);
-	void set_border(uint32_t l, uint32_t r, uint32_t t, uint32_t b);
+	void set_inner_size(int nw, int nh);
+	void set_border(int l, int r, int t, int b);
 
-	uint32_t get_lborder() const {return _lborder;}
-	uint32_t get_rborder() const {return _rborder;}
-	uint32_t get_tborder() const {return _tborder;}
-	uint32_t get_bborder() const {return _bborder;}
+	int get_lborder() const {return _lborder;}
+	int get_rborder() const {return _rborder;}
+	int get_tborder() const {return _tborder;}
+	int get_bborder() const {return _bborder;}
 
-	uint32_t get_inner_w() const {
+	int get_inner_w() const {
 		assert(_lborder + _rborder <= _w);
 		return _w - (_lborder + _rborder);
 	}
-	uint32_t get_inner_h() const {
+	int get_inner_h() const {
 		assert(_tborder + _bborder <= _h);
 		return _h - (_tborder + _bborder);
 	}
@@ -186,9 +186,6 @@ public:
 	virtual void draw        (RenderTarget &);
 	virtual void draw_border (RenderTarget &);
 	virtual void draw_overlay(RenderTarget &);
-	void update(int32_t x, int32_t y, int32_t w, int32_t h);
-	void update();
-	void update_inner(int32_t x, int32_t y, int32_t w, int32_t h);
 
 	// Events
 	virtual void think();
@@ -321,11 +318,11 @@ private:
 	 */
 	/*@{*/
 	int32_t _x, _y;
-	uint32_t _w, _h;
+	int _w, _h;
 	/*@}*/
-	uint32_t _lborder, _rborder, _tborder, _bborder;
+	int _lborder, _rborder, _tborder, _bborder;
 	uint8_t _border_snap_distance, _panel_snap_distance;
-	uint32_t _desired_w, _desired_h;
+	int _desired_w, _desired_h;
 
 	bool _running;
 	int _retcode;
@@ -359,7 +356,7 @@ struct NamedPanel : public Panel {
 	NamedPanel
 		(Panel * const nparent, const std::string & name,
 		 int32_t  const nx, int32_t  const ny,
-		 uint32_t const nw, uint32_t const nh,
+		 int const nw, int const nh,
 		 const std::string & tooltip_text = std::string())
 		: Panel(nparent, nx, ny, nw, nh, tooltip_text), m_name(name)
 	{

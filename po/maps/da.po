@@ -1,15 +1,15 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2015 Widelands Development Team
+# Copyright (C) 2005-2016 Widelands Development Team
 # 
 # Translators:
-# Joe Hansen <joedalton2@yahoo.dk>, 2009,2015
+# Joe Hansen <joedalton2@yahoo.dk>, 2009,2015-2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-12-14 05:31+0000\n"
-"PO-Revision-Date: 2016-01-03 23:48+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2016-01-31 20:26+0000\n"
+"PO-Revision-Date: 2016-02-02 14:51+0000\n"
+"Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
 "Language-Team: Danish (http://www.transifex.com/widelands/widelands/language/da/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -17,352 +17,15 @@ msgstr ""
 "Language: da\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../../maps/River Explorers.wmf/elemental:8
-msgid "River Explorers"
-msgstr "Flodopdagelsesrejsende"
+#: ../../campaigns/atl01.wmf/elemental:9 ../../campaigns/campaigns.conf:95
+msgid "From Nemesis to Genesis"
+msgstr "Fra nemesis til genesis"
 
-#: ../../maps/River Explorers.wmf/elemental:10
+#: ../../campaigns/atl01.wmf/elemental:11
 msgid ""
-"Each player has a different obstacle to expansion, and there’s always more "
-"than one way to overcome it. While the AI can be defeated here without "
-"building a single ship, players are advised to make ports and shipyards a "
-"priority – expeditions are universally useful and are often the fastest way "
-"to gold deposits."
-msgstr "Hver spiller har forskellige forhindringer for udvidelse, og der er altid mere end en måde at komme forbi dem på. Mens computerintelligensen kan besejres her uden at bygge et eneste skib, så rådes spillere til at gøre bygningen af havne og skibsværter en prioritet - ekspeditioner er altid nyttige og er ofte den hurtigste vej til gulddepoter."
-
-#: ../../maps/Riverlands.wmf/elemental:8
-msgid "Riverlands"
-msgstr "Flodlandene"
-
-#: ../../maps/Riverlands.wmf/elemental:10
-msgid ""
-"A mystical land, full of different landscapes, which are all crossed by a "
-"handful of big rivers."
-msgstr "Et mystisk land, fuldt med forskellige landskaber, som alle krydses af en håndfuld store floder."
-
-#: ../../maps/Rendez-Vous.wmf/elemental:7
-msgid "Rendez-Vous"
-msgstr "Det aftalte møde"
-
-#: ../../maps/Rendez-Vous.wmf/elemental:9
-msgid ""
-"Only a small hill in the centre of the map connects these four competing "
-"tribes. Lead your army right away to this hill and build a giant stronghold "
-"as a sign of your superiority! Hint: In the centre is only space for one "
-"stronghold. Water can be found everywhere, so there is no need to send out "
-"geologists."
-msgstr "Kun en lille bakke i centrum af kortet forbinder disse fire konkurrerende stammer. Før din hær lige mod bakken og byg en gigantisk fæstning som et tegn på dit overherredømme! Fif: I centrum er der kun plads til en fæstning. Vand kan findes overalt, så der er ingen grund til at sende geologer ud."
-
-#: ../../campaigns/tutorial04_economy.wmf/elemental:8
-#: ../../campaigns/tutorials.conf:27
-msgid "Economy"
-msgstr "Økonomi"
-
-#: ../../campaigns/tutorial04_economy.wmf/elemental:10
-msgid ""
-"In this tutorial, you will learn what option Widelands offers to adjust your"
-" economy. Recommended for players with some experience."
-msgstr "I denne introduktion vil du lære hvilke indstillinger Widelands tilbyder, så du kan justere din økonomi. Anbefalet for spiller med nogen erfaring."
-
-#: ../../maps/Checkmate.wmf/elemental:8
-msgid "Checkmate"
-msgstr "Skakmat"
-
-#: ../../maps/Checkmate.wmf/elemental:10
-msgid ""
-"Whether just one of nature’s strangest features or the creation of a mad "
-"(and game-hungry) god, this weird battleground awaits two opponents for "
-"another confrontation."
-msgstr "Uanset om det er en af naturens mærkeligste indretninger eller bare en gal guds kreation (og en spilsulten), så venter denne slagmark på to modstandere for endnu en konfrontation."
-
-#: ../../maps/Twin Lagoons.wmf/elemental:8
-msgid "Twin Lagoons"
-msgstr "Tvillinglaguner"
-
-#: ../../maps/Twin Lagoons.wmf/elemental:10
-msgid ""
-"When the wind swelled up and the first dunes were formed on these abandoned "
-"twin lagoons, nobody could have expected that two tribes that are "
-"desperately searching for more resources to support their endlessly ongoing "
-"wars would end up in this forgotten place at the same time and for the same "
-"well-known reason. Defend your transport lines or use ships to bypass the "
-"opponent. Then remove all enemy activity."
-msgstr "Når vinden svulmede op, og de første klitter blev dannet på disse forladte tvillingelaguner, kunne ingen have forventet, at to stammer, der desperat søger efter flere ressourcer til at støtte deres uendelige igangværende krige ville ende i dette glemte sted på samme tid, og af samme velkendte grund. Forsvar dine transportlinjer eller brug skibene til at omgå modstanderen. Fjern derefter al fjendtlig aktivitet."
-
-#: ../../maps/Sun of fire.wmf/elemental:9
-msgid "The Ancient Sun of Fire"
-msgstr "Den gamle ildsol"
-
-#: ../../maps/Sun of fire.wmf/elemental:11
-msgid ""
-"For hundreds of years, this island was kept as a sanctuary of the Gods. No "
-"human ever ventured to set a foot on it. But now that a tribe had finally "
-"been barefaced enough to settle on the coast of that island, a lot of others"
-" followed in its wake."
-msgstr "I hundredvis af år blev denne ø holdt som et fristid af guderne. Intet menneske satte fod på øen. Men nu hvor en stamme endelig har haft mod til at gå i land på kysten, følger en masse andre efter."
-
-#: ../../maps/Sun of fire.wmf/elemental:12 ../../maps/Ice
-#: wars.wmf/elemental:12
-msgid "Start positions are clockwise"
-msgstr "Startplaceringer er med uret"
-
-#: ../../maps/Glacier Lake.wmf/elemental:8
-msgid "Glacier Lake"
-msgstr "Gletsjersø"
-
-#: ../../maps/Glacier Lake.wmf/elemental:10
-msgid ""
-"A long time your tribe dwelt on this beautiful and lonely glacier lake. No "
-"one disturbed you and the resources were enough for your whole tribe, but a "
-"few months ago another tribe came over the mountains and settled down. And "
-"you are sure that there is only enough space for one tribe."
-msgstr "I lang tid boede din stamme på denne smukke og ensomme gletschersø. Ingen forstyrrede jer og ressourcerne var nok for hele stammen, men et par måneder siden kom en anden stamme over bjergene og slog sig ned. Og du er sikker på, at der kun er plads til en stamme."
-
-#: ../../maps/The Oasis Triangle.wmf/elemental:8
-msgid "The Oasis Triangle"
-msgstr "Oasetrekanten"
-
-#: ../../maps/The Oasis Triangle.wmf/elemental:10
-msgid ""
-"There is something mystical like a gray atmosphere around these three oases,"
-" which no one has found out about yet. Perhaps you will be the one, but be "
-"aware of the others who are searching too!"
-msgstr "Der er noget mytisk såsom en grå atmosfære omkring disse tre oaser, som ingen har opdaget endnu. Måske du vil være den udvalgte, men pas på andre er også på udkig!"
-
-#: ../../maps/Four Castles.wmf/elemental:8
-msgid "Four Castles"
-msgstr "Fire borge"
-
-#: ../../maps/Four Castles.wmf/elemental:10
-msgid ""
-"Well protected in their mighty fortresses, four power-hungry warlords are "
-"completing their schemes to dominate these lands…"
-msgstr ""
-
-#: ../../maps/MP Scenarios/Smugglers.wmf/elemental:9
-msgid "Smugglers"
-msgstr "Smuglere"
-
-#: ../../maps/MP Scenarios/Smugglers.wmf/elemental:11
-msgid ""
-"Your well established smuggling routes suddenly got busy: two other tribes "
-"have appeared and now a rivalry among smugglers has started. Which team will"
-" be the first to smuggle a certain number of wares?"
-msgstr "Dine veletablerede smuglerruter fik pludselig travlt. To andre stammer er ankommet og nu er en rivalisering blandt smuglerne begyndt. Hvilket hold vil være det første som smugler et bestemt antal varer?"
-
-#: ../../maps/Last Bastion.wmf/elemental:8
-msgid "Last Bastion"
-msgstr "Sidste bastion"
-
-#: ../../maps/Last Bastion.wmf/elemental:10
-msgid ""
-"The whimsical Gods didn’t answer our prayers. Instead, the increasing "
-"sunlight heated up the Earth thousandfold and melted glaciers and people "
-"were plunged into the deep. But now – high in the majestic mountains, on the"
-" last scrap of land – two surviving tribes are sheltering. Even though the "
-"Gods showed mercy and the climate thus turned cooler again, the water is "
-"still rising and rising. Onto the last secure place – the highest mountain "
-"range where the amount of gold and the space to live merely suffice for one "
-"tribe – only two opposite paths lead. But remember, be careful… this last "
-"living space is also a hard and small place to live. Don’t forget to take "
-"care of your timber supplies, you’ll need them."
-msgstr ""
-
-#: ../../maps/Islands at war.wmf/elemental:9
-msgid "Islands at War"
-msgstr "Øer i krig"
-
-#: ../../maps/Islands at war.wmf/elemental:11
-msgid ""
-"For centuries, you’ve lived peacefully side by side with the other tribe on "
-"the neighboring island. This peace seems to come to an end now – your "
-"neighbor has begun to expand."
-msgstr "I århundrede har i levet fredeligt side om side med den anden stamme på naboøen. Denne fred ser ud til at være forbid - din nabo er begyndt at ekspandere."
-
-#: ../../maps/Impact.wmf/elemental:7
-msgid "Impact"
-msgstr "Nedslag"
-
-#: ../../maps/Impact.wmf/elemental:9
-msgid ""
-"After an impact of an asteroid and the following harsh winter, three isles "
-"are connected by ice and stone, setting an end to the peaceful coexistence "
-"of three tribes."
-msgstr "Efter nedslaget af en asteroide og den følgende hårde vinter er tre øer forbundet af is og sten, hvilket sætter en stopper for den fredelige sameksistens mellem tre stammer."
-
-#: ../../maps/The Far North.wmf/elemental:8
-msgid "The Far North"
-msgstr "Det fjerne nord"
-
-#: ../../maps/The Far North.wmf/elemental:10
-msgid ""
-"Some say that impenetrable lands to the far north scared away even the most "
-"courageous settlers and the bravest of the brave warriors. Big and old "
-"forests, full of big and predatory game, cut across by wetlands and hills "
-"were shrouded in mystery. The ones who had managed to come back mentioned "
-"tremendous buildings, decorated with carvings and gold from majestic "
-"mountain ranges somewhere amongst the wilderness. Dozens of years after only"
-" some crumbly ruins remain of these good old times, covered with moss and "
-"trees. Their shapes give only an idea about the craftsmanship of ancient "
-"constructors. Nobody knows why they (have) disappeared. Nobody knows why. "
-"People say that now nothing is blocking the road to wealth. But many will "
-"die pulled apart by wolves, engulfed by swamp… encircled by hostile tribes."
-msgstr ""
-
-#: ../../maps/Finnish Lakes.wmf/elemental:8
-msgid "Finnish Lakes"
-msgstr "Finske søer"
-
-#: ../../maps/Finnish Lakes.wmf/elemental:10
-msgid ""
-"These are the beautiful Finnish lands of lakes, rivers, ancient forests and "
-"mountains. It is up to you to find a way through these lands."
-msgstr "Dette er det smukke finske landskab med søer, floder, gamle skove og bjerge. Det er op til dig, at finde en vej igennem området."
-
-#: ../../maps/Volcanic Winter.wmf/elemental:8
-msgid "Volcanic Winter"
-msgstr "Vulkanisk vinter"
-
-#: ../../maps/Volcanic Winter.wmf/elemental:10
-msgid ""
-"In the middle of summer, a series of volcanic eruptions drew the winter in. "
-"Suddenly, the sun seemed to be gone and the only light and heat sources left"
-" were those that enforced this dramatic change. Continents, oceans and seas "
-"are frozen now, only the volcanic islands seem to be left as habitable land."
-msgstr "I midten af sommeren, fremtrak en række vulkanudbrud vinterens fremkomst. Pludselig, var solen væk, og det eneste lys og varmekilder tilbage var dem, der havde frembragt denne dramatiske ændring. Kontinenter, oceaner og have er frosset nu, kun de vulkanske øer synes at stå som beboelig jord."
-
-#: ../../campaigns/emp02.wmf/elemental:9 ../../campaigns/campaigns.conf:83
-msgid "An Outpost for Exile"
-msgstr "En forpost for eksil"
-
-#: ../../campaigns/emp02.wmf/elemental:11
-msgid ""
-"Finally the ship was repaired, so Lutius and his people returned to the "
-"quest to find a good place for a new beginning. Only a few days later, they "
-"land on a green, Mediterranean island, looking like paradise. Overjoyed, "
-"they set out to explore this new living space."
-msgstr "Endelig blev skibet repareret, så Lutius og hans folk kunne genoptage missionen med at finde et godt sted til en ny begyndelse. Kun nogle få dage senere gør de landgang på en grøn, solskinsø, der ligner et paradis. Fuld af jubel begynder de at udforske deres nye levested."
-
-#: ../../maps/Mystical Maze.wmf/elemental:8
-msgid "Mystical Maze"
-msgstr "Mystisk labyrint"
-
-#: ../../maps/Mystical Maze.wmf/elemental:10
-msgid ""
-"There are two big questions in the air: Who created this unbelievably big "
-"maze, and what can be found inside?"
-msgstr "Der hænger to spørgsmål i luften: Hvem skabte denne utrolige store labyrint, og hvad kan findes inden i den?"
-
-#: ../../campaigns/tutorial01_basic_control.wmf/elemental:8
-#: ../../campaigns/tutorials.conf:15
-msgid "Basic Control"
-msgstr "Basiskontrol"
-
-#: ../../campaigns/tutorial01_basic_control.wmf/elemental:10
-msgid ""
-"In this tutorial, you will learn how to navigate in Widelands and how to "
-"build buildings and roads."
-msgstr "I denne introduktion vil du lære hvordan du navigerer i Widelands og hvordan du bygger bygninger og veje."
-
-#: ../../maps/Trident of Fire.wmf/elemental:9
-msgid "Trident of Fire"
-msgstr "Ildtreforke"
-
-#: ../../maps/Trident of Fire.wmf/elemental:11
-msgid ""
-"In the vicinity of three major volcanoes, six lovely islands are inviting "
-"settlers to start a new life. Deserts and a quickly growing forest wait to "
-"be discovered. But only by becoming a naval power will your tribe be able to"
-" explore enough resources to compete with its opponents."
-msgstr "I nærheden af tre store vulkaner, inviterer seks dejlige øer bosættere sig til at starte et nyt liv. Ørkener og en hurtigt voksende skov vente på at blive opdaget. Men kun ved at blive en sømagt vil din stamme kunne udnytte nok ressourcer til at konkurrere med dens modstandere."
-
-#: ../../campaigns/tutorials.conf:19
-#: ../../campaigns/tutorial02_warfare.wmf/elemental:8
-msgid "Warfare"
-msgstr "Krig"
-
-#: ../../campaigns/tutorials.conf:23
-#: ../../campaigns/tutorial03_seafaring.wmf/elemental:8
-msgid "Seafaring"
-msgstr "Søfart"
-
-#: ../../campaigns/tutorial03_seafaring.wmf/elemental:10
-msgid ""
-"In this tutorial, you will get to know seafaring, which is how to handle "
-"ships and ports."
-msgstr "I denne introduktion vil du lære om søvæsen, som indbefatter håndtering af skibe og havne."
-
-#: ../../maps/Ice wars.wmf/elemental:9
-msgid "Ice wars"
-msgstr "Iskrige"
-
-#: ../../maps/Ice wars.wmf/elemental:11
-msgid "Autumn became winter. Some things are frozen, but not the war."
-msgstr "Efterår blev vinter. Nogle ting er frosset, men ikke krigen."
-
-#: ../../campaigns/bar02.wmf/elemental:7 ../../campaigns/campaigns.conf:72
-msgid "This Land is Our Land"
-msgstr "Dette land er vores land"
-
-#: ../../campaigns/bar02.wmf/elemental:9
-msgid ""
-"This tutorial explains the handling of military and training site buildings "
-"and will introduce fighting."
-msgstr "Denne øvelse forklarer håndteringen af militære anlæg og træningsanlæg og vil give en kort introduktion til kamp."
-
-#: ../../maps/The Green Plateau.wmf/elemental:8
-msgid "The Green Plateau"
-msgstr "Det grønne plateau"
-
-#: ../../maps/The Green Plateau.wmf/elemental:10
-msgid ""
-"You are standing on an island, crowned by mighty mountains which keep a "
-"wonderful and mighty treasure in their middle – The Green Plateau, which is "
-"hard to conquer but easy to lose. So, if you want it, be aware of the other "
-"clans."
-msgstr "Du står på en ø, kronet af store bjerge, som har en vidunderlig og stor skat i sin midte - Det grønne plateau, som er svær at erobre men nem at miste. Så, hvis du ønsker den, så hold øje med de andre klaner."
-
-#: ../../maps/Lake of Tranquility.wmf/elemental:8
-msgid "Lake of Tranquility"
-msgstr "Rolighedens sø"
-
-#: ../../maps/Lake of Tranquility.wmf/elemental:10
-msgid ""
-"This lake, deep in the most ancient forests, has long been known for its "
-"beauty and idyllic peace. However, its sanctity has been disturbed now, as "
-"two hostile tribes have arrived at its shores…"
-msgstr ""
-
-#: ../../maps/Calvisson.wmf/elemental:9
-msgid "Calvisson"
-msgstr "Calvisson"
-
-#: ../../maps/Calvisson.wmf/elemental:11
-msgid ""
-"It’s a pleasure to settle in the beauty of this fissured countryside. But "
-"the ways to encompass these large territories are long and meandering, so it"
-" is easy to err into the land of the foreign clans."
-msgstr "Det er en fornøjelse at slå sig ned i dette sprækkede landområde. Men metoderne til at kommer på tværs af disse store territorier er langsomme og bugtede, så det er nemt ved en fejltagelse at komme ind på fremmede klaners område."
-
-#: ../../maps/Crossing the Horizon.wmf/elemental:8
-msgid "Crossing the Horizon"
-msgstr "Krydser horisonten"
-
-#: ../../maps/Crossing the Horizon.wmf/elemental:10
-msgid "Man your ship and sail to the horizon."
-msgstr "Bemand dit skib og sejl ud mod horisonten"
-
-#: ../../maps/Firegames.wmf/elemental:7
-msgid "Firegames"
-msgstr "Ildkamp"
-
-#: ../../maps/Firegames.wmf/elemental:9
-msgid ""
-"Is this a test by the Gods or an evil plan by someone else, that you and "
-"your tribe woke up on this island among fire and lava? Until now it seems as"
-" if you are alone, but no-one knows what might happen if you met an opposing"
-" tribe?"
-msgstr "Er dette en test fra guderne eller en ond plan af en anden, at du og din stamme skal vågne på denne ø blandt ild og lava? Indtil nu virker det som om, at du er alene, men ingen ved, hvad der vil ske, hvis du møder en anden stamme?"
+"After landing on a mysterious island close to Atlantis, the remaining "
+"Atlanteans struggle to make a new home for themselves."
+msgstr "Efter landgang på en mystisk ø tæt på Atlantis kæmper de tilbageværende atlanteanere for at skabe dem et nyt hjem."
 
 #: ../../campaigns/bar01.wmf/elemental:8 ../../campaigns/campaigns.conf:67
 msgid "A Place to Call Home"
@@ -373,6 +36,16 @@ msgid ""
 "In this scenario, the higher production buildings including mining will be "
 "introduced."
 msgstr "I dette scenarie vil bygninger med højere produktion, inklusive minedrift, blive introduceret."
+
+#: ../../campaigns/bar02.wmf/elemental:7 ../../campaigns/campaigns.conf:72
+msgid "This Land is Our Land"
+msgstr "Dette land er vores land"
+
+#: ../../campaigns/bar02.wmf/elemental:9
+msgid ""
+"This tutorial explains the handling of military and training site buildings "
+"and will introduce fighting."
+msgstr "Denne øvelse forklarer håndteringen af militære anlæg og træningsanlæg og vil give en kort introduktion til kamp."
 
 #: ../../campaigns/campaigns.conf:27
 msgid "The Second Empire"
@@ -454,155 +127,22 @@ msgstr "Da deres gud mistede troen på atlanteanerne og druknede deres ø, blev 
 msgid "The Strands of Malac’ Mor"
 msgstr "Malac' Mors bredder"
 
+#: ../../campaigns/campaigns.conf:83 ../../campaigns/emp02.wmf/elemental:9
+msgid "An Outpost for Exile"
+msgstr "En forpost for eksil"
+
 #: ../../campaigns/campaigns.conf:88 ../../campaigns/campaigns.conf:100
 #: ../../campaigns/dummy.wmf/elemental:7
 msgid "Not yet implemented"
 msgstr "Endnu ikke implementeret"
 
-#: ../../campaigns/campaigns.conf:95 ../../campaigns/atl01.wmf/elemental:9
-msgid "From Nemesis to Genesis"
-msgstr "Fra nemesis til genesis"
+#: ../../campaigns/dummy.wmf/elemental:9
+msgid "Nobody"
+msgstr "Ingen"
 
-#: ../../maps/Wisent Valley.wmf/elemental:8
-msgid "Wisent Valley"
-msgstr "Vildoksedal"
-
-#: ../../maps/Wisent Valley.wmf/elemental:10
-msgid ""
-"It seems as if this magical valley has been inhabited by wisents since the "
-"beginning of days. When your tribe came to this place, you were sure that it"
-" offered enough space for a peaceful life. But can your tribe live in peace "
-"with your neighbors?"
-msgstr "Det virker som om, at denne magiske dal har været beboet af bisoner siden verdens begyndelse. Da din stamme kom til dette sted, var du sikker på, at stedet tilbød plads for et fredeligt liv. Men kan din stamme leve i fred med dine naboer?"
-
-#: ../../maps/The Thaw.wmf/elemental:8
-msgid "The Thaw"
-msgstr "Tøvejret"
-
-#: ../../maps/The Thaw.wmf/elemental:10
-msgid ""
-"Another thaw set in. Three tribes were sheltering from severe winter among "
-"majestic mountains. At the time of the solstice they listened to the oracle "
-"and went to war. The only survivor will sacrifice his enemies’ treasures on "
-"the ancient altar, build there a splendid castle and gain the goodwill and "
-"respect of the Gods."
-msgstr "En anden tø satte i. Tre stammer havde søgt ly for en hård vinter blandt majestætiske bjerge. På tidspunktet for solhverv lyttede de til oraklet og gik i krig. Den eneste overlevende vil ofre sine fjenders skatte på den gamle alter, bygge der et pragtfuld slot og vinde goodwill og respekt fra guderne."
-
-#: ../../campaigns/atl01.wmf/elemental:11
-msgid ""
-"After landing on a mysterious island close to Atlantis, the remaining "
-"Atlanteans struggle to make a new home for themselves."
-msgstr "Efter landgang på en mystisk ø tæt på Atlantis kæmper de tilbageværende atlanteanere for at skabe dem et nyt hjem."
-
-#: ../../maps/Desert Tournament.wmf/elemental:8
-msgid "Desert Tournament"
-msgstr "Ørkenturnering"
-
-#: ../../maps/Desert Tournament.wmf/elemental:10
-msgid ""
-"Four tribes struggle with their nearest neighbor to be the first to reach "
-"the mountain of gold that promises riches beyond belief. But can the two "
-"remaining ones share the resources wisely?"
-msgstr "Fire stammer kæmper mod deres nærmeste nabo om at være den første som når guldbjerget, som lover ufattelige rigdomme. Men kan de to tilbageværende dele ressourcerne klogt?"
-
-#: ../../maps/Golden Peninsula.wmf/elemental:8
-msgid "Golden Peninsula"
-msgstr "Gylden halvø"
-
-#: ../../maps/Golden Peninsula.wmf/elemental:10
-msgid "Two empires race for the treasures of a legendary peninsula…"
-msgstr ""
-
-#: ../../maps/Elven Forests.wmf/elemental:8
-msgid "Elven Forests"
-msgstr "Elverskove"
-
-#: ../../maps/Elven Forests.wmf/elemental:10
-msgid ""
-"The breath-taking beauty of these emerald lands has lured many tribes into "
-"an attempt to take them for themselves."
-msgstr "Den vidunderlige skønhed i disse smaragdlande har lokke mange stammer til at forsøge at få dem for sig selv."
-
-#: ../../maps/Comet Island.wmf/elemental:7
-msgid "Comet Island"
-msgstr "Kometøen"
-
-#: ../../maps/Comet Island.wmf/elemental:9
-msgid ""
-"A few miles in front of Gerion Coast lies a small unnamed island. Until now,"
-" you have not seen any reason to sail there, but yesterday a big fireball "
-"came from the sky and touched down in its center. Is this a sign of the "
-"Gods? You believe it is and you hope that your tribe will find the treasure "
-"of this island before other tribes will follow."
-msgstr "Nogle få kilometer foran Gerionkysten ligger en lille unavngivet ø. Indtil nu har du ikke set nogen grund til at sejle hertid, men i går kom en stor ildkugle fra himlen, som landede her i dets centrum. Er det et tegn fra guderne? Det tror du det er, og du håber, at din stamme vil finde denne ø's rigdomme før andre stammer følger efter."
-
-#: ../../campaigns/tutorial02_warfare.wmf/elemental:10
-msgid ""
-"In this tutorial, you will be taught the secrets of warfare: how to create "
-"soldiers, how to train them and how to lead them in battle."
-msgstr "I denne introduktion vil du lære hemmelighederne ved krig: Hvordan du skaber soldater, hvordan du træner dem og fører dem i kamp."
-
-#: ../../maps/Together We’re Strong.wmf/elemental:8
-msgid "Together We’re Strong"
-msgstr "Sammen er vi stærke"
-
-#: ../../maps/Together We’re Strong.wmf/elemental:10
-msgid ""
-"The four mighty harbors of the Craw Islands have been trading their goods "
-"among each other for ages. All of them needed resources that they could not "
-"produce in their own territory and in exchange provided other resources to "
-"those that could not produce them. Based on these trades, a very friendly "
-"commerce was common between the four harbors and the people living on the "
-"Craw Islands – until recently, when two of the harbors united to form an "
-"exclusive trade alliance, forcing the other two to do the same. Suddenly, it"
-" seems only a matter of time before the first fights between the harbors "
-"will shatter the peaceful life that has lasted for so long…"
-msgstr ""
-
-#: ../../maps/The long way.wmf/elemental:7
-msgid "The Long Way"
-msgstr "Den lange vej"
-
-#: ../../maps/The long way.wmf/elemental:9
-msgid ""
-"Another strange test by the Gods. To reach the other side, there seems to be"
-" no other way but to occupy the land of your enemies."
-msgstr "Endnu en mærkelig test fra guderne. For at nå den anden side, er der ikke nogen anden måde end at besætte dine fjenders land."
-
-#: ../../maps/Swamp Island.wmf/elemental:8
-msgid "Swamp Island"
-msgstr "Sumpøen"
-
-#: ../../maps/Swamp Island.wmf/elemental:10
-msgid ""
-"It smells like swamp, it looks like swamp and it is a swamp. But it is the "
-"place you were born and where you’ve lived your whole life. If you don’t "
-"want to lose it, defend it!"
-msgstr "Det lugter som sump, det ser ud som sump og det er sump. Men det er stedet, hvor du blev født og hvor du har levet dit hele liv. Hvis du ikke ønsker at miste det, så forsvar det!"
-
-#: ../../maps/MP Scenarios/Island Hopping.wmf/elemental:7
-msgid "Island Hopping"
-msgstr "Ø-hop"
-
-#: ../../maps/MP Scenarios/Island Hopping.wmf/elemental:9
-msgid ""
-"A special tournament in Atlantean culture is the so-called ‘Island Hopping’,"
-" where two or more groups try to reach the center island as fast as "
-"possible, to be the first erecting a castle on the top of the central "
-"mountain."
-msgstr "En speciel turnering i atlanteanerkulturen er den såkaldte »ø-hop«, hvor to eller flere grupper forsøger at nå den midterste ø så hurtigt som muligt, for at være den første som rejser en borg øverst på det centrale bjerg."
-
-#: ../../maps/Four Mountains.wmf/elemental:8
-msgid "Four Mountains"
-msgstr "Fire bjerge"
-
-#: ../../maps/Four Mountains.wmf/elemental:10
-msgid ""
-"Each tribe is surrounded by four mighty mountains. Who will first conquer "
-"them and claim the resources for his own tribe? Hint I: Water can be found "
-"along the river. Hint II: Snowmen mark additional water sources. Hint III: "
-"Each mountain contains only one resource."
-msgstr "Hver stamme er omgivet af fire mægtige bjerge. Hvem vil først erobre dem og kræve ressourcerne for deres egen stamme? Fif I: Vand kan findes langs floden. Fif II: Snemænd markerer yderligere vandressourcer. Fif III: Hvert bjerg indeholder kun en ressource."
+#: ../../campaigns/dummy.wmf/elemental:10
+msgid "Sorry, this map is not yet implemented."
+msgstr "Beklager, dette kort er endnu ikke implementeret."
 
 #: ../../campaigns/emp01.wmf/elemental:9
 msgid ""
@@ -613,42 +153,57 @@ msgid ""
 " an unknown desert strand and save his people. For now."
 msgstr "Efter at have tabt et vigtigt slag mod barbarerne, som førte til tabet af størstedelen af imperiets territorium, forlader Lutius Fremil for at starte et nyt liv. Men hans skæbne fører skibet ind i en stor storm, som næsten ødelægger skibet. Kun ved en masse held får han landsat sit beskadigede skib på en ukendt ørkenstrand og redder sit folk. For nu."
 
-#: ../../maps/The Big Lake.wmf/elemental:8
-msgid "The Big Lake"
-msgstr "Den store sø"
-
-#: ../../maps/The Big Lake.wmf/elemental:10
+#: ../../campaigns/emp02.wmf/elemental:11
 msgid ""
-"This island once appeared out of the deepest depths of the sea. In those "
-"days, fire rose out of the salty seawater and brought ash, stones and soil "
-"to light. And the fire came nearer and nearer to the sun, while the mountain"
-" grew and grew. Until one day, when the whole fire mountain exploded. "
-"Nowadays only this ring is left from that mighty fire mountain. Do you think"
-" that it is big enough for more than one tribe?"
-msgstr "Denne ø dukkede engang for længe siden op ud af de dybeste dybder af havet. I disse dage steg brand ud af den salte havvand og bragte aske, sten og jord frem. Og ilden kom nærmere og nærmere til solen, mens bjerget voksede og voksede. Indtil en dag, hvor hele brand bjerget eksploderede. I dag kun denne ring tilbage fra det mægtige ildbjerg. Tror du, at den er stor nok til mere end en stamme?"
+"Finally the ship was repaired, so Lutius and his people returned to the "
+"quest to find a good place for a new beginning. Only a few days later, they "
+"land on a green, Mediterranean island, looking like paradise. Overjoyed, "
+"they set out to explore this new living space."
+msgstr "Endelig blev skibet repareret, så Lutius og hans folk kunne genoptage missionen med at finde et godt sted til en ny begyndelse. Kun nogle få dage senere gør de landgang på en grøn, solskinsø, der ligner et paradis. Fuld af jubel begynder de at udforske deres nye levested."
 
-#: ../../maps/Three Warriors.wmf/elemental:9
-msgid "Three Warriors"
-msgstr "Tre krigere"
+#: ../../campaigns/tutorial01_basic_control.wmf/elemental:8
+#: ../../campaigns/tutorials.conf:15
+msgid "Basic Control"
+msgstr "Basiskontrol"
 
-#: ../../maps/Three Warriors.wmf/elemental:11
+#: ../../campaigns/tutorial01_basic_control.wmf/elemental:10
 msgid ""
-"Mighty mountains divide this land into three fertile valleys. But a path "
-"connects the valleys and thus a fight seems inescapable! Hint: Water can be "
-"found around the lakes."
-msgstr "Store bjerge deler landet i tre frugtbare dale. Men en sti forbinder disse dale, hvorfor en kamp synes uundgåelig! Fif: Der er vand at finde omkring søerne."
+"In this tutorial, you will learn how to navigate in Widelands and how to "
+"build buildings and roads."
+msgstr "I denne introduktion vil du lære hvordan du navigerer i Widelands og hvordan du bygger bygninger og veje."
 
-#: ../../maps/Dry Riverbed.wmf/elemental:8
-msgid "Dry Riverbed"
-msgstr "Tør flodseng"
+#: ../../campaigns/tutorial02_warfare.wmf/elemental:8
+#: ../../campaigns/tutorials.conf:19
+msgid "Warfare"
+msgstr "Krig"
 
-#: ../../maps/Dry Riverbed.wmf/elemental:10
+#: ../../campaigns/tutorial02_warfare.wmf/elemental:10
 msgid ""
-"It has been a long time since the last raindrop touched these grounds. Small"
-" wonder that there is not much water left in this dry riverbed. Everyone "
-"knows: soon there will be a war. A war about the last of the remaining "
-"water."
-msgstr "Det er lang tid siden, at den sidste regndråbe ramte denne jord. Så det er indlysende, at der ikke er meget vand tilbage i den tørre flodseng. Alle ved det: Snart starter krigen. En krig over det sidste tilbageværende vand."
+"In this tutorial, you will be taught the secrets of warfare: how to create "
+"soldiers, how to train them and how to lead them in battle."
+msgstr "I denne introduktion vil du lære hemmelighederne ved krig: Hvordan du skaber soldater, hvordan du træner dem og fører dem i kamp."
+
+#: ../../campaigns/tutorial03_seafaring.wmf/elemental:8
+#: ../../campaigns/tutorials.conf:23
+msgid "Seafaring"
+msgstr "Søfart"
+
+#: ../../campaigns/tutorial03_seafaring.wmf/elemental:10
+msgid ""
+"In this tutorial, you will get to know seafaring, which is how to handle "
+"ships and ports."
+msgstr "I denne introduktion vil du lære om søvæsen, som indbefatter håndtering af skibe og havne."
+
+#: ../../campaigns/tutorial04_economy.wmf/elemental:8
+#: ../../campaigns/tutorials.conf:27
+msgid "Economy"
+msgstr "Økonomi"
+
+#: ../../campaigns/tutorial04_economy.wmf/elemental:10
+msgid ""
+"In this tutorial, you will learn what option Widelands offers to adjust your"
+" economy. Recommended for players with some experience."
+msgstr "I denne introduktion vil du lære hvilke indstillinger Widelands tilbyder, så du kan justere din økonomi. Anbefalet for spiller med nogen erfaring."
 
 #: ../../maps/Atoll.wmf/elemental:9
 msgid "Atoll"
@@ -657,6 +212,41 @@ msgstr "Koralø"
 #: ../../maps/Atoll.wmf/elemental:11
 msgid "Who will be the real king of the big atoll?"
 msgstr "Hvem vil være den reelle konge over den store koralø?"
+
+#: ../../maps/Calvisson.wmf/elemental:9
+msgid "Calvisson"
+msgstr "Calvisson"
+
+#: ../../maps/Calvisson.wmf/elemental:11
+msgid ""
+"It’s a pleasure to settle in the beauty of this fissured countryside. But "
+"the ways to encompass these large territories are long and meandering, so it"
+" is easy to err into the land of the foreign clans."
+msgstr "Det er en fornøjelse at slå sig ned i dette sprækkede landområde. Men metoderne til at kommer på tværs af disse store territorier er langsomme og bugtede, så det er nemt ved en fejltagelse at komme ind på fremmede klaners område."
+
+#: ../../maps/Checkmate.wmf/elemental:8
+msgid "Checkmate"
+msgstr "Skakmat"
+
+#: ../../maps/Checkmate.wmf/elemental:10
+msgid ""
+"Whether just one of nature’s strangest features or the creation of a mad "
+"(and game-hungry) god, this weird battleground awaits two opponents for "
+"another confrontation."
+msgstr "Uanset om det er en af naturens mærkeligste indretninger eller bare en gal guds kreation (og en spilsulten), så venter denne slagmark på to modstandere for endnu en konfrontation."
+
+#: ../../maps/Comet_Island.wmf/elemental:7
+msgid "Comet Island"
+msgstr "Kometøen"
+
+#: ../../maps/Comet_Island.wmf/elemental:9
+msgid ""
+"A few miles in front of Gerion Coast lies a small unnamed island. Until now,"
+" you have not seen any reason to sail there, but yesterday a big fireball "
+"came from the sky and touched down in its center. Is this a sign of the "
+"Gods? You believe it is and you hope that your tribe will find the treasure "
+"of this island before other tribes will follow."
+msgstr "Nogle få kilometer foran Gerionkysten ligger en lille unavngivet ø. Indtil nu har du ikke set nogen grund til at sejle hertid, men i går kom en stor ildkugle fra himlen, som landede her i dets centrum. Er det et tegn fra guderne? Det tror du det er, og du håber, at din stamme vil finde denne ø's rigdomme før andre stammer følger efter."
 
 #: ../../maps/Crater.wmf/elemental:8
 msgid "Crater"
@@ -668,93 +258,46 @@ msgid ""
 " crater. Two tribes are now fighting for the rich resources."
 msgstr "Lang tid efter at en meteor styrtede ned i et par bjerge, blomstrer livet nu i krateret. To stammer bekæmper nu hinanden for at få fat på disse ressourcer."
 
-#: ../../maps/War of the Valleys.wmf/elemental:7
-msgid "War of the Valleys"
-msgstr "Dalenes krig"
+#: ../../maps/Crossing_the_Horizon.wmf/elemental:8
+msgid "Crossing the Horizon"
+msgstr "Krydser horisonten"
 
-#: ../../maps/War of the Valleys.wmf/elemental:9
+#: ../../maps/Crossing_the_Horizon.wmf/elemental:10
+msgid "Man your ship and sail to the horizon."
+msgstr "Bemand dit skib og sejl ud mod horisonten"
+
+#: ../../maps/Desert_Tournament.wmf/elemental:8
+msgid "Desert Tournament"
+msgstr "Ørkenturnering"
+
+#: ../../maps/Desert_Tournament.wmf/elemental:10
 msgid ""
-"It is said that even the sun and moon must find their way between the spires"
-" of these mountains. HINT: Monoliths mark ore-spots. Don’t bother sending "
-"geologists anywhere else."
-msgstr "Det siges, at selv solen og månen må finde deres vej mellem disse bjerges tinder. FIF: Monolitter markerer malmlokationer. Send ikke geologer andre steder hen."
+"Four tribes struggle with their nearest neighbor to be the first to reach "
+"the mountain of gold that promises riches beyond belief. But can the two "
+"remaining ones share the resources wisely?"
+msgstr "Fire stammer kæmper mod deres nærmeste nabo om at være den første som når guldbjerget, som lover ufattelige rigdomme. Men kan de to tilbageværende dele ressourcerne klogt?"
 
-#: ../../maps/Swamp Monks.wmf/elemental:8
-msgid "Swamp Monks"
-msgstr "Sumpmonke"
+#: ../../maps/Dry_Riverbed.wmf/elemental:8
+msgid "Dry Riverbed"
+msgstr "Tør flodseng"
 
-#: ../../maps/Swamp Monks.wmf/elemental:10
+#: ../../maps/Dry_Riverbed.wmf/elemental:10
 msgid ""
-"It is said that the old war monks, living in the even older swamps, are the "
-"key to control over the whole island."
-msgstr "Det sige at de gamle krigsmunke, der lever i de endnu ældre sumpe, er nøglen til kontrol over hele øen."
+"It has been a long time since the last raindrop touched these grounds. Small"
+" wonder that there is not much water left in this dry riverbed. Everyone "
+"knows: soon there will be a war. A war about the last of the remaining "
+"water."
+msgstr "Det er lang tid siden, at den sidste regndråbe ramte denne jord. Så det er indlysende, at der ikke er meget vand tilbage i den tørre flodseng. Alle ved det: Snart starter krigen. En krig over det sidste tilbageværende vand."
 
-#: ../../maps/Kings and Queens.wmf/elemental:9
-msgid "Kings and Queens"
-msgstr "Konger og dronninger"
+#: ../../maps/Elven_Forests.wmf/elemental:8
+msgid "Elven Forests"
+msgstr "Elverskove"
 
-#: ../../maps/Kings and Queens.wmf/elemental:11
+#: ../../maps/Elven_Forests.wmf/elemental:10
 msgid ""
-"An old legend tells that these seven kingdoms, that have flourished for ages"
-" in prosperity, will someday collapse into a devastating war. Has your "
-"latest betrayal been one too many, and will the prophecy come true?"
-msgstr "En gammel legende fortæller at disse syv kongedømmer, som har blomstret i mange år, en dag vil falde sammen i en ødelæggende krig. har dit sidste forræderi været et for meget, og vil profetien blive opfyldt?"
-
-#: ../../maps/The Pass Through the Mountains.wmf/elemental:8
-msgid "The Pass Through the Mountains"
-msgstr "Passet igennem bjergene"
-
-#: ../../maps/The Pass Through the Mountains.wmf/elemental:10
-msgid ""
-"In this mountainous area two princes have settled. Now they are expanding "
-"their territories, unaware of the fact that they are not alone!"
-msgstr "I disse bjerge har to prinser slået sig ned. Nu udvider de deres territorier uden at vide, at de ikke er alene!"
-
-#: ../../maps/The Nile.wmf/elemental:9
-msgid "The Nile"
-msgstr "Nilen"
-
-#: ../../maps/The Nile.wmf/elemental:11
-msgid ""
-"The river has always provided food and communication. This time, eight "
-"empires will fight for control over this land."
-msgstr "Floden har altid sørget for mad og kommunikation. Denne gang vil otte imperier kæmpe om kontrollen over denne ø."
-
-#: ../../campaigns/dummy.wmf/elemental:9
-msgid "Nobody"
-msgstr "Ingen"
-
-#: ../../campaigns/dummy.wmf/elemental:10
-msgid "Sorry, this map is not yet implemented."
-msgstr "Beklager, dette kort er endnu ikke implementeret."
-
-#: ../../maps/Two frontiers.wmf/elemental:7
-msgid "Two Frontiers"
-msgstr "To grænser"
-
-#: ../../maps/Two frontiers.wmf/elemental:9
-msgid "A multiplayer battle map on a small circle-shaped island."
-msgstr "Et krigskort for flere spillere på en lille cirkelformet ø."
-
-#: ../../maps/Twinkling Waves.wmf/elemental:8
-msgid "Twinkling Waves"
-msgstr "Blinkende bølger"
-
-#: ../../maps/Twinkling Waves.wmf/elemental:10
-msgid ""
-"Many beautiful, green islands await the ones brave enough to pass the "
-"thousand waves, twinkling in the sun."
-msgstr "Mange smukke, grønne øer venter de modige som tør krydse de tusinde bølger, der blinker i solen."
-
-#: ../../maps/Long, long way.wmf/elemental:8
-msgid "Long, long way"
-msgstr "Lang, lang vej"
-
-#: ../../maps/Long, long way.wmf/elemental:10
-msgid ""
-">Where dat? A thousand miles from here.< [Porgy and Bess] You have to go a "
-"long, long way to conquer all the islands. Good luck!"
-msgstr ">Hvor det? Tusind kilometer herfra.< [Porgy og Bess] Du har en lang, lang vej foran dig for at erobre alle øerne. Held og lykke!"
+"The breath-taking beauty of these emerald lands has lured many tribes into "
+"an attempt to take them for themselves."
+msgstr "Den vidunderlige skønhed i disse smaragdlande har lokke mange stammer til at forsøge at få dem for sig selv."
 
 #: ../../maps/Fellowships.wmf/elemental:9
 msgid "Fellowships"
@@ -773,3 +316,460 @@ msgid ""
 "somewhat above the normal value. The AI performed badly at the time of "
 "writing (2013)."
 msgstr "Dette kort er bedst egnet for to eller tre spillere, med en spilhastighed lidt over den normale værdi. Computerintelligensen fungerede dårligt, da dette blev skrevet (2013)."
+
+#: ../../maps/Finnish_Lakes.wmf/elemental:8
+msgid "Finnish Lakes"
+msgstr "Finske søer"
+
+#: ../../maps/Finnish_Lakes.wmf/elemental:10
+msgid ""
+"These are the beautiful Finnish lands of lakes, rivers, ancient forests and "
+"mountains. It is up to you to find a way through these lands."
+msgstr "Dette er det smukke finske landskab med søer, floder, gamle skove og bjerge. Det er op til dig, at finde en vej igennem området."
+
+#: ../../maps/Firegames.wmf/elemental:7
+msgid "Firegames"
+msgstr "Ildkamp"
+
+#: ../../maps/Firegames.wmf/elemental:9
+msgid ""
+"Is this a test by the Gods or an evil plan by someone else, that you and "
+"your tribe woke up on this island among fire and lava? Until now it seems as"
+" if you are alone, but no-one knows what might happen if you met an opposing"
+" tribe?"
+msgstr "Er dette en test fra guderne eller en ond plan af en anden, at du og din stamme skal vågne på denne ø blandt ild og lava? Indtil nu virker det som om, at du er alene, men ingen ved, hvad der vil ske, hvis du møder en anden stamme?"
+
+#: ../../maps/Four_Castles.wmf/elemental:8
+msgid "Four Castles"
+msgstr "Fire borge"
+
+#: ../../maps/Four_Castles.wmf/elemental:10
+msgid ""
+"Well protected in their mighty fortresses, four power-hungry warlords are "
+"completing their schemes to dominate these lands…"
+msgstr "Velbeskyttet i deres mægtige fæstninger, færdiggør fire magthungrende krigsherrer deres planer om at dominere disse lande ..."
+
+#: ../../maps/Four_Mountains.wmf/elemental:8
+msgid "Four Mountains"
+msgstr "Fire bjerge"
+
+#: ../../maps/Four_Mountains.wmf/elemental:10
+msgid ""
+"Each tribe is surrounded by four mighty mountains. Who will first conquer "
+"them and claim the resources for his own tribe? Hint I: Water can be found "
+"along the river. Hint II: Snowmen mark additional water sources. Hint III: "
+"Each mountain contains only one resource."
+msgstr "Hver stamme er omgivet af fire mægtige bjerge. Hvem vil først erobre dem og kræve ressourcerne for deres egen stamme? Fif I: Vand kan findes langs floden. Fif II: Snemænd markerer yderligere vandressourcer. Fif III: Hvert bjerg indeholder kun en ressource."
+
+#: ../../maps/Glacier_Lake.wmf/elemental:8
+msgid "Glacier Lake"
+msgstr "Gletsjersø"
+
+#: ../../maps/Glacier_Lake.wmf/elemental:10
+msgid ""
+"A long time your tribe dwelt on this beautiful and lonely glacier lake. No "
+"one disturbed you and the resources were enough for your whole tribe, but a "
+"few months ago another tribe came over the mountains and settled down. And "
+"you are sure that there is only enough space for one tribe."
+msgstr "I lang tid boede din stamme på denne smukke og ensomme gletschersø. Ingen forstyrrede jer og ressourcerne var nok for hele stammen, men et par måneder siden kom en anden stamme over bjergene og slog sig ned. Og du er sikker på, at der kun er plads til en stamme."
+
+#: ../../maps/Golden_Peninsula.wmf/elemental:8
+msgid "Golden Peninsula"
+msgstr "Gylden halvø"
+
+#: ../../maps/Golden_Peninsula.wmf/elemental:10
+msgid "Two empires race for the treasures of a legendary peninsula…"
+msgstr "To imperier jager skattene på en legendarisk halvø ..."
+
+#: ../../maps/Ice_wars.wmf/elemental:9
+msgid "Ice wars"
+msgstr "Iskrige"
+
+#: ../../maps/Ice_wars.wmf/elemental:11
+msgid "Autumn became winter. Some things are frozen, but not the war."
+msgstr "Efterår blev vinter. Nogle ting er frosset, men ikke krigen."
+
+#: ../../maps/Ice_wars.wmf/elemental:12
+#: ../../maps/Sun_of_fire.wmf/elemental:12
+msgid "Start positions are clockwise"
+msgstr "Startplaceringer er med uret"
+
+#: ../../maps/Impact.wmf/elemental:7
+msgid "Impact"
+msgstr "Nedslag"
+
+#: ../../maps/Impact.wmf/elemental:9
+msgid ""
+"After an impact of an asteroid and the following harsh winter, three isles "
+"are connected by ice and stone, setting an end to the peaceful coexistence "
+"of three tribes."
+msgstr "Efter nedslaget af en asteroide og den følgende hårde vinter er tre øer forbundet af is og sten, hvilket sætter en stopper for den fredelige sameksistens mellem tre stammer."
+
+#: ../../maps/Islands_at_war.wmf/elemental:9
+msgid "Islands at War"
+msgstr "Øer i krig"
+
+#: ../../maps/Islands_at_war.wmf/elemental:11
+msgid ""
+"For centuries, you’ve lived peacefully side by side with the other tribe on "
+"the neighboring island. This peace seems to come to an end now – your "
+"neighbor has begun to expand."
+msgstr "I århundrede har i levet fredeligt side om side med den anden stamme på naboøen. Denne fred ser ud til at være forbid - din nabo er begyndt at ekspandere."
+
+#: ../../maps/Kings_and_Queens.wmf/elemental:9
+msgid "Kings and Queens"
+msgstr "Konger og dronninger"
+
+#: ../../maps/Kings_and_Queens.wmf/elemental:11
+msgid ""
+"An old legend tells that these seven kingdoms, that have flourished for ages"
+" in prosperity, will someday collapse into a devastating war. Has your "
+"latest betrayal been one too many, and will the prophecy come true?"
+msgstr "En gammel legende fortæller at disse syv kongedømmer, som har blomstret i mange år, en dag vil falde sammen i en ødelæggende krig. har dit sidste forræderi været et for meget, og vil profetien blive opfyldt?"
+
+#: ../../maps/Lake_of_Tranquility.wmf/elemental:8
+msgid "Lake of Tranquility"
+msgstr "Rolighedens sø"
+
+#: ../../maps/Lake_of_Tranquility.wmf/elemental:10
+msgid ""
+"This lake, deep in the most ancient forests, has long been known for its "
+"beauty and idyllic peace. However, its sanctity has been disturbed now, as "
+"two hostile tribes have arrived at its shores…"
+msgstr "Denne sø, dybt inde i de gamle skove, har i lang tid været kendt for sin skønhed og idylliske fred. Dette fristed er dog nu forstyrret, da to fjendtlige stammer er ankommet ved søens bredder ..."
+
+#: ../../maps/Last_Bastion.wmf/elemental:8
+msgid "Last Bastion"
+msgstr "Sidste bastion"
+
+#: ../../maps/Last_Bastion.wmf/elemental:10
+msgid ""
+"The whimsical Gods didn’t answer our prayers. Instead, the increasing "
+"sunlight heated up the Earth thousandfold and melted glaciers and people "
+"were plunged into the deep. But now – high in the majestic mountains, on the"
+" last scrap of land – two surviving tribes are sheltering. Even though the "
+"Gods showed mercy and the climate thus turned cooler again, the water is "
+"still rising and rising. Onto the last secure place – the highest mountain "
+"range where the amount of gold and the space to live merely suffice for one "
+"tribe – only two opposite paths lead. But remember, be careful… this last "
+"living space is also a hard and small place to live. Don’t forget to take "
+"care of your timber supplies, you’ll need them."
+msgstr "De lunefulde guder besvarede ikke vores bønner. I stedet varmede det stigende sollys jorden op tusindfold og smeltede gletsjere og folk faldt i dybet. Men nu - højt oppe i de majestætiske bjerge, på den sidste klump jord - har to overlevende stammer søgt ly. Selvom guderne viste barmhjertighed og klimaet derfor blev køligere igen, stiger vandet stadig. Inde på det sidste sikkert sted - den højeste bjergkæde, hvor mængden af guld og plads til at leve alene er tilstrækkelig for en stamme - fører kun to modstående veje. Men husk, vær forsigtig ... dette sidste levested er også et hårdt og lille sted at bo. Glem ikke at tage dig af dine tømmerforsyninger, du får brug for dem."
+
+#: ../../maps/Long,_long_way.wmf/elemental:8
+msgid "Long, long way"
+msgstr "Lang, lang vej"
+
+#: ../../maps/Long,_long_way.wmf/elemental:10
+msgid ""
+"Where dat? A thousand miles from here. [Porgy and Bess] You have to go a "
+"long, long way to conquer all the islands. Good luck!"
+msgstr "Hvor det? Tusind kilometer herfra. [Porgy og Bess] Du har en lang, lang vej foran dig for at erobre alle øerne. Held og lykke!"
+
+#: ../../maps/MP_Scenarios/Island_Hopping.wmf/elemental:7
+msgid "Island Hopping"
+msgstr "Ø-hop"
+
+#: ../../maps/MP_Scenarios/Island_Hopping.wmf/elemental:9
+msgid ""
+"A special tournament in Atlantean culture is the so-called ‘Island Hopping’,"
+" where two or more groups try to reach the center island as fast as "
+"possible, to be the first erecting a castle on the top of the central "
+"mountain."
+msgstr "En speciel turnering i atlanteanerkulturen er den såkaldte »ø-hop«, hvor to eller flere grupper forsøger at nå den midterste ø så hurtigt som muligt, for at være den første som rejser en borg øverst på det centrale bjerg."
+
+#: ../../maps/MP_Scenarios/Smugglers.wmf/elemental:9
+msgid "Smugglers"
+msgstr "Smuglere"
+
+#: ../../maps/MP_Scenarios/Smugglers.wmf/elemental:11
+msgid ""
+"Your well established smuggling routes suddenly got busy: two other tribes "
+"have appeared and now a rivalry among smugglers has started. Which team will"
+" be the first to smuggle a certain number of wares?"
+msgstr "Dine veletablerede smuglerruter fik pludselig travlt. To andre stammer er ankommet og nu er en rivalisering blandt smuglerne begyndt. Hvilket hold vil være det første som smugler et bestemt antal varer?"
+
+#: ../../maps/Mystical_Maze.wmf/elemental:8
+msgid "Mystical Maze"
+msgstr "Mystisk labyrint"
+
+#: ../../maps/Mystical_Maze.wmf/elemental:10
+msgid ""
+"There are two big questions in the air: Who created this unbelievably big "
+"maze, and what can be found inside?"
+msgstr "Der hænger to spørgsmål i luften: Hvem skabte denne utrolige store labyrint, og hvad kan findes inden i den?"
+
+#: ../../maps/Rendez-Vous.wmf/elemental:7
+msgid "Rendez-Vous"
+msgstr "Det aftalte møde"
+
+#: ../../maps/Rendez-Vous.wmf/elemental:9
+msgid ""
+"Only a small hill in the centre of the map connects these four competing "
+"tribes. Lead your army right away to this hill and build a giant stronghold "
+"as a sign of your superiority! Hint: In the centre is only space for one "
+"stronghold. Water can be found everywhere, so there is no need to send out "
+"geologists."
+msgstr "Kun en lille bakke i centrum af kortet forbinder disse fire konkurrerende stammer. Før din hær lige mod bakken og byg en gigantisk fæstning som et tegn på dit overherredømme! Fif: I centrum er der kun plads til en fæstning. Vand kan findes overalt, så der er ingen grund til at sende geologer ud."
+
+#: ../../maps/River_Explorers.wmf/elemental:8
+msgid "River Explorers"
+msgstr "Flodopdagelsesrejsende"
+
+#: ../../maps/River_Explorers.wmf/elemental:10
+msgid ""
+"Each player has a different obstacle to expansion, and there’s always more "
+"than one way to overcome it. While the AI can be defeated here without "
+"building a single ship, players are advised to make ports and shipyards a "
+"priority – expeditions are universally useful and are often the fastest way "
+"to gold deposits."
+msgstr "Hver spiller har forskellige forhindringer for udvidelse, og der er altid mere end en måde at komme forbi dem på. Mens computerintelligensen kan besejres her uden at bygge et eneste skib, så rådes spillere til at gøre bygningen af havne og skibsværter en prioritet - ekspeditioner er altid nyttige og er ofte den hurtigste vej til gulddepoter."
+
+#: ../../maps/Riverlands.wmf/elemental:8
+msgid "Riverlands"
+msgstr "Flodlandene"
+
+#: ../../maps/Riverlands.wmf/elemental:10
+msgid ""
+"A mystical land, full of different landscapes, which are all crossed by a "
+"handful of big rivers."
+msgstr "Et mystisk land, fuldt med forskellige landskaber, som alle krydses af en håndfuld store floder."
+
+#: ../../maps/Sun_of_fire.wmf/elemental:9
+msgid "The Ancient Sun of Fire"
+msgstr "Den gamle ildsol"
+
+#: ../../maps/Sun_of_fire.wmf/elemental:11
+msgid ""
+"For hundreds of years, this island was kept as a sanctuary of the Gods. No "
+"human ever ventured to set a foot on it. But now that a tribe had finally "
+"been barefaced enough to settle on the coast of that island, a lot of others"
+" followed in its wake."
+msgstr "I hundredvis af år blev denne ø holdt som et fristid af guderne. Intet menneske satte fod på øen. Men nu hvor en stamme endelig har haft mod til at gå i land på kysten, følger en masse andre efter."
+
+#: ../../maps/Swamp_Island.wmf/elemental:8
+msgid "Swamp Island"
+msgstr "Sumpøen"
+
+#: ../../maps/Swamp_Island.wmf/elemental:10
+msgid ""
+"It smells like swamp, it looks like swamp and it is a swamp. But it is the "
+"place you were born and where you’ve lived your whole life. If you don’t "
+"want to lose it, defend it!"
+msgstr "Det lugter som sump, det ser ud som sump og det er sump. Men det er stedet, hvor du blev født og hvor du har levet dit hele liv. Hvis du ikke ønsker at miste det, så forsvar det!"
+
+#: ../../maps/Swamp_Monks.wmf/elemental:8
+msgid "Swamp Monks"
+msgstr "Sumpmonke"
+
+#: ../../maps/Swamp_Monks.wmf/elemental:10
+msgid ""
+"It is said that the old war monks, living in the even older swamps, are the "
+"key to control over the whole island."
+msgstr "Det sige at de gamle krigsmunke, der lever i de endnu ældre sumpe, er nøglen til kontrol over hele øen."
+
+#: ../../maps/The_Big_Lake.wmf/elemental:8
+msgid "The Big Lake"
+msgstr "Den store sø"
+
+#: ../../maps/The_Big_Lake.wmf/elemental:10
+msgid ""
+"This island once appeared out of the deepest depths of the sea. In those "
+"days, fire rose out of the salty seawater and brought ash, stones and soil "
+"to light. And the fire came nearer and nearer to the sun, while the mountain"
+" grew and grew. Until one day, when the whole fire mountain exploded. "
+"Nowadays only this ring is left from that mighty fire mountain. Do you think"
+" that it is big enough for more than one tribe?"
+msgstr "Denne ø dukkede engang for længe siden op ud af de dybeste dybder af havet. I disse dage steg brand ud af den salte havvand og bragte aske, sten og jord frem. Og ilden kom nærmere og nærmere til solen, mens bjerget voksede og voksede. Indtil en dag, hvor hele brand bjerget eksploderede. I dag kun denne ring tilbage fra det mægtige ildbjerg. Tror du, at den er stor nok til mere end en stamme?"
+
+#: ../../maps/The_Far_North.wmf/elemental:8
+msgid "The Far North"
+msgstr "Det fjerne nord"
+
+#: ../../maps/The_Far_North.wmf/elemental:10
+msgid ""
+"Some say that impenetrable lands to the far north scared away even the most "
+"courageous settlers and the bravest of the brave warriors. Big and old "
+"forests, full of big and predatory game, cut across by wetlands and hills "
+"were shrouded in mystery. The ones who had managed to come back mentioned "
+"tremendous buildings, decorated with carvings and gold from majestic "
+"mountain ranges somewhere amongst the wilderness. Dozens of years after only"
+" some crumbly ruins remain of these good old times, covered with moss and "
+"trees. Their shapes give only an idea about the craftsmanship of ancient "
+"constructors. Nobody knows why they (have) disappeared. Nobody knows why. "
+"People say that now nothing is blocking the road to wealth. But many will "
+"die pulled apart by wolves, engulfed by swamp… encircled by hostile tribes."
+msgstr "Nogle siger at de uigennemtrængelige lande fjernt mod nord skræmte selv de mest modige bosættere og krigere væk. Store og gamle skove, fulde af store og jagende dyr, gennemskåret af vådområder og bakker var indhyllet i mystik. De få, som vendte tilbage, nævnte enorme bygninger, dekoreret med indgraveringer og guld fra majestætiske bjergkæder et sted i vildmarken. År efter er der kun nedbrudte ruiner dækket af mos og træer tilbage fra disse gode, gamle tider. Deres former giver kun en ide om den håndværksviden, de gamle bygningsarbejdere havde. Ingen ved, hvorfor de forsvandt. Folk siger, at vejen til rigdom ingen hindringer har. Men mange vil dø og blive spist af ulvene, opslugt af sumpe ... omringet af fjendtlige stammer."
+
+#: ../../maps/The_Green_Plateau.wmf/elemental:8
+msgid "The Green Plateau"
+msgstr "Det grønne plateau"
+
+#: ../../maps/The_Green_Plateau.wmf/elemental:10
+msgid ""
+"You are standing on an island, crowned by mighty mountains which keep a "
+"wonderful and mighty treasure in their middle – The Green Plateau, which is "
+"hard to conquer but easy to lose. So, if you want it, be aware of the other "
+"clans."
+msgstr "Du står på en ø, kronet af store bjerge, som har en vidunderlig og stor skat i sin midte - Det grønne plateau, som er svær at erobre men nem at miste. Så, hvis du ønsker den, så hold øje med de andre klaner."
+
+#: ../../maps/The_Nile.wmf/elemental:9
+msgid "The Nile"
+msgstr "Nilen"
+
+#: ../../maps/The_Nile.wmf/elemental:11
+msgid ""
+"The river has always provided food and communication. This time, eight "
+"empires will fight for control over this land."
+msgstr "Floden har altid sørget for mad og kommunikation. Denne gang vil otte imperier kæmpe om kontrollen over denne ø."
+
+#: ../../maps/The_Oasis_Triangle.wmf/elemental:8
+msgid "The Oasis Triangle"
+msgstr "Oasetrekanten"
+
+#: ../../maps/The_Oasis_Triangle.wmf/elemental:10
+msgid ""
+"There is something mystical like a gray atmosphere around these three oases,"
+" which no one has found out about yet. Perhaps you will be the one, but be "
+"aware of the others who are searching too!"
+msgstr "Der er noget mytisk såsom en grå atmosfære omkring disse tre oaser, som ingen har opdaget endnu. Måske du vil være den udvalgte, men pas på andre er også på udkig!"
+
+#: ../../maps/The_Pass_Through_the_Mountains.wmf/elemental:8
+msgid "The Pass Through the Mountains"
+msgstr "Passet igennem bjergene"
+
+#: ../../maps/The_Pass_Through_the_Mountains.wmf/elemental:10
+msgid ""
+"In this mountainous area two princes have settled. Now they are expanding "
+"their territories, unaware of the fact that they are not alone!"
+msgstr "I disse bjerge har to prinser slået sig ned. Nu udvider de deres territorier uden at vide, at de ikke er alene!"
+
+#: ../../maps/The_Thaw.wmf/elemental:8
+msgid "The Thaw"
+msgstr "Tøvejret"
+
+#: ../../maps/The_Thaw.wmf/elemental:10
+msgid ""
+"Another thaw set in. Three tribes were sheltering from severe winter among "
+"majestic mountains. At the time of the solstice they listened to the oracle "
+"and went to war. The only survivor will sacrifice his enemies’ treasures on "
+"the ancient altar, build there a splendid castle and gain the goodwill and "
+"respect of the Gods."
+msgstr "En anden tø satte i. Tre stammer havde søgt ly for en hård vinter blandt majestætiske bjerge. På tidspunktet for solhverv lyttede de til oraklet og gik i krig. Den eneste overlevende vil ofre sine fjenders skatte på den gamle alter, bygge der et pragtfuld slot og vinde goodwill og respekt fra guderne."
+
+#: ../../maps/The_long_way.wmf/elemental:7
+msgid "The Long Way"
+msgstr "Den lange vej"
+
+#: ../../maps/The_long_way.wmf/elemental:9
+msgid ""
+"Another strange test by the Gods. To reach the other side, there seems to be"
+" no other way but to occupy the land of your enemies."
+msgstr "Endnu en mærkelig test fra guderne. For at nå den anden side, er der ikke nogen anden måde end at besætte dine fjenders land."
+
+#: ../../maps/Three_Warriors.wmf/elemental:9
+msgid "Three Warriors"
+msgstr "Tre krigere"
+
+#: ../../maps/Three_Warriors.wmf/elemental:11
+msgid ""
+"Mighty mountains divide this land into three fertile valleys. But a path "
+"connects the valleys and thus a fight seems inescapable! Hint: Water can be "
+"found around the lakes."
+msgstr "Store bjerge deler landet i tre frugtbare dale. Men en sti forbinder disse dale, hvorfor en kamp synes uundgåelig! Fif: Der er vand at finde omkring søerne."
+
+#: ../../maps/Together_We’re_Strong.wmf/elemental:8
+msgid "Together We’re Strong"
+msgstr "Sammen er vi stærke"
+
+#: ../../maps/Together_We’re_Strong.wmf/elemental:10
+msgid ""
+"The four mighty harbors of the Craw Islands have been trading their goods "
+"among each other for ages. All of them needed resources that they could not "
+"produce in their own territory and in exchange provided other resources to "
+"those that could not produce them. Based on these trades, a very friendly "
+"commerce was common between the four harbors and the people living on the "
+"Craw Islands – until recently, when two of the harbors united to form an "
+"exclusive trade alliance, forcing the other two to do the same. Suddenly, it"
+" seems only a matter of time before the first fights between the harbors "
+"will shatter the peaceful life that has lasted for so long…"
+msgstr "De fire mægtige havne på Crawøerne har handlet deres varer med hinanden i umindelige tider. De har alle brug for ressourcer, som de ikke kunne producere på deres eget område og til gengæld leveret andre ressourcer til dem, der ikke kunne producere dem selv. På baggrund af disse handler var en meget venlig økonomi almindelig mellem de fire havne og de mennesker, der lever på Crawøerne - indtil for nylig, hvor to af havnene slog sig sammen for at danne en eksklusiv handelsalliance, hvilket tvang de to andre til at gøre det samme. Pludselig virker det kun et spørgsmål om tid, før de første kampe mellem havnene vil knuse den fredelige liv, der varede i så lang tid ..."
+
+#: ../../maps/Trident_of_Fire.wmf/elemental:9
+msgid "Trident of Fire"
+msgstr "Ildtreforke"
+
+#: ../../maps/Trident_of_Fire.wmf/elemental:11
+msgid ""
+"In the vicinity of three major volcanoes, six lovely islands are inviting "
+"settlers to start a new life. Deserts and a quickly growing forest wait to "
+"be discovered. But only by becoming a naval power will your tribe be able to"
+" explore enough resources to compete with its opponents."
+msgstr "I nærheden af tre store vulkaner, inviterer seks dejlige øer bosættere sig til at starte et nyt liv. Ørkener og en hurtigt voksende skov vente på at blive opdaget. Men kun ved at blive en sømagt vil din stamme kunne udnytte nok ressourcer til at konkurrere med dens modstandere."
+
+#: ../../maps/Twin_Lagoons.wmf/elemental:8
+msgid "Twin Lagoons"
+msgstr "Tvillinglaguner"
+
+#: ../../maps/Twin_Lagoons.wmf/elemental:10
+msgid ""
+"When the wind swelled up and the first dunes were formed on these abandoned "
+"twin lagoons, nobody could have expected that two tribes that are "
+"desperately searching for more resources to support their endlessly ongoing "
+"wars would end up in this forgotten place at the same time and for the same "
+"well-known reason. Defend your transport lines or use ships to bypass the "
+"opponent. Then remove all enemy activity."
+msgstr "Når vinden svulmede op, og de første klitter blev dannet på disse forladte tvillingelaguner, kunne ingen have forventet, at to stammer, der desperat søger efter flere ressourcer til at støtte deres uendelige igangværende krige ville ende i dette glemte sted på samme tid, og af samme velkendte grund. Forsvar dine transportlinjer eller brug skibene til at omgå modstanderen. Fjern derefter al fjendtlig aktivitet."
+
+#: ../../maps/Twinkling_Waves.wmf/elemental:8
+msgid "Twinkling Waves"
+msgstr "Blinkende bølger"
+
+#: ../../maps/Twinkling_Waves.wmf/elemental:10
+msgid ""
+"Many beautiful, green islands await the ones brave enough to pass the "
+"thousand waves, twinkling in the sun."
+msgstr "Mange smukke, grønne øer venter de modige som tør krydse de tusinde bølger, der blinker i solen."
+
+#: ../../maps/Two_frontiers.wmf/elemental:7
+msgid "Two Frontiers"
+msgstr "To grænser"
+
+#: ../../maps/Two_frontiers.wmf/elemental:9
+msgid "A multiplayer battle map on a small circle-shaped island."
+msgstr "Et krigskort for flere spillere på en lille cirkelformet ø."
+
+#: ../../maps/Volcanic_Winter.wmf/elemental:8
+msgid "Volcanic Winter"
+msgstr "Vulkanisk vinter"
+
+#: ../../maps/Volcanic_Winter.wmf/elemental:10
+msgid ""
+"In the middle of summer, a series of volcanic eruptions drew the winter in. "
+"Suddenly, the sun seemed to be gone and the only light and heat sources left"
+" were those that enforced this dramatic change. Continents, oceans and seas "
+"are frozen now, only the volcanic islands seem to be left as habitable land."
+msgstr "I midten af sommeren, fremtrak en række vulkanudbrud vinterens fremkomst. Pludselig, var solen væk, og det eneste lys og varmekilder tilbage var dem, der havde frembragt denne dramatiske ændring. Kontinenter, oceaner og have er frosset nu, kun de vulkanske øer synes at stå som beboelig jord."
+
+#: ../../maps/War_of_the_Valleys.wmf/elemental:7
+msgid "War of the Valleys"
+msgstr "Dalenes krig"
+
+#: ../../maps/War_of_the_Valleys.wmf/elemental:9
+msgid ""
+"It is said that even the sun and moon must find their way between the spires"
+" of these mountains. HINT: Monoliths mark ore-spots. Don’t bother sending "
+"geologists anywhere else."
+msgstr "Det siges, at selv solen og månen må finde deres vej mellem disse bjerges tinder. FIF: Monolitter markerer malmlokationer. Send ikke geologer andre steder hen."
+
+#: ../../maps/Wisent_Valley.wmf/elemental:8
+msgid "Wisent Valley"
+msgstr "Vildoksedal"
+
+#: ../../maps/Wisent_Valley.wmf/elemental:10
+msgid ""
+"It seems as if this magical valley has been inhabited by wisents since the "
+"beginning of days. When your tribe came to this place, you were sure that it"
+" offered enough space for a peaceful life. But can your tribe live in peace "
+"with your neighbors?"
+msgstr "Det virker som om, at denne magiske dal har været beboet af bisoner siden verdens begyndelse. Da din stamme kom til dette sted, var du sikker på, at stedet tilbød plads for et fredeligt liv. Men kan din stamme leve i fred med dine naboer?"

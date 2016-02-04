@@ -1,5 +1,5 @@
 <rt>
 <p>
-<img src="pics/wl-ico-128.png">
+<img src="images/logos/wl-ico-128.png">
 </p>
 </rt>

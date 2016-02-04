@@ -21,8 +21,6 @@
 
 #include <memory>
 
-#include <boost/format.hpp>
-
 #include "base/macros.h"
 #include "base/wexception.h"
 #include "economy/economy.h"
@@ -99,6 +97,11 @@ void Ship::init(EditorGameBase& egbase) {
 	Bob::init(egbase);
 	init_fleet(egbase);
 	Notifications::publish(NoteShipMessage(this, NoteShipMessage::Message::kGained));
+	assert(get_owner());
+
+	// Assigning a ship name
+	m_shipname = get_owner()->pick_shipname();
+	molog("New ship: %s\n", m_shipname.c_str());
 }
 
 /**
@@ -434,7 +437,7 @@ void Ship::ship_update_expedition(Game& game, Bob::State&) {
 						_("Port Space"),
 						_("Port Space Found"),
 						_("An expedition ship found a new port build space."),
-						"fsel_editor_set_port_space.png");
+						"images/wui/editor/fsel_editor_set_port_space.png");
 		}
 		m_expedition->seen_port_buildspaces.swap(temp_port_buildspaces);
 		if (new_port_space) {
@@ -555,7 +558,7 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 									pgettext("ship", "Waiting"),
 									_("Island Circumnavigated"),
 									_("An expedition ship sailed around its island without any events."),
-									"ship_explore_island_cw.png");
+									"images/wui/ship/ship_explore_island_cw.png");
 						m_ship_state = EXP_WAITING;
 
 						Notifications::publish(
@@ -619,7 +622,7 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 						_("Land Ahoy!"),
 						_("Coast Reached"),
 						_("An expedition ship reached a coast and is waiting for further commands."),
-						"ship_scout_ne.png");
+						"images/wui/ship/ship_scout_ne.png");
 
 			Notifications::publish(
 			   NoteShipMessage(this, NoteShipMessage::Message::kWaitingForCommand));
@@ -643,6 +646,22 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 					// air and remove the old ones ;)
 					WaresQueue & wq = cs->waresqueue(ware->descr_index());
 					const uint32_t cur = wq.get_filled();
+
+					// This is to help to debug the situation when colonization fails
+					// Can the reason be that worker was not unloaded as the last one?
+					if (wq.get_max_fill() <= cur) {
+						log ("  %d: Colonization error: unloading wares to constructionsite of %s"
+						" (owner %d) failed.\n"
+						" Wares unloaded to the site: %d, max capacity: %d, remaining to unload: %d\n"
+						" No free capacity to unload another ware\n",
+						get_owner()->player_number(),
+						cs->get_info().becomes->name().c_str(),
+						cs->get_owner()->player_number(),
+						cur,
+						wq.get_max_fill(),
+						i);
+					}
+
 					assert(wq.get_max_fill() > cur);
 					wq.set_filled(cur + 1);
 					m_items.at(i).remove(game);
@@ -666,7 +685,7 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 						_("Port Lost!"),
 						_("New port construction site is gone"),
 						_("Unloading of wares failed, expedition is cancelled now."),
-						"menu_ship_cancel_expedition.png");
+						"images/wui/ship/menu_ship_cancel_expedition.png");
 			send_signal(game, "cancel_expedition");
 		}
 
@@ -846,7 +865,7 @@ void Ship::start_task_expedition(Game& game) {
 				pgettext("ship", "Expedition"),
 				_("Expedition Ready"),
 				_("An expedition ship is waiting for your commands."),
-				"start_expedition.png");
+				"images/wui/buildings/start_expedition.png");
 	Notifications::publish(NoteShipMessage(this, NoteShipMessage::Message::kWaitingForCommand));
 }
 
@@ -970,7 +989,7 @@ void Ship::log_general_info(const EditorGameBase& egbase) {
  * \param title user-visible title of the message
  * \param description user-visible message body, will be placed in an appropriate rich-text
  *paragraph
- * \param picture picture name relative to the pics directory
+ * \param picture picture name relative to the data/ directory
  */
 void Ship::send_message(Game& game,
 								const std::string& title,
@@ -979,7 +998,7 @@ void Ship::send_message(Game& game,
                         const std::string& picture) {
 	std::string rt_description;
 	if (picture.size() > 3) {
-		rt_description = "<rt image=pics/";
+		rt_description = "<rt image=";
 		rt_description += picture;
 		rt_description += "><p font-size=14 font-face=DejaVuSerif>";
 	} else
@@ -989,8 +1008,8 @@ void Ship::send_message(Game& game,
 
 	Message* msg = new Message(Message::Type::kSeafaring,
 	                           game.get_gametime(),
-	                           title,
-										(boost::format("pics/%s") % picture).str(),
+										title,
+										picture,
 										heading,
 	                           rt_description,
 	                           get_position(),
@@ -1007,7 +1026,7 @@ Load / Save implementation
 ==============================
 */
 
-constexpr uint8_t kCurrentPacketVersion = 5;
+constexpr uint8_t kCurrentPacketVersion = 6;
 
 Ship::Loader::Loader() : m_lastdock(0), m_destination(0) {
 }
@@ -1049,6 +1068,7 @@ void Ship::Loader::load(FileRead & fr)
 		m_ship_state = TRANSPORT;
 	}
 
+	m_shipname = fr.c_string();
 	m_lastdock = fr.unsigned_32();
 	m_destination = fr.unsigned_32();
 
@@ -1082,6 +1102,9 @@ void Ship::Loader::load_finish() {
 	// restore the state the ship is in
 	ship.m_ship_state = m_ship_state;
 
+	// restore the  ship id and name
+	ship.m_shipname = m_shipname;
+
 	// if the ship is on an expedition, restore the expedition specific data
 	if (m_expedition) {
 		ship.m_expedition.swap(m_expedition);
@@ -1110,7 +1133,7 @@ MapObject::Loader* Ship::load(EditorGameBase& egbase, MapObjectLoader& mol, File
 				const ShipDescr* descr = nullptr;
 				// Removing this will break the test suite
 				if (packet_version < 5) {
-					std::string tribe_name = fr.c_string();
+					std::string tribe_name = fr.string();
 					fr.c_string(); // This used to be the ship's name, which we don't need any more.
 					if (!(egbase.tribes().tribe_exists(tribe_name))) {
 						throw GameDataError("Tribe %s does not exist for ship", tribe_name.c_str());
@@ -1171,6 +1194,7 @@ void Ship::save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw) {
 		fw.unsigned_8(static_cast<uint8_t>(m_expedition->island_explore_direction));
 	}
 
+	fw.string(m_shipname);
 	fw.unsigned_32(mos.get_object_file_index_or_zero(m_lastdock.get(egbase)));
 	fw.unsigned_32(mos.get_object_file_index_or_zero(m_destination.get(egbase)));
 

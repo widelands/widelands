@@ -1,7 +1,8 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2015 Widelands Development Team
+# Copyright (C) 2005-2016 Widelands Development Team
 # 
 # Translators:
+# Alexander Mackinnon Jansen <bornxlo@gmail.com>, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # GunChleoc, 2014
 # GunChleoc, 2014
@@ -9,9 +10,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-12-03 09:55+0000\n"
-"PO-Revision-Date: 2015-12-03 09:56+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2016-01-31 20:26+0000\n"
+"PO-Revision-Date: 2016-02-01 13:52+0000\n"
+"Last-Translator: Alexander Mackinnon Jansen <bornxlo@gmail.com>\n"
 "Language-Team: Norwegian Bokmål (http://www.transifex.com/widelands/widelands/language/nb/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -24,16 +25,16 @@ msgstr ""
 #: ../../campaigns/atl01.wmf/scripting/init.lua:74
 msgctxt "message_short_title"
 msgid "Building lost!"
-msgstr ""
-
-#: ../../campaigns/atl01.wmf/scripting/init.lua:82
-msgctxt "message_heading"
-msgid "Building lost!"
-msgstr ""
+msgstr "Mistet en bygning!"
 
 #: ../../campaigns/atl01.wmf/scripting/init.lua:76
 msgid "We lost a building to the ocean!"
 msgstr "Vi mistet en bygning til havet!"
+
+#: ../../campaigns/atl01.wmf/scripting/init.lua:82
+msgctxt "message_heading"
+msgid "Building lost!"
+msgstr "Mistet en bygning!"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:32
 msgid "Ensure the supply of building wares"
@@ -41,11 +42,11 @@ msgstr "Sikre forsyningen av byggevarer"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:34
 msgid "Supply Building Wares"
-msgstr ""
+msgstr "Forsyn med byggevarer"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:35
 msgid "Supply basic building material for your economy:"
-msgstr ""
+msgstr "Forsyn økonomien med grunnleggende byggevarer:"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:36
 msgid "Build a quarry"
@@ -53,11 +54,11 @@ msgstr "Bygg et steinbrudd"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:37
 msgid "Build two woodcutter’s houses"
-msgstr ""
+msgstr "Bygg to trefelleres hus"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:38
 msgid "Build two forester’s houses"
-msgstr ""
+msgstr "Bygg to skogforvalterhus"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:39
 msgid "Build a sawmill"
@@ -76,7 +77,7 @@ msgid ""
 "The island is huge and as long as we are not sure that we are alone here, we"
 " cannot relax. Explore and conquer it, this is the only way to protect us "
 "from threats on the island and from Atlantis."
-msgstr ""
+msgstr "Øya er enorm og så lang at vi ikke er sikre på om vi er alene her, vi kan ikke slappe av. Utforsk og erobre øya, dette er den eneste måten vi kan beskytte oss mot trussler fra øya og fra Atlantis."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:49
 msgid "Build military sites to expand your territory"
@@ -96,7 +97,7 @@ msgid ""
 "well working food environment by building at least one farm, one blackroot "
 "farm and a mill. The two kinds of flour together with water from a well will"
 " be baked into bread in a bakery, so build a bakery and a well, too."
-msgstr ""
+msgstr "Mat er veldig viktig for gruver og militære treningsområdet. Etabler et fungerende matmiljø ved å bygge minst én gård, én svartrotgård og ei mølle. De to meltypene sammen med vann fra en brønn bakes til brød i et bakeri, så bygg et bakeri og en brønn også."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:59
 msgid ""
@@ -106,7 +107,7 @@ msgid ""
 "breeding more. Make sure that there are always fish left, otherwise the fish"
 " breeder won’t be able to breed new ones. The smoking happens in a smokery, "
 "you will need at least two of those."
-msgstr ""
+msgstr "De andre to viktige matvarene er røkt fisk og røkt kjøtt. Rått kjøtt leveres av en jeger. En fisker fanger fisk fra sjøen mens en fiskeoppdretter passer på at fiskestimen ikke utryddes ved å avle flere. Pass på at det alltid er fisk igjen, ellers kan ikke fiskeoppdretteren avle nye. Maten røykes i et røkeri, som du trenger minst to av."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:60
 msgid "Build a farm and a blackroot farm"
@@ -114,7 +115,7 @@ msgstr "Bygg en gård og en svartrotgård"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:61
 msgid "Build a mill to make cornmeal and blackroot flour"
-msgstr ""
+msgstr "Bygg ei mølle for å lage mais- og svartrotmel."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:62
 msgid "Build a well"
@@ -122,25 +123,25 @@ msgstr "Bygg en brønn"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:63
 msgid "Build a bakery to bake bread from cornmeal, blackroot flour and water"
-msgstr ""
+msgstr "Bygg et bakeri for å bake brød fra maismel, svartrotmel og vann"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:64
 msgid "Build a hunter’s house to get raw meat"
-msgstr ""
+msgstr "Bygg et jegerhus for å skaffe rått kjøtt"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:65
 msgid "Build a fisher’s house close to water to get raw fish"
-msgstr ""
+msgstr "Bygg et fiskerhus nærme vann for å skaffe rå fisk"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:66
 msgid ""
 "Build a fish breeder’s house close to the fisher to make sure the fish do "
 "not die out"
-msgstr ""
+msgstr "Bygg en fiskeoppdretters hus nær fiskerhuset for å passe på at fisken ikke dør ut"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:67
 msgid "Build two smokeries to smoke raw meat and fish"
-msgstr ""
+msgstr "Bygg to røkeri for å røyke rått kjøtt og rå fisk"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:73
 msgid "Build a spider farm and a weaving mill"
@@ -169,7 +170,7 @@ msgstr "Bygg en edderkoppgård"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:79
 msgid "Build a gold spinning mill"
-msgstr ""
+msgstr "Bygg et gullspinneri"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:85
 msgid "Build industry and mines"
@@ -185,14 +186,14 @@ msgid ""
 "mine will dig for quartz and diamonds – all of them are precious materials "
 "and very rarely found. It will produce a lot of stone while searching for "
 "them."
-msgstr ""
+msgstr "Jern-, gull- og kullmalm utvinnes fra sine respektive gruver. Krystallgruva graver etter kvarts og diamanter, som alle er dyrebare mineraler som er vanskelige å finne. Den vil produsere mye stein mens den leter."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:89
 msgid ""
 "The ores have to be smelted at a smelting works before they can be used. The"
 " refined materials are then used in the weapon smithy, the armor smithy and "
 "the toolsmithy."
-msgstr ""
+msgstr "Malmen må smeltes i et smelteverk før den kan brukes. De rafinerte materialene brukes så i våpensmia, rustningsmia og verktøysmia."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:90
 msgid ""
@@ -206,7 +207,7 @@ msgstr "Bygg et smelteverk"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:92
 msgid "Build an armor smithy and a weapon smithy"
-msgstr ""
+msgstr "Bygg ei rustningsmie og ei våpensmie."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:93
 msgid "Build a toolsmithy"
@@ -214,11 +215,11 @@ msgstr "Bygg en verktøysmie"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:99
 msgid "Build training sites for soldiers"
-msgstr ""
+msgstr "Bygg treningsleirer for soldater"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:101
 msgid "Soldier Training Sites"
-msgstr ""
+msgstr "Treningsleirer for soldater"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:102
 msgid ""
@@ -893,6 +894,7 @@ msgid ""
 msgstr ""
 
 #: ../../scripting/format_scenario.lua:36
+#, lua-format
 msgid "“%s”"
 msgstr "«%s»"
 

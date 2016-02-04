@@ -28,6 +28,7 @@
 #include "game_io/game_cmd_queue_packet.h"
 #include "game_io/game_interactive_player_packet.h"
 #include "game_io/game_map_packet.h"
+#include "game_io/game_player_ai_persistent_packet.h"
 #include "game_io/game_player_economies_packet.h"
 #include "game_io/game_player_info_packet.h"
 #include "game_io/game_preload_packet.h"
@@ -87,6 +88,10 @@ int32_t GameLoader::load_game(bool const multiplayer) {
 
 	log("Game: Reading Player Economies Info ... ");
 	{GamePlayerEconomiesPacket            p; p.read(m_fs, m_game, mol);}
+	log("took %ums\n", timer.ms_since_last_query());
+
+	log("Game: Reading ai persistent data ... ");
+	{GamePlayerAiPersistentPacket           p; p.read(m_fs, m_game, mol);}
 	log("took %ums\n", timer.ms_since_last_query());
 
 	log("Game: Reading Command Queue Data ... ");

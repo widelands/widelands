@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2007-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -58,21 +58,21 @@ struct WuiPlotArea : public UI::Panel {
 	void draw(RenderTarget &) override;
 
 	void set_time(TIME id) {
-		m_time = id;
+		time_ = id;
 	}
 
 	void set_time_id(int32_t time) {
-		if (time == m_game_time_id)
+		if (time == game_time_id_)
 			set_time(TIME_GAME);
 		else
 			set_time(static_cast<TIME>(time));
 	}
-	TIME get_time() {return static_cast<TIME>(m_time); }
+	TIME get_time() {return static_cast<TIME>(time_); }
 	int32_t get_time_id() {
-		if (m_time == TIME_GAME)
-			return m_game_time_id;
+		if (time_ == TIME_GAME)
+			return game_time_id_;
 		else
-			return m_time;
+			return time_;
 	}
 	void set_sample_rate(uint32_t id); // in milliseconds
 
@@ -82,7 +82,7 @@ struct WuiPlotArea : public UI::Panel {
 		(uint32_t id, const std::vector<uint32_t> * data, RGBColor);
 	void show_plot(uint32_t id, bool t);
 
-	void set_plotmode(int32_t id) {m_plotmode = id;}
+	void set_plotmode(int32_t id) {plotmode_ = id;}
 
 	void set_plotcolor(uint32_t id, RGBColor color);
 
@@ -99,16 +99,16 @@ protected:
 		bool                          showplot;
 		RGBColor                      plotcolor;
 	};
-	std::vector<PlotData> m_plotdata;
+	std::vector<PlotData> plotdata_;
 
-	int32_t                 m_plotmode;
-	int32_t                 m_sample_rate;
+	int32_t                 plotmode_;
+	int32_t                 sample_rate_;
 
 private:
 	uint32_t get_game_time();
 
-	TIME                    m_time;  // How much do you want to list
-	int32_t                 m_game_time_id; // what label is used for TIME_GAME
+	TIME                    time_;  // How much do you want to list
+	int32_t                 game_time_id_; // what label is used for TIME_GAME
 };
 
 /**
@@ -133,8 +133,8 @@ struct WuiPlotAreaSlider : public UI::DiscreteSlider {
 		 tooltip_text,
 		 cursor_size,
 		 enabled),
-	  m_plot_area(plot_area),
-	  m_last_game_time_id(plot_area.get_game_time_id())
+	  plot_area_(plot_area),
+	  last_game_time_id_(plot_area.get_game_time_id())
 	{
 		changedto.connect(boost::bind(&WuiPlotArea::set_time_id, &plot_area, _1));
 	}
@@ -143,8 +143,8 @@ protected:
 	void draw(RenderTarget & dst) override;
 
 private:
-	WuiPlotArea & m_plot_area;
-	int32_t m_last_game_time_id;
+	WuiPlotArea & plot_area_;
+	int32_t last_game_time_id_;
 };
 
 /**
@@ -170,7 +170,7 @@ private:
 	struct ReducedPlotData {
 		const std::vector<uint32_t> * dataset;
 	};
-	std::vector<ReducedPlotData>  m_negative_plotdata;
+	std::vector<ReducedPlotData>  negative_plotdata_;
 };
 
 

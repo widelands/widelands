@@ -182,8 +182,7 @@ public:
 
 	Point calc_drawpos(const EditorGameBase &, Point) const;
 	/// Draw this soldier
-	virtual void draw
-		(const EditorGameBase &, RenderTarget &, const Point&) const override;
+	void draw(const EditorGameBase&, RenderTarget&, const Point&) const override;
 
 	static void calc_info_icon_size
 		(const TribeDescr &, uint32_t & w, uint32_t & h);
@@ -309,8 +308,7 @@ protected:
 	Loader * create_loader() override;
 
 public:
-	virtual void do_save
-		(EditorGameBase &, MapObjectSaver &, FileWrite &) override;
+	void do_save(EditorGameBase&, MapObjectSaver&, FileWrite&) override;
 };
 
 }

@@ -852,10 +852,10 @@ HasSoldiers
 
 		.. code-block:: lua
 
-			l:set_soldiers{
+			l:set_soldiers({
 			  [{0,0,0,0}] = 10,
 			  [{1,2,3,4}] = 5,
-			)
+			})
 
 		would add 10 level 0 soldier and 5 soldiers with hit point level 1,
 		attack level 2, defense level 3 and evade level 4 (as long as this is
@@ -3846,6 +3846,7 @@ const PropertyType<LuaShip> LuaShip::Properties[] = {
 	PROP_RO(LuaShip, state),
 	PROP_RW(LuaShip, scouting_direction),
 	PROP_RW(LuaShip, island_explore_direction),
+	PROP_RO(LuaShip, shipname),
 	{nullptr, nullptr, nullptr},
 };
 
@@ -4026,6 +4027,22 @@ int LuaShip::set_island_explore_direction(lua_State* L) {
 		return 1;
 	}
 	return 0;
+}
+
+/* RST
+	.. attribute:: NAME
+
+	Get name of ship:
+
+		(RO) returns the :class:`string` ship's name.
+
+
+*/
+int LuaShip::get_shipname(lua_State* L) {
+	EditorGameBase& egbase = get_egbase(L);
+	Ship* ship = get(L, egbase);
+	lua_pushstring(L, ship->get_shipname().c_str());
+	return 1;
 }
 
 /*

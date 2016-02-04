@@ -1,17 +1,17 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2015 Widelands Development Team
+# Copyright (C) 2005-2016 Widelands Development Team
 # 
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2011
 # Juanjo, 2015
-# Juanjo, 2015
+# Juanjo, 2015-2016
 # Juanjo, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-12-03 09:55+0000\n"
-"PO-Revision-Date: 2015-12-03 21:46+0000\n"
+"POT-Creation-Date: 2016-01-23 08:23+0000\n"
+"PO-Revision-Date: 2016-01-31 13:09+0000\n"
 "Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -27,14 +27,14 @@ msgctxt "message_short_title"
 msgid "Building lost!"
 msgstr "Hem perdut un edifici!"
 
+#: ../../campaigns/atl01.wmf/scripting/init.lua:76
+msgid "We lost a building to the ocean!"
+msgstr "L'oceà s'ha engolit un dels nostres edificis!"
+
 #: ../../campaigns/atl01.wmf/scripting/init.lua:82
 msgctxt "message_heading"
 msgid "Building lost!"
 msgstr "Hem perdut un edifici!"
-
-#: ../../campaigns/atl01.wmf/scripting/init.lua:76
-msgid "We lost a building to the ocean!"
-msgstr "L'oceà s'ha engolit un dels nostres edificis!"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:32
 msgid "Ensure the supply of building wares"
@@ -158,7 +158,7 @@ msgid ""
 "tabards are the uniforms of soldiers. The weaving mill needs gold thread and"
 " spider silk as raw material. Spider silk is produced by the spider farm, "
 "while gold thread is produced by the gold spinning mill out of gold."
-msgstr "Els teixidors produeixen tela de seda d'aranya i tabards al taller de teixir. La tela de seda d'aranya es fa servir per la construcció d'alguns edificis i per fer-ne roba, mentre que els tabards són els uniformes del soldats. El taller de teixir necessita fil d'or i seda d'aranya. La seda d'aranya es produeix a la granja d'aranyes i el fil d'or es produeix en la filadora d'or a partir de lingots d'or."
+msgstr "Els teixidors produeixen tela de seda d'aranya i tabards al taller de teixir. La tela de seda d'aranya es fa servir per a la construcció d'alguns edificis i per fer-ne roba, mentre que els tabards són els uniformes dels soldats. El taller de teixir necessita fil d'or i seda d'aranya. La seda d'aranya es produeix a la granja d'aranyes i el fil d'or es produeix en la filadora d'or a partir de lingots d'or."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:77
 msgid "Build a weaving mill"
@@ -320,7 +320,7 @@ msgid ""
 "During the nights, they went crazy and were full of fear. It was not long "
 "before the horse breeder Xydra figured out what was wrong with them: the sea"
 " level in front of their stable was rising with ever increasing speed."
-msgstr "Però tot semblava anar bé. Només els cavalls semblaven sentir que alguna cosa no anava bé. Per la nit, solien tornar-se bojos i molt espantats. No va ser fins que el nostre criador de cavalls, en Xydra, esbrinà què els hi passava: el nivell de la mar del davant del seu estable estava pujant cada cop més ràpid."
+msgstr "Però tot semblava anar bé. Només els cavalls semblaven sentir que alguna cosa no anava bé. A la nit, solien embogir i semblava que tenien por. No va ser fins que el nostre criador de cavalls, en Xydra, esbrinà què els hi passava: el nivell de la mar del davant del seu estable estava pujant cada cop més ràpid."
 
 #. TRANSLATORS: Foreword
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:151
@@ -347,7 +347,7 @@ msgid ""
 "turned to the clerics, but they had no substantial help to offer. Most "
 "accepted their fate while others tried to change the god’s mind by offering "
 "animals in his temple. But to no avail..."
-msgstr "Sentint-se culpable, el rei es suicidà. Sense monarca, la gent va buscar als clergues per ajudar-los, però no tenien res per ajudar-los. Molts acceptaren el seu destí, mentre que altres volien fer canviar d'opinió al déu oferint-li animals al seu temple. Però fou inútil..."
+msgstr "Sentint-se culpable, el rei es suïcidà. Sense monarca, la gent va buscar als clergues per ajudar-los, però no tenien res per ajudar-los. Molts acceptaren el seu destí, mentre que altres volien fer canviar d'opinió al déu oferint-li animals al seu temple. Però fou inútil..."
 
 #. TRANSLATORS: Foreword
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:161
@@ -441,7 +441,7 @@ msgid ""
 "architect. Sidolus, you are a seasoned warrior and strategist. I have called"
 " you before me to seek your counsel: what needs to be done to make this our "
 "new home?"
-msgstr "Que en Satul us abrigui. Loftomor, sou l'arquitecte més famós de l'illa. Sidolus, vós sou l'estratega guerrer amb més experiència. Us he fet venir per aconsellar-me: què hem de fer per fer d'aquesta illa la nostra nova llar?"
+msgstr "Que en Satul us abrigui. Loftomor, sou l'arquitecte més famós de l'illa. Sidolus, vós sou l'estrateg guerrer amb més experiència. Us he fet venir per aconsellar-me: què hem de fer per fer d'aquesta illa la nostra nova llar?"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:190
 msgid "Loftomor Speaks"
@@ -471,7 +471,7 @@ msgid ""
 "swiftly. I will not feel safe on this island as long as we have not seen all"
 " its shores it. I brought plenty of good men from Atlantis. The military "
 "might is available. We only need some housing to live in."
-msgstr "Que en Satul us abrigui, Jundlina. Estic d'acord amb el que proposa en Loftomor. Necessitem un bon subministrament de materials de construcció per expandir el nostre territori. No estaré tranquil a l'illa fins que no n'haguem explorat tota la seva costa. He portat molts homes bons de l'Atlàntida. Tenim prou poder militar. Només cal que els hi donem un lloc on viure-hi."
+msgstr "Que en Satul us abrigui, Jundlina. Estic d'acord amb el que proposa en Loftomor. Necessitem un bon subministrament de materials de construcció per expandir el nostre territori. No estaré tranquil a l'illa fins que no n'hàgim explorat tota la seva costa. He portat molts homes bons de l'Atlàntida. Tenim prou poder militar. Només cal que els donem un lloc on viure."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:207
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:247
@@ -542,7 +542,7 @@ msgid ""
 "the bread is tedious and boring; I feel a more industrial approach would be "
 "helpful here. I for one would love to just have fresh bread delivered to my "
 "house every day."
-msgstr "Però podem arribar a un acord que ens afavoreixi: fer pa és una tasca que demana molt de temps. Moldre la negrarrel i el panís i després posar-lo al forn és pesat i avorrit. Crec que un enfocament més industrial per fer el pa seria d'ajuda. A mi personalment, m'agradaria que m'entreguessin pa fresc a casa tots els dies."
+msgstr "Però podem arribar a un acord que ens afavoreixi: fer pa és una tasca que demana molt de temps. Moldre la negrarrel i el panís i després posar-lo al forn és pesat i avorrit. Crec que un enfocament més industrial per fer el pa seria d'ajuda. A mi personalment, m'agradaria que m'entreguessin pa fresc a casa cada dia."
 
 #. TRANSLATORS: Colionder
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:234
@@ -669,11 +669,11 @@ msgid ""
 "misbehaving and bullying the common folk. What is this nonsense all about? "
 "They are servants for the common good and must not misuse their powers. This"
 " is inexcusable! Explain this, if you will!"
-msgstr "Què és això que sento, Sidolus? M'han dit que els vostres soldats es comporten malament i amenacen als civils. Què són aquestes bestieses? Els soldats són servidors del bé comú i no han d'utilitzar malament el poder que se'ls hi ha donat. Això no es pot perdonar! Explique-vos, si voleu!"
+msgstr "Què és això que sento, Sidolus? M'han dit que els vostres soldats es comporten malament i amenacen als civils. Què són aquestes bestieses? Els soldats són servidors del bé comú i no han d'utilitzar malament el poder que se'ls hi ha donat. Això no es pot perdonar! Expliqueu-vos, si voleu!"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:313
 msgid "Sidolus Seems Contrite"
-msgstr "En Sidolus sembla arrepentit"
+msgstr "En Sidolus sembla penedit"
 
 #. TRANSLATORS: Sidolus
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:316
@@ -719,7 +719,7 @@ msgid ""
 "People are complaining about crowded streets and slow transportation. We "
 "need to help out our carriers on the roads. I have decided to build a horse "
 "farm so that the horses can help with the heavy wares."
-msgstr "La gent es queixa de que els camins estan col·lapsats de tant trànsit com hi ha. El transport és lent i necessitem ajudar els treballadors dels camins. He decidit construir una granja de cavalls i així ens puguin ajudar a transportar els béns més pesats."
+msgstr "La gent es queixa que els camins estan col·lapsats de tant trànsit com hi ha. El transport és lent i necessitem ajudar els treballadors dels camins. He decidit construir una granja de cavalls i així ens puguin ajudar a transportar els béns més pesats."
 
 #. TRANSLATORS: Jundlina
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:344
@@ -727,7 +727,7 @@ msgid ""
 "Another way to take load from our roads is to build warehouses. We have "
 "claimed the mountain now, it seems a good idea to have a warehouse on the "
 "plateau to avoid having to transport everything up and down the slopes."
-msgstr "Una altra forma per alleugerir la càrrega dels camins és construir magatzems. Ja hem conquerit la muntanya i sembla una bona idea tenir-hi un magatzem a l'altipla per evitar haver de transportar-ho tot cap amunt i cap avall de la vessant de la muntanya."
+msgstr "Una altra forma per alleugerir la càrrega dels camins és construir magatzems. Ja hem conquerit la muntanya i sembla una bona idea tenir-hi un magatzem a l'altiplà per evitar haver de transportar-ho tot cap amunt i cap avall del vessant de la muntanya."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:356
 msgid "A Dangerous Discovery"
@@ -747,7 +747,7 @@ msgid ""
 " building is crude, the assemblage is sloppy. But the materials are very "
 "enduring: the wood used for it seemed to have been burned in a strange way "
 "before it was used as building material – it is hard as stone."
-msgstr "Hem trobat un edifici vell, destruït i cremat per les flames. Estic preocupat per aquest descobriment perquè no n'havíem vist mai cap igual. No el va dissenyar cap arquitecte atlant del que hagi sentit a parlar. L'edifici és tosc i el muntatge és descuidat. Però els materials són molt resistents: la fusta sembla que hagi estat cremada d'una forma estranya abans de fer-se servir en la construcció. Aquesta fusta sembla forta com la pedra."
+msgstr "Hem trobat un edifici vell, destruït i cremat per les flames. Estic preocupat per aquest descobriment perquè no n'havíem vist mai cap igual. No el va dissenyar cap arquitecte atlant de qui s'hagi sentit a parlar. L'edifici és tosc i el muntatge és descuidat. Però els materials són molt resistents: la fusta sembla que hagi estat cremada d'una forma estranya abans de fer-se servir en la construcció. Aquesta fusta sembla forta com la pedra."
 
 #. TRANSLATORS: Jundlina
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:362
@@ -764,7 +764,7 @@ msgid ""
 "We must improve our military capabilities. If there are foes on the island, "
 "we have to be prepared when we meet them. We should also enforce the "
 "fortification of our borders."
-msgstr "Hem de millorar les habilitats de lluita. Si hi ha adversaris a l'illa, hem d'estar preparats per enfrontar-nos-hi. També hauríem de reforçar la fortificació de les nostre fronteres."
+msgstr "Hem de millorar les habilitats de lluita. Si hi ha adversaris a l'illa, hem d'estar preparats per enfrontar-nos-hi. També hauríem de reforçar la fortificació de les nostres fronteres."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:373
 msgid "Another Building"
@@ -797,7 +797,7 @@ msgid ""
 "no trace of this old economy to be found. I am starting to relax, but I will"
 " not let our guard down as we continue to explore this beautiful island. But"
 " without obvious dangers, I am feeling very much at home here already."
-msgstr "Un altre d'aquests edificis estranys. La tribu que els construí va controlar l'illa sencera en algun moment. Però ja no els hi tinc por. Hem explorat gran part de l'illa i no hem trobat encara rastre d'aquesta tribu. No he de baixar la guàrdia mentre continuem explorant l'illa, però, sense veure altres tribus, començo a sentir-me com a casa."
+msgstr "Un altre d'aquests edificis estranys. La tribu que els construí va controlar l'illa sencera en algun moment. Però ja no els hi tinc por. Hem explorat gran part de l'illa i no hem trobat encara rastre d'aquesta tribu. No he d'abaixar la guàrdia mentre continuem explorant l'illa, però, sense veure altres tribus, començo a sentir-me com a casa."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:398
 msgid "The Water is Rising!"
@@ -831,7 +831,7 @@ msgid ""
 "Ostur, we have no time. The water rises too fast, and if we build the ships "
 "on the shore they will vanish in the sea before they can float. I fear we "
 "are doomed!"
-msgstr "Ostur, no tenim temps. L'aigua s'eleva massa ràpid i si construïm els vaixells a la costa, se les endurà la corrent abans que puguin flotar. Em temo que estem condemnats!"
+msgstr "Ostur, no tenim temps. L'aigua s'eleva massa ràpid i si construïm els vaixells a la costa, se les endurà el corrent abans que puguin flotar. Em temo que estem condemnats!"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:418
 msgid "Ostur Seems Confident"
@@ -851,7 +851,7 @@ msgstr "Un amic ha explorat l'illa pel seu compte i m'ha explicat que hi ha un l
 msgid ""
 "Your red hair is a signal from the fire god. I will trust you and support "
 "your plan. Our survival lies in your hands now, Ostur."
-msgstr "El vostre cabell roig és un senyal del déu del foc. Confiaré amb vós i donaré suport al vostre pla. La nostra supervivència depén ara de vós, Ostur."
+msgstr "El vostre cabell roig és un senyal del déu del foc. Confiaré amb vós i donaré suport al vostre pla. La nostra supervivència depèn ara de vós, Ostur."
 
 #. TRANSLATORS: Jundlina
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:436
@@ -860,7 +860,7 @@ msgid ""
 "logs and spidercloth for the construction there. Forget about everything "
 "else, we need those wares on top of the mountain before our warehouses are "
 "all swallowed by the sea."
-msgstr "Ràpid! Necessitem una casa per a l'Ostur al costat del llac. Necessitem taulons, troncs i tela de seda d'aranya per la construcció. Oblideu-vos de tot i centreu-vos en portar els béns cap al cim de la muntanya abans que el mar engoleixi els magatzems."
+msgstr "Ràpid! Necessitem una casa per a l'Ostur al costat del llac. Necessitem taulons, troncs i tela de seda d'aranya per la construcció. Oblideu-vos de tot i centreu-vos a portar els béns cap al cim de la muntanya abans que el mar engoleixi els magatzems."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:443
 msgid "Jundlina is Relieved"
@@ -881,7 +881,7 @@ msgstr "Alabat sigui en Satul! L'Ostur, el jove constructor de vaixells ho ha ac
 msgid ""
 "I expect a long journey, but we will find the land of Satul in the end. This"
 " is what I promised my people. And myself."
-msgstr "Crec que serà un llarg viatge, però trobarem la terra d'en Satul. Això és el que he promés a la meva gent. I a mi mateix*."
+msgstr "Crec que serà un llarg viatge, però trobarem la terra d'en Satul. Això és el que he promès a la meva gent. I a mi mateix."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:450
 msgid "Congratulations"
@@ -894,6 +894,7 @@ msgid ""
 msgstr "Heu complit la missió. Continueu amb la pròxima missió o continueu jugant."
 
 #: ../../scripting/format_scenario.lua:36
+#, lua-format
 msgid "“%s”"
 msgstr "“%s”"
 

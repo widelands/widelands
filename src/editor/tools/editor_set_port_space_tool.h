@@ -23,8 +23,8 @@
 #include "editor/tools/editor_tool.h"
 #include "logic/widelands.h"
 
-#define FSEL_ESPS_FILENAME "pics/fsel_editor_set_port_space.png"
-#define FSEL_EUPS_FILENAME "pics/fsel_editor_unset_port_space.png"
+#define FSEL_ESPS_FILENAME "images/wui/editor/fsel_editor_set_port_space.png"
+#define FSEL_EUPS_FILENAME "images/wui/editor/fsel_editor_unset_port_space.png"
 
 /// Unsets a buildspace for ports.
 class EditorUnsetPortSpaceTool : public EditorTool {

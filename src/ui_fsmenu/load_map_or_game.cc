@@ -34,7 +34,7 @@
 /// This class defines common coordinates for these UI screens.
 /// It also defines common buttons.
 FullscreenMenuLoadMapOrGame::FullscreenMenuLoadMapOrGame() :
-		FullscreenMenuBase("choosemapmenu.jpg"),
+		FullscreenMenuBase("images/ui_fsmenu/choosemapmenu.jpg"),
 
 		// Values for alignment and size
 		padding_(4),
@@ -55,12 +55,12 @@ FullscreenMenuLoadMapOrGame::FullscreenMenuLoadMapOrGame() :
 		back_
 		  (this, "back",
 			right_column_x_, m_buty, m_butw, buth_,
-			g_gr->images().get("pics/but0.png"),
+			g_gr->images().get("images/ui_basic/but0.png"),
 			_("Back"), std::string(), true, false),
 		ok_
 		  (this, "ok",
 			get_w() - m_right_column_margin - m_butw, m_buty, m_butw, buth_,
-			g_gr->images().get("pics/but2.png"),
+			g_gr->images().get("images/ui_basic/but2.png"),
 			_("OK"), std::string(), false, false)
 	{}
 

@@ -35,36 +35,37 @@
 #include "wui/mapviewpixelconstants.h"
 #include "wui/mapviewpixelfunctions.h"
 
-// Explanation of how drawing works:
-// Schematic of triangle neighborhood:
-//
-//               *
-//              / \
-//             / u \
-//         (f)/     \
-//    *------*------* (r)
-//     \  l / \  r / \
-//      \  /   \  /   \
-//       \/  d  \/ rr  \
-//       *------*------* (br)
-//        \ dd /
-//         \  /
-//          \/
-//          *
-//
-// Each field (f) owns two triangles: (r)ight & (d)own. When we look at the
-// field, we have to make sure to schedule drawing the triangles. This is done
-// by of these triangles is done by TerrainProgram.
-//
-// To draw dithered edges, we have to look at the neighboring triangles for the
-// two triangles too: If a neighboring triangle has another texture and our
-// dither layer is smaller, we have to draw a dithering triangle too - this lets the neighboring
-// texture
-// bleed into our triangle.
-//
-// The dither triangle is the triangle that should be partially (either r or
-// d). Example: if r and d have different textures and r.dither_layer >
-// d.dither_layer, then we will repaint d with the dither texture as mask.
+/*
+ * Explanation of how drawing works:
+ * Schematic of triangle neighborhood:
+ *
+ *               *
+ *              / \
+ *             / u \
+ *         (f)/     \
+ *    *------*------* (r)
+ *     \  l / \  r / \
+ *      \  /   \  /   \
+ *       \/  d  \/ rr  \
+ *       *------*------* (br)
+ *        \ dd /
+ *         \  /
+ *          \/
+ *          *
+ *
+ * Each field (f) owns two triangles: (r)ight & (d)own. When we look at the
+ * field, we have to make sure to schedule drawing the triangles. This is done
+ * by TerrainProgram.
+ *
+ * To draw dithered edges, we have to look at the neighboring triangles for the
+ * two triangles too: If a neighboring triangle has another texture and our
+ * dither layer is smaller, we have to draw a dithering triangle too - this lets
+ * the neighboring texture bleed into our triangle.
+ *
+ * The dither triangle is the triangle that should be partially drawn (either r or
+ * d). Example: if r and d have different textures and r.dither_layer >
+ * d.dither_layer, then we will repaint d with the dither texture as mask.
+ */
 
 namespace {
 

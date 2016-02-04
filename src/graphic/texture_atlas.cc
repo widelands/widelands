@@ -25,6 +25,15 @@
 
 #include "base/wexception.h"
 
+namespace  {
+
+// This padding will be applied to the left and bottom of each block to
+// separate them during blitting if OpenGL decides to be a jerk about where to
+// sample.
+constexpr int kPadding = 1;
+
+}  // namespace
+
 TextureAtlas::Node::Node(const Rect& init_r) : used(false), r(init_r) {
 }
 
@@ -71,8 +80,9 @@ TextureAtlas::Node* TextureAtlas::find_node(Node* node, int w, int h) {
 std::unique_ptr<Texture> TextureAtlas::pack_as_many_as_possible(const int max_dimension,
                                                                 const int texture_atlas_index,
                                                                 std::vector<PackedTexture>* pack_info) {
-	std::unique_ptr<Node> root(
-	   new Node(Rect(0, 0, blocks_.begin()->texture->width(), blocks_.begin()->texture->height())));
+
+	std::unique_ptr<Node> root(new Node(Rect(0, 0, blocks_.begin()->texture->width() + kPadding,
+	                                         blocks_.begin()->texture->height() + kPadding)));
 
 	const auto grow_right = [&root](int delta_w) {
 		std::unique_ptr<Node> new_root(new Node(Rect(0, 0, root->r.w + delta_w, root->r.h)));
@@ -92,8 +102,8 @@ std::unique_ptr<Texture> TextureAtlas::pack_as_many_as_possible(const int max_di
 
 	std::vector<Block> packed, not_packed;
 	for (Block& block : blocks_) {
-		const int block_width = block.texture->width();
-		const int block_height = block.texture->height();
+		const int block_width = block.texture->width() + kPadding;
+		const int block_height = block.texture->height() + kPadding;
 
 		Node* fitting_node = find_node(root.get(), block_width, block_height);
 		if (fitting_node == nullptr) {

@@ -43,7 +43,7 @@ struct EditorDecreaseResourcesTool : public EditorTool {
 	EditorActionArgs format_args_impl(EditorInteractive & parent) override;
 
 	char const * get_sel_impl() const override {
-		return "pics/fsel_editor_decrease_resources.png";
+		return "images/wui/editor/fsel_editor_decrease_resources.png";
 	}
 
 	int32_t get_change_by() const        {return m_change_by;}

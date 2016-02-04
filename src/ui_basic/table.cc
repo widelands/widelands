@@ -104,7 +104,7 @@ void Table<void *>::add_column
 				new Button
 					(this, title,
 					 complete_width, 0, width, m_headerheight,
-					 g_gr->images().get("pics/but3.png"),
+					 g_gr->images().get("images/ui_basic/but3.png"),
 					 title, tooltip_string, true, false);
 			c.btn->sigclicked.connect
 				(boost::bind(&Table::header_button_clicked, boost::ref(*this), m_columns.size()));
@@ -151,7 +151,7 @@ void Table<void *>::set_column_title(uint8_t const col, const std::string & titl
 			new Button
 				(this, title,
 				 complete_width, 0, column.width, m_headerheight,
-				 g_gr->images().get("pics/but3.png"),
+				 g_gr->images().get("images/ui_basic/but3.png"),
 				 title, "", true, false);
 		column.btn->sigclicked.connect
 			(boost::bind(&Table::header_button_clicked, boost::ref(*this), col));
@@ -182,7 +182,9 @@ void Table<void *>::EntryRecord::set_checked
 
 	cell.d_checked = checked;
 	cell.d_picture =
-		g_gr->images().get(checked ? "pics/checkbox_checked.png" : "pics/checkbox_empty.png");
+		g_gr->images().get(checked ?
+									 "images/ui_basic/checkbox_checked.png" :
+									 "images/ui_basic/checkbox_empty.png");
 }
 
 void Table<void *>::EntryRecord::toggle(uint8_t const col)
@@ -248,9 +250,9 @@ void Table<void *>::fit_height(uint32_t entries) {
 	if (entries == 0) {
 		entries = size();
 	}
-	uint32_t tablewidth;
-	uint32_t tableheight;
-	get_desired_size(tablewidth, tableheight);
+	int tablewidth;
+	int tableheight;
+	get_desired_size(&tablewidth, &tableheight);
 	tableheight = m_headerheight + 2 + get_lineheight() * entries;
 	set_desired_size(tablewidth, tableheight);
 }
@@ -283,7 +285,7 @@ void Table<void *>::draw(RenderTarget & dst)
 		Columns::size_type const nr_columns = m_columns.size();
 		for (uint32_t i = 0, curx = 0; i < nr_columns; ++i) {
 			const Column& column = m_columns[i];
-			int const curw  = column.width;
+			int const curw = column.width;
 			Align alignment = mirror_alignment(column.alignment);
 
 			const Image* entry_picture = er.get_picture(i);
@@ -291,11 +293,10 @@ void Table<void *>::draw(RenderTarget & dst)
 
 			Point point(curx, y);
 			int picw = 0;
-			int pich = 0;
 
-			if (entry_picture) {
+			if (entry_picture != nullptr) {
 				picw = entry_picture->width();
-				pich = entry_picture->height();
+				const int pich = entry_picture->height();
 
 				int draw_x = point.x;
 
@@ -315,26 +316,13 @@ void Table<void *>::draw(RenderTarget & dst)
 						}
 					}
 
-					if (alignment & Align_Right) {
+					if (static_cast<int>(alignment & UI::Align::kRight)) {
 						draw_x += curw - blit_width;
 					}
 
-					// Temporary texture for the scaled image
-					Texture* scaled_texture = new Texture(blit_width, max_pic_height);
-
-					// Initialize the rectangle
-					scaled_texture->fill_rect(Rect(0, 0, blit_width, max_pic_height),
-									RGBAColor(255, 255, 255, 0));
-
 					// Create the scaled image
-					scaled_texture->blit(Rect(0, 0, blit_width, max_pic_height),
-							 *entry_picture,
-							 Rect(0, 0, picw, pich),
-							 1.,
-							 BlendMode::UseAlpha);
-
-					// This will now blit with any appropriate cropping
-					dst.blit(Point(draw_x, point.y + 1), scaled_texture);
+					dst.blitrect_scale(Rect(draw_x, point.y + 1, blit_width, max_pic_height),
+					                   entry_picture, Rect(0, 0, picw, pich), 1., BlendMode::UseAlpha);
 
 					// For text alignment below
 					picw = blit_width;
@@ -345,7 +333,7 @@ void Table<void *>::draw(RenderTarget & dst)
 						} else {
 							draw_x = point.x + (curw - picw) / 2;
 						}
-					} else if (alignment & Align_Right) {
+					} else if (static_cast<int>(alignment & UI::Align::kRight)) {
 						draw_x += curw - picw;
 					}
 					dst.blit(Point(draw_x, point.y + (lineheight - pich) / 2), entry_picture);
@@ -359,11 +347,11 @@ void Table<void *>::draw(RenderTarget & dst)
 				curx += curw;
 				continue;
 			}
-			const Image* entry_text_im = UI::g_fh1->render(as_uifont(entry_string, m_fontsize));
+			const Image* entry_text_im = UI::g_fh1->render(as_uifont(richtext_escape(entry_string), m_fontsize));
 
-			if (alignment & Align_Right) {
+			if (static_cast<int>(alignment & UI::Align::kRight)) {
 				point.x += curw - 2 * picw;
-			} else if (alignment & Align_HCenter) {
+			} else if (static_cast<int>(alignment & UI::Align::kHCenter)) {
 				point.x += (curw - picw) / 2;
 			}
 
@@ -378,7 +366,7 @@ void Table<void *>::draw(RenderTarget & dst)
 			if ((curw + picw) < text_width) {
 				// Fix positioning for BiDi languages.
 				if (UI::g_fh1->fontset().is_rtl()) {
-					point.x = alignment & Align_Right ? curx : curx + picw;
+					point.x = static_cast<int>(alignment & UI::Align::kRight) ? curx : curx + picw;
 				}
 				// We want this always on, e.g. for mixed language savegame filenames
 				if (i18n::has_rtl_character(entry_string.c_str(), 20)) { // Restrict check for efficiency
@@ -462,7 +450,6 @@ bool Table<void *>::handle_mousepress
 					if (column.is_checkbox_column) {
 						play_click();
 						m_entry_records.at(row)->toggle(col);
-						update(0, 0, get_eff_w(), get_h());
 					}
 					break;
 				}
@@ -538,7 +525,6 @@ void Table<void *>::select(const uint32_t i)
 	m_selection = i;
 
 	selected(m_selection);
-	update(0, 0, get_eff_w(), get_h());
 }
 
 /**
@@ -553,7 +539,7 @@ Table<void *>::EntryRecord & Table<void *>::add
 	for (size_t i = 0; i < m_columns.size(); ++i)
 		if (m_columns.at(i).is_checkbox_column) {
 			result.m_data.at(i).d_picture =
-				g_gr->images().get("pics/checkbox_empty.png");
+				g_gr->images().get("images/ui_basic/checkbox_empty.png");
 		}
 
 	m_scrollbar->set_steps
@@ -565,8 +551,6 @@ Table<void *>::EntryRecord & Table<void *>::add
 		select(m_entry_records.size() - 1);
 		m_scrollbar->set_scrollpos(std::numeric_limits<int32_t>::max());
 	}
-
-	update(0, 0, get_eff_w(), get_h());
 	return result;
 }
 
@@ -576,8 +560,6 @@ Table<void *>::EntryRecord & Table<void *>::add
 void Table<void *>::set_scrollpos(int32_t const i)
 {
 	m_scrollpos = i;
-
-	update(0, 0, get_eff_w(), get_h());
 }
 
 /**
@@ -645,8 +627,6 @@ void Table<void *>::sort(const uint32_t Begin, uint32_t End)
 			newselection = i;
 	}
 	m_selection = newselection;
-
-	update();
 }
 
 /**

@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2015 Widelands Development Team
+# Copyright (C) 2005-2016 Widelands Development Team
 # 
 # Translators:
 # Balázs Meskó <meskobalazs@gmail.com>, 2016
@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-12-14 05:31+0000\n"
-"PO-Revision-Date: 2016-01-14 00:31+0000\n"
+"POT-Creation-Date: 2016-01-31 20:26+0000\n"
+"PO-Revision-Date: 2016-02-01 08:46+0000\n"
 "Last-Translator: Balázs Meskó <meskobalazs@gmail.com>\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
@@ -36,8 +36,8 @@ msgid "Licensing information for Widelands"
 msgstr "Licencelési információ a Widelandshez"
 
 #: ../../txts/LICENSE.lua:23
-msgid "Copyright 2002 - 2015 by the Widelands Development Team."
-msgstr "Copyright 2002 - 2015, Widelands fejlesztőcsapat"
+msgid "Copyright 2002 - 2016 by the Widelands Development Team."
+msgstr "Copyright 2002 - 2016, Widelands fejlesztőcsapat"
 
 #: ../../txts/LICENSE.lua:24
 msgid ""

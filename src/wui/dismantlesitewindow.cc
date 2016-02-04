@@ -24,7 +24,7 @@
 #include "ui_basic/tabpanel.h"
 #include "wui/buildingwindow.h"
 
-static const char pic_tab_wares[] = "pics/menu_tab_wares.png";
+static const char pic_tab_wares[] = "images/wui/buildings/menu_tab_wares.png";
 
 /**
  * Status window for dismantle sites.
@@ -58,7 +58,7 @@ DismantleSiteWindow::DismantleSiteWindow
 			 UI::ProgressBar::DefaultWidth, UI::ProgressBar::DefaultHeight,
 			 UI::ProgressBar::Horizontal);
 	m_progress->set_total(1 << 16);
-	box.add(m_progress, UI::Box::AlignCenter);
+	box.add(m_progress, UI::Align::kHCenter);
 
 	box.add_space(8);
 

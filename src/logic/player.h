@@ -21,6 +21,7 @@
 #define WL_LOGIC_PLAYER_H
 
 #include <memory>
+#include <unordered_set>
 
 #include "base/macros.h"
 #include "graphic/color.h"
@@ -37,7 +38,7 @@
 // there are three arrays to be used by AI
 // their size is defined here
 // (all are of the same size)
-constexpr int kAIDataSize = 6;
+constexpr int kAIDataSize = 8;
 
 class Node;
 namespace Widelands {
@@ -76,6 +77,7 @@ public:
 	friend class EditorGameBase;
 	friend struct GamePlayerInfoPacket;
 	friend struct GamePlayerEconomiesPacket;
+	friend struct GamePlayerAiPersistentPacket;
 	friend class MapBuildingdataPacket;
 	friend class MapPlayersViewPacket;
 	friend class MapExplorationPacket;
@@ -133,6 +135,31 @@ public:
 	// For cheating
 	void set_see_all(bool const t) {m_see_all = t; m_view_changed = true;}
 	bool see_all() const {return m_see_all;}
+
+	/// Data that are used and managed by AI. They are here to have it saved as a port of player's data
+	struct AiPersistentState {
+		AiPersistentState() : initialized(0){}
+
+		//was initialized
+		uint8_t initialized;
+		uint32_t colony_scan_area;
+		uint32_t trees_around_cutters;
+		uint32_t expedition_start_time;
+		int16_t ships_utilization; //0-10000 to avoid floats, used for decision for building new ships
+		uint8_t no_more_expeditions;
+		int16_t last_attacked_player;
+		int32_t least_military_score;
+		int32_t target_military_score;
+		int16_t ai_personality_military_loneliness;
+		int32_t ai_personality_attack_margin;
+		uint32_t ai_productionsites_ratio;
+		int32_t ai_personality_wood_difference;
+		uint32_t ai_personality_early_militarysites;
+	} ai_data;
+
+	AiPersistentState* get_mutable_ai_persistent_state(){
+		return &ai_data;
+	}
 
 	/// Per-player field information.
 	struct Field {
@@ -433,13 +460,11 @@ public:
 	Flag *   build_flag(Coords);      /// Build a flag if it is allowed.
 	Road & force_road(const Path &);
 	Road * build_road(const Path &); /// Build a road if it is allowed.
-	Building & force_building
-		(const Coords,
-		 const Building::FormerBuildings &);
-	Building & force_csite
-		(const Coords,
+	Building& force_building(Coords, const Building::FormerBuildings&);
+	Building& force_csite
+		(Coords,
 		 DescriptionIndex,
-		 const Building::FormerBuildings & = Building::FormerBuildings());
+		 const Building::FormerBuildings& = Building::FormerBuildings());
 	Building * build(Coords, DescriptionIndex, bool, Building::FormerBuildings &);
 	void bulldoze(PlayerImmovable &, bool recurse = false);
 	void flagaction(Flag &);
@@ -499,6 +524,8 @@ public:
 
 	void read_statistics(FileRead &);
 	void write_statistics(FileWrite &) const;
+	void read_remaining_shipnames(FileRead &);
+	void write_remaining_shipnames(FileWrite &) const;
 	void sample_statistics();
 	void ware_produced(DescriptionIndex);
 
@@ -514,23 +541,14 @@ public:
 		m_further_initializations .push_back(init);
 	}
 
-	// set of functions to be used by AI to save and read own data within this class
-	void set_ai_data(int32_t value, uint32_t position);
-	void set_ai_data(uint32_t value, uint32_t position);
-	void set_ai_data(int16_t value, uint32_t position);
-	void set_ai_data(bool value, uint32_t position);
-	void get_ai_data(int32_t * value, uint32_t position);
-	void get_ai_data(uint32_t * value, uint32_t position);
-	void get_ai_data(int16_t * value, uint32_t position);
-	void get_ai_data(bool * value, uint32_t position);
+	const std::string pick_shipname();
 
 private:
 	BuildingStatsVector* get_mutable_building_statistics(const DescriptionIndex& i);
 	void update_building_statistics(Building &, NoteImmovable::Ownership ownership);
 	void update_team_players();
 	void play_message_sound(const Message::Type & msgtype);
-	void _enhance_or_dismantle
-		(Building *, DescriptionIndex const index_of_new_building);
+	void _enhance_or_dismantle(Building*, DescriptionIndex index_of_new_building);
 
 	// Called when a node becomes seen or has changed.  Discovers the node and
 	// those of the 6 surrounding edges/triangles that are not seen from another
@@ -557,6 +575,7 @@ private:
 	uint32_t               m_casualties, m_kills;
 	uint32_t               m_msites_lost,     m_msites_defeated;
 	uint32_t               m_civil_blds_lost, m_civil_blds_defeated;
+	std::unordered_set<std::string>  m_remaining_shipnames;
 
 	Field *               m_fields;
 	std::vector<bool>     m_allowed_worker_types;
@@ -593,15 +612,6 @@ private:
 	 * m_ware_stocks[ware_id][time_index]
 	 */
 	std::vector< std::vector<uint32_t> > m_ware_stocks;
-
-
-	/**
-	 * AI internal data. These will be ignored by human player
-	 * AI is managing the content of these arrays
-	 */
-	int32_t m_ai_data_int32 [kAIDataSize];
-	uint32_t m_ai_data_uint32 [kAIDataSize];
-	int16_t m_ai_data_int16 [kAIDataSize];
 
 	PlayerBuildingStats m_building_stats;
 

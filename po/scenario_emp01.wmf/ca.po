@@ -1,15 +1,15 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2015 Widelands Development Team
+# Copyright (C) 2005-2016 Widelands Development Team
 # 
 # Translators:
-# Juanjo, 2015
+# Juanjo, 2015-2016
 # Juanjo, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-18 08:43+0000\n"
-"PO-Revision-Date: 2015-11-18 13:51+0000\n"
+"POT-Creation-Date: 2016-01-23 08:23+0000\n"
+"PO-Revision-Date: 2016-01-24 20:54+0000\n"
 "Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -175,7 +175,7 @@ msgstr "Supervivents"
 #. TRANSLATORS: Lutius - Diary
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:114
 msgid "Finally, the Gods were with us!"
-msgstr "Per fi, el déus estan amb nosaltres!"
+msgstr "Per fi, els déus estan amb nosaltres!"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:117
@@ -245,7 +245,7 @@ msgstr "Senyor, he vist que ha finalitzat la construcció del barracó, així qu
 msgid ""
 "This is a good step forward. Now we can feel a bit safer and can look "
 "forward to repairing our ship."
-msgstr "És un bon pas endavant. Ara ens podrem sentir una mica més segurs i esperar a que acabi la reparació del nostre vaixell."
+msgstr "És un bon pas endavant. Ara ens podrem sentir una mica més segurs i esperar que acabi la reparació del nostre vaixell."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:153
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:168
@@ -288,7 +288,7 @@ msgid ""
 "Perhaps it would be a good idea to wait until he cleans enough space for "
 "constructing two more lumberjack’s houses, so that we can harvest the logs "
 "faster."
-msgstr "M'han informat que el llenyataire acaba de començar a treballar. Potser seria una bona idea esperar a que netegi prou espai per construir-hi dues cases més de llenyataires i així aconseguir troncs més ràpid."
+msgstr "M'han informat que el llenyataire acaba de començar a treballar. Potser seria una bona idea esperar que netegi prou espai per construir-hi dues cases més de llenyataires i així aconseguir troncs més ràpidament."
 
 #. TRANSLATORS: Amalea
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:174
@@ -306,7 +306,7 @@ msgstr "Entra n'Amalea..."
 #. TRANSLATORS: Amalea
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:183
 msgid "I’ve got two important things to talk about… First the good news:"
-msgstr "Tinc dues coses importants que dir-vos. Primer, les bones notícies..."
+msgstr "Tinc dues coses importants a dir-vos. Primer, les bones notícies:"
 
 #. TRANSLATORS: Amalea
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:186
@@ -355,7 +355,7 @@ msgstr "Senyor, estava pensant que potser aquelles roques de la costa sud de l'i
 msgid ""
 "The repair of our ship will take a few weeks, anyway, and the resources we "
 "harvest now might be the base of strong and big buildings in another land."
-msgstr "La reparació de la nostra nau tardarà unes quantes setmanes. De totes formes, els béns que aconseguim ara podrien ser la base de forts i grans edificis en una altra illa."
+msgstr "La reparació de la nostra nau tardarà unes quantes setmanes. De totes maneres, els béns que aconseguim ara podrien ser la base de forts i grans edificis en una altra illa."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:213
 msgid "A Step Forward"
@@ -395,7 +395,7 @@ msgstr "Avui m'ha arribat un missatge dient que la nostra nau està completament
 msgid ""
 "Tonight will be our last night on this island. Tomorrow morning we will "
 "leave, searching for a new place for our exile."
-msgstr "Aquesta nit serà l'última en aquesta illa. Demà pel matí, partirem, buscant un nou lloc per al nostre exili."
+msgstr "Aquesta nit serà l'última en aquesta illa. Demà al matí partirem, buscant un nou lloc per al nostre exili."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:233
@@ -428,6 +428,7 @@ msgid ""
 msgstr "Senyor, heu fet d'aquesta península un lloc molt segur. És hora de continuar!"
 
 #: ../../scripting/format_scenario.lua:36
+#, lua-format
 msgid "“%s”"
 msgstr "“%s”"
 

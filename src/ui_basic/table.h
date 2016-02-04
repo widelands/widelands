@@ -62,7 +62,7 @@ public:
 		(uint32_t width,
 		 const std::string & title = std::string(),
 		 const std::string & tooltip = std::string(),
-		 Align                                  = Align_Left,
+		 Align                                  = UI::Align::kLeft,
 		 bool                is_checkbox_column = false);
 
 	void set_column_title(uint8_t col, const std::string & title);
@@ -170,7 +170,7 @@ public:
 		(uint32_t width,
 		 const std::string & title = std::string(),
 		 const std::string & tooltip = std::string(),
-		 Align                                  = Align_Left,
+		 Align                                  = UI::Align::kLeft,
 		 bool                is_checkbox_column = false);
 
 	void set_column_title(uint8_t col, const std::string & title);

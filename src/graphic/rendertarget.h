@@ -65,13 +65,13 @@ public:
 	void blit(const Point& dst,
 	          const Image* image,
 	          BlendMode blend_mode = BlendMode::UseAlpha,
-	          UI::Align = UI::Align_TopLeft);
+				 UI::Align = UI::Align::kTopLeft);
 
 	// Like blit. See MonochromeBlitProgram for details.
 	void blit_monochrome(const Point& dst,
 						const Image* image,
 						const RGBAColor& blend_mode,
-						UI::Align = UI::Align_TopLeft);
+						UI::Align = UI::Align::kTopLeft);
 
 	void blitrect(const Point& dst,
 	              const Image* image,
@@ -83,16 +83,18 @@ public:
 	// multiplied with 'opacity' before blitting. The 'blend_mode'
 	// defines if values are blended with whats already there or just
 	// copied over.
-	void blitrect_scale(const Rect& destination_rect,
+	// Rect's are taken by value on purpose.
+	void blitrect_scale(Rect destination_rect,
 	                    const Image* image,
-	                    const Rect& source_rect,
+	                    Rect source_rect,
 	                    float opacity,
 	                    BlendMode blend_mode);
 
-	// Like blitrect_scale. See MonochromeBlitProgram for details.
-	void blitrect_scale_monochrome(const Rect& destination_rect,
+	// Like blitrect_scale. See MonochromeBlitProgram for details. Rect's are
+	// taken by value on purpose.
+	void blitrect_scale_monochrome(Rect destination_rect,
 	                               const Image* image,
-	                               const Rect& source_rect,
+	                               Rect source_rect,
 	                               const RGBAColor& blend);
 
 	void tile(const Rect&,
@@ -118,7 +120,7 @@ public:
 
 protected:
 	bool clip(Rect & r) const;
-	bool to_surface_geometry(Point* dst, Rect* srcrc) const;
+	bool to_surface_geometry(Rect* destination_rect, Rect* source_rect) const;
 
 	// Does the actual blitting.
 	void do_blit_animation(const Point& dst,

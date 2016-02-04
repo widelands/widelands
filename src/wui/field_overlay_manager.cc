@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008, 2010-2011, 2013 by the Widelands Development Team
+ * Copyright (C) 2002-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,15 +26,15 @@
 #include "graphic/graphic.h"
 #include "logic/field.h"
 
-FieldOverlayManager::FieldOverlayManager() : m_current_overlay_id(0) {
-	OverlayInfo * buildhelp_info = m_buildhelp_infos;
+FieldOverlayManager::FieldOverlayManager() : current_overlay_id_(0) {
+	OverlayInfo * buildhelp_info = buildhelp_infos_;
 	const char * filenames[] = {
-		"pics/set_flag.png",
-		"pics/small.png",
-		"pics/medium.png",
-		"pics/big.png",
-		"pics/mine.png",
-		"pics/port.png"
+		"images/wui/overlays/set_flag.png",
+		"images/wui/overlays/small.png",
+		"images/wui/overlays/medium.png",
+		"images/wui/overlays/big.png",
+		"images/wui/overlays/mine.png",
+		"images/wui/overlays/port.png"
 	};
 	const char * const * filename = filenames;
 
@@ -55,16 +55,16 @@ FieldOverlayManager::FieldOverlayManager() : m_current_overlay_id(0) {
 }
 
 bool FieldOverlayManager::buildhelp() const {
-	return m_buildhelp;
+	return buildhelp_;
 }
 
 void FieldOverlayManager::show_buildhelp(const bool value) {
-	m_buildhelp = value;
+	buildhelp_ = value;
 }
 
 void FieldOverlayManager::get_overlays(Widelands::FCoords const c,
                                           std::vector<OverlayInfo>* result) const {
-	const RegisteredOverlaysMap & overlay_map = m_overlays[Widelands::TCoords<>::None];
+	const RegisteredOverlaysMap & overlay_map = overlays_[Widelands::TCoords<>::None];
 	RegisteredOverlaysMap::const_iterator it = overlay_map.lower_bound(c);
 
 	while (it != overlay_map.end() && it->first == c && it->second.level <= kLevelForBuildHelp) {
@@ -72,10 +72,10 @@ void FieldOverlayManager::get_overlays(Widelands::FCoords const c,
 		++it;
 	}
 
-	if (m_buildhelp) {
+	if (buildhelp_) {
 		int buildhelp_overlay_index = get_buildhelp_overlay(c);
 		if (buildhelp_overlay_index < Widelands::Field::Buildhelp_None) {
-		   result->emplace_back(m_buildhelp_infos[buildhelp_overlay_index]);
+		   result->emplace_back(buildhelp_infos_[buildhelp_overlay_index]);
 	   }
 	}
 
@@ -90,7 +90,7 @@ void FieldOverlayManager::get_overlays(Widelands::TCoords<> const c,
 	assert(c.t == Widelands::TCoords<>::D || c.t == Widelands::TCoords<>::R);
 
 
-	const RegisteredOverlaysMap & overlay_map = m_overlays[c.t];
+	const RegisteredOverlaysMap & overlay_map = overlays_[c.t];
 	RegisteredOverlaysMap::const_iterator it = overlay_map.lower_bound(c);
 	while (it != overlay_map.end() && it->first == c) {
 		result->emplace_back(it->second.pic, it->second.hotspot);
@@ -100,7 +100,7 @@ void FieldOverlayManager::get_overlays(Widelands::TCoords<> const c,
 
 int FieldOverlayManager::get_buildhelp_overlay(const Widelands::FCoords& fc) const {
 	Widelands::NodeCaps const caps =
-	   m_callback ? static_cast<Widelands::NodeCaps>(m_callback(fc)) : fc.field->nodecaps();
+	   callback_ ? static_cast<Widelands::NodeCaps>(callback_(fc)) : fc.field->nodecaps();
 
 	const int value = caps & Widelands::BUILDCAPS_MINE ?
 	               Widelands::Field::Buildhelp_Mine :
@@ -130,7 +130,7 @@ void FieldOverlayManager::register_overlay
 		hotspot = Point(pic->width() / 2, pic->height() / 2);
 	}
 
-	RegisteredOverlaysMap & overlay_map = m_overlays[c.t];
+	RegisteredOverlaysMap & overlay_map = overlays_[c.t];
 	for
 		(RegisteredOverlaysMap::iterator it = overlay_map.find(c);
 		 it != overlay_map.end() && it->first == c;
@@ -180,7 +180,7 @@ void FieldOverlayManager::register_overlay
 void FieldOverlayManager::remove_overlay(Widelands::TCoords<> const c, const Image* pic) {
 	assert(c.t <= 2);
 
-	RegisteredOverlaysMap & overlay_map = m_overlays[c.t];
+	RegisteredOverlaysMap & overlay_map = overlays_[c.t];
 
 	if (overlay_map.count(c)) {
 		RegisteredOverlaysMap::iterator it = overlay_map.lower_bound(c);
@@ -196,8 +196,8 @@ void FieldOverlayManager::remove_overlay(Widelands::TCoords<> const c, const Ima
 }
 
 void FieldOverlayManager::remove_overlay(const OverlayId overlay_id) {
-	const RegisteredOverlaysMap * const overlays_end = m_overlays + 3;
-	for (RegisteredOverlaysMap * j = m_overlays; j != overlays_end; ++j)
+	const RegisteredOverlaysMap * const overlays_end = overlays_ + 3;
+	for (RegisteredOverlaysMap * j = overlays_; j != overlays_end; ++j)
 		for (RegisteredOverlaysMap::iterator it = j->begin(); it != j->end();) {
 			it->second.overlay_ids.erase(overlay_id);
 			if (it->second.overlay_ids.empty())
@@ -208,16 +208,16 @@ void FieldOverlayManager::remove_overlay(const OverlayId overlay_id) {
 }
 
 void FieldOverlayManager::remove_all_overlays() {
-	m_overlays[0].clear();
-	m_overlays[1].clear();
-	m_overlays[2].clear();
+	overlays_[0].clear();
+	overlays_[1].clear();
+	overlays_[2].clear();
 }
 
 void FieldOverlayManager::register_overlay_callback_function(CallbackFn function) {
-	m_callback = function;
+	callback_ = function;
 }
 
 FieldOverlayManager::OverlayId FieldOverlayManager::next_overlay_id() {
-	++m_current_overlay_id;
-	return m_current_overlay_id;
+	++current_overlay_id_;
+	return current_overlay_id_;
 }

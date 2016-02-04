@@ -62,7 +62,7 @@ buildtool="" #Use ninja by default, fall back to make if that is not available.
   # Check if directories / links already exists and create / update them if needed.
   prepare_directories_and_links () {
     test -d build/locale || mkdir -p build/locale
-    test -e locale || ln -s build/locale
+    test -e data/locale || ln -s ../build/locale data/locale
     return 0
   }
 
