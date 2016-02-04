@@ -35,9 +35,9 @@ namespace UI {
 
 struct EditBoxImpl;
 
-/** An editbox can be clicked, then the user can change its text (title). 
- * 
- * When return is pressed, the editbox is unfocused, the keyboard 
+/** An editbox can be clicked, then the user can change its text (title).
+ *
+ * When return is pressed, the editbox is unfocused, the keyboard
  * released and a callback function is called.
  */
 struct EditBox : public Panel {

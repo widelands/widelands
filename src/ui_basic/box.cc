@@ -406,7 +406,7 @@ void Box::set_itepos_(uint32_t idx, int32_t pos)
 
 		if (orientation_ == Horizontal)
 			it.u.panel.panel->set_pos(Point(pos, breadth));
-		else 
+		else
 			it.u.panel.panel->set_pos(Point(breadth, pos));
 		break;
 	}
