@@ -63,7 +63,7 @@ struct MapOrSaveSelectionWindow : public UI::Window {
 		UI::Button * btn = new UI::Button
 			(this, "map",
 			 space, y, butw, buth,
-			 g_gr->images().get("pics/but0.png"),
+			 g_gr->images().get("images/ui_basic/but0.png"),
 			 _("Map"), _("Select a map"), true, false);
 		btn->sigclicked.connect
 			(boost::bind
@@ -73,7 +73,7 @@ struct MapOrSaveSelectionWindow : public UI::Window {
 		btn = new UI::Button
 			(this, "saved_game",
 			 space, y + buth + space, butw, buth,
-			 g_gr->images().get("pics/but0.png"),
+			 g_gr->images().get("images/ui_basic/but0.png"),
 			 /** Translators: This is a button to select a savegame */
 			 _("Saved Game"), _("Select a saved game"), true, false);
 		btn->sigclicked.connect
@@ -84,7 +84,7 @@ struct MapOrSaveSelectionWindow : public UI::Window {
 		btn = new UI::Button
 			(this, "cancel",
 			 space + butw / 4, y + 3 * buth + 2 * space, butw / 2, buth,
-			 g_gr->images().get("pics/but1.png"),
+			 g_gr->images().get("images/ui_basic/but1.png"),
 			 _("Cancel"), _("Cancel selection"), true, false);
 		btn->sigclicked.connect
 			(boost::bind
@@ -108,7 +108,7 @@ struct MapOrSaveSelectionWindow : public UI::Window {
 FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG
 	(GameSettingsProvider * const settings, GameController * const ctrl)
 	:
-	FullscreenMenuBase("launchMPGmenu.jpg"),
+	FullscreenMenuBase("images/ui_fsmenu/launch_mpg_menu.jpg"),
 
 // Values for alignment and size
 	butw_ (get_w() / 4),
@@ -126,36 +126,36 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG
 	change_map_or_save_
 		(this, "change_map_or_save",
 		 right_column_x_ + butw_ - buth_, get_h() * 3 / 20, buth_, buth_,
-		 g_gr->images().get("pics/but1.png"),
-		 g_gr->images().get("pics/menu_toggle_minimap.png"),
+		 g_gr->images().get("images/ui_basic/but1.png"),
+		 g_gr->images().get("images/wui/menus/menu_toggle_minimap.png"),
 		 _("Change map or saved game"), false, false),
 	ok_
 		(this, "ok",
 		 right_column_x_, get_h() * 12 / 20 - 2 * label_height_, butw_, buth_,
-		 g_gr->images().get("pics/but2.png"),
+		 g_gr->images().get("images/ui_basic/but2.png"),
 		 _("Start game"), std::string(), false, false),
 	back_
 		(this, "back",
 		 right_column_x_, get_h() * 218 / 240, butw_, buth_,
-		 g_gr->images().get("pics/but0.png"),
+		 g_gr->images().get("images/ui_basic/but0.png"),
 		 _("Back"), std::string(), true, false),
 	wincondition_
 		(this, "win_condition",
 		 right_column_x_, get_h() * 11 / 20 - 2 * label_height_, butw_, buth_,
-		 g_gr->images().get("pics/but1.png"),
+		 g_gr->images().get("images/ui_basic/but1.png"),
 		 "", std::string(), false, false),
 	help_button_
 		(this, "help",
 		 right_column_x_ + butw_ - buth_, get_h() / 100, buth_, buth_,
-		 g_gr->images().get("pics/but1.png"),
-		 g_gr->images().get("pics/menu_help.png"),
+		 g_gr->images().get("images/ui_basic/but1.png"),
+		 g_gr->images().get("images/ui_basic/menu_help.png"),
 		 _("Show the help window"), true, false),
 
 // Text labels
 	title_
 		(this,
 		 get_w() / 2, get_h() / 25,
-		 _("Multiplayer Game Setup"), UI::Align_HCenter),
+		 _("Multiplayer Game Setup"), UI::Align::kHCenter),
 	mapname_
 		(this,
 		 right_column_x_, get_h() * 3 / 20,
@@ -164,19 +164,19 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG
 		(this,
 		 // (get_w() * 57 / 80) is the width of the MultiPlayerSetupGroup
 		 get_w() / 50, get_h() / 10, (get_w() * 57 / 80) / 3, get_h() / 10,
-		 _("Clients"), UI::Align_HCenter),
+		 _("Clients"), UI::Align::kHCenter),
 	players_
 		(this,
 		 get_w() / 50 + (get_w() * 57 / 80) * 6 / 15, get_h() / 10, (get_w() * 57 / 80) * 9 / 15, get_h() / 10,
-		 _("Players"), UI::Align_HCenter),
+		 _("Players"), UI::Align::kHCenter),
 	map_
 		(this,
 		 right_column_x_, get_h() / 10, butw_, get_h() / 10,
-		 _("Map"), UI::Align_HCenter),
+		 _("Map"), UI::Align::kHCenter),
 	wincondition_type_
 		(this,
 		 right_column_x_ + (butw_ / 2), get_h() * 10 / 20 - 1.5 * label_height_,
-		 _("Type of game"), UI::Align_HCenter),
+		 _("Type of game"), UI::Align::kHCenter),
 
 	map_info_(this, right_column_x_, get_h() * 2 / 10, butw_, get_h() * 23 / 80 - 2 * label_height_),
 	client_info_(this, right_column_x_, get_h() * 13 / 20 - 2 * label_height_, butw_, 2 * label_height_),

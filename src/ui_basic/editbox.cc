@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003, 2006-2008, 2010-2011 by the Widelands Development Team
+ * Copyright (C) 2003-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,15 +22,23 @@
 #include <limits>
 
 #include <SDL_keycode.h>
+#include <boost/format.hpp>
 
-#include "graphic/font_handler.h"
 #include "graphic/font_handler1.h"
 #include "graphic/rendertarget.h"
+#include "graphic/text/bidi.h"
 #include "graphic/text/font_set.h"
 #include "graphic/text_constants.h"
 #include "ui_basic/mouse_constants.h"
 
 // TODO(GunChleoc): Arabic: Fix positioning for Arabic
+
+namespace {
+
+constexpr int kMargin = 4;
+
+} // namespace
+
 
 namespace UI {
 
@@ -41,7 +49,6 @@ struct EditBoxImpl {
 	/*@{*/
 	std::string fontname;
 	uint32_t fontsize;
-	RGBColor fontcolor;
 	/*@}*/
 
 	/// Background tile style.
@@ -65,11 +72,11 @@ struct EditBoxImpl {
 
 EditBox::EditBox
 	(Panel * const parent,
-	 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
+	 const int32_t x, const int32_t y, const uint32_t w,
 	 const Image* background,
-	 Align _align)
+	 int font_size)
 	:
-	Panel(parent, x, y, w, h),
+	Panel(parent, x, y, w, UI::g_fh1->render(as_uifont("."), font_size)->height() + 2),
 	m(new EditBoxImpl),
 	m_history_active(false),
 	m_history_position(-1)
@@ -78,10 +85,10 @@ EditBox::EditBox
 
 	m->background = background;
 	m->fontname = UI::g_fh1->fontset().serif();
-	m->fontsize = UI_FONT_SIZE_SMALL;
-	m->fontcolor = UI_FONT_CLR_FG;
+	m->fontsize = font_size;
 
-	m->align = static_cast<Align>((_align & Align_Horizontal) | Align_VCenter);
+	// Set alignment to the UI language's principal writing direction
+	m->align = UI::g_fh1->fontset().is_rtl() ? UI::Align::kCenterRight : UI::Align::kCenterLeft;
 	m->caret = 0;
 	m->scrolloffset = 0;
 	// yes, use *signed* max as maximum length; just a small safe-guard.
@@ -110,16 +117,6 @@ const std::string & EditBox::text() const
 }
 
 /**
- * Set the font used by the edit box.
- */
-void EditBox::set_font(const std::string & name, int32_t size, RGBColor color)
-{
-	m->fontname = name;
-	m->fontsize = size;
-	m->fontcolor = color;
-}
-
-/**
  * Set the current text in the edit box.
  *
  * The text is truncated if it is longer than the maximum length set by
@@ -137,8 +134,6 @@ void EditBox::set_text(const std::string & t)
 		m->text.erase(m->text.begin() + m->maxLength, m->text.end());
 	if (caretatend || m->caret > m->text.size())
 		m->caret = m->text.size();
-
-	update();
 }
 
 
@@ -167,34 +162,6 @@ void EditBox::set_max_length(uint32_t const n)
 			m->caret = m->text.size();
 
 		check_caret();
-		update();
-	}
-}
-
-
-/**
- * \return the text alignment
- */
-Align EditBox::align() const
-{
-	return m->align;
-}
-
-
-/**
- * Set the new alignment.
- *
- * Note that vertical alignment is always centered, independent of what
- * you select here.
- */
-void EditBox::set_align(Align _align)
-{
-	_align = static_cast<Align>((_align & Align_Horizontal) | Align_VCenter);
-	if (_align != m->align) {
-		m->align = _align;
-		m->scrolloffset = 0;
-		check_caret();
-		update();
 	}
 }
 
@@ -206,7 +173,6 @@ bool EditBox::handle_mousepress(const uint8_t btn, int32_t, int32_t)
 {
 	if (btn == SDL_BUTTON_LEFT && get_can_focus()) {
 		focus();
-		update();
 		return true;
 	}
 
@@ -268,7 +234,6 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code)
 				m->text.erase(m->text.begin() + m->caret);
 				check_caret();
 				changed();
-				update();
 			}
 			return true;
 
@@ -286,8 +251,6 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code)
 							break;
 
 				check_caret();
-
-				update();
 			}
 			return true;
 
@@ -311,7 +274,6 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code)
 						}
 
 				check_caret();
-				update();
 			}
 			return true;
 
@@ -325,7 +287,6 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code)
 				m->caret = 0;
 
 				check_caret();
-				update();
 			}
 			return true;
 
@@ -338,7 +299,6 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code)
 			if (m->caret != m->text.size()) {
 				m->caret = m->text.size();
 				check_caret();
-				update();
 			}
 			return true;
 
@@ -356,7 +316,6 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code)
 					m->text = m_history[m_history_position];
 					m->caret = m->text.size();
 					check_caret();
-					update();
 				}
 			}
 			return true;
@@ -375,7 +334,6 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code)
 					m->text = m_history[m_history_position];
 					m->caret = m->text.size();
 					check_caret();
-					update();
 				}
 			}
 			return true;
@@ -394,7 +352,6 @@ bool EditBox::handle_textinput(const std::string& input_text) {
 		m->caret += input_text.length();
 		check_caret();
 		changed();
-		update();
 	}
 	return true;
 }
@@ -410,7 +367,7 @@ void EditBox::draw(RenderTarget & odst)
 		 Point(get_x(), get_y()));
 
 	// Draw border.
-	if (get_w() >= 4 && get_h() >= 4) {
+	if (get_w() >= kMargin && get_h() >= kMargin) {
 		static const RGBColor black(0, 0, 0);
 
 		// bottom edge
@@ -429,32 +386,69 @@ void EditBox::draw(RenderTarget & odst)
 		dst.fill_rect(Rect(Point(1, 0), 1, get_h() - 2), black);
 	}
 
-	if (has_focus())
+	if (has_focus()) {
 		dst.brighten_rect
 			(Rect(Point(0, 0), get_w(), get_h()), MOUSE_OVER_BRIGHT_FACTOR);
-
-	Point pos(4, get_h() >> 1);
-
-	switch (m->align & Align_Horizontal) {
-	case Align_HCenter:
-		pos.x = get_w() >> 1;
-		break;
-	case Align_Right:
-		pos.x = get_w() - 4;
-		break;
-	default:
-		break;
 	}
 
-	pos.x += m->scrolloffset;
+	const int max_width = get_w() - 2 * kMargin;
 
-	UI::g_fh->draw_text
-		(dst,
-		 TextStyle::makebold(Font::get(m->fontname, m->fontsize), m->fontcolor),
-		 pos,
-		 m->text,
-		 align(),
-		 has_focus() ? static_cast<int32_t>(m->caret) : std::numeric_limits<uint32_t>::max());
+	const Image* entry_text_im = UI::g_fh1->render(as_editorfont(m->text, m->fontsize));
+
+	int linewidth = entry_text_im->width();
+	int lineheight = entry_text_im->height();
+
+	Point point(kMargin, get_h() / 2);
+
+	if (static_cast<int>(m->align & UI::Align::kRight)) {
+		point.x += max_width;
+	}
+
+	UI::correct_for_align(m->align, linewidth, lineheight, &point);
+
+	// Crop to max_width while blitting
+	if (max_width < linewidth) {
+		// Fix positioning for BiDi languages.
+		if (UI::g_fh1->fontset().is_rtl()) {
+			point.x = 0;
+		}
+		// We want this always on, e.g. for mixed language savegame filenames
+		if (i18n::has_rtl_character(m->text.c_str(), 100)) { // Restrict check for efficiency
+			// TODO(GunChleoc): Arabic: Fix scrolloffset
+			dst.blitrect(point,
+							 entry_text_im,
+							 Rect(linewidth - max_width, 0, linewidth, lineheight));
+		}
+		else {
+			if (static_cast<int>(m->align & UI::Align::kRight)) {
+				// TODO(GunChleoc): Arabic: Fix scrolloffset
+				dst.blitrect(point,
+								 entry_text_im,
+								 Rect(point.x + m->scrolloffset + kMargin, point.y, max_width, lineheight));
+			} else {
+				dst.blitrect(point,
+								 entry_text_im,
+								 Rect(point.x - m->scrolloffset - kMargin, point.y, max_width, lineheight));
+			}
+		}
+	} else {
+		dst.blitrect(point, entry_text_im, Rect(0, 0, max_width, lineheight));
+	}
+
+	if (has_focus()) {
+		// Draw the caret
+		std::string line_to_caret = m->text.substr(0, m->caret);
+		// TODO(GunChleoc): Arabic: Fix cursor position for BIDI text.
+		int caret_x = text_width(line_to_caret, m->fontsize);
+
+		const uint16_t fontheight = text_height(m->text, m->fontsize);
+
+		const Image* caret_image = g_gr->images().get("images/ui_basic/caret.png");
+		Point caretpt;
+		caretpt.x = point.x + m->scrolloffset + caret_x - caret_image->width() + LINE_MARGIN;
+		caretpt.y = point.y + (fontheight - caret_image->height()) / 2;
+		dst.blit(caretpt, caret_image);
+	}
 }
 
 /**
@@ -464,37 +458,29 @@ void EditBox::check_caret()
 {
 	std::string leftstr(m->text, 0, m->caret);
 	std::string rightstr(m->text, m->caret, std::string::npos);
-	uint32_t leftw;
-	uint32_t rightw;
-	uint32_t tmp;
-
-	UI::g_fh->get_size(m->fontname, m->fontsize, leftstr, leftw, tmp);
-	UI::g_fh->get_size(m->fontname, m->fontsize, rightstr, rightw, tmp);
+	int32_t leftw = text_width(leftstr, m->fontsize);
+	int32_t rightw = text_width(rightstr, m->fontsize);
 
 	int32_t caretpos;
 
-	switch (m->align & Align_Horizontal) {
-	case Align_HCenter:
-		caretpos  = (get_w() - static_cast<int32_t>(leftw + rightw)) / 2;
-		caretpos += m->scrolloffset + leftw;
-		break;
-	case Align_Right:
-		caretpos = get_w() - 4 + m->scrolloffset - rightw;
+	switch (m->align & UI::Align::kHorizontal) {
+	case UI::Align::kRight:
+		caretpos = get_w() - kMargin + m->scrolloffset - rightw;
 		break;
 	default:
-		caretpos = 4 + m->scrolloffset + leftw;
+		caretpos = kMargin + m->scrolloffset + leftw;
 		break;
 	}
 
-	if (caretpos < 4)
-		m->scrolloffset += 4 - caretpos + get_w() / 5;
-	else if (caretpos > get_w() - 4)
-		m->scrolloffset -= caretpos - get_w() + 4 + get_w() / 5;
+	if (caretpos < kMargin)
+		m->scrolloffset += kMargin - caretpos + get_w() / 5;
+	else if (caretpos > get_w() - kMargin)
+		m->scrolloffset -= caretpos - get_w() + kMargin + get_w() / 5;
 
-	if ((m->align & Align_Horizontal) == Align_Left) {
+	if ((m->align & UI::Align::kHorizontal) == UI::Align::kLeft) {
 		if (m->scrolloffset > 0)
 			m->scrolloffset = 0;
-	} else if ((m->align & Align_Horizontal) == Align_Right) {
+	} else if ((m->align & UI::Align::kHorizontal) == UI::Align::kRight) {
 		if (m->scrolloffset < 0)
 			m->scrolloffset = 0;
 	}

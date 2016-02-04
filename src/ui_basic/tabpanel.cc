@@ -320,7 +320,7 @@ void TabPanel::draw(RenderTarget & dst)
 			dst.blit(Point(x + kTabPanelTextMargin, (kTabPanelButtonHeight - tabs_[idx]->pic->height()) / 2),
 						tabs_[idx]->pic,
 						BlendMode::UseAlpha,
-						UI::Align_Left);
+						UI::Align::kLeft);
 		}
 
 		// Draw top part of border
@@ -385,7 +385,6 @@ void TabPanel::draw(RenderTarget & dst)
 void TabPanel::handle_mousein(bool inside)
 {
 	if (!inside && highlight_ != kNotFound) {
-		update(tabs_[highlight_]->get_x(), 0, tabs_[highlight_]->get_w(), kTabPanelButtonHeight);
 		highlight_ = kNotFound;
 	}
 }
@@ -400,12 +399,6 @@ bool TabPanel::handle_mousemove
 	size_t hl = find_tab(x, y);
 
 	if (hl != highlight_) {
-		if (hl != kNotFound) {
-			update(tabs_[hl]->get_x(), 0, tabs_[hl]->get_w(), kTabPanelButtonHeight);
-		}
-		if (highlight_ != kNotFound) {
-			update(tabs_[highlight_]->get_x(), 0, tabs_[highlight_]->get_w(), kTabPanelButtonHeight);
-		}
 		highlight_ = hl;
 		set_tooltip(highlight_ != kNotFound ? tabs_[highlight_]->tooltip : "");
 	}

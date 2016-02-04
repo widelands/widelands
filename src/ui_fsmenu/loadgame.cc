@@ -87,11 +87,11 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame
 	// Main title
 	title_
 		(this, get_w() / 2, tabley_ / 3,
-		 is_replay_ ? _("Choose a replay") : _("Choose a saved game"), UI::Align_HCenter),
+		 is_replay_ ? _("Choose a replay") : _("Choose a saved game"), UI::Align::kHCenter),
 
 	// Savegame description
 	label_mapname_
-		(this, right_column_x_, tabley_, "", UI::Align_Left),
+		(this, right_column_x_, tabley_, "", UI::Align::kLeft),
 	ta_mapname_(this,
 					 right_column_x_ + indent_, get_y_from_preceding(label_mapname_) + padding_,
 					 get_right_column_w(right_column_x_ + indent_), 2 * label_height_ - padding_),
@@ -99,7 +99,7 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame
 	label_gametime_
 		(this, right_column_x_, get_y_from_preceding(ta_mapname_) + 2 * padding_,
 		 "",
-		 UI::Align_Left),
+		 UI::Align::kLeft),
 	ta_gametime_(this,
 					  right_column_tab_, label_gametime_.get_y(),
 					  get_right_column_w(right_column_tab_), label_height_),
@@ -107,7 +107,7 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame
 	label_players_
 		(this, right_column_x_, get_y_from_preceding(ta_gametime_),
 		 "",
-		 UI::Align_Left),
+		 UI::Align::kLeft),
 	ta_players_(this,
 					 right_column_tab_, label_players_.get_y(),
 					 get_right_column_w(right_column_tab_), label_height_),
@@ -115,14 +115,14 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame
 	label_version_
 		(this, right_column_x_, get_y_from_preceding(ta_players_),
 		 "",
-		 UI::Align_Left),
+		 UI::Align::kLeft),
 	ta_version_(this,
-					 right_column_tab_, label_version_.get_y(), "", UI::Align_Left),
+					 right_column_tab_, label_version_.get_y(), "", UI::Align::kLeft),
 
 	label_win_condition_
 		(this, right_column_x_, get_y_from_preceding(ta_version_) + 3 * padding_,
 		 "",
-		 UI::Align_Left),
+		 UI::Align::kLeft),
 	ta_win_condition_(this,
 							 right_column_x_ + indent_, get_y_from_preceding(label_win_condition_) + padding_,
 							 get_right_column_w(right_column_x_ + indent_), label_height_),
@@ -131,7 +131,7 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame
 		(this, "delete",
 		 right_column_x_, buty_ - buth_ - 2 * padding_,
 		 butw_, buth_,
-		 g_gr->images().get("pics/but0.png"),
+		 g_gr->images().get("images/ui_basic/but0.png"),
 		 _("Delete"), std::string(), false, false),
 
 	ta_errormessage_
@@ -177,7 +177,7 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame
 	delete_.sigclicked.connect
 		(boost::bind
 			 (&FullscreenMenuLoadGame::clicked_delete, boost::ref(*this)));
-	table_.add_column(130, _("Save Date"), _("The date this game was saved"), UI::Align_Left);
+	table_.add_column(130, _("Save Date"), _("The date this game was saved"), UI::Align::kLeft);
 	int used_width = 130;
 	if (is_replay_ || settings_->settings().multiplayer) {
 		std::vector<std::string> modes;
@@ -206,14 +206,14 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame
 								 /** TRANSLATORS: A tooltip will explain if you need to use an abbreviation. */
 								 _("Mode"),
 								 (boost::format("%s %s") % mode_tooltip_1 % mode_tooltip_2).str(),
-								 UI::Align_Left);
+								 UI::Align::kLeft);
 		used_width += 65;
 	}
 	table_.add_column(table_.get_w() - used_width,
 							 _("Description"),
 							 _("The filename that the game was saved under followed by the map’s name, "
 								"or the map’s name followed by the last objective achieved."),
-								 UI::Align_Left);
+								 UI::Align::kLeft);
 	table_.set_column_compare
 		(0,
 		 boost::bind(&FullscreenMenuLoadGame::compare_date_descending, this, _1, _2));

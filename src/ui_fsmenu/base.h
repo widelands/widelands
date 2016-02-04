@@ -76,7 +76,10 @@ public:
 		kJoingame
 	};
 
-	FullscreenMenuBase(char const * bgpic);
+	/// Calls FullscreenMenuBase(const std::string& bgpic)
+	/// with a default background image
+	FullscreenMenuBase();
+	FullscreenMenuBase(const std::string& bgpic);
 	virtual ~FullscreenMenuBase();
 
 	void draw(RenderTarget &) override;

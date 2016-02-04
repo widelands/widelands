@@ -45,7 +45,7 @@ struct EditorSetHeightTool : public EditorTool {
 	EditorActionArgs format_args_impl(EditorInteractive & parent) override;
 
 	char const * get_sel_impl() const override {
-		return "pics/fsel_editor_set_height.png";
+		return "images/wui/editor/fsel_editor_set_height.png";
 	}
 
 	Widelands::HeightInterval get_interval() const {

@@ -33,7 +33,7 @@ FullscreenMenuMultiPlayer::FullscreenMenuMultiPlayer() :
 	title
 		(this,
 		 get_w() / 2, title_y_,
-		 _("Choose game type"), UI::Align_HCenter),
+		 _("Choose game type"), UI::Align::kHCenter),
 
 // Buttons
 	vbox(this, box_x_, box_y_, UI::Box::Vertical,
@@ -62,15 +62,15 @@ FullscreenMenuMultiPlayer::FullscreenMenuMultiPlayer() :
 
 	title.set_font(ui_fn(), fs_big(), UI_FONT_CLR_FG);
 
-	vbox.add(&metaserver, UI::Box::AlignCenter);
-	vbox.add(&lan, UI::Box::AlignCenter);
+	vbox.add(&metaserver, UI::Align::kHCenter);
+	vbox.add(&lan, UI::Align::kHCenter);
 
 	// Multiple add_space calls to get the same height for the back button as in the single player menu
 	vbox.add_space(buth_);
 	vbox.add_space(buth_);
 	vbox.add_space(6 * buth_);
 
-	vbox.add(&back, UI::Box::AlignCenter);
+	vbox.add(&back, UI::Align::kHCenter);
 
 	vbox.set_size(butw_, get_h() - vbox.get_y());
 
@@ -81,8 +81,8 @@ FullscreenMenuMultiPlayer::FullscreenMenuMultiPlayer() :
 			new UI::Button
 				(this, "login_dialog",
 				 box_x_ + butw_ + buth_ / 4, get_h() * 6 / 25, buth_, buth_,
-				 g_gr->images().get("pics/but1.png"),
-				 g_gr->images().get("pics/continue.png"),
+				 g_gr->images().get("images/ui_basic/but1.png"),
+				 g_gr->images().get("images/ui_basic/continue.png"),
 				 _("Show login dialog"), true, false);
 		showloginbox->sigclicked.connect
 			(boost::bind

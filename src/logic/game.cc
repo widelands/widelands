@@ -254,7 +254,7 @@ bool Game::run_splayer_scenario_direct(char const * const mapname, const std::st
 		 	(*this, g_options.pull_section("global"), 1, false));
 
 	loaderUI.step(_("Loading map"));
-	maploader->load_map_complete(*this, true);
+	maploader->load_map_complete(*this, Widelands::MapLoader::LoadType::kScenario);
 	maploader.reset();
 
 	set_game_controller(new SinglePlayerGameController(*this, true, 1));
@@ -340,7 +340,10 @@ void Game::init_newgame
 
 	if (loaderUI)
 		loaderUI->step(_("Loading map"));
-	maploader->load_map_complete(*this, settings.scenario);
+	maploader->load_map_complete(*this,
+										  settings.scenario ?
+											  Widelands::MapLoader::LoadType::kScenario :
+											  Widelands::MapLoader::LoadType::kGame);
 
 	// Check for win_conditions
 	if (!settings.scenario) {

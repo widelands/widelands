@@ -1,20 +1,20 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2015 Widelands Development Team
+# Copyright (C) 2005-2016 Widelands Development Team
 # 
 # Translators:
 # wl-zocker, 2014
 # millimarg, 2015
 # Mirian Margiani <mirian.margiani@gmail.com>, 2014
 # Peter Schwanemann <nasenbaer_peter@sourceforge.net>, 2005
-# Venatrix, 2015
+# Venatrix, 2015-2016
 # wl-zocker, 2015-2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-12-14 05:31+0000\n"
-"PO-Revision-Date: 2016-01-07 14:25+0000\n"
-"Last-Translator: wl-zocker\n"
+"POT-Creation-Date: 2016-01-31 20:26+0000\n"
+"PO-Revision-Date: 2016-02-01 14:24+0000\n"
+"Last-Translator: Venatrix\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -39,8 +39,8 @@ msgid "Licensing information for Widelands"
 msgstr "Lizenzinformationen für Widelands"
 
 #: ../../txts/LICENSE.lua:23
-msgid "Copyright 2002 - 2015 by the Widelands Development Team."
-msgstr "Copyright 2002 - 2015 Widelands-Entwicklungsteam."
+msgid "Copyright 2002 - 2016 by the Widelands Development Team."
+msgstr "Copyright 2002 - 2016 durch das Widelands-Entwicklungsteam."
 
 #: ../../txts/LICENSE.lua:24
 msgid ""

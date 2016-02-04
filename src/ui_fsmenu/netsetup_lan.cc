@@ -28,19 +28,19 @@
 #include "profile/profile.h"
 
 FullscreenMenuNetSetupLAN::FullscreenMenuNetSetupLAN () :
-	FullscreenMenuBase("ui_fsmenu.jpg"), //  TODO(unknown): change this
+	FullscreenMenuBase(),
 
 // Values for alignment and size
 	butx_ (get_w() * 13 / 40),
 	butw_ (get_w() / 4),
 	buth_ (get_h() * 19 / 400),
-	lisw_ (get_w() * 9 / 16),
+	listw_ (get_w() * 9 / 16),
 
 // Text labels
 	title
 		(this,
 		 get_w() / 2, get_h() / 10,
-		 _("Begin Network Game"), UI::Align_HCenter),
+		 _("Begin Network Game"), UI::Align::kHCenter),
 	opengames_
 		(this,
 		 get_w() * 3 / 50, get_h() * 27 / 100,
@@ -58,37 +58,37 @@ FullscreenMenuNetSetupLAN::FullscreenMenuNetSetupLAN () :
 	joingame
 		(this, "join_game",
 		 get_w() * 16 / 25, get_h() * 5333 / 10000, butw_, buth_,
-		 g_gr->images().get("pics/but1.png"),
+		 g_gr->images().get("images/ui_basic/but1.png"),
 		 _("Join this game"), std::string(), true, false),
 	hostgame
 		(this, "host_game",
 		 get_w() * 16 / 25, get_h() * 6083 / 10000, butw_, buth_,
-		 g_gr->images().get("pics/but1.png"),
+		 g_gr->images().get("images/ui_basic/but1.png"),
 		 _("Host a new game"), std::string(), true, false),
 	back
 		(this, "back",
 		 get_w() * 16 / 25, get_h() * 8333 / 10000, butw_, buth_,
-		 g_gr->images().get("pics/but0.png"),
+		 g_gr->images().get("images/ui_basic/but0.png"),
 		 _("Back"), std::string(), true, false),
 	loadlasthost
 		(this, "load_previous_host",
 		 get_w() * 171 / 200, get_h() * 19 / 40, buth_, buth_,
-		 g_gr->images().get("pics/but1.png"),
-		 g_gr->images().get("pics/menu_load_game.png"),
+		 g_gr->images().get("images/ui_basic/but1.png"),
+		 g_gr->images().get("images/ui_fsmenu/menu_load_game.png"),
 		 _("Load previous host"), true, false),
 
 // Edit boxes
 	playername
-		(this, get_w() * 16 / 25, get_h() * 3333 / 10000, butw_,       buth_,
-		 g_gr->images().get("pics/but2.png")),
+		(this, get_w() * 16 / 25, get_h() * 3333 / 10000, butw_,
+		 g_gr->images().get("images/ui_basic/but2.png"), fs_small()),
 	hostname
-		(this, get_w() * 16 / 25, get_h() * 19 / 40,  get_w() * 17 / 80, buth_,
-		 g_gr->images().get("pics/but2.png")),
+		(this, get_w() * 16 / 25, get_h() * 19 / 40,  get_w() * 17 / 80,
+		 g_gr->images().get("images/ui_basic/but2.png"), fs_small()),
 
 // List
 	opengames
 		(this,
-		 get_w() * 3 / 50, get_h() * 3333 / 10000, lisw_, get_h() * 5433 / 10000)
+		 get_w() * 3 / 50, get_h() * 3333 / 10000, listw_, get_h() * 5433 / 10000)
 {
 	joingame.sigclicked.connect
 		(boost::bind
@@ -108,14 +108,12 @@ FullscreenMenuNetSetupLAN::FullscreenMenuNetSetupLAN () :
 	title       .set_textstyle(UI::TextStyle::ui_big());
 	hostname    .changed.connect
 		(boost::bind(&FullscreenMenuNetSetupLAN::change_hostname, this));
-	hostname    .set_font(ui_fn(), fs_small(), UI_FONT_CLR_FG);
 	playername  .set_text  (s.get_string("nickname", (_("nobody"))));
 	playername  .changed.connect
 		(boost::bind(&FullscreenMenuNetSetupLAN::change_playername, this));
-	playername  .set_font(ui_fn(), fs_small(), UI_FONT_CLR_FG);
-	opengames   .add_column(lisw_ * 2 / 5, _("Host"));
-	opengames   .add_column(lisw_ * 2 / 5, _("Map"));
-	opengames   .add_column(lisw_     / 5, _("State"));
+	opengames   .add_column(listw_ * 2 / 5, _("Host"));
+	opengames   .add_column(listw_ * 2 / 5, _("Map"));
+	opengames   .add_column(listw_     / 5, _("State"));
 	opengames   .selected.connect(boost::bind(&FullscreenMenuNetSetupLAN::game_selected, this, _1));
 	opengames   .double_clicked.connect
 		(boost::bind(&FullscreenMenuNetSetupLAN::game_doubleclicked, this, _1));

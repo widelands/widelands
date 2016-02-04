@@ -52,23 +52,17 @@ InteractiveGameBase::InteractiveGameBase
 	:
 	InteractiveBase(_game, global_s),
 	chat_provider_(nullptr),
-	building_census_format_
-		(global_s.get_string("building_census_format",       "%N")),
-	building_statistics_format_
-		(global_s.get_string("building_statistics_format",   "%t")),
-	building_tooltip_format_
-		(global_s.get_string("building_tooltip_format",      "%r")),
 	chatenabled_(chatenabled),
 	multiplayer_(multiplayer),
 	playertype_(pt),
 
 #define INIT_BTN(picture, name, tooltip)                            \
  TOOLBAR_BUTTON_COMMON_PARAMETERS(name),                                      \
- g_gr->images().get("pics/" picture ".png"),                      \
+ g_gr->images().get("images/" picture ".png"),                      \
  tooltip                                                                      \
 
 	toggle_buildhelp_
-		(INIT_BTN("menu_toggle_buildhelp", "buildhelp", _("Show Building Spaces (on/off)")))
+		(INIT_BTN("wui/menus/menu_toggle_buildhelp", "buildhelp", _("Show Building Spaces (on/off)")))
 {
 	toggle_buildhelp_.sigclicked.connect(boost::bind(&InteractiveGameBase::toggle_buildhelp, this));
 }
@@ -123,7 +117,7 @@ void InteractiveGameBase::draw_overlay(RenderTarget& dst) {
 			dst.blit(Point(get_w() - 5,  5),
 						UI::g_fh1->render(game_speed),
 						BlendMode::UseAlpha,
-						UI::Align_TopRight);
+						UI::Align::kTopRight);
 		}
 	}
 }

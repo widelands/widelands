@@ -46,7 +46,7 @@ struct EditorMakeInfrastructureTool : public EditorTool {
 							  Widelands::Map* map) override;
 
 	const char * get_sel_impl() const override
-		{return "pics/fsel.png";} //  Standard sel icon, most complex tool of all
+		{return "images/ui_basic/fsel.png";} //  Standard sel icon, most complex tool of all
 
 private:
 	Widelands::PlayerNumber m_player;

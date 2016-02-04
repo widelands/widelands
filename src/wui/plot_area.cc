@@ -59,7 +59,7 @@ const uint32_t time_in_ms[] = {
 	30 * hours
 };
 
-const char BG_PIC[] = "pics/plot_area_bg.png";
+const char BG_PIC[] = "images/wui/plot_area_bg.png";
 const RGBColor LINE_COLOR(0, 0, 0);
 const RGBColor ZERO_LINE_COLOR(255, 255, 255);
 
@@ -144,7 +144,7 @@ int32_t calc_how_many(uint32_t time_ms, int32_t sample_rate) {
  */
 void draw_value(const string& value, const RGBColor& color, const Point& pos, RenderTarget & dst) {
 	const Image* pic = UI::g_fh1->render(ytick_text_style(value, color));
-	dst.blit(pos, pic, BlendMode::UseAlpha, UI::Align_CenterRight);
+	dst.blit(pos, pic, BlendMode::UseAlpha, UI::Align::kCenterRight);
 }
 
 /**
@@ -219,7 +219,7 @@ void draw_diagram
 			(xtick_text_style((boost::format("-%u ") % (max_x / how_many_ticks * i)).str()));
 		dst.blit
 			(Point(static_cast<int32_t>(posx), inner_h - space_at_bottom + 10),
-			 xtick, BlendMode::UseAlpha, UI::Align_Center);
+			 xtick, BlendMode::UseAlpha, UI::Align::kCenter);
 
 		posx -= sub;
 	}
@@ -237,7 +237,7 @@ void draw_diagram
 
 	//  print the used unit
 	const Image* xtick = UI::g_fh1->render(xtick_text_style((boost::format(get_unit_name(unit)) % "").str()));
-	dst.blit(Point(2, spacing + 2), xtick, BlendMode::UseAlpha, UI::Align_CenterLeft);
+	dst.blit(Point(2, spacing + 2), xtick, BlendMode::UseAlpha, UI::Align::kCenterLeft);
 }
 
 }  // namespace

@@ -121,7 +121,7 @@ bool match_force_skip(char* & candidate, const char* pattern) {
 		} else if (*p != *pattern)
 			return false;
 
-	return false;
+	NEVER_HERE();
 }
 
 ProductionProgram::ActReturn::Condition * create_economy_condition
@@ -403,8 +403,8 @@ std::string ProductionProgram::ActReturn::SiteHas::description
 	std::string condition = i18n::localize_list(condition_list, i18n::ConcatenateWith::AND);
 	if (1 < group.second) {
 		/** TRANSLATORS: This is an item in a list of wares, e.g. "3x water": */
-		/** TRANSLATORS:    %1$s = "3" */
-		/** TRANSLATORS:    %2$i = "water" */
+		/** TRANSLATORS:    %1$i = "3" */
+		/** TRANSLATORS:    %2$s = "water" */
 		condition = (boost::format(_("%1$ix %2$s"))
 						 % static_cast<unsigned int>(group.second)
 						 % condition).str();

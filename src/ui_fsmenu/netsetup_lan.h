@@ -60,7 +60,7 @@ private:
 	uint32_t butx_;
 	uint32_t butw_;
 	uint32_t buth_;
-	uint32_t lisw_;
+	uint32_t listw_;
 	UI::Textarea title, opengames_;
 	UI::Textarea playername_, hostname_;
 	UI::Button joingame, hostgame, back, loadlasthost;

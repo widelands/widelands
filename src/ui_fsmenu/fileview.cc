@@ -54,9 +54,9 @@ bool read_text(const std::string& filename, std::string* title, std::string* con
 FullscreenMenuTextView::FullscreenMenuTextView
 	()
 	:
-	FullscreenMenuBase("fileviewmenu.jpg"),
+	FullscreenMenuBase("images/ui_fsmenu/fileviewmenu.jpg"),
 
-	title (this, get_w() * 3 / 50, get_h() / 10, "", UI::Align_Center),
+	title (this, get_w() * 3 / 50, get_h() / 10, "", UI::Align::kCenter),
 
 	textview
 		(this,
@@ -66,7 +66,7 @@ FullscreenMenuTextView::FullscreenMenuTextView
 	close_button
 		(this, "close",
 		 get_w() * 3 / 8, get_h() * 9 / 10, get_w() / 4, get_h() * 9 / 200,
-		 g_gr->images().get("pics/but0.png"),
+		 g_gr->images().get("images/ui_basic/but0.png"),
 		 _("Close"), std::string(), true, false)
 {
 	close_button.sigclicked.connect(

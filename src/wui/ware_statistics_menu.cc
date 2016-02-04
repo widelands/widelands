@@ -39,10 +39,11 @@
 
 #define INACTIVE 0
 
-static const char pic_tab_production[] = "pics/menu_tab_wares_production.png";
-static const char pic_tab_consumption[] = "pics/menu_tab_wares_consumption.png";
-static const char pic_tab_economy[] = "pics/menu_tab_wares_econ_health.png";
-static const char pic_tab_stock[] = "pics/menu_tab_wares_stock.png"; // TODO(unknown): replace place holder
+static const char pic_tab_production[] = "images/wui/stats/menu_tab_wares_production.png";
+static const char pic_tab_consumption[] = "images/wui/stats/menu_tab_wares_consumption.png";
+static const char pic_tab_economy[] = "images/wui/stats/menu_tab_wares_econ_health.png";
+// TODO(unknown): replace place holder
+static const char pic_tab_stock[] = "images/wui/stats/menu_tab_wares_stock.png";
 
 static const RGBColor colors[] = {
 	RGBColor(115, 115, 115), //inactive
@@ -161,7 +162,7 @@ parent_(&parent)
 
 	UI::TabPanel * tabs =
 		 new UI::TabPanel
-			 (box, spacing, 0, g_gr->images().get("pics/but1.png"));
+			 (box, spacing, 0, g_gr->images().get("images/ui_basic/but1.png"));
 
 
 	plot_production_ =
@@ -210,7 +211,7 @@ parent_(&parent)
 	tabs->activate(0);
 
 	//add tabbed environment to box
-	box->add(tabs, UI::Box::AlignLeft, true);
+	box->add(tabs, UI::Align::kLeft, true);
 
 	//register statistics data
 	for (Widelands::DescriptionIndex cur_ware = 0; cur_ware < nr_wares; ++cur_ware) {
@@ -249,15 +250,13 @@ parent_(&parent)
 			(box, 0, 0, parent.get_player()->tribe(),
 			 boost::bind(&WareStatisticsMenu::cb_changed_to, boost::ref(*this), _1, _2),
 			 color_map_),
-		 UI::Box::AlignLeft, true);
-
+		 UI::Align::kLeft, true);
 	box->add
 		(new WuiPlotGenericAreaSlider
 			(this, *plot_production_, this,
 			0, 0, 100, 45,
-			g_gr->images().get("pics/but1.png")),
-		 UI::Box::AlignLeft, true);
-
+			g_gr->images().get("images/ui_basic/but1.png")),
+		 UI::Align::kLeft, true);
 }
 
 /**

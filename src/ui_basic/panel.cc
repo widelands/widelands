@@ -73,7 +73,6 @@ Panel::Panel
 		_parent->_fchild = this;
 	} else
 		_prev = _next = nullptr;
-	update(0, 0, _w, _h);
 }
 
 /**
@@ -81,8 +80,6 @@ Panel::Panel
  */
 Panel::~Panel()
 {
-	update();
-
 	// Release pointers to this object
 	if (_g_mousegrab == this)
 		_g_mousegrab = nullptr;
@@ -142,23 +139,17 @@ int Panel::do_run()
 	while (Panel * const p = forefather->_parent)
 		forefather = p;
 
-	s_default_cursor = g_gr->images().get("pics/cursor.png");
-	s_default_cursor_click = g_gr->images().get("pics/cursor_click.png");
+	s_default_cursor = g_gr->images().get("images/ui_basic/cursor.png");
+	s_default_cursor_click = g_gr->images().get("images/ui_basic/cursor_click.png");
 
 	// Loop
 	_running = true;
 
 	// Panel-specific startup code. This might call end_modal()!
 	start();
-	g_gr->update();
 
-	uint32_t minTime;
-	{
-		int maxfps = g_options.pull_section("global").get_int("maxfps", 25);
-		if (maxfps < 5)
-			maxfps = 5;
-		minTime = 1000 / maxfps;
-	}
+	const uint32_t minimum_frame_time =
+	   1000 / std::max(5, g_options.pull_section("global").get_int("maxfps", 30));
 
 	while (_running) {
 		const uint32_t startTime = SDL_GetTicks();
@@ -178,32 +169,22 @@ int Panel::do_run()
 
 		do_think();
 
-		if (g_gr->need_update()) {
-			RenderTarget & rt = *g_gr->get_render_target();
-
-			forefather->do_draw(rt);
-
-			rt.blit
-				(app->get_mouse_position() - Point(3, 7),
-				 WLApplication::get()->is_mouse_pressed() ?
-					s_default_cursor_click :
-					s_default_cursor);
-
-			forefather->do_tooltip();
-
-			g_gr->refresh();
-		}
+		RenderTarget& rt = *g_gr->get_render_target();
+		forefather->do_draw(rt);
+		rt.blit(app->get_mouse_position() - Point(3, 7),
+		        WLApplication::get()->is_mouse_pressed() ? s_default_cursor_click : s_default_cursor);
+		forefather->do_tooltip();
+		g_gr->refresh();
 
 		if (_flags & pf_child_die)
 			check_child_death();
 
 		//  Wait until 1second/maxfps are over.
-		const uint32_t diffTime = SDL_GetTicks() - startTime;
-		if (diffTime < minTime) {
-			SDL_Delay(minTime - diffTime);
+		const uint32_t frame_time = SDL_GetTicks() - startTime;
+		if (frame_time < minimum_frame_time) {
+			SDL_Delay(minimum_frame_time - frame_time);
 		}
 	}
-	g_gr->update();
 	end();
 
 	// Done
@@ -242,8 +223,6 @@ void Panel::set_size(const int nw, const int nh)
 	if (nw == _w && nh == _h)
 		return;
 
-	int const upw = std::min(nw, _w);
-	int const uph = std::min(nh, _h);
 	_w = nw;
 	_h = nh;
 
@@ -251,18 +230,14 @@ void Panel::set_size(const int nw, const int nh)
 		move_inside_parent();
 
 	layout();
-
-	update(0, 0, upw, uph);
 }
 
 /**
  * Move the panel. Panel's position is relative to the parent.
  */
 void Panel::set_pos(const Point n) {
-	update(0, 0, _w, _h);
 	_x = n.x;
 	_y = n.y;
-	update(0, 0, _w, _h);
 }
 
 /**
@@ -383,7 +358,6 @@ void Panel::set_border(int l, int r, int t, int b)
 	_rborder = r;
 	_tborder = t;
 	_bborder = b;
-	update();
 }
 
 /**
@@ -425,8 +399,6 @@ void Panel::set_visible(bool const on)
 	_flags &= ~pf_visible;
 	if (on)
 		_flags |= pf_visible;
-
-	update(0, 0, _w, _h);
 }
 
 /**
@@ -446,63 +418,6 @@ void Panel::draw_border(RenderTarget &) {}
  * This can be used e.g. for debug information.
 */
 void Panel::draw_overlay(RenderTarget &) {}
-
-
-/**
- * Mark a part of a panel for updating.
- */
-void Panel::update(int x, int y, int w, int h)
-{
-	if
-		(x >= _w || x + w <= 0
-		 ||
-		 y >= _h || y + h <= 0)
-		return;
-
-	if (_parent) {
-		_parent->update_inner(x + _x, y + _y, w, h);
-	} else {
-		if (x < 0) {
-			w += x;
-			x = 0;
-		}
-		if (x + w > g_gr->get_xres())
-			w = g_gr->get_xres() - x;
-		if (w <= 0)
-			return;
-
-		if (y < 0) {
-			h += y;
-			y = 0;
-		}
-		if (y + h > g_gr->get_yres())
-			h = g_gr->get_yres() - y;
-		if (h <= 0)
-			return;
-
-		g_gr->update();
-	}
-}
-
-
-/**
- * Overload for convenience.
- *
- * Equivalent to update(0, 0, get_w(), get_h());
- */
-void Panel::update()
-{
-	update(0, 0, get_w(), get_h());
-}
-
-
-/**
- * Mark a part of a panel for updating.
- */
-void Panel::update_inner(int32_t x, int32_t y, int32_t w, int32_t h)
-{
-	update(x - _lborder, y - _tborder, w, h);
-}
 
 /**
  * Called once per event loop pass, unless set_think(false) has
@@ -627,7 +542,6 @@ bool Panel::handle_key(bool down, SDL_Keysym code)
 					while (p != _focus) {
 						if (p->get_can_focus()) {
 							p->focus();
-							p->update();
 							break;
 						}
 						if (p == _lchild) {
@@ -778,15 +692,15 @@ void Panel::die()
  */
 void Panel::play_click()
 {
-	g_sound_handler.play_fx("sound/click", 128, PRIO_ALWAYS_PLAY);
+	g_sound_handler.play_fx("click", 128, PRIO_ALWAYS_PLAY);
 }
 void Panel::play_new_chat_message()
 {
-	g_sound_handler.play_fx("sound/lobby_chat", 128, PRIO_ALWAYS_PLAY);
+	g_sound_handler.play_fx("lobby_chat", 128, PRIO_ALWAYS_PLAY);
 }
 void Panel::play_new_chat_member()
 {
-	g_sound_handler.play_fx("sound/lobby_freshmen", 128, PRIO_ALWAYS_PLAY);
+	g_sound_handler.play_fx("lobby_freshmen", 128, PRIO_ALWAYS_PLAY);
 }
 
 
@@ -1110,11 +1024,8 @@ bool Panel::ui_mousemove
 		return true;
 	}
 
-	Panel * p;
-	g_gr->update();
-
-	p = ui_trackmouse(x, y);
-	if (!p)
+	Panel* const p = ui_trackmouse(x, y);
+	if (p == nullptr)
 		return false;
 
 	return p->do_mousemove(state, x, y, xdiff, ydiff);

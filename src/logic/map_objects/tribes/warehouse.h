@@ -225,8 +225,7 @@ protected:
 	/// Initializes the container sizes for the owner's tribe.
 	void init_containers(Player& owner);
 	/// Create the warehouse information window.
-	virtual void create_options_window
-		(InteractiveGameBase &, UI::Window * & registry) override;
+	void create_options_window(InteractiveGameBase&, UI::Window*& registry) override;
 
 private:
 	void init_portdock(EditorGameBase & egbase);

@@ -21,8 +21,6 @@
 
 #include <cstdio>
 
-#include <boost/format.hpp>
-
 #include "base/log.h"
 #include "base/wexception.h"
 #include "graphic/font.h"
@@ -41,15 +39,19 @@ FullscreenMenuBase
 ==============================================================================
 */
 
+FullscreenMenuBase::FullscreenMenuBase():
+	FullscreenMenuBase("images/ui_fsmenu/ui_fsmenu.jpg")
+	{}
+
 /**
  * Initialize a pre-game menu
  *
  * Args: bgpic  name of the background picture
  */
-FullscreenMenuBase::FullscreenMenuBase(char const* const bgpic)
+FullscreenMenuBase::FullscreenMenuBase(const std::string& bgpic)
    : UI::Panel(nullptr, 0, 0, g_gr->get_xres(), g_gr->get_yres()) {
 
-	background_image_ = (boost::format("pics/%s") % bgpic).str();
+	background_image_ = bgpic;
 }
 
 FullscreenMenuBase::~FullscreenMenuBase()

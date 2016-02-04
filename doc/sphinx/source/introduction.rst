@@ -68,10 +68,10 @@ Win conditions
 In non player scenarios, win conditions define when one single player has won
 a game. The definitions of win conditions is very similar to defining
 initializations: We have to create a Lua script in
-``/scripting/win_conditions`` which returns an array with ``name``,
+``/data/scripting/win_conditions`` which returns an array with ``name``,
 ``description`` and ``func``. Let's also make up a quick example: The first
 player to have 200 logs in his HQ wins the game. All others loose. Save the
-following file as ``/scripting/win_conditions/havest_logs.lua``.
+following file as ``/data/scripting/win_conditions/havest_logs.lua``.
 
 .. code-block:: lua
 

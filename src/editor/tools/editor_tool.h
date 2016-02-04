@@ -47,7 +47,7 @@ public:
 
 	enum ToolIndex {First, Second, Third};
 	int32_t handle_click
-		(const ToolIndex i,
+		(ToolIndex i,
 		const Widelands::World& world, Widelands::NodeAndTriangle<> const center,
 		EditorInteractive& parent, EditorActionArgs* args, Widelands::Map* map)
 	{
@@ -57,7 +57,7 @@ public:
 	}
 
 	int32_t handle_undo
-		(const ToolIndex i,
+		(ToolIndex i,
 		const Widelands::World& world, Widelands::NodeAndTriangle<> const center,
 		EditorInteractive& parent, EditorActionArgs* args, Widelands::Map* map)
 	{

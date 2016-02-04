@@ -118,8 +118,8 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 	{
 		h->set_map(mapname, mapfilename, maxplayers, savegame);
 	}
-	virtual void set_player_state
-		(uint8_t const number, PlayerSettings::State const state) override
+	void set_player_state
+		(uint8_t number, PlayerSettings::State const state) override
 	{
 		if (number >= settings().players.size())
 			return;
@@ -210,8 +210,8 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 		h->set_player_state(number, newstate, true);
 	}
 
-	virtual void set_player_tribe
-		(uint8_t const number, const std::string & tribe, bool const random_tribe) override
+	void set_player_tribe
+		(uint8_t number, const std::string& tribe, bool const random_tribe) override
 	{
 		if (number >= h->settings().players.size())
 			return;
@@ -223,8 +223,7 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 			 ||
 			 settings().players.at(number).state == PlayerSettings::stateShared
 			 ||
-			 settings().players.at(number).state == PlayerSettings::stateOpen // For savegame loading
-			)
+		    settings().players.at(number).state == PlayerSettings::stateOpen)  // For savegame loading
 			h->set_player_tribe(number, tribe, random_tribe);
 	}
 
@@ -824,7 +823,7 @@ void NetHost::run(bool const autorun)
 				set_win_condition_script(gpdp.get_win_condition());
 			}
 		} else {
-			loaderUI.reset(new UI::ProgressWindow ("pics/progress.png"));
+			loaderUI.reset(new UI::ProgressWindow ("images/loadscreens/progress.png"));
 			std::vector<std::string> tipstext;
 			tipstext.push_back("general_game");
 			tipstext.push_back("multiplayer");

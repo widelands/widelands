@@ -37,7 +37,7 @@
 FullscreenMenuInternetLobby::FullscreenMenuInternetLobby
 	(char const * const nick, char const * const pwd, bool registered)
 :
-	FullscreenMenuBase("internetmenu.jpg"),
+	FullscreenMenuBase("images/ui_fsmenu/internetmenu.jpg"),
 
 // Values for alignment and size
 	butx_ (get_w() * 13 / 40),
@@ -52,7 +52,7 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby
 	title
 		(this,
 		 get_w() / 2, get_h() / 20,
-		 _("Metaserver Lobby"), UI::Align_HCenter),
+		 _("Metaserver Lobby"), UI::Align::kHCenter),
 	clients_
 		(this,
 		 get_w() * 4 / 125, get_h() * 15 / 100,
@@ -70,23 +70,23 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby
 	joingame
 		(this, "join_game",
 		 get_w() * 17 / 25, get_h() * 55 / 100, butw_, buth_,
-		 g_gr->images().get("pics/but1.png"),
+		 g_gr->images().get("images/ui_basic/but1.png"),
 		 _("Join this game"), std::string(), false, false),
 	hostgame
 		(this, "host_game",
 		 get_w() * 17 / 25, get_h() * 81 / 100, butw_, buth_,
-		 g_gr->images().get("pics/but1.png"),
+		 g_gr->images().get("images/ui_basic/but1.png"),
 		 _("Open a new game"), std::string(), true, false),
 	back
 		(this, "back",
 		 get_w() * 17 / 25, get_h() * 90 / 100, butw_, buth_,
-		 g_gr->images().get("pics/but0.png"),
+		 g_gr->images().get("images/ui_basic/but0.png"),
 		 _("Back"), std::string(), true, false),
 
 // Edit boxes
 	servername
-		(this, get_w() * 17 / 25, get_h() * 68 / 100, butw_, buth_,
-		 g_gr->images().get("pics/but2.png")),
+		(this, get_w() * 17 / 25, get_h() * 68 / 100, butw_,
+		 g_gr->images().get("images/ui_basic/but2.png"), fs_),
 
 // List
 	clientsonline
@@ -127,18 +127,17 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby
 	servername  .set_text (server);
 	servername  .changed.connect
 		(boost::bind(&FullscreenMenuInternetLobby::change_servername, this));
-	servername  .set_font(fn_, fs_, UI_FONT_CLR_FG);
 
 	// prepare the lists
 	std::string t_tip = (boost::format("%s%s%s%s%s%s%s%s%s%s")
 		% "<rt><p><font underline=yes>"
 		% _("User Status")
 		% "</font><br>"
-		% "<img src=pics/roadb_yellow.png> "
+		% "<img src=images/wui/overlays/roadb_yellow.png> "
 		% _("Registered")
-		% "<br><img src=pics/roadb_green.png> "
+		% "<br><img src=images/wui/overlays/roadb_green.png> "
 		% _("Administrator")
-		% "<br><img src=pics/roadb_red.png> "
+		% "<br><img src=images/wui/overlays/roadb_red.png> "
 		% _("Unregistered")
 		%  "</p></rt>").str();
 	clientsonline .add_column(22, "*", t_tip);
@@ -219,12 +218,12 @@ void FullscreenMenuInternetLobby::fill_games_list(const std::vector<InternetGame
 		const Image* pic;
 		if (games.at(i).connectable) {
 			if (games.at(i).build_id == build_id())
-				pic = g_gr->images().get("pics/continue.png");
+				pic = g_gr->images().get("images/ui_basic/continue.png");
 			else {
-				pic = g_gr->images().get("pics/different.png");
+				pic = g_gr->images().get("images/ui_basic/different.png");
 			}
 		} else {
-			pic = g_gr->images().get("pics/stop.png");
+			pic = g_gr->images().get("images/ui_basic/stop.png");
 		}
 		// If one of the servers has the same name as the local name of the
 		// clients server, we disable the 'hostgame' button to avoid having more
@@ -274,16 +273,16 @@ void FullscreenMenuInternetLobby::fill_client_list(const std::vector<InternetCli
 		const Image* pic;
 		switch (convert_clienttype(client.type)) {
 			case 0: // UNREGISTERED
-				pic = g_gr->images().get("pics/roadb_red.png");
+				pic = g_gr->images().get("images/wui/overlays/roadb_red.png");
 				er.set_picture(0, pic);
 				break;
 			case 1: // REGISTERED
-				pic = g_gr->images().get("pics/roadb_yellow.png");
+				pic = g_gr->images().get("images/wui/overlays/roadb_yellow.png");
 				er.set_picture(0, pic);
 				break;
 			case 2: // SUPERUSER
 			case 3: // BOT
-				pic = g_gr->images().get("pics/roadb_green.png");
+				pic = g_gr->images().get("images/wui/overlays/roadb_green.png");
 				er.set_color(RGBColor(0, 255, 0));
 				er.set_picture(0, pic);
 				break;
@@ -390,7 +389,7 @@ void FullscreenMenuInternetLobby::clicked_joingame()
 											_("Connection timed out"),
 											warning,
 											UI::WLMessageBox::MBoxType::kOk,
-											UI::Align_Left);
+											UI::Align::kLeft);
 				mmb.run<UI::Panel::Returncodes>();
 				return InternetGaming::ref().set_error();
 			}
@@ -416,7 +415,8 @@ DIAG_ON("-Wold-style-cast")
 			// Show a popup warning message
 			std::string warningheader(_("Connection problem"));
 			std::string warning(_("Widelands was unable to connect to the host."));
-			UI::WLMessageBox mmb(this, warningheader, warning, UI::WLMessageBox::MBoxType::kOk, UI::Align_Left);
+				UI::WLMessageBox mmb(this, warningheader, warning, UI::WLMessageBox::MBoxType::kOk,
+											UI::Align::kLeft);
 			mmb.run<UI::Panel::Returncodes>();
 		}
 		SDLNet_ResolveHost (&peer, ip.c_str(), WIDELANDS_PORT);

@@ -35,8 +35,8 @@
 
 using Widelands::ProductionSite;
 
-static char const * pic_tab_wares  = "pics/menu_tab_wares.png";
-static char const * pic_tab_workers = "pics/menu_list_workers.png";
+static char const * pic_tab_wares = "images/wui/buildings/menu_tab_wares.png";
+static char const * pic_tab_workers = "images/wui/buildings/menu_list_workers.png";
 
 /*
 ===============
@@ -61,7 +61,7 @@ ProductionSiteWindow::ProductionSiteWindow
 		for (uint32_t i = 0; i < warequeues.size(); ++i)
 			prod_box->add
 				(new WaresQueueDisplay(prod_box, 0, 0, igbase(), ps, warequeues[i]),
-				 UI::Box::AlignLeft);
+				 UI::Align::kLeft);
 
 		get_tabs()->add
 			("wares", g_gr->images().get(pic_tab_wares),
@@ -93,17 +93,17 @@ ProductionSiteWindow::ProductionSiteWindow
 			worker_caps_->add_inf_space();
 			UI::Button * evict_button = new UI::Button
 							(worker_caps_, "evict", 0, 0, 34, 34,
-							 g_gr->images().get("pics/but4.png"),
-							 g_gr->images().get("pics/menu_drop_soldier.png"),
+							 g_gr->images().get("images/ui_basic/but4.png"),
+							 g_gr->images().get("images/wui/buildings/menu_drop_soldier.png"),
 							 _("Terminate the employment of the selected worker"));
 			evict_button->sigclicked.connect
 					(boost::bind(&ProductionSiteWindow::evict_worker, boost::ref(*this)));
-			worker_caps_->add(evict_button, UI::Box::AlignCenter);
+			worker_caps_->add(evict_button, UI::Align::kHCenter);
 		}
 
-		worker_box->add(worker_table_, UI::Box::AlignLeft, true);
+		worker_box->add(worker_table_, UI::Align::kLeft, true);
 		worker_box->add_space(4);
-		worker_box->add(worker_caps_, UI::Box::AlignLeft, true);
+		worker_box->add(worker_caps_, UI::Align::kLeft, true);
 		get_tabs()->add
 			("workers", g_gr->images().get(pic_tab_workers),
 			 worker_box,
@@ -202,7 +202,6 @@ void ProductionSiteWindow::update_worker_table()
 			continue;
 		}
 	}
-	worker_table_->update();
 }
 
 void ProductionSiteWindow::evict_worker() {

@@ -52,7 +52,7 @@ void CmdLuaCoroutine::execute (Game & game) {
 				*new Widelands::Message
 				(Message::Type::kGameLogic,
 				 game.get_gametime(),
-				 "pics/menu_help.png",
+				 "images/ui_basic/menu_help.png",
 				 "Coroutine",
 				 "Lua Coroutine Failed",
 				 e.what());

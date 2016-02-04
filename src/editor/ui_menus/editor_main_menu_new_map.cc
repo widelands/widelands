@@ -49,18 +49,18 @@ MainMenuNewMap::MainMenuNewMap(EditorInteractive & parent)
 	box_(this, margin_, margin_, UI::Box::Vertical, 0, 0, margin_),
 	width_(&box_, 0, 0, box_width_, box_width_ / 3,
 			 0, 0, 0,
-			 _("Width:"), "", g_gr->images().get("pics/but1.png"), UI::SpinBox::Type::kValueList),
+			 _("Width:"), "", g_gr->images().get("images/ui_basic/but1.png"), UI::SpinBox::Type::kValueList),
 	height_(&box_, 0, 0, box_width_, box_width_ / 3,
 			  0, 0, 0,
-			  _("Height:"), "", g_gr->images().get("pics/but1.png"), UI::SpinBox::Type::kValueList),
+			  _("Height:"), "", g_gr->images().get("images/ui_basic/but1.png"), UI::SpinBox::Type::kValueList),
 	list_(&box_, 0, 0, box_width_, 330),
 	// Buttons
 	button_box_(&box_, 0, 0, UI::Box::Horizontal, 0, 0, margin_),
 	ok_button_(&button_box_, "create_map", 0, 0, box_width_ / 2 - margin_, 0,
-		 g_gr->images().get("pics/but5.png"),
+		 g_gr->images().get("images/ui_basic/but5.png"),
 		 _("Create Map")),
 	cancel_button_(&button_box_, "generate_map", 0, 0, box_width_ / 2 - margin_, 0,
-		 g_gr->images().get("pics/but1.png"),
+		 g_gr->images().get("images/ui_basic/but1.png"),
 		 _("Cancel"))
 {
 	width_.set_value_list(Widelands::kMapDimensions);
@@ -82,19 +82,19 @@ MainMenuNewMap::MainMenuNewMap(EditorInteractive & parent)
 		height_.set_value(height_index);
 	}
 
-	box_.add(&width_, UI::Box::AlignLeft);
-	box_.add(&height_, UI::Box::AlignLeft);
+	box_.add(&width_, UI::Align::kLeft);
+	box_.add(&height_, UI::Align::kLeft);
 	box_.add_space(margin_);
 	UI::Textarea* terrain_label = new UI::Textarea(&box_, _("Terrain:"));
-	box_.add(terrain_label, UI::Box::AlignLeft);
-	box_.add(&list_, UI::Box::AlignLeft);
+	box_.add(terrain_label, UI::Align::kLeft);
+	box_.add(&list_, UI::Align::kLeft);
 	box_.add_space(2 * margin_);
 
 	cancel_button_.sigclicked.connect(boost::bind(&MainMenuNewMap::clicked_cancel, this));
 	ok_button_.sigclicked.connect(boost::bind(&MainMenuNewMap::clicked_create_map, this));
-	button_box_.add(&cancel_button_, UI::Box::AlignLeft);
-	button_box_.add(&ok_button_, UI::Box::AlignLeft);
-	box_.add(&button_box_, UI::Box::AlignLeft);
+	button_box_.add(&cancel_button_, UI::Align::kLeft);
+	button_box_.add(&ok_button_, UI::Align::kLeft);
+	box_.add(&button_box_, UI::Align::kLeft);
 
 	box_.set_size(box_width_,
 					  width_.get_h() + height_.get_h() + terrain_label->get_h() + list_.get_h()

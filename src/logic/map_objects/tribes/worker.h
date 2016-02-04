@@ -226,7 +226,6 @@ private:
 	bool run_mine             (Game &, State &, const Action &);
 	bool run_breed            (Game &, State &, const Action &);
 	bool run_createware       (Game &, State &, const Action &);
-	bool run_setdescription   (Game &, State &, const Action &);
 	bool run_setbobdescription(Game &, State &, const Action &);
 	bool run_findobject       (Game &, State &, const Action &);
 	bool run_findspace        (Game &, State &, const Action &);

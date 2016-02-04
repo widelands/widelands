@@ -74,37 +74,37 @@ InteractivePlayer::InteractivePlayer
 
 #define INIT_BTN_this(picture, name, tooltip)                       \
  TOOLBAR_BUTTON_COMMON_PARAMETERS(name),                                      \
- g_gr->images().get("pics/" picture ".png"),                      \
+ g_gr->images().get("images/" picture ".png"),                      \
  tooltip                                                                      \
 
 
 #define INIT_BTN(picture, name, tooltip)                            \
  TOOLBAR_BUTTON_COMMON_PARAMETERS(name),                                      \
- g_gr->images().get("pics/" picture ".png"),                      \
+ g_gr->images().get("images/" picture ".png"),                      \
  tooltip                                                                      \
 
 
 toggle_chat_
 	(INIT_BTN_this
-	 ("menu_chat", "chat", _("Chat"))),
+	 ("wui/menus/menu_chat", "chat", _("Chat"))),
 toggle_options_menu_
 	(INIT_BTN
-	 ("menu_options_menu", "options_menu", _("Options"))),
+	 ("wui/menus/menu_options_menu", "options_menu", _("Options"))),
 toggle_statistics_menu_
 	(INIT_BTN
-	 ("menu_toggle_menu", "statistics_menu", _("Statistics"))),
+	 ("wui/menus/menu_toggle_menu", "statistics_menu", _("Statistics"))),
 toggle_objectives_
 	(INIT_BTN
-	 ("menu_objectives", "objectives", _("Objectives"))),
+	 ("wui/menus/menu_objectives", "objectives", _("Objectives"))),
 toggle_minimap_
 	(INIT_BTN_this
-	 ("menu_toggle_minimap", "minimap", _("Minimap"))),
+	 ("wui/menus/menu_toggle_minimap", "minimap", _("Minimap"))),
 toggle_message_menu_
 	(INIT_BTN
-	 ("menu_toggle_oldmessage_menu", "messages", _("Messages"))),
+	 ("wui/menus/menu_toggle_oldmessage_menu", "messages", _("Messages"))),
 toggle_help_
 	(INIT_BTN
-	 ("menu_help", "help", _("Tribal Encyclopedia")))
+	 ("ui_basic/menu_help", "help", _("Tribal Encyclopedia")))
 
 {
 	toggle_chat_.sigclicked.connect
@@ -124,19 +124,19 @@ toggle_help_
 
 	// TODO(unknown): instead of making unneeded buttons invisible after generation,
 	// they should not at all be generated. -> implement more dynamic toolbar UI
-	toolbar_.add(&toggle_options_menu_,    UI::Box::AlignLeft);
-	toolbar_.add(&toggle_statistics_menu_, UI::Box::AlignLeft);
-	toolbar_.add(&toggle_minimap_,         UI::Box::AlignLeft);
-	toolbar_.add(&toggle_buildhelp_,       UI::Box::AlignLeft);
+	toolbar_.add(&toggle_options_menu_,    UI::Align::kLeft);
+	toolbar_.add(&toggle_statistics_menu_, UI::Align::kLeft);
+	toolbar_.add(&toggle_minimap_,         UI::Align::kLeft);
+	toolbar_.add(&toggle_buildhelp_,       UI::Align::kLeft);
 	if (multiplayer) {
-		toolbar_.add(&toggle_chat_,            UI::Box::AlignLeft);
+		toolbar_.add(&toggle_chat_,            UI::Align::kLeft);
 		toggle_chat_.set_visible(false);
 		toggle_chat_.set_enabled(false);
 	}
 
-	toolbar_.add(&toggle_help_,            UI::Box::AlignLeft);
-	toolbar_.add(&toggle_objectives_,      UI::Box::AlignLeft);
-	toolbar_.add(&toggle_message_menu_,    UI::Box::AlignLeft);
+	toolbar_.add(&toggle_help_,            UI::Align::kLeft);
+	toolbar_.add(&toggle_objectives_,      UI::Align::kLeft);
+	toolbar_.add(&toggle_message_menu_,    UI::Align::kLeft);
 
 	set_player_number(plyn);
 	fieldclicked.connect(boost::bind(&InteractivePlayer::node_action, this));
@@ -219,13 +219,13 @@ void InteractivePlayer::think()
 		toggle_chat_.set_enabled(chatenabled_);
 	}
 	{
-		char const * msg_icon = "pics/menu_toggle_oldmessage_menu.png";
+		char const * msg_icon = "images/wui/menus/menu_toggle_oldmessage_menu.png";
 		std::string msg_tooltip = _("Messages");
 		if
 			(uint32_t const nr_new_messages =
 				player().messages().nr_messages(Widelands::Message::Status::kNew))
 		{
-			msg_icon    = "pics/menu_toggle_newmessage_menu.png";
+			msg_icon    = "images/wui/menus/menu_toggle_newmessage_menu.png";
 			msg_tooltip =
 			   (boost::format(ngettext("%u new message", "%u new messages", nr_new_messages)) %
 			    nr_new_messages).str();

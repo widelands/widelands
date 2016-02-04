@@ -80,6 +80,7 @@ const std::string heading(const std::string& text) {
 	                       "%s<br></p><p font-size=8> <br></p></rt>") %
 	         text).str());
 }
+
 }  // namespace
 
 EncyclopediaWindow::EncyclopediaWindow(InteractivePlayer& parent, UI::UniqueWindow::Registry& registry)
@@ -94,21 +95,21 @@ EncyclopediaWindow::EncyclopediaWindow(InteractivePlayer& parent, UI::UniqueWind
 
 	tab_definitions.push_back(
 	   std::unique_ptr<EncyclopediaTab>(new EncyclopediaTab("wares",
-	                                                        "pics/menu_tab_wares.png",
+																			  "images/wui/buildings/menu_tab_wares.png",
 	                                                        _("Wares"),
 	                                                        "tribes/scripting/help/ware_help.lua",
 	                                                        Widelands::MapObjectType::WARE)));
 
 	tab_definitions.push_back(
 	   std::unique_ptr<EncyclopediaTab>(new EncyclopediaTab("workers",
-	                                                        "pics/menu_tab_workers.png",
+																			  "images/wui/buildings/menu_tab_workers.png",
 	                                                        _("Workers"),
 	                                                        "tribes/scripting/help/worker_help.lua",
 	                                                        Widelands::MapObjectType::WORKER)));
 
 	tab_definitions.push_back(std::unique_ptr<EncyclopediaTab>(
 	   new EncyclopediaTab("buildings",
-	                       "pics/genstats_nrbuildings.png",
+								  "images/wui/stats/genstats_nrbuildings.png",
 	                       _("Buildings"),
 	                       "tribes/scripting/help/building_help.lua",
 	                       Widelands::MapObjectType::BUILDING)));
@@ -147,12 +148,12 @@ EncyclopediaWindow::EncyclopediaWindow(InteractivePlayer& parent, UI::UniqueWind
 		                  std::unique_ptr<UI::MultilineTextarea>(new UI::MultilineTextarea(
 		                     boxes_.at(tab->key).get(), 0, 0, contents_width, contents_height))));
 
-		boxes_.at(tab->key)->add(lists_.at(tab->key).get(), UI::Align_Left);
+		boxes_.at(tab->key)->add(lists_.at(tab->key).get(), UI::Align::kLeft);
 		boxes_.at(tab->key)->add_space(kPadding);
-		boxes_.at(tab->key)->add(contents_.at(tab->key).get(), UI::Align_Left);
+		boxes_.at(tab->key)->add(contents_.at(tab->key).get(), UI::Align::kLeft);
 
 		wrapper_boxes_.at(tab->key)->add_space(kPadding);
-		wrapper_boxes_.at(tab->key)->add(boxes_.at(tab->key).get(), UI::Align_Left);
+		wrapper_boxes_.at(tab->key)->add(boxes_.at(tab->key).get(), UI::Align::kLeft);
 
 		tabs_.add("encyclopedia_" + tab->key,
 		          g_gr->images().get(tab->image_filename),

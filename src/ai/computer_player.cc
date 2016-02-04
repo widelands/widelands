@@ -40,7 +40,7 @@ struct EmptyAI : ComputerPlayer {
 			name = "empty";
 			/** TRANSLATORS: This is the name of an AI used in the game setup screens */
 			descname = _("No AI");
-			icon_filename = "pics/ai_empty.png";
+			icon_filename = "images/ai/ai_empty.png";
 		}
 		ComputerPlayer * instantiate
 			(Widelands::Game & g, Widelands::PlayerNumber const pid) const override

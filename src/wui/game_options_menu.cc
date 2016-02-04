@@ -74,54 +74,54 @@ GameOptionsMenu::GameOptionsMenu
 	readme_
 		(&box_, "readme",
 		 0, 0, width, 0,
-		 g_gr->images().get("pics/but4.png"),
+		 g_gr->images().get("images/ui_basic/but4.png"),
 		 _("README"),
 		/** TRANSLATORS: Button tooltip */
 		_("Show general information about Widelands and keyboard shortcuts")),
 	license_
 		(&box_, "license",
 		 0, 0, width, 0,
-		 g_gr->images().get("pics/but4.png"),
+		 g_gr->images().get("images/ui_basic/but4.png"),
 		 _("License"),
 		/** TRANSLATORS: Button tooltip */
 		_("Show the distribution licence document")),
 	authors_
 		(&box_, "authors",
 		 0, 0, width, 0,
-		 g_gr->images().get("pics/but4.png"),
+		 g_gr->images().get("images/ui_basic/but4.png"),
 		 _("Authors"),
 		/** TRANSLATORS: Button tooltip */
 		_("Show information about the Widelands Development Team")),
 	sound_
 		(&box_, "sound_options",
 		 0, 0, width, 0,
-		 g_gr->images().get("pics/but4.png"),
+		 g_gr->images().get("images/ui_basic/but4.png"),
 		 _("Sound Options"),
 		/** TRANSLATORS: Button tooltip */
 		_("Set sound effect and music options")),
 	save_game_
 		(&box_, "save_game",
 		 0, 0, width, 35,
-		 g_gr->images().get("pics/but4.png"),
-		 g_gr->images().get("pics/menu_save_game.png"),
+		 g_gr->images().get("images/ui_basic/but4.png"),
+		 g_gr->images().get("images/wui/menus/menu_save_game.png"),
 		 /** TRANSLATORS: Button tooltip */
 		 _("Save Game")),
 	exit_game_
 		(&box_, "exit_game",
 		 0, 0, width, 35,
-		 g_gr->images().get("pics/but4.png"),
-		 g_gr->images().get("pics/menu_exit_game.png"),
+		 g_gr->images().get("images/ui_basic/but4.png"),
+		 g_gr->images().get("images/wui/menus/menu_exit_game.png"),
 		 /** TRANSLATORS: Button tooltip */
 		 _("Exit Game"))
 {
-	box_.add(&readme_, UI::Box::AlignCenter);
-	box_.add(&license_, UI::Box::AlignCenter);
-	box_.add(&authors_, UI::Box::AlignCenter);
+	box_.add(&readme_, UI::Align::kHCenter);
+	box_.add(&license_, UI::Align::kHCenter);
+	box_.add(&authors_, UI::Align::kHCenter);
 	box_.add_space(vgap);
-	box_.add(&sound_, UI::Box::AlignCenter);
+	box_.add(&sound_, UI::Align::kHCenter);
 	box_.add_space(vgap);
-	box_.add(&save_game_, UI::Box::AlignCenter);
-	box_.add(&exit_game_, UI::Box::AlignCenter);
+	box_.add(&save_game_, UI::Align::kHCenter);
+	box_.add(&exit_game_, UI::Align::kHCenter);
 	box_.set_size(width, 4 * readme_.get_h() + 2 * save_game_.get_h() + 2 * vgap + 7 * vspacing);
 	set_inner_size(get_inner_w(), box_.get_h() + 2 * margin);
 

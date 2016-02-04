@@ -1,8 +1,8 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2015 Widelands Development Team
+# Copyright (C) 2005-2016 Widelands Development Team
 # 
 # Translators:
-# Cristiano, 2015
+# Cristiano, 2015-2016
 # Gabriel Rota <gabriel.rota@gmail.com>, 2009
 # GunChleoc, 2014
 # Guybrush88 <erpizzo@alice.it>, 2015
@@ -11,9 +11,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-12-14 05:31+0000\n"
-"PO-Revision-Date: 2015-12-25 20:53+0000\n"
-"Last-Translator: Riccardo Di Maio <riccardodimaio11@gmail.com>\n"
+"POT-Creation-Date: 2016-01-23 08:23+0000\n"
+"PO-Revision-Date: 2016-01-25 18:16+0000\n"
+"Last-Translator: Cristiano\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -149,7 +149,7 @@ msgid ""
 "these Barbarians. So, I left Fremil by boat to find a new world and a new "
 "life for myself, somewhere in the south. Now I am sailing on the Gulf of "
 "Perl with my family, some of my friends and a few of my best warriors."
-msgstr ""
+msgstr "Ciononostante non vedevo altro modo per cancellare la mia vergogna se non combattere contro i barbari. Così lasciai Fremil con una barca per trovarmi un mondo nuovo e una nuova vita, da qualche parte nel sud. Ora sto navigando sul golfo Perl con la mia famiglia, alcuni dei miei amici e alcuni dei miei migliori guerrieri."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:99
 msgid "The Rough Sea"
@@ -331,7 +331,7 @@ msgid ""
 "These trees provide shelter from the sandstorms that sweep in from the "
 "desert, and shade on the hot days, and they are the home of many gentle "
 "animals. We shouldn’t leave this island a complete desert."
-msgstr ""
+msgstr "Questi alberi forniscono riparo dalle tempeste di sabbia del deserto, ombra nei giorni caldi e sono dimora di tanti miti animali. Non dovremmo lasciare quest'isola completamente spoglia."
 
 #. TRANSLATORS: Amalea
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:195
@@ -428,7 +428,7 @@ msgstr "Saledus parla:"
 msgid ""
 "Sire, you have made this peninsula a very secure place. Now it’s time to "
 "move on!"
-msgstr ""
+msgstr "Sire, hai reso questa penisola un posto molto sicuro. È il momento di muoversi!"
 
 #: ../../scripting/format_scenario.lua:36
 #, lua-format

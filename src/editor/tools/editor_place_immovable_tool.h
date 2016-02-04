@@ -46,7 +46,7 @@ struct EditorPlaceImmovableTool : public EditorTool, public MultiSelect {
 	EditorActionArgs format_args_impl(EditorInteractive & parent) override;
 
 	char const * get_sel_impl() const override {
-		return "pics/fsel_editor_place_immovable.png";
+		return "images/wui/editor/fsel_editor_place_immovable.png";
 	}
 };
 

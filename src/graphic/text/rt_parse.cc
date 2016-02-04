@@ -25,7 +25,6 @@
 #include <vector>
 
 #include <SDL.h>
-#include <boost/algorithm/string.hpp>
 #include <boost/format.hpp>
 
 #include "graphic/text/rt_errors_impl.h"
@@ -142,8 +141,6 @@ void Tag::m_parse_content(TextStream & ts, TagConstraints & tcs, const TagSet & 
 			if (!tc.text_allowed) {
 				throw SyntaxErrorImpl(line, col, "no text, as only tags are allowed here", text, ts.peek(100));
 			}
-			boost::replace_all(text, "&gt;", ">");
-			boost::replace_all(text, "&lt;", "<");
 			m_childs.push_back(new Child(text));
 		}
 

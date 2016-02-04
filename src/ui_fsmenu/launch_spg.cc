@@ -44,11 +44,24 @@
 #include "ui_fsmenu/mapselect.h"
 #include "wui/playerdescrgroup.h"
 
+namespace {
+static char const * const player_pictures_small[] = {
+	"images/players/fsel_editor_set_player_01_pos.png",
+	"images/players/fsel_editor_set_player_02_pos.png",
+	"images/players/fsel_editor_set_player_03_pos.png",
+	"images/players/fsel_editor_set_player_04_pos.png",
+	"images/players/fsel_editor_set_player_05_pos.png",
+	"images/players/fsel_editor_set_player_06_pos.png",
+	"images/players/fsel_editor_set_player_07_pos.png",
+	"images/players/fsel_editor_set_player_08_pos.png"
+};
+} // namespace
+
 FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG
 	(GameSettingsProvider * const settings, GameController * const ctrl,
 	 bool /* autolaunch */)
 	:
-	FullscreenMenuBase("ui_fsmenu.jpg"),
+	FullscreenMenuBase(),
 
 // Values for alignment and size
 	butw_ (get_w() / 4),
@@ -58,58 +71,58 @@ FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG
 	select_map_
 		(this, "select_map",
 		 get_w() * 7 / 10, get_h() * 3 / 10, butw_, buth_,
-		 g_gr->images().get("pics/but1.png"),
+		 g_gr->images().get("images/ui_basic/but1.png"),
 		 _("Select map"), std::string(), false, false),
 	wincondition_
 		(this, "win_condition",
 		 get_w() * 7 / 10, get_h() * 4 / 10 + buth_, butw_, buth_,
-		 g_gr->images().get("pics/but1.png"),
+		 g_gr->images().get("images/ui_basic/but1.png"),
 		 "", std::string(), false, false),
 	back_
 		(this, "back",
 		 get_w() * 7 / 10, get_h() * 17 / 20, butw_, buth_,
-		 g_gr->images().get("pics/but0.png"),
+		 g_gr->images().get("images/ui_basic/but0.png"),
 		 _("Back"), std::string(), true, false),
 	ok_
 		(this, "ok",
 		 get_w() * 7 / 10, get_h() * 9 / 10, butw_, buth_,
-		 g_gr->images().get("pics/but2.png"),
+		 g_gr->images().get("images/ui_basic/but2.png"),
 		 _("Start game"), std::string(), false, false),
 
 // Text labels
 	title_
 		(this,
 		 get_w() / 2, get_h() / 10,
-		 _("Launch Game"), UI::Align_HCenter),
+		 _("Launch Game"), UI::Align::kHCenter),
 	mapname_
 		(this,
 		 get_w() * 7 / 10 + butw_ / 2, get_h() * 53 / 200 - 15,
-		 std::string(), UI::Align_HCenter),
+		 std::string(), UI::Align::kHCenter),
 	name_
 		(this,
 		 get_w() * 1 / 25, get_h() * 53 / 200 - 15,
-		 _("Player’s name"), UI::Align_Left),
+		 _("Player’s name"), UI::Align::kLeft),
 	type_
 		(this,
 		 // (Element x) + (PlayerDescriptionGroup x)  + border
 		 ((get_w() * 16 / 25) * 35 / 125) + (get_w() / 25) + 2, get_h() * 53 / 200 - 15,
-		 _("Player’s type"), UI::Align_Left),
+		 _("Player’s type"), UI::Align::kLeft),
 	team_
 		(this,
 		 ((get_w() * 16 / 25) * 35 / 125) + (get_w() / 25) + 2, get_h() * 53 / 200,
-		 _("Team"), UI::Align_Left),
+		 _("Team"), UI::Align::kLeft),
 	tribe_
 		(this,
 		 ((get_w() * 16 / 25) * 80 / 125) + (get_w() / 25) + 2, get_h() * 53 / 200 - 15,
-		 _("Player’s tribe"), UI::Align_Left),
+		 _("Player’s tribe"), UI::Align::kLeft),
 	init_
 		(this,
 		 ((get_w() * 16 / 25) * 55 / 125) + (get_w() / 25) + 2, get_h() * 53 / 200,
-		 _("Start type"), UI::Align_Left),
+		 _("Start type"), UI::Align::kLeft),
 	wincondition_type_
 		(this,
 		 get_w() * 7 / 10 + (butw_ / 2), get_h() * 7 / 20 + buth_,
-		 _("Type of game"), UI::Align_HCenter),
+		 _("Type of game"), UI::Align::kHCenter),
 
 // Variables and objects used in the menu
 	settings_     (settings),
@@ -143,15 +156,16 @@ FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG
 	init_.set_textstyle(tsmaller);
 
 	uint32_t y = get_h() * 3 / 10 - buth_;
-	char posIco[42];
 	for (uint32_t i = 0; i < MAX_PLAYERS; ++i) {
-		sprintf(posIco, "pics/fsel_editor_set_player_0%i_pos.png", i + 1);
+		const Image* player_image = g_gr->images().get(player_pictures_small[i]);
+		assert(player_image);
+
 		pos_[i] =
 			new UI::Button
 				(this, "switch_to_position",
 				 get_w() / 100, y += buth_, get_h() * 17 / 500, get_h() * 17 / 500,
-				 g_gr->images().get("pics/but1.png"),
-				 g_gr->images().get(posIco),
+				 g_gr->images().get("images/ui_basic/but1.png"),
+				 player_image,
 				 _("Switch to position"), false);
 		pos_[i]->sigclicked.connect
 			(boost::bind(&FullscreenMenuLaunchSPG::switch_to_position, boost::ref(*this), i));

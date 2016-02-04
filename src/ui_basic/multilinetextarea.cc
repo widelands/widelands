@@ -34,33 +34,32 @@ static const uint32_t RICHTEXT_MARGIN = 2;
 MultilineTextarea::MultilineTextarea
 	(Panel * const parent,
 	 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
-	 const std::string & text,
+	 const std::string& text,
 	 const Align align,
-	 const bool always_show_scrollbar)
+	 MultilineTextarea::ScrollMode scroll_mode)
 	:
 	Panel       (parent, x, y, w, h),
 	m_text      (text),
 	m_style(UI::TextStyle::ui_small()),
 	isrichtext(false),
 	m_scrollbar (this, get_w() - scrollbar_w(), 0, scrollbar_w(), h, false),
-	m_scrollmode(ScrollNormal)
+	m_scrollmode(scroll_mode)
 {
 	assert(scrollbar_w() <= w);
 	set_thinks(false);
 
 	//  do not allow vertical alignment as it does not make sense
-	m_align = static_cast<Align>(align & Align_Horizontal);
+	m_align = align & UI::Align::kHorizontal;
 
 	m_scrollbar.moved.connect(boost::bind(&MultilineTextarea::scrollpos_changed, this, _1));
 
 	m_scrollbar.set_singlestepsize(UI::g_fh1->render(as_uifont(".", UI_FONT_SIZE_SMALL))->height());
 	m_scrollbar.set_pagesize(h - 2 * UI::g_fh1->render(as_uifont(".", UI_FONT_SIZE_BIG))->height());
 	m_scrollbar.set_steps(1);
-	m_scrollbar.set_force_draw(always_show_scrollbar);
+	m_scrollbar.set_force_draw(m_scrollmode == ScrollMode::kScrollNormalForced ||
+										m_scrollmode == ScrollMode::kScrollLogForced);
 
 	recompute();
-
-	update(0, 0, get_eff_w(), get_h());
 }
 
 
@@ -68,7 +67,7 @@ MultilineTextarea::MultilineTextarea
  * Replace the current text with a new one.
  * Fix up scrolling state if necessary.
  */
-void MultilineTextarea::set_text(const std::string & text)
+void MultilineTextarea::set_text(const std::string& text)
 {
 	m_text = text;
 	recompute();
@@ -83,12 +82,13 @@ void MultilineTextarea::recompute()
 	uint32_t height;
 
 	// We wrap the text twice. We need to do this to account for the presence/absence of the scollbar.
-	bool scroolbar_was_enabled = m_scrollbar.is_enabled();
+	bool scrollbar_was_enabled = m_scrollbar.is_enabled();
 	for (int i = 0; i < 2; ++i) {
 		if (m_text.compare(0, 3, "<rt")) {
 			isrichtext = false;
-			boost::replace_all(m_text, "\n", "<br>");
-			const Image* text_im = UI::g_fh1->render(as_uifont(m_text, m_style.font->size(), m_style.fg),
+			std::string text_to_render = richtext_escape(m_text);
+			boost::replace_all(text_to_render, "\n", "<br>");
+			const Image* text_im = UI::g_fh1->render(as_uifont(text_to_render, m_style.font->size(), m_style.fg),
 																  get_eff_w() - 2 * RICHTEXT_MARGIN);
 			height = text_im->height();
 		} else {
@@ -100,20 +100,24 @@ void MultilineTextarea::recompute()
 
 		bool setbottom = false;
 
-		if (m_scrollmode == ScrollLog)
+		if (m_scrollmode == ScrollMode::kScrollLog || m_scrollmode == ScrollMode::kScrollLogForced) {
 			if (m_scrollbar.get_scrollpos() >= m_scrollbar.get_steps() - 1)
 				setbottom = true;
+		} else if (m_scrollmode == ScrollMode::kNoScrolling) {
+			m_scrollbar.set_scrollpos(0);
+			m_scrollbar.set_steps(1);
+			set_desired_size(get_w(), height);
+			set_size(get_w(), height);
+		}
 
 		m_scrollbar.set_steps(height - get_h());
 		if (setbottom)
 			m_scrollbar.set_scrollpos(height - get_h());
 
-		if (m_scrollbar.is_enabled() == scroolbar_was_enabled) {
+		if (m_scrollbar.is_enabled() == scrollbar_was_enabled) {
 			break; // No need to wrap twice.
 		}
 	}
-
-	update(0, 0, get_eff_w(), get_h());
 }
 
 /**
@@ -121,18 +125,7 @@ void MultilineTextarea::recompute()
  */
 void MultilineTextarea::scrollpos_changed(int32_t const /* pixels */)
 {
-	update(0, 0, get_eff_w(), get_h());
 }
-
-/**
- * Change the scroll mode. This will not change the current scroll position;
- * it only affects the behaviour of set_text().
- */
-void MultilineTextarea::set_scrollmode(ScrollMode mode)
-{
-	m_scrollmode = mode;
-}
-
 
 /// Take care about scrollbar on resize
 void MultilineTextarea::layout()
@@ -147,13 +140,16 @@ void MultilineTextarea::layout()
 /**
  * Redraw the textarea
  */
-void MultilineTextarea::draw(RenderTarget & dst)
+void MultilineTextarea::draw(RenderTarget& dst)
 {
 	if (isrichtext) {
 		rt.draw(dst, Point(RICHTEXT_MARGIN, RICHTEXT_MARGIN - m_scrollbar.get_scrollpos()));
 	} else {
-		const Image* text_im = UI::g_fh1->render(as_aligned(m_text, m_align, m_style.font->size(), m_style.fg),
-															  get_eff_w() - 2 * RICHTEXT_MARGIN);
+		std::string text_to_render = richtext_escape(m_text);
+		boost::replace_all(text_to_render, "\n", "<br>");
+		const Image* text_im =
+				UI::g_fh1->render(as_aligned(text_to_render, m_align, m_style.font->size(), m_style.fg),
+										get_eff_w() - 2 * RICHTEXT_MARGIN);
 
 		uint32_t blit_width = std::min(text_im->width(), static_cast<int>(get_eff_w()));
 		uint32_t blit_height = std::min(text_im->height(), static_cast<int>(get_inner_h()));
@@ -161,11 +157,11 @@ void MultilineTextarea::draw(RenderTarget & dst)
 		if (blit_width > 0 && blit_height > 0) {
 			int32_t anchor = 0;
 			Align alignment = mirror_alignment(m_align);
-			switch (alignment & Align_Horizontal) {
-			case Align_HCenter:
+			switch (alignment & UI::Align::kHorizontal) {
+			case UI::Align::kHCenter:
 				anchor = (get_eff_w() - blit_width) / 2;
 				break;
-			case Align_Right:
+			case UI::Align::kRight:
 				anchor = get_eff_w() - blit_width - RICHTEXT_MARGIN;
 				break;
 			default:
@@ -190,7 +186,6 @@ bool MultilineTextarea::handle_mousewheel(uint32_t which, int32_t x, int32_t y) 
 
 void MultilineTextarea::scroll_to_top() {
 	m_scrollbar.set_scrollpos(0);
-	update(0, 0, 0, 0);
 }
 
 } // namespace UI

@@ -80,8 +80,9 @@ TextureAtlas::Node* TextureAtlas::find_node(Node* node, int w, int h) {
 std::unique_ptr<Texture> TextureAtlas::pack_as_many_as_possible(const int max_dimension,
                                                                 const int texture_atlas_index,
                                                                 std::vector<PackedTexture>* pack_info) {
-	std::unique_ptr<Node> root(
-	   new Node(Rect(0, 0, blocks_.begin()->texture->width() + kPadding, blocks_.begin()->texture->height() + kPadding)));
+
+	std::unique_ptr<Node> root(new Node(Rect(0, 0, blocks_.begin()->texture->width() + kPadding,
+	                                         blocks_.begin()->texture->height() + kPadding)));
 
 	const auto grow_right = [&root](int delta_w) {
 		std::unique_ptr<Node> new_root(new Node(Rect(0, 0, root->r.w + delta_w, root->r.h)));
