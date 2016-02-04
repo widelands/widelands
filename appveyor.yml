@@ -16,7 +16,7 @@ install:
   # Update mirrors
   - cmd: "bash --login -c \"pacman --noconfirm --sync pacman-mirrors\""
   # Update msys2 core
-  #- cmd: "bash --login -c \"update-core\""
+  - cmd: "bash --login -c \"update-core\""
   # Update msys2 system
   - cmd: "bash --login -c \"pacman -Su --noconfirm\""
   # Installed required libs
