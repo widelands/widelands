@@ -64,7 +64,7 @@ FullscreenMenuLoadMapOrGame::FullscreenMenuLoadMapOrGame() :
 			_("OK"), std::string(), false, false)
 	{}
 
-int32_t FullscreenMenuLoadMapOrGame::get_y_fropreceding_(UI::Panel& preceding_panel) {
+int32_t FullscreenMenuLoadMapOrGame::get_y_from_preceding(UI::Panel& preceding_panel) {
 	return preceding_panel.get_y() + preceding_panel.get_h();
 }
 

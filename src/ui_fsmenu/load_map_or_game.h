@@ -62,7 +62,7 @@ protected:
 	virtual void fill_table() {}
 
 	// Returns a y coordinate that can be used to position a Panel below the Panel directly above it
-	int32_t get_y_fropreceding_(UI::Panel& preceding_panel);
+	int32_t get_y_from_preceding(UI::Panel& preceding_panel);
 
 	// Returns the width that a Panel in the right column should have, depending on its x position
 	int32_t get_right_column_w(int32_t x);

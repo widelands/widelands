@@ -93,11 +93,11 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame
 	label_mapname_
 		(this, right_column_x_, tabley_, "", UI::Align_Left),
 	ta_mapname_(this,
-					 right_column_x_ + indent_, get_y_fropreceding_(label_mapname_) + padding_,
+					 right_column_x_ + indent_, get_y_from_preceding(label_mapname_) + padding_,
 					 get_right_column_w(right_column_x_ + indent_), 2 * label_height_ - padding_),
 
 	label_gametime_
-		(this, right_column_x_, get_y_fropreceding_(ta_mapname_) + 2 * padding_,
+		(this, right_column_x_, get_y_from_preceding(ta_mapname_) + 2 * padding_,
 		 "",
 		 UI::Align_Left),
 	ta_gametime_(this,
@@ -105,7 +105,7 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame
 					  get_right_column_w(right_column_tab_), label_height_),
 
 	label_players_
-		(this, right_column_x_, get_y_fropreceding_(ta_gametime_),
+		(this, right_column_x_, get_y_from_preceding(ta_gametime_),
 		 "",
 		 UI::Align_Left),
 	ta_players_(this,
@@ -113,18 +113,18 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame
 					 get_right_column_w(right_column_tab_), label_height_),
 
 	label_version_
-		(this, right_column_x_, get_y_fropreceding_(ta_players_),
+		(this, right_column_x_, get_y_from_preceding(ta_players_),
 		 "",
 		 UI::Align_Left),
 	ta_version_(this,
 					 right_column_tab_, label_version_.get_y(), "", UI::Align_Left),
 
 	label_win_condition_
-		(this, right_column_x_, get_y_fropreceding_(ta_version_) + 3 * padding_,
+		(this, right_column_x_, get_y_from_preceding(ta_version_) + 3 * padding_,
 		 "",
 		 UI::Align_Left),
 	ta_win_condition_(this,
-							 right_column_x_ + indent_, get_y_fropreceding_(label_win_condition_) + padding_,
+							 right_column_x_ + indent_, get_y_from_preceding(label_win_condition_) + padding_,
 							 get_right_column_w(right_column_x_ + indent_), label_height_),
 
 	delete_
@@ -137,15 +137,15 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame
 	ta_errormessage_
 		(this,
 		 right_column_x_,
-		 get_y_fropreceding_(ta_mapname_) + 2 * padding_,
+		 get_y_from_preceding(ta_mapname_) + 2 * padding_,
 		 get_right_column_w(right_column_x_),
-		 delete_.get_y() - get_y_fropreceding_(ta_mapname_) - 6 * padding_),
+		 delete_.get_y() - get_y_from_preceding(ta_mapname_) - 6 * padding_),
 
-	minimap_y_(get_y_fropreceding_(ta_win_condition_) + 3 * padding_),
+	minimap_y_(get_y_from_preceding(ta_win_condition_) + 3 * padding_),
 	minimap_w_(get_right_column_w(right_column_x_)),
-	minimap_h_(delete_.get_y() - get_y_fropreceding_(ta_win_condition_) - 6 * padding_),
+	minimap_h_(delete_.get_y() - get_y_from_preceding(ta_win_condition_) - 6 * padding_),
 	minimap_icon_(this,
-						right_column_x_, get_y_fropreceding_(ta_win_condition_) + 3 * padding_,
+						right_column_x_, get_y_from_preceding(ta_win_condition_) + 3 * padding_,
 						minimap_w_, minimap_h_, nullptr),
 
 	// "Data container" for the savegame information

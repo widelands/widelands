@@ -56,35 +56,35 @@ FullscreenMenuCampaignSelect::FullscreenMenuCampaignSelect() :
 		 "",
 		 UI::Align_Left),
 	ta_campname_(this,
-					  right_column_x_ + indent_, get_y_fropreceding_(label_campname_) + padding_,
+					  right_column_x_ + indent_, get_y_from_preceding(label_campname_) + padding_,
 					  get_right_column_w(right_column_x_) - indent_, label_height_),
 
 	label_tribename_
-		(this, right_column_x_, get_y_fropreceding_(ta_campname_) + 2 * padding_,
+		(this, right_column_x_, get_y_from_preceding(ta_campname_) + 2 * padding_,
 		 "",
 		 UI::Align_Left),
 	ta_tribename_(this,
-						 right_column_x_ + indent_, get_y_fropreceding_(label_tribename_) + padding_,
+						 right_column_x_ + indent_, get_y_from_preceding(label_tribename_) + padding_,
 						 get_right_column_w(right_column_x_ + indent_), label_height_),
 
 	label_difficulty_
-		(this, right_column_x_, get_y_fropreceding_(ta_tribename_) + 2 * padding_,
+		(this, right_column_x_, get_y_from_preceding(ta_tribename_) + 2 * padding_,
 		 "",
 		 UI::Align_Left),
 	ta_difficulty_(this,
-						 right_column_x_ + indent_, get_y_fropreceding_(label_difficulty_) + padding_,
+						 right_column_x_ + indent_, get_y_from_preceding(label_difficulty_) + padding_,
 						 get_right_column_w(right_column_x_ + indent_), 2 * label_height_ - padding_),
 
 	label_description_
-		(this, right_column_x_, get_y_fropreceding_(ta_difficulty_) + 2 * padding_,
+		(this, right_column_x_, get_y_from_preceding(ta_difficulty_) + 2 * padding_,
 		 _("Description:"),
 		 UI::Align_Left),
 	ta_description_
 		(this,
 		 right_column_x_ + indent_,
-		 get_y_fropreceding_(label_description_) + padding_,
+		 get_y_from_preceding(label_description_) + padding_,
 		 get_right_column_w(right_column_x_ + indent_),
-		 buty_ - get_y_fropreceding_(label_description_) - 4 * padding_)
+		 buty_ - get_y_from_preceding(label_description_) - 4 * padding_)
 {
 	title_.set_textstyle(UI::TextStyle::ui_big());
 	back_.set_tooltip(_("Return to the main menu"));
@@ -289,7 +289,7 @@ FullscreenMenuCampaignMapSelect::FullscreenMenuCampaignMapSelect(bool is_tutoria
 		 is_tutorial ? _("Choose a tutorial") : _("Choose a scenario"),
 		 UI::Align_HCenter),
 	subtitle_
-		(this, get_w() / 6, get_y_fropreceding_(title_) + 6 * padding_,
+		(this, get_w() / 6, get_y_from_preceding(title_) + 6 * padding_,
 		 get_w() * 2 / 3, 4 * label_height_,
 		 "",
 		 UI::Align_HCenter),
@@ -300,28 +300,28 @@ FullscreenMenuCampaignMapSelect::FullscreenMenuCampaignMapSelect(bool is_tutoria
 		 "",
 		 UI::Align_Left),
 	ta_mapname_(this,
-					 right_column_x_ + indent_, get_y_fropreceding_(label_mapname_) + padding_,
+					 right_column_x_ + indent_, get_y_from_preceding(label_mapname_) + padding_,
 					 get_right_column_w(right_column_x_ + indent_), label_height_),
 
 	label_author_
 		(this,
-		 right_column_x_, get_y_fropreceding_(ta_mapname_) + 2 * padding_,
+		 right_column_x_, get_y_from_preceding(ta_mapname_) + 2 * padding_,
 		 "",
 		 UI::Align_Left),
 	ta_author_(this,
-					right_column_x_ + indent_, get_y_fropreceding_(label_author_) + padding_,
+					right_column_x_ + indent_, get_y_from_preceding(label_author_) + padding_,
 					get_right_column_w(right_column_x_ + indent_), 2 * label_height_),
 
 	label_description_
-		(this, right_column_x_, get_y_fropreceding_(ta_author_) + padding_,
+		(this, right_column_x_, get_y_from_preceding(ta_author_) + padding_,
 		 "",
 		 UI::Align_Left),
 	ta_description_
 		(this,
 		 right_column_x_ + indent_,
-		 get_y_fropreceding_(label_description_) + padding_,
+		 get_y_from_preceding(label_description_) + padding_,
 		 get_right_column_w(right_column_x_ + indent_),
-		 buty_ - get_y_fropreceding_(label_description_) - 4 * padding_),
+		 buty_ - get_y_from_preceding(label_description_) - 4 * padding_),
 
 	is_tutorial_(is_tutorial)
 {
