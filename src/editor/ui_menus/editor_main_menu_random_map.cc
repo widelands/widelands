@@ -419,7 +419,7 @@ void MainMenuNewRandomMap::clicked_create_map() {
 		dynamic_cast<EditorInteractive&>(*get_parent());
 	Widelands::EditorGameBase & egbase = eia.egbase();
 	Widelands::Map              & map    = egbase.map();
-	UI::ProgressWindow loader;
+	UI::ProgressWindow loader_ui;
 
 	egbase.cleanup_for_load();
 
@@ -444,11 +444,11 @@ void MainMenuNewRandomMap::clicked_create_map() {
 		_("No Name"),
 		g_options.pull_section("global").get_string("realname", pgettext("map_name", "Unknown")),
 		sstrm.str().c_str());
-	loader.step(_("Generating random map..."));
+	loader_ui.step(_("Generating random map..."));
 	gen.create_random_map();
 
 	egbase.postload     ();
-	egbase.load_graphics(loader);
+	egbase.load_graphics(loader_ui);
 
 	map.recalc_whole_map(egbase.world());
 	eia.map_changed(EditorInteractive::MapWas::kReplaced);

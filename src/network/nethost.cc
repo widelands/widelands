@@ -805,9 +805,9 @@ void NetHost::run(bool const autorun)
 #endif
 
 	try {
-		// NOTE  loaderUI will stay uninitialized, if this is run as dedicated, so all called functions need
+		// NOTE  loader_ui will stay uninitialized, if this is run as dedicated, so all called functions need
 		// NOTE  to check whether the pointer is valid.
-		std::unique_ptr<UI::ProgressWindow> loaderUI;
+		std::unique_ptr<UI::ProgressWindow> loader_ui;
 		GameTips * tips = nullptr;
 		if (m_is_dedicated) {
 			log ("[Dedicated] Starting the game...\n");
@@ -823,16 +823,16 @@ void NetHost::run(bool const autorun)
 				set_win_condition_script(gpdp.get_win_condition());
 			}
 		} else {
-			loaderUI.reset(new UI::ProgressWindow ("images/loadscreens/progress.png"));
+			loader_ui.reset(new UI::ProgressWindow ("images/loadscreens/progress.png"));
 			std::vector<std::string> tipstext;
 			tipstext.push_back("general_game");
 			tipstext.push_back("multiplayer");
 			try {
 				tipstext.push_back(d->hp.get_players_tribe());
 			} catch (GameSettingsProvider::NoTribe) {}
-			tips = new GameTips(*loaderUI, tipstext);
+			tips = new GameTips(*loader_ui, tipstext);
 
-			loaderUI->step(_("Preparing game"));
+			loader_ui->step(_("Preparing game"));
 
 			d->game = &game;
 			game.set_game_controller(this);
@@ -862,9 +862,9 @@ void NetHost::run(bool const autorun)
 		}
 
 		if (!d->settings.savegame) // new game
-			game.init_newgame (loaderUI.get(), d->settings);
+			game.init_newgame (loader_ui.get(), d->settings);
 		else                      // savegame
-			game.init_savegame(loaderUI.get(), d->settings);
+			game.init_savegame(loader_ui.get(), d->settings);
 		d->pseudo_networktime = game.get_gametime();
 		d->time.reset(d->pseudo_networktime);
 		d->lastframe = SDL_GetTicks();
@@ -889,7 +889,7 @@ void NetHost::run(bool const autorun)
 			DedicatedLog::get()->game_start(clients, game.map().get_name().c_str());
 		}
 		game.run
-			(loaderUI.get(),
+			(loader_ui.get(),
 			 d->settings.savegame ? Widelands::Game::Loaded : d->settings.scenario ?
 			 Widelands::Game::NewMPScenario : Widelands::Game::NewNonScenario,
 			 "",

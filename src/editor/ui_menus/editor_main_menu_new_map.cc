@@ -109,9 +109,9 @@ void MainMenuNewMap::clicked_create_map() {
 	EditorInteractive& parent = eia();
 	Widelands::EditorGameBase & egbase = parent.egbase();
 	Widelands::Map              & map    = egbase.map();
-	UI::ProgressWindow loader;
+	UI::ProgressWindow loader_ui;
 
-	loader.step(_("Creating empty map..."));
+	loader_ui.step(_("Creating empty map..."));
 
 	egbase.cleanup_for_load();
 
@@ -124,7 +124,7 @@ void MainMenuNewMap::clicked_create_map() {
 				g_options.pull_section("global").get_string("realname", pgettext("map_name", "Unknown")));
 
 	egbase.postload     ();
-	egbase.load_graphics(loader);
+	egbase.load_graphics(loader_ui);
 
 	map.recalc_whole_map(egbase.world());
 	parent.map_changed(EditorInteractive::MapWas::kReplaced);
