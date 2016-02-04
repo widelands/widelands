@@ -237,9 +237,9 @@ bool Game::run_splayer_scenario_direct(char const * const mapname, const std::st
 	tribes();
 
 	// We have to create the players here.
+	loaderUI.step(_("Creating players"));
 	PlayerNumber const nr_players = map().get_nrplayers();
 	iterate_player_numbers(p, nr_players) {
-		loaderUI.stepf(_("Adding player %u"), p);
 		add_player
 			(p,
 			 0,
@@ -305,7 +305,7 @@ void Game::init_newgame
 		if (!background.empty()) {
 			loaderUI->set_background(background);
 		}
-		loaderUI->step(_("Configuring players"));
+		loaderUI->step(_("Creating players"));
 	}
 	std::vector<PlayerSettings> shared;
 	std::vector<uint8_t>        shared_num;
@@ -486,12 +486,10 @@ bool Game::run
 	if (start_game_type != Loaded) {
 		PlayerNumber const nr_players = map().get_nrplayers();
 		if (start_game_type == NewNonScenario) {
-			std::string step_description = _("Creating player infrastructure");
+			if (loader_ui) {
+				loader_ui->step(_("Creating player infrastructure"));
+			}
 			iterate_players_existing(p, nr_players, *this, plr) {
-				if (loader_ui) {
-					step_description += ".";
-					loader_ui->step(step_description);
-				}
 				plr->create_default_infrastructure();
 			}
 		} else {

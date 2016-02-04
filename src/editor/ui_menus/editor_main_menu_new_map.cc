@@ -111,6 +111,8 @@ void MainMenuNewMap::clicked_create_map() {
 	Widelands::Map              & map    = egbase.map();
 	UI::ProgressWindow loader;
 
+	loader.step(_("Creating empty map..."));
+
 	egbase.cleanup_for_load();
 
 	map.create_empty_map(
