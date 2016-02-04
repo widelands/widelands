@@ -2283,43 +2283,50 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 					prio -= 10;
 				}
 
-			} else if (bo.type == BuildingObserver::TRAININGSITE) {
+			} else if (bo.type == BuildingObserver::TRAININGSITE) { //NOCOM
 
-				prio = 30;
+				prio = 40;
 
 				if (bo.new_building_ == BuildingNecessity::kForced) {
 					prio += 30;
 				}
 
+				// We build one trainig site per X military sites
+				// with some variations, of course
+				prio += static_cast<int32_t>(militarysites.size() + productionsites.size())
+					- 50 * (ts_basic_count_ + ts_advanced_count_);
+
+				// We prefer basic trainingsites and sites with lower count
 				if (bo.trainingsite_type_ == TrainingSiteType::kBasic) {
-					prio = static_cast<int32_t>(militarysites.size())
-						- 40 * ts_basic_count_;
+					prio += 1;
+				}
+				prio -= 2 * bo.total_count();
+
+				// Special bonus for very first site of type
+				if (bo.total_count() == 0) {
+					prio += 10;
 				}
 
-				if (bo.trainingsite_type_ == TrainingSiteType::kAdvanced) {
-					prio = static_cast<int32_t>(militarysites.size())
-						- 50 * ts_advanced_count_;
+				// Let have at least one basic trainingsite before building one advanced
+				if (bo.new_building_ != BuildingNecessity::kForced &&
+					bo.trainingsite_type_ == TrainingSiteType::kAdvanced &&
+					ts_basic_count_ == 0) {
+					continue;
 				}
 
-				// exclude spots on border
+				// for spots close to a border
 				if (bf->near_border_) {
 					prio -= 5;
 				}
 
-
-				// for type1 we need 15 productionsties
-				if (bo.trainingsite_type_ == TrainingSiteType::kBasic && productionsites.size() < 15) {
-					prio -= 15;
-				}
-
-				// for type2 we need 4 mines
-				if (bo.trainingsite_type_ == TrainingSiteType::kAdvanced && virtual_mines < 4) {
-					prio -= 15;;
+				// be should rather have some mines
+				if (virtual_mines < 6) {
+					prio -= (6 - virtual_mines) * 7;
 				}
 
 				// take care about borders and enemies
 				if (bf->enemy_nearby_) {
-					prio -= 10;
+					prio -= 15;
 				}
 
 				if (bf->unowned_land_nearby_) {
@@ -2514,6 +2521,19 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 	if (best_building->type == BuildingObserver::MILITARYSITE) {
 		persistent_data->target_military_score = proposed_priority;
 	}
+
+	if (best_building->type == BuildingObserver::TRAININGSITE) { //NOCOM
+		printf ("%d %s: building %d. %-26s, psites: %3d, msites: %2d, tsites: %2d, was forced after:%8d\n",
+		player_number(),
+		gamestring_with_leading_zeros(gametime),
+		best_building->total_count() + 1,
+		best_building->name,
+		productionsites.size(),
+		militarysites.size(),
+		trainingsites.size(),
+		best_building->forced_after_);
+	}
+
 
 
 	// send the command to construct a new building
@@ -5521,16 +5541,18 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 					site->second.score -= 2;
 				}
 
-				// here is some differentiation based on "character" of a player
-				if (type_ == DefaultAI::Type::kWeak) {
-					site->second.score -= 3;
-					site->second.score -= vacant_mil_positions_ / 8;
-				} else if (type_ == DefaultAI::Type::kVeryWeak) {
-					site->second.score -= 6;
-					site->second.score -= vacant_mil_positions_ / 4;
-				} else {  //=AGRESSIVE
-					site->second.score -= vacant_mil_positions_ / 16;
-				}
+				//// here is some differentiation based on "character" of a player //NOCOM
+				//if (type_ == DefaultAI::Type::kWeak) {
+					//site->second.score -= 3;
+					//site->second.score -= vacant_mil_positions_ / 4;
+				//} else if (type_ == DefaultAI::Type::kVeryWeak) {
+					//site->second.score -= 6;
+					//site->second.score -= vacant_mil_positions_ / 2;
+				//} else {  //=AGRESSIVE
+					//site->second.score -= vacant_mil_positions_ / 8;
+				//}
+				site->second.score -= vacant_mil_positions_ / 8;
+				
 				if (site->second.mines_nearby == ExtendedBool::kFalse) {
 					site->second.score -= 1;
 				} else {
@@ -5545,9 +5567,20 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 					site->second.score -= 8;
 				}
 				// also we should have at least some training sites
-				if ((ts_basic_count_ + ts_advanced_count_) == 0) {
-					site->second.score -= 4;
+				switch (ts_basic_count_ + ts_advanced_count_ - ts_without_trainers_) {
+					case 0:
+						site->second.score -= 6;
+						break;
+					case 1:
+						site->second.score -= 3;
+						break;
+					case 2:
+						site->second.score -= 1;
+						break;
+					default:
+						;
 				}
+
 				// treating no attack score
 				if (site->second.no_attack_counter < 0) {
 					// we cannot attack yet
