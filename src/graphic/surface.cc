@@ -42,9 +42,7 @@ namespace {
 //   x.append(math.cos(2*pi*float(i)/kNumTrianglesForCircle))
 //   y.append(math.sin(2*pi*float(i)/kNumTrianglesForCircle))
 constexpr int kNumTrianglesForCircle = 6;
-constexpr float kCircleXValues[kNumTrianglesForCircle] = {
-	1. ,  0.5, -0.5, -1. , -0.5,  0.5
-};
+constexpr float kCircleXValues[kNumTrianglesForCircle] = {1., 0.5, -0.5, -1., -0.5, 0.5};
 constexpr float kCircleYValues[kNumTrianglesForCircle] = {0.00000000e+00,
                                                           8.66025404e-01,
                                                           8.66025404e-01,
@@ -68,10 +66,6 @@ FloatPoint calculate_line_normal(const PointType& start, const PointType& end) {
 	const float dy = end.y - start.y;
 	const float len = std::hypot(dx, dy);
 	return FloatPoint(-dy / len, dx / len);
-}
-
-float dot(const FloatPoint& p1, const FloatPoint& p2) {
-	return p1.x * p2.x + p1.y * p2.y;
 }
 
 // Tesselates the line made up of 'points' ino triangles and converts them into OpenGL space for a
@@ -181,7 +175,7 @@ void Surface::draw_line_strip(std::vector<FloatPoint> points,
 	}
 
 	std::vector<DrawLineProgram::PerVertexData> vertices;
-	// We need for each point the number of triangles for the circle around it 2
+	// We need for each point: the number of triangles for the circle around + 2
 	// more triangles for the line to the next point. A triangle has 3 points.
 	vertices.reserve(3 * points.size() * (kNumTrianglesForCircle + 2));
 
@@ -194,7 +188,7 @@ void Surface::draw_line_strip(std::vector<FloatPoint> points,
 	tesselate_line_strip(
 	   w, h, RGBAColor(color.r, color.g, color.b, 255), line_width, points, &vertices);
 	if (line_draw_mode == LineDrawMode::kAntialiased) {
-		tesselate_line_strip(w, h, RGBAColor(color.r, color.g, color.b, 100), line_width + 2., points,
+		tesselate_line_strip(w, h, RGBAColor(color.r, color.g, color.b, 80), line_width + 2., points,
 		                     &vertices);
 	}
 	do_draw_line_strip(std::move(vertices));
