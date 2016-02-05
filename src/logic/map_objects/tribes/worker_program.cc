@@ -35,7 +35,6 @@ const WorkerProgram::ParseMap WorkerProgram::parsemap_[] = {
 	{"mine",              &WorkerProgram::parse_mine},
 	{"breed",             &WorkerProgram::parse_breed},
 	{"createware",        &WorkerProgram::parse_createware},
-	{"setdescription",    &WorkerProgram::parse_plant},
 	{"setbobdescription", &WorkerProgram::parse_setbobdescription},
 	{"findobject",        &WorkerProgram::parse_findobject},
 	{"findspace",         &WorkerProgram::parse_findspace},

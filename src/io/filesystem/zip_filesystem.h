@@ -45,15 +45,12 @@ public:
 
 	void * load(const std::string & fname, size_t & length) override;
 
-	virtual void write
-		(const std::string & fname, void const * data, int32_t length) override;
+	void write(const std::string& fname, void const* data, int32_t length) override;
 	void ensure_directory_exists(const std::string & fs_dirname) override;
 	void   make_directory      (const std::string & fs_dirname) override;
 
-	virtual StreamRead  * open_stream_read
-		(const std::string & fname) override;
-	virtual StreamWrite * open_stream_write
-		(const std::string & fname) override;
+	StreamRead* open_stream_read(const std::string& fname) override;
+	StreamWrite* open_stream_write(const std::string& fname) override;
 
 	FileSystem * make_sub_file_system(const std::string & fs_dirname) override;
 	FileSystem * create_sub_file_system(const std::string & fs_dirname, Type) override;

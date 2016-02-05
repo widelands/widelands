@@ -1,6 +1,3 @@
-# NOCOM(GunChleoc): Test this.
-
-
 #!/bin/bash
 
 set -e
@@ -91,7 +88,7 @@ EOF
    rsync -Ca $SOURCE_DIR/data $DESTINATION/Widelands.app/Contents/MacOS/
 
    echo "Copying locales ..."
-   rsync -Ca locale $DESTINATION/Widelands.app/Contents/MacOS/
+   rsync -Ca locale $DESTINATION/Widelands.app/Contents/MacOS/data/
 
    echo "Copying binary ..."
    cp -a src/widelands $DESTINATION/Widelands.app/Contents/MacOS/

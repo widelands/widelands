@@ -2,13 +2,13 @@
 # Copyright (C) 2005-2016 Widelands Development Team
 # 
 # Translators:
-# Lyubomir Vasilev, 2015
+# Lyubomir Vasilev, 2015-2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-01-23 08:23+0000\n"
-"PO-Revision-Date: 2016-01-23 10:26+0000\n"
+"POT-Creation-Date: 2016-01-31 20:26+0000\n"
+"PO-Revision-Date: 2016-01-31 21:54+0000\n"
 "Last-Translator: Lyubomir Vasilev\n"
 "Language-Team: Bulgarian (http://www.transifex.com/widelands/widelands/language/bg/)\n"
 "MIME-Version: 1.0\n"
@@ -34,8 +34,8 @@ msgid "Licensing information for Widelands"
 msgstr "Информация за лиценза на Widelands"
 
 #: ../../txts/LICENSE.lua:23
-msgid "Copyright 2002 - 2015 by the Widelands Development Team."
-msgstr "Copyright 2002 - 2015 от екипа по разработката на Widelands"
+msgid "Copyright 2002 - 2016 by the Widelands Development Team."
+msgstr "© 2002-2016 от екипа по разработката на Widelands"
 
 #: ../../txts/LICENSE.lua:24
 msgid ""

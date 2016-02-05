@@ -2,14 +2,14 @@
 # Copyright (C) 2005-2016 Widelands Development Team
 # 
 # Translators:
-# Joe Hansen <joedalton2@yahoo.dk>, 2009,2015
+# Joe Hansen <joedalton2@yahoo.dk>, 2009,2015-2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-01-23 08:23+0000\n"
-"PO-Revision-Date: 2016-01-23 08:24+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2016-01-31 20:26+0000\n"
+"PO-Revision-Date: 2016-02-02 14:51+0000\n"
+"Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
 "Language-Team: Danish (http://www.transifex.com/widelands/widelands/language/da/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -347,7 +347,7 @@ msgstr "Fire borge"
 msgid ""
 "Well protected in their mighty fortresses, four power-hungry warlords are "
 "completing their schemes to dominate these lands…"
-msgstr ""
+msgstr "Velbeskyttet i deres mægtige fæstninger, færdiggør fire magthungrende krigsherrer deres planer om at dominere disse lande ..."
 
 #: ../../maps/Four_Mountains.wmf/elemental:8
 msgid "Four Mountains"
@@ -379,7 +379,7 @@ msgstr "Gylden halvø"
 
 #: ../../maps/Golden_Peninsula.wmf/elemental:10
 msgid "Two empires race for the treasures of a legendary peninsula…"
-msgstr ""
+msgstr "To imperier jager skattene på en legendarisk halvø ..."
 
 #: ../../maps/Ice_wars.wmf/elemental:9
 msgid "Ice wars"
@@ -436,7 +436,7 @@ msgid ""
 "This lake, deep in the most ancient forests, has long been known for its "
 "beauty and idyllic peace. However, its sanctity has been disturbed now, as "
 "two hostile tribes have arrived at its shores…"
-msgstr ""
+msgstr "Denne sø, dybt inde i de gamle skove, har i lang tid været kendt for sin skønhed og idylliske fred. Dette fristed er dog nu forstyrret, da to fjendtlige stammer er ankommet ved søens bredder ..."
 
 #: ../../maps/Last_Bastion.wmf/elemental:8
 msgid "Last Bastion"
@@ -454,7 +454,7 @@ msgid ""
 "tribe – only two opposite paths lead. But remember, be careful… this last "
 "living space is also a hard and small place to live. Don’t forget to take "
 "care of your timber supplies, you’ll need them."
-msgstr ""
+msgstr "De lunefulde guder besvarede ikke vores bønner. I stedet varmede det stigende sollys jorden op tusindfold og smeltede gletsjere og folk faldt i dybet. Men nu - højt oppe i de majestætiske bjerge, på den sidste klump jord - har to overlevende stammer søgt ly. Selvom guderne viste barmhjertighed og klimaet derfor blev køligere igen, stiger vandet stadig. Inde på det sidste sikkert sted - den højeste bjergkæde, hvor mængden af guld og plads til at leve alene er tilstrækkelig for en stamme - fører kun to modstående veje. Men husk, vær forsigtig ... dette sidste levested er også et hårdt og lille sted at bo. Glem ikke at tage dig af dine tømmerforsyninger, du får brug for dem."
 
 #: ../../maps/Long,_long_way.wmf/elemental:8
 msgid "Long, long way"
@@ -464,7 +464,7 @@ msgstr "Lang, lang vej"
 msgid ""
 "Where dat? A thousand miles from here. [Porgy and Bess] You have to go a "
 "long, long way to conquer all the islands. Good luck!"
-msgstr ""
+msgstr "Hvor det? Tusind kilometer herfra. [Porgy og Bess] Du har en lang, lang vej foran dig for at erobre alle øerne. Held og lykke!"
 
 #: ../../maps/MP_Scenarios/Island_Hopping.wmf/elemental:7
 msgid "Island Hopping"
@@ -599,7 +599,7 @@ msgid ""
 "constructors. Nobody knows why they (have) disappeared. Nobody knows why. "
 "People say that now nothing is blocking the road to wealth. But many will "
 "die pulled apart by wolves, engulfed by swamp… encircled by hostile tribes."
-msgstr ""
+msgstr "Nogle siger at de uigennemtrængelige lande fjernt mod nord skræmte selv de mest modige bosættere og krigere væk. Store og gamle skove, fulde af store og jagende dyr, gennemskåret af vådområder og bakker var indhyllet i mystik. De få, som vendte tilbage, nævnte enorme bygninger, dekoreret med indgraveringer og guld fra majestætiske bjergkæder et sted i vildmarken. År efter er der kun nedbrudte ruiner dækket af mos og træer tilbage fra disse gode, gamle tider. Deres former giver kun en ide om den håndværksviden, de gamle bygningsarbejdere havde. Ingen ved, hvorfor de forsvandt. Folk siger, at vejen til rigdom ingen hindringer har. Men mange vil dø og blive spist af ulvene, opslugt af sumpe ... omringet af fjendtlige stammer."
 
 #: ../../maps/The_Green_Plateau.wmf/elemental:8
 msgid "The Green Plateau"
@@ -693,7 +693,7 @@ msgid ""
 "exclusive trade alliance, forcing the other two to do the same. Suddenly, it"
 " seems only a matter of time before the first fights between the harbors "
 "will shatter the peaceful life that has lasted for so long…"
-msgstr ""
+msgstr "De fire mægtige havne på Crawøerne har handlet deres varer med hinanden i umindelige tider. De har alle brug for ressourcer, som de ikke kunne producere på deres eget område og til gengæld leveret andre ressourcer til dem, der ikke kunne producere dem selv. På baggrund af disse handler var en meget venlig økonomi almindelig mellem de fire havne og de mennesker, der lever på Crawøerne - indtil for nylig, hvor to af havnene slog sig sammen for at danne en eksklusiv handelsalliance, hvilket tvang de to andre til at gøre det samme. Pludselig virker det kun et spørgsmål om tid, før de første kampe mellem havnene vil knuse den fredelige liv, der varede i så lang tid ..."
 
 #: ../../maps/Trident_of_Fire.wmf/elemental:9
 msgid "Trident of Fire"

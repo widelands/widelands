@@ -52,12 +52,6 @@ InteractiveGameBase::InteractiveGameBase
 	:
 	InteractiveBase(_game, global_s),
 	chat_provider_(nullptr),
-	building_census_format_
-		(global_s.get_string("building_census_format",       "%N")),
-	building_statistics_format_
-		(global_s.get_string("building_statistics_format",   "%t")),
-	building_tooltip_format_
-		(global_s.get_string("building_tooltip_format",      "%r")),
 	chatenabled_(chatenabled),
 	multiplayer_(multiplayer),
 	playertype_(pt),

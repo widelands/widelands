@@ -69,7 +69,6 @@ private:
 	void parse_mine             (Worker::Action* act, const std::vector<std::string>& cmd);
 	void parse_breed            (Worker::Action* act, const std::vector<std::string>& cmd);
 	void parse_createware       (Worker::Action* act, const std::vector<std::string>& cmd);
-	void parse_setdescription   (Worker::Action* act, const std::vector<std::string>& cmd);
 	void parse_setbobdescription(Worker::Action* act, const std::vector<std::string>& cmd);
 	void parse_findobject       (Worker::Action* act, const std::vector<std::string>& cmd);
 	void parse_findspace        (Worker::Action* act, const std::vector<std::string>& cmd);

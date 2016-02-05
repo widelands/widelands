@@ -37,8 +37,7 @@ struct S2MapLoader : public Widelands::MapLoader {
 	S2MapLoader(const std::string& filename, Widelands::Map& M);
 
 	int32_t preload_map(bool) override;
-	virtual int32_t load_map_complete
-		(Widelands::EditorGameBase&, Widelands::MapLoader::LoadType) override;
+	int32_t load_map_complete(Widelands::EditorGameBase&, Widelands::MapLoader::LoadType) override;
 
 private:
 	const std::string m_filename;
