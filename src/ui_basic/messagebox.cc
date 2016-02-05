@@ -94,7 +94,7 @@ WLMessageBox::WLMessageBox(Panel* const parent,
 	if (type_ == MBoxType::kOkCancel) {
 		cancel_button_.reset(
 		   new Button(this,
-		              "no",
+		              "cancel",
 		              UI::g_fh1->fontset().is_rtl() ? right_button_x : left_button_x,
 		              button_y,
 		              button_w,
