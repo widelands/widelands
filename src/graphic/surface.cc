@@ -220,3 +220,13 @@ void Surface::blit(const Rect& dst_rect,
 	const FloatRect rect = rect_to_gl_renderbuffer(width(), height(), dst_rect);
 	do_blit(rect, adjust_for_src(image.blit_data(), src_rect), opacity, blend_mode);
 }
+
+void draw_rect(const Rect& rc, const RGBColor& clr, Surface* surface) {
+	const FloatPoint top_left = FloatPoint(rc.x + 0.5f, rc.y + 0.5f);
+	const FloatPoint top_right = FloatPoint(rc.x + rc.w - 0.5f, rc.y + 0.5f);
+	const FloatPoint bottom_right = FloatPoint(rc.x + rc.w - 0.5f, rc.y + rc.h - 0.5f);
+	const FloatPoint bottom_left = FloatPoint(rc.x + 0.5f, rc.y + rc.h - 0.5f);
+
+	surface->draw_line_strip(
+	   {top_left, top_right, bottom_right, bottom_left, top_left}, clr, 1, LineDrawMode::kSharp);
+}
