@@ -216,12 +216,6 @@ void Graphic::set_fullscreen(const bool value)
 */
 void Graphic::refresh()
 {
-	// NOCOM(#sirver): what
-	screen_->draw_line_strip(
-		{FloatPoint(20, 300), FloatPoint(700, 500), FloatPoint(250, 50)}, RGBColor(255, 0, 0), 30, LineDrawMode::kAntialiased);
-
-	draw_rect(Rect(5, 7, 3, 4), RGBColor(0, 255, 0), screen_.get());
-
 	RenderQueue::instance().draw(screen_->width(), screen_->height());
 
 	// Setting the window size immediately after going out of fullscreen does

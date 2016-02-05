@@ -102,7 +102,9 @@ private:
 	DISALLOW_COPY_AND_ASSIGN(Surface);
 };
 
-/// Draws a rect (frame only) to the surface.
-void draw_rect(const Rect&, const RGBColor&, Surface* destination);
+/// Draws a rect (frame only) to the surface. The width of the surrounding line
+/// is 1 pixel, i.e. the transparent inner box of the drawn rectangle starts at
+/// (x+1, y+1) and has dimension (w - 2, h - 2).
+void draw_rect(const Rect& rect, const RGBColor&, Surface* destination);
 
 #endif  // end of include guard: WL_GRAPHIC_SURFACE_H
