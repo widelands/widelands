@@ -16,7 +16,7 @@ def datadir():
     return os.path.join(os.path.dirname(__file__), "data")
 
 def datadir_for_testing():
-    return os.path.join(os.path.dirname(__file__))
+    return os.path.relpath(".", os.path.dirname(__file__))
 
 def out(string):
     sys.stdout.write(string)
