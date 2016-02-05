@@ -1854,9 +1854,10 @@ int32_t Map::change_terrain
 	Notifications::publish(
 	   NoteFieldTerrainChanged{c, static_cast<MapIndex>(c.field - &m_fields[0])});
 
-	recalc_for_field_area(world, Area<FCoords>(c, 2));
-
-	return 2;
+	// Changing the terrain can affect ports, which can be up to 3 fields away.
+	constexpr int kPotentiallyAffectedNeighbors = 3;
+	recalc_for_field_area(world, Area<FCoords>(c, kPotentiallyAffectedNeighbors));
+	return kPotentiallyAffectedNeighbors;
 }
 
 bool Map::is_resource_valid

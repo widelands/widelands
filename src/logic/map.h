@@ -400,7 +400,7 @@ public:
 	 * happen in the game too if some kind of land increasement is implemented (like
 	 * drying swamps). The nodecaps need to be recalculated
 	 *
-	 * @return the radius of changes (which are always 2)
+	 * @return the radius of changes.
 	 */
 	int32_t change_terrain(const World& world, TCoords<FCoords>, DescriptionIndex);
 
