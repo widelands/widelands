@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2008, 2010-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -68,19 +68,19 @@ private:
 
 	bool compare_difficulty(uint32_t, uint32_t);
 
-	UI::Table<uintptr_t const>    m_table;
+	UI::Table<uintptr_t const>    table_;
 
-	UI::Textarea                  m_title;
-	UI::Textarea                  m_label_campname;
-	UI::MultilineTextarea         m_ta_campname;
-	UI::Textarea                  m_label_tribename;
-	UI::MultilineTextarea         m_ta_tribename;
-	UI::Textarea                  m_label_difficulty;
-	UI::MultilineTextarea         m_ta_difficulty;
-	UI::Textarea                  m_label_description;
-	UI::MultilineTextarea         m_ta_description;
+	UI::Textarea                  title_;
+	UI::Textarea                  label_campname_;
+	UI::MultilineTextarea         ta_campname_;
+	UI::Textarea                  label_tribename_;
+	UI::MultilineTextarea         ta_tribename_;
+	UI::Textarea                  label_difficulty_;
+	UI::MultilineTextarea         ta_difficulty_;
+	UI::Textarea                  label_description_;
+	UI::MultilineTextarea         ta_description_;
 
-	std::vector<CampaignListData> m_campaigns_data;
+	std::vector<CampaignListData> campaigns_data_;
 
 	/// Variables used for exchange between the two Campaign UIs and
 	/// Game::run_campaign
@@ -115,23 +115,23 @@ private:
 		CampaignScenarioData() : index(0) {}
 	};
 
-	UI::Table<uintptr_t const>    m_table;
+	UI::Table<uintptr_t const>    table_;
 
-	UI::Textarea                  m_title;
-	UI::MultilineTextarea         m_subtitle;
-	UI::Textarea                  m_label_mapname;
-	UI::MultilineTextarea         m_ta_mapname;
-	UI::Textarea                  m_label_author;
-	UI::MultilineTextarea         m_ta_author;
-	UI::Textarea                  m_label_description;
-	UI::MultilineTextarea         m_ta_description;
+	UI::Textarea                  title_;
+	UI::MultilineTextarea         subtitle_;
+	UI::Textarea                  label_mapname_;
+	UI::MultilineTextarea         ta_mapname_;
+	UI::Textarea                  label_author_;
+	UI::MultilineTextarea         ta_author_;
+	UI::Textarea                  label_description_;
+	UI::MultilineTextarea         ta_description_;
 
 	uint32_t                      campaign;
 	std::string                   campmapfile;
 
-	std::vector<CampaignScenarioData> m_scenarios_data;
+	std::vector<CampaignScenarioData> scenarios_data_;
 
-	bool m_is_tutorial;
+	bool is_tutorial_;
 };
 
 #endif  // end of include guard: WL_UI_FSMENU_CAMPAIGN_SELECT_H
