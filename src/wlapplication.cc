@@ -263,6 +263,8 @@ redirected_stdio_(false)
 
 	setup_homedir();
 	init_settings();
+	datadir_ = g_fs->canonicalize_name(datadir_);
+	datadir_for_testing_ = g_fs->canonicalize_name(datadir_for_testing_);
 
 	log("Adding directory: %s\n", datadir_.c_str());
 	g_fs->add_file_system(&FileSystem::create(datadir_));
