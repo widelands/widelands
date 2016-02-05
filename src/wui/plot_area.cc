@@ -60,8 +60,8 @@ const uint32_t time_in_ms[] = {
 
 const char BG_PIC[] = "images/wui/plot_area_bg.png";
 const RGBColor kAxisLineColor(0, 0, 0);
-constexpr float kAxisLinesWidth = 1.5f;
-constexpr float kPlotLinesWidth = 2.f;
+constexpr float kAxisLinesWidth = 2.0f;
+constexpr float kPlotLinesWidth = 3.f;
 const RGBColor kZeroLineColor(255, 255, 255);
 
 enum UNIT {

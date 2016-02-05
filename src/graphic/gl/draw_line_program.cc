@@ -47,8 +47,11 @@ const char kDrawLineFragmentShader[] = R"(
 
 varying vec4 var_color;
 
+#define PI 3.141592653589793
+
 void main() {
-	gl_FragColor = var_color;
+	float alpha = pow(cos(var_color.a * PI / 2), 1.5);
+	gl_FragColor = vec4(var_color.r, var_color.g, var_color.b, alpha);
 }
 )";
 
