@@ -33,6 +33,16 @@ namespace {
 
 constexpr GLenum NONE = static_cast<GLenum>(0);
 
+// Reads 'filename' from g_fs into a string.
+std::string read_file(const std::string& filename) {
+	std::string content;
+	FileRead fr;
+	fr.open(*g_fs, filename);
+	content.assign(fr.data(0), fr.get_size());
+	fr.close();
+	return content;
+}
+
 // Returns a readable string for a GL_*_SHADER 'type' for debug output.
 std::string shader_to_string(GLenum type) {
 	if (type == GL_VERTEX_SHADER) {
@@ -129,23 +139,8 @@ Program::~Program() {
 }
 
 void Program::build(const std::string& program_name) {
-
-	std::string fragment_shader_source;
-	FileRead fr;
-	fr.open(*g_fs, "shaders/" + program_name + ".fp");
-	while (char* line = fr.read_line()) {
-		fragment_shader_source += line;
-		fragment_shader_source += "\n";
-	}
-	fr.close();
-
-	std::string vertex_shader_source;
-	fr.open(*g_fs, "shaders/" + program_name + ".vp");
-	while (char* line = fr.read_line()) {
-		vertex_shader_source += line;
-		vertex_shader_source += "\n";
-	}
-	fr.close();
+	std::string fragment_shader_source = read_file("shaders/" + program_name + ".fp");
+	std::string vertex_shader_source = read_file("shaders/" + program_name + ".vp");
 
 	vertex_shader_.reset(new Shader(GL_VERTEX_SHADER));
 	vertex_shader_->compile(vertex_shader_source.c_str());
