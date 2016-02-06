@@ -24,6 +24,7 @@
 #include <memory>
 #include <string>
 
+#include <boost/format.hpp>
 #ifndef _WIN32
 #include <SDL.h> // for a dirty hack.
 #include <unistd.h> // for usleep
@@ -73,10 +74,7 @@ namespace Widelands {
 //#define SYNC_DEBUG
 
 Game::SyncWrapper::~SyncWrapper() {
-	if (m_dump) {
-		delete m_dump;
-		m_dump = nullptr;
-
+	if (m_dump != nullptr) {
 		if (!m_syncstreamsave)
 			g_fs->fs_unlink(m_dumpfname);
 	}
@@ -84,7 +82,7 @@ Game::SyncWrapper::~SyncWrapper() {
 
 void Game::SyncWrapper::start_dump(const std::string & fname) {
 	m_dumpfname = fname + ".wss";
-	m_dump = g_fs->open_stream_write(m_dumpfname);
+	m_dump.reset(g_fs->open_stream_write(m_dumpfname));
 }
 
 static const unsigned long long MINIMUM_DISK_SPACE = 256 * 1024 * 1024;
@@ -98,29 +96,21 @@ void Game::SyncWrapper::data(void const * const sync_data, size_t const size) {
 	log("\n");
 #endif
 
-	if
-		(m_dump &&
-		 static_cast<int32_t>(m_counter - m_next_diskspacecheck) >= 0)
-	{
+	if (m_dump != nullptr && static_cast<int32_t>(m_counter - m_next_diskspacecheck) >= 0) {
 		m_next_diskspacecheck = m_counter + 16 * 1024 * 1024;
 
 		if (g_fs->disk_space() < MINIMUM_DISK_SPACE) {
 			log("Stop writing to syncstream file: disk is getting full.\n");
-			delete m_dump;
-			m_dump = nullptr;
+			m_dump.reset();
 		}
 	}
 
-	if (m_dump) {
+	if (m_dump != nullptr) {
 		try {
 			m_dump->data(sync_data, size);
 		} catch (const WException &) {
-			log
-				("Writing to syncstream file %s failed. Stop synctream dump.\n",
-				 m_dumpfname.c_str());
-
-			delete m_dump;
-			m_dump = nullptr;
+			log("Writing to syncstream file %s failed. Stop synctream dump.\n", m_dumpfname.c_str());
+			m_dump.reset();
 		}
 	}
 
@@ -137,7 +127,6 @@ Game::Game() :
 	m_writesyncstream     (false),
 	m_state               (gs_notrunning),
 	m_cmdqueue            (*this),
-	m_replaywriter        (nullptr),
 	/** TRANSLATORS: Win condition for this game has not been set. */
 	m_win_condition_displayname(_("Not set"))
 {
@@ -145,7 +134,6 @@ Game::Game() :
 
 Game::~Game()
 {
-	delete m_replaywriter;
 }
 
 
@@ -259,7 +247,7 @@ bool Game::run_splayer_scenario_direct(char const * const mapname, const std::st
 
 	set_game_controller(new SinglePlayerGameController(*this, true, 1));
 	try {
-		bool const result = run(&loaderUI, NewSPScenario, script_to_run, false);
+		bool const result = run(&loaderUI, NewSPScenario, script_to_run, false, "single_player");
 		delete m_ctrl;
 		m_ctrl = nullptr;
 		return result;
@@ -417,7 +405,7 @@ bool Game::run_load_game(std::string filename, const std::string& script_to_run)
 
 	set_game_controller(new SinglePlayerGameController(*this, true, player_nr));
 	try {
-		bool const result = run(&loaderUI, Loaded, script_to_run, false);
+		bool const result = run(&loaderUI, Loaded, script_to_run, false, "single_player");
 		delete m_ctrl;
 		m_ctrl = nullptr;
 		return result;
@@ -461,7 +449,7 @@ void Game::postload()
  */
 bool Game::run
 	(UI::ProgressWindow * loader_ui, StartGameType const start_game_type,
-	 const std::string& script_to_run, bool replay)
+	 const std::string& script_to_run, bool replay, const std::string& prefix_for_replays)
 {
 	assert(loader_ui != nullptr);
 
@@ -530,16 +518,13 @@ bool Game::run
 
 	if (m_writereplay || m_writesyncstream) {
 		// Derive a replay filename from the current time
-		std::string fname(REPLAY_DIR);
-		fname += '/';
-		fname += timestring();
-		fname += REPLAY_SUFFIX;
-
+		const std::string fname = (boost::format("%s/%s_%s%s") % REPLAY_DIR % timestring() %
+		                           prefix_for_replays % REPLAY_SUFFIX).str();
 		if (m_writereplay) {
 			log("Starting replay writer\n");
 
 			assert(!m_replaywriter);
-			m_replaywriter = new ReplayWriter(*this, fname);
+			m_replaywriter.reset(new ReplayWriter(*this, fname));
 
 			log("Replay writer has started\n");
 		}

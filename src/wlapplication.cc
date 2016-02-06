@@ -1222,7 +1222,7 @@ bool WLApplication::new_game()
 
 			game.set_game_controller(ctrl.get());
 			game.init_newgame(&loaderUI, sp.settings());
-			game.run(&loaderUI, Widelands::Game::NewNonScenario, "", false);
+			game.run(&loaderUI, Widelands::Game::NewNonScenario, "", false, "single_player");
 		} catch (const std::exception & e) {
 			log("Fatal exception: %s\n", e.what());
 			emergency_save(game);
@@ -1337,7 +1337,7 @@ void WLApplication::replay()
 
 		game.save_handler().set_allow_saving(false);
 
-		game.run(&loaderUI, Widelands::Game::Loaded, "", true);
+		game.run(&loaderUI, Widelands::Game::Loaded, "", true, "replay");
 	} catch (const std::exception & e) {
 		log("Fatal Exception: %s\n", e.what());
 		emergency_save(game);

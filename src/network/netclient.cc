@@ -224,14 +224,13 @@ void NetClient::run ()
 
 		log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 		d->modal = game.get_ibase();
-		log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
-		log("#sirver d->settings.scenario: %d\n", d->settings.scenario);
-		game.run(loaderUI, d->settings.savegame ? Widelands::Game::Loaded : d->settings.scenario ?
-		                                          Widelands::Game::NewMPScenario :
-		                                          Widelands::Game::NewNonScenario,
-		         "", false);
+	   game.run(loaderUI, d->settings.savegame ? Widelands::Game::Loaded : d->settings.scenario ?
+	                                             Widelands::Game::NewMPScenario :
+	                                             Widelands::Game::NewNonScenario,
+	            "", false,
+	            (boost::format("netclient_%d") % static_cast<int>(d->settings.usernum)).str());
 
-		log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
+	   log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 		// if this is an internet game, tell the metaserver that the game is done.
 		if (m_internet)
 			InternetGaming::ref().set_game_done();
@@ -239,6 +238,7 @@ void NetClient::run ()
 		d->modal = nullptr;
 		log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 		d->game = nullptr;
+		// NOCOM(#sirver): what
 	// } catch (...) {
 	// log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 		// d->modal = nullptr;

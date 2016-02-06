@@ -770,7 +770,7 @@ void NetHost::run()
 			 d->settings.savegame ? Widelands::Game::Loaded : d->settings.scenario ?
 			 Widelands::Game::NewMPScenario : Widelands::Game::NewNonScenario,
 			 "",
-			 false);
+			 false, "nethost");
 
 		delete tips;
 
