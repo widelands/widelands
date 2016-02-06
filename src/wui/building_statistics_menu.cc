@@ -399,11 +399,13 @@ bool BuildingStatisticsMenu::add_button(
 
 	owned_labels_[id] =
 		new UI::Textarea(button_box, 0, 0, kBuildGridCellWidth, kLabelHeight, UI::Align::kCenter);
-	button_box->add(owned_labels_[id], UI::Align::kLeft);
+	button_box->add(owned_labels_[id], UI::Align::kHCenter);
+
+	button_box->add_space(6);
 
 	productivity_labels_[id] =
 		new UI::Textarea(button_box, 0, 0, kBuildGridCellWidth, kLabelHeight, UI::Align::kCenter);
-	button_box->add(productivity_labels_[id], UI::Align::kLeft);
+	button_box->add(productivity_labels_[id], UI::Align::kHCenter);
 
 	row.add(button_box, UI::Align::kLeft);
 
