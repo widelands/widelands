@@ -92,7 +92,6 @@ void ProgressWindow::set_background(const std::string & file_name) {
 }
 
 void ProgressWindow::step(const std::string & description) {
-
 	RenderTarget & rt = *g_gr->get_render_target();
 
 	const uint32_t xres = g_gr->get_xres();
