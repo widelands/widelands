@@ -888,12 +888,11 @@ void NetHost::run(bool const autorun)
 						clients.push_back(d->settings.users.at(i).name);
 			DedicatedLog::get()->game_start(clients, game.map().get_name().c_str());
 		}
-		game.run
-			(loaderUI.get(),
-			 d->settings.savegame ? Widelands::Game::Loaded : d->settings.scenario ?
-			 Widelands::Game::NewMPScenario : Widelands::Game::NewNonScenario,
-			 "",
-			 false);
+		game.run(loaderUI.get(),
+		         d->settings.savegame ? Widelands::Game::Loaded : d->settings.scenario ?
+		                                Widelands::Game::NewMPScenario :
+		                                Widelands::Game::NewNonScenario,
+		         "", false, "nethost");
 
 		delete tips;
 
