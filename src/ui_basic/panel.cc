@@ -1104,7 +1104,7 @@ bool Panel::draw_tooltip(RenderTarget & dst, const std::string & text)
 		 tip_width, tip_height);
 	const Point tooltip_bottom_right = r.opposite_of_origin();
 	const Point screen_bottom_right(g_gr->get_xres(), g_gr->get_yres());
-	if (screen_bottom_right.x < tooltip_bottom_right_.x)
+	if (screen_bottom_right.x < tooltip_bottom_right.x)
 		r.x -=  4 + r.w;
 	if (screen_bottom_right.y < tooltip_bottom_right.y)
 		r.y -= 35 + r.h;
