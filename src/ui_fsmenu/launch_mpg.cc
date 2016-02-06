@@ -434,15 +434,9 @@ void FullscreenMenuLaunchMPG::select_saved_game() {
 			warning.run<UI::Panel::Returncodes>();
 		}
 	} else {
-		if (!settings_ || settings_->settings().saved_games.empty())
+		if (!settings_ || settings_->settings().saved_games.empty()) {
 			throw wexception("A file was selected, that is not available to the client");
-		// this file is obviously a file from the dedicated server's saved games pool not available locally.
-		for (uint32_t i = 0; i < settings_->settings().saved_games.size(); ++i)
-			if (settings_->settings().saved_games.at(i).path == filename) {
-				settings_->set_map(filename, filename, settings_->settings().saved_games.at(i).players, true);
-				return;
-			}
-		throw wexception("The selected file could not be found in the pool of dedicated saved games.");
+		}
 	}
 }
 

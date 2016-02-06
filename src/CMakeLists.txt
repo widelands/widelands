@@ -63,16 +63,6 @@ else()
   )
 endif()
 
-wl_binary(wl_dedicated
-  SRCS
-    dedicated_main.cc
-  DEPENDS
-    base_log
-    io_filesystem
-    logic
-    network
-)
-
 add_subdirectory(ai)
 add_subdirectory(base)
 add_subdirectory(chat)
@@ -116,7 +106,6 @@ wl_library(widelands_ball_of_mud
     graphic_text
     graphic_text_layout
     helper
-    io_dedicated_log
     io_filesystem
     logic
     logic_game_controller

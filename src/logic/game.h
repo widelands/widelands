@@ -134,7 +134,6 @@ public:
 	 * or \c false otherwise.
 	 */
 	bool is_loaded() {return m_state == gs_running;}
-	void end_dedicated_game();
 
 	void cleanup_for_load() override;
 

@@ -153,7 +153,6 @@ enum {
 
 	/**
 	 * During game setup, this command is sent by the host to advise clients of a map change.
-	 * Or by a client on a dedicated server to advise a map change.
 	 *
 	 * Payload is:
 	 * \li string: human readable mapname
@@ -179,12 +178,11 @@ enum {
 	 */
 	NETCMD_SETTING_ALLPLAYERS = 7,
 
+	// NOCOM(#sirver): can this be killed?
 	/**
 	 * During game setup, this command updates the information associated to
 	 * one player slot.
 	 *
-	 * The client sends this command to toggle the player type. This is only available if the server is
-	 * dedicated and the client was granted access.
 	 * Payload in that case is:
 	 * \li unsigned_8: number of the player
 	 *
@@ -216,7 +214,6 @@ enum {
 
 	/**
 	 * Sent by the host during game setup to indicate that the game starts.
-	 * Alternatively sent by the client to start a dedicated server.
 	 *
 	 * The client must load the map and setup the game. As soon as the game
 	 * is fully loaded, it must behave as if a \ref NETCMD_WAIT command had
@@ -369,10 +366,9 @@ enum {
 	NETCMD_FILE_PART = 24,
 
 	/**
-	* Sent by the host (or by the client if access was granted to dedicated server)
-	* to change the win condition.
+	* Sent by the host to change the win condition.
 	*
-	* If sent by the host, attached data is:
+	* Attached data is:
 	* \li string: name of the win condition
 	*
 	* If sent by the client, no data is attached, as it is only a request to toggle
@@ -420,41 +416,7 @@ enum {
 	 */
 	NETCMD_SETTING_CHANGEINIT = 28,
 
-	/**
-	 * This is sent by the server to grant access to the settings (as well as to acknowledge the correct
-	 * password if the server is password protected)
-	 */
-	NETCMD_DEDICATED_ACCESS = 29,
-
-	/**
-	 * This is sent by the dedicated server to inform the client about the available maps on the dedicated
-	 * server. Payload is:
-	 *
-	 * \li string:     Path to the map file
-	 * \li unsigned_8: Number of maximum players
-	 * \li bool:       Whether this map can be played as multiplayer scenario
-	 */
-	NETCMD_DEDICATED_MAPS = 30,
-
-	/**
-	 * This is sent by the dedicated server to inform the client about the available saved games on the
-	 * dedicated server. Payload is:
-	 *
-	 * \li string:     Path to the map file
-	 * \li unsigned_8: Number of maximum players
-	 */
-	NETCMD_DEDICATED_SAVED_GAMES = 31,
-
-	/**
-	 * This is sent by the dedicated server to generate a clientsided translated system chat message.
-	 * Payload is:
-	 *
-	 * \li string:    Message code \see NetworkGamingMessages::fill_map()
-	 * \li string:    First attached string
-	 * \li string:    Second attached string
-	 * \li string:    Third attached string
-	 */
-	NETCMD_SYSTEM_MESSAGE_CODE = 32,
+	// 29 - 32 were commands related to dedicated server. Do not use.
 
 	/**
 	 * Sent by the metaserver to a freshly opened game to check connectability

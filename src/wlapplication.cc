@@ -57,7 +57,6 @@
 #include "graphic/text/font_set.h"
 #include "graphic/text_constants.h"
 #include "helper.h"
-#include "io/dedicated_log.h"
 #include "io/filesystem/disk_filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/game.h"
@@ -391,68 +390,6 @@ void WLApplication::run()
 			emergency_save(game);
 			throw;
 		}
-	} else if (game_type_ == INTERNET) {
-		Widelands::Game game;
-		try {
-			// disable sound completely
-			g_sound_handler.nosound_ = true;
-
-			// setup some details of the dedicated server
-			Section & s = g_options.pull_section      ("global");
-			const std::string & meta   = s.get_string ("metaserver",     INTERNET_GAMING_METASERVER.c_str());
-			uint32_t            port   = s.get_natural("metaserverport", INTERNET_GAMING_PORT);
-			const std::string & name   = s.get_string ("nickname",       "dedicated");
-			const std::string & server = s.get_string ("servername",     name.c_str());
-			const bool registered      = s.get_bool   ("registered",     false);
-			const std::string & pwd    = s.get_string ("password",       "");
-			for (;;) { // endless loop
-				if (!InternetGaming::ref().login(name, pwd, registered, meta, port)) {
-					dedicatedlog("ERROR: Could not connect to metaserver (reason above)!\n");
-					return;
-				}
-				std::string realservername(server);
-				bool name_valid = false;
-				while (!name_valid) {
-					name_valid = true;
-					const std::vector<InternetGame> & hosts = InternetGaming::ref().games();
-					for (uint32_t i = 0; i < hosts.size(); ++i) {
-						if (hosts.at(i).name == realservername)
-							name_valid = false;
-					}
-					if (!name_valid)
-						realservername += "*";
-				}
-
-				InternetGaming::ref().set_local_servername(realservername);
-
-				NetHost netgame(name, true);
-
-				// Load the requested map
-				Widelands::Map map;
-				map.set_filename(filename_);
-				std::unique_ptr<Widelands::MapLoader> ml = map.get_correct_loader(filename_);
-				if (!ml) {
-					throw WLWarning
-						("Unsupported format",
-						 "Widelands could not load the file \"%s\". The file format seems to be incompatible.",
-						 filename_.c_str());
-				}
-				ml->preload_map(true);
-
-				// set the map
-				netgame.set_map(map.get_name(), map.get_filename(), map.get_nrplayers());
-
-				// run the network game
-				// -> autostarts when a player sends "/start" as pm to the server.
-				netgame.run(true);
-
-				InternetGaming::ref().logout();
-			}
-		} catch (const std::exception & e) {
-			log("Fatal exception: %s\n", e.what());
-			emergency_save(game);
-			throw;
-		}
 	} else {
 		g_sound_handler.start_music("intro");
 
@@ -749,7 +686,6 @@ bool WLApplication::init_settings() {
 	s.get_bool("remove_syncstreams");
 	s.get_bool("sound_at_message");
 	s.get_bool("transparent_chat");
-	s.get_bool("dedicated_saving"); // saving via chatcommand on dedicated servers -> nethost.cc
 	s.get_string("registered");
 	s.get_string("nickname");
 	s.get_string("password");
@@ -957,17 +893,6 @@ void WLApplication::handle_commandline_parameters()
 			filename_.erase(filename_.size() - 1);
 		game_type_ = SCENARIO;
 		commandline_.erase("scenario");
-	}
-	if (commandline_.count("dedicated")) {
-		if (game_type_ != NONE)
-			throw wexception("dedicated can not be combined with other actions");
-		filename_ = commandline_["dedicated"];
-		if (filename_.empty())
-			throw wexception("empty value of commandline parameter --dedicated");
-		if (*filename_.rbegin() == '/')
-			filename_.erase(filename_.size() - 1);
-		game_type_ = INTERNET;
-		commandline_.erase("dedicated");
 	}
 	if (commandline_.count("script")) {
 		script_to_run_ = commandline_["script"];

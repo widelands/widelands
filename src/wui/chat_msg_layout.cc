@@ -58,8 +58,7 @@ std::string format_as_old_richtext(const ChatMessage& chat_message) {
 	//
 	// Note that we do want host and meta server to send some richtext code,
 	// as the ability to send formatted commands is nice for the usability
-	// of meta server and dedicated servers, so we're treading a bit of a
-	// fine line here.
+	// of meta server so we're treading a bit of a fine line here.
 	std::string sanitized;
 	for (std::string::size_type pos = 0; pos < chat_message.msg.size(); ++pos) {
 		if (chat_message.msg[pos] == '<') {
@@ -157,8 +156,7 @@ std::string format_as_richtext(const ChatMessage& chat_message) {
 	//
 	// Note that we do want host and meta server to send some richtext code,
 	// as the ability to send formatted commands is nice for the usability
-	// of meta server and dedicated servers, so we're treading a bit of a
-	// fine line here.
+	// of meta server so we're treading a bit of a fine line here.
 	std::string sanitized;
 	for (std::string::size_type pos = 0; pos < chat_message.msg.size(); ++pos) {
 		if (chat_message.msg[pos] == '<') {
