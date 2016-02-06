@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006, 2008-2011, 2015 by the Widelands Development Team
+ * Copyright (C) 2002-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -60,11 +60,11 @@ struct Button : public NamedPanel {
 
 	void set_pic(const Image* pic);
 	void set_title(const std::string &);
-	const std::string & get_title() const {return m_title;}
+	const std::string & get_title() const {return title_;}
 
-	bool enabled() const {return m_enabled;}
+	bool enabled() const {return enabled_;}
 	void set_enabled(bool on);
-	void set_repeating(bool const on) {m_repeating = on;}
+	void set_repeating(bool const on) {repeating_ = on;}
 	bool is_snap_target() const override {return true;}
 
 	// Drawing and event handlers
@@ -78,7 +78,7 @@ struct Button : public NamedPanel {
 
 	// Set the permanently pressed state of the button
 	void set_perm_pressed(bool state);
-	bool get_perm_pressed() const {return m_permpressed;}
+	bool get_perm_pressed() const {return permpressed_;}
 
 	// Set button to flat / not flat
 	void set_flat(bool flat);
@@ -92,23 +92,23 @@ struct Button : public NamedPanel {
 protected:
 	virtual void clicked() {} /// Override this to react on the click.
 
-	bool        m_highlighted;    //  mouse is over the button
-	bool        m_pressed;        //  mouse is clicked over the button
-	bool        m_permpressed;    //  button should appear  pressed
-	bool        m_enabled;
-	bool        m_repeating;
-	bool        m_flat;
-	bool        m_keep_image_size; // Keep image's original size and center it
-	bool        m_draw_flat_background;
+	bool        highlighted_;    //  mouse is over the button
+	bool        pressed_;        //  mouse is clicked over the button
+	bool        permpressed_;    //  button should appear  pressed
+	bool        enabled_;
+	bool        repeating_;
+	bool        flat_;
+	bool        keep_image_size_; // Keep image's original size and center it
+	bool        draw_flat_background_;
 
-	uint32_t     m_time_nextact;
+	uint32_t     time_nextact_;
 
-	std::string m_title;          //  title string used when _mypic == 0
+	std::string title_;          //  title string used when _mypic == 0
 
-	const Image* m_pic_background; //  background texture (picture ID)
-	const Image* m_pic_custom;     //  custom icon on the button
+	const Image* pic_background_; //  background texture (picture ID)
+	const Image* pic_custom_;     //  custom icon on the button
 
-	RGBColor    m_clr_down; //  color of border while a flat button is "down"
+	RGBColor    clr_down_; //  color of border while a flat button is "down"
 };
 
 } // namespace UI
