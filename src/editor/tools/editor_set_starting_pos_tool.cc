@@ -25,6 +25,29 @@
 #include "logic/map.h"
 #include "wui/field_overlay_manager.h"
 
+namespace {
+static char const * const player_pictures[] = {
+	"images/players/editor_player_01_starting_pos.png",
+	"images/players/editor_player_02_starting_pos.png",
+	"images/players/editor_player_03_starting_pos.png",
+	"images/players/editor_player_04_starting_pos.png",
+	"images/players/editor_player_05_starting_pos.png",
+	"images/players/editor_player_06_starting_pos.png",
+	"images/players/editor_player_07_starting_pos.png",
+	"images/players/editor_player_08_starting_pos.png"
+};
+static char const * const player_pictures_small[] = {
+	"images/players/fsel_editor_set_player_01_pos.png",
+	"images/players/fsel_editor_set_player_02_pos.png",
+	"images/players/fsel_editor_set_player_03_pos.png",
+	"images/players/fsel_editor_set_player_04_pos.png",
+	"images/players/fsel_editor_set_player_05_pos.png",
+	"images/players/fsel_editor_set_player_06_pos.png",
+	"images/players/fsel_editor_set_player_07_pos.png",
+	"images/players/fsel_editor_set_player_08_pos.png"
+};
+} // namespace
+
 // global variable to pass data from callback to class
 static int32_t m_current_player;
 
@@ -58,7 +81,7 @@ EditorSetStartingPosTool::EditorSetStartingPosTool()
 	: EditorTool(*this, *this, false), m_current_sel_pic(nullptr)
 {
 	m_current_player = 0;
-	strcpy(fsel_picsname, FSEL_PIC_FILENAME);
+	fsel_picsname = "images/players/fsel_editor_set_player_01_pos.png";
 }
 
 int32_t EditorSetStartingPosTool::handle_click_impl(const Widelands::World&,
@@ -81,20 +104,18 @@ int32_t EditorSetStartingPosTool::handle_click_impl(const Widelands::World&,
 
 		Widelands::Coords const old_sp = map->get_starting_pos(m_current_player);
 
-		char picname[] = "pics/editor_player_00_starting_pos.png";
-		picname[19] += m_current_player / 10;
-		picname[20] += m_current_player % 10;
-		const Image* pic = g_gr->images().get(picname);
+		const Image* player_image = g_gr->images().get(player_pictures[m_current_player - 1]);
+		assert(player_image);
 
 		//  check if field is valid
 		if (editor_tool_set_starting_pos_callback(map->get_fcoords(center.node), *map)) {
 			FieldOverlayManager * overlay_manager = eia.mutable_field_overlay_manager();
 			//  remove old overlay if any
-			overlay_manager->remove_overlay(old_sp, pic);
+			overlay_manager->remove_overlay(old_sp, player_image);
 
 			//  add new overlay
 			overlay_manager->register_overlay(
-			   center.node, pic, 4, Point(pic->width() / 2, STARTING_POS_HOTSPOT_Y));
+				center.node, player_image, 4, Point(player_image->width() / 2, STARTING_POS_HOTSPOT_Y));
 
 			//  set new player pos
 			map->set_starting_pos(m_current_player, center.node);
@@ -112,8 +133,6 @@ Widelands::PlayerNumber EditorSetStartingPosTool::get_current_player
 
 void EditorSetStartingPosTool::set_current_player(int32_t const i) {
 	m_current_player = i;
-
-	fsel_picsname[28] = '0' + m_current_player / 10;
-	fsel_picsname[29] = '0' + m_current_player % 10;
+	fsel_picsname = player_pictures_small[m_current_player - 1];
 	m_current_sel_pic = fsel_picsname;
 }

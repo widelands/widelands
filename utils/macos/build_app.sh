@@ -46,7 +46,7 @@ function FixDependencies {
    dylibbundler -b -of \
       -p '@executable_path/' \
       -d $DESTINATION/Widelands.app/Contents/MacOS \
-      -x $DESTINATION/Widelands.app/Contents/MacOS/${binary} 
+      -x $DESTINATION/Widelands.app/Contents/MacOS/${binary}
 }
 
 function CopyAndFixDependencies {
@@ -67,7 +67,7 @@ function MakeAppPackage {
    mkdir $DESTINATION/Widelands.app/Contents/
    mkdir $DESTINATION/Widelands.app/Contents/Resources/
    mkdir $DESTINATION/Widelands.app/Contents/MacOS/
-   cp $SOURCE_DIR/pics/widelands.icns $DESTINATION/Widelands.app/Contents/Resources/widelands.icns
+   cp $SOURCE_DIR/data/images/logos/widelands.icns $DESTINATION/Widelands.app/Contents/Resources/widelands.icns
    ln -s /Applications $DESTINATION/Applications
 
    cat > $DESTINATION/Widelands.app/Contents/Info.plist << EOF
@@ -85,24 +85,10 @@ function MakeAppPackage {
 EOF
 
    echo "Copying data files ..."
-   rsync -Ca $SOURCE_DIR/ $DESTINATION/Widelands.app/Contents/MacOS/ \
-      --exclude "build" \
-      --exclude "cmake" \
-      --exclude "doc" \
-      --exclude "locale" \
-      --exclude "manual_test" \
-      --exclude "po" \
-      --exclude "src" \
-      --exclude "test" \
-      --exclude "utils" \
-      --exclude "*.cmake" \
-      --exclude "*.py" \
-      --exclude "*.sh" \
-      --exclude ".*" \
-      --exclude "CMakeLists*"
+   rsync -Ca $SOURCE_DIR/data $DESTINATION/Widelands.app/Contents/MacOS/
 
    echo "Copying locales ..."
-   rsync -Ca locale $DESTINATION/Widelands.app/Contents/MacOS/
+   rsync -Ca locale $DESTINATION/Widelands.app/Contents/MacOS/data/
 
    echo "Copying binary ..."
    cp -a src/widelands $DESTINATION/Widelands.app/Contents/MacOS/
@@ -116,12 +102,12 @@ EOF
    pushd $DESTINATION/Widelands.app/Contents/MacOS/
    ln -s libpng*.dylib libpng.dylib
    popd
-   CopyAndFixDependencies "/usr/local/lib/libjpeg.dylib"  
+   CopyAndFixDependencies "/usr/local/lib/libjpeg.dylib"
 
    echo "Copying dynamic libraries for SDL_mixer ... "
-   CopyAndFixDependencies /usr/local/lib/libogg.dylib  
-   CopyAndFixDependencies /usr/local/lib/libvorbis.dylib 
-   CopyAndFixDependencies /usr/local/lib/libvorbisfile.dylib 
+   CopyAndFixDependencies /usr/local/lib/libogg.dylib
+   CopyAndFixDependencies /usr/local/lib/libvorbis.dylib
+   CopyAndFixDependencies /usr/local/lib/libvorbisfile.dylib
 }
 
 function BuildWidelands() {

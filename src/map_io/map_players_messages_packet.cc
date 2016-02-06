@@ -126,7 +126,7 @@ void MapPlayersMessagesPacket::read
 									(static_cast<Message::Type>(s->get_natural("type")),
 									 sent,
 									 name,
-									 "pics/menu_build_flag.png",
+									 "images/wui/fieldaction/menu_build_flag.png",
 									 name,
 									 s->get_safe_string("body"),
 									 get_coords("position", extent, Coords::null(), s),
@@ -195,8 +195,6 @@ void MapPlayersMessagesPacket::write
 				break;
 			case Message::Status::kArchived: //  The default status. Do not write.
 				break;
-			default:
-				assert(false);
 			}
 			if (message.serial()) {
 				const MapObject* mo = egbase.objects().get_object(message.serial());

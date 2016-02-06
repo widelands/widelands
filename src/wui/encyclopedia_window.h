@@ -40,8 +40,8 @@ struct EncyclopediaWindow : public UI::UniqueWindow {
 
 private:
 	struct EncyclopediaEntry {
-		EncyclopediaEntry(const EncyclopediaEntry& other) = default;
-		EncyclopediaEntry& operator = (const EncyclopediaEntry& other) = default;
+		EncyclopediaEntry(const EncyclopediaEntry&) = default;
+		EncyclopediaEntry& operator = (const EncyclopediaEntry&) = default;
 		EncyclopediaEntry(const Widelands::DescriptionIndex _index,
 		                  const std::string& _descname,
 		                  const Image* _icon)

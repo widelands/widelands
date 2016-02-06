@@ -43,7 +43,7 @@ struct EditorPlaceBobTool : public EditorTool, public MultiSelect {
 
 	EditorActionArgs format_args_impl(EditorInteractive & parent) override;
 
-	char const * get_sel_impl() const override {return "pics/fsel_editor_place_bob.png";}
+	char const * get_sel_impl() const override {return "images/wui/editor/fsel_editor_place_bob.png";}
 };
 
 #endif  // end of include guard: WL_EDITOR_TOOLS_EDITOR_PLACE_BOB_TOOL_H

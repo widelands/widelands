@@ -53,20 +53,20 @@ struct Textarea : public Panel {
 		(Panel * parent,
 		 int32_t x, int32_t y,
 		 const std::string & text = std::string(),
-		 Align align = Align_Left);
+		 Align align = UI::Align::kLeft);
 	Textarea
 		(Panel * parent,
 		 int32_t x, int32_t y, uint32_t w, uint32_t h,
-		 Align align = Align_Left);
+		 Align align = UI::Align::kLeft);
 	Textarea
 		(Panel *  const parent,
 		 int32_t x, int32_t y, uint32_t w, uint32_t h,
 		 const std::string & text,
-		 Align align = Align_Left);
+		 Align align = UI::Align::kLeft);
 	Textarea
 		(Panel * parent,
 		 const std::string & text = std::string(),
-		 Align align = Align_Left);
+		 Align align = UI::Align::kLeft);
 
 	/**
 	 * If fixed_width > 0, the Textarea will not change its width.

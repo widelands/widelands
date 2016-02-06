@@ -20,6 +20,7 @@
 #include "editor/ui_menus/editor_tool_menu.h"
 
 #include "base/i18n.h"
+#include "base/wexception.h"
 #include "editor/editorinteractive.h"
 #include "editor/tools/editor_decrease_height_tool.h"
 #include "editor/tools/editor_decrease_resources_tool.h"
@@ -58,7 +59,7 @@ UI::UniqueWindow(&parent, "tool_menu", &registry, 350, 400, _("Tools"))
    radioselect_.add_button                                                   \
       (this,                                                                  \
        pos,                                                                   \
-       g_gr->images().get("pics/editor_menu_tool_" pic ".png"),       \
+       g_gr->images().get("images/wui/editor/editor_menu_tool_" pic ".png"),       \
        tooltip);                                                              \
    pos.x += width + spacing;                                                  \
 
@@ -140,7 +141,7 @@ void EditorToolMenu::changed_to() {
 		current_registry_pointer = nullptr; // no need for a window
 		break;
 	default:
-		assert(false);
+		NEVER_HERE();
 		break;
 	}
 
@@ -151,7 +152,6 @@ void EditorToolMenu::changed_to() {
 		parent.mutable_field_overlay_manager()->register_overlay_callback_function(
 		   boost::bind(&editor_Tool_set_port_space_callback, _1, boost::ref(map)));
 		map.recalc_whole_map(parent.egbase().world());
-		update();
 	}
 
 	if (current_registry_pointer) {
@@ -200,7 +200,7 @@ void EditorToolMenu::changed_to() {
 					*current_registry_pointer);
 				break;
 			default:
-				assert(false);
+				NEVER_HERE();
 			}
 	}
 }

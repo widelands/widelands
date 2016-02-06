@@ -441,7 +441,7 @@ void Immovable::draw
 {
 	if (m_anim) {
 		if (!m_anim_construction_total)
-			dst.drawanim(pos, m_anim, game.get_gametime() - m_animstart, nullptr);
+			dst.blit_animation(pos, m_anim, game.get_gametime() - m_animstart);
 		else
 			draw_construction(game, dst, pos);
 	}
@@ -477,14 +477,16 @@ void Immovable::draw_construction
 
 	uint32_t lines = ((done % units_per_frame) * curh) / units_per_frame;
 
+	assert(get_owner() != nullptr);  // Who would build something they do not own?
+	const RGBColor& player_color = get_owner()->get_playercolor();
 	if (current_frame > 0) {
 		// Not the first pic, so draw the previous one in the back
-		dst.drawanim(pos, m_anim, (current_frame - 1) * frametime, get_owner());
+		dst.blit_animation(pos, m_anim, (current_frame - 1) * frametime, player_color);
 	}
 
 	assert(lines <= curh);
-	dst.drawanimrect
-		(pos, m_anim, current_frame * frametime, get_owner(), Rect(Point(0, curh - lines), curw, lines));
+	dst.blit_animation(pos, m_anim, current_frame * frametime, player_color,
+	                   Rect(Point(0, curh - lines), curw, lines));
 
 	// Additionally, if statistics are enabled, draw a progression string
 	if (game.get_ibase()->get_display_flags() & InteractiveBase::dfShowStatistics) {
@@ -497,7 +499,7 @@ void Immovable::draw_construction
 		dst.blit(pos - Point(0, 48),
 				 UI::g_fh1->render(m_construct_string),
 				 BlendMode::UseAlpha,
-				 UI::Align_Center);
+				 UI::Align::kCenter);
 	}
 }
 

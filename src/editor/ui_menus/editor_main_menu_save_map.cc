@@ -57,7 +57,7 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive& parent)
                      tabley_ + tableh_ + 3 * padding_ - 1,
                      get_inner_w() - right_column_x_ - padding_,
                      buth_,
-                     g_gr->images().get("pics/but1.png"),
+							g_gr->images().get("images/ui_basic/but1.png"),
                      _("Make Directory")),
      edit_options_(this,
                    "edit_options",
@@ -65,7 +65,7 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive& parent)
                    tabley_ + tableh_ - buth_,
                    get_inner_w() - right_column_x_ - padding_,
                    buth_,
-                   g_gr->images().get("pics/but5.png"),
+						 g_gr->images().get("images/ui_basic/but5.png"),
                    _("Map Options")),
      editbox_label_(this,
                     padding_,
@@ -73,7 +73,7 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive& parent)
                     butw_,
                     buth_,
                     _("Filename:"),
-                    UI::Align::Align_Left) {
+                    UI::Align::kLeft) {
 
 	// Make room for edit_options_
 	map_details_.set_size(map_details_.get_w(), map_details_.get_h() - buth_ - padding_);
@@ -86,9 +86,7 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive& parent)
 	                           editbox_label_.get_x() + editbox_label_.get_w() + padding_,
 	                           editbox_label_.get_y(),
 	                           tablew_ - editbox_label_.get_w() - padding_ + 1,
-	                           buth_,
-	                           g_gr->images().get("pics/but1.png"),
-	                           UI::Align::Align_Left);
+										g_gr->images().get("images/ui_basic/but1.png"));
 
 	editbox_->set_text(parent.egbase().map().get_name());
 	editbox_->changed.connect(boost::bind(&MainMenuSaveMap::edit_box_changed, this));

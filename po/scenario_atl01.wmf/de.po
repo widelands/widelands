@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2015 Widelands Development Team
+# Copyright (C) 2005-2016 Widelands Development Team
 # 
 # Translators:
 # wl-zocker, 2014
@@ -15,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-12-03 09:55+0000\n"
-"PO-Revision-Date: 2015-12-03 10:44+0000\n"
+"POT-Creation-Date: 2016-01-31 20:26+0000\n"
+"PO-Revision-Date: 2016-02-01 14:59+0000\n"
 "Last-Translator: Venatrix\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -32,14 +32,14 @@ msgctxt "message_short_title"
 msgid "Building lost!"
 msgstr "Gebäude verloren!"
 
+#: ../../campaigns/atl01.wmf/scripting/init.lua:76
+msgid "We lost a building to the ocean!"
+msgstr "Wir haben ein Gebäude an das Meer verloren!"
+
 #: ../../campaigns/atl01.wmf/scripting/init.lua:82
 msgctxt "message_heading"
 msgid "Building lost!"
 msgstr "Gebäude verloren!"
-
-#: ../../campaigns/atl01.wmf/scripting/init.lua:76
-msgid "We lost a building to the ocean!"
-msgstr "Wir haben ein Gebäude an das Meer verloren!"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:32
 msgid "Ensure the supply of building wares"
@@ -899,6 +899,7 @@ msgid ""
 msgstr "Du hast diese Mission abgeschlossen. Fahre mit der nächsten fort oder spiele weiter, solange du magst."
 
 #: ../../scripting/format_scenario.lua:36
+#, lua-format
 msgid "“%s”"
 msgstr "„%s“"
 

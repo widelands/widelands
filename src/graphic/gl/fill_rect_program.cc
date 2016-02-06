@@ -103,9 +103,6 @@ void FillRectProgram::draw(const std::vector<Arguments>& arguments) {
 		case BlendMode::Copy:
 			glDisable(GL_BLEND);
 			break;
-
-		default:
-			break;
 		}
 
 		glUseProgram(gl_program_.object());
@@ -195,9 +192,6 @@ void FillRectProgram::draw(const std::vector<Arguments>& arguments) {
 
 		case BlendMode::Copy:
 			glEnable(GL_BLEND);
-			break;
-
-		default:
 			break;
 		}
 	}

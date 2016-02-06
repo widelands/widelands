@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006, 2008 by the Widelands Development Team
+ * Copyright (C) 2002-2016, 2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -50,8 +50,8 @@ struct GameChatMenu : public UI::UniqueWindow {
 private:
 	GameChatMenu(UI::Panel *, UI::UniqueWindow::Registry &, ChatProvider &, const std::string & title);
 	void acknowledge();
-	GameChatPanel m_chat;
-	bool m_close_on_send;
+	GameChatPanel chat_;
+	bool close_on_send_;
 };
 
 #endif  // end of include guard: WL_WUI_GAME_CHAT_MENU_H

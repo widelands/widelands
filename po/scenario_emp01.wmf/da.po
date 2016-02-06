@@ -1,15 +1,16 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2015 Widelands Development Team
+# Copyright (C) 2005-2016 Widelands Development Team
 # 
 # Translators:
-# Joe Hansen <joedalton2@yahoo.dk>, 2015
+# Joe Hansen <joedalton2@yahoo.dk>, 2015-2016
+# Ole Laursen <ole.laursen@gmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-18 08:43+0000\n"
-"PO-Revision-Date: 2015-11-18 08:43+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2016-01-31 20:26+0000\n"
+"PO-Revision-Date: 2016-02-02 14:52+0000\n"
+"Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
 "Language-Team: Danish (http://www.transifex.com/widelands/widelands/language/da/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,7 +20,7 @@ msgstr ""
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:28
 msgid "Build a blockhouse"
-msgstr ""
+msgstr "Byg et blokhus"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:30
 msgid "Blockhouse"
@@ -29,35 +30,35 @@ msgstr "Blokhus"
 msgid ""
 "Build a blockhouse at the red house symbol on the east side of the forests, "
 "to the right of your provisional headquarters."
-msgstr ""
+msgstr "Byg et blokhus ved det røde hussymbol på det østlige side af skoven, to til højre for dit midlertidige hovedkvarter."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:37
 msgid "Build a lumberjack’s house"
-msgstr "Byge en skovhuggerbygning"
+msgstr "Byge en skovhuggerhytte"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:39
 msgid "Lumberjack’s House"
-msgstr "Skovhuggerbygning"
+msgstr "Skovhuggerhytte"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:40
 msgid ""
 "Build a lumberjack’s house at the red house symbol, south of your "
 "provisional headquarters."
-msgstr "Byg en skovhuggerbygning ved det røde hus symbol, syd for dit midlertidige hovedkvarter."
+msgstr "Byg en skovhuggerhytte ved det røde hussymbol, syd for dit midlertidige hovedkvarter."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:46
 msgid "Build 2 lumberjack’s houses and a sawmill"
-msgstr "Byg 2 skovhuggerbygninger og et savværk"
+msgstr "Byg 2 skovhuggerhytter og et savværk"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:48
 msgid "Two Lumberjack’s Houses and a Sawmill"
-msgstr "To skovhuggerbygninger og et savværk"
+msgstr "To skovhuggerhytter og et savværk"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:49
 msgid ""
 "Build two more lumberjack’s houses and a sawmill as soon as there is enough "
 "space for them."
-msgstr "Byg to yderligere skovhuggerbygninger og et savværk så snart der er nok plads til dem."
+msgstr "Byg to yderligere skovhuggerhytter og et savværk så snart der er nok plads til dem."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:55
 msgid "Build a forester’s house"
@@ -83,7 +84,7 @@ msgstr "Stenbrud"
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:67
 msgid ""
 "Build a quarry in the south to cut some granite and marble out of the rocks."
-msgstr ""
+msgstr "Opfør et stenbrud mod syd for at hugge granit og marmor ud af klipperne."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:68
 msgid "These might be used for future buildings."
@@ -98,7 +99,7 @@ msgstr "En mørk nat"
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:112
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:225
 msgid "Diary of Lutius"
-msgstr "Lutius dagbog"
+msgstr "Lutius' dagbog"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:81
@@ -116,7 +117,7 @@ msgid ""
 "forest. Soon, we met a Barbarian tribe, which at first was friendly. A few "
 "of my men even traded with them and their children came to us, to admire our"
 " clean and tidy uniforms and weapons."
-msgstr ""
+msgstr "Med en hær på 150 mænd, blev jeg tildelt opgaven med at patruljere vores nordlige grænse, som ligger nær Galdinbjergene i en stor, smuk og gammel skov. Snart mødte vi en barbarstamme, som først virkede venlige. Nogle få af mine mænd handlede med dem og deres børn kom til os, for at beundre vores rene og ordentlige uniformer og våben."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:87
@@ -149,7 +150,7 @@ msgstr ""
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:99
 msgid "The Rough Sea"
-msgstr ""
+msgstr "Hård sø"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:102
@@ -169,12 +170,12 @@ msgstr ""
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:111
 msgid "Survivors"
-msgstr ""
+msgstr "Overlevende"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:114
 msgid "Finally, the Gods were with us!"
-msgstr "Endelig, guderne var med os!"
+msgstr "Endelig var guderne med os!"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:117
@@ -194,7 +195,7 @@ msgstr ""
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:126
 msgid "A Foreboding"
-msgstr ""
+msgstr "Et varsel"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:127
 msgid "Saledus looks around nervously…"
@@ -427,6 +428,7 @@ msgid ""
 msgstr ""
 
 #: ../../scripting/format_scenario.lua:36
+#, lua-format
 msgid "“%s”"
 msgstr "»%s«"
 

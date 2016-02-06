@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2011 by the Widelands Development Team
+ * Copyright (C) 2008-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -54,7 +54,7 @@ private:
 	void key_enter();
 	void key_escape();
 
-	ChatProvider & m_chat;
+	ChatProvider & chat_;
 	UI::MultilineTextarea chatbox;
 	UI::EditBox editbox;
 	uint32_t chat_message_counter;

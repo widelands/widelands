@@ -1,16 +1,16 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2015 Widelands Development Team
+# Copyright (C) 2005-2016 Widelands Development Team
 # 
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2011
-# Juanjo, 2015
+# Juanjo, 2015-2016
 # Juanjo, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-12-03 09:55+0000\n"
-"PO-Revision-Date: 2015-12-03 21:46+0000\n"
+"POT-Creation-Date: 2016-01-23 08:23+0000\n"
+"PO-Revision-Date: 2016-01-31 13:05+0000\n"
 "Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -46,6 +46,7 @@ msgid ""
 msgstr "Aquest joc és lliure i de codi obert (FOSS, Free and Open Source), distribuït sota llicència pública general (GPL) GNU v2.0."
 
 #: ../../txts/LICENSE.lua:26
+#, lua-format
 msgid ""
 "You can find more information on FOSS and the GPL by visiting the following "
 "webpage:  %s"
@@ -136,7 +137,7 @@ msgid ""
 "all areas. If you are interested in contributing – be it by making graphics,\n"
 "fixing bugs or adding new features, translating the game into your language or\n"
 "creating new maps – get in touch on our homepage."
-msgstr "El Widelands té acabades pràcticament totes les funcions, és entretingut\njugar-hi sol i encara més en mode multijugador. Encara hi ha feina per fer en\ntotes les àrees. Si esteu interessat en contribuir-hi, sigui fent gràfics, corregint errors,\nafegint-hi noves funcions, traduint el joc o bé creant nous mapes, poseu-vos en\ncontacte al nostre lloc web."
+msgstr "El Widelands té acabades pràcticament totes les funcions, és entretingut\njugar-hi sol i encara més en mode multijugador. Encara hi ha feina per fer en\ntotes les àrees. Si esteu interessat a contribuir-hi, sigui fent gràfics, corregint errors,\nafegint-hi noves funcions, traduint el joc o bé creant nous mapes, poseu-vos en\ncontacte al nostre lloc web."
 
 #: ../../txts/README.lua:45
 msgid "General game control"
@@ -147,20 +148,20 @@ msgid ""
 "To close an open window, right-click on it. To minimize/maximize a window, "
 "click on it with the middle mouse button or with the left mouse button while"
 " holding down Ctrl."
-msgstr "Per tancar una finestra oberta, cliqueu amb el botó dret. Per minimitzar/maximitzar una finestra,\ncliqueu la barra de títol amb el botó del mig o amb l'esquerre mentre\nmanteniu premuda la tecla «Ctrl»."
+msgstr "Per tancar una finestra oberta, cliqueu amb el botó dret. Per minimitzar/maximitzar una finestra,\ncliqueu la barra de títol amb el botó del mig o amb l'esquerre mentre\nmanteniu premuda la tecla Ctrl."
 
 #: ../../txts/README.lua:49
 msgid ""
 "If you hold Ctrl while building a road, flags will be placed automatically.\n"
 "If you hold Ctrl while removing a road, all flags up to the first junction are\n"
 "removed."
-msgstr "Si manteniu premuda la tecla «Ctrl» mentre construïu un camí, automàticament\nes plantaran banderes al llarg d'aquest. Si ho feu mentre retireu un camí,\nes destruiran tots els camins i banderes fins a trobar una cruïlla."
+msgstr "Si manteniu premuda la tecla Ctrl mentre construïu un camí, automàticament\nes plantaran banderes al llarg d'aquest. Si ho feu mentre retireu un camí,\nes destruiran tots els camins i banderes fins a trobar una cruïlla."
 
 #: ../../txts/README.lua:53
 msgid ""
 "You can skip confirmation windows for irreversible actions if you hold Ctrl\n"
 "while clicking on the action button."
-msgstr "Podeu saltar-vos les finestres de confirmació d'accions irreversibles\nsi manteniu la tecla «Ctrl» premuda mentre cliqueu el botó d'acció."
+msgstr "Podeu saltar les finestres de confirmació d'accions irreversibles\nsi manteniu la tecla Ctrl premuda mentre cliqueu el botó d'acció."
 
 #: ../../txts/README.lua:56
 msgid "Keyboard shortcuts (in-game)"
@@ -294,11 +295,12 @@ msgid ""
 msgstr "Una descripció detallada de les economies està disponible a l'enciclopèdia tribal. Es pot consultar mentre s'està jugant."
 
 #: ../../txts/README.lua:92
+#, lua-format
 msgid ""
 "If you need more documentation or help for Widelands or the Widelands "
 "Editor, be sure to visit our homepage at %s. You can find online help in our"
 " Wiki there."
-msgstr "Si necessiteu ajuda o informació per al Widelands p el seu editor,\nvisiteu el nostre lloc web en %s. A la wiki, trobareu ajuda actualitzada."
+msgstr "Si necessiteu ajuda o informació per al Widelands o el seu editor,\nvisiteu el nostre lloc web en %s. Al wiki, trobareu ajuda actualitzada."
 
 #: ../../txts/README.lua:94
 msgid "Reporting Bugs"
@@ -332,7 +334,7 @@ msgstr "- Quina versió del Widelands esteu usant (és a dir, el número de vers
 msgid ""
 "- Please also include which operating system you are running Widelands on as\n"
 "some bugs can be platform specific."
-msgstr "- Per favor, incloeu també el sistema operatiu que feu servir per jugar al Widelands\nja que alguns errors poden ser específics de la plataforma."
+msgstr "- Per favor, incloeu també el sistema operatiu que feu servir per jugar al Widelands,\nja que alguns errors poden ser específics de la plataforma."
 
 #: ../../txts/README.lua:112
 msgid "- Which map you were playing when the bug occurred."
@@ -372,7 +374,7 @@ msgid ""
 "to become incompatible and to ‘go out of sync’. This is similar to how network\n"
 "games will suffer from desynchronization problems if one of the players has a\n"
 "different version of the game."
-msgstr "Usant l'opció de veure la repetició del menú principal podreu reconstruir i veure\nperfectament una partida jugada anteriorment. Cal tenir en compte que els petits\ncanvis en el codi del Widelands poden fer que partides desades amb altres versions\nsiguin incompatibles i es dessincronitzin. Això també passa amb partides\nmultijugador quan els jugadors tenen diferents versions del joc."
+msgstr "Usant l'opció de veure la repetició del menú principal podreu reconstruir i veure\nperfectament una partida jugada anteriorment. Cal tenir en compte que els petits\ncanvis en el codi del Widelands poden fer que partides desades amb altres versions\nsiguin incompatibles i es desincronitzin. Això també passa amb partides\nmultijugador quan els jugadors tenen diferents versions del joc."
 
 #: ../../txts/README.lua:136
 msgid ""
@@ -380,7 +382,7 @@ msgid ""
 "can be useful as attachments to bug reports. The replay files are saved in the\n"
 "~/.widelands/replays directory on Linux and Mac OS X. On Windows,\n"
 "they are in the ‘replays’ subdirectory of your Widelands installation."
-msgstr "Les repeticions són una eina útil per trobar errors del programa,\naixí que pot ser útil adjuntar-les en informes d'errors. En Linux i Mac OS X,\nels arxius de repetició es desen al directori «~/.widelands/replays» .\nEn Windows, al directori «replays» on està instal·lat el Widelands."
+msgstr "Les repeticions són una eina útil per trobar errors del programa,\naixí que pot ser útil adjuntar-les en informes d'errors. En Linux i Mac OS X,\nels arxius de repetició es desen al directori «~/.widelands/replays».\nEn Windows, al directori «replays» on està instal·lat el Widelands."
 
 #: ../../txts/developers.lua:3
 msgid "Atlantean"
@@ -434,11 +436,10 @@ msgstr "FreeBSD"
 msgid "Graphicians"
 msgstr "Grafistes"
 
-#: ../../txts/developers.lua:3 ../../txts/developers.lua:3
+#: ../../txts/developers.lua:3
 msgid "Graphics"
 msgstr "Gràfics"
 
-#: ../../txts/developers.lua:3 ../../txts/developers.lua:3
 #: ../../txts/developers.lua:3
 msgid "Homepage"
 msgstr "Pàgina inicial"
@@ -471,7 +472,7 @@ msgstr "Altres"
 msgid "Packagers"
 msgstr "Empaquetadors"
 
-#: ../../txts/developers.lua:3 ../../txts/developers.lua:3
+#: ../../txts/developers.lua:3
 msgid "Sound"
 msgstr "So"
 
@@ -517,9 +518,10 @@ msgstr "L'editor és per als jugadors que volen dissenyar els seus propis mapes 
 msgid ""
 "As you can see, this editor is heavy work in progress and as the editor "
 "becomes better and better, this text will also get longer and more complete."
-msgstr "Tal i com podeu veure, l'editor està encara en procés de construcció. Conforme millori l'editor, aquests textos també s'aniran completant."
+msgstr "Tal com podeu veure, l'editor està encara en procés de construcció. A mesura que millori l'editor, aquests textos també s'aniran completant."
 
 #: ../../txts/editor_readme.lua:14
+#, lua-format
 msgid "Please have a look at our enduser manuals on our wiki pages at: %s"
 msgstr "Per favor, doneu un cop d'ull al manual de l'usuari en les nostres pàgines wiki en: %s"
 
@@ -635,7 +637,7 @@ msgstr "canvia la mida d'eina"
 #. TRANSLATORS: This is a hotkey
 #: ../../txts/editor_readme.lua:43
 msgid "Shift (Hold):"
-msgstr "Maj. (mantinguda premuda):"
+msgstr "Maj (mantinguda premuda):"
 
 #: ../../txts/editor_readme.lua:43
 msgid "selects first alternative tool while pressed"
@@ -679,20 +681,20 @@ msgstr "Construïu sempre cabanes de guarda forestal i del guarda de caça, per 
 msgid ""
 "You can find general help for the editor as well as a short tutorial on our "
 "wiki at www.widelands.org"
-msgstr "Podeu trobar ajuda general per a l'editor i un breu tutorial a la nostra wiki en www.widelands.org (en anglès)."
+msgstr "Podeu trobar ajuda general per a l'editor i un breu tutorial al nostre wiki en www.widelands.org (en anglès)."
 
 #: ../../txts/tips/editor.tip:6
 msgid ""
 "You can select multiple animal types if you hold down Ctrl during selection."
 " If you then click on the map, an instance of one of the selected animal "
 "types will be placed."
-msgstr "Podeu seleccionar diversos tipus d'animals si manteniu premuda la tecla «Ctrl» durant la selecció. Si després cliqueu al mapa, es posarà al mapa un dels animals seleccionats."
+msgstr "Podeu seleccionar diversos tipus d'animals si manteniu premuda la tecla Ctrl durant la selecció. Si després cliqueu al mapa, es posarà al mapa un dels animals seleccionats."
 
 #: ../../txts/tips/editor.tip:10
 msgid ""
 "Just like with animals, you can also select multiple immovables or ground "
 "textures with Ctrl + mouse click."
-msgstr "Igual que amb els animals, podeu seleccionar diversos objectes inamovibles o textures de terreny amb la combinació «Ctrl+clic»."
+msgstr "Igual que amb els animals, podeu seleccionar diversos objectes inamovibles o textures de terreny amb la combinació Ctrl+Clic."
 
 #: ../../txts/tips/editor.tip:14
 msgid ""
@@ -754,7 +756,7 @@ msgstr "Dividiu els camins en seccions més curtes plantant-hi algunes banderes.
 msgid ""
 "Any further questions? Our FAQ, the wiki and of course our community forums "
 "can be found at www.widelands.org."
-msgstr "Teniu algun dubte? Podeu trobar les nostres PMF, la wiki i el fòrum de la comunitat en www.widelands.org (en anglès)."
+msgstr "Teniu algun dubte? Podeu trobar les nostres PMF, el wiki i el fòrum de la comunitat en www.widelands.org (en anglès)."
 
 #: ../../txts/tips/general_game.tip:26
 msgid ""
@@ -803,7 +805,7 @@ msgstr "Els nous soldats es recluten en el quarter general, magatzems o ports si
 msgid ""
 "If you like to live dangerously, pressing Ctrl while clicking the enhance, "
 "dismantle or destroy building buttons will skip the confirmation."
-msgstr "Si us agrada viure al límit, prement la tecla «Ctrl» mentre cliqueu millorar, desmantellar o destruir l'edifici, es realitzarà l'acció directament sense demanar-vos confirmació."
+msgstr "Si us agrada viure al límit, prement la tecla Ctrl mentre cliqueu millorar, desmantellar o destruir l'edifici, es realitzarà l'acció directament sense demanar-vos confirmació."
 
 #: ../../txts/tips/general_game.tip:58
 msgid "Press I to quickly toggle the display of your stock inventory."
@@ -825,7 +827,7 @@ msgstr "Podeu usar les tecles «Av Pàg» i «Re Pàg» per ajustar la velocitat
 msgid ""
 "You can use ‘/me’ at the beginning of a chatmessage: ‘/me is tired’ will be "
 "printed as ‘-> Nickname is tired’."
-msgstr "Podeu escriure «/me» al principi del missatge de xat: si el vostre àlies és \"Abcd\", el missatge «/me està cansat» es mostrarà com «Abcd està cansat»."
+msgstr "Podeu escriure «/me» al principi del missatge de xat: si el vostre àlies és «Abcd», el missatge «/me està cansat» es mostrarà com «Abcd està cansat»."
 
 #: ../../txts/tips/multiplayer.tip:10
 msgid ""

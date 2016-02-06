@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2003, 2006-2013 by the Widelands Development Team
+ * Copyright (C) 2002-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -60,27 +60,16 @@ public:
 	void set_chat_provider(ChatProvider &);
 	ChatProvider * get_chat_provider();
 
-	// TODO(sirver): Remove the use of these methods as the strings are no longer configurable.
-	const std::string & building_census_format      () const {
-		return m_building_census_format;
-	}
-	const std::string & building_statistics_format  () const {
-		return m_building_statistics_format;
-	}
-	const std::string & building_tooltip_format     () const {
-		return m_building_tooltip_format;
-	}
-
 	virtual bool can_see(Widelands::PlayerNumber) const = 0;
 	virtual bool can_act(Widelands::PlayerNumber) const = 0;
 	virtual Widelands::PlayerNumber player_number() const = 0;
 
 	virtual void node_action() = 0;
-	const PlayerType & get_playertype()const {return m_playertype;}
-	void set_playertype(const PlayerType & pt) {m_playertype = pt;}
+	const PlayerType & get_playertype()const {return playertype_;}
+	void set_playertype(const PlayerType & pt) {playertype_ = pt;}
 
 	bool try_show_ship_window();
-	bool is_multiplayer() {return m_multiplayer;}
+	bool is_multiplayer() {return multiplayer_;}
 
 	void show_game_summary();
 	void postload() override;
@@ -90,18 +79,15 @@ protected:
 	void draw_overlay(RenderTarget &) override;
 	virtual int32_t calculate_buildcaps(const Widelands::TCoords<Widelands::FCoords> c) = 0;
 
-	GameMainMenuWindows m_mainm_windows;
+	GameMainMenuWindows      main_windows_;
 	ChatProvider           * chat_provider_;
-	std::string              m_building_census_format;
-	std::string              m_building_statistics_format;
-	std::string              m_building_tooltip_format;
-	bool                     m_chatenabled;
-	bool                     m_multiplayer;
-	PlayerType m_playertype;
-	UI::UniqueWindow::Registry m_fieldaction;
-	UI::UniqueWindow::Registry m_game_summary;
+	bool                     chatenabled_;
+	bool                     multiplayer_;
+	PlayerType playertype_;
+	UI::UniqueWindow::Registry fieldaction_;
+	UI::UniqueWindow::Registry game_summary_;
 
-	UI::Button m_toggle_buildhelp;
+	UI::Button toggle_buildhelp_;
 
 private:
 	void on_buildhelp_changed(const bool value) override;

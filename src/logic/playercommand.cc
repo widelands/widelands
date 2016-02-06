@@ -1929,11 +1929,6 @@ void CmdSetStockPolicy::execute(Game & game)
 			case Warehouse::SP_DontStock:
 			case Warehouse::SP_Remove:
 				break;
-			default:
-				log
-					("Cmd_SetStockPolicy: sender %u, bad policy %u\n",
-					 sender(), m_policy);
-				return;
 			}
 
 			if (m_isworker) {

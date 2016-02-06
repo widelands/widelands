@@ -4,6 +4,7 @@
 # Translators:
 # GunChleoc, 2014
 # GunChleoc, 2014
+# Jaypad <ju-ju@nataju.fr>, 2015
 # Renaud Bouchard, 2015
 # Renaud Bouchard, 2015
 # Tubuntu <tubuntu@testimonium.be>, 2015
@@ -11,9 +12,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-04 07:08+0000\n"
-"PO-Revision-Date: 2015-11-04 07:11+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2015-12-14 05:31+0000\n"
+"PO-Revision-Date: 2015-12-28 15:23+0000\n"
+"Last-Translator: Jaypad <ju-ju@nataju.fr>\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -68,13 +69,13 @@ msgstr "Puisque vos routes s'allongent et que votre économie s'agrandie, vous p
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:46
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:48
 msgid "Build a tower"
-msgstr ""
+msgstr "Construisez une tour"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:49
 msgid ""
 "Build a tower at the north-east border of your territory to get greater "
 "visual range and to protect your people from sudden attacks by enemies."
-msgstr ""
+msgstr "Construisez une tour à la frontière nord-est de votre territoire pour améliorer votre champ de vision et protéger votre peuple des attaques surprises ennemies."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:54
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:56
@@ -126,7 +127,7 @@ msgid ""
 " the blacksmith reaches his next level (master blacksmith), you can even "
 "enhance the ax workshop to a war mill, which will produce additional "
 "weapons."
-msgstr ""
+msgstr "Améliorez votre forge en fabrique de haches et construisez une autre forge pour assurer la construction des outils. Quand le forgeron aura atteint le niveau suivant (Maître forgeron), vous pourrez encore améliorer la fabrique de haches en moulin de guerre, qui produira des armes supplémentaires. "
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:83
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:120
@@ -427,7 +428,7 @@ msgid ""
 "settlement. He has instructed us to build a tower,  to have a greater visual"
 " range over the area around our hall to protect our people from sudden "
 "attacks."
-msgstr ""
+msgstr "Thron m'a raconté qu'il a découvert des traces dans la neige au nord-est de notre campement. Il nous a chargé de construire une tour, pour avoir une meilleure portée visuelle sur les environs de notre village, et protéger notre peuple d'attaques surprises."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:254
 msgid "Further Exploration"
@@ -506,7 +507,7 @@ msgid ""
 "settlement should be safe for now. For the future, we might think on "
 "building some more fortifications like barriers and towers at the passages, "
 "but for now we can take a deep breath."
-msgstr ""
+msgstr "Enfin ! Notre forteresse est achevée, l'accès à notre campement est donc sécurisé pour le moment. A l'avenir, nous devrions penser à construire davantage de bâtiments militaires, comme des barricades et des tours au niveau des passages, mais pour le moment, nous pouvons souffler un peu."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:300
 msgid "Enhanced Economy and Training"
@@ -605,6 +606,7 @@ msgid ""
 msgstr "Seigneur, n'oubliez pas les pauvres porteurs: nos routes deviennent de plus en plus longues et le fardeau sur leurs épaules ne s'allège jamais. Nous devrions élever plus de boeufs pour rendre leur travail moins pénible et notre transport plus efficace."
 
 #: ../../scripting/format_scenario.lua:36
+#, lua-format
 msgid "“%s”"
 msgstr "“%s”"
 

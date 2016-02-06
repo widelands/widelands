@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010 by the Widelands Development Team
+ * Copyright (C) 2010-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -52,27 +52,27 @@ struct QuickNavigation {
 private:
 	void setview(Point where);
 
-	const Widelands::EditorGameBase & m_egbase;
-	uint32_t m_screenwidth;
-	uint32_t m_screenheight;
+	const Widelands::EditorGameBase & egbase_;
+	uint32_t screenwidth_;
+	uint32_t screenheight_;
 
 	/**
 	 * This is the callback function that we call to request a change in view position.
 	 */
-	SetViewFn m_setview;
+	SetViewFn setview_;
 
-	bool m_havefirst;
-	bool m_update;
-	Point m_anchor;
-	Point m_current;
+	bool havefirst_;
+	bool update_;
+	Point anchor_;
+	Point current_;
 
 	/**
 	 * Keeps track of what the player has looked at to allow jumping back and forth
 	 * in the history.
 	 */
 	/*@{*/
-	std::vector<Point> m_history;
-	std::vector<Point>::size_type m_history_index;
+	std::vector<Point> history_;
+	std::vector<Point>::size_type history_index_;
 	/*@}*/
 
 	struct Landmark {
@@ -85,7 +85,7 @@ private:
 	/**
 	 * Landmarks that were set explicitly by the player, mapped on the 0-9 keys.
 	 */
-	Landmark m_landmarks[10];
+	Landmark landmarks_[10];
 };
 
 #endif  // end of include guard: WL_WUI_QUICKNAVIGATION_H

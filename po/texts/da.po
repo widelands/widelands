@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2015 Widelands Development Team
+# Copyright (C) 2005-2016 Widelands Development Team
 # 
 # Translators:
 # Erik Soe Sorensen <eriksoe@daimi.au.dk>, 2007
@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-28 11:19+0000\n"
-"PO-Revision-Date: 2015-11-28 11:21+0000\n"
+"POT-Creation-Date: 2016-01-31 20:26+0000\n"
+"PO-Revision-Date: 2016-02-01 08:58+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Danish (http://www.transifex.com/widelands/widelands/language/da/)\n"
 "MIME-Version: 1.0\n"
@@ -35,8 +35,8 @@ msgid "Licensing information for Widelands"
 msgstr "Licensinformation for Widelands"
 
 #: ../../txts/LICENSE.lua:23
-msgid "Copyright 2002 - 2015 by the Widelands Development Team."
-msgstr "Ophavsret 2002 - 2015 Widelands' udviklingshold."
+msgid "Copyright 2002 - 2016 by the Widelands Development Team."
+msgstr ""
 
 #: ../../txts/LICENSE.lua:24
 msgid ""
@@ -45,6 +45,7 @@ msgid ""
 msgstr "Dette spil er Free and Open Source (FOSS), licenseret under GNU General Public License (GPL) V2.0."
 
 #: ../../txts/LICENSE.lua:26
+#, lua-format
 msgid ""
 "You can find more information on FOSS and the GPL by visiting the following "
 "webpage:  %s"
@@ -293,6 +294,7 @@ msgid ""
 msgstr ""
 
 #: ../../txts/README.lua:92
+#, lua-format
 msgid ""
 "If you need more documentation or help for Widelands or the Widelands "
 "Editor, be sure to visit our homepage at %s. You can find online help in our"
@@ -433,11 +435,10 @@ msgstr ""
 msgid "Graphicians"
 msgstr "Grafikere"
 
-#: ../../txts/developers.lua:3 ../../txts/developers.lua:3
+#: ../../txts/developers.lua:3
 msgid "Graphics"
 msgstr "Grafik"
 
-#: ../../txts/developers.lua:3 ../../txts/developers.lua:3
 #: ../../txts/developers.lua:3
 msgid "Homepage"
 msgstr "Hjemmeside"
@@ -470,7 +471,7 @@ msgstr "Andre"
 msgid "Packagers"
 msgstr "Pakkere"
 
-#: ../../txts/developers.lua:3 ../../txts/developers.lua:3
+#: ../../txts/developers.lua:3
 msgid "Sound"
 msgstr "Lyd"
 
@@ -492,7 +493,7 @@ msgstr "Oversættere"
 
 #: ../../txts/developers.lua:3
 msgid "Windows"
-msgstr ""
+msgstr "Vinduer"
 
 #: ../../txts/developers.lua:3
 msgid "ZetaOS"
@@ -519,6 +520,7 @@ msgid ""
 msgstr ""
 
 #: ../../txts/editor_readme.lua:14
+#, lua-format
 msgid "Please have a look at our enduser manuals on our wiki pages at: %s"
 msgstr ""
 

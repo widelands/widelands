@@ -271,8 +271,7 @@ public:
 private:
 	void increment_program_pointer();
 
-	void draw_construction
-		(const EditorGameBase &, RenderTarget &, const Point);
+	void draw_construction(const EditorGameBase&, RenderTarget&, Point);
 };
 
 

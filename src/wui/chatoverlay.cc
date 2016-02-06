@@ -22,6 +22,7 @@
 #include <memory>
 
 #include "base/macros.h"
+#include "base/wexception.h"
 #include "chat/chat.h"
 #include "graphic/font_handler1.h"
 #include "graphic/rendertarget.h"
@@ -155,8 +156,7 @@ void ChatOverlay::Impl::recompute()
 			}
 			chat_idx--;
 		} else {
-			// Shoudn't happen
-			assert(false);
+			NEVER_HERE();
 		}
 		havemessages_ = true;
 	}

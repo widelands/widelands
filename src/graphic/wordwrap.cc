@@ -33,32 +33,6 @@
 #include "graphic/rendertarget.h"
 #include "graphic/text/bidi.h"
 
-namespace {
-std::string as_editorfont(const std::string& text,
-								  int ptsize = UI_FONT_SIZE_SMALL,
-								  const RGBColor& clr = UI_FONT_CLR_FG) {
-	// UI Text is always bold due to historic reasons
-	static boost::format
-			f("<rt keep_spaces=1><p><font face=serif size=%i bold=1 shadow=1 color=%s>%s</font></p></rt>");
-	f % ptsize;
-	f % clr.hex_value();
-	f % richtext_escape(text);
-	return f.str();
-}
-
-// This is inefficient; only call when we need the exact width.
-uint32_t text_width(const std::string& text, int ptsize) {
-	return UI::g_fh1->render(as_editorfont(text, ptsize - UI::g_fh1->fontset().size_offset()))->width();
-}
-
-// This is inefficient; only call when we need the exact height.
-uint32_t text_height(const std::string& text, int ptsize) {
-	return UI::g_fh1->render(as_editorfont(text.empty() ? "." : text,
-														ptsize - UI::g_fh1->fontset().size_offset()))->height();
-}
-
-} // namespace
-
 namespace UI {
 
 /**
@@ -66,12 +40,12 @@ namespace UI {
  * and a default-constructed text style.
  */
 WordWrap::WordWrap() :
-	m_wrapwidth(std::numeric_limits<uint32_t>::max()), m_draw_caret(false), mode_(WordWrap::Mode::kDisplay)
+	m_wrapwidth(std::numeric_limits<uint32_t>::max()), m_draw_caret(false)
 {
 }
 
 WordWrap::WordWrap(const TextStyle & style, uint32_t gwrapwidth) :
-	m_style(style), m_draw_caret(false), mode_(WordWrap::Mode::kDisplay)
+	m_style(style), m_draw_caret(false)
 {
 	m_wrapwidth = gwrapwidth;
 
@@ -112,9 +86,8 @@ uint32_t WordWrap::wrapwidth() const
  * Perform the wrapping computations for the given text and fill in
  * the private data containing the wrapped results.
  */
-void WordWrap::wrap(const std::string & text, WordWrap::Mode mode)
+void WordWrap::wrap(const std::string & text)
 {
-	mode_ = mode;
 	m_lines.clear();
 
 	std::string::size_type line_start = 0;
@@ -148,7 +121,7 @@ void WordWrap::compute_end_of_line
 	 uint32_t safety_margin)
 {
 	std::string::size_type minimum_chars = 1; // So we won't get empty lines
-	assert(m_wrapwidth > safety_margin);
+	assert(text.empty() || m_wrapwidth > safety_margin);
 
 	std::string::size_type orig_end = text.find('\n', line_start);
 	if (orig_end == std::string::npos)
@@ -353,10 +326,10 @@ void WordWrap::draw(RenderTarget & dst, Point where, Align align, uint32_t caret
 
 	calc_wrapped_pos(caret, caretline, caretpos);
 
-	if ((align & Align_Vertical) != Align_Top) {
+	if ((align & UI::Align::kVertical) != UI::Align::kTop) {
 		uint32_t h = height();
 
-		if ((align & Align_Vertical) == Align_VCenter)
+		if ((align & UI::Align::kVertical) == UI::Align::kVCenter)
 			where.y -= (h + 1) / 2;
 		else
 			where.y -= h;
@@ -373,27 +346,23 @@ void WordWrap::draw(RenderTarget & dst, Point where, Align align, uint32_t caret
 
 		Point point(where.x, where.y);
 
-		if (alignment & Align_Right) {
+		if (static_cast<int>(alignment & UI::Align::kRight)) {
 			point.x += m_wrapwidth - LINE_MARGIN;
 		}
 
 		const Image* entry_text_im =
-				UI::g_fh1->render(mode_ == WordWrap::Mode::kDisplay ?
-											as_uifont(m_lines[line].text,
-														 m_style.font->size() - UI::g_fh1->fontset().size_offset(),
-														 m_style.fg) :
-											as_editorfont(m_lines[line].text,
-															  m_style.font->size() - UI::g_fh1->fontset().size_offset(),
-															  m_style.fg));
+				UI::g_fh1->render(as_editorfont(m_lines[line].text,
+														  m_style.font->size() - UI::g_fh1->fontset().size_offset(),
+														  m_style.fg));
 		UI::correct_for_align(alignment, entry_text_im->width(), fontheight, &point);
 		dst.blit(point, entry_text_im);
 
-		if (mode_ == WordWrap::Mode::kEditor && m_draw_caret && line == caretline) {
+		if (m_draw_caret && line == caretline) {
 			std::string line_to_caret = m_lines[line].text.substr(0, caretpos);
 			// TODO(GunChleoc): Arabic: Fix cursor position for BIDI text.
 			int caret_x = text_width(line_to_caret, m_style.font->size());
 
-			const Image* caret_image = g_gr->images().get("pics/caret.png");
+			const Image* caret_image = g_gr->images().get("images/ui_basic/caret.png");
 			Point caretpt;
 			caretpt.x = point.x + caret_x - caret_image->width() + LINE_MARGIN;
 			caretpt.y = point.y + (fontheight - caret_image->height()) / 2;

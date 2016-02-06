@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -66,77 +66,77 @@ InteractivePlayer::InteractivePlayer
 	 bool                     const multiplayer)
 	:
 	InteractiveGameBase (_game, global_s, NONE, multiplayer, multiplayer),
-	m_auto_roadbuild_mode(global_s.get_bool("auto_roadbuild_mode", true)),
-	m_flag_to_connect(Widelands::Coords::null()),
+	auto_roadbuild_mode_(global_s.get_bool("auto_roadbuild_mode", true)),
+	flag_to_connect_(Widelands::Coords::null()),
 
 // Chat is different, as chat_provider_ needs to be checked when toggling
 // Minimap is different as it warps and stuff
 
 #define INIT_BTN_this(picture, name, tooltip)                       \
  TOOLBAR_BUTTON_COMMON_PARAMETERS(name),                                      \
- g_gr->images().get("pics/" picture ".png"),                      \
+ g_gr->images().get("images/" picture ".png"),                      \
  tooltip                                                                      \
 
 
 #define INIT_BTN(picture, name, tooltip)                            \
  TOOLBAR_BUTTON_COMMON_PARAMETERS(name),                                      \
- g_gr->images().get("pics/" picture ".png"),                      \
+ g_gr->images().get("images/" picture ".png"),                      \
  tooltip                                                                      \
 
 
-m_toggle_chat
+toggle_chat_
 	(INIT_BTN_this
-	 ("menu_chat", "chat", _("Chat"))),
-m_toggle_options_menu
+	 ("wui/menus/menu_chat", "chat", _("Chat"))),
+toggle_options_menu_
 	(INIT_BTN
-	 ("menu_options_menu", "options_menu", _("Options"))),
-m_toggle_statistics_menu
+	 ("wui/menus/menu_options_menu", "options_menu", _("Options"))),
+toggle_statistics_menu_
 	(INIT_BTN
-	 ("menu_toggle_menu", "statistics_menu", _("Statistics"))),
-m_toggle_objectives
+	 ("wui/menus/menu_toggle_menu", "statistics_menu", _("Statistics"))),
+toggle_objectives_
 	(INIT_BTN
-	 ("menu_objectives", "objectives", _("Objectives"))),
-m_toggle_minimap
+	 ("wui/menus/menu_objectives", "objectives", _("Objectives"))),
+toggle_minimap_
 	(INIT_BTN_this
-	 ("menu_toggle_minimap", "minimap", _("Minimap"))),
-m_toggle_message_menu
+	 ("wui/menus/menu_toggle_minimap", "minimap", _("Minimap"))),
+toggle_message_menu_
 	(INIT_BTN
-	 ("menu_toggle_oldmessage_menu", "messages", _("Messages"))),
-m_toggle_help
+	 ("wui/menus/menu_toggle_oldmessage_menu", "messages", _("Messages"))),
+toggle_help_
 	(INIT_BTN
-	 ("menu_help", "help", _("Tribal Encyclopedia")))
+	 ("ui_basic/menu_help", "help", _("Tribal Encyclopedia")))
 
 {
-	m_toggle_chat.sigclicked.connect
+	toggle_chat_.sigclicked.connect
 		(boost::bind(&InteractivePlayer::toggle_chat, this));
-	m_toggle_options_menu.sigclicked.connect
-		(boost::bind(&UI::UniqueWindow::Registry::toggle, boost::ref(m_options)));
-	m_toggle_statistics_menu.sigclicked.connect
-		(boost::bind(&UI::UniqueWindow::Registry::toggle, boost::ref(m_statisticsmenu)));
-	m_toggle_objectives.sigclicked.connect
-		(boost::bind(&UI::UniqueWindow::Registry::toggle, boost::ref(m_objectives)));
-	m_toggle_minimap.sigclicked.connect
+	toggle_options_menu_.sigclicked.connect
+		(boost::bind(&UI::UniqueWindow::Registry::toggle, boost::ref(options_)));
+	toggle_statistics_menu_.sigclicked.connect
+		(boost::bind(&UI::UniqueWindow::Registry::toggle, boost::ref(statisticsmenu_)));
+	toggle_objectives_.sigclicked.connect
+		(boost::bind(&UI::UniqueWindow::Registry::toggle, boost::ref(objectives_)));
+	toggle_minimap_.sigclicked.connect
 		(boost::bind(&InteractivePlayer::toggle_minimap, this));
-	m_toggle_message_menu.sigclicked.connect
-		(boost::bind(&UI::UniqueWindow::Registry::toggle, boost::ref(m_message_menu)));
-	m_toggle_help.sigclicked.connect
-		(boost::bind(&UI::UniqueWindow::Registry::toggle, boost::ref(m_encyclopedia)));
+	toggle_message_menu_.sigclicked.connect
+		(boost::bind(&UI::UniqueWindow::Registry::toggle, boost::ref(message_menu_)));
+	toggle_help_.sigclicked.connect
+		(boost::bind(&UI::UniqueWindow::Registry::toggle, boost::ref(encyclopedia_)));
 
 	// TODO(unknown): instead of making unneeded buttons invisible after generation,
 	// they should not at all be generated. -> implement more dynamic toolbar UI
-	toolbar_.add(&m_toggle_options_menu,    UI::Box::AlignLeft);
-	toolbar_.add(&m_toggle_statistics_menu, UI::Box::AlignLeft);
-	toolbar_.add(&m_toggle_minimap,         UI::Box::AlignLeft);
-	toolbar_.add(&m_toggle_buildhelp,       UI::Box::AlignLeft);
+	toolbar_.add(&toggle_options_menu_,    UI::Align::kLeft);
+	toolbar_.add(&toggle_statistics_menu_, UI::Align::kLeft);
+	toolbar_.add(&toggle_minimap_,         UI::Align::kLeft);
+	toolbar_.add(&toggle_buildhelp_,       UI::Align::kLeft);
 	if (multiplayer) {
-		toolbar_.add(&m_toggle_chat,            UI::Box::AlignLeft);
-		m_toggle_chat.set_visible(false);
-		m_toggle_chat.set_enabled(false);
+		toolbar_.add(&toggle_chat_,            UI::Align::kLeft);
+		toggle_chat_.set_visible(false);
+		toggle_chat_.set_enabled(false);
 	}
 
-	toolbar_.add(&m_toggle_help,            UI::Box::AlignLeft);
-	toolbar_.add(&m_toggle_objectives,      UI::Box::AlignLeft);
-	toolbar_.add(&m_toggle_message_menu,    UI::Box::AlignLeft);
+	toolbar_.add(&toggle_help_,            UI::Align::kLeft);
+	toolbar_.add(&toggle_objectives_,      UI::Align::kLeft);
+	toolbar_.add(&toggle_message_menu_,    UI::Align::kLeft);
 
 	set_player_number(plyn);
 	fieldclicked.connect(boost::bind(&InteractivePlayer::node_action, this));
@@ -148,22 +148,22 @@ m_toggle_help
  registry.on_delete = std::bind(&UI::Button::set_perm_pressed, &btn, false); \
  if (registry.window) btn.set_perm_pressed(true);                            \
 
-	INIT_BTN_HOOKS(m_chat, m_toggle_chat)
-	INIT_BTN_HOOKS(m_options, m_toggle_options_menu)
-	INIT_BTN_HOOKS(m_statisticsmenu, m_toggle_statistics_menu)
-	INIT_BTN_HOOKS(minimap_registry(), m_toggle_minimap)
-	INIT_BTN_HOOKS(m_objectives, m_toggle_objectives)
-	INIT_BTN_HOOKS(m_encyclopedia, m_toggle_help)
-	INIT_BTN_HOOKS(m_message_menu, m_toggle_message_menu)
+	INIT_BTN_HOOKS(chat_, toggle_chat_)
+	INIT_BTN_HOOKS(options_, toggle_options_menu_)
+	INIT_BTN_HOOKS(statisticsmenu_, toggle_statistics_menu_)
+	INIT_BTN_HOOKS(minimap_registry(), toggle_minimap_)
+	INIT_BTN_HOOKS(objectives_, toggle_objectives_)
+	INIT_BTN_HOOKS(encyclopedia_, toggle_help_)
+	INIT_BTN_HOOKS(message_menu_, toggle_message_menu_)
 
-	m_encyclopedia.open_window = [this] {new EncyclopediaWindow(*this, m_encyclopedia);};
-	m_options.open_window = [this] {new GameOptionsMenu(*this, m_options, m_mainm_windows);};
-	m_statisticsmenu.open_window = [this] {
-		new GameMainMenu(*this, m_statisticsmenu, m_mainm_windows);
+	encyclopedia_.open_window = [this] {new EncyclopediaWindow(*this, encyclopedia_);};
+	options_.open_window = [this] {new GameOptionsMenu(*this, options_, main_windows_);};
+	statisticsmenu_.open_window = [this] {
+		new GameMainMenu(*this, statisticsmenu_, main_windows_);
 	};
-	m_objectives.open_window = [this] {new GameObjectivesMenu(this, m_objectives);};
-	m_message_menu.open_window = [this] {new GameMessageMenu(*this, m_message_menu);};
-	m_mainm_windows.stock.open_window = [this] {new StockMenu(*this, m_mainm_windows.stock);};
+	objectives_.open_window = [this] {new GameObjectivesMenu(this, objectives_);};
+	message_menu_.open_window = [this] {new GameMessageMenu(*this, message_menu_);};
+	main_windows_.stock.open_window = [this] {new StockMenu(*this, main_windows_.stock);};
 
 #ifndef NDEBUG //  only in debug builds
 	addCommand
@@ -177,61 +177,61 @@ InteractivePlayer::~InteractivePlayer() {
 	registry.on_create = 0;                                                                         \
 	registry.on_delete = 0;
 
-	DEINIT_BTN_HOOKS(m_chat, m_toggle_chat)
-	DEINIT_BTN_HOOKS(m_options, m_toggle_options_menu)
-	DEINIT_BTN_HOOKS(m_statisticsmenu, m_toggle_statistics_menu)
-	DEINIT_BTN_HOOKS(minimap_registry(), m_toggle_minimap)
-	DEINIT_BTN_HOOKS(m_objectives, m_toggle_objectives)
-	DEINIT_BTN_HOOKS(m_encyclopedia, m_toggle_help)
-	DEINIT_BTN_HOOKS(m_message_menu, m_toggle_message_menu)
+	DEINIT_BTN_HOOKS(chat_, toggle_chat_)
+	DEINIT_BTN_HOOKS(options_, toggle_options_menu_)
+	DEINIT_BTN_HOOKS(statisticsmenu_, toggle_statistics_menu_)
+	DEINIT_BTN_HOOKS(minimap_registry(), toggle_minimap_)
+	DEINIT_BTN_HOOKS(objectives_, toggle_objectives_)
+	DEINIT_BTN_HOOKS(encyclopedia_, toggle_help_)
+	DEINIT_BTN_HOOKS(message_menu_, toggle_message_menu_)
 }
 
 void InteractivePlayer::think()
 {
 	InteractiveBase::think();
 
-	if (m_flag_to_connect) {
-		Widelands::Field & field = egbase().map()[m_flag_to_connect];
+	if (flag_to_connect_) {
+		Widelands::Field & field = egbase().map()[flag_to_connect_];
 		if (upcast(Widelands::Flag const, flag, field.get_immovable())) {
 			if (!flag->has_road() && !is_building_road())
-				if (m_auto_roadbuild_mode) {
+				if (auto_roadbuild_mode_) {
 					//  There might be a fieldaction window open, showing a button
 					//  for roadbuilding. If that dialog remains open so that the
 					//  button is clicked, we would enter roadbuilding mode while
 					//  we are already in roadbuilding mode from the call below.
 					//  That is not allowed. Therefore we must delete the
 					//  fieldaction window before entering roadbuilding mode here.
-					delete m_fieldaction.window;
-					m_fieldaction.window = nullptr;
-					warp_mouse_to_node(m_flag_to_connect);
+					delete fieldaction_.window;
+					fieldaction_.window = nullptr;
+					warp_mouse_to_node(flag_to_connect_);
 					set_sel_pos
 						(Widelands::NodeAndTriangle<>
-						 	(m_flag_to_connect,
+						 	(flag_to_connect_,
 						 	 Widelands::TCoords<>
-						 	 	(m_flag_to_connect, Widelands::TCoords<>::D)));
-					start_build_road(m_flag_to_connect, field.get_owned_by());
+						 	 	(flag_to_connect_, Widelands::TCoords<>::D)));
+					start_build_road(flag_to_connect_, field.get_owned_by());
 				}
-			m_flag_to_connect = Widelands::Coords::null();
+			flag_to_connect_ = Widelands::Coords::null();
 		}
 	}
 	if (is_multiplayer()) {
-		m_toggle_chat.set_visible(m_chatenabled);
-		m_toggle_chat.set_enabled(m_chatenabled);
+		toggle_chat_.set_visible(chatenabled_);
+		toggle_chat_.set_enabled(chatenabled_);
 	}
 	{
-		char const * msg_icon = "pics/menu_toggle_oldmessage_menu.png";
+		char const * msg_icon = "images/wui/menus/menu_toggle_oldmessage_menu.png";
 		std::string msg_tooltip = _("Messages");
 		if
 			(uint32_t const nr_new_messages =
 				player().messages().nr_messages(Widelands::Message::Status::kNew))
 		{
-			msg_icon    = "pics/menu_toggle_newmessage_menu.png";
+			msg_icon    = "images/wui/menus/menu_toggle_newmessage_menu.png";
 			msg_tooltip =
 			   (boost::format(ngettext("%u new message", "%u new messages", nr_new_messages)) %
 			    nr_new_messages).str();
 		}
-		m_toggle_message_menu.set_pic(g_gr->images().get(msg_icon));
-		m_toggle_message_menu.set_tooltip(msg_tooltip);
+		toggle_message_menu_.set_pic(g_gr->images().get(msg_icon));
+		toggle_message_menu_.set_tooltip(msg_tooltip);
 	}
 }
 
@@ -239,18 +239,18 @@ void InteractivePlayer::think()
 void InteractivePlayer::popup_message
 	(Widelands::MessageId const id, const Widelands::Message & message)
 {
-	m_message_menu.create();
-	dynamic_cast<GameMessageMenu&>(*m_message_menu.window)
+	message_menu_.create();
+	dynamic_cast<GameMessageMenu&>(*message_menu_.window)
 	.show_new_message(id, message);
 }
 
 
 //  Toolbar button callback functions.
 void InteractivePlayer::toggle_chat() {
-	if (m_chat.window)
-		delete m_chat.window;
+	if (chat_.window)
+		delete chat_.window;
 	else if (chat_provider_)
-		GameChatMenu::create_chat_console(this, m_chat, *chat_provider_);
+		GameChatMenu::create_chat_console(this, chat_, *chat_provider_);
 }
 
 bool InteractivePlayer::can_see(Widelands::PlayerNumber const p) const
@@ -263,7 +263,7 @@ bool InteractivePlayer::can_act(Widelands::PlayerNumber const p) const
 }
 Widelands::PlayerNumber InteractivePlayer::player_number() const
 {
-	return m_player_number;
+	return player_number_;
 }
 
 int32_t InteractivePlayer::calculate_buildcaps(const Widelands::TCoords<Widelands::FCoords> c) {
@@ -289,7 +289,7 @@ void InteractivePlayer::node_action()
 		}
 
 		// everything else can bring up the temporary dialog
-		show_field_action(this, get_player(), &m_fieldaction);
+		show_field_action(this, get_player(), &fieldaction_);
 	}
 }
 
@@ -315,7 +315,7 @@ bool InteractivePlayer::handle_key(bool const down, SDL_Keysym const code)
 			return true;
 
 		case SDLK_i:
-			m_mainm_windows.stock.toggle();
+			main_windows_.stock.toggle();
 			return true;
 
 		case SDLK_m:
@@ -323,11 +323,11 @@ bool InteractivePlayer::handle_key(bool const down, SDL_Keysym const code)
 			return true;
 
 		case SDLK_n:
-			m_message_menu.toggle();
+			message_menu_.toggle();
 			return true;
 
 		case SDLK_o:
-			m_objectives.toggle();
+			objectives_.toggle();
 			return true;
 
 		case SDLK_c:
@@ -335,16 +335,16 @@ bool InteractivePlayer::handle_key(bool const down, SDL_Keysym const code)
 			return true;
 
 		case SDLK_b:
-			if (m_mainm_windows.building_stats.window == nullptr) {
-				new BuildingStatisticsMenu(*this, m_mainm_windows.building_stats);
+			if (main_windows_.building_stats.window == nullptr) {
+				new BuildingStatisticsMenu(*this, main_windows_.building_stats);
 			} else {
-				m_mainm_windows.building_stats.toggle();
+				main_windows_.building_stats.toggle();
 			}
 			return true;
 
 		case SDLK_s:
 			if (code.mod & (KMOD_LCTRL | KMOD_RCTRL))
-				new GameMainMenuSaveGame(*this, m_mainm_windows.savegame);
+				new GameMainMenuSaveGame(*this, main_windows_.savegame);
 			else
 				set_display_flag
 					(dfShowStatistics, !get_display_flag(dfShowStatistics));
@@ -355,16 +355,16 @@ bool InteractivePlayer::handle_key(bool const down, SDL_Keysym const code)
 				break;
 			/* no break */
 		case SDLK_HOME:
-			move_view_to(game().map().get_starting_pos(m_player_number));
+			move_view_to(game().map().get_starting_pos(player_number_));
 			return true;
 
 		case SDLK_KP_ENTER:
 		case SDLK_RETURN:
-			if (!chat_provider_ | !m_chatenabled || !is_multiplayer())
+			if (!chat_provider_ | !chatenabled_ || !is_multiplayer())
 				break;
 
-			if (!m_chat.window)
-				GameChatMenu::create_chat_console(this, m_chat, *chat_provider_);
+			if (!chat_.window)
+				GameChatMenu::create_chat_console(this, chat_, *chat_provider_);
 
 			return true;
 		default:
@@ -380,7 +380,7 @@ bool InteractivePlayer::handle_key(bool const down, SDL_Keysym const code)
  * player
  */
 void InteractivePlayer::set_player_number(uint32_t const n) {
-	m_player_number = n;
+	player_number_ = n;
 }
 
 
@@ -404,10 +404,10 @@ void InteractivePlayer::cmdSwitchPlayer(const std::vector<std::string> & args)
 	}
 
 	DebugConsole::write(
-	   str(boost::format("Switching from #%1% to #%2%.") % static_cast<int>(m_player_number) % n));
-	m_player_number = n;
+	   str(boost::format("Switching from #%1% to #%2%.") % static_cast<int>(player_number_) % n));
+	player_number_ = n;
 
-	if (UI::UniqueWindow* const building_statistics_window = m_mainm_windows.building_stats.window) {
+	if (UI::UniqueWindow* const building_statistics_window = main_windows_.building_stats.window) {
 		dynamic_cast<BuildingStatisticsMenu&>(*building_statistics_window).update();
 	}
 }

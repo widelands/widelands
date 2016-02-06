@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006, 2008-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -76,7 +76,10 @@ public:
 		kJoingame
 	};
 
-	FullscreenMenuBase(char const * bgpic);
+	/// Calls FullscreenMenuBase(const std::string& bgpic)
+	/// with a default background image
+	FullscreenMenuBase();
+	FullscreenMenuBase(const std::string& bgpic);
 	virtual ~FullscreenMenuBase();
 
 	void draw(RenderTarget &) override;

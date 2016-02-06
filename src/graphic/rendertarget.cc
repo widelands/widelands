@@ -19,20 +19,10 @@
 
 #include "graphic/rendertarget.h"
 
-#include "base/log.h"
 #include "base/macros.h"
 #include "graphic/animation.h"
 #include "graphic/graphic.h"
 #include "graphic/surface.h"
-#include "logic/player.h"
-
-using Widelands::BaseImmovable;
-using Widelands::Coords;
-using Widelands::FCoords;
-using Widelands::Map;
-using Widelands::MapObjectDescr;
-using Widelands::Player;
-using Widelands::TCoords;
 
 /**
  * Build a render target for the given surface.
@@ -164,17 +154,13 @@ void RenderTarget::brighten_rect(const Rect& rect, int32_t factor)
 void RenderTarget::blit(const Point& dst, const Image* image, BlendMode blend_mode, UI::Align align)
 {
 	Point destination_point(dst);
-
 	UI::correct_for_align(align, image->width(), image->height(), &destination_point);
 
-	Rect srcrc(Point(0, 0), image->width(), image->height());
+	Rect source_rect(Point(0, 0), image->width(), image->height());
+	Rect destination_rect(destination_point.x, destination_point.y, source_rect.w, source_rect.h);
 
-	if (to_surface_geometry(&destination_point, &srcrc)) {
-		m_surface->blit(Rect(destination_point.x, destination_point.y, srcrc.w, srcrc.h),
-		                *image,
-		                srcrc,
-		                1.,
-		                blend_mode);
+	if (to_surface_geometry(&destination_rect, &source_rect)) {
+		m_surface->blit(destination_rect, *image, source_rect, 1., blend_mode);
 	}
 }
 
@@ -182,14 +168,13 @@ void RenderTarget::blit_monochrome(const Point& dst,
 									  const Image* image,
 									  const RGBAColor& blend_mode, UI::Align align) {
 	Point destination_point(dst);
-
 	UI::correct_for_align(align, image->width(), image->height(), &destination_point);
 
-	Rect srcrc(Point(0, 0), image->width(), image->height());
+	Rect source_rect(Point(0, 0), image->width(), image->height());
+	Rect destination_rect(destination_point.x, destination_point.y, source_rect.w, source_rect.h);
 
-	if (to_surface_geometry(&destination_point, &srcrc)) {
-		m_surface->blit_monochrome(Rect(destination_point.x, destination_point.y, srcrc.w, srcrc.h),
-		                           *image, srcrc, blend_mode);
+	if (to_surface_geometry(&destination_rect, &source_rect)) {
+		m_surface->blit_monochrome(destination_rect, *image, source_rect, blend_mode);
 	}
 }
 
@@ -204,49 +189,33 @@ void RenderTarget::blitrect
 
 	// We want to use the given srcrc, but we must make sure that we are not
 	// blitting outside of the boundaries of 'image'.
-	Rect srcrc(gsrcrc.x,
+	Rect source_rect(gsrcrc.x,
 	           gsrcrc.y,
 	           std::min<int32_t>(image->width() - gsrcrc.x, gsrcrc.w),
 	           std::min<int32_t>(image->height() - gsrcrc.y, gsrcrc.h));
+	Rect destination_rect(dst.x, dst.y, source_rect.w, source_rect.h);
 
-	Point destination_point(dst);
-	if (to_surface_geometry(&destination_point, &srcrc))
-		m_surface->blit(Rect(destination_point.x, destination_point.y, srcrc.w, srcrc.h),
-		         *image,
-		         srcrc,
-		         1.,
-		         blend_mode);
-}
-
-void RenderTarget::blitrect_scale(const Rect& dst,
-                                  const Image* image,
-                                  const Rect& source_rect,
-											 const float opacity,
-                                  const BlendMode blend_mode) {
-
-	Point destination_point(dst.x, dst.y);
-	Rect srcrect(source_rect);
-	if (to_surface_geometry(&destination_point, &srcrect)) {
-		m_surface->blit(Rect(destination_point.x, destination_point.y, dst.w, dst.h),
-		                *image,
-		                source_rect,
-		                opacity,
-		                blend_mode);
+	if (to_surface_geometry(&destination_rect, &source_rect)) {
+		m_surface->blit(destination_rect, *image, source_rect, 1., blend_mode);
 	}
 }
 
-void RenderTarget::blitrect_scale_monochrome(const Rect& destination_rect,
+void RenderTarget::blitrect_scale(Rect destination_rect,
+                                  const Image* image,
+                                  Rect source_rect,
+                                  const float opacity,
+                                  const BlendMode blend_mode) {
+	if (to_surface_geometry(&destination_rect, &source_rect)) {
+		m_surface->blit(destination_rect, *image, source_rect, opacity, blend_mode);
+	}
+}
+
+void RenderTarget::blitrect_scale_monochrome(Rect destination_rect,
                                        const Image* image,
-                                       const Rect& source_rect,
+                                       Rect source_rect,
 													const RGBAColor& blend) {
-	Point destination_point(destination_rect.x, destination_rect.y);
-	Rect srcrect(source_rect);
-	if (to_surface_geometry(&destination_point, &srcrect)) {
-		m_surface->blit_monochrome(
-		   Rect(destination_point.x, destination_point.y, destination_rect.w, destination_rect.h),
-		   *image,
-		   source_rect,
-		   blend);
+	if (to_surface_geometry(&destination_rect, &source_rect)) {
+		m_surface->blit_monochrome(destination_rect, *image, source_rect, blend);
 	}
 }
 
@@ -330,38 +299,46 @@ void RenderTarget::tile(const Rect& rect, const Image* image, const Point& gofs,
 // TODO(unknown): Correctly calculate the stereo position for sound effects
 // TODO(unknown): The chosen semantics of animation sound effects is problematic:
 // What if the game runs very slowly or very quickly?
-void RenderTarget::drawanim
-	(const Point& dst, uint32_t animation, uint32_t time, const Player* player)
-{
+void RenderTarget::blit_animation(const Point& dst, uint32_t animation, uint32_t time) {
 	const Animation& anim = g_gr->animations().get_animation(animation);
-
-	Point destination_point = dst - anim.hotspot();
-
-	Rect srcrc(Point(0, 0), anim.width(), anim.height());
-
-	if (to_surface_geometry(&destination_point, &srcrc))
-		anim.blit(time, destination_point, srcrc, player ? &player->get_playercolor() : NULL, m_surface);
-
-	//  Look if there is a sound effect registered for this frame and trigger
-	//  the effect (see SoundHandler::stereo_position).
-	anim.trigger_soundfx(time, 128);
+	do_blit_animation(dst, anim, time, nullptr, Rect(Point(0, 0), anim.width(), anim.height()));
 }
 
-/**
- * Draws a part of a frame of an animation at the given location
- */
-void RenderTarget::drawanimrect
-	(const Point& dst, uint32_t animation, uint32_t time, const Player* player, const Rect& gsrcrc)
-{
+void RenderTarget::blit_animation(const Point& dst,
+                                  uint32_t animation,
+                                  uint32_t time,
+                                  const RGBColor& player_color) {
 	const Animation& anim = g_gr->animations().get_animation(animation);
+	do_blit_animation(dst, anim, time, &player_color, Rect(Point(0, 0), anim.width(), anim.height()));
+}
 
-	Point destination_point = dst - anim.hotspot();
-	destination_point += gsrcrc.origin();
+void RenderTarget::blit_animation(const Point& dst,
+                                  uint32_t animation,
+                                  uint32_t time,
+                                  const RGBColor& player_color,
+                                  const Rect& source_rect) {
+	do_blit_animation(
+	   dst, g_gr->animations().get_animation(animation), time, &player_color, source_rect);
+}
 
-	Rect srcrc(gsrcrc);
+void RenderTarget::do_blit_animation(const Point& dst,
+                                     const Animation& animation,
+                                     uint32_t time,
+                                     const RGBColor* player_color,
+                                     const Rect& source_rect) {
+	Rect destination_rect(dst.x - animation.hotspot().x + source_rect.x,
+	                      dst.y - animation.hotspot().y + source_rect.y, source_rect.w,
+	                      source_rect.h);
+	Rect srcrc(source_rect);
+	if (to_surface_geometry(&destination_rect, &srcrc)) {
+		animation.blit(time, destination_rect.origin(), srcrc, player_color, m_surface);
+	}
 
-	if (to_surface_geometry(&destination_point, &srcrc))
-		anim.blit(time, destination_point, srcrc, player ? &player->get_playercolor() : NULL, m_surface);
+	// Look if there is a sound effect registered for this frame and trigger the
+	// effect (see SoundHandler::stereo_position).
+	// TODO(sirver): Playing a sound effect in here is rather silly. What if
+	// this animation is used in the menus?
+	animation.trigger_soundfx(time, 128);
 }
 
 /**
@@ -426,41 +403,71 @@ bool RenderTarget::clip(Rect & r) const
  * Clip against window and source bitmap, returns false if blitting is
  * unnecessary because image is not inside the target surface.
  */
-bool RenderTarget::to_surface_geometry(Point* dst, Rect* srcrc) const
+bool RenderTarget::to_surface_geometry(Rect* destination_rect, Rect* source_rect) const
 {
-	assert(0 <= srcrc->x);
-	assert(0 <= srcrc->y);
-	*dst += m_offset;
+	assert(0 <= source_rect->x);
+	assert(0 <= source_rect->y);
+	destination_rect->x += m_offset.x;
+	destination_rect->y += m_offset.y;
 
-	// Clipping
-	if (dst->x < 0) {
-		if (srcrc->w <= -dst->x)
+	// We have to clip the target rect against our own drawing area. If we make
+	// changes to any side of our rectangle, we have to change the source rect
+	// too. But since the source_rectangle might have a different size than the
+	// destination_rect, we do this by making the proportional change.
+
+	// Clipping, from the left.
+	if (destination_rect->x < 0) {
+		if (destination_rect->w <= -destination_rect->x) {
 			return false;
-		srcrc->x -= dst->x;
-		srcrc->w += dst->x;
-		dst->x = 0;
+		}
+		// Adding 0.5 is a cheap way of turning integer truncation into a rounded value.
+		const int source_rect_pixel_change =
+		   0.5 + -static_cast<double>(destination_rect->x) / destination_rect->w * source_rect->w;
+		source_rect->x += source_rect_pixel_change;
+		source_rect->w -= source_rect_pixel_change;
+		destination_rect->w += destination_rect->x;
+		destination_rect->x = 0;
 	}
 
-	if (dst->x + srcrc->w > m_rect.w) {
-		if (m_rect.w <= dst->x)
+	// Clipping, from the right.
+	if (destination_rect->x + destination_rect->w > m_rect.w) {
+		if (m_rect.w <= destination_rect->x) {
 			return false;
-		srcrc->w = m_rect.w - dst->x;
+		}
+		const int new_destination_w = m_rect.w - destination_rect->x;
+		// Adding 0.5 is a cheap way of turning integer truncation into a rounded value.
+		source_rect->w =
+		   0.5 + static_cast<double>(new_destination_w) / destination_rect->w * source_rect->w;
+		destination_rect->w = new_destination_w;
 	}
 
-	if (dst->y < 0) {
-		if (srcrc->h <= -dst->y)
+	// Clipping, from the top.
+	if (destination_rect->y < 0) {
+		if (destination_rect->h <= -destination_rect->y) {
 			return false;
-		srcrc->y -= dst->y;
-		srcrc->h += dst->y;
-		dst->y = 0;
+		}
+		// Adding 0.5 is a cheap way of turning integer truncation into a rounded value.
+		const int source_rect_pixel_change = 0.5 +
+		   -static_cast<double>(destination_rect->y) / destination_rect->h * source_rect->h;
+		source_rect->y += source_rect_pixel_change;
+		source_rect->h -= source_rect_pixel_change;
+		destination_rect->h += destination_rect->y;
+		destination_rect->y = 0;
 	}
 
-	if (dst->y + srcrc->h > m_rect.h) {
-		if (m_rect.h <= dst->y)
+	// Clipping, from the bottom.
+	if (destination_rect->y + destination_rect->h > m_rect.h) {
+		if (m_rect.h <= destination_rect->y) {
 			return false;
-		srcrc->h = m_rect.h - dst->y;
+		}
+		const int new_destination_h = m_rect.h - destination_rect->y;
+		// Adding 0.5 is a cheap way of turning integer truncation into a rounded value.
+		source_rect->h =
+		   0.5 + static_cast<double>(new_destination_h) / destination_rect->h * source_rect->h;
+		destination_rect->h = new_destination_h;
 	}
 
-	*dst += m_rect.origin();
+	destination_rect->x += m_rect.x;
+	destination_rect->y += m_rect.y;
 	return true;
 }

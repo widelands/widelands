@@ -308,23 +308,6 @@ bool Worker::run_breed(Game & game, State & state, const Action & action)
 
 
 /**
- * OUTDATED - SHOULD NOT BE USED ANYMORE AND DOES NOT DO ANYTHING VALUEABLE
- *    just kept here for savegame compatibility for Build15 and earlier
- *
- * setdescription \<immovable name\> \<immovable name\> ...
- *
- * sparamv = possible bobs
- */
-bool Worker::run_setdescription
-	(Game & game, State & state, const Action &)
-{
-	++state.ivar1;
-	schedule_act(game, 10);
-	return true;
-}
-
-
-/**
  * setbobdescription \<bob name\> \<bob name\> ...
  *
  * Randomly select a bob name that can be used in subsequent commands
@@ -749,7 +732,7 @@ bool Worker::run_object(Game & game, State & state, const Action & action)
 
 /**
  * Plant an immovable on the current position. The immovable type must have
- * been selected by a previous command (i.e. setdescription)
+ * been selected by a previous command (i.e. plant)
  */
 bool Worker::run_plant(Game & game, State & state, const Action & action)
 {
@@ -1876,7 +1859,7 @@ void Worker::return_update(Game & game, State & state)
 				(Message::Type::kGameLogic,
 				 game.get_gametime(),
 				 _("Worker"),
-				 "pics/menu_help.png",
+				 "images/ui_basic/menu_help.png",
 				 _("Worker got lost!"),
 				 message,
 				 get_position()),
@@ -1891,7 +1874,7 @@ void Worker::return_update(Game & game, State & state)
 /**
  * Follow the steps of a configuration-defined program.
  * ivar1 is the next action to be performed.
- * ivar2 is used to store description indices selected by setdescription
+ * ivar2 is used to store description indices selected by plant/setbobdescription
  * objvar1 is used to store objects found by findobject
  * coords is used to store target coordinates found by findspace
  */
@@ -2925,18 +2908,16 @@ void Worker::draw_inner
 	(const EditorGameBase& game, RenderTarget& dst, const Point& drawpos)
 	const
 {
-	dst.drawanim
-		(drawpos,
-		 get_current_anim(),
-		 game.get_gametime() - get_animstart(),
-		 get_owner());
+	assert(get_owner() != nullptr);
+	const RGBColor& player_color = get_owner()->get_playercolor();
 
-	if (WareInstance const * const carried_ware = get_carried_ware(game))
-		dst.drawanim
-			(drawpos - descr().get_ware_hotspot(),
-			 carried_ware->descr().get_animation("idle"),
-			 0,
-			 get_owner());
+	dst.blit_animation(
+	   drawpos, get_current_anim(), game.get_gametime() - get_animstart(), player_color);
+
+	if (WareInstance const* const carried_ware = get_carried_ware(game)) {
+		dst.blit_animation(drawpos - descr().get_ware_hotspot(),
+		                   carried_ware->descr().get_animation("idle"), 0, player_color);
+	}
 }
 
 

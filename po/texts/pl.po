@@ -1,17 +1,17 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2015 Widelands Development Team
+# Copyright (C) 2005-2016 Widelands Development Team
 # 
 # Translators:
 # Andrzej 'Endrju' Krentosz <endrjux@gmail.com>, 2006
 # Igor Kotrasiński <ikk_pl@yahoo.co.uk>, 2015
-# Tomasz Pudło <wptom@wp.pl>, 2015
+# Tomasz Pudło <wptom@wp.pl>, 2015-2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-28 11:19+0000\n"
-"PO-Revision-Date: 2015-11-28 11:21+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2016-01-23 08:23+0000\n"
+"PO-Revision-Date: 2016-01-25 18:16+0000\n"
+"Last-Translator: Tomasz Pudło <wptom@wp.pl>\n"
 "Language-Team: Polish (http://www.transifex.com/widelands/widelands/language/pl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -46,6 +46,7 @@ msgid ""
 msgstr "Niniejsza gra jest wolna i darmowa (FOSS), opublikowana na licencji GNU General Public License (GPL) V2.0."
 
 #: ../../txts/LICENSE.lua:26
+#, lua-format
 msgid ""
 "You can find more information on FOSS and the GPL by visiting the following "
 "webpage:  %s"
@@ -147,20 +148,20 @@ msgid ""
 "To close an open window, right-click on it. To minimize/maximize a window, "
 "click on it with the middle mouse button or with the left mouse button while"
 " holding down Ctrl."
-msgstr ""
+msgstr "Aby zamknąć otwarte okno, kliknij je prawym przyciskiem myszy. Aby je zmaksymalizować lub zminimalizować, kliknij na pasku tytułu okna środkowym przyciskiem myszy lub lewym przyciskiem myszy z przytrzymanym klawiszem Ctrl."
 
 #: ../../txts/README.lua:49
 msgid ""
 "If you hold Ctrl while building a road, flags will be placed automatically.\n"
 "If you hold Ctrl while removing a road, all flags up to the first junction are\n"
 "removed."
-msgstr ""
+msgstr "Jeśli przytrzymasz Ctrl podczas budowy drogi, automatycznie zostaną\numieszczone flagi. Jeśli przytrzymasz Ctrl podczas usuwania drogi,\nwszystkie flagi do pierwszego skrzyżowania zostaną usunięte."
 
 #: ../../txts/README.lua:53
 msgid ""
 "You can skip confirmation windows for irreversible actions if you hold Ctrl\n"
 "while clicking on the action button."
-msgstr ""
+msgstr "Możesz pominąć okno potwierdzenia dla nieodwracalnej akcji przytrzymując\nklawisz Ctrl przy klikaniu na przycisk tej akcji."
 
 #: ../../txts/README.lua:56
 msgid "Keyboard shortcuts (in-game)"
@@ -168,19 +169,19 @@ msgstr "Skróty klawiaturowe (w grze)"
 
 #: ../../txts/README.lua:58
 msgid " Page Up: increases game speed"
-msgstr ""
+msgstr "Page Up: zwiększa prędkość gry"
 
 #: ../../txts/README.lua:59
 msgid " Page Down: decreases game speed"
-msgstr ""
+msgstr "Page Down: zmniejsza prędkość gry"
 
 #: ../../txts/README.lua:60
 msgid "Pause: pauses the game"
-msgstr ""
+msgstr "Pause: wstrzymuje grę"
 
 #: ../../txts/README.lua:61
 msgid "Space: toggles if building spaces are shown"
-msgstr ""
+msgstr "Spacja: przełącza wyświetlanie miejsc pod budowę"
 
 #: ../../txts/README.lua:62
 msgid "M: toggles minimap"
@@ -220,7 +221,7 @@ msgstr "Home: przechodzi do pozycji początkowej na mapie"
 
 #: ../../txts/README.lua:71
 msgid "(Ctrl +) 0-9: Remember and go to previously remembered locations"
-msgstr ""
+msgstr "(CTRL+) 0-9: zapamiętuje i przechodzi do zapamiętanych pozycji"
 
 #: ../../txts/README.lua:72
 msgid ",: goes to the previous location"
@@ -236,15 +237,15 @@ msgstr "F6: pokazuje konsolę debugowania (tylko w buildach debugowych)"
 
 #: ../../txts/README.lua:75
 msgid "Ctrl + F10: quits the game immediately"
-msgstr ""
+msgstr "Ctrl + F10: natychmiast kończy grę"
 
 #: ../../txts/README.lua:76
 msgid "Ctrl + Leftclick: skips confirmation dialogs"
-msgstr ""
+msgstr "Ctrl + lewy przycisk myszy: pomija okna potwierdzenia"
 
 #: ../../txts/README.lua:77
 msgid "Ctrl + F11: takes a screenshot"
-msgstr ""
+msgstr "Ctrl + F11: robi zrzut ekranu"
 
 #: ../../txts/README.lua:79
 msgid ""
@@ -281,7 +282,7 @@ msgstr "G: przechodzi do pozycji związanej z aktualną wiadomością"
 
 #: ../../txts/README.lua:88
 msgid "Delete: archives/restores the current message"
-msgstr ""
+msgstr "Delete: archiwizuje/odtwarza obecną wiadomość"
 
 #: ../../txts/README.lua:90
 msgid "Online Help"
@@ -294,6 +295,7 @@ msgid ""
 msgstr ""
 
 #: ../../txts/README.lua:92
+#, lua-format
 msgid ""
 "If you need more documentation or help for Widelands or the Widelands "
 "Editor, be sure to visit our homepage at %s. You can find online help in our"
@@ -434,11 +436,10 @@ msgstr "FreeBSD"
 msgid "Graphicians"
 msgstr "Graficy"
 
-#: ../../txts/developers.lua:3 ../../txts/developers.lua:3
+#: ../../txts/developers.lua:3
 msgid "Graphics"
 msgstr "Grafika"
 
-#: ../../txts/developers.lua:3 ../../txts/developers.lua:3
 #: ../../txts/developers.lua:3
 msgid "Homepage"
 msgstr "Strona domowa"
@@ -471,7 +472,7 @@ msgstr "Inne"
 msgid "Packagers"
 msgstr "Opiekuni pakietów"
 
-#: ../../txts/developers.lua:3 ../../txts/developers.lua:3
+#: ../../txts/developers.lua:3
 msgid "Sound"
 msgstr "Dźwięk"
 
@@ -520,6 +521,7 @@ msgid ""
 msgstr "Jak widać, Edytor jest we wczesnej fazie rozwoju, wraz z jego rozwojem polepszy się i ta dokumentacja."
 
 #: ../../txts/editor_readme.lua:14
+#, lua-format
 msgid "Please have a look at our enduser manuals on our wiki pages at: %s"
 msgstr "Sprawdź nasze instrukcje dla użytkowników na naszych stronach wiki na: %s"
 
@@ -536,7 +538,7 @@ msgstr "Skróty klawiszowe"
 #. TRANSLATORS: This is a hotkey
 #: ../../txts/editor_readme.lua:21
 msgid "Space:"
-msgstr ""
+msgstr "Spacja:"
 
 #: ../../txts/editor_readme.lua:21
 msgid "toggles if building spaces are shown"
@@ -608,7 +610,7 @@ msgstr "przełącza narzędzie informacyjne"
 #. TRANSLATORS: This is a hotkey
 #: ../../txts/editor_readme.lua:37
 msgid "Ctrl + L:"
-msgstr ""
+msgstr "Ctrl + L:"
 
 #: ../../txts/editor_readme.lua:37
 msgid "load map"
@@ -617,7 +619,7 @@ msgstr "wczytuje mapę"
 #. TRANSLATORS: This is a hotkey
 #: ../../txts/editor_readme.lua:39
 msgid "Ctrl + S:"
-msgstr ""
+msgstr "Ctrl + S:"
 
 #: ../../txts/editor_readme.lua:39
 msgid "save map"
@@ -635,7 +637,7 @@ msgstr "zmienia rozmiar narzędzi"
 #. TRANSLATORS: This is a hotkey
 #: ../../txts/editor_readme.lua:43
 msgid "Shift (Hold):"
-msgstr ""
+msgstr "Shift (przytrzymaj):"
 
 #: ../../txts/editor_readme.lua:43
 msgid "selects first alternative tool while pressed"
@@ -644,7 +646,7 @@ msgstr "wybiera pierwsze alternatywne narzędzie podczas przytrzymania"
 #. TRANSLATORS: This is a hotkey
 #: ../../txts/editor_readme.lua:45
 msgid "Alt (Hold):"
-msgstr ""
+msgstr "Alt (przytrzymaj):"
 
 #: ../../txts/editor_readme.lua:45
 msgid "Selects second alternative tool while pressed"
@@ -655,7 +657,7 @@ msgstr "wybiera drugie alternatywne narzędzie podczas przytrzymania"
 msgid ""
 "Some buildings, such as the farm, have a very small work area. If the "
 "building is surrounded with trees or roads, production will stop."
-msgstr ""
+msgstr "Niektóre budynki, jak na przykład farma, mają bardzo mały promień pracy. Jeśli budynek jest otoczony drzewami albo drogami, produkcja się zatrzyma."
 
 #: ../../txts/tips/atlanteans.tip:6
 msgid ""
@@ -667,7 +669,7 @@ msgstr "Zawsze buduj leśniczówkę i hodowcę ryb, żeby zapewnić sobie stałe
 msgid ""
 "Keep an eye on your fishers. After fish resources are exhausted in their "
 "work area, they will stop fishing."
-msgstr ""
+msgstr "Miej oko na swoich rybaków. Gdy w ich obszarze pracy skończą się ryby, przestaną łowić."
 
 #: ../../txts/tips/barbarians.tip:10
 msgid ""
@@ -686,13 +688,13 @@ msgid ""
 "You can select multiple animal types if you hold down Ctrl during selection."
 " If you then click on the map, an instance of one of the selected animal "
 "types will be placed."
-msgstr ""
+msgstr "Aby zaznaczyć kilka typów zwierząt, przytrzymaj w trakcie zaznaczania przycisk Ctrl. Kliknij następnie na mapę, aby umieścić losowo jeden z zaznaczonych obiektów."
 
 #: ../../txts/tips/editor.tip:10
 msgid ""
 "Just like with animals, you can also select multiple immovables or ground "
 "textures with Ctrl + mouse click."
-msgstr ""
+msgstr "W ten sam sposób, co zwierzęta możesz zaznaczać wiele obiektów statycznych lub tekstur terenu za pomocą CTRL + kliknięcia."
 
 #: ../../txts/tips/editor.tip:14
 msgid ""

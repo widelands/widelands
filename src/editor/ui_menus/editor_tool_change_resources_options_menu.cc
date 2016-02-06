@@ -23,6 +23,7 @@
 #include <string>
 
 #include "base/i18n.h"
+#include "base/wexception.h"
 #include "editor/editorinteractive.h"
 #include "editor/tools/editor_increase_resources_tool.h"
 #include "editor/tools/editor_set_resources_tool.h"
@@ -54,21 +55,21 @@ EditorToolChangeResourcesOptionsMenu
 	m_change_by_label
 		(this,
 		 hmargin(), vmargin(), get_inner_w() - 2 * hmargin(), BUTTON_HEIGHT,
-		 _("Increase/Decrease Value"), UI::Align_BottomCenter),
+		 _("Increase/Decrease Value"), UI::Align::kBottomCenter),
 	m_change_by_increase
 		(this, "incr_change_by",
 		 get_inner_w() - hmargin() - BUTTON_WIDTH,
 		 m_change_by_label.get_y() + m_change_by_label.get_h() + spacing(),
 		 BUTTON_WIDTH, BUTTON_HEIGHT,
-		 g_gr->images().get("pics/but1.png"),
-		 g_gr->images().get("pics/scrollbar_up.png")),
+		 g_gr->images().get("images/ui_basic/but1.png"),
+		 g_gr->images().get("images/ui_basic/scrollbar_up.png")),
 	m_change_by_decrease
 		(this, "decr_change_by",
 		 hmargin(),
 		 m_change_by_increase.get_y(),
 		 BUTTON_WIDTH, BUTTON_HEIGHT,
-		 g_gr->images().get("pics/but1.png"),
-		 g_gr->images().get("pics/scrollbar_down.png")),
+		 g_gr->images().get("images/ui_basic/but1.png"),
+		 g_gr->images().get("images/ui_basic/scrollbar_down.png")),
 	m_change_by_value
 		(this,
 		 m_change_by_increase.get_x() + m_change_by_increase.get_w() +
@@ -79,32 +80,32 @@ EditorToolChangeResourcesOptionsMenu
 		 (m_change_by_increase.get_x() + m_change_by_increase.get_w() +
 		  hspacing()),
 		 BUTTON_HEIGHT,
-		 UI::Align_BottomCenter),
+		 UI::Align::kBottomCenter),
 	m_set_to_label
 		(this,
 		 vmargin(),
 		 m_change_by_increase.get_y() + m_change_by_increase.get_h() + vspacing(),
 		 get_inner_w() - 2 * hmargin(), BUTTON_HEIGHT,
-		 _("Set Value"), UI::Align_BottomCenter),
+		 _("Set Value"), UI::Align::kBottomCenter),
 	m_set_to_increase
 		(this, "incr_set_to",
 		 m_change_by_increase.get_x(),
 		 m_set_to_label.get_y() + m_set_to_label.get_h() + vspacing(),
 		 BUTTON_WIDTH, BUTTON_HEIGHT,
-		 g_gr->images().get("pics/but1.png"),
-		 g_gr->images().get("pics/scrollbar_up.png")),
+		 g_gr->images().get("images/ui_basic/but1.png"),
+		 g_gr->images().get("images/ui_basic/scrollbar_up.png")),
 	m_set_to_decrease
 		(this, "decr_set_to",
 		 hmargin(),
 		 m_set_to_increase.get_y(), BUTTON_WIDTH, BUTTON_HEIGHT,
-		 g_gr->images().get("pics/but1.png"),
-		 g_gr->images().get("pics/scrollbar_down.png")),
+		 g_gr->images().get("images/ui_basic/but1.png"),
+		 g_gr->images().get("images/ui_basic/scrollbar_down.png")),
 	m_set_to_value
 		(this,
 		 m_change_by_value.get_x(), m_set_to_increase.get_y(),
 		 m_change_by_value.get_w(), BUTTON_HEIGHT,
-		 UI::Align_BottomCenter),
-	m_cur_selection(this, 0, 0, _("Current Selection"), UI::Align_BottomCenter),
+		 UI::Align::kBottomCenter),
+	m_cur_selection(this, 0, 0, _("Current Selection"), UI::Align::kBottomCenter),
 	m_increase_tool(increase_tool)
 {
 	m_change_by_increase.sigclicked.connect
@@ -198,7 +199,7 @@ void EditorToolChangeResourcesOptionsMenu::clicked_button(Button const n)
 	case    Set_To_Increase: set_to    += set_to    < 63; break;
 	case    Set_To_Decrease: set_to    -= 0 < set_to;     break;
 	default:
-		assert(false);
+		NEVER_HERE();
 		break;
 	}
 	m_increase_tool.set_change_by(change_by);

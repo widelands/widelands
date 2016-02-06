@@ -25,6 +25,7 @@
 
 #include "base/log.h"
 #include "base/macros.h"
+#include "base/wexception.h"
 #include "economy/wares_queue.h"
 #include "graphic/graphic.h"
 #include "logic/findimmovable.h"
@@ -851,10 +852,10 @@ HasSoldiers
 
 		.. code-block:: lua
 
-			l:set_soldiers{
+			l:set_soldiers({
 			  [{0,0,0,0}] = 10,
 			  [{1,2,3,4}] = 5,
-			)
+			})
 
 		would add 10 level 0 soldier and 5 soldiers with hit point level 1,
 		attack level 2, defense level 3 and evade level 4 (as long as this is
@@ -1335,11 +1336,11 @@ const PropertyType<LuaMapObjectDescription> LuaMapObjectDescription::Properties[
 
 // Only base classes can be persisted.
 void LuaMapObjectDescription::__persist(lua_State*) {
-	assert(false);
+	NEVER_HERE();
 }
 
 void LuaMapObjectDescription::__unpersist(lua_State*) {
-	assert(false);
+	NEVER_HERE();
 }
 
 /*
@@ -3845,6 +3846,7 @@ const PropertyType<LuaShip> LuaShip::Properties[] = {
 	PROP_RO(LuaShip, state),
 	PROP_RW(LuaShip, scouting_direction),
 	PROP_RW(LuaShip, island_explore_direction),
+	PROP_RO(LuaShip, shipname),
 	{nullptr, nullptr, nullptr},
 };
 
@@ -3952,7 +3954,7 @@ int LuaShip::get_scouting_direction(lua_State* L) {
 			case WalkingDir::WALK_NW:
 				lua_pushstring(L, "nw");
 				break;
-			default:
+			case WalkingDir::IDLE:
 				return 0;
 			}
 		return 1;
@@ -4003,7 +4005,7 @@ int LuaShip::get_island_explore_direction(lua_State* L) {
 			case IslandExploreDirection::kClockwise:
 				lua_pushstring(L, "cw");
 				break;
-			default:
+			case IslandExploreDirection::kNotSet:
 				return 0;
 		}
 		return 1;
@@ -4025,6 +4027,22 @@ int LuaShip::set_island_explore_direction(lua_State* L) {
 		return 1;
 	}
 	return 0;
+}
+
+/* RST
+	.. attribute:: NAME
+
+	Get name of ship:
+
+		(RO) returns the :class:`string` ship's name.
+
+
+*/
+int LuaShip::get_shipname(lua_State* L) {
+	EditorGameBase& egbase = get_egbase(L);
+	Ship* ship = get(L, egbase);
+	lua_pushstring(L, ship->get_shipname().c_str());
+	return 1;
 }
 
 /*

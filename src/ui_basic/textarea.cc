@@ -137,8 +137,6 @@ void Textarea::set_text(const std::string & text)
 		expand();
 	else if (m_layoutmode == Layouted)
 		update_desired_size();
-
-	update();
 }
 
 const std::string& Textarea::get_text()
@@ -162,10 +160,10 @@ void Textarea::draw(RenderTarget & dst)
 {
 	if (!m_text.empty()) {
 		Point anchor
-			(m_align & Align_HCenter ?
-			 get_w() / 2 : m_align & Align_Right  ? get_w() : 0,
-			 m_align & Align_VCenter ?
-			 get_h() / 2 : m_align & Align_Bottom ? get_h() : 0);
+			(static_cast<int>(m_align & UI::Align::kHCenter) ?
+			 get_w() / 2 : static_cast<int>(m_align & UI::Align::kRight)  ? get_w() : 0,
+			 static_cast<int>(m_align & UI::Align::kVCenter) ?
+			 get_h() / 2 : static_cast<int>(m_align & UI::Align::kBottom) ? get_h() : 0);
 
 		dst.blit(anchor, rendered_text_, BlendMode::UseAlpha, m_align);
 	}
@@ -182,14 +180,14 @@ void Textarea::collapse()
 	int32_t w = get_w();
 	int32_t h = get_h();
 
-	if (m_align & Align_HCenter)
+	if (static_cast<int>(m_align & UI::Align::kHCenter))
 		x += w >> 1;
-	else if (m_align & Align_Right)
+	else if (static_cast<int>(m_align & UI::Align::kRight))
 		x += w;
 
-	if (m_align & Align_VCenter)
+	if (static_cast<int>(m_align & UI::Align::kVCenter))
 		y += h >> 1;
-	else if (m_align & Align_Bottom)
+	else if (static_cast<int>(m_align & UI::Align::kBottom))
 		y += h;
 
 	set_pos(Point(x, y));
@@ -206,17 +204,17 @@ void Textarea::expand()
 	int32_t y = get_y();
 
 	update_desired_size();
-	uint32_t w, h;
-	get_desired_size(w, h);
+	int w, h;
+	get_desired_size(&w, &h);
 
-	if      (m_align & Align_HCenter)
+	if      (static_cast<int>(m_align & UI::Align::kHCenter))
 		x -= w >> 1;
-	else if (m_align & Align_Right)
+	else if (static_cast<int>(m_align & UI::Align::kRight))
 		x -= w;
 
-	if      (m_align & Align_VCenter)
+	if      (static_cast<int>(m_align & UI::Align::kVCenter))
 		y -= h >> 1;
-	else if (m_align & Align_Bottom)
+	else if (static_cast<int>(m_align & UI::Align::kBottom))
 		y -= h;
 
 	set_pos(Point(x, y));

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2004-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,7 +23,7 @@
 
 ComputerPlayer::ComputerPlayer
 	(Widelands::Game & g, Widelands::PlayerNumber const pid)
-	: m_game(g), m_player_number(pid)
+	: game_(g), player_number_(pid)
 {
 }
 
@@ -40,7 +40,7 @@ struct EmptyAI : ComputerPlayer {
 			name = "empty";
 			/** TRANSLATORS: This is the name of an AI used in the game setup screens */
 			descname = _("No AI");
-			icon_filename = "pics/ai_empty.png";
+			icon_filename = "images/ai/ai_empty.png";
 		}
 		ComputerPlayer * instantiate
 			(Widelands::Game & g, Widelands::PlayerNumber const pid) const override

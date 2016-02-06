@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-09-28 06:43+0000\n"
-"PO-Revision-Date: 2015-10-03 19:26+0000\n"
+"POT-Creation-Date: 2015-12-14 05:31+0000\n"
+"PO-Revision-Date: 2016-01-13 00:12+0000\n"
 "Last-Translator: Szűcs Kornél Géza <sz.kornelgeza@gmail.com>\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
@@ -244,7 +244,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:125
 msgid "No Iron"
-msgstr ""
+msgstr "Nincs vas"
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:127
 msgid "We lack iron"
@@ -309,7 +309,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:150
 msgid "Start an expedition"
-msgstr ""
+msgstr "Expedíció indítása"
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:153
 msgid "Start an expedition."
@@ -414,8 +414,9 @@ msgid ""
 msgstr ""
 
 #: ../../scripting/format_scenario.lua:36
+#, lua-format
 msgid "“%s”"
-msgstr ""
+msgstr "„%s”"
 
 #: ../../scripting/format_scenario.lua:146
 msgid "New Objective"

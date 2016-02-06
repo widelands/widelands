@@ -27,6 +27,7 @@
 
 #include "base/i18n.h"
 #include "base/macros.h"
+#include "base/wexception.h"
 #include "config.h"
 #include "economy/economy.h"
 #include "economy/flag.h"
@@ -120,7 +121,7 @@ bool match_force_skip(char* & candidate, const char* pattern) {
 		} else if (*p != *pattern)
 			return false;
 
-	return false;
+	NEVER_HERE();
 }
 
 ProductionProgram::ActReturn::Condition * create_economy_condition
@@ -287,7 +288,7 @@ void ProductionProgram::parse_ware_type_group
 			break;
 		default:
 			// scan for terminator should ensure that this cannot happen
-			assert(false);
+			NEVER_HERE();
 		}
 	}
 }
@@ -402,8 +403,8 @@ std::string ProductionProgram::ActReturn::SiteHas::description
 	std::string condition = i18n::localize_list(condition_list, i18n::ConcatenateWith::AND);
 	if (1 < group.second) {
 		/** TRANSLATORS: This is an item in a list of wares, e.g. "3x water": */
-		/** TRANSLATORS:    %1$s = "3" */
-		/** TRANSLATORS:    %2$i = "water" */
+		/** TRANSLATORS:    %1$i = "3" */
+		/** TRANSLATORS:    %2$s = "water" */
 		condition = (boost::format(_("%1$ix %2$s"))
 						 % static_cast<unsigned int>(group.second)
 						 % condition).str();
@@ -697,8 +698,6 @@ void ProductionProgram::ActCall::execute
 		ps.m_program_timer   = true;
 		ps.m_program_time    = ps.schedule_act(game, 10);
 		break;
-	default:
-		throw wexception("ProductionProgram call: bad result handling method");
 	}
 }
 
@@ -818,8 +817,7 @@ void ProductionProgram::ActCheckMap::execute(Game& game, ProductionSite& ps) con
 			}
 		}
 		default:
-			assert(false);
-			break;
+			NEVER_HERE();
 	}
 }
 
@@ -1055,7 +1053,7 @@ void ProductionProgram::ActProduce::execute
 		count += item_pair.second;
 		std::string ware_descname = tribe.get_ware_descr(item_pair.first)->descname();
 		// TODO(GunChleoc): would be nice with pngettext whenever it gets added to xgettext for Lua.
-		if (1 < count) {
+		if (1 < item_pair.second || 1 < produced_wares_.size()) {
 			/** TRANSLATORS: This is an item in a list of wares, e.g. "Produced 2x Coal": */
 			/** TRANSLATORS:    %%1$i = "2" */
 			/** TRANSLATORS:    %2$s = "Coal" */
@@ -1151,7 +1149,7 @@ void ProductionProgram::ActRecruit::execute
 		count += item_pair.second;
 		std::string worker_descname = tribe.get_worker_descr(item_pair.first)->descname();
 		// TODO(GunChleoc): would be nice with pngettext whenever it gets added to xgettext for Lua.
-		if (1 < count) {
+		if (1 < item_pair.second || 1 < recruited_workers_.size()) {
 			/** TRANSLATORS: This is an item in a list of workers, e.g. "Recruited 2x Ox": */
 			/** TRANSLATORS:    %1$i = "2" */
 			/** TRANSLATORS:    %2$s = "Ox" */

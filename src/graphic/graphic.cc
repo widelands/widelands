@@ -31,6 +31,7 @@
 #include "graphic/font.h"
 #include "graphic/font_handler.h"
 #include "graphic/font_handler1.h"
+#include "graphic/gl/initialize.h"
 #include "graphic/gl/system_headers.h"
 #include "graphic/image.h"
 #include "graphic/image_io.h"
@@ -52,9 +53,9 @@ namespace  {
 // Sets the icon for the application.
 void set_icon(SDL_Window* sdl_window) {
 #ifndef _WIN32
-	const std::string icon_name = "pics/wl-ico-128.png";
+	const std::string icon_name = "images/logos/wl-ico-128.png";
 #else
-	const std::string icon_name = "pics/wl-ico-32.png";
+	const std::string icon_name = "images/logos/wl-ico-32.png";
 #endif
 	SDL_Surface* s = load_image_as_sdl_surface(icon_name, g_fs);
 	SDL_SetWindowIcon(sdl_window, s);
@@ -69,64 +70,32 @@ Graphic::Graphic() : image_cache_(new ImageCache()), animation_manager_(new Anim
 /**
  * Initialize the SDL video mode.
  */
-void Graphic::initialize(int window_mode_w, int window_mode_h, bool init_fullscreen) {
+void Graphic::initialize(const TraceGl& trace_gl,
+                         int window_mode_w,
+                         int window_mode_h,
+                         bool init_fullscreen) {
 	window_mode_width_ = window_mode_w;
 	window_mode_height_ = window_mode_h;
-	requires_update_ = true;
 
-	// Request an OpenGL 2 context with double buffering.
-	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
-	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 2);
-	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 1);
-	SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
+	if (SDL_GL_LoadLibrary(nullptr) == -1) {
+		throw wexception("SDL_GL_LoadLibrary failed: %s", SDL_GetError());
+	}
 
 	log("Graphics: Try to set Videomode %ux%u\n", window_mode_width_, window_mode_height_);
 	sdl_window_ =
 	   SDL_CreateWindow("Widelands Window", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
 	                    window_mode_width_, window_mode_height_, SDL_WINDOW_OPENGL);
 
+	GLint max_texture_size;
+	gl_context_ = Gl::initialize(
+	   trace_gl == TraceGl::kYes ? Gl::Trace::kYes : Gl::Trace::kNo, sdl_window_,
+	   &max_texture_size);
+
 	resolution_changed();
 	set_fullscreen(init_fullscreen);
 
 	SDL_SetWindowTitle(sdl_window_, ("Widelands " + build_id() + '(' + build_type() + ')').c_str());
 	set_icon(sdl_window_);
-
-	gl_context_ = SDL_GL_CreateContext(sdl_window_);
-	SDL_GL_MakeCurrent(sdl_window_, gl_context_);
-
-#ifdef USE_GLBINDING
-	glbinding::Binding::initialize();
-#else
-	// See graphic/gl/system_headers.h for an explanation of the next line.
-	glewExperimental = GL_TRUE;
-	GLenum err = glewInit();
-	if (err != GLEW_OK) {
-		log("glewInit returns %i\nYour OpenGL installation must be __very__ broken. %s\n", err,
-		    glewGetErrorString(err));
-		throw wexception("glewInit returns %i: Broken OpenGL installation.", err);
-	}
-#endif
-
-	log(
-	   "Graphics: OpenGL: Version \"%s\"\n", reinterpret_cast<const char*>(glGetString(GL_VERSION)));
-
-	GLboolean glBool;
-	glGetBooleanv(GL_DOUBLEBUFFER, &glBool);
-	log("Graphics: OpenGL: Double buffering %s\n", (glBool == GL_TRUE) ? "enabled" : "disabled");
-
-	GLint max_texture_size;
-	glGetIntegerv(GL_MAX_TEXTURE_SIZE, &max_texture_size);
-	log("Graphics: OpenGL: Max texture size: %u\n", max_texture_size);
-
-	glDrawBuffer(GL_BACK);
-
-	glDisable(GL_DEPTH_TEST);
-	glDepthFunc(GL_LEQUAL);
-
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
-	glClear(GL_COLOR_BUFFER_BIT);
 
 	SDL_GL_SwapWindow(sdl_window_);
 
@@ -142,7 +111,6 @@ void Graphic::initialize(int window_mode_w, int window_mode_h, bool init_fullscr
 		    SDL_GetCurrentVideoDriver(), disp_mode.format, disp_mode.w, disp_mode.h);
 		assert(SDL_BYTESPERPIXEL(disp_mode.format) == 4);
 	}
-
 
 	std::map<std::string, std::unique_ptr<Texture>> textures_in_atlas;
 	auto texture_atlases = build_texture_atlas(max_texture_size, &textures_in_atlas);
@@ -200,8 +168,6 @@ void Graphic::resolution_changed() {
 	render_target_.reset(new RenderTarget(screen_.get()));
 
 	Notifications::publish(GraphicResolutionChanged{new_w, new_h});
-
-	update();
 }
 
 /**
@@ -245,18 +211,6 @@ void Graphic::set_fullscreen(const bool value)
 	resolution_changed();
 }
 
-
-void Graphic::update() {
-	requires_update_ = true;
-}
-
-/**
- * Returns true if parts of the screen have been marked for refreshing.
-*/
-bool Graphic::need_update() const {
-	return requires_update_;
-}
-
 /**
  * Bring the screen uptodate.
 */
@@ -286,7 +240,6 @@ void Graphic::refresh()
 	}
 
 	SDL_GL_SwapWindow(sdl_window_);
-	requires_update_ = false;
 }
 
 /**
@@ -295,7 +248,4 @@ void Graphic::refresh()
 void Graphic::screenshot(const string& fname)
 {
 	screenshot_filename_ = fname;
-
-	// Force a redraw of the screen soon.
-	update();
 }

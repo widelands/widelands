@@ -105,7 +105,7 @@ DitherProgram::DitherProgram() {
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, static_cast<GLint>(GL_CLAMP_TO_EDGE));
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, static_cast<GLint>(GL_CLAMP_TO_EDGE));
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, static_cast<GLint>(GL_LINEAR));
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, static_cast<GLint>(GL_NEAREST));
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, static_cast<GLint>(GL_LINEAR));
 }
 
 DitherProgram::~DitherProgram() {}
@@ -137,8 +137,6 @@ void DitherProgram::add_vertex(const FieldsToDraw::Field& field,
 		back.dither_texture_x = 0.5;
 		back.dither_texture_y = 0.;
 		break;
-	default:
-		throw wexception("Never here.");
 	}
 }
 
