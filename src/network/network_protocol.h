@@ -416,7 +416,18 @@ enum {
 	 */
 	NETCMD_SETTING_CHANGEINIT = 28,
 
-	// 29 - 32 were commands related to dedicated server. Do not use.
+	// 29 - 31 were commands related to dedicated server. Do not use.
+
+	/**
+	 * This is sent by the server to generate a clientsided translated system
+	 * chat message. Payload is:
+	 *
+	 * \li string:    Message code \see NetworkGamingMessages::fill_map()
+	 * \li string:    First attached string
+	 * \li string:    Second attached string
+	 * \li string:    Third attached string
+	 */
+	NETCMD_SYSTEM_MESSAGE_CODE = 32,
 
 	/**
 	 * Sent by the metaserver to a freshly opened game to check connectability

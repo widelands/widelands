@@ -40,7 +40,7 @@ struct NetHost : public GameController, private SyncCallback {
 	NetHost (const std::string & playername, bool internet = false);
 	virtual ~NetHost ();
 
-	void run(bool autostart = false);
+	void run();
 	const std::string & get_local_playername() const;
 	int16_t get_local_playerposition();
 

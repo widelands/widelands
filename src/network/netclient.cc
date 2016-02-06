@@ -103,6 +103,7 @@ NetClient::NetClient
 : d(new NetClientImpl), m_internet(internet)
 {
 	d->sock = SDLNet_TCP_Open(svaddr);
+			log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	if (d->sock == nullptr)
 		throw WLWarning
 			(_("Could not establish connection to host"),
@@ -154,9 +155,13 @@ void NetClient::run ()
 	{
 		FullscreenMenuLaunchMPG lgm(this, this);
 		lgm.set_chat_provider(*this);
+		log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 		d->modal = &lgm;
+		log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 		FullscreenMenuBase::MenuTarget code = lgm.run<FullscreenMenuBase::MenuTarget>();
+		log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 		d->modal = nullptr;
+		log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 		if (code == FullscreenMenuBase::MenuTarget::kBack) {
 			// if this is an internet game, tell the metaserver that client is back in the lobby.
 			if (m_internet)
@@ -165,69 +170,87 @@ void NetClient::run ()
 		}
 	}
 
+	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	d->server_is_waiting = true;
 
+	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	Widelands::Game game;
 #ifndef NDEBUG
 	game.set_write_syncstream(true);
 #endif
+	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 
-	try {
-		UI::ProgressWindow * loaderUI = new UI::ProgressWindow("images/loadscreens/progress.png");
+	// try {
+		UI::ProgressWindow* loaderUI = new UI::ProgressWindow("images/loadscreens/progress.png");
 		std::vector<std::string> tipstext;
 		tipstext.push_back("general_game");
 		tipstext.push_back("multiplayer");
+		log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 		try {
 			tipstext.push_back(get_players_tribe());
-		} catch (NoTribe) {}
-		GameTips tips (*loaderUI, tipstext);
+		} catch (NoTribe) {
+		}
+		log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
+		GameTips tips(*loaderUI, tipstext);
 
 		loaderUI->step(_("Preparing game"));
 
+		log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 		d->game = &game;
 		game.set_game_controller(this);
+		log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 		uint8_t const pn = d->settings.playernum + 1;
-		InteractiveGameBase * igb;
+		InteractiveGameBase* igb;
+		log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 		if (pn > 0)
-			igb =
-				new InteractivePlayer
-					(game, g_options.pull_section("global"),
-					 pn, true);
+			igb = new InteractivePlayer(game, g_options.pull_section("global"), pn, true);
 		else
-			igb =
-				new InteractiveSpectator
-					(game, g_options.pull_section("global"), true);
+			igb = new InteractiveSpectator(game, g_options.pull_section("global"), true);
+		log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 		game.set_ibase(igb);
 		igb->set_chat_provider(*this);
-		if (!d->settings.savegame) //  new map
+		log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
+		if (!d->settings.savegame) {  //  new map
 			game.init_newgame(loaderUI, d->settings);
-		else // savegame
+		} else {  // savegame
 			game.init_savegame(loaderUI, d->settings);
+		}
+		log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 		d->time.reset(game.get_gametime());
 		d->lasttimestamp = game.get_gametime();
+		log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 		d->lasttimestamp_realtime = SDL_GetTicks();
+		log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 
+		log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 		d->modal = game.get_ibase();
-		game.run
-			(loaderUI,
-			 d->settings.savegame ?
-			 Widelands::Game::Loaded
-			 : d->settings.scenario ?
-			 Widelands::Game::NewMPScenario : Widelands::Game::NewNonScenario,
-			 "", false);
+		log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
+		log("#sirver d->settings.scenario: %d\n", d->settings.scenario);
+		game.run(loaderUI, d->settings.savegame ? Widelands::Game::Loaded : d->settings.scenario ?
+		                                          Widelands::Game::NewMPScenario :
+		                                          Widelands::Game::NewNonScenario,
+		         "", false);
 
+		log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 		// if this is an internet game, tell the metaserver that the game is done.
 		if (m_internet)
 			InternetGaming::ref().set_game_done();
+		log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 		d->modal = nullptr;
+		log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 		d->game = nullptr;
-	} catch (...) {
-		d->modal = nullptr;
-		WLApplication::emergency_save(game);
-		d->game = nullptr;
-		disconnect("CLIENT_CRASHED");
-		throw;
-	}
+	// } catch (...) {
+	// log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
+		// d->modal = nullptr;
+	// log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
+		// WLApplication::emergency_save(game);
+	// log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
+		// d->game = nullptr;
+	// log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
+		// disconnect("CLIENT_CRASHED");
+			// log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
+		// throw;
+	/* } */
 }
 
 void NetClient::think()
@@ -307,7 +330,14 @@ const GameSettings & NetClient::settings()
 	return d->settings;
 }
 
-bool NetClient::can_change_player_state(uint8_t const number)
+void NetClient::set_scenario(bool) {
+}
+
+bool NetClient::can_change_map() {
+	return false;
+}
+
+bool NetClient::can_change_player_state(uint8_t const)
 {
 	return false;
 }
@@ -322,7 +352,6 @@ bool NetClient::can_change_player_team(uint8_t number)
 	return (number == d->settings.playernum) && !d->settings.scenario && !d->settings.savegame;
 }
 
-// NOCOM(#sirver): can these functions go away?
 bool NetClient::can_change_player_init(uint8_t number)
 {
 	return false;
@@ -345,6 +374,10 @@ void NetClient::set_player_ai(uint8_t, const std::string &, bool const /* random
 
 void NetClient::next_player_state(uint8_t number)
 {
+	// client is not allowed to do this
+}
+
+void NetClient::set_map(const std::string&, const std::string&, uint32_t, bool) {
 	// client is not allowed to do this
 }
 
@@ -484,6 +517,7 @@ void NetClient::set_paused(bool /* paused */)
 }
 
 void NetClient::receive_one_player(uint8_t const number, StreamRead& packet) {
+	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	if (number >= d->settings.players.size())
 		throw DisconnectException("PLAYER_UPDATE_FOR_N_E_P");
 
@@ -500,6 +534,7 @@ void NetClient::receive_one_player(uint8_t const number, StreamRead& packet) {
 }
 
 void NetClient::receive_one_user(uint32_t const number, StreamRead& packet) {
+	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	if (number > d->settings.users.size())
 		throw DisconnectException("USER_UPDATE_FOR_N_E_U");
 
@@ -579,7 +614,10 @@ void NetClient::handle_packet(RecvPacket & packet)
 		return;
 	}
 
+	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
+
 	if (d->settings.usernum == -2) {
+		log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 		if (cmd != NETCMD_HELLO)
 			throw ProtocolException(cmd);
 		uint8_t const version = packet.unsigned_8();
@@ -589,9 +627,11 @@ void NetClient::handle_packet(RecvPacket & packet)
 		d->settings.playernum = -1;
 		return;
 	}
+	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 
 	switch (cmd) {
 	case NETCMD_PING: {
+								log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 		SendPacket s;
 		s.unsigned_8(NETCMD_PONG);
 		s.send(d->sock);
@@ -601,6 +641,8 @@ void NetClient::handle_packet(RecvPacket & packet)
 	}
 
 	case NETCMD_SETTING_MAP: {
+								log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
+
 		d->settings.mapname = packet.string();
 		d->settings.mapfilename = g_fs->FileSystem::fix_cross_file(packet.string());
 		d->settings.savegame = packet.unsigned_8() == 1;
@@ -616,6 +658,8 @@ void NetClient::handle_packet(RecvPacket & packet)
 	}
 
 	case NETCMD_NEW_FILE_AVAILABLE: {
+								log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
+
 		std::string path = g_fs->FileSystem::fix_cross_file(packet.string());
 		uint32_t bytes   = packet.unsigned_32();
 		std::string md5  = packet.string();
@@ -666,6 +710,8 @@ void NetClient::handle_packet(RecvPacket & packet)
 	}
 
 	case NETCMD_FILE_PART: {
+								log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
+
 		// Only go on, if we are waiting for a file part at the moment. It can happen, that an "unrequested"
 		// part is send by the server if the map was changed just a moment ago and there was an outstanding
 		// request from the client.
@@ -714,7 +760,6 @@ void NetClient::handle_packet(RecvPacket & packet)
 			fr.open(*g_fs, file->filename);
 
 			std::unique_ptr<char[]> complete(new char[file->bytes]);
-			if (!complete) throw wexception("Out of memory");
 
 			fr.data_complete(complete.get(), file->bytes);
 			SimpleMD5Checksum md5sum;
@@ -768,6 +813,8 @@ void NetClient::handle_packet(RecvPacket & packet)
 	}
 
 	case NETCMD_SETTING_TRIBES: {
+								log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
+
 		d->settings.tribes.clear();
 		for (uint8_t i = packet.unsigned_8(); i; --i) {
 			TribeBasicInfo info = Widelands::Tribes::tribeinfo(packet.string());
@@ -788,59 +835,77 @@ void NetClient::handle_packet(RecvPacket & packet)
 	}
 
 	case NETCMD_SETTING_ALLPLAYERS: {
+								log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
+
 		d->settings.players.resize(packet.unsigned_8());
 		for (uint8_t i = 0; i < d->settings.players.size(); ++i)
 			receive_one_player(i, packet);
 		break;
 	}
 	case NETCMD_SETTING_PLAYER: {
+								log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 		uint8_t player = packet.unsigned_8();
 		receive_one_player(player, packet);
 		break;
 	}
 	case NETCMD_SETTING_ALLUSERS: {
+								log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 		d->settings.users.resize(packet.unsigned_8());
 		for (uint32_t i = 0; i < d->settings.users.size(); ++i)
 			receive_one_user(i, packet);
 		break;
 	}
 	case NETCMD_SETTING_USER: {
+								log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 		uint32_t user = packet.unsigned_32();
 		receive_one_user(user, packet);
 		break;
 	}
 	case NETCMD_SET_PLAYERNUMBER: {
+								log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 		int32_t number = packet.signed_32();
 		d->settings.playernum = number;
 		d->settings.users.at(d->settings.usernum).position = number;
 		break;
 	}
 	case NETCMD_WIN_CONDITION: {
+								log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 		d->settings.win_condition_script = packet.string();
 		break;
 	}
 
 	case NETCMD_LAUNCH: {
+	  log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
+	  log("#sirver d->modal: %p,d->game: %p\n", d->modal, d->game);
 		if (!d->modal || d->game) {
+			log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 			throw DisconnectException("UNEXPECTED_LAUNCH");
 		}
 		d->modal->end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kOk);
 		break;
 	}
+
 	case NETCMD_SETSPEED:
+			log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 		d->realspeed = packet.unsigned_16();
 		log
 			("[Client] speed: %u.%03u\n",
 			 d->realspeed / 1000, d->realspeed % 1000);
 		break;
+
 	case NETCMD_TIME:
+								log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 		d->time.receive(packet.signed_32());
 		break;
+
 	case NETCMD_WAIT:
+								log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 		log("[Client]: server is waiting.\n");
 		d->server_is_waiting = true;
 		break;
+
 	case NETCMD_PLAYERCOMMAND: {
+			log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 		if (!d->game)
 			throw DisconnectException("PLAYERCMD_WO_GAME");
 
@@ -852,7 +917,9 @@ void NetClient::handle_packet(RecvPacket & packet)
 		d->time.receive(time);
 		break;
 	}
+
 	case NETCMD_SYNCREQUEST: {
+			log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 		if (!d->game)
 			throw DisconnectException("SYNCREQUEST_WO_GAME");
 		int32_t const time = packet.signed_32();
@@ -860,7 +927,9 @@ void NetClient::handle_packet(RecvPacket & packet)
 		d->game->enqueue_command(new CmdNetCheckSync(time, this));
 		break;
 	}
+
 	case NETCMD_CHAT: {
+								log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 		ChatMessage c;
 		c.time = time(nullptr);
 		c.playern = packet.signed_16();
@@ -872,7 +941,9 @@ void NetClient::handle_packet(RecvPacket & packet)
 		Notifications::publish(c);
 		break;
 	}
+
 	case NETCMD_SYSTEM_MESSAGE_CODE: {
+								log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 		ChatMessage c;
 		c.time = time(nullptr);
 		std::string code = packet.string();
@@ -886,14 +957,18 @@ void NetClient::handle_packet(RecvPacket & packet)
 		Notifications::publish(c);
 		break;
 	}
+
 	case NETCMD_INFO_DESYNC:
+								log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 		log
 			("[Client] received NETCMD_INFO_DESYNC. Trying to salvage some "
 			 "information for debugging.\n");
 		if (d->game)
 			d->game->save_syncstream(true);
 		break;
+
 	default:
+			log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 		throw ProtocolException(cmd);
 	}
 }

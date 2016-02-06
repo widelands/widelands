@@ -433,10 +433,6 @@ void FullscreenMenuLaunchMPG::select_saved_game() {
 				UI::WLMessageBox::MBoxType::kOk);
 			warning.run<UI::Panel::Returncodes>();
 		}
-	} else {
-		if (!settings_ || settings_->settings().saved_games.empty()) {
-			throw wexception("A file was selected, that is not available to the client");
-		}
 	}
 }
 

@@ -309,7 +309,7 @@ private:
 struct HostChatProvider : public ChatProvider {
 	HostChatProvider(NetHost * const _h) : h(_h), kickClient(0) {}
 
-	void send(const std::string & msg) override {
+	void send(const std::string& msg) override {
 		ChatMessage c;
 		c.time = time(nullptr);
 		c.playern = h->get_local_playerposition();
@@ -336,7 +336,7 @@ struct HostChatProvider : public ChatProvider {
 
 			// Split up in "cmd" "arg1" "arg2"
 			std::string cmd, arg1, arg2;
-			std::string temp = c.msg.substr(1); // cut off '/'
+			std::string temp = c.msg.substr(1);  // cut off '/'
 			h->split_command_array(temp, cmd, arg1, arg2);
 			log("%s + \"%s\" + \"%s\"\n", cmd.c_str(), arg1.c_str(), arg2.c_str());
 
@@ -353,22 +353,26 @@ struct HostChatProvider : public ChatProvider {
 
 			// Help
 			if (cmd == "help") {
-				c.msg =
-					(boost::format("<br>%s<br>%s<br>%s<br>%s<br>%s<br>%s<br>%s")
-						% _("Available host commands are:")
-						/** TRANSLATORS: Available host command */
-						% _("/help  -  Shows this help")
-						/** TRANSLATORS: Available host command */
-						% _("/announce <msg>  -  Send a chatmessage as announcement (system chat)")
-						/** TRANSLATORS: Available host command */
-						% _("/warn <name> <reason>  -  Warn the user <name> because of <reason>")
-						/** TRANSLATORS: Available host command */
-						% _("/kick <name> <reason>  -  Kick the user <name> because of <reason>")
-						/** TRANSLATORS: Available host command */
-						% _("/forcePause            -  Force the game to pause.")
-						/** TRANSLATORS: Available host command */
-						% _("/endForcedPause        -  Return game to normal speed.")
-					).str();
+				c.msg = (boost::format("<br>%s<br>%s<br>%s<br>%s<br>%s<br>%s<br>%s") %
+				         _("Available host commands are:")
+				         /** TRANSLATORS: Available host command */
+				         %
+				         _("/help  -  Shows this help")
+				         /** TRANSLATORS: Available host command */
+				         %
+				         _("/announce <msg>  -  Send a chatmessage as announcement (system chat)")
+				         /** TRANSLATORS: Available host command */
+				         %
+				         _("/warn <name> <reason>  -  Warn the user <name> because of <reason>")
+				         /** TRANSLATORS: Available host command */
+				         %
+				         _("/kick <name> <reason>  -  Kick the user <name> because of <reason>")
+				         /** TRANSLATORS: Available host command */
+				         %
+				         _("/forcePause            -  Force the game to pause.")
+				         /** TRANSLATORS: Available host command */
+				         %
+				         _("/endForcedPause        -  Return game to normal speed.")).str();
 			}
 
 			// Announce
@@ -388,10 +392,10 @@ struct HostChatProvider : public ChatProvider {
 					c.msg = _("Wrong use, should be: /warn <name> <reason>");
 				} else {
 					int32_t num = h->check_client(arg1);
-					} else if (num == -1) {
+					if (num == -1) {
 						c.msg = (boost::format(_("The client %s could not be found.")) % arg1).str();
 					} else {
-						c.msg  = (boost::format("HOST WARNING FOR %s: ") % arg1).str();
+						c.msg = (boost::format("HOST WARNING FOR %s: ") % arg1).str();
 						c.msg += arg2;
 					}
 				}
@@ -409,12 +413,14 @@ struct HostChatProvider : public ChatProvider {
 						kickReason = "No reason given!";
 					// Check if client exists
 					int32_t num = h->check_client(kickUser);
-					else if (num == -1)
-						c.msg = (boost::format(_("The client %s could not be found.")) % arg1).str();
+					if (num == -1) c.msg =
+					   (boost::format(_("The client %s could not be found.")) % arg1).str();
 					else {
 						kickClient = num;
-						c.msg  = (boost::format(_("Are you sure you want to kick %s?")) % arg1).str() + "<br>";
-						c.msg += (boost::format(_("The stated reason was: %s")) % kickReason).str() + "<br>";
+						c.msg =
+						   (boost::format(_("Are you sure you want to kick %s?")) % arg1).str() + "<br>";
+						c.msg +=
+						   (boost::format(_("The stated reason was: %s")) % kickReason).str() + "<br>";
 						c.msg += (boost::format(_("If yes, type: /ack_kick %s")) % arg1).str();
 					}
 				}
@@ -433,7 +439,7 @@ struct HostChatProvider : public ChatProvider {
 					} else
 						c.msg = _("kick acknowledgement cancelled: Wrong name given!");
 				}
-				kickUser   = "";
+				kickUser = "";
 				kickReason = "";
 			}
 
@@ -673,7 +679,7 @@ void NetHost::init_computer_players()
 	}
 }
 
-void NetHost::run(bool const autorun)
+void NetHost::run()
 {
 	// Fill the list of possible system messages
 	NetworkGamingMessages::fill_map();

@@ -30,6 +30,7 @@
 #include <boost/format.hpp>
 
 #include "base/wexception.h"
+#include "base/log.h" // NOCOM(#sirver): remove again
 #include "io/filesystem/filesystem_exceptions.h"
 #include "io/filesystem/zip_exceptions.h"
 #include "io/streamread.h"
@@ -57,16 +58,24 @@ void ZipFilesystem::ZipFile::close() {
 }
 
 void ZipFilesystem::ZipFile::open_for_zip() {
+	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
+	log("#sirver state_: %d\n", state_);
 	if (state_ == State::kZipping)
 		return;
 
+	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	close();
+	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 
 	write_handle_ = zipOpen(path_.c_str(), APPEND_STATUS_ADDINZIP);
+	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	if (!write_handle_) {
+		log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 		//  Couldn't open for append, so create new.
 		write_handle_ = zipOpen(path_.c_str(), APPEND_STATUS_CREATE);
 	}
+	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
+	log("#sirver write_handle_: %p\n", write_handle_);
 
 	state_ = State::kZipping;
 }
@@ -101,6 +110,7 @@ std::string ZipFilesystem::ZipFile::strip_basename(const std::string& filename) 
 }
 
 const zipFile& ZipFilesystem::ZipFile::write_handle() {
+	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	open_for_zip();
 	return write_handle_;
 }
@@ -306,6 +316,7 @@ void ZipFilesystem::fs_unlink(const std::string & filename) {
  * if the dir can't be created or if a file with this name exists
  */
 void ZipFilesystem::ensure_directory_exists(const std::string & dirname) {
+	log("#sirver dirname: %s\n", dirname.c_str());
 	if (file_exists(dirname) && is_directory(dirname))
 		return;
 
@@ -345,6 +356,12 @@ void ZipFilesystem::make_directory(const std::string & dirname) {
 	case ZIP_ERRNO:
 		throw FileError
 			("ZipFilesystem::make_directory", complete_filename, strerror(errno));
+	case ZIP_PARAMERROR:
+		log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
+	case ZIP_BADZIPFILE:
+		log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
+	case ZIP_INTERNALERROR:
+		log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	default:
 		throw FileError
 			("ZipFilesystem::make_directory", complete_filename);
