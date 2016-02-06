@@ -131,7 +131,7 @@ void Window::set_center_panel(Panel * panel)
  */
 void Window::update_desired_size()
 {
-	if (m_center_panel) {
+	if (m_center_panel && !_is_minimal) {
 		int innerw, innerh;
 		m_center_panel->get_desired_size(&innerw, &innerh);
 		set_desired_size
@@ -488,6 +488,7 @@ void Window::restore() {
 		(get_lborder(), get_rborder(),
 		 get_tborder(), BT_B_PIXMAP_THICKNESS);
 	set_inner_size(get_inner_w(), _oldh);
+	update_desired_size();
 	move_inside_parent();
 }
 void Window::minimize() {
