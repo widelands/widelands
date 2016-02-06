@@ -225,7 +225,6 @@ public:
 ReplayWriter::ReplayWriter(Game & game, const std::string & filename)
 	: m_game(game), m_filename(filename)
 {
-	log("#sirver filename: %s\n", filename.c_str());
 	g_fs->ensure_directory_exists(REPLAY_DIR);
 
 	SaveHandler & save_handler = m_game.save_handler();

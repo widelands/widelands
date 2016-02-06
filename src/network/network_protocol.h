@@ -178,7 +178,6 @@ enum {
 	 */
 	NETCMD_SETTING_ALLPLAYERS = 7,
 
-	// NOCOM(#sirver): can this be killed?
 	/**
 	 * During game setup, this command updates the information associated to
 	 * one player slot.
