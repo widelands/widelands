@@ -72,6 +72,105 @@ struct NodeStyle {
 	string reference;
 };
 
+
+/*
+ * This class makes sure that we only load each font file once.
+ */
+class FontCache {
+public:
+	FontCache() = default;
+	~FontCache();
+
+	IFont& get_font(NodeStyle* style);
+
+private:
+	struct FontDescr {
+		string face;
+		uint16_t size;
+
+		bool operator<(const FontDescr& o) const {
+			return size < o.size || (size == o.size && face < o.face);
+		}
+	};
+	using FontMap = map<FontDescr, IFont*>;
+	using FontMapPair = pair<const FontDescr, std::unique_ptr<IFont>>;
+
+	FontMap m_fontmap;
+
+	DISALLOW_COPY_AND_ASSIGN(FontCache);
+};
+
+FontCache::~FontCache() {
+	for (FontMap::reference& entry : m_fontmap) {
+		delete entry.second;
+	}
+}
+
+IFont& FontCache::get_font(NodeStyle* ns) {
+	if (ns->font_face == "serif") {
+		ns->font_face = ns->fontset->serif();
+	} else if (ns->font_face == "sans") {
+		ns->font_face = ns->fontset->sans();
+	} else if (ns->font_face == "condensed") {
+		ns->font_face = ns->fontset->condensed();
+	}
+	const bool is_bold = ns->font_style & IFont::BOLD;
+	const bool is_italic = ns->font_style & IFont::ITALIC;
+	if (is_bold && is_italic) {
+		if (ns->font_face == ns->fontset->condensed() ||
+			 ns->font_face == ns->fontset->condensed_bold() ||
+			 ns->font_face == ns->fontset->condensed_italic()) {
+			ns->font_face = ns->fontset->condensed_bold_italic();
+		} else if (ns->font_face == ns->fontset->serif() ||
+					  ns->font_face == ns->fontset->serif_bold() ||
+					  ns->font_face == ns->fontset->serif_italic()) {
+			ns->font_face = ns->fontset->serif_bold_italic();
+		} else {
+			ns->font_face = ns->fontset->sans_bold_italic();
+		}
+		// NOCOM ns->font_style &= ~IFont::ITALIC;
+		// ns->font_style &= ~IFont::BOLD;
+	} else if (is_bold) {
+		if (ns->font_face == ns->fontset->condensed()) {
+			ns->font_face = ns->fontset->condensed_bold();
+		} else if (ns->font_face == ns->fontset->serif()) {
+			ns->font_face = ns->fontset->serif_bold();
+		} else {
+			ns->font_face = ns->fontset->sans_bold();
+		}
+		// ns->font_style &= ~IFont::BOLD;
+	} else if (is_italic) {
+		if (ns->font_face == ns->fontset->condensed()) {
+			ns->font_face = ns->fontset->condensed_italic();
+		} else if (ns->font_face == ns->fontset->serif()) {
+			ns->font_face = ns->fontset->serif_italic();
+		} else {
+			ns->font_face = ns->fontset->sans_italic();
+		}
+		// NOCOM ns->font_style &= ~IFont::ITALIC;
+	}
+
+	log("NOCOM font face is %s\n", ns->font_face.c_str());
+
+	uint16_t font_size = ns->font_size + ns->fontset->size_offset();
+
+	FontDescr fd = {ns->font_face, font_size};
+	FontMap::iterator i = m_fontmap.find(fd);
+	if (i != m_fontmap.end())
+		return *i->second;
+
+	std::unique_ptr<IFont> font;
+	try {
+		font.reset(load_font(ns->font_face, font_size));
+	} catch (FileNotFoundError& e) {
+		log("Font file not found. Falling back to serif: %s\n%s\n", ns->font_face.c_str(), e.what());
+		font.reset(load_font(ns->fontset->serif(), font_size));
+	}
+	assert(font != nullptr);
+
+	return *m_fontmap.insert(std::make_pair(fd, font.release())).first->second;
+}
+
 struct Reference {
 	Rect dim;
 	string ref;
@@ -317,7 +416,7 @@ uint16_t Layout::fit_nodes(vector<RenderNode*>& rv, uint16_t w, Borders p, bool 
  */
 class TextNode : public RenderNode {
 public:
-	TextNode(IFont& font, NodeStyle&, const string& txt);
+	TextNode(FontCache& font, NodeStyle&, const string& txt);
 	virtual ~TextNode() {}
 
 	uint16_t width() override {return m_w;}
@@ -338,20 +437,23 @@ protected:
 	uint16_t m_w, m_h;
 	const string m_txt;
 	NodeStyle m_s;
-	IFont& m_font;
+	FontCache& m_fontcache;
 };
 
-TextNode::TextNode(IFont& font, NodeStyle& ns, const string& txt)
-	: RenderNode(ns), m_txt(txt), m_s(ns), m_font(font)
+TextNode::TextNode(FontCache& font, NodeStyle& ns, const string& txt)
+	: RenderNode(ns), m_txt(txt), m_s(ns), m_fontcache(font)
 {
-	m_font.dimensions(m_txt, ns.font_style, &m_w, &m_h);
+	m_fontcache.get_font(&m_s).dimensions(m_txt, ns.font_style, &m_w, &m_h); // NOCOM
+	log("\nNOCOM dimensions are %d, %d for '%s'\n", m_w, m_h, m_txt.c_str());
 }
 uint16_t TextNode::hotspot_y() {
-	return m_font.ascent(m_s.font_style);
+	return m_fontcache.get_font(&m_s).ascent(m_s.font_style); // NOCOM
 }
 
+// NOCOM split fonts per glyph here.
 Texture* TextNode::render(TextureCache* texture_cache) {
-	const Texture& img = m_font.render(m_txt, m_s.font_color, m_s.font_style, texture_cache);
+	const Texture& img = m_fontcache.get_font(&m_s).render(m_txt, m_s.font_color, m_s.font_style, texture_cache);
+	log("NOCOM size %d %d for rendering %s\n", img.width(), img.height(), m_txt.c_str());
 	Texture* rv = new Texture(img.width(), img.height());
 	rv->blit(Rect(0, 0, img.width(), img.height()),
 	         img,
@@ -367,7 +469,7 @@ Texture* TextNode::render(TextureCache* texture_cache) {
  */
 class FillingTextNode : public TextNode {
 public:
-	FillingTextNode(IFont& font, NodeStyle& ns, uint16_t w, const string& txt, bool expanding = false) :
+	FillingTextNode(FontCache& font, NodeStyle& ns, uint16_t w, const string& txt, bool expanding = false) :
 		TextNode(font, ns, txt), m_expanding(expanding) {
 			m_w = w;
 		}
@@ -381,7 +483,7 @@ private:
 	bool m_expanding;
 };
 Texture* FillingTextNode::render(TextureCache* texture_cache) {
-	const Texture& t = m_font.render(m_txt, m_s.font_color, m_s.font_style, texture_cache);
+	const Texture& t = m_fontcache.get_font(&m_s).render(m_txt, m_s.font_color, m_s.font_style, texture_cache);
 	Texture* rv = new Texture(m_w, m_h);
 	for (uint16_t curx = 0; curx < m_w; curx += t.width()) {
 		Rect srcrect(Point(0, 0), min<int>(t.width(), m_w - curx), m_h);
@@ -396,7 +498,7 @@ Texture* FillingTextNode::render(TextureCache* texture_cache) {
  */
 class WordSpacerNode : public TextNode {
 public:
-	WordSpacerNode(IFont& font, NodeStyle& ns) : TextNode(font, ns, " ") {}
+	WordSpacerNode(FontCache& font, NodeStyle& ns) : TextNode(font, ns, " ") {}
 	static void show_spaces(bool t) {m_show_spaces = t;}
 
 	Texture* render(TextureCache* texture_cache) override {
@@ -588,101 +690,6 @@ Texture* ImgRenderNode::render(TextureCache* /* texture_cache */) {
 }
 // End: Helper Stuff
 
-/*
- * This class makes sure that we only load each font file once.
- */
-class FontCache {
-public:
-	FontCache() = default;
-	~FontCache();
-
-	IFont& get_font(NodeStyle* style);
-
-private:
-	struct FontDescr {
-		string face;
-		uint16_t size;
-
-		bool operator<(const FontDescr& o) const {
-			return size < o.size || (size == o.size && face < o.face);
-		}
-	};
-	using FontMap = map<FontDescr, IFont*>;
-	using FontMapPair = pair<const FontDescr, std::unique_ptr<IFont>>;
-
-	FontMap m_fontmap;
-
-	DISALLOW_COPY_AND_ASSIGN(FontCache);
-};
-
-FontCache::~FontCache() {
-	for (FontMap::reference& entry : m_fontmap) {
-		delete entry.second;
-	}
-}
-
-IFont& FontCache::get_font(NodeStyle* ns) {
-	if (ns->font_face == "serif") {
-		ns->font_face = ns->fontset->serif();
-	} else if (ns->font_face == "sans") {
-		ns->font_face = ns->fontset->sans();
-	} else if (ns->font_face == "condensed") {
-		ns->font_face = ns->fontset->condensed();
-	}
-	const bool is_bold = ns->font_style & IFont::BOLD;
-	const bool is_italic = ns->font_style & IFont::ITALIC;
-	if (is_bold && is_italic) {
-		if (ns->font_face == ns->fontset->condensed() ||
-			 ns->font_face == ns->fontset->condensed_bold() ||
-			 ns->font_face == ns->fontset->condensed_italic()) {
-			ns->font_face = ns->fontset->condensed_bold_italic();
-		} else if (ns->font_face == ns->fontset->serif() ||
-					  ns->font_face == ns->fontset->serif_bold() ||
-					  ns->font_face == ns->fontset->serif_italic()) {
-			ns->font_face = ns->fontset->serif_bold_italic();
-		} else {
-			ns->font_face = ns->fontset->sans_bold_italic();
-		}
-		ns->font_style &= ~IFont::ITALIC;
-		ns->font_style &= ~IFont::BOLD;
-	} else if (is_bold) {
-		if (ns->font_face == ns->fontset->condensed()) {
-			ns->font_face = ns->fontset->condensed_bold();
-		} else if (ns->font_face == ns->fontset->serif()) {
-			ns->font_face = ns->fontset->serif_bold();
-		} else {
-			ns->font_face = ns->fontset->sans_bold();
-		}
-		ns->font_style &= ~IFont::BOLD;
-	} else if (is_italic) {
-		if (ns->font_face == ns->fontset->condensed()) {
-			ns->font_face = ns->fontset->condensed_italic();
-		} else if (ns->font_face == ns->fontset->serif()) {
-			ns->font_face = ns->fontset->serif_italic();
-		} else {
-			ns->font_face = ns->fontset->sans_italic();
-		}
-		ns->font_style &= ~IFont::ITALIC;
-	}
-
-	uint16_t font_size = ns->font_size + ns->fontset->size_offset();
-
-	FontDescr fd = {ns->font_face, font_size};
-	FontMap::iterator i = m_fontmap.find(fd);
-	if (i != m_fontmap.end())
-		return *i->second;
-
-	std::unique_ptr<IFont> font;
-	try {
-		font.reset(load_font(ns->font_face, font_size));
-	} catch (FileNotFoundError& e) {
-		log("Font file not found. Falling back to serif: %s\n%s\n", ns->font_face.c_str(), e.what());
-		font.reset(load_font(ns->fontset->serif(), font_size));
-	}
-	assert(font != nullptr);
-
-	return *m_fontmap.insert(std::make_pair(fd, font.release())).first->second;
-}
 
 class TagHandler;
 TagHandler* create_taghandler(Tag& tag, FontCache& fc, NodeStyle& ns, ImageCache* image_cache,
@@ -730,7 +737,7 @@ void TagHandler::m_make_text_nodes(const string& txt, vector<RenderNode*>& nodes
 
 			// We only know if the spacer goes to the left or right after having a look at the current word.
 			for (uint16_t ws_indx = 0; ws_indx < ts.pos() - cpos; ws_indx++) {
-				spacer_nodes.push_back(new WordSpacerNode(font_cache_.get_font(&ns), ns));
+				spacer_nodes.push_back(new WordSpacerNode(font_cache_, ns));
 			}
 
 			word = ts.till_any_or_end(" \t\n\r");
@@ -747,7 +754,7 @@ void TagHandler::m_make_text_nodes(const string& txt, vector<RenderNode*>& nodes
 						word = i18n::line2bidi(word.c_str());
 					}
 					it = text_nodes.insert(text_nodes.begin(),
-												  new TextNode(font_cache_.get_font(&ns), ns, word.c_str()));
+												  new TextNode(font_cache_, ns, word.c_str()));
 				} else { // Sequences of Latin words go to the right from current position
 					if (it < text_nodes.end()) {
 						++it;
@@ -758,7 +765,7 @@ void TagHandler::m_make_text_nodes(const string& txt, vector<RenderNode*>& nodes
 							++it;
 						}
 					}
-					it = text_nodes.insert(it, new TextNode(font_cache_.get_font(&ns), ns, word));
+					it = text_nodes.insert(it, new TextNode(font_cache_, ns, word));
 				}
 			}
 			previous_word = word;
@@ -773,7 +780,7 @@ void TagHandler::m_make_text_nodes(const string& txt, vector<RenderNode*>& nodes
 			std::size_t cpos = ts.pos();
 			ts.skip_ws();
 			for (uint16_t ws_indx = 0; ws_indx < ts.pos() - cpos; ws_indx++) {
-				nodes.push_back(new WordSpacerNode(font_cache_.get_font(&ns), ns));
+				nodes.push_back(new WordSpacerNode(font_cache_, ns));
 			}
 			word = ts.till_any_or_end(" \t\n\r");
 			ns.fontset = i18n::find_fontset(word.c_str(), fontsets_);
@@ -783,10 +790,10 @@ void TagHandler::m_make_text_nodes(const string& txt, vector<RenderNode*>& nodes
 				if (i18n::has_script_character(word.c_str(), UI::FontSets::Selector::kCJK)) {
 					std::vector<std::string> units = i18n::split_cjk_word(word.c_str());
 					for (const std::string& unit: units) {
-						nodes.push_back(new TextNode(font_cache_.get_font(&ns), ns, unit));
+						nodes.push_back(new TextNode(font_cache_, ns, unit));
 					}
 				} else {
-					nodes.push_back(new TextNode(font_cache_.get_font(&ns), ns, word));
+					nodes.push_back(new TextNode(font_cache_, ns, word));
 				}
 			}
 		}
@@ -941,9 +948,9 @@ public:
 		RenderNode* rn = nullptr;
 		if (!m_fill_text.empty()) {
 			if (m_space < INFINITE_WIDTH)
-				rn = new FillingTextNode(font_cache_.get_font(&m_ns), m_ns, m_space, m_fill_text);
+				rn = new FillingTextNode(font_cache_, m_ns, m_space, m_fill_text);
 			else
-				rn = new FillingTextNode(font_cache_.get_font(&m_ns), m_ns, 0, m_fill_text, true);
+				rn = new FillingTextNode(font_cache_, m_ns, 0, m_fill_text, true);
 		} else {
 			SpaceNode* sn;
 			if (m_space < INFINITE_WIDTH)

@@ -25,6 +25,7 @@
 #include <SDL_ttf.h>
 #include <boost/format.hpp>
 
+#include "base/log.h" // NOCOM
 #include "graphic/sdl_utils.h"
 #include "graphic/text/rt_errors.h"
 #include "graphic/texture.h"
@@ -62,6 +63,7 @@ void SdlTtfFont::dimensions(const string& txt, int style, uint16_t * gw, uint16_
 
 const Texture& SdlTtfFont::render
 	(const string& txt, const RGBColor& clr, int style, TextureCache* texture_cache) {
+	log("NOCOM rendering %s %d - %s\n", font_name_.c_str(), ptsize_, txt.c_str());
 	const string hash =
 		(boost::format("%s:%s:%i:%02x%02x%02x:%i") % font_name_ % ptsize_ % txt %
 		 static_cast<int>(clr.r) % static_cast<int>(clr.g) % static_cast<int>(clr.b) % style)
@@ -134,8 +136,8 @@ uint16_t SdlTtfFont::ascent(int style) const {
 
 void SdlTtfFont::m_set_style(int style) {
 	// Those must have been handled by loading the correct font.
-	assert(!(style & BOLD));
-	assert(!(style & ITALIC));
+	// NOCOM assert(!(style & BOLD));
+	//assert(!(style & ITALIC));
 
 	int sdl_style = TTF_STYLE_NORMAL;
 	if (style & UNDERLINE) sdl_style |= TTF_STYLE_UNDERLINE;
