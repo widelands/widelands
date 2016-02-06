@@ -95,12 +95,15 @@ macro(_common_compile_tasks)
   endif()
   if(ARG_USES_OPENGL)
     if(OPTION_USE_GLBINDING)
-      # Early versions of glbinding defined GLBINDING_INCLUDES, newer define
-      # GLBINDING_INCLUDE_DIRS. We mention both and rely that only one of them
-      # is defined.
-      # # NOCOMMIT(#sirver): remove?
-      # wl_include_system_directories(${NAME} ${GLBINDING_INCLUDES} ${GLBINDING_INCLUDE_DIRS})
-      target_link_libraries(${NAME} ${GLBINDING_LIBRARIES})
+      # Early versions of glbinding defined GLBINDING_INCLUDES, newer use
+      # cmake's module system.
+      if(DEFINED GLBINDING_INCLUDES)
+        wl_include_system_directories(${NAME} ${GLBINDING_INCLUDES})
+        target_link_libraries(${NAME} ${GLBINDING_LIBRARIES})
+      else()
+        target_link_libraries(${NAME} glbinding::glbinding)
+      endif()
+
       target_link_libraries(${NAME} ${OPENGL_gl_LIBRARY})
     else()
       wl_include_system_directories(${NAME} ${GLEW_INCLUDE_DIR})
