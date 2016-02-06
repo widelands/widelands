@@ -19,8 +19,8 @@ Build-Depends: debhelper (>= 9),
   doxygen, 
   cmake, 
   imagemagick,
-  glbinding,
-  glbinding-dev,
+  libglbinding,
+  libglbinding-dev,
   libpng-dev, 
   zlib1g-dev
 Vcs-Git: git://git.debian.org/git/pkg-games/widelands.git
