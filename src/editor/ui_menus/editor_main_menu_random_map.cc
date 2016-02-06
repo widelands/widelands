@@ -292,8 +292,13 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent) :
 	// ---------- "Generate Map" button ----------
 	cancel_button_.sigclicked.connect(boost::bind(&MainMenuNewRandomMap::clicked_cancel, this));
 	ok_button_.sigclicked.connect(boost::bind(&MainMenuNewRandomMap::clicked_create_map, this));
-	button_box_.add(&cancel_button_, UI::Align::kLeft);
-	button_box_.add(&ok_button_, UI::Align::kLeft);
+	if (UI::g_fh1->fontset().is_rtl()) {
+		button_box_.add(&ok_button_, UI::Align::kLeft);
+		button_box_.add(&cancel_button_, UI::Align::kLeft);
+	} else {
+		button_box_.add(&cancel_button_, UI::Align::kLeft);
+		button_box_.add(&ok_button_, UI::Align::kLeft);
+	}
 	box_.add(&button_box_, UI::Align::kLeft);
 	box_height += margin_ + button_box_.get_h();
 	box_height += 6 * margin_;

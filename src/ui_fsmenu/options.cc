@@ -116,7 +116,7 @@ FullscreenMenuOptions::FullscreenMenuOptions
 	// Buttons
 	cancel_
 		(this, "cancel",
-		 get_w() * 1 / 4 - butw_ / 2,
+		 UI::g_fh1->fontset().is_rtl() ? get_w() * 3 / 4 - butw_ / 2 : get_w() * 1 / 4 - butw_ / 2,
 		 get_inner_h() - hmargin_,
 		 butw_, buth_,
 		 g_gr->images().get("images/ui_basic/but0.png"),
@@ -130,7 +130,7 @@ FullscreenMenuOptions::FullscreenMenuOptions
 		 _("Apply"), std::string(), true, false),
 	ok_
 		(this, "ok",
-		 get_w() * 3 / 4 - butw_ / 2,
+		 UI::g_fh1->fontset().is_rtl() ? get_w() * 1 / 4 - butw_ / 2 : get_w() * 3 / 4 - butw_ / 2,
 		 get_inner_h() - hmargin_,
 		 butw_, buth_,
 		 g_gr->images().get("images/ui_basic/but2.png"),
