@@ -69,6 +69,8 @@ wl_binary(wl_dedicated
   DEPENDS
     base_log
     io_filesystem
+    logic
+    network
 )
 
 add_subdirectory(ai)
@@ -137,8 +139,6 @@ wl_library(helper
   DEPENDS
     base_exceptions
 )
-
-
 
 if (CMAKE_SYSTEM_NAME MATCHES "FreeBSD" OR CMAKE_SYSTEM_NAME MATCHES "OpenBSD")
   target_link_libraries(widelands_ball_of_mud ${EXECINFO_LIBRARY})
