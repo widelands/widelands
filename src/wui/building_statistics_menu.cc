@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -401,8 +401,6 @@ bool BuildingStatisticsMenu::add_button(
 		new UI::Textarea(button_box, 0, 0, kBuildGridCellWidth, kLabelHeight, UI::Align::kCenter);
 	button_box->add(owned_labels_[id], UI::Align::kHCenter);
 
-	button_box->add_space(6);
-
 	productivity_labels_[id] =
 		new UI::Textarea(button_box, 0, 0, kBuildGridCellWidth, kLabelHeight, UI::Align::kCenter);
 	button_box->add(productivity_labels_[id], UI::Align::kHCenter);
@@ -421,6 +419,7 @@ bool BuildingStatisticsMenu::add_button(
 	++*column;
 	if (*column == kColumns) {
 		tabs_[tab_index]->add(&row, UI::Align::kLeft);
+		tabs_[tab_index]->add_space(6);
 		*column = 0;
 		return true;
 	}
@@ -764,19 +763,30 @@ void BuildingStatisticsMenu::update() {
 void BuildingStatisticsMenu::set_labeltext_autosize(UI::Textarea* textarea,
 																	 const std::string& text,
 																	 const RGBColor& color) {
-	int fontsize = text.length() > 7 ? kLabelFontSize - floor(text.length() / 3) : kLabelFontSize;
 
-	UI::TextStyle style;
-	if (text.length() > 5) {
-		style.font = UI::Font::get(UI::g_fh1->fontset().condensed(), fontsize);
-	} else {
-		style.font = UI::Font::get(UI::g_fh1->fontset().serif(), fontsize);
-	}
-	style.fg = color;
-	style.bold = true;
+	const int min_font_size = 6;
+	const int max_width = kBuildGridCellWidth - 2;
+	const int max_height = kLabelHeight - 2;
 
-	textarea->set_textstyle(style);
+	int font_size = UI_FONT_SIZE_SMALL;
+	std::string fontset = UI::g_fh1->fontset().serif();
+
+	textarea->set_font(fontset, font_size, color);
 	textarea->set_text(text);
+
+	while (textarea->get_h() > max_height && font_size > min_font_size) {
+		--font_size;
+		textarea->set_font(fontset, font_size, color);
+	}
+
+	if (textarea->get_w() > max_width) {
+		fontset = UI::g_fh1->fontset().condensed();
+		while (textarea->get_w() > max_width && font_size > min_font_size) {
+			--font_size;
+			textarea->set_font(fontset, font_size, color);
+		}
+	}
+
 	textarea->set_visible(true);
 }
 
