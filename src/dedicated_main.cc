@@ -22,11 +22,15 @@
 #include <string>
 
 #include "base/log.h"
+#include "base/warning.h"
+#include "base/wexception.h"
 #include "config.h"
 #include "io/filesystem/filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/game.h"
+#include "map_io/map_loader.h"
 #include "network/internet_gaming.h"
+#include "network/nethost.h"
 
 int main(int argc, char **argv)
 {
@@ -43,21 +47,13 @@ int main(int argc, char **argv)
 	// Widelands::Game game;
 	// NOCOM(#sirver): kill dedicatedlog
 	// NOCOM(#sirver): make this configurable
-	if (!InternetGaming::ref().login(
-	       "dedicated", "", false, INTERNET_GAMING_METASERVER, INTERNET_GAMING_PORT)) {
-		log("ERROR: Could not connect to metaserver (reason above)!\n");
-		return;
-	}
+	// if (!InternetGaming::ref().login(
+			 // "dedicated", "", false, INTERNET_GAMING_METASERVER, INTERNET_GAMING_PORT)) {
+		// log("ERROR: Could not connect to metaserver (reason above)!\n");
+		// return 1;
+	// }
 
 	// try {
-	// // setup some details of the dedicated server
-	// Section & s = g_options.pull_section      ("global");
-	// const std::string & meta   = s.get_string ("metaserver", INTERNET_GAMING_METASERVER.c_str());
-	// uint32_t            port   = s.get_natural("metaserverport", INTERNET_GAMING_PORT);
-	// const std::string & name   = s.get_string ("nickname",       "dedicated");
-	// const std::string & server = s.get_string ("servername",     name.c_str());
-	// const bool registered      = s.get_bool   ("registered",     false);
-	// const std::string & pwd    = s.get_string ("password",       "");
 	// for (;;) { // endless loop
 	// std::string realservername(server);
 	// bool name_valid = false;
@@ -72,32 +68,33 @@ int main(int argc, char **argv)
 	// realservername += "*";
 	// }
 
-	// InternetGaming::ref().set_local_servername(realservername);
+	InternetGaming::ref().set_local_servername("dedicated_testing");
 
-	// NetHost netgame(name, true);
+	NetHost netgame("dedicated", true);
 
 	// // Load the requested map
-	// Widelands::Map map;
-	// map.set_filename(filename_);
-	// std::unique_ptr<Widelands::MapLoader> ml = map.get_correct_loader(filename_);
-	// if (!ml) {
-	// throw WLWarning
-	// ("Unsupported format",
-	// "Widelands could not load the file \"%s\". The file format seems to be incompatible.",
-	// filename_.c_str());
-	// }
-	// ml->preload_map(true);
+	Widelands::Map map;
+	map.set_filename(map_name);
+	std::unique_ptr<Widelands::MapLoader> ml = map.get_correct_loader(map_name);
+	if (!ml) {
+		throw WLWarning(
+		   "Unsupported format",
+		   "Widelands could not load the file \"%s\". The file format seems to be incompatible.",
+		   map_name.c_str());
+	}
+	ml->preload_map(true);
 
-	// // set the map
-	// netgame.set_map(map.get_name(), map.get_filename(), map.get_nrplayers());
+	// set the map
+	netgame.set_map(map.get_name(), map.get_filename(), map.get_nrplayers());
 
 	// // run the network game
 	// // -> autostarts when a player sends "/start" as pm to the server.
-	// netgame.run(true);
+	netgame.run(true);
 
-	// InternetGaming::ref().logout();
 	// }
 	// } catch (const std::exception & e) {
+
+	// InternetGaming::ref().logout();
 
 	return 0;
 }
