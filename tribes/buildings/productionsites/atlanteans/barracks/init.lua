@@ -23,13 +23,13 @@ tribes:new_productionsite_type {
 	},
 
    animations = {
-		idle = { -- NOCOM make animations
+		idle = {
 			pictures = path.list_files(dirname .. "idle_??.png"),
-			hotspot = { 77, 70 },
+			hotspot = { 48, 65 },
 		},
 		working = { -- NOCOM make animations
 			pictures = path.list_files(dirname .. "idle_??.png"),
-			hotspot = { 77, 70 },
+			hotspot = { 48, 65 },
 		}
 	},
 
