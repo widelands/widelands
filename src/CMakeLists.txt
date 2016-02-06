@@ -63,6 +63,14 @@ else()
   )
 endif()
 
+wl_binary(wl_dedicated
+  SRCS
+    dedicated_main.cc
+  DEPENDS
+    base_log
+    io_filesystem
+)
+
 add_subdirectory(ai)
 add_subdirectory(base)
 add_subdirectory(chat)
