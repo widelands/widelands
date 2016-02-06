@@ -95,7 +95,10 @@ macro(_common_compile_tasks)
   endif()
   if(ARG_USES_OPENGL)
     if(OPTION_USE_GLBINDING)
-      wl_include_system_directories(${NAME} ${GLBINDING_INCLUDES})
+      # Early versions of glbinding defined GLBINDING_INCLUDES, newer define
+      # GLBINDING_INCLUDE_DIRS. We mention both and rely that only one of them
+      # is defined.
+      wl_include_system_directories(${NAME} ${GLBINDING_INCLUDES} ${GLBINDING_INCLUDE_DIRS})
       target_link_libraries(${NAME} ${GLBINDING_LIBRARIES})
       target_link_libraries(${NAME} ${OPENGL_gl_LIBRARY})
     else()
