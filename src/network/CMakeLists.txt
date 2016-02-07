@@ -32,7 +32,6 @@ wl_library(network
     chat
     game_io
     helper
-    io_dedicated_log
     io_fileread
     io_filesystem
     io_stream

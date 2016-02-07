@@ -67,12 +67,6 @@ struct UserSettings {
 	bool        ready; // until now only used as a check for whether user is currently receiving a file or not
 };
 
-struct DedicatedMapInfos {
-	std::string path;
-	uint8_t     players;
-	bool        scenario;
-};
-
 /**
  * Holds all settings about a game that can be configured before the
  * game actually starts.
@@ -130,11 +124,6 @@ struct GameSettings {
 
 	/// Users connected to the game (0-based indices) - only used in multiplayer
 	std::vector<UserSettings> users;
-
-	/// Only used for dedicated servers so the clients can look through the maps available on the server
-	/// like in their "own" map / saved games selection menu
-	std::vector<DedicatedMapInfos> maps;
-	std::vector<DedicatedMapInfos> saved_games;
 };
 
 
