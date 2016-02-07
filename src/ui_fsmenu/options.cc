@@ -190,7 +190,7 @@ FullscreenMenuOptions::FullscreenMenuOptions
 	// Saving options
 	sb_autosave_
 		(&box_saving_, 0, 0, column_width_, 250,
-		 opt.autosave / 60, 0, 100, _("Save game automatically every"),
+		 opt.autosave / 60, 0, 100, _("Save game automatically every:"),
 		 /** TRANSLATORS: Options: Save game automatically every: */
 		 /** TRANSLATORS: This will have a number added in front of it */
 		 ngettext("minute", "minutes", opt.autosave / 60),
@@ -198,7 +198,7 @@ FullscreenMenuOptions::FullscreenMenuOptions
 
 	sb_rolling_autosave_
 		(&box_saving_, 0, 0, column_width_, 250,
-		 opt.rolling_autosave, 1, 20, _("Maximum number of autosave files"),
+		 opt.rolling_autosave, 1, 20, _("Maximum number of autosave files:"),
 		 "",
 		 g_gr->images().get("images/ui_basic/but3.png"), UI::SpinBox::Type::kBig),
 

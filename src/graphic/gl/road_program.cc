@@ -31,50 +31,9 @@
 #include "graphic/texture.h"
 #include "logic/roadtype.h"
 
-namespace  {
-
 // We target OpenGL 2.1 for the desktop here.
-const char kRoadVertexShader[] = R"(
-#version 120
-
-// Attributes.
-attribute vec2 attr_position;
-attribute vec2 attr_texture_position;
-attribute float attr_brightness;
-
-uniform float u_z_value;
-
-// Outputs.
-varying vec2 out_texture_position;
-varying float out_brightness;
-
-void main() {
-	out_texture_position = attr_texture_position;
-	out_brightness = attr_brightness;
-	gl_Position = vec4(attr_position, u_z_value, 1.);
-}
-)";
-
-const char kRoadFragmentShader[] = R"(
-#version 120
-
-// Inputs.
-varying vec2 out_texture_position;
-varying float out_brightness;
-
-uniform sampler2D u_texture;
-
-void main() {
-	vec4 color = texture2D(u_texture, out_texture_position);
-	color.rgb *= out_brightness;
-	gl_FragColor = color;
-}
-)";
-
-}  // namespace
-
 RoadProgram::RoadProgram() {
-	gl_program_.build(kRoadVertexShader, kRoadFragmentShader);
+	gl_program_.build("road");
 
 	attr_position_ = glGetAttribLocation(gl_program_.object(), "attr_position");
 	attr_texture_position_ = glGetAttribLocation(gl_program_.object(), "attr_texture_position");
