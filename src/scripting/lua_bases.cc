@@ -153,6 +153,7 @@ int LuaEditorGameBase::get_players(lua_State * L) {
  ==========================================================
  */
 
+// NOCOM(#codereview): fix comment. nothing is registered here. also belows.
 /* RST
 	.. function:: get_immovable_description(immovable_name)
 
@@ -167,21 +168,20 @@ int LuaEditorGameBase::get_immovable_description(lua_State* L) {
 		report_error(L, "Wrong number of arguments");
 	}
 	const std::string immovable_name = luaL_checkstring(L, 2);
+	// NOCOM(#sirver): get_egbase() is slighly expensive. Pull the result into a variable.
 	const World& world = get_egbase(L).world();
 	DescriptionIndex idx = world.get_immovable_index(immovable_name);
 	if (idx != INVALID_INDEX) {
 		const ImmovableDescr* descr = world.get_immovable_descr(idx);
 		return to_lua<LuaMaps::LuaImmovableDescription>(L, new LuaMaps::LuaImmovableDescription(descr));
-	} else {
-		const Tribes& tribes = get_egbase(L).tribes();
-		idx = tribes.immovable_index(immovable_name);
-		if (!tribes.immovable_exists(idx)) {
-			report_error(L, "Immovable %s does not exist", immovable_name.c_str());
-		}
-		const ImmovableDescr* descr = tribes.get_immovable_descr(idx);
-		return to_lua<LuaMaps::LuaImmovableDescription>(L, new LuaMaps::LuaImmovableDescription(descr));
 	}
-	return 0;
+	const Tribes& tribes = get_egbase(L).tribes();
+	idx = tribes.immovable_index(immovable_name);
+	if (!tribes.immovable_exists(idx)) {
+		report_error(L, "Immovable %s does not exist", immovable_name.c_str());
+	}
+	const ImmovableDescr* descr = tribes.get_immovable_descr(idx);
+	return to_lua<LuaMaps::LuaImmovableDescription>(L, new LuaMaps::LuaImmovableDescription(descr));
 }
 
 
@@ -280,6 +280,7 @@ int LuaEditorGameBase::get_worker_description(lua_State* L) {
 	return LuaMaps::upcasted_map_object_descr_to_lua(L, worker_description);
 }
 
+// NOCOM(#codereview): fix comment
 /* RST
 	.. function:: get_resource_description(resource_name)
 
@@ -295,7 +296,7 @@ int LuaEditorGameBase::get_resource_description(lua_State* L) {
 	}
 	const std::string resource_name = luaL_checkstring(L, 2);
 	const World& world = get_egbase(L).world();
-	DescriptionIndex idx = world.get_resource(resource_name.c_str());
+	const DescriptionIndex idx = world.get_resource(resource_name.c_str());
 
 	if (idx == INVALID_INDEX) {
 		report_error(L, "Resource %s does not exist", resource_name.c_str());
@@ -305,6 +306,7 @@ int LuaEditorGameBase::get_resource_description(lua_State* L) {
 	return to_lua<LuaMaps::LuaResourceDescription>(L, new LuaMaps::LuaResourceDescription(descr));
 }
 
+// NOCOM(#codereview): fix commment.
 /* RST
 	.. function:: get_terrain_description(terrain_name)
 

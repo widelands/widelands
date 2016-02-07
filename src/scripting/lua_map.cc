@@ -1413,9 +1413,9 @@ int LuaMapObjectDescription::get_type_name(lua_State * L) {
 
 /* RST
 ImmovableDescription
--------------------
+--------------------
 
-.. class:: LuaImmovableDescription
+.. class:: ImmovableDescription
 
 	A static description of a base immovable, so it can be used in help files
 	without having to access an actual immovable on the map.
@@ -1429,6 +1429,8 @@ const PropertyType<LuaImmovableDescription> LuaImmovableDescription::Properties[
 	PROP_RO(LuaImmovableDescription, basename),
 	PROP_RO(LuaImmovableDescription, build_cost),
 	PROP_RO(LuaImmovableDescription, editor_category),
+	// NOCOM(#codereview): how about dropping has_terrain_affinity and instead make
+	// terrain_affinity either 'nil' or a table with preferred_* as keys?
 	PROP_RO(LuaImmovableDescription, has_terrain_affinity),
 	PROP_RO(LuaImmovableDescription, pickiness),
 	PROP_RO(LuaImmovableDescription, preferred_fertility),
@@ -1471,7 +1473,8 @@ int LuaImmovableDescription::get_basename(lua_State * L) {
 /* RST
 	.. attribute:: build_cost
 
-			(RO) a list of ware build cost for the immovable.
+			(RO) a table of ware-to-count pairs, describing the build cost for the
+			immovable.
 */
 int LuaImmovableDescription::get_build_cost(lua_State * L) {
 	return wares_or_workers_map_to_lua(L, get()->buildcost(), MapObjectType::WARE);
@@ -1556,6 +1559,8 @@ int LuaImmovableDescription::get_preferred_temperature(lua_State * L) {
 			(RO) "world" for world immovables and "tribe" for tribe immovables.
 */
 int LuaImmovableDescription::get_owner_type(lua_State * L) {
+	// NOCOM(#codereview): switch on the owner type, so that the compiler throws an error if we ever add
+	// a new one.
 	lua_pushstring(L, get()->owner_type() == MapObjectDescr::OwnerType::kWorld ? "world" : "tribe");
 	return 1;
 }
@@ -1567,6 +1572,16 @@ int LuaImmovableDescription::get_owner_type(lua_State * L) {
 			(RO) the size of the immovable as an int.
 */
 int LuaImmovableDescription::get_size(lua_State * L) {
+	// NOCOM(#codereview): see this todo, that is also mentioned below for
+	// buildings. I think we can do that now, every description is wrapped I
+	// think. Essentially that means every instance of something on the map
+	// (like a building) get's a .description that has the static data for the
+	// building/immovable. maybe in a followup branch, but definitvely before b19, since that is backwards
+	// incompatible.
+	// TODO(SirVer): size should be similar to
+	// https://wl.widelands.org/docs/wl/autogen_wl_map/#wl.map.BaseImmovable.size.
+	// In fact, as soon as all descriptions are wrapped (also for other
+	// immovables besides buildings) we should get rid of BaseImmovable.size.
 	lua_pushinteger(L, get()->get_size());
 	return 1;
 }
@@ -2664,6 +2679,8 @@ const PropertyType<LuaResourceDescription> LuaResourceDescription::Properties[] 
 	{nullptr, nullptr, nullptr},
 };
 
+// NOCOM(#codereview): please add tests for these in the lua persistence test, so that we know
+// persisting works. Also for all the other descriptions of course.
 void LuaResourceDescription::__persist(lua_State* L) {
 	const Widelands::ResourceDescription* descr = get();
 	PERS_STRING("name", descr->name());
@@ -2775,6 +2792,9 @@ const MethodType<LuaTerrainDescription> LuaTerrainDescription::Methods[] = {
 const PropertyType<LuaTerrainDescription> LuaTerrainDescription::Properties[] = {
 	PROP_RO(LuaTerrainDescription, name),
 	PROP_RO(LuaTerrainDescription, descname),
+	// NOCOM(#codereview): why not return the resource_description here and for
+	// valid_resources instead of the name? Seems cleaner than the indirection
+	// and slightly more future proof.
 	PROP_RO(LuaTerrainDescription, default_resource_name),
 	PROP_RO(LuaTerrainDescription, default_resource_amount),
 	PROP_RO(LuaTerrainDescription, editor_category),
@@ -2862,6 +2882,12 @@ int LuaTerrainDescription::get_default_resource_amount(lua_State * L) {
 */
 int LuaTerrainDescription::get_editor_category(lua_State * L) {
 	const EditorCategory& editor_category = get()->editor_category();
+	// NOCOM(#codereview): that is super scary, not sure if that is even
+	// portable... please make editor_category() return a pointer that can be nullptr.
+	// Update: I checked and it is not: clang warning:
+	// warning: reference cannot be bound to dereferenced null pointer in
+	// well-defined C++ code; comparison may be assumed to always evaluate to true
+	// [-Wtautological-undefined-compare]
 	if (&editor_category != nullptr) {
 		lua_newtable(L);
 		lua_pushstring(L, "name");
@@ -2905,7 +2931,7 @@ int LuaTerrainDescription::get_humidity(lua_State * L) {
 */
 
 int LuaTerrainDescription::get_representative_image(lua_State * L) {
-	lua_pushstring(L, *get()->texture_paths().begin());
+	lua_pushstring(L, get()->texture_paths().front());
 	return 1;
 }
 
@@ -2957,6 +2983,11 @@ int LuaTerrainDescription::get_valid_resources_names(lua_State * L) {
 		(RO) A double describing the probability that the given tree will grow on this terrain.
 			  Returns nil if the tree given has no terrain affinity or doesn't exist.
 */
+// NOCOM(#codereview): Sorry to be a stickler, but I think this belongs into
+// the tree description instead. It is the probability of the tree to grow on a
+// certain terrain, so asking the tree description seems more logical. Also, I
+// think it should pass in the terrain description/tree description, not the
+// name.
 int LuaTerrainDescription::probability_to_grow(lua_State * L) {
 	if (lua_gettop(L) != 2) {
 		report_error(L, "Takes only one argument.");

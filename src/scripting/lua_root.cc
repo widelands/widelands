@@ -309,7 +309,13 @@ World
 
 const char LuaWorld::className[] = "World";
 const MethodType<LuaWorld> LuaWorld::Methods[] = {
+	// NOCOM(#codereview): get_ because these are methods that take arguments
+	// instead of properties? Not sure how we did it for the Lua API in the
+	// past.
+	// NOCOM(#codereview): get_immovable_descriptions_for_attribute? Alternatively make this a property that
+	// returns all immovable_descriptions and filter in lua for the attribute.
 	METHOD(LuaWorld, immovable_descriptions),
+	// NOCOM(#codereview): terrain_descriptions is actually a property. It takes no arguments.
 	METHOD(LuaWorld, terrain_descriptions),
 	METHOD(LuaWorld, new_critter_type),
 	METHOD(LuaWorld, new_editor_immovable_category),
@@ -381,6 +387,9 @@ int LuaWorld::immovable_descriptions(lua_State* L) {
 
 		(RO) a list of terrain names, e.g. {"wiese1", "wiese2", ...}
 */
+// NOCOM(#codereview): why is this not just returning the terrain_description
+// instead of strings? Alternatively it could also return name/description
+// pairs.
 int LuaWorld::terrain_descriptions(lua_State* L) {
 	const World& world = get_egbase(L).world();
 	lua_newtable(L);
