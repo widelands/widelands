@@ -447,6 +447,7 @@ TextNode::TextNode(FontCache& font, NodeStyle& ns, const string& txt)
 	log("\nNOCOM dimensions are %d, %d for '%s'\n", m_w, m_h, m_txt.c_str());
 }
 uint16_t TextNode::hotspot_y() {
+	//log("\nNOCOM hotspot is %d for '%s'\n", m_fontcache.get_font(&m_s).ascent(m_s.font_style), m_txt.c_str());
 	return m_fontcache.get_font(&m_s).ascent(m_s.font_style); // NOCOM
 }
 
@@ -593,6 +594,7 @@ public:
 	uint16_t width() override {return m_w + m_margin.left + m_margin.right;}
 	uint16_t height() override {return m_h + m_margin.top + m_margin.bottom;}
 	uint16_t hotspot_y() override {return height();}
+	// NOCOM main rendering
 	Texture* render(TextureCache* texture_cache) override {
 		Texture* rv = new Texture(width(), height());
 		rv->fill_rect(Rect(0, 0, rv->width(), rv->height()), RGBAColor(255, 255, 255, 0));
@@ -624,6 +626,8 @@ public:
 		for (RenderNode* n : m_nodes_to_render) {
 			Texture* node_texture = n->render(texture_cache);
 			if (node_texture) {
+				log("NOCOM blitting (%d, %d) - (%d, %d)\n", n->x() + m_margin.left, n->y() + m_margin.top,
+					 node_texture->width(), node_texture->height());
 				Rect dst = Rect(n->x() + m_margin.left,
 				                n->y() + m_margin.top,
 				                node_texture->width(),

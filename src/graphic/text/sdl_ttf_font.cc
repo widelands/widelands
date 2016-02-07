@@ -63,6 +63,7 @@ void SdlTtfFont::dimensions(const string& txt, int style, uint16_t * gw, uint16_
 
 const Texture& SdlTtfFont::render
 	(const string& txt, const RGBColor& clr, int style, TextureCache* texture_cache) {
+	// NOCOM !!! This is not the same font as when the text node gets generated!
 	log("NOCOM rendering %s %d - %s\n", font_name_.c_str(), ptsize_, txt.c_str());
 	const string hash =
 		(boost::format("%s:%s:%i:%02x%02x%02x:%i") % font_name_ % ptsize_ % txt %
