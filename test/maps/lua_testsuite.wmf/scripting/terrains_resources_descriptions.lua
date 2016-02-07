@@ -142,7 +142,7 @@ function test_terrains_resource_descr:test_valid_resources_names()
 end
 
 function test_terrains_resource_descr:test_terrain_probability_to_grow()
-	-- Using comparisons in order to not run into trouble with floating point numbers
+   -- Using comparisons in order to not run into trouble with floating point numbers
    assert_true(egbase:get_terrain_description("wiese1"):probability_to_grow("alder_summer_sapling") < 0.6)
    assert_true(egbase:get_terrain_description("wiese1"):probability_to_grow("alder_summer_sapling") > 0.4)
    assert_true(egbase:get_terrain_description("wasteland_beach"):probability_to_grow("alder_summer_sapling") < 0.003)

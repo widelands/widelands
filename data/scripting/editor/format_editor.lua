@@ -1,9 +1,12 @@
 include "scripting/formatting.lua"
 
+-- NOCOM(#codereview): needs documentation
 function picture_li(imagepath, text)
-   return "<rt image=" .. imagepath .. " image-align=left>" .. p(text) .. "</rt>"
+   return "<rt image=" .. imagepath .. " image-align=left>"
+      .. p(text) .. "</rt>"
 end
 
+-- NOCOM(#codereview): needs documentation
 function spacer()
    return rt(p("font-size=3", ""))
 end
@@ -20,8 +23,13 @@ end
 --
 function text_line(t1, t2, imgstr)
    if imgstr then
-      return "<rt text-align=left image=" .. imgstr .. " image-align=right><p font-size=13 font-color=D1D1D1>" ..  t1 .. "</p><p line-spacing=3 font-size=12>" .. t2 .. "<br></p><p font-size=8> <br></p></rt>"
+      return "<rt text-align=left image=" .. imgstr ..
+         " image-align=right><p font-size=13 font-color=D1D1D1>" ..
+         t1 .. "</p><p line-spacing=3 font-size=12>" ..
+         t2 .. "<br></p><p font-size=8> <br></p></rt>"
    else
-      return "<rt text-align=left><p font-size=13 font-color=D1D1D1>" ..  t1 .. "</p><p line-spacing=3 font-size=12>" .. t2 .. "<br></p><p font-size=8> <br></p></rt>"
+      return "<rt text-align=left><p font-size=13 font-color=D1D1D1>" ..
+         t1 .. "</p><p line-spacing=3 font-size=12>" ..
+         t2 .. "<br></p><p font-size=8> <br></p></rt>"
    end
 end
