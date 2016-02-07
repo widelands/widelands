@@ -29,7 +29,7 @@ namespace UI {
 // Contains font information for a locale
 struct FontSet {
 
-	static constexpr const char* kFallbackFont = "DejaVu/DejaVuSerif.ttf";
+	static constexpr const char* kFallbackFont = "DejaVu/DejaVuSans.ttf";
 
 	/// Create the fontset for a locale from configuration file
 	FontSet(const std::string& localename);

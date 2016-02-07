@@ -64,28 +64,28 @@ std::string as_game_tip(const std::string& txt) {
 }
 
 std::string as_window_title(const std::string& txt) {
-	static boost::format f("<rt><p><font face=serif size=13 bold=1 color=%s>%s</font></p></rt>");
+	static boost::format f("<rt><p><font face=sans size=13 bold=1 color=%s>%s</font></p></rt>");
 
 	f % UI_FONT_CLR_FG.hex_value();
 	f % txt;
 	return f.str();
 }
 
-std::string as_uifont(const std::string & txt, int size, const RGBColor& clr) {
-	return as_aligned(txt, UI::Align::kLeft, size, clr);
+std::string as_uifont(const std::string & txt, int size, const RGBColor& clr, bool condensed) {
+	return as_aligned(txt, UI::Align::kLeft, size, clr, condensed);
 }
 
 std::string as_editorfont(const std::string& text, int ptsize, const RGBColor& clr) {
 	// UI Text is always bold due to historic reasons
 	static boost::format
-			f("<rt keep_spaces=1><p><font face=serif size=%i bold=1 shadow=1 color=%s>%s</font></p></rt>");
+			f("<rt keep_spaces=1><p><font face=sans size=%i bold=1 shadow=1 color=%s>%s</font></p></rt>");
 	f % ptsize;
 	f % clr.hex_value();
 	f % richtext_escape(text);
 	return f.str();
 }
 
-std::string as_aligned(const std::string & txt, UI::Align align, int ptsize, const RGBColor& clr) {
+std::string as_aligned(const std::string & txt, UI::Align align, int ptsize, const RGBColor& clr, bool condensed) {
 	std::string alignment = "left";
 	if ((align & UI::Align::kHorizontal) == UI::Align::kRight) {
 		alignment = "right";
@@ -95,8 +95,9 @@ std::string as_aligned(const std::string & txt, UI::Align align, int ptsize, con
 
 	// UI Text is always bold due to historic reasons
 	static boost::format
-			f("<rt><p align=%s><font face=serif size=%i bold=1 shadow=1 color=%s>%s</font></p></rt>");
+			f("<rt><p align=%s><font face=%s size=%i bold=1 shadow=1 color=%s>%s</font></p></rt>");
 	f % alignment;
+	f % (condensed ? "condensed" : "sans");
 	f % ptsize;
 	f % clr.hex_value();
 	f % txt;
@@ -104,7 +105,7 @@ std::string as_aligned(const std::string & txt, UI::Align align, int ptsize, con
 }
 
 std::string as_tooltip(const std::string & txt) {
-	static boost::format f("<rt><p><font face=serif size=%i bold=1 color=%s>%s</font></p></rt>");
+	static boost::format f("<rt><p><font face=sans size=%i bold=1 color=%s>%s</font></p></rt>");
 
 	f % UI_FONT_SIZE_SMALL;
 	f % UI_FONT_TOOLTIP_CLR.hex_value();
@@ -215,7 +216,7 @@ const TextStyle & TextStyle::ui_big()
 {
 	static TextStyle style;
 
-	style.font = Font::get(UI::g_fh1->fontset().serif(), UI_FONT_SIZE_BIG);
+	style.font = Font::get(UI::g_fh1->fontset().sans(), UI_FONT_SIZE_BIG);
 	style.fg = UI_FONT_CLR_FG;
 	style.bold = true;
 
@@ -226,7 +227,18 @@ const TextStyle & TextStyle::ui_small()
 {
 	static TextStyle style;
 
-	style.font = Font::get(UI::g_fh1->fontset().serif(), UI_FONT_SIZE_SMALL);
+	style.font = Font::get(UI::g_fh1->fontset().sans(), UI_FONT_SIZE_SMALL);
+	style.fg = UI_FONT_CLR_FG;
+	style.bold = true;
+
+	return style;
+}
+
+const TextStyle & TextStyle::ui_condensed()
+{
+	static TextStyle style;
+
+	style.font = Font::get(UI::g_fh1->fontset().condensed(), UI_FONT_SIZE_SMALL);
 	style.fg = UI_FONT_CLR_FG;
 	style.bold = true;
 

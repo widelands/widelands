@@ -64,13 +64,13 @@ std::string richtext_escape(const std::string& given_text);
  * of rich text which can be rendered.
  */
 std::string as_uifont
-	(const std::string&, int ptsize = UI_FONT_SIZE_SMALL, const RGBColor& clr = UI_FONT_CLR_FG);
+	(const std::string&, int ptsize = UI_FONT_SIZE_SMALL, const RGBColor& clr = UI_FONT_CLR_FG, bool condensed = false);
 
 std::string as_editorfont(const std::string& text, int ptsize = UI_FONT_SIZE_SMALL,
 								  const RGBColor& clr = UI_FONT_CLR_FG);
 
 std::string as_aligned(const std::string & txt, UI::Align align, int ptsize = UI_FONT_SIZE_SMALL,
-							  const RGBColor& clr = UI_FONT_CLR_FG);
+							  const RGBColor& clr = UI_FONT_CLR_FG, bool condensed = false);
 
 std::string as_tooltip(const std::string&);
 std::string as_waresinfo(const std::string&);
@@ -103,6 +103,7 @@ struct TextStyle {
 
 	static const TextStyle & ui_big();
 	static const TextStyle & ui_small();
+	static const TextStyle & ui_condensed();
 	uint32_t calc_bare_width(const std::string & text) const;
 	uint32_t calc_width_for_wrapping(const UChar& c) const;
 	uint32_t calc_width_for_wrapping(const std::string & text) const;
