@@ -712,9 +712,9 @@ void NetHost::run()
 #endif
 
 	try {
-		std::unique_ptr<UI::ProgressWindow> loaderUI;
+		std::unique_ptr<UI::ProgressWindow> loader_ui;
 		GameTips * tips = nullptr;
-		loaderUI.reset(new UI::ProgressWindow("images/loadscreens/progress.png"));
+		loader_ui.reset(new UI::ProgressWindow("images/loadscreens/progress.png"));
 		std::vector<std::string> tipstext;
 		tipstext.push_back("general_game");
 		tipstext.push_back("multiplayer");
@@ -722,9 +722,9 @@ void NetHost::run()
 			tipstext.push_back(d->hp.get_players_tribe());
 		} catch (GameSettingsProvider::NoTribe) {
 		}
-		tips = new GameTips(*loaderUI, tipstext);
+		tips = new GameTips(*loader_ui, tipstext);
 
-		loaderUI->step(_("Preparing game"));
+		loader_ui->step(_("Preparing game"));
 
 		d->game = &game;
 		game.set_game_controller(this);
@@ -748,9 +748,9 @@ void NetHost::run()
 		game.set_ibase(igb);
 
 		if (!d->settings.savegame) // new game
-			game.init_newgame (loaderUI.get(), d->settings);
+			game.init_newgame (loader_ui.get(), d->settings);
 		else                      // savegame
-			game.init_savegame(loaderUI.get(), d->settings);
+			game.init_savegame(loader_ui.get(), d->settings);
 		d->pseudo_networktime = game.get_gametime();
 		d->time.reset(d->pseudo_networktime);
 		d->lastframe = SDL_GetTicks();
@@ -766,7 +766,7 @@ void NetHost::run()
 		check_hung_clients();
 		init_computer_players();
 		game.run
-			(loaderUI.get(),
+			(loader_ui.get(),
 			 d->settings.savegame ? Widelands::Game::Loaded : d->settings.scenario ?
 			 Widelands::Game::NewMPScenario : Widelands::Game::NewNonScenario,
 			 "",

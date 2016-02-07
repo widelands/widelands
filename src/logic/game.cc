@@ -211,23 +211,23 @@ bool Game::run_splayer_scenario_direct(char const * const mapname, const std::st
 	std::unique_ptr<MapLoader> maploader(map().get_correct_loader(mapname));
 	if (!maploader)
 		throw wexception("could not load \"%s\"", mapname);
-	UI::ProgressWindow loaderUI;
+	UI::ProgressWindow loader_ui;
 
-	loaderUI.step (_("Preloading map"));
+	loader_ui.step (_("Preloading map"));
 	maploader->preload_map(true);
 	std::string const background = map().get_background();
 	if (!background.empty()) {
-		loaderUI.set_background(background);
+		loader_ui.set_background(background);
 	}
-	loaderUI.step(_("Loading world"));
+	loader_ui.step(_("Loading world"));
 	world();
-	loaderUI.step(_("Loading tribes"));
+	loader_ui.step(_("Loading tribes"));
 	tribes();
 
 	// We have to create the players here.
+	loader_ui.step(_("Creating players"));
 	PlayerNumber const nr_players = map().get_nrplayers();
 	iterate_player_numbers(p, nr_players) {
-		loaderUI.stepf(_("Adding player %u"), p);
 		add_player
 			(p,
 			 0,
@@ -241,13 +241,13 @@ bool Game::run_splayer_scenario_direct(char const * const mapname, const std::st
 		(new InteractivePlayer
 		 	(*this, g_options.pull_section("global"), 1, false));
 
-	loaderUI.step(_("Loading map"));
+	loader_ui.step(_("Loading map"));
 	maploader->load_map_complete(*this, Widelands::MapLoader::LoadType::kScenario);
 	maploader.reset();
 
 	set_game_controller(new SinglePlayerGameController(*this, true, 1));
 	try {
-		bool const result = run(&loaderUI, NewSPScenario, script_to_run, false, "single_player");
+		bool const result = run(&loader_ui, NewSPScenario, script_to_run, false, "single_player");
 		delete m_ctrl;
 		m_ctrl = nullptr;
 		return result;
@@ -264,11 +264,11 @@ bool Game::run_splayer_scenario_direct(char const * const mapname, const std::st
  *
  */
 void Game::init_newgame
-	(UI::ProgressWindow * loaderUI, const GameSettings & settings)
+	(UI::ProgressWindow* loader_ui, const GameSettings& settings)
 {
-	assert(loaderUI != nullptr);
+	assert(loader_ui != nullptr);
 
-	loaderUI->step(_("Preloading map"));
+	loader_ui->step(_("Preloading map"));
 
 	assert(!get_map());
 	set_map(new Map);
@@ -278,17 +278,17 @@ void Game::init_newgame
 	assert(maploader != nullptr);
 	maploader->preload_map(settings.scenario);
 
-	loaderUI->step(_("Loading world"));
+	loader_ui->step(_("Loading world"));
 	world();
 
-	loaderUI->step(_("Loading tribes"));
+	loader_ui->step(_("Loading tribes"));
 	tribes();
 
 	std::string const background = map().get_background();
 	if (!background.empty()) {
-		loaderUI->set_background(background);
+		loader_ui->set_background(background);
 	}
-	loaderUI->step(_("Configuring players"));
+	loader_ui->step(_("Creating players"));
 
 	std::vector<PlayerSettings> shared;
 	std::vector<uint8_t>        shared_num;
@@ -321,7 +321,7 @@ void Game::init_newgame
 			->add_further_starting_position(shared_num.at(n), shared.at(n).initialization_index);
 	}
 
-	loaderUI->step(_("Loading map"));
+	loader_ui->step(_("Loading map"));
 	maploader->load_map_complete(*this,
 										  settings.scenario ?
 											  Widelands::MapLoader::LoadType::kScenario :
@@ -348,11 +348,11 @@ void Game::init_newgame
  * run<Returncode>() takes care about this difference.
  */
 void Game::init_savegame
-	(UI::ProgressWindow * loaderUI, const GameSettings & settings)
+	(UI::ProgressWindow* loader_ui, const GameSettings& settings)
 {
-	assert(loaderUI != nullptr);
+	assert(loader_ui != nullptr);
 
-	loaderUI->step(_("Preloading map"));
+	loader_ui->step(_("Preloading map"));
 
 	assert(!get_map());
 	set_map(new Map);
@@ -362,8 +362,8 @@ void Game::init_savegame
 		gl.preload_game(gpdp);
 		m_win_condition_displayname = gpdp.get_win_condition();
 		std::string background(gpdp.get_background());
-		loaderUI->set_background(background);
-		loaderUI->step(_("Loading..."));
+		loader_ui->set_background(background);
+		loader_ui->step(_("Loading..."));
 		gl.load_game(settings.multiplayer);
 	} catch (...) {
 		throw;
@@ -371,14 +371,14 @@ void Game::init_savegame
 }
 
 bool Game::run_load_game(std::string filename, const std::string& script_to_run) {
-	UI::ProgressWindow loaderUI;
+	UI::ProgressWindow loader_ui;
 	std::vector<std::string> tipstext;
 	tipstext.push_back("general_game");
 	tipstext.push_back("singleplayer");
-	GameTips tips (loaderUI, tipstext);
+	GameTips tips (loader_ui, tipstext);
 	int8_t player_nr;
 
-	loaderUI.step(_("Preloading map"));
+	loader_ui.step(_("Preloading map"));
 
 	// We have to create an empty map, otherwise nothing will load properly
 	set_map(new Map);
@@ -390,13 +390,13 @@ bool Game::run_load_game(std::string filename, const std::string& script_to_run)
 		gl.preload_game(gpdp);
 		std::string background(gpdp.get_background());
 		m_win_condition_displayname = gpdp.get_win_condition();
-		loaderUI.set_background(background);
+		loader_ui.set_background(background);
 		player_nr = gpdp.get_player_nr();
 		set_ibase
 			(new InteractivePlayer
 			 	(*this, g_options.pull_section("global"), player_nr, false));
 
-		loaderUI.step(_("Loading..."));
+		loader_ui.step(_("Loading..."));
 		gl.load_game();
 	}
 
@@ -405,7 +405,7 @@ bool Game::run_load_game(std::string filename, const std::string& script_to_run)
 
 	set_game_controller(new SinglePlayerGameController(*this, true, player_nr));
 	try {
-		bool const result = run(&loaderUI, Loaded, script_to_run, false, "single_player");
+		bool const result = run(&loader_ui, Loaded, script_to_run, false, "single_player");
 		delete m_ctrl;
 		m_ctrl = nullptr;
 		return result;
@@ -459,10 +459,10 @@ bool Game::run
 	if (start_game_type != Loaded) {
 		PlayerNumber const nr_players = map().get_nrplayers();
 		if (start_game_type == NewNonScenario) {
-			std::string step_description = _("Creating player infrastructure");
+			if (loader_ui) {
+				loader_ui->step(_("Creating player infrastructure"));
+			}
 			iterate_players_existing(p, nr_players, *this, plr) {
-				step_description += ".";
-				loader_ui->step(step_description);
 				plr->create_default_infrastructure();
 			}
 		} else {

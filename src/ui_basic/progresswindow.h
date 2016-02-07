@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2008 by the Widelands Development Team
+ * Copyright (C) 2007-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -62,10 +62,10 @@ struct ProgressWindow {
 
 private:
 	using VisualizationArray = std::vector<IProgressVisualization *>;
-	Point m_label_center;
-	Rect  m_label_rectangle;
-	VisualizationArray m_visualizations;
-	std::string m_background;
+	Point label_center_;
+	Rect  label_rectangle_;
+	VisualizationArray visualizations_;
+	std::string background_;
 
 	void draw_background(RenderTarget & rt, uint32_t xres, uint32_t yres);
 	void update(bool repaint);

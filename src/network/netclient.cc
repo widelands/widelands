@@ -173,7 +173,7 @@ void NetClient::run ()
 #endif
 
 	try {
-		UI::ProgressWindow* loaderUI = new UI::ProgressWindow("images/loadscreens/progress.png");
+		UI::ProgressWindow* loader_ui = new UI::ProgressWindow("images/loadscreens/progress.png");
 		std::vector<std::string> tipstext;
 		tipstext.push_back("general_game");
 		tipstext.push_back("multiplayer");
@@ -181,9 +181,9 @@ void NetClient::run ()
 			tipstext.push_back(get_players_tribe());
 		} catch (NoTribe) {
 		}
-		GameTips tips(*loaderUI, tipstext);
+		GameTips tips(*loader_ui, tipstext);
 
-		loaderUI->step(_("Preparing game"));
+		loader_ui->step(_("Preparing game"));
 
 		d->game = &game;
 		game.set_game_controller(this);
@@ -196,16 +196,16 @@ void NetClient::run ()
 		game.set_ibase(igb);
 		igb->set_chat_provider(*this);
 		if (!d->settings.savegame) {  //  new map
-			game.init_newgame(loaderUI, d->settings);
+			game.init_newgame(loader_ui, d->settings);
 		} else {  // savegame
-			game.init_savegame(loaderUI, d->settings);
+			game.init_savegame(loader_ui, d->settings);
 		}
 		d->time.reset(game.get_gametime());
 		d->lasttimestamp = game.get_gametime();
 		d->lasttimestamp_realtime = SDL_GetTicks();
 
 		d->modal = game.get_ibase();
-	   game.run(loaderUI, d->settings.savegame ? Widelands::Game::Loaded : d->settings.scenario ?
+		game.run(loader_ui, d->settings.savegame ? Widelands::Game::Loaded : d->settings.scenario ?
 	                                             Widelands::Game::NewMPScenario :
 	                                             Widelands::Game::NewNonScenario,
 	            "", false,
@@ -584,7 +584,6 @@ void NetClient::handle_packet(RecvPacket & packet)
 		return;
 	}
 
-
 	if (d->settings.usernum == -2) {
 		if (cmd != NETCMD_HELLO)
 			throw ProtocolException(cmd);
@@ -607,7 +606,6 @@ void NetClient::handle_packet(RecvPacket & packet)
 	}
 
 	case NETCMD_SETTING_MAP: {
-
 		d->settings.mapname = packet.string();
 		d->settings.mapfilename = g_fs->FileSystem::fix_cross_file(packet.string());
 		d->settings.savegame = packet.unsigned_8() == 1;
