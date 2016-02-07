@@ -2291,11 +2291,11 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 
 				// take care about borders and enemies
 				if (bf->enemy_nearby_) {
-					prio -= 15;
+					prio -= 20;
 				}
 
 				if (bf->unowned_land_nearby_) {
-					prio -= 5;
+					prio -= 15;
 				}
 			}
 
@@ -2498,7 +2498,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 		militarysites.size(),
 		trainingsites.size(),
 		static_cast<int32_t>(militarysites.size() + productionsites.size())
-		- 70 * (ts_basic_count_ + ts_advanced_count_),
+		- 50 * (ts_basic_count_ + ts_advanced_count_),
 		best_building->primary_priority_);
 	}
 
@@ -3901,10 +3901,10 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 		}
 
 		// It seems we might need it after all
-		bo.primary_priority_ = 40;
+		bo.primary_priority_ = -20;
 
 		if (bo.forced_after_ < gametime && bo.total_count() == 0) {
-			bo.primary_priority_ += 30;
+			bo.primary_priority_ += 50;
 		}
 
 		//if we are close to enemy (was seen in last 15 minutes)
@@ -3915,7 +3915,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 		// We build one trainig site per X military sites
 		// with some variations, of course
 		bo.primary_priority_ += static_cast<int32_t>(militarysites.size() + productionsites.size())
-			- 70 * (ts_basic_count_ + ts_advanced_count_);
+			- 50 * (ts_basic_count_ + ts_advanced_count_);
 
 		// We prefer basic trainingsites and sites with lower count
 		if (bo.trainingsite_type_ == TrainingSiteType::kBasic) {
@@ -3925,7 +3925,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 
 		// Special bonus for very first site of type
 		if (bo.total_count() == 0) {
-			bo.primary_priority_ += 10;
+			bo.primary_priority_ += 20;
 		}
 
 		if (bo.primary_priority_ > 0) {
@@ -4365,7 +4365,8 @@ bool DefaultAI::check_trainingsites(uint32_t gametime) {
 
 		// First subsitute wares
 		int32_t filled = 0;
-		bool supplied_enough = true;
+		int32_t shortage = 0;
+		//bool supplied_enough = true; NOCOM
 		std::vector<WaresQueue*> const warequeues2 = tso.site->warequeues();
 		nr_warequeues = warequeues2.size();
 		for (size_t i = 0; i < nr_warequeues; ++i) {
@@ -4374,7 +4375,8 @@ bool DefaultAI::check_trainingsites(uint32_t gametime) {
 			}
 		}
 		if (filled < 5) {
-			supplied_enough = false;
+			//supplied_enough = false;
+			shortage += +5 - filled;
 		}
 
 		// checking non subsitutes
@@ -4384,14 +4386,38 @@ bool DefaultAI::check_trainingsites(uint32_t gametime) {
 				 =
 				 (warequeues2[i]->get_max_fill() < 5) ? warequeues2[i]->get_max_fill() : 5;
 				if (warequeues2[i]->get_filled() < required_amount) {
-					supplied_enough = false;
+					//supplied_enough = false;
+					shortage += required_amount - warequeues2[i]->get_filled();
 				}
 			}
 		}
 
-		if (supplied_enough) {
+		//printf ("  shortage of wares: %3d\n",shortage);
+		
+		if (gametime > 10 * 60 * 1000 && persistent_data->last_soldier_trained < gametime){
+			if (persistent_data->last_soldier_trained + 10 * 60 * 1000 < gametime){
+				if (shortage <= 3 ) {
+					game().send_player_change_soldier_capacity(*ts, 1);
+					printf ("  %d:  Calling soldier to trainingsite: shortage %d, last trained before: %6d\n",
+					 player_number(), shortage, (gametime - persistent_data->last_soldier_trained)/1000/60);
+				}
+			} else {
+				if (shortage <= 1 ) {
+					game().send_player_change_soldier_capacity(*ts, 1);
+					printf ("  %d:  Calling soldier to trainingsite: shortage %d, last trained before: %6d\n",
+					 player_number(), shortage, (gametime - persistent_data->last_soldier_trained)/1000/60);
+				}
+			}
+		} else if (shortage <= 3 ) {
 			game().send_player_change_soldier_capacity(*ts, 1);
+			printf ("  %d:  Calling soldier to trainingsite: shortage %d, last trained before: %6d\n",
+			 player_number(), shortage, (gametime - persistent_data->last_soldier_trained)/1000/60);
 		}
+
+
+		//if (supplied_enough) {
+			//game().send_player_change_soldier_capacity(*ts, 1);
+		//}
 	}
 
 	ts_without_trainers_ = 0;  // zeroing
@@ -5489,6 +5515,21 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 				training_mod = -1 ;
 			}
 	}
+		// also we should have at least some training sites
+	// this will also affect the very veak AI per se as its trainingsites are limited to 1 in total
+	switch (ts_basic_count_ + ts_advanced_count_ - ts_without_trainers_) {
+		case 0:
+			training_mod -= 6;
+			break;
+		case 1:
+			training_mod -= 3;
+			break;
+		case 2:
+			training_mod -= 1;
+			break;
+		default:
+			;
+	}
 	
 
 	for (std::map<uint32_t, EnemySiteObserver>::iterator site = enemy_sites.begin();
@@ -5607,21 +5648,7 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 				if (mines_.size() <= 2) {
 					site->second.score -= 8;
 				}
-				// also we should have at least some training sites
-				// this will also affect the very veak AI per se as its trainingsites are limited to 1 in total
-				switch (ts_basic_count_ + ts_advanced_count_ - ts_without_trainers_) {
-					case 0:
-						site->second.score -= 6;
-						break;
-					case 1:
-						site->second.score -= 3;
-						break;
-					case 2:
-						site->second.score -= 1;
-						break;
-					default:
-						;
-				}
+
 
 				
 				// Applying (decreasing score) if trainingsites are not working
