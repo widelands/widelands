@@ -792,12 +792,16 @@ void BuildingStatisticsMenu::set_labeltext_autosize(UI::Textarea* textarea,
 
 void BuildingStatisticsMenu::set_current_building_type(DescriptionIndex id) {
 	assert(building_buttons_[id] != nullptr);
-	current_building_type_ = id;
-	for (DescriptionIndex i = 0; i < iplayer().player().tribe().get_nrbuildings(); ++i) {
+
+	// Reset button states
+	for (size_t i = 0; i < building_buttons_.size(); ++i) {
 		if (building_buttons_[i] != nullptr) {
 			building_buttons_[i]->set_flat(true);
 		}
 	}
+
+	// Update for current button
+	current_building_type_ = id;
 	building_buttons_[current_building_type_]->set_flat(false);
 	building_buttons_[current_building_type_]->set_perm_pressed(true);
 	building_name_.set_text(iplayer().player().tribe().get_building_descr(id)->descname());
