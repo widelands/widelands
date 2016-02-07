@@ -4113,7 +4113,7 @@ int LuaShip::build_colonization_port(lua_State* L) {
 	Ship* ship =  get(L, get_egbase(L));
 	if (ship->get_ship_state() == Widelands::Ship::EXP_FOUNDPORTSPACE) {
 		if (upcast(Game, game, &get_egbase(L))) {
-			game->send_player_ship_construct_port(*ship, ship->exp_port_spaces()->front());
+			game->send_player_ship_construct_port(*ship, ship->exp_port_spaces().front());
 			return 1;
 		}
 	}

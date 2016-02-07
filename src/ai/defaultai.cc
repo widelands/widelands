@@ -4858,13 +4858,13 @@ void DefaultAI::expedition_management(ShipObserver& so) {
 
 	// If we have portspace following options are avaiable:
 	// 1. Build a port there
-	if (so.ship->exp_port_spaces()->size() > 0) {  // making sure we have possible portspaces
+	if (!so.ship->exp_port_spaces().empty()) {  // making sure we have possible portspaces
 
 		// we score the place
-		const uint8_t spot_score = spot_scoring(so.ship->exp_port_spaces()->front());
+		const uint8_t spot_score = spot_scoring(so.ship->exp_port_spaces().front());
 
 		if ((gametime / 10) % 8 < spot_score) {  // we build a port here
-			game().send_player_ship_construct_port(*so.ship, so.ship->exp_port_spaces()->front());
+			game().send_player_ship_construct_port(*so.ship, so.ship->exp_port_spaces().front());
 			so.last_command_time = gametime;
 			so.waiting_for_command_ = false;
 			// blocking the area for some time to save AI from idle attempts to built there
@@ -4872,7 +4872,7 @@ void DefaultAI::expedition_management(ShipObserver& so) {
 			// TODO(TiborB): how long it takes to build a port?
 			// I used 5 minutes
 			MapRegion<Area<FCoords>> mr(
-			   game().map(), Area<FCoords>(map.get_fcoords(so.ship->exp_port_spaces()->front()), 8));
+			   game().map(), Area<FCoords>(map.get_fcoords(so.ship->exp_port_spaces().front()), 8));
 			do {
 				BlockedField blocked2(
 				   map.get_fcoords(*(mr.location().field)), gametime + 5 * 60 * 1000);

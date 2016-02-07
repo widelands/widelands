@@ -446,7 +446,8 @@ void Warehouse::init(EditorGameBase & egbase)
 
 		m_next_stock_remove_act = schedule_act(*game, 4000);
 
-		log("Message: adding (wh) (%s) %i \n", to_string(descr().type()).c_str(), player.player_number());
+		log("Message: adding %s for player %i at (%d, %d)\n", to_string(descr().type()).c_str(),
+		    player.player_number(), m_position.x, m_position.y);
 
 		if (descr().get_isport()) {
 			send_message
@@ -478,12 +479,11 @@ void Warehouse::init(EditorGameBase & egbase)
 		}
 	}
 
-	if (uint32_t const conquer_radius = descr().get_conquers())
-		egbase.conquer_area
-			(PlayerArea<Area<FCoords> >
-			 	(player.player_number(),
-			 	 Area<FCoords>
-			 	 	(egbase.map().get_fcoords(get_position()), conquer_radius)));
+	if (uint32_t const conquer_radius = descr().get_conquers()) {
+		egbase.conquer_area(PlayerArea<Area<FCoords>>(
+		   player.player_number(),
+		   Area<FCoords>(egbase.map().get_fcoords(get_position()), conquer_radius)));
+	}
 
 	if (descr().get_isport()) {
 		init_portdock(egbase);
@@ -495,10 +495,7 @@ void Warehouse::init(EditorGameBase & egbase)
 			get_position().y);
 		}
 	}
-
-	//this is default
 	m_cleanup_in_progress = false;
-
 }
 
 void Warehouse::init_containers(Player& player) {
@@ -580,6 +577,7 @@ void Warehouse::restore_portdock_or_destroy(EditorGameBase& egbase) {
 
 /// Destroy the warehouse.
 void Warehouse::cleanup(EditorGameBase& egbase) {
+	log("#sirver m_position.x: %d,m_position.y: %d\n", m_position.x, m_position.y);
 
 	// if this is a port, it will remove also portdock.
 	// But portdock must know that it should not try to recreate itself
