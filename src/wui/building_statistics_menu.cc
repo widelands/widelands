@@ -764,9 +764,9 @@ void BuildingStatisticsMenu::set_labeltext_autosize(UI::Textarea* textarea,
 																	 const std::string& text,
 																	 const RGBColor& color) {
 
-	const int min_font_size = 6;
-	const int max_width = kBuildGridCellWidth - 2;
-	const int max_height = kLabelHeight - 2;
+	constexpr int kMinFontSize = 6;
+	constexpr int kMaxWidth = kBuildGridCellWidth - 2;
+	constexpr int kMaxHeight = kLabelHeight - 2;
 
 	int font_size = UI_FONT_SIZE_SMALL;
 	std::string fontset = UI::g_fh1->fontset().serif();
@@ -774,14 +774,14 @@ void BuildingStatisticsMenu::set_labeltext_autosize(UI::Textarea* textarea,
 	textarea->set_font(fontset, font_size, color);
 	textarea->set_text(text);
 
-	while (textarea->get_h() > max_height && font_size > min_font_size) {
+	while (textarea->get_h() > kMaxHeight && font_size > kMinFontSize) {
 		--font_size;
 		textarea->set_font(fontset, font_size, color);
 	}
 
-	if (textarea->get_w() > max_width) {
+	if (textarea->get_w() > kMaxWidth) {
 		fontset = UI::g_fh1->fontset().condensed();
-		while (textarea->get_w() > max_width && font_size > min_font_size) {
+		while (textarea->get_w() > kMaxWidth && font_size > kMinFontSize) {
 			--font_size;
 			textarea->set_font(fontset, font_size, color);
 		}
@@ -794,10 +794,11 @@ void BuildingStatisticsMenu::set_current_building_type(DescriptionIndex id) {
 	assert(building_buttons_[id] != nullptr);
 
 	// Reset button states
-	for (size_t i = 0; i < building_buttons_.size(); ++i) {
-		if (building_buttons_[i] != nullptr) {
-			building_buttons_[i]->set_flat(true);
+	for (UI::Button* building_button : building_buttons_) {
+		if (building_button == nullptr) {
+			continue;
 		}
+		building_button->set_flat(true);
 	}
 
 	// Update for current button
