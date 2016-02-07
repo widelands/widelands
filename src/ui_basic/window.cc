@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -81,18 +81,18 @@ Window::Window
 		_docked_left(false), _docked_right(false), _docked_bottom(false),
 		_drag_start_win_x(0), _drag_start_win_y(0),
 		_drag_start_mouse_x(0), _drag_start_mouse_y(0),
-		m_pic_lborder
+		pic_lborder_
 			(g_gr->images().get("images/wui/window_left.png")),
-		m_pic_rborder
+		pic_rborder_
 			(g_gr->images().get("images/wui/window_right.png")),
-		m_pic_top
+		pic_top_
 			(g_gr->images().get("images/wui/window_top.png")),
-		m_pic_bottom
+		pic_bottom_
 			(g_gr->images().get("images/wui/window_bottom.png")),
-		m_pic_background
+		pic_background_
 			(g_gr->images().get("images/wui/window_background.png")),
-		m_center_panel(nullptr),
-		m_fastclick_panel(nullptr)
+		center_panel_(nullptr),
+		fastclick_panel_(nullptr)
 {
 	set_title(title);
 
@@ -109,7 +109,7 @@ Window::Window
 */
 void Window::set_title(const string & text)
 {
-	m_title = is_richtext(text) ? text : as_window_title(text);
+	title_ = is_richtext(text) ? text : as_window_title(text);
 }
 
 /**
@@ -122,7 +122,7 @@ void Window::set_center_panel(Panel * panel)
 {
 	assert(panel->get_parent() == this);
 
-	m_center_panel = panel;
+	center_panel_ = panel;
 	update_desired_size();
 }
 
@@ -131,9 +131,9 @@ void Window::set_center_panel(Panel * panel)
  */
 void Window::update_desired_size()
 {
-	if (m_center_panel && !_is_minimal) {
+	if (center_panel_ && !_is_minimal) {
 		int innerw, innerh;
-		m_center_panel->get_desired_size(&innerw, &innerh);
+		center_panel_->get_desired_size(&innerw, &innerh);
 		set_desired_size
 			(innerw + get_lborder() + get_rborder(),
 			 innerh + get_tborder() + get_bborder());
@@ -146,9 +146,9 @@ void Window::update_desired_size()
  */
 void Window::layout()
 {
-	if (m_center_panel && !_is_minimal) {
-		m_center_panel->set_pos(Point(0, 0));
-		m_center_panel->set_size(get_inner_w(), get_inner_h());
+	if (center_panel_ && !_is_minimal) {
+		center_panel_->set_pos(Point(0, 0));
+		center_panel_->set_size(get_inner_w(), get_inner_h());
 	}
 }
 
@@ -179,9 +179,9 @@ void Window::move_out_of_the_way() {
  * Moves the mouse to the child panel that is activated as fast click panel
  */
 void Window::warp_mouse_to_fastclick_panel() {
-	if (m_fastclick_panel) {
-		 Point pt(m_fastclick_panel->get_w() / 2, m_fastclick_panel->get_h() / 2);
-		 UI::Panel * p = m_fastclick_panel;
+	if (fastclick_panel_) {
+		 Point pt(fastclick_panel_->get_w() / 2, fastclick_panel_->get_h() / 2);
+		 UI::Panel * p = fastclick_panel_;
 
 		while (p->get_parent() && p != this) {
 			 pt = p->to_parent(pt);
@@ -263,7 +263,7 @@ void Window::draw(RenderTarget & dst)
 	if (!is_minimal()) {
 		dst.tile
 			(Rect(Point(0, 0), get_inner_w(), get_inner_h()),
-			 m_pic_background, Point(0, 0));
+			 pic_background_, Point(0, 0));
 	}
 }
 
@@ -286,7 +286,7 @@ void Window::draw_border(RenderTarget & dst)
 
 		dst.blitrect //  top left corner
 			(Point(0, 0),
-			 m_pic_top,
+			 pic_top_,
 			 Rect(Point(0, 0), pos, TP_B_PIXMAP_THICKNESS));
 
 		//  top bar
@@ -294,7 +294,7 @@ void Window::draw_border(RenderTarget & dst)
 		for (; pos < hz_bar_end_minus_middle; pos += HZ_B_MIDDLE_PIXMAP_LEN)
 			dst.blitrect
 				(Point(pos, 0),
-				 m_pic_top,
+				 pic_top_,
 				 Rect
 				 	(Point(HZ_B_CORNER_PIXMAP_LEN, 0),
 				 	 HZ_B_MIDDLE_PIXMAP_LEN, TP_B_PIXMAP_THICKNESS));
@@ -304,17 +304,17 @@ void Window::draw_border(RenderTarget & dst)
 		assert(0 <= HZ_B_TOTAL_PIXMAP_LEN - width);
 		dst.blitrect
 			(Point(pos, 0),
-			 m_pic_top,
+			 pic_top_,
 			 Rect
 			 	(Point(HZ_B_TOTAL_PIXMAP_LEN - width, 0),
 			 	 width, TP_B_PIXMAP_THICKNESS));
 	}
 
 	// draw the title if we have one
-	if (!m_title.empty()) {
+	if (!title_.empty()) {
 		dst.blit
 			(Point(get_lborder() + get_inner_w() / 2, TP_B_PIXMAP_THICKNESS / 2),
-				UI::g_fh1->render(m_title),
+				UI::g_fh1->render(title_),
 				BlendMode::UseAlpha,
 				UI::Align::kCenter);
 	}
@@ -330,7 +330,7 @@ void Window::draw_border(RenderTarget & dst)
 			static_assert(0 <= VT_B_PIXMAP_THICKNESS, "assert(0 <= VT_B_PIXMAP_THICKNESS) failed.");
 			dst.blitrect // left top thingy
 				(Point(0, TP_B_PIXMAP_THICKNESS),
-				 m_pic_lborder,
+				 pic_lborder_,
 				 Rect(Point(0, 0), VT_B_PIXMAP_THICKNESS, VT_B_THINGY_PIXMAP_LEN));
 
 			int32_t pos = TP_B_PIXMAP_THICKNESS + VT_B_THINGY_PIXMAP_LEN;
@@ -340,7 +340,7 @@ void Window::draw_border(RenderTarget & dst)
 			for (; pos < vt_bar_end_minus_middle; pos += VT_B_MIDDLE_PIXMAP_LEN)
 				dst.blitrect
 					(Point(0, pos),
-					 m_pic_lborder,
+					 pic_lborder_,
 					 Rect
 					 	(Point(0, VT_B_THINGY_PIXMAP_LEN),
 					 	 VT_B_PIXMAP_THICKNESS, VT_B_MIDDLE_PIXMAP_LEN));
@@ -350,7 +350,7 @@ void Window::draw_border(RenderTarget & dst)
 			assert(0 <= VT_B_TOTAL_PIXMAP_LEN - height);
 			dst.blitrect
 				(Point(0, pos),
-				 m_pic_lborder,
+				 pic_lborder_,
 				 Rect
 				 	(Point(0, VT_B_TOTAL_PIXMAP_LEN - height),
 				 	 VT_B_PIXMAP_THICKNESS, height));
@@ -362,7 +362,7 @@ void Window::draw_border(RenderTarget & dst)
 
 			dst.blitrect // right top thingy
 				(Point(right_border_x, TP_B_PIXMAP_THICKNESS),
-				 m_pic_rborder,
+				 pic_rborder_,
 				 Rect(Point(0, 0), VT_B_PIXMAP_THICKNESS, VT_B_THINGY_PIXMAP_LEN));
 
 			int32_t pos = TP_B_PIXMAP_THICKNESS + VT_B_THINGY_PIXMAP_LEN;
@@ -372,7 +372,7 @@ void Window::draw_border(RenderTarget & dst)
 			for (; pos < vt_bar_end_minus_middle; pos += VT_B_MIDDLE_PIXMAP_LEN)
 				dst.blitrect
 					(Point(right_border_x, pos),
-					 m_pic_rborder,
+					 pic_rborder_,
 					 Rect
 					 	(Point(0, VT_B_THINGY_PIXMAP_LEN),
 					 	 VT_B_PIXMAP_THICKNESS, VT_B_MIDDLE_PIXMAP_LEN));
@@ -381,7 +381,7 @@ void Window::draw_border(RenderTarget & dst)
 			const int32_t height = vt_bar_end - pos + VT_B_THINGY_PIXMAP_LEN;
 			dst.blitrect
 				(Point(right_border_x, pos),
-				 m_pic_rborder,
+				 pic_rborder_,
 				 Rect
 				 	(Point(0, VT_B_TOTAL_PIXMAP_LEN - height),
 				 	 VT_B_PIXMAP_THICKNESS, height));
@@ -392,14 +392,14 @@ void Window::draw_border(RenderTarget & dst)
 
 			dst.blitrect //  bottom left corner
 				(Point(0, get_h() - BT_B_PIXMAP_THICKNESS),
-				 m_pic_bottom,
+				 pic_bottom_,
 				 Rect(Point(0, 0), pos, BT_B_PIXMAP_THICKNESS));
 
 			//  bottom bar
 			for (; pos < hz_bar_end_minus_middle; pos += HZ_B_MIDDLE_PIXMAP_LEN)
 				dst.blitrect
 					(Point(pos, get_h() - BT_B_PIXMAP_THICKNESS),
-					 m_pic_bottom,
+					 pic_bottom_,
 					 Rect
 					 	(Point(HZ_B_CORNER_PIXMAP_LEN, 0),
 					 	 HZ_B_MIDDLE_PIXMAP_LEN, BT_B_PIXMAP_THICKNESS));
@@ -408,7 +408,7 @@ void Window::draw_border(RenderTarget & dst)
 			const int32_t width = hz_bar_end - pos + HZ_B_CORNER_PIXMAP_LEN;
 			dst.blitrect
 				(Point(pos, get_h() - BT_B_PIXMAP_THICKNESS),
-				 m_pic_bottom,
+				 pic_bottom_,
 				 Rect
 				 	(Point(HZ_B_TOTAL_PIXMAP_LEN - width, 0),
 				 	 width, BT_B_PIXMAP_THICKNESS));

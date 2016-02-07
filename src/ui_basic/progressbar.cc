@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006-2007, 2009 by the Widelands Development Team
+ * Copyright (C) 2004-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -37,9 +37,9 @@ ProgressBar::ProgressBar
 	 uint32_t const orientation)
 	:
 	Panel        (parent, x, y, w, h),
-	m_orientation(orientation),
-	m_state      (0),
-	m_total      (100)
+	orientation_(orientation),
+	state_      (0),
+	total_      (100)
 {}
 
 
@@ -48,7 +48,7 @@ ProgressBar::ProgressBar
 */
 void ProgressBar::set_state(uint32_t state)
 {
-	m_state = state;
+	state_ = state;
 }
 
 
@@ -58,7 +58,7 @@ void ProgressBar::set_state(uint32_t state)
 void ProgressBar::set_total(uint32_t total)
 {
 	assert(total);
-	m_total = total;
+	total_ = total;
 }
 
 
@@ -69,9 +69,9 @@ void ProgressBar::draw(RenderTarget & dst)
 {
 	assert(0 < get_w());
 	assert(0 < get_h());
-	assert(m_total);
+	assert(total_);
 	const float fraction =
-		m_state < m_total ? static_cast<float>(m_state) / m_total : 1.0;
+		state_ < total_ ? static_cast<float>(state_) / total_ : 1.0;
 	assert(0 <= fraction);
 	assert     (fraction <= 1);
 
@@ -81,7 +81,7 @@ void ProgressBar::draw(RenderTarget & dst)
 		fraction <= 0.67 ? RGBColor(255, 255, 0) : RGBColor(0, 255, 0);
 
 	// Draw the actual bar
-	if (m_orientation == Horizontal)
+	if (orientation_ == Horizontal)
 	{
 		const uint32_t w = static_cast<uint32_t>(get_w() * fraction);
 		assert(w <= static_cast<uint32_t>(get_w()));
