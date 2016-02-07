@@ -107,6 +107,8 @@ bool AbstractWaresDisplay::handle_mousemove
 	                          tribe_.get_worker_descr(index)->descname() :
 	                          tribe_.get_ware_descr(index)->descname()) :
 	                      "");
+	curware_.fit_text(get_inner_w() - 2, UI::g_fh1->render(as_uifont("."))->height(), UI_FONT_SIZE_SMALL);
+
 	if (selection_anchor_ != Widelands::INVALID_INDEX) {
 		// Ensure mouse button is still pressed as some
 		// mouse release events do not reach us

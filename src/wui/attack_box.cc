@@ -71,9 +71,9 @@ std::unique_ptr<UI::HorizontalSlider> AttackBox::add_slider(UI::Box& parent,
 
 UI::Textarea& AttackBox::add_text(UI::Box& parent,
 											 std::string str,
-											 UI::Align alignment) {
+											 UI::Align alignment, int fontsize) {
 	UI::Textarea& result = *new UI::Textarea(&parent, str.c_str());
-	result.set_fontsize(UI_FONT_SIZE_ULTRASMALL);
+	result.set_fontsize(fontsize);
 	parent.add(&result, alignment);
 	return result;
 }
@@ -130,7 +130,6 @@ void AttackBox::init() {
 
 	UI::Box& linebox = *new UI::Box(this, 0, 0, UI::Box::Horizontal);
 	add(&linebox, UI::Align::kHCenter);
-	// NOCOM(GunChleoc): this string should be condensed
 	add_text(linebox, _("Soldiers:"));
 	linebox.add_space(8);
 
@@ -144,9 +143,7 @@ void AttackBox::init() {
 	const std::string attack_string =
 	   (boost::format(_("%1% / %2%")) % (max_attackers > 0 ? 1 : 0) % max_attackers).str();
 
-	soldiers_text_.reset(&add_text(columnbox,
-	                               attack_string,
-											 UI::Align::kHCenter));
+	soldiers_text_.reset(&add_text(columnbox, attack_string, UI::Align::kHCenter, UI_FONT_SIZE_ULTRASMALL));
 
 	soldiers_slider_ = add_slider(columnbox,
 	                              100,
