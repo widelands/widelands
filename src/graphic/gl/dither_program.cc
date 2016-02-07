@@ -27,66 +27,8 @@
 #include "graphic/texture.h"
 #include "io/filesystem/layered_filesystem.h"
 
-namespace  {
-
-const char kDitherVertexShader[] = R"(
-#version 120
-
-// Attributes.
-attribute float attr_brightness;
-attribute vec2 attr_dither_texture_position;
-attribute vec2 attr_position;
-attribute vec2 attr_texture_offset;
-attribute vec2 attr_texture_position;
-
-uniform float u_z_value;
-
-// Output of vertex shader.
-varying float var_brightness;
-varying vec2 var_dither_texture_position;
-varying vec2 var_texture_offset;
-varying vec2 var_texture_position;
-
-void main() {
-	var_brightness = attr_brightness;
-	var_dither_texture_position = attr_dither_texture_position;
-	var_texture_offset = attr_texture_offset;
-	var_texture_position = attr_texture_position;
-	gl_Position = vec4(attr_position, u_z_value, 1.);
-}
-)";
-
-const char kDitherFragmentShader[] = R"(
-#version 120
-
-uniform sampler2D u_dither_texture;
-uniform sampler2D u_terrain_texture;
-uniform vec2 u_texture_dimensions;
-
-varying float var_brightness;
-varying vec2 var_dither_texture_position;
-varying vec2 var_texture_position;
-varying vec2 var_texture_offset;
-
-// TODO(sirver): This is a hack to make sure we are sampling inside of the
-// terrain texture. This is a common problem with OpenGL and texture atlases.
-#define MARGIN 1e-2
-
-void main() {
-	vec2 texture_fract = clamp(
-			fract(var_texture_position),
-			vec2(MARGIN, MARGIN),
-			vec2(1. - MARGIN, 1. - MARGIN));
-	vec4 clr = texture2D(u_terrain_texture, var_texture_offset + u_texture_dimensions * texture_fract);
-	gl_FragColor = vec4(clr.rgb * var_brightness,
-			1. - texture2D(u_dither_texture, var_dither_texture_position).a);
-}
-)";
-
-}  // namespace
-
 DitherProgram::DitherProgram() {
-	gl_program_.build(kDitherVertexShader, kDitherFragmentShader);
+	gl_program_.build("dither");
 
 	attr_brightness_ = glGetAttribLocation(gl_program_.object(), "attr_brightness");
 	attr_dither_texture_position_ = glGetAttribLocation(gl_program_.object(), "attr_dither_texture_position");

@@ -58,6 +58,7 @@ wl_library(wui_common
   SRCS
     mapdetails.cc
     mapdetails.h
+    mapdata.cc
     mapdata.h
     maptable.cc
     maptable.h

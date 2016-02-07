@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006-2009, 2011-2012 by the Widelands Development Team
+ * Copyright (C) 2004-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -44,15 +44,15 @@ protected:
 	void clicked_ok() override;
 
 private:
-	uint32_t m_butx;
-	uint32_t m_butw;
-	uint32_t m_buth;
-	uint32_t m_lisw;
-	uint32_t m_fs;
-	uint32_t m_prev_clientlist_len;
-	std::string m_fn;
-	UI::Textarea title, m_clients, m_opengames;
-	UI::Textarea m_servername;
+	uint32_t butx_;
+	uint32_t butw_;
+	uint32_t buth_;
+	uint32_t lisw_;
+	uint32_t fs_;
+	uint32_t prev_clientlist_len_;
+	std::string fn_;
+	UI::Textarea title, clients_, opengames_;
+	UI::Textarea servername_;
 	UI::Button joingame, hostgame, back;
 	UI::EditBox servername;
 	UI::Table<const InternetClient * const> clientsonline;

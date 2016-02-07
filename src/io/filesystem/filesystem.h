@@ -122,6 +122,9 @@ public:
 
 	///Given a filename, return the name with any path stripped off.
 	static const char * fs_filename(const char * n);
+
+	// Everything before the final separator (/ or \) in 'full_path'. The
+	// returned value is either the empty string or ends with a separator.
 	static std::string fs_dirname(const std::string& full_path);
 
 	///Given a filename (without any path), return the extension, if any.

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006, 2008-2011 by the Widelands Development Team
+ * Copyright (C) 2004-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -38,14 +38,14 @@ struct Radiobutton : public Statebox {
 		(Panel * parent, Point, const Image* pic, Radiogroup &, int32_t id);
 	~Radiobutton();
 
-	Radiobutton * next_button() {return m_nextbtn;}
+	Radiobutton * next_button() {return nextbtn_;}
 
 private:
 	void clicked() override;
 
-	Radiobutton * m_nextbtn;
-	Radiogroup  & m_group;
-	int32_t           m_id;
+	Radiobutton * nextbtn_;
+	Radiogroup  & group_;
+	int32_t           id_;
 };
 
 /**
@@ -65,14 +65,14 @@ struct Radiogroup {
 	int32_t add_button
 		(Panel * parent, Point, const Image* pic, const std::string& tooltip = "", Radiobutton ** = nullptr);
 
-	int32_t get_state() const {return m_state;}
+	int32_t get_state() const {return state_;}
 	void set_state(int32_t state);
 	void set_enabled(bool);
-	Radiobutton * get_first_button() {return m_buttons;}
+	Radiobutton * get_first_button() {return buttons_;}
 private:
-	Radiobutton * m_buttons; //  linked list of buttons (not sorted)
-	int32_t           m_highestid;
-	int32_t           m_state;   //  -1: none
+	Radiobutton * buttons_; //  linked list of buttons (not sorted)
+	int32_t           highestid_;
+	int32_t           state_;   //  -1: none
 };
 
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010, 2013 by the Widelands Development Team
+ * Copyright (C) 2010-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -42,9 +42,9 @@ struct Icon : public Panel {
 	void draw(RenderTarget &) override;
 
 private:
-	const Image* m_pic;
-	bool         m_draw_frame;
-	RGBColor    m_framecolor;
+	const Image* pic_;
+	bool         draw_frame_;
+	RGBColor     framecolor_;
 };
 
 }
