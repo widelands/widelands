@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -399,11 +399,11 @@ bool BuildingStatisticsMenu::add_button(
 
 	owned_labels_[id] =
 		new UI::Textarea(button_box, 0, 0, kBuildGridCellWidth, kLabelHeight, UI::Align::kCenter);
-	button_box->add(owned_labels_[id], UI::Align::kLeft);
+	button_box->add(owned_labels_[id], UI::Align::kHCenter);
 
 	productivity_labels_[id] =
 		new UI::Textarea(button_box, 0, 0, kBuildGridCellWidth, kLabelHeight, UI::Align::kCenter);
-	button_box->add(productivity_labels_[id], UI::Align::kLeft);
+	button_box->add(productivity_labels_[id], UI::Align::kHCenter);
 
 	row.add(button_box, UI::Align::kLeft);
 
@@ -419,6 +419,7 @@ bool BuildingStatisticsMenu::add_button(
 	++*column;
 	if (*column == kColumns) {
 		tabs_[tab_index]->add(&row, UI::Align::kLeft);
+		tabs_[tab_index]->add_space(6);
 		*column = 0;
 		return true;
 	}
@@ -762,30 +763,46 @@ void BuildingStatisticsMenu::update() {
 void BuildingStatisticsMenu::set_labeltext_autosize(UI::Textarea* textarea,
 																	 const std::string& text,
 																	 const RGBColor& color) {
-	int fontsize = text.length() > 7 ? kLabelFontSize - floor(text.length() / 3) : kLabelFontSize;
 
-	UI::TextStyle style;
-	if (text.length() > 5) {
-		style.font = UI::Font::get(UI::g_fh1->fontset().condensed(), fontsize);
-	} else {
-		style.font = UI::Font::get(UI::g_fh1->fontset().serif(), fontsize);
-	}
-	style.fg = color;
-	style.bold = true;
+	constexpr int kMinFontSize = 6;
+	constexpr int kMaxWidth = kBuildGridCellWidth - 2;
+	constexpr int kMaxHeight = kLabelHeight - 2;
 
-	textarea->set_textstyle(style);
+	int font_size = UI_FONT_SIZE_SMALL;
+	std::string fontset = UI::g_fh1->fontset().serif();
+
+	textarea->set_font(fontset, font_size, color);
 	textarea->set_text(text);
+
+	while (textarea->get_h() > kMaxHeight && font_size > kMinFontSize) {
+		--font_size;
+		textarea->set_font(fontset, font_size, color);
+	}
+
+	if (textarea->get_w() > kMaxWidth) {
+		fontset = UI::g_fh1->fontset().condensed();
+		while (textarea->get_w() > kMaxWidth && font_size > kMinFontSize) {
+			--font_size;
+			textarea->set_font(fontset, font_size, color);
+		}
+	}
+
 	textarea->set_visible(true);
 }
 
 void BuildingStatisticsMenu::set_current_building_type(DescriptionIndex id) {
 	assert(building_buttons_[id] != nullptr);
-	current_building_type_ = id;
-	for (DescriptionIndex i = 0; i < iplayer().player().tribe().get_nrbuildings(); ++i) {
-		if (building_buttons_[i] != nullptr) {
-			building_buttons_[i]->set_flat(true);
+
+	// Reset button states
+	for (UI::Button* building_button : building_buttons_) {
+		if (building_button == nullptr) {
+			continue;
 		}
+		building_button->set_flat(true);
 	}
+
+	// Update for current button
+	current_building_type_ = id;
 	building_buttons_[current_building_type_]->set_flat(false);
 	building_buttons_[current_building_type_]->set_perm_pressed(true);
 	building_name_.set_text(iplayer().player().tribe().get_building_descr(id)->descname());
