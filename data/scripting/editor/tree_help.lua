@@ -1,3 +1,4 @@
+-- NOCOM(#sirver): documentation?
 include "scripting/editor/format_editor.lua"
 
 return {
@@ -30,9 +31,11 @@ return {
       for k,v in ipairs(terrain_list) do
          local terrain = wl.Editor():get_terrain_description(v.terrain_name_)
          -- TRANSLATORS: Terrain name (Climate)
-         result = result .. picture_li(terrain.representative_image, (_"%1% (%2%)"):bformat(terrain.descname, terrain.editor_category.descname) .. "<br>" .. ("%2.1f%%"):bformat(100 * v.probability_)) .. spacer()
+         result = result .. picture_li(terrain.representative_image,
+               (_"%1% (%2%)"):bformat(terrain.descname, terrain.editor_category.descname) ..
+               "<br>" .. ("%2.1f%%"):bformat(100 * v.probability_)
+            ) .. spacer()
       end
-
       return result
    end
 }

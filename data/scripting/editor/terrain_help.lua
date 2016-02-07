@@ -15,18 +15,22 @@ return {
          result = result .. spacer() .. rt(h2(_"Resources"))
          if (#valid_resources > 0) then
             -- TRANSLATORS: A header in the editor help
-            result = result .. rt(h3(ngettext("Valid Resource:", "Valid Resources:", #valid_resources)))
+            result = result .. rt(h3(ngettext(
+               "Valid Resource:", "Valid Resources:", #valid_resources)))
             for count, resourcename in pairs(valid_resources) do
                local valid_resource = wl.Editor():get_resource_description(resourcename)
-               result = result .. picture_li(valid_resource.representative_image, valid_resource.descname)
+               result = result .. picture_li(
+                  valid_resource.representative_image, valid_resource.descname)
             end
          end
 
          local default_resource_name = terrain.default_resource_name
          if (default_resource_name ~= nil) then
-            local default_resource = wl.Editor():get_resource_description(default_resource_name)
+            local default_resource = wl.Editor():get_resource_description(
+               default_resource_name)
             -- TRANSLATORS: e.g. "5x Water"
-            result = result .. text_line(_"Default:", _"%1%x %2%":bformat(terrain.default_resource_amount, default_resource.descname))
+            result = result .. text_line(_"Default:", _"%1%x %2%":bformat(
+               terrain.default_resource_amount, default_resource.descname))
          end
       end
 
@@ -44,6 +48,7 @@ return {
             for j = #tree_list, i, -1 do
                tree_list[j+1] = tree_list[j]
             end
+            -- NOCOM(#sirver): why the _ ? tree_name_ and probability_?
             tree_list[i] = {tree_name_ = tree_name, probability_ = probability}
          end
       end
@@ -51,7 +56,8 @@ return {
       local tree_string = ""
       for k,v in ipairs(tree_list) do
          local tree = wl.Editor():get_immovable_description(v.tree_name_)
-         tree_string = tree_string .. picture_li(tree.representative_image, tree.basename .. ("<br>%2.1f%%"):bformat(100 * v.probability_)) .. spacer()
+         tree_string = tree_string .. picture_li(tree.representative_image,
+            tree.basename .. ("<br>%2.1f%%"):bformat(100 * v.probability_)) .. spacer()
       end
 
       -- TRANSLATORS: A header in the editor help
