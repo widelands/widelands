@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2008, 2010-2011, 2013 by the Widelands Development Team
+ * Copyright (C) 2002-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -70,12 +70,12 @@ protected:
 	// UI coordinates and spacers
 	int32_t const padding_;               // Common padding between panels
 	int32_t const indent_;                // Indent for elements below labels
-	int32_t const m_label_height;
+	int32_t const label_height_;
 	int32_t const tablex_, tabley_, tablew_, tableh_;
-	int32_t const m_right_column_margin;   // X margins of the right column
+	int32_t const right_column_margin_;   // X margins of the right column
 	int32_t const right_column_x_;
-	int32_t const m_buty, m_butw, buth_;  // Button dimensions
-	int32_t const m_right_column_tab;
+	int32_t const buty_, butw_, buth_;  // Button dimensions
+	int32_t const right_column_tab_;
 
 	// Main buttons
 	UI::Button    back_;

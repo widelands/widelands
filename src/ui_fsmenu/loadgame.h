@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2008, 2010-2011, 2013 by the Widelands Development Team
+ * Copyright (C) 2002-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -75,7 +75,7 @@ public:
 		(Widelands::Game&, GameSettingsProvider* gsp, GameController* gc = nullptr,
 		 bool is_replay = false);
 
-	const std::string & filename() {return m_filename;}
+	const std::string & filename() {return filename_;}
 
 	void think() override;
 
@@ -92,36 +92,36 @@ private:
 	bool compare_date_descending(uint32_t, uint32_t);
 	void clicked_delete();
 
-	UI::Table<uintptr_t const>    m_table;
+	UI::Table<uintptr_t const>    table_;
 
-	bool                          m_is_replay;
+	bool                          is_replay_;
 
-	UI::Textarea                  m_title;
-	UI::Textarea                  m_label_mapname;
-	UI::MultilineTextarea         m_ta_mapname;  // Multiline for long names
-	UI::Textarea                  m_label_gametime;
-	UI::MultilineTextarea         m_ta_gametime; // Multiline because we want tooltips
-	UI::Textarea                  m_label_players;
-	UI::MultilineTextarea         m_ta_players;
-	UI::Textarea                  m_label_version;
-	UI::Textarea                  m_ta_version;
-	UI::Textarea                  m_label_win_condition;
-	UI::MultilineTextarea         m_ta_win_condition;
+	UI::Textarea                  title_;
+	UI::Textarea                  label_mapname_;
+	UI::MultilineTextarea         ta_mapname_;  // Multiline for long names
+	UI::Textarea                  label_gametime_;
+	UI::MultilineTextarea         ta_gametime_; // Multiline because we want tooltips
+	UI::Textarea                  label_players_;
+	UI::MultilineTextarea         ta_players_;
+	UI::Textarea                  label_version_;
+	UI::Textarea                  ta_version_;
+	UI::Textarea                  label_win_condition_;
+	UI::MultilineTextarea         ta_win_condition_;
 
-	UI::Button                    m_delete;
+	UI::Button                    delete_;
 
-	UI::MultilineTextarea         m_ta_errormessage;
+	UI::MultilineTextarea         ta_errormessage_;
 
-	int32_t const                 m_minimap_y, m_minimap_w, m_minimap_h;
-	UI::Icon                      m_minimap_icon;
-	std::unique_ptr<const Image>  m_minimap_image;
+	int32_t const                 minimap_y_, minimap_w_, minimap_h_;
+	UI::Icon                      minimap_icon_;
+	std::unique_ptr<const Image>  minimap_image_;
 
-	std::vector<SavegameData>     m_games_data;
-	std::string                   m_filename;
+	std::vector<SavegameData>     games_data_;
+	std::string                   filename_;
 
-	Widelands::Game&              m_game;
-	GameSettingsProvider*         m_settings;
-	GameController*               m_ctrl;
+	Widelands::Game&              game_;
+	GameSettingsProvider*         settings_;
+	GameController*               ctrl_;
 };
 
 

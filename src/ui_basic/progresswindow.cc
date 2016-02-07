@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2008, 2010, 2013 by the Widelands Development Team
+ * Copyright (C) 2007-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -47,7 +47,7 @@ ProgressWindow::ProgressWindow(const std::string& background) {
 }
 
 ProgressWindow::~ProgressWindow() {
-	for (IProgressVisualization * visualization : m_visualizations) {
+	for (IProgressVisualization * visualization : visualizations_) {
 		visualization->stop(); //  inform visualizations
 	}
 }
@@ -55,23 +55,23 @@ ProgressWindow::~ProgressWindow() {
 void ProgressWindow::draw_background
 	(RenderTarget & rt, const uint32_t xres, const uint32_t yres)
 {
-	m_label_center.x = xres / 2;
-	m_label_center.y = yres * PROGRESS_LABEL_POSITION_Y / 100;
+	label_center_.x = xres / 2;
+	label_center_.y = yres * PROGRESS_LABEL_POSITION_Y / 100;
 	Rect wnd_rect(Point(0, 0), xres, yres);
 
 	const uint32_t h = UI::g_fh1->render(as_uifont("."))->height();
 
-	m_label_rectangle.x = xres / 4;
-	m_label_rectangle.w = xres / 2;
-	m_label_rectangle.y =
-	m_label_center.y - h / 2 - PROGRESS_STATUS_RECT_PADDING;
-	m_label_rectangle.h = h + 2 * PROGRESS_STATUS_RECT_PADDING;
+	label_rectangle_.x = xres / 4;
+	label_rectangle_.w = xres / 2;
+	label_rectangle_.y =
+	label_center_.y - h / 2 - PROGRESS_STATUS_RECT_PADDING;
+	label_rectangle_.h = h + 2 * PROGRESS_STATUS_RECT_PADDING;
 
-	const Image* bg = g_gr->images().get(m_background);
+	const Image* bg = g_gr->images().get(background_);
 	rt.blitrect_scale(
 	   Rect(0, 0, xres, yres), bg, Rect(0, 0, bg->width(), bg->height()), 1., BlendMode::UseAlpha);
 
-	Rect border_rect = m_label_rectangle;
+	Rect border_rect = label_rectangle_;
 	border_rect.x -= PROGRESS_STATUS_BORDER_X;
 	border_rect.y -= PROGRESS_STATUS_BORDER_Y;
 	border_rect.w += 2 * PROGRESS_STATUS_BORDER_X;
@@ -84,9 +84,9 @@ void ProgressWindow::draw_background
 void ProgressWindow::set_background(const std::string & file_name) {
 	RenderTarget & rt = *g_gr->get_render_target();
 	if (!file_name.empty() && g_fs->file_exists(file_name)) {
-		m_background = file_name;
+		background_ = file_name;
 	} else {
-		m_background = "images/loadscreens/progress.png";
+		background_ = "images/loadscreens/progress.png";
 	}
 	draw_background(rt, g_gr->get_xres(), g_gr->get_yres());
 }
@@ -100,8 +100,8 @@ void ProgressWindow::step(const std::string & description) {
 	// always repaint the background first
 	draw_background(rt, xres, yres);
 
-	rt.fill_rect(m_label_rectangle, PROGRESS_FONT_COLOR_BG);
-	rt.blit(m_label_center,
+	rt.fill_rect(label_rectangle_, PROGRESS_FONT_COLOR_BG);
+	rt.blit(label_center_,
 			 UI::g_fh1->render(as_uifont(description, UI_FONT_SIZE_SMALL, PROGRESS_FONT_COLOR_FG)),
 			 BlendMode::UseAlpha,
 			 UI::Align::kCenter);
@@ -114,7 +114,7 @@ void ProgressWindow::step(const std::string & description) {
 }
 
 void ProgressWindow::update(bool const repaint) {
-	for (IProgressVisualization * visualization : m_visualizations) {
+	for (IProgressVisualization * visualization : visualizations_) {
 		visualization->update(repaint); //  let visualizations do their work
 	}
 	g_gr->refresh();
@@ -140,18 +140,18 @@ void ProgressWindow::stepf(const char * format, ...) {
 void ProgressWindow::add_visualization(IProgressVisualization * const instance)
 {
 	// just add to collection
-	m_visualizations.push_back(instance);
+	visualizations_.push_back(instance);
 }
 
 void ProgressWindow::remove_visualization(IProgressVisualization * instance) {
-	VisualizationArray & visualizations = m_visualizations;
+	VisualizationArray & visualizations = visualizations_;
 
 	for (VisualizationArray::iterator vis_iter = visualizations.begin();
 		  vis_iter != visualizations.end();
 		  ++vis_iter) {
 
 		if (*vis_iter == instance) {
-			m_visualizations.erase (vis_iter);
+			visualizations_.erase (vis_iter);
 			break;
 		}
 	}

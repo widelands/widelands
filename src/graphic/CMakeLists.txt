@@ -100,6 +100,8 @@ wl_library(graphic_gl_utils
     base_geometry
     base_log
     base_macros
+    io_fileread
+    io_filesystem
 )
 
 wl_library(graphic_terrain_programs
