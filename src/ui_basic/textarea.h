@@ -75,6 +75,15 @@ struct Textarea : public Panel {
 	 */
 	void set_fixed_width(uint32_t w);
 
+	/**
+	 * This will change the font until the text will fit into the given width and height.
+	 * Fontset will be changed to condensed if the text is too wide after fitting the height.
+	 */
+	void fit_text(int max_width,
+					  int max_height,
+					  int desired_font_size = UI_FONT_SIZE_SMALL,
+					  UI::FontSet::Face desired_fontface = UI::FontSet::Face::kSans);
+
 	void set_text(const std::string &);
 	const std::string& get_text();
 

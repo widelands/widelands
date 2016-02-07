@@ -242,4 +242,27 @@ void Textarea::update_desired_size()
 	set_desired_size(w, h);
 }
 
+
+void Textarea::fit_text(int max_width, int max_height,
+								int desired_font_size, UI::FontSet::Face desired_fontface) {
+
+	constexpr int kMinFontSize = 6;
+	int font_size = desired_font_size;
+	set_fontsize(font_size);
+	set_fontface(desired_fontface);
+
+	while (get_h() > max_height && font_size > kMinFontSize) {
+		--font_size;
+		set_fontsize(font_size);
+	}
+
+	if (get_w() > max_width) {
+		set_fontface(UI::FontSet::Face::kCondensed);
+		while (get_w() > max_width && font_size > kMinFontSize) {
+			--font_size;
+			set_fontsize(font_size);
+		}
+	}
+}
+
 }

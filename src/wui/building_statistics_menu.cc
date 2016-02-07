@@ -763,30 +763,9 @@ void BuildingStatisticsMenu::update() {
 void BuildingStatisticsMenu::set_labeltext_autosize(UI::Textarea* textarea,
 																	 const std::string& text,
 																	 const RGBColor& color) {
-
-	constexpr int kMinFontSize = 6;
-	constexpr int kMaxWidth = kBuildGridCellWidth - 2;
-	constexpr int kMaxHeight = kLabelHeight - 2;
-
-	int font_size = UI_FONT_SIZE_SMALL;
-	textarea->set_fontsize(font_size);
 	textarea->set_color(color);
-	textarea->set_fontface(UI::FontSet::Face::kSans);
 	textarea->set_text(text);
-
-	while (textarea->get_h() > kMaxHeight && font_size > kMinFontSize) {
-		--font_size;
-		textarea->set_fontsize(font_size);
-	}
-
-	if (textarea->get_w() > kMaxWidth) {
-		textarea->set_fontface(UI::FontSet::Face::kCondensed);
-		while (textarea->get_w() > kMaxWidth && font_size > kMinFontSize) {
-			--font_size;
-			textarea->set_fontsize(font_size);
-		}
-	}
-
+	textarea->fit_text(kBuildGridCellWidth - 2, kLabelHeight - 2, kLabelFontSize);
 	textarea->set_visible(true);
 }
 
