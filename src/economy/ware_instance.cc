@@ -311,7 +311,7 @@ void WareInstance::act(Game & game, uint32_t)
  */
 void WareInstance::update(Game & game)
 {
-	if (!m_descr) // Upsy, we're not even initialized. Happens on load
+	if (!descr_) // Upsy, we're not even initialized. Happens on load
 		return;
 
 	MapObject * const loc = m_location.get(game);
@@ -435,7 +435,7 @@ void WareInstance::enter_building(Game & game, Building & building)
 			throw wexception
 				("MO(%u): ware(%s): do not know how to move from building %u (%s at (%u,%u)) "
 				 "to %u (%s) -> not a warehouse!",
-				 serial(), m_descr->name().c_str(), building.serial(),
+				 serial(), descr_->name().c_str(), building.serial(),
 				 building.descr().name().c_str(), building.get_position().x,
 				 building.get_position().y, nextstep->serial(),
 				 nextstep->descr().name().c_str());

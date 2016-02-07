@@ -150,10 +150,10 @@ void CmdAct::write
 ObjectManager::~ObjectManager()
 {
 	// better not throw an exception in a destructor...
-	if (!m_objects.empty())
+	if (!objects_.empty())
 		log("ObjectManager: ouch! remaining objects\n");
 
-	log("lastserial: %i\n", m_lastserial);
+	log("lastserial: %i\n", lastserial_);
 }
 
 /**
@@ -161,11 +161,11 @@ ObjectManager::~ObjectManager()
  */
 void ObjectManager::cleanup(EditorGameBase & egbase)
 {
-	while (!m_objects.empty()) {
-		MapObjectMap::iterator it = m_objects.begin();
+	while (!objects_.empty()) {
+		MapObjectMap::iterator it = objects_.begin();
 		it->second->remove(egbase);
 	}
-	m_lastserial = 0;
+	lastserial_ = 0;
 }
 
 /**
@@ -173,10 +173,10 @@ void ObjectManager::cleanup(EditorGameBase & egbase)
  */
 void ObjectManager::insert(MapObject * obj)
 {
-	++m_lastserial;
-	assert(m_lastserial);
-	obj->m_serial = m_lastserial;
-	m_objects[m_lastserial] = obj;
+	++lastserial_;
+	assert(lastserial_);
+	obj->serial_ = lastserial_;
+	objects_[lastserial_] = obj;
 }
 
 /**
@@ -184,7 +184,7 @@ void ObjectManager::insert(MapObject * obj)
  */
 void ObjectManager::remove(MapObject & obj)
 {
-	m_objects.erase(obj.m_serial);
+	objects_.erase(obj.serial_);
 }
 
 /*
@@ -193,7 +193,7 @@ void ObjectManager::remove(MapObject & obj)
 std::vector<Serial> ObjectManager::all_object_serials_ordered () const {
 	std::vector<Serial> rv;
 
-	for (const std::pair<Serial, MapObject *>& o : m_objects) {
+	for (const std::pair<Serial, MapObject *>& o : objects_) {
 		rv.push_back(o.first);
 	}
 
@@ -204,11 +204,11 @@ std::vector<Serial> ObjectManager::all_object_serials_ordered () const {
 
 MapObject * ObjectPointer::get(const EditorGameBase & egbase)
 {
-	if (!m_serial)
+	if (!serial_)
 		return nullptr;
-	MapObject * const obj = egbase.objects().get_object(m_serial);
+	MapObject * const obj = egbase.objects().get_object(serial_);
 	if (!obj)
-		m_serial = 0;
+		serial_ = 0;
 	return obj;
 }
 
@@ -217,7 +217,7 @@ MapObject * ObjectPointer::get(const EditorGameBase & egbase)
 // that is pointed to.
 // That is, a 'const ObjectPointer' behaves like a 'ObjectPointer * const'.
 MapObject * ObjectPointer::get(const EditorGameBase & egbase) const {
-	return m_serial ? egbase.objects().get_object(m_serial) : nullptr;
+	return serial_ ? egbase.objects().get_object(serial_) : nullptr;
 }
 
 
@@ -233,7 +233,7 @@ MapObjectDescr IMPLEMENTATION
 MapObjectDescr::MapObjectDescr(const MapObjectType init_type,
 				 const std::string& init_name,
 				 const std::string& init_descname)
-	: m_type(init_type), m_name(init_name), m_descname(init_descname),
+	: type_(init_type), name_(init_name), descname_(init_descname),
 	  representative_image_filename_(""), icon_filename_("") {
 }
 MapObjectDescr::MapObjectDescr(const MapObjectType init_type,
@@ -258,16 +258,16 @@ MapObjectDescr::MapObjectDescr(const MapObjectType init_type,
 		}
 	}
 }
-MapObjectDescr::~MapObjectDescr() {m_anims.clear();}
+MapObjectDescr::~MapObjectDescr() {anims_.clear();}
 
 
-uint32_t MapObjectDescr::s_dyn_attribhigh =
+uint32_t MapObjectDescr::dyn_attribhigh_ =
 	MapObject::HIGHEST_FIXED_ATTRIBUTE;
-MapObjectDescr::AttribMap MapObjectDescr::s_dyn_attribs;
+MapObjectDescr::AttribMap MapObjectDescr::dyn_attribs_;
 
 
 bool MapObjectDescr::is_animation_known(const std::string & animname) const {
-	return (m_anims.count(animname) == 1);
+	return (anims_.count(animname) == 1);
 }
 
 /**
@@ -280,7 +280,7 @@ void MapObjectDescr::add_animation
 		throw GameDataError
 			("Tried to add already existing animation \"%s\"", animname.c_str());
 	} else {
-		m_anims.insert(std::pair<std::string, uint32_t>(animname, anim));
+		anims_.insert(std::pair<std::string, uint32_t>(animname, anim));
 	}
 }
 
@@ -299,7 +299,7 @@ void MapObjectDescr::add_directional_animation(DirAnimations* anims, const std::
 
 std::string MapObjectDescr::get_animation_name(uint32_t const anim) const {
 
-	for (const std::pair<std::string, uint32_t>& temp_anim : m_anims) {
+	for (const std::pair<std::string, uint32_t>& temp_anim : anims_) {
 		if (temp_anim.second == anim) {
 			return temp_anim.first;
 		}
@@ -332,7 +332,7 @@ const std::string& MapObjectDescr::icon_filename() const {
  * Search for the attribute in the attribute list
  */
 bool MapObjectDescr::has_attribute(uint32_t const attr) const {
-	for (const uint32_t& attrib : m_attributes) {
+	for (const uint32_t& attrib : attributes_) {
 		if (attrib == attr) {
 			return true;
 		}
@@ -347,7 +347,7 @@ bool MapObjectDescr::has_attribute(uint32_t const attr) const {
 void MapObjectDescr::add_attribute(uint32_t const attr)
 {
 	if (!has_attribute(attr))
-		m_attributes.push_back(attr);
+		attributes_.push_back(attr);
 }
 
 void MapObjectDescr::add_attributes(const std::vector<std::string>& attributes,
@@ -368,9 +368,9 @@ void MapObjectDescr::add_attributes(const std::vector<std::string>& attributes,
  * before and add_if_not_exists = true, we add it to the map. Else, throws exception.
  */
 uint32_t MapObjectDescr::get_attribute_id(const std::string & name, bool add_if_not_exists) {
-	AttribMap::iterator it = s_dyn_attribs.find(name);
+	AttribMap::iterator it = dyn_attribs_.find(name);
 
-	if (it != s_dyn_attribs.end()) {
+	if (it != dyn_attribs_.end()) {
 		return it->second;
 	}
 
@@ -383,12 +383,12 @@ uint32_t MapObjectDescr::get_attribute_id(const std::string & name, bool add_if_
 	if (!add_if_not_exists) {
 		throw GameDataError("get_attribute_id: attribute '%s' not found!\n", name.c_str());
 	} else {
-		++s_dyn_attribhigh;
-		s_dyn_attribs[name] = s_dyn_attribhigh;
+		++dyn_attribhigh_;
+		dyn_attribs_[name] = dyn_attribhigh_;
 	}
-	assert(s_dyn_attribhigh != 0); // wrap around seems *highly* unlikely ;)
+	assert(dyn_attribhigh_ != 0); // wrap around seems *highly* unlikely ;)
 
-	return s_dyn_attribhigh;
+	return dyn_attribhigh_;
 }
 
 /**
@@ -397,8 +397,8 @@ uint32_t MapObjectDescr::get_attribute_id(const std::string & name, bool add_if_
  */
 std::string MapObjectDescr::get_attribute_name(uint32_t id) {
 	for
-		(AttribMap::iterator iter = s_dyn_attribs.begin();
-		 iter != s_dyn_attribs.end(); ++iter)
+		(AttribMap::iterator iter = dyn_attribs_.begin();
+		 iter != dyn_attribs_.end(); ++iter)
 	{
 		if (iter->second == id)
 			return iter->first;
@@ -418,10 +418,10 @@ MapObject IMPLEMENTATION
  * Zero-initialize a map object
  */
 MapObject::MapObject(const MapObjectDescr * const the_descr) :
-m_descr(the_descr),
-m_serial(0),
-m_logsink(nullptr),
-m_reserved_by_worker(false)
+descr_(the_descr),
+serial_(0),
+logsink_(nullptr),
+reserved_by_worker_(false)
 {}
 
 
@@ -431,7 +431,7 @@ m_reserved_by_worker(false)
  */
 void MapObject::remove(EditorGameBase & egbase)
 {
-	removed(m_serial); // Signal call
+	removed(serial_); // Signal call
 	cleanup(egbase);
 	delete this;
 }
@@ -523,7 +523,7 @@ void MapObject::act(Game &, uint32_t) {}
  */
 void MapObject::set_logsink(LogSink * const sink)
 {
-	m_logsink = sink;
+	logsink_ = sink;
 }
 
 
@@ -534,7 +534,7 @@ void MapObject::log_general_info(const EditorGameBase &) {}
  */
 void MapObject::molog(char const * fmt, ...) const
 {
-	if (!g_verbose && !m_logsink)
+	if (!g_verbose && !logsink_)
 		return;
 
 	va_list va;
@@ -544,20 +544,20 @@ void MapObject::molog(char const * fmt, ...) const
 	vsnprintf(buffer, sizeof(buffer), fmt, va);
 	va_end(va);
 
-	if (m_logsink)
-		m_logsink->log(buffer);
+	if (logsink_)
+		logsink_->log(buffer);
 
-	log("MO(%u,%s): %s", m_serial, descr().name().c_str(), buffer);
+	log("MO(%u,%s): %s", serial_, descr().name().c_str(), buffer);
 }
 
 bool MapObject::is_reserved_by_worker() const
 {
-	return m_reserved_by_worker;
+	return reserved_by_worker_;
 }
 
 void MapObject::set_reserved_by_worker(bool reserve)
 {
-	m_reserved_by_worker = reserve;
+	reserved_by_worker_ = reserve;
 }
 
 
@@ -593,7 +593,7 @@ void MapObject::Loader::load(FileRead & fr)
 		}
 
 		if (packet_version == kCurrentPacketVersionMapObject) {
-			get_object()->m_reserved_by_worker = fr.unsigned_8();
+			get_object()->reserved_by_worker_ = fr.unsigned_8();
 		}
 	} catch (const WException & e) {
 		throw wexception("map object: %s", e.what());
@@ -636,7 +636,7 @@ void MapObject::save
 	fw.unsigned_8(kCurrentPacketVersionMapObject);
 
 	fw.unsigned_32(mos.get_object_file_index(*this));
-	fw.unsigned_8(m_reserved_by_worker);
+	fw.unsigned_8(reserved_by_worker_);
 }
 
 std::string to_string(const MapObjectType type) {
