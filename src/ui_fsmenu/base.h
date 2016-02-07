@@ -76,8 +76,8 @@ public:
 	void draw(RenderTarget &) override;
 
 	///\return the size for texts fitting to current resolution
-	uint32_t fs_small();
-	uint32_t fs_big();
+	int fs_small();
+	int fs_big();
 
 	/// Handle keypresses
 	bool handle_key(bool down, SDL_Keysym code) override;

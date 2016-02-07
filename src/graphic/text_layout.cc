@@ -85,7 +85,8 @@ std::string as_editorfont(const std::string& text, int ptsize, const RGBColor& c
 	return f.str();
 }
 
-std::string as_aligned(const std::string & txt, UI::Align align, int ptsize, const RGBColor& clr,  UI::FontSet::Face face) {
+std::string as_aligned(const std::string & txt, UI::Align align, int ptsize, const RGBColor& clr,
+							  UI::FontSet::Face face) {
 	std::string alignment = "left";
 	if ((align & UI::Align::kHorizontal) == UI::Align::kRight) {
 		alignment = "right";
