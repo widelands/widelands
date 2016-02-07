@@ -1283,7 +1283,7 @@ bool WLApplication::new_game()
 					(game, g_options.pull_section("global"), pn, false));
 			std::unique_ptr<GameController> ctrl
 				(new SinglePlayerGameController(game, true, pn));
-			UI::ProgressWindow loaderUI;
+			UI::ProgressWindow loader_ui;
 			std::vector<std::string> tipstext;
 			tipstext.push_back("general_game");
 			tipstext.push_back("singleplayer");
@@ -1291,13 +1291,13 @@ bool WLApplication::new_game()
 				tipstext.push_back(sp.get_players_tribe());
 			} catch (GameSettingsProvider::NoTribe) {
 			}
-			GameTips tips (loaderUI, tipstext);
+			GameTips tips (loader_ui, tipstext);
 
-			loaderUI.step(_("Preparing game"));
+			loader_ui.step(_("Preparing game"));
 
 			game.set_game_controller(ctrl.get());
-			game.init_newgame(&loaderUI, sp.settings());
-			game.run(&loaderUI, Widelands::Game::NewNonScenario, "", false);
+			game.init_newgame(&loader_ui, sp.settings());
+			game.run(&loader_ui, Widelands::Game::NewNonScenario, "", false);
 		} catch (const std::exception & e) {
 			log("Fatal exception: %s\n", e.what());
 			emergency_save(game);
@@ -1398,12 +1398,12 @@ void WLApplication::replay()
 	}
 
 	try {
-		UI::ProgressWindow loaderUI;
+		UI::ProgressWindow loader_ui;
 		std::vector<std::string> tipstext;
 		tipstext.push_back("general_game");
-		GameTips tips (loaderUI, tipstext);
+		GameTips tips (loader_ui, tipstext);
 
-		loaderUI.step(_("Loading..."));
+		loader_ui.step(_("Loading..."));
 
 		game.set_ibase
 			(new InteractiveSpectator(game, g_options.pull_section("global")));
@@ -1412,7 +1412,7 @@ void WLApplication::replay()
 
 		game.save_handler().set_allow_saving(false);
 
-		game.run(&loaderUI, Widelands::Game::Loaded, "", true);
+		game.run(&loader_ui, Widelands::Game::Loaded, "", true);
 	} catch (const std::exception & e) {
 		log("Fatal Exception: %s\n", e.what());
 		emergency_save(game);

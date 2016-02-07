@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -50,9 +50,9 @@ protected:
 public:
 	bool is_snap_target() const override {return true;}
 
-	int32_t get_value() const {return m_value;}
-	int32_t get_max_value() const {return m_max_value;}
-	int32_t get_min_value() const {return m_min_value;}
+	int32_t get_value() const {return value_;}
+	int32_t get_max_value() const {return max_value_;}
+	int32_t get_min_value() const {return min_value_;}
 
 	void set_value(int32_t);
 	void set_max_value(int32_t);
@@ -66,9 +66,9 @@ protected:
 	void calculate_cursor_position();
 
 	//  drawing
-	int32_t get_x_gap()    const {return m_x_gap;}
-	int32_t get_y_gap()    const {return m_y_gap;}
-	int32_t get_bar_size() const {return m_bar_size;}
+	int32_t get_x_gap()    const {return x_gap_;}
+	int32_t get_y_gap()    const {return y_gap_;}
+	int32_t get_bar_size() const {return bar_size_;}
 	void draw_cursor
 		(RenderTarget &, int32_t x, int32_t y, int32_t w, int32_t h);
 
@@ -88,24 +88,24 @@ public:
 	boost::signals2::signal<void (int32_t)> changedto;
 
 private:
-	int32_t m_min_value;          //  cursor values
-	int32_t m_max_value;
-	int32_t m_value;
-	int32_t m_relative_move;
+	int32_t min_value_;          //  cursor values
+	int32_t max_value_;
+	int32_t value_;
+	int32_t relative_move_;
 
-	bool m_highlighted;       //  mouse over
-	bool m_pressed;           //  the cursor is pressed
-	bool m_enabled;           //  enabled widget
+	bool highlighted_;       //  mouse over
+	bool pressed_;           //  the cursor is pressed
+	bool enabled_;           //  enabled widget
 
-	const Image* m_pic_background;    //  background texture (picture ID)
+	const Image* pic_background_;    //  background texture (picture ID)
 
 protected:
-	int32_t m_x_gap;              //  draw positions
-	int32_t m_y_gap;
-	int32_t m_bar_size;
+	int32_t x_gap_;              //  draw positions
+	int32_t y_gap_;
+	int32_t bar_size_;
 
-	int32_t m_cursor_pos;         //  cursor position
-	int32_t m_cursor_size;        //  cursor width
+	int32_t cursor_pos_;         //  cursor position
+	int32_t cursor_size_;        //  cursor width
 };
 
 
@@ -186,7 +186,7 @@ struct DiscreteSlider : public Panel {
 		(Panel * const parent,
 		 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
 		 const std::vector<std::string> labels_in,
-		 uint32_t m_value,
+		 uint32_t value_,
 		 const Image* background_picture_id,
 		 const std::string & tooltip_text = std::string(),
 		 const uint32_t cursor_size = 20,
