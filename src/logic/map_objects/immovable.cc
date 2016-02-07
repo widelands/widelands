@@ -26,6 +26,7 @@
 #include <boost/algorithm/string.hpp>
 #include <boost/format.hpp>
 
+#include "base/log.h"
 #include "base/macros.h"
 #include "base/wexception.h"
 #include "config.h"
@@ -118,7 +119,7 @@ void BaseImmovable::unset_position(EditorGameBase & egbase, Coords const c)
 
 	// this is to help to debug failing assertion below (see bug 1542238)
 	if (f.field->immovable != this){
-		printf (" Internal error: Immovable at %3dx%3d does not match: is %s but %s was expected.\n",
+		log(" Internal error: Immovable at %3dx%3d does not match: is %s but %s was expected.\n",
 		c.x,
 		c.y,
 		(f.field->immovable) ? f.field->immovable->descr().name().c_str() : "None",
