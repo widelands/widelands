@@ -38,25 +38,29 @@
 #include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
 
+// NOCOM(#codereview): turn these into functions in the anon namespace please,
+// that reads super scary.
 #define WINDOW_WIDTH std::min(700, g_gr->get_xres() - 40)
 #define WINDOW_HEIGHT std::min(550, g_gr->get_yres() - 40)
+
+namespace {
+
+using namespace Widelands;
 
 constexpr int kPadding = 5;
 constexpr int kTabHeight = 35;
 
-using namespace Widelands;
-
-inline EditorInteractive& EditorHelp::eia() const {
-	return dynamic_cast<EditorInteractive&>(*get_parent());
-}
-
-namespace {
 const std::string heading(const std::string& text) {
 	return ((boost::format("<rt><p font-size=18 font-weight=bold font-color=D1D1D1>"
 	                       "%s<br></p><p font-size=8> <br></p></rt>") %
 	         text).str());
 }
+
 }  // namespace
+
+inline EditorInteractive& EditorHelp::eia() const {
+	return dynamic_cast<EditorInteractive&>(*get_parent());
+}
 
 EditorHelp::EditorHelp(EditorInteractive& parent, UI::UniqueWindow::Registry& registry)
    : UI::UniqueWindow(&parent, "encyclopedia", &registry, WINDOW_WIDTH, WINDOW_HEIGHT, _("Help")),
@@ -137,6 +141,8 @@ EditorHelp::EditorHelp(EditorInteractive& parent, UI::UniqueWindow::Registry& re
 	}
 }
 
+// NOCOM(#codereview): take entries as a * so that the callsite reads more
+// clearly as modifying this value?
 void EditorHelp::fill_entries(const char* key, std::vector<HelpEntry>& entries) {
 	std::sort(entries.begin(), entries.end());
 	for (uint32_t i = 0; i < entries.size(); i++) {
@@ -211,6 +217,9 @@ void EditorHelp::entry_selected(const std::string& key,
 
 		cr->resume();
 		const std::string help_text = cr->pop_string();
+		// NOCOM(#codereview): Why is the lua script not returning the text
+		// including heading? Feels strange to do most formatting in Lua, but
+		// some in c++.
 		contents_.at(key)->set_text((boost::format("%s%s") % heading(descname) % help_text).str());
 
 	} catch (LuaError& err) {

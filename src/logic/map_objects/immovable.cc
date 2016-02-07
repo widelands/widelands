@@ -267,6 +267,10 @@ bool ImmovableDescr::has_editor_category() const {
 	return editor_category_ != nullptr;
 }
 
+// NOCOM(#codereview): that is scary. editor_category_ can be nullptr, but
+// this method suggest it is always valid. I would suggest killing
+// has_editor_category and instead return const EditorCategory* in this method,
+// documenting that it can be nullptr.
 const EditorCategory& ImmovableDescr::editor_category() const {
 	return *editor_category_;
 }

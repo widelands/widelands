@@ -45,8 +45,11 @@ private:
 			kTree
 		};
 
+		// NOCOM(#codereview): Or shorter
+		// HelpEntry(const HelpEntry&) = default;
 		HelpEntry(const HelpEntry& other) : HelpEntry(other.index, other.descname, other.icon) {
 		}
+		// NOCOM(#codereview): _blub is reserved for the compiler. init_blub ?
 		HelpEntry(const Widelands::DescriptionIndex _index,
 		          const std::string& _descname,
 		          const Image* _icon)
@@ -56,7 +59,7 @@ private:
 		std::string descname;
 		const Image* icon;
 
-		bool operator<(const HelpEntry other) const {
+		bool operator<(const HelpEntry& other) const {
 			return descname < other.descname;
 		}
 	};
