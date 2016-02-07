@@ -83,11 +83,7 @@ lasttrackserial_   (0)
 EditorGameBase::~EditorGameBase() {
 	delete map_;
 	delete player_manager_.release();
-
-	if (g_gr) { // dedicated does not use the sound_handler
-		assert(this == g_sound_handler.egbase_);
-		g_sound_handler.egbase_ = nullptr;
-	}
+	g_sound_handler.egbase_ = nullptr;
 }
 
 void EditorGameBase::think()

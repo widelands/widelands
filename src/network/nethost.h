@@ -40,7 +40,7 @@ struct NetHost : public GameController, private SyncCallback {
 	NetHost (const std::string & playername, bool internet = false);
 	virtual ~NetHost ();
 
-	void run(bool autostart = false);
+	void run();
 	const std::string & get_local_playername() const;
 	int16_t get_local_playerposition();
 
@@ -90,8 +90,6 @@ struct NetHost : public GameController, private SyncCallback {
 	void kick_user(uint32_t, std::string);
 	void split_command_array
 		(const std::string & cmdarray, std::string & cmd, std::string & arg1, std::string & arg2);
-	void handle_dserver_command(std::string, std::string);
-	void dserver_send_maps_and_saves(Client &);
 
 	void report_result(uint8_t player, Widelands::PlayerEndResult result, const std::string & info) override;
 
@@ -106,8 +104,6 @@ struct NetHost : public GameController, private SyncCallback {
 	}
 
 	bool forced_pause() {return m_forced_pause;}
-
-	bool is_dedicated() {return m_is_dedicated;}
 
 private:
 	NetTransferFile * file;
@@ -159,9 +155,6 @@ private:
 
 	NetHostImpl * d;
 	bool m_internet;
-	bool m_is_dedicated;
-	std::string m_password;
-	std::string m_dedicated_motd;
 	bool m_forced_pause;
 };
 
