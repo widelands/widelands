@@ -23,11 +23,10 @@
 
 #include "base/log.h"
 #include "base/wexception.h"
-#include "graphic/font.h"
 #include "graphic/graphic.h"
+#include "graphic/image.h"
 #include "graphic/rendertarget.h"
 #include "graphic/text_constants.h"
-#include "graphic/text_layout.h"
 #include "io/filesystem/filesystem.h"
 #include "wlapplication.h"
 

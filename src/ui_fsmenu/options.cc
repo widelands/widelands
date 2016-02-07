@@ -234,7 +234,7 @@ FullscreenMenuOptions::FullscreenMenuOptions
 	os_(opt)
 {
 	// Set up UI Elements
-	title_           .set_textstyle(UI::TextStyle::ui_big());
+	title_           .set_fontsize(UI_FONT_SIZE_BIG);
 
 	tabs_.add("options_interface", _("Interface"), &box_interface_, "");
 	tabs_.add("options_windows", _("Windows"), &box_windows_, "");

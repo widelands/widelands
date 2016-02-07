@@ -83,38 +83,49 @@ void Textarea::init()
 	fixed_width_ = 0;
 	set_handle_mouse(false);
 	set_thinks(false);
-	set_textstyle(UI::TextStyle::ui_small());
+	color_ = UI_FONT_CLR_FG;
+	fontsize_ = UI_FONT_SIZE_SMALL;
+	condensed_ = false;
+	update();
 }
 
-/**
- * Set the font of the textarea.
- */
-void Textarea::set_textstyle(const TextStyle & style)
-{
-	if (textstyle_ == style)
-		return;
+void Textarea::set_color(RGBColor color) {
+	if (color_ != color) {
+		color_ = color;
+		update();
+	}
+}
 
+void Textarea::set_fontsize(int fontsize) {
+	if (fontsize_ != fontsize) {
+		fontsize_ = fontsize;
+		update();
+	}
+}
+
+void Textarea::set_condensed(bool condensed) {
+	if (condensed_ != condensed) {
+		condensed_ = condensed;
+		update();
+	}
+}
+
+void Textarea::update()
+{
 	if (layoutmode_ == AutoMove)
-		collapse();
-	textstyle_ = style;
+		collapse(); // collapse() implicitly updates
+
+
 	rendered_text_ = UI::g_fh1->render(
 									as_uifont(text_,
-												 textstyle_.font->size() - UI::g_fh1->fontset().size_offset(),
-												 textstyle_.fg));
-
+												 fontsize_ - UI::g_fh1->fontset().size_offset(),
+												 color_, condensed_));
 	if (layoutmode_ == AutoMove)
 		expand();
 	else if (layoutmode_ == Layouted)
 		update_desired_size();
 }
 
-/**
- * @deprecated
- */
-void Textarea::set_font(const std::string & name, int size, RGBColor clr)
-{
-	set_textstyle(TextStyle::makebold(Font::get(name, size), clr));
-}
 
 /**
  * Set the text of the Textarea. Size (or desired size) is automatically
@@ -122,21 +133,10 @@ void Textarea::set_font(const std::string & name, int size, RGBColor clr)
  */
 void Textarea::set_text(const std::string & text)
 {
-	if (text_ == text)
-		return;
-
-	if (layoutmode_ == AutoMove)
-		collapse(); // collapse() implicitly updates
-
-	text_ = text;
-	rendered_text_ = UI::g_fh1->render(
-									as_uifont(text_,
-												 textstyle_.font->size() - UI::g_fh1->fontset().size_offset(),
-												 textstyle_.fg));
-	if (layoutmode_ == AutoMove)
-		expand();
-	else if (layoutmode_ == Layouted)
-		update_desired_size();
+	if (text_ != text) {
+		text_ = text;
+		update();
+	}
 }
 
 const std::string& Textarea::get_text()
@@ -236,8 +236,7 @@ void Textarea::update_desired_size()
 		if (text_.empty()) {
 			h = UI::g_fh1->render(
 					 as_uifont(".",
-								  textstyle_.font->size() - UI::g_fh1->fontset().size_offset(),
-								  textstyle_.fg))->height();
+								  fontsize_ - UI::g_fh1->fontset().size_offset()))->height();
 		}
 	}
 	set_desired_size(w, h);

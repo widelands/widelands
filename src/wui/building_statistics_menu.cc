@@ -49,7 +49,7 @@ using namespace Widelands;
 
 namespace {
 void set_label_font(UI::Textarea* label) {
-	label->set_font(UI::g_fh1->fontset().serif(), kLabelFontSize, UI_FONT_CLR_FG);
+	label->set_fontsize(kLabelFontSize);
 }
 }  // namespace
 
@@ -769,21 +769,21 @@ void BuildingStatisticsMenu::set_labeltext_autosize(UI::Textarea* textarea,
 	constexpr int kMaxHeight = kLabelHeight - 2;
 
 	int font_size = UI_FONT_SIZE_SMALL;
-	std::string fontset = UI::g_fh1->fontset().serif();
-
-	textarea->set_font(fontset, font_size, color);
+	textarea->set_fontsize(font_size);
+	textarea->set_color(color);
+	textarea->set_condensed(false);
 	textarea->set_text(text);
 
 	while (textarea->get_h() > kMaxHeight && font_size > kMinFontSize) {
 		--font_size;
-		textarea->set_font(fontset, font_size, color);
+		textarea->set_fontsize(font_size);
 	}
 
 	if (textarea->get_w() > kMaxWidth) {
-		fontset = UI::g_fh1->fontset().condensed();
+		textarea->set_condensed(true);
 		while (textarea->get_w() > kMaxWidth && font_size > kMinFontSize) {
 			--font_size;
-			textarea->set_font(fontset, font_size, color);
+			textarea->set_fontsize(font_size);
 		}
 	}
 

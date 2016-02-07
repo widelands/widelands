@@ -40,7 +40,7 @@ MultilineTextarea::MultilineTextarea
 	:
 	Panel       (parent, x, y, w, h),
 	text_      (text),
-	style_(UI::TextStyle::ui_small()),
+	color_(UI_FONT_CLR_FG),
 	isrichtext(false),
 	scrollbar_ (this, get_w() - scrollbar_w(), 0, scrollbar_w(), h, false),
 	scrollmode_(scroll_mode)
@@ -88,7 +88,7 @@ void MultilineTextarea::recompute()
 			isrichtext = false;
 			std::string text_to_render = richtext_escape(text_);
 			boost::replace_all(text_to_render, "\n", "<br>");
-			const Image* text_im = UI::g_fh1->render(as_uifont(text_to_render, style_.font->size(), style_.fg),
+			const Image* text_im = UI::g_fh1->render(as_uifont(text_to_render, UI_FONT_SIZE_SMALL, color_),
 																  get_eff_w() - 2 * RICHTEXT_MARGIN);
 			height = text_im->height();
 		} else {
@@ -148,7 +148,7 @@ void MultilineTextarea::draw(RenderTarget& dst)
 		std::string text_to_render = richtext_escape(text_);
 		boost::replace_all(text_to_render, "\n", "<br>");
 		const Image* text_im =
-				UI::g_fh1->render(as_aligned(text_to_render, align_, style_.font->size(), style_.fg),
+				UI::g_fh1->render(as_aligned(text_to_render, align_, UI_FONT_SIZE_SMALL, color_),
 										get_eff_w() - 2 * RICHTEXT_MARGIN);
 
 		uint32_t blit_width = std::min(text_im->width(), static_cast<int>(get_eff_w()));

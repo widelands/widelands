@@ -81,10 +81,9 @@ struct Textarea : public Panel {
 	// Drawing and event handlers
 	void draw(RenderTarget &) override;
 
-	void set_textstyle(const UI::TextStyle & style);
-	const UI::TextStyle & get_textstyle() const {return textstyle_;}
-
-	void set_font(const std::string & name, int size, RGBColor clr);
+	void set_color(RGBColor color);
+	void set_fontsize(int fontsize);
+	void set_condensed(bool condensed);
 
 protected:
 	void update_desired_size() override;
@@ -99,12 +98,16 @@ private:
 	void init();
 	void collapse();
 	void expand();
+	void update();
 
 	LayoutMode layoutmode_;
 	std::string text_;
 	const Image* rendered_text_;
 	Align align_;
-	UI::TextStyle textstyle_;
+	RGBColor color_;
+	int fontsize_;
+	bool condensed_;
+
 	uint32_t fixed_width_;
 };
 

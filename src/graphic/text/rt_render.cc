@@ -622,8 +622,6 @@ FontCache::~FontCache() {
 }
 
 IFont& FontCache::get_font(NodeStyle* ns) {
-	const std::string tempNOCOM = ns->font_face;
-
 	if (ns->font_face == "condensed") {
 		ns->font_face = ns->fontset->condensed();
 	} else if (ns->font_face == "serif") {
@@ -683,8 +681,6 @@ IFont& FontCache::get_font(NodeStyle* ns) {
 	}
 	assert(font != nullptr);
 
-	log("NOCOM parsed %s - font %s\n", tempNOCOM.c_str(), ns->font_face.c_str());
-
 	return *m_fontmap.insert(std::make_pair(fd, font.release())).first->second;
 }
 
@@ -718,8 +714,6 @@ void TagHandler::m_make_text_nodes(const string& txt, vector<RenderNode*>& nodes
 	TextStream ts(txt);
 	std::string word;
 	std::vector<RenderNode*> text_nodes;
-
-	//log("NOCOM rendering %s\n", txt.c_str());
 
 	// Bidirectional text (Arabic etc.)
 	if (i18n::has_rtl_character(txt.c_str())) {

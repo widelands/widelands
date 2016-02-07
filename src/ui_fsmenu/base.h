@@ -21,17 +21,8 @@
 #define WL_UI_FSMENU_BASE_H
 
 #include <string>
-#include <memory>
 
-#include "graphic/text_layout.h"
 #include "ui_basic/panel.h"
-
-namespace UI {
-struct Font;
-struct TextStyle;
-}
-
-class Image;
 
 /**
  * This class is the base class for a fullscreen menu.

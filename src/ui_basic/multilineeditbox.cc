@@ -154,19 +154,6 @@ void MultilineEditbox::set_text(const std::string & text)
 }
 
 /**
- * Set the text style.
- */
-void MultilineEditbox::set_textstyle(const UI::TextStyle & ts)
-{
-	if (d_->textstyle == ts)
-		return;
-
-	d_->textstyle = ts;
-	d_->update();
-
-}
-
-/**
  * Set the maximum number of bytes in the scrollbar text.
  *
  * This will shorten the currently stored text when necessary.
