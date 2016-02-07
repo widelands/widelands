@@ -719,7 +719,6 @@ void NetClient::handle_packet(RecvPacket & packet)
 			fr.open(*g_fs, file->filename);
 
 			std::unique_ptr<char[]> complete(new char[file->bytes]);
-			// NOCOM why was this deleted? if (!complete) throw wexception("Out of memory");
 
 			fr.data_complete(complete.get(), file->bytes);
 			SimpleMD5Checksum md5sum;
