@@ -413,9 +413,11 @@ struct HostChatProvider : public ChatProvider {
 						kickReason = "No reason given!";
 					// Check if client exists
 					int32_t num = h->check_client(kickUser);
-					if (num == -1) c.msg =
-					   (boost::format(_("The client %s could not be found.")) % arg1).str();
-					else {
+					if (num == -2) {
+						c.msg = _("You can not kick yourself!");
+					} else if (num == -1) {
+						c.msg = (boost::format(_("The client %s could not be found.")) % arg1).str();
+					} else {
 						kickClient = num;
 						c.msg =
 						   (boost::format(_("Are you sure you want to kick %s?")) % arg1).str() + "<br>";
@@ -742,8 +744,9 @@ void NetHost::run()
 
 		if ((pn > 0) && (pn <= UserSettings::highest_playernum())) {
 			igb = new InteractivePlayer(game, g_options.pull_section("global"), pn, true);
-		} else
+		} else {
 			igb = new InteractiveSpectator(game, g_options.pull_section("global"), true);
+		}
 		igb->set_chat_provider(d->chat);
 		game.set_ibase(igb);
 
