@@ -26,7 +26,6 @@
 #include "base/log.h"
 #include "base/macros.h"
 #include "base/warning.h"
-#include "io/dedicated_log.h"
 #include "io/fileread.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "network/internet_gaming_messages.h"
@@ -103,7 +102,7 @@ InternetGaming & InternetGaming::ref() {
 
 void InternetGaming::initialize_connection() {
 	// First of all try to connect to the metaserver
-	dedicatedlog("InternetGaming: Connecting to the metaserver.\n");
+	log("InternetGaming: Connecting to the metaserver.\n");
 	IPaddress peer;
 	if (hostent * const he = gethostbyname(m_meta.c_str())) {
 		peer.host = (reinterpret_cast<in_addr *>(he->h_addr_list[0]))->s_addr;
@@ -147,7 +146,7 @@ bool InternetGaming::login
 	initialize_connection();
 
 	// If we are here, a connection was established and we can send our login package through the socket.
-	dedicatedlog("InternetGaming: Sending login request.\n");
+	log("InternetGaming: Sending login request.\n");
 	SendPacket s;
 	s.string(IGPCMD_LOGIN);
 	s.string(boost::lexical_cast<std::string>(INTERNET_GAMING_PROTOCOL_VERSION));
@@ -174,7 +173,7 @@ bool InternetGaming::login
 				return false;
 		}
 	}
-	dedicatedlog("InternetGaming: No answer from metaserver!\n");
+	log("InternetGaming: No answer from metaserver!\n");
 	logout("NO_ANSWER");
 	return false;
 }
@@ -191,7 +190,7 @@ bool InternetGaming::relogin()
 	initialize_connection();
 
 	// If we are here, a connection was established and we can send our login package through the socket.
-	dedicatedlog("InternetGaming: Sending relogin request.\n");
+	log("InternetGaming: Sending relogin request.\n");
 	SendPacket s;
 	s.string(IGPCMD_RELOGIN);
 	s.string(boost::lexical_cast<std::string>(INTERNET_GAMING_PROTOCOL_VERSION));
@@ -218,7 +217,7 @@ bool InternetGaming::relogin()
 	}
 
 	if (INTERNET_GAMING_TIMEOUT <= time(nullptr) - secs) {
-		dedicatedlog("InternetGaming: No answer from metaserver!\n");
+		log("InternetGaming: No answer from metaserver!\n");
 		return false;
 	}
 
@@ -249,7 +248,7 @@ void InternetGaming::logout(const std::string & msgcode) {
 	s.send(m_sock);
 
 	const std::string & msg = InternetGamingMessages::get_message(msgcode);
-	dedicatedlog("InternetGaming: logout(%s)\n", msg.c_str());
+	log("InternetGaming: logout(%s)\n", msg.c_str());
 	format_and_add_chat("", "", true, msg);
 
 	reset();
@@ -269,7 +268,7 @@ void InternetGaming::handle_metaserver_communication() {
 			if (!m_deserializer.read(m_sock)) {
 				set_error();
 				const std::string & msg = InternetGamingMessages::get_message("CONNECTION_LOST");
-				dedicatedlog("InternetGaming: Error: %s\n", msg.c_str());
+				log("InternetGaming: Error: %s\n", msg.c_str());
 				format_and_add_chat("", "", true, msg);
 
 				// Check how much time passed since the socket broke the last time
@@ -331,7 +330,7 @@ void InternetGaming::handle_metaserver_communication() {
 		if (now > waittimeout) {
 			set_error();
 			waittimeout = std::numeric_limits<int32_t>::max();
-			dedicatedlog("InternetGaming: reached a timeout for an awaited answer of the metaserver!\n");
+			log("InternetGaming: reached a timeout for an awaited answer of the metaserver!\n");
 			if (!relogin()) {
 				// Do not try to relogin again automatically.
 				reset();
@@ -383,20 +382,20 @@ void InternetGaming::handle_packet(RecvPacket & packet)
 			m_clientname   = packet.string();
 			m_clientrights = packet.string();
 			m_state        = LOBBY;
-			dedicatedlog("InternetGaming: Client %s logged in.\n", m_clientname.c_str());
+			log("InternetGaming: Client %s logged in.\n", m_clientname.c_str());
 			return;
 
 		} else if (cmd == IGPCMD_RELOGIN) {
 			// Clients request to relogin was granted
 			m_state = LOBBY;
-			dedicatedlog("InternetGaming: Client %s relogged in.\n", m_clientname.c_str());
+			log("InternetGaming: Client %s relogged in.\n", m_clientname.c_str());
 			format_and_add_chat("", "", true, _("Successfully reconnected to the metaserver!"));
 			return;
 
 		} else if (cmd == IGPCMD_ERROR) {
 			std::string errortype = packet.string();
 			if (errortype != "LOGIN" && errortype != "RELOGIN") {
-				dedicatedlog("InternetGaming: Strange ERROR in connecting state: %s\n", errortype.c_str());
+				log("InternetGaming: Strange ERROR in connecting state: %s\n", errortype.c_str());
 				throw WLWarning(_("Mixed up"), _("The metaserver sent a strange ERROR during connection"));
 			}
 			// Clients login request got rejected
@@ -419,7 +418,7 @@ void InternetGaming::handle_packet(RecvPacket & packet)
 	try {
 		if (cmd == IGPCMD_LOGIN || cmd == IGPCMD_RELOGIN) {
 			// Login specific commands but not in CONNECTING state...
-			dedicatedlog
+			log
 				("InternetGaming: Received %s cmd although client is not in CONNECTING state.\n", cmd.c_str());
 			std::string temp =
 				(boost::format
@@ -431,7 +430,7 @@ void InternetGaming::handle_packet(RecvPacket & packet)
 		else if (cmd == IGPCMD_TIME) {
 			// Client received the server time
 			time_offset = boost::lexical_cast<int>(packet.string()) - time(nullptr);
-			dedicatedlog
+			log
 				(ngettext
 					("InternetGaming: Server time offset is %u second.",
 				 	 "InternetGaming: Server time offset is %u seconds.", time_offset),
@@ -471,7 +470,7 @@ void InternetGaming::handle_packet(RecvPacket & packet)
 
 		else if (cmd == IGPCMD_GAMES_UPDATE) {
 			// Client received a note, that the list of games was changed
-			dedicatedlog("InternetGaming: Game update on metaserver.\n");
+			log("InternetGaming: Game update on metaserver.\n");
 			gameupdateonmetaserver = true;
 		}
 
@@ -480,7 +479,7 @@ void InternetGaming::handle_packet(RecvPacket & packet)
 			uint8_t number = boost::lexical_cast<int>(packet.string()) & 0xff;
 			std::vector<InternetGame> old = gamelist;
 			gamelist.clear();
-			dedicatedlog("InternetGaming: Received a game list update with %u items.\n", number);
+			log("InternetGaming: Received a game list update with %u items.\n", number);
 			for (uint8_t i = 0; i < number; ++i) {
 				InternetGame * ing  = new InternetGame();
 				ing->name        = packet.string();
@@ -513,7 +512,7 @@ void InternetGaming::handle_packet(RecvPacket & packet)
 
 		else if (cmd == IGPCMD_CLIENTS_UPDATE) {
 			// Client received a note, that the list of clients was changed
-			dedicatedlog("InternetGaming: Client update on metaserver.\n");
+			log("InternetGaming: Client update on metaserver.\n");
 			clientupdateonmetaserver = true;
 		}
 
@@ -522,7 +521,7 @@ void InternetGaming::handle_packet(RecvPacket & packet)
 			uint8_t number = boost::lexical_cast<int>(packet.string()) & 0xff;
 			std::vector<InternetClient> old = clientlist;
 			clientlist.clear();
-			dedicatedlog("InternetGaming: Received a client list update with %u items.\n", number);
+			log("InternetGaming: Received a client list update with %u items.\n", number);
 			for (uint8_t i = 0; i < number; ++i) {
 				InternetClient * inc  = new InternetClient();
 				inc->name        = packet.string();
@@ -639,7 +638,7 @@ void InternetGaming::join_game(const std::string & gamename) {
 	s.string(gamename);
 	s.send(m_sock);
 	m_gamename = gamename;
-	dedicatedlog("InternetGaming: Client tries to join a game with the name %s\n", m_gamename.c_str());
+	log("InternetGaming: Client tries to join a game with the name %s\n", m_gamename.c_str());
 	m_state = IN_GAME;
 
 
@@ -660,7 +659,7 @@ void InternetGaming::open_game() {
 	s.string(m_gamename);
 	s.string("1024"); // Used to be maxclients, no longer used.
 	s.send(m_sock);
-	dedicatedlog("InternetGaming: Client opened a game with the name %s.\n", m_gamename.c_str());
+	log("InternetGaming: Client opened a game with the name %s.\n", m_gamename.c_str());
 	m_state = IN_GAME;
 
 	// From now on we wait for a reply from the metaserver
@@ -678,7 +677,7 @@ void InternetGaming::set_game_playing() {
 	SendPacket s;
 	s.string(IGPCMD_GAME_START);
 	s.send(m_sock);
-	dedicatedlog("InternetGaming: Client announced the start of the game %s.\n", m_gamename.c_str());
+	log("InternetGaming: Client announced the start of the game %s.\n", m_gamename.c_str());
 
 	// From now on we wait for a reply from the metaserver
 	waitcmd     = IGPCMD_GAME_START;
@@ -700,7 +699,7 @@ void InternetGaming::set_game_done() {
 	m_gameip  = "";
 	m_state   = LOBBY;
 
-	dedicatedlog("InternetGaming: Client announced the disconnect from the game %s.\n", m_gamename.c_str());
+	log("InternetGaming: Client announced the disconnect from the game %s.\n", m_gamename.c_str());
 }
 
 
