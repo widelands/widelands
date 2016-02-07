@@ -19,9 +19,14 @@ end
 --  =======================================================
 
 function test_descr:test_immovable_descr()
+   -- NOCOM(#codereview): Wrong immovable -> Unknown immovable?
    assert_error("Wrong immovable", function() egbase:get_immovable_description("XXX") end)
-   assert_error("Wrong number of parameters: 2", function() egbase:get_immovable_description("XXX", "YYY") end)
-   assert_error("Wrong number of parameters: 3", function() egbase:get_immovable_description("XXX","YYY","ZZZ") end)
+   assert_error("Wrong number of parameters: 2", function()
+      egbase:get_immovable_description("XXX", "YYY")
+   end)
+   assert_error("Wrong number of parameters: 3", function()
+      egbase:get_immovable_description("XXX","YYY","ZZZ")
+   end)
 end
 
 function test_descr:test_immovable_basename()
@@ -32,7 +37,8 @@ function test_descr:test_immovable_basename()
 end
 
 function test_descr:test_immovable_build_cost()
-   local build_cost = egbase:get_immovable_description("atlanteans_shipconstruction").build_cost
+   local build_cost = egbase:get_immovable_description(
+      "atlanteans_shipconstruction").build_cost
    assert_equal(10, build_cost["planks"])
    assert_equal(2, build_cost["log"])
    assert_equal(4, build_cost["spidercloth"])
@@ -49,51 +55,66 @@ function test_descr:test_immovable_build_cost()
 end
 
 function test_descr:test_immovable_editor_category()
+   -- NOCOM(#codereview): remove _"", see comment in new tests.
    assert_equal("plants", egbase:get_immovable_description("bush1").editor_category.name)
    assert_equal(_"Plants", egbase:get_immovable_description("bush1").editor_category.descname)
    assert_equal(nil, egbase:get_immovable_description("cornfield_ripe").editor_category)
-   assert_equal("trees_deciduous", egbase:get_immovable_description("alder_summer_sapling").editor_category.name)
-   assert_equal(_"Deciduous Trees", egbase:get_immovable_description("alder_summer_sapling").editor_category.descname)
-   assert_equal("trees_deciduous", egbase:get_immovable_description("alder_summer_old").editor_category.name)
+   assert_equal("trees_deciduous", egbase:get_immovable_description(
+      "alder_summer_sapling").editor_category.name)
+   assert_equal(_"Deciduous Trees", egbase:get_immovable_description(
+      "alder_summer_sapling").editor_category.descname)
+   assert_equal("trees_deciduous", egbase:get_immovable_description(
+      "alder_summer_old").editor_category.name)
 end
 
 function test_descr:test_immovable_has_terrain_affinity()
    assert_equal(false, egbase:get_immovable_description("bush1").has_terrain_affinity)
    assert_equal(false, egbase:get_immovable_description("cornfield_ripe").has_terrain_affinity)
-   assert_equal(true, egbase:get_immovable_description("alder_summer_sapling").has_terrain_affinity)
-   assert_equal(true, egbase:get_immovable_description("alder_summer_old").has_terrain_affinity)
+   assert_equal(true, egbase:get_immovable_description(
+      "alder_summer_sapling").has_terrain_affinity)
+   assert_equal(true, egbase:get_immovable_description(
+      "alder_summer_old").has_terrain_affinity)
 end
 
 function test_descr:test_immovable_pickiness()
    assert_equal(0, egbase:get_immovable_description("bush1").pickiness)
    assert_equal(0, egbase:get_immovable_description("cornfield_ripe").pickiness)
+   -- NOCOM(#codereview): see warning about float comparsion in new tests.
    assert_equal(0.6, egbase:get_immovable_description("alder_summer_sapling").pickiness)
    assert_equal(0.6, egbase:get_immovable_description("alder_summer_old").pickiness)
-   assert_equal(0.6, egbase:get_immovable_description("mushroom_red_wasteland_sapling").pickiness)
+   assert_equal(0.6, egbase:get_immovable_description(
+      "mushroom_red_wasteland_sapling").pickiness)
 end
 
 function test_descr:test_immovable_preferred_fertility()
    assert_equal(0, egbase:get_immovable_description("bush1").preferred_fertility)
    assert_equal(0, egbase:get_immovable_description("cornfield_ripe").preferred_fertility)
-   assert_equal(0.6, egbase:get_immovable_description("alder_summer_sapling").preferred_fertility)
+   assert_equal(0.6, egbase:get_immovable_description(
+      "alder_summer_sapling").preferred_fertility)
    assert_equal(0.6, egbase:get_immovable_description("alder_summer_old").preferred_fertility)
-   assert_equal(0.85, egbase:get_immovable_description("mushroom_red_wasteland_sapling").preferred_fertility)
+   assert_equal(0.85, egbase:get_immovable_description(
+      "mushroom_red_wasteland_sapling").preferred_fertility)
 end
 
 function test_descr:test_immovable_preferred_humidity()
    assert_equal(0, egbase:get_immovable_description("bush1").preferred_humidity)
    assert_equal(0, egbase:get_immovable_description("cornfield_ripe").preferred_humidity)
-   assert_equal(0.65, egbase:get_immovable_description("alder_summer_sapling").preferred_humidity)
+   assert_equal(0.65, egbase:get_immovable_description(
+      "alder_summer_sapling").preferred_humidity)
    assert_equal(0.65, egbase:get_immovable_description("alder_summer_old").preferred_humidity)
-   assert_equal(0.35, egbase:get_immovable_description("mushroom_red_wasteland_sapling").preferred_humidity)
+   assert_equal(0.35, egbase:get_immovable_description(
+      "mushroom_red_wasteland_sapling").preferred_humidity)
 end
 
 function test_descr:test_immovable_preferred_temperature()
    assert_equal(0, egbase:get_immovable_description("bush1").preferred_temperature)
    assert_equal(0, egbase:get_immovable_description("cornfield_ripe").preferred_temperature)
-   assert_equal(125, egbase:get_immovable_description("alder_summer_sapling").preferred_temperature)
-   assert_equal(125, egbase:get_immovable_description("alder_summer_old").preferred_temperature)
-   assert_equal(80, egbase:get_immovable_description("mushroom_red_wasteland_sapling").preferred_temperature)
+   assert_equal(125, egbase:get_immovable_description(
+      "alder_summer_sapling").preferred_temperature)
+   assert_equal(125, egbase:get_immovable_description(
+      "alder_summer_old").preferred_temperature)
+   assert_equal(80, egbase:get_immovable_description(
+      "mushroom_red_wasteland_sapling").preferred_temperature)
 end
 
 function test_descr:test_immovable_owner_type()
