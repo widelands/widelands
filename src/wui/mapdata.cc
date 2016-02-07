@@ -17,8 +17,9 @@
  *
  */
 
-#include "io/filesystem/filesystem.h"
 #include "wui/mapdata.h"
+
+#include "io/filesystem/filesystem.h"
 
 MapData::MapData() : authors(""), nrplayers(0), width(0), height(0),
 		maptype(MapData::MapType::kNormal), displaytype(MapData::DisplayType::kMapnamesLocalized) {}
