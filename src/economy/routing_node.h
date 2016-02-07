@@ -37,18 +37,18 @@ struct Road;
  */
 struct RoutingNodeNeighbour {
 	RoutingNodeNeighbour(RoutingNode * const f, int32_t const cost) :
-		m_nb(f), m_cost(cost)
+		nb_(f), cost_(cost)
 	{}
 	RoutingNode * get_neighbour() const {
-		return m_nb;
+		return nb_;
 	}
 	int32_t get_cost() const {
-		return m_cost;
+		return cost_;
 	}
 
 private:
-	RoutingNode * m_nb;
-	int32_t m_cost; /// Cost to get from me to the neighbour (Cost for road)
+	RoutingNode * nb_;
+	int32_t cost_; /// Cost to get from me to the neighbour (Cost for road)
 };
 using RoutingNodeNeighbours = std::vector<RoutingNodeNeighbour>;
 

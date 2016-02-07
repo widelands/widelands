@@ -26,7 +26,7 @@
 namespace Widelands {
 
 BaseRouteAStar::BaseRouteAStar(Router & router, WareWorker type) :
-	m_type(type),
+	type_(type),
 	mpf_cycle(router.assign_cycle())
 {
 }

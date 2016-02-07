@@ -122,9 +122,9 @@ void Ship::cleanup(EditorGameBase& egbase) {
 		m_fleet->remove_ship(egbase, this);
 	}
 
-	while (!m_items.empty()) {
-		m_items.back().remove(egbase);
-		m_items.pop_back();
+	while (!items_.empty()) {
+		items_.back().remove(egbase);
+		items_.pop_back();
 	}
 
 	Notifications::publish(NoteShipMessage(this, NoteShipMessage::Message::kLost));
@@ -637,10 +637,10 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 		if (baim) {
 			upcast(ConstructionSite, cs, baim);
 
-			for (int i = m_items.size() - 1; i >= 0; --i) {
+			for (int i = items_.size() - 1; i >= 0; --i) {
 				WareInstance* ware;
 				Worker* worker;
-				m_items.at(i).get(game, &ware, &worker);
+				items_.at(i).get(game, &ware, &worker);
 				if (ware) {
 					// no, we don't transfer the wares, we create new ones out of
 					// air and remove the old ones ;)
@@ -664,8 +664,8 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 
 					assert(wq.get_max_fill() > cur);
 					wq.set_filled(cur + 1);
-					m_items.at(i).remove(game);
-					m_items.resize(i);
+					items_.at(i).remove(game);
+					items_.resize(i);
 					break;
 				} else {
 					assert(worker);
@@ -675,7 +675,7 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 					worker->reset_tasks(game);
 					PartiallyFinishedBuilding::request_builder_callback(
 					   game, *cs->get_builder_request(), worker->descr().worker_index(), worker, *cs);
-					m_items.resize(i);
+					items_.resize(i);
 				}
 			}
 		} else {  // it seems that port constructionsite has dissapeared
@@ -689,7 +689,7 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 			send_signal(game, "cancel_expedition");
 		}
 
-		if (m_items.empty() || !baim) {  // we are done, either way
+		if (items_.empty() || !baim) {  // we are done, either way
 			m_ship_state = TRANSPORT;     // That's it, expedition finished
 
 			// Bring us back into a fleet and a economy.
@@ -698,7 +698,7 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 			// for case that there are any workers left on board
 			// (applicable when port construction space is kLost)
 			Worker* worker;
-			for (ShippingItem& item : m_items) {
+			for (ShippingItem& item : items_) {
 				item.get(game, nullptr, &worker);
 				if (worker) {
 					worker->reset_tasks(game);
@@ -728,7 +728,7 @@ void Ship::set_economy(Game& game, Economy* e) {
 	// we rely that wares really get reassigned our economy.
 
 	m_economy = e;
-	for (ShippingItem& shipping_item : m_items) {
+	for (ShippingItem& shipping_item : items_) {
 		shipping_item.set_economy(game, e);
 	}
 }
@@ -740,29 +740,29 @@ void Ship::set_economy(Game& game, Economy* e) {
  */
 void Ship::set_destination(Game& game, PortDock& pd) {
 	molog("set_destination / sending to portdock %u (carrying %" PRIuS " items)\n",
-	pd.serial(), m_items.size());
+	pd.serial(), items_.size());
 	m_destination = &pd;
 	send_signal(game, "wakeup");
 }
 
 void Ship::add_item(Game& game, const ShippingItem& item) {
-	assert(m_items.size() < descr().get_capacity());
+	assert(items_.size() < descr().get_capacity());
 
-	m_items.push_back(item);
-	m_items.back().set_location(game, this);
+	items_.push_back(item);
+	items_.back().set_location(game, this);
 }
 
 void Ship::withdraw_items(Game& game, PortDock& pd, std::vector<ShippingItem>& items) {
 	uint32_t dst = 0;
-	for (uint32_t src = 0; src < m_items.size(); ++src) {
-		PortDock* destination = m_items[src].get_destination(game);
+	for (uint32_t src = 0; src < items_.size(); ++src) {
+		PortDock* destination = items_[src].get_destination(game);
 		if (!destination || destination == &pd) {
-			items.push_back(m_items[src]);
+			items.push_back(items_[src]);
 		} else {
-			m_items[dst++] = m_items[src];
+			items_[dst++] = items_[src];
 		}
 	}
-	m_items.resize(dst);
+	items_.resize(dst);
 }
 
 /**
@@ -846,10 +846,10 @@ void Ship::start_task_expedition(Game& game) {
 
 	set_economy(game, m_expedition->economy.get());
 
-	for (int i = m_items.size() - 1; i >= 0; --i) {
+	for (int i = items_.size() - 1; i >= 0; --i) {
 		WareInstance* ware;
 		Worker* worker;
-		m_items.at(i).get(game, &ware, &worker);
+		items_.at(i).get(game, &ware, &worker);
 		if (worker) {
 			worker->reset_tasks(game);
 			worker->start_task_idle(game, 0, -1);
@@ -930,7 +930,7 @@ void Ship::exp_cancel(Game& game) {
 	// economy with us and the warehouse will make sure that they are
 	// getting used.
 	Worker* worker;
-	for (ShippingItem& item : m_items) {
+	for (ShippingItem& item : items_) {
 		item.get(game, nullptr, &worker);
 		if (worker) {
 			worker->reset_tasks(game);
@@ -971,12 +971,12 @@ void Ship::log_general_info(const EditorGameBase& egbase) {
 	      m_fleet ? m_fleet->serial() : 0,
 	      m_destination.serial(),
 	      m_lastdock.serial(),
-	      m_items.size());
+			items_.size());
 
-	for (const ShippingItem& shipping_item : m_items) {
+	for (const ShippingItem& shipping_item : items_) {
 		molog("  IT %u, destination %u\n",
-		      shipping_item.m_object.serial(),
-		      shipping_item.m_destination_dock.serial());
+				shipping_item.object_.serial(),
+				shipping_item.destination_dock_.serial());
 	}
 }
 
@@ -1088,9 +1088,9 @@ void Ship::Loader::load_pointers() {
 	if (m_destination)
 		ship.m_destination = &mol().get<PortDock>(m_destination);
 
-	ship.m_items.resize(m_items.size());
+	ship.items_.resize(m_items.size());
 	for (uint32_t i = 0; i < m_items.size(); ++i) {
-		ship.m_items[i] = m_items[i].get(mol());
+		ship.items_[i] = m_items[i].get(mol());
 	}
 }
 
@@ -1198,8 +1198,8 @@ void Ship::save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw) {
 	fw.unsigned_32(mos.get_object_file_index_or_zero(m_lastdock.get(egbase)));
 	fw.unsigned_32(mos.get_object_file_index_or_zero(m_destination.get(egbase)));
 
-	fw.unsigned_32(m_items.size());
-	for (ShippingItem& shipping_item : m_items) {
+	fw.unsigned_32(items_.size());
+	for (ShippingItem& shipping_item : items_) {
 		shipping_item.save(egbase, mos, fw);
 	}
 }
