@@ -320,24 +320,11 @@ bool Worker::run_setbobdescription
 {
 	int32_t const idx = game.logic_rand() % action.sparamv.size();
 
-	std::vector<std::string> const list(split_string(action.sparamv[idx], ":"));
-	std::string bob;
-	if (list.size() == 1) {
-		state.svar1 = "world";
-		bob = list[0];
-	} else {
-		state.svar1 = "tribe";
-		bob = list[1];
-	}
-
-	state.ivar2 =
-		state.svar1 == "world" ?
-		game.world().get_bob(bob.c_str())
-		:
-		game.tribes().ship_index(bob.c_str());
+	const std::string& bob = action.sparamv[idx];
+	state.ivar2 = game.world().get_bob(bob.c_str());
 
 	if (state.ivar2 < 0) {
-		molog("  WARNING: Unknown bob %s\n", action.sparamv[idx].c_str());
+		molog("  WARNING: Unknown bob %s\n", bob.c_str());
 		send_signal(game, "fail");
 		pop_task(game);
 		return true;
@@ -866,11 +853,7 @@ bool Worker::run_plant(Game & game, State & state, const Action & action)
  */
 bool Worker::run_create_bob(Game & game, State & state, const Action &)
 {
-	if (state.svar1 == "world") {
-		game.create_critter(get_position(), state.ivar2);
-	} else {
-		game.create_ship(get_position(), state.ivar2);
-	}
+	game.create_critter(get_position(), state.ivar2);
 	++state.ivar1;
 	schedule_act(game, 10);
 	return true;

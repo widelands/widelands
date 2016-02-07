@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006, 2008-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -70,11 +70,11 @@ struct UniqueWindow : public Window {
 		 const std::string & title);
 	virtual ~UniqueWindow();
 
-	bool get_usedefaultpos() {return m_usedefaultpos;}
+	bool get_usedefaultpos() {return usedefaultpos_;}
 
 private:
-	Registry * m_registry;
-	bool       m_usedefaultpos;
+	Registry * registry_;
+	bool       usedefaultpos_;
 };
 
 }

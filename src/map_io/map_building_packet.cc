@@ -99,8 +99,7 @@ void MapBuildingPacket::read(FileSystem& fs,
 							read_priorities (*building, fr);
 
 							//  Reference the players tribe if in editor.
-							if (g_gr) // but not on dedicated servers ;)
-								ibase.reference_player_tribe(p, &tribe);
+							ibase.reference_player_tribe(p, &tribe);
 						} else
 							throw GameDataError("player %u does not exist", p);
 					}

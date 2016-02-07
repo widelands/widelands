@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006, 2008 by the Widelands Development Team
+ * Copyright (C) 2002-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -82,7 +82,7 @@ struct Textarea : public Panel {
 	void draw(RenderTarget &) override;
 
 	void set_textstyle(const UI::TextStyle & style);
-	const UI::TextStyle & get_textstyle() const {return m_textstyle;}
+	const UI::TextStyle & get_textstyle() const {return textstyle_;}
 
 	void set_font(const std::string & name, int size, RGBColor clr);
 
@@ -100,11 +100,11 @@ private:
 	void collapse();
 	void expand();
 
-	LayoutMode m_layoutmode;
-	std::string m_text;
+	LayoutMode layoutmode_;
+	std::string text_;
 	const Image* rendered_text_;
-	Align m_align;
-	UI::TextStyle m_textstyle;
+	Align align_;
+	UI::TextStyle textstyle_;
 	uint32_t fixed_width_;
 };
 
