@@ -83,7 +83,7 @@ struct Textarea : public Panel {
 
 	void set_color(RGBColor color);
 	void set_fontsize(int fontsize);
-	void set_condensed(bool condensed);
+	void set_fontface(UI::FontSet::Face face);
 
 protected:
 	void update_desired_size() override;
@@ -106,7 +106,7 @@ private:
 	Align align_;
 	RGBColor color_;
 	int fontsize_;
-	bool condensed_;
+	UI::FontSet::Face fontface_;
 
 	uint32_t fixed_width_;
 };

@@ -71,8 +71,8 @@ std::string as_window_title(const std::string& txt) {
 	return f.str();
 }
 
-std::string as_uifont(const std::string & txt, int size, const RGBColor& clr, bool condensed) {
-	return as_aligned(txt, UI::Align::kLeft, size, clr, condensed);
+std::string as_uifont(const std::string & txt, int size, const RGBColor& clr, UI::FontSet::Face face) {
+	return as_aligned(txt, UI::Align::kLeft, size, clr, face);
 }
 
 std::string as_editorfont(const std::string& text, int ptsize, const RGBColor& clr) {
@@ -85,7 +85,7 @@ std::string as_editorfont(const std::string& text, int ptsize, const RGBColor& c
 	return f.str();
 }
 
-std::string as_aligned(const std::string & txt, UI::Align align, int ptsize, const RGBColor& clr, bool condensed) {
+std::string as_aligned(const std::string & txt, UI::Align align, int ptsize, const RGBColor& clr,  UI::FontSet::Face face) {
 	std::string alignment = "left";
 	if ((align & UI::Align::kHorizontal) == UI::Align::kRight) {
 		alignment = "right";
@@ -93,11 +93,25 @@ std::string as_aligned(const std::string & txt, UI::Align align, int ptsize, con
 		alignment = "center";
 	}
 
+	std::string font_face = "sans";
+
+	switch (face) {
+	case UI::FontSet::Face::kCondensed:
+		font_face = "condensed";
+		break;
+	case UI::FontSet::Face::kSerif:
+		font_face = "serif";
+		break;
+	case UI::FontSet::Face::kSans:
+		font_face = "sans";
+		break;
+	}
+
 	// UI Text is always bold due to historic reasons
 	static boost::format
 			f("<rt><p align=%s><font face=%s size=%i bold=1 shadow=1 color=%s>%s</font></p></rt>");
 	f % alignment;
-	f % (condensed ? "condensed" : "sans");
+	f % font_face;
 	f % ptsize;
 	f % clr.hex_value();
 	f % txt;

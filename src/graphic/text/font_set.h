@@ -29,6 +29,12 @@ namespace UI {
 // Contains font information for a locale
 struct FontSet {
 
+	enum class Face {
+		kSans,
+		kSerif,
+		kCondensed
+	};
+
 	static constexpr const char* kFallbackFont = "DejaVu/DejaVuSans.ttf";
 
 	/// Create the fontset for a locale from configuration file

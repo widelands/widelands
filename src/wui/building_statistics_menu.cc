@@ -771,7 +771,7 @@ void BuildingStatisticsMenu::set_labeltext_autosize(UI::Textarea* textarea,
 	int font_size = UI_FONT_SIZE_SMALL;
 	textarea->set_fontsize(font_size);
 	textarea->set_color(color);
-	textarea->set_condensed(false);
+	textarea->set_fontface(UI::FontSet::Face::kSans);
 	textarea->set_text(text);
 
 	while (textarea->get_h() > kMaxHeight && font_size > kMinFontSize) {
@@ -780,7 +780,7 @@ void BuildingStatisticsMenu::set_labeltext_autosize(UI::Textarea* textarea,
 	}
 
 	if (textarea->get_w() > kMaxWidth) {
-		textarea->set_condensed(true);
+		textarea->set_fontface(UI::FontSet::Face::kCondensed);
 		while (textarea->get_w() > kMaxWidth && font_size > kMinFontSize) {
 			--font_size;
 			textarea->set_fontsize(font_size);

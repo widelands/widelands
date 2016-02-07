@@ -85,7 +85,7 @@ void Textarea::init()
 	set_thinks(false);
 	color_ = UI_FONT_CLR_FG;
 	fontsize_ = UI_FONT_SIZE_SMALL;
-	condensed_ = false;
+	fontface_ = UI::FontSet::Face::kSans;
 	update();
 }
 
@@ -103,9 +103,9 @@ void Textarea::set_fontsize(int fontsize) {
 	}
 }
 
-void Textarea::set_condensed(bool condensed) {
-	if (condensed_ != condensed) {
-		condensed_ = condensed;
+void Textarea::set_fontface(UI::FontSet::Face face) {
+	if (fontface_ != face) {
+		fontface_ = face;
 		update();
 	}
 }
@@ -119,7 +119,7 @@ void Textarea::update()
 	rendered_text_ = UI::g_fh1->render(
 									as_uifont(text_,
 												 fontsize_ - UI::g_fh1->fontset().size_offset(),
-												 color_, condensed_));
+												 color_, fontface_));
 	if (layoutmode_ == AutoMove)
 		expand();
 	else if (layoutmode_ == Layouted)
