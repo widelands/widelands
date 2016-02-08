@@ -594,7 +594,6 @@ void EditorGameBase::conquer_area(PlayerArea<Area<FCoords> > player_area) {
 	//  cleanup_playerimmovables_area, so that those new border locations are
 	//  covered.
 	++player_area.radius;
-	// NOCOM(#sirver): what
 	cleanup_playerimmovables_area(player_area);
 }
 

@@ -535,19 +535,25 @@ Building& Player::force_csite
 	(Coords const location, DescriptionIndex b_idx,
 	 const BuildingDescr::FormerBuildings & former_buildings)
 {
-	Map & map = egbase().map();
+	EditorGameBase& eg = egbase();
+	Map & map = eg.map();
+	const Tribes& tribes = eg.tribes();
+	const PlayerNumber pn = player_number();
+
 	if (!former_buildings.empty()) {
 		DescriptionIndex idx = former_buildings.back();
-		const BuildingDescr * descr = egbase().tribes().get_building_descr(idx);
-		terraform_for_building(egbase(), player_number(), location, descr);
+		const BuildingDescr * descr = tribes.get_building_descr(idx);
+		terraform_for_building(eg, pn, location, descr);
 	}
 	FCoords flag_loc;
 	map.get_brn(map.get_fcoords(location), &flag_loc);
 	force_flag(flag_loc);
 
-	return
-		egbase().warp_constructionsite
-			(map.get_fcoords(location), m_plnum, b_idx, false, former_buildings);
+	terraform_for_building(
+	   eg, pn, location, tribes.get_building_descr(b_idx));
+
+	return eg.warp_constructionsite(
+	   map.get_fcoords(location), m_plnum, b_idx, false, former_buildings);
 }
 
 

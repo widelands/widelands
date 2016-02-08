@@ -577,8 +577,6 @@ void Warehouse::restore_portdock_or_destroy(EditorGameBase& egbase) {
 
 /// Destroy the warehouse.
 void Warehouse::cleanup(EditorGameBase& egbase) {
-	log("#sirver m_position.x: %d,m_position.y: %d\n", m_position.x, m_position.y);
-
 	// if this is a port, it will remove also portdock.
 	// But portdock must know that it should not try to recreate itself
 	m_cleanup_in_progress = true;

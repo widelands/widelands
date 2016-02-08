@@ -51,86 +51,52 @@ namespace Widelands {
 
 namespace  {
 
-/// Returns true if 'coord' is not occupied and neutral or onwned by 'player_number'.
-bool can_port_be_build_here(const PlayerNumber player_number, const FCoords& coord) {
+/// Returns true if 'coord' is not occupied or onwned by 'player_number' and
+/// nothing stands there.
+bool can_support_port(const PlayerNumber player_number, const FCoords& coord) {
 	const PlayerNumber owner = coord.field->get_owned_by();
 	if (owner != neutral() && owner != player_number) {
 		return false;
 	}
 	BaseImmovable* baim = coord.field->get_immovable();
-	if (baim) {
-		if (is_a(PlayerImmovable, baim)) {
-			return false;
-		}
+	if (baim != nullptr && baim->descr().type() >= MapObjectType::FLAG) {
+		return false;
 	}
 	return true;
 }
 
-/// Returns true if 'coord' contains a flag.
-bool has_flag(const Field* field) {
-	const BaseImmovable* baim = field->get_immovable();
-	return baim != nullptr && is_a(Flag, baim);
-}
-
 /// Returns true if a ship owned by 'player_number' can land and errect a port at 'coord'.
-bool can_ship_land_here(const PlayerNumber player_number, const Map& map, const FCoords& coord) {
-	if (!can_port_be_build_here(player_number, coord)) {
-		log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
+bool can_build_port_here(const PlayerNumber player_number, const Map& map, const FCoords& coord) {
+	if (!can_support_port(player_number, coord)) {
 		return false;
 	}
 
-	// Check all neighboured fields that will be used by the port
-	FCoords neighbour;
-	map.get_ln(coord, &neighbour);
-	if (!can_port_be_build_here(player_number, neighbour)) {
-		log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
-		return false;
-	}
-	map.get_tln(coord, &neighbour);
-	if (!can_port_be_build_here(player_number, neighbour)) {
-		log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
-		return false;
-	}
-	map.get_trn(coord, &neighbour);
-	if (!can_port_be_build_here(player_number, neighbour)) {
-		log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
-		return false;
-	}
-	map.get_brn(coord, &neighbour);
-	if (!can_port_be_build_here(player_number, neighbour)) {
-		log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
-		return false;
+	// All fields of the port + their neighboring fields (for the border) must
+	// be conquerable without military influence.
+	Widelands::FCoords c[4];  //  Big buildings occupy 4 locations.
+	c[0] = coord;
+	map.get_ln(coord, &c[1]);
+	map.get_tln(coord, &c[2]);
+	map.get_trn(coord, &c[3]);
+	for (int i = 0; i < 4; ++i) {
+		MapRegion<Area<FCoords>> area(map, Area<FCoords>(c[i], 1));
+		do {
+			if (!can_support_port(player_number, area.location())) {
+				return false;
+			}
+		} while (area.advance(map));
 	}
 
-	// 'neighbour' is now the brn neighbor of the port space, i.e. the place for
-	// the flag. Now check whether there is already a flag in the surroundings
-	// of the flag position
-	FCoords flag_neighbour;
-	map.get_ln(neighbour, &flag_neighbour);
-	if (has_flag(flag_neighbour.field)) {
-		log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
-		return false;
-	}
-	map.get_bln(neighbour, &flag_neighbour);
-	if (has_flag(flag_neighbour.field)) {
-		log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
-		return false;
-	}
-	map.get_brn(neighbour, &flag_neighbour);
-	if (has_flag(flag_neighbour.field)) {
-		log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
-		return false;
-	}
-	map.get_rn(neighbour, &flag_neighbour);
-	if (has_flag(flag_neighbour.field)) {
-		log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
-		return false;
-	}
-	map.get_trn(neighbour, &flag_neighbour);
-	if (has_flag(flag_neighbour.field)) {
-		log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
-		return false;
-	}
+	// Also all areas around the flag must be conquerable and must not contain
+	// another flag already.
+	FCoords flag_position;
+	map.get_brn(coord, &flag_position);
+	MapRegion<Area<FCoords>> area(map, Area<FCoords>(flag_position, 1));
+	do {
+		if (!can_support_port(player_number, area.location())) {
+			return false;
+		}
+	} while (area.advance(map));
 	return true;
 }
 
@@ -408,8 +374,6 @@ void Ship::ship_update_expedition(Game& game, Bob::State&) {
 		   map.get_neighbour(position, dir).field->nodecaps() & MOVECAPS_SWIM;
 	}
 
-	// NOCOM(#sirver): just switched seen_port_buildspaces from a unique_ptr<list<Coord>> to a vector.
-	// NOCOM(#sirver): problem is, that the ship is not mentioning the port space on the small island.
 	if (m_ship_state == EXP_SCOUTING) {
 		// Check surrounding fields for port buildspaces
 		std::vector<Coords> temp_port_buildspaces;
@@ -420,59 +384,32 @@ void Ship::ship_update_expedition(Game& game, Bob::State&) {
 				continue;
 			}
 
-			log("#sirver mr.location(): %d, %d\n", mr.location().x, mr.location().y);
-			// NOCOM(#sirver): this should theoretically be const
-			FCoords fc = map.get_fcoords(mr.location());
+			const FCoords fc = map.get_fcoords(mr.location());
 
 			// Check whether the maximum theoretical possible NodeCap of the field
 			// is of the size big and whether it can theoretically be a port space
-			log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 			if ((map.get_max_nodecaps(game.world(), fc) & BUILDCAPS_SIZEMASK) != BUILDCAPS_BIG ||
 			    map.find_portdock(fc).empty()) {
-				log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 				continue;
 			}
 
-			// NOTE This is the place to handle enemy territory and "clearing a port space from the
-			// enemy".
-			// NOTE There is a simple check for the current land owner to avoid placement of ports
-			// into enemy
-			// NOTE territory, as "clearing" is not yet implemented.
-			// NOTE further it checks, whether there is a Player_immovable on one of the fields.
-			// TODO(unknown): handle this more gracefully concering opposing players
-			log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
-			if (!can_ship_land_here(get_owner()->player_number(), map, fc)) {
+			if (!can_build_port_here(get_owner()->player_number(), map, fc)) {
 				continue;
 			}
 
-			log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
-
-			for (const auto & c : m_expedition->seen_port_buildspaces) {
-				log("  seen_port_buildspaces: #sirver c.x: %d,c.y: %d\n", c.x, c.y);
-			}
-
-			// NOCOM(#sirver): what
-			bool pbs_saved = false;
-			for (const Coords& coord : m_expedition->seen_port_buildspaces) {
-				// Check if the ship knows this port space already from its last check
-				if (coord == mr.location()) {
+			// Check if the ship knows this port space already from its last check
+			if (std::find(m_expedition->seen_port_buildspaces.begin(),
+			              m_expedition->seen_port_buildspaces.end(),
+			              mr.location()) != m_expedition->seen_port_buildspaces.end()) {
 					temp_port_buildspaces.push_back(mr.location());
-					pbs_saved = true;
-					break;
-				}
-			}
-			if (!pbs_saved) {
+			} else {
 				new_port_space = true;
 				temp_port_buildspaces.insert(temp_port_buildspaces.begin(), mr.location());
-			}
-			for (const auto & c : temp_port_buildspaces) {
-				log("  temp_port_buildspaces: #sirver c.x: %d,c.y: %d\n", c.x, c.y);
 			}
 		} while (mr.advance(map));
 
 		if (new_port_space) {
 			m_ship_state = EXP_FOUNDPORTSPACE;
-			// Send a message to the player, that a new port space was found
 			send_message(
 						game,
 						_("Port Space"),
