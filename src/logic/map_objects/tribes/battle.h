@@ -66,8 +66,8 @@ public:
 	bool locked(Game &);
 
 	// The two soldiers involved in this fight.
-	Soldier * first() {return m_first;}
-	Soldier * second() {return m_second;}
+	Soldier * first() {return first_;}
+	Soldier * second() {return second_;}
 
 	// Returns the other soldier involved in this battle. CHECKs that the given
 	// soldier is participating in this battle. Can return nullptr, but I have
@@ -83,41 +83,41 @@ private:
 		virtual void load(FileRead &);
 		void load_pointers() override;
 
-		Serial m_first;
-		Serial m_second;
+		Serial first_;
+		Serial second_;
 	};
 
 	void calculate_round(Game &);
 
-	Soldier * m_first;
-	Soldier * m_second;
+	Soldier * first_;
+	Soldier * second_;
 
 	/**
 	 * Gametime when the battle was created.
 	 */
-	int32_t m_creationtime;
+	int32_t creationtime_;
 
 	/**
 	 * 1 if only the first soldier is ready, 2 if only the second soldier
 	 * is ready, 3 if both are ready.
 	 */
-	uint8_t m_readyflags;
+	uint8_t readyflags_;
 
 	/**
 	 * Damage pending to apply. Damage is applied at end of round so animations
 	 * can show current action.
 	 */
-	uint32_t m_damage;
+	uint32_t damage_;
 
 	/**
 	 * \c true if the first soldier is the next to strike.
 	 */
-	bool m_first_strikes;
+	bool first_strikes_;
 
 	/**
 	 * \c true if the last turn attacker damaged his opponent
 	 */
-	bool m_last_attack_hits;
+	bool last_attack_hits_;
 };
 
 }

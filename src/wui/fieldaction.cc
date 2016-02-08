@@ -821,7 +821,7 @@ void FieldActionWindow::building_icon_mouse_in
 {
 	if (ibase().show_workarea_preview_ && !m_workarea_preview_overlay_id) {
 		const WorkareaInfo& workarea_info =
-		   m_plr->tribe().get_building_descr(Widelands::DescriptionIndex(idx))->m_workarea_info;
+		   m_plr->tribe().get_building_descr(Widelands::DescriptionIndex(idx))->workarea_info_;
 		m_workarea_preview_overlay_id = ibase().show_work_area(workarea_info, m_node);
 	}
 }
