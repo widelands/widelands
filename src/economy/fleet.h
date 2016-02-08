@@ -76,8 +76,8 @@ struct Fleet : MapObject {
 
 	Fleet(Player & player);
 
-	Player * get_owner() const {return &m_owner;}
-	Player & owner() const {return m_owner;}
+	Player * get_owner() const {return &owner_;}
+	Player & owner() const {return owner_;}
 
 	PortDock * get_dock(Flag & flag) const;
 	PortDock * get_dock(EditorGameBase &, Coords) const;
@@ -119,19 +119,19 @@ private:
 	PortPath & portpath_bidir(uint32_t i, uint32_t j, bool & reverse);
 	const PortPath & portpath_bidir(uint32_t i, uint32_t j, bool & reverse) const;
 
-	Player & m_owner;
-	std::vector<Ship *> m_ships;
-	std::vector<PortDock *> m_ports;
+	Player & owner_;
+	std::vector<Ship *> ships_;
+	std::vector<PortDock *> ports_;
 
-	bool m_act_pending;
+	bool act_pending_;
 
 	/**
 	 * Store all pairs shortest paths between port docks
 	 *
-	 * Let i < j, then the path from m_ports[i] to m_ports[j] is stored in
-	 * m_portpaths[binom(j,2) + i]
+	 * Let i < j, then the path from ports_[i] to ports_[j] is stored in
+	 * portpaths_[binom(j,2) + i]
 	 */
-	std::vector<PortPath> m_portpaths;
+	std::vector<PortPath> portpaths_;
 
 	// saving and loading
 protected:
@@ -143,8 +143,8 @@ protected:
 		void load_finish() override;
 
 	private:
-		std::vector<uint32_t> m_ships;
-		std::vector<uint32_t> m_ports;
+		std::vector<uint32_t> ships_;
+		std::vector<uint32_t> ports_;
 	};
 
 public:

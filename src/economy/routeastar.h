@@ -34,9 +34,9 @@ struct BaseRouteAStar {
 	void routeto(RoutingNode & to, IRoute & route);
 
 protected:
-	RoutingNode::Queue m_open;
-	WareWorker m_type;
-	RoutingNodeNeighbours m_neighbours;
+	RoutingNode::Queue open_;
+	WareWorker type_;
+	RoutingNodeNeighbours neighbours_;
 	uint32_t mpf_cycle;
 };
 
@@ -82,7 +82,7 @@ struct RouteAStar : BaseRouteAStar {
 	RoutingNode * step();
 
 private:
-	Estimator m_estimator;
+	Estimator estimator_;
 };
 
 /**
@@ -93,7 +93,7 @@ private:
 template<typename Est_>
 RouteAStar<Est_>::RouteAStar(Router & router, WareWorker type, const Estimator & est) :
 	BaseRouteAStar(router, type),
-	m_estimator(est)
+	estimator_(est)
 {
 }
 
@@ -109,33 +109,33 @@ void RouteAStar<Est_>::push(RoutingNode & node, int32_t cost, RoutingNode * back
 		node.mpf_cycle = mpf_cycle;
 		node.mpf_backlink = backlink;
 		node.mpf_realcost = cost;
-		node.mpf_estimate = m_estimator(node);
-		m_open.push(&node);
+		node.mpf_estimate = estimator_(node);
+		open_.push(&node);
 	} else if (node.mpf_cookie.is_active() && cost <= node.mpf_realcost) {
 		node.mpf_backlink = backlink;
 		node.mpf_realcost = cost;
-		m_open.decrease_key(&node);
+		open_.decrease_key(&node);
 	}
 }
 
 template<typename Est_>
 RoutingNode * RouteAStar<Est_>::step()
 {
-	if (m_open.empty())
+	if (open_.empty())
 		return nullptr;
 
 	// Keep the neighbours vector around to avoid excessive amounts of memory
 	// allocations and frees.
 	// Note that the C++ standard does not state whether clear will reset
 	// the reserved memory, but most implementations do not.
-	m_neighbours.clear();
+	neighbours_.clear();
 
-	RoutingNode * current = m_open.top();
-	m_open.pop(current);
+	RoutingNode * current = open_.top();
+	open_.pop(current);
 
-	current->get_neighbours(m_type, m_neighbours);
+	current->get_neighbours(type_, neighbours_);
 
-	for (RoutingNodeNeighbour& temp_neighbour : m_neighbours) {
+	for (RoutingNodeNeighbour& temp_neighbour : neighbours_) {
 		RoutingNode & neighbour = *temp_neighbour.get_neighbour();
 
 		// We have already found the best path
@@ -158,18 +158,18 @@ RoutingNode * RouteAStar<Est_>::step()
  */
 struct AStarEstimator {
 	AStarEstimator(ITransportCostCalculator & calc, RoutingNode & dest) :
-		m_calc(calc), m_dest(dest.get_position())
+		calc_(calc), dest_(dest.get_position())
 	{
 	}
 
 	int32_t operator()(RoutingNode & current) const
 	{
-		return m_calc.calc_cost_estimate(current.get_position(), m_dest);
+		return calc_.calc_cost_estimate(current.get_position(), dest_);
 	}
 
 private:
-	ITransportCostCalculator & m_calc;
-	Coords m_dest;
+	ITransportCostCalculator & calc_;
+	Coords dest_;
 };
 
 /**

@@ -69,18 +69,18 @@ public:
 	Request(PlayerImmovable & target, DescriptionIndex, CallbackFn, WareWorker);
 	~Request();
 
-	PlayerImmovable & target() const {return m_target;}
-	DescriptionIndex get_index() const {return m_index;}
-	WareWorker get_type() const {return m_type;}
-	uint32_t get_count() const {return m_count;}
-	uint32_t get_open_count() const {return m_count - m_transfers.size();}
-	bool is_open() const {return m_transfers.size() < m_count;}
-	Economy * get_economy() const {return m_economy;}
+	PlayerImmovable & target() const {return target_;}
+	DescriptionIndex get_index() const {return index_;}
+	WareWorker get_type() const {return type_;}
+	uint32_t get_count() const {return count_;}
+	uint32_t get_open_count() const {return count_ - transfers_.size();}
+	bool is_open() const {return transfers_.size() < count_;}
+	Economy * get_economy() const {return economy_;}
 	int32_t get_required_time() const;
-	int32_t get_last_request_time() const {return m_last_request_time;}
+	int32_t get_last_request_time() const {return last_request_time_;}
 	int32_t get_priority(int32_t cost) const;
 	uint32_t get_transfer_priority() const;
-	uint32_t get_num_transfers() const {return m_transfers.size();}
+	uint32_t get_num_transfers() const {return transfers_.size();}
 
 	Flag & target_flag() const;
 
@@ -89,7 +89,7 @@ public:
 	void set_required_time(int32_t time);
 	void set_required_interval(int32_t interval);
 
-	void set_last_request_time(int32_t const time) {m_last_request_time = time;}
+	void set_last_request_time(int32_t const time) {last_request_time_ = time;}
 
 	void start_transfer(Game &, Supply &);
 
@@ -101,8 +101,8 @@ public:
 	void transfer_finish(Game &, Transfer &);
 	void transfer_fail  (Game &, Transfer &);
 
-	void set_requirements (const Requirements & r) {m_requirements = r;}
-	const Requirements & get_requirements () const {return m_requirements;}
+	void set_requirements (const Requirements & r) {requirements_ = r;}
+	const Requirements & get_requirements () const {return requirements_;}
 
 private:
 	int32_t get_base_required_time(EditorGameBase &, uint32_t nr) const;
@@ -114,31 +114,31 @@ private:
 
 	using TransferList = std::vector<Transfer *>;
 
-	WareWorker m_type;
+	WareWorker type_;
 
-	PlayerImmovable & m_target;            //  who requested it?
-	//  Copies of m_target of various pointer types, to avoid expensive
+	PlayerImmovable & target_;            //  who requested it?
+	//  Copies of target_ of various pointer types, to avoid expensive
 	//  dynamic casting at runtime. Variables with an incompatible type
 	//  are filled with nulls.
-	Building        * m_target_building;
-	ProductionSite  * m_target_productionsite;
-	Warehouse       * m_target_warehouse;
-	ConstructionSite * m_target_constructionsite;
+	Building        * target_building_;
+	ProductionSite  * target_productionsite_;
+	Warehouse       * target_warehouse_;
+	ConstructionSite * target_constructionsite_;
 
-	Economy         * m_economy;
-	DescriptionIndex        m_index;             //  the index of the ware descr
-	uint32_t          m_count;             //  how many do we need in total
+	Economy         * economy_;
+	DescriptionIndex        index_;             //  the index of the ware descr
+	uint32_t          count_;             //  how many do we need in total
 
-	CallbackFn        m_callbackfn;        //  called on request success
+	CallbackFn        callbackfn_;        //  called on request success
 
 	//  when do we need the first ware (can be in the past)
-	int32_t           m_required_time;
-	int32_t           m_required_interval; //  time between wares
-	int32_t           m_last_request_time;
+	int32_t           required_time_;
+	int32_t           required_interval_; //  time between wares
+	int32_t           last_request_time_;
 
-	TransferList      m_transfers;         //  maximum size is m_count
+	TransferList      transfers_;         //  maximum size is count_
 
-	Requirements m_requirements;
+	Requirements requirements_;
 };
 
 }

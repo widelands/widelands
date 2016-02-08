@@ -31,7 +31,7 @@ class MapObjectLoader;
 
 
 struct CmdCallEconomyBalance : public GameLogicCommand {
-	CmdCallEconomyBalance () : GameLogicCommand(0), m_timerid(0) {} ///< for load and save
+	CmdCallEconomyBalance () : GameLogicCommand(0), timerid_(0) {} ///< for load and save
 
 	CmdCallEconomyBalance (uint32_t starttime, Economy *, uint32_t timerid);
 
@@ -43,8 +43,8 @@ struct CmdCallEconomyBalance : public GameLogicCommand {
 	void read (FileRead  &, EditorGameBase &, MapObjectLoader &) override;
 
 private:
-	OPtr<Flag> m_flag;
-	uint32_t m_timerid;
+	OPtr<Flag> flag_;
+	uint32_t timerid_;
 };
 
 }
