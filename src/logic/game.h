@@ -20,6 +20,8 @@
 #ifndef WL_LOGIC_GAME_H
 #define WL_LOGIC_GAME_H
 
+#include <memory>
+
 #include "base/md5.h"
 #include "io/streamwrite.h"
 #include "logic/cmd_queue.h"
@@ -108,7 +110,12 @@ public:
 	void init_newgame (UI::ProgressWindow* loader_ui, const GameSettings&);
 	void init_savegame(UI::ProgressWindow* loader_ui, const GameSettings&);
 	enum StartGameType {NewSPScenario, NewNonScenario, Loaded, NewMPScenario};
-	bool run(UI::ProgressWindow* loader_ui, StartGameType, const std::string& script_to_run, bool replay);
+
+	bool run(UI::ProgressWindow* loader_ui,
+	         StartGameType,
+	         const std::string& script_to_run,
+	         bool replay,
+	         const std::string& prefix_for_replays);
 
 	// Returns the upcasted lua interface.
 	LuaGameInterface& lua() override;
@@ -127,14 +134,15 @@ public:
 
 	void think() override;
 
-	ReplayWriter * get_replaywriter() {return m_replaywriter;}
+	ReplayWriter* get_replaywriter() {
+		return m_replaywriter.get();
+	}
 
 	/**
 	 * \return \c true if the game is completely loaded and running (or paused)
 	 * or \c false otherwise.
 	 */
 	bool is_loaded() {return m_state == gs_running;}
-	void end_dedicated_game();
 
 	void cleanup_for_load() override;
 
@@ -217,7 +225,6 @@ private:
 			m_target        (target),
 			m_counter       (0),
 			m_next_diskspacecheck(0),
-			m_dump          (nullptr),
 			m_syncstreamsave(false)
 		{}
 
@@ -238,7 +245,7 @@ private:
 		StreamWrite &   m_target;
 		uint32_t        m_counter;
 		uint32_t        m_next_diskspacecheck;
-		::StreamWrite * m_dump;
+		std::unique_ptr<StreamWrite> m_dump;
 		std::string     m_dumpfname;
 		bool            m_syncstreamsave;
 	}                    m_syncwrapper;
@@ -263,8 +270,7 @@ private:
 
 	SaveHandler          m_savehandler;
 
-	ReplayReader       * m_replayreader;
-	ReplayWriter       * m_replaywriter;
+	std::unique_ptr<ReplayWriter> m_replaywriter;
 
 	GeneralStatsVector m_general_stats;
 

@@ -854,7 +854,7 @@ void Building::send_message
 
 	Message * msg = new Message
 		(msgtype, game.get_gametime(), title, icon_filename, heading, rt_description,
-		 get_position(), (link_to_building_lifetime ? m_serial : 0));
+		 get_position(), (link_to_building_lifetime ? serial_ : 0));
 
 	if (throttle_time)
 		owner().add_message_with_timeout

@@ -62,7 +62,7 @@ struct ShippingItem {
 		ShippingItem get(MapObjectLoader & mol);
 
 	private:
-		uint32_t m_serial;
+		uint32_t serial_;
 	};
 
 	void save(EditorGameBase & egbase, MapObjectSaver & mos, FileWrite & fw);
@@ -77,11 +77,11 @@ private:
 	// Sets the location of this shippingitem, this could be a ship, a portdock or a warehouse.
 	void set_location(Game&, MapObject* obj);
 
-	// Updates m_destination_dock.
+	// Updates destination_dock_.
 	void update_destination(Game &, PortDock &);
 
-	ObjectPointer m_object;
-	OPtr<PortDock> m_destination_dock;
+	ObjectPointer object_;
+	OPtr<PortDock> destination_dock_;
 };
 
 } // namespace Widelands

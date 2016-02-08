@@ -213,7 +213,7 @@ public:
 	void set_worker_policy(DescriptionIndex ware, StockPolicy policy);
 
 	// Get the portdock if this is a port.
-	PortDock * get_portdock() const {return m_portdock;}
+	PortDock * get_portdock() const {return portdock_;}
 
 	// Returns the waresqueue of the expedition if this is a port.
 	// Will throw an exception otherwise.
@@ -271,11 +271,11 @@ private:
 
 	std::vector<PlannedWorkers> m_planned_workers;
 
-	PortDock * m_portdock;
+	PortDock * portdock_;
 
 	//this is information for portdock,to know whether it should
 	//try to recreate itself
-	bool m_cleanup_in_progress;
+	bool cleanup_in_progress_;
 
 };
 

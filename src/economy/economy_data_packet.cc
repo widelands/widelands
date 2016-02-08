@@ -37,7 +37,7 @@ void EconomyDataPacket::read(FileRead & fr)
 		uint16_t const packet_version = fr.unsigned_16();
 		if (packet_version == kCurrentPacketVersion) {
 			try {
-				const TribeDescr& tribe = m_eco->owner().tribe();
+				const TribeDescr& tribe = eco_->owner().tribe();
 				while (Time const last_modified = fr.unsigned_32()) {
 					char const * const type_name = fr.c_string();
 					uint32_t const permanent = fr.unsigned_32();
@@ -49,7 +49,7 @@ void EconomyDataPacket::read(FileRead & fr)
 								 "ignoring\n",
 								 type_name);
 						} else {
-							Economy::TargetQuantity& tq = m_eco->m_ware_target_quantities[i];
+							Economy::TargetQuantity& tq = eco_->ware_target_quantities_[i];
 							if (tq.last_modified) {
 								throw GameDataError("duplicated entry for %s", type_name);
 							}
@@ -66,7 +66,7 @@ void EconomyDataPacket::read(FileRead & fr)
 										 "ignoring\n",
 										 type_name);
 							} else {
-								Economy::TargetQuantity& tq = m_eco->m_worker_target_quantities[i];
+								Economy::TargetQuantity& tq = eco_->worker_target_quantities_[i];
 								if (tq.last_modified) {
 									throw GameDataError("duplicated entry for %s", type_name);
 								}
@@ -85,7 +85,7 @@ void EconomyDataPacket::read(FileRead & fr)
 			} catch (const WException & e) {
 				throw GameDataError("target quantities: %s", e.what());
 			}
-		m_eco->m_request_timerid = fr.unsigned_32();
+		eco_->request_timerid_ = fr.unsigned_32();
 		} else {
 			throw UnhandledVersionError("EconomyDataPacket", packet_version, kCurrentPacketVersion);
 		}
@@ -97,10 +97,10 @@ void EconomyDataPacket::read(FileRead & fr)
 void EconomyDataPacket::write(FileWrite & fw)
 {
 	fw.unsigned_16(kCurrentPacketVersion);
-	const TribeDescr & tribe = m_eco->owner().tribe();
+	const TribeDescr & tribe = eco_->owner().tribe();
 	for (const DescriptionIndex& ware_index : tribe.wares()) {
 		const Economy::TargetQuantity & tq =
-			m_eco->m_ware_target_quantities[ware_index];
+			eco_->ware_target_quantities_[ware_index];
 		if (Time const last_modified = tq.last_modified) {
 			fw.unsigned_32(last_modified);
 			fw.c_string(tribe.get_ware_descr(ware_index)->name());
@@ -109,7 +109,7 @@ void EconomyDataPacket::write(FileWrite & fw)
 	}
 	for (const DescriptionIndex& worker_index : tribe.workers()) {
 		const Economy::TargetQuantity & tq =
-			m_eco->m_worker_target_quantities[worker_index];
+			eco_->worker_target_quantities_[worker_index];
 		if (Time const last_modified = tq.last_modified) {
 			fw.unsigned_32(last_modified);
 			fw.c_string(tribe.get_worker_descr(worker_index)->name());
@@ -117,7 +117,7 @@ void EconomyDataPacket::write(FileWrite & fw)
 		}
 	}
 	fw.unsigned_32(0); //  terminator
-	fw.unsigned_32(m_eco->m_request_timerid);
+	fw.unsigned_32(eco_->request_timerid_);
 }
 
 }

@@ -229,7 +229,6 @@ public:
 	Widelands::EditorGameBase * egbase_;
 
 	/** Only for buffering the command line option --nosound until real initialization is done.
-	 *  And disabling sound on dedicated servers
 	 * \see SoundHandler::SoundHandler()
 	 * \see SoundHandler::init()
 	 */

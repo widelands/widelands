@@ -128,7 +128,7 @@ private:
  * bobs moving onto the shore).
  */
 struct CheckStepDefault {
-	CheckStepDefault(uint8_t const movecaps) : m_movecaps(movecaps) {}
+	CheckStepDefault(uint8_t const movecaps) : movecaps_(movecaps) {}
 
 	bool allowed
 		(Map &, FCoords start, FCoords end, int32_t dir, CheckStep::StepId)
@@ -136,7 +136,7 @@ struct CheckStepDefault {
 	bool reachable_dest(Map &, FCoords dest) const;
 
 private:
-	uint8_t m_movecaps;
+	uint8_t movecaps_;
 };
 
 
@@ -147,7 +147,7 @@ private:
  */
 struct CheckStepWalkOn {
 	CheckStepWalkOn(uint8_t const movecaps, bool const onlyend) :
-		m_movecaps(movecaps), m_onlyend(onlyend) {}
+		movecaps_(movecaps), onlyend_(onlyend) {}
 
 	bool allowed
 		(Map &, FCoords start, FCoords end, int32_t dir, CheckStep::StepId)
@@ -155,8 +155,8 @@ struct CheckStepWalkOn {
 	bool reachable_dest(Map &, FCoords dest) const;
 
 private:
-	uint8_t m_movecaps;
-	bool  m_onlyend;
+	uint8_t movecaps_;
+	bool  onlyend_;
 };
 
 
@@ -169,7 +169,7 @@ private:
  */
 struct CheckStepRoad {
 	CheckStepRoad(const Player & player, uint8_t const movecaps)
-		: m_player(player), m_movecaps(movecaps)
+		: player_(player), movecaps_(movecaps)
 	{}
 
 	bool allowed
@@ -178,8 +178,8 @@ struct CheckStepRoad {
 	bool reachable_dest(Map &, FCoords dest) const;
 
 private:
-	const Player & m_player;
-	uint8_t m_movecaps;
+	const Player & player_;
+	uint8_t movecaps_;
 };
 
 /**
@@ -187,7 +187,7 @@ private:
  * only checks whether the target is an allowed location.
  */
 struct CheckStepLimited {
-	void add_allowed_location(const Coords & c) {m_allowed_locations.insert(c);}
+	void add_allowed_location(const Coords & c) {allowed_locations_.insert(c);}
 	bool allowed
 		(Map &, FCoords start, FCoords end, int32_t dir, CheckStep::StepId)
 		const;
@@ -198,7 +198,7 @@ private:
 	// does not matter, as long as it is system independent (for parallel
 	// simulation).
 	// The only thing that matters is whether a location is in the set.
-	std::set<Coords, Coords::OrderingFunctor> m_allowed_locations;
+	std::set<Coords, Coords::OrderingFunctor> allowed_locations_;
 };
 
 
