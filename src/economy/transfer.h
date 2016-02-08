@@ -52,11 +52,11 @@ struct Transfer {
 	Transfer(Game &, Worker &);
 	~Transfer();
 
-	Request * get_request() const {return m_request;}
+	Request * get_request() const {return request_;}
 	void set_request(Request * req);
 	void set_destination(PlayerImmovable & imm);
 	PlayerImmovable * get_destination(Game & g);
-	uint32_t get_steps_left() const {return m_route.get_nrsteps();}
+	uint32_t get_steps_left() const {return route_.get_nrsteps();}
 
 	/// Called by the controlled ware or worker
 	PlayerImmovable * get_next_step(PlayerImmovable *, bool & psuccess);
@@ -76,12 +76,12 @@ struct Transfer {
 private:
 	void tlog(char const * fmt, ...) PRINTF_FORMAT(2, 3);
 
-	Game & m_game;
-	Request * m_request;
-	OPtr<PlayerImmovable> m_destination;
-	WareInstance * m_ware;    ///< non-null iff this is transferring a ware
-	Worker * m_worker;  ///< non-null iff this is transferring a worker
-	Route m_route;
+	Game & game_;
+	Request * request_;
+	OPtr<PlayerImmovable> destination_;
+	WareInstance * ware_;    ///< non-null iff this is transferring a ware
+	Worker * worker_;  ///< non-null iff this is transferring a worker
+	Route route_;
 };
 
 }

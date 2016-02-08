@@ -24,6 +24,7 @@
 #include <memory>
 #include <string>
 
+#include <boost/format.hpp>
 #ifndef _WIN32
 #include <SDL.h> // for a dirty hack.
 #include <unistd.h> // for usleep
@@ -73,10 +74,7 @@ namespace Widelands {
 //#define SYNC_DEBUG
 
 Game::SyncWrapper::~SyncWrapper() {
-	if (m_dump) {
-		delete m_dump;
-		m_dump = nullptr;
-
+	if (m_dump != nullptr) {
 		if (!m_syncstreamsave)
 			g_fs->fs_unlink(m_dumpfname);
 	}
@@ -84,7 +82,7 @@ Game::SyncWrapper::~SyncWrapper() {
 
 void Game::SyncWrapper::start_dump(const std::string & fname) {
 	m_dumpfname = fname + ".wss";
-	m_dump = g_fs->open_stream_write(m_dumpfname);
+	m_dump.reset(g_fs->open_stream_write(m_dumpfname));
 }
 
 static const unsigned long long MINIMUM_DISK_SPACE = 256 * 1024 * 1024;
@@ -98,29 +96,21 @@ void Game::SyncWrapper::data(void const * const sync_data, size_t const size) {
 	log("\n");
 #endif
 
-	if
-		(m_dump &&
-		 static_cast<int32_t>(m_counter - m_next_diskspacecheck) >= 0)
-	{
+	if (m_dump != nullptr && static_cast<int32_t>(m_counter - m_next_diskspacecheck) >= 0) {
 		m_next_diskspacecheck = m_counter + 16 * 1024 * 1024;
 
 		if (g_fs->disk_space() < MINIMUM_DISK_SPACE) {
 			log("Stop writing to syncstream file: disk is getting full.\n");
-			delete m_dump;
-			m_dump = nullptr;
+			m_dump.reset();
 		}
 	}
 
-	if (m_dump) {
+	if (m_dump != nullptr) {
 		try {
 			m_dump->data(sync_data, size);
 		} catch (const WException &) {
-			log
-				("Writing to syncstream file %s failed. Stop synctream dump.\n",
-				 m_dumpfname.c_str());
-
-			delete m_dump;
-			m_dump = nullptr;
+			log("Writing to syncstream file %s failed. Stop synctream dump.\n", m_dumpfname.c_str());
+			m_dump.reset();
 		}
 	}
 
@@ -137,7 +127,6 @@ Game::Game() :
 	m_writesyncstream     (false),
 	m_state               (gs_notrunning),
 	m_cmdqueue            (*this),
-	m_replaywriter        (nullptr),
 	/** TRANSLATORS: Win condition for this game has not been set. */
 	m_win_condition_displayname(_("Not set"))
 {
@@ -145,7 +134,6 @@ Game::Game() :
 
 Game::~Game()
 {
-	delete m_replaywriter;
 }
 
 
@@ -223,23 +211,23 @@ bool Game::run_splayer_scenario_direct(char const * const mapname, const std::st
 	std::unique_ptr<MapLoader> maploader(map().get_correct_loader(mapname));
 	if (!maploader)
 		throw wexception("could not load \"%s\"", mapname);
-	UI::ProgressWindow loaderUI;
+	UI::ProgressWindow loader_ui;
 
-	loaderUI.step (_("Preloading map"));
+	loader_ui.step (_("Preloading map"));
 	maploader->preload_map(true);
 	std::string const background = map().get_background();
 	if (!background.empty()) {
-		loaderUI.set_background(background);
+		loader_ui.set_background(background);
 	}
-	loaderUI.step(_("Loading world"));
+	loader_ui.step(_("Loading world"));
 	world();
-	loaderUI.step(_("Loading tribes"));
+	loader_ui.step(_("Loading tribes"));
 	tribes();
 
 	// We have to create the players here.
+	loader_ui.step(_("Creating players"));
 	PlayerNumber const nr_players = map().get_nrplayers();
 	iterate_player_numbers(p, nr_players) {
-		loaderUI.stepf(_("Adding player %u"), p);
 		add_player
 			(p,
 			 0,
@@ -253,13 +241,13 @@ bool Game::run_splayer_scenario_direct(char const * const mapname, const std::st
 		(new InteractivePlayer
 		 	(*this, g_options.pull_section("global"), 1, false));
 
-	loaderUI.step(_("Loading map"));
+	loader_ui.step(_("Loading map"));
 	maploader->load_map_complete(*this, Widelands::MapLoader::LoadType::kScenario);
 	maploader.reset();
 
 	set_game_controller(new SinglePlayerGameController(*this, true, 1));
 	try {
-		bool const result = run(&loaderUI, NewSPScenario, script_to_run, false);
+		bool const result = run(&loader_ui, NewSPScenario, script_to_run, false, "single_player");
 		delete m_ctrl;
 		m_ctrl = nullptr;
 		return result;
@@ -274,39 +262,34 @@ bool Game::run_splayer_scenario_direct(char const * const mapname, const std::st
 /**
  * Initialize the game based on the given settings.
  *
- * \note loaderUI can be nullptr, if this is run as dedicated server.
  */
 void Game::init_newgame
-	(UI::ProgressWindow * loaderUI, const GameSettings & settings)
+	(UI::ProgressWindow* loader_ui, const GameSettings& settings)
 {
-	if (loaderUI) {
-		loaderUI->step(_("Preloading map"));
-	}
+	assert(loader_ui != nullptr);
+
+	loader_ui->step(_("Preloading map"));
 
 	assert(!get_map());
 	set_map(new Map);
 
 	std::unique_ptr<MapLoader> maploader
 		(map().get_correct_loader(settings.mapfilename));
+	assert(maploader != nullptr);
 	maploader->preload_map(settings.scenario);
 
-	if (loaderUI) {
-		loaderUI->step(_("Loading world"));
-	}
+	loader_ui->step(_("Loading world"));
 	world();
 
-	if (loaderUI) {
-		loaderUI->step(_("Loading tribes"));
-	}
+	loader_ui->step(_("Loading tribes"));
 	tribes();
 
 	std::string const background = map().get_background();
-	if (loaderUI) {
-		if (!background.empty()) {
-			loaderUI->set_background(background);
-		}
-		loaderUI->step(_("Configuring players"));
+	if (!background.empty()) {
+		loader_ui->set_background(background);
 	}
+	loader_ui->step(_("Creating players"));
+
 	std::vector<PlayerSettings> shared;
 	std::vector<uint8_t>        shared_num;
 	for (uint32_t i = 0; i < settings.players.size(); ++i) {
@@ -338,8 +321,7 @@ void Game::init_newgame
 			->add_further_starting_position(shared_num.at(n), shared.at(n).initialization_index);
 	}
 
-	if (loaderUI)
-		loaderUI->step(_("Loading map"));
+	loader_ui->step(_("Loading map"));
 	maploader->load_map_complete(*this,
 										  settings.scenario ?
 											  Widelands::MapLoader::LoadType::kScenario :
@@ -364,15 +346,13 @@ void Game::init_newgame
  * At return the game is at the same state like a map loaded with Game::init()
  * Only difference is, that players are already initialized.
  * run<Returncode>() takes care about this difference.
- *
- * \note loaderUI can be nullptr, if this is run as dedicated server.
  */
 void Game::init_savegame
-	(UI::ProgressWindow * loaderUI, const GameSettings & settings)
+	(UI::ProgressWindow* loader_ui, const GameSettings& settings)
 {
-	if (loaderUI) {
-		loaderUI->step(_("Preloading map"));
-	}
+	assert(loader_ui != nullptr);
+
+	loader_ui->step(_("Preloading map"));
 
 	assert(!get_map());
 	set_map(new Map);
@@ -381,11 +361,9 @@ void Game::init_savegame
 		Widelands::GamePreloadPacket gpdp;
 		gl.preload_game(gpdp);
 		m_win_condition_displayname = gpdp.get_win_condition();
-		if (loaderUI) {
-			std::string background(gpdp.get_background());
-			loaderUI->set_background(background);
-			loaderUI->step(_("Loading..."));
-		}
+		std::string background(gpdp.get_background());
+		loader_ui->set_background(background);
+		loader_ui->step(_("Loading..."));
 		gl.load_game(settings.multiplayer);
 	} catch (...) {
 		throw;
@@ -393,14 +371,14 @@ void Game::init_savegame
 }
 
 bool Game::run_load_game(std::string filename, const std::string& script_to_run) {
-	UI::ProgressWindow loaderUI;
+	UI::ProgressWindow loader_ui;
 	std::vector<std::string> tipstext;
 	tipstext.push_back("general_game");
 	tipstext.push_back("singleplayer");
-	GameTips tips (loaderUI, tipstext);
+	GameTips tips (loader_ui, tipstext);
 	int8_t player_nr;
 
-	loaderUI.step(_("Preloading map"));
+	loader_ui.step(_("Preloading map"));
 
 	// We have to create an empty map, otherwise nothing will load properly
 	set_map(new Map);
@@ -412,13 +390,13 @@ bool Game::run_load_game(std::string filename, const std::string& script_to_run)
 		gl.preload_game(gpdp);
 		std::string background(gpdp.get_background());
 		m_win_condition_displayname = gpdp.get_win_condition();
-		loaderUI.set_background(background);
+		loader_ui.set_background(background);
 		player_nr = gpdp.get_player_nr();
 		set_ibase
 			(new InteractivePlayer
 			 	(*this, g_options.pull_section("global"), player_nr, false));
 
-		loaderUI.step(_("Loading..."));
+		loader_ui.step(_("Loading..."));
 		gl.load_game();
 	}
 
@@ -427,7 +405,7 @@ bool Game::run_load_game(std::string filename, const std::string& script_to_run)
 
 	set_game_controller(new SinglePlayerGameController(*this, true, player_nr));
 	try {
-		bool const result = run(&loaderUI, Loaded, script_to_run, false);
+		bool const result = run(&loader_ui, Loaded, script_to_run, false, "single_player");
 		delete m_ctrl;
 		m_ctrl = nullptr;
 		return result;
@@ -448,12 +426,7 @@ bool Game::run_load_game(std::string filename, const std::string& script_to_run)
 void Game::postload()
 {
 	EditorGameBase::postload();
-
-	if (g_gr) {
-		assert(get_ibase() != nullptr);
-		get_ibase()->postload();
-	} else
-		log("Note: Widelands runs without graphics, probably in dedicated server mode!\n");
+	get_ibase()->postload();
 }
 
 
@@ -473,25 +446,23 @@ void Game::postload()
  * 3.  After this has happened, the game graphics are loaded.
  *
  * \return true if a game actually took place, false otherwise
- *
- * \note loader_ui can be nullptr, if this is run as dedicated server.
  */
 bool Game::run
 	(UI::ProgressWindow * loader_ui, StartGameType const start_game_type,
-	 const std::string& script_to_run, bool replay)
+	 const std::string& script_to_run, bool replay, const std::string& prefix_for_replays)
 {
+	assert(loader_ui != nullptr);
+
 	m_replay = replay;
 	postload();
 
 	if (start_game_type != Loaded) {
 		PlayerNumber const nr_players = map().get_nrplayers();
 		if (start_game_type == NewNonScenario) {
-			std::string step_description = _("Creating player infrastructure");
+			if (loader_ui) {
+				loader_ui->step(_("Creating player infrastructure"));
+			}
 			iterate_players_existing(p, nr_players, *this, plr) {
-				if (loader_ui) {
-					step_description += ".";
-					loader_ui->step(step_description);
-				}
 				plr->create_default_infrastructure();
 			}
 		} else {
@@ -547,16 +518,13 @@ bool Game::run
 
 	if (m_writereplay || m_writesyncstream) {
 		// Derive a replay filename from the current time
-		std::string fname(REPLAY_DIR);
-		fname += '/';
-		fname += timestring();
-		fname += REPLAY_SUFFIX;
-
+		const std::string fname = (boost::format("%s/%s_%s%s") % REPLAY_DIR % timestring() %
+		                           prefix_for_replays % REPLAY_SUFFIX).str();
 		if (m_writereplay) {
 			log("Starting replay writer\n");
 
 			assert(!m_replaywriter);
-			m_replaywriter = new ReplayWriter(*this, fname);
+			m_replaywriter.reset(new ReplayWriter(*this, fname));
 
 			log("Replay writer has started\n");
 		}
@@ -567,46 +535,30 @@ bool Game::run
 
 	sync_reset();
 
-	if (loader_ui) {
-		load_graphics(*loader_ui);
+	load_graphics(*loader_ui);
 
 #ifdef _WIN32
-		//  Clear the event queue before starting game because we don't want
-		//  to handle events at game start that happened during loading procedure.
-		SDL_Event event;
-		while (SDL_PollEvent(&event));
+	//  Clear the event queue before starting game because we don't want
+	//  to handle events at game start that happened during loading procedure.
+	SDL_Event event;
+	while (SDL_PollEvent(&event));
 #endif
 
-		g_sound_handler.change_music("ingame", 1000, 0);
+	g_sound_handler.change_music("ingame", 1000, 0);
 
-		m_state = gs_running;
+	m_state = gs_running;
 
-		get_ibase()->run<UI::Panel::Returncodes>();
+	get_ibase()->run<UI::Panel::Returncodes>();
 
-		m_state = gs_ending;
+	m_state = gs_ending;
 
-		g_sound_handler.change_music("menu", 1000, 0);
+	g_sound_handler.change_music("menu", 1000, 0);
 
-		cleanup_objects();
-		delete get_ibase();
-		set_ibase(nullptr);
+	cleanup_objects();
+	delete get_ibase();
+	set_ibase(nullptr);
 
-		m_state = gs_notrunning;
-	} else {
-		// dedicated server
-		m_state = gs_running;
-		//handle network
-		while (m_state == gs_running) {
-			// TODO(unknown): this should be improved.
-#ifndef _WIN32
-			if (usleep(100) == -1)
-				break;
-#else
-			Sleep(1);
-#endif
-			think();
-		}
-	}
+	m_state = gs_notrunning;
 
 	return true;
 }
@@ -634,12 +586,6 @@ void Game::think()
 		// check if autosave is needed
 		m_savehandler.think(*this);
 	}
-}
-
-/// (Only) called by the dedicated server, to end a game once all players left
-void Game::end_dedicated_game() {
-	assert(!g_gr);
-	m_state = gs_notrunning;
 }
 
 /**

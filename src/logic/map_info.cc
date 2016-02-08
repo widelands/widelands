@@ -124,6 +124,8 @@ int main(int argc, char ** argv)
 			write_string(",\n  ");
 			write_key_value_string("description", map->get_description());
 			write_string(",\n  ");
+			write_key_value_string("hint", map->get_hint());
+			write_string(",\n  ");
 			write_key_value_int("width", map->get_width());
 			write_string(",\n  ");
 			write_key_value_int("height", map->get_height());

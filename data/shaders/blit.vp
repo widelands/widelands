@@ -1,0 +1,21 @@
+#version 120
+
+// Attributes.
+attribute vec2 attr_mask_texture_position;
+attribute vec2 attr_texture_position;
+attribute vec3 attr_position;
+attribute vec4 attr_blend;
+attribute float attr_program_flavor;
+
+varying vec2 out_mask_texture_coordinate;
+varying vec2 out_texture_coordinate;
+varying vec4 out_blend;
+varying float out_program_flavor;
+
+void main() {
+	out_mask_texture_coordinate = attr_mask_texture_position;
+	out_texture_coordinate = attr_texture_position;
+	out_blend = attr_blend;
+	out_program_flavor = attr_program_flavor;
+	gl_Position = vec4(attr_position, 1.);
+}

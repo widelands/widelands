@@ -29,7 +29,7 @@ namespace Widelands {
 struct GameDataError : public WException {
 	explicit GameDataError(char const * fmt, ...) PRINTF_FORMAT(2, 3);
 
-	char const * what() const noexcept override {return m_what.c_str();}
+	char const * what() const noexcept override {return what_.c_str();}
 protected:
 	GameDataError() {}
 };
@@ -49,7 +49,7 @@ struct UnhandledVersionError : public GameDataError {
 	explicit UnhandledVersionError(const char* packet_name, int32_t packet_version,
 									 int32_t current_packet_version);
 
-	char const * what() const noexcept override {return m_what.c_str();}
+	char const * what() const noexcept override {return what_.c_str();}
 protected:
 	UnhandledVersionError() {}
 };
