@@ -460,13 +460,13 @@ void MapBuildingdataPacket::read_warehouse
 
 			if (warehouse.descr().get_isport()) {
 				if (Serial portdock = fr.unsigned_32()) {
-					warehouse.m_portdock = &mol.get<PortDock>(portdock);
-					warehouse.m_portdock->set_economy(warehouse.get_economy());
+					warehouse.portdock_ = &mol.get<PortDock>(portdock);
+					warehouse.portdock_->set_economy(warehouse.get_economy());
 					// Expedition specific stuff. This is done in this packet
 					// because the "new style" loader is not supported and
 					// doesn't lend itself to request and other stuff.
-					if (warehouse.m_portdock->expedition_started()) {
-					warehouse.m_portdock->expedition_bootstrap()->load(warehouse, fr, game, mol);
+					if (warehouse.portdock_->expedition_started()) {
+					warehouse.portdock_->expedition_bootstrap()->load(warehouse, fr, game, mol);
 					}
 				}
 			}
@@ -1116,11 +1116,11 @@ void MapBuildingdataPacket::write_warehouse
 	fw.unsigned_32(warehouse.m_next_stock_remove_act);
 
 	if (warehouse.descr().get_isport()) {
-		fw.unsigned_32(mos.get_object_file_index_or_zero(warehouse.m_portdock));
+		fw.unsigned_32(mos.get_object_file_index_or_zero(warehouse.portdock_));
 
 		// Expedition specific stuff. See comment in loader.
-		if (warehouse.m_portdock->expedition_started()) {
-			warehouse.m_portdock->expedition_bootstrap()->save(fw, game, mos);
+		if (warehouse.portdock_->expedition_started()) {
+			warehouse.portdock_->expedition_bootstrap()->save(fw, game, mos);
 		}
 	}
 }

@@ -114,8 +114,8 @@ struct Ship : Bob {
 
 	void log_general_info(const EditorGameBase &) override;
 
-	uint32_t get_nritems() const {return m_items.size();}
-	const ShippingItem & get_item(uint32_t idx) const {return m_items[idx];}
+	uint32_t get_nritems() const {return items_.size();}
+	const ShippingItem & get_item(uint32_t idx) const {return items_[idx];}
 
 	void withdraw_items(Game & game, PortDock & pd, std::vector<ShippingItem> & items);
 	void add_item(Game &, const ShippingItem & item);
@@ -247,7 +247,7 @@ private:
 	Economy * m_economy;
 	OPtr<PortDock> m_lastdock;
 	OPtr<PortDock> m_destination;
-	std::vector<ShippingItem> m_items;
+	std::vector<ShippingItem> items_;
 	uint8_t m_ship_state;
 	std::string m_shipname;
 

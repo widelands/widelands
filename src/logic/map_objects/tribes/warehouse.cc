@@ -70,59 +70,59 @@ void remove_no_longer_existing_workers(Game& game, std::vector<Worker*>* workers
 
 WarehouseSupply::~WarehouseSupply()
 {
-	if (m_economy) {
+	if (economy_) {
 		log
 			("WarehouseSupply::~WarehouseSupply: Warehouse %u still belongs to "
 			 "an economy",
-			 m_warehouse->serial());
+			 warehouse_->serial());
 		set_economy(nullptr);
 	}
 
 	// We're removed from the Economy. Therefore, the wares can simply
 	// be cleared out. The global inventory will be okay.
-	m_wares  .clear();
-	m_workers.clear();
+	wares_  .clear();
+	workers_.clear();
 }
 
 /// Inform this supply, how much wares are to be handled
 void WarehouseSupply::set_nrwares(DescriptionIndex const i) {
-	assert(0 == m_wares.get_nrwareids());
+	assert(0 == wares_.get_nrwareids());
 
-	m_wares.set_nrwares(i);
+	wares_.set_nrwares(i);
 }
 void WarehouseSupply::set_nrworkers(DescriptionIndex const i) {
-	assert(0 == m_workers.get_nrwareids());
+	assert(0 == workers_.get_nrwareids());
 
-	m_workers.set_nrwares(i);
+	workers_.set_nrwares(i);
 }
 
 
 /// Add and remove our wares and the Supply to the economies as necessary.
 void WarehouseSupply::set_economy(Economy * const e)
 {
-	if (e == m_economy)
+	if (e == economy_)
 		return;
 
-	if (m_economy) {
-		m_economy->remove_supply(*this);
-		for (DescriptionIndex i = 0; i < m_wares.get_nrwareids(); ++i)
-			if (m_wares.stock(i))
-				m_economy->remove_wares(i, m_wares.stock(i));
-		for (DescriptionIndex i = 0; i < m_workers.get_nrwareids(); ++i)
-			if (m_workers.stock(i))
-				m_economy->remove_workers(i, m_workers.stock(i));
+	if (economy_) {
+		economy_->remove_supply(*this);
+		for (DescriptionIndex i = 0; i < wares_.get_nrwareids(); ++i)
+			if (wares_.stock(i))
+				economy_->remove_wares(i, wares_.stock(i));
+		for (DescriptionIndex i = 0; i < workers_.get_nrwareids(); ++i)
+			if (workers_.stock(i))
+				economy_->remove_workers(i, workers_.stock(i));
 	}
 
-	m_economy = e;
+	economy_ = e;
 
-	if (m_economy) {
-		for (DescriptionIndex i = 0; i < m_wares.get_nrwareids(); ++i)
-			if (m_wares.stock(i))
-				m_economy->add_wares(i, m_wares.stock(i));
-		for (DescriptionIndex i = 0; i < m_workers.get_nrwareids(); ++i)
-			if (m_workers.stock(i))
-				m_economy->add_workers(i, m_workers.stock(i));
-		m_economy->add_supply(*this);
+	if (economy_) {
+		for (DescriptionIndex i = 0; i < wares_.get_nrwareids(); ++i)
+			if (wares_.stock(i))
+				economy_->add_wares(i, wares_.stock(i));
+		for (DescriptionIndex i = 0; i < workers_.get_nrwareids(); ++i)
+			if (workers_.stock(i))
+				economy_->add_workers(i, workers_.stock(i));
+		economy_->add_supply(*this);
 	}
 }
 
@@ -133,9 +133,9 @@ void WarehouseSupply::add_wares(DescriptionIndex const id, uint32_t const count)
 	if (!count)
 		return;
 
-	if (m_economy) // No economies in the editor
-		m_economy->add_wares(id, count);
-	m_wares.add(id, count);
+	if (economy_) // No economies in the editor
+		economy_->add_wares(id, count);
+	wares_.add(id, count);
 }
 
 
@@ -145,9 +145,9 @@ void WarehouseSupply::remove_wares(DescriptionIndex const id, uint32_t const cou
 	if (!count)
 		return;
 
-	m_wares.remove(id, count);
-	if (m_economy) // No economies in the editor
-		m_economy->remove_wares(id, count);
+	wares_.remove(id, count);
+	if (economy_) // No economies in the editor
+		economy_->remove_wares(id, count);
 }
 
 
@@ -157,9 +157,9 @@ void WarehouseSupply::add_workers(DescriptionIndex const id, uint32_t const coun
 	if (!count)
 		return;
 
-	if (m_economy) // No economies in the editor
-		m_economy->add_workers(id, count);
-	m_workers.add(id, count);
+	if (economy_) // No economies in the editor
+		economy_->add_workers(id, count);
+	workers_.add(id, count);
 }
 
 
@@ -172,13 +172,13 @@ void WarehouseSupply::remove_workers(DescriptionIndex const id, uint32_t const c
 	if (!count)
 		return;
 
-	m_workers.remove(id, count);
-	if (m_economy) // No economies in the editor
-		m_economy->remove_workers(id, count);
+	workers_.remove(id, count);
+	if (economy_) // No economies in the editor
+		economy_->remove_workers(id, count);
 }
 
 /// Return the position of the Supply, i.e. the owning Warehouse.
-PlayerImmovable * WarehouseSupply::get_position(Game &) {return m_warehouse;}
+PlayerImmovable * WarehouseSupply::get_position(Game &) {return warehouse_;}
 
 
 /// Warehouse supplies are never active.
@@ -206,12 +206,12 @@ uint32_t WarehouseSupply::nr_supplies
 {
 	if (req.get_type() == wwWORKER)
 		return
-			m_warehouse->count_workers
+			warehouse_->count_workers
 				(game, req.get_index(), req.get_requirements());
 
 	//  Calculate how many wares can be sent out - it might be that we need them
 	// ourselves. E.g. for hiring new soldiers.
-	int32_t const x = m_wares.stock(req.get_index());
+	int32_t const x = wares_.stock(req.get_index());
 	// only mark an ware of that type as available, if the priority of the
 	// request + number of that wares in warehouse is > priority of request
 	// of *this* warehouse + 1 (+1 is important, as else the ware would directly
@@ -219,7 +219,7 @@ uint32_t WarehouseSupply::nr_supplies
 	// highered and would have the same value as the original request)
 	int32_t const y =
 		x + (req.get_priority(0) / 100)
-		- (m_warehouse->get_priority(wwWARE, req.get_index()) / 100) - 1;
+		- (warehouse_->get_priority(wwWARE, req.get_index()) / 100) - 1;
 	// But the number should never be higher than the number of wares available
 	if (y > x)
 		return x;
@@ -231,17 +231,17 @@ uint32_t WarehouseSupply::nr_supplies
 WareInstance & WarehouseSupply::launch_ware(Game & game, const Request & req) {
 	if (req.get_type() != wwWARE)
 		throw wexception("WarehouseSupply::launch_ware: called for non-ware request");
-	if (!m_wares.stock(req.get_index()))
+	if (!wares_.stock(req.get_index()))
 		throw wexception("WarehouseSupply::launch_ware: called for non-existing ware");
 
-	return m_warehouse->launch_ware(game, req.get_index());
+	return warehouse_->launch_ware(game, req.get_index());
 }
 
 /// Launch a ware as worker.
 Worker & WarehouseSupply::launch_worker(Game & game, const Request & req)
 {
 	return
-		m_warehouse->launch_worker
+		warehouse_->launch_worker
 			(game, req.get_index(), req.get_requirements());
 }
 
@@ -275,10 +275,10 @@ Warehouse::Warehouse(const WarehouseDescr & warehouse_descr) :
 	Building(warehouse_descr),
 	m_supply(new WarehouseSupply(this)),
 	m_next_military_act(0),
-	m_portdock(nullptr)
+	portdock_(nullptr)
 {
 	m_next_stock_remove_act = 0;
-	m_cleanup_in_progress = false;
+	cleanup_in_progress_ = false;
 }
 
 
@@ -487,7 +487,7 @@ void Warehouse::init(EditorGameBase & egbase)
 
 	if (descr().get_isport()) {
 		init_portdock(egbase);
-		PortDock* pd = m_portdock;
+		PortDock* pd = portdock_;
 		// should help diagnose problems with marine
 		if (!pd->get_fleet()) {
 			log(" Warning: portdock without a fleet created (%3dx%3d)\n",
@@ -495,7 +495,7 @@ void Warehouse::init(EditorGameBase & egbase)
 			get_position().y);
 		}
 	}
-	m_cleanup_in_progress = false;
+	cleanup_in_progress_ = false;
 }
 
 void Warehouse::init_containers(Player& player) {
@@ -530,20 +530,20 @@ void Warehouse::init_portdock(EditorGameBase & egbase)
 
 	molog("Found %" PRIuS " fields for the dock\n", dock.size());
 
-	m_portdock = new PortDock(this);
-	m_portdock->set_owner(get_owner());
-	m_portdock->set_economy(get_economy());
+	portdock_ = new PortDock(this);
+	portdock_->set_owner(get_owner());
+	portdock_->set_economy(get_economy());
 	for (const Coords& coords : dock) {
-		m_portdock->add_position(coords);
+		portdock_->add_position(coords);
 	}
-	m_portdock->init(egbase);
+	portdock_->init(egbase);
 
 	if (get_economy() != nullptr)
-		m_portdock->set_economy(get_economy());
+		portdock_->set_economy(get_economy());
 
 	// this is just to indicate something wrong is going on
 	//(tiborb)
-	PortDock* pd_tmp = m_portdock;
+	PortDock* pd_tmp = portdock_;
 	if (!pd_tmp->get_fleet()) {
 		log (" portdock for port at %3dx%3d created but without a fleet!\n",
 		    get_position().x,
@@ -560,14 +560,14 @@ void Warehouse::destroy(EditorGameBase & egbase)
 // if the port still exists and we are in game we first try to restore the portdock
 void Warehouse::restore_portdock_or_destroy(EditorGameBase& egbase) {
 	Warehouse::init_portdock(egbase);
-	if (!m_portdock) {
+	if (!portdock_) {
 		log(" Portdock could not be restored, removing the port now (coords: %3dx%3d)\n",
 		    get_position().x,
 		    get_position().y);
 		Building::destroy(egbase);
 	} else {
 		molog ("Message: portdock restored\n");
-		PortDock* pd_tmp = m_portdock;
+		PortDock* pd_tmp = portdock_;
 		if (!pd_tmp->get_fleet()) {
 			log (" Portdock restored but without a fleet!\n");
 		}
@@ -579,14 +579,14 @@ void Warehouse::restore_portdock_or_destroy(EditorGameBase& egbase) {
 void Warehouse::cleanup(EditorGameBase& egbase) {
 	// if this is a port, it will remove also portdock.
 	// But portdock must know that it should not try to recreate itself
-	m_cleanup_in_progress = true;
+	cleanup_in_progress_ = true;
 
-	if (egbase.objects().object_still_available(m_portdock)) {
-		m_portdock->remove(egbase);
+	if (egbase.objects().object_still_available(portdock_)) {
+		portdock_->remove(egbase);
 	}
 
-	if (!egbase.objects().object_still_available(m_portdock)) {
-		m_portdock = nullptr;
+	if (!egbase.objects().object_still_available(portdock_)) {
+		portdock_ = nullptr;
 	}
 
 	// This will empty the stock and launch all workers including incorporated
@@ -736,8 +736,8 @@ void Warehouse::set_economy(Economy * const e)
 	if (old)
 		old->remove_warehouse(*this);
 
-	if (m_portdock)
-		m_portdock->set_economy(e);
+	if (portdock_)
+		portdock_->set_economy(e);
 	m_supply->set_economy(e);
 	Building::set_economy(e);
 
@@ -747,8 +747,8 @@ void Warehouse::set_economy(Economy * const e)
 		}
 	}
 
-	if (m_portdock)
-		m_portdock->set_economy(e);
+	if (portdock_)
+		portdock_->set_economy(e);
 
 	if (e)
 		e->add_warehouse(*this);
@@ -1422,10 +1422,10 @@ void Warehouse::check_remove_stock(Game & game)
 }
 
 WaresQueue& Warehouse::waresqueue(DescriptionIndex index) {
-	assert(m_portdock != nullptr);
-	assert(m_portdock->expedition_bootstrap() != nullptr);
+	assert(portdock_ != nullptr);
+	assert(portdock_->expedition_bootstrap() != nullptr);
 
-	return m_portdock->expedition_bootstrap()->waresqueue(index);
+	return portdock_->expedition_bootstrap()->waresqueue(index);
 }
 
 /*
@@ -1478,7 +1478,7 @@ void Warehouse::log_general_info(const EditorGameBase & egbase)
 	Building::log_general_info(egbase);
 
 	if (descr().get_isport()){
-		PortDock* pd_tmp = m_portdock;
+		PortDock* pd_tmp = portdock_;
 		if (pd_tmp){
 			molog("Port dock: %u\n", pd_tmp->serial());
 			molog("port needs ship: %s\n", (pd_tmp->get_need_ship())?"true":"false");

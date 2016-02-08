@@ -286,8 +286,8 @@ private:
 // users can register for change updates. The registry should be
 // moved to InteractivePlayer or some other UI component.
 void Economy::show_options_window() {
-	if (m_optionswindow_registry.window) {
-		m_optionswindow_registry.window->move_to_top();
+	if (optionswindow_registry_.window) {
+		optionswindow_registry_.window->move_to_top();
 	} else {
 		new EconomyOptionsWindow(dynamic_cast<InteractiveGameBase&>
 			 	(*owner().egbase().get_ibase()), *this);

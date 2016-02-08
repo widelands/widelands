@@ -245,7 +245,7 @@ private:
 		StreamWrite &   m_target;
 		uint32_t        m_counter;
 		uint32_t        m_next_diskspacecheck;
-		std::unique_ptr<::StreamWrite> m_dump;
+		std::unique_ptr<StreamWrite> m_dump;
 		std::string     m_dumpfname;
 		bool            m_syncstreamsave;
 	}                    m_syncwrapper;
