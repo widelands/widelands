@@ -5,14 +5,14 @@
 ###################################
 
 init:
-  - cmd: "IF \"%PLATFORM%\" == \"x86\" (set MINGWPATH=C:\\msys64\\mingw32\\bin& set MINGWSUFFIX=i686) ELSE (set MINGWPATH=C:\\msys64\\mingw64\\bin& set MINGWSUFFIX=x86_64)" 
-  - cmd: "echo %MINGWPATH%"
-  - cmd: "echo %MINGWSUFFIX%"
+  - cmd: "IF \"%PLATFORM%\" == \"x86\" (set MINGWPATH=C:\\msys64\\mingw32\\bin& set MINGWSUFFIX=i686) ELSE (set MINGWPATH=C:\\msys64\\mingw64\\bin& set MINGWSUFFIX=x86_64)"
 
 install:
   # Installing various utilities
   - choco install -y InnoSetup
   - cmd: "set PATH=%MINGWPATH%;C:\\msys64\\usr\\bin;C:\\Program Files (x86)\\Inno Setup 5;%PATH%"
+  - cmd: "set CC=%MINGWPATH%\\gcc.exe"
+  - cmd: "set CXX=%MINGWPATH%\\gcc.exe"
   # Update mirrors
   - cmd: "bash --login -c \"pacman --noconfirm --sync pacman-mirrors\""
   # Update msys2 core with fixed update script (no wait for close window)
