@@ -116,7 +116,7 @@ void Textarea::update()
 		collapse(); // collapse() implicitly updates the size and position
 	}
 
-	fit_text();
+	render_text();
 
 	if (layoutmode_ == AutoMove) {
 		expand();
@@ -237,16 +237,14 @@ void Textarea::update_desired_size()
 		h = rendered_text_->height();
 		// We want empty textareas to have height
 		if (text_.empty()) {
-			h = UI::g_fh1->render(
-					 as_uifont(".",
-								  fontsize_ - UI::g_fh1->fontset().size_offset()))->height();
+			h = UI::g_fh1->render(as_uifont(".", fontsize_))->height();
 		}
 	}
 	set_desired_size(w, h);
 }
 
 
-void Textarea::fit_text() {
+void Textarea::render_text() {
 	rendered_text_ = UI::g_fh1->render(as_uifont(text_, fontsize_, color_, fontface_));
 
 	if (fixed_width_ > 0) { // Autofit

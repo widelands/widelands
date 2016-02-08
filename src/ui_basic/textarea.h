@@ -104,7 +104,7 @@ private:
 	 * This rerenders the text. If fixed_width_ is set, it will also use the condensed
 	 * Fontset if needed and then make the text smaller until it fits.
 	 */
-	void fit_text();
+	void render_text();
 
 	LayoutMode layoutmode_;
 	std::string text_;
