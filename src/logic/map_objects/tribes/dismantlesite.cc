@@ -68,7 +68,7 @@ DismantleSite::DismantleSite
 :
 PartiallyFinishedBuilding(gdescr)
 {
-	m_position = c;
+	position_ = c;
 	set_owner(&plr);
 
 	assert(!former_buildings.empty());
@@ -109,14 +109,14 @@ void DismantleSite::init(EditorGameBase & egbase)
 	count_returned_wares(this, wares);
 
 	std::map<DescriptionIndex, uint8_t>::const_iterator it = wares.begin();
-	m_wares.resize(wares.size());
+	wares_.resize(wares.size());
 
 	for (size_t i = 0; i < wares.size(); ++i, ++it) {
 		WaresQueue & wq =
-			*(m_wares[i] = new WaresQueue(*this, it->first, it->second));
+			*(wares_[i] = new WaresQueue(*this, it->first, it->second));
 
 		wq.set_filled(it->second);
-		m_work_steps += it->second;
+		work_steps_ += it->second;
 	}
 }
 
@@ -154,7 +154,7 @@ Construction sites only burn if some of the work has been completed.
 */
 bool DismantleSite::burn_on_destroy()
 {
-	if (m_work_completed >= m_work_steps)
+	if (work_completed_ >= work_steps_)
 		return false; // completed, so don't burn
 
 	return true;
@@ -166,7 +166,7 @@ Called by our builder to get instructions.
 ===============
 */
 bool DismantleSite::get_building_work(Game & game, Worker & worker, bool) {
-	if (&worker != m_builder.get(game)) {
+	if (&worker != builder_.get(game)) {
 		// Not our construction worker; e.g. a miner leaving a mine
 		// that is supposed to be enhanced. Make him return to a warehouse
 		worker.pop_task(game);
@@ -174,15 +174,15 @@ bool DismantleSite::get_building_work(Game & game, Worker & worker, bool) {
 		return true;
 	}
 
-	if (!m_work_steps) //  Happens for building without buildcost.
+	if (!work_steps_) //  Happens for building without buildcost.
 		schedule_destroy(game); //  Complete the building immediately.
 
 	// Check if one step has completed
-	if (static_cast<int32_t>(game.get_gametime() - m_work_steptime) >= 0 && m_working) {
-		++m_work_completed;
+	if (static_cast<int32_t>(game.get_gametime() - work_steptime_) >= 0 && working_) {
+		++work_completed_;
 
-		for (uint32_t i = 0; i < m_wares.size(); ++i) {
-			WaresQueue & wq = *m_wares[i];
+		for (uint32_t i = 0; i < wares_.size(); ++i) {
+			WaresQueue & wq = *wares_[i];
 
 			if (!wq.get_filled())
 				continue;
@@ -198,12 +198,12 @@ bool DismantleSite::get_building_work(Game & game, Worker & worker, bool) {
 			ware.init(game);
 			worker.start_task_dropoff(game, ware);
 
-			m_working = false;
+			working_ = false;
 			return true;
 		}
 	}
 
-	if (m_work_completed >= m_work_steps) {
+	if (work_completed_ >= work_steps_) {
 		schedule_destroy(game);
 
 		worker.pop_task(game);
@@ -214,12 +214,12 @@ bool DismantleSite::get_building_work(Game & game, Worker & worker, bool) {
 				 worker.descr().get_right_walk_anims(false),
 				 true);
 		worker.set_location(nullptr);
-	} else if (!m_working) {
-		m_work_steptime = game.get_gametime() + DISMANTLESITE_STEP_TIME;
+	} else if (!working_) {
+		work_steptime_ = game.get_gametime() + DISMANTLESITE_STEP_TIME;
 		worker.start_task_idle
 			(game, worker.descr().get_animation("work"), DISMANTLESITE_STEP_TIME);
 
-		m_working = true;
+		working_ = true;
 	}
 	return true;
 }
@@ -233,29 +233,29 @@ void DismantleSite::draw
 	(const EditorGameBase& game, RenderTarget& dst, const FCoords& coords, const Point& pos)
 {
 	const uint32_t gametime = game.get_gametime();
-	uint32_t tanim = gametime - m_animstart;
+	uint32_t tanim = gametime - animstart_;
 
-	if (coords != m_position)
+	if (coords != position_)
 		return; // draw big buildings only once
 
 	const RGBColor& player_color = get_owner()->get_playercolor();
 
 	// Draw the construction site marker
-	dst.blit_animation(pos, m_anim, tanim, player_color);
+	dst.blit_animation(pos, anim_, tanim, player_color);
 
 	// Draw the partially dismantled building
 	static_assert(0 <= DISMANTLESITE_STEP_TIME, "assert(0 <= DISMANTLESITE_STEP_TIME) failed.");
-	uint32_t total_time = DISMANTLESITE_STEP_TIME * m_work_steps;
-	uint32_t completed_time = DISMANTLESITE_STEP_TIME * m_work_completed;
+	uint32_t total_time = DISMANTLESITE_STEP_TIME * work_steps_;
+	uint32_t completed_time = DISMANTLESITE_STEP_TIME * work_completed_;
 
-	if (m_working)
-		completed_time += DISMANTLESITE_STEP_TIME + gametime - m_work_steptime;
+	if (working_)
+		completed_time += DISMANTLESITE_STEP_TIME + gametime - work_steptime_;
 
 	uint32_t anim_idx;
 	try {
-		anim_idx = m_building->get_animation("unoccupied");
+		anim_idx = building_->get_animation("unoccupied");
 	} catch (MapObjectDescr::AnimationNonexistent &) {
-		anim_idx = m_building->get_animation("idle");
+		anim_idx = building_->get_animation("idle");
 	}
 	const Animation& anim = g_gr->animations().get_animation(anim_idx);
 	const uint16_t w = anim.width();

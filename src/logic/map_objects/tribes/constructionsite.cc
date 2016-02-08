@@ -83,14 +83,14 @@ Access to the wares queues by id
 =======
 */
 WaresQueue & ConstructionSite::waresqueue(DescriptionIndex const wi) {
-	for (WaresQueue * ware : m_wares) {
+	for (WaresQueue * ware : wares_) {
 		if (ware->get_ware() == wi) {
 			return *ware;
 		}
 	}
 	throw wexception
 		("%s (%u) (building %s) has no WaresQueue for %u",
-		 descr().name().c_str(), serial(), m_building->name().c_str(), wi);
+		 descr().name().c_str(), serial(), building_->name().c_str(), wi);
 }
 
 
@@ -120,26 +120,26 @@ void ConstructionSite::init(EditorGameBase & egbase)
 		DescriptionIndex was_index = m_old_buildings.back();
 		const BuildingDescr* was_descr = owner().tribe().get_building_descr(was_index);
 		m_info.was = was_descr;
-		buildcost = &m_building->enhancement_cost();
+		buildcost = &building_->enhancement_cost();
 	} else {
-		buildcost = &m_building->buildcost();
+		buildcost = &building_->buildcost();
 	}
 
 	//  TODO(unknown): figure out whether planing is necessary
 
 	//  initialize the wares queues
 	size_t const buildcost_size = buildcost->size();
-	m_wares.resize(buildcost_size);
+	wares_.resize(buildcost_size);
 	std::map<DescriptionIndex, uint8_t>::const_iterator it = buildcost->begin();
 
 	for (size_t i = 0; i < buildcost_size; ++i, ++it) {
 		WaresQueue & wq =
-			*(m_wares[i] = new WaresQueue(*this, it->first, it->second));
+			*(wares_[i] = new WaresQueue(*this, it->first, it->second));
 
 		wq.set_callback(ConstructionSite::wares_queue_callback, this);
 		wq.set_consume_interval(CONSTRUCTIONSITE_STEP_TIME);
 
-		m_work_steps += it->second;
+		work_steps_ += it->second;
 	}
 }
 
@@ -154,13 +154,13 @@ void ConstructionSite::cleanup(EditorGameBase & egbase)
 {
 	PartiallyFinishedBuilding::cleanup(egbase);
 
-	if (m_work_steps <= m_work_completed) {
+	if (work_steps_ <= work_completed_) {
 		// Put the real building in place
-		DescriptionIndex becomes_idx = owner().tribe().building_index(m_building->name());
+		DescriptionIndex becomes_idx = owner().tribe().building_index(building_->name());
 		m_old_buildings.push_back(becomes_idx);
 		Building & b =
-			m_building->create(egbase, owner(), m_position, false, false, m_old_buildings);
-		if (Worker * const builder = m_builder.get(egbase)) {
+			building_->create(egbase, owner(), position_, false, false, m_old_buildings);
+		if (Worker * const builder = builder_.get(egbase)) {
 			builder->reset_tasks(dynamic_cast<Game&>(egbase));
 			builder->set_location(&b);
 		}
@@ -183,10 +183,10 @@ Construction sites only burn if some of the work has been completed.
 */
 bool ConstructionSite::burn_on_destroy()
 {
-	if (m_work_completed >= m_work_steps)
+	if (work_completed_ >= work_steps_)
 		return false; // completed, so don't burn
 
-	return m_work_completed || !m_old_buildings.empty();
+	return work_completed_ || !m_old_buildings.empty();
 }
 
 /*
@@ -198,7 +198,7 @@ bool ConstructionSite::fetch_from_flag(Game & game)
 {
 	++m_fetchfromflag;
 
-	if (Worker * const builder = m_builder.get(game))
+	if (Worker * const builder = builder_.get(game))
 		builder->update_task_buildingwork(game);
 
 	return true;
@@ -211,7 +211,7 @@ Called by our builder to get instructions.
 ===============
 */
 bool ConstructionSite::get_building_work(Game & game, Worker & worker, bool) {
-	if (&worker != m_builder.get(game)) {
+	if (&worker != builder_.get(game)) {
 		// Not our construction worker; e.g. a miner leaving a mine
 		// that is supposed to be enhanced. Make him return to a warehouse
 		worker.pop_task(game);
@@ -219,27 +219,27 @@ bool ConstructionSite::get_building_work(Game & game, Worker & worker, bool) {
 		return true;
 	}
 
-	if (!m_work_steps) //  Happens for building without buildcost.
+	if (!work_steps_) //  Happens for building without buildcost.
 		schedule_destroy(game); //  Complete the building immediately.
 
 	// Check if one step has completed
-	if (m_working) {
-		if (static_cast<int32_t>(game.get_gametime() - m_work_steptime) < 0) {
+	if (working_) {
+		if (static_cast<int32_t>(game.get_gametime() - work_steptime_) < 0) {
 			worker.start_task_idle
 				(game,
 				 worker.descr().get_animation("work"),
-				 m_work_steptime - game.get_gametime());
+				 work_steptime_ - game.get_gametime());
 			m_builder_idle = false;
 			return true;
 		} else {
 			//TODO(fweber): cause "construction sounds" to be played -
 			//perhaps dependent on kind of construction?
 
-			++m_work_completed;
-			if (m_work_completed >= m_work_steps)
+			++work_completed_;
+			if (work_completed_ >= work_steps_)
 				schedule_destroy(game);
 
-			m_working = false;
+			working_ = false;
 		}
 	}
 
@@ -252,7 +252,7 @@ bool ConstructionSite::get_building_work(Game & game, Worker & worker, bool) {
 	}
 
 	// Drop all the wares that are too much out to the flag.
-	for (WaresQueue * iqueue: m_wares) {
+	for (WaresQueue * iqueue: wares_) {
 		WaresQueue * queue = iqueue;
 		if (queue->get_filled() > queue->get_max_fill()) {
 			queue->set_filled(queue->get_filled() - 1);
@@ -265,10 +265,10 @@ bool ConstructionSite::get_building_work(Game & game, Worker & worker, bool) {
 	}
 
 	// Check if we've got wares to consume
-	if (m_work_completed < m_work_steps)
+	if (work_completed_ < work_steps_)
 	{
-		for (uint32_t i = 0; i < m_wares.size(); ++i) {
-			WaresQueue & wq = *m_wares[i];
+		for (uint32_t i = 0; i < wares_.size(); ++i) {
+			WaresQueue & wq = *wares_[i];
 
 			if (!wq.get_filled())
 				continue;
@@ -279,8 +279,8 @@ bool ConstructionSite::get_building_work(Game & game, Worker & worker, bool) {
 			//update consumption statistic
 			owner().ware_consumed(wq.get_ware(), 1);
 
-			m_working = true;
-			m_work_steptime = game.get_gametime() + CONSTRUCTIONSITE_STEP_TIME;
+			working_ = true;
+			work_steptime_ = game.get_gametime() + CONSTRUCTIONSITE_STEP_TIME;
 
 			worker.start_task_idle
 				(game, worker.descr().get_animation("work"), CONSTRUCTIONSITE_STEP_TIME);
@@ -308,8 +308,8 @@ void ConstructionSite::wares_queue_callback
 {
 	ConstructionSite & cs = *static_cast<ConstructionSite *>(data);
 
-	if (!cs.m_working)
-		if (Worker * const builder = cs.m_builder.get(game))
+	if (!cs.working_)
+		if (Worker * const builder = cs.builder_.get(game))
 			builder->update_task_buildingwork(game);
 }
 
@@ -323,27 +323,27 @@ void ConstructionSite::draw
 	(const EditorGameBase & game, RenderTarget & dst, const FCoords& coords, const Point& pos)
 {
 	const uint32_t gametime = game.get_gametime();
-	uint32_t tanim = gametime - m_animstart;
+	uint32_t tanim = gametime - animstart_;
 
-	if (coords != m_position)
+	if (coords != position_)
 		return; // draw big buildings only once
 
 	// Draw the construction site marker
 	const RGBColor& player_color = get_owner()->get_playercolor();
-	dst.blit_animation(pos, m_anim, tanim, player_color);
+	dst.blit_animation(pos, anim_, tanim, player_color);
 
 	// Draw the partially finished building
 
 	static_assert(0 <= CONSTRUCTIONSITE_STEP_TIME, "assert(0 <= CONSTRUCTIONSITE_STEP_TIME) failed.");
-	m_info.totaltime = CONSTRUCTIONSITE_STEP_TIME * m_work_steps;
-	m_info.completedtime = CONSTRUCTIONSITE_STEP_TIME * m_work_completed;
+	m_info.totaltime = CONSTRUCTIONSITE_STEP_TIME * work_steps_;
+	m_info.completedtime = CONSTRUCTIONSITE_STEP_TIME * work_completed_;
 
-	if (m_working) {
+	if (working_) {
 		assert
-			(m_work_steptime
+			(work_steptime_
 			 <=
 			 m_info.completedtime + CONSTRUCTIONSITE_STEP_TIME + gametime);
-		m_info.completedtime += CONSTRUCTIONSITE_STEP_TIME + gametime - m_work_steptime;
+		m_info.completedtime += CONSTRUCTIONSITE_STEP_TIME + gametime - work_steptime_;
 	}
 
 	uint32_t anim_idx;

@@ -85,7 +85,7 @@ public:
 	WaresQueue & waresqueue(DescriptionIndex) override;
 
 	void set_building(const BuildingDescr &) override;
-	const BuildingDescr & building() const {return *m_building;}
+	const BuildingDescr & building() const {return *building_;}
 
 	void init   (EditorGameBase &) override;
 	void cleanup(EditorGameBase &) override;

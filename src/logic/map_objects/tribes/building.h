@@ -123,7 +123,7 @@ public:
 	virtual uint32_t get_conquers() const;
 	virtual uint32_t vision_range() const;
 
-	WorkareaInfo m_workarea_info;
+	WorkareaInfo workarea_info_;
 
 	virtual int32_t suitability(const Map &, FCoords) const;
 	const BuildingHints & hints() const {return m_hints;}
@@ -190,7 +190,7 @@ public:
 	Flag & base_flag() override;
 	virtual uint32_t get_playercaps() const;
 
-	virtual Coords get_position() const {return m_position;}
+	virtual Coords get_position() const {return position_;}
 	PositionList get_positions (const EditorGameBase &) const override;
 
 	std::string info_string(const InfoStringFormat& format);
@@ -288,11 +288,11 @@ protected:
 	void set_seeing(bool see);
 
 	UI::Window * m_optionswindow;
-	Coords       m_position;
+	Coords       position_;
 	Flag       * m_flag;
 
-	uint32_t m_anim;
-	int32_t  m_animstart;
+	uint32_t anim_;
+	int32_t  animstart_;
 
 	using LeaveQueue = std::vector<OPtr<Worker>>;
 	LeaveQueue m_leave_queue; //  FIFO queue of workers leaving the building

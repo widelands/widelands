@@ -46,7 +46,7 @@ private:
 	void click_increase();
 
 	InteractiveGameBase & m_igb;
-	Widelands::Building & m_building;
+	Widelands::Building & building_;
 
 	UI::Button m_decrease;
 	UI::Button m_increase;
@@ -59,7 +59,7 @@ SoldierCapacityControl::SoldierCapacityControl
 :
 Box(parent, 0, 0, Horizontal),
 m_igb(igb),
-m_building(building),
+building_(building),
 m_decrease
 	(this, "decrease", 0, 0, 32, 32,
 	 g_gr->images().get("images/ui_basic/but4.png"),
@@ -86,21 +86,21 @@ m_value(this, "199", UI::Align::kCenter)
 
 void SoldierCapacityControl::think()
 {
-	SoldierControl * soldiers = dynamic_cast<SoldierControl *>(&m_building);
+	SoldierControl * soldiers = dynamic_cast<SoldierControl *>(&building_);
 	uint32_t const capacity = soldiers->soldier_capacity();
 	char buffer[sizeof("4294967295")];
 
 	sprintf(buffer, "%2u", capacity);
 	m_value.set_text(buffer);
 
-	bool const can_act = m_igb.can_act(m_building.owner().player_number());
+	bool const can_act = m_igb.can_act(building_.owner().player_number());
 	m_decrease.set_enabled(can_act && soldiers->min_soldier_capacity() < capacity);
 	m_increase.set_enabled(can_act && soldiers->max_soldier_capacity() > capacity);
 }
 
 void SoldierCapacityControl::change_soldier_capacity(int delta)
 {
-	m_igb.game().send_player_change_soldier_capacity(m_building, delta);
+	m_igb.game().send_player_change_soldier_capacity(building_, delta);
 }
 
 void SoldierCapacityControl::click_decrease()
