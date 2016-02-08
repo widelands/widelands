@@ -26,6 +26,7 @@
 
 #include "base/i18n.h"
 #include "editor/editorinteractive.h"
+#include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
 #include "logic/map.h"
 #include "ui_basic/editbox.h"
@@ -57,13 +58,15 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive & parent, bool modal)
 	max_w_(get_inner_w() - 2 * padding_),
 	ok_(
 		this, "ok",
-		padding_, get_inner_h() - padding_ - buth_,
+		UI::g_fh1->fontset().is_rtl() ? padding_ : butw_ + 2 * padding_,
+		get_inner_h() - padding_ - buth_,
 		butw_, buth_,
 		g_gr->images().get("images/ui_basic/but5.png"),
 		_("OK")),
 	cancel_(
 		this, "cancel",
-		butw_ + 2 * padding_, get_inner_h() - padding_ - buth_,
+		UI::g_fh1->fontset().is_rtl() ? butw_ + 2 * padding_ : padding_,
+		get_inner_h() - padding_ - buth_,
 		butw_, buth_,
 		g_gr->images().get("images/ui_basic/but1.png"),
 		_("Cancel")),

@@ -214,9 +214,6 @@ void FullscreenMenuMapSelect::entry_selected()
  * The search starts in \ref curdir_ ("..../maps") and there is no possibility
  * to move further up. If the user moves down into subdirectories, we insert an
  * entry to move back up.
- *
- * \note special case is, if this is a multiplayer game on a dedicated server and
- * the client wants to change the map - in that case the maps available on the server are shown.
  */
 void FullscreenMenuMapSelect::fill_table()
 {
@@ -231,137 +228,66 @@ void FullscreenMenuMapSelect::fill_table()
 		display_type = MapData::DisplayType::kMapnamesLocalized;
 	}
 
-	if (settings_->settings().maps.empty()) {
-		// This is the normal case
+	// This is the normal case
 
-		//  Fill it with all files we find in all directories.
-		FilenameSet files = g_fs->list_directory(curdir_);
+	//  Fill it with all files we find in all directories.
+	FilenameSet files = g_fs->list_directory(curdir_);
 
-		//If we are not at the top of the map directory hierarchy (we're not talking
-		//about the absolute filesystem top!) we manually add ".."
-		if (curdir_ != basedir_) {
-			maps_data_.push_back(MapData::create_parent_dir(curdir_));
-		}
+	//If we are not at the top of the map directory hierarchy (we're not talking
+	//about the absolute filesystem top!) we manually add ".."
+	if (curdir_ != basedir_) {
+		maps_data_.push_back(MapData::create_parent_dir(curdir_));
+	}
 
-		Widelands::Map map; //  MapLoader needs a place to put its preload data
+	Widelands::Map map; //  MapLoader needs a place to put its preload data
 
-		for (const std::string& mapfilename : files) {
-			// Add map file (compressed) or map directory (uncompressed)
-			std::unique_ptr<Widelands::MapLoader> ml = map.get_correct_loader(mapfilename);
-			if (ml != nullptr) {
-				try {
-					map.set_filename(mapfilename);
-					ml->preload_map(true);
-
-					if (!map.get_width() || !map.get_height()) {
-						continue;
-					}
-
-					MapData::MapType maptype;
-					if (map.scenario_types() & scenario_types_) {
-						maptype = MapData::MapType::kScenario;
-					} else if (dynamic_cast<WidelandsMapLoader*>(ml.get())) {
-						maptype = MapData::MapType::kNormal;
-					} else {
-						maptype = MapData::MapType::kSettlers2;
-					}
-
-					MapData mapdata(map, mapfilename, maptype, display_type);
-
-					has_translated_mapname_ =
-							has_translated_mapname_ || (mapdata.name != mapdata.localized_name);
-
-					bool has_all_tags = true;
-					for (std::set<uint32_t>::const_iterator it = req_tags_.begin(); it != req_tags_.end(); ++it)
-						has_all_tags &= mapdata.tags.count(tags_ordered_[*it]);
-					if (!has_all_tags) {
-						continue;
-					}
-					maps_data_.push_back(mapdata);
-				} catch (const std::exception & e) {
-					log("Mapselect: Skip %s due to preload error: %s\n", mapfilename.c_str(), e.what());
-				} catch (...) {
-					log("Mapselect: Skip %s due to unknown exception\n", mapfilename.c_str());
-				}
-			} else if (g_fs->is_directory(mapfilename)) {
-				// Add subdirectory to the list
-				const char* fs_filename = FileSystem::fs_filename(mapfilename.c_str());
-				if (!strcmp(fs_filename, ".") || !strcmp(fs_filename, ".."))
-					continue;
-				maps_data_.push_back(MapData::create_directory(mapfilename));
-			}
-		}
-	} else {
-		//client changing maps on dedicated server
-		for (uint16_t i = 0; i < settings_->settings().maps.size(); ++i) {
-			Widelands::Map map; //  MapLoader needs a place to put its preload data
-
-			const DedicatedMapInfos & dmap = settings_->settings().maps.at(i);
-			const std::string& mapfilename = dmap.path;
-			std::unique_ptr<Widelands::MapLoader> ml(map.get_correct_loader(mapfilename));
-
+	for (const std::string& mapfilename : files) {
+		// Add map file (compressed) or map directory (uncompressed)
+		std::unique_ptr<Widelands::MapLoader> ml = map.get_correct_loader(mapfilename);
+		if (ml != nullptr) {
 			try {
-				if (!ml) {
-					throw wexception("Mapselect: No MapLoader");
-				}
-
 				map.set_filename(mapfilename);
 				ml->preload_map(true);
 
 				if (!map.get_width() || !map.get_height()) {
-					throw wexception("Mapselect: Map has no size");
+					continue;
 				}
 
 				MapData::MapType maptype;
-
 				if (map.scenario_types() & scenario_types_) {
 					maptype = MapData::MapType::kScenario;
 				} else if (dynamic_cast<WidelandsMapLoader*>(ml.get())) {
-					maptype = MapData::MapType::kSettlers2;
-				} else {
 					maptype = MapData::MapType::kNormal;
-				}
-
-				if (map.get_nrplayers() != dmap.players ||
-					 (maptype == MapData::MapType::kScenario) != dmap.scenario) {
-					throw wexception("Mapselect: Number of players or scenario doesn't match");
+				} else {
+					maptype = MapData::MapType::kSettlers2;
 				}
 
 				MapData mapdata(map, mapfilename, maptype, display_type);
 
-				// Finally write the entry to the list
-				maps_data_.push_back(mapdata);
-			} catch (...) {
-				log("Mapselect: Skipped reading locale data for file %s - not valid.\n", mapfilename.c_str());
+				has_translated_mapname_ =
+						has_translated_mapname_ || (mapdata.name != mapdata.localized_name);
 
-				MapData mapdata;
-
-				// Fill in the data we got from the dedicated server
-				mapdata.filename    = mapfilename;
-				mapdata.name        = mapfilename.substr(5, mapfilename.size() - 1);
-				mapdata.authors     = MapAuthorData(_("Nobody"));
-				mapdata.description = _("This map file is not present in your filesystem."
-							" The data shown here was sent by the server.");
-				mapdata.hint        = "";
-				mapdata.nrplayers   = dmap.players;
-				mapdata.width       = 1;
-				mapdata.height      = 0;
-				mapdata.displaytype = display_type;
-
-				if (dmap.scenario) {
-					mapdata.maptype = MapData::MapType::kScenario;
-					mapdata.tags.insert("scenario");
-				} else if (dynamic_cast<WidelandsMapLoader*>(ml.get())) {
-					mapdata.maptype = MapData::MapType::kSettlers2;
-				} else {
-					mapdata.maptype = MapData::MapType::kNormal;
+				bool has_all_tags = true;
+				for (std::set<uint32_t>::const_iterator it = req_tags_.begin(); it != req_tags_.end(); ++it)
+					has_all_tags &= mapdata.tags.count(tags_ordered_[*it]);
+				if (!has_all_tags) {
+					continue;
 				}
-
-				// Finally write the entry to the list
 				maps_data_.push_back(mapdata);
+			} catch (const std::exception & e) {
+				log("Mapselect: Skip %s due to preload error: %s\n", mapfilename.c_str(), e.what());
+			} catch (...) {
+				log("Mapselect: Skip %s due to unknown exception\n", mapfilename.c_str());
 			}
+		} else if (g_fs->is_directory(mapfilename)) {
+			// Add subdirectory to the list
+			const char* fs_filename = FileSystem::fs_filename(mapfilename.c_str());
+			if (!strcmp(fs_filename, ".") || !strcmp(fs_filename, ".."))
+				continue;
+			maps_data_.push_back(MapData::create_directory(mapfilename));
 		}
 	}
+
 	table_.fill(maps_data_, display_type);
 	if (!table_.empty()) {
 		table_.select(0);

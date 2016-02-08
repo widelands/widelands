@@ -27,31 +27,6 @@
 
 namespace  {
 
-const char kDrawLineVertexShader[] = R"(
-#version 120
-
-// Attributes.
-attribute vec3 attr_position;
-attribute vec3 attr_color;
-
-varying vec3 var_color;
-
-void main() {
-	var_color = attr_color;
-	gl_Position = vec4(attr_position, 1.);
-}
-)";
-
-const char kDrawLineFragmentShader[] = R"(
-#version 120
-
-varying vec3 var_color;
-
-void main() {
-	gl_FragColor = vec4(var_color.rgb, 1.);
-}
-)";
-
 struct DrawBatch {
 	int offset;
 	int count;
@@ -67,7 +42,7 @@ DrawLineProgram& DrawLineProgram::instance() {
 }
 
 DrawLineProgram::DrawLineProgram() {
-	gl_program_.build(kDrawLineVertexShader, kDrawLineFragmentShader);
+	gl_program_.build("draw_line");
 
 	attr_position_ = glGetAttribLocation(gl_program_.object(), "attr_position");
 	attr_color_ = glGetAttribLocation(gl_program_.object(), "attr_color");
