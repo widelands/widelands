@@ -45,7 +45,7 @@ MultilineTextarea::MultilineTextarea
 	scrollbar_ (this, get_w() - scrollbar_w(), 0, scrollbar_w(), h, false),
 	scrollmode_(scroll_mode)
 {
-	assert(scrollbar_w() <= w);
+	assert(scrollmode_ == MultilineTextarea::ScrollMode::kNoScrolling || scrollbar_w() <= w);
 	set_thinks(false);
 
 	//  do not allow vertical alignment as it does not make sense
