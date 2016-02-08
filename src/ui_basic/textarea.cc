@@ -112,18 +112,17 @@ void Textarea::set_fontface(UI::FontSet::Face face) {
 
 void Textarea::update()
 {
-	if (layoutmode_ == AutoMove)
-		collapse(); // collapse() implicitly updates
+	if (layoutmode_ == AutoMove) {
+		collapse(); // collapse() implicitly updates the size and position
+	}
 
+	fit_text();
 
-	rendered_text_ = UI::g_fh1->render(
-									as_uifont(text_,
-												 fontsize_ - UI::g_fh1->fontset().size_offset(),
-												 color_, fontface_));
-	if (layoutmode_ == AutoMove)
+	if (layoutmode_ == AutoMove) {
 		expand();
-	else if (layoutmode_ == Layouted)
+	} else if (layoutmode_ == Layouted) {
 		update_desired_size();
+	}
 }
 
 
@@ -147,9 +146,13 @@ const std::string& Textarea::get_text()
 
 /**
  * Set the fixed width. The Textarea will still collapse, but then restore this width when expand() is called.
+ * If this is set, text will also autoshrink to fit the width.
  */
-void Textarea::set_fixed_width(uint32_t w) {
-	fixed_width_ = w;
+void Textarea::set_fixed_width(int w) {
+	if (fixed_width_ != w) {
+		fixed_width_ = w;
+		update();
+	}
 }
 
 
@@ -243,24 +246,12 @@ void Textarea::update_desired_size()
 }
 
 
-void Textarea::fit_text(int max_width, int max_height,
-								int desired_font_size, UI::FontSet::Face desired_fontface) {
+void Textarea::fit_text() {
+	rendered_text_ = UI::g_fh1->render(as_uifont(text_, fontsize_, color_, fontface_));
 
-	constexpr int kMinFontSize = 6;
-	int font_size = desired_font_size;
-	set_fontsize(font_size);
-	set_fontface(desired_fontface);
-
-	while (get_h() > max_height && font_size > kMinFontSize) {
-		--font_size;
-		set_fontsize(font_size);
-	}
-
-	if (get_w() > max_width) {
-		set_fontface(UI::FontSet::Face::kCondensed);
-		while (get_w() > max_width && font_size > kMinFontSize) {
-			--font_size;
-			set_fontsize(font_size);
+	if (fixed_width_ > 0) { // Autofit
+		for (int size = fontsize_; rendered_text_->width() > fixed_width_ && size > kMinimumFontSize; --size) {
+			rendered_text_ = UI::g_fh1->render(as_uifont(text_, size, color_, UI::FontSet::Face::kCondensed));
 		}
 	}
 }

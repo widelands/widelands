@@ -185,7 +185,7 @@ void CategorizedItemSelectionMenu<DescriptionType, ToolType>::update_label() {
 		buf = (boost::format(_("Current: %s …")) % buf).str();
 	} else if (buf.empty()) {
 		/** TRANSLATORS: Help text in an editor tool*/
-		buf = _("Click to select an item to place on the map. You can use the Ctrl key to select multiple items");
+		buf = _("Click to select an item. Use the Ctrl key to select multiple items.");
 	} else {
 		/** TRANSLATORS: %s are the currently selected items in an editor tool*/
 		buf = (boost::format(_("Current: %s")) % buf).str();

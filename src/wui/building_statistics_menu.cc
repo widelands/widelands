@@ -399,10 +399,14 @@ bool BuildingStatisticsMenu::add_button(
 
 	owned_labels_[id] =
 		new UI::Textarea(button_box, 0, 0, kBuildGridCellWidth, kLabelHeight, UI::Align::kCenter);
+	owned_labels_[id]->set_fontsize(kLabelFontSize);
+	owned_labels_[id]->set_fixed_width(kBuildGridCellWidth);
 	button_box->add(owned_labels_[id], UI::Align::kHCenter);
 
 	productivity_labels_[id] =
 		new UI::Textarea(button_box, 0, 0, kBuildGridCellWidth, kLabelHeight, UI::Align::kCenter);
+	productivity_labels_[id]->set_fontsize(kLabelFontSize);
+	productivity_labels_[id]->set_fixed_width(kBuildGridCellWidth);
 	button_box->add(productivity_labels_[id], UI::Align::kHCenter);
 
 	row.add(button_box, UI::Align::kLeft);
@@ -678,7 +682,7 @@ void BuildingStatisticsMenu::update() {
 				/** TRANSLATORS: Percent in building statistics window, e.g. 85% */
 				/** TRANSLATORS: If you wish to add a space, translate as '%i %%' */
 				const std::string perc_str = (boost::format(_("%i%%")) % percent).str();
-				set_labeltext_autosize(productivity_labels_[id], perc_str, color);
+				set_labeltext(productivity_labels_[id], perc_str, color);
 			}
 			if (has_selection_ && id == current_building_type_) {
 				no_unproductive_label_.set_text(nr_unproductive > 0 ? std::to_string(nr_unproductive) :
@@ -708,7 +712,7 @@ void BuildingStatisticsMenu::update() {
 				}
 				const std::string perc_str = (boost::format(_("%1%/%2%")) % total_stationed_soldiers %
 														total_soldier_capacity).str();
-				set_labeltext_autosize(productivity_labels_[id], perc_str, color);
+				set_labeltext(productivity_labels_[id], perc_str, color);
 			}
 			if (has_selection_ && id == current_building_type_) {
 				no_unproductive_label_.set_text(nr_unproductive > 0 ? std::to_string(nr_unproductive) :
@@ -734,7 +738,7 @@ void BuildingStatisticsMenu::update() {
 		} else {
 			owned_text = (boost::format(_("%1%/%2%")) % nr_owned % "–").str();
 		}
-		set_labeltext_autosize(owned_labels_[id], owned_text, UI_FONT_CLR_FG);
+		set_labeltext(owned_labels_[id], owned_text, UI_FONT_CLR_FG);
 		owned_labels_[id]->set_visible((nr_owned + nr_build) > 0);
 
 		building_buttons_[id]->set_enabled((nr_owned + nr_build) > 0);
@@ -760,12 +764,11 @@ void BuildingStatisticsMenu::update() {
 	}
 }
 
-void BuildingStatisticsMenu::set_labeltext_autosize(UI::Textarea* textarea,
+void BuildingStatisticsMenu::set_labeltext(UI::Textarea* textarea,
 																	 const std::string& text,
 																	 const RGBColor& color) {
 	textarea->set_color(color);
 	textarea->set_text(text);
-	textarea->fit_text(kBuildGridCellWidth - 2, kLabelHeight - 2, kLabelFontSize);
 	textarea->set_visible(true);
 }
 
