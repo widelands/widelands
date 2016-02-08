@@ -226,38 +226,12 @@ Default styles
 =============================
 */
 
-
-const TextStyle & TextStyle::ui_big()
-{
-	static TextStyle style;
-
-	style.font = Font::get(UI::g_fh1->fontset().sans(), UI_FONT_SIZE_BIG);
-	style.fg = UI_FONT_CLR_FG;
-	style.bold = true;
-
-	return style;
-}
-
-const TextStyle & TextStyle::ui_small()
-{
-	static TextStyle style;
-
-	style.font = Font::get(UI::g_fh1->fontset().sans(), UI_FONT_SIZE_SMALL);
-	style.fg = UI_FONT_CLR_FG;
-	style.bold = true;
-
-	return style;
-}
-
-const TextStyle & TextStyle::ui_condensed()
-{
-	static TextStyle style;
-
-	style.font = Font::get(UI::g_fh1->fontset().condensed(), UI_FONT_SIZE_SMALL);
-	style.fg = UI_FONT_CLR_FG;
-	style.bold = true;
-
-	return style;
-}
+TextStyle::TextStyle() :
+	font(Font::get(UI::g_fh1->fontset().sans(), UI_FONT_SIZE_SMALL)),
+	fg(UI_FONT_CLR_FG),
+	bold(true),
+	italics(false),
+	underline(false)
+{}
 
 } // namespace UI

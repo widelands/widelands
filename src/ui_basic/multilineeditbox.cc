@@ -104,7 +104,6 @@ MultilineEditbox::Data::Data(MultilineEditbox & o)
 :
 scrollbar(&o, o.get_w() - ms_scrollbar_w, 0, ms_scrollbar_w, o.get_h(), false),
 cursor_pos(0),
-textstyle(UI::TextStyle::ui_small()),
 maxbytes(0xffff),
 ww_valid(false),
 owner(o)

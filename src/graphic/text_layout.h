@@ -88,13 +88,7 @@ namespace UI {
  */
 // TODO(GunChleoc): This struct will disappear with the old font handler
 struct TextStyle {
-	TextStyle() :
-		font(nullptr),
-		fg(255, 255, 255),
-		bold(false),
-		italics(false),
-		underline(false)
-	{}
+	TextStyle();
 
 	static TextStyle makebold(Font * font, RGBColor fg) {
 		TextStyle ts;
@@ -104,9 +98,6 @@ struct TextStyle {
 		return ts;
 	}
 
-	static const TextStyle & ui_big();
-	static const TextStyle & ui_small();
-	static const TextStyle & ui_condensed();
 	uint32_t calc_bare_width(const std::string & text) const;
 	uint32_t calc_width_for_wrapping(const UChar& c) const;
 	uint32_t calc_width_for_wrapping(const std::string & text) const;
