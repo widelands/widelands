@@ -91,13 +91,13 @@ bool CheckStepDefault::allowed
 {
 	NodeCaps const endcaps = end.field->nodecaps();
 
-	if (endcaps & m_movecaps)
+	if (endcaps & movecaps_)
 		return true;
 
 	// Swimming bobs are allowed to move from a water field to a shore field
 	NodeCaps const startcaps = start.field->nodecaps();
 
-	if ((endcaps & MOVECAPS_WALK) && (startcaps & m_movecaps & MOVECAPS_SWIM))
+	if ((endcaps & MOVECAPS_WALK) && (startcaps & movecaps_ & MOVECAPS_SWIM))
 		return true;
 
 	return false;
@@ -107,8 +107,8 @@ bool CheckStepDefault::reachable_dest(Map & map, FCoords const dest) const
 {
 	NodeCaps const caps = dest.field->nodecaps();
 
-	if (!(caps & m_movecaps)) {
-		if (!((m_movecaps & MOVECAPS_SWIM) && (caps & MOVECAPS_WALK)))
+	if (!(caps & movecaps_)) {
+		if (!((movecaps_ & MOVECAPS_SWIM) && (caps & MOVECAPS_WALK)))
 			return false;
 
 		if (!map.can_reach_by_water(dest))
@@ -137,19 +137,19 @@ bool CheckStepWalkOn::allowed
 
 	//  Make sure to not find paths where we walk onto an unwalkable node, then
 	//  then back onto a walkable node.
-	if (!m_onlyend && id != CheckStep::stepFirst && !(startcaps & m_movecaps))
+	if (!onlyend_ && id != CheckStep::stepFirst && !(startcaps & movecaps_))
 		return false;
 
-	if (endcaps & m_movecaps)
+	if (endcaps & movecaps_)
 		return true;
 
 	//  We can't move onto the node using normal rules.
 	// If onlyend is true, exception rules only apply for the last step.
-	if (m_onlyend && id != CheckStep::stepLast)
+	if (onlyend_ && id != CheckStep::stepLast)
 		return false;
 
 	// If the previous field was walkable, we can move onto this one
-	if (startcaps & m_movecaps)
+	if (startcaps & movecaps_)
 		return true;
 
 	return false;
@@ -166,16 +166,16 @@ bool CheckStepRoad::allowed
 	 CheckStep::StepId const id)
 	const
 {
-	uint8_t const endcaps = m_player.get_buildcaps(end);
+	uint8_t const endcaps = player_.get_buildcaps(end);
 
 	// Calculate cost and passability
 	if
-		(!(endcaps & m_movecaps)
+		(!(endcaps & movecaps_)
 		 &&
 		 !
 		 ((endcaps & MOVECAPS_WALK)
 		  &&
-		  (m_player.get_buildcaps(start) & m_movecaps & MOVECAPS_SWIM)))
+		  (player_.get_buildcaps(start) & movecaps_ & MOVECAPS_SWIM)))
 		return false;
 
 	// Check for blocking immovables
@@ -197,8 +197,8 @@ bool CheckStepRoad::reachable_dest(Map & map, FCoords const dest) const
 {
 	NodeCaps const caps = dest.field->nodecaps();
 
-	if (!(caps & m_movecaps)) {
-		if (!((m_movecaps & MOVECAPS_SWIM) && (caps & MOVECAPS_WALK)))
+	if (!(caps & movecaps_)) {
+		if (!((movecaps_ & MOVECAPS_SWIM) && (caps & MOVECAPS_WALK)))
 			return false;
 
 		if (!map.can_reach_by_water(dest))
@@ -212,7 +212,7 @@ bool CheckStepRoad::reachable_dest(Map & map, FCoords const dest) const
 bool CheckStepLimited::allowed
 	(Map &, FCoords, FCoords const end, int32_t, CheckStep::StepId) const
 {
-	return m_allowed_locations.find(end) != m_allowed_locations.end();
+	return allowed_locations_.find(end) != allowed_locations_.end();
 }
 
 bool CheckStepLimited::reachable_dest(Map &, FCoords) const {

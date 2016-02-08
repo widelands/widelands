@@ -1013,7 +1013,7 @@ void Ship::send_message(Game& game,
 										heading,
 	                           rt_description,
 	                           get_position(),
-	                           m_serial);
+	                           serial_);
 
 	get_owner()->add_message(game, *msg);
 }
