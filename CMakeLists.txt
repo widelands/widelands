@@ -243,6 +243,7 @@ install(
     data/i18n
     data/images
     data/scripting
+    data/shaders
     data/tribes
     data/txts
     data/world
