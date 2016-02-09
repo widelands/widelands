@@ -688,7 +688,7 @@ void ProductionSite::act(Game & game, uint32_t const data)
 			if (state.program->size() <= state.ip)
 				return program_end(game, Completed);
 
-			if (m_anim != descr().get_animation(m_default_anim)) {
+			if (anim_ != descr().get_animation(m_default_anim)) {
 				// Restart idle animation, which is the default
 				start_animation(game, descr().get_animation(m_default_anim));
 			}
