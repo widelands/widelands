@@ -247,6 +247,12 @@ void Textarea::update_desired_size()
 void Textarea::render_text() {
 	rendered_text_ = UI::g_fh1->render(as_uifont(text_, fontsize_, color_, fontface_));
 
+	// NOCOM(#codereview): I feel like I saw this loop somewhere else before.
+	// How about pulling this out into an accessible method - I imagine that
+	// we'd like to tweak this to use binary search for finding the right font
+	// size in the future and it would be nice if there is only one place to
+	// change. If I am wrong and this is the only place this logic is moved this
+	// comment is void of course :)
 	if (fixed_width_ > 0) { // Autofit
 		for (int size = fontsize_; rendered_text_->width() > fixed_width_ && size > kMinimumFontSize; --size) {
 			rendered_text_ = UI::g_fh1->render(as_uifont(text_, size, color_, UI::FontSet::Face::kCondensed));
