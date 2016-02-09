@@ -35,7 +35,7 @@ Route IMPLEMENTATION
 */
 
 namespace Widelands {
-Route::Route() : m_totalcost(0)
+Route::Route() : totalcost_(0)
 {}
 
 /**
@@ -44,8 +44,8 @@ Route::Route() : m_totalcost(0)
 */
 void Route::init(int32_t totalcost)
 {
-	m_totalcost = totalcost;
-	m_route.clear();
+	totalcost_ = totalcost;
+	route_.clear();
 }
 
 /**
@@ -56,8 +56,8 @@ void Route::init(int32_t totalcost)
 Flag & Route::get_flag
 	(EditorGameBase & egbase, std::vector<Flag *>::size_type const idx)
 {
-	assert(idx < m_route.size());
-	return *m_route[idx].get(egbase);
+	assert(idx < route_.size());
+	return *route_[idx].get(egbase);
 }
 
 /**
@@ -65,9 +65,9 @@ Flag & Route::get_flag
 */
 void Route::trim_start(int32_t count)
 {
-	assert(count < static_cast<int32_t>(m_route.size()));
+	assert(count < static_cast<int32_t>(route_.size()));
 
-	m_route.erase(m_route.begin(), m_route.begin() + count);
+	route_.erase(route_.begin(), route_.begin() + count);
 }
 
 /**
@@ -75,9 +75,9 @@ void Route::trim_start(int32_t count)
 */
 void Route::truncate(int32_t const count)
 {
-	assert(count < static_cast<int32_t>(m_route.size()));
+	assert(count < static_cast<int32_t>(route_.size()));
 
-	m_route.erase(m_route.begin() + count + 1, m_route.end());
+	route_.erase(route_.begin() + count + 1, route_.end());
 }
 
 
@@ -89,9 +89,9 @@ void Route::truncate(int32_t const count)
  */
 void Route::load(LoadData & data, FileRead & fr)
 {
-	m_route.clear();
+	route_.clear();
 
-	m_totalcost = fr.signed_32();
+	totalcost_ = fr.signed_32();
 	uint32_t nsteps = fr.unsigned_16();
 	for (uint32_t step = 0; step < nsteps; ++step)
 		data.flags.push_back(fr.unsigned_32());
@@ -106,7 +106,7 @@ void Route::load_pointers(const LoadData & data, MapObjectLoader & mol) {
 	for (uint32_t i = 0; i < data.flags.size(); ++i) {
 		uint32_t const flag_serial = data.flags.size();
 		try {
-			m_route.push_back(&mol.get<Flag>(flag_serial));
+			route_.push_back(&mol.get<Flag>(flag_serial));
 		} catch (const WException & e) {
 			throw wexception("Route flag #%u (%u): %s", i, flag_serial, e.what());
 		}
@@ -121,10 +121,10 @@ void Route::save
 	(FileWrite & fw, EditorGameBase & egbase, MapObjectSaver & mos)
 {
 	fw.signed_32(get_totalcost());
-	fw.unsigned_16(m_route.size());
+	fw.unsigned_16(route_.size());
 	for
 		(std::vector<ObjectPointer>::size_type idx = 0;
-		 idx < m_route.size();
+		 idx < route_.size();
 		 ++idx)
 	{
 		Flag & flag = get_flag(egbase, idx);
@@ -140,7 +140,7 @@ void Route::insert_as_first(RoutingNode * node) {
 	// we are sure that node is a Flag, since it is the only
 	// RoutingNode ever used in the path finder (outside tests)
 	// That's why we can make this cast
-	m_route.insert(m_route.begin(), static_cast<Flag *>(node));
+	route_.insert(route_.begin(), static_cast<Flag *>(node));
 }
 
 }

@@ -120,14 +120,14 @@ public:
 	ImmovableDescr(const std::string& init_descname, const LuaTable&, const Tribes& tribes);
 	~ImmovableDescr() override;
 
-	int32_t get_size() const {return m_size;}
+	int32_t get_size() const {return size_;}
 	ImmovableProgram const * get_program(const std::string &) const;
 
 	Immovable & create(EditorGameBase &, Coords) const;
 
 	MapObjectDescr::OwnerType owner_type() const {return owner_type_;}
 
-	const Buildcost & buildcost() const {return m_buildcost;}
+	const Buildcost & buildcost() const {return buildcost_;}
 
 
 	// Returns the editor category.
@@ -142,15 +142,15 @@ public:
 	const TerrainAffinity& terrain_affinity() const;
 
 protected:
-	int32_t     m_size;
-	Programs    m_programs;
+	int32_t     size_;
+	Programs    programs_;
 
 	/// Whether this ImmovableDescr belongs to a tribe or the world
 	const MapObjectDescr::OwnerType owner_type_;
 
 	/// Buildcost for externally constructible immovables (for ship construction)
 	/// \see ActConstruction
-	Buildcost m_buildcost;
+	Buildcost buildcost_;
 
 private:
 	 // Common constructor functions for tribes and world.
@@ -175,10 +175,10 @@ public:
 	Immovable(const ImmovableDescr &);
 	~Immovable();
 
-	Player * get_owner() const {return m_owner;}
+	Player * get_owner() const {return owner_;}
 	void set_owner(Player * player);
 
-	Coords get_position() const {return m_position;}
+	Coords get_position() const {return position_;}
 	PositionList get_positions (const EditorGameBase &) const override;
 
 	int32_t  get_size    () const override;
@@ -187,7 +187,7 @@ public:
 
 	void program_step(Game & game, uint32_t const delay = 1) {
 		if (delay)
-			m_program_step = schedule_act(game, delay);
+			program_step_ = schedule_act(game, delay);
 		increment_program_pointer();
 	}
 
@@ -205,23 +205,23 @@ public:
 	void set_action_data(ImmovableActionData * data);
 	template<typename T>
 	T * get_action_data() {
-		if (!m_action_data)
+		if (!action_data_)
 			return nullptr;
-		if (T * data = dynamic_cast<T *>(m_action_data.get()))
+		if (T * data = dynamic_cast<T *>(action_data_.get()))
 			return data;
 		set_action_data(nullptr);
 		return nullptr;
 	}
 
 protected:
-	Player * m_owner;
-	Coords                   m_position;
+	Player * owner_;
+	Coords                   position_;
 
-	uint32_t                     m_anim;
-	int32_t                      m_animstart;
+	uint32_t                     anim_;
+	int32_t                      animstart_;
 
-	const ImmovableProgram * m_program;
-	uint32_t m_program_ptr; ///< index of next instruction to execute
+	const ImmovableProgram * program_;
+	uint32_t program_ptr_; ///< index of next instruction to execute
 
 /* GCC 4.0 has problems with friend declarations: It doesn't allow
  * substructures of friend classes private access but we rely on this behaviour
@@ -232,23 +232,23 @@ protected:
  */
 #if (__GNUC__ == 4) && (__GNUC_MINOR__ == 0)
 public:
-	uint32_t m_anim_construction_total;
-	uint32_t m_anim_construction_done;
-	int32_t m_program_step;
+	uint32_t anim_construction_total_;
+	uint32_t anim_construction_done_;
+	uint32_t program_step_;
 protected:
 #else
-	uint32_t m_anim_construction_total;
-	uint32_t m_anim_construction_done;
-	uint32_t m_program_step; ///< time of next step
+	uint32_t anim_construction_total_;
+	uint32_t anim_construction_done_;
+	uint32_t program_step_; ///< time of next step
 #endif
-	std::string m_construct_string;
+	std::string construct_string_;
 
 	/**
 	 * Private persistent data for the currently active program action.
 	 *
 	 * \warning Use get_action_data to access this.
 	 */
-	std::unique_ptr<ImmovableActionData> m_action_data;
+	std::unique_ptr<ImmovableActionData> action_data_;
 
         // Load/save support
 protected:
@@ -287,10 +287,10 @@ struct PlayerImmovable : public BaseImmovable {
 	PlayerImmovable(const MapObjectDescr &);
 	virtual ~PlayerImmovable();
 
-	Player * get_owner() const {return m_owner;}
-	Player & owner() const {return *m_owner;}
-	Economy * get_economy() const {return m_economy;}
-	Economy & economy() const {return *m_economy;}
+	Player * get_owner() const {return owner_;}
+	Player & owner() const {return *owner_;}
+	Economy * get_economy() const {return economy_;}
+	Economy & economy() const {return *economy_;}
 
 	virtual Flag & base_flag() = 0;
 
@@ -306,7 +306,7 @@ struct PlayerImmovable : public BaseImmovable {
 	 * immovable. This is not the same as the list of production
 	 * workers returned by \ref ProductionSite::get_production_workers
 	 */
-	const Workers & get_workers() const {return m_workers;}
+	const Workers & get_workers() const {return workers_;}
 
 	void log_general_info(const EditorGameBase &) override;
 
@@ -332,10 +332,10 @@ protected:
 	void cleanup(EditorGameBase &) override;
 
 private:
-	Player              * m_owner;
-	Economy             * m_economy;
+	Player              * owner_;
+	Economy             * economy_;
 
-	Workers   m_workers;
+	Workers   workers_;
 
 	// load/save support
 protected:

@@ -42,26 +42,26 @@ public:
 
 	Building & create_object() const override;
 
-	uint32_t get_conquers() const override {return m_conquer_radius;}
+	uint32_t get_conquers() const override {return conquer_radius_;}
 	uint32_t get_max_number_of_soldiers () const {
-		return m_num_soldiers;
+		return num_soldiers_;
 	}
 	uint32_t get_heal_per_second        () const {
-		return m_heal_per_second;
+		return heal_per_second_;
 	}
 
-	bool     m_prefers_heroes_at_start;
-	std::string m_occupied_str;
-	std::string m_aggressor_str;
-	std::string m_attack_str;
-	std::string m_defeated_enemy_str;
-	std::string m_defeated_you_str;
+	bool     prefers_heroes_at_start_;
+	std::string occupied_str_;
+	std::string aggressor_str_;
+	std::string attack_str_;
+	std::string defeated_enemy_str_;
+	std::string defeated_you_str_;
 
 
 private:
-	uint32_t m_conquer_radius;
-	uint32_t m_num_soldiers;
-	uint32_t m_heal_per_second;
+	uint32_t conquer_radius_;
+	uint32_t num_soldiers_;
+	uint32_t heal_per_second_;
 	DISALLOW_COPY_AND_ASSIGN(MilitarySiteDescr);
 };
 
@@ -115,7 +115,7 @@ public:
 	void set_requirements  (const Requirements &);
 	void clear_requirements();
 	const Requirements & get_requirements () const {
-		return m_soldier_requirements;
+		return soldier_requirements_;
 	}
 
 	void reinit_after_conqueration(Game &);
@@ -124,7 +124,7 @@ public:
 
 	void set_soldier_preference(SoldierPreference);
 	SoldierPreference get_soldier_preference() const {
-			return m_soldier_preference;
+			return soldier_preference_;
 	}
 
 protected:
@@ -153,28 +153,28 @@ private:
 
 
 private:
-	Requirements m_soldier_requirements; // This is used to grab a bunch of soldiers: Anything goes
-	RequireAttribute m_soldier_upgrade_requirements; // This is used when exchanging soldiers.
-	std::unique_ptr<Request> m_normal_soldier_request;  // filling the site
-	std::unique_ptr<Request> m_upgrade_soldier_request; // seeking for better soldiers
-	bool m_didconquer;
-	uint32_t m_capacity;
+	Requirements soldier_requirements_; // This is used to grab a bunch of soldiers: Anything goes
+	RequireAttribute soldier_upgrade_requirements_; // This is used when exchanging soldiers.
+	std::unique_ptr<Request> normal_soldier_request_;  // filling the site
+	std::unique_ptr<Request> upgrade_soldier_request_; // seeking for better soldiers
+	bool didconquer_;
+	uint32_t capacity_;
 
 	/**
 	 * Next gametime where we should heal something.
 	 */
-	int32_t m_nexthealtime;
+	int32_t nexthealtime_;
 
 	struct SoldierJob {
 		Soldier    * soldier;
 		ObjectPointer  enemy;
 		bool        stayhome;
 	};
-	std::vector<SoldierJob> m_soldierjobs;
-	SoldierPreference m_soldier_preference;
-	int32_t m_next_swap_soldiers_time;
-	bool m_soldier_upgrade_try; // optimization -- if everybody is zero-level, do not downgrade
-	bool m_doing_upgrade_request;
+	std::vector<SoldierJob> soldierjobs_;
+	SoldierPreference soldier_preference_;
+	int32_t next_swap_soldiers_time_;
+	bool soldier_upgrade_try_; // optimization -- if everybody is zero-level, do not downgrade
+	bool doing_upgrade_request_;
 };
 
 }

@@ -75,7 +75,7 @@ private:
 	void jump_building(JumpTarget target, bool reverse);
 
 	/// Sets the label for id type to text in the chosen color with dynamic font size
-	void set_labeltext_autosize(UI::Textarea* textarea,
+	void set_labeltext(UI::Textarea* textarea,
 	                            const std::string& text,
 	                            const RGBColor& color);
 

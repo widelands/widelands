@@ -73,7 +73,7 @@ struct Textarea : public Panel {
 	 * Use this if you need a Textarea that keeps changing its contents, but you don't want the
 	 * surrounding elements to shift, e.g. in a Box.
 	 */
-	void set_fixed_width(uint32_t w);
+	void set_fixed_width(int w);
 
 	void set_text(const std::string &);
 	const std::string& get_text();
@@ -81,10 +81,9 @@ struct Textarea : public Panel {
 	// Drawing and event handlers
 	void draw(RenderTarget &) override;
 
-	void set_textstyle(const UI::TextStyle & style);
-	const UI::TextStyle & get_textstyle() const {return textstyle_;}
-
-	void set_font(const std::string & name, int size, RGBColor clr);
+	void set_color(RGBColor color);
+	void set_fontsize(int fontsize);
+	void set_fontface(UI::FontSet::Face face);
 
 protected:
 	void update_desired_size() override;
@@ -99,13 +98,23 @@ private:
 	void init();
 	void collapse();
 	void expand();
+	void update();
+
+	/**
+	 * This rerenders the text. If fixed_width_ is set, it will also use the condensed
+	 * Fontset if needed and then make the text smaller until it fits.
+	 */
+	void render_text();
 
 	LayoutMode layoutmode_;
 	std::string text_;
 	const Image* rendered_text_;
 	Align align_;
-	UI::TextStyle textstyle_;
-	uint32_t fixed_width_;
+	RGBColor color_;
+	int fontsize_;
+	UI::FontSet::Face fontface_;
+
+	int fixed_width_;
 };
 
 }

@@ -3086,7 +3086,7 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 
 	// Get max radius of recursive workarea
 	WorkareaInfo::size_type radius = 0;
-	const WorkareaInfo& workarea_info = site.bo->desc->m_workarea_info;
+	const WorkareaInfo& workarea_info = site.bo->desc->workarea_info_;
 	for (const std::pair<uint32_t, std::set<std::string>>& temp_info : workarea_info) {
 		if (radius < temp_info.first) {
 			radius = temp_info.first;

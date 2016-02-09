@@ -35,7 +35,7 @@ namespace Widelands {
 /**
  * Automatically register with the worker's economy.
  */
-IdleWorkerSupply::IdleWorkerSupply(Worker & w) : m_worker (w), m_economy(nullptr)
+IdleWorkerSupply::IdleWorkerSupply(Worker & w) : worker_ (w), economy_(nullptr)
 {
 	set_economy(w.get_economy());
 }
@@ -55,11 +55,11 @@ IdleWorkerSupply::~IdleWorkerSupply()
  */
 void IdleWorkerSupply::set_economy(Economy * const e)
 {
-	if (m_economy != e) {
-		if (m_economy)
-			m_economy->remove_supply(*this);
-		if ((m_economy = e))
-			m_economy->   add_supply(*this);
+	if (economy_ != e) {
+		if (economy_)
+			economy_->remove_supply(*this);
+		if ((economy_ = e))
+			economy_->   add_supply(*this);
 	}
 }
 
@@ -78,13 +78,13 @@ SupplyProviders IdleWorkerSupply::provider_type(Game *) const
 
 bool IdleWorkerSupply::has_storage() const
 {
-	return m_worker.get_transfer();
+	return worker_.get_transfer();
 }
 
 void IdleWorkerSupply::get_ware_type(WareWorker & type, DescriptionIndex & ware) const
 {
 	type = wwWORKER;
-	ware = m_worker.descr().worker_index();
+	ware = worker_.descr().worker_index();
 }
 
 /**
@@ -92,7 +92,7 @@ void IdleWorkerSupply::get_ware_type(WareWorker & type, DescriptionIndex & ware)
  */
 PlayerImmovable * IdleWorkerSupply::get_position(Game & game)
 {
-	return m_worker.get_location(game);
+	return worker_.get_location(game);
 }
 
 
@@ -100,11 +100,11 @@ uint32_t IdleWorkerSupply::nr_supplies(const Game &, const Request & req) const
 {
 	assert
 		(req.get_type() != wwWORKER ||
-		 m_worker.owner().tribe().has_worker(req.get_index()));
+		 worker_.owner().tribe().has_worker(req.get_index()));
 	if
 		(req.get_type() == wwWORKER &&
-		 m_worker.descr().can_act_as(req.get_index()) &&
-		 req.get_requirements().check(m_worker))
+		 worker_.descr().can_act_as(req.get_index()) &&
+		 req.get_requirements().check(worker_))
 		return 1;
 
 	return 0;
@@ -124,20 +124,20 @@ Worker & IdleWorkerSupply::launch_worker(Game &, const Request & req)
 	if (req.get_type() != wwWORKER)
 		throw wexception("IdleWorkerSupply: not a worker request");
 	if
-		(!m_worker.descr().can_act_as(req.get_index()) ||
-		 !req.get_requirements().check(m_worker))
+		(!worker_.descr().can_act_as(req.get_index()) ||
+		 !req.get_requirements().check(worker_))
 		throw wexception("IdleWorkerSupply: worker type mismatch");
 
-	return m_worker;
+	return worker_;
 }
 
 void IdleWorkerSupply::send_to_storage(Game & game, Warehouse * wh)
 {
 	assert(!has_storage());
 
-	Transfer * t = new Transfer(game, m_worker);
+	Transfer * t = new Transfer(game, worker_);
 	t->set_destination(*wh);
-	m_worker.start_task_transfer(game, t);
+	worker_.start_task_transfer(game, t);
 }
 
 }
