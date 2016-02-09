@@ -74,7 +74,7 @@ public:
 	const std::string& representative_image_filename() const override;
 	virtual void blit(uint32_t time, const Point&, const Rect& srcrc, const RGBColor* clr, Surface*)
 		const override;
-	void trigger_soundfx(uint32_t framenumber, uint32_t stereo_position) const override;
+	void trigger_sound(uint32_t framenumber, uint32_t stereo_position) const override;
 
 
 private:
@@ -251,7 +251,7 @@ uint32_t NonPackedAnimation::current_frame(uint32_t time) const {
 	return 0;
 }
 
-void NonPackedAnimation::trigger_soundfx(uint32_t time, uint32_t stereo_position) const {
+void NonPackedAnimation::trigger_sound(uint32_t time, uint32_t stereo_position) const {
 	if (sound_effect_.empty()) {
 		return;
 	}

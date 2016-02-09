@@ -133,7 +133,7 @@ class ProductionSite : public Building {
 	friend struct ProductionProgram::ActMine;
 	friend struct ProductionProgram::ActCheckSoldier;
 	friend struct ProductionProgram::ActTrain;
-	friend struct ProductionProgram::ActPlayFX;
+	friend struct ProductionProgram::ActPlaySound;
 	friend struct ProductionProgram::ActConstruct;
 	MO_DESCR(ProductionSiteDescr)
 

@@ -967,7 +967,7 @@ bool Worker::run_geologist_find(Game & game, State & state, const Action &)
  * Demand from the g_sound_handler to play a certain sound effect.
  * Whether the effect actually gets played is decided only by the sound server.
  */
-bool Worker::run_playfx(Game & game, State & state, const Action & action)
+bool Worker::run_play_sound(Game & game, State & state, const Action & action)
 {
 	g_sound_handler.play_fx(action.sparam1, get_position(), action.iparam1);
 

@@ -1520,7 +1520,7 @@ void ProductionProgram::ActTrain::execute
 	return ps.program_step(game);
 }
 
-ProductionProgram::ActPlayFX::ActPlayFX(char * parameters) {
+ProductionProgram::ActPlaySound::ActPlaySound(char * parameters) {
 	try {
 		bool reached_end;
 		const std::string& filepath = next_word(parameters, reached_end);
@@ -1543,7 +1543,7 @@ ProductionProgram::ActPlayFX::ActPlayFX(char * parameters) {
 	}
 }
 
-void ProductionProgram::ActPlayFX::execute
+void ProductionProgram::ActPlaySound::execute
 	(Game & game, ProductionSite & ps) const
 {
 	g_sound_handler.play_fx(name, ps.position_, priority);
@@ -1775,7 +1775,7 @@ ProductionProgram::ProductionProgram(const std::string& _name,
 										 new ActTrain(arguments.get())));
 		} else if (boost::iequals(parts[0], "play_sound")) {
 			actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
-										 new ActPlayFX(arguments.get())));
+										 new ActPlaySound(arguments.get())));
 		} else if (boost::iequals(parts[0], "construct")) {
 			actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
 										 new ActConstruct(arguments.get(), _name, building)));

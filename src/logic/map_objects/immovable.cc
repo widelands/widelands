@@ -169,7 +169,7 @@ ImmovableProgram::ImmovableProgram(const std::string& init_name,
 		} else if (parts[0] == "seed") {
 			action = new ActSeed(arguments.get(), *immovable);
 		} else if (parts[0] == "play_sound") {
-			action = new ActPlayFX(arguments.get(), *immovable);
+			action = new ActPlaySound(arguments.get(), *immovable);
 		} else if (parts[0] == "construction") {
 			action = new ActConstruction(arguments.get(), *immovable);
 		} else {
@@ -776,7 +776,7 @@ void ImmovableProgram::ActAnimate::execute
 }
 
 
-ImmovableProgram::ActPlayFX::ActPlayFX(char* parameters, const ImmovableDescr&) {
+ImmovableProgram::ActPlaySound::ActPlaySound(char* parameters, const ImmovableDescr&) {
 	try {
 		bool reached_end;
 		name = next_word(parameters, reached_end);
@@ -802,7 +802,7 @@ ImmovableProgram::ActPlayFX::ActPlayFX(char* parameters, const ImmovableDescr&) 
 /** Demand from the g_sound_handler to play a certain sound effect.
  * Whether the effect actually gets played
  * is decided only by the sound server*/
-void ImmovableProgram::ActPlayFX::execute
+void ImmovableProgram::ActPlaySound::execute
 	(Game & game, Immovable & immovable) const
 {
 	g_sound_handler.play_fx(name, immovable.get_position(), priority);
