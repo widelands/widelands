@@ -121,9 +121,9 @@ BuildingDescr::BuildingDescr
 			//  Merge the enhancements workarea info into this building's
 			//  workarea info.
 			const BuildingDescr * tmp_enhancement = egbase_.tribes().get_building_descr(en_i);
-			for (std::pair<uint32_t, std::set<std::string>> area : tmp_enhancement->m_workarea_info)
+			for (std::pair<uint32_t, std::set<std::string>> area : tmp_enhancement->workarea_info_)
 			{
-				std::set<std::string> & strs = m_workarea_info[area.first];
+				std::set<std::string> & strs = workarea_info_[area.first];
 				for (std::string str : area.second)
 					strs.insert(str);
 			}
@@ -177,7 +177,7 @@ Building & BuildingDescr::create
 	const
 {
 	Building & b = construct ? create_constructionsite() : create_object();
-	b.m_position = pos;
+	b.position_ = pos;
 	b.set_owner(&owner);
 	for (DescriptionIndex idx : former_buildings) {
 		b.m_old_buildings.push_back(idx);
@@ -246,10 +246,10 @@ Building::Building(const BuildingDescr & building_descr) :
 	PlayerImmovable(building_descr),
 	m_optionswindow(nullptr),
 	m_flag         (nullptr),
-	m_anim(0),
-	m_animstart(0),
+	anim_(0),
+	animstart_(0),
 	m_leave_time(0),
-	m_defeating_player(0),
+	defeating_player_(0),
 	m_seeing(false)
 {}
 
@@ -331,8 +331,8 @@ uint32_t Building::get_playercaps() const {
 
 void Building::start_animation(EditorGameBase & egbase, uint32_t const anim)
 {
-	m_anim = anim;
-	m_animstart = egbase.get_gametime();
+	anim_ = anim;
+	animstart_ = egbase.get_gametime();
 }
 
 /*
@@ -349,23 +349,23 @@ void Building::init(EditorGameBase & egbase)
 	Map & map = egbase.map();
 	Coords neighb;
 
-	set_position(egbase, m_position);
+	set_position(egbase, position_);
 
 	if (get_size() == BIG) {
-		map.get_ln(m_position, &neighb);
+		map.get_ln(position_, &neighb);
 		set_position(egbase, neighb);
 
-		map.get_tln(m_position, &neighb);
+		map.get_tln(position_, &neighb);
 		set_position(egbase, neighb);
 
-		map.get_trn(m_position, &neighb);
+		map.get_trn(position_, &neighb);
 		set_position(egbase, neighb);
 	}
 
 	// Make sure the flag is there
 
 
-	map.get_brn(m_position, &neighb);
+	map.get_brn(position_, &neighb);
 	{
 		Flag * flag = dynamic_cast<Flag *>(map.get_immovable(neighb));
 		if (!flag)
@@ -387,8 +387,8 @@ void Building::init(EditorGameBase & egbase)
 
 void Building::cleanup(EditorGameBase & egbase)
 {
-	if (m_defeating_player) {
-		Player & defeating_player = egbase.player(m_defeating_player);
+	if (defeating_player_) {
+		Player & defeating_player = egbase.player(defeating_player_);
 		if (descr().get_conquers()) {
 			owner()         .count_msite_lost        ();
 			defeating_player.count_msite_defeated    ();
@@ -402,19 +402,19 @@ void Building::cleanup(EditorGameBase & egbase)
 	m_flag->detach_building(egbase);
 
 	// Unset the building
-	unset_position(egbase, m_position);
+	unset_position(egbase, position_);
 
 	if (get_size() == BIG) {
 		Map & map = egbase.map();
 		Coords neighb;
 
-		map.get_ln(m_position, &neighb);
+		map.get_ln(position_, &neighb);
 		unset_position(egbase, neighb);
 
-		map.get_tln(m_position, &neighb);
+		map.get_tln(position_, &neighb);
 		unset_position(egbase, neighb);
 
-		map.get_trn(m_position, &neighb);
+		map.get_trn(position_, &neighb);
 		unset_position(egbase, neighb);
 	}
 
@@ -447,18 +447,18 @@ BaseImmovable::PositionList Building::get_positions
 {
 	PositionList rv;
 
-	rv.push_back(m_position);
+	rv.push_back(position_);
 	if (get_size() == BIG) {
 		Map & map = egbase.map();
 		Coords neighb;
 
-		map.get_ln(m_position, &neighb);
+		map.get_ln(position_, &neighb);
 		rv.push_back(neighb);
 
-		map.get_tln(m_position, &neighb);
+		map.get_tln(position_, &neighb);
 		rv.push_back(neighb);
 
-		map.get_trn(m_position, &neighb);
+		map.get_trn(position_, &neighb);
 		rv.push_back(neighb);
 	}
 	return rv;
@@ -474,7 +474,7 @@ applicable.
 void Building::destroy(EditorGameBase & egbase)
 {
 	const bool fire           = burn_on_destroy();
-	const Coords pos          = m_position;
+	const Coords pos          = position_;
 	PlayerImmovable::destroy(egbase);
 	// We are deleted. Only use stack variables beyond this point
 	if (fire)
@@ -647,9 +647,9 @@ Draw the building.
 void Building::draw
 	(const EditorGameBase& game, RenderTarget& dst, const FCoords& coords, const Point& pos)
 {
-	if (coords == m_position) { // draw big buildings only once
+	if (coords == position_) { // draw big buildings only once
 		dst.blit_animation(
-		   pos, m_anim, game.get_gametime() - m_animstart, get_owner()->get_playercolor());
+			pos, anim_, game.get_gametime() - animstart_, get_owner()->get_playercolor());
 
 		//  door animation?
 
@@ -744,14 +744,14 @@ void Building::set_priority
 void Building::log_general_info(const EditorGameBase & egbase) {
 	PlayerImmovable::log_general_info(egbase);
 
-	molog("m_position: (%i, %i)\n", m_position.x, m_position.y);
+	molog("position: (%i, %i)\n", position_.x, position_.y);
 	molog("m_flag: %p\n", m_flag);
 	molog
 		("* position: (%i, %i)\n",
 		 m_flag->get_position().x, m_flag->get_position().y);
 
-	molog("m_anim: %s\n", descr().get_animation_name(m_anim).c_str());
-	molog("m_animstart: %i\n", m_animstart);
+	molog("anim: %s\n", descr().get_animation_name(anim_).c_str());
+	molog("animstart: %i\n", animstart_);
 
 	molog("m_leave_time: %i\n", m_leave_time);
 

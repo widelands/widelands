@@ -68,7 +68,7 @@ DismantleSite::DismantleSite
 :
 PartiallyFinishedBuilding(gdescr)
 {
-	m_position = c;
+	position_ = c;
 	set_owner(&plr);
 
 	assert(!former_buildings.empty());
@@ -233,15 +233,15 @@ void DismantleSite::draw
 	(const EditorGameBase& game, RenderTarget& dst, const FCoords& coords, const Point& pos)
 {
 	const uint32_t gametime = game.get_gametime();
-	uint32_t tanim = gametime - m_animstart;
+	uint32_t tanim = gametime - animstart_;
 
-	if (coords != m_position)
+	if (coords != position_)
 		return; // draw big buildings only once
 
 	const RGBColor& player_color = get_owner()->get_playercolor();
 
 	// Draw the construction site marker
-	dst.blit_animation(pos, m_anim, tanim, player_color);
+	dst.blit_animation(pos, anim_, tanim, player_color);
 
 	// Draw the partially dismantled building
 	static_assert(0 <= DISMANTLESITE_STEP_TIME, "assert(0 <= DISMANTLESITE_STEP_TIME) failed.");

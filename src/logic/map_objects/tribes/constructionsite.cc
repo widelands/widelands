@@ -159,7 +159,7 @@ void ConstructionSite::cleanup(EditorGameBase & egbase)
 		DescriptionIndex becomes_idx = owner().tribe().building_index(m_building->name());
 		m_old_buildings.push_back(becomes_idx);
 		Building & b =
-			m_building->create(egbase, owner(), m_position, false, false, m_old_buildings);
+			m_building->create(egbase, owner(), position_, false, false, m_old_buildings);
 		if (Worker * const builder = m_builder.get(egbase)) {
 			builder->reset_tasks(dynamic_cast<Game&>(egbase));
 			builder->set_location(&b);
@@ -323,14 +323,14 @@ void ConstructionSite::draw
 	(const EditorGameBase & game, RenderTarget & dst, const FCoords& coords, const Point& pos)
 {
 	const uint32_t gametime = game.get_gametime();
-	uint32_t tanim = gametime - m_animstart;
+	uint32_t tanim = gametime - animstart_;
 
-	if (coords != m_position)
+	if (coords != position_)
 		return; // draw big buildings only once
 
 	// Draw the construction site marker
 	const RGBColor& player_color = get_owner()->get_playercolor();
-	dst.blit_animation(pos, m_anim, tanim, player_color);
+	dst.blit_animation(pos, anim_, tanim, player_color);
 
 	// Draw the partially finished building
 

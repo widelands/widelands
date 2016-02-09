@@ -59,7 +59,7 @@ MilitarySiteDescr::MilitarySiteDescr(const std::string& init_descname,
 	m_heal_per_second     = table.get_int("heal_per_second");
 
 	if (m_conquer_radius > 0)
-		m_workarea_info[m_conquer_radius].insert(descname() + " conquer");
+		workarea_info_[m_conquer_radius].insert(descname() + " conquer");
 	m_prefers_heroes_at_start = table.get_bool("prefer_heroes");
 
 	std::unique_ptr<LuaTable> items_table = table.get_table("messages");
@@ -202,7 +202,7 @@ void MilitarySite::cleanup(EditorGameBase & egbase)
 			 	(owner().player_number(),
 			 	 Area<FCoords>
 			 	 	(egbase.map().get_fcoords(get_position()), descr().get_conquers())),
-			 m_defeating_player);
+			 defeating_player_);
 
 	Building::cleanup(egbase);
 
