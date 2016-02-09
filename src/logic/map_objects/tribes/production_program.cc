@@ -1539,7 +1539,7 @@ ProductionProgram::ActPlayFX::ActPlayFX(char * parameters) {
 
 		g_sound_handler.load_fx_if_needed(filepath, filename, name);
 	} catch (const WException & e) {
-		throw GameDataError("playFX: %s", e.what());
+		throw GameDataError("play_sound: %s", e.what());
 	}
 }
 
@@ -1773,7 +1773,7 @@ ProductionProgram::ProductionProgram(const std::string& _name,
 		} else if (boost::iequals(parts[0], "train")) {
 			actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
 										 new ActTrain(arguments.get())));
-		} else if (boost::iequals(parts[0], "playFX")) {
+		} else if (boost::iequals(parts[0], "play_sound")) {
 			actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
 										 new ActPlayFX(arguments.get())));
 		} else if (boost::iequals(parts[0], "construct")) {

@@ -48,7 +48,7 @@ const WorkerProgram::ParseMap WorkerProgram::parsemap_[] = {
 	{"geologist",         &WorkerProgram::parse_geologist},
 	{"geologist-find",    &WorkerProgram::parse_geologist_find},
 	{"scout",             &WorkerProgram::parse_scout},
-	{"playFX",            &WorkerProgram::parse_play_fx},
+	{"play_sound",            &WorkerProgram::parse_play_fx},
 	{"construct",         &WorkerProgram::parse_construct},
 
 	{nullptr, nullptr}
@@ -567,7 +567,7 @@ void WorkerProgram::parse_scout(Worker::Action* act, const std::vector<std::stri
 void WorkerProgram::parse_play_fx(Worker::Action* act, const std::vector<std::string>& cmd)
 {
 	if (cmd.size() < 3 || cmd.size() > 4)
-		throw wexception("Usage: playFX <fx_dir> <fx_name> [priority]");
+		throw wexception("Usage: play_sound <fx_dir> <fx_name> [priority]");
 
 	act->sparam1 = cmd[1] + "/" + cmd[2];
 

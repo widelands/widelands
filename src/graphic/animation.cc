@@ -96,7 +96,7 @@ private:
 	vector<const Image*> pcmasks_;
 
 	// name of sound effect that will be played at frame 0.
-	// TODO(sirver): this should be done using playFX in a program instead of
+	// TODO(sirver): this should be done using play_sound in a program instead of
 	// binding it to the animation.
 	string sound_effect_;
 	bool play_once_;

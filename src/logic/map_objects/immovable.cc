@@ -168,7 +168,7 @@ ImmovableProgram::ImmovableProgram(const std::string& init_name,
 			action = new ActRemove(arguments.get(), *immovable);
 		} else if (parts[0] == "seed") {
 			action = new ActSeed(arguments.get(), *immovable);
-		} else if (parts[0] == "playFX") {
+		} else if (parts[0] == "play_sound") {
 			action = new ActPlayFX(arguments.get(), *immovable);
 		} else if (parts[0] == "construction") {
 			action = new ActConstruction(arguments.get(), *immovable);
@@ -795,7 +795,7 @@ ImmovableProgram::ActPlayFX::ActPlayFX(char* parameters, const ImmovableDescr&) 
 													 FileSystem::fs_filename(name.c_str()),
 													 name);
 	} catch (const WException & e) {
-		throw GameDataError("playFX: %s", e.what());
+		throw GameDataError("play_sound: %s", e.what());
 	}
 }
 
