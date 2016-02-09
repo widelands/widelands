@@ -20,6 +20,7 @@
 #include "wui/login_box.h"
 
 #include "base/i18n.h"
+#include "graphic/font_handler1.h"
 #include "profile/profile.h"
 #include "ui_basic/button.h"
 #include "ui_basic/messagebox.h"
@@ -54,14 +55,20 @@ Window(&parent, "login_box", 0, 0, 500, 220, _("Metaserver login"))
 
 	UI::Button * loginbtn = new UI::Button
 		(this, "login",
-		 (get_inner_w() / 2 - 200) / 2, get_inner_h() - 20 - margin,
+		 UI::g_fh1->fontset()->is_rtl() ?
+			 (get_inner_w() / 2 - 200) / 2 :
+			 (get_inner_w() / 2 - 200) / 2 + get_inner_w() / 2,
+		 get_inner_h() - 20 - margin,
 		 200, 20,
 		 g_gr->images().get("images/ui_basic/but5.png"),
 		 _("Login"));
 	loginbtn->sigclicked.connect(boost::bind(&LoginBox::clicked_ok, boost::ref(*this)));
 	UI::Button * cancelbtn = new UI::Button
 		(this, "cancel",
-		 (get_inner_w() / 2 - 200) / 2 + get_inner_w() / 2, loginbtn->get_y(), 200, 20,
+		 UI::g_fh1->fontset()->is_rtl() ?
+			 (get_inner_w() / 2 - 200) / 2 + get_inner_w() / 2 :
+			 (get_inner_w() / 2 - 200) / 2,
+		 loginbtn->get_y(), 200, 20,
 		 g_gr->images().get("images/ui_basic/but1.png"),
 		 _("Cancel"));
 	cancelbtn->sigclicked.connect(boost::bind(&LoginBox::clicked_back, boost::ref(*this)));

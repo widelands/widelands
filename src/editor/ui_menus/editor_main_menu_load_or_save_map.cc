@@ -25,6 +25,7 @@
 #include "base/i18n.h"
 #include "base/wexception.h"
 #include "editor/editorinteractive.h"
+#include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
 #include "io/filesystem/filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
@@ -50,7 +51,7 @@ MainMenuLoadOrSaveMap::MainMenuLoadOrSaveMap(EditorInteractive& parent,
 		  this, right_column_x_, tabley_, get_inner_w() - right_column_x_ - padding_, tableh_),
      ok_(this,
          "ok",
-         get_inner_w() / 2 - butw_ - padding_,
+			UI::g_fh1->fontset()->is_rtl() ? get_inner_w() / 2 - butw_ - padding_ : get_inner_w() / 2 + padding_,
          get_inner_h() - padding_ - buth_,
          butw_,
          buth_,
@@ -58,7 +59,9 @@ MainMenuLoadOrSaveMap::MainMenuLoadOrSaveMap(EditorInteractive& parent,
          _("OK")),
      cancel_(this,
              "cancel",
-             get_inner_w() / 2 + padding_,
+				 UI::g_fh1->fontset()->is_rtl() ?
+					 get_inner_w() / 2 + padding_ :
+					 get_inner_w() / 2 - butw_ - padding_,
              get_inner_h() - padding_ - buth_,
              butw_,
              buth_,

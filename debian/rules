@@ -1,7 +1,5 @@
 #!/usr/bin/make -f
 
-# NOCOM review this
-
 # Hardening flags
 CPPFLAGS:=$(shell dpkg-buildflags --get CPPFLAGS)
 CFLAGS:=$(shell dpkg-buildflags --get CFLAGS) $(CPPFLAGS)
@@ -17,6 +15,7 @@ override_dh_auto_configure:
 	  dh_auto_configure -Scmake -- \
 		-DWL_INSTALL_BASEDIR=/usr/share/games/widelands \
 		-DWL_INSTALL_DATADIR=/usr/share/games/widelands/data \
+		-DOPTION_USE_GLBINDING:BOOL=ON \
 		-DCMAKE_BUILD_TYPE=Release
 
 override_dh_strip:

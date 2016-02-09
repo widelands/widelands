@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006, 2008-2011, 2015 by the Widelands Development Team
+ * Copyright (C) 2002-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -75,13 +75,13 @@ struct BaseListselect : public Panel {
 
 	void set_entry_color(uint32_t, RGBColor);
 
-	uint32_t size () const {return m_entry_records.size ();}
-	bool     empty() const {return m_entry_records.empty();}
+	uint32_t size () const {return entry_records_.size ();}
+	bool     empty() const {return entry_records_.empty();}
 
 	uint32_t operator[](const uint32_t i) const
 	{
 		assert(i < size());
-		return m_entry_records[i]->m_entry;
+		return entry_records_[i]->entry_;
 	}
 
 	static uint32_t no_selection_index()
@@ -91,7 +91,7 @@ struct BaseListselect : public Panel {
 
 	uint32_t selection_index() const
 	{
-		return m_selection;
+		return selection_;
 	}
 
 	void select(uint32_t i);
@@ -123,7 +123,7 @@ private:
 	static const int32_t ms_darken_value = -20;
 
 	struct EntryRecord {
-		uint32_t m_entry;
+		uint32_t entry_;
 		bool use_clr;
 		RGBColor clr;
 		const Image* pic;
@@ -132,17 +132,17 @@ private:
 	};
 	using EntryRecordDeque = std::deque<EntryRecord *>;
 
-	uint32_t m_max_pic_width;
-	uint32_t m_lineheight;
-	EntryRecordDeque m_entry_records;
-	Scrollbar m_scrollbar;
-	uint32_t m_scrollpos;         //  in pixels
-	uint32_t m_selection;
-	uint32_t m_last_click_time;
-	uint32_t m_last_selection;  // for double clicks
-	bool m_show_check; //  show a green arrow left of selected element
-	const Image* m_check_pic;
-	std::string m_current_tooltip;
+	uint32_t max_pic_width_;
+	uint32_t lineheight_;
+	EntryRecordDeque entry_records_;
+	Scrollbar scrollbar_;
+	uint32_t scrollpos_;         //  in pixels
+	uint32_t selection_;
+	uint32_t last_click_time_;
+	uint32_t last_selection_;  // for double clicks
+	bool show_check_; //  show a green arrow left of selected element
+	const Image* check_pic_;
+	std::string current_tooltip_;
 };
 
 template<typename Entry>
@@ -162,8 +162,8 @@ struct Listselect : public BaseListselect {
 		 const bool select_this = false,
 		 const std::string & tooltip_text = std::string())
 	{
-		m_entry_cache.push_back(value);
-		BaseListselect::add(name, m_entry_cache.size() - 1, pic, select_this, tooltip_text);
+		entry_cache_.push_back(value);
+		BaseListselect::add(name, entry_cache_.size() - 1, pic, select_this, tooltip_text);
 	}
 	void add_front
 		(const std::string& name,
@@ -172,22 +172,22 @@ struct Listselect : public BaseListselect {
 		 const bool select_this = false,
 		 const std::string & tooltip_text = std::string())
 	{
-		m_entry_cache.push_front(value);
+		entry_cache_.push_front(value);
 		BaseListselect::add_front(name, pic, select_this, tooltip_text);
 	}
 
 	const Entry & operator[](uint32_t const i) const
 	{
-		return m_entry_cache[BaseListselect::operator[](i)];
+		return entry_cache_[BaseListselect::operator[](i)];
 	}
 
 	const Entry & get_selected() const
 	{
-		return m_entry_cache[BaseListselect::get_selected()];
+		return entry_cache_[BaseListselect::get_selected()];
 	}
 
 private:
-	std::deque<Entry> m_entry_cache;
+	std::deque<Entry> entry_cache_;
 };
 
 /**

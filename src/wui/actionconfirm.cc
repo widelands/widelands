@@ -23,6 +23,7 @@
 
 #include "base/macros.h"
 #include "economy/economy.h"
+#include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
 #include "logic/map_objects/tribes/building.h"
 #include "logic/map_objects/tribes/ship.h"
@@ -153,7 +154,7 @@ ActionConfirm::ActionConfirm
 	UI::Button * okbtn =
 		new UI::Button
 			(this, "ok",
-			 6, 80, 80, 34,
+			 UI::g_fh1->fontset()->is_rtl() ? 6 : 114, 80, 80, 34,
 			 g_gr->images().get("images/ui_basic/but4.png"),
 			 g_gr->images().get("images/wui/menu_okay.png"));
 	okbtn->sigclicked.connect(boost::bind(&ActionConfirm::ok, this));
@@ -161,7 +162,7 @@ ActionConfirm::ActionConfirm
 	UI::Button * cancelbtn =
 		new UI::Button
 			(this, "abort",
-			 114, 80, 80, 34,
+			 UI::g_fh1->fontset()->is_rtl() ? 114 : 6, 80, 80, 34,
 			 g_gr->images().get("images/ui_basic/but4.png"),
 			 g_gr->images().get("images/wui/menu_abort.png"));
 	cancelbtn->sigclicked.connect(boost::bind(&ActionConfirm::die, this));

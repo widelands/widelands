@@ -49,8 +49,8 @@ struct WLWarning : public std::exception {
 
 protected:
 	WLWarning() {}
-	std::string m_what;
-	std::string m_title;
+	std::string what_;
+	std::string title_;
 };
 
 #endif  // end of include guard: WL_BASE_WARNING_H

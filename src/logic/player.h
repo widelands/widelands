@@ -613,7 +613,7 @@ private:
 	 */
 	std::vector< std::vector<uint32_t> > m_ware_stocks;
 
-	PlayerBuildingStats m_building_stats;
+	PlayerBuildingStats building_stats_;
 
 	DISALLOW_COPY_AND_ASSIGN(Player);
 };

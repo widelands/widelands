@@ -372,15 +372,15 @@ void Map::set_origin(Coords const new_origin) {
 		for (c.x = 0; c.x < m_width; ++c.x, ++c.field) {
 			assert(c.field == &operator[] (c));
 			if (upcast(Immovable, immovable, c.field->get_immovable()))
-				immovable->m_position = c;
+				immovable->position_ = c;
 			for
 				(Bob * bob = c.field->get_first_bob();
 				 bob;
 				 bob = bob->get_next_bob())
 			{
-				bob->m_position.x     = c.x;
-				bob->m_position.y     = c.y;
-				bob->m_position.field = c.field;
+				bob->position_.x     = c.x;
+				bob->position_.y     = c.y;
+				bob->position_.field = c.field;
 			}
 		}
 
@@ -1854,9 +1854,10 @@ int32_t Map::change_terrain
 	Notifications::publish(
 	   NoteFieldTerrainChanged{c, static_cast<MapIndex>(c.field - &m_fields[0])});
 
-	recalc_for_field_area(world, Area<FCoords>(c, 2));
-
-	return 2;
+	// Changing the terrain can affect ports, which can be up to 3 fields away.
+	constexpr int kPotentiallyAffectedNeighbors = 3;
+	recalc_for_field_area(world, Area<FCoords>(c, kPotentiallyAffectedNeighbors));
+	return kPotentiallyAffectedNeighbors;
 }
 
 bool Map::is_resource_valid

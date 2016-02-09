@@ -44,8 +44,8 @@ struct IdleWorkerSupply : public Supply {
 	Worker & launch_worker(Game &, const Request &) override;
 
 private:
-	Worker  & m_worker;
-	Economy * m_economy;
+	Worker  & worker_;
+	Economy * economy_;
 };
 
 }

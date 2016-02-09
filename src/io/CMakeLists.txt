@@ -44,16 +44,3 @@ wl_library(io_filesystem
     io_stream
     third_party_minizip
 )
-
-
-wl_library(io_dedicated_log
-  SRCS
-    dedicated_log.h
-    dedicated_log.cc
-  DEPENDS
-    base_i18n
-    base_log
-    chat
-    io_fileread
-    io_filesystem
-)

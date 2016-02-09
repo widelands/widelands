@@ -20,6 +20,7 @@
 #include "editor/ui_menus/editor_main_menu_save_map_make_directory.h"
 
 #include "base/i18n.h"
+#include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
 
 MainMenuSaveMapMakeDirectory::MainMenuSaveMapMakeDirectory
@@ -35,13 +36,15 @@ MainMenuSaveMapMakeDirectory::MainMenuSaveMapMakeDirectory
 	edit_(&vbox_, 0, 0, get_inner_w() - 2 * padding_, g_gr->images().get("images/ui_basic/but1.png")),
 	ok_button_(
 		this, "ok",
-		padding_, get_inner_h() - padding_ - buth_,
+		UI::g_fh1->fontset()->is_rtl() ? padding_ : get_inner_w() - butw_ - padding_,
+		get_inner_h() - padding_ - buth_,
 		butw_, buth_,
 		g_gr->images().get("images/ui_basic/but5.png"),
 		_("OK")),
 	cancel_button_(
 		this, "cancel",
-		get_inner_w() - butw_ - padding_, get_inner_h() - padding_ - buth_,
+		UI::g_fh1->fontset()->is_rtl() ?get_inner_w() - butw_ - padding_ : padding_,
+		get_inner_h() - padding_ - buth_,
 		butw_, buth_,
 		g_gr->images().get("images/ui_basic/but1.png"),
 		_("Cancel")) {

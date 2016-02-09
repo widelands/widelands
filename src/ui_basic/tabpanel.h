@@ -22,6 +22,8 @@
 
 #include <vector>
 
+#include <boost/signals2.hpp>
+
 #include "ui_basic/panel.h"
 
 namespace UI {
@@ -113,6 +115,8 @@ struct TabPanel : public Panel {
 	void activate(uint32_t idx);
 	void activate(const std::string &);
 	uint32_t active() {return active_;}
+
+	boost::signals2::signal<void ()> sigclicked;
 
 protected:
 	void layout() override;

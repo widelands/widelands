@@ -107,12 +107,12 @@ FontCache::~FontCache() {
 }
 
 IFont& FontCache::get_font(NodeStyle* ns) {
-	if (ns->font_face == "serif") {
+	if (ns->font_face == "condensed") {
+		ns->font_face = ns->fontset->condensed();
+	} else if (ns->font_face == "serif") {
 		ns->font_face = ns->fontset->serif();
 	} else if (ns->font_face == "sans") {
 		ns->font_face = ns->fontset->sans();
-	} else if (ns->font_face == "condensed") {
-		ns->font_face = ns->fontset->condensed();
 	}
 	const bool is_bold = ns->font_style & IFont::BOLD;
 	const bool is_italic = ns->font_style & IFont::ITALIC;
@@ -147,10 +147,8 @@ IFont& FontCache::get_font(NodeStyle* ns) {
 		} else {
 			ns->font_face = ns->fontset->sans_italic();
 		}
-		// NOCOM ns->font_style &= ~IFont::ITALIC;
+		// ns->font_style &= ~IFont::ITALIC;
 	}
-
-	log("NOCOM font face is %s\n", ns->font_face.c_str());
 
 	uint16_t font_size = ns->font_size + ns->fontset->size_offset();
 
@@ -163,8 +161,8 @@ IFont& FontCache::get_font(NodeStyle* ns) {
 	try {
 		font.reset(load_font(ns->font_face, font_size));
 	} catch (FileNotFoundError& e) {
-		log("Font file not found. Falling back to serif: %s\n%s\n", ns->font_face.c_str(), e.what());
-		font.reset(load_font(ns->fontset->serif(), font_size));
+		log("Font file not found. Falling back to sans: %s\n%s\n", ns->font_face.c_str(), e.what());
+		font.reset(load_font(ns->fontset->sans(), font_size));
 	}
 	assert(font != nullptr);
 
@@ -1163,7 +1161,7 @@ TagHandler* create_taghandler(Tag& tag, FontCache& fc, NodeStyle& ns, ImageCache
 Renderer::Renderer(ImageCache* image_cache, TextureCache* texture_cache, const UI::FontSets& fontsets) :
 	font_cache_(new FontCache()), parser_(new Parser()),
 	image_cache_(image_cache), texture_cache_(texture_cache), fontsets_(fontsets),
-	renderer_style_("serif", 16, INFINITE_WIDTH, INFINITE_WIDTH) {
+	renderer_style_("sans", 16, INFINITE_WIDTH, INFINITE_WIDTH) {
 	TextureCache* render
 		(const std::string&, uint16_t, const TagSet&);
 }

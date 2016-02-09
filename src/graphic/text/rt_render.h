@@ -58,7 +58,7 @@ struct RendererStyle {
  * Fonts in our sense are defined by the general font shape (given by the font
  * name) and the size of the font. Note that Bold and Italic are special in the
  * regard that we expect that this is already handled by the Font File, so, the
- * font loader directly loads DejaVuSerif-Bold.ttf for example.
+ * font loader directly loads DejaVuSans-Bold.ttf for example.
  */
 class IFont {
 public:

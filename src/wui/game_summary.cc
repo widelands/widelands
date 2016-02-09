@@ -122,7 +122,7 @@ game_(parent->game())
 	players_table_->add_column(100, _("Time"));
 
 	// Prepare Elements
-	title_area_->set_textstyle(UI::TextStyle::ui_big());
+	title_area_->set_fontsize(UI_FONT_SIZE_BIG);
 
 	// Connections
 	continue_button_->sigclicked.connect

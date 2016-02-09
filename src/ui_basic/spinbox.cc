@@ -110,7 +110,7 @@ SpinBox::SpinBox
 	uint32_t actual_w = std::max(w, unit_w);
 	uint32_t no_padding = (is_big ? 6 : 4);
 	// Give some height margin = 2 to keep the label from generating a scrollbar.
-	uint32_t texth = UI::g_fh1->render(as_uifont("."))->height() + 2;
+	uint32_t texth = UI::g_fh1->render(as_uifont(UI::g_fh1->fontset()->representative_character()))->height() + 2;
 	uint32_t buttonh = 20;
 
 	// 40 is an ad hoc width estimate for the MultilineTextarea scrollbar + a bit of text.
@@ -187,7 +187,7 @@ SpinBox::SpinBox
 		sbi_->text->set_fixed_width(unit_w
 											 - 2 * sbi_->button_ten_plus->get_w()
 											 - 2 * sbi_->button_minus->get_w()
-											 - 4 * padding);
+											 - 2 * padding);
 
 		box_->add(sbi_->button_ten_minus, UI::Align::kTop);
 		box_->add(sbi_->button_minus, UI::Align::kTop);
@@ -195,7 +195,7 @@ SpinBox::SpinBox
 		box_->add(sbi_->button_plus, UI::Align::kTop);
 		box_->add(sbi_->button_ten_plus, UI::Align::kTop);
 	} else {
-		sbi_->text->set_fixed_width(unit_w - 2 * sbi_->button_minus->get_w() - 2 * padding);
+		sbi_->text->set_fixed_width(unit_w - 2 * sbi_->button_minus->get_w());
 
 		box_->add(sbi_->button_minus, UI::Align::kHCenter);
 		box_->add(sbi_->text, UI::Align::kHCenter);

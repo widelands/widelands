@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006, 2008 by the Widelands Development Team
+ * Copyright (C) 2002-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -73,7 +73,7 @@ struct Textarea : public Panel {
 	 * Use this if you need a Textarea that keeps changing its contents, but you don't want the
 	 * surrounding elements to shift, e.g. in a Box.
 	 */
-	void set_fixed_width(uint32_t w);
+	void set_fixed_width(int w);
 
 	void set_text(const std::string &);
 	const std::string& get_text();
@@ -81,10 +81,9 @@ struct Textarea : public Panel {
 	// Drawing and event handlers
 	void draw(RenderTarget &) override;
 
-	void set_textstyle(const UI::TextStyle & style);
-	const UI::TextStyle & get_textstyle() const {return m_textstyle;}
-
-	void set_font(const std::string & name, int size, RGBColor clr);
+	void set_color(RGBColor color);
+	void set_fontsize(int fontsize);
+	void set_fontface(UI::FontSet::Face face);
 
 protected:
 	void update_desired_size() override;
@@ -99,13 +98,23 @@ private:
 	void init();
 	void collapse();
 	void expand();
+	void update();
 
-	LayoutMode m_layoutmode;
-	std::string m_text;
+	/**
+	 * This rerenders the text. If fixed_width_ is set, it will also use the condensed
+	 * Fontset if needed and then make the text smaller until it fits.
+	 */
+	void render_text();
+
+	LayoutMode layoutmode_;
+	std::string text_;
 	const Image* rendered_text_;
-	Align m_align;
-	UI::TextStyle m_textstyle;
-	uint32_t fixed_width_;
+	Align align_;
+	RGBColor color_;
+	int fontsize_;
+	UI::FontSet::Face fontface_;
+
+	int fixed_width_;
 };
 
 }

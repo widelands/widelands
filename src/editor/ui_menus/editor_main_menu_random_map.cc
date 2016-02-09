@@ -46,7 +46,7 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent) :
 	// UI elements
 	margin_(4),
 	box_width_(get_inner_w() -  2 * margin_),
-	label_height_(UI::g_fh1->render(as_uifont("."))->height() + 2),
+	label_height_(UI::g_fh1->render(as_uifont(UI::g_fh1->fontset()->representative_character()))->height() + 2),
 	box_(this, margin_, margin_, UI::Box::Vertical, 0, 0, margin_),
 	// Size
 	width_(&box_, 0, 0, box_width_, box_width_ / 3,
@@ -292,8 +292,13 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent) :
 	// ---------- "Generate Map" button ----------
 	cancel_button_.sigclicked.connect(boost::bind(&MainMenuNewRandomMap::clicked_cancel, this));
 	ok_button_.sigclicked.connect(boost::bind(&MainMenuNewRandomMap::clicked_create_map, this));
-	button_box_.add(&cancel_button_, UI::Align::kLeft);
-	button_box_.add(&ok_button_, UI::Align::kLeft);
+	if (UI::g_fh1->fontset()->is_rtl()) {
+		button_box_.add(&ok_button_, UI::Align::kLeft);
+		button_box_.add(&cancel_button_, UI::Align::kLeft);
+	} else {
+		button_box_.add(&cancel_button_, UI::Align::kLeft);
+		button_box_.add(&ok_button_, UI::Align::kLeft);
+	}
 	box_.add(&button_box_, UI::Align::kLeft);
 	box_height += margin_ + button_box_.get_h();
 	box_height += 6 * margin_;
@@ -419,7 +424,7 @@ void MainMenuNewRandomMap::clicked_create_map() {
 		dynamic_cast<EditorInteractive&>(*get_parent());
 	Widelands::EditorGameBase & egbase = eia.egbase();
 	Widelands::Map              & map    = egbase.map();
-	UI::ProgressWindow loader;
+	UI::ProgressWindow loader_ui;
 
 	egbase.cleanup_for_load();
 
@@ -444,11 +449,11 @@ void MainMenuNewRandomMap::clicked_create_map() {
 		_("No Name"),
 		g_options.pull_section("global").get_string("realname", pgettext("map_name", "Unknown")),
 		sstrm.str().c_str());
-	loader.step(_("Generating random map..."));
+	loader_ui.step(_("Generating random map..."));
 	gen.create_random_map();
 
 	egbase.postload     ();
-	egbase.load_graphics(loader);
+	egbase.load_graphics(loader_ui);
 
 	map.recalc_whole_map(egbase.world());
 	eia.map_changed(EditorInteractive::MapWas::kReplaced);
