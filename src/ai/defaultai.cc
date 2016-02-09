@@ -4377,8 +4377,8 @@ bool DefaultAI::check_trainingsites(uint32_t gametime) {
 		}
 
 		// Has any soldier been trained up to now?
-		if (gametime > 10 * 60 * 1000 && persistent_data->last_soldier_trained < gametime){
-			if (persistent_data->last_soldier_trained + 10 * 60 * 1000 < gametime){
+		if (gametime > 10 * 60 * 1000 && persistent_data->last_soldier_trained < gametime) {
+			if (persistent_data->last_soldier_trained + 10 * 60 * 1000 < gametime) {
 				if (shortage <= 3) {
 					game().send_player_change_soldier_capacity(*ts, 1);
 				}
@@ -5491,7 +5491,7 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 			}
 	}
 	// Also we should have at least some training sites to be more willing to attack
-	// Of course, very weak AI can have only one trainingsite so will be allways penalted by this
+	// Of course, very weak AI can have only one trainingsite so will be allways penalized by this
 	switch (ts_basic_count_ + ts_advanced_count_ - ts_without_trainers_) {
 		case 0:
 			training_score -= 6;
