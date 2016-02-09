@@ -104,14 +104,14 @@ const MethodType<LuaPanel> LuaPanel::Methods[] = {
 
 		(RO) An :class:`array` of all visible buttons inside this Panel.
 */
-static void _put_all_visible_buttons_into_table
+static void put_all_visible_buttons_into_table
 	(lua_State * L, UI::Panel * g)
 {
 	if (!g) return;
 
 	for (UI::Panel * f = g->get_first_child(); f; f = f->get_next_sibling())
 	{
-		_put_all_visible_buttons_into_table(L, f);
+		put_all_visible_buttons_into_table(L, f);
 
 		if (upcast(UI::Button, b, f))
 			if (b->is_visible()) {
@@ -125,7 +125,7 @@ int LuaPanel::get_buttons(lua_State * L) {
 	assert(m_panel);
 
 	lua_newtable(L);
-	_put_all_visible_buttons_into_table(L, m_panel);
+	put_all_visible_buttons_into_table(L, m_panel);
 
 	return 1;
 }
@@ -135,14 +135,14 @@ int LuaPanel::get_buttons(lua_State * L) {
 
 		(RO) An :class:`array` of all visible tabs inside this Panel.
 */
-static void _put_all_tabs_into_table
+static void put_all_tabs_into_table
 	(lua_State * L, UI::Panel * g)
 {
 	if (!g) return;
 
 	for (UI::Panel * f = g->get_first_child(); f; f = f->get_next_sibling())
 	{
-		_put_all_tabs_into_table(L, f);
+		put_all_tabs_into_table(L, f);
 
 		if (upcast(UI::TabPanel, t, f))
 			for (UI::Tab* tab : t->tabs()) {
@@ -156,7 +156,7 @@ int LuaPanel::get_tabs(lua_State * L) {
 	assert(m_panel);
 
 	lua_newtable(L);
-	_put_all_tabs_into_table(L, m_panel);
+	put_all_tabs_into_table(L, m_panel);
 
 	return 1;
 }
@@ -168,14 +168,14 @@ int LuaPanel::get_tabs(lua_State * L) {
 		(RO) A :class:`array` of all currently open windows that are
 			children of this Panel.
 */
-static void _put_all_visible_windows_into_table
+static void put_all_visible_windows_into_table
 	(lua_State * L, UI::Panel * g)
 {
 	if (!g) return;
 
 	for (UI::Panel * f = g->get_first_child(); f; f = f->get_next_sibling())
 	{
-		_put_all_visible_windows_into_table(L, f);
+		put_all_visible_windows_into_table(L, f);
 
 		if (upcast(UI::Window, win, f)) {
 			lua_pushstring(L, win->get_name());
@@ -188,7 +188,7 @@ int LuaPanel::get_windows(lua_State * L) {
 	assert(m_panel);
 
 	lua_newtable(L);
-	_put_all_visible_windows_into_table(L, m_panel);
+	put_all_visible_windows_into_table(L, m_panel);
 
 	return 1;
 }

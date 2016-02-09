@@ -440,7 +440,7 @@ struct ProductionProgram {
 		uint8_t        m_distance; // width/radius of mine
 		uint8_t        m_max;  // Can work up to this percent (of total mountain resources)
 		uint8_t        m_chance; // odds of finding resources from empty mine
-		uint8_t        m_training; // probability of training in _empty_ mines
+		uint8_t        m_training; // probability of training in empty mines
 	};
 
 	struct ActCheckSoldier : public Action {
@@ -510,8 +510,8 @@ struct ProductionProgram {
 		uint32_t radius;
 	};
 
-	ProductionProgram(const std::string& _name,
-							const std::string& _descname,
+	ProductionProgram(const std::string& init_name,
+							const std::string& init_descname,
 							std::unique_ptr<LuaTable> actions_table,
 							const EditorGameBase& egbase,
 							ProductionSiteDescr* building);

@@ -60,12 +60,12 @@ using Widelands::Building;
 using Widelands::Map;
 
 InteractivePlayer::InteractivePlayer
-	(Widelands::Game        &       _game,
+	(Widelands::Game        &       g,
 	 Section                &       global_s,
 	 Widelands::PlayerNumber const plyn,
 	 bool                     const multiplayer)
 	:
-	InteractiveGameBase (_game, global_s, NONE, multiplayer, multiplayer),
+	InteractiveGameBase (g, global_s, NONE, multiplayer, multiplayer),
 	auto_roadbuild_mode_(global_s.get_bool("auto_roadbuild_mode", true)),
 	flag_to_connect_(Widelands::Coords::null()),
 

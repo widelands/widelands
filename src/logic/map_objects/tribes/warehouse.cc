@@ -291,7 +291,7 @@ Warehouse::~Warehouse()
  * Try to bring the given \ref PlannedWorkers up to date with our game data.
  * Return \c false if \p pw cannot be salvaged.
  */
-bool Warehouse::_load_finish_planned_worker(PlannedWorkers & pw)
+bool Warehouse::load_finish_planned_worker(PlannedWorkers & pw)
 {
 	const TribeDescr& tribe = owner().tribe();
 
@@ -351,7 +351,7 @@ bool Warehouse::_load_finish_planned_worker(PlannedWorkers & pw)
 		}
 
 		log
-			("_load_finish_planned_worker: old savegame: "
+			("load_finish_planned_worker: old savegame: "
 			 "need to create new request for '%s'\n",
 			 cost_it->first.c_str());
 		pw.requests.insert
@@ -361,7 +361,7 @@ bool Warehouse::_load_finish_planned_worker(PlannedWorkers & pw)
 
 	while (pw.requests.size() > idx) {
 		log
-			("_load_finish_planned_worker: old savegame: "
+			("load_finish_planned_worker: old savegame: "
 			 "removing outdated request.\n");
 		delete pw.requests.back();
 		pw.requests.pop_back();
@@ -401,7 +401,7 @@ void Warehouse::load_finish(EditorGameBase & egbase) {
 	{
 		uint32_t pwidx = 0;
 		while (pwidx < m_planned_workers.size()) {
-			if (!_load_finish_planned_worker(m_planned_workers[pwidx])) {
+			if (!load_finish_planned_worker(m_planned_workers[pwidx])) {
 				m_planned_workers[pwidx].cleanup();
 				m_planned_workers.erase(m_planned_workers.begin() + pwidx);
 			} else {
@@ -723,7 +723,7 @@ void Warehouse::act(Game & game, uint32_t const data)
 	// check because whether we suddenly can produce a requested worker. This
 	// is mostly previously available wares may become unavailable due to
 	// secondary requests.
-	_update_all_planned_workers(game);
+	update_all_planned_workers(game);
 
 	Building::act(game, data);
 }
@@ -1024,7 +1024,7 @@ void Warehouse::request_cb
 		// This ware may be used to build planned workers,
 		// so it seems like a good idea to update the associated requests
 		// and use the ware before it is sent away again.
-		wh._update_all_planned_workers(game);
+		wh.update_all_planned_workers(game);
 	}
 }
 
@@ -1110,7 +1110,7 @@ void Warehouse::create_worker(Game & game, DescriptionIndex const worker) {
 	// Update PlannedWorkers::amount here if appropriate, because this function
 	// may have been called directly by the Economy.
 	// Do not update anything else about PlannedWorkers here, because this
-	// function is called by _update_planned_workers, so avoid recursion
+	// function is called by update_planned_workers, so avoid recursion
 	for (PlannedWorkers& planned_worker : m_planned_workers) {
 		if (planned_worker.index == worker && planned_worker.amount)
 			planned_worker.amount--;
@@ -1153,7 +1153,7 @@ std::vector<uint32_t> Warehouse::calc_available_for_worker
 				available.push_back(get_workers().stock(id_w));
 			} else
 				throw wexception
-					("Economy::_create_requested_worker: buildcost inconsistency '%s'",
+					("Economy::create_requested_worker: buildcost inconsistency '%s'",
 					 input_name.c_str());
 		}
 	}
@@ -1219,14 +1219,14 @@ void Warehouse::plan_workers(Game & game, DescriptionIndex index, uint32_t amoun
 	}
 
 	pw->amount = amount;
-	_update_planned_workers(game, *pw);
+	update_planned_workers(game, *pw);
 }
 
 /**
  * See if we can create the workers of the given plan,
  * and update requests accordingly.
  */
-void Warehouse::_update_planned_workers
+void Warehouse::update_planned_workers
 	(Game & game, Warehouse::PlannedWorkers & pw)
 {
 	const WorkerDescr & w_desc = *owner().tribe().get_worker_descr(pw.index);
@@ -1250,7 +1250,7 @@ void Warehouse::_update_planned_workers
 			supply = m_supply->stock_workers(id_w);
 			} else
 				throw wexception
-					("_update_planned_workers: bad buildcost '%s'", input_name.c_str());
+					("update_planned_workers: bad buildcost '%s'", input_name.c_str());
 		}
 		if (supply >= pw.amount * buildcost.second)
 			pw.requests[idx]->set_count(0);
@@ -1272,11 +1272,11 @@ void Warehouse::_update_planned_workers
  * Needs to be called periodically, because some necessary supplies might arrive
  * due to idle transfers instead of by explicit request.
  */
-void Warehouse::_update_all_planned_workers(Game & game)
+void Warehouse::update_all_planned_workers(Game & game)
 {
 	uint32_t idx = 0;
 	while (idx < m_planned_workers.size()) {
-		_update_planned_workers(game, m_planned_workers[idx]);
+		update_planned_workers(game, m_planned_workers[idx]);
 
 		if (!m_planned_workers[idx].amount) {
 			m_planned_workers[idx].cleanup();

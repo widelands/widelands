@@ -29,8 +29,8 @@ namespace Widelands {
 
 struct CmdLuaCoroutine : public GameLogicCommand {
 	CmdLuaCoroutine() : GameLogicCommand(0), m_cr(nullptr) {} // For savegame loading
-	CmdLuaCoroutine(uint32_t const _duetime, LuaCoroutine * const cr) :
-		GameLogicCommand(_duetime), m_cr(cr) {}
+	CmdLuaCoroutine(uint32_t const init_duetime, LuaCoroutine * const cr) :
+		GameLogicCommand(init_duetime), m_cr(cr) {}
 
 	~CmdLuaCoroutine() {
 		delete m_cr;

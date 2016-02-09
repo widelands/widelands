@@ -72,7 +72,7 @@ WidelandsMapLoader::~WidelandsMapLoader() {
 
 /**
  * Preloads a map so that the map class returns valid data for all it's
- * get_info() functions (_width, _nrplayers..)
+ * get_info() functions (width, nrplayers..)
  */
 int32_t WidelandsMapLoader::preload_map(bool const scenario) {
 	assert(get_state() != STATE_LOADED);

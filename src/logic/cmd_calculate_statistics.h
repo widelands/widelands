@@ -28,8 +28,8 @@ namespace Widelands {
 
 struct CmdCalculateStatistics : public GameLogicCommand {
 	CmdCalculateStatistics() : GameLogicCommand(0) {} // For savegame loading
-	CmdCalculateStatistics(uint32_t const _duetime) :
-		GameLogicCommand(_duetime) {}
+	CmdCalculateStatistics(uint32_t const init_duetime) :
+		GameLogicCommand(init_duetime) {}
 
 	// Write these commands to a file (for savegames)
 	void write(FileWrite &, EditorGameBase &, MapObjectSaver  &) override;

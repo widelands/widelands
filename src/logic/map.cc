@@ -574,8 +574,8 @@ void Map::delete_tag(const std::string& tag) {
 }
 
 NodeCaps Map::get_max_nodecaps(const World& world, FCoords & fc) {
-	NodeCaps caps = _calc_nodecaps_pass1(world, fc, false);
-	caps = _calc_nodecaps_pass2(world, fc, false, caps);
+	NodeCaps caps = calc_nodecaps_pass1(world, fc, false);
+	caps = calc_nodecaps_pass2(world, fc, false, caps);
 	return caps;
 }
 
@@ -1003,10 +1003,10 @@ above recalc_brightness.
 ===============
 */
 void Map::recalc_nodecaps_pass1(const World& world, FCoords const f) {
-	f.field->caps = _calc_nodecaps_pass1(world, f, true);
+	f.field->caps = calc_nodecaps_pass1(world, f, true);
 }
 
-NodeCaps Map::_calc_nodecaps_pass1(const World& world, FCoords const f, bool consider_mobs) {
+NodeCaps Map::calc_nodecaps_pass1(const World& world, FCoords const f, bool consider_mobs) {
 	uint8_t caps = CAPS_NONE;
 
 	// 1a) Get all the neighbours to make life easier
@@ -1116,10 +1116,10 @@ Important: flag buildability has already been checked in the first pass.
 ===============
 */
 void Map::recalc_nodecaps_pass2(const World& world, const FCoords & f) {
-	f.field->caps = _calc_nodecaps_pass2(world, f, true);
+	f.field->caps = calc_nodecaps_pass2(world, f, true);
 }
 
-NodeCaps Map::_calc_nodecaps_pass2
+NodeCaps Map::calc_nodecaps_pass2
 	(const World& world, FCoords const f, bool consider_mobs, NodeCaps initcaps)
 {
 	uint8_t caps = consider_mobs ? f.field->caps : static_cast<uint8_t>(initcaps);
@@ -1136,7 +1136,7 @@ NodeCaps Map::_calc_nodecaps_pass2
 			(!br.field->get_immovable() || br.field->get_immovable()->descr().type() != MapObjectType::FLAG))
 			return static_cast<NodeCaps>(caps);
 	} else {
-		if (!(_calc_nodecaps_pass1(world, br, false) & BUILDCAPS_FLAG))
+		if (!(calc_nodecaps_pass1(world, br, false) & BUILDCAPS_FLAG))
 			return static_cast<NodeCaps>(caps);
 	}
 

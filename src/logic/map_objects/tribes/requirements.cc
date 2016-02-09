@@ -67,16 +67,16 @@ void Requirements::write
 }
 
 RequirementsStorage::RequirementsStorage
-	(uint32_t const _id, Reader const reader)
-	: m_id(_id), m_reader(reader)
+	(uint32_t const init_id, Reader const init_reader)
+	: m_id(init_id), m_reader(init_reader)
 {
 	StorageMap & s = storageMap();
 
-	assert(0 < _id);
-	assert    (_id < 65535);
-	assert(s.find(_id) == s.end());
+	assert(0 < init_id);
+	assert    (init_id < 65535);
+	assert(s.find(init_id) == s.end());
 
-	s.insert(std::make_pair(_id, this));
+	s.insert(std::make_pair(init_id, this));
 }
 
 uint32_t RequirementsStorage::id() const

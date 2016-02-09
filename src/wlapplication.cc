@@ -516,7 +516,7 @@ void WLApplication::handle_input(InputCallback const * cb)
 			break;
 		case SDL_MOUSEBUTTONDOWN:
 		case SDL_MOUSEBUTTONUP:
-			_handle_mousebutton(ev, cb);
+			handle_mousebutton(ev, cb);
 			break;
 		case SDL_MOUSEWHEEL:
 			if (cb && cb->mouse_wheel) {
@@ -543,7 +543,7 @@ void WLApplication::handle_input(InputCallback const * cb)
 /*
  * Capsule repetitive code for mouse buttons
  */
-void WLApplication::_handle_mousebutton
+void WLApplication::handle_mousebutton
 	(SDL_Event & ev, InputCallback const * cb)
 {
 		if (mouse_swapped_) {

@@ -475,8 +475,8 @@ private:
 	void recalc_brightness(FCoords);
 	void recalc_nodecaps_pass1(const World& world, FCoords);
 	void recalc_nodecaps_pass2(const World& world, const FCoords & f);
-	NodeCaps _calc_nodecaps_pass1(const World& world, FCoords, bool consider_mobs = true);
-	NodeCaps _calc_nodecaps_pass2(const World& world,
+	NodeCaps calc_nodecaps_pass1(const World& world, FCoords, bool consider_mobs = true);
+	NodeCaps calc_nodecaps_pass2(const World& world,
 	                              FCoords,
 	                              bool consider_mobs = true,
 	                              NodeCaps initcaps = CAPS_NONE);

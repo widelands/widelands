@@ -252,9 +252,9 @@ private:
 		(Game &, Request &, DescriptionIndex, Worker *, PlayerImmovable &);
 	void check_remove_stock(Game &);
 
-	bool _load_finish_planned_worker(PlannedWorkers & pw);
-	void _update_planned_workers(Game &, PlannedWorkers & pw);
-	void _update_all_planned_workers(Game &);
+	bool load_finish_planned_worker(PlannedWorkers & pw);
+	void update_planned_workers(Game &, PlannedWorkers & pw);
+	void update_all_planned_workers(Game &);
 
 	WarehouseSupply       * m_supply;
 
