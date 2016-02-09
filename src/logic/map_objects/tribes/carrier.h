@@ -48,7 +48,7 @@ struct Carrier : public Worker {
 	MO_DESCR(CarrierDescr)
 
 	Carrier(const CarrierDescr & carrier_descr)
-		: Worker(carrier_descr), m_promised_pickup_to(NOONE)
+		: Worker(carrier_descr), promised_pickup_to_(NOONE)
 	{}
 	virtual ~Carrier() {}
 
@@ -86,7 +86,7 @@ private:
 	static const int32_t NOONE = -1;
 	static const int32_t START_FLAG = 0;
 	static const int32_t END_FLAG = 1;
-	int32_t m_promised_pickup_to;
+	int32_t promised_pickup_to_;
 
 	// saving and loading
 protected:

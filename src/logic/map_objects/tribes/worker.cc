@@ -953,7 +953,7 @@ bool Worker::run_geologist_find(Game & game, State & state, const Action &)
 							  rdescr->descname(),
 							  message,
 							  position,
-							  m_serial),
+							  serial_),
 					 300000, 8);
 		}
 	}
@@ -1300,7 +1300,7 @@ DescriptionIndex Worker::level(Game & game) {
 	const TribeDescr & t = owner().tribe();
 	DescriptionIndex const old_index = t.worker_index(descr().name());
 	DescriptionIndex const new_index = descr().becomes();
-	m_descr = t.get_worker_descr(new_index);
+	descr_ = t.get_worker_descr(new_index);
 	assert(t.has_worker(new_index));
 
 	// Inform the economy, that something has changed
@@ -1846,7 +1846,7 @@ void Worker::return_update(Game & game, State & state)
 				 _("Worker got lost!"),
 				 message,
 				 get_position()),
-				 m_serial);
+				 serial_);
 		set_location(nullptr);
 		return pop_task(game);
 	}

@@ -96,7 +96,7 @@ public:
 	Economy(Player &);
 	~Economy();
 
-	Player & owner() const {return m_owner;}
+	Player & owner() const {return owner_;}
 
 	static void check_merge(Flag &, Flag &);
 	static void check_split(Flag &, Flag &);
@@ -113,7 +113,7 @@ public:
 		 uint32_t cost_cutoff = 0,
 		 const WarehouseAcceptFn & acceptfn = WarehouseAcceptFn());
 
-	std::vector<Flag *>::size_type get_nrflags() const {return m_flags.size();}
+	std::vector<Flag *>::size_type get_nrflags() const {return flags_.size();}
 	void    add_flag(Flag &);
 	void remove_flag(Flag &);
 
@@ -132,7 +132,7 @@ public:
 
 	void    add_warehouse(Warehouse &);
 	void remove_warehouse(Warehouse &);
-	const std::vector<Warehouse *>& warehouses() const {return m_warehouses;}
+	const std::vector<Warehouse *>& warehouses() const {return warehouses_;}
 
 	void    add_request(Request &);
 	void remove_request(Request &);
@@ -142,10 +142,10 @@ public:
 
 	/// information about this economy
 	WareList::WareCount stock_ware  (DescriptionIndex const i) {
-		return m_wares  .stock(i);
+		return wares_  .stock(i);
 	}
 	WareList::WareCount stock_worker(DescriptionIndex const i) {
-		return m_workers.stock(i);
+		return workers_.stock(i);
 	}
 
 	/// Whether the economy needs more of this ware type.
@@ -159,25 +159,25 @@ public:
 	bool needs_worker(DescriptionIndex) const;
 
 	const TargetQuantity & ware_target_quantity  (DescriptionIndex const i) const {
-		return m_ware_target_quantities[i];
+		return ware_target_quantities_[i];
 	}
 	TargetQuantity       & ware_target_quantity  (DescriptionIndex const i)       {
-		return m_ware_target_quantities[i];
+		return ware_target_quantities_[i];
 	}
 	const TargetQuantity & worker_target_quantity(DescriptionIndex const i) const {
-		return m_worker_target_quantities[i];
+		return worker_target_quantities_[i];
 	}
 	TargetQuantity       & worker_target_quantity(DescriptionIndex const i)       {
-		return m_worker_target_quantities[i];
+		return worker_target_quantities_[i];
 	}
 
 	void show_options_window();
 	UI::UniqueWindow::Registry& optionswindow_registry() {
-		return m_optionswindow_registry;
+		return optionswindow_registry_;
 	}
 
-	const WareList & get_wares  () const {return m_wares;}
-	const WareList & get_workers() const {return m_workers;}
+	const WareList & get_wares  () const {return wares_;}
+	const WareList & get_workers() const {return workers_;}
 
 	///< called by \ref Cmd_Call_Economy_Balance
 	void balance(uint32_t timerid);
@@ -227,32 +227,32 @@ private:
 /*************/
 	using RequestList = std::vector<Request *>;
 
-	Player & m_owner;
+	Player & owner_;
 
 	using Flags = std::vector<Flag *>;
-	Flags m_flags;
-	WareList m_wares;     ///< virtual storage with all wares in this Economy
-	WareList m_workers;   ///< virtual storage with all workers in this Economy
-	std::vector<Warehouse *> m_warehouses;
+	Flags flags_;
+	WareList wares_;     ///< virtual storage with all wares in this Economy
+	WareList workers_;   ///< virtual storage with all workers in this Economy
+	std::vector<Warehouse *> warehouses_;
 
-	RequestList m_requests; ///< requests
-	SupplyList m_supplies;
+	RequestList requests_; ///< requests
+	SupplyList supplies_;
 
-	TargetQuantity        * m_ware_target_quantities;
-	TargetQuantity        * m_worker_target_quantities;
-	Router                 * m_router;
+	TargetQuantity        * ware_target_quantities_;
+	TargetQuantity        * worker_target_quantities_;
+	Router                 * router_;
 
 	using SplitPair = std::pair<OPtr<Flag>, OPtr<Flag>>;
-	std::vector<SplitPair> m_split_checks;
+	std::vector<SplitPair> split_checks_;
 
 	/**
 	 * ID for the next request balancing timer. Used to throttle
 	 * excessive calls to the request/supply balancing logic.
 	 */
-	uint32_t m_request_timerid;
+	uint32_t request_timerid_;
 
-	static std::unique_ptr<Soldier> m_soldier_prototype;
-	UI::UniqueWindow::Registry m_optionswindow_registry;
+	static std::unique_ptr<Soldier> soldier_prototype_;
+	UI::UniqueWindow::Registry optionswindow_registry_;
 
 	// 'list' of unique providers
 	std::map<UniqueDistance, Supply*> available_supplies;

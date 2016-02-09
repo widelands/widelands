@@ -63,13 +63,13 @@ public:
 	~WareInstance();
 
 	MapObject* get_location(EditorGameBase& egbase) {
-		return m_location.get(egbase);
+		return location_.get(egbase);
 	}
 	Economy* get_economy() const {
-		return m_economy;
+		return economy_;
 	}
 	DescriptionIndex descr_index() const {
-		return m_descr_index;
+		return descr_index_;
 	}
 
 	void init(EditorGameBase&) override;
@@ -90,19 +90,19 @@ public:
 	void set_transfer(Game&, Transfer&);
 	void cancel_transfer(Game&);
 	Transfer* get_transfer() const {
-		return m_transfer;
+		return transfer_;
 	}
 
 	void log_general_info(const EditorGameBase& egbase) override;
 
 private:
-	ObjectPointer m_location;
-	Economy* m_economy;
-	DescriptionIndex m_descr_index;
+	ObjectPointer location_;
+	Economy* economy_;
+	DescriptionIndex descr_index_;
 
-	IdleWareSupply* m_supply;
-	Transfer* m_transfer;
-	ObjectPointer m_transfer_nextstep;  ///< cached PlayerImmovable, can be 0
+	IdleWareSupply* supply_;
+	Transfer* transfer_;
+	ObjectPointer transfer_nextstep_;  ///< cached PlayerImmovable, can be 0
 
 	// loading and saving stuff
 protected:
@@ -114,9 +114,9 @@ protected:
 		void load_finish() override;
 
 	private:
-		uint32_t m_location;
-		uint32_t m_transfer_nextstep;
-		Transfer::ReadData m_transfer;
+		uint32_t location_;
+		uint32_t transfer_nextstep_;
+		Transfer::ReadData transfer_;
 	};
 
 public:

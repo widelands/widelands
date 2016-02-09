@@ -33,13 +33,13 @@ namespace Widelands {
 /*************************************************************************/
 /*                         Router Implementation                         */
 /*************************************************************************/
-Router::Router(const ResetCycleFn & reset) : m_reset(reset), mpf_cycle(0) {}
+Router::Router(const ResetCycleFn & reset) : reset_(reset), mpf_cycle(0) {}
 
 uint32_t Router::assign_cycle()
 {
 	++mpf_cycle;
 	if (!mpf_cycle) { // reset all cycle fields
-		m_reset();
+		reset_();
 		++mpf_cycle;
 	}
 
