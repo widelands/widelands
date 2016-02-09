@@ -43,7 +43,7 @@ tribes:new_worker_type {
          "animation idle 2000",
          "play_sound sound/hammering geologist_hammer 192",
          "animation hacking 3000",
-         "geologist-find"
+         "geologist_find"
       }
    },
 

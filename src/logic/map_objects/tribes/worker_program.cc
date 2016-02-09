@@ -46,7 +46,7 @@ const WorkerProgram::ParseMap WorkerProgram::parsemap_[] = {
 	{"create_bob",        &WorkerProgram::parse_create_bob},
 	{"removeobject",      &WorkerProgram::parse_removeobject},
 	{"geologist",         &WorkerProgram::parse_geologist},
-	{"geologist-find",    &WorkerProgram::parse_geologist_find},
+	{"geologist_find",    &WorkerProgram::parse_geologist_find},
 	{"scout",             &WorkerProgram::parse_scout},
 	{"play_sound",            &WorkerProgram::parse_play_fx},
 	{"construct",         &WorkerProgram::parse_construct},
@@ -541,7 +541,7 @@ void WorkerProgram::parse_geologist(Worker::Action* act, const std::vector<std::
 void WorkerProgram::parse_geologist_find(Worker::Action* act, const std::vector<std::string>& cmd)
 {
 	if (cmd.size() != 1)
-		throw wexception("Usage: geologist-find");
+		throw wexception("Usage: geologist_find");
 
 	act->function = &Worker::run_geologist_find;
 }
