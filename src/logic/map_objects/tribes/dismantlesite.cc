@@ -73,9 +73,9 @@ PartiallyFinishedBuilding(gdescr)
 
 	assert(!former_buildings.empty());
 	for (DescriptionIndex former_idx : former_buildings) {
-		m_old_buildings.push_back(former_idx);
+		old_buildings_.push_back(former_idx);
 	}
-	const BuildingDescr* cur_descr = owner().tribe().get_building_descr(m_old_buildings.back());
+	const BuildingDescr* cur_descr = owner().tribe().get_building_descr(old_buildings_.back());
 	set_building(*cur_descr);
 
 	if (loading) {

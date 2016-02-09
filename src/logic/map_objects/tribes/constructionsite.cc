@@ -65,8 +65,8 @@ IMPLEMENTATION
 
 ConstructionSite::ConstructionSite(const ConstructionSiteDescr & cs_descr) :
 PartiallyFinishedBuilding (cs_descr),
-m_fetchfromflag     (0),
-m_builder_idle      (false)
+fetchfromflag_     (0),
+builder_idle_      (false)
 {}
 
 
@@ -102,7 +102,7 @@ Set the type of building we're going to build
 void ConstructionSite::set_building(const BuildingDescr & building_descr) {
 	PartiallyFinishedBuilding::set_building(building_descr);
 
-	m_info.becomes = &building_descr;
+	info_.becomes = &building_descr;
 }
 
 /*
@@ -115,11 +115,11 @@ void ConstructionSite::init(EditorGameBase & egbase)
 	PartiallyFinishedBuilding::init(egbase);
 
 	const std::map<DescriptionIndex, uint8_t> * buildcost;
-	if (!m_old_buildings.empty()) {
+	if (!old_buildings_.empty()) {
 		// Enhancement
-		DescriptionIndex was_index = m_old_buildings.back();
+		DescriptionIndex was_index = old_buildings_.back();
 		const BuildingDescr* was_descr = owner().tribe().get_building_descr(was_index);
-		m_info.was = was_descr;
+		info_.was = was_descr;
 		buildcost = &building_->enhancement_cost();
 	} else {
 		buildcost = &building_->buildcost();
@@ -157,16 +157,16 @@ void ConstructionSite::cleanup(EditorGameBase & egbase)
 	if (work_steps_ <= work_completed_) {
 		// Put the real building in place
 		DescriptionIndex becomes_idx = owner().tribe().building_index(building_->name());
-		m_old_buildings.push_back(becomes_idx);
+		old_buildings_.push_back(becomes_idx);
 		Building & b =
-			building_->create(egbase, owner(), position_, false, false, m_old_buildings);
+			building_->create(egbase, owner(), position_, false, false, old_buildings_);
 		if (Worker * const builder = builder_.get(egbase)) {
 			builder->reset_tasks(dynamic_cast<Game&>(egbase));
 			builder->set_location(&b);
 		}
 		// Open the new building window if needed
-		if (m_optionswindow) {
-			Point window_position = m_optionswindow->get_pos();
+		if (optionswindow_) {
+			Point window_position = optionswindow_->get_pos();
 			hide_options();
 			InteractiveGameBase & igbase =
 				dynamic_cast<InteractiveGameBase&>(*egbase.get_ibase());
@@ -186,7 +186,7 @@ bool ConstructionSite::burn_on_destroy()
 	if (work_completed_ >= work_steps_)
 		return false; // completed, so don't burn
 
-	return work_completed_ || !m_old_buildings.empty();
+	return work_completed_ || !old_buildings_.empty();
 }
 
 /*
@@ -196,7 +196,7 @@ Remember the ware on the flag. The worker will be sent from get_building_work().
 */
 bool ConstructionSite::fetch_from_flag(Game & game)
 {
-	++m_fetchfromflag;
+	++fetchfromflag_;
 
 	if (Worker * const builder = builder_.get(game))
 		builder->update_task_buildingwork(game);
@@ -229,7 +229,7 @@ bool ConstructionSite::get_building_work(Game & game, Worker & worker, bool) {
 				(game,
 				 worker.descr().get_animation("work"),
 				 work_steptime_ - game.get_gametime());
-			m_builder_idle = false;
+			builder_idle_ = false;
 			return true;
 		} else {
 			//TODO(fweber): cause "construction sounds" to be played -
@@ -244,9 +244,9 @@ bool ConstructionSite::get_building_work(Game & game, Worker & worker, bool) {
 	}
 
 	// Fetch wares from flag
-	if (m_fetchfromflag) {
-		--m_fetchfromflag;
-		m_builder_idle = false;
+	if (fetchfromflag_) {
+		--fetchfromflag_;
+		builder_idle_ = false;
 		worker.start_task_fetchfromflag(game);
 		return true;
 	}
@@ -284,14 +284,14 @@ bool ConstructionSite::get_building_work(Game & game, Worker & worker, bool) {
 
 			worker.start_task_idle
 				(game, worker.descr().get_animation("work"), CONSTRUCTIONSITE_STEP_TIME);
-			m_builder_idle = false;
+			builder_idle_ = false;
 			return true;
 		}
 	}
 	// The only work we have got for you, is to run around to look cute ;)
-	if (!m_builder_idle) {
+	if (!builder_idle_) {
 		worker.set_animation(game, worker.descr().get_animation("idle"));
-		m_builder_idle = true;
+		builder_idle_ = true;
 	}
 	worker.schedule_act(game, 2000);
 	return true;
@@ -335,15 +335,15 @@ void ConstructionSite::draw
 	// Draw the partially finished building
 
 	static_assert(0 <= CONSTRUCTIONSITE_STEP_TIME, "assert(0 <= CONSTRUCTIONSITE_STEP_TIME) failed.");
-	m_info.totaltime = CONSTRUCTIONSITE_STEP_TIME * work_steps_;
-	m_info.completedtime = CONSTRUCTIONSITE_STEP_TIME * work_completed_;
+	info_.totaltime = CONSTRUCTIONSITE_STEP_TIME * work_steps_;
+	info_.completedtime = CONSTRUCTIONSITE_STEP_TIME * work_completed_;
 
 	if (working_) {
 		assert
 			(work_steptime_
 			 <=
-			 m_info.completedtime + CONSTRUCTIONSITE_STEP_TIME + gametime);
-		m_info.completedtime += CONSTRUCTIONSITE_STEP_TIME + gametime - work_steptime_;
+			 info_.completedtime + CONSTRUCTIONSITE_STEP_TIME + gametime);
+		info_.completedtime += CONSTRUCTIONSITE_STEP_TIME + gametime - work_steptime_;
 	}
 
 	uint32_t anim_idx;
@@ -359,16 +359,16 @@ void ConstructionSite::draw
 	}
 	const Animation& anim = g_gr->animations().get_animation(anim_idx);
 	const size_t nr_frames = anim.nr_frames();
-	cur_frame = m_info.totaltime ? m_info.completedtime * nr_frames / m_info.totaltime : 0;
+	cur_frame = info_.totaltime ? info_.completedtime * nr_frames / info_.totaltime : 0;
 	// Redefine tanim
 	tanim = cur_frame * FRAME_LENGTH;
 
 	const uint16_t w = anim.width();
 	const uint16_t h = anim.height();
 
-	uint32_t lines = h * m_info.completedtime * nr_frames;
-	if (m_info.totaltime)
-		lines /= m_info.totaltime;
+	uint32_t lines = h * info_.completedtime * nr_frames;
+	if (info_.totaltime)
+		lines /= info_.totaltime;
 	assert(h * cur_frame <= lines);
 	lines -= h * cur_frame; //  This won't work if pictures have various sizes.
 
@@ -376,8 +376,8 @@ void ConstructionSite::draw
 		//  draw the prev pic from top to where next image will be drawing
 		dst.blit_animation(pos, anim_idx, tanim - FRAME_LENGTH, player_color,
 		                   Rect(Point(0, 0), w, h - lines));
-	} else if (!m_old_buildings.empty()) {
-		DescriptionIndex prev_idx = m_old_buildings.back();
+	} else if (!old_buildings_.empty()) {
+		DescriptionIndex prev_idx = old_buildings_.back();
 		const BuildingDescr* prev_building = owner().tribe().get_building_descr(prev_idx);
 		//  Is the first picture but there was another building here before,
 		//  get its most fitting picture and draw it instead.

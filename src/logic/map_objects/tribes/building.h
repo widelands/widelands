@@ -66,43 +66,43 @@ public:
 					  const LuaTable& t, const EditorGameBase& egbase);
 	~BuildingDescr() override {}
 
-	bool is_buildable   () const {return m_buildable;}
-	bool is_destructible() const {return m_destructible;}
-	bool is_enhanced    () const {return m_enhanced_building;}
+	bool is_buildable   () const {return buildable_;}
+	bool is_destructible() const {return destructible_;}
+	bool is_enhanced    () const {return enhanced_building_;}
 
 	/**
 	 * The build cost for direct construction
 	 */
-	const Buildcost & buildcost() const {return m_buildcost;}
+	const Buildcost & buildcost() const {return buildcost_;}
 
 	/**
 	 * Returned wares for dismantling
 	 */
-	const Buildcost & returned_wares() const {return m_return_dismantle;}
+	const Buildcost & returned_wares() const {return return_dismantle_;}
 
 	/**
 	 * The build cost for enhancing a previous building
 	 */
-	const Buildcost & enhancement_cost() const {return m_enhance_cost;}
+	const Buildcost & enhancement_cost() const {return enhance_cost_;}
 
 	/**
 	 * The returned wares for a enhaced building
 	 */
-	const Buildcost & returned_wares_enhanced() const {return m_return_enhanced;}
+	const Buildcost & returned_wares_enhanced() const {return return_enhanced_;}
 
 	std::string helptext_script() const {return helptext_script_;}
-	int32_t get_size() const {return m_size;}
-	bool get_ismine() const {return m_mine;}
-	bool get_isport() const {return m_port;}
-	bool needs_seafaring() const {return m_needs_seafaring;}
+	int32_t get_size() const {return size_;}
+	bool get_ismine() const {return mine_;}
+	bool get_isport() const {return port_;}
+	bool needs_seafaring() const {return needs_seafaring_;}
 
 	// Returns the enhancement this building can become or
 	// INVALID_INDEX if it cannot be enhanced.
-	const DescriptionIndex & enhancement() const {return m_enhancement;}
+	const DescriptionIndex & enhancement() const {return enhancement_;}
 	// Returns the building from which this building can be enhanced or
 	// INVALID_INDEX if it cannot be built as an enhanced building.
-	const DescriptionIndex& enhanced_from() const {return m_enhanced_from;}
-	void set_enhanced_from(const DescriptionIndex& index) {m_enhanced_from = index;}
+	const DescriptionIndex& enhanced_from() const {return enhanced_from_;}
+	void set_enhanced_from(const DescriptionIndex& index) {enhanced_from_ = index;}
 
 	/// Create a building of this type in the game. Calls init, which does
 	/// different things for different types of buildings (such as conquering
@@ -126,7 +126,7 @@ public:
 	WorkareaInfo workarea_info_;
 
 	virtual int32_t suitability(const Map &, FCoords) const;
-	const BuildingHints & hints() const {return m_hints;}
+	const BuildingHints & hints() const {return hints_;}
 
 protected:
 	virtual Building & create_object() const = 0;
@@ -134,24 +134,24 @@ protected:
 
 private:
 	const EditorGameBase& egbase_;
-	bool          m_buildable;       // the player can build this himself
-	bool          m_destructible;    // the player can destruct this himself
-	Buildcost     m_buildcost;
-	Buildcost     m_return_dismantle; // Returned wares on dismantle
-	Buildcost     m_enhance_cost;     // cost for enhancing
-	Buildcost     m_return_enhanced;   // Returned ware for dismantling an enhanced building
+	bool          buildable_;       // the player can build this himself
+	bool          destructible_;    // the player can destruct this himself
+	Buildcost     buildcost_;
+	Buildcost     return_dismantle_; // Returned wares on dismantle
+	Buildcost     enhance_cost_;     // cost for enhancing
+	Buildcost     return_enhanced_;   // Returned ware for dismantling an enhanced building
 	std::string   helptext_script_;   // The path and filename to the building's helptext script
-	int32_t       m_size;            // size of the building
-	bool          m_mine;
-	bool          m_port;
-	bool          m_needs_seafaring; // This building should only be built on seafaring maps.
-	DescriptionIndex  m_enhancement;
-	DescriptionIndex  m_enhanced_from; // The building this building was enhanced from, or INVALID_INDEX
-	bool          m_enhanced_building; // if it is one, it is bulldozable
-	BuildingHints m_hints;             // hints (knowledge) for computer players
+	int32_t       size_;            // size of the building
+	bool          mine_;
+	bool          port_;
+	bool          needs_seafaring_; // This building should only be built on seafaring maps.
+	DescriptionIndex  enhancement_;
+	DescriptionIndex  enhanced_from_; // The building this building was enhanced from, or INVALID_INDEX
+	bool          enhanced_building_; // if it is one, it is bulldozable
+	BuildingHints hints_;             // hints (knowledge) for computer players
 
 	// for migration, 0 is the default, meaning get_conquers() + 4
-	uint32_t m_vision_range;
+	uint32_t vision_range_;
 	DISALLOW_COPY_AND_ASSIGN(BuildingDescr);
 };
 
@@ -198,8 +198,8 @@ public:
 	// Return the overlay string that is displayed on the map view when enabled
 	// by the player.
 	const std::string& update_and_get_statistics_string() {
-		update_statistics_string(&m_statistics_string);
-		return m_statistics_string;
+		update_statistics_string(&statistics_string_);
+		return statistics_string_;
 	}
 
 	/// \returns the queue for a ware type or \throws WException.
@@ -238,7 +238,7 @@ public:
 	 * be the one being dismantled.
 	 */
 	const FormerBuildings get_former_buildings() {
-		return m_old_buildings;
+		return old_buildings_;
 	}
 
 	void log_general_info(const EditorGameBase &) override;
@@ -249,7 +249,7 @@ public:
 
 	///  Stores the PlayerNumber of the player who has defeated this building.
 	void set_defeating_player(PlayerNumber const player_number) {
-		m_defeating_player = player_number;
+		defeating_player_ = player_number;
 	}
 
 	void    add_worker(Worker &) override;
@@ -287,35 +287,35 @@ protected:
 
 	void set_seeing(bool see);
 
-	UI::Window * m_optionswindow;
+	UI::Window * optionswindow_;
 	Coords       position_;
-	Flag       * m_flag;
+	Flag       * flag_;
 
 	uint32_t anim_;
 	int32_t  animstart_;
 
 	using LeaveQueue = std::vector<OPtr<Worker>>;
-	LeaveQueue m_leave_queue; //  FIFO queue of workers leaving the building
-	uint32_t    m_leave_time;  //  when to wake the next one from leave queue
-	ObjectPointer  m_leave_allow; //  worker that is allowed to leave now
+	LeaveQueue leave_queue_; //  FIFO queue of workers leaving the building
+	uint32_t    leave_time_;  //  when to wake the next one from leave queue
+	ObjectPointer  leave_allow_; //  worker that is allowed to leave now
 
 	//  The player who has defeated this building.
-	PlayerNumber           m_defeating_player;
+	PlayerNumber           defeating_player_;
 
-	int32_t m_priority; // base priority
-	std::map<DescriptionIndex, int32_t> m_ware_priorities;
+	int32_t priority_; // base priority
+	std::map<DescriptionIndex, int32_t> ware_priorities_;
 
 	/// Whether we see our vision_range area based on workers in the building
-	bool m_seeing;
+	bool seeing_;
 
 	// Signals connected for the option window
 	std::vector<boost::signals2::connection> options_window_connections;
 
 	// The former buildings names, with the current one in last position.
-	FormerBuildings m_old_buildings;
+	FormerBuildings old_buildings_;
 
 private:
-	std::string m_statistics_string;
+	std::string statistics_string_;
 };
 
 }

@@ -80,7 +80,7 @@ class ConstructionSite : public PartiallyFinishedBuilding {
 public:
 	ConstructionSite(const ConstructionSiteDescr & descr);
 
-	const ConstructionsiteInformation & get_info() {return m_info;}
+	const ConstructionsiteInformation & get_info() {return info_;}
 
 	WaresQueue & waresqueue(DescriptionIndex) override;
 
@@ -107,10 +107,10 @@ protected:
 	void draw(const EditorGameBase &, RenderTarget &, const FCoords&, const Point&) override;
 
 private:
-	int32_t     m_fetchfromflag;  // # of wares to fetch from flag
+	int32_t     fetchfromflag_;  // # of wares to fetch from flag
 
-	bool        m_builder_idle;   // used to determine whether the builder is idle
-	ConstructionsiteInformation m_info; // asked for by player point of view for the gameview
+	bool        builder_idle_;   // used to determine whether the builder is idle
+	ConstructionsiteInformation info_; // asked for by player point of view for the gameview
 };
 
 }

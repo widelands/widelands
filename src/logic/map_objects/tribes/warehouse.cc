@@ -629,7 +629,7 @@ void Warehouse::cleanup(EditorGameBase& egbase) {
 			(PlayerArea<Area<FCoords> >
 			 	(owner().player_number(),
 			 	 Area<FCoords>(map.get_fcoords(get_position()), conquer_radius)),
-			 m_defeating_player);
+			 defeating_player_);
 
 	// Unsee the area that we started seeing in init()
 	Player & player = owner();
