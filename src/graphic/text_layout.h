@@ -27,6 +27,7 @@
 #include "graphic/font.h"
 #include "graphic/color.h"
 #include "graphic/text_constants.h"
+#include "graphic/text/font_set.h"
 
 /**
  * This function replaces some HTML entities in strings, e.g. %nbsp;.
@@ -64,13 +65,15 @@ std::string richtext_escape(const std::string& given_text);
  * of rich text which can be rendered.
  */
 std::string as_uifont
-	(const std::string&, int ptsize = UI_FONT_SIZE_SMALL, const RGBColor& clr = UI_FONT_CLR_FG);
+	(const std::string&, int ptsize = UI_FONT_SIZE_SMALL, const RGBColor& clr = UI_FONT_CLR_FG,
+	 UI::FontSet::Face face = UI::FontSet::Face::kSans);
 
 std::string as_editorfont(const std::string& text, int ptsize = UI_FONT_SIZE_SMALL,
 								  const RGBColor& clr = UI_FONT_CLR_FG);
 
 std::string as_aligned(const std::string & txt, UI::Align align, int ptsize = UI_FONT_SIZE_SMALL,
-							  const RGBColor& clr = UI_FONT_CLR_FG);
+							  const RGBColor& clr = UI_FONT_CLR_FG,
+							  UI::FontSet::Face face = UI::FontSet::Face::kSans);
 
 std::string as_tooltip(const std::string&);
 std::string as_waresinfo(const std::string&);
@@ -85,13 +88,7 @@ namespace UI {
  */
 // TODO(GunChleoc): This struct will disappear with the old font handler
 struct TextStyle {
-	TextStyle() :
-		font(nullptr),
-		fg(255, 255, 255),
-		bold(false),
-		italics(false),
-		underline(false)
-	{}
+	TextStyle();
 
 	static TextStyle makebold(Font * font, RGBColor fg) {
 		TextStyle ts;
@@ -101,8 +98,6 @@ struct TextStyle {
 		return ts;
 	}
 
-	static const TextStyle & ui_big();
-	static const TextStyle & ui_small();
 	uint32_t calc_bare_width(const std::string & text) const;
 	uint32_t calc_width_for_wrapping(const UChar& c) const;
 	uint32_t calc_width_for_wrapping(const std::string & text) const;

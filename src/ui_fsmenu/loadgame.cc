@@ -153,7 +153,7 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame
 	settings_(gsp),
 	ctrl_(gc)
 {
-	title_.set_textstyle(UI::TextStyle::ui_big());
+	title_.set_fontsize(UI_FONT_SIZE_BIG);
 	ta_gametime_.set_tooltip(_("The time that elapsed inside this game"));
 	ta_players_.set_tooltip(_("The number of players"));
 	ta_version_.set_tooltip(_("The version of Widelands that this game was played under"));

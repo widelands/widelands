@@ -86,7 +86,7 @@ FullscreenMenuCampaignSelect::FullscreenMenuCampaignSelect() :
 		 get_right_column_w(right_column_x_ + indent_),
 		 buty_ - get_y_from_preceding(label_description_) - 4 * padding_)
 {
-	title_.set_textstyle(UI::TextStyle::ui_big());
+	title_.set_fontsize(UI_FONT_SIZE_BIG);
 	back_.set_tooltip(_("Return to the main menu"));
 	ok_.set_tooltip(_("Play this campaign"));
 	ta_campname_.set_tooltip(_("The name of this campaign"));
@@ -325,7 +325,7 @@ FullscreenMenuCampaignMapSelect::FullscreenMenuCampaignMapSelect(bool is_tutoria
 
 	is_tutorial_(is_tutorial)
 {
-	title_.set_textstyle(UI::TextStyle::ui_big());
+	title_.set_fontsize(UI_FONT_SIZE_BIG);
 	back_.set_tooltip(_("Return to the main menu"));
 	if (is_tutorial_) {
 		ok_.set_tooltip(_("Play this tutorial"));
