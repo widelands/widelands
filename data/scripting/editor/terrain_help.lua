@@ -1,4 +1,10 @@
--- NOCOM(#codereview): add a comment where this is called from?
+-- RST
+-- terrain_help.lua
+-- -------------
+
+
+-- This file returns a formatted entry for the terrain help in the editor.
+
 include "scripting/editor/format_editor.lua"
 
 return {

@@ -1,4 +1,9 @@
--- NOCOM(#sirver): documentation?
+-- RST
+-- tree_help.lua
+-- -------------
+
+-- This file returns a formatted entry for the tree help in the editor.
+
 include "scripting/editor/format_editor.lua"
 
 return {
