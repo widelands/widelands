@@ -45,15 +45,13 @@ private:
 			kTree
 		};
 
-		// NOCOM(#codereview): Or shorter
-		// HelpEntry(const HelpEntry&) = default;
 		HelpEntry(const HelpEntry& other) : HelpEntry(other.index, other.descname, other.icon) {
 		}
-		// NOCOM(#codereview): _blub is reserved for the compiler. init_blub ?
-		HelpEntry(const Widelands::DescriptionIndex _index,
-		          const std::string& _descname,
-		          const Image* _icon)
-		   : index(_index), descname(_descname), icon(_icon) {
+
+		HelpEntry(const Widelands::DescriptionIndex init_index,
+					 const std::string& init_descname,
+					 const Image* init_icon)
+			: index(init_index), descname(init_descname), icon(init_icon) {
 		}
 		Widelands::DescriptionIndex index;
 		std::string descname;
@@ -86,7 +84,7 @@ private:
 	EditorInteractive& eia() const;
 
 	// Fill table of contents
-	void fill_entries(const char* key, std::vector<HelpEntry>& entries);
+	void fill_entries(const char* key, std::vector<HelpEntry>* entries);
 	void fill_terrains();
 	void fill_trees();
 

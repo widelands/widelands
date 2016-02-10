@@ -38,14 +38,10 @@
 #include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
 
-// NOCOM(#codereview): turn these into functions in the anon namespace please,
-// that reads super scary.
-#define WINDOW_WIDTH std::min(700, g_gr->get_xres() - 40)
-#define WINDOW_HEIGHT std::min(550, g_gr->get_yres() - 40)
-
 namespace {
 
-using namespace Widelands;
+#define WINDOW_WIDTH std::min(700, g_gr->get_xres() - 40)
+#define WINDOW_HEIGHT std::min(550, g_gr->get_yres() - 40)
 
 constexpr int kPadding = 5;
 constexpr int kTabHeight = 35;
@@ -141,23 +137,21 @@ EditorHelp::EditorHelp(EditorInteractive& parent, UI::UniqueWindow::Registry& re
 	}
 }
 
-// NOCOM(#codereview): take entries as a * so that the callsite reads more
-// clearly as modifying this value?
-void EditorHelp::fill_entries(const char* key, std::vector<HelpEntry>& entries) {
-	std::sort(entries.begin(), entries.end());
-	for (uint32_t i = 0; i < entries.size(); i++) {
-		HelpEntry cur = entries[i];
+void EditorHelp::fill_entries(const char* key, std::vector<HelpEntry>* entries) {
+	std::sort(entries->begin(), entries->end());
+	for (uint32_t i = 0; i < entries->size(); i++) {
+		HelpEntry cur = (*entries)[i];
 		lists_.at(key)->add(cur.descname, cur.index, cur.icon);
 	}
 	lists_.at(key)->select(0);
 }
 
 void EditorHelp::fill_terrains() {
-	const World& world = eia().egbase().world();
+	const Widelands::World& world = eia().egbase().world();
 	std::vector<HelpEntry> entries;
 
 	for (Widelands::DescriptionIndex i = 0; i < world.terrains().size(); ++i) {
-		const TerrainDescription& terrain = world.terrain_descr(i);
+		const Widelands::TerrainDescription& terrain = world.terrain_descr(i);
 		upcast(Image const, icon, &terrain.get_texture(0));
 		/** TRANSLATORS: Terrain name + editor category, e.g. Steppe (Summer) */
 		HelpEntry entry(i, (boost::format(_("%1% (%2%)"))
@@ -165,15 +159,15 @@ void EditorHelp::fill_terrains() {
 								  % terrain.editor_category().descname()).str(), icon);
 		entries.push_back(entry);
 	}
-	fill_entries("terrains", entries);
+	fill_entries("terrains", &entries);
 }
 
 void EditorHelp::fill_trees() {
-	const World& world = eia().egbase().world();
+	const Widelands::World& world = eia().egbase().world();
 	std::vector<HelpEntry> entries;
 
 	for (Widelands::DescriptionIndex i = 0; i < world.get_nr_immovables(); ++i) {
-		const ImmovableDescr* immovable = world.get_immovable_descr(i);
+		const Widelands::ImmovableDescr* immovable = world.get_immovable_descr(i);
 		uint32_t attribute_id = immovable->get_attribute_id("tree");
 		if (immovable->has_attribute(attribute_id)) {
 			const Image* icon = immovable->representative_image();
@@ -181,7 +175,7 @@ void EditorHelp::fill_trees() {
 			entries.push_back(entry);
 		}
 	}
-	fill_entries("trees", entries);
+	fill_entries("trees", &entries);
 }
 
 void EditorHelp::entry_selected(const std::string& key,
@@ -195,7 +189,7 @@ void EditorHelp::entry_selected(const std::string& key,
 
 		switch (type) {
 		case (HelpEntry::Type::kTerrain): {
-			const TerrainDescription& descr =
+			const Widelands::TerrainDescription& descr =
 			   eia().egbase().world().terrain_descr(lists_.at(key)->get_selected());
 			/** TRANSLATORS: Terrain name + editor category, e.g. Steppe (Summer) */
 			descname = (boost::format(_("%1% (%2%)"))
@@ -205,7 +199,7 @@ void EditorHelp::entry_selected(const std::string& key,
 			break;
 		}
 		case (HelpEntry::Type::kTree): {
-			const ImmovableDescr* descr =
+			const Widelands::ImmovableDescr* descr =
 			   eia().egbase().world().get_immovable_descr(lists_.at(key)->get_selected());
 			descname = descr->basename();
 			cr->push_arg(descr->name());
@@ -220,6 +214,8 @@ void EditorHelp::entry_selected(const std::string& key,
 		// NOCOM(#codereview): Why is the lua script not returning the text
 		// including heading? Feels strange to do most formatting in Lua, but
 		// some in c++.
+		// NOCOM(GunChleoc): This is because if we want to open this in a separate window rather than
+		// in the encyclopedia, the heading is shown on the window title instead. cf. the Building help.
 		contents_.at(key)->set_text((boost::format("%s%s") % heading(descname) % help_text).str());
 
 	} catch (LuaError& err) {
