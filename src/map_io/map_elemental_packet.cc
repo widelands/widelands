@@ -25,6 +25,7 @@
 #include "logic/editor_game_base.h"
 #include "logic/game_data_error.h"
 #include "logic/map.h"
+#include "logic/widelands.h"
 #include "profile/profile.h"
 
 namespace Widelands {
@@ -83,7 +84,7 @@ void MapElementalPacket::pre_read(FileSystem & fs, Map * map)
 					boost::split(players_string, team_string, boost::is_any_of(","));
 
 					for (const std::string& player: players_string) {
-						uint16_t player_number = static_cast<uint16_t>(atoi(player.c_str()));
+						PlayerNumber player_number = static_cast<PlayerNumber>(atoi(player.c_str()));
 						assert(player_number < MAX_PLAYERS);
 						team.push_back(player_number);
 					}
