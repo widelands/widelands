@@ -225,7 +225,7 @@ public:
 	/*
 	 * Properties
 	 */
-	int get_basename(lua_State *);
+	int get_species(lua_State *);
 	int get_build_cost(lua_State *);
 	int get_editor_category(lua_State *);
 	int get_has_terrain_affinity(lua_State *);

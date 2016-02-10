@@ -112,7 +112,7 @@ public:
 	int32_t dither_layer() const;
 
 	/// Returns the editor category.
-	const EditorCategory& editor_category() const;
+	const EditorCategory* editor_category() const;
 
 	/// Parameters for terrain affinity of immovables.
 	/// Temperature is in arbitrary units.

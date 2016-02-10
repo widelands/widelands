@@ -156,7 +156,7 @@ void EditorHelp::fill_terrains() {
 		/** TRANSLATORS: Terrain name + editor category, e.g. Steppe (Summer) */
 		HelpEntry entry(i, (boost::format(_("%1% (%2%)"))
 								  % terrain.descname().c_str()
-								  % terrain.editor_category().descname()).str(), icon);
+								  % terrain.editor_category()->descname()).str(), icon);
 		entries.push_back(entry);
 	}
 	fill_entries("terrains", &entries);
@@ -171,7 +171,7 @@ void EditorHelp::fill_trees() {
 		uint32_t attribute_id = immovable->get_attribute_id("tree");
 		if (immovable->has_attribute(attribute_id)) {
 			const Image* icon = immovable->representative_image();
-			HelpEntry entry(i, immovable->basename(), icon);
+			HelpEntry entry(i, immovable->species(), icon);
 			entries.push_back(entry);
 		}
 	}
@@ -194,14 +194,14 @@ void EditorHelp::entry_selected(const std::string& key,
 			/** TRANSLATORS: Terrain name + editor category, e.g. Steppe (Summer) */
 			descname = (boost::format(_("%1% (%2%)"))
 						  % descr.descname().c_str()
-						  % descr.editor_category().descname()).str();
+						  % descr.editor_category()->descname()).str();
 			cr->push_arg(descr.name());
 			break;
 		}
 		case (HelpEntry::Type::kTree): {
 			const Widelands::ImmovableDescr* descr =
 			   eia().egbase().world().get_immovable_descr(lists_.at(key)->get_selected());
-			descname = descr->basename();
+			descname = descr->species();
 			cr->push_arg(descr->name());
 			break;
 		}

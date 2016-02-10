@@ -82,7 +82,7 @@ world:new_immovable_type{
 world:new_immovable_type{
    name = "birch_summer_old",
    descname = _ "Birch (Old)",
-   basename = _ "Birch",
+   species = _ "Birch",
    editor_category = "trees_deciduous",
    size = "small",
    attributes = { "tree" },

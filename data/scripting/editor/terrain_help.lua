@@ -63,7 +63,7 @@ return {
       for k,v in ipairs(tree_list) do
          local tree = wl.Editor():get_immovable_description(v.tree_name_)
          tree_string = tree_string .. picture_li(tree.representative_image,
-            tree.basename .. ("<br>%2.1f%%"):bformat(100 * v.probability_)) .. spacer()
+            tree.species .. ("<br>%2.1f%%"):bformat(100 * v.probability_)) .. spacer()
       end
 
       -- TRANSLATORS: A header in the editor help

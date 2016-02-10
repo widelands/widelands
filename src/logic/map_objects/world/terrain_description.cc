@@ -210,8 +210,8 @@ const std::string& TerrainDescription::descname() const {
 	return descname_;
 }
 
-const EditorCategory& TerrainDescription::editor_category() const {
-	return *editor_category_;
+const EditorCategory* TerrainDescription::editor_category() const {
+	return editor_category_;
 }
 
 DescriptionIndex TerrainDescription::get_valid_resource(uint8_t index) const {

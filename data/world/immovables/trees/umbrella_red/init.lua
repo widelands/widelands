@@ -1,4 +1,4 @@
-dirname = path.dirname(__file__)
+sedirname = path.dirname(__file__)
 
 terrain_affinity = {
    preferred_temperature = 110,
@@ -87,7 +87,7 @@ world:new_immovable_type{
    -- TRANSLATORS: This is a fictitious tree. Be creative if you want.
    descname = _ "Red Umbrella Tree (Old)",
    -- TRANSLATORS: This is a fictitious tree. Be creative if you want.
-   basename = _ "Red Umbrella Tree",
+   species = _ "Red Umbrella Tree",
    editor_category = "trees_wasteland",
    size = "small",
    attributes = { "tree" },

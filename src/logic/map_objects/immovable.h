@@ -129,14 +129,12 @@ public:
 
 	const Buildcost & buildcost() const {return buildcost_;}
 
-	// Returns whether this immovable has an editor category. E.g. Tribe immovables never have one.
-	bool has_editor_category() const;
-
-	// Returns the editor category.
-	const EditorCategory& editor_category() const;
+	// Returns the editor category, or nullptr if the immovable has no editor category
+	// (e.g. Tribe immovables never have one).
+	const EditorCategory* editor_category() const;
 
 	// A basic localized name for the immovable, used by trees
-	const std::string& basename() const {return basename_;}
+	const std::string& species() const {return species_;}
 
 	// Every immovable that can 'grow' needs to have terrain affinity defined,
 	// all others do not. Returns true if this one has it defined.
@@ -157,7 +155,7 @@ protected:
 	/// \see ActConstruction
 	Buildcost buildcost_;
 
-	std::string basename_;
+	std::string species_;
 
 private:
 	 // Common constructor functions for tribes and world.

@@ -217,7 +217,7 @@ ImmovableDescr::ImmovableDescr(const std::string& init_descname,
 		std::vector<std::string> attributes = table.get_table("attributes")->array_entries<std::string>();
 		add_attributes(attributes, {MapObject::Attribute::RESI});
 
-		// Old trees get an extra basename so we can use it in help lists.
+		// Old trees get an extra species name so we can use it in help lists.
 		bool is_tree = false;
 		for (const std::string& attribute : attributes) {
 			if (attribute == "tree") {
@@ -226,10 +226,10 @@ ImmovableDescr::ImmovableDescr(const std::string& init_descname,
 			}
 		}
 		if (is_tree) {
-			if (!table.has_key("basename")) {
-				throw wexception("Immovable '%s' with type 'tree' must define a basename", name().c_str());
+			if (!table.has_key("species")) {
+				throw wexception("Immovable '%s' with type 'tree' must define a species", name().c_str());
 			}
-			basename_ = table.get_string("basename");
+			species_ = table.get_string("species");
 		}
 	}
 
@@ -273,16 +273,8 @@ ImmovableDescr::ImmovableDescr(const std::string& init_descname,
 	}
 }
 
-bool ImmovableDescr::has_editor_category() const {
-	return editor_category_ != nullptr;
-}
-
-// NOCOM(#codereview): that is scary. editor_category_ can be nullptr, but
-// this method suggest it is always valid. I would suggest killing
-// has_editor_category and instead return const EditorCategory* in this method,
-// documenting that it can be nullptr.
-const EditorCategory& ImmovableDescr::editor_category() const {
-	return *editor_category_;
+const EditorCategory* ImmovableDescr::editor_category() const {
+	return editor_category_;
 }
 
 bool ImmovableDescr::has_terrain_affinity() const {

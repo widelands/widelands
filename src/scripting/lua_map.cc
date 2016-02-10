@@ -1426,7 +1426,7 @@ const MethodType<LuaImmovableDescription> LuaImmovableDescription::Methods[] = {
 	{nullptr, nullptr},
 };
 const PropertyType<LuaImmovableDescription> LuaImmovableDescription::Properties[] = {
-	PROP_RO(LuaImmovableDescription, basename),
+	PROP_RO(LuaImmovableDescription, species),
 	PROP_RO(LuaImmovableDescription, build_cost),
 	PROP_RO(LuaImmovableDescription, editor_category),
 	// NOCOM(#codereview): how about dropping has_terrain_affinity and instead make
@@ -1460,12 +1460,12 @@ void LuaImmovableDescription::__unpersist(lua_State* L) {
 
 
 /* RST
-	.. attribute:: the basename of a tree for editor lists
+	.. attribute:: the species name of a tree for editor lists
 
-			(RO) the basename of the immovable, or an empty string if it has none.
+			(RO) the localized species name of the immovable, or an empty string if it has none.
 */
-int LuaImmovableDescription::get_basename(lua_State * L) {
-	lua_pushstring(L, get()->basename());
+int LuaImmovableDescription::get_species(lua_State * L) {
+	lua_pushstring(L, get()->species());
 	return 1;
 }
 
@@ -1486,14 +1486,14 @@ int LuaImmovableDescription::get_build_cost(lua_State * L) {
 			(RO) a table with "name" and "descname" entries for the editor category, or nil if it has none.
 */
 int LuaImmovableDescription::get_editor_category(lua_State * L) {
-	if (get()->has_editor_category()) {
-		const EditorCategory& editor_category = get()->editor_category();
+	const EditorCategory* editor_category = get()->editor_category();
+	if (editor_category != nullptr) {
 		lua_newtable(L);
 		lua_pushstring(L, "name");
-		lua_pushstring(L, editor_category.name());
+		lua_pushstring(L, editor_category->name());
 		lua_settable(L, -3);
 		lua_pushstring(L, "descname");
-		lua_pushstring(L, editor_category.descname());
+		lua_pushstring(L, editor_category->descname());
 		lua_settable(L, -3);
 	} else {
 		lua_pushnil(L);
@@ -2881,20 +2881,14 @@ int LuaTerrainDescription::get_default_resource_amount(lua_State * L) {
 			(RO) a table with "name" and "descname" entries for the editor category, or nil if it has none.
 */
 int LuaTerrainDescription::get_editor_category(lua_State * L) {
-	const EditorCategory& editor_category = get()->editor_category();
-	// NOCOM(#codereview): that is super scary, not sure if that is even
-	// portable... please make editor_category() return a pointer that can be nullptr.
-	// Update: I checked and it is not: clang warning:
-	// warning: reference cannot be bound to dereferenced null pointer in
-	// well-defined C++ code; comparison may be assumed to always evaluate to true
-	// [-Wtautological-undefined-compare]
-	if (&editor_category != nullptr) {
+	const EditorCategory* editor_category = get()->editor_category();
+	if (editor_category != nullptr) {
 		lua_newtable(L);
 		lua_pushstring(L, "name");
-		lua_pushstring(L, editor_category.name());
+		lua_pushstring(L, editor_category->name());
 		lua_settable(L, -3);
 		lua_pushstring(L, "descname");
-		lua_pushstring(L, editor_category.descname());
+		lua_pushstring(L, editor_category->descname());
 		lua_settable(L, -3);
 	} else {
 		lua_pushnil(L);

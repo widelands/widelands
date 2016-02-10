@@ -87,7 +87,7 @@ world:new_immovable_type{
    -- TRANSLATORS: This is a fictitious tree. Be creative if you want.
    descname = _ "Liana Tree (Old)",
    -- TRANSLATORS: This is a fictitious tree. Be creative if you want.
-   basename = _ "Liana Tree",
+   species = _ "Liana Tree",
    editor_category = "trees_wasteland",
    size = "small",
    attributes = { "tree" },

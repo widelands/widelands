@@ -84,7 +84,7 @@ world:new_immovable_type{
    -- TRANSLATORS: This is a fictitious tree. Be creative if you want.
    descname = _ "Dark Mushroom Tree (Old)",
    -- TRANSLATORS: This is a fictitious tree. Be creative if you want.
-   basename = _ "Dark Mushroom Tree",
+   species = _ "Dark Mushroom Tree",
    editor_category = "trees_wasteland",
    size = "small",
    attributes = { "tree" },
