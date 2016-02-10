@@ -154,6 +154,8 @@ int LuaEditorGameBase::get_players(lua_State * L) {
  */
 
 // NOCOM(#codereview): fix comment. nothing is registered here. also belows.
+// NOCOM(GunChleoc): I just copied the code including the documentation off get_building_description.
+// What would be a better comment then?
 /* RST
 	.. function:: get_immovable_description(immovable_name)
 
@@ -168,14 +170,14 @@ int LuaEditorGameBase::get_immovable_description(lua_State* L) {
 		report_error(L, "Wrong number of arguments");
 	}
 	const std::string immovable_name = luaL_checkstring(L, 2);
-	// NOCOM(#sirver): get_egbase() is slighly expensive. Pull the result into a variable.
-	const World& world = get_egbase(L).world();
+	EditorGameBase& egbase = get_egbase(L);
+	const World& world = egbase.world();
 	DescriptionIndex idx = world.get_immovable_index(immovable_name);
 	if (idx != INVALID_INDEX) {
 		const ImmovableDescr* descr = world.get_immovable_descr(idx);
 		return to_lua<LuaMaps::LuaImmovableDescription>(L, new LuaMaps::LuaImmovableDescription(descr));
 	}
-	const Tribes& tribes = get_egbase(L).tribes();
+	const Tribes& tribes = egbase.tribes();
 	idx = tribes.immovable_index(immovable_name);
 	if (!tribes.immovable_exists(idx)) {
 		report_error(L, "Immovable %s does not exist", immovable_name.c_str());
@@ -583,7 +585,8 @@ int LuaPlayerBase::place_building(lua_State * L) {
 	if (lua_gettop(L) >= 5)
 		force = luaL_checkboolean(L, 5);
 
-	const Tribes& tribes = get_egbase(L).tribes();
+	EditorGameBase& egbase = get_egbase(L);
+	const Tribes& tribes = egbase.tribes();
 
 	if (!tribes.building_exists(name)) {
 		report_error(L, "Unknown Building: '%s'", name.c_str());
@@ -599,14 +602,14 @@ int LuaPlayerBase::place_building(lua_State * L) {
 	Building * b = nullptr;
 	if (force) {
 		if (constructionsite) {
-			b = &get(L, get_egbase(L)).force_csite
+			b = &get(L, egbase).force_csite
 				(c->coords(), building_index, former_buildings);
 		} else {
-			b = &get(L, get_egbase(L)).force_building
+			b = &get(L, egbase).force_building
 				(c->coords(), former_buildings);
 		}
 	} else {
-		b = get(L, get_egbase(L)).build
+		b = get(L, egbase).build
 			(c->coords(), building_index, constructionsite, former_buildings);
 	}
 	if (!b)

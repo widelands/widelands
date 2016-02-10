@@ -1721,8 +1721,9 @@ int LuaBuildingDescription::get_enhanced(lua_State * L) {
 int LuaBuildingDescription::get_enhanced_from(lua_State * L) {
 	if (get()->is_enhanced()) {
 		const DescriptionIndex& enhanced_from = get()->enhanced_from();
-		assert(get_egbase(L).tribes().building_exists(enhanced_from));
-		return upcasted_map_object_descr_to_lua(L, get_egbase(L).tribes().get_building_descr(enhanced_from));
+		EditorGameBase& egbase = get_egbase(L);
+		assert(egbase.tribes().building_exists(enhanced_from));
+		return upcasted_map_object_descr_to_lua(L, egbase.tribes().get_building_descr(enhanced_from));
 	}
 	lua_pushnil(L);
 	return 0;
@@ -2452,8 +2453,9 @@ void LuaWareDescription::__persist(lua_State* L) {
 void LuaWareDescription::__unpersist(lua_State* L) {
 	std::string name;
 	UNPERS_STRING("name", name);
-	DescriptionIndex idx = get_egbase(L).tribes().safe_ware_index(name.c_str());
-	set_description_pointer(get_egbase(L).tribes().get_ware_descr(idx));
+	const Tribes& tribes = get_egbase(L).tribes();
+	DescriptionIndex idx = tribes.safe_ware_index(name.c_str());
+	set_description_pointer(tribes.get_ware_descr(idx));
 }
 
 
@@ -3864,10 +3866,10 @@ int LuaWarehouse::get_portdock(lua_State * L) {
 */
 int LuaWarehouse::get_expedition_in_progress(lua_State * L) {
 
-	Warehouse* wh = get(L, get_egbase(L));
+	EditorGameBase& egbase = get_egbase(L);
 
-	if (is_a(Game, &get_egbase(L))) {
-		PortDock* pd = wh->get_portdock();
+	if (is_a(Game, &egbase)) {
+		PortDock* pd = get(L, egbase)->get_portdock();
 		if (pd) {
 			if (pd->expedition_started()){
 				return 1;
@@ -3951,19 +3953,20 @@ int LuaWarehouse::set_soldiers(lua_State* L) {
 */
 int LuaWarehouse::start_expedition(lua_State* L) {
 
-	Warehouse* Wh = get(L, get_egbase(L));
+	EditorGameBase& egbase = get_egbase(L);
+	Warehouse* wh = get(L, egbase);
 
-	if (!Wh) {
+	if (!wh) {
 		return 0;
 	}
 
-	if (upcast(Game, game, &get_egbase(L))) {
-		PortDock* pd = Wh->get_portdock();
+	if (upcast(Game, game, &egbase)) {
+		PortDock* pd = wh->get_portdock();
 		if (!pd) {
 			return 0;
 		}
 		if (!pd->expedition_started()){
-			game->send_player_start_or_cancel_expedition(*Wh);
+			game->send_player_start_or_cancel_expedition(*wh);
 			return 1;
 		}
 	}
@@ -3981,19 +3984,20 @@ int LuaWarehouse::start_expedition(lua_State* L) {
 */
 int LuaWarehouse::cancel_expedition(lua_State* L) {
 
-	Warehouse* Wh = get(L, get_egbase(L));
+	EditorGameBase& egbase = get_egbase(L);
+	Warehouse* wh = get(L, egbase);
 
-	if (!Wh) {
+	if (!wh) {
 		return 0;
 	}
 
-	if (upcast(Game, game, &get_egbase(L))) {
-		PortDock* pd = Wh->get_portdock();
+	if (upcast(Game, game, &egbase)) {
+		PortDock* pd = wh->get_portdock();
 			if (!pd) {
 				return 0;
 			}
 		if (pd->expedition_started()){
-			game->send_player_start_or_cancel_expedition(*Wh);
+			game->send_player_start_or_cancel_expedition(*wh);
 			return 1;
 		}
 	}
@@ -4427,8 +4431,9 @@ int LuaShip::get_last_portdock(lua_State* L) {
 */
 // UNTESTED sink states
 int LuaShip::get_state(lua_State* L) {
-	if (is_a(Game, &get_egbase(L))) {
-		switch (get(L, get_egbase(L))->get_ship_state()) {
+	EditorGameBase& egbase = get_egbase(L);
+	if (is_a(Game, &egbase)) {
+		switch (get(L, egbase)->get_ship_state()) {
 			case Ship::TRANSPORT:
 				lua_pushstring(L, "transport");
 				break;
@@ -4460,8 +4465,9 @@ int LuaShip::get_state(lua_State* L) {
 }
 
 int LuaShip::get_scouting_direction(lua_State* L) {
-	if (is_a(Game, &get_egbase(L))) {
-		switch (get(L, get_egbase(L))->get_scouting_direction()) {
+	EditorGameBase& egbase = get_egbase(L);
+	if (is_a(Game, &egbase)) {
+		switch (get(L, egbase)->get_scouting_direction()) {
 			case WalkingDir::WALK_NE:
 				lua_pushstring(L, "ne");
 				break;
@@ -4489,7 +4495,8 @@ int LuaShip::get_scouting_direction(lua_State* L) {
 }
 
 int LuaShip::set_scouting_direction(lua_State* L) {
-	if (upcast(Game, game, &get_egbase(L))) {
+	EditorGameBase& egbase = get_egbase(L);
+	if (upcast(Game, game, &egbase)) {
 		std::string dirname = luaL_checkstring(L, 3);
 		WalkingDir dir = WalkingDir::IDLE;
 
@@ -4508,7 +4515,7 @@ int LuaShip::set_scouting_direction(lua_State* L) {
 		} else {
 			return 0;
 		}
-		game->send_player_ship_scouting_direction(*get(L, get_egbase(L)), dir);
+		game->send_player_ship_scouting_direction(*get(L, egbase), dir);
 		return 1;
 	}
 	return 0;
@@ -4523,8 +4530,9 @@ int LuaShip::set_scouting_direction(lua_State* L) {
 
 */
 int LuaShip::get_island_explore_direction(lua_State* L) {
-	if (is_a(Game, &get_egbase(L))) {
-		switch (get(L, get_egbase(L))->get_island_explore_direction()) {
+	EditorGameBase& egbase = get_egbase(L);
+	if (is_a(Game, &egbase)) {
+		switch (get(L, egbase)->get_island_explore_direction()) {
 			case IslandExploreDirection::kCounterClockwise:
 				lua_pushstring(L, "ccw");
 				break;
@@ -4540,8 +4548,9 @@ int LuaShip::get_island_explore_direction(lua_State* L) {
 }
 
 int LuaShip::set_island_explore_direction(lua_State* L) {
-	if (upcast(Game, game, &get_egbase(L))) {
-		Ship* ship = get(L, get_egbase(L));
+	EditorGameBase& egbase = get_egbase(L);
+	if (upcast(Game, game, &egbase)) {
+		Ship* ship = get(L, egbase);
 		std::string dir = luaL_checkstring(L, 3);
 		if (dir == "ccw"){
 			 game->send_player_ship_explore_island(*ship,  IslandExploreDirection::kCounterClockwise);
@@ -4636,9 +4645,10 @@ int LuaShip::get_workers(lua_State* L) {
 		:returns: true/false
 */
 int LuaShip::build_colonization_port(lua_State* L) {
-	Ship* ship =  get(L, get_egbase(L));
+	EditorGameBase& egbase = get_egbase(L);
+	Ship* ship =  get(L, egbase);
 	if (ship->get_ship_state() == Widelands::Ship::EXP_FOUNDPORTSPACE) {
-		if (upcast(Game, game, &get_egbase(L))) {
+		if (upcast(Game, game, &egbase)) {
 			game->send_player_ship_construct_port(*ship, ship->exp_port_spaces()->front());
 			return 1;
 		}
@@ -4987,7 +4997,7 @@ int LuaField::get_resource(lua_State * L) {
 }
 int LuaField::set_resource(lua_State * L) {
 	auto& egbase = get_egbase(L);
-	int32_t res = get_egbase(L).world().get_resource
+	int32_t res = egbase.world().get_resource
 		(luaL_checkstring(L, -1));
 
 	if (res == Widelands::INVALID_INDEX)
@@ -5013,16 +5023,16 @@ int LuaField::get_resource_amount(lua_State * L) {
 	return 1;
 }
 int LuaField::set_resource_amount(lua_State * L) {
+	EditorGameBase& egbase = get_egbase(L);
 	auto c  = fcoords(L);
 	int32_t res = c.field->get_resources();
 	int32_t amount = luaL_checkint32(L, -1);
-	const ResourceDescription * resDesc = get_egbase(L).world().get_resource(res);
+	const ResourceDescription * resDesc = egbase.world().get_resource(res);
 	int32_t max_amount = resDesc ? resDesc->max_amount() : 0;
 
 	if (amount < 0 || amount > max_amount)
 		report_error(L, "Illegal amount: %i, must be >= 0 and <= %i", amount, max_amount);
 
-	EditorGameBase & egbase = get_egbase(L);
 	auto& map = egbase.map();
 	if (is_a(Game, &egbase)) {
 		map.set_resources(c, amount);

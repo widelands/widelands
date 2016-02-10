@@ -886,14 +886,15 @@ int LuaPlayer::switchplayer(lua_State * L) {
 void LuaPlayer::m_parse_building_list
 	(lua_State * L, const TribeDescr & tribe, std::vector<DescriptionIndex> & rv)
 {
-	const Tribes& tribes = get_egbase(L).tribes();
+	EditorGameBase& egbase = get_egbase(L);
+	const Tribes& tribes = egbase.tribes();
 	if (lua_isstring(L, -1)) {
 		std::string opt = luaL_checkstring(L, -1);
 		if (opt != "all") {
 			report_error(L, "'%s' was not understood as argument!", opt.c_str());
 		}
 		// Only act on buildings that the tribe has or could conquer
-		const TribeDescr& tribe_descr = get(L, get_egbase(L)).tribe();
+		const TribeDescr& tribe_descr = get(L, egbase).tribe();
 		for (size_t i = 0; i < tribes.nrbuildings(); ++i) {
 			const DescriptionIndex& building_index = static_cast<DescriptionIndex>(i);
 			const BuildingDescr& descr = *tribe_descr.get_building_descr(building_index);
