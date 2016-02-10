@@ -856,10 +856,10 @@ HasSoldiers
 
 		.. code-block:: lua
 
-			l:set_soldiers{
+			l:set_soldiers({
 			  [{0,0,0,0}] = 10,
 			  [{1,2,3,4}] = 5,
-			)
+			})
 
 		would add 10 level 0 soldier and 5 soldiers with hit point level 1,
 		attack level 2, defense level 3 and evade level 4 (as long as this is
@@ -1819,7 +1819,7 @@ int LuaBuildingDescription::get_vision_range(lua_State * L) {
 			(RO) the workarea_radius of the building as an int.
 */
 int LuaBuildingDescription::get_workarea_radius(lua_State * L) {
-	lua_pushinteger(L, get()->m_workarea_info.begin()->first);
+	lua_pushinteger(L, get()->workarea_info_.begin()->first);
 	return 1;
 }
 

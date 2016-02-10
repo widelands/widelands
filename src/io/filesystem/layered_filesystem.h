@@ -67,8 +67,7 @@ public:
 	void make_directory         (const std::string & fs_dirname) override;
 
 	void * load(const std::string & fname, size_t & length) override;
-	virtual void write
-		(const std::string & fname, void const * data, int32_t length) override;
+	void write(const std::string& fname, void const* data, int32_t length) override;
 
 	StreamRead  * open_stream_read (const std::string & fname) override;
 	StreamWrite * open_stream_write(const std::string & fname) override;

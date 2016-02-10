@@ -200,8 +200,7 @@ public:
 
 
 protected:
-	virtual void create_options_window
-		(InteractiveGameBase &, UI::Window * & registry) override;
+	void create_options_window(InteractiveGameBase&, UI::Window*& registry) override;
 	void program_end(Game &, ProgramResult) override;
 
 private:

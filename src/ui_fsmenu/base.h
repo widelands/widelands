@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006, 2008-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,17 +21,8 @@
 #define WL_UI_FSMENU_BASE_H
 
 #include <string>
-#include <memory>
 
-#include "graphic/text_layout.h"
 #include "ui_basic/panel.h"
-
-namespace UI {
-struct Font;
-struct TextStyle;
-}
-
-class Image;
 
 /**
  * This class is the base class for a fullscreen menu.
@@ -85,8 +76,8 @@ public:
 	void draw(RenderTarget &) override;
 
 	///\return the size for texts fitting to current resolution
-	uint32_t fs_small();
-	uint32_t fs_big();
+	int fs_small();
+	int fs_big();
 
 	/// Handle keypresses
 	bool handle_key(bool down, SDL_Keysym code) override;

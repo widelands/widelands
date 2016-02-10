@@ -138,7 +138,7 @@ public:
 
 	/// Data that are used and managed by AI. They are here to have it saved as a port of player's data
 	struct AiPersistentState {
-		AiPersistentState() : initialized(0){}
+		AiPersistentState() : initialized(0) {}
 
 		//was initialized
 		uint8_t initialized;
@@ -155,6 +155,7 @@ public:
 		uint32_t ai_productionsites_ratio;
 		int32_t ai_personality_wood_difference;
 		uint32_t ai_personality_early_militarysites;
+		uint32_t last_soldier_trained;
 	} ai_data;
 
 	AiPersistentState* get_mutable_ai_persistent_state(){
@@ -460,13 +461,11 @@ public:
 	Flag *   build_flag(Coords);      /// Build a flag if it is allowed.
 	Road & force_road(const Path &);
 	Road * build_road(const Path &); /// Build a road if it is allowed.
-	Building & force_building
-		(const Coords,
-		 const Building::FormerBuildings &);
-	Building & force_csite
-		(const Coords,
+	Building& force_building(Coords, const Building::FormerBuildings&);
+	Building& force_csite
+		(Coords,
 		 DescriptionIndex,
-		 const Building::FormerBuildings & = Building::FormerBuildings());
+		 const Building::FormerBuildings& = Building::FormerBuildings());
 	Building * build(Coords, DescriptionIndex, bool, Building::FormerBuildings &);
 	void bulldoze(PlayerImmovable &, bool recurse = false);
 	void flagaction(Flag &);
@@ -550,8 +549,7 @@ private:
 	void update_building_statistics(Building &, NoteImmovable::Ownership ownership);
 	void update_team_players();
 	void play_message_sound(const Message::Type & msgtype);
-	void _enhance_or_dismantle
-		(Building *, DescriptionIndex const index_of_new_building);
+	void _enhance_or_dismantle(Building*, DescriptionIndex index_of_new_building);
 
 	// Called when a node becomes seen or has changed.  Discovers the node and
 	// those of the 6 surrounding edges/triangles that are not seen from another
@@ -616,7 +614,7 @@ private:
 	 */
 	std::vector< std::vector<uint32_t> > m_ware_stocks;
 
-	PlayerBuildingStats m_building_stats;
+	PlayerBuildingStats building_stats_;
 
 	DISALLOW_COPY_AND_ASSIGN(Player);
 };

@@ -79,8 +79,7 @@ protected:
 
 	uint32_t build_step_time() const override {return DISMANTLESITE_STEP_TIME;}
 
-	virtual void create_options_window
-		(InteractiveGameBase &, UI::Window * & registry) override;
+	void create_options_window(InteractiveGameBase&, UI::Window*& registry) override;
 
 	void draw(const EditorGameBase &, RenderTarget &, const FCoords&, const Point&) override;
 };

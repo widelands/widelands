@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -29,23 +29,23 @@ FullscreenMenuSinglePlayer::FullscreenMenuSinglePlayer() :
 // Title
 	title
 		(this,
-		 get_w() / 2, m_title_y,
+		 get_w() / 2, title_y_,
 		 _("Single Player"), UI::Align::kHCenter),
 
 // Buttons
-	vbox(this, m_box_x, m_box_y, UI::Box::Vertical,
-		  m_butw, get_h() - m_box_y, m_padding),
+	vbox(this, box_x_, box_y_, UI::Box::Vertical,
+		  butw_, get_h() - box_y_, padding_),
 	new_game
-		(&vbox, "new_game", 0, 0, m_butw, m_buth, g_gr->images().get(m_button_background),
+		(&vbox, "new_game", 0, 0, butw_, buth_, g_gr->images().get(button_background_),
 		 _("New Game"), "", true, false),
 	campaign
-		(&vbox, "campaigns", 0, 0, m_butw, m_buth, g_gr->images().get(m_button_background),
+		(&vbox, "campaigns", 0, 0, butw_, buth_, g_gr->images().get(button_background_),
 		 _("Campaigns"), "", true, false),
 	load_game
-		(&vbox, "load_game", 0, 0, m_butw, m_buth, g_gr->images().get(m_button_background),
+		(&vbox, "load_game", 0, 0, butw_, buth_, g_gr->images().get(button_background_),
 		 _("Load Game"), "", true, false),
 	back
-		(&vbox, "back", 0, 0, m_butw, m_buth, g_gr->images().get(m_button_background),
+		(&vbox, "back", 0, 0, butw_, buth_, g_gr->images().get(button_background_),
 		 _("Back"), "", true, false)
 {
 	new_game.sigclicked.connect
@@ -69,20 +69,20 @@ FullscreenMenuSinglePlayer::FullscreenMenuSinglePlayer() :
 			 boost::ref(*this),
 			 FullscreenMenuBase::MenuTarget::kBack));
 
-	title.set_font(ui_fn(), fs_big(), UI_FONT_CLR_FG);
+	title.set_fontsize(fs_big());
 
 	vbox.add(&new_game, UI::Align::kHCenter);
 	vbox.add(&campaign, UI::Align::kHCenter);
 
-	vbox.add_space(m_buth);
+	vbox.add_space(buth_);
 
 	vbox.add(&load_game, UI::Align::kHCenter);
 
-	vbox.add_space(6 * m_buth);
+	vbox.add_space(6 * buth_);
 
 	vbox.add(&back, UI::Align::kHCenter);
 
-	vbox.set_size(m_butw, get_h() - vbox.get_y());
+	vbox.set_size(butw_, get_h() - vbox.get_y());
 }
 
 void FullscreenMenuSinglePlayer::clicked_ok() {

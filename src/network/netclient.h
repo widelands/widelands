@@ -117,8 +117,6 @@ private:
 
 	NetClientImpl * d;
 	bool m_internet;
-	bool m_dedicated_access;
-	bool m_dedicated_temp_scenario;
 };
 
 #endif  // end of include guard: WL_NETWORK_NETCLIENT_H

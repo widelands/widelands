@@ -1,5 +1,3 @@
-# NOCOM(GunChleoc): Review this
-
 project (widelands)
 
 cmake_minimum_required (VERSION 2.8.7)
@@ -245,6 +243,7 @@ install(
     data/i18n
     data/images
     data/scripting
+    data/shaders
     data/tribes
     data/txts
     data/world

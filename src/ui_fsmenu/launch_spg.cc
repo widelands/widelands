@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2012 by the Widelands Development Team
+ * Copyright (C) 2002-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -64,122 +64,120 @@ FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG
 	FullscreenMenuBase(),
 
 // Values for alignment and size
-	m_butw (get_w() / 4),
-	m_buth (get_h() * 9 / 200),
+	butw_ (get_w() / 4),
+	buth_ (get_h() * 9 / 200),
 
 // Buttons
-	m_select_map
+	select_map_
 		(this, "select_map",
-		 get_w() * 7 / 10, get_h() * 3 / 10, m_butw, m_buth,
+		 get_w() * 7 / 10, get_h() * 3 / 10, butw_, buth_,
 		 g_gr->images().get("images/ui_basic/but1.png"),
 		 _("Select map"), std::string(), false, false),
-	m_wincondition
+	wincondition_
 		(this, "win_condition",
-		 get_w() * 7 / 10, get_h() * 4 / 10 + m_buth, m_butw, m_buth,
+		 get_w() * 7 / 10, get_h() * 4 / 10 + buth_, butw_, buth_,
 		 g_gr->images().get("images/ui_basic/but1.png"),
 		 "", std::string(), false, false),
-	m_back
+	back_
 		(this, "back",
-		 get_w() * 7 / 10, get_h() * 17 / 20, m_butw, m_buth,
+		 get_w() * 7 / 10, get_h() * 17 / 20, butw_, buth_,
 		 g_gr->images().get("images/ui_basic/but0.png"),
 		 _("Back"), std::string(), true, false),
-	m_ok
+	ok_
 		(this, "ok",
-		 get_w() * 7 / 10, get_h() * 9 / 10, m_butw, m_buth,
+		 get_w() * 7 / 10, get_h() * 9 / 10, butw_, buth_,
 		 g_gr->images().get("images/ui_basic/but2.png"),
 		 _("Start game"), std::string(), false, false),
 
 // Text labels
-	m_title
+	title_
 		(this,
 		 get_w() / 2, get_h() / 10,
 		 _("Launch Game"), UI::Align::kHCenter),
-	m_mapname
+	mapname_
 		(this,
-		 get_w() * 7 / 10 + m_butw / 2, get_h() * 53 / 200 - 15,
+		 get_w() * 7 / 10 + butw_ / 2, get_h() * 53 / 200 - 15,
 		 std::string(), UI::Align::kHCenter),
-	m_name
+	name_
 		(this,
 		 get_w() * 1 / 25, get_h() * 53 / 200 - 15,
 		 _("Player’s name"), UI::Align::kLeft),
-	m_type
+	type_
 		(this,
 		 // (Element x) + (PlayerDescriptionGroup x)  + border
 		 ((get_w() * 16 / 25) * 35 / 125) + (get_w() / 25) + 2, get_h() * 53 / 200 - 15,
 		 _("Player’s type"), UI::Align::kLeft),
-	m_team
+	team_
 		(this,
 		 ((get_w() * 16 / 25) * 35 / 125) + (get_w() / 25) + 2, get_h() * 53 / 200,
 		 _("Team"), UI::Align::kLeft),
-	m_tribe
+	tribe_
 		(this,
 		 ((get_w() * 16 / 25) * 80 / 125) + (get_w() / 25) + 2, get_h() * 53 / 200 - 15,
 		 _("Player’s tribe"), UI::Align::kLeft),
-	m_init
+	init_
 		(this,
 		 ((get_w() * 16 / 25) * 55 / 125) + (get_w() / 25) + 2, get_h() * 53 / 200,
 		 _("Start type"), UI::Align::kLeft),
-	m_wincondition_type
+	wincondition_type_
 		(this,
-		 get_w() * 7 / 10 + (m_butw / 2), get_h() * 7 / 20 + m_buth,
+		 get_w() * 7 / 10 + (butw_ / 2), get_h() * 7 / 20 + buth_,
 		 _("Type of game"), UI::Align::kHCenter),
 
 // Variables and objects used in the menu
-	m_settings     (settings),
-	m_ctrl         (ctrl),
-	m_is_scenario  (false)
+	settings_     (settings),
+	ctrl_         (ctrl),
+	is_scenario_  (false)
 {
-	m_select_map.sigclicked.connect(boost::bind(&FullscreenMenuLaunchSPG::select_map, boost::ref(*this)));
-	m_wincondition.sigclicked.connect
+	select_map_.sigclicked.connect(boost::bind(&FullscreenMenuLaunchSPG::select_map, boost::ref(*this)));
+	wincondition_.sigclicked.connect
 		(boost::bind
 			 (&FullscreenMenuLaunchSPG::win_condition_clicked,
 			  boost::ref(*this)));
-	m_back.sigclicked.connect(boost::bind(&FullscreenMenuLaunchSPG::clicked_back, boost::ref(*this)));
-	m_ok.sigclicked.connect
+	back_.sigclicked.connect(boost::bind(&FullscreenMenuLaunchSPG::clicked_back, boost::ref(*this)));
+	ok_.sigclicked.connect
 		(boost::bind
 			 (&FullscreenMenuLaunchSPG::clicked_ok, boost::ref(*this)));
 
-	m_lua = new LuaInterface();
-	m_win_condition_scripts = m_settings->settings().win_condition_scripts;
-	m_cur_wincondition = -1;
+	lua_ = new LuaInterface();
+	win_condition_scripts_ = settings_->settings().win_condition_scripts;
+	cur_wincondition_ = -1;
 	win_condition_clicked();
 
-	m_title.set_textstyle(UI::TextStyle::ui_big());
+	title_.set_fontsize(UI_FONT_SIZE_BIG);
 
-	UI::TextStyle tsmaller
-		(UI::TextStyle::makebold
-		 (UI::Font::get(ui_fn(), fs_small() * 4 / 5), UI_FONT_CLR_FG));
-	m_name.set_textstyle(tsmaller);
-	m_type.set_textstyle(tsmaller);
-	m_team.set_textstyle(tsmaller);
-	m_tribe.set_textstyle(tsmaller);
-	m_init.set_textstyle(tsmaller);
+	int smaller_fontsize = fs_small() * 4 / 5;
+	name_.set_fontsize(smaller_fontsize);
+	type_.set_fontsize(smaller_fontsize);
+	team_.set_fontsize(smaller_fontsize);
+	tribe_.set_fontsize(smaller_fontsize);
+	init_.set_fontsize(smaller_fontsize);
 
-	uint32_t y = get_h() * 3 / 10 - m_buth;
+	uint32_t y = get_h() * 3 / 10 - buth_;
 	for (uint32_t i = 0; i < MAX_PLAYERS; ++i) {
 		const Image* player_image = g_gr->images().get(player_pictures_small[i]);
 		assert(player_image);
 
-		m_pos[i] =
+		pos_[i] =
 			new UI::Button
 				(this, "switch_to_position",
-				 get_w() / 100, y += m_buth, get_h() * 17 / 500, get_h() * 17 / 500,
+				 get_w() / 100, y += buth_, get_h() * 17 / 500, get_h() * 17 / 500,
 				 g_gr->images().get("images/ui_basic/but1.png"),
 				 player_image,
 				 _("Switch to position"), false);
-		m_pos[i]->sigclicked.connect
+		pos_[i]->sigclicked.connect
 			(boost::bind(&FullscreenMenuLaunchSPG::switch_to_position, boost::ref(*this), i));
-		m_players[i] =
+		players_[i] =
 			new PlayerDescriptionGroup
 				(this,
 				 get_w() / 25, y, get_w() * 16 / 25, get_h() * 17 / 500 * 2,
 				 settings, i);
-		y += m_buth / 1.17;
+		y += buth_ / 1.17;
 	}
 }
 
 FullscreenMenuLaunchSPG::~FullscreenMenuLaunchSPG() {
-	delete m_lua;
+	delete lua_;
 }
 
 /**
@@ -189,7 +187,7 @@ FullscreenMenuLaunchSPG::~FullscreenMenuLaunchSPG() {
 void FullscreenMenuLaunchSPG::start()
 {
 	select_map();
-	if (m_settings->settings().mapname.empty()) {
+	if (settings_->settings().mapname.empty()) {
 		end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kBack);
 	}
 }
@@ -197,8 +195,8 @@ void FullscreenMenuLaunchSPG::start()
 
 void FullscreenMenuLaunchSPG::think()
 {
-	if (m_ctrl)
-		m_ctrl->think();
+	if (ctrl_)
+		ctrl_->think();
 
 	refresh();
 }
@@ -213,9 +211,9 @@ void FullscreenMenuLaunchSPG::clicked_back()
 	//  user it seems as if the launchgame-menu is a child of mapselect and
 	//  not the other way around - just end_modal(0); will be seen as bug
 	//  from user point of view, so we reopen the mapselect-menu.
-	m_settings->set_map(std::string(), std::string(), 0);
+	settings_->set_map(std::string(), std::string(), 0);
 	select_map();
-	if (m_settings->settings().mapname.empty())
+	if (settings_->settings().mapname.empty())
 		return end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kBack);
 	refresh();
 }
@@ -225,10 +223,10 @@ void FullscreenMenuLaunchSPG::clicked_back()
  */
 void FullscreenMenuLaunchSPG::win_condition_clicked()
 {
-	if (m_settings->can_change_map()) {
-		m_cur_wincondition++;
-		m_cur_wincondition %= m_win_condition_scripts.size();
-		m_settings->set_win_condition_script(m_win_condition_scripts[m_cur_wincondition]);
+	if (settings_->can_change_map()) {
+		cur_wincondition_++;
+		cur_wincondition_ %= win_condition_scripts_.size();
+		settings_->set_win_condition_script(win_condition_scripts_[cur_wincondition_]);
 	}
 
 	win_condition_update();
@@ -238,9 +236,9 @@ void FullscreenMenuLaunchSPG::win_condition_clicked()
  * update win conditions information
  */
 void FullscreenMenuLaunchSPG::win_condition_update() {
-	if (m_settings->settings().scenario) {
-		m_wincondition.set_title(_("Scenario"));
-		m_wincondition.set_tooltip
+	if (settings_->settings().scenario) {
+		wincondition_.set_title(_("Scenario"));
+		wincondition_.set_tooltip
 			(_("Win condition is set through the scenario"));
 	} else {
 		win_condition_load();
@@ -256,14 +254,14 @@ void FullscreenMenuLaunchSPG::win_condition_load() {
 	bool is_usable = true;
 	try {
 		std::unique_ptr<LuaTable> t =
-			m_lua->run_script(m_settings->get_win_condition_script());
+			lua_->run_script(settings_->get_win_condition_script());
 		t->do_not_warn_about_unaccessed_keys();
 
 		// Skip this win condition if the map doesn't have all the required tags
-		if (t->has_key("map_tags") && !m_settings->settings().mapfilename.empty()) {
+		if (t->has_key("map_tags") && !settings_->settings().mapfilename.empty()) {
 			Widelands::Map map;
 			std::unique_ptr<Widelands::MapLoader> ml =
-					map.get_correct_loader(m_settings->settings().mapfilename);
+					map.get_correct_loader(settings_->settings().mapfilename);
 			ml->preload_map(true);
 			for (const std::string map_tag : t->get_table("map_tags")->array_entries<std::string>()) {
 				if (!map.has_tag(map_tag)) {
@@ -277,9 +275,9 @@ void FullscreenMenuLaunchSPG::win_condition_load() {
 		const std::string descr = t->get_string("description");
 		{
 			i18n::Textdomain td("win_conditions");
-			m_wincondition.set_title(_(name));
+			wincondition_.set_title(_(name));
 		}
-		m_wincondition.set_tooltip(descr.c_str());
+		wincondition_.set_tooltip(descr.c_str());
 	} catch (LuaTableKeyError &) {
 		// might be that this is not a win condition after all.
 		is_usable = false;
@@ -294,7 +292,7 @@ void FullscreenMenuLaunchSPG::win_condition_load() {
  */
 void FullscreenMenuLaunchSPG::clicked_ok()
 {
-	if (!g_fs->file_exists(m_filename))
+	if (!g_fs->file_exists(filename_))
 		throw WLWarning
 			(_("File not found"),
 			 _
@@ -305,9 +303,9 @@ void FullscreenMenuLaunchSPG::clicked_ok()
 			 	 "a file that you do not own. Normally, such a file should be sent "
 			 	 "from the host to you, but perhaps the transfer was not yet "
 			 	 "finished!?!"),
-			 m_filename.c_str());
-	if (m_settings->can_launch()) {
-		if (m_is_scenario) {
+			 filename_.c_str());
+	if (settings_->can_launch()) {
+		if (is_scenario_) {
 			end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kScenarioGame);
 		} else {
 			end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kNormalGame);
@@ -322,44 +320,44 @@ void FullscreenMenuLaunchSPG::clicked_ok()
  */
 void FullscreenMenuLaunchSPG::refresh()
 {
-	const GameSettings & settings = m_settings->settings();
+	const GameSettings & settings = settings_->settings();
 
 	{
 		// Translate the maps name
 		const char * nomap = _("(no map)");
 		i18n::Textdomain td("maps");
-		m_mapname.set_text(settings.mapname.size() != 0 ? _(settings.mapname) : nomap);
+		mapname_.set_text(settings.mapname.size() != 0 ? _(settings.mapname) : nomap);
 	}
-	m_filename = settings.mapfilename;
-	m_nr_players = settings.players.size();
+	filename_ = settings.mapfilename;
+	nr_players_ = settings.players.size();
 
-	m_ok.set_enabled(m_settings->can_launch());
+	ok_.set_enabled(settings_->can_launch());
 
-	m_select_map.set_visible(m_settings->can_change_map());
-	m_select_map.set_enabled(m_settings->can_change_map());
-	m_wincondition.set_enabled
-		(m_settings->can_change_map() && !settings.scenario);
+	select_map_.set_visible(settings_->can_change_map());
+	select_map_.set_enabled(settings_->can_change_map());
+	wincondition_.set_enabled
+		(settings_->can_change_map() && !settings.scenario);
 
 	if (settings.scenario)
 		set_scenario_values();
 
 	// "Choose Position" Buttons in frond of PDG
-	for (uint8_t i = 0; i < m_nr_players; ++i) {
-		m_pos[i]->set_visible(true);
+	for (uint8_t i = 0; i < nr_players_; ++i) {
+		pos_[i]->set_visible(true);
 		const PlayerSettings & player = settings.players[i];
 		if
 			(player.state == PlayerSettings::stateOpen ||
 			 player.state == PlayerSettings::stateComputer)
-			m_pos[i]->set_enabled(true);
+			pos_[i]->set_enabled(true);
 		else
-			m_pos[i]->set_enabled(false);
+			pos_[i]->set_enabled(false);
 	}
-	for (uint32_t i = m_nr_players; i < MAX_PLAYERS; ++i)
-		m_pos[i]->set_visible(false);
+	for (uint32_t i = nr_players_; i < MAX_PLAYERS; ++i)
+		pos_[i]->set_visible(false);
 
 	// update the player description groups
 	for (uint32_t i = 0; i < MAX_PLAYERS; ++i)
-		m_players[i]->refresh();
+		players_[i]->refresh();
 
 	win_condition_update();
 }
@@ -370,25 +368,26 @@ void FullscreenMenuLaunchSPG::refresh()
  */
 void FullscreenMenuLaunchSPG::select_map()
 {
-	if (!m_settings->can_change_map())
+	if (!settings_->can_change_map())
 		return;
-	FullscreenMenuMapSelect msm(m_settings, nullptr);
+
+	FullscreenMenuMapSelect msm(settings_, nullptr);
 	FullscreenMenuBase::MenuTarget code = msm.run<FullscreenMenuBase::MenuTarget>();
 
 	if (code == FullscreenMenuBase::MenuTarget::kBack) {
 		// Set scenario = false, else the menu might crash when back is pressed.
-		m_settings->set_scenario(false);
+		settings_->set_scenario(false);
 		return;  // back was pressed
 	}
 
-	m_is_scenario = code == FullscreenMenuBase::MenuTarget::kScenarioGame;
-	m_settings->set_scenario(m_is_scenario);
+	is_scenario_ = code == FullscreenMenuBase::MenuTarget::kScenarioGame;
+	settings_->set_scenario(is_scenario_);
 
 	const MapData & mapdata = *msm.get_map();
-	m_nr_players = mapdata.nrplayers;
+	nr_players_ = mapdata.nrplayers;
 
-	safe_place_for_host(m_nr_players);
-	m_settings->set_map(mapdata.name, mapdata.filename, m_nr_players);
+	safe_place_for_host(nr_players_);
+	settings_->set_map(mapdata.name, mapdata.filename, nr_players_);
 }
 
 
@@ -399,18 +398,18 @@ void FullscreenMenuLaunchSPG::select_map()
  */
 void FullscreenMenuLaunchSPG::set_scenario_values()
 {
-	if (m_settings->settings().mapfilename.empty())
+	if (settings_->settings().mapfilename.empty())
 		throw wexception
 				("settings()->scenario was set to true, but no map is available");
 	Widelands::Map map; //  MapLoader needs a place to put its preload data
 	std::unique_ptr<Widelands::MapLoader> map_loader(
-	   map.get_correct_loader(m_settings->settings().mapfilename));
-	map.set_filename(m_settings->settings().mapfilename);
+	   map.get_correct_loader(settings_->settings().mapfilename));
+	map.set_filename(settings_->settings().mapfilename);
 	map_loader->preload_map(true);
 	Widelands::PlayerNumber const nrplayers = map.get_nrplayers();
 	for (uint8_t i = 0; i < nrplayers; ++i) {
-		m_settings->set_player_name (i, map.get_scenario_player_name (i + 1));
-		m_settings->set_player_tribe(i, map.get_scenario_player_tribe(i + 1));
+		settings_->set_player_name (i, map.get_scenario_player_name (i + 1));
+		settings_->set_player_tribe(i, map.get_scenario_player_tribe(i + 1));
 	}
 }
 
@@ -419,7 +418,7 @@ void FullscreenMenuLaunchSPG::set_scenario_values()
  */
 void FullscreenMenuLaunchSPG::switch_to_position(uint8_t const pos)
 {
-	m_settings->set_player_number(pos);
+	settings_->set_player_number(pos);
 }
 
 
@@ -430,7 +429,7 @@ void FullscreenMenuLaunchSPG::switch_to_position(uint8_t const pos)
 void FullscreenMenuLaunchSPG::safe_place_for_host
 	(uint8_t const newplayernumber)
 {
-	GameSettings settings = m_settings->settings();
+	GameSettings settings = settings_->settings();
 
 	// Check whether the host would still keep a valid position and return if
 	// yes.
@@ -449,7 +448,7 @@ void FullscreenMenuLaunchSPG::safe_place_for_host
 	}
 
 	// Kick player 1 and take the position
-	m_settings->set_player_state(0, PlayerSettings::stateClosed);
-	m_settings->set_player_state(0, PlayerSettings::stateOpen);
+	settings_->set_player_state(0, PlayerSettings::stateClosed);
+	settings_->set_player_state(0, PlayerSettings::stateOpen);
 	switch_to_position(0);
 }

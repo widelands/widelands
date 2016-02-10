@@ -100,7 +100,7 @@ struct NetClientImpl {
 
 NetClient::NetClient
 	(IPaddress * const svaddr, const std::string & playername, bool internet)
-: d(new NetClientImpl), m_internet(internet), m_dedicated_access(false), m_dedicated_temp_scenario(false)
+: d(new NetClientImpl), m_internet(internet)
 {
 	d->sock = SDLNet_TCP_Open(svaddr);
 	if (d->sock == nullptr)
@@ -157,17 +157,6 @@ void NetClient::run ()
 		d->modal = &lgm;
 		FullscreenMenuBase::MenuTarget code = lgm.run<FullscreenMenuBase::MenuTarget>();
 		d->modal = nullptr;
-		 // Only possible if server is dedicated - client pressed "start game" button
-		if (code == FullscreenMenuBase::MenuTarget::kNormalGame) {
-			SendPacket subs;
-			subs.unsigned_8(NETCMD_LAUNCH);
-			subs.send(d->sock);
-
-			// Reopen the menu - perhaps the start is denied or other problems occur
-			d->modal = &lgm;
-			code = lgm.run<FullscreenMenuBase::MenuTarget>();
-			d->modal = nullptr;
-		}
 		if (code == FullscreenMenuBase::MenuTarget::kBack) {
 			// if this is an internet game, tell the metaserver that client is back in the lobby.
 			if (m_internet)
@@ -184,48 +173,43 @@ void NetClient::run ()
 #endif
 
 	try {
-		UI::ProgressWindow * loaderUI = new UI::ProgressWindow("images/loadscreens/progress.png");
+		UI::ProgressWindow* loader_ui = new UI::ProgressWindow("images/loadscreens/progress.png");
 		std::vector<std::string> tipstext;
 		tipstext.push_back("general_game");
 		tipstext.push_back("multiplayer");
 		try {
 			tipstext.push_back(get_players_tribe());
-		} catch (NoTribe) {}
-		GameTips tips (*loaderUI, tipstext);
+		} catch (NoTribe) {
+		}
+		GameTips tips(*loader_ui, tipstext);
 
-		loaderUI->step(_("Preparing game"));
+		loader_ui->step(_("Preparing game"));
 
 		d->game = &game;
 		game.set_game_controller(this);
 		uint8_t const pn = d->settings.playernum + 1;
-		InteractiveGameBase * igb;
+		InteractiveGameBase* igb;
 		if (pn > 0)
-			igb =
-				new InteractivePlayer
-					(game, g_options.pull_section("global"),
-					 pn, true);
+			igb = new InteractivePlayer(game, g_options.pull_section("global"), pn, true);
 		else
-			igb =
-				new InteractiveSpectator
-					(game, g_options.pull_section("global"), true);
+			igb = new InteractiveSpectator(game, g_options.pull_section("global"), true);
 		game.set_ibase(igb);
 		igb->set_chat_provider(*this);
-		if (!d->settings.savegame) //  new map
-			game.init_newgame(loaderUI, d->settings);
-		else // savegame
-			game.init_savegame(loaderUI, d->settings);
+		if (!d->settings.savegame) {  //  new map
+			game.init_newgame(loader_ui, d->settings);
+		} else {  // savegame
+			game.init_savegame(loader_ui, d->settings);
+		}
 		d->time.reset(game.get_gametime());
 		d->lasttimestamp = game.get_gametime();
 		d->lasttimestamp_realtime = SDL_GetTicks();
 
 		d->modal = game.get_ibase();
-		game.run
-			(loaderUI,
-			 d->settings.savegame ?
-			 Widelands::Game::Loaded
-			 : d->settings.scenario ?
-			 Widelands::Game::NewMPScenario : Widelands::Game::NewNonScenario,
-			 "", false);
+		game.run(loader_ui, d->settings.savegame ? Widelands::Game::Loaded : d->settings.scenario ?
+	                                             Widelands::Game::NewMPScenario :
+	                                             Widelands::Game::NewNonScenario,
+	            "", false,
+	            (boost::format("netclient_%d") % static_cast<int>(d->settings.usernum)).str());
 
 		// if this is an internet game, tell the metaserver that the game is done.
 		if (m_internet)
@@ -318,38 +302,16 @@ const GameSettings & NetClient::settings()
 	return d->settings;
 }
 
-void NetClient::set_scenario(bool scenario)
-{
-	// only accessible, if server is a dedicated server and access is granted
-	if (!m_dedicated_access)
-		return;
-	m_dedicated_temp_scenario = scenario;
+void NetClient::set_scenario(bool) {
 }
 
-bool NetClient::can_change_map()
-{
-	// only true, if server is a dedicated server and access is granted
-	return m_dedicated_access;
+bool NetClient::can_change_map() {
+	return false;
 }
 
-bool NetClient::can_change_player_state(uint8_t const number)
+bool NetClient::can_change_player_state(uint8_t const)
 {
-	if (!m_dedicated_access) // normal case
-		return false;
-
-	// dedicated server, access granted
-	if (d->settings.savegame)
-		return d->settings.players.at(number).state != PlayerSettings::stateClosed;
-	else if (d->settings.scenario)
-			return
-				((d->settings.players.at(number).state == PlayerSettings::stateOpen
-				  ||
-				  d->settings.players.at(number).state == PlayerSettings::stateHuman)
-				 &&
-				 d->settings .players.at(number).closeable)
-				||
-				d->settings  .players.at(number).state == PlayerSettings::stateClosed;
-	return true;
+	return false;
 }
 
 bool NetClient::can_change_player_tribe(uint8_t number)
@@ -359,75 +321,17 @@ bool NetClient::can_change_player_tribe(uint8_t number)
 
 bool NetClient::can_change_player_team(uint8_t number)
 {
-	if (!m_dedicated_access) // normal case
-		return (number == d->settings.playernum) && !d->settings.scenario && !d->settings.savegame;
-	else { // dedicated server, access granted
-		if (d->settings.scenario || d->settings.savegame)
-			return false;
-		if (number >= d->settings.players.size())
-			return false;
-		if (number == d->settings.playernum)
-			return true;
-		return
-			d->settings.players.at(number).state == PlayerSettings::stateComputer;
-	}
+	return (number == d->settings.playernum) && !d->settings.scenario && !d->settings.savegame;
 }
 
 bool NetClient::can_change_player_init(uint8_t number)
 {
-	if (!m_dedicated_access) // normal case
-		return false;
-	else { // dedicated server, access granted
-		if (d->settings.scenario || d->settings.savegame)
-			return false;
-		return number < d->settings.players.size();
-	}
+	return false;
 }
 
 bool NetClient::can_launch()
 {
-	// only true, if server is a dedicated server and access is granted
-	if (!m_dedicated_access)
-		return false;
-	if (d->settings.mapname.empty())
-		return false;
-	if (d->settings.players.size() < 1)
-		return false;
-	if (d->game)
-		return false;
-
-	// if there is one client that is currently receiving a file, we can not launch.
-	for (uint8_t i = 0; i < d->settings.users.size(); ++i) {
-		if (d->settings.users[i].position == d->settings.users[i].not_connected())
-			continue;
-		if (!d->settings.users[i].ready)
-			return false;
-	}
-
-	// all players must be connected to a controller (human/ai) or be closed.
-	for (size_t i = 0; i < d->settings.players.size(); ++i) {
-		if (d->settings.players.at(i).state == PlayerSettings::stateOpen)
-			return false;
-	}
-	return true;
-}
-
-void NetClient::set_map
-	(const std::string & name,
-	 const std::string & path,
-	 uint32_t /* players */,
-	 bool savegame)
-{
-	// only accessible, if server is a dedicated server and access is granted
-	if (!m_dedicated_access)
-		return;
-	SendPacket s;
-	s.unsigned_8(NETCMD_SETTING_MAP);
-	s.string(name);
-	s.string(path);
-	s.unsigned_8(savegame ? 1 : 0);
-	s.unsigned_8(m_dedicated_temp_scenario ? 1 : 0);
-	s.send(d->sock);
+	return false;
 }
 
 void NetClient::set_player_state(uint8_t, PlayerSettings::State)
@@ -442,18 +346,16 @@ void NetClient::set_player_ai(uint8_t, const std::string &, bool const /* random
 
 void NetClient::next_player_state(uint8_t number)
 {
-	// only accessible, if server is a dedicated server and access is granted
-	if (!m_dedicated_access)
-		return;
-	SendPacket s;
-	s.unsigned_8(NETCMD_SETTING_PLAYER);
-	s.unsigned_8(number);
-	s.send(d->sock);
+	// client is not allowed to do this
+}
+
+void NetClient::set_map(const std::string&, const std::string&, uint32_t, bool) {
+	// client is not allowed to do this
 }
 
 void NetClient::set_player_tribe(uint8_t number, const std::string & tribe, bool const random_tribe)
 {
-	if ((number != d->settings.playernum) && !m_dedicated_access)
+	if ((number != d->settings.playernum))
 		return;
 
 	SendPacket s;
@@ -466,7 +368,7 @@ void NetClient::set_player_tribe(uint8_t number, const std::string & tribe, bool
 
 void NetClient::set_player_team(uint8_t number, Widelands::TeamNumber team)
 {
-	if ((number != d->settings.playernum) && !m_dedicated_access)
+	if ((number != d->settings.playernum))
 		return;
 
 	SendPacket s;
@@ -483,7 +385,7 @@ void NetClient::set_player_closeable(uint8_t, bool)
 
 void NetClient::set_player_shared(uint8_t number, uint8_t player)
 {
-	if ((number != d->settings.playernum) && !m_dedicated_access)
+	if ((number != d->settings.playernum))
 		return;
 
 	SendPacket s;
@@ -495,7 +397,7 @@ void NetClient::set_player_shared(uint8_t number, uint8_t player)
 
 void NetClient::set_player_init(uint8_t number, uint8_t)
 {
-	if ((number != d->settings.playernum) && !m_dedicated_access)
+	if ((number != d->settings.playernum))
 		return;
 
 	// Host will decide what to change, therefore the init is not send, just the request to change
@@ -526,12 +428,7 @@ void NetClient::set_win_condition_script(std::string) {
 }
 
 void NetClient::next_win_condition() {
-	// only accessible, if server is a dedicated server and access is granted
-	if (!m_dedicated_access)
-		return;
-	SendPacket s;
-	s.unsigned_8(NETCMD_WIN_CONDITION);
-	s.send(d->sock);
+	// Clients are not allowed to change this
 }
 
 void NetClient::set_player_number(uint8_t const number)
@@ -723,23 +620,6 @@ void NetClient::handle_packet(RecvPacket & packet)
 		break;
 	}
 
-	case NETCMD_DEDICATED_MAPS: {
-		DedicatedMapInfos info;
-		info.path     = g_fs->FileSystem::fix_cross_file(packet.string());
-		info.players  = packet.unsigned_8();
-		info.scenario = packet.unsigned_8() == 1;
-		d->settings.maps.push_back(info);
-		break;
-	}
-
-	case NETCMD_DEDICATED_SAVED_GAMES: {
-		DedicatedMapInfos info;
-		info.path    = g_fs->FileSystem::fix_cross_file(packet.string());
-		info.players = packet.unsigned_8();
-		d->settings.saved_games.push_back(info);
-		break;
-	}
-
 	case NETCMD_NEW_FILE_AVAILABLE: {
 		std::string path = g_fs->FileSystem::fix_cross_file(packet.string());
 		uint32_t bytes   = packet.unsigned_32();
@@ -839,7 +719,6 @@ void NetClient::handle_packet(RecvPacket & packet)
 			fr.open(*g_fs, file->filename);
 
 			std::unique_ptr<char[]> complete(new char[file->bytes]);
-			if (!complete) throw wexception("Out of memory");
 
 			fr.data_complete(complete.get(), file->bytes);
 			SimpleMD5Checksum md5sum;
@@ -952,19 +831,23 @@ void NetClient::handle_packet(RecvPacket & packet)
 		d->modal->end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kOk);
 		break;
 	}
+
 	case NETCMD_SETSPEED:
 		d->realspeed = packet.unsigned_16();
 		log
 			("[Client] speed: %u.%03u\n",
 			 d->realspeed / 1000, d->realspeed % 1000);
 		break;
+
 	case NETCMD_TIME:
 		d->time.receive(packet.signed_32());
 		break;
+
 	case NETCMD_WAIT:
 		log("[Client]: server is waiting.\n");
 		d->server_is_waiting = true;
 		break;
+
 	case NETCMD_PLAYERCOMMAND: {
 		if (!d->game)
 			throw DisconnectException("PLAYERCMD_WO_GAME");
@@ -977,6 +860,7 @@ void NetClient::handle_packet(RecvPacket & packet)
 		d->time.receive(time);
 		break;
 	}
+
 	case NETCMD_SYNCREQUEST: {
 		if (!d->game)
 			throw DisconnectException("SYNCREQUEST_WO_GAME");
@@ -985,6 +869,7 @@ void NetClient::handle_packet(RecvPacket & packet)
 		d->game->enqueue_command(new CmdNetCheckSync(time, this));
 		break;
 	}
+
 	case NETCMD_CHAT: {
 		ChatMessage c;
 		c.time = time(nullptr);
@@ -997,6 +882,7 @@ void NetClient::handle_packet(RecvPacket & packet)
 		Notifications::publish(c);
 		break;
 	}
+
 	case NETCMD_SYSTEM_MESSAGE_CODE: {
 		ChatMessage c;
 		c.time = time(nullptr);
@@ -1011,10 +897,7 @@ void NetClient::handle_packet(RecvPacket & packet)
 		Notifications::publish(c);
 		break;
 	}
-	case NETCMD_DEDICATED_ACCESS: {
-		m_dedicated_access = true;
-		break;
-	}
+
 	case NETCMD_INFO_DESYNC:
 		log
 			("[Client] received NETCMD_INFO_DESYNC. Trying to salvage some "
@@ -1022,6 +905,7 @@ void NetClient::handle_packet(RecvPacket & packet)
 		if (d->game)
 			d->game->save_syncstream(true);
 		break;
+
 	default:
 		throw ProtocolException(cmd);
 	}

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2009, 2011 by the Widelands Development Team
+ * Copyright (C) 2002-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -52,14 +52,14 @@ struct MultilineTextarea : public Panel {
 		 const Align                      = UI::Align::kLeft,
 		 MultilineTextarea::ScrollMode scroll_mode = MultilineTextarea::ScrollMode::kScrollNormal);
 
-	const std::string& get_text() const {return m_text;}
+	const std::string& get_text() const {return text_;}
 
 	void set_text(const std::string&);
 
 	uint32_t scrollbar_w() const {return 24;}
-	uint32_t get_eff_w() const {return m_scrollbar.is_enabled() ? get_w() - scrollbar_w() : get_w();}
+	uint32_t get_eff_w() const {return scrollbar_.is_enabled() ? get_w() - scrollbar_w() : get_w();}
 
-	void set_color(RGBColor fg) {m_style.fg = fg;}
+	void set_color(RGBColor fg) {color_ = fg;}
 
 	// Drawing and event handlers
 	void draw(RenderTarget&) override;
@@ -74,15 +74,15 @@ private:
 	void recompute();
 	void scrollpos_changed(int32_t pixels);
 
-	std::string m_text;
-	UI::TextStyle m_style;
-	Align m_align;
+	std::string text_;
+	RGBColor color_;
+	Align align_;
 
 	bool isrichtext;
 	RichText rt;
 
-	Scrollbar   m_scrollbar;
-	ScrollMode  m_scrollmode;
+	Scrollbar   scrollbar_;
+	ScrollMode  scrollmode_;
 };
 
 }

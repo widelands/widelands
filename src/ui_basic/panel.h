@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -241,9 +241,6 @@ public:
 	void set_tooltip(const std::string& text) {_tooltip = text;}
 	const std::string& tooltip() const {return _tooltip;}
 
-	///\return the current set UI font
-	std::string ui_fn();
-
 	virtual void die();
 
 protected:
@@ -358,14 +355,14 @@ struct NamedPanel : public Panel {
 		 int32_t  const nx, int32_t  const ny,
 		 int const nw, int const nh,
 		 const std::string & tooltip_text = std::string())
-		: Panel(nparent, nx, ny, nw, nh, tooltip_text), m_name(name)
+		: Panel(nparent, nx, ny, nw, nh, tooltip_text), name_(name)
 	{
 	}
 
-	const std::string & get_name() const {return m_name;}
+	const std::string & get_name() const {return name_;}
 
 private:
-	std::string m_name;
+	std::string name_;
 };
 
 }

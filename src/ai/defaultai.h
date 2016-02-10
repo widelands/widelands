@@ -343,7 +343,7 @@ private:
 
 	// this is a bunch of patterns that have to identify weapons and armors for input queues of trainingsites
 	std::vector<std::string> const armors_and_weapons =
-		{"ax", "lance", "armor", "helm", "lance", "trident", "tabard", "shield", "mask"};
+		{"ax", "armor", "helm", "lance", "trident", "tabard", "shield", "mask", "spear"};
 
 	enum {kReprioritize, kStopShipyard, kStapShipyard};
 

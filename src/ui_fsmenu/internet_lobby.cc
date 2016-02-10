@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006-2009, 2011-2013, 2015 by the Widelands Development Team
+ * Copyright (C) 2004-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -40,28 +40,27 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby
 	FullscreenMenuBase("images/ui_fsmenu/internetmenu.jpg"),
 
 // Values for alignment and size
-	m_butx (get_w() * 13 / 40),
-	m_butw (get_w() * 36 / 125),
-	m_buth (get_h() * 19 / 400),
-	m_lisw (get_w() * 623 / 1000),
-	m_fs   (fs_small()),
-	m_prev_clientlist_len(1000),
-	m_fn   (ui_fn()),
+	butx_ (get_w() * 13 / 40),
+	butw_ (get_w() * 36 / 125),
+	buth_ (get_h() * 19 / 400),
+	lisw_ (get_w() * 623 / 1000),
+	fs_   (fs_small()),
+	prev_clientlist_len_(1000),
 
 // Text labels
 	title
 		(this,
 		 get_w() / 2, get_h() / 20,
 		 _("Metaserver Lobby"), UI::Align::kHCenter),
-	m_clients
+	clients_
 		(this,
 		 get_w() * 4 / 125, get_h() * 15 / 100,
 		 _("Clients online:")),
-	m_opengames
+	opengames_
 		(this,
 		 get_w() * 17 / 25, get_h() * 15 / 100,
 		 _("List of games:")),
-	m_servername
+	servername_
 		(this,
 		 get_w() * 17 / 25, get_h() * 63 / 100,
 		 _("Name of your server:")),
@@ -69,40 +68,40 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby
 // Buttons
 	joingame
 		(this, "join_game",
-		 get_w() * 17 / 25, get_h() * 55 / 100, m_butw, m_buth,
+		 get_w() * 17 / 25, get_h() * 55 / 100, butw_, buth_,
 		 g_gr->images().get("images/ui_basic/but1.png"),
 		 _("Join this game"), std::string(), false, false),
 	hostgame
 		(this, "host_game",
-		 get_w() * 17 / 25, get_h() * 81 / 100, m_butw, m_buth,
+		 get_w() * 17 / 25, get_h() * 81 / 100, butw_, buth_,
 		 g_gr->images().get("images/ui_basic/but1.png"),
 		 _("Open a new game"), std::string(), true, false),
 	back
 		(this, "back",
-		 get_w() * 17 / 25, get_h() * 90 / 100, m_butw, m_buth,
+		 get_w() * 17 / 25, get_h() * 90 / 100, butw_, buth_,
 		 g_gr->images().get("images/ui_basic/but0.png"),
 		 _("Back"), std::string(), true, false),
 
 // Edit boxes
 	servername
-		(this, get_w() * 17 / 25, get_h() * 68 / 100, m_butw,
-		 g_gr->images().get("images/ui_basic/but2.png"), m_fs),
+		(this, get_w() * 17 / 25, get_h() * 68 / 100, butw_,
+		 g_gr->images().get("images/ui_basic/but2.png"), fs_),
 
 // List
 	clientsonline
 		(this,
 		 get_w() * 4 / 125, get_h()     / 5,
-		 m_lisw,          get_h() * 3 / 10),
+		 lisw_,          get_h() * 3 / 10),
 	opengames
 		(this,
 		 get_w() * 17 / 25, get_h()    / 5,
-		 m_butw,  get_h() * 7 / 20),
+		 butw_,  get_h() * 7 / 20),
 
 // The chat UI
 	chat
 		(this,
 		 get_w() * 4 / 125,    get_h() * 51 / 100,
-		 m_lisw, get_h() * 44 / 100,
+		 lisw_, get_h() * 44 / 100,
 		 InternetGaming::ref()),
 
 // Login information
@@ -119,10 +118,10 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby
 	// Set the texts and style of UI elements
 	Section & s = g_options.pull_section("global"); //  for playername
 
-	title       .set_font(m_fn, fs_big(), UI_FONT_CLR_FG);
-	m_opengames .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
-	m_clients     .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
-	m_servername.set_font(m_fn, m_fs, UI_FONT_CLR_FG);
+	title       .set_fontsize(fs_big());
+	opengames_ .set_fontsize(fs_);
+	clients_     .set_fontsize(fs_);
+	servername_.set_fontsize(fs_);
 	std::string server = s.get_string("servername", "");
 	servername  .set_text (server);
 	servername  .changed.connect
@@ -142,14 +141,14 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby
 		%  "</p></rt>").str();
 	clientsonline .add_column(22, "*", t_tip);
 	/** TRANSLATORS: Player Name */
-	clientsonline .add_column((m_lisw - 22) * 3 / 8, pgettext("player", "Name"));
-	clientsonline .add_column((m_lisw - 22) * 2 / 8, _("Points"));
-	clientsonline .add_column((m_lisw - 22) * 3 / 8, _("Game"));
+	clientsonline .add_column((lisw_ - 22) * 3 / 8, pgettext("player", "Name"));
+	clientsonline .add_column((lisw_ - 22) * 2 / 8, _("Points"));
+	clientsonline .add_column((lisw_ - 22) * 3 / 8, _("Game"));
 	clientsonline.set_column_compare
 		(0, boost::bind(&FullscreenMenuInternetLobby::compare_clienttype, this, _1, _2));
 	clientsonline .double_clicked.connect
 		(boost::bind(&FullscreenMenuInternetLobby::client_doubleclicked, this, _1));
-	opengames   .set_font(m_fn, m_fs);
+	opengames   .set_fontsize(fs_);
 	opengames   .selected.connect
 		(boost::bind(&FullscreenMenuInternetLobby::server_selected, this));
 	opengames   .double_clicked.connect
@@ -292,11 +291,11 @@ void FullscreenMenuInternetLobby::fill_client_list(const std::vector<InternetCli
 	}
 
 	// If a new player joins the lobby, play a sound.
-	if (clients.size() != m_prev_clientlist_len)
+	if (clients.size() != prev_clientlist_len_)
 	{
-		if (clients.size() > m_prev_clientlist_len && !InternetGaming::ref().sound_off())
+		if (clients.size() > prev_clientlist_len_ && !InternetGaming::ref().sound_off())
 			play_new_chat_member();
-		m_prev_clientlist_len = clients.size();
+		prev_clientlist_len_ = clients.size();
 	}
 }
 

@@ -28,6 +28,7 @@
 #include "base/i18n.h"
 #include "base/macros.h"
 #include "editor/editorinteractive.h"
+#include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
 #include "graphic/image.h"
 #include "graphic/texture.h"
@@ -92,8 +93,13 @@ MainMenuNewMap::MainMenuNewMap(EditorInteractive & parent)
 
 	cancel_button_.sigclicked.connect(boost::bind(&MainMenuNewMap::clicked_cancel, this));
 	ok_button_.sigclicked.connect(boost::bind(&MainMenuNewMap::clicked_create_map, this));
-	button_box_.add(&cancel_button_, UI::Align::kLeft);
-	button_box_.add(&ok_button_, UI::Align::kLeft);
+	if (UI::g_fh1->fontset().is_rtl()) {
+		button_box_.add(&ok_button_, UI::Align::kLeft);
+		button_box_.add(&cancel_button_, UI::Align::kLeft);
+	} else {
+		button_box_.add(&cancel_button_, UI::Align::kLeft);
+		button_box_.add(&ok_button_, UI::Align::kLeft);
+	}
 	box_.add(&button_box_, UI::Align::kLeft);
 
 	box_.set_size(box_width_,
@@ -109,7 +115,9 @@ void MainMenuNewMap::clicked_create_map() {
 	EditorInteractive& parent = eia();
 	Widelands::EditorGameBase & egbase = parent.egbase();
 	Widelands::Map              & map    = egbase.map();
-	UI::ProgressWindow loader;
+	UI::ProgressWindow loader_ui;
+
+	loader_ui.step(_("Creating empty map..."));
 
 	egbase.cleanup_for_load();
 
@@ -122,7 +130,7 @@ void MainMenuNewMap::clicked_create_map() {
 				g_options.pull_section("global").get_string("realname", pgettext("map_name", "Unknown")));
 
 	egbase.postload     ();
-	egbase.load_graphics(loader);
+	egbase.load_graphics(loader_ui);
 
 	map.recalc_whole_map(egbase.world());
 	parent.map_changed(EditorInteractive::MapWas::kReplaced);
