@@ -3501,7 +3501,7 @@ bool DefaultAI::marine_main_decisions() {
 	if (shipyards_count == 0 || !idle_shipyard_stocked || ports_count == 0) {
 		enough_ships = FleetStatus::kDoNothing;
 	} else if (allships.size() - expeditions_in_progress == 0) {
-		// We allways need at least one ship in transport mode
+		// We always need at least one ship in transport mode
 		enough_ships = FleetStatus::kNeedShip;
 	} else if (persistent_data->ships_utilization > 5000) {
 		// If ships utilization is too high
@@ -5491,7 +5491,7 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 			}
 	}
 	// Also we should have at least some training sites to be more willing to attack
-	// Of course, very weak AI can have only one trainingsite so will be allways penalized by this
+	// Of course, very weak AI can have only one trainingsite so will be always penalized by this
 	switch (ts_basic_count_ + ts_advanced_count_ - ts_without_trainers_) {
 		case 0:
 			training_score -= 6;
