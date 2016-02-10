@@ -2121,11 +2121,15 @@ bool Map::allows_seafaring() {
 	return false;
 }
 
-bool Map::has_artifacts(const World& world) {
-	for (int32_t i = 0; i < world.get_nr_immovables(); ++i) {
-		const ImmovableDescr& descr = *world.get_immovable_descr(i);
-		if (descr.has_attribute(descr.get_attribute_id("artifact"))) {
-			return true;
+bool Map::has_artifacts() {
+	for (FCoords c(Coords(0, 0), m_fields.get()); c.y < m_height; ++c.y) {
+		for (c.x = 0; c.x < m_width; ++c.x, ++c.field) {
+			assert(c.field == &operator[] (c));
+			if (upcast(Immovable, immovable, c.field->get_immovable())) {
+				if (immovable->descr().has_attribute(immovable->descr().get_attribute_id("artifact"))) {
+					return true;
+				}
+			}
 		}
 	}
 	return false;
