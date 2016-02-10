@@ -72,6 +72,7 @@ constexpr int kColonyScanStartArea = 35;
 constexpr int kColonyScanMinArea = 10;
 constexpr int kExpeditionMaxDuration = 90 * 60 * 1000;
 constexpr uint32_t kNoShip = std::numeric_limits<uint32_t>::max();
+constexpr uint32_t kNever = std::numeric_limits<uint32_t>::max();
 constexpr uint32_t kNoExpedition = 0;
 
 // this is intended for map developers, by default should be off
@@ -108,7 +109,7 @@ DefaultAI::DefaultAI(Game& ggame, PlayerNumber const pid, DefaultAI::Type const 
      next_mine_construction_due_(0),
      inhibit_road_building_(0),
      time_of_last_construction_(0),
-     enemy_last_seen_(std::numeric_limits<uint32_t>::max()),
+     enemy_last_seen_(kNever),
      numof_warehouses_(0),
      new_buildings_stop_(false),
      resource_necessity_territory_(100),
@@ -856,6 +857,7 @@ void DefaultAI::late_initialization() {
 		persistent_data->ai_productionsites_ratio = std::rand() % 5 + 7;
 		persistent_data->ai_personality_wood_difference = std::rand() % 40 - 20;
 		persistent_data->ai_personality_early_militarysites = std::rand() % 20 + 20;
+		persistent_data->last_soldier_trained = kNever;
 	} else if (persistent_data->initialized == kTrue) {
 		// Doing some consistency checks
 		check_range<uint32_t>(persistent_data->expedition_start_time, gametime, "expedition_start_time");
@@ -1757,19 +1759,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 		} else if (bo.type == BuildingObserver::MILITARYSITE) {
 			bo.new_building_ = check_building_necessity(bo.desc->get_size(), gametime);
 		} else if  (bo.type == BuildingObserver::TRAININGSITE){
-			if (bo.aimode_limit_status() != AiModeBuildings::kAnotherAllowed) {
-				bo.new_building_ = BuildingNecessity::kNotNeeded;
-			} else if (bo.forced_after_ < gametime && bo.total_count() == 0) {
-				bo.new_building_ = BuildingNecessity::kForced;
-			} else if (ts_without_trainers_ || (ts_basic_const_count_ + ts_advanced_const_count_) > 0) {
-				bo.new_building_ = BuildingNecessity::kNotNeeded;
-			} else if (bo.prohibited_till_ > gametime) {
-				bo.new_building_ = BuildingNecessity::kNotNeeded;
-			} else if (bo.build_material_shortage_) {
-				bo.new_building_ = BuildingNecessity::kNotNeeded;
-			} else {
-				bo.new_building_ = BuildingNecessity::kAllowed;
-			}
+			bo.new_building_ = check_building_necessity(bo, PerfEvaluation::kForConstruction, gametime);
 		} else if (bo.aimode_limit_status() != AiModeBuildings::kAnotherAllowed) {
 			bo.new_building_ = BuildingNecessity::kNotNeeded;
 		} else {
@@ -2285,45 +2275,28 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 
 			} else if (bo.type == BuildingObserver::TRAININGSITE) {
 
-				prio = 30;
+				// Even if a site is forced it has kNeeded necessity now
+				assert(bo.primary_priority_ > 0 && bo.new_building_ == BuildingNecessity::kNeeded);
 
-				if (bo.new_building_ == BuildingNecessity::kForced) {
-					prio += 30;
-				}
+				prio = bo.primary_priority_;
 
-				if (bo.trainingsite_type_ == TrainingSiteType::kBasic) {
-					prio = static_cast<int32_t>(militarysites.size())
-						- 40 * ts_basic_count_;
-				}
-
-				if (bo.trainingsite_type_ == TrainingSiteType::kAdvanced) {
-					prio = static_cast<int32_t>(militarysites.size())
-						- 50 * ts_advanced_count_;
-				}
-
-				// exclude spots on border
+				// for spots close to a border
 				if (bf->near_border_) {
 					prio -= 5;
 				}
 
-
-				// for type1 we need 15 productionsties
-				if (bo.trainingsite_type_ == TrainingSiteType::kBasic && productionsites.size() < 15) {
-					prio -= 15;
-				}
-
-				// for type2 we need 4 mines
-				if (bo.trainingsite_type_ == TrainingSiteType::kAdvanced && virtual_mines < 4) {
-					prio -= 15;;
+				// be should rather have some mines
+				if (virtual_mines < 6) {
+					prio -= (6 - virtual_mines) * 7;
 				}
 
 				// take care about borders and enemies
 				if (bf->enemy_nearby_) {
-					prio -= 10;
+					prio -= 20;
 				}
 
 				if (bf->unowned_land_nearby_) {
-					prio -= 5;
+					prio -= 15;
 				}
 			}
 
@@ -2514,7 +2487,6 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 	if (best_building->type == BuildingObserver::MILITARYSITE) {
 		persistent_data->target_military_score = proposed_priority;
 	}
-
 
 	// send the command to construct a new building
 	game().send_player_build(player_number(), proposed_coords, best_building->id);
@@ -3470,7 +3442,7 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 bool DefaultAI::marine_main_decisions() {
 
 	if (!seafaring_economy) {
-		set_taskpool_task_time(std::numeric_limits<uint32_t>::max(), SchedulerTaskId::KMarineDecisions);
+		set_taskpool_task_time(kNever, SchedulerTaskId::KMarineDecisions);
 		return false;
 	}
 
@@ -3529,7 +3501,7 @@ bool DefaultAI::marine_main_decisions() {
 	if (shipyards_count == 0 || !idle_shipyard_stocked || ports_count == 0) {
 		enough_ships = FleetStatus::kDoNothing;
 	} else if (allships.size() - expeditions_in_progress == 0) {
-		// We allways need at least one ship in transport mode
+		// We always need at least one ship in transport mode
 		enough_ships = FleetStatus::kNeedShip;
 	} else if (persistent_data->ships_utilization > 5000) {
 		// If ships utilization is too high
@@ -3898,6 +3870,56 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 		return BuildingNecessity::kForbidden;
 	}
 
+	// First we deal with training sites, they are separate category
+	if (bo.type == BuildingObserver::TRAININGSITE) {
+
+		bo.primary_priority_ = 0;
+		if (bo.aimode_limit_status() != AiModeBuildings::kAnotherAllowed) {
+			return BuildingNecessity::kNotNeeded;
+		} else if (ts_without_trainers_ || (ts_basic_const_count_ + ts_advanced_const_count_) > 0) {
+			return BuildingNecessity::kNotNeeded;
+		} else if (bo.prohibited_till_ > gametime) {
+			return BuildingNecessity::kNotNeeded;
+		} else if (bo.build_material_shortage_) {
+			return BuildingNecessity::kNotNeeded;
+		}
+
+		// It seems we might need it after all
+		bo.primary_priority_ = -30;
+
+		if (bo.forced_after_ < gametime && bo.total_count() == 0) {
+			bo.primary_priority_ += 50;
+		}
+
+		//if we are close to enemy (was seen in last 15 minutes)
+		if (enemy_last_seen_ < gametime && enemy_last_seen_ + 15 * 60 * 1000 > gametime) {
+			bo.primary_priority_ += 10;
+		}
+
+		// We build one trainig site per X military sites
+		// with some variations, of course
+		bo.primary_priority_ += static_cast<int32_t>(militarysites.size() + productionsites.size())
+			- 50 * (ts_basic_count_ + ts_advanced_count_);
+
+		// We prefer basic trainingsites and sites with lower count
+		if (bo.trainingsite_type_ == TrainingSiteType::kBasic) {
+			bo.primary_priority_ += 1;
+		}
+		bo.primary_priority_ -= 2 * bo.total_count();
+
+		// Special bonus for very first site of type
+		if (bo.total_count() == 0) {
+			bo.primary_priority_ += 30;
+		}
+
+		if (bo.primary_priority_ > 0) {
+			return BuildingNecessity::kNeeded;
+		} else {
+			return BuildingNecessity::kNotNeeded;
+		}
+	}
+
+	// Let deal with productionsites now
 	// First we iterate over outputs of building, count warehoused stock
 	// and deciding if we have enough on stock (in warehouses)
 	bo.max_preciousness_ = 0;
@@ -4327,7 +4349,10 @@ bool DefaultAI::check_trainingsites(uint32_t gametime) {
 
 		// First subsitute wares
 		int32_t filled = 0;
-		bool supplied_enough = true;
+		// We call a soldier to a trainingsite only if it is stocked. Shortage is deficit of wares
+		// Generally we accept shortage 1, but if training is stalled (no trained soldier in last 1 minutes)
+		// we can accept also shortage up to 3
+		int32_t shortage = 0;
 		std::vector<WaresQueue*> const warequeues2 = tso.site->warequeues();
 		nr_warequeues = warequeues2.size();
 		for (size_t i = 0; i < nr_warequeues; ++i) {
@@ -4336,7 +4361,7 @@ bool DefaultAI::check_trainingsites(uint32_t gametime) {
 			}
 		}
 		if (filled < 5) {
-			supplied_enough = false;
+			shortage += 5 - filled;
 		}
 
 		// checking non subsitutes
@@ -4346,14 +4371,27 @@ bool DefaultAI::check_trainingsites(uint32_t gametime) {
 				 =
 				 (warequeues2[i]->get_max_fill() < 5) ? warequeues2[i]->get_max_fill() : 5;
 				if (warequeues2[i]->get_filled() < required_amount) {
-					supplied_enough = false;
+					shortage += required_amount - warequeues2[i]->get_filled();
 				}
 			}
 		}
 
-		if (supplied_enough) {
+		// Has any soldier been trained up to now?
+		if (gametime > 10 * 60 * 1000 && persistent_data->last_soldier_trained < gametime) {
+			if (persistent_data->last_soldier_trained + 10 * 60 * 1000 < gametime) {
+				if (shortage <= 3) {
+					game().send_player_change_soldier_capacity(*ts, 1);
+				}
+			} else {
+				if (shortage <= 1) {
+					game().send_player_change_soldier_capacity(*ts, 1);
+				}
+			}
+		// or this can be very first soldier to be trained
+		} else if (shortage <= 3) {
 			game().send_player_change_soldier_capacity(*ts, 1);
 		}
+
 	}
 
 	ts_without_trainers_ = 0;  // zeroing
@@ -4667,6 +4705,8 @@ void DefaultAI::out_of_resources_site(const ProductionSite& site) {
 // (AI will then wait till training site is stocked)
 void DefaultAI::soldier_trained(const TrainingSite& site) {
 
+	persistent_data->last_soldier_trained = game().get_gametime();
+
 	for (TrainingSiteObserver & trainingsite_obs : trainingsites) {
 		if (trainingsite_obs.site == &site) {
 			if (trainingsite_obs.site->soldier_capacity() > 0) {
@@ -4975,7 +5015,7 @@ void DefaultAI::gain_building(Building& b) {
 			productionsites.back().built_time_ = game().get_gametime();
 			productionsites.back().unoccupied_till_ = game().get_gametime();
 			productionsites.back().stats_zero_ = 0;
-			productionsites.back().no_resources_since_ =  std::numeric_limits<uint32_t>::max();
+			productionsites.back().no_resources_since_ =  kNever;
 			productionsites.back().bo->unoccupied_count_ += 1;
 			if (bo.is_shipyard_) {
 				marine_task_queue.push_back(kStopShipyard);
@@ -4992,7 +5032,7 @@ void DefaultAI::gain_building(Building& b) {
 			mines_.back().site = &dynamic_cast<ProductionSite&>(b);
 			mines_.back().bo = &bo;
 			mines_.back().built_time_ = game().get_gametime();
-			mines_.back().no_resources_since_ =  std::numeric_limits<uint32_t>::max();
+			mines_.back().no_resources_since_ =  kNever;
 			mines_.back().bo->unoccupied_count_ += 1;
 
 			for (uint32_t i = 0; i < bo.outputs_.size(); ++i)
@@ -5420,6 +5460,52 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 	// sites that were either conquered or destroyed
 	std::vector<uint32_t> disappeared_sites;
 
+	// Willingness to attack depend on how long ago the last soldier has been trained. This is used as
+	// indicator how busy our trainingsites are.
+	// Moreover the stronger AI the more sensitive to it it is (a score of attack willingness is more
+	// decreased if promotion of soldiers is stalled)
+	int8_t training_score = 0;
+	if (persistent_data->last_soldier_trained > gametime) {
+		// No soldier was ever trained ...
+		switch (type_) {
+			case DefaultAI::Type::kNormal:
+				training_score = -8;
+				break;
+			case DefaultAI::Type::kWeak:
+				training_score = -4;
+				break;
+			default:
+				training_score = -2;
+			}
+	} else if (persistent_data->last_soldier_trained + 10 * 60 * 1000 < gametime) {
+		// was any soldier trained within last 10 minutes
+		switch (type_) {
+			case DefaultAI::Type::kNormal:
+				training_score = -4;
+				break;
+			case DefaultAI::Type::kWeak:
+				training_score = -2;
+				break;
+			default:
+				training_score = -1;
+			}
+	}
+	// Also we should have at least some training sites to be more willing to attack
+	// Of course, very weak AI can have only one trainingsite so will be always penalized by this
+	switch (ts_basic_count_ + ts_advanced_count_ - ts_without_trainers_) {
+		case 0:
+			training_score -= 6;
+			break;
+		case 1:
+			training_score -= 3;
+			break;
+		case 2:
+			training_score -= 1;
+			break;
+		default:
+			;
+	}
+
 	for (std::map<uint32_t, EnemySiteObserver>::iterator site = enemy_sites.begin();
 	     site != enemy_sites.end();
 	     ++site) {
@@ -5493,7 +5579,7 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 			site->second.warehouse_ = is_warehouse;
 
 			// getting rid of default
-			if (site->second.last_time_attackable == std::numeric_limits<uint32_t>::max()) {
+			if (site->second.last_time_attackable == kNever) {
 				site->second.last_time_attackable = gametime;
 			}
 
@@ -5521,16 +5607,8 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 					site->second.score -= 2;
 				}
 
-				// here is some differentiation based on "character" of a player
-				if (type_ == DefaultAI::Type::kWeak) {
-					site->second.score -= 3;
-					site->second.score -= vacant_mil_positions_ / 8;
-				} else if (type_ == DefaultAI::Type::kVeryWeak) {
-					site->second.score -= 6;
-					site->second.score -= vacant_mil_positions_ / 4;
-				} else {  //=AGRESSIVE
-					site->second.score -= vacant_mil_positions_ / 16;
-				}
+				site->second.score -= vacant_mil_positions_ / 8;
+
 				if (site->second.mines_nearby == ExtendedBool::kFalse) {
 					site->second.score -= 1;
 				} else {
@@ -5544,10 +5622,10 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 				if (mines_.size() <= 2) {
 					site->second.score -= 8;
 				}
-				// also we should have at least some training sites
-				if ((ts_basic_count_ + ts_advanced_count_) == 0) {
-					site->second.score -= 4;
-				}
+
+				// Applying (decreasing score) if trainingsites are not working
+				site->second.score += training_score;
+
 				// treating no attack score
 				if (site->second.no_attack_counter < 0) {
 					// we cannot attack yet
