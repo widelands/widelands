@@ -111,11 +111,16 @@ end
 
 function test_descr:test_immovable_size()
    assert_equal(0, egbase:get_immovable_description("bush1").size)
-  assert_equal(1, egbase:get_immovable_description("cornfield_ripe").size)
+   assert_equal(1, egbase:get_immovable_description("cornfield_ripe").size)
    assert_equal(1, egbase:get_immovable_description("alder_summer_sapling").size)
    assert_equal(1, egbase:get_immovable_description("alder_summer_old").size)
 end
 
+function test_descr:test_immovable_has_attribute()
+   assert_equal(false, egbase:get_immovable_description("bush1"):has_attribute("tree"))
+   assert_equal(false, egbase:get_immovable_description("alder_summer_sapling"):has_attribute("tree"))
+   assert_equal(true, egbase:get_immovable_description("alder_summer_old"):has_attribute("tree"))
+end
 
 function test_descr:test_immovable_probability_to_grow()
    -- Using comparisons in order to not run into trouble with floating point numbers

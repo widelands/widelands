@@ -39,21 +39,23 @@ return {
 
       -- Trees
       local tree_list = {}
-      for i, tree_name in ipairs(world:immovable_descriptions("tree")) do
-         local tree = wl.Editor():get_immovable_description(tree_name)
-         local probability = tree:probability_to_grow(terrain.name)
-         if (probability > 0.01) then
-            -- sort the trees by percentage
-            i = 1
-            while (tree_list[i] and (tree_list[i].probability_ > probability)) do
-               i = i + 1
-            end
+      for i, immovable_name in ipairs(world.immovable_descriptions) do
+         local immovable = wl.Editor():get_immovable_description(immovable_name)
+         if (immovable:has_attribute("tree")) then
+            local probability = immovable:probability_to_grow(terrain.name)
+            if (probability > 0.01) then
+               -- sort the trees by percentage
+               i = 1
+               while (tree_list[i] and (tree_list[i].probability_ > probability)) do
+                  i = i + 1
+               end
 
-            for j = #tree_list, i, -1 do
-               tree_list[j+1] = tree_list[j]
+               for j = #tree_list, i, -1 do
+                  tree_list[j+1] = tree_list[j]
+               end
+               -- NOCOM(#sirver): why the _ ? tree_name_ and probability_?
+               tree_list[i] = {tree_name_ = immovable.name, probability_ = probability}
             end
-            -- NOCOM(#sirver): why the _ ? tree_name_ and probability_?
-            tree_list[i] = {tree_name_ = tree_name, probability_ = probability}
          end
       end
 

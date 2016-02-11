@@ -309,14 +309,6 @@ World
 
 const char LuaWorld::className[] = "World";
 const MethodType<LuaWorld> LuaWorld::Methods[] = {
-	// NOCOM(#codereview): get_ because these are methods that take arguments
-	// instead of properties? Not sure how we did it for the Lua API in the
-	// past.
-	// NOCOM(#codereview): get_immovable_descriptions_for_attribute? Alternatively make this a property that
-	// returns all immovable_descriptions and filter in lua for the attribute.
-	METHOD(LuaWorld, immovable_descriptions),
-	// NOCOM(#codereview): terrain_descriptions is actually a property. It takes no arguments.
-	METHOD(LuaWorld, terrain_descriptions),
 	METHOD(LuaWorld, new_critter_type),
 	METHOD(LuaWorld, new_editor_immovable_category),
 	METHOD(LuaWorld, new_editor_terrain_category),
@@ -326,6 +318,8 @@ const MethodType<LuaWorld> LuaWorld::Methods[] = {
 	{0, 0},
 };
 const PropertyType<LuaWorld> LuaWorld::Properties[] = {
+	PROP_RO(LuaWorld, immovable_descriptions),
+	PROP_RO(LuaWorld, terrain_descriptions),
 	{0, 0, 0},
 };
 
@@ -353,35 +347,27 @@ void LuaWorld::__unpersist(lua_State*) {
  */
 
 /* RST
-	.. method:: immovable_descriptions(attribute_name)
+	.. attribute:: immovable_descriptions
 
-		Returns a list of names with the immovables that have the attribute with the given attribute_name.
+		Returns a list of names with all the immovables that the world has.
 
 		(RO) a list of immovable names, e.g. {"alder_summer_old", "cirrus_wasteland_old", ...}
 */
-int LuaWorld::immovable_descriptions(lua_State* L) {
-	if (lua_gettop(L) != 2) {
-		report_error(L, "Takes only one argument.");
-	}
+int LuaWorld::get_immovable_descriptions(lua_State* L) {
 	const World& world = get_egbase(L).world();
-	const std::string attribute_name = luaL_checkstring(L, 2);
 	lua_newtable(L);
 	int index = 1;
 	for (DescriptionIndex i = 0; i < world.get_nr_immovables(); ++i) {
-		const ImmovableDescr* immovable = world.get_immovable_descr(i);
-		const uint32_t attribute_id = immovable->get_attribute_id(attribute_name);
-		if (immovable->has_attribute(attribute_id)) {
-			lua_pushint32(L, index++);
-			lua_pushstring(L, immovable->name());
-			lua_settable(L, -3);
-		}
+		lua_pushint32(L, index++);
+		lua_pushstring(L, world.get_immovable_descr(i)->name());
+		lua_settable(L, -3);
 	}
 	return 1;
 }
 
 
 /* RST
-	.. method:: terrain_descriptions()
+	.. attribute:: terrain_descriptions
 
 		Returns a list of names with the terrains that are available in the world.
 
@@ -390,7 +376,9 @@ int LuaWorld::immovable_descriptions(lua_State* L) {
 // NOCOM(#codereview): why is this not just returning the terrain_description
 // instead of strings? Alternatively it could also return name/description
 // pairs.
-int LuaWorld::terrain_descriptions(lua_State* L) {
+// NOCOM(GunChleoc): LuaTerrainDescription is defined in LuaMap. Do we really want a dependency from
+// here to LuaMap? Same problem for the immovables.
+int LuaWorld::get_terrain_descriptions(lua_State* L) {
 	const World& world = get_egbase(L).world();
 	lua_newtable(L);
 	int index = 1;

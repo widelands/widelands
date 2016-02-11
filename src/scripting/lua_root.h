@@ -107,12 +107,12 @@ public:
 	/*
 	 * Properties
 	 */
+	int get_immovable_descriptions(lua_State* L);
+	int get_terrain_descriptions(lua_State* L);
 
 	/*
 	 * Lua methods
 	 */
-	int immovable_descriptions(lua_State* L);
-	int terrain_descriptions(lua_State* L);
 	int new_critter_type(lua_State* L);
 	int new_editor_immovable_category(lua_State* L);
 	int new_editor_terrain_category(lua_State* L);

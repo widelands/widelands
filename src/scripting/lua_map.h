@@ -235,6 +235,7 @@ public:
 	/*
 	 * Lua methods
 	 */
+	int has_attribute(lua_State *);
 	int probability_to_grow(lua_State *);
 
 	/*

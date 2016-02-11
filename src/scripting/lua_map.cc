@@ -1423,6 +1423,7 @@ ImmovableDescription
 */
 const char LuaImmovableDescription::className[] = "ImmovableDescription";
 const MethodType<LuaImmovableDescription> LuaImmovableDescription::Methods[] = {
+	METHOD(LuaImmovableDescription, has_attribute),
 	METHOD(LuaImmovableDescription, probability_to_grow),
 	{nullptr, nullptr},
 };
@@ -1571,6 +1572,23 @@ int LuaImmovableDescription::get_size(lua_State * L) {
  METHODS
  ==========================================================
  */
+
+/* RST
+	.. method:: whether the immovable has the given attribute
+
+		:arg attribute_name: The attribute that we are checking for.
+		:type attribute_name: :class:`string`
+
+			(RO) true if the immovable has the attribute, false otherwise.
+*/
+int LuaImmovableDescription::has_attribute(lua_State * L) {
+	if (lua_gettop(L) != 2) {
+		report_error(L, "Takes only one argument.");
+	}
+	const uint32_t attribute_id = get()->get_attribute_id(luaL_checkstring(L, 2));
+	lua_pushboolean(L, get()->has_attribute(attribute_id));
+	return 1;
+}
 
 /* RST
 	.. method:: probability_to_grow
