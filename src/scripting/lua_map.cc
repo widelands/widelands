@@ -2692,8 +2692,6 @@ const PropertyType<LuaResourceDescription> LuaResourceDescription::Properties[] 
 	{nullptr, nullptr, nullptr},
 };
 
-// NOCOM(#codereview): please add tests for these in the lua persistence test, so that we know
-// persisting works. Also for all the other descriptions of course.
 void LuaResourceDescription::__persist(lua_State* L) {
 	const Widelands::ResourceDescription* descr = get();
 	PERS_STRING("name", descr->name());
