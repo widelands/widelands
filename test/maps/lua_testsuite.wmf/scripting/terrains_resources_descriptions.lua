@@ -110,13 +110,13 @@ function test_terrains_resource_descr:test_terrain_name()
       egbase:get_terrain_description("winter_water").name)
 end
 
-function test_terrains_resource_descr:test_terrain_default_resource_name()
-   assert_equal("water", egbase:get_terrain_description("wiese1").default_resource_name)
-   assert_equal(nil, egbase:get_terrain_description("wasteland_beach").default_resource_name)
+function test_terrains_resource_descr:test_terrain_default_resource()
+   assert_equal("water", egbase:get_terrain_description("wiese1").default_resource.name)
+   assert_equal(nil, egbase:get_terrain_description("wasteland_beach").default_resource)
    assert_equal(nil,
-      egbase:get_terrain_description("desert_forested_mountain2").default_resource_name)
+      egbase:get_terrain_description("desert_forested_mountain2").default_resource)
    assert_equal("fish",
-      egbase:get_terrain_description("winter_water").default_resource_name)
+      egbase:get_terrain_description("winter_water").default_resource.name)
 end
 
 function test_terrains_resource_descr:test_terrain_default_resource_amount()
@@ -182,13 +182,11 @@ function test_terrains_resource_descr:test_terrain_representative_image()
       egbase:get_terrain_description("winter_water").representative_image)
 end
 
-function test_terrains_resource_descr:test_valid_resources_names()
-   assert_equal("water", egbase:get_terrain_description("wiese1").valid_resources_names[1])
-   assert_equal(0, #egbase:get_terrain_description("wasteland_beach").valid_resources_names)
-   assert_equal(4, #egbase:get_terrain_description(
-      "desert_forested_mountain2").valid_resources_names)
-   assert_equal("fish", egbase:get_terrain_description(
-      "winter_water").valid_resources_names[1])
+function test_terrains_resource_descr:test_valid_resources()
+   assert_equal("water", egbase:get_terrain_description("wiese1").valid_resources[1].name)
+   assert_equal(0, #egbase:get_terrain_description("wasteland_beach").valid_resources)
+   assert_equal(4, #egbase:get_terrain_description("desert_forested_mountain2").valid_resources)
+   assert_equal("fish", egbase:get_terrain_description("winter_water").valid_resources[1].name)
 end
 
 function test_terrains_resource_descr:test_terrain_probability_to_grow()

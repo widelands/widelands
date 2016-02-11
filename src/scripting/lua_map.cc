@@ -2773,17 +2773,14 @@ const MethodType<LuaTerrainDescription> LuaTerrainDescription::Methods[] = {
 const PropertyType<LuaTerrainDescription> LuaTerrainDescription::Properties[] = {
 	PROP_RO(LuaTerrainDescription, name),
 	PROP_RO(LuaTerrainDescription, descname),
-	// NOCOM(#codereview): why not return the resource_description here and for
-	// valid_resources instead of the name? Seems cleaner than the indirection
-	// and slightly more future proof.
-	PROP_RO(LuaTerrainDescription, default_resource_name),
+	PROP_RO(LuaTerrainDescription, default_resource),
 	PROP_RO(LuaTerrainDescription, default_resource_amount),
 	PROP_RO(LuaTerrainDescription, editor_category),
 	PROP_RO(LuaTerrainDescription, fertility),
 	PROP_RO(LuaTerrainDescription, humidity),
 	PROP_RO(LuaTerrainDescription, representative_image),
 	PROP_RO(LuaTerrainDescription, temperature),
-	PROP_RO(LuaTerrainDescription, valid_resources_names),
+	PROP_RO(LuaTerrainDescription, valid_resources),
 	{nullptr, nullptr, nullptr},
 };
 
@@ -2827,17 +2824,18 @@ int LuaTerrainDescription::get_descname(lua_State * L) {
 }
 
 /* RST
-	.. attribute:: get_default_resource_name
+	.. attribute:: get_default_resource
 
-			(RO) the :class:`string` internal name of the default resource provided by this terrain, or
+			(RO) the :class:`wl.map.ResourceDescription` for the default resource provided by this terrain, or
 				  nil if the terrain has no default resource.
 */
 
-int LuaTerrainDescription::get_default_resource_name(lua_State * L) {
+int LuaTerrainDescription::get_default_resource(lua_State * L) {
 	int res_index = get()->get_default_resource();
 	const World& world = get_egbase(L).world();
 	if (res_index != Widelands::kNoResource && res_index < world.get_nr_resources()) {
-		lua_pushstring(L, world.get_resource(res_index)->name());
+		to_lua<LuaMaps::LuaResourceDescription>
+				(L, new LuaMaps::LuaResourceDescription(world.get_resource(res_index)));
 	} else {
 		lua_pushnil(L);
 	}
@@ -2923,19 +2921,20 @@ int LuaTerrainDescription::get_temperature(lua_State * L) {
 
 
 /* RST
-	.. attribute:: valid_resources_names
+	.. attribute:: valid_resources
 
-			(RO) a list of the names for all valid resources for this terrain.
+			(RO) a list of :class:`wl.map.ResourceDescription` with all valid resources for this terrain.
 */
 
-int LuaTerrainDescription::get_valid_resources_names(lua_State * L) {
+int LuaTerrainDescription::get_valid_resources(lua_State * L) {
 	const World& world = get_egbase(L).world();
 	lua_newtable(L);
 	int index = 1;
 	for (uint8_t res_index : get()->valid_resources()) {
 		if (res_index != Widelands::kNoResource && res_index < world.get_nr_resources()) {
 			lua_pushint32(L, index++);
-			lua_pushstring(L, world.get_resource(res_index)->name());
+			to_lua<LuaMaps::LuaResourceDescription>
+					(L, new LuaMaps::LuaResourceDescription(world.get_resource(res_index)));
 			lua_settable(L, -3);
 		}
 	}

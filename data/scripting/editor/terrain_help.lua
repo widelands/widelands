@@ -16,24 +16,21 @@ return {
       local result = picture_li(terrain.representative_image, "")
 
       -- Resources
-      local valid_resources = terrain.valid_resources_names
+      local valid_resources = terrain.valid_resources
       if (#valid_resources > 0) then
          result = result .. spacer() .. rt(h2(_"Resources"))
          if (#valid_resources > 0) then
             -- TRANSLATORS: A header in the editor help
             result = result .. rt(h3(ngettext(
                "Valid Resource:", "Valid Resources:", #valid_resources)))
-            for count, resourcename in pairs(valid_resources) do
-               local valid_resource = wl.Editor():get_resource_description(resourcename)
+            for count, resource in pairs(valid_resources) do
                result = result .. picture_li(
-                  valid_resource.representative_image, valid_resource.descname)
+                  resource.representative_image, resource.descname)
             end
          end
 
-         local default_resource_name = terrain.default_resource_name
-         if (default_resource_name ~= nil) then
-            local default_resource = wl.Editor():get_resource_description(
-               default_resource_name)
+         local default_resource = terrain.default_resource
+         if (default_resource ~= nil) then
             -- TRANSLATORS: e.g. "5x Water"
             result = result .. text_line(_"Default:", _"%1%x %2%":bformat(
                terrain.default_resource_amount, default_resource.descname))

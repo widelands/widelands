@@ -629,14 +629,14 @@ public:
 	 */
 	int get_name(lua_State *);
 	int get_descname(lua_State *);
-	int get_default_resource_name(lua_State *);
+	int get_default_resource(lua_State *);
 	int get_default_resource_amount(lua_State *);
 	int get_editor_category(lua_State *);
 	int get_fertility(lua_State *);
 	int get_humidity(lua_State *);
 	int get_representative_image(lua_State *);
 	int get_temperature(lua_State *);
-	int get_valid_resources_names(lua_State *);
+	int get_valid_resources(lua_State *);
 
 	/*
 	 * Lua methods
