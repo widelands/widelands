@@ -82,6 +82,9 @@ public:
 	unsigned long long disk_space() override;
 
 private:
+	/// This is used to assemble an error message for exceptions that includes all file paths
+	std::string paths_error_message(const std::string& filename) const;
+
 	std::vector<std::unique_ptr<FileSystem>> m_filesystems;
 	std::unique_ptr<FileSystem> m_home;
 };
