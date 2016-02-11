@@ -1531,9 +1531,16 @@ int LuaImmovableDescription::get_terrain_affinity(lua_State * L) {
 			(RO) "world" for world immovables and "tribe" for tribe immovables.
 */
 int LuaImmovableDescription::get_owner_type(lua_State * L) {
-	// NOCOM(#codereview): switch on the owner type, so that the compiler throws an error if we ever add
-	// a new one.
-	lua_pushstring(L, get()->owner_type() == MapObjectDescr::OwnerType::kWorld ? "world" : "tribe");
+	switch (get()->owner_type()) {
+	case MapObjectDescr::OwnerType::kWorld:
+		lua_pushstring(L, "world");
+		break;
+	case MapObjectDescr::OwnerType::kTribe:
+		lua_pushstring(L, "tribe");
+		break;
+	default:
+		NEVER_HERE();
+	}
 	return 1;
 }
 
