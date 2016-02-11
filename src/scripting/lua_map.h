@@ -235,6 +235,7 @@ public:
 	/*
 	 * Lua methods
 	 */
+	int probability_to_grow(lua_State *);
 
 	/*
 	 * C methods
@@ -641,7 +642,6 @@ public:
 	/*
 	 * Lua methods
 	 */
-	int probability_to_grow(lua_State *);
 
 	/*
 	 * C methods

@@ -40,7 +40,8 @@ return {
       -- Trees
       local tree_list = {}
       for i, tree_name in ipairs(world:immovable_descriptions("tree")) do
-         local probability = terrain:probability_to_grow(tree_name)
+         local tree = wl.Editor():get_immovable_description(tree_name)
+         local probability = tree:probability_to_grow(terrain.name)
          if (probability > 0.01) then
             -- sort the trees by percentage
             i = 1

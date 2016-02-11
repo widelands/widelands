@@ -117,6 +117,21 @@ function test_descr:test_immovable_size()
 end
 
 
+function test_descr:test_immovable_probability_to_grow()
+   -- Using comparisons in order to not run into trouble with floating point numbers
+   -- NOCOM(#codereview): use assert_near then.
+   assert_equal(nil, egbase:get_immovable_description("bush1"):probability_to_grow("wiese1"))
+   assert_true(egbase:get_immovable_description("alder_summer_sapling"):probability_to_grow("wiese1") < 0.6)
+   assert_true(egbase:get_immovable_description("alder_summer_sapling"):probability_to_grow("wiese1") > 0.4)
+   assert_true(egbase:get_immovable_description("alder_summer_sapling"):probability_to_grow("wasteland_beach") < 0.003)
+   assert_true(egbase:get_immovable_description("alder_summer_sapling"):probability_to_grow("wasteland_beach") > 0.002)
+   assert_true(egbase:get_immovable_description("alder_summer_sapling"):probability_to_grow("desert_forested_mountain2") < 0.662)
+   assert_true(egbase:get_immovable_description("alder_summer_sapling"):probability_to_grow("desert_forested_mountain2") > 0.660)
+   assert_true(egbase:get_immovable_description("alder_summer_sapling"):probability_to_grow("winter_water") < 0.000038)
+   assert_true(egbase:get_immovable_description("alder_summer_sapling"):probability_to_grow("winter_water") > 0.000037)
+end
+
+
 --  =======================================================
 --  ***************** BuildingDescription *****************
 --  =======================================================

@@ -17,8 +17,7 @@ return {
       result = result .. rt(p("font-size=3", "")) .. rt(h2(_"Preferred terrains")) .. spacer()
       terrain_list = {}
       for i, terrain_name in ipairs(world:terrain_descriptions()) do
-         local terrain = wl.Editor():get_terrain_description(terrain_name)
-         local probability = terrain:probability_to_grow(tree_name)
+         local probability = tree:probability_to_grow(terrain_name)
          if (probability > 0.01) then
             -- sort the terrains by percentage
             i = 1

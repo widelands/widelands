@@ -188,16 +188,3 @@ function test_terrains_resource_descr:test_valid_resources()
    assert_equal(4, #egbase:get_terrain_description("desert_forested_mountain2").valid_resources)
    assert_equal("fish", egbase:get_terrain_description("winter_water").valid_resources[1].name)
 end
-
-function test_terrains_resource_descr:test_terrain_probability_to_grow()
-   -- Using comparisons in order to not run into trouble with floating point numbers
-   -- NOCOM(#codereview): use assert_near then.
-   assert_true(egbase:get_terrain_description("wiese1"):probability_to_grow("alder_summer_sapling") < 0.6)
-   assert_true(egbase:get_terrain_description("wiese1"):probability_to_grow("alder_summer_sapling") > 0.4)
-   assert_true(egbase:get_terrain_description("wasteland_beach"):probability_to_grow("alder_summer_sapling") < 0.003)
-   assert_true(egbase:get_terrain_description("wasteland_beach"):probability_to_grow("alder_summer_sapling") > 0.002)
-   assert_true(egbase:get_terrain_description("desert_forested_mountain2"):probability_to_grow("alder_summer_sapling") < 0.662)
-   assert_true(egbase:get_terrain_description("desert_forested_mountain2"):probability_to_grow("alder_summer_sapling") > 0.660)
-   assert_true(egbase:get_terrain_description("winter_water"):probability_to_grow("alder_summer_sapling") < 0.000038)
-   assert_true(egbase:get_terrain_description("winter_water"):probability_to_grow("alder_summer_sapling") > 0.000037)
-end

@@ -1423,6 +1423,7 @@ ImmovableDescription
 */
 const char LuaImmovableDescription::className[] = "ImmovableDescription";
 const MethodType<LuaImmovableDescription> LuaImmovableDescription::Methods[] = {
+	METHOD(LuaImmovableDescription, probability_to_grow),
 	{nullptr, nullptr},
 };
 const PropertyType<LuaImmovableDescription> LuaImmovableDescription::Properties[] = {
@@ -1564,6 +1565,37 @@ int LuaImmovableDescription::get_size(lua_State * L) {
 	lua_pushinteger(L, get()->get_size());
 	return 1;
 }
+
+/*
+ ==========================================================
+ METHODS
+ ==========================================================
+ */
+
+/* RST
+	.. method:: probability_to_grow
+
+		:arg terrain_name: The terrain that we are checking the probability for.
+		:type terrain_name: :class:`string`
+
+		(RO) A double describing the probability that this tree will grow on the given terrain.
+			  Returns nil if this immovable tree has no terrain affinity (all trees should have one).
+*/
+// NOCOM(#codereview): I think it should pass in the terrain description, not the name.
+// NOCOM(GunChleoc): Which eris function do I need for that?
+int LuaImmovableDescription::probability_to_grow(lua_State * L) {
+	if (lua_gettop(L) != 2) {
+		report_error(L, "Takes only one argument.");
+	}
+	if (get()->has_terrain_affinity()) {
+		const TerrainDescription* terrain = get_egbase(L).world().terrain_descr(luaL_checkstring(L, 2));
+		lua_pushnumber(L, Widelands::probability_to_grow(get()->terrain_affinity(), *terrain));
+	} else {
+		lua_pushnil(L);
+	}
+	return 1;
+}
+
 
 
 /* RST
@@ -2767,7 +2799,6 @@ TerrainDescription
 */
 const char LuaTerrainDescription::className[] = "TerrainDescription";
 const MethodType<LuaTerrainDescription> LuaTerrainDescription::Methods[] = {
-	METHOD(LuaTerrainDescription, probability_to_grow),
 	{nullptr, nullptr},
 };
 const PropertyType<LuaTerrainDescription> LuaTerrainDescription::Properties[] = {
@@ -2792,7 +2823,7 @@ void LuaTerrainDescription::__persist(lua_State* L) {
 void LuaTerrainDescription::__unpersist(lua_State* L) {
 	std::string name;
 	UNPERS_STRING("name", name);
-	set_description_pointer(get_egbase(L).world().get_ter(name.c_str()));
+	set_description_pointer(get_egbase(L).world().terrain_descr(name));
 }
 
 /*
@@ -2947,41 +2978,6 @@ int LuaTerrainDescription::get_valid_resources(lua_State * L) {
  METHODS
  ==========================================================
  */
-
-/* RST
-	.. method:: probability_to_grow
-
-		:arg treename: The tree that we are checking the probability for.
-		:type treename: :class:`string`
-
-		(RO) A double describing the probability that the given tree will grow on this terrain.
-			  Returns nil if the tree given has no terrain affinity or doesn't exist.
-*/
-// NOCOM(#codereview): Sorry to be a stickler, but I think this belongs into
-// the tree description instead. It is the probability of the tree to grow on a
-// certain terrain, so asking the tree description seems more logical. Also, I
-// think it should pass in the terrain description/tree description, not the
-// name.
-int LuaTerrainDescription::probability_to_grow(lua_State * L) {
-	if (lua_gettop(L) != 2) {
-		report_error(L, "Takes only one argument.");
-	}
-	const std::string tree_name = luaL_checkstring(L, 2);
-	const World& world = get_egbase(L).world();
-	const DescriptionIndex index = world.get_immovable_index(tree_name);
-	if (index != INVALID_INDEX) {
-		const ImmovableDescr* tree = world.get_immovable_descr(index);
-		if (tree->has_terrain_affinity()) {
-			lua_pushnumber(L, Widelands::probability_to_grow(tree->terrain_affinity(), *get()));
-		} else {
-			lua_pushnil(L);
-		}
-	} else {
-		lua_pushnil(L);
-	}
-	return 1;
-}
-
 
 
 
