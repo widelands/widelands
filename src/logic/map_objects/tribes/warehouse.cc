@@ -447,7 +447,7 @@ void Warehouse::init(EditorGameBase & egbase)
 		m_next_stock_remove_act = schedule_act(*game, 4000);
 
 		log("Message: adding %s for player %i at (%d, %d)\n", to_string(descr().type()).c_str(),
-		    player.player_number(), m_position.x, m_position.y);
+		    player.player_number(), position_.x, position_.y);
 
 		if (descr().get_isport()) {
 			send_message
