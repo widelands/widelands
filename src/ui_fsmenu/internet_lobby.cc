@@ -46,7 +46,6 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby
 	lisw_ (get_w() * 623 / 1000),
 	fs_   (fs_small()),
 	prev_clientlist_len_(1000),
-	fn_   (ui_fn()),
 
 // Text labels
 	title
@@ -119,10 +118,10 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby
 	// Set the texts and style of UI elements
 	Section & s = g_options.pull_section("global"); //  for playername
 
-	title       .set_font(fn_, fs_big(), UI_FONT_CLR_FG);
-	opengames_ .set_font(fn_, fs_, UI_FONT_CLR_FG);
-	clients_     .set_font(fn_, fs_, UI_FONT_CLR_FG);
-	servername_.set_font(fn_, fs_, UI_FONT_CLR_FG);
+	title       .set_fontsize(fs_big());
+	opengames_ .set_fontsize(fs_);
+	clients_     .set_fontsize(fs_);
+	servername_.set_fontsize(fs_);
 	std::string server = s.get_string("servername", "");
 	servername  .set_text (server);
 	servername  .changed.connect
@@ -149,7 +148,7 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby
 		(0, boost::bind(&FullscreenMenuInternetLobby::compare_clienttype, this, _1, _2));
 	clientsonline .double_clicked.connect
 		(boost::bind(&FullscreenMenuInternetLobby::client_doubleclicked, this, _1));
-	opengames   .set_font(fn_, fs_);
+	opengames   .set_fontsize(fs_);
 	opengames   .selected.connect
 		(boost::bind(&FullscreenMenuInternetLobby::server_selected, this));
 	opengames   .double_clicked.connect

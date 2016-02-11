@@ -54,7 +54,7 @@ struct WException : public std::exception {
 
 protected:
 	WException() {}
-	std::string m_what;
+	std::string what_;
 };
 
 #define wexception(...) WException(__FILE__, __LINE__, __VA_ARGS__)

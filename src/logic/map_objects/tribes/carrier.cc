@@ -53,7 +53,7 @@ void Carrier::start_task_road(Game & game)
 
 	top_state().ivar1 = 0;
 
-	m_promised_pickup_to = NOONE;
+	promised_pickup_to_ = NOONE;
 }
 
 
@@ -85,13 +85,13 @@ void Carrier::road_update(Game & game, State & state)
 	}
 
 	// Check for pending wares
-	if (m_promised_pickup_to == NOONE)
+	if (promised_pickup_to_ == NOONE)
 		find_pending_ware(game);
 
-	if (m_promised_pickup_to != NOONE) {
+	if (promised_pickup_to_ != NOONE) {
 		if (state.ivar1) {
 			state.ivar1 = 0;
-			return start_task_transport(game, m_promised_pickup_to);
+			return start_task_transport(game, promised_pickup_to_);
 		} else {
 			// Short delay before we move to pick up
 			state.ivar1 = 1;
@@ -126,10 +126,10 @@ void Carrier::road_update(Game & game, State & state)
  */
 void Carrier::road_pop(Game & game, State & /* state */)
 {
-	if (m_promised_pickup_to != NOONE && get_location(game)) {
+	if (promised_pickup_to_ != NOONE && get_location(game)) {
 		Road & road      = dynamic_cast<Road&>(*get_location(game));
-		Flag & flag      = road.get_flag(static_cast<Road::FlagId>(m_promised_pickup_to));
-		Flag & otherflag = road.get_flag(static_cast<Road::FlagId>(m_promised_pickup_to ^ 1));
+		Flag & flag      = road.get_flag(static_cast<Road::FlagId>(promised_pickup_to_));
+		Flag & otherflag = road.get_flag(static_cast<Road::FlagId>(promised_pickup_to_ ^ 1));
 
 		flag.cancel_pickup(game, otherflag);
 	}
@@ -274,7 +274,7 @@ void Carrier::pickup_from_flag(Game & game, State & state)
 	int32_t const ivar1 = state.ivar1;
 	if (!start_task_walktoflag(game, ivar1)) {
 
-		m_promised_pickup_to = NOONE;
+		promised_pickup_to_ = NOONE;
 
 		Road & road      = dynamic_cast<Road&>(*get_location(game));
 		Flag & flag      = road.get_flag(static_cast<Road::FlagId>(ivar1));
@@ -307,7 +307,7 @@ void Carrier::drop_ware(Game & game, State & state)
 	Road & road = dynamic_cast<Road&>(*get_location(game));
 	Flag & flag = road.get_flag(static_cast<Road::FlagId>(state.ivar1 ^ 1));
 
-	if (m_promised_pickup_to == (state.ivar1 ^ 1)) {
+	if (promised_pickup_to_ == (state.ivar1 ^ 1)) {
 		// If there's an ware we acked, we can drop ours even if the flag is
 		// flooded
 		other =
@@ -319,13 +319,13 @@ void Carrier::drop_ware(Game & game, State & state)
 				("[Carrier]: strange: acked ware from busy flag no longer "
 				 "present.\n");
 
-			m_promised_pickup_to = NOONE;
+			promised_pickup_to_ = NOONE;
 			set_animation(game, descr().get_animation("idle"));
 			return schedule_act(game, 20);
 		}
 
-		state.ivar1 = m_promised_pickup_to;
-		m_promised_pickup_to = NOONE;
+		state.ivar1 = promised_pickup_to_;
+		promised_pickup_to_ = NOONE;
 	}
 
 	// Drop our ware
@@ -382,7 +382,7 @@ bool Carrier::swap_or_wait(Game & game, State & state)
 	Flag & otherflag = road.get_flag(static_cast<Road::FlagId>(state.ivar1));
 
 
-	if (m_promised_pickup_to == (state.ivar1 ^ 1)) {
+	if (promised_pickup_to_ == (state.ivar1 ^ 1)) {
 		// All is well, we already acked an ware that we can pick up
 		// from this flag
 		return false;
@@ -392,7 +392,7 @@ bool Carrier::swap_or_wait(Game & game, State & state)
 				("MO(%u): transport: overload exchange: flag %u is fucked up",
 				 serial(), flag.serial());
 
-		m_promised_pickup_to = state.ivar1 ^ 1;
+		promised_pickup_to_ = state.ivar1 ^ 1;
 		return false;
 	} else if (!start_task_walktoflag(game, state.ivar1 ^ 1, true))
 		start_task_waitforcapacity(game, flag); //  wait one node away
@@ -411,7 +411,7 @@ bool Carrier::notify_ware(Game & game, int32_t const flag)
 	State & state = top_state();
 
 	// Check if we've already acked something
-	if (m_promised_pickup_to != NOONE)
+	if (promised_pickup_to_ != NOONE)
 		return false;
 
 	// If we are currently in a transport.
@@ -438,7 +438,7 @@ bool Carrier::notify_ware(Game & game, int32_t const flag)
 			return false;
 
 	// Ack it if we haven't
-	m_promised_pickup_to = flag;
+	promised_pickup_to_ = flag;
 
 	if      (state.task == &taskRoad)
 		send_signal(game, "ware");
@@ -450,7 +450,7 @@ bool Carrier::notify_ware(Game & game, int32_t const flag)
 
 
 /**
- * Find a pending ware on one of the road's flags, ack it and set m_promised_pickup_to
+ * Find a pending ware on one of the road's flags, ack it and set promised_pickup_to_
  * accordingly.
  */
 void Carrier::find_pending_ware(Game & game)
@@ -458,7 +458,7 @@ void Carrier::find_pending_ware(Game & game)
 	Road & road = dynamic_cast<Road&>(*get_location(game));
 	uint32_t havewarebits = 0;
 
-	assert(m_promised_pickup_to == NOONE);
+	assert(promised_pickup_to_ == NOONE);
 
 	if (road.get_flag(Road::FlagStart).has_pending_ware
 			(game, road.get_flag(Road::FlagEnd))) {
@@ -477,7 +477,7 @@ void Carrier::find_pending_ware(Game & game)
 
 	// Ack our decision
 	if (havewarebits == 1) {
-		m_promised_pickup_to = START_FLAG;
+		promised_pickup_to_ = START_FLAG;
 		if
 			(!
 			 road.get_flag(Road::FlagStart).ack_pickup
@@ -486,7 +486,7 @@ void Carrier::find_pending_ware(Game & game)
 				("Carrier::find_pending_ware: start flag is messed up");
 
 	} else if (havewarebits == 2) {
-		m_promised_pickup_to = END_FLAG;
+		promised_pickup_to_ = END_FLAG;
 		if
 			(!
 			 road.get_flag(Road::FlagEnd).ack_pickup
@@ -575,7 +575,7 @@ void Carrier::log_general_info(const Widelands::EditorGameBase & egbase)
 
 	Worker::log_general_info(egbase);
 
-	molog("m_promised_pickup_to = %i\n", m_promised_pickup_to);
+	molog("promised_pickup_to = %i\n", promised_pickup_to_);
 }
 
 /*
@@ -601,7 +601,7 @@ void Carrier::Loader::load(FileRead & fr)
 		uint8_t packet_version = fr.unsigned_8();
 		if (packet_version == kCurrentPacketVersion) {
 			Carrier & carrier = get<Carrier>();
-			carrier.m_promised_pickup_to = fr.signed_32();
+			carrier.promised_pickup_to_ = fr.signed_32();
 		} else {
 			throw UnhandledVersionError("Carrier", packet_version, kCurrentPacketVersion);
 		}
@@ -628,7 +628,7 @@ void Carrier::do_save
 	Worker::do_save(egbase, mos, fw);
 
 	fw.unsigned_8(kCurrentPacketVersion);
-	fw.signed_32(m_promised_pickup_to);
+	fw.signed_32(promised_pickup_to_);
 }
 
 /**

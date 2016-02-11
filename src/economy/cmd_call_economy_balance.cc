@@ -34,8 +34,8 @@ CmdCallEconomyBalance::CmdCallEconomyBalance
 	(uint32_t const starttime, Economy * const economy, uint32_t const timerid)
 	: GameLogicCommand(starttime)
 {
-	m_flag = economy->get_arbitrary_flag();
-	m_timerid = timerid;
+	flag_ = economy->get_arbitrary_flag();
+	timerid_ = timerid;
 }
 
 /**
@@ -44,8 +44,8 @@ CmdCallEconomyBalance::CmdCallEconomyBalance
  */
 void CmdCallEconomyBalance::execute(Game & game)
 {
-	if (Flag * const flag = m_flag.get(game))
-		flag->get_economy()->balance(m_timerid);
+	if (Flag * const flag = flag_.get(game))
+		flag->get_economy()->balance(timerid_);
 }
 
 constexpr uint16_t kCurrentPacketVersion = 3;
@@ -62,8 +62,8 @@ void CmdCallEconomyBalance::read
 			GameLogicCommand::read(fr, egbase, mol);
 			uint32_t serial = fr.unsigned_32();
 			if (serial)
-				m_flag = &mol.get<Flag>(serial);
-			m_timerid = fr.unsigned_32();
+				flag_ = &mol.get<Flag>(serial);
+			timerid_ = fr.unsigned_32();
 		} else {
 			throw UnhandledVersionError("CmdCallEconomyBalance", packet_version, kCurrentPacketVersion);
 		}
@@ -78,11 +78,11 @@ void CmdCallEconomyBalance::write
 
 	// Write Base Commands
 	GameLogicCommand::write(fw, egbase, mos);
-	if (Flag * const flag = m_flag.get(egbase))
+	if (Flag * const flag = flag_.get(egbase))
 		fw.unsigned_32(mos.get_object_file_index(*flag));
 	else
 		fw.unsigned_32(0);
-	fw.unsigned_32(m_timerid);
+	fw.unsigned_32(timerid_);
 }
 
 }

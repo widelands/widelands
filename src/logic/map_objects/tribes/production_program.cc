@@ -722,7 +722,7 @@ ProductionProgram::ActWorker::ActWorker(
 
 		for (const std::pair<uint32_t, std::set<std::string> >& area_info : worker_workarea_info) {
 			std::set<std::string> & building_radius_infos =
-				descr->m_workarea_info[area_info.first];
+				descr->workarea_info_[area_info.first];
 
 			for (const std::string& worker_descname : area_info.second) {
 				std::string description = descr->descname();
@@ -1228,7 +1228,7 @@ ProductionProgram::ActMine::ActMine(
 				% world.get_resource(m_resource)->descname())
 				.str();
 
-		descr->m_workarea_info[m_distance].insert(description);
+		descr->workarea_info_[m_distance].insert(description);
 	} catch (const WException & e) {
 		throw GameDataError("mine: %s", e.what());
 	}
@@ -1546,7 +1546,7 @@ ProductionProgram::ActPlayFX::ActPlayFX(char * parameters) {
 void ProductionProgram::ActPlayFX::execute
 	(Game & game, ProductionSite & ps) const
 {
-	g_sound_handler.play_fx(name, ps.m_position, priority);
+	g_sound_handler.play_fx(name, ps.position_, priority);
 	return ps.program_step(game);
 }
 
@@ -1562,7 +1562,7 @@ ProductionProgram::ActConstruct::ActConstruct(
 		workerprogram = params[1];
 		radius = boost::lexical_cast<uint32_t>(params[2]);
 
-		std::set<std::string> & building_radius_infos = descr->m_workarea_info[radius];
+		std::set<std::string> & building_radius_infos = descr->workarea_info_[radius];
 		std::string description = descr->name() + ' ' + production_program_name;
 		description += " construct ";
 		description += objectname;

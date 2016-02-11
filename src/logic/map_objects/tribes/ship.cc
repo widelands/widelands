@@ -49,6 +49,59 @@
 
 namespace Widelands {
 
+namespace  {
+
+/// Returns true if 'coord' is not occupied or owned by 'player_number' and
+/// nothing stands there.
+bool can_support_port(const PlayerNumber player_number, const FCoords& coord) {
+	const PlayerNumber owner = coord.field->get_owned_by();
+	if (owner != neutral() && owner != player_number) {
+		return false;
+	}
+	BaseImmovable* baim = coord.field->get_immovable();
+	if (baim != nullptr && baim->descr().type() >= MapObjectType::FLAG) {
+		return false;
+	}
+	return true;
+}
+
+/// Returns true if a ship owned by 'player_number' can land and erect a port at 'coord'.
+bool can_build_port_here(const PlayerNumber player_number, const Map& map, const FCoords& coord) {
+	if (!can_support_port(player_number, coord)) {
+		return false;
+	}
+
+	// All fields of the port + their neighboring fields (for the border) must
+	// be conquerable without military influence.
+	Widelands::FCoords c[4];  //  Big buildings occupy 4 locations.
+	c[0] = coord;
+	map.get_ln(coord, &c[1]);
+	map.get_tln(coord, &c[2]);
+	map.get_trn(coord, &c[3]);
+	for (int i = 0; i < 4; ++i) {
+		MapRegion<Area<FCoords>> area(map, Area<FCoords>(c[i], 1));
+		do {
+			if (!can_support_port(player_number, area.location())) {
+				return false;
+			}
+		} while (area.advance(map));
+	}
+
+	// Also all areas around the flag must be conquerable and must not contain
+	// another flag already.
+	FCoords flag_position;
+	map.get_brn(coord, &flag_position);
+	MapRegion<Area<FCoords>> area(map, Area<FCoords>(flag_position, 1));
+	do {
+		if (!can_support_port(player_number, area.location())) {
+			return false;
+		}
+	} while (area.advance(map));
+	return true;
+}
+
+}  // namespace
+
 ShipDescr::ShipDescr(const std::string& init_descname, const LuaTable& table)
 	:
 	BobDescr(init_descname, MapObjectType::SHIP, MapObjectDescr::OwnerType::kTribe, table) {
@@ -122,9 +175,9 @@ void Ship::cleanup(EditorGameBase& egbase) {
 		m_fleet->remove_ship(egbase, this);
 	}
 
-	while (!m_items.empty()) {
-		m_items.back().remove(egbase);
-		m_items.pop_back();
+	while (!items_.empty()) {
+		items_.back().remove(egbase);
+		items_.pop_back();
 	}
 
 	Notifications::publish(NoteShipMessage(this, NoteShipMessage::Message::kLost));
@@ -323,115 +376,40 @@ void Ship::ship_update_expedition(Game& game, Bob::State&) {
 
 	if (m_ship_state == EXP_SCOUTING) {
 		// Check surrounding fields for port buildspaces
-		std::unique_ptr<std::list<Coords>> temp_port_buildspaces(new std::list<Coords>());
+		std::vector<Coords> temp_port_buildspaces;
 		MapRegion<Area<Coords>> mr(map, Area<Coords>(position, descr().vision_range()));
 		bool new_port_space = false;
 		do {
-			if (map.is_port_space(mr.location())) {
-				FCoords fc = map.get_fcoords(mr.location());
+			if (!map.is_port_space(mr.location())) {
+				continue;
+			}
 
-				// Check whether the maximum theoretical possible NodeCap of the field is of the size
-				// big
-				// and whether it can theoretically be a port space
-				if ((map.get_max_nodecaps(game.world(), fc) & BUILDCAPS_SIZEMASK) != BUILDCAPS_BIG ||
-				    map.find_portdock(fc).empty()) {
-					continue;
-				}
+			const FCoords fc = map.get_fcoords(mr.location());
 
-				// NOTE This is the place to handle enemy territory and "clearing a port space from the
-				// enemy".
-				// NOTE There is a simple check for the current land owner to avoid placement of ports
-				// into enemy
-				// NOTE territory, as "clearing" is not yet implemented.
-				// NOTE further it checks, whether there is a Player_immovable on one of the fields.
-				// TODO(unknown): handle this more gracefully concering opposing players
-				PlayerNumber pn = get_owner()->player_number();
-				FCoords coord = fc;
-				bool invalid = false;
-				for (uint8_t step = 0; !invalid && step < 5; ++step) {
-					if (coord.field->get_owned_by() != neutral() && coord.field->get_owned_by() != pn) {
-						invalid = true;
-						continue;
-					}
-					BaseImmovable* baim = coord.field->get_immovable();
-					if (baim)
-						if (is_a(PlayerImmovable, baim)) {
-							invalid = true;
-							continue;
-						}
+			// Check whether the maximum theoretical possible NodeCap of the field
+			// is of the size big and whether it can theoretically be a port space
+			if ((map.get_max_nodecaps(game.world(), fc) & BUILDCAPS_SIZEMASK) != BUILDCAPS_BIG ||
+			    map.find_portdock(fc).empty()) {
+				continue;
+			}
 
-					// Check all neighboured fields that will be used by the port
-					switch (step) {
-					case 0:
-						map.get_ln(fc, &coord);
-						break;
-					case 1:
-						map.get_tln(fc, &coord);
-						break;
-					case 2:
-						map.get_trn(fc, &coord);
-						break;
-					case 3:
-						// Flag coordinate
-						map.get_brn(fc, &coord);
-						break;
-					default:
-						break;
-					}
-				}
-				// Now check whether there is a flag in the surroundings of the flag position
-				FCoords neighb;
-				map.get_ln(coord, &neighb);
-				for (uint8_t step = 0; !invalid && step < 5; ++step) {
-					BaseImmovable* baim = neighb.field->get_immovable();
-					if (baim)
-						if (is_a(Flag, baim)) {
-							invalid = true;
-							continue;
-						}
-					// Check all neighboured fields but not the one already checked for a
-					// PlayerImmovable.
-					switch (step) {
-					case 0:
-						map.get_bln(coord, &neighb);
-						break;
-					case 1:
-						map.get_brn(coord, &neighb);
-						break;
-					case 2:
-						map.get_rn(coord, &neighb);
-						break;
-					case 3:
-						map.get_trn(coord, &neighb);
-						break;
-					default:
-						break;
-					}
-				}
-				if (invalid)
-					continue;
+			if (!can_build_port_here(get_owner()->player_number(), map, fc)) {
+				continue;
+			}
 
-				bool pbs_saved = false;
-				for (std::list<Coords>::const_iterator it =
-				        m_expedition->seen_port_buildspaces->begin();
-				     it != m_expedition->seen_port_buildspaces->end() && !pbs_saved;
-				     ++it) {
-					// Check if the ship knows this port space already from its last check
-					if (*it == mr.location()) {
-						temp_port_buildspaces->push_back(mr.location());
-						pbs_saved = true;
-					}
-				}
-				if (!pbs_saved) {
-					new_port_space = true;
-					temp_port_buildspaces->push_front(mr.location());
-				}
+			// Check if the ship knows this port space already from its last check
+			if (std::find(m_expedition->seen_port_buildspaces.begin(),
+			              m_expedition->seen_port_buildspaces.end(),
+			              mr.location()) != m_expedition->seen_port_buildspaces.end()) {
+					temp_port_buildspaces.push_back(mr.location());
+			} else {
+				new_port_space = true;
+				temp_port_buildspaces.insert(temp_port_buildspaces.begin(), mr.location());
 			}
 		} while (mr.advance(map));
 
 		if (new_port_space) {
 			m_ship_state = EXP_FOUNDPORTSPACE;
-			// Send a message to the player, that a new port space was found
 			send_message(
 						game,
 						_("Port Space"),
@@ -439,7 +417,7 @@ void Ship::ship_update_expedition(Game& game, Bob::State&) {
 						_("An expedition ship found a new port build space."),
 						"images/wui/editor/fsel_editor_set_port_space.png");
 		}
-		m_expedition->seen_port_buildspaces.swap(temp_port_buildspaces);
+		m_expedition->seen_port_buildspaces = temp_port_buildspaces;
 		if (new_port_space) {
 			Notifications::publish(
 			   NoteShipMessage(this, NoteShipMessage::Message::kWaitingForCommand));
@@ -631,16 +609,15 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 		}
 	}
 	case EXP_COLONIZING: {
-		assert(m_expedition->seen_port_buildspaces && !m_expedition->seen_port_buildspaces->empty());
-		BaseImmovable* baim =
-		   game.map()[m_expedition->seen_port_buildspaces->front()].get_immovable();
+		assert(!m_expedition->seen_port_buildspaces.empty());
+		BaseImmovable* baim = game.map()[m_expedition->seen_port_buildspaces.front()].get_immovable();
 		if (baim) {
 			upcast(ConstructionSite, cs, baim);
 
-			for (int i = m_items.size() - 1; i >= 0; --i) {
+			for (int i = items_.size() - 1; i >= 0; --i) {
 				WareInstance* ware;
 				Worker* worker;
-				m_items.at(i).get(game, &ware, &worker);
+				items_.at(i).get(game, &ware, &worker);
 				if (ware) {
 					// no, we don't transfer the wares, we create new ones out of
 					// air and remove the old ones ;)
@@ -664,8 +641,8 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 
 					assert(wq.get_max_fill() > cur);
 					wq.set_filled(cur + 1);
-					m_items.at(i).remove(game);
-					m_items.resize(i);
+					items_.at(i).remove(game);
+					items_.resize(i);
 					break;
 				} else {
 					assert(worker);
@@ -675,7 +652,7 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 					worker->reset_tasks(game);
 					PartiallyFinishedBuilding::request_builder_callback(
 					   game, *cs->get_builder_request(), worker->descr().worker_index(), worker, *cs);
-					m_items.resize(i);
+					items_.resize(i);
 				}
 			}
 		} else {  // it seems that port constructionsite has dissapeared
@@ -689,7 +666,7 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 			send_signal(game, "cancel_expedition");
 		}
 
-		if (m_items.empty() || !baim) {  // we are done, either way
+		if (items_.empty() || !baim) {  // we are done, either way
 			m_ship_state = TRANSPORT;     // That's it, expedition finished
 
 			// Bring us back into a fleet and a economy.
@@ -698,7 +675,7 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 			// for case that there are any workers left on board
 			// (applicable when port construction space is kLost)
 			Worker* worker;
-			for (ShippingItem& item : m_items) {
+			for (ShippingItem& item : items_) {
 				item.get(game, nullptr, &worker);
 				if (worker) {
 					worker->reset_tasks(game);
@@ -728,7 +705,7 @@ void Ship::set_economy(Game& game, Economy* e) {
 	// we rely that wares really get reassigned our economy.
 
 	m_economy = e;
-	for (ShippingItem& shipping_item : m_items) {
+	for (ShippingItem& shipping_item : items_) {
 		shipping_item.set_economy(game, e);
 	}
 }
@@ -740,29 +717,29 @@ void Ship::set_economy(Game& game, Economy* e) {
  */
 void Ship::set_destination(Game& game, PortDock& pd) {
 	molog("set_destination / sending to portdock %u (carrying %" PRIuS " items)\n",
-	pd.serial(), m_items.size());
+	pd.serial(), items_.size());
 	m_destination = &pd;
 	send_signal(game, "wakeup");
 }
 
 void Ship::add_item(Game& game, const ShippingItem& item) {
-	assert(m_items.size() < descr().get_capacity());
+	assert(items_.size() < descr().get_capacity());
 
-	m_items.push_back(item);
-	m_items.back().set_location(game, this);
+	items_.push_back(item);
+	items_.back().set_location(game, this);
 }
 
 void Ship::withdraw_items(Game& game, PortDock& pd, std::vector<ShippingItem>& items) {
 	uint32_t dst = 0;
-	for (uint32_t src = 0; src < m_items.size(); ++src) {
-		PortDock* destination = m_items[src].get_destination(game);
+	for (uint32_t src = 0; src < items_.size(); ++src) {
+		PortDock* destination = items_[src].get_destination(game);
 		if (!destination || destination == &pd) {
-			items.push_back(m_items[src]);
+			items.push_back(items_[src]);
 		} else {
-			m_items[dst++] = m_items[src];
+			items_[dst++] = items_[src];
 		}
 	}
-	m_items.resize(dst);
+	items_.resize(dst);
 }
 
 /**
@@ -832,7 +809,7 @@ void Ship::start_task_expedition(Game& game) {
 	m_ship_state = EXP_WAITING;
 	// Initialize a new, yet empty expedition
 	m_expedition.reset(new Expedition());
-	m_expedition->seen_port_buildspaces.reset(new std::list<Coords>());
+	m_expedition->seen_port_buildspaces.clear();
 	m_expedition->island_exploration = false;
 	m_expedition->scouting_direction = WalkingDir::IDLE;
 	m_expedition->exploration_start = Coords(0, 0);
@@ -846,10 +823,10 @@ void Ship::start_task_expedition(Game& game) {
 
 	set_economy(game, m_expedition->economy.get());
 
-	for (int i = m_items.size() - 1; i >= 0; --i) {
+	for (int i = items_.size() - 1; i >= 0; --i) {
 		WareInstance* ware;
 		Worker* worker;
-		m_items.at(i).get(game, &ware, &worker);
+		items_.at(i).get(game, &ware, &worker);
 		if (worker) {
 			worker->reset_tasks(game);
 			worker->start_task_idle(game, 0, -1);
@@ -930,7 +907,7 @@ void Ship::exp_cancel(Game& game) {
 	// economy with us and the warehouse will make sure that they are
 	// getting used.
 	Worker* worker;
-	for (ShippingItem& item : m_items) {
+	for (ShippingItem& item : items_) {
 		item.get(game, nullptr, &worker);
 		if (worker) {
 			worker->reset_tasks(game);
@@ -971,12 +948,12 @@ void Ship::log_general_info(const EditorGameBase& egbase) {
 	      m_fleet ? m_fleet->serial() : 0,
 	      m_destination.serial(),
 	      m_lastdock.serial(),
-	      m_items.size());
+			items_.size());
 
-	for (const ShippingItem& shipping_item : m_items) {
+	for (const ShippingItem& shipping_item : items_) {
 		molog("  IT %u, destination %u\n",
-		      shipping_item.m_object.serial(),
-		      shipping_item.m_destination_dock.serial());
+				shipping_item.object_.serial(),
+				shipping_item.destination_dock_.serial());
 	}
 }
 
@@ -1000,9 +977,9 @@ void Ship::send_message(Game& game,
 	if (picture.size() > 3) {
 		rt_description = "<rt image=";
 		rt_description += picture;
-		rt_description += "><p font-size=14 font-face=DejaVuSerif>";
+		rt_description += "><p font-size=14 font-face=serif>";
 	} else
-		rt_description = "<rt><p font-size=14 font-face=DejaVuSerif>";
+		rt_description = "<rt><p font-size=14 font-face=serif>";
 	rt_description += description;
 	rt_description += "</p></rt>";
 
@@ -1013,7 +990,7 @@ void Ship::send_message(Game& game,
 										heading,
 	                           rt_description,
 	                           get_position(),
-	                           m_serial);
+	                           serial_);
 
 	get_owner()->add_message(game, *msg);
 }
@@ -1049,10 +1026,10 @@ void Ship::Loader::load(FileRead & fr)
 		 m_ship_state == EXP_FOUNDPORTSPACE || m_ship_state == EXP_COLONIZING) {
 		m_expedition.reset(new Expedition());
 		// Currently seen port build spaces
-		m_expedition->seen_port_buildspaces.reset(new std::list<Coords>());
+		m_expedition->seen_port_buildspaces.clear();
 		uint8_t numofports = fr.unsigned_8();
 		for (uint8_t i = 0; i < numofports; ++i)
-			m_expedition->seen_port_buildspaces->push_back(read_coords_32(&fr));
+			m_expedition->seen_port_buildspaces.push_back(read_coords_32(&fr));
 		// Swimability of the directions
 		for (uint8_t i = 0; i < LAST_DIRECTION; ++i)
 			m_expedition->swimable[i] = (fr.unsigned_8() == 1);
@@ -1088,9 +1065,9 @@ void Ship::Loader::load_pointers() {
 	if (m_destination)
 		ship.m_destination = &mol().get<PortDock>(m_destination);
 
-	ship.m_items.resize(m_items.size());
+	ship.items_.resize(m_items.size());
 	for (uint32_t i = 0; i < m_items.size(); ++i) {
-		ship.m_items[i] = m_items[i].get(mol());
+		ship.items_[i] = m_items[i].get(mol());
 	}
 }
 
@@ -1174,12 +1151,9 @@ void Ship::save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw) {
 	// expedition specific data
 	if (state_is_expedition()) {
 		// currently seen port buildspaces
-		assert(m_expedition->seen_port_buildspaces);
-		fw.unsigned_8(m_expedition->seen_port_buildspaces->size());
-		for (std::list<Coords>::const_iterator it = m_expedition->seen_port_buildspaces->begin();
-		     it != m_expedition->seen_port_buildspaces->end();
-		     ++it) {
-			write_coords_32(&fw, *it);
+		fw.unsigned_8(m_expedition->seen_port_buildspaces.size());
+		for (const Coords& coords : m_expedition->seen_port_buildspaces) {
+			write_coords_32(&fw, coords);
 		}
 		// swimability of the directions
 		for (uint8_t i = 0; i < LAST_DIRECTION; ++i)
@@ -1198,8 +1172,8 @@ void Ship::save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw) {
 	fw.unsigned_32(mos.get_object_file_index_or_zero(m_lastdock.get(egbase)));
 	fw.unsigned_32(mos.get_object_file_index_or_zero(m_destination.get(egbase)));
 
-	fw.unsigned_32(m_items.size());
-	for (ShippingItem& shipping_item : m_items) {
+	fw.unsigned_32(items_.size());
+	for (ShippingItem& shipping_item : items_) {
 		shipping_item.save(egbase, mos, fw);
 	}
 }

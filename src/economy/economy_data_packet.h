@@ -31,13 +31,13 @@ struct MapObjectSaver;
 
 class EconomyDataPacket {
 	public:
-		EconomyDataPacket(Economy * e) : m_eco(e) {}
+		EconomyDataPacket(Economy * e) : eco_(e) {}
 
 		void read(FileRead &);
 		void write(FileWrite &);
 
 	private:
-		Economy * m_eco;
+		Economy * eco_;
 };
 
 }

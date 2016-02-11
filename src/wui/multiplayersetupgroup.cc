@@ -67,8 +67,7 @@ struct MultiPlayerClientGroup : public UI::Box {
 	MultiPlayerClientGroup
 		(UI::Panel            * const parent, uint8_t id,
 		 int32_t const /* x */, int32_t const /* y */, int32_t const w, int32_t const h,
-		 GameSettingsProvider * const settings,
-		 UI::Font * font)
+		 GameSettingsProvider * const settings)
 		 :
 		 UI::Box(parent, 0, 0, UI::Box::Horizontal, w, h),
 		 type_icon(nullptr),
@@ -80,7 +79,6 @@ struct MultiPlayerClientGroup : public UI::Box {
 		set_size(w, h);
 		name = new UI::Textarea
 			(this, 0, 0, w - h - UI::Scrollbar::Size * 11 / 5, h);
-		name->set_textstyle(UI::TextStyle::makebold(font, UI_FONT_CLR_FG));
 		add(name, UI::Align::kHCenter);
 		// Either Button if changeable OR text if not
 		if (id == settings->settings().usernum) { // Our Client
@@ -402,19 +400,16 @@ MultiPlayerSetupGroup::MultiPlayerSetupGroup
 	(UI::Panel            * const parent,
 	 int32_t const x, int32_t const y, int32_t const w, int32_t const h,
 	 GameSettingsProvider * const settings,
-	 uint32_t /* butw */, uint32_t buth,
-	 const std::string & fname, uint32_t const fsize)
+	 uint32_t /* butw */, uint32_t buth)
 :
 UI::Panel(parent, x, y, w, h),
 s(settings),
 npsb(new NetworkPlayerSettingsBackend(s)),
 clientbox(this, 0, buth, UI::Box::Vertical, w / 3, h - buth),
 playerbox(this, w * 6 / 15, buth, UI::Box::Vertical, w * 9 / 15, h - buth),
-buth_(buth),
-fsize_(fsize),
-fname_(fname)
+buth_(buth)
 {
-	UI::TextStyle tsmaller(UI::TextStyle::makebold(UI::Font::get(fname, fsize * 3 / 4), UI_FONT_CLR_FG));
+	int small_font = UI_FONT_SIZE_SMALL * 3 / 4;
 
 	// Clientbox and labels
 	labels.push_back
@@ -423,7 +418,7 @@ fname_(fname)
 			 UI::Scrollbar::Size * 6 / 5, buth / 3,
 			 w / 3 - buth - UI::Scrollbar::Size * 2, buth));
 	labels.back()->set_text(_("Client name"));
-	labels.back()->set_textstyle(tsmaller);
+	labels.back()->set_fontsize(small_font);
 
 	labels.push_back
 		(new UI::Textarea
@@ -431,7 +426,7 @@ fname_(fname)
 			 w / 3 - buth - UI::Scrollbar::Size * 6 / 5, buth / 3,
 			 buth * 2, buth));
 	labels.back()->set_text(_("Role"));
-	labels.back()->set_textstyle(tsmaller);
+	labels.back()->set_fontsize(small_font);
 
 	clientbox.set_size(w / 3, h - buth);
 	clientbox.set_scrolling(true);
@@ -443,7 +438,7 @@ fname_(fname)
 			 w * 6 / 15, buth / 3,
 			 buth, buth));
 	labels.back()->set_text(_("Start"));
-	labels.back()->set_textstyle(tsmaller);
+	labels.back()->set_fontsize(small_font);
 
 	labels.push_back
 		(new UI::Textarea
@@ -451,7 +446,7 @@ fname_(fname)
 			 w * 6 / 15 + buth, buth / 3 - 10,
 			 buth, buth));
 	labels.back()->set_text(_("Type"));
-	labels.back()->set_textstyle(tsmaller);
+	labels.back()->set_fontsize(small_font);
 
 	labels.push_back
 		(new UI::Textarea
@@ -459,7 +454,7 @@ fname_(fname)
 			 w * 6 / 15 + buth * 2, buth / 3,
 			 buth, buth));
 	labels.back()->set_text(_("Tribe"));
-	labels.back()->set_textstyle(tsmaller);
+	labels.back()->set_fontsize(small_font);
 
 	labels.push_back
 		(new UI::Textarea
@@ -467,11 +462,11 @@ fname_(fname)
 			 w * 6 / 15 + buth * 3, buth / 3,
 			 w * 9 / 15 - 4 * buth, buth, UI::Align::kHCenter));
 	labels.back()->set_text(_("Initialization"));
-	labels.back()->set_textstyle(tsmaller);
+	labels.back()->set_fontsize(small_font);
 
 	labels.push_back(new UI::Textarea(this, w - buth, buth / 3, buth, buth, UI::Align::kRight));
 	labels.back()->set_text(_("Team"));
-	labels.back()->set_textstyle(tsmaller);
+	labels.back()->set_fontsize(small_font);
 
 	playerbox.set_size(w * 9 / 15, h - buth);
 	multi_player_player_groups.resize(MAX_PLAYERS);
@@ -506,7 +501,7 @@ void MultiPlayerSetupGroup::refresh()
 	for (uint32_t i = 0; i < settings.users.size(); ++i) {
 		if (!multi_player_client_groups.at(i)) {
 			multi_player_client_groups.at(i) = new MultiPlayerClientGroup(
-				&clientbox, i, 0, 0, clientbox.get_w(), buth_, s, UI::Font::get(fname_, fsize_));
+				&clientbox, i, 0, 0, clientbox.get_w(), buth_, s);
 			clientbox.add(&*multi_player_client_groups.at(i), UI::Align::kHCenter);
 		}
 		multi_player_client_groups.at(i)->refresh();
