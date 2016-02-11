@@ -256,7 +256,7 @@ public:
 	void set_scenario_player_closeable(PlayerNumber, bool);
 
 	/// \returns the maximum theoretical possible nodecaps (no blocking bobs, etc.)
-	NodeCaps get_max_nodecaps(const World& world, FCoords &);
+	NodeCaps get_max_nodecaps(const World& world, const FCoords &);
 
 	BaseImmovable * get_immovable(Coords) const;
 	uint32_t find_bobs
