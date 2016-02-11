@@ -1429,13 +1429,7 @@ const PropertyType<LuaImmovableDescription> LuaImmovableDescription::Properties[
 	PROP_RO(LuaImmovableDescription, species),
 	PROP_RO(LuaImmovableDescription, build_cost),
 	PROP_RO(LuaImmovableDescription, editor_category),
-	// NOCOM(#codereview): how about dropping has_terrain_affinity and instead make
-	// terrain_affinity either 'nil' or a table with preferred_* as keys?
-	PROP_RO(LuaImmovableDescription, has_terrain_affinity),
-	PROP_RO(LuaImmovableDescription, pickiness),
-	PROP_RO(LuaImmovableDescription, preferred_fertility),
-	PROP_RO(LuaImmovableDescription, preferred_humidity),
-	PROP_RO(LuaImmovableDescription, preferred_temperature),
+	PROP_RO(LuaImmovableDescription, terrain_affinity),
 	PROP_RO(LuaImmovableDescription, owner_type),
 	PROP_RO(LuaImmovableDescription, size),
 	{nullptr, nullptr, nullptr},
@@ -1502,53 +1496,31 @@ int LuaImmovableDescription::get_editor_category(lua_State * L) {
 }
 
 /* RST
-	.. attribute:: whether this immovable has terrain affinity
+	.. attribute:: returns the terrain affinity values for this immovable
 
-			(RO) true if this immovable has terrain affinity
+			(RO) a table containing numbers labeled as pickiness, preferred_fertility,
+				  preferred_humidity, and preferred_temperature,
+				  or nil if the immovalbe has no terrain affinity.
 */
-int LuaImmovableDescription::get_has_terrain_affinity(lua_State * L) {
-	lua_pushboolean(L, get()->has_terrain_affinity());
-	return 1;
-}
-
-/* RST
-	.. attribute:: the terrain affinity's pickiness
-
-			(RO) the immovable's pickiness terrain affinity value. 0 if it has no terrain affinity.
-*/
-int LuaImmovableDescription::get_pickiness(lua_State * L) {
-	lua_pushnumber(L, get()->has_terrain_affinity() ? get()->terrain_affinity().pickiness() : 0);
-	return 1;
-}
-
-/* RST
-	.. attribute:: the terrain affinity's preferred_fertility
-
-			(RO) the immovable's preferred_fertility terrain affinity value. 0 if it has no terrain affinity.
-*/
-int LuaImmovableDescription::get_preferred_fertility(lua_State * L) {
-	lua_pushnumber(L, get()->has_terrain_affinity() ? get()->terrain_affinity().preferred_fertility() : 0);
-	return 1;
-}
-
-/* RST
-	.. attribute:: the terrain affinity's preferred_humidity
-
-			(RO) the immovable's preferred_humidity terrain affinity value. 0 if it has no terrain affinity.
-*/
-int LuaImmovableDescription::get_preferred_humidity(lua_State * L) {
-	lua_pushnumber(L, get()->has_terrain_affinity() ? get()->terrain_affinity().preferred_humidity() : 0);
-	return 1;
-}
-
-
-/* RST
-	.. attribute:: the terrain affinity's preferred_temperature
-
-			(RO) the immovable's preferred_temperature terrain affinity value. 0 if it has no terrain affinity.
-*/
-int LuaImmovableDescription::get_preferred_temperature(lua_State * L) {
-	lua_pushnumber(L, get()->has_terrain_affinity() ? get()->terrain_affinity().preferred_temperature() : 0);
+int LuaImmovableDescription::get_terrain_affinity(lua_State * L) {
+	if (get()->has_terrain_affinity()) {
+		const TerrainAffinity& affinity = get()->terrain_affinity();
+		lua_newtable(L);
+		lua_pushstring(L, "pickiness");
+		lua_pushnumber(L, affinity.pickiness());
+		lua_settable(L, -3);
+		lua_pushstring(L, "preferred_fertility");
+		lua_pushnumber(L, affinity.preferred_fertility());
+		lua_settable(L, -3);
+		lua_pushstring(L, "preferred_humidity");
+		lua_pushnumber(L, affinity.preferred_humidity());
+		lua_settable(L, -3);
+		lua_pushstring(L, "preferred_temperature");
+		lua_pushnumber(L, affinity.preferred_temperature());
+		lua_settable(L, -3);
+	} else {
+		lua_pushnil(L);
+	}
 	return 1;
 }
 

@@ -29,11 +29,11 @@ function test_descr:test_immovable_descr()
    end)
 end
 
-function test_descr:test_immovable_basename()
-   assert_equal("", egbase:get_immovable_description("bush1").basename)
-   assert_equal("", egbase:get_immovable_description("cornfield_ripe").basename)
-   assert_equal("", egbase:get_immovable_description("alder_summer_sapling").basename)
-   assert_equal(_"Alder", egbase:get_immovable_description("alder_summer_old").basename)
+function test_descr:test_immovable_species()
+   assert_equal("", egbase:get_immovable_description("bush1").species)
+   assert_equal("", egbase:get_immovable_description("cornfield_ripe").species)
+   assert_equal("", egbase:get_immovable_description("alder_summer_sapling").species)
+   assert_equal(_"Alder", egbase:get_immovable_description("alder_summer_old").species)
 end
 
 function test_descr:test_immovable_build_cost()
@@ -67,54 +67,39 @@ function test_descr:test_immovable_editor_category()
       "alder_summer_old").editor_category.name)
 end
 
-function test_descr:test_immovable_has_terrain_affinity()
-   assert_equal(false, egbase:get_immovable_description("bush1").has_terrain_affinity)
-   assert_equal(false, egbase:get_immovable_description("cornfield_ripe").has_terrain_affinity)
-   assert_equal(true, egbase:get_immovable_description(
-      "alder_summer_sapling").has_terrain_affinity)
-   assert_equal(true, egbase:get_immovable_description(
-      "alder_summer_old").has_terrain_affinity)
-end
+function test_descr:test_immovable_terrain_affinity()
+   assert_equal(nil, egbase:get_immovable_description("bush1").terrain_affinity)
+   assert_equal(nil, egbase:get_immovable_description("cornfield_ripe").terrain_affinity)
 
-function test_descr:test_immovable_pickiness()
-   assert_equal(0, egbase:get_immovable_description("bush1").pickiness)
-   assert_equal(0, egbase:get_immovable_description("cornfield_ripe").pickiness)
+   local aff_alder_sapling = egbase:get_immovable_description("alder_summer_sapling").terrain_affinity
+   local aff_alder_old = egbase:get_immovable_description("alder_summer_old").terrain_affinity
+   local aff_mushroom_red_pole = egbase:get_immovable_description("mushroom_red_wasteland_pole").terrain_affinity
+   local aff_umbrella_green_mature = egbase:get_immovable_description("umbrella_green_wasteland_mature").terrain_affinity
+
+   -- Pickiness
    -- NOCOM(#codereview): see warning about float comparsion in new tests.
-   assert_equal(0.6, egbase:get_immovable_description("alder_summer_sapling").pickiness)
-   assert_equal(0.6, egbase:get_immovable_description("alder_summer_old").pickiness)
-   assert_equal(0.6, egbase:get_immovable_description(
-      "mushroom_red_wasteland_sapling").pickiness)
-end
+   assert_equal(0.6, aff_alder_sapling["pickiness"])
+   assert_equal(aff_alder_sapling["pickiness"], aff_alder_old["pickiness"])
+   assert_equal(0.6, aff_mushroom_red_pole["pickiness"])
+   assert_equal(0.8, aff_umbrella_green_mature["pickiness"])
 
-function test_descr:test_immovable_preferred_fertility()
-   assert_equal(0, egbase:get_immovable_description("bush1").preferred_fertility)
-   assert_equal(0, egbase:get_immovable_description("cornfield_ripe").preferred_fertility)
-   assert_equal(0.6, egbase:get_immovable_description(
-      "alder_summer_sapling").preferred_fertility)
-   assert_equal(0.6, egbase:get_immovable_description("alder_summer_old").preferred_fertility)
-   assert_equal(0.85, egbase:get_immovable_description(
-      "mushroom_red_wasteland_sapling").preferred_fertility)
-end
+   -- preferred_fertility
+   assert_equal(0.6, aff_alder_sapling["preferred_fertility"])
+   assert_equal(aff_alder_sapling["preferred_fertility"], aff_alder_old["preferred_fertility"])
+   assert_equal(0.85, aff_mushroom_red_pole["preferred_fertility"])
+   assert_equal(0.85, aff_umbrella_green_mature["preferred_fertility"])
 
-function test_descr:test_immovable_preferred_humidity()
-   assert_equal(0, egbase:get_immovable_description("bush1").preferred_humidity)
-   assert_equal(0, egbase:get_immovable_description("cornfield_ripe").preferred_humidity)
-   assert_equal(0.65, egbase:get_immovable_description(
-      "alder_summer_sapling").preferred_humidity)
-   assert_equal(0.65, egbase:get_immovable_description("alder_summer_old").preferred_humidity)
-   assert_equal(0.35, egbase:get_immovable_description(
-      "mushroom_red_wasteland_sapling").preferred_humidity)
-end
+   -- preferred_humidity
+   assert_equal(0.65, aff_alder_sapling["preferred_humidity"])
+   assert_equal(aff_alder_sapling["preferred_humidity"], aff_alder_old["preferred_humidity"])
+   assert_equal(0.35, aff_mushroom_red_pole["preferred_humidity"])
+   assert_equal(0.2, aff_umbrella_green_mature["preferred_humidity"])
 
-function test_descr:test_immovable_preferred_temperature()
-   assert_equal(0, egbase:get_immovable_description("bush1").preferred_temperature)
-   assert_equal(0, egbase:get_immovable_description("cornfield_ripe").preferred_temperature)
-   assert_equal(125, egbase:get_immovable_description(
-      "alder_summer_sapling").preferred_temperature)
-   assert_equal(125, egbase:get_immovable_description(
-      "alder_summer_old").preferred_temperature)
-   assert_equal(80, egbase:get_immovable_description(
-      "mushroom_red_wasteland_sapling").preferred_temperature)
+   -- preferred_temperature
+   assert_equal(125, aff_alder_sapling["preferred_temperature"])
+   assert_equal(aff_alder_sapling["preferred_temperature"], aff_alder_old["preferred_temperature"])
+   assert_equal(80, aff_mushroom_red_pole["preferred_temperature"])
+   assert_equal(110, aff_umbrella_green_mature["preferred_temperature"])
 end
 
 function test_descr:test_immovable_owner_type()
