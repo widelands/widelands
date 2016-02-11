@@ -371,7 +371,7 @@ private:
 	void think() override;
 
 	InteractiveGameBase & m_igb;
-	Widelands::Building & m_building;
+	Widelands::Building & building_;
 	SoldierPanel m_soldierpanel;
 	UI::Radiogroup m_soldier_preference;
 	UI::Textarea m_infotext;
@@ -385,7 +385,7 @@ SoldierList::SoldierList
 UI::Box(&parent, 0, 0, UI::Box::Vertical),
 
 m_igb(igb),
-m_building(building),
+building_(building),
 m_soldierpanel(*this, igb.egbase(), building),
 m_infotext(this, _("Click soldier to send away"))
 {
@@ -413,7 +413,7 @@ m_infotext(this, _("Click soldier to send away"))
 
 	UI::Box * buttons = new UI::Box(this, 0, 0, UI::Box::Horizontal);
 
-	bool can_act = m_igb.can_act(m_building.owner().player_number());
+	bool can_act = m_igb.can_act(building_.owner().player_number());
 	if (upcast(Widelands::MilitarySite, ms, &building)) {
 		m_soldier_preference.add_button
 			(buttons, Point(0, 0),
@@ -450,16 +450,16 @@ m_infotext(this, _("Click soldier to send away"))
 
 SoldierControl & SoldierList::soldiers() const
 {
-	return *dynamic_cast<SoldierControl *>(&m_building);
+	return *dynamic_cast<SoldierControl *>(&building_);
 }
 
 void SoldierList::think()
 {
 	// Only update the soldiers pref radio if player is spectator
-	if (m_igb.can_act(m_building.owner().player_number())) {
+	if (m_igb.can_act(building_.owner().player_number())) {
 		return;
 	}
-	if (upcast(Widelands::MilitarySite, ms, &m_building)) {
+	if (upcast(Widelands::MilitarySite, ms, &building_)) {
 		switch (ms->get_soldier_preference()) {
 			case Widelands::MilitarySite::kPrefersRookies:
 				m_soldier_preference.set_state(0);
@@ -495,20 +495,20 @@ void SoldierList::mouseover(const Soldier * soldier)
 void SoldierList::eject(const Soldier * soldier)
 {
 	uint32_t const capacity_min = soldiers().min_soldier_capacity();
-	bool can_act = m_igb.can_act(m_building.owner().player_number());
+	bool can_act = m_igb.can_act(building_.owner().player_number());
 	bool over_min = capacity_min < soldiers().present_soldiers().size();
 
 	if (can_act && over_min)
-		m_igb.game().send_player_drop_soldier(m_building, soldier->serial());
+		m_igb.game().send_player_drop_soldier(building_, soldier->serial());
 }
 
 void SoldierList::set_soldier_preference(int32_t changed_to) {
 #ifndef NDEBUG
-	upcast(Widelands::MilitarySite, ms, &m_building);
+	upcast(Widelands::MilitarySite, ms, &building_);
 	assert(ms);
 #endif
 	m_igb.game().send_player_militarysite_set_soldier_preference
-		(m_building, changed_to == 0 ?
+		(building_, changed_to == 0 ?
 			Widelands::MilitarySite::kPrefersRookies:
 			Widelands::MilitarySite::kPrefersHeroes);
 }

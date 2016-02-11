@@ -74,7 +74,7 @@ FullscreenMenuTextView::FullscreenMenuTextView
 								boost::ref(*this),
 								FullscreenMenuBase::MenuTarget::kBack));
 
-	title.set_font(ui_fn(), fs_big(), UI_FONT_CLR_FG);
+	title.set_fontsize(fs_big());
 	title.set_pos
 		(Point((get_inner_w() - title.get_w()) / 2, get_h() * 167 / 1000));
 }

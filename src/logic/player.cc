@@ -1259,9 +1259,9 @@ const Player::BuildingStatsVector& Player::get_building_statistics(const Descrip
 
 Player::BuildingStatsVector* Player::get_mutable_building_statistics(const DescriptionIndex& i) {
 	DescriptionIndex const nr_buildings = egbase().tribes().nrbuildings();
-	if (m_building_stats.size() < nr_buildings)
-		m_building_stats.resize(nr_buildings);
-	return &m_building_stats[i];
+	if (building_stats_.size() < nr_buildings)
+		building_stats_.resize(nr_buildings);
+	return &building_stats_[i];
 }
 
 /**
@@ -1279,8 +1279,8 @@ void Player::update_building_statistics
 	const size_t nr_buildings = egbase().tribes().nrbuildings();
 
 	// Get the valid vector for this
-	if (m_building_stats.size() < nr_buildings)
-		m_building_stats.resize(nr_buildings);
+	if (building_stats_.size() < nr_buildings)
+		building_stats_.resize(nr_buildings);
 
 	std::vector<BuildingStats>& stat =
 		*get_mutable_building_statistics(egbase().tribes().building_index(building_name.c_str()));

@@ -32,7 +32,6 @@ namespace UI {
 
 struct SpinBoxImpl;
 struct IntValueTextReplacement;
-struct TextStyle;
 
 /// A spinbox is an UI element for setting the integer value of a variable.
 /// w is the overall width of the SpinBox and must be wide enough to fit 2 labels and the buttons.

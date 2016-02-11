@@ -51,7 +51,7 @@ namespace Widelands {
 
 namespace  {
 
-/// Returns true if 'coord' is not occupied or onwned by 'player_number' and
+/// Returns true if 'coord' is not occupied or owned by 'player_number' and
 /// nothing stands there.
 bool can_support_port(const PlayerNumber player_number, const FCoords& coord) {
 	const PlayerNumber owner = coord.field->get_owned_by();
@@ -65,7 +65,7 @@ bool can_support_port(const PlayerNumber player_number, const FCoords& coord) {
 	return true;
 }
 
-/// Returns true if a ship owned by 'player_number' can land and errect a port at 'coord'.
+/// Returns true if a ship owned by 'player_number' can land and erect a port at 'coord'.
 bool can_build_port_here(const PlayerNumber player_number, const Map& map, const FCoords& coord) {
 	if (!can_support_port(player_number, coord)) {
 		return false;
@@ -977,9 +977,9 @@ void Ship::send_message(Game& game,
 	if (picture.size() > 3) {
 		rt_description = "<rt image=";
 		rt_description += picture;
-		rt_description += "><p font-size=14 font-face=DejaVuSerif>";
+		rt_description += "><p font-size=14 font-face=serif>";
 	} else
-		rt_description = "<rt><p font-size=14 font-face=DejaVuSerif>";
+		rt_description = "<rt><p font-size=14 font-face=serif>";
 	rt_description += description;
 	rt_description += "</p></rt>";
 

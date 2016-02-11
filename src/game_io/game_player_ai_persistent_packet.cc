@@ -28,7 +28,7 @@
 
 namespace Widelands {
 
-constexpr uint16_t kCurrentPacketVersion = 1;
+constexpr uint16_t kCurrentPacketVersion = 2;
 
 void GamePlayerAiPersistentPacket::read
 	(FileSystem & fs, Game & game, MapObjectLoader *)
@@ -57,6 +57,7 @@ void GamePlayerAiPersistentPacket::read
 					player->ai_data.ai_productionsites_ratio = fr.unsigned_32();
 					player->ai_data.ai_personality_wood_difference = fr.signed_32();
 					player->ai_data.ai_personality_early_militarysites = fr.unsigned_32();
+					player->ai_data.last_soldier_trained = fr.unsigned_32();
 
 				} catch (const WException & e) {
 					throw GameDataError("player %u: %s", p, e.what());
@@ -96,6 +97,7 @@ void GamePlayerAiPersistentPacket::write
 		fw.unsigned_32(player->ai_data.ai_productionsites_ratio);
 		fw.signed_32(player->ai_data.ai_personality_wood_difference);
 		fw.unsigned_32(player->ai_data.ai_personality_early_militarysites);
+		fw.unsigned_32(player->ai_data.last_soldier_trained);
 	}
 
 	fw.write(fs, "binary/player_ai");
