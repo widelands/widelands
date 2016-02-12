@@ -440,7 +440,8 @@ void ZipFilesystem::write
 			 (boost::format("in path '%s'', Error") % zip_file_->path() % strerror(errno)).str());
 	default:
 		throw FileError
-			("ZipFilesystem::write", complete_filename, (boost::format("in path '%s'") % zip_file_->path()).str());
+			("ZipFilesystem::write", complete_filename,
+			 (boost::format("in path '%s'") % zip_file_->path()).str());
 	}
 
 	zipCloseFileInZip(zip_file_->write_handle());
