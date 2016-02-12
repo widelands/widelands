@@ -1328,7 +1328,7 @@ void WLApplication::replay()
 		tipstext.push_back("general_game");
 		GameTips tips (loader_ui, tipstext);
 
-		loader_ui.step(_("Loading..."));
+		loader_ui.step(_("Loading…"));
 
 		game.set_ibase
 			(new InteractiveSpectator(game, g_options.pull_section("global")));

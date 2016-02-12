@@ -363,7 +363,7 @@ void Game::init_savegame
 		m_win_condition_displayname = gpdp.get_win_condition();
 		std::string background(gpdp.get_background());
 		loader_ui->set_background(background);
-		loader_ui->step(_("Loading..."));
+		loader_ui->step(_("Loading…"));
 		gl.load_game(settings.multiplayer);
 	} catch (...) {
 		throw;
@@ -396,7 +396,7 @@ bool Game::run_load_game(std::string filename, const std::string& script_to_run)
 			(new InteractivePlayer
 			 	(*this, g_options.pull_section("global"), player_nr, false));
 
-		loader_ui.step(_("Loading..."));
+		loader_ui.step(_("Loading…"));
 		gl.load_game();
 	}
 
