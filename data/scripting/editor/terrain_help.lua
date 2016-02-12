@@ -46,24 +46,22 @@ return {
             if (probability > 0.01) then
                -- sort the trees by percentage
                i = 1
-               while (tree_list[i] and (tree_list[i].probability_ > probability)) do
+               while (tree_list[i] and (tree_list[i].probability > probability)) do
                   i = i + 1
                end
 
                for j = #tree_list, i, -1 do
                   tree_list[j+1] = tree_list[j]
                end
-               -- NOCOM(#sirver): why the _ ? tree_name_ and probability_?
-               tree_list[i] = {tree_name_ = immovable.name, probability_ = probability}
+               tree_list[i] = {tree = immovable, probability = probability}
             end
          end
       end
 
       local tree_string = ""
       for k,v in ipairs(tree_list) do
-         local tree = wl.Editor():get_immovable_description(v.tree_name_)
-         tree_string = tree_string .. picture_li(tree.representative_image,
-            tree.species .. ("<br>%2.1f%%"):bformat(100 * v.probability_)) .. spacer()
+         tree_string = tree_string .. picture_li(v.tree.representative_image,
+            v.tree.species .. ("<br>%2.1f%%"):bformat(100 * v.probability)) .. spacer()
       end
 
       -- TRANSLATORS: A header in the editor help

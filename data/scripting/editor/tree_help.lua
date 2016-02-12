@@ -21,23 +21,23 @@ return {
          if (probability > 0.01) then
             -- sort the terrains by percentage
             i = 1
-            while (terrain_list[i] and (terrain_list[i].probability_ > probability)) do
+            while (terrain_list[i] and (terrain_list[i].probability > probability)) do
                i = i + 1
             end
 
             for j = #terrain_list, i, -1 do
                terrain_list[j+1] = terrain_list[j]
             end
-            terrain_list[i] = {terrain_name_ = terrain_name, probability_ = probability}
+            terrain_list[i] = {terrain_name = terrain_name, probability = probability}
          end
       end
 
       for k,v in ipairs(terrain_list) do
-         local terrain = wl.Editor():get_terrain_description(v.terrain_name_)
+         local terrain = wl.Editor():get_terrain_description(v.terrain_name)
          -- TRANSLATORS: Terrain name (Climate)
          result = result .. picture_li(terrain.representative_image,
                (_"%1% (%2%)"):bformat(terrain.descname, terrain.editor_category.descname) ..
-               "<br>" .. ("%2.1f%%"):bformat(100 * v.probability_)
+               "<br>" .. ("%2.1f%%"):bformat(100 * v.probability)
             ) .. spacer()
       end
       return result
