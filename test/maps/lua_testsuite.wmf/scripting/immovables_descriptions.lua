@@ -19,8 +19,7 @@ end
 --  =======================================================
 
 function test_descr:test_immovable_descr()
-   -- NOCOM(#codereview): Wrong immovable -> Unknown immovable?
-   assert_error("Wrong immovable", function() egbase:get_immovable_description("XXX") end)
+   assert_error("Unknown immovable", function() egbase:get_immovable_description("XXX") end)
    assert_error("Wrong number of parameters: 2", function()
       egbase:get_immovable_description("XXX", "YYY")
    end)
@@ -136,7 +135,7 @@ end
 --  =======================================================
 
 function test_descr:test_building_descr()
-   assert_error("Wrong building", function() egbase:get_building_description("XXX") end)
+   assert_error("Unknown building", function() egbase:get_building_description("XXX") end)
    assert_error("Wrong number of parameters: 2", function() egbase:get_building_description("XXX", "YYY") end)
    assert_error("Wrong number of parameters: 3", function() egbase:get_building_description("XXX","YYY","ZZZ") end)
 end
@@ -439,7 +438,7 @@ end
 --  =======================================================
 
 function test_descr:test_ware_descr()
-   assert_error("Wrong ware", function() egbase:get_ware_description("XXX") end)
+   assert_error("Unknown ware", function() egbase:get_ware_description("XXX") end)
    assert_error("Wrong number of parameters: 2", function() egbase:get_ware_description("XXX","YYY") end)
 end
 
@@ -513,7 +512,7 @@ end
 --  =======================================================
 
 function test_descr:test_worker_descr()
-   assert_error("Wrong worker", function() egbase:get_worker_description("XXX") end)
+   assert_error("Unknown worker", function() egbase:get_worker_description("XXX") end)
    assert_error("Wrong number of parameters: 2", function() egbase:get_worker_description("XXX","YYY") end)
 end
 
