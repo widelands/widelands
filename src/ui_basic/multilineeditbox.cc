@@ -104,7 +104,6 @@ MultilineEditbox::Data::Data(MultilineEditbox & o)
 :
 scrollbar(&o, o.get_w() - ms_scrollbar_w, 0, ms_scrollbar_w, o.get_h(), false),
 cursor_pos(0),
-textstyle(UI::TextStyle::ui_small()),
 maxbytes(0xffff),
 ww_valid(false),
 owner(o)
@@ -151,19 +150,6 @@ void MultilineEditbox::set_text(const std::string & text)
 	d_->scroll_cursor_into_view();
 
 	changed();
-}
-
-/**
- * Set the text style.
- */
-void MultilineEditbox::set_textstyle(const UI::TextStyle & ts)
-{
-	if (d_->textstyle == ts)
-		return;
-
-	d_->textstyle = ts;
-	d_->update();
-
 }
 
 /**

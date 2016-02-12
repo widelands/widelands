@@ -261,7 +261,7 @@ WarehouseDescr::WarehouseDescr
 	m_heal_per_second = table.get_int("heal_per_second");
 	if (table.has_key("conquers")) {
 		m_conquers = table.get_int("conquers");
-		m_workarea_info[m_conquers].insert(descname() + " conquer");
+		workarea_info_[m_conquers].insert(descname() + " conquer");
 	}
 }
 
@@ -446,7 +446,8 @@ void Warehouse::init(EditorGameBase & egbase)
 
 		m_next_stock_remove_act = schedule_act(*game, 4000);
 
-		log("Message: adding (wh) (%s) %i \n", to_string(descr().type()).c_str(), player.player_number());
+		log("Message: adding %s for player %i at (%d, %d)\n", to_string(descr().type()).c_str(),
+		    player.player_number(), position_.x, position_.y);
 
 		if (descr().get_isport()) {
 			send_message
@@ -478,12 +479,11 @@ void Warehouse::init(EditorGameBase & egbase)
 		}
 	}
 
-	if (uint32_t const conquer_radius = descr().get_conquers())
-		egbase.conquer_area
-			(PlayerArea<Area<FCoords> >
-			 	(player.player_number(),
-			 	 Area<FCoords>
-			 	 	(egbase.map().get_fcoords(get_position()), conquer_radius)));
+	if (uint32_t const conquer_radius = descr().get_conquers()) {
+		egbase.conquer_area(PlayerArea<Area<FCoords>>(
+		   player.player_number(),
+		   Area<FCoords>(egbase.map().get_fcoords(get_position()), conquer_radius)));
+	}
 
 	if (descr().get_isport()) {
 		init_portdock(egbase);
@@ -495,10 +495,7 @@ void Warehouse::init(EditorGameBase & egbase)
 			get_position().y);
 		}
 	}
-
-	//this is default
 	cleanup_in_progress_ = false;
-
 }
 
 void Warehouse::init_containers(Player& player) {
@@ -580,7 +577,6 @@ void Warehouse::restore_portdock_or_destroy(EditorGameBase& egbase) {
 
 /// Destroy the warehouse.
 void Warehouse::cleanup(EditorGameBase& egbase) {
-
 	// if this is a port, it will remove also portdock.
 	// But portdock must know that it should not try to recreate itself
 	cleanup_in_progress_ = true;
@@ -629,7 +625,7 @@ void Warehouse::cleanup(EditorGameBase& egbase) {
 			(PlayerArea<Area<FCoords> >
 			 	(owner().player_number(),
 			 	 Area<FCoords>(map.get_fcoords(get_position()), conquer_radius)),
-			 m_defeating_player);
+			 defeating_player_);
 
 	// Unsee the area that we started seeing in init()
 	Player & player = owner();
@@ -903,7 +899,7 @@ Worker & Warehouse::launch_worker
 				// NOTE: This code lies about the TrainingAttributes of the new worker
 				m_supply->remove_workers(worker_id, 1);
 				const WorkerDescr & workerdescr = *game.tribes().get_worker_descr(worker_id);
-				return workerdescr.create(game, owner(), this, m_position);
+				return workerdescr.create(game, owner(), this, position_);
 			}
 		}
 
@@ -1105,7 +1101,7 @@ void Warehouse::create_worker(Game & game, DescriptionIndex const worker) {
 			remove_workers(owner().tribe().safe_worker_index(input), buildcost.second);
 	}
 
-	incorporate_worker(game, &w_desc.create(game, owner(), this, m_position));
+	incorporate_worker(game, &w_desc.create(game, owner(), this, position_));
 
 	// Update PlannedWorkers::amount here if appropriate, because this function
 	// may have been called directly by the Economy.

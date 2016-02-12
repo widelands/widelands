@@ -197,10 +197,8 @@ struct Ship : Bob {
 	}
 
 	/// \returns (in expedition mode only!) the list of currently seen port build spaces
-	const std::list<Coords>* exp_port_spaces() {
-		if (!m_expedition)
-			return nullptr;
-		return m_expedition->seen_port_buildspaces.get();
+	const std::vector<Coords>& exp_port_spaces() {
+		return m_expedition->seen_port_buildspaces;
 	}
 
 	void exp_scouting_direction(Game &, WalkingDir);
@@ -254,7 +252,7 @@ private:
 	std::string m_shipname;
 
 	struct Expedition {
-		std::unique_ptr<std::list<Coords> > seen_port_buildspaces;
+		std::vector<Coords> seen_port_buildspaces;
 		bool swimable[LAST_DIRECTION];
 		bool island_exploration;
 		WalkingDir scouting_direction;

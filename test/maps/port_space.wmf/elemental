@@ -1,0 +1,12 @@
+# Automatically created by Widelands bzr7801[trunk] (Debug)
+
+[global]
+packet_version="1"
+map_w="64"
+map_h="64"
+nr_players="2"
+name="port_space"
+author="Unknown"
+descr="No description defined"
+hint=
+tags="seafaring"

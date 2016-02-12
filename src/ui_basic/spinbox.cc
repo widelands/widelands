@@ -187,7 +187,7 @@ SpinBox::SpinBox
 		sbi_->text->set_fixed_width(unit_w
 											 - 2 * sbi_->button_ten_plus->get_w()
 											 - 2 * sbi_->button_minus->get_w()
-											 - 4 * padding);
+											 - 2 * padding);
 
 		box_->add(sbi_->button_ten_minus, UI::Align::kTop);
 		box_->add(sbi_->button_minus, UI::Align::kTop);
@@ -195,7 +195,7 @@ SpinBox::SpinBox
 		box_->add(sbi_->button_plus, UI::Align::kTop);
 		box_->add(sbi_->button_ten_plus, UI::Align::kTop);
 	} else {
-		sbi_->text->set_fixed_width(unit_w - 2 * sbi_->button_minus->get_w() - 2 * padding);
+		sbi_->text->set_fixed_width(unit_w - 2 * sbi_->button_minus->get_w());
 
 		box_->add(sbi_->button_minus, UI::Align::kHCenter);
 		box_->add(sbi_->text, UI::Align::kHCenter);

@@ -144,16 +144,14 @@ FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG
 	cur_wincondition_ = -1;
 	win_condition_clicked();
 
-	title_.set_textstyle(UI::TextStyle::ui_big());
+	title_.set_fontsize(UI_FONT_SIZE_BIG);
 
-	UI::TextStyle tsmaller
-		(UI::TextStyle::makebold
-		 (UI::Font::get(ui_fn(), fs_small() * 4 / 5), UI_FONT_CLR_FG));
-	name_.set_textstyle(tsmaller);
-	type_.set_textstyle(tsmaller);
-	team_.set_textstyle(tsmaller);
-	tribe_.set_textstyle(tsmaller);
-	init_.set_textstyle(tsmaller);
+	int smaller_fontsize = fs_small() * 4 / 5;
+	name_.set_fontsize(smaller_fontsize);
+	type_.set_fontsize(smaller_fontsize);
+	team_.set_fontsize(smaller_fontsize);
+	tribe_.set_fontsize(smaller_fontsize);
+	init_.set_fontsize(smaller_fontsize);
 
 	uint32_t y = get_h() * 3 / 10 - buth_;
 	for (uint32_t i = 0; i < MAX_PLAYERS; ++i) {
