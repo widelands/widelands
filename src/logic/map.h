@@ -147,7 +147,7 @@ public:
 
 	using PortSpacesSet = std::set<Coords, Coords::OrderingFunctor>;
 	using Objectives = std::map<std::string, std::unique_ptr<Objective>>;
-	using SuggestedTeam = std::vector<uint16_t>;             // Players in a team
+	using SuggestedTeam = std::vector<PlayerNumber>;             // Players in a team
 	using SuggestedTeamLineup = std::vector<SuggestedTeam>; // Recommended teams to play against each other
 
 
