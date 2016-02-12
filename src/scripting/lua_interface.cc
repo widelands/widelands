@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2010, 2013 by the Widelands Development Team
+ * Copyright (C) 2006-2016, 2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -52,46 +52,46 @@ void open_lua_library
 
 
 LuaInterface::LuaInterface() {
-	m_L = luaL_newstate();
+	lua_state_ = luaL_newstate();
 
 	// Open the Lua libraries
-	open_lua_library(m_L, "", luaopen_base, false);
-	open_lua_library(m_L, LUA_TABLIBNAME, luaopen_table, true);
-	open_lua_library(m_L, LUA_STRLIBNAME, luaopen_string, true);
-	open_lua_library(m_L, LUA_MATHLIBNAME, luaopen_math, true);
-	open_lua_library(m_L, LUA_DBLIBNAME, luaopen_debug, true);
-	open_lua_library(m_L, LUA_COLIBNAME, luaopen_coroutine, true);
+	open_lua_library(lua_state_, "", luaopen_base, false);
+	open_lua_library(lua_state_, LUA_TABLIBNAME, luaopen_table, true);
+	open_lua_library(lua_state_, LUA_STRLIBNAME, luaopen_string, true);
+	open_lua_library(lua_state_, LUA_MATHLIBNAME, luaopen_math, true);
+	open_lua_library(lua_state_, LUA_DBLIBNAME, luaopen_debug, true);
+	open_lua_library(lua_state_, LUA_COLIBNAME, luaopen_coroutine, true);
 
 	// Push the instance of this class into the registry
 	// MSVC2008 requires that stored and retrieved types are
 	// same, so use LuaInterface* on both sides.
 	lua_pushlightuserdata
-		(m_L, reinterpret_cast<void *>(dynamic_cast<LuaInterface *>(this)));
-	lua_setfield(m_L, LUA_REGISTRYINDEX, "lua_interface");
+		(lua_state_, reinterpret_cast<void *>(dynamic_cast<LuaInterface *>(this)));
+	lua_setfield(lua_state_, LUA_REGISTRYINDEX, "lua_interface");
 
 	// Now our own
-	LuaGlobals::luaopen_globals(m_L);
+	LuaGlobals::luaopen_globals(lua_state_);
 
 	// And helper methods.
-	LuaPath::luaopen_path(m_L);
+	LuaPath::luaopen_path(lua_state_);
 
 	// Also push the "wl" and the "hooks" table.
-	lua_newtable(m_L);
-	lua_setglobal(m_L, "wl");
+	lua_newtable(lua_state_);
+	lua_setglobal(lua_state_, "wl");
 
-	lua_newtable(m_L);
-	lua_setglobal(m_L, "hooks");
+	lua_newtable(lua_state_);
+	lua_setglobal(lua_state_, "hooks");
 }
 
 LuaInterface::~LuaInterface() {
-	lua_close(m_L);
+	lua_close(lua_state_);
 }
 
 void LuaInterface::interpret_string(const std::string& cmd) {
-	int rv = luaL_dostring(m_L, cmd.c_str());
-	check_return_value_for_errors(m_L, rv);
+	int rv = luaL_dostring(lua_state_, cmd.c_str());
+	check_return_value_for_errors(lua_state_, rv);
 }
 
 std::unique_ptr<LuaTable> LuaInterface::run_script(const std::string& path) {
-	return ::run_script(m_L, path, g_fs);
+	return ::run_script(lua_state_, path, g_fs);
 }
