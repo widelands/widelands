@@ -1553,7 +1553,7 @@ int LuaImmovableDescription::get_owner_type(lua_State * L) {
 			(RO) the size of the immovable as an int.
 */
 int LuaImmovableDescription::get_size(lua_State * L) {
-	// NOCOM(#codereview): see this todo, that is also mentioned below for
+	// TODO(GunChleoc): see this todo, that is also mentioned below for
 	// buildings. I think we can do that now, every description is wrapped I
 	// think. Essentially that means every instance of something on the map
 	// (like a building) get's a .description that has the static data for the
