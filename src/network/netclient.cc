@@ -324,7 +324,7 @@ bool NetClient::can_change_player_team(uint8_t number)
 	return (number == d->settings.playernum) && !d->settings.scenario && !d->settings.savegame;
 }
 
-bool NetClient::can_change_player_init(uint8_t number)
+bool NetClient::can_change_player_init(uint8_t)
 {
 	return false;
 }
@@ -344,7 +344,7 @@ void NetClient::set_player_ai(uint8_t, const std::string &, bool const /* random
 	// client is not allowed to do this
 }
 
-void NetClient::next_player_state(uint8_t number)
+void NetClient::next_player_state(uint8_t)
 {
 	// client is not allowed to do this
 }

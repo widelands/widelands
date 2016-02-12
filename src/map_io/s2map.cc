@@ -361,7 +361,10 @@ int32_t S2MapLoader::preload_map(bool const scenario) {
 int32_t S2MapLoader::load_map_complete
 	(Widelands::EditorGameBase& egbase, MapLoader::LoadType)
 {
-	ScopedTimer timer("S2MapLoader::load_map_complete() took %ums");
+	std::string timer_message = "S2MapLoader::load_map_complete() for '";
+	timer_message += m_map.get_name();
+	timer_message += "' took %ums";
+	ScopedTimer timer(timer_message);
 
 	load_s2mf(egbase);
 
