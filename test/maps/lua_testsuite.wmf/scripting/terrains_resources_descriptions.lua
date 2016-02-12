@@ -17,13 +17,10 @@ function test_terrains_resource_descr:test_resource_descr()
 end
 
 function test_terrains_resource_descr:test_resource_descname()
-   -- NOCOM(#sirver): I think you should remove _ from here. The regression
-   -- test always runs the game in English and tests should not be run any
-   -- other way to be reproducible and hermetic
-   assert_equal(_"Coal", egbase:get_resource_description("coal").descname)
-   assert_equal(_"Stones", egbase:get_resource_description("stones").descname)
-   assert_equal(_"Water", egbase:get_resource_description("water").descname)
-   assert_equal(_"Fish", egbase:get_resource_description("fish").descname)
+   assert_equal("Coal", egbase:get_resource_description("coal").descname)
+   assert_equal("Stones", egbase:get_resource_description("stones").descname)
+   assert_equal("Water", egbase:get_resource_description("water").descname)
+   assert_equal("Fish", egbase:get_resource_description("fish").descname)
 end
 
 function test_terrains_resource_descr:test_resource_name()
@@ -36,6 +33,8 @@ end
 function test_terrains_resource_descr:test_resource_is_detectable()
    -- NOCOM(#codereview): is_detectable -> is_surveiable ?
    -- https://en.wikipedia.org/wiki/Geological_survey
+   -- NOCOM(GunChleoc): I think "detectable" is fine, the term "detecting" is used on
+   -- https://en.wikipedia.org/wiki/Prospecting. And the word "surveyable" doesn't exist.
    assert_equal(true, egbase:get_resource_description("coal").is_detectable)
    assert_equal(true, egbase:get_resource_description("stones").is_detectable)
    assert_equal(true, egbase:get_resource_description("water").is_detectable)
@@ -90,13 +89,13 @@ function test_terrains_resource_descr:test_terrain_descr()
 end
 
 function test_terrains_resource_descr:test_terrain_descname()
-   assert_equal(_"Meadow",
+   assert_equal("Meadow",
       egbase:get_terrain_description("wiese1").descname)
-   assert_equal(_"Beach",
+   assert_equal("Beach",
       egbase:get_terrain_description("wasteland_beach").descname)
-   assert_equal(_"Forested Mountain",
+   assert_equal("Forested Mountain",
       egbase:get_terrain_description("desert_forested_mountain2").descname)
-   assert_equal(_"Water",
+   assert_equal("Water",
       egbase:get_terrain_description("winter_water").descname)
 end
 
@@ -129,39 +128,34 @@ function test_terrains_resource_descr:test_terrain_default_resource_amount()
 end
 
 function test_terrains_resource_descr:test_terrain_editor_category()
-   -- NOCOM(#codereview): same comments about _"" here
    assert_equal("green", egbase:get_terrain_description("wiese1").editor_category.name)
-   assert_equal(_"Summer", egbase:get_terrain_description("wiese1").editor_category.descname)
+   assert_equal("Summer", egbase:get_terrain_description("wiese1").editor_category.descname)
    assert_equal("wasteland",
       egbase:get_terrain_description("wasteland_beach").editor_category.name)
-   assert_equal(_"Wasteland",
+   assert_equal("Wasteland",
       egbase:get_terrain_description("wasteland_beach").editor_category.descname)
    assert_equal("desert",
       egbase:get_terrain_description("desert_forested_mountain2").editor_category.name)
-   assert_equal(_"Desert",
+   assert_equal("Desert",
       egbase:get_terrain_description("desert_forested_mountain2").editor_category.descname)
    assert_equal("winter",
       egbase:get_terrain_description("winter_water").editor_category.name)
-   assert_equal(_"Winter",
+   assert_equal("Winter",
       egbase:get_terrain_description("winter_water").editor_category.descname)
 end
 
 function test_terrains_resource_descr:test_terrain_fertility()
-   -- NOCOM(#codereview): comparing float values for equality is risky and
-   -- might fail on other systems. add a assert_near or assert_close(a, b,
-   -- epsilon) to lunit.lua?
-   assert_equal(0.7, egbase:get_terrain_description("wiese1").fertility)
-   assert_equal(0.2, egbase:get_terrain_description("wasteland_beach").fertility)
-   assert_equal(0.5, egbase:get_terrain_description("desert_forested_mountain2").fertility)
-   assert_equal(0.001, egbase:get_terrain_description("winter_water").fertility)
+   assert_near(0.7, egbase:get_terrain_description("wiese1").fertility, 0.01)
+   assert_near(0.2, egbase:get_terrain_description("wasteland_beach").fertility, 0.01)
+   assert_near(0.5, egbase:get_terrain_description("desert_forested_mountain2").fertility, 0.01)
+   assert_near(0.001, egbase:get_terrain_description("winter_water").fertility, 0.0001)
 end
 
 function test_terrains_resource_descr:test_terrain_humidity()
-   -- NOCOM(#codereview): same comment about floats.
-   assert_equal(0.6, egbase:get_terrain_description("wiese1").humidity)
-   assert_equal(0.4, egbase:get_terrain_description("wasteland_beach").humidity)
-   assert_equal(0.5, egbase:get_terrain_description("desert_forested_mountain2").humidity)
-   assert_equal(0.999, egbase:get_terrain_description("winter_water").humidity)
+   assert_near(0.6, egbase:get_terrain_description("wiese1").humidity, 0.01)
+   assert_near(0.4, egbase:get_terrain_description("wasteland_beach").humidity, 0.01)
+   assert_near(0.5, egbase:get_terrain_description("desert_forested_mountain2").humidity, 0.01)
+   assert_near(0.999, egbase:get_terrain_description("winter_water").humidity, 0.0001)
 end
 
 function test_terrains_resource_descr:test_terrain_temperature()

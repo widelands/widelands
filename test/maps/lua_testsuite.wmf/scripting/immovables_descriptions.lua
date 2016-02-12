@@ -33,7 +33,7 @@ function test_descr:test_immovable_species()
    assert_equal("", egbase:get_immovable_description("bush1").species)
    assert_equal("", egbase:get_immovable_description("cornfield_ripe").species)
    assert_equal("", egbase:get_immovable_description("alder_summer_sapling").species)
-   assert_equal(_"Alder", egbase:get_immovable_description("alder_summer_old").species)
+   assert_equal("Alder", egbase:get_immovable_description("alder_summer_old").species)
 end
 
 function test_descr:test_immovable_build_cost()
@@ -55,13 +55,12 @@ function test_descr:test_immovable_build_cost()
 end
 
 function test_descr:test_immovable_editor_category()
-   -- NOCOM(#codereview): remove _"", see comment in new tests.
    assert_equal("plants", egbase:get_immovable_description("bush1").editor_category.name)
-   assert_equal(_"Plants", egbase:get_immovable_description("bush1").editor_category.descname)
+   assert_equal("Plants", egbase:get_immovable_description("bush1").editor_category.descname)
    assert_equal(nil, egbase:get_immovable_description("cornfield_ripe").editor_category)
    assert_equal("trees_deciduous", egbase:get_immovable_description(
       "alder_summer_sapling").editor_category.name)
-   assert_equal(_"Deciduous Trees", egbase:get_immovable_description(
+   assert_equal("Deciduous Trees", egbase:get_immovable_description(
       "alder_summer_sapling").editor_category.descname)
    assert_equal("trees_deciduous", egbase:get_immovable_description(
       "alder_summer_old").editor_category.name)
@@ -77,23 +76,22 @@ function test_descr:test_immovable_terrain_affinity()
    local aff_umbrella_green_mature = egbase:get_immovable_description("umbrella_green_wasteland_mature").terrain_affinity
 
    -- Pickiness
-   -- NOCOM(#codereview): see warning about float comparsion in new tests.
-   assert_equal(0.6, aff_alder_sapling["pickiness"])
+   assert_near(0.6, aff_alder_sapling["pickiness"], 0.01)
    assert_equal(aff_alder_sapling["pickiness"], aff_alder_old["pickiness"])
-   assert_equal(0.6, aff_mushroom_red_pole["pickiness"])
-   assert_equal(0.8, aff_umbrella_green_mature["pickiness"])
+   assert_near(0.6, aff_mushroom_red_pole["pickiness"], 0.01)
+   assert_near(0.8, aff_umbrella_green_mature["pickiness"], 0.01)
 
    -- preferred_fertility
-   assert_equal(0.6, aff_alder_sapling["preferred_fertility"])
+   assert_near(0.6, aff_alder_sapling["preferred_fertility"], 0.01)
    assert_equal(aff_alder_sapling["preferred_fertility"], aff_alder_old["preferred_fertility"])
-   assert_equal(0.85, aff_mushroom_red_pole["preferred_fertility"])
-   assert_equal(0.85, aff_umbrella_green_mature["preferred_fertility"])
+   assert_near(0.85, aff_mushroom_red_pole["preferred_fertility"], 0.01)
+   assert_near(0.85, aff_umbrella_green_mature["preferred_fertility"], 0.01)
 
    -- preferred_humidity
-   assert_equal(0.65, aff_alder_sapling["preferred_humidity"])
+   assert_near(0.65, aff_alder_sapling["preferred_humidity"], 0.01)
    assert_equal(aff_alder_sapling["preferred_humidity"], aff_alder_old["preferred_humidity"])
-   assert_equal(0.35, aff_mushroom_red_pole["preferred_humidity"])
-   assert_equal(0.2, aff_umbrella_green_mature["preferred_humidity"])
+   assert_near(0.35, aff_mushroom_red_pole["preferred_humidity"], 0.01)
+   assert_near(0.2, aff_umbrella_green_mature["preferred_humidity"], 0.01)
 
    -- preferred_temperature
    assert_equal(125, aff_alder_sapling["preferred_temperature"])
@@ -123,17 +121,13 @@ function test_descr:test_immovable_has_attribute()
 end
 
 function test_descr:test_immovable_probability_to_grow()
-   -- Using comparisons in order to not run into trouble with floating point numbers
-   -- NOCOM(#codereview): use assert_near then.
    assert_equal(nil, egbase:get_immovable_description("bush1"):probability_to_grow("wiese1"))
-   assert_true(egbase:get_immovable_description("alder_summer_sapling"):probability_to_grow("wiese1") < 0.6)
-   assert_true(egbase:get_immovable_description("alder_summer_sapling"):probability_to_grow("wiese1") > 0.4)
-   assert_true(egbase:get_immovable_description("alder_summer_sapling"):probability_to_grow("wasteland_beach") < 0.003)
-   assert_true(egbase:get_immovable_description("alder_summer_sapling"):probability_to_grow("wasteland_beach") > 0.002)
-   assert_true(egbase:get_immovable_description("alder_summer_sapling"):probability_to_grow("desert_forested_mountain2") < 0.662)
-   assert_true(egbase:get_immovable_description("alder_summer_sapling"):probability_to_grow("desert_forested_mountain2") > 0.660)
-   assert_true(egbase:get_immovable_description("alder_summer_sapling"):probability_to_grow("winter_water") < 0.000038)
-   assert_true(egbase:get_immovable_description("alder_summer_sapling"):probability_to_grow("winter_water") > 0.000037)
+
+   local alder = egbase:get_immovable_description("alder_summer_sapling")
+   assert_near(0.51, alder:probability_to_grow("wiese1"), 0.01)
+   assert_near(0.0022, alder:probability_to_grow("wasteland_beach"), 0.0001)
+   assert_near(0.66, alder:probability_to_grow("desert_forested_mountain2"), 0.01)
+   assert_near(0.000037, alder:probability_to_grow("winter_water"), 0.000001)
 end
 
 
@@ -150,10 +144,10 @@ end
 
 -- This is actually a property of MapOjectDescription
 function test_descr:test_descname()
-   assert_equal(_"Lumberjack’s Hut", egbase:get_building_description("barbarians_lumberjacks_hut").descname)
-   assert_equal(_"Battle Arena", egbase:get_building_description("barbarians_battlearena").descname)
-   assert_equal(_"Fortress", egbase:get_building_description("barbarians_fortress").descname)
-   assert_equal(_"Coal Mine", egbase:get_building_description("barbarians_coalmine").descname)
+   assert_equal("Lumberjack’s Hut", egbase:get_building_description("barbarians_lumberjacks_hut").descname)
+   assert_equal("Battle Arena", egbase:get_building_description("barbarians_battlearena").descname)
+   assert_equal("Fortress", egbase:get_building_description("barbarians_fortress").descname)
+   assert_equal("Coal Mine", egbase:get_building_description("barbarians_coalmine").descname)
 end
 
 -- This is actually a property of MapOjectDescription
@@ -281,7 +275,7 @@ end
 
 -- This is actually a property of MapOjectDescription
 function test_descr:test_descname()
-   assert_equal(_"Coal Mine", egbase:get_building_description("barbarians_coalmine").descname)
+   assert_equal("Coal Mine", egbase:get_building_description("barbarians_coalmine").descname)
 end
 
 -- This is actually a property of MapOjectDescription
@@ -332,7 +326,7 @@ end
 
 -- This is actually a property of MapOjectDescription
 function test_descr:test_descname()
-   assert_equal(_"Sentry", egbase:get_building_description("barbarians_sentry").descname)
+   assert_equal("Sentry", egbase:get_building_description("barbarians_sentry").descname)
 end
 
 -- This is actually a property of MapOjectDescription
@@ -361,7 +355,7 @@ end
 
 -- This is actually a property of MapOjectDescription
 function test_descr:test_descname()
-   assert_equal(_"Battle Arena", egbase:get_building_description("barbarians_battlearena").descname)
+   assert_equal("Battle Arena", egbase:get_building_description("barbarians_battlearena").descname)
 end
 
 -- This is actually a property of MapOjectDescription
@@ -422,7 +416,7 @@ end
 
 -- This is actually a property of MapOjectDescription
 function test_descr:test_descname()
-   assert_equal(_"Warehouse", egbase:get_building_description("barbarians_warehouse").descname)
+   assert_equal("Warehouse", egbase:get_building_description("barbarians_warehouse").descname)
 end
 
 -- This is actually a property of MapOjectDescription
@@ -451,7 +445,7 @@ end
 
 -- This is actually a property of MapOjectDescription
 function test_descr:test_descname()
-   assert_equal(_"Thatch Reed", egbase:get_ware_description("thatch_reed").descname)
+   assert_equal("Thatch Reed", egbase:get_ware_description("thatch_reed").descname)
 end
 
 -- This is actually a property of MapOjectDescription
@@ -525,7 +519,7 @@ end
 
 -- This is actually a property of MapOjectDescription
 function test_descr:test_descname()
-   assert_equal(_"Miner", egbase:get_worker_description("barbarians_miner").descname)
+   assert_equal("Miner", egbase:get_worker_description("barbarians_miner").descname)
 end
 
 -- This is actually a property of MapOjectDescription
