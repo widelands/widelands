@@ -17,7 +17,9 @@ return {
       result = result .. rt(p("font-size=3", "")) .. rt(h2(_"Preferred terrains")) .. spacer()
       terrain_list = {}
       for i, terrain_name in ipairs(world.terrain_descriptions) do
-         local probability = tree:probability_to_grow(terrain_name)
+      -- NOCOM we want terrains here, not terrain names.
+			local terrain = wl.Editor():get_terrain_description(terrain_name)
+         local probability = tree:probability_to_grow(terrain)
          if (probability > 0.01) then
             -- sort the terrains by percentage
             i = 1
@@ -28,15 +30,14 @@ return {
             for j = #terrain_list, i, -1 do
                terrain_list[j+1] = terrain_list[j]
             end
-            terrain_list[i] = {terrain_name = terrain_name, probability = probability}
+            terrain_list[i] = {terrain = terrain, probability = probability}
          end
       end
 
       for k,v in ipairs(terrain_list) do
-         local terrain = wl.Editor():get_terrain_description(v.terrain_name)
          -- TRANSLATORS: Terrain name (Climate)
-         result = result .. picture_li(terrain.representative_image,
-               (_"%1% (%2%)"):bformat(terrain.descname, terrain.editor_category.descname) ..
+         result = result .. picture_li(v.terrain.representative_image,
+               (_"%1% (%2%)"):bformat(v.terrain.descname, v.terrain.editor_category.descname) ..
                "<br>" .. ("%2.1f%%"):bformat(100 * v.probability)
             ) .. spacer()
       end

@@ -120,13 +120,20 @@ function test_descr:test_immovable_has_attribute()
 end
 
 function test_descr:test_immovable_probability_to_grow()
-   assert_equal(nil, egbase:get_immovable_description("bush1"):probability_to_grow("wiese1"))
+	local terrain = egbase:get_terrain_description("wiese1")
+   assert_equal(nil, egbase:get_immovable_description("bush1"):probability_to_grow(terrain))
 
    local alder = egbase:get_immovable_description("alder_summer_sapling")
-   assert_near(0.51, alder:probability_to_grow("wiese1"), 0.01)
-   assert_near(0.0022, alder:probability_to_grow("wasteland_beach"), 0.0001)
-   assert_near(0.66, alder:probability_to_grow("desert_forested_mountain2"), 0.01)
-   assert_near(0.000037, alder:probability_to_grow("winter_water"), 0.000001)
+   assert_near(0.51, alder:probability_to_grow(terrain), 0.01)
+
+   terrain = egbase:get_terrain_description("wasteland_beach")
+   assert_near(0.0022, alder:probability_to_grow(terrain), 0.0001)
+
+   terrain = egbase:get_terrain_description("desert_forested_mountain2")
+   assert_near(0.66, alder:probability_to_grow(terrain), 0.01)
+
+   terrain = egbase:get_terrain_description("winter_water")
+   assert_near(0.000037, alder:probability_to_grow(terrain), 0.000001)
 end
 
 

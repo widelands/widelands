@@ -647,11 +647,13 @@ public:
 	/*
 	 * C methods
 	 */
-protected:
 	const Widelands::TerrainDescription* get() const {
 		assert(terraindescr_ != nullptr);
 		return terraindescr_;
 	}
+
+protected:
+
 	// For persistence.
 	void set_description_pointer(const Widelands::TerrainDescription* pointer) {
 		terraindescr_ = pointer;

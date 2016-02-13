@@ -1593,22 +1593,18 @@ int LuaImmovableDescription::has_attribute(lua_State * L) {
 /* RST
 	.. method:: probability_to_grow
 
-		:arg terrain_name: The terrain that we are checking the probability for.
-		:type terrain_name: :class:`string`
+		:arg terrain: The terrain that we are checking the probability for.
+		:type terrain: :class:`wl.map.TerrainDescription`
 
 		(RO) A double describing the probability that this tree will grow on the given terrain.
 			  Returns nil if this immovable tree has no terrain affinity (all trees should have one).
 */
-// NOCOM(#codereview): I think it should pass in the terrain description, not the name.
-// NOCOM(GunChleoc): Which eris function do I need for that?
-// NOCOM(#codereview): This should work:
-// LuaMaps::LuaTerrainDescription * c = *get_user_class<LuaMaps::LuaTerrainDescription>(L, 2);
 int LuaImmovableDescription::probability_to_grow(lua_State * L) {
 	if (lua_gettop(L) != 2) {
 		report_error(L, "Takes only one argument.");
 	}
 	if (get()->has_terrain_affinity()) {
-		const TerrainDescription* terrain = get_egbase(L).world().terrain_descr(luaL_checkstring(L, 2));
+		const TerrainDescription* terrain = (*get_user_class<LuaMaps::LuaTerrainDescription>(L, 2))->get();
 		lua_pushnumber(L, Widelands::probability_to_grow(get()->terrain_affinity(), *terrain));
 	} else {
 		lua_pushnil(L);
