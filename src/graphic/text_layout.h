@@ -83,9 +83,10 @@ std::string as_window_title(const std::string&);
 std::string as_game_tip(const std::string&);
 
 /**
-  * This will render the text as ui_font. If width > 0 and the rendered image is too wide,
-  * it will first use the condensed font face and then make the text smaller until it fits the specified
-  * width. The resulting font size will not go below kMinimumFontSize.
+  * Render 'text' as ui_font. If 'width' > 0 and the rendered image is too
+  * wide, it will first use the condensed font face and then make the text
+  * smaller until it fits 'width'. The resulting font size will not go below
+  * 'kMinimumFontSize'.
   */
 const Image* autofit_ui_text(const std::string& text,
 									  int width = 0,
