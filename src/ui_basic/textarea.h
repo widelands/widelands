@@ -83,7 +83,6 @@ struct Textarea : public Panel {
 
 	void set_color(RGBColor color);
 	void set_fontsize(int fontsize);
-	void set_fontface(UI::FontSet::Face face);
 
 protected:
 	void update_desired_size() override;
@@ -100,19 +99,12 @@ private:
 	void expand();
 	void update();
 
-	/**
-	 * This rerenders the text. If fixed_width_ is set, it will also use the condensed
-	 * Fontset if needed and then make the text smaller until it fits.
-	 */
-	void render_text();
-
 	LayoutMode layoutmode_;
 	std::string text_;
 	const Image* rendered_text_;
 	Align align_;
 	RGBColor color_;
 	int fontsize_;
-	UI::FontSet::Face fontface_;
 
 	int fixed_width_;
 };
