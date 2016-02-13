@@ -16,9 +16,7 @@ return {
       -- TRANSLATORS: A header in the editor help. Terrains preferred by a type of tree.
       result = result .. rt(p("font-size=3", "")) .. rt(h2(_"Preferred terrains")) .. spacer()
       terrain_list = {}
-      for i, terrain_name in ipairs(world.terrain_descriptions) do
-      -- NOCOM we want terrains here, not terrain names.
-			local terrain = wl.Editor():get_terrain_description(terrain_name)
+      for i, terrain in ipairs(world.terrain_descriptions) do
          local probability = tree:probability_to_grow(terrain)
          if (probability > 0.01) then
             -- sort the terrains by percentage

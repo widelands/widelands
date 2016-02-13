@@ -349,9 +349,9 @@ void LuaWorld::__unpersist(lua_State*) {
 /* RST
 	.. attribute:: immovable_descriptions
 
-		Returns a list of names with all the immovables that the world has.
+		Returns a list of all the immovables that are available in the world.
 
-		(RO) a list of immovable names, e.g. {"alder_summer_old", "cirrus_wasteland_old", ...}
+		(RO) a list of :class:`LuaImmovableDescription` objects
 */
 int LuaWorld::get_immovable_descriptions(lua_State* L) {
 	const World& world = get_egbase(L).world();
@@ -359,7 +359,7 @@ int LuaWorld::get_immovable_descriptions(lua_State* L) {
 	int index = 1;
 	for (DescriptionIndex i = 0; i < world.get_nr_immovables(); ++i) {
 		lua_pushint32(L, index++);
-		lua_pushstring(L, world.get_immovable_descr(i)->name());
+		to_lua<LuaMaps::LuaImmovableDescription>(L, new LuaMaps::LuaImmovableDescription(world.get_immovable_descr(i)));
 		lua_settable(L, -3);
 	}
 	return 1;
@@ -369,25 +369,17 @@ int LuaWorld::get_immovable_descriptions(lua_State* L) {
 /* RST
 	.. attribute:: terrain_descriptions
 
-		Returns a list of names with the terrains that are available in the world.
+		Returns a list of all the terrains that are available in the world.
 
-		(RO) a list of terrain names, e.g. {"wiese1", "wiese2", ...}
+		(RO) a list of :class:`LuaTerrainDescription` objects
 */
-// NOCOM(#codereview): why is this not just returning the terrain_description
-// instead of strings? Alternatively it could also return name/description
-// pairs.
-// NOCOM(GunChleoc): LuaTerrainDescription is defined in LuaMap. Do we really want a dependency from
-// here to LuaMap? Same problem for the immovables.
-// NOCOM(#sirver): sure, why not? I mean this is the root of the object graph, it necessarily will
-// need to know about all child objects.
 int LuaWorld::get_terrain_descriptions(lua_State* L) {
 	const World& world = get_egbase(L).world();
 	lua_newtable(L);
 	int index = 1;
 	for (DescriptionIndex i = 0; i < world.terrains().size(); ++i) {
-		const TerrainDescription& terrain = world.terrain_descr(i);
 		lua_pushint32(L, index++);
-		lua_pushstring(L, terrain.name());
+		to_lua<LuaMaps::LuaTerrainDescription>(L, new LuaMaps::LuaTerrainDescription(&world.terrain_descr(i)));
 		lua_settable(L, -3);
 	}
 	return 1;
