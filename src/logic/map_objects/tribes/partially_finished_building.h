@@ -76,7 +76,6 @@ protected:
 	uint32_t work_steptime_;  // time when next step is completed
 	uint32_t work_completed_; // how many steps have we done so far?
 	uint32_t work_steps_;     // how many steps (= wares) until we're done?
-	//Player::ConstructionsiteInformation * info_; // asked for by player point of view for the gameview
 };
 
 }

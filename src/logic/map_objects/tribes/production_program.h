@@ -214,9 +214,9 @@ struct ProductionProgram {
 		};
 
 		using Conditions = std::vector<Condition *>;
-		ProgramResult m_result;
-		bool       m_is_when; //  otherwise it is "unless"
-		Conditions m_conditions;
+		ProgramResult result_;
+		bool       is_when_; //  otherwise it is "unless"
+		Conditions conditions_;
 	};
 
 
@@ -254,8 +254,8 @@ struct ProductionProgram {
 		ActCall(char* parameters, const ProductionSiteDescr&);
 		void execute(Game &, ProductionSite &) const override;
 	private:
-		ProductionProgram             * m_program;
-		ProgramResultHandlingMethod m_handling_methods[3];
+		ProductionProgram             * program_;
+		ProgramResultHandlingMethod handling_methods_[3];
 	};
 
 	/// Calls a program of the productionsite's main worker.
@@ -272,9 +272,9 @@ struct ProductionProgram {
 		void execute(Game &, ProductionSite &) const override;
 		bool get_building_work(Game &, ProductionSite &, Worker &) const override;
 		void building_work_failed(Game &, ProductionSite &, Worker &) const override;
-		const std::string & program() const {return m_program;}
+		const std::string & program() const {return program_;}
 	private:
-		std::string m_program;
+		std::string program_;
 	};
 
 	/// Does nothing.
@@ -291,7 +291,7 @@ struct ProductionProgram {
 		ActSleep(char * parameters);
 		void execute(Game &, ProductionSite &) const override;
 	private:
-		Duration m_duration;
+		Duration duration_;
 	};
 
 	/// Checks whether the map has a certain feature enabled.
@@ -311,7 +311,7 @@ struct ProductionProgram {
 		 enum {
 			 SEAFARING = 1
 		 };
-		 uint8_t m_feature;
+		 uint8_t feature_;
 	};
 
 	/// Runs an animation.
@@ -334,8 +334,8 @@ struct ProductionProgram {
 		ActAnimate(char* parameters, ProductionSiteDescr*);
 		void execute(Game &, ProductionSite &) const override;
 	private:
-		uint32_t m_id;
-		Duration m_duration;
+		uint32_t id_;
+		Duration duration_;
 	};
 
 	/// Consumes wares from the input storages.
@@ -436,11 +436,11 @@ struct ProductionProgram {
 		void execute(Game &, ProductionSite &) const override;
 
 	private:
-		DescriptionIndex m_resource;
-		uint8_t        m_distance; // width/radius of mine
-		uint8_t        m_max;  // Can work up to this percent (of total mountain resources)
-		uint8_t        m_chance; // odds of finding resources from empty mine
-		uint8_t        m_training; // probability of training in _empty_ mines
+		DescriptionIndex resource_;
+		uint8_t        distance_; // width/radius of mine
+		uint8_t        max_;  // Can work up to this percent (of total mountain resources)
+		uint8_t        chance_; // odds of finding resources from empty mine
+		uint8_t        training_; // probability of training in _empty_ mines
 	};
 
 	struct ActCheckSoldier : public Action {

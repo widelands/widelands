@@ -614,7 +614,7 @@ void MapBuildingdataPacket::read_productionsite
 		uint16_t const packet_version = fr.unsigned_16();
 		if (packet_version == kCurrentPacketVersionProductionsite) {
 			ProductionSite::WorkingPosition & wp_begin =
-				*productionsite.m_working_positions;
+				*productionsite.working_positions_;
 			const ProductionSiteDescr & pr_descr = productionsite.descr();
 			const BillOfMaterials & working_positions = pr_descr.working_positions();
 
@@ -702,7 +702,7 @@ void MapBuildingdataPacket::read_productionsite
 					 "number of working positions");
 
 			//  items from flags
-			productionsite.m_fetchfromflag = fr.signed_32();
+			productionsite.fetchfromflag_ = fr.signed_32();
 
 			//  skipped programs
 			uint32_t const gametime = game.get_gametime();
@@ -716,7 +716,7 @@ void MapBuildingdataPacket::read_productionsite
 							 "program %s was skipped at time %u, but time is only "
 							 "%u",
 							 program_name, skip_time, gametime);
-					productionsite.m_skipped_programs[program_name] = skip_time;
+					productionsite.skipped_programs_[program_name] = skip_time;
 				} else {
 					fr.unsigned_32(); // eat skip time
 					log
@@ -728,29 +728,29 @@ void MapBuildingdataPacket::read_productionsite
 
 			//  state
 			uint16_t const nr_progs = fr.unsigned_16();
-			productionsite.m_stack.resize(nr_progs);
+			productionsite.stack_.resize(nr_progs);
 			for (uint16_t i = 0; i < nr_progs; ++i) {
 				std::string program_name = fr.c_string();
 				std::transform
 					(program_name.begin(), program_name.end(), program_name.begin(),
 					 tolower);
 
-				productionsite.m_stack[i].program =
+				productionsite.stack_[i].program =
 					productionsite.descr().get_program(program_name);
-				productionsite.m_stack[i].ip    = fr.  signed_32();
-				productionsite.m_stack[i].phase = fr.  signed_32();
-				productionsite.m_stack[i].flags = fr.unsigned_32();
+				productionsite.stack_[i].ip    = fr.  signed_32();
+				productionsite.stack_[i].phase = fr.  signed_32();
+				productionsite.stack_[i].flags = fr.unsigned_32();
 
 				uint32_t serial = fr.unsigned_32();
 				if (serial)
-					productionsite.m_stack[i].objvar = &mol.get<MapObject>(serial);
-				productionsite.m_stack[i].coord = read_coords_32_allow_null(&fr, game.map().extent());
+					productionsite.stack_[i].objvar = &mol.get<MapObject>(serial);
+				productionsite.stack_[i].coord = read_coords_32_allow_null(&fr, game.map().extent());
 			}
-			productionsite.m_program_timer = fr.unsigned_8();
-			productionsite.m_program_time = fr.signed_32();
+			productionsite.program_timer_ = fr.unsigned_8();
+			productionsite.program_time_ = fr.signed_32();
 
 			uint16_t nr_queues = fr.unsigned_16();
-			assert(!productionsite.m_input_queues.size());
+			assert(!productionsite.input_queues_.size());
 			for (uint16_t i = 0; i < nr_queues; ++i) {
 				WaresQueue * wq = new WaresQueue(productionsite, INVALID_INDEX, 0);
 				wq->read(fr, game, mol);
@@ -758,16 +758,16 @@ void MapBuildingdataPacket::read_productionsite
 				if (!game.tribes().ware_exists(wq->get_ware())) {
 					delete wq;
 				} else {
-					productionsite.m_input_queues.push_back(wq);
+					productionsite.input_queues_.push_back(wq);
 				}
 			}
 
 			uint16_t const stats_size = fr.unsigned_16();
-			productionsite.m_statistics.resize(stats_size);
-			for (uint32_t i = 0; i < productionsite.m_statistics.size(); ++i)
-				productionsite.m_statistics[i] = fr.unsigned_8();
-			productionsite.m_statistics_string_on_changed_statistics = fr.c_string();
-			productionsite.m_production_result = fr.c_string();
+			productionsite.statistics_.resize(stats_size);
+			for (uint32_t i = 0; i < productionsite.statistics_.size(); ++i)
+				productionsite.statistics_[i] = fr.unsigned_8();
+			productionsite.statistics_string_on_changed_statistics_ = fr.c_string();
+			productionsite.production_result_ = fr.c_string();
 		} else {
 			throw UnhandledVersionError("MapBuildingdataPacket - Productionsite",
 												 packet_version, kCurrentPacketVersionProductionsite);
@@ -1183,7 +1183,7 @@ void MapBuildingdataPacket::write_productionsite
 	uint32_t const nr_working_positions =
 		productionsite.descr().nr_working_positions();
 	const ProductionSite::WorkingPosition & begin =
-		productionsite.m_working_positions[0];
+		productionsite.working_positions_[0];
 	const ProductionSite::WorkingPosition & end =
 		(&begin)[nr_working_positions];
 	uint32_t nr_workers = 0;
@@ -1205,44 +1205,44 @@ void MapBuildingdataPacket::write_productionsite
 			fw.unsigned_32(mos.get_object_file_index(*w));
 		}
 
-	fw.signed_32(productionsite.m_fetchfromflag);
+	fw.signed_32(productionsite.fetchfromflag_);
 
 	//  skipped programs
 	assert
-		(productionsite.m_skipped_programs.size()
+		(productionsite.skipped_programs_.size()
 		 <=
 		 std::numeric_limits<uint8_t>::max());
-	fw.unsigned_8(productionsite.m_skipped_programs.size());
+	fw.unsigned_8(productionsite.skipped_programs_.size());
 
-	for (const std::pair<std::string, Time>& temp_program : productionsite.m_skipped_programs) {
+	for (const std::pair<std::string, Time>& temp_program : productionsite.skipped_programs_) {
 		fw.string    (temp_program.first);
 		fw.unsigned_32(temp_program.second);
 	}
 
 	//  state
-	uint16_t const program_size = productionsite.m_stack.size();
+	uint16_t const program_size = productionsite.stack_.size();
 	fw.unsigned_16(program_size);
 	for (uint16_t i = 0; i < program_size; ++i) {
-		fw.string    (productionsite.m_stack[i].program->name());
-		fw.  signed_32(productionsite.m_stack[i].ip);
-		fw.  signed_32(productionsite.m_stack[i].phase);
-		fw.unsigned_32(productionsite.m_stack[i].flags);
-		fw.unsigned_32(mos.get_object_file_index_or_zero(productionsite.m_stack[i].objvar.get(game)));
-		write_coords_32(&fw, productionsite.m_stack[i].coord);
+		fw.string    (productionsite.stack_[i].program->name());
+		fw.  signed_32(productionsite.stack_[i].ip);
+		fw.  signed_32(productionsite.stack_[i].phase);
+		fw.unsigned_32(productionsite.stack_[i].flags);
+		fw.unsigned_32(mos.get_object_file_index_or_zero(productionsite.stack_[i].objvar.get(game)));
+		write_coords_32(&fw, productionsite.stack_[i].coord);
 	}
-	fw.unsigned_8(productionsite.m_program_timer);
-	fw. signed_32(productionsite.m_program_time);
+	fw.unsigned_8(productionsite.program_timer_);
+	fw. signed_32(productionsite.program_time_);
 
-	const uint16_t input_queues_size = productionsite.m_input_queues.size();
+	const uint16_t input_queues_size = productionsite.input_queues_.size();
 	fw.unsigned_16(input_queues_size);
 	for (uint16_t i = 0; i < input_queues_size; ++i)
-		productionsite.m_input_queues[i]->write(fw, game, mos);
+		productionsite.input_queues_[i]->write(fw, game, mos);
 
-	const uint16_t statistics_size = productionsite.m_statistics.size();
+	const uint16_t statistics_size = productionsite.statistics_.size();
 	fw.unsigned_16(statistics_size);
 	for (uint32_t i = 0; i < statistics_size; ++i)
-		fw.unsigned_8(productionsite.m_statistics[i]);
-	fw.string(productionsite.m_statistics_string_on_changed_statistics);
+		fw.unsigned_8(productionsite.statistics_[i]);
+	fw.string(productionsite.statistics_string_on_changed_statistics_);
 	fw.string(productionsite.production_result());
 }
 
