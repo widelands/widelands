@@ -78,8 +78,7 @@ struct BaseListselect : public Panel {
 	void switch_entries(uint32_t, uint32_t);
 
 	void set_entry_color(uint32_t, RGBColor);
-	void set_font(const std::string & fontname, int32_t const fontsize) {
-		fontname_ = fontname;
+	void set_fontsize(int32_t const fontsize) {
 		fontsize_ = fontsize;
 	}
 

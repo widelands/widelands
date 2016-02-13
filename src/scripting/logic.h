@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2015 by the Widelands Development Team
+ * Copyright (C) 2006-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -37,7 +37,7 @@ public:
 	std::unique_ptr<LuaTable> run_script(const std::string& script) override;
 
 private:
-	std::unique_ptr<EditorFactory> m_factory;
+	std::unique_ptr<EditorFactory> factory_;
 };
 
 class LuaGameInterface : public LuaInterface {
@@ -61,7 +61,7 @@ public:
 		(FileWrite &, Widelands::MapObjectSaver &);
 
 private:
-	std::unique_ptr<GameFactory> m_factory;
+	std::unique_ptr<GameFactory> factory_;
 };
 
 #endif  // end of include guard: WL_SCRIPTING_LOGIC_H

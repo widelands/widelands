@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2010, 2013 by the Widelands Development Team
+ * Copyright (C) 2006-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -2509,7 +2509,7 @@ void LuaMapObject::__persist(lua_State * L) {
 	Game & game = get_game(L);
 
 	uint32_t idx = 0;
-	if (MapObject* obj = m_ptr.get(game))
+	if (MapObject* obj = ptr_.get(game))
 		idx = mos.get_object_file_index(*obj);
 
 	PERS_UINT32("file_index", idx);
@@ -2519,10 +2519,10 @@ void LuaMapObject::__unpersist(lua_State* L) {
 	UNPERS_UINT32("file_index", idx);
 
 	if (!idx)
-		m_ptr = nullptr;
+		ptr_ = nullptr;
 	else {
 		MapObjectLoader& mol = *get_mol(L);
-		m_ptr = &mol.get<MapObject>(idx);
+		ptr_ = &mol.get<MapObject>(idx);
 	}
 }
 
@@ -2679,7 +2679,7 @@ MapObject* LuaMapObject::get(lua_State* L, EditorGameBase& egbase, std::string n
 	return o;
 }
 MapObject* LuaMapObject::m_get_or_zero(EditorGameBase& egbase) {
-	return m_ptr.get(egbase);
+	return ptr_.get(egbase);
 }
 
 /* RST
@@ -4113,7 +4113,7 @@ int LuaShip::build_colonization_port(lua_State* L) {
 	Ship* ship =  get(L, get_egbase(L));
 	if (ship->get_ship_state() == Widelands::Ship::EXP_FOUNDPORTSPACE) {
 		if (upcast(Game, game, &get_egbase(L))) {
-			game->send_player_ship_construct_port(*ship, ship->exp_port_spaces()->front());
+			game->send_player_ship_construct_port(*ship, ship->exp_port_spaces().front());
 			return 1;
 		}
 	}
@@ -4338,11 +4338,11 @@ const PropertyType<LuaField> LuaField::Properties[] = {
 
 
 void LuaField::__persist(lua_State * L) {
-	PERS_INT32("x", m_c.x); PERS_INT32("y", m_c.y);
+	PERS_INT32("x", coords_.x); PERS_INT32("y", coords_.y);
 }
 
 void LuaField::__unpersist(lua_State * L) {
-	UNPERS_INT32("x", m_c.x); UNPERS_INT32("y", m_c.y);
+	UNPERS_INT32("x", coords_.x); UNPERS_INT32("y", coords_.y);
 }
 
 /*
@@ -4352,7 +4352,7 @@ void LuaField::__unpersist(lua_State * L) {
  */
 // Hash is used to identify a class in a Set
 int LuaField::get___hash(lua_State * L) {
-	const std::string pushme = (boost::format("%i_%i") % m_c.x % m_c.y).str();
+	const std::string pushme = (boost::format("%i_%i") % coords_.x % coords_.y).str();
 	lua_pushstring(L, pushme.c_str());
 	return 1;
 }
@@ -4362,8 +4362,8 @@ int LuaField::get___hash(lua_State * L) {
 
 		(RO) The x/y coordinate of this field
 */
-int LuaField::get_x(lua_State * L) {lua_pushuint32(L, m_c.x); return 1;}
-int LuaField::get_y(lua_State * L) {lua_pushuint32(L, m_c.y); return 1;}
+int LuaField::get_x(lua_State * L) {lua_pushuint32(L, coords_.x); return 1;}
+int LuaField::get_y(lua_State * L) {lua_pushuint32(L, coords_.y); return 1;}
 
 /* RST
 	.. attribute:: height
@@ -4430,13 +4430,13 @@ int LuaField::set_raw_height(lua_State * L) {
 */
 int LuaField::get_viewpoint_x(lua_State * L) {
 	int32_t px, py;
-	MapviewPixelFunctions::get_save_pix(get_egbase(L).map(), m_c, px, py);
+	MapviewPixelFunctions::get_save_pix(get_egbase(L).map(), coords_, px, py);
 	lua_pushint32(L, px);
 	return 1;
 }
 int LuaField::get_viewpoint_y(lua_State * L) {
 	int32_t px, py;
-	MapviewPixelFunctions::get_save_pix(get_egbase(L).map(), m_c, px, py);
+	MapviewPixelFunctions::get_save_pix(get_egbase(L).map(), coords_, px, py);
 	lua_pushint32(L, py);
 	return 1;
 }
@@ -4524,7 +4524,7 @@ int LuaField::get_initial_resource_amount(lua_State * L) {
 		to remove an immovable, you can use :func:`wl.map.MapObject.remove`.
 */
 int LuaField::get_immovable(lua_State * L) {
-	BaseImmovable * bi = get_egbase(L).map().get_immovable(m_c);
+	BaseImmovable * bi = get_egbase(L).map().get_immovable(coords_);
 
 	if (!bi)
 		return 0;
@@ -4627,7 +4627,7 @@ int LuaField::set_terd(lua_State * L) {
 */
 #define GET_X_NEIGHBOUR(X) int LuaField::get_ ##X(lua_State* L) { \
    Coords n; \
-   get_egbase(L).map().get_ ##X(m_c, &n); \
+   get_egbase(L).map().get_ ##X(coords_, &n); \
 	to_lua<LuaField>(L, new LuaField(n.x, n.y)); \
 	return 1; \
 }
@@ -4673,7 +4673,7 @@ int LuaField::get_claimers(lua_State * L) {
 	iterate_players_existing(other_p, map.get_nrplayers(), egbase, plr)
 		claimers.push_back
 			(PlrInfluence(plr->player_number(), plr->military_influence
-					(map.get_index(m_c, map.get_width()))
+					(map.get_index(coords_, map.get_width()))
 			)
 		);
 
@@ -4700,12 +4700,12 @@ int LuaField::get_claimers(lua_State * L) {
  ==========================================================
  */
 int LuaField::__eq(lua_State * L) {
-	lua_pushboolean(L, (*get_user_class<LuaField>(L, -1))->m_c == m_c);
+	lua_pushboolean(L, (*get_user_class<LuaField>(L, -1))->coords_ == coords_);
 	return 1;
 }
 
 int LuaField::__tostring(lua_State * L) {
-	const std::string pushme = (boost::format("Field(%i,%i)") % m_c.x % m_c.y).str();
+	const std::string pushme = (boost::format("Field(%i,%i)") % coords_.x % coords_.y).str();
 	lua_pushstring(L, pushme);
 	return 1;
 }
@@ -4820,7 +4820,7 @@ int LuaField::m_hollow_region
 	(lua_State * L, uint32_t radius, uint32_t inner_radius)
 {
 	Map & map = get_egbase(L).map();
-	HollowArea<Area<> > har(Area<>(m_c, radius), inner_radius);
+	HollowArea<Area<> > har(Area<>(coords_, radius), inner_radius);
 
 	MapHollowRegion<Area<> > mr(map, har);
 
@@ -4836,7 +4836,7 @@ int LuaField::m_hollow_region
 }
 
 const Widelands::FCoords LuaField::fcoords(lua_State * L) {
-	return get_egbase(L).map().get_fcoords(m_c);
+	return get_egbase(L).map().get_fcoords(coords_);
 }
 
 
@@ -4864,11 +4864,11 @@ const PropertyType<LuaPlayerSlot> LuaPlayerSlot::Properties[] = {
 };
 
 void LuaPlayerSlot::__persist(lua_State * L) {
-	PERS_UINT32("player", m_plr);
+	PERS_UINT32("player", player_number_);
 }
 
 void LuaPlayerSlot::__unpersist(lua_State * L) {
-	UNPERS_UINT32("player", m_plr);
+	UNPERS_UINT32("player", player_number_);
 }
 
 /*
@@ -4882,7 +4882,7 @@ void LuaPlayerSlot::__unpersist(lua_State * L) {
 		(RO) The name of the tribe suggested for this player in this map
 */
 int LuaPlayerSlot::get_tribe_name(lua_State * L) {
-	lua_pushstring(L, get_egbase(L).get_map()->get_scenario_player_tribe(m_plr));
+	lua_pushstring(L, get_egbase(L).get_map()->get_scenario_player_tribe(player_number_));
 	return 1;
 }
 
@@ -4892,7 +4892,7 @@ int LuaPlayerSlot::get_tribe_name(lua_State * L) {
 		(RO) The name for this player as suggested in this map
 */
 int LuaPlayerSlot::get_name(lua_State * L) {
-	lua_pushstring(L, get_egbase(L).get_map()->get_scenario_player_name(m_plr));
+	lua_pushstring(L, get_egbase(L).get_map()->get_scenario_player_name(player_number_));
 	return 1;
 }
 
@@ -4905,7 +4905,7 @@ int LuaPlayerSlot::get_name(lua_State * L) {
 		wherever it want. This field is only centered when the game starts.
 */
 int LuaPlayerSlot::get_starting_field(lua_State * L) {
-	to_lua<LuaField>(L, new LuaField(get_egbase(L).map().get_starting_pos(m_plr)));
+	to_lua<LuaField>(L, new LuaField(get_egbase(L).map().get_starting_pos(player_number_)));
 	return 1;
 }
 

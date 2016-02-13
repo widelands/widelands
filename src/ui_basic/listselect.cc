@@ -383,11 +383,12 @@ void BaseListselect::draw(RenderTarget & dst)
 			1;
 
 		std::string font_face = er.font_face.empty() ? fontname_ : er.font_face;
+		RGBColor color = er.use_clr ? er.clr : UI_FONT_CLR_FG;
 
 		// Horizontal center the string
 		UI::g_fh->draw_text
 			(dst,
-			 TextStyle::makebold(Font::get(font_face, fontsize_), er.use_clr ? er.clr : UI_FONT_CLR_FG),
+			 TextStyle::makebold(Font::get(font_face, fontsize_), color),
 			 Point
 			 	(x,
 			 	 y +

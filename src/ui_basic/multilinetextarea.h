@@ -59,7 +59,7 @@ struct MultilineTextarea : public Panel {
 	uint32_t scrollbar_w() const {return 24;}
 	uint32_t get_eff_w() const {return scrollbar_.is_enabled() ? get_w() - scrollbar_w() : get_w();}
 
-	void set_color(RGBColor fg) {style_.fg = fg;}
+	void set_color(RGBColor fg) {color_ = fg;}
 
 	// Drawing and event handlers
 	void draw(RenderTarget&) override;
@@ -75,7 +75,7 @@ private:
 	void scrollpos_changed(int32_t pixels);
 
 	std::string text_;
-	UI::TextStyle style_;
+	RGBColor color_;
 	Align align_;
 
 	bool isrichtext;
