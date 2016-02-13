@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2006-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -669,20 +669,20 @@ Widelands:: klass * get(lua_State * L, Widelands::EditorGameBase & egbase) { \
 }
 
 class LuaMapObject : public LuaMapModuleClass {
-	Widelands::ObjectPointer m_ptr;
+	Widelands::ObjectPointer ptr_;
 
 public:
 	LUNA_CLASS_HEAD(LuaMapObject);
 
-	LuaMapObject() : m_ptr(nullptr) {}
+	LuaMapObject() : ptr_(nullptr) {}
 	LuaMapObject(Widelands::MapObject & mo) {
-		m_ptr = &mo;
+		ptr_ = &mo;
 	}
-	LuaMapObject(lua_State * L) : m_ptr(nullptr) {
+	LuaMapObject(lua_State * L) : ptr_(nullptr) {
 		report_error(L, "Cannot instantiate a '%s' directly!", className);
 	}
 	virtual ~LuaMapObject() {
-		m_ptr = nullptr;
+		ptr_ = nullptr;
 	}
 
 	void __persist(lua_State * L) override;
@@ -1139,14 +1139,14 @@ public:
 #undef CASTED_GET
 
 class LuaField : public LuaMapModuleClass {
-	Widelands::Coords m_c;
+	Widelands::Coords coords_;
 public:
 	LUNA_CLASS_HEAD(LuaField);
 
 	LuaField() {}
 	LuaField (int16_t x, int16_t y) :
-		m_c(Widelands::Coords(x, y)) {}
-	LuaField (Widelands::Coords c) : m_c(c) {}
+		coords_(Widelands::Coords(x, y)) {}
+	LuaField (Widelands::Coords c) : coords_(c) {}
 	LuaField(lua_State * L) {
 		report_error(L, "Cannot instantiate a 'Field' directly!");
 	}
@@ -1198,7 +1198,7 @@ public:
 	/*
 	 * C methods
 	 */
-	inline const Widelands::Coords & coords() {return m_c;}
+	inline const Widelands::Coords & coords() {return coords_;}
 	const Widelands::FCoords fcoords(lua_State * L);
 
 private:
@@ -1207,14 +1207,14 @@ private:
 };
 
 class LuaPlayerSlot : public LuaMapModuleClass {
-	Widelands::PlayerNumber m_plr;
+	Widelands::PlayerNumber player_number_;
 
 public:
 	LUNA_CLASS_HEAD(LuaPlayerSlot);
 
-	LuaPlayerSlot() : m_plr(0) {}
-	LuaPlayerSlot(Widelands::PlayerNumber plr) : m_plr(plr) {}
-	LuaPlayerSlot(lua_State * L) : m_plr(0) {
+	LuaPlayerSlot() : player_number_(0) {}
+	LuaPlayerSlot(Widelands::PlayerNumber plr) : player_number_(plr) {}
+	LuaPlayerSlot(lua_State * L) : player_number_(0) {
 		report_error(L, "Cannot instantiate a 'PlayerSlot' directly!");
 	}
 	virtual ~LuaPlayerSlot() {}

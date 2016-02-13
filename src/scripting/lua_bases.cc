@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2006-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -367,10 +367,10 @@ const PropertyType<LuaPlayerBase> LuaPlayerBase::Properties[] = {
 };
 
 void LuaPlayerBase::__persist(lua_State * L) {
-	PERS_UINT32("player", m_pl);
+	PERS_UINT32("player", player_number_);
 }
 void LuaPlayerBase::__unpersist(lua_State * L) {
-	UNPERS_UINT32("player", m_pl);
+	UNPERS_UINT32("player", player_number_);
 }
 
 /*
@@ -384,7 +384,7 @@ void LuaPlayerBase::__unpersist(lua_State * L) {
 		(RO) The number of this Player.
 */
 int LuaPlayerBase::get_number(lua_State * L) {
-	lua_pushuint32(L, m_pl);
+	lua_pushuint32(L, player_number_);
 	return 1;
 }
 
@@ -666,7 +666,7 @@ int LuaPlayerBase::conquer(lua_State * L) {
 
 	get_egbase(L).conquer_area_no_building
 		(PlayerArea<Area<FCoords> >
-			(m_pl, Area<FCoords>
+			(player_number_, Area<FCoords>
 				((*get_user_class<LuaMaps::LuaField>(L, 2))->fcoords(L), radius))
 	);
 	return 0;
@@ -731,11 +731,11 @@ int LuaPlayerBase::get_wares(lua_State * L) {
 Player & LuaPlayerBase::get
 		(lua_State * L, Widelands::EditorGameBase & egbase)
 {
-	if (m_pl > MAX_PLAYERS)
-		report_error(L, "Illegal player number %i",  m_pl);
-	Player * rv = egbase.get_player(m_pl);
+	if (player_number_ > MAX_PLAYERS)
+		report_error(L, "Illegal player number %i",  player_number_);
+	Player * rv = egbase.get_player(player_number_);
 	if (!rv)
-		report_error(L, "Player with the number %i does not exist", m_pl);
+		report_error(L, "Player with the number %i does not exist", player_number_);
 	return *rv;
 }
 
