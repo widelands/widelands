@@ -245,14 +245,6 @@ struct WalkableSpot {
 };
 }
 
-struct BlockedField {
-	Widelands::FCoords coords;
-	uint32_t blocked_until_;
-
-	BlockedField(Widelands::FCoords c, int32_t until) : coords(c), blocked_until_(until) {
-	}
-};
-
 struct BuildableField {
 	Widelands::FCoords coords;
 
@@ -453,6 +445,7 @@ struct BuildingObserver {
 	uint32_t stocklevel_time;  // time when stocklevel_ was last time recalculated
 	uint32_t last_dismantle_time_;
 	uint32_t construction_decision_time_;
+	uint32_t last_building_built_;
 
 	uint32_t unoccupied_count_;
 
@@ -591,6 +584,47 @@ struct SchedulerTask {
 		(const uint32_t time, const Widelands::SchedulerTaskId t, const uint8_t p, const char* d):
 		due_time(time), id(t), priority(p), descr(d){}
 
+};
+
+// List of blocked fields with block time, with some accompanying functions
+struct BlockedFields {
+	// <hash of field coordinates, time till blocked>
+	// of course hash of an blocked field is unique
+	std::map<uint32_t, uint32_t> BlockedFields; //NOCOM or std::unordered_map rather?
+
+	void add(uint32_t hash, uint32_t till){
+		if (BlockedFields.count(hash) == 0) {
+			BlockedFields.insert(std::pair<uint32_t, uint32_t>(hash, till));
+		} else if (BlockedFields[hash] < till) {
+			BlockedFields.insert(std::pair<uint32_t, uint32_t>(hash, till));
+		}
+		//third possibility is that a field has been already blocked for longer time than 'till'
+	}
+
+	uint32_t count(){
+		return BlockedFields.size();
+	}
+
+	void remove_expired(uint32_t gametime) {
+		std::vector<uint32_t> fields_to_remove;
+		for (auto field: BlockedFields) {
+			if (field.second<gametime) {
+				fields_to_remove.push_back(field.first);
+			}
+		}
+		while (!fields_to_remove.empty()) {
+			BlockedFields.erase(fields_to_remove.back());
+			fields_to_remove.pop_back();
+		}
+	}
+
+	bool is_blocked(uint32_t hash){
+		if (BlockedFields.count(hash) == 0) {
+			return false;
+		} else {
+			return true;
+		}
+	}
 };
 
 #endif  // end of include guard: WL_AI_AI_HELP_STRUCTS_H

@@ -85,6 +85,7 @@ struct DefaultAI : ComputerPlayer {
 	enum class WoodPolicy : uint8_t {kDismantleRangers, kStopRangers, kAllowRangers};
 	enum class NewShip : uint8_t {kBuilt, kFoundOnLoad};
 	enum class PerfEvaluation : uint8_t {kForConstruction, kForDismantle};
+	enum class Attackable : uint8_t {kNotAttackable, kAttackable, kAttackableAndWeak};
 
 	enum class Tribes : uint8_t {
 		kNone,
@@ -92,7 +93,6 @@ struct DefaultAI : ComputerPlayer {
 		kAtlanteans,
 		kEmpire
 	};
-
 
 	/// Implementation for Strong
 	struct NormalImpl : public ComputerPlayer::Implementation {
@@ -263,7 +263,7 @@ private:
 
 	std::list<Widelands::FCoords> unusable_fields;
 	std::list<BuildableField*> buildable_fields;
-	std::list<BlockedField> blocked_fields;
+	BlockedFields blocked_fields; //NOCOM rename
 	std::unordered_set<uint32_t> port_reserved_coords;
 	std::list<MineableField*> mineable_fields;
 	std::list<Widelands::Flag const*> new_flags;
