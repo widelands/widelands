@@ -378,6 +378,8 @@ int LuaWorld::get_immovable_descriptions(lua_State* L) {
 // pairs.
 // NOCOM(GunChleoc): LuaTerrainDescription is defined in LuaMap. Do we really want a dependency from
 // here to LuaMap? Same problem for the immovables.
+// NOCOM(#sirver): sure, why not? I mean this is the root of the object graph, it necessarily will
+// need to know about all child objects.
 int LuaWorld::get_terrain_descriptions(lua_State* L) {
 	const World& world = get_egbase(L).world();
 	lua_newtable(L);

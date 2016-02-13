@@ -153,15 +153,12 @@ int LuaEditorGameBase::get_players(lua_State * L) {
  ==========================================================
  */
 
-// NOCOM(#codereview): fix comment. nothing is registered here. also belows.
-// NOCOM(GunChleoc): I just copied the code including the documentation off get_building_description.
-// What would be a better comment then?
 /* RST
 	.. function:: get_immovable_description(immovable_name)
 
 		:arg immovable_name: the name of the immovable
 
-		Registers an immovable description so Lua can reference it from the editor.
+		Returns the ImmovableDescription for the named object.
 
 		(RO) The :class:`~wl.Game.Immovable_description`.
 */
@@ -192,7 +189,7 @@ int LuaEditorGameBase::get_immovable_description(lua_State* L) {
 
 		:arg building_name: the name of the building
 
-		Registers a building description so Lua can reference it from the game.
+		Returns the description for the given building.
 
 		(RO) The :class:`~wl.Game.Building_description`.
 */
@@ -216,7 +213,7 @@ int LuaEditorGameBase::get_building_description(lua_State* L) {
 
 		:arg tribe_name: the name of the tribe
 
-		Registers a tribe description so Lua can reference it from the game.
+		Returns the tribe description of the given tribe.
 
 		(RO) The :class:`~wl.Game.Tribe_description`.
 */
@@ -240,7 +237,7 @@ int LuaEditorGameBase::get_tribe_description(lua_State* L) {
 
 		:arg ware_name: the name of the ware
 
-		Registers a ware description so Lua can reference it from the game.
+		Returns the ware description for the given ware.
 
 		(RO) The :class:`~wl.Game.Ware_description`.
 */
@@ -264,7 +261,7 @@ int LuaEditorGameBase::get_ware_description(lua_State* L) {
 
 		:arg worker_name: the name of the worker
 
-		Registers a worker description so Lua can reference it from the game.
+		Returs the worker desciption for the given worker.
 
 		(RO) The :class:`~wl.Game.Worker_description`.
 */
@@ -282,13 +279,12 @@ int LuaEditorGameBase::get_worker_description(lua_State* L) {
 	return LuaMaps::upcasted_map_object_descr_to_lua(L, worker_description);
 }
 
-// NOCOM(#codereview): fix comment
 /* RST
 	.. function:: get_resource_description(resource_name)
 
 		:arg resource_name: the name of the resource
 
-		Registers a resource description so Lua can reference it from the editor.
+		Returns the resource description for the given resource.
 
 		(RO) The :class:`~wl.Game.Resource_description`.
 */
@@ -308,13 +304,12 @@ int LuaEditorGameBase::get_resource_description(lua_State* L) {
 	return to_lua<LuaMaps::LuaResourceDescription>(L, new LuaMaps::LuaResourceDescription(descr));
 }
 
-// NOCOM(#codereview): fix commment.
 /* RST
 	.. function:: get_terrain_description(terrain_name)
 
 		:arg terrain_name: the name of the terrain
 
-		Registers a terrain description so Lua can reference it from the editor.
+		Returns a given terrain description for the given terrain.
 
 		(RO) The :class:`~wl.Game.Terrain_description`.
 */

@@ -1502,7 +1502,7 @@ int LuaImmovableDescription::get_editor_category(lua_State * L) {
 
 			(RO) a table containing numbers labeled as pickiness, preferred_fertility,
 				  preferred_humidity, and preferred_temperature,
-				  or nil if the immovalbe has no terrain affinity.
+				  or nil if the immovable has no terrain affinity.
 */
 int LuaImmovableDescription::get_terrain_affinity(lua_State * L) {
 	if (get()->has_terrain_affinity()) {
@@ -1601,6 +1601,8 @@ int LuaImmovableDescription::has_attribute(lua_State * L) {
 */
 // NOCOM(#codereview): I think it should pass in the terrain description, not the name.
 // NOCOM(GunChleoc): Which eris function do I need for that?
+// NOCOM(#codereview): This should work:
+// LuaMaps::LuaTerrainDescription * c = *get_user_class<LuaMaps::LuaTerrainDescription>(L, 2);
 int LuaImmovableDescription::probability_to_grow(lua_State * L) {
 	if (lua_gettop(L) != 2) {
 		report_error(L, "Takes only one argument.");

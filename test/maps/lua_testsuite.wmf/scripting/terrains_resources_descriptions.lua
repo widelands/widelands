@@ -31,10 +31,6 @@ function test_terrains_resource_descr:test_resource_name()
 end
 
 function test_terrains_resource_descr:test_resource_is_detectable()
-   -- NOCOM(#codereview): is_detectable -> is_surveiable ?
-   -- https://en.wikipedia.org/wiki/Geological_survey
-   -- NOCOM(GunChleoc): I think "detectable" is fine, the term "detecting" is used on
-   -- https://en.wikipedia.org/wiki/Prospecting. And the word "surveyable" doesn't exist.
    assert_equal(true, egbase:get_resource_description("coal").is_detectable)
    assert_equal(true, egbase:get_resource_description("stones").is_detectable)
    assert_equal(true, egbase:get_resource_description("water").is_detectable)

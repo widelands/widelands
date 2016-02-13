@@ -211,11 +211,10 @@ void EditorHelp::entry_selected(const std::string& key,
 
 		cr->resume();
 		const std::string help_text = cr->pop_string();
-		// NOCOM(#codereview): Why is the lua script not returning the text
-		// including heading? Feels strange to do most formatting in Lua, but
-		// some in c++.
-		// NOCOM(GunChleoc): This is because if we want to open this in a separate window rather than
-		// in the encyclopedia, the heading is shown on the window title instead. cf. the Building help.
+
+		// We add the heading here instead of in Lua, so that the content can be
+		// reused in a standalone window that will have the heading as a window
+		// title.
 		contents_.at(key)->set_text((boost::format("%s%s") % heading(descname) % help_text).str());
 
 	} catch (LuaError& err) {
