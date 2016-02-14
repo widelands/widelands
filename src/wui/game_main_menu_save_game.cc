@@ -33,9 +33,7 @@
 #include "logic/playersmanager.h"
 #include "wui/interactive_gamebase.h"
 
-InteractiveGameBase & GameMainMenuSaveGame::igbase() {
-	return dynamic_cast<InteractiveGameBase&>(*get_parent());
-}
+namespace {
 
 #define WINDOW_WIDTH                                                        440
 #define WINDOW_HEIGHT                                                       440
@@ -51,6 +49,12 @@ InteractiveGameBase & GameMainMenuSaveGame::igbase() {
 #define CANCEL_Y                      (WINDOW_HEIGHT - BUTTON_HEIGHT - VMARGIN)
 #define DELETE_Y                          (CANCEL_Y - BUTTON_HEIGHT - VSPACING)
 #define OK_Y                              (DELETE_Y - BUTTON_HEIGHT - VSPACING)
+
+} // namespace
+
+InteractiveGameBase & GameMainMenuSaveGame::igbase() {
+	return dynamic_cast<InteractiveGameBase&>(*get_parent());
+}
 
 GameMainMenuSaveGame::GameMainMenuSaveGame
 	(InteractiveGameBase & parent, UI::UniqueWindow::Registry & registry)

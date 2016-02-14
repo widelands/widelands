@@ -573,7 +573,7 @@ void Map::delete_tag(const std::string& tag) {
 	}
 }
 
-NodeCaps Map::get_max_nodecaps(const World& world, FCoords & fc) {
+NodeCaps Map::get_max_nodecaps(const World& world, const FCoords& fc) {
 	NodeCaps caps = calc_nodecaps_pass1(world, fc, false);
 	caps = calc_nodecaps_pass2(world, fc, false, caps);
 	return caps;

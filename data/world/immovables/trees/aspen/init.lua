@@ -82,6 +82,7 @@ world:new_immovable_type{
 world:new_immovable_type{
    name = "aspen_summer_old",
    descname = _ "Aspen (Old)",
+   species = _ "Aspen",
    editor_category = "trees_deciduous",
    size = "small",
    attributes = { "tree" },

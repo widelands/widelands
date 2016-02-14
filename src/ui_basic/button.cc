@@ -211,10 +211,11 @@ void Button::draw(RenderTarget & dst)
 
 	} else if (title_.length()) {
 		//  Otherwise draw title string centered
-		const Image* entry_text_im = UI::g_fh1->render(
-												  as_uifont(title_,
-																UI_FONT_SIZE_SMALL,
-																enabled_ ? UI_FONT_CLR_FG : UI_FONT_CLR_DISABLED));
+		const Image* entry_text_im =
+				autofit_ui_text(title_,
+									 get_inner_w() - 2 * kButtonImageMargin,
+									 enabled_ ? UI_FONT_CLR_FG : UI_FONT_CLR_DISABLED);
+
 		dst.blit(Point((get_w() - entry_text_im->width()) / 2, (get_h() - entry_text_im->height()) / 2),
 					entry_text_im);
 	}

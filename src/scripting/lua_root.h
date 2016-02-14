@@ -107,6 +107,8 @@ public:
 	/*
 	 * Properties
 	 */
+	int get_immovable_descriptions(lua_State* L);
+	int get_terrain_descriptions(lua_State* L);
 
 	/*
 	 * Lua methods

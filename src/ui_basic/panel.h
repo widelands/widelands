@@ -241,9 +241,6 @@ public:
 	void set_tooltip(const std::string& text) {tooltip_ = text;}
 	const std::string& tooltip() const {return tooltip_;}
 
-	///\return the current set UI font
-	std::string ui_fn();
-
 	virtual void die();
 
 protected:

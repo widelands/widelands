@@ -1114,18 +1114,4 @@ bool Panel::draw_tooltip(RenderTarget & dst, const std::string & text)
 	dst.blit(r.origin() + Point(2, 2), rendered_text);
 	return true;
 }
-
-std::string Panel::ui_fn() {
-	std::string style(UI::g_fh1->fontset().serif());
-	if (g_fs->file_exists("i18n/fonts/" + style)) {
-		return style;
-	}
-	log
-		("Could not find font file \"%s\"\n"
-		 "Make sure the path is given relative to Widelands font directory. "
-		 "Widelands will use standard font.\n",
-		 style.c_str());
-	return UI::FontSet::kFallbackFont;
-}
-
 }

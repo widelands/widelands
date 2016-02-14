@@ -649,7 +649,7 @@ void Building::draw
 {
 	if (coords == position_) { // draw big buildings only once
 		dst.blit_animation(
-		   pos, anim_, game.get_gametime() - animstart_, get_owner()->get_playercolor());
+			pos, anim_, game.get_gametime() - animstart_, get_owner()->get_playercolor());
 
 		//  door animation?
 

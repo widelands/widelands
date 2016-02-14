@@ -60,7 +60,7 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect
 	has_translated_mapname_(false)
 {
 	curdir_ = basedir_,
-	title_.set_textstyle(UI::TextStyle::ui_big());
+	title_.set_fontsize(UI_FONT_SIZE_BIG);
 	if (settings_->settings().multiplayer) {
 		back_.set_tooltip(_("Return to the multiplayer game setup"));
 	} else {

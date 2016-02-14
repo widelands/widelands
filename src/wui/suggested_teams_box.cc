@@ -123,9 +123,9 @@ void SuggestedTeamsBox::show(const std::vector<Widelands::Map::SuggestedTeamLine
 				}
 				is_first = false;
 
-				for (uint16_t player : team) {
+				for (Widelands::PlayerNumber player : team) {
 					assert(player < MAX_PLAYERS);
-					const Image* player_image = g_gr->images().get(player_pictures_small[++player]);
+					const Image* player_image = g_gr->images().get(player_pictures_small[player]);
 					assert(player_image);
 					player_icon = new UI::Icon(lineup_box_, 0, 0, 20, 20, player_image);
 					player_icon->set_visible(true);

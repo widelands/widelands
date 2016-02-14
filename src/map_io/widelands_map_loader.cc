@@ -108,7 +108,10 @@ int32_t WidelandsMapLoader::preload_map(bool const scenario) {
 int32_t WidelandsMapLoader::load_map_complete
 	(EditorGameBase & egbase, MapLoader::LoadType load_type)
 {
-	ScopedTimer timer("WidelandsMapLoader::load_map_complete() took %ums");
+	std::string timer_message = "WidelandsMapLoader::load_map_complete() for '";
+	timer_message += m_map.get_name();
+	timer_message += "' took %ums";
+	ScopedTimer timer(timer_message);
 
 	bool is_game = load_type == MapLoader::LoadType::kGame;
 

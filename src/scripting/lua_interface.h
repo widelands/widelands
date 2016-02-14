@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2006-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -41,7 +41,7 @@ public:
 	virtual std::unique_ptr<LuaTable> run_script(const std::string& script);
 
 protected:
-	lua_State* m_L;
+	lua_State* lua_state_;
 };
 
 #endif  // end of include guard: WL_SCRIPTING_LUA_INTERFACE_H

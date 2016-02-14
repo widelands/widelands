@@ -42,19 +42,13 @@
 #include "scripting/lua_table.h"
 #include "wui/interactive_player.h"
 
+namespace {
+
 #define WINDOW_WIDTH std::min(700, g_gr->get_xres() - 40)
 #define WINDOW_HEIGHT std::min(550, g_gr->get_yres() - 40)
 
 constexpr int kPadding = 5;
 constexpr int kTabHeight = 35;
-
-using namespace Widelands;
-
-inline InteractivePlayer& EncyclopediaWindow::iaplayer() const {
-	return dynamic_cast<InteractivePlayer&>(*get_parent());
-}
-
-namespace {
 
 struct EncyclopediaTab {
 	EncyclopediaTab(const std::string& init_key,
@@ -82,6 +76,10 @@ const std::string heading(const std::string& text) {
 }
 
 }  // namespace
+
+inline InteractivePlayer& EncyclopediaWindow::iaplayer() const {
+	return dynamic_cast<InteractivePlayer&>(*get_parent());
+}
 
 EncyclopediaWindow::EncyclopediaWindow(InteractivePlayer& parent, UI::UniqueWindow::Registry& registry)
 	: UI::UniqueWindow(
@@ -171,58 +169,58 @@ EncyclopediaWindow::EncyclopediaWindow(InteractivePlayer& parent, UI::UniqueWind
 	}
 }
 
-void EncyclopediaWindow::fill_entries(const char* key, std::vector<EncyclopediaEntry>& entries) {
-	std::sort(entries.begin(), entries.end());
-	for (uint32_t i = 0; i < entries.size(); i++) {
-		EncyclopediaEntry cur = entries[i];
+void EncyclopediaWindow::fill_entries(const char* key, std::vector<EncyclopediaEntry>* entries) {
+	std::sort(entries->begin(), entries->end());
+	for (uint32_t i = 0; i < entries->size(); i++) {
+		EncyclopediaEntry cur = (*entries)[i];
 		lists_.at(key)->add(cur.descname, cur.index, cur.icon);
 	}
 	lists_.at(key)->select(0);
 }
 
 void EncyclopediaWindow::fill_buildings() {
-	const Tribes& tribes = iaplayer().egbase().tribes();
-	const TribeDescr& tribe = iaplayer().player().tribe();
+	const Widelands::Tribes& tribes = iaplayer().egbase().tribes();
+	const Widelands::TribeDescr& tribe = iaplayer().player().tribe();
 	std::vector<EncyclopediaEntry> entries;
 
 	for (Widelands::DescriptionIndex i = 0; i < tribes.nrbuildings(); ++i) {
-		const BuildingDescr* building = tribes.get_building_descr(i);
-		if (tribe.has_building(i) || building->type() == MapObjectType::MILITARYSITE) {
+		const Widelands::BuildingDescr* building = tribes.get_building_descr(i);
+		if (tribe.has_building(i) || building->type() == Widelands::MapObjectType::MILITARYSITE) {
 			EncyclopediaEntry entry(i, building->descname(), building->icon());
 			entries.push_back(entry);
 		}
 	}
-	fill_entries("buildings", entries);
+	fill_entries("buildings", &entries);
 }
 
 void EncyclopediaWindow::fill_wares() {
-	const TribeDescr& tribe = iaplayer().player().tribe();
+	const Widelands::TribeDescr& tribe = iaplayer().player().tribe();
 	std::vector<EncyclopediaEntry> entries;
 
 	for (const Widelands::DescriptionIndex& i : tribe.wares()) {
-		const WareDescr* ware = tribe.get_ware_descr(i);
+		const Widelands::WareDescr* ware = tribe.get_ware_descr(i);
 		EncyclopediaEntry entry(i, ware->descname(), ware->icon());
 		entries.push_back(entry);
 	}
-	fill_entries("wares", entries);
+	fill_entries("wares", &entries);
 }
 
 void EncyclopediaWindow::fill_workers() {
-	const TribeDescr& tribe = iaplayer().player().tribe();
+	const Widelands::TribeDescr& tribe = iaplayer().player().tribe();
 	std::vector<EncyclopediaEntry> entries;
 
 	for (const Widelands::DescriptionIndex& i : tribe.workers()) {
-		const WorkerDescr* worker = tribe.get_worker_descr(i);
+		const Widelands::WorkerDescr* worker = tribe.get_worker_descr(i);
 		EncyclopediaEntry entry(i, worker->descname(), worker->icon());
 		entries.push_back(entry);
 	}
-	fill_entries("workers", entries);
+	fill_entries("workers", &entries);
 }
 
 void EncyclopediaWindow::entry_selected(const std::string& key,
                                         const std::string& script_path,
                                         const Widelands::MapObjectType& type) {
-	const TribeDescr& tribe = iaplayer().player().tribe();
+	const Widelands::TribeDescr& tribe = iaplayer().player().tribe();
 	try {
 		std::unique_ptr<LuaTable> table(iaplayer().egbase().lua().run_script(script_path));
 		std::unique_ptr<LuaCoroutine> cr(table->get_coroutine("func"));

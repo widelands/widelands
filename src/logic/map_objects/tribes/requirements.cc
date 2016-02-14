@@ -68,7 +68,7 @@ void Requirements::write
 
 RequirementsStorage::RequirementsStorage
 	(uint32_t const init_id, Reader const init_reader)
-	: m_id(init_id), m_reader(init_reader)
+	: id_(init_id), reader_(init_reader)
 {
 	StorageMap & s = storageMap();
 
@@ -81,7 +81,7 @@ RequirementsStorage::RequirementsStorage
 
 uint32_t RequirementsStorage::id() const
 {
-	return m_id;
+	return id_;
 }
 
 Requirements RequirementsStorage::read
@@ -98,7 +98,7 @@ Requirements RequirementsStorage::read
 	if (it == s.end())
 		throw GameDataError("unknown requirement id %u", id);
 
-	return it->second->m_reader(fr, egbase, mol);
+	return it->second->reader_(fr, egbase, mol);
 }
 
 RequirementsStorage::StorageMap & RequirementsStorage::storageMap()

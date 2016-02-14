@@ -75,7 +75,7 @@ private:
 	uint32_t    butw_;
 	uint32_t    buth_;
 	uint32_t    fs_;
-	std::string fn_;
+
 	// TODO(GunChleoc): We still need to use these consistently. Just getting them in for now
 	// so we can have the SuggestedTeamsBox
 	int32_t const padding_;               // Common padding between panels

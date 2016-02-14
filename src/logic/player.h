@@ -138,7 +138,7 @@ public:
 
 	/// Data that are used and managed by AI. They are here to have it saved as a port of player's data
 	struct AiPersistentState {
-		AiPersistentState() : initialized(0){}
+		AiPersistentState() : initialized(0) {}
 
 		//was initialized
 		uint8_t initialized;
@@ -155,6 +155,7 @@ public:
 		uint32_t ai_productionsites_ratio;
 		int32_t ai_personality_wood_difference;
 		uint32_t ai_personality_early_militarysites;
+		uint32_t last_soldier_trained;
 	} ai_data;
 
 	AiPersistentState* get_mutable_ai_persistent_state(){

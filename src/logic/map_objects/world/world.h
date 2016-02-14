@@ -50,7 +50,7 @@ public:
 	// becomes a pure container.
 	const DescriptionMaintainer<TerrainDescription>& terrains() const;
 	TerrainDescription& terrain_descr(DescriptionIndex i) const;
-	TerrainDescription const* get_ter(char const* const name) const;
+	const TerrainDescription* terrain_descr(const std::string& name) const;
 
 	DescriptionIndex get_bob(char const* const l) const;
 	BobDescr const* get_bob_descr(DescriptionIndex index) const;
