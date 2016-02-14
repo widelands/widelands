@@ -449,11 +449,11 @@ function building_help_building_section(building_description)
    elseif (building_description.is_port) then
       result = result .. text_line(_"Space required:",_"Port plot","images/wui/overlays/port.png")
    else
-      if (building_description.size == 1) then
+      if (building_description.size == "small") then
          result = result .. text_line(_"Space required:",_"Small plot","images/wui/overlays/small.png")
-      elseif (building_description.size == 2) then
+      elseif (building_description.size == "medium") then
          result = result .. text_line(_"Space required:",_"Medium plot","images/wui/overlays/medium.png")
-      elseif (building_description.size == 3) then
+      elseif (building_description.size == "big") then
          result = result .. text_line(_"Space required:",_"Big plot","images/wui/overlays/big.png")
       else
          result = result .. p(_"Space required:" .. _"Unknown")
