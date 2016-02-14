@@ -359,7 +359,8 @@ int LuaWorld::get_immovable_descriptions(lua_State* L) {
 	int index = 1;
 	for (DescriptionIndex i = 0; i < world.get_nr_immovables(); ++i) {
 		lua_pushint32(L, index++);
-		to_lua<LuaMaps::LuaImmovableDescription>(L, new LuaMaps::LuaImmovableDescription(world.get_immovable_descr(i)));
+		to_lua<LuaMaps::LuaImmovableDescription>(
+					L, new LuaMaps::LuaImmovableDescription(world.get_immovable_descr(i)));
 		lua_settable(L, -3);
 	}
 	return 1;
