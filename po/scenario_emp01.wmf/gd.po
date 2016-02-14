@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-02-03 09:18+0000\n"
-"PO-Revision-Date: 2016-02-07 12:49+0000\n"
+"POT-Creation-Date: 2016-02-09 16:38+0000\n"
+"PO-Revision-Date: 2016-02-10 17:29+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -148,7 +148,7 @@ msgid ""
 "these Barbarians. So, I left Fremil by boat to find a new world and a new "
 "life for myself, somewhere in the south. Now I am sailing on the Gulf of "
 "Perl with my family, some of my friends and a few of my best warriors."
-msgstr "Co-dhiù no co-dheth, bhiodh an nàire orm gu bràth mura dèanainn sabaid an aghaidh nan Tùsanach. Air an adhbhar sin, dh’fhàg mi Fremil air a’ bhàta gus saoghal ’s beatha ùr a lorg dhomh àiteigin gu deas. Tha mi a’ seòladh Camas Pherl le mo theaghlach ’s mo cuideachd a-nis."
+msgstr "Co-dhiù no co-dheth, bhiodh an nàire orm gu bràth mura dèanainn sabaid an aghaidh nan Tùsanach. Air an adhbhar sin, dh’fhàg mi Fremil air long gus saoghal ’s beatha ùr a lorg dhomh àiteigin gu deas. Tha mi a’ seòladh Camas Pherl le mo theaghlach ’s mo cuideachd a-nis."
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:99
 msgid "The Rough Sea"
@@ -161,7 +161,7 @@ msgid ""
 "Nature was against us and drove us into a dark, wild storm. I really don’t "
 "know how many hours have passed since the waves rose higher than our boat, "
 "but still it would be suicide to go outside."
-msgstr "Ar leam b’ e mearachd mhòr a bh’ ann a’ toirt Camas Pherl oirnn. Thàinig dubh-ghailleann fheargach oirnn. Chan eil fios agam dè cho fada on uair a dh’èirich na tarbh-thuinn na b’ àirde na am bàta againn ach chan fhaighinn ach bàs a’ dol a-mach."
+msgstr "Ar leam b’ e mearachd mhòr a bh’ ann a’ toirt Camas Pherl oirnn. Thàinig dubh-ghailleann fheargach oirnn. Chan eil fios agam dè cho fada on uair a dh’èirich na tarbh-thuinn na b’ àirde na an long againn ach chan fhaighinn ach bàs a’ dol a-mach."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:105
@@ -209,7 +209,7 @@ msgid ""
 "Sire, I fear we are not safe in this foreign land. Who knows what terrible "
 "creatures live beyond this forest, in that mighty desert? What if these "
 "creatures enter the woods and await the time to attack us?"
-msgstr ""
+msgstr "A thighearna, ’s eagal leam nach eil sinn sàbhailte air an tìr chèin seo. Cò aige a tha fios dè na creutairean uabhasach a tha a’ fuireach taobh thall na coille sa mhòr-fhàsach ud? Dè dh’èiridh dhuinn ma thig na creutairean sin a-steach dhan choille, a’ feitheamh gus an doir iad ionnsaigh oirnn?"
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:132
@@ -217,7 +217,7 @@ msgid ""
 "Well, perhaps my fear is misguided, but it can’t be wrong to keep watch in "
 "the forests – so that we can be sure to see any potential enemies before "
 "they can see us."
-msgstr ""
+msgstr "Uill, ’s dòcha gu bheil mi tuilleadh ’s eagalach ach cha bu mhiste leinn sùil a chumail a-mach sa choille – ach am bi sinn cinnteach gum mothaich sinn dha nàmhaid sam bith mus faic iadsan sinn."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:135
@@ -225,7 +225,7 @@ msgid ""
 "You really should build a blockhouse in the eastern portion of the forest. "
 "Then one of my men can keep watch in the darkness and keep us safe from "
 "these creatures."
-msgstr ""
+msgstr "Bu chòir dhuinn taigh-bloca a thogail taobh ear na coille. ’S urrainn dha fhear dhe mo chuideachd a bhith air faire san dorchadas an uairsin ’s ar cumail sàbhailte o na creutairean ud."
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:142
 msgid "Safe For Now"
@@ -240,14 +240,14 @@ msgstr "Fhuair Saledus faochadh…"
 msgid ""
 "Sire, I saw that the construction of the blockhouse was completed, so I have"
 " assigned one of my best soldiers to it to keep watch on the desert."
-msgstr ""
+msgstr "A thighearna, chunnaic mi gun bheil an taigh-bloca air a thogail, mar sin chuir mi fear dhe na saighdearan as fhearr agam a-null gus sùil a chumail air an fhàsach."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:148
 msgid ""
 "This is a good step forward. Now we can feel a bit safer and can look "
 "forward to repairing our ship."
-msgstr ""
+msgstr "Seo deagh-thoiseach dhuinn. Bidh sinn a’ faireachdainn beagan nas sàbhailte a-nis agus ’s urrainn dhuinn ar n-aire a thoirt air càradh na luinge againn."
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:153
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:168
@@ -262,14 +262,14 @@ msgstr "Tha fiamh a’ ghàire air Amalea…"
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:156
 msgid "Greetings, Lutius! I just met Saledus outside."
-msgstr ""
+msgstr "Fàilte, a Lutius! Tha mi air coinneachadh ri Saledus taobh a-muigh."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:159
 msgid ""
 "He told me about the blockhouse. Well, I don’t think we need more "
 "blockhouses – instead, we might concentrate on other things now."
-msgstr ""
+msgstr "Dh’innis e dhomh mun taigh-bhloca. Uill, ar leam chan eil sinn feumach air barrachd taighean-bloca a-nis – bu chòir dhuinn ar n-aire a thoirt air cùisean eile."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:162
@@ -277,7 +277,7 @@ msgid ""
 "It is absolutely clear that we need wood to repair our ship. So, I walked "
 "through the forest yesterday to look for a nice place for a lumberjack’s "
 "house and found one right south of our provisional headquarters."
-msgstr ""
+msgstr "Tha e cho follaiseach ’s a ghabhas gu bheil sinn feumach air fiodh gus an long againn a chàradh. Mar sin, choisich mi tron choille an-dè a’ sireadh àite math dha thaigh coillteir agus lorg mi fear dìreach gu deas air ar prìomh-àras sealadach."
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:169
 msgid "Amalea recommends…"
@@ -290,7 +290,7 @@ msgid ""
 "Perhaps it would be a good idea to wait until he cleans enough space for "
 "constructing two more lumberjack’s houses, so that we can harvest the logs "
 "faster."
-msgstr ""
+msgstr "Fhuair mi naidheachd gun do thòisich a’ chiad choilltear againn air obair an-diugh. Saoilidh mi gum bu chòir dhuinn feitheamh gus am fosgail e tìr gu leòr ach an tog sinn dà thaigh coillteir eile ach am buain sinn am fiodh nas luaithe."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:174
@@ -299,7 +299,7 @@ msgid ""
 "turn them into planks, which are needed by every ship and every bigger "
 "building too. So we should build a sawmill – as soon as we have enough space"
 " for this."
-msgstr ""
+msgstr "Ach gu mì-fhortanach, chan eil am fiodh mar a tha e gu feum gus an long a chàradh – feumaidh sinn maidean a dhèanamh dheth mar a dh’fheumas gach long is togalach mòr. Mar sin, bu chòir dhuinn muileann sàbhaidh a thogail – cho luath ’s a bhios rum gu leòr ann dha."
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:181
 msgid "Amalea comes in…"
@@ -308,21 +308,21 @@ msgstr "Tha Amalea a’ tighinn a-steach…"
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:183
 msgid "I’ve got two important things to talk about… First the good news:"
-msgstr ""
+msgstr "Tha dà rud cudromach air a dh’fheumas mi bruidhinn… Innsim an deagh naidheachd an toiseach:"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:186
 msgid ""
 "I noticed that the construction of the sawmill is complete, so we can begin "
 "to refine the logs that the lumberjacks are harvesting into lumber."
-msgstr ""
+msgstr "Mhothaich mi gu bheil am muileann sàbhaidh air a thogail, mas sin ’s urrainn dhuinn tòiseachadh air maidean a dhèanamh dhen fhiodh a tha na coilltearan a’ buain."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:189
 msgid ""
 "But the bad news is that our lumberjacks harvest at an incredible speed. "
 "There are almost no trees left on this island."
-msgstr ""
+msgstr "Ach ’s ann gu bheil na coilltearan ’ga buain uabhasach luath. Cha mhòr nach eil craobh air fhàgail air an eilean seo."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:192
@@ -330,12 +330,12 @@ msgid ""
 "These trees provide shelter from the sandstorms that sweep in from the "
 "desert, and shade on the hot days, and they are the home of many gentle "
 "animals. We shouldn’t leave this island a complete desert."
-msgstr ""
+msgstr "Tha na craobhan seo ’nam fasgadh dhuinn an aghaidh nan stoirmean a thig a-steach on fhàsach ’s an aghaidh teas an latha agus tha iomadh beathach socair a’ fuireach annta. Cha bu chòir dhuinn an t-eilean seo fhàgail ’na fhàsach buileach."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:195
 msgid "Lutius, please find someone who will take care of planting new trees."
-msgstr ""
+msgstr "A Lutius, an lorg thu cuideigin a chuireas craobhan ùra dhuinn?"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:201
 msgid "Thinking About the Future"
@@ -350,14 +350,14 @@ msgstr "Tha Saledus a’ beachdachadh…"
 msgid ""
 "Sire, I just thought about the rocks standing on the south shore of this "
 "land. Perhaps we could cut out some useful granite and beautiful marble."
-msgstr ""
+msgstr "A thighearna, rinn mi cnuasadh air na carraigean a tha air a’ chladach taobh deas an eilein. ’S dòcha gum b’ urrainn dhuinn gaireal feumail is marmor àlainn a ghearradh asta."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:207
 msgid ""
 "The repair of our ship will take a few weeks, anyway, and the resources we "
 "harvest now might be the base of strong and big buildings in another land."
-msgstr ""
+msgstr "Bheir càradh na luinge againn beagan sheachdainean co-dhiù agus b’ urrainn dhuinn na stòrasan a thogas sinn an-dràsta a chleachdadh gus togalaichean mòra seasmhach a thogail air tìr eile."
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:213
 msgid "A Step Forward"
@@ -373,12 +373,12 @@ msgid ""
 "Sire, today we got a lot closer to our first castle. The quarry to the south"
 " began its work today and will soon provide us with granite and beautiful "
 "marble."
-msgstr ""
+msgstr "A thighearna, rinn sinn toiseach-tòiseachaidh an-diugh airson a’ chiad chaisteil againn. Thòisich an cuaraidh gu deas ag obair an-diugh agus bheir e graineal is marmor brèagha dhuinn a dh’aithghearr."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:219
 msgid "Now we truly can look forward to settling down on another island."
-msgstr ""
+msgstr "Tha fiughar againn a-nis gun tuinich sinn air eilean eile dha-rìribh."
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:224
 msgid "Mission Complete"
@@ -390,19 +390,19 @@ msgid ""
 "Today I got the message that our ship is completely repaired. At the moment,"
 " my people are loading everything onto our newly repaired ship, hoping it "
 "will serve us better than last time."
-msgstr ""
+msgstr "Fhuair mi an naidheachd an-diugh gun deach càradh ar luinge a choileanadh. Tha mo chuideachd a’ luchdadh a h-uile rud dhan long air a h-ùr-chàradh againn, an dòchas gun soirbhich leinn an turas seo."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:230
 msgid ""
 "Tonight will be our last night on this island. Tomorrow morning we will "
 "leave, searching for a new place for our exile."
-msgstr ""
+msgstr "Chan fhuirich sinn ach oidhche eile air an eilean seo. Fàgaidh sinn an làrna-mhàireach, a’ lorg tuinidh ùir."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:233
 msgid "I still wonder if we will ever see Fremil again."
-msgstr ""
+msgstr "Saoil nach fhaic sinn Freimil a-rithist gu buan?"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:234
 msgid "Victory"
@@ -427,7 +427,7 @@ msgstr "Tha Saledus a’ bruidhinn:"
 msgid ""
 "Sire, you have made this peninsula a very secure place. Now it’s time to "
 "move on!"
-msgstr ""
+msgstr "A thighearna, rinn sibh àite glè thèarainte dhen rubha seo. Thàinig an t-àm airson falbh co-dhiù!"
 
 #: ../../data/scripting/format_scenario.lua:36
 #, lua-format

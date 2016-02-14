@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-02-03 09:18+0000\n"
-"PO-Revision-Date: 2016-02-03 09:51+0000\n"
+"POT-Creation-Date: 2016-02-09 16:38+0000\n"
+"PO-Revision-Date: 2016-02-12 14:07+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -130,7 +130,7 @@ msgstr "Nise, tha mi air bruidhinn mu thrèanadh agus leibheilean. Innseam barra
 msgid ""
 "A newly created soldier has no experience and is not very good at fighting. "
 "To make him stronger, you can build training sites."
-msgstr "Chan eil eòlas sam bith air saighdear air ùr-chruthachadh agus chan eil e uabhasach ath air sabaid. ’S urrainn dhut làraichean trèanaidh a thogail gus a neartachadh."
+msgstr "Chan eil eòlas sam bith air saighdear air ùr-chruthachadh agus chan eil e uabhasach ath air sabaid. ’S urrainn dhut ionadan-trèanaidh a thogail gus a neartachadh."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:51
 msgid ""
@@ -138,7 +138,7 @@ msgid ""
 "building, and it trains soldiers in evade. Since soldiers get very hungry "
 "during their workout, this building needs a lot of food and strong beer. In "
 "a real game, you should have a good infrastructure before you build it."
-msgstr "Is an raon catha aon dhe na làraichean trèanaidh ud. ’S e togalach daor mòr a th’ ann agus trèanaidh e teàrnadh nan saighdearan. Air sgàth ’s gun dig an t-acras air na saighdearan leis an obair chruaidh a nì iad ann, bidh an togalach seo feumach air mòran bìdh agus leanna làidir. Ann an geama dearbh, bu chòir do bhun-structar math a bhith agad mus tog thu fear."
+msgstr "Is an raon catha aon dhe na h-ionadan-trèanaidh ud. ’S e togalach daor mòr a th’ ann agus trèanaidh e teàrnadh nan saighdearan. Air sgàth ’s gun dig an t-acras air na saighdearan leis an obair chruaidh a nì iad ann, bidh an togalach seo feumach air mòran bìdh agus leanna làidir. Ann an geama dearbh, bu chòir do bhun-structar math a bhith agad mus tog thu fear."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:53
 msgid "To see evade training in action, build a battle arena."
@@ -222,7 +222,7 @@ msgid ""
 "There is a second training site: the training camp. It is a big building "
 "too, and to complement the battle arena, it trains attack and health "
 "(remember, the Barbarian soldiers cannot be trained in defense)."
-msgstr "Tha làrach trèanaidh eile ann agus seo an campa trèanaidh. ’S e togalach mòr a th’ ann cuideachd agus ach an coilean e nach dèan an raon catha, nì e trèanadh ionnsaighe agus slàinte (cuimhnich nach urrainn dha shaighdearan nan Tùsanach trèanadh dìona fhaighinn)."
+msgstr "Tha ionad-trèanaidh eile ann agus seo an campa trèanaidh. ’S e togalach mòr a th’ ann cuideachd agus ach an coilean e nach dèan an raon catha, nì e trèanadh ionnsaighe agus slàinte (cuimhnich nach urrainn dha shaighdearan nan Tùsanach trèanadh dìona fhaighinn)."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:91
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:99
