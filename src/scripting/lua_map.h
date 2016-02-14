@@ -35,6 +35,7 @@
 #include "logic/map_objects/tribes/trainingsite.h"
 #include "logic/map_objects/tribes/warehouse.h"
 #include "logic/map_objects/tribes/worker.h"
+#include "logic/map_objects/world/terrain_description.h"
 #include "scripting/lua.h"
 #include "scripting/luna.h"
 
@@ -43,8 +44,10 @@ namespace Widelands {
 	class SoldierDescr;
 	class BuildingDescr;
 	class Bob;
+	class ResourceDescription;
 	class WareDescr;
 	class WorkerDescr;
+	class TerrainDescription;
 	class TribeDescr;
 }
 
@@ -202,6 +205,47 @@ private:
 	const Widelands::klass* get() const {                                                           \
 		return static_cast<const Widelands::klass*>(LuaMapObjectDescription::get());                  \
 	}
+
+class LuaImmovableDescription : public LuaMapObjectDescription {
+public:
+	LUNA_CLASS_HEAD(LuaImmovableDescription);
+
+	virtual ~LuaImmovableDescription() {}
+
+	LuaImmovableDescription() {}
+	LuaImmovableDescription(const Widelands::ImmovableDescr* const immovabledescr)
+		: LuaMapObjectDescription(immovabledescr) {
+	}
+	LuaImmovableDescription(lua_State* L) : LuaMapObjectDescription(L) {
+	}
+
+	void __persist(lua_State * L) override;
+	void __unpersist(lua_State * L) override;
+
+	/*
+	 * Properties
+	 */
+	int get_species(lua_State *);
+	int get_build_cost(lua_State *);
+	int get_editor_category(lua_State *);
+	int get_terrain_affinity(lua_State *);
+	int get_owner_type(lua_State *);
+	int get_size(lua_State *);
+
+	/*
+	 * Lua methods
+	 */
+	int has_attribute(lua_State *);
+	int probability_to_grow(lua_State *);
+
+	/*
+	 * C methods
+	 */
+
+private:
+	CASTED_GET_DESCRIPTION(ImmovableDescr)
+};
+
 
 class LuaBuildingDescription : public LuaMapObjectDescription {
 public:
@@ -514,6 +558,111 @@ private:
 };
 
 #undef CASTED_GET_DESCRIPTION
+
+
+class LuaResourceDescription : public LuaMapModuleClass {
+public:
+	LUNA_CLASS_HEAD(LuaResourceDescription);
+
+	virtual ~LuaResourceDescription() {}
+
+	LuaResourceDescription() : resourcedescr_(nullptr) {}
+	LuaResourceDescription(const Widelands::ResourceDescription* const resourcedescr)
+		: resourcedescr_(resourcedescr) {}
+	LuaResourceDescription(lua_State* L) : resourcedescr_(nullptr) {
+		report_error(L, "Cannot instantiate a 'LuaResourceDescription' directly!");
+	}
+
+	void __persist(lua_State * L) override;
+	void __unpersist(lua_State * L) override;
+
+	/*
+	 * Properties
+	 */
+	int get_name(lua_State *);
+	int get_descname(lua_State *);
+	int get_is_detectable(lua_State *);
+	int get_max_amount(lua_State *);
+	int get_representative_image(lua_State *);
+
+	/*
+	 * Lua methods
+	 */
+
+	int editor_image(lua_State *);
+
+	/*
+	 * C methods
+	 */
+protected:
+	const Widelands::ResourceDescription* get() const {
+		assert(resourcedescr_ != nullptr);
+		return resourcedescr_;
+	}
+	// For persistence.
+	void set_description_pointer(const Widelands::ResourceDescription* pointer) {
+		resourcedescr_ = pointer;
+	}
+
+private:
+	const Widelands::ResourceDescription* resourcedescr_;
+};
+
+
+
+class LuaTerrainDescription : public LuaMapModuleClass {
+public:
+	LUNA_CLASS_HEAD(LuaTerrainDescription);
+
+	virtual ~LuaTerrainDescription() {}
+
+	LuaTerrainDescription() : terraindescr_(nullptr) {}
+	LuaTerrainDescription(const Widelands::TerrainDescription* const terraindescr)
+		: terraindescr_(terraindescr) {}
+	LuaTerrainDescription(lua_State* L) : terraindescr_(nullptr) {
+		report_error(L, "Cannot instantiate a 'LuaTerrainDescription' directly!");
+	}
+
+	void __persist(lua_State * L) override;
+	void __unpersist(lua_State * L) override;
+
+	/*
+	 * Properties
+	 */
+	int get_name(lua_State *);
+	int get_descname(lua_State *);
+	int get_default_resource(lua_State *);
+	int get_default_resource_amount(lua_State *);
+	int get_editor_category(lua_State *);
+	int get_fertility(lua_State *);
+	int get_humidity(lua_State *);
+	int get_representative_image(lua_State *);
+	int get_temperature(lua_State *);
+	int get_valid_resources(lua_State *);
+
+	/*
+	 * Lua methods
+	 */
+
+	/*
+	 * C methods
+	 */
+	const Widelands::TerrainDescription* get() const {
+		assert(terraindescr_ != nullptr);
+		return terraindescr_;
+	}
+
+protected:
+
+	// For persistence.
+	void set_description_pointer(const Widelands::TerrainDescription* pointer) {
+		terraindescr_ = pointer;
+	}
+
+private:
+	const Widelands::TerrainDescription* terraindescr_;
+};
+
 
 #define CASTED_GET(klass) \
 Widelands:: klass * get(lua_State * L, Widelands::EditorGameBase & egbase) { \

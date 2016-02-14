@@ -61,7 +61,7 @@ void MapTerrainPacket::read(FileSystem& fs,
 				}
 				const std::string new_terrain_name =
 				   lookup_table.lookup_terrain(old_terrain_name);
-				if (!world.get_ter(new_terrain_name.c_str())) {
+				if (!world.terrain_descr(new_terrain_name)) {
 					throw GameDataError("Terrain '%s' exists in map, not in world!", new_terrain_name.c_str());
 				}
 				smap[id] = world.terrains().get_index(new_terrain_name.c_str());

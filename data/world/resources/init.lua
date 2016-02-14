@@ -9,6 +9,8 @@ world:new_resource_type{
    max_amount = 20,
    -- A geologist can find it, otherwise false (see Fish)
    detectable = true,
+   -- This represents the resource in menus etc.
+   representative_image = pics_dir .. "coal4.png",
    -- Picture that is used to indicate the amount of resource on the map
    -- [5] means amount 0 to 5; next line means amount 6 to 10 and so on
    -- The picture with highest number is additionally used in ui
@@ -25,6 +27,7 @@ world:new_resource_type{
    descname = _ "Gold",
    max_amount = 20,
    detectable = true,
+   representative_image = pics_dir .. "gold4.png",
    editor_pictures = {
       [5] = pics_dir .. "gold1.png",
       [10] = pics_dir .. "gold2.png",
@@ -38,6 +41,7 @@ world:new_resource_type{
    descname = _ "Iron",
    max_amount = 20,
    detectable = true,
+   representative_image = pics_dir .. "iron4.png",
    editor_pictures = {
       [5] = pics_dir .. "iron1.png",
       [10] = pics_dir .. "iron2.png",
@@ -51,6 +55,7 @@ world:new_resource_type{
    descname = _ "Stones",
    max_amount = 20,
    detectable = true,
+   representative_image = pics_dir .. "stones4.png",
    editor_pictures = {
       [5] = pics_dir .. "stones1.png",
       [10] = pics_dir .. "stones2.png",
@@ -64,6 +69,7 @@ world:new_resource_type{
    descname = _ "Water",
    max_amount = 50,
    detectable = true,
+   representative_image = pics_dir .. "water4.png",
    editor_pictures = {
       [10] = pics_dir .."water1.png",
       [20] = pics_dir .."water2.png",
@@ -77,14 +83,11 @@ world:new_resource_type{
    descname = _ "Fish",
    max_amount = 20,
    detectable = false,
+   representative_image = pics_dir .. "fish.png",
    editor_pictures = {
       [5] = pics_dir .. "fish1.png",
       [10] = pics_dir .. "fish2.png",
       [15] = pics_dir .. "fish3.png",
       [1000] = pics_dir .. "fish4.png",
-      -- Clutch: The editor chooses the image with the highest number for the
-      -- UI. So we keep a nice picture for this purpose at the top of this
-      -- list.
-      [1001] = pics_dir .. "fish.png",
    }
 }

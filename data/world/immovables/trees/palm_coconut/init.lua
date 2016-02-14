@@ -79,6 +79,7 @@ world:new_immovable_type{
 world:new_immovable_type{
    name = "palm_coconut_desert_old",
    descname = _ "Coconut Palm (Old)",
+   species = _ "Coconut Palm",
    editor_category = "trees_palm",
    size = "small",
    attributes = { "tree" },

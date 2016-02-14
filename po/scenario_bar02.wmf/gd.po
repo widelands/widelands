@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-02-03 09:18+0000\n"
-"PO-Revision-Date: 2016-02-03 09:55+0000\n"
+"POT-Creation-Date: 2016-02-09 16:38+0000\n"
+"PO-Revision-Date: 2016-02-12 14:09+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -154,14 +154,14 @@ msgstr "Tha taighean-stòrais coltach ris a’ phrìomh-àras agad ach cha dìon
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:98
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:100
 msgid "Build training sites"
-msgstr "Tog làraichean trèanaidh"
+msgstr "Tog ionadan-trèanaidh"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:102
 msgid ""
 "Training sites like a training camp or a battle arena are used for training "
 "soldiers in their different attributes. These attributes are important in "
 "fights and the better a soldier is, the higher is the chance to win a fight."
-msgstr "Cleachdaidh tu togalaichean trèanaidh mar an cama trèanaidh ’s an raon catha gus buadhan nan saighdearan agad a thrèanadh. Bidh na buadhan seo cudromach air a bhlàr agus mar as fhearr a tha saighdear ’s ann as motha a bhios an seans gum buannaich e cath."
+msgstr "Cleachdaidh tu ionadan-trèanaidh mar an cama trèanaidh ’s an raon catha gus buadhan nan saighdearan agad a thrèanadh. Bidh na buadhan seo cudromach air a bhlàr agus mar as fhearr a tha saighdear ’s ann as motha a bhios an seans gum buannaich e cath."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:104
 msgid "The attributes are: health, attack, defense and evade."
@@ -529,7 +529,7 @@ msgid ""
 "processing economy. But that’s still not everything – most of our soldiers "
 "are quite young and neither have a good weapon nor are they well trained. We"
 " should build up training sites to prepare them for their future tasks."
-msgstr "Tha na clach-eòlaichean againn air barrachd stòrais dhe chlach-iarainn, gual is òr a lorg. Bu chòir dhuinn na mèinnean a th’ againn a leasachadh cho luath ’s a bhios barrachd eòlais air na mèinnearan againn. Bu chòir dhuinn barrachd mhèinnean a thogail agus bun-structar bìdh nas motha ach am biodh gu leòr ri ithe ann an-còmhnaidh, cho math ri eaconamaidh giullachd nas motha. Ach chan e seo a h-uile rud a tha a dhìth – tha a’ mhòrchuid dhe na saighdearan againn caran òg is chan eil arm math aca ’s cha d’ fhuair iad trèanadh. Bu chòir dhuinn làraichean trèanaidh a thogail gus an ullachadh airson na h-obrach tha romhpa."
+msgstr "Tha na clach-eòlaichean againn air barrachd stòrais dhe chlach-iarainn, gual is òr a lorg. Bu chòir dhuinn na mèinnean a th’ againn a leasachadh cho luath ’s a bhios barrachd eòlais air na mèinnearan againn. Bu chòir dhuinn barrachd mhèinnean a thogail agus bun-structar bìdh nas motha ach am biodh gu leòr ri ithe ann an-còmhnaidh, cho math ri eaconamaidh giullachd nas motha. Ach chan e seo a h-uile rud a tha a dhìth – tha a’ mhòrchuid dhe na saighdearan againn caran òg is chan eil arm math aca ’s cha d’ fhuair iad trèanadh. Bu chòir dhuinn ionadan-trèanaidh a thogail gus an ullachadh airson na h-obrach tha romhpa."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:315

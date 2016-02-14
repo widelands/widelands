@@ -94,7 +94,7 @@ CategorizedItemSelectionMenu<DescriptionType, ToolType>::CategorizedItemSelectio
 
 		std::vector<int> item_indices;
 		for (size_t j = 0; j < descriptions_.size(); ++j) {
-			if (descriptions_.get(j).editor_category().name() != category.name()) {
+			if (descriptions_.get(j).editor_category()->name() != category.name()) {
 				continue;
 			}
 			item_indices.push_back(j);
