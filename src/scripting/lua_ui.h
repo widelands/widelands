@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2006-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -40,14 +40,14 @@ class LuaUiModuleClass : public LunaClass {
 
 class LuaPanel : public LuaUiModuleClass {
 protected:
-	UI::Panel * m_panel;
+	UI::Panel * panel_;
 
 public:
 	LUNA_CLASS_HEAD(LuaPanel);
 
-	LuaPanel() : m_panel(nullptr) {}
-	LuaPanel(UI::Panel * p) : m_panel(p) {}
-	LuaPanel(lua_State * L) : m_panel(nullptr) {
+	LuaPanel() : panel_(nullptr) {}
+	LuaPanel(UI::Panel * p) : panel_(p) {}
+	LuaPanel(lua_State * L) : panel_(nullptr) {
 		report_error(L, "Cannot instantiate a '%s' directly!", className);
 	}
 	virtual ~LuaPanel() {}
@@ -114,7 +114,7 @@ public:
 	/*
 	 * C Methods
 	 */
-	UI::Button * get() {return static_cast<UI::Button *>(m_panel);}
+	UI::Button * get() {return static_cast<UI::Button *>(panel_);}
 };
 
 class LuaTab : public LuaPanel {
@@ -140,7 +140,7 @@ public:
 	/*
 	 * C Methods
 	 */
-	UI::Tab * get() {return static_cast<UI::Tab *>(m_panel);}
+	UI::Tab * get() {return static_cast<UI::Tab *>(panel_);}
 };
 
 class LuaWindow : public LuaPanel {
@@ -165,7 +165,7 @@ public:
 	/*
 	 * C Methods
 	 */
-	UI::Window * get() {return static_cast<UI::Window *>(m_panel);}
+	UI::Window * get() {return static_cast<UI::Window *>(panel_);}
 };
 
 
@@ -207,7 +207,7 @@ public:
 	/*
 	 * C Methods
 	 */
-	InteractiveBase * get() {return static_cast<InteractiveBase *>(m_panel);}
+	InteractiveBase * get() {return static_cast<InteractiveBase *>(panel_);}
 };
 
 void luaopen_wlui(lua_State *);

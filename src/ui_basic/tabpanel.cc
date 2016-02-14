@@ -243,6 +243,7 @@ void TabPanel::activate(uint32_t idx)
 	active_ = idx;
 
 	update_desired_size();
+	sigclicked();
 }
 
 void TabPanel::activate(const std::string & name)

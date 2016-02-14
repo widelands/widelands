@@ -40,12 +40,12 @@ MultilineTextarea::MultilineTextarea
 	:
 	Panel       (parent, x, y, w, h),
 	text_      (text),
-	style_(UI::TextStyle::ui_small()),
+	color_(UI_FONT_CLR_FG),
 	isrichtext(false),
 	scrollbar_ (this, get_w() - scrollbar_w(), 0, scrollbar_w(), h, false),
 	scrollmode_(scroll_mode)
 {
-	assert(scrollbar_w() <= w);
+	assert(scrollmode_ == MultilineTextarea::ScrollMode::kNoScrolling || scrollbar_w() <= w);
 	set_thinks(false);
 
 	//  do not allow vertical alignment as it does not make sense
@@ -191,7 +191,7 @@ std::string MultilineTextarea::make_richtext() {
 	// TODO(GunChleoc): Revisit this once the old font renderer is completely gone.
 	boost::replace_all(temp, "\n\n", "<br>&nbsp;<br>");
 	boost::replace_all(temp, "\n", "<br>");
-	return as_aligned(temp, align_, style_.font->size(), style_.fg);
+	return as_aligned(temp, align_, UI_FONT_SIZE_SMALL, color_);
 }
 
 } // namespace UI

@@ -23,11 +23,10 @@
 
 #include "base/log.h"
 #include "base/wexception.h"
-#include "graphic/font.h"
 #include "graphic/graphic.h"
+#include "graphic/image.h"
 #include "graphic/rendertarget.h"
 #include "graphic/text_constants.h"
-#include "graphic/text_layout.h"
 #include "io/filesystem/filesystem.h"
 #include "wlapplication.h"
 
@@ -71,11 +70,11 @@ void FullscreenMenuBase::draw(RenderTarget & dst) {
 	                   BlendMode::UseAlpha);
 }
 
-uint32_t FullscreenMenuBase::fs_small() {
+int FullscreenMenuBase::fs_small() {
 	return UI_FONT_SIZE_SMALL * get_h() / 600;
 }
 
-uint32_t FullscreenMenuBase::fs_big() {
+int FullscreenMenuBase::fs_big() {
 	return UI_FONT_SIZE_BIG * get_h() / 600;
 }
 

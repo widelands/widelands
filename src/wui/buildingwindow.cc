@@ -304,9 +304,9 @@ void BuildingWindow::create_capsbuttons(UI::Box * capsbuttons)
 	if (can_see) {
 		WorkareaInfo wa_info;
 		if (upcast(Widelands::ConstructionSite, csite, &building_)) {
-			wa_info = csite->building().m_workarea_info;
+			wa_info = csite->building().workarea_info_;
 		} else {
-			wa_info = building_.descr().m_workarea_info;
+			wa_info = building_.descr().workarea_info_;
 		}
 		if (!wa_info.empty()) {
 			toggle_workarea_ = new UI::Button
@@ -471,9 +471,9 @@ void BuildingWindow::show_workarea()
 	}
 	WorkareaInfo workarea_info;
 	if (upcast(Widelands::ConstructionSite, csite, &building_)) {
-		workarea_info = csite->building().m_workarea_info;
+		workarea_info = csite->building().workarea_info_;
 	} else {
-		workarea_info = building_.descr().m_workarea_info;
+		workarea_info = building_.descr().workarea_info_;
 	}
 	if (workarea_info.empty()) {
 		return;

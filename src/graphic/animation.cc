@@ -299,12 +299,12 @@ DirAnimations::DirAnimations
 	 uint32_t dir5,
 	 uint32_t dir6)
 {
-	m_animations[0] = dir1;
-	m_animations[1] = dir2;
-	m_animations[2] = dir3;
-	m_animations[3] = dir4;
-	m_animations[4] = dir5;
-	m_animations[5] = dir6;
+	animations_[0] = dir1;
+	animations_[1] = dir2;
+	animations_[2] = dir3;
+	animations_[3] = dir4;
+	animations_[4] = dir5;
+	animations_[5] = dir6;
 }
 
 /*

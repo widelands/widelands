@@ -441,7 +441,7 @@ std::string ProductionProgram::ActReturn::SiteHas::description_negation
 bool ProductionProgram::ActReturn::WorkersNeedExperience::evaluate
 	(const ProductionSite & ps) const
 {
-	ProductionSite::WorkingPosition const * const wp = ps.m_working_positions;
+	ProductionSite::WorkingPosition const * const wp = ps.working_positions_;
 	for (uint32_t i = ps.descr().nr_working_positions(); i;)
 		if (wp[--i].worker->needs_experience())
 			return true;
@@ -489,9 +489,9 @@ ProductionProgram::ActReturn::ActReturn
 	(char* parameters, const ProductionSiteDescr& descr, const Tribes& tribes)
 {
 	try {
-		if      (match(parameters, "failed"))    m_result = Failed;
-		else if (match(parameters, "completed")) m_result = Completed;
-		else if (match(parameters, "skipped"))   m_result = Skipped;
+		if      (match(parameters, "failed"))    result_ = Failed;
+		else if (match(parameters, "completed")) result_ = Completed;
+		else if (match(parameters, "skipped"))   result_ = Skipped;
 		else
 			throw GameDataError
 				("expected %s but found \"%s\"",
@@ -499,9 +499,9 @@ ProductionProgram::ActReturn::ActReturn
 
 		if (skip(parameters)) {
 			if      (match_force_skip(parameters, "when")) {
-				m_is_when = true;
+				is_when_ = true;
 				for (;;) {
-					m_conditions.push_back(create_condition(parameters, descr, tribes));
+					conditions_.push_back(create_condition(parameters, descr, tribes));
 					if (*parameters) {
 						skip(parameters);
 						if (!match_force_skip(parameters, "and"))
@@ -511,12 +511,12 @@ ProductionProgram::ActReturn::ActReturn
 						break;
 				}
 			} else if (match_force_skip(parameters, "unless")) {
-				m_is_when = false;
+				is_when_ = false;
 				for (;;) {
 					if (!*parameters)
 						throw GameDataError
 							("expected condition at end of input");
-					m_conditions.push_back(create_condition(parameters, descr, tribes));
+					conditions_.push_back(create_condition(parameters, descr, tribes));
 					if (*parameters) {
 						skip(parameters);
 						if (!match_force_skip(parameters, "or"))
@@ -534,7 +534,7 @@ ProductionProgram::ActReturn::ActReturn
 				("expected %s but found \"%s\"",
 				 ("space or end of input"), parameters);
 		else
-			m_is_when = true;
+			is_when_ = true;
 
 	} catch (const WException & e) {
 		throw GameDataError("return: %s", e.what());
@@ -542,7 +542,7 @@ ProductionProgram::ActReturn::ActReturn
 }
 
 ProductionProgram::ActReturn::~ActReturn() {
-	for (Condition * condition : m_conditions) {
+	for (Condition * condition : conditions_) {
 		delete condition;
 	}
 }
@@ -550,17 +550,17 @@ ProductionProgram::ActReturn::~ActReturn() {
 void ProductionProgram::ActReturn::execute
 	(Game & game, ProductionSite & ps) const
 {
-	if (!m_conditions.empty()) {
+	if (!conditions_.empty()) {
 		std::vector<std::string> condition_list;
-		if (m_is_when) { //  'when a and b and ...' (all conditions must be true)
-			for (const Condition * condition : m_conditions) {
+		if (is_when_) { //  'when a and b and ...' (all conditions must be true)
+			for (const Condition * condition : conditions_) {
 				if (!condition->evaluate(ps)) { //  A condition is false,
 					return ps.program_step(game); //  continue program.
 				}
 				condition_list.push_back(condition->description(game.tribes()));
 			}
 		} else { //  "unless a or b or ..." (all conditions must be false)
-			for (const Condition * condition : m_conditions) {
+			for (const Condition * condition : conditions_) {
 				if (condition->evaluate(ps)) { //  A condition is true,
 					return ps.program_step(game); //  continue program.
 				}
@@ -570,14 +570,14 @@ void ProductionProgram::ActReturn::execute
 		std::string condition_string = i18n::localize_list(condition_list, i18n::ConcatenateWith::AND);
 
 		std::string result_string = "";
-		if (m_result == Failed) {
+		if (result_ == Failed) {
 			/** TRANSLATORS: "Did not start working because the economy needs the ware ‘%s’" */
 			result_string =  (boost::format(_("Did not start %1$s because %2$s"))
 									% ps.top_state().program->descname()
 									% condition_string)
 								  .str();
 		}
-		else if (m_result == Completed) {
+		else if (result_ == Completed) {
 			/** TRANSLATORS: "Completed working because the economy needs the ware ‘%s’" */
 			result_string =  (boost::format(_("Completed %1$s because %2$s"))
 									% ps.top_state().program->descname()
@@ -593,7 +593,7 @@ void ProductionProgram::ActReturn::execute
 		}
 		ps.set_production_result(result_string);
 	}
-	return ps.program_end(game, m_result);
+	return ps.program_end(game, result_);
 }
 
 
@@ -601,9 +601,9 @@ ProductionProgram::ActCall::ActCall
 	(char * parameters, const ProductionSiteDescr & descr)
 {
 	//  Initialize with default handling methods.
-	m_handling_methods[Failed    - 1] = Continue;
-	m_handling_methods[Completed - 1] = Continue;
-	m_handling_methods[Skipped   - 1] = Continue;
+	handling_methods_[Failed    - 1] = Continue;
+	handling_methods_[Completed - 1] = Continue;
+	handling_methods_[Skipped   - 1] = Continue;
 
 	try {
 		bool reached_end;
@@ -618,7 +618,7 @@ ProductionProgram::ActCall::ActCall
 					 "the program \"%s\" has not (yet) been declared in %s "
 					 "(wrong declaration order?)",
 					 program_name, descr.descname().c_str());
-			m_program = it->second.get();
+			program_ = it->second.get();
 		}
 
 		//  Override with specified handling methods.
@@ -629,17 +629,17 @@ ProductionProgram::ActCall::ActCall
 
 			ProgramResult result_to_set_method_for;
 			if        (match_force_skip(parameters, "failure"))    {
-				if (m_handling_methods[Failed    - 1] != Continue)
+				if (handling_methods_[Failed    - 1] != Continue)
 					throw GameDataError
 						("%s handling method already defined", "failure");
 				result_to_set_method_for = Failed;
 			} else if (match_force_skip(parameters, "completion")) {
-				if (m_handling_methods[Completed - 1] != Continue)
+				if (handling_methods_[Completed - 1] != Continue)
 					throw GameDataError
 						("%s handling method already defined", "completion");
 				result_to_set_method_for = Completed;
 			} else if (match_force_skip(parameters, "skip"))       {
-				if (m_handling_methods[Skipped   - 1] != Continue)
+				if (handling_methods_[Skipped   - 1] != Continue)
 					throw GameDataError
 						("%s handling method already defined", "skip");
 				result_to_set_method_for = Skipped;
@@ -662,7 +662,7 @@ ProductionProgram::ActCall::ActCall
 					("expected %s but found \"%s\"",
 					 "{\"fail\"|\"complete\"|\"skip\"|\"repeat\"}",
 					 parameters);
-			m_handling_methods[result_to_set_method_for - 1] = handling_method;
+			handling_methods_[result_to_set_method_for - 1] = handling_method;
 			reached_end = !*parameters;
 			log
 				("read handling method for result %u: %u, parameters = \"%s\", "
@@ -681,12 +681,11 @@ void ProductionProgram::ActCall::execute
 	ProgramResult const program_result =
 		static_cast<ProgramResult>(ps.top_state().phase);
 
-	if (program_result == None) //  The program has not yet been called.
-		//ps.molog("%s  Call %s\n", ps.descname().c_str(),
-		//         m_program->get_name().c_str());
-		return ps.program_start(game, m_program->name());
+	if (program_result == None) { //  The program has not yet been called.
+		return ps.program_start(game, program_->name());
+	}
 
-	switch (m_handling_methods[program_result - 1]) {
+	switch (handling_methods_[program_result - 1]) {
 	case Fail:
 	case Complete:
 	case Skip:
@@ -695,8 +694,8 @@ void ProductionProgram::ActCall::execute
 		return ps.program_step(game);
 	case Repeat:
 		ps.top_state().phase = None;
-		ps.m_program_timer   = true;
-		ps.m_program_time    = ps.schedule_act(game, 10);
+		ps.program_timer_   = true;
+		ps.program_time_    = ps.schedule_act(game, 10);
 		break;
 	}
 }
@@ -708,7 +707,7 @@ ProductionProgram::ActWorker::ActWorker(
 		const Tribes& tribes)
 {
 	try {
-		m_program = parameters;
+		program_ = parameters;
 
 		//  Quote form "void ProductionSite::program_act(Game &)":
 		//  "Always main worker is doing stuff"
@@ -718,11 +717,11 @@ ProductionProgram::ActWorker::ActWorker(
 		//  This will fail unless the main worker has a program with the given
 		//  name, so it also validates the parameter.
 		const WorkareaInfo & worker_workarea_info =
-			main_worker_descr.get_program(m_program)->get_workarea_info();
+			main_worker_descr.get_program(program_)->get_workarea_info();
 
 		for (const std::pair<uint32_t, std::set<std::string> >& area_info : worker_workarea_info) {
 			std::set<std::string> & building_radius_infos =
-				descr->m_workarea_info[area_info.first];
+				descr->workarea_info_[area_info.first];
 
 			for (const std::string& worker_descname : area_info.second) {
 				std::string description = descr->descname();
@@ -743,7 +742,7 @@ void ProductionProgram::ActWorker::execute
 	(Game& game, ProductionSite& ps) const
 {
 	// Always main worker is doing stuff
-	ps.m_working_positions[0].worker->update_task_buildingwork(game);
+	ps.working_positions_[0].worker->update_task_buildingwork(game);
 }
 
 bool ProductionProgram::ActWorker::get_building_work
@@ -771,13 +770,13 @@ ProductionProgram::ActSleep::ActSleep(char* parameters) {
 		if (*parameters) {
 			char * endp;
 			long long int const value = strtoll(parameters, &endp, 0);
-			m_duration = value;
-			if (*endp || value <= 0 || m_duration != value)
+			duration_ = value;
+			if (*endp || value <= 0 || duration_ != value)
 				throw GameDataError
 					("expected %s but found \"%s\"",
 					 "duration in ms", parameters);
 		} else
-			m_duration = 0; //  Get duration from the result of a previous action.
+			duration_ = 0; //  Get duration from the result of a previous action.
 	} catch (const WException & e) {
 		throw GameDataError("sleep: %s", e.what());
 	}
@@ -786,7 +785,7 @@ ProductionProgram::ActSleep::ActSleep(char* parameters) {
 void ProductionProgram::ActSleep::execute(Game & game, ProductionSite & ps) const
 {
 	return
-		ps.program_step(game, m_duration ? m_duration : ps.top_state().phase);
+		ps.program_step(game, duration_ ? duration_ : ps.top_state().phase);
 }
 
 
@@ -795,7 +794,7 @@ ProductionProgram::ActCheckMap::ActCheckMap(char * parameters)
 	try {
 		if (*parameters) {
 			if (!strcmp(parameters, "seafaring"))
-				m_feature = SEAFARING;
+				feature_ = SEAFARING;
 			else
 				throw GameDataError("Unknown parameter \"%s\"", parameters);
 		} else
@@ -807,7 +806,7 @@ ProductionProgram::ActCheckMap::ActCheckMap(char * parameters)
 
 void ProductionProgram::ActCheckMap::execute(Game& game, ProductionSite& ps) const
 {
-	switch (m_feature) {
+	switch (feature_) {
 		case SEAFARING: {
 			if (game.map().get_port_spaces().size() > 1)
 				return ps.program_step(game, 0);
@@ -830,20 +829,20 @@ ProductionProgram::ActAnimate::ActAnimate(
 			throw GameDataError
 				("idle animation is default; calling is not allowed");
 		if (descr->is_animation_known(animation_name))
-			m_id = descr->get_animation(animation_name);
+			id_ = descr->get_animation(animation_name);
 		else {
 			throw GameDataError("Unknown animation '%s'", animation_name);
 		}
 		if (!reached_end) { //  The next parameter is the duration.
 			char * endp;
 			long long int const value = strtoll(parameters, &endp, 0);
-			m_duration = value;
-			if (*endp || value <= 0 || m_duration != value)
+			duration_ = value;
+			if (*endp || value <= 0 || duration_ != value)
 				throw GameDataError
 					("expected %s but found \"%s\"",
 					 "duration in ms", parameters);
 		} else
-			m_duration = 0; //  Get duration from the result of a previous action.
+			duration_ = 0; //  Get duration from the result of a previous action.
 	} catch (const WException & e) {
 		throw GameDataError("animate: %s", e.what());
 	}
@@ -852,9 +851,9 @@ ProductionProgram::ActAnimate::ActAnimate(
 void ProductionProgram::ActAnimate::execute
 	(Game& game, ProductionSite & ps) const
 {
-	ps.start_animation(game, m_id);
+	ps.start_animation(game, id_);
 	return
-		ps.program_step(game, m_duration ? m_duration : ps.top_state().phase);
+		ps.program_step(game, duration_ ? duration_ : ps.top_state().phase);
 }
 
 
@@ -1040,9 +1039,9 @@ void ProductionProgram::ActProduce::execute
 	(Game & game, ProductionSite & ps) const
 {
 	//ps.molog("  Produce\n");
-	assert(ps.m_produced_wares.empty());
-	ps.m_produced_wares = produced_wares_;
-	ps.m_working_positions[0].worker->update_task_buildingwork(game);
+	assert(ps.produced_wares_.empty());
+	ps.produced_wares_ = produced_wares_;
+	ps.working_positions_[0].worker->update_task_buildingwork(game);
 
 	const TribeDescr & tribe = ps.owner().tribe();
 	assert(produced_wares_.size());
@@ -1137,9 +1136,9 @@ ProductionProgram::ActRecruit::ActRecruit
 void ProductionProgram::ActRecruit::execute
 	(Game & game, ProductionSite & ps) const
 {
-	assert(ps.m_recruited_workers.empty());
-	ps.m_recruited_workers = recruited_workers_;
-	ps.m_working_positions[0].worker->update_task_buildingwork(game);
+	assert(ps.recruited_workers_.empty());
+	ps.recruited_workers_ = recruited_workers_;
+	ps.working_positions_[0].worker->update_task_buildingwork(game);
 
 	const TribeDescr & tribe = ps.owner().tribe();
 	assert(recruited_workers_.size());
@@ -1181,13 +1180,13 @@ ProductionProgram::ActMine::ActMine(
 {
 	try {
 		bool reached_end;
-		m_resource = world.safe_resource_index(next_word(parameters, reached_end));
+		resource_ = world.safe_resource_index(next_word(parameters, reached_end));
 
 		{
 			char * endp;
 			unsigned long long int const value = strtoull(parameters, &endp, 0);
-			m_distance = value;
-			if (*endp != ' ' || m_distance != value)
+			distance_ = value;
+			if (*endp != ' ' || distance_ != value)
 				throw GameDataError
 					("expected %s but found \"%s\"", "distance", parameters);
 			parameters = endp;
@@ -1196,7 +1195,7 @@ ProductionProgram::ActMine::ActMine(
 		{
 			char * endp;
 			unsigned long long int const value = strtoull(parameters, &endp, 0);
-			m_max = value;
+			max_ = value;
 			if (*endp != ' ' || value < 1 || 100 < value)
 				throw GameDataError
 					("expected %s but found \"%s\"",
@@ -1207,7 +1206,7 @@ ProductionProgram::ActMine::ActMine(
 		{
 			char * endp;
 			unsigned long long int const value = strtoull(parameters, &endp, 0);
-			m_chance = value;
+			chance_ = value;
 			if (*endp != ' ' || value < 1 || 100 < value)
 				throw GameDataError
 					("expected %s but found \"%s\"",
@@ -1217,7 +1216,7 @@ ProductionProgram::ActMine::ActMine(
 		{
 			char * endp;
 			unsigned long long int const value = strtoull(parameters, &endp, 0);
-			m_training = value;
+			training_ = value;
 			if (*endp || value < 1 || 100 < value)
 				throw GameDataError
 					("expected %s but found \"%s\"",
@@ -1225,10 +1224,10 @@ ProductionProgram::ActMine::ActMine(
 		}
 		std::string description =
 			(boost::format("%1$s %2$s mine %3$s") % descr->descname() % production_program_name
-				% world.get_resource(m_resource)->descname())
+				% world.get_resource(resource_)->descname())
 				.str();
 
-		descr->m_workarea_info[m_distance].insert(description);
+		descr->workarea_info_[distance_].insert(description);
 	} catch (const WException & e) {
 		throw GameDataError("mine: %s", e.what());
 	}
@@ -1246,14 +1245,14 @@ void ProductionProgram::ActMine::execute
 
 	{
 		MapRegion<Area<FCoords> > mr
-			(map, Area<FCoords> (map.get_fcoords(ps.get_position()), m_distance));
+			(map, Area<FCoords> (map.get_fcoords(ps.get_position()), distance_));
 		do {
 			uint8_t  fres   = mr.location().field->get_resources();
 			uint32_t amount = mr.location().field->get_resources_amount();
 			uint32_t start_amount =
 				mr.location().field->get_initial_res_amount();
 
-			if (fres != m_resource) {
+			if (fres != resource_) {
 				amount       = 0;
 				start_amount = 0;
 			}
@@ -1282,7 +1281,7 @@ void ProductionProgram::ActMine::execute
 	if (!totalres)
 		digged_percentage = 100;
 
-	if (digged_percentage < m_max) {
+	if (digged_percentage < max_) {
 		//  mine can produce normally
 		if (totalres == 0)
 			return ps.program_end(game, Failed);
@@ -1294,12 +1293,12 @@ void ProductionProgram::ActMine::execute
 		{
 			MapRegion<Area<FCoords> > mr
 				(map,
-				 Area<FCoords>(map.get_fcoords(ps.get_position()), m_distance));
+				 Area<FCoords>(map.get_fcoords(ps.get_position()), distance_));
 			do {
 				uint8_t  fres   = mr.location().field->get_resources();
 				uint32_t amount = mr.location().field->get_resources_amount();
 
-				if (fres != m_resource)
+				if (fres != resource_)
 					amount = 0;
 
 				pick -= 8 * amount;
@@ -1321,8 +1320,8 @@ void ProductionProgram::ActMine::execute
 		//  Inform the player about an empty mine, unless
 		//  there is a sufficiently high chance, that the mine
 		//  will still produce enough.
-		//  e.g. mines have m_chance=5, wells have 65
-		if (m_chance <= 20) {
+		//  e.g. mines have chance=5, wells have 65
+		if (chance_ <= 20) {
 				ps.notify_player(game, 60);
 			// and change the default animation
 			ps.set_default_anim("empty");
@@ -1331,10 +1330,10 @@ void ProductionProgram::ActMine::execute
 		//  Mine has reached its limits, still try to produce something but
 		//  independent of sourrunding resources. Do not decrease resources
 		//  further.
-		if (m_chance <= game.logic_rand() % 100) {
+		if (chance_ <= game.logic_rand() % 100) {
 
 			// Gain experience
-			if (m_training >= game.logic_rand() % 100) {
+			if (training_ >= game.logic_rand() % 100) {
 			  ps.train_workers(game);
 			}
 			return ps.program_end(game, Failed);
@@ -1546,7 +1545,7 @@ ProductionProgram::ActPlayFX::ActPlayFX(char * parameters) {
 void ProductionProgram::ActPlayFX::execute
 	(Game & game, ProductionSite & ps) const
 {
-	g_sound_handler.play_fx(name, ps.m_position, priority);
+	g_sound_handler.play_fx(name, ps.position_, priority);
 	return ps.program_step(game);
 }
 
@@ -1562,7 +1561,7 @@ ProductionProgram::ActConstruct::ActConstruct(
 		workerprogram = params[1];
 		radius = boost::lexical_cast<uint32_t>(params[2]);
 
-		std::set<std::string> & building_radius_infos = descr->m_workarea_info[radius];
+		std::set<std::string> & building_radius_infos = descr->workarea_info_[radius];
 		std::string description = descr->name() + ' ' + production_program_name;
 		description += " construct ";
 		description += objectname;
@@ -1614,7 +1613,7 @@ void ProductionProgram::ActConstruct::execute(Game & game, ProductionSite & psit
 	{
 		state.objvar = immovables[0].object;
 
-		psite.m_working_positions[0].worker->update_task_buildingwork(game);
+		psite.working_positions_[0].worker->update_task_buildingwork(game);
 		return;
 	}
 
@@ -1654,7 +1653,7 @@ void ProductionProgram::ActConstruct::execute(Game & game, ProductionSite & psit
 
 		state.coord = best_coords;
 
-		psite.m_working_positions[0].worker->update_task_buildingwork(game);
+		psite.working_positions_[0].worker->update_task_buildingwork(game);
 		return;
 	}
 
