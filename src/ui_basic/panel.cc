@@ -148,41 +148,55 @@ int Panel::do_run()
 	// Panel-specific startup code. This might call end_modal()!
 	start();
 
-	const uint32_t minimum_frame_time =
+	// think() is called at most 15 times per second, that is roughly ever 66ms.
+	const uint32_t kGameLogicDelay = 1000 / 15;
+
+	// With the default of 33FPS, the game will be drawn every 33ms.
+	const uint32_t draw_delay =
 	   1000 / std::max(5, g_options.pull_section("global").get_int("maxfps", 30));
 
+	static InputCallback input_callback = {
+		Panel::ui_mousepress,
+		Panel::ui_mouserelease,
+		Panel::ui_mousemove,
+		Panel::ui_key,
+		Panel::ui_textinput,
+		Panel::ui_mousewheel
+	};
+
+	const uint32_t initial_ticks = SDL_GetTicks();
+	uint32_t next_think_time = initial_ticks + kGameLogicDelay;
+	uint32_t next_draw_time = initial_ticks + draw_delay;
 	while (_running) {
-		const uint32_t startTime = SDL_GetTicks();
+		const uint32_t start_time = SDL_GetTicks();
 
-		static InputCallback icb = {
-			Panel::ui_mousepress,
-			Panel::ui_mouserelease,
-			Panel::ui_mousemove,
-			Panel::ui_key,
-			Panel::ui_textinput,
-			Panel::ui_mousewheel
-		};
+		app->handle_input(&input_callback);
 
-		app->handle_input(&icb);
-		if (app->should_die())
-			end_modal<Returncodes>(Returncodes::kBack);
+		if (start_time >= next_think_time) {
+			if (app->should_die())
+				end_modal<Returncodes>(Returncodes::kBack);
 
-		do_think();
+			do_think();
 
-		RenderTarget& rt = *g_gr->get_render_target();
-		forefather->do_draw(rt);
-		rt.blit(app->get_mouse_position() - Point(3, 7),
-		        WLApplication::get()->is_mouse_pressed() ? s_default_cursor_click : s_default_cursor);
-		forefather->do_tooltip();
-		g_gr->refresh();
+			if (_flags & pf_child_die)
+				check_child_death();
+			next_think_time = start_time + kGameLogicDelay;
+		}
 
-		if (_flags & pf_child_die)
-			check_child_death();
+		if (start_time >= next_draw_time) {
+			RenderTarget& rt = *g_gr->get_render_target();
+			forefather->do_draw(rt);
+			rt.blit(app->get_mouse_position() - Point(3, 7), WLApplication::get()->is_mouse_pressed() ?
+			                                                    s_default_cursor_click :
+			                                                    s_default_cursor);
+			forefather->do_tooltip();
+			g_gr->refresh();
+			next_draw_time = start_time + draw_delay;
+		}
 
-		//  Wait until 1second/maxfps are over.
-		const uint32_t frame_time = SDL_GetTicks() - startTime;
-		if (frame_time < minimum_frame_time) {
-			SDL_Delay(minimum_frame_time - frame_time);
+		int32_t delay = std::min<int32_t>(next_draw_time, next_think_time) - SDL_GetTicks();
+		if (delay > 0) {
+			SDL_Delay(delay);
 		}
 	}
 	end();
