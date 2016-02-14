@@ -131,8 +131,10 @@ void MapDetails::update(const MapData& mapdata, bool localize_mapname) {
 		author_label_.set_text(ngettext("Author:", "Authors:", mapdata.authors.get_number()));
 		author_.set_text(mapdata.authors.get_names());
 		descr_label_.set_text(_("Description:"));
-		descr_.set_text(mapdata.description +
-										  (mapdata.hint.empty() ? "" : (std::string("\n\n") + mapdata.hint)));
+		descr_.set_text(
+					mapdata.description +
+					/** TRANSLATORS: Map hint header when selecting a map. */
+					(mapdata.hint.empty() ? "" : (std::string("\n\n") + _("HINT:") + "\n" + mapdata.hint)));
 
 		// Show / hide suggested teams
 		if (mapdata.suggested_teams.empty()) {
