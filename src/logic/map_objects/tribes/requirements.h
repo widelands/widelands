@@ -125,8 +125,8 @@ struct RequirementsStorage {
 private:
 	using StorageMap = std::map<uint32_t, RequirementsStorage *>;
 
-	uint32_t m_id;
-	Reader m_reader;
+	uint32_t id_;
+	Reader reader_;
 
 	static StorageMap & storageMap();
 };

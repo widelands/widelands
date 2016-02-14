@@ -41,6 +41,8 @@ using std::flush;
  */
 int main(int argc, char * argv[])
 {
+	log("This is Widelands Version %s (%s)\n", build_id().c_str(), build_type().c_str());
+
 	WLApplication * g_app = nullptr;
 	try {
 		g_app = WLApplication::get(argc, const_cast<char const * *>(argv));

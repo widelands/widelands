@@ -136,6 +136,17 @@ std::string as_waresinfo(const std::string & txt) {
 	return f.str();
 }
 
+const Image* autofit_ui_text(const std::string& text, int width, RGBColor color, int fontsize) {
+	const Image* result =
+	   UI::g_fh1->render(as_uifont(text, fontsize, color, UI::FontSet::Face::kSans));
+	if (width > 0) { // Autofit
+		for (; result->width() > width && fontsize >= kMinimumFontSize; --fontsize) {
+			result = UI::g_fh1->render(as_uifont(text, fontsize, color, UI::FontSet::Face::kCondensed));
+		}
+	}
+	return result;
+}
+
 
 namespace UI {
 

@@ -85,7 +85,6 @@ void Textarea::init()
 	set_thinks(false);
 	color_ = UI_FONT_CLR_FG;
 	fontsize_ = UI_FONT_SIZE_SMALL;
-	fontface_ = UI::FontSet::Face::kSans;
 	update();
 }
 
@@ -103,20 +102,13 @@ void Textarea::set_fontsize(int fontsize) {
 	}
 }
 
-void Textarea::set_fontface(UI::FontSet::Face face) {
-	if (fontface_ != face) {
-		fontface_ = face;
-		update();
-	}
-}
-
 void Textarea::update()
 {
 	if (layoutmode_ == AutoMove) {
 		collapse(); // collapse() implicitly updates the size and position
 	}
 
-	render_text();
+	rendered_text_ = autofit_ui_text(text_, fixed_width_, color_, fontsize_);
 
 	if (layoutmode_ == AutoMove) {
 		expand();
@@ -241,17 +233,6 @@ void Textarea::update_desired_size()
 		}
 	}
 	set_desired_size(w, h);
-}
-
-
-void Textarea::render_text() {
-	rendered_text_ = UI::g_fh1->render(as_uifont(text_, fontsize_, color_, fontface_));
-
-	if (fixed_width_ > 0) { // Autofit
-		for (int size = fontsize_; rendered_text_->width() > fixed_width_ && size > kMinimumFontSize; --size) {
-			rendered_text_ = UI::g_fh1->render(as_uifont(text_, size, color_, UI::FontSet::Face::kCondensed));
-		}
-	}
 }
 
 }

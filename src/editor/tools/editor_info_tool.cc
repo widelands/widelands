@@ -115,7 +115,7 @@ int32_t EditorInfoTool::handle_click_impl(const Widelands::World& world,
 	/** TRANSLATORS: You can also translate this as "Category: %s" or "Property: %s" */
 	buf += "• " + (boost::format(_("Is: %s"))
 						% i18n::localize_list(terrain_is_strings, i18n::ConcatenateWith::AMPERSAND)).str() + "\n";
-	buf += "• " + (boost::format(_("Editor Category: %s")) % ter.editor_category().descname()).str() + "\n";
+	buf += "• " + (boost::format(_("Editor Category: %s")) % ter.editor_category()->descname()).str() + "\n";
 
 	// *** Resources info
 	buf += std::string("\n") + _("Resources:") + "\n";
