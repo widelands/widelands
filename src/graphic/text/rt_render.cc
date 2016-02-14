@@ -42,6 +42,7 @@
 #include "graphic/text/font_io.h"
 #include "graphic/text/font_set.h"
 #include "graphic/text/rt_parse.h"
+#include "graphic/text/sdl_ttf_font.h"
 #include "graphic/text/textstream.h"
 #include "graphic/text_layout.h"
 #include "graphic/texture.h"
@@ -436,22 +437,24 @@ protected:
 	const string m_txt;
 	NodeStyle m_s;
 	FontCache& m_fontcache;
+	SdlTtfFont& font_;
 };
 
 TextNode::TextNode(FontCache& font, NodeStyle& ns, const string& txt)
-	: RenderNode(ns), m_txt(txt), m_s(ns), m_fontcache(font)
+	: RenderNode(ns), m_txt(txt), m_s(ns), m_fontcache(font),
+	font_(dynamic_cast<SdlTtfFont&>(m_fontcache.get_font(&m_s)))
 {
-	m_fontcache.get_font(&m_s).dimensions(m_txt, ns.font_style, &m_w, &m_h); // NOCOM
+	font_.dimensions(m_txt, ns.font_style, &m_w, &m_h); // NOCOM
 	log("\nNOCOM dimensions are %d, %d for '%s'\n", m_w, m_h, m_txt.c_str());
 }
 uint16_t TextNode::hotspot_y() {
 	//log("\nNOCOM hotspot is %d for '%s'\n", m_fontcache.get_font(&m_s).ascent(m_s.font_style), m_txt.c_str());
-	return m_fontcache.get_font(&m_s).ascent(m_s.font_style); // NOCOM
+	return font_.ascent(m_s.font_style); // NOCOM
 }
 
 // NOCOM split fonts per glyph here.
 Texture* TextNode::render(TextureCache* texture_cache) {
-	const Texture& img = m_fontcache.get_font(&m_s).render(m_txt, m_s.font_color, m_s.font_style, texture_cache);
+	const Texture& img = font_.render(m_txt, m_s.font_color, m_s.font_style, texture_cache);
 	log("NOCOM size %d %d for rendering %s\n", img.width(), img.height(), m_txt.c_str());
 	Texture* rv = new Texture(img.width(), img.height());
 	rv->blit(Rect(0, 0, img.width(), img.height()),
@@ -482,7 +485,7 @@ private:
 	bool m_expanding;
 };
 Texture* FillingTextNode::render(TextureCache* texture_cache) {
-	const Texture& t = m_fontcache.get_font(&m_s).render(m_txt, m_s.font_color, m_s.font_style, texture_cache);
+	const Texture& t = font_.render(m_txt, m_s.font_color, m_s.font_style, texture_cache);
 	Texture* rv = new Texture(m_w, m_h);
 	for (uint16_t curx = 0; curx < m_w; curx += t.width()) {
 		Rect srcrect(Point(0, 0), min<int>(t.width(), m_w - curx), m_h);

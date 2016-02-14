@@ -28,8 +28,7 @@
 #include "base/log.h" // NOCOM
 #include "graphic/sdl_utils.h"
 #include "graphic/text/rt_errors.h"
-#include "graphic/texture.h"
-#include "graphic/texture_cache.h"
+
 
 using namespace std;
 using namespace boost;
