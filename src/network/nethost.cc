@@ -709,9 +709,7 @@ void NetHost::run()
 	broadcast(s);
 
 	Widelands::Game game;
-#ifndef NDEBUG
-	game.set_write_syncstream(true);
-#endif
+	game.set_write_syncstream(g_options.pull_section("global").get_bool("write_syncstreams", true));
 
 	try {
 		std::unique_ptr<UI::ProgressWindow> loader_ui;
