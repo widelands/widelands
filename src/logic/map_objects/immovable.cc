@@ -199,7 +199,8 @@ ImmovableDescr::ImmovableDescr(const std::string& init_descname,
 	MapObjectDescr(
 	MapObjectType::IMMOVABLE, table.get_string("name"), init_descname, table),
 	size_(BaseImmovable::NONE),
-	owner_type_(input_type) {
+	owner_type_(input_type),
+	editor_category_(nullptr) {
 	if (!is_animation_known("idle")) {
 		throw GameDataError("Immovable %s has no idle animation", table.get_string("name").c_str());
 	}
@@ -213,8 +214,23 @@ ImmovableDescr::ImmovableDescr(const std::string& init_descname,
 	}
 
 	if (table.has_key("attributes")) {
-		add_attributes(table.get_table("attributes")->
-							array_entries<std::string>(), {MapObject::Attribute::RESI});
+		std::vector<std::string> attributes = table.get_table("attributes")->array_entries<std::string>();
+		add_attributes(attributes, {MapObject::Attribute::RESI});
+
+		// Old trees get an extra species name so we can use it in help lists.
+		bool is_tree = false;
+		for (const std::string& attribute : attributes) {
+			if (attribute == "tree") {
+				is_tree = true;
+				break;
+			}
+		}
+		if (is_tree) {
+			if (!table.has_key("species")) {
+				throw wexception("Immovable '%s' with type 'tree' must define a species", name().c_str());
+			}
+			species_ = table.get_string("species");
+		}
 	}
 
 	std::unique_ptr<LuaTable> programs = table.get_table("programs");
@@ -257,8 +273,8 @@ ImmovableDescr::ImmovableDescr(const std::string& init_descname,
 	}
 }
 
-const EditorCategory& ImmovableDescr::editor_category() const {
-	return *editor_category_;
+const EditorCategory* ImmovableDescr::editor_category() const {
+	return editor_category_;
 }
 
 bool ImmovableDescr::has_terrain_affinity() const {
