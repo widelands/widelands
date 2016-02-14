@@ -13,12 +13,136 @@ function test_descr:test_instantiation_forbidden()
    end)
 end
 
+
+--  =======================================================
+--  ***************** ImmovableDescription *****************
+--  =======================================================
+
+function test_descr:test_immovable_descr()
+   assert_error("Unknown immovable", function() egbase:get_immovable_description("XXX") end)
+   assert_error("Wrong number of parameters: 2", function()
+      egbase:get_immovable_description("XXX", "YYY")
+   end)
+   assert_error("Wrong number of parameters: 3", function()
+      egbase:get_immovable_description("XXX","YYY","ZZZ")
+   end)
+end
+
+function test_descr:test_immovable_species()
+   assert_equal("", egbase:get_immovable_description("bush1").species)
+   assert_equal("", egbase:get_immovable_description("cornfield_ripe").species)
+   assert_equal("", egbase:get_immovable_description("alder_summer_sapling").species)
+   assert_equal("Alder", egbase:get_immovable_description("alder_summer_old").species)
+end
+
+function test_descr:test_immovable_build_cost()
+   local build_cost = egbase:get_immovable_description(
+      "atlanteans_shipconstruction").build_cost
+   assert_equal(10, build_cost["planks"])
+   assert_equal(2, build_cost["log"])
+   assert_equal(4, build_cost["spidercloth"])
+   assert_equal(nil, build_cost["wine"])
+
+   local total_cost = function(t)
+      local cost = 0
+      for name, count in pairs(t) do
+         cost = cost + count
+      end
+      return cost
+   end
+   assert_equal(16, total_cost(build_cost))
+end
+
+function test_descr:test_immovable_editor_category()
+   assert_equal("plants", egbase:get_immovable_description("bush1").editor_category.name)
+   assert_equal("Plants", egbase:get_immovable_description("bush1").editor_category.descname)
+   assert_equal(nil, egbase:get_immovable_description("cornfield_ripe").editor_category)
+   assert_equal("trees_deciduous", egbase:get_immovable_description(
+      "alder_summer_sapling").editor_category.name)
+   assert_equal("Deciduous Trees", egbase:get_immovable_description(
+      "alder_summer_sapling").editor_category.descname)
+   assert_equal("trees_deciduous", egbase:get_immovable_description(
+      "alder_summer_old").editor_category.name)
+end
+
+function test_descr:test_immovable_terrain_affinity()
+   assert_equal(nil, egbase:get_immovable_description("bush1").terrain_affinity)
+   assert_equal(nil, egbase:get_immovable_description("cornfield_ripe").terrain_affinity)
+
+   local aff_alder_sapling = egbase:get_immovable_description("alder_summer_sapling").terrain_affinity
+   local aff_alder_old = egbase:get_immovable_description("alder_summer_old").terrain_affinity
+   local aff_mushroom_red_pole = egbase:get_immovable_description("mushroom_red_wasteland_pole").terrain_affinity
+   local aff_umbrella_green_mature = egbase:get_immovable_description("umbrella_green_wasteland_mature").terrain_affinity
+
+   -- Pickiness
+   assert_near(0.6, aff_alder_sapling["pickiness"], 0.01)
+   assert_equal(aff_alder_sapling["pickiness"], aff_alder_old["pickiness"])
+   assert_near(0.6, aff_mushroom_red_pole["pickiness"], 0.01)
+   assert_near(0.8, aff_umbrella_green_mature["pickiness"], 0.01)
+
+   -- preferred_fertility
+   assert_near(0.6, aff_alder_sapling["preferred_fertility"], 0.01)
+   assert_equal(aff_alder_sapling["preferred_fertility"], aff_alder_old["preferred_fertility"])
+   assert_near(0.85, aff_mushroom_red_pole["preferred_fertility"], 0.01)
+   assert_near(0.85, aff_umbrella_green_mature["preferred_fertility"], 0.01)
+
+   -- preferred_humidity
+   assert_near(0.65, aff_alder_sapling["preferred_humidity"], 0.01)
+   assert_equal(aff_alder_sapling["preferred_humidity"], aff_alder_old["preferred_humidity"])
+   assert_near(0.35, aff_mushroom_red_pole["preferred_humidity"], 0.01)
+   assert_near(0.2, aff_umbrella_green_mature["preferred_humidity"], 0.01)
+
+   -- preferred_temperature
+   assert_equal(125, aff_alder_sapling["preferred_temperature"])
+   assert_equal(aff_alder_sapling["preferred_temperature"], aff_alder_old["preferred_temperature"])
+   assert_equal(80, aff_mushroom_red_pole["preferred_temperature"])
+   assert_equal(110, aff_umbrella_green_mature["preferred_temperature"])
+end
+
+function test_descr:test_immovable_owner_type()
+   assert_equal("world", egbase:get_immovable_description("bush1").owner_type)
+   assert_equal("tribe", egbase:get_immovable_description("cornfield_ripe").owner_type)
+   assert_equal("world", egbase:get_immovable_description("alder_summer_sapling").owner_type)
+   assert_equal("world", egbase:get_immovable_description("alder_summer_old").owner_type)
+end
+
+function test_descr:test_immovable_size()
+   assert_equal(0, egbase:get_immovable_description("bush1").size)
+   assert_equal(1, egbase:get_immovable_description("cornfield_ripe").size)
+   assert_equal(1, egbase:get_immovable_description("alder_summer_sapling").size)
+   assert_equal(1, egbase:get_immovable_description("alder_summer_old").size)
+end
+
+function test_descr:test_immovable_has_attribute()
+   assert_equal(false, egbase:get_immovable_description("bush1"):has_attribute("tree"))
+   assert_equal(false, egbase:get_immovable_description("alder_summer_sapling"):has_attribute("tree"))
+   assert_equal(true, egbase:get_immovable_description("alder_summer_old"):has_attribute("tree"))
+end
+
+function test_descr:test_immovable_probability_to_grow()
+	local terrain = egbase:get_terrain_description("wiese1")
+   assert_equal(nil, egbase:get_immovable_description("bush1"):probability_to_grow(terrain))
+
+   local alder = egbase:get_immovable_description("alder_summer_sapling")
+   assert_near(0.51, alder:probability_to_grow(terrain), 0.01)
+
+   terrain = egbase:get_terrain_description("wasteland_beach")
+   assert_near(0.0022, alder:probability_to_grow(terrain), 0.0001)
+
+   terrain = egbase:get_terrain_description("desert_forested_mountain2")
+   assert_near(0.66, alder:probability_to_grow(terrain), 0.01)
+
+   terrain = egbase:get_terrain_description("winter_water")
+   assert_near(0.000037, alder:probability_to_grow(terrain), 0.000001)
+end
+
+
 --  =======================================================
 --  ***************** BuildingDescription *****************
 --  =======================================================
 
 function test_descr:test_building_descr()
-   assert_error("Wrong building", function() egbase:get_building_description("XXX") end)
+   assert_error("Unknown building", function() egbase:get_building_description("XXX") end)
    assert_error("Wrong number of parameters: 2", function() egbase:get_building_description("XXX", "YYY") end)
    assert_error("Wrong number of parameters: 3", function() egbase:get_building_description("XXX","YYY","ZZZ") end)
 end
@@ -26,10 +150,10 @@ end
 
 -- This is actually a property of MapOjectDescription
 function test_descr:test_descname()
-   assert_equal(_"Lumberjack’s Hut", egbase:get_building_description("barbarians_lumberjacks_hut").descname)
-   assert_equal(_"Battle Arena", egbase:get_building_description("barbarians_battlearena").descname)
-   assert_equal(_"Fortress", egbase:get_building_description("barbarians_fortress").descname)
-   assert_equal(_"Coal Mine", egbase:get_building_description("barbarians_coalmine").descname)
+   assert_equal("Lumberjack’s Hut", egbase:get_building_description("barbarians_lumberjacks_hut").descname)
+   assert_equal("Battle Arena", egbase:get_building_description("barbarians_battlearena").descname)
+   assert_equal("Fortress", egbase:get_building_description("barbarians_fortress").descname)
+   assert_equal("Coal Mine", egbase:get_building_description("barbarians_coalmine").descname)
 end
 
 -- This is actually a property of MapOjectDescription
@@ -157,7 +281,7 @@ end
 
 -- This is actually a property of MapOjectDescription
 function test_descr:test_descname()
-   assert_equal(_"Coal Mine", egbase:get_building_description("barbarians_coalmine").descname)
+   assert_equal("Coal Mine", egbase:get_building_description("barbarians_coalmine").descname)
 end
 
 -- This is actually a property of MapOjectDescription
@@ -208,7 +332,7 @@ end
 
 -- This is actually a property of MapOjectDescription
 function test_descr:test_descname()
-   assert_equal(_"Sentry", egbase:get_building_description("barbarians_sentry").descname)
+   assert_equal("Sentry", egbase:get_building_description("barbarians_sentry").descname)
 end
 
 -- This is actually a property of MapOjectDescription
@@ -237,7 +361,7 @@ end
 
 -- This is actually a property of MapOjectDescription
 function test_descr:test_descname()
-   assert_equal(_"Battle Arena", egbase:get_building_description("barbarians_battlearena").descname)
+   assert_equal("Battle Arena", egbase:get_building_description("barbarians_battlearena").descname)
 end
 
 -- This is actually a property of MapOjectDescription
@@ -298,7 +422,7 @@ end
 
 -- This is actually a property of MapOjectDescription
 function test_descr:test_descname()
-   assert_equal(_"Warehouse", egbase:get_building_description("barbarians_warehouse").descname)
+   assert_equal("Warehouse", egbase:get_building_description("barbarians_warehouse").descname)
 end
 
 -- This is actually a property of MapOjectDescription
@@ -321,13 +445,13 @@ end
 --  =======================================================
 
 function test_descr:test_ware_descr()
-   assert_error("Wrong ware", function() egbase:get_ware_description("XXX") end)
+   assert_error("Unknown ware", function() egbase:get_ware_description("XXX") end)
    assert_error("Wrong number of parameters: 2", function() egbase:get_ware_description("XXX","YYY") end)
 end
 
 -- This is actually a property of MapOjectDescription
 function test_descr:test_descname()
-   assert_equal(_"Thatch Reed", egbase:get_ware_description("thatch_reed").descname)
+   assert_equal("Thatch Reed", egbase:get_ware_description("thatch_reed").descname)
 end
 
 -- This is actually a property of MapOjectDescription
@@ -395,13 +519,13 @@ end
 --  =======================================================
 
 function test_descr:test_worker_descr()
-   assert_error("Wrong worker", function() egbase:get_worker_description("XXX") end)
+   assert_error("Unknown worker", function() egbase:get_worker_description("XXX") end)
    assert_error("Wrong number of parameters: 2", function() egbase:get_worker_description("XXX","YYY") end)
 end
 
 -- This is actually a property of MapOjectDescription
 function test_descr:test_descname()
-   assert_equal(_"Miner", egbase:get_worker_description("barbarians_miner").descname)
+   assert_equal("Miner", egbase:get_worker_description("barbarians_miner").descname)
 end
 
 -- This is actually a property of MapOjectDescription

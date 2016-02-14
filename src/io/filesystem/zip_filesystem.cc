@@ -546,6 +546,6 @@ void ZipFilesystem::ZipStreamWrite::data(const void* const write_data, const siz
 		case ZIP_OK:
 			break;
 		default:
-			throw wexception("Failed to write into zipfile %S", zip_file_->path().c_str());
+			throw wexception("Failed to write into zipfile %s", zip_file_->path().c_str());
 	}
 }
