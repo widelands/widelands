@@ -79,6 +79,7 @@ world:new_immovable_type{
 world:new_immovable_type{
    name = "maple_winter_old",
    descname = _ "Maple (Old)",
+   species = _ "Maple",
    editor_category = "trees_deciduous",
    size = "small",
    attributes = { "tree" },

@@ -37,6 +37,30 @@ constexpr double pow2(const double& a) {
 	return a * a;
 }
 
+// Helper function for probability_to_grow
+// Calculates the probability to grow for the given affinity and terrain values
+double calculate_probability_to_grow(const TerrainAffinity& affinity,
+												 double terrain_humidity,
+												 double terrain_fertility,
+												 double terrain_temperature) {
+
+	constexpr double kHumidityWeight = 0.500086642549548;
+	constexpr double kFertilityWeight = 0.5292268046607387;
+	constexpr double kTemperatureWeight = 61.31300863608306;
+
+	const double sigma_humidity = (1. - affinity.pickiness());
+	const double sigma_temperature = (1. - affinity.pickiness());
+	const double sigma_fertility = (1. - affinity.pickiness());
+
+	return exp((-pow2((affinity.preferred_fertility() - terrain_fertility) /
+							(kFertilityWeight * sigma_fertility)) -
+					pow2((affinity.preferred_humidity() - terrain_humidity) /
+						  (kHumidityWeight * sigma_humidity)) -
+					pow2((affinity.preferred_temperature() - terrain_temperature) /
+						  (kTemperatureWeight * sigma_temperature))) /
+				  2);
+}
+
 }  // namespace
 
 TerrainAffinity::TerrainAffinity(const LuaTable& table, const std::string& immovable_name)
@@ -111,21 +135,20 @@ double probability_to_grow(const TerrainAffinity& affinity,
 		average(ln.field->terrain_r());
 	}
 
-	constexpr double kHumidityWeight = 0.500086642549548;
-	constexpr double kFertilityWeight = 0.5292268046607387;
-	constexpr double kTemperatureWeight = 61.31300863608306;
+	return calculate_probability_to_grow(affinity,
+													 terrain_humidity,
+													 terrain_fertility,
+													 terrain_temperature);
+}
 
-	const double sigma_humidity = (1. - affinity.pickiness());
-	const double sigma_temperature = (1. - affinity.pickiness());
-	const double sigma_fertility = (1. - affinity.pickiness());
 
-	return exp((-pow2((affinity.preferred_fertility() - terrain_fertility) /
-	                  (kFertilityWeight * sigma_fertility)) -
-	            pow2((affinity.preferred_humidity() - terrain_humidity) /
-	                 (kHumidityWeight * sigma_humidity)) -
-	            pow2((affinity.preferred_temperature() - terrain_temperature) /
-	                 (kTemperatureWeight * sigma_temperature))) /
-	           2);
+double probability_to_grow(const TerrainAffinity& affinity,
+									const TerrainDescription& terrain) {
+
+	return calculate_probability_to_grow(affinity,
+													 terrain.humidity(),
+													 terrain.fertility(),
+													 terrain.temperature());
 }
 
 }  // namespace Widelands

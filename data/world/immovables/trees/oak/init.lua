@@ -79,6 +79,7 @@ world:new_immovable_type{
 world:new_immovable_type{
    name = "oak_summer_old",
    descname = _ "Oak (Old)",
+   species = _ "Oak",
    editor_category = "trees_deciduous",
    size = "small",
    attributes = { "tree" },
