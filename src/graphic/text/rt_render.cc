@@ -219,16 +219,16 @@ public:
 	void set_halign(UI::Align ghalign) {m_halign = ghalign;}
 	UI::Align valign() {return m_valign;}
 	void set_valign(UI::Align gvalign) {m_valign = gvalign;}
-	void set_x(uint16_t nx) {m_x = nx;}
-	void set_y(uint16_t ny) {m_y = ny;}
-	uint16_t x() {return m_x;}
-	uint16_t y() {return m_y;}
+	void set_x(int32_t nx) {m_x = nx;}
+	void set_y(int32_t ny) {m_y = ny;}
+	int32_t x() {return m_x;}
+	int32_t y() {return m_y;}
 
 private:
 	Floating m_floating;
 	UI::Align m_halign;
 	UI::Align m_valign;
-	uint16_t m_x, m_y;
+	int32_t m_x, m_y;
 };
 
 class Layout {
@@ -366,11 +366,16 @@ uint16_t Layout::fit_nodes(vector<RenderNode*>& rv, uint16_t w, Borders p, bool 
 		// Go over again and adjust position for VALIGN
 		for (RenderNode* n : nodes_in_line) {
 			uint16_t space = line_height - n->height();
-			if (!space || n->valign() == UI::Align::kBottom)
+			if (!space || n->valign() == UI::Align::kBottom) {
 				continue;
-			if (n->valign() == UI::Align::kCenter)
+			}
+			if (n->valign() == UI::Align::kCenter) {
 				space /= 2;
-			n->set_y(n->y() - space);
+			}
+			// Space can become negative, for example when we have mixed fontsets on the same line
+			// (e.g. "default" and "arabic"), due to differing font heights and hotspots.
+			// So, we fix the sign.
+			n->set_y(std::abs(n->y() - space));
 		}
 		rv.insert(rv.end(), nodes_in_line.begin(), nodes_in_line.end());
 
@@ -444,18 +449,14 @@ TextNode::TextNode(FontCache& font, NodeStyle& ns, const string& txt)
 	: RenderNode(ns), m_txt(txt), m_s(ns), m_fontcache(font),
 	font_(dynamic_cast<SdlTtfFont&>(m_fontcache.get_font(&m_s)))
 {
-	font_.dimensions(m_txt, ns.font_style, &m_w, &m_h); // NOCOM
-	log("\nNOCOM dimensions are %d, %d for '%s'\n", m_w, m_h, m_txt.c_str());
+	font_.dimensions(m_txt, ns.font_style, &m_w, &m_h);
 }
 uint16_t TextNode::hotspot_y() {
-	//log("\nNOCOM hotspot is %d for '%s'\n", m_fontcache.get_font(&m_s).ascent(m_s.font_style), m_txt.c_str());
-	return font_.ascent(m_s.font_style); // NOCOM
+	return font_.ascent(m_s.font_style);
 }
 
-// NOCOM split fonts per glyph here.
 Texture* TextNode::render(TextureCache* texture_cache) {
 	const Texture& img = font_.render(m_txt, m_s.font_color, m_s.font_style, texture_cache);
-	log("NOCOM size %d %d for rendering %s\n", img.width(), img.height(), m_txt.c_str());
 	Texture* rv = new Texture(img.width(), img.height());
 	rv->blit(Rect(0, 0, img.width(), img.height()),
 	         img,
@@ -595,7 +596,7 @@ public:
 	uint16_t width() override {return m_w + m_margin.left + m_margin.right;}
 	uint16_t height() override {return m_h + m_margin.top + m_margin.bottom;}
 	uint16_t hotspot_y() override {return height();}
-	// NOCOM main rendering
+
 	Texture* render(TextureCache* texture_cache) override {
 		Texture* rv = new Texture(width(), height());
 		rv->fill_rect(Rect(0, 0, rv->width(), rv->height()), RGBAColor(255, 255, 255, 0));
@@ -627,8 +628,6 @@ public:
 		for (RenderNode* n : m_nodes_to_render) {
 			Texture* node_texture = n->render(texture_cache);
 			if (node_texture) {
-				log("NOCOM blitting (%d, %d) - (%d, %d)\n", n->x() + m_margin.left, n->y() + m_margin.top,
-					 node_texture->width(), node_texture->height());
 				Rect dst = Rect(n->x() + m_margin.left,
 				                n->y() + m_margin.top,
 				                node_texture->width(),
