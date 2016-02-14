@@ -148,9 +148,10 @@ int Panel::do_run()
 	// Panel-specific startup code. This might call end_modal()!
 	start();
 
-	// think() is called at most 15 times per second.
+	// think() is called at most 15 times per second, that is roughly ever 66ms.
 	const uint32_t kGameLogicDelay = 1000 / 15;
 
+	// With the default of 33FPS, the game will be drawn every 33ms.
 	const uint32_t draw_delay =
 	   1000 / std::max(5, g_options.pull_section("global").get_int("maxfps", 30));
 
@@ -163,8 +164,9 @@ int Panel::do_run()
 		Panel::ui_mousewheel
 	};
 
-	uint32_t next_think_time = SDL_GetTicks() + kGameLogicDelay;
-	uint32_t next_draw_time = SDL_GetTicks() + draw_delay;
+	const uint32_t initial_ticks = SDL_GetTicks();
+	uint32_t next_think_time = initial_ticks + kGameLogicDelay;
+	uint32_t next_draw_time = initial_ticks + draw_delay;
 	while (_running) {
 		const uint32_t start_time = SDL_GetTicks();
 
