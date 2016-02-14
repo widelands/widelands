@@ -28,16 +28,12 @@
 #include "graphic/sdl_utils.h"
 #include "graphic/text/rt_errors.h"
 
-
-using namespace std;
-using namespace boost;
-
 static const int SHADOW_OFFSET = 1;
 static const SDL_Color SHADOW_CLR = {0, 0, 0, SDL_ALPHA_OPAQUE};
 
 namespace RT {
 
-SdlTtfFont::SdlTtfFont(TTF_Font * font, const string& face, int ptsize, string* ttf_memory_block) :
+SdlTtfFont::SdlTtfFont(TTF_Font * font, const std::string& face, int ptsize, std::string* ttf_memory_block) :
 	font_(font), style_(TTF_STYLE_NORMAL), font_name_(face), ptsize_(ptsize),
 	ttf_file_memory_block_(ttf_memory_block) {
 }
@@ -47,7 +43,7 @@ SdlTtfFont::~SdlTtfFont() {
 	font_ = nullptr;
 }
 
-void SdlTtfFont::dimensions(const string& txt, int style, uint16_t * gw, uint16_t * gh) {
+void SdlTtfFont::dimensions(const std::string& txt, int style, uint16_t * gw, uint16_t * gh) {
 	m_set_style(style);
 
 	int w, h;
@@ -60,8 +56,8 @@ void SdlTtfFont::dimensions(const string& txt, int style, uint16_t * gw, uint16_
 }
 
 const Texture& SdlTtfFont::render
-	(const string& txt, const RGBColor& clr, int style, TextureCache* texture_cache) {
-	const string hash =
+	(const std::string& txt, const RGBColor& clr, int style, TextureCache* texture_cache) {
+	const std::string hash =
 		(boost::format("%s:%s:%i:%02x%02x%02x:%i") % font_name_ % ptsize_ % txt %
 		 static_cast<int>(clr.r) % static_cast<int>(clr.g) % static_cast<int>(clr.b) % style)
 			.str();
@@ -119,7 +115,7 @@ const Texture& SdlTtfFont::render
 		text_surface = TTF_RenderUTF8_Blended(font_, txt.c_str(), sdlclr);
 
 	if (!text_surface)
-		throw RenderError((format("Rendering '%s' gave the error: %s") % txt % TTF_GetError()).str());
+		throw RenderError((boost::format("Rendering '%s' gave the error: %s") % txt % TTF_GetError()).str());
 
 	return *texture_cache->insert(hash, std::unique_ptr<Texture>(new Texture(text_surface)));
 }

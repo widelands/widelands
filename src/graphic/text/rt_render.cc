@@ -129,8 +129,8 @@ IFont& FontCache::get_font(NodeStyle* ns) {
 		} else {
 			ns->font_face = ns->fontset->sans_bold_italic();
 		}
-		// NOCOM ns->font_style &= ~IFont::ITALIC;
-		// ns->font_style &= ~IFont::BOLD;
+		ns->font_style &= ~IFont::ITALIC;
+		ns->font_style &= ~IFont::BOLD;
 	} else if (is_bold) {
 		if (ns->font_face == ns->fontset->condensed()) {
 			ns->font_face = ns->fontset->condensed_bold();
@@ -139,7 +139,7 @@ IFont& FontCache::get_font(NodeStyle* ns) {
 		} else {
 			ns->font_face = ns->fontset->sans_bold();
 		}
-		// ns->font_style &= ~IFont::BOLD;
+		ns->font_style &= ~IFont::BOLD;
 	} else if (is_italic) {
 		if (ns->font_face == ns->fontset->condensed()) {
 			ns->font_face = ns->fontset->condensed_italic();
@@ -148,7 +148,7 @@ IFont& FontCache::get_font(NodeStyle* ns) {
 		} else {
 			ns->font_face = ns->fontset->sans_italic();
 		}
-		// ns->font_style &= ~IFont::ITALIC;
+		ns->font_style &= ~IFont::ITALIC;
 	}
 
 	uint16_t font_size = ns->font_size + ns->fontset->size_offset();
