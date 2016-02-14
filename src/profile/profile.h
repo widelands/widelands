@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2013 by the Widelands Development Team
+ * Copyright (C) 2002-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -68,7 +68,7 @@ public:
 		Value & operator= (Value);
 		Value & operator= (Value && other);
 
-		char const * get_name() const {return m_name.c_str();}
+		char const * get_name() const {return name_.c_str();}
 
 		bool is_used() const;
 		void mark_used();
@@ -77,8 +77,8 @@ public:
 		uint32_t get_natural () const;
 		uint32_t get_positive() const;
 		bool get_bool() const;
-		char const * get_string() const {return m_value.get();}
-		char       * get_string()       {return m_value.get();}
+		char const * get_string() const {return value_.get();}
+		char       * get_string()       {return value_.get();}
 		Point  get_point () const;
 
 		void set_string(char const *);
@@ -86,9 +86,9 @@ public:
 		friend void swap(Value& first, Value& second);
 
 	private:
-		bool m_used;
-		string m_name;
-		std::unique_ptr<char []> m_value;
+		bool                     used_;
+		string                   name_;
+		std::unique_ptr<char []> value_;
 
 		Value() = default;
 	};
@@ -103,7 +103,7 @@ public:
 
 	Value * get_val     (char const * name);
 	Value * get_next_val(char const * name = nullptr);
-	uint32_t get_num_values() const {return m_values.size();}
+	uint32_t get_nuvalue_s() const {return values_.size();}
 
 	char const * get_name() const;
 	void set_name(const std::string&);
@@ -176,10 +176,10 @@ public:
 	Value & create_val_duplicate(char const * name, char const * value);
 
 private:
-	Profile  * m_profile;
-	bool       m_used;
-	std::string m_section_name;
-	ValueList m_values;
+	Profile   * profile_;
+	bool        used_;
+	std::string section_name_;
+	ValueList   values_;
 };
 
 /**
@@ -241,10 +241,11 @@ public:
 	Section & create_section_duplicate(char const * name);
 
 private:
-	std::string m_filename;
 	using SectionList = std::vector<Section>;
-	SectionList m_sections;
-	int32_t m_error_level;
+
+	std::string filename_;
+	SectionList sections_;
+	int32_t     error_level_;
 
 	DISALLOW_COPY_AND_ASSIGN(Profile);
 };
