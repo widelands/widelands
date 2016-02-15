@@ -10,9 +10,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-08-12 07:27+0100\n"
-"PO-Revision-Date: 2015-08-12 13:32+0000\n"
-"Last-Translator: MiroslavR <miroslavr256@gmail.com>\n"
+"POT-Creation-Date: 2016-02-09 16:39+0000\n"
+"PO-Revision-Date: 2016-02-09 16:39+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Slovak (http://www.transifex.com/widelands/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -145,14 +145,10 @@ msgid ""
 "                      Only valid with --scenario, --loadgame, or --editor."
 msgstr " --script=NÁZOV_SÚBORU\n                      Po inicializácii spustiť zadaný skript v jazyku Lua.\n                      Platné len s --scenario, --loadgame alebo --editor."
 
-#: ../../src/wlapplication_messages.cc:88
-msgid " --dedicated=FILENAME Starts a dedicated server with FILENAME as map"
-msgstr " --dedicated=NÁZOV_SÚBORU Spustí dedikovaný server s mapou NÁZOV_SÚBORU"
-
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
 #. widelands textdomain
-#: ../../src/wlapplication_messages.cc:91
+#: ../../src/wlapplication_messages.cc:90
 msgid ""
 " --auto_roadbuild_mode=[true|false]\n"
 "                      Whether to enter roadbuilding mode\n"
@@ -160,33 +156,33 @@ msgid ""
 "                      not connected to a road."
 msgstr " --auto_roadbuild_mode=[true|false]\n                      Určuje, či sa má po umiestnení vlajky, ktorá\n                      nie je pripojená k ceste, automaticky zapnúť\n                      režim stavania ciest."
 
-#: ../../src/wlapplication_messages.cc:95
+#: ../../src/wlapplication_messages.cc:94
 msgid "Graphic options:"
 msgstr "Možnosti grafiky:"
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
 #. widelands textdomain
-#: ../../src/wlapplication_messages.cc:98
+#: ../../src/wlapplication_messages.cc:97
 msgid ""
 " --fullscreen=[true|false]\n"
 "                      Whether to use the whole display for the\n"
 "                      game screen."
 msgstr " --fullscreen=[true|false]\n                      Určuje, či sa na zobrazenie hry použije\n                      celá obrazovka."
 
-#: ../../src/wlapplication_messages.cc:101
+#: ../../src/wlapplication_messages.cc:100
 msgid " --xres=[...]         Width of the window in pixel."
 msgstr " --xres=[...]         Šírka okna v pixeloch."
 
-#: ../../src/wlapplication_messages.cc:102
+#: ../../src/wlapplication_messages.cc:101
 msgid " --yres=[...]         Height of the window in pixel."
 msgstr " --yres=[...]         Výška okna v pixeloch."
 
-#: ../../src/wlapplication_messages.cc:106
+#: ../../src/wlapplication_messages.cc:105
 msgid "Options for the internal window manager:"
 msgstr "Možnosti vnútorného správcu okien:"
 
-#: ../../src/wlapplication_messages.cc:107
+#: ../../src/wlapplication_messages.cc:106
 msgid ""
 " --border_snap_distance=[0 ...]\n"
 "                      Move a window to the edge of the screen\n"
@@ -197,7 +193,7 @@ msgstr " --border_snap_distance=[0 ...]\n                      Presunúť okno k
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
 #. widelands textdomain
-#: ../../src/wlapplication_messages.cc:113
+#: ../../src/wlapplication_messages.cc:112
 msgid ""
 " --dock_windows_to_edges=[true|false]\n"
 "                      Eliminate a window's border towards the\n"
@@ -205,7 +201,7 @@ msgid ""
 "                      window is next to the edge of the screen."
 msgstr " --dock_windows_to_edges=[true|false]\n                      Odstráni rám okna smerom k okraju obrazovky,\n                      keď je okraj okna vedľa okraja obrazovky."
 
-#: ../../src/wlapplication_messages.cc:117
+#: ../../src/wlapplication_messages.cc:116
 msgid ""
 " --panel_snap_distance=[0 ...]\n"
 "                      Move a window to the edge of the panel when\n"
@@ -213,7 +209,7 @@ msgid ""
 "                      distance from the edge of the panel."
 msgstr " --panel_snap_distance=[0 ...]\n                      Presunúť okno k okraju panelu, ak sa\n                      okraj okna nachádza v tomto rozsahu\n                      vzdialeností od okraja panelu."
 
-#: ../../src/wlapplication_messages.cc:121
+#: ../../src/wlapplication_messages.cc:120
 msgid ""
 " --snap_windows_only_when_overlapping=[yes|no]\n"
 "                      Only move a window to the edge of a panel\n"
@@ -221,15 +217,15 @@ msgid ""
 "                      panel."
 msgstr " --snap_windows_only_when_overlapping=[yes|no]\n                      Presunúť okno k okraju panelu, len ak\n                      okno prekrýva panel."
 
-#: ../../src/wlapplication_messages.cc:126
+#: ../../src/wlapplication_messages.cc:125
 msgid " --verbose            Enable verbose debug messages"
 msgstr " --verbose            Zapne podrobné ladiace výpisy"
 
-#: ../../src/wlapplication_messages.cc:128
+#: ../../src/wlapplication_messages.cc:127
 msgid " --help               Show this help"
 msgstr " --help               Zobrazí túto pomoc"
 
-#: ../../src/wlapplication_messages.cc:130
+#: ../../src/wlapplication_messages.cc:129
 msgid ""
 "Bug reports? Suggestions? Check out the project website:\n"
 "        https://launchpad.net/widelands\n"
