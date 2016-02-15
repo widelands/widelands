@@ -71,7 +71,7 @@ FileSystem::FileSystem()
  * \return True if ref path is absolute and within this FileSystem, false otherwise
  */
 bool FileSystem::is_path_absolute(const std::string & path) const {
-	std::string::size_type const path_size = path  .size();
+	std::string::size_type const path_size = path.size();
 	std::string::size_type const root_size = root_.size();
 
 	if (path_size < root_size)

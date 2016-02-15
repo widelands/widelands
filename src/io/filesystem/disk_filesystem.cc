@@ -125,7 +125,7 @@ std::set<std::string> RealFSImpl::list_directory(const std::string & path)
 			continue;
 		}
 		const std::string filename = canonicalize_name(realpath + c_file.name);
-		std::string result = filename.substr(m_root.size() + 1);
+		std::string result = filename.substr(root_.size() + 1);
 
 		// Paths should not contain any windows line separators.
 		boost::replace_all(result, "\\", "/");
