@@ -192,7 +192,11 @@ bool RealFSImpl::is_directory(const std::string & path) {
  */
 FileSystem * RealFSImpl::make_sub_file_system(const std::string & path) {
 	FileSystemPath fspath(canonicalize_name(path));
-	assert(fspath.m_exists); //TODO(unknown): throw an exception instead
+
+	if (!fspath.m_exists) {
+		throw wexception("RealFSImpl: unable to create sub filesystem, path does not exist for: %s",
+							  fspath.c_str());
+	}
 
 	if (fspath.m_isDirectory)
 		return new RealFSImpl   (fspath);
@@ -237,8 +241,13 @@ void RealFSImpl::fs_unlink(const std::string & file) {
  */
 void RealFSImpl::m_unlink_file(const std::string & file) {
 	FileSystemPath fspath(canonicalize_name(file));
-	assert(fspath.m_exists);  //TODO(unknown): throw an exception instead
-	assert(!fspath.m_isDirectory); //TODO(unknown): throw an exception instead
+	if (!fspath.m_exists) {
+		throw wexception("RealFSImpl: unable to unlink file, path does not exist for: %s",
+							  fspath.c_str());
+	}
+	if (fspath.m_isDirectory) {
+		throw wexception("RealFSImpl: unable to unlink file, path '%s' is a directory", fspath.c_str());
+	}
 
 #ifndef _WIN32
 	unlink(fspath.c_str());
@@ -252,8 +261,13 @@ void RealFSImpl::m_unlink_file(const std::string & file) {
  */
 void RealFSImpl::m_unlink_directory(const std::string & file) {
 	FileSystemPath fspath(canonicalize_name(file));
-	assert(fspath.m_exists);  //TODO(unknown): throw an exception instead
-	assert(fspath.m_isDirectory);  //TODO(unknown): throw an exception instead
+	if (!fspath.m_exists) {
+		throw wexception("RealFSImpl: unable to unlink directory, path does not exist for: %s",
+							  fspath.c_str());
+	}
+	if (!fspath.m_isDirectory) {
+		throw wexception("RealFSImpl: unable to unlink directoy, path '%s' is not a directory", fspath.c_str());
+	}
 
 	FilenameSet files = list_directory(file);
 	for
