@@ -167,9 +167,7 @@ std::string SaveHandler::create_file_name
 		filename += WLGF_SUFFIX;
 
 	// Now append directory name
-	std::string complete_filename = dir;
-	complete_filename += "/";
-	complete_filename += filename;
+	std::string complete_filename = dir + g_fs->file_separator() + filename;
 
 	return complete_filename;
 }

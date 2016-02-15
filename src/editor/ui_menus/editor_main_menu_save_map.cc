@@ -126,7 +126,7 @@ void MainMenuSaveMap::clicked_ok() {
 	if (filename == "" && table_.has_selection()) {  //  Maybe a directory is selected.
 		complete_filename = filename = maps_data_[table_.get_selected()].filename;
 	} else {
-		complete_filename = curdir_ + "/" + filename;
+		complete_filename = curdir_ + g_fs->file_separator() + filename;
 	}
 
 	if (g_fs->is_directory(complete_filename.c_str()) &&
@@ -155,9 +155,7 @@ void MainMenuSaveMap::clicked_make_directory() {
 	if (md.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk) {
 		g_fs->ensure_directory_exists(curdir_);
 		//  create directory
-		std::string fullname = curdir_;
-		fullname += "/";
-		fullname += md.get_dirname();
+		std::string fullname = curdir_ + g_fs->file_separator() + md.get_dirname();
 		g_fs->make_directory(fullname);
 		fill_table();
 	}
@@ -227,16 +225,15 @@ void MainMenuSaveMap::edit_box_changed() {
  */
 bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
 	//  Make sure that the current directory exists and is writeable.
-	g_fs->ensure_directory_exists(curdir_);
+	const std::string current_dir = g_fs->canonicalize_name(curdir_);
+	g_fs->ensure_directory_exists(current_dir);
 
 	//  OK, first check if the extension matches (ignoring case).
 	if (!boost::iends_with(filename, WLMF_SUFFIX))
 		filename += WLMF_SUFFIX;
 
 	//  append directory name
-	std::string complete_filename = curdir_;
-	complete_filename += "/";
-	complete_filename += filename;
+	std::string complete_filename = current_dir + g_fs->file_separator() + filename;
 
 	//  Check if file exists. If so, show a warning.
 	if (g_fs->file_exists(complete_filename)) {
