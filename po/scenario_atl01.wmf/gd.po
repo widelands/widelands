@@ -5,13 +5,13 @@
 # GunChleoc, 2015-2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2013
 # GunChleoc, 2015
-# GunChleoc, 2013-2014
+# GunChleoc, 2013-2014,2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-02-03 09:18+0000\n"
-"PO-Revision-Date: 2016-02-03 09:53+0000\n"
+"POT-Creation-Date: 2016-02-09 16:38+0000\n"
+"PO-Revision-Date: 2016-02-13 11:44+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -25,7 +25,7 @@ msgstr ""
 #: ../../data/campaigns/atl01.wmf/scripting/init.lua:74
 msgctxt "message_short_title"
 msgid "Building lost!"
-msgstr ""
+msgstr "Togalach air chall!"
 
 #: ../../data/campaigns/atl01.wmf/scripting/init.lua:76
 msgid "We lost a building to the ocean!"
@@ -34,7 +34,7 @@ msgstr "Chaill sinn togalach sa chuan!"
 #: ../../data/campaigns/atl01.wmf/scripting/init.lua:82
 msgctxt "message_heading"
 msgid "Building lost!"
-msgstr ""
+msgstr "Chaill sinn togalach!"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:32
 msgid "Ensure the supply of building wares"
@@ -97,7 +97,7 @@ msgid ""
 "well working food environment by building at least one farm, one blackroot "
 "farm and a mill. The two kinds of flour together with water from a well will"
 " be baked into bread in a bakery, so build a bakery and a well, too."
-msgstr "Tha biadh glè chudromach do mhèinnean ’s ionadan trèanaidh an airm. Stèidhich àrainneachd a nì biadh gu dòigheil le co-dhiù aon tuathanas, tuathanas fhreumhagan ’s muileann. nì taigh-fuine dà sheòrsa arain às an dà sheòrsa min-fhlùir ’s uisge on tobar, mar sin tog taigh-fuine ’s tobar cuideachd."
+msgstr "Tha biadh glè chudromach do mhèinnean ’s ionadan-trèanaidh an airm. Stèidhich àrainneachd a nì biadh gu dòigheil le co-dhiù aon tuathanas, tuathanas fhreumhagan ’s muileann. nì taigh-fuine dà sheòrsa arain às an dà sheòrsa min-fhlùir ’s uisge on tobar, mar sin tog taigh-fuine ’s tobar cuideachd."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:59
 msgid ""
@@ -158,7 +158,7 @@ msgid ""
 "tabards are the uniforms of soldiers. The weaving mill needs gold thread and"
 " spider silk as raw material. Spider silk is produced by the spider farm, "
 "while gold thread is produced by the gold spinning mill out of gold."
-msgstr ""
+msgstr "Nì na figheadairean sìoda agus lèintean ann an taigh nam beart. Bidh feum air sìoda gus cuid a thogalaichean a thogail agus a chum aodaich. Cuideachd, ’s e èideadh nan saighdearan a tha sna lèintean. Bidh taigh nam beart feumach air snàth òir agus snàth-sìoda mar stuth bhunasach. Tha snàth-sìoda ’ga dhèanamh ann an an rainse dhamhan fhad ’s a tha  snàth òir ’ga dhèanamh à òr ann an ceàrdach snìomhadair òir."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:77
 msgid "Build a weaving mill"
@@ -186,20 +186,20 @@ msgid ""
 "mine will dig for quartz and diamonds – all of them are precious materials "
 "and very rarely found. It will produce a lot of stone while searching for "
 "them."
-msgstr ""
+msgstr "Thèid clach-iarainn, clach-òir is gual a thochladh sna mèinnean iomchaidh. Togaidh a’ mhèinn criostail èiteagan ’s daoimeanan – ’s e stuthan togail uasail ’s glè ghann a th’ anns na seudan ud. Togaidh a’ mhèinn torr ghaireal fhad ’s a bhios i ’gan sireadh."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:89
 msgid ""
 "The ores have to be smelted at a smelting works before they can be used. The"
 " refined materials are then used in the weapon smithy, the armor smithy and "
 "the toolsmithy."
-msgstr ""
+msgstr "Feumaidh tu na clachan-mèinnir a leaghadh ann an ceàrdach leaghadair mus urrainn dhut an cleachdadh. Tha a’ mheatailt a gheibh thu asta ’ga chleachdadh sa cheàrdaichean arm, armachd ’s acainnean an uairsin."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:90
 msgid ""
 "Build a mine of each type. Make sure to send geologists to the mountain "
 "first."
-msgstr ""
+msgstr "Tog mèinn dhe gach seòrsa. Dèan cinnteach gun cuir thu clach-eòlaichean dha na beanntan an toiseach."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:91
 msgid "Build a smelting works"
@@ -215,11 +215,11 @@ msgstr "Tog ceàrdach acainnean"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:99
 msgid "Build training sites for soldiers"
-msgstr "Tog làraichean trèanaidh dha na saighdearan"
+msgstr "Tog ionadan-trèanaidh dha na saighdearan"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:101
 msgid "Soldier Training Sites"
-msgstr "Làraichean trèanaidh nan saighdearan"
+msgstr "Ionadan-trèanaidh nan saighdearan"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:102
 msgid ""
@@ -227,7 +227,7 @@ msgid ""
 "dungeon trains attack – the major attribute of the Atlanteans – and the "
 "labyrinth trains evasion, health and defense. The items produced by the "
 "industry are used to train better soldiers in the two training sites."
-msgstr ""
+msgstr "Mar a nì gach treubh eile, tha na h-Atlantaich comasach air saighdearan a thrèanadh: trèanaidh an toll-dubh an ionnsaigh – seo prìomh-fheart nan Atlantach – agus trèanaidh an cuartan teàrnadh, slàinte is dìon. Thèid na nithean a shaothraicheas na gnìomhachasan a chleachdadh gus saighdearan nas fhearr a thrèanadh san dà ionad-trèanaidh."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:103
 msgid "Build a dungeon and a labyrinth"
@@ -247,7 +247,7 @@ msgid ""
 "horses to help out your carriers. Horses are bred at horse farms using water"
 " and corn. A warehouse will also help to ensure that your transportation "
 "system does not collapse."
-msgstr ""
+msgstr "Nuair a dh’fhàsas na rathaidean agad nas fhaide ’s nas toinnte, bu chòir dhut eich fhastadh ach an doir iad cuideachadh dha na giùlanairean. Togaidh tu eich ann an stàballan le uisge is coirce. Cuidichidh taigh-stòrais thu cuideachd ach nach dèid siostam an lìbhrigidh a dholaidh."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:113
 msgid "Build a warehouse"
@@ -270,7 +270,7 @@ msgid ""
 "There is a lake at the top of the island. Build three ships in these waters "
 "and you might be able to rescue your people before the island is swallowed "
 "completely by the ocean."
-msgstr ""
+msgstr "Tha loch ceann a tuath an eilein. Tog trì longan san loch ud agus bi teans gun sàbhail thu do mhuinntir mus dèid an t-eilean a bhàthadh leis a’ chuan gu tur."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:124
 msgid "Build a shipyard close to the lake to start building ships"
@@ -278,11 +278,11 @@ msgstr "Tog doca faisg air an loch gus longan a thogail"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:135
 msgid "Proud to the Death"
-msgstr ""
+msgstr "Uaibhreach gu crìch"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:137
 msgid "Favored by the God"
-msgstr "Tha gràs dhè ort"
+msgstr "Gràs dhè orra"
 
 #. TRANSLATORS: Foreword
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:139
@@ -292,7 +292,7 @@ msgid ""
 "human to be empowered by the sea god Lutas to breathe above sea level – and "
 "the wise clerics, who provided the link to Lutas – they prospered and became"
 " civilized."
-msgstr ""
+msgstr "Nuair a bha an saoghal glè òg, bhiodh treubh uaibhreach a’ còmhnadh air eilean falaichte caillte Atlantais. Riaghladh sìol Rìgh Ajanthul – sin a’ chiad duine a fhuair cumhachd o dhia na mara Lutas ach an gabhadh e anail os cionn na mara – an eilean còmhla ris na clèirich glice a chum an ceangal ri Lutas – shoirbhich leotha agus thog iad sìobhaltas."
 
 #. TRANSLATORS: Foreword
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:141
@@ -303,11 +303,11 @@ msgid ""
 "began looking for a cure for death even though most clerics warned him "
 "against it. Some said that endless life was only for the gods and that to "
 "seek for it was forbidden."
-msgstr ""
+msgstr "Thachair an sgeulachd seo ri linn Rìgh Askandor, an 43mh rìgh às dèidh Rìgh Ajanthul. B’ e deagh-rìgh a bh’ ann a riaghladh Atlantas gu fad-sheallach glic. Ach ghabh e an t-eagal ron bhàs nuair a dh’fhàs e aosta agus thòisich e air leigheas a shireadh airson a’ bhàis ged a thug a’ mhòrchuid dhe na clèirich rabhadh dha mu dhèidhinn. Bhiodh cuid den bheachd nach faigheadh ach na diathan beatha buan agus nach biodh e ceadaichte a bhith ’ga shireadh."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:145
 msgid "Disgraced Before the God"
-msgstr ""
+msgstr "Maslachadh dhè"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:147
 msgid "The God’s Punishment"
@@ -320,7 +320,7 @@ msgid ""
 "During the nights, they went crazy and were full of fear. It was not long "
 "before the horse breeder Xydra figured out what was wrong with them: the sea"
 " level in front of their stable was rising with ever increasing speed."
-msgstr ""
+msgstr "Co-dhiù, cha robh dragh air duine. Cha do dh’fhairich ach na h-eich gun robh càil cearr. Bhiodh iad gòrach leis an t-eagal rè na h-oidhche. Cha b’ fhada gus an do thuig an gille-each Xydra na bha cearr orra: bha àirde na mara air beulaibh an stàball ag èirigh na bu luaithe ’s na bu luaithe."
 
 #. TRANSLATORS: Foreword
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:151
@@ -330,7 +330,7 @@ msgid ""
 " of the boldness of their king. He decided to withdraw the rights that were "
 "granted to King Ajanthul and his children. And so, he called them back below"
 " the sea again."
-msgstr ""
+msgstr "Rinn na clèirich meòrachadh agus lorg iad an t-adhbhar air èirigh na mara gu sgiobalta: bha an dia Lutas air a chreideamh ann am muinntir Atlantais a chall air sàilleibh spealp an rìgh. Thug e roimhe na còraichean a thug e do Rìgh Ajanthul ’s a shìol a thoirt air falbh. Mar sin, bha e ’gan gairm air ais gu bonn na mara."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:155
 msgid "Uproar and Confusion"
@@ -338,7 +338,7 @@ msgstr "Ùpraid is breisleach"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:157
 msgid "Emerging Chaos..."
-msgstr ""
+msgstr "Dubh-choimeasg ag èirigh…"
 
 #. TRANSLATORS: Foreword
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:159
@@ -347,7 +347,7 @@ msgid ""
 "turned to the clerics, but they had no substantial help to offer. Most "
 "accepted their fate while others tried to change the god’s mind by offering "
 "animals in his temple. But to no avail..."
-msgstr ""
+msgstr "Thug an rìgh ùthachd à fhèin fo chiont. Chaidh an sluagh chun nan clèireach a’ sireadh cobharach le dìth an rìgh ach ’s ann nach b’ urrainn dhaibh-san an cuideachadh na bu mhotha. Ghabh a’ mhòrchuid ri an dàn fhad ’s a bha cuid eile a’ feuchainn gun dugadh iad an dia às a bheachd le ìobairtean bheathaichean san teampall aige. Ach cha b’ fhoghain e…"
 
 #. TRANSLATORS: Foreword
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:161

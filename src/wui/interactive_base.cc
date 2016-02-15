@@ -307,13 +307,6 @@ Called once per frame by the UI code
 */
 void InteractiveBase::think()
 {
-	// Timing
-	uint32_t curframe = SDL_GetTicks();
-
-	frametime_ = curframe - lastframe_;
-	avg_usframetime_ = ((avg_usframetime_  * 15) + (frametime_  * 1000)) / 16;
-	lastframe_ = curframe;
-
 	// If one of the arrow keys is pressed, scroll here
 	const uint32_t scrollval = 10;
 
@@ -347,6 +340,13 @@ Draw debug overlay when appropriate.
 ===============
 */
 void InteractiveBase::draw_overlay(RenderTarget& dst) {
+	// Timing
+	uint32_t curframe = SDL_GetTicks();
+
+	frametime_ = curframe - lastframe_;
+	avg_usframetime_ = ((avg_usframetime_  * 15) + (frametime_  * 1000)) / 16;
+	lastframe_ = curframe;
+
 
 	const Map & map = egbase().map();
 	const bool is_game = dynamic_cast<const Game*>(&egbase());

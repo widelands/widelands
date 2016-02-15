@@ -120,7 +120,7 @@ function test_descr:test_immovable_has_attribute()
 end
 
 function test_descr:test_immovable_probability_to_grow()
-	local terrain = egbase:get_terrain_description("wiese1")
+   local terrain = egbase:get_terrain_description("wiese1")
    assert_equal(nil, egbase:get_immovable_description("bush1"):probability_to_grow(terrain))
 
    local alder = egbase:get_immovable_description("alder_summer_sapling")
