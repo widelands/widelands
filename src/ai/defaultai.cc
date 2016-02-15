@@ -1002,12 +1002,12 @@ void DefaultAI::update_buildable_field(BuildableField& field, uint16_t range, bo
 	// look if there is any unowned land nearby
 	Map& map = game().map();
 	const uint32_t gametime = game().get_gametime();
-	FindNodeUnowned find_unowned(player_, game());
+	FindNodeUnownedWalkable find_unowned_walkable(player_, game());
 	FindNodeUnownedMineable find_unowned_mines_pots(player_, game());
 	PlayerNumber const pn = player_->player_number();
 	const World& world = game().world();
 	field.unowned_land_nearby_ =
-	   map.find_fields(Area<FCoords>(field.coords, range), nullptr, find_unowned);
+	   map.find_fields(Area<FCoords>(field.coords, range), nullptr, find_unowned_walkable);
 	FindNodeAllyOwned find_ally(player_, game(), player_number());
 	const int32_t AllyOwnedFields =
 	   map.find_fields(Area<FCoords>(field.coords, 3), nullptr, find_ally);
@@ -1016,7 +1016,7 @@ void DefaultAI::update_buildable_field(BuildableField& field, uint16_t range, bo
 	if (AllyOwnedFields > 0) {
 		field.near_border_ = true;
 	} else if (field.unowned_land_nearby_ > 0) {
-		if (map.find_fields(Area<FCoords>(field.coords, 4), nullptr, find_unowned) > 0) {
+		if (map.find_fields(Area<FCoords>(field.coords, 4), nullptr, find_unowned_walkable) > 0) {
 			field.near_border_ = true;
 		}
 	}
@@ -1500,10 +1500,19 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 	bool needs_boost_economy = false;
 	if (highest_nonmil_prio_ > 10
 		&& has_enough_space
-		&& virtual_mines >= 5){
+		&& virtual_mines >= 5 &&
+		!player_statistics.strong_enough(player_number())) {
 			needs_boost_economy = true;
 		}
 
+	//NOCOM
+	if (highest_nonmil_prio_ > 10
+		&& has_enough_space
+		&& virtual_mines >= 5 &&
+		player_statistics.strong_enough(player_number())) {
+			printf (" %d player already too strong to boost economy\n", player_number());
+	}
+			
 	// resetting highest_nonmil_prio_ so it can be recalculated anew
 	highest_nonmil_prio_ = 0;
 
@@ -1546,6 +1555,8 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 			persistent_data->least_military_score = 0;
 		}
 	}
+	printf (" %d: least_military_score : %3d, in const %2d, vacant: %d\n",
+	player_number(), persistent_data->least_military_score, msites_in_constr(), vacant_mil_positions_ );
 
 	// This is effective score, falling down very quickly
 	if (persistent_data->target_military_score > kUpperLimit + 150) {
@@ -2147,6 +2158,10 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 					prio += (20 - bf->area_military_capacity_) * 10;
 					prio -= bo.build_material_shortage_  * 50;
 					prio -= (bf->military_in_constr_nearby_ + bf->military_unstationed_) * 50;
+					//sometimes expansion is stalled and this is to help boost it
+					if (msites_in_constr() == 0 && vacant_mil_positions_ <= 1) {
+						prio += 25;
+					}//NOCOM
 				} else {
 					if (bf->near_border_) {
 						prio += 50;
@@ -2967,16 +2982,23 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 
 	// if all possible roads skipped
 	if (last_attempt_) {
+		
 		Building* bld = flag.get_building();
 		// first we block the field for 15 minutes, probably it is not good place to build a
 		// building on
-		blocked_fields.add(coords_hash(bld->get_position()), game().get_gametime() + 15 * 60 * 1000);
-		// Also block the vicinity for shorter time
+
+		
+		//NOCOM this does not block proper position
+		//blocked_fields.add(coords_hash(bld->get_position()), game().get_gametime() + 15 * 60 * 1000);
+		// block the vicinity for shorter time
 		MapRegion<Area<FCoords>> mr(
 			   game().map(), Area<FCoords>(map.get_fcoords(bld->get_position()), 2));
 		do {
-			blocked_fields.add(coords_hash(mr.location()), game().get_gametime() + 5 * 60 * 1000);
+			blocked_fields.add(coords_hash(mr.location()), game().get_gametime() + 15 * 60 * 1000);
 		} while (mr.advance(map));
+		// Blocking the field itself
+		blocked_fields.add(coords_hash(bld->get_position()), game().get_gametime() + 15 * 60 * 1000);
+		printf ("   and also: %3dx%3d\n", bld->get_position().x,  bld->get_position().y);
 		eco->flags.remove(&flag);
 		game().send_player_bulldoze(*const_cast<Flag*>(&flag));
 		return true;
@@ -5295,27 +5317,22 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 	// receiving games statistics and parsing it (reading latest entry)
 	const Game::GeneralStatsVector& genstats = game().get_general_statistics();
 
-	// summing team power, creating team_power std::map of team_number:strength
-	std::map<TeamNumber, uint32_t> team_power;
+	//Collecting statistics and saving them in player_statistics object NOCOM
 	for (uint8_t j = 1; j <= plr_in_game; ++j) {
-		const Player* other = game().get_player(j);
-		const TeamNumber tm = other ? other->team_number() : 0;
-		if (tm == 0) {
-			continue;
-		}
-		// for case this is new team
-		if (team_power.count(tm) == 0) {
-			// adding this team (number) to vector
-			team_power[tm] = 0;
-		}
-		try {
-			team_power[tm] += genstats.at(j - 1).miltary_strength.back();
-		} catch (const std::out_of_range&) {
-			log("ComputerPlayer(%d): genstats entry missing - size :%d\n",
-			    player_number(),
-			    static_cast<unsigned int>(genstats.size()));
+		const Player* this_player = game().get_player(j);
+		if (this_player) {
+			try {
+				player_statistics.add(j, this_player->team_number(), genstats.at(j - 1).miltary_strength.back());
+			} catch (const std::out_of_range&) {
+				log("ComputerPlayer(%d): genstats entry missing - size :%d\n",
+				    player_number(),
+				    static_cast<unsigned int>(genstats.size()));
+			}
 		}
 	}
+	
+	player_statistics.recalculate_team_power();
+	//player_statistics.print_content(); NOCOM
 
 	// defining treshold ratio of own_strength/enemy's_strength
 	uint32_t treshold_ratio = 100;
@@ -5341,63 +5358,31 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 		treshold_ratio += persistent_data->ai_personality_attack_margin;
 	}
 
-	uint32_t my_power = 0;
-	try {
-		my_power = genstats.at(pn - 1).miltary_strength.back();
-	} catch (const std::out_of_range&) {
-		log("ComputerPlayer(%d): genstats entry missing - size :%d\n",
-		    player_number(),
-		    static_cast<unsigned int>(genstats.size()));
-	}
-	// adding power of team (minus my power) divided by 2
-	// (if I am a part of a team of course)
-	const TeamNumber team_number = player_->team_number();
-	if (team_number > 0) {
-		my_power += (team_power[team_number] - my_power) / 2;
-	}
+	const uint32_t my_power = player_statistics.get_modified_player_power(pn);
+
 
 	// now we test all players to identify 'attackable' ones
 	for (uint8_t j = 1; j <= plr_in_game; ++j) {
-		// if it's me
-		if (pn == j) {
-			player_attackable[j - 1] = Attackable::kNotAttackable;
-			continue;
-		}
-		// if we are the same team
-		const Player* other = game().get_player(j);
-		const TeamNumber tm = other ? other->team_number() : 0;
-		if (team_number > 0 && team_number == tm) {
+		// if we are the same team, or just it is me
+		if (player_statistics.players_in_same_team(pn, j) || pn == j) {
 			player_attackable[j - 1] = Attackable::kNotAttackable;
 			continue;
 		}
 
 		// now we compare strength
-		try {
-			// strength of the other player
-			uint32_t players_power = 0;
-			if (!genstats.at(j - 1).miltary_strength.empty()) {
-				players_power += genstats.at(j - 1).miltary_strength.back();
-			}
-			// +power of team (if member of a team)
-			if (tm > 0) {
-				players_power += (team_power[tm] - players_power) / 2;
-			}
+		// strength of the other player (considering his team)
+		uint32_t players_power = player_statistics.get_modified_player_power(j);;
 
-			if (players_power == 0) {
-				player_attackable.at(j - 1) = Attackable::kAttackable;
-			} else if (my_power * 100 / players_power > treshold_ratio * 5) {
-				player_attackable.at(j - 1) = Attackable::kAttackableAndWeak;
-			} else if (my_power * 100 / players_power > treshold_ratio) {
-				player_attackable.at(j - 1) = Attackable::kAttackable;
-			} else {
-				player_attackable.at(j - 1) = Attackable::kNotAttackable;
-			}
-		} catch (const std::out_of_range&) {
-			log("ComputerPlayer(%d): genstats entry missing - size :%d\n",
-			    player_number(),
-			    static_cast<unsigned int>(genstats.size()));
+		if (players_power == 0) {
+			player_attackable.at(j - 1) = Attackable::kAttackable;
+		} else if (my_power * 100 / players_power > treshold_ratio * 4) {
+			player_attackable.at(j - 1) = Attackable::kAttackableAndWeak;
+		} else if (my_power * 100 / players_power > treshold_ratio) {
+			player_attackable.at(j - 1) = Attackable::kAttackable;
+		} else {
 			player_attackable.at(j - 1) = Attackable::kNotAttackable;
 		}
+
 	}
 
 	// first we scan vicitnity of couple of militarysites to get new enemy sites
@@ -5490,6 +5475,8 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 		default:
 			;
 	}
+
+	const bool strong_enough = player_statistics.strong_enough(pn); //NOCOM
 
 	for (std::map<uint32_t, EnemySiteObserver>::iterator site = enemy_sites.begin();
 	     site != enemy_sites.end();
@@ -5611,6 +5598,10 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 
 				// Applying (decreasing score) if trainingsites are not working
 				site->second.score += training_score;
+				
+				if (strong_enough) {
+					site->second.score += 2;
+				}
 
 				// Enemy too weak, let finish him
 				if (player_attackable[owner_number - 1] == Attackable::kAttackableAndWeak) {
