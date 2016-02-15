@@ -74,6 +74,12 @@ private:
 	void recompute();
 	void scrollpos_changed(int32_t pixels);
 
+	/**
+	 * This prepares a non-richtext text for rendering. It escapes the source text and
+	 * turns \n into <br> tags as needed, then creates the richtext style wrappers.
+	 */
+	std::string make_richtext();
+
 	std::string text_;
 	RGBColor color_;
 	Align align_;

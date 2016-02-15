@@ -251,10 +251,15 @@ bool ZipFilesystem::is_directory(const std::string & path) {
  */
 FileSystem * ZipFilesystem::make_sub_file_system(const std::string & path) {
 	if (!file_exists(path)) {
-		throw wexception("ZipFilesystem::make_sub_file_system: The path does not exist.");
+		throw wexception("ZipFilesystem::make_sub_file_system: The path '%s' does not exist in zip file '%s'.",
+							  path.c_str(),
+							  zip_file_->path().c_str());
 	}
 	if (!is_directory(path)) {
-		throw wexception("ZipFilesystem::make_sub_file_system: The path needs to be a directory.");
+		throw wexception("ZipFilesystem::make_sub_file_system: "
+							  "The path '%s' needs to be a directory in zip file '%s'.",
+							  path.c_str(),
+							  zip_file_->path().c_str());
 	}
 
 	std::string localpath = path;
@@ -431,10 +436,12 @@ void ZipFilesystem::write
 		break;
 	case ZIP_ERRNO:
 		throw FileError
-			("ZipFilesystem::write", complete_filename, strerror(errno));
+			("ZipFilesystem::write", complete_filename,
+			 (boost::format("in path '%s'', Error") % zip_file_->path() % strerror(errno)).str());
 	default:
 		throw FileError
-			("ZipFilesystem::write", complete_filename);
+			("ZipFilesystem::write", complete_filename,
+			 (boost::format("in path '%s'") % zip_file_->path()).str());
 	}
 
 	zipCloseFileInZip(zip_file_->write_handle());
@@ -512,10 +519,10 @@ size_t ZipFilesystem::ZipStreamRead::data(void* read_data, size_t bufsize)
 {
 	int copied = unzReadCurrentFile(zip_file_->read_handle(), read_data, bufsize);
 	if (copied < 0) {
-		throw new DataError("Failed to read from zip file");
+		throw new DataError("Failed to read from zip file %s", zip_file_->path().c_str());
 	}
 	if (copied == 0) {
-		throw new DataError("End of file reaced while reading zip");
+		throw new DataError("End of file reaced while reading zip %s", zip_file_->path().c_str());
 	}
 	return copied;
 }
@@ -539,6 +546,6 @@ void ZipFilesystem::ZipStreamWrite::data(const void* const write_data, const siz
 		case ZIP_OK:
 			break;
 		default:
-			throw wexception("Failed to write into zipfile");
+			throw wexception("Failed to write into zipfile %s", zip_file_->path().c_str());
 	}
 }

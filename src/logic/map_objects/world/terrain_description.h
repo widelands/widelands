@@ -94,6 +94,9 @@ public:
 	/// Returns the number of valid resources.
 	int get_num_valid_resources() const;
 
+	/// Returns the the valid resources.
+	std::vector<uint8_t> valid_resources() const;
+
 	/// Returns true if this resource can be found in this terrain type.
 	bool is_resource_valid(int32_t res) const;
 
@@ -109,7 +112,7 @@ public:
 	int32_t dither_layer() const;
 
 	/// Returns the editor category.
-	const EditorCategory& editor_category() const;
+	const EditorCategory* editor_category() const;
 
 	/// Parameters for terrain affinity of immovables.
 	/// Temperature is in arbitrary units.

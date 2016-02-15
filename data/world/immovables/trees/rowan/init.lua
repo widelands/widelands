@@ -82,6 +82,7 @@ world:new_immovable_type{
 world:new_immovable_type{
    name = "rowan_summer_old",
    descname = _ "Rowan (Old)",
+   species = _ "Rowan",
    editor_category = "trees_deciduous",
    size = "small",
    attributes = { "tree" },

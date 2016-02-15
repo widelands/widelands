@@ -59,7 +59,7 @@ private:
 	InteractivePlayer& iaplayer() const;
 
 	// Fill table of contents
-	void fill_entries(const char* key, std::vector<EncyclopediaEntry>& entries);
+	void fill_entries(const char* key, std::vector<EncyclopediaEntry>* entries);
 	void fill_buildings();
 	void fill_wares();
 	void fill_workers();

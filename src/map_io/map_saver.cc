@@ -71,7 +71,10 @@ MapSaver::~MapSaver() {delete m_mos;}
 
 
 void MapSaver::save() {
-	ScopedTimer timer("MapSaver::save() took %ums");
+	std::string timer_message = "MapSaver::save() for '";
+	timer_message += m_egbase.map().get_name();
+	timer_message += "' took %ums";
+	ScopedTimer timer(timer_message);
 
 	delete m_mos;
 	m_mos = new MapObjectSaver();
