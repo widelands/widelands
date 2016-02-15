@@ -168,9 +168,7 @@ void NetClient::run ()
 	d->server_is_waiting = true;
 
 	Widelands::Game game;
-#ifndef NDEBUG
-	game.set_write_syncstream(true);
-#endif
+	game.set_write_syncstream(g_options.pull_section("global").get_bool("write_syncstreams", true));
 
 	try {
 		UI::ProgressWindow* loader_ui = new UI::ProgressWindow("images/loadscreens/progress.png");
