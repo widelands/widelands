@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2013, 2015 by the Widelands Development Team
+ * Copyright (C) 2008-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -583,8 +583,8 @@ struct NetHostImpl {
 NetHost::NetHost (const std::string & playername, bool internet)
 	:
 	d(new NetHostImpl(this)),
-	m_internet(internet),
-	m_forced_pause(false)
+	internet_(internet),
+	forced_pause_(false)
 {
 	log("[Host]: starting up.\n");
 
@@ -618,7 +618,7 @@ NetHost::NetHost (const std::string & playername, bool internet)
 	hostuser.position = UserSettings::none();
 	hostuser.ready = true;
 	d->settings.users.push_back(hostuser);
-	file = nullptr; //  Initialize as 0 pointer - unfortunately needed in struct.
+	file_ = nullptr; //  Initialize as 0 pointer - unfortunately needed in struct.
 }
 
 NetHost::~NetHost ()
@@ -638,7 +638,7 @@ NetHost::~NetHost ()
 
 	delete d->promoter;
 	delete d;
-	delete file;
+	delete file_;
 }
 
 const std::string & NetHost::get_local_playername() const
@@ -690,13 +690,13 @@ void NetHost::run()
 	const FullscreenMenuBase::MenuTarget code = lm.run<FullscreenMenuBase::MenuTarget>();
 	if (code == FullscreenMenuBase::MenuTarget::kBack) {
 		// if this is an internet game, tell the metaserver that client is back in the lobby.
-		if (m_internet)
+		if (internet_)
 			InternetGaming::ref().set_game_done();
 		return;
 	}
 
 	// if this is an internet game, tell the metaserver that the game started
-	if (m_internet)
+	if (internet_)
 		InternetGaming::ref().set_game_playing();
 
 	for (uint32_t i = 0; i < d->clients.size(); ++i) {
@@ -776,7 +776,7 @@ void NetHost::run()
 		delete tips;
 
 		// if this is an internet game, tell the metaserver that the game is done.
-		if (m_internet)
+		if (internet_)
 			InternetGaming::ref().set_game_done();
 		clear_computer_players();
 	} catch (...) {
@@ -1161,30 +1161,30 @@ void NetHost::set_map
 		// Read in the file
 		FileRead fr;
 		fr.open(*g_fs, mapfilename);
-		if (file)
-			delete file;
-		file = new NetTransferFile();
-		file->filename = mapfilename;
-		uint32_t leftparts = file->bytes = fr.get_size();
+		if (file_)
+			delete file_;
+		file_ = new NetTransferFile();
+		file_->filename = mapfilename;
+		uint32_t leftparts = file_->bytes = fr.get_size();
 		while (leftparts > 0) {
 			uint32_t readout = (leftparts > NETFILEPARTSIZE) ? NETFILEPARTSIZE : leftparts;
 			FilePart fp;
 			memcpy(fp.part, fr.data(readout), readout);
-			file->parts.push_back(fp);
+			file_->parts.push_back(fp);
 			leftparts -= readout;
 		}
-		std::vector<char> complete(file->bytes);
+		std::vector<char> complete(file_->bytes);
 		fr.set_file_pos(0);
-		fr.data_complete(&complete[0], file->bytes);
+		fr.data_complete(&complete[0], file_->bytes);
 		SimpleMD5Checksum md5sum;
-		md5sum.data(&complete[0], file->bytes);
+		md5sum.data(&complete[0], file_->bytes);
 		md5sum.finish_checksum();
-		file->md5sum = md5sum.get_checksum().str();
+		file_->md5sum = md5sum.get_checksum().str();
 	} else {
 		// reset previously offered map / saved game
-		if (file) {
-			delete file;
-			file = nullptr;
+		if (file_) {
+			delete file_;
+			file_ = nullptr;
 		}
 	}
 
@@ -1613,8 +1613,8 @@ bool NetHost::write_map_transfer_info(SendPacket & s, std::string mapfilename) {
 	//Scan-build reports that access to bytes here results in a dereference of null pointer.
 	//This is a false positive.
 	//See https://bugs.launchpad.net/widelands/+bug/1198919
-	s.unsigned_32(file->bytes);
-	s.string(file->md5sum);
+	s.unsigned_32(file_->bytes);
+	s.string(file_->md5sum);
 	return true;
 }
 
@@ -1720,9 +1720,9 @@ void NetHost::welcome_client (uint32_t const number, std::string & playername)
 	s.send(client.sock);
 
 	// If possible, offer the map / savegame as transfer
-	if (file) {
+	if (file_) {
 		s.reset();
-		if (write_map_transfer_info(s, file->filename))
+		if (write_map_transfer_info(s, file_->filename))
 			s.send(client.sock);
 	}
 
@@ -1924,7 +1924,7 @@ void NetHost::update_network_speed()
 	uint32_t const oldnetworkspeed = d->networkspeed;
 
 	// First check if a pause was forced by the host
-	if (m_forced_pause)
+	if (forced_pause_)
 		d->networkspeed = 0;
 
 	else {
@@ -2073,7 +2073,7 @@ void NetHost::handle_network ()
 	}
 
 	// if this is an internet game, handle the metaserver information
-	if (m_internet) {
+	if (internet_) {
 		InternetGaming::ref().handle_metaserver_communication();
 		// Maybe an important message was send on the metaserver,
 		// that we should show in game as well.
@@ -2112,9 +2112,9 @@ void NetHost::handle_network ()
 		}
 	}
 
-	// If a pause was forced or if the players all pause, send a ping regularly
-        // to keep the sockets up and running
-	if ((m_forced_pause || real_speed() == 0) && (time(nullptr) > (d->lastpauseping + 20))) {
+    // If a pause was forced or if the players all pause, send a ping regularly
+    // to keep the sockets up and running
+	if ((forced_pause_ || real_speed() == 0) && (time(nullptr) > (d->lastpauseping + 20))) {
 		d->lastpauseping = time(nullptr);
 
 		SendPacket s;
@@ -2320,10 +2320,10 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket & r)
 	}
 
 	case NETCMD_NEW_FILE_AVAILABLE: {
-		if (!file) // Do we have a file for sending
+		if (!file_) // Do we have a file for sending
 			throw DisconnectException("REQUEST_OF_N_E_FILE");
 		send_system_message_code
-			("STARTED_SENDING_FILE", file->filename, d->settings.users.at(client.usernum).name);
+			("STARTED_SENDING_FILE", file_->filename, d->settings.users.at(client.usernum).name);
 		send_file_part(client.sock, 0);
 		// Remember client as "currently receiving file"
 		d->settings.users[client.usernum].ready = false;
@@ -2336,19 +2336,19 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket & r)
 	}
 
 	case NETCMD_FILE_PART: {
-		if (!file) // Do we have a file for sending
+		if (!file_) // Do we have a file for sending
 			throw DisconnectException("REQUEST_OF_N_E_FILE");
 		uint32_t part = r.unsigned_32();
 		std::string x = r.string();
-		if (x != file->md5sum) {
-			log("[Host]: File transfer checksum missmatch %s != %s\n", x.c_str(), file->md5sum.c_str());
+		if (x != file_->md5sum) {
+			log("[Host]: File transfer checksum missmatch %s != %s\n", x.c_str(), file_->md5sum.c_str());
 			return; // Surely the file was changed, so we cancel here.
 		}
-		if (part >= file->parts.size())
+		if (part >= file_->parts.size())
 			throw DisconnectException("REQUEST_OF_N_E_FILEPART");
-		if (part == file->parts.size() - 1) {
+		if (part == file_->parts.size() - 1) {
 			send_system_message_code
-				("COMPLETED_FILE_TRANSFER", file->filename, d->settings.users.at(client.usernum).name);
+				("COMPLETED_FILE_TRANSFER", file_->filename, d->settings.users.at(client.usernum).name);
 			d->settings.users[client.usernum].ready = true;
 			SendPacket s;
 			s.unsigned_8(NETCMD_SETTING_USER);
@@ -2361,8 +2361,8 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket & r)
 		if (part % 100 == 0)
 			send_system_message_code
 				("SENDING_FILE_PART",
-				 (boost::format("%i/%i") % part % (file->parts.size() + 1)).str(),
-				 file->filename, d->settings.users.at(client.usernum).name);
+				 (boost::format("%i/%i") % part % (file_->parts.size() + 1)).str(),
+				 file_->filename, d->settings.users.at(client.usernum).name);
 		send_file_part(client.sock, part);
 		break;
 	}
@@ -2373,9 +2373,9 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket & r)
 }
 
 void NetHost::send_file_part(TCPsocket csock, uint32_t part) {
-	assert(part < file->parts.size());
+	assert(part < file_->parts.size());
 
-	uint32_t left = file->bytes - NETFILEPARTSIZE * part;
+	uint32_t left = file_->bytes - NETFILEPARTSIZE * part;
 	uint32_t size = (left > NETFILEPARTSIZE) ? NETFILEPARTSIZE : left;
 
 	// Send the part
@@ -2383,7 +2383,7 @@ void NetHost::send_file_part(TCPsocket csock, uint32_t part) {
 	s.unsigned_8(NETCMD_FILE_PART);
 	s.unsigned_32(part);
 	s.unsigned_32(size);
-	s.data(file->parts[part].part, size);
+	s.data(file_->parts[part].part, size);
 	s.send(csock);
 }
 
