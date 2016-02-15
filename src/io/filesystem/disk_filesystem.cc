@@ -51,16 +51,16 @@
 
 struct FileSystemPath: public std::string
 {
-	bool m_exists;
-	bool m_isDirectory;
+	bool exists_;
+	bool is_directory_;
 
 	FileSystemPath(const std::string & path)
 	: std::string(path)
 	{
 		struct stat st;
 
-		m_exists = (stat(c_str(), &st) != -1);
-		m_isDirectory = m_exists && S_ISDIR(st.st_mode);
+		exists_ = (stat(c_str(), &st) != -1);
+		is_directory_ = exists_ && S_ISDIR(st.st_mode);
 	}
 };
 
@@ -68,10 +68,10 @@ struct FileSystemPath: public std::string
  * Initialize the real file-system
  */
 RealFSImpl::RealFSImpl(const std::string & Directory)
-: m_directory(Directory)
+: directory_(Directory)
 {
 	// TODO(unknown): check OS permissions on whether the directory is writable!
-	m_root = canonicalize_name(Directory);
+	root_ = canonicalize_name(Directory);
 }
 
 
@@ -105,9 +105,9 @@ std::set<std::string> RealFSImpl::list_directory(const std::string & path)
 	long hFile;
 
 	if (path.size())
-		buf = m_directory + '\\' + path + "\\*";
+		buf = directory_ + '\\' + path + "\\*";
 	else
-		buf = m_directory + "\\*";
+		buf = directory_ + "\\*";
 
 	std::set<std::string> results;
 
@@ -145,12 +145,12 @@ std::set<std::string> RealFSImpl::list_directory(const std::string & path)
 			buf = path + "/*";
 			ofs = 0;
 		} else {
-			buf = m_directory + '/' + path + "/*";
-			ofs = m_directory.length() + 1;
+			buf = directory_ + '/' + path + "/*";
+			ofs = directory_.length() + 1;
 		}
 	} else {
-		buf = m_directory + "/*";
-		ofs = m_directory.length() + 1;
+		buf = directory_ + "/*";
+		ofs = directory_.length() + 1;
 	}
 	std::set<std::string> results;
 
@@ -159,7 +159,7 @@ std::set<std::string> RealFSImpl::list_directory(const std::string & path)
 
 	for (size_t i = 0; i < gl.gl_pathc; ++i) {
 		const std::string filename(canonicalize_name(&gl.gl_pathv[i][ofs]));
-		results.insert(filename.substr(m_root.size() + 1));
+		results.insert(filename.substr(root_.size() + 1));
 	}
 
 	globfree(&gl);
@@ -175,7 +175,7 @@ std::set<std::string> RealFSImpl::list_directory(const std::string & path)
  */
 // TODO(unknown): Can this be rewritten to just using exceptions? Should it?
 bool RealFSImpl::file_exists(const std::string & path) {
-	return FileSystemPath(canonicalize_name(path)).m_exists;
+	return FileSystemPath(canonicalize_name(path)).exists_;
 }
 
 /**
@@ -184,7 +184,7 @@ bool RealFSImpl::file_exists(const std::string & path) {
  * \e can't exist then)
  */
 bool RealFSImpl::is_directory(const std::string & path) {
-	return FileSystemPath(canonicalize_name(path)).m_isDirectory;
+	return FileSystemPath(canonicalize_name(path)).is_directory_;
 }
 
 /**
@@ -192,9 +192,14 @@ bool RealFSImpl::is_directory(const std::string & path) {
  */
 FileSystem * RealFSImpl::make_sub_file_system(const std::string & path) {
 	FileSystemPath fspath(canonicalize_name(path));
-	assert(fspath.m_exists); //TODO(unknown): throw an exception instead
 
-	if (fspath.m_isDirectory)
+	if (!fspath.exists_) {
+		throw wexception("RealFSImpl: unable to create sub filesystem, path does not exist for '%s'"
+							  " in directory '%s'",
+							  fspath.c_str(), directory_.c_str());
+	}
+
+	if (fspath.is_directory_)
 		return new RealFSImpl   (fspath);
 	else
 		return new ZipFilesystem(fspath);
@@ -206,10 +211,10 @@ FileSystem * RealFSImpl::make_sub_file_system(const std::string & path) {
 FileSystem * RealFSImpl::create_sub_file_system(const std::string & path, Type const fs)
 {
 	FileSystemPath fspath(canonicalize_name(path));
-	if (fspath.m_exists)
+	if (fspath.exists_)
 		throw wexception
-			("path %s already exists, can not create a filesystem from it",
-			 path.c_str());
+			("path '%s'' already exists in directory '%s', can not create a filesystem from it",
+			 path.c_str(), directory_.c_str());
 
 	if (fs == FileSystem::DIR) {
 		ensure_directory_exists(path);
@@ -223,22 +228,28 @@ FileSystem * RealFSImpl::create_sub_file_system(const std::string & path, Type c
  */
 void RealFSImpl::fs_unlink(const std::string & file) {
 	FileSystemPath fspath(canonicalize_name(file));
-	if (!fspath.m_exists)
+	if (!fspath.exists_)
 		return;
 
-	if (fspath.m_isDirectory)
-		m_unlink_directory(file);
+	if (fspath.is_directory_)
+		unlink_directory(file);
 	else
-		m_unlink_file(file);
+		unlink_file(file);
 }
 
 /**
  * Remove a single directory or file
  */
-void RealFSImpl::m_unlink_file(const std::string & file) {
+void RealFSImpl::unlink_file(const std::string & file) {
 	FileSystemPath fspath(canonicalize_name(file));
-	assert(fspath.m_exists);  //TODO(unknown): throw an exception instead
-	assert(!fspath.m_isDirectory); //TODO(unknown): throw an exception instead
+	if (!fspath.exists_) {
+		throw wexception("RealFSImpl: unable to unlink file, path does not exist for '%s' in directory '%s'",
+							  fspath.c_str(), directory_.c_str());
+	}
+	if (fspath.is_directory_) {
+		throw wexception("RealFSImpl: unable to unlink file, path '%s' in directory '%s' is a directory",
+							  fspath.c_str(), directory_.c_str());
+	}
 
 #ifndef _WIN32
 	unlink(fspath.c_str());
@@ -250,10 +261,17 @@ void RealFSImpl::m_unlink_file(const std::string & file) {
 /**
  * Recursively remove a directory
  */
-void RealFSImpl::m_unlink_directory(const std::string & file) {
+void RealFSImpl::unlink_directory(const std::string & file) {
 	FileSystemPath fspath(canonicalize_name(file));
-	assert(fspath.m_exists);  //TODO(unknown): throw an exception instead
-	assert(fspath.m_isDirectory);  //TODO(unknown): throw an exception instead
+	if (!fspath.exists_) {
+		throw wexception("RealFSImpl: unable to unlink directory, path does not exist for '%s'"
+							  " in directory '%s'",
+							  fspath.c_str(), directory_.c_str());
+	}
+	if (!fspath.is_directory_) {
+		throw wexception("RealFSImpl: unable to unlink directoy, path '%s' in directory '%s'"
+							  " is not a directory", fspath.c_str(), directory_.c_str());
+	}
 
 	FilenameSet files = list_directory(file);
 	for
@@ -268,9 +286,9 @@ void RealFSImpl::m_unlink_directory(const std::string & file) {
 			continue;
 
 		if (is_directory(*pname))
-			m_unlink_directory(*pname);
+			unlink_directory(*pname);
 		else
-			m_unlink_file(*pname);
+			unlink_file(*pname);
 	}
 
 	// NOTE: this might fail if this directory contains CVS dir,
@@ -279,7 +297,7 @@ void RealFSImpl::m_unlink_directory(const std::string & file) {
 	rmdir(fspath.c_str());
 #else
 	if (!RemoveDirectory(fspath.c_str()))
-		throw wexception("%s could not be deleted.", fspath.c_str());
+		throw wexception("'%s' could not be deleted in directory '%s'.", fspath.c_str(), directory_.c_str());
 #endif
 }
 
@@ -295,11 +313,11 @@ void RealFSImpl::ensure_directory_exists(const std::string & dirname)
 			it = dirname.find(file_separator(), it);
 
 			FileSystemPath fspath(canonicalize_name(dirname.substr(0, it)));
-			if (fspath.m_exists && !fspath.m_isDirectory)
+			if (fspath.exists_ && !fspath.is_directory_)
 				throw wexception
-					("%s exists and is not a directory",
-					 dirname.substr(0, it).c_str());
-			if (!fspath.m_exists)
+					("'%s' in directory '%s' exists and is not a directory",
+					 dirname.substr(0, it).c_str(), directory_.c_str());
+			if (!fspath.exists_)
 				make_directory(dirname.substr(0, it));
 
 			if (it == std::string::npos)
@@ -308,8 +326,8 @@ void RealFSImpl::ensure_directory_exists(const std::string & dirname)
 		}
 	} catch (const std::exception & e) {
 		throw wexception
-			("RealFSImpl::ensure_directory_exists(%s): %s",
-			 dirname.c_str(), e.what());
+			("RealFSImpl::ensure_directory_exists(%s) in directory '%s': %s",
+			 dirname.c_str(), directory_.c_str(), e.what());
 	}
 }
 
@@ -323,9 +341,10 @@ void RealFSImpl::ensure_directory_exists(const std::string & dirname)
  */
 void RealFSImpl::make_directory(const std::string & dirname) {
 	FileSystemPath fspath(canonicalize_name(dirname));
-	if (fspath.m_exists)
+	if (fspath.exists_)
 		throw wexception
-			("a file with the name \"%s\" already exists", dirname.c_str());
+			("a file/directory with the name '%s' already exists in directory '%s'",
+			 dirname.c_str(), directory_.c_str());
 
 	if
 #ifdef _WIN32
@@ -442,28 +461,28 @@ namespace {
 
 struct RealFSStreamRead : public StreamRead {
 	RealFSStreamRead(const std::string & fname)
-		: m_file(fopen(fname.c_str(), "rb"))
+		: file_(fopen(fname.c_str(), "rb"))
 	{
-		if (!m_file)
+		if (!file_)
 			throw wexception("could not open %s for reading", fname.c_str());
 	}
 
 	~RealFSStreamRead()
 	{
-		fclose(m_file);
+		fclose(file_);
 	}
 
 	size_t data(void * read_data, size_t const bufsize) override {
-		return fread(read_data, 1, bufsize, m_file);
+		return fread(read_data, 1, bufsize, file_);
 	}
 
 	bool end_of_file() const override
 	{
-		return feof(m_file);
+		return feof(file_);
 	}
 
 private:
-	FILE * m_file;
+	FILE * file_;
 };
 
 }
@@ -485,31 +504,31 @@ namespace {
 
 struct RealFSStreamWrite : public StreamWrite {
 	RealFSStreamWrite(const std::string & fname)
-		: m_filename(fname)
+		: filename_(fname)
 	{
-		m_file = fopen(fname.c_str(), "wb");
-		if (!m_file)
+		file_ = fopen(fname.c_str(), "wb");
+		if (!file_)
 			throw wexception("could not open %s for writing", fname.c_str());
 	}
 
-	~RealFSStreamWrite() {fclose(m_file);}
+	~RealFSStreamWrite() {fclose(file_);}
 
 	void data(const void * const write_data, const size_t size) override
 	{
-		size_t ret = fwrite(write_data, 1, size, m_file);
+		size_t ret = fwrite(write_data, 1, size, file_);
 
 		if (ret != size)
-			throw wexception("Write to %s failed", m_filename.c_str());
+			throw wexception("Write to %s failed", filename_.c_str());
 	}
 
 	void flush() override
 	{
-		fflush(m_file);
+		fflush(file_);
 	}
 
 private:
-	std::string m_filename;
-	FILE * m_file;
+	std::string filename_;
+	FILE * file_;
 };
 
 }
@@ -525,14 +544,14 @@ unsigned long long RealFSImpl::disk_space() {
 	ULARGE_INTEGER freeavailable;
 	return
 		GetDiskFreeSpaceEx
-			(canonicalize_name(m_directory).c_str(), &freeavailable, 0, 0)
+			(canonicalize_name(directory_).c_str(), &freeavailable, 0, 0)
 		?
 		//if more than 2G free space report that much
 		freeavailable.HighPart ? std::numeric_limits<unsigned long>::max() :
 		freeavailable.LowPart : 0;
 #else
 	struct statvfs svfs;
-	if (statvfs(canonicalize_name(m_directory).c_str(), &svfs) != -1) {
+	if (statvfs(canonicalize_name(directory_).c_str(), &svfs) != -1) {
 		return static_cast<unsigned long long>(svfs.f_bsize) * svfs.f_bavail;
 	}
 #endif

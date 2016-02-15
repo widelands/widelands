@@ -54,14 +54,14 @@ public:
 	void fs_unlink(const std::string & file) override;
 	void fs_rename(const std::string & old_name, const std::string & new_name) override;
 
-	std::string get_basename() override {return m_directory;}
+	std::string get_basename() override {return directory_;}
 	unsigned long long disk_space() override;
 
 private:
-	void m_unlink_directory(const std::string & file);
-	void m_unlink_file     (const std::string & file);
+	void unlink_directory(const std::string & file);
+	void unlink_file     (const std::string & file);
 
-	std::string m_directory;
+	std::string directory_;
 };
 
 #endif  // end of include guard: WL_IO_FILESYSTEM_DISK_FILESYSTEM_H

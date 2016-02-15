@@ -730,6 +730,7 @@ void NetHost::run()
 		game.set_game_controller(this);
 		InteractiveGameBase* igb;
 		uint8_t pn = d->settings.playernum + 1;
+		game.save_handler().set_autosave_filename("wl_autosave_nethost");
 
 		if (d->settings.savegame) {
 			// Read and broadcast original win condition
