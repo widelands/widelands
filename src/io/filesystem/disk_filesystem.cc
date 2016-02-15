@@ -194,8 +194,9 @@ FileSystem * RealFSImpl::make_sub_file_system(const std::string & path) {
 	FileSystemPath fspath(canonicalize_name(path));
 
 	if (!fspath.exists_) {
-		throw wexception("RealFSImpl: unable to create sub filesystem, path does not exist for: %s",
-							  fspath.c_str());
+		throw wexception("RealFSImpl: unable to create sub filesystem, path does not exist for '%s'"
+							  " in directory '%s'",
+							  fspath.c_str(), directory_.c_str());
 	}
 
 	if (fspath.is_directory_)
@@ -212,8 +213,8 @@ FileSystem * RealFSImpl::create_sub_file_system(const std::string & path, Type c
 	FileSystemPath fspath(canonicalize_name(path));
 	if (fspath.exists_)
 		throw wexception
-			("path %s already exists, can not create a filesystem from it",
-			 path.c_str());
+			("path '%s'' already exists in directory '%s', can not create a filesystem from it",
+			 path.c_str(), directory_.c_str());
 
 	if (fs == FileSystem::DIR) {
 		ensure_directory_exists(path);
@@ -242,11 +243,12 @@ void RealFSImpl::fs_unlink(const std::string & file) {
 void RealFSImpl::unlink_file(const std::string & file) {
 	FileSystemPath fspath(canonicalize_name(file));
 	if (!fspath.exists_) {
-		throw wexception("RealFSImpl: unable to unlink file, path does not exist for: %s",
-							  fspath.c_str());
+		throw wexception("RealFSImpl: unable to unlink file, path does not exist for '%s' in directory '%s'",
+							  fspath.c_str(), directory_.c_str());
 	}
 	if (fspath.is_directory_) {
-		throw wexception("RealFSImpl: unable to unlink file, path '%s' is a directory", fspath.c_str());
+		throw wexception("RealFSImpl: unable to unlink file, path '%s' in directory '%s' is a directory",
+							  fspath.c_str(), directory_.c_str());
 	}
 
 #ifndef _WIN32
@@ -262,11 +264,13 @@ void RealFSImpl::unlink_file(const std::string & file) {
 void RealFSImpl::unlink_directory(const std::string & file) {
 	FileSystemPath fspath(canonicalize_name(file));
 	if (!fspath.exists_) {
-		throw wexception("RealFSImpl: unable to unlink directory, path does not exist for: %s",
-							  fspath.c_str());
+		throw wexception("RealFSImpl: unable to unlink directory, path does not exist for '%s'"
+							  " in directory '%s'",
+							  fspath.c_str(), directory_.c_str());
 	}
 	if (!fspath.is_directory_) {
-		throw wexception("RealFSImpl: unable to unlink directoy, path '%s' is not a directory", fspath.c_str());
+		throw wexception("RealFSImpl: unable to unlink directoy, path '%s' in directory '%s'"
+							  " is not a directory", fspath.c_str(), directory_.c_str());
 	}
 
 	FilenameSet files = list_directory(file);
@@ -293,7 +297,7 @@ void RealFSImpl::unlink_directory(const std::string & file) {
 	rmdir(fspath.c_str());
 #else
 	if (!RemoveDirectory(fspath.c_str()))
-		throw wexception("%s could not be deleted.", fspath.c_str());
+		throw wexception("'%s' could not be deleted in directory '%s'.", fspath.c_str(), directory_.c_str());
 #endif
 }
 
@@ -311,8 +315,8 @@ void RealFSImpl::ensure_directory_exists(const std::string & dirname)
 			FileSystemPath fspath(canonicalize_name(dirname.substr(0, it)));
 			if (fspath.exists_ && !fspath.is_directory_)
 				throw wexception
-					("%s exists and is not a directory",
-					 dirname.substr(0, it).c_str());
+					("'%s' in directory '%s' exists and is not a directory",
+					 dirname.substr(0, it).c_str(), directory_.c_str());
 			if (!fspath.exists_)
 				make_directory(dirname.substr(0, it));
 
@@ -322,8 +326,8 @@ void RealFSImpl::ensure_directory_exists(const std::string & dirname)
 		}
 	} catch (const std::exception & e) {
 		throw wexception
-			("RealFSImpl::ensure_directory_exists(%s): %s",
-			 dirname.c_str(), e.what());
+			("RealFSImpl::ensure_directory_exists(%s) in directory '%s': %s",
+			 dirname.c_str(), directory_.c_str(), e.what());
 	}
 }
 
@@ -339,7 +343,8 @@ void RealFSImpl::make_directory(const std::string & dirname) {
 	FileSystemPath fspath(canonicalize_name(dirname));
 	if (fspath.exists_)
 		throw wexception
-			("a file with the name \"%s\" already exists", dirname.c_str());
+			("a file/directory with the name '%s' already exists in directory '%s'",
+			 dirname.c_str(), directory_.c_str());
 
 	if
 #ifdef _WIN32
