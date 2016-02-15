@@ -204,7 +204,7 @@ FullscreenMenuOptions::FullscreenMenuOptions
 
 	nozip_(&box_saving_, Point(0, 0), _("Do not zip widelands data files (maps, replays and savegames)"),
 			 "", column_width_),
-	write_syncstreams_(&box_saving_, Point(0, 0), _("Write syncstreams in network games to debug desyncs."),
+	write_syncstreams_(&box_saving_, Point(0, 0), _("Write syncstreams in network games to debug desyncs"),
 							  "", column_width_),
 
 	// Game options
