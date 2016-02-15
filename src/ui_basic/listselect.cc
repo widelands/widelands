@@ -392,9 +392,9 @@ void BaseListselect::draw(RenderTarget & dst)
 
 		// Fix vertical position for mixed font heights
 		if (get_lineheight() > static_cast<uint32_t>(entry_text_im->height())) {
-			point.y += (get_lineheight() - entry_text_im->height()) / 2;
+			point.y += (lineheight_ - entry_text_im->height()) / 2;
 		} else {
-			point.y -= (entry_text_im->height() - get_lineheight()) / 2;
+			point.y -= (entry_text_im->height() - lineheight_) / 2;
 		}
 
 		// Crop to column width while blitting
@@ -402,12 +402,12 @@ void BaseListselect::draw(RenderTarget & dst)
 			// Fix positioning for BiDi languages.
 			point.x = 0;
 
-			// We want this always on, e.g. for mixed language savegame filenames
+			// We want this always on, e.g. for mixed language savegame filenames, or the languages list
 				dst.blitrect(point,
 								 entry_text_im,
-								 Rect(entry_text_im->width() - maxw + picw, 0, maxw, lineheight_));
+								 Rect(entry_text_im->width() - maxw + picw, 0, maxw, entry_text_im->height()));
 		} else {
-			dst.blitrect(point, entry_text_im, Rect(0, 0, maxw, lineheight_));
+			dst.blitrect(point, entry_text_im, Rect(0, 0, maxw, entry_text_im->height()));
 		}
 
 		y += lineheight;
