@@ -125,13 +125,16 @@ void MainMenuSaveMap::clicked_ok() {
 
 	if (filename == "" && table_.has_selection()) {  //  Maybe a directory is selected.
 		complete_filename = filename = maps_data_[table_.get_selected()].filename;
+		log("NOCOM clicked OK - getting filename from maps_data: %s\n", complete_filename.c_str());
 	} else {
 		complete_filename = curdir_ + g_fs->file_separator() + filename;
+		log("NOCOM clicked OK - assembled filename: %s\n", complete_filename.c_str());
 	}
 
 	if (g_fs->is_directory(complete_filename.c_str()) &&
 		 !Widelands::WidelandsMapLoader::is_widelands_map(complete_filename)) {
 		curdir_ = complete_filename;
+		log("NOCOM clicked OK - current dir is: %s\n", curdir_.c_str());
 		fill_table();
 	} else {  //  Ok, save this map
 		Widelands::Map& map = eia().egbase().map();
@@ -153,9 +156,11 @@ void MainMenuSaveMap::clicked_ok() {
 void MainMenuSaveMap::clicked_make_directory() {
 	MainMenuSaveMapMakeDirectory md(this, _("unnamed"));
 	if (md.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk) {
+		log("NOCOM clicked make directory: %s\n", curdir_.c_str());
 		g_fs->ensure_directory_exists(curdir_);
 		//  create directory
 		std::string fullname = curdir_ + g_fs->file_separator() + md.get_dirname();
+		log("NOCOM making directory: %s\n", fullname.c_str());
 		g_fs->make_directory(fullname);
 		fill_table();
 	}
@@ -202,6 +207,7 @@ void MainMenuSaveMap::double_clicked_item() {
 	const MapData& mapdata = maps_data_[table_.get_selected()];
 	if (mapdata.maptype == MapData::MapType::kDirectory) {
 		curdir_ = mapdata.filename;
+		log("NOCOM set current dir to: %s\n", curdir_.c_str());
 		fill_table();
 	} else {
 		clicked_ok();
@@ -225,15 +231,15 @@ void MainMenuSaveMap::edit_box_changed() {
  */
 bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
 	//  Make sure that the current directory exists and is writeable.
-	const std::string current_dir = g_fs->canonicalize_name(curdir_);
-	g_fs->ensure_directory_exists(current_dir);
+	log("NOCOM trying to save to: %s\n", curdir_.c_str());
+	g_fs->ensure_directory_exists(curdir_);
 
 	//  OK, first check if the extension matches (ignoring case).
 	if (!boost::iends_with(filename, WLMF_SUFFIX))
 		filename += WLMF_SUFFIX;
 
 	//  append directory name
-	std::string complete_filename = current_dir + g_fs->file_separator() + filename;
+	std::string complete_filename = curdir_ + g_fs->file_separator() + filename;
 
 	//  Check if file exists. If so, show a warning.
 	if (g_fs->file_exists(complete_filename)) {

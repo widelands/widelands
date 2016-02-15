@@ -147,12 +147,15 @@ void MainMenuLoadOrSaveMap::fill_table() {
 	maps_data_.clear();
 	has_translated_mapname_ = false;
 
+	log("NOCOM filling table from: %s\n", curdir_.c_str());
+
 	//  Fill it with all files we find.
 	FilenameSet files = g_fs->list_directory(curdir_);
 
 	// If we are not at the top of the map directory hierarchy (we're not talking
 	// about the absolute filesystem top!) we manually add ".."
 	if (curdir_ != basedir_) {
+		log("NOCOM calling create_parent_dir with: %s\n", curdir_.c_str());
 		maps_data_.push_back(MapData::create_parent_dir(curdir_));
 	}
 
