@@ -870,6 +870,6 @@ void InternetGaming::format_and_add_chat(std::string from, std::string to, bool 
 	if (system && (state_ == IN_GAME)) {
 		// Save system chat messages seperately as well, so the nethost can import and show them in game;
 		c.msg = "METASERVER: " + msg;
-		ingame_systechat_.push_back(c);
+		ingame_system_chat_.push_back(c);
 	}
 }

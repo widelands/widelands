@@ -118,10 +118,10 @@ struct InternetGaming : public ChatProvider {
 	/// Silence the internet lobby chat if we are in game as we do not see the messages anyways
 	bool sound_off() override {return state_ == IN_GAME;}
 
-	/// writes the ingame_systechat_ messages to \arg msg and resets it afterwards
+	/// writes the ingame_system_chat_ messages to \arg msg and resets it afterwards
 	void get_ingame_system_messages(std::vector<ChatMessage> & msg) {
-		msg = ingame_systechat_;
-		ingame_systechat_.clear();
+		msg = ingame_system_chat_;
+		ingame_system_chat_.clear();
 	}
 
 private:
@@ -180,7 +180,7 @@ private:
 
 	/// ChatProvider: chat messages
 	std::vector<ChatMessage> messages_;
-	std::vector<ChatMessage> ingame_systechat_;
+	std::vector<ChatMessage> ingame_system_chat_;
 
 	/// An important response of the metaserver, the client is waiting for.
 	std::string              waitcmd_;

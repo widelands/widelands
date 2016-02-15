@@ -103,7 +103,7 @@ public:
 
 	Value * get_val     (char const * name);
 	Value * get_next_val(char const * name = nullptr);
-	uint32_t get_nuvalue_s() const {return values_.size();}
+	uint32_t get_num_values() const {return values_.size();}
 
 	char const * get_name() const;
 	void set_name(const std::string&);
