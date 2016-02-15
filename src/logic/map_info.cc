@@ -43,7 +43,9 @@ namespace  {
 
 // Setup the static objects Widelands needs to operate and initializes systems.
 void initialize() {
-	SDL_Init(SDL_INIT_VIDEO);
+	if (SDL_Init(SDL_INIT_VIDEO) != 0) {
+		throw wexception("Unable to initialize SDL: %s", SDL_GetError());
+	}
 
 	g_fs = new LayeredFileSystem();
 	g_fs->add_file_system(&FileSystem::create(INSTALL_DATADIR));

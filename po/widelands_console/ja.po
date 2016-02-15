@@ -1,22 +1,22 @@
-# Japanese translation for widelands
-# Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
-# This file is distributed under the same license as the widelands package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
-#
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Widelands Development Team
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 msgid ""
 msgstr ""
-"Project-Id-Version: widelands\n"
-"Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2015-02-07 14:46+0000\n"
-"PO-Revision-Date: 2014-10-18 05:10+0000\n"
-"Last-Translator: Midori <midori.tj@gmail.com>\n"
-"Language-Team: Japanese <ja@li.org>\n"
+"Project-Id-Version: Widelands\n"
+"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
+"POT-Creation-Date: 2016-02-09 16:39+0000\n"
+"PO-Revision-Date: 2016-02-09 16:39+0000\n"
+"Last-Translator: GunChleoc\n"
+"Language-Team: Japanese (http://www.transifex.com/widelands/widelands/language/ja/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-02-08 05:43+0000\n"
-"X-Generator: Launchpad (build 17331)\n"
 "Language: ja\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 #. * TRANSLATORS: %s = version information
 #: ../../src/wlapplication_messages.cc:40
@@ -40,32 +40,27 @@ msgstr " --<config-entry-name>=value  任意の設定ファイルで上書きし
 msgid ""
 " --logfile=FILENAME   Log output to file FILENAME instead of \n"
 "                      terminal output"
-msgstr ""
-" --logfile=FILENAME   端末に出力する代わりに、ファイルFILENAMEに\n"
-"                      ログを出力します。"
+msgstr " --logfile=FILENAME   端末に出力する代わりに、ファイルFILENAMEに\n                      ログを出力します。"
 
 #: ../../src/wlapplication_messages.cc:49
 msgid ""
 " --datadir=DIRNAME    Use specified directory for the widelands\n"
 "                      data files"
-msgstr ""
-" --datadir=DIRNAME    widelandsデータファイルを指定したディレクトリで\n"
-"                      使用します。"
+msgstr " --datadir=DIRNAME    widelandsデータファイルを指定したディレクトリで\n                      使用します。"
 
 #: ../../src/wlapplication_messages.cc:51
 msgid ""
 " --homedir=DIRNAME    Use specified directory for widelands config\n"
 "                      files, savegames and replays"
-msgstr ""
-" --homedir=DIRNAME    widelands設定ファイル、セーブデータ、リプレイを\n"
-"                      指定ディレクトリで使用します。"
+msgstr " --homedir=DIRNAME    widelands設定ファイル、セーブデータ、リプレイを\n                      指定ディレクトリで使用します。"
 
 #: ../../src/wlapplication_messages.cc:54
 msgid "                      Default is ~/.widelands"
 msgstr "                      デフォルトは ~/.widelands"
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
-#. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the widelands textdomain
+#. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
+#. widelands textdomain
 #: ../../src/wlapplication_messages.cc:59
 msgid ""
 " --coredump=[true|false]\n"
@@ -77,29 +72,23 @@ msgstr ""
 msgid ""
 " --language=[de_DE|sv_SE|...]\n"
 "                      The locale to use."
-msgstr ""
-" --language=[de_DE|sv_SE|...]\n"
-"                      使用するロケール。"
+msgstr " --language=[de_DE|sv_SE|...]\n                      使用するロケール。"
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
-#. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the widelands textdomain
+#. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
+#. widelands textdomain
 #: ../../src/wlapplication_messages.cc:66
 msgid ""
 " --remove_syncstreams=[true|false]\n"
 "                      Remove syncstream files on startup"
-msgstr ""
-" --remove_syncstreams=[true|false]\n"
-"                      開始時にsyncstreamファイルを削除します。"
+msgstr " --remove_syncstreams=[true|false]\n                      開始時にsyncstreamファイルを削除します。"
 
 #: ../../src/wlapplication_messages.cc:68
 msgid ""
 " --remove_replays=[...]\n"
 "                      Remove replays after this number of days.\n"
 "                      If this is 0, replays are not deleted."
-msgstr ""
-" --remove_replays=[...]\n"
-"                      この日数以前のリプレイを削除します。\n"
-"                      これが0の場合はリプレイを削除しません。"
+msgstr " --remove_replays=[...]\n                      この日数以前のリプレイを削除します。\n                      これが0の場合はリプレイを削除しません。"
 
 #: ../../src/wlapplication_messages.cc:71
 msgid " --autosave=[...]     Automatically save each n minutes"
@@ -136,18 +125,13 @@ msgid ""
 " --editor             Directly starts the Widelands editor.\n"
 "                      You can add a =FILENAME to directly load\n"
 "                      the map FILENAME in editor."
-msgstr ""
-" --editor             Widelandsエディタを直接起動します。\n"
-"                      エディタでマップFILENAMEを直接読み込むために\n"
-"                      =FILENAMEを追加できます。"
+msgstr " --editor             Widelandsエディタを直接起動します。\n                      エディタでマップFILENAMEを直接読み込むために\n                      =FILENAMEを追加できます。"
 
 #: ../../src/wlapplication_messages.cc:83
 msgid ""
 " --scenario=FILENAME  Directly starts the map FILENAME as scenario\n"
 "                      map."
-msgstr ""
-" --scenario=FILENAME  シナリオマップとしてファイル名を\n"
-"                      直接起動します。"
+msgstr " --scenario=FILENAME  シナリオマップとしてファイル名を\n                      直接起動します。"
 
 #: ../../src/wlapplication_messages.cc:85
 msgid " --loadgame=FILENAME  Directly loads the savegame FILENAME."
@@ -157,17 +141,12 @@ msgstr " --loadgame=FILENAME    セーブデータFILENAMEを直接読み込み�
 msgid ""
 " --script=FILENAME    Run the given Lua script after initialization.\n"
 "                      Only valid with --scenario, --loadgame, or --editor."
-msgstr ""
-" --script=FILENAME 初期化後に指定したLuaスクリプトを実行します。\n"
-"                      --scenario、--loadgame、--editorでのみ有効です。"
-
-#: ../../src/wlapplication_messages.cc:88
-msgid " --dedicated=FILENAME Starts a dedicated server with FILENAME as map"
-msgstr " --dedicated=FILENAME マップとしてFILENAME を指定して専用サーバーを起動します。"
+msgstr " --script=FILENAME 初期化後に指定したLuaスクリプトを実行します。\n                      --scenario、--loadgame、--editorでのみ有効です。"
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
-#. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the widelands textdomain
-#: ../../src/wlapplication_messages.cc:91
+#. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
+#. widelands textdomain
+#: ../../src/wlapplication_messages.cc:90
 msgid ""
 " --auto_roadbuild_mode=[true|false]\n"
 "                      Whether to enter roadbuilding mode\n"
@@ -175,46 +154,44 @@ msgid ""
 "                      not connected to a road."
 msgstr ""
 
-#: ../../src/wlapplication_messages.cc:95
+#: ../../src/wlapplication_messages.cc:94
 msgid "Graphic options:"
 msgstr "グラフィックオプション:"
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
-#. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the widelands textdomain
-#: ../../src/wlapplication_messages.cc:98
+#. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
+#. widelands textdomain
+#: ../../src/wlapplication_messages.cc:97
 msgid ""
 " --fullscreen=[true|false]\n"
 "                      Whether to use the whole display for the\n"
 "                      game screen."
 msgstr ""
 
-#: ../../src/wlapplication_messages.cc:101
+#: ../../src/wlapplication_messages.cc:100
 msgid " --xres=[...]         Width of the window in pixel."
 msgstr " --xres=[...]         ウィンドウの幅（ピクセル）。"
 
-#: ../../src/wlapplication_messages.cc:102
+#: ../../src/wlapplication_messages.cc:101
 msgid " --yres=[...]         Height of the window in pixel."
 msgstr " --yres=[...]         ウィンドウの高さ（ピクセル）。"
 
-#: ../../src/wlapplication_messages.cc:106
+#: ../../src/wlapplication_messages.cc:105
 msgid "Options for the internal window manager:"
 msgstr "内部ウィンドウマネージャーのオプション:"
 
-#: ../../src/wlapplication_messages.cc:107
+#: ../../src/wlapplication_messages.cc:106
 msgid ""
 " --border_snap_distance=[0 ...]\n"
 "                      Move a window to the edge of the screen\n"
 "                      when the edge of the window comes within\n"
 "                      this distance from the edge of the screen."
-msgstr ""
-" --border_snap_distance=[0 ...]\n"
-"                      画面端からこの距離内に\n"
-"                      ウィンドウ端が来たときに、\n"
-"                      画面端へウィンドウを移動します。"
+msgstr " --border_snap_distance=[0 ...]\n                      画面端からこの距離内に\n                      ウィンドウ端が来たときに、\n                      画面端へウィンドウを移動します。"
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
-#. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the widelands textdomain
-#: ../../src/wlapplication_messages.cc:113
+#. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
+#. widelands textdomain
+#: ../../src/wlapplication_messages.cc:112
 msgid ""
 " --dock_windows_to_edges=[true|false]\n"
 "                      Eliminate a window's border towards the\n"
@@ -222,45 +199,34 @@ msgid ""
 "                      window is next to the edge of the screen."
 msgstr ""
 
-#: ../../src/wlapplication_messages.cc:117
+#: ../../src/wlapplication_messages.cc:116
 msgid ""
 " --panel_snap_distance=[0 ...]\n"
 "                      Move a window to the edge of the panel when\n"
 "                      the edge of the window comes within this\n"
 "                      distance from the edge of the panel."
-msgstr ""
-" --panel_snap_distance=[0 ...]\n"
-"                      ウィンドウ端が\n"
-"                      パネル端からこの距離内に来たときに、\n"
-"                      パネル端へウィンドウを移動します。"
+msgstr " --panel_snap_distance=[0 ...]\n                      ウィンドウ端が\n                      パネル端からこの距離内に来たときに、\n                      パネル端へウィンドウを移動します。"
 
-#: ../../src/wlapplication_messages.cc:121
+#: ../../src/wlapplication_messages.cc:120
 msgid ""
 " --snap_windows_only_when_overlapping=[yes|no]\n"
 "                      Only move a window to the edge of a panel\n"
 "                      if the window is overlapping with the\n"
 "                      panel."
-msgstr ""
-" --snap_windows_only_when_overlapping=[yes|no]\n"
-"                      ウィンドウがパネルと重なっているときに、\n"
-"                      パネル端へウィンドウを移動するだけ。"
+msgstr " --snap_windows_only_when_overlapping=[yes|no]\n                      ウィンドウがパネルと重なっているときに、\n                      パネル端へウィンドウを移動するだけ。"
 
-#: ../../src/wlapplication_messages.cc:126
+#: ../../src/wlapplication_messages.cc:125
 msgid " --verbose            Enable verbose debug messages"
 msgstr " --verbose            デバッグメッセージを有効化します。"
 
-#: ../../src/wlapplication_messages.cc:128
+#: ../../src/wlapplication_messages.cc:127
 msgid " --help               Show this help"
 msgstr " --help               このヘルプを表示します。"
 
-#: ../../src/wlapplication_messages.cc:130
+#: ../../src/wlapplication_messages.cc:129
 msgid ""
 "Bug reports? Suggestions? Check out the project website:\n"
 "        https://launchpad.net/widelands\n"
 "\n"
 "Hope you enjoy this game!"
-msgstr ""
-"バグレポートや提案がありますか？プロジェクトのウェブサイトをチェックしてください。\n"
-"        https://launchpad.net/widelands\n"
-"\n"
-"それでは良いゲームを！"
+msgstr "バグレポートや提案がありますか？プロジェクトのウェブサイトをチェックしてください。\n        https://launchpad.net/widelands\n\nそれでは良いゲームを！"

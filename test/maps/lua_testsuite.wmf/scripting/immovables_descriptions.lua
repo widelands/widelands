@@ -107,10 +107,10 @@ function test_descr:test_immovable_owner_type()
 end
 
 function test_descr:test_immovable_size()
-   assert_equal(0, egbase:get_immovable_description("bush1").size)
-   assert_equal(1, egbase:get_immovable_description("cornfield_ripe").size)
-   assert_equal(1, egbase:get_immovable_description("alder_summer_sapling").size)
-   assert_equal(1, egbase:get_immovable_description("alder_summer_old").size)
+   assert_equal("none", egbase:get_immovable_description("bush1").size)
+   assert_equal("small", egbase:get_immovable_description("cornfield_ripe").size)
+   assert_equal("small", egbase:get_immovable_description("alder_summer_sapling").size)
+   assert_equal("small", egbase:get_immovable_description("alder_summer_old").size)
 end
 
 function test_descr:test_immovable_has_attribute()
@@ -120,7 +120,7 @@ function test_descr:test_immovable_has_attribute()
 end
 
 function test_descr:test_immovable_probability_to_grow()
-	local terrain = egbase:get_terrain_description("wiese1")
+   local terrain = egbase:get_terrain_description("wiese1")
    assert_equal(nil, egbase:get_immovable_description("bush1"):probability_to_grow(terrain))
 
    local alder = egbase:get_immovable_description("alder_summer_sapling")
@@ -257,10 +257,11 @@ function test_descr:test_returned_wares_enhanced()
 end
 
 function test_descr:test_size()
-   assert_equal(1, egbase:get_building_description("barbarians_lumberjacks_hut").size)
-   assert_equal(2, egbase:get_building_description("barbarians_reed_yard").size)
-   assert_equal(3, egbase:get_building_description("barbarians_fortress").size)
-   assert_equal(1, egbase:get_building_description("barbarians_coalmine").size)
+   assert_equal("small", egbase:get_building_description("barbarians_lumberjacks_hut").size)
+   assert_equal("medium", egbase:get_building_description("barbarians_reed_yard").size)
+   assert_equal("big", egbase:get_building_description("barbarians_fortress").size)
+   assert_equal("small", egbase:get_building_description("barbarians_coalmine").size)
+   assert_equal("none", egbase:get_immovable_description("pebble1").size)
 end
 
 function test_descr:test_type()

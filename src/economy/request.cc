@@ -351,7 +351,7 @@ void Request::set_economy(Economy * const e)
 			economy_->remove_request(*this);
 		economy_ = e;
 		if (economy_ && is_open())
-			economy_->   add_request(*this);
+			economy_->add_request(*this);
 	}
 }
 

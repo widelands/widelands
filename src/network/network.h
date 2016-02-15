@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2008, 2012, 2015 by the Widelands Development Team
+ * Copyright (C) 2004-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -53,7 +53,7 @@ struct CmdNetCheckSync : public Widelands::Command {
 	Widelands::QueueCommandTypes id() const override {return Widelands::QueueCommandTypes::kNetCheckSync;}
 
 private:
-	SyncCallback * m_callback;
+	SyncCallback * callback_;
 };
 
 
@@ -79,13 +79,13 @@ public:
 	void receive(int32_t ntime);
 
 private:
-	int32_t m_networktime;
-	int32_t m_time;
+	int32_t networktime_;
+	int32_t time_;
 
-	uint32_t m_lastframe;
+	uint32_t lastframe_;
 
 	/// This is an attempt to measure how far behind the network time we are.
-	uint32_t m_latency;
+	uint32_t latency_;
 };
 
 
@@ -118,7 +118,7 @@ public:
 
 private:
 	std::vector<uint8_t> buffer;
-	size_t m_index;
+	size_t index_;
 };
 
 struct FilePart {
@@ -150,7 +150,7 @@ public:
 
 private:
 	friend struct RecvPacket;
-	std::vector<uint8_t> queue;
+	std::vector<uint8_t> queue_;
 };
 
 
@@ -169,7 +169,7 @@ struct DisconnectException : public std::exception {
 	const char * what() const noexcept override;
 
 private:
-	std::string m_what;
+	std::string what_;
 };
 
 /**
@@ -177,7 +177,7 @@ private:
  * should be terminated because an unexpected message got received that is disallowed by the protocol.
  */
 struct ProtocolException : public std::exception {
-	explicit ProtocolException(uint8_t code) {m_what = code;}
+	explicit ProtocolException(uint8_t code) {what_ = code;}
 
 	/// do NOT use!!! This exception shall only return the command number of the received message
 	/// via \ref ProtocolException:number()
@@ -186,10 +186,10 @@ struct ProtocolException : public std::exception {
 	}
 
 	/// \returns the command number of the received message
-	virtual int          number() const {return m_what;}
+	virtual int          number() const {return what_;}
 private:
 	// no uint8_t, as lexical_cast does not support that format
-	int m_what;
+	int what_;
 };
 
 #endif  // end of include guard: WL_NETWORK_NETWORK_H

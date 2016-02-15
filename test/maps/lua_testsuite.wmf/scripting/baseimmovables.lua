@@ -116,19 +116,19 @@ function immovable_property_tests:teardown()
 end
 
 function immovable_property_tests:test_size_none()
-   assert_equal("none", self.none.size)
+   assert_equal("none", self.none.descr.size)
 end
 function immovable_property_tests:test_size_small()
-   assert_equal("small", self.small.size)
+   assert_equal("small", self.small.descr.size)
 end
 function immovable_property_tests:test_size_medium()
-   assert_equal("medium", self.medium.size)
+   assert_equal("medium", self.medium.descr.size)
 end
 function immovable_property_tests:test_size_big()
-   assert_equal("big", self.big.size)
+   assert_equal("big", self.big.descr.size)
 end
 function immovable_property_tests:test_size_fortress()
-   assert_equal("big", self.big_building.size)
+   assert_equal("big", self.big_building.descr.size)
 end
 function immovable_property_tests:test_name_pebble()
    assert_equal("pebble1", self.none.descr.name)
