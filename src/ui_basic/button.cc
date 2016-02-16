@@ -39,13 +39,13 @@ Button::Button //  for textual buttons. If h = 0, h will resize according to the
 	 const Image* bg_pic,
 	 const std::string & title_text,
 	 const std::string & tooltip_text,
-	 bool const _enabled, bool const flat)
+	 bool const init_enabled, bool const flat)
 	:
 	NamedPanel           (parent, name, x, y, w, h, tooltip_text),
 	highlighted_   (false),
 	pressed_       (false),
 	permpressed_   (false),
-	enabled_       (_enabled),
+	enabled_       (init_enabled),
 	repeating_     (false),
 	flat_          (flat),
 	draw_flat_background_(false),
@@ -71,13 +71,13 @@ Button::Button //  for pictorial buttons
 	 const Image* bg_pic,
 	 const Image* fg_pic,
 	 const std::string & tooltip_text,
-	 bool const _enabled, bool const flat, const bool keep_image_size)
+	 bool const init_enabled, bool const flat, const bool keep_image_size)
 	:
 	NamedPanel      (parent, name, x, y, w, h, tooltip_text),
 	highlighted_   (false),
 	pressed_       (false),
 	permpressed_   (false),
-	enabled_       (_enabled),
+	enabled_       (init_enabled),
 	repeating_     (false),
 	flat_          (flat),
 	keep_image_size_(keep_image_size),
@@ -211,10 +211,11 @@ void Button::draw(RenderTarget & dst)
 
 	} else if (title_.length()) {
 		//  Otherwise draw title string centered
-		const Image* entry_text_im = UI::g_fh1->render(
-												  as_uifont(title_,
-																UI_FONT_SIZE_SMALL,
-																enabled_ ? UI_FONT_CLR_FG : UI_FONT_CLR_DISABLED));
+		const Image* entry_text_im =
+				autofit_ui_text(title_,
+									 get_inner_w() - 2 * kButtonImageMargin,
+									 enabled_ ? UI_FONT_CLR_FG : UI_FONT_CLR_DISABLED);
+
 		dst.blit(Point((get_w() - entry_text_im->width()) / 2, (get_h() - entry_text_im->height()) / 2),
 					entry_text_im);
 	}

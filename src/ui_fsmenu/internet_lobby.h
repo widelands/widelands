@@ -50,7 +50,6 @@ private:
 	uint32_t lisw_;
 	uint32_t fs_;
 	uint32_t prev_clientlist_len_;
-	std::string fn_;
 	UI::Textarea title, clients_, opengames_;
 	UI::Textarea servername_;
 	UI::Button joingame, hostgame, back;

@@ -202,17 +202,9 @@ FullscreenMenuOptions::FullscreenMenuOptions
 		 "",
 		 g_gr->images().get("images/ui_basic/but3.png"), UI::SpinBox::Type::kBig),
 
-	sb_remove_replays_
-		(&box_saving_, 0, 0, column_width_, 250,
-		 opt.remove_replays, 0, 365, _("Remove replays older than:"),
-		 /** TRANSLATORS: Options: Remove Replays older than: */
-		 /** TRANSLATORS: This will have a number added in front of it */
-		 ngettext("day", "days", opt.remove_replays),
-		 g_gr->images().get("images/ui_basic/but3.png"), UI::SpinBox::Type::kBig),
-
 	nozip_(&box_saving_, Point(0, 0), _("Do not zip widelands data files (maps, replays and savegames)"),
 			 "", column_width_),
-	remove_syncstreams_(&box_saving_, Point(0, 0), _("Remove Syncstream dumps on startup"),
+	write_syncstreams_(&box_saving_, Point(0, 0), _("Write syncstreams in network games to debug desyncs"),
 							  "", column_width_),
 
 	// Game options
@@ -234,7 +226,7 @@ FullscreenMenuOptions::FullscreenMenuOptions
 	os_(opt)
 {
 	// Set up UI Elements
-	title_           .set_textstyle(UI::TextStyle::ui_big());
+	title_           .set_fontsize(UI_FONT_SIZE_BIG);
 
 	tabs_.add("options_interface", _("Interface"), &box_interface_, "");
 	tabs_.add("options_windows", _("Windows"), &box_windows_, "");
@@ -278,9 +270,8 @@ FullscreenMenuOptions::FullscreenMenuOptions
 	// Saving
 	box_saving_.add(&sb_autosave_, UI::Align::kLeft);
 	box_saving_.add(&sb_rolling_autosave_, UI::Align::kLeft);
-	box_saving_.add(&sb_remove_replays_, UI::Align::kLeft);
 	box_saving_.add(&nozip_, UI::Align::kLeft);
-	box_saving_.add(&remove_syncstreams_, UI::Align::kLeft);
+	box_saving_.add(&write_syncstreams_, UI::Align::kLeft);
 
 	// Game
 	box_game_.add(&auto_roadbuild_mode_, UI::Align::kLeft);
@@ -304,14 +295,6 @@ FullscreenMenuOptions::FullscreenMenuOptions
 		temp_button->sigclicked.connect
 				(boost::bind
 					(&FullscreenMenuOptions::update_sb_autosave_unit,
-					 boost::ref(*this)));
-	}
-	/** TRANSLATORS Options: Remove Replays older than: */
-	sb_remove_replays_.add_replacement(0, _("Never"));
-	for (UI::Button* temp_button : sb_remove_replays_.get_buttons()) {
-		temp_button->sigclicked.connect
-				(boost::bind
-					(&FullscreenMenuOptions::update_sb_remove_replays_unit,
 					 boost::ref(*this)));
 	}
 	for (UI::Button* temp_button : sb_dis_panel_.get_buttons()) {
@@ -386,7 +369,7 @@ FullscreenMenuOptions::FullscreenMenuOptions
 
 	// Saving options
 	nozip_                .set_state(opt.nozip);
-	remove_syncstreams_   .set_state(opt.remove_syncstreams);
+	write_syncstreams_   .set_state(opt.write_syncstreams);
 
 	// Game options
 	auto_roadbuild_mode_  .set_state(opt.auto_roadbuild_mode);
@@ -401,10 +384,6 @@ FullscreenMenuOptions::FullscreenMenuOptions
 
 void FullscreenMenuOptions::update_sb_autosave_unit() {
 	sb_autosave_.set_unit(ngettext("minute", "minutes", sb_autosave_.get_value()));
-}
-
-void FullscreenMenuOptions::update_sb_remove_replays_unit() {
-	sb_remove_replays_.set_unit(ngettext("day", "days", sb_remove_replays_.get_value()));
 }
 
 void FullscreenMenuOptions::update_sb_dis_panel_unit() {
@@ -505,9 +484,8 @@ OptionsCtrl::OptionsStruct FullscreenMenuOptions::get_values() {
 	// Saving options
 	os_.autosave              = sb_autosave_.get_value();
 	os_.rolling_autosave      = sb_rolling_autosave_.get_value();
-	os_.remove_replays        = sb_remove_replays_.get_value();
 	os_.nozip                 = nozip_.get_state();
-	os_.remove_syncstreams    = remove_syncstreams_.get_state();
+	os_.write_syncstreams = write_syncstreams_.get_state();
 
 	// Game options
 	os_.auto_roadbuild_mode   = auto_roadbuild_mode_.get_state();
@@ -574,9 +552,8 @@ OptionsCtrl::OptionsStruct OptionsCtrl::options_struct(uint32_t active_tab) {
 	// Saving options
 	opt.autosave = opt_section_.get_int("autosave", DEFAULT_AUTOSAVE_INTERVAL * 60);
 	opt.rolling_autosave = opt_section_.get_int("rolling_autosave", 5);
-	opt.remove_replays = opt_section_.get_int("remove_replays", 0);
 	opt.nozip = opt_section_.get_bool("nozip", false);
-	opt.remove_syncstreams = opt_section_.get_bool("remove_syncstreams", true);
+	opt.write_syncstreams = opt_section_.get_bool("write_syncstreams", true);
 
 	// Game options
 	opt.auto_roadbuild_mode = opt_section_.get_bool("auto_roadbuild_mode", true);
@@ -618,9 +595,8 @@ void OptionsCtrl::save_options() {
 	// Saving options
 	opt_section_.set_int("autosave",               opt.autosave * 60);
 	opt_section_.set_int("rolling_autosave",       opt.rolling_autosave);
-	opt_section_.set_int("remove_replays",         opt.remove_replays);
 	opt_section_.set_bool("nozip",                 opt.nozip);
-	opt_section_.set_bool("remove_syncstreams",    opt.remove_syncstreams);
+	opt_section_.set_bool("write_syncstreams",    opt.write_syncstreams);
 
 	// Game options
 	opt_section_.set_bool("auto_roadbuild_mode",   opt.auto_roadbuild_mode);

@@ -926,7 +926,7 @@ bool Worker::run_geologist_find(Game & game, State & state, const Action &)
 		if (rdescr && rdescr->detectable() && position.field->get_resources_amount()) {
 			const std::string message =
 					(boost::format("<rt image=%s><p font-face=serif font-size=14>%s</p></rt>")
-					 % rdescr->get_editor_pic(rdescr->max_amount())
+					 % rdescr->representative_image()
 					 % _("A geologist found resources.")).str();
 
 			Message::Type message_type = Message::Type::kGeologists;
@@ -1021,17 +1021,17 @@ bool Worker::run_construct(Game & game, State & state, const Action & /* action 
 Worker::Worker(const WorkerDescr & worker_descr)
 	:
 	Bob          (worker_descr),
-	m_economy    (nullptr),
-	m_supply     (nullptr),
-	m_transfer   (nullptr),
-	m_current_exp(0)
+	economy_    (nullptr),
+	supply_     (nullptr),
+	transfer_   (nullptr),
+	current_exp_(0)
 {
 }
 
 Worker::~Worker()
 {
-	assert(!m_location.is_set());
-	assert(!m_transfer);
+	assert(!location_.is_set());
+	assert(!transfer_);
 }
 
 
@@ -1040,29 +1040,29 @@ void Worker::log_general_info(const EditorGameBase & egbase)
 {
 	Bob::log_general_info(egbase);
 
-	if (upcast(PlayerImmovable, loc, m_location.get(egbase))) {
+	if (upcast(PlayerImmovable, loc, location_.get(egbase))) {
 		molog("* Owner: (%p)\n", &loc->owner());
 		molog("** Owner (plrnr): %i\n", loc->owner().player_number());
 		molog("* Economy: %p\n", loc->get_economy());
 	}
 
-	PlayerImmovable * imm = m_location.get(egbase);
+	PlayerImmovable * imm = location_.get(egbase);
 	molog("location: %u\n", imm ? imm->serial() : 0);
-	molog("Economy: %p\n", m_economy);
-	molog("transfer: %p\n",  m_transfer);
+	molog("Economy: %p\n", economy_);
+	molog("transfer: %p\n",  transfer_);
 
-	if (upcast(WareInstance, ware, m_carried_ware.get(egbase))) {
+	if (upcast(WareInstance, ware, carried_ware_.get(egbase))) {
 		molog
-			("* m_carried_ware->get_ware() (id): %i\n",
+			("* carried_ware->get_ware() (id): %i\n",
 			 ware->descr_index());
-		molog("* m_carried_ware->get_economy() (): %p\n", ware->get_economy());
+		molog("* carried_ware->get_economy() (): %p\n", ware->get_economy());
 	}
 
 	molog
-		("m_current_exp: %i / %i\n",
-		 m_current_exp, descr().get_needed_experience());
+		("current_exp: %i / %i\n",
+		 current_exp_, descr().get_needed_experience());
 
-	molog("m_supply: %p\n", m_supply);
+	molog("supply: %p\n", supply_);
 }
 
 
@@ -1076,28 +1076,28 @@ void Worker::set_location(PlayerImmovable * const location)
 {
 	assert(!location || ObjectPointer(location).get(owner().egbase()));
 
-	PlayerImmovable * const oldlocation = get_location(owner().egbase());
-	if (oldlocation == location)
+	PlayerImmovable * const old_location = get_location(owner().egbase());
+	if (old_location == location)
 		return;
 
-	if (oldlocation) {
-		// Note: even though we have an oldlocation, m_economy may be zero
-		// (oldlocation got deleted)
-		oldlocation->remove_worker(*this);
+	if (old_location) {
+		// Note: even though we have an old location, economy_ may be zero
+		// (old_location got deleted)
+		old_location->remove_worker(*this);
 	} else {
 		if (!is_shipping()) {
-			assert(!m_economy);
+			assert(!economy_);
 		}
 	}
 
-	m_location = location;
+	location_ = location;
 
 	if (location) {
 		Economy * const eco = location->get_economy();
 
-		if (!m_economy || (descr().type() == MapObjectType::SOLDIER)) {
+		if (!economy_ || (descr().type() == MapObjectType::SOLDIER)) {
 			set_economy(eco);
-		} else if (m_economy != eco) {
+		} else if (economy_ != eco) {
 			throw wexception
 				("Worker::set_location changes economy, but worker is no soldier");
 		}
@@ -1124,22 +1124,22 @@ void Worker::set_location(PlayerImmovable * const location)
  */
 void Worker::set_economy(Economy * const economy)
 {
-	if (economy == m_economy)
+	if (economy == economy_)
 		return;
 
-	if (m_economy)
-		m_economy->remove_workers
+	if (economy_)
+		economy_->remove_workers
 			(owner().tribe().worker_index(descr().name().c_str()), 1);
 
-	m_economy = economy;
+	economy_ = economy;
 
 	if (WareInstance * const ware = get_carried_ware(owner().egbase()))
-		ware->set_economy(m_economy);
-	if (m_supply)
-		m_supply->set_economy(m_economy);
+		ware->set_economy(economy_);
+	if (supply_)
+		supply_->set_economy(economy_);
 
-	if (m_economy)
-		m_economy->add_workers(owner().tribe().worker_index(descr().name().c_str()), 1);
+	if (economy_)
+		economy_->add_workers(owner().tribe().worker_index(descr().name().c_str()), 1);
 }
 
 
@@ -1167,9 +1167,9 @@ void Worker::cleanup(EditorGameBase & egbase)
 {
 	WareInstance * const ware = get_carried_ware(egbase);
 
-	if (m_supply) {
-		delete m_supply;
-		m_supply = nullptr;
+	if (supply_) {
+		delete supply_;
+		supply_ = nullptr;
 	}
 
 	if (ware)
@@ -1204,7 +1204,7 @@ void Worker::set_carried_ware
 		delete oldware;
 	}
 
-	m_carried_ware = ware;
+	carried_ware_ = ware;
 	ware->set_location(egbase, this);
 	if (upcast(Game, game, &egbase))
 		ware->update(*game);
@@ -1220,7 +1220,7 @@ WareInstance * Worker::fetch_carried_ware(EditorGameBase & game)
 
 	if (ware) {
 		ware->set_location(game, nullptr);
-		m_carried_ware = nullptr;
+		carried_ware_ = nullptr;
 	}
 
 	return ware;
@@ -1261,11 +1261,11 @@ void Worker::incorporate(Game & game)
 void Worker::create_needed_experience(Game & /* game */)
 {
 	if (descr().get_needed_experience() == INVALID_INDEX) {
-		m_current_exp = INVALID_INDEX;
+		current_exp_ = INVALID_INDEX;
 		return;
 	}
 
-	m_current_exp = 0;
+	current_exp_ = 0;
 }
 
 
@@ -1278,7 +1278,7 @@ void Worker::create_needed_experience(Game & /* game */)
  */
 DescriptionIndex Worker::gain_experience(Game & game) {
 	return (descr().get_needed_experience() == INVALID_INDEX ||
-			  ++m_current_exp < descr().get_needed_experience()) ?
+			  ++current_exp_ < descr().get_needed_experience()) ?
 				INVALID_INDEX :
 				level(game);
 }
@@ -1304,8 +1304,8 @@ DescriptionIndex Worker::level(Game & game) {
 	assert(t.has_worker(new_index));
 
 	// Inform the economy, that something has changed
-	m_economy->remove_workers(old_index, 1);
-	m_economy->add_workers   (new_index, 1);
+	economy_->remove_workers(old_index, 1);
+	economy_->add_workers   (new_index, 1);
 
 	create_needed_experience(game);
 	return old_index; //  So that the caller knows what to replace him with.
@@ -1354,21 +1354,21 @@ void Worker::start_task_transfer(Game & game, Transfer * t)
 	// (in that case, the transfer task already exists on the stack
 	// when this is called).
 	if (get_state(taskGowarehouse) || get_state(taskTransfer)) {
-		assert(!m_transfer);
+		assert(!transfer_);
 
-		m_transfer = t;
+		transfer_ = t;
 		send_signal(game, "transfer");
 	} else { //  just start a normal transfer
 		push_task(game, taskTransfer);
-		m_transfer = t;
+		transfer_ = t;
 	}
 }
 
 void Worker::transfer_pop(Game & /* game */, State & /* state */)
 {
-	if (m_transfer) {
-		m_transfer->has_failed();
-		m_transfer = nullptr;
+	if (transfer_) {
+		transfer_->has_failed();
+		transfer_ = nullptr;
 	}
 }
 
@@ -1384,7 +1384,7 @@ void Worker::transfer_update(Game & game, State & /* state */) {
 	}
 
 	// The request is no longer valid, the task has failed
-	if (!m_transfer) {
+	if (!transfer_) {
 		molog("[transfer]: Fail (without transfer)\n");
 
 		send_signal(game, "fail");
@@ -1435,12 +1435,12 @@ void Worker::transfer_update(Game & game, State & /* state */) {
 	// Figure out where to go
 	bool success;
 	PlayerImmovable * const nextstep =
-		m_transfer->get_next_step(location, success);
+		transfer_->get_next_step(location, success);
 
 	if (!nextstep) {
-		Transfer * const t = m_transfer;
+		Transfer * const t = transfer_;
 
-		m_transfer = nullptr;
+		transfer_ = nullptr;
 
 		if (success) {
 			pop_task(game);
@@ -1550,7 +1550,7 @@ void Worker::transfer_update(Game & game, State & /* state */) {
  */
 void Worker::cancel_task_transfer(Game & game)
 {
-	m_transfer = nullptr;
+	transfer_ = nullptr;
 	send_signal(game, "cancel");
 }
 
@@ -1946,7 +1946,7 @@ const Bob::Task Worker::taskGowarehouse = {
  */
 void Worker::start_task_gowarehouse(Game & game)
 {
-	assert(!m_supply);
+	assert(!supply_);
 
 	push_task(game, taskGowarehouse);
 }
@@ -1978,17 +1978,17 @@ void Worker::gowarehouse_update(Game & game, State & /* state */)
 	}
 
 	if (dynamic_cast<Warehouse const *>(location)) {
-		delete m_supply;
-		m_supply = nullptr;
+		delete supply_;
+		supply_ = nullptr;
 
 		schedule_incorporate(game);
 		return;
 	}
 
 	// If we got a transfer, use it
-	if (m_transfer) {
-		Transfer * const t = m_transfer;
-		m_transfer = nullptr;
+	if (transfer_) {
+		Transfer * const t = transfer_;
+		transfer_ = nullptr;
 
 		molog("[gowarehouse]: Got transfer\n");
 
@@ -2011,8 +2011,8 @@ void Worker::gowarehouse_update(Game & game, State & /* state */)
 	// check against disappearing warehouses, or the worker will just
 	// idle on a flag until the end of days (actually, until either the
 	// flag is removed or a warehouse connects to the Economy).
-	if (!m_supply)
-		m_supply = new IdleWorkerSupply(*this);
+	if (!supply_)
+		supply_ = new IdleWorkerSupply(*this);
 
 	return start_task_idle(game, descr().get_animation("idle"), 1000);
 }
@@ -2023,19 +2023,19 @@ void Worker::gowarehouse_signalimmediate
 	if (signal == "transfer") {
 		// We are assigned a transfer, make sure our supply disappears immediately
 		// Otherwise, we might receive two transfers in a row.
-		delete m_supply;
-		m_supply = nullptr;
+		delete supply_;
+		supply_ = nullptr;
 	}
 }
 
 void Worker::gowarehouse_pop(Game &, State &)
 {
-	delete m_supply;
-	m_supply = nullptr;
+	delete supply_;
+	supply_ = nullptr;
 
-	if (m_transfer) {
-		m_transfer->has_failed();
-		m_transfer = nullptr;
+	if (transfer_) {
+		transfer_->has_failed();
+		transfer_ = nullptr;
 	}
 }
 
@@ -2477,16 +2477,16 @@ void Worker::start_task_fugitive(Game & game)
 }
 
 struct FindFlagWithPlayersWarehouse {
-	FindFlagWithPlayersWarehouse(const Player & owner) : m_owner(owner) {}
+	FindFlagWithPlayersWarehouse(const Player & owner) : owner_(owner) {}
 	bool accept(const BaseImmovable & imm) const {
 		if (upcast(Flag const, flag, &imm))
-			if (&flag->owner() == &m_owner)
+			if (&flag->owner() == &owner_)
 				if (flag->economy().warehouses().size())
 					return true;
 		return false;
 	}
 private:
-	const Player & m_owner;
+	const Player & owner_;
 };
 
 void Worker::fugitive_update(Game & game, State & state)
@@ -2925,8 +2925,8 @@ Load/save support
 constexpr uint8_t kCurrentPacketVersion = 3;
 
 Worker::Loader::Loader() :
-	m_location(0),
-	m_carried_ware(0)
+	location_(0),
+	carried_ware_(0)
 {
 }
 
@@ -2938,13 +2938,13 @@ void Worker::Loader::load(FileRead & fr)
 		if (packet_version == kCurrentPacketVersion) {
 
 			Worker & worker = get<Worker>();
-			m_location = fr.unsigned_32();
-			m_carried_ware = fr.unsigned_32();
-			worker.m_current_exp = fr.signed_32();
+			location_ = fr.unsigned_32();
+			carried_ware_ = fr.unsigned_32();
+			worker.current_exp_ = fr.signed_32();
 
 			if (fr.unsigned_8()) {
-				worker.m_transfer = new Transfer(dynamic_cast<Game&>(egbase()), worker);
-				worker.m_transfer->read(fr, m_transfer);
+				worker.transfer_ = new Transfer(dynamic_cast<Game&>(egbase()), worker);
+				worker.transfer_->read(fr, transfer_);
 			}
 		} else {
 			throw UnhandledVersionError("Worker", packet_version, kCurrentPacketVersion);
@@ -2960,12 +2960,12 @@ void Worker::Loader::load_pointers()
 
 	Worker & worker = get<Worker>();
 
-	if (m_location)
-		worker.set_location(&mol().get<PlayerImmovable>(m_location));
-	if (m_carried_ware)
-		worker.m_carried_ware = &mol().get<WareInstance>(m_carried_ware);
-	if (worker.m_transfer)
-		worker.m_transfer->read_pointers(mol(), m_transfer);
+	if (location_)
+		worker.set_location(&mol().get<PlayerImmovable>(location_));
+	if (carried_ware_)
+		worker.carried_ware_ = &mol().get<WareInstance>(carried_ware_);
+	if (worker.transfer_)
+		worker.transfer_->read_pointers(mol(), transfer_);
 }
 
 void Worker::Loader::load_finish()
@@ -2980,7 +2980,7 @@ void Worker::Loader::load_finish()
 	// us and will do so on load too. To make the order at which we are loaded
 	// not a factor, we do not overwrite the economy they might have set for us
 	// already.
-	if (PlayerImmovable * const location = worker.m_location.get(egbase())) {
+	if (PlayerImmovable * const location = worker.location_.get(egbase())) {
 		worker.set_economy(location->get_economy());
 	}
 }
@@ -3076,13 +3076,13 @@ void Worker::do_save
 	Bob::save(egbase, mos, fw);
 
 	fw.unsigned_8(kCurrentPacketVersion);
-	fw.unsigned_32(mos.get_object_file_index_or_zero(m_location.get(egbase)));
-	fw.unsigned_32(mos.get_object_file_index_or_zero(m_carried_ware.get(egbase)));
-	fw.signed_32(m_current_exp);
+	fw.unsigned_32(mos.get_object_file_index_or_zero(location_.get(egbase)));
+	fw.unsigned_32(mos.get_object_file_index_or_zero(carried_ware_.get(egbase)));
+	fw.signed_32(current_exp_);
 
-	if (m_transfer) {
+	if (transfer_) {
 		fw.unsigned_8(1);
-		m_transfer->write(mos, fw);
+		transfer_->write(mos, fw);
 	} else {
 		fw.unsigned_8(0);
 	}

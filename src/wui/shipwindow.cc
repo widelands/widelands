@@ -321,9 +321,9 @@ void ShipWindow::act_scout_towards(WalkingDir direction) {
 
 /// Constructs a port at the port build space in vision range
 void ShipWindow::act_construct_port() {
-	if (!m_ship.exp_port_spaces() || m_ship.exp_port_spaces()->empty())
+	if (m_ship.exp_port_spaces().empty())
 		return;
-	m_igbase.game().send_player_ship_construct_port(m_ship, m_ship.exp_port_spaces()->front());
+	m_igbase.game().send_player_ship_construct_port(m_ship, m_ship.exp_port_spaces().front());
 }
 
 /// Explores the island cw or ccw

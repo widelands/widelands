@@ -64,7 +64,7 @@ TerrainDescription::Is terrain_type_from_string(const std::string& type) {
 }  // namespace
 
 
-TerrainDescription::Type::Type(TerrainDescription::Is _is) : is(_is) {
+TerrainDescription::Type::Type(TerrainDescription::Is init_is) : is(init_is) {
 	switch (is) {
 	case Is::kArable:
 		/** TRANSLATORS: This is a terrain type tooltip in the editor */
@@ -210,8 +210,8 @@ const std::string& TerrainDescription::descname() const {
 	return descname_;
 }
 
-const EditorCategory& TerrainDescription::editor_category() const {
-	return *editor_category_;
+const EditorCategory* TerrainDescription::editor_category() const {
+	return editor_category_;
 }
 
 DescriptionIndex TerrainDescription::get_valid_resource(uint8_t index) const {
@@ -220,6 +220,10 @@ DescriptionIndex TerrainDescription::get_valid_resource(uint8_t index) const {
 
 int TerrainDescription::get_num_valid_resources() const {
 	return valid_resources_.size();
+}
+
+std::vector<uint8_t> TerrainDescription::valid_resources() const {
+	return valid_resources_;
 }
 
 bool TerrainDescription::is_resource_valid(const int res) const {

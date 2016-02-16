@@ -49,31 +49,31 @@ Request IMPLEMENTATION
 */
 
 Request::Request
-	(PlayerImmovable & _target,
+	(PlayerImmovable & init_target,
 	 DescriptionIndex const index,
 	 CallbackFn const cbfn,
 	 WareWorker const w)
 	:
 	type_             (w),
-	target_           (_target),
-	target_building_  (dynamic_cast<Building *>(&_target)),
-	target_productionsite_  (dynamic_cast<ProductionSite *>(&_target)),
-	target_warehouse_ (dynamic_cast<Warehouse *>(&_target)),
-	target_constructionsite_ (dynamic_cast<ConstructionSite *>(&_target)),
-	economy_          (_target.get_economy()),
+	target_           (init_target),
+	target_building_  (dynamic_cast<Building *>(&init_target)),
+	target_productionsite_  (dynamic_cast<ProductionSite *>(&init_target)),
+	target_warehouse_ (dynamic_cast<Warehouse *>(&init_target)),
+	target_constructionsite_ (dynamic_cast<ConstructionSite *>(&init_target)),
+	economy_          (init_target.get_economy()),
 	index_            (index),
 	count_            (1),
 	callbackfn_       (cbfn),
-	required_time_    (_target.owner().egbase().get_gametime()),
+	required_time_    (init_target.owner().egbase().get_gametime()),
 	required_interval_(0),
 	last_request_time_(required_time_)
 {
 	assert(type_ == wwWARE || type_ == wwWORKER);
-	if (w == wwWARE && !_target.owner().egbase().tribes().ware_exists(index))
+	if (w == wwWARE && !init_target.owner().egbase().tribes().ware_exists(index))
 		throw wexception
 			("creating ware request with index %u, but the ware for this index doesn't exist",
 			 index);
-	if (w == wwWORKER && !_target.owner().egbase().tribes().worker_exists(index))
+	if (w == wwWORKER && !init_target.owner().egbase().tribes().worker_exists(index))
 		throw wexception
 			("creating worker request with index %u, but the worker for this index doesn't exist",
 			 index);
@@ -351,7 +351,7 @@ void Request::set_economy(Economy * const e)
 			economy_->remove_request(*this);
 		economy_ = e;
 		if (economy_ && is_open())
-			economy_->   add_request(*this);
+			economy_->add_request(*this);
 	}
 }
 

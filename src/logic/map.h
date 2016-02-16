@@ -147,7 +147,7 @@ public:
 
 	using PortSpacesSet = std::set<Coords, Coords::OrderingFunctor>;
 	using Objectives = std::map<std::string, std::unique_ptr<Objective>>;
-	using SuggestedTeam = std::vector<uint16_t>;             // Players in a team
+	using SuggestedTeam = std::vector<PlayerNumber>;             // Players in a team
 	using SuggestedTeamLineup = std::vector<SuggestedTeam>; // Recommended teams to play against each other
 
 
@@ -256,7 +256,7 @@ public:
 	void set_scenario_player_closeable(PlayerNumber, bool);
 
 	/// \returns the maximum theoretical possible nodecaps (no blocking bobs, etc.)
-	NodeCaps get_max_nodecaps(const World& world, FCoords &);
+	NodeCaps get_max_nodecaps(const World& world, const FCoords &);
 
 	BaseImmovable * get_immovable(Coords) const;
 	uint32_t find_bobs
@@ -475,8 +475,8 @@ private:
 	void recalc_brightness(FCoords);
 	void recalc_nodecaps_pass1(const World& world, FCoords);
 	void recalc_nodecaps_pass2(const World& world, const FCoords & f);
-	NodeCaps _calc_nodecaps_pass1(const World& world, FCoords, bool consider_mobs = true);
-	NodeCaps _calc_nodecaps_pass2(const World& world,
+	NodeCaps calc_nodecaps_pass1(const World& world, FCoords, bool consider_mobs = true);
+	NodeCaps calc_nodecaps_pass2(const World& world,
 	                              FCoords,
 	                              bool consider_mobs = true,
 	                              NodeCaps initcaps = CAPS_NONE);

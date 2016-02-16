@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-02-03 09:18+0000\n"
+"POT-Creation-Date: 2016-02-16 09:25+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -2053,7 +2053,7 @@ msgstr ""
 #: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:94
 #: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:83
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:102
-#: ../../data/tribes/buildings/trainingsites/empire/arena/init.lua:72
+#: ../../data/tribes/buildings/trainingsites/empire/arena/init.lua:73
 #: ../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:68
 #: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:96
 msgid "sleeping"
@@ -2113,7 +2113,7 @@ msgstr ""
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:135
 #: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:91
-#: ../../data/tribes/buildings/trainingsites/empire/arena/init.lua:80
+#: ../../data/tribes/buildings/trainingsites/empire/arena/init.lua:81
 #: ../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:76
 msgid "upgrading soldier evade from level 0 to level 1"
 msgstr ""

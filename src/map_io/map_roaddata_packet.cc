@@ -111,11 +111,11 @@ void MapRoaddataPacket::read
 								 static_cast<long unsigned int>(nr_steps - i),
 								 e.what());
 						}
-					road._set_path(egbase, p);
+					road.set_path(egbase, p);
 
 					//  Now that all rudimentary data is set, init this road. Then
 					//  overwrite the initialization values.
-					road._link_into_flags(game);
+					road.link_into_flags(game);
 
 					road.idle_index_      = fr.unsigned_32();
 
@@ -143,7 +143,7 @@ void MapRoaddataPacket::read
 							 	new Request
 							 		(road,
 							 		 0,
-							 		 Road::_request_carrier_callback,
+							 		 Road::request_carrier_callback,
 									 wwWORKER))
 							->read(fr, game, mol);
 						} else {

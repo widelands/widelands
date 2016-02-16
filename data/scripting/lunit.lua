@@ -110,6 +110,17 @@ function assert_not_equal(unexpected, actual, msg)
   return actual
 end
 
+-- For testing float numbers - they can turn out to be a bit different from system
+-- to system, so we need a tolerance range.
+function assert_near(expected, actual, tolerance, msg)
+  lunit_stats_inc("assertions")
+  lunit_check_msg("assert_equal", msg)
+  lunit_do_assert(expected + tolerance >= actual, "expected '"..tostring(expected).."' with a tolerance of '"..tostring(tolerance).."' but was '"..tostring(actual).."'", msg)
+  lunit_do_assert(expected - tolerance <= actual, "expected '"..tostring(expected).."' with a tolerance of '"..tostring(tolerance).."' but was '"..tostring(actual).."'", msg)
+  return actual
+end
+
+
 function assert_match(pattern, actual, msg)
   lunit_stats_inc("assertions")
   lunit_check_msg("assert_match", msg)
