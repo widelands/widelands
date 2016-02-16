@@ -44,7 +44,7 @@ using Widelands::GameSaver;
 void SaveHandler::think(Widelands::Game & game) {
 	uint32_t realtime = SDL_GetTicks();
 	initialize(realtime);
-	std::string filename = "wl_autosave";
+	std::string filename = autosave_filename_;
 
 	if (!m_allow_saving) {
 		return;
@@ -97,7 +97,7 @@ void SaveHandler::think(Widelands::Game & game) {
 			filename_previous = filename_next;
 			number_of_rolls--;
 		}
-		filename = "wl_autosave_00";
+		filename = (boost::format("%s_00") % autosave_filename_).str();
 		log("Autosave: interval elapsed (%d s), saving %s\n", elapsed, filename.c_str());
 	}
 

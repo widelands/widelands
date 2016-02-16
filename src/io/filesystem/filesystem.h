@@ -142,7 +142,7 @@ protected:
 
 	///How to address the fs' topmost component (e.g. "" on Unix, "D:" on win32)
 	///\warning This is should \e not contain filesep!
-	std::string m_root;
+	std::string root_;
 
 #ifdef _WIN32
 private:

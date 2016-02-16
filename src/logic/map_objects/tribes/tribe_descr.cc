@@ -56,7 +56,7 @@ TribeDescr::TribeDescr
 	: name_(table.get_string("name")), descname_(info.descname), tribes_(init_tribes) {
 
 	try {
-		m_initializations = info.initializations;
+		initializations_ = info.initializations;
 
 		std::unique_ptr<LuaTable> items_table = table.get_table("animations");
 		frontier_animation_id_ = g_gr->animations().load(*items_table->get_table("frontier"));
