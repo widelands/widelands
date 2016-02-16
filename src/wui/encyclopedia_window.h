@@ -42,10 +42,10 @@ private:
 	struct EncyclopediaEntry {
 		EncyclopediaEntry(const EncyclopediaEntry&) = default;
 		EncyclopediaEntry& operator = (const EncyclopediaEntry&) = default;
-		EncyclopediaEntry(const Widelands::DescriptionIndex _index,
-		                  const std::string& _descname,
-		                  const Image* _icon)
-		   : index(_index), descname(_descname), icon(_icon) {
+		EncyclopediaEntry(const Widelands::DescriptionIndex i,
+								const std::string& init_descname,
+								const Image* init_icon)
+			: index(i), descname(init_descname), icon(init_icon) {
 		}
 		Widelands::DescriptionIndex index;
 		std::string descname;

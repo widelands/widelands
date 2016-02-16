@@ -47,10 +47,10 @@ std::string speed_string(int const speed) {
 }  // namespace
 
 InteractiveGameBase::InteractiveGameBase
-	(Widelands::Game & _game, Section & global_s,
+	(Widelands::Game& g, Section & global_s,
 	 PlayerType pt, bool const chatenabled, bool const multiplayer)
 	:
-	InteractiveBase(_game, global_s),
+	InteractiveBase(g, global_s),
 	chat_provider_(nullptr),
 	chatenabled_(chatenabled),
 	multiplayer_(multiplayer),

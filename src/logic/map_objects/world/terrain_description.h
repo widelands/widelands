@@ -53,7 +53,7 @@ public:
 	};
 
 	struct Type {
-		Type(TerrainDescription::Is _is);
+		Type(TerrainDescription::Is init_is);
 
 		TerrainDescription::Is is;
 		const char* descname;

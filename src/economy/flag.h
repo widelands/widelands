@@ -35,8 +35,8 @@ class WareInstance;
 
 class FlagDescr : public MapObjectDescr {
 public:
-	FlagDescr(char const* const _name, char const* const _descname)
-		: MapObjectDescr(MapObjectType::FLAG, _name, _descname) {
+	FlagDescr(char const* const init_name, char const* const init_descname)
+		: MapObjectDescr(MapObjectType::FLAG, init_name, init_descname) {
 	}
 	~FlagDescr() override {
 	}
