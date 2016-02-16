@@ -53,13 +53,17 @@ public:
 
 	/// Returns the path to the image that should be used in the editor to
 	/// represent an 'amount' of this resource.
-	const std::string& get_editor_pic(uint32_t amount) const;
+	const std::string& editor_image(uint32_t amount) const;
+
+	/// Returns the path to the image that should be used in menus to represent this resource
+	const std::string& representative_image() const {return representative_image_;}
 
 private:
 	const std::string name_;
 	const std::string descname_;
 	const bool detectable_;
 	const int32_t max_amount_;
+	const std::string representative_image_;
 	std::vector<EditorPicture> editor_pictures_;
 
 	DISALLOW_COPY_AND_ASSIGN(ResourceDescription);

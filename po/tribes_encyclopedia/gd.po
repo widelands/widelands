@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-02-03 09:18+0000\n"
-"PO-Revision-Date: 2016-02-03 09:55+0000\n"
+"POT-Creation-Date: 2016-02-09 16:38+0000\n"
+"PO-Revision-Date: 2016-02-12 14:14+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -1981,7 +1981,7 @@ msgid ""
 "This tasty bread is made in bakeries out of cornmeal, blackroot flour and "
 "water. It is appreciated as basic food by miners, scouts and soldiers in "
 "training sites (labyrinth and dungeon)."
-msgstr "Nì thu an t-aran blasta seo à min-coirce, min-freumhaige is uisge sna taighean-fuine. Tha na mèinnearan, rabhadairean is saighdearan ann an làraichean-trèanaidh (cuartanan is tuill-dhubha) measail air mar bhiadh bunasach."
+msgstr "Nì thu an t-aran blasta seo à min-coirce, min-freumhaige is uisge sna taighean-fuine. Tha na mèinnearan, rabhadairean is saighdearan ann an ionadan-trèanaidh (cuartanan is tuill-dhubha) measail air mar bhiadh bunasach."
 
 #. TRANSLATORS: Helptext for a ware: Pitta Bread
 #: ../../data/tribes/wares/bread_barbarians/helptexts.lua:4
@@ -1991,7 +1991,7 @@ msgid ""
 "is made out of wheat and water following a secret recipe. Pitta bread is "
 "used in the taverns, inns and big inns to prepare rations, snacks and meals."
 " It is also consumed at training sites (training camp and battle arena)."
-msgstr "Tha fuineadairean nan Tùsanach uabhasach math air aran tur ach blasta a dhèanamh. Nì iad à chruithneachd is uisge e ann an dòigh dhìomhair. Cleachdaich na taighean-tàirn, taighean-òil is taighean-òsta e gus greimeagan, lòin is miasan ullachadh. Ithear e ann an làraichean-trèanaidh (campaichean trèanaidh is raointean catha) cuideachd."
+msgstr "Tha fuineadairean nan Tùsanach uabhasach math air aran tur ach blasta a dhèanamh. Nì iad à chruithneachd is uisge e ann an dòigh dhìomhair. Cleachdaich na taighean-tàirn, taighean-òil is taighean-òsta e gus greimeagan, lòin is miasan ullachadh. Ithear e ann an ionadan-trèanaidh (campaichean trèanaidh is raointean catha) cuideachd."
 
 #. TRANSLATORS: Helptext for a ware: Bread
 #: ../../data/tribes/wares/bread_empire/helptexts.lua:4
@@ -2000,7 +2000,7 @@ msgid ""
 "The bakers of the Empire make really tasty bread out of flour and water. It "
 "is used in taverns and inns to prepare rations and meals. Bread is also "
 "consumed at the training sites (arena, colosseum, training camp)."
-msgstr "Nì fuineadairean na h-Impireachd aran uabhasach blasta à flùr is uisge. Cleachdaich na taighean-tàirn is taighean-òil e gus greimeagan is miasan ullachadh. Ithear e ann an làraichean-trèanaidh (raointean spòrs, coileasaman is campaichean trèanaidh) cuideachd."
+msgstr "Nì fuineadairean na h-Impireachd aran uabhasach blasta à flùr is uisge. Cleachdaich na taighean-tàirn is taighean-òil e gus greimeagan is miasan ullachadh. Ithear e ann an ionadan-trèanaidh (raointean spòrs, coileasaman is campaichean trèanaidh) cuideachd."
 
 #. TRANSLATORS: Helptext for a ware: Bread Paddle
 #: ../../data/tribes/wares/bread_paddle/helptexts.lua:4
@@ -2161,7 +2161,7 @@ msgid ""
 "Fish is one of the biggest food resources of the Atlanteans. It has to be "
 "smoked in a smokery before being delivered to mines, training sites and "
 "scouts."
-msgstr "’S e aon dhe na stòrasan bìdh as motha aig na h-Atlantaich a th’ anns na h-èisg. Feumaidh tu an toiteadh ann an taigh-toitidh mus lìbhrig thu dha na mèinnean, làraichean-trèanaidh is rabhadairean iad."
+msgstr "’S e aon dhe na stòrasan bìdh as motha aig na h-Atlantaich a th’ anns na h-èisg. Feumaidh tu an toiteadh ann an taigh-toitidh mus lìbhrig thu dha na mèinnean, ionadan-trèanaidh is rabhadairean iad."
 
 #. TRANSLATORS: Helptext for a ware: Fish
 #: ../../data/tribes/wares/fish/helptexts.lua:6
@@ -2170,7 +2170,7 @@ msgid ""
 "Besides pitta bread and meat, fish is also a foodstuff for the Barbarians. "
 "It is used in the taverns, inns and big inns and at the training sites "
 "(training camp and battle arena)."
-msgstr "A bharrachd air aran tur is feòil, is na h-èisg biadh eile airson nan Tùsanach. Cleachdaidh na taighean-tàirn, taighean-òil, taighean-seinnse is làraichean-trèanaidh (campaichean trèanaidh is raointean catha) iad."
+msgstr "A bharrachd air aran tur is feòil, is na h-èisg biadh eile airson nan Tùsanach. Cleachdaidh na taighean-tàirn, taighean-òil, taighean-seinnse is ionadan-trèanaidh (campaichean trèanaidh is raointean catha) iad."
 
 #. TRANSLATORS: Helptext for a ware: Fish
 #: ../../data/tribes/wares/fish/helptexts.lua:8
@@ -2178,7 +2178,7 @@ msgctxt "empire_ware"
 msgid ""
 "Besides bread and meat, fish is also a foodstuff for the Empire. Fish are "
 "used in taverns, inns and training sites (arena, colosseum, training camp)."
-msgstr "A bharrachd air aran is feòil, is na h-èisg biadh eile airson na h-Impireachd. Cleachdaidh na taighean-tàirn, taighean-òil is làraichean-trèanaidh (raointean spòrs, coileasaman is campaichean trèanaidh) iad."
+msgstr "A bharrachd air aran is feòil, is na h-èisg biadh eile airson na h-Impireachd. Cleachdaidh na taighean-tàirn, taighean-òil is ionadan-trèanaidh (raointean spòrs, coileasaman is campaichean trèanaidh) iad."
 
 #. TRANSLATORS: Helptext for a ware: Fishing Net
 #: ../../data/tribes/wares/fishing_net/helptexts.lua:4
@@ -2537,7 +2537,7 @@ msgctxt "atlanteans_ware"
 msgid ""
 "Meat has to be smoked in a smokery before being delivered to mines and "
 "training sites (dungeon and labyrinth)."
-msgstr "Feumaidh tu feòil a thoiteadh ann an taigh-toitidh mus lìbhrig thu dha na mèinnean is làraichean-trèanaidh (toll-dubh is cuartan) iad."
+msgstr "Feumaidh tu feòil a thoiteadh ann an taigh-toitidh mus lìbhrig thu dha na mèinnean is ionadan-trèanaidh (toll-dubh is cuartan) iad."
 
 #. TRANSLATORS: Helptext for a ware: Meat
 #: ../../data/tribes/wares/meat/helptexts.lua:8
@@ -2546,7 +2546,7 @@ msgid ""
 "Meat is used in the taverns, inns and big inns to prepare rations, snacks "
 "and meals for the miners. It is also consumed at the training sites "
 "(training camp and battle arena)."
-msgstr "Cleachdaidh tu feòil sna taighean-tàirn, taighean-òil is taighean-seinnse gus greimeagan, lòin is miasan ullachadh do na mèinnearan. Ithidh na saigheadan i sna làraichean-trèanaidh cuideachd (campaichean trèanaidh is raointean catha)."
+msgstr "Cleachdaidh tu feòil sna taighean-tàirn, taighean-òil is taighean-seinnse gus greimeagan, lòin is miasan ullachadh do na mèinnearan. Ithidh na saigheadan i sna h-ionadan-trèanaidh cuideachd (campaichean trèanaidh is raointean catha)."
 
 #. TRANSLATORS: Helptext for a ware: Meat
 #: ../../data/tribes/wares/meat/helptexts.lua:10
@@ -2555,7 +2555,7 @@ msgid ""
 "Meat can also be obtained as pork from piggeries. It is used in the inns and"
 " taverns to prepare lunch for the miners and is consumed at the training "
 "sites (arena, colosseum, training camp)."
-msgstr "Gheibh thu feòil na muicfheoil on fhail cuideachd. Thèid a cleachdadh sna taighean-tàirn is taighean-òil gus biadh ullachadh do na mèinnearan. Ithidh na saighdearan i sna làraichean-trèanaidh cuideachd (raointean spòrs, coileasaman is campaichean trèanaidh)."
+msgstr "Gheibh thu feòil na muicfheoil on fhail cuideachd. Thèid a cleachdadh sna taighean-tàirn is taighean-òil gus biadh ullachadh do na mèinnearan. Ithidh na saighdearan i sna h-ionadan-trèanaidh cuideachd (raointean spòrs, coileasaman is campaichean trèanaidh)."
 
 #. TRANSLATORS: Helptext for a ware: Milking Tongs
 #: ../../data/tribes/wares/milking_tongs/helptexts.lua:4
@@ -2753,7 +2753,7 @@ msgid ""
 "Smoked meat is made out of meat in a smokery. It is delivered to the mines "
 "and training sites (labyrinth and dungeon) where the miners and soldiers "
 "prepare a nutritious lunch for themselves."
-msgstr "Nì thu feòil-rèiste à feòil ann an taigh-toitidh. Thèid a lìbhrigeadh dha na mèinnean is làraichean-trèanaidh (cuartanan is tuill-dhubha) far an ullaich na mèinnearan is saighdearan biadh beathachail dhaibh fhèin."
+msgstr "Nì thu feòil-rèiste à feòil ann an taigh-toitidh. Thèid a lìbhrigeadh dha na mèinnean is ionadan-trèanaidh (cuartanan is tuill-dhubha) far an ullaich na mèinnearan is saighdearan biadh beathachail dhaibh fhèin."
 
 #. TRANSLATORS: Helptext for a ware: Snack
 #: ../../data/tribes/wares/snack/helptexts.lua:4
