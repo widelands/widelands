@@ -1686,12 +1686,12 @@ int32_t Map::findpath
 	start = FCoords(instart, &operator[](instart));
 	end   = FCoords(inend,   &operator[](inend));
 
-	path.m_path.clear();
+	path.path_.clear();
 
 	// Some stupid cases...
 	if (start == end) {
-		path.m_start = start;
-		path.m_end = end;
+		path.start_ = start;
+		path.end_ = end;
 		return 0; // duh...
 	}
 
@@ -1790,13 +1790,13 @@ int32_t Map::findpath
 	// Now unwind the taken route (even if we couldn't find a complete one!)
 	int32_t const result = cur == end ? curpf->real_cost : -1;
 
-	path.m_start = start;
-	path.m_end = cur;
+	path.start_ = start;
+	path.end_ = cur;
 
-	path.m_path.clear();
+	path.path_.clear();
 
 	while (curpf->backlink != IDLE) {
-		path.m_path.push_back(curpf->backlink);
+		path.path_.push_back(curpf->backlink);
 
 		// Reverse logic! (WALK_NW needs to find the SE neighbour)
 		get_neighbour(cur, get_reverse_dir(curpf->backlink), &cur);
