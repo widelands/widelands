@@ -33,8 +33,8 @@ class Request;
 
 class RoadDescr : public MapObjectDescr {
 public:
-	RoadDescr(char const* const _name, char const* const _descname)
-		: MapObjectDescr(MapObjectType::ROAD, _name, _descname) {
+	RoadDescr(char const* const init_name, char const* const init_descname)
+		: MapObjectDescr(MapObjectType::ROAD, init_name, init_descname) {
 	}
 	~RoadDescr() override {}
 
@@ -117,15 +117,15 @@ protected:
 	void draw(const EditorGameBase &, RenderTarget &, const FCoords&, const Point&) override;
 
 private:
-	void _set_path(EditorGameBase &, const Path &);
+	void set_path(EditorGameBase &, const Path &);
 
-	void _mark_map(EditorGameBase &);
-	void _unmark_map(EditorGameBase &);
+	void mark_map(EditorGameBase &);
+	void unmark_map(EditorGameBase &);
 
-	void _link_into_flags(EditorGameBase &);
+	void link_into_flags(EditorGameBase &);
 
-	void _request_carrier(CarrierSlot &);
-	static void _request_carrier_callback
+	void request_carrier(CarrierSlot &);
+	static void request_carrier_callback
 		(Game &, Request &, DescriptionIndex, Worker *, PlayerImmovable &);
 
 private:

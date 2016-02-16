@@ -1122,15 +1122,15 @@ void CmdShipCancelExpedition::write
 
 /*** class Cmd_SetWarePriority ***/
 CmdSetWarePriority::CmdSetWarePriority
-	(const uint32_t _duetime, const PlayerNumber _sender,
+	(const uint32_t init_duetime, const PlayerNumber init_sender,
 	 PlayerImmovable & imm,
-	 const int32_t type, const DescriptionIndex index, const int32_t priority)
+	 const int32_t init_type, const DescriptionIndex i, const int32_t init_priority)
 	:
-	PlayerCommand(_duetime, _sender),
+	PlayerCommand(init_duetime, init_sender),
 	serial_     (imm.serial()),
-	type_       (type),
-	index_      (index),
-	priority_   (priority)
+	type_       (init_type),
+	index_      (i),
+	priority_   (init_priority)
 {}
 
 void CmdSetWarePriority::execute(Game & game)
@@ -1201,11 +1201,11 @@ void CmdSetWarePriority::serialize(StreamWrite & ser)
 
 /*** class Cmd_SetWareMaxFill ***/
 CmdSetWareMaxFill::CmdSetWareMaxFill
-	(const uint32_t _duetime, const PlayerNumber _sender,
+	(const uint32_t init_duetime, const PlayerNumber init_sender,
 	 PlayerImmovable & imm,
 	 const DescriptionIndex index, const uint32_t max_fill)
 	:
-	PlayerCommand(_duetime, _sender),
+	PlayerCommand(init_duetime, init_sender),
 	serial_     (imm.serial()),
 	index_      (index),
 	max_fill_   (max_fill)
@@ -1274,11 +1274,11 @@ void CmdSetWareMaxFill::serialize(StreamWrite & ser)
 
 
 CmdChangeTargetQuantity::CmdChangeTargetQuantity
-	(const uint32_t _duetime, const PlayerNumber _sender,
-	 const uint32_t _economy, const DescriptionIndex _ware_type)
+	(const uint32_t init_duetime, const PlayerNumber init_sender,
+	 const uint32_t init_economy, const DescriptionIndex init_ware_type)
 	:
-	PlayerCommand(_duetime, _sender),
-	economy_ (_economy), ware_type_(_ware_type)
+	PlayerCommand(init_duetime, init_sender),
+	economy_(init_economy), ware_type_(init_ware_type)
 {}
 
 void CmdChangeTargetQuantity::write
@@ -1319,13 +1319,13 @@ void CmdChangeTargetQuantity::serialize(StreamWrite & ser)
 
 
 CmdSetWareTargetQuantity::CmdSetWareTargetQuantity
-	(const uint32_t _duetime, const PlayerNumber _sender,
-	 const uint32_t _economy,
-	 const DescriptionIndex _ware_type,
-	 const uint32_t _permanent)
+	(const uint32_t init_duetime, const PlayerNumber init_sender,
+	 const uint32_t init_economy,
+	 const DescriptionIndex init_ware_type,
+	 const uint32_t init_permanent)
 	:
-	CmdChangeTargetQuantity(_duetime, _sender, _economy, _ware_type),
-	permanent_(_permanent)
+	CmdChangeTargetQuantity(init_duetime, init_sender, init_economy, init_ware_type),
+	permanent_(init_permanent)
 {}
 
 void CmdSetWareTargetQuantity::execute(Game & game)
@@ -1381,11 +1381,11 @@ void CmdSetWareTargetQuantity::serialize(StreamWrite & ser)
 
 
 CmdResetWareTargetQuantity::CmdResetWareTargetQuantity
-	(const uint32_t _duetime, const PlayerNumber _sender,
-	 const uint32_t _economy,
-	 const DescriptionIndex _ware_type)
+	(const uint32_t init_duetime, const PlayerNumber init_sender,
+	 const uint32_t init_economy,
+	 const DescriptionIndex init_ware_type)
 	:
-	CmdChangeTargetQuantity(_duetime, _sender, _economy, _ware_type)
+	CmdChangeTargetQuantity(init_duetime, init_sender, init_economy, init_ware_type)
 {}
 
 void CmdResetWareTargetQuantity::execute(Game & game)
@@ -1437,13 +1437,13 @@ void CmdResetWareTargetQuantity::serialize(StreamWrite & ser)
 
 
 CmdSetWorkerTargetQuantity::CmdSetWorkerTargetQuantity
-	(const uint32_t _duetime, const PlayerNumber _sender,
-	 const uint32_t _economy,
-	 const DescriptionIndex _ware_type,
-	 const uint32_t _permanent)
+	(const uint32_t init_duetime, const PlayerNumber init_sender,
+	 const uint32_t init_economy,
+	 const DescriptionIndex init_ware_type,
+	 const uint32_t init_permanent)
 	:
-	CmdChangeTargetQuantity(_duetime, _sender, _economy, _ware_type),
-	permanent_(_permanent)
+	CmdChangeTargetQuantity(init_duetime, init_sender, init_economy, init_ware_type),
+	permanent_(init_permanent)
 {}
 
 void CmdSetWorkerTargetQuantity::execute(Game & game)
@@ -1499,11 +1499,11 @@ void CmdSetWorkerTargetQuantity::serialize(StreamWrite & ser)
 
 
 CmdResetWorkerTargetQuantity::CmdResetWorkerTargetQuantity
-	(const uint32_t _duetime, const PlayerNumber _sender,
-	 const uint32_t _economy,
-	 const DescriptionIndex _ware_type)
+	(const uint32_t init_duetime, const PlayerNumber init_sender,
+	 const uint32_t init_economy,
+	 const DescriptionIndex init_ware_type)
 	:
-	CmdChangeTargetQuantity(_duetime, _sender, _economy, _ware_type)
+	CmdChangeTargetQuantity(init_duetime, init_sender, init_economy, init_ware_type)
 {}
 
 void CmdResetWorkerTargetQuantity::execute(Game & game)

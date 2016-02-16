@@ -70,8 +70,8 @@ struct CmdBulldoze:public PlayerCommand {
 	CmdBulldoze
 		(const uint32_t t, const int32_t p,
 		 PlayerImmovable & pi,
-		 const bool _recurse = false)
-		: PlayerCommand(t, p), serial(pi.serial()), recurse(_recurse)
+		 const bool init_recurse = false)
+		: PlayerCommand(t, p), serial(pi.serial()), recurse(init_recurse)
 	{}
 
 	CmdBulldoze (StreamRead &);
@@ -92,11 +92,11 @@ private:
 struct CmdBuild:public PlayerCommand {
 	CmdBuild() : PlayerCommand() {} // For savegame loading
 	CmdBuild
-		(const uint32_t        _duetime,
+		(const uint32_t        init_duetime,
 		 const int32_t        p,
 		 const Coords         c,
 		 const DescriptionIndex i)
-		: PlayerCommand(_duetime, p), coords(c), bi(i)
+		: PlayerCommand(init_duetime, p), coords(c), bi(i)
 	{}
 
 	CmdBuild (StreamRead &);
@@ -241,11 +241,11 @@ private:
 struct CmdEnhanceBuilding:public PlayerCommand {
 	CmdEnhanceBuilding() : PlayerCommand(), serial(0) {} // For savegame loading
 	CmdEnhanceBuilding
-		(const uint32_t        _duetime,
+		(const uint32_t        init_duetime,
 		 const int32_t        p,
 		 Building           & b,
 		 const DescriptionIndex i)
-		: PlayerCommand(_duetime, p), serial(b.serial()), bi(i)
+		: PlayerCommand(init_duetime, p), serial(b.serial()), bi(i)
 	{}
 
 	// Write these commands to a file (for savegames)
@@ -612,8 +612,8 @@ struct CmdDropSoldier : public PlayerCommand {
 		(const uint32_t    t,
 		 const int32_t    p,
 		 Building &       b,
-		 const int32_t    _soldier)
-		: PlayerCommand(t, p), serial(b.serial()), soldier(_soldier)
+		 const int32_t    init_soldier)
+		: PlayerCommand(t, p), serial(b.serial()), soldier(init_soldier)
 	{}
 
 	// Write these commands to a file (for savegames)

@@ -465,7 +465,7 @@ struct ObjectPointer {
 	bool is_set() const {return serial_;}
 
 	// TODO(unknown): dammit... without an EditorGameBase object, we can't implement a
-	// MapObject* operator (would be _really_ nice)
+	// MapObject* operator (would be really nice)
 	MapObject * get(const EditorGameBase &);
 	MapObject * get(const EditorGameBase & egbase) const;
 

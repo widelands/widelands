@@ -52,16 +52,16 @@ Tab::Tab
 	 int32_t x,
 	 int32_t w,
 	 const std::string& name,
-	 const std::string& _title,
-	 const Image* _pic,
+	 const std::string& init_title,
+	 const Image* init_pic,
 	 const std::string& tooltip_text,
 	 Panel* const contents)
 	:
 	NamedPanel(tab_parent, name, x, 0, w, kTabPanelButtonHeight, tooltip_text),
 	parent(tab_parent),
 	id(tab_id),
-	pic(_pic),
-	title(_title),
+	pic(init_pic),
+	title(init_title),
 	tooltip(tooltip_text),
 	panel(contents)
 {
