@@ -147,7 +147,7 @@ using WaresMap = std::map<Widelands::DescriptionIndex, uint32_t>;
 using WorkersMap = std::map<Widelands::DescriptionIndex, uint32_t>;
 using SoldierAmount = std::pair<SoldierMapDescr, uint32_t>;
 using WorkerAmount = std::pair<Widelands::DescriptionIndex, uint32_t>;
-using PlrInfluence = std::pair<uint8_t, uint32_t>;
+using PlrInfluence = std::pair<Widelands::PlayerNumber, uint32_t>;
 using WaresSet = std::set<Widelands::DescriptionIndex>;
 using WorkersSet = std::set<Widelands::DescriptionIndex>;
 using SoldiersList = std::vector<Widelands::Soldier *>;
@@ -948,7 +948,7 @@ int LuaMap::get_player_slots(lua_State * L) {
 	Map & m = get_egbase(L).map();
 
 	lua_createtable(L, m.get_nrplayers(), 0);
-	for (uint32_t i = 0; i < m.get_nrplayers(); i++) {
+	for (Widelands::PlayerNumber i = 0; i < m.get_nrplayers(); i++) {
 		lua_pushuint32(L, i + 1);
 		to_lua<LuaMaps::LuaPlayerSlot>(L, new LuaMaps::LuaPlayerSlot(i + 1));
 		lua_settable(L, -3);
