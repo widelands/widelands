@@ -85,7 +85,7 @@ struct DefaultAI : ComputerPlayer {
 	enum class WoodPolicy : uint8_t {kDismantleRangers, kStopRangers, kAllowRangers};
 	enum class NewShip : uint8_t {kBuilt, kFoundOnLoad};
 	enum class PerfEvaluation : uint8_t {kForConstruction, kForDismantle};
-	enum class Attackable : uint8_t {kNotAttackable, kAttackable, kAttackableAndWeak};
+	enum class Attackable : uint8_t {kNotAttackable, kAttackable, kAttackableAndWeak, kAttackableVeryWeak};
 
 	enum class Tribes : uint8_t {
 		kNone,

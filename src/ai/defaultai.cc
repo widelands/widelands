@@ -1058,7 +1058,7 @@ void DefaultAI::update_buildable_field(BuildableField& field, uint16_t range, bo
 	// testing for near portspaces
 	if (field.portspace_nearby_ == Widelands::ExtendedBool::kUnset) {
 		field.portspace_nearby_ = ExtendedBool::kFalse;
-		MapRegion<Area<FCoords>> mr(map, Area<FCoords>(field.coords, 2));
+		MapRegion<Area<FCoords>> mr(map, Area<FCoords>(field.coords, 4));
 		do {
 			if (port_reserved_coords.count(coords_hash(mr.location())) > 0) {
 				field.portspace_nearby_ = ExtendedBool::kTrue;
@@ -1512,7 +1512,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 		player_statistics.strong_enough(player_number())) {
 			printf (" %d player already too strong to boost economy\n", player_number());
 	}
-			
+
 	// resetting highest_nonmil_prio_ so it can be recalculated anew
 	highest_nonmil_prio_ = 0;
 
@@ -1555,8 +1555,11 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 			persistent_data->least_military_score = 0;
 		}
 	}
-	printf (" %d: least_military_score : %3d, in const %2d, vacant: %d\n",
-	player_number(), persistent_data->least_military_score, msites_in_constr(), vacant_mil_positions_ );
+
+	//if (msites_in_constr() == 0 && vacant_mil_positions_ <= 2) { //NOCOM
+	 //printf (" %d: least_military_score : %3d, in const %2d, vacant: %d\n",
+	 //player_number(), persistent_data->least_military_score, msites_in_constr(), vacant_mil_positions_);
+	//}
 
 	// This is effective score, falling down very quickly
 	if (persistent_data->target_military_score > kUpperLimit + 150) {
@@ -2123,7 +2126,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 			}  // production sites done
 			else if (bo.type == BuildingObserver::MILITARYSITE) {
 
-				if (!bf->unowned_land_nearby_) {
+				if (!(bf->unowned_land_nearby_ || bf->enemy_nearby_)) {
 					continue;
 				}
 
@@ -2158,10 +2161,6 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 					prio += (20 - bf->area_military_capacity_) * 10;
 					prio -= bo.build_material_shortage_  * 50;
 					prio -= (bf->military_in_constr_nearby_ + bf->military_unstationed_) * 50;
-					//sometimes expansion is stalled and this is to help boost it
-					if (msites_in_constr() == 0 && vacant_mil_positions_ <= 1) {
-						prio += 25;
-					}//NOCOM
 				} else {
 					if (bf->near_border_) {
 						prio += 50;
@@ -2181,7 +2180,22 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 				prio += bf->distant_water_ * resource_necessity_water_needed_ / 100;
 				prio += bf->military_loneliness_ / 10;
 				prio += bf->trees_nearby_ / 3;
-				if (bf->portspace_nearby_ == ExtendedBool::kTrue) prio += 25;
+				if (bf->portspace_nearby_ == ExtendedBool::kTrue) {
+					if (num_ports == 0) {
+						prio += 100;
+					} else {
+						prio += 25;
+					}
+				}
+				//sometimes expansion is stalled and this is to help boost it
+				if (msites_in_constr() == 0 && vacant_mil_positions_ <= 2) {
+					prio += 10;
+					//printf (" %d: increasing score for field %3dx%3d: %3d\n", player_number(), bf->coords.x, bf->coords.y, prio);
+					if (bf->enemy_nearby_){
+						prio += 20;
+						//printf ("  + for enemy nearby: %3d\n", prio);
+					}
+				}
 
 				// additional score for bigger buildings
 				int32_t prio_for_size = bo.desc->get_size() - 1;
@@ -2490,7 +2504,11 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 		uint32_t block_time = 0;
 		uint32_t block_area = 0;
 		if (best_building->space_consumer_) {
-			block_time = 45 * 60 * 1000;
+			if (spots_ > 20) {
+				block_time = 45 * 60 * 1000;
+			} else {
+				block_time = 10 * 60 * 1000;
+			}
 			block_area = 3;
 		} else {  // militray buildings for a very short time
 			block_time = 25 * 1000;
@@ -2521,12 +2539,11 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 // improves current road system
 bool DefaultAI::improve_roads(uint32_t gametime) {
 
-	// first force a split on roads that are longer than 3 parts
-	// with exemption when there is too few building spots
-	if (spots_ > 20 && !roads.empty()) {
+	if (!roads.empty()) {
 		const Path& path = roads.front()->get_path();
 
-		if (path.get_nsteps() > 3) {
+		// first force a split on roads that are longer than 3 parts
+		if (path.get_nsteps() > 3 && spots_ > 20) {
 			const Map& map = game().map();
 			CoordPath cp(map, path);
 			// try to split after two steps
@@ -2553,13 +2570,15 @@ bool DefaultAI::improve_roads(uint32_t gametime) {
 
 			// Unable to set a flag - perhaps the road was build stupid
 			game().send_player_bulldoze(*const_cast<Road*>(roads.front()));
+			return true;
 		}
 
 		roads.push_back(roads.front());
 		roads.pop_front();
 
 		// occasionaly we test if the road can be dismounted
-		if (gametime % 5 == 0) {
+		// if there is shortage of spots we do it allways
+		if (gametime % 5 == 0 || spots_ < 15) {
 			const Road& road = *roads.front();
 			if (dispensable_road_test(*const_cast<Road*>(&road))) {
 				game().send_player_bulldoze(*const_cast<Road*>(&road));
@@ -2610,8 +2629,14 @@ bool DefaultAI::improve_roads(uint32_t gametime) {
 		}
 	}
 
-	// if this is end flag (or sole building) or just randomly
-	if (flag.nr_of_roads() <= 1 || gametime % 10 == 0) {
+	// is connected to a warehouse?
+	const bool needs_warehouse = flag.get_economy()->warehouses().empty();
+
+	// needs to be connected
+	if (flag.nr_of_roads() == 0 || needs_warehouse) {
+		create_shortcut_road(flag, 13, 22, gametime);
+		inhibit_road_building_ = gametime + 800;
+	} else if (spots_ > 15 && (flag.nr_of_roads() == 1 || gametime % 10 == 0)) {
 		create_shortcut_road(flag, 13, 22, gametime);
 		inhibit_road_building_ = gametime + 800;
 		// a warehouse with 3 or less roads
@@ -2619,7 +2644,7 @@ bool DefaultAI::improve_roads(uint32_t gametime) {
 		create_shortcut_road(flag, 9, -1, gametime);
 		inhibit_road_building_ = gametime + 400;
 		// and when a flag is full with wares
-	} else if (flag.current_wares() > 5) {
+	} else if (spots_ > 15 && flag.current_wares() > 5) {
 		create_shortcut_road(flag, 9, -2, gametime);
 		inhibit_road_building_ = gametime + 400;
 	} else {
@@ -2633,21 +2658,24 @@ bool DefaultAI::improve_roads(uint32_t gametime) {
 // and tries to find alternative route from one flag to another.
 // if route exists, it is not too long, and current road is not intensively used
 // the road can be dismantled
-bool DefaultAI::dispensable_road_test(Widelands::Road& road) {
+bool DefaultAI::dispensable_road_test(Widelands::Road& road) { //NOCOM
 
 	Flag& roadstartflag = road.get_flag(Road::FlagStart);
 	Flag& roadendflag = road.get_flag(Road::FlagEnd);
 
-	if (roadstartflag.current_wares() > 0 || roadendflag.current_wares() > 0) {
+	if (spots_ > 15 && roadstartflag.current_wares() + roadendflag.current_wares() > 0) {
 		return false;
 	}
+
+	printf (" %d: considering dismantle of road with %d wares. Spots: %d\n",
+	player_number(), roadstartflag.current_wares() + roadendflag.current_wares(), spots_);
 
 	std::priority_queue<NearFlag> queue;
 	// only used to collect flags reachable walking over roads
 	std::vector<NearFlag> reachableflags;
 	queue.push(NearFlag(roadstartflag, 0, 0));
 	uint8_t pathcounts = 0;
-	uint8_t checkradius = 8;
+	uint8_t checkradius = (spots_ > 15) ? 8 : 15;
 	Map& map = game().map();
 
 	// algorithm to walk on roads
@@ -2982,23 +3010,13 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 
 	// if all possible roads skipped
 	if (last_attempt_) {
-		
 		Building* bld = flag.get_building();
-		// first we block the field for 15 minutes, probably it is not good place to build a
-		// building on
-
-		
-		//NOCOM this does not block proper position
-		//blocked_fields.add(coords_hash(bld->get_position()), game().get_gametime() + 15 * 60 * 1000);
-		// block the vicinity for shorter time
+		// first we block the field and vicinity for 15 minutes, probably it is not good place to build on
 		MapRegion<Area<FCoords>> mr(
 			   game().map(), Area<FCoords>(map.get_fcoords(bld->get_position()), 2));
 		do {
 			blocked_fields.add(coords_hash(mr.location()), game().get_gametime() + 15 * 60 * 1000);
 		} while (mr.advance(map));
-		// Blocking the field itself
-		blocked_fields.add(coords_hash(bld->get_position()), game().get_gametime() + 15 * 60 * 1000);
-		printf ("   and also: %3dx%3d\n", bld->get_position().x,  bld->get_position().y);
 		eco->flags.remove(&flag);
 		game().send_player_bulldoze(*const_cast<Flag*>(&flag));
 		return true;
@@ -4564,6 +4582,9 @@ int32_t DefaultAI::recalc_with_border_range(const BuildableField& bf, int32_t pr
 	// and if close (up to 2 fields away) from border
 	if (bf.near_border_) {
 		prio -= 10;
+		if (spots_ < 15){
+			prio +=  3 * (spots_ - 15);
+		}
 	}
 
 	return prio;
@@ -5317,7 +5338,7 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 	// receiving games statistics and parsing it (reading latest entry)
 	const Game::GeneralStatsVector& genstats = game().get_general_statistics();
 
-	//Collecting statistics and saving them in player_statistics object NOCOM
+	//Collecting statistics and saving them in player_statistics object
 	for (uint8_t j = 1; j <= plr_in_game; ++j) {
 		const Player* this_player = game().get_player(j);
 		if (this_player) {
@@ -5330,9 +5351,8 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 			}
 		}
 	}
-	
+
 	player_statistics.recalculate_team_power();
-	//player_statistics.print_content(); NOCOM
 
 	// defining treshold ratio of own_strength/enemy's_strength
 	uint32_t treshold_ratio = 100;
@@ -5375,6 +5395,8 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 
 		if (players_power == 0) {
 			player_attackable.at(j - 1) = Attackable::kAttackable;
+		} else if (my_power * 100 / players_power > treshold_ratio * 8) {
+			player_attackable.at(j - 1) = Attackable::kAttackableVeryWeak;
 		} else if (my_power * 100 / players_power > treshold_ratio * 4) {
 			player_attackable.at(j - 1) = Attackable::kAttackableAndWeak;
 		} else if (my_power * 100 / players_power > treshold_ratio) {
@@ -5386,7 +5408,7 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 	}
 
 	// first we scan vicitnity of couple of militarysites to get new enemy sites
-	// militarysites rotate
+	// Militarysites rotate (see check_militarysites())
 	int32_t i = 0;
 	for (MilitarySiteObserver mso : militarysites) {
 		i += 1;
@@ -5571,7 +5593,8 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 			if (site->second.attack_soldiers_strength > 0
 				&&
 				(player_attackable[owner_number - 1] == Attackable::kAttackable ||
-				player_attackable[owner_number - 1] == Attackable::kAttackableAndWeak)) {
+				player_attackable[owner_number - 1] == Attackable::kAttackableAndWeak ||
+				player_attackable[owner_number - 1] == Attackable::kAttackableVeryWeak)) {
 				site->second.score = site->second.attack_soldiers_strength - site->second.defenders_strength / 2;
 
 				if (is_warehouse) {
@@ -5598,14 +5621,18 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 
 				// Applying (decreasing score) if trainingsites are not working
 				site->second.score += training_score;
-				
+
+				// We have an advantage over stongest opponent
 				if (strong_enough) {
-					site->second.score += 2;
+					site->second.score += 3;
 				}
 
 				// Enemy too weak, let finish him
 				if (player_attackable[owner_number - 1] == Attackable::kAttackableAndWeak) {
-					site->second.score += 5;
+					site->second.score += 4;
+				}
+				if (player_attackable[owner_number - 1] == Attackable::kAttackableVeryWeak) {
+					site->second.score += 8;
 				}
 
 				// treating no attack score
