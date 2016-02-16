@@ -171,9 +171,9 @@ void WaresQueue::add_to_economy(Economy & e)
 /**
  * Change size of the queue.
  */
-void WaresQueue::set_max_size(const uint32_t size)
+void WaresQueue::set_max_size(const Quantity size)
 {
-	uint32_t old_size = max_size_;
+	Quantity old_size = max_size_;
 	max_size_ = size;
 
 	// make sure that max fill is reduced as well if the max size is decreased
@@ -192,7 +192,7 @@ void WaresQueue::set_max_size(const uint32_t size)
  * but if there are more wares than that in the queue, they will not get
  * lost (the building should drop them).
  */
-void WaresQueue::set_max_fill(uint32_t size)
+void WaresQueue::set_max_fill(Quantity size)
 {
 	if (size > max_size_)
 		size = max_size_;
@@ -205,7 +205,7 @@ void WaresQueue::set_max_fill(uint32_t size)
 /**
  * Change fill status of the queue.
  */
-void WaresQueue::set_filled(const uint32_t filled) {
+void WaresQueue::set_filled(const Quantity filled) {
 	if (owner_.get_economy()) {
 		if (filled > filled_)
 			owner_.get_economy()->add_wares(ware_, filled - filled_);

@@ -45,7 +45,7 @@ class WorkerDescr : public BobDescr
 	friend struct WorkerProgram;
 
 public:
-	using Buildcost = std::map<std::string, uint8_t>;
+	using Buildcost = std::map<std::string, Quantity>;
 
 	WorkerDescr(const std::string& init_descname,
 					MapObjectType type, const LuaTable& table, const EditorGameBase& egbase);
@@ -67,7 +67,7 @@ public:
 	/// The special value std::numeric_limits<uint32_t>::max() means that the
 	/// the target quantity of this ware type will never be checked and should
 	/// not be configurable.
-	uint32_t default_target_quantity() const {return default_target_quantity_;}
+	Quantity default_target_quantity() const {return default_target_quantity_;}
 
 	bool has_demand_check() const {
 		return default_target_quantity() != std::numeric_limits<uint32_t>::max();
@@ -105,7 +105,7 @@ public:
 
 protected:
 	Point             ware_hotspot_;
-	uint32_t          default_target_quantity_;
+	Quantity          default_target_quantity_;
 	std::string       helptext_script_;  // The path and filename to the worker's helptext script
 	DirAnimations     walk_anims_;
 	DirAnimations     walkload_anims_;

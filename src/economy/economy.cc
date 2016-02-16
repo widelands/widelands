@@ -333,7 +333,7 @@ void Economy::_reset_all_pathfinding_cycles()
  */
 void Economy::set_ware_target_quantity
 	(DescriptionIndex const ware_type,
-	 uint32_t   const permanent,
+	 Quantity   const permanent,
 	 Time       const mod_time)
 {
 	TargetQuantity & tq = ware_target_quantities_[ware_type];
@@ -344,7 +344,7 @@ void Economy::set_ware_target_quantity
 
 void Economy::set_worker_target_quantity
 	(DescriptionIndex const ware_type,
-	 uint32_t   const permanent,
+	 Quantity   const permanent,
 	 Time       const mod_time)
 {
 	TargetQuantity & tq = worker_target_quantities_[ware_type];
@@ -359,7 +359,7 @@ void Economy::set_worker_target_quantity
  * This is also called when a ware is added to the economy through trade or
  * a merger.
 */
-void Economy::add_wares(DescriptionIndex const id, uint32_t const count)
+void Economy::add_wares(DescriptionIndex const id, Quantity const count)
 {
 	//log("%p: add(%i, %i)\n", this, id, count);
 
@@ -368,7 +368,7 @@ void Economy::add_wares(DescriptionIndex const id, uint32_t const count)
 
 	// TODO(unknown): add to global player inventory?
 }
-void Economy::add_workers(DescriptionIndex const id, uint32_t const count)
+void Economy::add_workers(DescriptionIndex const id, Quantity const count)
 {
 	//log("%p: add(%i, %i)\n", this, id, count);
 
@@ -384,7 +384,7 @@ void Economy::add_workers(DescriptionIndex const id, uint32_t const count)
  * This is also called when a ware is removed from the economy through trade or
  * a split of the Economy.
 */
-void Economy::remove_wares(DescriptionIndex const id, uint32_t const count)
+void Economy::remove_wares(DescriptionIndex const id, Quantity const count)
 {
 	assert(owner_.egbase().tribes().ware_exists(id));
 	//log("%p: remove(%i, %i) from %i\n", this, id, count, wares_.stock(id));
@@ -399,7 +399,7 @@ void Economy::remove_wares(DescriptionIndex const id, uint32_t const count)
  * This is also called when a worker is removed from the economy through
  * a split of the Economy.
  */
-void Economy::remove_workers(DescriptionIndex const id, uint32_t const count)
+void Economy::remove_workers(DescriptionIndex const id, Quantity const count)
 {
 	//log("%p: remove(%i, %i) from %i\n", this, id, count, workers_.stock(id));
 
@@ -505,11 +505,11 @@ void Economy::remove_supply(Supply & supply)
 
 
 bool Economy::needs_ware(DescriptionIndex const ware_type) const {
-	uint32_t const t = ware_target_quantity(ware_type).permanent;
+	Quantity const t = ware_target_quantity(ware_type).permanent;
 
 	// we have a target quantity set
 	if (t > 0) {
-		uint32_t quantity = 0;
+		Quantity quantity = 0;
 		for (const Warehouse * wh : warehouses_) {
 			quantity += wh->get_wares().stock(ware_type);
 			if (t <= quantity)
@@ -531,11 +531,11 @@ bool Economy::needs_ware(DescriptionIndex const ware_type) const {
 
 
 bool Economy::needs_worker(DescriptionIndex const worker_type) const {
-	uint32_t const t = worker_target_quantity(worker_type).permanent;
+	Quantity const t = worker_target_quantity(worker_type).permanent;
 
 	// we have a target quantity set
 	if (t > 0) {
-		uint32_t quantity = 0;
+		Quantity quantity = 0;
 		for (const Warehouse * wh : warehouses_) {
 			quantity += wh->get_workers().stock(worker_type);
 			if (t <= quantity)
@@ -925,8 +925,8 @@ void Economy::_create_requested_worker(Game & game, DescriptionIndex index)
 	// Find warehouses where we can create the required workers,
 	// and collect stats about existing build prerequisites
 	const WorkerDescr::Buildcost & cost = w_desc.buildcost();
-	std::vector<uint32_t> total_available;
-	uint32_t total_planned = 0;
+	std::vector<Quantity> total_available;
+	Quantity total_planned = 0;
 
 	total_available.insert(total_available.begin(), cost.size(), 0);
 
@@ -942,11 +942,11 @@ void Economy::_create_requested_worker(Game & game, DescriptionIndex index)
 				return;
 		}
 
-		std::vector<uint32_t> wh_available =
+		std::vector<Quantity> wh_available =
 			wh->calc_available_for_worker(game, index);
 		assert(wh_available.size() == total_available.size());
 
-		for (uint32_t idx = 0; idx < total_available.size(); ++idx)
+		for (Quantity idx = 0; idx < total_available.size(); ++idx)
 			total_available[idx] += wh_available[idx];
 	}
 
@@ -957,7 +957,7 @@ void Economy::_create_requested_worker(Game & game, DescriptionIndex index)
 	uint32_t idx = 0;
 	uint32_t scarcest_idx = 0;
 	bool plan_at_least_one = false;
-	for (const std::pair<std::string, uint8_t>& bc : cost) {
+	for (const std::pair<std::string, Quantity>& bc : cost) {
 		uint32_t cc = total_available[idx] / bc.second;
 		if (cc <= can_create) {
 			scarcest_idx = idx;

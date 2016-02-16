@@ -344,7 +344,7 @@ void MapBuildingdataPacket::read_warehouse
 
 			while (fr.unsigned_8()) {
 				const DescriptionIndex& id = tribe.ware_index(fr.c_string());
-				uint32_t amount = fr.unsigned_32();
+				Quantity amount = fr.unsigned_32();
 				Warehouse::StockPolicy policy =
 					static_cast<Warehouse::StockPolicy>(fr.unsigned_8());
 

@@ -339,7 +339,7 @@ Find the best matching indicator for the given amount.
 ==============
 */
 DescriptionIndex TribeDescr::get_resource_indicator
-	(ResourceDescription const * const res, uint32_t const amount) const {
+	(ResourceDescription const * const res, const ResourceAmount amount) const {
 	if (!res || !amount) {
 		DescriptionIndex idx = immovable_index("resi_none");
 		if (!has_immovable(idx)) {

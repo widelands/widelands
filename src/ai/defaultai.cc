@@ -4494,8 +4494,8 @@ bool DefaultAI::check_militarysites(uint32_t gametime) {
 		if (other_player_accessible(
 		       vision + 4, &unused1, &unused2, ms->get_position(), WalkSearch::kEnemy)) {
 
-			uint32_t const total_capacity = ms->max_soldier_capacity();
-			uint32_t const target_capacity = ms->soldier_capacity();
+			Quantity const total_capacity = ms->max_soldier_capacity();
+			Quantity const target_capacity = ms->soldier_capacity();
 
 			game().send_player_change_soldier_capacity(*ms, total_capacity - target_capacity);
 			changed = true;

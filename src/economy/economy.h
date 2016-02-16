@@ -89,7 +89,7 @@ public:
 	/// economies are merged. The setting that was modified most recently will
 	/// be used for the merged economy.
 	struct TargetQuantity {
-		uint32_t permanent;
+		Quantity permanent;
 		Time     last_modified;
 	};
 
@@ -121,14 +121,14 @@ public:
 	// (i.e. an Expedition ship).
 	Flag* get_arbitrary_flag();
 
-	void set_ware_target_quantity  (DescriptionIndex, uint32_t, Time);
-	void set_worker_target_quantity(DescriptionIndex, uint32_t, Time);
+	void set_ware_target_quantity  (DescriptionIndex, Quantity, Time);
+	void set_worker_target_quantity(DescriptionIndex, Quantity, Time);
 
-	void    add_wares  (DescriptionIndex, uint32_t count = 1);
-	void remove_wares  (DescriptionIndex, uint32_t count = 1);
+	void    add_wares  (DescriptionIndex, Quantity count = 1);
+	void remove_wares  (DescriptionIndex, Quantity count = 1);
 
-	void    add_workers(DescriptionIndex, uint32_t count = 1);
-	void remove_workers(DescriptionIndex, uint32_t count = 1);
+	void    add_workers(DescriptionIndex, Quantity count = 1);
+	void remove_workers(DescriptionIndex, Quantity count = 1);
 
 	void    add_warehouse(Warehouse &);
 	void remove_warehouse(Warehouse &);
@@ -141,10 +141,10 @@ public:
 	void remove_supply(Supply &);
 
 	/// information about this economy
-	WareList::WareCount stock_ware  (DescriptionIndex const i) {
+	Quantity stock_ware  (DescriptionIndex const i) {
 		return wares_  .stock(i);
 	}
-	WareList::WareCount stock_worker(DescriptionIndex const i) {
+	Quantity stock_worker(DescriptionIndex const i) {
 		return workers_.stock(i);
 	}
 

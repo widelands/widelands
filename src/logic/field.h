@@ -124,7 +124,7 @@ private:
 
 	DescriptionIndex m_resources; ///< Resource type on this field, if any
 	uint8_t m_initial_res_amount; ///< Initial amount of m_resources
-	uint8_t m_res_amount; ///< Current amount of m_resources
+	ResourceAmount m_res_amount; ///< Current amount of m_resources
 
 	Terrains terrains;
 
@@ -204,7 +204,7 @@ public:
 	// Resources can be set through Map::set_resources()
 	// TODO(unknown): This should return DescriptionIndex
 	uint8_t get_resources() const {return m_resources;}
-	uint8_t get_resources_amount() const {return m_res_amount;}
+	ResourceAmount get_resources_amount() const {return m_res_amount;}
 	// TODO(unknown): This should return uint8_t
 	int32_t get_initial_res_amount() const {return m_initial_res_amount;}
 

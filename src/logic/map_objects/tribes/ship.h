@@ -67,11 +67,11 @@ public:
 	uint32_t movecaps() const override;
 	const DirAnimations & get_sail_anims() const {return m_sail_anims;}
 
-	uint32_t get_capacity() const {return m_capacity;}
+	Quantity get_capacity() const {return m_capacity;}
 
 private:
 	DirAnimations m_sail_anims;
-	uint32_t m_capacity;
+	Quantity m_capacity;
 	DISALLOW_COPY_AND_ASSIGN(ShipDescr);
 };
 

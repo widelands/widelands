@@ -142,12 +142,12 @@ struct SoldierMapDescr {
 	}
 };
 
-using SoldiersMap = std::map<SoldierMapDescr, uint32_t>;
-using WaresMap = std::map<Widelands::DescriptionIndex, uint32_t>;
-using WorkersMap = std::map<Widelands::DescriptionIndex, uint32_t>;
-using SoldierAmount = std::pair<SoldierMapDescr, uint32_t>;
-using WorkerAmount = std::pair<Widelands::DescriptionIndex, uint32_t>;
-using PlrInfluence = std::pair<Widelands::PlayerNumber, uint32_t>;
+using SoldiersMap = std::map<SoldierMapDescr, Widelands::Quantity>;
+using WaresMap = std::map<Widelands::DescriptionIndex, Widelands::Quantity>;
+using WorkersMap = std::map<Widelands::DescriptionIndex, Widelands::Quantity>;
+using SoldierAmount = std::pair<SoldierMapDescr, Widelands::Quantity>;
+using WorkerAmount = std::pair<Widelands::DescriptionIndex, Widelands::Quantity>;
+using PlrInfluence = std::pair<Widelands::PlayerNumber, Widelands::MilitaryInfluence>;
 using WaresSet = std::set<Widelands::DescriptionIndex>;
 using WorkersSet = std::set<Widelands::DescriptionIndex>;
 using SoldiersList = std::vector<Widelands::Soldier *>;
@@ -309,7 +309,7 @@ int do_get_workers(lua_State* L, const PlayerImmovable& pi, const WorkersMap& va
 		lua_newtable(L);
 
 	for (const DescriptionIndex& i : set) {
-		uint32_t cnt = 0;
+		Widelands::Quantity cnt = 0;
 		if (c_workers.count(i))
 			cnt = c_workers[i];
 
@@ -350,7 +350,7 @@ int do_set_workers(lua_State* L, PlayerImmovable* pi, const WorkersMap& valid_wo
 		if (!valid_workers.count(sp.first))
 			report_error(L, "<%s> can't be employed here!", wdes->name().c_str());
 
-		uint32_t cur = 0;
+		Widelands::Quantity cur = 0;
 		WorkersMap::iterator i = c_workers.find(sp.first);
 		if (i != c_workers.end())
 			cur = i->second;
@@ -422,14 +422,14 @@ SoldiersMap m_parse_set_soldiers_arguments(lua_State* L, const SoldierDescr& sol
 	SoldiersMap rv;
 	if (lua_gettop(L) > 2) {
 		// STACK: cls, descr, count
-		const uint32_t count = luaL_checkuint32(L, 3);
+		const Widelands::Quantity count = luaL_checkuint32(L, 3);
 		const SoldierMapDescr d = unbox_lua_soldier_description(L, 2, soldier_descr);
 		rv.insert(SoldierAmount(d, count));
 	} else {
 		lua_pushnil(L);
 		while (lua_next(L, 2) != 0) {
 			const SoldierMapDescr d = unbox_lua_soldier_description(L, 3, soldier_descr);
-			const uint32_t count = luaL_checkuint32(L, -1);
+			const Widelands::Quantity count = luaL_checkuint32(L, -1);
 			rv.insert(SoldierAmount(d, count));
 			lua_pop(L, 1);
 		}
@@ -484,7 +484,7 @@ int do_get_soldiers(lua_State* L, const Widelands::SoldierControl& sc, const Tri
 
 		// Only return the number of those requested
 		const SoldierMapDescr wanted = unbox_lua_soldier_description(L, 2, soldier_descr);
-		uint32_t rv = 0;
+		Widelands::Quantity rv = 0;
 		for (const Soldier* s : soldiers) {
 			SoldierMapDescr sd
 				(s->get_hp_level(), s->get_attack_level(), s->get_defense_level(), s->get_evade_level());
@@ -529,7 +529,7 @@ int do_set_soldiers
 	// Now adjust them
 	EditorGameBase& egbase = get_egbase(L);
 	for (const SoldiersMap::value_type& sp : setpoints) {
-		uint32_t cur = 0;
+		Widelands::Quantity cur = 0;
 		SoldiersMap::iterator i = hist.find(sp.first);
 		if (i != hist.end())
 			cur = i->second;
@@ -2655,7 +2655,7 @@ int LuaWorkerDescription::get_buildcost(lua_State * L) {
 	lua_newtable(L);
 	int index = 1;
 	if (get()->is_buildable()) {
-		for (const std::pair<std::string, uint8_t>& buildcost_pair : get()->buildcost()) {
+		for (const std::pair<std::string, Quantity>& buildcost_pair : get()->buildcost()) {
 			lua_pushint32(L, index++);
 			lua_pushstring(L, buildcost_pair.first);
 			lua_settable(L, -3);
@@ -3432,9 +3432,9 @@ int LuaFlag::set_wares(lua_State * L)
 	WaresMap setpoints = m_parse_set_wares_arguments(L, f->owner().tribe());
 	WaresMap c_wares = count_wares_on_flag_(*f, tribes);
 
-	uint32_t nwares = 0;
+	Widelands::Quantity nwares = 0;
 
-	for (const std::pair<Widelands::DescriptionIndex, uint32_t>& ware : c_wares) {
+	for (const std::pair<Widelands::DescriptionIndex, Widelands::Quantity>& ware : c_wares) {
 		// all wares currently on the flag without a setpoint should be removed
 		if (!setpoints.count(ware.first))
 			setpoints.insert(Widelands::WareAmount(ware.first, 0));
@@ -3442,8 +3442,8 @@ int LuaFlag::set_wares(lua_State * L)
 	}
 
 	// The idea is to change as little as possible on this flag
-	for (const std::pair<Widelands::DescriptionIndex, uint32_t>& sp : setpoints) {
-		uint32_t cur = 0;
+	for (const std::pair<Widelands::DescriptionIndex, Widelands::Quantity>& sp : setpoints) {
+		Widelands::Quantity cur = 0;
 		WaresMap::iterator i = c_wares.find(sp.first);
 		if (i != c_wares.end())
 			cur = i->second;
@@ -3492,7 +3492,7 @@ int LuaFlag::get_wares(lua_State * L) {
 	if (wares_set.size() == flag->owner().tribe().get_nrwares()) { // Want all returned
 		wares_set.clear();
 
-		for (const std::pair<Widelands::DescriptionIndex, uint32_t>& ware : wares) {
+		for (const std::pair<Widelands::DescriptionIndex, Widelands::Quantity>& ware : wares) {
 			wares_set.insert(ware.first);
 		}
 	}
@@ -3501,7 +3501,7 @@ int LuaFlag::get_wares(lua_State * L) {
 		lua_newtable(L);
 
 	for (const Widelands::DescriptionIndex& ware : wares_set) {
-		uint32_t count = 0;
+		Widelands::Quantity count = 0;
 		if (wares.count(ware))
 			count = wares[ware];
 
@@ -4068,7 +4068,7 @@ int LuaProductionSite::set_wares(lua_State * L) {
 	for (const WareAmount& input_ware : ps->descr().inputs()) {
 		valid_wares.insert(input_ware.first);
 	}
-	for (const std::pair<Widelands::DescriptionIndex, uint32_t>& sp : setpoints) {
+	for (const std::pair<Widelands::DescriptionIndex, Widelands::Quantity>& sp : setpoints) {
 		if (!valid_wares.count(sp.first)) {
 			report_error(
 				L, "<%s> can't be stored in this building: %s!",
