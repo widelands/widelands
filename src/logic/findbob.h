@@ -40,7 +40,7 @@ struct FindBobAttribute : public FindBob {
  * if player is 0).
  */
 struct FindBobEnemySoldier : public FindBob {
-	FindBobEnemySoldier(Player * _player) : player(_player) {}
+	FindBobEnemySoldier(Player * init_player) : player(init_player) {}
 
 	bool accept(Bob *) const override;
 

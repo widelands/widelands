@@ -55,9 +55,9 @@ ProductionSite BUILDING
 */
 
 ProductionSiteDescr::ProductionSiteDescr
-	(const std::string& init_descname, const std::string& msgctxt, MapObjectType _type,
+	(const std::string& init_descname, const std::string& msgctxt, MapObjectType init_type,
 	 const LuaTable& table, const EditorGameBase& egbase)
-	: BuildingDescr(init_descname, _type, table, egbase),
+	: BuildingDescr(init_descname, init_type, table, egbase),
 	  out_of_resource_title_(""),
 	  out_of_resource_heading_(""),
 	  out_of_resource_message_(""),

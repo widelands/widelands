@@ -994,13 +994,13 @@ void Soldier::attack_pop(Game & game, State &)
 /**
  * Accept Bob when is a Soldier alive that is attacking the Player.
  *
- * \param _game
- * \param _player
+ * \param g
+ * \param p
  */
 struct FindBobSoldierAttackingPlayer : public FindBob {
-	FindBobSoldierAttackingPlayer(Game & _game, Player & _player) :
-		player(_player),
-		game(_game) {}
+	FindBobSoldierAttackingPlayer(Game& g, Player& p) :
+		player(p),
+		game(g) {}
 
 	bool accept(Bob * const bob) const override
 	{

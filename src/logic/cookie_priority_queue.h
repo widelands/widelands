@@ -87,7 +87,8 @@ struct CookiePriorityQueue : CookiePriorityQueueBase<_Type> {
 	using Compare = _Compare;
 	using CookieAccessor = _CookieAccessor;
 
-	CookiePriorityQueue(const Compare & _c = Compare(), const CookieAccessor & _a = CookieAccessor());
+	CookiePriorityQueue(const Compare& comparator = Compare(),
+							  const CookieAccessor& accessor = CookieAccessor());
 	~CookiePriorityQueue();
 
 	CookieSizeType size() const;
@@ -126,9 +127,9 @@ struct DefaultCookieAccessor {
 
 template<typename _T, typename _Cw, typename _CA>
 CookiePriorityQueue<_T, _Cw, _CA>::CookiePriorityQueue
-	(const typename CookiePriorityQueue<_T, _Cw, _CA>::Compare & _c,
-	 const typename CookiePriorityQueue<_T, _Cw, _CA>::CookieAccessor & _a)
-: c(_c), ca(_a)
+	(const typename CookiePriorityQueue<_T, _Cw, _CA>::Compare & comparator,
+	 const typename CookiePriorityQueue<_T, _Cw, _CA>::CookieAccessor & accessor)
+: c(comparator), ca(accessor)
 {
 }
 

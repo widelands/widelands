@@ -27,8 +27,8 @@
 namespace Widelands {
 
 
-FindNodeAnd::Subfunctor::Subfunctor(const FindNode & _ff, bool const _negate)
-	: negate(_negate), findfield(_ff)
+FindNodeAnd::Subfunctor::Subfunctor(const FindNode& init_findfield, bool const init_negate)
+	: negate(init_negate), findfield(init_findfield)
 {}
 
 void FindNodeAnd::add(const FindNode & findfield, bool const negate)

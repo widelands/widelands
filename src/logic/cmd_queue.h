@@ -92,7 +92,7 @@ private:
  * for all instances of a game to ensure parallel simulation.
  */
 struct GameLogicCommand : public Command {
-	GameLogicCommand (uint32_t const _duetime) : Command(_duetime) {}
+	GameLogicCommand (uint32_t const init_duetime) : Command(init_duetime) {}
 
 	// Write these commands to a file (for savegames)
 	virtual void write

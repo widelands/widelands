@@ -46,7 +46,7 @@ private:
 	};
 	template<typename T>
 	struct Capsule : public BaseCapsule {
-		Capsule(const T & _op) : op(_op) {}
+		Capsule(const T & init_op) : op(init_op) {}
 		bool accept(const Map & map, const FCoords & coord) const override {
 			return op.accept(map, coord);
 		}
@@ -105,7 +105,7 @@ private:
 		bool negate;
 		FindNode findfield;
 
-		Subfunctor(const FindNode &, bool _negate);
+		Subfunctor(const FindNode &, bool init_negate);
 	};
 
 	std::vector<Subfunctor> subfunctors;
