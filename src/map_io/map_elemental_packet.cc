@@ -123,20 +123,40 @@ void MapElementalPacket::write
 {
 
 	Profile prof;
-	Section & s = prof.create_section("global");
+	Section& global_section = prof.create_section("global");
 
-	s.set_int   ("packet_version", kCurrentPacketVersion);
+	global_section.set_int   ("packet_version", kCurrentPacketVersion);
 	const Map & map = egbase.map();
-	s.set_int   ("map_w",          map.get_width      ());
-	s.set_int   ("map_h",          map.get_height     ());
-	s.set_int   ("nr_players",     map.get_nrplayers  ());
-	s.set_string("name",           map.get_name       ());
-	s.set_string("author",         map.get_author     ());
-	s.set_string("descr",          map.get_description());
-	s.set_string("hint",           map.get_hint       ());
+	global_section.set_int   ("map_w",          map.get_width      ());
+	global_section.set_int   ("map_h",          map.get_height     ());
+	global_section.set_int   ("nr_players",     map.get_nrplayers  ());
+	global_section.set_string("name",           map.get_name       ());
+	global_section.set_string("author",         map.get_author     ());
+	global_section.set_string("descr",          map.get_description());
+	global_section.set_string("hint",           map.get_hint       ());
 	if (!map.get_background().empty())
-		s.set_string("background",  map.get_background ());
-	s.set_string("tags", boost::algorithm::join(map.get_tags(), ","));
+		global_section.set_string("background",  map.get_background ());
+	global_section.set_string("tags", boost::algorithm::join(map.get_tags(), ","));
+
+	int counter = 0;
+	for (Widelands::Map::SuggestedTeamLineup lineup : map.get_suggested_teams()) {
+		Section& teams_section = prof.create_section((boost::format("teams%02d") % counter++).str().c_str());
+		int lineup_counter = 0;
+		for (Widelands::Map::SuggestedTeam team : lineup) {
+			std::string section_contents = "";
+			for (std::vector<PlayerNumber>::const_iterator it = team.begin(); it != team.end(); ++it) {
+				if (it == team.begin()) {
+					section_contents = (boost::format("%d") % static_cast<unsigned int>(*it)).str();
+				}
+				else {
+					section_contents =
+							(boost::format("%s,%d") % section_contents % static_cast<unsigned int>(*it)).str();
+				}
+			}
+			teams_section.set_string((boost::format("team%d") % ++lineup_counter).str().c_str(),
+											 section_contents);
+		}
+	}
 
 	prof.write("elemental", false, fs);
 }
