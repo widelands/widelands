@@ -76,38 +76,32 @@ tribes:new_soldier_type {
 
    animations = animations,
 
-   max_hp_level = 3,
-   max_attack_level = 5,
-   max_defense_level = 0,
-   max_evade_level = 2,
-
-   -- initial values and per level increasements
-   hp = 13000,
-   hp_incr_per_level = 2800,
-   attack = {
-      minimum = 1200,
-      maximum = 1600
+   -- Battle attributes - initial values and per level increase
+   health = {
+      max_level = 3,
+      base = 13000,
+      increase_per_level = 2800,
+      pictures = path.list_files(dirname .. "hp_level?.png"),
    },
-   attack_incr_per_level = 700,
-   defense = 3,
-   defense_incr_per_level = 4,
-   evade = 25,
-   evade_incr_per_level = 15,
-
-   hp_level_0_pic = dirname .. "hp_level0.png",
-   hp_level_1_pic = dirname .. "hp_level1.png",
-   hp_level_2_pic = dirname .. "hp_level2.png",
-   hp_level_3_pic = dirname .. "hp_level3.png",
-   evade_level_0_pic = dirname .. "evade_level0.png",
-   evade_level_1_pic = dirname .. "evade_level1.png",
-   evade_level_2_pic = dirname .. "evade_level2.png",
-   attack_level_0_pic = dirname .. "attack_level0.png",
-   attack_level_1_pic = dirname .. "attack_level1.png",
-   attack_level_2_pic = dirname .. "attack_level2.png",
-   attack_level_3_pic = dirname .. "attack_level3.png",
-   attack_level_4_pic = dirname .. "attack_level4.png",
-   attack_level_5_pic = dirname .. "attack_level5.png",
-   defense_level_0_pic = dirname .. "defense_level0.png",
+   attack = {
+      max_level = 5,
+      base = 1200,
+      maximum = 1600,
+      increase_per_level = 700,
+      pictures = path.list_files(dirname .. "attack_level?.png"),
+   },
+   defense = {
+      max_level = 0,
+      base = 3,
+      increase_per_level = 4,
+      pictures = path.list_files(dirname .. "defense_level?.png"),
+   },
+   evade = {
+      max_level = 2,
+      base = 25,
+      increase_per_level = 15,
+      pictures = path.list_files(dirname .. "evade_level?.png"),
+   },
 
    -- Random animations for battle
    attack_success_w = {

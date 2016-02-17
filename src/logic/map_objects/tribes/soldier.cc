@@ -64,56 +64,13 @@ constexpr int kRetreatWhenHealthDropsBelowThisPercentage = 50;
 SoldierDescr::SoldierDescr(const std::string& init_descname,
 									const LuaTable& table,
 									const EditorGameBase& egbase) :
-	WorkerDescr(init_descname, MapObjectType::SOLDIER, table, egbase)
+	WorkerDescr(init_descname, MapObjectType::SOLDIER, table, egbase),
+	health_(table.get_table("health")),
+	attack_(table.get_table("attack")),
+	defense_(table.get_table("defense")),
+	evade_(table.get_table("evade"))
 {
 	add_attribute(MapObject::Attribute::SOLDIER);
-
-	m_base_hp = table.get_int("hp");
-
-	// Parse attack
-	std::unique_ptr<LuaTable> items_table = table.get_table("attack");
-	m_min_attack = items_table->get_int("minimum");
-	m_max_attack = items_table->get_int("maximum");
-	if (m_min_attack > m_max_attack) {
-		throw GameDataError("Minimum attack %d is greater than maximum attack %d.", m_min_attack, m_max_attack);
-	}
-
-	// Parse defend
-	m_defense           = table.get_int("defense");
-
-	// Parse evade
-	m_evade             = table.get_int("evade");
-
-	// Parse increases per level
-	m_hp_incr           = table.get_int("hp_incr_per_level");
-	m_attack_incr       = table.get_int("attack_incr_per_level");
-	m_defense_incr      = table.get_int("defense_incr_per_level");
-	m_evade_incr        = table.get_int("evade_incr_per_level");
-
-	// Parse max levels
-	m_max_hp_level      = table.get_int("max_hp_level");
-	m_max_attack_level  = table.get_int("max_attack_level");
-	m_max_defense_level = table.get_int("max_defense_level");
-	m_max_evade_level   = table.get_int("max_evade_level");
-
-	// Load the filenames
-	m_hp_pics_fn     .resize(m_max_hp_level      + 1);
-	m_attack_pics_fn .resize(m_max_attack_level  + 1);
-	m_defense_pics_fn.resize(m_max_defense_level + 1);
-	m_evade_pics_fn  .resize(m_max_evade_level   + 1);
-
-	for (uint32_t i = 0; i <= m_max_hp_level;      ++i) {
-		m_hp_pics_fn[i] = table.get_string((boost::format("hp_level_%u_pic") % i).str());
-	}
-	for (uint32_t i = 0; i <= m_max_attack_level;  ++i) {
-		m_attack_pics_fn[i] = table.get_string((boost::format("attack_level_%u_pic") % i).str());
-	}
-	for (uint32_t i = 0; i <= m_max_defense_level; ++i) {
-		m_defense_pics_fn[i] = table.get_string((boost::format("defense_level_%u_pic") % i).str());
-	}
-	for (uint32_t i = 0; i <= m_max_evade_level;   ++i) {
-		m_evade_pics_fn[i] = table.get_string((boost::format("evade_level_%u_pic") % i).str());
-	}
 
 	//  Battle animations
 	// attack_success_*-> soldier is attacking and hit his opponent
@@ -136,22 +93,32 @@ SoldierDescr::SoldierDescr(const std::string& init_descname,
 	add_battle_animation(table.get_table("die_w"), &m_die_w_name);
 	add_battle_animation(table.get_table("die_e"), &m_die_e_name);
 
+}
+
+SoldierDescr::BattleAttribute::BattleAttribute(std::unique_ptr<LuaTable> table) {
+	base = table->get_int("base");
+
+	if (table->has_key("maximum")) {
+		 maximum = table->get_int("maximum");
+		 if (base > maximum) {
+			 throw GameDataError("Minimum %d is greater than maximum %d for a soldier's battle attribute.",
+										base, maximum);
+		 }
+	} else {
+		maximum = base;
+	}
+	increase = table->get_int("increase_per_level");
+	max_level = table->get_int("max_level");
+
 	// Load Graphics
-	m_hp_pics     .resize(m_max_hp_level      + 1);
-	m_attack_pics .resize(m_max_attack_level  + 1);
-	m_defense_pics.resize(m_max_defense_level + 1);
-	m_evade_pics  .resize(m_max_evade_level   + 1);
-	for (uint32_t i = 0; i <= m_max_hp_level;      ++i)
-		m_hp_pics[i] = g_gr->images().get(m_hp_pics_fn[i]);
-	for (uint32_t i = 0; i <= m_max_attack_level;  ++i)
-		m_attack_pics[i] =
-			g_gr->images().get(m_attack_pics_fn[i]);
-	for (uint32_t i = 0; i <= m_max_defense_level; ++i)
-		m_defense_pics[i] =
-			g_gr->images().get(m_defense_pics_fn[i]);
-	for (uint32_t i = 0; i <= m_max_evade_level;   ++i)
-		m_evade_pics[i] =
-			g_gr->images().get(m_evade_pics_fn[i]);
+	std::vector<std::string> image_filenames = table->get_table("pictures")->array_entries<std::string>();
+	if (image_filenames.size() != max_level + 1) {
+		throw GameDataError("Soldier needs to have %d pictures for battle attribute, but found %lu",
+									max_level + 1, image_filenames.size());
+	}
+	for (const std::string& image_filename : image_filenames) {
+		images.push_back(g_gr->images().get(image_filename));
+	}
 }
 
 /**
@@ -308,7 +275,7 @@ void Soldier::set_level
 }
 void Soldier::set_hp_level(const uint32_t hp) {
 	assert(m_hp_level <= hp);
-	assert              (hp <= descr().get_max_hp_level());
+	assert              (hp <= descr().get_max_health_level());
 
 	uint32_t oldmax = get_max_hitpoints();
 
@@ -365,7 +332,7 @@ int32_t Soldier::get_training_attribute(uint32_t const attr) const
 
 uint32_t Soldier::get_max_hitpoints() const
 {
-	return descr().get_base_hp() + m_hp_level * descr().get_hp_incr_per_level();
+	return descr().get_base_health() + m_hp_level * descr().get_health_incr_per_level();
 }
 
 uint32_t Soldier::get_min_attack() const
@@ -575,7 +542,7 @@ void Soldier::calc_info_icon_size
 {
 	const SoldierDescr * soldierdesc = static_cast<const SoldierDescr *>
 		(tribe.get_worker_descr(tribe.soldier()));
-	const Image* hppic = soldierdesc->get_hp_level_pic(0);
+	const Image* hppic = soldierdesc->get_health_level_pic(0);
 	const Image* attackpic = soldierdesc->get_attack_level_pic(0);
 	const Image* defensepic = soldierdesc->get_defense_level_pic(0);
 	const Image* evadepic = soldierdesc->get_evade_level_pic(0);
@@ -1792,7 +1759,7 @@ void Soldier::Loader::load(FileRead & fr)
 			soldier.m_hp_current = fr.unsigned_32();
 
 			soldier.m_hp_level =
-				std::min(fr.unsigned_32(), soldier.descr().get_max_hp_level());
+				std::min(fr.unsigned_32(), soldier.descr().get_max_health_level());
 			soldier.m_attack_level =
 				std::min(fr.unsigned_32(), soldier.descr().get_max_attack_level());
 			soldier.m_defense_level =

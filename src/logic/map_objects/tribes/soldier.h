@@ -47,33 +47,37 @@ public:
 					 const LuaTable& t, const EditorGameBase& egbase);
 	~SoldierDescr() override {}
 
-	uint32_t get_max_hp_level          () const {return m_max_hp_level;}
-	uint32_t get_max_attack_level      () const {return m_max_attack_level;}
-	uint32_t get_max_defense_level     () const {return m_max_defense_level;}
-	uint32_t get_max_evade_level       () const {return m_max_evade_level;}
+	uint32_t get_max_health_level      () const {return health_.max_level;}
+	uint32_t get_max_attack_level      () const {return attack_.max_level;}
+	uint32_t get_max_defense_level     () const {return defense_.max_level;}
+	uint32_t get_max_evade_level       () const {return evade_.max_level;}
 
-	uint32_t get_base_hp        () const {return m_base_hp;}
-	uint32_t get_base_min_attack() const {return m_min_attack;}
-	uint32_t get_base_max_attack() const {return m_max_attack;}
-	uint32_t get_base_defense   () const {return m_defense;}
-	uint32_t get_base_evade     () const {return m_evade;}
+	uint32_t get_base_health    () const {return health_.base;}
+	uint32_t get_base_min_attack() const {return attack_.base;}
+	uint32_t get_base_max_attack() const {return attack_.maximum;}
+	uint32_t get_base_defense   () const {return defense_.base;}
+	uint32_t get_base_evade     () const {return evade_.base;}
 
-	uint32_t get_hp_incr_per_level     () const {return m_hp_incr;}
-	uint32_t get_attack_incr_per_level () const {return m_attack_incr;}
-	uint32_t get_defense_incr_per_level() const {return m_defense_incr;}
-	uint32_t get_evade_incr_per_level  () const {return m_evade_incr;}
+	uint32_t get_health_incr_per_level () const {return health_.increase;}
+	uint32_t get_attack_incr_per_level () const {return attack_.increase;}
+	uint32_t get_defense_incr_per_level() const {return defense_.increase;}
+	uint32_t get_evade_incr_per_level  () const {return evade_.increase;}
 
-	const Image* get_hp_level_pic     (uint32_t const level) const {
-		assert(level <= m_max_hp_level);      return m_hp_pics     [level];
+	const Image* get_health_level_pic(uint32_t const level) const {
+		assert(level <= get_max_health_level());
+		return health_.images[level];
 	}
-	const Image* get_attack_level_pic (uint32_t const level) const {
-		assert(level <= m_max_attack_level);  return m_attack_pics [level];
+	const Image* get_attack_level_pic(uint32_t const level) const {
+		assert(level <= get_max_attack_level());
+		return attack_.images[level];
 	}
 	const Image* get_defense_level_pic(uint32_t const level) const {
-		assert(level <= m_max_defense_level); return m_defense_pics[level];
+		assert(level <= get_max_defense_level());
+		return defense_.images[level];
 	}
-	const Image* get_evade_level_pic  (uint32_t const level) const {
-		assert(level <= m_max_evade_level);   return m_evade_pics  [level];
+	const Image* get_evade_level_pic(uint32_t const level) const {
+		assert(level <= get_max_evade_level());
+		return evade_.images[level];
 	}
 
 	uint32_t get_rand_anim(Game & game, const char * const name) const;
@@ -81,36 +85,23 @@ public:
 protected:
 	Bob & create_object() const override;
 
-	//  start values
-	uint32_t m_base_hp;
-	uint32_t m_min_attack;
-	uint32_t m_max_attack;
-	uint32_t m_defense;
-	uint32_t m_evade;
+	// Health, Attack, Defense and Evade values.
+	struct BattleAttribute {
+		BattleAttribute(std::unique_ptr<LuaTable> table);
 
-	//  per level increases
-	uint32_t m_hp_incr;
-	uint32_t m_attack_incr;
-	uint32_t m_defense_incr;
-	uint32_t m_evade_incr;
+		uint32_t base; // Base value
+		uint32_t maximum; // Maximum value for randomizing attack values
+		uint32_t increase; // Per level increase
+		uint32_t max_level; // Maximum level
+		std::vector<const Image* > images; // Level images
+	};
 
-	//  max levels
-	uint32_t m_max_hp_level;
-	uint32_t m_max_attack_level;
-	uint32_t m_max_defense_level;
-	uint32_t m_max_evade_level;
+	BattleAttribute health_;
+	BattleAttribute attack_;
+	BattleAttribute defense_;
+	BattleAttribute evade_;
 
-	//  level pictures
-	std::vector<const Image* >   m_hp_pics;
-	std::vector<const Image* >   m_attack_pics;
-	std::vector<const Image* >   m_evade_pics;
-	std::vector<const Image* >   m_defense_pics;
-	std::vector<std::string> m_hp_pics_fn;
-	std::vector<std::string> m_attack_pics_fn;
-	std::vector<std::string> m_evade_pics_fn;
-	std::vector<std::string> m_defense_pics_fn;
-
-	// animation names
+	// Battle animation names
 	std::vector<std::string> m_attack_success_w_name;
 	std::vector<std::string> m_attack_failure_w_name;
 	std::vector<std::string> m_evade_success_w_name;
@@ -196,7 +187,7 @@ public:
 	uint32_t get_evade() const;
 
 	const Image* get_hp_level_pic     () const {
-		return descr().get_hp_level_pic     (m_hp_level);
+		return descr().get_health_level_pic(m_hp_level);
 	}
 	const Image* get_attack_level_pic () const {
 		return descr().get_attack_level_pic (m_attack_level);

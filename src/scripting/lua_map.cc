@@ -384,9 +384,9 @@ SoldierMapDescr unbox_lua_soldier_description(lua_State* L, int table_index, con
 	lua_rawget(L, table_index);
 	soldier_descr.hp = luaL_checkuint32(L, -1);
 	lua_pop(L, 1);
-	if (soldier_descr.hp > sd.get_max_hp_level())
+	if (soldier_descr.hp > sd.get_max_health_level())
 		report_error
-			(L, "hp level (%i) > max hp level (%i)", soldier_descr.hp, sd.get_max_hp_level());
+			(L, "hp level (%i) > max hp level (%i)", soldier_descr.hp, sd.get_max_health_level());
 
 	lua_pushuint32(L, 2);
 	lua_rawget(L, table_index);

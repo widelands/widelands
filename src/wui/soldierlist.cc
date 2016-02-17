@@ -257,7 +257,7 @@ void SoldierPanel::think()
 		uint32_t level = soldier->get_attack_level();
 		level = level * (soldier->descr().get_max_defense_level() + 1) + soldier->get_defense_level();
 		level = level * (soldier->descr().get_max_evade_level() + 1) + soldier->get_evade_level();
-		level = level * (soldier->descr().get_max_hp_level() + 1) + soldier->get_hp_level();
+		level = level * (soldier->descr().get_max_health_level() + 1) + soldier->get_hp_level();
 
 		uint32_t health = soldier->get_current_hitpoints();
 
@@ -484,7 +484,7 @@ void SoldierList::mouseover(const Soldier * soldier)
 
 	m_infotext.set_text(
 		(boost::format(_("HP: %1$u/%2$u  AT: %3$u/%4$u  DE: %5$u/%6$u  EV: %7$u/%8$u"))
-			% soldier->get_hp_level() % soldier->descr().get_max_hp_level()
+			% soldier->get_hp_level() % soldier->descr().get_max_health_level()
 			% soldier->get_attack_level() % soldier->descr().get_max_attack_level()
 			% soldier->get_defense_level() % soldier->descr().get_max_defense_level()
 			% soldier->get_evade_level() % soldier->descr().get_max_evade_level()
