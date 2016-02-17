@@ -375,7 +375,7 @@ void BaseListselect::draw(RenderTarget & dst)
 						er.pic);
 		}
 
-		const Image* entry_text_im = UI::g_fh1->render(as_uifont(er.name, UI_FONT_SIZE_SMALL,
+		const Image* entry_text_im = UI::g_fh1->render(as_uifont(richtext_escape(er.name), UI_FONT_SIZE_SMALL,
 																					er.use_clr ? er.clr : UI_FONT_CLR_FG));
 
 		Align alignment = i18n::has_rtl_character(er.name.c_str(), 20) ? UI::Align::kRight : UI::Align::kLeft;
