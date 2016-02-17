@@ -2922,7 +2922,7 @@ Load/save support
 ==============================
 */
 
-constexpr uint8_t kCurrentPacketVersion = 3;
+constexpr uint8_t kCurrentPacketVersion = 2;
 
 Worker::Loader::Loader() :
 	location_(0),
