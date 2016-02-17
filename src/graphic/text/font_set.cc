@@ -20,6 +20,7 @@
 #include "graphic/text/font_set.h"
 
 #include <cstdlib>
+#include <memory>
 
 #include <boost/algorithm/string.hpp>
 #include <boost/format.hpp>

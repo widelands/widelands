@@ -94,7 +94,8 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive & parent, bool modal)
 
 	// We need less space for the hint and the description, but it should at least have 1 line height.
 	hint_ = new UI::MultilineEditbox(
-				  &main_box_, 0, 0, max_w_, std::max(labelh_, remaining_space * 1 / 3), "", g_gr->images().get("images/ui_basic/but1.png"));
+				  &main_box_, 0, 0, max_w_, std::max(labelh_, remaining_space * 1 / 3),
+				  "", g_gr->images().get("images/ui_basic/but1.png"));
 	descr_ = new UI::MultilineEditbox(
 					&main_box_, 0, 0, max_w_, remaining_space - hint_->get_h(),
 					"", g_gr->images().get("images/ui_basic/but1.png"));
@@ -144,7 +145,8 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive & parent, bool modal)
 	tabs_.add("main_map_options",
 				 g_gr->images().get("images/wui/menus/menu_toggle_minimap.png"), &main_box_, _("Main Options"));
 	tabs_.add("map_tags", g_gr->images().get("images/ui_basic/checkbox_checked.png"), &tags_box_, _("Tags"));
-	tabs_.add("map_teams", g_gr->images().get("images/wui/editor/editor_menu_player_menu.png"), &teams_box_, _("Teams"));
+	tabs_.add("map_teams", g_gr->images().get("images/wui/editor/editor_menu_player_menu.png"), &teams_box_,
+				 _("Teams"));
 
 	name_.changed.connect(boost::bind(&MainMenuMapOptions::changed, this));
 	author_.changed.connect(boost::bind(&MainMenuMapOptions::changed, this));

@@ -76,7 +76,8 @@ EditBox::EditBox
 	 const Image* background,
 	 int font_size)
 	:
-	Panel(parent, x, y, w, UI::g_fh1->render(as_uifont(UI::g_fh1->fontset()->representative_character()), font_size)->height() + 2),
+	Panel(parent, x, y, w, UI::g_fh1->render(as_uifont(UI::g_fh1->fontset()->representative_character()),
+														  font_size)->height() + 2),
 	m_(new EditBoxImpl),
 	history_active_(false),
 	history_position_(-1)

@@ -28,9 +28,9 @@
 #include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
+#include "graphic/text/bidi.h"
 #include "graphic/text_constants.h"
 #include "graphic/text_layout.h"
-#include "graphic/text/bidi.h"
 #include "wlapplication.h"
 
 constexpr int kMargin = 2;
@@ -398,7 +398,8 @@ void BaseListselect::draw(RenderTarget & dst)
 		}
 
 		// Crop to column width while blitting
-		if (static_cast<int>(alignment & UI::Align::kRight) && (maxw  + picw) < static_cast<uint32_t>(entry_text_im->width())) {
+		if (static_cast<int>(alignment & UI::Align::kRight) &&
+			 (maxw  + picw) < static_cast<uint32_t>(entry_text_im->width())) {
 			// Fix positioning for BiDi languages.
 			point.x = 0;
 
