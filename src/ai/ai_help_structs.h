@@ -604,7 +604,7 @@ struct SchedulerTask {
 struct BlockedFields {
 	// <hash of field coordinates, time till blocked>
 	// of course hash of an blocked field is unique
-	std::map<uint32_t, uint32_t> BlockedFields; //NOCOM or std::unordered_map rather?
+	std::map<uint32_t, uint32_t> BlockedFields;
 
 	void add(uint32_t hash, uint32_t till){
 		if (BlockedFields.count(hash) == 0) {
@@ -641,33 +641,31 @@ struct BlockedFields {
 	}
 };
 
+// This is an struct that stores strength of players, info on teams and provides some outputs from these data
 struct PlayersStrengths {
 	struct PlayerStat {
-		//uint16_t pn_;
 		uint8_t tn_;
 		uint32_t players_power_;
-		
-		
+
 		PlayerStat() {};
-		PlayerStat(uint8_t tc, uint32_t pp)
-		: tn_(tc), players_power_(pp) {
-		}
+		PlayerStat(uint8_t tc, uint32_t pp) : tn_(tc), players_power_(pp) {}
 	};
-	std::map<uint16_t,PlayerStat> all_stats;
-	
-	// number of team, sum of players' strength
+
+	// This is core part of this struct
+	std::map<uint16_t, PlayerStat> all_stats;
+
+	// Number of team, sum of players' strength
 	std::map<uint8_t, uint32_t> team_powers;
-	
+
+	// Inserting/updating data
 	void add(uint16_t pn, uint8_t tn, uint32_t pp){
 		if (all_stats.count(pn) == 0) {
-			all_stats.insert(std::pair<uint16_t,PlayerStat>(pn, PlayerStat(tn, pp)));
+			all_stats.insert(std::pair<uint16_t, PlayerStat>(pn, PlayerStat(tn, pp)));
 		} else {
 			all_stats[pn].players_power_ = pp;
 		}
-
-		assert(all_stats[pn].players_power_ == pp); //NOCOM
 	}
-	
+
 	void recalculate_team_power() {
 		team_powers.clear();
 		for (auto& item: all_stats){
@@ -680,7 +678,7 @@ struct PlayersStrengths {
 			}
 		}
 	}
-	
+
 	// This is strength of player plus third of strength of other members of his team
 	uint32_t get_modified_player_power(uint16_t pn){
 		uint32_t result = 0;
@@ -694,18 +692,16 @@ struct PlayersStrengths {
 		};
 		return result;
 	}
-		
 
-	
-	bool players_in_same_team(uint16_t pl1,uint16_t pl2){
-		if (all_stats.count(pl1) > 0 && all_stats.count(pl2) > 0 && pl1 != pl2) { 
+	bool players_in_same_team(uint16_t pl1, uint16_t pl2){
+		if (all_stats.count(pl1) > 0 && all_stats.count(pl2) > 0 && pl1 != pl2) {
 			// team number 0 = no team
 			return all_stats[pl1].tn_ > 0 && all_stats[pl1].tn_ == all_stats[pl2].tn_;
 		} else {
 			return false;
 		}
 	}
-	
+
 	bool strong_enough(uint16_t pl) {
 		if (all_stats.count(pl) == 0) {
 			return false;
@@ -713,7 +709,7 @@ struct PlayersStrengths {
 		uint32_t my_strength = all_stats[pl].players_power_;
 		uint32_t strongest_oponent_strength=0;
 		for (auto item : all_stats) {
-			if(!players_in_same_team(item.first, pl) && pl != item.first) {
+			if (!players_in_same_team(item.first, pl) && pl != item.first) {
 				if (get_modified_player_power(item.first) > strongest_oponent_strength) {
 					strongest_oponent_strength = get_modified_player_power(item.first);
 				}
@@ -721,22 +717,6 @@ struct PlayersStrengths {
 		}
 		return my_strength > strongest_oponent_strength + 50;
 	}
-
-	
-	void print_content(){ //NOCOM - remove
-		printf ("printing players: \n");
-		for (auto& item: all_stats){
-			printf ("  %2d  %3d   %3d, team power: %3d %s\n",
-				item.first, item.second.tn_, item.second.players_power_, get_modified_player_power(item.first),
-				strong_enough(item.first)?", strong enough": " ");
-		};
-		//printf ("printing teams: \n");
-		//for (auto& iter: team_powers){
-			//printf (" %2d: %5d\n", iter.first, iter.second);
-		//};
-	}
-		
 };
-		
 
 #endif  // end of include guard: WL_AI_AI_HELP_STRUCTS_H

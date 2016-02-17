@@ -263,8 +263,8 @@ private:
 
 	std::list<Widelands::FCoords> unusable_fields;
 	std::list<BuildableField*> buildable_fields;
-	BlockedFields blocked_fields; //NOCOM rename
-	PlayersStrengths player_statistics; //NOCOM
+	BlockedFields blocked_fields;
+	PlayersStrengths player_statistics;
 	std::unordered_set<uint32_t> port_reserved_coords;
 	std::list<MineableField*> mineable_fields;
 	std::list<Widelands::Flag const*> new_flags;

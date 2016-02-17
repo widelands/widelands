@@ -75,6 +75,10 @@ constexpr uint32_t kNoShip = std::numeric_limits<uint32_t>::max();
 constexpr uint32_t kNever = std::numeric_limits<uint32_t>::max();
 constexpr uint32_t kNoExpedition = 0;
 
+// following two are used for roads management, for creating shortcuts and dismantling dispensable roads
+constexpr int32_t kSpotsTooLittle = 15;
+constexpr int32_t kSpotsEnough = 25;
+
 // this is intended for map developers, by default should be off
 constexpr bool kPrintStats = false;
 
@@ -1505,14 +1509,6 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 			needs_boost_economy = true;
 		}
 
-	//NOCOM
-	if (highest_nonmil_prio_ > 10
-		&& has_enough_space
-		&& virtual_mines >= 5 &&
-		player_statistics.strong_enough(player_number())) {
-			printf (" %d player already too strong to boost economy\n", player_number());
-	}
-
 	// resetting highest_nonmil_prio_ so it can be recalculated anew
 	highest_nonmil_prio_ = 0;
 
@@ -1555,11 +1551,6 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 			persistent_data->least_military_score = 0;
 		}
 	}
-
-	//if (msites_in_constr() == 0 && vacant_mil_positions_ <= 2) { //NOCOM
-	 //printf (" %d: least_military_score : %3d, in const %2d, vacant: %d\n",
-	 //player_number(), persistent_data->least_military_score, msites_in_constr(), vacant_mil_positions_);
-	//}
 
 	// This is effective score, falling down very quickly
 	if (persistent_data->target_military_score > kUpperLimit + 150) {
@@ -2190,10 +2181,8 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 				//sometimes expansion is stalled and this is to help boost it
 				if (msites_in_constr() == 0 && vacant_mil_positions_ <= 2) {
 					prio += 10;
-					//printf (" %d: increasing score for field %3dx%3d: %3d\n", player_number(), bf->coords.x, bf->coords.y, prio);
 					if (bf->enemy_nearby_){
 						prio += 20;
-						//printf ("  + for enemy nearby: %3d\n", prio);
 					}
 				}
 
@@ -2491,7 +2480,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 
 	// send the command to construct a new building
 	game().send_player_build(player_number(), proposed_coords, best_building->id);
-	blocked_fields.add(coords_hash(proposed_coords), game().get_gametime() + 2 * 60 * 1000); //NOCOM
+	blocked_fields.add(coords_hash(proposed_coords), game().get_gametime() + 2 * 60 * 1000);
 
 	// resetting new_building_overdue_
 	best_building->new_building_overdue_ = 0;
@@ -2504,7 +2493,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 		uint32_t block_time = 0;
 		uint32_t block_area = 0;
 		if (best_building->space_consumer_) {
-			if (spots_ > 20) {
+			if (spots_ > kSpotsEnough) {
 				block_time = 45 * 60 * 1000;
 			} else {
 				block_time = 10 * 60 * 1000;
@@ -2517,7 +2506,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 
 		MapRegion<Area<FCoords>> mr(map, Area<FCoords>(map.get_fcoords(proposed_coords), block_area));
 		do {
-			blocked_fields.add(coords_hash(mr.location()), game().get_gametime() + block_time); //NOCOM
+			blocked_fields.add(coords_hash(mr.location()), game().get_gametime() + block_time);
 		} while (mr.advance(map));
 	}
 
@@ -2543,7 +2532,7 @@ bool DefaultAI::improve_roads(uint32_t gametime) {
 		const Path& path = roads.front()->get_path();
 
 		// first force a split on roads that are longer than 3 parts
-		if (path.get_nsteps() > 3 && spots_ > 20) {
+		if (path.get_nsteps() > 3 && spots_ > kSpotsEnough) {
 			const Map& map = game().map();
 			CoordPath cp(map, path);
 			// try to split after two steps
@@ -2578,7 +2567,7 @@ bool DefaultAI::improve_roads(uint32_t gametime) {
 
 		// occasionaly we test if the road can be dismounted
 		// if there is shortage of spots we do it allways
-		if (gametime % 5 == 0 || spots_ < 15) {
+		if (gametime % 5 == 0 || spots_ < kSpotsTooLittle) {
 			const Road& road = *roads.front();
 			if (dispensable_road_test(*const_cast<Road*>(&road))) {
 				game().send_player_bulldoze(*const_cast<Road*>(&road));
@@ -2636,15 +2625,26 @@ bool DefaultAI::improve_roads(uint32_t gametime) {
 	if (flag.nr_of_roads() == 0 || needs_warehouse) {
 		create_shortcut_road(flag, 13, 22, gametime);
 		inhibit_road_building_ = gametime + 800;
-	} else if (spots_ > 15 && (flag.nr_of_roads() == 1 || gametime % 10 == 0)) {
-		create_shortcut_road(flag, 13, 22, gametime);
-		inhibit_road_building_ = gametime + 800;
+	} else if (flag.nr_of_roads() == 1 || gametime % 10 == 0) {
+		if (spots_ > kSpotsEnough) {
+			// This is normal situation
+			create_shortcut_road(flag, 13, 22, gametime);
+			inhibit_road_building_ = gametime + 800;
+		} else if (spots_ > kSpotsTooLittle)  {
+			// We are shoft of spots so shortening must be significant
+			create_shortcut_road(flag, 13, 35, gametime);
+			inhibit_road_building_ = gametime + 800;
+		} else {
+			// We are very shoft of spots so shortening must be even bigger
+			create_shortcut_road(flag, 13, 50, gametime);
+			inhibit_road_building_ = gametime + 800;
+		}
 		// a warehouse with 3 or less roads
 	} else if (is_warehouse && flag.nr_of_roads() <= 3) {
 		create_shortcut_road(flag, 9, -1, gametime);
 		inhibit_road_building_ = gametime + 400;
 		// and when a flag is full with wares
-	} else if (spots_ > 15 && flag.current_wares() > 5) {
+	} else if (spots_ > kSpotsEnough && flag.current_wares() > 5) {
 		create_shortcut_road(flag, 9, -2, gametime);
 		inhibit_road_building_ = gametime + 400;
 	} else {
@@ -2658,24 +2658,30 @@ bool DefaultAI::improve_roads(uint32_t gametime) {
 // and tries to find alternative route from one flag to another.
 // if route exists, it is not too long, and current road is not intensively used
 // the road can be dismantled
-bool DefaultAI::dispensable_road_test(Widelands::Road& road) { //NOCOM
+bool DefaultAI::dispensable_road_test(Widelands::Road& road) {
 
 	Flag& roadstartflag = road.get_flag(Road::FlagStart);
 	Flag& roadendflag = road.get_flag(Road::FlagEnd);
 
-	if (spots_ > 15 && roadstartflag.current_wares() + roadendflag.current_wares() > 0) {
+	// We do not dismantle (even consider it) if the road is busy (some wares on flags), unless there
+	// is shortage of build spots
+	if (spots_ > kSpotsTooLittle && roadstartflag.current_wares() + roadendflag.current_wares() > 0) {
 		return false;
 	}
-
-	printf (" %d: considering dismantle of road with %d wares. Spots: %d\n",
-	player_number(), roadstartflag.current_wares() + roadendflag.current_wares(), spots_);
 
 	std::priority_queue<NearFlag> queue;
 	// only used to collect flags reachable walking over roads
 	std::vector<NearFlag> reachableflags;
 	queue.push(NearFlag(roadstartflag, 0, 0));
 	uint8_t pathcounts = 0;
-	uint8_t checkradius = (spots_ > 15) ? 8 : 15;
+	uint8_t checkradius = 0;
+	if (spots_ > kSpotsEnough) {
+		checkradius = 8;
+	} else if (spots_ > kSpotsTooLittle) {
+		checkradius = 12;
+	} else {
+		checkradius = 16;
+	}
 	Map& map = game().map();
 
 	// algorithm to walk on roads
@@ -3181,6 +3187,11 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 	// Lumberjack / Woodcutter handling
 	if (site.bo->need_trees_) {
 
+		//do not dismantle immediatelly
+		if ((game().get_gametime() - site.built_time_) < 4 * 60 * 1000) {
+			return false;
+		}
+
 		const uint32_t remaining_trees =
 		   map.find_immovables(Area<FCoords>(map.get_fcoords(site.site->get_position()), radius),
 		                       nullptr,
@@ -3199,8 +3210,6 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 		if (site.site->get_statistics_percent() > 20) {
 			return false;
 		}
-
-
 
 		// do not dismantle if there are some trees remaining
 		if (remaining_trees > 5) {
@@ -4582,8 +4591,8 @@ int32_t DefaultAI::recalc_with_border_range(const BuildableField& bf, int32_t pr
 	// and if close (up to 2 fields away) from border
 	if (bf.near_border_) {
 		prio -= 10;
-		if (spots_ < 15){
-			prio +=  3 * (spots_ - 15);
+		if (spots_ < kSpotsEnough){
+			prio +=  3 * (spots_ - kSpotsEnough);
 		}
 	}
 
@@ -5326,7 +5335,7 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 
 	Map& map = game().map();
 
-	// define which players are attackable //NOCOM
+	// define which players are attackable
 	std::vector<Attackable> player_attackable;
 	PlayerNumber const nr_players = map.get_nrplayers();
 	player_attackable.resize(nr_players);
@@ -5498,7 +5507,7 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 			;
 	}
 
-	const bool strong_enough = player_statistics.strong_enough(pn); //NOCOM
+	const bool strong_enough = player_statistics.strong_enough(pn);
 
 	for (std::map<uint32_t, EnemySiteObserver>::iterator site = enemy_sites.begin();
 	     site != enemy_sites.end();
@@ -5627,7 +5636,7 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 					site->second.score += 3;
 				}
 
-				// Enemy too weak, let finish him
+				// Enemy is too weak, be more aggressive attacking him
 				if (player_attackable[owner_number - 1] == Attackable::kAttackableAndWeak) {
 					site->second.score += 4;
 				}
