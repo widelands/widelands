@@ -85,6 +85,7 @@ public:
 protected:
 	Bob & create_object() const override;
 
+private:
 	// Health, Attack, Defense and Evade values.
 	struct BattleAttribute {
 		BattleAttribute(std::unique_ptr<LuaTable> table);
@@ -102,19 +103,18 @@ protected:
 	BattleAttribute evade_;
 
 	// Battle animation names
-	std::vector<std::string> m_attack_success_w_name;
-	std::vector<std::string> m_attack_failure_w_name;
-	std::vector<std::string> m_evade_success_w_name;
-	std::vector<std::string> m_evade_failure_w_name;
-	std::vector<std::string> m_die_w_name;
+	std::vector<std::string> attack_success_w_name_;
+	std::vector<std::string> attack_failure_w_name_;
+	std::vector<std::string> evade_success_w_name_;
+	std::vector<std::string> evade_failure_w_name_;
+	std::vector<std::string> die_w_name_;
 
-	std::vector<std::string> m_attack_success_e_name;
-	std::vector<std::string> m_attack_failure_e_name;
-	std::vector<std::string> m_evade_success_e_name;
-	std::vector<std::string> m_evade_failure_e_name;
-	std::vector<std::string> m_die_e_name;
+	std::vector<std::string> attack_success_e_name_;
+	std::vector<std::string> attack_failure_e_name_;
+	std::vector<std::string> evade_success_e_name_;
+	std::vector<std::string> evade_failure_e_name_;
+	std::vector<std::string> die_e_name_;
 
-private:
 	// Reads list of animation names from the table and pushes them into result.
 	void add_battle_animation(std::unique_ptr<LuaTable> table, std::vector<std::string>* result);
 

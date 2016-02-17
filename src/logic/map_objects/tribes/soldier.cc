@@ -74,24 +74,24 @@ SoldierDescr::SoldierDescr(const std::string& init_descname,
 
 	//  Battle animations
 	// attack_success_*-> soldier is attacking and hit his opponent
-	add_battle_animation(table.get_table("attack_success_w"), &m_attack_success_w_name);
-	add_battle_animation(table.get_table("attack_success_e"), &m_attack_success_e_name);
+	add_battle_animation(table.get_table("attack_success_w"), &attack_success_w_name_);
+	add_battle_animation(table.get_table("attack_success_e"), &attack_success_e_name_);
 
 	// attack_failure_*-> soldier is attacking and miss hit, defender evades
-	add_battle_animation(table.get_table("attack_failure_w"), &m_attack_failure_w_name);
-	add_battle_animation(table.get_table("attack_failure_e"), &m_attack_failure_e_name);
+	add_battle_animation(table.get_table("attack_failure_w"), &attack_failure_w_name_);
+	add_battle_animation(table.get_table("attack_failure_e"), &attack_failure_e_name_);
 
 	// evade_success_* -> soldier is defending and opponent misses
-	add_battle_animation(table.get_table("evade_success_w"), &m_evade_success_w_name);
-	add_battle_animation(table.get_table("evade_success_e"), &m_evade_success_e_name);
+	add_battle_animation(table.get_table("evade_success_w"), &evade_success_w_name_);
+	add_battle_animation(table.get_table("evade_success_e"), &evade_success_e_name_);
 
 	// evade_failure_* -> soldier is defending and opponent hits
-	add_battle_animation(table.get_table("evade_failure_w"), &m_evade_failure_w_name);
-	add_battle_animation(table.get_table("evade_failure_e"), &m_evade_failure_e_name);
+	add_battle_animation(table.get_table("evade_failure_w"), &evade_failure_w_name_);
+	add_battle_animation(table.get_table("evade_failure_e"), &evade_failure_e_name_);
 
 	// die_*           -> soldier is dying
-	add_battle_animation(table.get_table("die_w"), &m_die_w_name);
-	add_battle_animation(table.get_table("die_e"), &m_die_e_name);
+	add_battle_animation(table.get_table("die_w"), &die_w_name_);
+	add_battle_animation(table.get_table("die_e"), &die_e_name_);
 
 }
 
@@ -130,62 +130,62 @@ uint32_t SoldierDescr::get_rand_anim
 	std::string run = animation_name;
 
 	if (strcmp(animation_name, "attack_success_w") == 0) {
-		assert(!m_attack_success_w_name.empty());
-		uint32_t i = game.logic_rand() % m_attack_success_w_name.size();
-		run = m_attack_success_w_name[i];
+		assert(!attack_success_w_name_.empty());
+		uint32_t i = game.logic_rand() % attack_success_w_name_.size();
+		run = attack_success_w_name_[i];
 	}
 
 	if (strcmp(animation_name, "attack_success_e") == 0) {
-		assert(!m_attack_success_e_name.empty());
-		uint32_t i = game.logic_rand() % m_attack_success_e_name.size();
-		run = m_attack_success_e_name[i];
+		assert(!attack_success_e_name_.empty());
+		uint32_t i = game.logic_rand() % attack_success_e_name_.size();
+		run = attack_success_e_name_[i];
 	}
 
 	if (strcmp(animation_name, "attack_failure_w") == 0) {
-		assert(!m_attack_failure_w_name.empty());
-		uint32_t i = game.logic_rand() % m_attack_failure_w_name.size();
-		run = m_attack_failure_w_name[i];
+		assert(!attack_failure_w_name_.empty());
+		uint32_t i = game.logic_rand() % attack_failure_w_name_.size();
+		run = attack_failure_w_name_[i];
 	}
 
 	if (strcmp(animation_name, "attack_failure_e") == 0) {
-		assert(!m_attack_failure_e_name.empty());
-		uint32_t i = game.logic_rand() % m_attack_failure_e_name.size();
-		run = m_attack_failure_e_name[i];
+		assert(!attack_failure_e_name_.empty());
+		uint32_t i = game.logic_rand() % attack_failure_e_name_.size();
+		run = attack_failure_e_name_[i];
 	}
 
 	if (strcmp(animation_name, "evade_success_w") == 0) {
-		assert(!m_evade_success_w_name.empty());
-		uint32_t i = game.logic_rand() % m_evade_success_w_name.size();
-		run = m_evade_success_w_name[i];
+		assert(!evade_success_w_name_.empty());
+		uint32_t i = game.logic_rand() % evade_success_w_name_.size();
+		run = evade_success_w_name_[i];
 	}
 
 	if (strcmp(animation_name, "evade_success_e") == 0) {
-		assert(!m_evade_success_e_name.empty());
-		uint32_t i = game.logic_rand() % m_evade_success_e_name.size();
-		run = m_evade_success_e_name[i];
+		assert(!evade_success_e_name_.empty());
+		uint32_t i = game.logic_rand() % evade_success_e_name_.size();
+		run = evade_success_e_name_[i];
 	}
 
 	if (strcmp(animation_name, "evade_failure_w") == 0) {
-		assert(!m_evade_failure_w_name.empty());
-		uint32_t i = game.logic_rand() % m_evade_failure_w_name.size();
-		run = m_evade_failure_w_name[i];
+		assert(!evade_failure_w_name_.empty());
+		uint32_t i = game.logic_rand() % evade_failure_w_name_.size();
+		run = evade_failure_w_name_[i];
 	}
 
 	if (strcmp(animation_name, "evade_failure_e") == 0) {
-		assert(!m_evade_failure_e_name.empty());
-		uint32_t i = game.logic_rand() % m_evade_failure_e_name.size();
-		run = m_evade_failure_e_name[i];
+		assert(!evade_failure_e_name_.empty());
+		uint32_t i = game.logic_rand() % evade_failure_e_name_.size();
+		run = evade_failure_e_name_[i];
 	}
 	if (strcmp(animation_name, "die_w") == 0) {
-		assert(!m_die_w_name.empty());
-		uint32_t i = game.logic_rand() % m_die_w_name.size();
-		run = m_die_w_name[i];
+		assert(!die_w_name_.empty());
+		uint32_t i = game.logic_rand() % die_w_name_.size();
+		run = die_w_name_[i];
 	}
 
 	if (strcmp(animation_name, "die_e") == 0) {
-		assert(!m_die_e_name.empty());
-		uint32_t i = game.logic_rand() % m_die_e_name.size();
-		run = m_die_e_name[i];
+		assert(!die_e_name_.empty());
+		uint32_t i = game.logic_rand() % die_e_name_.size();
+		run = die_e_name_[i];
 	}
 	if (!is_animation_known(run)) {
 		log("Missing animation '%s' for soldier %s. Reverting to idle.\n", run.c_str(), name().c_str());
