@@ -37,8 +37,6 @@ namespace Widelands {
 class EditorGameBase;
 class Battle;
 
-#define HP_FRAMECOLOR RGBColor(255, 255, 255)
-
 class SoldierDescr : public WorkerDescr {
 public:
 	friend class Economy;
@@ -136,7 +134,7 @@ enum CombatWalkingDir {
 enum CombatFlags {
 	/// Soldier will wait enemies at his building flag. Only for defenders.
 	CF_DEFEND_STAYHOME = 1,
-	/// When current hitpoints goes under a fixed percentage, soldier will flee
+	/// When current health points drop below a fixed percentage, soldier will flee
 	/// and heal inside military building
 	CF_RETREAT_WHEN_INJURED = 2,
 	/// Attackers would try avoid entering combat with others soldiers but 'flag
@@ -156,17 +154,17 @@ public:
 	void cleanup(EditorGameBase &) override;
 
 	void set_level
-		(uint32_t hp, uint32_t attack, uint32_t defense, uint32_t evade);
-	void set_hp_level     (uint32_t);
+		(uint32_t health, uint32_t attack, uint32_t defense, uint32_t evade);
+	void set_health_level (uint32_t);
 	void set_attack_level (uint32_t);
 	void set_defense_level(uint32_t);
 	void set_evade_level  (uint32_t);
 	uint32_t get_level (TrainingAttribute) const;
-	uint32_t get_hp_level     () const {return m_hp_level;}
-	uint32_t get_attack_level () const {return m_attack_level;}
-	uint32_t get_defense_level() const {return m_defense_level;}
-	uint32_t get_evade_level  () const {return m_evade_level;}
-	uint32_t get_total_level () const {return m_hp_level + m_attack_level + m_defense_level + m_evade_level;}
+	uint32_t get_health_level     () const {return health_level_;}
+	uint32_t get_attack_level () const {return attack_level_;}
+	uint32_t get_defense_level() const {return defense_level_;}
+	uint32_t get_evade_level  () const {return evade_level_;}
+	uint32_t get_total_level() const   {return health_level_ + attack_level_ + defense_level_ + evade_level_;}
 
 	/// Automatically select a task.
 	void init_auto_task(Game &) override;
@@ -179,35 +177,35 @@ public:
 		(const TribeDescr &, uint32_t & w, uint32_t & h);
 	void draw_info_icon(RenderTarget &, Point, bool anchor_below) const;
 
-	uint32_t get_current_hitpoints() const {return m_hp_current;}
-	uint32_t get_max_hitpoints() const;
+	uint32_t get_current_health() const {return current_health_;}
+	uint32_t get_max_health() const;
 	uint32_t get_min_attack() const;
 	uint32_t get_max_attack() const;
 	uint32_t get_defense() const;
 	uint32_t get_evade() const;
 
-	const Image* get_hp_level_pic     () const {
-		return descr().get_health_level_pic(m_hp_level);
+	const Image* get_health_level_pic () const {
+		return descr().get_health_level_pic(health_level_);
 	}
 	const Image* get_attack_level_pic () const {
-		return descr().get_attack_level_pic (m_attack_level);
+		return descr().get_attack_level_pic (attack_level_);
 	}
 	const Image* get_defense_level_pic() const {
-		return descr().get_defense_level_pic(m_defense_level);
+		return descr().get_defense_level_pic(defense_level_);
 	}
 	const Image* get_evade_level_pic  () const {
-		return descr().get_evade_level_pic  (m_evade_level);
+		return descr().get_evade_level_pic  (evade_level_);
 	}
 
-	int32_t get_training_attribute(uint32_t attr) const override;
+	int32_t get_training_attribute(TrainingAttribute attr) const override;
 
 	/// Sets a random animation of desired type and start playing it.
 	void start_animation
 		(EditorGameBase &, char const * animname, uint32_t time);
 
-	/// Heal quantity of hit points instantly
+	/// Heal quantity of health points instantly
 	void heal (uint32_t);
-	void damage (uint32_t); /// Damage quantity of hit points
+	void damage (uint32_t); /// Damage quantity of health points
 
 	void log_general_info(const EditorGameBase &) override;
 
@@ -253,11 +251,11 @@ protected:
 	bool is_evict_allowed() override;
 
 private:
-	uint32_t m_hp_current;
-	uint32_t m_hp_level;
-	uint32_t m_attack_level;
-	uint32_t m_defense_level;
-	uint32_t m_evade_level;
+	uint32_t current_health_;
+	uint32_t health_level_;
+	uint32_t attack_level_;
+	uint32_t defense_level_;
+	uint32_t evade_level_;
 
 	/// This is used to replicate walk for soldiers but only just before and
 	/// just after figthing in a battle, to draw soldier at proper position.
@@ -275,7 +273,7 @@ private:
 	 */
 	Battle * m_battle;
 
-	static constexpr uint8_t kSoldierHpBarWidth = 13;
+	static constexpr uint8_t kSoldierHealthBarWidth = 13;
 
 	/// Number of consecutive blocked signals until the soldiers are considered permanently stuck
 	static constexpr uint8_t kBockCountIsStuck = 10;

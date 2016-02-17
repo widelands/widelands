@@ -1560,26 +1560,25 @@ CmdChangeTrainingOptions::CmdChangeTrainingOptions(StreamRead & des)
 PlayerCommand (0, des.unsigned_8())
 {
 	serial    = des.unsigned_32();  //  Serial of the building
-	attribute = des.unsigned_16();  //  Attribute to modify
+	attribute = static_cast<TrainingAttribute>(des.unsigned_8());  //  Attribute to modify
 	value     = des.unsigned_16();  //  New vale
 }
 
 void CmdChangeTrainingOptions::execute (Game & game)
 {
 	if (upcast(TrainingSite, trainingsite, game.objects().get_object(serial)))
-		game.player(sender()).change_training_options
-			(*trainingsite, attribute, value);
+		game.player(sender()).change_training_options(*trainingsite, attribute, value);
 }
 
 void CmdChangeTrainingOptions::serialize (StreamWrite & ser) {
 	ser.unsigned_8 (PLCMD_CHANGETRAININGOPTIONS);
 	ser.unsigned_8 (sender());
 	ser.unsigned_32(serial);
-	ser.unsigned_16(attribute);
+	ser.unsigned_8(static_cast<uint8_t>(attribute));
 	ser.unsigned_16(value);
 }
 
-constexpr uint16_t kCurrentPacketVersionChangeTrainingOptions = 1;
+constexpr uint16_t kCurrentPacketVersionChangeTrainingOptions = 2;
 
 void CmdChangeTrainingOptions::read
 	(FileRead & fr, EditorGameBase & egbase, MapObjectLoader & mol)
@@ -1589,7 +1588,7 @@ void CmdChangeTrainingOptions::read
 		if (packet_version == kCurrentPacketVersionChangeTrainingOptions) {
 			PlayerCommand::read(fr, egbase, mol);
 			serial = get_object_serial_or_zero<TrainingSite>(fr.unsigned_32(), mol);
-			attribute = fr.unsigned_16();
+			attribute = static_cast<TrainingAttribute>(fr.unsigned_8());
 			value     = fr.unsigned_16();
 		} else {
 			throw UnhandledVersionError("CmdChangeTrainingOptions",
@@ -1611,7 +1610,7 @@ void CmdChangeTrainingOptions::write
 	// Now serial
 	fw.unsigned_32(mos.get_object_file_index_or_zero(egbase.objects().get_object(serial)));
 
-	fw.unsigned_16(attribute);
+	fw.unsigned_8(static_cast<uint8_t>(attribute));
 	fw.unsigned_16(value);
 }
 

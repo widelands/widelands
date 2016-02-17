@@ -423,20 +423,20 @@ public:
 	int get_food_attack(lua_State *);
 	int get_food_defense(lua_State *);
 	int get_food_evade(lua_State *);
-	int get_food_hp(lua_State *);
+	int get_food_health(lua_State *);
 	int get_max_attack(lua_State *);
 	int get_max_defense(lua_State *);
 	int get_max_evade(lua_State *);
-	int get_max_hp(lua_State *);
+	int get_max_health(lua_State *);
 	int get_max_number_of_soldiers(lua_State *);
 	int get_min_attack(lua_State *);
 	int get_min_defense(lua_State *);
 	int get_min_evade(lua_State *);
-	int get_min_hp(lua_State *);
+	int get_min_health(lua_State *);
 	int get_weapons_attack(lua_State *);
 	int get_weapons_defense(lua_State *);
 	int get_weapons_evade(lua_State *);
-	int get_weapons_hp(lua_State *);
+	int get_weapons_health(lua_State *);
 
 	/*
 	 * Lua methods
@@ -1091,7 +1091,7 @@ public:
 	 */
 	int get_attack_level(lua_State *);
 	int get_defense_level(lua_State *);
-	int get_hp_level(lua_State *);
+	int get_health_level(lua_State *);
 	int get_evade_level(lua_State *);
 
 	/*

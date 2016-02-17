@@ -579,12 +579,13 @@ struct CmdResetWorkerTargetQuantity : public CmdChangeTargetQuantity {
 };
 
 struct CmdChangeTrainingOptions : public PlayerCommand {
-	CmdChangeTrainingOptions() : PlayerCommand(), serial(0), attribute(0), value(0) {} // For savegame loading
+	CmdChangeTrainingOptions() : PlayerCommand(),
+		serial(0), attribute(TrainingAttribute::kHealth), value(0) {} // For savegame loading
 	CmdChangeTrainingOptions
 		(const uint32_t    t,
 		 const PlayerNumber p,
 		 TrainingSite &   ts,
-		 const int32_t    at,
+		 const TrainingAttribute at,
 		 const int32_t    val)
 		: PlayerCommand(t, p), serial(ts.serial()), attribute(at), value(val)
 	{}
@@ -602,7 +603,7 @@ struct CmdChangeTrainingOptions : public PlayerCommand {
 
 private:
 	Serial serial;
-	int32_t attribute;
+	TrainingAttribute attribute;
 	int32_t value;
 };
 

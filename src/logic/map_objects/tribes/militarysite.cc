@@ -289,7 +289,7 @@ MilitarySite::find_least_suited_soldier()
 	int worst_soldier_level = INT_MIN;
 	Soldier * worst_soldier = nullptr;
 	for (Soldier* sld : present) {
-		int this_soldier_level = multiplier * static_cast<int> (sld->get_level(atrTotal));
+		int this_soldier_level = multiplier * static_cast<int> (sld->get_level(TrainingAttribute::kTotal));
 		if (this_soldier_level > worst_soldier_level)
 		{
 			worst_soldier_level = this_soldier_level;
@@ -327,8 +327,8 @@ MilitarySite::drop_least_suited_soldier(bool new_soldier_has_arrived, Soldier * 
 		// If the arriving guy is worse than worst present, I wont't release.
 		if (nullptr != newguy && nullptr != kickoutCandidate)
 		{
-			int32_t old_level = kickoutCandidate->get_level(atrTotal);
-			int32_t new_level = newguy->get_level(atrTotal);
+			int32_t old_level = kickoutCandidate->get_level(TrainingAttribute::kTotal);
+			int32_t new_level = newguy->get_level(TrainingAttribute::kTotal);
 			if (kPrefersHeroes == soldier_preference_ && old_level >= new_level)
 			{
 				return false;
@@ -599,12 +599,12 @@ void MilitarySite::act(Game & game, uint32_t const data)
 			// The healing algorithm is:
 			// * heal soldier with highest total level
 			// * heal healthiest if multiple of same total level exist
-			if (s->get_current_hitpoints() < s->get_max_hitpoints()) {
+			if (s->get_current_health() < s->get_max_health()) {
 				if (0 == soldier_to_heal || s->get_total_level() > max_total_level ||
 						(s->get_total_level() == max_total_level &&
-								s->get_current_hitpoints() / s->get_max_hitpoints() > max_health)) {
+								s->get_current_health() / s->get_max_health() > max_health)) {
 					max_total_level = s->get_total_level();
-					max_health = s->get_current_hitpoints() / s->get_max_hitpoints();
+					max_health = s->get_current_health() / s->get_max_health();
 					soldier_to_heal = s;
 				}
 			}
@@ -824,12 +824,12 @@ bool MilitarySite::attack(Soldier & enemy)
 	Soldier * defender = nullptr;
 
 	if (!present.empty()) {
-		// Find soldier with greatest hitpoints
+		// Find soldier with greatest health
 		uint32_t current_max = 0;
 		for (Soldier * temp_soldier : present) {
-			if (temp_soldier->get_current_hitpoints() > current_max) {
+			if (temp_soldier->get_current_health() > current_max) {
 				defender = temp_soldier;
-				current_max = defender->get_current_hitpoints();
+				current_max = defender->get_current_health();
 			}
 		}
 	} else {
@@ -1074,7 +1074,7 @@ MilitarySite::update_upgrade_requirements()
 		// There could be no soldier in the militarysite right now. No reason to freak out.
 		return false;
 	}
-	int32_t wg_level = worst_guy->get_level(atrTotal);
+	int32_t wg_level = worst_guy->get_level(TrainingAttribute::kTotal);
 
 	// Micro-optimization: I assume that the majority of military sites have only level-zero
 	// soldiers and prefer rookies. Handle them separately.
@@ -1100,7 +1100,7 @@ MilitarySite::update_upgrade_requirements()
 		{
 			upgrade_soldier_request_.reset();
 		}
-		soldier_upgrade_requirements_ = RequireAttribute(atrTotal, reqmin, reqmax);
+		soldier_upgrade_requirements_ = RequireAttribute(TrainingAttribute::kTotal, reqmin, reqmax);
 
 		return true;
 	}

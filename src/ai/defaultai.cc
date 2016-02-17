@@ -5259,37 +5259,37 @@ int32_t DefaultAI::calculate_strength(const std::vector<Widelands::Soldier*> sol
 			soldiers.at(0)->get_owner()->tribe().name().c_str());
 	}
 
-	float hp = 0;
-	float al = 0;
-	float dl = 0;
-	float el = 0;
+	float health = 0;
+	float attack = 0;
+	float defense = 0;
+	float evade = 0;
 	float final = 0;
 
 	for (Soldier * soldier : soldiers) {
 		switch (tribe) {
 			case (Tribes::kAtlanteans):
-				hp = 135 + 40 * soldier->get_hp_level();
-				al =  14 +  8 * soldier->get_attack_level();
-				dl = static_cast<float>(94 -  8 * soldier->get_defense_level()) / 100;
-				el = static_cast<float>(70 - 17 * soldier->get_evade_level()) / 100;
+				health = 135 + 40 * soldier->get_health_level();
+				attack =  14 +  8 * soldier->get_attack_level();
+				defense = static_cast<float>(94 -  8 * soldier->get_defense_level()) / 100;
+				evade = static_cast<float>(70 - 17 * soldier->get_evade_level()) / 100;
 				break;
 			case (Tribes::kBarbarians):
-				hp += 130 + 28 * soldier->get_hp_level();
-				al +=  14 +  7 * soldier->get_attack_level();
-				dl += static_cast<float>(97 -  8 * soldier->get_defense_level()) / 100;
-				el += static_cast<float>(75 - 15 * soldier->get_evade_level()) / 100;
+				health += 130 + 28 * soldier->get_health_level();
+				attack +=  14 +  7 * soldier->get_attack_level();
+				defense += static_cast<float>(97 -  8 * soldier->get_defense_level()) / 100;
+				evade += static_cast<float>(75 - 15 * soldier->get_evade_level()) / 100;
 				break;
 			case (Tribes::kEmpire):
-				hp += 130 + 21 * soldier->get_hp_level();
-				al +=  14 +  8 * soldier->get_attack_level();
-				dl += static_cast<float>(95 -  8 * soldier->get_defense_level()) / 100;
-				el += static_cast<float>(70 - 16 * soldier->get_evade_level()) / 100;
+				health += 130 + 21 * soldier->get_health_level();
+				attack +=  14 +  8 * soldier->get_attack_level();
+				defense += static_cast<float>(95 -  8 * soldier->get_defense_level()) / 100;
+				evade += static_cast<float>(70 - 16 * soldier->get_evade_level()) / 100;
 				break;
 			default:
 				NEVER_HERE();
 		}
 
-		final += (al * hp) / (dl * el);
+		final += (attack * health) / (defense * evade);
 	}
 
 	// 2500 is aproximate strength of one unpromoted soldier

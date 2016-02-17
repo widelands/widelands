@@ -1354,18 +1354,18 @@ ProductionProgram::ActCheckSoldier::ActCheckSoldier(char* parameters) {
 		throw GameDataError
 			("expected %s but found \"%s\"", "soldier type", parameters);
 	try {
-		if      (match_force_skip(parameters, "hp"))
-			attribute = atrHP;
+		if      (match_force_skip(parameters, "health"))
+			attribute = TrainingAttribute::kHealth;
 		else if (match_force_skip(parameters, "attack"))
-			attribute = atrAttack;
+			attribute = TrainingAttribute::kAttack;
 		else if (match_force_skip(parameters, "defense"))
-			attribute = atrDefense;
+			attribute = TrainingAttribute::kDefense;
 		else if (match_force_skip(parameters, "evade"))
-			attribute = atrEvade;
+			attribute = TrainingAttribute::kEvade;
 		else
 			throw GameDataError
 				("expected %s but found \"%s\"",
-					"{\"hp\"|\"attack\"|\"defense\"|\"evade\"}", parameters);
+					"{\"health\"|\"attack\"|\"defense\"|\"evade\"}", parameters);
 
 		char * endp;
 		unsigned long long int const value = strtoull(parameters, &endp, 0);
@@ -1395,16 +1395,16 @@ void ProductionProgram::ActCheckSoldier::execute
 			ps.set_production_result(_("No soldier found for this training level!"));
 			return ps.program_end(game, Skipped);
 		}
-		if        (attribute == atrHP)      {
-			if ((*it)->get_hp_level()      == level)
+		if        (attribute == TrainingAttribute::kHealth)  {
+			if ((*it)->get_health_level()  == level)
 				break;
-		} else if (attribute == atrAttack)  {
+		} else if (attribute == TrainingAttribute::kAttack) {
 			if ((*it)->get_attack_level()  == level)
 				break;
-		} else if (attribute == atrDefense) {
+		} else if (attribute == TrainingAttribute::kDefense) {
 			if ((*it)->get_defense_level() == level)
 				break;
-		} else if (attribute == atrEvade)   {
+		} else if (attribute == TrainingAttribute::kEvade) {
 			if ((*it)->get_evade_level()   == level)
 				break;
 		}
@@ -1426,18 +1426,18 @@ ProductionProgram::ActTrain::ActTrain(char* parameters) {
 		throw GameDataError
 			("expected %s but found \"%s\"", "soldier type", parameters);
 	try {
-		if      (match_force_skip(parameters, "hp"))
-			attribute = atrHP;
+		if      (match_force_skip(parameters, "health"))
+			attribute = TrainingAttribute::kHealth;
 		else if (match_force_skip(parameters, "attack"))
-			attribute = atrAttack;
+			attribute = TrainingAttribute::kAttack;
 		else if (match_force_skip(parameters, "defense"))
-			attribute = atrDefense;
+			attribute = TrainingAttribute::kDefense;
 		else if (match_force_skip(parameters, "evade"))
-			attribute = atrEvade;
+			attribute = TrainingAttribute::kEvade;
 		else
 			throw GameDataError
 				("expected %s but found \"%s\"",
-				 "{\"hp\"|\"attack\"|\"defense\"|\"evade\"}", parameters);
+				 "{\"health\"|\"attack\"|\"defense\"|\"evade\"}", parameters);
 
 		{
 			char * endp;
@@ -1480,31 +1480,32 @@ void ProductionProgram::ActTrain::execute
 			ps.set_production_result(_("No soldier found for this training level!"));
 			return ps.program_end(game, Skipped);
 		}
-		if        (attribute == atrHP)      {
-			if ((*it)->get_hp_level     () == level)
+		if        (attribute == TrainingAttribute::kHealth) {
+			if ((*it)->get_health_level () == level)
 				break;
-		} else if (attribute == atrAttack)  {
+		} else if (attribute == TrainingAttribute::kAttack) {
 			if ((*it)->get_attack_level () == level)
 				break;
-		} else if (attribute == atrDefense) {
+		} else if (attribute == TrainingAttribute::kDefense) {
 			if ((*it)->get_defense_level() == level)
 				break;
-		} else if (attribute == atrEvade)
+		} else if (attribute == TrainingAttribute::kEvade) {
 			if ((*it)->get_evade_level  () == level)
 				break;
+		}
 	}
 	ps.molog("    okay\n"); // okay, do nothing
 
 		try {
-			if      (attribute == atrHP)
-				(*it)->set_hp_level      (target_level);
-			else if (attribute == atrAttack)
+			if      (attribute == TrainingAttribute::kHealth)
+				(*it)->set_health_level  (target_level);
+			else if (attribute == TrainingAttribute::kAttack)
 				(*it)->set_attack_level  (target_level);
 
-			else if (attribute == atrDefense)
+			else if (attribute == TrainingAttribute::kDefense)
 				(*it)->set_defense_level (target_level);
 
-			else if (attribute == atrEvade)
+			else if (attribute == TrainingAttribute::kEvade)
 				(*it)->set_evade_level   (target_level);
 
 		} catch (...) {

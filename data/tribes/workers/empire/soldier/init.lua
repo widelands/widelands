@@ -82,7 +82,7 @@ tribes:new_soldier_type {
       max_level = 4,
       base = 13000,
       increase_per_level = 2100,
-      pictures = path.list_files(dirname .. "hp_level?.png"),
+      pictures = path.list_files(dirname .. "health_level?.png"),
    },
    attack = {
       max_level = 4,

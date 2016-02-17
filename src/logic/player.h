@@ -489,7 +489,7 @@ public:
 
 	// Military stuff
 	void drop_soldier(PlayerImmovable &, Soldier &);
-	void change_training_options(TrainingSite &, int32_t atr, int32_t val);
+	void change_training_options(TrainingSite &, TrainingAttribute attr, int32_t val);
 
 	uint32_t find_attack_soldiers
 		(Flag                   &,

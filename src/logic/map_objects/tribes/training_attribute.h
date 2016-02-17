@@ -26,12 +26,12 @@ namespace Widelands {
  * Indices for specific, individual attributes that \ref MapObject instances
  * may have. Used in conjunction with \ref Requirements.
  */
-enum TrainingAttribute {
-	atrHP = 0,
-	atrAttack,
-	atrDefense,
-	atrEvade,
-	atrTotal = 100
+enum class TrainingAttribute : uint8_t {
+	kHealth = 0,
+	kAttack,
+	kDefense,
+	kEvade,
+	kTotal = 100
 };
 
 }

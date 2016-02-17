@@ -112,31 +112,31 @@ int food_list_to_lua(lua_State* L, const std::vector<std::vector<std::string>>& 
 }
 
 struct SoldierMapDescr {
-	SoldierMapDescr(uint8_t ghp, uint8_t gat, uint8_t gde, uint8_t gev)
-	   : hp(ghp), at(gat), de(gde), ev(gev) {
+	SoldierMapDescr(uint8_t init_health, uint8_t init_attack, uint8_t init_defense, uint8_t init_evade)
+		: health(init_health), attack(init_attack), defense(init_defense), evade(init_evade) {
 	}
-	SoldierMapDescr() : hp(0), at(0), de(0), ev(0) {
+	SoldierMapDescr() : health(0), attack(0), defense(0), evade(0) {
 	}
 
-	uint8_t hp;
-	uint8_t at;
-	uint8_t de;
-	uint8_t ev;
+	uint8_t health;
+	uint8_t attack;
+	uint8_t defense;
+	uint8_t evade;
 
 	bool operator<(const SoldierMapDescr& ot) const {
-		bool hp_eq = hp == ot.hp;
-		bool at_eq = at == ot.at;
-		bool de_eq = de == ot.de;
-		if (hp_eq && at_eq && de_eq)
-			return ev < ot.ev;
-		if (hp_eq && at_eq)
-			return de < ot.de;
-		if (hp_eq)
-			return at < ot.at;
-		return hp < ot.hp;
+		bool equal_health = health == ot.health;
+		bool equal_attack = attack == ot.attack;
+		bool equal_defense = defense == ot.defense;
+		if (equal_health && equal_attack && equal_defense)
+			return evade < ot.evade;
+		if (equal_health && equal_attack)
+			return defense < ot.defense;
+		if (equal_health)
+			return attack < ot.attack;
+		return health < ot.health;
 	}
 	bool operator == (const SoldierMapDescr& ot) const {
-		if (hp == ot.hp && at == ot.at && de == ot.de && ev == ot.ev)
+		if (health == ot.health && attack == ot.attack && defense == ot.defense && evade == ot.evade)
 			return true;
 		return false;
 	}
@@ -375,43 +375,43 @@ int do_set_workers(lua_State* L, PlayerImmovable* pi, const WorkersMap& valid_wo
 	return 0;
 }
 
-// Unpacks the Lua table of the form {hp, at, de, ev} at the stack index
+// Unpacks the Lua table of the form {health, attack, defense, evade} at the stack index
 // 'table_index' into a SoldierMapDescr struct.
 SoldierMapDescr unbox_lua_soldier_description(lua_State* L, int table_index, const SoldierDescr& sd) {
 	SoldierMapDescr soldier_descr;
 
 	lua_pushuint32(L, 1);
 	lua_rawget(L, table_index);
-	soldier_descr.hp = luaL_checkuint32(L, -1);
+	soldier_descr.health = luaL_checkuint32(L, -1);
 	lua_pop(L, 1);
-	if (soldier_descr.hp > sd.get_max_health_level())
+	if (soldier_descr.health > sd.get_max_health_level())
 		report_error
-			(L, "hp level (%i) > max hp level (%i)", soldier_descr.hp, sd.get_max_health_level());
+			(L, "health level (%i) > max health level (%i)", soldier_descr.health, sd.get_max_health_level());
 
 	lua_pushuint32(L, 2);
 	lua_rawget(L, table_index);
-	soldier_descr.at = luaL_checkuint32(L, -1);
+	soldier_descr.attack = luaL_checkuint32(L, -1);
 	lua_pop(L, 1);
-	if (soldier_descr.at > sd.get_max_attack_level())
+	if (soldier_descr.attack > sd.get_max_attack_level())
 		report_error
-			(L, "attack level (%i) > max attack level (%i)", soldier_descr.at, sd.get_max_attack_level());
+			(L, "attack level (%i) > max attack level (%i)", soldier_descr.attack, sd.get_max_attack_level());
 
 	lua_pushuint32(L, 3);
 	lua_rawget(L, table_index);
-	soldier_descr.de = luaL_checkuint32(L, -1);
+	soldier_descr.defense = luaL_checkuint32(L, -1);
 	lua_pop(L, 1);
-	if (soldier_descr.de > sd.get_max_defense_level())
+	if (soldier_descr.defense > sd.get_max_defense_level())
 		report_error
-			(L, "defense level (%i) > max defense level (%i)", soldier_descr.de,
+			(L, "defense level (%i) > max defense level (%i)", soldier_descr.defense,
 			 sd.get_max_defense_level());
 
 	lua_pushuint32(L, 4);
 	lua_rawget(L, table_index);
-	soldier_descr.ev = luaL_checkuint32(L, -1);
+	soldier_descr.evade = luaL_checkuint32(L, -1);
 	lua_pop(L, 1);
-	if (soldier_descr.ev > sd.get_max_evade_level())
+	if (soldier_descr.evade > sd.get_max_evade_level())
 		report_error
-			(L, "evade level (%i) > max evade level (%i)", soldier_descr.ev, sd.get_max_evade_level());
+			(L, "evade level (%i) > max evade level (%i)", soldier_descr.evade, sd.get_max_evade_level());
 
 	return soldier_descr;
 }
@@ -451,7 +451,7 @@ int do_get_soldiers(lua_State* L, const Widelands::SoldierControl& sc, const Tri
 		SoldiersMap hist;
 		for (const Soldier* s : soldiers) {
 			SoldierMapDescr sd
-				(s->get_hp_level(), s->get_attack_level(),
+				(s->get_health_level(), s->get_attack_level(),
 				 s->get_defense_level(), s->get_evade_level());
 
 			SoldiersMap::iterator i = hist.find(sd);
@@ -469,10 +469,10 @@ int do_get_soldiers(lua_State* L, const Widelands::SoldierControl& sc, const Tri
 	lua_pushuint32(L, idx);                                                                         \
 	lua_pushuint32(L, i.first.name);                                                                \
 	lua_rawset(L, -3);
-			PUSHLEVEL(1, hp);
-			PUSHLEVEL(2, at);
-			PUSHLEVEL(3, de);
-			PUSHLEVEL(4, ev);
+			PUSHLEVEL(1, health);
+			PUSHLEVEL(2, attack);
+			PUSHLEVEL(3, defense);
+			PUSHLEVEL(4, evade);
 #undef PUSHLEVEL
 
 			lua_pushuint32(L, i.second);
@@ -487,7 +487,7 @@ int do_get_soldiers(lua_State* L, const Widelands::SoldierControl& sc, const Tri
 		uint32_t rv = 0;
 		for (const Soldier* s : soldiers) {
 			SoldierMapDescr sd
-				(s->get_hp_level(), s->get_attack_level(), s->get_defense_level(), s->get_evade_level());
+				(s->get_health_level(), s->get_attack_level(), s->get_defense_level(), s->get_evade_level());
 			if (sd == wanted)
 				++rv;
 		}
@@ -514,7 +514,7 @@ int do_set_soldiers
 	SoldiersMap hist;
 	for (const Soldier* s : curs) {
 		SoldierMapDescr sd
-			(s->get_hp_level(), s->get_attack_level(),
+			(s->get_health_level(), s->get_attack_level(),
 			 s->get_defense_level(), s->get_evade_level());
 
 		SoldiersMap::iterator i = hist.find(sd);
@@ -539,7 +539,7 @@ int do_set_soldiers
 			while (d) {
 				for (Soldier* s : sc->stationed_soldiers()) {
 					SoldierMapDescr is
-						(s->get_hp_level(), s->get_attack_level(),
+						(s->get_health_level(), s->get_attack_level(),
 						 s->get_defense_level(), s->get_evade_level());
 
 					if (is == sp.first) {
@@ -555,7 +555,7 @@ int do_set_soldiers
 				Soldier& soldier = dynamic_cast<Soldier&>
 					(soldier_descr.create(egbase, *owner, nullptr, building_position));
 				soldier.set_level
-					(sp.first.hp, sp.first.at, sp.first.de, sp.first.ev);
+					(sp.first.health, sp.first.attack, sp.first.defense, sp.first.evade);
 				if (sc->incorporate_soldier(egbase, soldier)) {
 					soldier.remove(egbase);
 					report_error(L, "No space left for soldier!");
@@ -807,7 +807,7 @@ HasSoldiers
 			kind in this building.
 
 			A soldier description is a :class:`array` that contains the level for
-			hitpoints, attack, defense and evade (in this order). An usage example:
+			health, attack, defense and evade (in this order). A usage example:
 
 			.. code-block:: lua
 
@@ -2180,20 +2180,20 @@ const PropertyType<LuaTrainingSiteDescription> LuaTrainingSiteDescription::Prope
 	PROP_RO(LuaTrainingSiteDescription, food_attack),
 	PROP_RO(LuaTrainingSiteDescription, food_defense),
 	PROP_RO(LuaTrainingSiteDescription, food_evade),
-	PROP_RO(LuaTrainingSiteDescription, food_hp),
+	PROP_RO(LuaTrainingSiteDescription, food_health),
 	PROP_RO(LuaTrainingSiteDescription, max_attack),
 	PROP_RO(LuaTrainingSiteDescription, max_defense),
 	PROP_RO(LuaTrainingSiteDescription, max_evade),
-	PROP_RO(LuaTrainingSiteDescription, max_hp),
+	PROP_RO(LuaTrainingSiteDescription, max_health),
 	PROP_RO(LuaTrainingSiteDescription, max_number_of_soldiers),
 	PROP_RO(LuaTrainingSiteDescription, min_attack),
 	PROP_RO(LuaTrainingSiteDescription, min_defense),
 	PROP_RO(LuaTrainingSiteDescription, min_evade),
-	PROP_RO(LuaTrainingSiteDescription, min_hp),
+	PROP_RO(LuaTrainingSiteDescription, min_health),
 	PROP_RO(LuaTrainingSiteDescription, weapons_attack),
 	PROP_RO(LuaTrainingSiteDescription, weapons_defense),
 	PROP_RO(LuaTrainingSiteDescription, weapons_evade),
-	PROP_RO(LuaTrainingSiteDescription, weapons_hp),
+	PROP_RO(LuaTrainingSiteDescription, weapons_health),
 	{nullptr, nullptr, nullptr},
 };
 
@@ -2235,13 +2235,13 @@ int LuaTrainingSiteDescription::get_food_evade(lua_State * L) {
 
 
 /* RST
-	.. attribute:: food_hp
+	.. attribute:: food_health
 
 		(RO) A table of tables with food ware names used for Health training,
 			  e.g. {{"barbarians_bread"}, {"fish", "meat"}}
 */
-int LuaTrainingSiteDescription::get_food_hp(lua_State * L) {
-	return food_list_to_lua(L, get()->get_food_hp());
+int LuaTrainingSiteDescription::get_food_health(lua_State * L) {
+	return food_list_to_lua(L, get()->get_food_health());
 }
 
 
@@ -2253,7 +2253,7 @@ int LuaTrainingSiteDescription::get_food_hp(lua_State * L) {
 int LuaTrainingSiteDescription::get_max_attack(lua_State * L) {
 	const TrainingSiteDescr* descr = get();
 	if (descr->get_train_attack())
-		lua_pushinteger(L, descr->get_max_level(atrAttack));
+		lua_pushinteger(L, descr->get_max_level(TrainingAttribute::kAttack));
 	else
 		lua_pushnil(L);
 	return 1;
@@ -2267,7 +2267,7 @@ int LuaTrainingSiteDescription::get_max_attack(lua_State * L) {
 int LuaTrainingSiteDescription::get_max_defense(lua_State * L) {
 	const TrainingSiteDescr* descr = get();
 	if (descr->get_train_defense())
-		lua_pushinteger(L, descr->get_max_level(atrDefense));
+		lua_pushinteger(L, descr->get_max_level(TrainingAttribute::kDefense));
 	else
 		lua_pushnil(L);
 	return 1;
@@ -2282,21 +2282,21 @@ int LuaTrainingSiteDescription::get_max_defense(lua_State * L) {
 int LuaTrainingSiteDescription::get_max_evade(lua_State * L) {
 	const TrainingSiteDescr * descr = get();
 	if (descr->get_train_evade())
-		lua_pushinteger(L, descr->get_max_level(atrEvade));
+		lua_pushinteger(L, descr->get_max_level(TrainingAttribute::kEvade));
 	else lua_pushnil(L);
 	return 1;
 }
 
 
 /* RST
-	.. attribute:: max_hp
+	.. attribute:: max_health
 
 		(RO) The number of health points that a soldier can train
 */
-int LuaTrainingSiteDescription::get_max_hp(lua_State * L) {
+int LuaTrainingSiteDescription::get_max_health(lua_State * L) {
 	const TrainingSiteDescr * descr = get();
-	if (descr->get_train_hp())
-		lua_pushinteger(L, descr->get_max_level(atrHP));
+	if (descr->get_train_health())
+		lua_pushinteger(L, descr->get_max_level(TrainingAttribute::kHealth));
 	else lua_pushnil(L);
 	return 1;
 }
@@ -2322,7 +2322,7 @@ int LuaTrainingSiteDescription::get_max_number_of_soldiers(lua_State * L) {
 int LuaTrainingSiteDescription::get_min_attack(lua_State * L) {
 	const TrainingSiteDescr * descr = get();
 	if (descr->get_train_attack())
-		lua_pushinteger(L, descr->get_min_level(atrAttack));
+		lua_pushinteger(L, descr->get_min_level(TrainingAttribute::kAttack));
 	else lua_pushnil(L);
 	return 1;
 }
@@ -2335,7 +2335,7 @@ int LuaTrainingSiteDescription::get_min_attack(lua_State * L) {
 int LuaTrainingSiteDescription::get_min_defense(lua_State * L) {
 	const TrainingSiteDescr * descr = get();
 	if (descr->get_train_defense())
-		lua_pushinteger(L, descr->get_min_level(atrDefense));
+		lua_pushinteger(L, descr->get_min_level(TrainingAttribute::kDefense));
 	else lua_pushnil(L);
 	return 1;
 }
@@ -2349,21 +2349,21 @@ int LuaTrainingSiteDescription::get_min_defense(lua_State * L) {
 int LuaTrainingSiteDescription::get_min_evade(lua_State * L) {
 	const TrainingSiteDescr * descr = get();
 	if (descr->get_train_evade())
-		lua_pushinteger(L, descr->get_min_level(atrEvade));
+		lua_pushinteger(L, descr->get_min_level(TrainingAttribute::kEvade));
 	else lua_pushnil(L);
 	return 1;
 }
 
 
 /* RST
-	.. attribute:: min_hp
+	.. attribute:: min_health
 
 		(RO) The number of health points that a soldier starts training with
 */
-int LuaTrainingSiteDescription::get_min_hp(lua_State * L) {
+int LuaTrainingSiteDescription::get_min_health(lua_State * L) {
 	const TrainingSiteDescr * descr = get();
-	if (descr->get_train_hp())
-		lua_pushinteger(L, descr->get_min_level(atrHP));
+	if (descr->get_train_health())
+		lua_pushinteger(L, descr->get_min_level(TrainingAttribute::kHealth));
 	else lua_pushnil(L);
 	return 1;
 }
@@ -2417,14 +2417,14 @@ int LuaTrainingSiteDescription::get_weapons_evade(lua_State * L) {
 }
 
 /* RST
-	.. attribute:: weapons_hp
+	.. attribute:: weapons_health
 
 		(RO) A table with weapon ware names used for Health training
 */
-int LuaTrainingSiteDescription::get_weapons_hp(lua_State * L) {
+int LuaTrainingSiteDescription::get_weapons_health(lua_State * L) {
 	lua_newtable(L);
 	int counter = 0;
-	for (const std::string& weaponname : get()->get_weapons_hp()) {
+	for (const std::string& weaponname : get()->get_weapons_health()) {
 		lua_pushnumber(L, ++counter);
 		lua_pushstring(L, weaponname);
 		lua_settable(L, -3);
@@ -4747,7 +4747,7 @@ const MethodType<LuaSoldier> LuaSoldier::Methods[] = {
 const PropertyType<LuaSoldier> LuaSoldier::Properties[] = {
 	PROP_RO(LuaSoldier, attack_level),
 	PROP_RO(LuaSoldier, defense_level),
-	PROP_RO(LuaSoldier, hp_level),
+	PROP_RO(LuaSoldier, health_level),
 	PROP_RO(LuaSoldier, evade_level),
 	{nullptr, nullptr, nullptr},
 };
@@ -4781,13 +4781,13 @@ int LuaSoldier::get_defense_level(lua_State * L) {
 }
 
 /* RST
-	.. attribute:: hp_level
+	.. attribute:: health_level
 
-		(RO) The current hp level of this soldier
+		(RO) The current health level of this soldier
 */
 // UNTESTED
-int LuaSoldier::get_hp_level(lua_State * L) {
-	lua_pushuint32(L, get(L, get_egbase(L))->get_hp_level());
+int LuaSoldier::get_health_level(lua_State * L) {
+	lua_pushuint32(L, get(L, get_egbase(L))->get_health_level());
 	return 1;
 }
 
