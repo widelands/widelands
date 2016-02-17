@@ -43,7 +43,7 @@ struct Button : public NamedPanel {
 		 const Image* background_picture_id,
 		 const std::string & title_text,
 		 const std::string & tooltip_text = std::string(),
-		 bool const _enabled = true,
+		 bool const enabled = true,
 		 bool const flat    = false);
 	// TODO(GunChleoc): We have a lot of bools here. Introduce an enum class.
 	Button /// for pictorial buttons
@@ -53,7 +53,7 @@ struct Button : public NamedPanel {
 		 const Image* background_picture_id,
 		 const Image* foreground_picture_id,
 		 const std::string & tooltip_text = std::string(),
-		 bool const _enabled = true,
+		 bool const enabled = true,
 		 bool const flat     = false,
 		 bool const keep_image_size = false);
 	~Button();
@@ -103,7 +103,7 @@ protected:
 
 	uint32_t     time_nextact_;
 
-	std::string title_;          //  title string used when _mypic == 0
+	std::string title_;          //  title string used when pic_custom_ == 0
 
 	const Image* pic_background_; //  background texture (picture ID)
 	const Image* pic_custom_;     //  custom icon on the button

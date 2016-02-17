@@ -126,7 +126,7 @@ public:
 
 	// Returns the initalization at 'index' (which must not be out of bounds).
 	const TribeBasicInfo::Initialization& initialization(const uint8_t index) const {
-		return m_initializations.at(index);
+		return initializations_.at(index);
 	}
 
 	using WaresOrder = std::vector<std::vector<Widelands::DescriptionIndex>>;
@@ -184,7 +184,7 @@ private:
 	WaresOrder                  workers_order_;
 	WaresOrderCoords            workers_order_coords_;
 
-	std::vector<TribeBasicInfo::Initialization> m_initializations;
+	std::vector<TribeBasicInfo::Initialization> initializations_;
 
 	DISALLOW_COPY_AND_ASSIGN(TribeDescr);
 };

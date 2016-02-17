@@ -5,13 +5,14 @@
 # adrien vigneron <adrienvigneron@ml1.net>, 2015
 # Jaypad <ju-ju@nataju.fr>, 2016
 # Renaud Bouchard, 2015
+# syl_, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-02-03 09:18+0000\n"
-"PO-Revision-Date: 2016-02-03 20:27+0000\n"
-"Last-Translator: Jaypad <ju-ju@nataju.fr>\n"
+"POT-Creation-Date: 2016-02-14 16:47+0000\n"
+"PO-Revision-Date: 2016-02-15 22:03+0000\n"
+"Last-Translator: syl_\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -245,6 +246,10 @@ msgstr "Aulne (Mature)"
 msgid "Alder (Old)"
 msgstr "Aulne (Vieux)"
 
+#: ../../data/world/immovables/trees/alder/init.lua:90
+msgid "Alder"
+msgstr "Aulne"
+
 #: ../../data/world/immovables/trees/aspen/init.lua:12
 msgid "Aspen (Sapling)"
 msgstr "Tremble (Jeune arbre)"
@@ -260,6 +265,10 @@ msgstr "Tremble (Mature)"
 #: ../../data/world/immovables/trees/aspen/init.lua:84
 msgid "Aspen (Old)"
 msgstr "Tremble (Vieux)"
+
+#: ../../data/world/immovables/trees/aspen/init.lua:85
+msgid "Aspen"
+msgstr "Tremble"
 
 #: ../../data/world/immovables/trees/beech/init.lua:12
 msgid "Beech (Sapling)"
@@ -277,6 +286,10 @@ msgstr "Hêtre (mature)"
 msgid "Beech (Old)"
 msgstr "Hêtre (vieux)"
 
+#: ../../data/world/immovables/trees/beech/init.lua:82
+msgid "Beech"
+msgstr "Hêtre"
+
 #: ../../data/world/immovables/trees/birch/init.lua:12
 msgid "Birch (Sapling)"
 msgstr "Bouleau (Jeune arbre)"
@@ -292,6 +305,10 @@ msgstr "Bouleau (Mature)"
 #: ../../data/world/immovables/trees/birch/init.lua:84
 msgid "Birch (Old)"
 msgstr "Bouleau (Vieux)"
+
+#: ../../data/world/immovables/trees/birch/init.lua:85
+msgid "Birch"
+msgstr "Bouleau"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/cirrus/init.lua:13
@@ -312,6 +329,11 @@ msgstr "Sapin Cirrus (Mature)"
 #: ../../data/world/immovables/trees/cirrus/init.lua:85
 msgid "Cirrus Tree (Old)"
 msgstr "Sapin Cirrus (Vieux)"
+
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#: ../../data/world/immovables/trees/cirrus/init.lua:87
+msgid "Cirrus Tree"
+msgstr ""
 
 #: ../../data/world/immovables/trees/deadtree1/init.lua:5
 #: ../../data/world/immovables/trees/deadtree2/init.lua:5
@@ -342,6 +364,10 @@ msgstr "Mélèze (mature)"
 msgid "Larch (Old)"
 msgstr "Mélèze (vieux)"
 
+#: ../../data/world/immovables/trees/larch/init.lua:82
+msgid "Larch"
+msgstr "Mélèze"
+
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/liana/init.lua:13
 msgid "Liana Tree (Sapling)"
@@ -362,6 +388,11 @@ msgstr "Arbre liane (Mature)"
 msgid "Liana Tree (Old)"
 msgstr "Arbre liane (Vieux)"
 
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#: ../../data/world/immovables/trees/liana/init.lua:90
+msgid "Liana Tree"
+msgstr ""
+
 #: ../../data/world/immovables/trees/maple/init.lua:12
 msgid "Maple (Sapling)"
 msgstr "Erable (Jeune arbre)"
@@ -377,6 +408,10 @@ msgstr "Erable (Mature)"
 #: ../../data/world/immovables/trees/maple/init.lua:81
 msgid "Maple (Old)"
 msgstr "Erable (Vieux)"
+
+#: ../../data/world/immovables/trees/maple/init.lua:82
+msgid "Maple"
+msgstr "Érable"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/mushroom_dark/init.lua:13
@@ -399,6 +434,11 @@ msgid "Dark Mushroom Tree (Old)"
 msgstr "Champignon boisé sombre (Vieux)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#: ../../data/world/immovables/trees/mushroom_dark/init.lua:87
+msgid "Dark Mushroom Tree"
+msgstr ""
+
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/mushroom_green/init.lua:13
 msgid "Green Mushroom Tree (Sapling)"
 msgstr "Champignon boisé vert (Jeune pousse)"
@@ -417,6 +457,11 @@ msgstr "Champignon boisé vert (Mature)"
 #: ../../data/world/immovables/trees/mushroom_green/init.lua:85
 msgid "Green Mushroom Tree (Old)"
 msgstr "Champignon boisé vert (Vieux)"
+
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#: ../../data/world/immovables/trees/mushroom_green/init.lua:87
+msgid "Green Mushroom Tree"
+msgstr ""
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/mushroom_red/init.lua:13
@@ -438,6 +483,11 @@ msgstr "Champignon boisé rouge (Mature)"
 msgid "Red Mushroom Tree (Old)"
 msgstr "Champignon boisé rouge (Vieux)"
 
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#: ../../data/world/immovables/trees/mushroom_red/init.lua:90
+msgid "Red Mushroom Tree"
+msgstr ""
+
 #: ../../data/world/immovables/trees/oak/init.lua:12
 msgid "Oak (Sapling)"
 msgstr "Chêne (Jeune arbre)"
@@ -453,6 +503,10 @@ msgstr "Chêne (Mature)"
 #: ../../data/world/immovables/trees/oak/init.lua:81
 msgid "Oak (Old)"
 msgstr "Chêne (Vieux)"
+
+#: ../../data/world/immovables/trees/oak/init.lua:82
+msgid "Oak"
+msgstr "Chêne"
 
 #: ../../data/world/immovables/trees/palm_borassus/init.lua:12
 msgid "Borassus Palm (Sapling)"
@@ -470,6 +524,10 @@ msgstr "Palmier de Palmyre (Mature)"
 msgid "Borassus Palm (Old)"
 msgstr "Palmier de Palmyre (Vieux)"
 
+#: ../../data/world/immovables/trees/palm_borassus/init.lua:82
+msgid "Borassus Palm"
+msgstr ""
+
 #: ../../data/world/immovables/trees/palm_coconut/init.lua:12
 msgid "Coconut Palm (Sapling)"
 msgstr "Cocotier (Jeune pousse)"
@@ -485,6 +543,10 @@ msgstr "Cocotier (Mature)"
 #: ../../data/world/immovables/trees/palm_coconut/init.lua:81
 msgid "Coconut Palm (Old)"
 msgstr "Cocotier (Vieux)"
+
+#: ../../data/world/immovables/trees/palm_coconut/init.lua:82
+msgid "Coconut Palm"
+msgstr ""
 
 #: ../../data/world/immovables/trees/palm_date/init.lua:12
 msgid "Date Palm (Sapling)"
@@ -502,6 +564,10 @@ msgstr "Palmier Dattier (Mature)"
 msgid "Date Palm (Old)"
 msgstr "Palmier Dattier (Vieux)"
 
+#: ../../data/world/immovables/trees/palm_date/init.lua:85
+msgid "Date Palm"
+msgstr ""
+
 #: ../../data/world/immovables/trees/palm_oil/init.lua:12
 msgid "Oil Palm (Sapling)"
 msgstr "Palmier à huile (Jeune pousse)"
@@ -517,6 +583,10 @@ msgstr "Palmier à huile (Mature)"
 #: ../../data/world/immovables/trees/palm_oil/init.lua:85
 msgid "Oil Palm (Old)"
 msgstr "Palmier à huile (Vieux)"
+
+#: ../../data/world/immovables/trees/palm_oil/init.lua:86
+msgid "Oil Palm"
+msgstr ""
 
 #: ../../data/world/immovables/trees/palm_roystonea/init.lua:12
 msgid "Roystonea regia Palm (Sapling)"
@@ -534,6 +604,10 @@ msgstr "Palmier Royal (Mature)"
 msgid "Roystonea regia Palm (Old)"
 msgstr "Palmier Royal (Vieux)"
 
+#: ../../data/world/immovables/trees/palm_roystonea/init.lua:82
+msgid "Roystonea regia Palm"
+msgstr ""
+
 #: ../../data/world/immovables/trees/rowan/init.lua:12
 msgid "Rowan (Sapling)"
 msgstr "Sorbier des oiseleurs (jeune arbre)"
@@ -550,6 +624,10 @@ msgstr "Sorbier des oiseleurs (mature)"
 msgid "Rowan (Old)"
 msgstr "Sorbier des oiseleurs (vieux)"
 
+#: ../../data/world/immovables/trees/rowan/init.lua:85
+msgid "Rowan"
+msgstr "Sorbier des oiseleurs"
+
 #: ../../data/world/immovables/trees/spruce/init.lua:12
 msgid "Spruce (Sapling)"
 msgstr "Epicéa (Jeune arbre)"
@@ -565,6 +643,10 @@ msgstr "Epicéa (Mature)"
 #: ../../data/world/immovables/trees/spruce/init.lua:81
 msgid "Spruce (Old)"
 msgstr "Epicéa (Vieux)"
+
+#: ../../data/world/immovables/trees/spruce/init.lua:82
+msgid "Spruce"
+msgstr "Épicéa"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/twine/init.lua:13
@@ -587,6 +669,11 @@ msgid "Twine Tree (Old)"
 msgstr "Arbre à ficelle (Vieux)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#: ../../data/world/immovables/trees/twine/init.lua:87
+msgid "Twine Tree"
+msgstr ""
+
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/umbrella_green/init.lua:13
 msgid "Green Umbrella Tree (Sapling)"
 msgstr "Arbre ombrelle vert (Jeune pousse)"
@@ -607,6 +694,11 @@ msgid "Green Umbrella Tree (Old)"
 msgstr "Arbre ombrelle vert (Vieux)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#: ../../data/world/immovables/trees/umbrella_green/init.lua:87
+msgid "Green Umbrella Tree"
+msgstr ""
+
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/umbrella_red/init.lua:13
 msgid "Red Umbrella Tree (Sapling)"
 msgstr "Arbre ombrelle rouge (Jeune pousse)"
@@ -625,6 +717,11 @@ msgstr "Arbre ombrelle rouge (Mature)"
 #: ../../data/world/immovables/trees/umbrella_red/init.lua:88
 msgid "Red Umbrella Tree (Old)"
 msgstr "Arbre ombrelle rouge (Vieux)"
+
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#: ../../data/world/immovables/trees/umbrella_red/init.lua:90
+msgid "Red Umbrella Tree"
+msgstr ""
 
 #: ../../data/world/init.lua:11
 msgid "Miscellaneous"
@@ -674,19 +771,19 @@ msgstr "Arbres de terres en friches"
 msgid "Coal"
 msgstr "Charbon"
 
-#: ../../data/world/resources/init.lua:25
+#: ../../data/world/resources/init.lua:27
 msgid "Gold"
 msgstr "Or"
 
-#: ../../data/world/resources/init.lua:38
+#: ../../data/world/resources/init.lua:41
 msgid "Iron"
 msgstr "Fer"
 
-#: ../../data/world/resources/init.lua:51
+#: ../../data/world/resources/init.lua:55
 msgid "Stones"
 msgstr "Pierres"
 
-#: ../../data/world/resources/init.lua:64
+#: ../../data/world/resources/init.lua:69
 #: ../../data/world/terrains/init.lua:362
 #: ../../data/world/terrains/init.lua:670
 #: ../../data/world/terrains/init.lua:967
@@ -694,7 +791,7 @@ msgstr "Pierres"
 msgid "Water"
 msgstr "Eau"
 
-#: ../../data/world/resources/init.lua:77
+#: ../../data/world/resources/init.lua:83
 msgid "Fish"
 msgstr "Poisson"
 

@@ -510,8 +510,8 @@ struct ProductionProgram {
 		uint32_t radius;
 	};
 
-	ProductionProgram(const std::string& _name,
-							const std::string& _descname,
+	ProductionProgram(const std::string& init_name,
+							const std::string& init_descname,
 							std::unique_ptr<LuaTable> actions_table,
 							const EditorGameBase& egbase,
 							ProductionSiteDescr* building);

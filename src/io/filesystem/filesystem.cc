@@ -62,7 +62,7 @@
 
 FileSystem::FileSystem()
 {
-	m_root = "";
+	root_ = "";
 }
 
 
@@ -71,16 +71,16 @@ FileSystem::FileSystem()
  * \return True if ref path is absolute and within this FileSystem, false otherwise
  */
 bool FileSystem::is_path_absolute(const std::string & path) const {
-	std::string::size_type const path_size = path  .size();
-	std::string::size_type const root_size = m_root.size();
+	std::string::size_type const path_size = path.size();
+	std::string::size_type const root_size = root_.size();
 
 	if (path_size < root_size)
 		return false;
 
 	if (path_size == root_size)
-		return path == m_root;
+		return path == root_;
 
-	if (path.compare(0, m_root.size(), m_root))
+	if (path.compare(0, root_.size(), root_))
 		return false;
 
 #ifdef _WIN32
@@ -262,7 +262,7 @@ std::string FileSystem::canonicalize_name(std::string path) const {
 	} else if (!is_path_absolute(path))
 		//  make relative paths absolute (so that "../../foo" can work)
 		fs_tokenize
-			(m_root.empty() ? get_working_directory() : m_root, file_separator(),
+			(root_.empty() ? get_working_directory() : root_, file_separator(),
 			 std::inserter(components, components.begin()));
 
 	//clean up the path
