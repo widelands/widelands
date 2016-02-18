@@ -239,7 +239,8 @@ bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
 		filename += WLMF_SUFFIX;
 
 	//  append directory name
-	std::string complete_filename = curdir_ + g_fs->file_separator() + filename;
+	const std::string complete_filename = curdir_ + g_fs->file_separator() + filename;
+	log("NOCOM complete_filename: %s\n", complete_filename.c_str());
 
 	//  Check if file exists. If so, show a warning.
 	if (g_fs->file_exists(complete_filename)) {
@@ -253,7 +254,8 @@ bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
 
 	// save to a tmp file/dir first, rename later
 	// (important to keep script files in the script directory)
-	std::string tmp_name = complete_filename + ".tmp";
+	const std::string tmp_name = complete_filename + ".tmp";
+	log("NOCOM tmp_name: %s\n", tmp_name.c_str());
 	if (g_fs->file_exists(tmp_name)) {
 		const std::string s = (boost::format(_
 				("A file with the name ‘%s.tmp’ already exists. You have to remove it manually."))
@@ -272,6 +274,13 @@ bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
 			(g_fs->create_sub_file_system(tmp_name.empty() ? complete_filename : tmp_name,
 				binary ? FileSystem::ZIP : FileSystem::DIR));
 		Widelands::MapSaver wms(*fs, egbase);
+
+		log("NOCOM created file system:\n");
+
+		log("NOCOM -- get_basename: %s\n", fs->get_basename().c_str());
+		log("NOCOM -- get_working_directory: %s\n", fs->get_working_directory().c_str());
+		log("NOCOM -- get_homedir: %s\n", fs->get_homedir().c_str());
+		log("NOCOM -- get_basename: %s\n", fs->get_basename().c_str());
 
 		// Recompute seafaring tag
 		if (map.allows_seafaring()) {
@@ -292,6 +301,7 @@ bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
 
 			// if saved to a tmp file earlier, rename now
 			if (!tmp_name.empty()) {
+				log("NOCOM Now rename %s to %s\n", tmp_name.c_str(), complete_filename.c_str());
 				g_fs->fs_unlink(complete_filename);
 				g_fs->fs_rename(tmp_name, complete_filename);
 				// also change fs, as we assign it to the map below
