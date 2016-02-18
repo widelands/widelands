@@ -67,21 +67,21 @@ void Requirements::write
 }
 
 RequirementsStorage::RequirementsStorage
-	(uint32_t const _id, Reader const reader)
-	: m_id(_id), m_reader(reader)
+	(uint32_t const init_id, Reader const init_reader)
+	: id_(init_id), reader_(init_reader)
 {
 	StorageMap & s = storageMap();
 
-	assert(0 < _id);
-	assert    (_id < 65535);
-	assert(s.find(_id) == s.end());
+	assert(0 < init_id);
+	assert    (init_id < 65535);
+	assert(s.find(init_id) == s.end());
 
-	s.insert(std::make_pair(_id, this));
+	s.insert(std::make_pair(init_id, this));
 }
 
 uint32_t RequirementsStorage::id() const
 {
-	return m_id;
+	return id_;
 }
 
 Requirements RequirementsStorage::read
@@ -98,7 +98,7 @@ Requirements RequirementsStorage::read
 	if (it == s.end())
 		throw GameDataError("unknown requirement id %u", id);
 
-	return it->second->m_reader(fr, egbase, mol);
+	return it->second->reader_(fr, egbase, mol);
 }
 
 RequirementsStorage::StorageMap & RequirementsStorage::storageMap()

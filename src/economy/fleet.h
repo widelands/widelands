@@ -36,8 +36,8 @@ struct Ship;
 
 class FleetDescr : public MapObjectDescr {
 public:
-	FleetDescr(char const* const _name, char const* const _descname)
-		: MapObjectDescr(MapObjectType::FLEET, _name, _descname) {
+	FleetDescr(char const* const init_name, char const* const init_descname)
+		: MapObjectDescr(MapObjectType::FLEET, init_name, init_descname) {
 	}
 	~FleetDescr() override {
 	}

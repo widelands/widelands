@@ -79,6 +79,7 @@ world:new_immovable_type{
 world:new_immovable_type{
    name = "spruce_summer_old",
    descname = _ "Spruce (Old)",
+   species = _ "Spruce",
    editor_category = "trees_coniferous",
    size = "small",
    attributes = { "tree" },

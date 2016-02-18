@@ -143,14 +143,14 @@ public:
 		void *   entry_;
 		bool     use_clr;
 		RGBColor clr;
-		struct _data {
+		struct Data {
 			const Image* d_picture;
 			std::string d_string;
 			bool d_checked;
 
-			_data() : d_checked(false) {}
+			Data() : d_checked(false) {}
 		};
-		std::vector<_data> data_;
+		std::vector<Data> data_;
 	};
 
 	/**

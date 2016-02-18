@@ -55,10 +55,10 @@ namespace Widelands {
 static const int32_t BUILDING_LEAVE_INTERVAL = 1000;
 
 BuildingDescr::BuildingDescr
-	(const std::string& init_descname, const MapObjectType _type,
+	(const std::string& init_descname, const MapObjectType init_type,
 	 const LuaTable& table, const EditorGameBase& egbase)
 	:
-	MapObjectDescr(_type, table.get_string("name"), init_descname, table),
+	MapObjectDescr(init_type, table.get_string("name"), init_descname, table),
 	egbase_         (egbase),
 	buildable_     (false),
 	size_          (BaseImmovable::SMALL),
@@ -80,7 +80,7 @@ BuildingDescr::BuildingDescr
 	i18n::Textdomain td("tribes");
 
 	// Partially finished buildings get their sizes from their associated building
-	if (_type != MapObjectType::CONSTRUCTIONSITE && _type != MapObjectType::DISMANTLESITE) {
+	if (type() != MapObjectType::CONSTRUCTIONSITE && type() != MapObjectType::DISMANTLESITE) {
 		try {
 			const std::string size = table.get_string("size");
 			if (boost::iequals(size, "small")) {
@@ -649,7 +649,7 @@ void Building::draw
 {
 	if (coords == position_) { // draw big buildings only once
 		dst.blit_animation(
-		   pos, anim_, game.get_gametime() - animstart_, get_owner()->get_playercolor());
+			pos, anim_, game.get_gametime() - animstart_, get_owner()->get_playercolor());
 
 		//  door animation?
 

@@ -41,20 +41,20 @@ class TestingRoutingNode : public RoutingNode {
 public:
 	TestingRoutingNode
 		(int32_t wcost = 0, Coords pos = Coords(0, 0)) :
-			_waitcost(wcost), _position(pos) {}
+			waitcost_(wcost), position_(pos) {}
 	void add_neighbour(TestingRoutingNode * nb) {
-		_neighbours.push_back(nb);
+		neighbours_.push_back(nb);
 	}
 	TestingRoutingNode * get_neighbour(uint8_t idx) const {
-		if (idx >= _neighbours.size())
+		if (idx >= neighbours_.size())
 			throw BadAccess();
-		return _neighbours[idx];
+		return neighbours_[idx];
 	}
 
-	Flag & base_flag() override {return _flag;}
-	void set_waitcost(int32_t const wc) {_waitcost = wc;}
-	int32_t get_waitcost() const {return _waitcost;}
-	const Coords & get_position() const override {return _position;}
+	Flag & base_flag() override {return flag_;}
+	void set_waitcost(int32_t const wc) {waitcost_ = wc;}
+	int32_t get_waitcost() const {return waitcost_;}
+	const Coords & get_position() const override {return position_;}
 
 	void get_neighbours(WareWorker type, RoutingNodeNeighbours &) override;
 
@@ -64,16 +64,16 @@ public:
 private:
 	using Neigbours = std::vector<TestingRoutingNode *>;
 
-	Neigbours _neighbours;
-	int32_t _waitcost;
-	Coords _position;
-	Flag _flag;
+	Neigbours neighbours_;
+	int32_t waitcost_;
+	Coords position_;
+	Flag flag_;
 };
 void TestingRoutingNode::get_neighbours(WareWorker type, RoutingNodeNeighbours & n) {
-	for (TestingRoutingNode * nb : _neighbours) {
+	for (TestingRoutingNode * nb : neighbours_) {
 		// second parameter is walktime in ms from this flag to the neighbour.
 		// only depends on slope
-		n.push_back(RoutingNodeNeighbour(nb, 1000 * ((type == wwWARE)?1 + _waitcost:1)));
+		n.push_back(RoutingNodeNeighbour(nb, 1000 * ((type == wwWARE)?1 + waitcost_:1)));
 	}
 }
 bool TestingRoutingNode::all_members_zeroed() {

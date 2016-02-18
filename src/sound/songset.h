@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006, 2008 by the Widelands Development Team
+ * Copyright (C) 2006-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -35,7 +35,7 @@
  * music, e.g. all songs that might be played while the main menu is being
  * shown. It is possible to access those songs one after another or in
  * random order. The fact that a Songset really contains several different
- * songs is hidden from the outside.\n
+ * songs is hidden from the outside.
  * A songset does not contain the audio data itself, to not use huge amounts of
  * memory. Instead, each song is loaded on request and the data is free()d
  * afterwards
