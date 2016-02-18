@@ -794,9 +794,9 @@ void Ship::start_task_movetodock(Game& game, PortDock& pd) {
 		get_position().y,
 		pd.get_positions(game)[0].x,
 		pd.get_positions(game)[0].y);
-		//this should not happen, but in theory there could be some inconstinency
-		//I (tiborb) failed to invoke this situation when testing so
-		//I am not sure if following line behaves allright
+		// This should not happen, but in theory there could be some inconstinency
+		// I (tiborb) failed to invoke this situation when testing so
+		// I am not sure if following line behaves allright
 		get_fleet()->update(game);
 		start_task_idle(game, descr().main_animation(), 5000);
 	}

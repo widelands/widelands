@@ -886,7 +886,6 @@ void ProductionProgram::ActConsume::execute
 	std::vector<uint8_t> consumption_quantities(nr_warequeues, 0);
 
 	Groups l_groups = consumed_wares_; //  make a copy for local modification
-	//log("ActConsume::execute(%s):\n", ps.descname().c_str());
 
 	//  Iterate over all input queues and see how much we should consume from
 	//  each of them.
@@ -973,7 +972,7 @@ void ProductionProgram::ActConsume::execute
 				assert(q <= warequeues[i]->get_filled());
 				warequeues[i]->set_filled(warequeues[i]->get_filled() - q);
 
-				//update consumption statistic
+				// Update consumption statistic
 				ps.owner().ware_consumed(warequeues[i]->get_ware(), q);
 			}
 		return ps.program_step(game);
@@ -1038,7 +1037,6 @@ ProductionProgram::ActProduce::ActProduce
 void ProductionProgram::ActProduce::execute
 	(Game & game, ProductionSite & ps) const
 {
-	//ps.molog("  Produce\n");
 	assert(ps.produced_wares_.empty());
 	ps.produced_wares_ = produced_wares_;
 	ps.working_positions_[0].worker->update_task_buildingwork(game);
@@ -1627,14 +1625,13 @@ void ProductionProgram::ActConstruct::execute(Game & game, ProductionSite & psit
 		(map.find_reachable_fields
 			(area, &fields, cstep, fna))
 	{
-		//testing received fields to get one with less immovables
-		//nearby
-		Coords best_coords = fields.back(); //just to initialize it
+		// Testing received fields to get one with less immovables nearby
+		Coords best_coords = fields.back(); // Just to initialize it
 		uint32_t best_score = std::numeric_limits<uint32_t>::max();
 		while (!fields.empty()) {
 			Coords coords = fields.back();
 
-			//counting immovables nearby
+			// Counting immovables nearby
 			std::vector<ImmovableFound> found_immovables;
 			const uint32_t imm_count =
 				map.find_immovables(Area<FCoords>(map.get_fcoords(coords), 2), &found_immovables);
@@ -1643,7 +1640,7 @@ void ProductionProgram::ActConstruct::execute(Game & game, ProductionSite & psit
 				best_coords = coords;
 			}
 
-			//no need to go on, it cannot be better
+			// No need to go on, it cannot be better
 			if (imm_count == 0) {
 				break;
 				}

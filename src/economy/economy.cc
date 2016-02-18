@@ -361,8 +361,6 @@ void Economy::set_worker_target_quantity
 */
 void Economy::add_wares(DescriptionIndex const id, uint32_t const count)
 {
-	//log("%p: add(%i, %i)\n", this, id, count);
-
 	wares_.add(id, count);
 	start_request_timer();
 
@@ -370,8 +368,6 @@ void Economy::add_wares(DescriptionIndex const id, uint32_t const count)
 }
 void Economy::add_workers(DescriptionIndex const id, uint32_t const count)
 {
-	//log("%p: add(%i, %i)\n", this, id, count);
-
 	workers_.add(id, count);
 	start_request_timer();
 
@@ -387,8 +383,6 @@ void Economy::add_workers(DescriptionIndex const id, uint32_t const count)
 void Economy::remove_wares(DescriptionIndex const id, uint32_t const count)
 {
 	assert(owner_.egbase().tribes().ware_exists(id));
-	//log("%p: remove(%i, %i) from %i\n", this, id, count, wares_.stock(id));
-
 	wares_.remove(id, count);
 
 	// TODO(unknown): remove from global player inventory?
@@ -401,8 +395,6 @@ void Economy::remove_wares(DescriptionIndex const id, uint32_t const count)
  */
 void Economy::remove_workers(DescriptionIndex const id, uint32_t const count)
 {
-	//log("%p: remove(%i, %i) from %i\n", this, id, count, workers_.stock(id));
-
 	workers_.remove(id, count);
 
 	// TODO(unknown): remove from global player inventory?

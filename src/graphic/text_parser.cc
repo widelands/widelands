@@ -63,7 +63,7 @@ void TextParser::parse
 	 std::vector<RichtextBlock> & blocks)
 {
 	bool more_richtext_blocks = true;
-	//First while loop parses all richtext blocks (images)
+	// First while loop parses all richtext blocks (images)
 	while (more_richtext_blocks) {
 		RichtextBlock new_richtext_block;
 		std::string unparsed_text;
@@ -81,7 +81,7 @@ void TextParser::parse
 
 		std::vector<TextBlock> text_blocks;
 
-		//Second while loop parses all textblocks of current richtext block
+		// Second while loop parses all textblocks of current richtext block
 		bool more_text_blocks = true;
 		while (more_text_blocks) {
 			std::string block_format;
@@ -114,11 +114,11 @@ bool TextParser::parse_textblock
 
 	const bool extract_more = extract_format_block(block, block_text, block_format, "<p", ">", "</p>");
 
-	//Split the the text because of " "
+	// Split the the text because of " "
 	std::vector<std::string> unwrapped_words;
 	split_words(block_text, &unwrapped_words);
 
-	//Handle user defined line breaks, and save them
+	// Handle user defined line breaks, and save them
 	for (const std::string& temp_words : unwrapped_words) {
 		for (std::string line = temp_words;;) {
 			line = i18n::make_ligatures(line.c_str());
@@ -193,25 +193,25 @@ bool TextParser::extract_format_block
 		return false;
 	}
 
-	//Append block_format
+	// Append block_format
 	block_format.erase();
 	block_format.append(block.substr(0, format_end_pos));
 
-	//Delete whole format block
+	// Delete whole format block
 	block.erase(0, format_end_pos + format_end.size());
 
-	//Find end of block
+	// Find end of block
 	const std::string::size_type block_end_pos = block.find(block_end);
 	if (block_end_pos == std::string::npos) {
 		return false;
 	}
-	//Extract text of block
+	// Extract text of block
 	block_text.erase();
 	block_text.append(block.substr(0, block_end_pos));
 
-	//Erase text including closing tag
+	// Erase text including closing tag
 	block.erase(0, block_end_pos + block_end.size());
-	//Is something left
+	// Is something left
 	return block.find(block_start) != std::string::npos;
 }
 

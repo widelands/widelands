@@ -233,8 +233,8 @@ void FullscreenMenuMapSelect::fill_table()
 	//  Fill it with all files we find in all directories.
 	FilenameSet files = g_fs->list_directory(curdir_);
 
-	//If we are not at the top of the map directory hierarchy (we're not talking
-	//about the absolute filesystem top!) we manually add ".."
+	// If we are not at the top of the map directory hierarchy (we're not talking
+	// about the absolute filesystem top!) we manually add ".."
 	if (curdir_ != basedir_) {
 		maps_data_.push_back(MapData::create_parent_dir(curdir_));
 	}

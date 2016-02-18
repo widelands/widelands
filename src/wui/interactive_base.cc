@@ -362,7 +362,7 @@ void InteractiveBase::draw_overlay(RenderTarget& dst) {
 			static boost::format node_format("(%i, %i)");
 			node_text = as_uifont
 				((node_format % sel_.pos.node.x % sel_.pos.node.y).str(), UI_FONT_SIZE_SMALL);
-		} else { //this is an editor
+		} else { // This is an editor
 			static boost::format node_format("(%i, %i, %i)");
 			const int32_t height = map[sel_.pos.node].get_height();
 			node_text = as_uifont
@@ -736,8 +736,6 @@ void InteractiveBase::roadb_add_overlay()
 {
 	assert(buildroad_);
 
-	//log("Add overlay\n");
-
 	Map & map = egbase().map();
 
 	// preview of the road
@@ -834,8 +832,6 @@ Remove road building data from road overlay
 void InteractiveBase::roadb_remove_overlay()
 {
 	assert(buildroad_);
-
-	//log("Remove overlay\n");
 
 	//  preview of the road
 	if (jobid_) {

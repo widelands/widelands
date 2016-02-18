@@ -150,7 +150,7 @@ void TabPanel::update_desired_size()
 
 		panel->get_desired_size(&panelw, &panelh);
 		// TODO(unknown):  the panel might be bigger -> add a scrollbar in that case
-		//panel->set_size(panelw, panelh);
+		// panel->set_size(panelw, panelh);
 
 		if (panelw > w)
 			w = panelw;

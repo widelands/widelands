@@ -490,7 +490,7 @@ void Table<void *>::move_selection(const int32_t offset)
 
 	select(static_cast<uint32_t>(new_selection));
 
-	//scroll to newly selected entry
+	// Scroll to newly selected entry
 	if (scrollbar_)
 	{
 		// Keep an unselected item above or below

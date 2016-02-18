@@ -542,7 +542,6 @@ void Warehouse::init_portdock(EditorGameBase & egbase)
 		portdock_->set_economy(get_economy());
 
 	// this is just to indicate something wrong is going on
-	//(tiborb)
 	PortDock* pd_tmp = portdock_;
 	if (!pd_tmp->get_fleet()) {
 		log (" portdock for port at %3dx%3d created but without a fleet!\n",
@@ -595,11 +594,11 @@ void Warehouse::cleanup(EditorGameBase& egbase) {
 		const WareList& workers = get_workers();
 		for (DescriptionIndex id = 0; id < workers.get_nrwareids(); ++id) {
 			const uint32_t stock = workers.stock(id);
-			//separate behaviour for the case of loading the game
-			//(which does save/destroy/reload) and simply destroying ingame
+			// Separate behaviour for the case of loading the game
+			// (which does save/destroy/reload) and simply destroying ingame
 			if (game->is_loaded())
 			{
-				//this game is really running
+				// This game is really running
 				for (uint32_t i = 0; i < stock; ++i) {
 					launch_worker(*game, id, Requirements()).start_task_leavebuilding(*game, true);
 				}
@@ -607,7 +606,7 @@ void Warehouse::cleanup(EditorGameBase& egbase) {
 			}
 			else
 			{
-				//we are in the load-game sequence...
+				// We are in the load-game sequence...
 				remove_workers(id, stock);
 			}
 		}
@@ -990,7 +989,7 @@ bool Warehouse::do_launch_ware(Game & game, WareInstance & ware)
 		return true;
 	}
 
-	//we did not launch the ware...
+	// We did not launch the ware...
 	return false;
 }
 
@@ -1095,7 +1094,7 @@ void Warehouse::create_worker(Game & game, DescriptionIndex const worker) {
 		DescriptionIndex const id_ware = owner().tribe().ware_index(input);
 		if (owner().tribe().has_ware(id_ware)) {
 			remove_wares(id_ware, buildcost.second);
-			//update statistic accordingly
+			// Update statistics accordingly
 			owner().ware_consumed(id_ware, buildcost.second);
 		} else
 			remove_workers(owner().tribe().safe_worker_index(input), buildcost.second);

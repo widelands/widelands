@@ -450,7 +450,7 @@ void GameMessageMenu::archive_or_restore()
 
 	switch (mode) {
 	case Inbox:
-		//archive highlighted message
+		// Archive highlighted message
 		if (!work_done) {
 			if (!list->has_selection()) return;
 
@@ -460,7 +460,7 @@ void GameMessageMenu::archive_or_restore()
 		}
 		break;
 	case Archive:
-		//restore highlighted message
+		// Restore highlighted message
 		if (!work_done) {
 			if (!list->has_selection()) return;
 

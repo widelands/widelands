@@ -78,7 +78,7 @@ void SaveHandler::think(Widelands::Game & game) {
 			m_last_saved_realtime = m_last_saved_realtime + 30000;
 			return;
 		}
-		//roll autosaves
+		// Roll autosaves
 		int32_t number_of_rolls = g_options.pull_section("global").get_int("rolling_autosave", 5) - 1;
 		std::string filename_previous =
 			create_file_name(get_base_dir(), (boost::format("%s_%02d") % filename % number_of_rolls).str());

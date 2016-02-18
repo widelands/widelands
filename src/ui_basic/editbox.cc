@@ -187,7 +187,7 @@ bool EditBox::handle_mouserelease(const uint8_t btn, int32_t, int32_t)
  * Handle keypress/release events
  */
 // TODO(unknown): Text input works only because code.unicode happens to map to ASCII for
-// ASCII characters (--> //HERE). Instead, all user editable strings should be
+// ASCII characters (--> // HERE). Instead, all user editable strings should be
 // real unicode.
 bool EditBox::handle_key(bool const down, SDL_Keysym const code)
 {
@@ -198,7 +198,7 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code)
 			return true;
 
 		case SDLK_TAB:
-			//let the panel handle the tab key
+			// Let the panel handle the tab key
 			return false;
 
 		case SDLK_KP_ENTER:

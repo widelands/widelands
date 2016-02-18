@@ -508,7 +508,7 @@ void MilitarySite::update_soldier_request(bool incd)
 			}
 			if (! upgrade_soldier_request_)
 			{
-				//phoo -- I can safely request new soldiers.
+				// phoo -- I can safely request new soldiers.
 				doing_upgrade_request_ = false;
 				update_normal_soldier_request();
 			}
@@ -579,7 +579,7 @@ void MilitarySite::act(Game & game, uint32_t const data)
 	// Therefore I must poll in some occasions. Let's do that rather infrequently,
 	// to keep the game lightweight.
 
-	//TODO(unknown): I would need two new callbacks, to get rid ot this polling.
+	// TODO(unknown): I would need two new callbacks, to get rid ot this polling.
 	if (timeofgame > next_swap_soldiers_time_)
 		{
 			next_swap_soldiers_time_ = timeofgame + (soldier_upgrade_try_ ? 20000 : 100000);

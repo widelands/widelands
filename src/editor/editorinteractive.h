@@ -64,7 +64,6 @@ public:
 		{}
 		EditorTool & current() const {return *current_pointer;}
 		using ToolVector = std::vector<EditorTool *>;
-		//ToolVector                     tools;
 		EditorTool          *          current_pointer;
 		EditorTool::ToolIndex         use_tool;
 		EditorInfoTool                info;
