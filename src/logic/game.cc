@@ -203,14 +203,14 @@ void Game::save_syncstream(bool const save)
 }
 
 
-bool Game::run_splayer_scenario_direct(char const * const mapname, const std::string& script_to_run) {
+bool Game::run_splayer_scenario_direct(const std::string& mapname, const std::string& script_to_run) {
 	assert(!get_map());
 
 	set_map(new Map);
 
 	std::unique_ptr<MapLoader> maploader(map().get_correct_loader(mapname));
 	if (!maploader)
-		throw wexception("could not load \"%s\"", mapname);
+		throw wexception("could not load \"%s\"", mapname.c_str());
 	UI::ProgressWindow loader_ui;
 
 	loader_ui.step (_("Preloading map"));
@@ -241,7 +241,7 @@ bool Game::run_splayer_scenario_direct(char const * const mapname, const std::st
 		(new InteractivePlayer
 		 	(*this, g_options.pull_section("global"), 1, false));
 
-	loader_ui.step(_("Loading map “%s”…"), mapname);
+	loader_ui.step(_("Loading map…"));
 	maploader->load_map_complete(*this, Widelands::MapLoader::LoadType::kScenario);
 	maploader.reset();
 
@@ -321,7 +321,7 @@ void Game::init_newgame
 			->add_further_starting_position(shared_num.at(n), shared.at(n).initialization_index);
 	}
 
-	loader_ui->step(_("Loading map “%s”…"), settings.mapfilename.c_str());
+	loader_ui->step(_("Loading map…"));
 	maploader->load_map_complete(*this,
 										  settings.scenario ?
 											  Widelands::MapLoader::LoadType::kScenario :
@@ -370,7 +370,7 @@ void Game::init_savegame
 	}
 }
 
-bool Game::run_load_game(std::string filename, const std::string& script_to_run) {
+bool Game::run_load_game(const std::string& filename, const std::string& script_to_run) {
 	UI::ProgressWindow loader_ui;
 	std::vector<std::string> tipstext;
 	tipstext.push_back("general_game");
