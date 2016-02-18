@@ -1649,7 +1649,8 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 		}
 
 		// not doing this for non-military buildins
-		if (!(bo.type == BuildingObserver::Type::kMilitarysite || bo.type == BuildingObserver::Type::kTrainingsite))
+		if (!(bo.type == BuildingObserver::Type::kMilitarysite ||
+				bo.type == BuildingObserver::Type::kTrainingsite))
 			continue;
 
 		// and neither for small military buildings
@@ -1680,7 +1681,8 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 
 		if (!bo.buildable(*player_)) {
 			bo.new_building = BuildingNecessity::kNotNeeded;
-		} else if (bo.type == BuildingObserver::Type::kProductionsite || bo.type == BuildingObserver::Type::kMine) {
+		} else if (bo.type == BuildingObserver::Type::kProductionsite ||
+					  bo.type == BuildingObserver::Type::kMine) {
 
 			bo.new_building = check_building_necessity(bo, PerfEvaluation::kForConstruction, gametime);
 
@@ -3977,7 +3979,9 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 	// a substitution exists. F.e. mines or pairs like tavern-inn
 	// To skip unnecessary calculation, we calculate this only if we have 0 count of the buildings
 	bool has_substitution_building = false;
-	if (bo.total_count() == 0 && bo.upgrade_substitutes && bo.type == BuildingObserver::Type::kProductionsite) {
+	if (bo.total_count() == 0 &&
+		 bo.upgrade_substitutes &&
+		 bo.type == BuildingObserver::Type::kProductionsite) {
 		const DescriptionIndex enhancement = bo.desc->enhancement();
 		BuildingObserver& en_bo
 			= get_building_observer(tribe_->get_building_descr(enhancement)->name().c_str());

@@ -103,7 +103,8 @@ bool FindNodeUnowned::accept(const Map&, const FCoords& fc) const {
 }
 
 // Sometimes we need to know how many nodes our allies owns
-FindNodeAllyOwned::FindNodeAllyOwned(Player* p, Game& g, PlayerNumber n) : player(p), game(g), player_number(n) {}
+FindNodeAllyOwned::FindNodeAllyOwned(Player* p, Game& g, PlayerNumber n) :
+	player(p), game(g), player_number(n) {}
 
 bool FindNodeAllyOwned::accept(const Map&, const FCoords& fc) const {
 	return (fc.field->nodecaps() & MOVECAPS_WALK) && (fc.field->get_owned_by() != 0) &&
@@ -301,7 +302,8 @@ bool BlockedFields::is_blocked(Coords coords) {
 
 // This is an struct that stores strength of players, info on teams and provides some outputs from these data
 PlayersStrengths::PlayerStat::PlayerStat() {}
-PlayersStrengths::PlayerStat::PlayerStat(Widelands::TeamNumber tc, uint32_t pp) : team_number(tc), players_power(pp) {}
+PlayersStrengths::PlayerStat::PlayerStat(Widelands::TeamNumber tc, uint32_t pp) :
+	team_number(tc), players_power(pp) {}
 
 // Inserting/updating data
 void PlayersStrengths::add(Widelands::PlayerNumber pn, Widelands::TeamNumber tn, uint32_t pp) {

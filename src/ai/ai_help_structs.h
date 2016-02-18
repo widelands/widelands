@@ -112,7 +112,7 @@ struct FindNodeEnemiesBuilding {
 struct FindNodeUnowned {
 	FindNodeUnowned(Player* p, Game& g, bool oe = false);
 
-	bool accept(const Map&, const FCoords& fc) const ;
+	bool accept(const Map&, const FCoords& fc) const;
 
 	Player* player;
 	Game& game;

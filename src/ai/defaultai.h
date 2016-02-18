@@ -203,9 +203,11 @@ private:
 
 	int32_t recalc_with_border_range(const Widelands::BuildableField&, int32_t);
 
-	void
-	consider_productionsite_influence(Widelands::BuildableField&, Widelands::Coords, const Widelands::BuildingObserver&);
-	// considering trees, rocks, mines, water, fishes for candidate for colonization (new port)
+	void consider_productionsite_influence(Widelands::BuildableField&,
+														Widelands::Coords,
+														const Widelands::BuildingObserver&);
+
+	// considering trees, rocks, mines, water, fish for candidate for colonization (new port)
 	uint8_t spot_scoring(Widelands::Coords candidate_spot);
 
 	Widelands::EconomyObserver* get_economy_observer(Widelands::Economy&);
