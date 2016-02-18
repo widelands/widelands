@@ -745,7 +745,7 @@ void Ship::withdraw_items(Game& game, PortDock& pd, std::vector<ShippingItem>& i
 /**
  * Find a path to the dock @p pd, returns its length, and the path optionally.
  */
-uint32_t Ship::calculate_sea_route(Game& game, PortDock& pd, Path* finalpath){
+uint32_t Ship::calculate_sea_route(Game& game, PortDock& pd, Path* finalpath) {
 	Map& map = game.map();
 	StepEvalAStar se(pd.get_warehouse()->get_position());
 	se.m_swim = true;
@@ -760,7 +760,7 @@ uint32_t Ship::calculate_sea_route(Game& game, PortDock& pd, Path* finalpath){
 	FCoords cur;
 	while (astar.step(cur, cost)) {
 		if (cur.field->get_immovable() == &pd) {
-			if (finalpath){
+			if (finalpath) {
 				astar.pathto(cur, *finalpath);
 				return finalpath->get_nsteps();
 			} else {

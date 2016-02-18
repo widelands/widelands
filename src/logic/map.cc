@@ -1833,21 +1833,21 @@ int32_t Map::change_terrain
 
 	// remove invalid resources if necessary
 	// check vertex to which the triangle belongs
-	if (!is_resource_valid(world, c, c.field->get_resources())){
+	if (!is_resource_valid(world, c, c.field->get_resources())) {
 		clear_resources(c);
 	}
 
 	// always check south-east vertex
 	Widelands::FCoords f_se(c, c.field);
 	get_neighbour(f_se, Widelands::WALK_SE, &f_se);
-	if (!is_resource_valid(world, f_se, f_se.field->get_resources())){
+	if (!is_resource_valid(world, f_se, f_se.field->get_resources())) {
 		clear_resources(f_se);
 	}
 
 	// check south-west vertex if d-Triangle is changed, check east vertex if r-Triangle is changed
 	Widelands::FCoords f_sw_e(c, c.field);
 	get_neighbour(f_sw_e, c.t == TCoords<FCoords>::D ? Widelands::WALK_SW : Widelands::WALK_E, &f_sw_e);
-	if (!is_resource_valid(world, f_sw_e, f_sw_e.field->get_resources())){
+	if (!is_resource_valid(world, f_sw_e, f_sw_e.field->get_resources())) {
 		clear_resources(f_sw_e);
 	}
 
