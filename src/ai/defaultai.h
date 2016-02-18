@@ -164,18 +164,6 @@ private:
 
 	bool construct_building(uint32_t);
 
-	uint32_t coords_hash(Widelands::Coords coords) {
-		uint32_t hash = coords.x << 16 | coords.y;
-		return hash;
-	}
-
-	Widelands::Coords coords_unhash(uint32_t hash) {
-		Widelands::Coords coords;
-		coords.x = hash >> 16;  // is cast needed here???
-		coords.y = hash;
-		return coords;
-	}
-
 	// all road management is invoked by function improve_roads()
 	// if needed it calls create_shortcut_road() with a flag from which
 	// new road should be considered (or is needed)

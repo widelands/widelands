@@ -768,7 +768,7 @@ void DefaultAI::late_initialization() {
 	for (const Coords& c : map.get_port_spaces()) {
 		MapRegion<Area<FCoords>> mr(map, Area<FCoords>(map.get_fcoords(c), 3));
 		do {
-			const int32_t hash = coords_hash(map.get_fcoords(*(mr.location().field)));
+			const int32_t hash = map.get_fcoords(*(mr.location().field)).hash();
 			if (port_reserved_coords.count(hash) == 0)
 				port_reserved_coords.insert(hash);
 		} while (mr.advance(map));
@@ -778,7 +778,7 @@ void DefaultAI::late_initialization() {
 		map.get_tln(c, &c_nw);
 		MapRegion<Area<FCoords>> mr_nw(map, Area<FCoords>(map.get_fcoords(c_nw), 3));
 		do {
-			const int32_t hash = coords_hash(map.get_fcoords(*(mr_nw.location().field)));
+			const int32_t hash = map.get_fcoords(*(mr_nw.location().field)).hash();
 			if (port_reserved_coords.count(hash) == 0)
 				port_reserved_coords.insert(hash);
 		} while (mr_nw.advance(map));
@@ -836,7 +836,7 @@ void DefaultAI::late_initialization() {
 			MapRegion<Area<FCoords>> mr(
 			   map, Area<FCoords>(map.get_fcoords(ps_obs.site->get_position()), 4));
 			do {
-				blocked_fields.add(coords_hash(mr.location()), game().get_gametime() + 20 * 60 * 1000);
+				blocked_fields.add(mr.location(), game().get_gametime() + 20 * 60 * 1000);
 			} while (mr.advance(map));
 		}
 	}
@@ -1064,7 +1064,7 @@ void DefaultAI::update_buildable_field(BuildableField& field, uint16_t range, bo
 		field.portspace_nearby = ExtendedBool::kFalse;
 		MapRegion<Area<FCoords>> mr(map, Area<FCoords>(field.coords, 4));
 		do {
-			if (port_reserved_coords.count(coords_hash(mr.location())) > 0) {
+			if (port_reserved_coords.count(mr.location().hash()) > 0) {
 				field.portspace_nearby = ExtendedBool::kTrue;
 				break;
 			}
@@ -1777,7 +1777,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 		}
 
 		// Continue if field is blocked at the moment
-		if (blocked_fields.is_blocked(coords_hash(bf->coords))) {
+		if (blocked_fields.is_blocked(bf->coords)) {
 			continue;
 		}
 
@@ -1810,7 +1810,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 
 			// testing for reserved ports
 			if (!bo.is_port) {
-				if (port_reserved_coords.count(coords_hash(bf->coords)) > 0) {
+				if (port_reserved_coords.count(bf->coords.hash()) > 0) {
 					continue;
 				}
 			}
@@ -2313,7 +2313,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 
 			// testing also vicinity
 			if (!bo.is_port) {
-				if (port_reserved_coords.count(coords_hash(bf->coords)) > 0) {
+				if (port_reserved_coords.count(bf->coords.hash()) > 0) {
 					continue;
 				}
 			}
@@ -2444,7 +2444,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 					prio += mf->same_mine_fields_nearby;
 
 					// Continue if field is blocked at the moment
-					if (blocked_fields.is_blocked(coords_hash(mf->coords))) {
+					if (blocked_fields.is_blocked(mf->coords)) {
 						continue;
 					}
 
@@ -2480,7 +2480,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 
 	// send the command to construct a new building
 	game().send_player_build(player_number(), proposed_coords, best_building->id);
-	blocked_fields.add(coords_hash(proposed_coords), game().get_gametime() + 2 * 60 * 1000);
+	blocked_fields.add(proposed_coords, game().get_gametime() + 2 * 60 * 1000);
 
 	// resetting new_building_overdue
 	best_building->new_building_overdue = 0;
@@ -2506,7 +2506,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 
 		MapRegion<Area<FCoords>> mr(map, Area<FCoords>(map.get_fcoords(proposed_coords), block_area));
 		do {
-			blocked_fields.add(coords_hash(mr.location()), game().get_gametime() + block_time);
+			blocked_fields.add(mr.location(), game().get_gametime() + block_time);
 		} while (mr.advance(map));
 	}
 
@@ -2867,7 +2867,7 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 			}
 
 			// now make sure that this field has not been processed yet
-			const uint32_t hash = coords_hash(reachable_coords);
+			const uint32_t hash = reachable_coords.hash();
 			if (lookuptable.count(hash) == 0) {
 				lookuptable.insert(hash);
 
@@ -2949,12 +2949,12 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 	for (std::vector<NearFlag>::iterator nf_walk_it = nearflags_tmp.begin();
 	     nf_walk_it != nearflags_tmp.end();
 	     ++nf_walk_it) {
-		uint32_t const hash_walk = coords_hash(nf_walk_it->flag->get_position());
+		uint32_t const hash_walk = nf_walk_it->flag->get_position().hash();
 		if (lookuptable.count(hash_walk) > 0) {
 			// iterating over nearflags
 			for (std::vector<NearFlag>::iterator nf_it = nearflags.begin(); nf_it != nearflags.end();
 			     ++nf_it) {
-				uint32_t const hash = coords_hash(nf_it->flag->get_position());
+				uint32_t const hash = nf_it->flag->get_position().hash();
 				if (hash == hash_walk) {
 					// decreasing "cost" (of walking via roads)
 					if (nf_it->cost > nf_walk_it->cost) {
@@ -3021,7 +3021,7 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 		MapRegion<Area<FCoords>> mr(
 			   game().map(), Area<FCoords>(map.get_fcoords(bld->get_position()), 2));
 		do {
-			blocked_fields.add(coords_hash(mr.location()), game().get_gametime() + 15 * 60 * 1000);
+			blocked_fields.add(mr.location(), game().get_gametime() + 15 * 60 * 1000);
 		} while (mr.advance(map));
 		eco->flags.remove(&flag);
 		game().send_player_bulldoze(*const_cast<Flag*>(&flag));
@@ -4767,7 +4767,7 @@ bool DefaultAI::other_player_accessible(const uint32_t max_distance,
 	Map& map = game().map();
 	std::list<uint32_t> queue;
 	std::unordered_set<uint32_t> done;
-	queue.push_front(coords_hash(starting_spot));
+	queue.push_front(starting_spot.hash());
 	PlayerNumber const pn = player_->player_number();
 
 	while (!queue.empty()) {
@@ -4779,7 +4779,7 @@ bool DefaultAI::other_player_accessible(const uint32_t max_distance,
 
 		done.insert(queue.front());
 
-		Coords tmp_coords = coords_unhash(queue.front());
+		Coords tmp_coords = Coords::unhash(queue.front());
 
 		// if beyond range
 		if (map.calc_distance(starting_spot, tmp_coords) > max_distance) {
@@ -4842,7 +4842,7 @@ bool DefaultAI::other_player_accessible(const uint32_t max_distance,
 			map.get_neighbour(tmp_coords, dir, &neigh_coords1);
 			Coords neigh_coords2;
 			map.get_neighbour(neigh_coords1, dir, &neigh_coords2);
-			queue.push_front(coords_hash(neigh_coords2));
+			queue.push_front(neigh_coords2.hash());
 		}
 	}
 	*tested_fields = done.size();
@@ -4926,9 +4926,9 @@ void DefaultAI::expedition_management(ShipObserver& so) {
 
 	// second we put current spot into visited_spots
 	bool first_time_here = false;
-	if (so.visited_spots.count(coords_hash(so.ship->get_position())) == 0) {
+	if (so.visited_spots.count(so.ship->get_position().hash()) == 0) {
 		first_time_here = true;
-		so.visited_spots.insert(coords_hash(so.ship->get_position()));
+		so.visited_spots.insert(so.ship->get_position().hash());
 	}
 
 	// If we have portspace following options are avaiable:
@@ -4949,7 +4949,7 @@ void DefaultAI::expedition_management(ShipObserver& so) {
 			MapRegion<Area<FCoords>> mr(
 			   game().map(), Area<FCoords>(map.get_fcoords(so.ship->exp_port_spaces().front()), 8));
 			do {
-				blocked_fields.add(coords_hash(mr.location()), game().get_gametime() + 5 * 60 * 1000);
+				blocked_fields.add(mr.location(), game().get_gametime() + 5 * 60 * 1000);
 			} while (mr.advance(map));
 
 			return;
@@ -5113,7 +5113,7 @@ void DefaultAI::gain_building(Building& b) {
 				MapRegion<Area<FCoords>> mr(
 				   map, Area<FCoords>(map.get_fcoords(warehousesites.back().site->get_position()), 3));
 				do {
-					const int32_t hash = coords_hash(map.get_fcoords(*(mr.location().field)));
+					const int32_t hash = map.get_fcoords(*(mr.location().field)).hash();
 					if (port_reserved_coords.count(hash) > 0)
 						port_reserved_coords.erase(hash);
 				} while (mr.advance(map));
@@ -5439,15 +5439,15 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 		for (uint32_t j = 0; j < immovables.size(); ++j) {
 			if (upcast(MilitarySite const, bld, immovables.at(j).object)) {
 				if (player_->is_hostile(bld->owner())) {
-					if (enemy_sites.count(coords_hash(bld->get_position())) == 0) {
-						enemy_sites[coords_hash(bld->get_position())] = EnemySiteObserver();
+					if (enemy_sites.count(bld->get_position().hash()) == 0) {
+						enemy_sites[bld->get_position().hash()] = EnemySiteObserver();
 					}
 				}
 			}
 			if (upcast(Warehouse const, wh, immovables.at(j).object)) {
 				if (player_->is_hostile(wh->owner())) {
-					if (enemy_sites.count(coords_hash(wh->get_position())) == 0) {
-						enemy_sites[coords_hash(wh->get_position())] = EnemySiteObserver();
+					if (enemy_sites.count(wh->get_position().hash()) == 0) {
+						enemy_sites[wh->get_position().hash()] = EnemySiteObserver();
 					}
 				}
 			}
@@ -5526,12 +5526,12 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 		bool is_attackable = false;
 		// we cannot attack unvisible site and there is no other way to find out
 		const bool is_visible = (1 < player_->vision
-			 	(Map::get_index(coords_unhash(site->first), map.get_width())));
+				(Map::get_index(Coords::unhash(site->first), map.get_width())));
 		uint16_t owner_number = 100;
 
 		// testing if we can attack the building - result is a flag
 		// if we dont get a flag, we remove the building from observers list
-		FCoords f = map.get_fcoords(coords_unhash(site->first));
+		FCoords f = map.get_fcoords(Coords::unhash(site->first));
 		uint32_t site_to_be_removed = std::numeric_limits<uint32_t>::max();
 		Flag* flag = nullptr;
 
@@ -5700,7 +5700,7 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 	assert(enemy_sites.count(best_target) > 0);
 
 	// attacking
-	FCoords f = map.get_fcoords(coords_unhash(best_target));
+	FCoords f = map.get_fcoords(Coords::unhash(best_target));
 	// setting no attack counter here
 	// this gauranties that it will not be attacked in next 3
 	// turns

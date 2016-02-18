@@ -268,41 +268,35 @@ bool SchedulerTask::operator<(SchedulerTask other) const {
 
 
 // List of blocked fields with block time, with some accompanying functions
-// NOCOM(#codereview) better pass the Coords here and have the BlockedFields calculate the coords_hash,
-// so we can be sure that the hash is always correct.
-void BlockedFields::add(uint32_t hash, uint32_t till) {
-	if (BlockedFields.count(hash) == 0) {
-		BlockedFields.insert(std::pair<uint32_t, uint32_t>(hash, till));
-	} else if (BlockedFields[hash] < till) {
-		BlockedFields[hash] = till;
+void BlockedFields::add(Widelands::Coords coords, uint32_t till) {
+	const uint32_t hash = coords.hash();
+	if (blocked_fields_.count(hash) == 0) {
+		blocked_fields_.insert(std::pair<uint32_t, uint32_t>(hash, till));
+	} else if (blocked_fields_[hash] < till) {
+		blocked_fields_[hash] = till;
 	}
 	// The third possibility is that a field has been already blocked for longer time than 'till'
 }
 
 uint32_t BlockedFields::count() {
-	return BlockedFields.size();
+	return blocked_fields_.size();
 }
 
 void BlockedFields::remove_expired(uint32_t gametime) {
 	std::vector<uint32_t> fields_to_remove;
-	for (auto field: BlockedFields) {
+	for (auto field: blocked_fields_) {
 		if (field.second < gametime) {
 			fields_to_remove.push_back(field.first);
 		}
 	}
 	while (!fields_to_remove.empty()) {
-		BlockedFields.erase(fields_to_remove.back());
+		blocked_fields_.erase(fields_to_remove.back());
 		fields_to_remove.pop_back();
 	}
 }
 
-// NOCOM(#codereview) better pass the Coords here and have the BlockedFields calculate the coords_hash.
-bool BlockedFields::is_blocked(uint32_t hash) {
-	if (BlockedFields.count(hash) == 0) {
-		return false;
-	} else {
-		return true;
-	}
+bool BlockedFields::is_blocked(Coords coords) {
+	return (blocked_fields_.count(coords.hash()) != 0);
 }
 
 // This is an struct that stores strength of players, info on teams and provides some outputs from these data

@@ -483,18 +483,14 @@ struct SchedulerTask {
 
 // List of blocked fields with block time, with some accompanying functions
 struct BlockedFields {
-	// NOCOM(#codereview) better pass the Coords here and have the BlockedFields calculate the coords_hash,
-	// so we can be sure that the hash is always correct.
-	void add(uint32_t hash, uint32_t till);
+	void add(Coords coords, uint32_t till);
 	uint32_t count();
 	void remove_expired(uint32_t gametime);
+	bool is_blocked(Coords coords);
 
-	// NOCOM(#codereview) better pass the Coords here and have the BlockedFields calculate the coords_hash.
-	bool is_blocked(uint32_t hash);
-
+private:
 	// <hash of field coordinates, time till blocked>
-	// of course hash of a blocked field has to be unique
-	std::map<uint32_t, uint32_t> BlockedFields;
+	std::map<uint32_t, uint32_t> blocked_fields_;
 };
 
 // This is a struct that stores strength of players, info on teams and provides some outputs from these data
