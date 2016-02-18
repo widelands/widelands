@@ -145,14 +145,14 @@ private:
 	void update_all_mineable_fields(uint32_t);
 	void update_all_not_buildable_fields();
 
-	void update_buildable_field(BuildableField&, uint16_t = 6, bool = false);
-	void update_mineable_field(MineableField&);
+	void update_buildable_field(Widelands::BuildableField&, uint16_t = 6, bool = false);
+	void update_mineable_field(Widelands::MineableField&);
 
 	void update_productionsite_stats();
 
 	// for productionsites
 	Widelands::BuildingNecessity check_building_necessity
-		(BuildingObserver& bo, PerfEvaluation purpose, uint32_t);
+		(Widelands::BuildingObserver& bo, PerfEvaluation purpose, uint32_t);
 	// for militarysites (overloading the function)
 	Widelands::BuildingNecessity check_building_necessity
 		(uint8_t, uint32_t);
@@ -198,7 +198,7 @@ private:
 	// return single number of strength of vector of soldiers
 	int32_t calculate_strength(const std::vector<Widelands::Soldier*>);
 	uint32_t get_stocklevel_by_hint(size_t);
-	uint32_t get_stocklevel(BuildingObserver&);
+	uint32_t get_stocklevel(Widelands::BuildingObserver&);
 	uint32_t get_warehoused_stock(Widelands::DescriptionIndex wt);
 	uint32_t get_stocklevel(Widelands::DescriptionIndex);  // count all direct outputs_
 	void review_wares_targets(uint32_t);
@@ -213,27 +213,27 @@ private:
 	                             const Widelands::Coords starting_spot,
 	                             const WalkSearch type);
 
-	int32_t recalc_with_border_range(const BuildableField&, int32_t);
+	int32_t recalc_with_border_range(const Widelands::BuildableField&, int32_t);
 
 	void
-	consider_productionsite_influence(BuildableField&, Widelands::Coords, const BuildingObserver&);
+	consider_productionsite_influence(Widelands::BuildableField&, Widelands::Coords, const Widelands::BuildingObserver&);
 	// considering trees, rocks, mines, water, fishes for candidate for colonization (new port)
 	uint8_t spot_scoring(Widelands::Coords candidate_spot);
 
-	EconomyObserver* get_economy_observer(Widelands::Economy&);
-	BuildingObserver& get_building_observer(char const*);
+	Widelands::EconomyObserver* get_economy_observer(Widelands::Economy&);
+	Widelands::BuildingObserver& get_building_observer(char const*);
 
 	void gain_immovable(Widelands::PlayerImmovable&);
 	void lose_immovable(const Widelands::PlayerImmovable&);
 	void gain_building(Widelands::Building&);
 	void lose_building(const Widelands::Building&);
 	void gain_ship(Widelands::Ship&, NewShip);
-	void check_ship_in_expedition(ShipObserver&, uint32_t);
-	void expedition_management(ShipObserver&);
+	void check_ship_in_expedition(Widelands::ShipObserver&, uint32_t);
+	void expedition_management(Widelands::ShipObserver&);
 	void out_of_resources_site(const Widelands::ProductionSite&);
 	void soldier_trained(const Widelands::TrainingSite&);
 
-	bool check_supply(const BuildingObserver&);
+	bool check_supply(const Widelands::BuildingObserver&);
 
 	void print_land_stats();
 
@@ -251,7 +251,7 @@ private:
 	Widelands::Player* player_;
 	Widelands::TribeDescr const* tribe_;
 
-	std::vector<BuildingObserver> buildings_;
+	std::vector<Widelands::BuildingObserver> buildings_;
 	uint32_t num_prod_constructionsites;
 	uint32_t num_ports;
 
@@ -262,38 +262,38 @@ private:
 	WoodPolicy wood_policy_;
 
 	std::list<Widelands::FCoords> unusable_fields;
-	std::list<BuildableField*> buildable_fields;
-	BlockedFields blocked_fields;
-	PlayersStrengths player_statistics;
+	std::list<Widelands::BuildableField*> buildable_fields;
+	Widelands::BlockedFields blocked_fields;
+	Widelands::PlayersStrengths player_statistics;
 	std::unordered_set<uint32_t> port_reserved_coords;
-	std::list<MineableField*> mineable_fields;
+	std::list<Widelands::MineableField*> mineable_fields;
 	std::list<Widelands::Flag const*> new_flags;
 	std::list<Widelands::Coords> flags_to_be_removed;
 	std::list<Widelands::Road const*> roads;
-	std::list<EconomyObserver*> economies;
-	std::list<ProductionSiteObserver> productionsites;
-	std::list<ProductionSiteObserver> mines_;
-	std::list<MilitarySiteObserver> militarysites;
-	std::list<WarehouseSiteObserver> warehousesites;
-	std::list<TrainingSiteObserver> trainingsites;
-	std::list<ShipObserver> allships;
+	std::list<Widelands::EconomyObserver*> economies;
+	std::list<Widelands::ProductionSiteObserver> productionsites;
+	std::list<Widelands::ProductionSiteObserver> mines_;
+	std::list<Widelands::MilitarySiteObserver> militarysites;
+	std::list<Widelands::WarehouseSiteObserver> warehousesites;
+	std::list<Widelands::TrainingSiteObserver> trainingsites;
+	std::list<Widelands::ShipObserver> allships;
 	// This is a vector that is filled up on initiatlization
 	// and no items are added/removed afterwards
-	std::vector<SchedulerTask> taskPool;
-	std::map<uint32_t, EnemySiteObserver> enemy_sites;
+	std::vector<Widelands::SchedulerTask> taskPool;
+	std::map<uint32_t, Widelands::EnemySiteObserver> enemy_sites;
 	// it will map mined material to observer
-	std::map<int32_t, MineTypesObserver> mines_per_type;
+	std::map<int32_t, Widelands::MineTypesObserver> mines_per_type;
 	// returns count of mines of the same type (output)
 	uint32_t mines_in_constr() const;
 	uint32_t mines_built() const;
-	std::map<int32_t, MilitarySiteSizeObserver> msites_per_size;
+	std::map<int32_t, Widelands::MilitarySiteSizeObserver> msites_per_size;
 	// returns count of militarysites
 	uint32_t msites_in_constr() const;
 	uint32_t msites_built() const;
 
 	int32_t limit_cnt_target(int32_t, int32_t);
 
-	std::vector<WareObserver> wares;
+	std::vector<Widelands::WareObserver> wares;
 
 	uint32_t next_ai_think_;
 	uint32_t next_mine_construction_due_;

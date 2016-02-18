@@ -2966,7 +2966,7 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 	}
 
 	// ordering nearflags
-	std::sort(nearflags.begin(), nearflags.end(), CompareShortening());
+	std::sort(nearflags.begin(), nearflags.end(), NearFlag::CompareShortening());
 
 	// this is just a random number, will be used later
 	int32_t random_gametime = game().get_gametime();
