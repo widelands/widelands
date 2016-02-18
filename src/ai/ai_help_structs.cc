@@ -36,7 +36,7 @@ bool FindNodeWithFlagOrRoad::accept(const Map&, FCoords fc) const {
 
 bool CheckStepRoadAI::allowed(
    Map& map, FCoords start, FCoords end, int32_t, CheckStep::StepId const id) const {
-	uint8_t endcaps = player_->get_buildcaps(end);
+	uint8_t endcaps = player->get_buildcaps(end);
 
 	// we should not cross fields with road or flags (or any other immovable)
 	if ((map.get_immovable(start)) && !(id == CheckStep::stepFirst)) {
@@ -44,13 +44,13 @@ bool CheckStepRoadAI::allowed(
 	}
 
 	// Calculate cost and passability
-	if (!(endcaps & movecaps_))
+	if (!(endcaps & movecaps))
 		return false;
 
 	// Check for blocking immovables
 	if (BaseImmovable const* const imm = map.get_immovable(end))
 		if (imm->get_size() >= BaseImmovable::SMALL) {
-			if (id != CheckStep::stepLast && !open_end_)
+			if (id != CheckStep::stepLast && !open_end)
 				return false;
 
 			if (dynamic_cast<Flag const*>(imm))
@@ -66,8 +66,8 @@ bool CheckStepRoadAI::allowed(
 bool CheckStepRoadAI::reachable_dest(Map& map, FCoords const dest) const {
 	NodeCaps const caps = dest.field->nodecaps();
 
-	if (!(caps & movecaps_)) {
-		if (!((movecaps_ & MOVECAPS_SWIM) && (caps & MOVECAPS_WALK)))
+	if (!(caps & movecaps)) {
+		if (!((movecaps & MOVECAPS_SWIM) && (caps & MOVECAPS_WALK)))
 			return false;
 
 		if (!map.can_reach_by_water(dest))
