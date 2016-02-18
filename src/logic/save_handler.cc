@@ -103,7 +103,7 @@ void SaveHandler::think(Widelands::Game & game) {
 
 	// TODO(unknown): defer saving to next tick so that this message is shown
 	// before the actual save, or put the saving logic in another thread
-	game.get_ibase()->log_message(_("Saving game..."));
+	game.get_ibase()->log_message(_("Saving game…"));
 
 	// save the game
 	const std::string complete_filename = create_file_name(get_base_dir(), filename);

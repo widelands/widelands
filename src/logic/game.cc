@@ -241,7 +241,7 @@ bool Game::run_splayer_scenario_direct(char const * const mapname, const std::st
 		(new InteractivePlayer
 		 	(*this, g_options.pull_section("global"), 1, false));
 
-	loader_ui.step(_("Loading map"));
+	loader_ui.step(_("Loading map “%s”…"), mapname);
 	maploader->load_map_complete(*this, Widelands::MapLoader::LoadType::kScenario);
 	maploader.reset();
 
@@ -321,7 +321,7 @@ void Game::init_newgame
 			->add_further_starting_position(shared_num.at(n), shared.at(n).initialization_index);
 	}
 
-	loader_ui->step(_("Loading map"));
+	loader_ui->step(_("Loading map “%s”…"), settings.mapfilename.c_str());
 	maploader->load_map_complete(*this,
 										  settings.scenario ?
 											  Widelands::MapLoader::LoadType::kScenario :
