@@ -1756,7 +1756,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 
 		} else if (bo.type == BuildingObserver::MILITARYSITE) {
 			bo.new_building_ = check_building_necessity(bo.desc->get_size(), gametime);
-		} else if  (bo.type == BuildingObserver::TRAININGSITE){
+		} else if  (bo.type == BuildingObserver::TRAININGSITE) {
 			bo.new_building_ = check_building_necessity(bo, PerfEvaluation::kForConstruction, gametime);
 		} else if (bo.aimode_limit_status() != AiModeBuildings::kAnotherAllowed) {
 			bo.new_building_ = BuildingNecessity::kNotNeeded;
@@ -2178,10 +2178,10 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 						prio += 25;
 					}
 				}
-				//sometimes expansion is stalled and this is to help boost it
+				// sometimes expansion is stalled and this is to help boost it
 				if (msites_in_constr() == 0 && vacant_mil_positions_ <= 2) {
 					prio += 10;
-					if (bf->enemy_nearby_){
+					if (bf->enemy_nearby_) {
 						prio += 20;
 					}
 				}
@@ -2566,7 +2566,7 @@ bool DefaultAI::improve_roads(uint32_t gametime) {
 		roads.pop_front();
 
 		// occasionaly we test if the road can be dismounted
-		// if there is shortage of spots we do it allways
+		// if there is shortage of spots we do it always
 		if (gametime % 5 == 0 || spots_ < kSpotsTooLittle) {
 			const Road& road = *roads.front();
 			if (dispensable_road_test(*const_cast<Road*>(&road))) {
@@ -2627,15 +2627,15 @@ bool DefaultAI::improve_roads(uint32_t gametime) {
 		inhibit_road_building_ = gametime + 800;
 	} else if (flag.nr_of_roads() == 1 || gametime % 10 == 0) {
 		if (spots_ > kSpotsEnough) {
-			// This is normal situation
+			// This is the normal situation
 			create_shortcut_road(flag, 13, 22, gametime);
 			inhibit_road_building_ = gametime + 800;
 		} else if (spots_ > kSpotsTooLittle)  {
-			// We are shoft of spots so shortening must be significant
+			// We are short of spots so shortening must be significant
 			create_shortcut_road(flag, 13, 35, gametime);
 			inhibit_road_building_ = gametime + 800;
 		} else {
-			// We are very shoft of spots so shortening must be even bigger
+			// We are very short of spots so shortening must be even bigger
 			create_shortcut_road(flag, 13, 50, gametime);
 			inhibit_road_building_ = gametime + 800;
 		}
@@ -3017,7 +3017,7 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 	// if all possible roads skipped
 	if (last_attempt_) {
 		Building* bld = flag.get_building();
-		// first we block the field and vicinity for 15 minutes, probably it is not good place to build on
+		// first we block the field and vicinity for 15 minutes, probably it is not a good place to build on
 		MapRegion<Area<FCoords>> mr(
 			   game().map(), Area<FCoords>(map.get_fcoords(bld->get_position()), 2));
 		do {
@@ -3187,7 +3187,7 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 	// Lumberjack / Woodcutter handling
 	if (site.bo->need_trees_) {
 
-		//do not dismantle immediatelly
+		// do not dismantle immediatelly
 		if ((game().get_gametime() - site.built_time_) < 4 * 60 * 1000) {
 			return false;
 		}
@@ -4591,7 +4591,7 @@ int32_t DefaultAI::recalc_with_border_range(const BuildableField& bf, int32_t pr
 	// and if close (up to 2 fields away) from border
 	if (bf.near_border_) {
 		prio -= 10;
-		if (spots_ < kSpotsEnough){
+		if (spots_ < kSpotsEnough) {
 			prio +=  3 * (spots_ - kSpotsEnough);
 		}
 	}
@@ -4812,7 +4812,7 @@ bool DefaultAI::other_player_accessible(const uint32_t max_distance,
 
 			// if owned by enemy
 			if  (type == WalkSearch::kEnemy && f->get_owned_by() != pn) {
-				// for case I am not member of a team
+				// in case I am not member of a team
 				if (player_->team_number() == 0) {
 					*tested_fields = done.size();
 					return true;
@@ -4933,7 +4933,7 @@ void DefaultAI::expedition_management(ShipObserver& so) {
 
 	// If we have portspace following options are avaiable:
 	// 1. Build a port there
-	if (so.ship->exp_port_spaces().size() > 0) {  // making sure we have possible portspaces
+	if (!so.ship->exp_port_spaces().empty()) {  // making sure we have possible portspaces
 
 		// we score the place
 		const uint8_t spot_score = spot_scoring(so.ship->exp_port_spaces().front());
@@ -5066,7 +5066,7 @@ void DefaultAI::gain_building(Building& b) {
 			mines_.push_back(ProductionSiteObserver());
 			mines_.back().site = &dynamic_cast<ProductionSite&>(b);
 			mines_.back().bo = &bo;
-			mines_.back().built_time_ =gametime;
+			mines_.back().built_time_ = gametime;
 			mines_.back().no_resources_since_ =  kNever;
 			mines_.back().bo->unoccupied_count_ += 1;
 
@@ -5340,22 +5340,22 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 	PlayerNumber const nr_players = map.get_nrplayers();
 	player_attackable.resize(nr_players);
 	uint32_t plr_in_game = 0;
-	uint16_t const pn = player_number();
+	Widelands::PlayerNumber const pn = player_number();
 
 	iterate_players_existing_novar(p, nr_players, game())++ plr_in_game;
 
 	// receiving games statistics and parsing it (reading latest entry)
 	const Game::GeneralStatsVector& genstats = game().get_general_statistics();
 
-	//Collecting statistics and saving them in player_statistics object
-	for (uint8_t j = 1; j <= plr_in_game; ++j) {
+	// Collecting statistics and saving them in player_statistics object
+	for (Widelands::TeamNumber j = 1; j <= plr_in_game; ++j) {
 		const Player* this_player = game().get_player(j);
 		if (this_player) {
 			try {
 				player_statistics.add(j, this_player->team_number(), genstats.at(j - 1).miltary_strength.back());
 			} catch (const std::out_of_range&) {
 				log("ComputerPlayer(%d): genstats entry missing - size :%d\n",
-				    player_number(),
+					 static_cast<unsigned int>(player_number()),
 				    static_cast<unsigned int>(genstats.size()));
 			}
 		}
@@ -5391,8 +5391,8 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 
 
 	// now we test all players to identify 'attackable' ones
-	for (uint8_t j = 1; j <= plr_in_game; ++j) {
-		// if we are the same team, or just it is me
+	for (Widelands::PlayerNumber j = 1; j <= plr_in_game; ++j) {
+		// if we are the same team, or it is just me
 		if (player_statistics.players_in_same_team(pn, j) || pn == j) {
 			player_attackable[j - 1] = Attackable::kNotAttackable;
 			continue;
@@ -5400,7 +5400,7 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 
 		// now we compare strength
 		// strength of the other player (considering his team)
-		uint32_t players_power = player_statistics.get_modified_player_power(j);;
+		uint32_t players_power = player_statistics.get_modified_player_power(j);
 
 		if (players_power == 0) {
 			player_attackable.at(j - 1) = Attackable::kAttackable;

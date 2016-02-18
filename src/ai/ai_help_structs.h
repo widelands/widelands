@@ -171,15 +171,13 @@ struct FindNodeUnownedMineable {
 // Unowned but walkable fields nearby
 struct FindNodeUnownedWalkable {
 	bool accept(const Map&, const FCoords& fc) const {
-
 		return (fc.field->nodecaps() & MOVECAPS_WALK) && (fc.field->get_owned_by() == 0);
 	}
 
 	Player* player_;
 	Game& game;
 
-	FindNodeUnownedWalkable(Player* p, Game& g) : player_(p), game(g) {
-	}
+	FindNodeUnownedWalkable(Player* p, Game& g) : player_(p), game(g) {}
 };
 
 // Looking only for mines-capable fields nearby
@@ -596,33 +594,35 @@ struct SchedulerTask {
 
 	SchedulerTask
 		(const uint32_t time, const Widelands::SchedulerTaskId t, const uint8_t p, const char* d):
-		due_time(time), id(t), priority(p), descr(d){}
+		due_time(time), id(t), priority(p), descr(d) {}
 
 };
 
 // List of blocked fields with block time, with some accompanying functions
 struct BlockedFields {
 	// <hash of field coordinates, time till blocked>
-	// of course hash of an blocked field is unique
+	// of course hash of a blocked field has to be unique
 	std::map<uint32_t, uint32_t> BlockedFields;
 
-	void add(uint32_t hash, uint32_t till){
+	// NOCOM(#codereview) better pass the Coords here and have the BlockedFields calculate the coords_hash,
+	// so we can be sure that the hash is always correct.
+	void add(uint32_t hash, uint32_t till) {
 		if (BlockedFields.count(hash) == 0) {
 			BlockedFields.insert(std::pair<uint32_t, uint32_t>(hash, till));
 		} else if (BlockedFields[hash] < till) {
 			BlockedFields[hash] = till;
 		}
-		//third possibility is that a field has been already blocked for longer time than 'till'
+		// The third possibility is that a field has been already blocked for longer time than 'till'
 	}
 
-	uint32_t count(){
+	uint32_t count() {
 		return BlockedFields.size();
 	}
 
 	void remove_expired(uint32_t gametime) {
 		std::vector<uint32_t> fields_to_remove;
 		for (auto field: BlockedFields) {
-			if (field.second<gametime) {
+			if (field.second < gametime) {
 				fields_to_remove.push_back(field.first);
 			}
 		}
@@ -632,7 +632,8 @@ struct BlockedFields {
 		}
 	}
 
-	bool is_blocked(uint32_t hash){
+	// NOCOM(#codereview) better pass the Coords here and have the BlockedFields calculate the coords_hash.
+	bool is_blocked(uint32_t hash) {
 		if (BlockedFields.count(hash) == 0) {
 			return false;
 		} else {
@@ -641,51 +642,54 @@ struct BlockedFields {
 	}
 };
 
+// NOCOM(#codereview): There are a lot of implementation details in this header file.
+// Consider shifting the details to the .cc file.
+
 // This is an struct that stores strength of players, info on teams and provides some outputs from these data
 struct PlayersStrengths {
 	struct PlayerStat {
-		uint8_t tn_;
-		uint32_t players_power_;
+		Widelands::TeamNumber team_number;
+		uint32_t players_power;
 
-		PlayerStat() {};
-		PlayerStat(uint8_t tc, uint32_t pp) : tn_(tc), players_power_(pp) {}
+		PlayerStat() {}
+		PlayerStat(Widelands::TeamNumber tc, uint32_t pp) : team_number(tc), players_power(pp) {}
 	};
 
-	// This is core part of this struct
-	std::map<uint16_t, PlayerStat> all_stats;
+	// This is the core part of this struct
+	std::map<Widelands::PlayerNumber, PlayerStat> all_stats;
 
 	// Number of team, sum of players' strength
-	std::map<uint8_t, uint32_t> team_powers;
+	std::map<Widelands::TeamNumber, uint32_t> team_powers;
 
 	// Inserting/updating data
-	void add(uint16_t pn, uint8_t tn, uint32_t pp){
+	void add(Widelands::PlayerNumber pn, Widelands::TeamNumber tn, uint32_t pp) {
 		if (all_stats.count(pn) == 0) {
-			all_stats.insert(std::pair<uint16_t, PlayerStat>(pn, PlayerStat(tn, pp)));
+			all_stats.insert(std::pair<Widelands::PlayerNumber, PlayerStat>(pn, PlayerStat(tn, pp)));
 		} else {
-			all_stats[pn].players_power_ = pp;
+			all_stats[pn].players_power = pp;
 		}
 	}
 
 	void recalculate_team_power() {
 		team_powers.clear();
-		for (auto& item: all_stats){
-			if (item.second.tn_ > 0) { //is a member of a team
-				if (team_powers.count(item.second.tn_) > 0){
-					team_powers[item.second.tn_] += item.second.players_power_;
+		for (auto& item: all_stats) {
+			if (item.second.team_number > 0) { // is a member of a team
+				if (team_powers.count(item.second.team_number) > 0) {
+					team_powers[item.second.team_number] += item.second.players_power;
 				} else {
-					team_powers[item.second.tn_] = item.second.players_power_;
+					team_powers[item.second.team_number] = item.second.players_power;
 				}
 			}
 		}
 	}
 
 	// This is strength of player plus third of strength of other members of his team
-	uint32_t get_modified_player_power(uint16_t pn){
+	uint32_t get_modified_player_power(Widelands::PlayerNumber pn) {
 		uint32_t result = 0;
-		uint8_t team = 0;
+		Widelands::TeamNumber team = 0;
 		if (all_stats.count(pn) > 0) {
-			result = all_stats[pn].players_power_;
-			team = all_stats[pn].tn_;
+			result = all_stats[pn].players_power;
+			team = all_stats[pn].team_number;
 		};
 		if (team > 0 && team_powers.count(team) > 0) {
 			result = result + (team_powers[team] - result) / 3;
@@ -693,29 +697,29 @@ struct PlayersStrengths {
 		return result;
 	}
 
-	bool players_in_same_team(uint16_t pl1, uint16_t pl2){
+	bool players_in_same_team(Widelands::PlayerNumber pl1, Widelands::PlayerNumber pl2) {
 		if (all_stats.count(pl1) > 0 && all_stats.count(pl2) > 0 && pl1 != pl2) {
 			// team number 0 = no team
-			return all_stats[pl1].tn_ > 0 && all_stats[pl1].tn_ == all_stats[pl2].tn_;
+			return all_stats[pl1].team_number > 0 && all_stats[pl1].team_number == all_stats[pl2].team_number;
 		} else {
 			return false;
 		}
 	}
 
-	bool strong_enough(uint16_t pl) {
+	bool strong_enough(Widelands::PlayerNumber pl) {
 		if (all_stats.count(pl) == 0) {
 			return false;
 		}
-		uint32_t my_strength = all_stats[pl].players_power_;
-		uint32_t strongest_oponent_strength=0;
+		uint32_t my_strength = all_stats[pl].players_power;
+		uint32_t strongest_opponent_strength = 0;
 		for (auto item : all_stats) {
 			if (!players_in_same_team(item.first, pl) && pl != item.first) {
-				if (get_modified_player_power(item.first) > strongest_oponent_strength) {
-					strongest_oponent_strength = get_modified_player_power(item.first);
+				if (get_modified_player_power(item.first) > strongest_opponent_strength) {
+					strongest_opponent_strength = get_modified_player_power(item.first);
 				}
 			}
 		}
-		return my_strength > strongest_oponent_strength + 50;
+		return my_strength > strongest_opponent_strength + 50;
 	}
 };
 
