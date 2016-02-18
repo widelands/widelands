@@ -25,6 +25,7 @@
 #include <vector>
 
 #include <SDL.h>
+#include <boost/algorithm/string/replace.hpp>
 #include <boost/format.hpp>
 
 #include "graphic/text/rt_errors_impl.h"
@@ -286,6 +287,9 @@ Parser::~Parser() {
 }
 
 Tag * Parser::parse(std::string text, const TagSet & allowed_tags) {
+	// TODO(GunChleoc): Some \ will disappear while typing in edit fields.
+	boost::replace_all(text, "\\", "\\\\"); // Prevent crashes with \.
+
 	m_ts.reset(new TextStream(text));
 
 	m_ts->skip_ws(); m_ts->rskip_ws();

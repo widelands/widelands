@@ -51,7 +51,6 @@ std::string richtext_escape(const std::string& given_text) {
 	std::string text = given_text;
 	boost::replace_all(text, ">", "&gt;");
 	boost::replace_all(text, "<", "&lt;");
-	boost::replace_all(text, "\\", "\\\\");
 	return text;
 }
 
