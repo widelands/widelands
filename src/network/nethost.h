@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2012 by the Widelands Development Team
+ * Copyright (C) 2008-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -40,7 +40,7 @@ struct NetHost : public GameController, private SyncCallback {
 	NetHost (const std::string & playername, bool internet = false);
 	virtual ~NetHost ();
 
-	void run(bool autostart = false);
+	void run();
 	const std::string & get_local_playername() const;
 	int16_t get_local_playerposition();
 
@@ -90,27 +90,22 @@ struct NetHost : public GameController, private SyncCallback {
 	void kick_user(uint32_t, std::string);
 	void split_command_array
 		(const std::string & cmdarray, std::string & cmd, std::string & arg1, std::string & arg2);
-	void handle_dserver_command(std::string, std::string);
-	void dserver_send_maps_and_saves(Client &);
 
 	void report_result(uint8_t player, Widelands::PlayerEndResult result, const std::string & info) override;
 
 	void force_pause() {
-		m_forced_pause = true;
+		forced_pause_ = true;
 		update_network_speed();
 	}
 
 	void end_forced_pause() {
-		m_forced_pause = false;
+		forced_pause_ = false;
 		update_network_speed();
 	}
 
-	bool forced_pause() {return m_forced_pause;}
-
-	bool is_dedicated() {return m_is_dedicated;}
+	bool forced_pause() {return forced_pause_;}
 
 private:
-	NetTransferFile * file;
 
 	void send_system_message_code
 		(const std::string &,
@@ -157,12 +152,10 @@ private:
 		 const std::string & arg = "");
 	void reaper();
 
-	NetHostImpl * d;
-	bool m_internet;
-	bool m_is_dedicated;
-	std::string m_password;
-	std::string m_dedicated_motd;
-	bool m_forced_pause;
+	NetTransferFile * file_;
+	NetHostImpl     * d;
+	bool              internet_;
+	bool              forced_pause_;
 };
 
 

@@ -114,7 +114,6 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG
 	butw_ (get_w() / 4),
 	buth_ (get_h() * 9 / 200),
 	fs_   (fs_small()),
-	fn_   (ui_fn()),
 	// TODO(GunChleoc): We still need to use these consistently. Just getting them in for now
 	// so we can have the SuggestedTeamsBox
 	padding_(4),
@@ -204,11 +203,15 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG
 	lua_ = new LuaInterface();
 	win_condition_clicked();
 
-	title_      .set_font(fn_, fs_big(), UI_FONT_CLR_FG);
-	mapname_    .set_font(fn_, fs_, RGBColor(255, 255, 127));
-	clients_    .set_font(fn_, fs_, RGBColor(0, 255, 0));
-	players_    .set_font(fn_, fs_, RGBColor(0, 255, 0));
-	map_        .set_font(fn_, fs_, RGBColor(0, 255, 0));
+	title_      .set_fontsize(fs_big());
+	mapname_    .set_fontsize(fs_);
+	mapname_    .set_color(RGBColor(255, 255, 127));
+	clients_    .set_fontsize(fs_);
+	clients_    .set_color(RGBColor(0, 255, 0));
+	players_    .set_fontsize(fs_);
+	players_    .set_color(RGBColor(0, 255, 0));
+	map_        .set_fontsize(fs_);
+	map_        .set_color(RGBColor(0, 255, 0));
 
 	mapname_ .set_text(_("(no map)"));
 	map_info_.set_text(_("The host has not yet selected a map or saved game."));
@@ -217,7 +220,7 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG
 		new MultiPlayerSetupGroup
 			(this,
 			 get_w() / 50, get_h() / 8, get_w() * 57 / 80, get_h() / 2,
-			 settings, butw_, buth_, fn_, fs_);
+			 settings, butw_, buth_);
 
 	// If we are the host, open the map or save selection menu at startup
 	if (settings_->settings().usernum == 0 && settings_->settings().mapname.empty()) {
@@ -433,16 +436,6 @@ void FullscreenMenuLaunchMPG::select_saved_game() {
 				UI::WLMessageBox::MBoxType::kOk);
 			warning.run<UI::Panel::Returncodes>();
 		}
-	} else {
-		if (!settings_ || settings_->settings().saved_games.empty())
-			throw wexception("A file was selected, that is not available to the client");
-		// this file is obviously a file from the dedicated server's saved games pool not available locally.
-		for (uint32_t i = 0; i < settings_->settings().saved_games.size(); ++i)
-			if (settings_->settings().saved_games.at(i).path == filename) {
-				settings_->set_map(filename, filename, settings_->settings().saved_games.at(i).players, true);
-				return;
-			}
-		throw wexception("The selected file could not be found in the pool of dedicated saved games.");
 	}
 }
 

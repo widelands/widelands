@@ -150,6 +150,7 @@ private:
 	void toolsize_menu_btn();
 	void toggle_mainmenu();
 	void toggle_playermenu();
+	void toggle_help();
 
 	//  state variables
 	bool need_save_;
@@ -173,6 +174,7 @@ private:
 	UI::UniqueWindow::Registry immovablemenu_;
 	UI::UniqueWindow::Registry bobmenu_;
 	UI::UniqueWindow::Registry resourcesmenu_;
+	UI::UniqueWindow::Registry helpmenu_;
 
 	UI::Button toggle_main_menu_;
 	UI::Button toggle_tool_menu_;
@@ -182,6 +184,7 @@ private:
 	UI::Button toggle_player_menu_;
 	UI::Button undo_;
 	UI::Button redo_;
+	UI::Button toggle_help_;
 };
 
 #endif  // end of include guard: WL_EDITOR_EDITORINTERACTIVE_H

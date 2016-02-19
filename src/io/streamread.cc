@@ -35,7 +35,7 @@ StreamRead::DataError::DataError(char const * const fmt, ...) {
 		vsnprintf(buffer, sizeof(buffer), fmt, va);
 		va_end(va);
 	}
-	m_what += buffer;
+	what_ += buffer;
 }
 
 /**

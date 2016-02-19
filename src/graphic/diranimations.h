@@ -33,20 +33,20 @@ struct DirAnimations {
 		 uint32_t dir4 = 0, uint32_t dir5 = 0, uint32_t dir6 = 0);
 
 	uint32_t get_animation(Widelands::Direction const dir) const {
-		return m_animations[dir - 1];
+		return animations_[dir - 1];
 	}
 	void set_animation(const Widelands::Direction dir, const uint32_t anim) {
-		m_animations[dir - 1] = anim;
+		animations_[dir - 1] = anim;
 	}
 
 	static DirAnimations null() {
 		return DirAnimations(0); // Since real animation IDs are positive, this is safe
 	}
 
-	operator bool() const {return m_animations[0];}
+	operator bool() const {return animations_[0];}
 
 private:
-	uint32_t m_animations[6];
+	uint32_t animations_[6];
 };
 
 #endif  // end of include guard: WL_GRAPHIC_DIRANIMATIONS_H

@@ -114,8 +114,8 @@ struct Ship : Bob {
 
 	void log_general_info(const EditorGameBase &) override;
 
-	uint32_t get_nritems() const {return m_items.size();}
-	const ShippingItem & get_item(uint32_t idx) const {return m_items[idx];}
+	uint32_t get_nritems() const {return items_.size();}
+	const ShippingItem & get_item(uint32_t idx) const {return items_[idx];}
 
 	void withdraw_items(Game & game, PortDock & pd, std::vector<ShippingItem> & items);
 	void add_item(Game &, const ShippingItem & item);
@@ -197,10 +197,8 @@ struct Ship : Bob {
 	}
 
 	/// \returns (in expedition mode only!) the list of currently seen port build spaces
-	const std::list<Coords>* exp_port_spaces() {
-		if (!m_expedition)
-			return nullptr;
-		return m_expedition->seen_port_buildspaces.get();
+	const std::vector<Coords>& exp_port_spaces() {
+		return m_expedition->seen_port_buildspaces;
 	}
 
 	void exp_scouting_direction(Game &, WalkingDir);
@@ -249,12 +247,12 @@ private:
 	Economy * m_economy;
 	OPtr<PortDock> m_lastdock;
 	OPtr<PortDock> m_destination;
-	std::vector<ShippingItem> m_items;
+	std::vector<ShippingItem> items_;
 	uint8_t m_ship_state;
 	std::string m_shipname;
 
 	struct Expedition {
-		std::unique_ptr<std::list<Coords> > seen_port_buildspaces;
+		std::vector<Coords> seen_port_buildspaces;
 		bool swimable[LAST_DIRECTION];
 		bool island_exploration;
 		WalkingDir scouting_direction;

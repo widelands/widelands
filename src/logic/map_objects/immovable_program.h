@@ -65,10 +65,10 @@ struct ImmovableProgram {
 	struct ActAnimate : public Action {
 		ActAnimate(char * parameters, ImmovableDescr &);
 		void execute(Game &, Immovable &) const override;
-		uint32_t animation() const {return m_id;}
+		uint32_t animation() const {return id_;}
 	private:
-		uint32_t m_id;
-		Duration m_duration;
+		uint32_t id_;
+		Duration duration_;
 	};
 
 	/// Transforms the immovable into another immovable or into a bob
@@ -163,20 +163,20 @@ struct ImmovableProgram {
 		ActConstruction(char* parameters, ImmovableDescr&);
 		void execute(Game &, Immovable &) const override;
 
-		Duration buildtime() const {return m_buildtime;}
-		Duration decaytime() const {return m_decaytime;}
+		Duration buildtime() const {return buildtime_;}
+		Duration decaytime() const {return decaytime_;}
 
 	private:
-		uint32_t m_animid;
-		Duration m_buildtime;
-		Duration m_decaytime;
+		uint32_t animid_;
+		Duration buildtime_;
+		Duration decaytime_;
 	};
 
 	/// Create a program with a single action.
-	ImmovableProgram(char const * const _name, Action * const action)
-		: m_name(_name)
+	ImmovableProgram(char const * const init_name, Action * const action)
+		: name_(init_name)
 	{
-		m_actions.push_back(action);
+		actions_.push_back(action);
 	}
 
 	// Create an immovable program from a number of lines.
@@ -185,24 +185,24 @@ struct ImmovableProgram {
 	                 ImmovableDescr* immovable);
 
 	~ImmovableProgram() {
-		for (Action * action : m_actions) {
+		for (Action * action : actions_) {
 			delete action;
 		}
 	}
 
-	const std::string & name() const {return m_name;}
-	size_t size() const {return m_actions.size();}
+	const std::string & name() const {return name_;}
+	size_t size() const {return actions_.size();}
 	const Action & operator[](size_t const idx) const {
-		assert(idx < m_actions.size());
-		return *m_actions[idx];
+		assert(idx < actions_.size());
+		return *actions_[idx];
 	}
 
 	using Actions = std::vector<Action *>;
-	const Actions & actions() const {return m_actions;}
+	const Actions & actions() const {return actions_;}
 
 private:
-	std::string m_name;
-	Actions     m_actions;
+	std::string name_;
+	Actions     actions_;
 };
 
 struct ImmovableActionData {

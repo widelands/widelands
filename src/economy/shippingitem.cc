@@ -31,12 +31,12 @@
 namespace Widelands {
 
 ShippingItem::ShippingItem(WareInstance & ware) :
-	m_object(&ware)
+	object_(&ware)
 {
 }
 
 ShippingItem::ShippingItem(Worker & worker) :
-	m_object(&worker)
+	object_(&worker)
 {
 }
 
@@ -48,7 +48,7 @@ void ShippingItem::get(EditorGameBase& game, WareInstance** ware, Worker** worke
 		*worker = nullptr;
 	}
 
-	MapObject* obj = m_object.get(game);
+	MapObject* obj = object_.get(game);
 	if (!obj) {
 		return;
 	}
@@ -113,7 +113,7 @@ void ShippingItem::end_shipping(Game & game)
 
 PortDock * ShippingItem::get_destination(Game & game)
 {
-	return m_destination_dock.get(game);
+	return destination_dock_.get(game);
 }
 
 void ShippingItem::update_destination(Game & game, PortDock & pd)
@@ -134,7 +134,7 @@ void ShippingItem::update_destination(Game & game, PortDock & pd)
 		}
 	}
 
-	m_destination_dock = dynamic_cast<PortDock *>(next);
+	destination_dock_ = dynamic_cast<PortDock *>(next);
 }
 
 void ShippingItem::schedule_update(Game & game, int32_t delay)
@@ -156,9 +156,9 @@ void ShippingItem::schedule_update(Game & game, int32_t delay)
  */
 void ShippingItem::remove(EditorGameBase & egbase)
 {
-	if (MapObject * obj = m_object.get(egbase)) {
+	if (MapObject * obj = object_.get(egbase)) {
 		obj->remove(egbase);
-		m_object = nullptr;
+		object_ = nullptr;
 	}
 }
 
@@ -170,7 +170,7 @@ void ShippingItem::Loader::load(FileRead & fr)
 	try {
 		uint8_t packet_version = fr.unsigned_8();
 		if (packet_version == kCurrentPacketVersion) {
-			m_serial = fr.unsigned_32();
+			serial_ = fr.unsigned_32();
 		} else {
 			throw UnhandledVersionError("ShippingItem", packet_version, kCurrentPacketVersion);
 		}
@@ -182,15 +182,15 @@ void ShippingItem::Loader::load(FileRead & fr)
 ShippingItem ShippingItem::Loader::get(MapObjectLoader & mol)
 {
 	ShippingItem it;
-	if (m_serial != 0)
-		it.m_object = &mol.get<MapObject>(m_serial);
+	if (serial_ != 0)
+		it.object_ = &mol.get<MapObject>(serial_);
 	return it;
 }
 
 void ShippingItem::save(EditorGameBase & egbase, MapObjectSaver & mos, FileWrite & fw)
 {
 	fw.unsigned_8(kCurrentPacketVersion);
-	fw.unsigned_32(mos.get_object_file_index_or_zero(m_object.get(egbase)));
+	fw.unsigned_32(mos.get_object_file_index_or_zero(object_.get(egbase)));
 }
 
 } // namespace Widelands

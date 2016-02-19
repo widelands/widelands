@@ -54,15 +54,15 @@ public:
 
 	Building & create_object() const override;
 
-	uint32_t get_conquers() const override {return m_conquers;}
+	uint32_t get_conquers() const override {return conquers_;}
 
 	uint32_t get_heal_per_second        () const {
-		return m_heal_per_second;
+		return heal_per_second_;
 	}
 
 private:
-	int32_t m_conquers;
-	uint32_t m_heal_per_second;
+	int32_t conquers_;
+	uint32_t heal_per_second_;
 	DISALLOW_COPY_AND_ASSIGN(WarehouseDescr);
 };
 
@@ -122,7 +122,7 @@ public:
 	/// * Sets a next_spawn time for each buildable worker type without cost
 	///   that the owning player is allowed to create and schedules act for for
 	///   the spawn.
-	/// * Schedules act for military stuff (and sets m_next_military_act).
+	/// * Schedules act for military stuff (and sets next_military_act_).
 	/// * Sees the area (since a warehouse is considered to be always occupied).
 	/// * Conquers land if the the warehouse type is configured to do that.
 	/// * Sends a message to the player about the creation of this warehouse.
@@ -213,7 +213,7 @@ public:
 	void set_worker_policy(DescriptionIndex ware, StockPolicy policy);
 
 	// Get the portdock if this is a port.
-	PortDock * get_portdock() const {return m_portdock;}
+	PortDock * get_portdock() const {return portdock_;}
 
 	// Returns the waresqueue of the expedition if this is a port.
 	// Will throw an exception otherwise.
@@ -252,30 +252,30 @@ private:
 		(Game &, Request &, DescriptionIndex, Worker *, PlayerImmovable &);
 	void check_remove_stock(Game &);
 
-	bool _load_finish_planned_worker(PlannedWorkers & pw);
-	void _update_planned_workers(Game &, PlannedWorkers & pw);
-	void _update_all_planned_workers(Game &);
+	bool load_finish_planned_worker(PlannedWorkers & pw);
+	void update_planned_workers(Game &, PlannedWorkers & pw);
+	void update_all_planned_workers(Game &);
 
-	WarehouseSupply       * m_supply;
+	WarehouseSupply       * supply_;
 
-	std::vector<StockPolicy> m_ware_policy;
-	std::vector<StockPolicy> m_worker_policy;
+	std::vector<StockPolicy> ware_policy_;
+	std::vector<StockPolicy> worker_policy_;
 
 	// Workers who live here at the moment
 	using WorkerList = std::vector<Worker *>;
 	using IncorporatedWorkers = std::map<DescriptionIndex, WorkerList>;
-	IncorporatedWorkers        m_incorporated_workers;
-	std::vector<Time>          m_next_worker_without_cost_spawn;
-	Time                       m_next_military_act;
-	Time                       m_next_stock_remove_act;
+	IncorporatedWorkers        incorporated_workers_;
+	std::vector<Time>          next_worker_without_cost_spawn_;
+	Time                       next_military_act_;
+	Time                       next_stock_remove_act_;
 
-	std::vector<PlannedWorkers> m_planned_workers;
+	std::vector<PlannedWorkers> planned_workers_;
 
-	PortDock * m_portdock;
+	PortDock * portdock_;
 
 	//this is information for portdock,to know whether it should
 	//try to recreate itself
-	bool m_cleanup_in_progress;
+	bool cleanup_in_progress_;
 
 };
 

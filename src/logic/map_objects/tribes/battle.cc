@@ -45,22 +45,22 @@ const BattleDescr& Battle::descr() const {
 Battle::Battle ()
 	:
 	MapObject(&g_battle_descr),
-	m_first(nullptr),
-	m_second(nullptr),
-	m_creationtime(0),
-	m_readyflags(0),
-	m_damage(0),
-	m_first_strikes(true),
-	m_last_attack_hits(false)
+	first_(nullptr),
+	second_(nullptr),
+	creationtime_(0),
+	readyflags_(0),
+	damage_(0),
+	first_strikes_(true),
+	last_attack_hits_(false)
 {}
 
 Battle::Battle(Game & game, Soldier & First, Soldier & Second) :
 	MapObject     (&g_battle_descr),
-	m_first        (&First),
-	m_second       (&Second),
-	m_readyflags   (0),
-	m_damage       (0),
-	m_first_strikes(true)
+	first_        (&First),
+	second_       (&Second),
+	readyflags_   (0),
+	damage_       (0),
+	first_strikes_(true)
 {
 	assert(First.get_owner() != Second.get_owner());
 	{
@@ -81,30 +81,30 @@ void Battle::init (EditorGameBase & egbase)
 {
 	MapObject::init(egbase);
 
-	m_creationtime = egbase.get_gametime();
+	creationtime_ = egbase.get_gametime();
 
 	Game& game = dynamic_cast<Game&>(egbase);
 
-	if (Battle* battle = m_first ->get_battle()) {
-		battle->cancel(game, *m_first);
+	if (Battle* battle = first_ ->get_battle()) {
+		battle->cancel(game, *first_);
 	}
-	m_first->set_battle(game, this);
-	if (Battle* battle = m_second->get_battle()) {
-		battle->cancel(game, *m_second);
+	first_->set_battle(game, this);
+	if (Battle* battle = second_->get_battle()) {
+		battle->cancel(game, *second_);
 	}
-	m_second->set_battle(game, this);
+	second_->set_battle(game, this);
 }
 
 
 void Battle::cleanup (EditorGameBase & egbase)
 {
-	if (m_first) {
-		m_first ->set_battle(dynamic_cast<Game&>(egbase), nullptr);
-		m_first  = nullptr;
+	if (first_) {
+		first_ ->set_battle(dynamic_cast<Game&>(egbase), nullptr);
+		first_  = nullptr;
 	}
-	if (m_second) {
-		m_second->set_battle(dynamic_cast<Game&>(egbase), nullptr);
-		m_second = nullptr;
+	if (second_) {
+		second_->set_battle(dynamic_cast<Game&>(egbase), nullptr);
+		second_ = nullptr;
 	}
 
 	MapObject::cleanup(egbase);
@@ -116,11 +116,11 @@ void Battle::cleanup (EditorGameBase & egbase)
  */
 void Battle::cancel(Game & game, Soldier & soldier)
 {
-	if (&soldier == m_first)  {
-		m_first = nullptr;
+	if (&soldier == first_)  {
+		first_ = nullptr;
 		soldier.set_battle(game, nullptr);
-	} else if (&soldier == m_second) {
-		m_second = nullptr;
+	} else if (&soldier == second_) {
+		second_ = nullptr;
 		soldier.set_battle(game, nullptr);
 	} else
 		return;
@@ -131,17 +131,17 @@ void Battle::cancel(Game & game, Soldier & soldier)
 
 bool Battle::locked(Game & game)
 {
-	if (!m_first || !m_second)
+	if (!first_ || !second_)
 		return false;
-	if (game.get_gametime() - m_creationtime < 1000)
+	if (game.get_gametime() - creationtime_ < 1000)
 		return true; // don't change battles around willy-nilly
-	return m_first->get_position() == m_second->get_position();
+	return first_->get_position() == second_->get_position();
 }
 
 Soldier * Battle::opponent(Soldier& soldier)
 {
-	assert(m_first == &soldier || m_second == &soldier);
-	Soldier* other_soldier = m_first == &soldier ? m_second : m_first;
+	assert(first_ == &soldier || second_ == &soldier);
+	Soldier* other_soldier = first_ == &soldier ? second_ : first_;
 	return other_soldier;
 }
 
@@ -153,35 +153,35 @@ Soldier * Battle::opponent(Soldier& soldier)
 void Battle::get_battle_work(Game & game, Soldier & soldier)
 {
 	// Identify what soldier is calling the routine
-	uint8_t const this_soldier_is = &soldier == m_first ? 1 : 2;
+	uint8_t const this_soldier_is = &soldier == first_ ? 1 : 2;
 
-	assert(m_first->get_battle() == this || m_second->get_battle() == this);
+	assert(first_->get_battle() == this || second_->get_battle() == this);
 
 	//  Created this four 'states' of the battle:
 	// *First time entered, one enters :
-	//    oneReadyToFight, mark m_readyflags as he is ready to fight
+	//    oneReadyToFight, mark readyflags_ as he is ready to fight
 	// *Next time, the opponent enters:
-	//    bothReadyToFight, mark m_readyflags as 3 (round fighted)
+	//    bothReadyToFight, mark readyflags_ as 3 (round fighted)
 	// *Next time, the first enters again:
-	//    roundFought, reset m_readyflags
+	//    roundFought, reset readyflags_
 	// *Opponent not on field yet, so one enters :
 	//    waitingForOpponent, if others are false
 
-	bool const oneReadyToFight  = (m_readyflags == 0);
-	bool const roundFought      = (m_readyflags == 3);
-	bool const bothReadyToFight = ((this_soldier_is | m_readyflags) == 3) &&
+	bool const oneReadyToFight  = (readyflags_ == 0);
+	bool const roundFought      = (readyflags_ == 3);
+	bool const bothReadyToFight = ((this_soldier_is | readyflags_) == 3) &&
 		(!roundFought);
 	bool const waitingForOpponent = !(oneReadyToFight || roundFought || bothReadyToFight);
 	std::string what_anim;
 
 	// Apply pending damage
-	if (m_damage && oneReadyToFight) {
+	if (damage_ && oneReadyToFight) {
 		// Current attacker is last defender, so damage goes to current attacker
-		if (m_first_strikes)
-			m_first ->damage(m_damage);
+		if (first_strikes_)
+			first_ ->damage(damage_);
 		else
-			m_second->damage(m_damage);
-		m_damage = 0;
+			second_->damage(damage_);
+		damage_ = 0;
 	}
 
 	if (soldier.get_current_hitpoints() < 1) {
@@ -194,15 +194,15 @@ void Battle::get_battle_work(Game & game, Soldier & soldier)
 		return schedule_destroy(game);
 	}
 
-	if (!m_first || !m_second)
+	if (!first_ || !second_)
 		return soldier.skip_act();
 
 	// Here is a timeout to prevent battle freezes
-	if (waitingForOpponent && (game.get_gametime() - m_creationtime) > 90 * 1000) {
+	if (waitingForOpponent && (game.get_gametime() - creationtime_) > 90 * 1000) {
 		molog("[battle] soldier %u waiting for opponent %u too long (%5d sec), cancelling battle...\n",
 			soldier.serial(),
 			opponent(soldier)->serial(),
-			(game.get_gametime() - m_creationtime) / 1000);
+			(game.get_gametime() - creationtime_) / 1000);
 		cancel(game, soldier);
 		return;
 	}
@@ -220,9 +220,9 @@ void Battle::get_battle_work(Game & game, Soldier & soldier)
 	//
 	if (oneReadyToFight) {
 		//  My opponent is not ready to battle. Idle until he wakes me up.
-		assert(m_readyflags == 0);
-		m_readyflags = this_soldier_is;
-		assert(m_readyflags == this_soldier_is);
+		assert(readyflags_ == 0);
+		readyflags_ = this_soldier_is;
+		assert(readyflags_ == this_soldier_is);
 
 		what_anim = this_soldier_is == 1 ?
 			"evade_success_e" :
@@ -236,12 +236,12 @@ void Battle::get_battle_work(Game & game, Soldier & soldier)
 		// Time for one of us to hurt the other. Which one is on turn is decided
 		// by calculate_round.
 		assert
-			((m_readyflags == 1 && this_soldier_is == 2) ||
-			 (m_readyflags == 2 && this_soldier_is == 1));
+			((readyflags_ == 1 && this_soldier_is == 2) ||
+			 (readyflags_ == 2 && this_soldier_is == 1));
 
 		// Both are now ready, mark flags, so our opponent can get new animation
-		m_readyflags = 3;
-		assert(m_readyflags == 3);
+		readyflags_ = 3;
+		assert(readyflags_ == 3);
 
 		// Resolve combat turn
 		calculate_round(game);
@@ -253,23 +253,23 @@ void Battle::get_battle_work(Game & game, Soldier & soldier)
 	if (roundFought) {
 		//  Both of us were already ready. That means that we already fought and
 		//  it is time to wait until both become ready.
-		m_readyflags = 0;
+		readyflags_ = 0;
 	}
 
-	// The function calculate_round inverts value of m_first_strikes, so
-	// attacker will be the m_first when m_first_strikes = false and
-	// attacker will be m_second when m_first_strikes = true
+	// The function calculate_round inverts value of first_strikes_, so
+	// attacker will be the first_ when first_strikes_ = false and
+	// attacker will be second_ when first_strikes_ = true
 	molog
 		("[battle] (%u) vs (%u) is %d, first strikes %d, last hit %d\n",
 		 soldier.serial(),
 		 opponent(soldier)->serial(),
 		 this_soldier_is,
-		 m_first_strikes,
-		 m_last_attack_hits);
+		 first_strikes_,
+		 last_attack_hits_);
 
 	if (this_soldier_is == 1) {
-		if (m_first_strikes) {
-			if (m_last_attack_hits) {
+		if (first_strikes_) {
+			if (last_attack_hits_) {
 				what_anim = "evade_failure_e";
 			}
 			else {
@@ -277,7 +277,7 @@ void Battle::get_battle_work(Game & game, Soldier & soldier)
 			}
 		}
 		else {
-			if (m_last_attack_hits) {
+			if (last_attack_hits_) {
 				what_anim = "attack_success_e";
 			}
 			else {
@@ -285,8 +285,8 @@ void Battle::get_battle_work(Game & game, Soldier & soldier)
 			}
 		}
 	} else {
-		if (m_first_strikes) {
-			if (m_last_attack_hits) {
+		if (first_strikes_) {
+			if (last_attack_hits_) {
 				what_anim = "attack_success_w";
 			}
 			else {
@@ -294,7 +294,7 @@ void Battle::get_battle_work(Game & game, Soldier & soldier)
 			}
 		}
 		else {
-			if (m_last_attack_hits) {
+			if (last_attack_hits_) {
 				what_anim = "evade_failure_w";
 			}
 			else {
@@ -312,25 +312,25 @@ void Battle::get_battle_work(Game & game, Soldier & soldier)
 
 void Battle::calculate_round(Game & game)
 {
-	assert(!m_damage);
+	assert(!damage_);
 
 	Soldier * attacker;
 	Soldier * defender;
 
-	if (m_first_strikes) {
-		attacker = m_first;
-		defender = m_second;
+	if (first_strikes_) {
+		attacker = first_;
+		defender = second_;
 	} else {
-		attacker = m_second;
-		defender = m_first;
+		attacker = second_;
+		defender = first_;
 	}
 
-	m_first_strikes = !m_first_strikes;
+	first_strikes_ = !first_strikes_;
 
 	uint32_t const hit = game.logic_rand() % 100;
 	if (hit > defender->get_evade()) {
 		// Attacker hits!
-		m_last_attack_hits = true;
+		last_attack_hits_ = true;
 
 		assert(attacker->get_min_attack() <= attacker->get_max_attack());
 		uint32_t const attack =
@@ -338,11 +338,11 @@ void Battle::calculate_round(Game & game)
 			(game.logic_rand()
 			 %
 			 (1 + attacker->get_max_attack() - attacker->get_min_attack()));
-		m_damage = attack - (attack * defender->get_defense()) / 100;
+		damage_ = attack - (attack * defender->get_defense()) / 100;
 	}
 	else {
 		// Defender evaded
-		m_last_attack_hits = false;
+		last_attack_hits_ = false;
 	}
 }
 
@@ -363,12 +363,12 @@ void Battle::Loader::load(FileRead & fr)
 
 	Battle & battle = get<Battle>();
 
-	battle.m_creationtime  = fr.signed_32();
-	battle.m_readyflags    = fr.unsigned_8();
-	battle.m_first_strikes = fr.unsigned_8();
-	battle.m_damage     = fr.unsigned_32();
-	m_first                = fr.unsigned_32();
-	m_second               = fr.unsigned_32();
+	battle.creationtime_  = fr.signed_32();
+	battle.readyflags_    = fr.unsigned_8();
+	battle.first_strikes_ = fr.unsigned_8();
+	battle.damage_     = fr.unsigned_32();
+	first_                = fr.unsigned_32();
+	second_               = fr.unsigned_32();
 }
 
 void Battle::Loader::load_pointers()
@@ -376,17 +376,17 @@ void Battle::Loader::load_pointers()
 	Battle & battle = get<Battle>();
 	try {
 		MapObject::Loader::load_pointers();
-		if (m_first)
+		if (first_)
 			try {
-				battle.m_first = &mol().get<Soldier>(m_first);
+				battle.first_ = &mol().get<Soldier>(first_);
 			} catch (const WException & e) {
-				throw wexception("soldier 1 (%u): %s", m_first, e.what());
+				throw wexception("soldier 1 (%u): %s", first_, e.what());
 			}
-		if (m_second)
+		if (second_)
 			try {
-				battle.m_second = &mol().get<Soldier>(m_second);
+				battle.second_ = &mol().get<Soldier>(second_);
 			} catch (const WException & e) {
-				throw wexception("soldier 2 (%u): %s", m_second, e.what());
+				throw wexception("soldier 2 (%u): %s", second_, e.what());
 			}
 	} catch (const WException & e) {
 		throw wexception("battle: %s", e.what());
@@ -401,14 +401,14 @@ void Battle::save
 
 	MapObject::save(egbase, mos, fw);
 
-	fw.signed_32(m_creationtime);
-	fw.unsigned_8(m_readyflags);
-	fw.unsigned_8(m_first_strikes);
-	fw.unsigned_32(m_damage);
+	fw.signed_32(creationtime_);
+	fw.unsigned_8(readyflags_);
+	fw.unsigned_8(first_strikes_);
+	fw.unsigned_32(damage_);
 
 	// And now, the serials of the soldiers !
-	fw.unsigned_32(m_first  ? mos.get_object_file_index(*m_first)  : 0);
-	fw.unsigned_32(m_second ? mos.get_object_file_index(*m_second) : 0);
+	fw.unsigned_32(first_  ? mos.get_object_file_index(*first_)  : 0);
+	fw.unsigned_32(second_ ? mos.get_object_file_index(*second_) : 0);
 }
 
 

@@ -55,20 +55,20 @@ namespace Widelands {
 static const int32_t BUILDING_LEAVE_INTERVAL = 1000;
 
 BuildingDescr::BuildingDescr
-	(const std::string& init_descname, const MapObjectType _type,
+	(const std::string& init_descname, const MapObjectType init_type,
 	 const LuaTable& table, const EditorGameBase& egbase)
 	:
-	MapObjectDescr(_type, table.get_string("name"), init_descname, table),
+	MapObjectDescr(init_type, table.get_string("name"), init_descname, table),
 	egbase_         (egbase),
-	m_buildable     (false),
-	m_size          (BaseImmovable::SMALL),
-	m_mine          (false),
-	m_port          (false),
-	m_enhancement   (INVALID_INDEX),
-	m_enhanced_from (INVALID_INDEX),
-	m_enhanced_building(false),
-	m_hints         (table.get_table("aihints")),
-	m_vision_range  (0)
+	buildable_     (false),
+	size_          (BaseImmovable::SMALL),
+	mine_          (false),
+	port_          (false),
+	enhancement_   (INVALID_INDEX),
+	enhanced_from_ (INVALID_INDEX),
+	enhanced_building_(false),
+	hints_         (table.get_table("aihints")),
+	vision_range_  (0)
 {
 	if (!is_animation_known("idle")) {
 		throw GameDataError("Building %s has no idle animation", table.get_string("name").c_str());
@@ -80,21 +80,21 @@ BuildingDescr::BuildingDescr
 	i18n::Textdomain td("tribes");
 
 	// Partially finished buildings get their sizes from their associated building
-	if (_type != MapObjectType::CONSTRUCTIONSITE && _type != MapObjectType::DISMANTLESITE) {
+	if (type() != MapObjectType::CONSTRUCTIONSITE && type() != MapObjectType::DISMANTLESITE) {
 		try {
 			const std::string size = table.get_string("size");
 			if (boost::iequals(size, "small")) {
-				m_size = BaseImmovable::SMALL;
+				size_ = BaseImmovable::SMALL;
 			} else if (boost::iequals(size, "medium")) {
-				m_size = BaseImmovable::MEDIUM;
+				size_ = BaseImmovable::MEDIUM;
 			} else if (boost::iequals(size, "big")) {
-				m_size = BaseImmovable::BIG;
+				size_ = BaseImmovable::BIG;
 			} else if (boost::iequals(size, "mine")) {
-				m_size = BaseImmovable::SMALL;
-				m_mine = true;
+				size_ = BaseImmovable::SMALL;
+				mine_ = true;
 			} else if (boost::iequals(size, "port")) {
-				m_size = BaseImmovable::BIG;
-				m_port = true;
+				size_ = BaseImmovable::BIG;
+				port_ = true;
 			} else {
 				throw GameDataError
 					("expected %s but found \"%s\"",
@@ -106,7 +106,7 @@ BuildingDescr::BuildingDescr
 	}
 
 	// Parse build options
-	m_destructible = table.has_key("destructible") ? table.get_bool("destructible") : true;
+	destructible_ = table.has_key("destructible") ? table.get_bool("destructible") : true;
 
 	if (table.has_key("enhancement")) {
 		const std::string enh = table.get_string("enhancement");
@@ -116,14 +116,14 @@ BuildingDescr::BuildingDescr
 		}
 		DescriptionIndex const en_i = egbase_.tribes().building_index(enh);
 		if (egbase_.tribes().building_exists(en_i)) {
-			m_enhancement = en_i;
+			enhancement_ = en_i;
 
 			//  Merge the enhancements workarea info into this building's
 			//  workarea info.
 			const BuildingDescr * tmp_enhancement = egbase_.tribes().get_building_descr(en_i);
-			for (std::pair<uint32_t, std::set<std::string>> area : tmp_enhancement->m_workarea_info)
+			for (std::pair<uint32_t, std::set<std::string>> area : tmp_enhancement->workarea_info_)
 			{
-				std::set<std::string> & strs = m_workarea_info[area.first];
+				std::set<std::string> & strs = workarea_info_[area.first];
 				for (std::string str : area.second)
 					strs.insert(str);
 			}
@@ -135,10 +135,10 @@ BuildingDescr::BuildingDescr
 	}
 
 	if (table.has_key("buildcost")) {
-		m_buildable = true;
+		buildable_ = true;
 		try {
-			m_buildcost = Buildcost(table.get_table("buildcost"), egbase_.tribes());
-			m_return_dismantle = Buildcost(table.get_table("return_on_dismantle"), egbase_.tribes());
+			buildcost_ = Buildcost(table.get_table("buildcost"), egbase_.tribes());
+			return_dismantle_ = Buildcost(table.get_table("return_on_dismantle"), egbase_.tribes());
 		} catch (const WException & e) {
 			throw wexception
 					("A buildable building must define \"buildcost\" and \"return_on_dismantle\": %s",
@@ -146,10 +146,10 @@ BuildingDescr::BuildingDescr
 		}
 	}
 	if (table.has_key("enhancement_cost")) {
-		m_enhanced_building = true;
+		enhanced_building_ = true;
 		try {
-			m_enhance_cost = Buildcost(table.get_table("enhancement_cost"), egbase_.tribes());
-			m_return_enhanced = Buildcost(table.get_table("return_on_dismantle_on_enhanced"), egbase_.tribes());
+			enhance_cost_ = Buildcost(table.get_table("enhancement_cost"), egbase_.tribes());
+			return_enhanced_ = Buildcost(table.get_table("return_on_dismantle_on_enhanced"), egbase_.tribes());
 		} catch (const WException & e) {
 			throw wexception
 					("An enhanced building must define \"enhancement_cost\""
@@ -159,10 +159,10 @@ BuildingDescr::BuildingDescr
 
 	helptext_script_ = table.get_string("helptext_script");
 
-	m_needs_seafaring = table.has_key("needs_seafaring") ? table.get_bool("needs_seafaring") : false;
+	needs_seafaring_ = table.has_key("needs_seafaring") ? table.get_bool("needs_seafaring") : false;
 
 	if (table.has_key("vision_range")) {
-		m_vision_range = table.get_int("vision_range");
+		vision_range_ = table.get_int("vision_range");
 	}
 }
 
@@ -177,10 +177,10 @@ Building & BuildingDescr::create
 	const
 {
 	Building & b = construct ? create_constructionsite() : create_object();
-	b.m_position = pos;
+	b.position_ = pos;
 	b.set_owner(&owner);
 	for (DescriptionIndex idx : former_buildings) {
-		b.m_old_buildings.push_back(idx);
+		b.old_buildings_.push_back(idx);
 	}
 	if (loading) {
 		b.Building::init(egbase);
@@ -192,7 +192,7 @@ Building & BuildingDescr::create
 
 
 int32_t BuildingDescr::suitability(const Map &, FCoords const fc) const {
-	return m_size <= (fc.field->nodecaps() & Widelands::BUILDCAPS_SIZEMASK);
+	return size_ <= (fc.field->nodecaps() & Widelands::BUILDCAPS_SIZEMASK);
 }
 
 /**
@@ -212,7 +212,7 @@ uint32_t BuildingDescr::get_conquers() const
  */
 uint32_t BuildingDescr::vision_range() const
 {
-	return m_vision_range ? m_vision_range : get_conquers() + 4;
+	return vision_range_ ? vision_range_ : get_conquers() + 4;
 }
 
 
@@ -244,18 +244,18 @@ Implementation
 
 Building::Building(const BuildingDescr & building_descr) :
 	PlayerImmovable(building_descr),
-	m_optionswindow(nullptr),
-	m_flag         (nullptr),
-	m_anim(0),
-	m_animstart(0),
-	m_leave_time(0),
-	m_defeating_player(0),
-	m_seeing(false)
+	optionswindow_(nullptr),
+	flag_         (nullptr),
+	anim_(0),
+	animstart_(0),
+	leave_time_(0),
+	defeating_player_(0),
+	seeing_(false)
 {}
 
 Building::~Building()
 {
-	if (m_optionswindow)
+	if (optionswindow_)
 		hide_options();
 }
 
@@ -294,9 +294,9 @@ void Building::load_finish(EditorGameBase & egbase) {
 		return false;
 	};
 
-	m_leave_queue.erase(
-	   std::remove_if(m_leave_queue.begin(), m_leave_queue.end(), should_be_deleted),
-	   m_leave_queue.end());
+	leave_queue_.erase(
+	   std::remove_if(leave_queue_.begin(), leave_queue_.end(), should_be_deleted),
+	   leave_queue_.end());
 }
 
 int32_t Building::get_size() const {return descr().get_size();}
@@ -305,7 +305,7 @@ bool Building::get_passable() const {return false;}
 
 Flag & Building::base_flag()
 {
-	return *m_flag;
+	return *flag_;
 }
 
 
@@ -331,8 +331,8 @@ uint32_t Building::get_playercaps() const {
 
 void Building::start_animation(EditorGameBase & egbase, uint32_t const anim)
 {
-	m_anim = anim;
-	m_animstart = egbase.get_gametime();
+	anim_ = anim;
+	animstart_ = egbase.get_gametime();
 }
 
 /*
@@ -349,29 +349,29 @@ void Building::init(EditorGameBase & egbase)
 	Map & map = egbase.map();
 	Coords neighb;
 
-	set_position(egbase, m_position);
+	set_position(egbase, position_);
 
 	if (get_size() == BIG) {
-		map.get_ln(m_position, &neighb);
+		map.get_ln(position_, &neighb);
 		set_position(egbase, neighb);
 
-		map.get_tln(m_position, &neighb);
+		map.get_tln(position_, &neighb);
 		set_position(egbase, neighb);
 
-		map.get_trn(m_position, &neighb);
+		map.get_trn(position_, &neighb);
 		set_position(egbase, neighb);
 	}
 
 	// Make sure the flag is there
 
 
-	map.get_brn(m_position, &neighb);
+	map.get_brn(position_, &neighb);
 	{
 		Flag * flag = dynamic_cast<Flag *>(map.get_immovable(neighb));
 		if (!flag)
 			flag =
 				new Flag (egbase, owner(), neighb);
-		m_flag = flag;
+		flag_ = flag;
 		flag->attach_building(egbase, *this);
 	}
 
@@ -381,14 +381,14 @@ void Building::init(EditorGameBase & egbase)
 	else
 		start_animation(egbase, descr().get_animation("idle"));
 
-	m_leave_time = egbase.get_gametime();
+	leave_time_ = egbase.get_gametime();
 }
 
 
 void Building::cleanup(EditorGameBase & egbase)
 {
-	if (m_defeating_player) {
-		Player & defeating_player = egbase.player(m_defeating_player);
+	if (defeating_player_) {
+		Player & defeating_player = egbase.player(defeating_player_);
 		if (descr().get_conquers()) {
 			owner()         .count_msite_lost        ();
 			defeating_player.count_msite_defeated    ();
@@ -399,22 +399,22 @@ void Building::cleanup(EditorGameBase & egbase)
 	}
 
 	// Remove from flag
-	m_flag->detach_building(egbase);
+	flag_->detach_building(egbase);
 
 	// Unset the building
-	unset_position(egbase, m_position);
+	unset_position(egbase, position_);
 
 	if (get_size() == BIG) {
 		Map & map = egbase.map();
 		Coords neighb;
 
-		map.get_ln(m_position, &neighb);
+		map.get_ln(position_, &neighb);
 		unset_position(egbase, neighb);
 
-		map.get_tln(m_position, &neighb);
+		map.get_tln(position_, &neighb);
 		unset_position(egbase, neighb);
 
-		map.get_trn(m_position, &neighb);
+		map.get_trn(position_, &neighb);
 		unset_position(egbase, neighb);
 	}
 
@@ -447,18 +447,18 @@ BaseImmovable::PositionList Building::get_positions
 {
 	PositionList rv;
 
-	rv.push_back(m_position);
+	rv.push_back(position_);
 	if (get_size() == BIG) {
 		Map & map = egbase.map();
 		Coords neighb;
 
-		map.get_ln(m_position, &neighb);
+		map.get_ln(position_, &neighb);
 		rv.push_back(neighb);
 
-		map.get_tln(m_position, &neighb);
+		map.get_tln(position_, &neighb);
 		rv.push_back(neighb);
 
-		map.get_trn(m_position, &neighb);
+		map.get_trn(position_, &neighb);
 		rv.push_back(neighb);
 	}
 	return rv;
@@ -474,7 +474,7 @@ applicable.
 void Building::destroy(EditorGameBase & egbase)
 {
 	const bool fire           = burn_on_destroy();
-	const Coords pos          = m_position;
+	const Coords pos          = position_;
 	PlayerImmovable::destroy(egbase);
 	// We are deleted. Only use stack variables beyond this point
 	if (fire)
@@ -541,24 +541,24 @@ bool Building::get_building_work(Game &, Worker & worker, bool)
  */
 bool Building::leave_check_and_wait(Game & game, Worker & w)
 {
-	if (&w == m_leave_allow.get(game)) {
-		m_leave_allow = nullptr;
+	if (&w == leave_allow_.get(game)) {
+		leave_allow_ = nullptr;
 		return true;
 	}
 
 	// Check time and queue
 	uint32_t const time = game.get_gametime();
 
-	if (m_leave_queue.empty()) {
-		if (m_leave_time <= time) {
-			m_leave_time = time + BUILDING_LEAVE_INTERVAL;
+	if (leave_queue_.empty()) {
+		if (leave_time_ <= time) {
+			leave_time_ = time + BUILDING_LEAVE_INTERVAL;
 			return true;
 		}
 
-		schedule_act(game, m_leave_time - time);
+		schedule_act(game, leave_time_ - time);
 	}
 
-	m_leave_queue.push_back(&w);
+	leave_queue_.push_back(&w);
 	return false;
 }
 
@@ -574,10 +574,10 @@ bool Building::leave_check_and_wait(Game & game, Worker & w)
 void Building::leave_skip(Game &, Worker & w)
 {
 	LeaveQueue::iterator const it =
-		std::find(m_leave_queue.begin(), m_leave_queue.end(), &w);
+		std::find(leave_queue_.begin(), leave_queue_.end(), &w);
 
-	if (it != m_leave_queue.end())
-		m_leave_queue.erase(it);
+	if (it != leave_queue_.end())
+		leave_queue_.erase(it);
 }
 
 
@@ -590,31 +590,31 @@ void Building::act(Game & game, uint32_t const data)
 {
 	uint32_t const time = game.get_gametime();
 
-	if (m_leave_time <= time) {
+	if (leave_time_ <= time) {
 		bool wakeup = false;
 
 		// Wake up one worker
-		while (!m_leave_queue.empty()) {
-			upcast(Worker, worker, m_leave_queue[0].get(game));
+		while (!leave_queue_.empty()) {
+			upcast(Worker, worker, leave_queue_[0].get(game));
 
-			m_leave_queue.erase(m_leave_queue.begin());
+			leave_queue_.erase(leave_queue_.begin());
 
 			if (worker) {
-				m_leave_allow = worker;
+				leave_allow_ = worker;
 
 				if (worker->wakeup_leave_building(game, *this)) {
-					m_leave_time = time + BUILDING_LEAVE_INTERVAL;
+					leave_time_ = time + BUILDING_LEAVE_INTERVAL;
 					wakeup = true;
 					break;
 				}
 			}
 		}
 
-		if (!m_leave_queue.empty())
-			schedule_act(game, m_leave_time - time);
+		if (!leave_queue_.empty())
+			schedule_act(game, leave_time_ - time);
 
 		if (!wakeup)
-			m_leave_time = time; // make sure leave_time doesn't get too far behind
+			leave_time_ = time; // make sure leave_time doesn't get too far behind
 	}
 
 	PlayerImmovable::act(game, data);
@@ -647,9 +647,9 @@ Draw the building.
 void Building::draw
 	(const EditorGameBase& game, RenderTarget& dst, const FCoords& coords, const Point& pos)
 {
-	if (coords == m_position) { // draw big buildings only once
+	if (coords == position_) { // draw big buildings only once
 		dst.blit_animation(
-		   pos, m_anim, game.get_gametime() - m_animstart, get_owner()->get_playercolor());
+			pos, anim_, game.get_gametime() - animstart_, get_owner()->get_playercolor());
 
 		//  door animation?
 
@@ -699,8 +699,8 @@ int32_t Building::get_priority
 		// if priority is defined for specific ware,
 		// combine base priority and ware priority
 		std::map<DescriptionIndex, int32_t>::const_iterator it =
-			m_ware_priorities.find(ware_index);
-		if (it != m_ware_priorities.end())
+			ware_priorities_.find(ware_index);
+		if (it != ware_priorities_.end())
 			priority = adjust
 				? (priority * it->second / DEFAULT_PRIORITY)
 				: it->second;
@@ -716,11 +716,11 @@ int32_t Building::get_priority
 void Building::collect_priorities
 	(std::map<int32_t, std::map<DescriptionIndex, int32_t> > & p) const
 {
-	if (m_ware_priorities.empty())
+	if (ware_priorities_.empty())
 		return;
 	std::map<DescriptionIndex, int32_t> & ware_priorities = p[wwWARE];
 	std::map<DescriptionIndex, int32_t>::const_iterator it;
-	for (it = m_ware_priorities.begin(); it != m_ware_priorities.end(); ++it) {
+	for (it = ware_priorities_.begin(); it != ware_priorities_.end(); ++it) {
 		if (it->second == DEFAULT_PRIORITY)
 			continue;
 		ware_priorities[it->first] = it->second;
@@ -736,7 +736,7 @@ void Building::set_priority
 	 int32_t    const new_priority)
 {
 	if (type == wwWARE) {
-		m_ware_priorities[ware_index] = new_priority;
+		ware_priorities_[ware_index] = new_priority;
 	}
 }
 
@@ -744,21 +744,21 @@ void Building::set_priority
 void Building::log_general_info(const EditorGameBase & egbase) {
 	PlayerImmovable::log_general_info(egbase);
 
-	molog("m_position: (%i, %i)\n", m_position.x, m_position.y);
-	molog("m_flag: %p\n", m_flag);
+	molog("position: (%i, %i)\n", position_.x, position_.y);
+	molog("flag: %p\n", flag_);
 	molog
 		("* position: (%i, %i)\n",
-		 m_flag->get_position().x, m_flag->get_position().y);
+		 flag_->get_position().x, flag_->get_position().y);
 
-	molog("m_anim: %s\n", descr().get_animation_name(m_anim).c_str());
-	molog("m_animstart: %i\n", m_animstart);
+	molog("anim: %s\n", descr().get_animation_name(anim_).c_str());
+	molog("animstart: %i\n", animstart_);
 
-	molog("m_leave_time: %i\n", m_leave_time);
+	molog("leave_time: %i\n", leave_time_);
 
 	molog
-		("m_leave_queue.size(): %lu\n",
-		 static_cast<long unsigned int>(m_leave_queue.size()));
-	molog("m_leave_allow.get(): %p\n", m_leave_allow.get(egbase));
+		("leave_queue.size(): %lu\n",
+		 static_cast<long unsigned int>(leave_queue_.size()));
+	molog("leave_allow.get(): %p\n", leave_allow_.get(egbase));
 }
 
 
@@ -788,7 +788,7 @@ void Building::remove_worker(Worker & worker) {
  */
 void Building::set_seeing(bool see)
 {
-	if (see == m_seeing)
+	if (see == seeing_)
 		return;
 
 	Player & player = owner();
@@ -801,7 +801,7 @@ void Building::set_seeing(bool see)
 		player.unsee_area
 			(Area<FCoords>(map.get_fcoords(get_position()), descr().vision_range()));
 
-	m_seeing = see;
+	seeing_ = see;
 }
 
 /**
@@ -854,7 +854,7 @@ void Building::send_message
 
 	Message * msg = new Message
 		(msgtype, game.get_gametime(), title, icon_filename, heading, rt_description,
-		 get_position(), (link_to_building_lifetime ? m_serial : 0));
+		 get_position(), (link_to_building_lifetime ? serial_ : 0));
 
 	if (throttle_time)
 		owner().add_message_with_timeout

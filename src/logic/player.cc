@@ -535,19 +535,25 @@ Building& Player::force_csite
 	(Coords const location, DescriptionIndex b_idx,
 	 const BuildingDescr::FormerBuildings & former_buildings)
 {
-	Map & map = egbase().map();
+	EditorGameBase& eg = egbase();
+	Map & map = eg.map();
+	const Tribes& tribes = eg.tribes();
+	const PlayerNumber pn = player_number();
+
 	if (!former_buildings.empty()) {
 		DescriptionIndex idx = former_buildings.back();
-		const BuildingDescr * descr = egbase().tribes().get_building_descr(idx);
-		terraform_for_building(egbase(), player_number(), location, descr);
+		const BuildingDescr * descr = tribes.get_building_descr(idx);
+		terraform_for_building(eg, pn, location, descr);
 	}
 	FCoords flag_loc;
 	map.get_brn(map.get_fcoords(location), &flag_loc);
 	force_flag(flag_loc);
 
-	return
-		egbase().warp_constructionsite
-			(map.get_fcoords(location), m_plnum, b_idx, false, former_buildings);
+	terraform_for_building(
+	   eg, pn, location, tribes.get_building_descr(b_idx));
+
+	return eg.warp_constructionsite(
+	   map.get_fcoords(location), m_plnum, b_idx, false, former_buildings);
 }
 
 
@@ -603,23 +609,23 @@ Building * Player::build
 Bulldoze the given road, flag or building.
 ===============
 */
-void Player::bulldoze(PlayerImmovable & _imm, bool const recurse)
+void Player::bulldoze(PlayerImmovable & imm, bool const recurse)
 {
 	std::vector<OPtr<PlayerImmovable> > bulldozelist;
-	bulldozelist.push_back(&_imm);
+	bulldozelist.push_back(&imm);
 
 	while (!bulldozelist.empty()) {
-		PlayerImmovable * imm = bulldozelist.back().get(egbase());
+		PlayerImmovable * immovable = bulldozelist.back().get(egbase());
 		bulldozelist.pop_back();
-		if (!imm)
+		if (!immovable)
 			continue;
 
 		// General security check
-		if (imm->get_owner() != this)
+		if (immovable->get_owner() != this)
 			return;
 
 		// Destroy, after extended security check
-		if (upcast(Building, building, imm)) {
+		if (upcast(Building, building, immovable)) {
 			if (!(building->get_playercaps() & Building::PCap_Bulldoze))
 				return;
 
@@ -629,7 +635,7 @@ void Player::bulldoze(PlayerImmovable & _imm, bool const recurse)
 
 			if (recurse && flag.is_dead_end())
 				bulldozelist.push_back(&flag);
-		} else if (upcast(Flag, flag, imm)) {
+		} else if (upcast(Flag, flag, immovable)) {
 			if (Building * const flagbuilding = flag->get_building())
 				if (!(flagbuilding->get_playercaps() & Building::PCap_Bulldoze)) {
 					log
@@ -671,7 +677,7 @@ void Player::bulldoze(PlayerImmovable & _imm, bool const recurse)
 			// Recursive bulldoze calls may cause flag to disappear
 			if (flagcopy.get(egbase()))
 				flag->destroy(egbase());
-		} else if (upcast(Road, road, imm)) {
+		} else if (upcast(Road, road, immovable)) {
 			Flag & start = road->get_flag(Road::FlagStart);
 			Flag & end = road->get_flag(Road::FlagEnd);
 
@@ -694,7 +700,7 @@ void Player::bulldoze(PlayerImmovable & _imm, bool const recurse)
 			}
 		} else
 			throw wexception
-				("Player::bulldoze(%u): bad immovable type", imm->serial());
+				("Player::bulldoze(%u): bad immovable type", immovable->serial());
 	}
 }
 
@@ -731,7 +737,7 @@ void Player::military_site_set_soldier_preference(PlayerImmovable & imm, uint8_t
 void Player::enhance_building
 	(Building * building, DescriptionIndex const index_of_new_building)
 {
-	_enhance_or_dismantle(building, index_of_new_building);
+	enhance_or_dismantle(building, index_of_new_building);
 }
 
 /*
@@ -739,9 +745,9 @@ void Player::enhance_building
  * apart.
  */
 void Player::dismantle_building(Building * building) {
-	_enhance_or_dismantle(building, INVALID_INDEX);
+	enhance_or_dismantle(building, INVALID_INDEX);
 }
-void Player::_enhance_or_dismantle
+void Player::enhance_or_dismantle
 	(Building * building, DescriptionIndex const index_of_new_building)
 {
 	if (&building->owner() ==
@@ -1253,9 +1259,9 @@ const Player::BuildingStatsVector& Player::get_building_statistics(const Descrip
 
 Player::BuildingStatsVector* Player::get_mutable_building_statistics(const DescriptionIndex& i) {
 	DescriptionIndex const nr_buildings = egbase().tribes().nrbuildings();
-	if (m_building_stats.size() < nr_buildings)
-		m_building_stats.resize(nr_buildings);
-	return &m_building_stats[i];
+	if (building_stats_.size() < nr_buildings)
+		building_stats_.resize(nr_buildings);
+	return &building_stats_[i];
 }
 
 /**
@@ -1273,8 +1279,8 @@ void Player::update_building_statistics
 	const size_t nr_buildings = egbase().tribes().nrbuildings();
 
 	// Get the valid vector for this
-	if (m_building_stats.size() < nr_buildings)
-		m_building_stats.resize(nr_buildings);
+	if (building_stats_.size() < nr_buildings)
+		building_stats_.resize(nr_buildings);
 
 	std::vector<BuildingStats>& stat =
 		*get_mutable_building_statistics(egbase().tribes().building_index(building_name.c_str()));

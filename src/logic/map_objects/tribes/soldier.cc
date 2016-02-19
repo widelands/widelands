@@ -994,13 +994,13 @@ void Soldier::attack_pop(Game & game, State &)
 /**
  * Accept Bob when is a Soldier alive that is attacking the Player.
  *
- * \param _game
- * \param _player
+ * \param g
+ * \param p
  */
 struct FindBobSoldierAttackingPlayer : public FindBob {
-	FindBobSoldierAttackingPlayer(Game & _game, Player & _player) :
-		player(_player),
-		game(_game) {}
+	FindBobSoldierAttackingPlayer(Game& g, Player& p) :
+		player(p),
+		game(g) {}
 
 	bool accept(Bob * const bob) const override
 	{
@@ -1503,7 +1503,7 @@ void Soldier::battle_update(Game & game, State &)
 							 _("Logic error"),
 							 messagetext,
 						 	 get_position(),
-							 m_serial));
+							 serial_));
 					opponent.owner().add_message
 						(game,
 						 *new Message
@@ -1514,7 +1514,7 @@ void Soldier::battle_update(Game & game, State &)
 							 _("Logic error"),
 							 messagetext,
 						 	 opponent.get_position(),
-							 m_serial));
+							 serial_));
 					game.game_controller()->set_desired_speed(0);
 					return pop_task(game);
 				}

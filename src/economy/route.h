@@ -46,8 +46,8 @@ struct Route : public IRoute {
 
 	void init(int32_t) override;
 
-	int32_t get_totalcost() const {return m_totalcost;}
-	int32_t get_nrsteps() const {return m_route.size() - 1;}
+	int32_t get_totalcost() const {return totalcost_;}
+	int32_t get_nrsteps() const {return route_.size() - 1;}
 	Flag & get_flag(EditorGameBase &, std::vector<Flag *>::size_type);
 
 	void trim_start(int32_t count);
@@ -64,8 +64,8 @@ struct Route : public IRoute {
 	void insert_as_first(RoutingNode * node) override;
 
 private:
-	int32_t                     m_totalcost;
-	std::vector<OPtr<Flag> > m_route; ///< includes start and end flags
+	int32_t                     totalcost_;
+	std::vector<OPtr<Flag> > route_; ///< includes start and end flags
 };
 
 }

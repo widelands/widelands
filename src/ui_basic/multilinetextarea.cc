@@ -40,12 +40,12 @@ MultilineTextarea::MultilineTextarea
 	:
 	Panel       (parent, x, y, w, h),
 	text_      (text),
-	style_(UI::TextStyle::ui_small()),
+	color_(UI_FONT_CLR_FG),
 	isrichtext(false),
 	scrollbar_ (this, get_w() - scrollbar_w(), 0, scrollbar_w(), h, false),
 	scrollmode_(scroll_mode)
 {
-	assert(scrollbar_w() <= w);
+	assert(scrollmode_ == MultilineTextarea::ScrollMode::kNoScrolling || scrollbar_w() <= w);
 	set_thinks(false);
 
 	//  do not allow vertical alignment as it does not make sense
@@ -86,10 +86,7 @@ void MultilineTextarea::recompute()
 	for (int i = 0; i < 2; ++i) {
 		if (text_.compare(0, 3, "<rt")) {
 			isrichtext = false;
-			std::string text_to_render = richtext_escape(text_);
-			boost::replace_all(text_to_render, "\n", "<br>");
-			const Image* text_im = UI::g_fh1->render(as_uifont(text_to_render, style_.font->size(), style_.fg),
-																  get_eff_w() - 2 * RICHTEXT_MARGIN);
+			const Image* text_im = UI::g_fh1->render(make_richtext(), get_eff_w() - 2 * RICHTEXT_MARGIN);
 			height = text_im->height();
 		} else {
 			isrichtext = true;
@@ -145,11 +142,7 @@ void MultilineTextarea::draw(RenderTarget& dst)
 	if (isrichtext) {
 		rt.draw(dst, Point(RICHTEXT_MARGIN, RICHTEXT_MARGIN - scrollbar_.get_scrollpos()));
 	} else {
-		std::string text_to_render = richtext_escape(text_);
-		boost::replace_all(text_to_render, "\n", "<br>");
-		const Image* text_im =
-				UI::g_fh1->render(as_aligned(text_to_render, align_, style_.font->size(), style_.fg),
-										get_eff_w() - 2 * RICHTEXT_MARGIN);
+		const Image* text_im = UI::g_fh1->render(make_richtext(), get_eff_w() - 2 * RICHTEXT_MARGIN);
 
 		uint32_t blit_width = std::min(text_im->width(), static_cast<int>(get_eff_w()));
 		uint32_t blit_height = std::min(text_im->height(), static_cast<int>(get_inner_h()));
@@ -186,6 +179,19 @@ bool MultilineTextarea::handle_mousewheel(uint32_t which, int32_t x, int32_t y) 
 
 void MultilineTextarea::scroll_to_top() {
 	scrollbar_.set_scrollpos(0);
+}
+
+std::string MultilineTextarea::make_richtext() {
+	std::string temp = richtext_escape(text_);
+	// Double paragraphs should generate an empty line.
+	// We do this here rather than in the font renderer, because a single \n
+	// should only create a new line without any added space.
+	// \n\n or \n\n\n will give us 1 blank line,
+	// \n\n\n or \n\n\n\” will give us 2 blank lines etc.
+	// TODO(GunChleoc): Revisit this once the old font renderer is completely gone.
+	boost::replace_all(temp, "\n\n", "<br>&nbsp;<br>");
+	boost::replace_all(temp, "\n", "<br>");
+	return as_aligned(temp, align_, UI_FONT_SIZE_SMALL, color_);
 }
 
 } // namespace UI

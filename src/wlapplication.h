@@ -135,7 +135,7 @@ struct WLApplication {
 	static WLApplication * get(int const argc = 0, char const * * argv = nullptr);
 	~WLApplication();
 
-	enum GameType {NONE, EDITOR, REPLAY, SCENARIO, LOADGAME, NETWORK, INTERNET};
+	enum GameType {NONE, EDITOR, REPLAY, SCENARIO, LOADGAME, NETWORK};
 
 	void run();
 
@@ -257,7 +257,7 @@ private:
 	///\note This is private on purpose. Read the class documentation.
 	static WLApplication * the_singleton;
 
-	void _handle_mousebutton(SDL_Event &, InputCallback const *);
+	void handle_mousebutton(SDL_Event &, InputCallback const *);
 };
 
 #endif  // end of include guard: WL_WLAPPLICATION_H

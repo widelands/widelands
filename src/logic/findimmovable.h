@@ -47,7 +47,7 @@ private:
 	};
 	template<typename T>
 	struct Capsule : public BaseCapsule {
-		Capsule(const T & _op) : op(_op) {}
+		Capsule(const T & init_op) : op(init_op) {}
 		bool accept(const BaseImmovable & imm) const override {return op.accept(imm);}
 
 		const T op;
@@ -115,7 +115,7 @@ struct FindImmovablePlayerImmovable {
 	bool accept(const BaseImmovable &) const;
 };
 struct FindImmovablePlayerMilitarySite {
-	FindImmovablePlayerMilitarySite(const Player & _player) : player(_player) {}
+	FindImmovablePlayerMilitarySite(const Player & init_player) : player(init_player) {}
 
 	bool accept(const BaseImmovable &) const;
 
@@ -127,7 +127,7 @@ struct FindImmovableAttackable {
 	bool accept(const BaseImmovable &) const;
 };
 struct FindImmovableByDescr {
-	FindImmovableByDescr(const ImmovableDescr & _descr) : descr(_descr) {}
+	FindImmovableByDescr(const ImmovableDescr & init_descr) : descr(init_descr) {}
 
 	bool accept(const BaseImmovable &) const;
 

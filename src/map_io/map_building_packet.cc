@@ -99,8 +99,7 @@ void MapBuildingPacket::read(FileSystem& fs,
 							read_priorities (*building, fr);
 
 							//  Reference the players tribe if in editor.
-							if (g_gr) // but not on dedicated servers ;)
-								ibase.reference_player_tribe(p, &tribe);
+							ibase.reference_player_tribe(p, &tribe);
 						} else
 							throw GameDataError("player %u does not exist", p);
 					}
@@ -143,12 +142,12 @@ void MapBuildingPacket::write
 
 			if (building->descr().type() == MapObjectType::CONSTRUCTIONSITE) {
 				upcast(PartiallyFinishedBuilding const, pfb, building);
-				fw.c_string((*pfb->m_building).name().c_str());
+				fw.c_string((*pfb->building_).name().c_str());
 				fw.unsigned_8(kTypeConstructionSite);
 
 			} else if (building->descr().type() == MapObjectType::DISMANTLESITE) {
 				upcast(PartiallyFinishedBuilding const, pfb, building);
-				fw.c_string((*pfb->m_building).name().c_str());
+				fw.c_string((*pfb->building_).name().c_str());
 				fw.unsigned_8(kTypeDismantleSite);
 
 			} else {

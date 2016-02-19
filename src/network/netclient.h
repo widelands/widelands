@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2012 by the Widelands Development Team
+ * Copyright (C) 2008-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -103,8 +103,6 @@ private:
 	/// for unique backupname
 	std::string backup_file_name(std::string & path) {return path + "~backup";}
 
-	NetTransferFile * file;
-
 	void syncreport() override;
 
 	void handle_packet(RecvPacket &);
@@ -115,10 +113,9 @@ private:
 	void disconnect
 		(const std::string & reason, const std::string & arg = "", bool sendreason = true, bool showmsg = true);
 
-	NetClientImpl * d;
-	bool m_internet;
-	bool m_dedicated_access;
-	bool m_dedicated_temp_scenario;
+	NetTransferFile * file_;
+	NetClientImpl   * d;
+	bool              internet_;
 };
 
 #endif  // end of include guard: WL_NETWORK_NETCLIENT_H

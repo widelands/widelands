@@ -93,12 +93,12 @@ WatchWindow::WatchWindow
 	(InteractiveGameBase &       parent,
 	 int32_t const x, int32_t const y, uint32_t const w, uint32_t const h,
 	 Widelands::Coords    const coords,
-	 bool                   const _single_window)
+	 bool                   const init_single_window)
 :
 	UI::Window(&parent, "watch", x, y, w, h, _("Watch")),
 	mapview   (this, 0, 0, 200, 166, parent),
 	last_visit(game().get_gametime()),
-	single_window(_single_window)
+	single_window(init_single_window)
 {
 	UI::Button * followbtn =
 		new UI::Button
@@ -118,7 +118,7 @@ WatchWindow::WatchWindow
 			 _("Center the main view on this"));
 	gotobtn->sigclicked.connect(boost::bind(&WatchWindow::do_goto, this));
 
-	if (_single_window) {
+	if (init_single_window) {
 		for (uint8_t i = 0; i < NUM_VIEWS; ++i) {
 			view_btns[i] =
 				new UI::Button
