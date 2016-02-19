@@ -38,18 +38,18 @@ struct IconGridButton : public Button {
 			 foreground_picture_id,
 			 tooltip_text, true, true),
 			 icongrid_(parent),
-			 _callback_argument_id(callback_argument_id)
+			 callback_argument_id_(callback_argument_id)
 		{}
 
 private:
 	IconGrid & icongrid_;
-	const uint32_t _callback_argument_id;
+	const uint32_t callback_argument_id_;
 
 	void handle_mousein(bool inside) override {
 		if (inside) {
-			icongrid_.mousein(_callback_argument_id);
+			icongrid_.mousein(callback_argument_id_);
 		} else {
-			icongrid_.mouseout(_callback_argument_id);
+			icongrid_.mouseout(callback_argument_id_);
 		}
 		Button::handle_mousein(inside);
 	}

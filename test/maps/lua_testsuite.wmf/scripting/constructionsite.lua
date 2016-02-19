@@ -36,8 +36,10 @@ function constructionsite_tests:test_type()
 end
 
 function constructionsite_tests:test_size()
-   assert_equal("small", self.l.size)
-   assert_equal("big", self.f.size)
+
+local building = egbase:get_building_description(self.l.building)
+   assert_equal("small", egbase:get_building_description(self.l.building).size)
+   assert_equal("big", egbase:get_building_description(self.f.building).size)
 end
 
 function constructionsite_tests:test_building()

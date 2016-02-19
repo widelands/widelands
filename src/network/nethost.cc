@@ -66,7 +66,7 @@
 
 
 struct HostGameSettingsProvider : public GameSettingsProvider {
-	HostGameSettingsProvider(NetHost * const _h) : h(_h), m_cur_wincondition(0) {}
+	HostGameSettingsProvider(NetHost * const init_host) : h(init_host), m_cur_wincondition(0) {}
 	~HostGameSettingsProvider() {}
 
 	void set_scenario(bool is_scenario) override {h->set_scenario(is_scenario);}
@@ -307,7 +307,7 @@ private:
 };
 
 struct HostChatProvider : public ChatProvider {
-	HostChatProvider(NetHost * const _h) : h(_h), kickClient(0) {}
+	HostChatProvider(NetHost * const init_host) : h(init_host), kickClient(0) {}
 
 	void send(const std::string& msg) override {
 		ChatMessage c;
@@ -730,6 +730,7 @@ void NetHost::run()
 		game.set_game_controller(this);
 		InteractiveGameBase* igb;
 		uint8_t pn = d->settings.playernum + 1;
+		game.save_handler().set_autosave_filename("wl_autosave_nethost");
 
 		if (d->settings.savegame) {
 			// Read and broadcast original win condition

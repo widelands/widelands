@@ -277,10 +277,10 @@ public:
 	int get_enhancement(lua_State *);
 	int get_is_mine(lua_State *);
 	int get_is_port(lua_State *);
+	int get_size(lua_State *);
 	int get_isproductionsite(lua_State *);
 	int get_returned_wares(lua_State *);
 	int get_returned_wares_enhanced(lua_State *);
-	int get_size(lua_State *);
 	int get_vision_range(lua_State *);
 	int get_workarea_radius(lua_State *);
 
@@ -726,7 +726,6 @@ public:
 	/*
 	 * Properties
 	 */
-	int get_size(lua_State * L);
 	int get_fields(lua_State * L);
 
 	/*

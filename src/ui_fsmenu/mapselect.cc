@@ -84,7 +84,7 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect
 	cb_dont_localize_mapnames_->changedto.connect
 			(boost::bind(&FullscreenMenuMapSelect::fill_table, boost::ref(*this)));
 
-	cb_show_all_maps_ = _add_tag_checkbox(vbox, "blumba", _("Show all maps"));
+	cb_show_all_maps_ = add_tag_checkbox(vbox, "blumba", _("Show all maps"));
 	tags_checkboxes_.clear(); // Remove this again, it is a special tag checkbox
 	cb_show_all_maps_->set_state(true);
 
@@ -94,27 +94,27 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect
 	vbox = new UI::Box(this,
 							 tablex_, vbox->get_y() + vbox->get_h() + padding_,
 							 UI::Box::Horizontal, checkbox_space_, get_w());
-	_add_tag_checkbox(vbox, "official", _("Official"));
-	_add_tag_checkbox(vbox, "unbalanced", _("Unbalanced"));
-	_add_tag_checkbox(vbox, "seafaring", _("Seafaring"));
-	_add_tag_checkbox(vbox, "artifacts", _("Artifacts"));
-	_add_tag_checkbox(vbox, "scenario", _("Scenario"));
+	add_tag_checkbox(vbox, "official", _("Official"));
+	add_tag_checkbox(vbox, "unbalanced", _("Unbalanced"));
+	add_tag_checkbox(vbox, "seafaring", _("Seafaring"));
+	add_tag_checkbox(vbox, "artifacts", _("Artifacts"));
+	add_tag_checkbox(vbox, "scenario", _("Scenario"));
 	vbox->set_size(get_w() - 2 * tablex_, checkbox_space_);
 
 	vbox = new UI::Box(this,
 							 tablex_, vbox->get_y() + vbox->get_h() + padding_,
 							 UI::Box::Horizontal, checkbox_space_, get_w());
-	_add_tag_checkbox(vbox, "ffa", _("Free for all"));
-	_add_tag_checkbox(vbox, "1v1", _("1v1"));
+	add_tag_checkbox(vbox, "ffa", _("Free for all"));
+	add_tag_checkbox(vbox, "1v1", _("1v1"));
 
 	vbox->set_size(get_w() - 2 * tablex_, checkbox_space_);
 
 	vbox = new UI::Box(this,
 							 tablex_, vbox->get_y() + vbox->get_h() + padding_,
 							 UI::Box::Horizontal, checkbox_space_, get_w());
-	_add_tag_checkbox(vbox, "2teams", _("Teams of 2"));
-	_add_tag_checkbox(vbox, "3teams", _("Teams of 3"));
-	_add_tag_checkbox(vbox, "4teams", _("Teams of 4"));
+	add_tag_checkbox(vbox, "2teams", _("Teams of 2"));
+	add_tag_checkbox(vbox, "3teams", _("Teams of 3"));
+	add_tag_checkbox(vbox, "4teams", _("Teams of 4"));
 	vbox->set_size(get_w() - 2 * tablex_, checkbox_space_);
 
 	scenario_types_ = settings_->settings().multiplayer ? Map::MP_SCENARIO : Map::SP_SCENARIO;
@@ -299,7 +299,7 @@ void FullscreenMenuMapSelect::fill_table()
 /*
  * Add a tag to the checkboxes
  */
-UI::Checkbox * FullscreenMenuMapSelect::_add_tag_checkbox
+UI::Checkbox * FullscreenMenuMapSelect::add_tag_checkbox
 	(UI::Box * box, std::string tag, std::string displ_name)
 {
 	int32_t id = tags_ordered_.size();
@@ -307,7 +307,7 @@ UI::Checkbox * FullscreenMenuMapSelect::_add_tag_checkbox
 
 	UI::Checkbox * cb = new UI::Checkbox(box, Point(0, 0), displ_name);
 	cb->changedto.connect
-		(boost::bind(&FullscreenMenuMapSelect::_tagbox_changed, this, id, _1));
+		(boost::bind(&FullscreenMenuMapSelect::tagbox_changed, this, id, _1));
 
 	box->add(cb, UI::Align::kLeft, true);
 	box->add_space(checkbox_space_);
@@ -319,7 +319,7 @@ UI::Checkbox * FullscreenMenuMapSelect::_add_tag_checkbox
 /*
  * One of the tagboxes has changed
  */
-void FullscreenMenuMapSelect::_tagbox_changed(int32_t id, bool to) {
+void FullscreenMenuMapSelect::tagbox_changed(int32_t id, bool to) {
 	if (id == 0) { // Show all maps checbox
 		if (to) {
 			for (UI::Checkbox * checkbox : tags_checkboxes_) {

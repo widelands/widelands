@@ -64,7 +64,7 @@ TerrainDescription::Is terrain_type_from_string(const std::string& type) {
 }  // namespace
 
 
-TerrainDescription::Type::Type(TerrainDescription::Is _is) : is(_is) {
+TerrainDescription::Type::Type(TerrainDescription::Is init_is) : is(init_is) {
 	switch (is) {
 	case Is::kArable:
 		/** TRANSLATORS: This is a terrain type tooltip in the editor */

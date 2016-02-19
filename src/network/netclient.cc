@@ -186,6 +186,8 @@ void NetClient::run ()
 		d->game = &game;
 		game.set_game_controller(this);
 		uint8_t const pn = d->settings.playernum + 1;
+		game.save_handler().set_autosave_filename(
+		   (boost::format("wl_autosave_netclient%u") % static_cast<unsigned int>(pn)).str());
 		InteractiveGameBase* igb;
 		if (pn > 0)
 			igb = new InteractivePlayer(game, g_options.pull_section("global"), pn, true);

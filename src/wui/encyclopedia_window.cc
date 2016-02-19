@@ -51,16 +51,16 @@ constexpr int kPadding = 5;
 constexpr int kTabHeight = 35;
 
 struct EncyclopediaTab {
-	EncyclopediaTab(const std::string& _key,
-	                const std::string& _image_filename,
-	                const std::string& _tooltip,
-	                const std::string& _script_path,
-	                const Widelands::MapObjectType _type)
-	   : key(_key),
-	     image_filename(_image_filename),
-	     tooltip(_tooltip),
-	     script_path(_script_path),
-	     type(_type) {
+	EncyclopediaTab(const std::string& init_key,
+						 const std::string& init_image_filename,
+						 const std::string& init_tooltip,
+						 const std::string& init_script_path,
+						 const Widelands::MapObjectType init_type)
+		: key(init_key),
+		  image_filename(init_image_filename),
+		  tooltip(init_tooltip),
+		  script_path(init_script_path),
+		  type(init_type) {
 	}
 	const std::string key;
 	const std::string image_filename;
