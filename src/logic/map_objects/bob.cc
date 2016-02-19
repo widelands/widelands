@@ -93,8 +93,8 @@ Bob & BobDescr::create
 }
 
 
-Bob::Bob(const BobDescr & _descr) :
-MapObject       (&_descr),
+Bob::Bob(const BobDescr & init_descr) :
+MapObject       (&init_descr),
 owner_          (nullptr),
 position_       (FCoords(Coords(0, 0), nullptr)), // not linked anywhere
 linknext_       (nullptr),

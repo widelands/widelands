@@ -1722,19 +1722,19 @@ void ProductionProgram::ActConstruct::building_work_failed
 }
 
 
-ProductionProgram::ProductionProgram(const std::string& _name,
-		const std::string& _descname,
+ProductionProgram::ProductionProgram(const std::string& init_name,
+		const std::string& init_descname,
 		std::unique_ptr<LuaTable> actions_table,
 		const EditorGameBase& egbase,
 		ProductionSiteDescr* building)
-	: name_(_name), descname_(_descname) {
+	: name_(init_name), descname_(init_descname) {
 
 	for (const std::string& action_string : actions_table->array_entries<std::string>()) {
 		std::vector<std::string> parts;
 		boost::split(parts, action_string, boost::is_any_of("="));
 		if (parts.size() != 2) {
 			throw GameDataError("invalid line: \"%s\" in production program \"%s\" for building \"%s\"",
-									  action_string.c_str(), _name.c_str(), building->name().c_str());
+									  action_string.c_str(), name().c_str(), building->name().c_str());
 		}
 		std::unique_ptr<char []> arguments(new char[parts[1].size() + 1]);
 		strncpy(arguments.get(), parts[1].c_str(), parts[1].size() + 1);
@@ -1762,10 +1762,10 @@ ProductionProgram::ProductionProgram(const std::string& _name,
 										 new ActRecruit(arguments.get(), *building, egbase.tribes())));
 		} else if (boost::iequals(parts[0], "worker")) {
 			actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
-										 new ActWorker(arguments.get(), _name, building, egbase.tribes())));
+										 new ActWorker(arguments.get(), name(), building, egbase.tribes())));
 		} else if (boost::iequals(parts[0], "mine")) {
 			actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
-										 new ActMine(arguments.get(), egbase.world(), _name, building)));
+										 new ActMine(arguments.get(), egbase.world(), name(), building)));
 		} else if (boost::iequals(parts[0], "check_soldier")) {
 			actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
 										 new ActCheckSoldier(arguments.get())));
@@ -1777,13 +1777,13 @@ ProductionProgram::ProductionProgram(const std::string& _name,
 										 new ActPlayFX(arguments.get())));
 		} else if (boost::iequals(parts[0], "construct")) {
 			actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
-										 new ActConstruct(arguments.get(), _name, building)));
+										 new ActConstruct(arguments.get(), name(), building)));
 		} else if (boost::iequals(parts[0], "check_map")) {
 			actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
 										 new ActCheckMap(arguments.get())));
 		} else {
 			throw GameDataError("unknown command type \"%s\" in production program \"%s\" for building \"%s\"",
-									  arguments.get(), _name.c_str(), building->name().c_str());
+									  arguments.get(), name().c_str(), building->name().c_str());
 		}
 
 		const ProductionProgram::Action& action = *actions_.back().get();
@@ -1809,7 +1809,7 @@ ProductionProgram::ProductionProgram(const std::string& _name,
 	}
 	if (actions_.empty())
 		throw GameDataError("no actions in production program \"%s\" for building \"%s\"",
-								  _name.c_str(), building->name().c_str());
+								  name().c_str(), building->name().c_str());
 }
 
 const std::string & ProductionProgram::name() const {return name_;}

@@ -178,7 +178,7 @@ void Table<void *>::set_column_compare
 void Table<void *>::EntryRecord::set_checked
 	(uint8_t const col, bool const checked)
 {
-	_data & cell = data_.at(col);
+	Data & cell = data_.at(col);
 
 	cell.d_checked = checked;
 	cell.d_picture =
@@ -194,7 +194,7 @@ void Table<void *>::EntryRecord::toggle(uint8_t const col)
 
 
 bool Table<void *>::EntryRecord::is_checked(uint8_t const col) const {
-	const _data & cell = data_.at(col);
+	const Data & cell = data_.at(col);
 
 	return cell.d_checked;
 }
