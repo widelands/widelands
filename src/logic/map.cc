@@ -2122,13 +2122,10 @@ bool Map::allows_seafaring() {
 }
 
 bool Map::has_artifacts() {
-	for (FCoords c(Coords(0, 0), m_fields.get()); c.y < m_height; ++c.y) {
-		for (c.x = 0; c.x < m_width; ++c.x, ++c.field) {
-			assert(c.field == &operator[] (c));
-			if (upcast(Immovable, immovable, c.field->get_immovable())) {
-				if (immovable->descr().has_attribute(immovable->descr().get_attribute_id("artifact"))) {
-					return true;
-				}
+	for (MapIndex i = 0; i < max_index(); ++i) {
+		if (upcast(Immovable, immovable, m_fields[i].get_immovable())) {
+			if (immovable->descr().has_attribute(immovable->descr().get_attribute_id("artifact"))) {
+				return true;
 			}
 		}
 	}
