@@ -113,14 +113,13 @@ int32_t RenderTarget::height() const
  */
 void RenderTarget::draw_line_strip(const std::vector<FloatPoint>& points,
                                    const RGBColor& color,
-                                   float line_width,
-                                   const LineDrawMode& line_draw_mode) {
+											  float line_width) {
 	std::vector<FloatPoint> adjusted_points;
 	adjusted_points.reserve(points.size());
 	for (const auto& p : points) {
 		adjusted_points.emplace_back(p.x + m_offset.x + m_rect.x, p.y + m_offset.y + m_rect.y);
 	}
-	m_surface->draw_line_strip(adjusted_points, color, line_width, line_draw_mode);
+	m_surface->draw_line_strip(adjusted_points, color, line_width);
 }
 
 /**

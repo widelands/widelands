@@ -30,7 +30,6 @@
 #include "base/rect.h"
 #include "graphic/gl/coordinate_conversion.h"
 #include "graphic/gl/utils.h"
-#include "graphic/line_draw_mode.h"
 
 namespace {
 
@@ -128,9 +127,8 @@ void Surface::brighten_rect(const Rect& rc, const int32_t factor)
 }
 
 void Surface::draw_line_strip(std::vector<FloatPoint> points,
-                              const RGBColor& color,
-                              float line_width,
-                              const LineDrawMode& line_draw_mode) {
+										const RGBColor& color,
+										float line_width) {
 	if (points.size() < 2) {
 		return;
 	}
@@ -142,11 +140,7 @@ void Surface::draw_line_strip(std::vector<FloatPoint> points,
 
 	const auto w = width();
 	const auto h = height();
-	// TODO(sirver): This code relies on depth testing to not draw
-	// semi-transparent pixels twice. That also means that kAntialiased will not
-	// perform correctly when drawing on offscreen surfaces - which we never do
-	// for lines in Widelands.
-	// NOCOM(#sirver): remove line_draw_mode?
+
 	tesselate_line_strip(w, h, color, line_width, points, &vertices);
 	do_draw_line_strip(std::move(vertices));
 }
@@ -185,5 +179,5 @@ void draw_rect(const Rect& rc, const RGBColor& clr, Surface* surface) {
 	const FloatPoint bottom_left = FloatPoint(rc.x + 0.5f, rc.y + rc.h - 0.5f);
 
 	surface->draw_line_strip(
-	   {top_left, top_right, bottom_right, bottom_left, top_left}, clr, 1, LineDrawMode::kSharp);
+		{top_left, top_right, bottom_right, bottom_left, top_left}, clr, 1);
 }

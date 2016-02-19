@@ -136,7 +136,6 @@ wl_library(graphic_draw_programs
     gl/draw_line_program.h
     gl/fill_rect_program.cc
     gl/fill_rect_program.h
-    line_draw_mode.h
   DEPENDS
     base_exceptions
     base_macros

@@ -29,7 +29,6 @@
 #include "graphic/color.h"
 #include "graphic/gl/draw_line_program.h"
 #include "graphic/image.h"
-#include "graphic/line_draw_mode.h"
 
 class Texture;
 
@@ -70,8 +69,7 @@ public:
 	// value on purpose.
 	void draw_line_strip(std::vector<FloatPoint> points,
 	                     const RGBColor& color,
-	                     float width,
-	                     const LineDrawMode& line_draw_mode);
+								float width);
 
 	/// makes a rectangle on the destination brighter (or darker).
 	void brighten_rect(const Rect&, int factor);
