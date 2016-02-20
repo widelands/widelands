@@ -83,7 +83,6 @@ std::string as_aligned(const std::string & txt, UI::Align align, int ptsize = UI
 
 std::string as_tooltip(const std::string&);
 std::string as_waresinfo(const std::string&);
-std::string as_window_title(const std::string&);
 std::string as_game_tip(const std::string&);
 
 /**

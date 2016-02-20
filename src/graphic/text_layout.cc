@@ -63,14 +63,6 @@ std::string as_game_tip(const std::string& txt) {
 	return f.str();
 }
 
-std::string as_window_title(const std::string& txt) {
-	static boost::format f("<rt><p><font face=sans size=13 bold=1 color=%s>%s</font></p></rt>");
-
-	f % UI_FONT_CLR_FG.hex_value();
-	f % txt;
-	return f.str();
-}
-
 std::string as_uifont(const std::string & txt, int size, const RGBColor& clr, UI::FontSet::Face face) {
 	return as_aligned(txt, UI::Align::kLeft, size, clr, face);
 }
