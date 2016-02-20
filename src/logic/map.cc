@@ -1340,31 +1340,39 @@ std::vector<Coords> Map::find_portdock(const Coords & c) const
 		WALK_E, WALK_E, WALK_E
 	};
 	const FCoords start = br_n(br_n(get_fcoords(c)));
-	FCoords f[16];
-	bool iswater[16];
-	int firstwater = -1;
-	int lastnonwater = -1;
-	f[0] = start;
-	for (uint32_t i = 0; i < 16; ++i) {
-		iswater[i] = (f[i].field->get_caps() & (MOVECAPS_SWIM|MOVECAPS_WALK)) == MOVECAPS_SWIM;
-		if (iswater[i]) {
-			if (firstwater < 0)
-				firstwater = i;
-		} else {
-			lastnonwater = i;
-		}
-		if (i < 15)
-			f[i + 1] = get_neighbour(f[i], cycledirs[i]);
-	}
-
+	const Widelands::PlayerNumber owner = start.field->get_owned_by();
+	bool is_good_water;
+	FCoords f = start;
 	std::vector<Coords> portdock;
-	if (firstwater >= 0) {
-		for (uint32_t i = firstwater; i < 16 && iswater[i]; ++i)
-			portdock.push_back(f[i]);
-		if (firstwater == 0 && lastnonwater >= 0) {
-			for (uint32_t i = lastnonwater + 1; i < 16; ++i)
-				portdock.push_back(f[i]);
+	for (uint32_t i = 0; i < 16; ++i) {
+		is_good_water = (f.field->get_caps() & (MOVECAPS_SWIM|MOVECAPS_WALK)) == MOVECAPS_SWIM;
+
+		// Any immovable here? (especially another portdock)
+		if (is_good_water && f.field->get_immovable()) {
+			is_good_water = false;
 		}
+
+		// If starting point is owned we make sure this field has the same owner
+		if (is_good_water && owner > 0 && f.field->get_owned_by() != owner) {
+			is_good_water = false;
+		}
+
+		// ... and is not on a border
+		if (is_good_water && owner > 0 && f.field->is_border()) {
+			is_good_water = false;
+		}
+
+		if (is_good_water) {
+			portdock.push_back(f);
+			// Occupy 2 fields maximum in order not to block space for other ports that
+			// might be built in the vicinity.
+			if (portdock.size() == 2) {
+				return portdock;
+			}
+		}
+
+		if (i < 15)
+			f = get_neighbour(f, cycledirs[i]);
 	}
 
 	return portdock;
