@@ -36,10 +36,10 @@
 #include "map_io/map_buildingdata_packet.h"
 #include "map_io/map_elemental_packet.h"
 #include "map_io/map_exploration_packet.h"
-#include "map_io/map_extradata_packet.h"
 #include "map_io/map_flag_packet.h"
 #include "map_io/map_flagdata_packet.h"
 #include "map_io/map_heights_packet.h"
+#include "map_io/map_images.h"
 #include "map_io/map_node_ownership_packet.h"
 #include "map_io/map_object_loader.h"
 #include "map_io/map_object_packet.h"
@@ -189,10 +189,6 @@ int32_t WidelandsMapLoader::load_map_complete
 	//  NON MANDATORY PACKETS BELOW THIS POINT
 	// Do not load unneeded packages in the editor
 	if (load_type != MapLoader::LoadType::kEditor) {
-		log("Reading Map Extra Data ... ");
-		{MapExtradataPacket      p; p.read(*m_fs, is_game);}
-		log("took %ums\n ", timer.ms_since_last_query());
-
 		log("Reading Map Version Data ... ");
 		{MapVersionPacket      p; p.read(*m_fs, egbase, is_game, *m_mol);}
 		log("took %ums\n ", timer.ms_since_last_query());
@@ -288,6 +284,10 @@ int32_t WidelandsMapLoader::load_map_complete
 
 	log("Reading Scripting Data ... ");
 	{MapScriptingPacket      p; p.read(*m_fs, egbase, is_game, *m_mol);}
+	log("took %ums\n ", timer.ms_since_last_query());
+
+	log("Reading map images ... ");
+	load_map_images(*m_fs);
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	if (load_type != MapLoader::LoadType::kEditor) {
