@@ -179,7 +179,7 @@ ProductionSiteDescr::ProductionSiteDescr
 				programs_[program_name] =
 						std::unique_ptr<ProductionProgram>(
 							new ProductionProgram(program_name,
-														 program_table->get_string("descname"),
+														 _(program_table->get_string("descname")),
 														 program_table->get_table("actions"),
 														 egbase,
 														 this));

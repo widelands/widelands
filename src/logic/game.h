@@ -123,12 +123,12 @@ public:
 	// Run a single player scenario directly via --scenario on the cmdline. Will
 	// run the 'script_to_run' after any init scripts of the map.
 	// Returns the result of run().
-	bool run_splayer_scenario_direct(char const * mapname, const std::string& script_to_run);
+	bool run_splayer_scenario_direct(const std::string& mapname, const std::string& script_to_run);
 
 	// Run a single player loaded game directly via --loadgame on the cmdline. Will
 	// run the 'script_to_run' directly after the game was loaded.
 	// Returns the result of run().
-	bool run_load_game (std::string filename, const std::string& script_to_run);
+	bool run_load_game (const std::string& filename, const std::string& script_to_run);
 
 	void postload() override;
 
