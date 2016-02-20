@@ -670,16 +670,17 @@ void Building::draw_help
 	const InteractiveGameBase & igbase =
 		dynamic_cast<const InteractiveGameBase&>(*game.get_ibase());
 	uint32_t const dpyflags = igbase.get_display_flags();
+	constexpr int kDesiredMaxWidth = 120; // We don't want text to be wider than this.
+
+	const std::string census_info = info_string(InfoStringFormat::kCensus);
+	const Image* rendered_census_info = UI::g_fh1->render(as_uifont(census_info));
+	if (rendered_census_info->width() > kDesiredMaxWidth) {
+		rendered_census_info = UI::g_fh1->render(as_condensed(census_info, UI::Align::kCenter), kDesiredMaxWidth);
+	}
+	Point census_pos(pos - Point(0, 48));
 
 	if (dpyflags & InteractiveBase::dfShowCensus) {
-		const std::string info = info_string(InfoStringFormat::kCensus);
-		if (!info.empty()) {
-			const Image* rendered_info = UI::g_fh1->render(as_uifont(info));
-			if (rendered_info->width() > 178) {
-				rendered_info = UI::g_fh1->render(as_condensed(info));
-			}
-			dst.blit(pos - Point(0, 48), rendered_info, BlendMode::UseAlpha, UI::Align::kCenter);
-		}
+		dst.blit(census_pos, rendered_census_info, BlendMode::UseAlpha, UI::Align::kCenter);
 	}
 
 	if (dpyflags & InteractiveBase::dfShowStatistics) {
@@ -690,11 +691,8 @@ void Building::draw_help
 				return;
 		const std::string info = info_string(InfoStringFormat::kStatistics);
 		if (!info.empty()) {
-			const Image* rendered_info = UI::g_fh1->render(as_uifont(info));
-			if (rendered_info->width() > 178) {
-				rendered_info = UI::g_fh1->render(as_condensed(info));
-			}
-			dst.blit(pos - Point(0, 35), rendered_info, BlendMode::UseAlpha, UI::Align::kCenter);
+			dst.blit(census_pos + Point(0, rendered_census_info->height() / 2 + 10),
+						UI::g_fh1->render(as_uifont(info)), BlendMode::UseAlpha, UI::Align::kCenter);
 		}
 	}
 }

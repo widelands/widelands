@@ -75,8 +75,8 @@ std::string as_uifont(const std::string & txt, int size, const RGBColor& clr, UI
 	return as_aligned(txt, UI::Align::kLeft, size, clr, face);
 }
 
-std::string as_condensed(const std::string& text, int ptsize, const RGBColor& clr) {
-	return as_uifont(text, ptsize, clr, UI::FontSet::Face::kCondensed);
+std::string as_condensed(const std::string& text, UI::Align align, int ptsize, const RGBColor& clr) {
+	return as_aligned(text, align, ptsize, clr, UI::FontSet::Face::kCondensed);
 }
 
 std::string as_editorfont(const std::string& text, int ptsize, const RGBColor& clr) {
@@ -145,7 +145,7 @@ const Image* autofit_ui_text(const std::string& text, int width, RGBColor color,
 		UI::g_fh1->render(as_uifont(text, fontsize, color));
 	if (width > 0) { // Autofit
 		for (; result->width() > width && fontsize >= kMinimumFontSize; --fontsize) {
-			result = UI::g_fh1->render(as_condensed(text, fontsize, color));
+			result = UI::g_fh1->render(as_condensed(text, UI::Align::kLeft, fontsize, color));
 		}
 	}
 	return result;
