@@ -502,7 +502,7 @@ std::string Building::info_string(const InfoStringFormat& format) {
 	default:
 		NEVER_HERE();
 	}
-	return result.empty() ? result : as_uifont(result);
+	return result;
 }
 
 
@@ -674,7 +674,11 @@ void Building::draw_help
 	if (dpyflags & InteractiveBase::dfShowCensus) {
 		const std::string info = info_string(InfoStringFormat::kCensus);
 		if (!info.empty()) {
-			dst.blit(pos - Point(0, 48), UI::g_fh1->render(info), BlendMode::UseAlpha, UI::Align::kCenter);
+			const Image* rendered_info = UI::g_fh1->render(as_uifont(info));
+			if (rendered_info->width() > 178) {
+				rendered_info = UI::g_fh1->render(as_condensed(info));
+			}
+			dst.blit(pos - Point(0, 48), rendered_info, BlendMode::UseAlpha, UI::Align::kCenter);
 		}
 	}
 
@@ -686,7 +690,11 @@ void Building::draw_help
 				return;
 		const std::string info = info_string(InfoStringFormat::kStatistics);
 		if (!info.empty()) {
-			dst.blit(pos - Point(0, 35), UI::g_fh1->render(info), BlendMode::UseAlpha, UI::Align::kCenter);
+			const Image* rendered_info = UI::g_fh1->render(as_uifont(info));
+			if (rendered_info->width() > 178) {
+				rendered_info = UI::g_fh1->render(as_condensed(info));
+			}
+			dst.blit(pos - Point(0, 35), rendered_info, BlendMode::UseAlpha, UI::Align::kCenter);
 		}
 	}
 }

@@ -75,6 +75,10 @@ std::string as_uifont(const std::string & txt, int size, const RGBColor& clr, UI
 	return as_aligned(txt, UI::Align::kLeft, size, clr, face);
 }
 
+std::string as_condensed(const std::string& text, int ptsize, const RGBColor& clr) {
+	return as_uifont(text, ptsize, clr, UI::FontSet::Face::kCondensed);
+}
+
 std::string as_editorfont(const std::string& text, int ptsize, const RGBColor& clr) {
 	// UI Text is always bold due to historic reasons
 	static boost::format
@@ -138,10 +142,10 @@ std::string as_waresinfo(const std::string & txt) {
 
 const Image* autofit_ui_text(const std::string& text, int width, RGBColor color, int fontsize) {
 	const Image* result =
-	   UI::g_fh1->render(as_uifont(text, fontsize, color, UI::FontSet::Face::kSans));
+		UI::g_fh1->render(as_uifont(text, fontsize, color));
 	if (width > 0) { // Autofit
 		for (; result->width() > width && fontsize >= kMinimumFontSize; --fontsize) {
-			result = UI::g_fh1->render(as_uifont(text, fontsize, color, UI::FontSet::Face::kCondensed));
+			result = UI::g_fh1->render(as_condensed(text, fontsize, color));
 		}
 	}
 	return result;

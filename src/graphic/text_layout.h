@@ -70,6 +70,10 @@ std::string as_uifont
 	(const std::string&, int ptsize = UI_FONT_SIZE_SMALL, const RGBColor& clr = UI_FONT_CLR_FG,
 	 UI::FontSet::Face face = UI::FontSet::Face::kSans);
 
+// Same as as_uifont, but with the condensed font preselected.
+std::string as_condensed
+	(const std::string& text, int ptsize = UI_FONT_SIZE_SMALL, const RGBColor& clr = UI_FONT_CLR_FG);
+
 std::string as_editorfont(const std::string& text, int ptsize = UI_FONT_SIZE_SMALL,
 								  const RGBColor& clr = UI_FONT_CLR_FG);
 
