@@ -118,7 +118,7 @@ void BaseImmovable::unset_position(EditorGameBase & egbase, Coords const c)
 	FCoords const f = map.get_fcoords(c);
 
 	// this is to help to debug failing assertion below (see bug 1542238)
-	if (f.field->immovable != this){
+	if (f.field->immovable != this) {
 		log(" Internal error: Immovable at %3dx%3d does not match: is %s but %s was expected.\n",
 		c.x,
 		c.y,
