@@ -1364,7 +1364,9 @@ std::vector<Coords> Map::find_portdock(const Coords & c) const
 
 		if (is_good_water) {
 			portdock.push_back(f);
-			if (portdock.size() == 2){
+			// Occupy 2 fields maximum in order not to block space for other ports that
+			// might be built in the vicinity.
+			if (portdock.size() == 2) {
 				return portdock;
 			}
 		}
