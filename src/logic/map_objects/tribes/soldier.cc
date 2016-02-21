@@ -72,7 +72,7 @@ SoldierDescr::SoldierDescr(const std::string& init_descname,
 {
 	add_attribute(MapObject::Attribute::SOLDIER);
 
-	//  Battle animations
+	// Battle animations
 	// attack_success_*-> soldier is attacking and hit his opponent
 	add_battle_animation(table.get_table("attack_success_w"), &attack_success_w_name_);
 	add_battle_animation(table.get_table("attack_success_e"), &attack_success_e_name_);
@@ -92,7 +92,6 @@ SoldierDescr::SoldierDescr(const std::string& init_descname,
 	// die_*           -> soldier is dying
 	add_battle_animation(table.get_table("die_w"), &die_w_name_);
 	add_battle_animation(table.get_table("die_e"), &die_e_name_);
-
 }
 
 SoldierDescr::BattleAttribute::BattleAttribute(std::unique_ptr<LuaTable> table) {
@@ -219,17 +218,17 @@ IMPLEMENTATION
 /// all done through init
 Soldier::Soldier(const SoldierDescr & soldier_descr) : Worker(soldier_descr)
 {
-	m_battle = nullptr;
-	health_level_      = 0;
+	battle_ = nullptr;
+	health_level_  = 0;
 	attack_level_  = 0;
 	defense_level_ = 0;
 	evade_level_   = 0;
 
 	current_health_    = get_max_health();
 
-	m_combat_walking   = CD_NONE;
-	m_combat_walkstart = 0;
-	m_combat_walkend   = 0;
+	combat_walking_   = CD_NONE;
+	combat_walkstart_ = 0;
+	combat_walkend_   = 0;
 }
 
 
@@ -242,9 +241,9 @@ void Soldier::init(EditorGameBase & egbase)
 
 	current_health_ = get_max_health();
 
-	m_combat_walking   = CD_NONE;
-	m_combat_walkstart = 0;
-	m_combat_walkend   = 0;
+	combat_walking_   = CD_NONE;
+	combat_walkstart_ = 0;
+	combat_walkend_   = 0;
 
 	Worker::init(egbase);
 }
@@ -397,14 +396,14 @@ void Soldier::damage (const uint32_t value)
 Point Soldier::calc_drawpos
 	(const EditorGameBase & game, const Point pos) const
 {
-	if (m_combat_walking == CD_NONE) {
+	if (combat_walking_ == CD_NONE) {
 		return Bob::calc_drawpos(game, pos);
 	}
 
 	bool moving = false;
 	Point spos = pos, epos = pos;
 
-	switch (m_combat_walking) {
+	switch (combat_walking_) {
 		case CD_WALK_W:
 			moving = true;
 			epos.x -= TRIANGLE_WIDTH / 4;
@@ -436,11 +435,11 @@ Point Soldier::calc_drawpos
 	if (moving) {
 
 		float f =
-			static_cast<float>(game.get_gametime() - m_combat_walkstart)
+			static_cast<float>(game.get_gametime() - combat_walkstart_)
 			/
-			(m_combat_walkend - m_combat_walkstart);
-		assert(m_combat_walkstart <= game.get_gametime());
-		assert(m_combat_walkstart < m_combat_walkend);
+			(combat_walkend_ - combat_walkstart_);
+		assert(combat_walkstart_ <= game.get_gametime());
+		assert(combat_walkstart_ < combat_walkend_);
 
 		if (f < 0)
 			f = 0;
@@ -564,7 +563,7 @@ void Soldier::calc_info_icon_size
 
 
 void Soldier::pop_task_or_fight(Game& game) {
-	if (m_battle)
+	if (battle_)
 		start_task_battle(game);
 	else
 		pop_task(game);
@@ -611,7 +610,7 @@ bool Soldier::is_attacking_player(Game & game, Player & player)
 
 Battle * Soldier::get_battle()
 {
-	return m_battle;
+	return battle_;
 }
 
 
@@ -630,10 +629,10 @@ bool Soldier::can_be_challenged()
 	if (!is_on_battlefield()) {
 		return false;
 	}
-	if (!m_battle) {
+	if (!battle_) {
 		return true;
 	}
-	return !m_battle->locked(dynamic_cast<Game&>(owner().egbase()));
+	return !battle_->locked(dynamic_cast<Game&>(owner().egbase()));
 }
 
 /**
@@ -643,8 +642,8 @@ bool Soldier::can_be_challenged()
  */
 void Soldier::set_battle(Game & game, Battle * const battle)
 {
-	if (m_battle != battle) {
-		m_battle = battle;
+	if (battle_ != battle) {
+		battle_ = battle;
 		send_signal(game, "battle");
 	}
 }
@@ -851,7 +850,7 @@ void Soldier::attack_update(Game & game, State & state)
 		}
 	}
 
-	if (m_battle)
+	if (battle_)
 		return start_task_battle(game);
 
 	if (signal == "blocked") {
@@ -954,8 +953,8 @@ void Soldier::attack_update(Game & game, State & state)
 
 void Soldier::attack_pop(Game & game, State &)
 {
-	if (m_battle)
-		m_battle->cancel(game, *this);
+	if (battle_)
+		battle_->cancel(game, *this);
 }
 
 /**
@@ -1069,7 +1068,7 @@ void Soldier::defense_update(Game & game, State & state)
 
 	Flag & baseflag = location->base_flag();
 
-	if (m_battle)
+	if (battle_)
 		return start_task_battle(game);
 
 	if (signal == "blocked")
@@ -1090,7 +1089,7 @@ void Soldier::defense_update(Game & game, State & state)
 			state.ivar2 = 1;
 			assert(state.ivar2 == 1);
 
-			if (m_battle)
+			if (battle_)
 				return start_task_battle(game);
 
 			// Check if any attacker is waiting us to fight
@@ -1235,8 +1234,8 @@ void Soldier::defense_update(Game & game, State & state)
 
 void Soldier::defense_pop(Game & game, State &)
 {
-	if (m_battle)
-		m_battle->cancel(game, *this);
+	if (battle_)
+		battle_->cancel(game, *this);
 }
 
 
@@ -1270,9 +1269,9 @@ void Soldier::start_task_move_in_battle(Game & game, CombatWalkingDir dir)
 	Map & map = game.map();
 	int32_t const tdelta = (map.calc_cost(get_position(), mapdir)) / 2;
 	molog("[move_in_battle] dir: (%d) tdelta: (%d)\n", dir, tdelta);
-	m_combat_walking   = dir;
-	m_combat_walkstart = game.get_gametime();
-	m_combat_walkend   = m_combat_walkstart + tdelta;
+	combat_walking_   = dir;
+	combat_walkstart_ = game.get_gametime();
+	combat_walkend_   = combat_walkstart_ + tdelta;
 
 	push_task(game, taskMoveInBattle);
 	State & state = top_state();
@@ -1283,28 +1282,28 @@ void Soldier::start_task_move_in_battle(Game & game, CombatWalkingDir dir)
 
 void Soldier::move_in_battle_update(Game & game, State &)
 {
-	if (game.get_gametime() >= m_combat_walkend) {
-		switch (m_combat_walking) {
+	if (game.get_gametime() >= combat_walkend_) {
+		switch (combat_walking_) {
 			case CD_NONE:
 				break;
 			case CD_WALK_W:
-				m_combat_walking = CD_COMBAT_W;
+				combat_walking_ = CD_COMBAT_W;
 				break;
 			case CD_WALK_E:
-				m_combat_walking = CD_COMBAT_E;
+				combat_walking_ = CD_COMBAT_E;
 				break;
 			case CD_RETURN_W:
 			case CD_RETURN_E:
 			case CD_COMBAT_W:
 			case CD_COMBAT_E:
-				m_combat_walking = CD_NONE;
+				combat_walking_ = CD_NONE;
 				break;
 		}
 		return pop_task(game);
 	} else
 		//  Only end the task once we've actually completed the step
 		// Ignore signals until then
-		return schedule_act(game, m_combat_walkend - game.get_gametime());
+		return schedule_act(game, combat_walkend_ - game.get_gametime());
 }
 
 /**
@@ -1333,8 +1332,8 @@ Bob::Task const Soldier::taskBattle = {
 
 void Soldier::start_task_battle(Game& game)
 {
-	assert(m_battle);
-	m_combat_walking = CD_NONE;
+	assert(battle_);
+	combat_walking_ = CD_NONE;
 
 	push_task(game, taskBattle);
 }
@@ -1361,21 +1360,21 @@ void Soldier::battle_update(Game & game, State &)
 		}
 	}
 
-	if (!m_battle) {
-		if (m_combat_walking == CD_COMBAT_W) {
+	if (!battle_) {
+		if (combat_walking_ == CD_COMBAT_W) {
 			return start_task_move_in_battle(game, CD_RETURN_W);
 		}
-		if (m_combat_walking == CD_COMBAT_E) {
+		if (combat_walking_ == CD_COMBAT_E) {
 			return start_task_move_in_battle(game, CD_RETURN_E);
 		}
-		assert(m_combat_walking == CD_NONE);
+		assert(combat_walking_ == CD_NONE);
 		molog("[battle] is over\n");
 		send_space_signals(game);
 		return pop_task(game);
 	}
 
 	Map & map = game.map();
-	Soldier & opponent = *m_battle->opponent(*this);
+	Soldier & opponent = *battle_->opponent(*this);
 	if (opponent.get_position() != get_position()) {
 		if (is_a(Building, map[get_position()].get_immovable()))
 		{
@@ -1394,20 +1393,20 @@ void Soldier::battle_update(Game & game, State &)
 	}
 
 	if (stay_home()) {
-		if (this == m_battle->first()) {
+		if (this == battle_->first()) {
 			molog("[battle] stay_home, so reverse roles\n");
-			new Battle(game, *m_battle->second(), *m_battle->first());
+			new Battle(game, *battle_->second(), *battle_->first());
 			return skip_act(); //  we will get a signal via set_battle()
 		} else {
-			if (m_combat_walking != CD_COMBAT_E) {
+			if (combat_walking_ != CD_COMBAT_E) {
 				opponent.send_signal(game, "wakeup");
 				return start_task_move_in_battle(game, CD_WALK_E);
 			}
 		}
 	} else {
-		if (opponent.stay_home() && (this == m_battle->second())) {
+		if (opponent.stay_home() && (this == battle_->second())) {
 			// Wait until correct roles are assigned
-			new Battle(game, *m_battle->second(), *m_battle->first());
+			new Battle(game, *battle_->second(), *battle_->first());
 			return schedule_act(game, 10);
 		}
 
@@ -1419,7 +1418,7 @@ void Soldier::battle_update(Game & game, State &)
 
 			uint32_t const dist = map.calc_distance(get_position(), dest);
 
-			if (dist >= 2 || this == m_battle->first()) {
+			if (dist >= 2 || this == battle_->first()) {
 				// Only make small steps at a time, so we can adjust to the
 				// opponent's change of position.
 				if
@@ -1488,7 +1487,7 @@ void Soldier::battle_update(Game & game, State &)
 			}
 		} else {
 			assert(opponent.get_position() == get_position());
-			assert(m_battle == opponent.get_battle());
+			assert(battle_ == opponent.get_battle());
 
 			if (opponent.is_walking()) {
 				molog
@@ -1498,14 +1497,14 @@ void Soldier::battle_update(Game & game, State &)
 				return start_task_idle(game, descr().get_animation("idle"), 5000);
 			}
 
-			if (m_battle->first()->serial() == serial()) {
-				if (m_combat_walking != CD_COMBAT_W) {
+			if (battle_->first()->serial() == serial()) {
+				if (combat_walking_ != CD_COMBAT_W) {
 					molog("[battle]: Moving west\n");
 					opponent.send_signal(game, "wakeup");
 					return start_task_move_in_battle(game, CD_WALK_W);
 				}
 			} else {
-				if (m_combat_walking != CD_COMBAT_E) {
+				if (combat_walking_ != CD_COMBAT_E) {
 					molog("[battle]: Moving east\n");
 					opponent.send_signal(game, "wakeup");
 					return start_task_move_in_battle(game, CD_WALK_E);
@@ -1514,13 +1513,13 @@ void Soldier::battle_update(Game & game, State &)
 		}
 	}
 
-	m_battle->get_battle_work(game, *this);
+	battle_->get_battle_work(game, *this);
 }
 
 void Soldier::battle_pop(Game & game, State &)
 {
-	if (m_battle)
-		m_battle->cancel(game, *this);
+	if (battle_)
+		battle_->cancel(game, *this);
 }
 
 
@@ -1543,7 +1542,7 @@ void Soldier::start_task_die(Game & game)
 	start_task_idle
 			(game,
 			 descr().get_animation
-				 (m_combat_walking == CD_COMBAT_W ? "die_w" : "die_e"),
+				 (combat_walking_ == CD_COMBAT_W ? "die_w" : "die_e"),
 			 1000);
 }
 
@@ -1640,7 +1639,7 @@ bool Soldier::check_node_blocked
 			if (soldier->get_battle()) {
 				foundbattle = true;
 
-				if (m_battle && m_battle->opponent(*this) == soldier)
+				if (battle_ && battle_->opponent(*this) == soldier)
 					foundopponent = true;
 			}
 		}
@@ -1722,13 +1721,13 @@ void Soldier::log_general_info(const EditorGameBase & egbase)
 	molog ("Attack:   %d-%d\n", get_min_attack(), get_max_attack());
 	molog ("Defense:  %d%%\n", get_defense());
 	molog ("Evade:    %d%%\n", get_evade());
-	molog ("CombatWalkingDir:   %i\n", m_combat_walking);
-	molog ("CombatWalkingStart: %i\n", m_combat_walkstart);
-	molog ("CombatWalkEnd:      %i\n", m_combat_walkend);
-	molog ("HasBattle:   %s\n", m_battle ? "yes" : "no");
-	if (m_battle) {
-		molog("BattleSerial: %u\n", m_battle->serial());
-		molog("Opponent: %u\n", m_battle->opponent(*this)->serial());
+	molog ("CombatWalkingDir:   %i\n", combat_walking_);
+	molog ("CombatWalkingStart: %i\n", combat_walkstart_);
+	molog ("CombatWalkEnd:      %i\n", combat_walkend_);
+	molog ("HasBattle:   %s\n", battle_ ? "yes" : "no");
+	if (battle_) {
+		molog("BattleSerial: %u\n", battle_->serial());
+		molog("Opponent: %u\n", battle_->opponent(*this)->serial());
 	}
 }
 
@@ -1743,7 +1742,7 @@ Load/save support
 constexpr uint8_t kCurrentPacketVersion = 2;
 
 Soldier::Loader::Loader() :
-		m_battle(0)
+		battle_(0)
 {
 }
 
@@ -1770,13 +1769,13 @@ void Soldier::Loader::load(FileRead & fr)
 			if (soldier.current_health_ > soldier.get_max_health())
 				soldier.current_health_ = soldier.get_max_health();
 
-			soldier.m_combat_walking = static_cast<CombatWalkingDir>(fr.unsigned_8());
-			if (soldier.m_combat_walking != CD_NONE) {
-				soldier.m_combat_walkstart = fr.unsigned_32();
-				soldier.m_combat_walkend = fr.unsigned_32();
+			soldier.combat_walking_ = static_cast<CombatWalkingDir>(fr.unsigned_8());
+			if (soldier.combat_walking_ != CD_NONE) {
+				soldier.combat_walkstart_ = fr.unsigned_32();
+				soldier.combat_walkend_ = fr.unsigned_32();
 			}
 
-			m_battle = fr.unsigned_32();
+			battle_ = fr.unsigned_32();
 		} else {
 			throw UnhandledVersionError("Soldier", packet_version, kCurrentPacketVersion);
 		}
@@ -1791,8 +1790,8 @@ void Soldier::Loader::load_pointers()
 
 	Soldier & soldier = get<Soldier>();
 
-	if (m_battle)
-		soldier.m_battle = &mol().get<Battle>(m_battle);
+	if (battle_)
+		soldier.battle_ = &mol().get<Battle>(battle_);
 }
 
 const Bob::Task * Soldier::Loader::get_task(const std::string & name)
@@ -1822,13 +1821,13 @@ void Soldier::do_save
 	fw.unsigned_32(defense_level_);
 	fw.unsigned_32(evade_level_);
 
-	fw.unsigned_8(m_combat_walking);
-	if (m_combat_walking != CD_NONE) {
-		fw.unsigned_32(m_combat_walkstart);
-		fw.unsigned_32(m_combat_walkend);
+	fw.unsigned_8(combat_walking_);
+	if (combat_walking_ != CD_NONE) {
+		fw.unsigned_32(combat_walkstart_);
+		fw.unsigned_32(combat_walkend_);
 	}
 
-	fw.unsigned_32(mos.get_object_file_index_or_zero(m_battle));
+	fw.unsigned_32(mos.get_object_file_index_or_zero(battle_));
 }
 
 }

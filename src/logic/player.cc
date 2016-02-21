@@ -1431,7 +1431,7 @@ void Player::read_statistics(FileRead & fr)
  */
 void Player::write_remaining_shipnames(FileWrite & fw) const {
 	fw.unsigned_16(m_remaining_shipnames.size());
-	for (const auto& shipname : m_remaining_shipnames){
+	for (const auto& shipname : m_remaining_shipnames) {
 		fw.string(shipname);
 	}
 }

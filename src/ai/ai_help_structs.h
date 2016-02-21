@@ -589,7 +589,7 @@ struct SchedulerTask {
 
 	SchedulerTask
 		(const uint32_t time, const Widelands::SchedulerTaskId t, const uint8_t p, const char* d):
-		due_time(time), id(t), priority(p), descr(d){}
+		due_time(time), id(t), priority(p), descr(d) {}
 
 };
 

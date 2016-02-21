@@ -29,7 +29,7 @@ namespace Widelands {
 struct MapAStarBase {
 	MapAStarBase(Map & m) :
 		map(m),
-		pathfields(m.m_pathfieldmgr->allocate())
+		pathfields(m.pathfieldmgr_->allocate())
 	{
 	}
 

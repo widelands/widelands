@@ -84,30 +84,30 @@ public:
 
 // FindImmovable functor
 struct FindImmovableSize {
-	FindImmovableSize(int32_t const min, int32_t const max)
-		: m_min(min), m_max(max)
+	FindImmovableSize(int32_t const init_min, int32_t const init_max)
+		: min(init_min), max(init_max)
 	{}
 
 	bool accept(const BaseImmovable &) const;
 
 private:
-	int32_t m_min, m_max;
+	int32_t min, max;
 };
 struct FindImmovableType {
-	FindImmovableType(MapObjectType const type) : m_type(type) {}
+	FindImmovableType(MapObjectType const init_type) : type(init_type) {}
 
 	bool accept(const BaseImmovable &) const;
 
 private:
-	MapObjectType m_type;
+	MapObjectType type;
 };
 struct FindImmovableAttribute {
-	FindImmovableAttribute(uint32_t const attrib) : m_attrib(attrib) {}
+	FindImmovableAttribute(uint32_t const init_attrib) : attrib(init_attrib) {}
 
 	bool accept(const BaseImmovable &) const;
 
 private:
-	int32_t m_attrib;
+	int32_t attrib;
 };
 struct FindImmovablePlayerImmovable {
 	FindImmovablePlayerImmovable() {}
@@ -134,11 +134,11 @@ struct FindImmovableByDescr {
 	const ImmovableDescr & descr;
 };
 struct FindFlagOf {
-	FindFlagOf(const FindImmovable & finder) : finder_(finder) {}
+	FindFlagOf(const FindImmovable & init_finder) : finder(init_finder) {}
 
 	bool accept(const BaseImmovable &) const;
 
-	const FindImmovable finder_;
+	const FindImmovable finder;
 };
 
 

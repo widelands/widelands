@@ -1477,9 +1477,9 @@ void Warehouse::log_general_info(const EditorGameBase & egbase)
 {
 	Building::log_general_info(egbase);
 
-	if (descr().get_isport()){
+	if (descr().get_isport()) {
 		PortDock* pd_tmp = portdock_;
-		if (pd_tmp){
+		if (pd_tmp) {
 			molog("Port dock: %u\n", pd_tmp->serial());
 			molog("port needs ship: %s\n", (pd_tmp->get_need_ship())?"true":"false");
 			molog("wares and workers waiting: %u\n", pd_tmp->count_waiting());
