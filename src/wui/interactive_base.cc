@@ -356,17 +356,17 @@ void InteractiveBase::draw_overlay(RenderTarget& dst) {
 		std::string node_text;
 		if (is_game) {
 			const std::string gametime(gametimestring(egbase().get_gametime(), true));
-			const std::string gametime_text = as_uifont(gametime, UI_FONT_SIZE_SMALL);
+			const std::string gametime_text = as_uifont(gametime);
 			dst.blit(Point(5, 5), UI::g_fh1->render(gametime_text), BlendMode::UseAlpha, UI::Align::kTopLeft);
 
 			static boost::format node_format("(%i, %i)");
 			node_text = as_uifont
-				((node_format % sel_.pos.node.x % sel_.pos.node.y).str(), UI_FONT_SIZE_SMALL);
+				((node_format % sel_.pos.node.x % sel_.pos.node.y).str());
 		} else { //this is an editor
 			static boost::format node_format("(%i, %i, %i)");
 			const int32_t height = map[sel_.pos.node].get_height();
 			node_text = as_uifont
-				((node_format % sel_.pos.node.x % sel_.pos.node.y % height).str(), UI_FONT_SIZE_SMALL);
+				((node_format % sel_.pos.node.x % sel_.pos.node.y % height).str());
 		}
 
 		dst.blit(
@@ -380,8 +380,7 @@ void InteractiveBase::draw_overlay(RenderTarget& dst) {
 	if (get_display_flag(dfDebug)) {
 		static boost::format fps_format("%5.1f fps (avg: %5.1f fps)");
 		const std::string fps_text = as_uifont(
-		   (fps_format % (1000.0 / frametime_) % (1000.0 / (avg_usframetime_ / 1000))).str(),
-		   UI_FONT_SIZE_SMALL);
+			(fps_format % (1000.0 / frametime_) % (1000.0 / (avg_usframetime_ / 1000))).str());
 		dst.blit(Point(5, (is_game) ? 25 : 5),
 		         UI::g_fh1->render(fps_text),
 		         BlendMode::UseAlpha,
