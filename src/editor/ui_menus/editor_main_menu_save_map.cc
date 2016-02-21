@@ -273,7 +273,7 @@ bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
 		std::unique_ptr<FileSystem> fs
 			(g_fs->create_sub_file_system(tmp_name, binary ? FileSystem::ZIP : FileSystem::DIR));
 
-		Widelands::MapSaver wms(*fs, egbase);
+		Widelands::MapSaver* wms = new Widelands::MapSaver(*fs, egbase);
 
 		log("NOCOM created file system:\n");
 
@@ -296,15 +296,17 @@ bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
 		}
 
 		try {
-			wms.save();
+			wms->save();
 			eia().set_need_save(false);
 
 			// if saved to a tmp file earlier, rename now
 			if (!tmp_name.empty()) {
 				log("NOCOM Now rename %s to %s\n", tmp_name.c_str(), complete_filename.c_str());
-				g_fs->fs_rename(tmp_name, complete_filename);
 				// also change fs, as we assign it to the map below
-				fs.reset(g_fs->make_sub_file_system(complete_filename));
+				delete wms;
+				fs.reset(g_fs->create_sub_file_system
+							(complete_filename, binary ? FileSystem::ZIP : FileSystem::DIR));
+				g_fs->fs_rename(tmp_name, complete_filename);
 
 				log("NOCOM -- get_basename: %s\n", fs->get_basename().c_str());
 				log("NOCOM -- get_working_directory: %s\n", fs->get_working_directory().c_str());
