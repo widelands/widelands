@@ -125,16 +125,13 @@ void MainMenuSaveMap::clicked_ok() {
 
 	if (filename == "" && table_.has_selection()) {  //  Maybe a directory is selected.
 		complete_filename = filename = maps_data_[table_.get_selected()].filename;
-		log("NOCOM clicked OK - getting filename from maps_data: %s\n", complete_filename.c_str());
 	} else {
 		complete_filename = curdir_ + g_fs->file_separator() + filename;
-		log("NOCOM clicked OK - assembled filename: %s\n", complete_filename.c_str());
 	}
 
 	if (g_fs->is_directory(complete_filename.c_str()) &&
 		 !Widelands::WidelandsMapLoader::is_widelands_map(complete_filename)) {
 		curdir_ = complete_filename;
-		log("NOCOM clicked OK - current dir is: %s\n", curdir_.c_str());
 		fill_table();
 	} else {  //  Ok, save this map
 		Widelands::Map& map = eia().egbase().map();
@@ -156,11 +153,9 @@ void MainMenuSaveMap::clicked_ok() {
 void MainMenuSaveMap::clicked_make_directory() {
 	MainMenuSaveMapMakeDirectory md(this, _("unnamed"));
 	if (md.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk) {
-		log("NOCOM clicked make directory: %s\n", curdir_.c_str());
 		g_fs->ensure_directory_exists(curdir_);
 		//  create directory
 		std::string fullname = curdir_ + g_fs->file_separator() + md.get_dirname();
-		log("NOCOM making directory: %s\n", fullname.c_str());
 		g_fs->make_directory(fullname);
 		fill_table();
 	}
@@ -207,7 +202,6 @@ void MainMenuSaveMap::double_clicked_item() {
 	const MapData& mapdata = maps_data_[table_.get_selected()];
 	if (mapdata.maptype == MapData::MapType::kDirectory) {
 		curdir_ = mapdata.filename;
-		log("NOCOM set current dir to: %s\n", curdir_.c_str());
 		fill_table();
 	} else {
 		clicked_ok();
@@ -231,7 +225,6 @@ void MainMenuSaveMap::edit_box_changed() {
  */
 bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
 	//  Make sure that the current directory exists and is writeable.
-	log("NOCOM trying to save to: %s\n", curdir_.c_str());
 	g_fs->ensure_directory_exists(curdir_);
 
 	//  OK, first check if the extension matches (ignoring case).
@@ -240,7 +233,6 @@ bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
 
 	//  append directory name
 	const std::string complete_filename = curdir_ + g_fs->file_separator() + filename;
-	log("NOCOM complete_filename: %s\n", complete_filename.c_str());
 
 	//  Check if file exists. If so, show a warning.
 	if (g_fs->file_exists(complete_filename)) {
@@ -255,7 +247,6 @@ bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
 	// save to a tmp file/dir first, rename later
 	// (important to keep script files in the script directory)
 	const std::string tmp_name = complete_filename + ".tmp";
-	log("NOCOM tmp_name: %s\n", tmp_name.c_str());
 	if (g_fs->file_exists(tmp_name)) {
 		const std::string s = (boost::format(_
 				("A file with the name ‘%s.tmp’ already exists. You have to remove it manually."))
@@ -271,16 +262,8 @@ bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
 
 	{ // fs scope
 		std::unique_ptr<FileSystem> fs
-			(g_fs->create_sub_file_system(tmp_name, binary ? FileSystem::ZIP : FileSystem::DIR));
-
-		Widelands::MapSaver* wms = new Widelands::MapSaver(*fs, egbase);
-
-		log("NOCOM created file system:\n");
-
-		log("NOCOM -- get_basename: %s\n", fs->get_basename().c_str());
-		log("NOCOM -- get_working_directory: %s\n", fs->get_working_directory().c_str());
-		log("NOCOM -- get_homedir: %s\n", fs->get_homedir().c_str());
-		log("NOCOM -- get_basename: %s\n", fs->get_basename().c_str());
+			(g_fs->create_sub_file_system(tmp_name.empty() ? complete_filename : tmp_name,
+				binary ? FileSystem::ZIP : FileSystem::DIR));
 
 		// Recompute seafaring tag
 		if (map.allows_seafaring()) {
@@ -296,22 +279,19 @@ bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
 		}
 
 		try {
-			wms->save();
+			Widelands::MapSaver wms(*fs, egbase);
+			wms.save();
 			eia().set_need_save(false);
 
 			// if saved to a tmp file earlier, rename now
 			if (!tmp_name.empty()) {
-				log("NOCOM Now rename %s to %s\n", tmp_name.c_str(), complete_filename.c_str());
+#ifndef _WIN32
+				g_fs->fs_unlink(complete_filename);
+#endif
 				// also change fs, as we assign it to the map below
-				delete wms;
 				fs.reset(g_fs->create_sub_file_system
 							(complete_filename, binary ? FileSystem::ZIP : FileSystem::DIR));
 				g_fs->fs_rename(tmp_name, complete_filename);
-
-				log("NOCOM -- get_basename: %s\n", fs->get_basename().c_str());
-				log("NOCOM -- get_working_directory: %s\n", fs->get_working_directory().c_str());
-				log("NOCOM -- get_homedir: %s\n", fs->get_homedir().c_str());
-				log("NOCOM -- get_basename: %s\n", fs->get_basename().c_str());
 			}
 
 			// set the filesystem of the map to the current save file / directory
