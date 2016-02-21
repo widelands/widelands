@@ -1432,7 +1432,7 @@ void Player::read_statistics(FileRead & fr)
  */
 void Player::write_remaining_shipnames(FileWrite & fw) const {
 	fw.unsigned_16(remaining_shipnames_.size());
-	for (const auto& shipname : remaining_shipnames_){
+	for (const auto& shipname : remaining_shipnames_) {
 		fw.string(shipname);
 	}
 }

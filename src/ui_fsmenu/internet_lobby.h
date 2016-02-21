@@ -52,19 +52,19 @@ private:
 	uint32_t prev_clientlist_len_;
 	UI::Textarea title, clients_, opengames_;
 	UI::Textarea servername_;
-	UI::Button joingame, hostgame, back;
-	UI::EditBox servername;
-	UI::Table<const InternetClient * const> clientsonline;
-	UI::Listselect<InternetGame> opengames;
+	UI::Button joingame_, hostgame_, back_;
+	UI::EditBox edit_servername_;
+	UI::Table<const InternetClient * const> clientsonline_list_;
+	UI::Listselect<InternetGame> opengames_list_;
 	GameChatPanel chat;
 
 	// Login information
-	const char * nickname;
-	const char * password;
-	bool         reg;
+	const char * nickname_;
+	const char * password_;
+	bool         is_registered_;
 
-	void fill_games_list (const std::vector<InternetGame> &);
-	void fill_client_list(const std::vector<InternetClient> &);
+	void fill_games_list (const std::vector<InternetGame>*);
+	void fill_client_list(const std::vector<InternetClient>*);
 
 	void connect_to_metaserver();
 

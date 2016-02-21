@@ -1502,7 +1502,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 	bool needs_boost_economy = false;
 	if (highest_nonmil_prio_ > 10
 		&& has_enough_space
-		&& virtual_mines >= 5){
+		&& virtual_mines >= 5) {
 			needs_boost_economy = true;
 		}
 
@@ -1758,7 +1758,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 
 		} else if (bo.type == BuildingObserver::MILITARYSITE) {
 			bo.new_building_ = check_building_necessity(bo.desc->get_size(), gametime);
-		} else if  (bo.type == BuildingObserver::TRAININGSITE){
+		} else if  (bo.type == BuildingObserver::TRAININGSITE) {
 			bo.new_building_ = check_building_necessity(bo, PerfEvaluation::kForConstruction, gametime);
 		} else if (bo.aimode_limit_status() != AiModeBuildings::kAnotherAllowed) {
 			bo.new_building_ = BuildingNecessity::kNotNeeded;

@@ -396,8 +396,8 @@ void S2MapLoader::load_s2mf_header(FileRead& fr)
 #endif
 
 	//  don't really set size, but make the structures valid
-	m_map.m_width  = header.w;
-	m_map.m_height = header.h;
+	m_map.width_  = header.w;
+	m_map.height_ = header.h;
 
 	m_map.set_author(header.author);
 	m_map.set_name(header.name);
@@ -419,10 +419,10 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase & egbase)
 	fr.open(*g_fs, m_filename.c_str());
 
 	load_s2mf_header(fr);
-	m_map.set_size(m_map.m_width, m_map.m_height);
+	m_map.set_size(m_map.width_, m_map.height_);
 
 	//  The header must already have been processed.
-	assert(m_map.m_fields.get());
+	assert(m_map.fields_.get());
 	int16_t const mapwidth  = m_map.get_width ();
 	int16_t const mapheight = m_map.get_height();
 	assert(mapwidth > 0 && mapheight > 0);
@@ -433,7 +433,7 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase & egbase)
 	if (!section)
 		throw wexception("Section 1 (Heights) not found");
 
-	Widelands::Field * f = m_map.m_fields.get();
+	Widelands::Field * f = m_map.fields_.get();
 	pc = section.get();
 	for (int16_t y = 0; y < mapheight; ++y)
 		for (int16_t x = 0; x < mapwidth; ++x, ++f, ++pc)
@@ -450,7 +450,7 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase & egbase)
 	const Widelands::World& world = egbase.world();
 	TerrainConverter terrain_converter(world, *lookup_table);
 
-	f = m_map.m_fields.get();
+	f = m_map.fields_.get();
 	pc = section.get();
 	for (int16_t y = 0; y < mapheight; ++y)
 		for (int16_t x = 0; x < mapwidth; ++x, ++f, ++pc) {
@@ -466,7 +466,7 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase & egbase)
 	if (!section)
 		throw wexception("Section 3 (Terrain 2) not found");
 
-	f = m_map.m_fields.get();
+	f = m_map.fields_.get();
 	pc = section.get();
 	for (int16_t y = 0; y < mapheight; ++y)
 		for (int16_t x = 0; x < mapwidth; ++x, ++f, ++pc) {
