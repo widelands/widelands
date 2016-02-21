@@ -672,11 +672,9 @@ void Building::draw_help
 	uint32_t const dpyflags = igbase.get_display_flags();
 	constexpr int kDesiredMaxWidth = 120; // We don't want text to be wider than this.
 
-	const std::string census_info = info_string(InfoStringFormat::kCensus);
-	const Image* rendered_census_info = UI::g_fh1->render(as_uifont(census_info));
-	if (rendered_census_info->width() > kDesiredMaxWidth) {
-		rendered_census_info = UI::g_fh1->render(as_condensed(census_info, UI::Align::kCenter), kDesiredMaxWidth);
-	}
+	const Image* rendered_census_info =
+			UI::g_fh1->render(as_condensed(info_string(InfoStringFormat::kCensus), UI::Align::kCenter),
+									kDesiredMaxWidth);
 	Point census_pos(pos - Point(0, 48));
 
 	if (dpyflags & InteractiveBase::dfShowCensus) {
