@@ -64,7 +64,7 @@ void show_usage(const std::string& build_id, const std::string& build_type)
 			/** TRANSLATORS: You may translate true/false, also as on/off or yes/no, but */
 			/** TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the widelands textdomain */
 		<< _(" --write_syncstreams=[true|false]\n"
-			  "                      Create syncstreams to help debug network games.") << endl
+			  "                      Create syncstream dump files to help debug network games.") << endl
 		<< _(" --autosave=[...]     Automatically save each n minutes") << endl
 		<< _(" --rolling_autosave=[...]\n"
 			  "                      Use this many files for rolling autosaves") << endl << endl
