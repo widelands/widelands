@@ -690,7 +690,8 @@ void Building::draw_help
 		const std::string info = info_string(InfoStringFormat::kStatistics);
 		if (!info.empty()) {
 			dst.blit(census_pos + Point(0, rendered_census_info->height() / 2 + 10),
-						UI::g_fh1->render(as_uifont(info)), BlendMode::UseAlpha, UI::Align::kCenter);
+						UI::g_fh1->render(as_uifont(info, UI_FONT_SIZE_SMALL - 1)),
+						BlendMode::UseAlpha, UI::Align::kCenter);
 		}
 	}
 }
