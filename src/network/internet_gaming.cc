@@ -721,10 +721,9 @@ bool InternetGaming::update_for_games() {
 
 
 
-/// \returns the tables in the room, if no error occured
-const std::vector<InternetGame> & InternetGaming::games() {
-	// TODO(Hasi50): in case of error() this is a memory leak? should return some unmodifiable singleton.
-	return error() ? * (new std::vector<InternetGame>()) : gamelist_;
+/// \returns the tables in the room, if no error occured, or nullptr in case of error
+const std::vector<InternetGame>* InternetGaming::games() {
+	return error() ? nullptr : &gamelist_;
 }
 
 
@@ -739,10 +738,9 @@ bool InternetGaming::update_for_clients() {
 
 
 
-/// \returns the players in the room, if no error occured
-const std::vector<InternetClient> & InternetGaming::clients() {
-	// TODO(Hasi50): in case of error() this is a memory leak? should return some unmodifiable singleton.
-	return error() ? * (new std::vector<InternetClient>()) : clientlist_;
+/// \returns the players in the room, if no error occured, or nullptr in case of error
+const std::vector<InternetClient>* InternetGaming::clients() {
+	return error() ? nullptr : &clientlist_;
 }
 
 

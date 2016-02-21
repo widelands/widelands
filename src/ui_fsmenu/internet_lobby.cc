@@ -66,33 +66,33 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby
 		 _("Name of your server:")),
 
 // Buttons
-	joingame
+	joingame_
 		(this, "join_game",
 		 get_w() * 17 / 25, get_h() * 55 / 100, butw_, buth_,
 		 g_gr->images().get("images/ui_basic/but1.png"),
 		 _("Join this game"), std::string(), false, false),
-	hostgame
+	hostgame_
 		(this, "host_game",
 		 get_w() * 17 / 25, get_h() * 81 / 100, butw_, buth_,
 		 g_gr->images().get("images/ui_basic/but1.png"),
 		 _("Open a new game"), std::string(), true, false),
-	back
+	back_
 		(this, "back",
 		 get_w() * 17 / 25, get_h() * 90 / 100, butw_, buth_,
 		 g_gr->images().get("images/ui_basic/but0.png"),
 		 _("Back"), std::string(), true, false),
 
 // Edit boxes
-	servername
+	edit_servername_
 		(this, get_w() * 17 / 25, get_h() * 68 / 100, butw_,
 		 g_gr->images().get("images/ui_basic/but2.png"), fs_),
 
 // List
-	clientsonline
+	clientsonline_list_
 		(this,
 		 get_w() * 4 / 125, get_h()     / 5,
 		 lisw_,          get_h() * 3 / 10),
-	opengames
+	opengames_list_
 		(this,
 		 get_w() * 17 / 25, get_h()    / 5,
 		 butw_,  get_h() * 7 / 20),
@@ -105,15 +105,15 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby
 		 InternetGaming::ref()),
 
 // Login information
-	nickname(nick),
-	password(pwd),
-	reg(registered)
+	nickname_(nick),
+	password_(pwd),
+	is_registered_(registered)
 {
-	joingame.sigclicked.connect(
+	joingame_.sigclicked.connect(
 				boost::bind(&FullscreenMenuInternetLobby::clicked_joingame, boost::ref(*this)));
-	hostgame.sigclicked.connect(
+	hostgame_.sigclicked.connect(
 				boost::bind(&FullscreenMenuInternetLobby::clicked_hostgame, boost::ref(*this)));
-	back.sigclicked.connect(boost::bind(&FullscreenMenuInternetLobby::clicked_back, boost::ref(*this)));
+	back_.sigclicked.connect(boost::bind(&FullscreenMenuInternetLobby::clicked_back, boost::ref(*this)));
 
 	// Set the texts and style of UI elements
 	Section & s = g_options.pull_section("global"); //  for playername
@@ -123,8 +123,8 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby
 	clients_     .set_fontsize(fs_);
 	servername_.set_fontsize(fs_);
 	std::string server = s.get_string("servername", "");
-	servername  .set_text (server);
-	servername  .changed.connect
+	edit_servername_  .set_text (server);
+	edit_servername_  .changed.connect
 		(boost::bind(&FullscreenMenuInternetLobby::change_servername, this));
 
 	// prepare the lists
@@ -139,19 +139,19 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby
 		% "<br><img src=images/wui/overlays/roadb_red.png> "
 		% _("Unregistered")
 		%  "</p></rt>").str();
-	clientsonline .add_column(22, "*", t_tip);
+	clientsonline_list_ .add_column(22, "*", t_tip);
 	/** TRANSLATORS: Player Name */
-	clientsonline .add_column((lisw_ - 22) * 3 / 8, pgettext("player", "Name"));
-	clientsonline .add_column((lisw_ - 22) * 2 / 8, _("Points"));
-	clientsonline .add_column((lisw_ - 22) * 3 / 8, _("Game"));
-	clientsonline.set_column_compare
+	clientsonline_list_ .add_column((lisw_ - 22) * 3 / 8, pgettext("player", "Name"));
+	clientsonline_list_ .add_column((lisw_ - 22) * 2 / 8, _("Points"));
+	clientsonline_list_ .add_column((lisw_ - 22) * 3 / 8, _("Game"));
+	clientsonline_list_.set_column_compare
 		(0, boost::bind(&FullscreenMenuInternetLobby::compare_clienttype, this, _1, _2));
-	clientsonline .double_clicked.connect
+	clientsonline_list_ .double_clicked.connect
 		(boost::bind(&FullscreenMenuInternetLobby::client_doubleclicked, this, _1));
-	opengames   .set_fontsize(fs_);
-	opengames   .selected.connect
+	opengames_list_   .set_fontsize(fs_);
+	opengames_list_   .selected.connect
 		(boost::bind(&FullscreenMenuInternetLobby::server_selected, this));
-	opengames   .double_clicked.connect
+	opengames_list_   .double_clicked.connect
 		(boost::bind(&FullscreenMenuInternetLobby::server_doubleclicked, this));
 
 	// try to connect to the metaserver
@@ -176,16 +176,18 @@ void FullscreenMenuInternetLobby::think ()
 		InternetGaming::ref().handle_metaserver_communication();
 	}
 
-	if (InternetGaming::ref().update_for_clients())
+	if (InternetGaming::ref().update_for_clients()) {
 		fill_client_list(InternetGaming::ref().clients());
+	}
 
-	if (InternetGaming::ref().update_for_games())
+	if (InternetGaming::ref().update_for_games()) {
 		fill_games_list(InternetGaming::ref().games());
+	}
 }
 
 void FullscreenMenuInternetLobby::clicked_ok()
 {
-	if (joingame.enabled()) {
+	if (joingame_.enabled()) {
 		server_doubleclicked();
 	} else {
 		clicked_hostgame();
@@ -201,35 +203,40 @@ void FullscreenMenuInternetLobby::connect_to_metaserver()
 	const std::string & metaserver = s.get_string("metaserver", INTERNET_GAMING_METASERVER.c_str());
 	uint32_t port = s.get_natural("metaserverport", INTERNET_GAMING_PORT);
 
-	InternetGaming::ref().login(nickname, password, reg, metaserver, port);
+	InternetGaming::ref().login(nickname_, password_, is_registered_, metaserver, port);
 }
 
 
 /// fills the server list
-void FullscreenMenuInternetLobby::fill_games_list(const std::vector<InternetGame> & games)
+void FullscreenMenuInternetLobby::fill_games_list(const std::vector<InternetGame>* games)
 {
 	// List and button cleanup
-	opengames.clear();
-	hostgame.set_enabled(true);
-	joingame.set_enabled(false);
-	std::string localservername = servername.text();
-	for (uint32_t i = 0; i < games.size(); ++i) {
-		const Image* pic;
-		if (games.at(i).connectable) {
-			if (games.at(i).build_id == build_id())
-				pic = g_gr->images().get("images/ui_basic/continue.png");
-			else {
-				pic = g_gr->images().get("images/ui_basic/different.png");
+	opengames_list_.clear();
+	hostgame_.set_enabled(true);
+	joingame_.set_enabled(false);
+	std::string localservername = edit_servername_.text();
+
+	if (games != nullptr) {  // If no communication error occurred, fill the list.
+		for (uint32_t i = 0; i < games->size(); ++i) {
+			const Image* pic;
+			const InternetGame& game = games->at(i);
+			if (game.connectable) {
+				if (game.build_id == build_id())
+					pic = g_gr->images().get("images/ui_basic/continue.png");
+				else {
+					pic = g_gr->images().get("images/ui_basic/different.png");
+				}
+			} else {
+				pic = g_gr->images().get("images/ui_basic/stop.png");
 			}
-		} else {
-			pic = g_gr->images().get("images/ui_basic/stop.png");
+			// If one of the servers has the same name as the local name of the
+			// clients server, we disable the 'hostgame' button to avoid having more
+			// than one server with the same name.
+			if (game.name == localservername) {
+				hostgame_.set_enabled(false);
+			}
+			opengames_list_.add(game.name, game, pic, false, game.build_id);
 		}
-		// If one of the servers has the same name as the local name of the
-		// clients server, we disable the 'hostgame' button to avoid having more
-		// than one server with the same name.
-		if (games.at(i).name == localservername)
-			hostgame.set_enabled(false);
-		opengames.add(games.at(i).name, games.at(i), pic, false, games.at(i).build_id);
 	}
 }
 
@@ -252,51 +259,51 @@ uint8_t FullscreenMenuInternetLobby::convert_clienttype(const std::string & type
  */
 bool FullscreenMenuInternetLobby::compare_clienttype(unsigned int rowa, unsigned int rowb)
 {
-	const InternetClient * playera = clientsonline[rowa];
-	const InternetClient * playerb = clientsonline[rowb];
+	const InternetClient * playera = clientsonline_list_[rowa];
+	const InternetClient * playerb = clientsonline_list_[rowb];
 
 	return convert_clienttype(playera->type) < convert_clienttype(playerb->type);
 }
 
 /// fills the client list
-void FullscreenMenuInternetLobby::fill_client_list(const std::vector<InternetClient> & clients)
+void FullscreenMenuInternetLobby::fill_client_list(const std::vector<InternetClient>* clients)
 {
-	clientsonline.clear();
-	for (uint32_t i = 0; i < clients.size(); ++i) {
-		const InternetClient & client(clients[i]);
-		UI::Table<const InternetClient * const>::EntryRecord & er = clientsonline.add(&client);
-		er.set_string(1, client.name);
-		er.set_string(2, client.points);
-		er.set_string(3, client.game);
+	clientsonline_list_.clear();
+	if (clients != nullptr) { // If no communication error occurred, fill the list.
+		for (uint32_t i = 0; i < clients->size(); ++i) {
+			const InternetClient& client(clients->at(i));
+			UI::Table<const InternetClient * const>::EntryRecord & er = clientsonline_list_.add(&client);
+			er.set_string(1, client.name);
+			er.set_string(2, client.points);
+			er.set_string(3, client.game);
 
-		const Image* pic;
-		switch (convert_clienttype(client.type)) {
-			case 0: // UNREGISTERED
-				pic = g_gr->images().get("images/wui/overlays/roadb_red.png");
-				er.set_picture(0, pic);
-				break;
-			case 1: // REGISTERED
-				pic = g_gr->images().get("images/wui/overlays/roadb_yellow.png");
-				er.set_picture(0, pic);
-				break;
-			case 2: // SUPERUSER
-			case 3: // BOT
-				pic = g_gr->images().get("images/wui/overlays/roadb_green.png");
-				er.set_color(RGBColor(0, 255, 0));
-				er.set_picture(0, pic);
-				break;
-			default:
-				continue;
+			const Image* pic;
+			switch (convert_clienttype(client.type)) {
+				case 0: // UNREGISTERED
+					pic = g_gr->images().get("images/wui/overlays/roadb_red.png");
+					er.set_picture(0, pic);
+					break;
+				case 1: // REGISTERED
+					pic = g_gr->images().get("images/wui/overlays/roadb_yellow.png");
+					er.set_picture(0, pic);
+					break;
+				case 2: // SUPERUSER
+				case 3: // BOT
+					pic = g_gr->images().get("images/wui/overlays/roadb_green.png");
+					er.set_color(RGBColor(0, 255, 0));
+					er.set_picture(0, pic);
+					break;
+				default:
+					continue;
+			}
 		}
 	}
 
 	// If a new player joins the lobby, play a sound.
-	if (clients.size() != prev_clientlist_len_)
-	{
-		if (clients.size() > prev_clientlist_len_ && !InternetGaming::ref().sound_off())
-			play_new_chat_member();
-		prev_clientlist_len_ = clients.size();
+	if (clients->size() > prev_clientlist_len_ && !InternetGaming::ref().sound_off()) {
+		play_new_chat_member();
 	}
+	prev_clientlist_len_ = clients->size();
 }
 
 
@@ -304,8 +311,8 @@ void FullscreenMenuInternetLobby::fill_client_list(const std::vector<InternetCli
 void FullscreenMenuInternetLobby::client_doubleclicked (uint32_t i)
 {
 	// add a @clientname to the current edit text.
-	if (clientsonline.has_selection()) {
-		UI::Table<const InternetClient * const>::EntryRecord & er = clientsonline.get_record(i);
+	if (clientsonline_list_.has_selection()) {
+		UI::Table<const InternetClient * const>::EntryRecord & er = clientsonline_list_.get_record(i);
 
 		std::string temp("@");
 		temp += er.get_string(1);
@@ -329,12 +336,12 @@ void FullscreenMenuInternetLobby::client_doubleclicked (uint32_t i)
 /// called when an entry of the server list was selected
 void FullscreenMenuInternetLobby::server_selected()
 {
-	if (opengames.has_selection()) {
-		const InternetGame * game = &opengames.get_selected();
+	if (opengames_list_.has_selection()) {
+		const InternetGame * game = &opengames_list_.get_selected();
 		if (game->connectable)
-			joingame.set_enabled(true);
+			joingame_.set_enabled(true);
 		else
-			joingame.set_enabled(false);
+			joingame_.set_enabled(false);
 	}
 }
 
@@ -343,8 +350,8 @@ void FullscreenMenuInternetLobby::server_selected()
 void FullscreenMenuInternetLobby::server_doubleclicked()
 {
 	// if the game is open try to connect it, if not do nothing.
-	if (opengames.has_selection()) {
-		const InternetGame * game = &opengames.get_selected();
+	if (opengames_list_.has_selection()) {
+		const InternetGame * game = &opengames_list_.get_selected();
 		if (game->connectable)
 			clicked_joingame();
 	}
@@ -355,14 +362,17 @@ void FullscreenMenuInternetLobby::server_doubleclicked()
 void FullscreenMenuInternetLobby::change_servername()
 {
 	// Allow client to enter a servername manually
-	hostgame.set_enabled(true);
+	hostgame_.set_enabled(true);
 
 	// Check whether a server of that name is already open.
 	// And disable 'hostgame' button if yes.
-	const std::vector<InternetGame> & games = InternetGaming::ref().games();
-	for (uint32_t i = 0; i < games.size(); ++i) {
-		if (games.at(i).name == servername.text())
-			hostgame.set_enabled(false);
+	const std::vector<InternetGame>* games = InternetGaming::ref().games();
+	if (games != nullptr) {
+		for (uint32_t i = 0; i < games->size(); ++i) {
+			if (games->at(i).name == edit_servername_.text()) {
+				hostgame_.set_enabled(false);
+			}
+		}
 	}
 }
 
@@ -370,8 +380,8 @@ void FullscreenMenuInternetLobby::change_servername()
 /// called when the 'join game' button was clicked
 void FullscreenMenuInternetLobby::clicked_joingame()
 {
-	if (opengames.has_selection()) {
-		InternetGaming::ref().join_game(opengames.get_selected().name);
+	if (opengames_list_.has_selection()) {
+		InternetGaming::ref().join_game(opengames_list_.get_selected().name);
 
 		uint32_t const secs = time(nullptr);
 		while (InternetGaming::ref().ip().size() < 1) {
@@ -431,7 +441,7 @@ DIAG_ON("-Wold-style-cast")
 void FullscreenMenuInternetLobby::clicked_hostgame()
 {
 	// Save selected servername as default for next time and during that take care that the name is not empty.
-	std::string servername_ui = servername.text();
+	std::string servername_ui = edit_servername_.text();
 	if (servername_ui.empty()) {
 		/** TRANSLATORS: This is shown for multiplayer games when no host */
 		/** TRANSLATORS: server to connect to has been specified yet. */
