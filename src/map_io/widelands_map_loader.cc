@@ -116,7 +116,7 @@ int32_t WidelandsMapLoader::load_map_complete
 	bool is_game = load_type == MapLoader::LoadType::kGame;
 
 	preload_map(!is_game);
-	m_map.set_size(m_map.m_width, m_map.m_height);
+	m_map.set_size(m_map.width_, m_map.height_);
 	m_mol.reset(new MapObjectLoader());
 
 	// MANDATORY PACKETS
