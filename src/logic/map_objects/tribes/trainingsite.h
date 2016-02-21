@@ -39,12 +39,12 @@ public:
 	Building & create_object() const override;
 
 	uint32_t get_max_number_of_soldiers() const {
-		return m_num_soldiers;
+		return num_soldiers_;
 	}
-	bool get_train_hp     () const {return m_train_hp;}
-	bool get_train_attack () const {return m_train_attack;}
-	bool get_train_defense() const {return m_train_defense;}
-	bool get_train_evade  () const {return m_train_evade;}
+	bool get_train_hp     () const {return train_hp_;}
+	bool get_train_attack () const {return train_attack_;}
+	bool get_train_defense() const {return train_defense_;}
+	bool get_train_evade  () const {return train_evade_;}
 
 	int32_t get_min_level(TrainingAttribute) const;
 	int32_t get_max_level(TrainingAttribute) const;
@@ -85,35 +85,35 @@ private:
 	//  struct and there should be a vector, indexed by Soldier_Index,
 	//  with that struct structs as element type.
 	/** Maximum number of soldiers for a training site*/
-	uint32_t m_num_soldiers;
+	uint32_t num_soldiers_;
 	/** Number of rounds w/o successful training, after which a soldier is kicked out.**/
-	uint32_t m_max_stall;
+	uint32_t max_stall_;
 	/** Whether this site can train hitpoints*/
-	bool m_train_hp;
+	bool train_hp_;
 	/** Whether this site can train attack*/
-	bool m_train_attack;
+	bool train_attack_;
 	/** Whether this site can train defense*/
-	bool m_train_defense;
+	bool train_defense_;
 	/** Whether this site can train evasion*/
-	bool m_train_evade;
+	bool train_evade_;
 
 	/** Minimum hitpoints to which a soldier can drop at this site*/
-	int32_t m_min_hp;
+	int32_t min_hp_;
 	/** Minimum attacks to which a soldier can drop at this site*/
-	int32_t m_min_attack;
+	int32_t min_attack_;
 	/** Minimum defense to which a soldier can drop at this site*/
-	int32_t m_min_defense;
+	int32_t min_defense_;
 	/** Minimum evasion to which a soldier can drop at this site*/
-	int32_t m_min_evade;
+	int32_t min_evade_;
 
 	/** Maximum hitpoints a soldier can acquire at this site*/
-	int32_t m_max_hp;
+	int32_t max_hp_;
 	/** Maximum attack a soldier can acquire at this site*/
-	int32_t m_max_attack;
+	int32_t max_attack_;
 	/** Maximum defense a soldier can acquire at this site*/
-	int32_t m_max_defense;
+	int32_t max_defense_;
 	/** Maximum evasion a soldier can acquire at this site*/
-	int32_t m_max_evade;
+	int32_t max_evade_;
 
 	// For building help
 	std::vector<std::vector<std::string>> food_hp_;
@@ -125,8 +125,6 @@ private:
 	std::vector<std::string> weapons_defense_;
 	std::vector<std::string> weapons_evade_;
 
-	// Re-use of m_inputs to get the resources
-	// TrainingMap m_programs;
 	DISALLOW_COPY_AND_ASSIGN(TrainingSiteDescr);
 };
 
@@ -167,14 +165,14 @@ public:
 	void remove_worker(Worker &) override;
 
 	bool get_build_heroes() {
-		return m_build_heroes;
+		return build_heroes_;
 	}
 	void set_build_heroes(bool b_heroes) {
-		m_build_heroes = b_heroes;
+		build_heroes_ = b_heroes;
 	}
 	void switch_heroes() {
-		m_build_heroes = !m_build_heroes;
-		molog("BUILD_HEROES: %s", m_build_heroes ? "TRUE" : "FALSE");
+		build_heroes_ = !build_heroes_;
+		molog("BUILD_HEROES: %s", build_heroes_ ? "TRUE" : "FALSE");
 	}
 
 	void set_economy(Economy * e) override;
@@ -217,38 +215,37 @@ private:
 	void drop_stalled_soldiers(Game &);
 	Upgrade * get_upgrade(TrainingAttribute);
 
-private:
 	/// Open requests for soldiers. The soldiers can be under way or unavailable
-	Request * m_soldier_request;
+	Request * soldier_request_;
 
 	/** The soldiers currently at the training site*/
-	std::vector<Soldier *> m_soldiers;
+	std::vector<Soldier *> soldiers_;
 
 	/** Number of soldiers that should be trained concurrently.
 	 * Equal or less to maximum number of soldiers supported by a training site.
-	 * There is no guarantee there really are m_capacity soldiers in the
+	 * There is no guarantee there really are capacity_ soldiers in the
 	 * building - some of them might still be under way or even not yet
 	 * available*/
-	uint32_t m_capacity;
+	uint32_t capacity_;
 
 	/** True, \b always upgrade already experienced soldiers first, when possible
 	 * False, \b always upgrade inexperienced soldiers first, when possible */
-	bool m_build_heroes;
+	bool build_heroes_;
 
-	std::vector<Upgrade> m_upgrades;
-	Upgrade * m_current_upgrade;
+	std::vector<Upgrade> upgrades_;
+	Upgrade * current_upgrade_;
 
-	ProgramResult m_result; /// The result of the last training program.
+	ProgramResult result_; /// The result of the last training program.
 
 	// These are used for kicking out soldiers prematurely
-	static const uint32_t training_state_multiplier;
+	static const uint32_t training_state_multiplier_;
 	// Unuque key to address each training level of each war art
 	using TypeAndLevel = std::pair<uint16_t, uint16_t>;
 	// First entry is the "stallness", second is a bool
 	using FailAndPresence = std::pair<uint16_t, uint8_t>; // first might wrap in a long play..
 	using TrainFailCount = std::map<TypeAndLevel, FailAndPresence>;
-	TrainFailCount training_failure_count;
-	uint32_t max_stall_val;
+	TrainFailCount training_failure_count_;
+	uint32_t max_stall_val_;
 	void init_kick_state(const TrainingAttribute&, const TrainingSiteDescr&);
 
 

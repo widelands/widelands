@@ -17,24 +17,19 @@
  *
  */
 
-#ifndef WL_MAP_IO_MAP_EXTRADATA_PACKET_H
-#define WL_MAP_IO_MAP_EXTRADATA_PACKET_H
+#ifndef WL_MAP_IO_MAP_IMAGES_H
+#define WL_MAP_IO_MAP_IMAGES_H
 
-#include "map_io/map_data_packet.h"
+#include "io/filesystem/filesystem.h"
 
 namespace Widelands {
 
-/*
- * This packet contains all extra data in the map. This can currently be one of
- * the followings
- *   - Images
- */
-class MapExtradataPacket {
-public:
-	void read(FileSystem&, bool);
-	void write(FileSystem&, EditorGameBase&);
-};
+// Load all images from 'pics/*' in the map.
+void load_map_images(FileSystem& filesystem);
+
+// Copies all images from 'pics/*' in 'old_fs' into the 'new_fs'.
+void save_map_images(FileSystem* new_fs, FileSystem* old_fs);
 
 }  // namespace Widelands
 
-#endif  // end of include guard: WL_MAP_IO_MAP_EXTRADATA_PACKET_H
+#endif  // end of include guard: WL_MAP_IO_MAP_IMAGES_H

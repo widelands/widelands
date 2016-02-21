@@ -48,8 +48,8 @@ enum {
 
 class CmdReplaySyncRead : public Command {
 public:
-	CmdReplaySyncRead(const uint32_t _duetime, const Md5Checksum & hash)
-		: Command(_duetime), m_hash(hash)
+	CmdReplaySyncRead(const uint32_t init_duetime, const Md5Checksum & hash)
+		: Command(init_duetime), m_hash(hash)
 	{}
 
 	QueueCommandTypes id() const override {return QueueCommandTypes::kReplaySyncRead;}
@@ -201,7 +201,7 @@ bool ReplayReader::end_of_replay()
  */
 class CmdReplaySyncWrite : public Command {
 public:
-	CmdReplaySyncWrite(const uint32_t _duetime) : Command(_duetime) {}
+	CmdReplaySyncWrite(const uint32_t init_duetime) : Command(init_duetime) {}
 
 	QueueCommandTypes id() const override {return QueueCommandTypes::kReplaySyncWrite;}
 

@@ -173,8 +173,8 @@ struct ImmovableProgram {
 	};
 
 	/// Create a program with a single action.
-	ImmovableProgram(char const * const _name, Action * const action)
-		: name_(_name)
+	ImmovableProgram(char const * const init_name, Action * const action)
+		: name_(init_name)
 	{
 		actions_.push_back(action);
 	}

@@ -158,7 +158,7 @@ public:
 		uint32_t last_soldier_trained;
 	} ai_data;
 
-	AiPersistentState* get_mutable_ai_persistent_state(){
+	AiPersistentState* get_mutable_ai_persistent_state() {
 		return &ai_data;
 	}
 
@@ -549,7 +549,7 @@ private:
 	void update_building_statistics(Building &, NoteImmovable::Ownership ownership);
 	void update_team_players();
 	void play_message_sound(const Message::Type & msgtype);
-	void _enhance_or_dismantle(Building*, DescriptionIndex index_of_new_building);
+	void enhance_or_dismantle(Building*, DescriptionIndex index_of_new_building);
 
 	// Called when a node becomes seen or has changed.  Discovers the node and
 	// those of the 6 surrounding edges/triangles that are not seen from another

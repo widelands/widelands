@@ -33,9 +33,9 @@ namespace Widelands {class Game;}
 class SaveHandler {
 public:
 	SaveHandler() : m_last_saved_realtime(0), m_initialized(false), m_allow_saving(true),
-		m_save_requested(false), m_save_filename("") {}
+		m_save_requested(false), m_save_filename(""), autosave_filename_("wl_autosave") {}
 	void think(Widelands::Game &);
-	std::string create_file_name(std::string dir, std::string filename);
+	std::string create_file_name(const std::string& dir, const std::string& filename) const;
 	bool save_game
 		(Widelands::Game   &,
 		 const std::string & filename,
@@ -43,10 +43,11 @@ public:
 
 	static std::string get_base_dir() {return "save";}
 	const std::string get_cur_filename() {return m_current_filename;}
-	void set_current_filename(std::string filename) {m_current_filename = filename;}
+	void set_current_filename(const std::string& filename) {m_current_filename = filename;}
+	void set_autosave_filename(const std::string& filename) {autosave_filename_ = filename;}
 	void set_allow_saving(bool t) {m_allow_saving = t;}
 	bool get_allow_saving() {return m_allow_saving;}
-	void request_save(std::string filename = "")
+	void request_save(const std::string& filename = "")
 	{
 		m_save_requested = true;
 		m_save_filename = filename;
@@ -59,6 +60,7 @@ private:
 	bool m_save_requested;
 	std::string m_save_filename;
 	std::string m_current_filename;
+	std::string autosave_filename_;
 
 	void initialize(uint32_t gametime);
 };

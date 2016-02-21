@@ -1550,20 +1550,32 @@ int LuaImmovableDescription::get_owner_type(lua_State * L) {
 /* RST
 	.. attribute:: size
 
-			(RO) the size of the immovable as an int.
+		(RO) The size of this immovable. Can be either of
+
+		* :const:`none` -- Example: mushrooms. Immovables will be destroyed when
+			something else is built on this field.
+		* :const:`small` -- Example: trees or flags
+		* :const:`medium` -- Example: Medium sized buildings
+		* :const:`big` -- Example: Big sized buildings or rocks
 */
 int LuaImmovableDescription::get_size(lua_State * L) {
-	// TODO(GunChleoc): see this todo, that is also mentioned below for
-	// buildings. I think we can do that now, every description is wrapped I
-	// think. Essentially that means every instance of something on the map
-	// (like a building) get's a .description that has the static data for the
-	// building/immovable. maybe in a followup branch, but definitvely before b19, since that is backwards
-	// incompatible.
-	// TODO(SirVer): size should be similar to
-	// https://wl.widelands.org/docs/wl/autogen_wl_map/#wl.map.BaseImmovable.size.
-	// In fact, as soon as all descriptions are wrapped (also for other
-	// immovables besides buildings) we should get rid of BaseImmovable.size.
-	lua_pushinteger(L, get()->get_size());
+	switch (get()->get_size()) {
+	case BaseImmovable::NONE:
+		lua_pushstring(L, "none");
+		break;
+	case BaseImmovable::SMALL:
+		lua_pushstring(L, "small");
+		break;
+	case BaseImmovable::MEDIUM:
+		lua_pushstring(L, "medium");
+		break;
+	case BaseImmovable::BIG:
+		lua_pushstring(L, "big");
+		break;
+	default:
+		report_error(L, "Unknown size %i in LuaImmovableDescription::get_size: %s",
+						 get()->get_size(), get()->name().c_str());
+	}
 	return 1;
 }
 
@@ -1642,13 +1654,9 @@ const PropertyType<LuaBuildingDescription> LuaBuildingDescription::Properties[] 
 	PROP_RO(LuaBuildingDescription, enhancement),
 	PROP_RO(LuaBuildingDescription, is_mine),
 	PROP_RO(LuaBuildingDescription, is_port),
+	PROP_RO(LuaBuildingDescription, size),
 	PROP_RO(LuaBuildingDescription, returned_wares),
 	PROP_RO(LuaBuildingDescription, returned_wares_enhanced),
-	// TODO(SirVer): size should be similar to
-	// https://wl.widelands.org/docs/wl/autogen_wl_map/#wl.map.BaseImmovable.size.
-	// In fact, as soon as all descriptions are wrapped (also for other
-	// immovables besides buildings) we should get rid of BaseImmovable.size.
-	PROP_RO(LuaBuildingDescription, size),
 	PROP_RO(LuaBuildingDescription, vision_range),
 	PROP_RO(LuaBuildingDescription, workarea_radius),
 	{nullptr, nullptr, nullptr},
@@ -1801,6 +1809,33 @@ int LuaBuildingDescription::get_is_port(lua_State * L) {
 }
 
 /* RST
+	.. attribute:: size
+
+		(RO) The size of this building. Can be either of
+
+		* :const:`small` -- Small sized buildings
+		* :const:`medium` -- Medium sized buildings
+		* :const:`big` -- Big sized buildings
+*/
+int LuaBuildingDescription::get_size(lua_State * L) {
+	switch (get()->get_size()) {
+	case BaseImmovable::SMALL:
+		lua_pushstring(L, "small");
+		break;
+	case BaseImmovable::MEDIUM:
+		lua_pushstring(L, "medium");
+		break;
+	case BaseImmovable::BIG:
+		lua_pushstring(L, "big");
+		break;
+	default:
+		report_error(L, "Unknown size %i in LuaBuildingDescription::get_size: %s",
+						 get()->get_size(), get()->name().c_str());
+	}
+	return 1;
+}
+
+/* RST
 	.. attribute:: returned_wares
 
 			(RO) a list of wares returned upon dismantling.
@@ -1817,17 +1852,6 @@ int LuaBuildingDescription::get_returned_wares(lua_State * L) {
 */
 int LuaBuildingDescription::get_returned_wares_enhanced(lua_State * L) {
 	return wares_or_workers_map_to_lua(L, get()->returned_wares_enhanced(), MapObjectType::WARE);
-}
-
-
-/* RST
-	.. attribute:: size
-
-			(RO) the size of the building: 1 = small, 2 = medium, 3 = big.
-*/
-int LuaBuildingDescription::get_size(lua_State * L) {
-	lua_pushinteger(L, get()->get_size());
-	return 1;
 }
 
 
@@ -3095,6 +3119,10 @@ int LuaMapObject::get_descr(lua_State * L) {
 			return CAST_TO_LUA(TrainingSiteDescr, LuaTrainingSiteDescription);
 		case (MapObjectType::WAREHOUSE):
 			return CAST_TO_LUA(WarehouseDescr, LuaWarehouseDescription);
+		case (MapObjectType::IMMOVABLE):
+			return CAST_TO_LUA(ImmovableDescr, LuaImmovableDescription);
+		case (MapObjectType::WORKER):
+			return CAST_TO_LUA(WorkerDescr, LuaWorkerDescription);
 		default:
 			return CAST_TO_LUA(MapObjectDescr, LuaMapObjectDescription);
 	}
@@ -3213,7 +3241,6 @@ const MethodType<LuaBaseImmovable> LuaBaseImmovable::Methods[] = {
 	{nullptr, nullptr},
 };
 const PropertyType<LuaBaseImmovable> LuaBaseImmovable::Properties[] = {
-	PROP_RO(LuaBaseImmovable, size),
 	PROP_RO(LuaBaseImmovable, fields),
 	{nullptr, nullptr, nullptr},
 };
@@ -3223,30 +3250,6 @@ const PropertyType<LuaBaseImmovable> LuaBaseImmovable::Properties[] = {
  PROPERTIES
  ==========================================================
  */
-/* RST
-	.. attribute:: size
-
-		(RO) The size of this immovable. Can be either of
-
-		* :const:`none` -- Example: mushrooms. Immovables will be destroyed when
-			something else is build on this field.
-		* :const:`small` -- Example: trees or flags
-		* :const:`medium` -- Example: Medium sized buildings
-		* :const:`big` -- Example: Big sized buildings or rocks
-*/
-int LuaBaseImmovable::get_size(lua_State * L) {
-	BaseImmovable * o = get(L, get_egbase(L));
-
-	switch (o->get_size()) {
-		case BaseImmovable::NONE: lua_pushstring(L, "none"); break;
-		case BaseImmovable::SMALL: lua_pushstring(L, "small"); break;
-		case BaseImmovable::MEDIUM: lua_pushstring(L, "medium"); break;
-		case BaseImmovable::BIG: lua_pushstring(L, "big"); break;
-		default:
-			report_error(L, "Unknown size in LuaBaseImmovable::get_size: %i", o->get_size());
-	}
-	return 1;
-}
 
 /* RST
 	.. attribute:: fields
@@ -3385,7 +3388,7 @@ int LuaFlag::get_roads(lua_State * L) {
 		EditorGameBase & egbase = get_egbase(L);
 		Flag * f = get(L, egbase);
 
-		for (uint32_t i = 1; i <= 6; i++){
+		for (uint32_t i = 1; i <= 6; i++) {
  	       if (f->get_road(i) != nullptr)  {
 				lua_pushstring(L, directions.at(i - 1));
 				upcasted_map_object_to_lua(L, f->get_road(i));
@@ -3859,7 +3862,7 @@ int LuaWarehouse::get_expedition_in_progress(lua_State * L) {
 	if (is_a(Game, &egbase)) {
 		PortDock* pd = get(L, egbase)->get_portdock();
 		if (pd) {
-			if (pd->expedition_started()){
+			if (pd->expedition_started()) {
 				return 1;
 			}
 		}
@@ -3953,7 +3956,7 @@ int LuaWarehouse::start_expedition(lua_State* L) {
 		if (!pd) {
 			return 0;
 		}
-		if (!pd->expedition_started()){
+		if (!pd->expedition_started()) {
 			game->send_player_start_or_cancel_expedition(*wh);
 			return 1;
 		}
@@ -3984,7 +3987,7 @@ int LuaWarehouse::cancel_expedition(lua_State* L) {
 			if (!pd) {
 				return 0;
 			}
-		if (pd->expedition_started()){
+		if (pd->expedition_started()) {
 			game->send_player_start_or_cancel_expedition(*wh);
 			return 1;
 		}
@@ -4540,7 +4543,7 @@ int LuaShip::set_island_explore_direction(lua_State* L) {
 	if (upcast(Game, game, &egbase)) {
 		Ship* ship = get(L, egbase);
 		std::string dir = luaL_checkstring(L, 3);
-		if (dir == "ccw"){
+		if (dir == "ccw") {
 			 game->send_player_ship_explore_island(*ship,  IslandExploreDirection::kCounterClockwise);
 		} else if (dir == "cw") {
 			 game->send_player_ship_explore_island(*ship, IslandExploreDirection::kClockwise);

@@ -63,11 +63,8 @@ void show_usage(const std::string& build_id, const std::string& build_type)
 			  "                      The locale to use.") << endl
 			/** TRANSLATORS: You may translate true/false, also as on/off or yes/no, but */
 			/** TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the widelands textdomain */
-		<< _(" --remove_syncstreams=[true|false]\n"
-			  "                      Remove syncstream files on startup") << endl
-		<< _(" --remove_replays=[...]\n"
-			  "                      Remove replays after this number of days.\n"
-			  "                      If this is 0, replays are not deleted.") << endl
+		<< _(" --write_syncstreams=[true|false]\n"
+			  "                      Create syncstreams to help debug network games.") << endl
 		<< _(" --autosave=[...]     Automatically save each n minutes") << endl
 		<< _(" --rolling_autosave=[...]\n"
 			  "                      Use this many files for rolling autosaves") << endl << endl
