@@ -100,7 +100,7 @@ SoldierDescr::BattleAttribute::BattleAttribute(std::unique_ptr<LuaTable> table) 
 	if (table->has_key("maximum")) {
 		 maximum = table->get_int("maximum");
 		 if (base > maximum) {
-			 throw GameDataError("Minimum %d is greater than maximum %d for a soldier's battle attribute.",
+			 throw GameDataError("Base %d is greater than maximum %d for a soldier's battle attribute.",
 										base, maximum);
 		 }
 	} else {

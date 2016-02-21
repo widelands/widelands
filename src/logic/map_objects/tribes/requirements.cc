@@ -229,13 +229,17 @@ void RequireAttribute::write
 static Requirements read_attribute
 	(FileRead & fr, EditorGameBase &, MapObjectLoader &)
 {
-	TrainingAttribute const at  = static_cast<TrainingAttribute>(fr.unsigned_8());
-	if
-		(at != TrainingAttribute::kHealth
-		 && at != TrainingAttribute::kAttack
-		 && at != TrainingAttribute::kDefense
-		 && at != TrainingAttribute::kEvade
-		 && at != TrainingAttribute::kTotal)
+	// Get the training attribute and check if it is a valid enum member
+	// We use a temp value, because the static_cast to the enum might be undefined.
+	uint8_t temp_at  = fr.unsigned_8();
+	switch (temp_at) {
+	case static_cast<uint8_t>(TrainingAttribute::kHealth):
+	case static_cast<uint8_t>(TrainingAttribute::kAttack):
+	case static_cast<uint8_t>(TrainingAttribute::kDefense):
+	case static_cast<uint8_t>(TrainingAttribute::kEvade):
+	case static_cast<uint8_t>(TrainingAttribute::kTotal):
+		break;
+	default:
 		throw GameDataError
 			(
 			 "expected kHealth (%u), kAttack (%u), kDefense (%u), kEvade "
@@ -245,7 +249,10 @@ static Requirements read_attribute
 				TrainingAttribute::kDefense,
 				TrainingAttribute::kEvade,
 				TrainingAttribute::kTotal,
-				at);
+				temp_at);
+	}
+	TrainingAttribute const at  = static_cast<TrainingAttribute>(temp_at);
+
 	int32_t const min = fr.signed_32();
 	int32_t const max = fr.signed_32();
 

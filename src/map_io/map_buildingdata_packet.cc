@@ -830,7 +830,29 @@ void MapBuildingdataPacket::read_trainingsite
 			uint16_t mapsize = fr.unsigned_16(); // map of training levels (not _the_ map)
 			while (mapsize)
 			{
-				TrainingAttribute traintype  = static_cast<TrainingAttribute>(fr.unsigned_8());
+				// Get the training attribute and check if it is a valid enum member
+				// We use a temp value, because the static_cast to the enum might be undefined.
+				uint8_t temp_traintype  = fr.unsigned_8();
+				switch (temp_traintype) {
+				case static_cast<uint8_t>(TrainingAttribute::kHealth):
+				case static_cast<uint8_t>(TrainingAttribute::kAttack):
+				case static_cast<uint8_t>(TrainingAttribute::kDefense):
+				case static_cast<uint8_t>(TrainingAttribute::kEvade):
+				case static_cast<uint8_t>(TrainingAttribute::kTotal):
+					break;
+				default:
+					throw GameDataError
+						(
+						 "expected kHealth (%u), kAttack (%u), kDefense (%u), kEvade "
+						 "(%u) or kTotal (%u) but found unknown attribute value (%u)",
+							TrainingAttribute::kHealth,
+							TrainingAttribute::kAttack,
+							TrainingAttribute::kDefense,
+							TrainingAttribute::kEvade,
+							TrainingAttribute::kTotal,
+							temp_traintype);
+				}
+				TrainingAttribute traintype  = static_cast<TrainingAttribute>(temp_traintype);
 				uint16_t trainlevel = fr.unsigned_16();
 				uint16_t trainstall = fr.unsigned_16();
 				uint16_t spresence  = fr.unsigned_8();

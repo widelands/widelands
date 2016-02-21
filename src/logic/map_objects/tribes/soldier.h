@@ -160,11 +160,11 @@ public:
 	void set_defense_level(uint32_t);
 	void set_evade_level  (uint32_t);
 	uint32_t get_level (TrainingAttribute) const;
-	uint32_t get_health_level     () const {return health_level_;}
+	uint32_t get_health_level () const {return health_level_;}
 	uint32_t get_attack_level () const {return attack_level_;}
 	uint32_t get_defense_level() const {return defense_level_;}
 	uint32_t get_evade_level  () const {return evade_level_;}
-	uint32_t get_total_level() const   {return health_level_ + attack_level_ + defense_level_ + evade_level_;}
+	uint32_t get_total_level  () const {return health_level_ + attack_level_ + defense_level_ + evade_level_;}
 
 	/// Automatically select a task.
 	void init_auto_task(Game &) override;
