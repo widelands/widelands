@@ -287,7 +287,6 @@ Parser::~Parser() {
 }
 
 Tag * Parser::parse(std::string text, const TagSet & allowed_tags) {
-	// TODO(GunChleoc): Some \ will disappear while typing in edit fields.
 	boost::replace_all(text, "\\", "\\\\"); // Prevent crashes with \.
 
 	m_ts.reset(new TextStream(text));
