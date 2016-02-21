@@ -302,7 +302,6 @@ bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
 			// if saved to a tmp file earlier, rename now
 			if (!tmp_name.empty()) {
 				log("NOCOM Now rename %s to %s\n", tmp_name.c_str(), complete_filename.c_str());
-				g_fs->fs_unlink(tmp_name);
 				g_fs->fs_rename(tmp_name, complete_filename);
 				// also change fs, as we assign it to the map below
 				fs.reset(g_fs->make_sub_file_system(complete_filename));
