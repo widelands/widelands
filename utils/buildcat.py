@@ -51,6 +51,7 @@ MAINPOTS = [
                     "../../src/*/*/*/*/*.h",
                     "../../src/*/*/*/*/*/*.h",
                     "../../data/scripting/widelands/*.lua",
+                    "../../data/scripting/editor/*.lua",
     ] ),
     ( "widelands_console/widelands_console", [
                     "../../src/wlapplication_messages.cc",
