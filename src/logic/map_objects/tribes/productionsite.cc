@@ -301,7 +301,7 @@ bool ProductionSite::has_workers(DescriptionIndex targetSite, Game & /* game */)
 			for (const auto& wp : bld->working_positions()) {
 
 				// If worker for this position is buildable, just skip him
-				if (owner().tribe().get_worker_descr(wp.first)->is_buildable()){
+				if (owner().tribe().get_worker_descr(wp.first)->is_buildable()) {
 					continue;
 				}
 
