@@ -179,7 +179,7 @@ ProductionSiteDescr::ProductionSiteDescr
 				programs_[program_name] =
 						std::unique_ptr<ProductionProgram>(
 							new ProductionProgram(program_name,
-														 program_table->get_string("descname"),
+														 _(program_table->get_string("descname")),
 														 program_table->get_table("actions"),
 														 egbase,
 														 this));
@@ -301,7 +301,7 @@ bool ProductionSite::has_workers(DescriptionIndex targetSite, Game & /* game */)
 			for (const auto& wp : bld->working_positions()) {
 
 				// If worker for this position is buildable, just skip him
-				if (owner().tribe().get_worker_descr(wp.first)->is_buildable()){
+				if (owner().tribe().get_worker_descr(wp.first)->is_buildable()) {
 					continue;
 				}
 

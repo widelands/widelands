@@ -158,7 +158,7 @@ public:
 		uint32_t last_soldier_trained;
 	} ai_data;
 
-	AiPersistentState* get_mutable_ai_persistent_state(){
+	AiPersistentState* get_mutable_ai_persistent_state() {
 		return &ai_data;
 	}
 

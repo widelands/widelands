@@ -364,7 +364,7 @@ void PortDock::ship_arrived(Game& game, Ship& ship) {
 			waiting_.pop_back();
 		}
 
-		if (waiting_.empty()){
+		if (waiting_.empty()) {
 			set_need_ship(game, false);
 		}
 	}

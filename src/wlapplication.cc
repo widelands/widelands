@@ -418,7 +418,7 @@ void WLApplication::run()
 	} else if (game_type_ == LOADGAME) {
 		Widelands::Game game;
 		try {
-			game.run_load_game(filename_.c_str(), script_to_run_);
+			game.run_load_game(filename_, script_to_run_);
 		} catch (const Widelands::GameDataError & e) {
 			log("Game not loaded: Game data error: %s\n", e.what());
 		} catch (const std::exception & e) {
@@ -1374,7 +1374,7 @@ void WLApplication::replay()
 		tipstext.push_back("general_game");
 		GameTips tips (loader_ui, tipstext);
 
-		loader_ui.step(_("Loading..."));
+		loader_ui.step(_("Loading…"));
 
 		game.set_ibase
 			(new InteractiveSpectator(game, g_options.pull_section("global")));

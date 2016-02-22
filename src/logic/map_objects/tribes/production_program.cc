@@ -1635,7 +1635,7 @@ void ProductionProgram::ActConstruct::execute(Game & game, ProductionSite & psit
 			std::vector<ImmovableFound> found_immovables;
 			const uint32_t imm_count =
 				map.find_immovables(Area<FCoords>(map.get_fcoords(coords), 2), &found_immovables);
-			if (best_score > imm_count){
+			if (best_score > imm_count) {
 				best_score = imm_count;
 				best_coords = coords;
 			}

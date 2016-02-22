@@ -103,7 +103,7 @@ void SaveHandler::think(Widelands::Game & game) {
 
 	// TODO(unknown): defer saving to next tick so that this message is shown
 	// before the actual save, or put the saving logic in another thread
-	game.get_ibase()->log_message(_("Saving game..."));
+	game.get_ibase()->log_message(_("Saving game…"));
 
 	// save the game
 	const std::string complete_filename = create_file_name(get_base_dir(), filename);
@@ -159,17 +159,17 @@ void SaveHandler::initialize(uint32_t realtime) {
 /*
  * Calculate the name of the save file
  */
-std::string SaveHandler::create_file_name
-	(std::string dir, std::string filename)
+std::string SaveHandler::create_file_name(const std::string& dir, const std::string& filename) const
 {
-	// ok, first check if the extension matches (ignoring case)
-	if (!boost::iends_with(filename, WLGF_SUFFIX))
-		filename += WLGF_SUFFIX;
-
-	// Now append directory name
+	// Append directory name
 	std::string complete_filename = dir;
 	complete_filename += "/";
 	complete_filename += filename;
+
+	// Now check if the extension matches (ignoring case)
+	if (!boost::iends_with(filename, WLGF_SUFFIX)) {
+		complete_filename += WLGF_SUFFIX;
+	}
 
 	return complete_filename;
 }
