@@ -262,8 +262,7 @@ bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
 
 	{ // fs scope
 		std::unique_ptr<FileSystem> fs
-			(g_fs->create_sub_file_system(tmp_name.empty() ? complete_filename : tmp_name,
-				binary ? FileSystem::ZIP : FileSystem::DIR));
+			(g_fs->create_sub_file_system(tmp_name, binary ? FileSystem::ZIP : FileSystem::DIR));
 
 		// Recompute seafaring tag
 		if (map.allows_seafaring()) {
@@ -279,27 +278,16 @@ bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
 		}
 
 		try {
-			Widelands::MapSaver wms(*fs, egbase);
-			wms.save();
+			Widelands::MapSaver* wms = new Widelands::MapSaver(*fs, egbase);
+			wms->save();
+			delete wms;
+			//reset filesystem to avoid file locks on saves
+			fs.reset();
 			eia().set_need_save(false);
-
-			// if saved to a tmp file earlier, rename now
-			if (!tmp_name.empty()) {
-#ifdef _WIN32
-				// Unlinking the file handle for the Zip filesystem in Windows will cause
-				// the file rename to fail.
-				if (binary == FileSystem::DIR) {
-					g_fs->fs_unlink(complete_filename);
-				}
-#else
-				g_fs->fs_unlink(complete_filename);
-#endif
-				// also change fs, as we assign it to the map below
-				fs.reset(g_fs->create_sub_file_system
-							(complete_filename, binary ? FileSystem::ZIP : FileSystem::DIR));
-				g_fs->fs_rename(tmp_name, complete_filename);
-			}
-
+			g_fs->fs_unlink(complete_filename);
+			g_fs->fs_rename(tmp_name, complete_filename);
+			// also change fs, as we assign it to the map below
+			fs.reset(g_fs->make_sub_file_system(complete_filename));
 			// set the filesystem of the map to the current save file / directory
 			map.swap_filesystem(fs);
 			// DONT use fs as of here, its garbage now!
@@ -315,9 +303,7 @@ bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
 			mbox.run<UI::Panel::Returncodes>();
 
 			// cleanup tmp file if it was created
-			if (!tmp_name.empty()) {
-				g_fs->fs_unlink(tmp_name);
-			}
+			g_fs->fs_unlink(tmp_name);
 		}
 	} // end fs scope, dont use it
 
