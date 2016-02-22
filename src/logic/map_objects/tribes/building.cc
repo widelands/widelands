@@ -675,7 +675,7 @@ void Building::draw_help
 	const Image* rendered_census_info =
 			UI::g_fh1->render(as_condensed(info_string(InfoStringFormat::kCensus), UI::Align::kCenter),
 									kDesiredMaxWidth);
-	Point census_pos(pos - Point(0, 48));
+	const Point census_pos(pos - Point(0, 48));
 
 	if (dpyflags & InteractiveBase::dfShowCensus) {
 		dst.blit(census_pos, rendered_census_info, BlendMode::UseAlpha, UI::Align::kCenter);
@@ -687,10 +687,10 @@ void Building::draw_help
 				(!iplayer->player().see_all() &&
 				 iplayer->player().is_hostile(*get_owner()))
 				return;
-		const std::string info = info_string(InfoStringFormat::kStatistics);
+		const std::string& info = info_string(InfoStringFormat::kStatistics);
 		if (!info.empty()) {
 			dst.blit(census_pos + Point(0, rendered_census_info->height() / 2 + 10),
-						UI::g_fh1->render(as_uifont(info, UI_FONT_SIZE_SMALL - 1)),
+						UI::g_fh1->render(as_condensed(info)),
 						BlendMode::UseAlpha, UI::Align::kCenter);
 		}
 	}
