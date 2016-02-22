@@ -119,7 +119,6 @@ void MilitarySite::update_statistics_string(std::string* s)
 	s->clear();
 	uint32_t present = present_soldiers().size();
 	uint32_t stationed = stationed_soldiers().size();
-	std::string color;
 
 	if (present == stationed) {
 		if (capacity_ > stationed) {
@@ -133,7 +132,6 @@ void MilitarySite::update_statistics_string(std::string* s)
 			*s = (boost::format(ngettext("%u soldier", "%u soldiers", stationed))
 											% stationed).str();
 		}
-		color = UI_FONT_CLR_GOOD.hex_value();
 	} else {
 		if (capacity_ > stationed) {
 			/** TRANSLATORS: %1% is the number of soldiers the plural refers to */
@@ -148,9 +146,8 @@ void MilitarySite::update_statistics_string(std::string* s)
 			*s = (boost::format(ngettext("%1%(+%2%) soldier", "%1%(+%2%) soldiers", stationed))
 					% present % (stationed - present)).str();
 		}
-		color = UI_FONT_CLR_OK.hex_value();
 	}
-	*s = (boost::format("<font color=%s>%s</font>") % color % *s).str();
+	*s = (boost::format("<font color=%s>%s</font>") % UI_FONT_CLR_OK.hex_value() % *s).str();
 
 }
 
