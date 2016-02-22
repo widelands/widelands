@@ -1,0 +1,62 @@
+{
+   "tribes":[
+      {
+         "name": "barbarians",
+         "descname": "Barbarians",
+         "author": "The Widelands Development Team",
+         "tooltip": "The mighty tribes of the east-lands.",
+         "icon": "tribes/images/barbarians/icon.png",
+         "buildings":[
+            {
+               "descname": "Headquarters"
+            },
+            {
+               "descname": "Port"
+            },
+            {
+               "descname": "Warehouse"
+            }
+
+         ]
+      },
+      {
+         "name": "empire",
+         "descname": "Empire",
+         "author": "The Widelands Development Team",
+         "tooltip": "This is the culture of the Roman Empire.",
+         "icon": "tribes/images/empire/icon.png",
+         "buildings":[
+            {
+               "descname": "Headquarters"
+            },
+            {
+               "descname": "Port"
+            },
+            {
+               "descname": "Warehouse"
+            }
+
+         ]
+      },
+      {
+         "name": "atlanteans",
+         "descname": "Atlanteans",
+         "author": "The Widelands Development Team",
+         "tooltip": "This tribe is known from the oldest tales. The sons and daughters of Atlantis.",
+         "icon": "tribes/images/atlanteans/icon.png",
+         "buildings":[
+            {
+               "descname": "Headquarters"
+            },
+            {
+               "descname": "Port"
+            },
+            {
+               "descname": "Warehouse"
+            }
+
+         ]
+      }
+
+   ]
+}
