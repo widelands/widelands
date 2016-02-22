@@ -57,4 +57,17 @@ Coords Coords::null() {
 	return Coords(-1, -1);
 }
 
+// Hash coordinates to use them as keys in a container
+uint32_t Coords::hash() const {
+	return x << 16 | y;
+}
+
+// Unhash coordinates so they can be gotten from a container
+Coords Coords::unhash(uint32_t hash) {
+	Coords coords;
+	coords.x = hash >> 16;  // is cast needed here???
+	coords.y = hash;
+	return coords;
+}
+
 }  // namespace Widelands

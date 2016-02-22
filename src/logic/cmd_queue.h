@@ -70,17 +70,17 @@ constexpr uint32_t kCommandQueueBucketSize = 65536; // Make this a power of two,
  * the same for all parallel simulation.
  */
 struct Command {
-	Command (const uint32_t init_duetime) : m_duetime(init_duetime) {}
+	Command (const uint32_t init_duetime) : duetime_(init_duetime) {}
 	virtual ~Command ();
 
 	virtual void execute (Game &) = 0;
 	virtual QueueCommandTypes id() const = 0;
 
-	uint32_t duetime() const {return m_duetime;}
-	void set_duetime(uint32_t const t) {m_duetime = t;}
+	uint32_t duetime() const {return duetime_;}
+	void set_duetime(uint32_t const t) {duetime_ = t;}
 
 private:
-	uint32_t m_duetime;
+	uint32_t duetime_;
 };
 
 
@@ -148,11 +148,11 @@ public:
 	void flush(); // delete all commands in the queue now
 
 private:
-	Game                       & m_game;
-	uint32_t                     nextserial;
-	uint32_t m_ncmds;
+	Game& game_;
+	uint32_t nextserial_;
+	uint32_t ncmds_;
 	using CommandsContainer = std::vector<std::priority_queue<CmdItem>>;
-	CommandsContainer m_cmds;
+	CommandsContainer cmds_;
 };
 
 }
