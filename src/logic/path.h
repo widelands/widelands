@@ -42,35 +42,35 @@ struct Path {
 	friend struct MapAStarBase;
 
 	Path() {}
-	Path(const Coords & c) : m_start(c), m_end(c) {}
+	Path(const Coords & c) : start_(c), end_(c) {}
 	Path(CoordPath &);
 
 	void reverse();
 
-	Coords get_start() const {return m_start;}
-	Coords get_end  () const {return m_end;}
+	Coords get_start() const {return start_;}
+	Coords get_end  () const {return end_;}
 
 	using StepVector = std::vector<Direction>;
-	StepVector::size_type get_nsteps() const {return m_path.size();}
+	StepVector::size_type get_nsteps() const {return path_.size();}
 	Direction operator[](StepVector::size_type const i) const {
-		assert(i < m_path.size());
-		return m_path[m_path.size() - i - 1];
+		assert(i < path_.size());
+		return path_[path_.size() - i - 1];
 	}
 
 	void append(const Map & map, Direction);
 
 	void reorigin(const Coords & new_origin, const Extent & extent) {
-		m_start.reorigin(new_origin, extent);
-		m_end  .reorigin(new_origin, extent);
+		start_.reorigin(new_origin, extent);
+		end_  .reorigin(new_origin, extent);
 	}
 
 	void save(FileWrite & fw) const;
 	void load(FileRead & fr, const Map & map);
 
 private:
-	Coords m_start;
-	Coords m_end;
-	StepVector m_path;
+	Coords start_;
+	Coords end_;
+	StepVector path_;
 };
 
 // CoordPath is an extended path that also caches related Coords

@@ -664,7 +664,7 @@ The actual logic behind find_bobs and find_reachable_bobs.
 */
 struct FindBobsCallback {
 	FindBobsCallback(std::vector<Bob *> * const list, const FindBob & functor)
-		: m_list(list), m_functor(functor), m_found(0) {}
+		: list_(list), functor_(functor), found_(0) {}
 
 	void operator()(const Map &, const FCoords cur) {
 		for
@@ -673,22 +673,22 @@ struct FindBobsCallback {
 			 bob = bob->get_next_bob())
 		{
 			if
-				(m_list &&
-				 std::find(m_list->begin(), m_list->end(), bob) != m_list->end())
+				(list_ &&
+				 std::find(list_->begin(), list_->end(), bob) != list_->end())
 				continue;
 
-			if (m_functor.accept(bob)) {
-				if (m_list)
-					m_list->push_back(bob);
+			if (functor_.accept(bob)) {
+				if (list_)
+					list_->push_back(bob);
 
-				++m_found;
+				++found_;
 			}
 		}
 	}
 
-	std::vector<Bob *> * m_list;
-	const FindBob      & m_functor;
-	uint32_t                 m_found;
+	std::vector<Bob*>* list_;
+	const FindBob& functor_;
+	uint32_t found_;
 };
 
 
@@ -711,7 +711,7 @@ uint32_t Map::find_bobs
 
 	find(area, cb);
 
-	return cb.m_found;
+	return cb.found_;
 }
 
 
@@ -737,7 +737,7 @@ uint32_t Map::find_reachable_bobs
 
 	find_reachable(area, checkstep, cb);
 
-	return cb.m_found;
+	return cb.found_;
 }
 
 
@@ -751,7 +751,7 @@ The actual logic behind find_immovables and find_reachable_immovables.
 struct FindImmovablesCallback {
 	FindImmovablesCallback
 		(std::vector<ImmovableFound> * const list, const FindImmovable & functor)
-		: m_list(list), m_functor(functor), m_found(0) {}
+		: list_(list), functor_(functor), found_(0) {}
 
 	void operator()(const Map &, const FCoords cur) {
 		BaseImmovable * const imm = cur.field->get_immovable();
@@ -759,21 +759,21 @@ struct FindImmovablesCallback {
 		if (!imm)
 			return;
 
-		if (m_functor.accept(*imm)) {
-			if (m_list) {
+		if (functor_.accept(*imm)) {
+			if (list_) {
 				ImmovableFound imf;
 				imf.object = imm;
 				imf.coords = cur;
-				m_list->push_back(imf);
+				list_->push_back(imf);
 			}
 
-			++m_found;
+			++found_;
 		}
 	}
 
-	std::vector<ImmovableFound> * m_list;
-	const FindImmovable         & m_functor;
-	uint32_t                          m_found;
+	std::vector<ImmovableFound>* list_;
+	const FindImmovable& functor_;
+	uint32_t found_;
 };
 
 
@@ -794,7 +794,7 @@ uint32_t Map::find_immovables
 
 	find(area, cb);
 
-	return cb.m_found;
+	return cb.found_;
 }
 
 
@@ -818,7 +818,7 @@ uint32_t Map::find_reachable_immovables
 
 	find_reachable(area, checkstep, cb);
 
-	return cb.m_found;
+	return cb.found_;
 }
 
 
@@ -862,20 +862,20 @@ The actual logic behind find_fields and find_reachable_fields.
 struct FindNodesCallback {
 	FindNodesCallback
 		(std::vector<Coords> * const list, const FindNode & functor)
-		: m_list(list), m_functor(functor), m_found(0) {}
+		: list_(list), functor_(functor), found_(0) {}
 
 	void operator()(const Map & map, const FCoords cur) {
-		if (m_functor.accept(map, cur)) {
-			if (m_list)
-				m_list->push_back(cur);
+		if (functor_.accept(map, cur)) {
+			if (list_)
+				list_->push_back(cur);
 
-			++m_found;
+			++found_;
 		}
 	}
 
-	std::vector<Coords> * m_list;
-	const FindNode     & m_functor;
-	uint32_t                  m_found;
+	std::vector<Coords>* list_;
+	const FindNode & functor_;
+	uint32_t found_;
 };
 
 
@@ -897,7 +897,7 @@ uint32_t Map::find_fields
 
 	find(area, cb);
 
-	return cb.m_found;
+	return cb.found_;
 }
 
 
@@ -920,7 +920,7 @@ uint32_t Map::find_reachable_fields
 
 	find_reachable(area, checkstep, cb);
 
-	return cb.m_found;
+	return cb.found_;
 }
 
 
@@ -1424,7 +1424,7 @@ uint32_t Map::calc_distance(const Coords a, const Coords b) const
 	rx = lx + dist;
 
 	// Allow for wrap-around
-	// Yes, the second is an else if; see the above if (dist >= m_width)
+	// Yes, the second is an else if; see the above if (dist >= width_)
 	if (lx < 0)
 		lx += width_;
 	else if (rx >= static_cast<int32_t>(width_))
@@ -1694,12 +1694,12 @@ int32_t Map::findpath
 	start = FCoords(instart, &operator[](instart));
 	end   = FCoords(inend,   &operator[](inend));
 
-	path.m_path.clear();
+	path.path_.clear();
 
 	// Some stupid cases...
 	if (start == end) {
-		path.m_start = start;
-		path.m_end = end;
+		path.start_ = start;
+		path.end_ = end;
 		return 0; // duh...
 	}
 
@@ -1798,13 +1798,13 @@ int32_t Map::findpath
 	// Now unwind the taken route (even if we couldn't find a complete one!)
 	int32_t const result = cur == end ? curpf->real_cost : -1;
 
-	path.m_start = start;
-	path.m_end = cur;
+	path.start_ = start;
+	path.end_ = cur;
 
-	path.m_path.clear();
+	path.path_.clear();
 
 	while (curpf->backlink != IDLE) {
-		path.m_path.push_back(curpf->backlink);
+		path.path_.push_back(curpf->backlink);
 
 		// Reverse logic! (WALK_NW needs to find the SE neighbour)
 		get_neighbour(cur, get_reverse_dir(curpf->backlink), &cur);
