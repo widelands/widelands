@@ -285,7 +285,13 @@ bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
 
 			// if saved to a tmp file earlier, rename now
 			if (!tmp_name.empty()) {
-#ifndef _WIN32
+#ifdef _WIN32
+				// Unlinking the file handle for the Zip filesystem in Windows will cause
+				// the file rename to fail.
+				if (binary == FileSystem::DIR) {
+					g_fs->fs_unlink(complete_filename);
+				}
+#else
 				g_fs->fs_unlink(complete_filename);
 #endif
 				// also change fs, as we assign it to the map below
