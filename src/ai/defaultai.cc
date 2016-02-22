@@ -1504,8 +1504,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 	bool needs_boost_economy = false;
 	if (highest_nonmil_prio_ > 10
 		&& has_enough_space
-		&& virtual_mines >= 5 &&
-		!player_statistics.strong_enough(player_number())) {
+		&& virtual_mines >= 5) {
 			needs_boost_economy = true;
 		}
 

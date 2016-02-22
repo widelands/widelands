@@ -519,4 +519,5 @@ struct PlayersStrengths {
 	std::map<Widelands::TeamNumber, uint32_t> team_powers;
 };
 } // namespace Widelands
+
 #endif  // end of include guard: WL_AI_AI_HELP_STRUCTS_H

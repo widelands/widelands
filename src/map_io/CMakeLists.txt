@@ -43,14 +43,14 @@ wl_library(map_io
     map_elemental_packet.h
     map_exploration_packet.cc
     map_exploration_packet.h
-    map_extradata_packet.cc
-    map_extradata_packet.h
     map_flag_packet.cc
     map_flag_packet.h
     map_flagdata_packet.cc
     map_flagdata_packet.h
     map_heights_packet.cc
     map_heights_packet.h
+    map_images.cc
+    map_images.h
     map_message_saver.h
     map_node_ownership_packet.cc
     map_node_ownership_packet.h
