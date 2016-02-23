@@ -43,7 +43,7 @@ struct EditorDrawTool : public EditorTool {
 	EditorActionArgs format_args_impl(EditorInteractive & parent) override;
 
 	char const * get_sel_impl() const override {
-		return "images/ui_basic/fsel.png";
+		return "EDITOR_DRAW_TOOL";
 	}
 
 	void add_action(EditorToolAction ac, EditorActionArgs & args);

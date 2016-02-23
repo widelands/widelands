@@ -41,8 +41,8 @@ void MapElementalPacket::pre_read(FileSystem & fs, Map * map)
 	try {
 		int32_t const packet_version = s.get_int("packet_version");
 		if (packet_version == kCurrentPacketVersion) {
-			map->m_width       = s.get_int   ("map_w");
-			map->m_height      = s.get_int   ("map_h");
+			map->width_       = s.get_int   ("map_w");
+			map->height_      = s.get_int   ("map_h");
 			map->set_nrplayers  (s.get_int   ("nr_players"));
 			map->set_name       (s.get_string("name"));
 			map->set_author     (s.get_string("author"));
@@ -64,7 +64,7 @@ void MapElementalPacket::pre_read(FileSystem & fs, Map * map)
 			}
 
 			// Get suggested teams
-			map->m_suggested_teams.clear();
+			map->suggested_teams_.clear();
 
 			uint16_t team_section_id = 0;
 			std::string teamsection_key = (boost::format("teams%02i") % team_section_id).str();
@@ -97,7 +97,7 @@ void MapElementalPacket::pre_read(FileSystem & fs, Map * map)
 					team_string = teamsection->get_string(team_key.c_str(), "");
 				}
 
-				map->m_suggested_teams.push_back(lineup);
+				map->suggested_teams_.push_back(lineup);
 
 				// Increase teamsection
 				++team_section_id;
