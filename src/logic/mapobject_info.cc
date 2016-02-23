@@ -41,6 +41,12 @@ using namespace Widelands;
 
 namespace  {
 
+/*
+ ==========================================================
+ SETUP
+ ==========================================================
+ */
+
 const std::string kDirectory = "mapobject_info";
 
 // Setup the static objects Widelands needs to operate and initializes systems.
@@ -63,6 +69,12 @@ void initialize() {
 	g_sound_handler.init();
 	g_sound_handler.nosound_ = true;
 }
+
+/*
+ ==========================================================
+ SPECIALIZED FILEWRITE
+ ==========================================================
+ */
 
 // Defines some convenience writing functions for the JSOn format
 class JSONFileWrite : public FileWrite {
@@ -130,6 +142,12 @@ private:
 	int level_;
 };
 
+/*
+ ==========================================================
+ BUILDINGS
+ ==========================================================
+ */
+
 void write_building_category(const std::string& category_name,
 									  const std::string& category_heading,
 									  const std::vector<DescriptionIndex>& buildings,
@@ -150,6 +168,10 @@ void write_building_category(const std::string& category_name,
 		fw->close_element();
 		fw->write_key_value_string("descname", building.descname());
 		fw->close_element();
+		fw->write_key_value_string("icon", building.icon_filename());
+		fw->close_element();
+		fw->write_key_value_string("representative_image", building.representative_image_filename());
+		fw->close_element();
 
 		// Helptext
 		try {
@@ -163,7 +185,31 @@ void write_building_category(const std::string& category_name,
 		} catch (LuaError& err) {
 			fw->write_key_value_string("helptext", err.what());
 		}
-		fw->close_brace(true, i, buildings.size()); // Building
+		fw->close_element();
+
+		// Buildcost
+		fw->open_array("buildcost"); // Buildcost
+
+		if (building.is_buildable()) {
+			// std::map<DescriptionIndex, uint8_t>
+			size_t buildcost_counter = 0;
+			for (WareAmount buildcost : building.buildcost()) {
+				const WareDescr& ware = *tribe.get_ware_descr(buildcost.first);
+				fw->open_brace(); // Buildcost
+				fw->write_key_value_string("name", ware.name());
+				fw->close_element();
+				fw->write_key_value_string("descname", ware.descname());
+				fw->close_element();
+				fw->write_key_value_string("icon", ware.icon_filename());
+				fw->close_element();
+				fw->write_key_value_int("amount", buildcost.second);
+				fw->close_brace(true, buildcost_counter, building.buildcost().size()); // Buildcost
+				++buildcost_counter;
+			}
+		}
+		fw->close_array(); // Buildcost
+
+		fw->close_brace(false, i, buildings.size()); // Building
 	}
 	fw->close_array(); // Buildinglist
 }
@@ -282,6 +328,12 @@ void write_buildings(const TribeDescr& tribe, EditorGameBase& egbase) {
 	log("\n");
 }
 
+/*
+ ==========================================================
+ WARES
+ ==========================================================
+ */
+
 void write_wares(const TribeDescr& tribe, EditorGameBase& egbase) {
 	log("\n===============\nWriting wares:\n===============\n");
 	JSONFileWrite fw;
@@ -325,6 +377,10 @@ void write_wares(const TribeDescr& tribe, EditorGameBase& egbase) {
 			fw.write_key_value_string("name", building.name());
 			fw.close_element();
 			fw.write_key_value_string("descname", building.descname());
+			fw.close_element();
+			fw.write_key_value_string("icon", building.icon_filename());
+			fw.close_element();
+			fw.write_key_value_string("representative_image", building.representative_image_filename());
 			fw.close_brace(true, prod_counter, no_of_producers); // Building
 			++prod_counter;
 		}
@@ -339,6 +395,10 @@ void write_wares(const TribeDescr& tribe, EditorGameBase& egbase) {
 			fw.write_key_value_string("name", building.name());
 			fw.close_element();
 			fw.write_key_value_string("descname", building.descname());
+			fw.close_element();
+			fw.write_key_value_string("icon", building.icon_filename());
+			fw.close_element();
+			fw.write_key_value_string("representative_image", building.representative_image_filename());
 			fw.close_brace(true, consumer_counter, no_of_consumers); // Building
 			++consumer_counter;
 		}
@@ -353,6 +413,12 @@ void write_wares(const TribeDescr& tribe, EditorGameBase& egbase) {
 	fw.write(*g_fs, (boost::format("%s/%s_wares.json") % kDirectory % tribe.name()).str().c_str());
 	log("\n");
 }
+
+/*
+ ==========================================================
+ WORKERS
+ ==========================================================
+ */
 
 void write_workers(const TribeDescr& tribe, EditorGameBase& egbase) {
 	log("\n================\nWriting workers:\n================\n");
@@ -369,6 +435,8 @@ void write_workers(const TribeDescr& tribe, EditorGameBase& egbase) {
 		fw.write_key_value_string("name", worker.name());
 		fw.close_element();
 		fw.write_key_value_string("descname", worker.descname());
+		fw.close_element();
+		fw.write_key_value_string("icon", worker.icon_filename());
 		fw.close_element();
 
 		// Helptext
@@ -392,6 +460,8 @@ void write_workers(const TribeDescr& tribe, EditorGameBase& egbase) {
 			fw.write_key_value_string("name", becomes.name());
 			fw.close_element();
 			fw.write_key_value_string("descname", worker.descname());
+			fw.close_element();
+			fw.write_key_value_string("icon", worker.icon_filename());
 			fw.close_brace(true);
 		}
 		fw.close_brace(true, counter, no_of_workers); // Worker
@@ -403,6 +473,12 @@ void write_workers(const TribeDescr& tribe, EditorGameBase& egbase) {
 	fw.write(*g_fs, (boost::format("%s/%s_workers.json") % kDirectory % tribe.name()).str().c_str());
 	log("\n");
 }
+
+/*
+ ==========================================================
+ TRIBES
+ ==========================================================
+ */
 
 void write_tribes(EditorGameBase& egbase) {
 	JSONFileWrite fw;
@@ -439,14 +515,17 @@ void write_tribes(EditorGameBase& egbase) {
 		write_workers(tribe, egbase);
 	}
 	fw.close_array(); // Tribes
-
-	// NOCOM write_key_value_int("number", 42);
-
 	fw.close_brace(); // Main
 	fw.write(*g_fs, (boost::format("%s/tribes.json") % kDirectory).str().c_str());
 }
 
 }  // namespace
+
+/*
+ ==========================================================
+ MAIN
+ ==========================================================
+ */
 
 int main(int argc, char ** argv)
 {
