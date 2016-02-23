@@ -77,6 +77,9 @@ public:
 		}
 		data(writeme.c_str(), writeme.size());
 	}
+	void write_key(const std::string& key) {
+		write_string((boost::format("\"%s\":\n") % key).str(), true);
+	}
 	void write_key_value(const std::string& key, const std::string& quoted_value) {
 		write_string((boost::format("\"%s\": %s") % key % quoted_value).str(), true);
 	}
@@ -92,13 +95,16 @@ public:
 		write_string("{\n", true);
 		++level_;
 	}
-	void close_brace(int current = 0, int total = 0) {
+	void close_brace(bool precede_newline = false, int current = 0, int total = 0) {
 		--level_;
+		if (precede_newline) {
+			write_string("\n");
+		}
 		// JSON hates a final comma
 		if (current < total - 1) {
 			write_string("},\n", true);
 		} else {
-			write_string("}\n", true);
+			write_string("}", true);
 		}
 	}
 	void open_array(const std::string& name) {
@@ -152,8 +158,7 @@ void write_buildings(const TribeDescr& tribe, const Tribes& tribes, EditorGameBa
 		} catch (LuaError& err) {
 			fw.write_key_value_string("helptext", err.what());
 		}
-		fw.write_string("\n");
-		fw.close_brace(building_index, buildings.size()); // Building
+		fw.close_brace(true, building_index, buildings.size()); // Building
 	}
 	fw.close_array(); // Buildings
 
@@ -205,8 +210,7 @@ void write_wares(const TribeDescr& tribe, const Tribes& tribes, EditorGameBase& 
 			fw.write_key_value_string("name", building.name());
 			fw.close_element();
 			fw.write_key_value_string("descname", building.descname());
-			fw.write_string("\n");
-			fw.close_brace(prod_counter, no_of_producers); // Building
+			fw.close_brace(true, prod_counter, no_of_producers); // Building
 			++prod_counter;
 		}
 		fw.close_array(1, 5); // Producers - and we need a comma
@@ -220,13 +224,12 @@ void write_wares(const TribeDescr& tribe, const Tribes& tribes, EditorGameBase& 
 			fw.write_key_value_string("name", building.name());
 			fw.close_element();
 			fw.write_key_value_string("descname", building.descname());
-			fw.write_string("\n");
-			fw.close_brace(consumer_counter, no_of_consumers); // Building
+			fw.close_brace(true, consumer_counter, no_of_consumers); // Building
 			++consumer_counter;
 		}
 		fw.close_array(); // Consumers
 
-		fw.close_brace(counter, no_of_wares); // Ware
+		fw.close_brace(false, counter, no_of_wares); // Ware
 		++counter;
 	}
 	fw.close_array(); // Wares
@@ -269,10 +272,14 @@ void write_workers(const TribeDescr& tribe, const Tribes& tribes, EditorGameBase
 		if (worker.becomes() != INVALID_INDEX) {
 			fw.close_element();
 			const WorkerDescr& becomes = *tribes.get_worker_descr(worker.becomes());
-			fw.write_key_value_string("becomes", becomes.name());
+			fw.write_key("becomes");
+			fw.open_brace();
+			fw.write_key_value_string("name", becomes.name());
+			fw.close_element();
+			fw.write_key_value_string("descname", worker.descname());
+			fw.close_brace(true);
 		}
-		fw.write_string("\n");
-		fw.close_brace(counter, no_of_workers); // Worker
+		fw.close_brace(true, counter, no_of_workers); // Worker
 		++counter;
 	}
 	fw.close_array(); // Workers
@@ -309,8 +316,7 @@ void write_tribes(EditorGameBase& egbase) {
 		fw.write_key_value_string("tooltip", tribe_info.tooltip);
 		fw.close_element();
 		fw.write_key_value_string("icon", tribe_info.icon);
-		fw.write_string("\n");
-		fw.close_brace(tribe_index, tribeinfos.size()); // TribeDescr
+		fw.close_brace(true, tribe_index, tribeinfos.size()); // TribeDescr
 
 		 // These go in separate files
 		write_buildings(tribe, *tribes, egbase);
