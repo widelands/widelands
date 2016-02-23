@@ -47,33 +47,33 @@ public:
 					 const LuaTable& t, const EditorGameBase& egbase);
 	~SoldierDescr() override {}
 
-	uint32_t get_max_hp_level          () const {return m_max_hp_level;}
-	uint32_t get_max_attack_level      () const {return m_max_attack_level;}
-	uint32_t get_max_defense_level     () const {return m_max_defense_level;}
-	uint32_t get_max_evade_level       () const {return m_max_evade_level;}
+	uint32_t get_max_hp_level          () const {return max_hp_level_;}
+	uint32_t get_max_attack_level      () const {return max_attack_level_;}
+	uint32_t get_max_defense_level     () const {return max_defense_level_;}
+	uint32_t get_max_evade_level       () const {return max_evade_level_;}
 
-	uint32_t get_base_hp        () const {return m_base_hp;}
-	uint32_t get_base_min_attack() const {return m_min_attack;}
-	uint32_t get_base_max_attack() const {return m_max_attack;}
-	uint32_t get_base_defense   () const {return m_defense;}
-	uint32_t get_base_evade     () const {return m_evade;}
+	uint32_t get_base_hp        () const {return base_hp_;}
+	uint32_t get_base_min_attack() const {return min_attack_;}
+	uint32_t get_base_max_attack() const {return max_attack_;}
+	uint32_t get_base_defense   () const {return defense_;}
+	uint32_t get_base_evade     () const {return evade_;}
 
-	uint32_t get_hp_incr_per_level     () const {return m_hp_incr;}
-	uint32_t get_attack_incr_per_level () const {return m_attack_incr;}
-	uint32_t get_defense_incr_per_level() const {return m_defense_incr;}
-	uint32_t get_evade_incr_per_level  () const {return m_evade_incr;}
+	uint32_t get_hp_incr_per_level     () const {return hp_incr_;}
+	uint32_t get_attack_incr_per_level () const {return attack_incr_;}
+	uint32_t get_defense_incr_per_level() const {return defense_incr_;}
+	uint32_t get_evade_incr_per_level  () const {return evade_incr_;}
 
 	const Image* get_hp_level_pic     (uint32_t const level) const {
-		assert(level <= m_max_hp_level);      return m_hp_pics     [level];
+		assert(level <= max_hp_level_);      return hp_pics_     [level];
 	}
 	const Image* get_attack_level_pic (uint32_t const level) const {
-		assert(level <= m_max_attack_level);  return m_attack_pics [level];
+		assert(level <= max_attack_level_);  return attack_pics_ [level];
 	}
 	const Image* get_defense_level_pic(uint32_t const level) const {
-		assert(level <= m_max_defense_level); return m_defense_pics[level];
+		assert(level <= max_defense_level_); return defense_pics_[level];
 	}
 	const Image* get_evade_level_pic  (uint32_t const level) const {
-		assert(level <= m_max_evade_level);   return m_evade_pics  [level];
+		assert(level <= max_evade_level_);   return evade_pics_  [level];
 	}
 
 	uint32_t get_rand_anim(Game & game, const char * const name) const;
@@ -82,46 +82,46 @@ protected:
 	Bob & create_object() const override;
 
 	//  start values
-	uint32_t m_base_hp;
-	uint32_t m_min_attack;
-	uint32_t m_max_attack;
-	uint32_t m_defense;
-	uint32_t m_evade;
+	uint32_t base_hp_;
+	uint32_t min_attack_;
+	uint32_t max_attack_;
+	uint32_t defense_;
+	uint32_t evade_;
 
 	//  per level increases
-	uint32_t m_hp_incr;
-	uint32_t m_attack_incr;
-	uint32_t m_defense_incr;
-	uint32_t m_evade_incr;
+	uint32_t hp_incr_;
+	uint32_t attack_incr_;
+	uint32_t defense_incr_;
+	uint32_t evade_incr_;
 
 	//  max levels
-	uint32_t m_max_hp_level;
-	uint32_t m_max_attack_level;
-	uint32_t m_max_defense_level;
-	uint32_t m_max_evade_level;
+	uint32_t max_hp_level_;
+	uint32_t max_attack_level_;
+	uint32_t max_defense_level_;
+	uint32_t max_evade_level_;
 
 	//  level pictures
-	std::vector<const Image* >   m_hp_pics;
-	std::vector<const Image* >   m_attack_pics;
-	std::vector<const Image* >   m_evade_pics;
-	std::vector<const Image* >   m_defense_pics;
-	std::vector<std::string> m_hp_pics_fn;
-	std::vector<std::string> m_attack_pics_fn;
-	std::vector<std::string> m_evade_pics_fn;
-	std::vector<std::string> m_defense_pics_fn;
+	std::vector<const Image* >   hp_pics_;
+	std::vector<const Image* >   attack_pics_;
+	std::vector<const Image* >   evade_pics_;
+	std::vector<const Image* >   defense_pics_;
+	std::vector<std::string> hp_pics_fn_;
+	std::vector<std::string> attack_pics_fn_;
+	std::vector<std::string> evade_pics_fn_;
+	std::vector<std::string> defense_pics_fn_;
 
 	// animation names
-	std::vector<std::string> m_attack_success_w_name;
-	std::vector<std::string> m_attack_failure_w_name;
-	std::vector<std::string> m_evade_success_w_name;
-	std::vector<std::string> m_evade_failure_w_name;
-	std::vector<std::string> m_die_w_name;
+	std::vector<std::string> attack_success_w_name_;
+	std::vector<std::string> attack_failure_w_name_;
+	std::vector<std::string> evade_success_w_name_;
+	std::vector<std::string> evade_failure_w_name_;
+	std::vector<std::string> die_w_name_;
 
-	std::vector<std::string> m_attack_success_e_name;
-	std::vector<std::string> m_attack_failure_e_name;
-	std::vector<std::string> m_evade_success_e_name;
-	std::vector<std::string> m_evade_failure_e_name;
-	std::vector<std::string> m_die_e_name;
+	std::vector<std::string> attack_success_e_name_;
+	std::vector<std::string> attack_failure_e_name_;
+	std::vector<std::string> evade_success_e_name_;
+	std::vector<std::string> evade_failure_e_name_;
+	std::vector<std::string> die_e_name_;
 
 private:
 	// Reads list of animation names from the table and pushes them into result.
@@ -171,11 +171,11 @@ public:
 	void set_defense_level(uint32_t);
 	void set_evade_level  (uint32_t);
 	uint32_t get_level (TrainingAttribute) const;
-	uint32_t get_hp_level     () const {return m_hp_level;}
-	uint32_t get_attack_level () const {return m_attack_level;}
-	uint32_t get_defense_level() const {return m_defense_level;}
-	uint32_t get_evade_level  () const {return m_evade_level;}
-	uint32_t get_total_level () const {return m_hp_level + m_attack_level + m_defense_level + m_evade_level;}
+	uint32_t get_hp_level     () const {return hp_level_;}
+	uint32_t get_attack_level () const {return attack_level_;}
+	uint32_t get_defense_level() const {return defense_level_;}
+	uint32_t get_evade_level  () const {return evade_level_;}
+	uint32_t get_total_level () const {return hp_level_ + attack_level_ + defense_level_ + evade_level_;}
 
 	/// Automatically select a task.
 	void init_auto_task(Game &) override;
@@ -188,7 +188,7 @@ public:
 		(const TribeDescr &, uint32_t & w, uint32_t & h);
 	void draw_info_icon(RenderTarget &, Point, bool anchor_below) const;
 
-	uint32_t get_current_hitpoints() const {return m_hp_current;}
+	uint32_t get_current_hitpoints() const {return hp_current_;}
 	uint32_t get_max_hitpoints() const;
 	uint32_t get_min_attack() const;
 	uint32_t get_max_attack() const;
@@ -196,16 +196,16 @@ public:
 	uint32_t get_evade() const;
 
 	const Image* get_hp_level_pic     () const {
-		return descr().get_hp_level_pic     (m_hp_level);
+		return descr().get_hp_level_pic     (hp_level_);
 	}
 	const Image* get_attack_level_pic () const {
-		return descr().get_attack_level_pic (m_attack_level);
+		return descr().get_attack_level_pic (attack_level_);
 	}
 	const Image* get_defense_level_pic() const {
-		return descr().get_defense_level_pic(m_defense_level);
+		return descr().get_defense_level_pic(defense_level_);
 	}
 	const Image* get_evade_level_pic  () const {
-		return descr().get_evade_level_pic  (m_evade_level);
+		return descr().get_evade_level_pic  (evade_level_);
 	}
 
 	int32_t get_training_attribute(uint32_t attr) const override;
@@ -262,27 +262,27 @@ protected:
 	bool is_evict_allowed() override;
 
 private:
-	uint32_t m_hp_current;
-	uint32_t m_hp_level;
-	uint32_t m_attack_level;
-	uint32_t m_defense_level;
-	uint32_t m_evade_level;
+	uint32_t hp_current_;
+	uint32_t hp_level_;
+	uint32_t attack_level_;
+	uint32_t defense_level_;
+	uint32_t evade_level_;
 
 	/// This is used to replicate walk for soldiers but only just before and
 	/// just after figthing in a battle, to draw soldier at proper position.
-	/// Maybe Bob.m_walking could be used, but then that variable should be
+	/// Maybe Bob.walking_ could be used, but then that variable should be
 	/// protected instead of private, and some type of rework needed to allow
 	/// the new states. I thought that it is cleaner to have this variable
 	/// separate.
-	CombatWalkingDir m_combat_walking;
-	uint32_t  m_combat_walkstart;
-	uint32_t  m_combat_walkend;
+	CombatWalkingDir combat_walking_;
+	uint32_t  combat_walkstart_;
+	uint32_t  combat_walkend_;
 
 	/**
 	 * If the soldier is involved in a challenge, it is assigned a battle
 	 * object.
 	 */
-	Battle * m_battle;
+	Battle * battle_;
 
 	static constexpr uint8_t kSoldierHpBarWidth = 13;
 
@@ -302,7 +302,7 @@ protected:
 		const Task * get_task(const std::string & name) override;
 
 	private:
-		uint32_t m_battle;
+		uint32_t battle_;
 	};
 
 	Loader * create_loader() override;

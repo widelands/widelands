@@ -337,14 +337,14 @@ bool Fleet::get_path(PortDock & start, PortDock & end, Path & path)
 	return true;
 }
 
-uint32_t Fleet::count_ships(){
+uint32_t Fleet::count_ships() {
 	return ships_.size();
 }
 
-uint32_t Fleet::count_ships_heading_here(EditorGameBase & egbase, PortDock * port){
+uint32_t Fleet::count_ships_heading_here(EditorGameBase & egbase, PortDock * port) {
 	uint32_t ships_on_way = 0;
-	for (uint16_t s = 0; s < ships_.size(); s += 1){
-		if (ships_[s]->get_destination(egbase) == port){
+	for (uint16_t s = 0; s < ships_.size(); s += 1) {
+		if (ships_[s]->get_destination(egbase) == port) {
 			ships_on_way += 1;
 		}
 	}
@@ -352,10 +352,10 @@ uint32_t Fleet::count_ships_heading_here(EditorGameBase & egbase, PortDock * por
 	return ships_on_way;
 }
 
-uint32_t Fleet::count_ports(){
+uint32_t Fleet::count_ports() {
 	return ports_.size();
 }
-bool Fleet::get_act_pending(){
+bool Fleet::get_act_pending() {
 	return act_pending_;
 }
 
@@ -612,7 +612,7 @@ PortDock * Fleet::get_dock(EditorGameBase & egbase, Coords field_coords) const
 {
 	for (PortDock * temp_port : ports_) {
 		for (Coords tmp_coords :  temp_port->get_positions(egbase)) {
-			if (tmp_coords == field_coords){
+			if (tmp_coords == field_coords) {
 				return temp_port;
 			}
 		}
@@ -636,7 +636,7 @@ PortDock * Fleet::get_arbitrary_dock() const
  */
 void Fleet::update(EditorGameBase & egbase)
 {
-	if (act_pending_){
+	if (act_pending_) {
 		return;
 	}
 
@@ -692,7 +692,7 @@ void Fleet::act(Game & game, uint32_t /* data */)
 	// first we go over ships - idle ones (=without destination)
 	// then over wares on these ships and create first ship-port
 	// pairs with score
-	for (uint16_t s = 0; s < ships_.size(); s += 1){
+	for (uint16_t s = 0; s < ships_.size(); s += 1) {
 		if (ships_[s]->get_destination(game)) {
 			continue;
 		}
@@ -700,13 +700,13 @@ void Fleet::act(Game & game, uint32_t /* data */)
 			continue; // in expedition obviously
 		}
 
-		for (uint16_t i = 0; i < ships_[s]->get_nritems(); i += 1){
+		for (uint16_t i = 0; i < ships_[s]->get_nritems(); i += 1) {
 			PortDock * dst = ships_[s]->items_[i].get_destination(game);
 			if (!dst) {
 				// if wares without destination on ship without destination
 				// such ship can be send to any port, and should be sent
 				// to some port, so we add 1 point to score for each port
-				for (uint16_t p = 0; p < ports_.size(); p += 1){
+				for (uint16_t p = 0; p < ports_.size(); p += 1) {
 					mapping.first = s;
 					mapping.second = p;
 					scores[mapping] += 1;
@@ -715,15 +715,15 @@ void Fleet::act(Game & game, uint32_t /* data */)
 			}
 
 			bool destination_found = false; //just a functional check
-			for (uint16_t p = 0; p < ports_.size(); p += 1){
-				if (ports_[p] ==  ships_[s]->items_[i].get_destination(game)){
+			for (uint16_t p = 0; p < ports_.size(); p += 1) {
+				if (ports_[p] ==  ships_[s]->items_[i].get_destination(game)) {
 					mapping.first = s;
 					mapping.second = p;
 					scores[mapping] += (i == 0)?8:1;
 					destination_found = true;
 				}
 			}
-			if (!destination_found){
+			if (!destination_found) {
 				// Perhaps the throw here is too strong
 				// we can still remove it before stable release if it proves too much
 				// during my testing this situation never happened
@@ -737,9 +737,9 @@ void Fleet::act(Game & game, uint32_t /* data */)
 
 	// now opposite aproach - we go over ports to find out those that have wares
 	// waiting for ship then find candidate ships to satisfy the requests
-	for (uint16_t p = 0; p < ports_.size(); p += 1){
+	for (uint16_t p = 0; p < ports_.size(); p += 1) {
 		PortDock & pd = *ports_[p];
-		if (!pd.get_need_ship()){
+		if (!pd.get_need_ship()) {
 			continue;
 		}
 
@@ -753,7 +753,7 @@ void Fleet::act(Game & game, uint32_t /* data */)
 
 		// scoring and entering the pair into scores (or increasing existing
 		// score if the pair is already there)
-		for (uint16_t s = 0; s < ships_.size(); s += 1){
+		for (uint16_t s = 0; s < ships_.size(); s += 1) {
 
 			if (ships_[s]->get_destination(game)) {
 				continue; // already has destination
@@ -824,18 +824,18 @@ void Fleet::act(Game & game, uint32_t /* data */)
 	uint16_t best_score;
 
 	// after sending a ship we will remove one or more items from scores
-	while (!scores.empty()){
+	while (!scores.empty()) {
 		best_score = 0;
 
 		// searching for combination with highest score
 		for (std::pair<std::pair<uint16_t, uint16_t>, uint16_t> combination : scores) {
-			if (combination.second > best_score){
+			if (combination.second > best_score) {
 				best_score = combination.second;
 				best_ship = combination.first.first;
 				best_port = combination.first.second;
 			}
 		}
-		if (best_score == 0){
+		if (best_score == 0) {
 			// this is check of correctnes of this algorithm, this should not happen
 			throw wexception("Fleet::act(): No port-destination pair selected or its score is zero");
 		}
@@ -853,7 +853,7 @@ void Fleet::act(Game & game, uint32_t /* data */)
 
 		// pruning the scores table
 		// the ship that was just sent somewhere cannot be send elsewhere :)
-		for (auto it = scores.cbegin(); it != scores.cend();){
+		for (auto it = scores.cbegin(); it != scores.cend();) {
 
 			// decreasing score for target port as there was a ship just sent there
 			if (it->first.second == best_port) {

@@ -44,7 +44,7 @@ void GameCmdQueuePacket::read
 			// nothing to be done for m_game
 
 			// Next serial
-			cmdq.nextserial = fr.unsigned_32();
+			cmdq.nextserial_ = fr.unsigned_32();
 
 			// Erase all currently pending commands in the queue
 			cmdq.flush();
@@ -65,8 +65,8 @@ void GameCmdQueuePacket::read
 
 				item.cmd = &cmd;
 
-				cmdq.m_cmds[cmd.duetime() % kCommandQueueBucketSize].push(item);
-				++ cmdq.m_ncmds;
+				cmdq.cmds_[cmd.duetime() % kCommandQueueBucketSize].push(item);
+				++ cmdq.ncmds_;
 			}
 		} else {
 			throw UnhandledVersionError("GameCmdQueuePacket", packet_version, kCurrentPacketVersion);
@@ -89,7 +89,7 @@ void GameCmdQueuePacket::write
 	// nothing to be done for m_game
 
 	// Next serial
-	fw.unsigned_32(cmdq.nextserial);
+	fw.unsigned_32(cmdq.nextserial_);
 
 	// Write all commands
 
@@ -97,9 +97,9 @@ void GameCmdQueuePacket::write
 	uint32_t time = game.get_gametime();
 	size_t nhandled = 0;
 
-	while (nhandled < cmdq.m_ncmds) {
+	while (nhandled < cmdq.ncmds_) {
 		// Make a copy, so we can pop stuff
-		std::priority_queue<CmdQueue::CmdItem> p = cmdq.m_cmds[time % kCommandQueueBucketSize];
+		std::priority_queue<CmdQueue::CmdItem> p = cmdq.cmds_[time % kCommandQueueBucketSize];
 
 		while (!p.empty()) {
 			const CmdQueue::CmdItem & it = p.top();
