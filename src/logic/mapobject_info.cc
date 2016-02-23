@@ -138,8 +138,21 @@ void write_buildings(const TribeDescr& tribe, const Tribes& tribes, EditorGameBa
 		fw.write_key_value_string("name", building.name());
 		fw.close_element();
 		fw.write_key_value_string("descname", building.descname());
-		fw.write_string("\n");
+		fw.close_element();
 
+		// Helptext
+		try {
+			std::unique_ptr<LuaTable> table(
+				egbase.lua().run_script("tribes/scripting/mapobject_info/building_helptext.lua"));
+			std::unique_ptr<LuaCoroutine> cr(table->get_coroutine("func"));
+			cr->push_arg(&building);
+			cr->resume();
+			const std::string help_text = cr->pop_string();
+			fw.write_key_value_string("helptext", help_text);
+		} catch (LuaError& err) {
+			fw.write_key_value_string("helptext", err.what());
+		}
+		fw.write_string("\n");
 		fw.close_brace(building_index, buildings.size()); // Building
 	}
 	fw.close_array(); // Buildings
@@ -196,8 +209,7 @@ void write_wares(const TribeDescr& tribe, const Tribes& tribes, EditorGameBase& 
 			fw.close_brace(prod_counter, no_of_producers); // Building
 			++prod_counter;
 		}
-		fw.close_array(); // Producers
-		fw.close_element();
+		fw.close_array(1, 5); // Producers - and we need a comma
 
 		fw.open_array("consumers"); // Consumers
 		size_t consumer_counter = 0;
@@ -239,8 +251,27 @@ void write_workers(const TribeDescr& tribe, const Tribes& tribes, EditorGameBase
 		fw.write_key_value_string("name", worker.name());
 		fw.close_element();
 		fw.write_key_value_string("descname", worker.descname());
-		fw.write_string("\n");
+		fw.close_element();
 
+		// Helptext
+		try {
+			std::unique_ptr<LuaTable> table(
+				egbase.lua().run_script("tribes/scripting/mapobject_info/worker_helptext.lua"));
+			std::unique_ptr<LuaCoroutine> cr(table->get_coroutine("func"));
+			cr->push_arg(&worker);
+			cr->resume();
+			const std::string help_text = cr->pop_string();
+			fw.write_key_value_string("helptext", help_text);
+		} catch (LuaError& err) {
+			fw.write_key_value_string("helptext", err.what());
+		}
+
+		if (worker.becomes() != INVALID_INDEX) {
+			fw.close_element();
+			const WorkerDescr& becomes = *tribes.get_worker_descr(worker.becomes());
+			fw.write_key_value_string("becomes", becomes.name());
+		}
+		fw.write_string("\n");
 		fw.close_brace(counter, no_of_workers); // Worker
 		++counter;
 	}
@@ -265,7 +296,9 @@ void write_tribes(EditorGameBase& egbase) {
 		const TribeBasicInfo& tribe_info = tribeinfos[tribe_index];
 		const TribeDescr& tribe =
 				*egbase.tribes().get_tribe_descr(tribes->tribe_index(tribe_info.name));
-		log("\n\n=========================\nWriting tribe: %s\n=========================\n", tribe.name().c_str());
+		log("\n\n=========================\nWriting tribe: %s\n=========================\n",
+			 tribe.name().c_str());
+
 		fw.open_brace(); // TribeDescr
 		fw.write_key_value_string("name", tribe_info.name);
 		fw.close_element();
