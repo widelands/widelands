@@ -40,12 +40,12 @@ using namespace Widelands;
 
 namespace  {
 
-constexpr size_t kCutoff = 8; // NOCOM For testing, we don't want the JSON to get huge!
-
 const std::string kDirectory = "mapobject_info";
 
 // Setup the static objects Widelands needs to operate and initializes systems.
 void initialize() {
+	i18n::set_locale("en");
+
 	if (SDL_Init(SDL_INIT_VIDEO) != 0) {
 		throw wexception("Unable to initialize SDL: %s", SDL_GetError());
 	}
@@ -124,25 +124,172 @@ private:
 };
 
 
-void write_buildings(const TribeDescr& tribe, const Tribes& tribes) {
+void write_buildings(const TribeDescr& tribe, const Tribes& tribes, EditorGameBase& egbase) {
+	log("\n==================\nWriting buildings:\n==================\n");
 	JSONFileWrite fw;
 	fw.open_brace(); // Main
 
 	fw.open_array("buildings"); // Buildings
 	const std::vector<DescriptionIndex>& buildings = tribe.buildings();
-	for (size_t building_index = 0; building_index < buildings.size() && building_index < kCutoff; ++building_index) {
+	for (size_t building_index = 0; building_index < buildings.size(); ++building_index) {
 		const BuildingDescr& building = *tribes.get_building_descr(building_index);
-		log("Writing building: %s\n", building.name().c_str());
+		log(" %s", building.name().c_str());
 		fw.open_brace();
+		fw.write_key_value_string("name", building.name());
+		fw.close_element();
 		fw.write_key_value_string("descname", building.descname());
 		fw.write_string("\n");
 
-		fw.close_brace(building_index, std::min(buildings.size(), kCutoff)); // Building
+		fw.close_brace(building_index, buildings.size()); // Building
 	}
 	fw.close_array(); // Buildings
 
 	fw.close_brace(); // Main
 	fw.write(*g_fs, (boost::format("%s/%s_buildings.json") % kDirectory % tribe.name()).str().c_str());
+	log("\n");
+}
+
+void write_wares(const TribeDescr& tribe, const Tribes& tribes, EditorGameBase& egbase) {
+	log("\n===============\nWriting wares:\n===============\n");
+	JSONFileWrite fw;
+	fw.open_brace(); // Main
+
+	fw.open_array("wares"); // Wares
+	size_t counter = 0;
+	const size_t no_of_wares = tribe.wares().size();
+	for (DescriptionIndex ware_index : tribe.wares()) {
+		const WareDescr& ware = *tribes.get_ware_descr(ware_index);
+		log(" %s", ware.name().c_str());
+		fw.open_brace();
+		fw.write_key_value_string("name", ware.name());
+		fw.close_element();
+		fw.write_key_value_string("descname", ware.descname());
+		fw.close_element();
+		fw.write_key_value_string("icon", ware.icon_filename());
+		fw.close_element();
+
+		// Helptext
+		try {
+			std::unique_ptr<LuaTable> table(
+				egbase.lua().run_script("tribes/scripting/mapobject_info/ware_helptext.lua"));
+			std::unique_ptr<LuaCoroutine> cr(table->get_coroutine("func"));
+			cr->push_arg(tribe.name());
+			cr->push_arg(&ware);
+			cr->resume();
+			const std::string help_text = cr->pop_string();
+			fw.write_key_value_string("helptext", help_text);
+		} catch (LuaError& err) {
+			fw.write_key_value_string("helptext", err.what());
+		}
+		fw.close_element();
+
+		fw.open_array("producers"); // Producers
+		size_t prod_counter = 0;
+		const size_t no_of_producers = ware.producers().size();
+		for (DescriptionIndex building_index : ware.producers()) {
+			const BuildingDescr& building = *tribes.get_building_descr(building_index);
+			fw.open_brace();
+			fw.write_key_value_string("name", building.name());
+			fw.close_element();
+			fw.write_key_value_string("descname", building.descname());
+			fw.write_string("\n");
+			fw.close_brace(prod_counter, no_of_producers); // Building
+			++prod_counter;
+		}
+		fw.close_array(); // Producers
+		fw.close_element();
+
+		fw.open_array("consumers"); // Consumers
+		size_t consumer_counter = 0;
+		const size_t no_of_consumers = ware.consumers().size();
+		for (DescriptionIndex building_index : ware.consumers()) {
+			const BuildingDescr& building = *tribes.get_building_descr(building_index);
+			fw.open_brace();
+			fw.write_key_value_string("name", building.name());
+			fw.close_element();
+			fw.write_key_value_string("descname", building.descname());
+			fw.write_string("\n");
+			fw.close_brace(consumer_counter, no_of_consumers); // Building
+			++consumer_counter;
+		}
+		fw.close_array(); // Consumers
+
+		fw.close_brace(counter, no_of_wares); // Ware
+		++counter;
+	}
+	fw.close_array(); // Wares
+
+	fw.close_brace(); // Main
+	fw.write(*g_fs, (boost::format("%s/%s_wares.json") % kDirectory % tribe.name()).str().c_str());
+	log("\n");
+}
+
+void write_workers(const TribeDescr& tribe, const Tribes& tribes, EditorGameBase& egbase) {
+	log("\n================\nWriting workers:\n================\n");
+	JSONFileWrite fw;
+	fw.open_brace(); // Main
+
+	fw.open_array("workers"); // Workers
+	size_t counter = 0;
+	const size_t no_of_workers = tribe.workers().size();
+	for (DescriptionIndex worker_index : tribe.workers()) {
+		const WorkerDescr& worker = *tribes.get_worker_descr(worker_index);
+		log(" %s", worker.name().c_str());
+		fw.open_brace();
+		fw.write_key_value_string("name", worker.name());
+		fw.close_element();
+		fw.write_key_value_string("descname", worker.descname());
+		fw.write_string("\n");
+
+		fw.close_brace(counter, no_of_workers); // Worker
+		++counter;
+	}
+	fw.close_array(); // Workers
+
+	fw.close_brace(); // Main
+	fw.write(*g_fs, (boost::format("%s/%s_workers.json") % kDirectory % tribe.name()).str().c_str());
+	log("\n");
+}
+
+void write_tribes(EditorGameBase& egbase) {
+	JSONFileWrite fw;
+	fw.open_brace(); // Main
+	fw.open_array("tribes"); // Tribes
+
+	/// Tribes
+
+	Tribes* tribes = egbase.mutable_tribes();
+	tribes->postload();
+	std::vector<TribeBasicInfo> tribeinfos = tribes->get_all_tribeinfos();
+	for (size_t tribe_index = 0; tribe_index < tribeinfos.size(); ++tribe_index) {
+		const TribeBasicInfo& tribe_info = tribeinfos[tribe_index];
+		const TribeDescr& tribe =
+				*egbase.tribes().get_tribe_descr(tribes->tribe_index(tribe_info.name));
+		log("\n\n=========================\nWriting tribe: %s\n=========================\n", tribe.name().c_str());
+		fw.open_brace(); // TribeDescr
+		fw.write_key_value_string("name", tribe_info.name);
+		fw.close_element();
+		fw.write_key_value_string("descname", tribe_info.descname);
+		fw.close_element();
+		fw.write_key_value_string("author", tribe_info.author);
+		fw.close_element();
+		fw.write_key_value_string("tooltip", tribe_info.tooltip);
+		fw.close_element();
+		fw.write_key_value_string("icon", tribe_info.icon);
+		fw.write_string("\n");
+		fw.close_brace(tribe_index, tribeinfos.size()); // TribeDescr
+
+		 // These go in separate files
+		write_buildings(tribe, *tribes, egbase);
+		write_wares(tribe, *tribes, egbase);
+		write_workers(tribe, *tribes, egbase);
+	}
+	fw.close_array(); // Tribes
+
+	// NOCOM write_key_value_int("number", 42);
+
+	fw.close_brace(); // Main
+	fw.write(*g_fs, (boost::format("%s/tribes.json") % kDirectory).str().c_str());
 }
 
 }  // namespace
@@ -151,49 +298,12 @@ int main(int argc, char ** argv)
 {
 
 	try {
-		i18n::set_locale("en");
+
 		initialize();
 
 		EditorGameBase egbase(nullptr);
-		const World& world = egbase.world();
-		const Tribes& tribes = egbase.tribes();
-
-		// Write JSON.
-		{
-			JSONFileWrite fw;
-			fw.open_brace(); // Main
-			fw.open_array("tribes"); // Tribes
-
-			/// Tribes
-			std::vector<TribeBasicInfo> tribeinfos = tribes.get_all_tribeinfos();
-			for (size_t tribe_index = 0; tribe_index < tribeinfos.size(); ++tribe_index) {
-				const TribeBasicInfo& tribe_info = tribeinfos[tribe_index];
-				const TribeDescr& tribe =
-						*egbase.tribes().get_tribe_descr(egbase.tribes().tribe_index(tribe_info.name));
-				log("Writing tribe: %s\n", tribe.name().c_str());
-				fw.open_brace(); // TribeDescr
-				fw.write_key_value_string("name", tribe_info.name);
-				fw.close_element();
-				fw.write_key_value_string("descname", tribe_info.descname);
-				fw.close_element();
-				fw.write_key_value_string("author", tribe_info.author);
-				fw.close_element();
-				fw.write_key_value_string("tooltip", tribe_info.tooltip);
-				fw.close_element();
-				fw.write_key_value_string("icon", tribe_info.icon);
-				fw.write_string("\n");
-				fw.close_brace(tribe_index, tribeinfos.size()); // TribeDescr
-
-				 // These go in separate files
-				write_buildings(tribe, tribes);
-			}
-			fw.close_array(); // Tribes
-
-			// NOCOM write_key_value_int("number", 42);
-
-			fw.close_brace(); // Main
-			fw.write(*g_fs, (boost::format("%s/tribes.json") % kDirectory).str().c_str());
-		}
+		// NOCOM const World& world = egbase.world();
+		write_tribes(egbase);
 	}
 	catch (std::exception& e) {
 		log("Exception: %s.\n", e.what());
