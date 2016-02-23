@@ -15,7 +15,7 @@ tribes:new_trainingsite_type {
       planks = 5,
       spidercloth = 5,
       diamond = 2,
-      quartz = 2
+      gold = 2
    },
    return_on_dismantle = {
       log = 1,
@@ -23,7 +23,7 @@ tribes:new_trainingsite_type {
       planks = 2,
       spidercloth = 2,
       diamond = 1,
-      quartz = 1
+      gold = 1
    },
 
    animations = {
