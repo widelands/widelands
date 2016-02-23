@@ -40,7 +40,9 @@ using namespace Widelands;
 
 namespace  {
 
-constexpr size_t kCutoff = 3; // NOCOM For testing, we don't want the JSON to get huge!
+constexpr size_t kCutoff = 8; // NOCOM For testing, we don't want the JSON to get huge!
+
+const std::string kDirectory = "mapobject_info";
 
 // Setup the static objects Widelands needs to operate and initializes systems.
 void initialize() {
@@ -50,6 +52,7 @@ void initialize() {
 
 	g_fs = new LayeredFileSystem();
 	g_fs->add_file_system(&FileSystem::create(INSTALL_DATADIR));
+	g_fs->ensure_directory_exists(kDirectory);
 
 	// We don't really need graphics or sound here, but we will get error messages
 	// when they aren't initialized
@@ -101,14 +104,10 @@ public:
 	void open_array(const std::string& name) {
 		write_string((boost::format("\"%s\":[\n") % name).str(), true);
 		++level_;
-		//write_string("{\n""", true);
-		//++level_;
 	}
 	void close_array(int current = 0, int total = 0) {
 		--level_;
 		write_string("\n");
-		// write_string("}\n", true);
-		//--level_;
 		// JSON hates a final comma
 		if (current < total - 1) {
 			write_string("],\n", true);
@@ -123,6 +122,28 @@ public:
 private:
 	int level_;
 };
+
+
+void write_buildings(const TribeDescr& tribe, const Tribes& tribes) {
+	JSONFileWrite fw;
+	fw.open_brace(); // Main
+
+	fw.open_array("buildings"); // Buildings
+	const std::vector<DescriptionIndex>& buildings = tribe.buildings();
+	for (size_t building_index = 0; building_index < buildings.size() && building_index < kCutoff; ++building_index) {
+		const BuildingDescr& building = *tribes.get_building_descr(building_index);
+		log("Writing building: %s\n", building.name().c_str());
+		fw.open_brace();
+		fw.write_key_value_string("descname", building.descname());
+		fw.write_string("\n");
+
+		fw.close_brace(building_index, std::min(buildings.size(), kCutoff)); // Building
+	}
+	fw.close_array(); // Buildings
+
+	fw.close_brace(); // Main
+	fw.write(*g_fs, (boost::format("%s/%s_buildings.json") % kDirectory % tribe.name()).str().c_str());
+}
 
 }  // namespace
 
@@ -145,11 +166,11 @@ int main(int argc, char ** argv)
 
 			/// Tribes
 			std::vector<TribeBasicInfo> tribeinfos = tribes.get_all_tribeinfos();
-			for (size_t tribe_index = 0; tribe_index < tribeinfos.size() && tribe_index < kCutoff; ++tribe_index) {
+			for (size_t tribe_index = 0; tribe_index < tribeinfos.size(); ++tribe_index) {
 				const TribeBasicInfo& tribe_info = tribeinfos[tribe_index];
-				const TribeDescr* tribe =
-						egbase.tribes().get_tribe_descr(egbase.tribes().tribe_index(tribe_info.name));
-				log("Writing tribe: %s\n", tribe->name().c_str());
+				const TribeDescr& tribe =
+						*egbase.tribes().get_tribe_descr(egbase.tribes().tribe_index(tribe_info.name));
+				log("Writing tribe: %s\n", tribe.name().c_str());
 				fw.open_brace(); // TribeDescr
 				fw.write_key_value_string("name", tribe_info.name);
 				fw.close_element();
@@ -160,31 +181,18 @@ int main(int argc, char ** argv)
 				fw.write_key_value_string("tooltip", tribe_info.tooltip);
 				fw.close_element();
 				fw.write_key_value_string("icon", tribe_info.icon);
-				fw.close_element();
+				fw.write_string("\n");
+				fw.close_brace(tribe_index, tribeinfos.size()); // TribeDescr
 
-				/// Buildings
-
-				fw.open_array("buildings"); // Buildings
-				const std::vector<DescriptionIndex>& buildings = tribe->buildings();
-				for (size_t building_index = 0; building_index < buildings.size() && building_index < kCutoff; ++building_index) {
-					const BuildingDescr* building = tribes.get_building_descr(building_index);
-					log("Writing building: %s\n", building->name().c_str());
-					fw.open_brace();
-					fw.write_key_value_string("descname", building->descname());
-					fw.write_string("\n");
-
-					fw.close_brace(building_index, std::min(buildings.size(), kCutoff)); // Building
-				}
-				fw.close_array(); // Buildings
-
-				fw.close_brace(tribe_index, std::min(tribeinfos.size(), kCutoff)); // TribeDescr
+				 // These go in separate files
+				write_buildings(tribe, tribes);
 			}
 			fw.close_array(); // Tribes
 
 			// NOCOM write_key_value_int("number", 42);
 
 			fw.close_brace(); // Main
-			fw.write(FileSystem::create("."), "mapobjects.json");
+			fw.write(*g_fs, (boost::format("%s/tribes.json") % kDirectory).str().c_str());
 		}
 	}
 	catch (std::exception& e) {

@@ -10,9 +10,20 @@ import sys
 
 base_path = os.path.abspath(os.path.dirname(__file__))
 
-print("Reading mapinfo from JSON:")
+source_path = os.path.normpath(base_path + "/data/mapobject_info")
 
-source_path = os.path.normpath(base_path + "/mapobjects.json")
-source_file = open(source_path, "r")
-dataset = json.load(source_file)
+if (not os.path.isdir(source_path)):
+	print("Error: Path " + source_path + " not found.")
+	sys.exit(1)
+
+source_files = sorted(os.listdir(source_path), key=str.lower)
+
+print("Reading mapinfo from JSON:")
+for source_filename in source_files:
+	file_path = source_path + "/" + source_filename
+	if source_filename.endswith(".json"):
+		print("- Reading " + file_path)
+		source_file = open(file_path, "r")
+		dataset = json.load(source_file)
+
 print("Done.")
