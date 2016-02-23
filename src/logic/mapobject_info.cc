@@ -26,6 +26,7 @@
 
 #include "base/i18n.h"
 #include "base/log.h"
+#include "base/macros.h"
 #include "config.h"
 #include "graphic/graphic.h"
 #include "io/filesystem/filesystem.h"
@@ -129,22 +130,26 @@ private:
 	int level_;
 };
 
+void write_building_category(const std::string& category_name,
+									  const std::string& category_heading,
+									  const std::vector<DescriptionIndex>& buildings,
+									  const TribeDescr& tribe,
+									  EditorGameBase& egbase,
+									  JSONFileWrite* fw) {
+	fw->write_key_value_string("name", category_name);
+	fw->close_element();
+	fw->write_key_value_string("heading", category_heading);
+	fw->close_element();
+	fw->open_array("buildinglist"); // Buildinglist
 
-void write_buildings(const TribeDescr& tribe, const Tribes& tribes, EditorGameBase& egbase) {
-	log("\n==================\nWriting buildings:\n==================\n");
-	JSONFileWrite fw;
-	fw.open_brace(); // Main
-
-	fw.open_array("buildings"); // Buildings
-	const std::vector<DescriptionIndex>& buildings = tribe.buildings();
-	for (size_t building_index = 0; building_index < buildings.size(); ++building_index) {
-		const BuildingDescr& building = *tribes.get_building_descr(building_index);
+	for (size_t i = 0; i < buildings.size(); ++i) {
+		const BuildingDescr& building = *tribe.get_building_descr(buildings[i]);
 		log(" %s", building.name().c_str());
-		fw.open_brace();
-		fw.write_key_value_string("name", building.name());
-		fw.close_element();
-		fw.write_key_value_string("descname", building.descname());
-		fw.close_element();
+		fw->open_brace();
+		fw->write_key_value_string("name", building.name());
+		fw->close_element();
+		fw->write_key_value_string("descname", building.descname());
+		fw->close_element();
 
 		// Helptext
 		try {
@@ -154,20 +159,130 @@ void write_buildings(const TribeDescr& tribe, const Tribes& tribes, EditorGameBa
 			cr->push_arg(&building);
 			cr->resume();
 			const std::string help_text = cr->pop_string();
-			fw.write_key_value_string("helptext", help_text);
+			fw->write_key_value_string("helptext", help_text);
 		} catch (LuaError& err) {
-			fw.write_key_value_string("helptext", err.what());
+			fw->write_key_value_string("helptext", err.what());
 		}
-		fw.close_brace(true, building_index, buildings.size()); // Building
+		fw->close_brace(true, i, buildings.size()); // Building
 	}
-	fw.close_array(); // Buildings
+	fw->close_array(); // Buildinglist
+}
 
+
+void write_buildings(const TribeDescr& tribe, EditorGameBase& egbase) {
+
+	// Sort the buildings into different types
+	std::vector<DescriptionIndex> mines;
+	std::vector<DescriptionIndex> mines_enhanced;
+	std::vector<DescriptionIndex> ports;
+	std::vector<DescriptionIndex> headquarters;
+	std::vector<DescriptionIndex> small_buildings;
+	std::vector<DescriptionIndex> small_buildings_enhanced;
+	std::vector<DescriptionIndex> medium_buildings;
+	std::vector<DescriptionIndex> medium_buildings_enhanced;
+	std::vector<DescriptionIndex> big_buildings;
+	std::vector<DescriptionIndex> big_buildings_enhanced;
+
+	for (DescriptionIndex building_index : tribe.buildings()) {
+		const BuildingDescr& building = *tribe.get_building_descr(building_index);
+		if (building.type() != MapObjectType::CONSTRUCTIONSITE &&
+			 building.type() != MapObjectType::DISMANTLESITE) {
+			if (building.get_ismine()) {
+				if (building.is_enhanced()) {
+					mines_enhanced.push_back(building_index);
+				} else {
+					mines.push_back(building_index);
+				}
+			} else if (building.get_isport()) {
+				ports.push_back(building_index);
+			} else if (building.type() == MapObjectType::WAREHOUSE
+						  && !building.is_buildable()
+						  && !building.is_enhanced()) {
+				headquarters.push_back(building_index);
+			} else if (building.get_size() == BaseImmovable::SMALL) {
+				if (building.is_enhanced()) {
+					small_buildings_enhanced.push_back(building_index);
+				} else {
+					small_buildings.push_back(building_index);
+				}
+			} else if (building.get_size() == BaseImmovable::MEDIUM) {
+				if (building.is_enhanced()) {
+					medium_buildings_enhanced.push_back(building_index);
+				} else {
+					medium_buildings.push_back(building_index);
+				}
+			} else if (building.get_size() == BaseImmovable::BIG) {
+				if (building.is_enhanced()) {
+					big_buildings_enhanced.push_back(building_index);
+				} else {
+					big_buildings.push_back(building_index);
+				}
+			} else {
+				NEVER_HERE();
+			}
+		}
+	}
+
+	log("\n==================\nWriting buildings:\n==================\n");
+	JSONFileWrite fw;
+	fw.open_brace(); // Main
+	fw.open_array("buildings"); // Buildings
+
+	fw.open_brace(); // Category
+	write_building_category("headquarters", "Headquarters", headquarters, tribe, egbase, &fw);
+	fw.close_brace(true, 1, 5); // Category - we need a comma
+
+	fw.open_brace(); // Category
+	write_building_category("small", "Small Buildings", small_buildings, tribe, egbase, &fw);
+
+	if (!small_buildings_enhanced.empty()) {
+		fw.close_brace(true, 1, 5); // Category - we need a comma
+		fw.open_brace(); // Category
+		write_building_category("small_enhanced", "Small Enhanced Buildings", small_buildings_enhanced, tribe, egbase, &fw);
+	}
+	fw.close_brace(true, 1, 5); // Category - we need a comma
+
+	fw.open_brace(); // Category
+	write_building_category("medium", "Medium Buildings", medium_buildings, tribe, egbase, &fw);
+
+	if (!medium_buildings_enhanced.empty()) {
+		fw.close_brace(true, 1, 5); // Category - we need a comma
+		fw.open_brace(); // Category
+		write_building_category("medium_enhanced", "Medium Enhanced Buildings", medium_buildings_enhanced, tribe, egbase, &fw);
+	}
+	fw.close_brace(true, 1, 5); // Category - we need a comma
+
+	fw.open_brace(); // Category
+	write_building_category("big", "Big Buildings", big_buildings, tribe, egbase, &fw);
+
+	if (!big_buildings_enhanced.empty()) {
+		fw.close_brace(true, 1, 5); // Category - we need a comma
+		fw.open_brace(); // Category
+		write_building_category("big_enhanced", "Big Enhanced Buildings", big_buildings_enhanced, tribe, egbase, &fw);
+	}
+	fw.close_brace(true, 1, 5); // Category - we need a comma
+
+	fw.open_brace(); // Category
+	write_building_category("mines", "Mines", mines, tribe, egbase, &fw);
+
+	if (!mines_enhanced.empty()) {
+		fw.close_brace(true, 1, 5); // Category - we need a comma
+		fw.open_brace(); // Category
+		write_building_category("mines_enhanced", "Enhanced Mines", mines_enhanced, tribe, egbase, &fw);
+	}
+	fw.close_brace(true, 1, 5); // Category - we need a comma
+
+	fw.open_brace(); // Category
+	write_building_category("port", "Port", ports, tribe, egbase, &fw);
+	fw.close_brace(); // Category
+
+	fw.close_array(); // Buildings
 	fw.close_brace(); // Main
 	fw.write(*g_fs, (boost::format("%s/%s_buildings.json") % kDirectory % tribe.name()).str().c_str());
 	log("\n");
 }
 
-void write_wares(const TribeDescr& tribe, const Tribes& tribes, EditorGameBase& egbase) {
+void write_wares(const TribeDescr& tribe, EditorGameBase& egbase) {
 	log("\n===============\nWriting wares:\n===============\n");
 	JSONFileWrite fw;
 	fw.open_brace(); // Main
@@ -176,7 +291,7 @@ void write_wares(const TribeDescr& tribe, const Tribes& tribes, EditorGameBase& 
 	size_t counter = 0;
 	const size_t no_of_wares = tribe.wares().size();
 	for (DescriptionIndex ware_index : tribe.wares()) {
-		const WareDescr& ware = *tribes.get_ware_descr(ware_index);
+		const WareDescr& ware = *tribe.get_ware_descr(ware_index);
 		log(" %s", ware.name().c_str());
 		fw.open_brace();
 		fw.write_key_value_string("name", ware.name());
@@ -205,7 +320,7 @@ void write_wares(const TribeDescr& tribe, const Tribes& tribes, EditorGameBase& 
 		size_t prod_counter = 0;
 		const size_t no_of_producers = ware.producers().size();
 		for (DescriptionIndex building_index : ware.producers()) {
-			const BuildingDescr& building = *tribes.get_building_descr(building_index);
+			const BuildingDescr& building = *tribe.get_building_descr(building_index);
 			fw.open_brace();
 			fw.write_key_value_string("name", building.name());
 			fw.close_element();
@@ -219,7 +334,7 @@ void write_wares(const TribeDescr& tribe, const Tribes& tribes, EditorGameBase& 
 		size_t consumer_counter = 0;
 		const size_t no_of_consumers = ware.consumers().size();
 		for (DescriptionIndex building_index : ware.consumers()) {
-			const BuildingDescr& building = *tribes.get_building_descr(building_index);
+			const BuildingDescr& building = *tribe.get_building_descr(building_index);
 			fw.open_brace();
 			fw.write_key_value_string("name", building.name());
 			fw.close_element();
@@ -239,7 +354,7 @@ void write_wares(const TribeDescr& tribe, const Tribes& tribes, EditorGameBase& 
 	log("\n");
 }
 
-void write_workers(const TribeDescr& tribe, const Tribes& tribes, EditorGameBase& egbase) {
+void write_workers(const TribeDescr& tribe, EditorGameBase& egbase) {
 	log("\n================\nWriting workers:\n================\n");
 	JSONFileWrite fw;
 	fw.open_brace(); // Main
@@ -248,7 +363,7 @@ void write_workers(const TribeDescr& tribe, const Tribes& tribes, EditorGameBase
 	size_t counter = 0;
 	const size_t no_of_workers = tribe.workers().size();
 	for (DescriptionIndex worker_index : tribe.workers()) {
-		const WorkerDescr& worker = *tribes.get_worker_descr(worker_index);
+		const WorkerDescr& worker = *tribe.get_worker_descr(worker_index);
 		log(" %s", worker.name().c_str());
 		fw.open_brace();
 		fw.write_key_value_string("name", worker.name());
@@ -271,7 +386,7 @@ void write_workers(const TribeDescr& tribe, const Tribes& tribes, EditorGameBase
 
 		if (worker.becomes() != INVALID_INDEX) {
 			fw.close_element();
-			const WorkerDescr& becomes = *tribes.get_worker_descr(worker.becomes());
+			const WorkerDescr& becomes = *tribe.get_worker_descr(worker.becomes());
 			fw.write_key("becomes");
 			fw.open_brace();
 			fw.write_key_value_string("name", becomes.name());
@@ -295,14 +410,14 @@ void write_tribes(EditorGameBase& egbase) {
 	fw.open_array("tribes"); // Tribes
 
 	/// Tribes
+	egbase.mutable_tribes()->postload(); // Make sure that all values have been set.
+	const Tribes& tribes = egbase.tribes();
 
-	Tribes* tribes = egbase.mutable_tribes();
-	tribes->postload();
-	std::vector<TribeBasicInfo> tribeinfos = tribes->get_all_tribeinfos();
+	std::vector<TribeBasicInfo> tribeinfos = tribes.get_all_tribeinfos();
 	for (size_t tribe_index = 0; tribe_index < tribeinfos.size(); ++tribe_index) {
 		const TribeBasicInfo& tribe_info = tribeinfos[tribe_index];
 		const TribeDescr& tribe =
-				*egbase.tribes().get_tribe_descr(tribes->tribe_index(tribe_info.name));
+				*tribes.get_tribe_descr(tribes.tribe_index(tribe_info.name));
 		log("\n\n=========================\nWriting tribe: %s\n=========================\n",
 			 tribe.name().c_str());
 
@@ -319,9 +434,9 @@ void write_tribes(EditorGameBase& egbase) {
 		fw.close_brace(true, tribe_index, tribeinfos.size()); // TribeDescr
 
 		 // These go in separate files
-		write_buildings(tribe, *tribes, egbase);
-		write_wares(tribe, *tribes, egbase);
-		write_workers(tribe, *tribes, egbase);
+		write_buildings(tribe, egbase);
+		write_wares(tribe, egbase);
+		write_workers(tribe, egbase);
 	}
 	fw.close_array(); // Tribes
 
