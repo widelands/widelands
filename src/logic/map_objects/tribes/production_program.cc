@@ -1524,7 +1524,7 @@ ProductionProgram::ActPlayFX::ActPlayFX(char * parameters) {
 		bool reached_end;
 		const std::string& filepath = next_word(parameters, reached_end);
 		const std::string& filename = next_word(parameters, reached_end);
-		name = filepath + "/" + filename;
+		name = filepath + g_fs->file_separator() + filename;
 
 		if (!reached_end) {
 			char * endp;
