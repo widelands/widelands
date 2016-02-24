@@ -148,12 +148,12 @@ private:
  ==========================================================
  */
 
-void write_building_category(const std::string& category_name,
-									  const std::string& category_heading,
-									  const std::vector<DescriptionIndex>& buildings,
-									  const TribeDescr& tribe,
-									  EditorGameBase& egbase,
-									  JSONFileWrite* fw) {
+void add_building_category(const std::string& category_name,
+									const std::string& category_heading,
+									const std::vector<DescriptionIndex>& buildings,
+									const TribeDescr& tribe,
+									EditorGameBase& egbase,
+									JSONFileWrite* fw) {
 	fw->write_key_value_string("name", category_name);
 	fw->close_element();
 	fw->write_key_value_string("heading", category_heading);
@@ -189,9 +189,7 @@ void write_building_category(const std::string& category_name,
 
 		// Buildcost
 		fw->open_array("buildcost"); // Buildcost
-
 		if (building.is_buildable()) {
-			// std::map<DescriptionIndex, uint8_t>
 			size_t buildcost_counter = 0;
 			for (WareAmount buildcost : building.buildcost()) {
 				const WareDescr& ware = *tribe.get_ware_descr(buildcost.first);
@@ -207,7 +205,57 @@ void write_building_category(const std::string& category_name,
 				++buildcost_counter;
 			}
 		}
-		fw->close_array(); // Buildcost
+		fw->close_array(1, 5); // Buildcost - we need a comma
+
+		// Produces
+		fw->open_array("produces"); // Produces
+		if (upcast(ProductionSiteDescr const, productionsite, &building)) {
+			size_t produces_counter = 0;
+			for (DescriptionIndex ware_index : productionsite->output_ware_types()) {
+				const WareDescr& ware = *tribe.get_ware_descr(ware_index);
+				fw->open_brace(); // WareDescr
+				fw->write_key_value_string("name", ware.name());
+				fw->close_element();
+				fw->write_key_value_string("descname", ware.descname());
+				fw->close_element();
+				fw->write_key_value_string("icon", ware.icon_filename());
+				fw->close_brace(true, produces_counter, productionsite->output_ware_types().size()); // WareDescr
+				++produces_counter;
+			}
+			produces_counter = 0;
+			for (DescriptionIndex worker_index : productionsite->output_worker_types()) {
+				const WorkerDescr& ware = *tribe.get_worker_descr(worker_index);
+				fw->open_brace(); // WorkerDescr
+				fw->write_key_value_string("name", ware.name());
+				fw->close_element();
+				fw->write_key_value_string("descname", ware.descname());
+				fw->close_element();
+				fw->write_key_value_string("icon", ware.icon_filename());
+				fw->close_brace(true, produces_counter, productionsite->output_worker_types().size()); // WorkerDescr
+				++produces_counter;
+			}
+		}
+		fw->close_array(1, 5); // Produces - we need a comma
+
+		// Consumes
+		fw->open_array("consumes"); // Consumes
+		if (upcast(ProductionSiteDescr const, productionsite, &building)) {
+			size_t consumes_counter = 0;
+			for (WareAmount input : productionsite->inputs()) {
+				const WareDescr& ware = *tribe.get_ware_descr(input.first);
+				fw->open_brace(); // Input
+				fw->write_key_value_string("name", ware.name());
+				fw->close_element();
+				fw->write_key_value_string("descname", ware.descname());
+				fw->close_element();
+				fw->write_key_value_string("icon", ware.icon_filename());
+				fw->close_element();
+				fw->write_key_value_int("amount", input.second);
+				fw->close_brace(true, consumes_counter, productionsite->inputs().size()); // Input
+				++consumes_counter;
+			}
+		}
+		fw->close_array(); // Consumes
 
 		fw->close_brace(false, i, buildings.size()); // Building
 	}
@@ -275,51 +323,51 @@ void write_buildings(const TribeDescr& tribe, EditorGameBase& egbase) {
 	fw.open_array("buildings"); // Buildings
 
 	fw.open_brace(); // Category
-	write_building_category("headquarters", "Headquarters", headquarters, tribe, egbase, &fw);
+	add_building_category("headquarters", "Headquarters", headquarters, tribe, egbase, &fw);
 	fw.close_brace(true, 1, 5); // Category - we need a comma
 
 	fw.open_brace(); // Category
-	write_building_category("small", "Small Buildings", small_buildings, tribe, egbase, &fw);
+	add_building_category("small", "Small Buildings", small_buildings, tribe, egbase, &fw);
 
 	if (!small_buildings_enhanced.empty()) {
 		fw.close_brace(true, 1, 5); // Category - we need a comma
 		fw.open_brace(); // Category
-		write_building_category("small_enhanced", "Small Enhanced Buildings", small_buildings_enhanced, tribe, egbase, &fw);
+		add_building_category("small_enhanced", "Small Enhanced Buildings", small_buildings_enhanced, tribe, egbase, &fw);
 	}
 	fw.close_brace(true, 1, 5); // Category - we need a comma
 
 	fw.open_brace(); // Category
-	write_building_category("medium", "Medium Buildings", medium_buildings, tribe, egbase, &fw);
+	add_building_category("medium", "Medium Buildings", medium_buildings, tribe, egbase, &fw);
 
 	if (!medium_buildings_enhanced.empty()) {
 		fw.close_brace(true, 1, 5); // Category - we need a comma
 		fw.open_brace(); // Category
-		write_building_category("medium_enhanced", "Medium Enhanced Buildings", medium_buildings_enhanced, tribe, egbase, &fw);
+		add_building_category("medium_enhanced", "Medium Enhanced Buildings", medium_buildings_enhanced, tribe, egbase, &fw);
 	}
 	fw.close_brace(true, 1, 5); // Category - we need a comma
 
 	fw.open_brace(); // Category
-	write_building_category("big", "Big Buildings", big_buildings, tribe, egbase, &fw);
+	add_building_category("big", "Big Buildings", big_buildings, tribe, egbase, &fw);
 
 	if (!big_buildings_enhanced.empty()) {
 		fw.close_brace(true, 1, 5); // Category - we need a comma
 		fw.open_brace(); // Category
-		write_building_category("big_enhanced", "Big Enhanced Buildings", big_buildings_enhanced, tribe, egbase, &fw);
+		add_building_category("big_enhanced", "Big Enhanced Buildings", big_buildings_enhanced, tribe, egbase, &fw);
 	}
 	fw.close_brace(true, 1, 5); // Category - we need a comma
 
 	fw.open_brace(); // Category
-	write_building_category("mines", "Mines", mines, tribe, egbase, &fw);
+	add_building_category("mines", "Mines", mines, tribe, egbase, &fw);
 
 	if (!mines_enhanced.empty()) {
 		fw.close_brace(true, 1, 5); // Category - we need a comma
 		fw.open_brace(); // Category
-		write_building_category("mines_enhanced", "Enhanced Mines", mines_enhanced, tribe, egbase, &fw);
+		add_building_category("mines_enhanced", "Enhanced Mines", mines_enhanced, tribe, egbase, &fw);
 	}
 	fw.close_brace(true, 1, 5); // Category - we need a comma
 
 	fw.open_brace(); // Category
-	write_building_category("port", "Port", ports, tribe, egbase, &fw);
+	add_building_category("port", "Port", ports, tribe, egbase, &fw);
 	fw.close_brace(); // Category
 
 	fw.close_array(); // Buildings
