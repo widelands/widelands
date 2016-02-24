@@ -47,7 +47,7 @@ namespace  {
  ==========================================================
  */
 
-const std::string kDirectory = "mapobject_info";
+const std::string kDirectory = "map_object_info";
 
 // Setup the static objects Widelands needs to operate and initializes systems.
 void initialize() {

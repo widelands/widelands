@@ -14,21 +14,19 @@ wl_binary(wl_map_info
     map_io_map_loader
 )
 
-# NOCOM clean this up
-wl_binary(wl_mapobject_info
+wl_binary(wl_map_object_info
   SRCS
-    mapobject_info.cc
+    map_objects/map_object_info.cc
   USES_SDL2
   DEPENDS
+    base_i18n
     base_log
+    base_macros
     graphic
-    graphic_image_io
-    graphic_minimap_renderer
-    graphic_surface
     io_fileread
     io_filesystem
     logic
-    map_io_map_loader
+    sound
 )
 
 wl_library(logic_widelands_geometry
