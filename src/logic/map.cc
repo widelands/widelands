@@ -2131,7 +2131,7 @@ bool Map::allows_seafaring() {
 
 bool Map::has_artifacts() {
 	for (MapIndex i = 0; i < max_index(); ++i) {
-		if (upcast(Immovable, immovable, m_fields[i].get_immovable())) {
+		if (upcast(Immovable, immovable, fields_[i].get_immovable())) {
 			if (immovable->descr().has_attribute(immovable->descr().get_attribute_id("artifact"))) {
 				return true;
 			}
