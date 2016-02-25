@@ -75,6 +75,9 @@ struct ChatProvider {
 	// TODO(sirver): this does not belong here. The receiver of the
 	// notifications should deal with this.
 	virtual bool sound_off() {return false;}
+
+	// The specific chat provider subclass might not have been set, e.g. due to an exception.
+	virtual bool has_been_set() const {return false;}
 };
 
 #endif  // end of include guard:
