@@ -87,7 +87,7 @@ return {
      sleep(300000)
 
      local hq = wl.Game().players[player.number]:get_buildings("empire_headquarters")[1]
-
+     
      if hq and hq.descr.name == "empire_headquarters" then
       if hq:get_wares("water") < 100 then
          hq:set_wares("water", hq:get_wares("water") + 20)
