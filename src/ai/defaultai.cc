@@ -3128,17 +3128,17 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 	bool considering_upgrade = enhancement != INVALID_INDEX;
 
 	// First we check for rare case when input wares are set to 0 but AI is not aware that
-	// the site is pending for upgrade - one possible cause is this is a fresly loaded game
+	// the site is pending for upgrade - one possible cause is this is a freshly loaded game
 	if (!site.upgrade_pending) {
-		bool resseting_wares = false;
+		bool resetting_wares = false;
 		for (auto& queue : site.site->warequeues()) {
 			if (queue->get_max_fill() == 0) {
-				resseting_wares = true;
+				resetting_wares = true;
 				game().send_player_set_ware_max_fill(*site.site, queue->get_ware(), queue->get_max_size());
 			}
 		}
-		if (resseting_wares) {
-			log(" %d: AI: input queues resettted to max for %s (game just loaded?)\n",
+		if (resetting_wares) {
+			log(" %d: AI: input queues were reset to max for %s (game just loaded?)\n",
 			player_number(),
 			site.bo->name);
 			return true;
@@ -3152,14 +3152,14 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 		for (auto& queue : site.site->warequeues()) {
 			left_wares += queue->get_filled();
 		}
-		//do nothing when some wares are left, but do not wait more then 4 minutes
+		// Do nothing when some wares are left, but do not wait more then 4 minutes
 		if (site.bo->construction_decision_time + 4 * 60 * 1000 > gametime && left_wares > 0) {
 			return false;
 		}
 		assert (site.bo->cnt_upgrade_pending == 1);
 		assert(enhancement != INVALID_INDEX);
 		game().send_player_enhance_building(*site.site, enhancement);
-		considering_upgrade = false;
+		considering_upgrade = false; // NOCOM(#codereview): I don't think we need to set this here, because we return anyway.
 		return true;
 	} else if (site.bo->cnt_upgrade_pending > 0) {
 		// some other site of this type is in pending for upgrade
@@ -3178,12 +3178,12 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 		considering_upgrade = false;
 	}
 
-	// if upgraded building produces another wares we are willing to upgrade it sooner
+	// if upgraded building produces other wares we are willing to upgrade it sooner
 	if (considering_upgrade) {
 		if (site.bo->upgrade_extends) {
 			// if upgrade produces new outputs, we force first upgrade
 			if (gametime < site.built_time + 10 * 60 * 1000) {
-				considering_upgrade = false;
+				considering_upgrade = false; // NOCOM(codereview): I don't understand - how does 'false' force an upgrade here?
 			}
 		} else {
 			if (gametime < 45 * 60 * 1000 || gametime < site.built_time + 20 * 60 * 1000) {
@@ -3224,7 +3224,7 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 				}
 			}
 
-			// Dont forget about limitation of number of buildings
+			// Don't forget about limitation of number of buildings
 			if (en_bo.aimode_limit_status() != AiModeBuildings::kAnotherAllowed) {
 				doing_upgrade = false;
 			}
