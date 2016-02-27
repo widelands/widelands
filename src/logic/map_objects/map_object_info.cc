@@ -212,8 +212,7 @@ void write_buildings(const TribeDescr& tribe, EditorGameBase& egbase) {
 				fw.open_array("produced_wares"); // Produces
 				size_t produces_counter = 0;
 				for (DescriptionIndex ware_index : productionsite->output_ware_types()) {
-					const WareDescr& ware = *tribe.get_ware_descr(ware_index);
-					fw.write_value_string(ware.name());
+					fw.write_value_string(tribe.get_ware_descr(ware_index)->name());
 					fw.close_element(produces_counter, productionsite->output_ware_types().size());
 					++produces_counter;
 				}
@@ -223,8 +222,7 @@ void write_buildings(const TribeDescr& tribe, EditorGameBase& egbase) {
 				fw.open_array("produced_workers"); // Produces
 				size_t produces_counter = 0;
 				for (DescriptionIndex worker_index : productionsite->output_worker_types()) {
-					const WorkerDescr& worker = *tribe.get_worker_descr(worker_index);
-					fw.write_value_string(worker.name());
+					fw.write_value_string(tribe.get_worker_descr(worker_index)->name());
 					fw.close_element(produces_counter, productionsite->output_worker_types().size());
 					++produces_counter;
 				}
@@ -352,45 +350,7 @@ void write_wares(const TribeDescr& tribe, EditorGameBase& egbase) {
 		} catch (LuaError& err) {
 			fw.write_key_value_string("helptext", err.what());
 		}
-		fw.close_element();
-
-		fw.open_array("producers"); // Producers
-		size_t prod_counter = 0;
-		const size_t no_of_producers = ware.producers().size();
-		for (DescriptionIndex building_index : ware.producers()) {
-			const BuildingDescr& building = *tribe.get_building_descr(building_index);
-			fw.open_brace();
-			fw.write_key_value_string("name", building.name());
-			fw.close_element();
-			fw.write_key_value_string("descname", building.descname());
-			fw.close_element();
-			fw.write_key_value_string("icon", building.icon_filename());
-			fw.close_element();
-			fw.write_key_value_string("representative_image", building.representative_image_filename());
-			fw.close_brace(true, prod_counter, no_of_producers); // Building
-			++prod_counter;
-		}
-		fw.close_array(1, 5); // Producers - and we need a comma
-
-		fw.open_array("consumers"); // Consumers
-		size_t consumer_counter = 0;
-		const size_t no_of_consumers = ware.consumers().size();
-		for (DescriptionIndex building_index : ware.consumers()) {
-			const BuildingDescr& building = *tribe.get_building_descr(building_index);
-			fw.open_brace();
-			fw.write_key_value_string("name", building.name());
-			fw.close_element();
-			fw.write_key_value_string("descname", building.descname());
-			fw.close_element();
-			fw.write_key_value_string("icon", building.icon_filename());
-			fw.close_element();
-			fw.write_key_value_string("representative_image", building.representative_image_filename());
-			fw.close_brace(true, consumer_counter, no_of_consumers); // Building
-			++consumer_counter;
-		}
-		fw.close_array(); // Consumers
-
-		fw.close_brace(false, counter, no_of_wares); // Ware
+		fw.close_brace(true, counter, no_of_wares); // Ware
 		++counter;
 	}
 	fw.close_array(); // Wares
@@ -445,9 +405,7 @@ void write_workers(const TribeDescr& tribe, EditorGameBase& egbase) {
 			fw.open_brace();
 			fw.write_key_value_string("name", becomes.name());
 			fw.close_element();
-			fw.write_key_value_string("descname", worker.descname());
-			fw.close_element();
-			fw.write_key_value_string("icon", worker.icon_filename());
+			fw.write_key_value_int("experience", worker.get_needed_experience());
 			fw.close_brace(true);
 		}
 		fw.close_brace(true, counter, no_of_workers); // Worker
