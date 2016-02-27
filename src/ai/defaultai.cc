@@ -3159,7 +3159,6 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 		assert (site.bo->cnt_upgrade_pending == 1);
 		assert(enhancement != INVALID_INDEX);
 		game().send_player_enhance_building(*site.site, enhancement);
-		considering_upgrade = false; // NOCOM(#codereview): I don't think we need to set this here, because we return anyway.
 		return true;
 	} else if (site.bo->cnt_upgrade_pending > 0) {
 		// some other site of this type is in pending for upgrade
@@ -3178,12 +3177,13 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 		considering_upgrade = false;
 	}
 
-	// if upgraded building produces other wares we are willing to upgrade it sooner
+	// If upgrade produces new outputs, we upgrade unless the site is younger
+	// then 10 minutes. Otherwise the site must be older then 20 minutes and
+	// gametime > 45 minutes.
 	if (considering_upgrade) {
 		if (site.bo->upgrade_extends) {
-			// if upgrade produces new outputs, we force first upgrade
 			if (gametime < site.built_time + 10 * 60 * 1000) {
-				considering_upgrade = false; // NOCOM(codereview): I don't understand - how does 'false' force an upgrade here?
+				considering_upgrade = false;
 			}
 		} else {
 			if (gametime < 45 * 60 * 1000 || gametime < site.built_time + 20 * 60 * 1000) {
