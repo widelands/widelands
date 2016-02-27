@@ -1559,20 +1559,9 @@ int LuaImmovableDescription::get_owner_type(lua_State * L) {
 		* :const:`big` -- Example: Big sized buildings or rocks
 */
 int LuaImmovableDescription::get_size(lua_State * L) {
-	switch (get()->get_size()) {
-	case BaseImmovable::NONE:
-		lua_pushstring(L, "none");
-		break;
-	case BaseImmovable::SMALL:
-		lua_pushstring(L, "small");
-		break;
-	case BaseImmovable::MEDIUM:
-		lua_pushstring(L, "medium");
-		break;
-	case BaseImmovable::BIG:
-		lua_pushstring(L, "big");
-		break;
-	default:
+	try {
+		lua_pushstring(L, BaseImmovable::size_to_string(get()->get_size()));
+	} catch (std::exception&) {
 		report_error(L, "Unknown size %i in LuaImmovableDescription::get_size: %s",
 						 get()->get_size(), get()->name().c_str());
 	}
@@ -1818,17 +1807,9 @@ int LuaBuildingDescription::get_is_port(lua_State * L) {
 		* :const:`big` -- Big sized buildings
 */
 int LuaBuildingDescription::get_size(lua_State * L) {
-	switch (get()->get_size()) {
-	case BaseImmovable::SMALL:
-		lua_pushstring(L, "small");
-		break;
-	case BaseImmovable::MEDIUM:
-		lua_pushstring(L, "medium");
-		break;
-	case BaseImmovable::BIG:
-		lua_pushstring(L, "big");
-		break;
-	default:
+	try {
+		lua_pushstring(L, BaseImmovable::size_to_string(get()->get_size()));
+	} catch (std::exception&) {
 		report_error(L, "Unknown size %i in LuaBuildingDescription::get_size: %s",
 						 get()->get_size(), get()->name().c_str());
 	}

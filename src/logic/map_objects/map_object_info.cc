@@ -93,6 +93,9 @@ public:
 	void write_key(const std::string& key) {
 		write_string((boost::format("\"%s\":\n") % key).str(), true);
 	}
+	void write_value_string(const std::string& quoted_value) {
+		write_string((boost::format("\"%s\"") % quoted_value).str(), true);
+	}
 	void write_key_value(const std::string& key, const std::string& quoted_value) {
 		write_string((boost::format("\"%s\": %s") % key % quoted_value).str(), true);
 	}
@@ -108,12 +111,12 @@ public:
 		write_string("{\n", true);
 		++level_;
 	}
+	// JSON hates a final comma. This defaults to having NO comma.
 	void close_brace(bool precede_newline = false, int current = 0, int total = 0) {
 		--level_;
 		if (precede_newline) {
 			write_string("\n");
 		}
-		// JSON hates a final comma
 		if (current < total - 1) {
 			write_string("},\n", true);
 		} else {
@@ -124,19 +127,21 @@ public:
 		write_string((boost::format("\"%s\":[\n") % name).str(), true);
 		++level_;
 	}
+	// JSON hates a final comma. This defaults to having NO comma.
 	void close_array(int current = 0, int total = 0) {
 		--level_;
 		write_string("\n");
-		// JSON hates a final comma
 		if (current < total - 1) {
 			write_string("],\n", true);
 		} else {
 			write_string("]\n", true);
 		}
 	}
-	// JSON hates a final comma
-	void close_element() {
-		write_string(",\n");
+	// JSON hates a final comma. This defaults to having a comma.
+	void close_element(int current = -2, int total = 0) {
+		if (current < total - 1) {
+			write_string(",\n");
+		}
 	}
 private:
 	int level_;
@@ -148,106 +153,145 @@ private:
  ==========================================================
  */
 
-void add_building_category(const std::string& category_name,
-									const std::string& category_heading,
-									const std::vector<DescriptionIndex>& buildings,
-									const TribeDescr& tribe,
-									EditorGameBase& egbase,
-									JSONFileWrite* fw) {
-	fw->write_key_value_string("name", category_name);
-	fw->close_element();
-	fw->write_key_value_string("heading", category_heading);
-	fw->close_element();
-	fw->open_array("buildinglist"); // Buildinglist
+void write_buildings(const TribeDescr& tribe, EditorGameBase& egbase) {
 
+	log("\n==================\nWriting buildings:\n==================\n");
+	JSONFileWrite fw;
+	fw.open_brace(); // Main
+	fw.open_array("buildings"); // Buildings
+
+	// We don't want any partially finished buildings
+	std::vector<const BuildingDescr*> buildings;
+	for (const DescriptionIndex& index : tribe.buildings()) {
+		const BuildingDescr* building = tribe.get_building_descr(index);
+		if (building->type() != MapObjectType::CONSTRUCTIONSITE &&
+			 building->type() != MapObjectType::DISMANTLESITE) {
+			buildings.push_back(building);
+		}
+	}
+
+	// Now write
 	for (size_t i = 0; i < buildings.size(); ++i) {
-		const BuildingDescr& building = *tribe.get_building_descr(buildings[i]);
+		const BuildingDescr& building = *buildings[i];
 		log(" %s", building.name().c_str());
-		fw->open_brace();
+		fw.open_brace(); // Building
 
-		// Conditional stuff first, so we won't run into trouble with the commas.
+		fw.write_key_value_string("name", building.name());
+		fw.close_element();
+		fw.write_key_value_string("descname", building.descname());
+		fw.close_element();
+		fw.write_key_value_string("icon", building.representative_image_filename());
+		fw.close_element();
+
+		// Conditional stuff in between, so we won't run into trouble with the commas.
 
 		// Buildcost
 		if (building.is_buildable()) {
-			fw->open_array("buildcost"); // Buildcost
+			fw.open_array("buildcost"); // Buildcost
 			size_t buildcost_counter = 0;
 			for (WareAmount buildcost : building.buildcost()) {
 				const WareDescr& ware = *tribe.get_ware_descr(buildcost.first);
-				fw->open_brace(); // Buildcost
-				fw->write_key_value_string("name", ware.name());
-				fw->close_element();
-				fw->write_key_value_string("descname", ware.descname());
-				fw->close_element();
-				fw->write_key_value_string("icon", ware.icon_filename());
-				fw->close_element();
-				fw->write_key_value_int("amount", buildcost.second);
-				fw->close_brace(true, buildcost_counter, building.buildcost().size()); // Buildcost
+				fw.open_brace(); // Buildcost
+				fw.write_key_value_string("name", ware.name());
+				fw.close_element();
+				fw.write_key_value_int("amount", buildcost.second);
+				fw.close_brace(true, buildcost_counter, building.buildcost().size()); // Buildcost
 				++buildcost_counter;
 			}
-			fw->close_array(1, 5); // Buildcost - we need a comma
+			fw.close_array(1, 5); // Buildcost - we need a comma
+		}
+
+		if (building.is_enhanced()) {
+			fw.write_key_value_string("enhanced", tribe.get_building_descr(building.enhanced_from())->name());
+			fw.close_element();
 		}
 
 		if (upcast(ProductionSiteDescr const, productionsite, &building)) {
 			// Produces
-			if (productionsite->output_ware_types().size() > 0 ||
-				 productionsite->output_worker_types().size() > 0) {
-				fw->open_array("produces"); // Produces
+			if (productionsite->output_ware_types().size() > 0) {
+				fw.open_array("produced_wares"); // Produces
 				size_t produces_counter = 0;
 				for (DescriptionIndex ware_index : productionsite->output_ware_types()) {
 					const WareDescr& ware = *tribe.get_ware_descr(ware_index);
-					fw->open_brace(); // WareDescr
-					fw->write_key_value_string("name", ware.name());
-					fw->close_element();
-					fw->write_key_value_string("descname", ware.descname());
-					fw->close_element();
-					fw->write_key_value_string("icon", ware.icon_filename());
-					fw->close_brace(true, produces_counter, productionsite->output_ware_types().size()); // WareDescr
+					fw.write_value_string(ware.name());
+					fw.close_element(produces_counter, productionsite->output_ware_types().size());
 					++produces_counter;
 				}
-				produces_counter = 0;
+				fw.close_array(1, 5); // Produces - we need a comma
+			}
+			if (productionsite->output_worker_types().size() > 0) {
+				fw.open_array("produced_workers"); // Produces
+				size_t produces_counter = 0;
 				for (DescriptionIndex worker_index : productionsite->output_worker_types()) {
-					const WorkerDescr& ware = *tribe.get_worker_descr(worker_index);
-					fw->open_brace(); // WorkerDescr
-					fw->write_key_value_string("name", ware.name());
-					fw->close_element();
-					fw->write_key_value_string("descname", ware.descname());
-					fw->close_element();
-					fw->write_key_value_string("icon", ware.icon_filename());
-					fw->close_brace(true, produces_counter, productionsite->output_worker_types().size()); // WorkerDescr
+					const WorkerDescr& worker = *tribe.get_worker_descr(worker_index);
+					fw.write_value_string(worker.name());
+					fw.close_element(produces_counter, productionsite->output_worker_types().size());
 					++produces_counter;
 				}
-				fw->close_array(1, 5); // Produces - we need a comma
+				fw.close_array(1, 5); // Produces - we need a comma
 			}
 
 			// Consumes
 			if (productionsite->inputs().size() > 0) {
-				fw->open_array("consumes"); // Consumes
+				fw.open_array("stored_wares"); // Consumes
 				size_t consumes_counter = 0;
 				for (WareAmount input : productionsite->inputs()) {
 					const WareDescr& ware = *tribe.get_ware_descr(input.first);
-					fw->open_brace(); // Input
-					fw->write_key_value_string("name", ware.name());
-					fw->close_element();
-					fw->write_key_value_string("descname", ware.descname());
-					fw->close_element();
-					fw->write_key_value_string("icon", ware.icon_filename());
-					fw->close_element();
-					fw->write_key_value_int("amount", input.second);
-					fw->close_brace(true, consumes_counter, productionsite->inputs().size()); // Input
+					fw.open_brace(); // Input
+					fw.write_key_value_string("name", ware.name());
+					fw.close_element();
+					fw.write_key_value_int("amount", input.second);
+					fw.close_brace(true, consumes_counter, productionsite->inputs().size()); // Input
 					++consumes_counter;
 				}
-				fw->close_array(1, 5); // Consumes - we need a comma
+				fw.close_array(1, 5); // Consumes - we need a comma
 			}
+
+			fw.open_array("workers"); // Workers
+			size_t worker_counter = 0;
+			for (WareAmount input : productionsite->working_positions()) {
+				const WorkerDescr& worker = *tribe.get_worker_descr(input.first);
+				fw.open_brace(); // Worker
+				fw.write_key_value_string("name", worker.name());
+				fw.close_element();
+				fw.write_key_value_int("amount", input.second);
+				fw.close_brace(true, worker_counter, productionsite->working_positions().size()); // Worker
+				++worker_counter;
+			}
+			fw.close_array(1, 5); // Workers - we need a comma
 		}
 
-		fw->write_key_value_string("name", building.name());
-		fw->close_element();
-		fw->write_key_value_string("descname", building.descname());
-		fw->close_element();
-		fw->write_key_value_string("icon", building.icon_filename());
-		fw->close_element();
-		fw->write_key_value_string("representative_image", building.representative_image_filename());
-		fw->close_element();
+		// Type NOCOM do we need this?
+		switch (building.type()) {
+		case MapObjectType::PRODUCTIONSITE:
+			fw.write_key_value_string("type", "productionsite");
+			break;
+		case MapObjectType::WAREHOUSE:
+			fw.write_key_value_string("type", "warehouse");
+			break;
+		case MapObjectType::MILITARYSITE:
+			fw.write_key_value_string("type", "militarysite");
+			break;
+		case MapObjectType::TRAININGSITE:
+			fw.write_key_value_string("type", "trainingsite");
+			break;
+		default:
+			NEVER_HERE();
+		}
+		fw.close_element();
+
+		// Size
+		if (building.type() == MapObjectType::WAREHOUSE &&
+			 !building.is_buildable() && !building.is_enhanced()) {
+				fw.write_key_value_string("size", "headquarters");
+		} else if (building.get_ismine()) {
+			fw.write_key_value_string("size", "mine");
+		} else if (building.get_isport()) {
+			fw.write_key_value_string("size", "port");
+		} else {
+			fw.write_key_value_string("size", BaseImmovable::size_to_string(building.get_size()));
+		}
+		fw.close_element();
 
 		// Helptext
 		try {
@@ -257,125 +301,13 @@ void add_building_category(const std::string& category_name,
 			cr->push_arg(&building);
 			cr->resume();
 			const std::string help_text = cr->pop_string();
-			fw->write_key_value_string("helptext", help_text);
+			fw.write_key_value_string("helptext", help_text);
 		} catch (LuaError& err) {
-			fw->write_key_value_string("helptext", err.what());
+			fw.write_key_value_string("helptext", err.what());
 		}
-		// NOCOM fw->close_element();
 
-		fw->close_brace(true, i, buildings.size()); // Building
+		fw.close_brace(true, i, buildings.size()); // Building
 	}
-	fw->close_array(); // Buildinglist
-}
-
-
-void write_buildings(const TribeDescr& tribe, EditorGameBase& egbase) {
-
-	// Sort the buildings into different types
-	std::vector<DescriptionIndex> mines;
-	std::vector<DescriptionIndex> mines_enhanced;
-	std::vector<DescriptionIndex> ports;
-	std::vector<DescriptionIndex> headquarters;
-	std::vector<DescriptionIndex> small_buildings;
-	std::vector<DescriptionIndex> small_buildings_enhanced;
-	std::vector<DescriptionIndex> medium_buildings;
-	std::vector<DescriptionIndex> medium_buildings_enhanced;
-	std::vector<DescriptionIndex> big_buildings;
-	std::vector<DescriptionIndex> big_buildings_enhanced;
-
-	for (DescriptionIndex building_index : tribe.buildings()) {
-		const BuildingDescr& building = *tribe.get_building_descr(building_index);
-		if (building.type() != MapObjectType::CONSTRUCTIONSITE &&
-			 building.type() != MapObjectType::DISMANTLESITE) {
-			if (building.get_ismine()) {
-				if (building.is_enhanced()) {
-					mines_enhanced.push_back(building_index);
-				} else {
-					mines.push_back(building_index);
-				}
-			} else if (building.get_isport()) {
-				ports.push_back(building_index);
-			} else if (building.type() == MapObjectType::WAREHOUSE
-						  && !building.is_buildable()
-						  && !building.is_enhanced()) {
-				headquarters.push_back(building_index);
-			} else if (building.get_size() == BaseImmovable::SMALL) {
-				if (building.is_enhanced()) {
-					small_buildings_enhanced.push_back(building_index);
-				} else {
-					small_buildings.push_back(building_index);
-				}
-			} else if (building.get_size() == BaseImmovable::MEDIUM) {
-				if (building.is_enhanced()) {
-					medium_buildings_enhanced.push_back(building_index);
-				} else {
-					medium_buildings.push_back(building_index);
-				}
-			} else if (building.get_size() == BaseImmovable::BIG) {
-				if (building.is_enhanced()) {
-					big_buildings_enhanced.push_back(building_index);
-				} else {
-					big_buildings.push_back(building_index);
-				}
-			} else {
-				NEVER_HERE();
-			}
-		}
-	}
-
-	log("\n==================\nWriting buildings:\n==================\n");
-	JSONFileWrite fw;
-	fw.open_brace(); // Main
-	fw.open_array("buildings"); // Buildings
-
-	fw.open_brace(); // Category
-	add_building_category("headquarters", "Headquarters", headquarters, tribe, egbase, &fw);
-	fw.close_brace(true, 1, 5); // Category - we need a comma
-
-	fw.open_brace(); // Category
-	add_building_category("small", "Small Buildings", small_buildings, tribe, egbase, &fw);
-
-	if (!small_buildings_enhanced.empty()) {
-		fw.close_brace(true, 1, 5); // Category - we need a comma
-		fw.open_brace(); // Category
-		add_building_category("small_enhanced", "Small Enhanced Buildings", small_buildings_enhanced, tribe, egbase, &fw);
-	}
-	fw.close_brace(true, 1, 5); // Category - we need a comma
-
-	fw.open_brace(); // Category
-	add_building_category("medium", "Medium Buildings", medium_buildings, tribe, egbase, &fw);
-
-	if (!medium_buildings_enhanced.empty()) {
-		fw.close_brace(true, 1, 5); // Category - we need a comma
-		fw.open_brace(); // Category
-		add_building_category("medium_enhanced", "Medium Enhanced Buildings", medium_buildings_enhanced, tribe, egbase, &fw);
-	}
-	fw.close_brace(true, 1, 5); // Category - we need a comma
-
-	fw.open_brace(); // Category
-	add_building_category("big", "Big Buildings", big_buildings, tribe, egbase, &fw);
-
-	if (!big_buildings_enhanced.empty()) {
-		fw.close_brace(true, 1, 5); // Category - we need a comma
-		fw.open_brace(); // Category
-		add_building_category("big_enhanced", "Big Enhanced Buildings", big_buildings_enhanced, tribe, egbase, &fw);
-	}
-	fw.close_brace(true, 1, 5); // Category - we need a comma
-
-	fw.open_brace(); // Category
-	add_building_category("mines", "Mines", mines, tribe, egbase, &fw);
-
-	if (!mines_enhanced.empty()) {
-		fw.close_brace(true, 1, 5); // Category - we need a comma
-		fw.open_brace(); // Category
-		add_building_category("mines_enhanced", "Enhanced Mines", mines_enhanced, tribe, egbase, &fw);
-	}
-	fw.close_brace(true, 1, 5); // Category - we need a comma
-
-	fw.open_brace(); // Category
-	add_building_category("port", "Port", ports, tribe, egbase, &fw);
-	fw.close_brace(); // Category
-
 	fw.close_array(); // Buildings
 	fw.close_brace(); // Main
 	fw.write(*g_fs, (boost::format("%s/%s_buildings.json") % kDirectory % tribe.name()).str().c_str());
@@ -593,7 +525,7 @@ void write_tribes(EditorGameBase& egbase) {
  ==========================================================
  */
 
-int main(int argc, char ** argv)
+int main()
 {
 
 	try {
