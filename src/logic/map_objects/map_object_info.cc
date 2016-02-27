@@ -164,6 +164,82 @@ void add_building_category(const std::string& category_name,
 		const BuildingDescr& building = *tribe.get_building_descr(buildings[i]);
 		log(" %s", building.name().c_str());
 		fw->open_brace();
+
+		// Conditional stuff first, so we won't run into trouble with the commas.
+
+		// Buildcost
+		if (building.is_buildable()) {
+			fw->open_array("buildcost"); // Buildcost
+			size_t buildcost_counter = 0;
+			for (WareAmount buildcost : building.buildcost()) {
+				const WareDescr& ware = *tribe.get_ware_descr(buildcost.first);
+				fw->open_brace(); // Buildcost
+				fw->write_key_value_string("name", ware.name());
+				fw->close_element();
+				fw->write_key_value_string("descname", ware.descname());
+				fw->close_element();
+				fw->write_key_value_string("icon", ware.icon_filename());
+				fw->close_element();
+				fw->write_key_value_int("amount", buildcost.second);
+				fw->close_brace(true, buildcost_counter, building.buildcost().size()); // Buildcost
+				++buildcost_counter;
+			}
+			fw->close_array(1, 5); // Buildcost - we need a comma
+		}
+
+		if (upcast(ProductionSiteDescr const, productionsite, &building)) {
+			// Produces
+			if (productionsite->output_ware_types().size() > 0 ||
+				 productionsite->output_worker_types().size() > 0) {
+				fw->open_array("produces"); // Produces
+				size_t produces_counter = 0;
+				for (DescriptionIndex ware_index : productionsite->output_ware_types()) {
+					const WareDescr& ware = *tribe.get_ware_descr(ware_index);
+					fw->open_brace(); // WareDescr
+					fw->write_key_value_string("name", ware.name());
+					fw->close_element();
+					fw->write_key_value_string("descname", ware.descname());
+					fw->close_element();
+					fw->write_key_value_string("icon", ware.icon_filename());
+					fw->close_brace(true, produces_counter, productionsite->output_ware_types().size()); // WareDescr
+					++produces_counter;
+				}
+				produces_counter = 0;
+				for (DescriptionIndex worker_index : productionsite->output_worker_types()) {
+					const WorkerDescr& ware = *tribe.get_worker_descr(worker_index);
+					fw->open_brace(); // WorkerDescr
+					fw->write_key_value_string("name", ware.name());
+					fw->close_element();
+					fw->write_key_value_string("descname", ware.descname());
+					fw->close_element();
+					fw->write_key_value_string("icon", ware.icon_filename());
+					fw->close_brace(true, produces_counter, productionsite->output_worker_types().size()); // WorkerDescr
+					++produces_counter;
+				}
+				fw->close_array(1, 5); // Produces - we need a comma
+			}
+
+			// Consumes
+			if (productionsite->inputs().size() > 0) {
+				fw->open_array("consumes"); // Consumes
+				size_t consumes_counter = 0;
+				for (WareAmount input : productionsite->inputs()) {
+					const WareDescr& ware = *tribe.get_ware_descr(input.first);
+					fw->open_brace(); // Input
+					fw->write_key_value_string("name", ware.name());
+					fw->close_element();
+					fw->write_key_value_string("descname", ware.descname());
+					fw->close_element();
+					fw->write_key_value_string("icon", ware.icon_filename());
+					fw->close_element();
+					fw->write_key_value_int("amount", input.second);
+					fw->close_brace(true, consumes_counter, productionsite->inputs().size()); // Input
+					++consumes_counter;
+				}
+				fw->close_array(1, 5); // Consumes - we need a comma
+			}
+		}
+
 		fw->write_key_value_string("name", building.name());
 		fw->close_element();
 		fw->write_key_value_string("descname", building.descname());
@@ -185,79 +261,9 @@ void add_building_category(const std::string& category_name,
 		} catch (LuaError& err) {
 			fw->write_key_value_string("helptext", err.what());
 		}
-		fw->close_element();
+		// NOCOM fw->close_element();
 
-		// Buildcost
-		fw->open_array("buildcost"); // Buildcost
-		if (building.is_buildable()) {
-			size_t buildcost_counter = 0;
-			for (WareAmount buildcost : building.buildcost()) {
-				const WareDescr& ware = *tribe.get_ware_descr(buildcost.first);
-				fw->open_brace(); // Buildcost
-				fw->write_key_value_string("name", ware.name());
-				fw->close_element();
-				fw->write_key_value_string("descname", ware.descname());
-				fw->close_element();
-				fw->write_key_value_string("icon", ware.icon_filename());
-				fw->close_element();
-				fw->write_key_value_int("amount", buildcost.second);
-				fw->close_brace(true, buildcost_counter, building.buildcost().size()); // Buildcost
-				++buildcost_counter;
-			}
-		}
-		fw->close_array(1, 5); // Buildcost - we need a comma
-
-		// Produces
-		fw->open_array("produces"); // Produces
-		if (upcast(ProductionSiteDescr const, productionsite, &building)) {
-			size_t produces_counter = 0;
-			for (DescriptionIndex ware_index : productionsite->output_ware_types()) {
-				const WareDescr& ware = *tribe.get_ware_descr(ware_index);
-				fw->open_brace(); // WareDescr
-				fw->write_key_value_string("name", ware.name());
-				fw->close_element();
-				fw->write_key_value_string("descname", ware.descname());
-				fw->close_element();
-				fw->write_key_value_string("icon", ware.icon_filename());
-				fw->close_brace(true, produces_counter, productionsite->output_ware_types().size()); // WareDescr
-				++produces_counter;
-			}
-			produces_counter = 0;
-			for (DescriptionIndex worker_index : productionsite->output_worker_types()) {
-				const WorkerDescr& ware = *tribe.get_worker_descr(worker_index);
-				fw->open_brace(); // WorkerDescr
-				fw->write_key_value_string("name", ware.name());
-				fw->close_element();
-				fw->write_key_value_string("descname", ware.descname());
-				fw->close_element();
-				fw->write_key_value_string("icon", ware.icon_filename());
-				fw->close_brace(true, produces_counter, productionsite->output_worker_types().size()); // WorkerDescr
-				++produces_counter;
-			}
-		}
-		fw->close_array(1, 5); // Produces - we need a comma
-
-		// Consumes
-		fw->open_array("consumes"); // Consumes
-		if (upcast(ProductionSiteDescr const, productionsite, &building)) {
-			size_t consumes_counter = 0;
-			for (WareAmount input : productionsite->inputs()) {
-				const WareDescr& ware = *tribe.get_ware_descr(input.first);
-				fw->open_brace(); // Input
-				fw->write_key_value_string("name", ware.name());
-				fw->close_element();
-				fw->write_key_value_string("descname", ware.descname());
-				fw->close_element();
-				fw->write_key_value_string("icon", ware.icon_filename());
-				fw->close_element();
-				fw->write_key_value_int("amount", input.second);
-				fw->close_brace(true, consumes_counter, productionsite->inputs().size()); // Input
-				++consumes_counter;
-			}
-		}
-		fw->close_array(); // Consumes
-
-		fw->close_brace(false, i, buildings.size()); // Building
+		fw->close_brace(true, i, buildings.size()); // Building
 	}
 	fw->close_array(); // Buildinglist
 }
