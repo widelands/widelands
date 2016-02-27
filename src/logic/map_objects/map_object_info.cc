@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2015 by the Widelands Development Team
+ * Copyright (C) 2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -528,6 +528,18 @@ void write_workers(const TribeDescr& tribe, EditorGameBase& egbase) {
  ==========================================================
  */
 
+void add_tribe_info(const TribeBasicInfo& tribe_info, JSONFileWrite* fw) {
+		fw->write_key_value_string("name", tribe_info.name);
+		fw->close_element();
+		fw->write_key_value_string("descname", tribe_info.descname);
+		fw->close_element();
+		fw->write_key_value_string("author", tribe_info.author);
+		fw->close_element();
+		fw->write_key_value_string("tooltip", tribe_info.tooltip);
+		fw->close_element();
+		fw->write_key_value_string("icon", tribe_info.icon);
+}
+
 void write_tribes(EditorGameBase& egbase) {
 	JSONFileWrite fw;
 	fw.open_brace(); // Main
@@ -540,24 +552,24 @@ void write_tribes(EditorGameBase& egbase) {
 	std::vector<TribeBasicInfo> tribeinfos = tribes.get_all_tribeinfos();
 	for (size_t tribe_index = 0; tribe_index < tribeinfos.size(); ++tribe_index) {
 		const TribeBasicInfo& tribe_info = tribeinfos[tribe_index];
-		const TribeDescr& tribe =
-				*tribes.get_tribe_descr(tribes.tribe_index(tribe_info.name));
 		log("\n\n=========================\nWriting tribe: %s\n=========================\n",
-			 tribe.name().c_str());
+			 tribe_info.name.c_str());
 
 		fw.open_brace(); // TribeDescr
-		fw.write_key_value_string("name", tribe_info.name);
-		fw.close_element();
-		fw.write_key_value_string("descname", tribe_info.descname);
-		fw.close_element();
-		fw.write_key_value_string("author", tribe_info.author);
-		fw.close_element();
-		fw.write_key_value_string("tooltip", tribe_info.tooltip);
-		fw.close_element();
-		fw.write_key_value_string("icon", tribe_info.icon);
+		add_tribe_info(tribe_info, &fw);
 		fw.close_brace(true, tribe_index, tribeinfos.size()); // TribeDescr
 
 		 // These go in separate files
+
+		JSONFileWrite fw_tribe;
+		fw_tribe.open_brace(); // TribeDescr
+		add_tribe_info(tribe_info, &fw_tribe);
+		fw_tribe.close_brace(true); // TribeDescr
+		fw_tribe.write(*g_fs, (boost::format("%s/tribe_%s.json") % kDirectory % tribe_info.name).str().c_str());
+
+		const TribeDescr& tribe =
+				*tribes.get_tribe_descr(tribes.tribe_index(tribe_info.name));
+
 		write_buildings(tribe, egbase);
 		write_wares(tribe, egbase);
 		write_workers(tribe, egbase);
