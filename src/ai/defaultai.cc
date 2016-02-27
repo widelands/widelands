@@ -3153,8 +3153,10 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 			left_wares += queue->get_filled();
 		}
 		// Do nothing when some wares are left, but do not wait more then 4 minutes
-		if (site.bo->construction_decision_time + 4 * 60 * 1000 > gametime && left_wares > 0) {
-			return false;
+		if (site.bo->construction_decision_time + 4 * 60 * 1000 > gametime
+			&&
+			left_wares > 0) {
+				return false;
 		}
 		assert (site.bo->cnt_upgrade_pending == 1);
 		assert(enhancement != INVALID_INDEX);
@@ -3186,8 +3188,10 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 				considering_upgrade = false;
 			}
 		} else {
-			if (gametime < 45 * 60 * 1000 || gametime < site.built_time + 20 * 60 * 1000) {
-				considering_upgrade = false;
+			if (gametime < 45 * 60 * 1000
+				||
+				gametime < site.built_time + 20 * 60 * 1000) {
+					considering_upgrade = false;
 			}
 		}
 	}
