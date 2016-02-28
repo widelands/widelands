@@ -206,6 +206,11 @@ void write_buildings(const TribeDescr& tribe, EditorGameBase& egbase) {
 			fw.close_element();
 		}
 
+		if (building.enhancement() != INVALID_INDEX) {
+			fw.write_key_value_string("enhancement", tribe.get_building_descr(building.enhancement())->name());
+			fw.close_element();
+		}
+
 		if (upcast(ProductionSiteDescr const, productionsite, &building)) {
 			// Produces
 			if (productionsite->output_ware_types().size() > 0) {
@@ -257,9 +262,15 @@ void write_buildings(const TribeDescr& tribe, EditorGameBase& egbase) {
 				++worker_counter;
 			}
 			fw.close_array(1, 5); // Workers - we need a comma
+		} else if (upcast(MilitarySiteDescr const, militarysite, &building)) {
+			fw.write_key_value_int("conquers", militarysite->get_conquers());
+			fw.close_element();
+			fw.write_key_value_int("max_soldiers", militarysite->get_max_number_of_soldiers());
+			fw.close_element();
+			fw.write_key_value_int("heal_per_second", militarysite->get_heal_per_second());
+			fw.close_element();
 		}
 
-		// Type NOCOM do we need this?
 		switch (building.type()) {
 		case MapObjectType::PRODUCTIONSITE:
 			fw.write_key_value_string("type", "productionsite");
