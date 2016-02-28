@@ -502,7 +502,6 @@ int main()
 		initialize();
 
 		EditorGameBase egbase(nullptr);
-		// NOCOM const World& world = egbase.world();
 		write_tribes(egbase);
 	}
 	catch (std::exception& e) {
