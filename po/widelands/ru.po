@@ -7,13 +7,14 @@
 # Anton Khabarov <2233009@gmail.com>, 2015
 # dr&mx <dronmax@gmail.com>, 2015
 # Yuriy Sokolov <lention@mail.ru>, 2015
+# Денис Шабанов <inactive+Dodolphin@transifex.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-02-16 09:25+0000\n"
-"PO-Revision-Date: 2016-02-16 09:26+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2016-02-20 12:30+0000\n"
+"PO-Revision-Date: 2016-02-23 21:30+0000\n"
+"Last-Translator: Денис Шабанов <inactive+Dodolphin@transifex.com>\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -33,7 +34,7 @@ msgstr ""
 
 #: ../../data/scripting/widelands/multiplayer_help.lua:14
 msgid "Client settings"
-msgstr ""
+msgstr "Настройки клиента"
 
 #: ../../data/scripting/widelands/multiplayer_help.lua:15
 msgid ""
@@ -340,7 +341,7 @@ msgstr "Карта не была сохранена, вы действитель
 
 #: ../../src/editor/editorinteractive.cc:632
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:120
-msgid "Creating empty map..."
+msgid "Creating empty map…"
 msgstr ""
 
 #. * TRANSLATORS: Default name for new map
@@ -361,7 +362,7 @@ msgstr "Неизвестно"
 
 #: ../../src/editor/editorinteractive.cc:647
 #, c-format
-msgid "Loading map \"%s\"..."
+msgid "Loading map “%s”…"
 msgstr ""
 
 #: ../../src/editor/map_generator.cc:792
@@ -833,8 +834,8 @@ msgid "Generate Map"
 msgstr "Сгенерировать карту"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:452
-msgid "Generating random map..."
-msgstr "Создание случайной карты..."
+msgid "Generating random map…"
+msgstr ""
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:61
 #: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:28
@@ -1029,13 +1030,13 @@ msgid "Scenario"
 msgstr "Сценарий"
 
 #: ../../src/logic/game.cc:244 ../../src/logic/game.cc:324
-msgid "Loading map"
-msgstr "Загрузка карты"
+msgid "Loading map…"
+msgstr ""
 
 #: ../../src/logic/game.cc:366 ../../src/logic/game.cc:399
-#: ../../src/wlapplication.cc:1377
-msgid "Loading..."
-msgstr "Загрузка..."
+#: ../../src/ui_basic/progresswindow.cc:50 ../../src/wlapplication.cc:1377
+msgid "Loading…"
+msgstr ""
 
 #: ../../src/logic/game.cc:463
 msgid "Creating player infrastructure"
@@ -1489,8 +1490,8 @@ msgid ""
 msgstr "Конец  повтора достигнут и игра остановлена. Вы можете снова активировать игру и продолжить просмотр, если захотите."
 
 #: ../../src/logic/save_handler.cc:106
-msgid "Saving game..."
-msgstr "Сохранение игры..."
+msgid "Saving game…"
+msgstr ""
 
 #: ../../src/logic/save_handler.cc:125
 msgid "Saving failed!"
@@ -2074,10 +2075,6 @@ msgstr "нет"
 msgid "off"
 msgstr "выкл"
 
-#: ../../src/ui_basic/progresswindow.cc:46
-msgid "Preparing..."
-msgstr "Подготовка..."
-
 #: ../../src/ui_basic/spinbox.cc:149
 msgid "Decrease the value"
 msgstr "Уменьшить значение"
@@ -2353,8 +2350,8 @@ msgid "unnamed"
 msgstr ""
 
 #: ../../src/ui_fsmenu/intro.cc:32
-msgid "Press any key or click to continue ..."
-msgstr "Нажмите любую клавишу или щёлкните мышью для продолжения..."
+msgid "Press any key or click to continue…"
+msgstr ""
 
 #. * TRANSLATORS: Dialog box title for selecting between map or saved game for
 #. new multiplayer game

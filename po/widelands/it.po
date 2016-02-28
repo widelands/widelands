@@ -9,15 +9,15 @@
 # Gabriel Rota <gabriel.rota@gmail.com>, 2009
 # GunChleoc, 2014
 # Guybrush88 <erpizzo@alice.it>, 2015-2016
-# Luigi Lain <lainluigi86@tiscali.it>, 2015
+# Luigi Lain <lainluigi86@tiscali.it>, 2015-2016
 # Tommaso Amici <tommaso.amici@gmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-02-16 09:25+0000\n"
-"PO-Revision-Date: 2016-02-17 09:01+0000\n"
-"Last-Translator: Guybrush88 <erpizzo@alice.it>\n"
+"POT-Creation-Date: 2016-02-20 12:30+0000\n"
+"PO-Revision-Date: 2016-02-22 23:55+0000\n"
+"Last-Translator: Luigi Lain <lainluigi86@tiscali.it>\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -33,7 +33,7 @@ msgstr "Impostazioni per una partita multiplayer"
 
 #: ../../data/scripting/widelands/multiplayer_help.lua:11
 msgid "You are in the multiplayer launch game menu."
-msgstr ""
+msgstr "Sei nel menù per il lancio di una partita multiplayer"
 
 #: ../../data/scripting/widelands/multiplayer_help.lua:14
 msgid "Client settings"
@@ -43,19 +43,19 @@ msgstr "Impostazioni del client"
 msgid ""
 "On the left side is a list of all clients including you. You can set your "
 "role with the button following your nickname. Available roles are:"
-msgstr ""
+msgstr "Sulla sinistra vi è una lista dei client, compreso te. Puoi impostare il tuo ruolo dal bottone accanto al tuo nickname. I ruoli disponibili sono:"
 
 #: ../../data/scripting/widelands/multiplayer_help.lua:16
 msgid ""
 "The player with the color of the flag. If more than one client selected the "
 "same color, these share control over the player (‘shared kingdom mode’)."
-msgstr ""
+msgstr "Il giocatore con il colore della bandiera. Se più di un client selezionano lo stesso colore, essi condividono il controllo del giocatore (\"modalità regno condiviso\")."
 
 #: ../../data/scripting/widelands/multiplayer_help.lua:17
 msgid ""
 "Spectator mode, meaning you can see everything, but cannot control any "
 "player"
-msgstr ""
+msgstr "E modalità spettatore, che significa che puoi vedere ogni cosa, ma non puoi controllare nessun giocatore"
 
 #: ../../data/scripting/widelands/multiplayer_help.lua:19
 msgid "Player settings"
@@ -65,22 +65,22 @@ msgstr "Impostazioni del giocatore"
 msgid ""
 "In the middle are the settings for the players. To start a game, each player"
 " must be one of the following:"
-msgstr ""
+msgstr "In mezzo ci sono le impostazioni per i giocatori. Per avviare una partita, ogni giocatore deve essere in uno dei seguenti stati:"
 
 #: ../../data/scripting/widelands/multiplayer_help.lua:21
 msgid "Connected to one or more clients (see ‘Client settings’)."
-msgstr ""
+msgstr "Connesso a uno o più client (guarda \"Impostazioni client\")."
 
 #: ../../data/scripting/widelands/multiplayer_help.lua:22
 msgid ""
 "Connected to a computer player (the face in the picture as well as the mouse"
 " hover texts indicate the strength of the currently selected computer "
 "player)."
-msgstr ""
+msgstr "Connesso con un giocatore computer (la faccia nell'immagine ed il testo che appare tenendovi il mouse sopra indicano la forza del giocatore computer selezionato)"
 
 #: ../../data/scripting/widelands/multiplayer_help.lua:23
 msgid "Set as shared in starting position for another player."
-msgstr ""
+msgstr "Imposta come posizione di inizio condivisa per un altro giocatore."
 
 #: ../../data/scripting/widelands/multiplayer_help.lua:24
 msgid "Closed."
@@ -92,13 +92,13 @@ msgid ""
 "‘type’ button of a player. Hosting players can also set the initialization "
 "of each player (the set of buildings, wares and workers the player starts "
 "with) and the tribe and team for computer players"
-msgstr ""
+msgstr "Le ultime tre sono impostabili solamente dal client ospitante cliccando con il tasto sinistro il bottone \"Tipo\" per ogni giocatore. Il giocatore ospitante può inoltre decidere il tipo di avvio di ogni giocatore (il set di edifici, merci e lavoratori con il quale un giocatore comincia) e la tribù e le squadre per i giocatori computer"
 
 #: ../../data/scripting/widelands/multiplayer_help.lua:26
 msgid ""
 "Every client connected to a player (the set ‘role’ player) can set the tribe"
 " and the team for that player"
-msgstr ""
+msgstr "Ogni client connesso a un giocatore (il giocatore \"ruolo\" impostato) può impostare la tribù e la squadra per quel giocatore"
 
 #: ../../data/scripting/widelands/multiplayer_help.lua:28
 msgid "Map details"
@@ -110,7 +110,7 @@ msgid ""
 " side. A button next to the map name allows the host to change to a "
 "different map. Furthermore, the host is able to set a specific win "
 "condition, and finally can start the game as soon as all players are set up."
-msgstr ""
+msgstr "Sulla destra vi sono informazioni circa la mappa o il salvataggio selezionato. Un bottone immediatamente a destra del nome della mappa consente all'host di modificarla in una differente. Inoltre l'host può impostare una condizione di vittoria specifica ed infine può avviare il gioco appena tutti i giocatori sono pronti."
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
 #: ../../src/ai/computer_player.cc:42
@@ -344,7 +344,7 @@ msgstr "La mappa non è stata salvata, vuoi davvero uscire?"
 
 #: ../../src/editor/editorinteractive.cc:632
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:120
-msgid "Creating empty map..."
+msgid "Creating empty map…"
 msgstr "Creazione di una mappa vuota in corso..."
 
 #. * TRANSLATORS: Default name for new map
@@ -365,7 +365,7 @@ msgstr "Sconosciuto"
 
 #: ../../src/editor/editorinteractive.cc:647
 #, c-format
-msgid "Loading map \"%s\"..."
+msgid "Loading map “%s”…"
 msgstr "Caricamento della mappa \"%s\" in corso..."
 
 #: ../../src/editor/map_generator.cc:792
@@ -835,7 +835,7 @@ msgid "Generate Map"
 msgstr "Genera una mappa"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:452
-msgid "Generating random map..."
+msgid "Generating random map…"
 msgstr "Generazione di una mappa casuale in corso..."
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:61
@@ -1031,12 +1031,12 @@ msgid "Scenario"
 msgstr "Scenario"
 
 #: ../../src/logic/game.cc:244 ../../src/logic/game.cc:324
-msgid "Loading map"
+msgid "Loading map…"
 msgstr "Caricamento della mappa in corso"
 
 #: ../../src/logic/game.cc:366 ../../src/logic/game.cc:399
-#: ../../src/wlapplication.cc:1377
-msgid "Loading..."
+#: ../../src/ui_basic/progresswindow.cc:50 ../../src/wlapplication.cc:1377
+msgid "Loading…"
 msgstr "Caricamento in corso..."
 
 #: ../../src/logic/game.cc:463
@@ -1244,7 +1244,7 @@ msgstr "Completato %1$s perché %2$s"
 #: ../../src/logic/map_objects/tribes/production_program.cc:589
 #, c-format
 msgid "Skipped %1$s because %2$s"
-msgstr ""
+msgstr "Saltato %1$s perché %2$s"
 
 #: ../../src/logic/map_objects/tribes/production_program.cc:814
 msgid "No use for ships on this map!"
@@ -1324,7 +1324,7 @@ msgstr "Trovato dello spazio per il porto"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:417
 msgid "An expedition ship found a new port build space."
-msgstr ""
+msgstr "Una nave in spedizione ha trovato un nuovo luogo dove costruire un porto."
 
 #. * TRANSLATORS: A ship has circumnavigated an island and is waiting for
 #. orders
@@ -1339,7 +1339,7 @@ msgstr "Isola circumnavigata"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:538
 msgid "An expedition ship sailed around its island without any events."
-msgstr ""
+msgstr "Una nave in spedizione ha circumnavigato la sua isola senza eventi."
 
 #. * TRANSLATORS: A ship has discovered land
 #: ../../src/logic/map_objects/tribes/ship.cc:600
@@ -1353,7 +1353,7 @@ msgstr "Raggiunta la costa"
 #: ../../src/logic/map_objects/tribes/ship.cc:602
 msgid ""
 "An expedition ship reached a coast and is waiting for further commands."
-msgstr ""
+msgstr "Una nave in spedizione ha raggiunto la costa e sta attendendo ulteriori ordini."
 
 #: ../../src/logic/map_objects/tribes/ship.cc:662
 msgid "Port Lost!"
@@ -1365,7 +1365,7 @@ msgstr "Il nuovo cantiere del porto è andato"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:664
 msgid "Unloading of wares failed, expedition is cancelled now."
-msgstr ""
+msgstr "Scarico merci fallito, la spedizione è stata cancellata."
 
 #. * TRANSLATORS: Ship expedition ready
 #: ../../src/logic/map_objects/tribes/ship.cc:842
@@ -1379,7 +1379,7 @@ msgstr "Spedizione pronta"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:844
 msgid "An expedition ship is waiting for your commands."
-msgstr ""
+msgstr "Una nave in spedizione sta attendendo i tuoi ordini."
 
 #: ../../src/logic/map_objects/tribes/soldier.cc:1503
 #: ../../src/logic/map_objects/tribes/soldier.cc:1514
@@ -1403,14 +1403,14 @@ msgstr "Un nuovo magazzino è stato aggiunto alla tua economia."
 msgid ""
 "should mine resource %s, which does not exist in world; tribe is not "
 "compatible with world"
-msgstr ""
+msgstr "dovrebbe estrarre dalle miniere la risorsa %s, che non esiste nel mondo; la tribù non è compatibile con il mondo"
 
 #: ../../src/logic/map_objects/tribes/worker.cc:225
 #, c-format
 msgid ""
 "should breed resource type %s, which does not exist in world; tribe is not "
 "compatible with world"
-msgstr ""
+msgstr "dovrebbe allevare il tipo di risorsa %s, che non esiste nel mondo; la tribù non è compatibile con il mondo"
 
 #: ../../src/logic/map_objects/tribes/worker.cc:930
 msgid "A geologist found resources."
@@ -1419,7 +1419,7 @@ msgstr "Un geologo ha trovato delle risorse."
 #: ../../src/logic/map_objects/tribes/worker.cc:1836
 #, c-format
 msgid "Your %s can't find a way home and will likely die."
-msgstr ""
+msgstr "Il tuo %s non riesce a trovare la strada di casa e probabilmente morirà."
 
 #: ../../src/logic/map_objects/tribes/worker.cc:1844
 #: ../../src/wui/productionsitewindow.cc:82
@@ -1441,7 +1441,7 @@ msgstr "arabile"
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/logic/map_objects/world/terrain_description.cc:81
 msgid "navigable"
-msgstr ""
+msgstr "navigabile"
 
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/logic/map_objects/world/terrain_description.cc:86
@@ -1451,12 +1451,12 @@ msgstr "irraggiungibile"
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/logic/map_objects/world/terrain_description.cc:91
 msgid "mineable"
-msgstr ""
+msgstr "terreno per miniere"
 
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/logic/map_objects/world/terrain_description.cc:96
 msgid "unwalkable"
-msgstr ""
+msgstr "non attraversabile"
 
 #: ../../src/logic/objective.h:38
 msgid "This objective has no description."
@@ -1473,7 +1473,7 @@ msgid ""
 msgstr "Raggiunta la fine della riproduzione e il gioco è in pausa. Puoi ripartire a giocare e continuare a guardare se vuoi."
 
 #: ../../src/logic/save_handler.cc:106
-msgid "Saving game..."
+msgid "Saving game…"
 msgstr "Salvataggio in corso..."
 
 #: ../../src/logic/save_handler.cc:125
@@ -2052,10 +2052,6 @@ msgstr "no"
 msgid "off"
 msgstr "Spento"
 
-#: ../../src/ui_basic/progresswindow.cc:46
-msgid "Preparing..."
-msgstr "Preparazione..."
-
 #: ../../src/ui_basic/spinbox.cc:149
 msgid "Decrease the value"
 msgstr "Diminuisci il valore"
@@ -2325,7 +2321,7 @@ msgid "unnamed"
 msgstr "senza nome"
 
 #: ../../src/ui_fsmenu/intro.cc:32
-msgid "Press any key or click to continue ..."
+msgid "Press any key or click to continue…"
 msgstr "Premi un tasto qualunque o un click per continuare"
 
 #. * TRANSLATORS: Dialog box title for selecting between map or saved game for
@@ -2914,7 +2910,7 @@ msgstr "Esegue un suono all'arrivo del messaggio"
 
 #: ../../src/ui_fsmenu/options.cc:193
 msgid "Save game automatically every:"
-msgstr ""
+msgstr "Salvataggio automatico del gioco ogni"
 
 #. * TRANSLATORS: Options: Save game automatically every:
 #. * TRANSLATORS: This will have a number added in front of it
@@ -2926,7 +2922,7 @@ msgstr[1] "minuti"
 
 #: ../../src/ui_fsmenu/options.cc:201
 msgid "Maximum number of autosave files:"
-msgstr ""
+msgstr "Massimo numero di file di autosalvataggip:"
 
 #: ../../src/ui_fsmenu/options.cc:205
 msgid "Do not zip widelands data files (maps, replays and savegames)"
@@ -2961,19 +2957,19 @@ msgstr "Lingua"
 
 #: ../../src/ui_fsmenu/options.cc:231
 msgid "Interface"
-msgstr ""
+msgstr "Interfaccia"
 
 #: ../../src/ui_fsmenu/options.cc:232
 msgid "Windows"
-msgstr ""
+msgstr "Finestre"
 
 #: ../../src/ui_fsmenu/options.cc:233
 msgid "Sound"
-msgstr ""
+msgstr "Sonoro"
 
 #: ../../src/ui_fsmenu/options.cc:234
 msgid "Saving"
-msgstr ""
+msgstr "Salvataggio"
 
 #. * TRANSLATORS Options: Save game automatically every:
 #: ../../src/ui_fsmenu/options.cc:293
@@ -3786,7 +3782,7 @@ msgstr "Il nome di questa mappa"
 #. * TRANSLATORS: Map hint header when selecting a map.
 #: ../../src/wui/mapdetails.cc:137
 msgid "HINT:"
-msgstr ""
+msgstr "SUGGERIMENTI:"
 
 #: ../../src/wui/maptable.cc:36
 msgid "Number of players"
