@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-02-09 16:38+0000\n"
-"PO-Revision-Date: 2016-02-13 11:44+0000\n"
+"POT-Creation-Date: 2016-02-20 12:30+0000\n"
+"PO-Revision-Date: 2016-02-24 22:58+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -184,7 +184,7 @@ msgstr "Gnìomhachasan is mèinnean"
 msgid ""
 "Iron ore, gold ore and coal are mined in the respective mines. The crystal "
 "mine will dig for quartz and diamonds – all of them are precious materials "
-"and very rarely found. It will produce a lot of stone while searching for "
+"and very rarely found. It will produce a lot of granite while searching for "
 "them."
 msgstr "Thèid clach-iarainn, clach-òir is gual a thochladh sna mèinnean iomchaidh. Togaidh a’ mhèinn criostail èiteagan ’s daoimeanan – ’s e stuthan togail uasail ’s glè ghann a th’ anns na seudan ud. Togaidh a’ mhèinn torr ghaireal fhad ’s a bhios i ’gan sireadh."
 
@@ -337,7 +337,7 @@ msgid "Uproar and Confusion"
 msgstr "Ùpraid is breisleach"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:157
-msgid "Emerging Chaos..."
+msgid "Emerging Chaos…"
 msgstr "Dubh-choimeasg ag èirigh…"
 
 #. TRANSLATORS: Foreword
@@ -346,7 +346,7 @@ msgid ""
 "Guilt-ridden, the king committed suicide. Without a monarch, the people "
 "turned to the clerics, but they had no substantial help to offer. Most "
 "accepted their fate while others tried to change the god’s mind by offering "
-"animals in his temple. But to no avail..."
+"animals in his temple. But to no avail…"
 msgstr "Thug an rìgh ùthachd à fhèin fo chiont. Chaidh an sluagh chun nan clèireach a’ sireadh cobharach le dìth an rìgh ach ’s ann nach b’ urrainn dhaibh-san an cuideachadh na bu mhotha. Ghabh a’ mhòrchuid ri an dàn fhad ’s a bha cuid eile a’ feuchainn gun dugadh iad an dia às a bheachd le ìobairtean bheathaichean san teampall aige. Ach cha b’ fhoghain e…"
 
 #. TRANSLATORS: Foreword
@@ -357,7 +357,7 @@ msgid ""
 "situation, she convinced herself that to soothe the god, an offer of great "
 "personal value was needed. So she offered him her most beloved: her husband,"
 " the father of her only child."
-msgstr ""
+msgstr "B’ e Jundlina, nighean an rìgh nach bu mhaireann agus àrd-chlèireach an dè a bha a bu choileiriche. Air sgàth ’s nach dug na h-ìobairtean atharrachadh air a’ chùis, chuir i roimhpe gum biodh feum air mòr-ìobairt phearsanta gus an dia a rèiteachadh. air an adhbhar seo, thairg i dha na bha gaoil oirre thar rud sam bith eile: an duine aice, athair a h-aon leanaban."
 
 #. TRANSLATORS: Foreword
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:163
@@ -369,14 +369,14 @@ msgid ""
 "she set the temple on fire and stole a ship to flee from the god’s influence"
 " over Atlantis. This small group started praying to Satul, the fire god and "
 "the worst enemy of Lutas."
-msgstr ""
+msgstr "Ach cha dug sin an caochladh beachd air an dia na bu mhotha. Chum an sàl air a bhith a’ lìonadh. Air bhoile le ciont, pian is fearg, chaidh Jundlina ’na h-eiriceach: Chruinnich i ìslich gu dìomhair nach robh a’ dol le co-dhùnadh nan clèireach a ghabh ri toil an dè. ’S ann còmhla riutha-san a chuir i an teampall ’na theine ’s a ghoid i long gus teicheadh o smachd an dè air Atlantas. Thòisich a’ chuideachd bheag seo air ùrnaigh a dhèanamh dha Shatul, dia an teine agus nàmhaid guineach Lutais."
 
 #. TRANSLATORS: Foreword
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:165
 msgid ""
 "Leaving the dying Atlantis and their past behind, they started on a quest to"
 " find a place sheltered by the fire and protected from the sea."
-msgstr ""
+msgstr "Chuir iad an cùl ri Atlantas a’ bàthadh agus ris an seach-shaoghal, a’ sireadh àite-còmhnaidh fo fhasgadh teine ’s dìonta on mhuir."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:172
 msgid "The Princess’ Memoir"
@@ -394,7 +394,7 @@ msgid ""
 "smashed our ship. Now, we are out of his reach. One day later, we sighted an"
 " island which seems to have one of these fire spitting mountains on it. I "
 "deemed this a sign from the fire god and we landed on its shore."
-msgstr ""
+msgstr "Dh’fhàg sinn Atlantas agus sheòl sinn gu ear. Ràinig sinn am muir toirmisgte air an t-siathamh latha gun sgeul air ruagaire o Atlantas agus gun Lutas air a bhith a’ briseadh na luinge againn. Cha ruig e sinn tuilleadh a-nis. Latha às dèidh sin, chunnaic sinn eilean air an robh tè de na beanntan ud a thilgeas teine. Ar leam b’ e sanas o dhia an teine a bh’ ann agus chaidh rinn air tìr air a chladach."
 
 #. TRANSLATORS: Jundlina - Diary
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:178
@@ -405,7 +405,7 @@ msgid ""
 " on Atlantis. I hope they will withstand the next rain. At least, the towers"
 " will warn us if a ship from Atlantis follows us and if the island is "
 "inhabited, we will see attackers a long time before they arrive."
-msgstr ""
+msgstr "Thug sinn seachad an t-seachdain seo chaidh a’ togail dà thùr-faire air na beanntan faisg air ar n-ionad-laighe; agus, gu nàdarra, thog sinn talla dhuinn. Tha luchd-togail sgileil ’nar cuideachd – co-dhiù, is bochd na togalaichean a th’ againn an coimeas an ealain a bhiodh againn ann an Atlantas. Tha mi ’n dòchas gun seas iad an aghaidh an ath-uisge. Co-dhiù no co-dheth, bheir na tùir rabhadh dhuinn ma thig long o Atlantas às ar dèidh agus ma tha daoine eile a’ fuireach san eilean, chì sinn ionnsaigh sam bith ùine fhada mus dig e."
 
 #. TRANSLATORS: Jundlina - Diary
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:181
@@ -414,7 +414,7 @@ msgid ""
 "it a home. I reckon we need to establish a sustainable economy and to "
 "explore our surroundings. I called for specialists and will follow their "
 "advice."
-msgstr ""
+msgstr "Tha sinn air àite-fuirich a thogail san eilean seo. Bu chòir dhuinn ar dachaigh a dhèanamh dheth a-nis. Saoilidh mi gum feum sinn eaconamaidh sheasmhach a thogail a-nis agus an tìr timcheall oirnn a rùrachadh. Dh’iarr mi eòlaichean agus leanaidh mi air a’ chomhairle a bheir iad dhomh."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:184
 msgid "Loftomor and Sidolus Arrive"
@@ -441,7 +441,7 @@ msgid ""
 "architect. Sidolus, you are a seasoned warrior and strategist. I have called"
 " you before me to seek your counsel: what needs to be done to make this our "
 "new home?"
-msgstr ""
+msgstr "Gum blàthaicheadh Satul an dithis agaibh. A Loftomor, is tusa an ailtire as cliùiteach san eilean. A Shidolus, ’s e seann-ghaisgeach a th’ annaibh is math air ro-innleachd. Dh’iarr mi oirbh tighinn ach am faighinn ur comhairle: dè am bu chòir dhuinn dèanamh gus còmhnaidh a ghabhail an-seo?"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:190
 msgid "Loftomor Speaks"
@@ -457,7 +457,7 @@ msgid ""
 " most buildings can’t be made out of logs alone. Stronger buildings also "
 "need granite, but there is plenty to the north-east of here; we just need to"
 " build a quarry, and my stonemasons will go to work promptly."
-msgstr ""
+msgstr "Gum blàthaicheadh Satul sibh, a Jundlina! ’S e na stuthan-togail a th’ anns an rud as cudromaiche gus tuineachadh a thogail. Tha craobhan an-seo, mar sin bu chòir dhuinn taighean a thogail dha na buaineadairean-fiodha ’s seadh cuid a phlanntairean-coille cuideachd ach nach ruith na craobhan oirnn. Ò, agus na dìochuimhnicheamaid am muileann sàbhaidh air sgàth ’s nach fhoghain fiodh simplidh airson a’ mhòrchuid a thogalaichean. Bidh togalaichean treuna feumach air gaireal cuideachd ach tha grunn dheth gu ear-thuath oirnn; cha leig sinn a leas ach cuaraidh a thogail agus na clachairean agam a’ tòiseachadh air an obair sa bhad."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:197
 msgid "Sidolus Speaks"
@@ -471,7 +471,7 @@ msgid ""
 "swiftly. I will not feel safe on this island as long as we have not seen all"
 " its shores it. I brought plenty of good men from Atlantis. The military "
 "might is available. We only need some housing to live in."
-msgstr ""
+msgstr "Gum blàthaicheadh Satul sibh, a Jundlina! Tha mi ag aontachadh ri beachdan Loftomoir. Bidh sinn feumach air saothrachadh math nan stuthan togail air sgàth ’s gum feum sinn ar ranntair a leudachadh cho luath ’s a ghabhas. Chan fhairich mi gu bheil mi sàbhailte san eilean seo gus am bi sinn air gach oirthir dheth fhaicinn. Thug mi grunn duine comasach leam o Atlantas. Tha cumhachd an airm ri làimh dhuinn. Chan fheum sinn ach taighean airson fuireach annta."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:207
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:247
@@ -489,7 +489,7 @@ msgid ""
 "that everybody is working well together. Now, there are other pressing "
 "matters. I called Colionder, my personal cook, before me to get his help "
 "with sorting some things out."
-msgstr ""
+msgstr "Tha am bun-structar togail againn coileanta a-nis agus thug mi seachad latha no dhà a’ dèanamh cinnteach gu bheil a h-uile duine ag obair còmhla gu math. Nise, tha cùisean èiginneach eile romhainn. Dh’iarr mi air Colionder, an còcaire pearsanta agam, gun tigeadh e ach am faighinn a chuideachadh le cuid a nithean."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:213
 msgid "Colionder Arrives"
@@ -499,7 +499,7 @@ msgstr "Tha Colionder a’ tighinn"
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:216
 msgid ""
 "May Satul warm you, Jundlina. Can I be of any service to you or the god?"
-msgstr ""
+msgstr "Gum blàthaicheadh Satul sibh, a Jundlina! Ciamar a fhritheileas mi dhuibh no don dia?"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:219
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:265
@@ -519,7 +519,7 @@ msgid ""
 " our people are accustomed to making their own food. I feel if we could "
 "split responsibilities, it would be better for us all. I want your thoughts "
 "on this."
-msgstr ""
+msgstr "Gum blàthaicheadh Satul agus thusa, a Cholionder! Bha mi a’ cnuasadh air ciamar am b’ urrainn dhuinn am biadh againn a dhèanamh san dòigh a b’ èifeachdaiche. Tha sinn a’ call cus dèanadais air sgàth ’s gu bheil ar muinntir cleachdte ri bhith a’ dèanamh am iadh aca fhèin. Ar leam b’ fheairrde sinn uile na dleasdanasan sin a sgaoileadh. Dè do bheachdan?"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:225
 msgid "Colionder is in Thought"
@@ -532,7 +532,7 @@ msgid ""
 "food is something deeply ingrained in us Atlanteans – it is a ceremony that "
 "we just need for our well-being. So I guess we cannot take this away from "
 "the individuals completely."
-msgstr ""
+msgstr "À, cha chreid mi gur urrainn dhuinn seo atharrachadh idir. Tha dèanamh is gabhail bìdh fìor-chudromach dha na h-Atlantaich - ’s e gnàths a th’ ann a dh’fheumas sinn airson ar soirbheas. Dhomhsa dheth, cha ghabh seo a thoirt air falbh o gach duine gu tur."
 
 #. TRANSLATORS: Colionder
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:231
@@ -542,7 +542,7 @@ msgid ""
 "the bread is tedious and boring; I feel a more industrial approach would be "
 "helpful here. I for one would love to just have fresh bread delivered to my "
 "house every day."
-msgstr ""
+msgstr "Ach ’s dòcha gun gabh seo rèiteachadh: chan e dèanamh arain ach buaireasach dhomh. Tha e ràsanach ’s bheir e ùine fhada fhada flùr a bhleith às na freumhagan ’s an coirce agus aran fhuineadh dheth an uairsin; saoilidh mi gum bhiodh gnìomhachas feumail airson sin. Bheireadh e toileachas mòr dhomhsa nan lìbhrigte aran ùr blàth dhan taigh agam gach latha."
 
 #. TRANSLATORS: Colionder
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:234
@@ -553,7 +553,7 @@ msgid ""
 "building where the side effects do not matter? I think those two things "
 "would be accepted by the people and would reduce the cooking time without "
 "taking away the ritual."
-msgstr ""
+msgstr "Ò agus nas cudromaiche buileach: tha e dòrainneach an t-iasg is feòil a thoiteadh gus an glanadh ’s piseach a thoirt air a’ bhlas a th’ orra. Tha an taigh agam loma-làn smùide agus bidh droch-fhàileadh ann fad seachdainean. Saoilibh am b’ urrainn dhuinn seo a dhèanamh ann an taigh sònraichte far nach biodh an droch-bhuil gu diofar? Saoilidh mi gun gabhadh an sluagh ris an dà chùis seo agus cha bhiodh againn ri ùine mhòr a thoirt seachad air a’ chòcaireachd is sinn a’ cumail ris a’ gnàths fhathast."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:237
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:238
@@ -563,7 +563,7 @@ msgstr "Tha Jundlina ag aontachadh"
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:240
 msgid "Your words sound wise to me, Colionder. So be it then."
-msgstr ""
+msgstr "Tha gliocas ’nad fhaclan, a Cholionder. Mar sin bitheadh mar-thà."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:248
 msgid "Jundlina is Reviewing the Reports"
@@ -574,7 +574,7 @@ msgstr "Tha Jundlina a’ toirt lèirmheas air na h-aithrisean"
 msgid ""
 "Seems like our food production is finished and everybody is working together"
 " nicely. It is really starting to feel like home here."
-msgstr ""
+msgstr "Tha coltas gun deach an saothrachadh bìdh a choileanadh a-nis agus gu bheil a h-uile duine ag obair còmhla gu math. Tha mi a’ faireachdainn gu bheil mi dachaigh a-nis."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:256
 msgid "A Man Comes to Jundlina"
@@ -873,7 +873,7 @@ msgid ""
 "never have I seen sturdier ones – with enough room to carry all of us and "
 "some wares too. And this rescue came just in time: Lutas is about to swallow"
 " the rest of this island, the water rises faster by the hour. But we can "
-"make our escape now and start over in some country farther away..."
+"make our escape now and start over in some country farther away…"
 msgstr ""
 
 #. TRANSLATORS: Jundlina

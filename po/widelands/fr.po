@@ -3,7 +3,7 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
-# adrien vigneron <adrienvigneron@ml1.net>, 2015
+# adrien vigneron <adrienvigneron@ml1.net>, 2015-2016
 # Bouchard Renaud <renaud.bouchard@gmail.com>, 2014
 # hugues martin, 2015
 # Jaypad <ju-ju@nataju.fr>, 2015-2016
@@ -15,9 +15,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-02-16 09:25+0000\n"
-"PO-Revision-Date: 2016-02-16 09:26+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2016-02-20 12:30+0000\n"
+"PO-Revision-Date: 2016-02-27 19:47+0000\n"
+"Last-Translator: adrien vigneron <adrienvigneron@ml1.net>\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -344,8 +344,8 @@ msgstr "La carte n'a pas été enregistrée, voulez vous vraiment quitter ?"
 
 #: ../../src/editor/editorinteractive.cc:632
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:120
-msgid "Creating empty map..."
-msgstr ""
+msgid "Creating empty map…"
+msgstr "Création d'une carte vide..."
 
 #. * TRANSLATORS: Default name for new map
 #: ../../src/editor/editorinteractive.cc:639
@@ -365,8 +365,8 @@ msgstr "Inconnu"
 
 #: ../../src/editor/editorinteractive.cc:647
 #, c-format
-msgid "Loading map \"%s\"..."
-msgstr ""
+msgid "Loading map “%s”…"
+msgstr "Chargement de la carte \"%s\""
 
 #: ../../src/editor/map_generator.cc:792
 msgid "Random Player"
@@ -541,22 +541,22 @@ msgstr "Descr: %s"
 #: ../../src/editor/ui_menus/categorized_item_selection_menu.h:185
 #, c-format
 msgid "Current: %s …"
-msgstr ""
+msgstr "Actuel: %s ..."
 
 #. * TRANSLATORS: Help text in an editor tool
 #: ../../src/editor/ui_menus/categorized_item_selection_menu.h:188
 msgid "Click to select an item. Use the Ctrl key to select multiple items."
-msgstr ""
+msgstr "Cliquer pour sélectionner un objet. Utiliser la touche Ctrl pour sélectionner plusieurs objets."
 
 #. * TRANSLATORS: %s are the currently selected items in an editor tool
 #: ../../src/editor/ui_menus/categorized_item_selection_menu.h:191
 #, c-format
 msgid "Current: %s"
-msgstr ""
+msgstr "Actuel: %s ..."
 
 #: ../../src/editor/ui_menus/editor_help.cc:73
 msgid "Terrains"
-msgstr ""
+msgstr "Terrains"
 
 #: ../../src/editor/ui_menus/editor_help.cc:80
 msgid "Trees"
@@ -835,8 +835,8 @@ msgid "Generate Map"
 msgstr "Générer la carte"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:452
-msgid "Generating random map..."
-msgstr "Génération de carte aléatoire..."
+msgid "Generating random map…"
+msgstr ""
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:61
 #: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:28
@@ -1031,12 +1031,12 @@ msgid "Scenario"
 msgstr "Scénario"
 
 #: ../../src/logic/game.cc:244 ../../src/logic/game.cc:324
-msgid "Loading map"
-msgstr "Chargement de la carte"
+msgid "Loading map…"
+msgstr "Chargement de la carte..."
 
 #: ../../src/logic/game.cc:366 ../../src/logic/game.cc:399
-#: ../../src/wlapplication.cc:1377
-msgid "Loading..."
+#: ../../src/ui_basic/progresswindow.cc:50 ../../src/wlapplication.cc:1377
+msgid "Loading…"
 msgstr "Chargement..."
 
 #: ../../src/logic/game.cc:463
@@ -1473,7 +1473,7 @@ msgid ""
 msgstr "La fin du replay a été atteinte et le jeu a été mis en pause. Vous pouvez désactiver la mise en pause et continuer la visualisation si vous le désirez."
 
 #: ../../src/logic/save_handler.cc:106
-msgid "Saving game..."
+msgid "Saving game…"
 msgstr "Sauvegarde du jeu..."
 
 #: ../../src/logic/save_handler.cc:125
@@ -2052,10 +2052,6 @@ msgstr "non"
 msgid "off"
 msgstr "désactivé"
 
-#: ../../src/ui_basic/progresswindow.cc:46
-msgid "Preparing..."
-msgstr "Préparation..."
-
 #: ../../src/ui_basic/spinbox.cc:149
 msgid "Decrease the value"
 msgstr "Diminuer la valeur"
@@ -2325,8 +2321,8 @@ msgid "unnamed"
 msgstr "non nommé"
 
 #: ../../src/ui_fsmenu/intro.cc:32
-msgid "Press any key or click to continue ..."
-msgstr "Pressez sur n'importe quelle touche ou cliquez sur continuer"
+msgid "Press any key or click to continue…"
+msgstr "Pressez sur n'importe quelle touche ou cliquez sur continuer..."
 
 #. * TRANSLATORS: Dialog box title for selecting between map or saved game for
 #. new multiplayer game
@@ -2914,7 +2910,7 @@ msgstr "Jouer un son à l'arrivée d'un message"
 
 #: ../../src/ui_fsmenu/options.cc:193
 msgid "Save game automatically every:"
-msgstr ""
+msgstr "Sauvegarde automatique à chaque:"
 
 #. * TRANSLATORS: Options: Save game automatically every:
 #. * TRANSLATORS: This will have a number added in front of it
@@ -2926,7 +2922,7 @@ msgstr[1] "minutes"
 
 #: ../../src/ui_fsmenu/options.cc:201
 msgid "Maximum number of autosave files:"
-msgstr ""
+msgstr "Nombre maximal de sauvegardes automatiques:"
 
 #: ../../src/ui_fsmenu/options.cc:205
 msgid "Do not zip widelands data files (maps, replays and savegames)"

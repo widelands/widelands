@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-02-16 09:25+0000\n"
-"PO-Revision-Date: 2016-02-16 10:50+0000\n"
+"POT-Creation-Date: 2016-02-20 12:30+0000\n"
+"PO-Revision-Date: 2016-02-21 21:34+0000\n"
 "Last-Translator: Lyubomir Vasilev\n"
 "Language-Team: Bulgarian (http://www.transifex.com/widelands/widelands/language/bg/)\n"
 "MIME-Version: 1.0\n"
@@ -28,7 +28,7 @@ msgstr "Това е компилация на Widelands: %s"
 
 #: ../../src/wlapplication_messages.cc:43
 msgid "Usage: widelands <option0>=<value0> ... <optionN>=<valueN>"
-msgstr "Начин на използване: widelands <опция0>=<стойност0> ... <опцияN>=<стойностN>"
+msgstr "Начин на използване: widelands <опция0>=<стойност0> … <опцияN>=<стойностN>"
 
 #: ../../src/wlapplication_messages.cc:44
 msgid "Options:"
@@ -74,7 +74,7 @@ msgstr " --coredump=[true|false]\n                      Създава „core d
 msgid ""
 " --language=[de_DE|sv_SE|...]\n"
 "                      The locale to use."
-msgstr " --language=[de_DE|bg_BG|...]\n                      Езикът, който да се ползва."
+msgstr " --language=[de_DE|bg_BG|…]\n                      Езикът, който да се ползва."
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
@@ -87,13 +87,13 @@ msgstr " --write_syncstreams=[true|false]\n                      Създава�
 
 #: ../../src/wlapplication_messages.cc:68
 msgid " --autosave=[...]     Automatically save each n minutes"
-msgstr " --autosave=[...]     Автоматично запазване на всеки х минути"
+msgstr " --autosave=[…]     Автоматично запазване на всеки х минути"
 
 #: ../../src/wlapplication_messages.cc:69
 msgid ""
 " --rolling_autosave=[...]\n"
 "                      Use this many files for rolling autosaves"
-msgstr " --rolling_autosave=[...]\n                      Използване на толкова файлове за\n                      непрекъснати автоматични запазвания"
+msgstr " --rolling_autosave=[…]\n                      Използване на толкова файлове за\n                      непрекъснати автоматични запазвания"
 
 #: ../../src/wlapplication_messages.cc:72
 msgid "Sound options:"
@@ -165,11 +165,11 @@ msgstr " --fullscreen=[true|false]\n                      Дали да се и�
 
 #: ../../src/wlapplication_messages.cc:97
 msgid " --xres=[...]         Width of the window in pixel."
-msgstr " --xres=[...]         Ширина на прозореца в пиксели."
+msgstr " --xres=[…]         Ширина на прозореца в пиксели."
 
 #: ../../src/wlapplication_messages.cc:98
 msgid " --yres=[...]         Height of the window in pixel."
-msgstr " --yres=[...]         Височина на прозореца в пиксели."
+msgstr " --yres=[…]         Височина на прозореца в пиксели."
 
 #: ../../src/wlapplication_messages.cc:102
 msgid "Options for the internal window manager:"
@@ -181,7 +181,7 @@ msgid ""
 "                      Move a window to the edge of the screen\n"
 "                      when the edge of the window comes within\n"
 "                      this distance from the edge of the screen."
-msgstr " --border_snap_distance=[0 ...]\n                      Придвижва прозореца към края на екрана в\n                      случай, че края на прозореца се окаже в\n                      указаното разстояние от края на екрана."
+msgstr " --border_snap_distance=[0 …]\n                      Придвижва прозореца към края на екрана в\n                      случай, че края на прозореца се окаже в\n                      указаното разстояние от края на екрана."
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
@@ -200,7 +200,7 @@ msgid ""
 "                      Move a window to the edge of the panel when\n"
 "                      the edge of the window comes within this\n"
 "                      distance from the edge of the panel."
-msgstr " --panel_snap_distance=[0 ...]\n                      Придвижва прозореца към края на панела в\n                      случай, че края на прозореца се окаже в\n                      указаното разстояние от края на панела."
+msgstr " --panel_snap_distance=[0 …]\n                      Придвижва прозореца към края на панела в\n                      случай, че края на прозореца се окаже в\n                      указаното разстояние от края на панела."
 
 #: ../../src/wlapplication_messages.cc:117
 msgid ""
