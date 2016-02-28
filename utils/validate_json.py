@@ -6,7 +6,7 @@ import json
 import os.path
 import sys
 
-# Tests if .json files in data/map_object_info are valid JSON files
+# Tests if the .json files in the directories on the bottom are valid JSON files
 
 def validate_files_in_path(source_path):
 

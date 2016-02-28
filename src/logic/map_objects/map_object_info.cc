@@ -76,7 +76,7 @@ void initialize() {
  ==========================================================
  */
 
-// Defines some convenience writing functions for the JSOn format
+// Defines some convenience writing functions for the JSON format
 class JSONFileWrite : public FileWrite {
 public:
 	JSONFileWrite() : FileWrite(), level_(0) {}
@@ -496,11 +496,8 @@ void write_tribes(EditorGameBase& egbase) {
 
 int main()
 {
-
 	try {
-
 		initialize();
-
 		EditorGameBase egbase(nullptr);
 		write_tribes(egbase);
 	}
