@@ -186,7 +186,7 @@ world:new_terrain_type{
    dither_layer = 160,
    temperature = 75,
    humidity = 0.75,
-   fertility = 0.5,
+   fertility = 0.45,
 }
 
 
@@ -412,7 +412,7 @@ world:new_terrain_type{
    default_resource_amount = 4,
    textures = { pics_dir .. "wasteland/ashes2_00.png" },
    dither_layer = 410,
-   temperature = 125,
+   temperature = 115,
    humidity = 0.13,
    fertility = 0.999,
 }
@@ -703,7 +703,7 @@ world:new_terrain_type{
    dither_layer = 230,
    temperature = 50,
    humidity = 0.85,
-   fertility = 0.5,
+   fertility = 0.45,
 }
 
 
