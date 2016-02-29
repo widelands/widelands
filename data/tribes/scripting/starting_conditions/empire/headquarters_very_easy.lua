@@ -75,6 +75,12 @@ return {
       }
    })
 
+      place_building_in_region(player, "empire_outpost", sf:region(13), {
+		soldiers = {
+         [{0,0,0,0}] = 1,
+      },
+      })
+      
       place_building_in_region(player, "empire_colosseum", sf:region(11), {
          wares = {
             empire_bread = 8,
@@ -83,38 +89,68 @@ return {
          },
       })
 
+      place_building_in_region(player, "empire_bakery", sf:region(11), {
+         wares = {}
+      })
+
+    local plr = wl.Game().players[player.number]
+    -- index of a warehouse we will add to. Used to 'rotate' warehouses
+    local idx = 1
+
    for i=1,100000 do
      sleep(300000)
 
-     local hq = wl.Game().players[player.number]:get_buildings("empire_headquarters")[1]
-     
-     if hq and hq.descr.name == "empire_headquarters" then
-      if hq:get_wares("water") < 100 then
-         hq:set_wares("water", hq:get_wares("water") + 20)
-       end
-       if hq:get_wares("log") < 100 then
-         hq:set_wares("log", hq:get_wares("log") + 20)
-       end
-       if hq:get_wares("granite") < 100 then
-         hq:set_wares("granite", hq:get_wares("granite") + 10)
-       end
-       if hq:get_wares("coal") < 100 then
-         hq:set_wares("coal", hq:get_wares("coal") + 5)
-       end
-       if hq:get_wares("iron_ore") < 100 then
-         hq:set_wares("iron_ore", hq:get_wares("iron_ore") + 5)
-       end
-       if hq:get_wares("marble") < 100 then
-         hq:set_wares("marble", hq:get_wares("marble") + 5)
-       end
-       if hq:get_wares("fish") < 50 then
-         hq:set_wares("fish", hq:get_wares("fish") + 1)
-       end
-       if hq:get_wares("gold") < 50 then
-         hq:set_wares("gold", hq:get_wares("gold") + 1)
-       end
-     end
-   end
+		-- collect all ~warehouses and pick one to insert the wares
+		local warehouses = array_combine(plr:get_buildings(plr.tribe_name .. "_headquarters"),
+			plr:get_buildings(plr.tribe_name .. "_warehouse"),
+			plr:get_buildings(plr.tribe_name .. "_port"))
+		
+		if #warehouses > 0 then
+
+			-- adding to a warehouse with index idx, if out of range, adding to wh 1
+		    if idx > #warehouses then
+				idx = 1
+			end
+		    
+		    local wh = warehouses[idx]
+		    local added = 0
+		    
+	      if wh:get_wares("water") < 100 then
+	         wh:set_wares("water", wh:get_wares("water") + 20)
+	       end
+	       if wh:get_wares("log") < 100 then
+	         wh:set_wares("log", wh:get_wares("log") + 10)
+	       end
+	       if wh:get_wares("granite") < 100 then
+	         wh:set_wares("granite", wh:get_wares("granite") + 5 + #warehouses)
+	       end
+	       if wh:get_wares("coal") < 100 then
+	         wh:set_wares("coal", wh:get_wares("coal") + 5)
+	       end
+	       if wh:get_wares("iron_ore") < 100 then
+	         wh:set_wares("iron_ore", wh:get_wares("iron_ore") + 5)
+	       end
+	       if wh:get_wares("marble") < 100 then
+	         wh:set_wares("marble", wh:get_wares("marble") + 5)
+	       end
+	       if wh:get_wares("fish") < 50 then
+	         wh:set_wares("fish", wh:get_wares("fish") + 1)
+	       end
+	       if wh:get_wares("gold") < 50 then
+	         wh:set_wares("gold", wh:get_wares("gold") + 1)
+	       end
+		    if plr:get_wares("wheat") < 60 + #warehouses * 10 then
+		        wh:set_wares("wheat", wh:get_wares("wheat") + 10 + #warehouses * 2)
+		        added = added + 1
+		    end
+		    if plr:get_wares("flour") < 30 + #warehouses * 10 then
+		        wh:set_wares("flour", wh:get_wares("flour") + #warehouses * 5)
+		        added = added + 1
+		    end		    
+		    print (player.number..": "..added.." types of ware added to warehouse "..idx.." of "..#warehouses.." (cheating mode)")
+     		idx = idx + 1	
+    	end
+    end
 end
 }
 

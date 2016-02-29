@@ -70,19 +70,19 @@ return {
          [{0,0,0,0}] = 45,
       }
    })
-   place_building_in_region(player, "barbarians_fortress", sf:region(12), {
+   place_building_in_region(player, "barbarians_tower", sf:region(13), {
 		soldiers = {
          [{0,0,0,0}] = 1,
       },
       })
-   place_building_in_region(player, "barbarians_battlearena", sf:region(12), {
+   place_building_in_region(player, "barbarians_battlearena", sf:region(11), {
         wares = {
             barbarians_bread = 8,
             fish = 6,
             meat = 6,
          }
       })
-   place_building_in_region(player, "barbarians_brewery", sf:region(12), {
+   place_building_in_region(player, "barbarians_brewery", sf:region(11), {
 		wares = {},
       })
  
@@ -145,7 +145,7 @@ return {
 		        added = added + 1
 		    end
 		    
-		    print (player.number..": "..added.." types of ware added to warehouse "..idx.." of "..#warehouses.." (cheating mode)") -- NOCOM good idea?		    idx = idx + 1
+		    print (player.number..": "..added.." types of ware added to warehouse "..idx.." of "..#warehouses.." (cheating mode)")
 		    
 		    idx = idx + 1	
 		end
