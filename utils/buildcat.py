@@ -50,6 +50,7 @@ MAINPOTS = [
                     "../../src/*/*/*/*.h",
                     "../../src/*/*/*/*/*.h",
                     "../../src/*/*/*/*/*/*.h",
+                    "../../data/scripting/*.lua",
                     "../../data/scripting/editor/*.lua",
                     "../../data/scripting/widelands/*.lua",
     ] ),
