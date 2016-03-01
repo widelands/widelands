@@ -33,7 +33,7 @@ tribes:new_worker_type {
       buildship = {
          "walk object-or-coords",
          "plant tribe:atlanteans_shipconstruction unless object",
-         "playFX sound/sawmill sawmill 230",
+         "play_sound sound/sawmill sawmill 230",
          "animation idle 500",
          "construct",
          "animation idle 5000",
