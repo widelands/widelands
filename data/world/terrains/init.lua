@@ -185,7 +185,7 @@ world:new_terrain_type{
    textures = { pics_dir .. "green/bergwiese_00.png" },
    dither_layer = 160,
    temperature = 75,
-   humidity = 0.75,
+   humidity = 0.8,
    fertility = 0.45,
 }
 
@@ -412,7 +412,7 @@ world:new_terrain_type{
    default_resource_amount = 4,
    textures = { pics_dir .. "wasteland/ashes2_00.png" },
    dither_layer = 410,
-   temperature = 115,
+   temperature = 118,
    humidity = 0.13,
    fertility = 0.999,
 }
