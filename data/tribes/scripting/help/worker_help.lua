@@ -76,6 +76,31 @@ function worker_help_producers_string(tribe, worker_description)
    return result
 end
 
+
+-- RST
+-- .. function worker_help_employers_string(worker_description)
+--
+--    Displays the buildings where the worker can work
+--
+--    :arg worker_description: the worker_description from C++.
+--    :returns: Info about buildings that use this worker
+--
+function worker_help_employers_string(worker_description)
+   local result = ""
+   local employers = worker_description.employers;
+
+   if (#employers > 0) then
+      -- TRANSLATORS: Worker Encyclopedia: A list of buildings where a worker can work
+      -- TRANSLATORS: You can also translate this as 'workplace(s)'
+      result = result .. rt(h2(ngettext("Works at", "Works at", #employers)))
+      for i, building in ipairs(worker_description.employers) do
+         result = result .. dependencies({worker_description, building}, building.descname)
+      end
+   end
+   return result
+end
+
+
 -- RST
 -- .. function worker_help_string(worker_description)
 --
@@ -102,19 +127,22 @@ function worker_help_string(tribe, worker_description)
          end
       end
 
-      if(#toolnames > 0) then
-         result = result .. help_tool_string(tribe, toolnames, 1)
+      if (#toolnames > 0) then
+         local tool_string = help_tool_string(tribe, toolnames, 1)
+         -- TRANSLATORS: Tribal Encyclopedia: Heading for which tool a worker uses
+         result = result .. rt(h2(_"Worker uses")) .. tool_string
       end
    else
       result = result .. worker_help_producers_string(tribe, worker_description)
    end
 
+   result = result .. worker_help_employers_string(worker_description)
 
    -- TODO(GunChleoc): Add "enhanced from" info in one_tribe branch
    local becomes_description = worker_description.becomes
    if (becomes_description) then
 
-      result = result .. rt(h3(_"Experience levels:"))
+      result = result .. rt(h2(_"Experience levels"))
       local exp_string = _"%s to %s (%s EP)":format(
             worker_description.descname,
             becomes_description.descname,
