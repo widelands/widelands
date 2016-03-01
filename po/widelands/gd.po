@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-02-16 09:25+0000\n"
-"PO-Revision-Date: 2016-02-18 16:16+0000\n"
+"POT-Creation-Date: 2016-02-20 12:30+0000\n"
+"PO-Revision-Date: 2016-02-20 12:36+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -340,7 +340,7 @@ msgstr "Cha deach am mapa a shàbhaladh, a bheil thu cinnteach gu bheil thu airs
 
 #: ../../src/editor/editorinteractive.cc:632
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:120
-msgid "Creating empty map..."
+msgid "Creating empty map…"
 msgstr "A’ cruthachadh mapa falamh…"
 
 #. * TRANSLATORS: Default name for new map
@@ -361,8 +361,8 @@ msgstr "Mapa nach aithne dhuinn"
 
 #: ../../src/editor/editorinteractive.cc:647
 #, c-format
-msgid "Loading map \"%s\"..."
-msgstr "A’ luchdadh mapa “%s”..."
+msgid "Loading map “%s”…"
+msgstr "A’ luchdadh mapa “%s”…"
 
 #: ../../src/editor/map_generator.cc:792
 msgid "Random Player"
@@ -833,8 +833,8 @@ msgid "Generate Map"
 msgstr "Gin mapa"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:452
-msgid "Generating random map..."
-msgstr "A’ gintinn mapa tuaireamach..."
+msgid "Generating random map…"
+msgstr "A’ gintinn mapa tuaireamach…"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:61
 #: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:28
@@ -1029,13 +1029,13 @@ msgid "Scenario"
 msgstr "Cnàmh-sgeul"
 
 #: ../../src/logic/game.cc:244 ../../src/logic/game.cc:324
-msgid "Loading map"
-msgstr "A’ luchdadh a’ mhapa"
+msgid "Loading map…"
+msgstr "A’ luchdadh a’ mhapa…"
 
 #: ../../src/logic/game.cc:366 ../../src/logic/game.cc:399
-#: ../../src/wlapplication.cc:1377
-msgid "Loading..."
-msgstr "’Ga luchdadh..."
+#: ../../src/ui_basic/progresswindow.cc:50 ../../src/wlapplication.cc:1377
+msgid "Loading…"
+msgstr "’Ga luchdadh…"
 
 #: ../../src/logic/game.cc:463
 msgid "Creating player infrastructure"
@@ -1489,8 +1489,8 @@ msgid ""
 msgstr "Ràinig sinn deireadh na h-ath-chluiche is chaidh an geama a chur ’na stad. ’S urrainn dhut an geama a chur a’ dol a-rithist is leantainn air adhart a’ coimhead air ma thogras tu."
 
 #: ../../src/logic/save_handler.cc:106
-msgid "Saving game..."
-msgstr "A’ sàbhaladh a’ gheama..."
+msgid "Saving game…"
+msgstr "A’ sàbhaladh a’ gheama…"
 
 #: ../../src/logic/save_handler.cc:125
 msgid "Saving failed!"
@@ -2074,10 +2074,6 @@ msgstr "chaneil"
 msgid "off"
 msgstr "dheth"
 
-#: ../../src/ui_basic/progresswindow.cc:46
-msgid "Preparing..."
-msgstr "’Ga ullachadh..."
-
 #: ../../src/ui_basic/spinbox.cc:149
 msgid "Decrease the value"
 msgstr "Lùghdaich an luach"
@@ -2353,8 +2349,8 @@ msgid "unnamed"
 msgstr "gun_ainm"
 
 #: ../../src/ui_fsmenu/intro.cc:32
-msgid "Press any key or click to continue ..."
-msgstr "Brùth air iuchair sam bith no briog airson leantainn air adhart..."
+msgid "Press any key or click to continue…"
+msgstr "Brùth air iuchair sam bith no briog airson leantainn air adhart…"
 
 #. * TRANSLATORS: Dialog box title for selecting between map or saved game for
 #. new multiplayer game

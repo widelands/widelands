@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-02-16 09:25+0000\n"
-"PO-Revision-Date: 2016-02-16 09:26+0000\n"
+"POT-Creation-Date: 2016-02-20 12:30+0000\n"
+"PO-Revision-Date: 2016-02-20 12:32+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Japanese (http://www.transifex.com/widelands/widelands/language/ja/)\n"
 "MIME-Version: 1.0\n"
@@ -338,7 +338,7 @@ msgstr "マップが保存されていません。\nこのまま終了します�
 
 #: ../../src/editor/editorinteractive.cc:632
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:120
-msgid "Creating empty map..."
+msgid "Creating empty map…"
 msgstr ""
 
 #. * TRANSLATORS: Default name for new map
@@ -359,7 +359,7 @@ msgstr ""
 
 #: ../../src/editor/editorinteractive.cc:647
 #, c-format
-msgid "Loading map \"%s\"..."
+msgid "Loading map “%s”…"
 msgstr ""
 
 #: ../../src/editor/map_generator.cc:792
@@ -828,8 +828,8 @@ msgid "Generate Map"
 msgstr "マップ生成"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:452
-msgid "Generating random map..."
-msgstr "ランダムマップを生成中..."
+msgid "Generating random map…"
+msgstr ""
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:61
 #: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:28
@@ -1024,13 +1024,13 @@ msgid "Scenario"
 msgstr "シナリオ"
 
 #: ../../src/logic/game.cc:244 ../../src/logic/game.cc:324
-msgid "Loading map"
-msgstr "マップを読込中"
+msgid "Loading map…"
+msgstr ""
 
 #: ../../src/logic/game.cc:366 ../../src/logic/game.cc:399
-#: ../../src/wlapplication.cc:1377
-msgid "Loading..."
-msgstr "読込中..."
+#: ../../src/ui_basic/progresswindow.cc:50 ../../src/wlapplication.cc:1377
+msgid "Loading…"
+msgstr ""
 
 #: ../../src/logic/game.cc:463
 msgid "Creating player infrastructure"
@@ -1457,8 +1457,8 @@ msgid ""
 msgstr "リプレイが終了したため、ゲームを一時停止しています。一時停止を解除すると観察を続行できます。"
 
 #: ../../src/logic/save_handler.cc:106
-msgid "Saving game..."
-msgstr "ゲーム保存中..."
+msgid "Saving game…"
+msgstr ""
 
 #: ../../src/logic/save_handler.cc:125
 msgid "Saving failed!"
@@ -2033,10 +2033,6 @@ msgstr ""
 msgid "off"
 msgstr ""
 
-#: ../../src/ui_basic/progresswindow.cc:46
-msgid "Preparing..."
-msgstr "準備中..."
-
 #: ../../src/ui_basic/spinbox.cc:149
 msgid "Decrease the value"
 msgstr "値を減らす"
@@ -2303,7 +2299,7 @@ msgid "unnamed"
 msgstr ""
 
 #: ../../src/ui_fsmenu/intro.cc:32
-msgid "Press any key or click to continue ..."
+msgid "Press any key or click to continue…"
 msgstr ""
 
 #. * TRANSLATORS: Dialog box title for selecting between map or saved game for

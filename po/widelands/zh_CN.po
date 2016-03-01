@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-02-16 09:25+0000\n"
-"PO-Revision-Date: 2016-02-16 09:26+0000\n"
+"POT-Creation-Date: 2016-02-20 12:30+0000\n"
+"PO-Revision-Date: 2016-02-20 12:32+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/widelands/widelands/language/zh_CN/)\n"
 "MIME-Version: 1.0\n"
@@ -340,7 +340,7 @@ msgstr "这个地图没有保存，您确定真的要退出吗？"
 
 #: ../../src/editor/editorinteractive.cc:632
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:120
-msgid "Creating empty map..."
+msgid "Creating empty map…"
 msgstr ""
 
 #. * TRANSLATORS: Default name for new map
@@ -361,7 +361,7 @@ msgstr "未知"
 
 #: ../../src/editor/editorinteractive.cc:647
 #, c-format
-msgid "Loading map \"%s\"..."
+msgid "Loading map “%s”…"
 msgstr ""
 
 #: ../../src/editor/map_generator.cc:792
@@ -830,8 +830,8 @@ msgid "Generate Map"
 msgstr "生成地图"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:452
-msgid "Generating random map..."
-msgstr "生成随机地图"
+msgid "Generating random map…"
+msgstr ""
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:61
 #: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:28
@@ -1026,13 +1026,13 @@ msgid "Scenario"
 msgstr "方案"
 
 #: ../../src/logic/game.cc:244 ../../src/logic/game.cc:324
-msgid "Loading map"
-msgstr "正在读取地图"
+msgid "Loading map…"
+msgstr ""
 
 #: ../../src/logic/game.cc:366 ../../src/logic/game.cc:399
-#: ../../src/wlapplication.cc:1377
-msgid "Loading..."
-msgstr "载入中……"
+#: ../../src/ui_basic/progresswindow.cc:50 ../../src/wlapplication.cc:1377
+msgid "Loading…"
+msgstr ""
 
 #: ../../src/logic/game.cc:463
 msgid "Creating player infrastructure"
@@ -1459,8 +1459,8 @@ msgid ""
 msgstr "重放已经结束，游戏暂停。如果你喜欢你可以继续游戏和观看。"
 
 #: ../../src/logic/save_handler.cc:106
-msgid "Saving game..."
-msgstr "保存游戏……"
+msgid "Saving game…"
+msgstr ""
 
 #: ../../src/logic/save_handler.cc:125
 msgid "Saving failed!"
@@ -2035,10 +2035,6 @@ msgstr ""
 msgid "off"
 msgstr ""
 
-#: ../../src/ui_basic/progresswindow.cc:46
-msgid "Preparing..."
-msgstr ""
-
 #: ../../src/ui_basic/spinbox.cc:149
 msgid "Decrease the value"
 msgstr ""
@@ -2305,8 +2301,8 @@ msgid "unnamed"
 msgstr "无名"
 
 #: ../../src/ui_fsmenu/intro.cc:32
-msgid "Press any key or click to continue ..."
-msgstr "按任意键或单击继续……"
+msgid "Press any key or click to continue…"
+msgstr ""
 
 #. * TRANSLATORS: Dialog box title for selecting between map or saved game for
 #. new multiplayer game

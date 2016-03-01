@@ -368,6 +368,8 @@ struct BuildingObserver {
 	int32_t cnt_target;  // number of buildings as target
 	int32_t cnt_limit_by_aimode; // limit imposed by weak or normal AI mode
 
+	int32_t cnt_upgrade_pending; //number of buildings that are to be upgraded
+
 	// used to track amount of wares produced by building
 	uint32_t stocklevel;
 	uint32_t stocklevel_time;  // time when stocklevel_ was last time recalculated
@@ -388,6 +390,7 @@ struct ProductionSiteObserver {
 	uint32_t unoccupied_till;
 	uint8_t stats_zero;
 	uint32_t no_resources_since;
+	bool upgrade_pending;
 	BuildingObserver* bo;
 };
 

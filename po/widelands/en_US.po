@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-02-16 09:25+0000\n"
-"PO-Revision-Date: 2016-02-16 09:26+0000\n"
+"POT-Creation-Date: 2016-02-20 12:30+0000\n"
+"PO-Revision-Date: 2016-02-20 12:32+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: English (United States) (http://www.transifex.com/widelands/widelands/language/en_US/)\n"
 "MIME-Version: 1.0\n"
@@ -337,7 +337,7 @@ msgstr ""
 
 #: ../../src/editor/editorinteractive.cc:632
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:120
-msgid "Creating empty map..."
+msgid "Creating empty map…"
 msgstr ""
 
 #. * TRANSLATORS: Default name for new map
@@ -358,7 +358,7 @@ msgstr ""
 
 #: ../../src/editor/editorinteractive.cc:647
 #, c-format
-msgid "Loading map \"%s\"..."
+msgid "Loading map “%s”…"
 msgstr ""
 
 #: ../../src/editor/map_generator.cc:792
@@ -828,7 +828,7 @@ msgid "Generate Map"
 msgstr ""
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:452
-msgid "Generating random map..."
+msgid "Generating random map…"
 msgstr ""
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:61
@@ -1024,12 +1024,12 @@ msgid "Scenario"
 msgstr ""
 
 #: ../../src/logic/game.cc:244 ../../src/logic/game.cc:324
-msgid "Loading map"
+msgid "Loading map…"
 msgstr ""
 
 #: ../../src/logic/game.cc:366 ../../src/logic/game.cc:399
-#: ../../src/wlapplication.cc:1377
-msgid "Loading..."
+#: ../../src/ui_basic/progresswindow.cc:50 ../../src/wlapplication.cc:1377
+msgid "Loading…"
 msgstr ""
 
 #: ../../src/logic/game.cc:463
@@ -1466,7 +1466,7 @@ msgid ""
 msgstr ""
 
 #: ../../src/logic/save_handler.cc:106
-msgid "Saving game..."
+msgid "Saving game…"
 msgstr ""
 
 #: ../../src/logic/save_handler.cc:125
@@ -2045,10 +2045,6 @@ msgstr ""
 msgid "off"
 msgstr ""
 
-#: ../../src/ui_basic/progresswindow.cc:46
-msgid "Preparing..."
-msgstr ""
-
 #: ../../src/ui_basic/spinbox.cc:149
 msgid "Decrease the value"
 msgstr ""
@@ -2318,7 +2314,7 @@ msgid "unnamed"
 msgstr ""
 
 #: ../../src/ui_fsmenu/intro.cc:32
-msgid "Press any key or click to continue ..."
+msgid "Press any key or click to continue…"
 msgstr ""
 
 #. * TRANSLATORS: Dialog box title for selecting between map or saved game for
