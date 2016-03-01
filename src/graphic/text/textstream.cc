@@ -19,6 +19,7 @@
 
 #include "graphic/text/textstream.h"
 
+#include <boost/algorithm/string/replace.hpp>
 #include <boost/format.hpp>
 
 #include "graphic/text/rt_errors_impl.h"
@@ -102,14 +103,28 @@ string TextStream::till_any(string chars) {
 		}
 		if (found) break;
 
-		if (m_t[j] == '\\')
+		// Get rid of control characters
+		// http://en.cppreference.com/w/cpp/language/escape
+		switch (m_t[j]) {
+		case '\a':
+		case '\b':
+		case '\f':
+		case '\v':
 			++j;
+			break;
+		default:
+			break;
+		}
+
 		rv += m_t[j];
 		++j;
 	}
 	if (!found)
 		throw EndOfTextImpl(started_at, peek(100, started_at));
 	m_consume(j - started_at);
+
+	// Undo the extra \ that were inserted in Parser::parse to prevent crashes.
+	boost::replace_all(rv, "\\\\", "\\");
 
 	return rv;
 }
