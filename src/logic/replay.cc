@@ -49,7 +49,7 @@ enum {
 class CmdReplaySyncRead : public Command {
 public:
 	CmdReplaySyncRead(const uint32_t init_duetime, const Md5Checksum & hash)
-		: Command(init_duetime), m_hash(hash)
+		: Command(init_duetime), hash_(hash)
 	{}
 
 	QueueCommandTypes id() const override {return QueueCommandTypes::kReplaySyncRead;}
@@ -58,12 +58,12 @@ public:
 	{
 		const Md5Checksum myhash = game.get_sync_hash();
 
-		if (m_hash != myhash) {
+		if (hash_ != myhash) {
 			log
 				("REPLAY: Lost synchronization at time %u\n"
 				 "I have:     %s\n"
 				 "Replay has: %s\n",
-				 duetime(), myhash.str().c_str(), m_hash.str().c_str());
+				 duetime(), myhash.str().c_str(), hash_.str().c_str());
 
 			// In case syncstream logging is on, save it for analysis
 			game.save_syncstream(true);
@@ -74,7 +74,7 @@ public:
 	}
 
 private:
-	Md5Checksum m_hash;
+	Md5Checksum hash_;
 };
 
 
