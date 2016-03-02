@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-02-14 16:47+0000\n"
-"PO-Revision-Date: 2016-02-14 23:09+0000\n"
+"POT-Creation-Date: 2016-02-20 12:30+0000\n"
+"PO-Revision-Date: 2016-02-20 16:06+0000\n"
 "Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -763,7 +763,7 @@ msgstr "Palmeres"
 
 #: ../../data/world/init.lua:65
 msgid "Wasteland Trees"
-msgstr "Arbres d'erms"
+msgstr "Arbres volcànics"
 
 #: ../../data/world/resources/init.lua:7
 msgid "Coal"
@@ -799,7 +799,7 @@ msgstr "Clima temperat"
 
 #: ../../data/world/terrains/init.lua:9
 msgid "Wasteland"
-msgstr "Erm"
+msgstr "Paisatge volcànic"
 
 #: ../../data/world/terrains/init.lua:14
 msgid "Winter"

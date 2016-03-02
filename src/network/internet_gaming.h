@@ -124,6 +124,8 @@ struct InternetGaming : public ChatProvider {
 		ingame_system_chat_.clear();
 	}
 
+	bool has_been_set() const override {return true;}
+
 private:
 	InternetGaming();
 
