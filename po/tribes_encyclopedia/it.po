@@ -14,9 +14,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-02-20 12:30+0000\n"
-"PO-Revision-Date: 2016-02-25 15:01+0000\n"
-"Last-Translator: Guybrush88 <erpizzo@alice.it>\n"
+"POT-Creation-Date: 2016-03-01 09:34+0000\n"
+"PO-Revision-Date: 2016-03-01 22:21+0000\n"
+"Last-Translator: Luigi Lain <lainluigi86@tiscali.it>\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1265,7 +1265,7 @@ msgstr "Addestra i soldati in 'Difesa', 'Schivata' e 'Salute'."
 msgctxt "barbarians_building"
 msgid ""
 "‘No better friend you have in battle than the enemy’s blow that misses.’"
-msgstr ""
+msgstr "'Il tuo migliore amico in battaglia è il colpo del nemico che va a vuoto.'"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/helptexts.lua:8
@@ -1311,7 +1311,7 @@ msgctxt "barbarians_building"
 msgid ""
 "If all needed wares are delivered in time, a battle arena can train evade "
 "for one soldier from 0 to the highest level in %1$s and %2$s on average."
-msgstr ""
+msgstr "Se tutte le merci necessarie sono consegnate in tempo, un'Arena di battaglia può addestrare un nuovo soldato da 0 al livello finale rispettivamente in %1$s e %2$s."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/helptexts.lua:3
@@ -1471,7 +1471,7 @@ msgid ""
 msgstr "Serve come base per la colonizzazione e il commercio oltreoceano. Inoltre immagazzina soldati, merci e attrezzi."
 
 #: ../../data/tribes/scripting/help/building_help.lua:108
-#: ../../data/tribes/scripting/help/format_help.lua:146
+#: ../../data/tribes/scripting/help/format_help.lua:142
 #, lua-format
 msgid "%s and"
 msgstr "%s e"
@@ -1709,44 +1709,43 @@ msgstr "Lavoratori"
 msgid "%s or better"
 msgstr "%s o migliore"
 
-#: ../../data/tribes/scripting/help/building_help.lua:669
-#: ../../data/tribes/scripting/help/worker_help.lua:117
-msgid "Experience levels:"
-msgstr "Livelli di esperienza:"
-
-#. TRANSLATORS: EP = Experience Points
-#: ../../data/tribes/scripting/help/building_help.lua:671
-#: ../../data/tribes/scripting/help/building_help.lua:680
-#: ../../data/tribes/scripting/help/worker_help.lua:118
-#: ../../data/tribes/scripting/help/worker_help.lua:127
-#, lua-format
-msgid "%s to %s (%s EP)"
-msgstr "%s a %s (%s EP)"
-
-#: ../../data/tribes/scripting/help/building_help.lua:703
-msgid "Production"
-msgstr "Produzione"
-
-#: ../../data/tribes/scripting/help/building_help.lua:704
-msgid "Performance:"
-msgstr "Prestazione:"
-
-#. TRANSLATORS: %1$d is a number, %2$s the name of a ware, e.g. 12x Stone
-#: ../../data/tribes/scripting/help/format_help.lua:86
-#: ../../data/tribes/scripting/help/format_help.lua:138
-msgid "%1$dx %2$s"
-msgstr "%1$dx %2$s"
-
-#. TRANSLATORS: Tribal Encyclopedia: Heading for which tools a worker uses
-#: ../../data/tribes/scripting/help/format_help.lua:111
+#. TRANSLATORS: Tribal Encyclopedia: Heading for which tool workers use
+#: ../../data/tribes/scripting/help/building_help.lua:668
 msgid "Worker uses:"
 msgid_plural "Workers use:"
 msgstr[0] "Il lavoratore utilizza:"
 msgstr[1] "I lavoratori utilizzano:"
 
+#: ../../data/tribes/scripting/help/building_help.lua:673
+msgid "Experience levels:"
+msgstr "Livelli di esperienza:"
+
+#. TRANSLATORS: EP = Experience Points
+#: ../../data/tribes/scripting/help/building_help.lua:675
+#: ../../data/tribes/scripting/help/building_help.lua:684
+#: ../../data/tribes/scripting/help/worker_help.lua:146
+#: ../../data/tribes/scripting/help/worker_help.lua:155
+#, lua-format
+msgid "%s to %s (%s EP)"
+msgstr "%s a %s (%s EP)"
+
+#: ../../data/tribes/scripting/help/building_help.lua:707
+msgid "Production"
+msgstr "Produzione"
+
+#: ../../data/tribes/scripting/help/building_help.lua:708
+msgid "Performance:"
+msgstr "Prestazione:"
+
+#. TRANSLATORS: %1$d is a number, %2$s the name of a ware, e.g. 12x Stone
+#: ../../data/tribes/scripting/help/format_help.lua:86
+#: ../../data/tribes/scripting/help/format_help.lua:134
+msgid "%1$dx %2$s"
+msgstr "%1$dx %2$s"
+
 #. TRANSLATORS: Tribal Encyclopedia: Heading for wares consumed by a
 #. productionsite
-#: ../../data/tribes/scripting/help/format_help.lua:165
+#: ../../data/tribes/scripting/help/format_help.lua:161
 msgid "Ware consumed:"
 msgid_plural "Wares consumed:"
 msgstr[0] "Merce consumata"
@@ -1776,7 +1775,7 @@ msgid "%1% and %2%"
 msgstr "%1% e %2%"
 
 #: ../../data/tribes/scripting/help/ware_help.lua:32
-#: ../../data/tribes/scripting/help/worker_help.lua:93
+#: ../../data/tribes/scripting/help/worker_help.lua:118
 msgid "Purpose"
 msgstr "Scopo"
 
@@ -1808,6 +1807,24 @@ msgid "Worker recruited:"
 msgid_plural "Workers recruited:"
 msgstr[0] "Operaio reclutato:"
 msgstr[1] "Operai reclutati:"
+
+#. TRANSLATORS: Worker Encyclopedia: A list of buildings where a worker can
+#. work
+#. TRANSLATORS: You can also translate this as 'workplace(s)'
+#: ../../data/tribes/scripting/help/worker_help.lua:95
+msgid "Works at"
+msgid_plural "Works at"
+msgstr[0] ""
+msgstr[1] ""
+
+#. TRANSLATORS: Tribal Encyclopedia: Heading for which tool a worker uses
+#: ../../data/tribes/scripting/help/worker_help.lua:133
+msgid "Worker uses"
+msgstr "Il lavoratore usa"
+
+#: ../../data/tribes/scripting/help/worker_help.lua:145
+msgid "Experience levels"
+msgstr "Livelli di esperienza"
 
 #. TRANSLATORS: Helptext for a ware: Armor
 #: ../../data/tribes/wares/armor/helptexts.lua:4
@@ -1871,7 +1888,7 @@ msgid ""
 "The broad ax is produced by the ax workshop and the war mill. It is used in "
 "the training camp – together with food – to train soldiers with a "
 "fundamental fighting knowledge from attack level 1 to attack level 2."
-msgstr "L'ascia larga è prodotta dalla fabbrica di asce e dalla fucina da guerra. È usata nel campo di addestramento - insieme al cibo - per addestrare i soldati con una coonoscenza fondamentale di combattimento in attacco dal livello 1 al livello 2."
+msgstr "L'ascia larga è prodotta dalla fabbrica di asce e dalla fucina da guerra. È usata nel campo di addestramento - insieme al cibo - per addestrare i soldati con una conoscenza fondamentale di combattimento in attacco dal livello 1 al livello 2."
 
 #. TRANSLATORS: Helptext for a ware: Bronze Ax
 #: ../../data/tribes/wares/ax_bronze/helptexts.lua:4
@@ -1881,7 +1898,7 @@ msgid ""
 "soldiers can use it. It is produced at the war mill and used in the training"
 " camp – together with food – to train soldiers from attack level 2 to level "
 "3."
-msgstr ""
+msgstr "L'ascia di bronzo è considerata un'arma difficile da maneggiare. Solo soldati abili sono in grado di usarla.  È prodotta dalla fucina da guerra ed è usata nel campo di addestramento - insieme al cibo - per addestrare i soldati dal livello 2 al livello 3."
 
 #. TRANSLATORS: Helptext for a ware: Sharp Ax
 #: ../../data/tribes/wares/ax_sharp/helptexts.lua:4
@@ -1891,7 +1908,7 @@ msgid ""
 "heavier and sharper than the ordinary ax. It is produced in ax workshops and"
 " war mills. In training camps, it is used – together with food – to train "
 "soldiers from attack level 0 to level 1."
-msgstr ""
+msgstr "I giovani soldati sono orgogliosi di imparare a combattere con questa potente arma. È più pesante e affilata di un'ascia ordinaria. È prodotta nelle Fabbriche di asce e Fucine da guerra. Si usa nei campi di addestramento - insieme al cibo - per addestrare i soldati in attacco dal livello 0 al livello 1."
 
 #. TRANSLATORS: Helptext for a ware: Warrior’s Ax
 #: ../../data/tribes/wares/ax_warriors/helptexts.lua:4
@@ -2828,7 +2845,7 @@ msgid ""
 "Golden tabards are produced in Atlantean weaving mills out of gold thread. "
 "They are used in the labyrinth – together with food – to train soldiers from"
 " health level 0 to level 1."
-msgstr ""
+msgstr "I tabarri dorati vengono prodotti nei mulini di tessitura atlantidei dal filato d'oro. Sono usati nel Labirinto - insieme al cibo - per addestrare i soldati in Salute dal livello 0 al livello 1."
 
 #. TRANSLATORS: Helptext for a ware: Thatch Reed
 #: ../../data/tribes/wares/thatch_reed/helptexts.lua:4
@@ -2882,7 +2899,7 @@ msgid ""
 "This is the medium trident. It is produced in the weapon smithy and used by "
 "advanced soldiers in the dungeon  – together with food – to train from "
 "attack level 1 to level 2."
-msgstr ""
+msgstr "Questo è il tridente medio. Viene prodotto nella fucina di armi ed è usato nelle Segrete - insieme al cibio - per addestrare i soldati in attacco dal livello 1  al livello 2"
 
 #. TRANSLATORS: Helptext for a ware: Water
 #: ../../data/tribes/wares/water/helptexts.lua:4
