@@ -2583,6 +2583,7 @@ const MethodType<LuaWorkerDescription> LuaWorkerDescription::Methods[] = {
 const PropertyType<LuaWorkerDescription> LuaWorkerDescription::Properties[] = {
 	PROP_RO(LuaWorkerDescription, becomes),
 	PROP_RO(LuaWorkerDescription, buildcost),
+	PROP_RO(LuaWorkerDescription, employers),
 	PROP_RO(LuaWorkerDescription, helptext_script),
 	PROP_RO(LuaWorkerDescription, is_buildable),
 	PROP_RO(LuaWorkerDescription, needed_experience),
@@ -2641,6 +2642,22 @@ int LuaWorkerDescription::get_buildcost(lua_State * L) {
 			lua_pushstring(L, buildcost_pair.first);
 			lua_settable(L, -3);
 		}
+	}
+	return 1;
+}
+
+/* RST
+	.. attribute:: employers
+		(RO) An array with :class:`LuaBuildingDescription` with buildings where
+		this worker can be employed.
+*/
+int LuaWorkerDescription::get_employers(lua_State * L) {
+	lua_newtable(L);
+	int index = 1;
+	for (const DescriptionIndex& building_index : get()->employers()) {
+		lua_pushint32(L, index++);
+		upcasted_map_object_descr_to_lua(L, get_egbase(L).tribes().get_building_descr(building_index));
+		lua_rawset(L, -3);
 	}
 	return 1;
 }

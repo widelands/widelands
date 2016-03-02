@@ -33,9 +33,9 @@ namespace Widelands {
 constexpr uint8_t kCurrentPacketVersion = 1;
 
 Path::Path(CoordPath & o)
-	: m_start(o.get_start()), m_end(o.get_end()), m_path(o.steps())
+	: start_(o.get_start()), end_(o.get_end()), path_(o.steps())
 {
-	std::reverse(m_path.begin(), m_path.end()); //  path stored in reverse order
+	std::reverse(path_.begin(), path_.end()); //  path stored in reverse order
 }
 
 /*
@@ -45,11 +45,11 @@ Change the path so that it goes in the opposite direction
 */
 void Path::reverse()
 {
-	std::swap(m_start, m_end);
-	std::reverse(m_path.begin(), m_path.end());
+	std::swap(start_, end_);
+	std::reverse(path_.begin(), path_.end());
 
-	for (uint32_t i = 0; i < m_path.size(); ++i)
-		m_path[i] = get_reverse_dir(m_path[i]);
+	for (uint32_t i = 0; i < path_.size(); ++i)
+		path_[i] = get_reverse_dir(path_[i]);
 }
 
 /*
@@ -58,8 +58,8 @@ Add the given step at the end of the path.
 ===============
 */
 void Path::append(const Map & map, const Direction dir) {
-	m_path.insert(m_path.begin(), dir); // stores in reversed order!
-	map.get_neighbour(m_end, dir, &m_end);
+	path_.insert(path_.begin(), dir); // stores in reversed order!
+	map.get_neighbour(end_, dir, &end_);
 }
 
 /**
@@ -68,13 +68,13 @@ void Path::append(const Map & map, const Direction dir) {
 void Path::save(FileWrite & fw) const
 {
 	fw.unsigned_8(kCurrentPacketVersion);
-	write_coords_32(&fw, m_start);
+	write_coords_32(&fw, start_);
 
 	// Careful: steps are stored in the reverse order in m_path
 	// However, we save them in the forward order, to make loading easier
-	fw.unsigned_32(m_path.size());
-	for (uint32_t i = m_path.size(); i > 0; --i)
-		write_direction_8(&fw, m_path[i - 1]);
+	fw.unsigned_32(path_.size());
+	for (uint32_t i = path_.size(); i > 0; --i)
+		write_direction_8(&fw, path_[i - 1]);
 }
 
 /**
@@ -89,8 +89,8 @@ void Path::load(FileRead & fr, const Map & map)
 		uint8_t packet_version = fr.unsigned_8();
 		if (packet_version == kCurrentPacketVersion) {
 
-			m_start = m_end = read_coords_32(&fr, map.extent());
-			m_path.clear();
+			start_ = end_ = read_coords_32(&fr, map.extent());
+			path_.clear();
 			uint32_t steps = fr.unsigned_32();
 			while (steps--)
 				append(map, read_direction_8(&fr));
@@ -108,10 +108,10 @@ Initialize from a path, calculating the coordinates as needed
 ===============
 */
 CoordPath::CoordPath(const Map & map, const Path & path) {
-	m_coords.clear();
-	m_path.clear();
+	coords_.clear();
+	path_.clear();
 
-	m_coords.push_back(path.get_start());
+	coords_.push_back(path.get_start());
 
 	Coords c = path.get_start();
 
@@ -119,9 +119,9 @@ CoordPath::CoordPath(const Map & map, const Path & path) {
 	for (Path::StepVector::size_type i = 0; i < nr_steps; ++i) {
 		const char dir = path[i];
 
-		m_path.push_back(dir);
+		path_.push_back(dir);
 		map.get_neighbour(c, dir, &c);
-		m_coords.push_back(c);
+		coords_.push_back(c);
 	}
 }
 
@@ -130,8 +130,8 @@ CoordPath::CoordPath(const Map & map, const Path & path) {
 /// \return -1 if node is not part of this path.
 int32_t CoordPath::get_index(Coords const c) const
 {
-	for (uint32_t i = 0; i < m_coords.size(); ++i)
-		if (m_coords[i] == c)
+	for (uint32_t i = 0; i < coords_.size(); ++i)
+		if (coords_[i] == c)
 			return i;
 
 	return -1;
@@ -145,11 +145,11 @@ Reverse the direction of the path.
 */
 void CoordPath::reverse()
 {
-	std::reverse(m_path.begin(), m_path.end());
-	std::reverse(m_coords.begin(), m_coords.end());
+	std::reverse(path_.begin(), path_.end());
+	std::reverse(coords_.begin(), coords_.end());
 
-	for (uint32_t i = 0; i < m_path.size(); ++i)
-		m_path[i] = get_reverse_dir(m_path[i]);
+	for (uint32_t i = 0; i < path_.size(); ++i)
+		path_[i] = get_reverse_dir(path_[i]);
 }
 
 
@@ -159,10 +159,10 @@ Truncate the path after the given number of steps
 ===============
 */
 void CoordPath::truncate(const std::vector<char>::size_type after) {
-	assert(after <= m_path.size());
+	assert(after <= path_.size());
 
-	m_path.erase(m_path.begin() + after, m_path.end());
-	m_coords.erase(m_coords.begin() + after + 1, m_coords.end());
+	path_.erase(path_.begin() + after, path_.end());
+	coords_.erase(coords_.begin() + after + 1, coords_.end());
 }
 
 /*
@@ -171,10 +171,10 @@ Opposite of truncate: remove the first n steps of the path.
 ===============
 */
 void CoordPath::trim_start(const std::vector<char>::size_type before) {
-	assert(before <= m_path.size());
+	assert(before <= path_.size());
 
-	m_path.erase(m_path.begin(), m_path.begin() + before);
-	m_coords.erase(m_coords.begin(), m_coords.begin() + before);
+	path_.erase(path_.begin(), path_.begin() + before);
+	coords_.erase(coords_.begin(), coords_.begin() + before);
 }
 
 /*
@@ -192,8 +192,8 @@ void CoordPath::append(const Map & map, const Path & tail) {
 		const char dir = tail[i];
 
 		map.get_neighbour(c, dir, &c);
-		m_path.push_back(dir);
-		m_coords.push_back(c);
+		path_.push_back(dir);
+		coords_.push_back(c);
 	}
 }
 
@@ -206,9 +206,9 @@ void CoordPath::append(const CoordPath & tail)
 {
 	assert(tail.get_start() == get_end());
 
-	m_path.insert(m_path.end(), tail.m_path.begin(), tail.m_path.end());
-	m_coords.insert
-		(m_coords.end(), tail.m_coords.begin() + 1, tail.m_coords.end());
+	path_.insert(path_.end(), tail.path_.begin(), tail.path_.end());
+	coords_.insert
+		(coords_.end(), tail.coords_.begin() + 1, tail.coords_.end());
 }
 
 }

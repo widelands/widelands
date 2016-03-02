@@ -90,9 +90,8 @@ end
 --          are filled with workers by default.
 --    :type b1_descr: :class:`array`
 function prefilled_buildings(p, ...)
-   -- TODO(GunChleoc) this should produce an error message if a building/ware/worker doesn't exist.
    for idx,bdescr in ipairs({...}) do
-      b = p:place_building(bdescr[1], wl.Game().map:get_field(bdescr[2],bdescr[3]), false, true)
+      local b = p:place_building(bdescr[1], wl.Game().map:get_field(bdescr[2],bdescr[3]), false, true)
       -- Fill with workers
       if b.valid_workers then b:set_workers(b.valid_workers) end
       if bdescr.workers then b:set_workers(bdescr.workers) end
@@ -153,9 +152,11 @@ function place_building_in_region(
       end
       table.remove(fields, idx)
    end
-   error(string.format(
-      "Could not find a suitable position for building '%s' for player %i",
-      building, plr.number)
+   plr:send_message(
+      -- TRANSLATORS: Short for "Not enough space"
+      _"No Space",
+      rt(p(_([[Some of your starting buildings didn’t have enough room and weren’t built. You are at a disadvantage with this; consider restarting this map with a fair starting condition.]]))),
+      {popup=true, heading=_"Not enough space"}
    )
 end
 
