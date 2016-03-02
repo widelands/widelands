@@ -206,4 +206,13 @@ DescriptionIndex WorkerDescr::worker_index() const {
 	return egbase_.tribes().worker_index(name());
 }
 
+void WorkerDescr::add_employer(const DescriptionIndex& building_index) {
+	employers_.insert(building_index);
 }
+
+const std::set<DescriptionIndex>& WorkerDescr::employers() const {
+	return employers_;
+}
+
+
+} // namespace Widelands

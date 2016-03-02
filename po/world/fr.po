@@ -2,7 +2,7 @@
 # Copyright (C) 2005-2016 Widelands Development Team
 # 
 # Translators:
-# adrien vigneron <adrienvigneron@ml1.net>, 2015
+# adrien vigneron <adrienvigneron@ml1.net>, 2015-2016
 # Jaypad <ju-ju@nataju.fr>, 2016
 # Renaud Bouchard, 2015
 # syl_, 2016
@@ -10,9 +10,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-02-14 16:47+0000\n"
-"PO-Revision-Date: 2016-02-15 22:03+0000\n"
-"Last-Translator: syl_\n"
+"POT-Creation-Date: 2016-02-20 12:30+0000\n"
+"PO-Revision-Date: 2016-02-27 19:43+0000\n"
+"Last-Translator: adrien vigneron <adrienvigneron@ml1.net>\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -333,7 +333,7 @@ msgstr "Sapin Cirrus (Vieux)"
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/cirrus/init.lua:87
 msgid "Cirrus Tree"
-msgstr ""
+msgstr "Arbre Cirrus"
 
 #: ../../data/world/immovables/trees/deadtree1/init.lua:5
 #: ../../data/world/immovables/trees/deadtree2/init.lua:5
@@ -391,7 +391,7 @@ msgstr "Arbre liane (Vieux)"
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/liana/init.lua:90
 msgid "Liana Tree"
-msgstr ""
+msgstr "Arbre à lianes"
 
 #: ../../data/world/immovables/trees/maple/init.lua:12
 msgid "Maple (Sapling)"
@@ -436,7 +436,7 @@ msgstr "Champignon boisé sombre (Vieux)"
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/mushroom_dark/init.lua:87
 msgid "Dark Mushroom Tree"
-msgstr ""
+msgstr "Arbre à champignons noirs"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/mushroom_green/init.lua:13
@@ -461,7 +461,7 @@ msgstr "Champignon boisé vert (Vieux)"
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/mushroom_green/init.lua:87
 msgid "Green Mushroom Tree"
-msgstr ""
+msgstr "Arbre à champignons verts"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/mushroom_red/init.lua:13
@@ -486,7 +486,7 @@ msgstr "Champignon boisé rouge (Vieux)"
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/mushroom_red/init.lua:90
 msgid "Red Mushroom Tree"
-msgstr ""
+msgstr "Arbre à champignons rouges"
 
 #: ../../data/world/immovables/trees/oak/init.lua:12
 msgid "Oak (Sapling)"
@@ -526,7 +526,7 @@ msgstr "Palmier de Palmyre (Vieux)"
 
 #: ../../data/world/immovables/trees/palm_borassus/init.lua:82
 msgid "Borassus Palm"
-msgstr ""
+msgstr "Palmier de Palmyre"
 
 #: ../../data/world/immovables/trees/palm_coconut/init.lua:12
 msgid "Coconut Palm (Sapling)"
@@ -546,7 +546,7 @@ msgstr "Cocotier (Vieux)"
 
 #: ../../data/world/immovables/trees/palm_coconut/init.lua:82
 msgid "Coconut Palm"
-msgstr ""
+msgstr "Cocotier"
 
 #: ../../data/world/immovables/trees/palm_date/init.lua:12
 msgid "Date Palm (Sapling)"
@@ -566,7 +566,7 @@ msgstr "Palmier Dattier (Vieux)"
 
 #: ../../data/world/immovables/trees/palm_date/init.lua:85
 msgid "Date Palm"
-msgstr ""
+msgstr "Palmier Dattier"
 
 #: ../../data/world/immovables/trees/palm_oil/init.lua:12
 msgid "Oil Palm (Sapling)"
@@ -586,7 +586,7 @@ msgstr "Palmier à huile (Vieux)"
 
 #: ../../data/world/immovables/trees/palm_oil/init.lua:86
 msgid "Oil Palm"
-msgstr ""
+msgstr "Palmier à huile"
 
 #: ../../data/world/immovables/trees/palm_roystonea/init.lua:12
 msgid "Roystonea regia Palm (Sapling)"
@@ -606,7 +606,7 @@ msgstr "Palmier Royal (Vieux)"
 
 #: ../../data/world/immovables/trees/palm_roystonea/init.lua:82
 msgid "Roystonea regia Palm"
-msgstr ""
+msgstr "Palmier Royal"
 
 #: ../../data/world/immovables/trees/rowan/init.lua:12
 msgid "Rowan (Sapling)"
@@ -671,7 +671,7 @@ msgstr "Arbre à ficelle (Vieux)"
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/twine/init.lua:87
 msgid "Twine Tree"
-msgstr ""
+msgstr "Arbre à ficelle"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/umbrella_green/init.lua:13
@@ -696,7 +696,7 @@ msgstr "Arbre ombrelle vert (Vieux)"
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/umbrella_green/init.lua:87
 msgid "Green Umbrella Tree"
-msgstr ""
+msgstr "Arbre ombrelle vert"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/umbrella_red/init.lua:13
@@ -721,7 +721,7 @@ msgstr "Arbre ombrelle rouge (Vieux)"
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/umbrella_red/init.lua:90
 msgid "Red Umbrella Tree"
-msgstr ""
+msgstr "Arbre ombrelle rouge"
 
 #: ../../data/world/init.lua:11
 msgid "Miscellaneous"

@@ -4,14 +4,14 @@
 # Translators:
 # Gabriel Rota <gabriel.rota@gmail.com>, 2009
 # Guybrush88 <erpizzo@alice.it>, 2015-2016
-# Luigi Lain <lainluigi86@tiscali.it>, 2015
+# Luigi Lain <lainluigi86@tiscali.it>, 2015-2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-02-16 09:25+0000\n"
-"PO-Revision-Date: 2016-02-17 08:37+0000\n"
-"Last-Translator: Guybrush88 <erpizzo@alice.it>\n"
+"POT-Creation-Date: 2016-02-20 12:30+0000\n"
+"PO-Revision-Date: 2016-02-24 23:02+0000\n"
+"Last-Translator: Luigi Lain <lainluigi86@tiscali.it>\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -247,7 +247,7 @@ msgstr "Ontano (vecchio)"
 
 #: ../../data/world/immovables/trees/alder/init.lua:90
 msgid "Alder"
-msgstr ""
+msgstr "Ontano"
 
 #: ../../data/world/immovables/trees/aspen/init.lua:12
 msgid "Aspen (Sapling)"
@@ -267,7 +267,7 @@ msgstr "Pioppo tremulo (vecchio)"
 
 #: ../../data/world/immovables/trees/aspen/init.lua:85
 msgid "Aspen"
-msgstr ""
+msgstr "Pioppo tremulo"
 
 #: ../../data/world/immovables/trees/beech/init.lua:12
 msgid "Beech (Sapling)"
@@ -287,7 +287,7 @@ msgstr "Faggio (vecchio)"
 
 #: ../../data/world/immovables/trees/beech/init.lua:82
 msgid "Beech"
-msgstr ""
+msgstr "Faggio"
 
 #: ../../data/world/immovables/trees/birch/init.lua:12
 msgid "Birch (Sapling)"
@@ -332,7 +332,7 @@ msgstr "Albero vecchio di cirro"
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/cirrus/init.lua:87
 msgid "Cirrus Tree"
-msgstr ""
+msgstr "Albero di cirro"
 
 #: ../../data/world/immovables/trees/deadtree1/init.lua:5
 #: ../../data/world/immovables/trees/deadtree2/init.lua:5
@@ -435,7 +435,7 @@ msgstr "Albero a fungo scuro (vecchio)"
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/mushroom_dark/init.lua:87
 msgid "Dark Mushroom Tree"
-msgstr ""
+msgstr "Albero a fungo scuro"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/mushroom_green/init.lua:13
@@ -460,7 +460,7 @@ msgstr "Albero a fungo verde (vecchio)"
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/mushroom_green/init.lua:87
 msgid "Green Mushroom Tree"
-msgstr ""
+msgstr "Albero a fungo verde"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/mushroom_red/init.lua:13
@@ -485,7 +485,7 @@ msgstr "Albero a fungo rosso (vecchio)"
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/mushroom_red/init.lua:90
 msgid "Red Mushroom Tree"
-msgstr ""
+msgstr "Albero a fungo rosso"
 
 #: ../../data/world/immovables/trees/oak/init.lua:12
 msgid "Oak (Sapling)"
@@ -525,7 +525,7 @@ msgstr "Borassus (vecchia)"
 
 #: ../../data/world/immovables/trees/palm_borassus/init.lua:82
 msgid "Borassus Palm"
-msgstr ""
+msgstr "Borassus "
 
 #: ../../data/world/immovables/trees/palm_coconut/init.lua:12
 msgid "Coconut Palm (Sapling)"
@@ -565,7 +565,7 @@ msgstr "Palma da datteri (vecchia)"
 
 #: ../../data/world/immovables/trees/palm_date/init.lua:85
 msgid "Date Palm"
-msgstr ""
+msgstr "Palma da datteri "
 
 #: ../../data/world/immovables/trees/palm_oil/init.lua:12
 msgid "Oil Palm (Sapling)"
@@ -605,7 +605,7 @@ msgstr "Palma Roystonea reale (vecchia)"
 
 #: ../../data/world/immovables/trees/palm_roystonea/init.lua:82
 msgid "Roystonea regia Palm"
-msgstr ""
+msgstr "Palma Roystonea reale"
 
 #: ../../data/world/immovables/trees/rowan/init.lua:12
 msgid "Rowan (Sapling)"
@@ -670,7 +670,7 @@ msgstr "Albero a cordicella (vecchio)"
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/twine/init.lua:87
 msgid "Twine Tree"
-msgstr ""
+msgstr "Albero a cordicella "
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/umbrella_green/init.lua:13
@@ -695,7 +695,7 @@ msgstr "Albero ad ombrello verde (vecchio)"
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/umbrella_green/init.lua:87
 msgid "Green Umbrella Tree"
-msgstr ""
+msgstr "Albero ad ombrello verde "
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/umbrella_red/init.lua:13
@@ -720,7 +720,7 @@ msgstr "Albero ad ombrello rosso (vecchio)"
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/umbrella_red/init.lua:90
 msgid "Red Umbrella Tree"
-msgstr ""
+msgstr "Albero ad ombrello rosso"
 
 #: ../../data/world/init.lua:11
 msgid "Miscellaneous"

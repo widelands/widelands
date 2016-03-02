@@ -48,7 +48,7 @@ void GamePlayerEconomiesPacket::read
 		if (packet_version == kCurrentPacketVersion) {
 			iterate_players_existing(p, nr_players, game, player)
 				try {
-					Player::Economies & economies = player->m_economies;
+					Player::Economies & economies = player->economies_;
 					for (uint32_t i = 0; i < economies.size(); ++i) {
 						uint32_t value = fr.unsigned_32();
 						if (value < 0xffffffff) {
@@ -106,7 +106,7 @@ void GamePlayerEconomiesPacket::write
 	const Field & field_0 = map[0];
 	PlayerNumber const nr_players = map.get_nrplayers();
 	iterate_players_existing_const(p, nr_players, game, player) {
-		const Player::Economies & economies = player->m_economies;
+		const Player::Economies & economies = player->economies_;
 		for (Economy * temp_economy : economies) {
 			bool wrote_this_economy = false;
 

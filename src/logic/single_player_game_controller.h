@@ -42,15 +42,15 @@ public:
 	void report_result(uint8_t player, Widelands::PlayerEndResult result, const std::string & info) override;
 
 private:
-	Widelands::Game & m_game;
-	bool m_useai;
-	int32_t m_lastframe;
-	int32_t m_time;
-	uint32_t m_speed; ///< current game speed, in milliseconds per second
-	bool m_paused;
-	uint32_t m_player_cmdserial;
-	Widelands::PlayerNumber m_local;
-	std::vector<ComputerPlayer *> m_computerplayers;
+	Widelands::Game & game_;
+	bool use_ai_;
+	int32_t lastframe_;
+	int32_t time_;
+	uint32_t speed_; ///< current game speed, in milliseconds per second
+	bool paused_;
+	uint32_t player_cmdserial_;
+	Widelands::PlayerNumber local_;
+	std::vector<ComputerPlayer *> computerplayers_;
 };
 
 #endif  // end of include guard: WL_LOGIC_SINGLE_PLAYER_GAME_CONTROLLER_H
