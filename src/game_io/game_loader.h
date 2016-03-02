@@ -43,8 +43,8 @@ struct GameLoader {
 	int32_t    load_game(bool multiplayer = false);
 
 private:
-	FileSystem & m_fs;
-	Game       & m_game;
+	FileSystem & fs_;
+	Game       & game_;
 };
 
 }

@@ -43,8 +43,8 @@ struct GameSaver {
 	void save();
 
 private:
-	FileSystem & m_fs;
-	Game       & m_game;
+	FileSystem & fs_;
+	Game       & game_;
 };
 
 }
