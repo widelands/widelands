@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-02-16 09:25+0000\n"
-"PO-Revision-Date: 2016-02-16 10:51+0000\n"
+"POT-Creation-Date: 2016-03-01 09:34+0000\n"
+"PO-Revision-Date: 2016-03-01 10:36+0000\n"
 "Last-Translator: Lyubomir Vasilev\n"
 "Language-Team: Bulgarian (http://www.transifex.com/widelands/widelands/language/bg/)\n"
 "MIME-Version: 1.0\n"
@@ -21,6 +21,43 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language: bg\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: ../../data/scripting/editor/terrain_help.lua:21
+#: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:54
+#: ../../src/editor/ui_menus/editor_tool_menu.cc:71
+msgid "Resources"
+msgstr "Ресурси"
+
+#: ../../data/scripting/editor/terrain_help.lua:35
+msgid "%1%x %2%"
+msgstr "%1%х %2%"
+
+#: ../../data/scripting/editor/terrain_help.lua:35
+msgid "Default:"
+msgstr "По подразбиране:"
+
+#: ../../data/scripting/editor/terrain_help.lua:67
+msgid "Probability of trees growing"
+msgstr "Шанс да растат дървета"
+
+#: ../../data/scripting/editor/terrain_help.lua:72
+msgid "No trees will grow here."
+msgstr "Тук няма да растат дървета."
+
+#: ../../data/scripting/editor/tree_help.lua:17
+msgid "Preferred terrains"
+msgstr "Предпочитани видове терен"
+
+#. * TRANSLATORS: File name for saving objective achieved
+#. * TRANSLATORS: %1% = map name. %2% = achievement name
+#. * TRANSLATORS: %1% is a filename, %2% a map's name.
+#. * TRANSLATORS: Terrain name + editor category, e.g. Steppe (Summer)
+#: ../../data/scripting/editor/tree_help.lua:38
+#: ../../src/editor/ui_menus/editor_help.cc:157
+#: ../../src/editor/ui_menus/editor_help.cc:195
+#: ../../src/scripting/lua_game.cc:1060 ../../src/ui_fsmenu/loadgame.cc:74
+msgid "%1% (%2%)"
+msgstr "%1% (%2%)"
 
 #. * TRANSLATORS: This is a heading for a help window
 #: ../../data/scripting/widelands/multiplayer_help.lua:10
@@ -341,7 +378,7 @@ msgstr "Картата не е запазена, сигурни ли сте, ч�
 
 #: ../../src/editor/editorinteractive.cc:632
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:120
-msgid "Creating empty map..."
+msgid "Creating empty map…"
 msgstr "Създаване на празна карта…"
 
 #. * TRANSLATORS: Default name for new map
@@ -362,7 +399,7 @@ msgstr "Неизвестно"
 
 #: ../../src/editor/editorinteractive.cc:647
 #, c-format
-msgid "Loading map \"%s\"..."
+msgid "Loading map “%s”…"
 msgstr "Зареждане на картата „%s“…"
 
 #: ../../src/editor/map_generator.cc:792
@@ -558,16 +595,6 @@ msgstr "Терени"
 #: ../../src/editor/ui_menus/editor_help.cc:80
 msgid "Trees"
 msgstr "Дървета"
-
-#. * TRANSLATORS: File name for saving objective achieved
-#. * TRANSLATORS: %1% = map name. %2% = achievement name
-#. * TRANSLATORS: %1% is a filename, %2% a map's name.
-#. * TRANSLATORS: Terrain name + editor category, e.g. Steppe (Summer)
-#: ../../src/editor/ui_menus/editor_help.cc:157
-#: ../../src/editor/ui_menus/editor_help.cc:195
-#: ../../src/scripting/lua_game.cc:1060 ../../src/ui_fsmenu/loadgame.cc:74
-msgid "%1% (%2%)"
-msgstr "%1% (%2%)"
 
 #: ../../src/editor/ui_menus/editor_main_menu.cc:46
 msgid "Main Menu"
@@ -832,8 +859,8 @@ msgid "Generate Map"
 msgstr "Създаване на карта"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:452
-msgid "Generating random map..."
-msgstr "Създаване на произволна карта..."
+msgid "Generating random map…"
+msgstr "Създаване на произволна карта…"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:61
 #: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:28
@@ -849,26 +876,26 @@ msgstr "Име на файл:"
 msgid "unnamed"
 msgstr "без име"
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:243
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:239
 #: ../../src/wui/game_main_menu_save_game.cc:260
 #, c-format
 msgid "A file with the name ‘%s’ already exists. Overwrite?"
 msgstr "Вече съществува файл с името „%s“. Презаписване?"
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:246
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:259
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:309
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:242
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:255
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:302
 msgid "Error Saving Map!"
 msgstr "Грешка при запазването на картата!"
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:256
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:252
 #, c-format
 msgid ""
 "A file with the name ‘%s.tmp’ already exists. You have to remove it "
 "manually."
 msgstr "Вече съществува файл с името „%s.tmp“. Трябва да го премахнете ръчно."
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:305
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:298
 msgid ""
 "Error Saving Map!\n"
 "Saved map file may be corrupt!\n"
@@ -900,7 +927,7 @@ msgstr "Брой играчи"
 #: ../../src/editor/ui_menus/editor_player_menu.cc:232
 #: ../../src/logic/map.cc:315
 #: ../../src/logic/single_player_game_settings_provider.cc:88
-#: ../../src/network/nethost.cc:1698 ../../src/ui_fsmenu/launch_mpg.cc:581
+#: ../../src/network/nethost.cc:1700 ../../src/ui_fsmenu/launch_mpg.cc:581
 #: ../../src/wui/multiplayersetupgroup.cc:142
 #: ../../src/wui/multiplayersetupgroup.cc:304
 #, c-format
@@ -931,11 +958,6 @@ msgstr "Увел./намал. на стойността"
 #: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:89
 msgid "Set Value"
 msgstr "Задаване на стойност"
-
-#: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:54
-#: ../../src/editor/ui_menus/editor_tool_menu.cc:71
-msgid "Resources"
-msgstr "Ресурси"
 
 #: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:108
 msgid "Current Selection"
@@ -1028,12 +1050,12 @@ msgid "Scenario"
 msgstr "Сценарий"
 
 #: ../../src/logic/game.cc:244 ../../src/logic/game.cc:324
-msgid "Loading map"
-msgstr "Зареждане на картата"
+msgid "Loading map…"
+msgstr "Зареждане на картата…"
 
 #: ../../src/logic/game.cc:366 ../../src/logic/game.cc:399
-#: ../../src/wlapplication.cc:1377
-msgid "Loading..."
+#: ../../src/ui_basic/progresswindow.cc:50 ../../src/wlapplication.cc:1377
+msgid "Loading…"
 msgstr "Зареждане…"
 
 #: ../../src/logic/game.cc:463
@@ -1470,8 +1492,8 @@ msgid ""
 msgstr "Краят на повторението е достигнат и играта е на пауза. Можете да пуснете играта отново и да продължите да гледате, ако искате."
 
 #: ../../src/logic/save_handler.cc:106
-msgid "Saving game..."
-msgstr "Запазване на играта..."
+msgid "Saving game…"
+msgstr "Запазване на играта…"
 
 #: ../../src/logic/save_handler.cc:125
 msgid "Saving failed!"
@@ -1486,7 +1508,7 @@ msgid "Bluebyte Settlers II Map. No comment defined!"
 msgstr "Карта Bluebyte Settlers II. Няма коментари!"
 
 #: ../../src/network/internet_gaming.cc:114
-#: ../../src/ui_fsmenu/internet_lobby.cc:415
+#: ../../src/ui_fsmenu/internet_lobby.cc:425
 msgid "Connection problem"
 msgstr "Проблем с връзката"
 
@@ -1599,26 +1621,26 @@ msgstr "ГРЕШКА: %s"
 msgid "Received an unknown command from the metaserver: %s"
 msgstr "Получена е непозната команда от мета сървъра: %s"
 
-#: ../../src/network/internet_gaming.cc:754
+#: ../../src/network/internet_gaming.cc:752
 msgid "Message could not be sent: You are not connected to the metaserver!"
 msgstr "Съобщението не може да бъде изпратено: Не сте свързани с мета сървъра!"
 
-#: ../../src/network/internet_gaming.cc:766
+#: ../../src/network/internet_gaming.cc:764
 msgid "Message could not be sent: Was this supposed to be a private message?"
 msgstr "Съобщението не може да бъде изпратено: Трябваше ли да бъде тайно съобщение?"
 
-#: ../../src/network/internet_gaming.cc:840
+#: ../../src/network/internet_gaming.cc:838
 msgid "Conversion error"
 msgstr "Грешка при превръщането"
 
 #. * TRANSLATORS: Geeky message from the metaserver
 #. * TRANSLATORS: This message is shown if %s isn't "true" or "false"
-#: ../../src/network/internet_gaming.cc:843
+#: ../../src/network/internet_gaming.cc:841
 #, c-format
 msgid "Unable to determine truth value for \"%s\""
 msgstr "Не може да бъде установена вярната стойност за „%s“"
 
-#: ../../src/network/internet_gaming.cc:859
+#: ../../src/network/internet_gaming.cc:857
 msgid "unknown"
 msgstr "неизвестно"
 
@@ -1692,7 +1714,7 @@ msgid ""
 "the server shut down as you tried to connect."
 msgstr "Widelands не може да установи връзка с посочения адрес. Или \nтам няма сървър на Widelands, работещ на очаквания порт, или\nсървърът е бил спрян докато сте се свързвали."
 
-#: ../../src/network/netclient.cc:184 ../../src/network/nethost.cc:727
+#: ../../src/network/netclient.cc:184 ../../src/network/nethost.cc:729
 #: ../../src/wlapplication.cc:1267
 msgid "Preparing game"
 msgstr "Подготовка на играта"
@@ -1805,16 +1827,16 @@ msgstr "Играта не е в насилена пауза – няма как�
 msgid "Invalid command! Type /help for a list of commands."
 msgstr "Грешна команда! Въведете /help за списък на всички команди."
 
-#: ../../src/network/nethost.cc:1632
+#: ../../src/network/nethost.cc:1634
 #, c-format
 msgid "Computer %u"
 msgstr "Компютър %u"
 
-#: ../../src/network/nethost.cc:1692 ../../src/wui/game_summary.cc:119
+#: ../../src/network/nethost.cc:1694 ../../src/wui/game_summary.cc:119
 msgid "Player"
 msgstr "Играч"
 
-#: ../../src/network/nethost.cc:1857
+#: ../../src/network/nethost.cc:1859
 #, c-format
 msgid "%li second"
 msgid_plural "%li seconds"
@@ -2048,10 +2070,6 @@ msgstr "не"
 #: ../../src/profile/profile.cc:73
 msgid "off"
 msgstr "изкл."
-
-#: ../../src/ui_basic/progresswindow.cc:46
-msgid "Preparing..."
-msgstr "Подготвяне…"
 
 #: ../../src/ui_basic/spinbox.cc:149
 msgid "Decrease the value"
@@ -2299,31 +2317,31 @@ msgstr "Точки"
 msgid "Game"
 msgstr "Игра"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:384
+#: ../../src/ui_fsmenu/internet_lobby.cc:394
 msgid ""
 "Widelands was unable to get the IP address of the server in time.\n"
 "There seems to be a network problem, either on your side or on the side\n"
 "of the server.\n"
 msgstr "Widelands не успя да получи IP адреса на сървъра навреме.\nИзглежда има проблем с мрежата – Вашата или тази на\nсървъра.\n"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:388
+#: ../../src/ui_fsmenu/internet_lobby.cc:398
 msgid "Connection timed out"
 msgstr "Просрочено време за връзка"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:416
+#: ../../src/ui_fsmenu/internet_lobby.cc:426
 msgid "Widelands was unable to connect to the host."
 msgstr "Widelands не успя да се свърже със сървъра."
 
 #. * TRANSLATORS: This is shown for multiplayer games when no host
 #. * TRANSLATORS: server to connect to has been specified yet.
-#: ../../src/ui_fsmenu/internet_lobby.cc:438
+#: ../../src/ui_fsmenu/internet_lobby.cc:448
 msgctxt "server_name"
 msgid "unnamed"
 msgstr "без име"
 
 #: ../../src/ui_fsmenu/intro.cc:32
-msgid "Press any key or click to continue ..."
-msgstr "Натиснете произволен клавиш или щракнете, за да продължите..."
+msgid "Press any key or click to continue…"
+msgstr "Натиснете произволен клавиш или щракнете, за да продължите…"
 
 #. * TRANSLATORS: Dialog box title for selecting between map or saved game for
 #. new multiplayer game

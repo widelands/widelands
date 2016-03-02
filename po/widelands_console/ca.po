@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-02-16 09:25+0000\n"
-"PO-Revision-Date: 2016-02-18 18:29+0000\n"
+"POT-Creation-Date: 2016-02-20 12:30+0000\n"
+"PO-Revision-Date: 2016-02-20 13:01+0000\n"
 "Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -26,7 +26,7 @@ msgstr "Esteu emprant Widelands - Build %s."
 
 #: ../../src/wlapplication_messages.cc:43
 msgid "Usage: widelands <option0>=<value0> ... <optionN>=<valueN>"
-msgstr "Ús: widelands <opció0>=<valor0> ... <opcióN>=<valorN>"
+msgstr "Ús: widelands <opció0>=<valor0> … <opcióN>=<valorN>"
 
 #: ../../src/wlapplication_messages.cc:44
 msgid "Options:"
@@ -72,7 +72,7 @@ msgstr " --coredump=[true|false]\n                      Genera un bolcat del nuc
 msgid ""
 " --language=[de_DE|sv_SE|...]\n"
 "                      The locale to use."
-msgstr " --language=[de_DE|sv_SE|...]\n                      La configuració regional a emprar."
+msgstr " --language=[de_DE|sv_SE|…]\n                      La configuració regional a emprar."
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
@@ -85,13 +85,13 @@ msgstr " --write_syncstreams=[true|false]\n                      Inclou els flux
 
 #: ../../src/wlapplication_messages.cc:68
 msgid " --autosave=[...]     Automatically save each n minutes"
-msgstr " --autosave=[...]     Desa automàticament cada n minuts"
+msgstr " --autosave=[…]     Desa automàticament cada n minuts"
 
 #: ../../src/wlapplication_messages.cc:69
 msgid ""
 " --rolling_autosave=[...]\n"
 "                      Use this many files for rolling autosaves"
-msgstr " --rolling_autosave=[...]\n                      Usa aquests arxius per a les partides\n                      desades automàticament"
+msgstr " --rolling_autosave=[…]\n                      Usa aquests arxius per a les partides\n                      desades automàticament"
 
 #: ../../src/wlapplication_messages.cc:72
 msgid "Sound options:"
@@ -163,11 +163,11 @@ msgstr " --fullscreen=[true|false]\n                      Empra o no la pantalla
 
 #: ../../src/wlapplication_messages.cc:97
 msgid " --xres=[...]         Width of the window in pixel."
-msgstr " --xres=[...]         Amplada de la finestra en píxels."
+msgstr " --xres=[…]         Amplada de la finestra en píxels."
 
 #: ../../src/wlapplication_messages.cc:98
 msgid " --yres=[...]         Height of the window in pixel."
-msgstr " --yres=[...]         Alçada de la finestra en píxels."
+msgstr " --yres=[…]         Alçada de la finestra en píxels."
 
 #: ../../src/wlapplication_messages.cc:102
 msgid "Options for the internal window manager:"
@@ -179,7 +179,7 @@ msgid ""
 "                      Move a window to the edge of the screen\n"
 "                      when the edge of the window comes within\n"
 "                      this distance from the edge of the screen."
-msgstr " --border_snap_distance=[0 ...]\n                      Acobla la finestra a la vora de la pantalla\n                      quan les seves vores estiguin a una\n                      distància menor que l'escollida."
+msgstr " --border_snap_distance=[0 …]\n                      Acobla la finestra a la vora de la pantalla\n                      quan les seves vores estiguin a una\n                      distància menor que l'escollida."
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
@@ -198,7 +198,7 @@ msgid ""
 "                      Move a window to the edge of the panel when\n"
 "                      the edge of the window comes within this\n"
 "                      distance from the edge of the panel."
-msgstr " --panel_snap_distance=[0 ...]\n                      Moure una finestra cap a la vora del plafó\n                      quan la vora i el plafó estigui a menys\n                      distància de la definida per aquesta opció."
+msgstr " --panel_snap_distance=[0 …]\n                      Moure una finestra cap a la vora del plafó\n                      quan la vora i el plafó estigui a menys\n                      distància de la definida per aquesta opció."
 
 #: ../../src/wlapplication_messages.cc:117
 msgid ""
