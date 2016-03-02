@@ -239,7 +239,7 @@ private:
 	bool run_geologist        (Game &, State &, const Action &);
 	bool run_geologist_find   (Game &, State &, const Action &);
 	bool run_scout            (Game &, State &, const Action &);
-	bool run_playfx           (Game &, State &, const Action &);
+	bool run_play_sound       (Game &, State &, const Action &);
 	bool run_construct        (Game &, State &, const Action &);
 
 	OPtr<PlayerImmovable> location_; ///< meta location of the worker

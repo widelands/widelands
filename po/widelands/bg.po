@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-02-16 09:25+0000\n"
-"PO-Revision-Date: 2016-02-16 10:51+0000\n"
+"POT-Creation-Date: 2016-02-20 12:30+0000\n"
+"PO-Revision-Date: 2016-02-21 21:33+0000\n"
 "Last-Translator: Lyubomir Vasilev\n"
 "Language-Team: Bulgarian (http://www.transifex.com/widelands/widelands/language/bg/)\n"
 "MIME-Version: 1.0\n"
@@ -341,7 +341,7 @@ msgstr "Картата не е запазена, сигурни ли сте, ч�
 
 #: ../../src/editor/editorinteractive.cc:632
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:120
-msgid "Creating empty map..."
+msgid "Creating empty map…"
 msgstr "Създаване на празна карта…"
 
 #. * TRANSLATORS: Default name for new map
@@ -362,7 +362,7 @@ msgstr "Неизвестно"
 
 #: ../../src/editor/editorinteractive.cc:647
 #, c-format
-msgid "Loading map \"%s\"..."
+msgid "Loading map “%s”…"
 msgstr "Зареждане на картата „%s“…"
 
 #: ../../src/editor/map_generator.cc:792
@@ -832,8 +832,8 @@ msgid "Generate Map"
 msgstr "Създаване на карта"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:452
-msgid "Generating random map..."
-msgstr "Създаване на произволна карта..."
+msgid "Generating random map…"
+msgstr "Създаване на произволна карта…"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:61
 #: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:28
@@ -1028,12 +1028,12 @@ msgid "Scenario"
 msgstr "Сценарий"
 
 #: ../../src/logic/game.cc:244 ../../src/logic/game.cc:324
-msgid "Loading map"
-msgstr "Зареждане на картата"
+msgid "Loading map…"
+msgstr "Зареждане на картата…"
 
 #: ../../src/logic/game.cc:366 ../../src/logic/game.cc:399
-#: ../../src/wlapplication.cc:1377
-msgid "Loading..."
+#: ../../src/ui_basic/progresswindow.cc:50 ../../src/wlapplication.cc:1377
+msgid "Loading…"
 msgstr "Зареждане…"
 
 #: ../../src/logic/game.cc:463
@@ -1470,8 +1470,8 @@ msgid ""
 msgstr "Краят на повторението е достигнат и играта е на пауза. Можете да пуснете играта отново и да продължите да гледате, ако искате."
 
 #: ../../src/logic/save_handler.cc:106
-msgid "Saving game..."
-msgstr "Запазване на играта..."
+msgid "Saving game…"
+msgstr "Запазване на играта…"
 
 #: ../../src/logic/save_handler.cc:125
 msgid "Saving failed!"
@@ -2049,10 +2049,6 @@ msgstr "не"
 msgid "off"
 msgstr "изкл."
 
-#: ../../src/ui_basic/progresswindow.cc:46
-msgid "Preparing..."
-msgstr "Подготвяне…"
-
 #: ../../src/ui_basic/spinbox.cc:149
 msgid "Decrease the value"
 msgstr "Намаляване на стойността"
@@ -2322,8 +2318,8 @@ msgid "unnamed"
 msgstr "без име"
 
 #: ../../src/ui_fsmenu/intro.cc:32
-msgid "Press any key or click to continue ..."
-msgstr "Натиснете произволен клавиш или щракнете, за да продължите..."
+msgid "Press any key or click to continue…"
+msgstr "Натиснете произволен клавиш или щракнете, за да продължите…"
 
 #. * TRANSLATORS: Dialog box title for selecting between map or saved game for
 #. new multiplayer game
