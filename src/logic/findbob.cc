@@ -27,7 +27,7 @@ namespace Widelands {
 
 bool FindBobAttribute::accept(Bob * const bob) const
 {
-	return bob->has_attribute(m_attrib);
+	return bob->has_attribute(attrib);
 }
 
 bool FindBobEnemySoldier::accept(Bob * const imm) const
