@@ -72,7 +72,10 @@ std::string as_uifont
 
 // Same as as_aligned, but with the condensed font preselected.
 std::string as_condensed
-	(const std::string& text, UI::Align align = UI::Align::kLeft, int ptsize = UI_FONT_SIZE_SMALL, const RGBColor& clr = UI_FONT_CLR_FG);
+	(const std::string& text,
+	 UI::Align align = UI::Align::kLeft,
+	 int ptsize = UI_FONT_SIZE_SMALL,
+	 const RGBColor& clr = UI_FONT_CLR_FG);
 
 std::string as_editorfont(const std::string& text, int ptsize = UI_FONT_SIZE_SMALL,
 								  const RGBColor& clr = UI_FONT_CLR_FG);

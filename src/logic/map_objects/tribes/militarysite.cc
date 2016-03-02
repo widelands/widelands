@@ -147,7 +147,9 @@ void MilitarySite::update_statistics_string(std::string* s)
 					% present % (stationed - present)).str();
 		}
 	}
-	*s = (boost::format("<font color=%s>%s</font>") % UI_FONT_CLR_OK.hex_value() % *s).str();
+	*s = (boost::format("<font color=%s>%s</font>") % UI_FONT_CLR_OK.hex_value() %
+			// Line break to make Codecheck happy.
+			*s).str();
 
 }
 
