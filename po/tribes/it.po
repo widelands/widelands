@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-02-16 09:25+0000\n"
-"PO-Revision-Date: 2016-02-17 09:07+0000\n"
+"POT-Creation-Date: 2016-02-20 12:30+0000\n"
+"PO-Revision-Date: 2016-02-25 14:58+0000\n"
 "Last-Translator: Guybrush88 <erpizzo@alice.it>\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
@@ -3353,7 +3353,7 @@ msgstr "Geologo"
 #: ../../data/tribes/workers/barbarians/helmsmith/init.lua:17
 msgctxt "barbarians_worker"
 msgid "Helmsmith"
-msgstr ""
+msgstr "Fabbro d'elmi"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/barbarians/hunter/init.lua:18
@@ -3407,7 +3407,7 @@ msgstr "Bue"
 #: ../../data/tribes/workers/barbarians/ranger/init.lua:32
 msgctxt "barbarians_worker"
 msgid "Ranger"
-msgstr ""
+msgstr "Guardia forestale"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/barbarians/scout/init.lua:17

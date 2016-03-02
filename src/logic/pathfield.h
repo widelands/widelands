@@ -82,8 +82,8 @@ private:
 
 	using List = std::vector<boost::shared_ptr<Pathfields>>;
 
-	uint32_t m_nrfields;
-	List m_list;
+	uint32_t nrfields_;
+	List list_;
 };
 
 }
