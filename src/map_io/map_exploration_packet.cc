@@ -64,7 +64,7 @@ void MapExplorationPacket::read
 				for (uint8_t j = 0; j < nr_players; ++j) {
 					bool see = data & (1 << j);
 					if (Player * const player = egbase.get_player(j + 1))
-						player->m_fields[i].vision = see ? 1 : 0;
+						player->fields_[i].vision = see ? 1 : 0;
 					else if (see)
 					log
 						("MapExplorationPacket::read: WARNING: Player %u, "
