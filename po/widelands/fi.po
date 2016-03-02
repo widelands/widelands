@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-02-20 12:30+0000\n"
-"PO-Revision-Date: 2016-02-20 12:32+0000\n"
+"POT-Creation-Date: 2016-03-01 09:34+0000\n"
+"PO-Revision-Date: 2016-03-01 09:35+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
@@ -22,6 +22,43 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language: fi\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: ../../data/scripting/editor/terrain_help.lua:21
+#: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:54
+#: ../../src/editor/ui_menus/editor_tool_menu.cc:71
+msgid "Resources"
+msgstr "Resurssit"
+
+#: ../../data/scripting/editor/terrain_help.lua:35
+msgid "%1%x %2%"
+msgstr ""
+
+#: ../../data/scripting/editor/terrain_help.lua:35
+msgid "Default:"
+msgstr ""
+
+#: ../../data/scripting/editor/terrain_help.lua:67
+msgid "Probability of trees growing"
+msgstr ""
+
+#: ../../data/scripting/editor/terrain_help.lua:72
+msgid "No trees will grow here."
+msgstr ""
+
+#: ../../data/scripting/editor/tree_help.lua:17
+msgid "Preferred terrains"
+msgstr ""
+
+#. * TRANSLATORS: File name for saving objective achieved
+#. * TRANSLATORS: %1% = map name. %2% = achievement name
+#. * TRANSLATORS: %1% is a filename, %2% a map's name.
+#. * TRANSLATORS: Terrain name + editor category, e.g. Steppe (Summer)
+#: ../../data/scripting/editor/tree_help.lua:38
+#: ../../src/editor/ui_menus/editor_help.cc:157
+#: ../../src/editor/ui_menus/editor_help.cc:195
+#: ../../src/scripting/lua_game.cc:1060 ../../src/ui_fsmenu/loadgame.cc:74
+msgid "%1% (%2%)"
+msgstr "%1% (%2%)"
 
 #. * TRANSLATORS: This is a heading for a help window
 #: ../../data/scripting/widelands/multiplayer_help.lua:10
@@ -560,16 +597,6 @@ msgstr ""
 msgid "Trees"
 msgstr ""
 
-#. * TRANSLATORS: File name for saving objective achieved
-#. * TRANSLATORS: %1% = map name. %2% = achievement name
-#. * TRANSLATORS: %1% is a filename, %2% a map's name.
-#. * TRANSLATORS: Terrain name + editor category, e.g. Steppe (Summer)
-#: ../../src/editor/ui_menus/editor_help.cc:157
-#: ../../src/editor/ui_menus/editor_help.cc:195
-#: ../../src/scripting/lua_game.cc:1060 ../../src/ui_fsmenu/loadgame.cc:74
-msgid "%1% (%2%)"
-msgstr "%1% (%2%)"
-
 #: ../../src/editor/ui_menus/editor_main_menu.cc:46
 msgid "Main Menu"
 msgstr "Päävalikko"
@@ -850,26 +877,26 @@ msgstr "Tiedoston nimi:"
 msgid "unnamed"
 msgstr "nimetön"
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:243
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:239
 #: ../../src/wui/game_main_menu_save_game.cc:260
 #, c-format
 msgid "A file with the name ‘%s’ already exists. Overwrite?"
 msgstr "Tiedosto '%s' on jo olemassa. Ylikirjoitanko?"
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:246
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:259
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:309
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:242
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:255
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:302
 msgid "Error Saving Map!"
 msgstr "Kartan tallennus epäonnistui!"
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:256
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:252
 #, c-format
 msgid ""
 "A file with the name ‘%s.tmp’ already exists. You have to remove it "
 "manually."
 msgstr "Tiedosto nimeltään \"%s.tmp\" on jo olemassa. Poista se käsin."
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:305
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:298
 msgid ""
 "Error Saving Map!\n"
 "Saved map file may be corrupt!\n"
@@ -901,7 +928,7 @@ msgstr "Pelaajien määrä"
 #: ../../src/editor/ui_menus/editor_player_menu.cc:232
 #: ../../src/logic/map.cc:315
 #: ../../src/logic/single_player_game_settings_provider.cc:88
-#: ../../src/network/nethost.cc:1698 ../../src/ui_fsmenu/launch_mpg.cc:581
+#: ../../src/network/nethost.cc:1700 ../../src/ui_fsmenu/launch_mpg.cc:581
 #: ../../src/wui/multiplayersetupgroup.cc:142
 #: ../../src/wui/multiplayersetupgroup.cc:304
 #, c-format
@@ -932,11 +959,6 @@ msgstr "Nosta/laske arvoa"
 #: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:89
 msgid "Set Value"
 msgstr "Aseta arvo"
-
-#: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:54
-#: ../../src/editor/ui_menus/editor_tool_menu.cc:71
-msgid "Resources"
-msgstr "Resurssit"
 
 #: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:108
 msgid "Current Selection"
@@ -1487,7 +1509,7 @@ msgid "Bluebyte Settlers II Map. No comment defined!"
 msgstr "Kartta on Bluebyten Settlers II -muotoinen; kommenttia ei ole määritelty."
 
 #: ../../src/network/internet_gaming.cc:114
-#: ../../src/ui_fsmenu/internet_lobby.cc:415
+#: ../../src/ui_fsmenu/internet_lobby.cc:425
 msgid "Connection problem"
 msgstr "Yhteysongelma"
 
@@ -1600,26 +1622,26 @@ msgstr "VIRHE: %s"
 msgid "Received an unknown command from the metaserver: %s"
 msgstr "Vastaanotettiin tuntematon komento metapalvelimelta: %s"
 
-#: ../../src/network/internet_gaming.cc:754
+#: ../../src/network/internet_gaming.cc:752
 msgid "Message could not be sent: You are not connected to the metaserver!"
 msgstr "Viestin lähetys epäonnistui: Ei yhteyttä palvelimeen!"
 
-#: ../../src/network/internet_gaming.cc:766
+#: ../../src/network/internet_gaming.cc:764
 msgid "Message could not be sent: Was this supposed to be a private message?"
 msgstr "Viestinlähetys epäonnistui. Yrititkö lähettää yksityisviestin?"
 
-#: ../../src/network/internet_gaming.cc:840
+#: ../../src/network/internet_gaming.cc:838
 msgid "Conversion error"
 msgstr "Muunnos epäonnistui"
 
 #. * TRANSLATORS: Geeky message from the metaserver
 #. * TRANSLATORS: This message is shown if %s isn't "true" or "false"
-#: ../../src/network/internet_gaming.cc:843
+#: ../../src/network/internet_gaming.cc:841
 #, c-format
 msgid "Unable to determine truth value for \"%s\""
 msgstr "%s:n totuusarvo tuntematon"
 
-#: ../../src/network/internet_gaming.cc:859
+#: ../../src/network/internet_gaming.cc:857
 msgid "unknown"
 msgstr "tuntematon"
 
@@ -1693,7 +1715,7 @@ msgid ""
 "the server shut down as you tried to connect."
 msgstr "Widelands ei kyennyt muodostamaan yhteyttä annettuun osoitteeseen.\nJoko oletetussa portissa ei ole käynnissä Widelands-palvelinta tai\npalvelin sulkeutui kun yritit ottaa yhteyttä."
 
-#: ../../src/network/netclient.cc:184 ../../src/network/nethost.cc:727
+#: ../../src/network/netclient.cc:184 ../../src/network/nethost.cc:729
 #: ../../src/wlapplication.cc:1267
 msgid "Preparing game"
 msgstr "Valmistelen peliä"
@@ -1806,16 +1828,16 @@ msgstr "Pelitaukoa ei ole pakotettu."
 msgid "Invalid command! Type /help for a list of commands."
 msgstr "Virheellinen komento! Kirjoita /help nähdäksesi komennot."
 
-#: ../../src/network/nethost.cc:1632
+#: ../../src/network/nethost.cc:1634
 #, c-format
 msgid "Computer %u"
 msgstr "Tietokone %u"
 
-#: ../../src/network/nethost.cc:1692 ../../src/wui/game_summary.cc:119
+#: ../../src/network/nethost.cc:1694 ../../src/wui/game_summary.cc:119
 msgid "Player"
 msgstr "Pelaaja"
 
-#: ../../src/network/nethost.cc:1857
+#: ../../src/network/nethost.cc:1859
 #, c-format
 msgid "%li second"
 msgid_plural "%li seconds"
@@ -2296,24 +2318,24 @@ msgstr "Pisteet"
 msgid "Game"
 msgstr "Peli"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:384
+#: ../../src/ui_fsmenu/internet_lobby.cc:394
 msgid ""
 "Widelands was unable to get the IP address of the server in time.\n"
 "There seems to be a network problem, either on your side or on the side\n"
 "of the server.\n"
 msgstr "Widelands ei kyennyt selvittämään IP-osoitetta ajoissa.\nTämä näyttää verkko-ongelmalta, joko palvelimen tai sinun päässäsi.\n"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:388
+#: ../../src/ui_fsmenu/internet_lobby.cc:398
 msgid "Connection timed out"
 msgstr "Yhteys aikakatkaistu"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:416
+#: ../../src/ui_fsmenu/internet_lobby.cc:426
 msgid "Widelands was unable to connect to the host."
 msgstr "Yhteyttä koneeseen ei voitu muodostaa."
 
 #. * TRANSLATORS: This is shown for multiplayer games when no host
 #. * TRANSLATORS: server to connect to has been specified yet.
-#: ../../src/ui_fsmenu/internet_lobby.cc:438
+#: ../../src/ui_fsmenu/internet_lobby.cc:448
 msgctxt "server_name"
 msgid "unnamed"
 msgstr "nimetön"

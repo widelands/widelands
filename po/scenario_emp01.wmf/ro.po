@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-02-20 12:30+0000\n"
-"PO-Revision-Date: 2016-02-20 12:31+0000\n"
+"POT-Creation-Date: 2016-03-01 09:34+0000\n"
+"PO-Revision-Date: 2016-03-01 10:15+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Romanian (http://www.transifex.com/widelands/widelands/language/ro/)\n"
 "MIME-Version: 1.0\n"
@@ -73,7 +73,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:64
 msgid "Build a quarry"
-msgstr ""
+msgstr "Construiește o carieră de piatră"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:66
 msgid "Quarry"

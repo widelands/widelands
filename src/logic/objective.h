@@ -33,57 +33,57 @@ namespace Widelands {
 class Objective {
 public:
 	Objective(const std::string& init_name)
-	   : m_name(init_name),
-	     m_descname(init_name),
-	     m_descr(_("This objective has no description.")),
-	     m_visible(true),
-	     m_done(false) {
+		: name_(init_name),
+		  descname_(init_name),
+		  descr_(_("This objective has no description.")),
+		  visible_(true),
+		  done_(false) {
 	}
 
 	// Unique internal name of the objective.
 	const std::string& name() const {
-		return m_name;
+		return name_;
 	}
 
 	// User facing (translated) descriptive name.
 	const std::string& descname() const {
-		return m_descname;
+		return descname_;
 	}
 	void set_descname(const std::string& new_name) {
-		m_descname = new_name;
+		descname_ = new_name;
 	}
 
 	// Description text of this name.
 	const std::string& descr() const {
-		return m_descr;
+		return descr_;
 	}
 	void set_descr(const std::string& new_descr) {
-		m_descr = new_descr;
+		descr_ = new_descr;
 	}
 
 	// True, if this objective is fulfilled.
 	bool done() const {
-		return m_done;
+		return done_;
 	}
 
 	void set_done(bool t) {
-		m_done = t;
+		done_ = t;
 	}
 
 	// True, if this objective is visible to the user.
 	bool visible() const {
-		return m_visible;
+		return visible_;
 	}
 	void set_visible(const bool t) {
-		m_visible = t;
+		visible_ = t;
 	}
 
 private:
-	const std::string m_name;
-	std::string m_descname;
-	std::string m_descr;
-	bool m_visible;
-	bool m_done;
+	const std::string name_;
+	std::string descname_;
+	std::string descr_;
+	bool visible_;
+	bool done_;
 };
 }
 

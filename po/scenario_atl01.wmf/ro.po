@@ -2,13 +2,14 @@
 # Copyright (C) 2005-2016 Widelands Development Team
 # 
 # Translators:
+# Tarta Vasile-Florin <florin13t@gmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-02-20 12:30+0000\n"
-"PO-Revision-Date: 2016-02-20 12:31+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2016-03-01 09:34+0000\n"
+"PO-Revision-Date: 2016-03-01 10:19+0000\n"
+"Last-Translator: Tarta Vasile-Florin <florin13t@gmail.com>\n"
 "Language-Team: Romanian (http://www.transifex.com/widelands/widelands/language/ro/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -21,52 +22,52 @@ msgstr ""
 #: ../../data/campaigns/atl01.wmf/scripting/init.lua:74
 msgctxt "message_short_title"
 msgid "Building lost!"
-msgstr ""
+msgstr "Cladire pierdută!"
 
 #: ../../data/campaigns/atl01.wmf/scripting/init.lua:76
 msgid "We lost a building to the ocean!"
-msgstr ""
+msgstr "Am pierdut o cladire în ocean!"
 
 #: ../../data/campaigns/atl01.wmf/scripting/init.lua:82
 msgctxt "message_heading"
 msgid "Building lost!"
-msgstr ""
+msgstr "Cladire pierdută"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:32
 msgid "Ensure the supply of building wares"
-msgstr ""
+msgstr "Asigura livrarea materialelor de construcții"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:34
 msgid "Supply Building Wares"
-msgstr ""
+msgstr "Furnizare marfă pentru constructii"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:35
 msgid "Supply basic building material for your economy:"
-msgstr ""
+msgstr "Asigura materialele de construcții de bază pentru economia ta:"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:36
 msgid "Build a quarry"
-msgstr ""
+msgstr "Construiește o carieră de piatră"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:37
 msgid "Build two woodcutter’s houses"
-msgstr ""
+msgstr "Construiește doua case ale tăietărilor de lemne"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:38
 msgid "Build two forester’s houses"
-msgstr ""
+msgstr "Construiește doua case ale padurarului"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:39
 msgid "Build a sawmill"
-msgstr ""
+msgstr "Construiește o fabrică de cherestea"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:45
 msgid "Expand your territory and explore"
-msgstr ""
+msgstr "Extindeți teritoriul și explorează"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:47
 msgid "Expand and Explore"
-msgstr ""
+msgstr "Extinde și explorează"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:48
 msgid ""
@@ -77,15 +78,15 @@ msgstr ""
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:49
 msgid "Build military sites to expand your territory"
-msgstr ""
+msgstr "Construiețe o bază militară și extindeți teritoriul"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:55
 msgid "Establish a solid food production"
-msgstr ""
+msgstr "Asigură o producție de mâncare solidă"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:57
 msgid "Food Production"
-msgstr ""
+msgstr "Producția de mâncare"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:58
 msgid ""
@@ -115,7 +116,7 @@ msgstr ""
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:62
 msgid "Build a well"
-msgstr ""
+msgstr "Construiește o fântână"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:63
 msgid "Build a bakery to bake bread from cornmeal, blackroot flour and water"
