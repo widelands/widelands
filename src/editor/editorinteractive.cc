@@ -629,7 +629,7 @@ void EditorInteractive::run_editor(const std::string& filename, const std::strin
 			Widelands::Map & map = *new Widelands::Map;
 			egbase.set_map(&map);
 			if (filename.empty()) {
-				loader_ui.step(_("Creating empty map..."));
+				loader_ui.step(_("Creating empty map…"));
 				map.create_empty_map(
 				   egbase.world(),
 				   64,
@@ -644,7 +644,7 @@ void EditorInteractive::run_editor(const std::string& filename, const std::strin
 				egbase.load_graphics(loader_ui);
 				loader_ui.step(std::string());
 			} else {
-				loader_ui.stepf(_("Loading map \"%s\"..."), filename.c_str());
+				loader_ui.stepf(_("Loading map “%s”…"), filename.c_str());
 				eia.load(filename);
 			}
 		}

@@ -84,7 +84,7 @@ public:
 	virtual void blit(uint32_t time, const Point&, const Rect& srcrc, const RGBColor* clr, Surface*) const = 0;
 
 	/// Play the sound effect associated with this animation at the given time.
-	virtual void trigger_soundfx(uint32_t time, uint32_t stereo_position) const = 0;
+	virtual void trigger_sound(uint32_t time, uint32_t stereo_position) const = 0;
 
 private:
 	DISALLOW_COPY_AND_ASSIGN(Animation);

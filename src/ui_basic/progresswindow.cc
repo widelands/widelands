@@ -32,6 +32,8 @@
 #include "graphic/text_layout.h"
 #include "io/filesystem/layered_filesystem.h"
 
+namespace {
+
 #define PROGRESS_FONT_COLOR_FG        RGBColor(128, 128, 255)
 #define PROGRESS_FONT_COLOR_BG        RGBColor(64, 64, 0)
 #define PROGRESS_STATUS_RECT_PADDING  2
@@ -39,11 +41,13 @@
 #define PROGRESS_STATUS_BORDER_Y      2
 #define PROGRESS_LABEL_POSITION_Y     90 /* in percents, from top */
 
+} // namespace
+
 namespace UI {
 
 ProgressWindow::ProgressWindow(const std::string& background) {
 	set_background(background);
-	step(_("Preparing..."));
+	step(_("Loading…"));
 }
 
 ProgressWindow::~ProgressWindow() {

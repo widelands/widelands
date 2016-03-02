@@ -52,7 +52,7 @@ private:
 	};
 	template<typename T>
 	struct Capsule : public BaseCapsule {
-		Capsule(const T & _op) : op(_op) {}
+		Capsule(const T & init_op) : op(init_op) {}
 
 		bool allowed
 			(Map & map, const FCoords & start, const FCoords & end,

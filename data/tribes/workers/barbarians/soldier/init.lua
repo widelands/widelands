@@ -88,7 +88,7 @@ tribes:new_soldier_type {
       minimum = 1200,
       maximum = 1600
    },
-   attack_incr_per_level = 700,
+   attack_incr_per_level = 850,
    defense = 3,
    defense_incr_per_level = 4,
    evade = 25,

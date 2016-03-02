@@ -46,17 +46,17 @@ public:
 
 private:
 	struct CmdReplayEnd : public Widelands::Command {
-		CmdReplayEnd (uint32_t const _duetime) : Widelands::Command(_duetime) {}
+		CmdReplayEnd (uint32_t const init_duetime) : Widelands::Command(init_duetime) {}
 		virtual void execute (Widelands::Game & game);
 		virtual Widelands::QueueCommandTypes id() const;
 	};
 
-	Widelands::Game & m_game;
-	std::unique_ptr<Widelands::ReplayReader> m_replayreader;
-	int32_t m_lastframe;
-	int32_t m_time;
-	uint32_t m_speed;
-	bool m_paused;
+	Widelands::Game & game_;
+	std::unique_ptr<Widelands::ReplayReader> replayreader_;
+	int32_t lastframe_;
+	int32_t time_;
+	uint32_t speed_;
+	bool paused_;
 };
 
 #endif  // end of include guard: WL_LOGIC_REPLAY_GAME_CONTROLLER_H

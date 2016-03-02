@@ -86,7 +86,7 @@ extern class SoundHandler g_sound_handler;
  * \par Sound effects
  *
  * Buildings and workers can use sound effects in their programs. To do so, use
- * e.g. "playFX blacksmith_hammer" in the appropriate conf file. The conf file
+ * e.g. "play_sound blacksmith_hammer" in the appropriate conf file. The conf file
  * parser will then load one or more audio files for 'hammering blacksmith'
  * from the building's/worker's configuration directory and store them in an
  * FXset for later access, similar to the way music is stored in songsets.

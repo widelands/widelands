@@ -39,13 +39,13 @@ Button::Button //  for textual buttons. If h = 0, h will resize according to the
 	 const Image* bg_pic,
 	 const std::string & title_text,
 	 const std::string & tooltip_text,
-	 bool const _enabled, bool const flat)
+	 bool const init_enabled, bool const flat)
 	:
 	NamedPanel           (parent, name, x, y, w, h, tooltip_text),
 	highlighted_   (false),
 	pressed_       (false),
 	permpressed_   (false),
-	enabled_       (_enabled),
+	enabled_       (init_enabled),
 	repeating_     (false),
 	flat_          (flat),
 	draw_flat_background_(false),
@@ -72,13 +72,13 @@ Button::Button //  for pictorial buttons
 	 const Image* bg_pic,
 	 const Image* fg_pic,
 	 const std::string & tooltip_text,
-	 bool const _enabled, bool const flat, const bool keep_image_size)
+	 bool const init_enabled, bool const flat, const bool keep_image_size)
 	:
 	NamedPanel      (parent, name, x, y, w, h, tooltip_text),
 	highlighted_   (false),
 	pressed_       (false),
 	permpressed_   (false),
-	enabled_       (_enabled),
+	enabled_       (init_enabled),
 	repeating_     (false),
 	flat_          (flat),
 	keep_image_size_(keep_image_size),

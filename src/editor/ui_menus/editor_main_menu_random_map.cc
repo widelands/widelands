@@ -450,7 +450,7 @@ void MainMenuNewRandomMap::clicked_create_map() {
 		_("No Name"),
 		g_options.pull_section("global").get_string("realname", pgettext("map_name", "Unknown")),
 		sstrm.str().c_str());
-	loader_ui.step(_("Generating random map..."));
+	loader_ui.step(_("Generating random map…"));
 	gen.create_random_map();
 
 	egbase.postload     ();
