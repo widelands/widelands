@@ -10,17 +10,16 @@ return {
    descname = _ "Fortified Village",
    func =  function(plr, shared_in_start)
 
-   local sf = wl.Game().map.player_slots[plr.number].starting_field
-   if shared_in_start then
-      sf = shared_in_start
-   else
-      plr:allow_workers("all")
-   end
+      local sf = wl.Game().map.player_slots[plr.number].starting_field
+      if shared_in_start then
+         sf = shared_in_start
+      else
+         plr:allow_workers("all")
+      end
 
-   local h = plr:place_building("atlanteans_castle", sf, false, true)
-   h:set_soldiers{[{0,0,0,0}] = 12}
+      local h = plr:place_building("atlanteans_castle", sf, false, true)
+      h:set_soldiers{[{0,0,0,0}] = 12}
 
-   if not pcall(function()
       place_building_in_region(plr, "atlanteans_warehouse", sf:region(7), {
          wares = {
             diamond = 7,
@@ -97,13 +96,5 @@ return {
       place_building_in_region(plr, "atlanteans_sawmill", sf:region(11), {
          wares = { log = 1 }
       })
-   end) then
-      plr:send_message(
-         -- TRANSLATORS: Short for "Not enough space"
-         _"No Space",
-         rt(p(_([[Some of your starting buildings didn’t have enough room and weren’t built. You are at a disadvantage with this; consider restarting this map with a fair starting condition.]]))),
-         {popup=true, heading=_"Not enough space"}
-      )
    end
-end
 }
