@@ -288,7 +288,7 @@ void RenderTarget::tile(const Rect& rect, const Image* image, const Point& gofs,
 /**
  * Draws a frame of an animation at the given location
  * Plays sound effect that is registered with this frame (the SoundHandler
- * decides if the fx really does get played)
+ * decides if the sound really does get played)
  *
  * \param dstx, dsty the on-screen location of the animation hot spot
  * \param animation the animation ID
@@ -338,7 +338,7 @@ void RenderTarget::do_blit_animation(const Point& dst,
 	// effect (see SoundHandler::stereo_position).
 	// TODO(sirver): Playing a sound effect in here is rather silly. What if
 	// this animation is used in the menus?
-	animation.trigger_soundfx(time, 128);
+	animation.trigger_sound(time, 128);
 }
 
 /**

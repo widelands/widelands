@@ -46,9 +46,9 @@ const WorkerProgram::ParseMap WorkerProgram::parsemap_[] = {
 	{"create_bob",        &WorkerProgram::parse_create_bob},
 	{"removeobject",      &WorkerProgram::parse_removeobject},
 	{"geologist",         &WorkerProgram::parse_geologist},
-	{"geologist-find",    &WorkerProgram::parse_geologist_find},
+	{"geologist_find",    &WorkerProgram::parse_geologist_find},
 	{"scout",             &WorkerProgram::parse_scout},
-	{"playFX",            &WorkerProgram::parse_play_fx},
+	{"play_sound",        &WorkerProgram::parse_play_sound},
 	{"construct",         &WorkerProgram::parse_construct},
 
 	{nullptr, nullptr}
@@ -541,7 +541,7 @@ void WorkerProgram::parse_geologist(Worker::Action* act, const std::vector<std::
 void WorkerProgram::parse_geologist_find(Worker::Action* act, const std::vector<std::string>& cmd)
 {
 	if (cmd.size() != 1)
-		throw wexception("Usage: geologist-find");
+		throw wexception("Usage: geologist_find");
 
 	act->function = &Worker::run_geologist_find;
 }
@@ -564,16 +564,16 @@ void WorkerProgram::parse_scout(Worker::Action* act, const std::vector<std::stri
 	act->function = &Worker::run_scout;
 }
 
-void WorkerProgram::parse_play_fx(Worker::Action* act, const std::vector<std::string>& cmd)
+void WorkerProgram::parse_play_sound(Worker::Action* act, const std::vector<std::string>& cmd)
 {
 	if (cmd.size() < 3 || cmd.size() > 4)
-		throw wexception("Usage: playFX <fx_dir> <fx_name> [priority]");
+		throw wexception("Usage: play_sound <sound_dir> <sound_name> [priority]");
 
 	act->sparam1 = cmd[1] + "/" + cmd[2];
 
 	g_sound_handler.load_fx_if_needed(cmd[1], cmd[2], act->sparam1);
 
-	act->function = &Worker::run_playfx;
+	act->function = &Worker::run_play_sound;
 	act->iparam1 =
 		cmd.size() == 3 ?
 		64 : //  50% chance to play, only one instance at a time

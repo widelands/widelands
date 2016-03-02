@@ -50,6 +50,8 @@ MAINPOTS = [
                     "../../src/*/*/*/*.h",
                     "../../src/*/*/*/*/*.h",
                     "../../src/*/*/*/*/*/*.h",
+                    "../../data/scripting/*.lua",
+                    "../../data/scripting/editor/*.lua",
                     "../../data/scripting/widelands/*.lua",
     ] ),
     ( "widelands_console/widelands_console", [
@@ -318,12 +320,12 @@ def do_compile_src( potfile, srcfiles ):
     except IOError as err_msg:
         sys.stderr.write("Failed to call xgettext: %s\n" % err_msg)
         return False
-    
+
     xgettext_status = xgettext.wait()
     if (xgettext_status != 0):
         sys.stderr.write("xgettext exited with errorcode %i\n" % xgettext_status)
         return False
-    
+
     return True
 
 

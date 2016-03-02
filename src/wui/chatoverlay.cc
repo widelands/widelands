@@ -72,11 +72,9 @@ struct ChatOverlay::Impl {
 
 private:
 	bool has_chat_provider() {
-		if (chat_ == nullptr) return false;
 		// The chat provider might not have been assigned a specific subclass,
 		// e.g. if there was an exception thrown.
-		if (is_a(ChatProvider, chat_)) return false;
-		return true;
+		return (chat_ != nullptr && chat_->has_been_set());
 	}
 };
 

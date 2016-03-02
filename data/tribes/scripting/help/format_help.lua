@@ -106,10 +106,6 @@ function help_tool_string(tribe, toolnames, no_of_workers)
          result = result .. image_line(ware_description.icon_name, 1, p(ware_description.descname))
       end
    end
-   if (result ~= "") then
-      -- TRANSLATORS: Tribal Encyclopedia: Heading for which tools a worker uses
-      result = rt(h3(ngettext("Worker uses:","Workers use:", no_of_workers))) .. result
-   end
    return result
 end
 

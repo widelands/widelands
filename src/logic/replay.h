@@ -58,9 +58,9 @@ public:
 	bool end_of_replay();
 
 private:
-	StreamRead * m_cmdlog;
+	StreamRead * cmdlog_;
 
-	uint32_t m_replaytime;
+	uint32_t replaytime_;
 };
 
 /**
@@ -75,9 +75,9 @@ public:
 	void send_sync(const Md5Checksum &);
 
 private:
-	Game        & m_game;
-	StreamWrite * m_cmdlog;
-	std::string m_filename;
+	Game        & game_;
+	StreamWrite* cmdlog_;
+	std::string filename_;
 };
 
 }
