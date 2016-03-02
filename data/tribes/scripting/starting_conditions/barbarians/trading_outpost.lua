@@ -10,8 +10,6 @@ return {
    descname = _"Trading Outpost",
    tooltip = _"Never run out of important wares for long",
    func = function(player, shared_in_start)
-   print (string.format(" %i: Initiating 'Headquarters cheat' mode",
-   player.number))
 
    local sf = wl.Game().map.player_slots[player.number].starting_field
    if shared_in_start then
@@ -87,7 +85,15 @@ return {
       wares = {},
       })
 
+   -- Get all warehouse types
     local plr = wl.Game().players[player.number]
+    local warehouse_types = {}
+    for i, building_name in ipairs(wl.Game():get_tribe_description(plr.tribe_name).buildings) do
+      if (wl.Game():get_building_description(building_name).type_name == "warehouse") then
+         table.insert(warehouse_types, building_name)
+      end
+    end
+
     -- index of a warehouse we will add to. Used to 'rotate' warehouses
     local idx = 1
 
@@ -95,9 +101,10 @@ return {
       sleep(300000)
 
       -- collect all ~warehouses and pick one to insert the wares
-      local warehouses = array_combine(plr:get_buildings(plr.tribe_name .. "_headquarters"),
-         plr:get_buildings(plr.tribe_name .. "_warehouse"),
-         plr:get_buildings(plr.tribe_name .. "_port"))
+      local warehouses = {}
+      for i, building_name in ipairs(warehouse_types) do
+            warehouses = array_combine(warehouses, plr:get_buildings(building_name))
+      end
 
       if #warehouses > 0 then
 
@@ -146,7 +153,9 @@ return {
               added = added + 1
           end
 
-          print (player.number..": "..added.." types of ware added to warehouse "..idx.." of "..#warehouses.." (cheating mode)")
+         if (added > 0) then
+            print (player.number..": "..added.." types of ware added to warehouse "..idx.." of "..#warehouses.." (cheating mode)")
+         end
 
           idx = idx + 1
       end
