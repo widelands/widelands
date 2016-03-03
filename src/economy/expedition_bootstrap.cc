@@ -160,8 +160,10 @@ void ExpeditionBootstrap::cancel(Game& game) {
 	workers_.clear();
 
 	// Update the user interface
-	if (upcast(InteractiveGameBase, igb, warehouse->owner().egbase().get_ibase()))
+	if (upcast(InteractiveGameBase, igb, warehouse->owner().egbase().get_ibase())) {
 		warehouse->refresh_options(*igb);
+	}
+	Notifications::publish(NoteExpeditionCanceled(this));
 }
 
 void ExpeditionBootstrap::cleanup(EditorGameBase& /* egbase */) {
