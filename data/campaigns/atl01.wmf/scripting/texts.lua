@@ -197,7 +197,7 @@ first_briefing_messages = {
       title = _"Sidolus Speaks",
       body = sidolus(
          -- TRANSLATORS: Sidolus
-         _([[May Satul warm you, Jundlina! I agree with what Loftomor proposes. We need a good supply of building materials for we have to expand our territory swiftly. I will not feel safe on this island as long as we have not seen all its shores it. I brought plenty of good men from Atlantis. The military might is available. We only need some housing to live in.]]))
+         _([[May Satul warm you, Jundlina! I agree with what Loftomor proposes. We need a good supply of building materials for we have to expand our territory swiftly. I will not feel safe on this island as long as we have not seen all its shores. I brought plenty of good men from Atlantis. The military might is available. We only need some housing to live in.]]))
          ..  new_objectives(obj_expand)
    }
 }
@@ -297,7 +297,7 @@ heavy_industry_story = {
       title = _"Jundlina Replies",
       body = jundlina(_"Jundlina Nods",
          -- TRANSLATORS: Jundlina
-         _([[I have considered this, Sidolus. I think  it is about time. We will make this a priority for now. You shall get your industry soon!]]))
+         _([[I have considered this, Sidolus. I think it is about time. We will make this a priority for now. You shall get your industry soon!]]))
          .. new_objectives(obj_make_heavy_industry_and_mining)
    },
 }
