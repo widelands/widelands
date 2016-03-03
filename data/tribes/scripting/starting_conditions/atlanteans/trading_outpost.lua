@@ -81,12 +81,6 @@ return {
          }
       })
 
-      place_building_in_region(player, "atlanteans_tower", sf:region(13), {
-         soldiers = {
-            [{0,0,0,0}] = 1,
-         },
-      })
-
       place_building_in_region(player, "atlanteans_toolsmithy", sf:region(11), {
          wares = {
             iron = 6,
@@ -103,6 +97,12 @@ return {
 
       place_building_in_region(player, "atlanteans_hunters_house", sf:region(11), {
          wares = {}
+      })
+
+      place_building_in_region(player, "atlanteans_tower", sf:region(13), {
+         soldiers = {
+            [{0,0,0,0}] = 1,
+         },
       })
 
       -- Get all warehouse types

@@ -73,12 +73,6 @@ return {
          }
       })
 
-      place_building_in_region(player, "barbarians_tower", sf:region(13), {
-         soldiers = {
-            [{0,0,0,0}] = 1,
-         },
-      })
-
       place_building_in_region(player, "barbarians_metal_workshop", sf:region(11), {
          wares = {
             iron = 8,
@@ -94,6 +88,12 @@ return {
 
       place_building_in_region(player, "barbarians_hunters_hut", sf:region(11), {
          wares = {}
+      })
+
+      place_building_in_region(player, "barbarians_tower", sf:region(13), {
+         soldiers = {
+            [{0,0,0,0}] = 1,
+         },
       })
 
       -- Get all warehouse types

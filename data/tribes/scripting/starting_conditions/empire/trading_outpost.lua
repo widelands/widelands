@@ -79,12 +79,6 @@ return {
          }
       })
 
-      place_building_in_region(player, "empire_outpost", sf:region(13), {
-         soldiers = {
-            [{0,0,0,0}] = 1,
-         },
-      })
-
       place_building_in_region(player, "empire_toolsmithy", sf:region(11), {
          wares = {
             iron = 8,
@@ -100,6 +94,12 @@ return {
 
       place_building_in_region(player, "empire_hunters_house", sf:region(11), {
          wares = {}
+      })
+
+      place_building_in_region(player, "empire_tower", sf:region(13), {
+         soldiers = {
+            [{0,0,0,0}] = 1,
+         },
       })
 
       -- Get all warehouse types
