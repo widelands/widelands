@@ -85,11 +85,11 @@ function test_terrains_resource_descr:test_terrain_descr()
 end
 
 function test_terrains_resource_descr:test_terrain_descname()
-   assert_equal("Meadow",
+   assert_equal("Meadow 1",
       egbase:get_terrain_description("wiese1").descname)
    assert_equal("Beach",
       egbase:get_terrain_description("wasteland_beach").descname)
-   assert_equal("Forested Mountain",
+   assert_equal("Forested Mountain 2",
       egbase:get_terrain_description("desert_forested_mountain2").descname)
    assert_equal("Water",
       egbase:get_terrain_description("winter_water").descname)

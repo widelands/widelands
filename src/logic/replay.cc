@@ -83,17 +83,17 @@ private:
  */
 ReplayReader::ReplayReader(Game & game, const std::string & filename)
 {
-	m_replaytime = 0;
+	replaytime_ = 0;
 
 	{
 		GameLoader gl(filename + WLGF_SUFFIX, game);
 		gl.load_game();
 	}
 
-	m_cmdlog = g_fs->open_stream_read(filename);
+	cmdlog_ = g_fs->open_stream_read(filename);
 
 	try {
-		const uint32_t magic = m_cmdlog->unsigned_32();
+		const uint32_t magic = cmdlog_->unsigned_32();
 		if (magic == 0x2E21A100)
 			// Note: This was never released as part of a build
 			throw wexception
@@ -104,14 +104,14 @@ ReplayReader::ReplayReader(Game & game, const std::string & filename)
 			throw wexception
 				("%s apparently not a valid replay file", filename.c_str());
 
-		const uint8_t packet_version = m_cmdlog->unsigned_8();
+		const uint8_t packet_version = cmdlog_->unsigned_8();
 		if (packet_version != kCurrentPacketVersion) {
 			throw UnhandledVersionError("ReplayReader", packet_version, kCurrentPacketVersion);
 		}
-		game.rng().read_state(*m_cmdlog);
+		game.rng().read_state(*cmdlog_);
 	}
 	catch (...) {
-		delete m_cmdlog;
+		delete cmdlog_;
 		throw;
 	}
 }
@@ -122,7 +122,7 @@ ReplayReader::ReplayReader(Game & game, const std::string & filename)
  */
 ReplayReader::~ReplayReader()
 {
-	delete m_cmdlog;
+	delete cmdlog_;
 }
 
 
@@ -135,22 +135,22 @@ ReplayReader::~ReplayReader()
  */
 Command * ReplayReader::get_next_command(const uint32_t time)
 {
-	if (!m_cmdlog)
+	if (!cmdlog_)
 		return nullptr;
 
-	if (static_cast<int32_t>(m_replaytime - time) > 0)
+	if (static_cast<int32_t>(replaytime_ - time) > 0)
 		return nullptr;
 
 	try {
-		uint8_t pkt = m_cmdlog->unsigned_8();
+		uint8_t pkt = cmdlog_->unsigned_8();
 
 		switch (pkt) {
 		case pkt_playercommand: {
-			m_replaytime = m_cmdlog->unsigned_32();
+			replaytime_ = cmdlog_->unsigned_32();
 
-			uint32_t duetime = m_cmdlog->unsigned_32();
-			uint32_t cmdserial = m_cmdlog->unsigned_32();
-			PlayerCommand & cmd = *PlayerCommand::deserialize(*m_cmdlog);
+			uint32_t duetime = cmdlog_->unsigned_32();
+			uint32_t cmdserial = cmdlog_->unsigned_32();
+			PlayerCommand & cmd = *PlayerCommand::deserialize(*cmdlog_);
 			cmd.set_duetime  (duetime);
 			cmd.set_cmdserial(cmdserial);
 
@@ -158,18 +158,18 @@ Command * ReplayReader::get_next_command(const uint32_t time)
 		}
 
 		case pkt_syncreport: {
-			uint32_t duetime = m_cmdlog->unsigned_32();
+			uint32_t duetime = cmdlog_->unsigned_32();
 			Md5Checksum hash;
-			m_cmdlog->data(hash.data, sizeof(hash.data));
+			cmdlog_->data(hash.data, sizeof(hash.data));
 
 			return new CmdReplaySyncRead(duetime, hash);
 		}
 
 		case pkt_end: {
-			uint32_t endtime = m_cmdlog->unsigned_32();
+			uint32_t endtime = cmdlog_->unsigned_32();
 			log("REPLAY: End of replay (gametime: %u)\n", endtime);
-			delete m_cmdlog;
-			m_cmdlog = nullptr;
+			delete cmdlog_;
+			cmdlog_ = nullptr;
 			return nullptr;
 		}
 
@@ -178,8 +178,8 @@ Command * ReplayReader::get_next_command(const uint32_t time)
 		}
 	} catch (const WException & e) {
 		log("REPLAY: Caught exception %s\n", e.what());
-		delete m_cmdlog;
-		m_cmdlog = nullptr;
+		delete cmdlog_;
+		cmdlog_ = nullptr;
 	}
 
 	return nullptr;
@@ -191,7 +191,7 @@ Command * ReplayReader::get_next_command(const uint32_t time)
  */
 bool ReplayReader::end_of_replay()
 {
-	return m_cmdlog == nullptr;
+	return cmdlog_ == nullptr;
 }
 
 
@@ -223,20 +223,20 @@ public:
  * and the game has changed into running state.
  */
 ReplayWriter::ReplayWriter(Game & game, const std::string & filename)
-	: m_game(game), m_filename(filename)
+	: game_(game), filename_(filename)
 {
 	g_fs->ensure_directory_exists(REPLAY_DIR);
 
-	SaveHandler & save_handler = m_game.save_handler();
+	SaveHandler & save_handler = game_.save_handler();
 
 	std::string error;
-	if (!save_handler.save_game(m_game, m_filename + WLGF_SUFFIX, &error))
+	if (!save_handler.save_game(game_, filename_ + WLGF_SUFFIX, &error))
 		throw wexception("Failed to save game for replay: %s", error.c_str());
 
 	log("Reloading the game from replay\n");
 	game.cleanup_for_load();
 	{
-		GameLoader gl(m_filename + WLGF_SUFFIX, game);
+		GameLoader gl(filename_ + WLGF_SUFFIX, game);
 		gl.load_game();
 	}
 	game.postload();
@@ -245,11 +245,11 @@ ReplayWriter::ReplayWriter(Game & game, const std::string & filename)
 	game.enqueue_command
 		(new CmdReplaySyncWrite(game.get_gametime() + kSyncInterval));
 
-	m_cmdlog = g_fs->open_stream_write(filename);
-	m_cmdlog->unsigned_32(kReplayMagic);
-	m_cmdlog->unsigned_8(kCurrentPacketVersion);
+	cmdlog_ = g_fs->open_stream_write(filename);
+	cmdlog_->unsigned_32(kReplayMagic);
+	cmdlog_->unsigned_8(kCurrentPacketVersion);
 
-	game.rng().write_state(*m_cmdlog);
+	game.rng().write_state(*cmdlog_);
 }
 
 
@@ -258,10 +258,10 @@ ReplayWriter::ReplayWriter(Game & game, const std::string & filename)
  */
 ReplayWriter::~ReplayWriter()
 {
-	m_cmdlog->unsigned_8(pkt_end);
-	m_cmdlog->unsigned_32(m_game.get_gametime());
+	cmdlog_->unsigned_8(pkt_end);
+	cmdlog_->unsigned_32(game_.get_gametime());
 
-	delete m_cmdlog;
+	delete cmdlog_;
 }
 
 
@@ -270,16 +270,16 @@ ReplayWriter::~ReplayWriter()
  */
 void ReplayWriter::send_player_command(PlayerCommand * cmd)
 {
-	m_cmdlog->unsigned_8(pkt_playercommand);
+	cmdlog_->unsigned_8(pkt_playercommand);
 	// The semantics of the timestamp is
 	// "There will be no more player commands that are due *before* the
 	// given time".
-	m_cmdlog->unsigned_32(m_game.get_gametime());
-	m_cmdlog->unsigned_32(cmd->duetime());
-	m_cmdlog->unsigned_32(cmd->cmdserial());
-	cmd->serialize(*m_cmdlog);
+	cmdlog_->unsigned_32(game_.get_gametime());
+	cmdlog_->unsigned_32(cmd->duetime());
+	cmdlog_->unsigned_32(cmd->cmdserial());
+	cmd->serialize(*cmdlog_);
 
-	m_cmdlog->flush();
+	cmdlog_->flush();
 }
 
 
@@ -288,10 +288,10 @@ void ReplayWriter::send_player_command(PlayerCommand * cmd)
  */
 void ReplayWriter::send_sync(const Md5Checksum & hash)
 {
-	m_cmdlog->unsigned_8(pkt_syncreport);
-	m_cmdlog->unsigned_32(m_game.get_gametime());
-	m_cmdlog->data(hash.data, sizeof(hash.data));
-	m_cmdlog->flush();
+	cmdlog_->unsigned_8(pkt_syncreport);
+	cmdlog_->unsigned_32(game_.get_gametime());
+	cmdlog_->data(hash.data, sizeof(hash.data));
+	cmdlog_->flush();
 }
 
 }

@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-02-20 12:30+0000\n"
-"PO-Revision-Date: 2016-02-20 16:12+0000\n"
+"POT-Creation-Date: 2016-03-01 09:34+0000\n"
+"PO-Revision-Date: 2016-03-01 11:50+0000\n"
 "Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -1466,7 +1466,7 @@ msgid ""
 msgstr "Serveix de base per a la colonització i comerç per via marítima. També fa de magatzem per a soldats, béns i eines."
 
 #: ../../data/tribes/scripting/help/building_help.lua:108
-#: ../../data/tribes/scripting/help/format_help.lua:146
+#: ../../data/tribes/scripting/help/format_help.lua:142
 #, lua-format
 msgid "%s and"
 msgstr "%s i"
@@ -1704,44 +1704,43 @@ msgstr "Treballadors"
 msgid "%s or better"
 msgstr "%s o millor"
 
-#: ../../data/tribes/scripting/help/building_help.lua:669
-#: ../../data/tribes/scripting/help/worker_help.lua:117
-msgid "Experience levels:"
-msgstr "Nivells d'experiència:"
-
-#. TRANSLATORS: EP = Experience Points
-#: ../../data/tribes/scripting/help/building_help.lua:671
-#: ../../data/tribes/scripting/help/building_help.lua:680
-#: ../../data/tribes/scripting/help/worker_help.lua:118
-#: ../../data/tribes/scripting/help/worker_help.lua:127
-#, lua-format
-msgid "%s to %s (%s EP)"
-msgstr "%s a %s (%s PE)"
-
-#: ../../data/tribes/scripting/help/building_help.lua:703
-msgid "Production"
-msgstr "Producció"
-
-#: ../../data/tribes/scripting/help/building_help.lua:704
-msgid "Performance:"
-msgstr "Rendiment:"
-
-#. TRANSLATORS: %1$d is a number, %2$s the name of a ware, e.g. 12x Stone
-#: ../../data/tribes/scripting/help/format_help.lua:86
-#: ../../data/tribes/scripting/help/format_help.lua:138
-msgid "%1$dx %2$s"
-msgstr "%1$dx %2$s"
-
-#. TRANSLATORS: Tribal Encyclopedia: Heading for which tools a worker uses
-#: ../../data/tribes/scripting/help/format_help.lua:111
+#. TRANSLATORS: Tribal Encyclopedia: Heading for which tool workers use
+#: ../../data/tribes/scripting/help/building_help.lua:668
 msgid "Worker uses:"
 msgid_plural "Workers use:"
 msgstr[0] "El treballador empra:"
 msgstr[1] "Els treballadors empren:"
 
+#: ../../data/tribes/scripting/help/building_help.lua:673
+msgid "Experience levels:"
+msgstr "Nivells d'experiència:"
+
+#. TRANSLATORS: EP = Experience Points
+#: ../../data/tribes/scripting/help/building_help.lua:675
+#: ../../data/tribes/scripting/help/building_help.lua:684
+#: ../../data/tribes/scripting/help/worker_help.lua:146
+#: ../../data/tribes/scripting/help/worker_help.lua:155
+#, lua-format
+msgid "%s to %s (%s EP)"
+msgstr "%s a %s (%s PE)"
+
+#: ../../data/tribes/scripting/help/building_help.lua:707
+msgid "Production"
+msgstr "Producció"
+
+#: ../../data/tribes/scripting/help/building_help.lua:708
+msgid "Performance:"
+msgstr "Rendiment:"
+
+#. TRANSLATORS: %1$d is a number, %2$s the name of a ware, e.g. 12x Stone
+#: ../../data/tribes/scripting/help/format_help.lua:86
+#: ../../data/tribes/scripting/help/format_help.lua:134
+msgid "%1$dx %2$s"
+msgstr "%1$dx %2$s"
+
 #. TRANSLATORS: Tribal Encyclopedia: Heading for wares consumed by a
 #. productionsite
-#: ../../data/tribes/scripting/help/format_help.lua:165
+#: ../../data/tribes/scripting/help/format_help.lua:161
 msgid "Ware consumed:"
 msgid_plural "Wares consumed:"
 msgstr[0] "Bé consumit:"
@@ -1771,7 +1770,7 @@ msgid "%1% and %2%"
 msgstr "%1% i %2%"
 
 #: ../../data/tribes/scripting/help/ware_help.lua:32
-#: ../../data/tribes/scripting/help/worker_help.lua:93
+#: ../../data/tribes/scripting/help/worker_help.lua:118
 msgid "Purpose"
 msgstr "Finalitat:"
 
@@ -1803,6 +1802,24 @@ msgid "Worker recruited:"
 msgid_plural "Workers recruited:"
 msgstr[0] "Treballador contractat:"
 msgstr[1] "Treballadors contractats:"
+
+#. TRANSLATORS: Worker Encyclopedia: A list of buildings where a worker can
+#. work
+#. TRANSLATORS: You can also translate this as 'workplace(s)'
+#: ../../data/tribes/scripting/help/worker_help.lua:95
+msgid "Works at"
+msgid_plural "Works at"
+msgstr[0] "Treballa en"
+msgstr[1] "Treballa en"
+
+#. TRANSLATORS: Tribal Encyclopedia: Heading for which tool a worker uses
+#: ../../data/tribes/scripting/help/worker_help.lua:133
+msgid "Worker uses"
+msgstr "Usos del treballador"
+
+#: ../../data/tribes/scripting/help/worker_help.lua:145
+msgid "Experience levels"
+msgstr "Nivells d'experiència"
 
 #. TRANSLATORS: Helptext for a ware: Armor
 #: ../../data/tribes/wares/armor/helptexts.lua:4

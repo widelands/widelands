@@ -11,9 +11,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-02-03 09:18+0000\n"
-"PO-Revision-Date: 2016-02-05 18:15+0000\n"
-"Last-Translator: Jaypad <ju-ju@nataju.fr>\n"
+"POT-Creation-Date: 2016-03-01 09:34+0000\n"
+"PO-Revision-Date: 2016-03-01 09:34+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1468,7 +1468,7 @@ msgid ""
 msgstr "Sert de base pour coloniser des terres situées au-delà des mers et le commerce. Stocke également les soldats, les marchandises et les outils."
 
 #: ../../data/tribes/scripting/help/building_help.lua:108
-#: ../../data/tribes/scripting/help/format_help.lua:146
+#: ../../data/tribes/scripting/help/format_help.lua:142
 #, lua-format
 msgid "%s and"
 msgstr "%s et"
@@ -1706,44 +1706,43 @@ msgstr "Ouvriers"
 msgid "%s or better"
 msgstr "%s ou plus"
 
-#: ../../data/tribes/scripting/help/building_help.lua:669
-#: ../../data/tribes/scripting/help/worker_help.lua:117
-msgid "Experience levels:"
-msgstr "Niveaux d'expérience&nbsp;:"
-
-#. TRANSLATORS: EP = Experience Points
-#: ../../data/tribes/scripting/help/building_help.lua:671
-#: ../../data/tribes/scripting/help/building_help.lua:680
-#: ../../data/tribes/scripting/help/worker_help.lua:118
-#: ../../data/tribes/scripting/help/worker_help.lua:127
-#, lua-format
-msgid "%s to %s (%s EP)"
-msgstr "%s à %s (%s EP)"
-
-#: ../../data/tribes/scripting/help/building_help.lua:703
-msgid "Production"
-msgstr "Production"
-
-#: ../../data/tribes/scripting/help/building_help.lua:704
-msgid "Performance:"
-msgstr "Performance&nbsp;:"
-
-#. TRANSLATORS: %1$d is a number, %2$s the name of a ware, e.g. 12x Stone
-#: ../../data/tribes/scripting/help/format_help.lua:86
-#: ../../data/tribes/scripting/help/format_help.lua:138
-msgid "%1$dx %2$s"
-msgstr "%1$d x %2$s"
-
-#. TRANSLATORS: Tribal Encyclopedia: Heading for which tools a worker uses
-#: ../../data/tribes/scripting/help/format_help.lua:111
+#. TRANSLATORS: Tribal Encyclopedia: Heading for which tool workers use
+#: ../../data/tribes/scripting/help/building_help.lua:668
 msgid "Worker uses:"
 msgid_plural "Workers use:"
 msgstr[0] "L'ouvrier utilise&nbsp;:"
 msgstr[1] "Les ouvriers utilisent&nbsp;:"
 
+#: ../../data/tribes/scripting/help/building_help.lua:673
+msgid "Experience levels:"
+msgstr "Niveaux d'expérience&nbsp;:"
+
+#. TRANSLATORS: EP = Experience Points
+#: ../../data/tribes/scripting/help/building_help.lua:675
+#: ../../data/tribes/scripting/help/building_help.lua:684
+#: ../../data/tribes/scripting/help/worker_help.lua:146
+#: ../../data/tribes/scripting/help/worker_help.lua:155
+#, lua-format
+msgid "%s to %s (%s EP)"
+msgstr "%s à %s (%s EP)"
+
+#: ../../data/tribes/scripting/help/building_help.lua:707
+msgid "Production"
+msgstr "Production"
+
+#: ../../data/tribes/scripting/help/building_help.lua:708
+msgid "Performance:"
+msgstr "Performance&nbsp;:"
+
+#. TRANSLATORS: %1$d is a number, %2$s the name of a ware, e.g. 12x Stone
+#: ../../data/tribes/scripting/help/format_help.lua:86
+#: ../../data/tribes/scripting/help/format_help.lua:134
+msgid "%1$dx %2$s"
+msgstr "%1$d x %2$s"
+
 #. TRANSLATORS: Tribal Encyclopedia: Heading for wares consumed by a
 #. productionsite
-#: ../../data/tribes/scripting/help/format_help.lua:165
+#: ../../data/tribes/scripting/help/format_help.lua:161
 msgid "Ware consumed:"
 msgid_plural "Wares consumed:"
 msgstr[0] "Marchandise utilisée&nbsp;:"
@@ -1773,7 +1772,7 @@ msgid "%1% and %2%"
 msgstr "%1% et %2%"
 
 #: ../../data/tribes/scripting/help/ware_help.lua:32
-#: ../../data/tribes/scripting/help/worker_help.lua:93
+#: ../../data/tribes/scripting/help/worker_help.lua:118
 msgid "Purpose"
 msgstr "Objectif"
 
@@ -1805,6 +1804,24 @@ msgid "Worker recruited:"
 msgid_plural "Workers recruited:"
 msgstr[0] "Ouvrier recruté&nbsp;:"
 msgstr[1] "Ouvriers recrutés&nbsp;:"
+
+#. TRANSLATORS: Worker Encyclopedia: A list of buildings where a worker can
+#. work
+#. TRANSLATORS: You can also translate this as 'workplace(s)'
+#: ../../data/tribes/scripting/help/worker_help.lua:95
+msgid "Works at"
+msgid_plural "Works at"
+msgstr[0] ""
+msgstr[1] ""
+
+#. TRANSLATORS: Tribal Encyclopedia: Heading for which tool a worker uses
+#: ../../data/tribes/scripting/help/worker_help.lua:133
+msgid "Worker uses"
+msgstr ""
+
+#: ../../data/tribes/scripting/help/worker_help.lua:145
+msgid "Experience levels"
+msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Armor
 #: ../../data/tribes/wares/armor/helptexts.lua:4
