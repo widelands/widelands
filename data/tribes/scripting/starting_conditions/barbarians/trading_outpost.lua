@@ -29,7 +29,7 @@ return {
          fire_tongs = 2,
          fish = 6,
          fishing_rod = 2,
-         gold = 4,
+         gold = 14,
          grout = 12,
          hammer = 12,
          hunting_spear = 2,
@@ -65,8 +65,11 @@ return {
          barbarians_stonemason = 2,
          barbarians_ox = 5,
       },
+      -- Max health: 3, Max attack: 5, Max defense: 0, Max evade: 2
       soldiers = {
-         [{0,0,0,0}] = 45,
+         [{0,0,0,0}] = 35,
+         [{1,0,0,1}] = 5,
+         [{1,1,0,0}] = 5,
       }
    })
    place_building_in_region(player, "barbarians_tower", sf:region(13), {
@@ -74,16 +77,17 @@ return {
          [{0,0,0,0}] = 1,
       },
       })
-   place_building_in_region(player, "barbarians_battlearena", sf:region(11), {
-        wares = {
-            barbarians_bread = 8,
-            fish = 6,
-            meat = 6,
-         }
-      })
-   place_building_in_region(player, "barbarians_brewery", sf:region(11), {
-      wares = {},
-      })
+
+   place_building_in_region(player, "barbarians_metal_workshop", sf:region(11), {
+      wares = {
+         iron = 8,
+         log = 8
+      }
+   })
+
+   place_building_in_region(player, "barbarians_hunters_hut", sf:region(11), {
+      wares = {}
+   })
 
    -- Get all warehouse types
     local plr = wl.Game().players[player.number]

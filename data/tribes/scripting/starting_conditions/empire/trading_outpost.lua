@@ -33,7 +33,7 @@ return {
          fish = 6,
          fishing_rod = 2,
          flour = 4,
-         gold = 4,
+         gold = 14,
          grape = 4,
          hammer = 14,
          hunting_spear = 2,
@@ -71,8 +71,11 @@ return {
          empire_weaponsmith = 1,
          empire_donkey = 5,
       },
+      -- Max health: 4, Max attack: 4, Max defense: 0, Max evade: 2
       soldiers = {
-         [{0,0,0,0}] = 45,
+         [{0,0,0,0}] = 35,
+         [{1,0,0,1}] = 5,
+         [{1,1,0,0}] = 5,
       }
    })
 
@@ -82,15 +85,14 @@ return {
       },
       })
 
-      place_building_in_region(player, "empire_colosseum", sf:region(11), {
+      place_building_in_region(player, "empire_toolsmithy", sf:region(11), {
          wares = {
-            empire_bread = 8,
-            fish = 4,
-            meat = 4,
-         },
+            iron = 8,
+            log = 8
+         }
       })
 
-      place_building_in_region(player, "empire_bakery", sf:region(11), {
+      place_building_in_region(player, "empire_hunters_house", sf:region(11), {
          wares = {}
       })
 

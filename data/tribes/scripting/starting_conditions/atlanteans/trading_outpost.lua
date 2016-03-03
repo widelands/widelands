@@ -27,7 +27,7 @@ return {
          spider_silk = 9,
          log = 20,
          coal = 12,
-         gold = 4,
+         gold = 14,
          gold_thread = 6,
          iron = 8,
          planks = 45,
@@ -73,8 +73,11 @@ return {
          atlanteans_woodcutter = 3,
          atlanteans_horse = 5,
       },
+      -- Max health: 1, Max attack: 4, Max defense: 2, Max evade: 2
       soldiers = {
-         [{0,0,0,0}] = 35,
+         [{0,0,0,0}] = 25,
+         [{1,0,0,1}] = 5,
+         [{1,1,0,0}] = 5,
       }
    })
 
@@ -84,15 +87,15 @@ return {
       },
       })
 
-      place_building_in_region(player, "atlanteans_labyrinth", sf:region(11), {
+      place_building_in_region(player, "atlanteans_toolsmithy", sf:region(11), {
          wares = {
-            atlanteans_bread = 4,
-            smoked_fish = 3,
-            smoked_meat = 3,
+            iron = 6,
+            log = 6,
+            spidercloth = 4
          }
       })
 
-      place_building_in_region(player, "atlanteans_armorsmithy", sf:region(11), {
+      place_building_in_region(player, "atlanteans_hunters_house", sf:region(11), {
          wares = {}
       })
 
