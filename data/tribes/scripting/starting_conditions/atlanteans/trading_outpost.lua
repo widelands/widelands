@@ -25,7 +25,7 @@ return {
             quartz = 9,
             granite = 50,
             spider_silk = 9,
-            log = 20,
+            log = 80,
             coal = 12,
             gold = 14,
             gold_thread = 6,

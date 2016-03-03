@@ -50,7 +50,7 @@ return {
             scythe = 5,
             shovel = 6,
             granite = 40,
-            log = 30,
+            log = 80,
             water = 12,
             wheat = 4,
             wine = 8,
