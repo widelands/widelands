@@ -1,5 +1,5 @@
 -- =======================================================================
---              Headquarters Starting Conditions for Atlanteans
+--          Trading Outpost Starting Conditions for the Atlanteans
 -- =======================================================================
 
 include "scripting/infrastructure.lua"

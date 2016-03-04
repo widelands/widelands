@@ -1,5 +1,5 @@
 -- =======================================================================
---                Starting conditions for Headquarters Medium
+--           Trading Outpost Starting Conditions for the Empire
 -- =======================================================================
 
 include "scripting/infrastructure.lua"

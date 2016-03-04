@@ -1,5 +1,5 @@
 -- =======================================================================
---                 Start conditions for Headquarters Medium
+--          Trading Outpost Starting Conditions for the Barbarians
 -- =======================================================================
 
 include "scripting/infrastructure.lua"
