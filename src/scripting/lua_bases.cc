@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2006-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,12 +22,13 @@
 #include <boost/format.hpp>
 
 #include "economy/economy.h"
-#include "logic/checkstep.h"
 #include "logic/constants.h"
+#include "logic/map_objects/checkstep.h"
+#include "logic/map_objects/tribes/tribe_descr.h"
+#include "logic/map_objects/tribes/tribes.h"
+#include "logic/map_objects/tribes/ware_descr.h"
+#include "logic/map_objects/world/world.h"
 #include "logic/player.h"
-#include "logic/tribes/tribe_descr.h"
-#include "logic/tribes/tribes.h"
-#include "logic/ware_descr.h"
 #include "scripting/factory.h"
 #include "scripting/globals.h"
 #include "scripting/lua_map.h"
@@ -78,10 +79,13 @@ EditorGameBase
 
 const char LuaEditorGameBase::className[] = "EditorGameBase";
 const MethodType<LuaEditorGameBase> LuaEditorGameBase::Methods[] = {
+	METHOD(LuaEditorGameBase, get_immovable_description),
 	METHOD(LuaEditorGameBase, get_building_description),
 	METHOD(LuaEditorGameBase, get_tribe_description),
 	METHOD(LuaEditorGameBase, get_ware_description),
 	METHOD(LuaEditorGameBase, get_worker_description),
+	METHOD(LuaEditorGameBase, get_resource_description),
+	METHOD(LuaEditorGameBase, get_terrain_description),
 	{nullptr, nullptr},
 };
 const PropertyType<LuaEditorGameBase> LuaEditorGameBase::Properties[] = {
@@ -150,11 +154,42 @@ int LuaEditorGameBase::get_players(lua_State * L) {
  */
 
 /* RST
+	.. function:: get_immovable_description(immovable_name)
+
+		:arg immovable_name: the name of the immovable
+
+		Returns the ImmovableDescription for the named object.
+
+		(RO) The :class:`~wl.Game.Immovable_description`.
+*/
+int LuaEditorGameBase::get_immovable_description(lua_State* L) {
+	if (lua_gettop(L) != 2) {
+		report_error(L, "Wrong number of arguments");
+	}
+	const std::string immovable_name = luaL_checkstring(L, 2);
+	EditorGameBase& egbase = get_egbase(L);
+	const World& world = egbase.world();
+	DescriptionIndex idx = world.get_immovable_index(immovable_name);
+	if (idx != INVALID_INDEX) {
+		const ImmovableDescr* descr = world.get_immovable_descr(idx);
+		return to_lua<LuaMaps::LuaImmovableDescription>(L, new LuaMaps::LuaImmovableDescription(descr));
+	}
+	const Tribes& tribes = egbase.tribes();
+	idx = tribes.immovable_index(immovable_name);
+	if (!tribes.immovable_exists(idx)) {
+		report_error(L, "Immovable %s does not exist", immovable_name.c_str());
+	}
+	const ImmovableDescr* descr = tribes.get_immovable_descr(idx);
+	return to_lua<LuaMaps::LuaImmovableDescription>(L, new LuaMaps::LuaImmovableDescription(descr));
+}
+
+
+/* RST
 	.. function:: get_building_description(building_description.name)
 
 		:arg building_name: the name of the building
 
-		Registers a building description so Lua can reference it from the game.
+		Returns the description for the given building.
 
 		(RO) The :class:`~wl.Game.Building_description`.
 */
@@ -178,7 +213,7 @@ int LuaEditorGameBase::get_building_description(lua_State* L) {
 
 		:arg tribe_name: the name of the tribe
 
-		Registers a tribe description so Lua can reference it from the game.
+		Returns the tribe description of the given tribe.
 
 		(RO) The :class:`~wl.Game.Tribe_description`.
 */
@@ -202,7 +237,7 @@ int LuaEditorGameBase::get_tribe_description(lua_State* L) {
 
 		:arg ware_name: the name of the ware
 
-		Registers a ware description so Lua can reference it from the game.
+		Returns the ware description for the given ware.
 
 		(RO) The :class:`~wl.Game.Ware_description`.
 */
@@ -226,7 +261,7 @@ int LuaEditorGameBase::get_ware_description(lua_State* L) {
 
 		:arg worker_name: the name of the worker
 
-		Registers a worker description so Lua can reference it from the game.
+		Returs the worker desciption for the given worker.
 
 		(RO) The :class:`~wl.Game.Worker_description`.
 */
@@ -243,6 +278,53 @@ int LuaEditorGameBase::get_worker_description(lua_State* L) {
 	const WorkerDescr* worker_description = tribes.get_worker_descr(worker_index);
 	return LuaMaps::upcasted_map_object_descr_to_lua(L, worker_description);
 }
+
+/* RST
+	.. function:: get_resource_description(resource_name)
+
+		:arg resource_name: the name of the resource
+
+		Returns the resource description for the given resource.
+
+		(RO) The :class:`~wl.Game.Resource_description`.
+*/
+int LuaEditorGameBase::get_resource_description(lua_State* L) {
+	if (lua_gettop(L) != 2) {
+		report_error(L, "Wrong number of arguments");
+	}
+	const std::string resource_name = luaL_checkstring(L, 2);
+	const World& world = get_egbase(L).world();
+	const DescriptionIndex idx = world.get_resource(resource_name.c_str());
+
+	if (idx == INVALID_INDEX) {
+		report_error(L, "Resource %s does not exist", resource_name.c_str());
+	}
+
+	const ResourceDescription* descr = world.get_resource(idx);
+	return to_lua<LuaMaps::LuaResourceDescription>(L, new LuaMaps::LuaResourceDescription(descr));
+}
+
+/* RST
+	.. function:: get_terrain_description(terrain_name)
+
+		:arg terrain_name: the name of the terrain
+
+		Returns a given terrain description for the given terrain.
+
+		(RO) The :class:`~wl.Game.Terrain_description`.
+*/
+int LuaEditorGameBase::get_terrain_description(lua_State* L) {
+	if (lua_gettop(L) != 2) {
+		report_error(L, "Wrong number of arguments");
+	}
+	const std::string terrain_name = luaL_checkstring(L, 2);
+	const TerrainDescription* descr = get_egbase(L).world().terrain_descr(terrain_name);
+	if (!descr) {
+		report_error(L, "Terrain %s does not exist", terrain_name.c_str());
+	}
+	return to_lua<LuaMaps::LuaTerrainDescription>(L, new LuaMaps::LuaTerrainDescription(descr));
+}
+
 
 /*
  ==========================================================
@@ -280,10 +362,10 @@ const PropertyType<LuaPlayerBase> LuaPlayerBase::Properties[] = {
 };
 
 void LuaPlayerBase::__persist(lua_State * L) {
-	PERS_UINT32("player", m_pl);
+	PERS_UINT32("player", player_number_);
 }
 void LuaPlayerBase::__unpersist(lua_State * L) {
-	UNPERS_UINT32("player", m_pl);
+	UNPERS_UINT32("player", player_number_);
 }
 
 /*
@@ -297,7 +379,7 @@ void LuaPlayerBase::__unpersist(lua_State * L) {
 		(RO) The number of this Player.
 */
 int LuaPlayerBase::get_number(lua_State * L) {
-	lua_pushuint32(L, m_pl);
+	lua_pushuint32(L, player_number_);
 	return 1;
 }
 
@@ -498,7 +580,8 @@ int LuaPlayerBase::place_building(lua_State * L) {
 	if (lua_gettop(L) >= 5)
 		force = luaL_checkboolean(L, 5);
 
-	const Tribes& tribes = get_egbase(L).tribes();
+	EditorGameBase& egbase = get_egbase(L);
+	const Tribes& tribes = egbase.tribes();
 
 	if (!tribes.building_exists(name)) {
 		report_error(L, "Unknown Building: '%s'", name.c_str());
@@ -514,14 +597,14 @@ int LuaPlayerBase::place_building(lua_State * L) {
 	Building * b = nullptr;
 	if (force) {
 		if (constructionsite) {
-			b = &get(L, get_egbase(L)).force_csite
+			b = &get(L, egbase).force_csite
 				(c->coords(), building_index, former_buildings);
 		} else {
-			b = &get(L, get_egbase(L)).force_building
+			b = &get(L, egbase).force_building
 				(c->coords(), former_buildings);
 		}
 	} else {
-		b = get(L, get_egbase(L)).build
+		b = get(L, egbase).build
 			(c->coords(), building_index, constructionsite, former_buildings);
 	}
 	if (!b)
@@ -578,7 +661,7 @@ int LuaPlayerBase::conquer(lua_State * L) {
 
 	get_egbase(L).conquer_area_no_building
 		(PlayerArea<Area<FCoords> >
-			(m_pl, Area<FCoords>
+			(player_number_, Area<FCoords>
 				((*get_user_class<LuaMaps::LuaField>(L, 2))->fcoords(L), radius))
 	);
 	return 0;
@@ -643,11 +726,11 @@ int LuaPlayerBase::get_wares(lua_State * L) {
 Player & LuaPlayerBase::get
 		(lua_State * L, Widelands::EditorGameBase & egbase)
 {
-	if (m_pl > MAX_PLAYERS)
-		report_error(L, "Illegal player number %i",  m_pl);
-	Player * rv = egbase.get_player(m_pl);
+	if (player_number_ > MAX_PLAYERS)
+		report_error(L, "Illegal player number %i",  player_number_);
+	Player * rv = egbase.get_player(player_number_);
 	if (!rv)
-		report_error(L, "Player with the number %i does not exist", m_pl);
+		report_error(L, "Player with the number %i does not exist", player_number_);
 	return *rv;
 }
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2003-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -37,19 +37,19 @@ struct IconGridButton : public Button {
 			(&parent, name, x, y, w, h, background_picture_id,
 			 foreground_picture_id,
 			 tooltip_text, true, true),
-			 m_icongrid(parent),
-			 _callback_argument_id(callback_argument_id)
+			 icongrid_(parent),
+			 callback_argument_id_(callback_argument_id)
 		{}
 
 private:
-	IconGrid & m_icongrid;
-	const uint32_t _callback_argument_id;
+	IconGrid & icongrid_;
+	const uint32_t callback_argument_id_;
 
 	void handle_mousein(bool inside) override {
 		if (inside) {
-			m_icongrid.mousein(_callback_argument_id);
+			icongrid_.mousein(callback_argument_id_);
 		} else {
-			m_icongrid.mouseout(_callback_argument_id);
+			icongrid_.mouseout(callback_argument_id_);
 		}
 		Button::handle_mousein(inside);
 	}
@@ -64,9 +64,9 @@ IconGrid::IconGrid
 	 int32_t cols)
 	:
 	Panel            (parent, x, y, 0, 0),
-	m_columns        (cols),
-	m_cell_width     (cellw),
-	m_cell_height    (cellh)
+	columns_        (cols),
+	cell_width_     (cellw),
+	cell_height_    (cellh)
 {}
 
 
@@ -82,25 +82,25 @@ int32_t IconGrid::add
 
 	it.data = data;
 
-	m_items.push_back(it);
+	items_.push_back(it);
 
 	// resize
-	const int32_t rows = (m_items.size() + m_columns - 1) / m_columns;
+	const int32_t rows = (items_.size() + columns_ - 1) / columns_;
 
 	if (rows <= 1) {
-		set_desired_size(m_cell_width * m_columns, m_cell_height);
+		set_desired_size(cell_width_ * columns_, cell_height_);
 	} else {
 		set_desired_size
-			(m_cell_width * m_columns, m_cell_height * rows);
+			(cell_width_ * columns_, cell_height_ * rows);
 	}
 
-	uint32_t idx = m_items.size() - 1;
-	uint32_t x = (idx % m_columns) * m_cell_width;
-	uint32_t y = (idx / m_columns) * m_cell_height;
+	uint32_t idx = items_.size() - 1;
+	uint32_t x = (idx % columns_) * cell_width_;
+	uint32_t y = (idx / columns_) * cell_height_;
 
 	UI::Button * btn = new IconGridButton
 		(*this, name,
-		 x, y, m_cell_width, m_cell_height,
+		 x, y, cell_width_, cell_height_,
 		 nullptr, pic,
 		 idx, tooltip_text);
 	btn->sigclicked.connect(boost::bind(&IconGrid::clicked_button, this, idx));
@@ -118,9 +118,9 @@ void IconGrid::clicked_button(uint32_t idx) {
 */
 void * IconGrid::get_data(int32_t idx)
 {
-	assert(static_cast<uint32_t>(idx) < m_items.size());
+	assert(static_cast<uint32_t>(idx) < items_.size());
 
-	return m_items[idx].data;
+	return items_[idx].data;
 }
 
 }

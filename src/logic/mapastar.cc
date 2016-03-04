@@ -19,7 +19,7 @@
 
 #include "logic/mapastar.h"
 
-#include "logic/instances.h"
+#include "logic/map_objects/map_object.h"
 #include "logic/path.h"
 
 namespace Widelands {
@@ -31,8 +31,8 @@ namespace Widelands {
  */
 void MapAStarBase::pathto(Coords dest, Path & path) const
 {
-	path.m_end = dest;
-	path.m_path.clear();
+	path.end_ = dest;
+	path.path_.clear();
 
 	Coords cur = dest;
 	for (;;) {
@@ -43,12 +43,12 @@ void MapAStarBase::pathto(Coords dest, Path & path) const
 		if (pf.backlink == IDLE)
 			break;
 
-		path.m_path.push_back(pf.backlink);
+		path.path_.push_back(pf.backlink);
 
 		map.get_neighbour(cur, get_reverse_dir(pf.backlink), &cur);
 	}
 
-	path.m_start = cur;
+	path.start_ = cur;
 }
 
 } // namespace Widelands

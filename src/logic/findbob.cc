@@ -20,14 +20,14 @@
 #include "logic/findbob.h"
 
 #include "base/macros.h"
+#include "logic/map_objects/tribes/soldier.h"
 #include "logic/player.h"
-#include "logic/soldier.h"
 
 namespace Widelands {
 
 bool FindBobAttribute::accept(Bob * const bob) const
 {
-	return bob->has_attribute(m_attrib);
+	return bob->has_attribute(attrib);
 }
 
 bool FindBobEnemySoldier::accept(Bob * const imm) const

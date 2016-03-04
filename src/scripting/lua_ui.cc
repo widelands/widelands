@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2006-20116 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -104,14 +104,14 @@ const MethodType<LuaPanel> LuaPanel::Methods[] = {
 
 		(RO) An :class:`array` of all visible buttons inside this Panel.
 */
-static void _put_all_visible_buttons_into_table
+static void put_all_visible_buttons_into_table
 	(lua_State * L, UI::Panel * g)
 {
 	if (!g) return;
 
 	for (UI::Panel * f = g->get_first_child(); f; f = f->get_next_sibling())
 	{
-		_put_all_visible_buttons_into_table(L, f);
+		put_all_visible_buttons_into_table(L, f);
 
 		if (upcast(UI::Button, b, f))
 			if (b->is_visible()) {
@@ -122,10 +122,10 @@ static void _put_all_visible_buttons_into_table
 	}
 }
 int LuaPanel::get_buttons(lua_State * L) {
-	assert(m_panel);
+	assert(panel_);
 
 	lua_newtable(L);
-	_put_all_visible_buttons_into_table(L, m_panel);
+	put_all_visible_buttons_into_table(L, panel_);
 
 	return 1;
 }
@@ -135,14 +135,14 @@ int LuaPanel::get_buttons(lua_State * L) {
 
 		(RO) An :class:`array` of all visible tabs inside this Panel.
 */
-static void _put_all_tabs_into_table
+static void put_all_tabs_into_table
 	(lua_State * L, UI::Panel * g)
 {
 	if (!g) return;
 
 	for (UI::Panel * f = g->get_first_child(); f; f = f->get_next_sibling())
 	{
-		_put_all_tabs_into_table(L, f);
+		put_all_tabs_into_table(L, f);
 
 		if (upcast(UI::TabPanel, t, f))
 			for (UI::Tab* tab : t->tabs()) {
@@ -153,10 +153,10 @@ static void _put_all_tabs_into_table
 	}
 }
 int LuaPanel::get_tabs(lua_State * L) {
-	assert(m_panel);
+	assert(panel_);
 
 	lua_newtable(L);
-	_put_all_tabs_into_table(L, m_panel);
+	put_all_tabs_into_table(L, panel_);
 
 	return 1;
 }
@@ -168,14 +168,14 @@ int LuaPanel::get_tabs(lua_State * L) {
 		(RO) A :class:`array` of all currently open windows that are
 			children of this Panel.
 */
-static void _put_all_visible_windows_into_table
+static void put_all_visible_windows_into_table
 	(lua_State * L, UI::Panel * g)
 {
 	if (!g) return;
 
 	for (UI::Panel * f = g->get_first_child(); f; f = f->get_next_sibling())
 	{
-		_put_all_visible_windows_into_table(L, f);
+		put_all_visible_windows_into_table(L, f);
 
 		if (upcast(UI::Window, win, f)) {
 			lua_pushstring(L, win->get_name());
@@ -185,10 +185,10 @@ static void _put_all_visible_windows_into_table
 	}
 }
 int LuaPanel::get_windows(lua_State * L) {
-	assert(m_panel);
+	assert(panel_);
 
 	lua_newtable(L);
-	_put_all_visible_windows_into_table(L, m_panel);
+	put_all_visible_windows_into_table(L, panel_);
 
 	return 1;
 }
@@ -199,27 +199,27 @@ int LuaPanel::get_windows(lua_State * L) {
 		(RW) The current mouse position relative to this Panels position
 */
 int LuaPanel::get_mouse_position_x(lua_State * L) {
-	assert(m_panel);
-	lua_pushint32(L, m_panel->get_mouse_position().x);
+	assert(panel_);
+	lua_pushint32(L, panel_->get_mouse_position().x);
 	return 1;
 }
 int LuaPanel::set_mouse_position_x(lua_State * L) {
-	assert(m_panel);
-	Point p = m_panel->get_mouse_position();
+	assert(panel_);
+	Point p = panel_->get_mouse_position();
 	p.x = luaL_checkint32(L, -1);
-	m_panel->set_mouse_pos(p);
+	panel_->set_mouse_pos(p);
 	return 1;
 }
 int LuaPanel::get_mouse_position_y(lua_State * L) {
-	assert(m_panel);
-	lua_pushint32(L, m_panel->get_mouse_position().y);
+	assert(panel_);
+	lua_pushint32(L, panel_->get_mouse_position().y);
 	return 1;
 }
 int LuaPanel::set_mouse_position_y(lua_State * L) {
-	assert(m_panel);
-	Point p = m_panel->get_mouse_position();
+	assert(panel_);
+	Point p = panel_->get_mouse_position();
 	p.y = luaL_checkint32(L, -1);
-	m_panel->set_mouse_pos(p);
+	panel_->set_mouse_pos(p);
 	return 1;
 }
 
@@ -229,23 +229,23 @@ int LuaPanel::set_mouse_position_y(lua_State * L) {
 		(RW) The dimensions of this panel in pixels
 */
 int LuaPanel::get_width(lua_State * L) {
-	assert(m_panel);
-	lua_pushint32(L, m_panel->get_w());
+	assert(panel_);
+	lua_pushint32(L, panel_->get_w());
 	return 1;
 }
 int LuaPanel::set_width(lua_State * L) {
-	assert(m_panel);
-	m_panel->set_size(luaL_checkint32(L, -1), m_panel->get_h());
+	assert(panel_);
+	panel_->set_size(luaL_checkint32(L, -1), panel_->get_h());
 	return 1;
 }
 int LuaPanel::get_height(lua_State * L) {
-	assert(m_panel);
-	lua_pushint32(L, m_panel->get_h());
+	assert(panel_);
+	lua_pushint32(L, panel_->get_h());
 	return 1;
 }
 int LuaPanel::set_height(lua_State * L) {
-	assert(m_panel);
-	m_panel->set_size(m_panel->get_w(), luaL_checkint32(L, -1));
+	assert(panel_);
+	panel_->set_size(panel_->get_w(), luaL_checkint32(L, -1));
 	return 1;
 }
 
@@ -256,29 +256,29 @@ int LuaPanel::set_height(lua_State * L) {
 		parent's element inner canvas.
 */
 int LuaPanel::get_position_x(lua_State * L) {
-	assert(m_panel);
-	Point p = m_panel->to_parent(Point(0, 0));
+	assert(panel_);
+	Point p = panel_->to_parent(Point(0, 0));
 
 	lua_pushint32(L, p.x);
 	return 1;
 }
 int LuaPanel::set_position_x(lua_State * L) {
-	assert(m_panel);
-	Point p(luaL_checkint32(L, -1) - m_panel->get_lborder(), m_panel->get_y());
-	m_panel->set_pos(p);
+	assert(panel_);
+	Point p(luaL_checkint32(L, -1) - panel_->get_lborder(), panel_->get_y());
+	panel_->set_pos(p);
 	return 1;
 }
 int LuaPanel::get_position_y(lua_State * L) {
-	assert(m_panel);
-	Point p = m_panel->to_parent(Point(0, 0));
+	assert(panel_);
+	Point p = panel_->to_parent(Point(0, 0));
 
 	lua_pushint32(L, p.y);
 	return 1;
 }
 int LuaPanel::set_position_y(lua_State * L) {
-	assert(m_panel);
-	Point p(m_panel->get_x(), luaL_checkint32(L, -1) - m_panel->get_tborder());
-	m_panel->set_pos(p);
+	assert(panel_);
+	Point p(panel_->get_x(), luaL_checkint32(L, -1) - panel_->get_tborder());
+	panel_->set_pos(p);
 	return 1;
 }
 
@@ -298,12 +298,12 @@ int LuaPanel::set_position_y(lua_State * L) {
 		:rtype: both are :class:`integers`
 */
 int LuaPanel::get_descendant_position(lua_State * L) {
-	assert(m_panel);
+	assert(panel_);
 
-	UI::Panel * cur = (*get_base_user_class<LuaPanel>(L, 2))->m_panel;
+	UI::Panel * cur = (*get_base_user_class<LuaPanel>(L, 2))->panel_;
 
 	Point cp = Point(0, 0);
-	while (cur && cur != m_panel) {
+	while (cur && cur != panel_) {
 		cp += cur->to_parent(Point(0, 0));
 		cur = cur->get_parent();
 	}
@@ -482,8 +482,8 @@ int LuaWindow::get_name(lua_State * L) {
 		not use it any longer.
 */
 int LuaWindow::close(lua_State * /* L */) {
-	delete m_panel;
-	m_panel = nullptr;
+	delete panel_;
+	panel_ = nullptr;
 	return 0;
 }
 
@@ -526,7 +526,7 @@ LuaMapView::LuaMapView(lua_State* L) : LuaPanel(get_egbase(L).get_ibase()) {
 void LuaMapView::__unpersist(lua_State* L)
 {
 	Widelands::Game & game = get_game(L);
-	m_panel = game.get_ibase();
+	panel_ = game.get_ibase();
 }
 
 

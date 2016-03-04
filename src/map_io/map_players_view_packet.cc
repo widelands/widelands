@@ -26,6 +26,7 @@
 
 #include "base/log.h"
 #include "base/macros.h"
+#include "base/wexception.h"
 #include "economy/flag.h"
 #include "economy/road.h"
 #include "io/fileread.h"
@@ -33,10 +34,9 @@
 #include "logic/editor_game_base.h"
 #include "logic/field.h"
 #include "logic/game_data_error.h"
+#include "logic/map_objects/tribes/tribe_descr.h"
+#include "logic/map_objects/world/world.h"
 #include "logic/player.h"
-#include "logic/tribes/tribe_descr.h"
-#include "logic/world/world.h"
-
 
 namespace Widelands {
 
@@ -176,12 +176,6 @@ namespace {
 
 
 // Errors for the Read* functions.
-struct TribeNonexistent : public FileRead::DataError {
-	TribeNonexistent(char const* const Name)
-	   : DataError("tribe \"%s\" does not exist", Name), name(Name) {
-	}
-	char const* const name;
-};
 struct TribeImmovableNonexistent : public FileRead::DataError {
 	TribeImmovableNonexistent(const std::string& Name)
 	   : DataError("immovable type \"%s\" does not seem to be a tribe immovable", Name.c_str()),
@@ -311,7 +305,7 @@ void MapPlayersViewPacket::read
 	Field & first_field = map[0];
 	const PlayerNumber nr_players = map.get_nrplayers();
 	iterate_players_existing_const(plnum, nr_players, egbase, player) {
-		Player::Field * const player_fields = player->m_fields;
+		Player::Field * const player_fields = player->fields_;
 		uint32_t const gametime = egbase.get_gametime();
 
 		char unseen_times_filename[FILENAME_SIZE];
@@ -881,14 +875,14 @@ inline static void write_unseen_immovable
 		immovable_kind = UNSEEN_PORTDOCK;
 	else
 	{
-		// We should never get here.. debugging code until assert(false)
+		// We should never get here.. output some information about the situation.
 		log ("\nwidelands_map_players_view_data_packet.cc::write_unseen_immovable(): ");
 		log
 		("%s %s (%s) was not expected.\n",
 			typeid(*map_object_descr).name(),
 			map_object_descr->name().c_str(),
 			map_object_descr->descname().c_str());
-		assert(false);
+		NEVER_HERE();
 	}
 	immovable_kinds_file.unsigned_8(immovable_kind);
 }
@@ -909,7 +903,7 @@ void MapPlayersViewPacket::write
 	Field & first_field = map[0];
 	const PlayerNumber nr_players = map.get_nrplayers();
 	iterate_players_existing_const(plnum, nr_players, egbase, player)
-		if (const Player::Field * const player_fields = player->m_fields) {
+		if (const Player::Field * const player_fields = player->fields_) {
 			FileWrite                   unseen_times_file;
 			FileWrite           node_immovable_kinds_file;
 			FileWrite                node_immovables_file;

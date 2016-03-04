@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -30,8 +30,8 @@ Textarea::Textarea
 	 const std::string & text, Align align)
 	:
 		Panel      (parent, x, y, 0, 0),
-		m_layoutmode(AutoMove),
-		m_align    (align)
+		layoutmode_(AutoMove),
+		align_    (align)
 {
 	init();
 	set_text(text);
@@ -43,8 +43,8 @@ Textarea::Textarea
 	 Align align)
 	:
 		Panel      (parent, x, y, w, h),
-		m_layoutmode(AutoMove),
-		m_align    (align)
+		layoutmode_(AutoMove),
+		align_    (align)
 {
 	init();
 }
@@ -55,8 +55,8 @@ Textarea:: Textarea
 	 const std::string & text, Align align)
 	:
 		Panel      (parent, x, y, w, h),
-		m_layoutmode(AutoMove),
-		m_align    (align)
+		layoutmode_(AutoMove),
+		align_    (align)
 {
 	init();
 	set_text(text);
@@ -68,8 +68,8 @@ Textarea::Textarea
 	 Align align)
 :
 Panel(parent, 0, 0, 0, 0),
-m_layoutmode(Layouted),
-m_align(align)
+layoutmode_(Layouted),
+align_(align)
 {
 	init();
 	set_text(text);
@@ -83,38 +83,40 @@ void Textarea::init()
 	fixed_width_ = 0;
 	set_handle_mouse(false);
 	set_thinks(false);
-	set_textstyle(UI::TextStyle::ui_small());
+	color_ = UI_FONT_CLR_FG;
+	fontsize_ = UI_FONT_SIZE_SMALL;
+	update();
 }
 
-/**
- * Set the font of the textarea.
- */
-void Textarea::set_textstyle(const TextStyle & style)
+void Textarea::set_color(RGBColor color) {
+	if (color_ != color) {
+		color_ = color;
+		update();
+	}
+}
+
+void Textarea::set_fontsize(int fontsize) {
+	if (fontsize_ != fontsize) {
+		fontsize_ = fontsize;
+		update();
+	}
+}
+
+void Textarea::update()
 {
-	if (m_textstyle == style)
-		return;
+	if (layoutmode_ == AutoMove) {
+		collapse(); // collapse() implicitly updates the size and position
+	}
 
-	if (m_layoutmode == AutoMove)
-		collapse();
-	m_textstyle = style;
-	rendered_text_ = UI::g_fh1->render(
-									as_uifont(m_text,
-												 m_textstyle.font->size() - UI::g_fh1->fontset().size_offset(),
-												 m_textstyle.fg));
+	rendered_text_ = autofit_ui_text(text_, fixed_width_, color_, fontsize_);
 
-	if (m_layoutmode == AutoMove)
+	if (layoutmode_ == AutoMove) {
 		expand();
-	else if (m_layoutmode == Layouted)
+	} else if (layoutmode_ == Layouted) {
 		update_desired_size();
+	}
 }
 
-/**
- * @deprecated
- */
-void Textarea::set_font(const std::string & name, int size, RGBColor clr)
-{
-	set_textstyle(TextStyle::makebold(Font::get(name, size), clr));
-}
 
 /**
  * Set the text of the Textarea. Size (or desired size) is automatically
@@ -122,36 +124,27 @@ void Textarea::set_font(const std::string & name, int size, RGBColor clr)
  */
 void Textarea::set_text(const std::string & text)
 {
-	if (m_text == text)
-		return;
-
-	if (m_layoutmode == AutoMove)
-		collapse(); // collapse() implicitly updates
-
-	m_text = text;
-	rendered_text_ = UI::g_fh1->render(
-									as_uifont(m_text,
-												 m_textstyle.font->size() - UI::g_fh1->fontset().size_offset(),
-												 m_textstyle.fg));
-	if (m_layoutmode == AutoMove)
-		expand();
-	else if (m_layoutmode == Layouted)
-		update_desired_size();
-
-	update();
+	if (text_ != text) {
+		text_ = text;
+		update();
+	}
 }
 
 const std::string& Textarea::get_text()
 {
-	return m_text;
+	return text_;
 }
 
 
 /**
  * Set the fixed width. The Textarea will still collapse, but then restore this width when expand() is called.
+ * If this is set, text will also autoshrink to fit the width.
  */
-void Textarea::set_fixed_width(uint32_t w) {
-	fixed_width_ = w;
+void Textarea::set_fixed_width(int w) {
+	if (fixed_width_ != w) {
+		fixed_width_ = w;
+		update();
+	}
 }
 
 
@@ -160,14 +153,14 @@ void Textarea::set_fixed_width(uint32_t w) {
  */
 void Textarea::draw(RenderTarget & dst)
 {
-	if (!m_text.empty()) {
+	if (!text_.empty()) {
 		Point anchor
-			(m_align & Align_HCenter ?
-			 get_w() / 2 : m_align & Align_Right  ? get_w() : 0,
-			 m_align & Align_VCenter ?
-			 get_h() / 2 : m_align & Align_Bottom ? get_h() : 0);
+			(static_cast<int>(align_ & UI::Align::kHCenter) ?
+			 get_w() / 2 : static_cast<int>(align_ & UI::Align::kRight)  ? get_w() : 0,
+			 static_cast<int>(align_ & UI::Align::kVCenter) ?
+			 get_h() / 2 : static_cast<int>(align_ & UI::Align::kBottom) ? get_h() : 0);
 
-		dst.blit(anchor, rendered_text_, BlendMode::UseAlpha, m_align);
+		dst.blit(anchor, rendered_text_, BlendMode::UseAlpha, align_);
 	}
 }
 
@@ -182,14 +175,14 @@ void Textarea::collapse()
 	int32_t w = get_w();
 	int32_t h = get_h();
 
-	if (m_align & Align_HCenter)
+	if (static_cast<int>(align_ & UI::Align::kHCenter))
 		x += w >> 1;
-	else if (m_align & Align_Right)
+	else if (static_cast<int>(align_ & UI::Align::kRight))
 		x += w;
 
-	if (m_align & Align_VCenter)
+	if (static_cast<int>(align_ & UI::Align::kVCenter))
 		y += h >> 1;
-	else if (m_align & Align_Bottom)
+	else if (static_cast<int>(align_ & UI::Align::kBottom))
 		y += h;
 
 	set_pos(Point(x, y));
@@ -206,17 +199,17 @@ void Textarea::expand()
 	int32_t y = get_y();
 
 	update_desired_size();
-	uint32_t w, h;
-	get_desired_size(w, h);
+	int w, h;
+	get_desired_size(&w, &h);
 
-	if      (m_align & Align_HCenter)
+	if      (static_cast<int>(align_ & UI::Align::kHCenter))
 		x -= w >> 1;
-	else if (m_align & Align_Right)
+	else if (static_cast<int>(align_ & UI::Align::kRight))
 		x -= w;
 
-	if      (m_align & Align_VCenter)
+	if      (static_cast<int>(align_ & UI::Align::kVCenter))
 		y -= h >> 1;
-	else if (m_align & Align_Bottom)
+	else if (static_cast<int>(align_ & UI::Align::kBottom))
 		y -= h;
 
 	set_pos(Point(x, y));
@@ -235,11 +228,8 @@ void Textarea::update_desired_size()
 		w = fixed_width_ > 0 ? fixed_width_ : rendered_text_->width();
 		h = rendered_text_->height();
 		// We want empty textareas to have height
-		if (m_text.empty()) {
-			h = UI::g_fh1->render(
-					 as_uifont(".",
-								  m_textstyle.font->size() - UI::g_fh1->fontset().size_offset(),
-								  m_textstyle.fg))->height();
+		if (text_.empty()) {
+			h = UI::g_fh1->render(as_uifont(".", fontsize_))->height();
 		}
 	}
 	set_desired_size(w, h);

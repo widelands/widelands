@@ -21,6 +21,7 @@
 #define WL_IO_FILESYSTEM_ZIP_FILESYSTEM_H
 
 #include <cstring>
+#include <memory>
 #include <string>
 
 #include "base/macros.h"
@@ -44,15 +45,12 @@ public:
 
 	void * load(const std::string & fname, size_t & length) override;
 
-	virtual void write
-		(const std::string & fname, void const * data, int32_t length) override;
+	void write(const std::string& fname, void const* data, int32_t length) override;
 	void ensure_directory_exists(const std::string & fs_dirname) override;
 	void   make_directory      (const std::string & fs_dirname) override;
 
-	virtual StreamRead  * open_stream_read
-		(const std::string & fname) override;
-	virtual StreamWrite * open_stream_write
-		(const std::string & fname) override;
+	StreamRead* open_stream_read(const std::string& fname) override;
+	StreamWrite* open_stream_write(const std::string& fname) override;
 
 	FileSystem * make_sub_file_system(const std::string & fs_dirname) override;
 	FileSystem * create_sub_file_system(const std::string & fs_dirname, Type) override;
@@ -63,50 +61,87 @@ public:
 
 	static FileSystem * create_from_directory(const std::string & directory);
 
-	std::string get_basename() override {return m_zipfilename;}
+	std::string get_basename() override;
 
-protected:
-	void m_open_unzip();
-	void m_open_zip();
-	void m_close();
-	std::string strip_basename(std::string);
+private:
+	enum class State {kIdle, kZipping, kUnzipping};
 
-	enum State {
-		STATE_IDLE,
-		STATE_ZIPPING,
-		STATE_UNZIPPPING
+	// All zip filesystems that use the same zip file have a shared
+	// state, which is represented in this struct. This is usually
+	// shared between the root file system, plus every filesystem generated
+	// through 'make_sub_file_system'.
+	class ZipFile {
+	public:
+		ZipFile(const std::string& zipfile);
+
+		// Calls 'close()'.
+		~ZipFile();
+
+		// Make 'filename' into a relative part, dealing with legacy Widelands
+		// zip file format.
+		std::string strip_basename(const std::string& filename);
+
+		// Full path to the zip file.
+		const std::string& path() const;
+
+		// Closes the file if it is open, reopens it for writing, and
+		// returns the minizip handle.
+		const zipFile& write_handle();
+
+		// Closes the file if it is open, reopens it for reading, and returns the
+		// minizip handle.
+		const unzFile& read_handle();
+
+	private:
+		// Closes 'path_' and reopens it for unzipping (read).
+		void open_for_unzip();
+
+		// Closes 'path_' and reopens it for zipping (write).
+		void open_for_zip();
+
+		// Closes 'path_' if it is opened.
+		void close();
+
+		State state_;
+
+		// E.g. "path/to/filename.zip"
+		std::string path_;
+
+		// E.g. "filename.zip"
+		std::string basename_;
+
+		// File handles for zipping and unzipping.
+		zipFile write_handle_;
+		unzFile read_handle_;
 	};
 
-	State       m_state;
-	zipFile     m_zipfile;
-	unzFile     m_unzipfile;
-	/// if true data is in a directory named as the zipfile. This is set by
-	/// strip_basename()
-	bool        m_oldzip;
-	std::string m_zipfilename;
-	std::string m_basenamezip;
-	std::string m_basename;
-
 	struct ZipStreamRead : StreamRead {
-		explicit ZipStreamRead(zipFile file, ZipFilesystem* zipfs);
+		explicit ZipStreamRead(const std::shared_ptr<ZipFile>& shared_data);
 		virtual ~ZipStreamRead();
 		size_t data(void* data, size_t bufsize) override;
 		bool end_of_file() const override;
 	private:
-		zipFile m_unzipfile;
-		ZipFilesystem* m_zipfs;
+		std::shared_ptr<ZipFile> zip_file_;
 	};
+
 	struct ZipStreamWrite : StreamWrite {
-		explicit ZipStreamWrite(zipFile file, ZipFilesystem* zipfs);
+		explicit ZipStreamWrite(const std::shared_ptr<ZipFile>& shared_data);
 		virtual ~ZipStreamWrite();
 		void data(const void* const data, size_t size) override;
 	private:
-		zipFile m_zipfile;
-		ZipFilesystem* m_zipfs;
+		std::shared_ptr<ZipFile> zip_file_;
 	};
 
+	// Used for creating sub filesystems.
+	ZipFilesystem(const std::shared_ptr<ZipFile>& shared_data, const std::string& basedir_in_zip_file);
+
+	// The data shared between all zip filesystems with the same
+	// underlying zip file.
+	std::shared_ptr<ZipFile> zip_file_;
+
+	// If we are a sub filesystem, this points to our base
+	// directory, otherwise it is the empty string.
+	std::string basedir_in_zip_file_;
 };
-
-
 
 #endif  // end of include guard: WL_IO_FILESYSTEM_ZIP_FILESYSTEM_H

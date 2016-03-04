@@ -25,7 +25,7 @@
 #include <boost/format.hpp>
 
 #include "base/i18n.h"
-#include "logic/building.h"
+#include "logic/map_objects/tribes/building.h"
 #include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
 
@@ -42,7 +42,7 @@ BuildingHelpWindow::BuildingHelpWindow
 	:
 	UI::UniqueWindow(parent, "help_window", &reg, width, height,
 			(boost::format(_("Help: %s")) % building_description.descname()).str()),
-	textarea_(new MultilineTextarea(this, 5, 5, width - 10, height -10, std::string(), Align_Left))
+	textarea_(new MultilineTextarea(this, 5, 5, width - 10, height - 10, std::string(), UI::Align::kLeft))
 {
 	assert(tribe.has_building(tribe.building_index(building_description.name())));
 	try {

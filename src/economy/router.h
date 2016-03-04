@@ -24,7 +24,7 @@
 #include <boost/function.hpp>
 #include <stdint.h>
 
-#include "logic/wareworker.h"
+#include "logic/map_objects/tribes/wareworker.h"
 
 namespace Widelands {
 class ITransportCostCalculator;
@@ -49,7 +49,7 @@ struct Router {
 	uint32_t assign_cycle();
 
 private:
-	ResetCycleFn m_reset;
+	ResetCycleFn reset_;
 	uint32_t mpf_cycle;       ///< pathfinding cycle, see Flag::mpf_cycle
 };
 

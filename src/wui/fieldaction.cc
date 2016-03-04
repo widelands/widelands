@@ -25,13 +25,13 @@
 #include "economy/flag.h"
 #include "economy/road.h"
 #include "graphic/graphic.h"
-#include "logic/attackable.h"
 #include "logic/cmd_queue.h"
+#include "logic/map_objects/attackable.h"
+#include "logic/map_objects/tribes/soldier.h"
+#include "logic/map_objects/tribes/tribe_descr.h"
+#include "logic/map_objects/tribes/warehouse.h"
 #include "logic/maphollowregion.h"
 #include "logic/player.h"
-#include "logic/soldier.h"
-#include "logic/tribes/tribe_descr.h"
-#include "logic/warehouse.h"
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
 #include "ui_basic/icongrid.h"
@@ -40,9 +40,9 @@
 #include "ui_basic/unique_window.h"
 #include "wui/actionconfirm.h"
 #include "wui/attack_box.h"
+#include "wui/field_overlay_manager.h"
 #include "wui/game_debug_ui.h"
 #include "wui/interactive_player.h"
-#include "wui/overlay_manager.h"
 #include "wui/waresdisplay.h"
 #include "wui/watchwindow.h"
 
@@ -214,26 +214,26 @@ private:
 
 	Widelands::Player * m_plr;
 	Widelands::Map    * m_map;
-	OverlayManager & m_overlay_manager;
+	FieldOverlayManager & m_field_overlay_manager;
 
 	Widelands::FCoords  m_node;
 
 	UI::TabPanel      m_tabpanel;
 	bool m_fastclick; // if true, put the mouse over first button in first tab
 	uint32_t m_best_tab;
-	OverlayManager::JobId m_workarea_preview_job_id;
+	FieldOverlayManager::OverlayId m_workarea_preview_overlay_id;
 
 	/// Variables to use with attack dialog.
 	AttackBox * m_attack_box;
 };
 
-static const char * const pic_tab_buildroad  = "pics/menu_tab_buildroad.png";
-static const char * const pic_tab_watch      = "pics/menu_tab_watch.png";
+static const char * const pic_tab_buildroad  = "images/wui/fieldaction/menu_tab_buildroad.png";
+static const char * const pic_tab_watch      = "images/wui/fieldaction/menu_tab_watch.png";
 static const char * const pic_tab_buildhouse[] = {
-	"pics/menu_tab_buildsmall.png",
-	"pics/menu_tab_buildmedium.png",
-	"pics/menu_tab_buildbig.png",
-	"pics/menu_tab_buildport.png"
+	"images/wui/fieldaction/menu_tab_buildsmall.png",
+	"images/wui/fieldaction/menu_tab_buildmedium.png",
+	"images/wui/fieldaction/menu_tab_buildbig.png",
+	"images/wui/fieldaction/menu_tab_buildport.png"
 };
 static const std::string tooltip_tab_build[] = {
 	_("Build small building"),
@@ -244,21 +244,21 @@ static const std::string tooltip_tab_build[] = {
 static const std::string name_tab_build[] = {"small", "medium", "big", "port"};
 
 
-static const char * const pic_tab_buildmine  = "pics/menu_tab_buildmine.png";
+static const char * const pic_tab_buildmine  = "images/wui/fieldaction/menu_tab_buildmine.png";
 
-static const char * const pic_buildroad      = "pics/menu_build_way.png";
-static const char * const pic_remroad        = "pics/menu_rem_way.png";
-static const char * const pic_buildflag      = "pics/menu_build_flag.png";
-static const char * const pic_ripflag        = "pics/menu_rip_flag.png";
-static const char * const pic_watchfield     = "pics/menu_watch_field.png";
-static const char * const pic_showcensus     = "pics/menu_show_census.png";
-static const char * const pic_showstatistics = "pics/menu_show_statistics.png";
-static const char * const pic_debug          = "pics/menu_debug.png";
-static const char * const pic_abort          = "pics/menu_abort.png";
-static const char * const pic_geologist      = "pics/menu_geologist.png";
+static const char * const pic_buildroad      = "images/wui/fieldaction/menu_build_way.png";
+static const char * const pic_remroad        = "images/wui/fieldaction/menu_rem_way.png";
+static const char * const pic_buildflag      = "images/wui/fieldaction/menu_build_flag.png";
+static const char * const pic_ripflag        = "images/wui/fieldaction/menu_rip_flag.png";
+static const char * const pic_watchfield     = "images/wui/fieldaction/menu_watch_field.png";
+static const char * const pic_showcensus     = "images/wui/fieldaction/menu_show_census.png";
+static const char * const pic_showstatistics = "images/wui/fieldaction/menu_show_statistics.png";
+static const char * const pic_debug          = "images/wui/fieldaction/menu_debug.png";
+static const char * const pic_abort          = "images/wui/menu_abort.png";
+static const char * const pic_geologist      = "images/wui/fieldaction/menu_geologist.png";
 
-static const char * const pic_tab_attack     = "pics/menu_tab_attack.png";
-static const char * const pic_attack         = "pics/menu_attack.png";
+static const char * const pic_tab_attack     = "images/wui/fieldaction/menu_tab_attack.png";
+static const char * const pic_attack         = "images/wui/buildings/menu_attack.png";
 
 
 /*
@@ -274,12 +274,12 @@ FieldActionWindow::FieldActionWindow
 	UI::UniqueWindow(ib, "field_action", registry, 68, 34, _("Action")),
 	m_plr(plr),
 	m_map(&ib->egbase().map()),
-	m_overlay_manager(*m_map->get_overlay_manager()),
+	m_field_overlay_manager(*ib->mutable_field_overlay_manager()),
 	m_node(ib->get_sel_pos().node, &(*m_map)[ib->get_sel_pos().node]),
-	m_tabpanel(this, 0, 0, g_gr->images().get("pics/but1.png")),
+	m_tabpanel(this, 0, 0, g_gr->images().get("images/ui_basic/but1.png")),
 	m_fastclick(true),
 	m_best_tab(0),
-	m_workarea_preview_job_id(0),
+	m_workarea_preview_overlay_id(0),
 	m_attack_box(nullptr)
 {
 	ib->set_sel_freeze(true);
@@ -291,8 +291,8 @@ FieldActionWindow::FieldActionWindow
 
 FieldActionWindow::~FieldActionWindow()
 {
-	if (m_workarea_preview_job_id)
-		m_overlay_manager.remove_overlay(m_workarea_preview_job_id);
+	if (m_workarea_preview_overlay_id)
+		m_field_overlay_manager.remove_overlay(m_workarea_preview_overlay_id);
 	ibase().set_sel_freeze(false);
 	delete m_attack_box;
 }
@@ -374,7 +374,7 @@ void FieldActionWindow::add_buttons_auto()
 			if (dynamic_cast<Game const *>(&ibase().egbase())) {
 				add_button
 					(buildbox, "configure_economy",
-					 "pics/genstats_nrwares.png",
+					 "images/wui/stats/genstats_nrwares.png",
 					 &FieldActionWindow::act_configure_economy,
 					 _("Configure economy"));
 				if (can_act)
@@ -466,7 +466,7 @@ void FieldActionWindow::add_buttons_attack ()
 			 attackable->can_attack())
 		{
 			m_attack_box = new AttackBox(&a_box, m_plr, &m_node, 0, 0);
-			a_box.add(m_attack_box, UI::Box::AlignTop);
+			a_box.add(m_attack_box, UI::Align::kTop);
 
 			set_fastclick_panel
 				(&add_button
@@ -613,13 +613,13 @@ UI::Button & FieldActionWindow::add_button
 		*new UI::Button
 			(box, name,
 			 0, 0, 34, 34,
-			 g_gr->images().get("pics/but2.png"),
+			 g_gr->images().get("images/ui_basic/but2.png"),
 			 g_gr->images().get(picname),
 			 tooltip_text);
 	button.sigclicked.connect(boost::bind(fn, this));
 	button.set_repeating(repeating);
 	box->add
-		(&button, UI::Box::AlignTop);
+		(&button, UI::Align::kTop);
 
 	return button;
 }
@@ -809,9 +809,9 @@ void FieldActionWindow::act_build(Widelands::DescriptionIndex idx)
 void FieldActionWindow::building_icon_mouse_out
 	(Widelands::DescriptionIndex)
 {
-	if (m_workarea_preview_job_id) {
-		m_overlay_manager.remove_overlay(m_workarea_preview_job_id);
-		m_workarea_preview_job_id = 0;
+	if (m_workarea_preview_overlay_id) {
+		m_field_overlay_manager.remove_overlay(m_workarea_preview_overlay_id);
+		m_workarea_preview_overlay_id = 0;
 	}
 }
 
@@ -819,11 +819,10 @@ void FieldActionWindow::building_icon_mouse_out
 void FieldActionWindow::building_icon_mouse_in
 	(const Widelands::DescriptionIndex idx)
 {
-	if (ibase().m_show_workarea_preview && !m_workarea_preview_job_id) {
-		const WorkareaInfo & workarea_info =
-			m_plr->tribe().get_building_descr(Widelands::DescriptionIndex(idx))
-			->m_workarea_info;
-		m_workarea_preview_job_id = ibase().show_work_area(workarea_info, m_node);
+	if (ibase().show_workarea_preview_ && !m_workarea_preview_overlay_id) {
+		const WorkareaInfo& workarea_info =
+		   m_plr->tribe().get_building_descr(Widelands::DescriptionIndex(idx))->workarea_info_;
+		m_workarea_preview_overlay_id = ibase().show_work_area(workarea_info, m_node);
 	}
 }
 

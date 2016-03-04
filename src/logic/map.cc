@@ -34,21 +34,20 @@
 #include "economy/road.h"
 #include "editor/tools/editor_increase_resources_tool.h"
 #include "io/filesystem/layered_filesystem.h"
-#include "logic/checkstep.h"
 #include "logic/findimmovable.h"
 #include "logic/findnode.h"
+#include "logic/map_objects/checkstep.h"
+#include "logic/map_objects/tribes/soldier.h"
+#include "logic/map_objects/tribes/tribe_descr.h"
+#include "logic/map_objects/world/terrain_description.h"
+#include "logic/map_objects/world/world.h"
 #include "logic/mapfringeregion.h"
 #include "logic/objective.h"
 #include "logic/pathfield.h"
 #include "logic/player.h"
-#include "logic/soldier.h"
-#include "logic/tribes/tribe_descr.h"
-#include "logic/world/terrain_description.h"
-#include "logic/world/world.h"
 #include "map_io/s2map.h"
 #include "map_io/widelands_map_loader.h"
 #include "notifications/notifications.h"
-#include "wui/overlay_manager.h"
 
 namespace Widelands {
 
@@ -68,11 +67,11 @@ Map IMPLEMENTATION
  */
 
 Map::Map() :
-m_nrplayers      (0),
-m_scenario_types (NO_SCENARIO),
-m_width          (0),
-m_height         (0),
-m_pathfieldmgr   (new PathfieldManager)
+nrplayers_      (0),
+scenario_types_ (NO_SCENARIO),
+width_          (0),
+height_         (0),
+pathfieldmgr_   (new PathfieldManager)
 {
 }
 
@@ -110,12 +109,11 @@ and recalcs the interactive player's overlay.
 */
 void Map::recalc_for_field_area(const World& world, const Area<FCoords> area) {
 	assert(0 <= area.x);
-	assert(area.x < m_width);
+	assert(area.x < width_);
 	assert(0 <= area.y);
-	assert(area.y < m_height);
-	assert(m_fields.get() <= area.field);
-	assert            (area.field < m_fields.get() + max_index());
-	assert(m_overlay_manager);
+	assert(area.y < height_);
+	assert(fields_.get() <= area.field);
+	assert            (area.field < fields_.get() + max_index());
 
 	{ //  First pass.
 		MapRegion<Area<FCoords> > mr(*this, area);
@@ -129,12 +127,6 @@ void Map::recalc_for_field_area(const World& world, const Area<FCoords> area) {
 	{ //  Second pass.
 		MapRegion<Area<FCoords> > mr(*this, area);
 		do recalc_nodecaps_pass2(world, mr.location()); while (mr.advance(*this));
-	}
-
-	{ //  Now only recaluclate the overlays.
-		OverlayManager & om = overlay_manager();
-		MapRegion<Area<FCoords> > mr(*this, area);
-		do om.recalc_field_overlays(mr.location()); while (mr.advance(*this));
 	}
 }
 
@@ -150,14 +142,12 @@ the overlays have completely changed.
 */
 void Map::recalc_whole_map(const World& world)
 {
-	assert(m_overlay_manager);
-
 	//  Post process the map in the necessary two passes to calculate
 	//  brightness and building caps
 	FCoords f;
 
-	for (int16_t y = 0; y < m_height; ++y)
-		for (int16_t x = 0; x < m_width; ++x) {
+	for (int16_t y = 0; y < height_; ++y)
+		for (int16_t x = 0; x < width_; ++x) {
 			f = get_fcoords(Coords(x, y));
 			uint32_t radius = 0;
 			check_neighbour_heights(f, radius);
@@ -166,32 +156,20 @@ void Map::recalc_whole_map(const World& world)
 			recalc_nodecaps_pass1  (world, f);
 		}
 
-	for (int16_t y = 0; y < m_height; ++y)
-		for (int16_t x = 0; x < m_width; ++x) {
+	for (int16_t y = 0; y < height_; ++y)
+		for (int16_t x = 0; x < width_; ++x) {
 			f = get_fcoords(Coords(x, y));
 			recalc_nodecaps_pass2(world, f);
 		}
-
-	//  Now only recaluclate the overlays.
-	for (int16_t y = 0; y < m_height; ++y)
-		for (int16_t x = 0; x < m_width; ++x)
-			overlay_manager().recalc_field_overlays(get_fcoords(Coords(x, y)));
 }
 
-/*
- * recalculates all default resources.
- *
- * This just needed for the game, not for
- * the editor. Since there, default resources
- * are not shown.
- */
 void Map::recalc_default_resources(const World& world) {
-	for (int16_t y = 0; y < m_height; ++y)
-		for (int16_t x = 0; x < m_width; ++x) {
+	for (int16_t y = 0; y < height_; ++y)
+		for (int16_t x = 0; x < width_; ++x) {
 			FCoords f, f1;
 			f = get_fcoords(Coords(x, y));
 			//  only on unset nodes
-			if (f.field->get_resources() != 0 || f.field->get_resources_amount())
+			if (f.field->get_resources() != Widelands::kNoResource || f.field->get_resources_amount())
 				continue;
 			std::map<int32_t, int32_t> m;
 			int32_t amount = 0;
@@ -272,11 +250,9 @@ void Map::recalc_default_resources(const World& world) {
 			amount /= 6;
 
 			if (res == -1 || !amount) {
-				f.field->set_resources(0, 0);
-				f.field->set_initial_res_amount(0);
+				clear_resources(f);
 			} else {
-				f.field->set_resources(res, amount);
-				f.field->set_initial_res_amount(amount);
+				initialize_resources(f, res, amount);
 			}
 
 		}
@@ -289,25 +265,24 @@ go back to your initial state
 ===============
 */
 void Map::cleanup() {
-	m_nrplayers = 0;
-	m_width = m_height = 0;
+	nrplayers_ = 0;
+	width_ = height_ = 0;
 
-	m_fields.reset();
+	fields_.reset();
 
-	m_starting_pos.clear();
-	m_scenario_tribes.clear();
-	m_scenario_names.clear();
-	m_scenario_ais.clear();
-	m_scenario_closeables.clear();
+	starting_pos_.clear();
+	scenario_tribes_.clear();
+	scenario_names_.clear();
+	scenario_ais_.clear();
+	scenario_closeables_.clear();
 
-	m_tags.clear();
-	m_hint = std::string();
-	m_background = std::string();
+	tags_.clear();
+	hint_ = std::string();
+	background_ = std::string();
 
-	m_overlay_manager.reset();
 	objectives_.clear();
 
-	m_port_spaces.clear();
+	port_spaces_.clear();
 
 	// TODO(meitis): should be done here ... but WidelandsMapLoader::preload_map calls
 	// this cleanup AFTER assigning filesystem_ in WidelandsMapLoader::WidelandsMapLoader
@@ -323,6 +298,7 @@ the given data
 */
 void Map::create_empty_map
 	(const World& world, uint32_t const w, uint32_t const h,
+	 const Widelands::DescriptionIndex default_terrain,
 	 const std::string& name,
 	 const std::string& author,
 	 const std::string& description)
@@ -342,13 +318,15 @@ void Map::create_empty_map
 
 	{
 		Field::Terrains default_terrains;
-		default_terrains.d = 0;
-		default_terrains.r = 0;
-		Field * field = m_fields.get();
-		const Field * const fields_end = field + max_index();
-		for (; field < fields_end; ++field) {
-			field->set_height(10);
-			field->set_terrains(default_terrains);
+		default_terrains.d = default_terrain;
+		default_terrains.r = default_terrain;
+		for (int16_t y = 0; y < height_; ++y) {
+			for (int16_t x = 0; x < width_; ++x) {
+				auto f = get_fcoords(Coords(x, y));
+				f.field->set_height(10);
+				f.field->set_terrains(default_terrains);
+				clear_resources(f);
+			}
 		}
 	}
 	recalc_whole_map(world);
@@ -359,56 +337,56 @@ void Map::create_empty_map
 
 void Map::set_origin(Coords const new_origin) {
 	assert(0 <= new_origin.x);
-	assert     (new_origin.x < m_width);
+	assert     (new_origin.x < width_);
 	assert(0 <= new_origin.y);
-	assert     (new_origin.y < m_height);
+	assert     (new_origin.y < height_);
 
 	for (uint8_t i = get_nrplayers(); i;) {
-		m_starting_pos[--i].reorigin(new_origin, extent());
+		starting_pos_[--i].reorigin(new_origin, extent());
 	}
 
-	std::unique_ptr<Field[]> new_field_order(new Field[m_width * m_height]);
-	memset(new_field_order.get(), 0, sizeof(Field) * m_width * m_height);
+	std::unique_ptr<Field[]> new_field_order(new Field[width_ * height_]);
+	memset(new_field_order.get(), 0, sizeof(Field) * width_ * height_);
 
 	// Rearrange The fields
 	// NOTE because of the triangle design, we have to take special care about cases
 	// NOTE where y is changed by an odd number
 	bool yisodd = (new_origin.y % 2) != 0;
-	for (FCoords c(Coords(0, 0)); c.y < m_height; ++c.y) {
+	for (FCoords c(Coords(0, 0)); c.y < height_; ++c.y) {
 		bool cyisodd = (c.y % 2) != 0;
-		for (c.x = 0; c.x < m_width; ++c.x) {
+		for (c.x = 0; c.x < width_; ++c.x) {
 			Coords temp;
 			if (yisodd && cyisodd)
 				temp = Coords(c.x + new_origin.x + 1, c.y + new_origin.y);
 			else
 				temp = Coords(c.x + new_origin.x, c.y + new_origin.y);
 			normalize_coords(temp);
-			new_field_order[get_index(c, m_width)] = operator[](temp);
+			new_field_order[get_index(c, width_)] = operator[](temp);
 		}
 	}
 	// Now that we restructured the fields, we just overwrite the old order
-	m_fields.reset(new_field_order.release());
+	fields_.reset(new_field_order.release());
 
 	//  Inform immovables and bobs about their new coordinates.
-	for (FCoords c(Coords(0, 0), m_fields.get()); c.y < m_height; ++c.y)
-		for (c.x = 0; c.x < m_width; ++c.x, ++c.field) {
+	for (FCoords c(Coords(0, 0), fields_.get()); c.y < height_; ++c.y)
+		for (c.x = 0; c.x < width_; ++c.x, ++c.field) {
 			assert(c.field == &operator[] (c));
 			if (upcast(Immovable, immovable, c.field->get_immovable()))
-				immovable->m_position = c;
+				immovable->position_ = c;
 			for
 				(Bob * bob = c.field->get_first_bob();
 				 bob;
 				 bob = bob->get_next_bob())
 			{
-				bob->m_position.x     = c.x;
-				bob->m_position.y     = c.y;
-				bob->m_position.field = c.field;
+				bob->position_.x     = c.x;
+				bob->position_.y     = c.y;
+				bob->position_.field = c.field;
 			}
 		}
 
 	// Take care about port spaces
 	PortSpacesSet new_port_spaces;
-	for (PortSpacesSet::iterator it = m_port_spaces.begin(); it != m_port_spaces.end(); ++it) {
+	for (PortSpacesSet::iterator it = port_spaces_.begin(); it != port_spaces_.end(); ++it) {
 		Coords temp;
 		if (yisodd && ((it->y % 2) == 0))
 			temp = Coords(it->x - new_origin.x - 1, it->y - new_origin.y);
@@ -418,9 +396,7 @@ void Map::set_origin(Coords const new_origin) {
 		log("(%i,%i) -> (%i,%i)\n", it->x, it->y, temp.x, temp.y);
 		new_port_spaces.insert(temp);
 	}
-	m_port_spaces = new_port_spaces;
-
-	m_overlay_manager.reset(new OverlayManager());
+	port_spaces_ = new_port_spaces;
 }
 
 
@@ -433,17 +409,15 @@ Set the size of the map. This should only happen once during initial load.
 */
 void Map::set_size(const uint32_t w, const uint32_t h)
 {
-	assert(!m_fields);
+	assert(!fields_);
 
-	m_width  = w;
-	m_height = h;
+	width_  = w;
+	height_ = h;
 
-	m_fields.reset(new Field[w * h]);
-	memset(m_fields.get(), 0, sizeof(Field) * w * h);
+	fields_.reset(new Field[w * h]);
+	memset(fields_.get(), 0, sizeof(Field) * w * h);
 
-	m_pathfieldmgr->set_size(w * h);
-
-	m_overlay_manager.reset(new OverlayManager());
+	pathfieldmgr_->set_size(w * h);
 }
 
 /*
@@ -451,34 +425,34 @@ void Map::set_size(const uint32_t w, const uint32_t h)
  */
 const std::string & Map::get_scenario_player_tribe(const PlayerNumber p) const
 {
-	assert(m_scenario_tribes.size() == get_nrplayers());
+	assert(scenario_tribes_.size() == get_nrplayers());
 	assert(p);
 	assert(p <= get_nrplayers());
-	return m_scenario_tribes[p - 1];
+	return scenario_tribes_[p - 1];
 }
 
 const std::string & Map::get_scenario_player_name(const PlayerNumber p) const
 {
-	assert(m_scenario_names.size() == get_nrplayers());
+	assert(scenario_names_.size() == get_nrplayers());
 	assert(p);
 	assert(p <= get_nrplayers());
-	return m_scenario_names[p - 1];
+	return scenario_names_[p - 1];
 }
 
 const std::string & Map::get_scenario_player_ai(const PlayerNumber p) const
 {
-	assert(m_scenario_ais.size() == get_nrplayers());
+	assert(scenario_ais_.size() == get_nrplayers());
 	assert(p);
 	assert(p <= get_nrplayers());
-	return m_scenario_ais[p - 1];
+	return scenario_ais_[p - 1];
 }
 
 bool Map::get_scenario_player_closeable(const PlayerNumber p) const
 {
-	assert(m_scenario_closeables.size() == get_nrplayers());
+	assert(scenario_closeables_.size() == get_nrplayers());
 	assert(p);
 	assert(p <= get_nrplayers());
-	return m_scenario_closeables[p - 1];
+	return scenario_closeables_[p - 1];
 }
 
 void Map::swap_filesystem(std::unique_ptr<FileSystem>& fs)
@@ -494,32 +468,32 @@ void Map::set_scenario_player_tribe(PlayerNumber const p, const std::string & tr
 {
 	assert(p);
 	assert(p <= get_nrplayers());
-	m_scenario_tribes.resize(get_nrplayers());
-	m_scenario_tribes[p - 1] = tribename;
+	scenario_tribes_.resize(get_nrplayers());
+	scenario_tribes_[p - 1] = tribename;
 }
 
 void Map::set_scenario_player_name(PlayerNumber const p, const std::string & playername)
 {
 	assert(p);
 	assert(p <= get_nrplayers());
-	m_scenario_names.resize(get_nrplayers());
-	m_scenario_names[p - 1] = playername;
+	scenario_names_.resize(get_nrplayers());
+	scenario_names_[p - 1] = playername;
 }
 
 void Map::set_scenario_player_ai(PlayerNumber const p, const std::string & ainame)
 {
 	assert(p);
 	assert(p <= get_nrplayers());
-	m_scenario_ais.resize(get_nrplayers());
-	m_scenario_ais[p - 1] = ainame;
+	scenario_ais_.resize(get_nrplayers());
+	scenario_ais_[p - 1] = ainame;
 }
 
 void Map::set_scenario_player_closeable(PlayerNumber const p, bool closeable)
 {
 	assert(p);
 	assert(p <= get_nrplayers());
-	m_scenario_closeables.resize(get_nrplayers());
-	m_scenario_closeables[p - 1] = closeable;
+	scenario_closeables_.resize(get_nrplayers());
+	scenario_closeables_[p - 1] = closeable;
 }
 
 /*
@@ -530,18 +504,18 @@ Could happen multiple times in the map editor.
 */
 void Map::set_nrplayers(PlayerNumber const nrplayers) {
 	if (!nrplayers) {
-		m_nrplayers = 0;
+		nrplayers_ = 0;
 		return;
 	}
 
-	m_starting_pos.resize(nrplayers, Coords(-1, -1));
-	m_scenario_tribes.resize(nrplayers);
-	m_scenario_ais.resize(nrplayers);
-	m_scenario_closeables.resize(nrplayers);
-	m_scenario_names.resize(nrplayers);
-	m_scenario_tribes.resize(nrplayers);
+	starting_pos_.resize(nrplayers, Coords(-1, -1));
+	scenario_tribes_.resize(nrplayers);
+	scenario_ais_.resize(nrplayers);
+	scenario_closeables_.resize(nrplayers);
+	scenario_names_.resize(nrplayers);
+	scenario_tribes_.resize(nrplayers);
 
-	m_nrplayers = nrplayers; // in case the number players got less
+	nrplayers_ = nrplayers; // in case the number players got less
 }
 
 /*
@@ -552,56 +526,56 @@ Set the starting coordinates of a player
 void Map::set_starting_pos(PlayerNumber const plnum, Coords const c)
 {
 	assert(1 <= plnum && plnum <= get_nrplayers());
-	m_starting_pos[plnum - 1] = c;
+	starting_pos_[plnum - 1] = c;
 }
 
 
 void Map::set_filename(const std::string& filename)
 {
-	m_filename = filename;
+	filename_ = filename;
 }
 
 void Map::set_author(const std::string& author)
 {
-	m_author = author;
+	author_ = author;
 }
 
 void Map::set_name(const std::string& name)
 {
-	m_name = name;
+	name_ = name;
 }
 
 void Map::set_description(const std::string& description)
 {
-	m_description = description;
+	description_ = description;
 }
 
 void Map::set_hint(const std::string& hint)
 {
-	m_hint = hint;
+	hint_ = hint;
 }
 
 void Map::set_background(const std::string& image_path)
 {
 	if (image_path.empty())
-		m_background.clear();
+		background_.clear();
 	else
-		m_background = image_path;
+		background_ = image_path;
 }
 
 void Map::add_tag(const std::string& tag) {
-	m_tags.insert(tag);
+	tags_.insert(tag);
 }
 
 void Map::delete_tag(const std::string& tag) {
 	if (has_tag(tag)) {
-		m_tags.erase(m_tags.find(tag));
+		tags_.erase(tags_.find(tag));
 	}
 }
 
-NodeCaps Map::get_max_nodecaps(const World& world, FCoords & fc) {
-	NodeCaps caps = _calc_nodecaps_pass1(world, fc, false);
-	caps = _calc_nodecaps_pass2(world, fc, false, caps);
+NodeCaps Map::get_max_nodecaps(const World& world, const FCoords& fc) {
+	NodeCaps caps = calc_nodecaps_pass1(world, fc, false);
+	caps = calc_nodecaps_pass2(world, fc, false, caps);
 	return caps;
 }
 
@@ -626,7 +600,7 @@ void Map::find_reachable
 	(Area<FCoords> const area, const CheckStep & checkstep, functorT & functor)
 {
 	std::vector<Coords> queue;
-	boost::shared_ptr<Pathfields> pathfields = m_pathfieldmgr->allocate();
+	boost::shared_ptr<Pathfields> pathfields = pathfieldmgr_->allocate();
 
 	queue.push_back(area);
 
@@ -634,7 +608,7 @@ void Map::find_reachable
 		// Pop the last ware from the queue
 		FCoords const cur = get_fcoords(*queue.rbegin());
 		queue.pop_back();
-		Pathfield & curpf = pathfields->fields[cur.field - m_fields.get()];
+		Pathfield & curpf = pathfields->fields[cur.field - fields_.get()];
 
 		//  handle this node
 		functor(*this, cur);
@@ -647,7 +621,7 @@ void Map::find_reachable
 			get_neighbour(cur, dir, &neighb);
 
 			if  //  node not already handled?
-				(pathfields->fields[neighb.field - m_fields.get()].cycle
+				(pathfields->fields[neighb.field - fields_.get()].cycle
 				 !=
 				 pathfields->cycle
 				 &&
@@ -690,7 +664,7 @@ The actual logic behind find_bobs and find_reachable_bobs.
 */
 struct FindBobsCallback {
 	FindBobsCallback(std::vector<Bob *> * const list, const FindBob & functor)
-		: m_list(list), m_functor(functor), m_found(0) {}
+		: list_(list), functor_(functor), found_(0) {}
 
 	void operator()(const Map &, const FCoords cur) {
 		for
@@ -699,22 +673,22 @@ struct FindBobsCallback {
 			 bob = bob->get_next_bob())
 		{
 			if
-				(m_list &&
-				 std::find(m_list->begin(), m_list->end(), bob) != m_list->end())
+				(list_ &&
+				 std::find(list_->begin(), list_->end(), bob) != list_->end())
 				continue;
 
-			if (m_functor.accept(bob)) {
-				if (m_list)
-					m_list->push_back(bob);
+			if (functor_.accept(bob)) {
+				if (list_)
+					list_->push_back(bob);
 
-				++m_found;
+				++found_;
 			}
 		}
 	}
 
-	std::vector<Bob *> * m_list;
-	const FindBob      & m_functor;
-	uint32_t                 m_found;
+	std::vector<Bob*>* list_;
+	const FindBob& functor_;
+	uint32_t found_;
 };
 
 
@@ -737,7 +711,7 @@ uint32_t Map::find_bobs
 
 	find(area, cb);
 
-	return cb.m_found;
+	return cb.found_;
 }
 
 
@@ -763,7 +737,7 @@ uint32_t Map::find_reachable_bobs
 
 	find_reachable(area, checkstep, cb);
 
-	return cb.m_found;
+	return cb.found_;
 }
 
 
@@ -777,7 +751,7 @@ The actual logic behind find_immovables and find_reachable_immovables.
 struct FindImmovablesCallback {
 	FindImmovablesCallback
 		(std::vector<ImmovableFound> * const list, const FindImmovable & functor)
-		: m_list(list), m_functor(functor), m_found(0) {}
+		: list_(list), functor_(functor), found_(0) {}
 
 	void operator()(const Map &, const FCoords cur) {
 		BaseImmovable * const imm = cur.field->get_immovable();
@@ -785,21 +759,21 @@ struct FindImmovablesCallback {
 		if (!imm)
 			return;
 
-		if (m_functor.accept(*imm)) {
-			if (m_list) {
+		if (functor_.accept(*imm)) {
+			if (list_) {
 				ImmovableFound imf;
 				imf.object = imm;
 				imf.coords = cur;
-				m_list->push_back(imf);
+				list_->push_back(imf);
 			}
 
-			++m_found;
+			++found_;
 		}
 	}
 
-	std::vector<ImmovableFound> * m_list;
-	const FindImmovable         & m_functor;
-	uint32_t                          m_found;
+	std::vector<ImmovableFound>* list_;
+	const FindImmovable& functor_;
+	uint32_t found_;
 };
 
 
@@ -820,7 +794,7 @@ uint32_t Map::find_immovables
 
 	find(area, cb);
 
-	return cb.m_found;
+	return cb.found_;
 }
 
 
@@ -844,7 +818,7 @@ uint32_t Map::find_reachable_immovables
 
 	find_reachable(area, checkstep, cb);
 
-	return cb.m_found;
+	return cb.found_;
 }
 
 
@@ -888,20 +862,20 @@ The actual logic behind find_fields and find_reachable_fields.
 struct FindNodesCallback {
 	FindNodesCallback
 		(std::vector<Coords> * const list, const FindNode & functor)
-		: m_list(list), m_functor(functor), m_found(0) {}
+		: list_(list), functor_(functor), found_(0) {}
 
 	void operator()(const Map & map, const FCoords cur) {
-		if (m_functor.accept(map, cur)) {
-			if (m_list)
-				m_list->push_back(cur);
+		if (functor_.accept(map, cur)) {
+			if (list_)
+				list_->push_back(cur);
 
-			++m_found;
+			++found_;
 		}
 	}
 
-	std::vector<Coords> * m_list;
-	const FindNode     & m_functor;
-	uint32_t                  m_found;
+	std::vector<Coords>* list_;
+	const FindNode & functor_;
+	uint32_t found_;
 };
 
 
@@ -923,7 +897,7 @@ uint32_t Map::find_fields
 
 	find(area, cb);
 
-	return cb.m_found;
+	return cb.found_;
 }
 
 
@@ -946,7 +920,7 @@ uint32_t Map::find_reachable_fields
 
 	find_reachable(area, checkstep, cb);
 
-	return cb.m_found;
+	return cb.found_;
 }
 
 
@@ -1029,10 +1003,10 @@ above recalc_brightness.
 ===============
 */
 void Map::recalc_nodecaps_pass1(const World& world, FCoords const f) {
-	f.field->caps = _calc_nodecaps_pass1(world, f, true);
+	f.field->caps = calc_nodecaps_pass1(world, f, true);
 }
 
-NodeCaps Map::_calc_nodecaps_pass1(const World& world, FCoords const f, bool consider_mobs) {
+NodeCaps Map::calc_nodecaps_pass1(const World& world, FCoords const f, bool consider_mobs) {
 	uint8_t caps = CAPS_NONE;
 
 	// 1a) Get all the neighbours to make life easier
@@ -1142,10 +1116,10 @@ Important: flag buildability has already been checked in the first pass.
 ===============
 */
 void Map::recalc_nodecaps_pass2(const World& world, const FCoords & f) {
-	f.field->caps = _calc_nodecaps_pass2(world, f, true);
+	f.field->caps = calc_nodecaps_pass2(world, f, true);
 }
 
-NodeCaps Map::_calc_nodecaps_pass2
+NodeCaps Map::calc_nodecaps_pass2
 	(const World& world, FCoords const f, bool consider_mobs, NodeCaps initcaps)
 {
 	uint8_t caps = consider_mobs ? f.field->caps : static_cast<uint8_t>(initcaps);
@@ -1162,7 +1136,7 @@ NodeCaps Map::_calc_nodecaps_pass2
 			(!br.field->get_immovable() || br.field->get_immovable()->descr().type() != MapObjectType::FLAG))
 			return static_cast<NodeCaps>(caps);
 	} else {
-		if (!(_calc_nodecaps_pass1(world, br, false) & BUILDCAPS_FLAG))
+		if (!(calc_nodecaps_pass1(world, br, false) & BUILDCAPS_FLAG))
 			return static_cast<NodeCaps>(caps);
 	}
 
@@ -1366,31 +1340,39 @@ std::vector<Coords> Map::find_portdock(const Coords & c) const
 		WALK_E, WALK_E, WALK_E
 	};
 	const FCoords start = br_n(br_n(get_fcoords(c)));
-	FCoords f[16];
-	bool iswater[16];
-	int firstwater = -1;
-	int lastnonwater = -1;
-	f[0] = start;
-	for (uint32_t i = 0; i < 16; ++i) {
-		iswater[i] = (f[i].field->get_caps() & (MOVECAPS_SWIM|MOVECAPS_WALK)) == MOVECAPS_SWIM;
-		if (iswater[i]) {
-			if (firstwater < 0)
-				firstwater = i;
-		} else {
-			lastnonwater = i;
-		}
-		if (i < 15)
-			f[i + 1] = get_neighbour(f[i], cycledirs[i]);
-	}
-
+	const Widelands::PlayerNumber owner = start.field->get_owned_by();
+	bool is_good_water;
+	FCoords f = start;
 	std::vector<Coords> portdock;
-	if (firstwater >= 0) {
-		for (uint32_t i = firstwater; i < 16 && iswater[i]; ++i)
-			portdock.push_back(f[i]);
-		if (firstwater == 0 && lastnonwater >= 0) {
-			for (uint32_t i = lastnonwater + 1; i < 16; ++i)
-				portdock.push_back(f[i]);
+	for (uint32_t i = 0; i < 16; ++i) {
+		is_good_water = (f.field->get_caps() & (MOVECAPS_SWIM|MOVECAPS_WALK)) == MOVECAPS_SWIM;
+
+		// Any immovable here? (especially another portdock)
+		if (is_good_water && f.field->get_immovable()) {
+			is_good_water = false;
 		}
+
+		// If starting point is owned we make sure this field has the same owner
+		if (is_good_water && owner > 0 && f.field->get_owned_by() != owner) {
+			is_good_water = false;
+		}
+
+		// ... and is not on a border
+		if (is_good_water && owner > 0 && f.field->is_border()) {
+			is_good_water = false;
+		}
+
+		if (is_good_water) {
+			portdock.push_back(f);
+			// Occupy 2 fields maximum in order not to block space for other ports that
+			// might be built in the vicinity.
+			if (portdock.size() == 2) {
+				return portdock;
+			}
+		}
+
+		if (i < 15)
+			f = get_neighbour(f, cycledirs[i]);
 	}
 
 	return portdock;
@@ -1398,15 +1380,15 @@ std::vector<Coords> Map::find_portdock(const Coords & c) const
 
 /// \returns true, if Coordinates are in port space list
 bool Map::is_port_space(const Coords& c) const {
-	return m_port_spaces.count(c);
+	return port_spaces_.count(c);
 }
 
 /// Set or unset a space as port space
 void Map::set_port_space(Coords c, bool allowed) {
 	if (allowed) {
-		m_port_spaces.insert(c);
+		port_spaces_.insert(c);
 	} else {
-		m_port_spaces.erase(c);
+		port_spaces_.erase(c);
 	}
 }
 
@@ -1421,14 +1403,14 @@ uint32_t Map::calc_distance(const Coords a, const Coords b) const
 
 	// do we fly up or down?
 	dy = b.y - a.y;
-	if (dy > static_cast<int32_t>(m_height >> 1)) //  wrap-around!
-		dy -= m_height;
-	else if (dy < -static_cast<int32_t>(m_height >> 1))
-		dy += m_height;
+	if (dy > static_cast<int32_t>(height_ >> 1)) //  wrap-around!
+		dy -= height_;
+	else if (dy < -static_cast<int32_t>(height_ >> 1))
+		dy += height_;
 
 	dist = abs(dy);
 
-	if (static_cast<int16_t>(dist) >= m_width)
+	if (static_cast<int16_t>(dist) >= width_)
 		// no need to worry about x movement at all
 		return dist;
 
@@ -1442,24 +1424,24 @@ uint32_t Map::calc_distance(const Coords a, const Coords b) const
 	rx = lx + dist;
 
 	// Allow for wrap-around
-	// Yes, the second is an else if; see the above if (dist >= m_width)
+	// Yes, the second is an else if; see the above if (dist >= width_)
 	if (lx < 0)
-		lx += m_width;
-	else if (rx >= static_cast<int32_t>(m_width))
-		rx -= m_width;
+		lx += width_;
+	else if (rx >= static_cast<int32_t>(width_))
+		rx -= width_;
 
 	// Normal, non-wrapping case
 	if (lx <= rx)
 	{
 		if (b.x < lx) {
 			int32_t dx1 = lx - b.x;
-			int32_t dx2 = b.x - (rx - m_width);
+			int32_t dx2 = b.x - (rx - width_);
 			dist += std::min(dx1, dx2);
 		}
 		else if (b.x > rx)
 		{
 			int32_t dx1 = b.x - rx;
-			int32_t dx2 = (lx + m_width) - b.x;
+			int32_t dx2 = (lx + width_) - b.x;
 			dist += std::min(dx1, dx2);
 		}
 	}
@@ -1629,8 +1611,7 @@ void Map::get_neighbour
 	case WALK_SW: get_bln(f, o); break;
 	case WALK_W:  get_ln (f, o); break;
 	default:
-		assert(false);
-		break;
+		NEVER_HERE();
 	}
 }
 
@@ -1645,8 +1626,7 @@ void Map::get_neighbour
 	case WALK_SW: get_bln(f, o); break;
 	case WALK_W:  get_ln (f, o); break;
 	default:
-		assert(false);
-		break;
+		NEVER_HERE();
 	}
 }
 
@@ -1714,12 +1694,12 @@ int32_t Map::findpath
 	start = FCoords(instart, &operator[](instart));
 	end   = FCoords(inend,   &operator[](inend));
 
-	path.m_path.clear();
+	path.path_.clear();
 
 	// Some stupid cases...
 	if (start == end) {
-		path.m_start = start;
-		path.m_end = end;
+		path.start_ = start;
+		path.end_ = end;
 		return 0; // duh...
 	}
 
@@ -1733,9 +1713,9 @@ int32_t Map::findpath
 		upper_cost_limit = persist * calc_cost_estimate(start, end);
 
 	// Actual pathfinding
-	boost::shared_ptr<Pathfields> pathfields = m_pathfieldmgr->allocate();
+	boost::shared_ptr<Pathfields> pathfields = pathfieldmgr_->allocate();
 	Pathfield::Queue Open;
-	Pathfield * curpf = &pathfields->fields[start.field - m_fields.get()];
+	Pathfield * curpf = &pathfields->fields[start.field - fields_.get()];
 	curpf->cycle      = pathfields->cycle;
 	curpf->real_cost  = 0;
 	curpf->estim_cost = calc_cost_lowerbound(start, end);
@@ -1749,7 +1729,7 @@ int32_t Map::findpath
 		curpf = Open.top();
 		Open.pop(curpf);
 
-		cur.field = m_fields.get() + (curpf - pathfields->fields.get());
+		cur.field = fields_.get() + (curpf - pathfields->fields.get());
 		get_coords(*cur.field, cur);
 
 		if (upper_cost_limit && curpf->real_cost > upper_cost_limit)
@@ -1770,7 +1750,7 @@ int32_t Map::findpath
 			int32_t cost;
 
 			get_neighbour(cur, *direction, &neighb);
-			Pathfield & neighbpf = pathfields->fields[neighb.field - m_fields.get()];
+			Pathfield & neighbpf = pathfields->fields[neighb.field - fields_.get()];
 
 			// Is the field Closed already?
 			if
@@ -1818,17 +1798,17 @@ int32_t Map::findpath
 	// Now unwind the taken route (even if we couldn't find a complete one!)
 	int32_t const result = cur == end ? curpf->real_cost : -1;
 
-	path.m_start = start;
-	path.m_end = cur;
+	path.start_ = start;
+	path.end_ = cur;
 
-	path.m_path.clear();
+	path.path_.clear();
 
 	while (curpf->backlink != IDLE) {
-		path.m_path.push_back(curpf->backlink);
+		path.path_.push_back(curpf->backlink);
 
 		// Reverse logic! (WALK_NW needs to find the SE neighbour)
 		get_neighbour(cur, get_reverse_dir(curpf->backlink), &cur);
-		curpf = &pathfields->fields[cur.field - m_fields.get()];
+		curpf = &pathfields->fields[cur.field - fields_.get()];
 	}
 
 	return result;
@@ -1854,34 +1834,119 @@ bool Map::can_reach_by_water(const Coords field) const
 	return false;
 }
 
-/*
-===========
-changes the given triangle's terrain.
-this happens in the editor and might happen in the game
-too if some kind of land increasement is implemented (like
-drying swamps).
-The nodecaps need to be recalculated
-
-returns the radius of changes (which are always 2)
-===========
-*/
 int32_t Map::change_terrain
 	(const World& world, TCoords<FCoords> const c, DescriptionIndex const terrain)
 {
 	c.field->set_terrain(c.t, terrain);
 
-	Notifications::publish(NoteFieldTransformed(c, c.field - &m_fields[0]));
+	// remove invalid resources if necessary
+	// check vertex to which the triangle belongs
+	if (!is_resource_valid(world, c, c.field->get_resources())) {
+		clear_resources(c);
+	}
 
-	recalc_for_field_area(world, Area<FCoords>(c, 2));
+	// always check south-east vertex
+	Widelands::FCoords f_se(c, c.field);
+	get_neighbour(f_se, Widelands::WALK_SE, &f_se);
+	if (!is_resource_valid(world, f_se, f_se.field->get_resources())) {
+		clear_resources(f_se);
+	}
 
-	return 2;
+	// check south-west vertex if d-Triangle is changed, check east vertex if r-Triangle is changed
+	Widelands::FCoords f_sw_e(c, c.field);
+	get_neighbour(f_sw_e, c.t == TCoords<FCoords>::D ? Widelands::WALK_SW : Widelands::WALK_E, &f_sw_e);
+	if (!is_resource_valid(world, f_sw_e, f_sw_e.field->get_resources())) {
+		clear_resources(f_sw_e);
+	}
+
+	Notifications::publish(
+	   NoteFieldTerrainChanged{c, static_cast<MapIndex>(c.field - &fields_[0])});
+
+	// Changing the terrain can affect ports, which can be up to 3 fields away.
+	constexpr int kPotentiallyAffectedNeighbors = 3;
+	recalc_for_field_area(world, Area<FCoords>(c, kPotentiallyAffectedNeighbors));
+	return kPotentiallyAffectedNeighbors;
 }
 
+bool Map::is_resource_valid
+	(const Widelands::World& world, const TCoords<Widelands::FCoords>& c, int32_t const curres)
+{
+	if (curres == Widelands::kNoResource)
+		return true;
+
+	Widelands::FCoords f(c, c.field);
+	Widelands::FCoords f1;
+
+	int32_t count = 0;
+
+	//  this field
+	count += world.terrain_descr(f.field->terrain_r()).is_resource_valid(curres);
+	count += world.terrain_descr(f.field->terrain_d()).is_resource_valid(curres);
+
+	//  If one of the neighbours is impassable, count its resource stronger.
+	//  top left neigbour
+	get_neighbour(f, Widelands::WALK_NW, &f1);
+	count += world.terrain_descr(f1.field->terrain_r()).is_resource_valid(curres);
+	count += world.terrain_descr(f1.field->terrain_d()).is_resource_valid(curres);
+
+	//  top right neigbour
+	get_neighbour(f, Widelands::WALK_NE, &f1);
+	count += world.terrain_descr(f1.field->terrain_d()).is_resource_valid(curres);
+
+	//  left neighbour
+	get_neighbour(f, Widelands::WALK_W, &f1);
+	count += world.terrain_descr(f1.field->terrain_r()).is_resource_valid(curres);
+
+	return count > 1;
+}
+
+void Map::ensure_resource_consistency(const World& world)
+{
+	for (MapIndex i = 0; i < max_index(); ++i) {
+		auto fcords = get_fcoords(fields_[i]);
+		if (!is_resource_valid(world, fcords, fcords.field->get_resources())) {
+			clear_resources(fcords);
+		}
+	}
+}
+
+void Map::initialize_resources(const FCoords& c,
+                               const DescriptionIndex resource_type,
+                               uint8_t amount) {
+	// You cannot have an amount of nothing.
+	if (resource_type == Widelands::kNoResource) {
+		amount = 0;
+	}
+	const auto note = NoteFieldResourceChanged{
+	   c, c.field->resources, c.field->initial_res_amount, c.field->res_amount,
+	};
+
+	c.field->resources = resource_type;
+	c.field->initial_res_amount = amount;
+	c.field->res_amount = amount;
+	Notifications::publish(note);
+}
+
+void Map::set_resources(const FCoords& c, uint8_t amount) {
+	// You cannot change the amount of resources on a field without resources.
+	if (c.field->resources == Widelands::kNoResource) {
+		return;
+	}
+	const auto note = NoteFieldResourceChanged{
+	   c, c.field->resources, c.field->initial_res_amount, c.field->res_amount,
+	};
+	c.field->res_amount = amount;
+	Notifications::publish(note);
+}
+
+void Map::clear_resources(const FCoords& c) {
+	initialize_resources(c, Widelands::kNoResource, 0);
+}
 
 uint32_t Map::set_height(const World& world, const FCoords fc, uint8_t const new_value) {
 	assert(new_value <= MAX_FIELD_HEIGHT);
-	assert(m_fields.get() <= fc.field);
-	assert            (fc.field < m_fields.get() + max_index());
+	assert(fields_.get() <= fc.field);
+	assert            (fc.field < fields_.get() + max_index());
 	fc.field->height = new_value;
 	uint32_t radius = 2;
 	check_neighbour_heights(fc, radius);
@@ -1975,8 +2040,8 @@ The radius of modified fields is stored in area.
 */
 void Map::check_neighbour_heights(FCoords coords, uint32_t & area)
 {
-	assert(m_fields.get() <= coords.field);
-	assert            (coords.field < m_fields.get() + max_index());
+	assert(fields_.get() <= coords.field);
+	assert            (coords.field < fields_.get() + max_index());
 
 	int32_t height = coords.field->get_height();
 	bool check[] = {false, false, false, false, false, false};

@@ -33,9 +33,9 @@ MapTable::MapTable
 	UI::Table<uintptr_t>(parent, x, y, w, h, descending) {
 
 	/** TRANSLATORS: Column title for number of players in map list */
-	add_column(35, _("Pl."), _("Number of players"), UI::Align_HCenter);
-	add_column(get_w() - 35 - 115, "", _("The name of the map or scenario"), UI::Align_Left);
-	add_column(115, _("Size"), _("The size of the map (Width x Height)"), UI::Align_Left);
+	add_column(35, _("Pl."), _("Number of players"), UI::Align::kHCenter);
+	add_column(get_w() - 35 - 115, "", _("The name of the map or scenario"), UI::Align::kLeft);
+	add_column(115, _("Size"), _("The size of the map (Width x Height)"), UI::Align::kLeft);
 	set_sort_column(0);
 }
 
@@ -48,16 +48,16 @@ void MapTable::fill(const std::vector<MapData>& entries, MapData::DisplayType ty
 
 		if (mapdata.maptype == MapData::MapType::kDirectory) {
 			te.set_string(0, "");
-			te.set_picture(1,  g_gr->images().get("pics/ls_dir.png"), mapdata.localized_name);
+			te.set_picture(1,  g_gr->images().get("images/ui_basic/ls_dir.png"), mapdata.localized_name);
 			te.set_string(2, "");
 		} else {
 			te.set_string(0, (boost::format("(%i)") % mapdata.nrplayers).str());
 
-			std::string picture = "pics/ls_wlmap.png";
+			std::string picture = "images/ui_basic/ls_wlmap.png";
 			if (mapdata.maptype == MapData::MapType::kScenario) {
-				picture = "pics/ls_wlscenario.png";
+				picture = "images/ui_basic/ls_wlscenario.png";
 			} else if (mapdata.maptype == MapData::MapType::kSettlers2) {
-				picture = "pics/ls_s2map.png";
+				picture = "images/ui_basic/ls_s2map.png";
 			}
 
 			if (type == MapData::DisplayType::kFilenames) {

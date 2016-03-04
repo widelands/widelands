@@ -28,13 +28,36 @@
 #include "graphic/graphic.h"
 #include "logic/constants.h"
 #include "logic/map.h"
+#include "logic/map_objects/tribes/tribes.h"
+#include "logic/map_objects/tribes/warehouse.h"
 #include "logic/player.h"
-#include "logic/tribes/tribes.h"
-#include "logic/warehouse.h"
 #include "ui_basic/editbox.h"
 #include "ui_basic/messagebox.h"
 #include "ui_basic/textarea.h"
-#include "wui/overlay_manager.h"
+#include "wui/field_overlay_manager.h"
+
+namespace {
+static char const * const player_pictures[] = {
+	"images/players/editor_player_01_starting_pos.png",
+	"images/players/editor_player_02_starting_pos.png",
+	"images/players/editor_player_03_starting_pos.png",
+	"images/players/editor_player_04_starting_pos.png",
+	"images/players/editor_player_05_starting_pos.png",
+	"images/players/editor_player_06_starting_pos.png",
+	"images/players/editor_player_07_starting_pos.png",
+	"images/players/editor_player_08_starting_pos.png"
+};
+static char const * const player_pictures_small[] = {
+	"images/players/fsel_editor_set_player_01_pos.png",
+	"images/players/fsel_editor_set_player_02_pos.png",
+	"images/players/fsel_editor_set_player_03_pos.png",
+	"images/players/fsel_editor_set_player_04_pos.png",
+	"images/players/fsel_editor_set_player_05_pos.png",
+	"images/players/fsel_editor_set_player_06_pos.png",
+	"images/players/fsel_editor_set_player_07_pos.png",
+	"images/players/fsel_editor_set_player_08_pos.png"
+};
+} // namespace
 
 #define UNDEFINED_TRIBE_NAME "<undefined>"
 
@@ -50,15 +73,15 @@ EditorPlayerMenu::EditorPlayerMenu
 	m_add_player
 		(this, "add_player",
 		 get_inner_w() - 5 - 20, 5, 20, 20,
-		 g_gr->images().get("pics/but1.png"),
-		 g_gr->images().get("pics/scrollbar_up.png"),
+		 g_gr->images().get("images/ui_basic/but1.png"),
+		 g_gr->images().get("images/ui_basic/scrollbar_up.png"),
 		 _("Add player"),
 		 parent.egbase().map().get_nrplayers() < MAX_PLAYERS),
 	m_remove_last_player
 		(this, "remove_last_player",
 		 5, 5, 20, 20,
-		 g_gr->images().get("pics/but1.png"),
-		 g_gr->images().get("pics/scrollbar_down.png"),
+		 g_gr->images().get("images/ui_basic/but1.png"),
+		 g_gr->images().get("images/ui_basic/scrollbar_down.png"),
 		 _("Remove last player"),
 		 1 < parent.egbase().map().get_nrplayers()),
 	m_tribenames(eia().egbase().tribes().get_all_tribenames())
@@ -142,8 +165,8 @@ void EditorPlayerMenu::update() {
 		if (!m_plr_names[p - 1]) {
 			m_plr_names[p - 1] =
 				new UI::EditBox
-					(this, posx, posy, 140, size,
-					 g_gr->images().get("pics/but0.png"));
+					(this, posx, posy, 140,
+					 g_gr->images().get("images/ui_basic/but0.png"));
 			m_plr_names[p - 1]->changed.connect
 				(boost::bind(&EditorPlayerMenu::name_changed, this, p - 1));
 			posx += 140 + spacing;
@@ -155,7 +178,7 @@ void EditorPlayerMenu::update() {
 				new UI::Button
 					(this, "tribe",
 					 posx, posy, 140, size,
-					 g_gr->images().get("pics/but0.png"),
+					 g_gr->images().get("images/ui_basic/but0.png"),
 					 "");
 			m_plr_set_tribes_buts[p - 1]->sigclicked.connect
 				(boost::bind(&EditorPlayerMenu::player_tribe_clicked, boost::ref(*this), p - 1));
@@ -183,16 +206,16 @@ void EditorPlayerMenu::update() {
 				new UI::Button
 					(this, "starting_pos",
 					 posx, posy, size, size,
-					 g_gr->images().get("pics/but0.png"),
+					 g_gr->images().get("images/ui_basic/but0.png"),
 					 nullptr,
 					 "");
 			m_plr_set_pos_buts[p - 1]->sigclicked.connect
 				(boost::bind(&EditorPlayerMenu::set_starting_pos_clicked, boost::ref(*this), p));
 		}
-		char text[] = "pics/fsel_editor_set_player_00_pos.png";
-		text[28] += p / 10;
-		text[29] += p % 10;
-		m_plr_set_pos_buts[p - 1]->set_pic(g_gr->images().get(text));
+		const Image* player_image = g_gr->images().get(player_pictures_small[p - 1]);
+		assert(player_image);
+
+		m_plr_set_pos_buts[p - 1]->set_pic(player_image);
 		posy += size + spacing;
 	}
 	set_inner_size(get_inner_w(), posy + spacing);
@@ -227,14 +250,12 @@ void EditorPlayerMenu::clicked_remove_last_player() {
 	if (!menu.is_player_tribe_referenced(old_nr_players)) {
 		if (const Widelands::Coords sp = map.get_starting_pos(old_nr_players)) {
 			//  Remove starting position marker.
-			char picsname[] = "pics/editor_player_00_starting_pos.png";
-			picsname[19] += old_nr_players / 10;
-			picsname[20] += old_nr_players % 10;
-			map.overlay_manager().remove_overlay
-				(sp, g_gr->images().get(picsname));
+			const Image* player_image = g_gr->images().get(player_pictures[old_nr_players - 1]);
+			assert(player_image);
+			menu.mutable_field_overlay_manager()->remove_overlay(sp, player_image);
 		}
 		// if removed player was selected switch to the next highest player
-		if (old_nr_players == menu.tools.set_starting_pos.get_current_player())
+		if (old_nr_players == menu.tools()->set_starting_pos.get_current_player())
 			set_starting_pos_clicked(nr_players);
 	}
 	map.set_nrplayers(nr_players);
@@ -291,15 +312,15 @@ void EditorPlayerMenu::set_starting_pos_clicked(uint8_t n) {
 		menu.move_view_to(sp);
 
 	//  select tool set mplayer
-	menu.select_tool(menu.tools.set_starting_pos, EditorTool::First);
-	menu.tools.set_starting_pos.set_current_player(n);
+	menu.select_tool(menu.tools()->set_starting_pos, EditorTool::First);
+	menu.tools()->set_starting_pos.set_current_player(n);
 
 	//  reselect tool, so everything is in a defined state
-	menu.select_tool(menu.tools.current(), EditorTool::First);
+	menu.select_tool(menu.tools()->current(), EditorTool::First);
 
 	//  Register callback function to make sure that only valid locations are
 	//  selected.
-	map.overlay_manager().register_overlay_callback_function(
+	menu.mutable_field_overlay_manager()->register_overlay_callback_function(
 	   boost::bind(&editor_tool_set_starting_pos_callback, _1, boost::ref(map)));
 	map.recalc_whole_map(menu.egbase().world());
 	update();
@@ -332,7 +353,7 @@ void EditorPlayerMenu::make_infrastructure_clicked(uint8_t n) {
    // so must be true)
 	Widelands::EditorGameBase & egbase = parent.egbase();
 	Widelands::Map & map = egbase.map();
-	OverlayManager & overlay_manager = map.overlay_manager();
+	auto* overlay_manager = parent.mutable_field_overlay_manager();
 	const Widelands::Coords start_pos = map.get_starting_pos(n);
 	assert(start_pos);
 
@@ -372,17 +393,14 @@ void EditorPlayerMenu::make_infrastructure_clicked(uint8_t n) {
 
 		// Remove the player overlay from this starting pos.
 		// A HQ is overlay enough
-		std::string picsname = "pics/editor_player_";
-		picsname += static_cast<char>((n / 10) + 0x30);
-		picsname += static_cast<char>((n % 10) + 0x30);
-		picsname += "_starting_pos.png";
-		overlay_manager.remove_overlay
-			(start_pos, g_gr->images().get(picsname));
+		const Image* player_image = g_gr->images().get(player_pictures[n - 1]);
+		assert(player_image);
+		overlay_manager->remove_overlay(start_pos, player_image);
 	}
 
-	parent.select_tool(parent.tools.make_infrastructure, EditorTool::First);
-	parent.tools.make_infrastructure.set_player(n);
-	overlay_manager.register_overlay_callback_function(
+	parent.select_tool(parent.tools()->make_infrastructure, EditorTool::First);
+	parent.tools()->make_infrastructure.set_player(n);
+	overlay_manager->register_overlay_callback_function(
 	   boost::bind(&editor_make_infrastructure_tool_callback, _1, boost::ref(egbase), n));
 	map.recalc_whole_map(egbase.world());
 }

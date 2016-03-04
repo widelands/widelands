@@ -3,11 +3,37 @@ add_subdirectory(text)
 # TODO(sirver): Separate this directory into a base directory and one
 # that is Widelands aware (can include logic stuff).
 
+wl_library(graphic_build_texture_atlas
+  SRCS
+    build_texture_atlas.h
+    build_texture_atlas.cc
+  DEPENDS
+    graphic
+    graphic_image_io
+    graphic_surface
+    graphic_texture_atlas
+    io_filesystem
+)
+
 wl_library(graphic_color
   SRCS
     color.h
     color.cc
   USES_SDL2
+)
+
+wl_library(graphic_render_queue
+  SRCS
+    render_queue.cc
+    render_queue.h
+  DEPENDS
+    base_exceptions
+    base_geometry
+    base_macros
+    graphic_color
+    graphic_terrain_programs
+    graphic_draw_programs
+    logic
 )
 
 wl_library(graphic_text_layout
@@ -19,9 +45,9 @@ wl_library(graphic_text_layout
     base_i18n
     graphic
     graphic_color
+    graphic_surface
     graphic_text
 )
-
 
 wl_library(graphic_image_io
   SRCS
@@ -32,6 +58,7 @@ wl_library(graphic_image_io
   USES_SDL2_IMAGE
   DEPENDS
     base_exceptions
+    base_log
     graphic_surface
     io_fileread
     io_filesystem
@@ -44,10 +71,10 @@ wl_library(graphic_image_cache
     image_cache.h
   USES_SDL2
   DEPENDS
-    base_log
     base_macros
     graphic_image_io
     graphic_surface
+    graphic_texture_atlas
 )
 
 wl_library(graphic_sdl_utils
@@ -59,6 +86,10 @@ wl_library(graphic_sdl_utils
 
 wl_library(graphic_gl_utils
   SRCS
+    gl/blit_data.h
+    gl/coordinate_conversion.h
+    gl/initialize.cc
+    gl/initialize.h
     gl/system_headers.h
     gl/utils.cc
     gl/utils.h
@@ -66,19 +97,56 @@ wl_library(graphic_gl_utils
   USES_OPENGL
   DEPENDS
     base_exceptions
+    base_geometry
     base_log
     base_macros
+    io_fileread
+    io_filesystem
 )
 
-wl_library(graphic_surface
+wl_library(graphic_terrain_programs
+  SRCS
+    gl/fields_to_draw.h
+    gl/road_program.cc
+    gl/road_program.h
+    gl/terrain_program.cc
+    gl/terrain_program.h
+    gl/dither_program.cc
+    gl/dither_program.h
+  DEPENDS
+    base_exceptions
+    base_geometry
+    base_log
+    base_macros
+    graphic
+    graphic_gl_utils
+    graphic_image_io
+    graphic_surface
+    io_filesystem
+    logic
+)
+
+wl_library(graphic_draw_programs
   SRCS
     blend_mode.h
+    blit_mode.h
     gl/blit_program.cc
     gl/blit_program.h
     gl/draw_line_program.cc
     gl/draw_line_program.h
     gl/fill_rect_program.cc
     gl/fill_rect_program.h
+  DEPENDS
+    base_exceptions
+    base_macros
+    base_geometry
+    graphic_gl_utils
+    base_log
+    graphic_color
+)
+
+wl_library(graphic_surface
+  SRCS
     image.h
     screen.cc
     screen.h
@@ -97,7 +165,9 @@ wl_library(graphic_surface
     base_macros
     graphic
     graphic_color
+    graphic_draw_programs
     graphic_gl_utils
+    graphic_render_queue
     graphic_sdl_utils
 )
 
@@ -115,26 +185,19 @@ wl_library(graphic_game_renderer
   SRCS
     game_renderer.cc
     game_renderer.h
-    gl/dither_program.cc
-    gl/dither_program.h
-    gl/fields_to_draw.h
-    gl/road_program.cc
-    gl/road_program.h
-    gl/terrain_program.cc
-    gl/terrain_program.h
   DEPENDS
-    base_exceptions
     base_geometry
-    base_log
     base_macros
     graphic
     graphic_gl_utils
-    graphic_image_io
+    graphic_render_queue
     graphic_surface
-    io_filesystem
+    graphic_terrain_programs
     logic
+    wui
+    wui_edge_overlay_manager
+    wui_field_overlay_manager
     wui_mapview_pixelfunctions
-    wui_overlay_manager
 )
 
 wl_library(graphic_minimap_renderer
@@ -146,6 +209,7 @@ wl_library(graphic_minimap_renderer
     base_macros
     economy
     graphic
+    graphic_image_io
     graphic_surface
     logic
     wui_mapview_pixelfunctions
@@ -185,10 +249,13 @@ wl_library(graphic
     base_log
     base_macros
     build_info
+    graphic_build_texture_atlas
     graphic_color
+    graphic_draw_programs
     graphic_gl_utils
     graphic_image_cache
     graphic_image_io
+    graphic_render_queue
     graphic_surface
     graphic_text
     graphic_text_layout
@@ -200,5 +267,4 @@ wl_library(graphic
     notifications
     scripting_lua_table
     sound
-    wui_overlay_manager
 )

@@ -23,7 +23,7 @@
 #include <vector>
 
 #include "base/macros.h"
-#include "logic/immovable.h"
+#include "logic/map_objects/immovable.h"
 #include "logic/path.h"
 #include "logic/roadtype.h"
 
@@ -33,8 +33,8 @@ class Request;
 
 class RoadDescr : public MapObjectDescr {
 public:
-	RoadDescr(char const* const _name, char const* const _descname)
-		: MapObjectDescr(MapObjectType::ROAD, _name, _descname) {
+	RoadDescr(char const* const init_name, char const* const init_descname)
+		: MapObjectDescr(MapObjectType::ROAD, init_name, init_descname) {
 	}
 	~RoadDescr() override {}
 
@@ -85,9 +85,9 @@ struct Road : public PlayerImmovable {
 		(EditorGameBase &,
 		 Flag & start, Flag & end, const Path &);
 
-	Flag & get_flag(FlagId const flag) const {return *m_flags[flag];}
+	Flag & get_flag(FlagId const flag) const {return *flags_[flag];}
 
-	uint8_t get_roadtype() const {return m_type;}
+	uint8_t get_roadtype() const {return type_;}
 	int32_t  get_size    () const override;
 	bool get_passable() const override;
 	PositionList get_positions(const EditorGameBase &) const override;
@@ -97,8 +97,8 @@ struct Road : public PlayerImmovable {
 	void set_economy(Economy *) override;
 
 	int32_t get_cost(FlagId fromflag);
-	const Path & get_path() const {return m_path;}
-	int32_t get_idle_index() const {return m_idle_index;}
+	const Path & get_path() const {return path_;}
+	int32_t get_idle_index() const {return idle_index_;}
 
 	void presplit(Game &, Coords split);
 	void postsplit(Game &, Flag &);
@@ -117,38 +117,38 @@ protected:
 	void draw(const EditorGameBase &, RenderTarget &, const FCoords&, const Point&) override;
 
 private:
-	void _set_path(EditorGameBase &, const Path &);
+	void set_path(EditorGameBase &, const Path &);
 
-	void _mark_map(EditorGameBase &);
-	void _unmark_map(EditorGameBase &);
+	void mark_map(EditorGameBase &);
+	void unmark_map(EditorGameBase &);
 
-	void _link_into_flags(EditorGameBase &);
+	void link_into_flags(EditorGameBase &);
 
-	void _request_carrier(CarrierSlot &);
-	static void _request_carrier_callback
+	void request_carrier(CarrierSlot &);
+	static void request_carrier_callback
 		(Game &, Request &, DescriptionIndex, Worker *, PlayerImmovable &);
 
 private:
 
 	/// Counter that is incremented when a ware does not get a carrier for this
 	/// road immediately and decremented over time.
-	uint32_t   m_busyness;
+	uint32_t   busyness_;
 
-	/// holds the gametime when m_busyness was last updated
-	uint32_t   m_busyness_last_update;
+	/// holds the gametime when busyness_ was last updated
+	uint32_t   busyness_last_update_;
 
-	uint8_t    m_type;       ///< RoadType, 2 bits used
-	Flag     * m_flags  [2]; ///< start and end flag
-	int32_t    m_flagidx[2]; ///< index of this road in the flag's road array
+	uint8_t    type_;       ///< RoadType, 2 bits used
+	Flag     * flags_  [2]; ///< start and end flag
+	int32_t    flagidx_[2]; ///< index of this road in the flag's road array
 
 	/// cost for walking this road (0 = from start to end, 1 = from end to start)
-	int32_t    m_cost   [2];
+	int32_t    cost_   [2];
 
-	Path       m_path;       ///< path goes from start to end
-	uint32_t   m_idle_index; ///< index into path where carriers should idle
+	Path       path_;       ///< path goes from start to end
+	uint32_t   idle_index_; ///< index into path where carriers should idle
 
 	using SlotVector = std::vector<CarrierSlot>;
-	SlotVector m_carrier_slots;
+	SlotVector carrier_slots_;
 };
 
 }

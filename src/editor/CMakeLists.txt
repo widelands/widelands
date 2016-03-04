@@ -47,6 +47,8 @@ wl_library(editor
     tools/editor_tool_action.h
     tools/multi_select.h
     ui_menus/categorized_item_selection_menu.h
+    ui_menus/editor_help.cc
+    ui_menus/editor_help.h
     ui_menus/editor_main_menu.cc
     ui_menus/editor_main_menu.h
     ui_menus/editor_main_menu_load_map.cc
@@ -96,6 +98,7 @@ wl_library(editor
     logic_widelands_geometry
     map_io
     map_io_map_loader
+    notifications
     random
     scripting_lua_interface
     scripting_lua_table
@@ -104,6 +107,6 @@ wl_library(editor
     widelands_ball_of_mud
     wui
     wui_common
+    wui_field_overlay_manager
     wui_mapview_pixelfunctions
-    wui_overlay_manager
 )

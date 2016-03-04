@@ -25,7 +25,7 @@
 #include <vector>
 
 #include "io/filesystem/layered_filesystem.h"
-#include "logic/tribes/tribe_basic_info.h"
+#include "logic/map_objects/tribes/tribe_basic_info.h"
 #include "logic/widelands.h"
 #include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
@@ -65,12 +65,6 @@ struct UserSettings {
 	Widelands::PlayerEndResult     result;
 	std::string win_condition_string;
 	bool        ready; // until now only used as a check for whether user is currently receiving a file or not
-};
-
-struct DedicatedMapInfos {
-	std::string path;
-	uint8_t     players;
-	bool        scenario;
 };
 
 /**
@@ -130,11 +124,6 @@ struct GameSettings {
 
 	/// Users connected to the game (0-based indices) - only used in multiplayer
 	std::vector<UserSettings> users;
-
-	/// Only used for dedicated servers so the clients can look through the maps available on the server
-	/// like in their "own" map / saved games selection menu
-	std::vector<DedicatedMapInfos> maps;
-	std::vector<DedicatedMapInfos> saved_games;
 };
 
 

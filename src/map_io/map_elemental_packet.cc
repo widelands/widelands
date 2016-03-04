@@ -25,6 +25,7 @@
 #include "logic/editor_game_base.h"
 #include "logic/game_data_error.h"
 #include "logic/map.h"
+#include "logic/widelands.h"
 #include "profile/profile.h"
 
 namespace Widelands {
@@ -40,8 +41,8 @@ void MapElementalPacket::pre_read(FileSystem & fs, Map * map)
 	try {
 		int32_t const packet_version = s.get_int("packet_version");
 		if (packet_version == kCurrentPacketVersion) {
-			map->m_width       = s.get_int   ("map_w");
-			map->m_height      = s.get_int   ("map_h");
+			map->width_       = s.get_int   ("map_w");
+			map->height_      = s.get_int   ("map_h");
 			map->set_nrplayers  (s.get_int   ("nr_players"));
 			map->set_name       (s.get_string("name"));
 			map->set_author     (s.get_string("author"));
@@ -63,7 +64,7 @@ void MapElementalPacket::pre_read(FileSystem & fs, Map * map)
 			}
 
 			// Get suggested teams
-			map->m_suggested_teams.clear();
+			map->suggested_teams_.clear();
 
 			uint16_t team_section_id = 0;
 			std::string teamsection_key = (boost::format("teams%02i") % team_section_id).str();
@@ -83,7 +84,7 @@ void MapElementalPacket::pre_read(FileSystem & fs, Map * map)
 					boost::split(players_string, team_string, boost::is_any_of(","));
 
 					for (const std::string& player: players_string) {
-						uint16_t player_number = static_cast<uint16_t>(atoi(player.c_str()));
+						PlayerNumber player_number = static_cast<PlayerNumber>(atoi(player.c_str()));
 						assert(player_number < MAX_PLAYERS);
 						team.push_back(player_number);
 					}
@@ -96,7 +97,7 @@ void MapElementalPacket::pre_read(FileSystem & fs, Map * map)
 					team_string = teamsection->get_string(team_key.c_str(), "");
 				}
 
-				map->m_suggested_teams.push_back(lineup);
+				map->suggested_teams_.push_back(lineup);
 
 				// Increase teamsection
 				++team_section_id;

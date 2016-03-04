@@ -31,9 +31,9 @@
 #include "graphic/rendertarget.h"
 #include "graphic/texture.h"
 #include "logic/map.h"
-#include "logic/world/editor_category.h"
-#include "logic/world/terrain_description.h"
-#include "logic/world/world.h"
+#include "logic/map_objects/world/editor_category.h"
+#include "logic/map_objects/world/terrain_description.h"
+#include "logic/map_objects/world/world.h"
 #include "ui_basic/checkbox.h"
 #include "ui_basic/panel.h"
 #include "ui_basic/tabpanel.h"
@@ -51,13 +51,13 @@ UI::Checkbox* create_terrain_checkbox(UI::Panel* parent,
 	std::vector<std::string> tooltips;
 
 	// Blit the main terrain image
-	const Texture& terrain_texture = terrain_descr.get_texture(0);
+	const Image& terrain_texture = terrain_descr.get_texture(0);
 	Texture* texture = new Texture(terrain_texture.width(), terrain_texture.height());
-	blit(Rect(0, 0, terrain_texture.width(), terrain_texture.height()),
+	texture->blit(Rect(0, 0, terrain_texture.width(), terrain_texture.height()),
 					  terrain_texture,
 					  Rect(0, 0, terrain_texture.width(), terrain_texture.height()),
 					  1.,
-					  BlendMode::UseAlpha, texture);
+					  BlendMode::UseAlpha);
 	Point pt(1, terrain_texture.height() - kSmallPicSize - 1);
 
 	// Collect tooltips and blit small icons representing "is" values
@@ -67,12 +67,11 @@ UI::Checkbox* create_terrain_checkbox(UI::Panel* parent,
 								terrain_descr.custom_tooltips().end());
 		tooltips.push_back(terrain_type.descname);
 
-		blit(Rect(pt.x, pt.y, terrain_type.icon->width(), terrain_type.icon->height()),
+		texture->blit(Rect(pt.x, pt.y, terrain_type.icon->width(), terrain_type.icon->height()),
 			 *terrain_type.icon,
 			 Rect(0, 0, terrain_type.icon->width(), terrain_type.icon->height()),
 			  1.,
-			  BlendMode::UseAlpha,
-			  texture);
+			  BlendMode::UseAlpha);
 		pt.x += kSmallPicSize + 1;
 	}
 	// Make sure we delete this later on.

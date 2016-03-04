@@ -18,7 +18,7 @@
  */
 
 #include "graphic/graphic.h"
-#include "logic/trainingsite.h"
+#include "logic/map_objects/tribes/trainingsite.h"
 #include "ui_basic/tabpanel.h"
 #include "wui/productionsitewindow.h"
 #include "wui/soldiercapacitycontrol.h"
@@ -27,7 +27,7 @@
 using Widelands::TrainingSite;
 using Widelands::atrAttack;
 
-static char const * pic_tab_military = "pics/menu_tab_military.png";
+static char const * pic_tab_military = "images/wui/buildings/menu_tab_military.png";
 
 /**
  * Status window for \ref TrainingSite

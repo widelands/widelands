@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2006-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -58,10 +58,13 @@ public:
 	/*
 	 * Lua methods
 	 */
+	int get_immovable_description(lua_State * L);
 	int get_building_description(lua_State * L);
 	int get_tribe_description(lua_State * L);
 	int get_ware_description(lua_State * L);
 	int get_worker_description(lua_State * L);
+	int get_resource_description(lua_State * L);
+	int get_terrain_description(lua_State * L);
 
 	/*
 	 * C methods
@@ -70,19 +73,19 @@ public:
 
 
 class LuaPlayerBase : public LuaBasesModuleClass {
-	Widelands::PlayerNumber m_pl;
+	Widelands::PlayerNumber player_number_;
 	enum {NONE = -1};
 
 public:
 	LUNA_CLASS_HEAD(LuaPlayerBase);
 
 
-	LuaPlayerBase() : m_pl(NONE) {}
-	LuaPlayerBase (lua_State * L) : m_pl(NONE) {
+	LuaPlayerBase() : player_number_(NONE) {}
+	LuaPlayerBase (lua_State * L) : player_number_(NONE) {
 		report_error(L, "Cannot instantiate a 'PlayerBase' directly!");
 	}
 	LuaPlayerBase(Widelands::PlayerNumber n) {
-		m_pl = n;
+		player_number_ = n;
 	}
 	virtual ~LuaPlayerBase() {}
 
@@ -114,7 +117,7 @@ public:
 	Widelands::Player& get(lua_State* L, Widelands::EditorGameBase&);
 
 protected:
-	inline Widelands::PlayerNumber player_number() {return m_pl;}
+	inline Widelands::PlayerNumber player_number() {return player_number_;}
 };
 
 void luaopen_wlbases(lua_State *);

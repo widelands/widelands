@@ -30,55 +30,63 @@ from confgettext import Conf_GetText
 # to let .po[t] comments point to somewhere useful
 MAINPOTS = [
     ( "maps/maps", [
-        "../../maps/*/elemental",
-        "../../maps/*/*/elemental",
-        "../../campaigns/*.conf",
-        "../../campaigns/*/elemental"
+        "../../data/maps/*/elemental",
+        "../../data/maps/*/*/elemental",
+        "../../data/campaigns/*.conf",
+        "../../data/campaigns/*/elemental"
     ] ),
-    ( "texts/texts", ["../../txts/*.lua",
-                  "../../txts/tips/*.tip"] ),
+    ( "texts/texts", ["../../data/txts/*.lua",
+                  "../../data/txts/tips/*.tip"] ),
     ( "widelands/widelands", [
                     "../../src/wlapplication.cc",
                     "../../src/*/*.cc",
                     "../../src/*/*/*.cc",
+                    "../../src/*/*/*/*.cc",
+                    "../../src/*/*/*/*/*.cc",
+                    "../../src/*/*/*/*/*/*.cc",
                     "../../src/wlapplication.h",
                     "../../src/*/*.h",
                     "../../src/*/*/*.h",
-                    "../../scripting/widelands/*.lua",
+                    "../../src/*/*/*/*.h",
+                    "../../src/*/*/*/*/*.h",
+                    "../../src/*/*/*/*/*/*.h",
+                    "../../data/scripting/*.lua",
+                    "../../data/scripting/editor/*.lua",
+                    "../../data/scripting/widelands/*.lua",
     ] ),
     ( "widelands_console/widelands_console", [
                     "../../src/wlapplication_messages.cc",
                     "../../src/wlapplication_messages.h",
     ] ),
     ( "win_conditions/win_conditions", [
-        "../../scripting/win_conditions/*.lua",
-        "../../scripting/win_condition_texts.lua",
+        "../../data/scripting/win_conditions/*.lua",
+        "../../data/scripting/win_condition_texts.lua",
     ]),
     ("world/world", [
-        "../../world/*.lua",
-        "../../world/*/*.lua",
-        "../../world/*/*/*.lua",
-        "../../world/*/*/*/*.lua",
-        "../../world/*/*/*/*/*.lua",
-        "../../world/*/*/*/*/*/*.lua",
+        "../../data/world/*.lua",
+        "../../data/world/*/*.lua",
+        "../../data/world/*/*/*.lua",
+        "../../data/world/*/*/*/*.lua",
+        "../../data/world/*/*/*/*/*.lua",
+        "../../data/world/*/*/*/*/*/*.lua",
     ]),
     ("tribes/tribes", [
-        "../../tribes/scripting/starting_conditions/*/*.lua",
-        "../../tribes/*.lua",
-        "../../tribes/*/init.lua",
-        "../../tribes/*/*/init.lua",
-        "../../tribes/*/*/*/init.lua",
-        "../../tribes/*/*/*/*/init.lua",
-        "../../tribes/*/*/*/*/*/init.lua",
+        "../../data/tribes/scripting/starting_conditions/*/*.lua",
+        "../../data/tribes/*.lua",
+        "../../data/tribes/*/init.lua",
+        "../../data/tribes/*/*/init.lua",
+        "../../data/tribes/*/*/*/init.lua",
+        "../../data/tribes/*/*/*/*/init.lua",
+        "../../data/tribes/*/*/*/*/*/init.lua",
     ]),
 
     ("tribes_encyclopedia/tribes_encyclopedia", [
-        "../../tribes/scripting/help/*.lua",
-        "../../tribes/*/helptexts.lua",
-        "../../tribes/*/*/helptexts.lua",
-        "../../tribes/*/*/*/helptexts.lua",
-        "../../tribes/*/*/*/*/helptexts.lua",
-        "../../tribes/*/*/*/*/*/helptexts.lua",
+        "../../data/tribes/scripting/help/*.lua",
+        "../../data/tribes/*/helptexts.lua",
+        "../../data/tribes/*/*/helptexts.lua",
+        "../../data/tribes/*/*/*/helptexts.lua",
+        "../../data/tribes/*/*/*/*/helptexts.lua",
+        "../../data/tribes/*/*/*/*/*/helptexts.lua",
     ]),
 ]
 
@@ -97,18 +105,18 @@ MAINPOTS = [
 # For every instance found of a given type, '%s' in this values is replaced
 # with the name of the instance.
 ITERATIVEPOTS = [
-    ("scenario_%(name)s/scenario_%(name)s", "campaigns/",
-         ["../../campaigns/%(name)s/extra_data",
-          "../../campaigns/%(name)s/objective",
-          "../../campaigns/%(name)s/scripting/*.lua",
-          "../../scripting/format_scenario.lua"
+    ("scenario_%(name)s/scenario_%(name)s", "data/campaigns/",
+         ["../../data/campaigns/%(name)s/extra_data",
+          "../../data/campaigns/%(name)s/objective",
+          "../../data/campaigns/%(name)s/scripting/*.lua",
+          "../../data/scripting/format_scenario.lua"
          ]
     ),
-    ("map_%(name)s/map_%(name)s", "maps/",
-         [ "../../maps/%(name)s/scripting/*.lua", ]
+    ("map_%(name)s/map_%(name)s", "data/maps/",
+         [ "../../data/maps/%(name)s/scripting/*.lua", ]
     ),
-    ("mp_scenario_%(name)s/mp_scenario_%(name)s", "maps/MP_Scenarios/",
-         [ "../../maps/MP_Scenarios/%(name)s/scripting/*.lua", ]
+    ("mp_scenario_%(name)s/mp_scenario_%(name)s", "data/maps/MP_Scenarios/",
+         [ "../../data/maps/MP_Scenarios/%(name)s/scripting/*.lua", ]
     ),
 ]
 
@@ -172,9 +180,9 @@ def pot_modify_header( potfile_in, potfile_out, header ):
     """
     Modify the header of a translation catalog read from potfile_in to
     the given header and write out the modified catalog to potfile_out.
-    
+
     Returns whether or not the header was successfully modified.
-    
+
     Note: potfile_in and potfile_out must not point to the same file!
     """
     class State:
@@ -182,12 +190,12 @@ def pot_modify_header( potfile_in, potfile_out, header ):
          possibly_empty_msgid,
          search_for_empty_line,
          header_traversed) = range(4)
-        
+
     st = State.start
     with open(potfile_in, "rt") as potin:
         for line in potin:
             line = line.strip()
-            
+
             if st == State.start:
                 if line.startswith("msgid \"\""):
                     st = State.possibly_empty_msgid
@@ -207,16 +215,16 @@ def pot_modify_header( potfile_in, potfile_out, header ):
                 if not line:
                     st = State.header_traversed
                     break;
-        
+
         if st != State.header_traversed:
             return False
-        
+
         with open(potfile_out, "wt") as potout:
             potout.write(header)
             potout.writelines(potin)
 
         return True
-    
+
 def run_msguniq(potfile):
     msguniq_rv = os.system("msguniq \"%s\" -F --output-file=\"%s\"" % (potfile, potfile))
     if (msguniq_rv):
@@ -237,11 +245,11 @@ def do_compile( potfile, srcfiles ):
     lua_files = set([ f for f in files if
         os.path.splitext(f)[-1].lower() == '.lua' ])
     conf_files = files - lua_files
-    
+
     temp_potfile = potfile + ".tmp"
-    
+
     if (os.path.exists(temp_potfile)): os.remove(temp_potfile)
-    
+
     # Find translatable strings in Lua files using xgettext
     xgettext = subprocess.Popen("xgettext %s --files-from=- --output=\"%s\"" % \
         (LUAXGETTEXTOPTS, temp_potfile), shell=True, stdin=subprocess.PIPE, universal_newlines=True)
@@ -252,46 +260,46 @@ def do_compile( potfile, srcfiles ):
     except IOError as err_msg:
         sys.stderr.write("Failed to call xgettext: %s\n" % err_msg)
         return False
-    
+
     xgettext_status = xgettext.wait()
     if (xgettext_status != 0):
         sys.stderr.write("xgettext exited with errorcode %i\n" % xgettext_status)
         return False
-        
+
     xgettext_found_something_to_translate = os.path.exists(temp_potfile)
-    
+
     # Find translatable strings in configuration files
     conf = Conf_GetText()
     conf.parse(conf_files)
-    
+
     if not (xgettext_found_something_to_translate or conf.found_something_to_translate):
         # Found no translatable strings
         return False
-    
+
     if (xgettext_found_something_to_translate):
         header_fixed = pot_modify_header(temp_potfile, potfile, HEAD)
         os.remove(temp_potfile)
-        
+
         if not header_fixed:
             return False
-        
+
         if (conf.found_something_to_translate):
             # Merge the conf POT with Lua POT
             with open(potfile, "at") as p:
                 p.write("\n" + conf.toString())
-                
+
             if not run_msguniq(potfile):
                 return False
     elif (conf.found_something_to_translate):
         with open(potfile, "wt") as p:
             p.write(HEAD + conf.toString())
-            
+
         # Msguniq is run here only to sort POT entries by file
         if not run_msguniq(potfile):
             return False
 
     return True
-    
+
 
 
 def do_compile_src( potfile, srcfiles ):
@@ -300,18 +308,25 @@ def do_compile_src( potfile, srcfiles ):
     and write out the given potfile
     """
     # call xgettext and supply source filenames via stdin
-    gettext_input = subprocess.Popen("xgettext %s --files-from=- --output=%s" % \
-            (XGETTEXTOPTS, potfile), shell=True, stdin=subprocess.PIPE, universal_newlines=True).stdin
+    xgettext = subprocess.Popen("xgettext %s --files-from=- --output=%s" % \
+            (XGETTEXTOPTS, potfile), shell=True, stdin=subprocess.PIPE, universal_newlines=True)
     try:
         for one_pattern in srcfiles:
             # 'normpath' is necessary for windows ('/' vs. '\')
             # 'glob' handles filename wildcards
             for one_file in glob(os.path.normpath(one_pattern)):
-                gettext_input.write(one_file + "\n")
-        return gettext_input.close()
+                xgettext.stdin.write(one_file + "\n")
+        xgettext.stdin.close()
     except IOError as err_msg:
         sys.stderr.write("Failed to call xgettext: %s\n" % err_msg)
-        return -1
+        return False
+
+    xgettext_status = xgettext.wait()
+    if (xgettext_status != 0):
+        sys.stderr.write("xgettext exited with errorcode %i\n" % xgettext_status)
+        return False
+
+    return True
 
 
 ##############################################################################
@@ -362,8 +377,7 @@ def do_update_potfiles():
             potfile = os.path.basename(pot) + '.pot'
             if pot.startswith('widelands'):
                 # This catalogs can be built with xgettext
-                do_compile_src(potfile , srcfiles )
-                succ = True
+                succ = do_compile_src(potfile , srcfiles )
             else:
                 succ = do_compile(potfile, srcfiles)
 

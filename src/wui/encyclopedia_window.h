@@ -23,8 +23,8 @@
 #include <map>
 #include <memory>
 
-#include "logic/instances.h"
-#include "logic/tribes/tribe_descr.h"
+#include "logic/map_objects/map_object.h"
+#include "logic/map_objects/tribes/tribe_descr.h"
 #include "ui_basic/box.h"
 #include "ui_basic/listselect.h"
 #include "ui_basic/multilinetextarea.h"
@@ -40,13 +40,12 @@ struct EncyclopediaWindow : public UI::UniqueWindow {
 
 private:
 	struct EncyclopediaEntry {
-		EncyclopediaEntry(const EncyclopediaEntry& other)
-		   : EncyclopediaEntry(other.index, other.descname, other.icon) {
-		}
-		EncyclopediaEntry(const Widelands::DescriptionIndex _index,
-		                  const std::string& _descname,
-		                  const Image* _icon)
-		   : index(_index), descname(_descname), icon(_icon) {
+		EncyclopediaEntry(const EncyclopediaEntry&) = default;
+		EncyclopediaEntry& operator = (const EncyclopediaEntry&) = default;
+		EncyclopediaEntry(const Widelands::DescriptionIndex i,
+								const std::string& init_descname,
+								const Image* init_icon)
+			: index(i), descname(init_descname), icon(init_icon) {
 		}
 		Widelands::DescriptionIndex index;
 		std::string descname;
@@ -60,7 +59,7 @@ private:
 	InteractivePlayer& iaplayer() const;
 
 	// Fill table of contents
-	void fill_entries(const char* key, std::vector<EncyclopediaEntry>& entries);
+	void fill_entries(const char* key, std::vector<EncyclopediaEntry>* entries);
 	void fill_buildings();
 	void fill_wares();
 	void fill_workers();

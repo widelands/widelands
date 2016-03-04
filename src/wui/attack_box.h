@@ -26,10 +26,10 @@
 #include "graphic/font_handler1.h"
 #include "graphic/text/font_set.h"
 #include "graphic/text_constants.h"
-#include "logic/attackable.h"
-#include "logic/bob.h"
+#include "logic/map_objects/attackable.h"
+#include "logic/map_objects/bob.h"
 #include "logic/player.h"
-#include "logic/soldier.h"
+#include "logic/map_objects/tribes/soldier.h"
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
 #include "ui_basic/slider.h"
@@ -66,10 +66,9 @@ private:
 	                                                 char const* hint);
 	// TODO(GunChleoc): This should also return a unique_ptr
 	UI::Textarea& add_text(UI::Box& parent,
-	                       std::string str,
-	                       uint32_t alignment = UI::Box::AlignTop,
-	                       const std::string& fontname = UI::g_fh1->fontset().serif(),
-	                       uint32_t fontsize = UI_FONT_SIZE_SMALL);
+								  std::string str,
+								  UI::Align alignment = UI::Align::kTop,
+								  int fontsize = UI_FONT_SIZE_SMALL);
 	std::unique_ptr<UI::Button> add_button(UI::Box& parent,
 	                                       const std::string& text,
 	                                       void (AttackBox::*fn)(),

@@ -43,14 +43,14 @@ EditorToolChangeHeightOptionsMenu::EditorToolChangeHeightOptionsMenu
 	m_change_by_label
 		(this,
 		 hmargin(), vmargin(), get_inner_w() - 2 * hmargin(), height,
-		 _("Increase/Decrease Value"), UI::Align_BottomCenter),
+		 _("Increase/Decrease Value"), UI::Align::kBottomCenter),
 	m_change_by_increase
 		(this, "incr_change_by",
 		 get_inner_w() - hmargin() - width,
 		 m_change_by_label.get_y() + m_change_by_label.get_h() + spacing(),
 		 width, height,
-		 g_gr->images().get("pics/but1.png"),
-		 g_gr->images().get("pics/scrollbar_up.png"),
+		 g_gr->images().get("images/ui_basic/but1.png"),
+		 g_gr->images().get("images/ui_basic/scrollbar_up.png"),
 		 std::string(),
 		 increase_tool.get_change_by() < MAX_FIELD_HEIGHT_DIFF),
 	m_change_by_decrease
@@ -58,8 +58,8 @@ EditorToolChangeHeightOptionsMenu::EditorToolChangeHeightOptionsMenu
 		 hmargin(),
 		 m_change_by_increase.get_y(),
 		 width, height,
-		 g_gr->images().get("pics/but1.png"),
-		 g_gr->images().get("pics/scrollbar_down.png"),
+		 g_gr->images().get("images/ui_basic/but1.png"),
+		 g_gr->images().get("images/ui_basic/scrollbar_down.png"),
 		 std::string(),
 		 1 < increase_tool.get_change_by()),
 	m_change_by_value
@@ -72,21 +72,21 @@ EditorToolChangeHeightOptionsMenu::EditorToolChangeHeightOptionsMenu
 		 (m_change_by_increase.get_x() + m_change_by_increase.get_w() +
 		  hspacing()),
 		 height,
-		 UI::Align_BottomCenter),
+		 UI::Align::kBottomCenter),
 	m_set_to_label
 		(this,
 		 vmargin(),
 		 m_change_by_increase.get_y() + m_change_by_increase.get_h() +
 		 vspacing(),
 		 get_inner_w() - 2 * hmargin(), height,
-		 _("Set Value"), UI::Align_BottomCenter),
+		 _("Set Value"), UI::Align::kBottomCenter),
 	m_set_to_increase
 		(this, "incr_set_to",
 		 m_change_by_increase.get_x(),
 		 m_set_to_label.get_y() + m_set_to_label.get_h() + vspacing(),
 		 width, height,
-		 g_gr->images().get("pics/but1.png"),
-		 g_gr->images().get("pics/scrollbar_up.png"),
+		 g_gr->images().get("images/ui_basic/but1.png"),
+		 g_gr->images().get("images/ui_basic/scrollbar_up.png"),
 		 std::string(),
 		 increase_tool.set_tool().get_interval().min < MAX_FIELD_HEIGHT),
 	m_set_to_decrease
@@ -94,15 +94,15 @@ EditorToolChangeHeightOptionsMenu::EditorToolChangeHeightOptionsMenu
 		 hmargin(),
 		 m_set_to_increase.get_y(),
 		 width, height,
-		 g_gr->images().get("pics/but1.png"),
-		 g_gr->images().get("pics/scrollbar_down.png"),
+		 g_gr->images().get("images/ui_basic/but1.png"),
+		 g_gr->images().get("images/ui_basic/scrollbar_down.png"),
 		 std::string(),
 		 0 < increase_tool.set_tool().get_interval().min),
 	m_set_to_value
 		(this,
 		 m_change_by_value.get_x(), m_set_to_increase.get_y(),
 		 m_change_by_value.get_w(), height,
-		 UI::Align_BottomCenter)
+		 UI::Align::kBottomCenter)
 {
 	m_change_by_increase.sigclicked.connect
 		(boost::bind

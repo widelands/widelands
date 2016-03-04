@@ -25,9 +25,9 @@
 #include "base/i18n.h"
 #include "base/macros.h"
 #include "graphic/graphic.h"
-#include "logic/bob.h"
 #include "logic/game.h"
 #include "logic/map.h"
+#include "logic/map_objects/bob.h"
 #include "logic/player.h"
 #include "profile/profile.h"
 #include "ui_basic/button.h"
@@ -93,19 +93,19 @@ WatchWindow::WatchWindow
 	(InteractiveGameBase &       parent,
 	 int32_t const x, int32_t const y, uint32_t const w, uint32_t const h,
 	 Widelands::Coords    const coords,
-	 bool                   const _single_window)
+	 bool                   const init_single_window)
 :
 	UI::Window(&parent, "watch", x, y, w, h, _("Watch")),
 	mapview   (this, 0, 0, 200, 166, parent),
 	last_visit(game().get_gametime()),
-	single_window(_single_window)
+	single_window(init_single_window)
 {
 	UI::Button * followbtn =
 		new UI::Button
 			(this, "follow",
 			 0, h - 34, 34, 34,
-			 g_gr->images().get("pics/but0.png"),
-			 g_gr->images().get("pics/menu_watch_follow.png"),
+			 g_gr->images().get("images/ui_basic/but0.png"),
+			 g_gr->images().get("images/wui/menus/menu_watch_follow.png"),
 			 _("Follow"));
 	followbtn->sigclicked.connect(boost::bind(&WatchWindow::do_follow, this));
 
@@ -113,18 +113,18 @@ WatchWindow::WatchWindow
 		new UI::Button
 			(this, "center_mainview_here",
 			 34, h - 34, 34, 34,
-			 g_gr->images().get("pics/but0.png"),
-			 g_gr->images().get("pics/menu_goto.png"),
+			 g_gr->images().get("images/ui_basic/but0.png"),
+			 g_gr->images().get("images/wui/menus/menu_goto.png"),
 			 _("Center the main view on this"));
 	gotobtn->sigclicked.connect(boost::bind(&WatchWindow::do_goto, this));
 
-	if (_single_window) {
+	if (init_single_window) {
 		for (uint8_t i = 0; i < NUM_VIEWS; ++i) {
 			view_btns[i] =
 				new UI::Button
 					(this, "view",
 					 74 + (17 * i), 200 - 34, 17, 34,
-					 g_gr->images().get("pics/but0.png"),
+					 g_gr->images().get("images/ui_basic/but0.png"),
 					 "-", std::string(),
 					 false);
 			view_btns[i]->sigclicked.connect
@@ -135,8 +135,8 @@ WatchWindow::WatchWindow
 			new UI::Button
 				(this, "close",
 				 w - 34, h - 34, 34, 34,
-				 g_gr->images().get("pics/but0.png"),
-				 g_gr->images().get("pics/menu_abort.png"),
+				 g_gr->images().get("images/ui_basic/but0.png"),
+				 g_gr->images().get("images/wui/menu_abort.png"),
 				 _("Close"));
 		closebtn->sigclicked.connect(boost::bind(&WatchWindow::close_cur_view, this));
 	}

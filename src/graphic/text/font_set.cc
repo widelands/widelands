@@ -123,7 +123,7 @@ void FontSet::parse_font_for_locale(const std::string& localename) {
 					std::unique_ptr<LuaTable> font_set_table = fonts_table->get_table(fontsetname);
 					font_set_table->do_not_warn_about_unaccessed_keys();
 
-					set_fonts(*font_set_table, serif_);
+					set_fonts(*font_set_table, sans_);
 					direction_string = get_string_with_default(*font_set_table, "direction", "ltr");
 					if (font_set_table->has_key("size_offset")) {
 						size_offset_ = font_set_table->get_int("size_offset");
@@ -148,13 +148,13 @@ void FontSet::parse_font_for_locale(const std::string& localename) {
 }
 
 
-// The documentation on the fonts fallback scheme is in the 'i18n/fonts.lua' data file.
+// The documentation on the fonts fallback scheme is in the 'data/i18n/fonts.lua' data file.
 void FontSet::set_fonts(const LuaTable& table, const std::string& fallback) {
-	set_font_group(table, "serif", fallback,
-						&serif_, &serif_bold_, &serif_italic_, &serif_bold_italic_);
-
-	set_font_group(table, "sans", serif_,
+	set_font_group(table, "sans", fallback,
 						&sans_, &sans_bold_, &sans_italic_, &sans_bold_italic_);
+
+	set_font_group(table, "serif", sans_,
+						&serif_, &serif_bold_, &serif_italic_, &serif_bold_italic_);
 
 	set_font_group(table, "condensed", sans_,
 						&condensed_, &condensed_bold_, &condensed_italic_, &condensed_bold_italic_);

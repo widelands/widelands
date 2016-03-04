@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2013 by the Widelands Development Team
+ * Copyright (C) 2002-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,9 +19,9 @@
 
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
+#include "logic/map_objects/tribes/warehouse.h"
 #include "logic/player.h"
 #include "logic/playercommand.h"
-#include "logic/warehouse.h"
 #include "ui_basic/tabpanel.h"
 #include "wui/buildingwindow.h"
 #include "wui/portdockwaresdisplay.h"
@@ -29,15 +29,15 @@
 
 using Widelands::Warehouse;
 
-static const char pic_tab_wares[] = "pics/menu_tab_wares.png";
-static const char pic_tab_workers[] = "pics/menu_tab_workers.png";
-static const char pic_tab_dock_wares[] = "pics/menu_tab_wares_dock.png";
-static const char pic_tab_dock_workers[] = "pics/menu_tab_workers_dock.png";
-static const char pic_tab_expedition[] = "pics/start_expedition.png";
+static const char pic_tab_wares[] = "images/wui/buildings/menu_tab_wares.png";
+static const char pic_tab_workers[] = "images/wui/buildings/menu_tab_workers.png";
+static const char pic_tab_dock_wares[] = "images/wui/buildings/menu_tab_wares_dock.png";
+static const char pic_tab_dock_workers[] = "images/wui/buildings/menu_tab_workers_dock.png";
+static const char pic_tab_expedition[] = "images/wui/buildings/start_expedition.png";
 
-static const char pic_policy_prefer[] = "pics/stock_policy_prefer.png";
-static const char pic_policy_dontstock[] = "pics/stock_policy_dontstock.png";
-static const char pic_policy_remove[] = "pics/stock_policy_remove.png";
+static const char pic_policy_prefer[] = "images/wui/buildings/stock_policy_prefer.png";
+static const char pic_policy_dontstock[] = "images/wui/buildings/stock_policy_dontstock.png";
+static const char pic_policy_remove[] = "images/wui/buildings/stock_policy_remove.png";
 
 /**
  * Extends the wares display to show and modify stock policy of items.
@@ -52,7 +52,7 @@ protected:
 	void draw_ware(RenderTarget & dst, Widelands::DescriptionIndex ware) override;
 
 private:
-	Warehouse & m_warehouse;
+	Warehouse & warehouse_;
 };
 
 WarehouseWaresDisplay::WarehouseWaresDisplay
@@ -60,14 +60,14 @@ WarehouseWaresDisplay::WarehouseWaresDisplay
 	 Warehouse & wh, Widelands::WareWorker type, bool selectable)
 :
 WaresDisplay(parent, 0, 0, wh.owner().tribe(), type, selectable),
-m_warehouse(wh)
+warehouse_(wh)
 {
 	set_inner_size(width, 0);
-	add_warelist(type == Widelands::wwWORKER ? m_warehouse.get_workers() : m_warehouse.get_wares());
+	add_warelist(type == Widelands::wwWORKER ? warehouse_.get_workers() : warehouse_.get_wares());
 	if (type == Widelands::wwWORKER)
 	{
 		const std::vector<Widelands::DescriptionIndex> & worker_types_without_cost =
-			m_warehouse.owner().tribe().worker_types_without_cost();
+			warehouse_.owner().tribe().worker_types_without_cost();
 		for (size_t i = 0; i < worker_types_without_cost.size(); ++i)
 		{
 			hide_ware(worker_types_without_cost.at(i));
@@ -79,17 +79,23 @@ void WarehouseWaresDisplay::draw_ware(RenderTarget & dst, Widelands::Description
 {
 	WaresDisplay::draw_ware(dst, ware);
 
-	Warehouse::StockPolicy policy = m_warehouse.get_stock_policy(get_type(), ware);
-	const Image* pic;
-
+	Warehouse::StockPolicy policy = warehouse_.get_stock_policy(get_type(), ware);
+	const Image* pic = nullptr;
 	switch (policy) {
-	case Warehouse::SP_Prefer: pic = g_gr->images().get(pic_policy_prefer); break;
-	case Warehouse::SP_DontStock: pic = g_gr->images().get(pic_policy_dontstock); break;
-	case Warehouse::SP_Remove: pic = g_gr->images().get(pic_policy_remove); break;
-	default:
+	case Warehouse::SP_Prefer:
+		pic = g_gr->images().get(pic_policy_prefer);
+		break;
+	case Warehouse::SP_DontStock:
+		pic = g_gr->images().get(pic_policy_dontstock);
+		break;
+	case Warehouse::SP_Remove:
+		pic = g_gr->images().get(pic_policy_remove);
+		break;
+	case Warehouse::SP_Normal:
 		// don't draw anything for the normal policy
 		return;
 	}
+	assert(pic != nullptr);
 
 	dst.blit(ware_position(ware), pic);
 }
@@ -104,11 +110,11 @@ struct WarehouseWaresPanel : UI::Box {
 
 	void set_policy(Warehouse::StockPolicy);
 private:
-	InteractiveGameBase & m_gb;
-	Warehouse & m_wh;
-	bool m_can_act;
-	Widelands::WareWorker m_type;
-	WarehouseWaresDisplay m_display;
+	InteractiveGameBase & gb_;
+	Warehouse & wh_;
+	bool can_act_;
+	Widelands::WareWorker type_;
+	WarehouseWaresDisplay display_;
 };
 
 WarehouseWaresPanel::WarehouseWaresPanel
@@ -116,28 +122,28 @@ WarehouseWaresPanel::WarehouseWaresPanel
 	 InteractiveGameBase & gb, Warehouse & wh, Widelands::WareWorker type)
 :
 	UI::Box(parent, 0, 0, UI::Box::Vertical),
-	m_gb(gb),
-	m_wh(wh),
-	m_can_act(m_gb.can_act(m_wh.owner().player_number())),
-	m_type(type),
-	m_display(this, width, m_wh, m_type, m_can_act)
+	gb_(gb),
+	wh_(wh),
+	can_act_(gb_.can_act(wh_.owner().player_number())),
+	type_(type),
+	display_(this, width, wh_, type_, can_act_)
 {
-	add(&m_display, UI::Box::AlignLeft, true);
+	add(&display_, UI::Align::kLeft, true);
 
-	if (m_can_act) {
+	if (can_act_) {
 		UI::Box * buttons = new UI::Box(this, 0, 0, UI::Box::Horizontal);
 		UI::Button * b;
-		add(buttons, UI::Box::AlignLeft);
+		add(buttons, UI::Align::kLeft);
 
 #define ADD_POLICY_BUTTON(policy, policyname, tooltip)                                           \
 		b = new UI::Button                                                             \
 			(buttons, #policy, 0, 0, 34, 34,                                                  \
-			 g_gr->images().get("pics/but4.png"),                                   \
-			 g_gr->images().get("pics/stock_policy_button_" #policy ".png"),      \
+			 g_gr->images().get("images/ui_basic/but4.png"),                                   \
+			 g_gr->images().get("images/wui/buildings/stock_policy_button_" #policy ".png"),      \
 			 tooltip),                                                                        \
 		b->sigclicked.connect \
 			(boost::bind(&WarehouseWaresPanel::set_policy, this, Warehouse::SP_##policyname)), \
-		buttons->add(b, UI::Box::AlignCenter);
+        buttons->add(b, UI::Align::kHCenter);
 
 		ADD_POLICY_BUTTON(normal, Normal, _("Normal policy"))
 		ADD_POLICY_BUTTON(prefer, Prefer, _("Preferably store selected wares here"))
@@ -150,18 +156,18 @@ WarehouseWaresPanel::WarehouseWaresPanel
  * Add Buttons policy buttons
  */
 void WarehouseWaresPanel::set_policy(Warehouse::StockPolicy newpolicy) {
-	if (m_gb.can_act(m_wh.owner().player_number())) {
-		bool is_workers = m_type == Widelands::wwWORKER;
+	if (gb_.can_act(wh_.owner().player_number())) {
+		bool is_workers = type_ == Widelands::wwWORKER;
 		const std::set<Widelands::DescriptionIndex> indices =
-				is_workers ? m_wh.owner().tribe().workers() : m_wh.owner().tribe().wares();
+				is_workers ? wh_.owner().tribe().workers() : wh_.owner().tribe().wares();
 
 		for (const Widelands::DescriptionIndex& index : indices) {
-			if (m_display.ware_selected(index)) {
-				m_gb.game().send_player_command
+			if (display_.ware_selected(index)) {
+				gb_.game().send_player_command
 					(*new Widelands::CmdSetStockPolicy
-						(m_gb.game().get_gametime(),
-						 m_wh.owner().player_number(),
-						 m_wh, is_workers,
+						(gb_.game().get_gametime(),
+						 wh_.owner().player_number(),
+						 wh_, is_workers,
 						 index, newpolicy));
 			}
 		}

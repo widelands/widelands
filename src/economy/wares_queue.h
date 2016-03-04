@@ -20,7 +20,7 @@
 #ifndef WL_ECONOMY_WARES_QUEUE_H
 #define WL_ECONOMY_WARES_QUEUE_H
 
-#include "logic/immovable.h"
+#include "logic/map_objects/immovable.h"
 #include "logic/widelands.h"
 
 namespace Widelands {
@@ -45,13 +45,13 @@ public:
 	WaresQueue(PlayerImmovable &, DescriptionIndex, uint8_t size);
 
 #ifndef NDEBUG
-	~WaresQueue() {assert(m_ware == INVALID_INDEX);}
+	~WaresQueue() {assert(ware_ == INVALID_INDEX);}
 #endif
 
-	DescriptionIndex get_ware()    const {return m_ware;}
-	uint32_t get_max_fill() const {return m_max_fill;}
-	uint32_t get_max_size() const {return m_max_size;}
-	uint32_t get_filled()   const {return m_filled;}
+	DescriptionIndex get_ware()    const {return ware_;}
+	uint32_t get_max_fill() const {return max_fill_;}
+	uint32_t get_max_size() const {return max_size_;}
+	uint32_t get_filled()   const {return filled_;}
 
 	void cleanup();
 
@@ -65,7 +65,7 @@ public:
 	void set_filled          (uint32_t);
 	void set_consume_interval(uint32_t);
 
-	Player & owner() const {return m_owner.owner();}
+	Player & owner() const {return owner_.owner();}
 
 	void read (FileRead  &, Game &, MapObjectLoader &);
 	void write(FileWrite &, Game &, MapObjectSaver  &);
@@ -75,19 +75,19 @@ private:
 		(Game &, Request &, DescriptionIndex, Worker *, PlayerImmovable &);
 	void update();
 
-	PlayerImmovable & m_owner;
-	DescriptionIndex         m_ware;    ///< ware ID
-	uint32_t m_max_size;         ///< nr of items that fit into the queue maximum
-	uint32_t m_max_fill;         ///< nr of wares that should be ideally in this queue
-	uint32_t m_filled;           ///< nr of items that are currently in the queue
+	PlayerImmovable & owner_;
+	DescriptionIndex         ware_;    ///< ware ID
+	uint32_t max_size_;         ///< nr of items that fit into the queue maximum
+	uint32_t max_fill_;         ///< nr of wares that should be ideally in this queue
+	uint32_t filled_;           ///< nr of items that are currently in the queue
 
 	///< time in ms between consumption at full speed
-	uint32_t m_consume_interval;
+	uint32_t consume_interval_;
 
-	Request         * m_request; ///< currently pending request
+	Request         * request_; ///< currently pending request
 
-	CallbackFn      * m_callback_fn;
-	void            * m_callback_data;
+	CallbackFn      * callback_fn_;
+	void            * callback_data_;
 };
 
 }

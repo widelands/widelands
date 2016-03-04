@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2015 Widelands Development Team
+# Copyright (C) 2005-2016 Widelands Development Team
 # 
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2012
@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-28 11:19+0000\n"
-"PO-Revision-Date: 2015-11-28 11:21+0000\n"
+"POT-Creation-Date: 2016-01-23 08:23+0000\n"
+"PO-Revision-Date: 2016-01-23 08:24+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Turkish (http://www.transifex.com/widelands/widelands/language/tr/)\n"
 "MIME-Version: 1.0\n"
@@ -235,11 +235,11 @@ msgid ""
 "another confrontation."
 msgstr ""
 
-#: ../../maps/Comet Island.wmf/elemental:7
+#: ../../maps/Comet_Island.wmf/elemental:7
 msgid "Comet Island"
 msgstr "Kuyrukluyıldız Adası"
 
-#: ../../maps/Comet Island.wmf/elemental:9
+#: ../../maps/Comet_Island.wmf/elemental:9
 msgid ""
 "A few miles in front of Gerion Coast lies a small unnamed island. Until now,"
 " you have not seen any reason to sail there, but yesterday a big fireball "
@@ -258,30 +258,30 @@ msgid ""
 " crater. Two tribes are now fighting for the rich resources."
 msgstr "Birkaç dağa meteor çarptıktan çok sonra, kraterde hayat canlandı. Şimdi iki kabile zengin kaynaklar için savaşıyor."
 
-#: ../../maps/Crossing the Horizon.wmf/elemental:8
+#: ../../maps/Crossing_the_Horizon.wmf/elemental:8
 msgid "Crossing the Horizon"
 msgstr ""
 
-#: ../../maps/Crossing the Horizon.wmf/elemental:10
+#: ../../maps/Crossing_the_Horizon.wmf/elemental:10
 msgid "Man your ship and sail to the horizon."
 msgstr ""
 
-#: ../../maps/Desert Tournament.wmf/elemental:8
+#: ../../maps/Desert_Tournament.wmf/elemental:8
 msgid "Desert Tournament"
 msgstr "Çöl Turnuvası"
 
-#: ../../maps/Desert Tournament.wmf/elemental:10
+#: ../../maps/Desert_Tournament.wmf/elemental:10
 msgid ""
 "Four tribes struggle with their nearest neighbor to be the first to reach "
 "the mountain of gold that promises riches beyond belief. But can the two "
 "remaining ones share the resources wisely?"
 msgstr ""
 
-#: ../../maps/Dry Riverbed.wmf/elemental:8
+#: ../../maps/Dry_Riverbed.wmf/elemental:8
 msgid "Dry Riverbed"
 msgstr "Kuru Nehiryatağı"
 
-#: ../../maps/Dry Riverbed.wmf/elemental:10
+#: ../../maps/Dry_Riverbed.wmf/elemental:10
 msgid ""
 "It has been a long time since the last raindrop touched these grounds. Small"
 " wonder that there is not much water left in this dry riverbed. Everyone "
@@ -289,11 +289,11 @@ msgid ""
 "water."
 msgstr ""
 
-#: ../../maps/Elven Forests.wmf/elemental:8
+#: ../../maps/Elven_Forests.wmf/elemental:8
 msgid "Elven Forests"
 msgstr "Elf Ormanı"
 
-#: ../../maps/Elven Forests.wmf/elemental:10
+#: ../../maps/Elven_Forests.wmf/elemental:10
 msgid ""
 "The breath-taking beauty of these emerald lands has lured many tribes into "
 "an attempt to take them for themselves."
@@ -317,11 +317,11 @@ msgid ""
 "writing (2013)."
 msgstr ""
 
-#: ../../maps/Finnish Lakes.wmf/elemental:8
+#: ../../maps/Finnish_Lakes.wmf/elemental:8
 msgid "Finnish Lakes"
 msgstr "Fin Gölleri"
 
-#: ../../maps/Finnish Lakes.wmf/elemental:10
+#: ../../maps/Finnish_Lakes.wmf/elemental:10
 msgid ""
 "These are the beautiful Finnish lands of lakes, rivers, ancient forests and "
 "mountains. It is up to you to find a way through these lands."
@@ -339,21 +339,21 @@ msgid ""
 " tribe?"
 msgstr ""
 
-#: ../../maps/Four Castles.wmf/elemental:8
+#: ../../maps/Four_Castles.wmf/elemental:8
 msgid "Four Castles"
 msgstr "Dört Kale"
 
-#: ../../maps/Four Castles.wmf/elemental:10
+#: ../../maps/Four_Castles.wmf/elemental:10
 msgid ""
 "Well protected in their mighty fortresses, four power-hungry warlords are "
 "completing their schemes to dominate these lands…"
 msgstr ""
 
-#: ../../maps/Four Mountains.wmf/elemental:8
+#: ../../maps/Four_Mountains.wmf/elemental:8
 msgid "Four Mountains"
 msgstr "Dört Dağ"
 
-#: ../../maps/Four Mountains.wmf/elemental:10
+#: ../../maps/Four_Mountains.wmf/elemental:10
 msgid ""
 "Each tribe is surrounded by four mighty mountains. Who will first conquer "
 "them and claim the resources for his own tribe? Hint I: Water can be found "
@@ -361,11 +361,11 @@ msgid ""
 "Each mountain contains only one resource."
 msgstr ""
 
-#: ../../maps/Glacier Lake.wmf/elemental:8
+#: ../../maps/Glacier_Lake.wmf/elemental:8
 msgid "Glacier Lake"
 msgstr "Buzul Göl"
 
-#: ../../maps/Glacier Lake.wmf/elemental:10
+#: ../../maps/Glacier_Lake.wmf/elemental:10
 msgid ""
 "A long time your tribe dwelt on this beautiful and lonely glacier lake. No "
 "one disturbed you and the resources were enough for your whole tribe, but a "
@@ -373,24 +373,24 @@ msgid ""
 "you are sure that there is only enough space for one tribe."
 msgstr ""
 
-#: ../../maps/Golden Peninsula.wmf/elemental:8
+#: ../../maps/Golden_Peninsula.wmf/elemental:8
 msgid "Golden Peninsula"
 msgstr "Altın Yarımada"
 
-#: ../../maps/Golden Peninsula.wmf/elemental:10
+#: ../../maps/Golden_Peninsula.wmf/elemental:10
 msgid "Two empires race for the treasures of a legendary peninsula…"
 msgstr ""
 
-#: ../../maps/Ice wars.wmf/elemental:9
+#: ../../maps/Ice_wars.wmf/elemental:9
 msgid "Ice wars"
 msgstr ""
 
-#: ../../maps/Ice wars.wmf/elemental:11
+#: ../../maps/Ice_wars.wmf/elemental:11
 msgid "Autumn became winter. Some things are frozen, but not the war."
 msgstr ""
 
-#: ../../maps/Ice wars.wmf/elemental:12 ../../maps/Sun of
-#: fire.wmf/elemental:12
+#: ../../maps/Ice_wars.wmf/elemental:12
+#: ../../maps/Sun_of_fire.wmf/elemental:12
 msgid "Start positions are clockwise"
 msgstr "Başlangıç pozisyonları saat yönünde"
 
@@ -405,44 +405,44 @@ msgid ""
 "of three tribes."
 msgstr "Bir asteroit darbesi  ve çarpışmanın ardından gelen sert kış , üç adayı buz ve kayalarla birleştirdi ve burdaki üç kabilenin barış içinde yaşamasına son verdi."
 
-#: ../../maps/Islands at war.wmf/elemental:9
+#: ../../maps/Islands_at_war.wmf/elemental:9
 msgid "Islands at War"
 msgstr ""
 
-#: ../../maps/Islands at war.wmf/elemental:11
+#: ../../maps/Islands_at_war.wmf/elemental:11
 msgid ""
 "For centuries, you’ve lived peacefully side by side with the other tribe on "
 "the neighboring island. This peace seems to come to an end now – your "
 "neighbor has begun to expand."
 msgstr ""
 
-#: ../../maps/Kings and Queens.wmf/elemental:9
+#: ../../maps/Kings_and_Queens.wmf/elemental:9
 msgid "Kings and Queens"
 msgstr ""
 
-#: ../../maps/Kings and Queens.wmf/elemental:11
+#: ../../maps/Kings_and_Queens.wmf/elemental:11
 msgid ""
 "An old legend tells that these seven kingdoms, that have flourished for ages"
 " in prosperity, will someday collapse into a devastating war. Has your "
 "latest betrayal been one too many, and will the prophecy come true?"
 msgstr ""
 
-#: ../../maps/Lake of Tranquility.wmf/elemental:8
+#: ../../maps/Lake_of_Tranquility.wmf/elemental:8
 msgid "Lake of Tranquility"
 msgstr "Sukünet Gölü"
 
-#: ../../maps/Lake of Tranquility.wmf/elemental:10
+#: ../../maps/Lake_of_Tranquility.wmf/elemental:10
 msgid ""
 "This lake, deep in the most ancient forests, has long been known for its "
 "beauty and idyllic peace. However, its sanctity has been disturbed now, as "
 "two hostile tribes have arrived at its shores…"
 msgstr ""
 
-#: ../../maps/Last Bastion.wmf/elemental:8
+#: ../../maps/Last_Bastion.wmf/elemental:8
 msgid "Last Bastion"
 msgstr "Son Kale"
 
-#: ../../maps/Last Bastion.wmf/elemental:10
+#: ../../maps/Last_Bastion.wmf/elemental:10
 msgid ""
 "The whimsical Gods didn’t answer our prayers. Instead, the increasing "
 "sunlight heated up the Earth thousandfold and melted glaciers and people "
@@ -456,21 +456,21 @@ msgid ""
 "care of your timber supplies, you’ll need them."
 msgstr ""
 
-#: ../../maps/Long, long way.wmf/elemental:8
+#: ../../maps/Long,_long_way.wmf/elemental:8
 msgid "Long, long way"
 msgstr ""
 
-#: ../../maps/Long, long way.wmf/elemental:10
+#: ../../maps/Long,_long_way.wmf/elemental:10
 msgid ""
-">Where dat? A thousand miles from here.< [Porgy and Bess] You have to go a "
+"Where dat? A thousand miles from here. [Porgy and Bess] You have to go a "
 "long, long way to conquer all the islands. Good luck!"
 msgstr ""
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/elemental:7
+#: ../../maps/MP_Scenarios/Island_Hopping.wmf/elemental:7
 msgid "Island Hopping"
 msgstr ""
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/elemental:9
+#: ../../maps/MP_Scenarios/Island_Hopping.wmf/elemental:9
 msgid ""
 "A special tournament in Atlantean culture is the so-called ‘Island Hopping’,"
 " where two or more groups try to reach the center island as fast as "
@@ -478,22 +478,22 @@ msgid ""
 "mountain."
 msgstr ""
 
-#: ../../maps/MP Scenarios/Smugglers.wmf/elemental:9
+#: ../../maps/MP_Scenarios/Smugglers.wmf/elemental:9
 msgid "Smugglers"
 msgstr ""
 
-#: ../../maps/MP Scenarios/Smugglers.wmf/elemental:11
+#: ../../maps/MP_Scenarios/Smugglers.wmf/elemental:11
 msgid ""
 "Your well established smuggling routes suddenly got busy: two other tribes "
 "have appeared and now a rivalry among smugglers has started. Which team will"
 " be the first to smuggle a certain number of wares?"
 msgstr ""
 
-#: ../../maps/Mystical Maze.wmf/elemental:8
+#: ../../maps/Mystical_Maze.wmf/elemental:8
 msgid "Mystical Maze"
 msgstr "Mistik Labirent"
 
-#: ../../maps/Mystical Maze.wmf/elemental:10
+#: ../../maps/Mystical_Maze.wmf/elemental:10
 msgid ""
 "There are two big questions in the air: Who created this unbelievably big "
 "maze, and what can be found inside?"
@@ -512,11 +512,11 @@ msgid ""
 "geologists."
 msgstr "Birbiriyle mücadele eden bu dört kabileyi, sadece haritanın merkezindeki bir tepelik birleştiriyor. Ordunu bu tepeye gönder ve oraya gücünün simgesi olarak devasa bir kale inşa et! İpucu: Merkezde yanlızca bir kale için yer var. Su heryerde bulunabilir, jeolog göndermeye gerek yok."
 
-#: ../../maps/River Explorers.wmf/elemental:8
+#: ../../maps/River_Explorers.wmf/elemental:8
 msgid "River Explorers"
 msgstr ""
 
-#: ../../maps/River Explorers.wmf/elemental:10
+#: ../../maps/River_Explorers.wmf/elemental:10
 msgid ""
 "Each player has a different obstacle to expansion, and there’s always more "
 "than one way to overcome it. While the AI can be defeated here without "
@@ -535,11 +535,11 @@ msgid ""
 "handful of big rivers."
 msgstr "Mistik bir kara parçası, farklı manzaralarla dolu, hepsi de bir avuç büyük nehirle kesilmiş."
 
-#: ../../maps/Sun of fire.wmf/elemental:9
+#: ../../maps/Sun_of_fire.wmf/elemental:9
 msgid "The Ancient Sun of Fire"
 msgstr ""
 
-#: ../../maps/Sun of fire.wmf/elemental:11
+#: ../../maps/Sun_of_fire.wmf/elemental:11
 msgid ""
 "For hundreds of years, this island was kept as a sanctuary of the Gods. No "
 "human ever ventured to set a foot on it. But now that a tribe had finally "
@@ -547,32 +547,32 @@ msgid ""
 " followed in its wake."
 msgstr ""
 
-#: ../../maps/Swamp Island.wmf/elemental:8
+#: ../../maps/Swamp_Island.wmf/elemental:8
 msgid "Swamp Island"
 msgstr "Bataklık Ada"
 
-#: ../../maps/Swamp Island.wmf/elemental:10
+#: ../../maps/Swamp_Island.wmf/elemental:10
 msgid ""
 "It smells like swamp, it looks like swamp and it is a swamp. But it is the "
 "place you were born and where you’ve lived your whole life. If you don’t "
 "want to lose it, defend it!"
 msgstr ""
 
-#: ../../maps/Swamp Monks.wmf/elemental:8
+#: ../../maps/Swamp_Monks.wmf/elemental:8
 msgid "Swamp Monks"
 msgstr "Bataklık Rahipleri"
 
-#: ../../maps/Swamp Monks.wmf/elemental:10
+#: ../../maps/Swamp_Monks.wmf/elemental:10
 msgid ""
 "It is said that the old war monks, living in the even older swamps, are the "
 "key to control over the whole island."
 msgstr ""
 
-#: ../../maps/The Big Lake.wmf/elemental:8
+#: ../../maps/The_Big_Lake.wmf/elemental:8
 msgid "The Big Lake"
 msgstr ""
 
-#: ../../maps/The Big Lake.wmf/elemental:10
+#: ../../maps/The_Big_Lake.wmf/elemental:10
 msgid ""
 "This island once appeared out of the deepest depths of the sea. In those "
 "days, fire rose out of the salty seawater and brought ash, stones and soil "
@@ -582,11 +582,11 @@ msgid ""
 " that it is big enough for more than one tribe?"
 msgstr ""
 
-#: ../../maps/The Far North.wmf/elemental:8
+#: ../../maps/The_Far_North.wmf/elemental:8
 msgid "The Far North"
 msgstr "Uzak Kuzey"
 
-#: ../../maps/The Far North.wmf/elemental:10
+#: ../../maps/The_Far_North.wmf/elemental:10
 msgid ""
 "Some say that impenetrable lands to the far north scared away even the most "
 "courageous settlers and the bravest of the brave warriors. Big and old "
@@ -601,11 +601,11 @@ msgid ""
 "die pulled apart by wolves, engulfed by swamp… encircled by hostile tribes."
 msgstr ""
 
-#: ../../maps/The Green Plateau.wmf/elemental:8
+#: ../../maps/The_Green_Plateau.wmf/elemental:8
 msgid "The Green Plateau"
 msgstr "Yeşil Plato"
 
-#: ../../maps/The Green Plateau.wmf/elemental:10
+#: ../../maps/The_Green_Plateau.wmf/elemental:10
 msgid ""
 "You are standing on an island, crowned by mighty mountains which keep a "
 "wonderful and mighty treasure in their middle – The Green Plateau, which is "
@@ -613,42 +613,42 @@ msgid ""
 "clans."
 msgstr ""
 
-#: ../../maps/The Nile.wmf/elemental:9
+#: ../../maps/The_Nile.wmf/elemental:9
 msgid "The Nile"
 msgstr ""
 
-#: ../../maps/The Nile.wmf/elemental:11
+#: ../../maps/The_Nile.wmf/elemental:11
 msgid ""
 "The river has always provided food and communication. This time, eight "
 "empires will fight for control over this land."
 msgstr ""
 
-#: ../../maps/The Oasis Triangle.wmf/elemental:8
+#: ../../maps/The_Oasis_Triangle.wmf/elemental:8
 msgid "The Oasis Triangle"
 msgstr "Vaha Üçgeni"
 
-#: ../../maps/The Oasis Triangle.wmf/elemental:10
+#: ../../maps/The_Oasis_Triangle.wmf/elemental:10
 msgid ""
 "There is something mystical like a gray atmosphere around these three oases,"
 " which no one has found out about yet. Perhaps you will be the one, but be "
 "aware of the others who are searching too!"
 msgstr ""
 
-#: ../../maps/The Pass Through the Mountains.wmf/elemental:8
+#: ../../maps/The_Pass_Through_the_Mountains.wmf/elemental:8
 msgid "The Pass Through the Mountains"
 msgstr ""
 
-#: ../../maps/The Pass Through the Mountains.wmf/elemental:10
+#: ../../maps/The_Pass_Through_the_Mountains.wmf/elemental:10
 msgid ""
 "In this mountainous area two princes have settled. Now they are expanding "
 "their territories, unaware of the fact that they are not alone!"
 msgstr ""
 
-#: ../../maps/The Thaw.wmf/elemental:8
+#: ../../maps/The_Thaw.wmf/elemental:8
 msgid "The Thaw"
 msgstr ""
 
-#: ../../maps/The Thaw.wmf/elemental:10
+#: ../../maps/The_Thaw.wmf/elemental:10
 msgid ""
 "Another thaw set in. Three tribes were sheltering from severe winter among "
 "majestic mountains. At the time of the solstice they listened to the oracle "
@@ -657,32 +657,32 @@ msgid ""
 "respect of the Gods."
 msgstr ""
 
-#: ../../maps/The long way.wmf/elemental:7
+#: ../../maps/The_long_way.wmf/elemental:7
 msgid "The Long Way"
 msgstr ""
 
-#: ../../maps/The long way.wmf/elemental:9
+#: ../../maps/The_long_way.wmf/elemental:9
 msgid ""
 "Another strange test by the Gods. To reach the other side, there seems to be"
 " no other way but to occupy the land of your enemies."
 msgstr ""
 
-#: ../../maps/Three Warriors.wmf/elemental:9
+#: ../../maps/Three_Warriors.wmf/elemental:9
 msgid "Three Warriors"
 msgstr "Üç Savaşçı"
 
-#: ../../maps/Three Warriors.wmf/elemental:11
+#: ../../maps/Three_Warriors.wmf/elemental:11
 msgid ""
 "Mighty mountains divide this land into three fertile valleys. But a path "
 "connects the valleys and thus a fight seems inescapable! Hint: Water can be "
 "found around the lakes."
 msgstr "Yüce dağlar bu toprakları üç verimli vadiye bölmüş. Fakat vadileri birleştiren bir geçit ve savaş kaçınılmaz görünüyor! İpcucu: Su Göl civarında bulunabilir."
 
-#: ../../maps/Together We’re Strong.wmf/elemental:8
+#: ../../maps/Together_We’re_Strong.wmf/elemental:8
 msgid "Together We’re Strong"
 msgstr ""
 
-#: ../../maps/Together We’re Strong.wmf/elemental:10
+#: ../../maps/Together_We’re_Strong.wmf/elemental:10
 msgid ""
 "The four mighty harbors of the Craw Islands have been trading their goods "
 "among each other for ages. All of them needed resources that they could not "
@@ -695,11 +695,11 @@ msgid ""
 "will shatter the peaceful life that has lasted for so long…"
 msgstr ""
 
-#: ../../maps/Trident of Fire.wmf/elemental:9
+#: ../../maps/Trident_of_Fire.wmf/elemental:9
 msgid "Trident of Fire"
 msgstr ""
 
-#: ../../maps/Trident of Fire.wmf/elemental:11
+#: ../../maps/Trident_of_Fire.wmf/elemental:11
 msgid ""
 "In the vicinity of three major volcanoes, six lovely islands are inviting "
 "settlers to start a new life. Deserts and a quickly growing forest wait to "
@@ -707,11 +707,11 @@ msgid ""
 " explore enough resources to compete with its opponents."
 msgstr ""
 
-#: ../../maps/Twin Lagoons.wmf/elemental:8
+#: ../../maps/Twin_Lagoons.wmf/elemental:8
 msgid "Twin Lagoons"
 msgstr ""
 
-#: ../../maps/Twin Lagoons.wmf/elemental:10
+#: ../../maps/Twin_Lagoons.wmf/elemental:10
 msgid ""
 "When the wind swelled up and the first dunes were formed on these abandoned "
 "twin lagoons, nobody could have expected that two tribes that are "
@@ -721,29 +721,29 @@ msgid ""
 "opponent. Then remove all enemy activity."
 msgstr ""
 
-#: ../../maps/Twinkling Waves.wmf/elemental:8
+#: ../../maps/Twinkling_Waves.wmf/elemental:8
 msgid "Twinkling Waves"
 msgstr "Parıldayan Dalgalar"
 
-#: ../../maps/Twinkling Waves.wmf/elemental:10
+#: ../../maps/Twinkling_Waves.wmf/elemental:10
 msgid ""
 "Many beautiful, green islands await the ones brave enough to pass the "
 "thousand waves, twinkling in the sun."
 msgstr "Gün ışığında parıldayan bin dalgayı geçebilecek kadar cesur olanları birçok güzel, yeşil ada beklemekte."
 
-#: ../../maps/Two frontiers.wmf/elemental:7
+#: ../../maps/Two_frontiers.wmf/elemental:7
 msgid "Two Frontiers"
 msgstr "İki Cephe"
 
-#: ../../maps/Two frontiers.wmf/elemental:9
+#: ../../maps/Two_frontiers.wmf/elemental:9
 msgid "A multiplayer battle map on a small circle-shaped island."
 msgstr ""
 
-#: ../../maps/Volcanic Winter.wmf/elemental:8
+#: ../../maps/Volcanic_Winter.wmf/elemental:8
 msgid "Volcanic Winter"
 msgstr ""
 
-#: ../../maps/Volcanic Winter.wmf/elemental:10
+#: ../../maps/Volcanic_Winter.wmf/elemental:10
 msgid ""
 "In the middle of summer, a series of volcanic eruptions drew the winter in. "
 "Suddenly, the sun seemed to be gone and the only light and heat sources left"
@@ -751,22 +751,22 @@ msgid ""
 "are frozen now, only the volcanic islands seem to be left as habitable land."
 msgstr ""
 
-#: ../../maps/War of the Valleys.wmf/elemental:7
+#: ../../maps/War_of_the_Valleys.wmf/elemental:7
 msgid "War of the Valleys"
 msgstr "Vadilerin Savaşı"
 
-#: ../../maps/War of the Valleys.wmf/elemental:9
+#: ../../maps/War_of_the_Valleys.wmf/elemental:9
 msgid ""
 "It is said that even the sun and moon must find their way between the spires"
 " of these mountains. HINT: Monoliths mark ore-spots. Don’t bother sending "
 "geologists anywhere else."
 msgstr ""
 
-#: ../../maps/Wisent Valley.wmf/elemental:8
+#: ../../maps/Wisent_Valley.wmf/elemental:8
 msgid "Wisent Valley"
 msgstr "Bizon Vadisi"
 
-#: ../../maps/Wisent Valley.wmf/elemental:10
+#: ../../maps/Wisent_Valley.wmf/elemental:10
 msgid ""
 "It seems as if this magical valley has been inhabited by wisents since the "
 "beginning of days. When your tribe came to this place, you were sure that it"

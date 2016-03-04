@@ -44,23 +44,23 @@ using Widelands::GameSaver;
 void SaveHandler::think(Widelands::Game & game) {
 	uint32_t realtime = SDL_GetTicks();
 	initialize(realtime);
-	std::string filename = "wl_autosave";
+	std::string filename = autosave_filename_;
 
-	if (!m_allow_saving) {
+	if (!allow_saving_) {
 		return;
 	}
 	if (game.is_replay()) {
 		return;
 	}
 
-	if (m_save_requested) {
-		if (!m_save_filename.empty()) {
-			filename = m_save_filename;
+	if (save_requested_) {
+		if (!save_filename_.empty()) {
+			filename = save_filename_;
 		}
 
 		log("Autosave: save requested : %s\n", filename.c_str());
-		m_save_requested = false;
-		m_save_filename = "";
+		save_requested_ = false;
+		save_filename_ = "";
 	} else {
 		const int32_t autosave_interval_in_seconds =
 			g_options.pull_section("global").get_int("autosave", DEFAULT_AUTOSAVE_INTERVAL * 60);
@@ -68,14 +68,14 @@ void SaveHandler::think(Widelands::Game & game) {
 			return; // no autosave requested
 		}
 
-		const int32_t elapsed = (realtime - m_last_saved_realtime) / 1000;
+		const int32_t elapsed = (realtime - last_saved_realtime_) / 1000;
 		if (elapsed < autosave_interval_in_seconds) {
 			return;
 		}
 
 		if (game.game_controller()->is_paused()) { // check if game is paused
 			// Wait 30 seconds until next save try
-			m_last_saved_realtime = m_last_saved_realtime + 30000;
+			last_saved_realtime_ = last_saved_realtime_ + 30000;
 			return;
 		}
 		//roll autosaves
@@ -97,13 +97,13 @@ void SaveHandler::think(Widelands::Game & game) {
 			filename_previous = filename_next;
 			number_of_rolls--;
 		}
-		filename = "wl_autosave_00";
+		filename = (boost::format("%s_00") % autosave_filename_).str();
 		log("Autosave: interval elapsed (%d s), saving %s\n", elapsed, filename.c_str());
 	}
 
 	// TODO(unknown): defer saving to next tick so that this message is shown
 	// before the actual save, or put the saving logic in another thread
-	game.get_ibase()->log_message(_("Saving game..."));
+	game.get_ibase()->log_message(_("Saving game…"));
 
 	// save the game
 	const std::string complete_filename = create_file_name(get_base_dir(), filename);
@@ -132,7 +132,7 @@ void SaveHandler::think(Widelands::Game & game) {
 			g_fs->fs_rename(backup_filename, complete_filename);
 		}
 		// Wait 30 seconds until next save try
-		m_last_saved_realtime = m_last_saved_realtime + 30000;
+		last_saved_realtime_ = last_saved_realtime_ + 30000;
 		return;
 	} else {
 		// if backup file was created, time to remove it
@@ -142,34 +142,32 @@ void SaveHandler::think(Widelands::Game & game) {
 
 	log("Autosave: save took %d ms\n", SDL_GetTicks() - realtime);
 	game.get_ibase()->log_message(_("Game saved"));
-	m_last_saved_realtime = realtime;
+	last_saved_realtime_ = realtime;
 }
 
 /**
 * Initialize autosave timer
  */
 void SaveHandler::initialize(uint32_t realtime) {
-	if (m_initialized)
+	if (initialized_)
 		return;
 
-	m_last_saved_realtime = realtime;
-	m_initialized = true;
+	last_saved_realtime_ = realtime;
+	initialized_ = true;
 }
 
 /*
  * Calculate the name of the save file
  */
-std::string SaveHandler::create_file_name
-	(std::string dir, std::string filename)
+std::string SaveHandler::create_file_name(const std::string& dir, const std::string& filename) const
 {
-	// ok, first check if the extension matches (ignoring case)
-	if (!boost::iends_with(filename, WLGF_SUFFIX))
-		filename += WLGF_SUFFIX;
+	// Append directory name
+	std::string complete_filename = dir + g_fs->file_separator() + filename;
 
-	// Now append directory name
-	std::string complete_filename = dir;
-	complete_filename += "/";
-	complete_filename += filename;
+	// Now check if the extension matches (ignoring case)
+	if (!boost::iends_with(filename, WLGF_SUFFIX)) {
+		complete_filename += WLGF_SUFFIX;
+	}
 
 	return complete_filename;
 }

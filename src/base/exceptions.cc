@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2009, 2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -40,11 +40,11 @@ WException::WException
 	}
 	std::ostringstream ost;
 	ost << '[' << file << ':' << line << "] " << buffer;
-	m_what = ost.str();
+	what_ = ost.str();
 }
 
 char const * WException::what() const noexcept {
-	return m_what.c_str();
+	return what_.c_str();
 }
 
 
@@ -52,7 +52,7 @@ char const * WException::what() const noexcept {
  * class warning implementation
  */
 WLWarning::WLWarning(char const * const et, char const * const em, ...) :
-	m_title(et)
+	title_(et)
 {
 	char buffer[512];
 	{
@@ -61,14 +61,14 @@ WLWarning::WLWarning(char const * const et, char const * const em, ...) :
 		vsnprintf(buffer, sizeof(buffer), em, va);
 		va_end(va);
 	}
-	m_what = buffer;
+	what_ = buffer;
 }
 
 char const * WLWarning::title() const
 {
-	return m_title.c_str();
+	return title_.c_str();
 }
 
 char const * WLWarning::what() const noexcept {
-	return m_what.c_str();
+	return what_.c_str();
 }

@@ -3,6 +3,7 @@
 # 
 # Translators:
 # Bananasoft <bananasoftservice@yahoo.it>, 2015
+# Cristiano, 2015
 # Gabriel Rota <gabriel.rota@gmail.com>, 2009
 # GunChleoc, 2014
 # GunChleoc, 2014
@@ -11,9 +12,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-12-07 20:16+0000\n"
-"PO-Revision-Date: 2015-12-09 18:03+0000\n"
-"Last-Translator: Bananasoft <bananasoftservice@yahoo.it>\n"
+"POT-Creation-Date: 2015-12-14 05:31+0000\n"
+"PO-Revision-Date: 2015-12-24 11:51+0000\n"
+"Last-Translator: Cristiano\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -63,12 +64,12 @@ msgstr "Ricorda di costruire una fattoria per il bestiame"
 msgid ""
 "As your roads grow longer and your economy bigger, you should make good use "
 "of your oxen to help transport wares more quickly."
-msgstr ""
+msgstr "Man mano che le strade si allungano e tua economia cresce, dovrai fare un buon uso dei tuoi buoi per trasportare le merci più rapidamente."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:46
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:48
 msgid "Build a tower"
-msgstr ""
+msgstr "Costruisci una torre"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:49
 msgid ""
@@ -97,7 +98,7 @@ msgid ""
 "Expand your territory to the mountains, send geologists to search for ore "
 "and coal and build a mining economy with mines, taverns, smelting works and "
 "metal workshop."
-msgstr ""
+msgstr "Espandi il tuo territorio fino alle montagne, invia i geologi alla ricerca di oro e carbone e costruisci un'economia mineraria con delle miniere, taverne, fonderie, officina del fabbro"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:70
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:72
@@ -126,7 +127,7 @@ msgid ""
 " the blacksmith reaches his next level (master blacksmith), you can even "
 "enhance the ax workshop to a war mill, which will produce additional "
 "weapons."
-msgstr ""
+msgstr "Migliora la tua officina in una fabbrica d'asce per produrre armi e costruisci un'altra officina per garantire la produzione di attrezzi. Quando il fabbro raggiunge il suo prossimo livello (mastro fabbro), puoi anche migliorarla in una fucina da guerra, che produce ulteriori armi."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:83
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:120
@@ -518,7 +519,7 @@ msgid ""
 "Our mining economy seems to work fine, that is already good news! Anyway, "
 "there are still a lot of men and women waiting in our hall to get a task, so"
 " they can help our soldiers to prepare for the war to come."
-msgstr ""
+msgstr "La nostra economia mineraria sembra funzionare bene, questa è davvero una buona notizia! Comunque, ci sono ancora un sacco di uomini e donne in attesa di ottenere un lavoro, in modo che possano aiutare i nostri soldati a prepararsi per la guerra a venire. "
 
 #. TRANSLATORS: Boldreth
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:306
@@ -560,7 +561,7 @@ msgstr "Vittoria"
 msgid ""
 "You have completed the last mission of the Barbarian tutorial campaign. You "
 "may continue playing if you wish, otherwise move on to the next campaign."
-msgstr ""
+msgstr "Hai completato l'ultima missione della campagna tutorial Barbari. Puoi continuare a giocare, se lo desideri, altrimenti passa alla prossima campagna."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:325
 msgid "Military Assault"
@@ -605,6 +606,7 @@ msgid ""
 msgstr "Capo, ricordi i poveri trasportatori: le nostre strade diventano sempre più lunghe e il peso sulle loro spalle non diventa mai più leggero. Dovremmo allevare più buoi per rendere il loro lavoro più leggero e i nostri trasporti più efficienti."
 
 #: ../../scripting/format_scenario.lua:36
+#, lua-format
 msgid "“%s”"
 msgstr "“%s”"
 

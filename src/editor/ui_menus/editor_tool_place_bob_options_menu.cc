@@ -26,9 +26,9 @@
 #include "editor/editorinteractive.h"
 #include "editor/tools/editor_place_bob_tool.h"
 #include "graphic/graphic.h"
-#include "logic/critter.h"
 #include "logic/map.h"
-#include "logic/world/world.h"
+#include "logic/map_objects/world/critter.h"
+#include "logic/map_objects/world/world.h"
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
 #include "ui_basic/checkbox.h"
@@ -44,7 +44,7 @@ EditorToolPlaceBobOptionsMenu::EditorToolPlaceBobOptionsMenu
 :
 EditorToolOptionsMenu(parent, registry, 100, 100, _("Animals")),
 
-m_tabpanel          (this, 0, 0, g_gr->images().get("pics/but1.png")),
+m_tabpanel          (this, 0, 0, g_gr->images().get("images/ui_basic/but1.png")),
 m_pit               (pit),
 m_click_recursion_protect(false)
 {
@@ -72,7 +72,7 @@ m_click_recursion_protect(false)
 	}
 
 	const Image* tab_icon =
-		g_gr->images().get("pics/list_first_entry.png");
+		g_gr->images().get("images/ui_basic/list_first_entry.png");
 	Point pos;
 	uint32_t cur_x = bobs_in_row;
 	int32_t i = 0;
@@ -97,7 +97,7 @@ m_click_recursion_protect(false)
 		cb.set_state(m_pit.is_enabled(i));
 		cb.changedto.connect(boost::bind(&EditorToolPlaceBobOptionsMenu::clicked, this, i, _1));
 		m_checkboxes.push_back(&cb);
-		box->add(&cb, UI::Align_Left);
+		box->add(&cb, UI::Align::kLeft);
 		box->add_space(space);
 		pos.x += width + 1 + space;
 		++cur_x;

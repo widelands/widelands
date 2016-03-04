@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,7 +26,7 @@ namespace UI {
 /**
  * Windows are cached by default.
  *
- * The graphics (see m_pic_*) are used in the following manner: (Example)
+ * The graphics (see pic__*) are used in the following manner: (Example)
  *
  * top:
  *  <--20leftmostpixel_of_top-->
@@ -62,16 +62,16 @@ public:
 		 const std::string& title);
 
 	void set_title(const std::string &);
-	const std::string & get_title() const {return m_title;}
+	const std::string & get_title() const {return title_;}
 
 	void set_center_panel(Panel * panel);
 	void move_out_of_the_way();
 	void move_inside_parent() override;
 	void center_to_parent();
 	void warp_mouse_to_fastclick_panel();
-	void set_fastclick_panel(Panel * p) {m_fastclick_panel = p;}
+	void set_fastclick_panel(Panel * p) {fastclick_panel_ = p;}
 
-	bool is_minimal() const {return _is_minimal;}
+	bool is_minimal() const {return is_minimal_;}
 	void restore ();
 	void minimize();
 	bool is_snap_target() const override {return true;}
@@ -94,22 +94,22 @@ protected:
 	void update_desired_size() override;
 
 private:
-	bool _is_minimal;
-	uint32_t _oldh;  // if it is, this is the old height
-	bool _dragging, _docked_left, _docked_right, _docked_bottom;
-	int32_t _drag_start_win_x, _drag_start_win_y;
-	int32_t _drag_start_mouse_x, _drag_start_mouse_y;
+	bool is_minimal_;
+	uint32_t oldh_;  // if it is, this is the old height
+	bool dragging_, docked_left_, docked_right_, docked_bottom_;
+	int32_t drag_start_win_x_, drag_start_win_y_;
+	int32_t drag_start_mouse_x_, drag_start_mouse_y_;
 
-	std::string m_title;
+	std::string title_;
 
-	const Image* m_pic_lborder;
-	const Image* m_pic_rborder;
-	const Image* m_pic_top;
-	const Image* m_pic_bottom;
-	const Image* m_pic_background;
+	const Image* pic_lborder_;
+	const Image* pic_rborder_;
+	const Image* pic_top_;
+	const Image* pic_bottom_;
+	const Image* pic_background_;
 
-	Panel * m_center_panel;
-	Panel * m_fastclick_panel;
+	Panel * center_panel_;
+	Panel * fastclick_panel_;
 };
 
 }

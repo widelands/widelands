@@ -22,37 +22,7 @@
 #include <vector>
 
 #include "base/log.h"
-
-namespace  {
-
-const char kFillRectVertexShader[] = R"(
-#version 120
-
-// Attributes.
-attribute vec2 attr_position;
-
-// Uniforms.
-uniform vec4 u_rect;
-
-
-void main() {
-	float x = u_rect.x + attr_position.x * u_rect.z;
-	float y = u_rect.y + attr_position.y * u_rect.w;
-	gl_Position = vec4(x, y, 0., 1.);
-}
-)";
-
-const char kFillRectFragmentShader[] = R"(
-#version 120
-
-uniform ivec4 u_color;
-
-void main() {
-	gl_FragColor = vec4(u_color) / 255.;
-}
-)";
-
-}  // namespace
+#include "base/wexception.h"
 
 // static
 FillRectProgram& FillRectProgram::instance() {
@@ -61,52 +31,139 @@ FillRectProgram& FillRectProgram::instance() {
 }
 
 FillRectProgram::FillRectProgram() {
-	gl_program_.build(kFillRectVertexShader, kFillRectFragmentShader);
+	gl_program_.build("fill_rect");
 
 	attr_position_ = glGetAttribLocation(gl_program_.object(), "attr_position");
-
-	u_color_ = glGetUniformLocation(gl_program_.object(), "u_color");
-	u_rect_ = glGetUniformLocation(gl_program_.object(), "u_rect");
-
-	std::vector<PerVertexData> vertices;
-	vertices.push_back(PerVertexData
-			{0., 1.});
-	vertices.push_back(PerVertexData
-			{1., 1.});
-	vertices.push_back(PerVertexData
-			{0., 0.});
-	vertices.push_back(PerVertexData
-			{1., 0.});
-
-	glBindBuffer(GL_ARRAY_BUFFER, gl_array_buffer_.object());
-	glBufferData(
-	   GL_ARRAY_BUFFER, sizeof(PerVertexData) * vertices.size(), vertices.data(), GL_STATIC_DRAW);
-	glVertexAttribPointer(attr_position_,
-								 2,
-								 GL_FLOAT,
-								 GL_FALSE,
-								 sizeof(PerVertexData),
-								 reinterpret_cast<void*>(0));
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	attr_color_ = glGetAttribLocation(gl_program_.object(), "attr_color");
 }
 
-void FillRectProgram::draw(const FloatRect& gl_dst_rect, const RGBAColor& color) {
-	glUseProgram(gl_program_.object());
-	glEnableVertexAttribArray(attr_position_);
-	glBindBuffer(GL_ARRAY_BUFFER, gl_array_buffer_.object());
+void FillRectProgram::draw(const FloatRect& destination_rect,
+                           const float z_value,
+                           const RGBAColor& color,
+                           const BlendMode blend_mode) {
+	draw({Arguments{destination_rect, z_value, color, blend_mode} });
+}
 
-	glVertexAttribPointer(attr_position_,
-								 2,
-								 GL_FLOAT,
-								 GL_FALSE,
-								 sizeof(PerVertexData),
-								 reinterpret_cast<void*>(0));
+void FillRectProgram::draw(const std::vector<Arguments>& arguments) {
+	size_t i = 0;
 
-	glUniform4f(u_rect_, gl_dst_rect.x, gl_dst_rect.y, gl_dst_rect.w, gl_dst_rect.h);
-	glUniform4i(u_color_, color.r, color.g, color.b, color.a);
+	while (i < arguments.size()) {
+		vertices_.clear();
+		const Arguments& template_args = arguments[i];
 
-	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+		// This method does 3 things:
+		// - if blend_mode is Copy, we will copy color into the destination
+		// pixels without blending.
+		// - if blend_mode is Alpha and color.r < 0, we will
+		// GL_FUNC_REVERSE_SUBTRACT color.r from all RGB values in the
+		// destination buffer. color.a should be 0 for this.
+		// - if blend_mode is Alpha and color.r > 0, we will
+		// GL_ADD color.r to all RGB values in the destination buffer.
+		// color.a should be 0 for this.
 
-	glDisableVertexAttribArray(attr_position_);
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
+		// The simple trick here is to fill the rect, but using a different glBlendFunc that will sum
+		// src and target (or subtract them if factor is negative).
+		switch (template_args.blend_mode) {
+		case BlendMode::Subtract:
+			glBlendEquation(GL_FUNC_REVERSE_SUBTRACT);
+		/* fallthrough intended */
+		case BlendMode::UseAlpha:
+			glBlendFunc(GL_ONE, GL_ONE);
+			break;
+
+		case BlendMode::Copy:
+			glDisable(GL_BLEND);
+			break;
+		}
+
+		glUseProgram(gl_program_.object());
+
+		gl_array_buffer_.bind();
+
+		auto& gl_state = Gl::State::instance();
+		gl_state.enable_vertex_attrib_array({
+		   attr_position_, attr_color_,
+		});
+
+		// Batch common rectangles up.
+		while (i < arguments.size()) {
+			const Arguments& current_args = arguments[i];
+			if (current_args.blend_mode != template_args.blend_mode) {
+				break;
+			}
+
+			const float r = current_args.color.r / 255.;
+			const float g = current_args.color.g / 255.;
+			const float b = current_args.color.b / 255.;
+			const float a = current_args.color.a / 255.;
+
+			// First triangle.
+			vertices_.emplace_back(current_args.destination_rect.x,
+			                      current_args.destination_rect.y,
+			                      current_args.z_value,
+			                      r,
+			                      g,
+			                      b,
+			                      a);
+			vertices_.emplace_back(current_args.destination_rect.x + current_args.destination_rect.w,
+			                      current_args.destination_rect.y,
+			                      current_args.z_value,
+			                      r,
+			                      g,
+			                      b,
+			                      a);
+			vertices_.emplace_back(current_args.destination_rect.x,
+			                      current_args.destination_rect.y + current_args.destination_rect.h,
+			                      current_args.z_value,
+			                      r,
+			                      g,
+			                      b,
+			                      a);
+
+			// Second triangle.
+			vertices_.emplace_back(current_args.destination_rect.x + current_args.destination_rect.w,
+			                      current_args.destination_rect.y,
+			                      current_args.z_value,
+			                      r,
+			                      g,
+			                      b,
+			                      a);
+			vertices_.emplace_back(current_args.destination_rect.x,
+			                      current_args.destination_rect.y + current_args.destination_rect.h,
+			                      current_args.z_value,
+			                      r,
+			                      g,
+			                      b,
+			                      a);
+			vertices_.emplace_back(current_args.destination_rect.x + current_args.destination_rect.w,
+			                      current_args.destination_rect.y + current_args.destination_rect.h,
+			                      current_args.z_value,
+			                      r,
+			                      g,
+			                      b,
+			                      a);
+			++i;
+		}
+
+		gl_array_buffer_.update(vertices_);
+
+		Gl::vertex_attrib_pointer(
+		   attr_position_, 3, sizeof(PerVertexData), offsetof(PerVertexData, gl_x));
+		Gl::vertex_attrib_pointer(attr_color_, 4, sizeof(PerVertexData), offsetof(PerVertexData, r));
+
+		glDrawArrays(GL_TRIANGLES, 0, vertices_.size());
+
+		switch (template_args.blend_mode) {
+		case BlendMode::Subtract:
+			glBlendEquation(GL_FUNC_ADD);
+		/* fallthrough intended */
+		case BlendMode::UseAlpha:
+			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+			break;
+
+		case BlendMode::Copy:
+			glEnable(GL_BLEND);
+			break;
+		}
+	}
 }

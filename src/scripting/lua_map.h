@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2006-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,16 +25,17 @@
 #include "economy/flag.h"
 #include "economy/portdock.h"
 #include "economy/road.h"
-#include "logic/constructionsite.h"
-#include "logic/dismantlesite.h"
+#include "logic/map_objects/tribes/constructionsite.h"
+#include "logic/map_objects/tribes/dismantlesite.h"
 #include "logic/game.h"
-#include "logic/militarysite.h"
-#include "logic/productionsite.h"
-#include "logic/ship.h"
-#include "logic/soldier.h"
-#include "logic/trainingsite.h"
-#include "logic/warehouse.h"
-#include "logic/worker.h"
+#include "logic/map_objects/tribes/militarysite.h"
+#include "logic/map_objects/tribes/productionsite.h"
+#include "logic/map_objects/tribes/ship.h"
+#include "logic/map_objects/tribes/soldier.h"
+#include "logic/map_objects/tribes/trainingsite.h"
+#include "logic/map_objects/tribes/warehouse.h"
+#include "logic/map_objects/tribes/worker.h"
+#include "logic/map_objects/world/terrain_description.h"
 #include "scripting/lua.h"
 #include "scripting/luna.h"
 
@@ -43,8 +44,10 @@ namespace Widelands {
 	class SoldierDescr;
 	class BuildingDescr;
 	class Bob;
+	class ResourceDescription;
 	class WareDescr;
 	class WorkerDescr;
+	class TerrainDescription;
 	class TribeDescr;
 }
 
@@ -203,6 +206,47 @@ private:
 		return static_cast<const Widelands::klass*>(LuaMapObjectDescription::get());                  \
 	}
 
+class LuaImmovableDescription : public LuaMapObjectDescription {
+public:
+	LUNA_CLASS_HEAD(LuaImmovableDescription);
+
+	virtual ~LuaImmovableDescription() {}
+
+	LuaImmovableDescription() {}
+	LuaImmovableDescription(const Widelands::ImmovableDescr* const immovabledescr)
+		: LuaMapObjectDescription(immovabledescr) {
+	}
+	LuaImmovableDescription(lua_State* L) : LuaMapObjectDescription(L) {
+	}
+
+	void __persist(lua_State * L) override;
+	void __unpersist(lua_State * L) override;
+
+	/*
+	 * Properties
+	 */
+	int get_species(lua_State *);
+	int get_build_cost(lua_State *);
+	int get_editor_category(lua_State *);
+	int get_terrain_affinity(lua_State *);
+	int get_owner_type(lua_State *);
+	int get_size(lua_State *);
+
+	/*
+	 * Lua methods
+	 */
+	int has_attribute(lua_State *);
+	int probability_to_grow(lua_State *);
+
+	/*
+	 * C methods
+	 */
+
+private:
+	CASTED_GET_DESCRIPTION(ImmovableDescr)
+};
+
+
 class LuaBuildingDescription : public LuaMapObjectDescription {
 public:
 	LUNA_CLASS_HEAD(LuaBuildingDescription);
@@ -233,10 +277,10 @@ public:
 	int get_enhancement(lua_State *);
 	int get_is_mine(lua_State *);
 	int get_is_port(lua_State *);
+	int get_size(lua_State *);
 	int get_isproductionsite(lua_State *);
 	int get_returned_wares(lua_State *);
 	int get_returned_wares_enhanced(lua_State *);
-	int get_size(lua_State *);
 	int get_vision_range(lua_State *);
 	int get_workarea_radius(lua_State *);
 
@@ -328,17 +372,17 @@ private:
 };
 
 
-class LuaMilitarySiteDescription : public LuaProductionSiteDescription {
+class LuaMilitarySiteDescription : public LuaBuildingDescription {
 public:
 	LUNA_CLASS_HEAD(LuaMilitarySiteDescription);
 
 	virtual ~LuaMilitarySiteDescription() {}
 
 	LuaMilitarySiteDescription() {}
-	LuaMilitarySiteDescription(const Widelands::ProductionSiteDescr* const militarysitedescr)
-		: LuaProductionSiteDescription(militarysitedescr) {
+	LuaMilitarySiteDescription(const Widelands::MilitarySiteDescr* const militarysitedescr)
+		: LuaBuildingDescription(militarysitedescr) {
 	}
-	LuaMilitarySiteDescription(lua_State* L) : LuaProductionSiteDescription(L) {
+	LuaMilitarySiteDescription(lua_State* L) : LuaBuildingDescription(L) {
 	}
 
 	/*
@@ -367,7 +411,7 @@ public:
 	virtual ~LuaTrainingSiteDescription() {}
 
 	LuaTrainingSiteDescription() {}
-	LuaTrainingSiteDescription(const Widelands::ProductionSiteDescr* const trainingsitedescr)
+	LuaTrainingSiteDescription(const Widelands::TrainingSiteDescr* const trainingsitedescr)
 		: LuaProductionSiteDescription(trainingsitedescr) {
 	}
 	LuaTrainingSiteDescription(lua_State* L) : LuaProductionSiteDescription(L) {
@@ -497,6 +541,7 @@ public:
 	 */
 	int get_becomes(lua_State*);
 	int get_buildcost(lua_State*);
+	int get_employers(lua_State*);
 	int get_helptext_script(lua_State*);
 	int get_is_buildable(lua_State*);
 	int get_needed_experience(lua_State*);
@@ -515,6 +560,111 @@ private:
 
 #undef CASTED_GET_DESCRIPTION
 
+
+class LuaResourceDescription : public LuaMapModuleClass {
+public:
+	LUNA_CLASS_HEAD(LuaResourceDescription);
+
+	virtual ~LuaResourceDescription() {}
+
+	LuaResourceDescription() : resourcedescr_(nullptr) {}
+	LuaResourceDescription(const Widelands::ResourceDescription* const resourcedescr)
+		: resourcedescr_(resourcedescr) {}
+	LuaResourceDescription(lua_State* L) : resourcedescr_(nullptr) {
+		report_error(L, "Cannot instantiate a 'LuaResourceDescription' directly!");
+	}
+
+	void __persist(lua_State * L) override;
+	void __unpersist(lua_State * L) override;
+
+	/*
+	 * Properties
+	 */
+	int get_name(lua_State *);
+	int get_descname(lua_State *);
+	int get_is_detectable(lua_State *);
+	int get_max_amount(lua_State *);
+	int get_representative_image(lua_State *);
+
+	/*
+	 * Lua methods
+	 */
+
+	int editor_image(lua_State *);
+
+	/*
+	 * C methods
+	 */
+protected:
+	const Widelands::ResourceDescription* get() const {
+		assert(resourcedescr_ != nullptr);
+		return resourcedescr_;
+	}
+	// For persistence.
+	void set_description_pointer(const Widelands::ResourceDescription* pointer) {
+		resourcedescr_ = pointer;
+	}
+
+private:
+	const Widelands::ResourceDescription* resourcedescr_;
+};
+
+
+
+class LuaTerrainDescription : public LuaMapModuleClass {
+public:
+	LUNA_CLASS_HEAD(LuaTerrainDescription);
+
+	virtual ~LuaTerrainDescription() {}
+
+	LuaTerrainDescription() : terraindescr_(nullptr) {}
+	LuaTerrainDescription(const Widelands::TerrainDescription* const terraindescr)
+		: terraindescr_(terraindescr) {}
+	LuaTerrainDescription(lua_State* L) : terraindescr_(nullptr) {
+		report_error(L, "Cannot instantiate a 'LuaTerrainDescription' directly!");
+	}
+
+	void __persist(lua_State * L) override;
+	void __unpersist(lua_State * L) override;
+
+	/*
+	 * Properties
+	 */
+	int get_name(lua_State *);
+	int get_descname(lua_State *);
+	int get_default_resource(lua_State *);
+	int get_default_resource_amount(lua_State *);
+	int get_editor_category(lua_State *);
+	int get_fertility(lua_State *);
+	int get_humidity(lua_State *);
+	int get_representative_image(lua_State *);
+	int get_temperature(lua_State *);
+	int get_valid_resources(lua_State *);
+
+	/*
+	 * Lua methods
+	 */
+
+	/*
+	 * C methods
+	 */
+	const Widelands::TerrainDescription* get() const {
+		assert(terraindescr_ != nullptr);
+		return terraindescr_;
+	}
+
+protected:
+
+	// For persistence.
+	void set_description_pointer(const Widelands::TerrainDescription* pointer) {
+		terraindescr_ = pointer;
+	}
+
+private:
+	const Widelands::TerrainDescription* terraindescr_;
+};
+
+
 #define CASTED_GET(klass) \
 Widelands:: klass * get(lua_State * L, Widelands::EditorGameBase & egbase) { \
 	return static_cast<Widelands:: klass *> \
@@ -522,20 +672,20 @@ Widelands:: klass * get(lua_State * L, Widelands::EditorGameBase & egbase) { \
 }
 
 class LuaMapObject : public LuaMapModuleClass {
-	Widelands::ObjectPointer m_ptr;
+	Widelands::ObjectPointer ptr_;
 
 public:
 	LUNA_CLASS_HEAD(LuaMapObject);
 
-	LuaMapObject() : m_ptr(nullptr) {}
+	LuaMapObject() : ptr_(nullptr) {}
 	LuaMapObject(Widelands::MapObject & mo) {
-		m_ptr = &mo;
+		ptr_ = &mo;
 	}
-	LuaMapObject(lua_State * L) : m_ptr(nullptr) {
+	LuaMapObject(lua_State * L) : ptr_(nullptr) {
 		report_error(L, "Cannot instantiate a '%s' directly!", className);
 	}
 	virtual ~LuaMapObject() {
-		m_ptr = nullptr;
+		ptr_ = nullptr;
 	}
 
 	void __persist(lua_State * L) override;
@@ -577,7 +727,6 @@ public:
 	/*
 	 * Properties
 	 */
-	int get_size(lua_State * L);
 	int get_fields(lua_State * L);
 
 	/*
@@ -976,6 +1125,7 @@ public:
 	int set_scouting_direction(lua_State* L);
 	int get_island_explore_direction(lua_State* L);
 	int set_island_explore_direction(lua_State* L);
+	int get_shipname(lua_State* L);
 	/*
 	 * Lua methods
 	 */
@@ -991,14 +1141,14 @@ public:
 #undef CASTED_GET
 
 class LuaField : public LuaMapModuleClass {
-	Widelands::Coords m_c;
+	Widelands::Coords coords_;
 public:
 	LUNA_CLASS_HEAD(LuaField);
 
 	LuaField() {}
 	LuaField (int16_t x, int16_t y) :
-		m_c(Widelands::Coords(x, y)) {}
-	LuaField (Widelands::Coords c) : m_c(c) {}
+		coords_(Widelands::Coords(x, y)) {}
+	LuaField (Widelands::Coords c) : coords_(c) {}
 	LuaField(lua_State * L) {
 		report_error(L, "Cannot instantiate a 'Field' directly!");
 	}
@@ -1050,7 +1200,7 @@ public:
 	/*
 	 * C methods
 	 */
-	inline const Widelands::Coords & coords() {return m_c;}
+	inline const Widelands::Coords & coords() {return coords_;}
 	const Widelands::FCoords fcoords(lua_State * L);
 
 private:
@@ -1059,14 +1209,14 @@ private:
 };
 
 class LuaPlayerSlot : public LuaMapModuleClass {
-	Widelands::PlayerNumber m_plr;
+	Widelands::PlayerNumber player_number_;
 
 public:
 	LUNA_CLASS_HEAD(LuaPlayerSlot);
 
-	LuaPlayerSlot() : m_plr(0) {}
-	LuaPlayerSlot(Widelands::PlayerNumber plr) : m_plr(plr) {}
-	LuaPlayerSlot(lua_State * L) : m_plr(0) {
+	LuaPlayerSlot() : player_number_(0) {}
+	LuaPlayerSlot(Widelands::PlayerNumber plr) : player_number_(plr) {}
+	LuaPlayerSlot(lua_State * L) : player_number_(0) {
 		report_error(L, "Cannot instantiate a 'PlayerSlot' directly!");
 	}
 	virtual ~LuaPlayerSlot() {}

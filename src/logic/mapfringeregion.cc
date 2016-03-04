@@ -19,62 +19,62 @@
 
 #include "logic/mapfringeregion.h"
 
+#include "base/wexception.h"
+
 namespace Widelands {
 
 template <>
 bool MapFringeRegion<Area<FCoords> >::advance(const Map & map) {
-	switch (m_phase) {
+	switch (phase_) {
 	case 0:
-		if (m_area.radius) {
-			m_remaining_in_phase = m_area.radius;
-			m_phase              = 6;
+		if (area_.radius) {
+			remaining_in_phase_ = area_.radius;
+			phase_              = 6;
 		}
 		else
 			return false;
 		/* no break */
-	case 1: map.get_trn(m_area, &m_area); break;
-	case 2: map.get_tln(m_area, &m_area); break;
-	case 3: map. get_ln(m_area, &m_area); break;
-	case 4: map.get_bln(m_area, &m_area); break;
-	case 5: map.get_brn(m_area, &m_area); break;
-	case 6: map. get_rn(m_area, &m_area); break;
+	case 1: map.get_trn(area_, &area_); break;
+	case 2: map.get_tln(area_, &area_); break;
+	case 3: map. get_ln(area_, &area_); break;
+	case 4: map.get_bln(area_, &area_); break;
+	case 5: map.get_brn(area_, &area_); break;
+	case 6: map. get_rn(area_, &area_); break;
 	default:
-		assert(false);
-		break;
+	  NEVER_HERE();
 	}
-	if (--m_remaining_in_phase == 0) {
-		m_remaining_in_phase = m_area.radius;
-		--m_phase;
+	if (--remaining_in_phase_ == 0) {
+		remaining_in_phase_ = area_.radius;
+		--phase_;
 	}
-	return m_phase;
+	return phase_;
 }
 
 template <>
 bool MapFringeRegion<Area<> >::advance(const Map & map) {
-	switch (m_phase) {
+	switch (phase_) {
 	case 0:
-		if (m_area.radius) {
-			m_remaining_in_phase = m_area.radius;
-			m_phase              = 6;
+		if (area_.radius) {
+			remaining_in_phase_ = area_.radius;
+			phase_              = 6;
 		}
 		else
 			return false;
 		/* no break */
-	case 1: map.get_trn(m_area, &m_area); break;
-	case 2: map.get_tln(m_area, &m_area); break;
-	case 3: map. get_ln(m_area, &m_area); break;
-	case 4: map.get_bln(m_area, &m_area); break;
-	case 5: map.get_brn(m_area, &m_area); break;
-	case 6: map. get_rn(m_area, &m_area); break;
+	case 1: map.get_trn(area_, &area_); break;
+	case 2: map.get_tln(area_, &area_); break;
+	case 3: map. get_ln(area_, &area_); break;
+	case 4: map.get_bln(area_, &area_); break;
+	case 5: map.get_brn(area_, &area_); break;
+	case 6: map. get_rn(area_, &area_); break;
 	default:
-		assert(false);
-		break;
+		NEVER_HERE();
 	}
-	if (--m_remaining_in_phase == 0) {
-		m_remaining_in_phase = m_area.radius;
-		--m_phase;
+	if (--remaining_in_phase_ == 0) {
+		remaining_in_phase_ = area_.radius;
+		--phase_;
 	}
-	return m_phase;
+	return phase_;
 }
 
 }

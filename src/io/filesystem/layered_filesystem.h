@@ -67,8 +67,7 @@ public:
 	void make_directory         (const std::string & fs_dirname) override;
 
 	void * load(const std::string & fname, size_t & length) override;
-	virtual void write
-		(const std::string & fname, void const * data, int32_t length) override;
+	void write(const std::string& fname, void const* data, int32_t length) override;
 
 	StreamRead  * open_stream_read (const std::string & fname) override;
 	StreamWrite * open_stream_write(const std::string & fname) override;
@@ -83,6 +82,9 @@ public:
 	unsigned long long disk_space() override;
 
 private:
+	/// This is used to assemble an error message for exceptions that includes all file paths
+	std::string paths_error_message(const std::string& filename) const;
+
 	std::vector<std::unique_ptr<FileSystem>> m_filesystems;
 	std::unique_ptr<FileSystem> m_home;
 };

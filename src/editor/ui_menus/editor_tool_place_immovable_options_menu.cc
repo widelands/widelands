@@ -26,7 +26,7 @@
 #include "editor/tools/editor_place_immovable_tool.h"
 #include "graphic/graphic.h"
 #include "logic/map.h"
-#include "logic/world/world.h"
+#include "logic/map_objects/world/world.h"
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
 #include "ui_basic/checkbox.h"

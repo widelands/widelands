@@ -57,7 +57,7 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive& parent)
                      tabley_ + tableh_ + 3 * padding_ - 1,
                      get_inner_w() - right_column_x_ - padding_,
                      buth_,
-                     g_gr->images().get("pics/but1.png"),
+							g_gr->images().get("images/ui_basic/but1.png"),
                      _("Make Directory")),
      edit_options_(this,
                    "edit_options",
@@ -65,7 +65,7 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive& parent)
                    tabley_ + tableh_ - buth_,
                    get_inner_w() - right_column_x_ - padding_,
                    buth_,
-                   g_gr->images().get("pics/but5.png"),
+						 g_gr->images().get("images/ui_basic/but5.png"),
                    _("Map Options")),
      editbox_label_(this,
                     padding_,
@@ -73,7 +73,7 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive& parent)
                     butw_,
                     buth_,
                     _("Filename:"),
-                    UI::Align::Align_Left) {
+                    UI::Align::kLeft) {
 
 	// Make room for edit_options_
 	map_details_.set_size(map_details_.get_w(), map_details_.get_h() - buth_ - padding_);
@@ -86,9 +86,7 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive& parent)
 	                           editbox_label_.get_x() + editbox_label_.get_w() + padding_,
 	                           editbox_label_.get_y(),
 	                           tablew_ - editbox_label_.get_w() - padding_ + 1,
-	                           buth_,
-	                           g_gr->images().get("pics/but1.png"),
-	                           UI::Align::Align_Left);
+										g_gr->images().get("images/ui_basic/but1.png"));
 
 	editbox_->set_text(parent.egbase().map().get_name());
 	editbox_->changed.connect(boost::bind(&MainMenuSaveMap::edit_box_changed, this));
@@ -128,7 +126,7 @@ void MainMenuSaveMap::clicked_ok() {
 	if (filename == "" && table_.has_selection()) {  //  Maybe a directory is selected.
 		complete_filename = filename = maps_data_[table_.get_selected()].filename;
 	} else {
-		complete_filename = curdir_ + "/" + filename;
+		complete_filename = curdir_ + g_fs->file_separator() + filename;
 	}
 
 	if (g_fs->is_directory(complete_filename.c_str()) &&
@@ -157,9 +155,7 @@ void MainMenuSaveMap::clicked_make_directory() {
 	if (md.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk) {
 		g_fs->ensure_directory_exists(curdir_);
 		//  create directory
-		std::string fullname = curdir_;
-		fullname += "/";
-		fullname += md.get_dirname();
+		std::string fullname = curdir_ + g_fs->file_separator() + md.get_dirname();
 		g_fs->make_directory(fullname);
 		fill_table();
 	}
@@ -236,9 +232,7 @@ bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
 		filename += WLMF_SUFFIX;
 
 	//  append directory name
-	std::string complete_filename = curdir_;
-	complete_filename += "/";
-	complete_filename += filename;
+	const std::string complete_filename = curdir_ + g_fs->file_separator() + filename;
 
 	//  Check if file exists. If so, show a warning.
 	if (g_fs->file_exists(complete_filename)) {
@@ -252,7 +246,7 @@ bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
 
 	// save to a tmp file/dir first, rename later
 	// (important to keep script files in the script directory)
-	std::string tmp_name = complete_filename + ".tmp";
+	const std::string tmp_name = complete_filename + ".tmp";
 	if (g_fs->file_exists(tmp_name)) {
 		const std::string s = (boost::format(_
 				("A file with the name ‘%s.tmp’ already exists. You have to remove it manually."))
@@ -268,9 +262,7 @@ bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
 
 	{ // fs scope
 		std::unique_ptr<FileSystem> fs
-			(g_fs->create_sub_file_system(tmp_name.empty() ? complete_filename : tmp_name,
-				binary ? FileSystem::ZIP : FileSystem::DIR));
-		Widelands::MapSaver wms(*fs, egbase);
+			(g_fs->create_sub_file_system(tmp_name, binary ? FileSystem::ZIP : FileSystem::DIR));
 
 		// Recompute seafaring tag
 		if (map.allows_seafaring()) {
@@ -286,17 +278,16 @@ bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
 		}
 
 		try {
-			wms.save();
+			Widelands::MapSaver* wms = new Widelands::MapSaver(*fs, egbase);
+			wms->save();
+			delete wms;
+			//reset filesystem to avoid file locks on saves
+			fs.reset();
 			eia().set_need_save(false);
-
-			// if saved to a tmp file earlier, rename now
-			if (!tmp_name.empty()) {
-				g_fs->fs_unlink(complete_filename);
-				g_fs->fs_rename(tmp_name, complete_filename);
-				// also change fs, as we assign it to the map below
-				fs.reset(g_fs->make_sub_file_system(complete_filename));
-			}
-
+			g_fs->fs_unlink(complete_filename);
+			g_fs->fs_rename(tmp_name, complete_filename);
+			// also change fs, as we assign it to the map below
+			fs.reset(g_fs->make_sub_file_system(complete_filename));
 			// set the filesystem of the map to the current save file / directory
 			map.swap_filesystem(fs);
 			// DONT use fs as of here, its garbage now!
@@ -312,9 +303,7 @@ bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
 			mbox.run<UI::Panel::Returncodes>();
 
 			// cleanup tmp file if it was created
-			if (!tmp_name.empty()) {
-				g_fs->fs_unlink(tmp_name);
-			}
+			g_fs->fs_unlink(tmp_name);
 		}
 	} // end fs scope, dont use it
 

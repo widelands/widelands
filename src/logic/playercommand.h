@@ -26,10 +26,10 @@
 #include "economy/flag.h"
 #include "logic/message_id.h"
 #include "logic/path.h"
-#include "logic/ship.h"
-#include "logic/trainingsite.h"
-#include "logic/warehouse.h"
-#include "logic/worker.h"
+#include "logic/map_objects/tribes/ship.h"
+#include "logic/map_objects/tribes/trainingsite.h"
+#include "logic/map_objects/tribes/warehouse.h"
+#include "logic/map_objects/tribes/worker.h"
 
 namespace Widelands {
 
@@ -47,11 +47,11 @@ public:
 	PlayerCommand (uint32_t time, PlayerNumber);
 
 	/// For savegame loading
-	PlayerCommand() : GameLogicCommand(0), m_sender(0), m_cmdserial(0) {}
+	PlayerCommand() : GameLogicCommand(0), sender_(0), cmdserial_(0) {}
 
-	PlayerNumber sender   () const {return m_sender;}
-	uint32_t      cmdserial() const {return m_cmdserial;}
-	void set_cmdserial(const uint32_t s) {m_cmdserial = s;}
+	PlayerNumber sender   () const {return sender_;}
+	uint32_t      cmdserial() const {return cmdserial_;}
+	void set_cmdserial(const uint32_t s) {cmdserial_ = s;}
 
 	virtual void serialize (StreamWrite &) = 0;
 	static Widelands::PlayerCommand * deserialize (StreamRead &);
@@ -61,8 +61,8 @@ public:
 	void read (FileRead  &, EditorGameBase &, MapObjectLoader &) override;
 
 private:
-	PlayerNumber m_sender;
-	uint32_t      m_cmdserial;
+	PlayerNumber sender_;
+	uint32_t      cmdserial_;
 };
 
 struct CmdBulldoze:public PlayerCommand {
@@ -70,8 +70,8 @@ struct CmdBulldoze:public PlayerCommand {
 	CmdBulldoze
 		(const uint32_t t, const int32_t p,
 		 PlayerImmovable & pi,
-		 const bool _recurse = false)
-		: PlayerCommand(t, p), serial(pi.serial()), recurse(_recurse)
+		 const bool init_recurse = false)
+		: PlayerCommand(t, p), serial(pi.serial()), recurse(init_recurse)
 	{}
 
 	CmdBulldoze (StreamRead &);
@@ -92,11 +92,11 @@ private:
 struct CmdBuild:public PlayerCommand {
 	CmdBuild() : PlayerCommand() {} // For savegame loading
 	CmdBuild
-		(const uint32_t        _duetime,
+		(const uint32_t        init_duetime,
 		 const int32_t        p,
 		 const Coords         c,
 		 const DescriptionIndex i)
-		: PlayerCommand(_duetime, p), coords(c), bi(i)
+		: PlayerCommand(init_duetime, p), coords(c), bi(i)
 	{}
 
 	CmdBuild (StreamRead &);
@@ -241,11 +241,11 @@ private:
 struct CmdEnhanceBuilding:public PlayerCommand {
 	CmdEnhanceBuilding() : PlayerCommand(), serial(0) {} // For savegame loading
 	CmdEnhanceBuilding
-		(const uint32_t        _duetime,
+		(const uint32_t        init_duetime,
 		 const int32_t        p,
 		 Building           & b,
 		 const DescriptionIndex i)
-		: PlayerCommand(_duetime, p), serial(b.serial()), bi(i)
+		: PlayerCommand(init_duetime, p), serial(b.serial()), bi(i)
 	{}
 
 	// Write these commands to a file (for savegames)
@@ -422,10 +422,10 @@ struct CmdSetWarePriority : public PlayerCommand {
 	// For savegame loading
 	CmdSetWarePriority() :
 		PlayerCommand(),
-		m_serial(0),
-		m_type(0),
-		m_index(),
-		m_priority(0)
+		serial_(0),
+		type_(0),
+		index_(),
+		priority_(0)
 	{}
 	CmdSetWarePriority
 		(uint32_t duetime, PlayerNumber sender,
@@ -444,14 +444,14 @@ struct CmdSetWarePriority : public PlayerCommand {
 	void serialize (StreamWrite &) override;
 
 private:
-	Serial m_serial;
-	int32_t m_type; ///< this is always WARE right now
-	DescriptionIndex m_index;
-	int32_t m_priority;
+	Serial serial_;
+	int32_t type_; ///< this is always WARE right now
+	DescriptionIndex index_;
+	int32_t priority_;
 };
 
 struct CmdSetWareMaxFill : public PlayerCommand {
-	CmdSetWareMaxFill() : PlayerCommand(), m_serial(0), m_index(), m_max_fill(0) {} // For savegame loading
+	CmdSetWareMaxFill() : PlayerCommand(), serial_(0), index_(), max_fill_(0) {} // For savegame loading
 	CmdSetWareMaxFill
 		(uint32_t duetime, PlayerNumber,
 		 PlayerImmovable &,
@@ -469,13 +469,13 @@ struct CmdSetWareMaxFill : public PlayerCommand {
 	void serialize (StreamWrite &) override;
 
 private:
-	Serial m_serial;
-	DescriptionIndex m_index;
-	uint32_t m_max_fill;
+	Serial serial_;
+	DescriptionIndex index_;
+	uint32_t max_fill_;
 };
 
 struct CmdChangeTargetQuantity : public PlayerCommand {
-	CmdChangeTargetQuantity() : PlayerCommand(), m_economy(0), m_ware_type() {} //  For savegame loading.
+	CmdChangeTargetQuantity() : PlayerCommand(), economy_(0), ware_type_() {} //  For savegame loading.
 	CmdChangeTargetQuantity
 		(uint32_t duetime, PlayerNumber sender,
 		 uint32_t economy, DescriptionIndex index);
@@ -489,17 +489,17 @@ struct CmdChangeTargetQuantity : public PlayerCommand {
 	void serialize (StreamWrite &) override;
 
 protected:
-	uint32_t   economy  () const {return m_economy;}
-	DescriptionIndex ware_type() const {return m_ware_type;}
+	uint32_t   economy  () const {return economy_;}
+	DescriptionIndex ware_type() const {return ware_type_;}
 
 private:
-	uint32_t   m_economy;
-	DescriptionIndex m_ware_type;
+	uint32_t   economy_;
+	DescriptionIndex ware_type_;
 };
 
 
 struct CmdSetWareTargetQuantity : public CmdChangeTargetQuantity {
-	CmdSetWareTargetQuantity() : CmdChangeTargetQuantity(), m_permanent(0) {}
+	CmdSetWareTargetQuantity() : CmdChangeTargetQuantity(), permanent_(0) {}
 	CmdSetWareTargetQuantity
 		(uint32_t duetime, PlayerNumber sender,
 		 uint32_t economy, DescriptionIndex index,
@@ -517,7 +517,7 @@ struct CmdSetWareTargetQuantity : public CmdChangeTargetQuantity {
 	void serialize (StreamWrite &) override;
 
 private:
-	uint32_t m_permanent;
+	uint32_t permanent_;
 };
 
 struct CmdResetWareTargetQuantity : public CmdChangeTargetQuantity {
@@ -539,7 +539,7 @@ struct CmdResetWareTargetQuantity : public CmdChangeTargetQuantity {
 };
 
 struct CmdSetWorkerTargetQuantity : public CmdChangeTargetQuantity {
-	CmdSetWorkerTargetQuantity() : CmdChangeTargetQuantity(), m_permanent(0) {}
+	CmdSetWorkerTargetQuantity() : CmdChangeTargetQuantity(), permanent_(0) {}
 	CmdSetWorkerTargetQuantity
 		(uint32_t duetime, PlayerNumber sender,
 		 uint32_t economy, DescriptionIndex index,
@@ -557,7 +557,7 @@ struct CmdSetWorkerTargetQuantity : public CmdChangeTargetQuantity {
 	void serialize (StreamWrite &) override;
 
 private:
-	uint32_t m_permanent;
+	uint32_t permanent_;
 };
 
 struct CmdResetWorkerTargetQuantity : public CmdChangeTargetQuantity {
@@ -612,8 +612,8 @@ struct CmdDropSoldier : public PlayerCommand {
 		(const uint32_t    t,
 		 const int32_t    p,
 		 Building &       b,
-		 const int32_t    _soldier)
-		: PlayerCommand(t, p), serial(b.serial()), soldier(_soldier)
+		 const int32_t    init_soldier)
+		: PlayerCommand(t, p), serial(b.serial()), soldier(init_soldier)
 	{}
 
 	// Write these commands to a file (for savegames)
@@ -683,7 +683,7 @@ struct PlayerMessageCommand : public PlayerCommand {
 	PlayerMessageCommand () : PlayerCommand() {} //  for savegames
 	PlayerMessageCommand
 		(const uint32_t t, const PlayerNumber p, const MessageId i)
-		: PlayerCommand(t, p), m_message_id(i)
+		: PlayerCommand(t, p), message_id_(i)
 	{}
 
 	void write(FileWrite &, EditorGameBase &, MapObjectSaver  &) override;
@@ -691,10 +691,10 @@ struct PlayerMessageCommand : public PlayerCommand {
 
 	PlayerMessageCommand(StreamRead &);
 
-	MessageId message_id() const {return m_message_id;}
+	MessageId message_id() const {return message_id_;}
 
 private:
-	MessageId m_message_id;
+	MessageId message_id_;
 };
 
 struct CmdMessageSetStatusRead : public PlayerMessageCommand {
@@ -751,10 +751,10 @@ struct CmdSetStockPolicy : PlayerCommand {
 	void read (FileRead  &, EditorGameBase &, MapObjectLoader &) override;
 
 private:
-	Serial m_warehouse;
-	bool m_isworker;
-	DescriptionIndex m_ware;
-	Warehouse::StockPolicy m_policy;
+	Serial warehouse_;
+	bool isworker_;
+	DescriptionIndex ware_;
+	Warehouse::StockPolicy policy_;
 };
 
 }

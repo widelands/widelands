@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003, 2006-2008, 2011 by the Widelands Development Team
+ * Copyright (C) 2003-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -35,14 +35,17 @@ namespace UI {
 
 struct EditBoxImpl;
 
-/// An editbox can be clicked, then the user can change its text (title). When
-/// return is pressed, the editbox is unfocused, the keyboard released and a
-/// callback function is called
+/** An editbox can be clicked, then the user can change its text (title).
+ *
+ * When return is pressed, the editbox is unfocused, the keyboard
+ * released and a callback function is called.
+ */
 struct EditBox : public Panel {
 	EditBox
 		(Panel *,
-		 int32_t x, int32_t y, uint32_t w, uint32_t h,
-		 const Image* background = g_gr->images().get("pics/but2.png"), Align align = Align_Center);
+		 int32_t x, int32_t y, uint32_t w,
+		 const Image* background = g_gr->images().get("images/ui_basic/but2.png"),
+		 int font_size = UI_FONT_SIZE_SMALL);
 	virtual ~EditBox();
 
 	boost::signals2::signal<void ()> changed;
@@ -53,11 +56,8 @@ struct EditBox : public Panel {
 	void set_text(const std::string &);
 	uint32_t max_length() const;
 	void set_max_length(uint32_t);
-	Align align() const;
-	void set_align(Align);
-	void set_font(const std::string & name, int32_t size, RGBColor color);
 
-	void activate_history(bool activate) {m_history_active = activate;}
+	void activate_history(bool activate) {history_active_ = activate;}
 
 	bool handle_mousepress(uint8_t btn, int32_t x, int32_t y) override;
 	bool handle_mouserelease(uint8_t btn, int32_t x, int32_t y) override;
@@ -67,13 +67,13 @@ struct EditBox : public Panel {
 	void draw(RenderTarget &) override;
 
 private:
-	std::unique_ptr<EditBoxImpl> m;
+	std::unique_ptr<EditBoxImpl> m_;
 
 	void check_caret();
 
-	bool        m_history_active;
-	int16_t     m_history_position;
-	std::string m_history[CHAT_HISTORY_SIZE];
+	bool        history_active_;
+	int16_t     history_position_;
+	std::string history_[CHAT_HISTORY_SIZE];
 };
 
 }

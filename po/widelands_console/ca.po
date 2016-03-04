@@ -3,15 +3,15 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
-# Juanjo, 2015
+# Juanjo, 2015-2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-07-04 16:22+0200\n"
-"PO-Revision-Date: 2015-07-14 19:40+0000\n"
+"POT-Creation-Date: 2016-02-20 12:30+0000\n"
+"PO-Revision-Date: 2016-02-20 13:01+0000\n"
 "Last-Translator: Juanjo\n"
-"Language-Team: Catalan (http://www.transifex.com/projects/p/widelands/language/ca/)\n"
+"Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -26,7 +26,7 @@ msgstr "Esteu emprant Widelands - Build %s."
 
 #: ../../src/wlapplication_messages.cc:43
 msgid "Usage: widelands <option0>=<value0> ... <optionN>=<valueN>"
-msgstr "Ús: widelands <opció0>=<valor0> ... <opcióN>=<valorN>"
+msgstr "Ús: widelands <opció0>=<valor0> … <opcióN>=<valorN>"
 
 #: ../../src/wlapplication_messages.cc:44
 msgid "Options:"
@@ -72,85 +72,74 @@ msgstr " --coredump=[true|false]\n                      Genera un bolcat del nuc
 msgid ""
 " --language=[de_DE|sv_SE|...]\n"
 "                      The locale to use."
-msgstr " --language=[de_DE|sv_SE|...]\n                      La configuració regional a emprar."
+msgstr " --language=[de_DE|sv_SE|…]\n                      La configuració regional a emprar."
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
 #. widelands textdomain
 #: ../../src/wlapplication_messages.cc:66
 msgid ""
-" --remove_syncstreams=[true|false]\n"
-"                      Remove syncstream files on startup"
-msgstr " --remove_syncstreams=[true|false]\n                      Eliminar els arxius de flux de sincronització a l'inici"
+" --write_syncstreams=[true|false]\n"
+"                      Create syncstreams to help debug network games."
+msgstr " --write_syncstreams=[true|false]\n                      Inclou els fluxos de sincronització per ajudar a depurar les partides en xarxa."
 
 #: ../../src/wlapplication_messages.cc:68
-msgid ""
-" --remove_replays=[...]\n"
-"                      Remove replays after this number of days.\n"
-"                      If this is 0, replays are not deleted."
-msgstr " --remove_replays=[...]\n                      Elimina les repeticions al cap d'aquests dies.\n                      Si aquesta variable és 0, les repeticions\n                      no s'esborraran."
-
-#: ../../src/wlapplication_messages.cc:71
 msgid " --autosave=[...]     Automatically save each n minutes"
-msgstr " --autosave=[...]     Desa automàticament cada n minuts"
+msgstr " --autosave=[…]     Desa automàticament cada n minuts"
 
-#: ../../src/wlapplication_messages.cc:72
+#: ../../src/wlapplication_messages.cc:69
 msgid ""
 " --rolling_autosave=[...]\n"
 "                      Use this many files for rolling autosaves"
-msgstr " --rolling_autosave=[...]\n                      Usa aquests arxius per a les partides\n                      desades automàticament"
+msgstr " --rolling_autosave=[…]\n                      Usa aquests arxius per a les partides\n                      desades automàticament"
 
-#: ../../src/wlapplication_messages.cc:75
+#: ../../src/wlapplication_messages.cc:72
 msgid "Sound options:"
 msgstr "Opcions de so:"
 
-#: ../../src/wlapplication_messages.cc:76
+#: ../../src/wlapplication_messages.cc:73
 msgid " --nosound            Starts the game with sound disabled."
 msgstr " --nosound            Inicia el programa amb el so desactivat."
 
-#: ../../src/wlapplication_messages.cc:77
+#: ../../src/wlapplication_messages.cc:74
 msgid " --disable_fx         Disable sound effects."
 msgstr " --disable_fx         Desactiva els efectes de so."
 
-#: ../../src/wlapplication_messages.cc:78
+#: ../../src/wlapplication_messages.cc:75
 msgid " --disable_music      Disable music."
 msgstr " --disable_music      Desactiva la música."
 
-#: ../../src/wlapplication_messages.cc:79
+#: ../../src/wlapplication_messages.cc:76
 msgid " --nozip              Do not save files as binary zip archives."
 msgstr " --nozip              No guarda els arxius com a binaris zip."
 
-#: ../../src/wlapplication_messages.cc:80
+#: ../../src/wlapplication_messages.cc:77
 msgid ""
 " --editor             Directly starts the Widelands editor.\n"
 "                      You can add a =FILENAME to directly load\n"
 "                      the map FILENAME in editor."
 msgstr " --editor             Comença directament a l'editor del\n                      Widelands. Podeu afegir =NOMARXIU\n                      per carregar directament el mapa a l'editor."
 
-#: ../../src/wlapplication_messages.cc:83
+#: ../../src/wlapplication_messages.cc:80
 msgid ""
 " --scenario=FILENAME  Directly starts the map FILENAME as scenario\n"
 "                      map."
 msgstr " --scenario=ARXMAPA  Comença directament el mapa \n                      ARXMAPA com a mapa de la partida."
 
-#: ../../src/wlapplication_messages.cc:85
+#: ../../src/wlapplication_messages.cc:82
 msgid " --loadgame=FILENAME  Directly loads the savegame FILENAME."
 msgstr " --loadgame=NOMPARTIDA  Directament carrega la partida guardada amb el nom «NOMPARTIDA»."
 
-#: ../../src/wlapplication_messages.cc:86
+#: ../../src/wlapplication_messages.cc:83
 msgid ""
 " --script=FILENAME    Run the given Lua script after initialization.\n"
 "                      Only valid with --scenario, --loadgame, or --editor."
 msgstr " --script=ARXSCRIPT    Executa l'script Lua donat\n                      després de l'inici. Només vàlid amb\n                      --scenario, --loadgame o --editor."
 
-#: ../../src/wlapplication_messages.cc:88
-msgid " --dedicated=FILENAME Starts a dedicated server with FILENAME as map"
-msgstr " --dedicated=ARXMAPA Inicia un servidor dedicat\n                      amb el mapa ARXMAPA"
-
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
 #. widelands textdomain
-#: ../../src/wlapplication_messages.cc:91
+#: ../../src/wlapplication_messages.cc:87
 msgid ""
 " --auto_roadbuild_mode=[true|false]\n"
 "                      Whether to enter roadbuilding mode\n"
@@ -158,44 +147,44 @@ msgid ""
 "                      not connected to a road."
 msgstr " --auto_roadbuild_mode=[true|false]\n                      Habilita/deshabilita l'entrada automàtica\n                      al mode de construcció de camins\n                      quan es planta una bandera."
 
-#: ../../src/wlapplication_messages.cc:95
+#: ../../src/wlapplication_messages.cc:91
 msgid "Graphic options:"
 msgstr "Opcions gràfiques:"
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
 #. widelands textdomain
-#: ../../src/wlapplication_messages.cc:98
+#: ../../src/wlapplication_messages.cc:94
 msgid ""
 " --fullscreen=[true|false]\n"
 "                      Whether to use the whole display for the\n"
 "                      game screen."
 msgstr " --fullscreen=[true|false]\n                      Empra o no la pantalla sencera per\n                      al joc."
 
-#: ../../src/wlapplication_messages.cc:101
+#: ../../src/wlapplication_messages.cc:97
 msgid " --xres=[...]         Width of the window in pixel."
-msgstr " --xres=[...]         Amplada de la finestra en píxels."
+msgstr " --xres=[…]         Amplada de la finestra en píxels."
+
+#: ../../src/wlapplication_messages.cc:98
+msgid " --yres=[...]         Height of the window in pixel."
+msgstr " --yres=[…]         Alçada de la finestra en píxels."
 
 #: ../../src/wlapplication_messages.cc:102
-msgid " --yres=[...]         Height of the window in pixel."
-msgstr " --yres=[...]         Alçada de la finestra en píxels."
-
-#: ../../src/wlapplication_messages.cc:106
 msgid "Options for the internal window manager:"
 msgstr "Opcions per al gestor de finestres intern:"
 
-#: ../../src/wlapplication_messages.cc:107
+#: ../../src/wlapplication_messages.cc:103
 msgid ""
 " --border_snap_distance=[0 ...]\n"
 "                      Move a window to the edge of the screen\n"
 "                      when the edge of the window comes within\n"
 "                      this distance from the edge of the screen."
-msgstr " --border_snap_distance=[0 ...]\n                      Acobla la finestra a la vora de la pantalla\n                      quan les seves vores estiguin a una\n                      distància menor que l'escollida."
+msgstr " --border_snap_distance=[0 …]\n                      Acobla la finestra a la vora de la pantalla\n                      quan les seves vores estiguin a una\n                      distància menor que l'escollida."
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
 #. widelands textdomain
-#: ../../src/wlapplication_messages.cc:113
+#: ../../src/wlapplication_messages.cc:109
 msgid ""
 " --dock_windows_to_edges=[true|false]\n"
 "                      Eliminate a window's border towards the\n"
@@ -203,31 +192,31 @@ msgid ""
 "                      window is next to the edge of the screen."
 msgstr " --dock_windows_to_edges=[true|false]\n                      Habilita/deshabilita l'acoblament a la vora\n                      de la pantalla quan la vora d'alguna finestra\n                      estigui a prop de la vora de la pantalla."
 
-#: ../../src/wlapplication_messages.cc:117
+#: ../../src/wlapplication_messages.cc:113
 msgid ""
 " --panel_snap_distance=[0 ...]\n"
 "                      Move a window to the edge of the panel when\n"
 "                      the edge of the window comes within this\n"
 "                      distance from the edge of the panel."
-msgstr " --panel_snap_distance=[0 ...]\n                      Moure una finestra cap a la vora del panell\n                      quan la vora i el panell estigui a menys\n                      distància de la definida per aquesta opció."
+msgstr " --panel_snap_distance=[0 …]\n                      Moure una finestra cap a la vora del plafó\n                      quan la vora i el plafó estigui a menys\n                      distància de la definida per aquesta opció."
 
-#: ../../src/wlapplication_messages.cc:121
+#: ../../src/wlapplication_messages.cc:117
 msgid ""
 " --snap_windows_only_when_overlapping=[yes|no]\n"
 "                      Only move a window to the edge of a panel\n"
 "                      if the window is overlapping with the\n"
 "                      panel."
-msgstr " --snap_windows_only_when_overlapping=[yes|no]\n                      Habilita/deshabilita l'acoblament de\n                      finestres al panell quan la finestra i el\n                      panell estiguin prou a prop o es solapin."
+msgstr " --snap_windows_only_when_overlapping=[yes|no]\n                      Habilita/deshabilita l'acoblament de\n                      finestres al plafó quan la finestra i el\n                      plafó estiguin prou a prop o se superposin."
 
-#: ../../src/wlapplication_messages.cc:126
+#: ../../src/wlapplication_messages.cc:122
 msgid " --verbose            Enable verbose debug messages"
 msgstr " --verbose            Habilita els missatges de\n                      depuració descriptius"
 
-#: ../../src/wlapplication_messages.cc:128
+#: ../../src/wlapplication_messages.cc:124
 msgid " --help               Show this help"
 msgstr " --help               Mostra aquesta ajuda"
 
-#: ../../src/wlapplication_messages.cc:130
+#: ../../src/wlapplication_messages.cc:126
 msgid ""
 "Bug reports? Suggestions? Check out the project website:\n"
 "        https://launchpad.net/widelands\n"

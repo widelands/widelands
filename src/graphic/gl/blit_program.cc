@@ -22,280 +22,218 @@
 #include <vector>
 
 #include "base/log.h"
+#include "graphic/blit_mode.h"
+#include "graphic/gl/blit_data.h"
+#include "graphic/gl/coordinate_conversion.h"
 #include "graphic/gl/utils.h"
 
 namespace  {
 
-const char kBlitVertexShader[] = R"(
-#version 120
-
-// Attributes.
-attribute vec2 attr_position;
-
-// Uniforms.
-uniform vec4 u_dst_rect;
-uniform vec4 u_src_rect;
-
-varying vec2 out_texture_coordinate;
-
-void main() {
-	out_texture_coordinate = u_src_rect.xy + attr_position.xy * u_src_rect.zw;
-	gl_Position = vec4(u_dst_rect.xy + attr_position.xy * u_dst_rect.zw, 0., 1.);
-}
-)";
-
-const char kVanillaBlitFragmentShader[] = R"(
-#version 120
-
-uniform float u_opacity;
-uniform sampler2D u_texture;
-
-varying vec2 out_texture_coordinate;
-
-void main() {
-	vec4 color = texture2D(u_texture, out_texture_coordinate);
-	gl_FragColor = vec4(color.rgb, u_opacity * color.a);
-}
-)";
-
-const char kMonochromeBlitFragmentShader[] = R"(
-#version 120
-
-uniform float u_opacity;
-uniform sampler2D u_texture;
-uniform vec3 u_blend;
-
-varying vec2 out_texture_coordinate;
-
-void main() {
-	vec4 texture_color = texture2D(u_texture, out_texture_coordinate);
-
-	// See http://en.wikipedia.org/wiki/YUV.
-	float luminance = dot(vec3(0.299, 0.587, 0.114), texture_color.rgb);
-
-	gl_FragColor = vec4(vec3(luminance) * u_blend, u_opacity * texture_color.a);
-}
-)";
-
-const char kBlendedBlitFragmentShader[] = R"(
-#version 120
-
-uniform float u_opacity;
-uniform sampler2D u_texture;
-uniform sampler2D u_mask;
-uniform vec3 u_blend;
-
-varying vec2 out_texture_coordinate;
-
-void main() {
-	vec4 texture_color = texture2D(u_texture, out_texture_coordinate);
-	vec4 mask_color = texture2D(u_mask, out_texture_coordinate);
-
-	// See http://en.wikipedia.org/wiki/YUV.
-	float luminance = dot(vec3(0.299, 0.587, 0.114), texture_color.rgb);
-	float blend_influence = mask_color.r * mask_color.a;
-	gl_FragColor = vec4(
-	   mix(texture_color.rgb, u_blend * luminance, blend_influence), u_opacity * texture_color.a);
-}
-)";
+// While drawing we put all draw calls into a buffer, so that we have to
+// transfer the buffer to the GPU only once, even though we might need to do
+// many glDraw* calls. This structure represents the parameters for one glDraw*
+// call.
+struct DrawBatch {
+	int offset;
+	int count;
+	uint32_t texture;
+	uint32_t mask;
+	BlendMode blend_mode;
+};
 
 }  // namespace
 
-class BlitProgram {
-public:
-	BlitProgram(const std::string& fragment_shader);
+BlitProgram::BlitProgram() {
+	gl_program_.build("blit");
 
-	void activate(const FloatRect& gl_dest_rect,
-	              const FloatRect& gl_src_rect,
-	              const GLuint gl_texture,
-					  const float opacity,
-	              const BlendMode blend_mode);
-
-	void draw();
-	void draw_and_deactivate(BlendMode blend_mode);
-
-	GLuint program_object() const {
-		return gl_program_.object();
-	}
-
-private:
-	struct PerVertexData {
-		float gl_x, gl_y;
-	};
-	static_assert(sizeof(PerVertexData) == 8, "Wrong padding.");
-
-	// The buffer that will contain the quad for rendering.
-	Gl::Buffer gl_array_buffer_;
-
-	// The program.
-	Gl::Program gl_program_;
-
-	// Attributes.
-	GLint attr_position_;
-
-	// Uniforms.
-	GLint u_dst_rect_;
-	GLint u_opacity_;
-	GLint u_src_rect_;
-	GLint u_texture_;
-	DISALLOW_COPY_AND_ASSIGN(BlitProgram);
-};
-
-BlitProgram::BlitProgram(const std::string& fragment_shader) {
-	gl_program_.build(kBlitVertexShader, fragment_shader.c_str());
-
+	attr_blend_ = glGetAttribLocation(gl_program_.object(), "attr_blend");
+	attr_mask_texture_position_ = glGetAttribLocation(gl_program_.object(), "attr_mask_texture_position");
 	attr_position_ = glGetAttribLocation(gl_program_.object(), "attr_position");
+	attr_texture_position_ = glGetAttribLocation(gl_program_.object(), "attr_texture_position");
+	attr_program_flavor_ = glGetAttribLocation(gl_program_.object(), "attr_program_flavor");
 
 	u_texture_ = glGetUniformLocation(gl_program_.object(), "u_texture");
-	u_opacity_ = glGetUniformLocation(gl_program_.object(), "u_opacity");
-	u_dst_rect_ = glGetUniformLocation(gl_program_.object(), "u_dst_rect");
-	u_src_rect_ = glGetUniformLocation(gl_program_.object(), "u_src_rect");
-
-	std::vector<PerVertexData> vertices;
-	vertices.push_back(PerVertexData
-			{0., 1.});
-	vertices.push_back(PerVertexData
-			{1., 1.});
-	vertices.push_back(PerVertexData
-			{0., 0.});
-	vertices.push_back(PerVertexData
-			{1., 0.});
-
-	glBindBuffer(GL_ARRAY_BUFFER, gl_array_buffer_.object());
-	glBufferData(
-	   GL_ARRAY_BUFFER, sizeof(PerVertexData) * vertices.size(), vertices.data(), GL_STATIC_DRAW);
-	glVertexAttribPointer(attr_position_,
-								 2,
-								 GL_FLOAT,
-								 GL_FALSE,
-								 sizeof(PerVertexData),
-								 reinterpret_cast<void*>(0));
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	u_mask_ = glGetUniformLocation(gl_program_.object(), "u_mask");
 }
 
-void BlitProgram::activate(const FloatRect& gl_dest_rect,
-                       const FloatRect& gl_src_rect,
-                       const GLuint gl_texture,
-							  const float opacity,
-                       const BlendMode blend_mode) {
+BlitProgram::~BlitProgram() {}
+
+void BlitProgram::draw(const std::vector<Arguments>& arguments) {
 	glUseProgram(gl_program_.object());
-	glEnableVertexAttribArray(attr_position_);
-	glBindBuffer(GL_ARRAY_BUFFER, gl_array_buffer_.object());
 
-	glVertexAttribPointer(attr_position_,
-								 2,
-								 GL_FLOAT,
-								 GL_FALSE,
-								 sizeof(PerVertexData),
-								 reinterpret_cast<void*>(0));
+	auto& gl_state = Gl::State::instance();
 
+	gl_state.enable_vertex_attrib_array({attr_blend_,
+	                                   attr_mask_texture_position_,
+	                                   attr_position_,
+	                                   attr_texture_position_,
+	                                   attr_program_flavor_});
+
+	gl_array_buffer_.bind();
+
+	Gl::vertex_attrib_pointer(attr_blend_, 4, sizeof(PerVertexData), offsetof(PerVertexData, blend_r));
+	Gl::vertex_attrib_pointer(attr_mask_texture_position_,
+	                       2,
+	                       sizeof(PerVertexData),
+	                       offsetof(PerVertexData, mask_texture_x));
+	Gl::vertex_attrib_pointer(attr_position_, 3, sizeof(PerVertexData), offsetof(PerVertexData, gl_x));
+	Gl::vertex_attrib_pointer(
+	   attr_texture_position_, 2, sizeof(PerVertexData), offsetof(PerVertexData, texture_x));
+	Gl::vertex_attrib_pointer(
+	   attr_program_flavor_, 1, sizeof(PerVertexData), offsetof(PerVertexData, program_flavor));
 
 	glUniform1i(u_texture_, 0);
-	glUniform1f(u_opacity_, opacity);
-	glUniform4f(u_dst_rect_, gl_dest_rect.x, gl_dest_rect.y, gl_dest_rect.w, gl_dest_rect.h);
-	glUniform4f(u_src_rect_, gl_src_rect.x, gl_src_rect.y, gl_src_rect.w, gl_src_rect.h);
-
-	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, gl_texture);
-
-	if (blend_mode == BlendMode::Copy) {
-		glBlendFunc(GL_ONE, GL_ZERO);
-	}
-}
-
-void BlitProgram::draw_and_deactivate(BlendMode blend_mode) {
-	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
-
-	if (blend_mode == BlendMode::Copy) {
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	}
-
-	glDisableVertexAttribArray(attr_position_);
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
-}
-
-// static
-VanillaBlitProgram& VanillaBlitProgram::instance() {
-	static VanillaBlitProgram blit_program;
-	return blit_program;
-}
-
-VanillaBlitProgram::~VanillaBlitProgram() {
-}
-
-VanillaBlitProgram::VanillaBlitProgram() {
-	blit_program_.reset(new BlitProgram(kVanillaBlitFragmentShader));
-}
-
-
-void VanillaBlitProgram::draw(const FloatRect& gl_dest_rect,
-                       const FloatRect& gl_src_rect,
-                       const GLuint gl_texture,
-							  const float opacity,
-                       const BlendMode blend_mode) {
-	blit_program_->activate(gl_dest_rect, gl_src_rect, gl_texture, opacity, blend_mode);
-	blit_program_->draw_and_deactivate(blend_mode);
-}
-
-// static
-MonochromeBlitProgram& MonochromeBlitProgram::instance() {
-	static MonochromeBlitProgram blit_program;
-	return blit_program;
-}
-
-MonochromeBlitProgram::~MonochromeBlitProgram() {
-}
-
-MonochromeBlitProgram::MonochromeBlitProgram() {
-	blit_program_.reset(new BlitProgram(kMonochromeBlitFragmentShader));
-
-	u_blend_ = glGetUniformLocation(blit_program_->program_object(), "u_blend");
-}
-
-void MonochromeBlitProgram::draw(const FloatRect& gl_dest_rect,
-                       const FloatRect& gl_src_rect,
-                       const GLuint gl_texture,
-							  const RGBAColor& blend) {
-	blit_program_->activate(gl_dest_rect, gl_src_rect, gl_texture, blend.a / 255., BlendMode::UseAlpha);
-
-	glUniform3f(u_blend_, blend.r / 255., blend.g / 255., blend.b / 255.);
-
-	blit_program_->draw_and_deactivate(BlendMode::UseAlpha);
-}
-
-// static
-BlendedBlitProgram& BlendedBlitProgram::instance() {
-	static BlendedBlitProgram blit_program;
-	return blit_program;
-}
-
-BlendedBlitProgram::~BlendedBlitProgram() {
-}
-
-BlendedBlitProgram::BlendedBlitProgram() {
-	blit_program_.reset(new BlitProgram(kBlendedBlitFragmentShader));
-	u_blend_ = glGetUniformLocation(blit_program_->program_object(), "u_blend");
-	u_mask_ = glGetUniformLocation(blit_program_->program_object(), "u_mask");
-}
-
-void BlendedBlitProgram::draw(const FloatRect& gl_dest_rect,
-                       const FloatRect& gl_src_rect,
-                       const GLuint gl_texture_image,
-							  const GLuint gl_texture_mask,
-							  const RGBAColor& blend) {
-	blit_program_->activate(gl_dest_rect, gl_src_rect, gl_texture_image, blend.a / 255., BlendMode::UseAlpha);
-
-	glActiveTexture(GL_TEXTURE1);
-	glBindTexture(GL_TEXTURE_2D, gl_texture_mask);
 	glUniform1i(u_mask_, 1);
 
-	glUniform3f(u_blend_, blend.r / 255., blend.g / 255., blend.b / 255.);
+	// Prepare the buffer for many draw calls.
+	std::vector<DrawBatch> draw_batches;
+	int offset = 0;
+	vertices_.clear();
 
-	blit_program_->draw_and_deactivate(BlendMode::UseAlpha);
+	size_t i = 0;
+	while (i < arguments.size()) {
+		const auto& template_args = arguments[i];
 
-	glActiveTexture(GL_TEXTURE1);
-	glBindTexture(GL_TEXTURE_2D, 0);
+		// Batch common blit operations up.
+		while (i < arguments.size()) {
+			const auto& current_args = arguments[i];
+			if (current_args.blend_mode != template_args.blend_mode ||
+			    current_args.texture.texture_id != template_args.texture.texture_id ||
+			    (current_args.mask.texture_id != 0 &&
+			     current_args.mask.texture_id != template_args.mask.texture_id)) {
+				break;
+			}
 
-	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, 0);
+			const float blend_r = current_args.blend.r / 255.;
+			const float blend_g = current_args.blend.g / 255.;
+			const float blend_b = current_args.blend.b / 255.;
+			const float blend_a = current_args.blend.a / 255.;
+
+			const FloatRect texture_rect = to_gl_texture(current_args.texture);
+			const FloatRect mask_rect = to_gl_texture(current_args.mask);
+			float program_flavor = 0;
+			switch (current_args.blit_mode) {
+				case BlitMode::kDirect:
+					program_flavor = 0.;
+					break;
+
+				case BlitMode::kMonochrome:
+					program_flavor = 1.;
+					break;
+
+				case BlitMode::kBlendedWithMask:
+					program_flavor = 2.;
+					break;
+			}
+
+			vertices_.emplace_back(current_args.destination_rect.x,
+					current_args.destination_rect.y,
+					current_args.z_value,
+					texture_rect.x,
+					texture_rect.y,
+					mask_rect.x,
+					mask_rect.y,
+					blend_r,
+					blend_g,
+					blend_b,
+					blend_a, program_flavor);
+
+			vertices_.emplace_back(current_args.destination_rect.x + current_args.destination_rect.w,
+					current_args.destination_rect.y,
+					current_args.z_value,
+					texture_rect.x + texture_rect.w,
+					texture_rect.y,
+					mask_rect.x + mask_rect.w,
+					mask_rect.y,
+					blend_r,
+					blend_g,
+					blend_b,
+					blend_a, program_flavor);
+
+			vertices_.emplace_back(current_args.destination_rect.x,
+					current_args.destination_rect.y + current_args.destination_rect.h,
+					current_args.z_value,
+					texture_rect.x,
+					texture_rect.y + texture_rect.h,
+					mask_rect.x,
+					mask_rect.y + mask_rect.h,
+					blend_r,
+					blend_g,
+					blend_b,
+					blend_a, program_flavor);
+
+			vertices_.emplace_back(vertices_.at(vertices_.size() - 2));
+			vertices_.emplace_back(vertices_.at(vertices_.size() - 2));
+
+			vertices_.emplace_back(current_args.destination_rect.x + current_args.destination_rect.w,
+					current_args.destination_rect.y + current_args.destination_rect.h,
+					current_args.z_value,
+					texture_rect.x + texture_rect.w,
+					texture_rect.y + texture_rect.h,
+					mask_rect.x + mask_rect.w,
+					mask_rect.y + mask_rect.h,
+					blend_r,
+					blend_g,
+					blend_b,
+					blend_a, program_flavor);
+			++i;
+		}
+
+		draw_batches.emplace_back(DrawBatch{offset,
+		                                    static_cast<int>(vertices_.size() - offset),
+		                                    template_args.texture.texture_id,
+		                                    template_args.mask.texture_id,
+		                                    template_args.blend_mode});
+		offset = vertices_.size();
+	}
+	gl_array_buffer_.update(vertices_);
+
+	// Now do the draw calls.
+	for (const auto& draw_arg : draw_batches) {
+		gl_state.bind(GL_TEXTURE0, draw_arg.texture);
+		gl_state.bind(GL_TEXTURE1, draw_arg.mask);
+
+		if (draw_arg.blend_mode == BlendMode::Copy) {
+			glBlendFunc(GL_ONE, GL_ZERO);
+		}
+		glDrawArrays(GL_TRIANGLES, draw_arg.offset, draw_arg.count);
+
+		if (draw_arg.blend_mode == BlendMode::Copy) {
+			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		}
+	}
+}
+
+void BlitProgram::draw(const FloatRect& gl_dest_rect,
+                              const float z_value,
+										const BlitData& texture,
+										const BlitData& mask,
+                              const RGBAColor& blend,
+										const BlendMode& blend_mode) {
+	draw({Arguments{gl_dest_rect,
+	                z_value,
+	                texture,
+	                mask,
+	                blend,
+	                blend_mode,
+	                mask.texture_id != 0 ? BlitMode::kBlendedWithMask : BlitMode::kDirect}});
+}
+
+void BlitProgram::draw_monochrome(const FloatRect& dest_rect,
+                                 const float z_value,
+											const BlitData& texture,
+                                 const RGBAColor& blend) {
+	draw({Arguments{dest_rect,
+	                z_value,
+	                texture,
+	                BlitData{0, 0, 0, Rect()},
+	                blend,
+	                BlendMode::UseAlpha,
+	                BlitMode::kMonochrome}});
+}
+
+// static
+BlitProgram& BlitProgram::instance() {
+	static BlitProgram blit_program;
+	return blit_program;
 }

@@ -24,9 +24,9 @@
 
 /// Font Sizes
 #define UI_FONT_SIZE_BIG        22
-#define UI_FONT_SIZE_PROSA      18
 #define UI_FONT_SIZE_SMALL      14
 #define UI_FONT_SIZE_ULTRASMALL 10
+constexpr int kMinimumFontSize = 6;
 
 /// Font colors
 
@@ -34,9 +34,6 @@
 #define UI_FONT_CLR_FG       RGBColor(255, 255,   0)
 #define UI_FONT_CLR_DISABLED RGBColor(127, 127, 127)
 #define UI_FONT_CLR_WARNING  RGBColor(255,  22,  22)
-
-/// Prosa font color
-#define PROSA_FONT_CLR_FG    RGBColor(255, 255,   0)
 
 /// Tooltip font color
 #define UI_FONT_TOOLTIP_CLR  RGBColor(255, 255,   0)

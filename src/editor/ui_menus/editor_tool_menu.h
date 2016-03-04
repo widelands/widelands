@@ -29,7 +29,7 @@ struct EditorToolMenu : public UI::UniqueWindow {
 	EditorToolMenu(EditorInteractive &, UI::UniqueWindow::Registry &);
 
 private:
-	UI::Radiogroup m_radioselect;
+	UI::Radiogroup radioselect_;
 
 	void changed_to();
 };

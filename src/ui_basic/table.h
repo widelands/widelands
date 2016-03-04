@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006, 2008-2011, 2015 by the Widelands Development Team
+ * Copyright (C) 2002-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -36,13 +36,16 @@ namespace UI {
 struct Scrollbar;
 struct Button;
 
-/// A table with columns and lines. The entries can be sorted by columns by
-/// clicking on the column header button.
-///
-/// Entry can be
-///   1. a reference type,
-///   2. a pointer type or
-///   3. uintptr_t.
+/** A table with columns and lines.
+ *
+ * The entries can be sorted by columns by
+ * clicking on the column header button.
+ *
+ *  Entry can be
+ *    1. a reference type,
+ *    2. a pointer type or
+ *    3. uintptr_t.
+ */
 template<typename Entry> class Table {
 public:
 	struct EntryRecord {
@@ -62,7 +65,7 @@ public:
 		(uint32_t width,
 		 const std::string & title = std::string(),
 		 const std::string & tooltip = std::string(),
-		 Align                                  = Align_Left,
+		 Align                                  = UI::Align::kLeft,
 		 bool                is_checkbox_column = false);
 
 	void set_column_title(uint8_t col, const std::string & title);
@@ -122,7 +125,7 @@ public:
 		void set_string(uint8_t col, const std::string &);
 		const Image* get_picture(uint8_t col) const;
 		const std::string & get_string(uint8_t col) const;
-		void * entry() const {return m_entry;}
+		void * entry() const {return entry_;}
 		void set_color(const  RGBColor c) {
 			use_clr = true;
 			clr = c;
@@ -137,23 +140,23 @@ public:
 
 	private:
 		friend class Table<void *>;
-		void *   m_entry;
+		void *   entry_;
 		bool     use_clr;
 		RGBColor clr;
-		struct _data {
+		struct Data {
 			const Image* d_picture;
 			std::string d_string;
 			bool d_checked;
 
-			_data() : d_checked(false) {}
+			Data() : d_checked(false) {}
 		};
-		std::vector<_data> m_data;
+		std::vector<Data> data_;
 	};
 
 	/**
 	 * Compare the two items at the given indices in the list.
 	 *
-	 * \return \c true if the first item is strictly less than the second
+	 * return true if the first item is strictly less than the second
 	 */
 	using CompareFn = boost::function<bool (uint32_t, uint32_t)>;
 
@@ -170,7 +173,7 @@ public:
 		(uint32_t width,
 		 const std::string & title = std::string(),
 		 const std::string & tooltip = std::string(),
-		 Align                                  = Align_Left,
+		 Align                                  = UI::Align::kLeft,
 		 bool                is_checkbox_column = false);
 
 	void set_column_title(uint8_t col, const std::string & title);
@@ -178,13 +181,13 @@ public:
 
 	void clear();
 	void set_sort_column(uint8_t const col) {
-		assert(col < m_columns.size());
-		m_sort_column = col;
+		assert(col < columns_.size());
+		sort_column_ = col;
 	}
-	uint8_t get_sort_colum() const {return m_sort_column;}
-	bool  get_sort_descending() const {return m_sort_descending;}
+	uint8_t get_sort_colum() const {return sort_column_;}
+	bool  get_sort_descending() const {return sort_descending_;}
 	void set_sort_descending(bool const descending) {
-		m_sort_descending = descending;
+		sort_descending_ = descending;
 	}
 
 	void sort
@@ -194,22 +197,22 @@ public:
 
 	EntryRecord & add(void * entry = nullptr, bool select = false);
 
-	uint32_t size() const {return m_entry_records.size();}
-	bool empty() const {return m_entry_records.empty();}
+	uint32_t size() const {return entry_records_.size();}
+	bool empty() const {return entry_records_.empty();}
 	void * operator[](uint32_t const i) const {
-		assert(i < m_entry_records.size());
-		return m_entry_records[i]->entry();
+		assert(i < entry_records_.size());
+		return entry_records_[i]->entry();
 	}
 	static uint32_t no_selection_index() {
 		return std::numeric_limits<uint32_t>::max();
 	}
 	bool has_selection() const {
-		return m_selection != no_selection_index();
+		return selection_ != no_selection_index();
 	}
-	uint32_t selection_index() const {return m_selection;}
+	uint32_t selection_index() const {return selection_;}
 	EntryRecord & get_record(uint32_t const n) const {
-		assert(n < m_entry_records.size());
-		return *m_entry_records[n];
+		assert(n < entry_records_.size());
+		return *entry_records_[n];
 	}
 	static void * get(const EntryRecord & er) {return er.entry();}
 	EntryRecord * find(const void * entry) const;
@@ -222,19 +225,19 @@ public:
 		}
 	};
 	EntryRecord & get_selected_record() const {
-		if (m_selection == no_selection_index())
+		if (selection_ == no_selection_index())
 			throw NoSelection();
-		assert(m_selection < m_entry_records.size());
-		return *m_entry_records.at(m_selection);
+		assert(selection_ < entry_records_.size());
+		return *entry_records_.at(selection_);
 	}
 	void remove_selected() {
-		if (m_selection == no_selection_index())
+		if (selection_ == no_selection_index())
 			throw NoSelection();
-		remove(m_selection);
+		remove(selection_);
 	}
 	void * get_selected() const {return get_selected_record().entry();}
 
-	uint32_t get_lineheight() const {return m_lineheight + 2;}
+	uint32_t get_lineheight() const {return lineheight_ + 2;}
 	uint32_t get_eff_w     () const {return get_w();}
 
 	/// Adjust the desired size to fit the height needed for the number of entries.
@@ -257,30 +260,30 @@ private:
 	using Columns = std::vector<Column>;
 	struct Column {
 		Button                 * btn;
-		uint32_t                              width;
-		Align                                 alignment;
-		bool                                           is_checkbox_column;
-		CompareFn compare;
+		uint32_t                 width;
+		Align                    alignment;
+		bool                     is_checkbox_column;
+		CompareFn                compare;
 	};
 
 	static const int32_t ms_darken_value = -20;
 
-	Columns            m_columns;
-	uint32_t           m_total_width;
-	uint32_t           m_fontsize;
-	uint32_t           m_headerheight;
-	int32_t            m_lineheight;
-	Scrollbar        * m_scrollbar;
-	int32_t            m_scrollpos; //  in pixels
-	uint32_t           m_selection;
-	uint32_t           m_last_click_time;
-	uint32_t           m_last_selection;  // for double clicks
-	Columns::size_type m_sort_column;
-	bool               m_sort_descending;
+	Columns            columns_;
+	uint32_t           total_width_;
+	uint32_t           fontsize_;
+	uint32_t           headerheight_;
+	int32_t            lineheight_;
+	Scrollbar        * scrollbar_;
+	int32_t            scrollpos_; //  in pixels
+	uint32_t           selection_;
+	uint32_t           last_click_time_;
+	uint32_t           last_selection_;  // for double clicks
+	Columns::size_type sort_column_;
+	bool               sort_descending_;
 
 	void header_button_clicked(Columns::size_type);
 	using EntryRecordVector = std::vector<EntryRecord *>;
-	EntryRecordVector m_entry_records;
+	EntryRecordVector entry_records_;
 	void set_scrollpos(int32_t pos);
 };
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2003, 2009 by the Widelands Development Team
+ * Copyright (C) 2002, 2003, 2009, 2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -43,7 +43,7 @@
  */
 struct WException : public std::exception {
 	explicit WException
-		(const char * file, uint32_t line, const char * fmt, ...)
+		(char const * const file, uint32_t const line, char const * const fmt, ...)
 	 PRINTF_FORMAT(4, 5);
 
 	/**
@@ -54,10 +54,12 @@ struct WException : public std::exception {
 
 protected:
 	WException() {}
-	std::string m_what;
+	std::string what_;
 };
 
 #define wexception(...) WException(__FILE__, __LINE__, __VA_ARGS__)
 
+// Throws a wexception for unreachable code.
+#define NEVER_HERE() throw WException(__FILE__, __LINE__, "Unreachable code was reached.")
 
 #endif  // end of include guard: WL_BASE_WEXCEPTION_H

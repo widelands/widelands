@@ -21,13 +21,13 @@ function _array_contains(list, string)
    return false
 end
 
-function path_test:test_list_directory()
-   assert_true(_array_contains(path.list_directory("/"), "world"))
-   assert_false(_array_contains(path.list_directory("/", "[^w].*"), "world"))
-   local specific = path.list_directory("/pics", "cursor\\.png")
-   assert_equal(#specific, 1)
-   assert_equal(specific[1], "pics/cursor.png")
-   local no_slash = path.list_directory("pics", "cursor\\.png")
-   assert_equal(#no_slash, 1)
-   assert_equal(no_slash[1], "pics/cursor.png")
+function path_test:test_list_files()
+   local dirname = "tribes/buildings/productionsites/barbarians/lumberjacks_hut/"
+   assert_equal(4, #path.list_files(dirname .. "build_??.png"))
+   assert_equal("tribes/buildings/productionsites/barbarians/lumberjacks_hut/build_00.png", path.list_files(dirname .. "build_??.png")[1])
+   assert_equal("tribes/buildings/productionsites/barbarians/lumberjacks_hut/build_03.png", path.list_files(dirname .. "build_??.png")[4])
+   assert_equal(1, #path.list_files(dirname .. "menu.png"))
+   assert_equal("tribes/buildings/productionsites/barbarians/lumberjacks_hut/menu.png", path.list_files(dirname .. "menu.png")[1])
+   assert_equal(0, #path.list_files(dirname .. "foo.png"))
+   assert_equal(1, #path.list_files(dirname .. "init.lua"))
 end

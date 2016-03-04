@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -28,10 +28,10 @@
 #include "logic/player.h"
 #include "wui/interactive_gamebase.h"
 
-static char const * pic_priority_low     = "pics/low_priority_button.png";
-static char const * pic_priority_normal  = "pics/normal_priority_button.png";
-static char const * pic_priority_high    = "pics/high_priority_button.png";
-static char const * pic_max_fill_indicator = "pics/max_fill_indicator.png";
+static char const * pic_priority_low     = "images/wui/buildings/low_priority_button.png";
+static char const * pic_priority_normal  = "images/wui/buildings/normal_priority_button.png";
+static char const * pic_priority_high    = "images/wui/buildings/high_priority_button.png";
+static char const * pic_max_fill_indicator = "images/wui/buildings/max_fill_indicator.png";
 
 WaresQueueDisplay::WaresQueueDisplay
 	(UI::Panel * const parent,
@@ -42,33 +42,32 @@ WaresQueueDisplay::WaresQueueDisplay
 	 bool show_only)
 :
 UI::Panel(parent, x, y, 0, 28),
-m_igb(igb),
-m_building(building),
-m_queue(queue),
-m_priority_radiogroup(nullptr),
-m_increase_max_fill(nullptr),
-m_decrease_max_fill(nullptr),
-m_ware_index(queue->get_ware()),
-m_ware_type(Widelands::wwWARE),
-m_max_fill_indicator(g_gr->images().get(pic_max_fill_indicator)),
-m_cache_size(queue->get_max_size()),
-m_cache_filled(queue->get_filled()),
-m_cache_max_fill(queue->get_max_fill()),
-m_total_height(0),
-m_show_only(show_only)
+igb_(igb),
+building_(building),
+queue_(queue),
+priority_radiogroup_(nullptr),
+increase_max_fill_(nullptr),
+decrease_max_fill_(nullptr),
+ware_index_(queue->get_ware()),
+ware_type_(Widelands::wwWARE),
+max_fill_indicator_(g_gr->images().get(pic_max_fill_indicator)),
+cache_size_(queue->get_max_size()),
+cache_max_fill_(queue->get_max_fill()),
+total_height_(0),
+show_only_(show_only)
 {
 	const Widelands::WareDescr & ware =
-		*queue->owner().tribe().get_ware_descr(m_queue->get_ware());
+		*queue->owner().tribe().get_ware_descr(queue_->get_ware());
 	set_tooltip(ware.descname().c_str());
 
-	m_icon = ware.icon();
+	icon_ = ware.icon();
 
-	uint16_t ph = m_max_fill_indicator->height();
+	uint16_t ph = max_fill_indicator_->height();
 
 	uint32_t priority_button_height = show_only ? 0 : 3 * PriorityButtonSize;
 	uint32_t image_height = show_only ? WARE_MENU_PIC_HEIGHT : std::max<int32_t>(WARE_MENU_PIC_HEIGHT, ph);
 
-	m_total_height = std::max(priority_button_height, image_height) + 2 * Border;
+	total_height_ = std::max(priority_button_height, image_height) + 2 * Border;
 
 	max_size_changed();
 
@@ -77,7 +76,7 @@ m_show_only(show_only)
 
 WaresQueueDisplay::~WaresQueueDisplay()
 {
-	delete m_priority_radiogroup;
+	delete priority_radiogroup_;
 }
 
 /**
@@ -87,20 +86,20 @@ WaresQueueDisplay::~WaresQueueDisplay()
  */
 void WaresQueueDisplay::max_size_changed()
 {
-	uint32_t pbs = m_show_only ? 0 : PriorityButtonSize;
-	uint32_t ctrl_b_size = m_show_only ? 0 : 2 * WARE_MENU_PIC_WIDTH;
+	uint32_t pbs = show_only_ ? 0 : PriorityButtonSize;
+	uint32_t ctrl_b_size = show_only_ ? 0 : 2 * WARE_MENU_PIC_WIDTH;
 
-	m_cache_size = m_queue->get_max_size();
+	cache_size_ = queue_->get_max_size();
 
 	update_priority_buttons();
 	update_max_fill_buttons();
 
-	if (m_cache_size <= 0) {
+	if (cache_size_ <= 0) {
 		set_desired_size(0, 0);
 	} else {
 		set_desired_size
-			(m_cache_size * (CellWidth + CellSpacing) + pbs + ctrl_b_size + 2 * Border,
-			 m_total_height);
+			(cache_size_ * (CellWidth + CellSpacing) + pbs + ctrl_b_size + 2 * Border,
+			 total_height_);
 	}
 }
 
@@ -109,18 +108,14 @@ void WaresQueueDisplay::max_size_changed()
  */
 void WaresQueueDisplay::think()
 {
-	if (static_cast<uint32_t>(m_queue->get_max_size()) != m_cache_size)
+	if (static_cast<uint32_t>(queue_->get_max_size()) != cache_size_)
 		max_size_changed();
 
-	if (static_cast<uint32_t>(m_queue->get_filled()) != m_cache_filled)
-		update();
-
-	if (static_cast<uint32_t>(m_queue->get_max_fill()) != m_cache_max_fill) {
-		m_cache_max_fill = m_queue->get_max_fill();
+	// TODO(sirver): It seems cache_max_fill_ is not really useful for anything.
+	if (static_cast<uint32_t>(queue_->get_max_fill()) != cache_max_fill_) {
+		cache_max_fill_ = queue_->get_max_fill();
 		compute_max_fill_buttons_enabled_state();
-		update();
 	}
-
 }
 
 /**
@@ -128,40 +123,39 @@ void WaresQueueDisplay::think()
  */
 void WaresQueueDisplay::draw(RenderTarget & dst)
 {
-	if (!m_cache_size)
+	if (!cache_size_)
 		return;
 
-	m_cache_filled = m_queue->get_filled();
-	m_cache_max_fill = m_queue->get_max_fill();
+	cache_max_fill_ = queue_->get_max_fill();
 
-	uint32_t nr_wares_to_draw = std::min(m_cache_filled, m_cache_size);
-	uint32_t nr_empty_to_draw = m_cache_size - nr_wares_to_draw;
+	uint32_t nr_wares_to_draw = std::min(queue_->get_filled(), cache_size_);
+	uint32_t nr_empty_to_draw = cache_size_ - nr_wares_to_draw;
 
 	Point point;
-	point.x = Border + (m_show_only ? 0 : CellWidth + CellSpacing);
-	point.y = Border + (m_total_height - 2 * Border - WARE_MENU_PIC_HEIGHT) / 2;
+	point.x = Border + (show_only_ ? 0 : CellWidth + CellSpacing);
+	point.y = Border + (total_height_ - 2 * Border - WARE_MENU_PIC_HEIGHT) / 2;
 
 	for (; nr_wares_to_draw; --nr_wares_to_draw, point.x += CellWidth + CellSpacing) {
 		dst.blitrect_scale(
-				Rect(point.x, point.y, m_icon->width(), m_icon->height()),
-				m_icon,
-				Rect(0, 0, m_icon->width(), m_icon->height()),
+				Rect(point.x, point.y, icon_->width(), icon_->height()),
+				icon_,
+				Rect(0, 0, icon_->width(), icon_->height()),
 				1.0,
 				BlendMode::UseAlpha);
 	}
 	for (; nr_empty_to_draw; --nr_empty_to_draw, point.x += CellWidth + CellSpacing) {
-		dst.blitrect_scale_monochrome(Rect(point.x, point.y, m_icon->width(), m_icon->height()),
-		                              m_icon,
-		                              Rect(0, 0, m_icon->width(), m_icon->height()),
+		dst.blitrect_scale_monochrome(Rect(point.x, point.y, icon_->width(), icon_->height()),
+		                              icon_,
+		                              Rect(0, 0, icon_->width(), icon_->height()),
 		                              RGBAColor(166, 166, 166, 127));
 	}
 
-	if (!m_show_only) {
-		uint16_t pw = m_max_fill_indicator->width();
+	if (!show_only_) {
+		uint16_t pw = max_fill_indicator_->width();
 		point.y = Border;
 		point.x = Border + CellWidth + CellSpacing +
-			(m_queue->get_max_fill() * (CellWidth + CellSpacing)) - CellSpacing / 2 - pw / 2;
-		dst.blit(point, m_max_fill_indicator);
+			(queue_->get_max_fill() * (CellWidth + CellSpacing)) - CellSpacing / 2 - pw / 2;
+		dst.blit(point, max_fill_indicator_);
 	}
 }
 
@@ -170,95 +164,94 @@ void WaresQueueDisplay::draw(RenderTarget & dst)
  */
 void WaresQueueDisplay::update_priority_buttons()
 {
-	if (m_cache_size <= 0 || m_show_only) {
-		delete m_priority_radiogroup;
-		m_priority_radiogroup = nullptr;
+	if (cache_size_ <= 0 || show_only_) {
+		delete priority_radiogroup_;
+		priority_radiogroup_ = nullptr;
 	}
 
-	Point pos = Point(m_cache_size * CellWidth + Border, 0);
-	pos.x = (m_cache_size + 2) * (CellWidth + CellSpacing) + Border;
-	pos.y = Border + (m_total_height - 2 * Border - 3 * PriorityButtonSize) / 2;
+	Point pos = Point(cache_size_ * CellWidth + Border, 0);
+	pos.x = (cache_size_ + 2) * (CellWidth + CellSpacing) + Border;
+	pos.y = Border + (total_height_ - 2 * Border - 3 * PriorityButtonSize) / 2;
 
-	if (m_priority_radiogroup) {
+	if (priority_radiogroup_) {
 		pos.y += 2 * PriorityButtonSize;
-		for (UI::Radiobutton * btn = m_priority_radiogroup->get_first_button(); btn; btn = btn->next_button()) {
+		for (UI::Radiobutton * btn = priority_radiogroup_->get_first_button(); btn; btn = btn->next_button()) {
 			btn->set_pos(pos);
 			pos.y -= PriorityButtonSize;
 		}
 	} else {
-		m_priority_radiogroup = new UI::Radiogroup();
+		priority_radiogroup_ = new UI::Radiogroup();
 
-		m_priority_radiogroup->add_button
+		priority_radiogroup_->add_button
 			(this, pos, g_gr->images().get(pic_priority_high), _("Highest priority"));
 		pos.y += PriorityButtonSize;
-		m_priority_radiogroup->add_button
+		priority_radiogroup_->add_button
 				(this, pos, g_gr->images().get(pic_priority_normal), _("Normal priority"));
 		pos.y += PriorityButtonSize;
-		m_priority_radiogroup->add_button
+		priority_radiogroup_->add_button
 				(this, pos, g_gr->images().get(pic_priority_low), _("Lowest priority"));
 	}
 
-	int32_t priority = m_building.get_priority(m_ware_type, m_ware_index, false);
+	int32_t priority = building_.get_priority(ware_type_, ware_index_, false);
 	switch (priority) {
 	case HIGH_PRIORITY:
-		m_priority_radiogroup->set_state(0);
+		priority_radiogroup_->set_state(0);
 		break;
 	case DEFAULT_PRIORITY:
-		m_priority_radiogroup->set_state(1);
+		priority_radiogroup_->set_state(1);
 		break;
 	case LOW_PRIORITY:
-		m_priority_radiogroup->set_state(2);
+		priority_radiogroup_->set_state(2);
 		break;
 	default:
 		break;
 	}
 
-	m_priority_radiogroup->changedto.connect
+	priority_radiogroup_->changedto.connect
 		(boost::bind(&WaresQueueDisplay::radiogroup_changed, this, _1));
 
-	bool const can_act = m_igb.can_act(m_building.owner().player_number());
+	bool const can_act = igb_.can_act(building_.owner().player_number());
 	if (!can_act)
-		m_priority_radiogroup->set_enabled(false);
+		priority_radiogroup_->set_enabled(false);
 }
 
 /**
  * Updates the desired size buttons
  */
 void WaresQueueDisplay::update_max_fill_buttons() {
-	delete m_increase_max_fill;
-	delete m_decrease_max_fill;
-	m_increase_max_fill = nullptr;
-	m_decrease_max_fill = nullptr;
+	delete increase_max_fill_;
+	delete decrease_max_fill_;
+	increase_max_fill_ = nullptr;
+	decrease_max_fill_ = nullptr;
 
-	if (m_cache_size <= 0 || m_show_only)
+	if (cache_size_ <= 0 || show_only_)
 		return;
 
 	uint32_t x = Border;
-	uint32_t y = Border + (m_total_height - 2 * Border - WARE_MENU_PIC_WIDTH) / 2;
+	uint32_t y = Border + (total_height_ - 2 * Border - WARE_MENU_PIC_WIDTH) / 2;
 
-	m_decrease_max_fill = new UI::Button
+	decrease_max_fill_ = new UI::Button
 		(this, "decrease_max_fill",
 		 x, y, WARE_MENU_PIC_WIDTH, WARE_MENU_PIC_HEIGHT,
-		 g_gr->images().get("pics/but4.png"),
-		 g_gr->images().get("pics/scrollbar_left.png"),
+		 g_gr->images().get("images/ui_basic/but4.png"),
+		 g_gr->images().get("images/ui_basic/scrollbar_left.png"),
 		 _("Decrease the number of wares you want to be stored here."));
-	m_decrease_max_fill->sigclicked.connect
+	decrease_max_fill_->sigclicked.connect
 		(boost::bind(&WaresQueueDisplay::decrease_max_fill_clicked, boost::ref(*this)));
 
-	x = Border + (m_cache_size + 1) * (CellWidth + CellSpacing);
-	m_increase_max_fill = new UI::Button
+	x = Border + (cache_size_ + 1) * (CellWidth + CellSpacing);
+	increase_max_fill_ = new UI::Button
 		(this, "increase_max_fill",
 		 x, y, WARE_MENU_PIC_WIDTH, WARE_MENU_PIC_HEIGHT,
-		 g_gr->images().get("pics/but4.png"),
-		 g_gr->images().get("pics/scrollbar_right.png"),
+		 g_gr->images().get("images/ui_basic/but4.png"),
+		 g_gr->images().get("images/ui_basic/scrollbar_right.png"),
 		 _("Increase the number of wares you want to be stored here."));
-	m_increase_max_fill->sigclicked.connect
+	increase_max_fill_->sigclicked.connect
 		(boost::bind(&WaresQueueDisplay::increase_max_fill_clicked, boost::ref(*this)));
 
-	m_increase_max_fill->set_repeating(true);
-	m_decrease_max_fill->set_repeating(true);
+	increase_max_fill_->set_repeating(true);
+	decrease_max_fill_->set_repeating(true);
 	compute_max_fill_buttons_enabled_state();
-
 }
 
 /**
@@ -279,8 +272,8 @@ void WaresQueueDisplay::radiogroup_changed(int32_t state)
 		return;
 	}
 
-	m_igb.game().send_player_set_ware_priority
-			(m_building, m_ware_type, m_ware_index, priority);
+	igb_.game().send_player_set_ware_priority
+			(building_, ware_type_, ware_index_, priority);
 }
 
 /**
@@ -289,20 +282,20 @@ void WaresQueueDisplay::radiogroup_changed(int32_t state)
  */
 void WaresQueueDisplay::decrease_max_fill_clicked()
 {
-	assert (m_cache_max_fill > 0);
+	assert (cache_max_fill_ > 0);
 
-	m_igb.game().send_player_set_ware_max_fill
-			(m_building, m_ware_index, m_cache_max_fill - 1);
+	igb_.game().send_player_set_ware_max_fill
+			(building_, ware_index_, cache_max_fill_ - 1);
 
 }
 
 void WaresQueueDisplay::increase_max_fill_clicked()
 {
 
-	assert (m_cache_max_fill < m_queue->get_max_size());
+	assert (cache_max_fill_ < queue_->get_max_size());
 
-	m_igb.game().send_player_set_ware_max_fill
-			(m_building, m_ware_index, m_cache_max_fill + 1);
+	igb_.game().send_player_set_ware_max_fill
+			(building_, ware_index_, cache_max_fill_ + 1);
 
 }
 
@@ -310,13 +303,13 @@ void WaresQueueDisplay::compute_max_fill_buttons_enabled_state()
 {
 
 	// Disable those buttons for replay watchers
-	bool const can_act = m_igb.can_act(m_building.owner().player_number());
+	bool const can_act = igb_.can_act(building_.owner().player_number());
 	if (!can_act) {
-		if (m_increase_max_fill) m_increase_max_fill->set_enabled(false);
-		if (m_decrease_max_fill) m_decrease_max_fill->set_enabled(false);
+		if (increase_max_fill_) increase_max_fill_->set_enabled(false);
+		if (decrease_max_fill_) decrease_max_fill_->set_enabled(false);
 	} else {
 
-		if (m_decrease_max_fill) m_decrease_max_fill->set_enabled(m_cache_max_fill > 0);
-		if (m_increase_max_fill) m_increase_max_fill->set_enabled(m_cache_max_fill < m_queue->get_max_size());
+		if (decrease_max_fill_) decrease_max_fill_->set_enabled(cache_max_fill_ > 0);
+		if (increase_max_fill_) increase_max_fill_->set_enabled(cache_max_fill_ < queue_->get_max_size());
 	}
 }

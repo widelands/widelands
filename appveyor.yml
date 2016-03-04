@@ -1,0 +1,55 @@
+###################################
+#   Widelands.org                 #
+#                                 #
+#   Appveyor build configuration  #
+###################################
+
+init:
+  - cmd: "IF \"%PLATFORM%\" == \"x86\" (set MINGWPATH=C:\\msys64\\mingw32\\bin& set MINGWSUFFIX=i686) ELSE (set MINGWPATH=C:\\msys64\\mingw64\\bin& set MINGWSUFFIX=x86_64)"
+
+install:
+  # Installing various utilities
+  - choco install -y InnoSetup
+  - cmd: "set PATH=%MINGWPATH%;C:\\msys64\\usr\\bin;C:\\Program Files (x86)\\Inno Setup 5;%PATH%"
+  - cmd: "set CC=%MINGWPATH%\\gcc.exe"
+  - cmd: "set CXX=%MINGWPATH%\\g++.exe"
+  # Update mirrors
+  - cmd: "bash --login -c \"pacman --noconfirm --sync pacman-mirrors\""
+  # Update msys2 core with fixed update script (no wait for close window)
+  - cmd: "bash --login -c \"exec 0</dev/null && $APPVEYOR_BUILD_FOLDER/utils/win32/appveyor/update-core.sh\""
+  # Update msys2 system
+  - cmd: "bash --login -c \"pacman -Su --noconfirm\""
+  # Installed required libs
+  - cmd: "bash --login -c \"pacman --noconfirm -S mingw-w64-%MINGWSUFFIX%-boost mingw-w64-%MINGWSUFFIX%-SDL2_net mingw-w64-%MINGWSUFFIX%-SDL2_ttf mingw-w64-%MINGWSUFFIX%-SDL2_mixer mingw-w64-%MINGWSUFFIX%-SDL2_image mingw-w64-%MINGWSUFFIX%-glbinding\""
+
+shallow_clone: true
+
+branches:
+  except:
+    - _widelands_dev_widelands_trunk
+
+build_script:
+  - cmd: cd %APPVEYOR_BUILD_FOLDER%
+  - cmd: md build
+  - cmd: cd build
+  - cmd: echo %APPVEYOR_BUILD_VERSION%_%CONFIGURATION%_%PLATFORM% > %APPVEYOR_BUILD_FOLDER%\WL_RELEASE
+  - cmd: "cmake -G \"Ninja\" -DCMAKE_BUILD_TYPE=%CONFIGURATION% -DOPTION_USE_GLBINDING=ON %APPVEYOR_BUILD_FOLDER%"
+  - cmd: ninja
+
+on_success:
+  - cmd: strip -sv %APPVEYOR_BUILD_FOLDER%\build\src\widelands.exe
+  - cmd: ISCC /q /o%APPVEYOR_BUILD_FOLDER% /fWidelands-%APPVEYOR_BUILD_VERSION%-%CONFIGURATION%-%PLATFORM% c:\projects\widelands\utils\win32\innosetup\Widelands.iss
+  - appveyor PushArtifact %APPVEYOR_BUILD_FOLDER%\Widelands-%APPVEYOR_BUILD_VERSION%-%CONFIGURATION%-%PLATFORM%.exe
+  
+artifacts:
+  - path: Widelands-$(APPVEYOR_BUILD_VERSION)-$(CONFIGURATION)-$(PLATFORM).exe
+    name: Widelands Setup
+
+platform: 
+  - x64
+  - x86
+
+configuration:
+  - Release
+  - Debug
+

@@ -46,12 +46,9 @@ public:
 	// Implements Surface
 	int width() const override;
 	int height() const override;
-	void setup_gl() override;
-	void pixel_to_gl(float* x, float* y) const override;
 
 	// Implements Image.
-	int get_gl_texture() const override;
-	const FloatRect& texture_coordinates() const override;
+	const BlitData& blit_data() const override;
 
 	enum UnlockMode {
 		/**
@@ -69,41 +66,43 @@ public:
 		Unlock_NoChange
 	};
 
-	/// This returns the pixel format for direct pixel access.
-	const SDL_PixelFormat & format() const;
-
-	// Number of bytes per row.
-	uint16_t get_pitch() const;
-
-	// Pointer to the raw pixel data. May only be called inside lock/unlock
-	// pairs.
-	uint8_t * get_pixels() const;
-
 	// Lock/Unlock pairs must guard any of the direct pixel access using the
 	// functions below. Lock/Unlock pairs cannot be nested.
 	void lock();
 	void unlock(UnlockMode);
 
-	// Returns the color of the pixel as a value as defined by 'format()'.
-	uint32_t get_pixel(uint16_t x, uint16_t y);
+	// Returns the color of the pixel.
+	RGBAColor get_pixel(uint16_t x, uint16_t y);
 
 	// Sets the pixel to the 'clr'.
-	void set_pixel(uint16_t x, uint16_t y, uint32_t clr);
+	void set_pixel(uint16_t x, uint16_t y, const RGBAColor& color);
 
 private:
+	// Configures OpenGL to draw to this surface.
+	void setup_gl();
 	void init(uint16_t w, uint16_t h);
 
-	// Width and height.
-	int m_w, m_h;
+	// Implements surface.
+	void do_blit(const FloatRect& dst_rect,
+	             const BlitData& texture,
+	             float opacity,
+	             BlendMode blend_mode) override;
+	void do_blit_blended(const FloatRect& dst_rect,
+	                     const BlitData& texture,
+	                     const BlitData& mask,
+	                     const RGBColor& blend) override;
+	void do_blit_monochrome(const FloatRect& dst_rect,
+	                        const BlitData& texture,
+	                        const RGBAColor& blend) override;
+	void
+	do_draw_line(const FloatPoint& start, const FloatPoint& end, const RGBColor& color, int width) override;
+	void
+	do_fill_rect(const FloatRect& dst_rect, const RGBAColor& color, BlendMode blend_mode) override;
 
 	// True if we own the texture, i.e. if we need to delete it.
 	bool m_owns_texture;
 
-	// Texture coordinates in m_texture.
-	FloatRect m_texture_coordinates;
-
-	GLuint m_texture;
-
+	BlitData m_blit_data;
 	/// Pixel data, while the texture is locked
 	std::unique_ptr<uint8_t[]> m_pixels;
 

@@ -23,12 +23,13 @@
 
 #include <stdint.h>
 
+#include "base/wexception.h"
 #include "editor/tools/editor_increase_resources_tool.h"
 #include "logic/editor_game_base.h"
 #include "logic/findnode.h"
 #include "logic/map.h"
-#include "logic/world/map_gen.h"
-#include "logic/world/world.h"
+#include "logic/map_objects/world/map_gen.h"
+#include "logic/map_objects/world/world.h"
 #include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
 
@@ -133,9 +134,8 @@ void MapGenerator::generate_resources(uint32_t const* const random1,
 		uint8_t res_val = static_cast<uint8_t>(random_value / (kMaxElevation / max_amount));
 		res_val *= static_cast<uint8_t>(map_info_.resource_amount) + 1;
 		res_val /= 3;
-		if (editor_change_resource_tool_callback(fc, map_, world, res_idx)) {
-			fc.field->set_resources(res_idx, res_val);
-			fc.field->set_initial_res_amount(res_val);
+		if (map_.is_resource_valid(world, fc, res_idx)) {
+			map_.initialize_resources(fc, res_idx, res_val);
 		}
 	};
 
@@ -411,7 +411,7 @@ uint32_t * MapGenerator::generate_random_value_map
 		delete[] values;
 		throw;
 	}
-	// Never here.
+	NEVER_HERE();
 }
 
 
@@ -741,7 +741,7 @@ void MapGenerator::create_random_map()
 	const std::string ai    = map_.get_scenario_player_ai(1);
 	map_.set_nrplayers(map_info_.numPlayers);
 	FindNodeSize functor(FindNodeSize::sizeBig);
-	Coords playerstart;
+	Coords playerstart(-1, -1);
 
 	// Build a basic structure how player start positions are placed
 	uint8_t line[3];
@@ -848,6 +848,21 @@ void MapGenerator::create_random_map()
 			log("WARNING: Could not find a suitable place for player %u\n", n);
 			// Let's hope that one is at least on dry ground.
 			coords2 = playerstart;
+		}
+
+		// Remove coordinates if they are an illegal starting position.
+		if (coords2.x < 0 || coords2.x > map_.get_width() - 1 ||
+			 coords2.y < 0 || coords2.y > map_.get_height() - 1) {
+
+			// TODO(GunChleoc): If we check for buildcaps here, this always fails.
+			// we should bulldoze a bit of terrain to increase the chance that starting positions
+			// do not fail:
+			// map_.get_fcoords(coords2).field->nodecaps() & Widelands::BUILDCAPS_SIZEMASK
+			// != Widelands::BUILDCAPS_BIG)
+
+			log("WARNING: Player %u has no starting position - illegal coordinates (%d, %d).\n",
+				 n, coords2.x, coords2.y);
+			coords2 = Coords(-1, -1);
 		}
 
 		// Finally set the found starting position

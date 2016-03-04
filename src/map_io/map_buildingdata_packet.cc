@@ -23,6 +23,8 @@
 #include <memory>
 
 #include "base/macros.h"
+#include "base/wexception.h"
+#include "economy/expedition_bootstrap.h"
 #include "economy/flag.h"
 #include "economy/portdock.h"
 #include "economy/request.h"
@@ -30,22 +32,21 @@
 #include "economy/wares_queue.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
-#include "logic/constructionsite.h"
-#include "logic/dismantlesite.h"
 #include "logic/editor_game_base.h"
-#include "logic/expedition_bootstrap.h"
 #include "logic/game.h"
 #include "logic/map.h"
-#include "logic/militarysite.h"
+#include "logic/map_objects/tribes/constructionsite.h"
+#include "logic/map_objects/tribes/dismantlesite.h"
+#include "logic/map_objects/tribes/militarysite.h"
+#include "logic/map_objects/tribes/production_program.h"
+#include "logic/map_objects/tribes/productionsite.h"
+#include "logic/map_objects/tribes/soldier.h"
+#include "logic/map_objects/tribes/trainingsite.h"
+#include "logic/map_objects/tribes/tribe_descr.h"
+#include "logic/map_objects/tribes/warehouse.h"
+#include "logic/map_objects/tribes/worker.h"
 #include "logic/player.h"
-#include "logic/production_program.h"
-#include "logic/productionsite.h"
-#include "logic/soldier.h"
-#include "logic/trainingsite.h"
-#include "logic/tribes/tribe_descr.h"
-#include "logic/warehouse.h"
 #include "logic/widelands_geometry_io.h"
-#include "logic/worker.h"
 #include "map_io/map_object_loader.h"
 #include "map_io/map_object_saver.h"
 
@@ -59,7 +60,7 @@ constexpr uint16_t kCurrentPacketVersionDismantlesite = 1;
 constexpr uint16_t kCurrentPacketVersionConstructionsite = 3;
 constexpr uint16_t kCurrentPacketPFBuilding = 1;
 constexpr uint16_t kCurrentPacketVersionWarehouse = 6;
-constexpr uint16_t kCurrentPacketVersionMilitarysite = 4;
+constexpr uint16_t kCurrentPacketVersionMilitarysite = 5;
 constexpr uint16_t kCurrentPacketVersionProductionsite = 5;
 constexpr uint16_t kCurrentPacketVersionTrainingsite = 4;
 
@@ -86,7 +87,7 @@ void MapBuildingdataPacket::read
 					if (fr.unsigned_8()) {
 						char const * const animation_name = fr.c_string();
 						try {
-							building.m_anim =
+							building.anim_ =
 								building.descr().get_animation(animation_name);
 						} catch (const MapObjectDescr::AnimationNonexistent &) {
 							log
@@ -95,15 +96,15 @@ void MapBuildingdataPacket::read
 								 building.owner().tribe().name().c_str(),
 								 building.descr().descname().c_str(),
 								 animation_name);
-							building.m_anim = building.descr().get_animation("idle");
+							building.anim_ = building.descr().get_animation("idle");
 						}
 					} else {
-						building.m_anim = 0;
+						building.anim_ = 0;
 					}
-					building.m_animstart = fr.unsigned_32();
+					building.animstart_ = fr.unsigned_32();
 
 					{
-						Building::LeaveQueue & leave_queue = building.m_leave_queue;
+						Building::LeaveQueue & leave_queue = building.leave_queue_;
 						leave_queue.resize(fr.unsigned_16());
 
 						for (Building::LeaveQueue::iterator queue_iter = leave_queue.begin();
@@ -130,26 +131,26 @@ void MapBuildingdataPacket::read
 						}
 					}
 
-					building.m_leave_time = fr.unsigned_32();
+					building.leave_time_ = fr.unsigned_32();
 
 					if (uint32_t const leaver_serial = fr.unsigned_32())
 						try {
-							building.m_leave_allow =
+							building.leave_allow_ =
 								&mol.get<MapObject>(leaver_serial);
 						} catch (const WException & e) {
 							throw GameDataError
 								("leave allow item (%u): %s", leaver_serial, e.what());
 						}
 					else {
-						building.m_leave_allow = nullptr;
+						building.leave_allow_ = nullptr;
 					}
 
 					while (fr.unsigned_8()) {
 						DescriptionIndex oldidx = building.owner().tribe().safe_building_index(fr.c_string());
-						building.m_old_buildings.push_back(oldidx);
+						building.old_buildings_.push_back(oldidx);
 					}
 					// Only construction sites may have an empty list
-					if (building.m_old_buildings.empty() && !is_a(ConstructionSite, &building)) {
+					if (building.old_buildings_.empty() && !is_a(ConstructionSite, &building)) {
 						throw GameDataError
 							("Failed to read %s %u: No former buildings informations.\n"
 							"Your savegame is corrupted", building.descr().descname().c_str(), building.serial());
@@ -179,7 +180,7 @@ void MapBuildingdataPacket::read
 					}
 
 					//  Set economy now, some stuff below will count on this.
-					building.set_economy(building.m_flag->get_economy());
+					building.set_economy(building.flag_->get_economy());
 
 					Game& game = dynamic_cast<Game&>(egbase);
 
@@ -187,12 +188,12 @@ void MapBuildingdataPacket::read
 						read_constructionsite(*constructionsite, fr, game, mol);
 					} else if (upcast(DismantleSite, dms, &building)) {
 						read_dismantlesite(*dms, fr, game, mol);
+					} else if (upcast(MilitarySite, militarysite, &building)) {
+						read_militarysite(*militarysite, fr, game, mol);
 					} else if (upcast(Warehouse, warehouse, &building)) {
 						read_warehouse(*warehouse, fr, game, mol);
 					} else if (upcast(ProductionSite, productionsite, &building)) {
-						if (upcast(MilitarySite, militarysite, productionsite)) {
-							read_militarysite(*militarysite, fr, game, mol);
-						} else if (upcast(TrainingSite, trainingsite, productionsite)) {
+						if (upcast(TrainingSite, trainingsite, productionsite)) {
 							read_trainingsite(*trainingsite, fr, game, mol);
 						} else {
 							read_productionsite(*productionsite, fr, game, mol);
@@ -200,7 +201,7 @@ void MapBuildingdataPacket::read
 					} else {
 						//  type of building is not one of (or derived from)
 						//  {ConstructionSite, Warehouse, ProductionSite}
-						assert(false);
+						NEVER_HERE();
 					}
 					mol.mark_object_as_loaded(building);
 				} catch (const WException & e) {
@@ -225,49 +226,49 @@ void MapBuildingdataPacket::read_partially_finished_building
 		uint16_t const packet_version = fr.unsigned_16();
 		if (packet_version == kCurrentPacketPFBuilding) {
 			const TribeDescr & tribe = pfb.owner().tribe();
-			pfb.m_building =
+			pfb.building_ =
 				tribe.get_building_descr(tribe.safe_building_index(fr.c_string()));
 
-			delete pfb.m_builder_request;
+			delete pfb.builder_request_;
 			if (fr.unsigned_8()) {
-				pfb.m_builder_request =
+				pfb.builder_request_ =
 					new Request
 					(pfb,
 					 0,
 					 PartiallyFinishedBuilding::request_builder_callback,
 					 wwWORKER);
-				pfb.m_builder_request->read(fr, game, mol);
+				pfb.builder_request_->read(fr, game, mol);
 			} else
-				pfb.m_builder_request = nullptr;
+				pfb.builder_request_ = nullptr;
 
 			if (uint32_t const builder_serial = fr.unsigned_32()) {
 				try {
-					pfb.m_builder = &mol.get<Worker>(builder_serial);
+					pfb.builder_ = &mol.get<Worker>(builder_serial);
 				} catch (const WException & e) {
 					throw GameDataError
 						("builder (%u): %s", builder_serial, e.what());
 				}
 			} else
-				pfb.m_builder = nullptr;
+				pfb.builder_ = nullptr;
 
 			try {
 				uint16_t const size = fr.unsigned_16();
-				pfb.m_wares.resize(size);
-				for (uint16_t i = 0; i < pfb.m_wares.size(); ++i)
+				pfb.wares_.resize(size);
+				for (uint16_t i = 0; i < pfb.wares_.size(); ++i)
 				{
-					pfb.m_wares[i] =
+					pfb.wares_[i] =
 						new WaresQueue
 						(pfb, INVALID_INDEX, 0);
-					pfb.m_wares[i]->read(fr, game, mol);
+					pfb.wares_[i]->read(fr, game, mol);
 				}
 			} catch (const WException & e) {
 				throw GameDataError("wares: %s", e.what());
 			}
 
-			pfb.m_working        = fr.unsigned_8 ();
-			pfb.m_work_steptime  = fr.unsigned_32();
-			pfb.m_work_completed = fr.unsigned_32();
-			pfb.m_work_steps     = fr.unsigned_32();
+			pfb.working_        = fr.unsigned_8 ();
+			pfb.work_steptime_  = fr.unsigned_32();
+			pfb.work_completed_ = fr.unsigned_32();
+			pfb.work_steps_     = fr.unsigned_32();
 		} else {
 			throw UnhandledVersionError("MapBuildingdataPacket - Partially Finished Building",
 												 packet_version, kCurrentPacketPFBuilding);
@@ -288,15 +289,15 @@ void MapBuildingdataPacket::read_constructionsite
 		if (packet_version >= kCurrentPacketVersionConstructionsite) {
 			read_partially_finished_building(constructionsite, fr, game, mol);
 
-			for (ConstructionSite::Wares::iterator wares_iter = constructionsite.m_wares.begin();
-				  wares_iter != constructionsite.m_wares.end();
+			for (ConstructionSite::Wares::iterator wares_iter = constructionsite.wares_.begin();
+				  wares_iter != constructionsite.wares_.end();
 				  ++wares_iter) {
 
 					(*wares_iter)->set_callback
 						(ConstructionSite::wares_queue_callback, &constructionsite);
 			}
 
-			constructionsite.m_fetchfromflag  = fr.  signed_32();
+			constructionsite.fetchfromflag_  = fr.  signed_32();
 		} else {
 			throw UnhandledVersionError("MapBuildingdataPacket - Constructionsite",
 												 packet_version, kCurrentPacketVersionConstructionsite);
@@ -364,7 +365,7 @@ void MapBuildingdataPacket::read_warehouse
 				}
 			}
 
-			assert(warehouse.m_incorporated_workers.empty());
+			assert(warehouse.incorporated_workers_.empty());
 			{
 				uint16_t const nrworkers = fr.unsigned_16();
 				for (uint16_t i = 0; i < nrworkers; ++i) {
@@ -373,9 +374,9 @@ void MapBuildingdataPacket::read_warehouse
 					try {
 						Worker & worker = mol.get<Worker>(worker_serial);
 						const DescriptionIndex& worker_index = tribe.worker_index(worker.descr().name().c_str());
-						if (!warehouse.m_incorporated_workers.count(worker_index))
-							warehouse.m_incorporated_workers[worker_index] = std::vector<Worker *>();
-						warehouse.m_incorporated_workers[worker_index].push_back(&worker);
+						if (!warehouse.incorporated_workers_.count(worker_index))
+							warehouse.incorporated_workers_[worker_index] = std::vector<Worker *>();
+						warehouse.incorporated_workers_[worker_index].push_back(&worker);
 					} catch (const WException & e) {
 						throw GameDataError
 							("incorporated worker #%u (%u): %s",
@@ -414,7 +415,7 @@ void MapBuildingdataPacket::read_warehouse
 					assert(i < worker_types_without_cost.size());
 					if (worker_types_without_cost.at(i) == worker_index) {
 						if
-							(warehouse.m_next_worker_without_cost_spawn[i] != never())
+							(warehouse.next_worker_without_cost_spawn_[i] != never())
 							throw GameDataError
 								(
 								 "%s %u has a next_spawn time for worker type "
@@ -422,8 +423,8 @@ void MapBuildingdataPacket::read_warehouse
 								 "to %u\n",
 								 warehouse.descr().descname().c_str(), warehouse.serial(),
 								 worker_typename, next_spawn,
-								 warehouse.m_next_worker_without_cost_spawn[i]);
-						warehouse.m_next_worker_without_cost_spawn[i] = next_spawn;
+								 warehouse.next_worker_without_cost_spawn_[i]);
+						warehouse.next_worker_without_cost_spawn_[i] = next_spawn;
 						break;
 					}
 				}
@@ -436,10 +437,10 @@ void MapBuildingdataPacket::read_warehouse
 			// Consistency checks are in Warehouse::load_finish
 			uint32_t nr_planned_workers = fr.unsigned_32();
 			while (nr_planned_workers--) {
-				warehouse.m_planned_workers.push_back
+				warehouse.planned_workers_.push_back
 					(Warehouse::PlannedWorkers());
 				Warehouse::PlannedWorkers & pw =
-					warehouse.m_planned_workers.back();
+					warehouse.planned_workers_.back();
 				pw.index = tribe.worker_index(fr.c_string());
 				pw.amount = fr.unsigned_32();
 
@@ -455,17 +456,17 @@ void MapBuildingdataPacket::read_warehouse
 				}
 			}
 
-			warehouse.m_next_stock_remove_act = fr.unsigned_32();
+			warehouse.next_stock_remove_act_ = fr.unsigned_32();
 
 			if (warehouse.descr().get_isport()) {
 				if (Serial portdock = fr.unsigned_32()) {
-					warehouse.m_portdock = &mol.get<PortDock>(portdock);
-					warehouse.m_portdock->set_economy(warehouse.get_economy());
+					warehouse.portdock_ = &mol.get<PortDock>(portdock);
+					warehouse.portdock_->set_economy(warehouse.get_economy());
 					// Expedition specific stuff. This is done in this packet
 					// because the "new style" loader is not supported and
 					// doesn't lend itself to request and other stuff.
-					if (warehouse.m_portdock->expedition_started()) {
-					warehouse.m_portdock->expedition_bootstrap()->load(warehouse, fr, game, mol);
+					if (warehouse.portdock_->expedition_started()) {
+					warehouse.portdock_->expedition_bootstrap()->load(warehouse, fr, game, mol);
 					}
 				}
 			}
@@ -476,7 +477,7 @@ void MapBuildingdataPacket::read_warehouse
 				Area<FCoords> a
 					(map.get_fcoords(warehouse.get_position()), conquer_radius);
 				const Field & first_map_field = map[0];
-				Player::Field * const player_fields = player.m_fields;
+				Player::Field * const player_fields = player.fields_;
 				MapRegion<Area<FCoords> > mr(map, a);
 				do
 					player_fields[mr.location().field - &first_map_field]
@@ -488,7 +489,7 @@ void MapBuildingdataPacket::read_warehouse
 				(Area<FCoords>
 				 (game.map().get_fcoords(warehouse.get_position()),
 				  warehouse.descr().vision_range()));
-			warehouse.m_next_military_act = game.get_gametime();
+			warehouse.next_military_act_ = game.get_gametime();
 			//log("Read warehouse stuff for %p\n", &warehouse);
 		} else {
 			throw UnhandledVersionError("MapBuildingdataPacket - Warehouse",
@@ -509,38 +510,36 @@ void MapBuildingdataPacket::read_militarysite
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
 		if (packet_version == kCurrentPacketVersionMilitarysite) {
-			read_productionsite(militarysite, fr, game, mol);
-
-			militarysite.m_normal_soldier_request.reset();
+			militarysite.normal_soldier_request_.reset();
 
 			if (fr.unsigned_8()) {
-				militarysite.m_normal_soldier_request.reset
+				militarysite.normal_soldier_request_.reset
 					(new Request
 						(militarysite,
 						 0,
 						 MilitarySite::request_soldier_callback,
 						 wwWORKER));
-				militarysite.m_normal_soldier_request->read(fr, game, mol);
+				militarysite.normal_soldier_request_->read(fr, game, mol);
 			}
 			else
-				militarysite.m_normal_soldier_request.reset();
+				militarysite.normal_soldier_request_.reset();
 
 			if (fr.unsigned_8())
 			{
-				militarysite.m_upgrade_soldier_request.reset
+				militarysite.upgrade_soldier_request_.reset
 					(new Request
 						(militarysite,
-						 (!militarysite.m_normal_soldier_request) ? 0
+						 (!militarysite.normal_soldier_request_) ? 0
 						: militarysite.owner().tribe().soldier(),
 						MilitarySite::request_soldier_callback,
 						wwWORKER));
-				militarysite.m_upgrade_soldier_request->read(fr, game, mol);
+				militarysite.upgrade_soldier_request_->read(fr, game, mol);
 			}
 			else
-				militarysite.m_upgrade_soldier_request.reset();
+				militarysite.upgrade_soldier_request_.reset();
 
 
-			if ((militarysite.m_didconquer = fr.unsigned_8())) {
+			if ((militarysite.didconquer_ = fr.unsigned_8())) {
 				//  Add to map of military influence.
 				const Map & map = game.map();
 				Area<FCoords> a
@@ -548,7 +547,7 @@ void MapBuildingdataPacket::read_militarysite
 					 militarysite.descr().get_conquers());
 				const Field & first_map_field = map[0];
 				Player::Field * const player_fields =
-					militarysite.owner().m_fields;
+					militarysite.owner().fields_;
 				MapRegion<Area<FCoords> > mr(map, a);
 				do
 					player_fields[mr.location().field - &first_map_field]
@@ -558,16 +557,16 @@ void MapBuildingdataPacket::read_militarysite
 			}
 
 			//  capacity (modified by user)
-			militarysite.m_capacity = fr.unsigned_8();
-			militarysite.m_nexthealtime = fr.signed_32();
+			militarysite.capacity_ = fr.unsigned_8();
+			militarysite.nexthealtime_ = fr.signed_32();
 
 			uint16_t reqmin = fr.unsigned_16();
 			uint16_t reqmax = fr.unsigned_16();
-			militarysite.m_soldier_upgrade_requirements = RequireAttribute(atrTotal, reqmin, reqmax);
-			militarysite.m_soldier_preference = static_cast<MilitarySite::SoldierPreference>(fr.unsigned_8());
-			militarysite.m_next_swap_soldiers_time = fr.signed_32();
-			militarysite.m_soldier_upgrade_try = 0 != fr.unsigned_8() ? true : false;
-			militarysite.m_doing_upgrade_request = 0 != fr.unsigned_8() ? true : false;
+			militarysite.soldier_upgrade_requirements_ = RequireAttribute(atrTotal, reqmin, reqmax);
+			militarysite.soldier_preference_ = static_cast<MilitarySite::SoldierPreference>(fr.unsigned_8());
+			militarysite.next_swap_soldiers_time_ = fr.signed_32();
+			militarysite.soldier_upgrade_try_ = 0 != fr.unsigned_8() ? true : false;
+			militarysite.doing_upgrade_request_ = 0 != fr.unsigned_8() ? true : false;
 
 		} else {
 			throw UnhandledVersionError("MapBuildingdataPacket - Militarysite",
@@ -583,22 +582,22 @@ void MapBuildingdataPacket::read_militarysite
 		//  Cmd_ChangeSoldierCapacity to the beginning of the game's command
 		//  queue. But that would not work because the command queue is not read
 		//  yet and will be cleared before it is read.
-		if (militarysite.m_capacity < militarysite.min_soldier_capacity()) {
+		if (militarysite.capacity_ < militarysite.min_soldier_capacity()) {
 			log
 				("WARNING: militarysite %u of player %u at (%i, %i) has capacity "
 				 "set to %u but it must be at least %u. Changing to that value.\n",
 				 militarysite.serial(), militarysite.owner().player_number(),
 				 militarysite.get_position().x, militarysite.get_position().y,
-				 militarysite.m_capacity, militarysite.min_soldier_capacity());
-			militarysite.m_capacity = militarysite.min_soldier_capacity();
-		} else if (militarysite.max_soldier_capacity() < militarysite.m_capacity) {
+				 militarysite.capacity_, militarysite.min_soldier_capacity());
+			militarysite.capacity_ = militarysite.min_soldier_capacity();
+		} else if (militarysite.max_soldier_capacity() < militarysite.capacity_) {
 			log
 				("WARNING: militarysite %u of player %u at (%i, %i) has capacity "
 				 "set to %u but it can be at most %u. Changing to that value.\n",
 				 militarysite.serial(), militarysite.owner().player_number(),
 				 militarysite.get_position().x, militarysite.get_position().y,
-				 militarysite.m_capacity, militarysite.max_soldier_capacity());
-			militarysite.m_capacity = militarysite.max_soldier_capacity();
+				 militarysite.capacity_, militarysite.max_soldier_capacity());
+			militarysite.capacity_ = militarysite.max_soldier_capacity();
 		}
 	} catch (const WException & e) {
 		throw GameDataError("militarysite: %s", e.what());
@@ -615,7 +614,7 @@ void MapBuildingdataPacket::read_productionsite
 		uint16_t const packet_version = fr.unsigned_16();
 		if (packet_version == kCurrentPacketVersionProductionsite) {
 			ProductionSite::WorkingPosition & wp_begin =
-				*productionsite.m_working_positions;
+				*productionsite.working_positions_;
 			const ProductionSiteDescr & pr_descr = productionsite.descr();
 			const BillOfMaterials & working_positions = pr_descr.working_positions();
 
@@ -703,7 +702,7 @@ void MapBuildingdataPacket::read_productionsite
 					 "number of working positions");
 
 			//  items from flags
-			productionsite.m_fetchfromflag = fr.signed_32();
+			productionsite.fetchfromflag_ = fr.signed_32();
 
 			//  skipped programs
 			uint32_t const gametime = game.get_gametime();
@@ -717,7 +716,7 @@ void MapBuildingdataPacket::read_productionsite
 							 "program %s was skipped at time %u, but time is only "
 							 "%u",
 							 program_name, skip_time, gametime);
-					productionsite.m_skipped_programs[program_name] = skip_time;
+					productionsite.skipped_programs_[program_name] = skip_time;
 				} else {
 					fr.unsigned_32(); // eat skip time
 					log
@@ -729,29 +728,29 @@ void MapBuildingdataPacket::read_productionsite
 
 			//  state
 			uint16_t const nr_progs = fr.unsigned_16();
-			productionsite.m_stack.resize(nr_progs);
+			productionsite.stack_.resize(nr_progs);
 			for (uint16_t i = 0; i < nr_progs; ++i) {
 				std::string program_name = fr.c_string();
 				std::transform
 					(program_name.begin(), program_name.end(), program_name.begin(),
 					 tolower);
 
-				productionsite.m_stack[i].program =
+				productionsite.stack_[i].program =
 					productionsite.descr().get_program(program_name);
-				productionsite.m_stack[i].ip    = fr.  signed_32();
-				productionsite.m_stack[i].phase = fr.  signed_32();
-				productionsite.m_stack[i].flags = fr.unsigned_32();
+				productionsite.stack_[i].ip    = fr.  signed_32();
+				productionsite.stack_[i].phase = fr.  signed_32();
+				productionsite.stack_[i].flags = fr.unsigned_32();
 
 				uint32_t serial = fr.unsigned_32();
 				if (serial)
-					productionsite.m_stack[i].objvar = &mol.get<MapObject>(serial);
-				productionsite.m_stack[i].coord = read_coords_32_allow_null(&fr, game.map().extent());
+					productionsite.stack_[i].objvar = &mol.get<MapObject>(serial);
+				productionsite.stack_[i].coord = read_coords_32_allow_null(&fr, game.map().extent());
 			}
-			productionsite.m_program_timer = fr.unsigned_8();
-			productionsite.m_program_time = fr.signed_32();
+			productionsite.program_timer_ = fr.unsigned_8();
+			productionsite.program_time_ = fr.signed_32();
 
 			uint16_t nr_queues = fr.unsigned_16();
-			assert(!productionsite.m_input_queues.size());
+			assert(!productionsite.input_queues_.size());
 			for (uint16_t i = 0; i < nr_queues; ++i) {
 				WaresQueue * wq = new WaresQueue(productionsite, INVALID_INDEX, 0);
 				wq->read(fr, game, mol);
@@ -759,16 +758,16 @@ void MapBuildingdataPacket::read_productionsite
 				if (!game.tribes().ware_exists(wq->get_ware())) {
 					delete wq;
 				} else {
-					productionsite.m_input_queues.push_back(wq);
+					productionsite.input_queues_.push_back(wq);
 				}
 			}
 
 			uint16_t const stats_size = fr.unsigned_16();
-			productionsite.m_statistics.resize(stats_size);
-			for (uint32_t i = 0; i < productionsite.m_statistics.size(); ++i)
-				productionsite.m_statistics[i] = fr.unsigned_8();
-			productionsite.m_statistics_string_on_changed_statistics = fr.c_string();
-			productionsite.m_production_result = fr.c_string();
+			productionsite.statistics_.resize(stats_size);
+			for (uint32_t i = 0; i < productionsite.statistics_.size(); ++i)
+				productionsite.statistics_[i] = fr.unsigned_8();
+			productionsite.statistics_string_on_changed_statistics_ = fr.c_string();
+			productionsite.production_result_ = fr.c_string();
 		} else {
 			throw UnhandledVersionError("MapBuildingdataPacket - Productionsite",
 												 packet_version, kCurrentPacketVersionProductionsite);
@@ -793,20 +792,20 @@ void MapBuildingdataPacket::read_trainingsite
 		if (packet_version == kCurrentPacketVersionTrainingsite) {
 			read_productionsite(trainingsite, fr, game, mol);
 
-			delete trainingsite.m_soldier_request;
-			trainingsite.m_soldier_request = nullptr;
+			delete trainingsite.soldier_request_;
+			trainingsite.soldier_request_ = nullptr;
 			if (fr.unsigned_8()) {
-				trainingsite.m_soldier_request =
+				trainingsite.soldier_request_ =
 					new Request
 						(trainingsite,
 						 0,
 						 TrainingSite::request_soldier_callback,
 						 wwWORKER);
-				trainingsite.m_soldier_request->read(fr, game, mol);
+				trainingsite.soldier_request_->read(fr, game, mol);
 			}
 
-			trainingsite.m_capacity = fr.unsigned_8();
-			trainingsite.m_build_heroes = fr.unsigned_8();
+			trainingsite.capacity_ = fr.unsigned_8();
+			trainingsite.build_heroes_ = fr.unsigned_8();
 
 			uint8_t const nr_upgrades = fr.unsigned_8();
 			for (uint8_t i = 0; i < nr_upgrades; ++i) {
@@ -836,7 +835,7 @@ void MapBuildingdataPacket::read_trainingsite
 				uint16_t spresence  = fr.unsigned_8();
 				mapsize--;
 				std::pair<uint16_t, uint8_t> t = std::make_pair(trainstall, spresence);
-				trainingsite.training_failure_count[std::make_pair(traintype, trainlevel)] = t;
+				trainingsite.training_failure_count_[std::make_pair(traintype, trainlevel)] = t;
 			}
 		} else {
 			throw UnhandledVersionError("MapBuildingdataPacket - Trainingsite",
@@ -852,22 +851,22 @@ void MapBuildingdataPacket::read_trainingsite
 		//  Cmd_ChangeSoldierCapacity to the beginning of the game's command
 		//  queue. But that would not work because the command queue is not read
 		//  yet and will be cleared before it is read.
-		if        (trainingsite.m_capacity < trainingsite.min_soldier_capacity()) {
+		if        (trainingsite.capacity_ < trainingsite.min_soldier_capacity()) {
 			log
 				("WARNING: trainingsite %u of player %u at (%i, %i) has capacity "
 				 "set to %u but it must be at least %u. Changing to that value.\n",
 				 trainingsite.serial(), trainingsite.owner().player_number(),
 				 trainingsite.get_position().x, trainingsite.get_position().y,
-				 trainingsite.m_capacity, trainingsite.min_soldier_capacity());
-			trainingsite.m_capacity = trainingsite.min_soldier_capacity();
-		} else if (trainingsite.max_soldier_capacity() < trainingsite.m_capacity) {
+				 trainingsite.capacity_, trainingsite.min_soldier_capacity());
+			trainingsite.capacity_ = trainingsite.min_soldier_capacity();
+		} else if (trainingsite.max_soldier_capacity() < trainingsite.capacity_) {
 			log
 				("WARNING: trainingsite %u of player %u at (%i, %i) has capacity "
 				 "set to %u but it can be at most %u. Changing to that value.\n",
 				 trainingsite.serial(), trainingsite.owner().player_number(),
 				 trainingsite.get_position().x, trainingsite.get_position().y,
-				 trainingsite.m_capacity, trainingsite.max_soldier_capacity());
-			trainingsite.m_capacity = trainingsite.max_soldier_capacity();
+				 trainingsite.capacity_, trainingsite.max_soldier_capacity());
+			trainingsite.capacity_ = trainingsite.max_soldier_capacity();
 		}
 	} catch (const WException & e) {
 		throw GameDataError("trainingsite: %s", e.what());
@@ -899,16 +898,16 @@ void MapBuildingdataPacket::write
 			//  player immovable owner is already in existence packet
 
 			//  write the general stuff
-			if (building->m_anim) {
+			if (building->anim_) {
 				fw.unsigned_8(1);
-				fw.string(building->descr().get_animation_name(building->m_anim));
+				fw.string(building->descr().get_animation_name(building->anim_));
 			} else
 				fw.unsigned_8(0);
 
-			fw.unsigned_32(building->m_animstart);
+			fw.unsigned_32(building->animstart_);
 
 			{
-				const Building::LeaveQueue & leave_queue = building->m_leave_queue;
+				const Building::LeaveQueue & leave_queue = building->leave_queue_;
 				fw.unsigned_16(leave_queue.size());
 				for (const OPtr<Worker >& temp_queue: leave_queue) {
 					assert(mos.is_object_known(*temp_queue.get(egbase)));
@@ -916,8 +915,8 @@ void MapBuildingdataPacket::write
 						(mos.get_object_file_index(*temp_queue.get(egbase)));
 				}
 			}
-			fw.unsigned_32(building->m_leave_time);
-			if (MapObject const * const o = building->m_leave_allow.get(egbase))
+			fw.unsigned_32(building->leave_time_);
+			if (MapObject const * const o = building->leave_allow_.get(egbase))
 			{
 				assert(mos.is_object_known(*o));
 				fw.unsigned_32(mos.get_object_file_index(*o));
@@ -926,7 +925,7 @@ void MapBuildingdataPacket::write
 			}
 			{
 				const TribeDescr& td = building->owner().tribe();
-				for (DescriptionIndex b_idx : building->m_old_buildings) {
+				for (DescriptionIndex b_idx : building->old_buildings_) {
 					const BuildingDescr* b_descr = td.get_building_descr(b_idx);
 					fw.unsigned_8(1);
 					fw.string(b_descr->name());
@@ -946,20 +945,19 @@ void MapBuildingdataPacket::write
 				write_constructionsite(*constructionsite, fw, game, mos);
 			} else if (upcast(DismantleSite const, dms, building)) {
 				write_dismantlesite(*dms, fw, game, mos);
+			} else if (upcast(MilitarySite const, militarysite, building)) {
+				write_militarysite(*militarysite, fw, game, mos);
 			} else if (upcast(Warehouse const, warehouse, building)) {
 				write_warehouse (*warehouse, fw, game, mos);
 			} else if (upcast(ProductionSite const, productionsite, building)) {
-				if (upcast(MilitarySite const, militarysite, productionsite)) {
-					write_militarysite(*militarysite, fw, game, mos);
-				}
-				else if (upcast(TrainingSite const, trainingsite, productionsite)) {
+				if (upcast(TrainingSite const, trainingsite, productionsite)) {
 					write_trainingsite(*trainingsite, fw, game, mos);
 				}
 				else {
 					write_productionsite(*productionsite, fw, game, mos);
 				}
 			} else {
-				assert(false);
+				NEVER_HERE();
 				//  type of building is not one of (or derived from)
 				//  {ConstructionSite, Warehouse, ProductionSite}
 			}
@@ -978,31 +976,31 @@ void MapBuildingdataPacket::write_partially_finished_building
 	fw.unsigned_16(kCurrentPacketPFBuilding);
 
 	//  descriptions
-	fw.string(pfb.m_building->name());
+	fw.string(pfb.building_->name());
 
 	// builder request
-	if (pfb.m_builder_request) {
+	if (pfb.builder_request_) {
 		fw.unsigned_8(1);
-		pfb.m_builder_request->write(fw, game, mos);
+		pfb.builder_request_->write(fw, game, mos);
 	} else
 		fw.unsigned_8(0);
 
 	// builder
-	if (Worker const * builder = pfb.m_builder.get(game)) {
+	if (Worker const * builder = pfb.builder_.get(game)) {
 		assert(mos.is_object_known(*builder));
 		fw.unsigned_32(mos.get_object_file_index(*builder));
 	} else
 		fw.unsigned_32(0);
 
-	const uint16_t wares_size = pfb.m_wares.size();
+	const uint16_t wares_size = pfb.wares_.size();
 	fw.unsigned_16(wares_size);
 	for (uint16_t i = 0; i < wares_size; ++i)
-		pfb.m_wares[i]->write(fw, game, mos);
+		pfb.wares_[i]->write(fw, game, mos);
 
-	fw.unsigned_8 (pfb.m_working);
-	fw.unsigned_32(pfb.m_work_steptime);
-	fw.unsigned_32(pfb.m_work_completed);
-	fw.unsigned_32(pfb.m_work_steps);
+	fw.unsigned_8 (pfb.working_);
+	fw.unsigned_32(pfb.work_steptime_);
+	fw.unsigned_32(pfb.work_completed_);
+	fw.unsigned_32(pfb.work_steps_);
 }
 
 void MapBuildingdataPacket::write_constructionsite
@@ -1016,7 +1014,7 @@ void MapBuildingdataPacket::write_constructionsite
 
 	write_partially_finished_building(constructionsite, fw, game, mos);
 
-	fw.signed_32(constructionsite.m_fetchfromflag);
+	fw.signed_32(constructionsite.fetchfromflag_);
 }
 
 void MapBuildingdataPacket::write_dismantlesite
@@ -1044,7 +1042,7 @@ void MapBuildingdataPacket::write_warehouse
 
 	//  supply
 	const TribeDescr & tribe = warehouse.owner().tribe();
-	const WareList & wares = warehouse.m_supply->get_wares();
+	const WareList & wares = warehouse.supply_->get_wares();
 	for (DescriptionIndex i = 0; i < wares.get_nrwareids  (); ++i) {
 		fw.unsigned_8(1);
 		fw.string(tribe.get_ware_descr(i)->name());
@@ -1052,7 +1050,7 @@ void MapBuildingdataPacket::write_warehouse
 		fw.unsigned_8(warehouse.get_ware_policy(i));
 	}
 	fw.unsigned_8(0);
-	const WareList & workers = warehouse.m_supply->get_workers();
+	const WareList & workers = warehouse.supply_->get_workers();
 	for (DescriptionIndex i = 0; i < workers.get_nrwareids(); ++i) {
 		fw.unsigned_8(1);
 		fw.string(tribe.get_worker_descr(i)->name());
@@ -1063,14 +1061,14 @@ void MapBuildingdataPacket::write_warehouse
 
 	//  Incorporated workers, write sorted after file-serial.
 	uint32_t nworkers = 0;
-	for (const std::pair<DescriptionIndex, Warehouse::WorkerList>& cwt: warehouse.m_incorporated_workers) {
+	for (const std::pair<DescriptionIndex, Warehouse::WorkerList>& cwt: warehouse.incorporated_workers_) {
 		nworkers += cwt.second.size();
 	}
 
 	fw.unsigned_16(nworkers);
 	using TWorkerMap = std::map<uint32_t, const Worker *>;
 	TWorkerMap workermap;
-	for (const std::pair<DescriptionIndex, Warehouse::WorkerList>& cwt : warehouse.m_incorporated_workers) {
+	for (const std::pair<DescriptionIndex, Warehouse::WorkerList>& cwt : warehouse.incorporated_workers_) {
 		for (Worker * temp_worker : cwt.second) {
 			const Worker & w = *temp_worker;
 			assert(mos.is_object_known(w));
@@ -1090,9 +1088,9 @@ void MapBuildingdataPacket::write_warehouse
 		const std::vector<DescriptionIndex> & worker_types_without_cost =
 			tribe.worker_types_without_cost();
 		assert(worker_types_without_cost.size() ==
-				 warehouse.m_next_worker_without_cost_spawn.size());
+				 warehouse.next_worker_without_cost_spawn_.size());
 		for (uint8_t i = worker_types_without_cost.size(); i;) {
-			const Time& next_spawn = warehouse.m_next_worker_without_cost_spawn[--i];
+			const Time& next_spawn = warehouse.next_worker_without_cost_spawn_[--i];
 			if (next_spawn != never()) {
 				fw.string
 					(tribe.get_worker_descr(tribe.worker_types_without_cost().at(i))
@@ -1103,8 +1101,8 @@ void MapBuildingdataPacket::write_warehouse
 	}
 	fw.unsigned_8(0); //  terminator for spawn times
 
-	fw.unsigned_32(warehouse.m_planned_workers.size());
-	for (const Warehouse::PlannedWorkers& temp_worker : warehouse.m_planned_workers) {
+	fw.unsigned_32(warehouse.planned_workers_.size());
+	for (const Warehouse::PlannedWorkers& temp_worker : warehouse.planned_workers_) {
 		fw.c_string(tribe.get_worker_descr(temp_worker.index)->name());
 		fw.unsigned_32(temp_worker.amount);
 
@@ -1115,14 +1113,14 @@ void MapBuildingdataPacket::write_warehouse
 		}
 	}
 
-	fw.unsigned_32(warehouse.m_next_stock_remove_act);
+	fw.unsigned_32(warehouse.next_stock_remove_act_);
 
 	if (warehouse.descr().get_isport()) {
-		fw.unsigned_32(mos.get_object_file_index_or_zero(warehouse.m_portdock));
+		fw.unsigned_32(mos.get_object_file_index_or_zero(warehouse.portdock_));
 
 		// Expedition specific stuff. See comment in loader.
-		if (warehouse.m_portdock->expedition_started()) {
-			warehouse.m_portdock->expedition_bootstrap()->save(fw, game, mos);
+		if (warehouse.portdock_->expedition_started()) {
+			warehouse.portdock_->expedition_bootstrap()->save(fw, game, mos);
 		}
 	}
 }
@@ -1135,42 +1133,41 @@ void MapBuildingdataPacket::write_militarysite
 	 MapObjectSaver & mos)
 {
 	fw.unsigned_16(kCurrentPacketVersionMilitarysite);
-	write_productionsite(militarysite, fw, game, mos);
 
-	if (militarysite.m_normal_soldier_request) {
+	if (militarysite.normal_soldier_request_) {
 		fw.unsigned_8(1);
-		militarysite.m_normal_soldier_request->write(fw, game, mos);
+		militarysite.normal_soldier_request_->write(fw, game, mos);
 	} else {
 		fw.unsigned_8(0);
 	}
 
-	if (militarysite.m_upgrade_soldier_request)
+	if (militarysite.upgrade_soldier_request_)
 	{
 		fw.unsigned_8(1);
-		militarysite.m_upgrade_soldier_request->write(fw, game, mos);
+		militarysite.upgrade_soldier_request_->write(fw, game, mos);
 	}
 	else
 		fw.unsigned_8(0);
 
 
-	fw.unsigned_8(militarysite.m_didconquer);
-	fw.unsigned_8(militarysite.m_capacity);
-	fw.signed_32(militarysite.m_nexthealtime);
+	fw.unsigned_8(militarysite.didconquer_);
+	fw.unsigned_8(militarysite.capacity_);
+	fw.signed_32(militarysite.nexthealtime_);
 
-	if (militarysite.m_normal_soldier_request)
+	if (militarysite.normal_soldier_request_)
 	{
-		if (militarysite.m_upgrade_soldier_request)
+		if (militarysite.upgrade_soldier_request_)
 			{
 				throw GameDataError
 				("Internal error in a MilitarySite -- cannot continue. Use previous autosave.");
 			}
 	}
-	fw.unsigned_16(militarysite.m_soldier_upgrade_requirements.get_min());
-	fw.unsigned_16(militarysite.m_soldier_upgrade_requirements.get_max());
-	fw.unsigned_8(militarysite.m_soldier_preference);
-	fw.signed_32(militarysite.m_next_swap_soldiers_time);
-	fw.unsigned_8(militarysite.m_soldier_upgrade_try ? 1 : 0);
-	fw.unsigned_8(militarysite.m_doing_upgrade_request ? 1 : 0);
+	fw.unsigned_16(militarysite.soldier_upgrade_requirements_.get_min());
+	fw.unsigned_16(militarysite.soldier_upgrade_requirements_.get_max());
+	fw.unsigned_8(militarysite.soldier_preference_);
+	fw.signed_32(militarysite.next_swap_soldiers_time_);
+	fw.unsigned_8(militarysite.soldier_upgrade_try_ ? 1 : 0);
+	fw.unsigned_8(militarysite.doing_upgrade_request_ ? 1 : 0);
 
 }
 
@@ -1186,7 +1183,7 @@ void MapBuildingdataPacket::write_productionsite
 	uint32_t const nr_working_positions =
 		productionsite.descr().nr_working_positions();
 	const ProductionSite::WorkingPosition & begin =
-		productionsite.m_working_positions[0];
+		productionsite.working_positions_[0];
 	const ProductionSite::WorkingPosition & end =
 		(&begin)[nr_working_positions];
 	uint32_t nr_workers = 0;
@@ -1208,44 +1205,44 @@ void MapBuildingdataPacket::write_productionsite
 			fw.unsigned_32(mos.get_object_file_index(*w));
 		}
 
-	fw.signed_32(productionsite.m_fetchfromflag);
+	fw.signed_32(productionsite.fetchfromflag_);
 
 	//  skipped programs
 	assert
-		(productionsite.m_skipped_programs.size()
+		(productionsite.skipped_programs_.size()
 		 <=
 		 std::numeric_limits<uint8_t>::max());
-	fw.unsigned_8(productionsite.m_skipped_programs.size());
+	fw.unsigned_8(productionsite.skipped_programs_.size());
 
-	for (const std::pair<std::string, Time>& temp_program : productionsite.m_skipped_programs) {
+	for (const std::pair<std::string, Time>& temp_program : productionsite.skipped_programs_) {
 		fw.string    (temp_program.first);
 		fw.unsigned_32(temp_program.second);
 	}
 
 	//  state
-	uint16_t const program_size = productionsite.m_stack.size();
+	uint16_t const program_size = productionsite.stack_.size();
 	fw.unsigned_16(program_size);
 	for (uint16_t i = 0; i < program_size; ++i) {
-		fw.string    (productionsite.m_stack[i].program->name());
-		fw.  signed_32(productionsite.m_stack[i].ip);
-		fw.  signed_32(productionsite.m_stack[i].phase);
-		fw.unsigned_32(productionsite.m_stack[i].flags);
-		fw.unsigned_32(mos.get_object_file_index_or_zero(productionsite.m_stack[i].objvar.get(game)));
-		write_coords_32(&fw, productionsite.m_stack[i].coord);
+		fw.string    (productionsite.stack_[i].program->name());
+		fw.  signed_32(productionsite.stack_[i].ip);
+		fw.  signed_32(productionsite.stack_[i].phase);
+		fw.unsigned_32(productionsite.stack_[i].flags);
+		fw.unsigned_32(mos.get_object_file_index_or_zero(productionsite.stack_[i].objvar.get(game)));
+		write_coords_32(&fw, productionsite.stack_[i].coord);
 	}
-	fw.unsigned_8(productionsite.m_program_timer);
-	fw. signed_32(productionsite.m_program_time);
+	fw.unsigned_8(productionsite.program_timer_);
+	fw. signed_32(productionsite.program_time_);
 
-	const uint16_t input_queues_size = productionsite.m_input_queues.size();
+	const uint16_t input_queues_size = productionsite.input_queues_.size();
 	fw.unsigned_16(input_queues_size);
 	for (uint16_t i = 0; i < input_queues_size; ++i)
-		productionsite.m_input_queues[i]->write(fw, game, mos);
+		productionsite.input_queues_[i]->write(fw, game, mos);
 
-	const uint16_t statistics_size = productionsite.m_statistics.size();
+	const uint16_t statistics_size = productionsite.statistics_.size();
 	fw.unsigned_16(statistics_size);
 	for (uint32_t i = 0; i < statistics_size; ++i)
-		fw.unsigned_8(productionsite.m_statistics[i]);
-	fw.string(productionsite.m_statistics_string_on_changed_statistics);
+		fw.unsigned_8(productionsite.statistics_[i]);
+	fw.string(productionsite.statistics_string_on_changed_statistics_);
 	fw.string(productionsite.production_result());
 }
 
@@ -1264,34 +1261,34 @@ void MapBuildingdataPacket::write_trainingsite
 
 	//  requests
 
-	if (trainingsite.m_soldier_request) {
+	if (trainingsite.soldier_request_) {
 		fw.unsigned_8(1);
-		trainingsite.m_soldier_request->write(fw, game, mos);
+		trainingsite.soldier_request_->write(fw, game, mos);
 	} else {
 		fw.unsigned_8(0);
 	}
 
-	fw.unsigned_8(trainingsite.m_capacity);
-	fw.unsigned_8(trainingsite.m_build_heroes);
+	fw.unsigned_8(trainingsite.capacity_);
+	fw.unsigned_8(trainingsite.build_heroes_);
 
 	// upgrades
-	fw.unsigned_8(trainingsite.m_upgrades.size());
-	for (uint8_t i = 0; i < trainingsite.m_upgrades.size(); ++i) {
-		const TrainingSite::Upgrade & upgrade = trainingsite.m_upgrades[i];
+	fw.unsigned_8(trainingsite.upgrades_.size());
+	for (uint8_t i = 0; i < trainingsite.upgrades_.size(); ++i) {
+		const TrainingSite::Upgrade & upgrade = trainingsite.upgrades_[i];
 		fw.unsigned_8(upgrade.attribute);
 		fw.unsigned_8(upgrade.prio);
 		fw.unsigned_8(upgrade.credit);
 		fw.signed_32(upgrade.lastattempt);
 		fw.signed_8(upgrade.lastsuccess);
 	}
-	if (255 < trainingsite.training_failure_count.size())
+	if (255 < trainingsite.training_failure_count_.size())
 		log
 			("Save TrainingSite: Failure counter has ridiculously many entries! (%u)\n",
-			 static_cast<uint16_t>(trainingsite.training_failure_count.size()));
-	fw.unsigned_16(static_cast<uint16_t> (trainingsite.training_failure_count.size()));
+			 static_cast<uint16_t>(trainingsite.training_failure_count_.size()));
+	fw.unsigned_16(static_cast<uint16_t> (trainingsite.training_failure_count_.size()));
 	for
-		(TrainingSite::TrainFailCount::const_iterator i = trainingsite.training_failure_count.begin();
-		 i != trainingsite.training_failure_count.end(); i++)
+		(TrainingSite::TrainFailCount::const_iterator i = trainingsite.training_failure_count_.begin();
+		 i != trainingsite.training_failure_count_.end(); i++)
 	{
 		fw.unsigned_16(i->first.first);
 		fw.unsigned_16(i->first.second);
