@@ -44,7 +44,7 @@ struct GameSaver {
 
 private:
 	FileSystem & m_fs;
-	Game       & m_game;
+	Game       & game_;
 };
 
 }

@@ -70,7 +70,7 @@ void Path::save(FileWrite & fw) const
 	fw.unsigned_8(kCurrentPacketVersion);
 	write_coords_32(&fw, start_);
 
-	// Careful: steps are stored in the reverse order in m_path
+	// Careful: steps are stored in the reverse order in path_
 	// However, we save them in the forward order, to make loading easier
 	fw.unsigned_32(path_.size());
 	for (uint32_t i = path_.size(); i > 0; --i)
