@@ -50,6 +50,8 @@ MAINPOTS = [
                     "../../src/*/*/*/*.h",
                     "../../src/*/*/*/*/*.h",
                     "../../src/*/*/*/*/*/*.h",
+                    "../../data/scripting/*.lua",
+                    "../../data/scripting/editor/*.lua",
                     "../../data/scripting/widelands/*.lua",
                     "../../data/scripting/editor/*.lua",
     ] ),
@@ -307,18 +309,25 @@ def do_compile_src( potfile, srcfiles ):
     and write out the given potfile
     """
     # call xgettext and supply source filenames via stdin
-    gettext_input = subprocess.Popen("xgettext %s --files-from=- --output=%s" % \
-            (XGETTEXTOPTS, potfile), shell=True, stdin=subprocess.PIPE, universal_newlines=True).stdin
+    xgettext = subprocess.Popen("xgettext %s --files-from=- --output=%s" % \
+            (XGETTEXTOPTS, potfile), shell=True, stdin=subprocess.PIPE, universal_newlines=True)
     try:
         for one_pattern in srcfiles:
             # 'normpath' is necessary for windows ('/' vs. '\')
             # 'glob' handles filename wildcards
             for one_file in glob(os.path.normpath(one_pattern)):
-                gettext_input.write(one_file + "\n")
-        return gettext_input.close()
+                xgettext.stdin.write(one_file + "\n")
+        xgettext.stdin.close()
     except IOError as err_msg:
         sys.stderr.write("Failed to call xgettext: %s\n" % err_msg)
-        return -1
+        return False
+
+    xgettext_status = xgettext.wait()
+    if (xgettext_status != 0):
+        sys.stderr.write("xgettext exited with errorcode %i\n" % xgettext_status)
+        return False
+
+    return True
 
 
 ##############################################################################
@@ -369,8 +378,7 @@ def do_update_potfiles():
             potfile = os.path.basename(pot) + '.pot'
             if pot.startswith('widelands'):
                 # This catalogs can be built with xgettext
-                do_compile_src(potfile , srcfiles )
-                succ = True
+                succ = do_compile_src(potfile , srcfiles )
             else:
                 succ = do_compile(potfile, srcfiles)
 

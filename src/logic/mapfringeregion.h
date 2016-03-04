@@ -34,16 +34,16 @@ namespace Widelands {
  */
 template <typename AreaType = Area<> > struct MapFringeRegion {
 	MapFringeRegion(const Map & map, AreaType area) :
-		m_area              (area),
-		m_remaining_in_phase(area.radius),
-		m_phase             (area.radius ? 6 : 0)
+		area_              (area),
+		remaining_in_phase_(area.radius),
+		phase_             (area.radius ? 6 : 0)
 	{
 		for (typename AreaType::RadiusType r = area.radius; r; --r)
-			map.get_tln(m_area, &m_area);
+			map.get_tln(area_, &area_);
 	}
 
 
-	const typename AreaType::CoordsType & location() const {return m_area;}
+	const typename AreaType::CoordsType & location() const {return area_;}
 
 	/**
 	 * Moves on to the next location. The return value indicates whether the new
@@ -64,17 +64,17 @@ template <typename AreaType = Area<> > struct MapFringeRegion {
 	 * the region ready to iterate over the next layer of nodes.
 	 */
 	void extend(const Map & map) {
-		map.get_tln(m_area, &m_area);
-		++m_area.radius;
-		m_remaining_in_phase = m_area.radius;
-		m_phase = 6;
+		map.get_tln(area_, &area_);
+		++area_.radius;
+		remaining_in_phase_ = area_.radius;
+		phase_ = 6;
 	}
 
-	typename AreaType::RadiusType radius() const {return m_area.radius;}
+	typename AreaType::RadiusType radius() const {return area_.radius;}
 private:
-	AreaType                       m_area;
-	typename AreaType::RadiusType m_remaining_in_phase;
-	uint8_t   m_phase;
+	AreaType                       area_;
+	typename AreaType::RadiusType remaining_in_phase_;
+	uint8_t   phase_;
 };
 
 }

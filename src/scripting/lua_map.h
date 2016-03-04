@@ -541,6 +541,7 @@ public:
 	 */
 	int get_becomes(lua_State*);
 	int get_buildcost(lua_State*);
+	int get_employers(lua_State*);
 	int get_helptext_script(lua_State*);
 	int get_is_buildable(lua_State*);
 	int get_needed_experience(lua_State*);

@@ -477,7 +477,7 @@ void MapBuildingdataPacket::read_warehouse
 				Area<FCoords> a
 					(map.get_fcoords(warehouse.get_position()), conquer_radius);
 				const Field & first_map_field = map[0];
-				Player::Field * const player_fields = player.m_fields;
+				Player::Field * const player_fields = player.fields_;
 				MapRegion<Area<FCoords> > mr(map, a);
 				do
 					player_fields[mr.location().field - &first_map_field]
@@ -547,7 +547,7 @@ void MapBuildingdataPacket::read_militarysite
 					 militarysite.descr().get_conquers());
 				const Field & first_map_field = map[0];
 				Player::Field * const player_fields =
-					militarysite.owner().m_fields;
+					militarysite.owner().fields_;
 				MapRegion<Area<FCoords> > mr(map, a);
 				do
 					player_fields[mr.location().field - &first_map_field]

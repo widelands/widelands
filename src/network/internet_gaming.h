@@ -86,9 +86,9 @@ struct InternetGaming : public ChatProvider {
 
 	// Informative functions for lobby
 	bool update_for_games();
-	const std::vector<InternetGame>   & games();
+	const std::vector<InternetGame>* games();
 	bool update_for_clients();
-	const std::vector<InternetClient> & clients();
+	const std::vector<InternetClient>* clients();
 
 	/// sets the name of the local server as shown in the games list
 	void set_local_servername(const std::string & name) {gamename_ = name;}
@@ -123,6 +123,8 @@ struct InternetGaming : public ChatProvider {
 		msg = ingame_system_chat_;
 		ingame_system_chat_.clear();
 	}
+
+	bool has_been_set() const override {return true;}
 
 private:
 	InternetGaming();
