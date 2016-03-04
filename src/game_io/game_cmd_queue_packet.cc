@@ -41,7 +41,7 @@ void GameCmdQueuePacket::read
 		if (packet_version == kCurrentPacketVersion) {
 			CmdQueue & cmdq = game.cmdqueue();
 
-			// nothing to be done for m_game
+			// nothing to be done for game_
 
 			// Next serial
 			cmdq.nextserial_ = fr.unsigned_32();
@@ -86,7 +86,7 @@ void GameCmdQueuePacket::write
 
 	const CmdQueue & cmdq = game.cmdqueue();
 
-	// nothing to be done for m_game
+	// nothing to be done for game_
 
 	// Next serial
 	fw.unsigned_32(cmdq.nextserial_);
