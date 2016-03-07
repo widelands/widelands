@@ -118,7 +118,7 @@ void BaseImmovable::unset_position(EditorGameBase & egbase, Coords const c)
 	FCoords const f = map.get_fcoords(c);
 
 	// this is to help to debug failing assertion below (see bug 1542238)
-	if (f.field->immovable != this){
+	if (f.field->immovable != this) {
 		log(" Internal error: Immovable at %3dx%3d does not match: is %s but %s was expected.\n",
 		c.x,
 		c.y,
@@ -168,8 +168,8 @@ ImmovableProgram::ImmovableProgram(const std::string& init_name,
 			action = new ActRemove(arguments.get(), *immovable);
 		} else if (parts[0] == "seed") {
 			action = new ActSeed(arguments.get(), *immovable);
-		} else if (parts[0] == "playFX") {
-			action = new ActPlayFX(arguments.get(), *immovable);
+		} else if (parts[0] == "play_sound") {
+			action = new ActPlaySound(arguments.get(), *immovable);
 		} else if (parts[0] == "construction") {
 			action = new ActConstruction(arguments.get(), *immovable);
 		} else {
@@ -792,7 +792,7 @@ void ImmovableProgram::ActAnimate::execute
 }
 
 
-ImmovableProgram::ActPlayFX::ActPlayFX(char* parameters, const ImmovableDescr&) {
+ImmovableProgram::ActPlaySound::ActPlaySound(char* parameters, const ImmovableDescr&) {
 	try {
 		bool reached_end;
 		name = next_word(parameters, reached_end);
@@ -811,14 +811,14 @@ ImmovableProgram::ActPlayFX::ActPlayFX(char* parameters, const ImmovableDescr&) 
 													 FileSystem::fs_filename(name.c_str()),
 													 name);
 	} catch (const WException & e) {
-		throw GameDataError("playFX: %s", e.what());
+		throw GameDataError("play_sound: %s", e.what());
 	}
 }
 
 /** Demand from the g_sound_handler to play a certain sound effect.
  * Whether the effect actually gets played
  * is decided only by the sound server*/
-void ImmovableProgram::ActPlayFX::execute
+void ImmovableProgram::ActPlaySound::execute
 	(Game & game, Immovable & immovable) const
 {
 	g_sound_handler.play_fx(name, immovable.get_position(), priority);

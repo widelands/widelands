@@ -30,7 +30,7 @@ world:new_terrain_type{
    name = "wiese1",
 
    -- The name that will be used in UI and translated.
-   descname = _ "Meadow",
+   descname = _ "Meadow 1",
 
    -- The category for sorting this into menus in the editor.
    editor_category = "green",
@@ -83,7 +83,7 @@ world:new_terrain_type{
 
 world:new_terrain_type{
    name = "wiese2",
-   descname = _ "Meadow",
+   descname = _ "Meadow 2",
    editor_category = "green",
    is = "arable",
    tooltips = {
@@ -104,7 +104,7 @@ world:new_terrain_type{
 
 world:new_terrain_type{
    name = "wiese3",
-   descname = _ "Meadow",
+   descname = _ "Meadow 3",
    editor_category = "green",
    is = "arable",
    tooltips = {
@@ -124,7 +124,7 @@ world:new_terrain_type{
 
 world:new_terrain_type{
    name = "wiese4",
-   descname = _ "Meadow",
+   descname = _ "Meadow 4",
    editor_category = "green",
    is = "arable",
    tooltips = {
@@ -184,15 +184,15 @@ world:new_terrain_type{
    default_resource_amount = 0,
    textures = { pics_dir .. "green/bergwiese_00.png" },
    dither_layer = 160,
-   temperature = 85,
-   humidity = 0.75,
-   fertility = 0.5,
+   temperature = 75,
+   humidity = 0.8,
+   fertility = 0.45,
 }
 
 
 world:new_terrain_type{
    name = "berg1",
-   descname = _ "Mountain",
+   descname = _ "Mountain 1",
    editor_category = "green",
    is = "mineable",
    valid_resources = { "coal", "iron", "gold", "stones" },
@@ -208,7 +208,7 @@ world:new_terrain_type{
 
 world:new_terrain_type{
    name = "berg2",
-   descname = _ "Mountain",
+   descname = _ "Mountain 2",
    editor_category = "green",
    is = "mineable",
    valid_resources = {"coal", "iron", "gold", "stones"},
@@ -224,7 +224,7 @@ world:new_terrain_type{
 
 world:new_terrain_type{
    name = "berg3",
-   descname = _ "Mountain",
+   descname = _ "Mountain 3",
    editor_category = "green",
    is = "mineable",
    valid_resources = {"coal", "iron", "gold", "stones"},
@@ -240,7 +240,7 @@ world:new_terrain_type{
 
 world:new_terrain_type{
    name = "berg4",
-   descname = _ "Mountain",
+   descname = _ "Mountain 4",
    editor_category = "green",
    is = "mineable",
    valid_resources = {"coal", "iron", "gold", "stones"},
@@ -256,7 +256,7 @@ world:new_terrain_type{
 
 world:new_terrain_type{
    name = "summer_forested_mountain1",
-   descname = _ "Forested Mountain",
+   descname = _ "Forested Mountain 1",
    editor_category = "green",
    is = "mineable",
    -- You can add custom additional tooltip entries here.
@@ -276,7 +276,7 @@ world:new_terrain_type{
 
 world:new_terrain_type{
    name = "summer_forested_mountain2",
-   descname = _ "Forested Mountain",
+   descname = _ "Forested Mountain 2",
    editor_category = "green",
    is = "mineable",
    -- You can add custom additional tooltip entries here.
@@ -380,7 +380,7 @@ world:new_terrain_type{
 
 world:new_terrain_type{
    name = "ashes",
-   descname = _ "Ashes",
+   descname = _ "Ashes 1",
    editor_category = "wasteland",
    is = "arable",
    tooltips = {
@@ -400,7 +400,7 @@ world:new_terrain_type{
 
 world:new_terrain_type{
    name = "ashes2",
-   descname = _ "Ashes",
+   descname = _ "Ashes 2",
    editor_category = "wasteland",
    is = "arable",
    tooltips = {
@@ -412,15 +412,15 @@ world:new_terrain_type{
    default_resource_amount = 4,
    textures = { pics_dir .. "wasteland/ashes2_00.png" },
    dither_layer = 410,
-   temperature = 125,
-   humidity = 0.1,
+   temperature = 118,
+   humidity = 0.13,
    fertility = 0.999,
 }
 
 
 world:new_terrain_type{
    name = "hardground1",
-   descname = _ "Hard Ground",
+   descname = _ "Hard Ground 1",
    editor_category = "wasteland",
    is = "arable",
    tooltips = {
@@ -440,7 +440,7 @@ world:new_terrain_type{
 
 world:new_terrain_type{
    name = "hardground2",
-   descname = _ "Hard Ground",
+   descname = _ "Hard Ground 2",
    editor_category = "wasteland",
    is = "arable",
    tooltips = {
@@ -460,7 +460,7 @@ world:new_terrain_type{
 
 world:new_terrain_type{
    name = "hardground3",
-   descname = _ "Hard Ground",
+   descname = _ "Hard Ground 3",
    editor_category = "wasteland",
    is = "arable",
    tooltips = {
@@ -480,7 +480,7 @@ world:new_terrain_type{
 
 world:new_terrain_type{
    name = "hardground4",
-   descname = _ "Hard Ground",
+   descname = _ "Hard Ground 4",
    editor_category = "wasteland",
    is = "arable",
    tooltips = {
@@ -510,13 +510,13 @@ world:new_terrain_type{
    dither_layer = 360,
    temperature = 120,
    humidity = 0.1,
-   fertility = 0.25,
+   fertility = 0.2,
 }
 
 
 world:new_terrain_type{
    name = "wasteland_mountain1",
-   descname = _ "Mountain",
+   descname = _ "Mountain 1",
    editor_category = "wasteland",
    is = "mineable",
    valid_resources = { "coal", "iron", "gold", "stones" },
@@ -532,7 +532,7 @@ world:new_terrain_type{
 
 world:new_terrain_type{
    name = "wasteland_mountain2",
-   descname = _ "Mountain",
+   descname = _ "Mountain 2",
    editor_category = "wasteland",
    is = "mineable",
    valid_resources = { "coal", "iron", "gold", "stones" },
@@ -548,7 +548,7 @@ world:new_terrain_type{
 
 world:new_terrain_type{
    name = "wasteland_mountain3",
-   descname = _ "Mountain",
+   descname = _ "Mountain 3",
    editor_category = "wasteland",
    is = "mineable",
    valid_resources = { "coal", "iron", "gold", "stones" },
@@ -564,7 +564,7 @@ world:new_terrain_type{
 
 world:new_terrain_type{
    name = "wasteland_mountain4",
-   descname = _ "Mountain",
+   descname = _ "Mountain 4",
    editor_category = "wasteland",
    is = "mineable",
    valid_resources = { "coal", "iron", "gold", "stones" },
@@ -579,7 +579,7 @@ world:new_terrain_type{
 
 world:new_terrain_type{
    name = "wasteland_forested_mountain1",
-   descname = _ "Forested Mountain",
+   descname = _ "Forested Mountain 1",
    editor_category = "wasteland",
    is = "mineable",
    tooltips = {
@@ -598,7 +598,7 @@ world:new_terrain_type{
 
 world:new_terrain_type{
    name = "wasteland_forested_mountain2",
-   descname = _ "Forested Mountain",
+   descname = _ "Forested Mountain 2",
    editor_category = "wasteland",
    is = "mineable",
    tooltips = {
@@ -633,7 +633,7 @@ world:new_terrain_type{
 
 world:new_terrain_type{
    name = "lava-stone1",
-   descname = _ "Lava Rocks",
+   descname = _ "Lava Rocks 1",
    editor_category = "wasteland",
    is = "unreachable",
    valid_resources = {},
@@ -650,7 +650,7 @@ world:new_terrain_type{
 
 world:new_terrain_type{
    name = "lava-stone2",
-   descname = _ "Lava Rocks",
+   descname = _ "Lava Rocks 2",
    editor_category = "wasteland",
    is = "unreachable",
    valid_resources = {},
@@ -689,7 +689,7 @@ world:new_terrain_type{
 
 world:new_terrain_type{
    name = "tundra",
-   descname = _ "Tundra",
+   descname = _ "Tundra 1",
    editor_category = "winter",
    is = "arable",
    tooltips = {
@@ -701,15 +701,15 @@ world:new_terrain_type{
    default_resource_amount = 10,
    textures = { pics_dir .. "winter/tundra_00.png" },
    dither_layer = 230,
-   temperature = 45,
+   temperature = 50,
    humidity = 0.85,
-   fertility = 0.5,
+   fertility = 0.45,
 }
 
 
 world:new_terrain_type{
    name = "tundra2",
-   descname = _ "Tundra",
+   descname = _ "Tundra 2",
    editor_category = "winter",
    is = "arable",
    tooltips = {
@@ -729,7 +729,7 @@ world:new_terrain_type{
 
 world:new_terrain_type{
    name = "tundra3",
-   descname = _ "Tundra",
+   descname = _ "Tundra 3",
    editor_category = "winter",
    is = "arable",
    tooltips = {
@@ -797,7 +797,7 @@ world:new_terrain_type{
 
 world:new_terrain_type{
    name = "winter_mountain1",
-   descname = _ "Mountain",
+   descname = _ "Mountain 1",
    editor_category = "winter",
    is = "mineable",
    valid_resources = { "coal", "iron", "gold", "stones" },
@@ -813,7 +813,7 @@ world:new_terrain_type{
 
 world:new_terrain_type{
    name = "winter_mountain2",
-   descname = _ "Mountain",
+   descname = _ "Mountain 2",
    editor_category = "winter",
    is = "mineable",
    valid_resources = { "coal", "iron", "gold", "stones" },
@@ -829,7 +829,7 @@ world:new_terrain_type{
 
 world:new_terrain_type{
    name = "winter_mountain3",
-   descname = _ "Mountain",
+   descname = _ "Mountain 3",
    editor_category = "winter",
    is = "mineable",
    valid_resources = { "coal", "iron", "gold", "stones" },
@@ -845,7 +845,7 @@ world:new_terrain_type{
 
 world:new_terrain_type{
    name = "winter_mountain4",
-   descname = _ "Mountain",
+   descname = _ "Mountain 4",
    editor_category = "winter",
    is = "mineable",
    valid_resources = { "coal", "iron", "gold", "stones" },
@@ -860,7 +860,7 @@ world:new_terrain_type{
 
 world:new_terrain_type{
    name = "winter_forested_mountain1",
-   descname = _ "Forested Mountain",
+   descname = _ "Forested Mountain 1",
    editor_category = "winter",
    is = "mineable",
    tooltips = {
@@ -879,7 +879,7 @@ world:new_terrain_type{
 
 world:new_terrain_type{
    name = "winter_forested_mountain2",
-   descname = _ "Forested Mountain",
+   descname = _ "Forested Mountain 2",
    editor_category = "winter",
    is = "mineable",
    tooltips = {
@@ -930,7 +930,7 @@ world:new_terrain_type{
 
 world:new_terrain_type{
    name = "ice_floes",
-   descname = _ "Ice Floes",
+   descname = _ "Ice Floes 1",
    editor_category = "winter",
    is = "water",
    valid_resources = {"fish"},
@@ -947,7 +947,7 @@ world:new_terrain_type{
 
 world:new_terrain_type{
    name = "ice_floes2",
-   descname = _ "Ice Floes",
+   descname = _ "Ice Floes 2",
    editor_category = "winter",
    is = "water",
    valid_resources = {"fish"},
@@ -982,23 +982,6 @@ world:new_terrain_type{
 ---------------------
 --  Former Desert  --
 ---------------------
-
-
-world:new_terrain_type{
-   name = "desert4",
-   descname = _ "Desert",
-   editor_category = "desert",
-   is = "arable",
-   valid_resources = {"water"},
-   default_resource = "water",
-   default_resource_amount = 2,
-   textures = { pics_dir .. "desert/desert4_00.png" },
-   dither_layer = 270,
-   temperature = 168,
-   humidity = 0.001,
-   fertility = 0.1,
-}
-
 
 world:new_terrain_type{
    name = "drysoil",
@@ -1096,7 +1079,7 @@ world:new_terrain_type{
 
 world:new_terrain_type{
    name = "mountain1",
-   descname = _ "Mountain",
+   descname = _ "Mountain 1",
    editor_category = "desert",
    is = "mineable",
    valid_resources = { "coal", "iron", "gold", "stones" },
@@ -1112,7 +1095,7 @@ world:new_terrain_type{
 
 world:new_terrain_type{
    name = "mountain2",
-   descname = _ "Mountain",
+   descname = _ "Mountain 2",
    editor_category = "desert",
    is = "mineable",
    valid_resources = { "coal", "iron", "gold", "stones" },
@@ -1128,7 +1111,7 @@ world:new_terrain_type{
 
 world:new_terrain_type{
    name = "mountain3",
-   descname = _ "Mountain",
+   descname = _ "Mountain 3",
    editor_category = "desert",
    is = "mineable",
    valid_resources = { "coal", "iron", "gold", "stones" },
@@ -1144,7 +1127,7 @@ world:new_terrain_type{
 
 world:new_terrain_type{
    name = "mountain4",
-   descname = _ "Mountain",
+   descname = _ "Mountain 4",
    editor_category = "desert",
    is = "mineable",
    valid_resources = { "coal", "iron", "gold", "stones" },
@@ -1159,7 +1142,7 @@ world:new_terrain_type{
 
 world:new_terrain_type{
    name = "desert_forested_mountain1",
-   descname = _ "Forested Mountain",
+   descname = _ "Forested Mountain 1",
    editor_category = "desert",
    is = "mineable",
    tooltips = {
@@ -1178,7 +1161,7 @@ world:new_terrain_type{
 
 world:new_terrain_type{
    name = "desert_forested_mountain2",
-   descname = _ "Forested Mountain",
+   descname = _ "Forested Mountain 2",
    editor_category = "desert",
    is = "mineable",
    tooltips = {
@@ -1197,7 +1180,7 @@ world:new_terrain_type{
 
 world:new_terrain_type{
    name = "desert1",
-   descname = _ "Desert",
+   descname = _ "Desert 1",
    editor_category = "desert",
    is = "walkable",
    valid_resources = {},
@@ -1213,7 +1196,7 @@ world:new_terrain_type{
 
 world:new_terrain_type{
    name = "desert2",
-   descname = _ "Desert",
+   descname = _ "Desert 2",
    editor_category = "desert",
    is = "walkable",
    valid_resources = {},
@@ -1229,7 +1212,7 @@ world:new_terrain_type{
 
 world:new_terrain_type{
    name = "desert3",
-   descname = _ "Desert",
+   descname = _ "Desert 3",
    editor_category = "desert",
    is = "walkable",
    valid_resources = {},
@@ -1240,6 +1223,22 @@ world:new_terrain_type{
    temperature = 178,
    humidity = 0.001,
    fertility = 0.001,
+}
+
+
+world:new_terrain_type{
+   name = "desert4",
+   descname = _ "Desert 4",
+   editor_category = "desert",
+   is = "arable",
+   valid_resources = {"water"},
+   default_resource = "water",
+   default_resource_amount = 2,
+   textures = { pics_dir .. "desert/desert4_00.png" },
+   dither_layer = 270,
+   temperature = 168,
+   humidity = 0.001,
+   fertility = 0.1,
 }
 
 

@@ -39,15 +39,15 @@ const FindImmovable & find_immovable_always_true()
 
 bool FindImmovableSize              ::accept(const BaseImmovable & imm) const {
 	int32_t const size = imm.get_size();
-	return m_min <= size && size <= m_max;
+	return min <= size && size <= max;
 }
 
 bool FindImmovableType              ::accept(const BaseImmovable & imm) const {
-	return m_type == imm.descr().type();
+	return type == imm.descr().type();
 }
 
 bool FindImmovableAttribute         ::accept(const BaseImmovable & imm) const {
-	return imm.has_attribute(m_attrib);
+	return imm.has_attribute(attrib);
 }
 
 bool FindImmovablePlayerImmovable   ::accept(const BaseImmovable & imm) const {
@@ -75,7 +75,7 @@ bool FindImmovableByDescr::accept(const BaseImmovable & baseimm) const {
 bool FindFlagOf::accept(const BaseImmovable & baseimm) const {
 	if (upcast(const Flag, flag, &baseimm)) {
 		if (Building * building = flag->get_building()) {
-			if (finder_.accept(*building))
+			if (finder.accept(*building))
 				return true;
 		}
 	}

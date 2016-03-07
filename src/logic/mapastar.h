@@ -29,7 +29,7 @@ namespace Widelands {
 struct MapAStarBase {
 	MapAStarBase(Map & m) :
 		map(m),
-		pathfields(m.m_pathfieldmgr->allocate())
+		pathfields(m.pathfieldmgr_->allocate())
 	{
 	}
 
@@ -53,37 +53,37 @@ protected:
 
 struct StepEvalAStar {
 	StepEvalAStar(Coords target) :
-		m_target(target),
-		m_estimator_bias(0),
-		m_conservative(true),
-		m_swim(false)
+		target_(target),
+		estimator_bias_(0),
+		conservative_(true),
+		swim_(false)
 	{
 	}
 
 	int32_t estimate(Map & map, FCoords pos) const
 	{
-		int32_t est = m_estimator_bias;
-		if (m_conservative)
-			est += map.calc_cost_lowerbound(pos, m_target);
+		int32_t est = estimator_bias_;
+		if (conservative_)
+			est += map.calc_cost_lowerbound(pos, target_);
 		else
-			est += map.calc_cost_estimate(pos, m_target);
+			est += map.calc_cost_estimate(pos, target_);
 		return est;
 	}
 
 	int32_t stepcost(Map & map, FCoords from, int32_t /* fromcost */, WalkingDir dir, FCoords to) const
 	{
 		if
-			((m_swim && !(to.field->nodecaps() & MOVECAPS_SWIM)) ||
-			 (!m_swim && !(to.field->nodecaps() & MOVECAPS_WALK)))
+			((swim_ && !(to.field->nodecaps() & MOVECAPS_SWIM)) ||
+			 (!swim_ && !(to.field->nodecaps() & MOVECAPS_WALK)))
 			return -1;
 
 		return map.calc_cost(from, dir);
 	}
 
-	Coords m_target;
-	int32_t m_estimator_bias;
-	bool m_conservative;
-	bool m_swim;
+	Coords target_;
+	int32_t estimator_bias_;
+	bool conservative_;
+	bool swim_;
 };
 
 

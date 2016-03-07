@@ -84,12 +84,12 @@ public:
 };
 
 struct FindNodeCaps {
-	FindNodeCaps(uint8_t mincaps) : m_mincaps(mincaps) {}
+	FindNodeCaps(uint8_t init_mincaps) : mincaps(init_mincaps) {}
 
 	bool accept(const Map &, const FCoords &) const;
 
 private:
-	uint8_t m_mincaps;
+	uint8_t mincaps;
 };
 
 /// Accepts a node if it is accepted by all subfunctors.
@@ -108,7 +108,7 @@ private:
 		Subfunctor(const FindNode &, bool init_negate);
 	};
 
-	std::vector<Subfunctor> m_subfunctors;
+	std::vector<Subfunctor> subfunctors;
 };
 
 /// Accepts a node based on what can be built there.
@@ -123,12 +123,12 @@ struct FindNodeSize {
 		sizePort,         //  can build a port on this field
 	};
 
-	FindNodeSize(Size size) : m_size(size) {}
+	FindNodeSize(Size init_size) : size(init_size) {}
 
 	bool accept(const Map &, const FCoords &) const;
 
 private:
-	Size m_size;
+	Size size;
 };
 
 /// Accepts a node based on the size of the immovable there (if any).
@@ -140,44 +140,44 @@ struct FindNodeImmovableSize {
 		sizeBig    = 1 << 3
 	};
 
-	FindNodeImmovableSize(uint32_t sizes) : m_sizes(sizes) {}
+	FindNodeImmovableSize(uint32_t init_sizes) : sizes(init_sizes) {}
 
 	bool accept(const Map &, const FCoords &) const;
 
 private:
-	uint32_t m_sizes;
+	uint32_t sizes;
 };
 
 /// Accepts a node if it has an immovable with a given attribute.
 struct FindNodeImmovableAttribute {
-	FindNodeImmovableAttribute(uint32_t attrib) : m_attribute(attrib) {}
+	FindNodeImmovableAttribute(uint32_t attrib) : attribute(attrib) {}
 
 	bool accept(const Map &, const FCoords &) const;
 
 private:
-	uint32_t m_attribute;
+	uint32_t attribute;
 };
 
 
 /// Accepts a node if it has at least one of the given resource.
 struct FindNodeResource {
-	FindNodeResource(uint8_t res) : m_resource(res) {}
+	FindNodeResource(uint8_t res) : resource(res) {}
 
 	bool accept(const Map &, const FCoords &) const;
 
 private:
-	uint8_t m_resource;
+	uint8_t resource;
 };
 
 
 /// Accepts a node if it has the given resource type and remaining capacity.
 struct FindNodeResourceBreedable {
-	FindNodeResourceBreedable(uint8_t res) : m_resource(res) {}
+	FindNodeResourceBreedable(uint8_t res) : resource(res) {}
 
 	bool accept(const Map &, const FCoords &) const;
 
 private:
-	uint8_t m_resource;
+	uint8_t resource;
 };
 
 /// Accepts a node if it is a shore node in the sense that it is walkable
