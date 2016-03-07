@@ -119,6 +119,7 @@ if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-unreachable-code")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-documentation")
 
+  wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Werror=deprecated")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Werror=non-pod-varargs")
 
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Qunused-arguments")
