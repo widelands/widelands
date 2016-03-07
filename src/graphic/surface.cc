@@ -51,13 +51,16 @@ FloatPoint calculate_line_normal(const PointType& start, const PointType& end) {
 	return FloatPoint(-dy / len, dx / len);
 }
 
-// Tesselates the line made up of 'points' ino triangles and converts them into OpenGL space for a
-// renderbuffer of dimensions 'w' and 'h'.
-void tesselate_line_strip(int w,
-                          int h,
+// Tesselates the line made up of 'points' ino triangles and converts them into
+// OpenGL space for a renderbuffer of dimensions 'w' and 'h'.
+// We need for each line four points. We do not make sure that these quads are
+// not properly joined at the corners which does not seem to matter a lot for
+// the thin lines that we draw in Widelands.
+void tesselate_line_strip(const int w,
+                          const int h,
                           const RGBColor& color,
-                          float line_width,
-                          std::vector<FloatPoint> points,
+                          const float line_width,
+                          const std::vector<FloatPoint>& points,
                           std::vector<DrawLineProgram::PerVertexData>* vertices) {
 	const float r = color.r / 255.;
 	const float g = color.g / 255.;
@@ -134,14 +137,9 @@ void Surface::draw_line_strip(std::vector<FloatPoint> points,
 	}
 
 	std::vector<DrawLineProgram::PerVertexData> vertices;
-	// We need for each point: the number of triangles for the circle around + 2
-	// more triangles for the line to the next point. A triangle has 3 points.
+	// Each line needs 2 triangles.
 	vertices.reserve(3 * 2 * points.size());
-
-	const auto w = width();
-	const auto h = height();
-
-	tesselate_line_strip(w, h, color, line_width, points, &vertices);
+	tesselate_line_strip(width(), height(), color, line_width, points, &vertices);
 	do_draw_line_strip(std::move(vertices));
 }
 

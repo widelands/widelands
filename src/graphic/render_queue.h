@@ -148,7 +148,8 @@ public:
 		BlendMode blend_mode;
 
 		// This is a logical union, i.e. only one of these members will be filled
-		// with useful data. It cannot be because some items are non POD.
+		// with useful data. It cannot be a true union because some items are not
+		// plain-old data types.
 		BlitArguments blit_arguments;
 		TerrainArguments terrain_arguments;
 		RectArguments rect_arguments;
