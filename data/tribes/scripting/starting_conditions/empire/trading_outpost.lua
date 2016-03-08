@@ -8,7 +8,7 @@ set_textdomain("tribes")
 
 return {
    descname = _"Trading Outpost",
-   tooltip = _"If this player runs out of important wares, they will be replenished for free",
+   tooltip = _"If this player runs low on important wares, they will be replenished for free",
    func = function(player, shared_in_start)
 
       local sf = wl.Game().map.player_slots[player.number].starting_field
