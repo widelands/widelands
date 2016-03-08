@@ -197,7 +197,7 @@ train
 Increases the level of a specified property of a soldier. No further documentation available.
 
 play_sound
-------
+----------
 Plays a soundFX.
 
 Parameter syntax::
