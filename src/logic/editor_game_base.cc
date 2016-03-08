@@ -184,7 +184,7 @@ void EditorGameBase::inform_players_about_ownership
 	(MapIndex const i, PlayerNumber const new_owner)
 {
 	iterate_players_existing_const(plnum, MAX_PLAYERS, *this, p) {
-		Player::Field & player_field = p->m_fields[i];
+		Player::Field & player_field = p->fields_[i];
 		if (1 < player_field.vision) {
 			player_field.owner = new_owner;
 		}
@@ -195,7 +195,7 @@ void EditorGameBase::inform_players_about_immovable
 {
 	if (!Road::is_road_descr(descr))
 		iterate_players_existing_const(plnum, MAX_PLAYERS, *this, p) {
-			Player::Field & player_field = p->m_fields[i];
+			Player::Field & player_field = p->fields_[i];
 			if (1 < player_field.vision) {
 				player_field.map_object_descr[TCoords<>::None] = descr;
 			}
@@ -523,7 +523,7 @@ void EditorGameBase::set_road
 	MapIndex const           i = f        .field - &first_field;
 	MapIndex const neighbour_i = neighbour.field - &first_field;
 	iterate_players_existing_const(plnum, MAX_PLAYERS, *this, p) {
-		Player::Field & first_player_field = *p->m_fields;
+		Player::Field & first_player_field = *p->fields_;
 		Player::Field & player_field = (&first_player_field)[i];
 		if
 			(1 < player_field                      .vision

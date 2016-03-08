@@ -213,9 +213,9 @@ private:
 	Widelands::EconomyObserver* get_economy_observer(Widelands::Economy&);
 	Widelands::BuildingObserver& get_building_observer(char const*);
 
-	void gain_immovable(Widelands::PlayerImmovable&);
+	void gain_immovable(Widelands::PlayerImmovable&, bool found_on_load = false);
 	void lose_immovable(const Widelands::PlayerImmovable&);
-	void gain_building(Widelands::Building&);
+	void gain_building(Widelands::Building&, bool found_on_load);
 	void lose_building(const Widelands::Building&);
 	void gain_ship(Widelands::Ship&, NewShip);
 	void check_ship_in_expedition(Widelands::ShipObserver&, uint32_t);

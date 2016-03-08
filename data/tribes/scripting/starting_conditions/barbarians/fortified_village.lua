@@ -10,18 +10,17 @@ return {
    descname = _ "Fortified Village",
    func =  function(plr, shared_in_start)
 
-   local sf = wl.Game().map.player_slots[plr.number].starting_field
+      local sf = wl.Game().map.player_slots[plr.number].starting_field
 
-   if shared_in_start then
-      sf = shared_in_start
-   else
-      plr:allow_workers("all")
-   end
+      if shared_in_start then
+         sf = shared_in_start
+      else
+         plr:allow_workers("all")
+      end
 
-   local h = plr:place_building("barbarians_citadel", sf, false, true)
-   h:set_soldiers{[{0,0,0,0}] = 12}
+      local h = plr:place_building("barbarians_citadel", sf, false, true)
+      h:set_soldiers{[{0,0,0,0}] = 12}
 
-   if not pcall(function()
        place_building_in_region(plr, "barbarians_warehouse", sf:region(7), {
          wares = {
             ax = 5,
@@ -78,25 +77,17 @@ return {
       place_building_in_region(plr, "barbarians_helmsmithy", sf:region(12), {
          wares = { iron = 4, gold = 4 }
       })
-      place_building_in_region(plr, "barbarians_metalworks", sf:region(12), {
+      place_building_in_region(plr, "barbarians_metal_workshop", sf:region(12), {
          wares = { iron = 8 },
       })
       place_building_in_region(plr, "barbarians_ax_workshop", sf:region(12), {
          wares = { coal = 8 },
       })
-      place_building_in_region(plr, "barbarians_hardener", sf:region(12), {
+      place_building_in_region(plr, "barbarians_wood_hardener", sf:region(12), {
          wares = { log = 1 },
       })
       place_building_in_region(plr, "barbarians_lime_kiln", sf:region(12), {
          wares = { granite = 6, coal = 3 },
       })
-   end) then
-      plr:send_message(
-         -- TRANSLATORS: Short for "Not enough space"
-         _"No Space",
-         rt(p(_([[Some of your starting buildings didn’t have enough room and weren’t built. You are at a disadvantage with this; consider restarting this map with a fair starting condition.]]))),
-         {popup=true, heading=_"Not enough space"}
-      )
    end
-end,
 }

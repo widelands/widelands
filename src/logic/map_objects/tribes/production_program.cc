@@ -1517,12 +1517,12 @@ void ProductionProgram::ActTrain::execute
 	return ps.program_step(game);
 }
 
-ProductionProgram::ActPlayFX::ActPlayFX(char * parameters) {
+ProductionProgram::ActPlaySound::ActPlaySound(char * parameters) {
 	try {
 		bool reached_end;
 		const std::string& filepath = next_word(parameters, reached_end);
 		const std::string& filename = next_word(parameters, reached_end);
-		name = filepath + "/" + filename;
+		name = filepath + g_fs->file_separator() + filename;
 
 		if (!reached_end) {
 			char * endp;
@@ -1536,11 +1536,11 @@ ProductionProgram::ActPlayFX::ActPlayFX(char * parameters) {
 
 		g_sound_handler.load_fx_if_needed(filepath, filename, name);
 	} catch (const WException & e) {
-		throw GameDataError("playFX: %s", e.what());
+		throw GameDataError("play_sound: %s", e.what());
 	}
 }
 
-void ProductionProgram::ActPlayFX::execute
+void ProductionProgram::ActPlaySound::execute
 	(Game & game, ProductionSite & ps) const
 {
 	g_sound_handler.play_fx(name, ps.position_, priority);
@@ -1769,9 +1769,9 @@ ProductionProgram::ProductionProgram(const std::string& init_name,
 		} else if (boost::iequals(parts[0], "train")) {
 			actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
 										 new ActTrain(arguments.get())));
-		} else if (boost::iequals(parts[0], "playFX")) {
+		} else if (boost::iequals(parts[0], "play_sound")) {
 			actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
-										 new ActPlayFX(arguments.get())));
+										 new ActPlaySound(arguments.get())));
 		} else if (boost::iequals(parts[0], "construct")) {
 			actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
 										 new ActConstruct(arguments.get(), name(), building)));

@@ -447,7 +447,11 @@ void RealFSImpl::fs_rename
 {
 	const std::string fullname1 = canonicalize_name(old_name);
 	const std::string fullname2 = canonicalize_name(new_name);
-	rename(fullname1.c_str(), fullname2.c_str());
+	if (rename(fullname1.c_str(), fullname2.c_str()) != 0)
+		throw wexception("DiskFileSystem: unable to rename %s to %s: %s",
+							fullname1.c_str(),
+							fullname1.c_str(),
+							strerror(errno));
 }
 
 

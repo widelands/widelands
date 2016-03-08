@@ -98,6 +98,7 @@ struct NetClient :
 	// ChatProvider interface
 	void send(const std::string & msg) override;
 	const std::vector<ChatMessage> & get_messages() const override;
+	bool has_been_set() const override {return true;}
 
 private:
 	/// for unique backupname

@@ -477,7 +477,10 @@ void DefaultAI::late_initialization() {
 	tribe_ = &player_->tribe();
 	const uint32_t gametime = game().get_gametime();
 
-	log("ComputerPlayer(%d): initializing (%u)\n", player_number(), static_cast<unsigned int>(type_));
+	log("ComputerPlayer(%d): initializing as type %u\n", player_number(), static_cast<unsigned int>(type_));
+	if (player_->team_number() > 0) {
+		log ("    ... member of team %d\n", player_->team_number());
+	}
 
 	wares.resize(game().tribes().nrwares());
 	for (DescriptionIndex i = 0; i < static_cast<DescriptionIndex>(game().tribes().nrwares()); ++i) {
@@ -508,6 +511,7 @@ void DefaultAI::late_initialization() {
 		bo.cnt_under_construction = 0;
 		bo.cnt_target = 1;  // default for everything
 		bo.cnt_limit_by_aimode = std::numeric_limits<int32_t>::max();
+		bo.cnt_upgrade_pending = 0;
 		bo.stocklevel = 0;
 		bo.stocklevel_time = 0;
 		bo.last_dismantle_time = 0;
@@ -824,7 +828,7 @@ void DefaultAI::late_initialization() {
 				//  Guard by a set - immovables might be on several nodes at once.
 				if (&imm->owner() == player_ && !found_immovables.count(imm)) {
 					found_immovables.insert(imm);
-					gain_immovable(*imm);
+					gain_immovable(*imm, true);
 				}
 			}
 		}
@@ -3114,74 +3118,134 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 
 	Map& map = game().map();
 
-	// first we try to upgrade
-	// Upgrading policy
-	// a) if there are two buildings and none enhanced and there are workers
-	// available, one is to be enhanced
-	// b) if there are two buildings
-	// statistics percents are decisive
-	// c) yet there are buildings that might be upgraded, even when
-	// there is no second buiding of the kind (flag upgrade_substitutes)
+	// The code here is bit complicated
+	// a) Either this site is pending for upgrade, if ready, order the upgrade
+	// b) other site of type is pending for upgrade
+	// c) if none of above, we can consider upgrade of this one
 
 	const DescriptionIndex enhancement = site.site->descr().enhancement();
-	if (connected_to_wh && enhancement != INVALID_INDEX &&
-		// if upgrade does not subsitute, we need to have two buildings at least
-		((site.bo->cnt_built - site.bo->unoccupied_count > 1 && site.bo->upgrade_extends)
-		||
-		site.bo->upgrade_substitutes) &&
-	    gametime > 45 * 60 * 1000 &&
-	    gametime > site.built_time + 20 * 60 * 1000) {
 
-		// Only enhance buildings that are allowed (scenario mode)
-		// do not do decisions too fast
-		if (player_->is_building_type_allowed(enhancement)) {
+	bool considering_upgrade = enhancement != INVALID_INDEX;
 
-			const BuildingDescr& bld = *tribe_->get_building_descr(enhancement);
-			BuildingObserver& en_bo = get_building_observer(bld.name().c_str());
-			bool doing_upgrade = false;
+	// First we check for rare case when input wares are set to 0 but AI is not aware that
+	// the site is pending for upgrade - one possible cause is this is a freshly loaded game
+	if (!site.upgrade_pending) {
+		bool resetting_wares = false;
+		for (auto& queue : site.site->warequeues()) {
+			if (queue->get_max_fill() == 0) {
+				resetting_wares = true;
+				game().send_player_set_ware_max_fill(*site.site, queue->get_ware(), queue->get_max_size());
+			}
+		}
+		if (resetting_wares) {
+			log(" %d: AI: input queues were reset to max for %s (game just loaded?)\n",
+			player_number(),
+			site.bo->name);
+			return true;
+		}
+	}
 
-			if (gametime - en_bo.construction_decision_time >= 10 * 60 * 1000 &&
-			    (en_bo.cnt_under_construction + en_bo.unoccupied_count) == 0) {
+	if (site.upgrade_pending) {
+		// The site is in process of emptying its input queues
+		// Counting remaining wares in the site now
+		int32_t left_wares = 0;
+		for (auto& queue : site.site->warequeues()) {
+			left_wares += queue->get_filled();
+		}
+		// Do nothing when some wares are left, but do not wait more then 4 minutes
+		if (site.bo->construction_decision_time + 4 * 60 * 1000 > gametime
+			&&
+			left_wares > 0) {
+				return false;
+		}
+		assert (site.bo->cnt_upgrade_pending == 1);
+		assert(enhancement != INVALID_INDEX);
+		game().send_player_enhance_building(*site.site, enhancement);
+		return true;
+	} else if (site.bo->cnt_upgrade_pending > 0) {
+		// some other site of this type is in pending for upgrade
+		assert (site.bo->cnt_upgrade_pending == 1);
+		return false;
+	}
+	assert (site.bo->cnt_upgrade_pending == 0);
 
-				// don't upgrade without workers
-				if (site.site->has_workers(enhancement, game())) {
+	// Of course type of productionsite must be allowed
+	if (considering_upgrade && !player_->is_building_type_allowed(enhancement)) {
+		considering_upgrade = false;
+	}
 
-					// forcing first upgrade
-					if (en_bo.total_count() == 0) {
-						doing_upgrade = true;
-					}
+	// Site must be connected to warehouse
+	if (considering_upgrade && !connected_to_wh) {
+		considering_upgrade = false;
+	}
 
-					if (en_bo.total_count() == 1) {
-						// If the upgrade itself can be upgraded futher, we are more willing to upgrade 2nd building
-						if (en_bo.upgrade_extends || en_bo.upgrade_substitutes) {
-							if (en_bo.current_stats > 30) {
-								doing_upgrade = true;
-							}
-						} else if (en_bo.current_stats > 50) {
-							doing_upgrade = true;
-						}
-					}
+	// If upgrade produces new outputs, we upgrade unless the site is younger
+	// then 10 minutes. Otherwise the site must be older then 20 minutes and
+	// gametime > 45 minutes.
+	if (considering_upgrade) {
+		if (site.bo->upgrade_extends) {
+			if (gametime < site.built_time + 10 * 60 * 1000) {
+				considering_upgrade = false;
+			}
+		} else {
+			if (gametime < 45 * 60 * 1000
+				||
+				gametime < site.built_time + 20 * 60 * 1000) {
+					considering_upgrade = false;
+			}
+		}
+	}
 
-					if (en_bo.total_count() > 1) {
-						if (en_bo.current_stats > 80) {
-								doing_upgrade = true;
-						}
-					}
+	// No upgrade without proper workers
+	if (considering_upgrade && !site.site->has_workers(enhancement, game())) {
+		considering_upgrade = false;
+	}
 
-					// Dont forget about limitation of number of buildings
-					if (en_bo.cnt_limit_by_aimode <= en_bo.total_count() - en_bo.unconnected_count) {
-						doing_upgrade = false;
-					}
+	if (considering_upgrade) {
+
+		const BuildingDescr& bld = *tribe_->get_building_descr(enhancement);
+		BuildingObserver& en_bo = get_building_observer(bld.name().c_str());
+		bool doing_upgrade = false;
+
+		// 10 minutes is a time to productions statics to settle
+		if ((en_bo.last_building_built == kNever || gametime - en_bo.last_building_built >= 10 * 60 * 1000) &&
+		    (en_bo.cnt_under_construction + en_bo.unoccupied_count) == 0) {
+
+			// forcing first upgrade
+			if (en_bo.total_count() == 0) {
+				doing_upgrade = true;
+			}
+
+			if (en_bo.total_count() == 1) {
+				if (en_bo.current_stats > 55) {
+					doing_upgrade = true;
 				}
 			}
 
-			// Enhance if enhanced building is useful
-			// additional: we dont want to lose the old building
-			if (doing_upgrade) {
-				game().send_player_enhance_building(*site.site, enhancement);
-				en_bo.construction_decision_time = gametime;
-				return true;
+			if (en_bo.total_count() > 1) {
+				if (en_bo.current_stats > 75) {
+						doing_upgrade = true;
+				}
 			}
+
+			// Don't forget about limitation of number of buildings
+			if (en_bo.aimode_limit_status() != AiModeBuildings::kAnotherAllowed) {
+				doing_upgrade = false;
+			}
+		}
+
+		// Here we just restrict input wares to 0 and set flag 'upgrade_pending' to true
+		if (doing_upgrade) {
+
+			// reducing input queues
+			for (auto& queue : site.site->warequeues()) {
+				game().send_player_set_ware_max_fill(*site.site, queue->get_ware(), 0);
+			}
+			site.bo->construction_decision_time = gametime;
+			en_bo.construction_decision_time = gametime;
+			site.upgrade_pending = true;
+			site.bo->cnt_upgrade_pending += 1;
+			return true;
 		}
 	}
 
@@ -4656,9 +4720,9 @@ BuildingObserver& DefaultAI::get_building_observer(char const* const name) {
 }
 
 // this is called whenever we gain ownership of a PlayerImmovable
-void DefaultAI::gain_immovable(PlayerImmovable& pi) {
+void DefaultAI::gain_immovable(PlayerImmovable& pi, const bool found_on_load) {
 	if (upcast(Building, building, &pi)) {
-		gain_building(*building);
+		gain_building(*building, found_on_load);
 	} else if (upcast(Flag const, flag, &pi)) {
 		new_flags.push_back(flag);
 	} else if (upcast(Road const, road, &pi)) {
@@ -5012,7 +5076,7 @@ void DefaultAI::expedition_management(ShipObserver& so) {
 }
 
 // this is called whenever we gain a new building
-void DefaultAI::gain_building(Building& b) {
+void DefaultAI::gain_building(Building& b, const bool found_on_load) {
 
 	BuildingObserver& bo = get_building_observer(b.descr().name().c_str());
 
@@ -5050,10 +5114,15 @@ void DefaultAI::gain_building(Building& b) {
 			productionsites.back().site = &dynamic_cast<ProductionSite&>(b);
 			productionsites.back().bo = &bo;
 			productionsites.back().bo->new_building_overdue = 0;
-			productionsites.back().built_time = gametime;
+			if (found_on_load && gametime > 5 * 60 * 1000) {
+				productionsites.back().built_time = gametime - 5 * 60 * 1000;
+			} else {
+				productionsites.back().built_time = gametime;
+			}
 			productionsites.back().unoccupied_till = gametime;
 			productionsites.back().stats_zero = 0;
 			productionsites.back().no_resources_since =  kNever;
+			productionsites.back().upgrade_pending = false;
 			productionsites.back().bo->unoccupied_count += 1;
 			if (bo.is_shipyard) {
 				marine_task_queue.push_back(kStopShipyard);
@@ -5175,6 +5244,10 @@ void DefaultAI::lose_building(const Building& b) {
 			     i != productionsites.end();
 			     ++i)
 				if (i->site == &b) {
+					if (i->upgrade_pending) {
+						bo.cnt_upgrade_pending -= 1;
+					}
+					assert (bo.cnt_upgrade_pending == 0 || bo.cnt_upgrade_pending == 1);
 					productionsites.erase(i);
 					break;
 				}

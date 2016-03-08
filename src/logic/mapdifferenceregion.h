@@ -40,7 +40,7 @@ namespace Widelands {
 template <typename AreaType = Area<> > struct MapDifferenceRegion {
 	MapDifferenceRegion
 		(const Map & map, AreaType area, Direction direction)
-		: m_area(area), m_remaining_in_edge(area.radius), m_passed_corner(false)
+		: area_(area), remaining_in_edge_(area.radius), passed_corner_(false)
 	{
 		assert(1 <= direction);
 		assert     (direction <= 6);
@@ -50,7 +50,7 @@ template <typename AreaType = Area<> > struct MapDifferenceRegion {
 #define DIRECTION_CASE(dir, neighbour_function)                               \
       case dir:                                                               \
          for (; area.radius; --area.radius)                                   \
-            map.neighbour_function(m_area, &m_area);                          \
+				map.neighbour_function(area_, &area_);                            \
          break;                                                               \
 
 		DIRECTION_CASE(WALK_NW, get_tln);
@@ -63,10 +63,10 @@ template <typename AreaType = Area<> > struct MapDifferenceRegion {
 		}
 		--direction; if (!direction) direction = 6;
 		--direction; if (!direction) direction = 6;
-		m_direction = direction;
+		direction_ = direction;
 	}
 
-	typename AreaType::CoordsType & location() const {return m_area;}
+	typename AreaType::CoordsType & location() const {return area_;}
 
 	/**
 	 * Moves on to the next location. The return value indicates whether the new
@@ -80,12 +80,12 @@ template <typename AreaType = Area<> > struct MapDifferenceRegion {
 
 	void move_to_other_side(const Map & map);
 
-	typename AreaType::RadiusType radius() const {return m_area.radius;}
+	typename AreaType::RadiusType radius() const {return area_.radius;}
 private:
-	AreaType                       m_area;
-	typename AreaType::RadiusType m_remaining_in_edge;
-	bool                            m_passed_corner;
-	Direction                       m_direction;
+	AreaType                       area_;
+	typename AreaType::RadiusType remaining_in_edge_;
+	bool                            passed_corner_;
+	Direction                       direction_;
 };
 
 }

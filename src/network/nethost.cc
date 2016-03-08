@@ -482,6 +482,8 @@ struct HostChatProvider : public ChatProvider {
 		Notifications::publish(msg);
 	}
 
+	bool has_been_set() const override {return true;}
+
 private:
 	NetHost                * h;
 	std::vector<ChatMessage> messages;
