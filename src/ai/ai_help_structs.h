@@ -36,7 +36,6 @@
 #include "logic/map_objects/world/world.h"
 #include "logic/player.h"
 
-
 namespace Widelands {
 
 class ProductionSite;
@@ -254,6 +253,8 @@ struct BuildableField {
 	// stationed (manned) military buildings nearby
 	int16_t military_stationed;
 	// stationed (manned) military buildings nearby
+	//unconnected buildings nearby
+	bool unconnected_nearby;
 	int16_t military_unstationed;
 	bool is_portspace;
 	bool port_nearby;  // to increase priority if a port is nearby,
@@ -401,6 +402,7 @@ struct MilitarySiteObserver {
 	// when considering attack most military sites are inside territory and should be skipped during
 	// evaluation
 	bool enemies_nearby;
+	uint32_t built_time;
 };
 
 struct TrainingSiteObserver {
@@ -494,6 +496,54 @@ struct BlockedFields {
 private:
 	// <hash of field coordinates, time till blocked>
 	std::map<uint32_t, uint32_t> blocked_fields_;
+};
+
+// list of candidate flags to built roads, with some additional logic
+struct FlagsForRoads {
+
+	FlagsForRoads(int32_t mr) : min_reduction(mr) {};
+
+	struct Candidate {
+		Candidate();
+		Candidate(uint32_t cr, int32_t ad, bool de);
+
+		uint32_t coords_hash;
+		int32_t new_road_length;
+		int32_t current_roads_distance;
+		int32_t air_distance;
+		int32_t reduction_score;
+		bool different_economy;
+		bool new_road_possible;
+		bool accessed_via_roads;
+
+		bool operator<(const Candidate& other) const;
+		bool operator==(const Candidate& other) const;
+		void calculate_score();
+	};
+
+	int32_t min_reduction;
+	// This is the core of this object - candidate flags ordered by score
+	std::set<Candidate> queue;
+
+	void add_flag(Widelands::Coords coords, int32_t air_dist, bool diff_economy) {
+		queue.insert(Candidate(coords.hash(), air_dist, diff_economy));
+	}
+
+	uint32_t count() {
+		return queue.size();
+	}
+
+	// this is for debuging and development purposes
+	void print();
+	// during processing we need to pick first one uprocessed flags (with best score so far)
+	bool get_best_uncalculated(uint32_t* winner);
+	// when we test candidate flag if road can be built to it, there are two possible outcomes:
+	void road_possible(Widelands::Coords coords, uint32_t distance);
+	void road_impossible(Widelands::Coords coords);
+	// updating walking distance over existing roads
+	void set_road_distance(Widelands::Coords coords, int32_t distance);
+	// Finally we query the flag that we will build a road to
+	bool get_winner(uint32_t* winner_hash, uint32_t pos);
 };
 
 // This is a struct that stores strength of players, info on teams and provides some outputs from these data

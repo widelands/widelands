@@ -300,6 +300,156 @@ bool BlockedFields::is_blocked(Coords coords) {
 	return (blocked_fields_.count(coords.hash()) != 0);
 }
 
+
+FlagsForRoads::Candidate::Candidate(uint32_t cr, int32_t ad, bool de):
+	coords_hash(cr), air_distance(ad), different_economy(de) {
+		new_road_possible = false;
+		accessed_via_roads = false;
+		new_road_length = 1000;
+		current_roads_distance = 1000; // must be big enough
+		reduction_score = -air_distance; // allows reasonable ordering from the start
+		}
+
+bool FlagsForRoads::Candidate::operator<(const Candidate& other) const {
+	if (reduction_score == other.reduction_score) {
+		return coords_hash < other.coords_hash;
+	} else {
+		return reduction_score > other.reduction_score;
+	}
+}
+
+bool FlagsForRoads::Candidate::operator==(const Candidate& other) const {
+	return coords_hash == other.coords_hash;
+}
+
+void FlagsForRoads::Candidate::calculate_score() {
+	if (!new_road_possible) {
+		reduction_score = -1000 - air_distance; // to have at least some ordering preserved
+	} else if (different_economy) {
+		reduction_score = 10000 - air_distance - 2 * new_road_length;
+	} else if (!accessed_via_roads) {
+		if (air_distance + 6 > new_road_length) {
+			reduction_score = 1000 - air_distance - 2 * new_road_length;
+		} else {
+			reduction_score = -1000;
+		}
+	} else {
+		reduction_score = current_roads_distance - 2 * new_road_length;
+	}
+}
+
+void FlagsForRoads::print() { // this is for debuging and development purposes
+	for (auto& item : queue) {
+		log("   %starget: %3dx%3d, saving: %5d (%3d), air distance: %3d, new road: %6d, score: %5d %s\n",
+		(item.reduction_score>=min_reduction && item.new_road_possible)?"+":" ",
+		Coords::unhash(item.coords_hash).x,
+		Coords::unhash(item.coords_hash).y,
+		item.current_roads_distance - item.new_road_length,
+		min_reduction,
+		item.air_distance,
+		item.new_road_length,
+		item.reduction_score,
+		(item.new_road_possible)? ", new road possible" : " ");
+	}
+}
+
+// queue is orderd but some roads are only estimations so we takes first such item
+bool FlagsForRoads::get_best_uncalculated(uint32_t* winner) {
+	for (auto& item : queue) {
+		if (!item.new_road_possible) {
+			*winner = item.coords_hash;
+			return true;
+		}
+	}
+	return false;
+}
+
+void  FlagsForRoads::road_possible(Widelands::Coords coords, uint32_t distance) {
+	// std::set does not allow updating
+	Candidate new_item = Candidate(0, 0, false);
+	for (auto item : queue) {
+		if (item.coords_hash == coords.hash()) {
+			new_item = item;
+			//printf ("   old value: %d, received: %3d\n", item.new_road_length, distance);
+			assert (new_item.coords_hash == item.coords_hash);
+			queue.erase(item);
+			break;
+		}
+	}
+
+	new_item.new_road_length = distance;
+	new_item.new_road_possible = true;
+	new_item.calculate_score();
+	queue.insert(new_item);
+}
+
+// Remove the flag from candidates
+void FlagsForRoads::road_impossible(Widelands::Coords coords) {
+	const uint32_t hash = coords.hash();
+	for (auto item : queue) {
+		if (item.coords_hash == hash) {
+			queue.erase(item);
+			return;
+		}
+	}
+}
+
+// updating walking distance over existing roads
+void FlagsForRoads::set_road_distance(Widelands::Coords coords, int32_t distance) {
+	//printf ("    updating existing road distance for %3dx%3d, length: %3d\n", coords.x, coords.y, distance);
+	const uint32_t hash = coords.hash();
+	Candidate new_item = Candidate(0, 0, false);
+	bool replacing = false;
+	for (auto item : queue) {
+		if (item.coords_hash == hash) {
+			assert (!item.different_economy);
+			if (distance < item.current_roads_distance) {
+				new_item = item;
+				queue.erase(item);
+				replacing = true;
+				break;
+			}
+		break;
+		}
+	}
+	if (replacing) {
+		new_item.current_roads_distance = distance;
+		new_item.accessed_via_roads = true;
+		new_item.calculate_score();
+		queue.insert(new_item);
+	}
+}
+
+bool FlagsForRoads::get_winner(uint32_t* winner_hash, uint32_t pos) {
+	assert (pos == 1 || pos == 2);
+	uint32_t counter = 1;
+	// The AI can ask for 2nd position, but there might be only one viable candidate
+	// in this case we return the first one of course
+	bool has_winner = false;
+	for (auto item : queue) {
+		if (item.reduction_score < min_reduction || !item.new_road_possible) {
+			continue;
+		}
+		assert (item.air_distance > 0);
+		assert(item.reduction_score >= min_reduction);
+		assert(item.new_road_possible);
+		*winner_hash=item.coords_hash;
+		has_winner = true;
+
+		if (counter == pos) {
+			return true;
+		} else if (counter < pos) {
+			counter += 1;
+		} else {
+			break;
+		}
+	}
+	if (has_winner) {
+		return true;
+	}
+	return false;
+}
+
 // This is an struct that stores strength of players, info on teams and provides some outputs from these data
 PlayersStrengths::PlayerStat::PlayerStat() {}
 PlayersStrengths::PlayerStat::PlayerStat(Widelands::TeamNumber tc, uint32_t pp) :
