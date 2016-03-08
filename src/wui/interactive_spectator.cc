@@ -40,9 +40,9 @@
  * Setup the replay UI for the given game.
  */
 InteractiveSpectator::InteractiveSpectator
-	(Widelands::Game & _game, Section & global_s, bool const multiplayer)
+	(Widelands::Game& g, Section& global_s, bool const multiplayer)
 	:
-	InteractiveGameBase(_game, global_s, OBSERVER, multiplayer, multiplayer),
+	InteractiveGameBase(g, global_s, OBSERVER, multiplayer, multiplayer),
 
 #define INIT_BTN(picture, name, tooltip)                            \
  TOOLBAR_BUTTON_COMMON_PARAMETERS(name),                                      \

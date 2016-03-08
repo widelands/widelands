@@ -15,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-02-09 16:38+0000\n"
-"PO-Revision-Date: 2016-02-09 20:45+0000\n"
+"POT-Creation-Date: 2016-03-02 08:54+0000\n"
+"PO-Revision-Date: 2016-03-02 09:51+0000\n"
 "Last-Translator: Venatrix\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -189,7 +189,7 @@ msgstr "Industrie und Minen"
 msgid ""
 "Iron ore, gold ore and coal are mined in the respective mines. The crystal "
 "mine will dig for quartz and diamonds – all of them are precious materials "
-"and very rarely found. It will produce a lot of stone while searching for "
+"and very rarely found. It will produce a lot of granite while searching for "
 "them."
 msgstr "Eisenerz, Golderz und Kohle werden in den entsprechenden Minen abgebaut. Die Kristallmine sucht nach Bergkristall und Diamanten – das sind wertvolle und seltene Materialien. Während der Suche wird eine große Menge Stein abgebaut."
 
@@ -342,7 +342,7 @@ msgid "Uproar and Confusion"
 msgstr "Aufruhr und Verwirrung"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:157
-msgid "Emerging Chaos..."
+msgid "Emerging Chaos…"
 msgstr "Aufkommendes Chaos …"
 
 #. TRANSLATORS: Foreword
@@ -351,7 +351,7 @@ msgid ""
 "Guilt-ridden, the king committed suicide. Without a monarch, the people "
 "turned to the clerics, but they had no substantial help to offer. Most "
 "accepted their fate while others tried to change the god’s mind by offering "
-"animals in his temple. But to no avail..."
+"animals in his temple. But to no avail…"
 msgstr "Mit Schuldgefühlen beladen, beging der König Selbstmord. Daraufhin legten die Leute ihre Hoffnung in die Hände der Geistlichen, die aber auch keine wirkliche Hilfe bieten konnten. Die meisten Leute akzeptierten ihr Schicksal, während andere versuchten, den Gott durch Tieropfer zu besänftigen. Alles jedoch ohne Erfolg …"
 
 #. TRANSLATORS: Foreword
@@ -878,7 +878,7 @@ msgid ""
 "never have I seen sturdier ones – with enough room to carry all of us and "
 "some wares too. And this rescue came just in time: Lutas is about to swallow"
 " the rest of this island, the water rises faster by the hour. But we can "
-"make our escape now and start over in some country farther away..."
+"make our escape now and start over in some country farther away…"
 msgstr "Gepriesen sei Satul! Ostur, der junge Schiffsbauer hat es geschafft. Wir haben drei Schiffe – eines robuster als das andere – mit genug Platz für uns und einige wichtige Waren. Und gerade noch rechtzeitig, Lutas ist dabei, den Rest dieser Insel zu verschlingen, das Wasser steigt von Stunde zu Stunde. Aber wir können noch fliehen und woanders – weit weg von hier – neu beginnen …"
 
 #. TRANSLATORS: Jundlina

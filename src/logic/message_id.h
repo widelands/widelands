@@ -38,7 +38,7 @@ namespace Widelands {
 /// MapMessageSaver does that.
 struct MessageId {
 	MessageId() : id(0) {}
-	explicit MessageId(uint32_t const _id) : id(_id) {}
+	explicit MessageId(uint32_t const init_id) : id(init_id) {}
 
 	/// Constant value for no message.
 	static MessageId null() {MessageId result; result.id = 0; return result;}

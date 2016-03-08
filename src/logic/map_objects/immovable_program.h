@@ -123,23 +123,22 @@ struct ImmovableProgram {
 		uint8_t probability;
 	};
 
-	/// Plays a soundFX.
+	/// Plays a sound effect.
 	///
 	/// Parameter syntax:
-	///    parameters ::= soundFX [priority]
+	///    parameters ::= directory sound [priority]
 	/// Parameter semantics:
 	///    directory:
-	///       The directory of the productionsite.
-	///    soundFX:
-	///       The filename of an soundFX (relative to the productionsite's
-	///       directory).
+	///       The directory of the sound files, relative to the datadir.
+	///    sound:
+	///       The base filename of a sound effect (relative to the directory).
 	///    priority:
 	///       An integer. If omitted, 127 is used.
 	///
-	/// Plays the specified soundFX with the specified priority. Whether the
-	/// soundFX is actually played is determined by the sound handler.
-	struct ActPlayFX : public Action {
-		ActPlayFX(char* parameters, const ImmovableDescr &);
+	/// Plays the specified sound effect with the specified priority. Whether the
+	/// sound effect is actually played is determined by the sound handler.
+	struct ActPlaySound : public Action {
+		ActPlaySound(char* parameters, const ImmovableDescr &);
 		void execute(Game &, Immovable &) const override;
 	private:
 		std::string name;
@@ -173,8 +172,8 @@ struct ImmovableProgram {
 	};
 
 	/// Create a program with a single action.
-	ImmovableProgram(char const * const _name, Action * const action)
-		: name_(_name)
+	ImmovableProgram(char const * const init_name, Action * const action)
+		: name_(init_name)
 	{
 		actions_.push_back(action);
 	}

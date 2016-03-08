@@ -3,7 +3,7 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
-# adrien vigneron <adrienvigneron@ml1.net>, 2015
+# adrien vigneron <adrienvigneron@ml1.net>, 2015-2016
 # Bouchard Renaud <renaud.bouchard@gmail.com>, 2014
 # hugues martin, 2015
 # Jaypad <ju-ju@nataju.fr>, 2015-2016
@@ -15,15 +15,104 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-02-14 16:47+0000\n"
-"PO-Revision-Date: 2016-02-15 22:05+0000\n"
-"Last-Translator: syl_\n"
+"POT-Creation-Date: 2016-03-02 08:54+0000\n"
+"PO-Revision-Date: 2016-03-08 14:12+0000\n"
+"Last-Translator: Jaypad <ju-ju@nataju.fr>\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: fr\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: ../../data/scripting/editor/terrain_help.lua:21
+#: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:54
+#: ../../src/editor/ui_menus/editor_tool_menu.cc:71
+msgid "Resources"
+msgstr "Ressources"
+
+#: ../../data/scripting/editor/terrain_help.lua:35
+msgid "%1%x %2%"
+msgstr "%1%x %2%"
+
+#: ../../data/scripting/editor/terrain_help.lua:35
+msgid "Default:"
+msgstr "Défaut : "
+
+#: ../../data/scripting/editor/terrain_help.lua:67
+msgid "Probability of trees growing"
+msgstr "Probabilité de croissance des arbres"
+
+#: ../../data/scripting/editor/terrain_help.lua:72
+msgid "No trees will grow here."
+msgstr "Aucun arbre ne poussera ici."
+
+#: ../../data/scripting/editor/tree_help.lua:17
+msgid "Preferred terrains"
+msgstr "Terrains préférés"
+
+#. * TRANSLATORS: File name for saving objective achieved
+#. * TRANSLATORS: %1% = map name. %2% = achievement name
+#. * TRANSLATORS: %1% is a filename, %2% a map's name.
+#. * TRANSLATORS: Terrain name + editor category, e.g. Steppe (Summer)
+#: ../../data/scripting/editor/tree_help.lua:38
+#: ../../src/editor/ui_menus/editor_help.cc:157
+#: ../../src/editor/ui_menus/editor_help.cc:195
+#: ../../src/scripting/lua_game.cc:1060 ../../src/ui_fsmenu/loadgame.cc:74
+msgid "%1% (%2%)"
+msgstr "%1% (%2%)"
+
+#: ../../data/scripting/format_scenario.lua:36
+#, lua-format
+msgid "“%s”"
+msgstr "“%s”"
+
+#. * TRANSLATORS: Concatenate the last 2 items on a list.
+#. * TRANSLATORS: RTL languages might want to change the word order here.
+#: ../../data/scripting/formatting.lua:31 ../../src/base/i18n.cc:335
+#, c-format
+msgid "%1$s & %2$s"
+msgstr "%1$s & %2$s"
+
+#. * TRANSLATORS: Join the last 2 items on a list with "or".
+#. * TRANSLATORS: RTL languages might want to change the word order here.
+#: ../../data/scripting/formatting.lua:33 ../../src/base/i18n.cc:339
+#, c-format
+msgid "%1$s or %2$s"
+msgstr "%1$s ou %2$s"
+
+#. * TRANSLATORS: Join the last 2 items on a list with a comma.
+#. * TRANSLATORS: RTL languages might want to change the word order here.
+#. * TRANSLATORS: Concatenate 2 items at in the middle of a list.
+#. * TRANSLATORS: RTL languages might want to change the word order here.
+#: ../../data/scripting/formatting.lua:35
+#: ../../data/scripting/formatting.lua:40 ../../src/base/i18n.cc:343
+#: ../../src/base/i18n.cc:353
+#, c-format
+msgid "%1$s, %2$s"
+msgstr "%1$s, %2$s"
+
+#. * TRANSLATORS: Concatenate the last 2 items on a list.
+#. * TRANSLATORS: RTL languages might want to change the word order here.
+#: ../../data/scripting/formatting.lua:37 ../../src/base/i18n.cc:347
+#, c-format
+msgid "%1$s and %2$s"
+msgstr "%1$s et %2$s"
+
+#: ../../data/scripting/infrastructure.lua:157
+msgid "No Space"
+msgstr "Pas d'espace"
+
+#: ../../data/scripting/infrastructure.lua:158
+msgid ""
+"Some of your starting buildings didn’t have enough room and weren’t built. "
+"You are at a disadvantage with this; consider restarting this map with a "
+"fair starting condition."
+msgstr "Certains de vos bâtiments de départ n'ont pu être construits en raison du manque de place. Dans ces conditions, vous êtes désavantagé ; vous devriez envisager de redémarrer cette carte avec des conditions de départ équitables."
+
+#: ../../data/scripting/infrastructure.lua:159
+msgid "Not enough space"
+msgstr "Espace insuffisant"
 
 #. * TRANSLATORS: This is a heading for a help window
 #: ../../data/scripting/widelands/multiplayer_help.lua:10
@@ -112,6 +201,49 @@ msgid ""
 "condition, and finally can start the game as soon as all players are set up."
 msgstr "Il y a sur le côté droit les informations concernant la carte ou la sauvegarde. Un bouton à droite de la carte permet à l'hôte de changer pour une carte différente. De plus, l'hôte peut définir des conditions de victoire spécifiques et finalement démarrer le jeu dès que tous les joueurs sont configurés."
 
+#: ../../data/scripting/win_condition_texts.lua:4
+msgid "Congratulations!"
+msgstr "Félicitations !"
+
+#: ../../data/scripting/win_condition_texts.lua:5
+msgid "You have won this game!"
+msgstr "Vous avez gagné cette partie !"
+
+#: ../../data/scripting/win_condition_texts.lua:9
+msgid "You are defeated!"
+msgstr "Vous êtes vaincu !"
+
+#: ../../data/scripting/win_condition_texts.lua:10
+msgid ""
+"You lost your last warehouse and are therefore defeated. You may continue as"
+" spectator if you want."
+msgstr "Vous avez perdu votre dernier entrepôt et êtes donc vaincu. Vous pouvez continuer le jeu en tant que spectateur si vous le désirez."
+
+#: ../../data/scripting/win_condition_texts.lua:14
+msgid "You won"
+msgstr "Vous avez gagné"
+
+#: ../../data/scripting/win_condition_texts.lua:15
+msgid "You are the winner!"
+msgstr "Vous êtes le vainqueur !"
+
+#: ../../data/scripting/win_condition_texts.lua:19
+msgid "You lost"
+msgstr "Vous avez perdu"
+
+#: ../../data/scripting/win_condition_texts.lua:20
+msgid "You’ve lost this game!"
+msgstr "Vous avez perdu cette partie !"
+
+#: ../../data/scripting/win_condition_texts.lua:24
+#: ../../src/wui/game_message_menu.cc:75 ../../src/wui/game_summary.cc:121
+msgid "Status"
+msgstr "État"
+
+#: ../../data/scripting/win_condition_texts.lua:25
+msgid "Player overview:"
+msgstr "Aperçu du joueur :"
+
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
 #: ../../src/ai/computer_player.cc:42
 msgid "No AI"
@@ -131,36 +263,6 @@ msgstr "IA faible"
 #: ../../src/ai/defaultai.h:128
 msgid "Very Weak AI"
 msgstr "IA très faible"
-
-#. * TRANSLATORS: Concatenate the last 2 items on a list.
-#. * TRANSLATORS: RTL languages might want to change the word order here.
-#: ../../src/base/i18n.cc:335
-#, c-format
-msgid "%1$s & %2$s"
-msgstr "%1$s & %2$s"
-
-#. * TRANSLATORS: Join the last 2 items on a list with "or".
-#. * TRANSLATORS: RTL languages might want to change the word order here.
-#: ../../src/base/i18n.cc:339
-#, c-format
-msgid "%1$s or %2$s"
-msgstr "%1$s ou %2$s"
-
-#. * TRANSLATORS: Join the last 2 items on a list with a comma.
-#. * TRANSLATORS: RTL languages might want to change the word order here.
-#. * TRANSLATORS: Concatenate 2 items at in the middle of a list.
-#. * TRANSLATORS: RTL languages might want to change the word order here.
-#: ../../src/base/i18n.cc:343 ../../src/base/i18n.cc:353
-#, c-format
-msgid "%1$s, %2$s"
-msgstr "%1$s, %2$s"
-
-#. * TRANSLATORS: Concatenate the last 2 items on a list.
-#. * TRANSLATORS: RTL languages might want to change the word order here.
-#: ../../src/base/i18n.cc:347
-#, c-format
-msgid "%1$s and %2$s"
-msgstr "%1$s et %2$s"
 
 #. * TRANSLATORS: January. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
@@ -344,8 +446,8 @@ msgstr "La carte n'a pas été enregistrée, voulez vous vraiment quitter ?"
 
 #: ../../src/editor/editorinteractive.cc:632
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:120
-msgid "Creating empty map..."
-msgstr ""
+msgid "Creating empty map…"
+msgstr "Création d'une carte vide..."
 
 #. * TRANSLATORS: Default name for new map
 #: ../../src/editor/editorinteractive.cc:639
@@ -365,8 +467,8 @@ msgstr "Inconnu"
 
 #: ../../src/editor/editorinteractive.cc:647
 #, c-format
-msgid "Loading map \"%s\"..."
-msgstr ""
+msgid "Loading map “%s”…"
+msgstr "Chargement de la carte \"%s\""
 
 #: ../../src/editor/map_generator.cc:792
 msgid "Random Player"
@@ -541,36 +643,26 @@ msgstr "Descr: %s"
 #: ../../src/editor/ui_menus/categorized_item_selection_menu.h:185
 #, c-format
 msgid "Current: %s …"
-msgstr ""
+msgstr "Actuel: %s ..."
 
 #. * TRANSLATORS: Help text in an editor tool
 #: ../../src/editor/ui_menus/categorized_item_selection_menu.h:188
 msgid "Click to select an item. Use the Ctrl key to select multiple items."
-msgstr ""
+msgstr "Cliquer pour sélectionner un objet. Utiliser la touche Ctrl pour sélectionner plusieurs objets."
 
 #. * TRANSLATORS: %s are the currently selected items in an editor tool
 #: ../../src/editor/ui_menus/categorized_item_selection_menu.h:191
 #, c-format
 msgid "Current: %s"
-msgstr ""
+msgstr "Actuel: %s ..."
 
 #: ../../src/editor/ui_menus/editor_help.cc:73
 msgid "Terrains"
-msgstr ""
+msgstr "Terrains"
 
 #: ../../src/editor/ui_menus/editor_help.cc:80
 msgid "Trees"
 msgstr "Arbres"
-
-#. * TRANSLATORS: File name for saving objective achieved
-#. * TRANSLATORS: %1% = map name. %2% = achievement name
-#. * TRANSLATORS: %1% is a filename, %2% a map's name.
-#. * TRANSLATORS: Terrain name + editor category, e.g. Steppe (Summer)
-#: ../../src/editor/ui_menus/editor_help.cc:157
-#: ../../src/editor/ui_menus/editor_help.cc:195
-#: ../../src/scripting/lua_game.cc:1060 ../../src/ui_fsmenu/loadgame.cc:74
-msgid "%1% (%2%)"
-msgstr "%1% (%2%)"
 
 #: ../../src/editor/ui_menus/editor_main_menu.cc:46
 msgid "Main Menu"
@@ -835,8 +927,8 @@ msgid "Generate Map"
 msgstr "Générer la carte"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:452
-msgid "Generating random map..."
-msgstr "Génération de carte aléatoire..."
+msgid "Generating random map…"
+msgstr "Génération d'une carte aléatoire..."
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:61
 #: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:28
@@ -852,26 +944,26 @@ msgstr "Nom de fichier:"
 msgid "unnamed"
 msgstr "SansNom"
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:243
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:239
 #: ../../src/wui/game_main_menu_save_game.cc:260
 #, c-format
 msgid "A file with the name ‘%s’ already exists. Overwrite?"
 msgstr "Ce fichier '%s' existe déjà. L'écraser ?"
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:246
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:259
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:309
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:242
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:255
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:302
 msgid "Error Saving Map!"
 msgstr "Erreur d'enregistrement de la carte!"
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:256
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:252
 #, c-format
 msgid ""
 "A file with the name ‘%s.tmp’ already exists. You have to remove it "
 "manually."
 msgstr "Un fichier nommé \"%s.tmp\" existe déjà. Vous devez le supprimer manuellement."
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:305
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:298
 msgid ""
 "Error Saving Map!\n"
 "Saved map file may be corrupt!\n"
@@ -903,7 +995,7 @@ msgstr "Nombre de Joueurs"
 #: ../../src/editor/ui_menus/editor_player_menu.cc:232
 #: ../../src/logic/map.cc:315
 #: ../../src/logic/single_player_game_settings_provider.cc:88
-#: ../../src/network/nethost.cc:1699 ../../src/ui_fsmenu/launch_mpg.cc:581
+#: ../../src/network/nethost.cc:1700 ../../src/ui_fsmenu/launch_mpg.cc:581
 #: ../../src/wui/multiplayersetupgroup.cc:142
 #: ../../src/wui/multiplayersetupgroup.cc:304
 #, c-format
@@ -934,11 +1026,6 @@ msgstr "Augmenter/Réduire la Valeur"
 #: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:89
 msgid "Set Value"
 msgstr "Définir la Valeur"
-
-#: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:54
-#: ../../src/editor/ui_menus/editor_tool_menu.cc:71
-msgid "Resources"
-msgstr "Ressources"
 
 #: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:108
 msgid "Current Selection"
@@ -1031,12 +1118,12 @@ msgid "Scenario"
 msgstr "Scénario"
 
 #: ../../src/logic/game.cc:244 ../../src/logic/game.cc:324
-msgid "Loading map"
-msgstr "Chargement de la carte"
+msgid "Loading map…"
+msgstr "Chargement de la carte..."
 
 #: ../../src/logic/game.cc:366 ../../src/logic/game.cc:399
-#: ../../src/wlapplication.cc:1331
-msgid "Loading..."
+#: ../../src/ui_basic/progresswindow.cc:50 ../../src/wlapplication.cc:1377
+msgid "Loading…"
 msgstr "Chargement..."
 
 #: ../../src/logic/game.cc:463
@@ -1473,7 +1560,7 @@ msgid ""
 msgstr "La fin du replay a été atteinte et le jeu a été mis en pause. Vous pouvez désactiver la mise en pause et continuer la visualisation si vous le désirez."
 
 #: ../../src/logic/save_handler.cc:106
-msgid "Saving game..."
+msgid "Saving game…"
 msgstr "Sauvegarde du jeu..."
 
 #: ../../src/logic/save_handler.cc:125
@@ -1489,7 +1576,7 @@ msgid "Bluebyte Settlers II Map. No comment defined!"
 msgstr "Carte Bluebyte Settlers II. Pas de commentaire défini!"
 
 #: ../../src/network/internet_gaming.cc:114
-#: ../../src/ui_fsmenu/internet_lobby.cc:415
+#: ../../src/ui_fsmenu/internet_lobby.cc:425
 msgid "Connection problem"
 msgstr "Problème de connexion"
 
@@ -1512,116 +1599,116 @@ msgstr "Widelands n'a pas pu établir de connexion à l'adresse donnée.\nSoit i
 msgid "For hosting a game, please take a look at the notes at:"
 msgstr "Pour héberger une partie, veuillez jeter un œil aux notes à:"
 
-#: ../../src/network/internet_gaming.cc:302
+#: ../../src/network/internet_gaming.cc:309
 msgid "Something went wrong: "
 msgstr "Quelque chose s'est mal passé: "
 
-#: ../../src/network/internet_gaming.cc:392
+#: ../../src/network/internet_gaming.cc:399
 msgid "Successfully reconnected to the metaserver!"
 msgstr "Reconnecté au méta-serveur avec succès!"
 
-#: ../../src/network/internet_gaming.cc:399
+#: ../../src/network/internet_gaming.cc:406
 msgid "Mixed up"
 msgstr "Mêlé"
 
-#: ../../src/network/internet_gaming.cc:399
+#: ../../src/network/internet_gaming.cc:406
 msgid "The metaserver sent a strange ERROR during connection"
 msgstr "Le méta-serveur a envoyé une ERREUR étrange pendant la connexion"
 
-#: ../../src/network/internet_gaming.cc:410
+#: ../../src/network/internet_gaming.cc:417
 msgid "Unexpected packet"
 msgstr "Paquet inattendu"
 
-#: ../../src/network/internet_gaming.cc:412
+#: ../../src/network/internet_gaming.cc:419
 #, c-format
 msgid ""
 "Expected a LOGIN, RELOGIN or REJECTED packet from server, but received "
 "command %s. Maybe the metaserver is using a different protocol version ?"
 msgstr "Un paquet LOGIN, RELOGIN, ou REJECTED était attendu du serveur, mais la commande %s a été reçue.  Peut-être le méta-serveur utilise-t-il une version du protocole différente ?"
 
-#: ../../src/network/internet_gaming.cc:425
+#: ../../src/network/internet_gaming.cc:432
 #, c-format
 msgid ""
 "WARNING: Received a %s command although we are not in CONNECTING state."
 msgstr "AVERTISSEMENT: Une commande %s a été reçue, alors que nous ne sommes pas dans l'état CONNECTING."
 
-#: ../../src/network/internet_gaming.cc:435
+#: ../../src/network/internet_gaming.cc:442
 #, c-format
 msgid "InternetGaming: Server time offset is %u second."
 msgid_plural "InternetGaming: Server time offset is %u seconds."
 msgstr[0] "Jeux Internet: La compensation du temps par le serveur est de %u seconde."
 msgstr[1] "Jeux Internet: La compensation du temps par le serveur est de %u secondes."
 
-#: ../../src/network/internet_gaming.cc:440
+#: ../../src/network/internet_gaming.cc:447
 #, c-format
 msgid "Server time offset is %u second."
 msgid_plural "Server time offset is %u seconds."
 msgstr[0] "La compensation du temps par le serveur est de %u seconde."
 msgstr[1] "La compensation du temps par le serveur est de %u secondes."
 
-#: ../../src/network/internet_gaming.cc:463
+#: ../../src/network/internet_gaming.cc:470
 #, c-format
 msgid "Invalid chat message type \"%s\"."
 msgstr "Type de message chat \"%s\" invalide."
 
-#: ../../src/network/internet_gaming.cc:463
+#: ../../src/network/internet_gaming.cc:470
 msgid "Invalid message type"
 msgstr "Type de message invalide"
 
-#: ../../src/network/internet_gaming.cc:499
+#: ../../src/network/internet_gaming.cc:506
 #, c-format
 msgid "The game %s is now available"
 msgstr "La partie %s est maintenant disponible"
 
-#: ../../src/network/internet_gaming.cc:508
+#: ../../src/network/internet_gaming.cc:515
 #, c-format
 msgid "The game %s has been closed"
 msgstr "La partie %s a été fermée"
 
-#: ../../src/network/internet_gaming.cc:543
+#: ../../src/network/internet_gaming.cc:550
 #, c-format
 msgid "%s joined the lobby"
 msgstr "%s rejoint le groupe"
 
-#: ../../src/network/internet_gaming.cc:552
+#: ../../src/network/internet_gaming.cc:559
 #, c-format
 msgid "%s left the lobby"
 msgstr "%s quitte le groupe"
 
-#: ../../src/network/internet_gaming.cc:586
+#: ../../src/network/internet_gaming.cc:593
 msgid "Chat message could not be sent."
 msgstr "Le message ne peut pas être envoyé."
 
-#: ../../src/network/internet_gaming.cc:602
+#: ../../src/network/internet_gaming.cc:609
 #, c-format
 msgid "ERROR: %s"
 msgstr "ERREUR: %s"
 
-#: ../../src/network/internet_gaming.cc:612
+#: ../../src/network/internet_gaming.cc:619
 #, c-format
 msgid "Received an unknown command from the metaserver: %s"
 msgstr "Reçu une commande inconnue depuis le méta-serveur: %s"
 
-#: ../../src/network/internet_gaming.cc:745
+#: ../../src/network/internet_gaming.cc:752
 msgid "Message could not be sent: You are not connected to the metaserver!"
 msgstr "Le message n'a pas pu être envoyé : vous n'êtes pas connecté au méta-serveur!"
 
-#: ../../src/network/internet_gaming.cc:757
+#: ../../src/network/internet_gaming.cc:764
 msgid "Message could not be sent: Was this supposed to be a private message?"
 msgstr "Le message n'a pas pu être envoyé : était-ce censé être un message privé?"
 
-#: ../../src/network/internet_gaming.cc:831
+#: ../../src/network/internet_gaming.cc:838
 msgid "Conversion error"
 msgstr "Erreur de conversion"
 
 #. * TRANSLATORS: Geeky message from the metaserver
 #. * TRANSLATORS: This message is shown if %s isn't "true" or "false"
-#: ../../src/network/internet_gaming.cc:834
+#: ../../src/network/internet_gaming.cc:841
 #, c-format
 msgid "Unable to determine truth value for \"%s\""
 msgstr "Impossible de déterminer la vrai valeur de \"%s\""
 
-#: ../../src/network/internet_gaming.cc:850
+#: ../../src/network/internet_gaming.cc:857
 msgid "unknown"
 msgstr "inconnu"
 
@@ -1695,8 +1782,8 @@ msgid ""
 "the server shut down as you tried to connect."
 msgstr "Widelands n'a pas pu établir une connexion vers l'adresse indiquée.\nSoit il n'y a aucun serveur Widelands fonctionnant sur le port supposé\nou bien le serveur a été éteint pendant que vous tentiez de vous y connecter."
 
-#: ../../src/network/netclient.cc:186 ../../src/network/nethost.cc:729
-#: ../../src/wlapplication.cc:1221
+#: ../../src/network/netclient.cc:184 ../../src/network/nethost.cc:729
+#: ../../src/wlapplication.cc:1267
 msgid "Preparing game"
 msgstr "Préparation de la partie"
 
@@ -1808,16 +1895,16 @@ msgstr "Il n'y a pas de pause forcée - rien à stopper."
 msgid "Invalid command! Type /help for a list of commands."
 msgstr "Commande invalide! Entrez /help pour la liste des commandes."
 
-#: ../../src/network/nethost.cc:1633
+#: ../../src/network/nethost.cc:1634
 #, c-format
 msgid "Computer %u"
 msgstr "Ordinateur %u"
 
-#: ../../src/network/nethost.cc:1693 ../../src/wui/game_summary.cc:119
+#: ../../src/network/nethost.cc:1694 ../../src/wui/game_summary.cc:119
 msgid "Player"
 msgstr "Joueur"
 
-#: ../../src/network/nethost.cc:1858
+#: ../../src/network/nethost.cc:1859
 #, c-format
 msgid "%li second"
 msgid_plural "%li seconds"
@@ -2051,10 +2138,6 @@ msgstr "non"
 #: ../../src/profile/profile.cc:73
 msgid "off"
 msgstr "désactivé"
-
-#: ../../src/ui_basic/progresswindow.cc:46
-msgid "Preparing..."
-msgstr "Préparation..."
 
 #: ../../src/ui_basic/spinbox.cc:149
 msgid "Decrease the value"
@@ -2298,35 +2381,35 @@ msgid "Points"
 msgstr "Points"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:146
-#: ../../src/ui_fsmenu/options.cc:243
+#: ../../src/ui_fsmenu/options.cc:235
 msgid "Game"
 msgstr "Partie"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:384
+#: ../../src/ui_fsmenu/internet_lobby.cc:394
 msgid ""
 "Widelands was unable to get the IP address of the server in time.\n"
 "There seems to be a network problem, either on your side or on the side\n"
 "of the server.\n"
 msgstr "Widelands n'a pas été capable d'avoir l'adresse IP du serveur à temps.\nIl semble qu'il y ait un problème réseau, soit de votre coté soit du coté\ndu serveur.\n"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:388
+#: ../../src/ui_fsmenu/internet_lobby.cc:398
 msgid "Connection timed out"
 msgstr "Le délai imparti à la connexion a expiré"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:416
+#: ../../src/ui_fsmenu/internet_lobby.cc:426
 msgid "Widelands was unable to connect to the host."
 msgstr "Widelands ne peut se connecter à l'hôte."
 
 #. * TRANSLATORS: This is shown for multiplayer games when no host
 #. * TRANSLATORS: server to connect to has been specified yet.
-#: ../../src/ui_fsmenu/internet_lobby.cc:438
+#: ../../src/ui_fsmenu/internet_lobby.cc:448
 msgctxt "server_name"
 msgid "unnamed"
 msgstr "non nommé"
 
 #: ../../src/ui_fsmenu/intro.cc:32
-msgid "Press any key or click to continue ..."
-msgstr "Pressez sur n'importe quelle touche ou cliquez sur continuer"
+msgid "Press any key or click to continue…"
+msgstr "Pressez sur n'importe quelle touche ou cliquez sur continuer..."
 
 #. * TRANSLATORS: Dialog box title for selecting between map or saved game for
 #. new multiplayer game
@@ -2888,7 +2971,7 @@ msgstr "Distance pour que la fenêtre se colle à d'autres"
 #. * TRANSLATORS: Options: Distance for windows to snap to borders:
 #. * TRANSLATORS: This will have a number added in front of it
 #: ../../src/ui_fsmenu/options.cc:174 ../../src/ui_fsmenu/options.cc:182
-#: ../../src/ui_fsmenu/options.cc:411 ../../src/ui_fsmenu/options.cc:415
+#: ../../src/ui_fsmenu/options.cc:390 ../../src/ui_fsmenu/options.cc:394
 msgid "pixel"
 msgid_plural "pixels"
 msgstr[0] "pixel"
@@ -2914,11 +2997,11 @@ msgstr "Jouer un son à l'arrivée d'un message"
 
 #: ../../src/ui_fsmenu/options.cc:193
 msgid "Save game automatically every:"
-msgstr ""
+msgstr "Sauvegarde automatique à chaque:"
 
 #. * TRANSLATORS: Options: Save game automatically every:
 #. * TRANSLATORS: This will have a number added in front of it
-#: ../../src/ui_fsmenu/options.cc:196 ../../src/ui_fsmenu/options.cc:403
+#: ../../src/ui_fsmenu/options.cc:196 ../../src/ui_fsmenu/options.cc:386
 msgid "minute"
 msgid_plural "minutes"
 msgstr[0] "minute"
@@ -2926,83 +3009,66 @@ msgstr[1] "minutes"
 
 #: ../../src/ui_fsmenu/options.cc:201
 msgid "Maximum number of autosave files:"
-msgstr ""
+msgstr "Nombre maximal de sauvegardes automatiques:"
 
-#: ../../src/ui_fsmenu/options.cc:207
-msgid "Remove replays older than:"
-msgstr "Supprimer les replays plus anciens que:"
-
-#. * TRANSLATORS: Options: Remove Replays older than:
-#. * TRANSLATORS: This will have a number added in front of it
-#: ../../src/ui_fsmenu/options.cc:210 ../../src/ui_fsmenu/options.cc:407
-msgid "day"
-msgid_plural "days"
-msgstr[0] "jour"
-msgstr[1] "jours"
-
-#: ../../src/ui_fsmenu/options.cc:213
+#: ../../src/ui_fsmenu/options.cc:205
 msgid "Do not zip widelands data files (maps, replays and savegames)"
 msgstr "Ne pas compresser les fichiers de données (cartes, enregistrements et sauvegardes)"
 
-#: ../../src/ui_fsmenu/options.cc:215
-msgid "Remove Syncstream dumps on startup"
-msgstr "Empêcher la vidange de Syncstream au démarrage"
+#: ../../src/ui_fsmenu/options.cc:207
+msgid "Write syncstreams in network games to debug desyncs"
+msgstr "Créer des flux de synchronisation pour déboguer les parties en réseau"
 
-#: ../../src/ui_fsmenu/options.cc:219
+#: ../../src/ui_fsmenu/options.cc:211
 msgid "Start building road after placing a flag"
 msgstr "Commence à construire une route après avoir placé un drapeau"
 
-#: ../../src/ui_fsmenu/options.cc:220
+#: ../../src/ui_fsmenu/options.cc:212
 msgid "Show buildings area preview"
 msgstr "Montrer un aperçu des zones de constructions"
 
-#: ../../src/ui_fsmenu/options.cc:221
+#: ../../src/ui_fsmenu/options.cc:213
 msgid "Show in-game chat with transparent background"
 msgstr "Afficher le chat en ligne avec un fond transparent"
 
 #. * TRANSLATORS: A watchwindow is a window where you keep watching an object
 #. or a map region,
 #. * TRANSLATORS: and it also lets you jump to it on the map.
-#: ../../src/ui_fsmenu/options.cc:226
+#: ../../src/ui_fsmenu/options.cc:218
 msgid "Use single watchwindow mode"
 msgstr "Utiliser le mode simple de fenêtre d'observation"
 
-#: ../../src/ui_fsmenu/options.cc:229 ../../src/ui_fsmenu/options.cc:244
+#: ../../src/ui_fsmenu/options.cc:221 ../../src/ui_fsmenu/options.cc:236
 msgid "Language"
 msgstr "Langue"
 
-#: ../../src/ui_fsmenu/options.cc:239
+#: ../../src/ui_fsmenu/options.cc:231
 msgid "Interface"
 msgstr "Interface"
 
-#: ../../src/ui_fsmenu/options.cc:240
+#: ../../src/ui_fsmenu/options.cc:232
 msgid "Windows"
 msgstr "Fenêtre"
 
-#: ../../src/ui_fsmenu/options.cc:241
+#: ../../src/ui_fsmenu/options.cc:233
 msgid "Sound"
 msgstr "Son"
 
-#: ../../src/ui_fsmenu/options.cc:242
+#: ../../src/ui_fsmenu/options.cc:234
 msgid "Saving"
 msgstr "Sauvegarde"
 
 #. * TRANSLATORS Options: Save game automatically every:
-#: ../../src/ui_fsmenu/options.cc:302
+#: ../../src/ui_fsmenu/options.cc:293
 msgid "Off"
 msgstr "Arrêt"
 
-#. * TRANSLATORS Options: Remove Replays older than:
-#: ../../src/ui_fsmenu/options.cc:310
-msgid "Never"
-msgstr "Jamais"
-
 #. * TRANSLATORS: Screen resolution, e.g. 800 x 600
-#: ../../src/ui_fsmenu/options.cc:357 ../../src/ui_fsmenu/options.cc:363
+#: ../../src/ui_fsmenu/options.cc:340 ../../src/ui_fsmenu/options.cc:346
 msgid "%1% x %2%"
 msgstr "%1% x %2%"
 
-#: ../../src/ui_fsmenu/options.cc:421
+#: ../../src/ui_fsmenu/options.cc:400
 msgid "Try system language"
 msgstr "Essayer la langue du système"
 
@@ -3018,11 +3084,11 @@ msgstr "Campagnes"
 msgid "Load Game"
 msgstr "Charger une partie"
 
-#: ../../src/wlapplication.cc:1007
+#: ../../src/wlapplication.cc:1053
 msgid "Game data error"
 msgstr "Erreur de données du jeu"
 
-#: ../../src/wlapplication.cc:1017
+#: ../../src/wlapplication.cc:1063
 #, c-format
 msgid ""
 "\n"
@@ -3030,7 +3096,7 @@ msgid ""
 "Please report this problem to help us improve Widelands. You will find related messages in the standard output (stdout.txt on Windows). You are using build %1$s (%2$s). "
 msgstr "\n\nS'il vous plaît, communiquez nous ce problème pour nous aider à améliorer Widelands, Vous trouverez les messages relatifs dans la sortie standard (stdout.txt sur windows). Vous utilisez la version %1$s (%2$s). "
 
-#: ../../src/wlapplication.cc:1024
+#: ../../src/wlapplication.cc:1070
 msgid ""
 "Please add this information to your report.\n"
 "\n"
@@ -3429,10 +3495,6 @@ msgctxt "message"
 msgid "Type"
 msgstr "Type"
 
-#: ../../src/wui/game_message_menu.cc:75 ../../src/wui/game_summary.cc:121
-msgid "Status"
-msgstr "État"
-
 #. * TRANSLATORS: We have very little space here. You can also translate this
 #. as "Time" or "Time Sent"
 #. * TRANSLATORS: This is used in the game messages menu - please open an
@@ -3803,7 +3865,7 @@ msgstr "Le nom de cette carte"
 #. * TRANSLATORS: Map hint header when selecting a map.
 #: ../../src/wui/mapdetails.cc:137
 msgid "HINT:"
-msgstr ""
+msgstr "Conseil :"
 
 #: ../../src/wui/maptable.cc:36
 msgid "Number of players"

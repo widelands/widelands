@@ -460,22 +460,22 @@ struct ProductionProgram {
 		uint8_t target_level;
 	};
 
-	/// Plays a soundFX.
+	/// Plays a sound effect.
 	///
 	/// Parameter syntax:
-	///    parameters ::= soundFX [priority]
+	///    parameters ::= directory sound [priority]
 	/// Parameter semantics:
 	///    directory:
-	///       The directory of the sound effect.
-	///    soundFX:
-	///       The base filename of a soundFX (without path, running numbers or file extension)
+	///       The directory of the sound files, relative to the datadir.
+	///    sound:
+	///       The base filename of a sound effect (relative to the directory).
 	///    priority:
 	///       An integer. If omitted, 127 is used.
 	///
-	/// Plays the specified soundFX with the specified priority. Whether the
-	/// soundFX is actually played is determined by the sound handler.
-	struct ActPlayFX : public Action {
-		ActPlayFX(char * parameters);
+	/// Plays the specified sound effect with the specified priority. Whether the
+	/// sound effect is actually played is determined by the sound handler.
+	struct ActPlaySound : public Action {
+		ActPlaySound(char * parameters);
 		void execute(Game &, ProductionSite &) const override;
 	private:
 		std::string name;
@@ -510,8 +510,8 @@ struct ProductionProgram {
 		uint32_t radius;
 	};
 
-	ProductionProgram(const std::string& _name,
-							const std::string& _descname,
+	ProductionProgram(const std::string& init_name,
+							const std::string& init_descname,
 							std::unique_ptr<LuaTable> actions_table,
 							const EditorGameBase& egbase,
 							ProductionSiteDescr* building);

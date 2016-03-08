@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-02-03 09:18+0000\n"
-"PO-Revision-Date: 2016-02-07 21:29+0000\n"
+"POT-Creation-Date: 2016-03-02 08:54+0000\n"
+"PO-Revision-Date: 2016-03-08 08:17+0000\n"
 "Last-Translator: Luigi Lain <lainluigi86@tiscali.it>\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
@@ -639,7 +639,7 @@ msgid ""
 "transport wares. The simplest way is to click on the construction site’s "
 "flag, choose ‘Build road’, and then click on the destination flag (the one "
 "in front of your headquarters), just like I’ve demonstrated."
-msgstr ""
+msgstr "Ai tuoi lavoratori non piace camminare per i campi. Devi costruire una strada dal quartier generale al cantiere in modo che i portatori possano trasportare le merci. Il modo più semplice è cliccare sulla bandiera del cantiere, scegliere \"costruisci strada\", e cliccare sulla bandiera di arrivo (quella davanti al quartier generale), come ho appena dimostrato."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:351
 msgid "You Destroyed the Construction Site!"
@@ -652,7 +652,7 @@ msgid ""
 "previous savegame. Luckily, these are created from time to time. To do so, "
 "you have to go back to the main menu and choose ‘Single Player’ → ‘Load "
 "Game’. And please be a bit more careful next time."
-msgstr ""
+msgstr "Sembra che tu abbia distrutto il cantiere per una cava che volevamo costruire. Siccome ci serve il granito, ti suggerisco di ricaricare da un salvataggio precedente. Fortunatamente, questi vengono creati periodicamente. Per ricaricare la partita, devi tornare al menu principale e scegliere 'giocatore singolo' → 'carica partita'. E cerca di essere più attento la prossima volta."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:361
 msgid "Build a second quarry"
@@ -662,7 +662,7 @@ msgstr "Costruisci una seconda cava"
 msgid ""
 "When there are many rocks, you can consider building another quarry. This "
 "will make the granite production faster."
-msgstr ""
+msgstr "Se ci sono tante rocce, puoi valutare se costruire una seconda cava. Questo renderà più rapida la produzione di granito."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:365
 msgid ""
@@ -732,7 +732,7 @@ msgid ""
 "Hi, it’s me again! This time, I have sent you a message. Messages are sent "
 "to you by Widelands to inform you about important events: empty mines, "
 "attacks on your tribe, won or lost military buildings, resources found…"
-msgstr ""
+msgstr "Ciao, sono di nnuovo io!  Questa volta, ti ho mandato un messaggio. I messaggi ti vengono mandati da Widelands per informarti di eventi importanti: miniere esaurite, attacchi contro la tua tribù, edifici militari conquistati o persi, risorse trovate..."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:401
 msgid ""
@@ -748,17 +748,17 @@ msgid ""
 "reading, and the one that informed you that a new headquarters was added to "
 "your economy. Let’s learn how to archive messages: first, select the message"
 " that you wish to archive by clicking on it in the list. Then, click the"
-msgstr ""
+msgstr "Al momento hai due messaggi. Questo, che stai leggendo, e quello che ti informa che un nuovo quartier generale è stato aggiunto alla tua economia. Impariamo ad archiviare messaggi: per prima cosa, seleziona il messaggio che desideri archiviare cliccandoci sopra nella lista. Poi, clicca sul"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:404
 msgid "‘Archive selected message’ button to move it into your archive."
-msgstr ""
+msgstr "pulsante 'Archivia il messaggio selezionato' per spostarlo nell'archivio."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:406
 msgid ""
 "Once you have deleted a message, another message will be selected "
 "automatically from the list."
-msgstr ""
+msgstr "Una volta che hai cancellato un messaggio, un altro messaggio sarà selezionato automaticamente dalla lista."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:408
 msgid ""
@@ -779,7 +779,7 @@ msgid ""
 "The message window is central to fully controlling your tribe’s fortune. "
 "However, you will get a lot of messages in a real game. To keep your head "
 "straight, you should try to keep the inbox empty."
-msgstr ""
+msgstr "La finestra dei messaggi è fondamentale per controllare appieno la sorte della tua tribù. Ma riceverai un sacco di messaggi durante una partita reale. Per non confonderti, dovresti cercare di mantenere la tua posta in arrivo vuota. "
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:416
 msgid "Archive all your messages in your inbox now."
@@ -791,7 +791,7 @@ msgid ""
 "button at the very bottom of the screen. The newest message will be marked "
 "for you automatically. Keep clicking the ‘Archive selected message’ button "
 "until all messages have been archived and the list is empty."
-msgstr ""
+msgstr "Per farlo, apri la finestra dei messaggi premendo 'n' o cliccando il pulsante più a destra in fondo allo schermo. Il messaggio più recente sarà spuntato automaticamente. Continua a cliccare su 'Archivia il messaggio selezionato' finchè tutti i messaggi sono stati archiviati e la lista è vuota."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:424
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:445
@@ -803,7 +803,7 @@ msgid ""
 "Excellent. Do you remember how to close windows? You simply have to right-"
 "click on them. This will work with all windows except for story message "
 "windows like this one. Go ahead and try it."
-msgstr ""
+msgstr "Eccellente. Ricordi come si chiudono le finestre? Devi semplicemente cliccare col destro su di esse. Questo funziona per tutte le finestre, tranne i messaggi della storia come questo. Va avanti e provaci."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:428
 msgid ""
@@ -836,7 +836,7 @@ msgid ""
 "I’ll take all rocks away from the poor stonemasons in the quarries. They "
 "will then send a message each that they can’t find any in their work areas "
 "the next time they try to do some work."
-msgstr ""
+msgstr "Ben fatto! Ora vediamo come funzionano i messaggi in una partita vera, ok? Per questo, rimuoverò tutte le rocce dai poveri tagliapietre alle cave. Ciascuno manderà un messaggio indicando che non trovano nessuna pietra nella loro area di lavoro la prossima volta che cercheranno di lavorare."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:455
 msgid "Messages Arrived!"
@@ -848,20 +848,20 @@ msgid ""
 "has changed appearance? You can destroy the quarries now as they are no "
 "longer of any use and just blocking space. To do so, there are two "
 "possibilities:"
-msgstr ""
+msgstr "Hai ricevuto dei messaggi. Vedi come è cambiato il pulsante in fondo allo schermo? Ora puoi distruggere tutte le cave, visto che non servono più a nulla e stanno solo occupando spazio. Per farlo, ci sono due possibilità:"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:459
 msgid ""
 "Burning down the quarry: this is the fastest way of clearing the space. "
 "While the worker abandons the building, the wares are lost."
-msgstr ""
+msgstr "Bruciare la cava:  questo è il modo più rapido di liberare lo spazio. Il lavoratore abbandonerà l'edificio, ma eventuali merci all'interno saranno perdute."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:460
 msgid ""
 "Dismantling the quarry: a builder will walk from the headquarters to "
 "dismantle the quarry piece by piece. Thereby, you regain some of the "
 "resources you used for the construction."
-msgstr ""
+msgstr "Smantellare la cava: un costruttore arriverà dal quartier generale per smantellare la cava un pezzo alla volta. In questo modo, recuperi alcune delle risorse che hai usato per la costruzione."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:466
 msgid ""
@@ -879,14 +879,14 @@ msgstr "Ci sono due modi diversi di distruggere un edificio: abbatterlo e smante
 msgid ""
 "Burning down the quarry: This is the fastest way of clearing the space. "
 "While the worker abandons the building, the wares are lost."
-msgstr ""
+msgstr "Bruciare la cava:  questo è il modo più rapido di liberare lo spazio. Il lavoratore abbandonerà l'edificio, ma eventuali merci all'interno saranno perdute."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:470
 msgid ""
 "Dismantling the quarry: A builder will walk from the headquarters to "
 "dismantle the quarry piece by piece. Thereby, you regain some of the "
 "resources you used for the construction."
-msgstr ""
+msgstr "Smantellare la cava: un costruttore arriverà dal quartier generale per smantellare la cava un pezzo alla volta. In questo modo, recuperi alcune delle risorse che hai usato per la costruzione."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:475
 msgid "Expanding Your Territory!"
@@ -910,13 +910,13 @@ msgid ""
 "conquer around itself and the more soldiers can be stationed there. The "
 "buildings also vary in their vision range: buildings with a tower see "
 "farther than others."
-msgstr ""
+msgstr "Espandersi è semplice come costruire un edificio militare agli angoli del tuo territorio. I barbari hanno alcui edifici militari differenti: guardiole, fortini, torri, fortezze e cittadelle. Più grande è l'edificio, più costoso sarà costruirlo, più territorio conquisterà intorno a sé e più soldati portanno accamparsi. Gli edifici variano anche nel campo visivo: gli edifici con una torre vedono più lontano degli altri."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:479
 msgid ""
 "As soon as a military building is manned, it will extend your land. I will "
 "tell your more about military buildings in another tutorial."
-msgstr ""
+msgstr "Non appena un edificio militare viene presidiato, espanderà il tuo territorio. Ti parlerò più in dettaglio degli edifici militari in un altro tutorial."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:481
 msgid "Let’s try it out now: build a military building on your border."
@@ -942,14 +942,14 @@ msgid ""
 "In Widelands, it is necessary to build many buildings, which take up a lot "
 "of space. To expand your territory, you have to build military buildings "
 "next to your border. Every tribe has several military buildings."
-msgstr ""
+msgstr "In Widelands è necessario costruire molti edifici, che occupano un sacco di spazio. Per espandere il tuo territorio, devi costruire edifici militari vicino al tuo confine. Ogni tribù ha diversi edifici militari."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:490
 msgid ""
 "The Barbarians have four different military buildings you can build: the "
 "sentry (small), the barrier and the tower (both medium) and the fortress "
 "(big). Just choose the one you like most."
-msgstr ""
+msgstr "I Barbari hanno quattro edifici militari differenti che puoi costruire: la guardiola (piccola), il fortino e la torre (entrambi medi) e la fortezza (grande). Ti basta scegliere quello che ti piace di più."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:491
 msgid ""
@@ -957,7 +957,7 @@ msgid ""
 "medium (yellow) building plots, but buildings can be built on a building "
 "plot that provides more space than they need. You should always keep that in"
 " mind when you search for a suitable place."
-msgstr ""
+msgstr "Ricorda che gli edifici grandi (icona verde) non possono essere costruiti sugli spazi edificabili piccoli (rossi) o medi (gialli), ma gli edifici si possono costruire su spazi edificabili che provvedono più spazio di quanto non sia necessario. Dovresti sempre tenerlo in considerazione quando cerchi uno spazio adatto."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:497
 msgid "Military Site Occupied"
@@ -977,7 +977,7 @@ msgstr "Ottimo. Hai notato come il tuo territorio si sia espanso quando i tuoi s
 msgid ""
 "Every military building has a certain conquer area – the more expensive the "
 "building, the more land it conquers."
-msgstr ""
+msgstr "Ogni edificio militare ha una certa area conquistata - più l'edificio è costoso, più terreno conquista."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:508
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:510
@@ -989,13 +989,13 @@ msgid ""
 "This concludes the first tutorial. In order to learn more about the game, I "
 "suggest to play one of the other tutorials. Each of them covers a different "
 "topic."
-msgstr ""
+msgstr "Questo conclude il primo tutorial. Per imparare di più sul gioco, puoi giocare uno degli altri tutorial. Ognuno di essi copre un aspetto differente."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:512
 msgid ""
 "However, since you now know how to control Widelands, you can also start a "
 "game (or continue this one) and discover more by yourself."
-msgstr ""
+msgstr "Tuttavia, siccome sai controllare Widelands, puoi anche cominciare una partita, o contiuare questa, e scoprire di più per conto tuo."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:513
 msgid "To leave this game and return to the main menu, click on the"

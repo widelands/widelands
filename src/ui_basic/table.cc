@@ -51,9 +51,8 @@ Table<void *>::Table
 :
 	Panel             (parent, x, y, w, h),
 	total_width_     (0),
-	fontsize_        (UI_FONT_SIZE_SMALL),
-	headerheight_    (UI::g_fh1->render(as_uifont(".", fontsize_))->height() + 4),
-	lineheight_      (UI::g_fh1->render(as_uifont(".", fontsize_))->height()),
+	headerheight_    (UI::g_fh1->render(as_uifont("."))->height() + 4),
+	lineheight_      (UI::g_fh1->render(as_uifont("."))->height()),
 	scrollbar_       (nullptr),
 	scrollpos_       (0),
 	selection_       (no_selection_index()),
@@ -178,7 +177,7 @@ void Table<void *>::set_column_compare
 void Table<void *>::EntryRecord::set_checked
 	(uint8_t const col, bool const checked)
 {
-	_data & cell = data_.at(col);
+	Data & cell = data_.at(col);
 
 	cell.d_checked = checked;
 	cell.d_picture =
@@ -194,7 +193,7 @@ void Table<void *>::EntryRecord::toggle(uint8_t const col)
 
 
 bool Table<void *>::EntryRecord::is_checked(uint8_t const col) const {
-	const _data & cell = data_.at(col);
+	const Data & cell = data_.at(col);
 
 	return cell.d_checked;
 }
@@ -347,7 +346,7 @@ void Table<void *>::draw(RenderTarget & dst)
 				curx += curw;
 				continue;
 			}
-			const Image* entry_text_im = UI::g_fh1->render(as_uifont(richtext_escape(entry_string), fontsize_));
+			const Image* entry_text_im = UI::g_fh1->render(as_uifont(richtext_escape(entry_string)));
 
 			if (static_cast<int>(alignment & UI::Align::kRight)) {
 				point.x += curw - 2 * picw;

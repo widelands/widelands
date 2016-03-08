@@ -182,7 +182,7 @@ public:
 	///< called by \ref Cmd_Call_Economy_Balance
 	void balance(uint32_t timerid);
 
-	void rebalance_supply() {_start_request_timer();}
+	void rebalance_supply() {start_request_timer();}
 
 private:
 
@@ -204,23 +204,23 @@ private:
 /*************/
 /* Functions */
 /*************/
-	void _remove_flag(Flag &);
-	void _reset_all_pathfinding_cycles();
+	void do_remove_flag(Flag &);
+	void reset_all_pathfinding_cycles();
 
-	void _merge(Economy &);
-	void _check_splits();
-	void _split(const std::set<OPtr<Flag> > &);
+	void merge(Economy &);
+	void check_splits();
+	void split(const std::set<OPtr<Flag> > &);
 
-	void _start_request_timer(int32_t delta = 200);
+	void start_request_timer(int32_t delta = 200);
 
-	Supply * _find_best_supply(Game &, const Request &, int32_t & cost);
-	void _process_requests(Game &, RSPairStruct &);
-	void _balance_requestsupply(Game &);
-	void _handle_active_supplies(Game &);
-	void _create_requested_workers(Game &);
-	void _create_requested_worker(Game &, DescriptionIndex);
+	Supply * find_best_supply(Game &, const Request &, int32_t & cost);
+	void process_requests(Game &, RSPairStruct &);
+	void balance_requestsupply(Game &);
+	void handle_active_supplies(Game &);
+	void create_requested_workers(Game &);
+	void create_requested_worker(Game &, DescriptionIndex);
 
-	bool   _has_request(Request &);
+	bool has_request(Request &);
 
 /*************/
 /* Variables */
@@ -255,7 +255,7 @@ private:
 	UI::UniqueWindow::Registry optionswindow_registry_;
 
 	// 'list' of unique providers
-	std::map<UniqueDistance, Supply*> available_supplies;
+	std::map<UniqueDistance, Supply*> available_supplies_;
 
 	DISALLOW_COPY_AND_ASSIGN(Economy);
 };

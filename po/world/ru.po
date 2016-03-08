@@ -5,13 +5,14 @@
 # Alexander Bikmeyev <bikmeyev@freemail.ru>, 2006
 # dr&mx <dronmax@gmail.com>, 2015
 # Yuriy Sokolov <lention@mail.ru>, 2015
+# Денис Шабанов <inactive+Dodolphin@transifex.com>, 2016
 # Федор <Lunar-energy@ya.ru>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-02-14 16:47+0000\n"
-"PO-Revision-Date: 2016-02-14 16:48+0000\n"
+"POT-Creation-Date: 2016-03-02 08:54+0000\n"
+"PO-Revision-Date: 2016-03-02 08:56+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
@@ -288,7 +289,7 @@ msgstr "бук (старый)"
 
 #: ../../data/world/immovables/trees/beech/init.lua:82
 msgid "Beech"
-msgstr ""
+msgstr "бук"
 
 #: ../../data/world/immovables/trees/birch/init.lua:12
 msgid "Birch (Sapling)"
@@ -308,7 +309,7 @@ msgstr "берёза (старая)"
 
 #: ../../data/world/immovables/trees/birch/init.lua:85
 msgid "Birch"
-msgstr ""
+msgstr "берёза"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/cirrus/init.lua:13
@@ -366,7 +367,7 @@ msgstr "лиственница (старая)"
 
 #: ../../data/world/immovables/trees/larch/init.lua:82
 msgid "Larch"
-msgstr ""
+msgstr "лиственница"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/liana/init.lua:13
@@ -506,7 +507,7 @@ msgstr "дуб (старый)"
 
 #: ../../data/world/immovables/trees/oak/init.lua:82
 msgid "Oak"
-msgstr ""
+msgstr "дуб"
 
 #: ../../data/world/immovables/trees/palm_borassus/init.lua:12
 msgid "Borassus Palm (Sapling)"
@@ -546,7 +547,7 @@ msgstr "кокосовая пальма (старая)"
 
 #: ../../data/world/immovables/trees/palm_coconut/init.lua:82
 msgid "Coconut Palm"
-msgstr ""
+msgstr "кокосовая пальма"
 
 #: ../../data/world/immovables/trees/palm_date/init.lua:12
 msgid "Date Palm (Sapling)"
@@ -646,7 +647,7 @@ msgstr "ель (старая)"
 
 #: ../../data/world/immovables/trees/spruce/init.lua:82
 msgid "Spruce"
-msgstr ""
+msgstr "ель"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/twine/init.lua:13
@@ -787,7 +788,7 @@ msgstr "скалы"
 #: ../../data/world/terrains/init.lua:362
 #: ../../data/world/terrains/init.lua:670
 #: ../../data/world/terrains/init.lua:967
-#: ../../data/world/terrains/init.lua:1264
+#: ../../data/world/terrains/init.lua:1263
 msgid "Water"
 msgstr "вода"
 
@@ -808,19 +809,12 @@ msgid "Winter"
 msgstr "зима"
 
 #: ../../data/world/terrains/init.lua:19
-#: ../../data/world/terrains/init.lua:989
-#: ../../data/world/terrains/init.lua:1200
-#: ../../data/world/terrains/init.lua:1216
-#: ../../data/world/terrains/init.lua:1232
 msgid "Desert"
 msgstr "пустыня"
 
-#: ../../data/world/terrains/init.lua:33 ../../data/world/terrains/init.lua:86
-#: ../../data/world/terrains/init.lua:107
-#: ../../data/world/terrains/init.lua:127
-#: ../../data/world/terrains/init.lua:1039
-msgid "Meadow"
-msgstr "луга"
+#: ../../data/world/terrains/init.lua:33
+msgid "Meadow 1"
+msgstr ""
 
 #. TRANSLATORS: This is an entry in a terrain tooltip. Try to use 1 word if
 #. possible.
@@ -842,17 +836,29 @@ msgstr "луга"
 #: ../../data/world/terrains/init.lua:737
 #: ../../data/world/terrains/init.lua:868
 #: ../../data/world/terrains/init.lua:887
-#: ../../data/world/terrains/init.lua:1024
-#: ../../data/world/terrains/init.lua:1044
-#: ../../data/world/terrains/init.lua:1064
-#: ../../data/world/terrains/init.lua:1084
-#: ../../data/world/terrains/init.lua:1167
-#: ../../data/world/terrains/init.lua:1186
+#: ../../data/world/terrains/init.lua:1007
+#: ../../data/world/terrains/init.lua:1027
+#: ../../data/world/terrains/init.lua:1047
+#: ../../data/world/terrains/init.lua:1067
+#: ../../data/world/terrains/init.lua:1150
+#: ../../data/world/terrains/init.lua:1169
 msgid "likes trees"
 msgstr ""
 
+#: ../../data/world/terrains/init.lua:86
+msgid "Meadow 2"
+msgstr ""
+
+#: ../../data/world/terrains/init.lua:107
+msgid "Meadow 3"
+msgstr ""
+
+#: ../../data/world/terrains/init.lua:127
+msgid "Meadow 4"
+msgstr ""
+
 #: ../../data/world/terrains/init.lua:147
-#: ../../data/world/terrains/init.lua:1019
+#: ../../data/world/terrains/init.lua:1002
 msgid "Steppe"
 msgstr "степь"
 
@@ -861,38 +867,50 @@ msgid "Barren Steppe"
 msgstr "полупустыня"
 
 #: ../../data/world/terrains/init.lua:179
-#: ../../data/world/terrains/init.lua:1059
+#: ../../data/world/terrains/init.lua:1042
 msgid "Mountain Meadow"
 msgstr "горный луг"
 
 #: ../../data/world/terrains/init.lua:195
-#: ../../data/world/terrains/init.lua:211
-#: ../../data/world/terrains/init.lua:227
-#: ../../data/world/terrains/init.lua:243
 #: ../../data/world/terrains/init.lua:519
-#: ../../data/world/terrains/init.lua:535
-#: ../../data/world/terrains/init.lua:551
-#: ../../data/world/terrains/init.lua:567
 #: ../../data/world/terrains/init.lua:800
+#: ../../data/world/terrains/init.lua:1082
+msgid "Mountain 1"
+msgstr ""
+
+#: ../../data/world/terrains/init.lua:211
+#: ../../data/world/terrains/init.lua:535
 #: ../../data/world/terrains/init.lua:816
+#: ../../data/world/terrains/init.lua:1098
+msgid "Mountain 2"
+msgstr ""
+
+#: ../../data/world/terrains/init.lua:227
+#: ../../data/world/terrains/init.lua:551
 #: ../../data/world/terrains/init.lua:832
+#: ../../data/world/terrains/init.lua:1114
+msgid "Mountain 3"
+msgstr ""
+
+#: ../../data/world/terrains/init.lua:243
+#: ../../data/world/terrains/init.lua:567
 #: ../../data/world/terrains/init.lua:848
-#: ../../data/world/terrains/init.lua:1099
-#: ../../data/world/terrains/init.lua:1115
-#: ../../data/world/terrains/init.lua:1131
-#: ../../data/world/terrains/init.lua:1147
-msgid "Mountain"
-msgstr "горы"
+#: ../../data/world/terrains/init.lua:1130
+msgid "Mountain 4"
+msgstr ""
 
 #: ../../data/world/terrains/init.lua:259
-#: ../../data/world/terrains/init.lua:279
 #: ../../data/world/terrains/init.lua:582
-#: ../../data/world/terrains/init.lua:601
 #: ../../data/world/terrains/init.lua:863
+#: ../../data/world/terrains/init.lua:1145
+msgid "Forested Mountain 1"
+msgstr ""
+
+#: ../../data/world/terrains/init.lua:279
+#: ../../data/world/terrains/init.lua:601
 #: ../../data/world/terrains/init.lua:882
-#: ../../data/world/terrains/init.lua:1162
-#: ../../data/world/terrains/init.lua:1181
-msgid "Forested Mountain"
+#: ../../data/world/terrains/init.lua:1164
+msgid "Forested Mountain 2"
 msgstr ""
 
 #: ../../data/world/terrains/init.lua:299
@@ -902,7 +920,7 @@ msgstr "болото"
 #: ../../data/world/terrains/init.lua:315
 #: ../../data/world/terrains/init.lua:620
 #: ../../data/world/terrains/init.lua:917
-#: ../../data/world/terrains/init.lua:1248
+#: ../../data/world/terrains/init.lua:1247
 msgid "Beach"
 msgstr "пляж"
 
@@ -916,31 +934,52 @@ msgid "Lava"
 msgstr "лава"
 
 #: ../../data/world/terrains/init.lua:383
+msgid "Ashes 1"
+msgstr ""
+
 #: ../../data/world/terrains/init.lua:403
-msgid "Ashes"
-msgstr "пепелище"
+msgid "Ashes 2"
+msgstr ""
 
 #: ../../data/world/terrains/init.lua:423
+msgid "Hard Ground 1"
+msgstr ""
+
 #: ../../data/world/terrains/init.lua:443
+msgid "Hard Ground 2"
+msgstr ""
+
 #: ../../data/world/terrains/init.lua:463
+msgid "Hard Ground 3"
+msgstr ""
+
 #: ../../data/world/terrains/init.lua:483
-msgid "Hard Ground"
-msgstr "твёрдый грунт"
+msgid "Hard Ground 4"
+msgstr ""
 
 #: ../../data/world/terrains/init.lua:503
 msgid "Igneous Rocks"
 msgstr "магматические горные породы"
 
 #: ../../data/world/terrains/init.lua:636
+msgid "Lava Rocks 1"
+msgstr ""
+
 #: ../../data/world/terrains/init.lua:653
-msgid "Lava Rocks"
-msgstr "вулканические горные породы"
+msgid "Lava Rocks 2"
+msgstr ""
 
 #: ../../data/world/terrains/init.lua:692
+msgid "Tundra 1"
+msgstr ""
+
 #: ../../data/world/terrains/init.lua:712
+msgid "Tundra 2"
+msgstr ""
+
 #: ../../data/world/terrains/init.lua:732
-msgid "Tundra"
-msgstr "тундра"
+msgid "Tundra 3"
+msgstr ""
 
 #: ../../data/world/terrains/init.lua:752
 msgid "Tundra Taiga"
@@ -955,14 +994,37 @@ msgid "Ice"
 msgstr "лёд"
 
 #: ../../data/world/terrains/init.lua:933
-#: ../../data/world/terrains/init.lua:950
-msgid "Ice Floes"
-msgstr "айсберг"
+msgid "Ice Floes 1"
+msgstr ""
 
-#: ../../data/world/terrains/init.lua:1005
+#: ../../data/world/terrains/init.lua:950
+msgid "Ice Floes 2"
+msgstr ""
+
+#: ../../data/world/terrains/init.lua:988
 msgid "Dry Soil"
 msgstr "сухая почва"
 
-#: ../../data/world/terrains/init.lua:1079
+#: ../../data/world/terrains/init.lua:1022
+msgid "Meadow"
+msgstr "луга"
+
+#: ../../data/world/terrains/init.lua:1062
 msgid "High Mountain Meadow"
 msgstr "высокогорные луга"
+
+#: ../../data/world/terrains/init.lua:1183
+msgid "Desert 1"
+msgstr ""
+
+#: ../../data/world/terrains/init.lua:1199
+msgid "Desert 2"
+msgstr ""
+
+#: ../../data/world/terrains/init.lua:1215
+msgid "Desert 3"
+msgstr ""
+
+#: ../../data/world/terrains/init.lua:1231
+msgid "Desert 4"
+msgstr ""

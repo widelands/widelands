@@ -37,14 +37,14 @@ namespace Widelands {
  * Pre-initialize a WaresQueue
 */
 WaresQueue::WaresQueue
-	(PlayerImmovable &       _owner,
-	 DescriptionIndex        const _ware,
-	 uint8_t           const _max_size)
+	(PlayerImmovable &       init_owner,
+	 DescriptionIndex        const init_ware,
+	 uint8_t           const init_max_size)
 	:
-	owner_           (_owner),
-	ware_            (_ware),
-	max_size_        (_max_size),
-	max_fill_        (_max_size),
+	owner_           (init_owner),
+	ware_            (init_ware),
+	max_size_        (init_max_size),
+	max_fill_        (init_max_size),
 	filled_          (0),
 	consume_interval_(0),
 	request_         (nullptr),

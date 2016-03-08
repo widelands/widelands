@@ -77,10 +77,10 @@ Window::Window
 		NamedPanel
 			(parent, name, x, y, w + VT_B_PIXMAP_THICKNESS * 2,
 			 TP_B_PIXMAP_THICKNESS + h + BT_B_PIXMAP_THICKNESS),
-		_is_minimal(false), _dragging(false),
-		_docked_left(false), _docked_right(false), _docked_bottom(false),
-		_drag_start_win_x(0), _drag_start_win_y(0),
-		_drag_start_mouse_x(0), _drag_start_mouse_y(0),
+		is_minimal_(false), dragging_(false),
+		docked_left_(false), docked_right_(false), docked_bottom_(false),
+		drag_start_win_x_(0), drag_start_win_y_(0),
+		drag_start_mouse_x_(0), drag_start_mouse_y_(0),
 		pic_lborder_
 			(g_gr->images().get("images/wui/window_left.png")),
 		pic_rborder_
@@ -109,7 +109,8 @@ Window::Window
 */
 void Window::set_title(const string & text)
 {
-	title_ = is_richtext(text) ? text : as_window_title(text);
+	assert(!is_richtext(text));
+	title_ = text;
 }
 
 /**
@@ -131,7 +132,7 @@ void Window::set_center_panel(Panel * panel)
  */
 void Window::update_desired_size()
 {
-	if (center_panel_ && !_is_minimal) {
+	if (center_panel_ && !is_minimal_) {
 		int innerw, innerh;
 		center_panel_->get_desired_size(&innerw, &innerh);
 		set_desired_size
@@ -146,7 +147,7 @@ void Window::update_desired_size()
  */
 void Window::layout()
 {
-	if (center_panel_ && !_is_minimal) {
+	if (center_panel_ && !is_minimal_) {
 		center_panel_->set_pos(Point(0, 0));
 		center_panel_->set_size(get_inner_w(), get_inner_h());
 	}
@@ -210,16 +211,16 @@ void Window::move_inside_parent() {
 		if (parent->get_inner_w() >= get_w()) {
 			if (px < 0) {
 				px = 0;
-				if (parent->get_dock_windows_to_edges() && !_docked_left)
-					_docked_left =  true;
+				if (parent->get_dock_windows_to_edges() && !docked_left_)
+					docked_left_ =  true;
 			} else if (px + get_w() >= parent->get_inner_w()) {
 				px = parent->get_inner_w() - get_w();
-				if (parent->get_dock_windows_to_edges() && !_docked_right)
-					_docked_right = true;
+				if (parent->get_dock_windows_to_edges() && !docked_right_)
+					docked_right_ = true;
 			}
-			if (_docked_left)
+			if (docked_left_)
 				px -= VT_B_PIXMAP_THICKNESS;
-			else if (_docked_right)
+			else if (docked_right_)
 				px += VT_B_PIXMAP_THICKNESS;
 		}
 		if (parent->get_inner_h() >= get_h()) {
@@ -228,12 +229,12 @@ void Window::move_inside_parent() {
 			else if (py + get_h() > parent->get_inner_h()) {
 				py = parent->get_inner_h() - get_h();
 				if
-					(!_is_minimal
+					(!is_minimal_
 					&&
-					parent->get_dock_windows_to_edges() && !_docked_bottom)
-					_docked_bottom = true;
+					parent->get_dock_windows_to_edges() && !docked_bottom_)
+					docked_bottom_ = true;
 			}
-			if (_docked_bottom)
+			if (docked_bottom_)
 				py += BT_B_PIXMAP_THICKNESS;
 		}
 		set_pos(Point(px, py));
@@ -312,16 +313,17 @@ void Window::draw_border(RenderTarget & dst)
 
 	// draw the title if we have one
 	if (!title_.empty()) {
+		// The title shouldn't be richtext, but we escape it just to make sure.
 		dst.blit
 			(Point(get_lborder() + get_inner_w() / 2, TP_B_PIXMAP_THICKNESS / 2),
-				UI::g_fh1->render(title_),
+			 autofit_ui_text(richtext_escape(title_), get_inner_w(), UI_FONT_CLR_FG, 13),
 				BlendMode::UseAlpha,
 				UI::Align::kCenter);
 	}
 
-	if (!_is_minimal) {
+	if (!is_minimal_) {
 		const int32_t vt_bar_end = get_h() -
-			(_docked_bottom ? 0 : BT_B_PIXMAP_THICKNESS) - VT_B_THINGY_PIXMAP_LEN;
+			(docked_bottom_ ? 0 : BT_B_PIXMAP_THICKNESS) - VT_B_THINGY_PIXMAP_LEN;
 		const int32_t vt_bar_end_minus_middle =
 			vt_bar_end - VT_B_MIDDLE_PIXMAP_LEN;
 
@@ -437,11 +439,11 @@ bool Window::handle_mousepress(const uint8_t btn, int32_t mx, int32_t my)
 		 btn == SDL_BUTTON_MIDDLE)
 		is_minimal() ? restore() : minimize();
 	else if (btn == SDL_BUTTON_LEFT) {
-		_dragging = true;
-		_drag_start_win_x = get_x();
-		_drag_start_win_y = get_y();
-		_drag_start_mouse_x = get_x() + get_lborder() + mx;
-		_drag_start_mouse_y = get_y() + get_tborder() + my;
+		dragging_ = true;
+		drag_start_win_x_ = get_x();
+		drag_start_win_y_ = get_y();
+		drag_start_mouse_x_ = get_x() + get_lborder() + mx;
+		drag_start_mouse_y_ = get_y() + get_tborder() + my;
 		grab_mouse(true);
 	} else if (btn == SDL_BUTTON_RIGHT) {
 		play_click();
@@ -453,7 +455,7 @@ bool Window::handle_mousepress(const uint8_t btn, int32_t mx, int32_t my)
 bool Window::handle_mouserelease(const uint8_t btn, int32_t, int32_t) {
 	if (btn == SDL_BUTTON_LEFT) {
 		grab_mouse(false);
-		_dragging = false;
+		dragging_ = false;
 	}
 	return true;
 }
@@ -482,25 +484,25 @@ void Window::die()
 
 
 void Window::restore() {
-	assert(_is_minimal);
-	_is_minimal = false;
+	assert(is_minimal_);
+	is_minimal_ = false;
 	set_border
 		(get_lborder(), get_rborder(),
 		 get_tborder(), BT_B_PIXMAP_THICKNESS);
-	set_inner_size(get_inner_w(), _oldh);
+	set_inner_size(get_inner_w(), oldh_);
 	update_desired_size();
 	move_inside_parent();
 }
 void Window::minimize() {
-	assert(!_is_minimal);
+	assert(!is_minimal_);
 	int32_t y = get_y(), x = get_x();
-	if (_docked_bottom) {
+	if (docked_bottom_) {
 		y -= BT_B_PIXMAP_THICKNESS; //  Minimal can not be bottom-docked.
-		_docked_bottom = false;
+		docked_bottom_ = false;
 	}
 	if (y < 0) y = 0; //  Move into the screen
-	_oldh = get_inner_h();
-	_is_minimal = true;
+	oldh_ = get_inner_h();
+	is_minimal_ = true;
 	set_border(get_lborder(), get_rborder(), get_tborder(), 0);
 	set_size(get_w(), TP_B_PIXMAP_THICKNESS);
 	set_pos(Point(x, y)); // If on border, this feels more natural
@@ -513,11 +515,11 @@ void Window::minimize() {
 bool Window::handle_mousemove
 		(const uint8_t, int32_t mx, int32_t my, int32_t, int32_t)
 {
-	if (_dragging) {
+	if (dragging_) {
 		const int32_t mouse_x = get_x() + get_lborder() + mx;
 		const int32_t mouse_y = get_y() + get_tborder() + my;
-		int32_t left = _drag_start_win_x + mouse_x - _drag_start_mouse_x;
-		int32_t top  = _drag_start_win_y + mouse_y - _drag_start_mouse_y;
+		int32_t left = drag_start_win_x_ + mouse_x - drag_start_mouse_x_;
+		int32_t top  = drag_start_win_y_ + mouse_y - drag_start_mouse_y_;
 		int32_t new_left = left, new_top = top;
 
 		if (const Panel * const parent = get_parent()) {
@@ -530,7 +532,7 @@ bool Window::handle_mousemove
 			top  = min<int32_t>(max_y - get_tborder(), top);
 			left = max<int32_t>(get_rborder() - w, left);
 			top  = max
-				(-static_cast<int32_t>(h - ((_is_minimal) ? get_tborder() : get_bborder())), top);
+				(-static_cast<int32_t>(h - ((is_minimal_) ? get_tborder() : get_bborder())), top);
 			new_left = left; new_top = top;
 
 			const uint8_t psnap = parent->get_panel_snap_distance ();
@@ -635,22 +637,22 @@ bool Window::handle_mousemove
 			if (parent->get_dock_windows_to_edges()) {
 				if (new_left <= 0 && new_left >= -VT_B_PIXMAP_THICKNESS) {
 						new_left = -VT_B_PIXMAP_THICKNESS;
-						_docked_left = true;
-				} else if (_docked_left) {
-					_docked_left = false;
+						docked_left_ = true;
+				} else if (docked_left_) {
+					docked_left_ = false;
 				}
 				if (new_left >= (max_x - w) && new_left <= (max_x - w) + VT_B_PIXMAP_THICKNESS) {
 					new_left = (max_x - w) + VT_B_PIXMAP_THICKNESS;
-						_docked_right = true;
-				} else if (_docked_right) {
-					_docked_right = false;
+						docked_right_ = true;
+				} else if (docked_right_) {
+					docked_right_ = false;
 				}
-				if (!_is_minimal) { //  minimal windows can not be bottom-docked
+				if (!is_minimal_) { //  minimal windows can not be bottom-docked
 					if (new_top >= (max_y - h) && new_top <= (max_y - h) + BT_B_PIXMAP_THICKNESS) {
 						new_top = (max_y - h) + BT_B_PIXMAP_THICKNESS;
-							_docked_bottom = true;
-					} else if (_docked_bottom) {
-						_docked_bottom = false;
+							docked_bottom_ = true;
+					} else if (docked_bottom_) {
+						docked_bottom_ = false;
 					}
 				}
 			}

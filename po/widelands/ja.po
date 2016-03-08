@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-02-14 16:47+0000\n"
-"PO-Revision-Date: 2016-02-14 16:48+0000\n"
+"POT-Creation-Date: 2016-03-02 08:54+0000\n"
+"PO-Revision-Date: 2016-03-02 08:56+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Japanese (http://www.transifex.com/widelands/widelands/language/ja/)\n"
 "MIME-Version: 1.0\n"
@@ -18,6 +18,95 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language: ja\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+
+#: ../../data/scripting/editor/terrain_help.lua:21
+#: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:54
+#: ../../src/editor/ui_menus/editor_tool_menu.cc:71
+msgid "Resources"
+msgstr "資源"
+
+#: ../../data/scripting/editor/terrain_help.lua:35
+msgid "%1%x %2%"
+msgstr ""
+
+#: ../../data/scripting/editor/terrain_help.lua:35
+msgid "Default:"
+msgstr ""
+
+#: ../../data/scripting/editor/terrain_help.lua:67
+msgid "Probability of trees growing"
+msgstr ""
+
+#: ../../data/scripting/editor/terrain_help.lua:72
+msgid "No trees will grow here."
+msgstr ""
+
+#: ../../data/scripting/editor/tree_help.lua:17
+msgid "Preferred terrains"
+msgstr ""
+
+#. * TRANSLATORS: File name for saving objective achieved
+#. * TRANSLATORS: %1% = map name. %2% = achievement name
+#. * TRANSLATORS: %1% is a filename, %2% a map's name.
+#. * TRANSLATORS: Terrain name + editor category, e.g. Steppe (Summer)
+#: ../../data/scripting/editor/tree_help.lua:38
+#: ../../src/editor/ui_menus/editor_help.cc:157
+#: ../../src/editor/ui_menus/editor_help.cc:195
+#: ../../src/scripting/lua_game.cc:1060 ../../src/ui_fsmenu/loadgame.cc:74
+msgid "%1% (%2%)"
+msgstr ""
+
+#: ../../data/scripting/format_scenario.lua:36
+#, lua-format
+msgid "“%s”"
+msgstr ""
+
+#. * TRANSLATORS: Concatenate the last 2 items on a list.
+#. * TRANSLATORS: RTL languages might want to change the word order here.
+#: ../../data/scripting/formatting.lua:31 ../../src/base/i18n.cc:335
+#, c-format
+msgid "%1$s & %2$s"
+msgstr ""
+
+#. * TRANSLATORS: Join the last 2 items on a list with "or".
+#. * TRANSLATORS: RTL languages might want to change the word order here.
+#: ../../data/scripting/formatting.lua:33 ../../src/base/i18n.cc:339
+#, c-format
+msgid "%1$s or %2$s"
+msgstr ""
+
+#. * TRANSLATORS: Join the last 2 items on a list with a comma.
+#. * TRANSLATORS: RTL languages might want to change the word order here.
+#. * TRANSLATORS: Concatenate 2 items at in the middle of a list.
+#. * TRANSLATORS: RTL languages might want to change the word order here.
+#: ../../data/scripting/formatting.lua:35
+#: ../../data/scripting/formatting.lua:40 ../../src/base/i18n.cc:343
+#: ../../src/base/i18n.cc:353
+#, c-format
+msgid "%1$s, %2$s"
+msgstr ""
+
+#. * TRANSLATORS: Concatenate the last 2 items on a list.
+#. * TRANSLATORS: RTL languages might want to change the word order here.
+#: ../../data/scripting/formatting.lua:37 ../../src/base/i18n.cc:347
+#, c-format
+msgid "%1$s and %2$s"
+msgstr ""
+
+#: ../../data/scripting/infrastructure.lua:157
+msgid "No Space"
+msgstr ""
+
+#: ../../data/scripting/infrastructure.lua:158
+msgid ""
+"Some of your starting buildings didn’t have enough room and weren’t built. "
+"You are at a disadvantage with this; consider restarting this map with a "
+"fair starting condition."
+msgstr ""
+
+#: ../../data/scripting/infrastructure.lua:159
+msgid "Not enough space"
+msgstr ""
 
 #. * TRANSLATORS: This is a heading for a help window
 #: ../../data/scripting/widelands/multiplayer_help.lua:10
@@ -106,6 +195,49 @@ msgid ""
 "condition, and finally can start the game as soon as all players are set up."
 msgstr ""
 
+#: ../../data/scripting/win_condition_texts.lua:4
+msgid "Congratulations!"
+msgstr ""
+
+#: ../../data/scripting/win_condition_texts.lua:5
+msgid "You have won this game!"
+msgstr ""
+
+#: ../../data/scripting/win_condition_texts.lua:9
+msgid "You are defeated!"
+msgstr ""
+
+#: ../../data/scripting/win_condition_texts.lua:10
+msgid ""
+"You lost your last warehouse and are therefore defeated. You may continue as"
+" spectator if you want."
+msgstr ""
+
+#: ../../data/scripting/win_condition_texts.lua:14
+msgid "You won"
+msgstr ""
+
+#: ../../data/scripting/win_condition_texts.lua:15
+msgid "You are the winner!"
+msgstr ""
+
+#: ../../data/scripting/win_condition_texts.lua:19
+msgid "You lost"
+msgstr ""
+
+#: ../../data/scripting/win_condition_texts.lua:20
+msgid "You’ve lost this game!"
+msgstr ""
+
+#: ../../data/scripting/win_condition_texts.lua:24
+#: ../../src/wui/game_message_menu.cc:75 ../../src/wui/game_summary.cc:121
+msgid "Status"
+msgstr "状態"
+
+#: ../../data/scripting/win_condition_texts.lua:25
+msgid "Player overview:"
+msgstr ""
+
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
 #: ../../src/ai/computer_player.cc:42
 msgid "No AI"
@@ -124,36 +256,6 @@ msgstr ""
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
 #: ../../src/ai/defaultai.h:128
 msgid "Very Weak AI"
-msgstr ""
-
-#. * TRANSLATORS: Concatenate the last 2 items on a list.
-#. * TRANSLATORS: RTL languages might want to change the word order here.
-#: ../../src/base/i18n.cc:335
-#, c-format
-msgid "%1$s & %2$s"
-msgstr ""
-
-#. * TRANSLATORS: Join the last 2 items on a list with "or".
-#. * TRANSLATORS: RTL languages might want to change the word order here.
-#: ../../src/base/i18n.cc:339
-#, c-format
-msgid "%1$s or %2$s"
-msgstr ""
-
-#. * TRANSLATORS: Join the last 2 items on a list with a comma.
-#. * TRANSLATORS: RTL languages might want to change the word order here.
-#. * TRANSLATORS: Concatenate 2 items at in the middle of a list.
-#. * TRANSLATORS: RTL languages might want to change the word order here.
-#: ../../src/base/i18n.cc:343 ../../src/base/i18n.cc:353
-#, c-format
-msgid "%1$s, %2$s"
-msgstr ""
-
-#. * TRANSLATORS: Concatenate the last 2 items on a list.
-#. * TRANSLATORS: RTL languages might want to change the word order here.
-#: ../../src/base/i18n.cc:347
-#, c-format
-msgid "%1$s and %2$s"
 msgstr ""
 
 #. * TRANSLATORS: January. Keep this to 4 letters maximum.
@@ -338,7 +440,7 @@ msgstr "マップが保存されていません。\nこのまま終了します�
 
 #: ../../src/editor/editorinteractive.cc:632
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:120
-msgid "Creating empty map..."
+msgid "Creating empty map…"
 msgstr ""
 
 #. * TRANSLATORS: Default name for new map
@@ -359,7 +461,7 @@ msgstr ""
 
 #: ../../src/editor/editorinteractive.cc:647
 #, c-format
-msgid "Loading map \"%s\"..."
+msgid "Loading map “%s”…"
 msgstr ""
 
 #: ../../src/editor/map_generator.cc:792
@@ -554,16 +656,6 @@ msgstr ""
 
 #: ../../src/editor/ui_menus/editor_help.cc:80
 msgid "Trees"
-msgstr ""
-
-#. * TRANSLATORS: File name for saving objective achieved
-#. * TRANSLATORS: %1% = map name. %2% = achievement name
-#. * TRANSLATORS: %1% is a filename, %2% a map's name.
-#. * TRANSLATORS: Terrain name + editor category, e.g. Steppe (Summer)
-#: ../../src/editor/ui_menus/editor_help.cc:157
-#: ../../src/editor/ui_menus/editor_help.cc:195
-#: ../../src/scripting/lua_game.cc:1060 ../../src/ui_fsmenu/loadgame.cc:74
-msgid "%1% (%2%)"
 msgstr ""
 
 #: ../../src/editor/ui_menus/editor_main_menu.cc:46
@@ -828,8 +920,8 @@ msgid "Generate Map"
 msgstr "マップ生成"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:452
-msgid "Generating random map..."
-msgstr "ランダムマップを生成中..."
+msgid "Generating random map…"
+msgstr ""
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:61
 #: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:28
@@ -845,26 +937,26 @@ msgstr ""
 msgid "unnamed"
 msgstr "名前なし"
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:243
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:239
 #: ../../src/wui/game_main_menu_save_game.cc:260
 #, c-format
 msgid "A file with the name ‘%s’ already exists. Overwrite?"
 msgstr "ファイル「%s」は既に存在します。上書きしますか？"
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:246
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:259
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:309
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:242
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:255
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:302
 msgid "Error Saving Map!"
 msgstr "ゲーム保存エラー"
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:256
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:252
 #, c-format
 msgid ""
 "A file with the name ‘%s.tmp’ already exists. You have to remove it "
 "manually."
 msgstr ""
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:305
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:298
 msgid ""
 "Error Saving Map!\n"
 "Saved map file may be corrupt!\n"
@@ -896,7 +988,7 @@ msgstr "プレイ人数"
 #: ../../src/editor/ui_menus/editor_player_menu.cc:232
 #: ../../src/logic/map.cc:315
 #: ../../src/logic/single_player_game_settings_provider.cc:88
-#: ../../src/network/nethost.cc:1699 ../../src/ui_fsmenu/launch_mpg.cc:581
+#: ../../src/network/nethost.cc:1700 ../../src/ui_fsmenu/launch_mpg.cc:581
 #: ../../src/wui/multiplayersetupgroup.cc:142
 #: ../../src/wui/multiplayersetupgroup.cc:304
 #, c-format
@@ -927,11 +1019,6 @@ msgstr "値の減少／増加"
 #: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:89
 msgid "Set Value"
 msgstr "値を設定"
-
-#: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:54
-#: ../../src/editor/ui_menus/editor_tool_menu.cc:71
-msgid "Resources"
-msgstr "資源"
 
 #: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:108
 msgid "Current Selection"
@@ -1024,13 +1111,13 @@ msgid "Scenario"
 msgstr "シナリオ"
 
 #: ../../src/logic/game.cc:244 ../../src/logic/game.cc:324
-msgid "Loading map"
-msgstr "マップを読込中"
+msgid "Loading map…"
+msgstr ""
 
 #: ../../src/logic/game.cc:366 ../../src/logic/game.cc:399
-#: ../../src/wlapplication.cc:1331
-msgid "Loading..."
-msgstr "読込中..."
+#: ../../src/ui_basic/progresswindow.cc:50 ../../src/wlapplication.cc:1377
+msgid "Loading…"
+msgstr ""
 
 #: ../../src/logic/game.cc:463
 msgid "Creating player infrastructure"
@@ -1457,8 +1544,8 @@ msgid ""
 msgstr "リプレイが終了したため、ゲームを一時停止しています。一時停止を解除すると観察を続行できます。"
 
 #: ../../src/logic/save_handler.cc:106
-msgid "Saving game..."
-msgstr "ゲーム保存中..."
+msgid "Saving game…"
+msgstr ""
 
 #: ../../src/logic/save_handler.cc:125
 msgid "Saving failed!"
@@ -1473,7 +1560,7 @@ msgid "Bluebyte Settlers II Map. No comment defined!"
 msgstr "Bluebyte Settlers IIのマップです。コメントが定義されていません。"
 
 #: ../../src/network/internet_gaming.cc:114
-#: ../../src/ui_fsmenu/internet_lobby.cc:415
+#: ../../src/ui_fsmenu/internet_lobby.cc:425
 msgid "Connection problem"
 msgstr "接続エラー"
 
@@ -1496,114 +1583,114 @@ msgstr "Widelandsは、指定されたアドレスへの接続を確立できま
 msgid "For hosting a game, please take a look at the notes at:"
 msgstr "ゲームをホストするには次の注意事項を見てみてください。"
 
-#: ../../src/network/internet_gaming.cc:302
+#: ../../src/network/internet_gaming.cc:309
 msgid "Something went wrong: "
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:392
+#: ../../src/network/internet_gaming.cc:399
 msgid "Successfully reconnected to the metaserver!"
 msgstr "正常にメタサーバーに再接続しました。"
 
-#: ../../src/network/internet_gaming.cc:399
+#: ../../src/network/internet_gaming.cc:406
 msgid "Mixed up"
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:399
+#: ../../src/network/internet_gaming.cc:406
 msgid "The metaserver sent a strange ERROR during connection"
 msgstr "メタサーバーが接続時に未知のエラーを送信しました"
 
-#: ../../src/network/internet_gaming.cc:410
+#: ../../src/network/internet_gaming.cc:417
 msgid "Unexpected packet"
 msgstr "予期しないパケット"
 
-#: ../../src/network/internet_gaming.cc:412
+#: ../../src/network/internet_gaming.cc:419
 #, c-format
 msgid ""
 "Expected a LOGIN, RELOGIN or REJECTED packet from server, but received "
 "command %s. Maybe the metaserver is using a different protocol version ?"
 msgstr "ログインや再ログイン、またはサーバーからの拒否パケットを予期していましたが、コマンド%sを受信しました。おそらくメタサーバーが異なるプロトコルバージョンを使用しています。"
 
-#: ../../src/network/internet_gaming.cc:425
+#: ../../src/network/internet_gaming.cc:432
 #, c-format
 msgid ""
 "WARNING: Received a %s command although we are not in CONNECTING state."
 msgstr "警告: 接続状態ではありませんが、%sコマンドを受信しました。"
 
-#: ../../src/network/internet_gaming.cc:435
+#: ../../src/network/internet_gaming.cc:442
 #, c-format
 msgid "InternetGaming: Server time offset is %u second."
 msgid_plural "InternetGaming: Server time offset is %u seconds."
 msgstr[0] "ネットゲーム: サーバー時刻との差は%u秒です。"
 
-#: ../../src/network/internet_gaming.cc:440
+#: ../../src/network/internet_gaming.cc:447
 #, c-format
 msgid "Server time offset is %u second."
 msgid_plural "Server time offset is %u seconds."
 msgstr[0] "サーバー時刻との差は%u秒です。"
 
-#: ../../src/network/internet_gaming.cc:463
+#: ../../src/network/internet_gaming.cc:470
 #, c-format
 msgid "Invalid chat message type \"%s\"."
 msgstr "不正なチャットメッセージタイプ「%s」です。"
 
-#: ../../src/network/internet_gaming.cc:463
+#: ../../src/network/internet_gaming.cc:470
 msgid "Invalid message type"
 msgstr "不正なメッセージタイプ"
 
-#: ../../src/network/internet_gaming.cc:499
+#: ../../src/network/internet_gaming.cc:506
 #, c-format
 msgid "The game %s is now available"
 msgstr "ゲーム%sは利用可能です"
 
-#: ../../src/network/internet_gaming.cc:508
+#: ../../src/network/internet_gaming.cc:515
 #, c-format
 msgid "The game %s has been closed"
 msgstr "ゲーム%sは閉鎖しています"
 
-#: ../../src/network/internet_gaming.cc:543
+#: ../../src/network/internet_gaming.cc:550
 #, c-format
 msgid "%s joined the lobby"
 msgstr "%sがロビーに入室しました"
 
-#: ../../src/network/internet_gaming.cc:552
+#: ../../src/network/internet_gaming.cc:559
 #, c-format
 msgid "%s left the lobby"
 msgstr "%sがロビーを退室しました"
 
-#: ../../src/network/internet_gaming.cc:586
+#: ../../src/network/internet_gaming.cc:593
 msgid "Chat message could not be sent."
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:602
+#: ../../src/network/internet_gaming.cc:609
 #, c-format
 msgid "ERROR: %s"
 msgstr "エラー: %s"
 
-#: ../../src/network/internet_gaming.cc:612
+#: ../../src/network/internet_gaming.cc:619
 #, c-format
 msgid "Received an unknown command from the metaserver: %s"
 msgstr "メタサーバーから不明なコマンドを受信しました: %s"
 
-#: ../../src/network/internet_gaming.cc:745
+#: ../../src/network/internet_gaming.cc:752
 msgid "Message could not be sent: You are not connected to the metaserver!"
 msgstr "メッセージを送信できませんでした。あなたはメタサーバーに接続されていません"
 
-#: ../../src/network/internet_gaming.cc:757
+#: ../../src/network/internet_gaming.cc:764
 msgid "Message could not be sent: Was this supposed to be a private message?"
 msgstr "メッセージを送信できませんでした。これはプライベートメッセージになるはずでしたか？"
 
-#: ../../src/network/internet_gaming.cc:831
+#: ../../src/network/internet_gaming.cc:838
 msgid "Conversion error"
 msgstr "変換エラー"
 
 #. * TRANSLATORS: Geeky message from the metaserver
 #. * TRANSLATORS: This message is shown if %s isn't "true" or "false"
-#: ../../src/network/internet_gaming.cc:834
+#: ../../src/network/internet_gaming.cc:841
 #, c-format
 msgid "Unable to determine truth value for \"%s\""
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:850
+#: ../../src/network/internet_gaming.cc:857
 msgid "unknown"
 msgstr "不明"
 
@@ -1677,8 +1764,8 @@ msgid ""
 "the server shut down as you tried to connect."
 msgstr "Widelandsは指定されたアドレスへの接続を確立できませんでした。\n予期していたポートでWidelandsサーバーが動作していなかったか、\nあなたが接続しようとしたときに、サーバーがシャットダウンしました。"
 
-#: ../../src/network/netclient.cc:186 ../../src/network/nethost.cc:729
-#: ../../src/wlapplication.cc:1221
+#: ../../src/network/netclient.cc:184 ../../src/network/nethost.cc:729
+#: ../../src/wlapplication.cc:1267
 msgid "Preparing game"
 msgstr "ゲーム準備中"
 
@@ -1790,16 +1877,16 @@ msgstr ""
 msgid "Invalid command! Type /help for a list of commands."
 msgstr "無効なコマンドです。コマンド一覧を見るには /help と入力します。"
 
-#: ../../src/network/nethost.cc:1633
+#: ../../src/network/nethost.cc:1634
 #, c-format
 msgid "Computer %u"
 msgstr "コンピュータ%u"
 
-#: ../../src/network/nethost.cc:1693 ../../src/wui/game_summary.cc:119
+#: ../../src/network/nethost.cc:1694 ../../src/wui/game_summary.cc:119
 msgid "Player"
 msgstr "プレイヤー"
 
-#: ../../src/network/nethost.cc:1858
+#: ../../src/network/nethost.cc:1859
 #, c-format
 msgid "%li second"
 msgid_plural "%li seconds"
@@ -2032,10 +2119,6 @@ msgstr ""
 #: ../../src/profile/profile.cc:73
 msgid "off"
 msgstr ""
-
-#: ../../src/ui_basic/progresswindow.cc:46
-msgid "Preparing..."
-msgstr "準備中..."
 
 #: ../../src/ui_basic/spinbox.cc:149
 msgid "Decrease the value"
@@ -2276,34 +2359,34 @@ msgid "Points"
 msgstr "ポイント"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:146
-#: ../../src/ui_fsmenu/options.cc:243
+#: ../../src/ui_fsmenu/options.cc:235
 msgid "Game"
 msgstr "ゲーム"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:384
+#: ../../src/ui_fsmenu/internet_lobby.cc:394
 msgid ""
 "Widelands was unable to get the IP address of the server in time.\n"
 "There seems to be a network problem, either on your side or on the side\n"
 "of the server.\n"
 msgstr "Widelandsは時間内にサーバーのIPアドレスを取得することができません\nでした。あなた側もしくはサーバー側に、ネットワーク上の問題がある\nようです。\n"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:388
+#: ../../src/ui_fsmenu/internet_lobby.cc:398
 msgid "Connection timed out"
 msgstr "接続がタイムアウトしました"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:416
+#: ../../src/ui_fsmenu/internet_lobby.cc:426
 msgid "Widelands was unable to connect to the host."
 msgstr "Widelandsがホストに接続できませんでした。"
 
 #. * TRANSLATORS: This is shown for multiplayer games when no host
 #. * TRANSLATORS: server to connect to has been specified yet.
-#: ../../src/ui_fsmenu/internet_lobby.cc:438
+#: ../../src/ui_fsmenu/internet_lobby.cc:448
 msgctxt "server_name"
 msgid "unnamed"
 msgstr ""
 
 #: ../../src/ui_fsmenu/intro.cc:32
-msgid "Press any key or click to continue ..."
+msgid "Press any key or click to continue…"
 msgstr ""
 
 #. * TRANSLATORS: Dialog box title for selecting between map or saved game for
@@ -2866,7 +2949,7 @@ msgstr "ウィンドウがパネルなどにドッキングされる距離"
 #. * TRANSLATORS: Options: Distance for windows to snap to borders:
 #. * TRANSLATORS: This will have a number added in front of it
 #: ../../src/ui_fsmenu/options.cc:174 ../../src/ui_fsmenu/options.cc:182
-#: ../../src/ui_fsmenu/options.cc:411 ../../src/ui_fsmenu/options.cc:415
+#: ../../src/ui_fsmenu/options.cc:390 ../../src/ui_fsmenu/options.cc:394
 msgid "pixel"
 msgid_plural "pixels"
 msgstr[0] ""
@@ -2895,7 +2978,7 @@ msgstr ""
 
 #. * TRANSLATORS: Options: Save game automatically every:
 #. * TRANSLATORS: This will have a number added in front of it
-#: ../../src/ui_fsmenu/options.cc:196 ../../src/ui_fsmenu/options.cc:403
+#: ../../src/ui_fsmenu/options.cc:196 ../../src/ui_fsmenu/options.cc:386
 msgid "minute"
 msgid_plural "minutes"
 msgstr[0] ""
@@ -2904,80 +2987,64 @@ msgstr[0] ""
 msgid "Maximum number of autosave files:"
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:207
-msgid "Remove replays older than:"
-msgstr ""
-
-#. * TRANSLATORS: Options: Remove Replays older than:
-#. * TRANSLATORS: This will have a number added in front of it
-#: ../../src/ui_fsmenu/options.cc:210 ../../src/ui_fsmenu/options.cc:407
-msgid "day"
-msgid_plural "days"
-msgstr[0] "日"
-
-#: ../../src/ui_fsmenu/options.cc:213
+#: ../../src/ui_fsmenu/options.cc:205
 msgid "Do not zip widelands data files (maps, replays and savegames)"
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:215
-msgid "Remove Syncstream dumps on startup"
-msgstr "起動時にセグメンテーションダンプを削除"
+#: ../../src/ui_fsmenu/options.cc:207
+msgid "Write syncstreams in network games to debug desyncs"
+msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:219
+#: ../../src/ui_fsmenu/options.cc:211
 msgid "Start building road after placing a flag"
 msgstr "旗を設置したあとすぐに道路の敷設を始める"
 
-#: ../../src/ui_fsmenu/options.cc:220
+#: ../../src/ui_fsmenu/options.cc:212
 msgid "Show buildings area preview"
 msgstr "建物の作業範囲を表示"
 
-#: ../../src/ui_fsmenu/options.cc:221
+#: ../../src/ui_fsmenu/options.cc:213
 msgid "Show in-game chat with transparent background"
 msgstr "ゲームチャットを透明な背景で表示"
 
 #. * TRANSLATORS: A watchwindow is a window where you keep watching an object
 #. or a map region,
 #. * TRANSLATORS: and it also lets you jump to it on the map.
-#: ../../src/ui_fsmenu/options.cc:226
+#: ../../src/ui_fsmenu/options.cc:218
 msgid "Use single watchwindow mode"
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:229 ../../src/ui_fsmenu/options.cc:244
+#: ../../src/ui_fsmenu/options.cc:221 ../../src/ui_fsmenu/options.cc:236
 msgid "Language"
 msgstr "言語"
 
-#: ../../src/ui_fsmenu/options.cc:239
+#: ../../src/ui_fsmenu/options.cc:231
 msgid "Interface"
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:240
+#: ../../src/ui_fsmenu/options.cc:232
 msgid "Windows"
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:241
+#: ../../src/ui_fsmenu/options.cc:233
 msgid "Sound"
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:242
+#: ../../src/ui_fsmenu/options.cc:234
 msgid "Saving"
 msgstr ""
 
 #. * TRANSLATORS Options: Save game automatically every:
-#: ../../src/ui_fsmenu/options.cc:302
+#: ../../src/ui_fsmenu/options.cc:293
 msgid "Off"
 msgstr "オフ"
 
-#. * TRANSLATORS Options: Remove Replays older than:
-#: ../../src/ui_fsmenu/options.cc:310
-msgid "Never"
-msgstr "しない"
-
 #. * TRANSLATORS: Screen resolution, e.g. 800 x 600
-#: ../../src/ui_fsmenu/options.cc:357 ../../src/ui_fsmenu/options.cc:363
+#: ../../src/ui_fsmenu/options.cc:340 ../../src/ui_fsmenu/options.cc:346
 msgid "%1% x %2%"
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:421
+#: ../../src/ui_fsmenu/options.cc:400
 msgid "Try system language"
 msgstr "システム言語を試す"
 
@@ -2993,11 +3060,11 @@ msgstr "キャンペーン"
 msgid "Load Game"
 msgstr "ゲーム読込"
 
-#: ../../src/wlapplication.cc:1007
+#: ../../src/wlapplication.cc:1053
 msgid "Game data error"
 msgstr "ゲームデータエラー"
 
-#: ../../src/wlapplication.cc:1017
+#: ../../src/wlapplication.cc:1063
 #, c-format
 msgid ""
 "\n"
@@ -3005,7 +3072,7 @@ msgid ""
 "Please report this problem to help us improve Widelands. You will find related messages in the standard output (stdout.txt on Windows). You are using build %1$s (%2$s). "
 msgstr "\n\nWidelandsの改善のためにこの問題を報告してください。標準出力（Windowsの場合はstdout.txt）に関連するメッセージを見つけましょう。あなたはビルド%1$s (%2$s)を使用しています。 "
 
-#: ../../src/wlapplication.cc:1024
+#: ../../src/wlapplication.cc:1070
 msgid ""
 "Please add this information to your report.\n"
 "\n"
@@ -3402,10 +3469,6 @@ msgstr "タイトル"
 msgctxt "message"
 msgid "Type"
 msgstr ""
-
-#: ../../src/wui/game_message_menu.cc:75 ../../src/wui/game_summary.cc:121
-msgid "Status"
-msgstr "状態"
 
 #. * TRANSLATORS: We have very little space here. You can also translate this
 #. as "Time" or "Time Sent"

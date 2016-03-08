@@ -92,9 +92,9 @@ ShipWindow::ShipWindow(InteractiveGameBase & igb, Ship & ship, const std::string
 	m_igbase(igb),
 	m_ship(ship)
 {
-	assert(!m_ship.m_window);
+	assert(!m_ship.window_);
 	assert(m_ship.get_owner());
-	m_ship.m_window = this;
+	m_ship.window_ = this;
 
 	UI::Box * vbox = new UI::Box(this, 0, 0, UI::Box::Vertical);
 
@@ -204,8 +204,8 @@ ShipWindow::ShipWindow(InteractiveGameBase & igb, Ship & ship, const std::string
 
 ShipWindow::~ShipWindow()
 {
-	assert(m_ship.m_window == this);
-	m_ship.m_window = nullptr;
+	assert(m_ship.window_ == this);
+	m_ship.window_ = nullptr;
 }
 
 void ShipWindow::think()
@@ -349,18 +349,18 @@ void ShipWindow::act_explore_island(IslandExploreDirection direction) {
 void Ship::show_window(InteractiveGameBase & igb, bool avoid_fastclick)
 {
 	// No window, if ship is sinking
-	if (m_ship_state == SINK_REQUEST || m_ship_state == SINK_ANIMATION)
+	if (ship_state_ == SINK_REQUEST || ship_state_ == SINK_ANIMATION)
 		return;
 
-	if (m_window) {
-		if (m_window->is_minimal())
-			m_window->restore();
-		m_window->move_to_top();
+	if (window_) {
+		if (window_->is_minimal())
+			window_->restore();
+		window_->move_to_top();
 	} else {
 		const std::string& title = get_shipname();
 		new ShipWindow(igb, *this, title);
 		if (!avoid_fastclick)
-			m_window->warp_mouse_to_fastclick_panel();
+			window_->warp_mouse_to_fastclick_panel();
 	}
 }
 
@@ -369,9 +369,9 @@ void Ship::show_window(InteractiveGameBase & igb, bool avoid_fastclick)
  */
 void Ship::close_window()
 {
-	if (m_window) {
-		delete m_window;
-		m_window = nullptr;
+	if (window_) {
+		delete window_;
+		window_ = nullptr;
 	}
 }
 
@@ -380,14 +380,14 @@ void Ship::close_window()
  */
 void Ship::refresh_window(InteractiveGameBase & igb) {
 	// Only do something if there is actually a window
-	if (m_window) {
-		Point window_position = m_window->get_pos();
+	if (window_) {
+		Point window_position = window_->get_pos();
 		close_window();
 		show_window(igb, true);
 		// show window could theoretically fail if refresh_window was called at the very same moment
 		// as the ship begins to sink
-		if (m_window)
-			m_window->set_pos(window_position);
+		if (window_)
+			window_->set_pos(window_position);
 	}
 }
 

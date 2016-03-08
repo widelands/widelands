@@ -2602,6 +2602,7 @@ const MethodType<LuaWorkerDescription> LuaWorkerDescription::Methods[] = {
 const PropertyType<LuaWorkerDescription> LuaWorkerDescription::Properties[] = {
 	PROP_RO(LuaWorkerDescription, becomes),
 	PROP_RO(LuaWorkerDescription, buildcost),
+	PROP_RO(LuaWorkerDescription, employers),
 	PROP_RO(LuaWorkerDescription, helptext_script),
 	PROP_RO(LuaWorkerDescription, is_buildable),
 	PROP_RO(LuaWorkerDescription, needed_experience),
@@ -2660,6 +2661,22 @@ int LuaWorkerDescription::get_buildcost(lua_State * L) {
 			lua_pushstring(L, buildcost_pair.first);
 			lua_settable(L, -3);
 		}
+	}
+	return 1;
+}
+
+/* RST
+	.. attribute:: employers
+		(RO) An array with :class:`LuaBuildingDescription` with buildings where
+		this worker can be employed.
+*/
+int LuaWorkerDescription::get_employers(lua_State * L) {
+	lua_newtable(L);
+	int index = 1;
+	for (const DescriptionIndex& building_index : get()->employers()) {
+		lua_pushint32(L, index++);
+		upcasted_map_object_descr_to_lua(L, get_egbase(L).tribes().get_building_descr(building_index));
+		lua_rawset(L, -3);
 	}
 	return 1;
 }
@@ -3388,7 +3405,7 @@ int LuaFlag::get_roads(lua_State * L) {
 		EditorGameBase & egbase = get_egbase(L);
 		Flag * f = get(L, egbase);
 
-		for (uint32_t i = 1; i <= 6; i++){
+		for (uint32_t i = 1; i <= 6; i++) {
  	       if (f->get_road(i) != nullptr)  {
 				lua_pushstring(L, directions.at(i - 1));
 				upcasted_map_object_to_lua(L, f->get_road(i));
@@ -3862,7 +3879,7 @@ int LuaWarehouse::get_expedition_in_progress(lua_State * L) {
 	if (is_a(Game, &egbase)) {
 		PortDock* pd = get(L, egbase)->get_portdock();
 		if (pd) {
-			if (pd->expedition_started()){
+			if (pd->expedition_started()) {
 				return 1;
 			}
 		}
@@ -3956,7 +3973,7 @@ int LuaWarehouse::start_expedition(lua_State* L) {
 		if (!pd) {
 			return 0;
 		}
-		if (!pd->expedition_started()){
+		if (!pd->expedition_started()) {
 			game->send_player_start_or_cancel_expedition(*wh);
 			return 1;
 		}
@@ -3987,7 +4004,7 @@ int LuaWarehouse::cancel_expedition(lua_State* L) {
 			if (!pd) {
 				return 0;
 			}
-		if (pd->expedition_started()){
+		if (pd->expedition_started()) {
 			game->send_player_start_or_cancel_expedition(*wh);
 			return 1;
 		}
@@ -4543,7 +4560,7 @@ int LuaShip::set_island_explore_direction(lua_State* L) {
 	if (upcast(Game, game, &egbase)) {
 		Ship* ship = get(L, egbase);
 		std::string dir = luaL_checkstring(L, 3);
-		if (dir == "ccw"){
+		if (dir == "ccw") {
 			 game->send_player_ship_explore_island(*ship,  IslandExploreDirection::kCounterClockwise);
 		} else if (dir == "cw") {
 			 game->send_player_ship_explore_island(*ship, IslandExploreDirection::kClockwise);

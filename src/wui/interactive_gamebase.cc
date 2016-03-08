@@ -47,10 +47,10 @@ std::string speed_string(int const speed) {
 }  // namespace
 
 InteractiveGameBase::InteractiveGameBase
-	(Widelands::Game & _game, Section & global_s,
+	(Widelands::Game& g, Section & global_s,
 	 PlayerType pt, bool const chatenabled, bool const multiplayer)
 	:
-	InteractiveBase(_game, global_s),
+	InteractiveBase(g, global_s),
 	chat_provider_(nullptr),
 	chatenabled_(chatenabled),
 	multiplayer_(multiplayer),
@@ -103,14 +103,13 @@ void InteractiveGameBase::draw_overlay(RenderTarget& dst) {
 		uint32_t const desired = game_controller->desired_speed();
 		if (real == desired) {
 			if (real != 1000) {
-				game_speed = as_uifont(speed_string(real), UI_FONT_SIZE_SMALL);
+				game_speed = as_condensed(speed_string(real));
 			}
 		} else {
-			game_speed = as_uifont((boost::format
+			game_speed = as_condensed((boost::format
 											/** TRANSLATORS: actual_speed (desired_speed) */
 											(_("%1$s (%2$s)")) %
-											speed_string(real) % speed_string(desired)).str(),
-										  UI_FONT_SIZE_SMALL);
+											speed_string(real) % speed_string(desired)).str());
 		}
 
 		if (!game_speed.empty()) {

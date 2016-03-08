@@ -48,8 +48,8 @@ const PortdockDescr& PortDock::descr() const {
 	return g_portdock_descr;
 }
 
-PortdockDescr::PortdockDescr(char const* const _name, char const* const _descname)
-   : MapObjectDescr(MapObjectType::PORTDOCK, _name, _descname) {
+PortdockDescr::PortdockDescr(char const* const init_name, char const* const init_descname)
+	: MapObjectDescr(MapObjectType::PORTDOCK, init_name, init_descname) {
 }
 
 PortDock::PortDock(Warehouse* wh)
@@ -253,7 +253,7 @@ void PortDock::update_shippingitem(Game& game, WareInstance& ware) {
 	     ++item_iter) {
 
 		if (item_iter->object_.serial() == ware.serial()) {
-			_update_shippingitem(game, item_iter);
+			update_shippingitem(game, item_iter);
 			return;
 		}
 	}
@@ -278,13 +278,13 @@ void PortDock::update_shippingitem(Game& game, Worker& worker) {
 	     ++item_iter) {
 
 		if (item_iter->object_.serial() == worker.serial()) {
-			_update_shippingitem(game, item_iter);
+			update_shippingitem(game, item_iter);
 			return;
 		}
 	}
 }
 
-void PortDock::_update_shippingitem(Game& game, std::vector<ShippingItem>::iterator it) {
+void PortDock::update_shippingitem(Game& game, std::vector<ShippingItem>::iterator it) {
 	it->update_destination(game, *this);
 
 	PortDock* dst = it->get_destination(game);
@@ -364,7 +364,7 @@ void PortDock::ship_arrived(Game& game, Ship& ship) {
 			waiting_.pop_back();
 		}
 
-		if (waiting_.empty()){
+		if (waiting_.empty()) {
 			set_need_ship(game, false);
 		}
 	}

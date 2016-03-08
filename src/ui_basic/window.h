@@ -52,6 +52,7 @@ namespace UI {
  */
 class Window : public NamedPanel {
 public:
+	/// Do not use richtext for the \param title.
 	Window
 		(Panel      * parent,
 		 const std::string& name,
@@ -61,7 +62,8 @@ public:
 		 uint32_t     h,
 		 const std::string& title);
 
-	void set_title(const std::string &);
+	/// This will set the window title. Do not use richtext for the \param text.
+	void set_title(const std::string& text);
 	const std::string & get_title() const {return title_;}
 
 	void set_center_panel(Panel * panel);
@@ -71,7 +73,7 @@ public:
 	void warp_mouse_to_fastclick_panel();
 	void set_fastclick_panel(Panel * p) {fastclick_panel_ = p;}
 
-	bool is_minimal() const {return _is_minimal;}
+	bool is_minimal() const {return is_minimal_;}
 	void restore ();
 	void minimize();
 	bool is_snap_target() const override {return true;}
@@ -94,11 +96,11 @@ protected:
 	void update_desired_size() override;
 
 private:
-	bool _is_minimal;
-	uint32_t _oldh;  // if it is, this is the old height
-	bool _dragging, _docked_left, _docked_right, _docked_bottom;
-	int32_t _drag_start_win_x, _drag_start_win_y;
-	int32_t _drag_start_mouse_x, _drag_start_mouse_y;
+	bool is_minimal_;
+	uint32_t oldh_;  // if it is, this is the old height
+	bool dragging_, docked_left_, docked_right_, docked_bottom_;
+	int32_t drag_start_win_x_, drag_start_win_y_;
+	int32_t drag_start_mouse_x_, drag_start_mouse_y_;
 
 	std::string title_;
 

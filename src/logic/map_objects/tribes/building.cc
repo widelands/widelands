@@ -55,10 +55,10 @@ namespace Widelands {
 static const int32_t BUILDING_LEAVE_INTERVAL = 1000;
 
 BuildingDescr::BuildingDescr
-	(const std::string& init_descname, const MapObjectType _type,
+	(const std::string& init_descname, const MapObjectType init_type,
 	 const LuaTable& table, const EditorGameBase& egbase)
 	:
-	MapObjectDescr(_type, table.get_string("name"), init_descname, table),
+	MapObjectDescr(init_type, table.get_string("name"), init_descname, table),
 	egbase_         (egbase),
 	buildable_     (false),
 	size_          (BaseImmovable::SMALL),
@@ -80,7 +80,7 @@ BuildingDescr::BuildingDescr
 	i18n::Textdomain td("tribes");
 
 	// Partially finished buildings get their sizes from their associated building
-	if (_type != MapObjectType::CONSTRUCTIONSITE && _type != MapObjectType::DISMANTLESITE) {
+	if (type() != MapObjectType::CONSTRUCTIONSITE && type() != MapObjectType::DISMANTLESITE) {
 		try {
 			const std::string size = table.get_string("size");
 			if (boost::iequals(size, "small")) {
@@ -502,7 +502,7 @@ std::string Building::info_string(const InfoStringFormat& format) {
 	default:
 		NEVER_HERE();
 	}
-	return result.empty() ? result : as_uifont(result);
+	return result;
 }
 
 
@@ -671,22 +671,29 @@ void Building::draw_help
 		dynamic_cast<const InteractiveGameBase&>(*game.get_ibase());
 	uint32_t const dpyflags = igbase.get_display_flags();
 
-	if (dpyflags & InteractiveBase::dfShowCensus) {
-		const std::string info = info_string(InfoStringFormat::kCensus);
-		if (!info.empty()) {
-			dst.blit(pos - Point(0, 48), UI::g_fh1->render(info), BlendMode::UseAlpha, UI::Align::kCenter);
-		}
-	}
+	if (dpyflags & InteractiveBase::dfShowCensus || dpyflags & InteractiveBase::dfShowStatistics) {
+		// We always render this so we can have a stable position for the statistics string.
+		const Image* rendered_census_info =
+				UI::g_fh1->render(as_condensed(info_string(InfoStringFormat::kCensus), UI::Align::kCenter),
+										120);
+		const Point census_pos(pos - Point(0, 48));
 
-	if (dpyflags & InteractiveBase::dfShowStatistics) {
-		if (upcast(InteractivePlayer const, iplayer, &igbase))
-			if
-				(!iplayer->player().see_all() &&
-				 iplayer->player().is_hostile(*get_owner()))
-				return;
-		const std::string info = info_string(InfoStringFormat::kStatistics);
-		if (!info.empty()) {
-			dst.blit(pos - Point(0, 35), UI::g_fh1->render(info), BlendMode::UseAlpha, UI::Align::kCenter);
+		if (dpyflags & InteractiveBase::dfShowCensus) {
+			dst.blit(census_pos, rendered_census_info, BlendMode::UseAlpha, UI::Align::kCenter);
+		}
+
+		if (dpyflags & InteractiveBase::dfShowStatistics) {
+			if (upcast(InteractivePlayer const, iplayer, &igbase))
+				if
+					(!iplayer->player().see_all() &&
+					 iplayer->player().is_hostile(*get_owner()))
+					return;
+			const std::string& info = info_string(InfoStringFormat::kStatistics);
+			if (!info.empty()) {
+				dst.blit(census_pos + Point(0, rendered_census_info->height() / 2 + 10),
+							UI::g_fh1->render(as_condensed(info)),
+							BlendMode::UseAlpha, UI::Align::kCenter);
+			}
 		}
 	}
 }

@@ -30,6 +30,7 @@
 #include "base/macros.h"
 #include "economy/flag.h"
 #include "economy/request.h"
+#include "graphic/text_constants.h"
 #include "logic/editor_game_base.h"
 #include "logic/findbob.h"
 #include "logic/game.h"
@@ -123,12 +124,12 @@ void MilitarySite::update_statistics_string(std::string* s)
 		if (capacity_ > stationed) {
 			/** TRANSLATORS: %1% is the number of soldiers the plural refers to */
 			/** TRANSLATORS: %2% is the maximum number of soldier slots in the building */
-			*s += (boost::format(ngettext("%1% soldier (+%2%)",
+			*s = (boost::format(ngettext("%1% soldier (+%2%)",
 																		  "%1% soldiers (+%2%)",
 																		  stationed))
 											% stationed % (capacity_ - stationed)).str();
 		} else {
-			*s += (boost::format(ngettext("%u soldier", "%u soldiers", stationed))
+			*s = (boost::format(ngettext("%u soldier", "%u soldiers", stationed))
 											% stationed).str();
 		}
 	} else {
@@ -142,10 +143,14 @@ void MilitarySite::update_statistics_string(std::string* s)
 		} else {
 			/** TRANSLATORS: %1% is the number of soldiers the plural refers to */
 			/** TRANSLATORS: %2% are currently open soldier slots in the building */
-			*s += (boost::format(ngettext("%1%(+%2%) soldier", "%1%(+%2%) soldiers", stationed))
+			*s = (boost::format(ngettext("%1%(+%2%) soldier", "%1%(+%2%) soldiers", stationed))
 					% present % (stationed - present)).str();
 		}
 	}
+	*s = (boost::format("<font color=%s>%s</font>") % UI_FONT_CLR_OK.hex_value() %
+			// Line break to make Codecheck happy.
+			*s).str();
+
 }
 
 

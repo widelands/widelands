@@ -95,6 +95,12 @@ public:
 	DescriptionIndex worker_index() const;
 	bool can_act_as(DescriptionIndex) const;
 
+	// Add a building to the list of employers
+	void add_employer(const DescriptionIndex& building_index);
+
+	// The buildings where this worker can work
+	const std::set<DescriptionIndex>& employers() const;
+
 	Worker & create
 		(EditorGameBase &, Player &, PlayerImmovable *, Coords) const;
 
@@ -123,6 +129,7 @@ protected:
 	 */
 	DescriptionIndex becomes_;
 	Programs  programs_;
+	std::set<DescriptionIndex> employers_; // Buildings where ths worker can work
 private:
 	const EditorGameBase& egbase_;
 	DISALLOW_COPY_AND_ASSIGN(WorkerDescr);

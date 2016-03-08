@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-02-03 09:18+0000\n"
-"PO-Revision-Date: 2016-02-03 09:53+0000\n"
+"POT-Creation-Date: 2016-03-02 08:54+0000\n"
+"PO-Revision-Date: 2016-03-02 08:55+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -1208,19 +1208,19 @@ msgstr "Taigh-seinnse"
 #: ../../data/tribes/buildings/productionsites/empire/inn/init.lua:64
 #: ../../data/tribes/buildings/productionsites/empire/tavern/init.lua:56
 msgid "preparing a ration"
-msgstr "ullachadh greimeige"
+msgstr "greimeag ullachadh"
 
 #. TRANSLATORS: Completed/Skipped/Did not start preparing a snack because ...
 #: ../../data/tribes/buildings/productionsites/barbarians/big_inn/init.lua:80
 #: ../../data/tribes/buildings/productionsites/barbarians/inn/init.lua:78
 msgid "preparing a snack"
-msgstr "ullachadh lòin"
+msgstr "lòn ullachadh"
 
 #. TRANSLATORS: Completed/Skipped/Did not start preparing a meal because ...
 #: ../../data/tribes/buildings/productionsites/barbarians/big_inn/init.lua:90
 #: ../../data/tribes/buildings/productionsites/empire/inn/init.lua:75
 msgid "preparing a meal"
-msgstr "ullachadh mèis"
+msgstr "mias ullachadh"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/brewery/init.lua:7
@@ -2102,7 +2102,7 @@ msgstr "Toll-dubh"
 #: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:94
 #: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:83
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:102
-#: ../../data/tribes/buildings/trainingsites/empire/arena/init.lua:72
+#: ../../data/tribes/buildings/trainingsites/empire/arena/init.lua:73
 #: ../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:68
 #: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:96
 msgid "sleeping"
@@ -2162,7 +2162,7 @@ msgstr "slàinte saighdeir àrdachadh o leibheil 0 gu leibheil 1"
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:135
 #: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:91
-#: ../../data/tribes/buildings/trainingsites/empire/arena/init.lua:80
+#: ../../data/tribes/buildings/trainingsites/empire/arena/init.lua:81
 #: ../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:76
 msgid "upgrading soldier evade from level 0 to level 1"
 msgstr "teàrnadh saighdeir àrdachadh o leibheil 0 gu leibheil 1"
@@ -2544,28 +2544,6 @@ msgstr "Tha sinn eòlach air an treubh seo o shean. Seo mic is nigheannan Atlant
 #: ../../data/tribes/scripting/starting_conditions/empire/fortified_village.lua:10
 msgid "Fortified Village"
 msgstr "Baile daingnichte"
-
-#. TRANSLATORS: Short for "Not enough space"
-#: ../../data/tribes/scripting/starting_conditions/atlanteans/fortified_village.lua:103
-#: ../../data/tribes/scripting/starting_conditions/barbarians/fortified_village.lua:96
-#: ../../data/tribes/scripting/starting_conditions/empire/fortified_village.lua:121
-msgid "No Space"
-msgstr "Gainnead ruim"
-
-#: ../../data/tribes/scripting/starting_conditions/atlanteans/fortified_village.lua:104
-#: ../../data/tribes/scripting/starting_conditions/barbarians/fortified_village.lua:97
-#: ../../data/tribes/scripting/starting_conditions/empire/fortified_village.lua:122
-msgid ""
-"Some of your starting buildings didn’t have enough room and weren’t built. "
-"You are at a disadvantage with this; consider restarting this map with a "
-"fair starting condition."
-msgstr "Cha robh rum gu leòr ann airson cuid dhe na togalaichean tòiseachaidh agad is cha deach an togail. Cuiridh seo èis ort; saoil an tòisich thu air a’ mhapa seo a-rithist le cumhan tòiseachaidh cothromach?"
-
-#: ../../data/tribes/scripting/starting_conditions/atlanteans/fortified_village.lua:105
-#: ../../data/tribes/scripting/starting_conditions/barbarians/fortified_village.lua:98
-#: ../../data/tribes/scripting/starting_conditions/empire/fortified_village.lua:123
-msgid "Not enough space"
-msgstr "Chan eil rum gu leòr ann"
 
 #: ../../data/tribes/scripting/starting_conditions/atlanteans/headquarters.lua:10
 #: ../../data/tribes/scripting/starting_conditions/barbarians/headquarters.lua:10

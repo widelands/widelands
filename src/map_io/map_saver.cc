@@ -39,10 +39,10 @@
 #include "map_io/map_buildingdata_packet.h"
 #include "map_io/map_elemental_packet.h"
 #include "map_io/map_exploration_packet.h"
-#include "map_io/map_extradata_packet.h"
 #include "map_io/map_flag_packet.h"
 #include "map_io/map_flagdata_packet.h"
 #include "map_io/map_heights_packet.h"
+#include "map_io/map_images.h"
 #include "map_io/map_node_ownership_packet.h"
 #include "map_io/map_object_packet.h"
 #include "map_io/map_object_saver.h"
@@ -128,10 +128,6 @@ void MapSaver::save() {
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	//  NON MANDATORY PACKETS BELOW THIS POINT
-	log("Writing Map Extra Data ... ");
-	{MapExtradataPacket               p; p.write(m_fs, m_egbase);}
-	log("took %ums\n ", timer.ms_since_last_query());
-
 	log("Writing Map Version ... ");
 	{MapVersionPacket               p; p.write(m_fs, m_egbase, *m_mos);}
 	log("took %ums\n ", timer.ms_since_last_query());
@@ -224,6 +220,10 @@ void MapSaver::save() {
 
 	log("Writing Objective Data ... ");
 	{MapObjectivePacket              p; p.write(m_fs, m_egbase, *m_mos);}
+	log("took %ums\n ", timer.ms_since_last_query());
+
+	log("Writing map images ... ");
+	save_map_images(&m_fs, m_egbase.map().filesystem());
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	if (is_game) {

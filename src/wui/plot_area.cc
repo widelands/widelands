@@ -43,7 +43,7 @@ const uint32_t hours = 60 * 60 * 1000;
 const uint32_t days = 24 * 60 * 60 * 1000;
 
 const int32_t spacing = 5;
-const int32_t space_at_bottom = 15;
+const int32_t space_at_bottom = 20;
 const int32_t space_at_right = 10;
 const int32_t space_left_of_label = 15;
 const uint32_t nr_samples = 30;   // How many samples per diagramm when relative plotting

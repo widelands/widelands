@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-02-16 09:25+0000\n"
+"POT-Creation-Date: 2016-03-08 15:25+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -2494,28 +2494,6 @@ msgstr ""
 #: ../../data/tribes/scripting/starting_conditions/barbarians/fortified_village.lua:10
 #: ../../data/tribes/scripting/starting_conditions/empire/fortified_village.lua:10
 msgid "Fortified Village"
-msgstr ""
-
-#. TRANSLATORS: Short for "Not enough space"
-#: ../../data/tribes/scripting/starting_conditions/atlanteans/fortified_village.lua:103
-#: ../../data/tribes/scripting/starting_conditions/barbarians/fortified_village.lua:96
-#: ../../data/tribes/scripting/starting_conditions/empire/fortified_village.lua:121
-msgid "No Space"
-msgstr ""
-
-#: ../../data/tribes/scripting/starting_conditions/atlanteans/fortified_village.lua:104
-#: ../../data/tribes/scripting/starting_conditions/barbarians/fortified_village.lua:97
-#: ../../data/tribes/scripting/starting_conditions/empire/fortified_village.lua:122
-msgid ""
-"Some of your starting buildings didn’t have enough room and weren’t built. "
-"You are at a disadvantage with this; consider restarting this map with a "
-"fair starting condition."
-msgstr ""
-
-#: ../../data/tribes/scripting/starting_conditions/atlanteans/fortified_village.lua:105
-#: ../../data/tribes/scripting/starting_conditions/barbarians/fortified_village.lua:98
-#: ../../data/tribes/scripting/starting_conditions/empire/fortified_village.lua:123
-msgid "Not enough space"
 msgstr ""
 
 #: ../../data/tribes/scripting/starting_conditions/atlanteans/headquarters.lua:10

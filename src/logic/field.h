@@ -82,53 +82,6 @@ struct Field {
 	struct ResourceAmounts {ResourceAmount d : 4, r : 4;};
 	static_assert(sizeof(ResourceAmounts) == 1, "assert(sizeof(ResourceAmounts) == 1) failed.");
 
-private:
-	/**
-	 * A field can be selected in one of 2 selections. This allows the user to
-	 * use selection tools to select a set of fields and then perform a command
-	 * on those fields.
-	 *
-	 * Selections can be edited with some operations. A selection can be
-	 * 1. inverted,
-	 * 2. unioned with the other selection,
-	 * 3. intersected with the other selection or
-	 * 4. differenced with the other selection.
-	 *
-	 * Each field can be owned by a player.
-	 * The 2 highest bits are selected_a and selected_b.
-	 * The next highest bit is the border bit.
-	 * The low bits are the player number of the owner.
-	 */
-	using OwnerInfoAndSelectionsType = PlayerNumber;
-	static const uint8_t Border_Bit =
-		std::numeric_limits<OwnerInfoAndSelectionsType>::digits - 1;
-	static const OwnerInfoAndSelectionsType Border_Bitmask = 1 << Border_Bit;
-	static const OwnerInfoAndSelectionsType Player_Number_Bitmask =
-		Border_Bitmask - 1;
-	static const OwnerInfoAndSelectionsType Owner_Info_Bitmask =
-		Player_Number_Bitmask + Border_Bitmask;
-	static_assert(MAX_PLAYERS <= Player_Number_Bitmask, "Bitmask is too big.");
-
-	// Data Members
-	/** linked list, \sa Bob::m_linknext*/
-	Bob           * bobs;
-	BaseImmovable * immovable;
-
-	uint8_t caps                    : 7;
-	uint8_t roads                   : 6;
-
-	Height height;
-	int8_t brightness;
-
-	OwnerInfoAndSelectionsType owner_info_and_selections;
-
-	DescriptionIndex m_resources; ///< Resource type on this field, if any
-	uint8_t m_initial_res_amount; ///< Initial amount of m_resources
-	ResourceAmount m_res_amount; ///< Current amount of m_resources
-
-	Terrains terrains;
-
-public:
 	Height get_height() const {return height;}
 	NodeCaps nodecaps() const {return static_cast<NodeCaps>(caps);}
 	uint16_t get_caps()     const {return caps;}
@@ -203,10 +156,10 @@ public:
 
 	// Resources can be set through Map::set_resources()
 	// TODO(unknown): This should return DescriptionIndex
-	uint8_t get_resources() const {return m_resources;}
-	ResourceAmount get_resources_amount() const {return m_res_amount;}
+	uint8_t get_resources() const {return resources;}
+	ResourceAmount get_resources_amount() const {return res_amount;}
 	// TODO(unknown): This should return uint8_t
-	int32_t get_initial_res_amount() const {return m_initial_res_amount;}
+	int32_t get_initial_res_amount() const {return initial_res_amount;}
 
 	/// \note you must reset this field's + neighbor's brightness when you
 	/// change the height. Map::change_height does this. This function is not
@@ -217,6 +170,52 @@ public:
 			static_cast<int8_t>(h) < 0 ? 0 :
 			MAX_FIELD_HEIGHT       < h ? MAX_FIELD_HEIGHT : h;
 	}
+
+private:
+	/**
+	 * A field can be selected in one of 2 selections. This allows the user to
+	 * use selection tools to select a set of fields and then perform a command
+	 * on those fields.
+	 *
+	 * Selections can be edited with some operations. A selection can be
+	 * 1. inverted,
+	 * 2. unioned with the other selection,
+	 * 3. intersected with the other selection or
+	 * 4. differenced with the other selection.
+	 *
+	 * Each field can be owned by a player.
+	 * The 2 highest bits are selected_a and selected_b.
+	 * The next highest bit is the border bit.
+	 * The low bits are the player number of the owner.
+	 */
+	using OwnerInfoAndSelectionsType = PlayerNumber;
+	static const uint8_t Border_Bit =
+		std::numeric_limits<OwnerInfoAndSelectionsType>::digits - 1;
+	static const OwnerInfoAndSelectionsType Border_Bitmask = 1 << Border_Bit;
+	static const OwnerInfoAndSelectionsType Player_Number_Bitmask =
+		Border_Bitmask - 1;
+	static const OwnerInfoAndSelectionsType Owner_Info_Bitmask =
+		Player_Number_Bitmask + Border_Bitmask;
+	static_assert(MAX_PLAYERS <= Player_Number_Bitmask, "Bitmask is too big.");
+
+	// Data Members
+	/** linked list, \sa Bob::linknext_ */
+	Bob           * bobs;
+	BaseImmovable * immovable;
+
+	uint8_t caps                    : 7;
+	uint8_t roads                   : 6;
+
+	Height height;
+	int8_t brightness;
+
+	OwnerInfoAndSelectionsType owner_info_and_selections;
+
+	DescriptionIndex resources; ///< Resource type on this field, if any
+	uint8_t initial_res_amount; ///< Initial amount of resources
+	ResourceAmount res_amount; ///< Current amount of resources
+
+	Terrains terrains;
 };
 #pragma pack(pop)
 

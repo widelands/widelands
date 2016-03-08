@@ -37,7 +37,7 @@ class ExpeditionBootstrap;
 
 class PortdockDescr : public MapObjectDescr {
 public:
-	PortdockDescr(char const* const _name, char const* const _descname);
+	PortdockDescr(char const* const init_name, char const* const init_descname);
 	~PortdockDescr() override {
 	}
 
@@ -134,7 +134,7 @@ private:
 
 	void init_fleet(EditorGameBase & egbase);
 	void set_fleet(Fleet * fleet);
-	void _update_shippingitem(Game &, std::vector<ShippingItem>::iterator);
+	void update_shippingitem(Game &, std::vector<ShippingItem>::iterator);
 	void set_need_ship(Game &, bool need);
 
 	Fleet * fleet_;

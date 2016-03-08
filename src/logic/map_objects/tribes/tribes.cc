@@ -366,6 +366,9 @@ void Tribes::postload() {
 			for (const DescriptionIndex& wareindex : de->output_ware_types()) {
 				wares_->get_mutable(wareindex)->add_producer(i);
 			}
+			for (const WareAmount& job : de->working_positions()) {
+				workers_->get_mutable(job.first)->add_employer(i);
+			}
 		}
 
 		// Register which buildings buildings can have been enhanced from

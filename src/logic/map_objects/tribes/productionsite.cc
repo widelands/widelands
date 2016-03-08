@@ -55,9 +55,9 @@ ProductionSite BUILDING
 */
 
 ProductionSiteDescr::ProductionSiteDescr
-	(const std::string& init_descname, const std::string& msgctxt, MapObjectType _type,
+	(const std::string& init_descname, const std::string& msgctxt, MapObjectType init_type,
 	 const LuaTable& table, const EditorGameBase& egbase)
-	: BuildingDescr(init_descname, _type, table, egbase),
+	: BuildingDescr(init_descname, init_type, table, egbase),
 	  out_of_resource_title_(""),
 	  out_of_resource_heading_(""),
 	  out_of_resource_message_(""),
@@ -179,7 +179,7 @@ ProductionSiteDescr::ProductionSiteDescr
 				programs_[program_name] =
 						std::unique_ptr<ProductionProgram>(
 							new ProductionProgram(program_name,
-														 program_table->get_string("descname"),
+														 _(program_table->get_string("descname")),
 														 program_table->get_table("actions"),
 														 egbase,
 														 this));
@@ -301,7 +301,7 @@ bool ProductionSite::has_workers(DescriptionIndex targetSite, Game & /* game */)
 			for (const auto& wp : bld->working_positions()) {
 
 				// If worker for this position is buildable, just skip him
-				if (owner().tribe().get_worker_descr(wp.first)->is_buildable()){
+				if (owner().tribe().get_worker_descr(wp.first)->is_buildable()) {
 					continue;
 				}
 
@@ -401,7 +401,7 @@ void ProductionSite::calc_statistics()
 
 	if (0 < percOk && percOk < 100) {
 		// TODO(GunChleoc): We might need to reverse the order here for RTL languages
-		statistics_string_on_changed_statistics_ = (boost::format("%s %s") % perc_str % trend_str).str();
+		statistics_string_on_changed_statistics_ = (boost::format("%s\u2009%s") % perc_str % trend_str).str();
 	} else {
 		statistics_string_on_changed_statistics_ = perc_str;
 	}
