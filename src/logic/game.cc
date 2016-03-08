@@ -89,8 +89,8 @@ static const unsigned long long MINIMUM_DISK_SPACE = 256 * 1024 * 1024;
 
 void Game::SyncWrapper::data(void const * const sync_data, size_t const size) {
 #ifdef SYNC_DEBUG
-	uint32_t time = m_game.get_gametime();
-	log("[sync:%08u t=%6u]", m_counter, time);
+	uint32_t time = game_.get_gametime();
+	log("[sync:%08u t=%6u]", counter_, time);
 	for (size_t i = 0; i < size; ++i)
 		log(" %02x", (static_cast<uint8_t const *>(sync_data))[i]);
 	log("\n");

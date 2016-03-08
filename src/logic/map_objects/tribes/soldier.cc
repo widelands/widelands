@@ -391,7 +391,7 @@ void Soldier::damage (const uint32_t value)
 /// Calculates the actual position to draw on from the base node position.
 /// This function takes battling into account.
 ///
-/// pos is the location, in pixels, of the node m_position (height is already
+/// pos is the location, in pixels, of the node position_ (height is already
 /// taken into account).
 Point Soldier::calc_drawpos
 	(const EditorGameBase & game, const Point pos) const
@@ -661,13 +661,13 @@ void Soldier::init_auto_task(Game & game) {
 }
 
 struct FindNodeOwned {
-	FindNodeOwned(PlayerNumber owner) : m_owner(owner)
+	FindNodeOwned(PlayerNumber owner) : owner_(owner)
 	{}
 	bool accept(const Map&, const FCoords& coords) const {
-		return (coords.field->get_owned_by() == m_owner);
+		return (coords.field->get_owned_by() == owner_);
 	}
 private:
-	PlayerNumber m_owner;
+	PlayerNumber owner_;
 };
 
 /**

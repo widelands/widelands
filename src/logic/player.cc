@@ -367,7 +367,7 @@ MessageId Player::add_message_with_timeout
 	return add_message(game, m);
 }
 
-void Player::message_object_removed(MessageId m_id) const
+void Player::message_object_removed(MessageId message_id) const
 {
 	// Send delete command
 	upcast(Game, game, &egbase_);
@@ -377,7 +377,7 @@ void Player::message_object_removed(MessageId m_id) const
 
 	game->cmdqueue().enqueue
 		(new CmdDeleteMessage
-			(game->get_gametime(), player_number_, m_id));
+			(game->get_gametime(), player_number_, message_id));
 }
 
 

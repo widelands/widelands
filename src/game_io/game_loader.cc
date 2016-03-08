@@ -40,7 +40,7 @@
 namespace Widelands {
 
 GameLoader::GameLoader(const std::string & path, Game & game) :
-	m_fs(*g_fs->make_sub_file_system(path)), m_game(game)
+	m_fs(*g_fs->make_sub_file_system(path)), game_(game)
 {}
 
 
@@ -53,7 +53,7 @@ GameLoader::~GameLoader() {
  */
 int32_t GameLoader::preload_game(GamePreloadPacket & mp) {
 	// Load elemental data block
-	mp.read(m_fs, m_game, nullptr);
+	mp.read(m_fs, game_, nullptr);
 
 	return 0;
 }
@@ -65,43 +65,43 @@ int32_t GameLoader::load_game(bool const multiplayer) {
 	ScopedTimer timer("GameLoader::load() took %ums");
 
 	log("Game: Reading Preload Data ... ");
-	{GamePreloadPacket                     p; p.read(m_fs, m_game);}
+	{GamePreloadPacket                     p; p.read(m_fs, game_);}
 	log("took %ums\n", timer.ms_since_last_query());
 
 	log("Game: Reading Game Class Data ... ");
-	{GameClassPacket                  p; p.read(m_fs, m_game);}
+	{GameClassPacket                  p; p.read(m_fs, game_);}
 	log("took %ums\n", timer.ms_since_last_query());
 
 	log("Game: Reading Map Data ... ");
-	GameMapPacket M;                          M.read(m_fs, m_game);
+	GameMapPacket M;                          M.read(m_fs, game_);
 	log("Game: Reading Map Data took %ums\n", timer.ms_since_last_query());
 
 	log("Game: Reading Player Info ... ");
-	{GamePlayerInfoPacket                 p; p.read(m_fs, m_game);}
+	{GamePlayerInfoPacket                 p; p.read(m_fs, game_);}
 	log("Game: Reading Player Info took %ums\n", timer.ms_since_last_query());
 
 	log("Game: Calling read_complete()\n");
-	M.read_complete(m_game);
+	M.read_complete(game_);
 	log("Game: read_complete took: %ums\n", timer.ms_since_last_query());
 
 	MapObjectLoader * const mol = M.get_map_object_loader();
 
 	log("Game: Reading Player Economies Info ... ");
-	{GamePlayerEconomiesPacket            p; p.read(m_fs, m_game, mol);}
+	{GamePlayerEconomiesPacket            p; p.read(m_fs, game_, mol);}
 	log("took %ums\n", timer.ms_since_last_query());
 
 	log("Game: Reading ai persistent data ... ");
-	{GamePlayerAiPersistentPacket           p; p.read(m_fs, m_game, mol);}
+	{GamePlayerAiPersistentPacket           p; p.read(m_fs, game_, mol);}
 	log("took %ums\n", timer.ms_since_last_query());
 
 	log("Game: Reading Command Queue Data ... ");
-	{GameCmdQueuePacket                   p; p.read(m_fs, m_game, mol);}
+	{GameCmdQueuePacket                   p; p.read(m_fs, game_, mol);}
 	log("took %ums\n", timer.ms_since_last_query());
 
 	//  This must be after the command queue has been read.
 	log("Game: Parsing messages ... ");
-	PlayerNumber const nr_players = m_game.map().get_nrplayers();
-	iterate_players_existing_const(p, nr_players, m_game, player) {
+	PlayerNumber const nr_players = game_.map().get_nrplayers();
+	iterate_players_existing_const(p, nr_players, game_, player) {
 		const MessageQueue & messages = player->messages();
 		for (std::pair<MessageId, Message *> temp_message : messages) {
 			Message* m = temp_message.second;
@@ -109,7 +109,7 @@ int32_t GameLoader::load_game(bool const multiplayer) {
 
 			// Renew MapObject connections
 			if (m->serial() > 0) {
-				MapObject* mo = m_game.objects().get_object(m->serial());
+				MapObject* mo = game_.objects().get_object(m->serial());
 				mo->removed.connect
 					(boost::bind(&Player::message_object_removed, player, m_id));
 			}
@@ -118,14 +118,14 @@ int32_t GameLoader::load_game(bool const multiplayer) {
 	log("took %ums\n", timer.ms_since_last_query());
 
 	// For compatibility hacks only
-	mol->load_finish_game(m_game);
+	mol->load_finish_game(game_);
 
 	// Only read and use interactive player data, if we load a singleplayer game.
 	// In multiplayer games every client needs to create a new interactive
 	// player.
 	if (!multiplayer) {
 		log("Game: Reading Interactive Player Data ... ");
-		{GameInteractivePlayerPacket       p; p.read(m_fs, m_game, mol);}
+		{GameInteractivePlayerPacket       p; p.read(m_fs, game_, mol);}
 		log("took %ums\n", timer.ms_since_last_query());
 	}
 

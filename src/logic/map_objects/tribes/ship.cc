@@ -748,9 +748,9 @@ void Ship::withdraw_items(Game& game, PortDock& pd, std::vector<ShippingItem>& i
 uint32_t Ship::calculate_sea_route(Game& game, PortDock& pd, Path* finalpath) {
 	Map& map = game.map();
 	StepEvalAStar se(pd.get_warehouse()->get_position());
-	se.m_swim = true;
-	se.m_conservative = false;
-	se.m_estimator_bias = -5 * map.calc_cost(0);
+	se.swim_ = true;
+	se.conservative_ = false;
+	se.estimator_bias_ = -5 * map.calc_cost(0);
 
 	MapAStar<StepEvalAStar> astar(map, se);
 
