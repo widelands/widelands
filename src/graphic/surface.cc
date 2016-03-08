@@ -56,12 +56,12 @@ FloatPoint calculate_line_normal(const PointType& start, const PointType& end) {
 // We need for each line four points. We do not make sure that these quads are
 // not properly joined at the corners which does not seem to matter a lot for
 // the thin lines that we draw in Widelands.
-void tesselate_line_strip(const int w,
-                          const int h,
-                          const RGBColor& color,
-                          const float line_width,
-                          const std::vector<FloatPoint>& points,
-                          std::vector<DrawLineProgram::PerVertexData>* vertices) {
+void tesselate_line_strip(int w,
+								  int h,
+								  const RGBColor& color,
+								  float line_width,
+								  const std::vector<FloatPoint>& points,
+								  std::vector<DrawLineProgram::PerVertexData>* vertices) {
 	const float r = color.r / 255.;
 	const float g = color.g / 255.;
 	const float b = color.b / 255.;
