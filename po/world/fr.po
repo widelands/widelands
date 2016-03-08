@@ -10,9 +10,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-02-20 12:30+0000\n"
-"PO-Revision-Date: 2016-02-27 19:43+0000\n"
-"Last-Translator: adrien vigneron <adrienvigneron@ml1.net>\n"
+"POT-Creation-Date: 2016-03-02 08:54+0000\n"
+"PO-Revision-Date: 2016-03-02 13:46+0000\n"
+"Last-Translator: Jaypad <ju-ju@nataju.fr>\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -787,7 +787,7 @@ msgstr "Pierres"
 #: ../../data/world/terrains/init.lua:362
 #: ../../data/world/terrains/init.lua:670
 #: ../../data/world/terrains/init.lua:967
-#: ../../data/world/terrains/init.lua:1264
+#: ../../data/world/terrains/init.lua:1263
 msgid "Water"
 msgstr "Eau"
 
@@ -808,19 +808,12 @@ msgid "Winter"
 msgstr "Hiver"
 
 #: ../../data/world/terrains/init.lua:19
-#: ../../data/world/terrains/init.lua:989
-#: ../../data/world/terrains/init.lua:1200
-#: ../../data/world/terrains/init.lua:1216
-#: ../../data/world/terrains/init.lua:1232
 msgid "Desert"
 msgstr "Désert"
 
-#: ../../data/world/terrains/init.lua:33 ../../data/world/terrains/init.lua:86
-#: ../../data/world/terrains/init.lua:107
-#: ../../data/world/terrains/init.lua:127
-#: ../../data/world/terrains/init.lua:1039
-msgid "Meadow"
-msgstr "Prairie"
+#: ../../data/world/terrains/init.lua:33
+msgid "Meadow 1"
+msgstr "Prairie 1"
 
 #. TRANSLATORS: This is an entry in a terrain tooltip. Try to use 1 word if
 #. possible.
@@ -842,17 +835,29 @@ msgstr "Prairie"
 #: ../../data/world/terrains/init.lua:737
 #: ../../data/world/terrains/init.lua:868
 #: ../../data/world/terrains/init.lua:887
-#: ../../data/world/terrains/init.lua:1024
-#: ../../data/world/terrains/init.lua:1044
-#: ../../data/world/terrains/init.lua:1064
-#: ../../data/world/terrains/init.lua:1084
-#: ../../data/world/terrains/init.lua:1167
-#: ../../data/world/terrains/init.lua:1186
+#: ../../data/world/terrains/init.lua:1007
+#: ../../data/world/terrains/init.lua:1027
+#: ../../data/world/terrains/init.lua:1047
+#: ../../data/world/terrains/init.lua:1067
+#: ../../data/world/terrains/init.lua:1150
+#: ../../data/world/terrains/init.lua:1169
 msgid "likes trees"
 msgstr "fertile"
 
+#: ../../data/world/terrains/init.lua:86
+msgid "Meadow 2"
+msgstr "Prairie 2"
+
+#: ../../data/world/terrains/init.lua:107
+msgid "Meadow 3"
+msgstr "Prairie 3"
+
+#: ../../data/world/terrains/init.lua:127
+msgid "Meadow 4"
+msgstr "Prairie 4"
+
 #: ../../data/world/terrains/init.lua:147
-#: ../../data/world/terrains/init.lua:1019
+#: ../../data/world/terrains/init.lua:1002
 msgid "Steppe"
 msgstr "Steppe"
 
@@ -861,39 +866,51 @@ msgid "Barren Steppe"
 msgstr "Steppe aride"
 
 #: ../../data/world/terrains/init.lua:179
-#: ../../data/world/terrains/init.lua:1059
+#: ../../data/world/terrains/init.lua:1042
 msgid "Mountain Meadow"
 msgstr "Pâture de montage"
 
 #: ../../data/world/terrains/init.lua:195
-#: ../../data/world/terrains/init.lua:211
-#: ../../data/world/terrains/init.lua:227
-#: ../../data/world/terrains/init.lua:243
 #: ../../data/world/terrains/init.lua:519
-#: ../../data/world/terrains/init.lua:535
-#: ../../data/world/terrains/init.lua:551
-#: ../../data/world/terrains/init.lua:567
 #: ../../data/world/terrains/init.lua:800
+#: ../../data/world/terrains/init.lua:1082
+msgid "Mountain 1"
+msgstr "Montagne 1"
+
+#: ../../data/world/terrains/init.lua:211
+#: ../../data/world/terrains/init.lua:535
 #: ../../data/world/terrains/init.lua:816
+#: ../../data/world/terrains/init.lua:1098
+msgid "Mountain 2"
+msgstr "Montagne 2"
+
+#: ../../data/world/terrains/init.lua:227
+#: ../../data/world/terrains/init.lua:551
 #: ../../data/world/terrains/init.lua:832
+#: ../../data/world/terrains/init.lua:1114
+msgid "Mountain 3"
+msgstr "Montagne 3"
+
+#: ../../data/world/terrains/init.lua:243
+#: ../../data/world/terrains/init.lua:567
 #: ../../data/world/terrains/init.lua:848
-#: ../../data/world/terrains/init.lua:1099
-#: ../../data/world/terrains/init.lua:1115
-#: ../../data/world/terrains/init.lua:1131
-#: ../../data/world/terrains/init.lua:1147
-msgid "Mountain"
-msgstr "Montagne"
+#: ../../data/world/terrains/init.lua:1130
+msgid "Mountain 4"
+msgstr "Montagne 4"
 
 #: ../../data/world/terrains/init.lua:259
-#: ../../data/world/terrains/init.lua:279
 #: ../../data/world/terrains/init.lua:582
-#: ../../data/world/terrains/init.lua:601
 #: ../../data/world/terrains/init.lua:863
+#: ../../data/world/terrains/init.lua:1145
+msgid "Forested Mountain 1"
+msgstr "Montagne arborée 1"
+
+#: ../../data/world/terrains/init.lua:279
+#: ../../data/world/terrains/init.lua:601
 #: ../../data/world/terrains/init.lua:882
-#: ../../data/world/terrains/init.lua:1162
-#: ../../data/world/terrains/init.lua:1181
-msgid "Forested Mountain"
-msgstr "Montagne arborée"
+#: ../../data/world/terrains/init.lua:1164
+msgid "Forested Mountain 2"
+msgstr "Montagne arborée 2"
 
 #: ../../data/world/terrains/init.lua:299
 msgid "Swamp"
@@ -902,7 +919,7 @@ msgstr "Marais"
 #: ../../data/world/terrains/init.lua:315
 #: ../../data/world/terrains/init.lua:620
 #: ../../data/world/terrains/init.lua:917
-#: ../../data/world/terrains/init.lua:1248
+#: ../../data/world/terrains/init.lua:1247
 msgid "Beach"
 msgstr "Plage"
 
@@ -916,31 +933,52 @@ msgid "Lava"
 msgstr "Lave"
 
 #: ../../data/world/terrains/init.lua:383
+msgid "Ashes 1"
+msgstr "Cendres 1"
+
 #: ../../data/world/terrains/init.lua:403
-msgid "Ashes"
-msgstr "Cendres"
+msgid "Ashes 2"
+msgstr "Cendres 2"
 
 #: ../../data/world/terrains/init.lua:423
+msgid "Hard Ground 1"
+msgstr "Sol dur 1"
+
 #: ../../data/world/terrains/init.lua:443
+msgid "Hard Ground 2"
+msgstr "Sol dur 2"
+
 #: ../../data/world/terrains/init.lua:463
+msgid "Hard Ground 3"
+msgstr "Sol dur 3"
+
 #: ../../data/world/terrains/init.lua:483
-msgid "Hard Ground"
-msgstr "Sol dur"
+msgid "Hard Ground 4"
+msgstr "Sol dur 4"
 
 #: ../../data/world/terrains/init.lua:503
 msgid "Igneous Rocks"
 msgstr "Roches ignées"
 
 #: ../../data/world/terrains/init.lua:636
+msgid "Lava Rocks 1"
+msgstr "Roches volcaniques 1"
+
 #: ../../data/world/terrains/init.lua:653
-msgid "Lava Rocks"
-msgstr "Roches Volcanique"
+msgid "Lava Rocks 2"
+msgstr "Roches volcaniques 2"
 
 #: ../../data/world/terrains/init.lua:692
+msgid "Tundra 1"
+msgstr "Toundra 1"
+
 #: ../../data/world/terrains/init.lua:712
+msgid "Tundra 2"
+msgstr "Toundra 2"
+
 #: ../../data/world/terrains/init.lua:732
-msgid "Tundra"
-msgstr "Toundra"
+msgid "Tundra 3"
+msgstr "Toundra 3"
 
 #: ../../data/world/terrains/init.lua:752
 msgid "Tundra Taiga"
@@ -955,14 +993,37 @@ msgid "Ice"
 msgstr "Glace"
 
 #: ../../data/world/terrains/init.lua:933
-#: ../../data/world/terrains/init.lua:950
-msgid "Ice Floes"
-msgstr "Banquises"
+msgid "Ice Floes 1"
+msgstr "Banquise 1"
 
-#: ../../data/world/terrains/init.lua:1005
+#: ../../data/world/terrains/init.lua:950
+msgid "Ice Floes 2"
+msgstr "Banquise 2"
+
+#: ../../data/world/terrains/init.lua:988
 msgid "Dry Soil"
 msgstr "terre aride"
 
-#: ../../data/world/terrains/init.lua:1079
+#: ../../data/world/terrains/init.lua:1022
+msgid "Meadow"
+msgstr "Prairie"
+
+#: ../../data/world/terrains/init.lua:1062
 msgid "High Mountain Meadow"
 msgstr "Prairie de haute montagne"
+
+#: ../../data/world/terrains/init.lua:1183
+msgid "Desert 1"
+msgstr "Désert 1"
+
+#: ../../data/world/terrains/init.lua:1199
+msgid "Desert 2"
+msgstr "Désert 2"
+
+#: ../../data/world/terrains/init.lua:1215
+msgid "Desert 3"
+msgstr "Désert 3"
+
+#: ../../data/world/terrains/init.lua:1231
+msgid "Desert 4"
+msgstr "Désert 4"

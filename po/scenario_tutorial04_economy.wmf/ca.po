@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-02-20 12:30+0000\n"
-"PO-Revision-Date: 2016-02-20 13:11+0000\n"
+"POT-Creation-Date: 2016-03-02 08:54+0000\n"
+"PO-Revision-Date: 2016-03-02 11:48+0000\n"
 "Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -312,7 +312,7 @@ msgstr "Ara observa aquestes dues pestanyes. Quan cliquis la"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:157
 msgid "third tab (‘Wares in warehouses’), I’ll continue."
-msgstr "tercera pestanya (\"Béns en magatzems\"), continuarem."
+msgstr "tercera pestanya («Béns en magatzems»), continuarem."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:162
 msgid "Switch to the third tab in the stock menu window."
@@ -485,7 +485,7 @@ msgstr "En el menú d'estadístiques, també hi ha"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:254
 msgid "‘Ware statistics’ button."
-msgstr "el botó \"Estadístiques de béns\"."
+msgstr "el botó «Estadístiques de béns»."
 
 #. TRANSLATORS: "it" refers to the ware statistics button
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:257
@@ -498,7 +498,7 @@ msgstr "Obriu la finestra d'estadístiques de béns."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:265
 msgid "Open the ‘Ware statistics’ window, accessed via the statistics menu."
-msgstr "Obriu la finestra d'\"Estadístiques de béns\", via el menú d'estadístiques."
+msgstr "Obriu la finestra d'«Estadístiques de béns», via el menú d'estadístiques."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:272
 msgid ""
@@ -650,7 +650,7 @@ msgstr "Obriu aquesta finestra."
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:382
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:385
 msgid "Open the ‘Configure economy’ window."
-msgstr "Obriu la finestra \"Opcions de l'economia\"."
+msgstr "Obriu la finestra «Opcions de l'economia»."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:386
 msgid "The window can be accessed by clicking on any flag you own."

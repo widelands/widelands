@@ -4,15 +4,16 @@
 # 
 # Translators:
 # Bouchard Renaud <renaud.bouchard@gmail.com>, 2014
+# Jaypad <ju-ju@nataju.fr>, 2016
 # Renaud Bouchard, 2015
 # Tubuntu <tubuntu@testimonium.be>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-02-16 09:25+0000\n"
-"PO-Revision-Date: 2016-02-16 09:25+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2016-03-02 08:54+0000\n"
+"PO-Revision-Date: 2016-03-08 14:08+0000\n"
+"Last-Translator: Jaypad <ju-ju@nataju.fr>\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -83,7 +84,7 @@ msgstr " --language=[de_DE|sv_SE|...]\n                      Locales à utiliser
 msgid ""
 " --write_syncstreams=[true|false]\n"
 "                      Create syncstreams to help debug network games."
-msgstr ""
+msgstr "--write_syncstreams=[true|false]\nCréer des flux de synchronisation pour aider à déboguer les parties en réseau."
 
 #: ../../src/wlapplication_messages.cc:68
 msgid " --autosave=[...]     Automatically save each n minutes"
