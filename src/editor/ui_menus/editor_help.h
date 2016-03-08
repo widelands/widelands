@@ -45,9 +45,6 @@ private:
 			kTree
 		};
 
-		HelpEntry(const HelpEntry& other) : HelpEntry(other.index, other.descname, other.icon) {
-		}
-
 		HelpEntry(const Widelands::DescriptionIndex init_index,
 					 const std::string& init_descname,
 					 const Image* init_icon)
