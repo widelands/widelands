@@ -31,7 +31,7 @@ struct WidelandsMapLoader;
  * This is just a wrapper around MapSaver and MapLoader
  */
 struct GameMapPacket : public GameDataPacket {
-	GameMapPacket() : m_mos(nullptr), m_mol(nullptr), m_wms(nullptr), m_wml(nullptr) {}
+	GameMapPacket() : mos_(nullptr), mol_(nullptr), wms_(nullptr), wml_(nullptr) {}
 	virtual ~GameMapPacket();
 
 
@@ -42,14 +42,14 @@ struct GameMapPacket : public GameDataPacket {
 
 	void write(FileSystem &, Game &, MapObjectSaver  * = nullptr) override;
 
-	MapObjectSaver  * get_map_object_saver () {return m_mos;}
-	MapObjectLoader * get_map_object_loader() {return m_mol;}
+	MapObjectSaver  * get_map_object_saver () {return mos_;}
+	MapObjectLoader * get_map_object_loader() {return mol_;}
 
 private:
-	MapObjectSaver  * m_mos;
-	MapObjectLoader * m_mol;
-	MapSaver             * m_wms;
-	WidelandsMapLoader         * m_wml;
+	MapObjectSaver  * mos_;
+	MapObjectLoader * mol_;
+	MapSaver             * wms_;
+	WidelandsMapLoader         * wml_;
 };
 
 }

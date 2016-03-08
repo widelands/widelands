@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2007-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -34,7 +34,7 @@
 
 namespace Widelands {
 
-GameSaver::GameSaver(FileSystem & fs, Game & game) : m_fs(fs), game_(game) {
+GameSaver::GameSaver(FileSystem & fs, Game & game) : fs_(fs), game_(game) {
 }
 
 
@@ -44,40 +44,40 @@ GameSaver::GameSaver(FileSystem & fs, Game & game) : m_fs(fs), game_(game) {
 void GameSaver::save() {
 	ScopedTimer timer("GameSaver::save() took %ums");
 
-	m_fs.ensure_directory_exists("binary");
+	fs_.ensure_directory_exists("binary");
 
 	log("Game: Writing Preload Data ... ");
-	{GamePreloadPacket                    p; p.write(m_fs, game_, nullptr);}
+	{GamePreloadPacket                    p; p.write(fs_, game_, nullptr);}
 	log("took %ums\n", timer.ms_since_last_query());
 
 	log("Game: Writing Game Class Data ... ");
-	{GameClassPacket                 p; p.write(m_fs, game_, nullptr);}
+	{GameClassPacket                 p; p.write(fs_, game_, nullptr);}
 	log("took %ums\n", timer.ms_since_last_query());
 
 	log("Game: Writing Player Info ... ");
-	{GamePlayerInfoPacket                p; p.write(m_fs, game_, nullptr);}
+	{GamePlayerInfoPacket                p; p.write(fs_, game_, nullptr);}
 	log("took %ums\n", timer.ms_since_last_query());
 
 	log("Game: Writing Map Data!\n");
-	GameMapPacket                         M; M.write(m_fs, game_, nullptr);
+	GameMapPacket                         M; M.write(fs_, game_, nullptr);
 	log("Game: Writing Map Data took %ums\n", timer.ms_since_last_query());
 
 	MapObjectSaver * const mos = M.get_map_object_saver();
 
 	log("Game: Writing Player Economies Info ... ");
-	{GamePlayerEconomiesPacket           p; p.write(m_fs, game_, mos);}
+	{GamePlayerEconomiesPacket           p; p.write(fs_, game_, mos);}
 	log("took %ums\n", timer.ms_since_last_query());
 
 	log("Game: Writing ai persistent data ... ");
-	{GamePlayerAiPersistentPacket           p; p.write(m_fs, game_, mos);}
+	{GamePlayerAiPersistentPacket           p; p.write(fs_, game_, mos);}
 	log("took %ums\n", timer.ms_since_last_query());
 
 	log("Game: Writing Command Queue Data ... ");
-	{GameCmdQueuePacket                  p; p.write(m_fs, game_, mos);}
+	{GameCmdQueuePacket                  p; p.write(fs_, game_, mos);}
 	log("took %ums\n", timer.ms_since_last_query());
 
 	log("Game: Writing Interactive Player Data ... ");
-	{GameInteractivePlayerPacket         p; p.write(m_fs, game_, mos);}
+	{GameInteractivePlayerPacket         p; p.write(fs_, game_, mos);}
 	log("took %ums\n", timer.ms_since_last_query());
 }
 
