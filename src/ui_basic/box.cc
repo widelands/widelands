@@ -347,7 +347,7 @@ void Box::get_item_size
 	const Item & it = items_[idx];
 
 	get_item_desired_size(idx, depth, breadth);
-	depth += it.assigned_var_depth;
+	*depth += it.assigned_var_depth;
 }
 
 /**
