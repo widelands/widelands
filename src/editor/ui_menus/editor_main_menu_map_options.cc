@@ -173,7 +173,7 @@ void MainMenuMapOptions::update() {
 	hint_->set_text(map.get_hint());
 
 	std::set<std::string> tags = map.get_tags();
-	for (std::pair<std::string, UI::Checkbox*> tag : tags_checkboxes_) {
+	for (auto tag : tags_checkboxes_) {
 		tag.second->set_state(tags.count(tag.first) > 0);
 	}
 }
@@ -194,7 +194,7 @@ void MainMenuMapOptions::clicked_ok() {
 	eia().egbase().map().set_hint(hint_->get_text());
 
 	eia().egbase().map().clear_tags();
-	for (std::pair<std::string, UI::Checkbox*> tag : tags_checkboxes_) {
+	for (const auto& tag : tags_checkboxes_) {
 		if (tag.second->get_state()) {
 			eia().egbase().map().add_tag(tag.first);
 		}

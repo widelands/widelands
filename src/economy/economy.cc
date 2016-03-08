@@ -957,7 +957,7 @@ void Economy::create_requested_worker(Game & game, DescriptionIndex index)
 	uint32_t idx = 0;
 	uint32_t scarcest_idx = 0;
 	bool plan_at_least_one = false;
-	for (const std::pair<std::string, uint8_t>& bc : cost) {
+	for (const auto& bc : cost) {
 		uint32_t cc = total_available[idx] / bc.second;
 		if (cc <= can_create) {
 			scarcest_idx = idx;
@@ -1136,7 +1136,7 @@ void Economy::handle_active_supplies(Game & game)
 	ss.unsigned_32(0x02decafa); // appears as facade02 in sync stream
 	ss.unsigned_32(assignments.size());
 
-	for (const std::pair<Supply *, Warehouse *>& temp_assignment : assignments) {
+	for (const auto& temp_assignment : assignments) {
 		ss.unsigned_32(temp_assignment.first->get_position(game)->serial());
 		ss.unsigned_32(temp_assignment.second->serial());
 

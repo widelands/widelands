@@ -123,7 +123,7 @@ CritterDescr::CritterDescr(const std::string& init_descname, const LuaTable& tab
 }
 
 CritterDescr::~CritterDescr() {
-	for (std::pair<std::string, CritterProgram *> program : programs_) {
+	for (auto program : programs_) {
 		delete program.second;
 	}
 }

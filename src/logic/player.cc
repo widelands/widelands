@@ -354,7 +354,7 @@ MessageId Player::add_message_with_timeout
 	const Map &       map      = game.map         ();
 	uint32_t    const gametime = game.get_gametime();
 	Coords      const position = m   .position    ();
-	for (std::pair<MessageId, Message *>  tmp_message : messages()) {
+	for (auto tmp_message : messages()) {
 		if
 			(tmp_message.second->type() == m.type()      &&
 			 gametime < tmp_message.second->sent() + timeout &&
