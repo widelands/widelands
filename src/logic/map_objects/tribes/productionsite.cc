@@ -401,7 +401,7 @@ void ProductionSite::calc_statistics()
 
 	if (0 < percOk && percOk < 100) {
 		// TODO(GunChleoc): We might need to reverse the order here for RTL languages
-		statistics_string_on_changed_statistics_ = (boost::format("%s %s") % perc_str % trend_str).str();
+		statistics_string_on_changed_statistics_ = (boost::format("%s\u2009%s") % perc_str % trend_str).str();
 	} else {
 		statistics_string_on_changed_statistics_ = perc_str;
 	}
