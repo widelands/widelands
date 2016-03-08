@@ -70,6 +70,13 @@ std::string as_uifont
 	(const std::string&, int ptsize = UI_FONT_SIZE_SMALL, const RGBColor& clr = UI_FONT_CLR_FG,
 	 UI::FontSet::Face face = UI::FontSet::Face::kSans);
 
+// Same as as_aligned, but with the condensed font preselected.
+std::string as_condensed
+	(const std::string& text,
+	 UI::Align align = UI::Align::kLeft,
+	 int ptsize = UI_FONT_SIZE_SMALL,
+	 const RGBColor& clr = UI_FONT_CLR_FG);
+
 std::string as_editorfont(const std::string& text, int ptsize = UI_FONT_SIZE_SMALL,
 								  const RGBColor& clr = UI_FONT_CLR_FG);
 
@@ -79,7 +86,6 @@ std::string as_aligned(const std::string & txt, UI::Align align, int ptsize = UI
 
 std::string as_tooltip(const std::string&);
 std::string as_waresinfo(const std::string&);
-std::string as_window_title(const std::string&);
 std::string as_game_tip(const std::string&);
 
 /**

@@ -56,19 +56,19 @@ void GamePreloadPacket::read
 		int32_t const packet_version = s.get_int("packet_version");
 
 		if (packet_version == kCurrentPacketVersion) {
-			m_gametime = s.get_safe_int("gametime");
-			m_mapname = s.get_safe_string("mapname");
+			gametime_ = s.get_safe_int("gametime");
+			mapname_ = s.get_safe_string("mapname");
 
-			m_background = s.get_safe_string("background");
-			m_player_nr = s.get_safe_int("player_nr");
-			m_win_condition = s.get_safe_string("win_condition");
-			m_number_of_players = s.get_safe_int("player_amount");
-			m_version = s.get_safe_string("widelands_version");
+			background_ = s.get_safe_string("background");
+			player_nr_ = s.get_safe_int("player_nr");
+			win_condition_ = s.get_safe_string("win_condition");
+			number_of_players_ = s.get_safe_int("player_amount");
+			version_ = s.get_safe_string("widelands_version");
 			if (fs.file_exists(kMinimapFilename)) {
-				m_minimap_path = kMinimapFilename;
+				minimap_path_ = kMinimapFilename;
 			}
-			m_savetimestamp = static_cast<time_t>(s.get_natural("savetimestamp"));
-			m_gametype = static_cast<GameController::GameType>(s.get_natural("gametype"));
+			savetimestamp_ = static_cast<time_t>(s.get_natural("savetimestamp"));
+			gametype_ = static_cast<GameController::GameType>(s.get_natural("gametype"));
 		} else {
 			throw UnhandledVersionError("GamePreloadPacket", packet_version, kCurrentPacketVersion);
 		}
