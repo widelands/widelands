@@ -148,7 +148,6 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby
 		(0, boost::bind(&FullscreenMenuInternetLobby::compare_clienttype, this, _1, _2));
 	clientsonline_list_ .double_clicked.connect
 		(boost::bind(&FullscreenMenuInternetLobby::client_doubleclicked, this, _1));
-	opengames_list_   .set_fontsize(fs_);
 	opengames_list_   .selected.connect
 		(boost::bind(&FullscreenMenuInternetLobby::server_selected, this));
 	opengames_list_   .double_clicked.connect
