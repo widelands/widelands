@@ -46,7 +46,8 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent) :
 	// UI elements
 	margin_(4),
 	box_width_(get_inner_w() -  2 * margin_),
-	label_height_(UI::g_fh1->render(as_uifont("."))->height() + 2),
+	label_height_(UI::g_fh1->render(as_uifont(
+												  UI::g_fh1->fontset()->representative_character()))->height() + 2),
 	box_(this, margin_, margin_, UI::Box::Vertical, 0, 0, margin_),
 	// Size
 	width_(&box_, 0, 0, box_width_, box_width_ / 3,
@@ -292,7 +293,7 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent) :
 	// ---------- "Generate Map" button ----------
 	cancel_button_.sigclicked.connect(boost::bind(&MainMenuNewRandomMap::clicked_cancel, this));
 	ok_button_.sigclicked.connect(boost::bind(&MainMenuNewRandomMap::clicked_create_map, this));
-	if (UI::g_fh1->fontset().is_rtl()) {
+	if (UI::g_fh1->fontset()->is_rtl()) {
 		button_box_.add(&ok_button_, UI::Align::kLeft);
 		button_box_.add(&cancel_button_, UI::Align::kLeft);
 	} else {

@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-02-20 12:30+0000\n"
-"PO-Revision-Date: 2016-02-21 21:33+0000\n"
+"POT-Creation-Date: 2016-03-02 08:54+0000\n"
+"PO-Revision-Date: 2016-03-02 09:03+0000\n"
 "Last-Translator: Lyubomir Vasilev\n"
 "Language-Team: Bulgarian (http://www.transifex.com/widelands/widelands/language/bg/)\n"
 "MIME-Version: 1.0\n"
@@ -21,6 +21,95 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language: bg\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: ../../data/scripting/editor/terrain_help.lua:21
+#: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:54
+#: ../../src/editor/ui_menus/editor_tool_menu.cc:71
+msgid "Resources"
+msgstr "Ресурси"
+
+#: ../../data/scripting/editor/terrain_help.lua:35
+msgid "%1%x %2%"
+msgstr "%1%х %2%"
+
+#: ../../data/scripting/editor/terrain_help.lua:35
+msgid "Default:"
+msgstr "По подразбиране:"
+
+#: ../../data/scripting/editor/terrain_help.lua:67
+msgid "Probability of trees growing"
+msgstr "Шанс да растат дървета"
+
+#: ../../data/scripting/editor/terrain_help.lua:72
+msgid "No trees will grow here."
+msgstr "Тук няма да растат дървета."
+
+#: ../../data/scripting/editor/tree_help.lua:17
+msgid "Preferred terrains"
+msgstr "Предпочитани видове терен"
+
+#. * TRANSLATORS: File name for saving objective achieved
+#. * TRANSLATORS: %1% = map name. %2% = achievement name
+#. * TRANSLATORS: %1% is a filename, %2% a map's name.
+#. * TRANSLATORS: Terrain name + editor category, e.g. Steppe (Summer)
+#: ../../data/scripting/editor/tree_help.lua:38
+#: ../../src/editor/ui_menus/editor_help.cc:157
+#: ../../src/editor/ui_menus/editor_help.cc:195
+#: ../../src/scripting/lua_game.cc:1060 ../../src/ui_fsmenu/loadgame.cc:74
+msgid "%1% (%2%)"
+msgstr "%1% (%2%)"
+
+#: ../../data/scripting/format_scenario.lua:36
+#, lua-format
+msgid "“%s”"
+msgstr "„%s“"
+
+#. * TRANSLATORS: Concatenate the last 2 items on a list.
+#. * TRANSLATORS: RTL languages might want to change the word order here.
+#: ../../data/scripting/formatting.lua:31 ../../src/base/i18n.cc:335
+#, c-format
+msgid "%1$s & %2$s"
+msgstr "%1$s и %2$s"
+
+#. * TRANSLATORS: Join the last 2 items on a list with "or".
+#. * TRANSLATORS: RTL languages might want to change the word order here.
+#: ../../data/scripting/formatting.lua:33 ../../src/base/i18n.cc:339
+#, c-format
+msgid "%1$s or %2$s"
+msgstr "%1$s или %2$s"
+
+#. * TRANSLATORS: Join the last 2 items on a list with a comma.
+#. * TRANSLATORS: RTL languages might want to change the word order here.
+#. * TRANSLATORS: Concatenate 2 items at in the middle of a list.
+#. * TRANSLATORS: RTL languages might want to change the word order here.
+#: ../../data/scripting/formatting.lua:35
+#: ../../data/scripting/formatting.lua:40 ../../src/base/i18n.cc:343
+#: ../../src/base/i18n.cc:353
+#, c-format
+msgid "%1$s, %2$s"
+msgstr "%1$s, %2$s"
+
+#. * TRANSLATORS: Concatenate the last 2 items on a list.
+#. * TRANSLATORS: RTL languages might want to change the word order here.
+#: ../../data/scripting/formatting.lua:37 ../../src/base/i18n.cc:347
+#, c-format
+msgid "%1$s and %2$s"
+msgstr "%1$s и %2$s"
+
+#: ../../data/scripting/infrastructure.lua:157
+msgid "No Space"
+msgstr "Няма място"
+
+#: ../../data/scripting/infrastructure.lua:158
+msgid ""
+"Some of your starting buildings didn’t have enough room and weren’t built. "
+"You are at a disadvantage with this; consider restarting this map with a "
+"fair starting condition."
+msgstr "Нямаше място за някои от Вашите начални сгради и те не бяха построени. Затова Вие сте в неравностойна позиция. Можете да рестартирате картата с по-равностойни начални условия."
+
+#: ../../data/scripting/infrastructure.lua:159
+msgid "Not enough space"
+msgstr "Няма достатъчно място"
 
 #. * TRANSLATORS: This is a heading for a help window
 #: ../../data/scripting/widelands/multiplayer_help.lua:10
@@ -109,6 +198,49 @@ msgid ""
 "condition, and finally can start the game as soon as all players are set up."
 msgstr "Можете да видите информация за избраната карта или запазена игра в дясната част. Бутон до името на картата позволява на сървъра да смени картата. Също така, сървърът може да зададе условието за победа, както и може да даде начало на играта, след като всички играчи станат готови"
 
+#: ../../data/scripting/win_condition_texts.lua:4
+msgid "Congratulations!"
+msgstr "Поздравления!"
+
+#: ../../data/scripting/win_condition_texts.lua:5
+msgid "You have won this game!"
+msgstr "Вие спечелихте тази игра!"
+
+#: ../../data/scripting/win_condition_texts.lua:9
+msgid "You are defeated!"
+msgstr "Вие бяхте победен/а!"
+
+#: ../../data/scripting/win_condition_texts.lua:10
+msgid ""
+"You lost your last warehouse and are therefore defeated. You may continue as"
+" spectator if you want."
+msgstr "Вие загубихте последния си склад, така че сте победен/а. Може да продължите като наблюдател, ако искате."
+
+#: ../../data/scripting/win_condition_texts.lua:14
+msgid "You won"
+msgstr "Вие спечелихте"
+
+#: ../../data/scripting/win_condition_texts.lua:15
+msgid "You are the winner!"
+msgstr "Вие сте победителят!"
+
+#: ../../data/scripting/win_condition_texts.lua:19
+msgid "You lost"
+msgstr "Вие загубихте"
+
+#: ../../data/scripting/win_condition_texts.lua:20
+msgid "You’ve lost this game!"
+msgstr "Вие загубихте тази игра!"
+
+#: ../../data/scripting/win_condition_texts.lua:24
+#: ../../src/wui/game_message_menu.cc:75 ../../src/wui/game_summary.cc:121
+msgid "Status"
+msgstr "Състояние"
+
+#: ../../data/scripting/win_condition_texts.lua:25
+msgid "Player overview:"
+msgstr "Преглед на играчите:"
+
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
 #: ../../src/ai/computer_player.cc:42
 msgid "No AI"
@@ -128,36 +260,6 @@ msgstr "Слаб ИИ"
 #: ../../src/ai/defaultai.h:128
 msgid "Very Weak AI"
 msgstr "Много слаб ИИ"
-
-#. * TRANSLATORS: Concatenate the last 2 items on a list.
-#. * TRANSLATORS: RTL languages might want to change the word order here.
-#: ../../src/base/i18n.cc:335
-#, c-format
-msgid "%1$s & %2$s"
-msgstr "%1$s и %2$s"
-
-#. * TRANSLATORS: Join the last 2 items on a list with "or".
-#. * TRANSLATORS: RTL languages might want to change the word order here.
-#: ../../src/base/i18n.cc:339
-#, c-format
-msgid "%1$s or %2$s"
-msgstr "%1$s или %2$s"
-
-#. * TRANSLATORS: Join the last 2 items on a list with a comma.
-#. * TRANSLATORS: RTL languages might want to change the word order here.
-#. * TRANSLATORS: Concatenate 2 items at in the middle of a list.
-#. * TRANSLATORS: RTL languages might want to change the word order here.
-#: ../../src/base/i18n.cc:343 ../../src/base/i18n.cc:353
-#, c-format
-msgid "%1$s, %2$s"
-msgstr "%1$s, %2$s"
-
-#. * TRANSLATORS: Concatenate the last 2 items on a list.
-#. * TRANSLATORS: RTL languages might want to change the word order here.
-#: ../../src/base/i18n.cc:347
-#, c-format
-msgid "%1$s and %2$s"
-msgstr "%1$s и %2$s"
 
 #. * TRANSLATORS: January. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
@@ -559,16 +661,6 @@ msgstr "Терени"
 msgid "Trees"
 msgstr "Дървета"
 
-#. * TRANSLATORS: File name for saving objective achieved
-#. * TRANSLATORS: %1% = map name. %2% = achievement name
-#. * TRANSLATORS: %1% is a filename, %2% a map's name.
-#. * TRANSLATORS: Terrain name + editor category, e.g. Steppe (Summer)
-#: ../../src/editor/ui_menus/editor_help.cc:157
-#: ../../src/editor/ui_menus/editor_help.cc:195
-#: ../../src/scripting/lua_game.cc:1060 ../../src/ui_fsmenu/loadgame.cc:74
-msgid "%1% (%2%)"
-msgstr "%1% (%2%)"
-
 #: ../../src/editor/ui_menus/editor_main_menu.cc:46
 msgid "Main Menu"
 msgstr "Главно меню"
@@ -849,26 +941,26 @@ msgstr "Име на файл:"
 msgid "unnamed"
 msgstr "без име"
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:243
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:239
 #: ../../src/wui/game_main_menu_save_game.cc:260
 #, c-format
 msgid "A file with the name ‘%s’ already exists. Overwrite?"
 msgstr "Вече съществува файл с името „%s“. Презаписване?"
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:246
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:259
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:309
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:242
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:255
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:302
 msgid "Error Saving Map!"
 msgstr "Грешка при запазването на картата!"
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:256
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:252
 #, c-format
 msgid ""
 "A file with the name ‘%s.tmp’ already exists. You have to remove it "
 "manually."
 msgstr "Вече съществува файл с името „%s.tmp“. Трябва да го премахнете ръчно."
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:305
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:298
 msgid ""
 "Error Saving Map!\n"
 "Saved map file may be corrupt!\n"
@@ -900,7 +992,7 @@ msgstr "Брой играчи"
 #: ../../src/editor/ui_menus/editor_player_menu.cc:232
 #: ../../src/logic/map.cc:315
 #: ../../src/logic/single_player_game_settings_provider.cc:88
-#: ../../src/network/nethost.cc:1698 ../../src/ui_fsmenu/launch_mpg.cc:581
+#: ../../src/network/nethost.cc:1700 ../../src/ui_fsmenu/launch_mpg.cc:581
 #: ../../src/wui/multiplayersetupgroup.cc:142
 #: ../../src/wui/multiplayersetupgroup.cc:304
 #, c-format
@@ -931,11 +1023,6 @@ msgstr "Увел./намал. на стойността"
 #: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:89
 msgid "Set Value"
 msgstr "Задаване на стойност"
-
-#: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:54
-#: ../../src/editor/ui_menus/editor_tool_menu.cc:71
-msgid "Resources"
-msgstr "Ресурси"
 
 #: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:108
 msgid "Current Selection"
@@ -1486,7 +1573,7 @@ msgid "Bluebyte Settlers II Map. No comment defined!"
 msgstr "Карта Bluebyte Settlers II. Няма коментари!"
 
 #: ../../src/network/internet_gaming.cc:114
-#: ../../src/ui_fsmenu/internet_lobby.cc:415
+#: ../../src/ui_fsmenu/internet_lobby.cc:425
 msgid "Connection problem"
 msgstr "Проблем с връзката"
 
@@ -1599,26 +1686,26 @@ msgstr "ГРЕШКА: %s"
 msgid "Received an unknown command from the metaserver: %s"
 msgstr "Получена е непозната команда от мета сървъра: %s"
 
-#: ../../src/network/internet_gaming.cc:754
+#: ../../src/network/internet_gaming.cc:752
 msgid "Message could not be sent: You are not connected to the metaserver!"
 msgstr "Съобщението не може да бъде изпратено: Не сте свързани с мета сървъра!"
 
-#: ../../src/network/internet_gaming.cc:766
+#: ../../src/network/internet_gaming.cc:764
 msgid "Message could not be sent: Was this supposed to be a private message?"
 msgstr "Съобщението не може да бъде изпратено: Трябваше ли да бъде тайно съобщение?"
 
-#: ../../src/network/internet_gaming.cc:840
+#: ../../src/network/internet_gaming.cc:838
 msgid "Conversion error"
 msgstr "Грешка при превръщането"
 
 #. * TRANSLATORS: Geeky message from the metaserver
 #. * TRANSLATORS: This message is shown if %s isn't "true" or "false"
-#: ../../src/network/internet_gaming.cc:843
+#: ../../src/network/internet_gaming.cc:841
 #, c-format
 msgid "Unable to determine truth value for \"%s\""
 msgstr "Не може да бъде установена вярната стойност за „%s“"
 
-#: ../../src/network/internet_gaming.cc:859
+#: ../../src/network/internet_gaming.cc:857
 msgid "unknown"
 msgstr "неизвестно"
 
@@ -1692,7 +1779,7 @@ msgid ""
 "the server shut down as you tried to connect."
 msgstr "Widelands не може да установи връзка с посочения адрес. Или \nтам няма сървър на Widelands, работещ на очаквания порт, или\nсървърът е бил спрян докато сте се свързвали."
 
-#: ../../src/network/netclient.cc:184 ../../src/network/nethost.cc:727
+#: ../../src/network/netclient.cc:184 ../../src/network/nethost.cc:729
 #: ../../src/wlapplication.cc:1267
 msgid "Preparing game"
 msgstr "Подготовка на играта"
@@ -1805,16 +1892,16 @@ msgstr "Играта не е в насилена пауза – няма как�
 msgid "Invalid command! Type /help for a list of commands."
 msgstr "Грешна команда! Въведете /help за списък на всички команди."
 
-#: ../../src/network/nethost.cc:1632
+#: ../../src/network/nethost.cc:1634
 #, c-format
 msgid "Computer %u"
 msgstr "Компютър %u"
 
-#: ../../src/network/nethost.cc:1692 ../../src/wui/game_summary.cc:119
+#: ../../src/network/nethost.cc:1694 ../../src/wui/game_summary.cc:119
 msgid "Player"
 msgstr "Играч"
 
-#: ../../src/network/nethost.cc:1857
+#: ../../src/network/nethost.cc:1859
 #, c-format
 msgid "%li second"
 msgid_plural "%li seconds"
@@ -2295,24 +2382,24 @@ msgstr "Точки"
 msgid "Game"
 msgstr "Игра"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:384
+#: ../../src/ui_fsmenu/internet_lobby.cc:394
 msgid ""
 "Widelands was unable to get the IP address of the server in time.\n"
 "There seems to be a network problem, either on your side or on the side\n"
 "of the server.\n"
 msgstr "Widelands не успя да получи IP адреса на сървъра навреме.\nИзглежда има проблем с мрежата – Вашата или тази на\nсървъра.\n"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:388
+#: ../../src/ui_fsmenu/internet_lobby.cc:398
 msgid "Connection timed out"
 msgstr "Просрочено време за връзка"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:416
+#: ../../src/ui_fsmenu/internet_lobby.cc:426
 msgid "Widelands was unable to connect to the host."
 msgstr "Widelands не успя да се свърже със сървъра."
 
 #. * TRANSLATORS: This is shown for multiplayer games when no host
 #. * TRANSLATORS: server to connect to has been specified yet.
-#: ../../src/ui_fsmenu/internet_lobby.cc:438
+#: ../../src/ui_fsmenu/internet_lobby.cc:448
 msgctxt "server_name"
 msgid "unnamed"
 msgstr "без име"
@@ -3404,10 +3491,6 @@ msgstr "Заглавие"
 msgctxt "message"
 msgid "Type"
 msgstr "Тип"
-
-#: ../../src/wui/game_message_menu.cc:75 ../../src/wui/game_summary.cc:121
-msgid "Status"
-msgstr "Състояние"
 
 #. * TRANSLATORS: We have very little space here. You can also translate this
 #. as "Time" or "Time Sent"

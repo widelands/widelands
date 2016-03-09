@@ -81,7 +81,7 @@ struct TextlineElement : Element {
 		std::vector<std::string>::iterator it = result_words.begin();
 
 		// Reorder words for BiDi
-		if (UI::g_fh1->fontset().is_rtl() && i18n::has_rtl_character(words)) {
+		if (UI::g_fh1->fontset()->is_rtl() && i18n::has_rtl_character(words)) {
 			std::string previous_word;
 			for (std::vector<std::string>::iterator source_it = words.begin();
 				  source_it != words.end(); ++source_it) {

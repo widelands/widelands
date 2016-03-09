@@ -270,7 +270,6 @@ private:
 
 	Columns            columns_;
 	uint32_t           total_width_;
-	uint32_t           fontsize_;
 	uint32_t           headerheight_;
 	int32_t            lineheight_;
 	Scrollbar        * scrollbar_;

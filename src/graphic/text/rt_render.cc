@@ -29,6 +29,7 @@
 #include <boost/algorithm/string/predicate.hpp>
 #include <boost/format.hpp>
 
+#include "base/i18n.h"
 #include "base/log.h"
 #include "base/macros.h"
 #include "base/point.h"
@@ -41,6 +42,7 @@
 #include "graphic/text/font_io.h"
 #include "graphic/text/font_set.h"
 #include "graphic/text/rt_parse.h"
+#include "graphic/text/sdl_ttf_font.h"
 #include "graphic/text/textstream.h"
 #include "graphic/text_layout.h"
 #include "graphic/texture.h"
@@ -59,18 +61,114 @@ struct Borders {
 };
 
 struct NodeStyle {
-	const UI::FontSet* const fontset;  // Not owned.
+	UI::FontSet const * fontset;
 	string font_face;
 	uint16_t font_size;
 	RGBColor font_color;
 	int font_style;
-	bool is_rtl;
 
 	uint8_t spacing;
 	UI::Align halign;
 	UI::Align valign;
 	string reference;
 };
+
+
+/*
+ * This class makes sure that we only load each font file once.
+ */
+class FontCache {
+public:
+	FontCache() = default;
+	~FontCache();
+
+	IFont& get_font(NodeStyle* style);
+
+private:
+	struct FontDescr {
+		string face;
+		uint16_t size;
+
+		bool operator<(const FontDescr& o) const {
+			return size < o.size || (size == o.size && face < o.face);
+		}
+	};
+	using FontMap = map<FontDescr, IFont*>;
+	using FontMapPair = pair<const FontDescr, std::unique_ptr<IFont>>;
+
+	FontMap m_fontmap;
+
+	DISALLOW_COPY_AND_ASSIGN(FontCache);
+};
+
+FontCache::~FontCache() {
+	for (FontMap::reference& entry : m_fontmap) {
+		delete entry.second;
+	}
+}
+
+IFont& FontCache::get_font(NodeStyle* ns) {
+	if (ns->font_face == "condensed") {
+		ns->font_face = ns->fontset->condensed();
+	} else if (ns->font_face == "serif") {
+		ns->font_face = ns->fontset->serif();
+	} else if (ns->font_face == "sans") {
+		ns->font_face = ns->fontset->sans();
+	}
+	const bool is_bold = ns->font_style & IFont::BOLD;
+	const bool is_italic = ns->font_style & IFont::ITALIC;
+	if (is_bold && is_italic) {
+		if (ns->font_face == ns->fontset->condensed() ||
+			 ns->font_face == ns->fontset->condensed_bold() ||
+			 ns->font_face == ns->fontset->condensed_italic()) {
+			ns->font_face = ns->fontset->condensed_bold_italic();
+		} else if (ns->font_face == ns->fontset->serif() ||
+					  ns->font_face == ns->fontset->serif_bold() ||
+					  ns->font_face == ns->fontset->serif_italic()) {
+			ns->font_face = ns->fontset->serif_bold_italic();
+		} else {
+			ns->font_face = ns->fontset->sans_bold_italic();
+		}
+		ns->font_style &= ~IFont::ITALIC;
+		ns->font_style &= ~IFont::BOLD;
+	} else if (is_bold) {
+		if (ns->font_face == ns->fontset->condensed()) {
+			ns->font_face = ns->fontset->condensed_bold();
+		} else if (ns->font_face == ns->fontset->serif()) {
+			ns->font_face = ns->fontset->serif_bold();
+		} else {
+			ns->font_face = ns->fontset->sans_bold();
+		}
+		ns->font_style &= ~IFont::BOLD;
+	} else if (is_italic) {
+		if (ns->font_face == ns->fontset->condensed()) {
+			ns->font_face = ns->fontset->condensed_italic();
+		} else if (ns->font_face == ns->fontset->serif()) {
+			ns->font_face = ns->fontset->serif_italic();
+		} else {
+			ns->font_face = ns->fontset->sans_italic();
+		}
+		ns->font_style &= ~IFont::ITALIC;
+	}
+
+	uint16_t font_size = ns->font_size + ns->fontset->size_offset();
+
+	FontDescr fd = {ns->font_face, font_size};
+	FontMap::iterator i = m_fontmap.find(fd);
+	if (i != m_fontmap.end())
+		return *i->second;
+
+	std::unique_ptr<IFont> font;
+	try {
+		font.reset(load_font(ns->font_face, font_size));
+	} catch (FileNotFoundError& e) {
+		log("Font file not found. Falling back to sans: %s\n%s\n", ns->font_face.c_str(), e.what());
+		font.reset(load_font(ns->fontset->sans(), font_size));
+	}
+	assert(font != nullptr);
+
+	return *m_fontmap.insert(std::make_pair(fd, font.release())).first->second;
+}
 
 struct Reference {
 	Rect dim;
@@ -121,16 +219,16 @@ public:
 	void set_halign(UI::Align ghalign) {m_halign = ghalign;}
 	UI::Align valign() {return m_valign;}
 	void set_valign(UI::Align gvalign) {m_valign = gvalign;}
-	void set_x(uint16_t nx) {m_x = nx;}
-	void set_y(uint16_t ny) {m_y = ny;}
-	uint16_t x() {return m_x;}
-	uint16_t y() {return m_y;}
+	void set_x(int32_t nx) {m_x = nx;}
+	void set_y(int32_t ny) {m_y = ny;}
+	int32_t x() {return m_x;}
+	int32_t y() {return m_y;}
 
 private:
 	Floating m_floating;
 	UI::Align m_halign;
 	UI::Align m_valign;
-	uint16_t m_x, m_y;
+	int32_t m_x, m_y;
 };
 
 class Layout {
@@ -268,11 +366,16 @@ uint16_t Layout::fit_nodes(vector<RenderNode*>& rv, uint16_t w, Borders p, bool 
 		// Go over again and adjust position for VALIGN
 		for (RenderNode* n : nodes_in_line) {
 			uint16_t space = line_height - n->height();
-			if (!space || n->valign() == UI::Align::kBottom)
+			if (!space || n->valign() == UI::Align::kBottom) {
 				continue;
-			if (n->valign() == UI::Align::kCenter)
+			}
+			if (n->valign() == UI::Align::kCenter) {
 				space /= 2;
-			n->set_y(n->y() - space);
+			}
+			// Space can become negative, for example when we have mixed fontsets on the same line
+			// (e.g. "default" and "arabic"), due to differing font heights and hotspots.
+			// So, we fix the sign.
+			n->set_y(std::abs(n->y() - space));
 		}
 		rv.insert(rv.end(), nodes_in_line.begin(), nodes_in_line.end());
 
@@ -317,7 +420,7 @@ uint16_t Layout::fit_nodes(vector<RenderNode*>& rv, uint16_t w, Borders p, bool 
  */
 class TextNode : public RenderNode {
 public:
-	TextNode(IFont& font, NodeStyle&, const string& txt);
+	TextNode(FontCache& font, NodeStyle&, const string& txt);
 	virtual ~TextNode() {}
 
 	uint16_t width() override {return m_w;}
@@ -338,20 +441,22 @@ protected:
 	uint16_t m_w, m_h;
 	const string m_txt;
 	NodeStyle m_s;
-	IFont& m_font;
+	FontCache& m_fontcache;
+	SdlTtfFont& font_;
 };
 
-TextNode::TextNode(IFont& font, NodeStyle& ns, const string& txt)
-	: RenderNode(ns), m_txt(txt), m_s(ns), m_font(font)
+TextNode::TextNode(FontCache& font, NodeStyle& ns, const string& txt)
+	: RenderNode(ns), m_txt(txt), m_s(ns), m_fontcache(font),
+	font_(dynamic_cast<SdlTtfFont&>(m_fontcache.get_font(&m_s)))
 {
-	m_font.dimensions(m_txt, ns.font_style, &m_w, &m_h);
+	font_.dimensions(m_txt, ns.font_style, &m_w, &m_h);
 }
 uint16_t TextNode::hotspot_y() {
-	return m_font.ascent(m_s.font_style);
+	return font_.ascent(m_s.font_style);
 }
 
 Texture* TextNode::render(TextureCache* texture_cache) {
-	const Texture& img = m_font.render(m_txt, m_s.font_color, m_s.font_style, texture_cache);
+	const Texture& img = font_.render(m_txt, m_s.font_color, m_s.font_style, texture_cache);
 	Texture* rv = new Texture(img.width(), img.height());
 	rv->blit(Rect(0, 0, img.width(), img.height()),
 	         img,
@@ -367,7 +472,7 @@ Texture* TextNode::render(TextureCache* texture_cache) {
  */
 class FillingTextNode : public TextNode {
 public:
-	FillingTextNode(IFont& font, NodeStyle& ns, uint16_t w, const string& txt, bool expanding = false) :
+	FillingTextNode(FontCache& font, NodeStyle& ns, uint16_t w, const string& txt, bool expanding = false) :
 		TextNode(font, ns, txt), m_expanding(expanding) {
 			m_w = w;
 		}
@@ -381,7 +486,7 @@ private:
 	bool m_expanding;
 };
 Texture* FillingTextNode::render(TextureCache* texture_cache) {
-	const Texture& t = m_font.render(m_txt, m_s.font_color, m_s.font_style, texture_cache);
+	const Texture& t = font_.render(m_txt, m_s.font_color, m_s.font_style, texture_cache);
 	Texture* rv = new Texture(m_w, m_h);
 	for (uint16_t curx = 0; curx < m_w; curx += t.width()) {
 		Rect srcrect(Point(0, 0), min<int>(t.width(), m_w - curx), m_h);
@@ -396,7 +501,7 @@ Texture* FillingTextNode::render(TextureCache* texture_cache) {
  */
 class WordSpacerNode : public TextNode {
 public:
-	WordSpacerNode(IFont& font, NodeStyle& ns) : TextNode(font, ns, " ") {}
+	WordSpacerNode(FontCache& font, NodeStyle& ns) : TextNode(font, ns, " ") {}
 	static void show_spaces(bool t) {m_show_spaces = t;}
 
 	Texture* render(TextureCache* texture_cache) override {
@@ -491,6 +596,7 @@ public:
 	uint16_t width() override {return m_w + m_margin.left + m_margin.right;}
 	uint16_t height() override {return m_h + m_margin.top + m_margin.bottom;}
 	uint16_t hotspot_y() override {return height();}
+
 	Texture* render(TextureCache* texture_cache) override {
 		Texture* rv = new Texture(width(), height());
 		rv->fill_rect(Rect(0, 0, rv->width(), rv->height()), RGBAColor(255, 255, 255, 0));
@@ -588,112 +694,17 @@ Texture* ImgRenderNode::render(TextureCache* /* texture_cache */) {
 }
 // End: Helper Stuff
 
-/*
- * This class makes sure that we only load each font file once.
- */
-class FontCache {
-public:
-	FontCache() = default;
-	~FontCache();
-
-	IFont& get_font(NodeStyle* style);
-
-private:
-	struct FontDescr {
-		string face;
-		uint16_t size;
-
-		bool operator<(const FontDescr& o) const {
-			return size < o.size || (size == o.size && face < o.face);
-		}
-	};
-	using FontMap = map<FontDescr, IFont*>;
-	using FontMapPair = pair<const FontDescr, std::unique_ptr<IFont>>;
-
-	FontMap m_fontmap;
-
-	DISALLOW_COPY_AND_ASSIGN(FontCache);
-};
-
-FontCache::~FontCache() {
-	for (FontMap::reference& entry : m_fontmap) {
-		delete entry.second;
-	}
-}
-
-IFont& FontCache::get_font(NodeStyle* ns) {
-	if (ns->font_face == "condensed") {
-		ns->font_face = ns->fontset->condensed();
-	} else if (ns->font_face == "serif") {
-		ns->font_face = ns->fontset->serif();
-	} else if (ns->font_face == "sans") {
-		ns->font_face = ns->fontset->sans();
-	}
-	const bool is_bold = ns->font_style & IFont::BOLD;
-	const bool is_italic = ns->font_style & IFont::ITALIC;
-	if (is_bold && is_italic) {
-		if (ns->font_face == ns->fontset->condensed() ||
-		    ns->font_face == ns->fontset->condensed_bold() ||
-		    ns->font_face == ns->fontset->condensed_italic()) {
-			ns->font_face = ns->fontset->condensed_bold_italic();
-		} else if (ns->font_face == ns->fontset->serif() ||
-		           ns->font_face == ns->fontset->serif_bold() ||
-		           ns->font_face == ns->fontset->serif_italic()) {
-			ns->font_face = ns->fontset->serif_bold_italic();
-		} else {
-			ns->font_face = ns->fontset->sans_bold_italic();
-		}
-		ns->font_style &= ~IFont::ITALIC;
-		ns->font_style &= ~IFont::BOLD;
-	} else if (is_bold) {
-		if (ns->font_face == ns->fontset->condensed()) {
-			ns->font_face = ns->fontset->condensed_bold();
-		} else if (ns->font_face == ns->fontset->serif()) {
-			ns->font_face = ns->fontset->serif_bold();
-		} else {
-			ns->font_face = ns->fontset->sans_bold();
-		}
-		ns->font_style &= ~IFont::BOLD;
-	} else if (is_italic) {
-		if (ns->font_face == ns->fontset->condensed()) {
-			ns->font_face = ns->fontset->condensed_italic();
-		} else if (ns->font_face == ns->fontset->serif()) {
-			ns->font_face = ns->fontset->serif_italic();
-		} else {
-			ns->font_face = ns->fontset->sans_italic();
-		}
-		ns->font_style &= ~IFont::ITALIC;
-	}
-
-	uint16_t font_size = ns->font_size + ns->fontset->size_offset();
-
-	FontDescr fd = {ns->font_face, font_size};
-	FontMap::iterator i = m_fontmap.find(fd);
-	if (i != m_fontmap.end())
-		return *i->second;
-
-	std::unique_ptr<IFont> font;
-	try {
-		font.reset(load_font(ns->font_face, font_size));
-	} catch (FileNotFoundError& e) {
-		log("Font file not found. Falling back to sans: %s\n%s\n", ns->font_face.c_str(), e.what());
-		font.reset(load_font(ns->fontset->sans(), font_size));
-	}
-	assert(font != nullptr);
-
-	return *m_fontmap.insert(std::make_pair(fd, font.release())).first->second;
-}
 
 class TagHandler;
 TagHandler* create_taghandler(Tag& tag, FontCache& fc, NodeStyle& ns, ImageCache* image_cache,
-										RendererStyle& renderer_style);
+										RendererStyle& renderer_style, const UI::FontSets& fontsets);
 
 class TagHandler {
 public:
 	TagHandler(Tag& tag, FontCache& fc, NodeStyle ns, ImageCache* image_cache,
-				  RendererStyle& renderer_style_) :
+				  RendererStyle& renderer_style_, const UI::FontSets& fontsets) :
 		m_tag(tag), font_cache_(fc), m_ns(ns), image_cache_(image_cache),
-		renderer_style(renderer_style_) {}
+		renderer_style(renderer_style_), fontsets_(fontsets) {}
 	virtual ~TagHandler() {}
 
 	virtual void enter() {}
@@ -708,6 +719,7 @@ protected:
 	NodeStyle m_ns;
 	ImageCache* image_cache_;  // Not owned
 	RendererStyle& renderer_style; // Reference to global renderer style in the renderer
+	const UI::FontSets& fontsets_;
 };
 
 void TagHandler::m_make_text_nodes(const string& txt, vector<RenderNode*>& nodes, NodeStyle& ns) {
@@ -729,10 +741,11 @@ void TagHandler::m_make_text_nodes(const string& txt, vector<RenderNode*>& nodes
 
 			// We only know if the spacer goes to the left or right after having a look at the current word.
 			for (uint16_t ws_indx = 0; ws_indx < ts.pos() - cpos; ws_indx++) {
-				spacer_nodes.push_back(new WordSpacerNode(font_cache_.get_font(&ns), ns));
+				spacer_nodes.push_back(new WordSpacerNode(font_cache_, ns));
 			}
 
 			word = ts.till_any_or_end(" \t\n\r");
+			ns.fontset = i18n::find_fontset(word.c_str(), fontsets_);
 			if (!word.empty()) {
 				replace_entities(&word);
 				bool word_is_bidi = i18n::has_rtl_character(word.c_str());
@@ -745,7 +758,7 @@ void TagHandler::m_make_text_nodes(const string& txt, vector<RenderNode*>& nodes
 						word = i18n::line2bidi(word.c_str());
 					}
 					it = text_nodes.insert(text_nodes.begin(),
-												  new TextNode(font_cache_.get_font(&ns), ns, word.c_str()));
+												  new TextNode(font_cache_, ns, word.c_str()));
 				} else { // Sequences of Latin words go to the right from current position
 					if (it < text_nodes.end()) {
 						++it;
@@ -756,7 +769,7 @@ void TagHandler::m_make_text_nodes(const string& txt, vector<RenderNode*>& nodes
 							++it;
 						}
 					}
-					it = text_nodes.insert(it, new TextNode(font_cache_.get_font(&ns), ns, word));
+					it = text_nodes.insert(it, new TextNode(font_cache_, ns, word));
 				}
 			}
 			previous_word = word;
@@ -771,19 +784,20 @@ void TagHandler::m_make_text_nodes(const string& txt, vector<RenderNode*>& nodes
 			std::size_t cpos = ts.pos();
 			ts.skip_ws();
 			for (uint16_t ws_indx = 0; ws_indx < ts.pos() - cpos; ws_indx++) {
-				nodes.push_back(new WordSpacerNode(font_cache_.get_font(&ns), ns));
+				nodes.push_back(new WordSpacerNode(font_cache_, ns));
 			}
 			word = ts.till_any_or_end(" \t\n\r");
+			ns.fontset = i18n::find_fontset(word.c_str(), fontsets_);
 			if (!word.empty()) {
 				replace_entities(&word);
 				word = i18n::make_ligatures(word.c_str());
-				if (i18n::has_cjk_character(word.c_str())) {
+				if (i18n::has_script_character(word.c_str(), UI::FontSets::Selector::kCJK)) {
 					std::vector<std::string> units = i18n::split_cjk_word(word.c_str());
 					for (const std::string& unit: units) {
-						nodes.push_back(new TextNode(font_cache_.get_font(&ns), ns, unit));
+						nodes.push_back(new TextNode(font_cache_, ns, unit));
 					}
 				} else {
-					nodes.push_back(new TextNode(font_cache_.get_font(&ns), ns, word));
+					nodes.push_back(new TextNode(font_cache_, ns, word));
 				}
 			}
 		}
@@ -794,7 +808,7 @@ void TagHandler::emit(vector<RenderNode*>& nodes) {
 	for (Child* c : m_tag.childs()) {
 		if (c->tag) {
 			std::unique_ptr<TagHandler> th(create_taghandler(*c->tag, font_cache_, m_ns, image_cache_,
-																			 renderer_style));
+																			 renderer_style, fontsets_));
 			th->enter();
 			th->emit(nodes);
 		} else
@@ -805,8 +819,8 @@ void TagHandler::emit(vector<RenderNode*>& nodes) {
 class FontTagHandler : public TagHandler {
 public:
 	FontTagHandler(Tag& tag, FontCache& fc, NodeStyle ns, ImageCache* image_cache,
-						RendererStyle& init_renderer_style)
-		: TagHandler(tag, fc, ns, image_cache, init_renderer_style) {}
+						RendererStyle& init_renderer_style, const UI::FontSets& fontsets)
+		: TagHandler(tag, fc, ns, image_cache, init_renderer_style, fontsets) {}
 
 	void enter() override {
 		const AttrMap& a = m_tag.attrs();
@@ -824,8 +838,8 @@ public:
 class PTagHandler : public TagHandler {
 public:
 	PTagHandler(Tag& tag, FontCache& fc, NodeStyle ns, ImageCache* image_cache,
-					RendererStyle& init_renderer_style)
-		: TagHandler(tag, fc, ns, image_cache, init_renderer_style), m_indent(0) {
+					RendererStyle& init_renderer_style, const UI::FontSets& fontsets)
+		: TagHandler(tag, fc, ns, image_cache, init_renderer_style, fontsets), m_indent(0) {
 	}
 
 	void enter() override {
@@ -873,8 +887,8 @@ private:
 class ImgTagHandler : public TagHandler {
 public:
 	ImgTagHandler(Tag& tag, FontCache& fc, NodeStyle ns, ImageCache* image_cache,
-					  RendererStyle& init_renderer_style) :
-		TagHandler(tag, fc, ns, image_cache, init_renderer_style), m_rn(nullptr) {
+					  RendererStyle& init_renderer_style, const UI::FontSets& fontsets) :
+		TagHandler(tag, fc, ns, image_cache, init_renderer_style, fontsets), m_rn(nullptr) {
 	}
 
 	void enter() override {
@@ -892,8 +906,8 @@ private:
 class VspaceTagHandler : public TagHandler {
 public:
 	VspaceTagHandler(Tag& tag, FontCache& fc, NodeStyle ns, ImageCache* image_cache,
-						  RendererStyle& init_renderer_style) :
-		TagHandler(tag, fc, ns, image_cache, init_renderer_style), m_space(0) {}
+						  RendererStyle& init_renderer_style, const UI::FontSets& fontsets) :
+		TagHandler(tag, fc, ns, image_cache, init_renderer_style, fontsets), m_space(0) {}
 
 	void enter() override {
 		const AttrMap& a = m_tag.attrs();
@@ -912,8 +926,8 @@ private:
 class HspaceTagHandler : public TagHandler {
 public:
 	HspaceTagHandler(Tag& tag, FontCache& fc, NodeStyle ns, ImageCache* image_cache,
-						  RendererStyle& init_renderer_style) :
-		TagHandler(tag, fc, ns, image_cache, init_renderer_style), m_bg(nullptr), m_space(0) {}
+						  RendererStyle& init_renderer_style, const UI::FontSets& fontsets) :
+		TagHandler(tag, fc, ns, image_cache, init_renderer_style, fontsets), m_bg(nullptr), m_space(0) {}
 
 	void enter() override {
 		const AttrMap& a = m_tag.attrs();
@@ -938,9 +952,9 @@ public:
 		RenderNode* rn = nullptr;
 		if (!m_fill_text.empty()) {
 			if (m_space < INFINITE_WIDTH)
-				rn = new FillingTextNode(font_cache_.get_font(&m_ns), m_ns, m_space, m_fill_text);
+				rn = new FillingTextNode(font_cache_, m_ns, m_space, m_fill_text);
 			else
-				rn = new FillingTextNode(font_cache_.get_font(&m_ns), m_ns, 0, m_fill_text, true);
+				rn = new FillingTextNode(font_cache_, m_ns, 0, m_fill_text, true);
 		} else {
 			SpaceNode* sn;
 			if (m_space < INFINITE_WIDTH)
@@ -964,8 +978,8 @@ private:
 class BrTagHandler : public TagHandler {
 public:
 	BrTagHandler(Tag& tag, FontCache& fc, NodeStyle ns, ImageCache* image_cache,
-					 RendererStyle& init_renderer_style) :
-		TagHandler(tag, fc, ns, image_cache, init_renderer_style) {
+					 RendererStyle& init_renderer_style, const UI::FontSets& fontsets) :
+		TagHandler(tag, fc, ns, image_cache, init_renderer_style, fontsets) {
 	}
 
 	void emit(vector<RenderNode*>& nodes) override {
@@ -978,10 +992,10 @@ class SubTagHandler : public TagHandler {
 public:
 	SubTagHandler
 		(Tag& tag, FontCache& fc, NodeStyle ns, ImageCache* image_cache,
-		 RendererStyle& init_renderer_style,
+		 RendererStyle& init_renderer_style, const UI::FontSets& fontsets,
 		 uint16_t max_w = 0, bool shrink_to_fit = true)
 		:
-			TagHandler(tag, fc, ns, image_cache, init_renderer_style),
+			TagHandler(tag, fc, ns, image_cache, init_renderer_style, fontsets),
 			shrink_to_fit_(shrink_to_fit),
 			m_w(max_w),
 			m_rn(new SubTagRenderNode(ns))
@@ -1104,8 +1118,8 @@ private:
 class RTTagHandler : public SubTagHandler {
 public:
 	RTTagHandler(Tag& tag, FontCache& fc, NodeStyle ns, ImageCache* image_cache,
-					 RendererStyle& init_renderer_style, uint16_t w) :
-		SubTagHandler(tag, fc, ns, image_cache, init_renderer_style, w, true) {
+					 RendererStyle& init_renderer_style, const UI::FontSets& fontsets, uint16_t w) :
+		SubTagHandler(tag, fc, ns, image_cache, init_renderer_style, fontsets, w, true) {
 	}
 
 	// Handle attributes that are in rt, but not in sub.
@@ -1118,16 +1132,16 @@ public:
 
 template<typename T> TagHandler* create_taghandler
 	(Tag& tag, FontCache& fc, NodeStyle& ns, ImageCache* image_cache,
-	 RendererStyle& renderer_style)
+	 RendererStyle& renderer_style, const UI::FontSets& fontsets)
 {
-	return new T(tag, fc, ns, image_cache, renderer_style);
+	return new T(tag, fc, ns, image_cache, renderer_style, fontsets);
 }
 using TagHandlerMap = map<const string, TagHandler* (*)
 	(Tag& tag, FontCache& fc, NodeStyle& ns, ImageCache* image_cache,
-	 RendererStyle& renderer_style)>;
+	 RendererStyle& renderer_style, const UI::FontSets& fontsets)>;
 
 TagHandler* create_taghandler(Tag& tag, FontCache& fc, NodeStyle& ns, ImageCache* image_cache,
-										RendererStyle& renderer_style) {
+										RendererStyle& renderer_style, const UI::FontSets& fontsets) {
 	static TagHandlerMap map;
 	if (map.empty()) {
 		map["br"] = &create_taghandler<BrTagHandler>;
@@ -1143,13 +1157,13 @@ TagHandler* create_taghandler(Tag& tag, FontCache& fc, NodeStyle& ns, ImageCache
 		throw RenderError
 			((boost::format("No Tag handler for %s. This is a bug, please submit a report.")
 			  % tag.name()).str());
-	return i->second(tag, fc, ns, image_cache, renderer_style);
+	return i->second(tag, fc, ns, image_cache, renderer_style, fontsets);
 }
 
-Renderer::Renderer(ImageCache* image_cache, TextureCache* texture_cache, UI::FontSet* fontset) :
+Renderer::Renderer(ImageCache* image_cache, TextureCache* texture_cache, const UI::FontSets& fontsets) :
 	font_cache_(new FontCache()), parser_(new Parser()),
-	image_cache_(image_cache), texture_cache_(texture_cache), fontset_(fontset),
-	renderer_style_(fontset->sans(), 16, INFINITE_WIDTH, INFINITE_WIDTH) {
+	image_cache_(image_cache), texture_cache_(texture_cache), fontsets_(fontsets),
+	renderer_style_("sans", 16, INFINITE_WIDTH, INFINITE_WIDTH) {
 	TextureCache* render
 		(const std::string&, uint16_t, const TagSet&);
 }
@@ -1167,15 +1181,16 @@ RenderNode* Renderer::layout_(const string& text, uint16_t width, const TagSet& 
 	renderer_style_.remaining_width = width;
 	renderer_style_.overall_width = width;
 
+	UI::FontSet const * fontset = fontsets_.get_fontset(i18n::get_locale());
+
 	NodeStyle default_style = {
-		fontset_,
-		renderer_style_.font_face, renderer_style_.font_size,
-		RGBColor(255, 255, 0), IFont::DEFAULT, fontset_->is_rtl(), 0,
-		UI::Align::kLeft, UI::Align::kTop,
+		fontset, renderer_style_.font_face, renderer_style_.font_size,
+		RGBColor(255, 255, 0), IFont::DEFAULT,
+		0, UI::Align::kLeft, UI::Align::kTop,
 		""
 	};
 
-	RTTagHandler rtrn(*rt, *font_cache_, default_style, image_cache_, renderer_style_, width);
+	RTTagHandler rtrn(*rt, *font_cache_, default_style, image_cache_, renderer_style_, fontsets_, width);
 	vector<RenderNode*> nodes;
 	rtrn.enter();
 	rtrn.emit(nodes);
