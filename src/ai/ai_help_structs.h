@@ -172,7 +172,7 @@ private:
 	const World& world_;
 };
 
-// Fishers and fishbreeders must be built near water
+// This is to be used for shipyards to make sure the water is wide enough
 struct FindNodeOpenWater {
 	FindNodeOpenWater(const World& world);
 
@@ -544,14 +544,14 @@ struct FlagsForRoads {
 		return queue.size();
 	}
 
-	// this is for debuging and development purposes
+	// This is for debuging and development purposes
 	void print();
 	// during processing we need to pick first one uprocessed flags (with best score so far)
 	bool get_best_uncalculated(uint32_t* winner);
-	// when we test candidate flag if road can be built to it, there are two possible outcomes:
+	// When we test candidate flag if road can be built to it, there are two possible outcomes:
 	void road_possible(Widelands::Coords coords, uint32_t distance);
 	void road_impossible(Widelands::Coords coords);
-	// updating walking distance over existing roads
+	// Updating walking distance over existing roads
 	void set_road_distance(Widelands::Coords coords, int32_t distance);
 	// Finally we query the flag that we will build a road to
 	bool get_winner(uint32_t* winner_hash, uint32_t pos);

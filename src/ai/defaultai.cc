@@ -997,7 +997,6 @@ void DefaultAI::update_all_not_buildable_fields() {
 			buildable_fields.push_back(new BuildableField(unusable_fields.front()));
 			unusable_fields.pop_front();
 			update_buildable_field(*buildable_fields.back());
-
 			continue;
 		}
 
@@ -1005,7 +1004,6 @@ void DefaultAI::update_all_not_buildable_fields() {
 			mineable_fields.push_back(new MineableField(unusable_fields.front()));
 			unusable_fields.pop_front();
 			update_mineable_field(*mineable_fields.back());
-
 			continue;
 		}
 
@@ -1232,9 +1230,9 @@ void DefaultAI::update_buildable_field(BuildableField& field, uint16_t range, bo
 		}
 	}
 
-	// the following is done always (regardless of military or not)
+	// The following is done always (regardless of military or not)
 
-	// we get immovables with higher radius
+	// We get immovables with higher radius
 	immovables.clear();
 	map.find_immovables(Area<FCoords>(field.coords, (range < 11) ? 11 : range), &immovables);
 	field.military_stationed = 0;
@@ -1245,7 +1243,7 @@ void DefaultAI::update_buildable_field(BuildableField& field, uint16_t range, bo
 	field.area_military_presence = 0;
 	field.unconnected_nearby = false;
 
-	//we are interested in unconnected immovables, but we must be also close to connected ones
+	// We are interested in unconnected immovables, but we must be also close to connected ones
 	bool any_connected_imm = false;
 	bool any_unconnected_imm = false;
 
@@ -1270,7 +1268,7 @@ void DefaultAI::update_buildable_field(BuildableField& field, uint16_t range, bo
 		// if we are here, immovable is ours
 		if (upcast(Building const, building, &base_immovable)) {
 
-			//connected to wh
+			// connected to warehouse
 			bool connected = !building->get_economy()->warehouses().empty();
 			if (connected) {
 				any_connected_imm = true;

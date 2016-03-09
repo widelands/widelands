@@ -362,7 +362,7 @@ void FlagsForRoads::print() { // this is for debuging and development purposes
 	}
 }
 
-// queue is orderd but some target flags are only estimations so we takes first such candidate_flag
+// Queue is ordered but some target flags are only estimations so we takes first such candidate_flag
 bool FlagsForRoads::get_best_uncalculated(uint32_t* winner) {
 	for (auto& candidate_flag : queue) {
 		if (!candidate_flag.new_road_possible) {
@@ -373,14 +373,14 @@ bool FlagsForRoads::get_best_uncalculated(uint32_t* winner) {
 	return false;
 }
 
-// We managed to calculate road from starting flag to this flag
-void  FlagsForRoads::road_possible(Widelands::Coords coords, uint32_t distance) {
+// Road from starting flag to this flag can be built
+void FlagsForRoads::road_possible(Widelands::Coords coords, uint32_t distance) {
 	// std::set does not allow updating
 	Candidate new_candidate_flag = Candidate(0, 0, false);
 	for (auto candidate_flag : queue) {
 		if (candidate_flag.coords_hash == coords.hash()) {
 			new_candidate_flag = candidate_flag;
-			assert (new_candidate_flag.coords_hash == candidate_flag.coords_hash);
+			assert(new_candidate_flag.coords_hash == candidate_flag.coords_hash);
 			queue.erase(candidate_flag);
 			break;
 		}
@@ -392,7 +392,7 @@ void  FlagsForRoads::road_possible(Widelands::Coords coords, uint32_t distance) 
 	queue.insert(new_candidate_flag);
 }
 
-// Remove the flag from candidates as new road is not possible
+// Remove the flag from candidates as interconnecting road is not possible
 void FlagsForRoads::road_impossible(Widelands::Coords coords) {
 	const uint32_t hash = coords.hash();
 	for (auto candidate_flag : queue) {
@@ -411,7 +411,7 @@ void FlagsForRoads::set_road_distance(Widelands::Coords coords, int32_t distance
 	bool replacing = false;
 	for (auto candidate_flag : queue) {
 		if (candidate_flag.coords_hash == hash) {
-			assert (!candidate_flag.different_economy);
+			assert(!candidate_flag.different_economy);
 			if (distance < candidate_flag.current_roads_distance) {
 				new_candidate_flag = candidate_flag;
 				queue.erase(candidate_flag);
@@ -430,7 +430,7 @@ void FlagsForRoads::set_road_distance(Widelands::Coords coords, int32_t distance
 }
 
 bool FlagsForRoads::get_winner(uint32_t* winner_hash, uint32_t pos) {
-	assert (pos == 1 || pos == 2);
+	assert(pos == 1 || pos == 2);
 	uint32_t counter = 1;
 	// If AI can ask for 2nd position, but there is only one viable candidate
 	// we return the first one of course
@@ -439,7 +439,7 @@ bool FlagsForRoads::get_winner(uint32_t* winner_hash, uint32_t pos) {
 		if (candidate_flag.reduction_score < min_reduction || !candidate_flag.new_road_possible) {
 			continue;
 		}
-		assert (candidate_flag.air_distance > 0);
+		assert(candidate_flag.air_distance > 0);
 		assert(candidate_flag.reduction_score >= min_reduction);
 		assert(candidate_flag.new_road_possible);
 		*winner_hash=candidate_flag.coords_hash;
