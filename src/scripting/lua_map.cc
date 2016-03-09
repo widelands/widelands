@@ -2917,7 +2917,7 @@ int LuaTerrainDescription::get_descname(lua_State * L) {
 */
 
 int LuaTerrainDescription::get_default_resource(lua_State * L) {
-	int res_index = get()->get_default_resource();
+	DescriptionIndex res_index = get()->get_default_resource();
 	const World& world = get_egbase(L).world();
 	if (res_index != Widelands::kNoResource && res_index < world.get_nr_resources()) {
 		to_lua<LuaMaps::LuaResourceDescription>
@@ -3016,7 +3016,7 @@ int LuaTerrainDescription::get_valid_resources(lua_State * L) {
 	const World& world = get_egbase(L).world();
 	lua_newtable(L);
 	int index = 1;
-	for (uint8_t res_index : get()->valid_resources()) {
+	for (DescriptionIndex res_index : get()->valid_resources()) {
 		if (res_index != Widelands::kNoResource && res_index < world.get_nr_resources()) {
 			lua_pushint32(L, index++);
 			to_lua<LuaMaps::LuaResourceDescription>
@@ -5005,7 +5005,7 @@ int LuaField::get_resource(lua_State * L) {
 }
 int LuaField::set_resource(lua_State * L) {
 	auto& egbase = get_egbase(L);
-	int32_t res = egbase.world().get_resource
+	DescriptionIndex res = egbase.world().get_resource
 		(luaL_checkstring(L, -1));
 
 	if (res == Widelands::INVALID_INDEX)
@@ -5033,13 +5033,15 @@ int LuaField::get_resource_amount(lua_State * L) {
 int LuaField::set_resource_amount(lua_State * L) {
 	EditorGameBase& egbase = get_egbase(L);
 	auto c  = fcoords(L);
-	int32_t res = c.field->get_resources();
-	int32_t amount = luaL_checkint32(L, -1);
+	DescriptionIndex res = c.field->get_resources();
+	auto amount = luaL_checkint32(L, -1);
 	const ResourceDescription * resDesc = egbase.world().get_resource(res);
-	int32_t max_amount = resDesc ? resDesc->max_amount() : 0;
+	ResourceAmount max_amount = resDesc ? resDesc->max_amount() : 0;
 
 	if (amount < 0 || amount > max_amount)
-		report_error(L, "Illegal amount: %i, must be >= 0 and <= %i", amount, max_amount);
+		report_error(L, "Illegal amount: %i, must be >= 0 and <= %i",
+						 amount,
+						 static_cast<unsigned int>(max_amount));
 
 	auto& map = egbase.map();
 	if (is_a(Game, &egbase)) {

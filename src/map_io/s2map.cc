@@ -635,7 +635,7 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase & egbase)
 			default:   res = "";        amount = 0; break;
 			};
 
-			int32_t nres = 0;
+			Widelands::DescriptionIndex nres = 0;
 			if (*res) {
 				nres = world.get_resource(res);
 				if (nres == Widelands::INVALID_INDEX)
@@ -644,7 +644,7 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase & egbase)
 						 "play settler maps here",
 						 res);
 			}
-			const int32_t real_amount = static_cast<int32_t>
+			const Widelands::ResourceAmount real_amount = static_cast<Widelands::ResourceAmount>
 				(2.86 * static_cast<float>(amount));
 			m_map.initialize_resources(c, nres, real_amount);
 		}

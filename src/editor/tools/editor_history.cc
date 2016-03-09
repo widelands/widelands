@@ -31,7 +31,7 @@ EditorActionArgs::EditorActionArgs(EditorInteractive & base):
 	sel_radius(base.get_sel_radius()),
 	change_by(0),
 	cur_res(0),
-	set_to(0),
+	set_to_resource(0),
 	m_interval(0, 0),
 	refcount(0)
 {}
@@ -46,8 +46,8 @@ EditorActionArgs::~EditorActionArgs()
 	obob_type.clear();
 	nimmov_types.clear();
 	oimmov_types.clear();
-	orgRes.clear();
-	orgResT.clear();
+	org_res.clear();
+	org_res_t.clear();
 	origHights.clear();
 	origTerrainType.clear();
 	terrainType.clear();

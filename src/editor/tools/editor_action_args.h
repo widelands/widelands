@@ -50,9 +50,11 @@ struct EditorActionArgs {
 
 	int32_t change_by;                                              // resources, hight change tools
 	std::list<Widelands::Field::Height> origHights;                 // change hight tool
-	uint8_t cur_res, set_to;                                        // resources change tools
-	std::list<uint8_t> orgRes, orgResT;                             // resources set tool
-	std::list<const Widelands::BobDescr *> obob_type, nbob_type;  // bob change tools
+	Widelands::DescriptionIndex cur_res;                            // resources change tools
+	Widelands::ResourceAmount set_to_resource;                      // resources change tools
+	std::list<Widelands::DescriptionIndex> org_res_t;               // resources set tool
+	std::list<Widelands::ResourceAmount> org_res;                   // resources set tool
+	std::list<const Widelands::BobDescr *> obob_type, nbob_type;    // bob change tools
 	std::list<std::string> oimmov_types;                            // immovable change tools
 	std::list<int32_t> nimmov_types;                                // immovable change tools
 	Widelands::HeightInterval m_interval;                  // noise hight tool

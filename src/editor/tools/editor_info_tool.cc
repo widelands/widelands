@@ -121,13 +121,14 @@ int32_t EditorInfoTool::handle_click_impl(const Widelands::World& world,
 	buf += std::string("\n") + _("Resources:") + "\n";
 
 	Widelands::DescriptionIndex ridx = f.get_resources();
-	int ramount = f.get_resources_amount();
+	Widelands::ResourceAmount ramount = f.get_resources_amount();
 
 	if (ramount > 0) {
 		buf += "• " + (boost::format(
 				_("Resource name: %s")) % world.get_resource(ridx)->name().c_str()
 			).str() + "\n";
-		buf += "• " + (boost::format(_("Resource amount: %i")) % ramount).str() + "\n";
+		buf += "• " + (boost::format(_("Resource amount: %i")) % static_cast<unsigned int>(ramount)).str()
+				 + "\n";
 	}
 	else {
 		buf += "• " + std::string(_("No resources")) + "\n";

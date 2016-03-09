@@ -128,8 +128,8 @@ bool Worker::run_mine(Game & game, State & state, const Action & action)
 	MapRegion<Area<FCoords> > mr
 		(map, Area<FCoords>(map.get_fcoords(get_position()), action.iparam1));
 	do {
-		uint8_t fres  = mr.location().field->get_resources();
-		uint32_t amount = mr.location().field->get_resources_amount();
+		DescriptionIndex fres = mr.location().field->get_resources();
+		ResourceAmount amount = mr.location().field->get_resources_amount();
 
 		// In the future, we might want to support amount = 0 for
 		// fields that can produce an infinite amount of resources.
@@ -164,12 +164,12 @@ bool Worker::run_mine(Game & game, State & state, const Action & action)
 	mr = MapRegion<Area<FCoords> >
 		(map, Area<FCoords>(map.get_fcoords(get_position()), action.iparam1));
 	do {
-		uint8_t fres  = mr.location().field->get_resources();
+		DescriptionIndex fres = mr.location().field->get_resources();
 		if (fres != res) {
 			continue;
 		}
 
-		uint32_t amount = mr.location().field->get_resources_amount();
+		ResourceAmount amount = mr.location().field->get_resources_amount();
 
 		pick -= 8 * amount;
 		if (pick < 0) {
@@ -233,8 +233,8 @@ bool Worker::run_breed(Game & game, State & state, const Action & action)
 	MapRegion<Area<FCoords> > mr
 		(map, Area<FCoords>(map.get_fcoords(get_position()), action.iparam1));
 	do {
-		uint8_t fres  = mr.location().field->get_resources();
-		uint32_t amount =
+		DescriptionIndex fres = mr.location().field->get_resources();
+		ResourceAmount amount =
 			mr.location().field->get_initial_res_amount() -
 			mr.location().field->get_resources_amount   ();
 
@@ -273,11 +273,11 @@ bool Worker::run_breed(Game & game, State & state, const Action & action)
 		(map, Area<FCoords>(map.get_fcoords(get_position()), action.iparam1));
 
 	do {
-		uint8_t fres  = mr.location().field->get_resources();
+		DescriptionIndex fres = mr.location().field->get_resources();
 		if (fres != res)
 			continue;
 
-		uint32_t amount =
+		ResourceAmount amount =
 			mr.location().field->get_initial_res_amount() -
 			mr.location().field->get_resources_amount   ();
 

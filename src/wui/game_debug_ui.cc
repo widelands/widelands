@@ -362,13 +362,15 @@ void FieldDebugWindow::think()
 		if (ridx == Widelands::kNoResource) {
 			str += "Resource: None\n";
 		} else {
-			const int ramount = m_coords.field->get_resources_amount();
-			const int initial_amount = m_coords.field->get_initial_res_amount();
+			const Widelands::ResourceAmount ramount = m_coords.field->get_resources_amount();
+			const Widelands::ResourceAmount initial_amount = m_coords.field->get_initial_res_amount();
 
 			str += (boost::format("Resource: %s\n")
 					  % ibase().egbase().world().get_resource(ridx)->name().c_str()).str();
 
-			str += (boost::format("  Amount: %i/%i\n") % ramount % initial_amount).str();
+			str += (boost::format("  Amount: %i/%i\n")
+					  % static_cast<unsigned int>(ramount)
+					  % static_cast<unsigned int>(initial_amount)).str();
 		}
 	}
 

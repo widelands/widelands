@@ -38,17 +38,16 @@ int32_t EditorSetResourcesTool::handle_click_impl(const Widelands::World& world,
 	 Widelands::Area<Widelands::FCoords>
 	 (map->get_fcoords(center.node), args->sel_radius));
 	do {
-		int32_t amount     = args->set_to;
-		int32_t max_amount = args->cur_res != Widelands::kNoResource ?
+		Widelands::ResourceAmount amount     = args->set_to_resource;
+		Widelands::ResourceAmount max_amount = args->cur_res != Widelands::kNoResource ?
 							 world.get_resource(args->cur_res)->max_amount() : 0;
-		if (amount < 0)
-			amount = 0;
-		else if (amount > max_amount)
+
+		if (amount > max_amount)
 			amount = max_amount;
 
 		if (map->is_resource_valid(world, mr.location(), args->cur_res)) {
-			args->orgResT.push_back(mr.location().field->get_resources());
-			args->orgRes.push_back(mr.location().field->get_resources_amount());
+			args->org_res_t.push_back(mr.location().field->get_resources());
+			args->org_res.push_back(mr.location().field->get_resources_amount());
 			map->initialize_resources(mr.location(), args->cur_res, amount);
 		}
 	} while (mr.advance(*map));
@@ -65,22 +64,21 @@ EditorSetResourcesTool::handle_undo_impl(const Widelands::World& world,
 	(*map,
 	 Widelands::Area<Widelands::FCoords>
 	 (map->get_fcoords(center.node), args->sel_radius));
-	std::list<uint8_t>::iterator ir = args->orgRes.begin(), it = args->orgResT.begin();
+	std::list<Widelands::ResourceAmount>::iterator amount_it = args->org_res.begin();
+	std::list<Widelands::DescriptionIndex>::iterator type_it = args->org_res_t.begin();
 	do {
-		int32_t amount     = *ir;
-		int32_t max_amount = world.get_resource(args->cur_res)->max_amount();
+		Widelands::ResourceAmount amount     = *amount_it;
+		Widelands::ResourceAmount max_amount = world.get_resource(args->cur_res)->max_amount();
 
-		if (amount < 0)
-			amount = 0;
 		if (amount > max_amount)
 			amount = max_amount;
 
-		map->initialize_resources(mr.location(), *it, amount);
-		++ir;
-		++it;
+		map->initialize_resources(mr.location(), *type_it, amount);
+		++amount_it;
+		++type_it;
 	} while (mr.advance(*map));
-	args->orgRes.clear();
-	args->orgResT.clear();
+	args->org_res.clear();
+	args->org_res_t.clear();
 	return mr.radius();
 }
 
@@ -88,6 +86,6 @@ EditorActionArgs EditorSetResourcesTool::format_args_impl(EditorInteractive & pa
 {
 	EditorActionArgs a(parent);
 	a.cur_res = m_cur_res;
-	a.set_to = m_set_to;
+	a.set_to_resource = m_set_to;
 	return a;
 }

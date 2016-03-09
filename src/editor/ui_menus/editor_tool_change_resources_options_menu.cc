@@ -204,6 +204,10 @@ void EditorToolChangeResourcesOptionsMenu::clicked_button(Button const n)
 	}
 	m_increase_tool.set_change_by(change_by);
 	m_increase_tool.decrease_tool().set_change_by(change_by);
+	if (set_to < 0) {
+		set_to = 0;
+	}
+
 	m_increase_tool.set_tool().set_set_to(set_to);
 
 	select_correct_tool();
@@ -214,26 +218,28 @@ void EditorToolChangeResourcesOptionsMenu::clicked_button(Button const n)
  * called when a resource has been selected
  */
 void EditorToolChangeResourcesOptionsMenu::selected() {
-	const int32_t resIx = m_radiogroup.get_state();
+	const int32_t res_ix = m_radiogroup.get_state();
+	if (res_ix >= 0) { // Only act if a radio button was selected
 
-	m_increase_tool.set_tool().set_cur_res(resIx);
-	m_increase_tool.set_cur_res(resIx);
-	m_increase_tool.decrease_tool().set_cur_res(resIx);
+		m_increase_tool.set_tool().set_cur_res(res_ix);
+		m_increase_tool.set_cur_res(res_ix);
+		m_increase_tool.decrease_tool().set_cur_res(res_ix);
 
-	Widelands::EditorGameBase& egbase = eia().egbase();
-	Widelands::Map & map = egbase.map();
-	eia().mutable_field_overlay_manager()->register_overlay_callback_function(
-		[resIx, &map, &egbase](const Widelands::TCoords<Widelands::FCoords>& coords) -> uint32_t {
-			if (map.is_resource_valid(egbase.world(), coords, resIx)) {
-				return coords.field->nodecaps();
-			}
-			return 0;
-		});
+		Widelands::EditorGameBase& egbase = eia().egbase();
+		Widelands::Map & map = egbase.map();
+		eia().mutable_field_overlay_manager()->register_overlay_callback_function(
+			[res_ix, &map, &egbase](const Widelands::TCoords<Widelands::FCoords>& coords) -> uint32_t {
+				if (map.is_resource_valid(egbase.world(), coords, res_ix)) {
+					return coords.field->nodecaps();
+				}
+				return 0;
+			});
 
-	map.recalc_whole_map(egbase.world());
-	select_correct_tool();
+		map.recalc_whole_map(egbase.world());
+		select_correct_tool();
 
-	update();
+		update();
+	}
 }
 
 /**

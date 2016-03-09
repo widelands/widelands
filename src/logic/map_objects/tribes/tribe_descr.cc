@@ -363,8 +363,8 @@ DescriptionIndex TribeDescr::get_resource_indicator
 		throw GameDataError("There is no resource indicator for resource %s", res->name().c_str());
 	}
 
-	int32_t bestmatch =
-		static_cast<int32_t>
+	ResourceAmount bestmatch =
+		static_cast<ResourceAmount>
 			((static_cast<float>(amount) / res->max_amount())
 			 *
 			 num_indicators);
@@ -372,10 +372,10 @@ DescriptionIndex TribeDescr::get_resource_indicator
 		throw GameDataError
 			("Amount of %s is %i but max amount is %i",
 			 res->name().c_str(),
-			 amount,
-			 res->max_amount());
+			 static_cast<unsigned int>(amount),
+			 static_cast<unsigned int>(res->max_amount()));
 	}
-	if (static_cast<int32_t>(amount) < res->max_amount()) {
+	if (amount < res->max_amount()) {
 		bestmatch += 1; // Resi start with 1, not 0
 	}
 
