@@ -352,7 +352,7 @@ void WordWrap::draw(RenderTarget & dst, Point where, Align align, uint32_t caret
 
 		const Image* entry_text_im =
 				UI::g_fh1->render(as_editorfont(m_lines[line].text,
-														  m_style.font->size() - UI::g_fh1->fontset().size_offset(),
+														  m_style.font->size() - UI::g_fh1->fontset()->size_offset(),
 														  m_style.fg));
 		UI::correct_for_align(alignment, entry_text_im->width(), fontheight, &point);
 		dst.blit(point, entry_text_im);

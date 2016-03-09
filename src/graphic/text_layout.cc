@@ -39,12 +39,12 @@ void replace_entities(std::string* text) {
 }
 
 uint32_t text_width(const std::string& text, int ptsize) {
-	return UI::g_fh1->render(as_editorfont(text, ptsize - UI::g_fh1->fontset().size_offset()))->width();
+	return UI::g_fh1->render(as_editorfont(text, ptsize - UI::g_fh1->fontset()->size_offset()))->width();
 }
 
 uint32_t text_height(const std::string& text, int ptsize) {
 	return UI::g_fh1->render(as_editorfont(text.empty() ? "." : text,
-														ptsize - UI::g_fh1->fontset().size_offset()))->height();
+														ptsize - UI::g_fh1->fontset()->size_offset()))->height();
 }
 
 std::string richtext_escape(const std::string& given_text) {
@@ -63,16 +63,12 @@ std::string as_game_tip(const std::string& txt) {
 	return f.str();
 }
 
-std::string as_window_title(const std::string& txt) {
-	static boost::format f("<rt><p><font face=sans size=13 bold=1 color=%s>%s</font></p></rt>");
-
-	f % UI_FONT_CLR_FG.hex_value();
-	f % txt;
-	return f.str();
-}
-
 std::string as_uifont(const std::string & txt, int size, const RGBColor& clr, UI::FontSet::Face face) {
 	return as_aligned(txt, UI::Align::kLeft, size, clr, face);
+}
+
+std::string as_condensed(const std::string& text, UI::Align align, int ptsize, const RGBColor& clr) {
+	return as_aligned(text, align, ptsize, clr, UI::FontSet::Face::kCondensed);
 }
 
 std::string as_editorfont(const std::string& text, int ptsize, const RGBColor& clr) {
@@ -138,10 +134,10 @@ std::string as_waresinfo(const std::string & txt) {
 
 const Image* autofit_ui_text(const std::string& text, int width, RGBColor color, int fontsize) {
 	const Image* result =
-	   UI::g_fh1->render(as_uifont(text, fontsize, color, UI::FontSet::Face::kSans));
+		UI::g_fh1->render(as_uifont(richtext_escape(text), fontsize, color));
 	if (width > 0) { // Autofit
 		for (; result->width() > width && fontsize >= kMinimumFontSize; --fontsize) {
-			result = UI::g_fh1->render(as_uifont(text, fontsize, color, UI::FontSet::Face::kCondensed));
+			result = UI::g_fh1->render(as_condensed(richtext_escape(text), UI::Align::kLeft, fontsize, color));
 		}
 	}
 	return result;
@@ -238,7 +234,7 @@ Default styles
 */
 
 TextStyle::TextStyle() :
-	font(Font::get(UI::g_fh1->fontset().sans(), UI_FONT_SIZE_SMALL)),
+	font(Font::get(UI::g_fh1->fontset()->sans(), UI_FONT_SIZE_SMALL)),
 	fg(UI_FONT_CLR_FG),
 	bold(true),
 	italics(false),

@@ -2129,11 +2129,12 @@ bool Map::allows_seafaring() {
 	return false;
 }
 
-bool Map::has_artifacts(const World& world) {
-	for (int32_t i = 0; i < world.get_nr_immovables(); ++i) {
-		const ImmovableDescr& descr = *world.get_immovable_descr(i);
-		if (descr.has_attribute(descr.get_attribute_id("artifact"))) {
-			return true;
+bool Map::has_artifacts() {
+	for (MapIndex i = 0; i < max_index(); ++i) {
+		if (upcast(Immovable, immovable, fields_[i].get_immovable())) {
+			if (immovable->descr().has_attribute(immovable->descr().get_attribute_id("artifact"))) {
+				return true;
+			}
 		}
 	}
 	return false;

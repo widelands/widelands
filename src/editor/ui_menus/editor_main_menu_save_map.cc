@@ -271,7 +271,7 @@ bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
 			map.delete_tag("seafaring");
 		}
 
-		if (map.has_artifacts(egbase.world())) {
+		if (map.has_artifacts()) {
 			map.add_tag("artifacts");
 		} else {
 			map.delete_tag("artifacts");
