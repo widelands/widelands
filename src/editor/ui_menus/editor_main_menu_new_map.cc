@@ -93,7 +93,7 @@ MainMenuNewMap::MainMenuNewMap(EditorInteractive & parent)
 
 	cancel_button_.sigclicked.connect(boost::bind(&MainMenuNewMap::clicked_cancel, this));
 	ok_button_.sigclicked.connect(boost::bind(&MainMenuNewMap::clicked_create_map, this));
-	if (UI::g_fh1->fontset().is_rtl()) {
+	if (UI::g_fh1->fontset()->is_rtl()) {
 		button_box_.add(&ok_button_, UI::Align::kLeft);
 		button_box_.add(&cancel_button_, UI::Align::kLeft);
 	} else {

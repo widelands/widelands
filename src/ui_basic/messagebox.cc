@@ -83,7 +83,7 @@ WLMessageBox::WLMessageBox(Panel* const parent,
 	                            "ok",
 	                            type_ == MBoxType::kOk ?
 	                               (width - button_w) / 2 :
-	                               UI::g_fh1->fontset().is_rtl() ? left_button_x : right_button_x,
+											 UI::g_fh1->fontset()->is_rtl() ? left_button_x : right_button_x,
 	                            button_y,
 	                            button_w,
 	                            0,
@@ -95,7 +95,7 @@ WLMessageBox::WLMessageBox(Panel* const parent,
 		cancel_button_.reset(
 		   new Button(this,
 		              "cancel",
-		              UI::g_fh1->fontset().is_rtl() ? right_button_x : left_button_x,
+						  UI::g_fh1->fontset()->is_rtl() ? right_button_x : left_button_x,
 		              button_y,
 		              button_w,
 		              0,
