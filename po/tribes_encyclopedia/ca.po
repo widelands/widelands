@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-03-01 09:34+0000\n"
-"PO-Revision-Date: 2016-03-01 11:50+0000\n"
+"POT-Creation-Date: 2016-03-02 08:54+0000\n"
+"PO-Revision-Date: 2016-03-02 16:35+0000\n"
 "Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -499,7 +499,7 @@ msgctxt "barbarians_building"
 msgid ""
 "This mine exploits only %s of the resource. From there on out, it will only "
 "have a 5%% chance of finding any coal."
-msgstr "Aquesta mina explota només el %s dels recursos. A partir d'ara tindrà només un 5%% de probabilitat de trobar carbó."
+msgstr "Aquesta mina explota només el %s dels recursos. A partir de llavors, tindrà només un 5%% de probabilitat de trobar carbó."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine/helptexts.lua:24
@@ -613,7 +613,7 @@ msgctxt "barbarians_building"
 msgid ""
 "This mine exploits only %s of the resource. From there on out, it will only "
 "have a 5%% chance of finding any gold ore."
-msgstr "Aquesta mina explota només el %s dels recursos. A partir d'ara tindrà només un 5%% de probabilitat de trobar mineral d'or."
+msgstr "Aquesta mina explota només el %s dels recursos. A partir de llavors, tindrà només un 5%% de probabilitat de trobar mineral d'or."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine/helptexts.lua:23
@@ -753,7 +753,7 @@ msgctxt "barbarians_building"
 msgid ""
 "This mine exploits only %s of the resource. From there on out, it will only "
 "have a 5%% chance of finding any iron ore."
-msgstr "Aquesta mina explota només el %s dels recursos. A partir d'ara tindrà només un 5%% de probabilitat de trobar mineral de ferro."
+msgstr "Aquesta mina explota només el %s dels recursos. A partir de llavors, tindrà només un 5%% de probabilitat de trobar mineral de ferro."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/ironmine/helptexts.lua:23
@@ -1511,8 +1511,8 @@ msgstr "Entrenament de salut:"
 #, lua-format
 msgid "Garrisoned soldiers heal %d health point per second"
 msgid_plural "Garrisoned soldiers heal %d health points per second"
-msgstr[0] "Els soldats allotjats es curen a %s punt per segon."
-msgstr[1] "Els soldats allotjats es curen a %s punts per segon."
+msgstr[0] "Els soldats allotjats es curen a raó de %d punt per segon."
+msgstr[1] "Els soldats allotjats es curen a raó de %d punts per segon."
 
 #: ../../data/tribes/scripting/help/building_help.lua:236
 #: ../../data/tribes/scripting/help/building_help.lua:242
@@ -1809,13 +1809,13 @@ msgstr[1] "Treballadors contractats:"
 #: ../../data/tribes/scripting/help/worker_help.lua:95
 msgid "Works at"
 msgid_plural "Works at"
-msgstr[0] "Treballa en"
-msgstr[1] "Treballa en"
+msgstr[0] "Edifici on treballa:"
+msgstr[1] "Edificis on treballa:"
 
 #. TRANSLATORS: Tribal Encyclopedia: Heading for which tool a worker uses
 #: ../../data/tribes/scripting/help/worker_help.lua:133
 msgid "Worker uses"
-msgstr "Usos del treballador"
+msgstr "Eines que necessita:"
 
 #: ../../data/tribes/scripting/help/worker_help.lua:145
 msgid "Experience levels"

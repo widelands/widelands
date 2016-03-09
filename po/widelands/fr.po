@@ -15,9 +15,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-03-01 09:34+0000\n"
-"PO-Revision-Date: 2016-03-01 09:35+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2016-03-02 08:54+0000\n"
+"PO-Revision-Date: 2016-03-08 14:12+0000\n"
+"Last-Translator: Jaypad <ju-ju@nataju.fr>\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -33,23 +33,23 @@ msgstr "Ressources"
 
 #: ../../data/scripting/editor/terrain_help.lua:35
 msgid "%1%x %2%"
-msgstr ""
+msgstr "%1%x %2%"
 
 #: ../../data/scripting/editor/terrain_help.lua:35
 msgid "Default:"
-msgstr ""
+msgstr "Défaut : "
 
 #: ../../data/scripting/editor/terrain_help.lua:67
 msgid "Probability of trees growing"
-msgstr ""
+msgstr "Probabilité de croissance des arbres"
 
 #: ../../data/scripting/editor/terrain_help.lua:72
 msgid "No trees will grow here."
-msgstr ""
+msgstr "Aucun arbre ne poussera ici."
 
 #: ../../data/scripting/editor/tree_help.lua:17
 msgid "Preferred terrains"
-msgstr ""
+msgstr "Terrains préférés"
 
 #. * TRANSLATORS: File name for saving objective achieved
 #. * TRANSLATORS: %1% = map name. %2% = achievement name
@@ -61,6 +61,58 @@ msgstr ""
 #: ../../src/scripting/lua_game.cc:1060 ../../src/ui_fsmenu/loadgame.cc:74
 msgid "%1% (%2%)"
 msgstr "%1% (%2%)"
+
+#: ../../data/scripting/format_scenario.lua:36
+#, lua-format
+msgid "“%s”"
+msgstr "“%s”"
+
+#. * TRANSLATORS: Concatenate the last 2 items on a list.
+#. * TRANSLATORS: RTL languages might want to change the word order here.
+#: ../../data/scripting/formatting.lua:31 ../../src/base/i18n.cc:335
+#, c-format
+msgid "%1$s & %2$s"
+msgstr "%1$s & %2$s"
+
+#. * TRANSLATORS: Join the last 2 items on a list with "or".
+#. * TRANSLATORS: RTL languages might want to change the word order here.
+#: ../../data/scripting/formatting.lua:33 ../../src/base/i18n.cc:339
+#, c-format
+msgid "%1$s or %2$s"
+msgstr "%1$s ou %2$s"
+
+#. * TRANSLATORS: Join the last 2 items on a list with a comma.
+#. * TRANSLATORS: RTL languages might want to change the word order here.
+#. * TRANSLATORS: Concatenate 2 items at in the middle of a list.
+#. * TRANSLATORS: RTL languages might want to change the word order here.
+#: ../../data/scripting/formatting.lua:35
+#: ../../data/scripting/formatting.lua:40 ../../src/base/i18n.cc:343
+#: ../../src/base/i18n.cc:353
+#, c-format
+msgid "%1$s, %2$s"
+msgstr "%1$s, %2$s"
+
+#. * TRANSLATORS: Concatenate the last 2 items on a list.
+#. * TRANSLATORS: RTL languages might want to change the word order here.
+#: ../../data/scripting/formatting.lua:37 ../../src/base/i18n.cc:347
+#, c-format
+msgid "%1$s and %2$s"
+msgstr "%1$s et %2$s"
+
+#: ../../data/scripting/infrastructure.lua:157
+msgid "No Space"
+msgstr "Pas d'espace"
+
+#: ../../data/scripting/infrastructure.lua:158
+msgid ""
+"Some of your starting buildings didn’t have enough room and weren’t built. "
+"You are at a disadvantage with this; consider restarting this map with a "
+"fair starting condition."
+msgstr "Certains de vos bâtiments de départ n'ont pu être construits en raison du manque de place. Dans ces conditions, vous êtes désavantagé ; vous devriez envisager de redémarrer cette carte avec des conditions de départ équitables."
+
+#: ../../data/scripting/infrastructure.lua:159
+msgid "Not enough space"
+msgstr "Espace insuffisant"
 
 #. * TRANSLATORS: This is a heading for a help window
 #: ../../data/scripting/widelands/multiplayer_help.lua:10
@@ -149,6 +201,49 @@ msgid ""
 "condition, and finally can start the game as soon as all players are set up."
 msgstr "Il y a sur le côté droit les informations concernant la carte ou la sauvegarde. Un bouton à droite de la carte permet à l'hôte de changer pour une carte différente. De plus, l'hôte peut définir des conditions de victoire spécifiques et finalement démarrer le jeu dès que tous les joueurs sont configurés."
 
+#: ../../data/scripting/win_condition_texts.lua:4
+msgid "Congratulations!"
+msgstr "Félicitations !"
+
+#: ../../data/scripting/win_condition_texts.lua:5
+msgid "You have won this game!"
+msgstr "Vous avez gagné cette partie !"
+
+#: ../../data/scripting/win_condition_texts.lua:9
+msgid "You are defeated!"
+msgstr "Vous êtes vaincu !"
+
+#: ../../data/scripting/win_condition_texts.lua:10
+msgid ""
+"You lost your last warehouse and are therefore defeated. You may continue as"
+" spectator if you want."
+msgstr "Vous avez perdu votre dernier entrepôt et êtes donc vaincu. Vous pouvez continuer le jeu en tant que spectateur si vous le désirez."
+
+#: ../../data/scripting/win_condition_texts.lua:14
+msgid "You won"
+msgstr "Vous avez gagné"
+
+#: ../../data/scripting/win_condition_texts.lua:15
+msgid "You are the winner!"
+msgstr "Vous êtes le vainqueur !"
+
+#: ../../data/scripting/win_condition_texts.lua:19
+msgid "You lost"
+msgstr "Vous avez perdu"
+
+#: ../../data/scripting/win_condition_texts.lua:20
+msgid "You’ve lost this game!"
+msgstr "Vous avez perdu cette partie !"
+
+#: ../../data/scripting/win_condition_texts.lua:24
+#: ../../src/wui/game_message_menu.cc:75 ../../src/wui/game_summary.cc:121
+msgid "Status"
+msgstr "État"
+
+#: ../../data/scripting/win_condition_texts.lua:25
+msgid "Player overview:"
+msgstr "Aperçu du joueur :"
+
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
 #: ../../src/ai/computer_player.cc:42
 msgid "No AI"
@@ -168,36 +263,6 @@ msgstr "IA faible"
 #: ../../src/ai/defaultai.h:128
 msgid "Very Weak AI"
 msgstr "IA très faible"
-
-#. * TRANSLATORS: Concatenate the last 2 items on a list.
-#. * TRANSLATORS: RTL languages might want to change the word order here.
-#: ../../src/base/i18n.cc:335
-#, c-format
-msgid "%1$s & %2$s"
-msgstr "%1$s & %2$s"
-
-#. * TRANSLATORS: Join the last 2 items on a list with "or".
-#. * TRANSLATORS: RTL languages might want to change the word order here.
-#: ../../src/base/i18n.cc:339
-#, c-format
-msgid "%1$s or %2$s"
-msgstr "%1$s ou %2$s"
-
-#. * TRANSLATORS: Join the last 2 items on a list with a comma.
-#. * TRANSLATORS: RTL languages might want to change the word order here.
-#. * TRANSLATORS: Concatenate 2 items at in the middle of a list.
-#. * TRANSLATORS: RTL languages might want to change the word order here.
-#: ../../src/base/i18n.cc:343 ../../src/base/i18n.cc:353
-#, c-format
-msgid "%1$s, %2$s"
-msgstr "%1$s, %2$s"
-
-#. * TRANSLATORS: Concatenate the last 2 items on a list.
-#. * TRANSLATORS: RTL languages might want to change the word order here.
-#: ../../src/base/i18n.cc:347
-#, c-format
-msgid "%1$s and %2$s"
-msgstr "%1$s et %2$s"
 
 #. * TRANSLATORS: January. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
@@ -863,7 +928,7 @@ msgstr "Générer la carte"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:452
 msgid "Generating random map…"
-msgstr ""
+msgstr "Génération d'une carte aléatoire..."
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:61
 #: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:28
@@ -2952,7 +3017,7 @@ msgstr "Ne pas compresser les fichiers de données (cartes, enregistrements et s
 
 #: ../../src/ui_fsmenu/options.cc:207
 msgid "Write syncstreams in network games to debug desyncs"
-msgstr ""
+msgstr "Créer des flux de synchronisation pour déboguer les parties en réseau"
 
 #: ../../src/ui_fsmenu/options.cc:211
 msgid "Start building road after placing a flag"
@@ -3430,10 +3495,6 @@ msgctxt "message"
 msgid "Type"
 msgstr "Type"
 
-#: ../../src/wui/game_message_menu.cc:75 ../../src/wui/game_summary.cc:121
-msgid "Status"
-msgstr "État"
-
 #. * TRANSLATORS: We have very little space here. You can also translate this
 #. as "Time" or "Time Sent"
 #. * TRANSLATORS: This is used in the game messages menu - please open an
@@ -3804,7 +3865,7 @@ msgstr "Le nom de cette carte"
 #. * TRANSLATORS: Map hint header when selecting a map.
 #: ../../src/wui/mapdetails.cc:137
 msgid "HINT:"
-msgstr ""
+msgstr "Conseil :"
 
 #: ../../src/wui/maptable.cc:36
 msgid "Number of players"

@@ -47,7 +47,6 @@ GameObjectivesMenu::GameObjectivesMenu
 		(this,
 		 5, 5,
 		 get_inner_w() - 10, OBJECTIVE_LIST,
-		 UI::Align::kLeft,
 		 false),
 	objectivetext
 		(this,

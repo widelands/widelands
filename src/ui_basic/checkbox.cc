@@ -143,7 +143,7 @@ void Statebox::draw(RenderTarget & dst)
 		Point text_anchor(kStateboxSize + kPadding, 0);
 
 		if (rendered_text_) {
-			if (UI::g_fh1->fontset().is_rtl()) {
+			if (UI::g_fh1->fontset()->is_rtl()) {
 				text_anchor.x = 0;
 				image_anchor.x = rendered_text_->width() + kPadding;
 				image_anchor.y = (get_h() - kStateboxSize) / 2;

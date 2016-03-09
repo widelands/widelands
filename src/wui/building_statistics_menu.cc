@@ -92,7 +92,7 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
 			UI::Align::kBottomLeft),
 		unproductive_percent_(
 			&unproductive_box_, 0, 0, 35, g_gr->images().get("images/ui_basic/but1.png"),
-			kLabelFontSize - UI::g_fh1->fontset().size_offset()), // We need consistent height here
+			kLabelFontSize - UI::g_fh1->fontset()->size_offset()), // We need consistent height here
 		unproductive_label2_(
 			&unproductive_box_,
 			/** TRANSLATORS: This is the second part of productivity with input field */

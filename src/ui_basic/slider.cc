@@ -551,7 +551,7 @@ DiscreteSlider::DiscreteSlider
 		 // here, we take into account the h_gap introduced by HorizontalSlider
 		 w / (2 * labels_in.size()) - cursor_size / 2, 0,
 		 w - (w / labels_in.size()) + cursor_size,
-		 h - UI::g_fh1->render(as_uifont("."))->height() - 2,
+		 h - UI::g_fh1->render(as_uifont(UI::g_fh1->fontset()->representative_character()))->height() - 2,
 		 0, labels_in.size() - 1, value_,
 		 background_picture_id,
 		 tooltip_text,
@@ -597,7 +597,7 @@ void DiscreteSlider::layout() {
 	slider.set_pos(Point(w / (2 * labels.size()) - slider.cursor_size_ / 2, 0));
 	slider.set_size
 		(w - (w / labels.size()) + slider.cursor_size_,
-		 h - UI::g_fh1->render(as_uifont("."))->height() + 2);
+		 h - UI::g_fh1->render(as_uifont(UI::g_fh1->fontset()->representative_character()))->height() + 2);
 	Panel::layout();
 }
 
