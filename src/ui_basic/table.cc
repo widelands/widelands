@@ -51,12 +51,9 @@ Table<void *>::Table
 :
 	Panel             (parent, x, y, w, h),
 	total_width_     (0),
-	fontsize_        (UI_FONT_SIZE_SMALL),
-	headerheight_    (UI::g_fh1->render(as_uifont(
-														UI::g_fh1->fontset()->representative_character(), fontsize_))
+	headerheight_    (UI::g_fh1->render(as_uifont(UI::g_fh1->fontset()->representative_character()))
 							->height() + 4),
-	lineheight_      (UI::g_fh1->render(as_uifont(
-														UI::g_fh1->fontset()->representative_character(), fontsize_))
+	lineheight_      (UI::g_fh1->render(as_uifont(UI::g_fh1->fontset()->representative_character()))
 							->height()),
 	scrollbar_       (nullptr),
 	scrollpos_       (0),
@@ -351,7 +348,7 @@ void Table<void *>::draw(RenderTarget & dst)
 				curx += curw;
 				continue;
 			}
-			const Image* entry_text_im = UI::g_fh1->render(as_uifont(richtext_escape(entry_string), fontsize_));
+			const Image* entry_text_im = UI::g_fh1->render(as_uifont(richtext_escape(entry_string)));
 
 			if (static_cast<int>(alignment & UI::Align::kRight)) {
 				point.x += curw - 2 * picw;
