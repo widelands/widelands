@@ -137,15 +137,23 @@ bool FindNodeMineable::accept(const Map&, const FCoords& fc) const {
 	return (fc.field->nodecaps() & BUILDCAPS_MINE) && (fc.field->get_resources() == res);
 }
 
-
 // Fishers and fishbreeders must be built near water
 FindNodeWater::FindNodeWater(const World& world) : world_(world) {}
 
-bool FindNodeWater::accept(const Map& /* map */, const FCoords& coord) const {
+bool FindNodeWater::accept(const Map& map, const FCoords& coord) const {
 	return (world_.terrain_descr(coord.field->terrain_d()).get_is() &
 			  TerrainDescription::Is::kWater) ||
-			 (world_.terrain_descr(coord.field->terrain_r()).get_is() &
+			 (world_.terrain_descr(map.get_neighbour(coord, WALK_W).field->terrain_r()).get_is() &
+			  TerrainDescription::Is::kWater) ||
+			 (world_.terrain_descr(map.get_neighbour(coord, WALK_NW).field->terrain_r()).get_is() &
 			  TerrainDescription::Is::kWater);
+}
+
+// Open water is field where all 6 adjacent triangles are water
+FindNodeOpenWater::FindNodeOpenWater(const World& world) : world_(world) {}
+
+bool FindNodeOpenWater::accept(const Map& /* map */, const FCoords& coord) const {
+	return !(coord.field->nodecaps() & MOVECAPS_WALK) && (coord.field->nodecaps() & MOVECAPS_SWIM);
 }
 
 // FindNodeWithFlagOrRoad
@@ -176,6 +184,7 @@ BuildableField::BuildableField(const Widelands::FCoords& fc)
 	  // non-negative, water is not recaldulated
 	  rocks_nearby(1),
 	  water_nearby(-1),
+	  open_water_nearby(-1),
 	  distant_water(0),
 	  fish_nearby(-1),
 	  critters_nearby(-1),
@@ -339,73 +348,73 @@ void FlagsForRoads::Candidate::calculate_score() {
 }
 
 void FlagsForRoads::print() { // this is for debuging and development purposes
-	for (auto& item : queue) {
+	for (auto& candidate_flag : queue) {
 		log("   %starget: %3dx%3d, saving: %5d (%3d), air distance: %3d, new road: %6d, score: %5d %s\n",
-		(item.reduction_score>=min_reduction && item.new_road_possible)?"+":" ",
-		Coords::unhash(item.coords_hash).x,
-		Coords::unhash(item.coords_hash).y,
-		item.current_roads_distance - item.new_road_length,
+		(candidate_flag.reduction_score>=min_reduction && candidate_flag.new_road_possible)?"+":" ",
+		Coords::unhash(candidate_flag.coords_hash).x,
+		Coords::unhash(candidate_flag.coords_hash).y,
+		candidate_flag.current_roads_distance - candidate_flag.new_road_length,
 		min_reduction,
-		item.air_distance,
-		item.new_road_length,
-		item.reduction_score,
-		(item.new_road_possible)? ", new road possible" : " ");
+		candidate_flag.air_distance,
+		candidate_flag.new_road_length,
+		candidate_flag.reduction_score,
+		(candidate_flag.new_road_possible)? ", new road possible" : " ");
 	}
 }
 
-// queue is orderd but some roads are only estimations so we takes first such item
+// queue is orderd but some target flags are only estimations so we takes first such candidate_flag
 bool FlagsForRoads::get_best_uncalculated(uint32_t* winner) {
-	for (auto& item : queue) {
-		if (!item.new_road_possible) {
-			*winner = item.coords_hash;
+	for (auto& candidate_flag : queue) {
+		if (!candidate_flag.new_road_possible) {
+			*winner = candidate_flag.coords_hash;
 			return true;
 		}
 	}
 	return false;
 }
 
+// We managed to calculate road from starting flag to this flag
 void  FlagsForRoads::road_possible(Widelands::Coords coords, uint32_t distance) {
 	// std::set does not allow updating
-	Candidate new_item = Candidate(0, 0, false);
-	for (auto item : queue) {
-		if (item.coords_hash == coords.hash()) {
-			new_item = item;
-			//printf ("   old value: %d, received: %3d\n", item.new_road_length, distance);
-			assert (new_item.coords_hash == item.coords_hash);
-			queue.erase(item);
+	Candidate new_candidate_flag = Candidate(0, 0, false);
+	for (auto candidate_flag : queue) {
+		if (candidate_flag.coords_hash == coords.hash()) {
+			new_candidate_flag = candidate_flag;
+			assert (new_candidate_flag.coords_hash == candidate_flag.coords_hash);
+			queue.erase(candidate_flag);
 			break;
 		}
 	}
 
-	new_item.new_road_length = distance;
-	new_item.new_road_possible = true;
-	new_item.calculate_score();
-	queue.insert(new_item);
+	new_candidate_flag.new_road_length = distance;
+	new_candidate_flag.new_road_possible = true;
+	new_candidate_flag.calculate_score();
+	queue.insert(new_candidate_flag);
 }
 
-// Remove the flag from candidates
+// Remove the flag from candidates as new road is not possible
 void FlagsForRoads::road_impossible(Widelands::Coords coords) {
 	const uint32_t hash = coords.hash();
-	for (auto item : queue) {
-		if (item.coords_hash == hash) {
-			queue.erase(item);
+	for (auto candidate_flag : queue) {
+		if (candidate_flag.coords_hash == hash) {
+			queue.erase(candidate_flag);
 			return;
 		}
 	}
 }
 
-// updating walking distance over existing roads
+// Updating walking distance over existing roads
+// Queue does not allow modifying its members so we erase and then eventually insert modified member
 void FlagsForRoads::set_road_distance(Widelands::Coords coords, int32_t distance) {
-	//printf ("    updating existing road distance for %3dx%3d, length: %3d\n", coords.x, coords.y, distance);
 	const uint32_t hash = coords.hash();
-	Candidate new_item = Candidate(0, 0, false);
+	Candidate new_candidate_flag = Candidate(0, 0, false);
 	bool replacing = false;
-	for (auto item : queue) {
-		if (item.coords_hash == hash) {
-			assert (!item.different_economy);
-			if (distance < item.current_roads_distance) {
-				new_item = item;
-				queue.erase(item);
+	for (auto candidate_flag : queue) {
+		if (candidate_flag.coords_hash == hash) {
+			assert (!candidate_flag.different_economy);
+			if (distance < candidate_flag.current_roads_distance) {
+				new_candidate_flag = candidate_flag;
+				queue.erase(candidate_flag);
 				replacing = true;
 				break;
 			}
@@ -413,27 +422,27 @@ void FlagsForRoads::set_road_distance(Widelands::Coords coords, int32_t distance
 		}
 	}
 	if (replacing) {
-		new_item.current_roads_distance = distance;
-		new_item.accessed_via_roads = true;
-		new_item.calculate_score();
-		queue.insert(new_item);
+		new_candidate_flag.current_roads_distance = distance;
+		new_candidate_flag.accessed_via_roads = true;
+		new_candidate_flag.calculate_score();
+		queue.insert(new_candidate_flag);
 	}
 }
 
 bool FlagsForRoads::get_winner(uint32_t* winner_hash, uint32_t pos) {
 	assert (pos == 1 || pos == 2);
 	uint32_t counter = 1;
-	// The AI can ask for 2nd position, but there might be only one viable candidate
-	// in this case we return the first one of course
+	// If AI can ask for 2nd position, but there is only one viable candidate
+	// we return the first one of course
 	bool has_winner = false;
-	for (auto item : queue) {
-		if (item.reduction_score < min_reduction || !item.new_road_possible) {
+	for (auto candidate_flag : queue) {
+		if (candidate_flag.reduction_score < min_reduction || !candidate_flag.new_road_possible) {
 			continue;
 		}
-		assert (item.air_distance > 0);
-		assert(item.reduction_score >= min_reduction);
-		assert(item.new_road_possible);
-		*winner_hash=item.coords_hash;
+		assert (candidate_flag.air_distance > 0);
+		assert(candidate_flag.reduction_score >= min_reduction);
+		assert(candidate_flag.new_road_possible);
+		*winner_hash=candidate_flag.coords_hash;
 		has_winner = true;
 
 		if (counter == pos) {

@@ -890,7 +890,6 @@ void DefaultAI::late_initialization() {
  * milliseconds if the area the computer owns is big.
  */
 void DefaultAI::update_all_buildable_fields(const uint32_t gametime) {
-
 	uint16_t i = 0;
 
 	// we test 40 fields that were update more than 1 seconds ago
@@ -973,10 +972,17 @@ void DefaultAI::update_all_mineable_fields(const uint32_t gametime) {
  */
 void DefaultAI::update_all_not_buildable_fields() {
 	int32_t const pn = player_number();
-	uint32_t maxchecks = unusable_fields.size();
 
-	if (maxchecks > 50) {
-		maxchecks = 50;
+	// We are checking at least 5 unusable fields (or less if there are not 5 of them)
+	// at once, but not more then 200...
+	// The idea is to check each field at least once a minute, of cours with big maps
+	// it will take longer
+	uint32_t maxchecks = unusable_fields.size();
+	if (maxchecks > 5) {
+		maxchecks = 5 + (unusable_fields.size() - 5) / 15;
+	}
+	if (maxchecks > 200) {
+		maxchecks = 200;
 	}
 
 	for (uint32_t i = 0; i < maxchecks; ++i) {
@@ -991,6 +997,7 @@ void DefaultAI::update_all_not_buildable_fields() {
 			buildable_fields.push_back(new BuildableField(unusable_fields.front()));
 			unusable_fields.pop_front();
 			update_buildable_field(*buildable_fields.back());
+
 			continue;
 		}
 
@@ -998,6 +1005,7 @@ void DefaultAI::update_all_not_buildable_fields() {
 			mineable_fields.push_back(new MineableField(unusable_fields.front()));
 			unusable_fields.pop_front();
 			update_mineable_field(*mineable_fields.back());
+
 			continue;
 		}
 
@@ -1126,19 +1134,25 @@ void DefaultAI::update_buildable_field(BuildableField& field, uint16_t range, bo
 		field.consumers_nearby.resize(wares.size());
 		field.supporters_nearby.clear();
 		field.supporters_nearby.resize(wares.size());
-		std::vector<Coords> water_list;
 		std::vector<Coords> resource_list;
 		std::vector<Bob*> critters_list;
 
 		if (field.water_nearby == kUncalculated) {
+			assert (field.open_water_nearby == kUncalculated);
 
 			FindNodeWater find_water(game().world());
-			map.find_fields(Area<FCoords>(field.coords, 5), &water_list, find_water);
-			field.water_nearby = water_list.size();
+			field.water_nearby =  map.find_fields(Area<FCoords>(field.coords, 5), nullptr, find_water);
+
+			if (field.water_nearby > 0) {
+				FindNodeOpenWater find_open_water(game().world());
+				field.open_water_nearby =
+					map.find_fields(Area<FCoords>(field.coords, 5), nullptr, find_open_water);
+			}
 
 			if (resource_necessity_water_needed_) {  // for atlanteans
-				map.find_fields(Area<FCoords>(field.coords, 14), &water_list, find_water);
-				field.distant_water = water_list.size() - field.water_nearby;
+				field.distant_water =
+					map.find_fields(Area<FCoords>(field.coords, 14), nullptr, find_water) - field.water_nearby;
+				assert (field.open_water_nearby <=  field.water_nearby);
 			}
 		}
 
@@ -1307,8 +1321,6 @@ void DefaultAI::update_buildable_field(BuildableField& field, uint16_t range, bo
 	}
 	if (any_unconnected_imm && any_connected_imm && field.military_in_constr_nearby == 0) {
 		field.unconnected_nearby = true;
-		//printf (" oh, we see both connected and unconnected immovables from %3dx%3d\n",
-		//field.coords.x, field.coords.y);
 	}
 }
 
@@ -2102,9 +2114,9 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 
 					else if (bo.is_shipyard) {
 						// for now AI builds only one shipyard
-						if (bf->water_nearby > 3 && (bo.total_count() - bo.unconnected_count) == 0 &&
+						if (bf->open_water_nearby > 1 && (bo.total_count() - bo.unconnected_count) == 0 &&
 						    seafaring_economy) {
-							prio += productionsites.size() * 5 + bf->water_nearby;
+							prio += productionsites.size() * 5 + bf->open_water_nearby;
 						}
 					}
 
@@ -2593,9 +2605,9 @@ bool DefaultAI::improve_roads(uint32_t gametime) {
 		roads.push_back(roads.front());
 		roads.pop_front();
 
-		// occasionaly we test if the road can be dismounted
+		// Occasionaly (not more then once in 15 seconds) we test if the road can be dismounted
 		// if there is shortage of spots we do it always
-		if (last_road_dismantled_ + 10 * 1000 < gametime &&
+		if (last_road_dismantled_ + 15 * 1000 < gametime &&
 			(gametime % 5 == 0 || spots_ < kSpotsTooLittle)) {
 				const Road& road = *roads.front();
 				if (dispensable_road_test(*const_cast<Road*>(&road))) {
@@ -2653,7 +2665,7 @@ bool DefaultAI::improve_roads(uint32_t gametime) {
 	// is connected to a warehouse?
 	const bool needs_warehouse = flag.get_economy()->warehouses().empty();
 
-	// needs to be connected
+	// Various tests to invoke building of a shortcut (new road)
 	if (flag.nr_of_roads() == 0 || needs_warehouse) {
 		create_shortcut_road(flag, 17, 22, gametime);
 		inhibit_road_building_ = gametime + 800;
@@ -2864,7 +2876,6 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 
 	Map& map = game().map();
 
-
 	// initializing new object of FlagsForRoads, we will push there all candidate flags
   	Widelands::FlagsForRoads RoadCandidates(min_reduction);
 
@@ -2873,8 +2884,8 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 
 	// get all flags within radius
 	std::vector<Coords> reachable;
-  	const uint32_t reachable_fields_count_tmp = map.find_reachable_fields(
-	   Area<FCoords>(map.get_fcoords(flag.get_position()), checkradius), &reachable, check, functor); //NOCOM
+  	map.find_reachable_fields(
+	   Area<FCoords>(map.get_fcoords(flag.get_position()), checkradius), &reachable, check, functor);
 
 	for (const Coords& reachable_coords : reachable) {
 
@@ -2908,9 +2919,6 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 			RoadCandidates.add_flag(reachable_coords, air_distance, different_economy);
 		}
 	}
-
-	printf ("  Initial status of candidates: \n");
-	RoadCandidates.print(); //NOCOM
 
 	// now we walk over roads and if field is reachable by roads, we change distance asigned above
 	std::priority_queue<NearFlag> queue;
@@ -2963,10 +2971,6 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 		}
 	}
 
-	printf ("  having %d candidates from flag at %3dx%3d, reachable: %3d, expected reduction: %3d\n",
-	RoadCandidates.count(), flag.get_position().x, flag.get_position().y,
-	reachable_fields_count_tmp, RoadCandidates.min_reduction);
-
 	// We do not calculate roads to all nearby flags, ideally we investigate 4 roads, but the number
 	// can be higher if a road cannot be built to considered flag. The logic is: 2 points for possible
 	// road, 1 for impossible, and count < 10 so in worst scenario we will calculate 10 impossible
@@ -2989,8 +2993,6 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 			count += 1;
 		}
 	}
-	printf ("  Final status of candidates: \n");
-	RoadCandidates.print();
 
 	// Well and finally building the winning road
 	uint32_t winner_hash = 0;

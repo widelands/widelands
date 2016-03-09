@@ -172,6 +172,16 @@ private:
 	const World& world_;
 };
 
+// Fishers and fishbreeders must be built near water
+struct FindNodeOpenWater {
+	FindNodeOpenWater(const World& world);
+
+	bool accept(const Map& /* map */, const FCoords& coord) const;
+
+private:
+	const World& world_;
+};
+
 struct FindNodeWithFlagOrRoad {
 	bool accept(const Map&, FCoords) const;
 };
@@ -232,6 +242,7 @@ struct BuildableField {
 	uint8_t trees_nearby;
 	uint8_t rocks_nearby;
 	int16_t water_nearby;
+	int16_t open_water_nearby;
 	int16_t distant_water;
 	int8_t fish_nearby;
 	int8_t critters_nearby;
