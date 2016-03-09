@@ -53,8 +53,12 @@ MultilineTextarea::MultilineTextarea
 
 	scrollbar_.moved.connect(boost::bind(&MultilineTextarea::scrollpos_changed, this, _1));
 
-	scrollbar_.set_singlestepsize(UI::g_fh1->render(as_uifont(".", UI_FONT_SIZE_SMALL))->height());
-	scrollbar_.set_pagesize(h - 2 * UI::g_fh1->render(as_uifont(".", UI_FONT_SIZE_BIG))->height());
+	scrollbar_.set_singlestepsize(UI::g_fh1->render(as_uifont(
+																		UI::g_fh1->fontset()->representative_character(),
+																		UI_FONT_SIZE_SMALL))->height());
+	scrollbar_.set_pagesize(h - 2 * UI::g_fh1->render(as_uifont(
+																		  UI::g_fh1->fontset()->representative_character(),
+																		  UI_FONT_SIZE_BIG))->height());
 	scrollbar_.set_steps(1);
 	scrollbar_.set_force_draw(scrollmode_ == ScrollMode::kScrollNormalForced ||
 										scrollmode_ == ScrollMode::kScrollLogForced);

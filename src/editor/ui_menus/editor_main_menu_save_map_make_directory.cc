@@ -36,14 +36,14 @@ MainMenuSaveMapMakeDirectory::MainMenuSaveMapMakeDirectory
 	edit_(&vbox_, 0, 0, get_inner_w() - 2 * padding_, g_gr->images().get("images/ui_basic/but1.png")),
 	ok_button_(
 		this, "ok",
-		UI::g_fh1->fontset().is_rtl() ? padding_ : get_inner_w() - butw_ - padding_,
+		UI::g_fh1->fontset()->is_rtl() ? padding_ : get_inner_w() - butw_ - padding_,
 		get_inner_h() - padding_ - buth_,
 		butw_, buth_,
 		g_gr->images().get("images/ui_basic/but5.png"),
 		_("OK")),
 	cancel_button_(
 		this, "cancel",
-		UI::g_fh1->fontset().is_rtl() ?get_inner_w() - butw_ - padding_ : padding_,
+		UI::g_fh1->fontset()->is_rtl() ?get_inner_w() - butw_ - padding_ : padding_,
 		get_inner_h() - padding_ - buth_,
 		butw_, buth_,
 		g_gr->images().get("images/ui_basic/but1.png"),
