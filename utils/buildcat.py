@@ -53,7 +53,6 @@ MAINPOTS = [
                     "../../data/scripting/*.lua",
                     "../../data/scripting/editor/*.lua",
                     "../../data/scripting/widelands/*.lua",
-                    "../../data/scripting/editor/*.lua",
     ] ),
     ( "widelands_console/widelands_console", [
                     "../../src/wlapplication_messages.cc",
@@ -228,7 +227,7 @@ def pot_modify_header(potfile_in, potfile_out, header):
             potout.writelines(potin)
 
         return True
-    
+
 def run_xgettext(infiles, outfile, opts):
     xgettext = subprocess.Popen("xgettext %s --files-from=- --output=\"%s\"" % \
         (opts, outfile), shell=True, stdin=subprocess.PIPE, universal_newlines=True)
@@ -241,7 +240,7 @@ def run_xgettext(infiles, outfile, opts):
 
     xgettext_status = xgettext.wait()
     if (xgettext_status != 0):
-        raise BuildcatError("xgettext exited with errorcode %i" % xgettext_status)    
+        raise BuildcatError("xgettext exited with errorcode %i" % xgettext_status)
 
 def run_msguniq(potfile):
     msguniq_rv = os.system("msguniq \"%s\" -F --output-file=\"%s\"" % (potfile, potfile))
