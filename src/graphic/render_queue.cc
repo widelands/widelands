@@ -77,6 +77,7 @@ make_key_blended(const uint64_t program_id, const uint64_t z_value, const uint64
 
 inline void from_item(const RenderQueue::Item& item, FillRectProgram::Arguments* args) {
 	args->color = item.rect_arguments.color;
+	args->destination_rect = item.rect_arguments.destination_rect;
 }
 
 inline void from_item(const RenderQueue::Item& item, BlitProgram::Arguments* args) {
@@ -84,11 +85,11 @@ inline void from_item(const RenderQueue::Item& item, BlitProgram::Arguments* arg
 	args->blend = item.blit_arguments.blend;
 	args->mask = item.blit_arguments.mask;
 	args->blit_mode = item.blit_arguments.mode;
+	args->destination_rect = item.blit_arguments.destination_rect;
 }
 
 inline void from_item(const RenderQueue::Item& item, DrawLineProgram::Arguments* args) {
-	args->color = item.line_arguments.color;
-	args->line_width = item.line_arguments.line_width;
+	args->vertices = std::move(item.line_arguments.vertices);
 }
 
 // Batches up as many items from 'items' that have the same 'program_id'.
@@ -106,7 +107,6 @@ std::vector<T> batch_up(const RenderQueue::Program program_id,
 		}
 		all_args.emplace_back();
 		T& args = all_args.back();
-		args.destination_rect = current_item.destination_rect;
 		args.z_value = current_item.z_value;
 		args.blend_mode = current_item.blend_mode;
 		from_item(current_item, &args);
@@ -160,9 +160,6 @@ void RenderQueue::enqueue(const Item& given_item) {
 			break;
 
 		case Program::kLine:
-		   extra_value = given_item.line_arguments.line_width;
-			break;
-
 		case Program::kRect:
 		case Program::kTerrainBase:
 		case Program::kTerrainDither:
@@ -206,13 +203,11 @@ void RenderQueue::draw(const int screen_width, const int screen_height) {
 	opaque_items_.clear();
 
 	glEnable(GL_BLEND);
-	glDepthMask(GL_FALSE);
 
 	std::sort(blended_items_.begin(), blended_items_.end());
 	draw_items(blended_items_);
 	blended_items_.clear();
 
-	glDepthMask(GL_TRUE);
 	glDisable(GL_DEPTH_TEST);
 	next_z_ = 1;
 }
@@ -238,7 +233,7 @@ void RenderQueue::draw_items(const std::vector<Item>& items) {
 			break;
 
 		case Program::kTerrainBase: {
-			ScopedScissor scoped_scissor(item.destination_rect);
+			ScopedScissor scoped_scissor(item.terrain_arguments.destination_rect);
 			terrain_program_->draw(item.terrain_arguments.gametime,
 			                       *item.terrain_arguments.terrains,
 			                       *item.terrain_arguments.fields_to_draw,
@@ -247,7 +242,7 @@ void RenderQueue::draw_items(const std::vector<Item>& items) {
 		} break;
 
 		case Program::kTerrainDither: {
-			ScopedScissor scoped_scissor(item.destination_rect);
+			ScopedScissor scoped_scissor(item.terrain_arguments.destination_rect);
 			dither_program_->draw(item.terrain_arguments.gametime,
 			                      *item.terrain_arguments.terrains,
 			                      *item.terrain_arguments.fields_to_draw,
@@ -256,7 +251,7 @@ void RenderQueue::draw_items(const std::vector<Item>& items) {
 		} break;
 
 		case Program::kTerrainRoad: {
-			ScopedScissor scoped_scissor(item.destination_rect);
+			ScopedScissor scoped_scissor(item.terrain_arguments.destination_rect);
 			road_program_->draw(item.terrain_arguments.renderbuffer_width,
 			                    item.terrain_arguments.renderbuffer_height,
 			                    *item.terrain_arguments.fields_to_draw,

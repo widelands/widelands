@@ -21,11 +21,13 @@
 #define WL_GRAPHIC_SURFACE_H
 
 #include <memory>
+#include <vector>
 
 #include "base/macros.h"
 #include "base/rect.h"
 #include "graphic/blend_mode.h"
 #include "graphic/color.h"
+#include "graphic/gl/draw_line_program.h"
 #include "graphic/image.h"
 
 class Texture;
@@ -63,8 +65,11 @@ public:
 	// in the target are just replaced (i.e. / BlendMode would be BlendMode::Copy).
 	void fill_rect(const Rect&, const RGBAColor&);
 
-	/// draw a line to the destination
-	void draw_line(const Point& start, const Point& end, const RGBColor& color, int width);
+	// Draw a 'width' pixel wide line to the destination. 'points' are taken by
+	// value on purpose.
+	void draw_line_strip(std::vector<FloatPoint> points,
+	                     const RGBColor& color,
+								float width);
 
 	/// makes a rectangle on the destination brighter (or darker).
 	void brighten_rect(const Rect&, int factor);
@@ -85,8 +90,9 @@ private:
 	                                const BlitData& texture,
 	                                const RGBAColor& blend) = 0;
 
-	virtual void
-	do_draw_line(const FloatPoint& start, const FloatPoint& end, const RGBColor& color, int width) = 0;
+	// Takes argument by value for micro optimization: the argument might then
+	// be moved by the compiler instead of copied.
+	virtual void do_draw_line_strip(std::vector<DrawLineProgram::PerVertexData> vertices) = 0;
 
 	virtual void
 	do_fill_rect(const FloatRect& dst_rect, const RGBAColor& color, BlendMode blend_mode) = 0;
@@ -94,7 +100,9 @@ private:
 	DISALLOW_COPY_AND_ASSIGN(Surface);
 };
 
-/// Draws a rect (frame only) to the surface.
-void draw_rect(const Rect&, const RGBColor&, Surface* destination);
+/// Draws a rect (frame only) to the surface. The width of the surrounding line
+/// is 1 pixel, i.e. the transparent inner box of the drawn rectangle starts at
+/// (x+1, y+1) and has dimension (w - 2, h - 2).
+void draw_rect(const Rect& rect, const RGBColor&, Surface* destination);
 
 #endif  // end of include guard: WL_GRAPHIC_SURFACE_H
