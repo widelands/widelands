@@ -872,10 +872,9 @@ Change the training priotity values
 ==========
 */
 void Player::change_training_options
-	(TrainingSite & trainingsite, int32_t const atr, int32_t const val)
+	(TrainingSite & trainingsite, TrainingAttribute attr, int32_t const val)
 {
 	if (trainingsite.get_owner() == this) {
-		TrainingAttribute const attr = static_cast<TrainingAttribute>(atr);
 		trainingsite.set_pri(attr, trainingsite.get_pri(attr) + val);
 	}
 }

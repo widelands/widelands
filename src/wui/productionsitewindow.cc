@@ -28,7 +28,6 @@
 #include "logic/map_objects/tribes/trainingsite.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/worker.h"
-#include "ui_basic/listselect.h"
 #include "ui_basic/tabpanel.h"
 #include "ui_basic/textarea.h"
 #include "wui/waresqueuedisplay.h"

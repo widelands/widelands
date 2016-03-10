@@ -26,7 +26,6 @@
 
 #include <boost/signals2.hpp>
 
-#include "graphic/align.h"
 #include "graphic/color.h"
 #include "ui_basic/panel.h"
 #include "ui_basic/scrollbar.h"
@@ -47,7 +46,6 @@ struct BaseListselect : public Panel {
 		 int32_t y,
 		 uint32_t w,
 		 uint32_t h,
-		 Align align = UI::Align::kLeft,
 		 bool show_check = false);
 	~BaseListselect();
 
@@ -64,23 +62,18 @@ struct BaseListselect : public Panel {
 		 uint32_t value,
 		 const Image* pic = nullptr,
 		 const bool select_this = false,
-		 const std::string & tooltip_text = std::string(),
-		 const std::string& fontname = "");
+		 const std::string & tooltip_text = std::string());
 	void add_front
 		(const std::string& name,
 		 const Image* pic = nullptr,
 		 const bool select_this = false,
-		 const std::string & tooltip_text = std::string(),
-		 const std::string& fontname = "");
+		 const std::string & tooltip_text = std::string());
 	void remove(uint32_t);
 	void remove(const char * name);
 
 	void switch_entries(uint32_t, uint32_t);
 
 	void set_entry_color(uint32_t, RGBColor);
-	void set_fontsize(int32_t const fontsize) {
-		fontsize_ = fontsize;
-	}
 
 	uint32_t size () const {return entry_records_.size ();}
 	bool     empty() const {return entry_records_.empty();}
@@ -136,13 +129,11 @@ private:
 		const Image* pic;
 		std::string name;
 		std::string tooltip;
-		std::string font_face;
 	};
 	using EntryRecordDeque = std::deque<EntryRecord *>;
 
 	uint32_t max_pic_width_;
 	uint32_t lineheight_;
-	Align align_;
 	EntryRecordDeque entry_records_;
 	Scrollbar scrollbar_;
 	uint32_t scrollpos_;         //  in pixels
@@ -151,9 +142,6 @@ private:
 	uint32_t last_selection_;  // for double clicks
 	bool show_check_; //  show a green arrow left of selected element
 	const Image* check_pic_;
-
-	std::string fontname_;
-	uint32_t    fontsize_;
 	std::string current_tooltip_;
 };
 
@@ -163,9 +151,8 @@ struct Listselect : public BaseListselect {
 		(Panel * parent,
 		 int32_t x, int32_t y,
 		 uint32_t w, uint32_t h,
-		 Align align = UI::Align::kLeft,
 		 bool show_check = false)
-		: BaseListselect(parent, x, y, w, h, align, show_check)
+		: BaseListselect(parent, x, y, w, h, show_check)
 	{}
 
 	void add
@@ -173,11 +160,10 @@ struct Listselect : public BaseListselect {
 		 Entry value,
 		 const Image* pic = nullptr,
 		 const bool select_this = false,
-		 const std::string & tooltip_text = std::string(),
-		 const std::string & font_face = "")
+		 const std::string & tooltip_text = std::string())
 	{
 		entry_cache_.push_back(value);
-		BaseListselect::add(name, entry_cache_.size() - 1, pic, select_this, tooltip_text, font_face);
+		BaseListselect::add(name, entry_cache_.size() - 1, pic, select_this, tooltip_text);
 	}
 	void add_front
 		(const std::string& name,
@@ -219,9 +205,8 @@ struct Listselect<Entry &> : public Listselect<Entry *> {
 		(Panel * parent,
 		 int32_t x, int32_t y,
 		 uint32_t w, uint32_t h,
-		 Align align = UI::Align::kLeft,
 		 bool show_check = false)
-		: Base(parent, x, y, w, h, align, show_check)
+		: Base(parent, x, y, w, h, show_check)
 	{}
 
 	void add

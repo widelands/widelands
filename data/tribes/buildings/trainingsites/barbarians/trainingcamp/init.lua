@@ -82,7 +82,7 @@ tribes:new_trainingsite_type {
          "ax_warriors"
       }
    },
-   ["soldier hp"] = {
+   ["soldier health"] = {
       min_level = 0,
       max_level = 2,
       food = {
@@ -160,37 +160,37 @@ tribes:new_trainingsite_type {
             "train=soldier attack 4 5"
          }
       },
-      upgrade_soldier_hp_0 = {
+      upgrade_soldier_health_0 = {
          -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
          descname = _"upgrading soldier health from level 0 to level 1",
          actions = {
-            "check_soldier=soldier hp 0",
+            "check_soldier=soldier health 0",
             "sleep=30000",
-            "check_soldier=soldier hp 0",
+            "check_soldier=soldier health 0",
             "consume=helmet barbarians_bread,fish,meat",
-            "train=soldier hp 0 1"
+            "train=soldier health 0 1"
          }
       },
-      upgrade_soldier_hp_1 = {
+      upgrade_soldier_health_1 = {
          -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
          descname = _"upgrading soldier health from level 1 to level 2",
          actions = {
-            "check_soldier=soldier hp 1",
+            "check_soldier=soldier health 1",
             "sleep=30000",
-            "check_soldier=soldier hp 1",
+            "check_soldier=soldier health 1",
             "consume=helmet_mask fish,meat barbarians_bread",
-            "train=soldier hp 1 2"
+            "train=soldier health 1 2"
          }
       },
-      upgrade_soldier_hp_2 = {
+      upgrade_soldier_health_2 = {
          -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
          descname = _"upgrading soldier health from level 2 to level 3",
          actions = {
-            "check_soldier=soldier hp 2",
+            "check_soldier=soldier health 2",
             "sleep=30000",
-            "check_soldier=soldier hp 2",
+            "check_soldier=soldier health 2",
             "consume=helmet_warhelm fish,meat:2 barbarians_bread",
-            "train=soldier hp 2 3"
+            "train=soldier health 2 3"
          }
       },
    },

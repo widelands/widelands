@@ -39,12 +39,12 @@ void replace_entities(std::string* text) {
 }
 
 uint32_t text_width(const std::string& text, int ptsize) {
-	return UI::g_fh1->render(as_editorfont(text, ptsize - UI::g_fh1->fontset().size_offset()))->width();
+	return UI::g_fh1->render(as_editorfont(text, ptsize - UI::g_fh1->fontset()->size_offset()))->width();
 }
 
 uint32_t text_height(const std::string& text, int ptsize) {
 	return UI::g_fh1->render(as_editorfont(text.empty() ? "." : text,
-														ptsize - UI::g_fh1->fontset().size_offset()))->height();
+														ptsize - UI::g_fh1->fontset()->size_offset()))->height();
 }
 
 std::string richtext_escape(const std::string& given_text) {
@@ -234,7 +234,7 @@ Default styles
 */
 
 TextStyle::TextStyle() :
-	font(Font::get(UI::g_fh1->fontset().sans(), UI_FONT_SIZE_SMALL)),
+	font(Font::get(UI::g_fh1->fontset()->sans(), UI_FONT_SIZE_SMALL)),
 	fg(UI_FONT_CLR_FG),
 	bold(true),
 	italics(false),

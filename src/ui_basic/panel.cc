@@ -1128,4 +1128,5 @@ bool Panel::draw_tooltip(RenderTarget & dst, const std::string & text)
 	dst.blit(r.origin() + Point(2, 2), rendered_text);
 	return true;
 }
+
 }

@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-02-16 09:25+0000\n"
-"PO-Revision-Date: 2016-02-18 18:10+0000\n"
+"POT-Creation-Date: 2016-03-02 08:54+0000\n"
+"PO-Revision-Date: 2016-03-02 08:55+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -2544,28 +2544,6 @@ msgstr "Tha sinn eòlach air an treubh seo o shean. Seo mic is nigheannan Atlant
 #: ../../data/tribes/scripting/starting_conditions/empire/fortified_village.lua:10
 msgid "Fortified Village"
 msgstr "Baile daingnichte"
-
-#. TRANSLATORS: Short for "Not enough space"
-#: ../../data/tribes/scripting/starting_conditions/atlanteans/fortified_village.lua:103
-#: ../../data/tribes/scripting/starting_conditions/barbarians/fortified_village.lua:96
-#: ../../data/tribes/scripting/starting_conditions/empire/fortified_village.lua:121
-msgid "No Space"
-msgstr "Gainnead ruim"
-
-#: ../../data/tribes/scripting/starting_conditions/atlanteans/fortified_village.lua:104
-#: ../../data/tribes/scripting/starting_conditions/barbarians/fortified_village.lua:97
-#: ../../data/tribes/scripting/starting_conditions/empire/fortified_village.lua:122
-msgid ""
-"Some of your starting buildings didn’t have enough room and weren’t built. "
-"You are at a disadvantage with this; consider restarting this map with a "
-"fair starting condition."
-msgstr "Cha robh rum gu leòr ann airson cuid dhe na togalaichean tòiseachaidh agad is cha deach an togail. Cuiridh seo èis ort; saoil an tòisich thu air a’ mhapa seo a-rithist le cumhan tòiseachaidh cothromach?"
-
-#: ../../data/tribes/scripting/starting_conditions/atlanteans/fortified_village.lua:105
-#: ../../data/tribes/scripting/starting_conditions/barbarians/fortified_village.lua:98
-#: ../../data/tribes/scripting/starting_conditions/empire/fortified_village.lua:123
-msgid "Not enough space"
-msgstr "Chan eil rum gu leòr ann"
 
 #: ../../data/tribes/scripting/starting_conditions/atlanteans/headquarters.lua:10
 #: ../../data/tribes/scripting/starting_conditions/barbarians/headquarters.lua:10

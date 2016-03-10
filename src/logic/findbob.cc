@@ -36,7 +36,7 @@ bool FindBobEnemySoldier::accept(Bob * const imm) const
 		if
 			(soldier->is_on_battlefield() &&
 			 (!player || soldier->owner().is_hostile(*player)) &&
-			 soldier->get_current_hitpoints())
+			 soldier->get_current_health())
 			return true;
 
 	return false;

@@ -692,13 +692,13 @@ void Warehouse::act(Game & game, uint32_t const data)
 				Soldier * soldier = static_cast<Soldier *>(*it);
 
 				//  Soldier dead ...
-				if (!soldier || soldier->get_current_hitpoints() == 0) {
+				if (!soldier || soldier->get_current_health() == 0) {
 					it = soldiers.erase(it);
 					supply_->remove_workers(soldier_index, 1);
 					continue;
 				}
 
-				if (soldier->get_current_hitpoints() < soldier->get_max_hitpoints()) {
+				if (soldier->get_current_health() < soldier->get_max_health()) {
 					soldier->heal(total_heal);
 					continue;
 				}
