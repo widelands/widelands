@@ -487,7 +487,7 @@ const Image* MapObject::representative_image() const {
 /**
  * Default implementation
  */
-int32_t MapObject::get_training_attribute(uint32_t) const
+int32_t MapObject::get_training_attribute(TrainingAttribute) const
 {
 	return -1;
 }

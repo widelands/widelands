@@ -71,7 +71,7 @@ Battle::Battle(Game & game, Soldier & First, Soldier & Second) :
 	}
 
 	// Ensures only live soldiers eganges in a battle
-	assert(First.get_current_hitpoints() && Second.get_current_hitpoints());
+	assert(First.get_current_health() && Second.get_current_health());
 
 	init(game);
 }
@@ -184,7 +184,7 @@ void Battle::get_battle_work(Game & game, Soldier & soldier)
 		damage_ = 0;
 	}
 
-	if (soldier.get_current_hitpoints() < 1) {
+	if (soldier.get_current_health() < 1) {
 		molog("[battle] soldier %u lost the battle\n", soldier.serial());
 		soldier          . owner().count_casualty();
 		opponent(soldier)->owner().count_kill    ();

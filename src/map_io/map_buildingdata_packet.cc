@@ -62,7 +62,7 @@ constexpr uint16_t kCurrentPacketPFBuilding = 1;
 constexpr uint16_t kCurrentPacketVersionWarehouse = 6;
 constexpr uint16_t kCurrentPacketVersionMilitarysite = 5;
 constexpr uint16_t kCurrentPacketVersionProductionsite = 5;
-constexpr uint16_t kCurrentPacketVersionTrainingsite = 4;
+constexpr uint16_t kCurrentPacketVersionTrainingsite = 5;
 
 void MapBuildingdataPacket::read
 	(FileSystem            &       fs,
@@ -562,7 +562,8 @@ void MapBuildingdataPacket::read_militarysite
 
 			uint16_t reqmin = fr.unsigned_16();
 			uint16_t reqmax = fr.unsigned_16();
-			militarysite.soldier_upgrade_requirements_ = RequireAttribute(atrTotal, reqmin, reqmax);
+			militarysite.soldier_upgrade_requirements_ =
+					RequireAttribute(TrainingAttribute::kTotal, reqmin, reqmax);
 			militarysite.soldier_preference_ = static_cast<MilitarySite::SoldierPreference>(fr.unsigned_8());
 			militarysite.next_swap_soldiers_time_ = fr.signed_32();
 			militarysite.soldier_upgrade_try_ = 0 != fr.unsigned_8() ? true : false;
@@ -829,13 +830,35 @@ void MapBuildingdataPacket::read_trainingsite
 			uint16_t mapsize = fr.unsigned_16(); // map of training levels (not _the_ map)
 			while (mapsize)
 			{
-				uint16_t traintype  = fr.unsigned_16();
+				// Get the training attribute and check if it is a valid enum member
+				// We use a temp value, because the static_cast to the enum might be undefined.
+				uint8_t temp_traintype  = fr.unsigned_8();
+				switch (temp_traintype) {
+				case static_cast<uint8_t>(TrainingAttribute::kHealth):
+				case static_cast<uint8_t>(TrainingAttribute::kAttack):
+				case static_cast<uint8_t>(TrainingAttribute::kDefense):
+				case static_cast<uint8_t>(TrainingAttribute::kEvade):
+				case static_cast<uint8_t>(TrainingAttribute::kTotal):
+					break;
+				default:
+					throw GameDataError
+						(
+						 "expected kHealth (%u), kAttack (%u), kDefense (%u), kEvade "
+						 "(%u) or kTotal (%u) but found unknown attribute value (%u)",
+							TrainingAttribute::kHealth,
+							TrainingAttribute::kAttack,
+							TrainingAttribute::kDefense,
+							TrainingAttribute::kEvade,
+							TrainingAttribute::kTotal,
+							temp_traintype);
+				}
+				TrainingAttribute traintype  = static_cast<TrainingAttribute>(temp_traintype);
 				uint16_t trainlevel = fr.unsigned_16();
 				uint16_t trainstall = fr.unsigned_16();
 				uint16_t spresence  = fr.unsigned_8();
 				mapsize--;
-				std::pair<uint16_t, uint8_t> t = std::make_pair(trainstall, spresence);
-				trainingsite.training_failure_count_[std::make_pair(traintype, trainlevel)] = t;
+				trainingsite.training_failure_count_[std::make_pair(traintype, trainlevel)] =
+						std::make_pair(trainstall, spresence);
 			}
 		} else {
 			throw UnhandledVersionError("MapBuildingdataPacket - Trainingsite",
@@ -1275,7 +1298,7 @@ void MapBuildingdataPacket::write_trainingsite
 	fw.unsigned_8(trainingsite.upgrades_.size());
 	for (uint8_t i = 0; i < trainingsite.upgrades_.size(); ++i) {
 		const TrainingSite::Upgrade & upgrade = trainingsite.upgrades_[i];
-		fw.unsigned_8(upgrade.attribute);
+		fw.unsigned_8(static_cast<uint8_t>(upgrade.attribute));
 		fw.unsigned_8(upgrade.prio);
 		fw.unsigned_8(upgrade.credit);
 		fw.signed_32(upgrade.lastattempt);
@@ -1290,7 +1313,7 @@ void MapBuildingdataPacket::write_trainingsite
 		(TrainingSite::TrainFailCount::const_iterator i = trainingsite.training_failure_count_.begin();
 		 i != trainingsite.training_failure_count_.end(); i++)
 	{
-		fw.unsigned_16(i->first.first);
+		fw.unsigned_8(static_cast<uint8_t>(i->first.first));
 		fw.unsigned_16(i->first.second);
 		fw.unsigned_16(i->second.first);
 		fw.unsigned_8(i->second.second);
