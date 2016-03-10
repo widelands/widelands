@@ -52,7 +52,7 @@ FullscreenMenuMain::FullscreenMenuMain() :
 		 _("Options"), "", true, false),
 	about
 		(&vbox, "about", 0, 0, butw_, buth_, g_gr->images().get(button_background_),
-		 _("About"), "", true, false),
+		 _("About Widelands"), "", true, false),
 	exit
 		(&vbox, "exit", 0, 0, butw_, buth_, g_gr->images().get(button_background_),
 		 _("Exit Widelands"), "", true, false),
