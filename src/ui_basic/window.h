@@ -52,6 +52,7 @@ namespace UI {
  */
 class Window : public NamedPanel {
 public:
+	/// Do not use richtext for the \param title.
 	Window
 		(Panel      * parent,
 		 const std::string& name,
@@ -61,7 +62,8 @@ public:
 		 uint32_t     h,
 		 const std::string& title);
 
-	void set_title(const std::string &);
+	/// This will set the window title. Do not use richtext for the \param text.
+	void set_title(const std::string& text);
 	const std::string & get_title() const {return title_;}
 
 	void set_center_panel(Panel * panel);

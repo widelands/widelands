@@ -51,7 +51,7 @@ MainMenuLoadOrSaveMap::MainMenuLoadOrSaveMap(EditorInteractive& parent,
 		  this, right_column_x_, tabley_, get_inner_w() - right_column_x_ - padding_, tableh_),
      ok_(this,
          "ok",
-			UI::g_fh1->fontset().is_rtl() ? get_inner_w() / 2 - butw_ - padding_ : get_inner_w() / 2 + padding_,
+			UI::g_fh1->fontset()->is_rtl() ? get_inner_w() / 2 - butw_ - padding_ : get_inner_w() / 2 + padding_,
          get_inner_h() - padding_ - buth_,
          butw_,
          buth_,
@@ -59,7 +59,7 @@ MainMenuLoadOrSaveMap::MainMenuLoadOrSaveMap(EditorInteractive& parent,
          _("OK")),
      cancel_(this,
              "cancel",
-				 UI::g_fh1->fontset().is_rtl() ?
+				 UI::g_fh1->fontset()->is_rtl() ?
 					 get_inner_w() / 2 + padding_ :
 					 get_inner_w() / 2 - butw_ - padding_,
              get_inner_h() - padding_ - buth_,
