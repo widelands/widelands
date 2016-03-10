@@ -148,21 +148,10 @@ void TabPanel::update_desired_size()
 		panel->get_desired_size(&panelw, &panelh);
 		// TODO(unknown):  the panel might be bigger -> add a scrollbar in that case
 
-		if (border_type_ == TabPanel::Type::kBorder) {
-			//NOCOM panel->set_border(kTabPanelSeparatorHeight + 1, kTabPanelSeparatorHeight + 1,
-			//						kTabPanelSeparatorHeight, kTabPanelSeparatorHeight);
-			//panel->set_pos(Point(0, kTabPanelButtonHeight));
-			if (panelw + kTabPanelSeparatorHeight > w) {
-				w = panelw + kTabPanelSeparatorHeight + 50; // NOCOM hack
-			}
-			h += panelh + kTabPanelSeparatorHeight + 1;
-		} else {
-			//panel->set_pos(Point(0, kTabPanelButtonHeight + kTabPanelSeparatorHeight));
-			if (panelw > w) {
-				w = panelw;
-			}
-			h += panelh;
+		if (panelw > w) {
+			w = panelw;
 		}
+		h += panelh;
 	}
 
 	set_desired_size(w, h);

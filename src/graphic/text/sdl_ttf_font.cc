@@ -128,9 +128,6 @@ uint16_t SdlTtfFont::ascent(int style) const {
 }
 
 void SdlTtfFont::m_set_style(int style) {
-	// Those must have been handled by loading the correct font.
-	// NOCOM assert(!(style & BOLD));
-	//assert(!(style & ITALIC));
 
 	int sdl_style = TTF_STYLE_NORMAL;
 	if (style & UNDERLINE) sdl_style |= TTF_STYLE_UNDERLINE;

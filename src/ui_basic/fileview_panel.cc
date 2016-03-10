@@ -28,8 +28,8 @@
 
 namespace UI {
 
-FileViewPanel::FileViewPanel(Panel* parent, int32_t x, int32_t y, int32_t w, int32_t h, const Image* background,
-									  TabPanel::Type border_type)
+FileViewPanel::FileViewPanel(Panel* parent, int32_t x, int32_t y, int32_t w, int32_t h,
+									  const Image* background, TabPanel::Type border_type)
 	:
 	TabPanel(parent, x, y, w, h, background, border_type),
 	padding_(5)
