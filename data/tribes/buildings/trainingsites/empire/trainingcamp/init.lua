@@ -75,7 +75,7 @@ tribes:new_trainingsite_type {
          "spear_war"
       }
    },
-   ["soldier hp"] = {
+   ["soldier health"] = {
       min_level = 0,
       max_level = 3,
       food = {
@@ -143,48 +143,48 @@ tribes:new_trainingsite_type {
             "train=soldier attack 3 4"
          }
       },
-      upgrade_soldier_hp_0 = {
+      upgrade_soldier_health_0 = {
          -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
          descname = _"upgrading soldier health from level 0 to level 1",
          actions = {
-            "check_soldier=soldier hp 0",
+            "check_soldier=soldier health 0",
             "sleep=30000",
-            "check_soldier=soldier hp 0",
+            "check_soldier=soldier health 0",
             "consume=armor_helmet empire_bread,fish,meat",
-            "train=soldier hp 0 1"
+            "train=soldier health 0 1"
          }
       },
-      upgrade_soldier_hp_1 = {
+      upgrade_soldier_health_1 = {
          -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
          descname = _"upgrading soldier health from level 1 to level 2",
          actions = {
-            "check_soldier=soldier hp 1",
+            "check_soldier=soldier health 1",
             "sleep=30000",
-            "check_soldier=soldier hp 1",
+            "check_soldier=soldier health 1",
             "consume=armor empire_bread fish,meat",
-            "train=soldier hp 1 2"
+            "train=soldier health 1 2"
          }
       },
-      upgrade_soldier_hp_2 = {
+      upgrade_soldier_health_2 = {
          -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
          descname = _"upgrading soldier health from level 2 to level 3",
          actions = {
-            "check_soldier=soldier hp 2",
+            "check_soldier=soldier health 2",
             "sleep=30000",
-            "check_soldier=soldier hp 2",
+            "check_soldier=soldier health 2",
             "consume=armor_chain empire_bread:2 fish,meat:2",
-            "train=soldier hp 2 3"
+            "train=soldier health 2 3"
          }
       },
-      upgrade_soldier_hp_3 = {
+      upgrade_soldier_health_3 = {
          -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
          descname = _"upgrading soldier health from level 3 to level 4",
          actions = {
-            "check_soldier=soldier hp 3",
+            "check_soldier=soldier health 3",
             "sleep=30000",
-            "check_soldier=soldier hp 3",
+            "check_soldier=soldier health 3",
             "consume=armor_gilded empire_bread:2 fish,meat:2",
-            "train=soldier hp 3 4"
+            "train=soldier health 3 4"
          }
       },
    },

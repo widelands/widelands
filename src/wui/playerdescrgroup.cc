@@ -202,6 +202,11 @@ void PlayerDescriptionGroup::refresh()
 								(tribeinfo.initializations.at
 									(player.initialization_index)
 								 .descname));
+						d->btnPlayerInit->set_tooltip
+							(_
+								(tribeinfo.initializations.at
+									(player.initialization_index)
+								 .tooltip));
 						break;
 					}
 				}

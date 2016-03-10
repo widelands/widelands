@@ -40,7 +40,9 @@ TribeBasicInfo::TribeBasicInfo(std::unique_ptr<LuaTable> table) {
 		{
 			std::unique_ptr<LuaTable> script_table = lua.run_script(script_path);
 			script_table->do_not_warn_about_unaccessed_keys();
-			initializations.push_back(Initialization(script_path, script_table->get_string("descname")));
+			initializations.push_back(Initialization(script_path,
+																  script_table->get_string("descname"),
+																  script_table->get_string("tooltip")));
 		}
 	} catch (const WException & e) {
 		throw Widelands::GameDataError

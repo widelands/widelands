@@ -8,6 +8,7 @@ set_textdomain("tribes")
 
 init = {
    descname = _ "Headquarters",
+   tooltip = _"Start the game with your headquarters only",
    func =  function(plr, shared_in_start)
 
    local sf = wl.Game().map.player_slots[plr.number].starting_field
