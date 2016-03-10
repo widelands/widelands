@@ -71,11 +71,11 @@ EditorMainMenu::EditorMainMenu
 		 0, 0, width, 0,
 		 g_gr->images().get("images/ui_basic/but1.png"),
 		 _("Map Options")),
-	button_view_readme_
-		(&box_, "readme",
+	button_about_
+		(&box_, "about",
 		 0, 0, width, 0,
 		 g_gr->images().get("images/ui_basic/but1.png"),
-		 _("View Readme")),
+		 _("About")),
 	button_exit_editor_
 		(&box_, "exit",
 		 0, 0, width, 0,
@@ -87,23 +87,17 @@ EditorMainMenu::EditorMainMenu
 	box_.add(&button_load_map_, UI::Align::kHCenter);
 	box_.add(&button_save_map_, UI::Align::kHCenter);
 	box_.add(&button_map_options_, UI::Align::kHCenter);
-	box_.add(&button_view_readme_, UI::Align::kHCenter);
+	box_.add(&button_about_, UI::Align::kHCenter);
 	box_.add(&button_exit_editor_, UI::Align::kHCenter);
 	box_.set_size(width, 7 * button_new_map_.get_h()+ 6 * vspacing);
 	set_inner_size(get_inner_w(), box_.get_h() + 2 * margin);
 
+	button_about_.sigclicked.connect(boost::bind(&EditorMainMenu::about_btn, boost::ref(*this)));
 	button_new_map_.sigclicked.connect(boost::bind(&EditorMainMenu::new_map_btn, this));
 	button_new_random_map_.sigclicked.connect(boost::bind(&EditorMainMenu::new_random_map_btn, this));
 	button_load_map_.sigclicked.connect(boost::bind(&EditorMainMenu::load_btn, this));
 	button_save_map_.sigclicked.connect(boost::bind(&EditorMainMenu::save_btn, this));
 	button_map_options_.sigclicked.connect(boost::bind(&EditorMainMenu::map_options_btn, this));
-
-	window_readme_.open_window = [this] {
-		fileview_window(eia(), window_readme_, "txts/editor_readme.lua");
-	};
-	button_view_readme_.sigclicked.connect(
-		boost::bind(&UI::UniqueWindow::Registry::toggle, window_readme_));
-
 	button_exit_editor_.sigclicked.connect(boost::bind(&EditorMainMenu::exit_btn, this));
 
 	// Put in the default position, if necessary
@@ -114,6 +108,18 @@ EditorMainMenu::EditorMainMenu
 /**
  * Called, when buttons get clicked
 */
+void EditorMainMenu::about_btn() {
+	if (window_readme_.window) {
+		delete window_readme_.window;
+	} else {
+		FileViewWindow* fileview = new FileViewWindow(eia(), window_readme_, _("About the Widelands Editor"));
+		fileview->add_tab("txts/editor_readme.lua");
+		fileview->add_tab("txts/LICENSE.lua");
+		fileview->add_tab("txts/AUTHORS.lua");
+		fileview->add_tab("txts/TRANSLATORS.lua");
+	}
+}
+
 void EditorMainMenu::new_map_btn() {
 	new MainMenuNewMap(eia());
 	die();

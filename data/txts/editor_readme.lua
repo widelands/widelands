@@ -3,7 +3,7 @@ include "scripting/formatting.lua"
 set_textdomain("texts")
 
 return {
-   title = _"README for the Widelands Editor",
+   title = _"Readme",
    text = rt(
       "<rt><p font-size=38 font-color=2F9131>" .. _[[The Widelands Editor]] .. "<br><br></p>" ..
 

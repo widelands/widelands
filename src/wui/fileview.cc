@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,96 +19,21 @@
 
 #include "wui/fileview.h"
 
-#include <map>
-#include <memory>
-
-#include <boost/algorithm/string.hpp>
-#include <boost/format.hpp>
-
-#include "base/i18n.h"
-#include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
-#include "graphic/text/font_set.h"
-#include "graphic/text_constants.h"
-#include "io/filesystem/filesystem.h"
-#include "scripting/lua_interface.h"
-#include "scripting/lua_table.h"
-#include "ui_basic/multilinetextarea.h"
-
-namespace {
-bool read_text(const std::string& filename, std::string* title, std::string* content) {
-	try {
-		LuaInterface lua;
-		std::unique_ptr<LuaTable> t(lua.run_script(filename));
-		*content = t->get_string("text");
-		*title = t->get_string("title");
-	} catch (LuaError & err) {
-		*content = err.what();
-		*title = "Lua error";
-		return false;
-	}
-	return true;
-}
-
-}  // namespace
-
-struct TextViewWindow : public UI::UniqueWindow {
-	TextViewWindow
-		(UI::Panel                  & parent,
-		 UI::UniqueWindow::Registry & reg);
-protected:
-	void set_text(const std::string & text);
-private:
-	UI::MultilineTextarea textview;
-};
-
-TextViewWindow::TextViewWindow
-	(UI::Panel                  & parent,
-	 UI::UniqueWindow::Registry & reg)
-	:
-	UI::UniqueWindow(&parent, "file_view", &reg, 0, 0, ""),
-	textview(this, 0, 0, 560, 240)
-{
-	set_inner_size(560, 240);
-
-	if (get_usedefaultpos())
-		center_to_parent();
-}
-
-void TextViewWindow::set_text(const std::string& text)
-{
-	textview.set_text(text);
-}
-
-
-struct FileViewWindow : public TextViewWindow {
-	FileViewWindow
-		(UI::Panel                  & parent,
-		 UI::UniqueWindow::Registry & reg,
-		 const std::string          & filename);
-};
 
 FileViewWindow::FileViewWindow
-	(UI::Panel                  & parent,
-	 UI::UniqueWindow::Registry & reg,
-	 const std::string          & filename)
+	(UI::Panel& parent, UI::UniqueWindow::Registry& reg, const std::string& title)
 	:
-	TextViewWindow(parent, reg)
-{
-	std::string title_text, content;
-	read_text(filename, &title_text, &content);
-	set_text(content);
-	set_title(title_text);
+	  UI::UniqueWindow(&parent, "file_view", &reg, 0, 0, title),
+	  tabs_(this, 0, 0, 560, 340, g_gr->images().get("images/ui_basic/but4.png"))
+ {
+	set_inner_size(560, 340);
+
+	if (get_usedefaultpos()) {
+		center_to_parent();
+	}
 }
 
-
-/**
- * Display the contents of a text file in a scrollable window.
-*/
-void fileview_window
-	(UI::Panel                  & parent,
-	 UI::UniqueWindow::Registry & reg,
-	 const std::string          & filename)
-{
-	new FileViewWindow(parent, reg, filename);
+void FileViewWindow::add_tab(const std::string& lua_script) {
+	tabs_.add_tab(lua_script);
 }

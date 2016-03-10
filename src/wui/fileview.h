@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006, 2008-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,11 +23,15 @@
 #include <cstring>
 #include <string>
 
+#include "ui_basic/fileview_panel.h"
 #include "ui_basic/unique_window.h"
 
-void fileview_window
-	(UI::Panel                  & parent,
-	 UI::UniqueWindow::Registry & reg,
-	 const std::string          & filename);
+struct FileViewWindow : public UI::UniqueWindow {
+	FileViewWindow(UI::Panel& parent, UI::UniqueWindow::Registry& reg, const std::string& title);
+	void add_tab(const std::string& lua_script);
+
+private:
+	UI::FileViewPanel tabs_;
+};
 
 #endif  // end of include guard: WL_WUI_FILEVIEW_H

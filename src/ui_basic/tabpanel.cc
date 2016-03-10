@@ -94,10 +94,10 @@ TabPanel::TabPanel
 	 TabPanel::Type border_type)
 	:
 	Panel           (parent, x, y, 0, 0),
+	border_type_    (border_type),
 	active_         (0),
 	highlight_      (kNotFound),
-	pic_background_ (background),
-	border_type_    (border_type)
+	pic_background_ (background)
 {}
 TabPanel::TabPanel
 	(Panel * const parent,
@@ -106,10 +106,10 @@ TabPanel::TabPanel
 	 TabPanel::Type border_type)
 	:
 	Panel           (parent, x, y, w, h),
+	border_type_    (border_type),
 	active_         (0),
 	highlight_      (kNotFound),
-	pic_background_ (background),
-	border_type_    (border_type)
+	pic_background_ (background)
 {}
 
 /**

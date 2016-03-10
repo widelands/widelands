@@ -17,42 +17,41 @@
  *
  */
 
-#ifndef WL_UI_FSMENU_ABOUT_H
-#define WL_UI_FSMENU_ABOUT_H
+#ifndef WL_UI_BASIC_FILEVIEW_PANEL_H
+#define WL_UI_BASIC_FILEVIEW_PANEL_H
 
-#include <cstring>
 #include <string>
 #include <memory>
 #include <vector>
 
-#include "ui_fsmenu/base.h"
 #include "ui_basic/box.h"
-#include "ui_basic/button.h"
-#include "ui_basic/fileview_panel.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/tabpanel.h"
-#include "ui_basic/textarea.h"
+
+namespace UI {
 
 /**
- * "Fullscreen "About" information with tabs
+ * A panel with tabs that get filled from Lua scripts.
  */
-class FullscreenMenuAbout : public FullscreenMenuBase {
+class FileViewPanel : public TabPanel {
 public:
-	FullscreenMenuAbout();
+	FileViewPanel(Panel * parent,
+					  int32_t x, int32_t y, int32_t w, int32_t h,
+					  const Image* background,
+					  TabPanel::Type border_type = TabPanel::Type::kNoBorder);
+
+	/// Adds a tab with the contents of 'lua_script'.
+	/// 'lua_script' must return a table that contains 'title' and 'text' keys.
+	void add_tab(const std::string& lua_script);
 
 private:
-	uint32_t const              butw_;
-	uint32_t const              buth_;
-	uint32_t const              hmargin_;
-	uint32_t const              padding_;
-	uint32_t const              tab_panel_width_;
-	uint32_t const              tab_panel_y_;
-
-	UI::Textarea                title_;
-	UI::Button                  close_;
+	const uint32_t padding_;
 
 	// Tab contents
-	UI::FileViewPanel tabs_;
+	std::vector<std::unique_ptr<Box>> boxes_;
+	std::vector<std::unique_ptr<MultilineTextarea>> textviews_;
 };
 
-#endif  // end of include guard: WL_UI_FSMENU_ABOUT_H
+} // namespace UI
+
+#endif  // end of include guard: WL_UI_BASIC_FILEVIEW_PANEL_H

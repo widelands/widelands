@@ -65,41 +65,10 @@ FullscreenMenuAbout::FullscreenMenuAbout()
 	title_.set_fontsize(UI_FONT_SIZE_BIG);
 	tabs_.set_pos(Point(hmargin_, tab_panel_y_));
 
-	add_tab("txts/README.lua");
-	add_tab("txts/LICENSE.lua");
-	add_tab("txts/AUTHORS.lua");
+	tabs_.add_tab("txts/README.lua");
+	tabs_.add_tab("txts/LICENSE.lua");
+	tabs_.add_tab("txts/AUTHORS.lua");
+	tabs_.add_tab("txts/TRANSLATORS.lua");
 
 	close_.sigclicked.connect(boost::bind(&FullscreenMenuAbout::clicked_back, this));
-}
-
-void FullscreenMenuAbout::add_tab(const std::string& lua_script) {
-	std::string content, title;
-	try {
-		LuaInterface lua;
-		std::unique_ptr<LuaTable> t(lua.run_script(lua_script));
-		content = t->get_string("text");
-		title = t->get_string("title");
-	} catch (LuaError & err) {
-		content = err.what();
-		title = "Lua error";
-	}
-	boxes_.push_back(std::unique_ptr<UI::Box>(new UI::Box(&tabs_, 0, 0, UI::Box::Vertical, 0, 0, padding_)));
-	size_t index = boxes_.size() - 1;
-
-	textviews_.push_back(std::unique_ptr<UI::MultilineTextarea>(
-									new UI::MultilineTextarea(
-										boxes_.at(index).get(),
-										0,
-										0,
-										tab_panel_width_ - padding_,
-										tabs_.get_inner_h() - 1.5 * padding_ - UI::kTabPanelButtonHeight,
-										content)));
-	tabs_.add((boost::format("about_%lu") % index).str(),
-				 title,
-				 boxes_.at(index).get(),
-				 "");
-	boxes_.at(index)->set_size(tabs_.get_inner_w(), tabs_.get_inner_h());
-
-	assert(boxes_.size() == textviews_.size());
-	assert(tabs_.tabs().size() == textviews_.size());
 }

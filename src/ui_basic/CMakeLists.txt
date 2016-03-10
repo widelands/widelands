@@ -8,6 +8,8 @@ wl_library(ui_basic
     checkbox.h
     editbox.cc
     editbox.h
+    fileview_panel.cc
+    fileview_panel.h
     icon.cc
     icon.h
     icongrid.cc
