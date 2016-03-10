@@ -19,20 +19,10 @@
 
 #include "ui_fsmenu/about.h"
 
-#include <map>
-#include <memory>
-
-#include <boost/algorithm/string.hpp>
 #include <boost/format.hpp>
 
 #include "base/i18n.h"
-#include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
-#include "graphic/text/font_set.h"
-#include "graphic/text_constants.h"
-#include "io/filesystem/filesystem.h"
-#include "scripting/lua_interface.h"
-#include "scripting/lua_table.h"
 
 
 FullscreenMenuAbout::FullscreenMenuAbout()

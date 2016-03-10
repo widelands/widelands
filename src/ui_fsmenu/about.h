@@ -20,17 +20,9 @@
 #ifndef WL_UI_FSMENU_ABOUT_H
 #define WL_UI_FSMENU_ABOUT_H
 
-#include <cstring>
-#include <string>
-#include <memory>
-#include <vector>
-
 #include "ui_fsmenu/base.h"
-#include "ui_basic/box.h"
 #include "ui_basic/button.h"
 #include "ui_basic/fileview_panel.h"
-#include "ui_basic/multilinetextarea.h"
-#include "ui_basic/tabpanel.h"
 #include "ui_basic/textarea.h"
 
 /**
