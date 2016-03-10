@@ -386,9 +386,9 @@ function test_descr:test_max_evade()
    assert_equal(nil, egbase:get_building_description("barbarians_trainingcamp").max_evade)
 end
 
-function test_descr:test_max_hp()
-   assert_equal(nil, egbase:get_building_description("barbarians_battlearena").max_hp)
-   assert_equal(2, egbase:get_building_description("barbarians_trainingcamp").max_hp)
+function test_descr:test_max_health()
+   assert_equal(nil, egbase:get_building_description("barbarians_battlearena").max_health)
+   assert_equal(2, egbase:get_building_description("barbarians_trainingcamp").max_health)
 end
 
 function test_descr:test_min_attack()
@@ -407,9 +407,9 @@ function test_descr:test_min_evade()
    assert_equal(nil, egbase:get_building_description("barbarians_trainingcamp").min_evade)
 end
 
-function test_descr:test_min_hp()
-   assert_equal(nil, egbase:get_building_description("barbarians_battlearena").min_hp)
-   assert_equal(0, egbase:get_building_description("barbarians_trainingcamp").min_hp)
+function test_descr:test_min_health()
+   assert_equal(nil, egbase:get_building_description("barbarians_battlearena").min_health)
+   assert_equal(0, egbase:get_building_description("barbarians_trainingcamp").min_health)
 end
 
 function test_descr:test_type()

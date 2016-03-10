@@ -69,7 +69,7 @@ tribes:new_trainingsite_type {
          "shield_advanced"
       }
    },
-   ["soldier hp"] = {
+   ["soldier health"] = {
       min_level = 0,
       max_level = 0,
       food = {
@@ -119,15 +119,15 @@ tribes:new_trainingsite_type {
             "train=soldier defense 1 2"
          }
       },
-      upgrade_soldier_hp_0 = {
+      upgrade_soldier_health_0 = {
          -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
          descname = _"upgrading soldier health from level 0 to level 1",
          actions = {
-            "check_soldier=soldier hp 0", -- Fails when aren't any soldier of level 0 hp
+            "check_soldier=soldier health 0", -- Fails when aren't any soldier of level 0 health
             "sleep=30000",
-            "check_soldier=soldier hp 0", -- Because the soldier can be expelled by the player
+            "check_soldier=soldier health 0", -- Because the soldier can be expelled by the player
             "consume=smoked_fish,smoked_meat:2 tabard_golden",
-            "train=soldier hp 0 1"
+            "train=soldier health 0 1"
          }
       },
       upgrade_soldier_evade_0 = {
