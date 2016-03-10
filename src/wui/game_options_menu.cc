@@ -27,7 +27,7 @@
 #include "base/i18n.h"
 #include "graphic/graphic.h"
 #include "sound/sound_handler.h"
-#include "ui_fsmenu/fileview.h"
+#include "wui/fileview.h"
 #include "wui/game_main_menu_save_game.h"
 #include "wui/game_options_sound_menu.h"
 #include "wui/unique_window_handler.h"

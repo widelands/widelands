@@ -17,16 +17,12 @@
  *
  */
 
-#ifndef WL_UI_FSMENU_FILEVIEW_H
-#define WL_UI_FSMENU_FILEVIEW_H
+#ifndef WL_WUI_FILEVIEW_H
+#define WL_WUI_FILEVIEW_H
 
 #include <cstring>
 #include <string>
 
-#include "ui_fsmenu/base.h"
-#include "ui_basic/button.h"
-#include "ui_basic/multilinetextarea.h"
-#include "ui_basic/textarea.h"
 #include "ui_basic/unique_window.h"
 
 void fileview_window
@@ -34,31 +30,4 @@ void fileview_window
 	 UI::UniqueWindow::Registry & reg,
 	 const std::string          & filename);
 
-/**
- * Shows a Text in a Fullscreen Menu. Can automatically handle Lua files and
- * plain text files. Waits for the button Ok to be clicked.
-*/
-class FullscreenMenuTextView : public FullscreenMenuBase {
-public:
-	FullscreenMenuTextView();
-
-protected:
-	void set_title(const std::string& title);
-	void set_text(const std::string& text);
-
-private:
-	UI::Textarea                                title;
-	UI::MultilineTextarea                      textview;
-	UI::Button                     close_button;
-};
-
-/**
- * Shows an ASCII-File in a Fullscreen Menu. Waits for the button Ok
- * to be clicked.
- */
-class FullscreenMenuFileView : public FullscreenMenuTextView {
-public:
-	FullscreenMenuFileView(const std::string & filename);
-};
-
-#endif  // end of include guard: WL_UI_FSMENU_FILEVIEW_H
+#endif  // end of include guard: WL_WUI_FILEVIEW_H

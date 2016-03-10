@@ -17,7 +17,7 @@
  *
  */
 
-#include "ui_fsmenu/fileview.h"
+#include "wui/fileview.h"
 
 #include <map>
 #include <memory>
@@ -33,6 +33,7 @@
 #include "io/filesystem/filesystem.h"
 #include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
+#include "ui_basic/multilinetextarea.h"
 
 namespace {
 bool read_text(const std::string& filename, std::string* title, std::string* content) {
@@ -50,53 +51,6 @@ bool read_text(const std::string& filename, std::string* title, std::string* con
 }
 
 }  // namespace
-
-FullscreenMenuTextView::FullscreenMenuTextView
-	()
-	:
-	FullscreenMenuBase("images/ui_fsmenu/fileviewmenu.jpg"),
-
-	title (this, get_w() * 3 / 50, get_h() / 10, "", UI::Align::kCenter),
-
-	textview
-		(this,
-		 get_w() *   3 /   80, get_h() * 283 / 1000,
-		 get_w() * 919 / 1000, get_h() *  11 /   20),
-
-	close_button
-		(this, "close",
-		 get_w() * 3 / 8, get_h() * 9 / 10, get_w() / 4, get_h() * 9 / 200,
-		 g_gr->images().get("images/ui_basic/but0.png"),
-		 _("Close"), std::string(), true, false)
-{
-	close_button.sigclicked.connect(
-				boost::bind(&FullscreenMenuTextView::end_modal<FullscreenMenuBase::MenuTarget>,
-								boost::ref(*this),
-								FullscreenMenuBase::MenuTarget::kBack));
-
-	title.set_fontsize(fs_big());
-	title.set_pos
-		(Point((get_inner_w() - title.get_w()) / 2, get_h() * 167 / 1000));
-}
-
-void FullscreenMenuTextView::set_text(const std::string & text)
-{
-	textview.set_text(text);
-}
-
-void FullscreenMenuTextView::set_title(const std::string& text)
-{
-	title.set_text(text);
-}
-
-FullscreenMenuFileView::FullscreenMenuFileView(const std::string & filename)
-: FullscreenMenuTextView()
-{
-	std::string content, title_text;
-	read_text(filename, &title_text, &content);
-	set_text(content);
-	set_title(title_text);
-}
 
 struct TextViewWindow : public UI::UniqueWindow {
 	TextViewWindow

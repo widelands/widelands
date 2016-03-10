@@ -3,7 +3,7 @@ include "scripting/formatting.lua"
 set_textdomain("texts")
 
 return {
-   title = _ "README",
+   title = _"Readme",
    text =
 rt("image=images/logos/wl-logo-64.png image-align=center text-align=center") ..
 rt("text-align=center",

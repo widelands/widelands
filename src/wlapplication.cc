@@ -75,8 +75,8 @@
 #include "sound/sound_handler.h"
 #include "ui_basic/messagebox.h"
 #include "ui_basic/progresswindow.h"
+#include "ui_fsmenu/about.h"
 #include "ui_fsmenu/campaign_select.h"
-#include "ui_fsmenu/fileview.h"
 #include "ui_fsmenu/internet_lobby.h"
 #include "ui_fsmenu/intro.h"
 #include "ui_fsmenu/launch_spg.h"
@@ -1024,18 +1024,8 @@ void WLApplication::mainmenu()
 				OptionsCtrl om(s);
 				break;
 			}
-			case FullscreenMenuBase::MenuTarget::kReadme: {
-				FullscreenMenuFileView ff("txts/README.lua");
-				ff.run<FullscreenMenuBase::MenuTarget>();
-				break;
-			}
-			case FullscreenMenuBase::MenuTarget::kLicense: {
-				FullscreenMenuFileView ff("txts/LICENSE.lua");
-				ff.run<FullscreenMenuBase::MenuTarget>();
-				break;
-			}
-			case FullscreenMenuBase::MenuTarget::kAuthors: {
-				FullscreenMenuFileView ff("txts/AUTHORS.lua");
+			case FullscreenMenuBase::MenuTarget::kAbout: {
+				FullscreenMenuAbout ff;
 				ff.run<FullscreenMenuBase::MenuTarget>();
 				break;
 			}

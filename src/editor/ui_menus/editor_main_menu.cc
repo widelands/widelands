@@ -26,7 +26,7 @@
 #include "editor/ui_menus/editor_main_menu_new_map.h"
 #include "editor/ui_menus/editor_main_menu_random_map.h"
 #include "editor/ui_menus/editor_main_menu_save_map.h"
-#include "ui_fsmenu/fileview.h"
+#include "wui/fileview.h"
 
 //TODO(unknown): these should be defined globally for the whole UI
 #define width 200
