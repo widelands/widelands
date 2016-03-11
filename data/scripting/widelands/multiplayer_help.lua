@@ -23,7 +23,7 @@ return {
       result = result .. picture_li("images/ui_fsmenu/shared_in.png", _"Set as shared in starting position for another player.")
       result = result .. picture_li("images/ui_basic/stop.png", _"Closed.")
       result = result .. rt(p(_"The latter three can only be set by the hosting client by left-clicking the ‘type’ button of a player. Hosting players can also set the initialization of each player (the set of buildings, wares and workers the player starts with) and the tribe and team for computer players"))
-      result = result .. rt(p(_"Every client connected to a player (the set ‘role’ player) can set the tribe and the team for that player"))
+      result = result .. rt(p(_"Every client connected to a player (who isn’t a spectator) can set the tribe and the team for that player"))
 
       result = result .. rt(h2(_"Map details"))
       result = result .. rt(p(_"You can see information about the selected map or savegame on the right-hand side. A button next to the map name allows the host to change to a different map. Furthermore, the host is able to set a specific win condition, and finally can start the game as soon as all players are set up."))
