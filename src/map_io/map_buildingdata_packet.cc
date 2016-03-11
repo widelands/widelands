@@ -490,7 +490,6 @@ void MapBuildingdataPacket::read_warehouse
 				 (game.map().get_fcoords(warehouse.get_position()),
 				  warehouse.descr().vision_range()));
 			warehouse.next_military_act_ = game.get_gametime();
-			//log("Read warehouse stuff for %p\n", &warehouse);
 		} else {
 			throw UnhandledVersionError("MapBuildingdataPacket - Warehouse",
 												 packet_version, kCurrentPacketVersionWarehouse);

@@ -74,7 +74,7 @@ private:
 	void scrollbar_moved(int32_t);
 	void update_positions();
 
-	//don't resize beyond this size
+	// Don't resize beyond this size
 	int max_x_, max_y_;
 
 	struct Item {

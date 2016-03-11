@@ -427,7 +427,6 @@ void BuildingWindow::act_start_or_cancel_expedition() {
 			igbase().game().send_player_start_or_cancel_expedition(building_);
 
 	// No need to die here - as soon as the request is handled, the UI will get updated by the portdock
-	//die();
 }
 
 /**

@@ -283,7 +283,8 @@ protected:  // TrainingSite must have access to this stuff
 	InputQueues input_queues_; ///< input queues for all inputs
 	std::vector<bool>        statistics_;
 	uint8_t                  last_stat_percent_;
-	uint32_t                 crude_percent_; //integer0-10000000, to be shirink to range 0-10
+	// integer 0-10000000, to be divided by 10000 to get a percent, to avoid float (target range: 0-10)
+	uint32_t                 crude_percent_;
 	bool                     is_stopped_;
 	std::string              default_anim_; // normally "idle", "empty", if empty mine.
 

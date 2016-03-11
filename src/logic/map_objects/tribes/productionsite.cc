@@ -326,7 +326,7 @@ bool ProductionSite::has_workers(DescriptionIndex targetSite, Game & /* game */)
 
 			}
 
-			//if we are here, all needs are satisfied
+			// If we are here, all needs are satisfied
 			return true;
 
 		} else {
@@ -938,13 +938,11 @@ void ProductionSite::program_end(Game & game, ProgramResult const result)
 
 	switch (result) {
 	case Failed:
-		//changed by TB below
 		statistics_.erase(statistics_.begin(), statistics_.begin() + 1);
 		statistics_.push_back(false);
 		calc_statistics();
 		crude_percent_ = crude_percent_ * 8 / 10;
 		break;
-		//end of changed by TB
 	case Completed:
 		skipped_programs_.erase(program_name);
 		statistics_.erase(statistics_.begin(), statistics_.begin() + 1);
@@ -955,9 +953,7 @@ void ProductionSite::program_end(Game & game, ProgramResult const result)
 		break;
 	case Skipped:
 		skipped_programs_[program_name] = game.get_gametime();
-		//changed by TB below
 		crude_percent_ = crude_percent_ * 98 / 100;
-		//end of changed by TB
 		break;
 	case None:
 		break;

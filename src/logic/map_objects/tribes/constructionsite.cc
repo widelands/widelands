@@ -232,8 +232,8 @@ bool ConstructionSite::get_building_work(Game & game, Worker & worker, bool) {
 			builder_idle_ = false;
 			return true;
 		} else {
-			//TODO(fweber): cause "construction sounds" to be played -
-			//perhaps dependent on kind of construction?
+			// TODO(fweber): cause "construction sounds" to be played -
+			// perhaps dependent on kind of construction?
 
 			++work_completed_;
 			if (work_completed_ >= work_steps_)
@@ -276,7 +276,7 @@ bool ConstructionSite::get_building_work(Game & game, Worker & worker, bool) {
 			wq.set_filled(wq.get_filled() - 1);
 			wq.set_max_size(wq.get_max_size() - 1);
 
-			//update consumption statistic
+			// Update consumption statistic
 			owner().ware_consumed(wq.get_ware(), 1);
 
 			working_ = true;

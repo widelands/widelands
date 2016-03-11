@@ -88,7 +88,7 @@ EditorGameBase::~EditorGameBase() {
 
 void EditorGameBase::think()
 {
-	//TODO(unknown): Get rid of this; replace by a function that just advances gametime
+	// TODO(unknown): Get rid of this; replace by a function that just advances gametime
 	// by a given number of milliseconds
 }
 

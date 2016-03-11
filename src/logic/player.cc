@@ -199,7 +199,7 @@ Player::Player
 			}
 		});
 
-	//Populating remaining_shipnames vector
+	// Populating remaining_shipnames vector
 	for (const auto& shipname : tribe_descr.get_ship_names()) {
 		remaining_shipnames_.insert(shipname);
 	}
@@ -1013,8 +1013,6 @@ void Player::rediscover_node
 		// top right neighbour
 		FCoords       tr = map.tr_n(f);
 		PlayerNumber tr_owner_number = tr.field->get_owned_by();
-		//MapIndex     tr_index        = map.get_index(tr, mapwidth);
-		//Vision        tr_vision       = vision(tr_index);
 		// bottom right neighbour
 		FCoords       br = map.br_n(f);
 		PlayerNumber br_owner_number = br.field->get_owned_by();
@@ -1028,9 +1026,6 @@ void Player::rediscover_node
 		// left neighbour
 		FCoords        l = map.l_n(f);
 		PlayerNumber  l_owner_number = l.field->get_owned_by();
-		//MapIndex      l_index        = map.get_index(l, mapwidth);
-		//Vision         l_vision       = vision(l_index);
-
 
 		field.border    = f.field->is_border();
 		field.border_r  =
@@ -1166,7 +1161,7 @@ void Player::sample_statistics()
 	assert (ware_consumptions_.size() == egbase().tribes().nrwares());
 	assert (ware_stocks_.size() == egbase().tribes().nrwares());
 
-	//calculate stocks
+	// Calculate stocks
 	std::vector<uint32_t> stocks(egbase().tribes().nrwares());
 
 	const uint32_t nrecos = get_nr_economies();
@@ -1182,8 +1177,7 @@ void Player::sample_statistics()
 		}
 	}
 
-
-	//update statistics
+	// Update statistics
 	for (uint32_t i = 0; i < ware_productions_.size(); ++i) {
 		ware_productions_[i].push_back(current_produced_statistics_[i]);
 		current_produced_statistics_[i] = 0;
@@ -1374,7 +1368,7 @@ void Player::read_statistics(FileRead & fr)
 			ware_productions_[idx][j] = fr.unsigned_32();
 	}
 
-	//read consumption statistics
+	// Read consumption statistics
 	nr_wares = fr.unsigned_16();
 	nr_entries = fr.unsigned_16();
 
@@ -1397,7 +1391,7 @@ void Player::read_statistics(FileRead & fr)
 			ware_consumptions_[idx][j] = fr.unsigned_32();
 	}
 
-	//read stock statistics
+	// Read stock statistics
 	nr_wares = fr.unsigned_16();
 	nr_entries = fr.unsigned_16();
 
@@ -1418,7 +1412,7 @@ void Player::read_statistics(FileRead & fr)
 			ware_stocks_[idx][j] = fr.unsigned_32();
 	}
 
-	//all statistics should have the same size
+	// All statistics should have the same size
 	assert(ware_productions_.size() == ware_consumptions_.size());
 	assert(ware_productions_[0].size() == ware_consumptions_[0].size());
 
@@ -1440,7 +1434,7 @@ void Player::write_remaining_shipnames(FileWrite & fw) const {
  * Write statistics data to the give file
  */
 void Player::write_statistics(FileWrite & fw) const {
-	//write produce statistics
+	// Write produce statistics
 	fw.unsigned_16(current_produced_statistics_.size());
 	fw.unsigned_16(ware_productions_[0].size());
 
@@ -1452,7 +1446,7 @@ void Player::write_statistics(FileWrite & fw) const {
 			fw.unsigned_32(ware_productions_[i][j]);
 	}
 
-	//write consume statistics
+	// Write consume statistics
 	fw.unsigned_16(current_consumed_statistics_.size());
 	fw.unsigned_16(ware_consumptions_[0].size());
 
@@ -1464,7 +1458,7 @@ void Player::write_statistics(FileWrite & fw) const {
 			fw.unsigned_32(ware_consumptions_[i][j]);
 	}
 
-	//write stock statistics
+	// Write stock statistics
 	fw.unsigned_16(ware_stocks_.size());
 	fw.unsigned_16(ware_stocks_[0].size());
 

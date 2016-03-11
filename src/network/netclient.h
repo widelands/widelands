@@ -27,7 +27,7 @@
 
 struct NetClientImpl;
 
-//TODO(unknown): Use composition instead of inheritance
+// TODO(unknown): Use composition instead of inheritance
 /**
  * NetClient manages the lifetime of a network game in which this computer
  * participates as a client.

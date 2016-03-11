@@ -376,7 +376,7 @@ void DefaultAI::think() {
 				if (check_economies()) {  // economies must be consistent
 					return;
 				}
-				if (gametime < 15000) { //more frequent on the beginning of game
+				if (gametime < 15000) { // More frequent at the beginning of game
 					set_taskpool_task_time(gametime + 2000, SchedulerTaskId::kConstructBuilding);
 				} else {
 					set_taskpool_task_time(gametime + 6000, SchedulerTaskId::kConstructBuilding);
@@ -1523,7 +1523,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 	const int32_t kBottomLimit = 40; // to prevent too dense militarysites
 	// modifying least_military_score, down if more military sites are needed and vice versa
 	if (too_many_ms_constructionsites || too_many_vacant_mil || needs_boost_economy) {
-		if (persistent_data->least_military_score < kUpperLimit) { //no sense to let it grow too high
+		if (persistent_data->least_military_score < kUpperLimit) { // No sense in letting it grow too high
 			persistent_data->least_military_score += 20;
 		}
 	} else {
@@ -2099,7 +2099,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 						prio += 5;
 					}
 
-					//+1 if any consumers_ are nearby
+					// +1 if any consumers_ are nearby
 					consumers_nearby_count = 0;
 
 					for (size_t k = 0; k < bo.outputs.size(); ++k)
@@ -2771,7 +2771,7 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 	if (flag.get_economy()->warehouses().empty() && flag.get_building()) {
 
 		// occupied military buildings get special treatment
-		//(extended grace time + longer radius)
+		// (extended grace time + longer radius)
 		bool occupied_military_ = false;
 		Building* b = flag.get_building();
 		if (upcast(MilitarySite, militb, b)) {
@@ -2882,7 +2882,7 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 				if (map.findpath(flag.get_position(), reachable_coords, 0, *path2, check) >= 0) {
 
 					// path is possible, but for now we presume connection
-					//'walking on existing roads' is not possible
+					// 'walking on existing roads' is not possible
 					// so we assign 'virtual distance'
 					int32_t virtual_distance = 0;
 					// the same economy, but connection not spotted above via "walking on roads"
@@ -3977,7 +3977,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			bo.primary_priority += 50;
 		}
 
-		//if we are close to enemy (was seen in last 15 minutes)
+		// If we are close to enemy (was seen in last 15 minutes)
 		if (enemy_last_seen_ < gametime && enemy_last_seen_ + 15 * 60 * 1000 > gametime) {
 			bo.primary_priority += 10;
 		}

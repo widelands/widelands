@@ -4309,7 +4309,7 @@ const PropertyType<LuaBob> LuaBob::Properties[] = {
  */
 
 /* RST
-	.. attribute:: field //working here
+	.. attribute:: field // working here
 
 		(RO) The field the bob is located on
 */

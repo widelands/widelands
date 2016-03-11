@@ -71,7 +71,7 @@
 namespace Widelands {
 
 /// Define this to get lots of debugging output concerned with syncs
-//#define SYNC_DEBUG
+// #define SYNC_DEBUG
 
 Game::SyncWrapper::~SyncWrapper() {
 	if (dump_ != nullptr) {

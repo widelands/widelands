@@ -885,7 +885,7 @@ void NetHost::send(ChatMessage msg)
 			s.string(msg.msg);
 			s.unsigned_8(1);
 			s.string(msg.recipient);
-		} else { //find the recipient
+		} else { // Find the recipient
 			int32_t clientnum = check_client(msg.recipient);
 			if (clientnum >= 0) {
 				s.signed_16(msg.playern);
@@ -1613,9 +1613,9 @@ bool NetHost::write_map_transfer_info(SendPacket & s, std::string mapfilename) {
 	// needs the file.
 	s.unsigned_8(NETCMD_NEW_FILE_AVAILABLE);
 	s.string(mapfilename);
-	//Scan-build reports that access to bytes here results in a dereference of null pointer.
-	//This is a false positive.
-	//See https://bugs.launchpad.net/widelands/+bug/1198919
+	// Scan-build reports that access to bytes here results in a dereference of null pointer.
+	// This is a false positive.
+	// See https://bugs.launchpad.net/widelands/+bug/1198919
 	s.unsigned_32(file_->bytes);
 	s.string(file_->md5sum);
 	return true;

@@ -417,7 +417,7 @@ void FieldDebugWindow::think()
 		// Remove from our list if its not in the bobs
 		// list, or if it doesn't seem to exist anymore
 		m_ui_bobs.remove(idx);
-		idx--; //reiter the same index
+		idx--; // reiter the same index
 	}
 	// Add remaining
 	for (const Widelands::Bob * temp_bob : bobs) {
