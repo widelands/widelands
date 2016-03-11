@@ -516,7 +516,7 @@ struct FlagsForRoads {
 
 	struct Candidate {
 		Candidate();
-		// NOCOM it's hard to see here what cr, ad and de mean without looking at the implementation
+		// NOCOM(#codereview) it's hard to see here what cr, ad and de mean without looking at the implementation
 		// - please give them longer names or add a comment.
 		Candidate(uint32_t cr, int32_t ad, bool de);
 
