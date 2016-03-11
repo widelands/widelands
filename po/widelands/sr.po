@@ -1,6 +1,5 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR Widelands Development Team
-# This file is distributed under the same license as the PACKAGE package.
+# Widelands PATH/TO/FILE.PO
+# Copyright (C) 2005-2016 Widelands Development Team
 # 
 # Translators:
 # GunChleoc, 2015
@@ -9,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-03-02 08:54+0000\n"
-"PO-Revision-Date: 2016-03-02 08:56+0000\n"
+"POT-Creation-Date: 2016-03-08 15:25+0000\n"
+"PO-Revision-Date: 2016-03-08 15:27+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Serbian (http://www.transifex.com/widelands/widelands/language/sr/)\n"
 "MIME-Version: 1.0\n"
@@ -25,14 +24,24 @@ msgstr ""
 msgid "Resources"
 msgstr ""
 
+#. TRANSLATORS: A header in the editor help
+#: ../../data/scripting/editor/terrain_help.lua:25
+msgid "Valid Resource:"
+msgid_plural "Valid Resources:"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
 #: ../../data/scripting/editor/terrain_help.lua:35
 msgid "%1%x %2%"
 msgstr ""
 
+#. TRANSLATORS: e.g. "5x Water"
 #: ../../data/scripting/editor/terrain_help.lua:35
 msgid "Default:"
 msgstr ""
 
+#. TRANSLATORS: A header in the editor help
 #: ../../data/scripting/editor/terrain_help.lua:67
 msgid "Probability of trees growing"
 msgstr ""
@@ -41,14 +50,17 @@ msgstr ""
 msgid "No trees will grow here."
 msgstr ""
 
+#. TRANSLATORS: A header in the editor help. Terrains preferred by a type of
+#. tree.
 #: ../../data/scripting/editor/tree_help.lua:17
 msgid "Preferred terrains"
 msgstr ""
 
-#. * TRANSLATORS: File name for saving objective achieved
-#. * TRANSLATORS: %1% = map name. %2% = achievement name
 #. * TRANSLATORS: %1% is a filename, %2% a map's name.
 #. * TRANSLATORS: Terrain name + editor category, e.g. Steppe (Summer)
+#. * TRANSLATORS: File name for saving objective achieved
+#. * TRANSLATORS: %1% = map name. %2% = achievement name
+#. TRANSLATORS: Terrain name (Climate)
 #: ../../data/scripting/editor/tree_help.lua:38
 #: ../../src/editor/ui_menus/editor_help.cc:157
 #: ../../src/editor/ui_menus/editor_help.cc:195
@@ -60,6 +72,13 @@ msgstr ""
 #, lua-format
 msgid "“%s”"
 msgstr ""
+
+#: ../../data/scripting/format_scenario.lua:146
+msgid "New Objective"
+msgid_plural "New Objectives"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
 
 #. * TRANSLATORS: Concatenate the last 2 items on a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
@@ -93,6 +112,7 @@ msgstr ""
 msgid "%1$s and %2$s"
 msgstr ""
 
+#. TRANSLATORS: Short for "Not enough space"
 #: ../../data/scripting/infrastructure.lua:157
 msgid "No Space"
 msgstr ""
@@ -511,8 +531,8 @@ msgstr ""
 msgid "port"
 msgstr ""
 
-#. * TRANSLATORS: Editor terrain property: units can walk on this terrain
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
+#. * TRANSLATORS: Editor terrain property: units can walk on this terrain
 #: ../../src/editor/tools/editor_info_tool.cc:77
 #: ../../src/logic/map_objects/world/terrain_description.cc:76
 msgid "walkable"
@@ -1164,14 +1184,14 @@ msgstr ""
 
 #. * TRANSLATORS: %1% is the number of soldiers the plural refers to
 #. * TRANSLATORS: %2% is the maximum number of soldier slots in the building
-#: ../../src/logic/map_objects/tribes/militarysite.cc:126
+#: ../../src/logic/map_objects/tribes/militarysite.cc:127
 msgid "%1% soldier (+%2%)"
 msgid_plural "%1% soldiers (+%2%)"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: ../../src/logic/map_objects/tribes/militarysite.cc:131
+#: ../../src/logic/map_objects/tribes/militarysite.cc:132
 #, c-format
 msgid "%u soldier"
 msgid_plural "%u soldiers"
@@ -1179,7 +1199,7 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: ../../src/logic/map_objects/tribes/militarysite.cc:140
+#: ../../src/logic/map_objects/tribes/militarysite.cc:141
 msgid "%1%(+%2%) soldier (+%3%)"
 msgid_plural "%1%(+%2%) soldiers (+%3%)"
 msgstr[0] ""
@@ -1188,7 +1208,7 @@ msgstr[2] ""
 
 #. * TRANSLATORS: %1% is the number of soldiers the plural refers to
 #. * TRANSLATORS: %2% are currently open soldier slots in the building
-#: ../../src/logic/map_objects/tribes/militarysite.cc:145
+#: ../../src/logic/map_objects/tribes/militarysite.cc:146
 msgid "%1%(+%2%) soldier"
 msgid_plural "%1%(+%2%) soldiers"
 msgstr[0] ""
@@ -1196,33 +1216,33 @@ msgstr[1] ""
 msgstr[2] ""
 
 #. * TRANSLATORS: Militarysite lost (taken/destroyed by enemy)
-#: ../../src/logic/map_objects/tribes/militarysite.cc:871
+#: ../../src/logic/map_objects/tribes/militarysite.cc:876
 msgctxt "building"
 msgid "Lost!"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/militarysite.cc:873
+#: ../../src/logic/map_objects/tribes/militarysite.cc:878
 msgid "Militarysite lost!"
 msgstr ""
 
 #. * TRANSLATORS: Message title.
 #. * TRANSLATORS: If you run out of space, you can also translate this as
 #. "Success!"
-#: ../../src/logic/map_objects/tribes/militarysite.cc:916
+#: ../../src/logic/map_objects/tribes/militarysite.cc:921
 msgid "Enemy Defeated!"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/militarysite.cc:918
+#: ../../src/logic/map_objects/tribes/militarysite.cc:923
 msgid "Enemy at site defeated!"
 msgstr ""
 
 #. * TRANSLATORS: Militarysite is being attacked
-#: ../../src/logic/map_objects/tribes/militarysite.cc:969
+#: ../../src/logic/map_objects/tribes/militarysite.cc:974
 msgctxt "building"
 msgid "Attack!"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/militarysite.cc:971
+#: ../../src/logic/map_objects/tribes/militarysite.cc:976
 msgid "You are under attack"
 msgstr ""
 
@@ -3232,9 +3252,9 @@ msgstr ""
 msgid "Show next building"
 msgstr ""
 
+#. * TRANSLATORS Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
-#. * TRANSLATORS Buildings: owned / under construction
 #: ../../src/wui/building_statistics_menu.cc:713
 #: ../../src/wui/building_statistics_menu.cc:737
 #: ../../src/wui/building_statistics_menu.cc:739

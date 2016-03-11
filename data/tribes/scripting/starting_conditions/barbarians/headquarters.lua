@@ -59,6 +59,7 @@ init = {
          barbarians_lime_burner = 1,
          barbarians_lumberjack = 3,
          barbarians_miner = 4,
+         barbarians_miner_master = 4,
          barbarians_ranger = 1,
          barbarians_stonemason = 2,
          barbarians_ox = 5,
