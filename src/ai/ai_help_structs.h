@@ -264,7 +264,7 @@ struct BuildableField {
 	// stationed (manned) military buildings nearby
 	int16_t military_stationed;
 	// stationed (manned) military buildings nearby
-	//unconnected buildings nearby
+	// unconnected buildings nearby
 	bool unconnected_nearby;
 	int16_t military_unstationed;
 	bool is_portspace;
@@ -509,13 +509,15 @@ private:
 	std::map<uint32_t, uint32_t> blocked_fields_;
 };
 
-// list of candidate flags to built roads, with some additional logic
+// list of candidate flags to build roads, with some additional logic
 struct FlagsForRoads {
 
-	FlagsForRoads(int32_t mr) : min_reduction(mr) {};
+	FlagsForRoads(int32_t mr) : min_reduction(mr) {}
 
 	struct Candidate {
 		Candidate();
+		// NOCOM it's hard to see here what cr, ad and de mean without looking at the implementation
+		// - please give them longer names or add a comment.
 		Candidate(uint32_t cr, int32_t ad, bool de);
 
 		uint32_t coords_hash;
@@ -544,9 +546,9 @@ struct FlagsForRoads {
 		return queue.size();
 	}
 
-	// This is for debuging and development purposes
+	// This is for debugging and development purposes
 	void print();
-	// during processing we need to pick first one uprocessed flags (with best score so far)
+	// during processing we need to pick first one uprocessed flag (with best score so far)
 	bool get_best_uncalculated(uint32_t* winner);
 	// When we test candidate flag if road can be built to it, there are two possible outcomes:
 	void road_possible(Widelands::Coords coords, uint32_t distance);

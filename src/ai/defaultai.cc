@@ -975,10 +975,12 @@ void DefaultAI::update_all_not_buildable_fields() {
 
 	// We are checking at least 5 unusable fields (or less if there are not 5 of them)
 	// at once, but not more then 200...
-	// The idea is to check each field at least once a minute, of cours with big maps
+	// The idea is to check each field at least once a minute, of course with big maps
 	// it will take longer
 	uint32_t maxchecks = unusable_fields.size();
 	if (maxchecks > 5) {
+		// NOCOM I think this would be shorter, but it's up to you if you want that:
+		// maxchecks = std::min(5 + (unusable_fields.size() - 5) / 15, 200);
 		maxchecks = 5 + (unusable_fields.size() - 5) / 15;
 	}
 	if (maxchecks > 200) {
@@ -2199,7 +2201,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 					prio -= (bf->military_in_constr_nearby + bf->military_unstationed) * 150;
 					prio += (5 - bf->own_military_sites_nearby_()) * 15;
 				}
-				prio +=(bf->unconnected_nearby) * 50;
+				prio += bf->unconnected_nearby * 50;
 				prio += bf->unowned_land_nearby * resource_necessity_territory_ / 100;
 				prio += bf->unowned_mines_spots_nearby * resource_necessity_mines_ / 100;
 				prio += ((bf->unowned_mines_spots_nearby > 0) ? 35 : 0) *
@@ -2603,7 +2605,7 @@ bool DefaultAI::improve_roads(uint32_t gametime) {
 		roads.push_back(roads.front());
 		roads.pop_front();
 
-		// Occasionaly (not more then once in 15 seconds) we test if the road can be dismounted
+		// Occasionaly (not more then once in 15 seconds) we test if the road can be dismantled
 		// if there is shortage of spots we do it always
 		if (last_road_dismantled_ + 15 * 1000 < gametime &&
 			(gametime % 5 == 0 || spots_ < kSpotsTooLittle)) {
@@ -2918,7 +2920,7 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 		}
 	}
 
-	// now we walk over roads and if field is reachable by roads, we change distance asigned above
+	// now we walk over roads and if field is reachable by roads, we change the distance assigned above
 	std::priority_queue<NearFlag> queue;
 	std::vector<NearFlag> nearflags;  // only used to collect flags reachable walk over roads
 	queue.push(NearFlag(flag, 0, 0));
@@ -2983,8 +2985,8 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 		// value of pathcost is not important, it just indicates, that the path can be built
 		const int32_t pathcost =
 			map.findpath(flag.get_position(), coords, 0, path, check);
-		if (pathcost>=0) {
-			RoadCandidates.road_possible(coords,  path.get_nsteps());
+		if (pathcost >= 0) {
+			RoadCandidates.road_possible(coords, path.get_nsteps());
 			count += 2;
 		} else {
 			RoadCandidates.road_impossible(coords);
@@ -2994,11 +2996,11 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 
 	// Well and finally building the winning road
 	uint32_t winner_hash = 0;
-	if (RoadCandidates.get_winner(&winner_hash, (gametime%4>0)? 1 : 2)) {
-		const Widelands::Coords target_coords=Coords::unhash(winner_hash);
+	if (RoadCandidates.get_winner(&winner_hash, (gametime %4 > 0)? 1 : 2)) {
+		const Widelands::Coords target_coords = Coords::unhash(winner_hash);
 		Path& path = *new Path();
-		const int32_t pathcost =map.findpath(flag.get_position(), target_coords, 0, path, check);
-		assert (pathcost>=0);
+		const int32_t pathcost = map.findpath(flag.get_position(), target_coords, 0, path, check);
+		assert (pathcost >= 0);
 		game().send_player_build_road(player_number(), path);
 		return true;
 	}

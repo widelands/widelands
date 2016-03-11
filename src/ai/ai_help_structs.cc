@@ -314,10 +314,10 @@ FlagsForRoads::Candidate::Candidate(uint32_t cr, int32_t ad, bool de):
 	coords_hash(cr), air_distance(ad), different_economy(de) {
 		new_road_possible = false;
 		accessed_via_roads = false;
-		new_road_length = 1000;
+		new_road_length = 1000; // NOCOM I see 1000 and -1000 in these new functions a lot - make 1000 a named constexpr?
 		current_roads_distance = 1000; // must be big enough
 		reduction_score = -air_distance; // allows reasonable ordering from the start
-		}
+}
 
 bool FlagsForRoads::Candidate::operator<(const Candidate& other) const {
 	if (reduction_score == other.reduction_score) {
@@ -347,7 +347,7 @@ void FlagsForRoads::Candidate::calculate_score() {
 	}
 }
 
-void FlagsForRoads::print() { // this is for debuging and development purposes
+void FlagsForRoads::print() { // this is for debugging and development purposes
 	for (auto& candidate_flag : queue) {
 		log("   %starget: %3dx%3d, saving: %5d (%3d), air distance: %3d, new road: %6d, score: %5d %s\n",
 		(candidate_flag.reduction_score>=min_reduction && candidate_flag.new_road_possible)?"+":" ",
@@ -362,7 +362,7 @@ void FlagsForRoads::print() { // this is for debuging and development purposes
 	}
 }
 
-// Queue is ordered but some target flags are only estimations so we takes first such candidate_flag
+// Queue is ordered but some target flags are only estimations so we take such a candidate_flag first
 bool FlagsForRoads::get_best_uncalculated(uint32_t* winner) {
 	for (auto& candidate_flag : queue) {
 		if (!candidate_flag.new_road_possible) {
@@ -376,6 +376,10 @@ bool FlagsForRoads::get_best_uncalculated(uint32_t* winner) {
 // Road from starting flag to this flag can be built
 void FlagsForRoads::road_possible(Widelands::Coords coords, uint32_t distance) {
 	// std::set does not allow updating
+	// NOCOM you iterate over this set a lot in order to find an element.
+	// How about using a std::map<coords.hash(), Candidate> or
+	// std::map<coords.hash(), std::unique_ptr<Candidate>>for easier access?
+	// This would also allow you to update an element.
 	Candidate new_candidate_flag = Candidate(0, 0, false);
 	for (auto candidate_flag : queue) {
 		if (candidate_flag.coords_hash == coords.hash()) {
