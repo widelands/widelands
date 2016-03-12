@@ -11,9 +11,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-03-01 09:34+0000\n"
-"PO-Revision-Date: 2016-03-01 09:34+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2016-03-02 08:54+0000\n"
+"PO-Revision-Date: 2016-03-02 14:22+0000\n"
+"Last-Translator: Jaypad <ju-ju@nataju.fr>\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1811,17 +1811,17 @@ msgstr[1] "Ouvriers recrutés&nbsp;:"
 #: ../../data/tribes/scripting/help/worker_help.lua:95
 msgid "Works at"
 msgid_plural "Works at"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Lieu de travail"
+msgstr[1] "Lieux de travail"
 
 #. TRANSLATORS: Tribal Encyclopedia: Heading for which tool a worker uses
 #: ../../data/tribes/scripting/help/worker_help.lua:133
 msgid "Worker uses"
-msgstr ""
+msgstr "L'ouvrier utilise"
 
 #: ../../data/tribes/scripting/help/worker_help.lua:145
 msgid "Experience levels"
-msgstr ""
+msgstr "Niveaux d'expérience"
 
 #. TRANSLATORS: Helptext for a ware: Armor
 #: ../../data/tribes/wares/armor/helptexts.lua:4

@@ -25,16 +25,6 @@
 
 #include "base/log.h"
 
-namespace  {
-
-struct DrawBatch {
-	int offset;
-	int count;
-	int line_width;
-};
-
-}  // namespace
-
 // static
 DrawLineProgram& DrawLineProgram::instance() {
 	static DrawLineProgram draw_line_program;
@@ -48,21 +38,7 @@ DrawLineProgram::DrawLineProgram() {
 	attr_color_ = glGetAttribLocation(gl_program_.object(), "attr_color");
 }
 
-void DrawLineProgram::draw(const FloatPoint& start,
-                           const FloatPoint& end,
-                           const float z_value,
-                           const RGBColor& color,
-									int line_width) {
-	draw({Arguments{FloatRect(start.x, start.y, end.x - start.x, end.y - start.y),
-	                z_value,
-	                color,
-						 static_cast<uint8_t>(line_width),
-	                BlendMode::Copy}});
-}
-
 void DrawLineProgram::draw(std::vector<Arguments> arguments) {
-	size_t i = 0;
-
 	glUseProgram(gl_program_.object());
 
 	auto& gl_state = Gl::State::instance();
@@ -72,50 +48,23 @@ void DrawLineProgram::draw(std::vector<Arguments> arguments) {
 
 	gl_array_buffer_.bind();
 
-	Gl::vertex_attrib_pointer(attr_position_, 3, sizeof(PerVertexData), offsetof(PerVertexData, gl_x));
-	Gl::vertex_attrib_pointer(attr_color_, 3, sizeof(PerVertexData), offsetof(PerVertexData, color_r));
+	Gl::vertex_attrib_pointer(
+	   attr_position_, 3, sizeof(PerVertexData), offsetof(PerVertexData, gl_x));
+	Gl::vertex_attrib_pointer(
+	   attr_color_, 4, sizeof(PerVertexData), offsetof(PerVertexData, color_r));
 
 	vertices_.clear();
 
-	std::vector<DrawBatch> draw_batches;
-	int offset = 0;
-	while (i < arguments.size()) {
-		const Arguments& template_args = arguments[i];
+	for (Arguments& current_args : arguments) {
+		// We do not support anything else for drawing lines, really.
+		assert(current_args.blend_mode == BlendMode::UseAlpha);
 
-		while (i < arguments.size()) {
-			const Arguments& current_args = arguments[i];
-			if (current_args.line_width != template_args.line_width) {
-				break;
-			}
-			// We do not support anything else for drawing lines, really.
-			assert(current_args.blend_mode == BlendMode::Copy);
-
-			vertices_.emplace_back(current_args.destination_rect.x,
-			                       current_args.destination_rect.y,
-			                       current_args.z_value,
-			                       current_args.color.r / 255.,
-			                       current_args.color.g / 255.,
-			                       current_args.color.b / 255.);
-
-			vertices_.emplace_back(current_args.destination_rect.x + current_args.destination_rect.w,
-			                       current_args.destination_rect.y + current_args.destination_rect.h,
-			                       current_args.z_value,
-			                       current_args.color.r / 255.,
-			                       current_args.color.g / 255.,
-			                       current_args.color.b / 255.);
-			++i;
+		for (auto& vertice : current_args.vertices) {
+			vertice.gl_z = current_args.z_value;
 		}
-
-		draw_batches.emplace_back(
-		   DrawBatch{offset, static_cast<int>(vertices_.size() - offset), template_args.line_width});
-		offset = vertices_.size();
+		std::move(
+		   current_args.vertices.begin(), current_args.vertices.end(), std::back_inserter(vertices_));
 	}
-
 	gl_array_buffer_.update(vertices_);
-
-	// Now do the draw calls.
-	for (const auto& draw_arg : draw_batches) {
-		glLineWidth(draw_arg.line_width);
-		glDrawArrays(GL_LINES, draw_arg.offset, draw_arg.count);
-	}
+	glDrawArrays(GL_TRIANGLES, 0, vertices_.size());
 }

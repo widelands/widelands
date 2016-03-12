@@ -121,7 +121,7 @@ BuildingDescr::BuildingDescr
 			//  Merge the enhancements workarea info into this building's
 			//  workarea info.
 			const BuildingDescr * tmp_enhancement = egbase_.tribes().get_building_descr(en_i);
-			for (std::pair<uint32_t, std::set<std::string>> area : tmp_enhancement->workarea_info_)
+			for (auto area : tmp_enhancement->workarea_info_)
 			{
 				std::set<std::string> & strs = workarea_info_[area.first];
 				for (std::string str : area.second)
@@ -502,7 +502,7 @@ std::string Building::info_string(const InfoStringFormat& format) {
 	default:
 		NEVER_HERE();
 	}
-	return result.empty() ? result : as_uifont(result);
+	return result;
 }
 
 
@@ -671,22 +671,29 @@ void Building::draw_help
 		dynamic_cast<const InteractiveGameBase&>(*game.get_ibase());
 	uint32_t const dpyflags = igbase.get_display_flags();
 
-	if (dpyflags & InteractiveBase::dfShowCensus) {
-		const std::string info = info_string(InfoStringFormat::kCensus);
-		if (!info.empty()) {
-			dst.blit(pos - Point(0, 48), UI::g_fh1->render(info), BlendMode::UseAlpha, UI::Align::kCenter);
-		}
-	}
+	if (dpyflags & InteractiveBase::dfShowCensus || dpyflags & InteractiveBase::dfShowStatistics) {
+		// We always render this so we can have a stable position for the statistics string.
+		const Image* rendered_census_info =
+				UI::g_fh1->render(as_condensed(info_string(InfoStringFormat::kCensus), UI::Align::kCenter),
+										120);
+		const Point census_pos(pos - Point(0, 48));
 
-	if (dpyflags & InteractiveBase::dfShowStatistics) {
-		if (upcast(InteractivePlayer const, iplayer, &igbase))
-			if
-				(!iplayer->player().see_all() &&
-				 iplayer->player().is_hostile(*get_owner()))
-				return;
-		const std::string info = info_string(InfoStringFormat::kStatistics);
-		if (!info.empty()) {
-			dst.blit(pos - Point(0, 35), UI::g_fh1->render(info), BlendMode::UseAlpha, UI::Align::kCenter);
+		if (dpyflags & InteractiveBase::dfShowCensus) {
+			dst.blit(census_pos, rendered_census_info, BlendMode::UseAlpha, UI::Align::kCenter);
+		}
+
+		if (dpyflags & InteractiveBase::dfShowStatistics) {
+			if (upcast(InteractivePlayer const, iplayer, &igbase))
+				if
+					(!iplayer->player().see_all() &&
+					 iplayer->player().is_hostile(*get_owner()))
+					return;
+			const std::string& info = info_string(InfoStringFormat::kStatistics);
+			if (!info.empty()) {
+				dst.blit(census_pos + Point(0, rendered_census_info->height() / 2 + 10),
+							UI::g_fh1->render(as_condensed(info)),
+							BlendMode::UseAlpha, UI::Align::kCenter);
+			}
 		}
 	}
 }

@@ -48,7 +48,6 @@ const int32_t space_at_right = 10;
 const int32_t space_left_of_label = 15;
 const uint32_t nr_samples = 30;   // How many samples per diagramm when relative plotting
 
-
 const uint32_t time_in_ms[] = {
 	15 * minutes,
 	30 * minutes,
@@ -60,8 +59,10 @@ const uint32_t time_in_ms[] = {
 };
 
 const char BG_PIC[] = "images/wui/plot_area_bg.png";
-const RGBColor LINE_COLOR(0, 0, 0);
-const RGBColor ZERO_LINE_COLOR(255, 255, 255);
+const RGBColor kAxisLineColor(0, 0, 0);
+constexpr float kAxisLinesWidth = 2.0f;
+constexpr float kPlotLinesWidth = 3.f;
+const RGBColor kZeroLineColor(255, 255, 255);
 
 enum UNIT {
 	UNIT_MIN,
@@ -184,34 +185,30 @@ void draw_diagram
 
 	// Draw coordinate system
 	// X Axis
-	dst.draw_line(Point(spacing, inner_h - space_at_bottom),
-	              Point(inner_w - space_at_right, inner_h - space_at_bottom),
-	              LINE_COLOR,
-	              2);
+	dst.draw_line_strip({
+		FloatPoint(spacing, inner_h - space_at_bottom),
+		FloatPoint(inner_w - space_at_right, inner_h - space_at_bottom)},
+		kAxisLineColor, kAxisLinesWidth);
 	// Arrow
-	dst.draw_line(Point(spacing, inner_h - space_at_bottom),
-	              Point(spacing + 5, inner_h - space_at_bottom - 3),
-	              LINE_COLOR,
-	              2);
-	dst.draw_line(Point(spacing, inner_h - space_at_bottom),
-	              Point(spacing + 5, inner_h - space_at_bottom + 3),
-	              LINE_COLOR,
-	              2);
+	dst.draw_line_strip({
+		FloatPoint(spacing + 5, inner_h - space_at_bottom - 3),
+		FloatPoint(spacing, inner_h - space_at_bottom),
+		FloatPoint(spacing + 5, inner_h - space_at_bottom + 3),
+		}, kAxisLineColor, kAxisLinesWidth);
+
 	//  Y Axis
-	dst.draw_line(Point(inner_w - space_at_right, spacing),
-	              Point(inner_w - space_at_right, inner_h - space_at_bottom),
-	              LINE_COLOR,
-	              2);
+	dst.draw_line_strip({FloatPoint(inner_w - space_at_right, spacing),
+	                     FloatPoint(inner_w - space_at_right, inner_h - space_at_bottom)},
+							  kAxisLineColor, kAxisLinesWidth);
 	//  No Arrow here, since this doesn't continue.
 
 	float sub = (xline_length - space_left_of_label) / how_many_ticks;
 	float posx = inner_w - space_at_right;
 
 	for (uint32_t i = 0; i <= how_many_ticks; ++i) {
-		dst.draw_line(Point(static_cast<int32_t>(posx), inner_h - space_at_bottom),
-		              Point(static_cast<int32_t>(posx), inner_h - space_at_bottom + 3),
-		              LINE_COLOR,
-		              2);
+		dst.draw_line_strip({FloatPoint(static_cast<int32_t>(posx), inner_h - space_at_bottom),
+		                     FloatPoint(static_cast<int32_t>(posx), inner_h - space_at_bottom + 3)},
+								  kAxisLineColor, kAxisLinesWidth);
 
 		// The space at the end is intentional to have the tick centered
 		// over the number, not to the left
@@ -225,15 +222,13 @@ void draw_diagram
 	}
 
 	//  draw yticks, one at full, one at half
-	dst.draw_line(Point(inner_w - space_at_right, spacing),
-	              Point(inner_w - space_at_right - 3, spacing),
-	              LINE_COLOR,
-	              2);
-	dst.draw_line(
-	   Point(inner_w - space_at_right, spacing + ((inner_h - space_at_bottom) - spacing) / 2),
-	   Point(inner_w - space_at_right - 3, spacing + ((inner_h - space_at_bottom) - spacing) / 2),
-	   LINE_COLOR,
-	   2);
+	dst.draw_line_strip({
+		FloatPoint(inner_w - space_at_right, spacing), FloatPoint(inner_w - space_at_right - 3, spacing)},
+		kAxisLineColor, kAxisLinesWidth);
+	dst.draw_line_strip({
+		FloatPoint(inner_w - space_at_right, spacing + ((inner_h - space_at_bottom) - spacing) / 2),
+		FloatPoint(inner_w - space_at_right - 3, spacing + ((inner_h - space_at_bottom) - spacing) / 2)},
+		kAxisLineColor, kAxisLinesWidth);
 
 	//  print the used unit
 	const Image* xtick = UI::g_fh1->render(xtick_text_style((boost::format(get_unit_name(unit)) % "").str()));
@@ -410,35 +405,31 @@ void WuiPlotArea::draw_plot_line
 		(RenderTarget & dst, std::vector<uint32_t> const * dataset, float const yline_length,
 		 uint32_t const highest_scale, float const sub, RGBColor const color, int32_t const yoffset)
 {
-
 	float posx = get_inner_w() - space_at_right;
-
-	int32_t lx = get_inner_w() - space_at_right;
-	int32_t ly = yoffset;
-	//init start point of the plot line with the first data value.
-	//this prevent that the plot start always at zero
-	if (int32_t value = (*dataset)[dataset->size() - 1]) {
+	const int lx = get_inner_w() - space_at_right;
+	int ly = yoffset;
+	// Init start point of the plot line with the first data value.
+	// This prevents that the plot starts always at zero
+	if (int value = (*dataset)[dataset->size() - 1]) {
 		ly -= static_cast<int32_t>(scale_value(yline_length, highest_scale, value));
 	}
+
+	std::vector<FloatPoint> points;
+	points.emplace_back(lx, ly);
 
 	for (int32_t i = dataset->size() - 1; i > 0 && posx > spacing; --i) {
 		int32_t const curx = static_cast<int32_t>(posx);
 		int32_t       cury = yoffset;
 
-		//scale the line to the available space
+		// Scale the line to the available space
 		if (int32_t value = (*dataset)[i]) {
 			const float length_y = scale_value(yline_length, highest_scale, value);
-
 			cury -= static_cast<int32_t>(length_y);
 		}
-
-		dst.draw_line(Point(lx, ly), Point(curx, cury), color, 2);
-
+		points.emplace_back(curx, cury);
 		posx -= sub;
-
-		lx = curx;
-		ly = cury;
 	}
+	dst.draw_line_strip(points, color, kPlotLinesWidth);
 }
 
 /*
@@ -504,22 +495,21 @@ WuiPlotArea (parent, x, y, w, h)
 void DifferentialPlotArea::draw(RenderTarget & dst) {
 	float const xline_length = get_inner_w() - space_at_right  - spacing;
 	float const yline_length = get_inner_h() - space_at_bottom - spacing;
-	//yoffset of the zero line
+	// yoffset of the zero line
 	float const yoffset = spacing + ((get_inner_h() - space_at_bottom) - spacing) / 2;
 
 	const uint32_t time_ms = get_plot_time();
 	draw_diagram(time_ms, get_inner_w(), get_inner_h(), xline_length, dst);
 
 	// draw zero line
-	dst.draw_line(Point(get_inner_w() - space_at_right, yoffset),
-	              Point(get_inner_w() - space_at_right - xline_length, yoffset),
-	              ZERO_LINE_COLOR,
-	              2);
+	dst.draw_line_strip({FloatPoint(get_inner_w() - space_at_right, yoffset),
+	                     FloatPoint(get_inner_w() - space_at_right - xline_length, yoffset)},
+							  kZeroLineColor, kPlotLinesWidth);
 
 	// How many do we take together when relative ploting
 	const int32_t how_many = calc_how_many(time_ms, sample_rate_);
 
-	//find max and min value
+	// Find max and min value
 	int32_t max = 0;
 	int32_t min = 0;
 
@@ -554,7 +544,7 @@ void DifferentialPlotArea::draw(RenderTarget & dst) {
 			}
 	}
 
-	//use equal positive and negative range
+	// Use equal positive and negative range
 	min = abs(min);
 	uint32_t highest_scale = 0;
 	if (min > max) {
@@ -562,7 +552,7 @@ void DifferentialPlotArea::draw(RenderTarget & dst) {
 	} else {
 		highest_scale = max;
 	}
-	//print the min and max values
+	// Print the min and max values
 	draw_value
 		(std::to_string(highest_scale), RGBColor(60, 125, 0),
 		 Point(get_inner_w() - space_at_right - 2, spacing + 2), dst);
@@ -602,8 +592,8 @@ void DifferentialPlotArea::draw(RenderTarget & dst) {
 				sub = xline_length / static_cast<float>(nr_samples);
 			}
 
-			//highest_scale represent the space between zero line and top.
-			//-> half of the whole differential plot area
+			// Highest_scale represent the space between zero line and top.
+			// -> half of the whole differential plot area
 			draw_plot_line(dst, dataset, yline_length, highest_scale * 2, sub, color, yoffset);
 		}
 }

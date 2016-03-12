@@ -104,7 +104,7 @@ private:
 	UI::Textarea        curware_;
 	WareListSelectionType      selected_;
 	WareListSelectionType      hidden_;
-	WareListSelectionType      in_selection_;  //Wares in temporary anchored selection
+	WareListSelectionType      in_selection_;  // Wares in temporary anchored selection
 	bool                selectable_;
 	bool                horizontal_;
 

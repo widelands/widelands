@@ -152,7 +152,7 @@ void MapObjectSaver::mark_object_as_saved(const MapObject & obj) {
  * Return the number of unsaved objects
  */
 void MapObjectSaver::detect_unsaved_objects() const {
-	for (const std::pair<const MapObject *, MapObjectRec>& temp_map : objects_) {
+	for (const auto& temp_map : objects_) {
 		if (!temp_map.second.saved) {
 			throw wexception
 				("%s has not been saved", temp_map.second.description.c_str());

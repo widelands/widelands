@@ -751,7 +751,7 @@ Start road building.
 */
 void FieldActionWindow::act_buildroad()
 {
-	//if we area already building a road just ignore this
+	// If we area already building a road just ignore this
 	if (!ibase().is_building_road()) {
 		ibase().start_build_road(m_node, m_plr->player_number());
 		okdialog();

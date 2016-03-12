@@ -28,54 +28,34 @@
 #include "graphic/color.h"
 #include "graphic/gl/utils.h"
 
+// TODO(sirver): This program actually now only draws Triangles. Merge with
+// DrawRect program.
 class DrawLineProgram {
 public:
+	struct PerVertexData {
+		float gl_x, gl_y, gl_z;
+		float color_r, color_g, color_b, float_a;
+	};
+	static_assert(sizeof(PerVertexData) == 28, "Wrong padding.");
+
 	struct Arguments {
-		// The line is drawn from the top left to the bottom right of
-		// this rectangle.
-		FloatRect destination_rect;
+		// Vertices of the triangles to draw. We expect everything but 'gl_z' to
+		// be filled in by the caller. We fill up the z value with 'z_value'
+		// before drawing. We directly expose the PerVertexData structure to
+		// avoid a copy.
+		std::vector<PerVertexData> vertices;
 		float z_value;
-		RGBAColor color;
-		uint8_t line_width;
-		BlendMode blend_mode;
+		BlendMode blend_mode;  // Always BlendMode::kUseAlpha.
 	};
 
 	// Returns the (singleton) instance of this class.
 	static DrawLineProgram& instance();
 
-	// Draws a line from (x1, y1) to (x2, y2) which are in gl
-	// coordinates in 'color' with a 'line_width' in pixels.
-	void draw(const FloatPoint& start,
-	          const FloatPoint& end,
-	          const float z_value,
-	          const RGBColor& color,
-	          const int line_width);
-
+	// Takes the 'arguments' by value on purpose.
 	void draw(std::vector<Arguments> arguments);
-
 
 private:
 	DrawLineProgram();
-
-	struct PerVertexData {
-		PerVertexData(float init_gl_x,
-		              float init_gl_y,
-		              float init_gl_z,
-		              float init_color_r,
-		              float init_color_g,
-		              float init_color_b)
-		   : gl_x(init_gl_x),
-		     gl_y(init_gl_y),
-		     gl_z(init_gl_z),
-		     color_r(init_color_r),
-		     color_g(init_color_g),
-		     color_b(init_color_b) {
-		}
-
-		float gl_x, gl_y, gl_z;
-		float color_r, color_g, color_b;
-	};
-	static_assert(sizeof(PerVertexData) == 24, "Wrong padding.");
 
 	// This is only kept around so that we do not constantly
 	// allocate memory for it.

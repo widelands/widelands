@@ -1,6 +1,5 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR Widelands Development Team
-# This file is distributed under the same license as the PACKAGE package.
+# Widelands PATH/TO/FILE.PO
+# Copyright (C) 2005-2016 Widelands Development Team
 # 
 # Translators:
 # GunChleoc, 2014
@@ -10,9 +9,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-03-01 09:34+0000\n"
-"PO-Revision-Date: 2016-03-01 09:35+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2016-03-08 15:25+0000\n"
+"PO-Revision-Date: 2016-03-08 18:11+0000\n"
+"Last-Translator: MiroslavR <miroslavr256@gmail.com>\n"
 "Language-Team: Slovak (http://www.transifex.com/widelands/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -26,36 +25,109 @@ msgstr ""
 msgid "Resources"
 msgstr "Zdroje"
 
+#. TRANSLATORS: A header in the editor help
+#: ../../data/scripting/editor/terrain_help.lua:25
+msgid "Valid Resource:"
+msgid_plural "Valid Resources:"
+msgstr[0] "Platný zdroj:"
+msgstr[1] "Platné zdroje:"
+msgstr[2] "Platné zdroje:"
+
 #: ../../data/scripting/editor/terrain_help.lua:35
 msgid "%1%x %2%"
-msgstr ""
+msgstr "%1%x %2%"
 
+#. TRANSLATORS: e.g. "5x Water"
 #: ../../data/scripting/editor/terrain_help.lua:35
 msgid "Default:"
-msgstr ""
+msgstr "Predvolené:"
 
+#. TRANSLATORS: A header in the editor help
 #: ../../data/scripting/editor/terrain_help.lua:67
 msgid "Probability of trees growing"
-msgstr ""
+msgstr "Pravdepodobnosť rastu stromov"
 
 #: ../../data/scripting/editor/terrain_help.lua:72
 msgid "No trees will grow here."
-msgstr ""
+msgstr "Tu nebudú rásť stromy."
 
+#. TRANSLATORS: A header in the editor help. Terrains preferred by a type of
+#. tree.
 #: ../../data/scripting/editor/tree_help.lua:17
 msgid "Preferred terrains"
-msgstr ""
+msgstr "Preferované terény"
 
-#. * TRANSLATORS: File name for saving objective achieved
-#. * TRANSLATORS: %1% = map name. %2% = achievement name
 #. * TRANSLATORS: %1% is a filename, %2% a map's name.
 #. * TRANSLATORS: Terrain name + editor category, e.g. Steppe (Summer)
+#. * TRANSLATORS: File name for saving objective achieved
+#. * TRANSLATORS: %1% = map name. %2% = achievement name
+#. TRANSLATORS: Terrain name (Climate)
 #: ../../data/scripting/editor/tree_help.lua:38
 #: ../../src/editor/ui_menus/editor_help.cc:157
 #: ../../src/editor/ui_menus/editor_help.cc:195
 #: ../../src/scripting/lua_game.cc:1060 ../../src/ui_fsmenu/loadgame.cc:74
 msgid "%1% (%2%)"
 msgstr "%1% (%2%)"
+
+#: ../../data/scripting/format_scenario.lua:36
+#, lua-format
+msgid "“%s”"
+msgstr "„%s“"
+
+#: ../../data/scripting/format_scenario.lua:146
+msgid "New Objective"
+msgid_plural "New Objectives"
+msgstr[0] "Nová úloha"
+msgstr[1] "Nové úlohy"
+msgstr[2] "Nové úlohy"
+
+#. * TRANSLATORS: Concatenate the last 2 items on a list.
+#. * TRANSLATORS: RTL languages might want to change the word order here.
+#: ../../data/scripting/formatting.lua:31 ../../src/base/i18n.cc:335
+#, c-format
+msgid "%1$s & %2$s"
+msgstr "%1$s a %2$s"
+
+#. * TRANSLATORS: Join the last 2 items on a list with "or".
+#. * TRANSLATORS: RTL languages might want to change the word order here.
+#: ../../data/scripting/formatting.lua:33 ../../src/base/i18n.cc:339
+#, c-format
+msgid "%1$s or %2$s"
+msgstr "%1$s alebo %2$s"
+
+#. * TRANSLATORS: Join the last 2 items on a list with a comma.
+#. * TRANSLATORS: RTL languages might want to change the word order here.
+#. * TRANSLATORS: Concatenate 2 items at in the middle of a list.
+#. * TRANSLATORS: RTL languages might want to change the word order here.
+#: ../../data/scripting/formatting.lua:35
+#: ../../data/scripting/formatting.lua:40 ../../src/base/i18n.cc:343
+#: ../../src/base/i18n.cc:353
+#, c-format
+msgid "%1$s, %2$s"
+msgstr "%1$s, %2$s"
+
+#. * TRANSLATORS: Concatenate the last 2 items on a list.
+#. * TRANSLATORS: RTL languages might want to change the word order here.
+#: ../../data/scripting/formatting.lua:37 ../../src/base/i18n.cc:347
+#, c-format
+msgid "%1$s and %2$s"
+msgstr "%1$s a %2$s"
+
+#. TRANSLATORS: Short for "Not enough space"
+#: ../../data/scripting/infrastructure.lua:157
+msgid "No Space"
+msgstr "Málo miesta"
+
+#: ../../data/scripting/infrastructure.lua:158
+msgid ""
+"Some of your starting buildings didn’t have enough room and weren’t built. "
+"You are at a disadvantage with this; consider restarting this map with a "
+"fair starting condition."
+msgstr "Nepodarilo sa umiestniť niektoré z počiatočných budov pre nedostatok miesta. Ste teda v nevýhode; zvážte, či by nebolo vhodné reštartovať mapu so spravodlivými počiatočnými podmienkami."
+
+#: ../../data/scripting/infrastructure.lua:159
+msgid "Not enough space"
+msgstr "Nedostatok miesta"
 
 #. * TRANSLATORS: This is a heading for a help window
 #: ../../data/scripting/widelands/multiplayer_help.lua:10
@@ -144,6 +216,49 @@ msgid ""
 "condition, and finally can start the game as soon as all players are set up."
 msgstr "Na pravej strane nájdete informácie o vybranej mape alebo uloženej hre. Tlačidlo napravo od názvu mapy umožňuje hostiteľovi zmeniť mapu. Hostiteľ okrem toho dokáže nastaviť presnú podmienku na víťazstvo a nakoniec, keď sa nastavia všetci hráči, začať hru."
 
+#: ../../data/scripting/win_condition_texts.lua:4
+msgid "Congratulations!"
+msgstr "Gratulujeme!"
+
+#: ../../data/scripting/win_condition_texts.lua:5
+msgid "You have won this game!"
+msgstr "Vyhrali ste túto hru!"
+
+#: ../../data/scripting/win_condition_texts.lua:9
+msgid "You are defeated!"
+msgstr "Utrpeli ste porážku!"
+
+#: ../../data/scripting/win_condition_texts.lua:10
+msgid ""
+"You lost your last warehouse and are therefore defeated. You may continue as"
+" spectator if you want."
+msgstr "Prehrali ste, lebo ste prišli o svoj posledný sklad. Ak chcete, môžete pokračovať ako divák."
+
+#: ../../data/scripting/win_condition_texts.lua:14
+msgid "You won"
+msgstr "Víťazstvo"
+
+#: ../../data/scripting/win_condition_texts.lua:15
+msgid "You are the winner!"
+msgstr "Zvíťazili ste!"
+
+#: ../../data/scripting/win_condition_texts.lua:19
+msgid "You lost"
+msgstr "Prehra"
+
+#: ../../data/scripting/win_condition_texts.lua:20
+msgid "You’ve lost this game!"
+msgstr "Prehrali ste túto hru!"
+
+#: ../../data/scripting/win_condition_texts.lua:24
+#: ../../src/wui/game_message_menu.cc:75 ../../src/wui/game_summary.cc:121
+msgid "Status"
+msgstr "Stav"
+
+#: ../../data/scripting/win_condition_texts.lua:25
+msgid "Player overview:"
+msgstr "Prehľad hráčov:"
+
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
 #: ../../src/ai/computer_player.cc:42
 msgid "No AI"
@@ -163,36 +278,6 @@ msgstr "Slabá AI"
 #: ../../src/ai/defaultai.h:128
 msgid "Very Weak AI"
 msgstr "Veľmi slabá AI"
-
-#. * TRANSLATORS: Concatenate the last 2 items on a list.
-#. * TRANSLATORS: RTL languages might want to change the word order here.
-#: ../../src/base/i18n.cc:335
-#, c-format
-msgid "%1$s & %2$s"
-msgstr "%1$s a %2$s"
-
-#. * TRANSLATORS: Join the last 2 items on a list with "or".
-#. * TRANSLATORS: RTL languages might want to change the word order here.
-#: ../../src/base/i18n.cc:339
-#, c-format
-msgid "%1$s or %2$s"
-msgstr "%1$s alebo %2$s"
-
-#. * TRANSLATORS: Join the last 2 items on a list with a comma.
-#. * TRANSLATORS: RTL languages might want to change the word order here.
-#. * TRANSLATORS: Concatenate 2 items at in the middle of a list.
-#. * TRANSLATORS: RTL languages might want to change the word order here.
-#: ../../src/base/i18n.cc:343 ../../src/base/i18n.cc:353
-#, c-format
-msgid "%1$s, %2$s"
-msgstr "%1$s, %2$s"
-
-#. * TRANSLATORS: Concatenate the last 2 items on a list.
-#. * TRANSLATORS: RTL languages might want to change the word order here.
-#: ../../src/base/i18n.cc:347
-#, c-format
-msgid "%1$s and %2$s"
-msgstr "%1$s a %2$s"
 
 #. * TRANSLATORS: January. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
@@ -447,8 +532,8 @@ msgstr "tažit"
 msgid "port"
 msgstr "prístav"
 
-#. * TRANSLATORS: Editor terrain property: units can walk on this terrain
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
+#. * TRANSLATORS: Editor terrain property: units can walk on this terrain
 #: ../../src/editor/tools/editor_info_tool.cc:77
 #: ../../src/logic/map_objects/world/terrain_description.cc:76
 msgid "walkable"
@@ -1100,14 +1185,14 @@ msgstr "rozobratých %u %%"
 
 #. * TRANSLATORS: %1% is the number of soldiers the plural refers to
 #. * TRANSLATORS: %2% is the maximum number of soldier slots in the building
-#: ../../src/logic/map_objects/tribes/militarysite.cc:126
+#: ../../src/logic/map_objects/tribes/militarysite.cc:127
 msgid "%1% soldier (+%2%)"
 msgid_plural "%1% soldiers (+%2%)"
 msgstr[0] "%1% vojak (+%2%)"
 msgstr[1] "%1% vojaci (+%2%)"
 msgstr[2] "%1% vojakov (+%2%)"
 
-#: ../../src/logic/map_objects/tribes/militarysite.cc:131
+#: ../../src/logic/map_objects/tribes/militarysite.cc:132
 #, c-format
 msgid "%u soldier"
 msgid_plural "%u soldiers"
@@ -1115,7 +1200,7 @@ msgstr[0] "%u vojak"
 msgstr[1] "%u vojaci"
 msgstr[2] "%u vojakov"
 
-#: ../../src/logic/map_objects/tribes/militarysite.cc:140
+#: ../../src/logic/map_objects/tribes/militarysite.cc:141
 msgid "%1%(+%2%) soldier (+%3%)"
 msgid_plural "%1%(+%2%) soldiers (+%3%)"
 msgstr[0] "%1%(+%2%) vojak (+%3%)"
@@ -1124,7 +1209,7 @@ msgstr[2] "%1%(+%2%) vojakov (+%3%)"
 
 #. * TRANSLATORS: %1% is the number of soldiers the plural refers to
 #. * TRANSLATORS: %2% are currently open soldier slots in the building
-#: ../../src/logic/map_objects/tribes/militarysite.cc:145
+#: ../../src/logic/map_objects/tribes/militarysite.cc:146
 msgid "%1%(+%2%) soldier"
 msgid_plural "%1%(+%2%) soldiers"
 msgstr[0] "%1%(+%2%) vojak"
@@ -1132,33 +1217,33 @@ msgstr[1] "%1%(+%2%) vojaci"
 msgstr[2] "%1%(+%2%) vojakov"
 
 #. * TRANSLATORS: Militarysite lost (taken/destroyed by enemy)
-#: ../../src/logic/map_objects/tribes/militarysite.cc:871
+#: ../../src/logic/map_objects/tribes/militarysite.cc:876
 msgctxt "building"
 msgid "Lost!"
 msgstr "Strata!"
 
-#: ../../src/logic/map_objects/tribes/militarysite.cc:873
+#: ../../src/logic/map_objects/tribes/militarysite.cc:878
 msgid "Militarysite lost!"
 msgstr "Strata vojenskej budovy!"
 
 #. * TRANSLATORS: Message title.
 #. * TRANSLATORS: If you run out of space, you can also translate this as
 #. "Success!"
-#: ../../src/logic/map_objects/tribes/militarysite.cc:916
+#: ../../src/logic/map_objects/tribes/militarysite.cc:921
 msgid "Enemy Defeated!"
 msgstr "Porážka nepriateľa"
 
-#: ../../src/logic/map_objects/tribes/militarysite.cc:918
+#: ../../src/logic/map_objects/tribes/militarysite.cc:923
 msgid "Enemy at site defeated!"
 msgstr "Nepriateľ na mieste porazený!"
 
 #. * TRANSLATORS: Militarysite is being attacked
-#: ../../src/logic/map_objects/tribes/militarysite.cc:969
+#: ../../src/logic/map_objects/tribes/militarysite.cc:974
 msgctxt "building"
 msgid "Attack!"
 msgstr "Útok!"
 
-#: ../../src/logic/map_objects/tribes/militarysite.cc:971
+#: ../../src/logic/map_objects/tribes/militarysite.cc:976
 msgid "You are under attack"
 msgstr "Útočí na vás nepriateľ"
 
@@ -1835,7 +1920,7 @@ msgstr "Nebola vynútená žiadna pauza – nie je čo ukončiť."
 
 #: ../../src/network/nethost.cc:470
 msgid "Invalid command! Type /help for a list of commands."
-msgstr "Neplatný príkaz! Napíšte /help, ak chcete vidieť zoznam príkazov."
+msgstr "Neplatný príkaz! Ak chcete vypísať zoznam príkazov, napíšte /help."
 
 #: ../../src/network/nethost.cc:1634
 #, c-format
@@ -1872,7 +1957,7 @@ msgstr "Server opustil hru."
 
 #: ../../src/network/network_gaming_messages.cc:126
 msgid "The game has started just after you tried to connect."
-msgstr "Hra sa začala práve po tom, ako ste sa pokúsili pripojiť."
+msgstr "Hra sa začala, hneď ako ste sa pokúsili pripojiť."
 
 #: ../../src/network/network_gaming_messages.cc:127
 msgid "Server has crashed and performed an emergency save."
@@ -3168,9 +3253,9 @@ msgstr "Zobraziť predošlú budovu"
 msgid "Show next building"
 msgstr "Zobraziť ďalšiu budovu"
 
+#. * TRANSLATORS Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
-#. * TRANSLATORS Buildings: owned / under construction
 #: ../../src/wui/building_statistics_menu.cc:713
 #: ../../src/wui/building_statistics_menu.cc:737
 #: ../../src/wui/building_statistics_menu.cc:739
@@ -3443,10 +3528,6 @@ msgstr "Názov"
 msgctxt "message"
 msgid "Type"
 msgstr "Typ"
-
-#: ../../src/wui/game_message_menu.cc:75 ../../src/wui/game_summary.cc:121
-msgid "Status"
-msgstr "Stav"
 
 #. * TRANSLATORS: We have very little space here. You can also translate this
 #. as "Time" or "Time Sent"

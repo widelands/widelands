@@ -377,6 +377,8 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 			for (const TribeBasicInfo& tribeinfo : settings.tribes) {
 				if (tribeinfo.name == player_setting.tribe) {
 					init->set_title(_(tribeinfo.initializations.at(player_setting.initialization_index).descname));
+					init->set_tooltip(
+								_(tribeinfo.initializations.at(player_setting.initialization_index).tooltip));
 					break;
 				}
 			}

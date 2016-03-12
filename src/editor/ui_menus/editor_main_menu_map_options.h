@@ -48,7 +48,7 @@ private:
 	void clicked_cancel();
 	void add_tag_checkbox(UI::Box* box, std::string tag, std::string displ_name);
 
-	const int padding_, indent_, labelh_, checkbox_space_, butw_, buth_, max_w_;
+	const unsigned int padding_, indent_, labelh_, checkbox_space_, butw_, max_w_;
 
 	UI::Button ok_, cancel_;
 

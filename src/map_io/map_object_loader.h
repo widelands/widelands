@@ -60,9 +60,9 @@ public:
 	// kinds of map objects have suitable default constructors.
 	template<typename T> T & register_object(Serial const n, T & object) {
 		ReverseMapObjectMap::const_iterator const existing =
-			objects_.find(n);
+			m_objects.find(n);
 		if (existing != objects_.end()) {
-			//delete &object; can not do this
+			// delete &object; can not do this
 			throw GameDataError("already loaded (%s)", to_string(existing->second->descr().type()).c_str());
 		}
 		objects_.insert(std::pair<Serial, MapObject *>(n, &object));

@@ -41,7 +41,7 @@
 #define NUM_VIEWS 5
 #define REFRESH_TIME 5000
 
-//Holds information for a view
+// Holds information for a view
 struct WatchWindowView {
 	Point view_point;
 	Widelands::ObjectPointer tracking; //  if non-null, we're tracking a Bob
@@ -168,7 +168,7 @@ void WatchWindow::add_view(Widelands::Coords const coords) {
 		toggle_buttons();
 }
 
-//Calc point on map from coords
+// Calc point on map from coords
 Point WatchWindow::calc_coords(Widelands::Coords const coords) {
 	// Initial positioning
 	int32_t vx = (coords.x + (coords.y & 1) * 0.5) * TRIANGLE_WIDTH;
@@ -179,7 +179,7 @@ Point WatchWindow::calc_coords(Widelands::Coords const coords) {
 	return Point(vx - mapview.get_w() / 2, vy - height - mapview.get_h() / 2);
 }
 
-//Switch to next view
+// Switch to next view
 void WatchWindow::next_view(bool const first) {
 	if (!first && views.size() == 1)
 		return;
@@ -193,13 +193,13 @@ void WatchWindow::next_view(bool const first) {
 }
 
 
-//Saves the coordinates of a view if it was already shown (and possibly moved)
+// Saves the coordinates of a view if it was already shown (and possibly moved)
 void WatchWindow::save_coords() {
 	views[cur_index].view_point = mapview.get_viewpoint();
 }
 
 
-//Enables/Disables buttons for views
+// Enables/Disables buttons for views
 void WatchWindow::toggle_buttons() {
 	for (uint32_t i = 0; i < NUM_VIEWS; ++i) {
 		if (i < views.size()) {
@@ -212,7 +212,7 @@ void WatchWindow::toggle_buttons() {
 	}
 }
 
-//Draws the current view
+// Draws the current view
 void WatchWindow::show_view(bool) {
 	mapview.set_viewpoint(views[cur_index].view_point, true);
 }
@@ -264,7 +264,7 @@ When the user drags the mapview, we stop tracking.
 ===============
 */
 void WatchWindow::stop_tracking_by_drag(int32_t, int32_t) {
-	//Disable switching while dragging
+	// Disable switching while dragging
 	if (mapview.is_dragging()) {
 		last_visit = game().get_gametime();
 		views[cur_index].tracking = nullptr;

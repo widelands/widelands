@@ -123,7 +123,7 @@ GameMainMenuSaveGame::GameMainMenuSaveGame
 	} else {
 		// Display current game infos
 		{
-			//Try to translate the map name.
+			// Try to translate the map name.
 			i18n::Textdomain td("maps");
 			mapname_.set_text(_(parent.game().get_map()->get_name()));
 		}
@@ -158,7 +158,7 @@ void GameMainMenuSaveGame::selected(uint32_t) {
 	}
 	button_ok_->set_enabled(true);
 
-	//Try to translate the map name.
+	// Try to translate the map name.
 	{
 		i18n::Textdomain td("maps");
 		mapname_.set_text(_(gpdp.get_mapname()));

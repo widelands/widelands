@@ -687,7 +687,7 @@ void Fleet::act(Game & game, uint32_t /* data */)
 	std::list<uint16_t> waiting_ports;
 
 	// this is just helper - first member of scores map
-	std::pair<uint16_t, uint16_t> mapping; //ship number, port number
+	std::pair<uint16_t, uint16_t> mapping; // ship number, port number
 
 	// first we go over ships - idle ones (=without destination)
 	// then over wares on these ships and create first ship-port
@@ -714,7 +714,7 @@ void Fleet::act(Game & game, uint32_t /* data */)
 				continue;
 			}
 
-			bool destination_found = false; //just a functional check
+			bool destination_found = false; // Just a functional check
 			for (uint16_t p = 0; p < ports_.size(); p += 1) {
 				if (ports_[p] ==  ships_[s]->items_[i].get_destination(game)) {
 					mapping.first = s;
@@ -765,7 +765,7 @@ void Fleet::act(Game & game, uint32_t /* data */)
 
 			mapping.first = s;
 			mapping.second = p;
-			// folowing aproximately considers free capacity of a ship
+			// following aproximately considers free capacity of a ship
 			scores[mapping] += ((ships_[s]->get_nritems() > 15)?1:3)
 			+
 			std::min(
@@ -774,8 +774,8 @@ void Fleet::act(Game & game, uint32_t /* data */)
 		}
 	}
 
-	//now adding score for distance
-	for (std::pair<std::pair<uint16_t, uint16_t>, uint16_t> ship_port_relation : scores) {
+	// Now adding score for distance
+	for (auto ship_port_relation : scores) {
 
 		// here we get distance ship->port
 		// possibilities are:
@@ -828,7 +828,7 @@ void Fleet::act(Game & game, uint32_t /* data */)
 		best_score = 0;
 
 		// searching for combination with highest score
-		for (std::pair<std::pair<uint16_t, uint16_t>, uint16_t> combination : scores) {
+		for (const auto& combination : scores) {
 			if (combination.second > best_score) {
 				best_score = combination.second;
 				best_ship = combination.first.first;

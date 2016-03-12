@@ -109,7 +109,8 @@ Window::Window
 */
 void Window::set_title(const string & text)
 {
-	title_ = is_richtext(text) ? text : as_window_title(text);
+	assert(!is_richtext(text));
+	title_ = text;
 }
 
 /**
@@ -312,9 +313,10 @@ void Window::draw_border(RenderTarget & dst)
 
 	// draw the title if we have one
 	if (!title_.empty()) {
+		// The title shouldn't be richtext, but we escape it just to make sure.
 		dst.blit
 			(Point(get_lborder() + get_inner_w() / 2, TP_B_PIXMAP_THICKNESS / 2),
-				UI::g_fh1->render(title_),
+			 autofit_ui_text(richtext_escape(title_), get_inner_w(), UI_FONT_CLR_FG, 13),
 				BlendMode::UseAlpha,
 				UI::Align::kCenter);
 	}

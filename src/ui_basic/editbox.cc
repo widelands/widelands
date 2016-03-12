@@ -76,7 +76,8 @@ EditBox::EditBox
 	 const Image* background,
 	 int font_size)
 	:
-	Panel(parent, x, y, w, UI::g_fh1->render(as_uifont("."), font_size)->height() + 2),
+	Panel(parent, x, y, w, UI::g_fh1->render(as_uifont(UI::g_fh1->fontset()->representative_character()),
+														  font_size)->height() + 2),
 	m_(new EditBoxImpl),
 	history_active_(false),
 	history_position_(-1)
@@ -84,11 +85,11 @@ EditBox::EditBox
 	set_thinks(false);
 
 	m_->background = background;
-	m_->fontname = UI::g_fh1->fontset().serif();
+	m_->fontname = UI::g_fh1->fontset()->sans();
 	m_->fontsize = font_size;
 
 	// Set alignment to the UI language's principal writing direction
-	m_->align = UI::g_fh1->fontset().is_rtl() ? UI::Align::kCenterRight : UI::Align::kCenterLeft;
+	m_->align = UI::g_fh1->fontset()->is_rtl() ? UI::Align::kCenterRight : UI::Align::kCenterLeft;
 	m_->caret = 0;
 	m_->scrolloffset = 0;
 	// yes, use *signed* max as maximum length; just a small safe-guard.
@@ -187,7 +188,7 @@ bool EditBox::handle_mouserelease(const uint8_t btn, int32_t, int32_t)
  * Handle keypress/release events
  */
 // TODO(unknown): Text input works only because code.unicode happens to map to ASCII for
-// ASCII characters (--> //HERE). Instead, all user editable strings should be
+// ASCII characters (--> // HERE). Instead, all user editable strings should be
 // real unicode.
 bool EditBox::handle_key(bool const down, SDL_Keysym const code)
 {
@@ -198,7 +199,7 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code)
 			return true;
 
 		case SDLK_TAB:
-			//let the panel handle the tab key
+			// Let the panel handle the tab key
 			return false;
 
 		case SDLK_KP_ENTER:
@@ -409,7 +410,7 @@ void EditBox::draw(RenderTarget & odst)
 	// Crop to max_width while blitting
 	if (max_width < linewidth) {
 		// Fix positioning for BiDi languages.
-		if (UI::g_fh1->fontset().is_rtl()) {
+		if (UI::g_fh1->fontset()->is_rtl()) {
 			point.x = 0;
 		}
 		// We want this always on, e.g. for mixed language savegame filenames

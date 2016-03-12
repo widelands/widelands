@@ -31,7 +31,7 @@ abilities = {
       p(_[[Take a look at the soldiers that are on their way to our military buildings. They look different from normal workers: they have a health bar over their head that displays their remaining health, and they have four symbols, which symbolize the individual soldier’s current levels in the four different categories: health, attack, defense and evade.]]) ..
       p(_[[If a Barbarian soldier is fully trained, he has level 3 health, level 5 attack, level 0 defense and level 2 evade. This is one fearsome warrior then! The individual abilities have the following meaning:]])
    ) ..
-   rt("image=tribes/workers/barbarians/soldier/hp_level0.png", h2(_"Health:"))..
+   rt("image=tribes/workers/barbarians/soldier/health_level0.png", h2(_"Health:"))..
    rt(p(_[[The total life of a soldier. A Barbarian soldier starts with 130 health, and he will gain 28 health with each health level.]])) ..
    rt("image=tribes/workers/barbarians/soldier/attack_level0.png", h2(_"Attack:")) ..
    rt(p(_[[The amount of damage a soldier will inflict on the enemy when an attack is successful. A Barbarian soldier with attack level 0 inflicts ~14 points of health damage when he succeeds in hitting an enemy. For each attack level, he gains 7 damage points.]])) ..

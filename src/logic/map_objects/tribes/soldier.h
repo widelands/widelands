@@ -37,8 +37,6 @@ namespace Widelands {
 class EditorGameBase;
 class Battle;
 
-#define HP_FRAMECOLOR RGBColor(255, 255, 255)
-
 class SoldierDescr : public WorkerDescr {
 public:
 	friend class Economy;
@@ -47,33 +45,37 @@ public:
 					 const LuaTable& t, const EditorGameBase& egbase);
 	~SoldierDescr() override {}
 
-	uint32_t get_max_hp_level          () const {return max_hp_level_;}
-	uint32_t get_max_attack_level      () const {return max_attack_level_;}
-	uint32_t get_max_defense_level     () const {return max_defense_level_;}
-	uint32_t get_max_evade_level       () const {return max_evade_level_;}
+	uint32_t get_max_health_level      () const {return health_.max_level;}
+	uint32_t get_max_attack_level      () const {return attack_.max_level;}
+	uint32_t get_max_defense_level     () const {return defense_.max_level;}
+	uint32_t get_max_evade_level       () const {return evade_.max_level;}
 
-	uint32_t get_base_hp        () const {return base_hp_;}
-	uint32_t get_base_min_attack() const {return min_attack_;}
-	uint32_t get_base_max_attack() const {return max_attack_;}
-	uint32_t get_base_defense   () const {return defense_;}
-	uint32_t get_base_evade     () const {return evade_;}
+	uint32_t get_base_health    () const {return health_.base;}
+	uint32_t get_base_min_attack() const {return attack_.base;}
+	uint32_t get_base_max_attack() const {return attack_.maximum;}
+	uint32_t get_base_defense   () const {return defense_.base;}
+	uint32_t get_base_evade     () const {return evade_.base;}
 
-	uint32_t get_hp_incr_per_level     () const {return hp_incr_;}
-	uint32_t get_attack_incr_per_level () const {return attack_incr_;}
-	uint32_t get_defense_incr_per_level() const {return defense_incr_;}
-	uint32_t get_evade_incr_per_level  () const {return evade_incr_;}
+	uint32_t get_health_incr_per_level () const {return health_.increase;}
+	uint32_t get_attack_incr_per_level () const {return attack_.increase;}
+	uint32_t get_defense_incr_per_level() const {return defense_.increase;}
+	uint32_t get_evade_incr_per_level  () const {return evade_.increase;}
 
-	const Image* get_hp_level_pic     (uint32_t const level) const {
-		assert(level <= max_hp_level_);      return hp_pics_     [level];
+	const Image* get_health_level_pic(uint32_t const level) const {
+		assert(level <= get_max_health_level());
+		return health_.images[level];
 	}
-	const Image* get_attack_level_pic (uint32_t const level) const {
-		assert(level <= max_attack_level_);  return attack_pics_ [level];
+	const Image* get_attack_level_pic(uint32_t const level) const {
+		assert(level <= get_max_attack_level());
+		return attack_.images[level];
 	}
 	const Image* get_defense_level_pic(uint32_t const level) const {
-		assert(level <= max_defense_level_); return defense_pics_[level];
+		assert(level <= get_max_defense_level());
+		return defense_.images[level];
 	}
-	const Image* get_evade_level_pic  (uint32_t const level) const {
-		assert(level <= max_evade_level_);   return evade_pics_  [level];
+	const Image* get_evade_level_pic(uint32_t const level) const {
+		assert(level <= get_max_evade_level());
+		return evade_.images[level];
 	}
 
 	uint32_t get_rand_anim(Game & game, const char * const name) const;
@@ -81,36 +83,24 @@ public:
 protected:
 	Bob & create_object() const override;
 
-	//  start values
-	uint32_t base_hp_;
-	uint32_t min_attack_;
-	uint32_t max_attack_;
-	uint32_t defense_;
-	uint32_t evade_;
+private:
+	// Health, Attack, Defense and Evade values.
+	struct BattleAttribute {
+		BattleAttribute(std::unique_ptr<LuaTable> table);
 
-	//  per level increases
-	uint32_t hp_incr_;
-	uint32_t attack_incr_;
-	uint32_t defense_incr_;
-	uint32_t evade_incr_;
+		uint32_t base; // Base value
+		uint32_t maximum; // Maximum value for randomizing attack values
+		uint32_t increase; // Per level increase
+		uint32_t max_level; // Maximum level
+		std::vector<const Image* > images; // Level images
+	};
 
-	//  max levels
-	uint32_t max_hp_level_;
-	uint32_t max_attack_level_;
-	uint32_t max_defense_level_;
-	uint32_t max_evade_level_;
+	BattleAttribute health_;
+	BattleAttribute attack_;
+	BattleAttribute defense_;
+	BattleAttribute evade_;
 
-	//  level pictures
-	std::vector<const Image* >   hp_pics_;
-	std::vector<const Image* >   attack_pics_;
-	std::vector<const Image* >   evade_pics_;
-	std::vector<const Image* >   defense_pics_;
-	std::vector<std::string> hp_pics_fn_;
-	std::vector<std::string> attack_pics_fn_;
-	std::vector<std::string> evade_pics_fn_;
-	std::vector<std::string> defense_pics_fn_;
-
-	// animation names
+	// Battle animation names
 	std::vector<std::string> attack_success_w_name_;
 	std::vector<std::string> attack_failure_w_name_;
 	std::vector<std::string> evade_success_w_name_;
@@ -123,7 +113,6 @@ protected:
 	std::vector<std::string> evade_failure_e_name_;
 	std::vector<std::string> die_e_name_;
 
-private:
 	// Reads list of animation names from the table and pushes them into result.
 	void add_battle_animation(std::unique_ptr<LuaTable> table, std::vector<std::string>* result);
 
@@ -145,7 +134,7 @@ enum CombatWalkingDir {
 enum CombatFlags {
 	/// Soldier will wait enemies at his building flag. Only for defenders.
 	CF_DEFEND_STAYHOME = 1,
-	/// When current hitpoints goes under a fixed percentage, soldier will flee
+	/// When current health points drop below a fixed percentage, soldier will flee
 	/// and heal inside military building
 	CF_RETREAT_WHEN_INJURED = 2,
 	/// Attackers would try avoid entering combat with others soldiers but 'flag
@@ -165,17 +154,17 @@ public:
 	void cleanup(EditorGameBase &) override;
 
 	void set_level
-		(uint32_t hp, uint32_t attack, uint32_t defense, uint32_t evade);
-	void set_hp_level     (uint32_t);
+		(uint32_t health, uint32_t attack, uint32_t defense, uint32_t evade);
+	void set_health_level (uint32_t);
 	void set_attack_level (uint32_t);
 	void set_defense_level(uint32_t);
 	void set_evade_level  (uint32_t);
 	uint32_t get_level (TrainingAttribute) const;
-	uint32_t get_hp_level     () const {return hp_level_;}
+	uint32_t get_health_level () const {return health_level_;}
 	uint32_t get_attack_level () const {return attack_level_;}
 	uint32_t get_defense_level() const {return defense_level_;}
 	uint32_t get_evade_level  () const {return evade_level_;}
-	uint32_t get_total_level () const {return hp_level_ + attack_level_ + defense_level_ + evade_level_;}
+	uint32_t get_total_level  () const {return health_level_ + attack_level_ + defense_level_ + evade_level_;}
 
 	/// Automatically select a task.
 	void init_auto_task(Game &) override;
@@ -188,15 +177,15 @@ public:
 		(const TribeDescr &, uint32_t & w, uint32_t & h);
 	void draw_info_icon(RenderTarget &, Point, bool anchor_below) const;
 
-	uint32_t get_current_hitpoints() const {return hp_current_;}
-	uint32_t get_max_hitpoints() const;
+	uint32_t get_current_health() const {return current_health_;}
+	uint32_t get_max_health() const;
 	uint32_t get_min_attack() const;
 	uint32_t get_max_attack() const;
 	uint32_t get_defense() const;
 	uint32_t get_evade() const;
 
-	const Image* get_hp_level_pic     () const {
-		return descr().get_hp_level_pic     (hp_level_);
+	const Image* get_health_level_pic () const {
+		return descr().get_health_level_pic(health_level_);
 	}
 	const Image* get_attack_level_pic () const {
 		return descr().get_attack_level_pic (attack_level_);
@@ -208,15 +197,15 @@ public:
 		return descr().get_evade_level_pic  (evade_level_);
 	}
 
-	int32_t get_training_attribute(uint32_t attr) const override;
+	int32_t get_training_attribute(TrainingAttribute attr) const override;
 
 	/// Sets a random animation of desired type and start playing it.
 	void start_animation
 		(EditorGameBase &, char const * animname, uint32_t time);
 
-	/// Heal quantity of hit points instantly
+	/// Heal quantity of health points instantly
 	void heal (uint32_t);
-	void damage (uint32_t); /// Damage quantity of hit points
+	void damage (uint32_t); /// Damage quantity of health points
 
 	void log_general_info(const EditorGameBase &) override;
 
@@ -262,8 +251,8 @@ protected:
 	bool is_evict_allowed() override;
 
 private:
-	uint32_t hp_current_;
-	uint32_t hp_level_;
+	uint32_t current_health_;
+	uint32_t health_level_;
 	uint32_t attack_level_;
 	uint32_t defense_level_;
 	uint32_t evade_level_;
@@ -284,7 +273,7 @@ private:
 	 */
 	Battle * battle_;
 
-	static constexpr uint8_t kSoldierHpBarWidth = 13;
+	static constexpr uint8_t kSoldierHealthBarWidth = 13;
 
 	/// Number of consecutive blocked signals until the soldiers are considered permanently stuck
 	static constexpr uint8_t kBockCountIsStuck = 10;
