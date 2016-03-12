@@ -719,7 +719,7 @@ ProductionProgram::ActWorker::ActWorker(
 		const WorkareaInfo & worker_workarea_info =
 			main_worker_descr.get_program(program_)->get_workarea_info();
 
-		for (const std::pair<uint32_t, std::set<std::string> >& area_info : worker_workarea_info) {
+		for (const auto& area_info : worker_workarea_info) {
 			std::set<std::string> & building_radius_infos =
 				descr->workarea_info_[area_info.first];
 
@@ -921,7 +921,7 @@ void ProductionProgram::ActConsume::execute
 		const TribeDescr & tribe = ps.owner().tribe();
 
 		std::vector<std::string> group_list;
-		for (const WareTypeGroup& group : l_groups) {
+		for (const auto& group : l_groups) {
 			assert(group.first.size());
 
 			std::vector<std::string> ware_list;
@@ -1785,11 +1785,11 @@ ProductionProgram::ProductionProgram(const std::string& init_name,
 		}
 
 		const ProductionProgram::Action& action = *actions_.back().get();
-		for (const WareTypeGroup& group : action.consumed_wares()) {
+		for (const auto& group : action.consumed_wares()) {
 			consumed_wares_.push_back(group);
 		}
 		// Add produced wares. If the ware already exists, increase the amount
-		for (const WareAmount& ware : action.produced_wares()) {
+		for (const auto& ware : action.produced_wares()) {
 			if (produced_wares_.count(ware.first) == 1) {
 				produced_wares_.at(ware.first) += ware.second;
 			} else {
@@ -1797,7 +1797,7 @@ ProductionProgram::ProductionProgram(const std::string& init_name,
 			}
 		}
 		// Add recruited workers. If the worker already exists, increase the amount
-		for (const WareAmount& worker : action.recruited_workers()) {
+		for (const auto& worker : action.recruited_workers()) {
 			if (recruited_workers_.count(worker.first) == 1) {
 				recruited_workers_.at(worker.first) += worker.second;
 			} else {

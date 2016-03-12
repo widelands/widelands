@@ -67,7 +67,7 @@ public:
 
 	uint32_t nr_working_positions() const {
 		uint32_t result = 0;
-		for (const WareAmount& working_pos : working_positions()) {
+		for (const auto& working_pos : working_positions()) {
 			result += working_pos.second;
 		}
 		return result;

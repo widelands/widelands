@@ -769,7 +769,7 @@ PlayerImmovable::Workers Warehouse::get_incorporated_workers()
 {
 	PlayerImmovable::Workers all_workers;
 
-	for (const std::pair<DescriptionIndex, WorkerList>& worker_pair : incorporated_workers_) {
+	for (const auto& worker_pair : incorporated_workers_) {
 		for (Worker * worker : worker_pair.second) {
 			all_workers.push_back(worker);
 		}
@@ -1059,7 +1059,7 @@ bool Warehouse::can_create_worker(Game &, DescriptionIndex const worker) const {
 	}
 
 	//  see if we have the resources
-	for (const std::pair<std::string, uint8_t>& buildcost : w_desc.buildcost()) {
+	for (const auto& buildcost : w_desc.buildcost()) {
 		const std::string & input_name = buildcost.first;
 		DescriptionIndex id_w = owner().tribe().ware_index(input_name);
 		if (owner().tribe().has_ware(id_w)) {
@@ -1089,7 +1089,7 @@ void Warehouse::create_worker(Game & game, DescriptionIndex const worker) {
 
 	const WorkerDescr & w_desc = *owner().tribe().get_worker_descr(worker);
 
-	for (const std::pair<std::string, uint8_t>& buildcost : w_desc.buildcost()) {
+	for (const auto& buildcost : w_desc.buildcost()) {
 		const std::string & input = buildcost.first;
 		DescriptionIndex const id_ware = owner().tribe().ware_index(input);
 		if (owner().tribe().has_ware(id_ware)) {
@@ -1137,7 +1137,7 @@ std::vector<uint32_t> Warehouse::calc_available_for_worker
 	const WorkerDescr & w_desc = *owner().tribe().get_worker_descr(index);
 	std::vector<uint32_t> available;
 
-	for (const std::pair<std::string, uint8_t>& buildcost : w_desc.buildcost()) {
+	for (const auto& buildcost : w_desc.buildcost()) {
 		const std::string & input_name = buildcost.first;
 		DescriptionIndex id_w = owner().tribe().ware_index(input_name);
 		if (owner().tribe().has_ware(id_w)) {
@@ -1192,7 +1192,7 @@ void Warehouse::plan_workers(Game & game, DescriptionIndex index, uint32_t amoun
 		pw->amount = 0;
 
 		const WorkerDescr & w_desc = *owner().tribe().get_worker_descr(pw->index);
-		for (const std::pair<std::string, uint8_t>& buildcost : w_desc.buildcost()) {
+		for (const auto& buildcost : w_desc.buildcost()) {
 			const std::string & input_name = buildcost.first;
 
 			DescriptionIndex id_w = owner().tribe().ware_index(input_name);
@@ -1231,7 +1231,7 @@ void Warehouse::update_planned_workers
 	}
 
 	uint32_t idx = 0;
-	for (const std::pair<std::string, uint8_t>& buildcost : w_desc.buildcost()) {
+	for (const auto& buildcost : w_desc.buildcost()) {
 
 		const std::string & input_name = buildcost.first;
 		uint32_t supply;

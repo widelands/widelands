@@ -389,7 +389,7 @@ bool SoundHandler::play_or_not
 
 	// starting a block, so I can define a local type for iterating
 	{
-		for (const std::pair<uint32_t, std::string> fx_pair : active_fx_) {
+		for (const auto& fx_pair : active_fx_) {
 			if (fx_pair.second == fx_name) {
 				already_running = true;
 				break;

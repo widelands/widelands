@@ -311,7 +311,7 @@ void GameMessageMenu::think()
 	}
 
 	// Add new messages to the list
-	for (const std::pair<MessageId, Message *>& temp_message : mq) {
+	for (const auto& temp_message : mq) {
 		MessageId      const id      =  temp_message.first;
 		const Message &       message = *temp_message.second;
 		Message::Status const status  = message.status();

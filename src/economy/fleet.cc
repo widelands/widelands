@@ -775,7 +775,7 @@ void Fleet::act(Game & game, uint32_t /* data */)
 	}
 
 	// Now adding score for distance
-	for (std::pair<std::pair<uint16_t, uint16_t>, uint16_t> ship_port_relation : scores) {
+	for (auto ship_port_relation : scores) {
 
 		// here we get distance ship->port
 		// possibilities are:
@@ -828,7 +828,7 @@ void Fleet::act(Game & game, uint32_t /* data */)
 		best_score = 0;
 
 		// searching for combination with highest score
-		for (std::pair<std::pair<uint16_t, uint16_t>, uint16_t> combination : scores) {
+		for (const auto& combination : scores) {
 			if (combination.second > best_score) {
 				best_score = combination.second;
 				best_ship = combination.first.first;

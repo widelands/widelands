@@ -577,7 +577,7 @@ void DefaultAI::late_initialization() {
 		if (bld.type() == MapObjectType::PRODUCTIONSITE) {
 			const ProductionSiteDescr& prod = dynamic_cast<const ProductionSiteDescr&>(bld);
 			bo.type = bld.get_ismine() ? BuildingObserver::Type::kMine : BuildingObserver::Type::kProductionsite;
-			for (const WareAmount& temp_input : prod.inputs()) {
+			for (const auto& temp_input : prod.inputs()) {
 				bo.inputs.push_back(temp_input.first);
 			}
 			for (const DescriptionIndex& temp_output : prod.output_ware_types()) {
@@ -671,7 +671,7 @@ void DefaultAI::late_initialization() {
 		if (bld.type() == MapObjectType::MILITARYSITE) {
 			bo.type = BuildingObserver::Type::kMilitarysite;
 			const MilitarySiteDescr& milit = dynamic_cast<const MilitarySiteDescr&>(bld);
-			for (const std::pair<unsigned char, unsigned char>& temp_buildcosts : milit.buildcost()) {
+			for (const auto& temp_buildcosts : milit.buildcost()) {
 				// bellow are non-critical wares (well, various types of wood)
 				if (tribe_->ware_index("log") == temp_buildcosts.first ||
 				    tribe_->ware_index("blackwood") == temp_buildcosts.first ||
@@ -691,7 +691,7 @@ void DefaultAI::late_initialization() {
 		if (bld.type() == MapObjectType::TRAININGSITE) {
 			bo.type = BuildingObserver::Type::kTrainingsite;
 			const TrainingSiteDescr& train = dynamic_cast<const TrainingSiteDescr&>(bld);
-			for (const WareAmount& temp_input : train.inputs()) {
+			for (const auto& temp_input : train.inputs()) {
 				bo.inputs.push_back(temp_input.first);
 
 				// collecting subsitutes
@@ -702,7 +702,7 @@ void DefaultAI::late_initialization() {
 					bo.substitute_inputs.insert(temp_input.first);
 				}
 
-				for (const std::pair<unsigned char, unsigned char>& temp_buildcosts : train.buildcost()) {
+				for (const auto& temp_buildcosts : train.buildcost()) {
 					// critical wares for trainingsites
 					if (tribe_->ware_index("spidercloth") == temp_buildcosts.first ||
 						tribe_->ware_index("gold") == temp_buildcosts.first ||
@@ -3110,7 +3110,7 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 	// Get max radius of recursive workarea
 	WorkareaInfo::size_type radius = 0;
 	const WorkareaInfo& workarea_info = site.bo->desc->workarea_info_;
-	for (const std::pair<uint32_t, std::set<std::string>>& temp_info : workarea_info) {
+	for (const auto& temp_info : workarea_info) {
 		if (radius < temp_info.first) {
 			radius = temp_info.first;
 		}
@@ -5884,7 +5884,7 @@ void DefaultAI::sort_task_pool() {
 // all levels)
 uint32_t DefaultAI::mines_in_constr() const {
 	uint32_t count = 0;
-	for (const std::pair<const int, MineTypesObserver> m : mines_per_type) {
+	for (const auto& m : mines_per_type) {
 		count += m.second.in_construction;
 	}
 	return count;
@@ -5892,7 +5892,7 @@ uint32_t DefaultAI::mines_in_constr() const {
 
 uint32_t DefaultAI::mines_built() const{
 	uint32_t count = 0;
-	for (const std::pair<const int, MineTypesObserver> m : mines_per_type) {
+	for (const auto& m : mines_per_type) {
 		count += m.second.finished;
 	}
 	return count;
@@ -5901,14 +5901,14 @@ uint32_t DefaultAI::mines_built() const{
 // following two functions count militarysites of the same size
 uint32_t DefaultAI::msites_in_constr() const {
 	uint32_t count = 0;
-	for (const std::pair<const int, MilitarySiteSizeObserver> m : msites_per_size) {
+	for (const auto& m : msites_per_size) {
 		count += m.second.in_construction;
 	}
 	return count;
 }
 uint32_t DefaultAI::msites_built() const{
 	uint32_t count = 0;
-	for (const std::pair<const int, MilitarySiteSizeObserver> m : msites_per_size) {
+	for (const auto& m : msites_per_size) {
 		count += m.second.finished;
 	}
 	return count;
