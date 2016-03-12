@@ -162,7 +162,7 @@ bool AbstractWaresDisplay::handle_mouserelease(uint8_t btn, int32_t x, int32_t y
 
 	// Release anchor, empty selection
 	selection_anchor_ = Widelands::INVALID_INDEX;
-	for (std::pair<const Widelands::DescriptionIndex&, bool> resetme : in_selection_) {
+	for (auto& resetme : in_selection_) {
 		in_selection_[resetme.first] = false;
 	}
 	return true;
@@ -207,7 +207,7 @@ void AbstractWaresDisplay::update_anchor_selection(int32_t x, int32_t y)
 		return;
 	}
 
-	for (std::pair<const Widelands::DescriptionIndex&, bool> resetme : in_selection_) {
+	for (auto& resetme : in_selection_) {
 		in_selection_[resetme.first] = false;
 	}
 

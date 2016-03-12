@@ -373,18 +373,18 @@ end
 --
 function building_help_dependencies_training(tribe, building_description)
    local result = ""
-   if (building_description.max_hp and building_description.min_hp) then
+   if (building_description.max_health and building_description.min_health) then
       result = result .. rt(h2(_"Health Training"))
       result = result .. rt(p(_"Trains ‘Health’ from %1% up to %2%":
-            bformat(building_description.min_hp, building_description.max_hp+1)))
+            bformat(building_description.min_health, building_description.max_health+1)))
       result = result .. rt(h3(_"Soldiers:"))
       result = result ..
          dependencies_basic({
-            "tribes/workers/" .. tribe.name .. "/soldier/hp_level" .. building_description.min_hp .. ".png",
+            "tribes/workers/" .. tribe.name .. "/soldier/health_level" .. building_description.min_health .. ".png",
             building_description.icon_name,
-            "tribes/workers/" .. tribe.name .. "/soldier/hp_level" .. (building_description.max_hp + 1) ..".png"})
-      result = result .. dependencies_training_food(building_description.food_hp)
-      result = result .. dependencies_training_weapons(building_description.weapons_hp)
+            "tribes/workers/" .. tribe.name .. "/soldier/health_level" .. (building_description.max_health + 1) ..".png"})
+      result = result .. dependencies_training_food(building_description.food_health)
+      result = result .. dependencies_training_weapons(building_description.weapons_health)
    end
    if (building_description.max_attack and building_description.min_attack) then
       result = result .. rt(h2(_"Attack Training"))

@@ -56,7 +56,7 @@ public:
 	 */
 	virtual void flush();
 
-	//TODO(unknown): implement an overloaded method that accepts fmt as std::string
+	// TODO(unknown): implement an overloaded method that accepts fmt as std::string
 	void print_f(char const *, ...) __attribute__((format(printf, 2, 3)));
 
 	void signed_8  (int8_t const x) {data(&x, 1);}

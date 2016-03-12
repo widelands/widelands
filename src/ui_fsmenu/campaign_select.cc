@@ -370,8 +370,7 @@ std::string FullscreenMenuCampaignMapSelect::get_map()
 }
 
 
-//telling this class what campaign we have and since we know what campaign we
-//have, fill it.
+// Telling this class what campaign we have and since we know what campaign we have, fill it.
 void FullscreenMenuCampaignMapSelect::set_campaign(uint32_t const i) {
 	campaign = i;
 	fill_table();

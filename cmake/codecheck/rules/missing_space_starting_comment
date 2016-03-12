@@ -1,0 +1,28 @@
+#!/usr/bin/python
+
+
+"""
+Comments should all start with a blank space
+"""
+
+error_msg = "Comments need to start with a space."
+
+strip_comments_and_strings = False
+regexp = r"""((^|\s)//[^\s/<!])|((^|\s)//<[^\s])|((^|\s)//!<[^\s])"""
+
+
+forbidden = [
+    '//spaceless comment',
+    '///spaceless comment',
+    '//<spaceless comment',
+    '///<spaceless comment',
+]
+
+allowed = [
+    '// nifty comment',
+    '/// nifty comment',
+    '//< we have a lot of those',
+    '///< we have a lot of those',
+    '//!< and some of those',
+    '///!< and some of those',
+]

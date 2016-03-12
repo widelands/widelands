@@ -121,7 +121,7 @@ BuildingDescr::BuildingDescr
 			//  Merge the enhancements workarea info into this building's
 			//  workarea info.
 			const BuildingDescr * tmp_enhancement = egbase_.tribes().get_building_descr(en_i);
-			for (std::pair<uint32_t, std::set<std::string>> area : tmp_enhancement->workarea_info_)
+			for (auto area : tmp_enhancement->workarea_info_)
 			{
 				std::set<std::string> & strs = workarea_info_[area.first];
 				for (std::string str : area.second)

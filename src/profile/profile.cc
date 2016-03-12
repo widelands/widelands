@@ -849,8 +849,8 @@ void Profile::read
 		}
 	}
 	catch (const FileNotFoundError &) {
-		//It's no problem if the config file does not exist. (It'll get
-		//written on exit anyway)
+		// It's no problem if the config file does not exist. (It'll get
+		// written on exit anyway)
 		log("There's no configuration file, using default values.\n");
 	}
 	catch (const std::exception & e) {

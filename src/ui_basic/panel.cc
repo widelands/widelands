@@ -112,9 +112,9 @@ Panel::~Panel()
  * Free all of the panel's children.
  */
 void Panel::free_children() {
-	//Scan-build claims this results in double free.
-	//This is a false positive.
-	//See https://bugs.launchpad.net/widelands/+bug/1198928
+	// Scan-build claims this results in double free.
+	// This is a false positive.
+	// See https://bugs.launchpad.net/widelands/+bug/1198928
 	while (first_child_) delete first_child_;
 }
 

@@ -114,7 +114,7 @@ ProductionSiteDescr::ProductionSiteDescr
 				}
 				DescriptionIndex const idx = egbase.tribes().ware_index(ware_name);
 				if (egbase.tribes().ware_exists(idx)) {
-					for (const WareAmount& temp_inputs : inputs()) {
+					for (const auto& temp_inputs : inputs()) {
 						if (temp_inputs.first == idx) {
 							throw wexception("duplicated");
 						}
@@ -143,7 +143,7 @@ ProductionSiteDescr::ProductionSiteDescr
 				}
 				DescriptionIndex const woi = egbase.tribes().worker_index(worker_name);
 				if (egbase.tribes().worker_exists(woi)) {
-					for (const WareAmount& wp : working_positions()) {
+					for (const auto& wp : working_positions()) {
 						if (wp.first == woi) {
 							throw wexception("duplicated");
 						}
@@ -326,7 +326,7 @@ bool ProductionSite::has_workers(DescriptionIndex targetSite, Game & /* game */)
 
 			}
 
-			//if we are here, all needs are satisfied
+			// If we are here, all needs are satisfied
 			return true;
 
 		} else {
@@ -426,7 +426,7 @@ void ProductionSite::init(EditorGameBase & egbase)
 
 	//  Request missing workers.
 	WorkingPosition * wp = working_positions_;
-	for (const WareAmount& temp_wp : descr().working_positions()) {
+	for (const auto& temp_wp : descr().working_positions()) {
 		DescriptionIndex const worker_index = temp_wp.first;
 		for (uint32_t j =  temp_wp.second; j; --j, ++wp)
 			if (Worker * const worker = wp->worker)
@@ -543,7 +543,7 @@ void ProductionSite::remove_worker(Worker & w)
 	molog("%s leaving\n", w.descr().descname().c_str());
 	WorkingPosition * wp = working_positions_;
 
-	for (const WareAmount& temp_wp : descr().working_positions()) {
+	for (const auto& temp_wp : descr().working_positions()) {
 		DescriptionIndex const worker_index = temp_wp.first;
 		for (uint32_t j = temp_wp.second; j; --j, ++wp) {
 			Worker * const worker = wp->worker;
@@ -938,13 +938,11 @@ void ProductionSite::program_end(Game & game, ProgramResult const result)
 
 	switch (result) {
 	case Failed:
-		//changed by TB below
 		statistics_.erase(statistics_.begin(), statistics_.begin() + 1);
 		statistics_.push_back(false);
 		calc_statistics();
 		crude_percent_ = crude_percent_ * 8 / 10;
 		break;
-		//end of changed by TB
 	case Completed:
 		skipped_programs_.erase(program_name);
 		statistics_.erase(statistics_.begin(), statistics_.begin() + 1);
@@ -955,9 +953,7 @@ void ProductionSite::program_end(Game & game, ProgramResult const result)
 		break;
 	case Skipped:
 		skipped_programs_[program_name] = game.get_gametime();
-		//changed by TB below
 		crude_percent_ = crude_percent_ * 98 / 100;
-		//end of changed by TB
 		break;
 	case None:
 		break;

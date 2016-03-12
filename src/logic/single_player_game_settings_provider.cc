@@ -95,7 +95,7 @@ void SinglePlayerGameSettingsProvider::set_map (const std::string & mapname, con
 				player.ai = impls.at(0)->name;
 				player.random_ai = false;
 			}
-			//If AI player then set tribe to random
+			// If AI player then set tribe to random
 			if (!s.scenario)
 				set_player_tribe(oldplayers, "", true);
 		}
