@@ -2908,45 +2908,10 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 				continue;
 			}
 
-<<<<<<< TREE
 			// This is a candidate, sending all necessary info to RoadCandidates
 			const bool different_economy = (player_immovable->get_economy() != flag.get_economy());
 			const int32_t air_distance = map.calc_distance(flag.get_position(), reachable_coords);
 			RoadCandidates.add_flag(reachable_coords, air_distance, different_economy);
-=======
-			// now make sure that this field has not been processed yet
-			const uint32_t hash = reachable_coords.hash();
-			if (lookuptable.count(hash) == 0) {
-				lookuptable.insert(hash);
-
-				// adding flag into NearFlags if road is possible
-				std::unique_ptr<Path> path2(new Path());
-
-				if (map.findpath(flag.get_position(), reachable_coords, 0, *path2, check) >= 0) {
-
-					// path is possible, but for now we presume connection
-					// 'walking on existing roads' is not possible
-					// so we assign 'virtual distance'
-					int32_t virtual_distance = 0;
-					// the same economy, but connection not spotted above via "walking on roads"
-					// algorithm
-					if (player_immovable->get_economy() == flag.get_economy()) {
-						virtual_distance = 50;
-					} else  // and now different economies
-					{
-						virtual_distance = 100;
-					}
-
-					// distance as the crow flies
-					const int32_t dist = map.calc_distance(flag.get_position(), reachable_coords);
-
-					nearflags.push_back(
-					   NearFlag(*dynamic_cast<const Flag*>(map[reachable_coords].get_immovable()),
-					            virtual_distance,
-					            dist));
-				}
-			}
->>>>>>> MERGE-SOURCE
 		}
 	}
 
