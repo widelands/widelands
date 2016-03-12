@@ -311,7 +311,7 @@ void GameMessageMenu::think()
 	}
 
 	// Add new messages to the list
-	for (const std::pair<MessageId, Message *>& temp_message : mq) {
+	for (const auto& temp_message : mq) {
 		MessageId      const id      =  temp_message.first;
 		const Message &       message = *temp_message.second;
 		Message::Status const status  = message.status();
@@ -450,7 +450,7 @@ void GameMessageMenu::archive_or_restore()
 
 	switch (mode) {
 	case Inbox:
-		//archive highlighted message
+		// Archive highlighted message
 		if (!work_done) {
 			if (!list->has_selection()) return;
 
@@ -460,7 +460,7 @@ void GameMessageMenu::archive_or_restore()
 		}
 		break;
 	case Archive:
-		//restore highlighted message
+		// Restore highlighted message
 		if (!work_done) {
 			if (!list->has_selection()) return;
 

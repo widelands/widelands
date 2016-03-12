@@ -376,7 +376,7 @@ void DefaultAI::think() {
 				if (check_economies()) {  // economies must be consistent
 					return;
 				}
-				if (gametime < 15000) { //more frequent on the beginning of game
+				if (gametime < 15000) { // More frequent at the beginning of game
 					set_taskpool_task_time(gametime + 2000, SchedulerTaskId::kConstructBuilding);
 				} else {
 					set_taskpool_task_time(gametime + 6000, SchedulerTaskId::kConstructBuilding);
@@ -577,7 +577,7 @@ void DefaultAI::late_initialization() {
 		if (bld.type() == MapObjectType::PRODUCTIONSITE) {
 			const ProductionSiteDescr& prod = dynamic_cast<const ProductionSiteDescr&>(bld);
 			bo.type = bld.get_ismine() ? BuildingObserver::Type::kMine : BuildingObserver::Type::kProductionsite;
-			for (const WareAmount& temp_input : prod.inputs()) {
+			for (const auto& temp_input : prod.inputs()) {
 				bo.inputs.push_back(temp_input.first);
 			}
 			for (const DescriptionIndex& temp_output : prod.output_ware_types()) {
@@ -671,7 +671,7 @@ void DefaultAI::late_initialization() {
 		if (bld.type() == MapObjectType::MILITARYSITE) {
 			bo.type = BuildingObserver::Type::kMilitarysite;
 			const MilitarySiteDescr& milit = dynamic_cast<const MilitarySiteDescr&>(bld);
-			for (const std::pair<unsigned char, unsigned char>& temp_buildcosts : milit.buildcost()) {
+			for (const auto& temp_buildcosts : milit.buildcost()) {
 				// bellow are non-critical wares (well, various types of wood)
 				if (tribe_->ware_index("log") == temp_buildcosts.first ||
 				    tribe_->ware_index("blackwood") == temp_buildcosts.first ||
@@ -691,7 +691,7 @@ void DefaultAI::late_initialization() {
 		if (bld.type() == MapObjectType::TRAININGSITE) {
 			bo.type = BuildingObserver::Type::kTrainingsite;
 			const TrainingSiteDescr& train = dynamic_cast<const TrainingSiteDescr&>(bld);
-			for (const WareAmount& temp_input : train.inputs()) {
+			for (const auto& temp_input : train.inputs()) {
 				bo.inputs.push_back(temp_input.first);
 
 				// collecting subsitutes
@@ -702,7 +702,7 @@ void DefaultAI::late_initialization() {
 					bo.substitute_inputs.insert(temp_input.first);
 				}
 
-				for (const std::pair<unsigned char, unsigned char>& temp_buildcosts : train.buildcost()) {
+				for (const auto& temp_buildcosts : train.buildcost()) {
 					// critical wares for trainingsites
 					if (tribe_->ware_index("spidercloth") == temp_buildcosts.first ||
 						tribe_->ware_index("gold") == temp_buildcosts.first ||
@@ -1523,7 +1523,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 	const int32_t kBottomLimit = 40; // to prevent too dense militarysites
 	// modifying least_military_score, down if more military sites are needed and vice versa
 	if (too_many_ms_constructionsites || too_many_vacant_mil || needs_boost_economy) {
-		if (persistent_data->least_military_score < kUpperLimit) { //no sense to let it grow too high
+		if (persistent_data->least_military_score < kUpperLimit) { // No sense in letting it grow too high
 			persistent_data->least_military_score += 20;
 		}
 	} else {
@@ -2099,7 +2099,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 						prio += 5;
 					}
 
-					//+1 if any consumers_ are nearby
+					// +1 if any consumers_ are nearby
 					consumers_nearby_count = 0;
 
 					for (size_t k = 0; k < bo.outputs.size(); ++k)
@@ -2771,7 +2771,7 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 	if (flag.get_economy()->warehouses().empty() && flag.get_building()) {
 
 		// occupied military buildings get special treatment
-		//(extended grace time + longer radius)
+		// (extended grace time + longer radius)
 		bool occupied_military_ = false;
 		Building* b = flag.get_building();
 		if (upcast(MilitarySite, militb, b)) {
@@ -2882,7 +2882,7 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 				if (map.findpath(flag.get_position(), reachable_coords, 0, *path2, check) >= 0) {
 
 					// path is possible, but for now we presume connection
-					//'walking on existing roads' is not possible
+					// 'walking on existing roads' is not possible
 					// so we assign 'virtual distance'
 					int32_t virtual_distance = 0;
 					// the same economy, but connection not spotted above via "walking on roads"
@@ -3110,7 +3110,7 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 	// Get max radius of recursive workarea
 	WorkareaInfo::size_type radius = 0;
 	const WorkareaInfo& workarea_info = site.bo->desc->workarea_info_;
-	for (const std::pair<uint32_t, std::set<std::string>>& temp_info : workarea_info) {
+	for (const auto& temp_info : workarea_info) {
 		if (radius < temp_info.first) {
 			radius = temp_info.first;
 		}
@@ -3977,7 +3977,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			bo.primary_priority += 50;
 		}
 
-		//if we are close to enemy (was seen in last 15 minutes)
+		// If we are close to enemy (was seen in last 15 minutes)
 		if (enemy_last_seen_ < gametime && enemy_last_seen_ + 15 * 60 * 1000 > gametime) {
 			bo.primary_priority += 10;
 		}
@@ -5370,37 +5370,37 @@ int32_t DefaultAI::calculate_strength(const std::vector<Widelands::Soldier*> sol
 			soldiers.at(0)->get_owner()->tribe().name().c_str());
 	}
 
-	float hp = 0;
-	float al = 0;
-	float dl = 0;
-	float el = 0;
+	float health = 0;
+	float attack = 0;
+	float defense = 0;
+	float evade = 0;
 	float final = 0;
 
 	for (Soldier * soldier : soldiers) {
 		switch (tribe) {
 			case (Tribes::kAtlanteans):
-				hp = 135 + 40 * soldier->get_hp_level();
-				al =  14 +  8 * soldier->get_attack_level();
-				dl = static_cast<float>(94 -  8 * soldier->get_defense_level()) / 100;
-				el = static_cast<float>(70 - 17 * soldier->get_evade_level()) / 100;
+				health = 135 + 40 * soldier->get_health_level();
+				attack =  14 +  8 * soldier->get_attack_level();
+				defense = static_cast<float>(94 -  8 * soldier->get_defense_level()) / 100;
+				evade = static_cast<float>(70 - 17 * soldier->get_evade_level()) / 100;
 				break;
 			case (Tribes::kBarbarians):
-				hp += 130 + 28 * soldier->get_hp_level();
-				al +=  14 +  7 * soldier->get_attack_level();
-				dl += static_cast<float>(97 -  8 * soldier->get_defense_level()) / 100;
-				el += static_cast<float>(75 - 15 * soldier->get_evade_level()) / 100;
+				health += 130 + 28 * soldier->get_health_level();
+				attack +=  14 +  7 * soldier->get_attack_level();
+				defense += static_cast<float>(97 -  8 * soldier->get_defense_level()) / 100;
+				evade += static_cast<float>(75 - 15 * soldier->get_evade_level()) / 100;
 				break;
 			case (Tribes::kEmpire):
-				hp += 130 + 21 * soldier->get_hp_level();
-				al +=  14 +  8 * soldier->get_attack_level();
-				dl += static_cast<float>(95 -  8 * soldier->get_defense_level()) / 100;
-				el += static_cast<float>(70 - 16 * soldier->get_evade_level()) / 100;
+				health += 130 + 21 * soldier->get_health_level();
+				attack +=  14 +  8 * soldier->get_attack_level();
+				defense += static_cast<float>(95 -  8 * soldier->get_defense_level()) / 100;
+				evade += static_cast<float>(70 - 16 * soldier->get_evade_level()) / 100;
 				break;
 			default:
 				NEVER_HERE();
 		}
 
-		final += (al * hp) / (dl * el);
+		final += (attack * health) / (defense * evade);
 	}
 
 	// 2500 is aproximate strength of one unpromoted soldier
@@ -5884,7 +5884,7 @@ void DefaultAI::sort_task_pool() {
 // all levels)
 uint32_t DefaultAI::mines_in_constr() const {
 	uint32_t count = 0;
-	for (const std::pair<const int, MineTypesObserver> m : mines_per_type) {
+	for (const auto& m : mines_per_type) {
 		count += m.second.in_construction;
 	}
 	return count;
@@ -5892,7 +5892,7 @@ uint32_t DefaultAI::mines_in_constr() const {
 
 uint32_t DefaultAI::mines_built() const{
 	uint32_t count = 0;
-	for (const std::pair<const int, MineTypesObserver> m : mines_per_type) {
+	for (const auto& m : mines_per_type) {
 		count += m.second.finished;
 	}
 	return count;
@@ -5901,14 +5901,14 @@ uint32_t DefaultAI::mines_built() const{
 // following two functions count militarysites of the same size
 uint32_t DefaultAI::msites_in_constr() const {
 	uint32_t count = 0;
-	for (const std::pair<const int, MilitarySiteSizeObserver> m : msites_per_size) {
+	for (const auto& m : msites_per_size) {
 		count += m.second.in_construction;
 	}
 	return count;
 }
 uint32_t DefaultAI::msites_built() const{
 	uint32_t count = 0;
-	for (const std::pair<const int, MilitarySiteSizeObserver> m : msites_per_size) {
+	for (const auto& m : msites_per_size) {
 		count += m.second.finished;
 	}
 	return count;

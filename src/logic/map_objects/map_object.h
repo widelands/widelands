@@ -35,6 +35,7 @@
 #include "graphic/color.h"
 #include "graphic/image.h"
 #include "logic/cmd_queue.h"
+#include "logic/map_objects/tribes/training_attribute.h"
 #include "logic/widelands.h"
 #include "scripting/lua_table.h"
 
@@ -271,7 +272,7 @@ public:
 	 * doesn't have this kind of attribute.
 	 * The default behaviour returns \c -1 for all attributes.
 	 */
-	virtual int32_t get_training_attribute(uint32_t attr) const;
+	virtual int32_t get_training_attribute(TrainingAttribute attr) const;
 
 	void remove(EditorGameBase &);
 	virtual void destroy(EditorGameBase &);

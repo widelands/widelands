@@ -205,13 +205,13 @@ struct Ship : Bob {
 	void exp_construct_port (Game &, const Coords&);
 	void exp_explore_island (Game &, IslandExploreDirection);
 
-	//Returns integer of direction, or WalkingDir::IDLE if query invalid
-	//Intended for LUA scripting
+	// Returns integer of direction, or WalkingDir::IDLE if query invalid
+	// Intended for LUA scripting
 	WalkingDir get_scouting_direction();
 
-	//Returns integer of direction, or IslandExploreDirection::kNotSet
-	//if query invalid
-	//Intended for LUA scripting
+	// Returns integer of direction, or IslandExploreDirection::kNotSet
+	// if query invalid
+	// Intended for LUA scripting
 	IslandExploreDirection get_island_explore_direction();
 
 	void exp_cancel (Game &);

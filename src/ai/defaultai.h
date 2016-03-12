@@ -227,7 +227,7 @@ private:
 
 	void print_land_stats();
 
-	//checks whether first value is in range, or lesser then...
+	// Checks whether first value is in range, or lesser then...
 	template<typename T> void check_range(const T, const  T, const  T, const char *);
 	template<typename T> void check_range(const T, const  T, const char *);
 
@@ -303,9 +303,6 @@ private:
 	int32_t resource_necessity_water_;
 	bool resource_necessity_water_needed_;  // unless atlanteans
 
-	// average count of trees around cutters
-	//uint32_t trees_around_cutters_;
-
 	uint16_t military_last_dismantle_;
 	uint32_t military_last_build_;  // sometimes expansions just stops, this is time of last military
 	                                // building build
@@ -329,7 +326,7 @@ private:
 	// the purpose is to print out a warning that the game is pacing too fast
 	int32_t scheduler_delay_counter_;
 
-	//this points to persistent data stored in Player object
+	// This points to persistent data stored in Player object
 	Widelands::Player::AiPersistentState* persistent_data;
 
 	// this is a bunch of patterns that have to identify weapons and armors for input queues of trainingsites

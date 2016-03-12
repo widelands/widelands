@@ -712,8 +712,6 @@ void Flag::init(EditorGameBase & egbase)
 */
 void Flag::cleanup(EditorGameBase & egbase)
 {
-	//molog("Flag::cleanup\n");
-
 	while (!flag_jobs_.empty()) {
 		delete flag_jobs_.begin()->request;
 		flag_jobs_.erase(flag_jobs_.begin());
@@ -725,8 +723,6 @@ void Flag::cleanup(EditorGameBase & egbase)
 		ware.set_location(egbase, nullptr);
 		ware.destroy     (egbase);
 	}
-
-	//molog("  wares destroyed\n");
 
 	if (building_) {
 		building_->remove(egbase); //  immediate death
@@ -744,8 +740,6 @@ void Flag::cleanup(EditorGameBase & egbase)
 		e->remove_flag(*this);
 
 	unset_position(egbase, position_);
-
-	//molog("  done\n");
 
 	PlayerImmovable::cleanup(egbase);
 }

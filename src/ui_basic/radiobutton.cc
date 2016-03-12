@@ -87,9 +87,9 @@ Radiogroup::Radiogroup()
  * Free all associated buttons.
  */
 Radiogroup::~Radiogroup() {
-	//Scan-build claims this results in double free.
-	//This is a false positive.
-	//See https://bugs.launchpad.net/widelands/+bug/1198928
+	// Scan-build claims this results in double free.
+	// This is a false positive.
+	// See https://bugs.launchpad.net/widelands/+bug/1198928
 	while (buttons_) delete buttons_;
 }
 

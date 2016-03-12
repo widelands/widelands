@@ -176,7 +176,7 @@ struct RequireAttribute {
 		(TrainingAttribute const init_at, int32_t const init_min, int32_t const init_max)
 		: at(init_at), min(init_min), max(init_max) {}
 
-	RequireAttribute() : at(atrTotal), min(SHRT_MIN), max(SHRT_MAX) {}
+	RequireAttribute() : at(TrainingAttribute::kTotal), min(SHRT_MIN), max(SHRT_MAX) {}
 	bool check(const MapObject &) const;
 	void write
 		(FileWrite &, EditorGameBase & egbase, MapObjectSaver &) const;

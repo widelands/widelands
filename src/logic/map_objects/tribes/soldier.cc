@@ -64,58 +64,15 @@ constexpr int kRetreatWhenHealthDropsBelowThisPercentage = 50;
 SoldierDescr::SoldierDescr(const std::string& init_descname,
 									const LuaTable& table,
 									const EditorGameBase& egbase) :
-	WorkerDescr(init_descname, MapObjectType::SOLDIER, table, egbase)
+	WorkerDescr(init_descname, MapObjectType::SOLDIER, table, egbase),
+	health_(table.get_table("health")),
+	attack_(table.get_table("attack")),
+	defense_(table.get_table("defense")),
+	evade_(table.get_table("evade"))
 {
 	add_attribute(MapObject::Attribute::SOLDIER);
 
-	base_hp_ = table.get_int("hp");
-
-	// Parse attack
-	std::unique_ptr<LuaTable> items_table = table.get_table("attack");
-	min_attack_ = items_table->get_int("minimum");
-	max_attack_ = items_table->get_int("maximum");
-	if (min_attack_ > max_attack_) {
-		throw GameDataError("Minimum attack %d is greater than maximum attack %d.", min_attack_, max_attack_);
-	}
-
-	// Parse defend
-	defense_           = table.get_int("defense");
-
-	// Parse evade
-	evade_             = table.get_int("evade");
-
-	// Parse increases per level
-	hp_incr_           = table.get_int("hp_incr_per_level");
-	attack_incr_       = table.get_int("attack_incr_per_level");
-	defense_incr_      = table.get_int("defense_incr_per_level");
-	evade_incr_        = table.get_int("evade_incr_per_level");
-
-	// Parse max levels
-	max_hp_level_      = table.get_int("max_hp_level");
-	max_attack_level_  = table.get_int("max_attack_level");
-	max_defense_level_ = table.get_int("max_defense_level");
-	max_evade_level_   = table.get_int("max_evade_level");
-
-	// Load the filenames
-	hp_pics_fn_     .resize(max_hp_level_      + 1);
-	attack_pics_fn_ .resize(max_attack_level_  + 1);
-	defense_pics_fn_.resize(max_defense_level_ + 1);
-	evade_pics_fn_  .resize(max_evade_level_   + 1);
-
-	for (uint32_t i = 0; i <= max_hp_level_;      ++i) {
-		hp_pics_fn_[i] = table.get_string((boost::format("hp_level_%u_pic") % i).str());
-	}
-	for (uint32_t i = 0; i <= max_attack_level_;  ++i) {
-		attack_pics_fn_[i] = table.get_string((boost::format("attack_level_%u_pic") % i).str());
-	}
-	for (uint32_t i = 0; i <= max_defense_level_; ++i) {
-		defense_pics_fn_[i] = table.get_string((boost::format("defense_level_%u_pic") % i).str());
-	}
-	for (uint32_t i = 0; i <= max_evade_level_;   ++i) {
-		evade_pics_fn_[i] = table.get_string((boost::format("evade_level_%u_pic") % i).str());
-	}
-
-	//  Battle animations
+	// Battle animations
 	// attack_success_*-> soldier is attacking and hit his opponent
 	add_battle_animation(table.get_table("attack_success_w"), &attack_success_w_name_);
 	add_battle_animation(table.get_table("attack_success_e"), &attack_success_e_name_);
@@ -135,23 +92,32 @@ SoldierDescr::SoldierDescr(const std::string& init_descname,
 	// die_*           -> soldier is dying
 	add_battle_animation(table.get_table("die_w"), &die_w_name_);
 	add_battle_animation(table.get_table("die_e"), &die_e_name_);
+}
+
+SoldierDescr::BattleAttribute::BattleAttribute(std::unique_ptr<LuaTable> table) {
+	base = table->get_int("base");
+
+	if (table->has_key("maximum")) {
+		 maximum = table->get_int("maximum");
+		 if (base > maximum) {
+			 throw GameDataError("Base %d is greater than maximum %d for a soldier's battle attribute.",
+										base, maximum);
+		 }
+	} else {
+		maximum = base;
+	}
+	increase = table->get_int("increase_per_level");
+	max_level = table->get_int("max_level");
 
 	// Load Graphics
-	hp_pics_     .resize(max_hp_level_      + 1);
-	attack_pics_ .resize(max_attack_level_  + 1);
-	defense_pics_.resize(max_defense_level_ + 1);
-	evade_pics_  .resize(max_evade_level_   + 1);
-	for (uint32_t i = 0; i <= max_hp_level_;      ++i)
-		hp_pics_[i] = g_gr->images().get(hp_pics_fn_[i]);
-	for (uint32_t i = 0; i <= max_attack_level_;  ++i)
-		attack_pics_[i] =
-			g_gr->images().get(attack_pics_fn_[i]);
-	for (uint32_t i = 0; i <= max_defense_level_; ++i)
-		defense_pics_[i] =
-			g_gr->images().get(defense_pics_fn_[i]);
-	for (uint32_t i = 0; i <= max_evade_level_;   ++i)
-		evade_pics_[i] =
-			g_gr->images().get(evade_pics_fn_[i]);
+	std::vector<std::string> image_filenames = table->get_table("pictures")->array_entries<std::string>();
+	if (image_filenames.size() != max_level + 1) {
+		throw GameDataError("Soldier needs to have %d pictures for battle attribute, but found %lu",
+									max_level + 1, image_filenames.size());
+	}
+	for (const std::string& image_filename : image_filenames) {
+		images.push_back(g_gr->images().get(image_filename));
+	}
 }
 
 /**
@@ -253,12 +219,12 @@ IMPLEMENTATION
 Soldier::Soldier(const SoldierDescr & soldier_descr) : Worker(soldier_descr)
 {
 	battle_ = nullptr;
-	hp_level_      = 0;
+	health_level_  = 0;
 	attack_level_  = 0;
 	defense_level_ = 0;
 	evade_level_   = 0;
 
-	hp_current_    = get_max_hitpoints();
+	current_health_    = get_max_health();
 
 	combat_walking_   = CD_NONE;
 	combat_walkstart_ = 0;
@@ -268,12 +234,12 @@ Soldier::Soldier(const SoldierDescr & soldier_descr) : Worker(soldier_descr)
 
 void Soldier::init(EditorGameBase & egbase)
 {
-	hp_level_      = 0;
+	health_level_  = 0;
 	attack_level_  = 0;
 	defense_level_ = 0;
 	evade_level_   = 0;
 
-	hp_current_    = get_max_hitpoints();
+	current_health_ = get_max_health();
 
 	combat_walking_   = CD_NONE;
 	combat_walkstart_ = 0;
@@ -296,26 +262,26 @@ bool Soldier::is_evict_allowed()
  * Set this soldiers level. Automatically sets the new values
  */
 void Soldier::set_level
-	(uint32_t const hp,
+	(uint32_t const health,
 	 uint32_t const attack,
 	 uint32_t const defense,
 	 uint32_t const evade)
 {
-	set_hp_level(hp);
+	set_health_level(health);
 	set_attack_level(attack);
 	set_defense_level(defense);
 	set_evade_level(evade);
 }
-void Soldier::set_hp_level(const uint32_t hp) {
-	assert(hp_level_ <= hp);
-	assert              (hp <= descr().get_max_hp_level());
+void Soldier::set_health_level(const uint32_t health) {
+	assert(health_level_ <= health);
+	assert(health <= descr().get_max_health_level());
 
-	uint32_t oldmax = get_max_hitpoints();
+	uint32_t oldmax = get_max_health();
 
-	hp_level_ = hp;
+	health_level_ = health;
 
-	uint32_t newmax = get_max_hitpoints();
-	hp_current_ = hp_current_ * newmax / oldmax;
+	uint32_t newmax = get_max_health();
+	current_health_ = current_health_ * newmax / oldmax;
 }
 void Soldier::set_attack_level(const uint32_t attack) {
 	assert(attack_level_ <= attack);
@@ -338,34 +304,34 @@ void Soldier::set_evade_level(const uint32_t evade) {
 
 uint32_t Soldier::get_level(TrainingAttribute const at) const {
 	switch (at) {
-	case atrHP:      return hp_level_;
-	case atrAttack:  return attack_level_;
-	case atrDefense: return defense_level_;
-	case atrEvade:   return evade_level_;
-	case atrTotal:
-		return hp_level_ + attack_level_ + defense_level_ + evade_level_;
+	case TrainingAttribute::kHealth:  return health_level_;
+	case TrainingAttribute::kAttack:  return attack_level_;
+	case TrainingAttribute::kDefense: return defense_level_;
+	case TrainingAttribute::kEvade:   return evade_level_;
+	case TrainingAttribute::kTotal:
+		return health_level_ + attack_level_ + defense_level_ + evade_level_;
 	}
 	NEVER_HERE();
 }
 
 
-int32_t Soldier::get_training_attribute(uint32_t const attr) const
+int32_t Soldier::get_training_attribute(TrainingAttribute const attr) const
 {
 	switch (attr) {
-	case atrHP: return hp_level_;
-	case atrAttack: return attack_level_;
-	case atrDefense: return defense_level_;
-	case atrEvade: return evade_level_;
-	case atrTotal:
-		return hp_level_ + attack_level_ + defense_level_ + evade_level_;
+	case TrainingAttribute::kHealth: return health_level_;
+	case TrainingAttribute::kAttack: return attack_level_;
+	case TrainingAttribute::kDefense: return defense_level_;
+	case TrainingAttribute::kEvade: return evade_level_;
+	case TrainingAttribute::kTotal:
+		return health_level_ + attack_level_ + defense_level_ + evade_level_;
 	default:
 		return Worker::get_training_attribute(attr);
 	}
 }
 
-uint32_t Soldier::get_max_hitpoints() const
+uint32_t Soldier::get_max_health() const
 {
-	return descr().get_base_hp() + hp_level_ * descr().get_hp_incr_per_level();
+	return descr().get_base_health() + health_level_ * descr().get_health_incr_per_level();
 }
 
 uint32_t Soldier::get_min_attack() const
@@ -397,29 +363,29 @@ uint32_t Soldier::get_evade() const
 }
 
 //  Unsignedness ensures that we can only heal, not hurt through this method.
-void Soldier::heal (const uint32_t hp) {
+void Soldier::heal (const uint32_t health) {
 	molog
-		("[soldier] healing (%d+)%d/%d\n", hp, hp_current_, get_max_hitpoints());
-	assert(hp);
-	assert(hp_current_ <  get_max_hitpoints());
-	hp_current_ += std::min(hp, get_max_hitpoints() - hp_current_);
-	assert(hp_current_ <= get_max_hitpoints());
+		("[soldier] healing (%d+)%d/%d\n", health, current_health_, get_max_health());
+	assert(health);
+	assert(current_health_ <  get_max_health());
+	current_health_ += std::min(health, get_max_health() - current_health_);
+	assert(current_health_ <= get_max_health());
 }
 
 /**
- * This only subs the specified number of hitpoints, don't do anything more.
+ * This only subs the specified number of health points, don't do anything more.
  */
 void Soldier::damage (const uint32_t value)
 {
-	assert (hp_current_ > 0);
+	assert (current_health_ > 0);
 
 	molog
 		("[soldier] damage %d(-%d)/%d\n",
-		 hp_current_, value, get_max_hitpoints());
-	if (hp_current_ < value)
-		hp_current_ = 0;
+		 current_health_, value, get_max_health());
+	if (current_health_ < value)
+		current_health_ = 0;
 	else
-		hp_current_ -= value;
+		current_health_ -= value;
 }
 
 /// Calculates the actual position to draw on from the base node position.
@@ -486,7 +452,7 @@ Point Soldier::calc_drawpos
 }
 
 /*
- * Draw this soldier. This basically draws him as a worker, but add hitpoints
+ * Draw this soldier. This basically draws him as a worker, but add health points
  */
 void Soldier::draw
 	(const EditorGameBase & game, RenderTarget & dst, const Point& pos) const
@@ -501,7 +467,7 @@ void Soldier::draw
 }
 
 /**
- * Draw the info icon (level indicators + HP bar) for this soldier.
+ * Draw the info icon (level indicators + health bar) for this soldier.
  *
  * \param anchor_below if \c true, the icon is drawn horizontally centered above
  * \p pt. Otherwise, the icon is drawn below and right of \p pt.
@@ -511,15 +477,15 @@ void Soldier::draw_info_icon
 {
 	// Gather information to determine coordinates
 	uint32_t w;
-	w = kSoldierHpBarWidth;
+	w = kSoldierHealthBarWidth;
 
-	const Image* hppic = get_hp_level_pic();
+	const Image* healthpic = get_health_level_pic();
 	const Image* attackpic = get_attack_level_pic();
 	const Image* defensepic = get_defense_level_pic();
 	const Image* evadepic = get_evade_level_pic();
 
-	uint16_t hpw = hppic->width();
-	uint16_t hph = hppic->height();
+	uint16_t hpw = healthpic->width();
+	uint16_t hph = healthpic->height();
 	uint16_t atw = attackpic->width();
 	uint16_t ath = attackpic->height();
 	uint16_t dew = defensepic->width();
@@ -539,10 +505,10 @@ void Soldier::draw_info_icon
 
 	// Draw energy bar
 	Rect energy_outer(Point(pt.x - w, pt.y), w * 2, 5);
-	dst.draw_rect(energy_outer, HP_FRAMECOLOR);
+	dst.draw_rect(energy_outer, RGBColor(255, 255, 255));
 
-	assert(get_max_hitpoints());
-	uint32_t health_width = 2 * (w - 1) * hp_current_ / get_max_hitpoints();
+	assert(get_max_health());
+	uint32_t health_width = 2 * (w - 1) * current_health_ / get_max_health();
 	Rect energy_inner(Point(pt.x - w + 1, pt.y + 1), health_width, 3);
 	Rect energy_complement
 		(energy_inner.origin() + Point(health_width, 0), 2 * (w - 1) - health_width, 3);
@@ -561,13 +527,13 @@ void Soldier::draw_info_icon
 	{
 		dst.blit(pt + Point(-atw, -(hph + ath)), attackpic);
 		dst.blit(pt + Point(0, -(evh + deh)), defensepic);
-		dst.blit(pt + Point(-hpw, -hph), hppic);
+		dst.blit(pt + Point(-hpw, -hph), healthpic);
 		dst.blit(pt + Point(0, -evh), evadepic);
 	}
 }
 
 /**
- * Compute the size of the info icon (level indicators + HP bar) for soldiers of
+ * Compute the size of the info icon (level indicators + health bar) for soldiers of
  * the given tribe.
  */
 void Soldier::calc_info_icon_size
@@ -575,12 +541,12 @@ void Soldier::calc_info_icon_size
 {
 	const SoldierDescr * soldierdesc = static_cast<const SoldierDescr *>
 		(tribe.get_worker_descr(tribe.soldier()));
-	const Image* hppic = soldierdesc->get_hp_level_pic(0);
+	const Image* healthpic = soldierdesc->get_health_level_pic(0);
 	const Image* attackpic = soldierdesc->get_attack_level_pic(0);
 	const Image* defensepic = soldierdesc->get_defense_level_pic(0);
 	const Image* evadepic = soldierdesc->get_evade_level_pic(0);
-	uint16_t hpw = hppic->width();
-	uint16_t hph = hppic->height();
+	uint16_t hpw = healthpic->width();
+	uint16_t hph = healthpic->height();
 	uint16_t atw = attackpic->width();
 	uint16_t ath = attackpic->height();
 	uint16_t dew = defensepic->width();
@@ -589,7 +555,7 @@ void Soldier::calc_info_icon_size
 	uint16_t evh = evadepic->height();
 
 	uint16_t animw;
-	animw = kSoldierHpBarWidth;
+	animw = kSoldierHealthBarWidth;
 
 	w = std::max(std::max(atw + dew, hpw + evw), 2 * animw);
 	h = 5 + std::max(hph + ath, evh + deh);
@@ -657,7 +623,7 @@ Battle * Soldier::get_battle()
  */
 bool Soldier::can_be_challenged()
 {
-	if (hp_current_ < 1) {  //< Soldier is dead!
+	if (current_health_ < 1) {  //< Soldier is dead!
 		return false;
 	}
 	if (!is_on_battlefield()) {
@@ -686,7 +652,7 @@ void Soldier::set_battle(Game & game, Battle * const battle)
  * Set a fallback task.
  */
 void Soldier::init_auto_task(Game & game) {
-	if (get_current_hitpoints() < 1) {
+	if (get_current_health() < 1) {
 		molog("[soldier] init_auto_task: die\n");
 		return start_task_die(game);
 	}
@@ -730,11 +696,11 @@ void Soldier::start_task_attack
 	state.ivar3    = 0; // Counts how often the soldier is blocked in a row
 
 	state.ivar1    |= CF_RETREAT_WHEN_INJURED;
-	state.ui32var3 = kRetreatWhenHealthDropsBelowThisPercentage * get_max_hitpoints() / 100;
+	state.ui32var3 = kRetreatWhenHealthDropsBelowThisPercentage * get_max_health() / 100;
 
 	// Injured soldiers are not allowed to attack
-	if (state.ui32var3 > get_current_hitpoints()) {
-		state.ui32var3 = get_current_hitpoints();
+	if (state.ui32var3 > get_current_health()) {
+		state.ui32var3 = get_current_health();
 	}
 }
 
@@ -918,11 +884,11 @@ void Soldier::attack_update(Game & game, State & state)
 	if
 		(!enemy ||
 		 ((state.ivar1 & CF_RETREAT_WHEN_INJURED) &&
-		  state.ui32var3 > get_current_hitpoints() &&
+		  state.ui32var3 > get_current_health() &&
 		  defenders > 0))
 	{
 		// Injured soldiers will try to return to safe site at home.
-		if (state.ui32var3 > get_current_hitpoints() && defenders) {
+		if (state.ui32var3 > get_current_health() && defenders) {
 			state.coords = Coords::null();
 			state.objvar1 = nullptr;
 		}
@@ -1006,7 +972,7 @@ struct FindBobSoldierAttackingPlayer : public FindBob {
 	{
 		if (upcast(Soldier, soldier, bob)) {
 			return
-				soldier->get_current_hitpoints() &&
+				soldier->get_current_health() &&
 				soldier->is_attacking_player(game, player) &&
 				soldier->owner().is_hostile(player);
 		}
@@ -1027,7 +993,7 @@ struct FindBobSoldierAttackingPlayer : public FindBob {
  * Variables used:
  * \li ivar1 used to store \c CombatFlags
  * \li ivar2 when CF_DEFEND_STAYHOME, 1 if it has reached the flag
-//           when CF_RETREAT_WHEN_INJURED, the lesser HP before fleeing
+//           when CF_RETREAT_WHEN_INJURED, the lesser health before fleeing
  */
 Bob::Task const Soldier::taskDefense = {
 	"defense",
@@ -1053,11 +1019,11 @@ void Soldier::start_task_defense
 	} else {
 		/* Flag defenders are not allowed to flee, to avoid abuses */
 		state.ivar1 |= CF_RETREAT_WHEN_INJURED;
-		state.ui32var3 = get_max_hitpoints() * kRetreatWhenHealthDropsBelowThisPercentage / 100;
+		state.ui32var3 = get_max_health() * kRetreatWhenHealthDropsBelowThisPercentage / 100;
 
 		// Soldier must defend even if he starts injured
-		if (state.ui32var3 < get_current_hitpoints())
-			state.ui32var3 = get_current_hitpoints();
+		if (state.ui32var3 < get_current_health())
+			state.ui32var3 = get_current_health();
 	}
 }
 
@@ -1163,10 +1129,10 @@ void Soldier::defense_update(Game & game, State & state)
 	if
 		(soldiers.empty() ||
 		 ((state.ivar1 & CF_RETREAT_WHEN_INJURED) &&
-		  get_current_hitpoints() < state.ui32var3))
+		  get_current_health() < state.ui32var3))
 	{
 
-		if (get_current_hitpoints() < state.ui32var3)
+		if (get_current_health() < state.ui32var3)
 			molog("[defense] I am heavily injured!\n");
 		else
 			molog("[defense] no enemy soldiers found, ending task\n");
@@ -1615,7 +1581,7 @@ struct FindBobSoldierOnBattlefield : public FindBob {
 		if (upcast(Soldier, soldier, bob))
 			return
 				soldier->is_on_battlefield() &&
-				soldier->get_current_hitpoints();
+				soldier->get_current_health();
 		return false;
 	}
 };
@@ -1636,7 +1602,7 @@ bool Soldier::check_node_blocked
 	if
 		(!attackdefense ||
 		 ((attackdefense->ivar1 & CF_RETREAT_WHEN_INJURED) &&
-		  attackdefense->ui32var3 > get_current_hitpoints()))
+		  attackdefense->ui32var3 > get_current_health()))
 	{
 		// Retreating or non-combatant soldiers act like normal bobs
 		return Bob::check_node_blocked(game, field, commit);
@@ -1661,7 +1627,7 @@ bool Soldier::check_node_blocked
 		 bob; bob = bob->get_next_on_field())
 	{
 		if (upcast(Soldier, soldier, bob)) {
-			if (!soldier->is_on_battlefield() || !soldier->get_current_hitpoints())
+			if (!soldier->is_on_battlefield() || !soldier->get_current_health())
 				continue;
 
 			if (!foundsoldier) {
@@ -1750,10 +1716,10 @@ void Soldier::log_general_info(const EditorGameBase & egbase)
 	molog("[Soldier]\n");
 	molog
 		("Levels: %d/%d/%d/%d\n",
-		 hp_level_, attack_level_, defense_level_, evade_level_);
-	molog ("HitPoints: %d/%d\n", hp_current_, get_max_hitpoints());
-	molog ("Attack :  %d-%d\n", get_min_attack(), get_max_attack());
-	molog ("Defense : %d%%\n", get_defense());
+		 health_level_, attack_level_, defense_level_, evade_level_);
+	molog ("Health:   %d/%d\n", current_health_, get_max_health());
+	molog ("Attack:   %d-%d\n", get_min_attack(), get_max_attack());
+	molog ("Defense:  %d%%\n", get_defense());
 	molog ("Evade:    %d%%\n", get_evade());
 	molog ("CombatWalkingDir:   %i\n", combat_walking_);
 	molog ("CombatWalkingStart: %i\n", combat_walkstart_);
@@ -1789,10 +1755,10 @@ void Soldier::Loader::load(FileRead & fr)
 		if (packet_version == kCurrentPacketVersion) {
 
 			Soldier & soldier = get<Soldier>();
-			soldier.hp_current_ = fr.unsigned_32();
+			soldier.current_health_ = fr.unsigned_32();
 
-			soldier.hp_level_ =
-				std::min(fr.unsigned_32(), soldier.descr().get_max_hp_level());
+			soldier.health_level_ =
+				std::min(fr.unsigned_32(), soldier.descr().get_max_health_level());
 			soldier.attack_level_ =
 				std::min(fr.unsigned_32(), soldier.descr().get_max_attack_level());
 			soldier.defense_level_ =
@@ -1800,8 +1766,8 @@ void Soldier::Loader::load(FileRead & fr)
 			soldier.evade_level_ =
 				std::min(fr.unsigned_32(), soldier.descr().get_max_evade_level());
 
-			if (soldier.hp_current_ > soldier.get_max_hitpoints())
-				soldier.hp_current_ = soldier.get_max_hitpoints();
+			if (soldier.current_health_ > soldier.get_max_health())
+				soldier.current_health_ = soldier.get_max_health();
 
 			soldier.combat_walking_ = static_cast<CombatWalkingDir>(fr.unsigned_8());
 			if (soldier.combat_walking_ != CD_NONE) {
@@ -1849,8 +1815,8 @@ void Soldier::do_save
 	Worker::do_save(egbase, mos, fw);
 
 	fw.unsigned_8(kCurrentPacketVersion);
-	fw.unsigned_32(hp_current_);
-	fw.unsigned_32(hp_level_);
+	fw.unsigned_32(current_health_);
+	fw.unsigned_32(health_level_);
 	fw.unsigned_32(attack_level_);
 	fw.unsigned_32(defense_level_);
 	fw.unsigned_32(evade_level_);
