@@ -22,6 +22,11 @@
 #include "base/macros.h"
 #include "logic/player.h"
 
+// couple of constants for calculation of road interconnections
+constexpr int kRoadNotFound = -1000;
+constexpr int kShortcutWithinSameEconomy = 1000;
+constexpr int kRoadToDifferentEconomy = 10000;
+
 namespace Widelands {
 
 // CheckStepRoadAI
@@ -310,11 +315,11 @@ bool BlockedFields::is_blocked(Coords coords) {
 }
 
 
-FlagsForRoads::Candidate::Candidate(uint32_t cr, int32_t ad, bool de):
-	coords_hash(cr), air_distance(ad), different_economy(de) {
+FlagsForRoads::Candidate::Candidate(uint32_t coords, int32_t distance, bool economy):
+	coords_hash(coords), air_distance(distance), different_economy(economy) {
 		new_road_possible = false;
 		accessed_via_roads = false;
-		new_road_length = 1000; // NOCOM(#codereview)  I see 1000 and -1000 in these new functions a lot - make 1000 a named constexpr?
+		new_road_length = 1000;
 		current_roads_distance = 1000; // must be big enough
 		reduction_score = -air_distance; // allows reasonable ordering from the start
 }
@@ -333,14 +338,14 @@ bool FlagsForRoads::Candidate::operator==(const Candidate& other) const {
 
 void FlagsForRoads::Candidate::calculate_score() {
 	if (!new_road_possible) {
-		reduction_score = -1000 - air_distance; // to have at least some ordering preserved
+		reduction_score = kRoadNotFound - air_distance; // to have at least some ordering preserved
 	} else if (different_economy) {
-		reduction_score = 10000 - air_distance - 2 * new_road_length;
+		reduction_score = kRoadToDifferentEconomy - air_distance - 2 * new_road_length;
 	} else if (!accessed_via_roads) {
 		if (air_distance + 6 > new_road_length) {
-			reduction_score = 1000 - air_distance - 2 * new_road_length;
+			reduction_score = kShortcutWithinSameEconomy - air_distance - 2 * new_road_length;
 		} else {
-			reduction_score = -1000;
+			reduction_score = kRoadNotFound;
 		}
 	} else {
 		reduction_score = current_roads_distance - 2 * new_road_length;
@@ -376,10 +381,6 @@ bool FlagsForRoads::get_best_uncalculated(uint32_t* winner) {
 // Road from starting flag to this flag can be built
 void FlagsForRoads::road_possible(Widelands::Coords coords, uint32_t distance) {
 	// std::set does not allow updating
-	// NOCOM(#codereview) you iterate over this set a lot in order to find an element.
-	// How about using a std::map<coords.hash(), Candidate> or
-	// std::map<coords.hash(), std::unique_ptr<Candidate>>for easier access?
-	// This would also allow you to update an element.
 	Candidate new_candidate_flag = Candidate(0, 0, false);
 	for (auto candidate_flag : queue) {
 		if (candidate_flag.coords_hash == coords.hash()) {

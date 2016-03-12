@@ -979,12 +979,7 @@ void DefaultAI::update_all_not_buildable_fields() {
 	// it will take longer
 	uint32_t maxchecks = unusable_fields.size();
 	if (maxchecks > 5) {
-		// NOCOM(#codereview) I think this would be shorter, but it's up to you if you want that:
-		// maxchecks = std::min(5 + (unusable_fields.size() - 5) / 15, 200);
-		maxchecks = 5 + (unusable_fields.size() - 5) / 15;
-	}
-	if (maxchecks > 200) {
-		maxchecks = 200;
+		maxchecks = std::min(5 + (unusable_fields.size() - 5) / 15, 200);
 	}
 
 	for (uint32_t i = 0; i < maxchecks; ++i) {
