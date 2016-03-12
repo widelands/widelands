@@ -979,7 +979,7 @@ void DefaultAI::update_all_not_buildable_fields() {
 	// it will take longer
 	uint32_t maxchecks = unusable_fields.size();
 	if (maxchecks > 5) {
-		maxchecks = std::min(5 + (unusable_fields.size() - 5) / 15, 200);
+		maxchecks = std::min<uint32_t>(5 + (unusable_fields.size() - 5) / 15, 200);
 	}
 
 	for (uint32_t i = 0; i < maxchecks; ++i) {
