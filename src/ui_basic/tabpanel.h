@@ -115,6 +115,9 @@ struct TabPanel : public Panel {
 	void activate(uint32_t idx);
 	void activate(const std::string &);
 	uint32_t active() {return active_;}
+	// Removes the last tab if the 'tabname' matches. Returns whether a tab was removed.
+	// We use the tabname as a safety precaution to prevent acidentally removing the wrong tab.
+	bool remove_last_tab(const std::string& tabname);
 
 	boost::signals2::signal<void ()> sigclicked;
 
