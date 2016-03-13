@@ -20,6 +20,7 @@
 #include "ai/ai_help_structs.h"
 
 #include "base/macros.h"
+#include "logic/map.h"
 #include "logic/player.h"
 
 // couple of constants for calculation of road interconnections
@@ -319,8 +320,9 @@ FlagsForRoads::Candidate::Candidate(uint32_t coords, int32_t distance, bool econ
 	coords_hash(coords), air_distance(distance), different_economy(economy) {
 		new_road_possible = false;
 		accessed_via_roads = false;
-		new_road_length = 1000; // Values are sufficient for map 512x512
-		current_roads_distance = 1000; // must be big enough
+		// Values are only very rough, and are dependant on the map size
+		new_road_length = 2 * Widelands::kMapDimensions.at(Widelands::kMapDimensions.size() - 1);
+		current_roads_distance = 2 *(Widelands::kMapDimensions.size() - 1); // must be big enough
 		reduction_score = -air_distance; // allows reasonable ordering from the start
 }
 
