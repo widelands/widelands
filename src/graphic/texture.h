@@ -99,11 +99,11 @@ private:
 	do_fill_rect(const FloatRect& dst_rect, const RGBAColor& color, BlendMode blend_mode) override;
 
 	// True if we own the texture, i.e. if we need to delete it.
-	bool m_owns_texture;
+	bool owns_texture_;
 
-	BlitData m_blit_data;
+	BlitData blit_data_;
 	/// Pixel data, while the texture is locked
-	std::unique_ptr<uint8_t[]> m_pixels;
+	std::unique_ptr<uint8_t[]> pixels_;
 
 	DISALLOW_COPY_AND_ASSIGN(Texture);
 };
