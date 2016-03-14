@@ -306,6 +306,7 @@ private:
 	uint16_t military_last_dismantle_;
 	uint32_t military_last_build_;  // sometimes expansions just stops, this is time of last military
 	                                // building build
+	uint32_t last_road_dismantled_; // uses to prevent too frequent road dismantling
 
 	bool seafaring_economy;          // false by default, until first port space is found
 	uint32_t expedition_ship_;
