@@ -71,11 +71,11 @@ EditorMainMenu::EditorMainMenu
 		 0, 0, width, 0,
 		 g_gr->images().get("images/ui_basic/but1.png"),
 		 _("Map Options")),
-	button_about_
-		(&box_, "about",
+	button_help_
+		(&box_, "help",
 		 0, 0, width, 0,
 		 g_gr->images().get("images/ui_basic/but1.png"),
-		 _("About")),
+		 _("Help")),
 	button_exit_editor_
 		(&box_, "exit",
 		 0, 0, width, 0,
@@ -87,12 +87,12 @@ EditorMainMenu::EditorMainMenu
 	box_.add(&button_load_map_, UI::Align::kHCenter);
 	box_.add(&button_save_map_, UI::Align::kHCenter);
 	box_.add(&button_map_options_, UI::Align::kHCenter);
-	box_.add(&button_about_, UI::Align::kHCenter);
+	box_.add(&button_help_, UI::Align::kHCenter);
 	box_.add(&button_exit_editor_, UI::Align::kHCenter);
 	box_.set_size(width, 7 * button_new_map_.get_h()+ 6 * vspacing);
 	set_inner_size(get_inner_w(), box_.get_h() + 2 * margin);
 
-	button_about_.sigclicked.connect(boost::bind(&EditorMainMenu::about_btn, boost::ref(*this)));
+	button_help_.sigclicked.connect(boost::bind(&EditorMainMenu::help_btn, boost::ref(*this)));
 	button_new_map_.sigclicked.connect(boost::bind(&EditorMainMenu::new_map_btn, this));
 	button_new_random_map_.sigclicked.connect(boost::bind(&EditorMainMenu::new_random_map_btn, this));
 	button_load_map_.sigclicked.connect(boost::bind(&EditorMainMenu::load_btn, this));
@@ -108,12 +108,12 @@ EditorMainMenu::EditorMainMenu
 /**
  * Called, when buttons get clicked
 */
-void EditorMainMenu::about_btn() {
-	if (window_readme_.window) {
-		delete window_readme_.window;
+void EditorMainMenu::help_btn() {
+	if (window_help_.window) {
+		delete window_help_.window;
 	} else {
-		FileViewWindow* fileview = new FileViewWindow(eia(), window_readme_, _("About the Widelands Editor"));
-		fileview->add_tab("txts/editor_readme.lua");
+		FileViewWindow* fileview = new FileViewWindow(eia(), window_help_, _("About the Widelands Editor"));
+		fileview->add_tab("txts/help/editor_help.lua");
 		fileview->add_tab("txts/LICENSE.lua");
 		fileview->add_tab("txts/AUTHORS.lua");
 		fileview->add_tab("txts/TRANSLATORS.lua");

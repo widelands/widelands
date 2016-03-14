@@ -684,7 +684,7 @@ void FullscreenMenuLaunchMPG::help_clicked() {
 	if (help_) {
 		help_->set_visible(true);
 	} else {
-		help_.reset(new UI::FullscreenHelpWindow(this, lua_, "scripting/widelands/multiplayer_help.lua",
+		help_.reset(new UI::FullscreenHelpWindow(this, lua_, "txts/help/multiplayer_help.lua",
 																/** TRANSLATORS: This is a heading for a help window */
 																_("Multiplayer Game Setup")));
 	}

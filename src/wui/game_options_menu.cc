@@ -71,8 +71,15 @@ GameOptionsMenu::GameOptionsMenu
 	windows_(windows),
 	box_(this, margin, margin, UI::Box::Vertical,
 		  width, get_h() - 2 * margin, vspacing),
+	help_
+		(&box_, "help",
+		 0, 0, width, 0,
+		 g_gr->images().get("images/ui_basic/but4.png"),
+		 _("Help"),
+		/** TRANSLATORS: Button tooltip */
+		_("General game control")),
 	about_
-		(&box_, "authors",
+		(&box_, "about",
 		 0, 0, width, 0,
 		 g_gr->images().get("images/ui_basic/but4.png"),
 		 _("About"),
@@ -100,15 +107,18 @@ GameOptionsMenu::GameOptionsMenu
 		 /** TRANSLATORS: Button tooltip */
 		 _("Exit Game"))
 {
+	box_.add(&help_, UI::Align::kHCenter);
+	box_.add_space(vgap);
 	box_.add(&about_, UI::Align::kHCenter);
 	box_.add_space(vgap);
 	box_.add(&sound_, UI::Align::kHCenter);
 	box_.add_space(vgap);
 	box_.add(&save_game_, UI::Align::kHCenter);
 	box_.add(&exit_game_, UI::Align::kHCenter);
-	box_.set_size(width, 2 * about_.get_h() + 2 * save_game_.get_h() + 2 * vgap + 5 * vspacing);
+	box_.set_size(width, 3 * about_.get_h() + 2 * save_game_.get_h() + 3 * vgap + 7 * vspacing);
 	set_inner_size(get_inner_w(), box_.get_h() + 2 * margin);
 
+	help_.sigclicked.connect(boost::bind(&GameOptionsMenu::clicked_help, boost::ref(*this)));
 	about_.sigclicked.connect(boost::bind(&GameOptionsMenu::clicked_about, boost::ref(*this)));
 	sound_.sigclicked.connect(boost::bind(&GameOptionsMenu::clicked_sound, boost::ref(*this)));
 	save_game_.sigclicked.connect(boost::bind(&GameOptionsMenu::clicked_save_game, boost::ref(*this)));
@@ -120,18 +130,29 @@ GameOptionsMenu::GameOptionsMenu
  registry.on_delete = std::bind(&UI::Button::set_perm_pressed, &btn, false); \
  if (registry.window) btn.set_perm_pressed(true);                            \
 
-	INIT_BTN_HOOKS(windows_.authors, about_)
+	INIT_BTN_HOOKS(windows_.help, help_)
+	INIT_BTN_HOOKS(windows_.about, about_)
 	INIT_BTN_HOOKS(windows_.sound_options, sound_)
 
 	if (get_usedefaultpos())
 		center_to_parent();
 }
 
-void GameOptionsMenu::clicked_about() {
-	if (windows_.authors.window) {
-		delete windows_.authors.window;
+void GameOptionsMenu::clicked_help() {
+	if (windows_.help.window) {
+		delete windows_.help.window;
 	} else {
-		FileViewWindow* fileview = new FileViewWindow(igb_, windows_.authors, _("About Widelands"));
+		FileViewWindow* fileview = new FileViewWindow(igb_, windows_.help, _("General game control"));
+		fileview->add_tab("txts/help/general_in_game_help.lua");
+	}
+}
+
+
+void GameOptionsMenu::clicked_about() {
+	if (windows_.about.window) {
+		delete windows_.about.window;
+	} else {
+		FileViewWindow* fileview = new FileViewWindow(igb_, windows_.about, _("About Widelands"));
 		fileview->add_tab("txts/README.lua");
 		fileview->add_tab("txts/LICENSE.lua");
 		fileview->add_tab("txts/AUTHORS.lua");

@@ -40,12 +40,12 @@ private:
 	UI::Button button_load_map_;
 	UI::Button button_save_map_;
 	UI::Button button_map_options_;
-	UI::Button button_about_;
+	UI::Button button_help_;
 	UI::Button button_exit_editor_;
 
-	UI::UniqueWindow::Registry window_readme_;
+	UI::UniqueWindow::Registry window_help_;
 
-	void about_btn      ();
+	void help_btn      ();
 	void exit_btn       ();
 	void load_btn       ();
 	void save_btn       ();

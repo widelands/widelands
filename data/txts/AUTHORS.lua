@@ -26,7 +26,7 @@ end
 return {
    title = _"Developers",
    text = rt(
-      "<rt text-align=center><p font-size=28 font-decoration=bold font-face=serif font-color=2F9131>" .. _"Widelands Development Team" .. "</p></rt>" ..
+      title(_"Widelands Development Team") ..
       list_authors()
    )
 }

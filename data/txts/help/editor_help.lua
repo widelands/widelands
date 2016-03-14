@@ -1,0 +1,48 @@
+include "scripting/formatting.lua"
+
+set_textdomain("texts")
+
+return {
+   title = _"Help",
+   text =
+      title(_[[The Widelands Editor]]) ..
+      rt(
+         h1(_"Introduction") ..
+
+         p(_"This editor is intended for players who would like to design their own maps to use with Widelands.") ..
+         p(_"As you can see, this editor is heavy work in progress and as the editor becomes better and better, this text will also get longer and more complete.") ..
+         p(_"Please have a look at our enduser manuals on our wiki pages at: %s"):bformat(a("http://wl.widelands.org/wiki")) ..
+         p(_"Those pages might be more complete and up to date than this file, and you will also find a short tutorial about building a map there.") ..
+
+         h1(_"Keyboard shortcuts") ..
+
+         p(
+            -- TRANSLATORS: This is a hotkey
+            _"Space:" .. " " .. _"toggles if building spaces are shown" .. "<br>" ..
+            -- TRANSLATORS: This is a hotkey
+            _"C:" .. " " .. _"toggles census" .. "<br>" ..
+            -- TRANSLATORS: This is a hotkey
+            _"F:" .. " " .. _"toggles fullscreen" .. "<br>" ..
+            -- TRANSLATORS: This is a hotkey
+            _"H:" .. " " .. _"toggles main menu" .. "<br>" ..
+            -- TRANSLATORS: This is a hotkey
+            _"M:" .. " " .. _"toggles minimap" .. "<br>" ..
+            -- TRANSLATORS: This is a hotkey
+            _"P:" .. " " .. _"toggles player menu" .. "<br>" ..
+            -- TRANSLATORS: This is a hotkey
+            _"T:" .. " " .. _"toggles tools menu" .. "<br>" ..
+            -- TRANSLATORS: This is a hotkey
+            _"I:" .. " " .. _"activates information tool" .. "<br>" ..
+            -- TRANSLATORS: This is a hotkey
+            _"Ctrl + L:" .. " " .. _"load map" .. "<br>" ..
+            -- TRANSLATORS: This is a hotkey
+            _"Ctrl + S:" .. " " .. _"save map" .. "<br>" ..
+            -- TRANSLATORS: This is a hotkey
+            _"1-0:" .. " " .. _"changes tool size" .. "<br>" ..
+            -- TRANSLATORS: This is a hotkey
+            _"Shift (Hold):" .. " " .. _"selects first alternative tool while pressed" .. "<br>" ..
+            -- TRANSLATORS: This is a hotkey
+            _"Alt (Hold):" .. " " .. _"Selects second alternative tool while pressed" .. "<br>"
+         )
+      )
+}
