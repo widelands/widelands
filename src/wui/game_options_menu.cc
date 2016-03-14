@@ -77,7 +77,7 @@ GameOptionsMenu::GameOptionsMenu
 		 g_gr->images().get("images/ui_basic/but4.png"),
 		 _("Help"),
 		/** TRANSLATORS: Button tooltip */
-		_("General game control")),
+		_("General help and keyboard shortcuts")),
 	about_
 		(&box_, "about",
 		 0, 0, width, 0,
