@@ -24,7 +24,7 @@
 
 ///  Decreases the height of a node by a value.
 struct EditorDecreaseHeightTool : public EditorTool {
-	EditorDecreaseHeightTool() : EditorTool(*this, *this), m_change_by(1) {}
+	EditorDecreaseHeightTool() : EditorTool(*this, *this), change_by_(1) {}
 
 	int32_t handle_click_impl
 		(const Widelands::World& world,
@@ -46,11 +46,11 @@ struct EditorDecreaseHeightTool : public EditorTool {
 		return "images/wui/editor//fsel_editor_decrease_height.png";
 	}
 
-	int32_t get_change_by() const {return m_change_by;}
-	void set_change_by(const int32_t n) {m_change_by = n;}
+	int32_t get_change_by() const {return change_by_;}
+	void set_change_by(const int32_t n) {change_by_ = n;}
 
 private:
-	int32_t m_change_by;
+	int32_t change_by_;
 };
 
 #endif  // end of include guard: WL_EDITOR_TOOLS_EDITOR_DECREASE_HEIGHT_TOOL_H

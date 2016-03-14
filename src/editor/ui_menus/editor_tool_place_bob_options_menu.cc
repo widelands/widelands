@@ -44,9 +44,9 @@ EditorToolPlaceBobOptionsMenu::EditorToolPlaceBobOptionsMenu
 :
 EditorToolOptionsMenu(parent, registry, 100, 100, _("Animals")),
 
-m_tabpanel          (this, 0, 0, g_gr->images().get("images/ui_basic/but1.png")),
-m_pit               (pit),
-m_click_recursion_protect(false)
+tabpanel_          (this, 0, 0, g_gr->images().get("images/ui_basic/but1.png")),
+pit_               (pit),
+click_recursion_protect_(false)
 {
 	int32_t const space  =  5;
 	const Widelands::World & world = parent.egbase().world();
@@ -58,7 +58,7 @@ m_click_recursion_protect(false)
 			 	 24U),
 			 12U);
 
-	set_center_panel(&m_tabpanel);
+	set_center_panel(&tabpanel_);
 
 	uint32_t width = 0, height = 0;
 	for (int32_t j = 0; j < nr_bobs; ++j) {
@@ -81,8 +81,8 @@ m_click_recursion_protect(false)
 		if (cur_x == bobs_in_row) {
 			cur_x = 0;
 			pos   = Point(5, 15);
-			box = new UI::Box(&m_tabpanel, 0, 0, UI::Box::Horizontal);
-			m_tabpanel.add("icons", tab_icon, box);
+			box = new UI::Box(&tabpanel_, 0, 0, UI::Box::Horizontal);
+			tabpanel_.add("icons", tab_icon, box);
 		}
 
 		const Widelands::BobDescr & descr = *world.get_bob_descr(i);
@@ -94,9 +94,9 @@ m_click_recursion_protect(false)
 		                     critter_descr ? critter_descr->descname() : std::string());
 
 		cb.set_desired_size(width, height);
-		cb.set_state(m_pit.is_enabled(i));
+		cb.set_state(pit_.is_enabled(i));
 		cb.changedto.connect(boost::bind(&EditorToolPlaceBobOptionsMenu::clicked, this, i, _1));
-		m_checkboxes.push_back(&cb);
+		checkboxes_.push_back(&cb);
 		box->add(&cb, UI::Align::kLeft);
 		box->add_space(space);
 		pos.x += width + 1 + space;
@@ -104,7 +104,7 @@ m_click_recursion_protect(false)
 		++i;
 	}
 
-	m_tabpanel.activate(0);
+	tabpanel_.activate(0);
 }
 
 
@@ -114,7 +114,7 @@ m_click_recursion_protect(false)
 void EditorToolPlaceBobOptionsMenu::clicked
 	(int32_t const n, bool const t)
 {
-	if (m_click_recursion_protect)
+	if (click_recursion_protect_)
 		return;
 
 	//  TODO(unknown): This code is erroneous. It checks the current key state. What it
@@ -122,23 +122,23 @@ void EditorToolPlaceBobOptionsMenu::clicked
 	//  TODO(unknown): usage comment for get_key_state.
 	const bool multiselect =
 		get_key_state(SDL_SCANCODE_LCTRL) | get_key_state(SDL_SCANCODE_RCTRL);
-	if (!t && (!multiselect || m_pit.get_nr_enabled() == 1)) {
-		m_checkboxes[n]->set_state(true);
+	if (!t && (!multiselect || pit_.get_nr_enabled() == 1)) {
+		checkboxes_[n]->set_state(true);
 		return;
 	}
 
 	if (!multiselect) {
-		for (uint32_t i = 0; m_pit.get_nr_enabled(); ++i) m_pit.enable(i, false);
+		for (uint32_t i = 0; pit_.get_nr_enabled(); ++i) pit_.enable(i, false);
 
 		//  disable all checkboxes
-		m_click_recursion_protect = true;
-		for (uint32_t i = 0; i < m_checkboxes.size(); ++i) {
+		click_recursion_protect_ = true;
+		for (uint32_t i = 0; i < checkboxes_.size(); ++i) {
 			if (i != static_cast<uint32_t>(n))
-				m_checkboxes[i]->set_state(false);
+				checkboxes_[i]->set_state(false);
 		}
-		m_click_recursion_protect = false;
+		click_recursion_protect_ = false;
 	}
 
-	m_pit.enable(n, t);
+	pit_.enable(n, t);
 	select_correct_tool();
 }

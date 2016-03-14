@@ -43,7 +43,7 @@ int32_t EditorSetHeightTool::handle_click_impl(const Widelands::World& world,
 	return map->set_height(
 	   world,
 	   Widelands::Area<Widelands::FCoords>(map->get_fcoords(center.node), args->sel_radius),
-	   args->m_interval);
+	   args->interval);
 }
 
 int32_t
@@ -75,6 +75,6 @@ EditorSetHeightTool::handle_undo_impl(const Widelands::World& world,
 EditorActionArgs EditorSetHeightTool::format_args_impl(EditorInteractive & parent)
 {
 	EditorActionArgs a(parent);
-	a.m_interval = m_interval;
+	a.interval = interval_;
 	return a;
 }

@@ -53,9 +53,9 @@ int32_t EditorNoiseHeightTool::handle_click_impl(const Widelands::World& world,
 		   max,
 		   map->set_height(world,
 		                  mr.location(),
-		                  args->m_interval.min +
+		                  args->interval.min +
 		                     static_cast<int32_t>(
-		                        static_cast<double>(args->m_interval.max - args->m_interval.min + 1) *
+		                        static_cast<double>(args->interval.max - args->interval.min + 1) *
 		                        rand() / (RAND_MAX + 1.0))));
 	} while (mr.advance(*map));
 	return mr.radius() + max;
@@ -67,12 +67,12 @@ EditorNoiseHeightTool::handle_undo_impl(const Widelands::World& world,
                                         EditorInteractive& parent,
                                         EditorActionArgs* args,
 										Widelands::Map* map) {
-	return m_set_tool.handle_undo_impl(world, center, parent, args, map);
+	return set_tool_.handle_undo_impl(world, center, parent, args, map);
 }
 
 EditorActionArgs EditorNoiseHeightTool::format_args_impl(EditorInteractive & parent)
 {
 	EditorActionArgs a(parent);
-	a.m_interval = m_interval;
+	a.interval = interval_;
 	return a;
 }

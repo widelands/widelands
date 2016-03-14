@@ -87,7 +87,7 @@ EditorSetResourcesTool::handle_undo_impl(const Widelands::World& world,
 EditorActionArgs EditorSetResourcesTool::format_args_impl(EditorInteractive & parent)
 {
 	EditorActionArgs a(parent);
-	a.cur_res = m_cur_res;
-	a.set_to = m_set_to;
+	a.cur_res = cur_res_;
+	a.set_to = set_to_;
 	return a;
 }

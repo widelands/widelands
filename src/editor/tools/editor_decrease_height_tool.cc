@@ -75,6 +75,6 @@ int32_t EditorDecreaseHeightTool::handle_undo_impl
 EditorActionArgs EditorDecreaseHeightTool::format_args_impl(EditorInteractive & parent)
 {
 	EditorActionArgs a(parent);
-	a.change_by = m_change_by;
+	a.change_by = change_by_;
 	return a;
 }

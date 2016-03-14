@@ -32,12 +32,12 @@ class EditorGameBase;
  */
 // TODO(unknown):  Implement undo for this tool
 struct EditorMakeInfrastructureTool : public EditorTool {
-	EditorMakeInfrastructureTool() : EditorTool(*this, *this, false), m_player(0) {}
+	EditorMakeInfrastructureTool() : EditorTool(*this, *this, false), player_(0) {}
 
 	void set_player(Widelands::PlayerNumber const n)
-		{m_player = n;}
+		{player_ = n;}
 	Widelands::PlayerNumber get_player() const
-		{return m_player;}
+		{return player_;}
 
 	int32_t handle_click_impl(const Widelands::World& world,
 	                          Widelands::NodeAndTriangle<> center,
@@ -49,8 +49,8 @@ struct EditorMakeInfrastructureTool : public EditorTool {
 		{return "images/ui_basic/fsel.png";} //  Standard sel icon, most complex tool of all
 
 private:
-	Widelands::PlayerNumber m_player;
-	UI::UniqueWindow::Registry m_registry;
+	Widelands::PlayerNumber player_;
+	UI::UniqueWindow::Registry registry_;
 };
 
 int32_t editor_make_infrastructure_tool_callback
