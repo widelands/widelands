@@ -719,7 +719,7 @@ ProductionProgram::ActWorker::ActWorker(
 		const WorkareaInfo & worker_workarea_info =
 			main_worker_descr.get_program(program_)->get_workarea_info();
 
-		for (const std::pair<uint32_t, std::set<std::string> >& area_info : worker_workarea_info) {
+		for (const auto& area_info : worker_workarea_info) {
 			std::set<std::string> & building_radius_infos =
 				descr->workarea_info_[area_info.first];
 
@@ -886,7 +886,6 @@ void ProductionProgram::ActConsume::execute
 	std::vector<uint8_t> consumption_quantities(nr_warequeues, 0);
 
 	Groups l_groups = consumed_wares_; //  make a copy for local modification
-	//log("ActConsume::execute(%s):\n", ps.descname().c_str());
 
 	//  Iterate over all input queues and see how much we should consume from
 	//  each of them.
@@ -922,7 +921,7 @@ void ProductionProgram::ActConsume::execute
 		const TribeDescr & tribe = ps.owner().tribe();
 
 		std::vector<std::string> group_list;
-		for (const WareTypeGroup& group : l_groups) {
+		for (const auto& group : l_groups) {
 			assert(group.first.size());
 
 			std::vector<std::string> ware_list;
@@ -973,7 +972,7 @@ void ProductionProgram::ActConsume::execute
 				assert(q <= warequeues[i]->get_filled());
 				warequeues[i]->set_filled(warequeues[i]->get_filled() - q);
 
-				//update consumption statistic
+				// Update consumption statistic
 				ps.owner().ware_consumed(warequeues[i]->get_ware(), q);
 			}
 		return ps.program_step(game);
@@ -1038,7 +1037,6 @@ ProductionProgram::ActProduce::ActProduce
 void ProductionProgram::ActProduce::execute
 	(Game & game, ProductionSite & ps) const
 {
-	//ps.molog("  Produce\n");
 	assert(ps.produced_wares_.empty());
 	ps.produced_wares_ = produced_wares_;
 	ps.working_positions_[0].worker->update_task_buildingwork(game);
@@ -1628,14 +1626,13 @@ void ProductionProgram::ActConstruct::execute(Game & game, ProductionSite & psit
 		(map.find_reachable_fields
 			(area, &fields, cstep, fna))
 	{
-		//testing received fields to get one with less immovables
-		//nearby
-		Coords best_coords = fields.back(); //just to initialize it
+		// Testing received fields to get one with less immovables nearby
+		Coords best_coords = fields.back(); // Just to initialize it
 		uint32_t best_score = std::numeric_limits<uint32_t>::max();
 		while (!fields.empty()) {
 			Coords coords = fields.back();
 
-			//counting immovables nearby
+			// Counting immovables nearby
 			std::vector<ImmovableFound> found_immovables;
 			const uint32_t imm_count =
 				map.find_immovables(Area<FCoords>(map.get_fcoords(coords), 2), &found_immovables);
@@ -1644,7 +1641,7 @@ void ProductionProgram::ActConstruct::execute(Game & game, ProductionSite & psit
 				best_coords = coords;
 			}
 
-			//no need to go on, it cannot be better
+			// No need to go on, it cannot be better
 			if (imm_count == 0) {
 				break;
 				}
@@ -1788,11 +1785,11 @@ ProductionProgram::ProductionProgram(const std::string& init_name,
 		}
 
 		const ProductionProgram::Action& action = *actions_.back().get();
-		for (const WareTypeGroup& group : action.consumed_wares()) {
+		for (const auto& group : action.consumed_wares()) {
 			consumed_wares_.push_back(group);
 		}
 		// Add produced wares. If the ware already exists, increase the amount
-		for (const WareAmount& ware : action.produced_wares()) {
+		for (const auto& ware : action.produced_wares()) {
 			if (produced_wares_.count(ware.first) == 1) {
 				produced_wares_.at(ware.first) += ware.second;
 			} else {
@@ -1800,7 +1797,7 @@ ProductionProgram::ProductionProgram(const std::string& init_name,
 			}
 		}
 		// Add recruited workers. If the worker already exists, increase the amount
-		for (const WareAmount& worker : action.recruited_workers()) {
+		for (const auto& worker : action.recruited_workers()) {
 			if (recruited_workers_.count(worker.first) == 1) {
 				recruited_workers_.at(worker.first) += worker.second;
 			} else {

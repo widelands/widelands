@@ -202,7 +202,7 @@ int LuaPlayer::get_inbox(lua_State * L) {
 
 	lua_newtable(L);
 	uint32_t cidx = 1;
-	for (const std::pair<MessageId, Message *>& temp_message : p.messages()) {
+	for (const auto& temp_message : p.messages()) {
 		if (temp_message.second->status() == Message::Status::kArchived)
 			continue;
 

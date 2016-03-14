@@ -46,7 +46,7 @@ int main(int argc, char * argv[])
 	WLApplication * g_app = nullptr;
 	try {
 		g_app = WLApplication::get(argc, const_cast<char const * *>(argv));
-		//TODO(unknown): handle exceptions from the constructor
+		// TODO(unknown): handle exceptions from the constructor
 		g_app->run();
 
 		delete g_app;

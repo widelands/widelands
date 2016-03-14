@@ -542,7 +542,6 @@ void Warehouse::init_portdock(EditorGameBase & egbase)
 		portdock_->set_economy(get_economy());
 
 	// this is just to indicate something wrong is going on
-	//(tiborb)
 	PortDock* pd_tmp = portdock_;
 	if (!pd_tmp->get_fleet()) {
 		log (" portdock for port at %3dx%3d created but without a fleet!\n",
@@ -595,11 +594,11 @@ void Warehouse::cleanup(EditorGameBase& egbase) {
 		const WareList& workers = get_workers();
 		for (DescriptionIndex id = 0; id < workers.get_nrwareids(); ++id) {
 			const uint32_t stock = workers.stock(id);
-			//separate behaviour for the case of loading the game
-			//(which does save/destroy/reload) and simply destroying ingame
+			// Separate behaviour for the case of loading the game
+			// (which does save/destroy/reload) and simply destroying ingame
 			if (game->is_loaded())
 			{
-				//this game is really running
+				// This game is really running
 				for (uint32_t i = 0; i < stock; ++i) {
 					launch_worker(*game, id, Requirements()).start_task_leavebuilding(*game, true);
 				}
@@ -607,7 +606,7 @@ void Warehouse::cleanup(EditorGameBase& egbase) {
 			}
 			else
 			{
-				//we are in the load-game sequence...
+				// We are in the load-game sequence...
 				remove_workers(id, stock);
 			}
 		}
@@ -770,7 +769,7 @@ PlayerImmovable::Workers Warehouse::get_incorporated_workers()
 {
 	PlayerImmovable::Workers all_workers;
 
-	for (const std::pair<DescriptionIndex, WorkerList>& worker_pair : incorporated_workers_) {
+	for (const auto& worker_pair : incorporated_workers_) {
 		for (Worker * worker : worker_pair.second) {
 			all_workers.push_back(worker);
 		}
@@ -990,7 +989,7 @@ bool Warehouse::do_launch_ware(Game & game, WareInstance & ware)
 		return true;
 	}
 
-	//we did not launch the ware...
+	// We did not launch the ware...
 	return false;
 }
 
@@ -1060,7 +1059,7 @@ bool Warehouse::can_create_worker(Game &, DescriptionIndex const worker) const {
 	}
 
 	//  see if we have the resources
-	for (const std::pair<std::string, uint8_t>& buildcost : w_desc.buildcost()) {
+	for (const auto& buildcost : w_desc.buildcost()) {
 		const std::string & input_name = buildcost.first;
 		DescriptionIndex id_w = owner().tribe().ware_index(input_name);
 		if (owner().tribe().has_ware(id_w)) {
@@ -1090,12 +1089,12 @@ void Warehouse::create_worker(Game & game, DescriptionIndex const worker) {
 
 	const WorkerDescr & w_desc = *owner().tribe().get_worker_descr(worker);
 
-	for (const std::pair<std::string, uint8_t>& buildcost : w_desc.buildcost()) {
+	for (const auto& buildcost : w_desc.buildcost()) {
 		const std::string & input = buildcost.first;
 		DescriptionIndex const id_ware = owner().tribe().ware_index(input);
 		if (owner().tribe().has_ware(id_ware)) {
 			remove_wares(id_ware, buildcost.second);
-			//update statistic accordingly
+			// Update statistics accordingly
 			owner().ware_consumed(id_ware, buildcost.second);
 		} else
 			remove_workers(owner().tribe().safe_worker_index(input), buildcost.second);
@@ -1138,7 +1137,7 @@ std::vector<uint32_t> Warehouse::calc_available_for_worker
 	const WorkerDescr & w_desc = *owner().tribe().get_worker_descr(index);
 	std::vector<uint32_t> available;
 
-	for (const std::pair<std::string, uint8_t>& buildcost : w_desc.buildcost()) {
+	for (const auto& buildcost : w_desc.buildcost()) {
 		const std::string & input_name = buildcost.first;
 		DescriptionIndex id_w = owner().tribe().ware_index(input_name);
 		if (owner().tribe().has_ware(id_w)) {
@@ -1193,7 +1192,7 @@ void Warehouse::plan_workers(Game & game, DescriptionIndex index, uint32_t amoun
 		pw->amount = 0;
 
 		const WorkerDescr & w_desc = *owner().tribe().get_worker_descr(pw->index);
-		for (const std::pair<std::string, uint8_t>& buildcost : w_desc.buildcost()) {
+		for (const auto& buildcost : w_desc.buildcost()) {
 			const std::string & input_name = buildcost.first;
 
 			DescriptionIndex id_w = owner().tribe().ware_index(input_name);
@@ -1232,7 +1231,7 @@ void Warehouse::update_planned_workers
 	}
 
 	uint32_t idx = 0;
-	for (const std::pair<std::string, uint8_t>& buildcost : w_desc.buildcost()) {
+	for (const auto& buildcost : w_desc.buildcost()) {
 
 		const std::string & input_name = buildcost.first;
 		uint32_t supply;

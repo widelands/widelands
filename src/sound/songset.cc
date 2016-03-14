@@ -76,7 +76,7 @@ Mix_Music * Songset::get_song()
 		filename = *(current_song_++);
 	}
 
-	//first, close the previous song and remove it from memory
+	// First, close the previous song and remove it from memory
 	if (m_) {
 		Mix_FreeMusic(m_);
 		m_ = nullptr;
@@ -88,7 +88,7 @@ Mix_Music * Songset::get_song()
 		fr_.close();
 	}
 
-	//then open the new song
+	// Then open the new song
 	if (fr_.try_open(*g_fs, filename)) {
 		if (!(rwops_ = SDL_RWFromMem(fr_.data(0), fr_.get_size()))) {
 			fr_.close();  // fr_ should be Open iff rwops_ != 0

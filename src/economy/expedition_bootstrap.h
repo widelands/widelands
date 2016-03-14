@@ -99,6 +99,17 @@ private:
 	DISALLOW_COPY_AND_ASSIGN(ExpeditionBootstrap);
 };
 
+
+struct NoteExpeditionCanceled {
+	CAN_BE_SENT_AS_NOTE(NoteId::NoteExpeditionCanceled)
+
+	ExpeditionBootstrap* bootstrap;
+
+	NoteExpeditionCanceled(ExpeditionBootstrap* const init_bootstrap)
+		: bootstrap(init_bootstrap) {
+	}
+};
+
 }  // namespace Widelands
 
 #endif  // end of include guard: WL_ECONOMY_EXPEDITION_BOOTSTRAP_H

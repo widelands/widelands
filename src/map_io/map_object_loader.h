@@ -62,7 +62,7 @@ public:
 		ReverseMapObjectMap::const_iterator const existing =
 			m_objects.find(n);
 		if (existing != m_objects.end()) {
-			//delete &object; can not do this
+			// delete &object; can not do this
 			throw GameDataError("already loaded (%s)", to_string(existing->second->descr().type()).c_str());
 		}
 		m_objects.insert(std::pair<Serial, MapObject *>(n, &object));

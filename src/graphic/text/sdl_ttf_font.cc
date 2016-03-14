@@ -128,7 +128,6 @@ uint16_t SdlTtfFont::ascent(int style) const {
 }
 
 void SdlTtfFont::m_set_style(int style) {
-
 	int sdl_style = TTF_STYLE_NORMAL;
 	if (style & UNDERLINE) sdl_style |= TTF_STYLE_UNDERLINE;
 

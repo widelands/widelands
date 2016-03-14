@@ -21,7 +21,9 @@
 #define WL_WUI_BUILDINGWINDOW_H
 
 #include <cstdlib>
+#include <memory>
 
+#include "economy/expedition_bootstrap.h"
 #include "ui_basic/button.h"
 #include "ui_basic/window.h"
 #include "wui/field_overlay_manager.h"
@@ -92,6 +94,13 @@ private:
 
 	FieldOverlayManager::OverlayId workarea_overlay_id_;
 	bool avoid_fastclick_;
+
+	// For ports only.
+	void update_expedition_button(bool expedition_was_canceled);
+
+	UI::Button * expeditionbtn_;
+	std::unique_ptr<Notifications::Subscriber<Widelands::NoteExpeditionCanceled>>
+		expedition_canceled_subscriber_;
 };
 
 #endif  // end of include guard: WL_WUI_BUILDINGWINDOW_H

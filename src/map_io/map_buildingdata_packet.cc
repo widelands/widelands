@@ -490,7 +490,6 @@ void MapBuildingdataPacket::read_warehouse
 				 (game.map().get_fcoords(warehouse.get_position()),
 				  warehouse.descr().vision_range()));
 			warehouse.next_military_act_ = game.get_gametime();
-			//log("Read warehouse stuff for %p\n", &warehouse);
 		} else {
 			throw UnhandledVersionError("MapBuildingdataPacket - Warehouse",
 												 packet_version, kCurrentPacketVersionWarehouse);
@@ -633,7 +632,7 @@ void MapBuildingdataPacket::read_productionsite
 				//  Find a working position that matches this request.
 				ProductionSite::WorkingPosition * wp = &wp_begin;
 				bool found_working_position = false;
-				for (const WareAmount& working_position : working_positions) {
+				for (const auto& working_position : working_positions) {
 					uint32_t count = working_position.second;
 					assert(count);
 					if (worker_index == working_position.first) {
@@ -672,7 +671,7 @@ void MapBuildingdataPacket::read_productionsite
 				const WorkerDescr & worker_descr = worker->descr();
 				ProductionSite::WorkingPosition * wp = &wp_begin;
 				bool found_working_position = false;
-				for (const WareAmount& working_position : working_positions) {
+				for (const auto& working_position : working_positions) {
 					uint32_t count = working_position.second;
 					assert(count);
 
@@ -1084,14 +1083,14 @@ void MapBuildingdataPacket::write_warehouse
 
 	//  Incorporated workers, write sorted after file-serial.
 	uint32_t nworkers = 0;
-	for (const std::pair<DescriptionIndex, Warehouse::WorkerList>& cwt: warehouse.incorporated_workers_) {
+	for (const auto& cwt: warehouse.incorporated_workers_) {
 		nworkers += cwt.second.size();
 	}
 
 	fw.unsigned_16(nworkers);
 	using TWorkerMap = std::map<uint32_t, const Worker *>;
 	TWorkerMap workermap;
-	for (const std::pair<DescriptionIndex, Warehouse::WorkerList>& cwt : warehouse.incorporated_workers_) {
+	for (const auto& cwt : warehouse.incorporated_workers_) {
 		for (Worker * temp_worker : cwt.second) {
 			const Worker & w = *temp_worker;
 			assert(mos.is_object_known(w));
@@ -1101,7 +1100,7 @@ void MapBuildingdataPacket::write_warehouse
 		}
 	}
 
-	for (const std::pair<uint32_t, const Worker *>& temp_worker : workermap) {
+	for (const auto& temp_worker : workermap) {
 		const Worker & obj = *temp_worker.second;
 		assert(mos.is_object_known(obj));
 		fw.unsigned_32(mos.get_object_file_index(obj));
@@ -1237,7 +1236,7 @@ void MapBuildingdataPacket::write_productionsite
 		 std::numeric_limits<uint8_t>::max());
 	fw.unsigned_8(productionsite.skipped_programs_.size());
 
-	for (const std::pair<std::string, Time>& temp_program : productionsite.skipped_programs_) {
+	for (const auto& temp_program : productionsite.skipped_programs_) {
 		fw.string    (temp_program.first);
 		fw.unsigned_32(temp_program.second);
 	}

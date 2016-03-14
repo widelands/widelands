@@ -264,7 +264,7 @@ WorkersMap get_valid_workers_for(const Road& r) {
 WorkersMap get_valid_workers_for(const ProductionSite& ps)
 {
 	WorkersMap rv;
-	for (const Widelands::WareAmount& item : ps.descr().working_positions()) {
+	for (const auto& item : ps.descr().working_positions()) {
 		rv.insert(WorkerAmount(item.first, item.second));
 	}
 	return rv;
@@ -1957,7 +1957,7 @@ const PropertyType<LuaProductionSiteDescription> LuaProductionSiteDescription::P
 int LuaProductionSiteDescription::get_inputs(lua_State * L) {
 	lua_newtable(L);
 	int index = 1;
-	for (const WareAmount& input_ware : get()->inputs()) {
+	for (const auto& input_ware : get()->inputs()) {
 		lua_pushint32(L, index++);
 		const WareDescr* descr = get_egbase(L).tribes().get_ware_descr(input_ware.first);
 		to_lua<LuaWareDescription>(L, new LuaWareDescription(descr));
@@ -2058,7 +2058,7 @@ int LuaProductionSiteDescription::consumed_wares(lua_State * L) {
 		const ProductionProgram& program = *programs.at(program_name);
 		lua_newtable(L);
 		int counter = 0;
-		for (const Widelands::ProductionProgram::WareTypeGroup& group: program.consumed_wares()) {
+		for (const auto& group: program.consumed_wares()) {
 			lua_pushnumber(L, ++counter);
 			lua_newtable(L);
 			for (const DescriptionIndex& ware_index : group.first) {
@@ -2656,7 +2656,7 @@ int LuaWorkerDescription::get_buildcost(lua_State * L) {
 	lua_newtable(L);
 	int index = 1;
 	if (get()->is_buildable()) {
-		for (const std::pair<std::string, uint8_t>& buildcost_pair : get()->buildcost()) {
+		for (const auto& buildcost_pair : get()->buildcost()) {
 			lua_pushint32(L, index++);
 			lua_pushstring(L, buildcost_pair.first);
 			lua_settable(L, -3);
@@ -3451,7 +3451,7 @@ int LuaFlag::set_wares(lua_State * L)
 
 	uint32_t nwares = 0;
 
-	for (const std::pair<Widelands::DescriptionIndex, uint32_t>& ware : c_wares) {
+	for (const auto& ware : c_wares) {
 		// all wares currently on the flag without a setpoint should be removed
 		if (!setpoints.count(ware.first))
 			setpoints.insert(Widelands::WareAmount(ware.first, 0));
@@ -3459,7 +3459,7 @@ int LuaFlag::set_wares(lua_State * L)
 	}
 
 	// The idea is to change as little as possible on this flag
-	for (const std::pair<Widelands::DescriptionIndex, uint32_t>& sp : setpoints) {
+	for (const auto& sp : setpoints) {
 		uint32_t cur = 0;
 		WaresMap::iterator i = c_wares.find(sp.first);
 		if (i != c_wares.end())
@@ -3509,7 +3509,7 @@ int LuaFlag::get_wares(lua_State * L) {
 	if (wares_set.size() == flag->owner().tribe().get_nrwares()) { // Want all returned
 		wares_set.clear();
 
-		for (const std::pair<Widelands::DescriptionIndex, uint32_t>& ware : wares) {
+		for (const auto& ware : wares) {
 			wares_set.insert(ware.first);
 		}
 	}
@@ -4054,7 +4054,7 @@ int LuaProductionSite::get_valid_wares(lua_State * L) {
 	ProductionSite * ps = get(L, egbase);
 
 	lua_newtable(L);
-	for (const WareAmount& input_ware : ps->descr().inputs()) {
+	for (const auto& input_ware : ps->descr().inputs()) {
 		const WareDescr* descr = egbase.tribes().get_ware_descr(input_ware.first);
 		lua_pushstring(L, descr->name());
 		lua_pushuint32(L, input_ware.second);
@@ -4082,10 +4082,10 @@ int LuaProductionSite::set_wares(lua_State * L) {
 	WaresMap setpoints = m_parse_set_wares_arguments(L, tribe);
 
 	WaresSet valid_wares;
-	for (const WareAmount& input_ware : ps->descr().inputs()) {
+	for (const auto& input_ware : ps->descr().inputs()) {
 		valid_wares.insert(input_ware.first);
 	}
-	for (const std::pair<Widelands::DescriptionIndex, uint32_t>& sp : setpoints) {
+	for (const auto& sp : setpoints) {
 		if (!valid_wares.count(sp.first)) {
 			report_error(
 				L, "<%s> can't be stored in this building: %s!",
@@ -4112,7 +4112,7 @@ int LuaProductionSite::get_wares(lua_State * L) {
 	WaresSet wares_set = m_parse_get_wares_arguments(L, tribe, &return_number);
 
 	WaresSet valid_wares;
-	for (const WareAmount& input_ware : ps->descr().inputs()) {
+	for (const auto& input_ware : ps->descr().inputs()) {
 		valid_wares.insert(input_ware.first);
 	}
 
@@ -4309,7 +4309,7 @@ const PropertyType<LuaBob> LuaBob::Properties[] = {
  */
 
 /* RST
-	.. attribute:: field //working here
+	.. attribute:: field // working here
 
 		(RO) The field the bob is located on
 */

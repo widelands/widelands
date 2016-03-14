@@ -193,7 +193,7 @@ void ObjectManager::remove(MapObject & obj)
 std::vector<Serial> ObjectManager::all_object_serials_ordered () const {
 	std::vector<Serial> rv;
 
-	for (const std::pair<Serial, MapObject *>& o : objects_) {
+	for (const auto& o : objects_) {
 		rv.push_back(o.first);
 	}
 
@@ -299,7 +299,7 @@ void MapObjectDescr::add_directional_animation(DirAnimations* anims, const std::
 
 std::string MapObjectDescr::get_animation_name(uint32_t const anim) const {
 
-	for (const std::pair<std::string, uint32_t>& temp_anim : anims_) {
+	for (const auto& temp_anim : anims_) {
 		if (temp_anim.second == anim) {
 			return temp_anim.first;
 		}

@@ -190,7 +190,7 @@ bool DismantleSite::get_building_work(Game & game, Worker & worker, bool) {
 			wq.set_filled(wq.get_filled() - 1);
 			wq.set_max_size(wq.get_max_size() - 1);
 
-			//update statistics
+			// Update statistics
 			owner().ware_produced(wq.get_ware());
 
 			const WareDescr & wd = *owner().tribe().get_ware_descr(wq.get_ware());

@@ -361,8 +361,6 @@ void Economy::set_worker_target_quantity
 */
 void Economy::add_wares(DescriptionIndex const id, uint32_t const count)
 {
-	//log("%p: add(%i, %i)\n", this, id, count);
-
 	wares_.add(id, count);
 	start_request_timer();
 
@@ -370,8 +368,6 @@ void Economy::add_wares(DescriptionIndex const id, uint32_t const count)
 }
 void Economy::add_workers(DescriptionIndex const id, uint32_t const count)
 {
-	//log("%p: add(%i, %i)\n", this, id, count);
-
 	workers_.add(id, count);
 	start_request_timer();
 
@@ -387,8 +383,6 @@ void Economy::add_workers(DescriptionIndex const id, uint32_t const count)
 void Economy::remove_wares(DescriptionIndex const id, uint32_t const count)
 {
 	assert(owner_.egbase().tribes().ware_exists(id));
-	//log("%p: remove(%i, %i) from %i\n", this, id, count, wares_.stock(id));
-
 	wares_.remove(id, count);
 
 	// TODO(unknown): remove from global player inventory?
@@ -401,8 +395,6 @@ void Economy::remove_wares(DescriptionIndex const id, uint32_t const count)
  */
 void Economy::remove_workers(DescriptionIndex const id, uint32_t const count)
 {
-	//log("%p: remove(%i, %i) from %i\n", this, id, count, workers_.stock(id));
-
 	workers_.remove(id, count);
 
 	// TODO(unknown): remove from global player inventory?
@@ -957,7 +949,7 @@ void Economy::create_requested_worker(Game & game, DescriptionIndex index)
 	uint32_t idx = 0;
 	uint32_t scarcest_idx = 0;
 	bool plan_at_least_one = false;
-	for (const std::pair<std::string, uint8_t>& bc : cost) {
+	for (const auto& bc : cost) {
 		uint32_t cc = total_available[idx] / bc.second;
 		if (cc <= can_create) {
 			scarcest_idx = idx;
@@ -1136,7 +1128,7 @@ void Economy::handle_active_supplies(Game & game)
 	ss.unsigned_32(0x02decafa); // appears as facade02 in sync stream
 	ss.unsigned_32(assignments.size());
 
-	for (const std::pair<Supply *, Warehouse *>& temp_assignment : assignments) {
+	for (const auto& temp_assignment : assignments) {
 		ss.unsigned_32(temp_assignment.first->get_position(game)->serial());
 		ss.unsigned_32(temp_assignment.second->serial());
 
