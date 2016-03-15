@@ -61,7 +61,7 @@
 namespace Widelands {
 
 WidelandsMapLoader::WidelandsMapLoader(FileSystem* fs, Map * const m)
-	: MapLoader("", *m), m_fs(fs)
+	: MapLoader("", *m), fs_(fs)
 {
 	m->filesystem_.reset(fs);
 }
@@ -77,25 +77,25 @@ WidelandsMapLoader::~WidelandsMapLoader() {
 int32_t WidelandsMapLoader::preload_map(bool const scenario) {
 	assert(get_state() != STATE_LOADED);
 
-	m_map.cleanup();
+	map_.cleanup();
 
 	{
 		MapElementalPacket mp;
-		mp.pre_read(*m_fs, &m_map);
-		m_old_world_name = mp.old_world_name();
+		mp.pre_read(*fs_, &map_);
+		old_world_name_ = mp.old_world_name();
 	}
 
 	{
 		MapPlayerNamesAndTribesPacket p;
-		p.pre_read(*m_fs, &m_map, !scenario);
+		p.pre_read(*fs_, &map_, !scenario);
 	}
 	// No scripting/init.lua file -> not playable as scenario
 	Map::ScenarioTypes m = Map::NO_SCENARIO;
-	if (m_fs->file_exists("scripting/init.lua"))
+	if (fs_->file_exists("scripting/init.lua"))
 		m |= Map::SP_SCENARIO;
-	if (m_fs->file_exists("scripting/multiplayer_init.lua"))
+	if (fs_->file_exists("scripting/multiplayer_init.lua"))
 		m |= Map::MP_SCENARIO;
-	m_map.set_scenario_types(m);
+	map_.set_scenario_types(m);
 
 	set_state(STATE_PRELOADED);
 
@@ -109,21 +109,21 @@ int32_t WidelandsMapLoader::load_map_complete
 	(EditorGameBase & egbase, MapLoader::LoadType load_type)
 {
 	std::string timer_message = "WidelandsMapLoader::load_map_complete() for '";
-	timer_message += m_map.get_name();
+	timer_message += map_.get_name();
 	timer_message += "' took %ums";
 	ScopedTimer timer(timer_message);
 
 	bool is_game = load_type == MapLoader::LoadType::kGame;
 
 	preload_map(!is_game);
-	m_map.set_size(m_map.width_, m_map.height_);
-	m_mol.reset(new MapObjectLoader());
+	map_.set_size(map_.width_, map_.height_);
+	mol_.reset(new MapObjectLoader());
 
 	// MANDATORY PACKETS
 	// PRELOAD DATA BEGIN
 	log("Reading Elemental Data ... ");
 	MapElementalPacket elemental_data_packet;
-	elemental_data_packet.read(*m_fs, egbase, is_game, *m_mol);
+	elemental_data_packet.read(*fs_, egbase, is_game, *mol_);
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	egbase.allocate_player_maps(); //  Can do this now that map size is known.
@@ -132,88 +132,88 @@ int32_t WidelandsMapLoader::load_map_complete
 	log("Reading Player Names And Tribe Data ... ");
 	{
 		MapPlayerNamesAndTribesPacket p;
-		p.read(*m_fs, egbase, is_game, *m_mol);
+		p.read(*fs_, egbase, is_game, *mol_);
 	}
 	log("took %ums\n ", timer.ms_since_last_query());
 	// PRELOAD DATA END
 
-	if (m_fs->file_exists("port_spaces")) {
+	if (fs_->file_exists("port_spaces")) {
 		log("Reading Port Spaces Data ... ");
 
 		MapPortSpacesPacket p;
-		p.read(*m_fs, egbase, is_game, *m_mol);
+		p.read(*fs_, egbase, is_game, *mol_);
 
 		log("took %ums\n ", timer.ms_since_last_query());
 	}
 
 	log("Reading Heights Data ... ");
-	{MapHeightsPacket        p; p.read(*m_fs, egbase, is_game, *m_mol);}
+	{MapHeightsPacket        p; p.read(*fs_, egbase, is_game, *mol_);}
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	std::unique_ptr<WorldLegacyLookupTable> world_lookup_table
-		(create_world_legacy_lookup_table(m_old_world_name));
+		(create_world_legacy_lookup_table(old_world_name_));
 	std::unique_ptr<TribesLegacyLookupTable> tribe_lookup_table(new TribesLegacyLookupTable());
 	log("Reading Terrain Data ... ");
-	{MapTerrainPacket p; p.read(*m_fs, egbase, *world_lookup_table);}
+	{MapTerrainPacket p; p.read(*fs_, egbase, *world_lookup_table);}
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	MapObjectPacket mapobjects;
 
 	log("Reading Map Objects ... ");
-	mapobjects.read(*m_fs, egbase, *m_mol, *world_lookup_table, *tribe_lookup_table);
+	mapobjects.read(*fs_, egbase, *mol_, *world_lookup_table, *tribe_lookup_table);
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	log("Reading Player Start Position Data ... ");
 	{
 		MapPlayerPositionPacket p;
-		p.read(*m_fs, egbase, is_game, *m_mol);
+		p.read(*fs_, egbase, is_game, *mol_);
 	}
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	// This call must stay around forever since this was the way critters have
 	// been saved into the map before 2010. Most of the maps we ship are still
 	// old in that sense and most maps on the homepage too.
-	if (m_fs->file_exists("binary/bob")) {
+	if (fs_->file_exists("binary/bob")) {
 		log("Reading (legacy) Bob Data ... ");
 		{
 			MapBobPacket p;
-			p.read(*m_fs, egbase, *m_mol, *world_lookup_table);
+			p.read(*fs_, egbase, *mol_, *world_lookup_table);
 		}
 		log("took %ums\n ", timer.ms_since_last_query());
 	}
 
 	log("Reading Resources Data ... ");
-	{MapResourcesPacket      p; p.read(*m_fs, egbase, *world_lookup_table);}
+	{MapResourcesPacket      p; p.read(*fs_, egbase, *world_lookup_table);}
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	//  NON MANDATORY PACKETS BELOW THIS POINT
 	// Do not load unneeded packages in the editor
 	if (load_type != MapLoader::LoadType::kEditor) {
 		log("Reading Map Version Data ... ");
-		{MapVersionPacket      p; p.read(*m_fs, egbase, is_game, *m_mol);}
+		{MapVersionPacket      p; p.read(*fs_, egbase, is_game, *mol_);}
 		log("took %ums\n ", timer.ms_since_last_query());
 
 
 		log("Reading Allowed Worker Types Data ... ");
 		{
 			MapAllowedWorkerTypesPacket p;
-			p.read(*m_fs, egbase, is_game, *m_mol);
+			p.read(*fs_, egbase, is_game, *mol_);
 		}
 		log("took %ums\n ", timer.ms_since_last_query());
 
 		log("Reading Allowed Building Types Data ... ");
 		{
 			MapAllowedBuildingTypesPacket p;
-			p.read(*m_fs, egbase, is_game, *m_mol);
+			p.read(*fs_, egbase, is_game, *mol_);
 		}
 		log("took %ums\n ", timer.ms_since_last_query());
 
 		log("Reading Node Ownership Data ... ");
-		{MapNodeOwnershipPacket p; p.read(*m_fs, egbase, is_game, *m_mol);}
+		{MapNodeOwnershipPacket p; p.read(*fs_, egbase, is_game, *mol_);}
 		log("took %ums\n ", timer.ms_since_last_query());
 
 		log("Reading Exploration Data ... ");
-		{MapExplorationPacket    p; p.read(*m_fs, egbase, is_game, *m_mol);}
+		{MapExplorationPacket    p; p.read(*fs_, egbase, is_game, *mol_);}
 		log("took %ums\n ", timer.ms_since_last_query());
 
 		//  !!!!!!!!!! NOTE
@@ -221,28 +221,28 @@ int32_t WidelandsMapLoader::load_map_complete
 		//  this order without knowing what you do
 		//  EXISTENT PACKETS
 		log("Reading Flag Data ... ");
-		{MapFlagPacket           p; p.read(*m_fs, egbase, is_game, *m_mol);}
+		{MapFlagPacket           p; p.read(*fs_, egbase, is_game, *mol_);}
 		log("took %ums\n ", timer.ms_since_last_query());
 
 		log("Reading Road Data ... ");
-		{MapRoadPacket           p; p.read(*m_fs, egbase, is_game, *m_mol);}
+		{MapRoadPacket           p; p.read(*fs_, egbase, is_game, *mol_);}
 		log("took %ums\n ", timer.ms_since_last_query());
 
 		log("Reading Building Data ... ");
-		{MapBuildingPacket       p; p.read(*m_fs, egbase, is_game, *m_mol);}
+		{MapBuildingPacket       p; p.read(*fs_, egbase, is_game, *mol_);}
 		log("took %ums\n ", timer.ms_since_last_query());
 
 		//  DATA PACKETS
 		log("Reading Flagdata Data ... ");
-		{MapFlagdataPacket       p; p.read(*m_fs, egbase, is_game, *m_mol);}
+		{MapFlagdataPacket       p; p.read(*fs_, egbase, is_game, *mol_);}
 		log("took %ums\n ", timer.ms_since_last_query());
 
 		log("Reading Roaddata Data ... ");
-		{MapRoaddataPacket       p; p.read(*m_fs, egbase, is_game, *m_mol);}
+		{MapRoaddataPacket       p; p.read(*fs_, egbase, is_game, *mol_);}
 		log("took %ums\n ", timer.ms_since_last_query());
 
 		log("Reading Buildingdata Data ... ");
-		{MapBuildingdataPacket   p; p.read(*m_fs, egbase, is_game, *m_mol);}
+		{MapBuildingdataPacket   p; p.read(*fs_, egbase, is_game, *mol_);}
 		log("took %ums\n ", timer.ms_since_last_query());
 
 		log("Second and third phase loading Map Objects ... ");
@@ -263,7 +263,7 @@ int32_t WidelandsMapLoader::load_map_complete
 		//  NOTE DO NOT CHANGE THE PLACE UNLESS YOU KNOW WHAT ARE YOU DOING
 		//  Must be loaded after every kind of object that can see.
 		log("Reading Players View Data ... ");
-		{MapPlayersViewPacket   p; p.read(*m_fs, egbase, is_game, *m_mol);}
+		{MapPlayersViewPacket   p; p.read(*fs_, egbase, is_game, *mol_);}
 		log("took %ums\n ", timer.ms_since_last_query());
 
 		//  This must come before anything that references messages, such as:
@@ -272,36 +272,36 @@ int32_t WidelandsMapLoader::load_map_complete
 		log("Reading Player Message Data ... ");
 		{
 			MapPlayersMessagesPacket p;
-			p.read(*m_fs, egbase, is_game, *m_mol);
+			p.read(*fs_, egbase, is_game, *mol_);
 		}
 		log("took %ums\n ", timer.ms_since_last_query());
 	} // load_type != MapLoader::LoadType::kEditor
 
 	//  Objectives
 	log("Reading Objective Data ... ");
-	{MapObjectivePacket      p; p.read(*m_fs, egbase, is_game, *m_mol);}
+	{MapObjectivePacket      p; p.read(*fs_, egbase, is_game, *mol_);}
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	log("Reading Scripting Data ... ");
-	{MapScriptingPacket      p; p.read(*m_fs, egbase, is_game, *m_mol);}
+	{MapScriptingPacket      p; p.read(*fs_, egbase, is_game, *mol_);}
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	log("Reading map images ... ");
-	load_map_images(*m_fs);
+	load_map_images(*fs_);
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	if (load_type != MapLoader::LoadType::kEditor) {
-		if (m_mol->get_nr_unloaded_objects()) {
+		if (mol_->get_nr_unloaded_objects()) {
 			log
 				("WARNING: There are %i unloaded objects. This is a bug, please "
 				 "consider committing!\n",
-				 m_mol->get_nr_unloaded_objects());
+				 mol_->get_nr_unloaded_objects());
 		}
 	} // load_type != MapLoader::LoadType::kEditor
 
-	m_map.recalc_whole_map(egbase.world());
+	map_.recalc_whole_map(egbase.world());
 
-	m_map.ensure_resource_consistency(egbase.world());
+	map_.ensure_resource_consistency(egbase.world());
 
 	set_state(STATE_LOADED);
 

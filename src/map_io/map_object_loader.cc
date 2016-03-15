@@ -29,7 +29,7 @@ namespace Widelands {
  * Returns true if this object has already been inserted
  */
 bool MapObjectLoader::is_object_known(Serial const n) {
-	return m_objects.find(n) != m_objects.end();
+	return objects_.find(n) != objects_.end();
 }
 
 
@@ -38,7 +38,7 @@ bool MapObjectLoader::is_object_known(Serial const n) {
  */
 void MapObjectLoader::mark_object_as_loaded(MapObject & obj)
 {
-	m_loaded_obj[&obj] = true;
+	loaded_objects_[&obj] = true;
 }
 
 /*
@@ -48,9 +48,9 @@ int32_t MapObjectLoader::get_nr_unloaded_objects()
 {
 	int32_t result = 0;
 	std::map<MapObject *, bool>::const_iterator const loaded_obj_end =
-		m_loaded_obj.end();
+		loaded_objects_.end();
 	for
-		(std::map<MapObject *, bool>::const_iterator it = m_loaded_obj.begin();
+		(std::map<MapObject *, bool>::const_iterator it = loaded_objects_.begin();
 		 it != loaded_obj_end;
 		 ++it)
 		if (!it->second)
@@ -65,7 +65,7 @@ int32_t MapObjectLoader::get_nr_unloaded_objects()
  */
 void MapObjectLoader::schedule_destroy(MapObject & obj)
 {
-	m_schedule_destroy.push_back(&obj);
+	schedule_destroy_.push_back(&obj);
 }
 
 /**
@@ -76,7 +76,7 @@ void MapObjectLoader::schedule_destroy(MapObject & obj)
  */
 void MapObjectLoader::schedule_act(Bob & bob)
 {
-	m_schedule_act.push_back(&bob);
+	schedule_act_.push_back(&bob);
 }
 
 /**
@@ -86,14 +86,14 @@ void MapObjectLoader::schedule_act(Bob & bob)
  */
 void MapObjectLoader::load_finish_game(Game & g)
 {
-	while (!m_schedule_destroy.empty()) {
-		m_schedule_destroy.back()->schedule_destroy(g);
-		m_schedule_destroy.pop_back();
+	while (!schedule_destroy_.empty()) {
+		schedule_destroy_.back()->schedule_destroy(g);
+		schedule_destroy_.pop_back();
 	}
 
-	while (!m_schedule_act.empty()) {
-		m_schedule_act.back()->schedule_act(g, 1);
-		m_schedule_act.pop_back();
+	while (!schedule_act_.empty()) {
+		schedule_act_.back()->schedule_act(g, 1);
+		schedule_act_.pop_back();
 	}
 }
 
