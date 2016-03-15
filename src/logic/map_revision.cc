@@ -25,11 +25,11 @@ namespace Widelands {
 
 
 MapVersion::MapVersion() :
-map_version_major_(0),
-map_version_minor_(0)
+map_version_major(0),
+map_version_minor(0)
 {
-	map_creator_version_ = build_id();
-	map_version_timestamp_ = static_cast<uint32_t>(time(nullptr));
+	map_creator_version = build_id();
+	map_version_timestamp = static_cast<uint32_t>(time(nullptr));
 }
 
 }
