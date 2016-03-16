@@ -944,16 +944,39 @@ void Ship::sink_ship(Game& game) {
 void Ship::log_general_info(const EditorGameBase& egbase) {
 	Bob::log_general_info(egbase);
 
-	molog("Fleet: %u, destination: %u, lastdock: %u, carrying: %" PRIuS "\n",
+	molog("Ship belongs to fleet: %u\n destination: %u (%dx%d)\n lastdock: %u (%dx%d)\n",
 	      fleet_ ? fleet_->serial() : 0,
 	      destination_.serial(),
+	      (destination_.is_set()) ?
+	      	destination_.get(egbase)->get_positions(egbase)[0].x : -1,
+	      (destination_.is_set()) ?
+	      	destination_.get(egbase)->get_positions(egbase)[0].y : -1,
 	      lastdock_.serial(),
-			items_.size());
+	      (lastdock_.is_set()) ?
+	      	lastdock_.get(egbase)->get_positions(egbase)[0].x : -1,
+	      (lastdock_.is_set()) ?
+	      	lastdock_.get(egbase)->get_positions(egbase)[0].y : -1);
+
+	molog("In state: %d (%s)\n",
+		ship_state_,
+		(expedition_) ? "expedition": "transportation");
+
+	if (destination_.is_set() && get_position().field->get_immovable() == destination_.get(egbase)) {
+		molog("Currently in destination portdock\n");
+	}
+
+	molog("Carrying %" PRIuS " items%s\n",
+		items_.size(),
+		(items_.empty()) ? "." : ":");
 
 	for (const ShippingItem& shipping_item : items_) {
-		molog("  IT %u, destination %u\n",
+		molog("  * %u, destination %u (%dx%d)\n",
 				shipping_item.object_.serial(),
-				shipping_item.destination_dock_.serial());
+				shipping_item.destination_dock_.serial(),
+				(shipping_item.destination_dock_.is_set()) ?
+					shipping_item.destination_dock_.get(egbase)->get_positions(egbase)[0].x : -1,
+				(shipping_item.destination_dock_.is_set()) ?
+					shipping_item.destination_dock_.get(egbase)->get_positions(egbase)[0].y : -1);
 	}
 }
 
