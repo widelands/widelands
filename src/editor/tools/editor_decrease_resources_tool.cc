@@ -50,12 +50,12 @@ int32_t EditorDecreaseResourcesTool::handle_click_impl(const Widelands::World& w
 		if (amount < 0)
 			amount = 0;
 
-		args->orgResT.push_back(mr.location().field->get_resources());
-		args->orgRes.push_back(mr.location().field->get_resources_amount());
+		args->original_resource_type.push_back(mr.location().field->get_resources());
+		args->original_resource_amount.push_back(mr.location().field->get_resources_amount());
 
-		if (mr.location().field->get_resources() == args->cur_res &&
-			map->is_resource_valid(world, mr.location(), args->cur_res)) {
-			map->initialize_resources(mr.location(), args->cur_res, amount);
+		if (mr.location().field->get_resources() == args->current_resource &&
+			map->is_resource_valid(world, mr.location(), args->current_resource)) {
+			map->initialize_resources(mr.location(), args->current_resource, amount);
 		}
 
 	} while (mr.advance(*map));
@@ -74,6 +74,6 @@ EditorActionArgs EditorDecreaseResourcesTool::format_args_impl(EditorInteractive
 {
 	EditorActionArgs a(parent);
 	a.change_by = change_by_;
-	a.cur_res = cur_res_;
+	a.current_resource = cur_res_;
 	return a;
 }

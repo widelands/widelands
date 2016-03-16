@@ -39,17 +39,17 @@ int32_t EditorSetResourcesTool::handle_click_impl(const Widelands::World& world,
 	 (map->get_fcoords(center.node), args->sel_radius));
 	do {
 		int32_t amount     = args->set_to;
-		int32_t max_amount = args->cur_res != Widelands::kNoResource ?
-							 world.get_resource(args->cur_res)->max_amount() : 0;
+		int32_t max_amount = args->current_resource != Widelands::kNoResource ?
+							 world.get_resource(args->current_resource)->max_amount() : 0;
 		if (amount < 0)
 			amount = 0;
 		else if (amount > max_amount)
 			amount = max_amount;
 
-		if (map->is_resource_valid(world, mr.location(), args->cur_res)) {
-			args->orgResT.push_back(mr.location().field->get_resources());
-			args->orgRes.push_back(mr.location().field->get_resources_amount());
-			map->initialize_resources(mr.location(), args->cur_res, amount);
+		if (map->is_resource_valid(world, mr.location(), args->current_resource)) {
+			args->original_resource_type.push_back(mr.location().field->get_resources());
+			args->original_resource_amount.push_back(mr.location().field->get_resources_amount());
+			map->initialize_resources(mr.location(), args->current_resource, amount);
 		}
 	} while (mr.advance(*map));
 	return mr.radius();
@@ -65,10 +65,10 @@ EditorSetResourcesTool::handle_undo_impl(const Widelands::World& world,
 	(*map,
 	 Widelands::Area<Widelands::FCoords>
 	 (map->get_fcoords(center.node), args->sel_radius));
-	std::list<uint8_t>::iterator ir = args->orgRes.begin(), it = args->orgResT.begin();
+	std::list<uint8_t>::iterator ir = args->original_resource_amount.begin(), it = args->original_resource_type.begin();
 	do {
 		int32_t amount     = *ir;
-		int32_t max_amount = world.get_resource(args->cur_res)->max_amount();
+		int32_t max_amount = world.get_resource(args->current_resource)->max_amount();
 
 		if (amount < 0)
 			amount = 0;
@@ -79,15 +79,15 @@ EditorSetResourcesTool::handle_undo_impl(const Widelands::World& world,
 		++ir;
 		++it;
 	} while (mr.advance(*map));
-	args->orgRes.clear();
-	args->orgResT.clear();
+	args->original_resource_amount.clear();
+	args->original_resource_type.clear();
 	return mr.radius();
 }
 
 EditorActionArgs EditorSetResourcesTool::format_args_impl(EditorInteractive & parent)
 {
 	EditorActionArgs a(parent);
-	a.cur_res = cur_res_;
+	a.current_resource = cur_res_;
 	a.set_to = set_to_;
 	return a;
 }

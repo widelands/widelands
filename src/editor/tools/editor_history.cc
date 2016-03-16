@@ -30,7 +30,7 @@
 EditorActionArgs::EditorActionArgs(EditorInteractive & base):
 	sel_radius(base.get_sel_radius()),
 	change_by(0),
-	cur_res(0),
+	current_resource(0),
 	set_to(0),
 	interval(0, 0),
 	refcount(0)
@@ -42,15 +42,15 @@ EditorActionArgs::~EditorActionArgs()
 		delete draw_actions.back();
 		draw_actions.pop_back();
 	}
-	nbob_type.clear();
-	obob_type.clear();
-	nimmov_types.clear();
-	oimmov_types.clear();
-	orgRes.clear();
-	orgResT.clear();
-	origHights.clear();
-	origTerrainType.clear();
-	terrainType.clear();
+	new_bob_type.clear();
+	old_bob_type.clear();
+	new_immovable_types.clear();
+	old_immovable_types.clear();
+	original_resource_amount.clear();
+	original_resource_type.clear();
+	original_heights.clear();
+	original_terrain_type.clear();
+	terrain_type.clear();
 }
 
 // === EditorHistory === //
