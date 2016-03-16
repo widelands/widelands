@@ -38,7 +38,6 @@ public:
 		UI::UniqueWindow::Registry readme;
 		UI::UniqueWindow::Registry keys;
 		UI::UniqueWindow::Registry help;
-		UI::UniqueWindow::Registry about;
 		UI::UniqueWindow::Registry license;
 		UI::UniqueWindow::Registry sound_options;
 

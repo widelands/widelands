@@ -114,9 +114,6 @@ void EditorMainMenu::help_btn() {
 	} else {
 		FileViewWindow* fileview = new FileViewWindow(eia(), window_help_, _("About the Widelands Editor"));
 		fileview->add_tab("txts/help/editor_help.lua");
-		fileview->add_tab("txts/LICENSE.lua");
-		fileview->add_tab("txts/AUTHORS.lua");
-		fileview->add_tab("txts/TRANSLATORS.lua");
 	}
 }
 

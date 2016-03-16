@@ -4,9 +4,9 @@ include "txts/help/common_helptexts.lua"
 set_textdomain("texts")
 
 return {
-   title = _"General Help",
+   title = _"Help",
    text =
-      title(_"General Help") ..
+      title(_"Help") ..
       rt(
          help_introduction() ..
          h2(_[[General game control]]) ..
