@@ -224,3 +224,16 @@ end
 function listitem_bullet(text)
    return listitem("•", text)
 end
+
+-- RST
+-- .. function:: dl(dt, dd)
+--
+--    Creates a description list item
+--
+--    :arg dt: description term, will be shown in bold
+--    :arg dd: description data - the text of the list item
+--
+--    :returns: b(dt) .. " " .. dd .. "<br>"
+function dl(dt, dd)
+   return b(dt) .. " " .. dd .. "<br>"
+end

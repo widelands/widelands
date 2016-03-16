@@ -115,7 +115,7 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase & e) :
 
 	toggle_main_menu_
 	(INIT_BUTTON
-	 ("images/wui/menus/menu_toggle_menu.png", "menu", _("Menu"))),
+	 ("images/wui/menus/menu_toggle_menu.png", "menu", _("Main Menu"))),
 	toggle_tool_menu_
 	(INIT_BUTTON
 	 ("images/wui/editor/editor_menu_toggle_tool_menu.png", "tools", _("Tools"))),

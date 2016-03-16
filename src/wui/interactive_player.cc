@@ -89,7 +89,7 @@ toggle_chat_
 	 ("wui/menus/menu_chat", "chat", _("Chat"))),
 toggle_options_menu_
 	(INIT_BTN
-	 ("wui/menus/menu_options_menu", "options_menu", _("Options"))),
+	 ("wui/menus/menu_options_menu", "options_menu", _("Main Menu"))),
 toggle_statistics_menu_
 	(INIT_BTN
 	 ("wui/menus/menu_toggle_menu", "statistics_menu", _("Statistics"))),

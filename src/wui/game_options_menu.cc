@@ -66,7 +66,7 @@ GameOptionsMenu::GameOptionsMenu
 	 UI::UniqueWindow::Registry               & registry,
 	 InteractiveGameBase::GameMainMenuWindows & windows)
 :
-	UI::UniqueWindow(&gb, "options", &registry, 2 * margin + width, 0, _("Options")),
+	UI::UniqueWindow(&gb, "options", &registry, 2 * margin + width, 0, _("Main Menu")),
 	igb_(gb),
 	windows_(windows),
 	box_(this, margin, margin, UI::Box::Vertical,
@@ -131,7 +131,7 @@ void GameOptionsMenu::clicked_help() {
 	if (windows_.help.window) {
 		delete windows_.help.window;
 	} else {
-		FileViewWindow* fileview = new FileViewWindow(igb_, windows_.help, _("Help"));
+		FileViewWindow* fileview = new FileViewWindow(igb_, windows_.help, _("General Help"));
 		fileview->add_tab("txts/help/general_in_game_help.lua");
 	}
 }

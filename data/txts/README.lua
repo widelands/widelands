@@ -20,22 +20,20 @@ rt(
 
    h2(_[[Widelands Help]]) ..
    p(_"You can find general help about gameplay or the editor by using the help button in the main menu.") ..
-   help_tribal_encyclopedia() ..
-
    help_online_help() ..
 
-    h2(_[[Reporting Bugs]]) ..
-    p(_[[If you encounter a bug, please report it to our bugtracker:]]) ..
-    p(a([[https://bugs.launchpad.net/widelands]])) ..
-    listitem_bullet(_[[Please provide enough background information. Tell us:]]) ..
-    listitem_bullet(_[[Detailed steps on how to trigger the bug, if possible.]]) ..
-    listitem_bullet(_[[What you expected to happen when performing the steps and what actually happened.]]) ..
-    listitem_bullet(_[[Which version of Widelands you are running (i.e. either the build number or the revision number if you are running a development version or a daily build.)]]) ..
-    listitem_bullet(_[[Please also include which operating system you are running Widelands on as some bugs can be platform specific.]]) ..
-    listitem_bullet(_[[Which map you were playing when the bug occurred.]]) ..
-    listitem_bullet(_[[If the bug concerns something not being displayed correctly or if it helps demonstrate the issue, please include one or more screenshots.]]) ..
-    listitem_bullet(_[[If you have a save game or replay demonstrating the issue (for instance crashes where it can be hard to tell exactly what is triggering it), please include that too. For more information, see the section on Replays below.]]
-   ) .. "</p>" ..
+   h2(_[[Reporting Bugs]]) ..
+   p(_[[If you encounter a bug, please report it to our bugtracker:]]) ..
+   p(a([[https://bugs.launchpad.net/widelands]])) ..
+   p(
+       listitem_bullet(_[[Please provide enough background information. Tell us:]]) ..
+       listitem_bullet(_[[Detailed steps on how to trigger the bug, if possible.]]) ..
+       listitem_bullet(_[[What you expected to happen when performing the steps and what actually happened.]]) ..
+       listitem_bullet(_[[Which version of Widelands you are running (i.e. either the build number or the revision number if you are running a development version or a daily build.)]]) ..
+       listitem_bullet(_[[Please also include which operating system you are running Widelands on as some bugs can be platform specific.]]) ..
+       listitem_bullet(_[[Which map you were playing when the bug occurred.]]) ..
+       listitem_bullet(_[[If the bug concerns something not being displayed correctly or if it helps demonstrate the issue, please include one or more screenshots.]]) ..
+       listitem_bullet(_[[If you have a save game or replay demonstrating the issue (for instance crashes where it can be hard to tell exactly what is triggering it), please include that too. For more information, see the section on Replays below.]])) ..
    help_replays()
 )
 }
