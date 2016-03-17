@@ -41,41 +41,18 @@ struct EncyclopediaWindow : public UI::UniqueWindow {
 
 private:
 	struct EncyclopediaEntry {
-		EncyclopediaEntry(const EncyclopediaEntry&) = default;
-		EncyclopediaEntry& operator = (const EncyclopediaEntry&) = default;
-		EncyclopediaEntry(const Widelands::DescriptionIndex i,
-								const std::string& init_descname,
-								const Image* init_icon,
-								const std::string& init_script_filename,
+		EncyclopediaEntry(const std::string& init_script_path,
 								const std::vector<std::string>& init_script_parameters)
-			: index(i), descname(init_descname), icon(init_icon), script_filename(init_script_filename),
-			  script_parameters(init_script_parameters) {
+			: script_path(init_script_path), script_parameters(init_script_parameters) {
 		}
-		Widelands::DescriptionIndex index;
-		std::string descname;
-		const Image* icon;
-		const std::string script_filename;
+		const std::string script_path;
 		const std::vector<std::string> script_parameters;
-
-		bool operator<(const EncyclopediaEntry other) const {
-			return descname < other.descname;
-		}
 	};
 
 	InteractivePlayer& iaplayer() const;
 
-	// Fill table of contents
-	//void fill_entries(const char* key, std::vector<EncyclopediaEntry>* entries);
-	//void fill_buildings();
-	//void fill_wares();
-	//void fill_workers();
-
 	// Update contents when an entry is selected
-	/*
-	void entry_selected(const std::string& key,
-	                    const std::string& script_path,
-	                    const Widelands::MapObjectType& type);
-							  */
+	void entry_selected(const std::string& tab_name);
 
 	// UI elements
 	UI::TabPanel tabs_;
@@ -85,7 +62,7 @@ private:
 	// Main contents boxes for each tab
 	std::map<std::string, std::unique_ptr<UI::Box>> boxes_;
 	// A tab's table of contents
-	std::map<std::string, std::unique_ptr<UI::Listselect<Widelands::DescriptionIndex>>> lists_;
+	std::map<std::string, std::unique_ptr<UI::Listselect<EncyclopediaEntry>>> lists_;
 	// The contents shown when an entry is selected in a tab
 	std::map<std::string, std::unique_ptr<UI::MultilineTextarea>> contents_;
 };

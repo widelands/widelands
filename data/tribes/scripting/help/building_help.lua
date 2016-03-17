@@ -760,12 +760,15 @@ end
 
 -- The main function call
 return {
-   func = function(tribename, building)
+   func = function(tribename, buildingname)
       set_textdomain("tribes_encyclopedia")
       local tribe = wl.Game():get_tribe_description(tribename)
       -- We need to get the building description again, because it will
       -- give us a cast to the appropriate subclass.
-      local building_description = wl.Game():get_building_description(building.name)
-      return building_help(tribe, building_description)
+      local building_description = wl.Game():get_building_description(buildingname)
+      return {
+         title = building_description.descname,
+         text = building_help(tribe, building_description)
+      }
    end
 }

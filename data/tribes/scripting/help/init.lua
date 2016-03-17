@@ -14,7 +14,13 @@ return {
                   {
                      name = "intro",
                      title = _"Intro",
-                     icon = "images/wui/stats/menu_tab_wares.png",
+                     -- NOCOM icon = "images/wui/buildings/menu_tab_wares.png",
+                     script = "txts/README.lua"
+                  },
+                  {
+                     name = "abacadabra",
+                     title = _"Abacadabra",
+                     icon = "images/wui/buildings/menu_tab_wares.png",
                      script = "txts/README.lua"
                   }
                }
@@ -25,11 +31,11 @@ return {
                icon = "images/wui/buildings/menu_tab_wares.png",
                entries = {
                   {
-                     name = "ware",
-                     title = _"Ware",
-                     icon = "images/wui/stats/menu_tab_wares.png",
+                     name = "log",
+                     title = _"Log",
+                     icon = "images/wui/buildings/menu_tab_wares.png",
                      script = "tribes/scripting/help/ware_help.lua",
-                     script_parameters = {"log"}
+                     script_parameters = {[1] = "barbarians", [2] = "log"}
                   }
                }
             },
@@ -39,11 +45,11 @@ return {
                icon = "images/wui/buildings/menu_tab_workers.png",
                entries = {
                   {
-                     name = "worker",
-                     title = _"Worker",
-                     icon = "images/wui/stats/menu_tab_workers.png",
+                     name = "barbarians_carrier",
+                     title = _"Carrier",
+                     icon = "images/wui/buildings/menu_tab_workers.png",
                      script = "tribes/scripting/help/worker_help.lua",
-                     script_parameters =  {"barbarians", "carrier"}
+                     script_parameters = {[1] = "barbarians", [2] = "barbarians_carrier"}
                   }
                }
             },
@@ -53,11 +59,11 @@ return {
                icon = "images/wui/stats/genstats_nrbuildings.png",
                entries = {
                   {
-                     name = "building",
-                     title = _"Building",
+                     name = "barbarians_ax_workshop",
+                     title = _"Ax Workshop",
                      icon = "images/wui/stats/genstats_nrbuildings.png",
                      script = "tribes/scripting/help/building_help.lua",
-                     script_parameters = {"barbarians", "ax_workshop"}
+                     script_parameters = {[1] = "barbarians", [2] = "barbarians_ax_workshop"}
                   }
                }
             },
