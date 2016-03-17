@@ -46,7 +46,9 @@ int32_t EditorSetResourcesTool::handle_click_impl(const Widelands::World& world,
 		else if (amount > max_amount)
 			amount = max_amount;
 
-		if (map->is_resource_valid(world, mr.location(), args->cur_res)) {
+		if (map->is_resource_valid(world, mr.location(), args->cur_res) &&
+				mr.location().field->get_resources_amount() != amount) {
+
 			args->orgRes.push_back(EditorActionArgs::ResourceState{
 				mr.location(),
 				mr.location().field->get_resources(),

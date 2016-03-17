@@ -51,7 +51,8 @@ int32_t EditorDecreaseResourcesTool::handle_click_impl(const Widelands::World& w
 			amount = 0;
 
 		if (mr.location().field->get_resources() == args->cur_res &&
-			map->is_resource_valid(world, mr.location(), args->cur_res)) {
+			map->is_resource_valid(world, mr.location(), args->cur_res) &&
+			mr.location().field->get_resources_amount() != 0) {
 
 			args->orgRes.push_back(EditorActionArgs::ResourceState{
 				mr.location(),
