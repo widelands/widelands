@@ -21,6 +21,8 @@
 
 #include <memory>
 
+#include <boost/format.hpp>
+
 #include "base/macros.h"
 #include "base/wexception.h"
 #include "economy/economy.h"
@@ -944,18 +946,20 @@ void Ship::sink_ship(Game& game) {
 void Ship::log_general_info(const EditorGameBase& egbase) {
 	Bob::log_general_info(egbase);
 
-	molog("Ship belongs to fleet: %u\n destination: %u (%dx%d)\n lastdock: %u (%dx%d)\n",
+	molog("Ship belongs to fleet: %u\n destination: %s\n lastdock: %s\n",
 	      fleet_ ? fleet_->serial() : 0,
-	      destination_.serial(),
-	      (destination_.is_set()) ?
-	      	destination_.get(egbase)->get_positions(egbase)[0].x : -1,
-	      (destination_.is_set()) ?
-	      	destination_.get(egbase)->get_positions(egbase)[0].y : -1,
-	      lastdock_.serial(),
-	      (lastdock_.is_set()) ?
-	      	lastdock_.get(egbase)->get_positions(egbase)[0].x : -1,
-	      (lastdock_.is_set()) ?
-	      	lastdock_.get(egbase)->get_positions(egbase)[0].y : -1);
+			(destination_.is_set()) ?
+				(boost::format("%u (%d x %d)")
+				 % destination_.serial()
+				 % destination_.get(egbase)->get_positions(egbase)[0].x
+				 % destination_.get(egbase)->get_positions(egbase)[0].y).str().c_str() :
+				"-",
+			(lastdock_.is_set()) ?
+				(boost::format("%u (%d x %d)")
+				 % lastdock_.serial()
+				 % lastdock_.get(egbase)->get_positions(egbase)[0].x
+				 % lastdock_.get(egbase)->get_positions(egbase)[0].y).str().c_str() :
+				"-");
 
 	molog("In state: %d (%s)\n",
 		ship_state_,
@@ -970,13 +974,15 @@ void Ship::log_general_info(const EditorGameBase& egbase) {
 		(items_.empty()) ? "." : ":");
 
 	for (const ShippingItem& shipping_item : items_) {
-		molog("  * %u, destination %u (%dx%d)\n",
+		molog("  * %u (%s), destination: %s\n",
 				shipping_item.object_.serial(),
-				shipping_item.destination_dock_.serial(),
+				shipping_item.object_.get(egbase)->descr().name().c_str(),
 				(shipping_item.destination_dock_.is_set()) ?
-					shipping_item.destination_dock_.get(egbase)->get_positions(egbase)[0].x : -1,
-				(shipping_item.destination_dock_.is_set()) ?
-					shipping_item.destination_dock_.get(egbase)->get_positions(egbase)[0].y : -1);
+					(boost::format("%u (%d x %d)")
+					 % shipping_item.destination_dock_.serial()
+					 % shipping_item.destination_dock_.get(egbase)->get_positions(egbase)[0].x
+					 % shipping_item.destination_dock_.get(egbase)->get_positions(egbase)[0].y).str().c_str() :
+					"-");
 	}
 }
 
