@@ -51,7 +51,14 @@ struct EditorActionArgs {
 	int32_t change_by;                                              // resources, hight change tools
 	std::list<Widelands::Field::Height> origHights;                 // change hight tool
 	uint8_t cur_res, set_to;                                        // resources change tools
-	std::list<uint8_t> orgRes, orgResT;                             // resources set tool
+
+	struct ResourceState {
+		Widelands::FCoords location;
+		uint8_t idx;
+		uint8_t amount;
+	};
+
+	std::list<ResourceState> orgRes;                             // resources set tool
 	std::list<const Widelands::BobDescr *> obob_type, nbob_type;  // bob change tools
 	std::list<std::string> oimmov_types;                            // immovable change tools
 	std::list<int32_t> nimmov_types;                                // immovable change tools
