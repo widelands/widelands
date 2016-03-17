@@ -19,6 +19,8 @@
 
 #include "scripting/lua_coroutine.h"
 
+#include <memory>
+
 #include "io/fileread.h"
 #include "io/filewrite.h"
 #include "scripting/lua_errors.h"
@@ -147,6 +149,17 @@ uint32_t LuaCoroutine::pop_uint32() {
 	lua_pop(lua_state_, 1);
 	--nreturn_values_;
 	return return_value;
+}
+
+std::unique_ptr<LuaTable> LuaCoroutine::pop_table() {
+	std::unique_ptr<LuaTable> result(nullptr);
+	if (!nreturn_values_) {
+		return result;
+	}
+	result.reset(new LuaTable(lua_state_));
+	lua_pop(lua_state_, 1);
+	--nreturn_values_;
+	return result;
 }
 
 constexpr uint8_t kCoroutineDataPacketVersion = 3;
