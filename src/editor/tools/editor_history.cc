@@ -47,7 +47,6 @@ EditorActionArgs::~EditorActionArgs()
 	nimmov_types.clear();
 	oimmov_types.clear();
 	orgRes.clear();
-	orgResT.clear();
 	origHights.clear();
 	origTerrainType.clear();
 	terrainType.clear();
