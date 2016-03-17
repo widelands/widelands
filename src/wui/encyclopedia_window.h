@@ -22,6 +22,7 @@
 
 #include <map>
 #include <memory>
+#include <vector>
 
 #include "logic/map_objects/map_object.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
@@ -44,12 +45,17 @@ private:
 		EncyclopediaEntry& operator = (const EncyclopediaEntry&) = default;
 		EncyclopediaEntry(const Widelands::DescriptionIndex i,
 								const std::string& init_descname,
-								const Image* init_icon)
-			: index(i), descname(init_descname), icon(init_icon) {
+								const Image* init_icon,
+								const std::string& init_script_filename,
+								const std::vector<std::string>& init_script_parameters)
+			: index(i), descname(init_descname), icon(init_icon), script_filename(init_script_filename),
+			  script_parameters(init_script_parameters) {
 		}
 		Widelands::DescriptionIndex index;
 		std::string descname;
 		const Image* icon;
+		const std::string script_filename;
+		const std::vector<std::string> script_parameters;
 
 		bool operator<(const EncyclopediaEntry other) const {
 			return descname < other.descname;
@@ -59,15 +65,17 @@ private:
 	InteractivePlayer& iaplayer() const;
 
 	// Fill table of contents
-	void fill_entries(const char* key, std::vector<EncyclopediaEntry>* entries);
-	void fill_buildings();
-	void fill_wares();
-	void fill_workers();
+	//void fill_entries(const char* key, std::vector<EncyclopediaEntry>* entries);
+	//void fill_buildings();
+	//void fill_wares();
+	//void fill_workers();
 
 	// Update contents when an entry is selected
+	/*
 	void entry_selected(const std::string& key,
 	                    const std::string& script_path,
 	                    const Widelands::MapObjectType& type);
+							  */
 
 	// UI elements
 	UI::TabPanel tabs_;

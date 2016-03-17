@@ -40,6 +40,7 @@
 #include "logic/player.h"
 #include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
+#include "ui_basic/messagebox.h"
 #include "wui/interactive_player.h"
 
 namespace {
@@ -49,25 +50,6 @@ namespace {
 
 constexpr int kPadding = 5;
 constexpr int kTabHeight = 35;
-
-struct EncyclopediaTab {
-	EncyclopediaTab(const std::string& init_key,
-						 const std::string& init_image_filename,
-						 const std::string& init_tooltip,
-						 const std::string& init_script_path,
-						 const Widelands::MapObjectType init_type)
-		: key(init_key),
-		  image_filename(init_image_filename),
-		  tooltip(init_tooltip),
-		  script_path(init_script_path),
-		  type(init_type) {
-	}
-	const std::string key;
-	const std::string image_filename;
-	const std::string tooltip;
-	const std::string script_path;
-	const Widelands::MapObjectType type;
-};
 
 const std::string heading(const std::string& text) {
 	return ((boost::format("<rt><p font-size=18 font-weight=bold font-color=D1D1D1>"
@@ -83,92 +65,97 @@ inline InteractivePlayer& EncyclopediaWindow::iaplayer() const {
 
 EncyclopediaWindow::EncyclopediaWindow(InteractivePlayer& parent, UI::UniqueWindow::Registry& registry)
 	: UI::UniqueWindow(
-        &parent, "encyclopedia", &registry, WINDOW_WIDTH, WINDOW_HEIGHT, _("Tribal Encyclopedia")),
+		  &parent, "encyclopedia", &registry, WINDOW_WIDTH, WINDOW_HEIGHT, ""),
      tabs_(this, 0, 0, nullptr) {
 
 	const int contents_height = WINDOW_HEIGHT - kTabHeight - 2 * kPadding;
 	const int contents_width = WINDOW_WIDTH / 2 - 1.5 * kPadding;
 
-	std::vector<std::unique_ptr<EncyclopediaTab>> tab_definitions;
+	const Widelands::TribeDescr& tribe = iaplayer().player().tribe();
+	try {
+		std::unique_ptr<LuaTable> table(iaplayer().egbase().lua().run_script("tribes/scripting/help/init.lua"));
+		std::unique_ptr<LuaCoroutine> cr(table->get_coroutine("func"));
+		cr->push_arg(tribe.name());
+		cr->resume();
 
-	tab_definitions.push_back(
-	   std::unique_ptr<EncyclopediaTab>(new EncyclopediaTab("wares",
-																			  "images/wui/buildings/menu_tab_wares.png",
-	                                                        _("Wares"),
-	                                                        "tribes/scripting/help/ware_help.lua",
-	                                                        Widelands::MapObjectType::WARE)));
+		std::unique_ptr<LuaTable> return_table = cr->pop_table();
+		set_title(return_table->get_string("title"));
+		std::unique_ptr<LuaTable> tabs_table = return_table->get_table("tabs");
 
-	tab_definitions.push_back(
-	   std::unique_ptr<EncyclopediaTab>(new EncyclopediaTab("workers",
-																			  "images/wui/buildings/menu_tab_workers.png",
-	                                                        _("Workers"),
-	                                                        "tribes/scripting/help/worker_help.lua",
-	                                                        Widelands::MapObjectType::WORKER)));
+		for (const auto& tab_table : tabs_table->array_entries<std::unique_ptr<LuaTable>>()) {
+			const std::string tab_name =  tab_table->get_string("name");
+			const std::string tab_icon = tab_table->has_key("icon") ? tab_table->get_string("icon") : "";
+			const std::string tab_title = tab_table->get_string("title");
 
-	tab_definitions.push_back(std::unique_ptr<EncyclopediaTab>(
-	   new EncyclopediaTab("buildings",
-								  "images/wui/stats/genstats_nrbuildings.png",
-	                       _("Buildings"),
-	                       "tribes/scripting/help/building_help.lua",
-	                       Widelands::MapObjectType::BUILDING)));
+			// Make sure that all paths exist
+			/* NOCOM
+			if (!g_fs->file_exists(tab->script_path)) {
+				throw wexception("Script path %s for tab %s does not exist!",
+									  tab->script_path.c_str(),
+									  tab->key.c_str());
+			}
+			*/
+			wrapper_boxes_.insert(std::make_pair(
+				tab_name, std::unique_ptr<UI::Box>(new UI::Box(&tabs_, 0, 0, UI::Box::Horizontal))));
 
-	for (const auto& tab : tab_definitions) {
-		// Make sure that all paths exist
-		if (!g_fs->file_exists(tab->script_path)) {
-			throw wexception("Script path %s for tab %s does not exist!",
-			                 tab->script_path.c_str(),
-			                 tab->key.c_str());
+			boxes_.insert(
+				std::make_pair(tab_name,
+									std::unique_ptr<UI::Box>(new UI::Box(
+										wrapper_boxes_.at(tab_name).get(), 0, 0, UI::Box::Horizontal))));
+
+			lists_.insert(
+				std::make_pair(tab_name,
+									std::unique_ptr<UI::Listselect<Widelands::DescriptionIndex>>(
+										new UI::Listselect<Widelands::DescriptionIndex>(
+											boxes_.at(tab_name).get(), 0, 0, contents_width, contents_height))));
+			// NOCOM lists_.at(key)->selected.connect(boost::bind(
+			 //  &EncyclopediaWindow::entry_selected, this, key, tab->script_path, tab->type));
+
+			contents_.insert(
+				std::make_pair(tab_name,
+									std::unique_ptr<UI::MultilineTextarea>(new UI::MultilineTextarea(
+										boxes_.at(tab_name).get(), 0, 0, contents_width, contents_height))));
+
+			boxes_.at(tab_name)->add(lists_.at(tab_name).get(), UI::Align::kLeft);
+			boxes_.at(tab_name)->add_space(kPadding);
+			boxes_.at(tab_name)->add(contents_.at(tab_name).get(), UI::Align::kLeft);
+
+			wrapper_boxes_.at(tab_name)->add_space(kPadding);
+			wrapper_boxes_.at(tab_name)->add(boxes_.at(tab_name).get(), UI::Align::kLeft);
+
+			if (tab_icon.empty()) {
+				tabs_.add("encyclopedia_" + tab_name,
+							 tab_title,
+							 wrapper_boxes_.at(tab_name).get());
+			} else if (g_fs->file_exists(tab_icon)) {
+				tabs_.add("encyclopedia_" + tab_name,
+							 g_gr->images().get(tab_icon),
+							 wrapper_boxes_.at(tab_name).get(),
+							 tab_title);
+			} else {
+				throw wexception("Icon path '%s' for tab '%s' does not exist!",
+									  tab_icon.c_str(),
+									  tab_name.c_str());
+			}
 		}
-		if (!g_fs->file_exists(tab->image_filename)) {
-			throw wexception("Image path %s for tab %s does not exist!",
-			                 tab->image_filename.c_str(),
-			                 tab->key.c_str());
-		}
-
-		wrapper_boxes_.insert(std::make_pair(
-		   tab->key, std::unique_ptr<UI::Box>(new UI::Box(&tabs_, 0, 0, UI::Box::Horizontal))));
-
-		boxes_.insert(
-		   std::make_pair(tab->key,
-		                  std::unique_ptr<UI::Box>(new UI::Box(
-		                     wrapper_boxes_.at(tab->key).get(), 0, 0, UI::Box::Horizontal))));
-
-		lists_.insert(
-		   std::make_pair(tab->key,
-		                  std::unique_ptr<UI::Listselect<Widelands::DescriptionIndex>>(
-		                     new UI::Listselect<Widelands::DescriptionIndex>(
-		                        boxes_.at(tab->key).get(), 0, 0, contents_width, contents_height))));
-		lists_.at(tab->key)->selected.connect(boost::bind(
-		   &EncyclopediaWindow::entry_selected, this, tab->key, tab->script_path, tab->type));
-
-		contents_.insert(
-		   std::make_pair(tab->key,
-		                  std::unique_ptr<UI::MultilineTextarea>(new UI::MultilineTextarea(
-		                     boxes_.at(tab->key).get(), 0, 0, contents_width, contents_height))));
-
-		boxes_.at(tab->key)->add(lists_.at(tab->key).get(), UI::Align::kLeft);
-		boxes_.at(tab->key)->add_space(kPadding);
-		boxes_.at(tab->key)->add(contents_.at(tab->key).get(), UI::Align::kLeft);
-
-		wrapper_boxes_.at(tab->key)->add_space(kPadding);
-		wrapper_boxes_.at(tab->key)->add(boxes_.at(tab->key).get(), UI::Align::kLeft);
-
-		tabs_.add("encyclopedia_" + tab->key,
-		          g_gr->images().get(tab->image_filename),
-		          wrapper_boxes_.at(tab->key).get(),
-		          tab->tooltip);
+	} catch (WException& err) {
+		log("Error loading script for encyclopedia:\n%s\n", err.what());
+		UI::WLMessageBox wmb(
+					&parent,
+					_("Error!"),
+					(boost::format("Error loading script for encyclopedia:\n%s") % err.what()).str(),
+					UI::WLMessageBox::MBoxType::kOk);
+		wmb.run<UI::Panel::Returncodes>();
 	}
-	tabs_.set_size(WINDOW_WIDTH, WINDOW_HEIGHT);
 
-	fill_buildings();
-	fill_wares();
-	fill_workers();
+	tabs_.set_size(WINDOW_WIDTH, WINDOW_HEIGHT);
 
 	if (get_usedefaultpos()) {
 		center_to_parent();
 	}
 }
 
+/* NOCOM
 void EncyclopediaWindow::fill_entries(const char* key, std::vector<EncyclopediaEntry>* entries) {
 	std::sort(entries->begin(), entries->end());
 	for (uint32_t i = 0; i < entries->size(); i++) {
@@ -186,7 +173,7 @@ void EncyclopediaWindow::fill_buildings() {
 	for (Widelands::DescriptionIndex i = 0; i < tribes.nrbuildings(); ++i) {
 		const Widelands::BuildingDescr* building = tribes.get_building_descr(i);
 		if (tribe.has_building(i) || building->type() == Widelands::MapObjectType::MILITARYSITE) {
-			EncyclopediaEntry entry(i, building->descname(), building->icon());
+			EncyclopediaEntry entry(i, building->descname(), building->icon(), "tribes/scripting/help/building_help.lua");
 			entries.push_back(entry);
 		}
 	}
@@ -199,7 +186,7 @@ void EncyclopediaWindow::fill_wares() {
 
 	for (const Widelands::DescriptionIndex& i : tribe.wares()) {
 		const Widelands::WareDescr* ware = tribe.get_ware_descr(i);
-		EncyclopediaEntry entry(i, ware->descname(), ware->icon());
+		EncyclopediaEntry entry(i, ware->descname(), ware->icon(), "tribes/scripting/help/ware_help.lua");
 		entries.push_back(entry);
 	}
 	fill_entries("wares", &entries);
@@ -211,12 +198,13 @@ void EncyclopediaWindow::fill_workers() {
 
 	for (const Widelands::DescriptionIndex& i : tribe.workers()) {
 		const Widelands::WorkerDescr* worker = tribe.get_worker_descr(i);
-		EncyclopediaEntry entry(i, worker->descname(), worker->icon());
+		EncyclopediaEntry entry(i, worker->descname(), worker->icon(), "tribes/scripting/help/worker_help.lua");
 		entries.push_back(entry);
 	}
 	fill_entries("workers", &entries);
 }
-
+*/
+/* NOCOM
 void EncyclopediaWindow::entry_selected(const std::string& key,
                                         const std::string& script_path,
                                         const Widelands::MapObjectType& type) {
@@ -278,3 +266,4 @@ void EncyclopediaWindow::entry_selected(const std::string& key,
 	}
 	contents_.at(key)->scroll_to_top();
 }
+	*/
