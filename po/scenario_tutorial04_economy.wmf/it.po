@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-03-02 08:54+0000\n"
-"PO-Revision-Date: 2016-03-08 08:17+0000\n"
+"POT-Creation-Date: 2016-03-11 07:02+0000\n"
+"PO-Revision-Date: 2016-03-17 14:27+0000\n"
 "Last-Translator: Luigi Lain <lainluigi86@tiscali.it>\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
@@ -670,14 +670,14 @@ msgstr "Questa finestra è simile al menu delle scorte, ma ha dei pulsanti aggiu
 msgid ""
 "You first have to select one or more wares (you can also left-click and "
 "drag). Then you can set the desired target quantity for the selected wares."
-msgstr ""
+msgstr "Per prima cosa devi selezionare una o più merci (puoi anche cliccare col sinistro e trascinare). Poi puoi impostare la quantità desiderata per le merci selezionate."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:395
 msgid ""
 "Most buildings will only produce something when the stock level in your "
 "warehouses falls below the target quantity, so you should indicate the "
 "reserve you want to stockpile."
-msgstr ""
+msgstr "La maggior parte degli edifici producono qualcosa solo quando il livello delle scorte nei tuoi magazzini scende sotto la quantità bersaglio, quindi dovresti indicare quante scorte vuoi accumulare."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:396
 msgid ""
@@ -685,7 +685,7 @@ msgid ""
 "carrier will take a scythe and become a farmer. Then there will be no "
 "scythes left, but the target quantity is 1, therefore your toolsmith will "
 "start producing another one."
-msgstr ""
+msgstr "Un esempio: il valore di default per le falci è 1. Se costruisci una fattoria, un portatore prenderà una falce e diventerà un contadino. Se non ci sono falci rimaste, il fabbro comincerà a produrne una nuova."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:397
 msgid ""
@@ -693,7 +693,7 @@ msgid ""
 " second farm will have to wait for its worker, who will lack a scythe. If "
 "you had set the target quantity to 2 before, two scythes would have been "
 "available and both farms would have been able to start working right away."
-msgstr ""
+msgstr "Se costruisci due fattorie, solo una di esse comincerà a lavorare subito. La seconda dovrà aspettare il suo lavoratore, a cui mancherà la falce. Se tu avessi impostato la quantità desiderata a 2 prima, due falci sarebbero state disponibili e entrambe le fattorie avrebbero cominciato a lavorare fin da subito."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:405
 msgid ""
@@ -701,13 +701,13 @@ msgid ""
 "your resources (in this case: iron) should be turned into or whether you "
 "would like to save your iron and wait until you know what you will need it "
 "for."
-msgstr ""
+msgstr "Cambiando la quantità desiderata, quindi, puoi decidere in quali merci/attrezzi trasformare le tue risorse (in questo caso ferro) o se preferisci conservarre il tuo ferro fino a quando non saprai meglio cosa ti serve."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:406
 msgid ""
 "Only buildings that consume wares care about this setting. Buildings that "
 "produce wares for free (e.g. your farms or wells) will always keep working."
-msgstr ""
+msgstr "Solo gli edifici che consumano merci sono influenzati da questa impostazione. Gli edifici che producono qualcosa gratis (per esempio le fattorie o i pozzi) continueranno sempre a lavorare."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:407
 msgid ""

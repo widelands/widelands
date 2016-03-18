@@ -3,14 +3,14 @@
 # 
 # Translators:
 # Lyubomir Vasilev, 2015
-# Lyubomir Vasilev, 2015-2016
+# Любомир Василев, 2015-2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-03-02 08:54+0000\n"
-"PO-Revision-Date: 2016-03-02 09:02+0000\n"
-"Last-Translator: Lyubomir Vasilev\n"
+"POT-Creation-Date: 2016-03-11 07:02+0000\n"
+"PO-Revision-Date: 2016-03-11 09:27+0000\n"
+"Last-Translator: Любомир Василев\n"
 "Language-Team: Bulgarian (http://www.transifex.com/widelands/widelands/language/bg/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -467,8 +467,8 @@ msgid ""
 "May Satul warm you, Jundlina! I agree with what Loftomor proposes. We need a"
 " good supply of building materials for we have to expand our territory "
 "swiftly. I will not feel safe on this island as long as we have not seen all"
-" its shores it. I brought plenty of good men from Atlantis. The military "
-"might is available. We only need some housing to live in."
+" its shores. I brought plenty of good men from Atlantis. The military might "
+"is available. We only need some housing to live in."
 msgstr "Нека Сатул те стопли, Юндлина! Съгласен съм с това, което Лофтомор предлага. Нуждаем се от добър запас от дървен материал, тъй като трябва по-скоро да разширим територията си. Няма да се чувствам в безопасност на този остров, докато не видя всичките му брегове. Доведох много добри хора от Атлантида. Военната мощ е налице. Трябват ни само къщи, в които да живеем."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:207
@@ -648,8 +648,8 @@ msgstr "Юндлина кима"
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:300
 msgid ""
-"I have considered this, Sidolus. I think  it is about time. We will make "
-"this a priority for now. You shall get your industry soon!"
+"I have considered this, Sidolus. I think it is about time. We will make this"
+" a priority for now. You shall get your industry soon!"
 msgstr "Обмислих го, Сидолий, и мисля, че е време. Това ще бъде приоритетът ни сега. Скоро ще получиш промишлеността си."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:307

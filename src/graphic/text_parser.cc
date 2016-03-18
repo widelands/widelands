@@ -33,29 +33,29 @@
 namespace UI {
 
 RichtextBlock::RichtextBlock() :
-	m_image_align(UI::Align::kLeft),
-	m_text_align (UI::Align::kLeft)
+	image_align_(UI::Align::kLeft),
+	text_align_ (UI::Align::kLeft)
 {}
 
 RichtextBlock::RichtextBlock(const RichtextBlock & src) {
-	m_images.clear();
-	m_text_blocks.clear();
-	for (uint32_t i = 0; i < src.m_images.size(); ++i)
-		m_images.push_back(src.m_images[i]);
-	for (uint32_t i = 0; i < src.m_text_blocks.size(); ++i)
-		m_text_blocks.push_back(src.m_text_blocks[i]);
-	m_image_align = src.m_image_align;
-	m_text_align = src.m_text_align;
+	images_.clear();
+	text_blocks_.clear();
+	for (uint32_t i = 0; i < src.images_.size(); ++i)
+		images_.push_back(src.images_[i]);
+	for (uint32_t i = 0; i < src.text_blocks_.size(); ++i)
+		text_blocks_.push_back(src.text_blocks_[i]);
+	image_align_ = src.image_align_;
+	text_align_ = src.text_align_;
 }
 
 TextBlock::TextBlock() {
-	m_font_size = 10;
-	m_font_color = RGBColor(255, 255, 0);
-	m_font_weight = "normal";
-	m_font_style = "normal";
-	m_font_decoration = "none";
-	m_font_face = (UI::g_fh1->fontset())->sans();
-	m_line_spacing = 0;
+	font_size_ = 10;
+	font_color_ = RGBColor(255, 255, 0);
+	font_weight_ = "normal";
+	font_style_ = "normal";
+	font_decoration_ = "none";
+	font_face_ = (UI::g_fh1->fontset())->sans();
+	line_spacing_ = 0;
 }
 
 void TextParser::parse

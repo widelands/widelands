@@ -62,12 +62,6 @@ return {
       font = "default"
    },
 
-   en_AU = {
-      name = "Australian English",
-      sort_name = "English (Australia)",
-      font = "default"
-   },
-
    en_CA = {
       name = "Canadian English",
       sort_name = "English (Canada)",
@@ -95,12 +89,6 @@ return {
    es = {
       name = "Español",
       sort_name = "Espanol",
-      font = "default"
-   },
-
-   es_CO = {
-      name = "Español colombiano",
-      sort_name = "Espanol colombiano",
       font = "default"
    },
 

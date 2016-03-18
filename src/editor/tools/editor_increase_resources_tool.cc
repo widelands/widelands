@@ -49,9 +49,15 @@ int32_t EditorIncreaseResourcesTool::handle_click_impl(const Widelands::World& w
 
 		if ((mr.location().field->get_resources() == args->cur_res ||
 				!mr.location().field->get_resources_amount()) &&
-				map->is_resource_valid(world, mr.location(), args->cur_res)) {
-			args->orgResT.push_back(mr.location().field->get_resources());
-			args->orgRes.push_back(mr.location().field->get_resources_amount());
+				map->is_resource_valid(world, mr.location(), args->cur_res) &&
+				mr.location().field->get_resources_amount() != max_amount) {
+
+			args->orgRes.push_back(EditorActionArgs::ResourceState{
+				mr.location(),
+				mr.location().field->get_resources(),
+				mr.location().field->get_resources_amount()
+			});
+
 			map->initialize_resources(mr.location(), args->cur_res, amount);
 		}
 	} while (mr.advance(*map));

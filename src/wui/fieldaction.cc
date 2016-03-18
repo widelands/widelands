@@ -443,7 +443,7 @@ void FieldActionWindow::add_buttons_auto()
 			(&watchbox, "debug",
 			 pic_debug,
 			 &FieldActionWindow::act_debug,
-			 _("Debug window"));
+			 _("Show Debug Window"));
 
 	// Add tabs
 	if (buildbox && buildbox->get_nritems())

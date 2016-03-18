@@ -323,7 +323,7 @@ void BuildingWindow::create_capsbuttons(UI::Box * capsbuttons)
 					(capsbuttons, "debug", 0, 0, 34, 34,
 					 g_gr->images().get("images/ui_basic/but4.png"),
 					 g_gr->images().get(pic_debug),
-					 _("Debug"));
+					 _("Show Debug Window"));
 			debugbtn->sigclicked.connect(boost::bind(&BuildingWindow::act_debug, boost::ref(*this)));
 			capsbuttons->add
 				(debugbtn,
