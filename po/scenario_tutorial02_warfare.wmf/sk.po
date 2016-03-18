@@ -4,13 +4,13 @@
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # GunChleoc, 2014
-# MiroslavR <miroslavr256@gmail.com>, 2015
+# MiroslavR <miroslavr256@gmail.com>, 2015-2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-03-02 08:54+0000\n"
-"PO-Revision-Date: 2016-03-02 15:06+0000\n"
+"POT-Creation-Date: 2016-03-11 07:02+0000\n"
+"PO-Revision-Date: 2016-03-12 16:34+0000\n"
 "Last-Translator: MiroslavR <miroslavr256@gmail.com>\n"
 "Language-Team: Slovak (http://www.transifex.com/widelands/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
@@ -53,7 +53,7 @@ msgid ""
 "soldier, a carrier grabs the needed weapons and armor from a warehouse (or "
 "your headquarters) and walks up the road to your new building. Basic "
 "Barbarian soldiers do not use armor, they only need an ax."
-msgstr "Nový vojak sa vytvára ako každý pracovník: keď si vojenská budova vyžiada vojaka, nosič vezme potrebné zbrane a zbroj zo skladiska (alebo základne) a dôjde k budove. Základní barbarskí vojaci nepoužívajú zbroj, potrebujú iba sekeru."
+msgstr "Nový vojak sa vytvára ako každý pracovník: keď si vojenská budova vyžiada vojaka, nosič vezme potrebné zbrane a zbroj zo skladiska (alebo ústredia) a dôjde k budove. Základní barbarskí vojaci nepoužívajú zbroj, potrebujú iba sekeru."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:31
 msgid ""
@@ -502,7 +502,7 @@ msgstr "Útočiť budú vaši vojaci zo všetkých vojenských budov nablízku. 
 msgid ""
 "Attack and conquer all military buildings of the enemy and destroy their "
 "headquarters."
-msgstr "Napadnite a dobyte všetky vojenské budovy nepriateľa a zničte jeho základňu."
+msgstr "Napadnite a dobyte všetky vojenské budovy nepriateľa a zničte jeho ústredie."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:197
 msgid "Defeat the enemy tribe"

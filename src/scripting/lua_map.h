@@ -711,7 +711,7 @@ public:
 	 */
 	Widelands::MapObject * get
 		(lua_State *, Widelands::EditorGameBase &, std::string = "MapObject");
-	Widelands::MapObject * m_get_or_zero(Widelands::EditorGameBase &);
+	Widelands::MapObject * get_or_zero(Widelands::EditorGameBase &);
 };
 
 
@@ -1204,8 +1204,8 @@ public:
 	const Widelands::FCoords fcoords(lua_State * L);
 
 private:
-	int m_region(lua_State * L, uint32_t radius);
-	int m_hollow_region(lua_State * L, uint32_t radius, uint32_t inner_radius);
+	int region(lua_State * L, uint32_t radius);
+	int hollow_region(lua_State * L, uint32_t radius, uint32_t inner_radius);
 };
 
 class LuaPlayerSlot : public LuaMapModuleClass {

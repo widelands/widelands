@@ -46,9 +46,15 @@ int32_t EditorSetResourcesTool::handle_click_impl(const Widelands::World& world,
 		else if (amount > max_amount)
 			amount = max_amount;
 
-		if (map->is_resource_valid(world, mr.location(), args->current_resource)) {
-			args->original_resource_type.push_back(mr.location().field->get_resources());
-			args->original_resource_amount.push_back(mr.location().field->get_resources_amount());
+		if (map->is_resource_valid(world, mr.location(), args->current_resource) &&
+				mr.location().field->get_resources_amount() != amount) {
+
+			args->original_resource.push_back(EditorActionArgs::ResourceState{
+				mr.location(),
+				mr.location().field->get_resources(),
+				mr.location().field->get_resources_amount()
+			});
+
 			map->initialize_resources(mr.location(), args->current_resource, amount);
 		}
 	} while (mr.advance(*map));
@@ -57,17 +63,12 @@ int32_t EditorSetResourcesTool::handle_click_impl(const Widelands::World& world,
 
 int32_t
 EditorSetResourcesTool::handle_undo_impl(const Widelands::World& world,
-                                         Widelands::NodeAndTriangle<Widelands::Coords> center,
+                                         Widelands::NodeAndTriangle<Widelands::Coords> /* center */,
                                          EditorInteractive& /* parent */,
                                          EditorActionArgs* args,
                                          Widelands::Map* map) {
-	Widelands::MapRegion<Widelands::Area<Widelands::FCoords> > mr
-	(*map,
-	 Widelands::Area<Widelands::FCoords>
-	 (map->get_fcoords(center.node), args->sel_radius));
-	std::list<uint8_t>::iterator ir = args->original_resource_amount.begin(), it = args->original_resource_type.begin();
-	do {
-		int32_t amount     = *ir;
+	for (const auto & res : args->original_resource) {
+		int32_t amount     = res.amount;
 		int32_t max_amount = world.get_resource(args->current_resource)->max_amount();
 
 		if (amount < 0)
@@ -75,13 +76,11 @@ EditorSetResourcesTool::handle_undo_impl(const Widelands::World& world,
 		if (amount > max_amount)
 			amount = max_amount;
 
-		map->initialize_resources(mr.location(), *it, amount);
-		++ir;
-		++it;
-	} while (mr.advance(*map));
-	args->original_resource_amount.clear();
-	args->original_resource_type.clear();
-	return mr.radius();
+		map->initialize_resources(res.location, res.idx, amount);
+	}
+
+	args->original_resource.clear();
+	return args->sel_radius;
 }
 
 EditorActionArgs EditorSetResourcesTool::format_args_impl(EditorInteractive & parent)

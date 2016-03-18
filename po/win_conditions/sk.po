@@ -4,14 +4,14 @@
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # GunChleoc, 2014
-# MiroslavR <miroslavr256@gmail.com>, 2015
+# MiroslavR <miroslavr256@gmail.com>, 2015-2016
 # Miroslav Remák <Unknown>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-03-02 08:54+0000\n"
-"PO-Revision-Date: 2016-03-02 15:32+0000\n"
+"POT-Creation-Date: 2016-03-11 07:02+0000\n"
+"PO-Revision-Date: 2016-03-13 13:51+0000\n"
 "Last-Translator: MiroslavR <miroslavr256@gmail.com>\n"
 "Language-Team: Slovak (http://www.transifex.com/widelands/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
@@ -36,7 +36,7 @@ msgstr "Porazili vás!"
 msgid ""
 "You lost your last warehouse and are therefore defeated. You may continue as"
 " spectator if you want."
-msgstr "Stratili ste svoj posledný sklad, a preto ste prehrali. Ak chcete, môžete pokračovať ako divák."
+msgstr "Prehrali ste, lebo ste prišli o svoj posledný sklad. Ak chcete, môžete pokračovať ako divák."
 
 #: ../../data/scripting/win_condition_texts.lua:14
 msgid "You won"

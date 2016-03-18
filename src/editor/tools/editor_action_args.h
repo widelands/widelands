@@ -48,16 +48,24 @@ struct EditorActionArgs {
 
 	uint32_t sel_radius;
 
-	int32_t change_by;                                                       // resources, height change tools
-	std::list<Widelands::Field::Height> original_heights;                    // change height tool
-	uint8_t current_resource, set_to;                                        // resources change tools
-	std::list<uint8_t> original_resource_amount, original_resource_type;     // resources set tool
-	std::list<const Widelands::BobDescr *> old_bob_type, new_bob_type;       // bob change tools
-	std::list<std::string> old_immovable_types;                              // immovable change tools
-	std::list<int32_t> new_immovable_types;                                  // immovable change tools
-	Widelands::HeightInterval interval;                                      // noise height tool
-	std::list<Widelands::DescriptionIndex> terrain_type, original_terrain_type;  // set terrain tool
-	std::list<EditorToolAction *> draw_actions;                              // draw tool
+	int32_t change_by;                                                  // resources, change height tools
+	std::list<Widelands::Field::Height> original_heights;               // change height tool
+	uint8_t current_resource, set_to;                                   // resources change tools
+
+	struct ResourceState {
+		Widelands::FCoords location;
+		uint8_t idx;
+		uint8_t amount;
+	};
+
+	std::list<ResourceState> original_resource;                         // resources set tool
+	std::list<const Widelands::BobDescr *> old_bob_type, new_bob_type;  // bob change tools
+	std::list<std::string> old_immovable_types;                         // immovable change tools
+	std::list<int32_t> new_immovable_types;                             // immovable change tools
+	Widelands::HeightInterval interval;                                 // noise height tool
+	std::list<Widelands::DescriptionIndex> terrain_type, original_terrain_type; // set terrain tool
+
+	std::list<EditorToolAction *> draw_actions;                         // draw tool
 
 	uint32_t refcount;
 };

@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-03-02 08:54+0000\n"
-"PO-Revision-Date: 2016-03-02 17:21+0000\n"
+"POT-Creation-Date: 2016-03-11 07:02+0000\n"
+"PO-Revision-Date: 2016-03-12 17:08+0000\n"
 "Last-Translator: MiroslavR <miroslavr256@gmail.com>\n"
 "Language-Team: Slovak (http://www.transifex.com/widelands/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
@@ -1392,7 +1392,7 @@ msgstr "Poskytuje ubytovanie pre obyvateľov. Okrem toho skladuje výrobky a ná
 #: ../../data/tribes/buildings/warehouses/atlanteans/headquarters/helptexts.lua:22
 msgctxt "atlanteans_building"
 msgid "The headquarters is your main building."
-msgstr "Základňa je vaša hlavná budova."
+msgstr "Ústredie je vaša hlavná budova."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/warehouses/atlanteans/port/helptexts.lua:16
@@ -1424,7 +1424,7 @@ msgstr "Poskytuje ubytovanie pre obyvateľov. Okrem toho skladuje výrobky a ná
 #: ../../data/tribes/buildings/warehouses/barbarians/headquarters_interim/helptexts.lua:22
 msgctxt "barbarians_building"
 msgid "The headquarters is your main building."
-msgstr "Základňa je vaša hlavná budova."
+msgstr "Ústredie je vaša hlavná budova."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/warehouses/barbarians/port/helptexts.lua:16
@@ -1444,7 +1444,7 @@ msgstr "Poskytuje ubytovanie pre obyvateľov. Okrem toho skladuje výrobky a ná
 #: ../../data/tribes/buildings/warehouses/empire/headquarters/helptexts.lua:22
 msgctxt "empire_building"
 msgid "The headquarters is your main building."
-msgstr "Základňa je vaša hlavná budova."
+msgstr "Ústredie je vaša hlavná budova."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/warehouses/empire/headquarters_shipwreck/helptexts.lua:16
@@ -1458,7 +1458,7 @@ msgstr "Napriek tomu, že táto loď stroskotala, vašim obyvateľom naďalej po
 #: ../../data/tribes/buildings/warehouses/empire/headquarters_shipwreck/helptexts.lua:22
 msgctxt "empire_building"
 msgid "The headquarters shipwreck is your main building."
-msgstr "Základňa vo vraku predstavuje vašu hlavnú budovu."
+msgstr "Ústredie vo vraku predstavuje vašu hlavnú budovu."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/warehouses/empire/port/helptexts.lua:16

@@ -46,8 +46,7 @@ EditorActionArgs::~EditorActionArgs()
 	old_bob_type.clear();
 	new_immovable_types.clear();
 	old_immovable_types.clear();
-	original_resource_amount.clear();
-	original_resource_type.clear();
+	original_resource.clear();
 	original_heights.clear();
 	original_terrain_type.clear();
 	terrain_type.clear();

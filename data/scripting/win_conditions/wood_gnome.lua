@@ -4,11 +4,11 @@
 
 include "scripting/coroutine.lua" -- for sleep
 include "scripting/table.lua"
-include "scripting/win_condition_functions.lua"
+include "scripting/win_conditions/win_condition_functions.lua"
 
 set_textdomain("win_conditions")
 
-include "scripting/win_condition_texts.lua"
+include "scripting/win_conditions/win_condition_texts.lua"
 
 local wc_name = "Wood Gnome"
 -- This needs to be exactly like wc_name, but localized, because wc_name
