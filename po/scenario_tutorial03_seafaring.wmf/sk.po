@@ -2,13 +2,13 @@
 # Copyright (C) 2005-2016 Widelands Development Team
 # 
 # Translators:
-# MiroslavR <miroslavr256@gmail.com>, 2015
+# MiroslavR <miroslavr256@gmail.com>, 2015-2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-03-02 08:54+0000\n"
-"PO-Revision-Date: 2016-03-02 15:06+0000\n"
+"POT-Creation-Date: 2016-03-11 07:02+0000\n"
+"PO-Revision-Date: 2016-03-12 16:34+0000\n"
 "Last-Translator: MiroslavR <miroslavr256@gmail.com>\n"
 "Language-Team: Slovak (http://www.transifex.com/widelands/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
@@ -72,7 +72,7 @@ msgid ""
 "For everything you do on the high seas, you need a port at the shore. Ports "
 "are like headquarters: they can store wares, workers and soldiers. The "
 "soldiers inside will automatically come out when an enemy attacks the port."
-msgstr "Na vykonávanie všetkých námorných činností je nutné na brehu postaviť prístav. Prístavy sú ako základne: uskladňujú výrobky, pracovníkov a vojakov. Keď na prístav zaútočí nepriateľ, vojaci vo vnútri automaticky vyjdú von."
+msgstr "Na vykonávanie všetkých námorných činností je nutné na brehu postaviť prístav. Prístavy sú ako ústredia: uskladňujú výrobky, pracovníkov a vojakov. Keď na prístav zaútočí nepriateľ, vojaci vo vnútri automaticky vyjdú von."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:47
 msgid ""
@@ -403,7 +403,7 @@ msgid ""
 " be attacked by a nearby enemy. While your headquarters has soldiers to "
 "defend it, your newly built port won’t. You should therefore avoid settling "
 "next to an enemy."
-msgstr "Musím vás však upozorniť na istú podobnosť medzi prístavom a základňou: na obe môže zaútočiť nepriateľ. Zatiaľ čo základňu bránia vojaci, novopostavený prístav nemá obranu. Snažte sa preto vyhýbať kolonizácii vedľa nepriateľa."
+msgstr "Musím vás však upozorniť na istú podobnosť medzi prístavom a ústredím: na obe môže zaútočiť nepriateľ. Zatiaľ čo ústredie bránia vojaci, novopostavený prístav nemá obranu. Snažte sa preto vyhýbať kolonizácii vedľa nepriateľa."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:189
 msgid ""
