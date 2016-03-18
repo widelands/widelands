@@ -98,15 +98,7 @@ return {
                name = "workers",
                title = _"Workers",
                icon = "images/wui/buildings/menu_tab_workers.png",
-               entries = {
-                  {
-                     name = "barbarians_carrier",
-                     title = _"Carrier",
-                     icon = "images/wui/buildings/menu_tab_workers.png",
-                     script = "tribes/scripting/help/worker_help.lua",
-                     script_parameters = {[1] = "barbarians", [2] = "barbarians_carrier"}
-                  }
-               }
+               entries = get_workers(tribename) -- NOCOM calling worker_help will eventually crash
             },
             {
                name = "buildings",
