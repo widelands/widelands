@@ -57,7 +57,7 @@ private:
 	void
 	do_fill_rect(const FloatRect& dst_rect, const RGBAColor& color, BlendMode blend_mode) override;
 
-	const int m_w, m_h;
+	const int w_, h_;
 
 	DISALLOW_COPY_AND_ASSIGN(Screen);
 };
