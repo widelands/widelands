@@ -71,13 +71,12 @@ EncyclopediaWindow::EncyclopediaWindow(InteractivePlayer& parent, UI::UniqueWind
 	const int contents_height = WINDOW_HEIGHT - kTabHeight - 2 * kPadding;
 	const int contents_width = WINDOW_WIDTH / 2 - 1.5 * kPadding;
 
-	const Widelands::TribeDescr& tribe = iaplayer().player().tribe();
+	const Widelands::TribeDescr& tribe = parent.player().tribe();
 	try {
 		std::unique_ptr<LuaTable> table(iaplayer().egbase().lua().run_script("tribes/scripting/help/init.lua"));
 		std::unique_ptr<LuaCoroutine> cr(table->get_coroutine("func"));
 		cr->push_arg(tribe.name());
 		cr->resume();
-
 		std::unique_ptr<LuaTable> return_table = cr->pop_table();
 		set_title(return_table->get_string("title"));
 
@@ -185,15 +184,17 @@ void EncyclopediaWindow::entry_selected(const std::string& tab_name) {
 	const EncyclopediaEntry& entry = lists_.at(tab_name)->get_selected();
 	try {
 		std::unique_ptr<LuaTable> table(iaplayer().egbase().lua().run_script(entry.script_path));
-		std::unique_ptr<LuaCoroutine> cr(table->get_coroutine("func"));
-		for (const std::string parameter : entry.script_parameters) {
-			cr->push_arg(parameter);
+		if (!entry.script_parameters.empty()) {
+			std::unique_ptr<LuaCoroutine> cr(table->get_coroutine("func"));
+			for (const std::string& parameter : entry.script_parameters) {
+				cr->push_arg(parameter);
+			}
+			cr->resume();
+			table = cr->pop_table();
 		}
-		cr->resume();
-		std::unique_ptr<LuaTable> return_table = cr->pop_table();
-		contents_.at(tab_name)->set_text((boost::format("%s%s") %
-													 heading(return_table->get_string("title"))
-													 % return_table->get_string("text")).str());
+		contents_.at(tab_name)->set_text((boost::format("%s%s")
+													 % heading(table->get_string("title"))
+													 % table->get_string("text")).str());
 	} catch (LuaError& err) {
 		contents_.at(tab_name)->set_text(err.what());
 	}

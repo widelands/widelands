@@ -101,24 +101,6 @@ void LuaCoroutine::push_arg(const Widelands::Coords & coords) {
 	++ninput_args_;
 }
 
-void LuaCoroutine::push_arg(const Widelands::BuildingDescr* building_descr) {
-	assert(building_descr != nullptr);
-	to_lua<LuaMaps::LuaBuildingDescription>(lua_state_, new LuaMaps::LuaBuildingDescription(building_descr));
-	++ninput_args_;
-}
-
-void LuaCoroutine::push_arg(const Widelands::WareDescr* ware_descr) {
-	assert(ware_descr != nullptr);
-	to_lua<LuaMaps::LuaWareDescription>(lua_state_, new LuaMaps::LuaWareDescription(ware_descr));
-	++ninput_args_;
-}
-
-void LuaCoroutine::push_arg(const Widelands::WorkerDescr* worker_descr) {
-	assert(worker_descr != nullptr);
-	to_lua<LuaMaps::LuaWorkerDescription>(lua_state_, new LuaMaps::LuaWorkerDescription(worker_descr));
-	++ninput_args_;
-}
-
 void LuaCoroutine::push_arg(const std::string& string) {
 	assert(!string.empty());
 	lua_pushstring(lua_state_, string);
@@ -157,7 +139,7 @@ std::unique_ptr<LuaTable> LuaCoroutine::pop_table() {
 		return result;
 	}
 	result.reset(new LuaTable(lua_state_));
-	lua_pop(lua_state_, 1);
+	lua_pop(lua_state_, lua_gettop(lua_state_));
 	--nreturn_values_;
 	return result;
 }
