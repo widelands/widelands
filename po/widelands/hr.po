@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-03-11 07:02+0000\n"
-"PO-Revision-Date: 2016-03-11 07:03+0000\n"
+"POT-Creation-Date: 2016-03-18 07:42+0000\n"
+"PO-Revision-Date: 2016-03-18 07:43+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Croatian (http://www.transifex.com/widelands/widelands/language/hr/)\n"
 "MIME-Version: 1.0\n"
@@ -430,7 +430,7 @@ msgstr "Vrati"
 
 #: ../../src/editor/editorinteractive.cc:143
 #: ../../src/editor/ui_menus/editor_help.cc:62
-#: ../../src/wui/buildingwindow.cc:360
+#: ../../src/wui/buildingwindow.cc:354
 msgid "Help"
 msgstr "Pomoć"
 
@@ -768,7 +768,7 @@ msgstr "Autori:"
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:111
 #: ../../src/ui_fsmenu/campaign_select.cc:80
 #: ../../src/ui_fsmenu/campaign_select.cc:157
-#: ../../src/ui_fsmenu/campaign_select.cc:396 ../../src/wui/mapdetails.cc:133
+#: ../../src/ui_fsmenu/campaign_select.cc:395 ../../src/wui/mapdetails.cc:133
 msgid "Description:"
 msgstr "Opis:"
 
@@ -1177,7 +1177,7 @@ msgstr "Nema opisa"
 msgid "%i%% built"
 msgstr "%i%% izgrađen"
 
-#: ../../src/logic/map_objects/tribes/dismantlesite.cc:96
+#: ../../src/logic/map_objects/tribes/dismantlesite.cc:98
 #, c-format
 msgid "%u%% dismantled"
 msgstr ""
@@ -1291,9 +1291,9 @@ msgstr ""
 #. * TRANSLATORS:    %2$s = "Ox"
 #: ../../src/logic/map_objects/tribes/production_program.cc:408
 #: ../../src/logic/map_objects/tribes/production_program.cc:430
-#: ../../src/logic/map_objects/tribes/production_program.cc:941
-#: ../../src/logic/map_objects/tribes/production_program.cc:1059
-#: ../../src/logic/map_objects/tribes/production_program.cc:1155
+#: ../../src/logic/map_objects/tribes/production_program.cc:940
+#: ../../src/logic/map_objects/tribes/production_program.cc:1057
+#: ../../src/logic/map_objects/tribes/production_program.cc:1153
 #, c-format
 msgid "%1$ix %2$s"
 msgstr ""
@@ -1335,7 +1335,7 @@ msgstr ""
 #. are any issues
 #. * TRANSLATORS: we need to address for your language.
 #: ../../src/logic/map_objects/tribes/production_program.cc:575
-#: ../../src/logic/map_objects/tribes/production_program.cc:964
+#: ../../src/logic/map_objects/tribes/production_program.cc:963
 #, c-format
 msgid "Did not start %1$s because %2$s"
 msgstr ""
@@ -1360,7 +1360,7 @@ msgstr ""
 #. are missing'
 #. * TRANSLATORS: e.g. 'Did not start working because fish, meat or pitta
 #. bread is missing'
-#: ../../src/logic/map_objects/tribes/production_program.cc:952
+#: ../../src/logic/map_objects/tribes/production_program.cc:951
 #, c-format
 msgid "%s is missing"
 msgid_plural "%s are missing"
@@ -1370,7 +1370,7 @@ msgstr[2] ""
 
 #. * TRANSLATORS: %s is a list of wares. String is fetched according to total
 #. amount of wares.
-#: ../../src/logic/map_objects/tribes/production_program.cc:1069
+#: ../../src/logic/map_objects/tribes/production_program.cc:1067
 #, c-format
 msgid "Produced %s"
 msgid_plural "Produced %s"
@@ -1380,7 +1380,7 @@ msgstr[2] ""
 
 #. * TRANSLATORS: %s is a list of workers. String is fetched according to
 #. total amount of workers.
-#: ../../src/logic/map_objects/tribes/production_program.cc:1165
+#: ../../src/logic/map_objects/tribes/production_program.cc:1163
 #, c-format
 msgid "Recruited %s"
 msgid_plural "Recruited %s"
@@ -1388,12 +1388,12 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: ../../src/logic/map_objects/tribes/production_program.cc:1387
+#: ../../src/logic/map_objects/tribes/production_program.cc:1385
 msgid "No soldier to train!"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/production_program.cc:1395
-#: ../../src/logic/map_objects/tribes/production_program.cc:1480
+#: ../../src/logic/map_objects/tribes/production_program.cc:1393
+#: ../../src/logic/map_objects/tribes/production_program.cc:1478
 msgid "No soldier found for this training level!"
 msgstr ""
 
@@ -1420,74 +1420,74 @@ msgstr ""
 msgid "%i%%"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:985
+#: ../../src/logic/map_objects/tribes/productionsite.cc:981
 msgid "Can’t find any more resources!"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/ship.cc:415
+#: ../../src/logic/map_objects/tribes/ship.cc:417
 msgid "Port Space"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/ship.cc:416
+#: ../../src/logic/map_objects/tribes/ship.cc:418
 msgid "Port Space Found"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/ship.cc:417
+#: ../../src/logic/map_objects/tribes/ship.cc:419
 msgid "An expedition ship found a new port build space."
 msgstr ""
 
 #. * TRANSLATORS: A ship has circumnavigated an island and is waiting for
 #. orders
-#: ../../src/logic/map_objects/tribes/ship.cc:536
+#: ../../src/logic/map_objects/tribes/ship.cc:538
 msgctxt "ship"
 msgid "Waiting"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/ship.cc:537
+#: ../../src/logic/map_objects/tribes/ship.cc:539
 msgid "Island Circumnavigated"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/ship.cc:538
+#: ../../src/logic/map_objects/tribes/ship.cc:540
 msgid "An expedition ship sailed around its island without any events."
 msgstr ""
 
 #. * TRANSLATORS: A ship has discovered land
-#: ../../src/logic/map_objects/tribes/ship.cc:600
+#: ../../src/logic/map_objects/tribes/ship.cc:602
 msgid "Land Ahoy!"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/ship.cc:601
+#: ../../src/logic/map_objects/tribes/ship.cc:603
 msgid "Coast Reached"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/ship.cc:602
+#: ../../src/logic/map_objects/tribes/ship.cc:604
 msgid ""
 "An expedition ship reached a coast and is waiting for further commands."
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/ship.cc:662
+#: ../../src/logic/map_objects/tribes/ship.cc:664
 msgid "Port Lost!"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/ship.cc:663
+#: ../../src/logic/map_objects/tribes/ship.cc:665
 msgid "New port construction site is gone"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/ship.cc:664
+#: ../../src/logic/map_objects/tribes/ship.cc:666
 msgid "Unloading of wares failed, expedition is cancelled now."
 msgstr ""
 
 #. * TRANSLATORS: Ship expedition ready
-#: ../../src/logic/map_objects/tribes/ship.cc:842
+#: ../../src/logic/map_objects/tribes/ship.cc:844
 msgctxt "ship"
 msgid "Expedition"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/ship.cc:843
+#: ../../src/logic/map_objects/tribes/ship.cc:845
 msgid "Expedition Ready"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/ship.cc:844
+#: ../../src/logic/map_objects/tribes/ship.cc:846
 msgid "An expedition ship is waiting for your commands."
 msgstr ""
 
@@ -2298,45 +2298,45 @@ msgstr "Ime scenarija"
 msgid "#"
 msgstr "#"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:395 ../../src/wui/mapdetails.cc:109
+#: ../../src/ui_fsmenu/campaign_select.cc:394 ../../src/wui/mapdetails.cc:109
 msgid "Scenario:"
 msgstr "Scenario:"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:395
+#: ../../src/ui_fsmenu/campaign_select.cc:394
 msgid "Tutorial:"
 msgstr "Vodič:"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:411
+#: ../../src/ui_fsmenu/campaign_select.cc:410
 #, c-format
 msgid "Invalid path to file in campaigns.conf: %s"
 msgstr "Pogrešna putanja do datoteke u campaigns.conf: %s"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:421
+#: ../../src/ui_fsmenu/campaign_select.cc:420
 msgid "The designer of this tutorial"
 msgid_plural "The designers of this tutorial"
 msgstr[0] "On je napravio ovaj vodič"
 msgstr[1] "Oni su napravili ovaj vodič"
 msgstr[2] "Oni su napravili ovaj vodič"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:424
+#: ../../src/ui_fsmenu/campaign_select.cc:423
 msgid "The designer of this scenario"
 msgid_plural "The designers of this scenario"
 msgstr[0] "Dizajner ovog scenarija"
 msgstr[1] "Dizajneri ovog scenarija"
 msgstr[2] "Dizajneri ovog scenarija"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:427 ../../src/wui/mapdetails.cc:131
+#: ../../src/ui_fsmenu/campaign_select.cc:426 ../../src/wui/mapdetails.cc:131
 msgid "Author:"
 msgid_plural "Authors:"
 msgstr[0] "Napravio:"
 msgstr[1] "Napravili:"
 msgstr[2] "Napravili:"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:456
+#: ../../src/ui_fsmenu/campaign_select.cc:455
 msgid "Pick a tutorial from the list, then hit \"OK\"."
 msgstr "Odaberite vodič s popisa i klikni na \"OK\""
 
-#: ../../src/ui_fsmenu/campaign_select.cc:458
+#: ../../src/ui_fsmenu/campaign_select.cc:457
 msgid ""
 "You can see a description of the currently selected tutorial on the right."
 msgstr "Desno je opis odabranog vodiča."
@@ -3267,59 +3267,59 @@ msgstr "%1%/%2%"
 msgid "Lacking Soldiers:"
 msgstr ""
 
-#: ../../src/wui/buildingwindow.cc:187
-msgid "Cancel the expedition"
-msgstr "Odustani od ekspedicije"
-
-#: ../../src/wui/buildingwindow.cc:197
-msgid "Start an expedition"
-msgstr "Pokreni ekspediciju"
-
 #. * TRANSLATORS: Stop/Continue toggle button for production sites.
-#: ../../src/wui/buildingwindow.cc:216
+#: ../../src/wui/buildingwindow.cc:210
 msgid "Continue"
 msgstr "Nastavi"
 
-#: ../../src/wui/buildingwindow.cc:216
+#: ../../src/wui/buildingwindow.cc:210
 msgid "Stop"
 msgstr "Zaustavi"
 
-#: ../../src/wui/buildingwindow.cc:240
+#: ../../src/wui/buildingwindow.cc:234
 #, c-format
 msgid "Enhance to %s"
 msgstr "Unaprijedi na %s"
 
-#: ../../src/wui/buildingwindow.cc:242 ../../src/wui/fieldaction.cc:106
+#: ../../src/wui/buildingwindow.cc:236 ../../src/wui/fieldaction.cc:106
 msgid "Construction costs:"
 msgstr "Cijena izrade:"
 
-#: ../../src/wui/buildingwindow.cc:267
+#: ../../src/wui/buildingwindow.cc:261
 msgid "Destroy"
 msgstr "Uništi"
 
-#: ../../src/wui/buildingwindow.cc:285
+#: ../../src/wui/buildingwindow.cc:279
 msgid "Dismantle"
 msgstr "Rastavi"
 
-#: ../../src/wui/buildingwindow.cc:285
+#: ../../src/wui/buildingwindow.cc:279
 msgid "Returns:"
 msgstr "Povrat:"
 
-#: ../../src/wui/buildingwindow.cc:317 ../../src/wui/buildingwindow.cc:506
+#: ../../src/wui/buildingwindow.cc:311 ../../src/wui/buildingwindow.cc:503
 msgid "Hide work area"
 msgstr "Sakrij dohvat"
 
-#: ../../src/wui/buildingwindow.cc:332
+#: ../../src/wui/buildingwindow.cc:326
 msgid "Debug"
 msgstr ""
 
-#: ../../src/wui/buildingwindow.cc:343
+#: ../../src/wui/buildingwindow.cc:337
 msgid "Center view on this"
 msgstr "Centriraj pogled na ovo mjesto"
 
-#: ../../src/wui/buildingwindow.cc:509
+#: ../../src/wui/buildingwindow.cc:506
 msgid "Show work area"
 msgstr "Prikaži dohvat"
+
+#: ../../src/wui/buildingwindow.cc:543
+msgid "Start an expedition"
+msgstr "Pokreni ekspediciju"
+
+#: ../../src/wui/buildingwindow.cc:547
+msgid "Cancel the expedition"
+msgstr "Odustani od ekspedicije"
 
 #: ../../src/wui/constructionsitewindow.cc:75
 #: ../../src/wui/dismantlesitewindow.cc:69
@@ -4045,57 +4045,61 @@ msgstr "(u dolasku)"
 msgid "(vacant)"
 msgstr "(neiskorišteno)"
 
-#: ../../src/wui/shipwindow.cc:116
+#: ../../src/wui/shipwindow.cc:120
 msgid "Scout towards the north west"
 msgstr "Istraži u smjeru sjeverozapada"
 
-#: ../../src/wui/shipwindow.cc:122
+#: ../../src/wui/shipwindow.cc:126
 msgid "Explore the island’s coast clockwise"
 msgstr "Istraži obalu otoka u smjeru kazaljke na satu"
 
-#: ../../src/wui/shipwindow.cc:128
+#: ../../src/wui/shipwindow.cc:132
 msgid "Scout towards the north east"
 msgstr "Istraži u smjeru sjeveroistoka"
 
-#: ../../src/wui/shipwindow.cc:134
+#: ../../src/wui/shipwindow.cc:138
 msgid "Scout towards the west"
 msgstr "Istraži u smjeru zapada"
 
-#: ../../src/wui/shipwindow.cc:140
+#: ../../src/wui/shipwindow.cc:144
 msgid "Construct a port at the current location"
 msgstr "Sagradi luku na ovome mjestu"
 
-#: ../../src/wui/shipwindow.cc:146
+#: ../../src/wui/shipwindow.cc:150
 msgid "Scout towards the east"
 msgstr "Istraži u smjeru istoka"
 
-#: ../../src/wui/shipwindow.cc:152
+#: ../../src/wui/shipwindow.cc:156
 msgid "Scout towards the south west"
 msgstr "Istraži u smjeru  jugozapada"
 
-#: ../../src/wui/shipwindow.cc:158
+#: ../../src/wui/shipwindow.cc:162
 msgid "Explore the island’s coast counter clockwise"
 msgstr "Istraži obalu otoka u smjeru suprotnom od kazaljke na satu"
 
-#: ../../src/wui/shipwindow.cc:164
+#: ../../src/wui/shipwindow.cc:168
 msgid "Scout towards the south east"
 msgstr "Istraži u smjeru jugoistoka"
 
-#: ../../src/wui/shipwindow.cc:176
+#: ../../src/wui/shipwindow.cc:180
 msgid "Go to ship"
 msgstr "Odi na brod"
 
-#: ../../src/wui/shipwindow.cc:181
+#: ../../src/wui/shipwindow.cc:185
 msgid "Go to destination"
 msgstr "Odi na cilj"
 
-#: ../../src/wui/shipwindow.cc:188
+#: ../../src/wui/shipwindow.cc:192
 msgid "Sink the ship"
 msgstr "Potopi brod"
 
-#: ../../src/wui/shipwindow.cc:193
+#: ../../src/wui/shipwindow.cc:198
 msgid "Cancel the Expedition"
 msgstr "Odustani od ekspedicije"
+
+#: ../../src/wui/shipwindow.cc:206
+msgid "Show Debug Window"
+msgstr ""
 
 #: ../../src/wui/soldiercapacitycontrol.cc:66
 msgid "Decrease capacity"
