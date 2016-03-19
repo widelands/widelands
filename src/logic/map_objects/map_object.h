@@ -383,7 +383,7 @@ protected:
 	/// Draws census and statistics on screen
 	void do_draw_info(bool show_census, const std::string& census,
 							bool show_statictics, const std::string& statictics,
-							RenderTarget& dst, const Point& pos);
+							RenderTarget& dst, const Point& pos) const;
 
 	void molog(char const * fmt, ...) const
 		__attribute__((format(printf, 2, 3)));

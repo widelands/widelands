@@ -31,6 +31,7 @@
 #include "economy/portdock.h"
 #include "economy/wares_queue.h"
 #include "graphic/graphic.h"
+#include "graphic/rendertarget.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
 #include "logic/findbob.h"
@@ -941,6 +942,50 @@ void Ship::sink_ship(Game& game) {
 	// Make sure the ship is active and close possible open windows
 	ship_wakeup(game);
 	close_window();
+}
+
+void Ship::draw(const EditorGameBase& game, RenderTarget& dst, const Point& pos) const {
+	Bob::draw(game, dst, pos);
+
+	// Show ship name and current activity
+	uint32_t const dpyflags = game.get_ibase()->get_display_flags();
+	std::string statistics_string = "";
+	if (dpyflags & InteractiveBase::dfShowStatistics) {
+		switch (ship_state_) {
+		case (ShipStates::TRANSPORT):
+			/** TRANSLATORS: This is a ship state */
+			statistics_string = _("Transporting Wares");
+			break;
+		case (ShipStates::EXP_WAITING):
+			/** TRANSLATORS: This is a ship state */
+			statistics_string = _("Waiting");
+			break;
+		case (ShipStates::EXP_SCOUTING):
+			/** TRANSLATORS: This is a ship state */
+			statistics_string = _("Scouting");
+			break;
+		case (ShipStates::EXP_FOUNDPORTSPACE):
+			/** TRANSLATORS: This is a ship state */
+			statistics_string = _("Port Space Found");
+			break;
+		case (ShipStates::EXP_COLONIZING):
+			/** TRANSLATORS: This is a ship state */
+			statistics_string = _("Building Port");
+			break;
+		case (ShipStates::SINK_REQUEST):
+		case (ShipStates::SINK_ANIMATION):
+			break;
+		default:
+			NEVER_HERE();
+		}
+		statistics_string = (boost::format("<font color=%s>%s</font>")
+									% UI_FONT_CLR_OK.hex_value()
+									% statistics_string).str();
+	}
+
+	do_draw_info(dpyflags & InteractiveBase::dfShowCensus, shipname_,
+					 dpyflags & InteractiveBase::dfShowStatistics, statistics_string,
+					 dst, calc_drawpos(game, pos));
 }
 
 void Ship::log_general_info(const EditorGameBase& egbase) {

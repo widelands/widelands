@@ -484,7 +484,7 @@ void MapObject::cleanup(EditorGameBase & egbase)
 }
 
 void MapObject::do_draw_info(bool show_census, const std::string& census,
-									  bool show_statictics, const std::string& statictics, RenderTarget& dst, const Point& pos) {
+									  bool show_statictics, const std::string& statictics, RenderTarget& dst, const Point& pos) const {
 	if (show_census || show_statictics) {
 		// We always render this so we can have a stable position for the statistics string.
 		const Image* rendered_census_info =

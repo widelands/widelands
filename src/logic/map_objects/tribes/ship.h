@@ -140,7 +140,7 @@ struct Ship : Bob {
 	//
 	// The EXP_FOUNDPORTSPACE state means, that a port build space was found.
 	//
-	enum {
+	enum ShipStates {
 		TRANSPORT          = 0,
 		EXP_WAITING        = 1,
 		EXP_SCOUTING       = 2,
@@ -216,6 +216,9 @@ struct Ship : Bob {
 
 	void exp_cancel (Game &);
 	void sink_ship  (Game &);
+
+protected:
+	void draw(const EditorGameBase&, RenderTarget&, const Point&) const override;
 
 private:
 	friend struct Fleet;
