@@ -27,7 +27,7 @@ EditorToolOptionsMenu::EditorToolOptionsMenu
 	:
 	UI::UniqueWindow
 		(&parent, "tool_options_menu", &registry, width, height, title),
-	m_current_pointer(parent.tools()->current_pointer)
+	current_pointer_(parent.tools()->current_pointer)
 {
 	if (get_usedefaultpos())
 		center_to_parent();
@@ -36,5 +36,5 @@ EditorToolOptionsMenu::EditorToolOptionsMenu
 
 void EditorToolOptionsMenu::select_correct_tool() {
 	dynamic_cast<EditorInteractive&>(*get_parent())
-		.select_tool(*m_current_pointer, EditorTool::First);
+		.select_tool(*current_pointer_, EditorTool::First);
 }

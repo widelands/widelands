@@ -35,11 +35,12 @@ struct EditorToolPlaceBobOptionsMenu : public EditorToolOptionsMenu {
 		 UI::UniqueWindow::Registry &);
 
 private:
-	UI::TabPanel               m_tabpanel;
-	std::vector<UI::Checkbox *> m_checkboxes;
-	EditorPlaceBobTool     & m_pit;
 	void clicked(int32_t, bool);
-	bool m_click_recursion_protect;
+
+	UI::TabPanel tabpanel_;
+	std::vector<UI::Checkbox*> checkboxes_;
+	EditorPlaceBobTool& pit_;
+	bool click_recursion_protect_;
 };
 
 #endif  // end of include guard: WL_EDITOR_UI_MENUS_EDITOR_TOOL_PLACE_BOB_OPTIONS_MENU_H

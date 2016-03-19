@@ -30,8 +30,8 @@ struct EditorNoiseHeightTool : public EditorTool {
 	     Widelands::HeightInterval(10, 14))
 		:
 		EditorTool(the_set_tool, the_set_tool),
-		m_set_tool(the_set_tool),
-		m_interval(the_interval)
+		set_tool_(the_set_tool),
+		interval_(the_interval)
 	{}
 
 	int32_t handle_click_impl(const Widelands::World& world,
@@ -53,17 +53,17 @@ struct EditorNoiseHeightTool : public EditorTool {
 	}
 
 	Widelands::HeightInterval get_interval() const {
-		return m_interval;
+		return interval_;
 	}
 	void set_interval(Widelands::HeightInterval const i) {
-		m_interval = i;
+		interval_ = i;
 	}
 
-	EditorSetHeightTool & set_tool() const {return m_set_tool;}
+	EditorSetHeightTool & set_tool() const {return set_tool_;}
 
 private:
-	EditorSetHeightTool & m_set_tool;
-	Widelands::HeightInterval m_interval;
+	EditorSetHeightTool & set_tool_;
+	Widelands::HeightInterval interval_;
 };
 
 #endif  // end of include guard: WL_EDITOR_TOOLS_EDITOR_NOISE_HEIGHT_TOOL_H

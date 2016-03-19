@@ -36,25 +36,25 @@ int32_t EditorPlaceBobTool::handle_click_impl(const Widelands::World& world,
                                               EditorActionArgs* args,
 											  Widelands::Map* map) {
 
-	if (get_nr_enabled() && args->obob_type.empty()) {
+	if (get_nr_enabled() && args->old_bob_type.empty()) {
 		Widelands::MapRegion<Widelands::Area<Widelands::FCoords> > mr
 		(*map,
 		 Widelands::Area<Widelands::FCoords>
 		 (map->get_fcoords(center.node), args->sel_radius));
 		do {
 			Widelands::Bob * const mbob = mr.location().field->get_first_bob();
-			args->obob_type.push_back((mbob ? &mbob->descr() : nullptr));
-			args->nbob_type.push_back(world.get_bob_descr(get_random_enabled()));
+			args->old_bob_type.push_back((mbob ? &mbob->descr() : nullptr));
+			args->new_bob_type.push_back(world.get_bob_descr(get_random_enabled()));
 		} while (mr.advance(*map));
 	}
 
-	if (!args->nbob_type.empty()) {
+	if (!args->new_bob_type.empty()) {
 		Widelands::EditorGameBase & egbase = parent.egbase();
 		Widelands::MapRegion<Widelands::Area<Widelands::FCoords> > mr
 		(*map,
 		 Widelands::Area<Widelands::FCoords>
 		 (map->get_fcoords(center.node), args->sel_radius));
-		std::list< const Widelands::BobDescr * >::iterator i = args->nbob_type.begin();
+		std::list< const Widelands::BobDescr * >::iterator i = args->new_bob_type.begin();
 		do {
 			const Widelands::BobDescr & descr = *(*i);
 			if (mr.location().field->nodecaps() & descr.movecaps()) {
@@ -75,13 +75,13 @@ EditorPlaceBobTool::handle_undo_impl(const Widelands::World&,
                                      EditorInteractive& parent,
                                      EditorActionArgs* args,
 									 Widelands::Map* map) {
-	if (!args->nbob_type.empty()) {
+	if (!args->new_bob_type.empty()) {
 		Widelands::EditorGameBase & egbase = parent.egbase();
 		Widelands::MapRegion<Widelands::Area<Widelands::FCoords> > mr
 		(*map,
 		 Widelands::Area<Widelands::FCoords>
 		 (map->get_fcoords(center.node), args->sel_radius));
-		std::list<const Widelands::BobDescr *>::iterator i = args->obob_type.begin();
+		std::list<const Widelands::BobDescr *>::iterator i = args->old_bob_type.begin();
 		do {
 			if (*i) {
 				const Widelands::BobDescr & descr = *(*i);

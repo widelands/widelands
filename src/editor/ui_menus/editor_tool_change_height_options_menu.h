@@ -36,13 +36,13 @@ struct EditorToolChangeHeightOptionsMenu :
 		 UI::UniqueWindow::Registry  &);
 
 private:
-	EditorIncreaseHeightTool & m_increase_tool;
-	UI::Textarea                  m_change_by_label;
-	UI::Button       m_change_by_increase, m_change_by_decrease;
-	UI::Textarea                  m_change_by_value;
-	UI::Textarea                  m_set_to_label;
-	UI::Button       m_set_to_increase, m_set_to_decrease;
-	UI::Textarea                  m_set_to_value;
+	EditorIncreaseHeightTool& increase_tool_;
+	UI::Textarea change_by_label_;
+	UI::Button change_by_increase_, change_by_decrease_;
+	UI::Textarea change_by_value_;
+	UI::Textarea set_to_label_;
+	UI::Button set_to_increase_, set_to_decrease_;
+	UI::Textarea set_to_value_;
 
 	void clicked_change_by_decrement();
 	void clicked_change_by_increment();
