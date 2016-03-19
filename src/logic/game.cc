@@ -555,7 +555,6 @@ bool Game::run
 	g_sound_handler.change_music("menu", 1000, 0);
 
 	cleanup_objects();
-	delete get_ibase();
 	set_ibase(nullptr);
 
 	state_ = gs_notrunning;

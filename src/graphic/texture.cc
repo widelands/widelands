@@ -100,6 +100,7 @@ bool is_bgr_surface(const SDL_PixelFormat& fmt) {
 }  // namespace
 
 Texture::Texture(int w, int h)
+	: owns_texture_(false)
 {
 	init(w, h);
 
@@ -113,6 +114,7 @@ Texture::Texture(int w, int h)
 }
 
 Texture::Texture(SDL_Surface * surface, bool intensity)
+	: owns_texture_(false)
 {
 	init(surface->w, surface->h);
 
@@ -151,12 +153,12 @@ Texture::Texture(SDL_Surface * surface, bool intensity)
 	SDL_FreeSurface(surface);
 }
 
-Texture::Texture(const GLuint texture, const Rect& subrect, int parent_w, int parent_h) {
+Texture::Texture(const GLuint texture, const Rect& subrect, int parent_w, int parent_h)
+	: owns_texture_(false)
+{
 	if (parent_w == 0 || parent_h == 0) {
 		throw wexception("Created a sub Texture with zero height and width parent.");
 	}
-
-	owns_texture_ = false;
 
 	blit_data_ = BlitData {
 		texture,

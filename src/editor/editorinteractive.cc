@@ -617,7 +617,7 @@ bool EditorInteractive::is_player_tribe_referenced
 
 void EditorInteractive::run_editor(const std::string& filename, const std::string& script_to_run) {
 	Widelands::EditorGameBase egbase(nullptr);
-	EditorInteractive eia(egbase);
+	EditorInteractive & eia = *new EditorInteractive(egbase);
 	egbase.set_ibase(&eia); // TODO(unknown): get rid of this
 	{
 		UI::ProgressWindow loader_ui("images/loadscreens/editor.jpg");
