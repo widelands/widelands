@@ -661,8 +661,7 @@ void Building::draw
 Draw overlay help strings when enabled.
 ===============
 */
-void Building::draw_info
-	(const EditorGameBase& game, RenderTarget& dst, const Point& pos)
+void Building::draw_info(const EditorGameBase& game, RenderTarget& dst, const Point& pos)
 {
 	const InteractiveGameBase & igbase =
 		dynamic_cast<const InteractiveGameBase&>(*game.get_ibase());
@@ -671,9 +670,7 @@ void Building::draw_info
 	bool show_statistics_string = dpyflags & InteractiveBase::dfShowStatistics;
 	if (show_statistics_string) {
 		if (upcast(InteractivePlayer const, iplayer, &igbase)) {
-			if
-				(!iplayer->player().see_all() &&
-				 iplayer->player().is_hostile(*get_owner())) {
+			if (!iplayer->player().see_all() && iplayer->player().is_hostile(*get_owner())) {
 				show_statistics_string = false;
 			}
 		}
