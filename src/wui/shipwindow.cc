@@ -28,6 +28,7 @@
 #include "logic/player.h"
 #include "ui_basic/box.h"
 #include "wui/actionconfirm.h"
+#include "wui/game_debug_ui.h"
 #include "wui/interactive_gamebase.h"
 #include "wui/interactive_player.h"
 #include "wui/itemwaresdisplay.h"
@@ -35,6 +36,7 @@
 static const char pic_goto[] = "images/wui/ship/menu_ship_goto.png";
 static const char pic_destination[] = "images/wui/ship/menu_ship_destination.png";
 static const char pic_sink[]     = "images/wui/ship/menu_ship_sink.png";
+static const char pic_debug[]     = "images/wui/fieldaction/menu_debug.png";
 static const char pic_cancel_expedition[] = "images/wui/ship/menu_ship_cancel_expedition.png";
 static const char pic_explore_cw[]  = "images/wui/ship/ship_explore_island_cw.png";
 static const char pic_explore_ccw[] = "images/wui/ship/ship_explore_island_ccw.png";
@@ -67,6 +69,7 @@ struct ShipWindow : UI::Window {
 	void act_goto();
 	void act_destination();
 	void act_sink();
+	void act_debug();
 	void act_cancel_expedition();
 	void act_scout_towards(WalkingDir);
 	void act_construct_port();
@@ -79,6 +82,7 @@ private:
 	UI::Button * btn_goto_;
 	UI::Button * btn_destination_;
 	UI::Button * btn_sink_;
+	UI::Button * btn_debug_;
 	UI::Button * btn_cancel_expedition_;
 	UI::Button * btn_explore_island_cw_;
 	UI::Button * btn_explore_island_ccw_;
@@ -187,12 +191,23 @@ ShipWindow::ShipWindow(InteractiveGameBase & igb, Ship & ship, const std::string
 		make_button
 			(buttons, "sink", _("Sink the ship"), pic_sink, boost::bind(&ShipWindow::act_sink, this));
 	buttons->add(btn_sink_, UI::Align::kLeft, false);
+
 	if (ship_.state_is_expedition()) {
 		btn_cancel_expedition_ =
 			make_button
 				(buttons, "cancel_expedition", _("Cancel the Expedition"), pic_cancel_expedition,
 				boost::bind(&ShipWindow::act_cancel_expedition, this));
 		buttons->add(btn_cancel_expedition_, UI::Align::kLeft, false);
+	}
+
+	if (igbase_.get_display_flag(InteractiveBase::dfDebug)) {
+		btn_debug_ =
+			make_button
+				(buttons, "debug", _("Show Debug Window"), pic_debug,
+				boost::bind(&ShipWindow::act_debug, this));
+		btn_debug_->set_enabled(true);
+		buttons->add
+			(btn_debug_, UI::Align::kLeft, false);
 	}
 	set_center_panel(vbox);
 	set_thinks(true);
@@ -297,6 +312,12 @@ void ShipWindow::act_sink()
 	else {
 		show_ship_sink_confirm(dynamic_cast<InteractivePlayer&>(igbase_), ship_);
 	}
+}
+
+/// Show debug info
+void ShipWindow::act_debug()
+{
+	show_mapobject_debug(igbase_, ship_);
 }
 
 /// Cancel expedition if confirmed

@@ -29,10 +29,10 @@ struct EditorIncreaseResourcesTool : public EditorTool {
 	EditorIncreaseResourcesTool(EditorDecreaseResourcesTool& the_decrease_tool,
 											 EditorSetResourcesTool& the_set_to_tool)
 	   : EditorTool(the_decrease_tool, the_set_to_tool),
-	     m_decrease_tool(the_decrease_tool),
-	     m_set_tool(the_set_to_tool),
-	     m_change_by(1),
-	     m_cur_res(0) {
+		  decrease_tool_(the_decrease_tool),
+	     set_tool_(the_set_to_tool),
+		  change_by_(1),
+		  cur_res_(0) {
 	}
 
 	/***
@@ -57,23 +57,23 @@ struct EditorIncreaseResourcesTool : public EditorTool {
 		return "images/wui/editor/fsel_editor_increase_resources.png";
 	}
 
-	int32_t get_change_by() const        {return m_change_by;}
-	void set_change_by(const int32_t n)  {m_change_by = n;}
-	Widelands::DescriptionIndex get_cur_res() const {return m_cur_res;}
+	int32_t get_change_by() const        {return change_by_;}
+	void set_change_by(const int32_t n)  {change_by_ = n;}
+	Widelands::DescriptionIndex get_cur_res() const {return cur_res_;}
 	void set_cur_res(Widelands::DescriptionIndex const res) {
-		m_cur_res = res;
+		cur_res_ = res;
 	}
 
 	EditorDecreaseResourcesTool & decrease_tool() const {
-		return m_decrease_tool;
+		return decrease_tool_;
 	}
-	EditorSetResourcesTool    &   set_tool() const {return m_set_tool;}
+	EditorSetResourcesTool    &   set_tool() const {return set_tool_;}
 
 private:
-	EditorDecreaseResourcesTool & m_decrease_tool;
-	EditorSetResourcesTool& m_set_tool;
-	int32_t m_change_by;
-	Widelands::DescriptionIndex m_cur_res;
+	EditorDecreaseResourcesTool& decrease_tool_;
+	EditorSetResourcesTool& set_tool_;
+	int32_t change_by_;
+	Widelands::DescriptionIndex cur_res_;
 };
 
 

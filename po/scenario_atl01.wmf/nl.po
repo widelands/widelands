@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-02-20 12:30+0000\n"
-"PO-Revision-Date: 2016-02-20 12:31+0000\n"
+"POT-Creation-Date: 2016-03-11 07:02+0000\n"
+"PO-Revision-Date: 2016-03-11 07:03+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Dutch (http://www.transifex.com/widelands/widelands/language/nl/)\n"
 "MIME-Version: 1.0\n"
@@ -468,9 +468,9 @@ msgid ""
 "May Satul warm you, Jundlina! I agree with what Loftomor proposes. We need a"
 " good supply of building materials for we have to expand our territory "
 "swiftly. I will not feel safe on this island as long as we have not seen all"
-" its shores it. I brought plenty of good men from Atlantis. The military "
-"might is available. We only need some housing to live in."
-msgstr "Mag Satul u verwarmen, Jundlina! Ik ben het eens met wat Loftomor voorstelt. We hebben een mooie voorraad van bouwmaterialen nodig om ons grondgebied snel uit te breiden. Ik zal me niet veilig voelen op dit eiland zolang we niet alle kusten hebben gezien. Ik heb voldoende goede mannen uit Atlantis meegenomen. De militaire macht is beschikbaar. We hebben enkel gebouwen nodig om in te leven."
+" its shores. I brought plenty of good men from Atlantis. The military might "
+"is available. We only need some housing to live in."
+msgstr ""
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:207
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:247
@@ -649,9 +649,9 @@ msgstr "Jundlina knikt"
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:300
 msgid ""
-"I have considered this, Sidolus. I think  it is about time. We will make "
-"this a priority for now. You shall get your industry soon!"
-msgstr "Ik heb dit overwogen, Sidolus. Ik denk dat het tijd wordt. We zullen er nu een prioriteit van maken. Je zult spoedig je industrie krijgen!"
+"I have considered this, Sidolus. I think it is about time. We will make this"
+" a priority for now. You shall get your industry soon!"
+msgstr ""
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:307
 msgid "Jundlina Summons Sidolus"

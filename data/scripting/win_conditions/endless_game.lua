@@ -3,11 +3,11 @@
 -- =======================================================================
 
 include "scripting/coroutine.lua" -- for sleep
-include "scripting/win_condition_functions.lua"
+include "scripting/win_conditions/win_condition_functions.lua"
 
 set_textdomain("win_conditions")
 
-include "scripting/win_condition_texts.lua"
+include "scripting/win_conditions/win_condition_texts.lua"
 
 local wc_name = "Endless Game"
 -- This needs to be exactly like wc_name, but localized, because wc_name

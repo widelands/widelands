@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-03-11 07:02+0000\n"
+"POT-Creation-Date: 2016-03-18 11:30+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -206,49 +206,6 @@ msgid ""
 "finally can start the game as soon as all players are set up."
 msgstr ""
 
-#: ../../data/scripting/win_condition_texts.lua:4
-msgid "Congratulations!"
-msgstr ""
-
-#: ../../data/scripting/win_condition_texts.lua:5
-msgid "You have won this game!"
-msgstr ""
-
-#: ../../data/scripting/win_condition_texts.lua:9
-msgid "You are defeated!"
-msgstr ""
-
-#: ../../data/scripting/win_condition_texts.lua:10
-msgid ""
-"You lost your last warehouse and are therefore defeated. You may continue as "
-"spectator if you want."
-msgstr ""
-
-#: ../../data/scripting/win_condition_texts.lua:14
-msgid "You won"
-msgstr ""
-
-#: ../../data/scripting/win_condition_texts.lua:15
-msgid "You are the winner!"
-msgstr ""
-
-#: ../../data/scripting/win_condition_texts.lua:19
-msgid "You lost"
-msgstr ""
-
-#: ../../data/scripting/win_condition_texts.lua:20
-msgid "You’ve lost this game!"
-msgstr ""
-
-#: ../../data/scripting/win_condition_texts.lua:24
-#: ../../src/wui/game_message_menu.cc:75 ../../src/wui/game_summary.cc:121
-msgid "Status"
-msgstr ""
-
-#: ../../data/scripting/win_condition_texts.lua:25
-msgid "Player overview:"
-msgstr ""
-
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
 #: ../../src/ai/computer_player.cc:42
 msgid "No AI"
@@ -409,7 +366,7 @@ msgstr ""
 
 #: ../../src/editor/editorinteractive.cc:143
 #: ../../src/editor/ui_menus/editor_help.cc:62
-#: ../../src/wui/buildingwindow.cc:360
+#: ../../src/wui/buildingwindow.cc:354
 msgid "Help"
 msgstr ""
 
@@ -743,7 +700,7 @@ msgstr ""
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:111
 #: ../../src/ui_fsmenu/campaign_select.cc:80
 #: ../../src/ui_fsmenu/campaign_select.cc:157
-#: ../../src/ui_fsmenu/campaign_select.cc:396 ../../src/wui/mapdetails.cc:133
+#: ../../src/ui_fsmenu/campaign_select.cc:395 ../../src/wui/mapdetails.cc:133
 msgid "Description:"
 msgstr ""
 
@@ -1149,7 +1106,7 @@ msgstr ""
 msgid "%i%% built"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/dismantlesite.cc:96
+#: ../../src/logic/map_objects/tribes/dismantlesite.cc:98
 #, c-format
 msgid "%u%% dismantled"
 msgstr ""
@@ -1253,9 +1210,9 @@ msgstr ""
 #. * TRANSLATORS:    %2$s = "Ox"
 #: ../../src/logic/map_objects/tribes/production_program.cc:408
 #: ../../src/logic/map_objects/tribes/production_program.cc:430
-#: ../../src/logic/map_objects/tribes/production_program.cc:941
-#: ../../src/logic/map_objects/tribes/production_program.cc:1059
-#: ../../src/logic/map_objects/tribes/production_program.cc:1155
+#: ../../src/logic/map_objects/tribes/production_program.cc:940
+#: ../../src/logic/map_objects/tribes/production_program.cc:1057
+#: ../../src/logic/map_objects/tribes/production_program.cc:1153
 #, c-format
 msgid "%1$ix %2$s"
 msgstr ""
@@ -1291,7 +1248,7 @@ msgstr ""
 #. * TRANSLATORS: on a development build if you can, and let us know if there are any issues
 #. * TRANSLATORS: we need to address for your language.
 #: ../../src/logic/map_objects/tribes/production_program.cc:575
-#: ../../src/logic/map_objects/tribes/production_program.cc:964
+#: ../../src/logic/map_objects/tribes/production_program.cc:963
 #, c-format
 msgid "Did not start %1$s because %2$s"
 msgstr ""
@@ -1314,7 +1271,7 @@ msgstr ""
 
 #. * TRANSLATORS: e.g. 'Did not start working because 3x water and 3x wheat are missing'
 #. * TRANSLATORS: e.g. 'Did not start working because fish, meat or pitta bread is missing'
-#: ../../src/logic/map_objects/tribes/production_program.cc:952
+#: ../../src/logic/map_objects/tribes/production_program.cc:951
 #, c-format
 msgid "%s is missing"
 msgid_plural "%s are missing"
@@ -1322,7 +1279,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. * TRANSLATORS: %s is a list of wares. String is fetched according to total amount of wares.
-#: ../../src/logic/map_objects/tribes/production_program.cc:1069
+#: ../../src/logic/map_objects/tribes/production_program.cc:1067
 #, c-format
 msgid "Produced %s"
 msgid_plural "Produced %s"
@@ -1330,19 +1287,19 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. * TRANSLATORS: %s is a list of workers. String is fetched according to total amount of workers.
-#: ../../src/logic/map_objects/tribes/production_program.cc:1165
+#: ../../src/logic/map_objects/tribes/production_program.cc:1163
 #, c-format
 msgid "Recruited %s"
 msgid_plural "Recruited %s"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../../src/logic/map_objects/tribes/production_program.cc:1387
+#: ../../src/logic/map_objects/tribes/production_program.cc:1385
 msgid "No soldier to train!"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/production_program.cc:1395
-#: ../../src/logic/map_objects/tribes/production_program.cc:1480
+#: ../../src/logic/map_objects/tribes/production_program.cc:1393
+#: ../../src/logic/map_objects/tribes/production_program.cc:1478
 msgid "No soldier found for this training level!"
 msgstr ""
 
@@ -1368,72 +1325,72 @@ msgstr ""
 msgid "%i%%"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:985
+#: ../../src/logic/map_objects/tribes/productionsite.cc:981
 msgid "Can’t find any more resources!"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/ship.cc:415
+#: ../../src/logic/map_objects/tribes/ship.cc:417
 msgid "Port Space"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/ship.cc:416
+#: ../../src/logic/map_objects/tribes/ship.cc:418
 msgid "Port Space Found"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/ship.cc:417
+#: ../../src/logic/map_objects/tribes/ship.cc:419
 msgid "An expedition ship found a new port build space."
 msgstr ""
 
 #. * TRANSLATORS: A ship has circumnavigated an island and is waiting for orders
-#: ../../src/logic/map_objects/tribes/ship.cc:536
+#: ../../src/logic/map_objects/tribes/ship.cc:538
 msgctxt "ship"
 msgid "Waiting"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/ship.cc:537
+#: ../../src/logic/map_objects/tribes/ship.cc:539
 msgid "Island Circumnavigated"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/ship.cc:538
+#: ../../src/logic/map_objects/tribes/ship.cc:540
 msgid "An expedition ship sailed around its island without any events."
 msgstr ""
 
 #. * TRANSLATORS: A ship has discovered land
-#: ../../src/logic/map_objects/tribes/ship.cc:600
+#: ../../src/logic/map_objects/tribes/ship.cc:602
 msgid "Land Ahoy!"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/ship.cc:601
+#: ../../src/logic/map_objects/tribes/ship.cc:603
 msgid "Coast Reached"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/ship.cc:602
+#: ../../src/logic/map_objects/tribes/ship.cc:604
 msgid "An expedition ship reached a coast and is waiting for further commands."
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/ship.cc:662
+#: ../../src/logic/map_objects/tribes/ship.cc:664
 msgid "Port Lost!"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/ship.cc:663
+#: ../../src/logic/map_objects/tribes/ship.cc:665
 msgid "New port construction site is gone"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/ship.cc:664
+#: ../../src/logic/map_objects/tribes/ship.cc:666
 msgid "Unloading of wares failed, expedition is cancelled now."
 msgstr ""
 
 #. * TRANSLATORS: Ship expedition ready
-#: ../../src/logic/map_objects/tribes/ship.cc:842
+#: ../../src/logic/map_objects/tribes/ship.cc:844
 msgctxt "ship"
 msgid "Expedition"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/ship.cc:843
+#: ../../src/logic/map_objects/tribes/ship.cc:845
 msgid "Expedition Ready"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/ship.cc:844
+#: ../../src/logic/map_objects/tribes/ship.cc:846
 msgid "An expedition ship is waiting for your commands."
 msgstr ""
 
@@ -2232,42 +2189,42 @@ msgstr ""
 msgid "#"
 msgstr ""
 
-#: ../../src/ui_fsmenu/campaign_select.cc:395 ../../src/wui/mapdetails.cc:109
+#: ../../src/ui_fsmenu/campaign_select.cc:394 ../../src/wui/mapdetails.cc:109
 msgid "Scenario:"
 msgstr ""
 
-#: ../../src/ui_fsmenu/campaign_select.cc:395
+#: ../../src/ui_fsmenu/campaign_select.cc:394
 msgid "Tutorial:"
 msgstr ""
 
-#: ../../src/ui_fsmenu/campaign_select.cc:411
+#: ../../src/ui_fsmenu/campaign_select.cc:410
 #, c-format
 msgid "Invalid path to file in campaigns.conf: %s"
 msgstr ""
 
-#: ../../src/ui_fsmenu/campaign_select.cc:421
+#: ../../src/ui_fsmenu/campaign_select.cc:420
 msgid "The designer of this tutorial"
 msgid_plural "The designers of this tutorial"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../../src/ui_fsmenu/campaign_select.cc:424
+#: ../../src/ui_fsmenu/campaign_select.cc:423
 msgid "The designer of this scenario"
 msgid_plural "The designers of this scenario"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../../src/ui_fsmenu/campaign_select.cc:427 ../../src/wui/mapdetails.cc:131
+#: ../../src/ui_fsmenu/campaign_select.cc:426 ../../src/wui/mapdetails.cc:131
 msgid "Author:"
 msgid_plural "Authors:"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../../src/ui_fsmenu/campaign_select.cc:456
+#: ../../src/ui_fsmenu/campaign_select.cc:455
 msgid "Pick a tutorial from the list, then hit \"OK\"."
 msgstr ""
 
-#: ../../src/ui_fsmenu/campaign_select.cc:458
+#: ../../src/ui_fsmenu/campaign_select.cc:457
 msgid ""
 "You can see a description of the currently selected tutorial on the right."
 msgstr ""
@@ -3194,58 +3151,59 @@ msgstr ""
 msgid "Lacking Soldiers:"
 msgstr ""
 
-#: ../../src/wui/buildingwindow.cc:187
-msgid "Cancel the expedition"
-msgstr ""
-
-#: ../../src/wui/buildingwindow.cc:197
-msgid "Start an expedition"
-msgstr ""
-
 #. * TRANSLATORS: Stop/Continue toggle button for production sites.
-#: ../../src/wui/buildingwindow.cc:216
+#: ../../src/wui/buildingwindow.cc:210
 msgid "Continue"
 msgstr ""
 
-#: ../../src/wui/buildingwindow.cc:216
+#: ../../src/wui/buildingwindow.cc:210
 msgid "Stop"
 msgstr ""
 
-#: ../../src/wui/buildingwindow.cc:240
+#: ../../src/wui/buildingwindow.cc:234
 #, c-format
 msgid "Enhance to %s"
 msgstr ""
 
-#: ../../src/wui/buildingwindow.cc:242 ../../src/wui/fieldaction.cc:106
+#: ../../src/wui/buildingwindow.cc:236 ../../src/wui/fieldaction.cc:106
 msgid "Construction costs:"
 msgstr ""
 
-#: ../../src/wui/buildingwindow.cc:267
+#: ../../src/wui/buildingwindow.cc:261
 msgid "Destroy"
 msgstr ""
 
-#: ../../src/wui/buildingwindow.cc:285
+#: ../../src/wui/buildingwindow.cc:279
 msgid "Dismantle"
 msgstr ""
 
-#: ../../src/wui/buildingwindow.cc:285
+#: ../../src/wui/buildingwindow.cc:279
 msgid "Returns:"
 msgstr ""
 
-#: ../../src/wui/buildingwindow.cc:317 ../../src/wui/buildingwindow.cc:506
+#: ../../src/wui/buildingwindow.cc:311 ../../src/wui/buildingwindow.cc:503
 msgid "Hide work area"
 msgstr ""
 
-#: ../../src/wui/buildingwindow.cc:332
-msgid "Debug"
+#: ../../src/wui/buildingwindow.cc:326 ../../src/wui/fieldaction.cc:446
+#: ../../src/wui/shipwindow.cc:206
+msgid "Show Debug Window"
 msgstr ""
 
-#: ../../src/wui/buildingwindow.cc:343
+#: ../../src/wui/buildingwindow.cc:337
 msgid "Center view on this"
 msgstr ""
 
-#: ../../src/wui/buildingwindow.cc:509
+#: ../../src/wui/buildingwindow.cc:506
 msgid "Show work area"
+msgstr ""
+
+#: ../../src/wui/buildingwindow.cc:543
+msgid "Start an expedition"
+msgstr ""
+
+#: ../../src/wui/buildingwindow.cc:547
+msgid "Cancel the expedition"
 msgstr ""
 
 #: ../../src/wui/constructionsitewindow.cc:75
@@ -3330,10 +3288,6 @@ msgstr ""
 
 #: ../../src/wui/fieldaction.cc:439
 msgid "Toggle building label display"
-msgstr ""
-
-#: ../../src/wui/fieldaction.cc:446
-msgid "Debug window"
 msgstr ""
 
 #: ../../src/wui/fieldaction.cc:452 ../../src/wui/watchwindow.cc:98
@@ -3452,6 +3406,10 @@ msgstr ""
 #: ../../src/wui/game_message_menu.cc:74
 msgctxt "message"
 msgid "Type"
+msgstr ""
+
+#: ../../src/wui/game_message_menu.cc:75 ../../src/wui/game_summary.cc:121
+msgid "Status"
 msgstr ""
 
 #. * TRANSLATORS: We have very little space here. You can also translate this as "Time" or "Time Sent"
@@ -3963,55 +3921,55 @@ msgstr ""
 msgid "(vacant)"
 msgstr ""
 
-#: ../../src/wui/shipwindow.cc:116
+#: ../../src/wui/shipwindow.cc:120
 msgid "Scout towards the north west"
 msgstr ""
 
-#: ../../src/wui/shipwindow.cc:122
+#: ../../src/wui/shipwindow.cc:126
 msgid "Explore the island’s coast clockwise"
 msgstr ""
 
-#: ../../src/wui/shipwindow.cc:128
+#: ../../src/wui/shipwindow.cc:132
 msgid "Scout towards the north east"
 msgstr ""
 
-#: ../../src/wui/shipwindow.cc:134
+#: ../../src/wui/shipwindow.cc:138
 msgid "Scout towards the west"
 msgstr ""
 
-#: ../../src/wui/shipwindow.cc:140
+#: ../../src/wui/shipwindow.cc:144
 msgid "Construct a port at the current location"
 msgstr ""
 
-#: ../../src/wui/shipwindow.cc:146
+#: ../../src/wui/shipwindow.cc:150
 msgid "Scout towards the east"
 msgstr ""
 
-#: ../../src/wui/shipwindow.cc:152
+#: ../../src/wui/shipwindow.cc:156
 msgid "Scout towards the south west"
 msgstr ""
 
-#: ../../src/wui/shipwindow.cc:158
+#: ../../src/wui/shipwindow.cc:162
 msgid "Explore the island’s coast counter clockwise"
 msgstr ""
 
-#: ../../src/wui/shipwindow.cc:164
+#: ../../src/wui/shipwindow.cc:168
 msgid "Scout towards the south east"
 msgstr ""
 
-#: ../../src/wui/shipwindow.cc:176
+#: ../../src/wui/shipwindow.cc:180
 msgid "Go to ship"
 msgstr ""
 
-#: ../../src/wui/shipwindow.cc:181
+#: ../../src/wui/shipwindow.cc:185
 msgid "Go to destination"
 msgstr ""
 
-#: ../../src/wui/shipwindow.cc:188
+#: ../../src/wui/shipwindow.cc:192
 msgid "Sink the ship"
 msgstr ""
 
-#: ../../src/wui/shipwindow.cc:193
+#: ../../src/wui/shipwindow.cc:198
 msgid "Cancel the Expedition"
 msgstr ""
 

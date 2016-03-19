@@ -32,13 +32,13 @@ int32_t EditorNoiseHeightTool::handle_click_impl(const Widelands::World& world,
                                                  EditorInteractive& /* parent */,
                                                  EditorActionArgs* args,
 												 Widelands::Map* map) {
-	if (args->origHights.empty()) {
+	if (args->original_heights.empty()) {
 		Widelands::MapRegion<Widelands::Area<Widelands::FCoords> > mr
 		(*map,
 		 Widelands::Area<Widelands::FCoords>
 		 (map->get_fcoords(center.node),
 		  args->sel_radius + MAX_FIELD_HEIGHT / MAX_FIELD_HEIGHT_DIFF + 1));
-		do args->origHights.push_back(mr.location().field->get_height());
+		do args->original_heights.push_back(mr.location().field->get_height());
 		while (mr.advance(*map));
 	}
 
@@ -53,9 +53,9 @@ int32_t EditorNoiseHeightTool::handle_click_impl(const Widelands::World& world,
 		   max,
 		   map->set_height(world,
 		                  mr.location(),
-		                  args->m_interval.min +
+		                  args->interval.min +
 		                     static_cast<int32_t>(
-		                        static_cast<double>(args->m_interval.max - args->m_interval.min + 1) *
+		                        static_cast<double>(args->interval.max - args->interval.min + 1) *
 		                        rand() / (RAND_MAX + 1.0))));
 	} while (mr.advance(*map));
 	return mr.radius() + max;
@@ -67,12 +67,12 @@ EditorNoiseHeightTool::handle_undo_impl(const Widelands::World& world,
                                         EditorInteractive& parent,
                                         EditorActionArgs* args,
 										Widelands::Map* map) {
-	return m_set_tool.handle_undo_impl(world, center, parent, args, map);
+	return set_tool_.handle_undo_impl(world, center, parent, args, map);
 }
 
 EditorActionArgs EditorNoiseHeightTool::format_args_impl(EditorInteractive & parent)
 {
 	EditorActionArgs a(parent);
-	a.m_interval = m_interval;
+	a.interval = interval_;
 	return a;
 }

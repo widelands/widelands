@@ -2,13 +2,13 @@
 # Copyright (C) 2005-2016 Widelands Development Team
 # 
 # Translators:
-# MiroslavR <miroslavr256@gmail.com>, 2015
+# MiroslavR <miroslavr256@gmail.com>, 2015-2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-03-02 08:54+0000\n"
-"PO-Revision-Date: 2016-03-02 15:06+0000\n"
+"POT-Creation-Date: 2016-03-11 07:02+0000\n"
+"PO-Revision-Date: 2016-03-12 16:59+0000\n"
 "Last-Translator: MiroslavR <miroslavr256@gmail.com>\n"
 "Language-Team: Slovak (http://www.transifex.com/widelands/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
@@ -334,7 +334,7 @@ msgid ""
 "The third tab shows you the wares that are stored in your headquarters, your"
 " warehouses and ports. They are not needed anywhere and are therefore your "
 "reserve."
-msgstr "Na tretej karte sa zobrazujú výrobky uskladnené v základni, skladoch a prístavoch. Nie sú nikde potrebné, a preto predstavujú rezervu."
+msgstr "Na tretej karte sa zobrazujú výrobky uskladnené v ústredí, skladoch a prístavoch. Nie sú nikde potrebné, a preto predstavujú rezervu."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:174
 msgid "The fourth tab shows the same thing for workers."
@@ -344,7 +344,7 @@ msgstr "Na štvrtej karte sa rovnakým spôsobom zobrazujú pracovníci."
 msgid ""
 "The third tab tells you that there are no rations left in your headquarters "
 "– that’s not good!"
-msgstr "Na tretej karte vidno, že v základni nie sú k dispozícii už žiadne prídely – to nie je dobré."
+msgstr "Na tretej karte vidno, že v ústredí nie sú k dispozícii už žiadne prídely – to nie je dobré."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:182
 msgid "You closed the stock window!"
@@ -762,7 +762,7 @@ msgid ""
 "Normally, produced wares are brought to the closest warehouse if they are "
 "not needed elsewhere. In this case, this means our headquarters. But we "
 "would like to have them in the warehouse near our fortresses."
-msgstr "Vyrobené výrobky sa za bežných podmienok donesú do najbližšieho skladu, ak ich netreba niekde inde. V našom prípade je to naša základňa. Chceli by sme ich však skladovať v sklade pri našich pevnostiach."
+msgstr "Vyrobené výrobky sa za bežných podmienok donesú do najbližšieho skladu, ak ich netreba niekde inde. V našom prípade je to naše ústredie. Chceli by sme ich však skladovať v sklade pri našich pevnostiach."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:430
 msgid ""
@@ -789,7 +789,7 @@ msgstr "Na to, aby ste to dosiahli, musíte spraviť dve veci. Najprv v požadov
 msgid ""
 "Then, to move the marble columns out of your headquarters, you will have to "
 "click on the remove button there."
-msgstr "Potom kliknutím na tlačidlo na odstránenie premiestnite mramorové stĺpy von zo základne."
+msgstr "Potom kliknutím na tlačidlo na odstránenie premiestnite mramorové stĺpy von z ústredia."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:437
 msgid "Bring 20 marble columns to the front line."

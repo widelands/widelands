@@ -44,10 +44,10 @@ int32_t EditorDeleteImmovableTool::handle_click_impl(const Widelands::World&,
 		         immovable,
 		         mr.location().field->get_immovable()))
 		{
-			args->oimmov_types.push_back(immovable->descr().name());
+			args->old_immovable_types.push_back(immovable->descr().name());
 			immovable->remove(egbase); //  Delete no buildings or stuff.
 		} else {
-			args->oimmov_types.push_back("");
+			args->old_immovable_types.push_back("");
 		}
 	while (mr.advance(*map));
 	return mr.radius() + 2;

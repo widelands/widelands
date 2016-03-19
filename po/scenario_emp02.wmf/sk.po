@@ -3,13 +3,13 @@
 # 
 # Translators:
 # GunChleoc, 2014
-# MiroslavR <miroslavr256@gmail.com>, 2015
+# MiroslavR <miroslavr256@gmail.com>, 2015-2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-03-02 08:54+0000\n"
-"PO-Revision-Date: 2016-03-02 15:06+0000\n"
+"POT-Creation-Date: 2016-03-11 07:02+0000\n"
+"PO-Revision-Date: 2016-03-12 16:32+0000\n"
 "Last-Translator: MiroslavR <miroslavr256@gmail.com>\n"
 "Language-Team: Slovak (http://www.transifex.com/widelands/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
@@ -40,7 +40,7 @@ msgstr "Kameňolom"
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:40
 msgid "Build a quarry to the south of your headquarters."
-msgstr "Postavte kameňolom južne od základne."
+msgstr "Postavte kameňolom južne od ústredia."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:46
 msgid "Protect your colony"
@@ -153,7 +153,7 @@ msgid ""
 "Finally, build up a fortress on the peninsula (near where the Barbarian "
 "headquarters stood before), to avoid new settlements of other tribes in that"
 " region."
-msgstr "Nakoniec postavte na polostrove (pri mieste, kde predtým stála barbarská základňa) pevnosť a zabráňte tak ostatným kmeňom v osídľovaní tejto oblasti."
+msgstr "Nakoniec postavte na polostrove (pri mieste, kde predtým stálo barbarské ústredie) pevnosť a zabráňte tak ostatným kmeňom v osídľovaní tejto oblasti."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:107
 msgid "A New Island"

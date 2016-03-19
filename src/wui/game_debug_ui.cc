@@ -153,7 +153,7 @@ MapObjectDebugWindow::MapObjectDebugWindow
 	object_          (&obj),
 	tabs_
 		(this, 0, 0,
-		 g_gr->images().get("images/ui_basic/but1.png"))
+		 g_gr->images().get("images/ui_basic/but4.png"))
 {
 	serial_ = obj.serial();
 	set_title(std::to_string(serial_));
@@ -242,7 +242,7 @@ FieldDebugWindow::FieldDebugWindow
 	ui_immovable_
 		(this, "immovable",
 		 0, 280, 300, 24,
-		 g_gr->images().get("images/ui_basic/but0.png"),
+		 g_gr->images().get("images/ui_basic/but4.png"),
 		 ""),
 
 	ui_bobs_(this, 0, 304, 300, 96)
