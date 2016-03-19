@@ -35,7 +35,7 @@ namespace UI {struct Button;}
  */
 struct EditorHistory {
 	EditorHistory(UI::Button & undo, UI::Button & redo):
-		m_undo_button(undo), m_redo_button(redo) {}
+		undo_button_(undo), redo_button_(redo) {}
 
 	uint32_t do_action(EditorTool& tool,
 							 EditorTool::ToolIndex ind,
@@ -48,13 +48,13 @@ struct EditorHistory {
 	uint32_t redo_action(const Widelands::World& world);
 
 private:
-	UI::Button & m_undo_button;
-	UI::Button & m_redo_button;
+	UI::Button & undo_button_;
+	UI::Button & redo_button_;
 
-	EditorDrawTool m_draw_tool;
+	EditorDrawTool draw_tool_;
 
-	std::deque<EditorToolAction> undo_stack;
-	std::deque<EditorToolAction> redo_stack;
+	std::deque<EditorToolAction> undo_stack_;
+	std::deque<EditorToolAction> redo_stack_;
 };
 
 

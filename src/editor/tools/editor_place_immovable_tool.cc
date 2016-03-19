@@ -41,7 +41,7 @@ int32_t EditorPlaceImmovableTool::handle_click_impl(const Widelands::World&,
 	if (!get_nr_enabled())
 		return radius;
 	Widelands::EditorGameBase & egbase = parent.egbase();
-	if (args->oimmov_types.empty())
+	if (args->old_immovable_types.empty())
 	{
 		Widelands::MapRegion<Widelands::Area<Widelands::FCoords> > mr
 		(*map,
@@ -49,18 +49,18 @@ int32_t EditorPlaceImmovableTool::handle_click_impl(const Widelands::World&,
 		 (map->get_fcoords(center.node), radius));
 		do {
 			const Widelands::BaseImmovable * im = mr.location().field->get_immovable();
-			args->oimmov_types.push_back((im ? im->descr().name() : ""));
-			args->nimmov_types.push_back(get_random_enabled());
+			args->old_immovable_types.push_back((im ? im->descr().name() : ""));
+			args->new_immovable_types.push_back(get_random_enabled());
 		} while (mr.advance(*map));
 	}
 
-	if (!args->nimmov_types.empty())
+	if (!args->new_immovable_types.empty())
 	{
 		Widelands::MapRegion<Widelands::Area<Widelands::FCoords> > mr
 		(*map,
 		 Widelands::Area<Widelands::FCoords>
 		 (map->get_fcoords(center.node), radius));
-		std::list<int32_t>::iterator i = args->nimmov_types.begin();
+		std::list<int32_t>::iterator i = args->new_immovable_types.begin();
 		do {
 			if
 			(!mr.location().field->get_immovable()
@@ -79,7 +79,7 @@ int32_t EditorPlaceImmovableTool::handle_undo_impl(const Widelands::World&,
 												   EditorActionArgs* args,
 												   Widelands::Map* map) {
 	const int32_t radius = args->sel_radius;
-	if (args->oimmov_types.empty())
+	if (args->old_immovable_types.empty())
 		return radius;
 
 	Widelands::EditorGameBase & egbase = parent.egbase();
@@ -87,7 +87,7 @@ int32_t EditorPlaceImmovableTool::handle_undo_impl(const Widelands::World&,
 	(*map,
 	 Widelands::Area<Widelands::FCoords>
 	 (map->get_fcoords(center.node), radius));
-	std::list<std::string>::iterator i = args->oimmov_types.begin();
+	std::list<std::string>::iterator i = args->old_immovable_types.begin();
 	do {
 		if
 			(upcast(Widelands::Immovable, immovable,

@@ -52,7 +52,7 @@ int32_t EditorMakeInfrastructureTool::handle_click_impl(const Widelands::World&,
                                                         EditorActionArgs* /* args */,
 														Widelands::Map*) {
 	show_field_action
-	(&parent, parent.egbase().get_player(m_player), &m_registry);
+	(&parent, parent.egbase().get_player(player_), &registry_);
 
 	//  Not really needed, since Player Immovables are taken care of while
 	//  placing on map.

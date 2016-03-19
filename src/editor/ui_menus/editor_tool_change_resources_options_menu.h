@@ -45,15 +45,15 @@ private:
 	};
 	void clicked_button(Button);
 	void update();
-	UI::Textarea                     m_change_by_label;
-	UI::Button          m_change_by_increase, m_change_by_decrease;
-	UI::Textarea                     m_change_by_value;
-	UI::Textarea                     m_set_to_label;
-	UI::Button          m_set_to_increase,    m_set_to_decrease;
-	UI::Textarea                     m_set_to_value;
-	UI::Textarea                     m_cur_selection;
-	UI::Radiogroup m_radiogroup;
-	EditorIncreaseResourcesTool & m_increase_tool;
+	UI::Textarea change_by_label_;
+	UI::Button change_by_increase_, change_by_decrease_;
+	UI::Textarea change_by_value_;
+	UI::Textarea set_to_label_;
+	UI::Button set_to_increase_, set_to_decrease_;
+	UI::Textarea set_to_value_;
+	UI::Textarea cur_selection_;
+	UI::Radiogroup radiogroup_;
+	EditorIncreaseResourcesTool& increase_tool_;
 };
 
 #endif  // end of include guard: WL_EDITOR_UI_MENUS_EDITOR_TOOL_CHANGE_RESOURCES_OPTIONS_MENU_H

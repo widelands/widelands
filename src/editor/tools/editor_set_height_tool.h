@@ -27,7 +27,7 @@
 ///  Ensures that the height of a node is within an interval.
 struct EditorSetHeightTool : public EditorTool {
 	EditorSetHeightTool()
-		: EditorTool(*this, *this), m_interval(10, 10)
+		: EditorTool(*this, *this), interval_(10, 10)
 	{}
 
 	int32_t handle_click_impl(const Widelands::World& world,
@@ -49,14 +49,14 @@ struct EditorSetHeightTool : public EditorTool {
 	}
 
 	Widelands::HeightInterval get_interval() const {
-		return m_interval;
+		return interval_;
 	}
 	void set_interval(Widelands::HeightInterval const i) {
-		m_interval = i;
+		interval_ = i;
 	}
 
 private:
-	Widelands::HeightInterval m_interval;
+	Widelands::HeightInterval interval_;
 };
 
 #endif  // end of include guard: WL_EDITOR_TOOLS_EDITOR_SET_HEIGHT_TOOL_H
