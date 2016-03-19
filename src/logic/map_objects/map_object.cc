@@ -28,7 +28,10 @@
 
 #include "base/log.h"
 #include "base/wexception.h"
+#include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
+#include "graphic/rendertarget.h"
+#include "graphic/text_layout.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
 #include "logic/cmd_queue.h"
@@ -478,6 +481,26 @@ void MapObject::init(EditorGameBase & egbase)
 void MapObject::cleanup(EditorGameBase & egbase)
 {
 	egbase.objects().remove(*this);
+}
+
+void MapObject::do_draw_info(bool show_census, const std::string& census,
+									  bool show_statictics, const std::string& statictics, RenderTarget& dst, const Point& pos) {
+	if (show_census || show_statictics) {
+		// We always render this so we can have a stable position for the statistics string.
+		const Image* rendered_census_info =
+				UI::g_fh1->render(as_condensed(census, UI::Align::kCenter), 120);
+		const Point census_pos(pos - Point(0, 48));
+
+		if (show_census) {
+			dst.blit(census_pos, rendered_census_info, BlendMode::UseAlpha, UI::Align::kCenter);
+		}
+
+		if (show_statictics && !statictics.empty()) {
+			dst.blit(census_pos + Point(0, rendered_census_info->height() / 2 + 10),
+						UI::g_fh1->render(as_condensed(statictics)),
+						BlendMode::UseAlpha, UI::Align::kCenter);
+		}
+	}
 }
 
 const Image* MapObject::representative_image() const {

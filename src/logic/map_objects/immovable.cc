@@ -30,11 +30,8 @@
 #include "base/macros.h"
 #include "base/wexception.h"
 #include "config.h"
-#include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
-#include "graphic/text_constants.h"
-#include "graphic/text_layout.h"
 #include "helper.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
@@ -515,32 +512,14 @@ void Immovable::draw_construction
 	                   Rect(Point(0, curh - lines), curw, lines));
 
 	// Additionally, if statistics are enabled, draw a progression string
-	// NOCOM code duplication with building!
 	uint32_t const dpyflags = game.get_ibase()->get_display_flags();
-	if (dpyflags & InteractiveBase::dfShowCensus || dpyflags & InteractiveBase::dfShowStatistics) {
-		// We always render this so we can have a stable position for the statistics string.
-		const Image* rendered_census_info =
-				UI::g_fh1->render(as_condensed(descr().descname(), UI::Align::kCenter),
-										120);
-		const Point census_pos(pos - Point(0, 48));
-
-		if (dpyflags & InteractiveBase::dfShowCensus) {
-			dst.blit(census_pos, rendered_census_info, BlendMode::UseAlpha, UI::Align::kCenter);
-		}
-
-		if (dpyflags & InteractiveBase::dfShowStatistics) {
-			construct_string_ =
-				(boost::format("<font color=%s>%s</font>")
-				 % UI_FONT_CLR_DARK.hex_value() % (boost::format(_("%i%% built")) % (100 * done / total)).str())
-				 .str();
-			dst.blit(census_pos + Point(0, rendered_census_info->height() / 2 + 10),
-						UI::g_fh1->render(as_condensed(construct_string_)),
-						BlendMode::UseAlpha, UI::Align::kCenter);
-		}
-	}
+	do_draw_info(dpyflags & InteractiveBase::dfShowCensus, descr().descname(),
+					 dpyflags & InteractiveBase::dfShowStatistics,
+					 (boost::format("<font color=%s>%s</font>")
+					  % UI_FONT_CLR_DARK.hex_value()
+					  % (boost::format(_("%i%% built")) % (100 * done / total)).str()).str(),
+					  dst, pos);
 }
-
-
 
 
 /**

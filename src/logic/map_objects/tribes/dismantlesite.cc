@@ -268,7 +268,7 @@ void DismantleSite::draw
 	dst.blit_animation(pos, anim_idx, tanim, player_color, Rect(Point(0, lines), w, h - lines));
 
 	// Draw help strings
-	draw_help(game, dst, coords, pos);
+	draw_info(game, dst, pos);
 }
 
 }
