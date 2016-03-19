@@ -246,7 +246,7 @@ protected:
 	uint32_t anim_construction_done_;
 	uint32_t program_step_; ///< time of next step
 #endif
-	std::string construct_string_;
+	std::string construct_string_; // NOCOM get rid?
 
 	/**
 	 * Private persistent data for the currently active program action.
