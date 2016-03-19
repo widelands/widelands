@@ -145,6 +145,9 @@ Tribes* EditorGameBase::mutable_tribes() {
 	return tribes_.get();
 }
 
+void EditorGameBase::set_ibase(InteractiveBase* const b) {
+	ibase_.reset(b);
+}
 
 InteractiveGameBase* EditorGameBase::get_igbase()
 {

@@ -48,6 +48,7 @@ Button::Button //  for textual buttons. If h = 0, h will resize according to the
 	enabled_       (init_enabled),
 	repeating_     (false),
 	flat_          (flat),
+	keep_image_size_(false),
 	draw_flat_background_(false),
 	time_nextact_  (0),
 	title_         (title_text),

@@ -715,8 +715,8 @@ void NetHost::run()
 
 	try {
 		std::unique_ptr<UI::ProgressWindow> loader_ui;
-		GameTips * tips = nullptr;
 		loader_ui.reset(new UI::ProgressWindow("images/loadscreens/progress.png"));
+
 		std::vector<std::string> tipstext;
 		tipstext.push_back("general_game");
 		tipstext.push_back("multiplayer");
@@ -724,7 +724,7 @@ void NetHost::run()
 			tipstext.push_back(d->hp.get_players_tribe());
 		} catch (GameSettingsProvider::NoTribe) {
 		}
-		tips = new GameTips(*loader_ui, tipstext);
+		std::unique_ptr<GameTips> tips(new GameTips(*loader_ui, tipstext));
 
 		loader_ui->step(_("Preparing game"));
 
@@ -776,8 +776,6 @@ void NetHost::run()
 			 "",
 			 false, "nethost");
 
-		delete tips;
-
 		// if this is an internet game, tell the metaserver that the game is done.
 		if (internet_)
 			InternetGaming::ref().set_game_done();
@@ -791,6 +789,7 @@ void NetHost::run()
 			disconnect_client(0, "SERVER_CRASHED");
 			reaper();
 		}
+
 		throw;
 	}
 	d->game = nullptr;

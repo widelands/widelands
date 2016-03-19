@@ -30,7 +30,8 @@ Icon::Icon
 	 const Image* picture_id)
 	:
 	Panel(parent, x, y, w, h),
-	pic_(picture_id)
+	pic_(picture_id),
+	draw_frame_(false)
 {
 	set_handle_mouse(false);
 	set_thinks(false);
