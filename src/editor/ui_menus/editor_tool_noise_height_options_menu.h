@@ -34,11 +34,11 @@ struct EditorToolNoiseHeightOptionsMenu : public EditorToolOptionsMenu {
 		 UI::UniqueWindow::Registry &);
 
 private:
-	EditorNoiseHeightTool & m_noise_tool;
-	UI::Textarea m_lower_label, m_upper_label;
-	UI::Button m_lower_decrease, m_lower_increase, m_upper_decrease, m_upper_increase;
-	UI::Textarea m_set_label;
-	UI::Button m_setto_decrease, m_setto_increase;
+	EditorNoiseHeightTool& noise_tool_;
+	UI::Textarea lower_label_, upper_label_;
+	UI::Button lower_decrease_, lower_increase_, upper_decrease_, upper_increase_;
+	UI::Textarea set_label_;
+	UI::Button setto_decrease_, setto_increase_;
 
 	void clicked_lower_decrease();
 	void clicked_lower_increase();

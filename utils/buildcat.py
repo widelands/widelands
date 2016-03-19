@@ -60,7 +60,6 @@ MAINPOTS = [
     ] ),
     ( "win_conditions/win_conditions", [
         "../../data/scripting/win_conditions/*.lua",
-        "../../data/scripting/win_condition_texts.lua",
     ]),
     ("world/world", [
         "../../data/world/*.lua",
