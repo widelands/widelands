@@ -85,8 +85,8 @@ private:
 	/// This is used to assemble an error message for exceptions that includes all file paths
 	std::string paths_error_message(const std::string& filename) const;
 
-	std::vector<std::unique_ptr<FileSystem>> m_filesystems;
-	std::unique_ptr<FileSystem> m_home;
+	std::vector<std::unique_ptr<FileSystem>> filesystems_;
+	std::unique_ptr<FileSystem> home_;
 };
 
 /// Access all game data files etc. through this FileSystem
