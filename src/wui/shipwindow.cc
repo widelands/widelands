@@ -250,7 +250,7 @@ void ShipWindow::think()
 	}
 
 	// Expedition specific buttons
-	uint8_t state = m_ship.get_ship_state();
+	Ship::ShipStates state = m_ship.get_ship_state();
 	if (m_ship.state_is_expedition()) {
 		/* The following rules apply:
 		 * - The "construct port" button is only active, if the ship is waiting for commands and found a port
@@ -260,18 +260,22 @@ void ShipWindow::think()
 		 * - The "explore island's coast" buttons are only active, if a coast is in vision range (no matter if
 		 *   in waiting or already expedition/scouting mode)
 		 */
-		m_btn_construct_port->set_enabled(can_act && (state == Ship::EXP_FOUNDPORTSPACE));
+		m_btn_construct_port->set_enabled(can_act && (state == Ship::ShipStates::kExpeditionPortspaceFound));
 		bool coast_nearby = false;
 		for (Direction dir = 1; dir <= LAST_DIRECTION; ++dir) {
 			// NOTE buttons are saved in the format DIRECTION - 1
 			m_btn_scout[dir - 1]->set_enabled
-				(can_act && m_ship.exp_dir_swimable(dir) && (state != Ship::EXP_COLONIZING));
+				(can_act && m_ship.exp_dir_swimable(dir) && (state != Ship::ShipStates::kExpeditionColonizing));
 			coast_nearby |= !m_ship.exp_dir_swimable(dir);
 		}
-		m_btn_explore_island_cw ->set_enabled(can_act && coast_nearby && (state != Ship::EXP_COLONIZING));
-		m_btn_explore_island_ccw->set_enabled(can_act && coast_nearby && (state != Ship::EXP_COLONIZING));
-		m_btn_sink              ->set_enabled(can_act && (state != Ship::EXP_COLONIZING));
-		m_btn_cancel_expedition ->set_enabled(can_act && (state != Ship::EXP_COLONIZING));
+		m_btn_explore_island_cw ->set_enabled(can_act && coast_nearby &&
+														  (state != Ship::ShipStates::kExpeditionColonizing));
+		m_btn_explore_island_ccw->set_enabled(can_act && coast_nearby &&
+														  (state != Ship::ShipStates::kExpeditionColonizing));
+		m_btn_sink              ->set_enabled(can_act &&
+														  (state != Ship::ShipStates::kExpeditionColonizing));
+		m_btn_cancel_expedition ->set_enabled(can_act &&
+														  (state != Ship::ShipStates::kExpeditionColonizing));
 	}
 }
 
@@ -370,7 +374,7 @@ void ShipWindow::act_explore_island(IslandExploreDirection direction) {
 void Ship::show_window(InteractiveGameBase & igb, bool avoid_fastclick)
 {
 	// No window, if ship is sinking
-	if (ship_state_ == SINK_REQUEST || ship_state_ == SINK_ANIMATION)
+	if (ship_state_ == ShipStates::kSinkRequest || ship_state_ == ShipStates::kSinkAnimation)
 		return;
 
 	if (window_) {
