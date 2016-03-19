@@ -62,8 +62,8 @@ struct WatchWindow : public UI::Window {
 	boost::signals2::signal<void (Point)> warp_mainview;
 
 	void add_view(Widelands::Coords);
-	void next_view(bool first = false);
-	void show_view(bool first = false);
+	void next_view();
+	void show_view();
 	Point calc_coords(Widelands::Coords);
 	void save_coords();
 	void close_cur_view();
@@ -76,7 +76,8 @@ protected:
 private:
 	void do_follow();
 	void do_goto();
-	void setview(uint8_t index);
+	void view_button_clicked(uint8_t index);
+	void set_current_view(uint8_t idx, bool save_previous = true);
 
 	MapView mapview;
 	uint32_t last_visit;
@@ -98,7 +99,8 @@ WatchWindow::WatchWindow
 	UI::Window(&parent, "watch", x, y, w, h, _("Watch")),
 	mapview   (this, 0, 0, 200, 166, parent),
 	last_visit(game().get_gametime()),
-	single_window(init_single_window)
+	single_window(init_single_window),
+	cur_index(0)
 {
 	UI::Button * followbtn =
 		new UI::Button
@@ -128,7 +130,7 @@ WatchWindow::WatchWindow
 					 "-", std::string(),
 					 false);
 			view_btns[i]->sigclicked.connect
-				(boost::bind(&WatchWindow::setview, this, i));
+				(boost::bind(&WatchWindow::view_button_clicked, this, i));
 		}
 
 		UI::Button * closebtn =
@@ -146,7 +148,7 @@ WatchWindow::WatchWindow
 	warp_mainview.connect(boost::bind(&InteractiveBase::move_view_to_point, &parent, _1));
 
 	add_view(coords);
-	next_view(true);
+	set_current_view(0, false);
 }
 
 /**
@@ -180,16 +182,8 @@ Point WatchWindow::calc_coords(Widelands::Coords const coords) {
 }
 
 // Switch to next view
-void WatchWindow::next_view(bool const first) {
-	if (!first && views.size() == 1)
-		return;
-	if (!first)
-		save_coords();
-	if (first || (cur_index == views.size() - 1 && cur_index != 0))
-		cur_index = 0;
-	else if (cur_index < views.size() - 1)
-		++cur_index;
-	show_view(first);
+void WatchWindow::next_view() {
+	set_current_view((cur_index + 1) % views.size());
 }
 
 
@@ -212,8 +206,23 @@ void WatchWindow::toggle_buttons() {
 	}
 }
 
+void WatchWindow::set_current_view(uint8_t idx, bool save_previous)
+{
+	assert(idx < views.size());
+
+	if (save_previous)
+		save_coords();
+
+	if (single_window) {
+		view_btns[cur_index]->set_perm_pressed(false);
+		view_btns[idx]->set_perm_pressed(true);
+	}
+	cur_index = idx;
+	show_view();
+}
+
 // Draws the current view
-void WatchWindow::show_view(bool) {
+void WatchWindow::show_view() {
 	mapview.set_viewpoint(views[cur_index].view_point, true);
 }
 
@@ -345,12 +354,10 @@ void WatchWindow::do_goto()
 /**
  * Sets the current view to @p index and resets timeout.
  */
-void WatchWindow::setview(uint8_t index)
+void WatchWindow::view_button_clicked(uint8_t index)
 {
-	save_coords();
-	cur_index = index;
+	set_current_view(index);
 	last_visit = game().get_gametime();
-	show_view();
 }
 
 /**
@@ -366,13 +373,8 @@ void WatchWindow::close_cur_view()
 		return;
 	}
 
-	uint8_t const old_index = cur_index;
-	next_view();
-	std::vector<WatchWindowView>::iterator view_it = views.begin();
-	for (uint8_t i = 0; i < old_index; ++i)
-		++view_it;
-	view_btns[cur_index]->set_enabled(false);
-	views.erase(view_it);
+	views.erase(views.begin() + cur_index);
+	set_current_view(cur_index % views.size(), false);
 	toggle_buttons();
 }
 
