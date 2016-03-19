@@ -41,7 +41,7 @@ struct ConstructionSiteWindow : public BuildingWindow {
 	void think() override;
 
 private:
-	UI::ProgressBar * m_progress;
+	UI::ProgressBar * progress_;
 };
 
 
@@ -54,14 +54,14 @@ ConstructionSiteWindow::ConstructionSiteWindow
 	UI::Box & box = *new UI::Box(get_tabs(), 0, 0, UI::Box::Vertical);
 
 	// Add the progress bar
-	m_progress =
+	progress_ =
 		new UI::ProgressBar
 			(&box,
 			 0, 0,
 			 UI::ProgressBar::DefaultWidth, UI::ProgressBar::DefaultHeight,
 			 UI::ProgressBar::Horizontal);
-	m_progress->set_total(1 << 16);
-	box.add(m_progress, UI::Align::kHCenter);
+	progress_->set_total(1 << 16);
+	box.add(progress_, UI::Align::kHCenter);
 
 	box.add_space(8);
 
@@ -88,7 +88,7 @@ void ConstructionSiteWindow::think()
 	const Widelands::ConstructionSite & cs =
 		dynamic_cast<Widelands::ConstructionSite&>(building());
 
-	m_progress->set_state(cs.get_built_per64k());
+	progress_->set_state(cs.get_built_per64k());
 }
 
 
