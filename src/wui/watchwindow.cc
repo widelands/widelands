@@ -148,7 +148,6 @@ WatchWindow::WatchWindow
 	warp_mainview.connect(boost::bind(&InteractiveBase::move_view_to_point, &parent, _1));
 
 	add_view(coords);
-	set_current_view(0, false);
 }
 
 /**
@@ -166,6 +165,7 @@ void WatchWindow::add_view(Widelands::Coords const coords) {
 	last_visit = game().get_gametime();
 
 	views.push_back(view);
+	set_current_view(views.size() - 1, views.size() > 1);
 	if (single_window)
 		toggle_buttons();
 }
