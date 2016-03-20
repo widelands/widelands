@@ -364,6 +364,10 @@ void Game::init_savegame
 		Widelands::GamePreloadPacket gpdp;
 		gl.preload_game(gpdp);
 		win_condition_displayname_ = gpdp.get_win_condition();
+		if (win_condition_displayname_ == "Scenario") {
+			// Replays can't handle scenarios
+			set_write_replay(false);
+		}
 		std::string background(gpdp.get_background());
 		loader_ui->set_background(background);
 		loader_ui->step(_("Loading…"));
@@ -393,6 +397,10 @@ bool Game::run_load_game(const std::string& filename, const std::string& script_
 		gl.preload_game(gpdp);
 		std::string background(gpdp.get_background());
 		win_condition_displayname_ = gpdp.get_win_condition();
+		if (win_condition_displayname_ == "Scenario") {
+			// Replays can't handle scenarios
+			set_write_replay(false);
+		}
 		loader_ui.set_background(background);
 		player_nr = gpdp.get_player_nr();
 		set_ibase
