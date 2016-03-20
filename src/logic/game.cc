@@ -206,6 +206,9 @@ void Game::save_syncstream(bool const save)
 bool Game::run_splayer_scenario_direct(const std::string& mapname, const std::string& script_to_run) {
 	assert(!get_map());
 
+	// Replays can't handle scenarios
+	set_write_replay(false);
+
 	set_map(new Map);
 
 	std::unique_ptr<MapLoader> maploader(map().get_correct_loader(mapname));
@@ -467,6 +470,8 @@ bool Game::run
 			}
 		} else {
 			// Is a scenario!
+			// Replays can't handle scenarios
+			set_write_replay(false);
 			iterate_players_existing_novar(p, nr_players, *this) {
 				if (!map().get_starting_pos(p))
 				throw WLWarning
