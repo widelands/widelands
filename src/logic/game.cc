@@ -238,7 +238,7 @@ bool Game::run_splayer_scenario_direct(const std::string& mapname, const std::st
 			 map().get_scenario_player_name (p));
 		get_player(p)->set_ai(map().get_scenario_player_ai(p));
 	}
-	win_condition_displayname_ = _("Scenario");
+	win_condition_displayname_ = "Scenario";
 
 	set_ibase
 		(new InteractivePlayer
@@ -338,7 +338,7 @@ void Game::init_newgame
 		std::unique_ptr<LuaCoroutine> cr = table->get_coroutine("func");
 		enqueue_command(new CmdLuaCoroutine(get_gametime() + 100, cr.release()));
 	} else {
-		win_condition_displayname_ = _("Scenario");
+		win_condition_displayname_ = "Scenario";
 	}
 }
 

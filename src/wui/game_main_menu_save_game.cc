@@ -176,7 +176,7 @@ void GameMainMenuSaveGame::selected(uint32_t) {
 		// Keep label empty
 		players_label_.set_text("");
 	}
-	win_condition_.set_text(gpdp.get_win_condition());
+	win_condition_.set_text(_(gpdp.get_localized_win_condition()));
 }
 
 /**
