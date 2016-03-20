@@ -52,16 +52,16 @@ Tab::Tab
 	 int32_t x,
 	 int32_t w,
 	 const std::string& name,
-	 const std::string& _title,
-	 const Image* _pic,
+	 const std::string& init_title,
+	 const Image* init_pic,
 	 const std::string& tooltip_text,
 	 Panel* const contents)
 	:
 	NamedPanel(tab_parent, name, x, 0, w, kTabPanelButtonHeight, tooltip_text),
 	parent(tab_parent),
 	id(tab_id),
-	pic(_pic),
-	title(_title),
+	pic(init_pic),
+	title(init_title),
 	tooltip(tooltip_text),
 	panel(contents)
 {
@@ -139,21 +139,18 @@ void TabPanel::layout()
  */
 void TabPanel::update_desired_size()
 {
-	uint32_t w;
-	uint32_t h;
-
 	// size of button row
-	w = kTabPanelButtonHeight * tabs_.size();
-	h = kTabPanelButtonHeight + kTabPanelSeparatorHeight;
+	int w = kTabPanelButtonHeight * tabs_.size();
+	int h = kTabPanelButtonHeight + kTabPanelSeparatorHeight;
 
 	// size of contents
 	if (active_ < tabs_.size()) {
 		Panel * const panel = tabs_[active_]->panel;
-		uint32_t panelw, panelh;
+		int panelw, panelh;
 
-		panel->get_desired_size(panelw, panelh);
+		panel->get_desired_size(&panelw, &panelh);
 		// TODO(unknown):  the panel might be bigger -> add a scrollbar in that case
-		//panel->set_size(panelw, panelh);
+		// panel->set_size(panelw, panelh);
 
 		if (panelw > w)
 			w = panelw;
@@ -246,6 +243,7 @@ void TabPanel::activate(uint32_t idx)
 	active_ = idx;
 
 	update_desired_size();
+	sigclicked();
 }
 
 void TabPanel::activate(const std::string & name)
@@ -256,10 +254,22 @@ void TabPanel::activate(const std::string & name)
 }
 
 /**
- * Return the tab names in order
+ * Return the tabs in order
  */
 const TabPanel::TabList & TabPanel::tabs() {
 	return tabs_;
+}
+
+bool TabPanel::remove_last_tab(const std::string& tabname) {
+	if (tabs_.back()->get_name() == tabname) {
+		tabs_.pop_back();
+		if (active_ > tabs_.size() - 1) {
+			active_ = 0ul;
+		}
+		update_desired_size();
+		return true;
+	}
+	return false;
 }
 
 /**
@@ -323,7 +333,7 @@ void TabPanel::draw(RenderTarget & dst)
 			dst.blit(Point(x + kTabPanelTextMargin, (kTabPanelButtonHeight - tabs_[idx]->pic->height()) / 2),
 						tabs_[idx]->pic,
 						BlendMode::UseAlpha,
-						UI::Align_Left);
+						UI::Align::kLeft);
 		}
 
 		// Draw top part of border
@@ -388,7 +398,6 @@ void TabPanel::draw(RenderTarget & dst)
 void TabPanel::handle_mousein(bool inside)
 {
 	if (!inside && highlight_ != kNotFound) {
-		update(tabs_[highlight_]->get_x(), 0, tabs_[highlight_]->get_w(), kTabPanelButtonHeight);
 		highlight_ = kNotFound;
 	}
 }
@@ -403,12 +412,6 @@ bool TabPanel::handle_mousemove
 	size_t hl = find_tab(x, y);
 
 	if (hl != highlight_) {
-		if (hl != kNotFound) {
-			update(tabs_[hl]->get_x(), 0, tabs_[hl]->get_w(), kTabPanelButtonHeight);
-		}
-		if (highlight_ != kNotFound) {
-			update(tabs_[highlight_]->get_x(), 0, tabs_[highlight_]->get_w(), kTabPanelButtonHeight);
-		}
 		highlight_ = hl;
 		set_tooltip(highlight_ != kNotFound ? tabs_[highlight_]->tooltip : "");
 	}

@@ -41,7 +41,7 @@ int32_t const h_space = 3;
  * rectangular bounding box.
  */
 struct Element {
-	explicit Element(const Rect & _bbox) : bbox(_bbox) {}
+	explicit Element(const Rect & bounding_box) : bbox(bounding_box) {}
 	virtual ~Element() {}
 
 	/**
@@ -54,8 +54,8 @@ struct Element {
 };
 
 struct ImageElement : Element {
-	ImageElement(const Rect & _bbox, const Image* _image)
-		: Element(_bbox), image(_image) {}
+	ImageElement(const Rect & bounding_box, const Image* init_image)
+		: Element(bounding_box), image(init_image) {}
 
 	void draw(RenderTarget & dst) override
 	{
@@ -67,10 +67,10 @@ struct ImageElement : Element {
 
 struct TextlineElement : Element {
 	TextlineElement
-		(const Rect & _bbox, const TextStyle & _style,
+		(const Rect & bounding_box, const TextStyle & init_style,
 		 std::vector<std::string>::const_iterator words_begin,
 		 std::vector<std::string>::const_iterator words_end)
-		: Element(_bbox), style(_style), words(words_begin, words_end) {}
+		: Element(bounding_box), style(init_style), words(words_begin, words_end) {}
 
 	void draw(RenderTarget & dst) override
 	{
@@ -81,11 +81,12 @@ struct TextlineElement : Element {
 		std::vector<std::string>::iterator it = result_words.begin();
 
 		// Reorder words for BiDi
-		if (UI::g_fh1->fontset().is_rtl() && i18n::has_rtl_character(words)) {
+		if (UI::g_fh1->fontset()->is_rtl() && i18n::has_rtl_character(words)) {
 			std::string previous_word;
 			for (std::vector<std::string>::iterator source_it = words.begin();
 				  source_it != words.end(); ++source_it) {
-				const std::string& word = *source_it;
+				std::string& word = *source_it;
+				replace_entities(&word);
 				if (source_it != words.end()) {
 					if (i18n::has_rtl_character(word.c_str()) || i18n::has_rtl_character(previous_word.c_str())) {
 						it = result_words.insert(result_words.begin(), word);
@@ -99,7 +100,8 @@ struct TextlineElement : Element {
 				}
 			}
 		} else {
-			for (const std::string& word: words) {
+			for (std::string& word: words) {
+				replace_entities(&word);
 				result_words.push_back(word);
 			}
 		}
@@ -248,8 +250,8 @@ struct TextBuilder {
 	/// parts of a line onto the same text baseline).
 	std::vector<Elt> elements;
 
-	TextBuilder(RichTextImpl & _rti) :
-		rti(_rti),
+	TextBuilder(RichTextImpl & impl) :
+		rti(impl),
 		images_width(0),
 		images_height(0),
 		maxwidth(0),
@@ -291,7 +293,8 @@ struct TextBuilder {
 			int32_t alignref_right = rti.width;
 
 			if (text_y < rti.height + images_height) {
-				if ((mirror_alignment(richtext->get_image_align()) & Align_Horizontal) == Align_Right) {
+				if ((mirror_alignment(richtext->get_image_align()) & UI::Align::kHorizontal)
+					 == UI::Align::kRight) {
 					alignref_right -= images_width + h_space;
 				} else {
 					// Note: center image alignment with text is not properly supported
@@ -302,11 +305,11 @@ struct TextBuilder {
 
 			int32_t textleft;
 
-			switch (mirror_alignment(richtext->get_text_align()) & Align_Horizontal) {
-			case Align_Right:
+			switch (mirror_alignment(richtext->get_text_align()) & UI::Align::kHorizontal) {
+			case UI::Align::kRight:
 				textleft = alignref_right - int32_t(linewidth);
 				break;
-			case Align_HCenter:
+			case UI::Align::kHCenter:
 				textleft = alignref_left + (alignref_right - alignref_left - int32_t(linewidth)) / 2;
 				break;
 			default:
@@ -386,10 +389,12 @@ void RichText::parse(const std::string & rtext)
 		// Fix up the alignment
 		int32_t imagealigndelta = 0;
 
-		if ((text.richtext->get_image_align() & Align_Horizontal) == Align_HCenter)
+		if ((text.richtext->get_image_align() & UI::Align::kHorizontal) == UI::Align::kHCenter) {
 			imagealigndelta = (int32_t(m->width) - int32_t(text.images_width)) / 2;
-		else if ((mirror_alignment(text.richtext->get_image_align()) & Align_Horizontal) == Align_Right)
+		} else if ((mirror_alignment(text.richtext->get_image_align()) & UI::Align::kHorizontal)
+					  == UI::Align::kRight) {
 			imagealigndelta = int32_t(m->width) - int32_t(text.images_width);
+		}
 
 		for (uint32_t idx = firstimageelement; idx < m->elements.size(); ++idx)
 			m->elements[idx]->bbox.x += imagealigndelta;

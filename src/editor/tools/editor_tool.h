@@ -41,44 +41,44 @@ class World;
 class EditorTool {
 public:
 	EditorTool(EditorTool & second, EditorTool & third, bool uda = true) :
-		m_second(second), m_third(third), undoable(uda)
+		second_(second), third_(third), undoable_(uda)
 	{}
 	virtual ~EditorTool() {}
 
 	enum ToolIndex {First, Second, Third};
 	int32_t handle_click
-		(const ToolIndex i,
+		(ToolIndex i,
 		const Widelands::World& world, Widelands::NodeAndTriangle<> const center,
 		EditorInteractive& parent, EditorActionArgs* args, Widelands::Map* map)
 	{
 		return
-		    (i == First ? *this : i == Second ? m_second : m_third)
+			 (i == First ? *this : i == Second ? second_ : third_)
 		    .handle_click_impl(world, center, parent, args, map);
 	}
 
 	int32_t handle_undo
-		(const ToolIndex i,
+		(ToolIndex i,
 		const Widelands::World& world, Widelands::NodeAndTriangle<> const center,
 		EditorInteractive& parent, EditorActionArgs* args, Widelands::Map* map)
 	{
 		return
-		    (i == First ? *this : i == Second ? m_second : m_third)
+			 (i == First ? *this : i == Second ? second_ : third_)
 		    .handle_undo_impl(world, center, parent, args, map);
 	}
 
 	const char * get_sel(const ToolIndex i) {
 		return
-		    (i == First ? *this : i == Second ? m_second : m_third)
+			 (i == First ? *this : i == Second ? second_ : third_)
 		    .get_sel_impl();
 	}
 
 	EditorActionArgs format_args(const ToolIndex i, EditorInteractive & parent) {
 		return
-		    (i == First ? *this : i == Second ? m_second : m_third)
+			 (i == First ? *this : i == Second ? second_ : third_)
 		    .format_args_impl(parent);
 	}
 
-	bool is_unduable() {return undoable;}
+	bool is_undoable() {return undoable_;}
 	virtual bool has_size_one() const {return false;}
 	virtual EditorActionArgs format_args_impl(EditorInteractive & parent) {
 		return EditorActionArgs(parent);
@@ -99,8 +99,8 @@ public:
 	virtual bool operates_on_triangles() const {return false;}
 
 protected:
-	EditorTool & m_second, & m_third;
-	bool undoable;
+	EditorTool & second_, & third_;
+	bool undoable_;
 
 private:
 	DISALLOW_COPY_AND_ASSIGN(EditorTool);

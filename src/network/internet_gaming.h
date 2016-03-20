@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2006, 2008-2009, 2012-2013 by the Widelands Development Team
+ * Copyright (C) 2004-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -70,9 +70,9 @@ struct InternetGaming : public ChatProvider {
 	void logout(const std::string & msgcode = "CONNECTION_CLOSED");
 
 	/// \returns whether the client is logged in
-	bool logged_in() {return (m_state == LOBBY) || (m_state == CONNECTING) || (m_state == IN_GAME);}
-	bool error()     {return (m_state == COMMUNICATION_ERROR);}
-	void set_error()  {m_state = COMMUNICATION_ERROR; gameupdate = true; clientupdate = true;}
+	bool logged_in() {return (state_ == LOBBY) || (state_ == CONNECTING) || (state_ == IN_GAME);}
+	bool error()     {return (state_ == COMMUNICATION_ERROR);}
+	void set_error()  {state_ = COMMUNICATION_ERROR; gameupdate_ = true; clientupdate_ = true;}
 
 	void handle_metaserver_communication();
 
@@ -86,21 +86,21 @@ struct InternetGaming : public ChatProvider {
 
 	// Informative functions for lobby
 	bool update_for_games();
-	const std::vector<InternetGame>   & games();
+	const std::vector<InternetGame>* games();
 	bool update_for_clients();
-	const std::vector<InternetClient> & clients();
+	const std::vector<InternetClient>* clients();
 
 	/// sets the name of the local server as shown in the games list
-	void set_local_servername(const std::string & name) {m_gamename = name;}
+	void set_local_servername(const std::string & name) {gamename_ = name;}
 
 	/// \returns the name of the local server
-	std::string & get_local_servername() {return m_gamename;}
+	std::string & get_local_servername() {return gamename_;}
 
 	/// \returns the name of the local client
-	std::string & get_local_clientname() {return m_clientname;}
+	std::string & get_local_clientname() {return clientname_;}
 
 	/// \returns the rights of the local client
-	std::string & get_local_clientrights() {return m_clientrights;}
+	std::string & get_local_clientrights() {return clientrights_;}
 
 
 	/// ChatProvider: sends a message via the metaserver.
@@ -108,26 +108,29 @@ struct InternetGaming : public ChatProvider {
 
 	/// ChatProvider: adds the message to the message list and calls parent.
 	void receive(const ChatMessage & msg) {
-		messages.push_back(msg);
+		messages_.push_back(msg);
 		Notifications::publish(msg);
 	}
 
 	/// ChatProvider: returns the list of chatmessages.
-	const std::vector<ChatMessage> & get_messages() const override {return messages;}
+	const std::vector<ChatMessage> & get_messages() const override {return messages_;}
 
 	/// Silence the internet lobby chat if we are in game as we do not see the messages anyways
-	bool sound_off() override {return m_state == IN_GAME;}
+	bool sound_off() override {return state_ == IN_GAME;}
 
-	/// writes the ingame_system_chat messages to \arg msg and resets it afterwards
+	/// writes the ingame_system_chat_ messages to \arg msg and resets it afterwards
 	void get_ingame_system_messages(std::vector<ChatMessage> & msg) {
-		msg = ingame_system_chat;
-		ingame_system_chat.clear();
+		msg = ingame_system_chat_;
+		ingame_system_chat_.clear();
 	}
+
+	bool has_been_set() const override {return true;}
 
 private:
 	InternetGaming();
 
 	void handle_packet(RecvPacket & packet);
+	void handle_failed_read();
 
 	// conversion functions
 	bool str2bool(std::string);
@@ -137,13 +140,13 @@ private:
 
 
 	/// The socket that connects us to the host
-	TCPsocket        m_sock;
+	TCPsocket        sock_;
 
 	/// Socket set used for selection
-	SDLNet_SocketSet m_sockset;
+	SDLNet_SocketSet sockset_;
 
 	/// Deserializer acts as a buffer for packets (reassembly/splitting up)
-	Deserializer     m_deserializer;
+	Deserializer     deserializer_;
 
 	/// Current state of this class
 	enum {
@@ -152,42 +155,42 @@ private:
 		LOBBY,
 		IN_GAME,
 		COMMUNICATION_ERROR
-	}                m_state;
+	}                state_;
 
 	/// data saved for possible relogin
-	std::string      m_pwd;
-	bool             m_reg;
-	std::string      m_meta;
-	uint32_t         m_port;
+	std::string      pwd_;
+	bool             reg_;
+	std::string      meta_;
+	uint32_t         port_;
 
 	/// local clients name and rights
-	std::string      m_clientname;
-	std::string      m_clientrights;
+	std::string      clientname_;
+	std::string      clientrights_;
 
 	/// informations of the clients game
-	std::string      m_gamename;
-	std::string      m_gameip;
+	std::string      gamename_;
+	std::string      gameip_;
 
 	/// Metaserver informations
-	bool                     clientupdateonmetaserver;
-	bool                     gameupdateonmetaserver;
-	bool                     clientupdate;
-	bool                     gameupdate;
-	std::vector<InternetClient> clientlist;
-	std::vector<InternetGame>   gamelist;
-	int32_t                  time_offset;
+	bool                        clientupdateonmetaserver_;
+	bool                        gameupdateonmetaserver_;
+	bool                        clientupdate_;
+	bool                        gameupdate_;
+	std::vector<InternetClient> clientlist_;
+	std::vector<InternetGame>   gamelist_;
+	int32_t                     time_offset_;
 
 	/// ChatProvider: chat messages
-	std::vector<ChatMessage> messages;
-	std::vector<ChatMessage> ingame_system_chat;
+	std::vector<ChatMessage> messages_;
+	std::vector<ChatMessage> ingame_system_chat_;
 
 	/// An important response of the metaserver, the client is waiting for.
-	std::string              waitcmd;
-	int32_t                  waittimeout;
+	std::string              waitcmd_;
+	int32_t                  waittimeout_;
 
 	/// Connection tracking specific variables
-	time_t                   lastbrokensocket[2];
-	time_t                   lastping;
+	time_t                   lastbrokensocket_[2]; /// last times when socket last broke in s.
+	time_t                   lastping_;
 
 };
 

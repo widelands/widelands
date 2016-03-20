@@ -43,15 +43,15 @@ struct CritterDescr : BobDescr {
 
 	bool is_swimming() const;
 	uint32_t movecaps() const override;
-	const DirAnimations & get_walk_anims() const {return m_walk_anims;}
+	const DirAnimations& get_walk_anims() const {return walk_anims_;}
 
 	CritterProgram const * get_program(const std::string &) const;
 
 
 private:
-	DirAnimations m_walk_anims;
+	DirAnimations walk_anims_;
 	using Programs = std::map<std::string, CritterProgram *>;
-	Programs      m_programs;
+	Programs      programs_;
 	DISALLOW_COPY_AND_ASSIGN(CritterDescr);
 };
 

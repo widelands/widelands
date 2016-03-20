@@ -33,12 +33,12 @@ namespace Widelands {
 PartiallyFinishedBuilding::PartiallyFinishedBuilding
 	(const BuildingDescr & gdescr) :
 Building         (gdescr),
-m_building       (nullptr),
-m_builder_request(nullptr),
-m_working        (false),
-m_work_steptime  (0),
-m_work_completed (0),
-m_work_steps     (0)
+building_       (nullptr),
+builder_request_(nullptr),
+working_        (false),
+work_steptime_  (0),
+work_completed_ (0),
+work_steps_     (0)
 {}
 
 /*
@@ -47,22 +47,22 @@ Set the type of building we're going to build
 ===============
 */
 void PartiallyFinishedBuilding::set_building(const BuildingDescr & building_descr) {
-	assert(!m_building);
+	assert(!building_);
 
-	m_building = &building_descr;
+	building_ = &building_descr;
 }
 
 void PartiallyFinishedBuilding::cleanup(EditorGameBase & egbase) {
-	if (m_builder_request) {
-		delete m_builder_request;
-		m_builder_request = nullptr;
+	if (builder_request_) {
+		delete builder_request_;
+		builder_request_ = nullptr;
 	}
 
-	for (WaresQueue * temp_ware : m_wares) {
+	for (WaresQueue * temp_ware : wares_) {
 		temp_ware->cleanup();
 		delete temp_ware;
 	}
-	m_wares.clear();
+	wares_.clear();
 
 	Building::cleanup(egbase);
 }
@@ -73,7 +73,7 @@ void PartiallyFinishedBuilding::init(EditorGameBase & egbase) {
 	if (upcast(Game, game, &egbase))
 		request_builder(*game);
 
-	g_sound_handler.play_fx("sound/create_construction_site", m_position, 255);
+	g_sound_handler.play_fx("create_construction_site", position_, 255);
 }
 
 /*
@@ -85,16 +85,16 @@ Note that the workers are dealt with in the PlayerImmovable code.
 void PartiallyFinishedBuilding::set_economy(Economy * const e)
 {
 	if (Economy * const old = get_economy()) {
-		for (WaresQueue * temp_ware : m_wares) {
+		for (WaresQueue * temp_ware : wares_) {
 			temp_ware->remove_from_economy(*old);
 		}
 	}
 	Building::set_economy(e);
-	if (m_builder_request)
-		m_builder_request->set_economy(e);
+	if (builder_request_)
+		builder_request_->set_economy(e);
 
 	if (e)
-		for (WaresQueue * temp_ware : m_wares) {
+		for (WaresQueue * temp_ware : wares_) {
 			temp_ware->add_to_economy(*e);
 		}
 }
@@ -107,9 +107,9 @@ Issue a request for the builder.
 ===============
 */
 void PartiallyFinishedBuilding::request_builder(Game &) {
-	assert(!m_builder.is_set() && !m_builder_request);
+	assert(!builder_.is_set() && !builder_request_);
 
-	m_builder_request =
+	builder_request_ =
 		new Request
 			(*this,
 			 owner().tribe().builder(),
@@ -123,7 +123,7 @@ Override: construction size is always the same size as the building
 ===============
 */
 int32_t PartiallyFinishedBuilding::get_size() const {
-	return m_building->get_size();
+	return building_->get_size();
 }
 
 /*
@@ -149,7 +149,7 @@ should be more useful to the player.
 */
 const Image* PartiallyFinishedBuilding::representative_image() const
 {
-	return m_building->representative_image(&owner().get_playercolor());
+	return building_->representative_image(&owner().get_playercolor());
 }
 
 
@@ -166,8 +166,8 @@ uint32_t PartiallyFinishedBuilding::get_built_per64k() const
 	uint32_t thisstep = 0;
 
 	uint32_t ts = build_step_time();
-	if (m_working) {
-		thisstep = ts - (m_work_steptime - time);
+	if (working_) {
+		thisstep = ts - (work_steptime_ - time);
 		// The check below is necessary because we drive construction via
 		// the construction worker in get_building_work(), and there can be
 		// a small delay between the worker completing his job and requesting
@@ -176,9 +176,9 @@ uint32_t PartiallyFinishedBuilding::get_built_per64k() const
 			thisstep = ts;
 	}
 	thisstep = (thisstep << 16) / ts;
-	uint32_t total = (thisstep + (m_work_completed << 16));
-	if (m_work_steps)
-		total /= m_work_steps;
+	uint32_t total = (thisstep + (work_completed_ << 16));
+	if (work_steps_)
+		total /= work_steps_;
 
 	assert(total <= (1 << 16));
 
@@ -203,10 +203,10 @@ void PartiallyFinishedBuilding::request_builder_callback
 
 	PartiallyFinishedBuilding & b = dynamic_cast<PartiallyFinishedBuilding&>(target);
 
-	b.m_builder = w;
+	b.builder_ = w;
 
 	delete &rq;
-	b.m_builder_request = nullptr;
+	b.builder_request_ = nullptr;
 
 	w->start_task_buildingwork(game);
 	b.set_seeing(true);

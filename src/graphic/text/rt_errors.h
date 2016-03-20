@@ -28,17 +28,17 @@ namespace RT {
 
 class Exception : public std::exception {
 public:
-	Exception(std::string msg) : std::exception(), m_msg(msg) {
+	Exception(std::string msg) : std::exception(), msg_(msg) {
 	}
-	const char* what() const noexcept override {return m_msg.c_str();}
+	const char* what() const noexcept override {return msg_.c_str();}
 
 private:
-	std::string m_msg;
+	std::string msg_;
 };
 
-#define DEF_ERR(name) class name : public Exception { \
+#define DEF_ERR(Name) class Name : public Exception { \
 public: \
-		  name(std::string msg) : Exception(msg) {} \
+		  Name(std::string msg) : Exception(msg) {} \
 };
 
 DEF_ERR(AttributeNotFound)

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006, 2008-2013 by the Widelands Development Team
+ * Copyright (C) 2002-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -51,15 +51,16 @@ private:
 	bool save_game(std::string);
 	void pause_game(bool paused);
 
-	UI::Listselect<std::string> m_ls;
-	UI::EditBox * m_editbox;
-	UI::Textarea m_name_label, m_mapname, m_gametime_label, m_gametime, m_players_label,
-		m_win_condition_label, m_win_condition;
-	UI::Button * m_button_ok;
-	std::string m_curdir;
-	std::string m_parentdir;
-	std::string m_filename;
-	bool m_overwrite;
+	UI::EditBox editbox_;
+	UI::Listselect<std::string> ls_;
+
+	UI::Textarea name_label_, mapname_, gametime_label_, gametime_, players_label_,
+		win_condition_label_, win_condition_;
+	UI::Button * button_ok_;
+	std::string curdir_;
+	std::string parentdir_;
+	std::string filename_;
+	bool overwrite_;
 };
 
 #endif  // end of include guard: WL_WUI_GAME_MAIN_MENU_SAVE_GAME_H

@@ -25,9 +25,8 @@
 #include "wui/soldierlist.h"
 
 using Widelands::TrainingSite;
-using Widelands::atrAttack;
 
-static char const * pic_tab_military = "pics/menu_tab_military.png";
+static char const * pic_tab_military = "images/wui/buildings/menu_tab_military.png";
 
 /**
  * Status window for \ref TrainingSite

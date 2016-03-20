@@ -65,22 +65,22 @@ MapDetails::MapDetails
 	suggested_teams_box_ = new UI::SuggestedTeamsBox(this, 0, 0, UI::Box::Vertical,
 																	 padding_, indent_, labelh_, max_x_, 4 * labelh_);
 
-	main_box_.add(&name_label_, UI::Box::AlignLeft);
+	main_box_.add(&name_label_, UI::Align::kLeft);
 	name_box_.add_space(indent_);
-	name_box_.add(&name_, UI::Box::AlignLeft);
-	main_box_.add(&name_box_, UI::Box::AlignLeft);
+	name_box_.add(&name_, UI::Align::kLeft);
+	main_box_.add(&name_box_, UI::Align::kLeft);
 	main_box_.add_space(padding_);
 
-	main_box_.add(&author_label_, UI::Box::AlignLeft);
+	main_box_.add(&author_label_, UI::Align::kLeft);
 	author_box_.add_space(indent_);
-	author_box_.add(&author_, UI::Box::AlignLeft);
-	main_box_.add(&author_box_, UI::Box::AlignLeft);
+	author_box_.add(&author_, UI::Align::kLeft);
+	main_box_.add(&author_box_, UI::Align::kLeft);
 	main_box_.add_space(padding_);
 
-	main_box_.add(&descr_label_, UI::Box::AlignLeft);
+	main_box_.add(&descr_label_, UI::Align::kLeft);
 	descr_box_.add_space(indent_);
-	descr_box_.add(&descr_, UI::Box::AlignLeft);
-	main_box_.add(&descr_box_, UI::Box::AlignLeft);
+	descr_box_.add(&descr_, UI::Align::kLeft);
+	main_box_.add(&descr_box_, UI::Align::kLeft);
 	main_box_.add_space(padding_);
 }
 
@@ -131,8 +131,10 @@ void MapDetails::update(const MapData& mapdata, bool localize_mapname) {
 		author_label_.set_text(ngettext("Author:", "Authors:", mapdata.authors.get_number()));
 		author_.set_text(mapdata.authors.get_names());
 		descr_label_.set_text(_("Description:"));
-		descr_.set_text(mapdata.description +
-										  (mapdata.hint.empty() ? "" : (std::string("\n\n") + mapdata.hint)));
+		descr_.set_text(
+					mapdata.description +
+					/** TRANSLATORS: Map hint header when selecting a map. */
+					(mapdata.hint.empty() ? "" : (std::string("\n\n") + _("HINT:") + "\n" + mapdata.hint)));
 
 		// Show / hide suggested teams
 		if (mapdata.suggested_teams.empty()) {

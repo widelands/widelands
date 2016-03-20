@@ -19,21 +19,23 @@
 
 #include "logic/mapdifferenceregion.h"
 
+#include "base/wexception.h"
+
 namespace Widelands {
 
 template <> bool MapDifferenceRegion<Area<FCoords> >::advance(const Map & map)
 {
-	assert(1 <= m_direction);
-	assert     (m_direction <= 6);
-	if (m_remaining_in_edge) {
-		map.get_neighbour(m_area, m_direction, &m_area);
-		--m_remaining_in_edge;
+	assert(1 <= direction_);
+	assert     (direction_ <= 6);
+	if (remaining_in_edge_) {
+		map.get_neighbour(area_, direction_, &area_);
+		--remaining_in_edge_;
 		return true;
 	} else {
-		if (!m_passed_corner) {
-			m_passed_corner = true;
-			--m_direction; if (!m_direction) m_direction = 6;
-			m_remaining_in_edge = m_area.radius;
+		if (!passed_corner_) {
+			passed_corner_ = true;
+			--direction_; if (!direction_) direction_ = 6;
+			remaining_in_edge_ = area_.radius;
 			return advance(map);
 		}
 	}
@@ -43,16 +45,16 @@ template <> bool MapDifferenceRegion<Area<FCoords> >::advance(const Map & map)
 template <>
 void MapDifferenceRegion<Area<FCoords> >::move_to_other_side(const Map & map)
 {
-	assert(1 <= m_direction);
-	assert     (m_direction <= 6);
-	assert(m_passed_corner);
-	--m_direction; if (!m_direction) m_direction = 6;
-	Area<FCoords>::RadiusType steps_left = m_area.radius + 1;
-	switch (m_direction) {
+	assert(1 <= direction_);
+	assert     (direction_ <= 6);
+	assert(passed_corner_);
+	--direction_; if (!direction_) direction_ = 6;
+	Area<FCoords>::RadiusType steps_left = area_.radius + 1;
+	switch (direction_) {
 #define DIRECTION_CASE(dir, neighbour_function)                               \
    case dir:                                                                  \
       for (; steps_left; --steps_left)                                        \
-         map.neighbour_function(m_area, &m_area);                             \
+			map.neighbour_function(area_, &area_);                               \
       break;                                                                  \
 
 	DIRECTION_CASE(WALK_NW, get_tln);
@@ -61,11 +63,12 @@ void MapDifferenceRegion<Area<FCoords> >::move_to_other_side(const Map & map)
 	DIRECTION_CASE(WALK_SE, get_brn);
 	DIRECTION_CASE(WALK_SW, get_bln);
 	DIRECTION_CASE(WALK_W,  get_ln);
-	default: assert(false);
+	default:
+			NEVER_HERE();
 	}
-	--m_direction; if (!m_direction) m_direction = 6;
-	m_remaining_in_edge = m_area.radius;
-	m_passed_corner     = false;
+	--direction_; if (!direction_) direction_ = 6;
+	remaining_in_edge_ = area_.radius;
+	passed_corner_     = false;
 }
 
 }

@@ -64,40 +64,38 @@ TerrainDescription::Is terrain_type_from_string(const std::string& type) {
 }  // namespace
 
 
-TerrainDescription::Type::Type(TerrainDescription::Is _is) : is(_is) {
+TerrainDescription::Type::Type(TerrainDescription::Is init_is) : is(init_is) {
 	switch (is) {
 	case Is::kArable:
 		/** TRANSLATORS: This is a terrain type tooltip in the editor */
 		descname = _("arable");
-		icon = g_gr->images().get("pics/terrain_arable.png");
+		icon = g_gr->images().get("images/wui/editor/terrain_arable.png");
 		break;
 	case Is::kWalkable:
 		/** TRANSLATORS: This is a terrain type tooltip in the editor */
 		descname = _("walkable");
-		icon = g_gr->images().get("pics/terrain_walkable.png");
+		icon = g_gr->images().get("images/wui/editor/terrain_walkable.png");
 		break;
 	case Is::kWater:
 		/** TRANSLATORS: This is a terrain type tooltip in the editor */
 		descname = _("navigable");
-		icon = g_gr->images().get("pics/terrain_water.png");
+		icon = g_gr->images().get("images/wui/editor/terrain_water.png");
 		break;
 	case Is::kUnreachable:
 		/** TRANSLATORS: This is a terrain type tooltip in the editor */
 		descname = _("unreachable");
-		icon = g_gr->images().get("pics/terrain_unreachable.png");
+		icon = g_gr->images().get("images/wui/editor/terrain_unreachable.png");
 		break;
 	case Is::kMineable:
 		/** TRANSLATORS: This is a terrain type tooltip in the editor */
 		descname = _("mineable");
-		icon = g_gr->images().get("pics/terrain_mineable.png");
+		icon = g_gr->images().get("images/wui/editor/terrain_mineable.png");
 		break;
 	case Is::kUnwalkable:
 		/** TRANSLATORS: This is a terrain type tooltip in the editor */
 		descname = _("unwalkable");
-		icon = g_gr->images().get("pics/terrain_unwalkable.png");
+		icon = g_gr->images().get("images/wui/editor/terrain_unwalkable.png");
 		break;
-	default:
-		throw wexception("Unknown TerrainDescription::Is in TerrainDescription::Type");
 	}
 }
 
@@ -212,8 +210,8 @@ const std::string& TerrainDescription::descname() const {
 	return descname_;
 }
 
-const EditorCategory& TerrainDescription::editor_category() const {
-	return *editor_category_;
+const EditorCategory* TerrainDescription::editor_category() const {
+	return editor_category_;
 }
 
 DescriptionIndex TerrainDescription::get_valid_resource(uint8_t index) const {
@@ -222,6 +220,10 @@ DescriptionIndex TerrainDescription::get_valid_resource(uint8_t index) const {
 
 int TerrainDescription::get_num_valid_resources() const {
 	return valid_resources_.size();
+}
+
+std::vector<uint8_t> TerrainDescription::valid_resources() const {
+	return valid_resources_;
 }
 
 bool TerrainDescription::is_resource_valid(const int res) const {

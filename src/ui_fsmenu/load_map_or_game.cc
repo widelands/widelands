@@ -25,7 +25,6 @@
 #include "graphic/graphic.h"
 #include "io/filesystem/filesystem.h"
 #include "ui_basic/button.h"
-#include "ui_basic/listselect.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/textarea.h"
 
@@ -34,33 +33,33 @@
 /// This class defines common coordinates for these UI screens.
 /// It also defines common buttons.
 FullscreenMenuLoadMapOrGame::FullscreenMenuLoadMapOrGame() :
-		FullscreenMenuBase("choosemapmenu.jpg"),
+		FullscreenMenuBase("images/ui_fsmenu/choosemapmenu.jpg"),
 
 		// Values for alignment and size
 		padding_(4),
 		indent_(10),
-		m_label_height(20),
+		label_height_(20),
 		tablex_(get_w() *  47 / 2500),
 		tabley_(get_h() * 17 / 50),
 		tablew_(get_w() * 711 / 1250),
 		tableh_(get_h() * 6083 / 10000),
-		m_right_column_margin(15),
-		right_column_x_(tablex_ + tablew_ + m_right_column_margin),
-		m_buty (get_h() * 9 / 10),
-		m_butw ((get_w() - right_column_x_ - m_right_column_margin) / 2 - padding_),
+		right_column_margin_(15),
+		right_column_x_(tablex_ + tablew_ + right_column_margin_),
+		buty_ (get_h() * 9 / 10),
+		butw_ ((get_w() - right_column_x_ - right_column_margin_) / 2 - padding_),
 		buth_ (get_h() * 9 / 200),
-		m_right_column_tab(get_w() - m_right_column_margin - m_butw),
+		right_column_tab_(get_w() - right_column_margin_ - butw_),
 
 		// Main buttons
 		back_
 		  (this, "back",
-			right_column_x_, m_buty, m_butw, buth_,
-			g_gr->images().get("pics/but0.png"),
+			right_column_x_, buty_, butw_, buth_,
+			g_gr->images().get("images/ui_basic/but0.png"),
 			_("Back"), std::string(), true, false),
 		ok_
 		  (this, "ok",
-			get_w() - m_right_column_margin - m_butw, m_buty, m_butw, buth_,
-			g_gr->images().get("pics/but2.png"),
+			get_w() - right_column_margin_ - butw_, buty_, butw_, buth_,
+			g_gr->images().get("images/ui_basic/but2.png"),
 			_("OK"), std::string(), false, false)
 	{}
 
@@ -69,5 +68,5 @@ int32_t FullscreenMenuLoadMapOrGame::get_y_from_preceding(UI::Panel& preceding_p
 }
 
 int32_t FullscreenMenuLoadMapOrGame::get_right_column_w(int32_t x) {
-	return get_w() - m_right_column_margin - x;
+	return get_w() - right_column_margin_ - x;
 }

@@ -44,6 +44,12 @@ struct Coords {
 	/// Returns a special value indicating invalidity.
 	static Coords null();
 
+	/// Unhash coordinates so they can be gotten from a container
+	static Coords unhash(uint32_t hash);
+
+	/// Hash coordinates to use them as keys in a container
+	uint32_t hash() const;
+
 	bool operator== (const Coords& other) const;
 	bool operator!= (const Coords & other) const;
 	operator bool() const;

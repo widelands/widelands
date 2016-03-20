@@ -15,7 +15,13 @@ endif (CMAKE_SOURCE_DIR STREQUAL CMAKE_BINARY_DIR)
 # (through config.h). If not specified, we are going to use the directory where
 # the executable is in. Also on Linux.
 # Packagers (or people using make install) have to set this variable to an absolute path.
-wl_set_if_unset(WL_INSTALL_DATADIR ".")
+wl_set_if_unset(WL_INSTALL_BASEDIR ".")
+
+# Define the directory structure for installation of the data files - will be hardcoded
+# in WL bin (through config.h). If not specified, we are going to use the "data" directory
+# below the directory where the executable is in. Also on Linux.
+# Packagers (or people using make install) have to set this variable to an absolute path.
+wl_set_if_unset(WL_INSTALL_DATADIR "./data")
 
 if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
   if (CMAKE_CXX_COMPILER_VERSION VERSION_LESS 4.7)
@@ -105,21 +111,15 @@ if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-global-constructors")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-padded")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-sign-conversion")
-  wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-switch-enum")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-missing-noreturn")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-implicit-fallthrough")
 
   # TODO(sirver): weak-vtables should be enabled, but leads to lot of errors right now.
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-weak-vtables")
-
-  # This warning warns when a default case is at a switch that handles all
-  # cases. While this is super nice, silencing this warning for clang will add
-  # a warning for GCC (which is not as clever and does not figure out that all
-  # cases are handled). Therefore we disable the warning and the unreachable as
-  # they always come in pairs in these cases.
-  wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-covered-switch-default")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-unreachable-code")
+  wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-documentation")
 
+  wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Werror=deprecated")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Werror=non-pod-varargs")
 
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Qunused-arguments")
@@ -158,7 +158,6 @@ else()
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wpointer-arith")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wredundant-decls")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wsign-promo")
-  wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wswitch-default")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wsync-nand")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wtrampolines")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wundef")
@@ -193,7 +192,7 @@ endif (CMAKE_SYSTEM_NAME MATCHES "FreeBSD" OR CMAKE_SYSTEM_NAME MATCHES "OpenBSD
 if (NOT DEFINED WL_VERSION)
   add_custom_target (
     BzrRevision ALL
-    COMMAND ${CMAKE_COMMAND} -DWL_INSTALL_DATADIR=${WL_INSTALL_DATADIR} -DPYTHON_EXECUTABLE=${PYTHON_EXECUTABLE} -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DSOURCE_DIR=${CMAKE_CURRENT_SOURCE_DIR} -DBINARY_DIR=${CMAKE_CURRENT_BINARY_DIR} -P ${CMAKE_CURRENT_SOURCE_DIR}/cmake/BzrRevision.cmake
+    COMMAND ${CMAKE_COMMAND} -DWL_INSTALL_BASEDIR=${WL_INSTALL_BASEDIR} -DWL_INSTALL_DATADIR=${WL_INSTALL_DATADIR} -DPYTHON_EXECUTABLE=${PYTHON_EXECUTABLE} -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DSOURCE_DIR=${CMAKE_CURRENT_SOURCE_DIR} -DBINARY_DIR=${CMAKE_CURRENT_BINARY_DIR} -P ${CMAKE_CURRENT_SOURCE_DIR}/cmake/BzrRevision.cmake
   )
 
   # Detect version now
@@ -209,7 +208,7 @@ if (NOT DEFINED WL_VERSION)
 else (NOT DEFINED WL_VERSION)
   add_custom_target (
     InputRevision ALL
-    COMMAND ${CMAKE_COMMAND} -DWL_INSTALL_DATADIR=${WL_INSTALL_DATADIR} -DWL_VERSION=${WL_VERSION} -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DSOURCE_DIR=${CMAKE_CURRENT_SOURCE_DIR} -DBINARY_DIR=${CMAKE_CURRENT_BINARY_DIR} -P ${CMAKE_CURRENT_SOURCE_DIR}/cmake/InputRevision.cmake
+    COMMAND ${CMAKE_COMMAND -DWL_INSTALL_BASEDIR=${WL_INSTALL_BASEDIR} -DWL_VERSION=${WL_VERSION} -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DSOURCE_DIR=${CMAKE_CURRENT_SOURCE_DIR} -DBINARY_DIR=${CMAKE_CURRENT_BINARY_DIR} -P ${CMAKE_CURRENT_SOURCE_DIR}/cmake/InputRevision.cmake
   )
 endif (NOT DEFINED WL_VERSION)
 
@@ -228,7 +227,7 @@ add_custom_target(_run_all_tests ALL
 
 install (
   FILES ${CMAKE_CURRENT_BINARY_DIR}/VERSION
-  DESTINATION ${WL_INSTALL_DATADIR}
+  DESTINATION ${WL_INSTALL_BASEDIR}
   CONFIGURATIONS Debug;Release
   COMPONENT CoreVersionFile
 )
@@ -241,13 +240,14 @@ add_subdirectory(src)
 # install files to the correct locations here
 install(
   DIRECTORY
-    campaigns
-    i18n
-    tribes
-    txts
-    world
-    pics
-    scripting
+    data/campaigns
+    data/i18n
+    data/images
+    data/scripting
+    data/shaders
+    data/tribes
+    data/txts
+    data/world
   DESTINATION ${WL_INSTALL_DATADIR}
   CONFIGURATIONS Debug;Release
   COMPONENT CoreDataFiles
@@ -255,7 +255,7 @@ install(
 
 install(
   DIRECTORY
-    maps
+    data/maps
   DESTINATION ${WL_INSTALL_DATADIR}
   CONFIGURATIONS Debug;Release
   COMPONENT MapFiles
@@ -263,8 +263,8 @@ install(
 
 install(
   DIRECTORY
-    music
-	sound
+    data/music
+    data/sound
   DESTINATION ${WL_INSTALL_DATADIR}
   CONFIGURATIONS Debug;Release
   COMPONENT MusicFiles
@@ -275,7 +275,7 @@ install(
     COPYING
     CREDITS
     ChangeLog
-  DESTINATION ${WL_INSTALL_DATADIR}
+  DESTINATION ${WL_INSTALL_BASEDIR}
   CONFIGURATIONS Debug;Release
   COMPONENT CoreLicenseFiles
 )
@@ -283,13 +283,13 @@ install(
 install(
   DIRECTORY
     doc
-  DESTINATION ${WL_INSTALL_DATADIR}
+  DESTINATION ${WL_INSTALL_BASEDIR}
   CONFIGURATIONS Debug
   COMPONENT DocFiles
   PATTERN "CMakeLists.txt" EXCLUDE
 )
 
-set_directory_properties(PROPERTIES ADDITIONAL_MAKE_CLEAN_FILES locale)
+set_directory_properties(PROPERTIES ADDITIONAL_MAKE_CLEAN_FILES ${WL_INSTALL_DATADIR}/locale)
 
 install(
   DIRECTORY

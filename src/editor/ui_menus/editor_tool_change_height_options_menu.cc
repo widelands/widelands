@@ -39,117 +39,117 @@ EditorToolChangeHeightOptionsMenu::EditorToolChangeHeightOptionsMenu
 	:
 	EditorToolOptionsMenu
 		(parent, registry, 250, 135, _("Height Tools Options")),
-	m_increase_tool(increase_tool),
-	m_change_by_label
+	increase_tool_(increase_tool),
+	change_by_label_
 		(this,
 		 hmargin(), vmargin(), get_inner_w() - 2 * hmargin(), height,
-		 _("Increase/Decrease Value"), UI::Align_BottomCenter),
-	m_change_by_increase
+		 _("Increase/Decrease Value"), UI::Align::kBottomCenter),
+	change_by_increase_
 		(this, "incr_change_by",
 		 get_inner_w() - hmargin() - width,
-		 m_change_by_label.get_y() + m_change_by_label.get_h() + spacing(),
+		 change_by_label_.get_y() + change_by_label_.get_h() + spacing(),
 		 width, height,
-		 g_gr->images().get("pics/but1.png"),
-		 g_gr->images().get("pics/scrollbar_up.png"),
+		 g_gr->images().get("images/ui_basic/but1.png"),
+		 g_gr->images().get("images/ui_basic/scrollbar_up.png"),
 		 std::string(),
 		 increase_tool.get_change_by() < MAX_FIELD_HEIGHT_DIFF),
-	m_change_by_decrease
+	change_by_decrease_
 		(this, "decr_change_by",
 		 hmargin(),
-		 m_change_by_increase.get_y(),
+		 change_by_increase_.get_y(),
 		 width, height,
-		 g_gr->images().get("pics/but1.png"),
-		 g_gr->images().get("pics/scrollbar_down.png"),
+		 g_gr->images().get("images/ui_basic/but1.png"),
+		 g_gr->images().get("images/ui_basic/scrollbar_down.png"),
 		 std::string(),
 		 1 < increase_tool.get_change_by()),
-	m_change_by_value
+	change_by_value_
 		(this,
-		 m_change_by_increase.get_x() + m_change_by_increase.get_w() +
+		 change_by_increase_.get_x() + change_by_increase_.get_w() +
 		 hspacing(),
-		 m_change_by_increase.get_y(),
-		 m_change_by_decrease.get_x() - hspacing()
+		 change_by_increase_.get_y(),
+		 change_by_decrease_.get_x() - hspacing()
 		 -
-		 (m_change_by_increase.get_x() + m_change_by_increase.get_w() +
+		 (change_by_increase_.get_x() + change_by_increase_.get_w() +
 		  hspacing()),
 		 height,
-		 UI::Align_BottomCenter),
-	m_set_to_label
+		 UI::Align::kBottomCenter),
+	set_to_label_
 		(this,
 		 vmargin(),
-		 m_change_by_increase.get_y() + m_change_by_increase.get_h() +
+		 change_by_increase_.get_y() + change_by_increase_.get_h() +
 		 vspacing(),
 		 get_inner_w() - 2 * hmargin(), height,
-		 _("Set Value"), UI::Align_BottomCenter),
-	m_set_to_increase
+		 _("Set Value"), UI::Align::kBottomCenter),
+	set_to_increase_
 		(this, "incr_set_to",
-		 m_change_by_increase.get_x(),
-		 m_set_to_label.get_y() + m_set_to_label.get_h() + vspacing(),
+		 change_by_increase_.get_x(),
+		 set_to_label_.get_y() + set_to_label_.get_h() + vspacing(),
 		 width, height,
-		 g_gr->images().get("pics/but1.png"),
-		 g_gr->images().get("pics/scrollbar_up.png"),
+		 g_gr->images().get("images/ui_basic/but1.png"),
+		 g_gr->images().get("images/ui_basic/scrollbar_up.png"),
 		 std::string(),
 		 increase_tool.set_tool().get_interval().min < MAX_FIELD_HEIGHT),
-	m_set_to_decrease
+	set_to_decrease_
 		(this, "decr_set_to",
 		 hmargin(),
-		 m_set_to_increase.get_y(),
+		 set_to_increase_.get_y(),
 		 width, height,
-		 g_gr->images().get("pics/but1.png"),
-		 g_gr->images().get("pics/scrollbar_down.png"),
+		 g_gr->images().get("images/ui_basic/but1.png"),
+		 g_gr->images().get("images/ui_basic/scrollbar_down.png"),
 		 std::string(),
 		 0 < increase_tool.set_tool().get_interval().min),
-	m_set_to_value
+	set_to_value_
 		(this,
-		 m_change_by_value.get_x(), m_set_to_increase.get_y(),
-		 m_change_by_value.get_w(), height,
-		 UI::Align_BottomCenter)
+		 change_by_value_.get_x(), set_to_increase_.get_y(),
+		 change_by_value_.get_w(), height,
+		 UI::Align::kBottomCenter)
 {
-	m_change_by_increase.sigclicked.connect
+	change_by_increase_.sigclicked.connect
 		(boost::bind
 		 (&EditorToolChangeHeightOptionsMenu::clicked_change_by_increment, boost::ref(*this)));
-	m_change_by_decrease.sigclicked.connect
+	change_by_decrease_.sigclicked.connect
 		(boost::bind
 		 (&EditorToolChangeHeightOptionsMenu::clicked_change_by_decrement, boost::ref(*this)));
-	m_set_to_increase.sigclicked.connect
+	set_to_increase_.sigclicked.connect
 		(boost::bind(&EditorToolChangeHeightOptionsMenu::clicked_setto_increment, boost::ref(*this)));
-	m_set_to_decrease.sigclicked.connect
+	set_to_decrease_.sigclicked.connect
 		(boost::bind(&EditorToolChangeHeightOptionsMenu::clicked_setto_decrement, boost::ref(*this)));
 
-	m_change_by_increase.set_repeating(true);
-	m_change_by_decrease.set_repeating(true);
-	m_set_to_increase   .set_repeating(true);
-	m_set_to_decrease   .set_repeating(true);
+	change_by_increase_.set_repeating(true);
+	change_by_decrease_.set_repeating(true);
+	set_to_increase_   .set_repeating(true);
+	set_to_decrease_   .set_repeating(true);
 	update();
 }
 
 
 void EditorToolChangeHeightOptionsMenu::clicked_change_by_decrement() {
-	int32_t change_by = m_increase_tool.get_change_by();
-	assert(change_by == m_increase_tool.decrease_tool().get_change_by());
+	int32_t change_by = increase_tool_.get_change_by();
+	assert(change_by == increase_tool_.decrease_tool().get_change_by());
 	assert(1 < change_by);
 
 	--change_by;
 
-	m_increase_tool                .set_change_by(change_by);
-	m_increase_tool.decrease_tool().set_change_by(change_by);
-	m_change_by_decrease.set_enabled(1 < change_by);
-	m_change_by_increase.set_enabled(true);
+	increase_tool_                .set_change_by(change_by);
+	increase_tool_.decrease_tool().set_change_by(change_by);
+	change_by_decrease_.set_enabled(1 < change_by);
+	change_by_increase_.set_enabled(true);
 	select_correct_tool();
 	update();
 }
 
 
 void EditorToolChangeHeightOptionsMenu::clicked_change_by_increment() {
-	int32_t change_by = m_increase_tool.get_change_by();
-	assert(change_by == m_increase_tool.decrease_tool().get_change_by());
+	int32_t change_by = increase_tool_.get_change_by();
+	assert(change_by == increase_tool_.decrease_tool().get_change_by());
 	assert(change_by < MAX_FIELD_HEIGHT_DIFF);
 
 	++change_by;
 
-	m_increase_tool                .set_change_by(change_by);
-	m_increase_tool.decrease_tool().set_change_by(change_by);
-	m_change_by_decrease.set_enabled(true);
-	m_change_by_increase.set_enabled(change_by < MAX_FIELD_HEIGHT_DIFF);
+	increase_tool_                .set_change_by(change_by);
+	increase_tool_.decrease_tool().set_change_by(change_by);
+	change_by_decrease_.set_enabled(true);
+	change_by_increase_.set_enabled(change_by < MAX_FIELD_HEIGHT_DIFF);
 	select_correct_tool();
 	update();
 }
@@ -157,16 +157,16 @@ void EditorToolChangeHeightOptionsMenu::clicked_change_by_increment() {
 
 void EditorToolChangeHeightOptionsMenu::clicked_setto_decrement() {
 	Widelands::Field::Height setto =
-		m_increase_tool.set_tool().get_interval().min;
-	assert(setto == m_increase_tool.set_tool().get_interval().max);
+		increase_tool_.set_tool().get_interval().min;
+	assert(setto == increase_tool_.set_tool().get_interval().max);
 	assert(0 < setto);
 
 	--setto;
 
-	m_increase_tool.set_tool().set_interval
+	increase_tool_.set_tool().set_interval
 		(Widelands::HeightInterval(setto, setto));
-	m_set_to_decrease.set_enabled(0 < setto);
-	m_set_to_increase.set_enabled(true);
+	set_to_decrease_.set_enabled(0 < setto);
+	set_to_increase_.set_enabled(true);
 	select_correct_tool();
 	update();
 }
@@ -174,16 +174,16 @@ void EditorToolChangeHeightOptionsMenu::clicked_setto_decrement() {
 
 void EditorToolChangeHeightOptionsMenu::clicked_setto_increment() {
 	Widelands::Field::Height setto =
-		m_increase_tool.set_tool().get_interval().min;
-	assert(setto == m_increase_tool.set_tool().get_interval().max);
+		increase_tool_.set_tool().get_interval().min;
+	assert(setto == increase_tool_.set_tool().get_interval().max);
 	assert(setto < MAX_FIELD_HEIGHT);
 
 	++setto;
 
-	m_increase_tool.set_tool().set_interval
+	increase_tool_.set_tool().set_interval
 		(Widelands::HeightInterval(setto, setto));
-	m_set_to_decrease.set_enabled(true);
-	m_set_to_increase.set_enabled(setto < MAX_FIELD_HEIGHT);
+	set_to_decrease_.set_enabled(true);
+	set_to_increase_.set_enabled(setto < MAX_FIELD_HEIGHT);
 	select_correct_tool();
 	update();
 }
@@ -191,8 +191,8 @@ void EditorToolChangeHeightOptionsMenu::clicked_setto_increment() {
 
 /// Update all the textareas, so that they represent the correct values.
 void EditorToolChangeHeightOptionsMenu::update() {
-	m_change_by_value.set_text(std::to_string(m_increase_tool.get_change_by()));
+	change_by_value_.set_text(std::to_string(increase_tool_.get_change_by()));
 
-	m_set_to_value.set_text(std::to_string(
-										static_cast<unsigned int>(m_increase_tool.set_tool().get_interval().min)));
+	set_to_value_.set_text(std::to_string(
+										static_cast<unsigned int>(increase_tool_.set_tool().get_interval().min)));
 }

@@ -9,9 +9,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-12-03 09:55+0000\n"
-"PO-Revision-Date: 2015-12-03 10:44+0000\n"
-"Last-Translator: Venatrix\n"
+"POT-Creation-Date: 2015-12-14 05:31+0000\n"
+"PO-Revision-Date: 2015-12-20 15:58+0000\n"
+"Last-Translator: wl-zocker\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -141,12 +141,14 @@ msgid "The reward for this feat amounts to:"
 msgstr "Die Prämie für diese Leistung beträgt:"
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:50
+#, lua-format
 msgid ""
 "%s is now King of the Hill and will win the game in 20 minutes, if nobody "
 "takes over the hill before then."
 msgstr "%s ist nun König des Hügels und wird das Spiel in 20 Minuten gewinnen, falls ihm niemand vorher die Herrschaft über den Hügel nimmt."
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:53
+#, lua-format
 msgid "%s lost control of the hill."
 msgstr "%s hat die Herrschaft über den Hügel verloren."
 
@@ -155,5 +157,6 @@ msgid "%1$s has been King of the Hill for %2$s!"
 msgstr "%1$s ist seit %2$s König des Hügels!"
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:56
+#, lua-format
 msgid "%s has won the game. Congratulations!"
 msgstr "%s hat das Spiel gewonnen. Herzlichen Glückwunsch!"

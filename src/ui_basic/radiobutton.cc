@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006, 2008-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -34,11 +34,11 @@ Radiobutton::Radiobutton
 	 int32_t      const id)
 	:
 	Statebox (parent, p, pic),
-	m_nextbtn(group.m_buttons),
-	m_group  (group),
-	m_id     (id)
+	nextbtn_(group.buttons_),
+	group_  (group),
+	id_     (id)
 {
-	group.m_buttons = this;
+	group.buttons_ = this;
 }
 
 /**
@@ -46,9 +46,9 @@ Radiobutton::Radiobutton
  */
 Radiobutton::~Radiobutton()
 {
-	for (Radiobutton * * pp = &m_group.m_buttons; *pp; pp = &(*pp)->m_nextbtn) {
+	for (Radiobutton * * pp = &group_.buttons_; *pp; pp = &(*pp)->nextbtn_) {
 		if (*pp == this) {
-			*pp = m_nextbtn;
+			*pp = nextbtn_;
 			break;
 		}
 	}
@@ -60,7 +60,7 @@ Radiobutton::~Radiobutton()
  */
 void Radiobutton::clicked()
 {
-	m_group.set_state(m_id);
+	group_.set_state(id_);
 	play_click();
 }
 
@@ -78,19 +78,19 @@ Radiogroup
  */
 Radiogroup::Radiogroup()
 {
-	m_buttons = nullptr;
-	m_highestid = -1;
-	m_state = -1;
+	buttons_ = nullptr;
+	highestid_ = -1;
+	state_ = -1;
 }
 
 /**
  * Free all associated buttons.
  */
 Radiogroup::~Radiogroup() {
-	//Scan-build claims this results in double free.
-	//This is a false positive.
-	//See https://bugs.launchpad.net/widelands/+bug/1198928
-	while (m_buttons) delete m_buttons;
+	// Scan-build claims this results in double free.
+	// This is a false positive.
+	// See https://bugs.launchpad.net/widelands/+bug/1198928
+	while (buttons_) delete buttons_;
 }
 
 
@@ -105,11 +105,11 @@ int32_t Radiogroup::add_button
 	 const std::string& tooltip,
 	 Radiobutton **     ret_btn)
 {
-	++m_highestid;
-	Radiobutton * btn = new Radiobutton(parent, p, pic, *this, m_highestid);
+	++highestid_;
+	Radiobutton * btn = new Radiobutton(parent, p, pic, *this, highestid_);
 	btn->set_tooltip(tooltip);
 	if (ret_btn) (*ret_btn) = btn;
-	return m_highestid;
+	return highestid_;
 }
 
 
@@ -119,14 +119,14 @@ int32_t Radiogroup::add_button
  * Args: state  the ID of the checked button (-1 means don't check any button)
  */
 void Radiogroup::set_state(int32_t const state) {
-	if (state == m_state) {
+	if (state == state_) {
 		clicked();
 		return;
 	}
 
-	for (Radiobutton * btn = m_buttons; btn; btn = btn->m_nextbtn)
-		btn->set_state(btn->m_id == state);
-	m_state = state;
+	for (Radiobutton * btn = buttons_; btn; btn = btn->nextbtn_)
+		btn->set_state(btn->id_ == state);
+	state_ = state;
 	changed();
 	changedto(state);
 }
@@ -135,7 +135,7 @@ void Radiogroup::set_state(int32_t const state) {
  * Disable this radiogroup
  */
 void Radiogroup::set_enabled(bool st) {
-	for (Radiobutton * btn = m_buttons; btn; btn = btn->m_nextbtn)
+	for (Radiobutton * btn = buttons_; btn; btn = btn->nextbtn_)
 		btn->set_enabled(st);
 }
 

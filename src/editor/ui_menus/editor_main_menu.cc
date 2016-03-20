@@ -28,7 +28,7 @@
 #include "editor/ui_menus/editor_main_menu_save_map.h"
 #include "ui_fsmenu/fileview.h"
 
-//TODO(unknown): these should be defined globally for the whole UI
+// TODO(unknown): these should be defined globally for the whole UI
 #define width 200
 #define margin 15
 #define vspacing 15
@@ -49,46 +49,46 @@ EditorMainMenu::EditorMainMenu
 	button_new_map_
 		(&box_, "new_map",
 		 0, 0, width, 0,
-		 g_gr->images().get("pics/but1.png"),
+		 g_gr->images().get("images/ui_basic/but1.png"),
 		 _("New Map")),
 	button_new_random_map_
 		(&box_, "new_random_map",
 		 0, 0, width, 0,
-		 g_gr->images().get("pics/but1.png"),
+		 g_gr->images().get("images/ui_basic/but1.png"),
 		 _("New Random Map")),
 	button_load_map_
 		(&box_, "load_map",
 		 0, 0, width, 0,
-		 g_gr->images().get("pics/but1.png"),
+		 g_gr->images().get("images/ui_basic/but1.png"),
 		 _("Load Map")),
 	button_save_map_
 		(&box_, "save_map",
 		 0, 0, width, 0,
-		 g_gr->images().get("pics/but1.png"),
+		 g_gr->images().get("images/ui_basic/but1.png"),
 		 _("Save Map")),
 	button_map_options_
 		(&box_, "map_options",
 		 0, 0, width, 0,
-		 g_gr->images().get("pics/but1.png"),
+		 g_gr->images().get("images/ui_basic/but1.png"),
 		 _("Map Options")),
 	button_view_readme_
 		(&box_, "readme",
 		 0, 0, width, 0,
-		 g_gr->images().get("pics/but1.png"),
+		 g_gr->images().get("images/ui_basic/but1.png"),
 		 _("View Readme")),
 	button_exit_editor_
 		(&box_, "exit",
 		 0, 0, width, 0,
-		 g_gr->images().get("pics/but5.png"),
+		 g_gr->images().get("images/ui_basic/but5.png"),
 		 _("Exit Editor"))
 {
-	box_.add(&button_new_map_, UI::Box::AlignCenter);
-	box_.add(&button_new_random_map_, UI::Box::AlignCenter);
-	box_.add(&button_load_map_, UI::Box::AlignCenter);
-	box_.add(&button_save_map_, UI::Box::AlignCenter);
-	box_.add(&button_map_options_, UI::Box::AlignCenter);
-	box_.add(&button_view_readme_, UI::Box::AlignCenter);
-	box_.add(&button_exit_editor_, UI::Box::AlignCenter);
+	box_.add(&button_new_map_, UI::Align::kHCenter);
+	box_.add(&button_new_random_map_, UI::Align::kHCenter);
+	box_.add(&button_load_map_, UI::Align::kHCenter);
+	box_.add(&button_save_map_, UI::Align::kHCenter);
+	box_.add(&button_map_options_, UI::Align::kHCenter);
+	box_.add(&button_view_readme_, UI::Align::kHCenter);
+	box_.add(&button_exit_editor_, UI::Align::kHCenter);
 	box_.set_size(width, 7 * button_new_map_.get_h()+ 6 * vspacing);
 	set_inner_size(get_inner_w(), box_.get_h() + 2 * margin);
 

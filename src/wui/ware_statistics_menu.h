@@ -37,13 +37,13 @@ public:
 	void set_time(int32_t);
 
 private:
-	InteractivePlayer * m_parent;
-	WuiPlotArea       * m_plot_production;
-	WuiPlotArea       * m_plot_consumption;
-	WuiPlotArea       * m_plot_stock;
-	DifferentialPlotArea       * m_plot_economy;
-	std::vector<uint8_t> m_color_map; //maps ware index to colors
-	std::vector<bool> m_active_colors;
+	InteractivePlayer * parent_;
+	WuiPlotArea       * plot_production_;
+	WuiPlotArea       * plot_consumption_;
+	WuiPlotArea       * plot_stock_;
+	DifferentialPlotArea       * plot_economy_;
+	std::vector<uint8_t> color_map_; // Maps ware index to colors
+	std::vector<bool> active_colors_;
 
 	void clicked_help();
 	void cb_changed_to(Widelands::DescriptionIndex, bool);

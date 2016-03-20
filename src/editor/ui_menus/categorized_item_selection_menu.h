@@ -20,8 +20,11 @@
 #ifndef WL_EDITOR_UI_MENUS_CATEGORIZED_ITEM_SELECTION_MENU_H
 #define WL_EDITOR_UI_MENUS_CATEGORIZED_ITEM_SELECTION_MENU_H
 
-#include <string>
+#include <algorithm>
 #include <cmath>
+#include <string>
+
+#include "boost/format.hpp"
 
 #include "base/i18n.h"
 #include "graphic/image.h"
@@ -29,9 +32,9 @@
 #include "logic/map_objects/world/editor_category.h"
 #include "ui_basic/box.h"
 #include "ui_basic/checkbox.h"
+#include "ui_basic/multilinetextarea.h"
 #include "ui_basic/panel.h"
 #include "ui_basic/tabpanel.h"
-#include "ui_basic/textarea.h"
 
 template <typename DescriptionType, typename ToolType>
 class CategorizedItemSelectionMenu : public UI::Box {
@@ -60,7 +63,8 @@ private:
 	const DescriptionMaintainer<DescriptionType>& descriptions_;
 	std::function<void()> select_correct_tool_;
 	bool protect_against_recursive_select_;
-	UI::Textarea current_selection_names_;
+	UI::TabPanel tab_panel_;
+	UI::MultilineTextarea current_selection_names_;
 	std::map<int, UI::Checkbox*> checkboxes_;
 	ToolType* const tool_;  // not owned
 };
@@ -78,24 +82,25 @@ CategorizedItemSelectionMenu<DescriptionType, ToolType>::CategorizedItemSelectio
 	descriptions_(descriptions),
 	select_correct_tool_(select_correct_tool),
 	protect_against_recursive_select_(false),
-	current_selection_names_(this, 0, 0, 0, 20, UI::Align_Center),
+	tab_panel_(this, 0, 0, nullptr),
+	current_selection_names_(this, 0, 0, 20, 20, "", UI::Align::kCenter,
+									 UI::MultilineTextarea::ScrollMode::kNoScrolling),
 	tool_(tool)
 {
-	UI::TabPanel* tab_panel = new UI::TabPanel(this, 0, 0, nullptr);
-	add(tab_panel, UI::Align_Center);
+	add(&tab_panel_, UI::Align::kCenter);
 
 	for (uint32_t category_index = 0; category_index < categories.size(); ++category_index) {
 		const Widelands::EditorCategory& category = categories.get(category_index);
 
 		std::vector<int> item_indices;
 		for (size_t j = 0; j < descriptions_.size(); ++j) {
-			if (descriptions_.get(j).editor_category().name() != category.name()) {
+			if (descriptions_.get(j).editor_category()->name() != category.name()) {
 				continue;
 			}
 			item_indices.push_back(j);
 		}
 
-		UI::Box* vertical = new UI::Box(tab_panel, 0, 0, UI::Box::Vertical);
+		UI::Box* vertical = new UI::Box(&tab_panel_, 0, 0, UI::Box::Vertical);
 		const int kSpacing = 5;
 		vertical->add_space(kSpacing);
 
@@ -108,7 +113,7 @@ CategorizedItemSelectionMenu<DescriptionType, ToolType>::CategorizedItemSelectio
 				horizontal = new UI::Box(vertical, 0, 0, UI::Box::Horizontal);
 				horizontal->add_space(kSpacing);
 
-				vertical->add(horizontal, UI::Align_Left);
+				vertical->add(horizontal, UI::Align::kLeft);
 				vertical->add_space(kSpacing);
 			}
 			assert(horizontal != nullptr);
@@ -117,13 +122,15 @@ CategorizedItemSelectionMenu<DescriptionType, ToolType>::CategorizedItemSelectio
 			cb->set_state(tool_->is_enabled(i));
 			cb->changedto.connect(boost::bind(&CategorizedItemSelectionMenu::selected, this, i, _1));
 			checkboxes_[i] = cb;
-			horizontal->add(cb, UI::Align_Left);
+			horizontal->add(cb, UI::Align::kLeft);
 			horizontal->add_space(kSpacing);
 			++nitems_handled;
 		}
-		tab_panel->add(category.name(), category.picture(), vertical, category.descname());
+		tab_panel_.add(category.name(), category.picture(), vertical, category.descname());
 	}
-	add(&current_selection_names_, UI::Align_Center, true);
+	add(&current_selection_names_, UI::Align::kCenter, true);
+	tab_panel_.sigclicked.connect(boost::bind(&CategorizedItemSelectionMenu::update_label, this));
+	update_label();
 }
 
 template <typename DescriptionType, typename ToolType>
@@ -160,14 +167,28 @@ void CategorizedItemSelectionMenu<DescriptionType, ToolType>::selected(const int
 
 template <typename DescriptionType, typename ToolType>
 void CategorizedItemSelectionMenu<DescriptionType, ToolType>::update_label() {
-	std::string buf = _("Current:");
+	current_selection_names_.set_size(tab_panel_.get_inner_w(), 20);
+	std::string buf = "";
+	constexpr int max_string_size = 100;
 	int j = tool_->get_nr_enabled();
-	for (int i = 0; j; ++i) {
+	for (int i = 0; j && buf.size() < max_string_size; ++i) {
 		if (tool_->is_enabled(i)) {
-			buf += " ";
+			if (j < tool_->get_nr_enabled()) {
+				buf += " • ";
+			}
 			buf += descriptions_.get(i).descname();
 			--j;
 		}
+	}
+	if (buf.size() > max_string_size) {
+		/** TRANSLATORS: %s are the currently selected items in an editor tool*/
+		buf = (boost::format(_("Current: %s …")) % buf).str();
+	} else if (buf.empty()) {
+		/** TRANSLATORS: Help text in an editor tool*/
+		buf = _("Click to select an item. Use the Ctrl key to select multiple items.");
+	} else {
+		/** TRANSLATORS: %s are the currently selected items in an editor tool*/
+		buf = (boost::format(_("Current: %s")) % buf).str();
 	}
 	current_selection_names_.set_text(buf);
 }

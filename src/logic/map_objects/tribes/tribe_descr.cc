@@ -56,7 +56,7 @@ TribeDescr::TribeDescr
 	: name_(table.get_string("name")), descname_(info.descname), tribes_(init_tribes) {
 
 	try {
-		m_initializations = info.initializations;
+		initializations_ = info.initializations;
 
 		std::unique_ptr<LuaTable> items_table = table.get_table("animations");
 		frontier_animation_id_ = g_gr->animations().load(*items_table->get_table("frontier"));
@@ -96,7 +96,7 @@ TribeDescr::TribeDescr
 					}
 					wares_.insert(wareindex);
 					column.push_back(wareindex);
-					wares_order_coords_[wareindex] = std::pair<uint32_t, uint32_t>(columnindex, rowindex);
+					wares_order_coords_[wareindex] = std::make_pair(columnindex, rowindex);
 				} catch (const WException& e) {
 					throw GameDataError("Failed adding ware '%s: %s", warenames[rowindex].c_str(), e.what());
 				}
@@ -121,7 +121,7 @@ TribeDescr::TribeDescr
 					}
 					workers_.insert(workerindex);
 					column.push_back(workerindex);
-					workers_order_coords_[workerindex] = std::pair<uint32_t, uint32_t>(columnindex, rowindex);
+					workers_order_coords_[workerindex] = std::make_pair(columnindex, rowindex);
 
 					const WorkerDescr& worker_descr = *tribes_.get_worker_descr(workerindex);
 					if (worker_descr.is_buildable() && worker_descr.buildcost().empty()) {
@@ -150,6 +150,8 @@ TribeDescr::TribeDescr
 			}
 		}
 
+		ship_names_ = table.get_table("ship_names")->array_entries<std::string>();
+
 		for (const std::string& buildingname : table.get_table("buildings")->array_entries<std::string>()) {
 			try {
 				DescriptionIndex index = tribes_.safe_building_index(buildingname);
@@ -159,12 +161,12 @@ TribeDescr::TribeDescr
 				buildings_.push_back(index);
 
 				// Register construction materials
-				for (WareAmount build_cost : get_building_descr(index)->buildcost()) {
+				for (const auto& build_cost : get_building_descr(index)->buildcost()) {
 					if (!is_construction_material(build_cost.first)) {
 						construction_materials_.insert(build_cost.first);
 					}
 				}
-				for (WareAmount enhancement_cost : get_building_descr(index)->enhancement_cost()) {
+				for (const auto& enhancement_cost : get_building_descr(index)->enhancement_cost()) {
 					if (!is_construction_material(enhancement_cost.first)) {
 						construction_materials_.insert(enhancement_cost.first);
 					}

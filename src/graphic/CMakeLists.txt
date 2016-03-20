@@ -45,6 +45,7 @@ wl_library(graphic_text_layout
     base_i18n
     graphic
     graphic_color
+    graphic_surface
     graphic_text
 )
 
@@ -87,6 +88,8 @@ wl_library(graphic_gl_utils
   SRCS
     gl/blit_data.h
     gl/coordinate_conversion.h
+    gl/initialize.cc
+    gl/initialize.h
     gl/system_headers.h
     gl/utils.cc
     gl/utils.h
@@ -97,6 +100,8 @@ wl_library(graphic_gl_utils
     base_geometry
     base_log
     base_macros
+    io_fileread
+    io_filesystem
 )
 
 wl_library(graphic_terrain_programs
@@ -204,6 +209,7 @@ wl_library(graphic_minimap_renderer
     base_macros
     economy
     graphic
+    graphic_image_io
     graphic_surface
     logic
     wui_mapview_pixelfunctions

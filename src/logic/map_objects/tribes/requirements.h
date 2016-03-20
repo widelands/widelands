@@ -60,7 +60,7 @@ private:
 
 	template<typename T>
 	struct Capsule : public BaseCapsule {
-		Capsule(const T & _m) : m(_m) {}
+		Capsule(const T & init_m) : m(init_m) {}
 
 		bool check(const MapObject & obj) const override {return m.check(obj);}
 
@@ -116,7 +116,7 @@ struct RequirementsStorage {
 		Requirements (*)
 			(FileRead &, EditorGameBase &, MapObjectLoader &);
 
-	RequirementsStorage(uint32_t _id, Reader reader);
+	RequirementsStorage(uint32_t id, Reader reader);
 	uint32_t id() const;
 
 	static Requirements read
@@ -125,8 +125,8 @@ struct RequirementsStorage {
 private:
 	using StorageMap = std::map<uint32_t, RequirementsStorage *>;
 
-	uint32_t m_id;
-	Reader m_reader;
+	uint32_t id_;
+	Reader reader_;
 
 	static StorageMap & storageMap();
 };
@@ -173,10 +173,10 @@ private:
  */
 struct RequireAttribute {
 	RequireAttribute
-		(TrainingAttribute const _at, int32_t const _min, int32_t const _max)
-		: at(_at), min(_min), max(_max) {}
+		(TrainingAttribute const init_at, int32_t const init_min, int32_t const init_max)
+		: at(init_at), min(init_min), max(init_max) {}
 
-	RequireAttribute() : at(atrTotal), min(SHRT_MIN), max(SHRT_MAX) {}
+	RequireAttribute() : at(TrainingAttribute::kTotal), min(SHRT_MIN), max(SHRT_MAX) {}
 	bool check(const MapObject &) const;
 	void write
 		(FileWrite &, EditorGameBase & egbase, MapObjectSaver &) const;

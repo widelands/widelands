@@ -85,18 +85,30 @@ macro(_common_compile_tasks)
   endif()
 
   # OpenGL and GLEW are one thing for us. If you use the one, you also use the
-  # other.
+  # other. We always add definitions, because add_definition() is not
+  # transitive and therefore some dependent targets do not set them properly.
+  # And a few -D do not hurt anything.
+  if(OPTION_USE_GLBINDING)
+    add_definitions("-DUSE_GLBINDING")
+  else()
+    add_definitions(${GLEW_EXTRA_DEFINITIONS})
+  endif()
   if(ARG_USES_OPENGL)
     if(OPTION_USE_GLBINDING)
-      wl_include_system_directories(${NAME} ${GLBINDING_INCLUDES})
-      target_link_libraries(${NAME} ${GLBINDING_LIBRARIES})
+      # Early versions of glbinding defined GLBINDING_INCLUDES, newer use
+      # cmake's module system.
+      if(DEFINED GLBINDING_INCLUDES)
+        wl_include_system_directories(${NAME} ${GLBINDING_INCLUDES})
+        target_link_libraries(${NAME} ${GLBINDING_LIBRARIES})
+      else()
+        target_link_libraries(${NAME} glbinding::glbinding)
+      endif()
+
       target_link_libraries(${NAME} ${OPENGL_gl_LIBRARY})
-      add_definitions("-DUSE_GLBINDING")
     else()
       wl_include_system_directories(${NAME} ${GLEW_INCLUDE_DIR})
       target_link_libraries(${NAME} ${GLEW_LIBRARY})
       target_link_libraries(${NAME} ${OPENGL_gl_LIBRARY})
-      add_definitions(${GLEW_EXTRA_DEFINITIONS})
     endif()
   endif()
 

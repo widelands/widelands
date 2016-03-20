@@ -81,11 +81,15 @@ void set_localedir(std::string dname) {
 	localedir = dname;
 }
 
+const std::string& get_localedir() {
+	return localedir;
+}
+
 /**
  * Grab a given TextDomain. If a new one is grabbed, it is pushed on the stack.
  * On release, it is dropped and the previous one is re-grabbed instead.
  *
- * So when a tribe loads, it grabs it's textdomain, loads all data and releases
+ * So when a tribe loads, it grabs its textdomain, loads all data and releases
  * it -> we're back in widelands domain. Negative: We can't translate error
  * messages. Who cares?
  */
@@ -111,8 +115,8 @@ void release_textdomain() {
 	}
 	textdomains.pop_back();
 
-	//don't try to get the previous TD when the very first one ('widelands')
-	//just got dropped
+	// Don't try to get the previous TD when the very first one ('widelands')
+	// just got dropped
 	if (!textdomains.empty()) {
 		char const * const domain = textdomains.back().first.c_str();
 
@@ -277,7 +281,7 @@ void set_locale(std::string name) {
 				leave_while = true;
 				break;
 			} else {
-				//log("locale is not working: %s\n", try_locale.c_str());
+				// log("locale is not working: %s\n", try_locale.c_str());
 			}
 		}
 		if (leave_while) break;

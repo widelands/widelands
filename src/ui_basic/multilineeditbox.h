@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006, 2008-2011 by Widelands Development Team
+ * Copyright (C) 2002-2016 by Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -38,13 +38,12 @@ struct TextStyle;
 struct MultilineEditbox : public Panel {
 	MultilineEditbox
 		(Panel *, int32_t x, int32_t y, uint32_t w, uint32_t h,
-		 const std::string & text, const Image* background = g_gr->images().get("pics/but2.png"));
+		 const std::string & text, const Image* background = g_gr->images().get("images/ui_basic/but2.png"));
 
 	boost::signals2::signal<void ()> changed;
 
 	const std::string & get_text() const;
 	void set_text(const std::string &);
-	void set_textstyle(const TextStyle &);
 
 	void set_maximum_bytes(uint32_t n);
 	uint32_t get_maximum_bytes() const;
@@ -61,7 +60,7 @@ private:
 	void scrollpos_changed(int32_t);
 
 	struct Data;
-	std::unique_ptr<Data> d;
+	std::unique_ptr<Data> d_;
 };
 
 }

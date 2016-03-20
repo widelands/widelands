@@ -72,13 +72,13 @@ void MapRoaddataPacket::read
 					Player & plr = egbase.player(player_index);
 
 					road.set_owner(&plr);
-					road.m_busyness             = fr.unsigned_32();
-					road.m_busyness_last_update = fr.unsigned_32();
-					road.m_type = fr.unsigned_32();
+					road.busyness_             = fr.unsigned_32();
+					road.busyness_last_update_ = fr.unsigned_32();
+					road.type_ = fr.unsigned_32();
 					{
 						uint32_t const flag_0_serial = fr.unsigned_32();
 						try {
-							road.m_flags[0] = &mol.get<Flag>(flag_0_serial);
+							road.flags_[0] = &mol.get<Flag>(flag_0_serial);
 						} catch (const WException & e) {
 							throw GameDataError
 								("flag 0 (%u): %s", flag_0_serial, e.what());
@@ -87,21 +87,21 @@ void MapRoaddataPacket::read
 					{
 						uint32_t const flag_1_serial = fr.unsigned_32();
 						try {
-							road.m_flags[1] = &mol.get<Flag>(flag_1_serial);
+							road.flags_[1] = &mol.get<Flag>(flag_1_serial);
 						} catch (const WException & e) {
 							throw GameDataError
 								("flag 1 (%u): %s", flag_1_serial, e.what());
 						}
 					}
-					road.m_flagidx[0] = fr.unsigned_32();
-					road.m_flagidx[1] = fr.unsigned_32();
+					road.flagidx_[0] = fr.unsigned_32();
+					road.flagidx_[1] = fr.unsigned_32();
 
-					road.m_cost[0] = fr.unsigned_32();
-					road.m_cost[1] = fr.unsigned_32();
+					road.cost_[0] = fr.unsigned_32();
+					road.cost_[1] = fr.unsigned_32();
 					Path::StepVector::size_type const nr_steps = fr.unsigned_16();
 					if (!nr_steps)
 						throw GameDataError("nr_steps = 0");
-					Path p(road.m_flags[0]->get_position());
+					Path p(road.flags_[0]->get_position());
 					for (Path::StepVector::size_type i = nr_steps; i; --i)
 						try {
 							p.append(egbase.map(), read_direction_8(&fr));
@@ -111,13 +111,13 @@ void MapRoaddataPacket::read
 								 static_cast<long unsigned int>(nr_steps - i),
 								 e.what());
 						}
-					road._set_path(egbase, p);
+					road.set_path(egbase, p);
 
 					//  Now that all rudimentary data is set, init this road. Then
 					//  overwrite the initialization values.
-					road._link_into_flags(game);
+					road.link_into_flags(game);
 
-					road.m_idle_index      = fr.unsigned_32();
+					road.idle_index_      = fr.unsigned_32();
 
 					uint32_t const count = fr.unsigned_32();
 					if (!count)
@@ -143,7 +143,7 @@ void MapRoaddataPacket::read
 							 	new Request
 							 		(road,
 							 		 0,
-							 		 Road::_request_carrier_callback,
+							 		 Road::request_carrier_callback,
 									 wwWORKER))
 							->read(fr, game, mol);
 						} else {
@@ -152,15 +152,15 @@ void MapRoaddataPacket::read
 						uint8_t const carrier_type = fr.unsigned_32();
 
 						if
-							(i < road.m_carrier_slots.size() &&
-							 road.m_carrier_slots[i].carrier_type == carrier_type)
+							(i < road.carrier_slots_.size() &&
+							 road.carrier_slots_[i].carrier_type == carrier_type)
 						{
-							assert(!road.m_carrier_slots[i].carrier.get(egbase));
+							assert(!road.carrier_slots_[i].carrier.get(egbase));
 
-							road.m_carrier_slots[i].carrier = carrier;
+							road.carrier_slots_[i].carrier = carrier;
 							if (carrier || carrier_request) {
-								delete road.m_carrier_slots[i].carrier_request;
-								road.m_carrier_slots[i].carrier_request =
+								delete road.carrier_slots_[i].carrier_request;
+								road.carrier_slots_[i].carrier_request =
 									carrier_request;
 							}
 						} else {
@@ -205,35 +205,35 @@ void MapRoaddataPacket::write
 				//  Theres only the owner
 				fw.unsigned_8(r->owner().player_number());
 
-				fw.unsigned_32(r->m_busyness);
-				fw.unsigned_32(r->m_busyness_last_update);
+				fw.unsigned_32(r->busyness_);
+				fw.unsigned_32(r->busyness_last_update_);
 
-				fw.unsigned_32(r->m_type);
+				fw.unsigned_32(r->type_);
 
 				//  serial of flags
-				assert(mos.is_object_known(*r->m_flags[0]));
-				assert(mos.is_object_known(*r->m_flags[1]));
-				fw.unsigned_32(mos.get_object_file_index(*r->m_flags[0]));
-				fw.unsigned_32(mos.get_object_file_index(*r->m_flags[1]));
+				assert(mos.is_object_known(*r->flags_[0]));
+				assert(mos.is_object_known(*r->flags_[1]));
+				fw.unsigned_32(mos.get_object_file_index(*r->flags_[0]));
+				fw.unsigned_32(mos.get_object_file_index(*r->flags_[1]));
 
-				fw.unsigned_32(r->m_flagidx[0]);
-				fw.unsigned_32(r->m_flagidx[1]);
+				fw.unsigned_32(r->flagidx_[0]);
+				fw.unsigned_32(r->flagidx_[1]);
 
-				fw.unsigned_32(r->m_cost[0]);
-				fw.unsigned_32(r->m_cost[1]);
+				fw.unsigned_32(r->cost_[0]);
+				fw.unsigned_32(r->cost_[1]);
 
-				const Path & path = r->m_path;
+				const Path & path = r->path_;
 				const Path::StepVector::size_type nr_steps = path.get_nsteps();
 				fw.unsigned_16(nr_steps);
 				for (Path::StepVector::size_type i = 0; i < nr_steps; ++i)
 					fw.unsigned_8(path[i]);
 
-				fw.unsigned_32(r->m_idle_index); //  TODO(unknown): do not save this
+				fw.unsigned_32(r->idle_index_); //  TODO(unknown): do not save this
 
 
-				fw.unsigned_32(r->m_carrier_slots.size());
+				fw.unsigned_32(r->carrier_slots_.size());
 
-				for (const Road::CarrierSlot& temp_slot : r->m_carrier_slots) {
+				for (const Road::CarrierSlot& temp_slot : r->carrier_slots_) {
 					if
 						(Carrier const * const carrier =
 						 temp_slot.carrier.get(egbase)) {

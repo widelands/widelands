@@ -41,9 +41,9 @@ struct WidelandsMapLoader : public MapLoader {
 	virtual ~WidelandsMapLoader();
 
 	int32_t preload_map(bool) override;
-	int32_t load_map_complete(EditorGameBase &, bool) override;
+	int32_t load_map_complete(EditorGameBase &, MapLoader::LoadType load_type) override;
 
-	MapObjectLoader * get_map_object_loader() {return m_mol.get();}
+	MapObjectLoader * get_map_object_loader() {return mol_.get();}
 
 	static bool is_widelands_map(const std::string & filename) {
 		return boost::iends_with(filename, WLMF_SUFFIX);
@@ -51,14 +51,14 @@ struct WidelandsMapLoader : public MapLoader {
 
 	// If this was made pre one-world, the name of the world.
 	const std::string& old_world_name() const {
-		return m_old_world_name;
+		return old_world_name_;
 	}
 
 private:
-	FileSystem* m_fs;  // not owned (owned by Map).
-	std::string m_filename;
-	std::unique_ptr<MapObjectLoader> m_mol;
-	std::string m_old_world_name;
+	FileSystem* fs_;  // not owned (owned by Map).
+	std::string filename_;
+	std::unique_ptr<MapObjectLoader> mol_;
+	std::string old_world_name_;
 };
 
 }

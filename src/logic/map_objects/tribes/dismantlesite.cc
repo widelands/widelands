@@ -30,6 +30,7 @@
 #include "graphic/animation.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
+#include "graphic/text_constants.h"
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
@@ -68,14 +69,14 @@ DismantleSite::DismantleSite
 :
 PartiallyFinishedBuilding(gdescr)
 {
-	m_position = c;
+	position_ = c;
 	set_owner(&plr);
 
 	assert(!former_buildings.empty());
 	for (DescriptionIndex former_idx : former_buildings) {
-		m_old_buildings.push_back(former_idx);
+		old_buildings_.push_back(former_idx);
 	}
-	const BuildingDescr* cur_descr = owner().tribe().get_building_descr(m_old_buildings.back());
+	const BuildingDescr* cur_descr = owner().tribe().get_building_descr(old_buildings_.back());
 	set_building(*cur_descr);
 
 	if (loading) {
@@ -93,7 +94,8 @@ Print completion percentage.
 void DismantleSite::update_statistics_string(std::string* s)
 {
 	unsigned int percent = (get_built_per64k() * 100) >> 16;
-	*s = (boost::format(_("%u%% dismantled")) % percent).str();
+	*s = (boost::format("<font color=%s>%s</font>") % UI_FONT_CLR_DARK.hex_value() %
+			(boost::format(_("%u%% dismantled")) % percent)).str();
 }
 
 /*
@@ -109,14 +111,14 @@ void DismantleSite::init(EditorGameBase & egbase)
 	count_returned_wares(this, wares);
 
 	std::map<DescriptionIndex, uint8_t>::const_iterator it = wares.begin();
-	m_wares.resize(wares.size());
+	wares_.resize(wares.size());
 
 	for (size_t i = 0; i < wares.size(); ++i, ++it) {
 		WaresQueue & wq =
-			*(m_wares[i] = new WaresQueue(*this, it->first, it->second));
+			*(wares_[i] = new WaresQueue(*this, it->first, it->second));
 
 		wq.set_filled(it->second);
-		m_work_steps += it->second;
+		work_steps_ += it->second;
 	}
 }
 
@@ -154,7 +156,7 @@ Construction sites only burn if some of the work has been completed.
 */
 bool DismantleSite::burn_on_destroy()
 {
-	if (m_work_completed >= m_work_steps)
+	if (work_completed_ >= work_steps_)
 		return false; // completed, so don't burn
 
 	return true;
@@ -166,7 +168,7 @@ Called by our builder to get instructions.
 ===============
 */
 bool DismantleSite::get_building_work(Game & game, Worker & worker, bool) {
-	if (&worker != m_builder.get(game)) {
+	if (&worker != builder_.get(game)) {
 		// Not our construction worker; e.g. a miner leaving a mine
 		// that is supposed to be enhanced. Make him return to a warehouse
 		worker.pop_task(game);
@@ -174,15 +176,15 @@ bool DismantleSite::get_building_work(Game & game, Worker & worker, bool) {
 		return true;
 	}
 
-	if (!m_work_steps) //  Happens for building without buildcost.
+	if (!work_steps_) //  Happens for building without buildcost.
 		schedule_destroy(game); //  Complete the building immediately.
 
 	// Check if one step has completed
-	if (static_cast<int32_t>(game.get_gametime() - m_work_steptime) >= 0 && m_working) {
-		++m_work_completed;
+	if (static_cast<int32_t>(game.get_gametime() - work_steptime_) >= 0 && working_) {
+		++work_completed_;
 
-		for (uint32_t i = 0; i < m_wares.size(); ++i) {
-			WaresQueue & wq = *m_wares[i];
+		for (uint32_t i = 0; i < wares_.size(); ++i) {
+			WaresQueue & wq = *wares_[i];
 
 			if (!wq.get_filled())
 				continue;
@@ -190,7 +192,7 @@ bool DismantleSite::get_building_work(Game & game, Worker & worker, bool) {
 			wq.set_filled(wq.get_filled() - 1);
 			wq.set_max_size(wq.get_max_size() - 1);
 
-			//update statistics
+			// Update statistics
 			owner().ware_produced(wq.get_ware());
 
 			const WareDescr & wd = *owner().tribe().get_ware_descr(wq.get_ware());
@@ -198,12 +200,12 @@ bool DismantleSite::get_building_work(Game & game, Worker & worker, bool) {
 			ware.init(game);
 			worker.start_task_dropoff(game, ware);
 
-			m_working = false;
+			working_ = false;
 			return true;
 		}
 	}
 
-	if (m_work_completed >= m_work_steps) {
+	if (work_completed_ >= work_steps_) {
 		schedule_destroy(game);
 
 		worker.pop_task(game);
@@ -214,12 +216,12 @@ bool DismantleSite::get_building_work(Game & game, Worker & worker, bool) {
 				 worker.descr().get_right_walk_anims(false),
 				 true);
 		worker.set_location(nullptr);
-	} else if (!m_working) {
-		m_work_steptime = game.get_gametime() + DISMANTLESITE_STEP_TIME;
+	} else if (!working_) {
+		work_steptime_ = game.get_gametime() + DISMANTLESITE_STEP_TIME;
 		worker.start_task_idle
 			(game, worker.descr().get_animation("work"), DISMANTLESITE_STEP_TIME);
 
-		m_working = true;
+		working_ = true;
 	}
 	return true;
 }
@@ -233,27 +235,29 @@ void DismantleSite::draw
 	(const EditorGameBase& game, RenderTarget& dst, const FCoords& coords, const Point& pos)
 {
 	const uint32_t gametime = game.get_gametime();
-	uint32_t tanim = gametime - m_animstart;
+	uint32_t tanim = gametime - animstart_;
 
-	if (coords != m_position)
+	if (coords != position_)
 		return; // draw big buildings only once
 
+	const RGBColor& player_color = get_owner()->get_playercolor();
+
 	// Draw the construction site marker
-	dst.drawanim(pos, m_anim, tanim, get_owner());
+	dst.blit_animation(pos, anim_, tanim, player_color);
 
 	// Draw the partially dismantled building
 	static_assert(0 <= DISMANTLESITE_STEP_TIME, "assert(0 <= DISMANTLESITE_STEP_TIME) failed.");
-	uint32_t total_time = DISMANTLESITE_STEP_TIME * m_work_steps;
-	uint32_t completed_time = DISMANTLESITE_STEP_TIME * m_work_completed;
+	uint32_t total_time = DISMANTLESITE_STEP_TIME * work_steps_;
+	uint32_t completed_time = DISMANTLESITE_STEP_TIME * work_completed_;
 
-	if (m_working)
-		completed_time += DISMANTLESITE_STEP_TIME + gametime - m_work_steptime;
+	if (working_)
+		completed_time += DISMANTLESITE_STEP_TIME + gametime - work_steptime_;
 
 	uint32_t anim_idx;
 	try {
-		anim_idx = m_building->get_animation("unoccupied");
+		anim_idx = building_->get_animation("unoccupied");
 	} catch (MapObjectDescr::AnimationNonexistent &) {
-		anim_idx = m_building->get_animation("idle");
+		anim_idx = building_->get_animation("idle");
 	}
 	const Animation& anim = g_gr->animations().get_animation(anim_idx);
 	const uint16_t w = anim.width();
@@ -261,7 +265,7 @@ void DismantleSite::draw
 
 	uint32_t lines = h * completed_time / total_time;
 
-	dst.drawanimrect(pos, anim_idx, tanim, get_owner(), Rect(Point(0, lines), w, h - lines));
+	dst.blit_animation(pos, anim_idx, tanim, player_color, Rect(Point(0, lines), w, h - lines));
 
 	// Draw help strings
 	draw_help(game, dst, coords, pos);

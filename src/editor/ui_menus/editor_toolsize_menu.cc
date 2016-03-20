@@ -41,28 +41,28 @@ EditorToolsizeMenu::EditorToolsizeMenu
 	:
 	UI::UniqueWindow
 		(&parent, "toolsize_menu", &registry, 250, 50, _("Tool Size")),
-	m_textarea(this, 5, 10, 240, 10, std::string(), UI::Align_BottomCenter),
-	m_increase
+	textarea_(this, 5, 10, 240, 10, std::string(), UI::Align::kBottomCenter),
+	increase_
 		(this, "incr",
 		 get_inner_w() / 2 - 10, 25, 20, 20,
-		 g_gr->images().get("pics/but0.png"),
-		 g_gr->images().get("pics/scrollbar_up.png"),
+		 g_gr->images().get("images/ui_basic/but0.png"),
+		 g_gr->images().get("images/ui_basic/scrollbar_up.png"),
 		 std::string(),
 		 parent.get_sel_radius() < MAX_TOOL_AREA),
-	m_decrease
+	decrease_
 		(this, "decr",
 		 get_inner_w() / 2 + 10, 25, 20, 20,
-		 g_gr->images().get("pics/but0.png"),
-		 g_gr->images().get("pics/scrollbar_down.png"),
+		 g_gr->images().get("images/ui_basic/but0.png"),
+		 g_gr->images().get("images/ui_basic/scrollbar_down.png"),
 		 std::string(),
 		 0 < parent.get_sel_radius()),
 	value_(0)
 {
-	m_increase.sigclicked.connect(boost::bind(&EditorToolsizeMenu::increase_radius, boost::ref(*this)));
-	m_decrease.sigclicked.connect(boost::bind(&EditorToolsizeMenu::decrease_radius, boost::ref(*this)));
+	increase_.sigclicked.connect(boost::bind(&EditorToolsizeMenu::increase_radius, boost::ref(*this)));
+	decrease_.sigclicked.connect(boost::bind(&EditorToolsizeMenu::decrease_radius, boost::ref(*this)));
 
-	m_increase.set_repeating(true);
-	m_decrease.set_repeating(true);
+	increase_.set_repeating(true);
+	decrease_.set_repeating(true);
 	update(parent.get_sel_radius());
 
 	if (eia().tools()->current().has_size_one()) {
@@ -78,12 +78,12 @@ void EditorToolsizeMenu::update(uint32_t const val) {
 	value_ = val;
 	eia().set_sel_radius(val);
 	set_buttons_enabled(true);
-	m_textarea.set_text((boost::format(_("Current Size: %u")) % (val + 1)).str());
+	textarea_.set_text((boost::format(_("Current Size: %u")) % (val + 1)).str());
 }
 
 void EditorToolsizeMenu::set_buttons_enabled(bool enable) {
-	m_decrease.set_enabled(enable && 0 < value_);
-	m_increase.set_enabled(enable && value_ < MAX_TOOL_AREA);
+	decrease_.set_enabled(enable && 0 < value_);
+	increase_.set_enabled(enable && value_ < MAX_TOOL_AREA);
 }
 
 

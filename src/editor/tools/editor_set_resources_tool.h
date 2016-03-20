@@ -27,7 +27,7 @@
 ///  Decreases the resources of a node by a value.
 struct EditorSetResourcesTool : public EditorTool {
 	EditorSetResourcesTool()
-		: EditorTool(*this, *this), m_cur_res(0), m_set_to(0)
+		: EditorTool(*this, *this), cur_res_(0), set_to_(0)
 	{}
 
 	/**
@@ -48,18 +48,18 @@ struct EditorSetResourcesTool : public EditorTool {
 	EditorActionArgs format_args_impl(EditorInteractive & parent) override;
 
 	char const * get_sel_impl() const override {
-		return "pics/fsel_editor_set_resources.png";
+		return "images/wui/editor/fsel_editor_set_resources.png";
 	}
 
-	uint8_t get_set_to() const       {return m_set_to;}
-	void set_set_to(uint8_t const n) {m_set_to = n;}
-	Widelands::DescriptionIndex get_cur_res() const {return m_cur_res;}
+	uint8_t get_set_to() const       {return set_to_;}
+	void set_set_to(uint8_t const n) {set_to_ = n;}
+	Widelands::DescriptionIndex get_cur_res() const {return cur_res_;}
 	void set_cur_res(Widelands::DescriptionIndex const res)
-	{m_cur_res = res;}
+	{cur_res_ = res;}
 
 private:
-	Widelands::DescriptionIndex m_cur_res;
-	uint8_t m_set_to;
+	Widelands::DescriptionIndex cur_res_;
+	uint8_t set_to_;
 };
 
 

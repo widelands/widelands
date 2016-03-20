@@ -43,13 +43,15 @@ namespace  {
 
 // Setup the static objects Widelands needs to operate and initializes systems.
 void initialize() {
-	SDL_Init(SDL_INIT_VIDEO);
+	if (SDL_Init(SDL_INIT_VIDEO) != 0) {
+		throw wexception("Unable to initialize SDL: %s", SDL_GetError());
+	}
 
 	g_fs = new LayeredFileSystem();
 	g_fs->add_file_system(&FileSystem::create(INSTALL_DATADIR));
 
 	g_gr = new Graphic();
-	g_gr->initialize(1, 1, false);
+	g_gr->initialize(Graphic::TraceGl::kNo, 1, 1, false);
 }
 
 }  // namespace
@@ -85,7 +87,7 @@ int main(int argc, char ** argv)
 		}
 
 		ml->preload_map(true);
-		ml->load_map_complete(egbase, true);
+		ml->load_map_complete(egbase, Widelands::MapLoader::LoadType::kScenario);
 
 		std::unique_ptr<Texture> minimap(
 		   draw_minimap(egbase, nullptr, Point(0, 0), MiniMapLayer::Terrain));
@@ -123,6 +125,8 @@ int main(int argc, char ** argv)
 			write_key_value_string("author", map->get_author());
 			write_string(",\n  ");
 			write_key_value_string("description", map->get_description());
+			write_string(",\n  ");
+			write_key_value_string("hint", map->get_hint());
 			write_string(",\n  ");
 			write_key_value_int("width", map->get_width());
 			write_string(",\n  ");

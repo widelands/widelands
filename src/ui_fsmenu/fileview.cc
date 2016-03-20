@@ -54,9 +54,9 @@ bool read_text(const std::string& filename, std::string* title, std::string* con
 FullscreenMenuTextView::FullscreenMenuTextView
 	()
 	:
-	FullscreenMenuBase("fileviewmenu.jpg"),
+	FullscreenMenuBase("images/ui_fsmenu/fileviewmenu.jpg"),
 
-	title (this, get_w() * 3 / 50, get_h() / 10, "", UI::Align_Center),
+	title (this, get_w() * 3 / 50, get_h() / 10, "", UI::Align::kCenter),
 
 	textview
 		(this,
@@ -66,7 +66,7 @@ FullscreenMenuTextView::FullscreenMenuTextView
 	close_button
 		(this, "close",
 		 get_w() * 3 / 8, get_h() * 9 / 10, get_w() / 4, get_h() * 9 / 200,
-		 g_gr->images().get("pics/but0.png"),
+		 g_gr->images().get("images/ui_basic/but0.png"),
 		 _("Close"), std::string(), true, false)
 {
 	close_button.sigclicked.connect(
@@ -74,11 +74,9 @@ FullscreenMenuTextView::FullscreenMenuTextView
 								boost::ref(*this),
 								FullscreenMenuBase::MenuTarget::kBack));
 
-	title.set_font(ui_fn(), fs_big(), UI_FONT_CLR_FG);
+	title.set_fontsize(fs_big());
 	title.set_pos
 		(Point((get_inner_w() - title.get_w()) / 2, get_h() * 167 / 1000));
-
-	textview.set_font(UI::g_fh1->fontset().serif(), UI_FONT_SIZE_PROSA, PROSA_FONT_CLR_FG);
 }
 
 void FullscreenMenuTextView::set_text(const std::string & text)
@@ -117,8 +115,6 @@ TextViewWindow::TextViewWindow
 	UI::UniqueWindow(&parent, "file_view", &reg, 0, 0, ""),
 	textview(this, 0, 0, 560, 240)
 {
-	textview.set_font(UI::g_fh1->fontset().serif(), UI_FONT_SIZE_PROSA, PROSA_FONT_CLR_FG);
-
 	set_inner_size(560, 240);
 
 	if (get_usedefaultpos())

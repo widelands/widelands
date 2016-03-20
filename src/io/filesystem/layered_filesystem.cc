@@ -29,7 +29,7 @@
 
 LayeredFileSystem * g_fs;
 
-LayeredFileSystem::LayeredFileSystem(): m_home(nullptr) {}
+LayeredFileSystem::LayeredFileSystem(): home_(nullptr) {}
 
 /**
  * Free all sub-filesystems
@@ -47,12 +47,12 @@ bool LayeredFileSystem::is_writable() const {
 }
 
 void LayeredFileSystem::add_file_system(FileSystem* fs) {
-	m_filesystems.emplace_back(fs);
+	filesystems_.emplace_back(fs);
 }
 
 void LayeredFileSystem::set_home_file_system(FileSystem * fs)
 {
-	m_home.reset(fs);
+	home_.reset(fs);
 }
 
 /**
@@ -61,11 +61,11 @@ void LayeredFileSystem::set_home_file_system(FileSystem * fs)
  */
 void LayeredFileSystem::remove_file_system(const FileSystem & fs)
 {
-	if (m_filesystems.back().get() != &fs)
+	if (filesystems_.back().get() != &fs)
 		throw std::logic_error
 			("LayeredFileSystem::remove_file_system: interspersed add/remove "
 			 "detected!");
-	m_filesystems.pop_back();
+	filesystems_.pop_back();
 }
 
 /**
@@ -79,9 +79,9 @@ void LayeredFileSystem::remove_file_system(const FileSystem & fs)
 std::set<std::string> LayeredFileSystem::list_directory(const std::string& path) {
 	std::set<std::string> results;
 	FilenameSet files;
-	//check home system first
-	if (m_home) {
-		files = m_home->list_directory(path);
+	// Check home system first
+	if (home_) {
+		files = home_->list_directory(path);
 		for
 			(FilenameSet::iterator fnit = files.begin();
 			 fnit != files.end();
@@ -89,7 +89,7 @@ std::set<std::string> LayeredFileSystem::list_directory(const std::string& path)
 				results.insert(*fnit);
 	}
 
-	for (auto it = m_filesystems.rbegin(); it != m_filesystems.rend(); ++it) {
+	for (auto it = filesystems_.rbegin(); it != filesystems_.rend(); ++it) {
 		files = (*it)->list_directory(path);
 
 		for (FilenameSet::iterator fnit = files.begin(); fnit != files.end(); ++fnit)
@@ -102,9 +102,9 @@ std::set<std::string> LayeredFileSystem::list_directory(const std::string& path)
  * Returns true if the file can be found in at least one of the sub-filesystems
  */
 bool LayeredFileSystem::file_exists(const std::string & path) {
-	if (m_home && m_home->file_exists(path))
+	if (home_ && home_->file_exists(path))
 		return true;
-	for (auto it = m_filesystems.rbegin(); it != m_filesystems.rend(); ++it)
+	for (auto it = filesystems_.rbegin(); it != filesystems_.rend(); ++it)
 		if ((*it)->file_exists(path))
 			return true;
 
@@ -116,10 +116,10 @@ bool LayeredFileSystem::file_exists(const std::string & path) {
  */
 // TODO(unknown): What if it's a file in some and a dir in others?????
 bool LayeredFileSystem::is_directory(const std::string & path) {
-	if (m_home && m_home->is_directory(path))
+	if (home_ && home_->is_directory(path))
 		return true;
 
-	for (auto it = m_filesystems.rbegin(); it != m_filesystems.rend(); ++it)
+	for (auto it = filesystems_.rbegin(); it != filesystems_.rend(); ++it)
 		if ((*it)->is_directory(path))
 			return true;
 
@@ -135,14 +135,14 @@ bool LayeredFileSystem::is_directory(const std::string & path) {
  * Let's just avoid any possible hassles with that.
  */
 void * LayeredFileSystem::load(const std::string & fname, size_t & length) {
-	if (m_home && m_home->file_exists(fname))
-		return m_home->load(fname, length);
+	if (home_ && home_->file_exists(fname))
+		return home_->load(fname, length);
 
-	for (auto it = m_filesystems.rbegin(); it != m_filesystems.rend(); ++it)
+	for (auto it = filesystems_.rbegin(); it != filesystems_.rend(); ++it)
 		if ((*it)->file_exists(fname))
 			return (*it)->load(fname, length);
 
-	throw FileNotFoundError("Could not find file", fname);
+	throw FileNotFoundError("LayeredFileSystem: Could not load file", paths_error_message(fname));
 }
 
 /**
@@ -152,14 +152,15 @@ void * LayeredFileSystem::load(const std::string & fname, size_t & length) {
 void LayeredFileSystem::write
 	(const std::string & fname, void const * const data, int32_t const length)
 {
-	if (m_home && m_home->is_writable())
-		return m_home->write(fname, data, length);
+	if (home_ && home_->is_writable())
+		return home_->write(fname, data, length);
 
-	for (auto it = m_filesystems.rbegin(); it != m_filesystems.rend(); ++it)
+	for (auto it = filesystems_.rbegin(); it != filesystems_.rend(); ++it)
 		if ((*it)->is_writable())
 			return (*it)->write(fname, data, length);
 
-	throw wexception("LayeredFileSystem: No writable filesystem!");
+	throw wexception("LayeredFileSystem: No writable filesystem for file: %s",
+						  paths_error_message(fname).c_str());
 }
 
 /**
@@ -167,56 +168,57 @@ void LayeredFileSystem::write
  * it exists.
  */
 StreamRead  * LayeredFileSystem::open_stream_read (const std::string & fname) {
-	if (m_home && m_home->file_exists(fname))
-		return m_home->open_stream_read(fname);
+	if (home_ && home_->file_exists(fname))
+		return home_->open_stream_read(fname);
 
-	for (auto it = m_filesystems.rbegin(); it != m_filesystems.rend(); ++it)
+	for (auto it = filesystems_.rbegin(); it != filesystems_.rend(); ++it)
 		if ((*it)->file_exists(fname))
 			return (*it)->open_stream_read(fname);
 
-	throw FileNotFoundError("Could not find file", fname);
+	throw FileNotFoundError("LayeredFileSystem: Could not open file for stream read",
+									paths_error_message(fname));
 }
 
 /**
  * Analogously to Write, create the file in the first writable sub-FS.
  */
 StreamWrite * LayeredFileSystem::open_stream_write(const std::string & fname) {
-	if (m_home && m_home->is_writable())
-		return m_home->open_stream_write(fname);
+	if (home_ && home_->is_writable())
+		return home_->open_stream_write(fname);
 
-	for (auto it = m_filesystems.rbegin(); it != m_filesystems.rend(); ++it)
+	for (auto it = filesystems_.rbegin(); it != filesystems_.rend(); ++it)
 		if ((*it)->is_writable())
 			return (*it)->open_stream_write(fname);
 
-	throw wexception("LayeredFileSystem: No writable filesystem!");
+	throw wexception("LayeredFileSystem: No writable filesystem for %s!", fname.c_str());
 }
 
 /**
  * MakeDir in first writable directory
  */
 void LayeredFileSystem::make_directory(const std::string & dirname) {
-	if (m_home && m_home->is_writable())
-		return m_home->make_directory(dirname);
+	if (home_ && home_->is_writable())
+		return home_->make_directory(dirname);
 
-	for (auto it = m_filesystems.rbegin(); it != m_filesystems.rend(); ++it)
+	for (auto it = filesystems_.rbegin(); it != filesystems_.rend(); ++it)
 		if ((*it)->is_writable())
 			return (*it)->make_directory(dirname);
 
-	throw wexception("LayeredFileSystem: No writable filesystem!");
+	throw wexception("LayeredFileSystem: No writable filesystem for dir: %s!", dirname.c_str());
 }
 
 /**
  * ensure_directory_exists in first writable directory
  */
 void LayeredFileSystem::ensure_directory_exists(const std::string & dirname) {
-	if (m_home && m_home->is_writable())
-		return m_home->ensure_directory_exists(dirname);
+	if (home_ && home_->is_writable())
+		return home_->ensure_directory_exists(dirname);
 
-	for (auto it = m_filesystems.rbegin(); it != m_filesystems.rend(); ++it)
+	for (auto it = filesystems_.rbegin(); it != filesystems_.rend(); ++it)
 		if ((*it)->is_writable())
 			return (*it)->ensure_directory_exists(dirname);
 
-	throw wexception("LayeredFileSystem: No writable filesystem!");
+	throw wexception("LayeredFileSystem: No writable filesystem for dir: %s!", dirname.c_str());
 }
 
 /**
@@ -224,14 +226,15 @@ void LayeredFileSystem::ensure_directory_exists(const std::string & dirname) {
  */
 FileSystem * LayeredFileSystem::make_sub_file_system(const std::string & dirname)
 {
-	if (m_home && m_home->is_writable() && m_home->file_exists(dirname))
-		return m_home->make_sub_file_system(dirname);
+	if (home_ && home_->is_writable() && home_->file_exists(dirname))
+		return home_->make_sub_file_system(dirname);
 
-	for (auto it = m_filesystems.rbegin(); it != m_filesystems.rend(); ++it)
+	for (auto it = filesystems_.rbegin(); it != filesystems_.rend(); ++it)
 		if ((*it)->is_writable() && (*it)->file_exists(dirname))
 			return (*it)->make_sub_file_system(dirname);
 
-	throw wexception("LayeredFileSystem: unable to create sub filesystem");
+	throw wexception("LayeredFileSystem: unable to create sub filesystem for existing directory: %s",
+						  paths_error_message(dirname).c_str());
 }
 
 /**
@@ -239,14 +242,15 @@ FileSystem * LayeredFileSystem::make_sub_file_system(const std::string & dirname
  */
 FileSystem * LayeredFileSystem::create_sub_file_system(const std::string & dirname, Type const type)
 {
-	if (m_home && m_home->is_writable() && !m_home->file_exists(dirname))
-		return m_home->create_sub_file_system(dirname, type);
+	if (home_ && home_->is_writable() && !home_->file_exists(dirname))
+		return home_->create_sub_file_system(dirname, type);
 
-	for (auto it = m_filesystems.rbegin(); it != m_filesystems.rend(); ++it)
+	for (auto it = filesystems_.rbegin(); it != filesystems_.rend(); ++it)
 		if ((*it)->is_writable() && !(*it)->file_exists(dirname))
 			return (*it)->create_sub_file_system(dirname, type);
 
-	throw wexception("LayeredFileSystem: unable to create sub filesystem");
+	throw wexception("LayeredFileSystem: unable to create sub filesystem for new directory: %s",
+						  paths_error_message(dirname).c_str());
 }
 
 /**
@@ -256,12 +260,12 @@ void LayeredFileSystem::fs_unlink(const std::string & file) {
 	if (!file_exists(file))
 		return;
 
-	if (m_home && m_home->is_writable() && m_home->file_exists(file)) {
-		m_home->fs_unlink(file);
+	if (home_ && home_->is_writable() && home_->file_exists(file)) {
+		home_->fs_unlink(file);
 		return;
 	}
 
-	for (auto it = m_filesystems.rbegin(); it != m_filesystems.rend(); ++it)
+	for (auto it = filesystems_.rbegin(); it != filesystems_.rend(); ++it)
 		if ((*it)->is_writable() && (*it)->file_exists(file)) {
 			(*it)->fs_unlink(file);
 			return;
@@ -273,11 +277,11 @@ void LayeredFileSystem::fs_rename
 {
 	if (!file_exists(old_name))
 		return;
-	if (m_home && m_home->is_writable() && m_home->file_exists(old_name)) {
-		m_home->fs_rename(old_name, new_name);
+	if (home_ && home_->is_writable() && home_->file_exists(old_name)) {
+		home_->fs_rename(old_name, new_name);
 		return;
 	}
-	for (auto it = m_filesystems.rbegin(); it != m_filesystems.rend(); ++it)
+	for (auto it = filesystems_.rbegin(); it != filesystems_.rend(); ++it)
 		if ((*it)->is_writable() && (*it)->file_exists(old_name)) {
 			(*it)->fs_rename(old_name, new_name);
 			return;
@@ -289,11 +293,25 @@ void LayeredFileSystem::fs_rename
 // This heuristic is justified by the fact that ths is
 // where we will create new files.
 unsigned long long LayeredFileSystem::disk_space() {
-	if (m_home) {
-		return m_home->disk_space();
+	if (home_) {
+		return home_->disk_space();
 	}
-	for (auto it = m_filesystems.rbegin(); it != m_filesystems.rend(); ++it)
+	for (auto it = filesystems_.rbegin(); it != filesystems_.rend(); ++it)
 		if (*it)
 			return (*it)->disk_space();
 	return 0;
+}
+
+std::string LayeredFileSystem::paths_error_message(const std::string& filename) const {
+
+	std::string message = filename + "\nI have tried the following path(s):";
+
+	if (home_) {
+		message += "\n    " + home_->get_basename() + FileSystem::file_separator() + filename;
+	}
+
+	for (auto it = filesystems_.rbegin(); it != filesystems_.rend(); ++it) {
+		message += "\n    " + (*it)->get_basename() + FileSystem::file_separator() + filename;
+	}
+	return message;
 }

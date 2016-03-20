@@ -32,7 +32,6 @@ namespace UI {
 
 struct SpinBoxImpl;
 struct IntValueTextReplacement;
-struct TextStyle;
 
 /// A spinbox is an UI element for setting the integer value of a variable.
 /// w is the overall width of the SpinBox and must be wide enough to fit 2 labels and the buttons.
@@ -52,7 +51,7 @@ public:
 		 int32_t startval, int32_t minval, int32_t maxval,
 		 const std::string& label_text = std::string(),
 		 const std::string& unit = std::string(),
-		 const Image* buttonbackground = g_gr->images().get("pics/but3.png"),
+		 const Image* buttonbackground = g_gr->images().get("images/ui_basic/but3.png"),
 		 SpinBox::Type = SpinBox::Type::kSmall,
 		  // The amount by which units are increased/decreased for small and big steps when a button is pressed.
 		 int32_t step_size = 1, int32_t big_step_size = 10);

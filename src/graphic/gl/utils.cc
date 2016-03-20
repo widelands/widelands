@@ -18,15 +18,30 @@
 
 #include "graphic/gl/utils.h"
 
+#include <cassert>
 #include <memory>
 #include <string>
 
 #include "base/log.h"
 #include "base/wexception.h"
+#include "io/fileread.h"
+#include "io/filesystem/layered_filesystem.h"
 
 namespace Gl {
 
 namespace {
+
+constexpr GLenum NONE = static_cast<GLenum>(0);
+
+// Reads 'filename' from g_fs into a string.
+std::string read_file(const std::string& filename) {
+	std::string content;
+	FileRead fr;
+	fr.open(*g_fs, filename);
+	content.assign(fr.data(0), fr.get_size());
+	fr.close();
+	return content;
+}
 
 // Returns a readable string for a GL_*_SHADER 'type' for debug output.
 std::string shader_to_string(GLenum type) {
@@ -41,41 +56,24 @@ std::string shader_to_string(GLenum type) {
 
 }  // namespace
 
-GLenum _handle_glerror(const char * file, unsigned int line)
-{
-	GLenum err = glGetError();
-	if (err == GL_NO_ERROR)
-		return err;
-
-	log("%s:%d: OpenGL ERROR: ", file, line);
-
-	switch (err)
-	{
-	case GL_INVALID_VALUE:
-		log("invalid value\n");
-		break;
-	case GL_INVALID_ENUM:
-		log("invalid enum\n");
-		break;
-	case GL_INVALID_OPERATION:
-		log("invalid operation\n");
-		break;
-	case GL_STACK_OVERFLOW:
-		log("stack overflow\n");
-		break;
-	case GL_STACK_UNDERFLOW:
-		log("stack undeflow\n");
-		break;
-	case GL_OUT_OF_MEMORY:
-		log("out of memory\n");
-		break;
-	case GL_TABLE_TOO_LARGE:
-		log("table too large\n");
-		break;
+const char* gl_error_to_string(const GLenum err) {
+	CLANG_DIAG_OFF("-Wswitch-enum");
+#define LOG(a) case a: return #a
+	switch (err) {
+		LOG(GL_INVALID_ENUM);
+		LOG(GL_INVALID_OPERATION);
+		LOG(GL_INVALID_VALUE);
+		LOG(GL_NO_ERROR);
+		LOG(GL_OUT_OF_MEMORY);
+		LOG(GL_STACK_OVERFLOW);
+		LOG(GL_STACK_UNDERFLOW);
+		LOG(GL_TABLE_TOO_LARGE);
 	default:
-		log("unknown\n");
+		break;
 	}
-	return err;
+#undef LOG
+	CLANG_DIAG_ON("-Wswitch-enum");
+	return "unknown";
 }
 
 // Thin wrapper around a Shader object to ensure proper cleanup.
@@ -140,13 +138,16 @@ Program::~Program() {
 	}
 }
 
-void Program::build(const char* vertex_shader_source, const char* fragment_shader_source) {
+void Program::build(const std::string& program_name) {
+	std::string fragment_shader_source = read_file("shaders/" + program_name + ".fp");
+	std::string vertex_shader_source = read_file("shaders/" + program_name + ".vp");
+
 	vertex_shader_.reset(new Shader(GL_VERTEX_SHADER));
-	vertex_shader_->compile(vertex_shader_source);
+	vertex_shader_->compile(vertex_shader_source.c_str());
 	glAttachShader(program_object_, vertex_shader_->object());
 
 	fragment_shader_.reset(new Shader(GL_FRAGMENT_SHADER));
-	fragment_shader_->compile(fragment_shader_source);
+	fragment_shader_->compile(fragment_shader_source.c_str());
 	glAttachShader(program_object_, fragment_shader_->object());
 
 	glLinkProgram(program_object_);
@@ -167,7 +168,7 @@ void Program::build(const char* vertex_shader_source, const char* fragment_shade
 }
 
 State::State()
-   : last_active_texture_(0), current_framebuffer_(0), current_framebuffer_texture_(0) {
+   : last_active_texture_(NONE), current_framebuffer_(0), current_framebuffer_texture_(0) {
 }
 
 void State::bind(const GLenum target, const GLuint texture) {
@@ -189,7 +190,7 @@ void State::do_bind(const GLenum target, const GLuint texture) {
 	glBindTexture(GL_TEXTURE_2D, texture);
 
 	target_to_texture_[target] = texture;
-	texture_to_target_[currently_bound_texture] = 0;
+	texture_to_target_[currently_bound_texture] = NONE;
 	texture_to_target_[texture] = target;
 }
 
@@ -212,6 +213,7 @@ void State::bind_framebuffer(const GLuint framebuffer, const GLuint texture) {
 	if (framebuffer != 0) {
 		unbind_texture_if_bound(texture);
 		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, texture, 0);
+		assert(glCheckFramebufferStatus(GL_FRAMEBUFFER) == GL_FRAMEBUFFER_COMPLETE);
 	}
 	current_framebuffer_ = framebuffer;
 	current_framebuffer_texture_ = texture;

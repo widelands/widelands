@@ -123,8 +123,7 @@ struct MapGenInfo {
 	MapGenInfo(const LuaTable& table, const World& world);
 
 	size_t get_num_areas(MapGenAreaInfo::MapGenAreaType areaType) const;
-	const MapGenAreaInfo & get_area
-		(MapGenAreaInfo::MapGenAreaType const areaType, uint32_t const index)
+	const MapGenAreaInfo& get_area(MapGenAreaInfo::MapGenAreaType areaType, uint32_t index)
 		const;
 	const MapGenBobCategory * get_bob_category(const std::string & bobCategory) const;
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003, 2006-2008, 2010-2011 by the Widelands Development Team
+ * Copyright (C) 2003-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,15 +22,23 @@
 #include <limits>
 
 #include <SDL_keycode.h>
+#include <boost/format.hpp>
 
-#include "graphic/font_handler.h"
 #include "graphic/font_handler1.h"
 #include "graphic/rendertarget.h"
+#include "graphic/text/bidi.h"
 #include "graphic/text/font_set.h"
 #include "graphic/text_constants.h"
 #include "ui_basic/mouse_constants.h"
 
 // TODO(GunChleoc): Arabic: Fix positioning for Arabic
+
+namespace {
+
+constexpr int kMargin = 4;
+
+} // namespace
+
 
 namespace UI {
 
@@ -40,8 +48,7 @@ struct EditBoxImpl {
 	 */
 	/*@{*/
 	std::string fontname;
-	uint32_t fontsize;
-	RGBColor fontcolor;
+	uint32_t    fontsize;
 	/*@}*/
 
 	/// Background tile style.
@@ -65,27 +72,28 @@ struct EditBoxImpl {
 
 EditBox::EditBox
 	(Panel * const parent,
-	 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
+	 const int32_t x, const int32_t y, const uint32_t w,
 	 const Image* background,
-	 Align _align)
+	 int font_size)
 	:
-	Panel(parent, x, y, w, h),
-	m(new EditBoxImpl),
-	m_history_active(false),
-	m_history_position(-1)
+	Panel(parent, x, y, w, UI::g_fh1->render(as_uifont(UI::g_fh1->fontset()->representative_character()),
+														  font_size)->height() + 2),
+	m_(new EditBoxImpl),
+	history_active_(false),
+	history_position_(-1)
 {
 	set_thinks(false);
 
-	m->background = background;
-	m->fontname = UI::g_fh1->fontset().serif();
-	m->fontsize = UI_FONT_SIZE_SMALL;
-	m->fontcolor = UI_FONT_CLR_FG;
+	m_->background = background;
+	m_->fontname = UI::g_fh1->fontset()->sans();
+	m_->fontsize = font_size;
 
-	m->align = static_cast<Align>((_align & Align_Horizontal) | Align_VCenter);
-	m->caret = 0;
-	m->scrolloffset = 0;
+	// Set alignment to the UI language's principal writing direction
+	m_->align = UI::g_fh1->fontset()->is_rtl() ? UI::Align::kCenterRight : UI::Align::kCenterLeft;
+	m_->caret = 0;
+	m_->scrolloffset = 0;
 	// yes, use *signed* max as maximum length; just a small safe-guard.
-	m->maxLength = std::numeric_limits<int32_t>::max();
+	m_->maxLength = std::numeric_limits<int32_t>::max();
 
 	set_handle_mouse(true);
 	set_can_focus(true);
@@ -93,7 +101,7 @@ EditBox::EditBox
 
 	// Initialize history as empty string
 	for (uint8_t i = 0; i < CHAT_HISTORY_SIZE; ++i)
-		m_history[i] = "";
+		history_[i] = "";
 }
 
 EditBox::~EditBox()
@@ -106,17 +114,7 @@ EditBox::~EditBox()
  */
 const std::string & EditBox::text() const
 {
-	return m->text;
-}
-
-/**
- * Set the font used by the edit box.
- */
-void EditBox::set_font(const std::string & name, int32_t size, RGBColor color)
-{
-	m->fontname = name;
-	m->fontsize = size;
-	m->fontcolor = color;
+	return m_->text;
 }
 
 /**
@@ -127,18 +125,16 @@ void EditBox::set_font(const std::string & name, int32_t size, RGBColor color)
  */
 void EditBox::set_text(const std::string & t)
 {
-	if (t == m->text)
+	if (t == m_->text)
 		return;
 
-	bool caretatend = m->caret == m->text.size();
+	bool caretatend = m_->caret == m_->text.size();
 
-	m->text = t;
-	if (m->text.size() > m->maxLength)
-		m->text.erase(m->text.begin() + m->maxLength, m->text.end());
-	if (caretatend || m->caret > m->text.size())
-		m->caret = m->text.size();
-
-	update();
+	m_->text = t;
+	if (m_->text.size() > m_->maxLength)
+		m_->text.erase(m_->text.begin() + m_->maxLength, m_->text.end());
+	if (caretatend || m_->caret > m_->text.size())
+		m_->caret = m_->text.size();
 }
 
 
@@ -147,7 +143,7 @@ void EditBox::set_text(const std::string & t)
  */
 uint32_t EditBox::max_length() const
 {
-	return m->maxLength;
+	return m_->maxLength;
 }
 
 
@@ -159,42 +155,14 @@ uint32_t EditBox::max_length() const
  */
 void EditBox::set_max_length(uint32_t const n)
 {
-	m->maxLength = n;
+	m_->maxLength = n;
 
-	if (m->text.size() > m->maxLength) {
-		m->text.erase(m->text.begin() + m->maxLength, m->text.end());
-		if (m->caret > m->text.size())
-			m->caret = m->text.size();
+	if (m_->text.size() > m_->maxLength) {
+		m_->text.erase(m_->text.begin() + m_->maxLength, m_->text.end());
+		if (m_->caret > m_->text.size())
+			m_->caret = m_->text.size();
 
 		check_caret();
-		update();
-	}
-}
-
-
-/**
- * \return the text alignment
- */
-Align EditBox::align() const
-{
-	return m->align;
-}
-
-
-/**
- * Set the new alignment.
- *
- * Note that vertical alignment is always centered, independent of what
- * you select here.
- */
-void EditBox::set_align(Align _align)
-{
-	_align = static_cast<Align>((_align & Align_Horizontal) | Align_VCenter);
-	if (_align != m->align) {
-		m->align = _align;
-		m->scrolloffset = 0;
-		check_caret();
-		update();
 	}
 }
 
@@ -206,7 +174,6 @@ bool EditBox::handle_mousepress(const uint8_t btn, int32_t, int32_t)
 {
 	if (btn == SDL_BUTTON_LEFT && get_can_focus()) {
 		focus();
-		update();
 		return true;
 	}
 
@@ -221,7 +188,7 @@ bool EditBox::handle_mouserelease(const uint8_t btn, int32_t, int32_t)
  * Handle keypress/release events
  */
 // TODO(unknown): Text input works only because code.unicode happens to map to ASCII for
-// ASCII characters (--> //HERE). Instead, all user editable strings should be
+// ASCII characters (--> // HERE). Instead, all user editable strings should be
 // real unicode.
 bool EditBox::handle_key(bool const down, SDL_Keysym const code)
 {
@@ -232,18 +199,18 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code)
 			return true;
 
 		case SDLK_TAB:
-			//let the panel handle the tab key
+			// Let the panel handle the tab key
 			return false;
 
 		case SDLK_KP_ENTER:
 		case SDLK_RETURN:
 			// Save history if active and text is not empty
-			if (m_history_active) {
-				if (!m->text.empty()) {
+			if (history_active_) {
+				if (!m_->text.empty()) {
 					for (uint8_t i = CHAT_HISTORY_SIZE - 1; i > 0; --i)
-						m_history[i] = m_history[i - 1];
-					m_history[0] = m->text;
-					m_history_position = -1;
+						history_[i] = history_[i - 1];
+					history_[0] = m_->text;
+					history_position_ = -1;
 				}
 			}
 			ok();
@@ -255,20 +222,19 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code)
 			}
 			/* no break */
 		case SDLK_DELETE:
-			if (m->caret < m->text.size()) {
-				while ((m->text[++m->caret] & 0xc0) == 0x80) {};
+			if (m_->caret < m_->text.size()) {
+				while ((m_->text[++m_->caret] & 0xc0) == 0x80) {};
 				// now handle it like Backspace
 			} else
 				return true;
 			/* no break */
 		case SDLK_BACKSPACE:
-			if (m->caret > 0) {
-				while ((m->text[--m->caret] & 0xc0) == 0x80)
-					m->text.erase(m->text.begin() + m->caret);
-				m->text.erase(m->text.begin() + m->caret);
+			if (m_->caret > 0) {
+				while ((m_->text[--m_->caret] & 0xc0) == 0x80)
+					m_->text.erase(m_->text.begin() + m_->caret);
+				m_->text.erase(m_->text.begin() + m_->caret);
 				check_caret();
 				changed();
-				update();
 			}
 			return true;
 
@@ -278,16 +244,14 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code)
 			}
 			/* no break */
 		case SDLK_LEFT:
-			if (m->caret > 0) {
-				while ((m->text[--m->caret] & 0xc0) == 0x80) {};
+			if (m_->caret > 0) {
+				while ((m_->text[--m_->caret] & 0xc0) == 0x80) {};
 				if (code.mod & (KMOD_LCTRL | KMOD_RCTRL))
-					for (uint32_t new_caret = m->caret;; m->caret = new_caret)
-						if (0 == new_caret || isspace(m->text[--new_caret]))
+					for (uint32_t new_caret = m_->caret;; m_->caret = new_caret)
+						if (0 == new_caret || isspace(m_->text[--new_caret]))
 							break;
 
 				check_caret();
-
-				update();
 			}
 			return true;
 
@@ -297,21 +261,20 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code)
 			}
 			/* no break */
 		case SDLK_RIGHT:
-			if (m->caret < m->text.size()) {
-				while ((m->text[++m->caret] & 0xc0) == 0x80) {};
+			if (m_->caret < m_->text.size()) {
+				while ((m_->text[++m_->caret] & 0xc0) == 0x80) {};
 				if (code.mod & (KMOD_LCTRL | KMOD_RCTRL))
-					for (uint32_t new_caret = m->caret;; ++new_caret)
+					for (uint32_t new_caret = m_->caret;; ++new_caret)
 						if
-							(new_caret == m->text.size()
+							(new_caret == m_->text.size()
 							 ||
-							 isspace(m->text[new_caret - 1]))
+							 isspace(m_->text[new_caret - 1]))
 						{
-							m->caret = new_caret;
+							m_->caret = new_caret;
 							break;
 						}
 
 				check_caret();
-				update();
 			}
 			return true;
 
@@ -321,11 +284,10 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code)
 			}
 			/* no break */
 		case SDLK_HOME:
-			if (m->caret != 0) {
-				m->caret = 0;
+			if (m_->caret != 0) {
+				m_->caret = 0;
 
 				check_caret();
-				update();
 			}
 			return true;
 
@@ -335,10 +297,9 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code)
 			}
 			/* no break */
 		case SDLK_END:
-			if (m->caret != m->text.size()) {
-				m->caret = m->text.size();
+			if (m_->caret != m_->text.size()) {
+				m_->caret = m_->text.size();
 				check_caret();
-				update();
 			}
 			return true;
 
@@ -349,14 +310,13 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code)
 			/* no break */
 		case SDLK_UP:
 			// Load entry from history if active and text is not empty
-			if (m_history_active) {
-				if (m_history_position > CHAT_HISTORY_SIZE - 2)
-					m_history_position = CHAT_HISTORY_SIZE - 2;
-				if (m_history[++m_history_position].size() > 0) {
-					m->text = m_history[m_history_position];
-					m->caret = m->text.size();
+			if (history_active_) {
+				if (history_position_ > CHAT_HISTORY_SIZE - 2)
+					history_position_ = CHAT_HISTORY_SIZE - 2;
+				if (history_[++history_position_].size() > 0) {
+					m_->text = history_[history_position_];
+					m_->caret = m_->text.size();
 					check_caret();
-					update();
 				}
 			}
 			return true;
@@ -368,14 +328,13 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code)
 			/* no break */
 		case SDLK_DOWN:
 			// Load entry from history if active and text is not equivalent to the current one
-			if (m_history_active) {
-				if (m_history_position < 1)
-					m_history_position = 1;
-				if (m_history[--m_history_position] != m->text) {
-					m->text = m_history[m_history_position];
-					m->caret = m->text.size();
+			if (history_active_) {
+				if (history_position_ < 1)
+					history_position_ = 1;
+				if (history_[--history_position_] != m_->text) {
+					m_->text = history_[history_position_];
+					m_->caret = m_->text.size();
 					check_caret();
-					update();
 				}
 			}
 			return true;
@@ -389,12 +348,11 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code)
 }
 
 bool EditBox::handle_textinput(const std::string& input_text) {
-	if ((m->text.size() +  input_text.length()) < m->maxLength) {
-		m->text.insert(m->caret, input_text);
-		m->caret += input_text.length();
+	if ((m_->text.size() +  input_text.length()) < m_->maxLength) {
+		m_->text.insert(m_->caret, input_text);
+		m_->caret += input_text.length();
 		check_caret();
 		changed();
-		update();
 	}
 	return true;
 }
@@ -406,11 +364,11 @@ void EditBox::draw(RenderTarget & odst)
 	// Draw the background
 	dst.tile
 		(Rect(Point(0, 0), get_w(), get_h()),
-		 m->background,
+		 m_->background,
 		 Point(get_x(), get_y()));
 
 	// Draw border.
-	if (get_w() >= 4 && get_h() >= 4) {
+	if (get_w() >= kMargin && get_h() >= kMargin) {
 		static const RGBColor black(0, 0, 0);
 
 		// bottom edge
@@ -429,32 +387,69 @@ void EditBox::draw(RenderTarget & odst)
 		dst.fill_rect(Rect(Point(1, 0), 1, get_h() - 2), black);
 	}
 
-	if (has_focus())
+	if (has_focus()) {
 		dst.brighten_rect
 			(Rect(Point(0, 0), get_w(), get_h()), MOUSE_OVER_BRIGHT_FACTOR);
-
-	Point pos(4, get_h() >> 1);
-
-	switch (m->align & Align_Horizontal) {
-	case Align_HCenter:
-		pos.x = get_w() >> 1;
-		break;
-	case Align_Right:
-		pos.x = get_w() - 4;
-		break;
-	default:
-		break;
 	}
 
-	pos.x += m->scrolloffset;
+	const int max_width = get_w() - 2 * kMargin;
 
-	UI::g_fh->draw_text
-		(dst,
-		 TextStyle::makebold(Font::get(m->fontname, m->fontsize), m->fontcolor),
-		 pos,
-		 m->text,
-		 align(),
-		 has_focus() ? static_cast<int32_t>(m->caret) : std::numeric_limits<uint32_t>::max());
+	const Image* entry_text_im = UI::g_fh1->render(as_editorfont(m_->text, m_->fontsize));
+
+	int linewidth = entry_text_im->width();
+	int lineheight = entry_text_im->height();
+
+	Point point(kMargin, get_h() / 2);
+
+	if (static_cast<int>(m_->align & UI::Align::kRight)) {
+		point.x += max_width;
+	}
+
+	UI::correct_for_align(m_->align, linewidth, lineheight, &point);
+
+	// Crop to max_width while blitting
+	if (max_width < linewidth) {
+		// Fix positioning for BiDi languages.
+		if (UI::g_fh1->fontset()->is_rtl()) {
+			point.x = 0;
+		}
+		// We want this always on, e.g. for mixed language savegame filenames
+		if (i18n::has_rtl_character(m_->text.c_str(), 100)) { // Restrict check for efficiency
+			// TODO(GunChleoc): Arabic: Fix scrolloffset
+			dst.blitrect(point,
+							 entry_text_im,
+							 Rect(linewidth - max_width, 0, linewidth, lineheight));
+		}
+		else {
+			if (static_cast<int>(m_->align & UI::Align::kRight)) {
+				// TODO(GunChleoc): Arabic: Fix scrolloffset
+				dst.blitrect(point,
+								 entry_text_im,
+								 Rect(point.x + m_->scrolloffset + kMargin, point.y, max_width, lineheight));
+			} else {
+				dst.blitrect(point,
+								 entry_text_im,
+								 Rect(point.x - m_->scrolloffset - kMargin, point.y, max_width, lineheight));
+			}
+		}
+	} else {
+		dst.blitrect(point, entry_text_im, Rect(0, 0, max_width, lineheight));
+	}
+
+	if (has_focus()) {
+		// Draw the caret
+		std::string line_to_caret = m_->text.substr(0, m_->caret);
+		// TODO(GunChleoc): Arabic: Fix cursor position for BIDI text.
+		int caret_x = text_width(line_to_caret, m_->fontsize);
+
+		const uint16_t fontheight = text_height(m_->text, m_->fontsize);
+
+		const Image* caret_image = g_gr->images().get("images/ui_basic/caret.png");
+		Point caretpt;
+		caretpt.x = point.x + m_->scrolloffset + caret_x - caret_image->width() + LINE_MARGIN;
+		caretpt.y = point.y + (fontheight - caret_image->height()) / 2;
+		dst.blit(caretpt, caret_image);
+	}
 }
 
 /**
@@ -462,41 +457,33 @@ void EditBox::draw(RenderTarget & odst)
  */
 void EditBox::check_caret()
 {
-	std::string leftstr(m->text, 0, m->caret);
-	std::string rightstr(m->text, m->caret, std::string::npos);
-	uint32_t leftw;
-	uint32_t rightw;
-	uint32_t tmp;
-
-	UI::g_fh->get_size(m->fontname, m->fontsize, leftstr, leftw, tmp);
-	UI::g_fh->get_size(m->fontname, m->fontsize, rightstr, rightw, tmp);
+	std::string leftstr(m_->text, 0, m_->caret);
+	std::string rightstr(m_->text, m_->caret, std::string::npos);
+	int32_t leftw = text_width(leftstr, m_->fontsize);
+	int32_t rightw = text_width(rightstr, m_->fontsize);
 
 	int32_t caretpos;
 
-	switch (m->align & Align_Horizontal) {
-	case Align_HCenter:
-		caretpos  = (get_w() - static_cast<int32_t>(leftw + rightw)) / 2;
-		caretpos += m->scrolloffset + leftw;
-		break;
-	case Align_Right:
-		caretpos = get_w() - 4 + m->scrolloffset - rightw;
+	switch (m_->align & UI::Align::kHorizontal) {
+	case UI::Align::kRight:
+		caretpos = get_w() - kMargin + m_->scrolloffset - rightw;
 		break;
 	default:
-		caretpos = 4 + m->scrolloffset + leftw;
+		caretpos = kMargin + m_->scrolloffset + leftw;
 		break;
 	}
 
-	if (caretpos < 4)
-		m->scrolloffset += 4 - caretpos + get_w() / 5;
-	else if (caretpos > get_w() - 4)
-		m->scrolloffset -= caretpos - get_w() + 4 + get_w() / 5;
+	if (caretpos < kMargin)
+		m_->scrolloffset += kMargin - caretpos + get_w() / 5;
+	else if (caretpos > get_w() - kMargin)
+		m_->scrolloffset -= caretpos - get_w() + kMargin + get_w() / 5;
 
-	if ((m->align & Align_Horizontal) == Align_Left) {
-		if (m->scrolloffset > 0)
-			m->scrolloffset = 0;
-	} else if ((m->align & Align_Horizontal) == Align_Right) {
-		if (m->scrolloffset < 0)
-			m->scrolloffset = 0;
+	if ((m_->align & UI::Align::kHorizontal) == UI::Align::kLeft) {
+		if (m_->scrolloffset > 0)
+			m_->scrolloffset = 0;
+	} else if ((m_->align & UI::Align::kHorizontal) == UI::Align::kRight) {
+		if (m_->scrolloffset < 0)
+			m_->scrolloffset = 0;
 	}
 }
 

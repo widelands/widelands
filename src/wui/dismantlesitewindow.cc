@@ -24,7 +24,7 @@
 #include "ui_basic/tabpanel.h"
 #include "wui/buildingwindow.h"
 
-static const char pic_tab_wares[] = "pics/menu_tab_wares.png";
+static const char pic_tab_wares[] = "images/wui/buildings/menu_tab_wares.png";
 
 /**
  * Status window for dismantle sites.
@@ -38,7 +38,7 @@ struct DismantleSiteWindow : public BuildingWindow {
 	void think() override;
 
 private:
-	UI::ProgressBar * m_progress;
+	UI::ProgressBar * progress_;
 };
 
 
@@ -51,14 +51,14 @@ DismantleSiteWindow::DismantleSiteWindow
 	UI::Box & box = *new UI::Box(get_tabs(), 0, 0, UI::Box::Vertical);
 
 	// Add the progress bar
-	m_progress =
+	progress_ =
 		new UI::ProgressBar
 			(&box,
 			 0, 0,
 			 UI::ProgressBar::DefaultWidth, UI::ProgressBar::DefaultHeight,
 			 UI::ProgressBar::Horizontal);
-	m_progress->set_total(1 << 16);
-	box.add(m_progress, UI::Box::AlignCenter);
+	progress_->set_total(1 << 16);
+	box.add(progress_, UI::Align::kHCenter);
 
 	box.add_space(8);
 
@@ -82,7 +82,7 @@ void DismantleSiteWindow::think()
 	const Widelands::DismantleSite & ds =
 		dynamic_cast<Widelands::DismantleSite&>(building());
 
-	m_progress->set_state(ds.get_built_per64k());
+	progress_->set_state(ds.get_built_per64k());
 }
 
 

@@ -69,7 +69,6 @@ private:
 	void parse_mine             (Worker::Action* act, const std::vector<std::string>& cmd);
 	void parse_breed            (Worker::Action* act, const std::vector<std::string>& cmd);
 	void parse_createware       (Worker::Action* act, const std::vector<std::string>& cmd);
-	void parse_setdescription   (Worker::Action* act, const std::vector<std::string>& cmd);
 	void parse_setbobdescription(Worker::Action* act, const std::vector<std::string>& cmd);
 	void parse_findobject       (Worker::Action* act, const std::vector<std::string>& cmd);
 	void parse_findspace        (Worker::Action* act, const std::vector<std::string>& cmd);
@@ -83,7 +82,7 @@ private:
 	void parse_geologist        (Worker::Action* act, const std::vector<std::string>& cmd);
 	void parse_geologist_find   (Worker::Action* act, const std::vector<std::string>& cmd);
 	void parse_scout            (Worker::Action* act, const std::vector<std::string>& cmd);
-	void parse_play_fx          (Worker::Action* act, const std::vector<std::string>& cmd);
+	void parse_play_sound       (Worker::Action* act, const std::vector<std::string>& cmd);
 	void parse_construct        (Worker::Action* act, const std::vector<std::string>& cmd);
 
 	const std::string name_;

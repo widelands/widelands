@@ -36,15 +36,15 @@ struct SupplyList {
 	void add_supply(Supply &);
 	void remove_supply(Supply &);
 
-	size_t get_nrsupplies() const {return m_supplies.size();}
-	const Supply & operator[](size_t const idx) const {return *m_supplies[idx];}
-	Supply & operator[](size_t const idx) {return *m_supplies[idx];}
+	size_t get_nrsupplies() const {return supplies_.size();}
+	const Supply & operator[](size_t const idx) const {return *supplies_[idx];}
+	Supply & operator[](size_t const idx) {return *supplies_[idx];}
 
 	bool have_supplies(Game & game, const Request &);
 
 private:
 	using Supplies = std::vector<Supply *>;
-	Supplies m_supplies;
+	Supplies supplies_;
 };
 
 }

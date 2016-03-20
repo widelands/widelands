@@ -30,8 +30,8 @@
 namespace Widelands {
 
 GameMapPacket::~GameMapPacket() {
-	delete m_wms;
-	delete m_wml;
+	delete wms_;
+	delete wml_;
 }
 
 void GameMapPacket::read
@@ -41,11 +41,11 @@ void GameMapPacket::read
 		throw GameDataError("no map");
 
 	//  Now Load the map as it would be a normal map saving.
-	delete m_wml;
+	delete wml_;
 
-	m_wml = new WidelandsMapLoader(fs.make_sub_file_system("map"), &game.map());
+	wml_ = new WidelandsMapLoader(fs.make_sub_file_system("map"), &game.map());
 
-	m_wml->preload_map(true);
+	wml_->preload_map(true);
 
 	//  DONE, mapfs gets deleted by WidelandsMapLoader.
 
@@ -54,8 +54,8 @@ void GameMapPacket::read
 
 
 void GameMapPacket::read_complete(Game & game) {
-	m_wml->load_map_complete(game, true);
-	m_mol = m_wml->get_map_object_loader();
+	wml_->load_map_complete(game, MapLoader::LoadType::kScenario);
+	mol_ = wml_->get_map_object_loader();
 }
 
 
@@ -67,10 +67,10 @@ void GameMapPacket::write
 		(fs.create_sub_file_system("map", FileSystem::DIR));
 
 	//  Now Write the map as it would be a normal map saving.
-	delete m_wms;
-	m_wms = new MapSaver(*mapfs, game);
-	m_wms->save();
-	m_mos = m_wms->get_map_object_saver();
+	delete wms_;
+	wms_ = new MapSaver(*mapfs, game);
+	wms_->save();
+	mos_ = wms_->get_map_object_saver();
 }
 
 }

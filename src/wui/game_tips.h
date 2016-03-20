@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2008 by the Widelands Development Team
+ * Copyright (C) 2007-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -43,13 +43,13 @@ private:
 	void load_tips(std::string);
 	void show_tip(int32_t index);
 
-	uint32_t             m_lastUpdated;
-	uint32_t             m_updateAfter;
-	UI::ProgressWindow & m_progressWindow;
-	bool                 m_registered;
-	uint32_t             m_lastTip;
+	uint32_t             lastUpdated_;
+	uint32_t             updateAfter_;
+	UI::ProgressWindow & progressWindow_;
+	bool                 registered_;
+	uint32_t             lastTip_;
 
-	std::vector<Tip>     m_tips;
+	std::vector<Tip>     tips_;
 };
 
 #endif  // end of include guard: WL_WUI_GAME_TIPS_H

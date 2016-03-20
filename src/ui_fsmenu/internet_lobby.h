@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006-2009, 2011-2012 by the Widelands Development Team
+ * Copyright (C) 2004-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -44,28 +44,27 @@ protected:
 	void clicked_ok() override;
 
 private:
-	uint32_t m_butx;
-	uint32_t m_butw;
-	uint32_t m_buth;
-	uint32_t m_lisw;
-	uint32_t m_fs;
-	uint32_t m_prev_clientlist_len;
-	std::string m_fn;
-	UI::Textarea title, m_clients, m_opengames;
-	UI::Textarea m_servername;
-	UI::Button joingame, hostgame, back;
-	UI::EditBox servername;
-	UI::Table<const InternetClient * const> clientsonline;
-	UI::Listselect<InternetGame> opengames;
+	uint32_t butx_;
+	uint32_t butw_;
+	uint32_t buth_;
+	uint32_t lisw_;
+	uint32_t fs_;
+	uint32_t prev_clientlist_len_;
+	UI::Textarea title, clients_, opengames_;
+	UI::Textarea servername_;
+	UI::Button joingame_, hostgame_, back_;
+	UI::EditBox edit_servername_;
+	UI::Table<const InternetClient * const> clientsonline_list_;
+	UI::Listselect<InternetGame> opengames_list_;
 	GameChatPanel chat;
 
 	// Login information
-	const char * nickname;
-	const char * password;
-	bool         reg;
+	const char * nickname_;
+	const char * password_;
+	bool         is_registered_;
 
-	void fill_games_list (const std::vector<InternetGame> &);
-	void fill_client_list(const std::vector<InternetClient> &);
+	void fill_games_list (const std::vector<InternetGame>*);
+	void fill_client_list(const std::vector<InternetClient>*);
 
 	void connect_to_metaserver();
 

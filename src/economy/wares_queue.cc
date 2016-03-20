@@ -37,21 +37,21 @@ namespace Widelands {
  * Pre-initialize a WaresQueue
 */
 WaresQueue::WaresQueue
-	(PlayerImmovable &       _owner,
-	 DescriptionIndex        const _ware,
-	 uint8_t           const _max_size)
+	(PlayerImmovable &       init_owner,
+	 DescriptionIndex        const init_ware,
+	 uint8_t           const init_max_size)
 	:
-	m_owner           (_owner),
-	m_ware            (_ware),
-	m_max_size        (_max_size),
-	m_max_fill        (_max_size),
-	m_filled          (0),
-	m_consume_interval(0),
-	m_request         (nullptr),
-	m_callback_fn     (nullptr),
-	m_callback_data   (nullptr)
+	owner_           (init_owner),
+	ware_            (init_ware),
+	max_size_        (init_max_size),
+	max_fill_        (init_max_size),
+	filled_          (0),
+	consume_interval_(0),
+	request_         (nullptr),
+	callback_fn_     (nullptr),
+	callback_data_   (nullptr)
 {
-	if (m_ware != INVALID_INDEX)
+	if (ware_ != INVALID_INDEX)
 		update();
 }
 
@@ -60,18 +60,18 @@ WaresQueue::WaresQueue
  * Clear the queue appropriately.
 */
 void WaresQueue::cleanup() {
-	assert(m_ware != INVALID_INDEX);
+	assert(ware_ != INVALID_INDEX);
 
-	if (m_filled && m_owner.get_economy())
-		m_owner.get_economy()->remove_wares(m_ware, m_filled);
+	if (filled_ && owner_.get_economy())
+		owner_.get_economy()->remove_wares(ware_, filled_);
 
-	m_filled = 0;
-	m_max_size = 0;
-	m_max_fill = 0;
+	filled_ = 0;
+	max_size_ = 0;
+	max_fill_ = 0;
 
 	update();
 
-	m_ware = INVALID_INDEX;
+	ware_ = INVALID_INDEX;
 }
 
 /**
@@ -79,31 +79,31 @@ void WaresQueue::cleanup() {
  * You must call this after every call to set_*()
 */
 void WaresQueue::update() {
-	assert(m_ware != INVALID_INDEX);
+	assert(ware_ != INVALID_INDEX);
 
-	if (m_filled > m_max_size) {
-		if (m_owner.get_economy())
-			m_owner.get_economy()->remove_wares(m_ware, m_filled - m_max_size);
-		m_filled = m_max_size;
+	if (filled_ > max_size_) {
+		if (owner_.get_economy())
+			owner_.get_economy()->remove_wares(ware_, filled_ - max_size_);
+		filled_ = max_size_;
 	}
 
-	if (m_filled < m_max_fill)
+	if (filled_ < max_fill_)
 	{
-		if (!m_request)
-			m_request =
+		if (!request_)
+			request_ =
 				new Request
-					(m_owner,
-					 m_ware,
+					(owner_,
+					 ware_,
 					 WaresQueue::request_callback,
 					 wwWARE);
 
-		m_request->set_count(m_max_fill - m_filled);
-		m_request->set_required_interval(m_consume_interval);
+		request_->set_count(max_fill_ - filled_);
+		request_->set_required_interval(consume_interval_);
 	}
 	else
 	{
-		delete m_request;
-		m_request = nullptr;
+		delete request_;
+		request_ = nullptr;
 	}
 }
 
@@ -112,8 +112,8 @@ void WaresQueue::update() {
 */
 void WaresQueue::set_callback(CallbackFn * const fn, void * const data)
 {
-	m_callback_fn = fn;
-	m_callback_data = data;
+	callback_fn_ = fn;
+	callback_data_ = data;
 }
 
 /**
@@ -134,14 +134,14 @@ void WaresQueue::request_callback
 		dynamic_cast<Building&>(target).waresqueue(ware);
 
 	assert(!w); // WaresQueue can't hold workers
-	assert(wq.m_filled < wq.m_max_size);
-	assert(wq.m_ware == ware);
+	assert(wq.filled_ < wq.max_size_);
+	assert(wq.ware_ == ware);
 
 	// Update
-	wq.set_filled(wq.m_filled + 1);
+	wq.set_filled(wq.filled_ + 1);
 
-	if (wq.m_callback_fn)
-		(*wq.m_callback_fn)(game, &wq, ware, wq.m_callback_data);
+	if (wq.callback_fn_)
+		(*wq.callback_fn_)(game, &wq, ware, wq.callback_data_);
 }
 
 /**
@@ -149,10 +149,10 @@ void WaresQueue::request_callback
 */
 void WaresQueue::remove_from_economy(Economy & e)
 {
-	if (m_ware != INVALID_INDEX) {
-		e.remove_wares(m_ware, m_filled);
-		if (m_request)
-			m_request->set_economy(nullptr);
+	if (ware_ != INVALID_INDEX) {
+		e.remove_wares(ware_, filled_);
+		if (request_)
+			request_->set_economy(nullptr);
 	}
 }
 
@@ -161,10 +161,10 @@ void WaresQueue::remove_from_economy(Economy & e)
 */
 void WaresQueue::add_to_economy(Economy & e)
 {
-	if (m_ware != INVALID_INDEX) {
-		e.add_wares(m_ware, m_filled);
-		if (m_request)
-			m_request->set_economy(&e);
+	if (ware_ != INVALID_INDEX) {
+		e.add_wares(ware_, filled_);
+		if (request_)
+			request_->set_economy(&e);
 	}
 }
 
@@ -173,14 +173,14 @@ void WaresQueue::add_to_economy(Economy & e)
  */
 void WaresQueue::set_max_size(const uint32_t size)
 {
-	uint32_t old_size = m_max_size;
-	m_max_size = size;
+	uint32_t old_size = max_size_;
+	max_size_ = size;
 
 	// make sure that max fill is reduced as well if the max size is decreased
 	// because this is very likely what the user wanted to only consume so
 	// and so many wares in the first place. If it is increased, keep the
 	// max fill fill as it was
-	set_max_fill(std::min(m_max_fill, m_max_fill - (old_size - m_max_size)));
+	set_max_fill(std::min(max_fill_, max_fill_ - (old_size - max_size_)));
 
 	update();
 }
@@ -194,10 +194,10 @@ void WaresQueue::set_max_size(const uint32_t size)
  */
 void WaresQueue::set_max_fill(uint32_t size)
 {
-	if (size > m_max_size)
-		size = m_max_size;
+	if (size > max_size_)
+		size = max_size_;
 
-	m_max_fill = size;
+	max_fill_ = size;
 
 	update();
 }
@@ -206,14 +206,14 @@ void WaresQueue::set_max_fill(uint32_t size)
  * Change fill status of the queue.
  */
 void WaresQueue::set_filled(const uint32_t filled) {
-	if (m_owner.get_economy()) {
-		if (filled > m_filled)
-			m_owner.get_economy()->add_wares(m_ware, filled - m_filled);
-		else if (filled < m_filled)
-			m_owner.get_economy()->remove_wares(m_ware, m_filled - filled);
+	if (owner_.get_economy()) {
+		if (filled > filled_)
+			owner_.get_economy()->add_wares(ware_, filled - filled_);
+		else if (filled < filled_)
+			owner_.get_economy()->remove_wares(ware_, filled_ - filled);
 	}
 
-	m_filled = filled;
+	filled_ = filled;
 
 	update();
 }
@@ -226,7 +226,7 @@ void WaresQueue::set_filled(const uint32_t filled) {
 */
 void WaresQueue::set_consume_interval(const uint32_t time)
 {
-	m_consume_interval = time;
+	consume_interval_ = time;
 
 	update();
 }
@@ -243,14 +243,14 @@ void WaresQueue::write(FileWrite & fw, Game & game, MapObjectSaver & mos)
 
 	//  Owner and callback is not saved, but this should be obvious on load.
 	fw.c_string
-		(owner().tribe().get_ware_descr(m_ware)->name().c_str());
-	fw.signed_32(m_max_size);
-	fw.signed_32(m_max_fill);
-	fw.signed_32(m_filled);
-	fw.signed_32(m_consume_interval);
-	if (m_request) {
+		(owner().tribe().get_ware_descr(ware_)->name().c_str());
+	fw.signed_32(max_size_);
+	fw.signed_32(max_fill_);
+	fw.signed_32(filled_);
+	fw.signed_32(consume_interval_);
+	if (request_) {
 		fw.unsigned_8(1);
-		m_request->write(fw, game, mos);
+		request_->write(fw, game, mos);
 	} else
 		fw.unsigned_8(0);
 }
@@ -261,26 +261,26 @@ void WaresQueue::read(FileRead & fr, Game & game, MapObjectLoader & mol)
 	uint16_t const packet_version = fr.unsigned_16();
 	try {
 		if (packet_version == kCurrentPacketVersion) {
-			delete m_request;
-			m_ware             = owner().tribe().ware_index(fr.c_string  ());
-			m_max_size         =                            fr.unsigned_32();
-			m_max_fill = fr.signed_32();
-			m_filled           =                            fr.unsigned_32();
-			m_consume_interval =                            fr.unsigned_32();
+			delete request_;
+			ware_             = owner().tribe().ware_index(fr.c_string  ());
+			max_size_         =                            fr.unsigned_32();
+			max_fill_ = fr.signed_32();
+			filled_           =                            fr.unsigned_32();
+			consume_interval_ =                            fr.unsigned_32();
 			if                                             (fr.unsigned_8 ()) {
-				m_request =                          //  TODO(unknown): Change Request::read
+				request_ =                          //  TODO(unknown): Change Request::read
 					new Request                       //  to a constructor.
-						(m_owner,
+						(owner_,
 						 0,
 						 WaresQueue::request_callback,
 						 wwWORKER);
-				m_request->read(fr, game, mol);
+				request_->read(fr, game, mol);
 			} else
-				m_request = nullptr;
+				request_ = nullptr;
 
 			//  Now Economy stuff. We have to add our filled items to the economy.
-			if (m_owner.get_economy())
-				add_to_economy(*m_owner.get_economy());
+			if (owner_.get_economy())
+				add_to_economy(*owner_.get_economy());
 		} else {
 			throw UnhandledVersionError("WaresQueue", packet_version, kCurrentPacketVersion);
 		}

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2006-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -99,14 +99,14 @@ void register_class
 		to_pop ++;
 	}
 
-	m_add_constructor_to_lua<T>(L);
-	m_add_instantiator_to_lua<T>(L);
+	add_constructor_to_lua<T>(L);
+	add_instantiator_to_lua<T>(L);
 	lua_pop(L, to_pop); // Pop everything we used so far.
 
-	m_create_metatable_for_class<T>(L);
+	create_metatable_for_class<T>(L);
 
-	m_register_properties_in_metatable<T, T>(L);
-	m_register_methods_in_metatable<T, T>(L);
+	register_properties_in_metatable<T, T>(L);
+	register_methods_in_metatable<T, T>(L);
 
 	if (!return_metatable)
 		lua_pop(L, 1); // remove the Metatable
@@ -119,8 +119,8 @@ void register_class
 template <class T, class PT>
 void add_parent(lua_State * L)
 {
-	m_register_properties_in_metatable<T, PT>(L);
-	m_register_methods_in_metatable<T, PT>(L);
+	register_properties_in_metatable<T, PT>(L);
+	register_methods_in_metatable<T, PT>(L);
 }
 
 /*
@@ -169,7 +169,7 @@ int to_lua(lua_State * const L, T * const obj) {
  */
 template <class T>
 T ** get_user_class(lua_State * const L, int narg) {
-	m_extract_userdata_from_user_class<T>(L, narg);
+	extract_userdata_from_user_class<T>(L, narg);
 
 	T ** rv = static_cast<T **>(luaL_checkudata(L, -1, T::className));
 	lua_pop(L, 1);
@@ -182,7 +182,7 @@ T ** get_user_class(lua_State * const L, int narg) {
  */
 template <class T>
 T ** get_base_user_class(lua_State * const L, int narg) {
-	m_extract_userdata_from_user_class<T>(L, narg);
+	extract_userdata_from_user_class<T>(L, narg);
 
 	T ** rv = static_cast<T * *>(lua_touserdata(L, -1));
 	lua_pop(L, 1);

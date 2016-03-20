@@ -191,7 +191,7 @@ private:
 			freeze(Freeze), triangles(Triangles), pos(Pos), radius(Radius),
 			pic(Pic), jobid(Jobid)
 		{}
-		bool              freeze; // don't change sel _even if mouse moves
+		bool              freeze; // don't change sel, even if mouse moves
 		bool              triangles; //  otherwise nodes
 		Widelands::NodeAndTriangle<>     pos;
 		uint32_t              radius;
@@ -222,7 +222,7 @@ private:
 	std::vector<const Image*> workarea_pics_;
 };
 
-#define PIC2 g_gr->images().get("pics/but2.png")
+#define PIC2 g_gr->images().get("images/ui_basic/but2.png")
 #define TOOLBAR_BUTTON_COMMON_PARAMETERS(name) \
     &toolbar_, name, 0, 0, 34U, 34U, PIC2
 

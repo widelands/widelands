@@ -25,6 +25,7 @@
 #include "base/i18n.h"
 #include "base/wexception.h"
 #include "editor/editorinteractive.h"
+#include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
 #include "io/filesystem/filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
@@ -50,19 +51,21 @@ MainMenuLoadOrSaveMap::MainMenuLoadOrSaveMap(EditorInteractive& parent,
 		  this, right_column_x_, tabley_, get_inner_w() - right_column_x_ - padding_, tableh_),
      ok_(this,
          "ok",
-         get_inner_w() / 2 - butw_ - padding_,
+			UI::g_fh1->fontset()->is_rtl() ? get_inner_w() / 2 - butw_ - padding_ : get_inner_w() / 2 + padding_,
          get_inner_h() - padding_ - buth_,
          butw_,
          buth_,
-         g_gr->images().get("pics/but5.png"),
+			g_gr->images().get("images/ui_basic/but5.png"),
          _("OK")),
      cancel_(this,
              "cancel",
-             get_inner_w() / 2 + padding_,
+				 UI::g_fh1->fontset()->is_rtl() ?
+					 get_inner_w() / 2 + padding_ :
+					 get_inner_w() / 2 - butw_ - padding_,
              get_inner_h() - padding_ - buth_,
              butw_,
              buth_,
-             g_gr->images().get("pics/but1.png"),
+				 g_gr->images().get("images/ui_basic/but1.png"),
              _("Cancel")),
      basedir_("maps"),
      has_translated_mapname_(false),
@@ -76,15 +79,15 @@ MainMenuLoadOrSaveMap::MainMenuLoadOrSaveMap(EditorInteractive& parent,
 	                                0,
 	                                butw_,
 	                                buth_,
-	                                g_gr->images().get("pics/but1.png"),
+											  g_gr->images().get("images/ui_basic/but1.png"),
 	                                _("Show Map Names"));
-	vbox->add(show_mapnames_, UI::Box::AlignLeft, true);
+	vbox->add(show_mapnames_, UI::Align::kLeft, true);
 
 	/** TRANSLATORS: Checkbox title. If this checkbox is enabled, map names aren't translated. */
 	cb_dont_localize_mapnames_ = new UI::Checkbox(vbox, Point(0, 0), _("Show original map names"));
 	cb_dont_localize_mapnames_->set_state(false);
 	vbox->add_space(2 * padding_);
-	vbox->add(cb_dont_localize_mapnames_, UI::Box::AlignLeft, true);
+	vbox->add(cb_dont_localize_mapnames_, UI::Align::kLeft, true);
 	vbox->set_size(get_inner_w(), buth_);
 
 	table_.set_column_compare(0, boost::bind(&MainMenuLoadOrSaveMap::compare_players, this, _1, _2));

@@ -36,14 +36,20 @@ class EditorGameBase;
 /// must be selected.
 class MapLoader {
 public:
+	enum class LoadType {
+		kGame,
+		kScenario,
+		kEditor
+	};
+
 	MapLoader(const std::string& filename, Map & M)
-		: m_map(M), m_s(STATE_INIT) {m_map.set_filename(filename);}
+		: map_(M), state_(STATE_INIT) {map_.set_filename(filename);}
 	virtual ~MapLoader() {}
 
 	virtual int32_t preload_map(bool as_scenario) = 0;
-	virtual int32_t load_map_complete(EditorGameBase &, bool as_scenario) = 0;
+	virtual int32_t load_map_complete(EditorGameBase &, MapLoader::LoadType) = 0;
 
-	Map & map() {return m_map;}
+	Map & map() {return map_;}
 
 protected:
 	enum State {
@@ -51,12 +57,12 @@ protected:
 		STATE_PRELOADED,
 		STATE_LOADED
 	};
-	void set_state(State const s) {m_s = s;}
-	State get_state() const {return m_s;}
-	Map & m_map;
+	void set_state(State const s) {state_ = s;}
+	State get_state() const {return state_;}
+	Map & map_;
 
 private:
-	State m_s;
+	State state_;
 };
 
 }

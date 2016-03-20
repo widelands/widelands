@@ -27,7 +27,7 @@
 #include "ui_basic/progressbar.h"
 #include "ui_basic/tabpanel.h"
 
-static const char pic_tab_wares[] = "pics/menu_tab_wares.png";
+static const char pic_tab_wares[] = "images/wui/buildings/menu_tab_wares.png";
 
 /**
  * Status window for construction sites.
@@ -41,7 +41,7 @@ struct ConstructionSiteWindow : public BuildingWindow {
 	void think() override;
 
 private:
-	UI::ProgressBar * m_progress;
+	UI::ProgressBar * progress_;
 };
 
 
@@ -54,14 +54,14 @@ ConstructionSiteWindow::ConstructionSiteWindow
 	UI::Box & box = *new UI::Box(get_tabs(), 0, 0, UI::Box::Vertical);
 
 	// Add the progress bar
-	m_progress =
+	progress_ =
 		new UI::ProgressBar
 			(&box,
 			 0, 0,
 			 UI::ProgressBar::DefaultWidth, UI::ProgressBar::DefaultHeight,
 			 UI::ProgressBar::Horizontal);
-	m_progress->set_total(1 << 16);
-	box.add(m_progress, UI::Box::AlignCenter);
+	progress_->set_total(1 << 16);
+	box.add(progress_, UI::Align::kHCenter);
 
 	box.add_space(8);
 
@@ -69,7 +69,7 @@ ConstructionSiteWindow::ConstructionSiteWindow
 	for (uint32_t i = 0; i < cs.get_nrwaresqueues(); ++i)
 		box.add
 			(new WaresQueueDisplay(&box, 0, 0, igbase(), cs, cs.get_waresqueue(i)),
-			 UI::Box::AlignLeft);
+			 UI::Align::kLeft);
 
 
 	get_tabs()->add("wares", g_gr->images().get(pic_tab_wares), &box, _("Building materials"));
@@ -88,7 +88,7 @@ void ConstructionSiteWindow::think()
 	const Widelands::ConstructionSite & cs =
 		dynamic_cast<Widelands::ConstructionSite&>(building());
 
-	m_progress->set_state(cs.get_built_per64k());
+	progress_->set_state(cs.get_built_per64k());
 }
 
 

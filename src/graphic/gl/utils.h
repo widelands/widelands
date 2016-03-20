@@ -20,6 +20,7 @@
 #define WL_GRAPHIC_GL_UTILS_H
 
 #include <memory>
+#include <string>
 #include <unordered_map>
 #include <unordered_set>
 #include <vector>
@@ -35,7 +36,8 @@ namespace Gl {
 
 class Shader;
 
-GLenum _handle_glerror(const char * file, unsigned int line);
+// Returns the name of the 'error'.
+const char* gl_error_to_string(GLenum error);
 
 // Thin wrapper around a OpenGL program object to ensure proper cleanup. Throws
 // on all errors.
@@ -48,9 +50,9 @@ public:
 		return program_object_;
 	}
 
-	// Creates and compiles 'vertex_shader_source' and 'fragment_shader_source'
-	// into shader objects. Then links them into the program.
-	void build(const char* vertex_shader_source, const char* fragment_shader_source);
+	// Creates and compiles shader objects based on the corresponding files in data/shaders,
+	// then links them into the program.
+	void build(const std::string& program_name);
 
 private:
 	const GLuint program_object_;
@@ -141,16 +143,10 @@ private:
 // Calls glVertexAttribPointer.
 void vertex_attrib_pointer(int vertex_index, int num_items, int stride, int offset);
 
-// Swap order of rows in m_pixels, to compensate for the upside-down nature of the
+// Swap order of rows in pixels, to compensate for the upside-down nature of the
 // OpenGL coordinate system.
 void swap_rows(int width, int height, int pitch, int bpp, uint8_t* pixels);
 
 }  // namespace Gl
-
-/**
- * handle_glerror() is intended to make debugging of OpenGL easier. It logs the
- * error code returned by glGetError and returns the error code.
- */
-#define handle_glerror() Gl::_handle_glerror(__FILE__, __LINE__)
 
 #endif  // end of include guard: WL_GRAPHIC_GL_UTILS_H

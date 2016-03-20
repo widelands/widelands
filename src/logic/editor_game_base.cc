@@ -83,16 +83,12 @@ lasttrackserial_   (0)
 EditorGameBase::~EditorGameBase() {
 	delete map_;
 	delete player_manager_.release();
-
-	if (g_gr) { // dedicated does not use the sound_handler
-		assert(this == g_sound_handler.egbase_);
-		g_sound_handler.egbase_ = nullptr;
-	}
+	g_sound_handler.egbase_ = nullptr;
 }
 
 void EditorGameBase::think()
 {
-	//TODO(unknown): Get rid of this; replace by a function that just advances gametime
+	// TODO(unknown): Get rid of this; replace by a function that just advances gametime
 	// by a given number of milliseconds
 }
 
@@ -149,6 +145,9 @@ Tribes* EditorGameBase::mutable_tribes() {
 	return tribes_.get();
 }
 
+void EditorGameBase::set_ibase(InteractiveBase* const b) {
+	ibase_.reset(b);
+}
 
 InteractiveGameBase* EditorGameBase::get_igbase()
 {
@@ -188,7 +187,7 @@ void EditorGameBase::inform_players_about_ownership
 	(MapIndex const i, PlayerNumber const new_owner)
 {
 	iterate_players_existing_const(plnum, MAX_PLAYERS, *this, p) {
-		Player::Field & player_field = p->m_fields[i];
+		Player::Field & player_field = p->fields_[i];
 		if (1 < player_field.vision) {
 			player_field.owner = new_owner;
 		}
@@ -199,7 +198,7 @@ void EditorGameBase::inform_players_about_immovable
 {
 	if (!Road::is_road_descr(descr))
 		iterate_players_existing_const(plnum, MAX_PLAYERS, *this, p) {
-			Player::Field & player_field = p->m_fields[i];
+			Player::Field & player_field = p->fields_[i];
 			if (1 < player_field.vision) {
 				player_field.map_object_descr[TCoords<>::None] = descr;
 			}
@@ -521,14 +520,13 @@ void EditorGameBase::set_road
 		mask = RoadType::kMask << RoadType::kEast;
 		break;
 	default:
-		assert(false);
-		break;
+		NEVER_HERE();
 	}
 	uint8_t const road = f.field->get_roads() & mask;
 	MapIndex const           i = f        .field - &first_field;
 	MapIndex const neighbour_i = neighbour.field - &first_field;
 	iterate_players_existing_const(plnum, MAX_PLAYERS, *this, p) {
-		Player::Field & first_player_field = *p->m_fields;
+		Player::Field & first_player_field = *p->fields_;
 		Player::Field & player_field = (&first_player_field)[i];
 		if
 			(1 < player_field                      .vision
@@ -635,9 +633,8 @@ void EditorGameBase::conquer_area_no_building
 	assert     (player_area.x < map().get_width());
 	assert(0 <= player_area.y);
 	assert     (player_area.y < map().get_height());
-	const Field & first_field = map()[0];
-	assert(&first_field <= player_area.field);
-	assert(player_area.field < &first_field + map().max_index());
+	assert(&map()[0] <= player_area.field);
+	assert(player_area.field < &map()[0] + map().max_index());
 	assert(0 < player_area.player_number);
 	assert    (player_area.player_number <= map().get_nrplayers());
 	MapRegion<Area<FCoords> > mr(map(), player_area);

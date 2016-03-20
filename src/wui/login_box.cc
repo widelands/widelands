@@ -20,6 +20,7 @@
 #include "wui/login_box.h"
 
 #include "base/i18n.h"
+#include "graphic/font_handler1.h"
 #include "profile/profile.h"
 #include "ui_basic/button.h"
 #include "ui_basic/messagebox.h"
@@ -33,22 +34,16 @@ Window(&parent, "login_box", 0, 0, 500, 220, _("Metaserver login"))
 	int32_t margin = 10;
 
 	ta_nickname = new UI::Textarea(this, margin, margin, _("Nickname:"));
-	eb_nickname =
-		new UI::EditBox
-			(this, 150, margin, 330, 20,
-			 g_gr->images().get("pics/but2.png"), UI::Align_Left);
+	eb_nickname = new UI::EditBox(this, 150, margin, 330, g_gr->images().get("images/ui_basic/but2.png"));
 
 	ta_password = new UI::Textarea(this, margin, 40, _("Password:"));
-	eb_password =
-		new UI::EditBox
-			(this, 150, 40, 330, 20,
-			 g_gr->images().get("pics/but2.png"), UI::Align_Left);
+	eb_password = new UI::EditBox(this, 150, 40, 330, g_gr->images().get("images/ui_basic/but2.png"));
 
 	pwd_warning =
 		new UI::MultilineTextarea
 			(this, margin, 65, 505, 50,
 			 _("WARNING: Password will be shown and saved readable!"),
-			 UI::Align_Left);
+			 UI::Align::kLeft);
 
 	cb_register = new UI::Checkbox(this, Point(margin, 110),
 											 _("Log in to a registered account"),
@@ -60,15 +55,21 @@ Window(&parent, "login_box", 0, 0, 500, 220, _("Metaserver login"))
 
 	UI::Button * loginbtn = new UI::Button
 		(this, "login",
-		 (get_inner_w() / 2 - 200) / 2, get_inner_h() - 20 - margin,
+		 UI::g_fh1->fontset()->is_rtl() ?
+			 (get_inner_w() / 2 - 200) / 2 :
+			 (get_inner_w() / 2 - 200) / 2 + get_inner_w() / 2,
+		 get_inner_h() - 20 - margin,
 		 200, 20,
-		 g_gr->images().get("pics/but5.png"),
+		 g_gr->images().get("images/ui_basic/but5.png"),
 		 _("Login"));
 	loginbtn->sigclicked.connect(boost::bind(&LoginBox::clicked_ok, boost::ref(*this)));
 	UI::Button * cancelbtn = new UI::Button
 		(this, "cancel",
-		 (get_inner_w() / 2 - 200) / 2 + get_inner_w() / 2, loginbtn->get_y(), 200, 20,
-		 g_gr->images().get("pics/but1.png"),
+		 UI::g_fh1->fontset()->is_rtl() ?
+			 (get_inner_w() / 2 - 200) / 2 + get_inner_w() / 2 :
+			 (get_inner_w() / 2 - 200) / 2,
+		 loginbtn->get_y(), 200, 20,
+		 g_gr->images().get("images/ui_basic/but1.png"),
 		 _("Cancel"));
 	cancelbtn->sigclicked.connect(boost::bind(&LoginBox::clicked_back, boost::ref(*this)));
 

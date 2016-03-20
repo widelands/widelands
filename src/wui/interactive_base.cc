@@ -103,12 +103,12 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
      road_build_player_(0),
      unique_window_handler_(new UniqueWindowHandler()),
      // Start at idx 0 for 2 enhancements, idx 3 for 1, idx 5 if none
-     workarea_pics_{g_gr->images().get("pics/workarea123.png"),
-                     g_gr->images().get("pics/workarea23.png"),
-                     g_gr->images().get("pics/workarea3.png"),
-                     g_gr->images().get("pics/workarea12.png"),
-                     g_gr->images().get("pics/workarea2.png"),
-                     g_gr->images().get("pics/workarea1.png")} {
+	  workarea_pics_{g_gr->images().get("images/wui/overlays/workarea123.png"),
+						  g_gr->images().get("images/wui/overlays/workarea23.png"),
+						  g_gr->images().get("images/wui/overlays/workarea3.png"),
+						  g_gr->images().get("images/wui/overlays/workarea12.png"),
+						  g_gr->images().get("images/wui/overlays/workarea2.png"),
+						  g_gr->images().get("images/wui/overlays/workarea1.png")} {
 
 	graphic_resolution_changed_subscriber_ = Notifications::subscribe<GraphicResolutionChanged>(
 	   [this](const GraphicResolutionChanged& message) {
@@ -137,7 +137,7 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
 
 	//  Having this in the initializer list (before Sys_InitGraphics) will give
 	//  funny results.
-	sel_.pic = g_gr->images().get("pics/fsel.png");
+	sel_.pic = g_gr->images().get("images/ui_basic/fsel.png");
 
 	setDefaultCommand (boost::bind(&InteractiveBase::cmd_lua, this, _1));
 	addCommand
@@ -206,7 +206,7 @@ void InteractiveBase::set_sel_pos(Widelands::NodeAndTriangle<> const center)
 						   player.is_hostile(*productionsite->get_owner())))
 						return set_tooltip("");
 				}
-				set_tooltip(productionsite->info_string(igbase->building_tooltip_format()));
+				set_tooltip(productionsite->info_string(Widelands::Building::InfoStringFormat::kTooltip));
 				return;
 			}
 	}
@@ -231,7 +231,7 @@ void InteractiveBase::set_sel_picture(const char * const file) {
 	set_sel_pos(get_sel_pos()); //  redraw
 }
 void InteractiveBase::unset_sel_picture() {
-	set_sel_picture("pics/fsel.png");
+	set_sel_picture("images/ui_basic/fsel.png");
 }
 
 bool InteractiveBase::buildhelp() const {
@@ -307,13 +307,6 @@ Called once per frame by the UI code
 */
 void InteractiveBase::think()
 {
-	// Timing
-	uint32_t curframe = SDL_GetTicks();
-
-	frametime_ = curframe - lastframe_;
-	avg_usframetime_ = ((avg_usframetime_  * 15) + (frametime_  * 1000)) / 16;
-	lastframe_ = curframe;
-
 	// If one of the arrow keys is pressed, scroll here
 	const uint32_t scrollval = 10;
 
@@ -335,12 +328,7 @@ void InteractiveBase::think()
 			set_rel_viewpoint(Point (scrollval, 0), false);
 		}
 	}
-
 	egbase().think(); // Call game logic here. The game advances.
-
-	//  The entire screen needs to be redrawn (unit movement, tile animation,
-	//  etc...)
-	g_gr->update();
 
 	UI::Panel::think();
 }
@@ -352,6 +340,13 @@ Draw debug overlay when appropriate.
 ===============
 */
 void InteractiveBase::draw_overlay(RenderTarget& dst) {
+	// Timing
+	uint32_t curframe = SDL_GetTicks();
+
+	frametime_ = curframe - lastframe_;
+	avg_usframetime_ = ((avg_usframetime_  * 15) + (frametime_  * 1000)) / 16;
+	lastframe_ = curframe;
+
 
 	const Map & map = egbase().map();
 	const bool is_game = dynamic_cast<const Game*>(&egbase());
@@ -361,36 +356,35 @@ void InteractiveBase::draw_overlay(RenderTarget& dst) {
 		std::string node_text;
 		if (is_game) {
 			const std::string gametime(gametimestring(egbase().get_gametime(), true));
-			const std::string gametime_text = as_uifont(gametime, UI_FONT_SIZE_SMALL);
-			dst.blit(Point(5, 5), UI::g_fh1->render(gametime_text), BlendMode::UseAlpha, UI::Align_TopLeft);
+			const std::string gametime_text = as_condensed(gametime);
+			dst.blit(Point(5, 5), UI::g_fh1->render(gametime_text), BlendMode::UseAlpha, UI::Align::kTopLeft);
 
 			static boost::format node_format("(%i, %i)");
-			node_text = as_uifont
-				((node_format % sel_.pos.node.x % sel_.pos.node.y).str(), UI_FONT_SIZE_SMALL);
-		} else { //this is an editor
+			node_text = as_condensed
+				((node_format % sel_.pos.node.x % sel_.pos.node.y).str());
+		} else { // This is an editor
 			static boost::format node_format("(%i, %i, %i)");
 			const int32_t height = map[sel_.pos.node].get_height();
-			node_text = as_uifont
-				((node_format % sel_.pos.node.x % sel_.pos.node.y % height).str(), UI_FONT_SIZE_SMALL);
+			node_text = as_condensed
+				((node_format % sel_.pos.node.x % sel_.pos.node.y % height).str());
 		}
 
 		dst.blit(
 			Point(get_w() - 5, get_h() - 5),
 			UI::g_fh1->render(node_text),
 			BlendMode::UseAlpha,
-			UI::Align_BottomRight);
+			UI::Align::kBottomRight);
 	}
 
-	// Blit FPS when in debug mode.
-	if (get_display_flag(dfDebug)) {
+	// Blit FPS when playing a game in debug mode.
+	if (get_display_flag(dfDebug) && is_game) {
 		static boost::format fps_format("%5.1f fps (avg: %5.1f fps)");
-		const std::string fps_text = as_uifont(
-		   (fps_format % (1000.0 / frametime_) % (1000.0 / (avg_usframetime_ / 1000))).str(),
-		   UI_FONT_SIZE_SMALL);
-		dst.blit(Point(5, (is_game) ? 25 : 5),
-		         UI::g_fh1->render(fps_text),
+		const Image * rendered_text = UI::g_fh1->render(as_condensed(
+			(fps_format % (1000.0 / frametime_) % (1000.0 / (avg_usframetime_ / 1000))).str()));
+		dst.blit(Point((get_w() - rendered_text->width()) / 2, 5),
+					rendered_text,
 		         BlendMode::UseAlpha,
-		         UI::Align_Left);
+					UI::Align::kLeft);
 	}
 }
 
@@ -741,8 +735,6 @@ void InteractiveBase::roadb_add_overlay()
 {
 	assert(buildroad_);
 
-	//log("Add overlay\n");
-
 	Map & map = egbase().map();
 
 	// preview of the road
@@ -812,15 +804,15 @@ void InteractiveBase::roadb_add_overlay()
 		const char * name = nullptr;
 
 		if (slope <= -4)
-			name = "pics/roadb_reddown.png";
+			name = "images/wui/overlays/roadb_reddown.png";
 		else if (slope <= -2)
-			name = "pics/roadb_yellowdown.png";
+			name = "images/wui/overlays/roadb_yellowdown.png";
 		else if (slope < 2)
-			name = "pics/roadb_green.png";
+			name = "images/wui/overlays/roadb_green.png";
 		else if (slope < 4)
-			name = "pics/roadb_yellow.png";
+			name = "images/wui/overlays/roadb_yellow.png";
 		else
-			name = "pics/roadb_red.png";
+			name = "images/wui/overlays/roadb_red.png";
 
 		field_overlay_manager_->register_overlay
 			(neighb,
@@ -839,8 +831,6 @@ Remove road building data from road overlay
 void InteractiveBase::roadb_remove_overlay()
 {
 	assert(buildroad_);
-
-	//log("Remove overlay\n");
 
 	//  preview of the road
 	if (jobid_) {

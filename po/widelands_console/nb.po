@@ -1,22 +1,21 @@
-# Norwegian Bokmal translation for widelands
-# Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
-# This file is distributed under the same license as the widelands package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
-#
+# Widelands PATH/TO/FILE.PO
+# Copyright (C) 2005-2016 Widelands Development Team
+# 
+# Translators:
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 msgid ""
 msgstr ""
-"Project-Id-Version: widelands\n"
-"Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2015-02-07 14:46+0000\n"
-"PO-Revision-Date: 2014-10-18 05:19+0000\n"
-"Last-Translator: GunChleoc <Unknown>\n"
-"Language-Team: Norwegian Bokmal <nb@li.org>\n"
+"Project-Id-Version: Widelands\n"
+"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
+"POT-Creation-Date: 2016-03-11 07:02+0000\n"
+"PO-Revision-Date: 2016-03-11 07:03+0000\n"
+"Last-Translator: GunChleoc\n"
+"Language-Team: Norwegian Bokmål (http://www.transifex.com/widelands/widelands/language/nb/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-02-08 05:43+0000\n"
-"X-Generator: Launchpad (build 17331)\n"
 "Language: nb\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. * TRANSLATORS: %s = version information
 #: ../../src/wlapplication_messages.cc:40
@@ -40,32 +39,27 @@ msgstr ""
 msgid ""
 " --logfile=FILENAME   Log output to file FILENAME instead of \n"
 "                      terminal output"
-msgstr ""
-" --logfile=FILNAVN   Logger utdata til FILNAVN istedenfor\n"
-"                      terminal-utdata"
+msgstr " --logfile=FILNAVN   Logger utdata til FILNAVN istedenfor\n                      terminal-utdata"
 
 #: ../../src/wlapplication_messages.cc:49
 msgid ""
 " --datadir=DIRNAME    Use specified directory for the widelands\n"
 "                      data files"
-msgstr ""
-" --datadir=MAPPE   bruker oppgitt mappe for Widelands\n"
-"                      datafiler"
+msgstr " --datadir=MAPPE   bruker oppgitt mappe for Widelands\n                      datafiler"
 
 #: ../../src/wlapplication_messages.cc:51
 msgid ""
 " --homedir=DIRNAME    Use specified directory for widelands config\n"
 "                      files, savegames and replays"
-msgstr ""
-" --homedir=MAPPENAVN    Bruk angitt mappe for Widelands konfigurasjons-\n"
-"                      filer, lagrede spill og repriser"
+msgstr " --homedir=MAPPENAVN    Bruk angitt mappe for Widelands konfigurasjons-\n                      filer, lagrede spill og repriser"
 
 #: ../../src/wlapplication_messages.cc:54
 msgid "                      Default is ~/.widelands"
 msgstr "                      Standard er ~/.widelands"
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
-#. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the widelands textdomain
+#. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
+#. widelands textdomain
 #: ../../src/wlapplication_messages.cc:59
 msgid ""
 " --coredump=[true|false]\n"
@@ -77,93 +71,78 @@ msgstr ""
 msgid ""
 " --language=[de_DE|sv_SE|...]\n"
 "                      The locale to use."
-msgstr ""
-" --language=[de_DE|sv_SE|...]\n"
-"                      Hvilken lokale som skal benyttes."
+msgstr " --language=[de_DE|sv_SE|...]\n                      Hvilken lokale som skal benyttes."
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
-#. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the widelands textdomain
-#: ../../src/wlapplication_messages.cc:66
-msgid ""
-" --remove_syncstreams=[true|false]\n"
-"                      Remove syncstream files on startup"
-msgstr ""
-
+#. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
+#. widelands textdomain.
+#. * TRANSLATORS: A syncstream is a synchronization stream. Syncstreams are
+#. used in multiplayer
+#. * TRANSLATORS: games to make sure that there is no mismatch between the
+#. players.
 #: ../../src/wlapplication_messages.cc:68
 msgid ""
-" --remove_replays=[...]\n"
-"                      Remove replays after this number of days.\n"
-"                      If this is 0, replays are not deleted."
+" --write_syncstreams=[true|false]\n"
+"                      Create syncstream dump files to help debug network games."
 msgstr ""
-" --remove_replays=[...]\n"
-"                      Fjern repriser etter angitt antall dager.\n"
-"                      Hvis tallet er 0, blir de ikke fjernet."
 
-#: ../../src/wlapplication_messages.cc:71
+#: ../../src/wlapplication_messages.cc:70
 msgid " --autosave=[...]     Automatically save each n minutes"
 msgstr ""
 
-#: ../../src/wlapplication_messages.cc:72
+#: ../../src/wlapplication_messages.cc:71
 msgid ""
 " --rolling_autosave=[...]\n"
 "                      Use this many files for rolling autosaves"
 msgstr ""
 
-#: ../../src/wlapplication_messages.cc:75
+#: ../../src/wlapplication_messages.cc:74
 msgid "Sound options:"
 msgstr "Lydvalg:"
 
-#: ../../src/wlapplication_messages.cc:76
+#: ../../src/wlapplication_messages.cc:75
 msgid " --nosound            Starts the game with sound disabled."
 msgstr " --nosound            Starter spillet med lyd avslått."
 
-#: ../../src/wlapplication_messages.cc:77
+#: ../../src/wlapplication_messages.cc:76
 msgid " --disable_fx         Disable sound effects."
 msgstr " --disable_fx         Slår av lydeffekter."
 
-#: ../../src/wlapplication_messages.cc:78
+#: ../../src/wlapplication_messages.cc:77
 msgid " --disable_music      Disable music."
 msgstr " --disable_music      Slår av musikk."
 
-#: ../../src/wlapplication_messages.cc:79
+#: ../../src/wlapplication_messages.cc:78
 msgid " --nozip              Do not save files as binary zip archives."
 msgstr ""
 
-#: ../../src/wlapplication_messages.cc:80
+#: ../../src/wlapplication_messages.cc:79
 msgid ""
 " --editor             Directly starts the Widelands editor.\n"
 "                      You can add a =FILENAME to directly load\n"
 "                      the map FILENAME in editor."
 msgstr ""
 
-#: ../../src/wlapplication_messages.cc:83
+#: ../../src/wlapplication_messages.cc:82
 msgid ""
 " --scenario=FILENAME  Directly starts the map FILENAME as scenario\n"
 "                      map."
-msgstr ""
-" --scenario=FILNAVN  Starter kartet FILNAVN direkte som et\n"
-"                      scenario."
+msgstr " --scenario=FILNAVN  Starter kartet FILNAVN direkte som et\n                      scenario."
 
-#: ../../src/wlapplication_messages.cc:85
+#: ../../src/wlapplication_messages.cc:84
 msgid " --loadgame=FILENAME  Directly loads the savegame FILENAME."
 msgstr " --loadgame=FILNAVN  Laster det lagrede spillet FILNAVN direkte."
 
-#: ../../src/wlapplication_messages.cc:86
+#: ../../src/wlapplication_messages.cc:85
 msgid ""
 " --script=FILENAME    Run the given Lua script after initialization.\n"
 "                      Only valid with --scenario, --loadgame, or --editor."
-msgstr ""
-" --script=FILNAVN    Kjør følgende Lua-skript etter oppstart.\n"
-"                      Kun gyldig sammen med --scenario, --loadgame, eller --"
-"editor."
-
-#: ../../src/wlapplication_messages.cc:88
-msgid " --dedicated=FILENAME Starts a dedicated server with FILENAME as map"
-msgstr " --dedicated=FILNAVN Starter en dedikert tjener med FILNAVN som kart"
+msgstr " --script=FILNAVN    Kjør følgende Lua-skript etter oppstart.\n                      Kun gyldig sammen med --scenario, --loadgame, eller --editor."
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
-#. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the widelands textdomain
-#: ../../src/wlapplication_messages.cc:91
+#. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
+#. widelands textdomain
+#: ../../src/wlapplication_messages.cc:89
 msgid ""
 " --auto_roadbuild_mode=[true|false]\n"
 "                      Whether to enter roadbuilding mode\n"
@@ -171,32 +150,33 @@ msgid ""
 "                      not connected to a road."
 msgstr ""
 
-#: ../../src/wlapplication_messages.cc:95
+#: ../../src/wlapplication_messages.cc:93
 msgid "Graphic options:"
 msgstr "Innstillinger for grafikk:"
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
-#. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the widelands textdomain
-#: ../../src/wlapplication_messages.cc:98
+#. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
+#. widelands textdomain
+#: ../../src/wlapplication_messages.cc:96
 msgid ""
 " --fullscreen=[true|false]\n"
 "                      Whether to use the whole display for the\n"
 "                      game screen."
 msgstr ""
 
-#: ../../src/wlapplication_messages.cc:101
+#: ../../src/wlapplication_messages.cc:99
 msgid " --xres=[...]         Width of the window in pixel."
 msgstr " --xres=[...]         Vinduets bredde i piksler."
 
-#: ../../src/wlapplication_messages.cc:102
+#: ../../src/wlapplication_messages.cc:100
 msgid " --yres=[...]         Height of the window in pixel."
 msgstr " --yres=[...]         Vinduets høyde i piksler."
 
-#: ../../src/wlapplication_messages.cc:106
+#: ../../src/wlapplication_messages.cc:104
 msgid "Options for the internal window manager:"
 msgstr "Valg for intern vindusbehandler:"
 
-#: ../../src/wlapplication_messages.cc:107
+#: ../../src/wlapplication_messages.cc:105
 msgid ""
 " --border_snap_distance=[0 ...]\n"
 "                      Move a window to the edge of the screen\n"
@@ -205,8 +185,9 @@ msgid ""
 msgstr ""
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
-#. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the widelands textdomain
-#: ../../src/wlapplication_messages.cc:113
+#. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
+#. widelands textdomain
+#: ../../src/wlapplication_messages.cc:111
 msgid ""
 " --dock_windows_to_edges=[true|false]\n"
 "                      Eliminate a window's border towards the\n"
@@ -214,7 +195,7 @@ msgid ""
 "                      window is next to the edge of the screen."
 msgstr ""
 
-#: ../../src/wlapplication_messages.cc:117
+#: ../../src/wlapplication_messages.cc:115
 msgid ""
 " --panel_snap_distance=[0 ...]\n"
 "                      Move a window to the edge of the panel when\n"
@@ -222,7 +203,7 @@ msgid ""
 "                      distance from the edge of the panel."
 msgstr ""
 
-#: ../../src/wlapplication_messages.cc:121
+#: ../../src/wlapplication_messages.cc:119
 msgid ""
 " --snap_windows_only_when_overlapping=[yes|no]\n"
 "                      Only move a window to the edge of a panel\n"
@@ -230,22 +211,18 @@ msgid ""
 "                      panel."
 msgstr ""
 
-#: ../../src/wlapplication_messages.cc:126
+#: ../../src/wlapplication_messages.cc:124
 msgid " --verbose            Enable verbose debug messages"
 msgstr " --verbose            Slå på utdypende feilsøkingsmeldinger"
 
-#: ../../src/wlapplication_messages.cc:128
+#: ../../src/wlapplication_messages.cc:126
 msgid " --help               Show this help"
 msgstr " --help               Viser denne hjelpen"
 
-#: ../../src/wlapplication_messages.cc:130
+#: ../../src/wlapplication_messages.cc:128
 msgid ""
 "Bug reports? Suggestions? Check out the project website:\n"
 "        https://launchpad.net/widelands\n"
 "\n"
 "Hope you enjoy this game!"
-msgstr ""
-"Feilrapporter? Forslag til forbedringer? Sjekk ut prosjektets hjemmeside:\n"
-"        https://launchpad.net/widelands\n"
-"\n"
-"Vi håper du liker Widelands!"
+msgstr "Feilrapporter? Forslag til forbedringer? Sjekk ut prosjektets hjemmeside:\n        https://launchpad.net/widelands\n\nVi håper du liker Widelands!"

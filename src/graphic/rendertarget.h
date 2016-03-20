@@ -28,11 +28,8 @@
 #include "graphic/color.h"
 #include "graphic/image.h"
 
+class Animation;
 class Surface;
-
-namespace Widelands {
-class Player;
-}
 
 /**
  * This class represents anything that can be rendered to.
@@ -60,7 +57,9 @@ public:
 	int32_t width() const;
 	int32_t height() const;
 
-	void draw_line(const Point& start, const Point& end, const RGBColor& color, uint8_t width = 1);
+	void draw_line_strip(const std::vector<FloatPoint>& points,
+								const RGBColor& color,
+								float width);
 	void draw_rect(const Rect&, const RGBColor&);
 	void fill_rect(const Rect&, const RGBAColor&);
 	void brighten_rect(const Rect&, int32_t factor);
@@ -68,13 +67,13 @@ public:
 	void blit(const Point& dst,
 	          const Image* image,
 	          BlendMode blend_mode = BlendMode::UseAlpha,
-	          UI::Align = UI::Align_TopLeft);
+				 UI::Align = UI::Align::kTopLeft);
 
 	// Like blit. See MonochromeBlitProgram for details.
 	void blit_monochrome(const Point& dst,
 						const Image* image,
 						const RGBAColor& blend_mode,
-						UI::Align = UI::Align_TopLeft);
+						UI::Align = UI::Align::kTopLeft);
 
 	void blitrect(const Point& dst,
 	              const Image* image,
@@ -86,16 +85,18 @@ public:
 	// multiplied with 'opacity' before blitting. The 'blend_mode'
 	// defines if values are blended with whats already there or just
 	// copied over.
-	void blitrect_scale(const Rect& destination_rect,
+	// Rect's are taken by value on purpose.
+	void blitrect_scale(Rect destination_rect,
 	                    const Image* image,
-	                    const Rect& source_rect,
+	                    Rect source_rect,
 	                    float opacity,
 	                    BlendMode blend_mode);
 
-	// Like blitrect_scale. See MonochromeBlitProgram for details.
-	void blitrect_scale_monochrome(const Rect& destination_rect,
+	// Like blitrect_scale. See MonochromeBlitProgram for details. Rect's are
+	// taken by value on purpose.
+	void blitrect_scale_monochrome(Rect destination_rect,
 	                               const Image* image,
-	                               const Rect& source_rect,
+	                               Rect source_rect,
 	                               const RGBAColor& blend);
 
 	void tile(const Rect&,
@@ -103,26 +104,39 @@ public:
 	          const Point& ofs,
 	          BlendMode blend_mode = BlendMode::UseAlpha);
 
-	void drawanim(const Point& dst, uint32_t animation, uint32_t time, const Widelands::Player* = 0);
-	void drawanimrect
-		(const Point& dst, uint32_t animation, uint32_t time, const Widelands::Player*, const Rect& srcrc);
+	// Draw the 'animation' as it should appear at 'time' in this target at 'dst'. Optionally, the animation is
+	// tinted with 'player_color' and cropped to 'source_rect'.
+	void blit_animation(const Point& dst, uint32_t animation, uint32_t time);
+	void blit_animation(const Point& dst, uint32_t animation, uint32_t time, const RGBColor& player_color);
+	void blit_animation(const Point& dst,
+	                    uint32_t animation,
+	                    uint32_t time,
+	                    const RGBColor& player_color,
+	                    const Rect& source_rect);
 
 	void reset();
 
-	Surface* get_surface() const {return m_surface;}
-	const Rect& get_rect() const {return m_rect;}
-	const Point& get_offset() const {return m_offset;}
+	Surface* get_surface() const {return surface_;}
+	const Rect& get_rect() const {return rect_;}
+	const Point& get_offset() const {return offset_;}
 
 protected:
 	bool clip(Rect & r) const;
-	bool to_surface_geometry(Point* dst, Rect* srcrc) const;
+	bool to_surface_geometry(Rect* destination_rect, Rect* source_rect) const;
 
-	///The target surface
-	Surface* m_surface;
-	///The current clip rectangle
-	Rect m_rect;
-	///Drawing offset
-	Point m_offset;
+	// Does the actual blitting.
+	void do_blit_animation(const Point& dst,
+	                       const Animation& animation,
+	                       uint32_t time,
+	                       const RGBColor* player_color,
+	                       const Rect& source_rect);
+
+	/// The target surface
+	Surface* surface_;
+	/// The current clip rectangle
+	Rect rect_;
+	/// Drawing offset
+	Point offset_;
 };
 
 #endif  // end of include guard: WL_GRAPHIC_RENDERTARGET_H

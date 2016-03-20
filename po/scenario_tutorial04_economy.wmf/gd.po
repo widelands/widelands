@@ -1,8 +1,8 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2015 Widelands Development Team
+# Copyright (C) 2005-2016 Widelands Development Team
 # 
 # Translators:
-# GunChleoc, 2015
+# GunChleoc, 2015-2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2013
 # GunChleoc, 2015
 # GunChleoc, 2013-2015
@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-28 11:19+0000\n"
-"PO-Revision-Date: 2015-11-30 10:45+0000\n"
+"POT-Creation-Date: 2016-03-02 08:54+0000\n"
+"PO-Revision-Date: 2016-03-02 09:03+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -20,44 +20,44 @@ msgstr ""
 "Language: gd\n"
 "Plural-Forms: nplurals=4; plural=(n==1 || n==11) ? 0 : (n==2 || n==12) ? 1 : (n > 2 && n < 20) ? 2 : 3;\n"
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:18
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:18
 msgid "Your Economy and its Settings"
 msgstr "An t-eaconamaidh agad agus a roghainnean"
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:20
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:20
 msgid "Economy"
 msgstr "An eaconamaidh"
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:21
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:21
 msgid ""
 "Welcome back. In this tutorial, I’ll tell you what you can do to check how "
 "well your economy works."
 msgstr "Fàilte air ais. San oideachadh seo, innsidh mi dhut dè as urrainn dhut dèanamh gus sùil a thoirt air dè cho math ’s a tha an t-eaconamaidh agad ag obrachadh."
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:22
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:22
 msgid ""
 "Building your economy up and making it work well and grow is the main part "
 "of Widelands. But you can’t control the workers directly – they will follow "
 "the general conditions you set."
 msgstr "’S e am prìomh amas aig Widelands a th’ ann gun tog thu eaconamaidh a dh’obraicheas gu math agus a dh’fhàsas. Ach chan eil smachd dìreach agad air na nì an luchd-obrach – leanaidh iad air an àrainneachd choitcheann a shuidhicheas tu."
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:23
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:23
 msgid ""
 "This is what I’ll show you in this tutorial: what actions can you take to "
 "define those general conditions?"
 msgstr "Seo na sheallas mi dhut dan oideachadh seo: dè na gnìomhan as urrainn dhut dèanamh gus an àrainneachd choitcheann seo a ghleusadh?"
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:31
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:31
 msgid "A Peaceful Land"
 msgstr "Tìr shìtheil"
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:33
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:33
 msgid ""
 "Now about the map: you have settled in a nice valley between two mountains, "
 "rich in marble, iron ore and coal. All were hoping for a peaceful life."
 msgstr "Nise, mu dhèidhinn a’ mapa: thuinich thu ann an gleann àlainn eadar dà bheinn sa bheil beartas marmoir, cloiche-iarainn agus guail. Bha a h-uile duine an dùil ’s an dòchas air beatha sìtheil."
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:34
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:34
 msgid ""
 "But one day, you discovered a barren wasteland with abandoned buildings in "
 "the east. A strange aura came from there, and no one wanted to set foot "
@@ -65,61 +65,61 @@ msgid ""
 "three castles."
 msgstr "Ach an latha a bha seo, lorg thu fàsach seasg le togalaichean trèigte gu ear. Thàinig àile neònach às agus cha robh duine deònach dol ann. Ach cha b’ urrainn dhut a’ chrìoch fhàgail gun dìon ’s thog thu trì caistealan ri linn sin."
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:35
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:35
 msgid ""
 "You had not been prepared for war, and you have to hurry now to build up an "
 "army."
 msgstr "Cha robh thu ullamh airson a’ chogaidh agus feumaidh tu feachd a thogail gu luath a-nis."
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:42
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:42
 msgid "The Tavern is Burning!"
 msgstr "Tha an taigh-tàirn agad ’na theine!"
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:44
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:44
 msgid "An accident"
 msgstr "Tubaist"
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:45
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:45
 msgid ""
 "Oh no, look at this: our tavern is burning! In all the hurry, our innkeeper "
 "accidentally dropped a torch. She is fine, but we could not extinguish the "
 "fire in time."
 msgstr "Obh obh, am faic thu sin: tha an taigh-tàirn againn ’na theine! Leis an greas a bha oirre, leig an tàrnadair againn lòchran tuiteam. Tha i ceart gu leòr, ach cha b’ urrainn dhuinn an teine a smàladh ri àm."
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:53
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:53
 msgid "Building statistics"
 msgstr "Stadastaireachd nan togalach"
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:55
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:55
 msgid "Check out your taverns"
 msgstr "Thoir sùil air na taighean-tàirn agad"
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:56
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:56
 msgid ""
 "At first, we should find out how many taverns we currently have. Widelands "
 "offers you a window where you can easily check this."
 msgstr "Bu chòir dhuinn faighinn a-mach an toiseach co mheud taigh-tàirn a th’ againn an-dràsta. Bheir Widelands uinneag dhut far am faic thu seo gun duilgheadas."
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:58
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:58
 msgid ""
 "First, you will have to open the statistics menu (you can find the "
 "corresponding button at the bottom). We will need this menu several times."
 msgstr "Tòisich le fosgladh uinneag na stadastaireachd (chì thu am putan air a son aig bonn na sgrìn). Bidh feum againn air a’ chlàr-taice seo iomadh turas."
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:59
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:59
 msgid "Afterwards, choose the ‘Building statistics’."
 msgstr "Tagh “Stadastaireachd nan togalach” an uairsin."
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:61
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:66
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:61
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:66
 msgid "Open the building statistics window."
 msgstr "Fosgail uinneag stadastaireachd nan togalach."
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:62
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:62
 msgid "You can also use the hotkey ‘b’."
 msgstr "’S urrainn dhut an hotkey “b” a chleachdadh cuideachd."
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:68
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:68
 msgid ""
 "The building statistics window gives you an overview over the buildings you "
 "have."
@@ -127,46 +127,46 @@ msgstr "Bheir uinneag stadastaireachd nan togalach foir-shealladh dhut air na to
 
 #. TRANSLATORS: "it" refers to the building statistics window
 #. TRANSLATORS: "it" refers to the stock menu window
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:72
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:145
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:72
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:145
 msgid "Open it. You can access it from the statistics menu."
 msgstr "Fosgail i. Gheibh thu greim oirre ann an clàr-taice na sadastaireachd."
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:73
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:146
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:73
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:146
 msgid ""
 "The statistics menu is accessed via the second button at the bottom. It "
 "provides several windows that give you information about the game."
 msgstr "Inntrigidh tu clàr-taice na stadastaireachd leis an dàrna putan aig a’ bhonn. Bheir e iomadh uinneag dhut le fiosrachadh mun gheama."
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:78
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:78
 msgid "Building Statistics"
 msgstr "Stadastaireachd nan togalach"
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:80
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:80
 msgid ""
 "This is the building statistics window. It shows you all buildings you can "
 "own, sorted by their size."
 msgstr "Seo uinneag stadastaireachd nan togalach. Seallaidh i dhut a h-uile togalach a b’ urrainn a bhith agad, air an seòrsachadh a-rèir am meud."
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:81
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:81
 msgid "Let me now explain what all those numbers mean:"
 msgstr "Mìnichidh mi dhut dè as ciall dha na h-àireamhan uile ud:"
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:83
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:83
 msgid ""
 "‘2/1’ below the quarry: This means that you have two quarries, plus another "
 "one which is under construction."
 msgstr "“2/1” fon chuaraidh: Is ciall dha seo gu bheil dà chuaraidh agad is fear eile a tha ’ga thogail."
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:84
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:84
 msgid ""
 "‘0%’: This indicates the average productivity of all buildings of that type."
 " You have just started this game, therefore none of your buildings has done "
 "any work yet, but they are going to start working soon."
 msgstr "“0%”: Seallaidh seo dhut an dèanadas cuibheasach aig a h-uile togalach dhen t-seòrsa ud. Chan eil thu ach air an geama seo a thòiseachadh, mar sin cha do rinn gin dhe na togalaichean agad obair fhathast. Tòisichidh iad air an obair a dh’aithghearr co-dhiù."
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:85
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:85
 msgid ""
 "‘2/4’ below your sentry: For military buildings, the stationed soldiers are "
 "shown instead of a productivity. You want to have four soldiers in your "
@@ -174,196 +174,196 @@ msgid ""
 " leaves two vacant positions – we really need more soldiers."
 msgstr "“2/4” fon fhreiceadan agad: Airson togalaichean an airm, thèid na saighdearan a tha ann a shealltainn dhut seach dèanadas. Tha thu ar iarraidh ceithir saighdear sna freiceadain agad ach chan eil ach dà shaighdear ’nan gearastan ann an togalaichean dhen t-seòrsa ud. Mar sin, tha dà dhreuchd fhalamh agad – tha sinn fìor-fheumach air saighdearan ùra."
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:86
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:86
 msgid ""
 "In both cases, the color (green - yellow - red) signals you how good the "
 "value is."
 msgstr "Leis an dath dhiubh, seallaidh an dath (uaine - buidhe - dearg) dhut dè cho math ’s a tha an luach."
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:87
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:87
 msgid ""
 "If you click on a building, you can scroll through the buildings of the "
 "selected type."
 msgstr "Às dèidh briogadh air togalach, ’s urrainn dhut sgroladh tro na togalaichean dhen t-seòrsa a thagh thu."
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:88
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:88
 msgid ""
 "If you don’t have any building of a particular building type, it will be "
 "shown greyed out."
 msgstr "Mur eil togalach sam bith dhe sheòrsa sònraichte agad, thèid a liathachadh a-mach."
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:91
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:91
 msgid "Now it’s your turn"
 msgstr "Siuthad is feuch e a-nis"
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:92
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:92
 msgid ""
 "This is enough explanation for now. Now try it out yourself. We want to know"
 " whether we still have taverns, so you have to choose the ‘Medium Buildings’"
 " tab. Close the building statistics menu afterwards."
 msgstr "Foghnaidh dhen mhìneachadh an-dràsta. Nise, feuch e. Tha sinn airson faighinn a-mach a bheil taighean-tàirn againn fhathast, mar sin feumaidh tu taba nan “Togalaichean meadhanach” a thaghadh. Dùin uinneag stadastaireachd nan togalach an uairsin."
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:95
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:95
 msgid "Look up your number of taverns in the building statistics window."
 msgstr "Faigh a-mach co mheud taigh-tàirn a th’ agad ann an uinneag stadastaireachd nan togalach."
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:97
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:97
 msgid "Choose the ‘Medium Buildings’ tab in the building statistics window."
 msgstr "Tagh taba nan “Togalaichean meadhanach” ann an uinneag stadastaireachd nan togalach."
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:98
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:98
 msgid "Look up how many taverns you have."
 msgstr "Faigh a-mach co mheud taigh-tàirn a th’ agad."
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:99
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:99
 msgid ""
 "Below every building, there are two lines. The first one shows the number of"
 " buildings you own and how many are under construction. The second line "
 "shows the average productivity if it is a production site or training site, "
 "or the stationed and desired soldiers in military buildings."
-msgstr "Tha dà loidhne fo gach togalach. Seallaidh an dàrna tè an àireamh de thogalaichean a th’ agad is co mheud a tha ’gan togail. Seallaidh an loidhne eile an dèanadas cuibheasach mas e togalach saothrachaidh no trèanaidh a th’ ann no na saighdearan a tha ’nan gearastan ann ’s a tha thu ag iarraidh ann an togalaichean an airm."
+msgstr "Tha dà loidhne fo gach togalach. Seallaidh an dàrna tè an àireamh de thogalaichean a th’ agad is co mheud a tha ’gan togail. Seallaidh an loidhne eile an dèanadas cuibheasach mas e togalach saothrachaidh no ionad-trèanaidh a th’ ann no na saighdearan a tha ’nan gearastan ann ’s a tha thu ag iarraidh ann an togalaichean an airm."
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:100
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:100
 msgid "Close the building statistics window when you are done."
 msgstr "Dùin uinneag stadastaireachd nan togalach nuair a bhios tu deiseil."
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:105
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:105
 msgid "You closed the building statistics window!"
 msgstr "Dhùin thu uinneag stadastaireachd nan togalach!"
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:107
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:107
 msgid ""
 "You have closed the building statistics window. I didn’t notice that you "
 "switched to the medium buildings to look up the number of taverns. Would you"
 " please be so nice and show it to me?"
 msgstr "Tha thu air uinneag stadastaireachd nan togalach a dhùnadh. Cha ro mhothaich mi gun do dh’atharraich thu dha na togalaichean meadhanach gus sùil a thoirt air uiread nan taighean-tàirn. Nach seall thu dhomh e?"
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:116
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:116
 msgid "Open the building statistics window again."
 msgstr "Fosgail uinneag stadastaireachd nan togalach a-rithist."
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:118
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:118
 msgid ""
 "You closed the building statistics window, although you have not yet looked "
 "up the number of taverns."
 msgstr "Tha thu air uinneag stadastaireachd nan togalach a dhùnadh ged nach dug thu sùil air uiread nan taighean-tàirn fhathast."
 
 #. TRANSLATORS: "it" refers to the building statistics window.
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:121
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:121
 msgid "Please reopen it and choose the second tab (medium buildings)."
 msgstr "Feuch am fosgail thu a-rithist i agus tagh an dàrna taba (togalaichean meadhanach)."
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:128
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:151
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:171
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:128
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:151
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:171
 msgid "Stock"
 msgstr "An stòras"
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:130
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:130
 msgid "Check for rations"
 msgstr "Thòir sùil air na greimeagan"
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:131
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:131
 msgid ""
 "OK. In the list, you’ve seen that you have no more taverns or inns. That "
 "means that you’re not producing any rations. But let’s see what we still "
 "have in stock."
 msgstr "Ceart mar-thà. Chunnaic thu air an liosta nach eil taigh-tàirn no taigh-seinnse sam bith air fhàgail dhut. Is ciall dha seo nach eil thu a’ dèanamh greimeagan. Ach thoireamaid sùil air na tha san stòras againn fhathast."
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:133
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:133
 msgid "Click on the ‘Stock’ button."
 msgstr "Briog air a’ phutan “An stòras”."
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:136
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:136
 msgid ""
 "You can also use the hotkey ‘i’ (as in ‘inventory’) to access this window "
 "quickly."
 msgstr "’S urrainn dhut an t-iuchair “i” (mar “iomlan”) a chleachdadh cuideachd gus an uinneag seo inntrigeadh gu luath."
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:140
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:140
 msgid "Open your stock window."
 msgstr "Fosgail uinneag an stòrais."
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:142
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:142
 msgid ""
 "The stock menu window gives you an overview over the wares you currently "
 "have."
 msgstr "Bheir uinneag clàr-taice an stòrais foir-shealladh dhut air a’ bhathar a th’ agad an-dràsta."
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:153
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:153
 msgid ""
 "The stock menu window has four tabs. The first (and currently selected) one "
 "shows you all your current wares, including those on roads, at flags and "
 "inside buildings waiting for processing."
 msgstr "Tha ceithir taba ann an uinneag clàr-taice an stòrais. Seallaidh a’ chiad fhear (a chaidh a thaghadh dhut) am bathar gu lèir a th’ agad an-dràsta, a’ gabhail a-steach na tha air na rathaidean, aig brataich agus a’ feitheamh taobh a-staigh thogalaichean gus an tèid a chleachdadh."
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:154
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:154
 msgid ""
 "Looking at the rations, there are currently only five in total, probably on "
 "their way to somewhere. Five rations are not much for such a big economy."
 msgstr "A thaobh nan greimeagan, tha còig gu lèir agad an-dràsta agus tha iad air an rathad gu àite air choireigin gun teagamh. Chan fhoghainn còig greimeagan airson eaconamaidh a tha cho mòr sin."
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:155
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:155
 msgid ""
 "The second tab shows you all your workers, again those on roads and in "
 "buildings summed up."
 msgstr "Seallaidh an dàrna taba an luchd-obrach gu lèir agad dhut, a-rithist an fheadhainn a tha air na rathaidean agus sna togalaichean còmhla."
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:156
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:156
 msgid "Now have a look at these two tabs. When you click on the"
 msgstr "Thoir sùil air an dà thaba seo a-nis. Nuair a nì thu briogadh air"
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:157
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:157
 msgid "third tab (‘Wares in warehouses’), I’ll continue."
 msgstr "an treas taba (“Bathar ann an taighean-stòrais”), leanaidh mi air adhart."
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:162
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:162
 msgid "Switch to the third tab in the stock menu window."
 msgstr "Tagh an treas taba ann an uinneag clàr-taice an stòrais."
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:164
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:164
 msgid ""
 "Have a look at the first two tabs in the stock menu window. They show all "
 "the wares and workers you have."
 msgstr "Thoir sùil air a’ chiad dà thaba ann an uinneag clàr-taice an stòrais. Seallaidh iad am bathar ’s an luchd-obrach gu lèir a th’ agad dhut."
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:166
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:284
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:166
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:284
 msgid "When you have seen enough, switch to the third tab."
 msgstr "Nuair a bhios tu air do leòr fhaicinn, tagh an treas taba."
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:173
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:173
 msgid ""
 "The third tab shows you the wares that are stored in your headquarters, your"
 " warehouses and ports. They are not needed anywhere and are therefore your "
 "reserve."
 msgstr "Seallaidh an treas taba dhut am bathar a tha ’ga ghlèidheadh sa phrìomh-àras, sna taighean-stòrais agus sna puirt agad. Chan eil thu feumach orra an-dràsta agus is iad an cùl-stòras agad."
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:174
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:174
 msgid "The fourth tab shows the same thing for workers."
 msgstr "Seallaidh an ceathramh taba an aon rud airson an luchd-obrach dhut."
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:175
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:175
 msgid ""
 "The third tab tells you that there are no rations left in your headquarters "
 "– that’s not good!"
 msgstr "Innsidh an treas taba dhut nach eil greimeag sam bith air fhàgail sa phrìomh-àras agad – chan eil sin math!"
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:182
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:182
 msgid "You closed the stock window!"
 msgstr "Dhùin thu uinneag an stòrais!"
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:184
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:184
 msgid ""
 "You have closed the stock menu window, but I have not yet finished with my "
 "explanation. Would you please reopen it and choose the third tab?"
 msgstr "Dhùin thu uinneag an stòrais, ach chan eil mi deiseil leis na mìneachaidhean agam. Am fosgail thu a-rithist i agus an tagh thu an treas taba?"
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:193
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:193
 msgid "Open the stock window again."
 msgstr "Fosgail uinneag an stòrais a-rithist."
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:195
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:195
 msgid ""
 "You closed the stock menu window before I finished telling you everything "
 "about it. If you already know everything, please feel free to leave this "
@@ -372,20 +372,20 @@ msgstr "Dhùin thu uinneag an stòrais mus robh mi deiseil leis na mìneachaidhe
 
 #. TRANSLATORS: "it" refers to the stock menu window.
 #. TRANSLATORS: "it" refers to the ware statistics window.
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:198
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:343
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:198
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:343
 msgid "Otherwise, please reopen it and choose the third tab."
 msgstr "Mur eil, feuch am fosgail thu a-rithist i agus tagh an treas taba."
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:205
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:205
 msgid "New taverns"
 msgstr "Taighean-tàirn ùra"
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:207
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:207
 msgid "We need new taverns"
 msgstr "Feumaidh sinn taighean-tàirn ùra"
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:208
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:208
 msgid ""
 "Now that you have an overview, you should act. I think we should build more "
 "than one tavern – two or three are better. Remember: as long as we don’t "
@@ -393,73 +393,73 @@ msgid ""
 "forge a single helm."
 msgstr "Nise on a tha am fiosrachadh agad, bu chòir dhut rudeigin a dhèanamh. Saoilidh mi gum bu chòir dhuinn barrachd air aon taigh-tàirn a thogail. Thoir an aire: cho fad ’s nach dèan sinn greimeag, cha tochail na mèinnearan againn airson cloiche-iarainn. Agus gun iarainn, chan urrainn dhuinn clogaid sam bith a dhèanamh."
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:210
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:218
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:210
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:218
 msgid "Build at least two taverns."
 msgstr "Tog co-dhiù dà thaigh-tàirn."
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:214
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:214
 msgid "Build new taverns."
 msgstr "Tog taighean-tàirn ùra."
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:216
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:216
 msgid "To make our mines work, we need rations again – the more, the better."
 msgstr "Bidh feum againn air greimeagan a-rithist ach an obraich na mèinnean againn – mar as motha dhiubh ’s ann nas fhearr."
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:223
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:223
 msgid "Ware Encyclopedia"
 msgstr "Leabhar-eòlais bathair"
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:225
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:225
 msgid ""
 "I am not sure if you could follow my remarks. Why do we need rations to get "
 "soldiers?"
 msgstr "Chan eil mi cinnteach an do thuig thu na thuirt mi. Carson a tha feum againn air greimeagan ach am faigh sinn saighdearan?"
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:226
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:226
 msgid ""
 "When you’ve played a lot, you will know such things by heart. But when "
 "you’re unsure what this tribe needs for a special ware, you can easily look "
 "it up in your tribe’s ware encyclopedia."
 msgstr "Nuair a bhios tu air cluiche gu tric, bi a leithid eòlais air do theangaidh. Ach mura h-eil thu cinnteach dè a dh’fheumas an treubh seo airson bathair shònraichte, ’s urrainn dhut seo a rannsachadh ann an leabhar-eòlais bathar do threubha."
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:227
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:227
 msgid "This encyclopedia can be accessed via"
 msgstr "Thèid thu a-steach dhan leabhar-eòlais le"
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:229
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:229
 msgid ""
 "the help button at the bottom. For all your tribe’s wares, it shows a short "
 "help text, a list of buildings that produces the ware and the needed wares."
 msgstr "putan na cobharach air bonn na sgrìn. Airson gach bathar do threubha, seallaidh e teacsa cobharach goirid dhut, liosta de thogalaichean a nì am bathar ud agus na batharan air a bhios feum."
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:230
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:230
 msgid ""
 "If you want, you can try it out. A soldier needs a wooden spear and a helmet"
 " – from there on out, you can search backwards."
 msgstr "Feuch ris ma thogras tu. Bidh saighdear feumach air sleagh fiodha agus clogaid – ’s urrainn dhut rannsachadh deireadh air thoiseach o seo a-mach."
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:237
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:237
 msgid "Priority Settings"
 msgstr "Roghainnean prìomhachais"
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:239
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:239
 msgid "Send the wares where they’re needed"
 msgstr "Cuir am bathar gu far a bheil feum air"
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:240
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:240
 msgid ""
 "Great. Our taverns have now been built up and are supplying us with rations."
 msgstr "Taghta. Tha na taighean-tàirn againn air an togail a-nis agus a’ toirt greimeagan dhuinn."
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:241
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:241
 msgid ""
 "At the moment, all mines are supplied with rations. If you want to "
 "prioritize a special mine, you simply have to open its window. In the wares "
 "tab, behind every ware, you can see ‘traffic lights’."
 msgstr "Tha thu a’ cur greimeagan dhan a h-uile mèinn an-dràsta. Ma tha thu airson prìomhachas a thoirt air aon dhiubh gu sònraichte, feumaidh tu an uinneag aice fhosgladh. Ann an taba a’ bhathair, an cois gach bathair, chì thu “solasan-trafaig”."
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:242
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:242
 msgid ""
 "When you click on the red dot (low priority), the corresponding ware gets "
 "delivered less frequently. Green means that as many wares as possible should"
@@ -467,7 +467,7 @@ msgid ""
 "important."
 msgstr "Ma nì thu briogadh air an dotag dhearg (prìomhachas ìseal) thèid am bathar co-cheangailte rithe a lìbhrigeadh as ainneimhe. Is ciall dha dh’uaine gun tèid na ghabhas dhen bhathar a lìbhrigeadh dhan togalach ud, ’s dòcha air sgàth ’s gun dèan e rudeigin cudromach."
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:243
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:243
 msgid ""
 "In our situation, you might want to work the bakeries as fast as possible "
 "because they supply our taverns, so you could set water to the highest "
@@ -475,59 +475,59 @@ msgid ""
 "then get less water, but the bakery could work faster."
 msgstr "San t-suidheachadh sa bheil sinn an-dràsta, ’s dòcha gu bheil thu airson ’s gun obraich na taighean-fuine cho luath ’s a ghabhas air sgàth ’s gun lìbhrig iad bathar dha na taighean-tàirn, mar sin b’ urrainn dhut am prìomhachas as àirde a thoirt air an uisge dhaibh. Gheibheadh gach togalach eile (an stàball mar eisimpleir) nas lugha dhe dh’uisge ach rinneadh an taigh-fuine obair na bu luaithe."
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:251
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:270
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:289
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:308
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:251
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:270
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:289
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:308
 msgid "Ware Statistics"
 msgstr "Stadastaireachd nam bathar"
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:253
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:253
 msgid "In the statistics menu, there is also a"
 msgstr "An an clàr-taice na stadastaireachd, tha"
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:254
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:254
 msgid "‘Ware statistics’ button."
 msgstr "putan “Stadastaireachd nam bathar” ann cuideachd."
 
 #. TRANSLATORS: "it" refers to the ware statistics button
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:257
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:257
 msgid "Click on it."
 msgstr "Briog air."
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:262
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:262
 msgid "Open the ware statistics window."
 msgstr "Fosgail uinneag stadastaireachd nam bathar."
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:265
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:265
 msgid "Open the ‘Ware statistics’ window, accessed via the statistics menu."
 msgstr "Fosgail uinneag “Stadastaireachd nam bathar” a gheibh thu ann an clàr-taice na stadastaireachd."
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:272
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:272
 msgid ""
 "In this menu window, you can select wares to see how their production or "
 "consumption has changed over time. Try it out with some wares."
 msgstr "San uinneag clàir-thaice seo, ’s urrainn dhut bathar a thaghadh ach am faic thu mar a dh’atharraich an dèanadas ’s an caitheamh rè ama. Feuch ris le bathar no dhà."
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:274
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:274
 msgid "I’ll continue as soon as you click on the"
 msgstr "Leanaidh mi air adhart nuair a nì thu briogadh air"
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:275
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:275
 msgid "third tab (‘Economy Health’)."
 msgstr "an treas taba (“Slàinte an eaconamaidh”)."
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:280
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:280
 msgid "Switch to the third tab in the ware statistics menu window."
 msgstr "Tagh an treas taba ann an uinneag clàr-taice stadastaireachd nam bathar."
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:282
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:282
 msgid ""
 "The first two tabs show you the production and consumption of any ware. You "
 "can toggle them by simply clicking on them."
 msgstr "Seallaidh a’ chiad dà thaba an dèanadas agus na tha ’ga chaitheamh airson gach bathair dhut. Cha leig thu leas ach briogadh orra gus an toglachadh."
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:291
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:291
 msgid ""
 "In this tab, you can see the difference between production and consumption, "
 "called ‘economy health’. You can see at one glance which one of those two is"
@@ -535,150 +535,150 @@ msgid ""
 "decreases."
 msgstr "San taba seo, chì thu an diofar eadar dèanamh is caitheamh air an canaidh sinn “slàinte an eaconamaidh”. Chì thu sa bhad dè tha nas àirde airson a’ bhathair a thagh thu agus is ciall dha seo am meudaich no an lùghdaich na th’ agad dhen bhathar."
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:292
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:292
 msgid "Now try this out. You can also compare it with the two previous tabs."
 msgstr "Feuch ris a-nis. ’S urrainn dhut a choimeas ris an dà thaba roimhe cuideachd."
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:294
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:294
 msgid "Click on the last tab when I should continue."
 msgstr "Briog air an taba mu dheireadh nuair a bu chòir dhomh leantainn air adhart."
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:299
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:299
 msgid "Switch to the last tab in the ware statistics menu window."
 msgstr "Tagh an taba mu dheireadh ann an uinneag clàr-taice stadastaireachd nam bathar."
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:301
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:301
 msgid ""
 "The third tab shows you the economy health of the ware. When the value is "
 "positive, this means your stock is growing."
 msgstr "Seallaidh an treas taba dhut slàinte an eaconamaidh airson bathair. Ma tha an luach deimhinneach, is ciall dha seo gu bheil an stòras agad a’ fàs."
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:303
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:303
 msgid "When you have seen enough, switch to the fourth tab."
 msgstr "Nuair a bhios tu air do leòr fhaicinn, tagh an ceathramh taba."
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:310
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:310
 msgid ""
 "In the last tab, you can also see your absolute stock. It will increase when"
 " the economy health is positive, and decrease otherwise. Compare the two "
 "graphs!"
 msgstr "San taba mu dheireadh, chì thu an dearbh stòras agad. Thèid e am meud nuair a bhios slàinte an eaconamaidh deimhinneach agus crìonaidh e mura bi. Dèan coimeas eadar an dà ghraf!"
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:311
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:311
 msgid ""
 "The last two tabs are good indicators to see whether shortages are about to "
 "come. Don’t forget to check them regularly!"
 msgstr "Innsidh an dà thaba mu dheireadh dhut ma tha gainnead gu bhith tighinn ort. Cum ’nad aire gun doir thu sùil orra gu reusanta cunbhalach!"
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:313
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:313
 msgid "Close this window when you’re done."
 msgstr "Dùin an uinneag seo nuair a bhios tu deiseil."
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:318
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:318
 msgid "Close the ware statistics window."
 msgstr "Dùin uinneag stadastaireachd nam bathar."
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:320
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:320
 msgid ""
 "The stock tab shows you how many wares you have. Compare the information "
 "from the four tabs to understand the correlation."
 msgstr "Seallaidh taba an stòrais dhut do mheud bathar a th’ agad. Coimeas am fiosrachadh sa cheithir taba ri chèile gus an dàimh eatorra a thuigsinn."
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:322
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:322
 msgid "When you have finished, close the ware statistics window."
 msgstr "Nuair a bhios tu deiseil, dùin uinneag stadastaireachd nam bathar."
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:327
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:348
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:327
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:348
 msgid "You closed the ware statistics window!"
 msgstr "Dhùin thu uinneag stadastaireachd nam bathar!"
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:329
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:329
 msgid ""
 "You have closed the ware statistics menu window, but I have not yet finished"
 " with my explanation. Would you please reopen it and choose the third tab?"
 msgstr "Dhùin thu uinneag clàr-taice stadastaireachd nam bathar, ach chan eil mi deiseil leis na mìneachaidhean agam. Am fosgail thu a-rithist i agus an tagh thu an treas taba?"
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:338
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:359
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:338
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:359
 msgid "Open the ware statistics window again."
 msgstr "Fosgail uinneag stadastaireachd nam bathar a-rithist."
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:340
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:361
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:340
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:361
 msgid ""
 "You closed the ware statistics menu window before I finished telling you "
 "everything about it. If you already know everything, please feel free to "
 "leave this tutorial at any time."
 msgstr "Dhùin thu uinneag clàr-taice stadastaireachd nam bathar mus robh mi deiseil leis na mìneachaidhean agam. Ma tha thu eòlach air a h-uile rud mar-thà, tha thu làn di-beathte an t-oideachadh seo fhàgail uair sam bith."
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:350
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:350
 msgid ""
 "You have closed the ware statistics menu window, but I have not yet finished"
 " with my explanation. Would you please reopen it and choose the fourth tab?"
 msgstr "Dhùin thu uinneag clàr-taice stadastaireachd nam bathar, ach chan eil mi deiseil leis na mìneachaidhean agam. Am fosgail thu a-rithist i agus an tagh thu an ceathramh taba?"
 
 #. TRANSLATORS: "it" refers to the ware statistics window.
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:364
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:364
 msgid "Otherwise, please reopen it and choose the fourth tab."
 msgstr "Mur eil, feuch am fosgail thu a-rithist i agus tagh an ceathramh taba."
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:370
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:391
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:403
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:370
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:391
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:403
 msgid "Economy options"
 msgstr "Roghainnean an eaconamaidh"
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:372
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:372
 msgid ""
 "I’ve shown you our stock menu window, where you could see which wares are at"
 " the warehouses. You remember?"
 msgstr "Sheall mi uinneag clàr-taice an stòrais againn dhut far am faca tu dè am bathar a bha sna taighean-stòrais. A bheil cuimhne agad?"
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:373
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:373
 msgid ""
 "Now I’ll tell you how you can determine how many wares you want to have. The"
 " menu window for this purpose can be accessed via any flag and is called "
 "‘Configure economy’."
 msgstr "Innsidh mi dhut a-nis mar a shuidhicheas tu cò mheud bathar a tha thu ag iarraidh. Gheibh thu greim air an uinneag clàir-thaice air a shon le bratach sam bith agus ’s e “Rèitich an eaconamaidh” a tha air."
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:375
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:375
 msgid "This is the icon."
 msgstr "Seo an ìomhaigheag."
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:378
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:378
 msgid "Open this window."
 msgstr "Fosgail an uinneag seo."
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:382
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:385
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:382
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:385
 msgid "Open the ‘Configure economy’ window."
 msgstr "Fosgail an uinneag “Rèitich an eaconamaidh”."
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:386
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:386
 msgid "The window can be accessed by clicking on any flag you own."
 msgstr "Gheibh thu greim air an uinneag ’s tu a’ briogadh air bratach sam bith a tha leatsa."
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:393
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:393
 msgid ""
 "This window looks similar to the stock window, but it has additional buttons"
 " at the bottom."
 msgstr "Tha an uinneag seo coltach ri uinneag an stòrais ach tha barrachd phutanan aig a’ bhonn."
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:394
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:394
 msgid ""
 "You first have to select one or more wares (you can also left-click and "
 "drag). Then you can set the desired target quantity for the selected wares."
 msgstr "Feumaidh tu bathar no dhà a thaghadh an toiseach (faodaidh tu slaodadh le briogadh deas cuideachd). ’S urrainn dhut an t-uiread-amais a shuidheachadh airson a’ bhathair a thagh thu an uairsin."
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:395
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:395
 msgid ""
 "Most buildings will only produce something when the stock level in your "
 "warehouses falls below the target quantity, so you should indicate the "
 "reserve you want to stockpile."
 msgstr "Cha dèan a’ mhòrchuid a thogalaichean bathar ach nuair a bhios nas lugha dheth na am meud-amais sna taighean-stòrais agad, mar sin bu chòir dhut an cùl-stòras a tha thu airson glèidheadh a shuidheachadh."
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:396
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:396
 msgid ""
 "An example: the default value for scythes is 1. If you build a farm, a "
 "carrier will take a scythe and become a farmer. Then there will be no "
@@ -686,7 +686,7 @@ msgid ""
 "start producing another one."
 msgstr "Seo eisimpleir: ’s e 1 a tha san luach tùsail airson fàil. Ma thogas tu tuathanas, gabhaidh giùlanair greim air fàl ach an tèid e ’na thuathanach. Cha bhi fàl air fhàgail dhut an uairsin ach ’s e 1 a th’ anns an uiread-amais, mar sin tòisichidh an ceàrd air fear eile a dhèanamh"
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:397
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:397
 msgid ""
 "If you build two farms, only one of them will start working immediately. The"
 " second farm will have to wait for its worker, who will lack a scythe. If "
@@ -694,7 +694,7 @@ msgid ""
 "available and both farms would have been able to start working right away."
 msgstr "Ma thogas tu dà thuathanas, cha tòisich ach an dàrna fear ag obair sa bhad. Feumaidh am fear eile feitheamh airson neach-obrach air a bheil dìth fàil. Nan robh thu air am meud-amais a shuidheachadh air 2 roimhe, bhiodh dà fhàl ri làimh dhut agus an dà thuathanas air tòiseachadh ag obair sa bhad."
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:405
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:405
 msgid ""
 "By changing the target quantity, you can therefore decide which wares/tools "
 "your resources (in this case: iron) should be turned into or whether you "
@@ -702,124 +702,124 @@ msgid ""
 "for."
 msgstr "Nuair a shuidhicheas tu an t-uiread-amais, cuiridh tu romhad dè am bathar/na h-acainnean a thèid a dhèanamh dhen stòras (iarainn san eisimpleir seo) a th’ agad no am b’ fhearr leat an t-iarann a ghlèidheadh gus am bi fios agad air dè nì thu leis."
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:406
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:406
 msgid ""
 "Only buildings that consume wares care about this setting. Buildings that "
 "produce wares for free (e.g. your farms or wells) will always keep working."
 msgstr "Chan eil diù ach aig na togalaichean a chaitheas bathar air an roghainn seo. Cumaidh na togalaichean a nì bathar an-asgaidh (can na tuathanasan no tobraichean agad) a’ dol an-còmhnaidh."
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:407
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:407
 msgid ""
 "Now let’s try it out: the current target quantity for marble columns is 10. "
 "Increase it to be prepared in case you will have to build up your "
 "fortifications quickly."
 msgstr "Feuchaidh sinn ris a-nis: ’s e 10 a tha san uiread-amais airson colbhan marmoir an-dràsta. Meudaich e ach am bi thu ullamh air eagal ’s gum feum thu cur ris an daingneachadh agad gu luath."
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:409
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:409
 msgid ""
 "Set the target quantity for marble columns to 20 and wait for your "
 "stonemason to produce them."
 msgstr "Suidhich uiread-amais nan colbhan marmoir air 20 agus fuirich ort gus am bi an clachair air an dèanamh."
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:414
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:414
 msgid ""
 "Sometimes, you will need many wares at the same time quickly – faster than "
 "they can be produced. In this case, it is good to have enough on reserve."
 msgstr "Uaireannan, bidh feum agad air mòran bhathar gu luath ’s aig an aon àm – nas luaithe nas urrainn dhut a dhèanamh. Nuair a thachras seo, ’s math ma bhios gu leòr dheth sa chùl-stòras agad."
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:416
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:416
 msgid ""
 "To be prepared for additional fortifications, you should produce 20 marble "
 "columns."
 msgstr "Bu chòir dhut 20 colbh marmoir a dhèanamh ach am biodh tu ullamh airson barrachd daingneachaidh."
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:417
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:417
 msgid ""
 "Your stonemason will not produce marble columns when they are not needed. "
 "You have to increase the target quantity."
 msgstr "Cha dèan an clachair agad colbh marmoir ach nuair a bhios feum air. Feumaidh tu an t-uiread-amais a mheudachadh."
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:418
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:418
 msgid ""
 "To do so, click on any flag and choose ‘Configure economy’. In this menu "
 "window, you can decide how many wares of each type you wish to have in "
 "stock."
 msgstr "Gus seo a dhèanamh, briog air bratach sam bith agus tagh “Rèitich an eaconamaidh”. San uinneag clàir-thaice ud, ’s urrainn dhut cur romhad co mheud bathar de gach seòrsa a tha thu airson glèidheadh san stòras agad."
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:425
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:425
 msgid "Warehouse Preferences"
 msgstr "Roghainnean an taighe-stòrais"
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:427
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:427
 msgid "Bring the marble columns to the front line"
 msgstr "Cuir na colbhan marmoir agad gu far a bheil thu an dùil air sabaid"
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:428
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:428
 msgid ""
 "The production of marble columns is working fine now, but it would be great "
 "if they were stored where we need them."
 msgstr "Tha sinn a’ dèanamh colbhan marmoir mar bu chòir a-nis ach bhiodh e taghta nan robh iad ’gan glèidheadh far a bheil feum againn orra."
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:429
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:429
 msgid ""
 "Normally, produced wares are brought to the closest warehouse if they are "
 "not needed elsewhere. In this case, this means our headquarters. But we "
 "would like to have them in the warehouse near our fortresses."
 msgstr "Mar as trice, thèid bathar ’ga ghiùlan dhan taigh-stòrais as fhaisge mur eil feum aige àite sam bith eile. San t-suidheachadh seo, is ciall dha seo am prìomh-àras againn. Ach b’ fhearr leinn gum biodh iad san taigh-stòrais faisg air na dùin againn."
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:430
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:430
 msgid ""
 "Every warehouse has four buttons to set the preference. If you move your "
 "mouse pointer over them, you will see tooltips that explain what the buttons"
 " do."
 msgstr "Tha ceithir putanan aig gach taigh-stòrais gus roghainn a’ bhathair a shuidheachadh. Ma ghluaiseas tu tomhaire na luchaige os an cionn, chì thu gliocas-sgrìn a mhìnicheas dè nì gach putan."
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:432
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:440
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:432
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:440
 msgid "Bring all the marble columns to the warehouse near the front line."
 msgstr "Cuir a h-uile colbh marmoir dhan taigh-stòrais faisg air far a bheil sinn an dùil air sabaid."
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:433
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:441
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:433
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:441
 msgid ""
 "To achieve this, you will have to do two things. First, set a preference for"
 " marble columns in the desired warehouse. All marble columns produced in the"
 " future will be brought there if possible."
 msgstr "Gus seo a choileanadh, feumaidh tu dà rud a dhèanamh. An toiseach, suidhich gum b’ fhearr leat colbhan marmoir san taigh-stòrais a thogras sinn. Thèid gach colbh marmoir a nithear san àm ri teachd a chur an-siud ma ghabhas seo dèanamh."
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:434
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:442
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:434
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:442
 msgid ""
 "Then, to move the marble columns out of your headquarters, you will have to "
 "click on the remove button there."
 msgstr "An uairsin, gus na colbhan marmoir fhaighinn on phrìomh-àras agad, feumaidh tu briogadh air putan an-siud gus an toirt air falbh."
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:437
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:437
 msgid "Bring 20 marble columns to the front line."
 msgstr "Cuir na colbhan marmoir agad gu far a bheil sinn an dùil air sabaid."
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:439
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:439
 msgid ""
 "To decide where your wares get stored, you can use the preference buttons in"
 " the warehouses."
 msgstr "Gus cur romhad càite an tèid bathar a ghlèidheadh, cleachd putanan nan roghainnean sna taighean-stòrais."
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:447
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:447
 msgid "Borders Secured"
 msgstr "Rinn sinn daingneachadh air na crìochan"
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:449
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:449
 msgid "We’re safe now"
 msgstr "Tha sinn sàbhailte a-nis"
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:450
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:450
 msgid ""
 "Great. We now have enough marble columns so that in case of an aggressor, we"
 " can build up our fortifications. But I do not think that that will be "
 "necessary. So far, no enemy has shown up."
 msgstr "Taghta. Tha colbhan marmoir gu leòr againn a-nis ach an urrainn dhuinn barrachd daingneachaidh a thogail ma bheir nàmhaid ionnsaigh oirnn. Ach cha chreid mi gu bheil sinn feumach air seo an-dràsta. Cha do thog nàmhaid a cheann gu ruige seo."
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:451
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:451
 msgid ""
 "I hope I could teach you how you can control the economy in Widelands. There"
 " are many options and they can be confusing at first. Even if you’ve only "
@@ -828,7 +828,7 @@ msgid ""
 "this tutorial and learn the rest!"
 msgstr "Tha mi ’n dòchas gun deach leam ionnsachadh dhut mar a stiùiricheas tu eaconamaidh Widelands. Tha iomadh roghainn ann agus ma dh’fhaoidte gun cuir iad ’nad bhrochan thu an toiseach. Ach cum ort fiù ’s mura h-eil thu ach beachd no dhà dheth a thuigsinn. Feuch ris ann an geama no dhà gus am faigh thu barrachd eòlais air agus faigh a-mach na ghabhas dèanamh. Till dhan oideachadh seo an uairsin gus an corr ionnsachadh!"
 
-#: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:453
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:453
 msgid ""
 "This was the last tutorial I had prepared for you. I’ve now taught you "
 "everything I know. There are still secrets hidden in this world even I don’t"
@@ -837,11 +837,12 @@ msgid ""
 "You can find it at:"
 msgstr "Seo an t-oideachadh mu dheireadh a dh’ullaich mi air do shon. Tha mi air a h-uile rud air a bheil mi eòlach a shealltainn dhut. Tha rùn-dìomhair no dhà eile falaichte san t-saoghal seo nach eil fiù ’s mi fhìn eòlach air. Lorgaidh mi àite far a chuireas mi seachad m’ aois. Ma tha ceist no dhà agad fhathast, bheir coimhearsnachd Widelands taic dhut gun teagamh. Lorgaidh tu i air:"
 
-#: ../../scripting/format_scenario.lua:36
+#: ../../data/scripting/format_scenario.lua:36
+#, lua-format
 msgid "“%s”"
 msgstr "“%s”"
 
-#: ../../scripting/format_scenario.lua:146
+#: ../../data/scripting/format_scenario.lua:146
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] "Amas ùr"

@@ -30,7 +30,7 @@
 
 namespace Widelands {
 
-constexpr uint16_t kCurrentPacketVersion = 18;
+constexpr uint16_t kCurrentPacketVersion = 19;
 
 void GamePlayerInfoPacket::read
 	(FileSystem & fs, Game & game, MapObjectLoader *) {
@@ -62,18 +62,14 @@ void GamePlayerInfoPacket::read
 
 					player.set_ai(fr.c_string());
 					player.read_statistics(fr);
+					player.read_remaining_shipnames(fr);
 
-					player.m_casualties = fr.unsigned_32();
-					player.m_kills      = fr.unsigned_32();
-					player.m_msites_lost         = fr.unsigned_32();
-					player.m_msites_defeated     = fr.unsigned_32();
-					player.m_civil_blds_lost     = fr.unsigned_32();
-					player.m_civil_blds_defeated = fr.unsigned_32();
-					for (int32_t ai_pos = 0; ai_pos < kAIDataSize; ++ai_pos) {
-						player.m_ai_data_int32[ai_pos] = fr.signed_32();
-						player.m_ai_data_uint32[ai_pos] = fr.unsigned_32();
-						player.m_ai_data_int16[ai_pos] = fr.unsigned_16();
-					}
+					player.casualties_ = fr.unsigned_32();
+					player.kills_      = fr.unsigned_32();
+					player.msites_lost_         = fr.unsigned_32();
+					player.msites_defeated_     = fr.unsigned_32();
+					player.civil_blds_lost_     = fr.unsigned_32();
+					player.civil_blds_defeated_ = fr.unsigned_32();
 				}
 			}
 			game.read_statistics(fr);
@@ -99,9 +95,9 @@ void GamePlayerInfoPacket::write
 	iterate_players_existing_const(p, nr_players, game, plr) {
 		fw.unsigned_8(1); // Player is in game.
 
-		fw.unsigned_8(plr->m_see_all);
+		fw.unsigned_8(plr->see_all_);
 
-		fw.unsigned_8(plr->m_plnum);
+		fw.unsigned_8(plr->player_number_);
 		fw.unsigned_8(plr->team_number());
 
 		fw.c_string(plr->tribe().name().c_str());
@@ -111,21 +107,17 @@ void GamePlayerInfoPacket::write
 
 		// Economies are in a packet after map loading
 
-		fw.c_string(plr->m_name.c_str());
-		fw.c_string(plr->m_ai.c_str());
+		fw.c_string(plr->name_.c_str());
+		fw.c_string(plr->ai_.c_str());
 
 		plr->write_statistics(fw);
+		plr->write_remaining_shipnames(fw);
 		fw.unsigned_32(plr->casualties());
 		fw.unsigned_32(plr->kills     ());
 		fw.unsigned_32(plr->msites_lost        ());
 		fw.unsigned_32(plr->msites_defeated    ());
 		fw.unsigned_32(plr->civil_blds_lost    ());
 		fw.unsigned_32(plr->civil_blds_defeated());
-		for (int32_t ai_pos = 0; ai_pos < kAIDataSize; ++ai_pos) {
-			fw.signed_32(plr->m_ai_data_int32[ai_pos]);
-			fw.unsigned_32(plr->m_ai_data_uint32[ai_pos]);
-			fw.unsigned_16(plr->m_ai_data_int16[ai_pos]);
-		}
 	} else
 		fw.unsigned_8(0); //  Player is NOT in game.
 

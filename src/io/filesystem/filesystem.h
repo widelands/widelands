@@ -65,7 +65,7 @@ public:
 		(const std::string & fname, void const * data, int32_t length)
 		= 0;
 	virtual void ensure_directory_exists(const std::string & fs_dirname) = 0;
-	//TODO(unknown): use this only from inside ensure_directory_exists()
+	// TODO(unknown): use this only from inside ensure_directory_exists()
 	virtual void make_directory(const std::string & fs_dirname) = 0;
 
 	/**
@@ -122,6 +122,9 @@ public:
 
 	///Given a filename, return the name with any path stripped off.
 	static const char * fs_filename(const char * n);
+
+	// Everything before the final separator (/ or \) in 'full_path'. The
+	// returned value is either the empty string or ends with a separator.
 	static std::string fs_dirname(const std::string& full_path);
 
 	///Given a filename (without any path), return the extension, if any.
@@ -139,7 +142,7 @@ protected:
 
 	///How to address the fs' topmost component (e.g. "" on Unix, "D:" on win32)
 	///\warning This is should \e not contain filesep!
-	std::string m_root;
+	std::string root_;
 
 #ifdef _WIN32
 private:

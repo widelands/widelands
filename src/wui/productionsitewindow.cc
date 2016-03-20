@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -28,15 +28,14 @@
 #include "logic/map_objects/tribes/trainingsite.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/worker.h"
-#include "ui_basic/listselect.h"
 #include "ui_basic/tabpanel.h"
 #include "ui_basic/textarea.h"
 #include "wui/waresqueuedisplay.h"
 
 using Widelands::ProductionSite;
 
-static char const * pic_tab_wares = "pics/menu_tab_wares.png";
-static char const * pic_tab_workers = "pics/menu_list_workers.png";
+static char const * pic_tab_wares = "images/wui/buildings/menu_tab_wares.png";
+static char const * pic_tab_workers = "images/wui/buildings/menu_list_workers.png";
 
 /*
 ===============
@@ -61,7 +60,7 @@ ProductionSiteWindow::ProductionSiteWindow
 		for (uint32_t i = 0; i < warequeues.size(); ++i)
 			prod_box->add
 				(new WaresQueueDisplay(prod_box, 0, 0, igbase(), ps, warequeues[i]),
-				 UI::Box::AlignLeft);
+				 UI::Align::kLeft);
 
 		get_tabs()->add
 			("wares", g_gr->images().get(pic_tab_wares),
@@ -70,40 +69,40 @@ ProductionSiteWindow::ProductionSiteWindow
 
 	// Add workers tab if applicable
 	if (!productionsite().descr().nr_working_positions()) {
-		m_worker_table = nullptr;
+		worker_table_ = nullptr;
 	} else {
 		UI::Box * worker_box = new UI::Box
 			(get_tabs(),
 			 0, 0, UI::Box::Vertical);
-		m_worker_table = new UI::Table<uintptr_t>(worker_box, 0, 0, 0, 100);
-		m_worker_caps = new UI::Box(worker_box, 0, 0, UI::Box::Horizontal);
+		worker_table_ = new UI::Table<uintptr_t>(worker_box, 0, 0, 0, 100);
+		worker_caps_ = new UI::Box(worker_box, 0, 0, UI::Box::Horizontal);
 
-		m_worker_table->add_column(210, (ngettext
+		worker_table_->add_column(210, (ngettext
 			("Worker", "Workers", productionsite().descr().nr_working_positions())
 		));
-		m_worker_table->add_column(60, _("Exp"));
-		m_worker_table->add_column(150, _("Next Level"));
+		worker_table_->add_column(60, _("Exp"));
+		worker_table_->add_column(150, _("Next Level"));
 
 		for (unsigned int i = 0; i < productionsite().descr().nr_working_positions(); ++i) {
-			m_worker_table->add(i);
+			worker_table_->add(i);
 		}
-		m_worker_table->fit_height();
+		worker_table_->fit_height();
 
 		if (igbase().can_act(building().owner().player_number())) {
-			m_worker_caps->add_inf_space();
+			worker_caps_->add_inf_space();
 			UI::Button * evict_button = new UI::Button
-							(m_worker_caps, "evict", 0, 0, 34, 34,
-							 g_gr->images().get("pics/but4.png"),
-							 g_gr->images().get("pics/menu_drop_soldier.png"),
+							(worker_caps_, "evict", 0, 0, 34, 34,
+							 g_gr->images().get("images/ui_basic/but4.png"),
+							 g_gr->images().get("images/wui/buildings/menu_drop_soldier.png"),
 							 _("Terminate the employment of the selected worker"));
 			evict_button->sigclicked.connect
 					(boost::bind(&ProductionSiteWindow::evict_worker, boost::ref(*this)));
-			m_worker_caps->add(evict_button, UI::Box::AlignCenter);
+			worker_caps_->add(evict_button, UI::Align::kHCenter);
 		}
 
-		worker_box->add(m_worker_table, UI::Box::AlignLeft, true);
+		worker_box->add(worker_table_, UI::Align::kLeft, true);
 		worker_box->add_space(4);
-		worker_box->add(m_worker_caps, UI::Box::AlignLeft, true);
+		worker_box->add(worker_caps_, UI::Align::kLeft, true);
 		get_tabs()->add
 			("workers", g_gr->images().get(pic_tab_workers),
 			 worker_box,
@@ -147,12 +146,12 @@ void ProductionSite::create_options_window
 
 void ProductionSiteWindow::update_worker_table()
 {
-	if (m_worker_table == nullptr) {
+	if (worker_table_ == nullptr) {
 		return;
 	}
 	assert
 		(productionsite().descr().nr_working_positions() ==
-			m_worker_table->size());
+			worker_table_->size());
 
 	for
 		(unsigned int i = 0;
@@ -163,7 +162,7 @@ void ProductionSiteWindow::update_worker_table()
 		const Widelands::Request * request =
 			productionsite().working_positions()[i].worker_request;
 		UI::Table<uintptr_t>::EntryRecord & er =
-			m_worker_table->get_record(i);
+			worker_table_->get_record(i);
 
 		if (worker) {
 			er.set_picture(0, worker->descr().icon(), worker->descr().descname());
@@ -202,13 +201,12 @@ void ProductionSiteWindow::update_worker_table()
 			continue;
 		}
 	}
-	m_worker_table->update();
 }
 
 void ProductionSiteWindow::evict_worker() {
-	if (m_worker_table->has_selection()) {
+	if (worker_table_->has_selection()) {
 		Widelands::Worker * worker =
-			productionsite().working_positions()[m_worker_table->get_selected()].worker;
+			productionsite().working_positions()[worker_table_->get_selected()].worker;
 		if (worker) {
 			igbase().game().send_player_evict_worker(*worker);
 		}

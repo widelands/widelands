@@ -1,0 +1,53 @@
+#!/usr/bin/make -f
+
+# Hardening flags
+CPPFLAGS:=$(shell dpkg-buildflags --get CPPFLAGS)
+CFLAGS:=$(shell dpkg-buildflags --get CFLAGS) $(CPPFLAGS)
+CXXFLAGS:=$(shell dpkg-buildflags --get CXXFLAGS) $(CPPFLAGS)
+LDFLAGS:=$(shell dpkg-buildflags --get LDFLAGS)
+
+%:
+	dh $@ $(DH_ARGS) --parallel --buildsystem=cmake
+
+
+override_dh_auto_configure:
+	CFLAGS="$(CFLAGS)" LDFLAGS="$(LDFLAGS)" CPPFLAGS="$(CPPFLAGS)" CXXFLAGS="$(CXXFLAGS)" \
+	  dh_auto_configure -Scmake -- \
+		-DWL_INSTALL_BASEDIR=/usr/share/games/widelands \
+		-DWL_INSTALL_DATADIR=/usr/share/games/widelands/data \
+		-DOPTION_USE_GLBINDING:BOOL=OFF \
+		-DCMAKE_BUILD_TYPE=Release
+
+override_dh_strip:
+	dh_strip --dbg-package=widelands-dbg
+
+override_dh_auto_install:
+	dh_auto_install --parallel
+	mkdir -p debian/tmp/usr/share/applications/
+	cp debian/widelands.desktop debian/tmp/usr/share/applications/
+	# Probably need to remove other duplicated license files in data/i18n/fonts
+	rm debian/tmp/usr/share/games/widelands/data/i18n/fonts/Widelands/LICENSE
+	# Do not include the GPL-2 license file again to keep lintian happy
+	# (but the file is listed from the user interface, so dont kill it completely)
+	# (we cannot patch the user interface because that's in a translated text)
+	if cmp --quiet debian/tmp/usr/share/games/widelands/COPYING /usr/share/common-licenses/GPL-2 ; then \
+	  rm debian/tmp/usr/share/games/widelands/COPYING; \
+	  cd debian/tmp/usr/share/games/widelands/ ; \
+	  ln -s /usr/share/common-licenses/GPL-2 COPYING ; \
+	else \
+	  echo "Error: Licence file changed. Please check it out:"; \
+	  diff -u debian/tmp/usr/share/games/widelands/COPYING /usr/share/common-licenses/GPL-2; \
+	  exit 1; \
+	fi
+	# Take care of the logo
+	for size in 16 32 48 64 128 ; do \
+	  mkdir -p debian/tmp/usr/share/icons/hicolor/$${size}x$${size}/apps ; \
+	  cp debian/tmp/usr/share/games/widelands/data/images/logos/wl-ico-$${size}.png \
+	     debian/tmp/usr/share/icons/hicolor/$${size}x$${size}/apps/widelands.png; \
+	done
+	convert debian/tmp/usr/share/icons/hicolor/32x32/apps/widelands.png \
+	        debian/tmp/usr/share/icons/hicolor/32x32/apps/widelands.xpm
+
+override_dh_install:
+	dh_install --fail-missing
+

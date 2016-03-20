@@ -126,7 +126,7 @@ public:
 
 	// Returns the initalization at 'index' (which must not be out of bounds).
 	const TribeBasicInfo::Initialization& initialization(const uint8_t index) const {
-		return m_initializations.at(index);
+		return initializations_.at(index);
 	}
 
 	using WaresOrder = std::vector<std::vector<Widelands::DescriptionIndex>>;
@@ -142,6 +142,8 @@ public:
 	}
 
 	void resize_ware_orders(size_t maxLength);
+
+	const std::vector<std::string>& get_ship_names() const {return ship_names_;}
 
 private:
 	// Helper function for adding a special worker type (carriers etc.)
@@ -161,6 +163,7 @@ private:
 
 	std::vector<DescriptionIndex>  buildings_;
 	std::set<DescriptionIndex>         immovables_;  // The player immovables
+	std::vector<std::string>           ship_names_;
 	std::set<DescriptionIndex>         workers_;
 	std::set<DescriptionIndex>         wares_;
 	// The wares that are used by construction sites
@@ -181,7 +184,7 @@ private:
 	WaresOrder                  workers_order_;
 	WaresOrderCoords            workers_order_coords_;
 
-	std::vector<TribeBasicInfo::Initialization> m_initializations;
+	std::vector<TribeBasicInfo::Initialization> initializations_;
 
 	DISALLOW_COPY_AND_ASSIGN(TribeDescr);
 };
