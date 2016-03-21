@@ -4442,25 +4442,25 @@ int LuaShip::get_state(lua_State* L) {
 	EditorGameBase& egbase = get_egbase(L);
 	if (is_a(Game, &egbase)) {
 		switch (get(L, egbase)->get_ship_state()) {
-			case Ship::TRANSPORT:
+			case Ship::ShipStates::kTransport:
 				lua_pushstring(L, "transport");
 				break;
-			case Ship::EXP_WAITING:
+			case Ship::ShipStates::kExpeditionWaiting:
 				lua_pushstring(L, "exp_waiting");
 				break;
-			case Ship::EXP_SCOUTING:
+			case Ship::ShipStates::kExpeditionScouting:
 				lua_pushstring(L, "exp_scouting");
 				break;
-			case Ship::EXP_FOUNDPORTSPACE:
+			case Ship::ShipStates::kExpeditionPortspaceFound:
 				lua_pushstring(L, "exp_found_port_space");
 				break;
-			case Ship::EXP_COLONIZING:
+			case Ship::ShipStates::kExpeditionColonizing:
 				lua_pushstring(L, "exp_colonizing");
 				break;
-			case Ship::SINK_REQUEST:
+			case Ship::ShipStates::kSinkRequest:
 				lua_pushstring(L, "sink_request");
 				break;
-			case Ship::SINK_ANIMATION:
+			case Ship::ShipStates::kSinkAnimation:
 				lua_pushstring(L, "sink_animation");
 				break;
 			default:
@@ -4655,7 +4655,7 @@ int LuaShip::get_workers(lua_State* L) {
 int LuaShip::build_colonization_port(lua_State* L) {
 	EditorGameBase& egbase = get_egbase(L);
 	Ship* ship =  get(L, egbase);
-	if (ship->get_ship_state() == Widelands::Ship::EXP_FOUNDPORTSPACE) {
+	if (ship->get_ship_state() == Widelands::Ship::ShipStates::kExpeditionPortspaceFound) {
 		if (upcast(Game, game, &egbase)) {
 			game->send_player_ship_construct_port(*ship, ship->exp_port_spaces().front());
 			return 1;

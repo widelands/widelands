@@ -468,9 +468,9 @@ void ShipCancelExpeditionConfirm::ok()
 		 &&
 		 iaplayer().can_act(ship->get_owner()->player_number())
 		 &&
-		 ship->get_ship_state() != Widelands::Ship::TRANSPORT
+		 ship->get_ship_state() != Widelands::Ship::ShipStates::kTransport
 		 &&
-		 ship->get_ship_state() != Widelands::Ship::EXP_COLONIZING)
+		 ship->get_ship_state() != Widelands::Ship::ShipStates::kExpeditionColonizing)
 	{
 		game.send_player_cancel_expedition_ship(*ship);
 	}
