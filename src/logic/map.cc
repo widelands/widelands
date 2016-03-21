@@ -1330,8 +1330,11 @@ bool Map::is_cycle_connected
 
 /**
  * Returns a list of portdock fields (if any) that a port built at \p c should have.
+ *
+ * @param disregard_territories When true, fields that the owner of the starting point
+ * does not own and fields that are blocked by a border will also be included in the list.
  */
-std::vector<Coords> Map::find_portdock(const Coords & c) const
+std::vector<Coords> Map::find_portdock(const Coords & c, bool disregard_territories) const
 {
 	static const WalkingDir cycledirs[16] = {
 		WALK_NE, WALK_NE, WALK_NE, WALK_NW, WALK_NW,
@@ -1352,14 +1355,16 @@ std::vector<Coords> Map::find_portdock(const Coords & c) const
 			is_good_water = false;
 		}
 
-		// If starting point is owned we make sure this field has the same owner
-		if (is_good_water && owner > 0 && f.field->get_owned_by() != owner) {
-			is_good_water = false;
-		}
+		if (!disregard_territories) {
+			// If starting point is owned we make sure this field has the same owner
+			if (is_good_water && owner != neutral() && f.field->get_owned_by() != owner) {
+				is_good_water = false;
+			}
 
-		// ... and is not on a border
-		if (is_good_water && owner > 0 && f.field->is_border()) {
-			is_good_water = false;
+			// ... and is not on a border
+			if (is_good_water && owner != neutral() && f.field->is_border()) {
+				is_good_water = false;
+			}
 		}
 
 		if (is_good_water) {

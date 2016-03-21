@@ -86,7 +86,7 @@ void MapPortSpacesPacket::write(FileSystem & fs, EditorGameBase & egbase, MapObj
 		if
 			((map.get_max_nodecaps(egbase.world(), fc) & BUILDCAPS_SIZEMASK) != BUILDCAPS_BIG
 			 ||
-			 map.find_portdock(fc).empty())
+			 map.find_portdock(fc, true).empty())
 		{
 			continue;
 		}
