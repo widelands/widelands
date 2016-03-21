@@ -156,7 +156,7 @@ toggle_help_
 	INIT_BTN_HOOKS(encyclopedia_, toggle_help_)
 	INIT_BTN_HOOKS(message_menu_, toggle_message_menu_)
 
-	encyclopedia_.open_window = [this] {new EncyclopediaWindow(*this, encyclopedia_);};
+	encyclopedia_.open_window = [this] {new EncyclopediaWindow(*this, encyclopedia_, &game().lua());};
 	options_.open_window = [this] {new GameOptionsMenu(*this, options_, main_windows_);};
 	statisticsmenu_.open_window = [this] {
 		new GameMainMenu(*this, statisticsmenu_, main_windows_);

@@ -139,7 +139,7 @@ std::unique_ptr<LuaTable> LuaCoroutine::pop_table() {
 		return result;
 	}
 	result.reset(new LuaTable(lua_state_));
-	lua_pop(lua_state_, lua_gettop(lua_state_));
+	lua_pop(lua_state_, 1);
 	--nreturn_values_;
 	return result;
 }

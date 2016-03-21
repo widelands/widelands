@@ -59,21 +59,18 @@ const std::string heading(const std::string& text) {
 
 }  // namespace
 
-inline InteractivePlayer& EncyclopediaWindow::iaplayer() const {
-	return dynamic_cast<InteractivePlayer&>(*get_parent());
-}
-
-EncyclopediaWindow::EncyclopediaWindow(InteractivePlayer& parent, UI::UniqueWindow::Registry& registry)
+EncyclopediaWindow::EncyclopediaWindow(InteractivePlayer& parent, UI::UniqueWindow::Registry& registry, LuaInterface* const lua)
 	: UI::UniqueWindow(
 		  &parent, "encyclopedia", &registry, WINDOW_WIDTH, WINDOW_HEIGHT, ""),
-     tabs_(this, 0, 0, nullptr) {
+	  tabs_(this, 0, 0, nullptr),
+	  lua_(lua) {
 
 	const int contents_height = WINDOW_HEIGHT - kTabHeight - 2 * kPadding;
 	const int contents_width = WINDOW_WIDTH / 2 - 1.5 * kPadding;
 
 	const Widelands::TribeDescr& tribe = parent.player().tribe();
 	try {
-		std::unique_ptr<LuaTable> table(iaplayer().egbase().lua().run_script("tribes/scripting/help/init.lua"));
+		std::unique_ptr<LuaTable> table(lua_->run_script("tribes/scripting/help/init.lua"));
 		std::unique_ptr<LuaCoroutine> cr(table->get_coroutine("func"));
 		cr->push_arg(tribe.name());
 		cr->resume();
@@ -131,12 +128,13 @@ EncyclopediaWindow::EncyclopediaWindow(InteractivePlayer& parent, UI::UniqueWind
 
 			// Now fill the lists
 			std::unique_ptr<LuaTable> entries_table = tab_table->get_table("entries");
-
 			for (const auto& entry_table : entries_table->array_entries<std::unique_ptr<LuaTable>>()) {
 				const std::string entry_name =  entry_table->get_string("name");
 				const std::string entry_title =  entry_table->get_string("title");
-				const std::string entry_icon = entry_table->has_key("icon") ? entry_table->get_string("icon") : "";
+				// NOCOM const std::string entry_icon = entry_table->has_key("icon") ? entry_table->get_string("icon") : "";
 				const std::string entry_script =  entry_table->get_string("script");
+
+				const std::string entry_icon = "";
 
 				// Make sure that all paths exist
 				if (!g_fs->file_exists(entry_script)) {
@@ -145,16 +143,11 @@ EncyclopediaWindow::EncyclopediaWindow(InteractivePlayer& parent, UI::UniqueWind
 										  entry_name.c_str());
 				}
 
-				std::vector<std::string> entry_script_parameters;
-				if (entry_table->has_key("script_parameters")) {
-					entry_script_parameters = entry_table->get_table("script_parameters")->array_entries<std::string>();
-				}
-
-				EncyclopediaEntry entry(entry_script, entry_script_parameters);
+				EncyclopediaEntry entry(entry_script, entry_table->get_table("script_parameters")->array_entries<std::string>());
 
 				if (entry_icon.empty()) {
-					lists_.at(tab_name)->add(entry_title, entry, nullptr);
-				} else if (g_fs->file_exists(tab_icon)) {
+					lists_.at(tab_name)->add(entry_title, entry);
+				} else if (g_fs->file_exists(entry_icon)) {
 					lists_.at(tab_name)->add(entry_title, entry, g_gr->images().get(entry_icon));
 				} else {
 					throw wexception("Icon path '%s' for tab entry '%s' does not exist!",
@@ -183,7 +176,7 @@ EncyclopediaWindow::EncyclopediaWindow(InteractivePlayer& parent, UI::UniqueWind
 void EncyclopediaWindow::entry_selected(const std::string& tab_name) {
 	const EncyclopediaEntry& entry = lists_.at(tab_name)->get_selected();
 	try {
-		std::unique_ptr<LuaTable> table(iaplayer().egbase().lua().run_script(entry.script_path));
+		std::unique_ptr<LuaTable> table(lua_->run_script(entry.script_path));
 		if (!entry.script_parameters.empty()) {
 			std::unique_ptr<LuaCoroutine> cr(table->get_coroutine("func"));
 			for (const std::string& parameter : entry.script_parameters) {

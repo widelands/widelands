@@ -70,13 +70,15 @@ return {
                      name = "intro",
                      title = _"Intro",
                      -- NOCOM icon = "images/wui/buildings/menu_tab_wares.png",
-                     script = "txts/README.lua"
+                     script = "txts/README.lua",
+                     script_parameters = {}
                   },
                   {
                      name = "abacadabra",
                      title = _"Abacadabra",
                      icon = "images/wui/buildings/menu_tab_wares.png",
-                     script = "txts/README.lua"
+                     script = "txts/README.lua",
+                     script_parameters = {}
                   }
                }
             },
@@ -84,21 +86,13 @@ return {
                name = "wares",
                title = _"Wares",
                icon = "images/wui/buildings/menu_tab_wares.png",
-               entries = {
-                  {
-                     name = "log",
-                     title = _"Log",
-                     icon = "images/wui/buildings/menu_tab_wares.png",
-                     script = "tribes/scripting/help/ware_help.lua",
-                     script_parameters = {[1] = "barbarians", [2] = "log"}
-                  }
-               }
+               entries = get_wares(tribename)
             },
             {
                name = "workers",
                title = _"Workers",
                icon = "images/wui/buildings/menu_tab_workers.png",
-               entries = get_workers(tribename) -- NOCOM calling worker_help will eventually crash
+               entries = get_workers(tribename)
             },
             {
                name = "buildings",

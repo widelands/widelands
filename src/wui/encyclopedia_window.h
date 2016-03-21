@@ -37,7 +37,7 @@
 class InteractivePlayer;
 
 struct EncyclopediaWindow : public UI::UniqueWindow {
-	EncyclopediaWindow(InteractivePlayer&, UI::UniqueWindow::Registry&);
+	EncyclopediaWindow(InteractivePlayer&, UI::UniqueWindow::Registry&, LuaInterface* const lua);
 
 private:
 	struct EncyclopediaEntry {
@@ -48,8 +48,6 @@ private:
 		const std::string script_path;
 		const std::vector<std::string> script_parameters;
 	};
-
-	InteractivePlayer& iaplayer() const;
 
 	// Update contents when an entry is selected
 	void entry_selected(const std::string& tab_name);
@@ -65,6 +63,8 @@ private:
 	std::map<std::string, std::unique_ptr<UI::Listselect<EncyclopediaEntry>>> lists_;
 	// The contents shown when an entry is selected in a tab
 	std::map<std::string, std::unique_ptr<UI::MultilineTextarea>> contents_;
+
+	LuaInterface* const lua_;
 };
 
 #endif  // end of include guard: WL_WUI_ENCYCLOPEDIA_WINDOW_H
