@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015-2016 by the Widelands Development Team
+ * Copyright (C) 2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,17 +17,17 @@
  *
  */
 
-#ifndef WL_EDITOR_UI_MENUS_EDITOR_HELP_H
-#define WL_EDITOR_UI_MENUS_EDITOR_HELP_H
+#ifndef WL_WUI_TRIBAL_ENCYCLOPEDIA_H
+#define WL_WUI_TRIBAL_ENCYCLOPEDIA_H
 
 #include "scripting/lua_interface.h"
 #include "ui_basic/encyclopedia_window.h"
 #include "ui_basic/unique_window.h"
 
-class EditorInteractive;
+class InteractivePlayer;
 
-struct EditorHelp : public UI::EncyclopediaWindow {
-	EditorHelp(EditorInteractive&, UI::UniqueWindow::Registry&, LuaInterface* const lua);
+struct TribalEncyclopedia : public UI::EncyclopediaWindow {
+	TribalEncyclopedia(InteractivePlayer&, UI::UniqueWindow::Registry&, LuaInterface* const lua);
 };
 
-#endif  // end of include guard: WL_EDITOR_UI_MENUS_EDITOR_HELP_H
+#endif  // end of include guard: WL_WUI_TRIBAL_ENCYCLOPEDIA_H

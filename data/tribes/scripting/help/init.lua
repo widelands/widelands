@@ -65,19 +65,11 @@ return {
             {
                name = "general",
                title = _"General",
+               icon = "images/logos/wl-ico-32.png",
                entries = {
                   {
                      name = "intro",
-                     title = _"Intro",
-                     -- NOCOM icon = "images/wui/buildings/menu_tab_wares.png",
-                     script = "txts/README.lua",
-                     script_parameters = {}
-                  },
-                  {
-                     -- NOCOM got a segfault here, watch this space
-                     name = "abacadabra",
-                     title = _"Abacadabra",
-                     icon = "images/wui/buildings/menu_tab_wares.png",
+                     title = _"Introduction",
                      script = "txts/README.lua",
                      script_parameters = {}
                   }

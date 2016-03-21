@@ -39,6 +39,9 @@ return {
                "<br>" .. ("%2.1f%%"):bformat(100 * v.probability)
             ) .. spacer()
       end
-      return result
+      return {
+         title = tree.species,
+         text = result
+      }
    end
 }

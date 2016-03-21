@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,14 +17,10 @@
  *
  */
 
-#include "wui/encyclopedia_window.h"
+#include "ui_basic/encyclopedia_window.h"
 
-#include <algorithm>
-#include <cstring>
 #include <map>
 #include <memory>
-#include <set>
-#include <string>
 #include <vector>
 
 #include <boost/format.hpp>
@@ -32,16 +28,10 @@
 #include "base/i18n.h"
 #include "graphic/graphic.h"
 #include "io/filesystem/layered_filesystem.h"
-#include "logic/map_objects/tribes/building.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
-#include "logic/map_objects/tribes/tribes.h"
-#include "logic/map_objects/tribes/ware_descr.h"
-#include "logic/map_objects/tribes/worker_descr.h"
-#include "logic/player.h"
-#include "scripting/lua_interface.h"
-#include "scripting/lua_table.h"
+#include "scripting/lua_coroutine.h"
 #include "ui_basic/messagebox.h"
-#include "wui/interactive_player.h"
+#include "wui/interactive_base.h"
 
 namespace {
 
@@ -59,14 +49,16 @@ const std::string heading(const std::string& text) {
 
 }  // namespace
 
-EncyclopediaWindow::EncyclopediaWindow(InteractivePlayer& parent, UI::UniqueWindow::Registry& registry, LuaInterface* const lua)
+namespace UI {
+
+EncyclopediaWindow::EncyclopediaWindow(InteractiveBase& parent, UI::UniqueWindow::Registry& registry, LuaInterface* const lua)
 	: UI::UniqueWindow(
 		  &parent, "encyclopedia", &registry, WINDOW_WIDTH, WINDOW_HEIGHT, ""),
 	  lua_(lua),
 	  tabs_(this, 0, 0, nullptr)
 		{}
 
-void EncyclopediaWindow::init(InteractivePlayer& parent, std::unique_ptr<LuaTable> table) {
+void EncyclopediaWindow::init(InteractiveBase& parent, std::unique_ptr<LuaTable> table) {
 
 	const int contents_height = WINDOW_HEIGHT - kTabHeight - 2 * kPadding;
 	const int contents_width = WINDOW_WIDTH / 2 - 1.5 * kPadding;
@@ -195,23 +187,4 @@ void EncyclopediaWindow::entry_selected(const std::string& tab_name) {
 	contents_.at(tab_name)->scroll_to_top();
 }
 
-TribalEncyclopedia::TribalEncyclopedia(InteractivePlayer& parent, UI::UniqueWindow::Registry& registry, LuaInterface* const lua)
-	: EncyclopediaWindow(parent, registry, lua)
-{
-	const Widelands::TribeDescr& tribe = parent.player().tribe();
-	try {
-		std::unique_ptr<LuaTable> table(lua_->run_script("tribes/scripting/help/init.lua"));
-		std::unique_ptr<LuaCoroutine> cr(table->get_coroutine("func"));
-		cr->push_arg(tribe.name());
-		cr->resume();
-		init(parent, cr->pop_table());
-	} catch (LuaError& err) {
-		log("Error loading script for encyclopedia:\n%s\n", err.what());
-		UI::WLMessageBox wmb(
-					&parent,
-					_("Error!"),
-					(boost::format("Error loading script for encyclopedia:\n%s") % err.what()).str(),
-					UI::WLMessageBox::MBoxType::kOk);
-		wmb.run<UI::Panel::Returncodes>();
-	}
-}
+} // namespace UI

@@ -370,7 +370,7 @@ void EditorInteractive::toggle_help() {
 	if (helpmenu_.window)
 		delete helpmenu_.window;
 	else
-		new EditorHelp(*this, helpmenu_);
+		new EditorHelp(*this, helpmenu_, &egbase().lua());
 }
 
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006, 2009 by the Widelands Development Team
+ * Copyright (C) 2002-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,30 +17,32 @@
  *
  */
 
-#ifndef WL_WUI_ENCYCLOPEDIA_WINDOW_H
-#define WL_WUI_ENCYCLOPEDIA_WINDOW_H
+#ifndef WL_UI_BASIC_ENCYCLOPEDIA_WINDOW_H
+#define WL_UI_BASIC_ENCYCLOPEDIA_WINDOW_H
 
 #include <map>
 #include <memory>
 #include <vector>
 
-#include "logic/map_objects/map_object.h"
-#include "logic/map_objects/tribes/tribe_descr.h"
+#include "scripting/lua_interface.h"
+#include "scripting/lua_table.h"
 #include "ui_basic/box.h"
 #include "ui_basic/listselect.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/table.h"
 #include "ui_basic/tabpanel.h"
 #include "ui_basic/unique_window.h"
-#include "ui_basic/window.h"
+// NOCOM #include "ui_basic/window.h"
 
-class InteractivePlayer;
+class InteractiveBase;
+
+namespace UI {
 
 struct EncyclopediaWindow : public UI::UniqueWindow {
-	EncyclopediaWindow(InteractivePlayer&, UI::UniqueWindow::Registry&, LuaInterface* const lua);
+	EncyclopediaWindow(InteractiveBase&, UI::UniqueWindow::Registry&, LuaInterface* const lua);
 
 protected:
-	void init(InteractivePlayer& parent, std::unique_ptr<LuaTable> table);
+	void init(InteractiveBase& parent, std::unique_ptr<LuaTable> table);
 
 	LuaInterface* const lua_;
 
@@ -70,8 +72,6 @@ private:
 	std::map<std::string, std::unique_ptr<UI::MultilineTextarea>> contents_;
 };
 
-struct TribalEncyclopedia : public EncyclopediaWindow {
-	TribalEncyclopedia(InteractivePlayer&, UI::UniqueWindow::Registry&, LuaInterface* const lua);
-};
+} // namespace UI
 
-#endif  // end of include guard: WL_WUI_ENCYCLOPEDIA_WINDOW_H
+#endif  // end of include guard: WL_UI_BASIC_ENCYCLOPEDIA_WINDOW_H

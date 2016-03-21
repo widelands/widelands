@@ -93,8 +93,6 @@ wl_library(wui
     debugconsole.cc
     debugconsole.h
     dismantlesitewindow.cc
-    encyclopedia_window.cc
-    encyclopedia_window.h
     fieldaction.cc
     fieldaction.h
     game_debug_ui.cc
@@ -161,6 +159,8 @@ wl_library(wui
     trainingsitewindow.cc
     transport_draw.cc
     transport_ui.cc
+    tribal_encyclopedia.cc
+    tribal_encyclopedia.h
     unique_window_handler.cc
     unique_window_handler.h
     ware_statistics_menu.cc
