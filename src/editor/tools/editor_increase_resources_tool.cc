@@ -40,20 +40,25 @@ int32_t EditorIncreaseResourcesTool::handle_click_impl(const Widelands::World& w
 				(map->get_fcoords(center.node), args->sel_radius));
 	do {
 		int32_t amount = mr.location().field->get_resources_amount();
-		int32_t max_amount = args->cur_res != Widelands::kNoResource ?
-							 world.get_resource(args->cur_res)->max_amount() : 0;
+		int32_t max_amount = args->current_resource != Widelands::kNoResource ?
+							 world.get_resource(args->current_resource)->max_amount() : 0;
 
 		amount += args->change_by;
 		if (amount > max_amount)
 			amount = max_amount;
 
-		args->orgResT.push_back(mr.location().field->get_resources());
-		args->orgRes.push_back(mr.location().field->get_resources_amount());
-
-		if ((mr.location().field->get_resources() == args->cur_res ||
+		if ((mr.location().field->get_resources() == args->current_resource ||
 				!mr.location().field->get_resources_amount()) &&
-				map->is_resource_valid(world, mr.location(), args->cur_res)) {
-			map->initialize_resources(mr.location(), args->cur_res, amount);
+				map->is_resource_valid(world, mr.location(), args->current_resource) &&
+				mr.location().field->get_resources_amount() != max_amount) {
+
+			args->original_resource.push_back(EditorActionArgs::ResourceState{
+				mr.location(),
+				mr.location().field->get_resources(),
+				mr.location().field->get_resources_amount()
+			});
+
+			map->initialize_resources(mr.location(), args->current_resource, amount);
 		}
 	} while (mr.advance(*map));
 	return mr.radius();
@@ -64,13 +69,13 @@ int32_t EditorIncreaseResourcesTool::handle_undo_impl(const Widelands::World& wo
 													  EditorInteractive& parent,
 													  EditorActionArgs* args,
 													  Widelands::Map* map) {
-	return m_set_tool.handle_undo_impl(world, center, parent, args, map);
+	return set_tool_.handle_undo_impl(world, center, parent, args, map);
 }
 
 EditorActionArgs EditorIncreaseResourcesTool::format_args_impl(EditorInteractive & parent)
 {
 	EditorActionArgs a(parent);
-	a.change_by = m_change_by;
-	a.cur_res = m_cur_res;
+	a.change_by = change_by_;
+	a.current_resource = cur_res_;
 	return a;
 }

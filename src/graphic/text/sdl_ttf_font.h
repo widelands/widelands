@@ -67,7 +67,7 @@ public:
 	uint16_t ascent(int) const override;
 
 private:
-	void m_set_style(int);
+	void set_style(int);
 
 	TTF_Font * font_;
 	int style_;

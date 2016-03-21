@@ -40,8 +40,8 @@ private:
 	void decrease_radius();
 	void increase_radius();
 
-	UI::Textarea                                   m_textarea;
-	UI::Button m_increase, m_decrease;
+	UI::Textarea textarea_;
+	UI::Button increase_, decrease_;
 	uint32_t value_;
 };
 

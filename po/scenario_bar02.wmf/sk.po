@@ -3,13 +3,13 @@
 # 
 # Translators:
 # GunChleoc, 2014
-# MiroslavR <miroslavr256@gmail.com>, 2015
+# MiroslavR <miroslavr256@gmail.com>, 2015-2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-03-02 08:54+0000\n"
-"PO-Revision-Date: 2016-03-02 15:06+0000\n"
+"POT-Creation-Date: 2016-03-11 07:02+0000\n"
+"PO-Revision-Date: 2016-03-12 16:31+0000\n"
 "Last-Translator: MiroslavR <miroslavr256@gmail.com>\n"
 "Language-Team: Slovak (http://www.transifex.com/widelands/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
@@ -82,7 +82,7 @@ msgstr "Vykonajte ďalší prieskum"
 msgid ""
 "Build more military buildings to explore the area around the headquarters "
 "and to ensure the safety of your people."
-msgstr "Postavte viac vojenských budov, aby ste preskúmali oblasť okolo základne a zaistili bezpečnosť svojich ľudí."
+msgstr "Postavte viac vojenských budov, aby ste preskúmali oblasť okolo ústredia a zaistili bezpečnosť svojich ľudí."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:62
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:64
@@ -147,7 +147,7 @@ msgid ""
 "they aren’t defended by soldiers. It is often wise to build a warehouse when"
 " your territory is growing and the paths to your headquarters get longer and"
 " longer."
-msgstr "Sklady sú podobné základni. Jediným rozdielom je, že ich nebránia vojaci. Sklad je často rozumné postaviť vtedy, keď sa vaše územie rozrastá a cesty k základni neustále predlžujú."
+msgstr "Sklady sú podobné ústrediu. Jediným rozdielom je, že ich nebránia vojaci. Sklad je často rozumné postaviť vtedy, keď sa vaše územie rozrastá a cesty k ústrediu neustále predlžujú."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:98
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:100

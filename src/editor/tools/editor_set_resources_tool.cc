@@ -39,17 +39,23 @@ int32_t EditorSetResourcesTool::handle_click_impl(const Widelands::World& world,
 	 (map->get_fcoords(center.node), args->sel_radius));
 	do {
 		int32_t amount     = args->set_to;
-		int32_t max_amount = args->cur_res != Widelands::kNoResource ?
-							 world.get_resource(args->cur_res)->max_amount() : 0;
+		int32_t max_amount = args->current_resource != Widelands::kNoResource ?
+							 world.get_resource(args->current_resource)->max_amount() : 0;
 		if (amount < 0)
 			amount = 0;
 		else if (amount > max_amount)
 			amount = max_amount;
 
-		if (map->is_resource_valid(world, mr.location(), args->cur_res)) {
-			args->orgResT.push_back(mr.location().field->get_resources());
-			args->orgRes.push_back(mr.location().field->get_resources_amount());
-			map->initialize_resources(mr.location(), args->cur_res, amount);
+		if (map->is_resource_valid(world, mr.location(), args->current_resource) &&
+				mr.location().field->get_resources_amount() != amount) {
+
+			args->original_resource.push_back(EditorActionArgs::ResourceState{
+				mr.location(),
+				mr.location().field->get_resources(),
+				mr.location().field->get_resources_amount()
+			});
+
+			map->initialize_resources(mr.location(), args->current_resource, amount);
 		}
 	} while (mr.advance(*map));
 	return mr.radius();
@@ -57,37 +63,30 @@ int32_t EditorSetResourcesTool::handle_click_impl(const Widelands::World& world,
 
 int32_t
 EditorSetResourcesTool::handle_undo_impl(const Widelands::World& world,
-                                         Widelands::NodeAndTriangle<Widelands::Coords> center,
+                                         Widelands::NodeAndTriangle<Widelands::Coords> /* center */,
                                          EditorInteractive& /* parent */,
                                          EditorActionArgs* args,
                                          Widelands::Map* map) {
-	Widelands::MapRegion<Widelands::Area<Widelands::FCoords> > mr
-	(*map,
-	 Widelands::Area<Widelands::FCoords>
-	 (map->get_fcoords(center.node), args->sel_radius));
-	std::list<uint8_t>::iterator ir = args->orgRes.begin(), it = args->orgResT.begin();
-	do {
-		int32_t amount     = *ir;
-		int32_t max_amount = world.get_resource(args->cur_res)->max_amount();
+	for (const auto & res : args->original_resource) {
+		int32_t amount     = res.amount;
+		int32_t max_amount = world.get_resource(args->current_resource)->max_amount();
 
 		if (amount < 0)
 			amount = 0;
 		if (amount > max_amount)
 			amount = max_amount;
 
-		map->initialize_resources(mr.location(), *it, amount);
-		++ir;
-		++it;
-	} while (mr.advance(*map));
-	args->orgRes.clear();
-	args->orgResT.clear();
-	return mr.radius();
+		map->initialize_resources(res.location, res.idx, amount);
+	}
+
+	args->original_resource.clear();
+	return args->sel_radius;
 }
 
 EditorActionArgs EditorSetResourcesTool::format_args_impl(EditorInteractive & parent)
 {
 	EditorActionArgs a(parent);
-	a.cur_res = m_cur_res;
-	a.set_to = m_set_to;
+	a.current_resource = cur_res_;
+	a.set_to = set_to_;
 	return a;
 }

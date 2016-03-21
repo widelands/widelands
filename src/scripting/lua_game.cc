@@ -525,7 +525,7 @@ int LuaPlayer::seen_field(lua_State * L) {
 		:returns: :const:`nil`
 */
 int LuaPlayer::allow_buildings(lua_State * L) {
-	return m_allow_forbid_buildings(L, true);
+	return allow_forbid_buildings(L, true);
 }
 
 /* RST
@@ -538,7 +538,7 @@ int LuaPlayer::allow_buildings(lua_State * L) {
 		:returns: :const:`nil`
 */
 int LuaPlayer::forbid_buildings(lua_State * L) {
-	return m_allow_forbid_buildings(L, false);
+	return allow_forbid_buildings(L, false);
 }
 
 /* RST
@@ -733,7 +733,7 @@ int LuaPlayer::get_buildings(lua_State * L) {
 	Player & p = get(L, egbase);
 
 	// if only one string, convert to array so that we can use
-	// m_parse_building_list
+	// parse_building_list
 	bool return_array = true;
 	if (lua_isstring(L, -1)) {
 		const char * name = luaL_checkstring(L, -1);
@@ -746,7 +746,7 @@ int LuaPlayer::get_buildings(lua_State * L) {
 	}
 
 	std::vector<DescriptionIndex> houses;
-	m_parse_building_list(L, p.tribe(), houses);
+	parse_building_list(L, p.tribe(), houses);
 
 	lua_newtable(L);
 
@@ -883,7 +883,7 @@ int LuaPlayer::switchplayer(lua_State * L) {
  C METHODS
  ==========================================================
  */
-void LuaPlayer::m_parse_building_list
+void LuaPlayer::parse_building_list
 	(lua_State * L, const TribeDescr & tribe, std::vector<DescriptionIndex> & rv)
 {
 	EditorGameBase& egbase = get_egbase(L);
@@ -919,12 +919,12 @@ void LuaPlayer::m_parse_building_list
 		}
 	}
 }
-int LuaPlayer::m_allow_forbid_buildings(lua_State * L, bool allow)
+int LuaPlayer::allow_forbid_buildings(lua_State * L, bool allow)
 {
 	Player & p = get(L, get_egbase(L));
 
 	std::vector<DescriptionIndex> houses;
-	m_parse_building_list(L, p.tribe(), houses);
+	parse_building_list(L, p.tribe(), houses);
 
 	for (const DescriptionIndex& house : houses) {
 		p.allow_building_type(house, allow);

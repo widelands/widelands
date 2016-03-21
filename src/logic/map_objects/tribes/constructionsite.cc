@@ -397,7 +397,7 @@ void ConstructionSite::draw
 	dst.blit_animation(pos, anim_idx, tanim, player_color, Rect(Point(0, h - lines), w, lines));
 
 	// Draw help strings
-	draw_help(game, dst, coords, pos);
+	draw_info(game, dst, pos);
 }
 
 }

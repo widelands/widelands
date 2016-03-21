@@ -27,31 +27,31 @@
 #include "graphic/render_queue.h"
 #include "graphic/texture.h"
 
-Screen::Screen(int w, int h) : m_w(w), m_h(h) {
+Screen::Screen(int w, int h) : w_(w), h_(h) {
 }
 
 int Screen::width() const {
-	return m_w;
+	return w_;
 }
 
 int Screen::height() const {
-	return m_h;
+	return h_;
 }
 
 std::unique_ptr<Texture> Screen::to_texture() const {
-	std::unique_ptr<uint8_t[]> pixels(new uint8_t[m_w * m_h * 4]);
-	glReadPixels(0, 0, m_w, m_h, GL_RGBA, GL_UNSIGNED_BYTE, pixels.get());
+	std::unique_ptr<uint8_t[]> pixels(new uint8_t[w_ * h_ * 4]);
+	glReadPixels(0, 0, w_, h_, GL_RGBA, GL_UNSIGNED_BYTE, pixels.get());
 
-	Gl::swap_rows(m_w, m_h, m_w * 4, 4, pixels.get());
+	Gl::swap_rows(w_, h_, w_ * 4, 4, pixels.get());
 
 	// Ownership of pixels is not taken here. But the Texture() transfers it to
 	// the GPU, frees the SDL surface and after that we are free to free
 	// 'pixels'.
 	SDL_Surface* surface = SDL_CreateRGBSurfaceFrom(pixels.get(),
-	                                                m_w,
-	                                                m_h,
+	                                                w_,
+	                                                h_,
 	                                                32,
-	                                                m_w * 4,
+	                                                w_ * 4,
 	                                                0x000000ff,
 	                                                0x0000ff00,
 	                                                0x00ff0000,

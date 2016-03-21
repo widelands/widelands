@@ -41,10 +41,10 @@ EditorDeleteBobTool::handle_click_impl(const Widelands::World&,
 	 (map->get_fcoords(center.node), radius));
 
 	do if (Widelands::Bob * const bob = mr.location().field->get_first_bob()) {
-			args->obob_type.push_back(&bob->descr());
+			args->old_bob_type.push_back(&bob->descr());
 			bob->remove(egbase);
 		} else {
-			args->obob_type.push_back(nullptr);
+			args->old_bob_type.push_back(nullptr);
 		}
 	while (mr.advance(*map));
 	return radius + 2;
@@ -58,7 +58,7 @@ EditorDeleteBobTool::handle_undo_impl(const Widelands::World& world,
 									  Widelands::Map* map) {
 
 	uint32_t ret = parent.tools()->place_bob.handle_undo_impl(world, center, parent, args, map);
-	args->obob_type.clear();
+	args->old_bob_type.clear();
 	return ret;
 }
 

@@ -155,7 +155,7 @@ using SoldiersList = std::vector<Widelands::Soldier *>;
 // parses the get argument for all classes that can be asked for their
 // current wares. Returns a set with all DescriptionIndices that must be considered.
 #define GET_INDEX(type) \
-	DescriptionIndex m_get_ ## type ## _index \
+	DescriptionIndex get_ ## type ## _index \
 		(lua_State * L, const TribeDescr& tribe,  const std::string & what) \
 	{ \
 		DescriptionIndex idx = tribe. type ## _index(what); \
@@ -168,7 +168,7 @@ GET_INDEX(worker)
 #undef GET_INDEX
 
 #define PARSERS(type, btype) \
-btype ##sSet m_parse_get_##type##s_arguments \
+btype ##sSet parse_get_##type##s_arguments \
 		(lua_State * L, const TribeDescr& tribe, bool * return_number) \
 { \
 	 /* takes either "all", a name or an array of names */ \
@@ -185,7 +185,7 @@ btype ##sSet m_parse_get_##type##s_arguments \
 			} \
 		} else { \
 			/* Only one item requested */ \
-			rv.insert(m_get_##type##_index(L, tribe, what)); \
+			rv.insert(get_##type##_index(L, tribe, what)); \
 			*return_number = true; \
 		} \
 	} else { \
@@ -193,14 +193,14 @@ btype ##sSet m_parse_get_##type##s_arguments \
 		luaL_checktype(L, 2, LUA_TTABLE); \
 		lua_pushnil(L); \
 		while (lua_next(L, 2) != 0) { \
-			rv.insert(m_get_##type##_index(L, tribe, luaL_checkstring(L, -1))); \
+			rv.insert(get_##type##_index(L, tribe, luaL_checkstring(L, -1))); \
 			lua_pop(L, 1); \
 		} \
 	} \
 	return rv; \
 } \
 \
-btype##sMap m_parse_set_##type##s_arguments \
+btype##sMap parse_set_##type##s_arguments \
 	(lua_State * L, const TribeDescr& tribe) \
 { \
 	int32_t nargs = lua_gettop(L); \
@@ -210,7 +210,7 @@ btype##sMap m_parse_set_##type##s_arguments \
 	if (nargs == 3) { \
 		/* name amount */ \
 		rv.insert(btype##Amount( \
-			m_get_##type##_index(L, tribe, luaL_checkstring(L, 2)), \
+			get_##type##_index(L, tribe, luaL_checkstring(L, 2)), \
 			luaL_checkuint32(L, 3) \
 		)); \
 	} else { \
@@ -219,7 +219,7 @@ btype##sMap m_parse_set_##type##s_arguments \
 		lua_pushnil(L); \
 		while (lua_next(L, 2) != 0) { \
 			rv.insert(btype##Amount( \
-				m_get_##type##_index(L, tribe, luaL_checkstring(L, -2)), \
+				get_##type##_index(L, tribe, luaL_checkstring(L, -2)), \
 				luaL_checkuint32(L, -1) \
 			)); \
 			lua_pop(L, 1); \
@@ -286,7 +286,7 @@ int do_get_workers(lua_State* L, const PlayerImmovable& pi, const WorkersMap& va
 	const TribeDescr& tribe = pi.owner().tribe();
 
 	bool return_number = false;
-	WorkersSet set = m_parse_get_workers_arguments(L, tribe, &return_number);
+	WorkersSet set = parse_get_workers_arguments(L, tribe, &return_number);
 
 	WorkersMap c_workers;
 	for (const Worker* w : pi.get_workers()) {
@@ -331,7 +331,7 @@ int do_set_workers(lua_State* L, PlayerImmovable* pi, const WorkersMap& valid_wo
 	EditorGameBase& egbase = get_egbase(L);
 	const TribeDescr& tribe = pi->owner().tribe();
 
-	WorkersMap setpoints = m_parse_set_workers_arguments(L, tribe);
+	WorkersMap setpoints = parse_set_workers_arguments(L, tribe);
 
 	WorkersMap c_workers;
 	for (const Worker* w : pi->get_workers()) {
@@ -418,7 +418,7 @@ SoldierMapDescr unbox_lua_soldier_description(lua_State* L, int table_index, con
 
 // Parser the arguments of set_soldiers() into a setpoint. See the
 // documentation in HasSoldiers to understand the valid arguments.
-SoldiersMap m_parse_set_soldiers_arguments(lua_State* L, const SoldierDescr& soldier_descr) {
+SoldiersMap parse_set_soldiers_arguments(lua_State* L, const SoldierDescr& soldier_descr) {
 	SoldiersMap rv;
 	if (lua_gettop(L) > 2) {
 		// STACK: cls, descr, count
@@ -507,7 +507,7 @@ int do_set_soldiers
 	const SoldierDescr& soldier_descr =  //  soldiers
 		dynamic_cast<const SoldierDescr&>
 			(*tribe.get_worker_descr(tribe.soldier()));
-	SoldiersMap setpoints = m_parse_set_soldiers_arguments(L, soldier_descr);
+	SoldiersMap setpoints = parse_set_soldiers_arguments(L, soldier_descr);
 
 	// Get information about current soldiers
 	const std::vector<Soldier*> curs = sc->stationed_soldiers();
@@ -3157,8 +3157,8 @@ int LuaMapObject::__eq(lua_State * L) {
 	EditorGameBase & egbase = get_egbase(L);
 	LuaMapObject * other = *get_base_user_class<LuaMapObject>(L, -1);
 
-	MapObject * me = m_get_or_zero(egbase);
-	MapObject * you = other->m_get_or_zero(egbase);
+	MapObject * me = get_or_zero(egbase);
+	MapObject * you = other->get_or_zero(egbase);
 
 	// Both objects are destroyed (nullptr) or equal: they are equal
 	if (me == you) {
@@ -3213,7 +3213,7 @@ int LuaMapObject::destroy(lua_State * L) {
 */
 int LuaMapObject::has_attribute(lua_State * L) {
 	EditorGameBase & egbase = get_egbase(L);
-	MapObject * obj = m_get_or_zero(egbase);
+	MapObject * obj = get_or_zero(egbase);
 	if (!obj) {
 		lua_pushboolean(L, false);
 		return 1;
@@ -3234,12 +3234,12 @@ int LuaMapObject::has_attribute(lua_State * L) {
  ==========================================================
  */
 MapObject* LuaMapObject::get(lua_State* L, EditorGameBase& egbase, std::string name) {
-	MapObject* o = m_get_or_zero(egbase);
+	MapObject* o = get_or_zero(egbase);
 	if (!o)
 		report_error(L, "%s no longer exists!", name.c_str());
 	return o;
 }
-MapObject* LuaMapObject::m_get_or_zero(EditorGameBase& egbase) {
+MapObject* LuaMapObject::get_or_zero(EditorGameBase& egbase) {
 	return ptr_.get(egbase);
 }
 
@@ -3446,7 +3446,7 @@ int LuaFlag::set_wares(lua_State * L)
 	Flag * f = get(L, egbase);
 	const Tribes& tribes = egbase.tribes();
 
-	WaresMap setpoints = m_parse_set_wares_arguments(L, f->owner().tribe());
+	WaresMap setpoints = parse_set_wares_arguments(L, f->owner().tribe());
 	WaresMap c_wares = count_wares_on_flag_(*f, tribes);
 
 	uint32_t nwares = 0;
@@ -3502,7 +3502,7 @@ int LuaFlag::get_wares(lua_State * L) {
 	Flag * flag = get(L, egbase);
 
 	bool return_number = false;
-	WaresSet wares_set = m_parse_get_wares_arguments(L, flag->owner().tribe(), &return_number);
+	WaresSet wares_set = parse_get_wares_arguments(L, flag->owner().tribe(), &return_number);
 
 	WaresMap wares = count_wares_on_flag_(*flag, tribes);
 
@@ -3895,7 +3895,7 @@ int LuaWarehouse::get_expedition_in_progress(lua_State * L) {
 #define WH_SET(type, btype) \
 int LuaWarehouse::set_##type##s(lua_State * L) { \
 	Warehouse * wh = get(L, get_egbase(L)); \
-	btype##sMap setpoints = m_parse_set_##type##s_arguments(L, wh->owner().tribe()); \
+	btype##sMap setpoints = parse_set_##type##s_arguments(L, wh->owner().tribe()); \
  \
 	for (btype##sMap::iterator i = setpoints.begin(); i != setpoints.end(); ++i) { \
 		int32_t d = i->second - \
@@ -3918,7 +3918,7 @@ int LuaWarehouse::get_##type##s(lua_State * L) { \
 	Warehouse * wh = get(L, get_egbase(L)); \
 	const Tribes& tribes = get_egbase(L).tribes(); \
 	bool return_number = false; \
-	btype##sSet set = m_parse_get_##type##s_arguments \
+	btype##sSet set = parse_get_##type##s_arguments \
 		(L, wh->owner().tribe(), &return_number); \
 	lua_newtable(L); \
 	if (return_number) \
@@ -4079,7 +4079,7 @@ int LuaProductionSite::get_valid_workers(lua_State * L) {
 int LuaProductionSite::set_wares(lua_State * L) {
 	ProductionSite * ps = get(L, get_egbase(L));
 	const TribeDescr& tribe = ps->owner().tribe();
-	WaresMap setpoints = m_parse_set_wares_arguments(L, tribe);
+	WaresMap setpoints = parse_set_wares_arguments(L, tribe);
 
 	WaresSet valid_wares;
 	for (const auto& input_ware : ps->descr().inputs()) {
@@ -4109,7 +4109,7 @@ int LuaProductionSite::get_wares(lua_State * L) {
 	const TribeDescr& tribe = ps->owner().tribe();
 
 	bool return_number = false;
-	WaresSet wares_set = m_parse_get_wares_arguments(L, tribe, &return_number);
+	WaresSet wares_set = parse_get_wares_arguments(L, tribe, &return_number);
 
 	WaresSet valid_wares;
 	for (const auto& input_ware : ps->descr().inputs()) {
@@ -4442,25 +4442,25 @@ int LuaShip::get_state(lua_State* L) {
 	EditorGameBase& egbase = get_egbase(L);
 	if (is_a(Game, &egbase)) {
 		switch (get(L, egbase)->get_ship_state()) {
-			case Ship::TRANSPORT:
+			case Ship::ShipStates::kTransport:
 				lua_pushstring(L, "transport");
 				break;
-			case Ship::EXP_WAITING:
+			case Ship::ShipStates::kExpeditionWaiting:
 				lua_pushstring(L, "exp_waiting");
 				break;
-			case Ship::EXP_SCOUTING:
+			case Ship::ShipStates::kExpeditionScouting:
 				lua_pushstring(L, "exp_scouting");
 				break;
-			case Ship::EXP_FOUNDPORTSPACE:
+			case Ship::ShipStates::kExpeditionPortspaceFound:
 				lua_pushstring(L, "exp_found_port_space");
 				break;
-			case Ship::EXP_COLONIZING:
+			case Ship::ShipStates::kExpeditionColonizing:
 				lua_pushstring(L, "exp_colonizing");
 				break;
-			case Ship::SINK_REQUEST:
+			case Ship::ShipStates::kSinkRequest:
 				lua_pushstring(L, "sink_request");
 				break;
-			case Ship::SINK_ANIMATION:
+			case Ship::ShipStates::kSinkAnimation:
 				lua_pushstring(L, "sink_animation");
 				break;
 			default:
@@ -4655,7 +4655,7 @@ int LuaShip::get_workers(lua_State* L) {
 int LuaShip::build_colonization_port(lua_State* L) {
 	EditorGameBase& egbase = get_egbase(L);
 	Ship* ship =  get(L, egbase);
-	if (ship->get_ship_state() == Widelands::Ship::EXP_FOUNDPORTSPACE) {
+	if (ship->get_ship_state() == Widelands::Ship::ShipStates::kExpeditionPortspaceFound) {
 		if (upcast(Game, game, &egbase)) {
 			game->send_player_ship_construct_port(*ship, ship->exp_port_spaces().front());
 			return 1;
@@ -5285,11 +5285,11 @@ int LuaField::region(lua_State * L) {
 	if (n == 3) {
 		uint32_t radius = luaL_checkuint32(L, -2);
 		uint32_t inner_radius = luaL_checkuint32(L, -1);
-		return m_hollow_region(L, radius, inner_radius);
+		return hollow_region(L, radius, inner_radius);
 	}
 
 	uint32_t radius = luaL_checkuint32(L, -1);
-	return m_region(L, radius);
+	return region(L, radius);
 }
 
 
@@ -5342,7 +5342,7 @@ int LuaField::has_caps(lua_State * L) {
  C METHODS
  ==========================================================
  */
-int LuaField::m_region(lua_State * L, uint32_t radius)
+int LuaField::region(lua_State * L, uint32_t radius)
 {
 	Map & map = get_egbase(L).map();
 	MapRegion<Area<FCoords> > mr
@@ -5360,7 +5360,7 @@ int LuaField::m_region(lua_State * L, uint32_t radius)
 	return 1;
 }
 
-int LuaField::m_hollow_region
+int LuaField::hollow_region
 	(lua_State * L, uint32_t radius, uint32_t inner_radius)
 {
 	Map & map = get_egbase(L).map();

@@ -32,12 +32,12 @@ int32_t EditorDecreaseHeightTool::handle_click_impl(const Widelands::World& worl
                                                     EditorInteractive& /* parent */,
                                                     EditorActionArgs* args,
 													Widelands::Map* map) {
-	if (args->origHights.empty()) {
+	if (args->original_heights.empty()) {
 		Widelands::MapRegion<Widelands::Area<Widelands::FCoords> > mr
 		(*map,
 		 Widelands::Area<Widelands::FCoords>
 		 (map->get_fcoords(center.node), args->sel_radius + MAX_FIELD_HEIGHT / MAX_FIELD_HEIGHT_DIFF + 1));
-		do args->origHights.push_back(mr.location().field->get_height());
+		do args->original_heights.push_back(mr.location().field->get_height());
 		while (mr.advance(*map));
 	}
 
@@ -58,7 +58,7 @@ int32_t EditorDecreaseHeightTool::handle_undo_impl
 	(*map,
 	 Widelands::Area<Widelands::FCoords>
 	 (map->get_fcoords(center.node), args->sel_radius + MAX_FIELD_HEIGHT / MAX_FIELD_HEIGHT_DIFF + 1));
-	std::list<Widelands::Field::Height>::iterator i = args->origHights.begin();
+	std::list<Widelands::Field::Height>::iterator i = args->original_heights.begin();
 
 	do {
 		mr.location().field->set_height(*i); ++i;
@@ -75,6 +75,6 @@ int32_t EditorDecreaseHeightTool::handle_undo_impl
 EditorActionArgs EditorDecreaseHeightTool::format_args_impl(EditorInteractive & parent)
 {
 	EditorActionArgs a(parent);
-	a.change_by = m_change_by;
+	a.change_by = change_by_;
 	return a;
 }

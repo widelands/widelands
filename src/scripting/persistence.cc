@@ -61,7 +61,7 @@ const char* LuaReader(lua_State* /* L */, void* userdata, size_t* bytes_read) {
  * be touched. Returns true if the object was non nil and
  * therefore stored, false otherwise.
  */
-static bool m_add_object_to_not_persist
+static bool add_object_to_not_persist
 	(lua_State * L, std::string name, uint32_t nidx)
 {
 	// Search for a dot. If one is found, we first have
@@ -99,7 +99,7 @@ static bool m_add_object_to_not_persist
 // Special handling for the upvalues of pairs and ipairs which are iterator
 // functions, but always the same and therefor need not be persisted (in fact
 // they are c functions, so they can't be persisted all the same)
-static void m_add_iterator_function_to_not_persist
+static void add_iterator_function_to_not_persist
 	(lua_State * L, std::string global, uint32_t idx)
 {
 	lua_getglobal(L, global.c_str());
@@ -109,7 +109,7 @@ static void m_add_iterator_function_to_not_persist
 	lua_settable(L, 1); //  table[function] = integer
 }
 
-static bool m_add_object_to_not_unpersist
+static bool add_object_to_not_unpersist
 	(lua_State * L, std::string name, uint32_t idx) {
 	// S: ... globals
 
@@ -139,7 +139,7 @@ static bool m_add_object_to_not_unpersist
 	return true;
 }
 
-static void m_add_iterator_function_to_not_unpersist
+static void add_iterator_function_to_not_unpersist
 	(lua_State * L, std::string global, uint32_t idx)
 {
 	lua_pushuint32(L, idx); // S: ... globals idx
@@ -158,7 +158,7 @@ static void m_add_iterator_function_to_not_unpersist
 // Those are the globals that will be regenerated (not by the persistence engine),
 // e.g. C-functions or automatically populated fields. Changing the ordering here will
 // break safe game compatibility.
-static const char * m_persistent_globals[] = {
+static const char * kPersistentGlobals[] = {
 	"_VERSION", "assert", "collectgarbage", "coroutine", "debug", "dofile",
 	"error", "gcinfo", "getfenv", "getmetatable", "io", "ipairs", "load",
 	"loadfile", "loadstring", "math", "module", "newproxy", "next", "os",
@@ -193,12 +193,12 @@ uint32_t persist_object
 	lua_settable(L, 1);
 
 	// Now the iterators functions.
-	m_add_iterator_function_to_not_persist(L, "pairs", i++);
-	m_add_iterator_function_to_not_persist(L, "ipairs", i++);
+	add_iterator_function_to_not_persist(L, "pairs", i++);
+	add_iterator_function_to_not_persist(L, "ipairs", i++);
 
 	// And finally the globals.
-	for (int j = 0; m_persistent_globals[j]; ++j) {
-		m_add_object_to_not_persist(L, m_persistent_globals[j], i++);
+	for (int j = 0; kPersistentGlobals[j]; ++j) {
+		add_object_to_not_persist(L, kPersistentGlobals[j], i++);
 	}
 
 	// The next few lines make eris error messages much more useful, but make
@@ -240,11 +240,11 @@ void unpersist_object
 	lua_pushcfunction(L, &luna_unpersisting_closure);
 	lua_settable(L, 1);
 
-	m_add_iterator_function_to_not_unpersist(L, "pairs", i++);
-	m_add_iterator_function_to_not_unpersist(L, "ipairs", i++);
+	add_iterator_function_to_not_unpersist(L, "pairs", i++);
+	add_iterator_function_to_not_unpersist(L, "ipairs", i++);
 
-	for (int j = 0; m_persistent_globals[j]; ++j) {
-		m_add_object_to_not_unpersist(L, m_persistent_globals[j], i++);
+	for (int j = 0; kPersistentGlobals[j]; ++j) {
+		add_object_to_not_unpersist(L, kPersistentGlobals[j], i++);
 	}
 
 	LuaReaderHelper helper;

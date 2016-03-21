@@ -30,8 +30,8 @@ struct EditorIncreaseHeightTool : public EditorTool {
 	 EditorSetHeightTool    &   the_set_tool)
 		:
 		EditorTool(the_decrease_tool, the_set_tool),
-		m_decrease_tool(the_decrease_tool), m_set_tool(the_set_tool),
-		m_change_by(1)
+		decrease_tool_(the_decrease_tool), set_tool_(the_set_tool),
+		change_by_(1)
 	{}
 
 	int32_t handle_click_impl(const Widelands::World& world,
@@ -52,18 +52,18 @@ struct EditorIncreaseHeightTool : public EditorTool {
 		return "images/wui/editor/fsel_editor_increase_height.png";
 	}
 
-	int32_t get_change_by() const {return m_change_by;}
-	void set_change_by(const int32_t n) {m_change_by = n;}
+	int32_t get_change_by() const {return change_by_;}
+	void set_change_by(const int32_t n) {change_by_ = n;}
 
 	EditorDecreaseHeightTool & decrease_tool() const {
-		return m_decrease_tool;
+		return decrease_tool_;
 	}
-	EditorSetHeightTool    &   set_tool() const {return m_set_tool;}
+	EditorSetHeightTool    &   set_tool() const {return set_tool_;}
 
 private:
-	EditorDecreaseHeightTool & m_decrease_tool;
-	EditorSetHeightTool      & m_set_tool;
-	int32_t                       m_change_by;
+	EditorDecreaseHeightTool& decrease_tool_;
+	EditorSetHeightTool& set_tool_;
+	int32_t change_by_;
 };
 
 #endif  // end of include guard: WL_EDITOR_TOOLS_EDITOR_INCREASE_HEIGHT_TOOL_H

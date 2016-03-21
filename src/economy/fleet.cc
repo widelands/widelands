@@ -696,7 +696,7 @@ void Fleet::act(Game & game, uint32_t /* data */)
 		if (ships_[s]->get_destination(game)) {
 			continue;
 		}
-		if (ships_[s]->get_ship_state() != Ship::TRANSPORT) {
+		if (ships_[s]->get_ship_state() != Ship::ShipStates::kTransport) {
 			continue; // in expedition obviously
 		}
 
@@ -759,7 +759,7 @@ void Fleet::act(Game & game, uint32_t /* data */)
 				continue; // already has destination
 			}
 
-			if (ships_[s]->get_ship_state() != Ship::TRANSPORT) {
+			if (ships_[s]->get_ship_state() != Ship::ShipStates::kTransport) {
 				continue; // in expedition obviously
 			}
 
