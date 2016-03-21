@@ -39,6 +39,11 @@ class InteractivePlayer;
 struct EncyclopediaWindow : public UI::UniqueWindow {
 	EncyclopediaWindow(InteractivePlayer&, UI::UniqueWindow::Registry&, LuaInterface* const lua);
 
+protected:
+	void init(InteractivePlayer& parent, std::unique_ptr<LuaTable> table);
+
+	LuaInterface* const lua_;
+
 private:
 	struct EncyclopediaEntry {
 		EncyclopediaEntry(const std::string& init_script_path,
@@ -63,8 +68,10 @@ private:
 	std::map<std::string, std::unique_ptr<UI::Listselect<EncyclopediaEntry>>> lists_;
 	// The contents shown when an entry is selected in a tab
 	std::map<std::string, std::unique_ptr<UI::MultilineTextarea>> contents_;
+};
 
-	LuaInterface* const lua_;
+struct TribalEncyclopedia : public EncyclopediaWindow {
+	TribalEncyclopedia(InteractivePlayer&, UI::UniqueWindow::Registry&, LuaInterface* const lua);
 };
 
 #endif  // end of include guard: WL_WUI_ENCYCLOPEDIA_WINDOW_H

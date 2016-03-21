@@ -62,23 +62,20 @@ const std::string heading(const std::string& text) {
 EncyclopediaWindow::EncyclopediaWindow(InteractivePlayer& parent, UI::UniqueWindow::Registry& registry, LuaInterface* const lua)
 	: UI::UniqueWindow(
 		  &parent, "encyclopedia", &registry, WINDOW_WIDTH, WINDOW_HEIGHT, ""),
-	  tabs_(this, 0, 0, nullptr),
-	  lua_(lua) {
+	  lua_(lua),
+	  tabs_(this, 0, 0, nullptr)
+		{}
+
+void EncyclopediaWindow::init(InteractivePlayer& parent, std::unique_ptr<LuaTable> table) {
 
 	const int contents_height = WINDOW_HEIGHT - kTabHeight - 2 * kPadding;
 	const int contents_width = WINDOW_WIDTH / 2 - 1.5 * kPadding;
 
-	const Widelands::TribeDescr& tribe = parent.player().tribe();
 	try {
-		std::unique_ptr<LuaTable> table(lua_->run_script("tribes/scripting/help/init.lua"));
-		std::unique_ptr<LuaCoroutine> cr(table->get_coroutine("func"));
-		cr->push_arg(tribe.name());
-		cr->resume();
-		std::unique_ptr<LuaTable> return_table = cr->pop_table();
-		set_title(return_table->get_string("title"));
+		set_title(table->get_string("title"));
 
 		// Read tab definitions
-		std::unique_ptr<LuaTable> tabs_table = return_table->get_table("tabs");
+		std::unique_ptr<LuaTable> tabs_table = table->get_table("tabs");
 		for (const auto& tab_table : tabs_table->array_entries<std::unique_ptr<LuaTable>>()) {
 			const std::string tab_name =  tab_table->get_string("name");
 			const std::string tab_icon = tab_table->has_key("icon") ? tab_table->get_string("icon") : "";
@@ -164,6 +161,12 @@ EncyclopediaWindow::EncyclopediaWindow(InteractivePlayer& parent, UI::UniqueWind
 		wmb.run<UI::Panel::Returncodes>();
 	}
 
+	for (const auto& list : lists_) {
+		if (!(list.second->empty())) {
+			list.second->select(0);
+		}
+	}
+
 	tabs_.set_size(WINDOW_WIDTH, WINDOW_HEIGHT);
 
 	if (get_usedefaultpos()) {
@@ -190,4 +193,25 @@ void EncyclopediaWindow::entry_selected(const std::string& tab_name) {
 		contents_.at(tab_name)->set_text(err.what());
 	}
 	contents_.at(tab_name)->scroll_to_top();
+}
+
+TribalEncyclopedia::TribalEncyclopedia(InteractivePlayer& parent, UI::UniqueWindow::Registry& registry, LuaInterface* const lua)
+	: EncyclopediaWindow(parent, registry, lua)
+{
+	const Widelands::TribeDescr& tribe = parent.player().tribe();
+	try {
+		std::unique_ptr<LuaTable> table(lua_->run_script("tribes/scripting/help/init.lua"));
+		std::unique_ptr<LuaCoroutine> cr(table->get_coroutine("func"));
+		cr->push_arg(tribe.name());
+		cr->resume();
+		init(parent, cr->pop_table());
+	} catch (LuaError& err) {
+		log("Error loading script for encyclopedia:\n%s\n", err.what());
+		UI::WLMessageBox wmb(
+					&parent,
+					_("Error!"),
+					(boost::format("Error loading script for encyclopedia:\n%s") % err.what()).str(),
+					UI::WLMessageBox::MBoxType::kOk);
+		wmb.run<UI::Panel::Returncodes>();
+	}
 }

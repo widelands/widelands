@@ -74,6 +74,7 @@ return {
                      script_parameters = {}
                   },
                   {
+                     -- NOCOM got a segfault here, watch this space
                      name = "abacadabra",
                      title = _"Abacadabra",
                      icon = "images/wui/buildings/menu_tab_wares.png",
