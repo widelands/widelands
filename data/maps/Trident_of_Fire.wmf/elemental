@@ -1,32 +1,28 @@
-# Automatically created by Widelands bzr6718[widelands] (Debug)
+# Automatically created by Widelands bzr7905[trunk] (Debug)
 
 [global]
 packet_version="1"
 map_w="160"
 map_h="160"
 nr_players="8"
-world="desert"
-name=_"Trident of Fire"
+name="Trident of Fire"
 author="Robnick"
-descr=_"In the vicinity of three major volcanoes, six lovely islands are inviting settlers to start a new life. Deserts and a quickly growing forest wait to be discovered. But only by becoming a naval power will your tribe be able to explore enough resources to compete with its opponents."
-tags="official,seafaring,1v1,2teams,3teams"
+descr="In the vicinity of three major volcanoes, six lovely islands are inviting settlers to start a new life. Deserts and a quickly growing forest wait to be discovered. But only by becoming a naval power will your tribe be able to explore enough resources to compete with its opponents."
+hint=
+tags="1v1,2teams,3teams,official,seafaring"
 
 [teams00]
-team1=1
-team2=3
-# red vs. green
+team1="1"
+team2="3"
 
 [teams01]
-team1=0,2
-team2=3,5
-# (blue, yellow) vs. (green, orange)
+team1="0,2"
+team2="3,5"
 
 [teams02]
-team1=0,4
-team2=3,1
-# (blue, black) vs. (green, red)
+team1="0,4"
+team2="3,1"
 
 [teams03]
-team1=0,4,2
-team2=3,1,5
-# (blue, black, yellow) vs. (green, red, orange)
+team1="0,4,2"
+team2="3,1,5"

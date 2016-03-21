@@ -1,0 +1,12 @@
+# Automatically created by Widelands bzr7890[trunk] (Debug)
+
+[global]
+packet_version="1"
+map_w="128"
+map_h="144"
+nr_players="3"
+name="Comet Island v2"
+author="Nasenbaer, edited by king_of_nowhere"
+descr="A few miles in front of Gerion Coast lies a small unnamed island. Until now, you have not seen any reason to sail there, but yesterday a big fireball came from the sky and touched down in its center. Is this a sign of the Gods? You believe it is and you hope that your tribe will find the treasure of this island before other tribes will follow."
+hint="Red player is close to the ores, but has llittle fertile terrain. Yellow player has plenty of good land, but must move far from his starting position to find ores. Blue player is a middle way"
+tags="unbalanced"

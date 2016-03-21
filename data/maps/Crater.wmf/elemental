@@ -1,12 +1,12 @@
-# Automatically created by Widelands bzr7574[artifacts] (Debug)
+# Automatically created by Widelands bzr7890[trunk] (Debug)
 
 [global]
 packet_version="1"
 map_w="64"
 map_h="64"
 nr_players="2"
-name=_"Crater"
+name="Crater"
 author="Tarrei"
-descr=_"Long after a meteor crashed into a couple of mountains, life blossoms in the crater. Two tribes are now fighting for the rich resources."
+descr="Long after a meteor crashed into a couple of mountains, life blossoms in the crater. Two tribes are now fighting for the rich resources."
 hint=
 tags="1v1,artifacts,official"

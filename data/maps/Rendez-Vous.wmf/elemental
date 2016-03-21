@@ -1,10 +1,12 @@
+# Automatically created by Widelands bzr7905[trunk] (Debug)
+
 [global]
 packet_version="1"
 map_w="128"
 map_h="128"
 nr_players="4"
-world="desert"
-name=_ "Rendez-Vous"
+name="Rendez-Vous"
 author="Quappo"
-descr=_ "Only a small hill in the centre of the map connects these four competing tribes. Lead your army right away to this hill and build a giant stronghold as a sign of your superiority! Hint: In the centre is only space for one stronghold. Water can be found everywhere, so there is no need to send out geologists."
-tags="official,ffa,2teams"
+descr="Only a small hill in the centre of the map connects these four competing tribes. Lead your army right away to this hill and build a giant stronghold as a sign of your superiority! Hint: In the centre is only space for one stronghold. Water can be found everywhere, so there is no need to send out geologists."
+hint=
+tags="2teams,ffa,official"

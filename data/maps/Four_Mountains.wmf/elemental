@@ -1,22 +1,20 @@
-# Automatically created by Widelands bzr7574[artifacts] (Debug)
+# Automatically created by Widelands bzr7905[trunk] (Debug)
 
 [global]
 packet_version="1"
 map_w="112"
 map_h="112"
 nr_players="4"
-name=_"Four Mountains"
+name="Four Mountains"
 author="Quappo"
-descr=_"Each tribe is surrounded by four mighty mountains. Who will first conquer them and claim the resources for his own tribe? Hint I: Water can be found along the river. Hint II: Snowmen mark additional water sources. Hint III: Each mountain contains only one resource."
+descr="Each tribe is surrounded by four mighty mountains. Who will first conquer them and claim the resources for his own tribe? Hint I: Water can be found along the river. Hint II: Snowmen mark additional water sources. Hint III: Each mountain contains only one resource."
 hint=
 tags="2teams,artifacts,ffa,official"
 
 [teams00]
-team1=0,1
-team2=2,3
-# (blue, red) vs. (yellow, green)
+team1="0,1"
+team2="2,3"
 
 [teams01]
-team1=0,3
-team2=1,2
-# (blue, green) vs. (red, yellow)
+team1="0,3"
+team2="1,2"

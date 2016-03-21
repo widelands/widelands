@@ -1,13 +1,12 @@
-# Automatically created by Widelands bzr6712[widelands] (Debug)
+# Automatically created by Widelands bzr7905[trunk] (Debug)
 
 [global]
 packet_version="1"
 map_w="96"
 map_h="96"
 nr_players="3"
-world="greenland"
-name=_"Fellowships"
+name="Fellowships"
 author="Teppo"
-descr=_"Coal is hard to find – learn to make it efficiently. Starting positions are similar, so the map should be fair. There is plenty of gold near the starting point – Do you see it?"
-hint=_"This map is best suited for two or three human players, with game speed somewhat above the normal value. The AI performed badly at the time of writing (2013)."
-tags="seafaring,official,ffa"
+descr="Coal is hard to find – learn to make it efficiently. Starting positions are similar, so the map should be fair. There is plenty of gold near the starting point – Do you see it?"
+hint="This map is best suited for two or three human players, with game speed somewhat above the normal value. The AI performed badly at the time of writing (2013)."
+tags="ffa,official,seafaring"

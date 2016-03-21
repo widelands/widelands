@@ -1,10 +1,12 @@
+# Automatically created by Widelands bzr7905[trunk] (Debug)
+
 [global]
-packet_version=1
-map_w=64
-map_h=64
-nr_players=3
-world=winterland
-name=_"Impact"
-author=deviant
-descr=_"After an impact of an asteroid and the following harsh winter, three isles are connected by ice and stone, setting an end to the peaceful coexistence of three tribes."
+packet_version="1"
+map_w="64"
+map_h="64"
+nr_players="3"
+name="Impact"
+author="deviant"
+descr="After an impact of an asteroid and the following harsh winter, three isles are connected by ice and stone, setting an end to the peaceful coexistence of three tribes."
+hint=
 tags="official,unbalanced"

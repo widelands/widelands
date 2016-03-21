@@ -1,0 +1,12 @@
+# Automatically created by Widelands bzr7905[trunk] (Debug)
+
+[global]
+packet_version="1"
+map_w="96"
+map_h="96"
+nr_players="3"
+name="Two Frontiers"
+author="ISCH"
+descr="A multiplayer battle map on a small circle-shaped island."
+hint=
+tags="ffa,official"

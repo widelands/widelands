@@ -1,0 +1,12 @@
+# Automatically created by Widelands bzr7905[trunk] (Debug)
+
+[global]
+packet_version="1"
+map_w="384"
+map_h="256"
+nr_players="3"
+name="Wideworld"
+author="Einstein13"
+descr=">The world is not enough< If you want to win, you have to send some ships. But rememeber: your opponents are very close to you."
+hint=
+tags="seafaring"

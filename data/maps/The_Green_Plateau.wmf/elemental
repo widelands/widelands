@@ -1,17 +1,16 @@
-# Automatically created by Widelands bzr7574[artifacts] (Debug)
+# Automatically created by Widelands bzr7905[trunk] (Debug)
 
 [global]
 packet_version="1"
 map_w="80"
 map_h="80"
 nr_players="4"
-name=_"The Green Plateau"
+name="The Green Plateau"
 author="Nasenbaer"
-descr=_"You are standing on an island, crowned by mighty mountains which keep a wonderful and mighty treasure in their middle – The Green Plateau, which is hard to conquer but easy to lose. So, if you want it, be aware of the other clans."
+descr="You are standing on an island, crowned by mighty mountains which keep a wonderful and mighty treasure in their middle – The Green Plateau, which is hard to conquer but easy to lose. So, if you want it, be aware of the other clans."
 hint=
 tags="1v1,artifacts,official"
 
 [teams00]
-team1=0
-team2=2
-# blue vs. yellow
+team1="0"
+team2="2"

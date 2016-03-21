@@ -1,16 +1,22 @@
-# Automatically created by Widelands 3246
+# Automatically created by Widelands bzr7905[trunk] (Debug)
 
 [global]
-packet_version="1"
+packet_version="2"
 
 [player_1]
 name="Spieler 1"
 tribe="barbarians"
+ai=
+closeable="false"
 
 [player_2]
 name="Spieler 2"
 tribe="empire"
+ai=
+closeable="false"
 
 [player_3]
 name="Spieler 3"
-tribe=atlanteans
+tribe="atlanteans"
+ai=
+closeable="false"

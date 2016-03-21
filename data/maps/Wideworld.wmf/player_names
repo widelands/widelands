@@ -1,0 +1,22 @@
+# Automatically created by Widelands bzr7905[trunk] (Debug)
+
+[global]
+packet_version="2"
+
+[player_1]
+name="Gracz 1"
+tribe="barbarians"
+ai=
+closeable="false"
+
+[player_2]
+name="Gracz 2"
+tribe="barbarians"
+ai=
+closeable="false"
+
+[player_3]
+name="Gracz 3"
+tribe="barbarians"
+ai=
+closeable="false"

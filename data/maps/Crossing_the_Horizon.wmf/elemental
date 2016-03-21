@@ -1,12 +1,12 @@
-# Automatically created by Widelands bzr7574[artifacts] (Debug)
+# Automatically created by Widelands bzr7905[trunk] (Debug)
 
 [global]
 packet_version="1"
 map_w="144"
 map_h="144"
 nr_players="4"
-name=_"Crossing the Horizon"
+name="Crossing the Horizon"
 author="Kristin"
-descr=_"Man your ship and sail to the horizon."
+descr="Man your ship and sail to the horizon."
 hint=
 tags="2teams,artifacts,ffa,official,seafaring"

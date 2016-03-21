@@ -1,17 +1,16 @@
-# Automatically created by Widelands bzr7574[artifacts] (Debug)
+# Automatically created by Widelands bzr7905[trunk] (Debug)
 
 [global]
 packet_version="1"
 map_w="112"
 map_h="80"
 nr_players="4"
-name=_"Desert Tournament"
+name="Desert Tournament"
 author="ivh"
-descr=_"Four tribes struggle with their nearest neighbor to be the first to reach the mountain of gold that promises riches beyond belief. But can the two remaining ones share the resources wisely?"
+descr="Four tribes struggle with their nearest neighbor to be the first to reach the mountain of gold that promises riches beyond belief. But can the two remaining ones share the resources wisely?"
 hint=
-tags="2teams,artifacts,ffa,official"
+tags="2teams,artifacts,ffa"
 
 [teams00]
-team1=0,1
-team2=2,3
-# (blue, red) vs. (yellow, green)
+team1="0,1"
+team2="2,3"

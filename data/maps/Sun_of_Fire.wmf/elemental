@@ -1,0 +1,12 @@
+# Automatically created by Widelands bzr7905[trunk] (Debug)
+
+[global]
+packet_version="1"
+map_w="176"
+map_h="176"
+nr_players="8"
+name="The Ancient Sun of Fire"
+author="Nasenbaer"
+descr="For hundreds of years, this island was kept as a sanctuary of the Gods. No human ever ventured to set a foot on it. But now that a tribe had finally been barefaced enough to settle on the coast of that island, a lot of others followed in its wake."
+hint="Start positions are clockwise"
+tags="2teams,3teams,4teams,ffa,official"

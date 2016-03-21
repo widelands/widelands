@@ -1,13 +1,12 @@
-# Automatically created by Widelands bzr6713[widelands] (Debug)
+# Automatically created by Widelands bzr7905[trunk] (Debug)
 
 [global]
 packet_version="1"
 map_w="256"
 map_h="256"
 nr_players="8"
-world="winterland"
-name=_"Ice wars"
+name="Ice wars"
 author="Einstein13"
-descr=_"Autumn became winter. Some things are frozen, but not the war."
-hint=_"Start positions are clockwise"
-tags="seafaring,official,4teams,3teams,2teams"
+descr="Autumn became winter. Some things are frozen, but not the war."
+hint="Start positions are clockwise"
+tags="2teams,3teams,4teams,official,seafaring"

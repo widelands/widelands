@@ -1,0 +1,12 @@
+# Automatically created by Widelands bzr7905[trunk] (Debug)
+
+[global]
+packet_version="1"
+map_w="256"
+map_h="256"
+nr_players="8"
+name="The Nile 2rc1"
+author="Einstein13"
+descr="Newer version of The Nile. The river provides water and transport. Use it wisely. Your oponents will do the same. Main ore resources you will find far deep to the desert."
+hint=
+tags="seafaring"

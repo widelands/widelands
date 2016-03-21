@@ -1,12 +1,12 @@
-# Automatically created by Widelands 3246
+# Automatically created by Widelands bzr7905[trunk] (Debug)
 
 [global]
 packet_version="1"
 map_w="96"
 map_h="96"
 nr_players="3"
-world="greenland"
-name=_ "Three Warriors"
+name="Three Warriors"
 author="Quappo"
-descr=_ "Mighty mountains divide this land into three fertile valleys. But a path connects the valleys and thus a fight seems inescapable! Hint: Water can be found around the lakes."
-tags="official,ffa"
+descr="Mighty mountains divide this land into three fertile valleys. But a path connects the valleys and thus a fight seems inescapable! Hint: Water can be found around the lakes."
+hint=
+tags="ffa,official"

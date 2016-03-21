@@ -1,0 +1,12 @@
+# Automatically created by Widelands bzr7890[trunk] (Debug)
+
+[global]
+packet_version="1"
+map_w="96"
+map_h="80"
+nr_players="2"
+name="Glacier Lake v2"
+author="Nasenbaer, edited by king_of_nowhere"
+descr="A long time your tribe dwelt on this beautiful and lonely glacier lake. No one disturbed you and the resources were enough for your whole tribe, but a few months ago another tribe came over the mountains and settled down. And you are sure that there is only enough space for one tribe."
+hint=
+tags="1v1,artifacts"

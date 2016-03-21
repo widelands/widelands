@@ -1,17 +1,16 @@
-# Automatically created by Widelands bzr7574[artifacts] (Debug)
+# Automatically created by Widelands bzr7905[trunk] (Debug)
 
 [global]
 packet_version="1"
 map_w="112"
 map_h="112"
 nr_players="4"
-name=_"Four Castles"
+name="Four Castles"
 author="Winterwind"
-descr=_"Well protected in their mighty fortresses, four power-hungry warlords are completing their schemes to dominate these lands…"
+descr="Well protected in their mighty fortresses, four power-hungry warlords are completing their schemes to dominate these lands…"
 hint=
 tags="2teams,artifacts,ffa,official"
 
 [teams00]
-team1=0,1
-team2=2,3
-# (blue, red) vs. (yellow, green)
+team1="0,1"
+team2="2,3"
