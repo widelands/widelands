@@ -64,6 +64,7 @@ wl_library(ui_basic
     profile
     scripting_coroutine
     scripting_lua_interface
+    scripting_lua_table
     sound
     widelands_ball_of_mud
 )

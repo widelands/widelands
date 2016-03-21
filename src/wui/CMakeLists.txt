@@ -204,7 +204,6 @@ wl_library(wui
     scripting_lua_table
     sound
     ui_basic
-    ui_fsmenu
     widelands_ball_of_mud
     wui_chat_ui
     wui_edge_overlay_manager
