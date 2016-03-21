@@ -665,9 +665,9 @@ void Building::draw_info(const EditorGameBase& game, RenderTarget& dst, const Po
 {
 	const InteractiveGameBase & igbase =
 		dynamic_cast<const InteractiveGameBase&>(*game.get_ibase());
-	uint32_t const dpyflags = igbase.get_display_flags();
+	uint32_t const display_flags = igbase.get_display_flags();
 
-	bool show_statistics_string = dpyflags & InteractiveBase::dfShowStatistics;
+	bool show_statistics_string = display_flags & InteractiveBase::dfShowStatistics;
 	if (show_statistics_string) {
 		if (upcast(InteractivePlayer const, iplayer, &igbase)) {
 			if (!iplayer->player().see_all() && iplayer->player().is_hostile(*get_owner())) {
@@ -678,7 +678,7 @@ void Building::draw_info(const EditorGameBase& game, RenderTarget& dst, const Po
 	const std::string statistics_string =
 			show_statistics_string ? info_string(InfoStringFormat::kStatistics) : "";
 
-	do_draw_info(dpyflags & InteractiveBase::dfShowCensus, info_string(InfoStringFormat::kCensus),
+	do_draw_info(display_flags & InteractiveBase::dfShowCensus, info_string(InfoStringFormat::kCensus),
 					 show_statistics_string, statistics_string,
 					 dst, pos);
 }

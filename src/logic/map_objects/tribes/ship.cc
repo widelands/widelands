@@ -948,9 +948,9 @@ void Ship::draw(const EditorGameBase& game, RenderTarget& dst, const Point& pos)
 	Bob::draw(game, dst, pos);
 
 	// Show ship name and current activity
-	uint32_t const dpyflags = game.get_ibase()->get_display_flags();
+	uint32_t const display_flags = game.get_ibase()->get_display_flags();
 	std::string statistics_string = "";
-	if (dpyflags & InteractiveBase::dfShowStatistics) {
+	if (display_flags & InteractiveBase::dfShowStatistics) {
 		switch (ship_state_) {
 		case (ShipStates::kTransport):
 			/** TRANSLATORS: This is a ship state */
@@ -983,8 +983,8 @@ void Ship::draw(const EditorGameBase& game, RenderTarget& dst, const Point& pos)
 									% statistics_string).str();
 	}
 
-	do_draw_info(dpyflags & InteractiveBase::dfShowCensus, shipname_,
-					 dpyflags & InteractiveBase::dfShowStatistics, statistics_string,
+	do_draw_info(display_flags & InteractiveBase::dfShowCensus, shipname_,
+					 display_flags & InteractiveBase::dfShowStatistics, statistics_string,
 					 dst, calc_drawpos(game, pos));
 }
 

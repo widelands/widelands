@@ -512,9 +512,9 @@ void Immovable::draw_construction
 	                   Rect(Point(0, curh - lines), curw, lines));
 
 	// Additionally, if statistics are enabled, draw a progression string
-	uint32_t const dpyflags = game.get_ibase()->get_display_flags();
-	do_draw_info(dpyflags & InteractiveBase::dfShowCensus, descr().descname(),
-					 dpyflags & InteractiveBase::dfShowStatistics,
+	uint32_t const display_flags = game.get_ibase()->get_display_flags();
+	do_draw_info(display_flags & InteractiveBase::dfShowCensus, descr().descname(),
+					 display_flags & InteractiveBase::dfShowStatistics,
 					 (boost::format("<font color=%s>%s</font>")
 					  % UI_FONT_CLR_DARK.hex_value()
 					  % (boost::format(_("%i%% built")) % (100 * done / total)).str()).str(),
