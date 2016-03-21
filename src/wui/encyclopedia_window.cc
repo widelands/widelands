@@ -131,10 +131,8 @@ EncyclopediaWindow::EncyclopediaWindow(InteractivePlayer& parent, UI::UniqueWind
 			for (const auto& entry_table : entries_table->array_entries<std::unique_ptr<LuaTable>>()) {
 				const std::string entry_name =  entry_table->get_string("name");
 				const std::string entry_title =  entry_table->get_string("title");
-				// NOCOM const std::string entry_icon = entry_table->has_key("icon") ? entry_table->get_string("icon") : "";
+				const std::string entry_icon = entry_table->has_key("icon") ? entry_table->get_string("icon") : "";
 				const std::string entry_script =  entry_table->get_string("script");
-
-				const std::string entry_icon = "";
 
 				// Make sure that all paths exist
 				if (!g_fs->file_exists(entry_script)) {
