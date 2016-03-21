@@ -954,7 +954,7 @@ void Ship::draw(const EditorGameBase& game, RenderTarget& dst, const Point& pos)
 		switch (ship_state_) {
 		case (ShipStates::kTransport):
 			/** TRANSLATORS: This is a ship state */
-			statistics_string = pgettext("ship_state", "Transporting Wares");
+			statistics_string = pgettext("ship_state", "Shipping");
 			break;
 		case (ShipStates::kExpeditionWaiting):
 			/** TRANSLATORS: This is a ship state */
@@ -970,7 +970,7 @@ void Ship::draw(const EditorGameBase& game, RenderTarget& dst, const Point& pos)
 			break;
 		case (ShipStates::kExpeditionColonizing):
 			/** TRANSLATORS: This is a ship state */
-			statistics_string = pgettext("ship_state", "Unloading");
+			statistics_string = pgettext("ship_state", "Expedition Landing");
 			break;
 		case (ShipStates::kSinkRequest):
 		case (ShipStates::kSinkAnimation):
