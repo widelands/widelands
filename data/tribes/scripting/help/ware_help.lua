@@ -134,8 +134,7 @@ function ware_help_consumers_string(tribe, ware_description)
 
    -- Now collecting the workers that use this ware as a tool
    local workers_string = ""
-   for i, workername in ipairs(tribe.workers) do
-   local worker = wl.Game():get_worker_description(workername)
+   for i, worker in ipairs(tribe.workers) do
       local add_this_worker = false
       for j, buildcost in ipairs(worker.buildcost) do
          if (buildcost ~= nil and buildcost == ware_description.name) then

@@ -12,8 +12,7 @@ include "tribes/scripting/help/format_help.lua"
 
 function worker_help_producers_string(tribe, worker_description)
    local result = ""
-   for i, building_name in ipairs(tribe.buildings) do
-      local building = wl.Game():get_building_description(building_name)
+   for i, building in ipairs(tribe.buildings) do
       if (building.type_name == "productionsite") then
          local recruits_this = false;
          for j, output in ipairs(building.output_worker_types) do

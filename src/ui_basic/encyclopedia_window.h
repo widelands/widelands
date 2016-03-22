@@ -32,7 +32,6 @@
 #include "ui_basic/table.h"
 #include "ui_basic/tabpanel.h"
 #include "ui_basic/unique_window.h"
-// NOCOM #include "ui_basic/window.h"
 
 class InteractiveBase;
 

@@ -346,10 +346,9 @@ function building_help_dependencies_production(tribe, building_description)
       local soldier = wl.Game():get_worker_description(tribe.soldier)
       for j, buildcost in ipairs(soldier.buildcost) do
          if (buildcost == ware) then
-            for k, buildingname in ipairs(tribe.buildings) do
-               local warehouse_description = wl.Game():get_building_description(buildingname)
-               if (warehouse_description.type_name == "warehouse") then
-                  outgoing = outgoing .. dependencies({ware, warehouse_description, soldier}, soldier.descname)
+            for k, building in ipairs(tribe.buildings) do
+               if (building.type_name == "warehouse") then
+                  outgoing = outgoing .. dependencies({ware, building, soldier}, soldier.descname)
                end
             end
          end
