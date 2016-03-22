@@ -49,6 +49,7 @@ return {
          tabs = {
             {
                name = "general",
+               -- TRANSLATORS Tab title: General Widelands help
                title = _"General",
                icon = "images/logos/wl-ico-32.png",
                entries = {
@@ -62,18 +63,21 @@ return {
             },
             {
                name = "wares",
+               -- TRANSLATORS Tab title: Ware help
                title = _"Wares",
                icon = "images/wui/buildings/menu_tab_wares.png",
                entries = ware_entries(tribename)
             },
             {
                name = "workers",
+               -- TRANSLATORS Tab title: worker help
                title = _"Workers",
                icon = "images/wui/buildings/menu_tab_workers.png",
                entries = worker_entries(tribename)
             },
             {
                name = "buildings",
+               -- TRANSLATORS Tab title: building help
                title = _"Buildings",
                icon = "images/wui/stats/genstats_nrbuildings.png",
                entries = building_entries(tribename)

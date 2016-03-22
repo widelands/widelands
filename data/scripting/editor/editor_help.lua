@@ -50,6 +50,7 @@ return {
    tabs = {
       {
          name = "general",
+         -- TRANSLATORS Tab title: General help with the Widelands Editor
          title = _"General",
          icon = "images/logos/WL-Editor-32.png",
          entries = {
@@ -63,12 +64,14 @@ return {
       },
       {
          name = "terrains",
+         -- TRANSLATORS Tab title: terrain help
          title = _"Terrains",
          icon = "images/wui/editor/editor_menu_tool_set_terrain.png",
          entries = get_terrains()
       },
       {
          name = "trees",
+         -- TRANSLATORS Tab title: tree help
          title = _"Trees",
          icon = "world/immovables/trees/alder/old/idle_0.png",
          entries = get_trees()
