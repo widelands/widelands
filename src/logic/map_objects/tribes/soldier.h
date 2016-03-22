@@ -159,6 +159,7 @@ public:
 	void set_attack_level (uint32_t);
 	void set_defense_level(uint32_t);
 	void set_evade_level  (uint32_t);
+	void set_retreat_health (uint32_t);
 	uint32_t get_level (TrainingAttribute) const;
 	uint32_t get_health_level () const {return health_level_;}
 	uint32_t get_attack_level () const {return attack_level_;}
@@ -178,6 +179,7 @@ public:
 	void draw_info_icon(RenderTarget &, Point, bool anchor_below) const;
 
 	uint32_t get_current_health() const {return current_health_;}
+	uint32_t get_retreat_health() const {return retreat_health_;}
 	uint32_t get_max_health() const;
 	uint32_t get_min_attack() const;
 	uint32_t get_max_attack() const;
@@ -256,6 +258,7 @@ private:
 	uint32_t attack_level_;
 	uint32_t defense_level_;
 	uint32_t evade_level_;
+	uint32_t retreat_health_;
 
 	/// This is used to replicate walk for soldiers but only just before and
 	/// just after figthing in a battle, to draw soldier at proper position.

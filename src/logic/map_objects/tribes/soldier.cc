@@ -223,6 +223,7 @@ Soldier::Soldier(const SoldierDescr & soldier_descr) : Worker(soldier_descr)
 	attack_level_  = 0;
 	defense_level_ = 0;
 	evade_level_   = 0;
+	retreat_health_    = 0;
 
 	current_health_    = get_max_health();
 
@@ -238,6 +239,7 @@ void Soldier::init(EditorGameBase & egbase)
 	attack_level_  = 0;
 	defense_level_ = 0;
 	evade_level_   = 0;
+	retreat_health_ = 0;
 
 	current_health_ = get_max_health();
 
@@ -300,6 +302,11 @@ void Soldier::set_evade_level(const uint32_t evade) {
 	assert                 (evade <= descr().get_max_evade_level());
 
 	evade_level_ = evade;
+}
+void Soldier::set_retreat_health(const uint32_t retreat) {
+	assert(retreat <= get_max_health());
+
+	retreat_health_ = retreat;
 }
 
 uint32_t Soldier::get_level(TrainingAttribute const at) const {
@@ -696,12 +703,13 @@ void Soldier::start_task_attack
 	state.ivar3    = 0; // Counts how often the soldier is blocked in a row
 
 	state.ivar1    |= CF_RETREAT_WHEN_INJURED;
-	state.ui32var3 = kRetreatWhenHealthDropsBelowThisPercentage * get_max_health() / 100;
+	set_retreat_health(kRetreatWhenHealthDropsBelowThisPercentage * get_max_health() / 100);
 
 	// Injured soldiers are not allowed to attack
-	if (state.ui32var3 > get_current_health()) {
-		state.ui32var3 = get_current_health();
+	if (get_retreat_health() > get_current_health()) {
+		set_retreat_health(get_current_health());
 	}
+	molog("[attack] starting, retreat health: %d\n", get_retreat_health());
 }
 
 void Soldier::attack_update(Game & game, State & state)
@@ -883,12 +891,16 @@ void Soldier::attack_update(Game & game, State & state)
 
 	if
 		(!enemy ||
-		 ((state.ivar1 & CF_RETREAT_WHEN_INJURED) &&
-		  state.ui32var3 > get_current_health() &&
+		 (get_retreat_health() > get_current_health() &&
 		  defenders > 0))
 	{
+		if (get_retreat_health() > get_current_health()) {
+			assert(state.ivar1 & CF_RETREAT_WHEN_INJURED);
+		}
+
 		// Injured soldiers will try to return to safe site at home.
-		if (state.ui32var3 > get_current_health() && defenders) {
+		if (get_retreat_health() > get_current_health() && defenders) {
+			molog(" [attack] badly injured (%d), retreating...\n", get_current_health());
 			state.coords = Coords::null();
 			state.objvar1 = nullptr;
 		}
@@ -1016,15 +1028,19 @@ void Soldier::start_task_defense
 	// Here goes 'configuration'
 	if (stayhome) {
 		state.ivar1 |= CF_DEFEND_STAYHOME;
+		set_retreat_health(0);
 	} else {
 		/* Flag defenders are not allowed to flee, to avoid abuses */
 		state.ivar1 |= CF_RETREAT_WHEN_INJURED;
-		state.ui32var3 = get_max_health() * kRetreatWhenHealthDropsBelowThisPercentage / 100;
+		set_retreat_health(get_max_health() * kRetreatWhenHealthDropsBelowThisPercentage / 100);
 
 		// Soldier must defend even if he starts injured
-		if (state.ui32var3 < get_current_health())
-			state.ui32var3 = get_current_health();
+		// (current health is below retreat treshold)
+		if (get_retreat_health() > get_current_health()) {
+			set_retreat_health(get_current_health());
+		}
 	}
+	molog("[defense] retreat health set: %d\n", get_retreat_health());
 }
 
 struct SoldierDistance {
@@ -1128,13 +1144,15 @@ void Soldier::defense_update(Game & game, State & state)
 
 	if
 		(soldiers.empty() ||
-		 ((state.ivar1 & CF_RETREAT_WHEN_INJURED) &&
-		  get_current_health() < state.ui32var3))
+		 (get_current_health() < get_retreat_health()))
 	{
+		if (get_retreat_health() > get_current_health()) {
+			assert(state.ivar1 & CF_RETREAT_WHEN_INJURED);
+		}
 
-		if (get_current_health() < state.ui32var3)
-			molog("[defense] I am heavily injured!\n");
-		else
+		if (get_current_health() < get_retreat_health()) {
+			molog("[defense] I am heavily injured (%d)!\n", get_current_health());
+		} else
 			molog("[defense] no enemy soldiers found, ending task\n");
 
 		// If no enemy was found, return home
@@ -1158,7 +1176,6 @@ void Soldier::defense_update(Game & game, State & state)
 					 descr().get_right_walk_anims(does_carry_ware()),
 					 true);
 		}
-
 		molog("[defense] return home\n");
 		if
 			(start_task_movepath
@@ -1602,7 +1619,7 @@ bool Soldier::check_node_blocked
 	if
 		(!attackdefense ||
 		 ((attackdefense->ivar1 & CF_RETREAT_WHEN_INJURED) &&
-		  attackdefense->ui32var3 > get_current_health()))
+		  get_retreat_health() > get_current_health()))
 	{
 		// Retreating or non-combatant soldiers act like normal bobs
 		return Bob::check_node_blocked(game, field, commit);
@@ -1718,6 +1735,7 @@ void Soldier::log_general_info(const EditorGameBase & egbase)
 		("Levels: %d/%d/%d/%d\n",
 		 health_level_, attack_level_, defense_level_, evade_level_);
 	molog ("Health:   %d/%d\n", current_health_, get_max_health());
+	molog ("Retreat:  %d\n", retreat_health_);
 	molog ("Attack:   %d-%d\n", get_min_attack(), get_max_attack());
 	molog ("Defense:  %d%%\n", get_defense());
 	molog ("Evade:    %d%%\n", get_evade());
