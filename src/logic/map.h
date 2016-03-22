@@ -431,7 +431,7 @@ public:
 	bool is_port_space(const Coords& c) const;
 	void set_port_space(Coords c, bool allowed);
 	const PortSpacesSet& get_port_spaces() const {return port_spaces_;}
-	std::vector<Coords> find_portdock(const Widelands::Coords& c, bool disregard_territories = false) const;
+	std::vector<Coords> find_portdock(const Widelands::Coords& c) const;
 	bool allows_seafaring();
 
 	/// Checks whether there are any artifacts on the map

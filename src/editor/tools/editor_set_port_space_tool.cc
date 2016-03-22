@@ -35,7 +35,7 @@ int32_t editor_Tool_set_port_space_callback
 	NodeCaps const caps = c.field->nodecaps();
 	FCoords f = map.get_fcoords(*c.field);
 	if ((caps & BUILDCAPS_SIZEMASK) == BUILDCAPS_BIG) {
-		if (!map.find_portdock(f, true).empty())
+		if (!map.find_portdock(f).empty())
 			return caps;
 	}
 	return 0;
