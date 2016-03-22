@@ -54,7 +54,7 @@ BuildingHelpWindow::BuildingHelpWindow
 		cr->push_arg(building_description.name());
 		cr->resume();
 		std::unique_ptr<LuaTable> return_table = cr->pop_table();
-		return_table->do_not_warn_about_unaccessed_keys();
+		return_table->do_not_warn_about_unaccessed_keys();  // We won't display the title here
 		textarea_->set_text(return_table->get_string("text"));
 	} catch (LuaError& err) {
 		textarea_->set_text(err.what());
