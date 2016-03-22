@@ -1,0 +1,12 @@
+# Automatically created by Widelands bzr7905[trunk] (Debug)
+
+[global]
+packet_version="1"
+map_w="96"
+map_h="96"
+nr_players="3"
+name="Fellowships"
+author="Teppo"
+descr="Ships are your best fellows. Starting positions are similar, so the map should be fair."
+hint="This is somewhat technical map. This map is best suited for two or three human players. Coal is hard to find – consider making some. There is gold near the starting point – Do you see it?"
+tags="ffa,seafaring"
