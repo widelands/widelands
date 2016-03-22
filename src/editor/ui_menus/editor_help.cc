@@ -35,11 +35,7 @@ EditorHelp::EditorHelp(EditorInteractive& parent, UI::UniqueWindow::Registry& re
 	: EncyclopediaWindow(parent, registry, lua)
 {
 	try {
-		std::unique_ptr<LuaTable> table(lua_->run_script("scripting/editor/editor_help.lua"));
-		// NOCOM why coroutine?
-		std::unique_ptr<LuaCoroutine> cr(table->get_coroutine("func"));
-		cr->resume();
-		init(parent, cr->pop_table());
+		init(parent, lua_->run_script("scripting/editor/editor_help.lua"));
 	} catch (LuaError& err) {
 		log("Error loading script for editor help:\n%s\n", err.what());
 		UI::WLMessageBox wmb(

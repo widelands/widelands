@@ -34,7 +34,7 @@ function ware_entries(tribename)
    return map_object_entries(tribename, "tribes/scripting/help/ware_help.lua", tribe.wares)
 end
 
--- Returns help entries for all the workerss that the tribe can use
+-- Returns help entries for all the workers that the tribe can use
 function worker_entries(tribename)
    local tribe = wl.Game():get_tribe_description(tribename)
    return map_object_entries(tribename, "tribes/scripting/help/worker_help.lua", tribe.workers)

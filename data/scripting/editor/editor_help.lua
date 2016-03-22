@@ -1,9 +1,13 @@
--- NOCOM document
+-- Returns definitions for encyclopedia tabs and their contents for the
+-- Editor Help
 
+
+-- Comparison function used to sort map objects alphabetically
 function compare_by_title(a, b)
   return a["title"] < b["title"]
 end
 
+-- Returns help entries for all the terrains in the world
 function get_terrains()
    local result = {}
    for i, terrain in ipairs(wl.World().terrain_descriptions) do
@@ -19,12 +23,12 @@ function get_terrains()
    return result
 end
 
+-- Returns help entries for all the trees in the world
 function get_trees()
    local result = {}
    local counter = 1
    for i, immovable in ipairs(wl.World().immovable_descriptions) do
       if (immovable:has_attribute("tree")) then
-         print("Tree! " ..immovable.name);
          result[counter] = {
             name = immovable.name,
             title = immovable.species,
@@ -39,10 +43,8 @@ function get_trees()
    return result
 end
 
--- NOCOM fix textdomain
-set_textdomain("tribes_encyclopedia")
-return {
-   func = function()
+-- Main function
+set_textdomain("widelands")
 return {
    title = _"Editor Help",
    tabs = {
@@ -72,6 +74,4 @@ return {
          entries = get_trees()
       }
    }
-}
-end
 }
