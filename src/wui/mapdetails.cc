@@ -44,7 +44,7 @@ MapDetails::MapDetails
 	max_x_(max_x),
 	max_y_(max_y),
 	// Subtract for main box and author box
-	descr_box_height_(max_y - 2 * (3 * labelh_ + padding_)),
+	descr_box_height_(max_y - 4 * labelh_ - 5 * padding_),
 
 	main_box_(this, 0, 0, UI::Box::Vertical,
 		  max_x_, max_y_, 0),
@@ -99,7 +99,7 @@ void MapDetails::clear() {
 
 void MapDetails::set_max_height(int new_height) {
 	max_y_ = new_height;
-	descr_box_height_ = max_y_ - 2 * (3 * labelh_ + padding_);
+	descr_box_height_ = max_y_ - 4 * labelh_ - 5 * padding_;
 	update_layout();
 }
 
