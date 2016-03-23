@@ -43,6 +43,8 @@ MapDetails::MapDetails
 	labelh_(20),
 	max_x_(max_x),
 	max_y_(max_y),
+	// Subtract for main box and author box
+	descr_box_height_(max_y - 2 * (3 * labelh_ + padding_)),
 
 	main_box_(this, 0, 0, UI::Box::Vertical,
 		  max_x_, max_y_, 0),
@@ -58,9 +60,9 @@ MapDetails::MapDetails
 	author_(&author_box_, 0, 0, max_x_ - indent_, labelh_, ""),
 
 	descr_box_(&main_box_, 0, 0, UI::Box::Horizontal,
-		  max_x_, 6 * labelh_ + padding_, padding_ / 2),
+		  max_x_, descr_box_height_, padding_ / 2),
 	descr_label_(&main_box_, 0, 0, max_x_, labelh_, ""),
-	descr_(&descr_box_, 0, 0, max_x_ - indent_, 5 * labelh_, "")
+	descr_(&descr_box_, 0, 0, max_x_ - indent_, descr_box_height_ - labelh_ - padding_, "")
 {
 	suggested_teams_box_ = new UI::SuggestedTeamsBox(this, 0, 0, UI::Box::Vertical,
 																	 padding_, indent_, labelh_, max_x_, 4 * labelh_);
@@ -93,6 +95,28 @@ void MapDetails::clear() {
 	author_.set_text("");
 	descr_.set_text("");
 	suggested_teams_box_->hide();
+}
+
+void MapDetails::set_max_height(int new_height) {
+	max_y_ = new_height;
+	descr_box_height_ = max_y_ - 2 * (3 * labelh_ + padding_);
+	update_layout();
+}
+
+void MapDetails::update_layout() {
+	// Adjust sizes for show / hide suggested teams
+	if (suggested_teams_box_->is_visible()) {
+		suggested_teams_box_->set_pos(Point(0, max_y_ - suggested_teams_box_->get_h()));
+		main_box_.set_size(max_x_, max_y_ - suggested_teams_box_->get_h());
+		descr_box_.set_size(
+					descr_box_.get_w(),
+					descr_box_height_ - suggested_teams_box_->get_h() - padding_);
+	} else {
+		main_box_.set_size(max_x_, max_y_);
+		descr_box_.set_size(descr_box_.get_w(), descr_box_height_);
+	}
+	descr_.set_size(descr_.get_w(), descr_box_.get_h() - descr_label_.get_h() - padding_);
+	descr_.scroll_to_top();
 }
 
 void MapDetails::update(const MapData& mapdata, bool localize_mapname) {
@@ -138,19 +162,10 @@ void MapDetails::update(const MapData& mapdata, bool localize_mapname) {
 
 		// Show / hide suggested teams
 		if (mapdata.suggested_teams.empty()) {
-			main_box_.set_size(max_x_, max_y_);
-			descr_box_.set_size(
-						descr_box_.get_w(),
-						max_y_ - descr_label_.get_y() - descr_label_.get_h() - 2 * padding_);
+			suggested_teams_box_->hide();
 		} else {
 			suggested_teams_box_->show(mapdata.suggested_teams);
-			suggested_teams_box_->set_pos(Point(0, max_y_ - suggested_teams_box_->get_h()));
-			main_box_.set_size(max_x_, max_y_ - suggested_teams_box_->get_h());
-			descr_box_.set_size(
-						descr_box_.get_w(),
-						suggested_teams_box_->get_y() - descr_label_.get_y() - descr_label_.get_h() - 4 * padding_);
 		}
-		descr_.set_size(descr_.get_w(), descr_box_.get_h());
-		descr_.scroll_to_top();
 	}
+	update_layout();
 }

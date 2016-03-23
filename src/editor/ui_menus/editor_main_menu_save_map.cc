@@ -75,8 +75,8 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive& parent)
                     _("Filename:"),
                     UI::Align::kLeft) {
 
-	// Make room for edit_options_
-	map_details_.set_size(map_details_.get_w(), map_details_.get_h() - buth_ - padding_);
+	// Make room for edit_options_ button
+	map_details_.set_max_height(map_details_.get_h() - buth_ - padding_);
 
 	table_.selected.connect(boost::bind(&MainMenuSaveMap::clicked_item, boost::ref(*this)));
 	table_.double_clicked.connect(
