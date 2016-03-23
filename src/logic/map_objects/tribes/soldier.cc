@@ -894,15 +894,14 @@ void Soldier::attack_update(Game & game, State & state)
 		 (get_retreat_health() > get_current_health() &&
 		  defenders > 0))
 	{
+		// Injured soldiers will try to return to safe site at home.
 		if (get_retreat_health() > get_current_health()) {
 			assert(state.ivar1 & CF_RETREAT_WHEN_INJURED);
-		}
-
-		// Injured soldiers will try to return to safe site at home.
-		if (get_retreat_health() > get_current_health() && defenders) {
-			molog(" [attack] badly injured (%d), retreating...\n", get_current_health());
-			state.coords = Coords::null();
-			state.objvar1 = nullptr;
+			if (defenders) {
+				molog(" [attack] badly injured (%d), retreating...\n", get_current_health());
+				state.coords = Coords::null();
+				state.objvar1 = nullptr;
+			}
 		}
 		// The old militarysite gets replaced by a new one, so if "enemy" is not
 		// valid anymore, we either "conquered" the new building, or it was
