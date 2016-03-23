@@ -55,10 +55,14 @@ struct WuiPlotArea : public UI::Panel {
 	WuiPlotArea
 		(UI::Panel * parent, int32_t x, int32_t y, int32_t w, int32_t h);
 
+	/// Calls update() if needed
+	void think() override;
+
 	void draw(RenderTarget &) override;
 
 	void set_time(TIME id) {
 		time_ = id;
+		needs_update_ = true;
 	}
 
 	void set_time_id(int32_t time) {
@@ -66,6 +70,7 @@ struct WuiPlotArea : public UI::Panel {
 			set_time(TIME_GAME);
 		else
 			set_time(static_cast<TIME>(time));
+		needs_update_ = true;
 	}
 	TIME get_time() {return static_cast<TIME>(time_); }
 	int32_t get_time_id() {
@@ -93,6 +98,8 @@ protected:
 		(RenderTarget & dst, std::vector<uint32_t> const * dataset, float const yline_length,
 		 uint32_t const highest_scale, float const sub, RGBColor const color, int32_t yoffset);
 	uint32_t get_plot_time();
+	/// Recalculates the data
+	virtual void update();
 
 	struct PlotData {
 		const std::vector<uint32_t> * dataset;
@@ -103,6 +110,16 @@ protected:
 
 	int32_t                 plotmode_;
 	int32_t                 sample_rate_;
+
+	/// Whether there has ben a data update since the last time that think() was executed
+	bool needs_update_;
+	/// The last time the information in this Panel got updated
+	uint32_t lastupdate_;
+
+	/// For first updating and then plotting the data
+	uint32_t time_ms_;
+	uint32_t highest_scale_;
+	float sub_;
 
 private:
 	uint32_t get_game_time();
@@ -162,7 +179,12 @@ public:
 	void register_negative_plot_data
 		(uint32_t id, const std::vector<uint32_t> * data);
 
+protected:
+	/// Recalculates the data
+	void update() override;
+
 private:
+
 	/**
 	 * for the negative plotdata only the values matter. The color and
 	 * visibility is determined by the normal plotdata.
