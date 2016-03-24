@@ -330,6 +330,10 @@ bool InteractivePlayer::handle_key(bool const down, SDL_Keysym const code)
 			objectives_.toggle();
 			return true;
 
+		case SDLK_F1:
+			encyclopedia_.toggle();
+			return true;
+
 		case SDLK_c:
 			set_display_flag(dfShowCensus, !get_display_flag(dfShowCensus));
 			return true;

@@ -16,32 +16,34 @@ return {
          h1(_"Keyboard Shortcuts") ..
 
          p(
-            -- TRANSLATORS: This is an access key combination. Do not change the key.
-            dl(_"Space:", _"Toggle building spaces") ..
-            -- TRANSLATORS: This is an access key combination. Do not change the key.
-            dl(_"C:", _"Toggle census") ..
-            -- TRANSLATORS: This is an access key combination. Do not change the key.
-            dl(_"F:", _"Toggle fullscreen") ..
-            -- TRANSLATORS: This is an access key combination. Do not change the key.
-            dl(_"H:", _"Toggle main menu") ..
-            -- TRANSLATORS: This is an access key combination. Do not change the key.
-            dl(_"M:", _"Toggle minimap") ..
-            -- TRANSLATORS: This is an access key combination. Do not change the key.
-            dl(_"P:", _"Toggle player menu") ..
-            -- TRANSLATORS: This is an access key combination. Do not change the key.
-            dl(_"T:", _"Toggle tools menu") ..
-            -- TRANSLATORS: This is an access key combination. Do not change the key.
-            dl(_"I:", _"Activate information tool") ..
-            -- TRANSLATORS: This is an access key combination. Do not change the key.
-            dl(_"Ctrl + L:", _"Load map") ..
-            -- TRANSLATORS: This is an access key combination. Do not change the key.
-            dl(_"Ctrl + S:", _"Save map") ..
-            -- TRANSLATORS: This is an access key combination. Do not change the key.
-            dl(_"1-0:", _"Change tool size") ..
-            -- TRANSLATORS: This is an access key combination. Do not change the key.
-            dl(_"Shift (Hold):", _"First alternative tool while pressed") ..
-            -- TRANSLATORS: This is an access key combination. Do not change the key.
-            dl(_"Alt (Hold):", _"Second alternative tool while pressed")
+            help_census_hotkey() ..
+            -- TRANSLATORS: This is an access key combination.
+            dl(help_format_hotkey("H"), _"Toggle main menu") ..
+            -- TRANSLATORS: This is an access key combination. The hotkey is 't'
+            dl(help_format_hotkey("T"), _"Toggle tools menu") ..
+            -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
+            dl(help_format_hotkey(pgettext("hotkey", "1-0")), _"Change tool size") ..
+            help_toggle_minimap_hotkey() ..
+            help_toggle_building_spaces_hotkey() ..
+            -- TRANSLATORS: This is an access key combination. The hotkey is 'p'
+            dl(help_format_hotkey("P"), _"Toggle player menu") ..
+            -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
+            dl(help_format_hotkey("Ctrl + Z"), _"Undo") ..
+            -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
+            dl(help_format_hotkey("Ctrl + Y"), _"Redo") ..
+            -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
+            dl(help_format_hotkey("F1"), _"Help") ..
+            -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
+            dl(help_format_hotkey(pgettext("hotkey", "Shift (Hold)")), _"First alternative tool while pressed") ..
+            -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
+            dl(help_format_hotkey(pgettext("hotkey", "Alt (Hold)")), _"Second alternative tool while pressed") ..
+            -- TRANSLATORS: This is an access key combination. The hotkey is 'i'
+            dl(help_format_hotkey("I"), _"Activate information tool") ..
+            -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
+            dl(help_format_hotkey(pgettext("hotkey", "Ctrl + L")), _"Load map") ..
+            -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
+            dl(help_format_hotkey(pgettext("hotkey", "Ctrl + S")), _"Save map") ..
+            help_toggle_fullscreen_hotkey()
          ) ..
 
          h2(_"Editor Help") ..
