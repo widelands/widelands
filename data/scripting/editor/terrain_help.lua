@@ -31,9 +31,9 @@ return {
 
          local default_resource = terrain.default_resource
          if (default_resource ~= nil) then
-            -- TRANSLATORS: e.g. "5x Water"
-            result = result .. text_line(_"Default:", _"%1%x %2%":bformat(
-               terrain.default_resource_amount, default_resource.descname))
+            result = result .. text_line(_"Default:",
+               -- TRANSLATORS: e.g. "5x Water"
+               _"%1%x %2%":bformat(terrain.default_resource_amount, default_resource.descname))
          end
       end
 
