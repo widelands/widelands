@@ -1,4 +1,4 @@
-set_textdomain("texts")
+set_textdomain("widelands_editor")
 
 include "scripting/formatting.lua"
 include "txts/help/common_helptexts.lua"

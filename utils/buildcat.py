@@ -52,7 +52,6 @@ MAINPOTS = [
         "../../src/*/*/*/*/*.h",
         "../../src/*/*/*/*/*/*.h",
         "../../data/scripting/*.lua",
-        "../../data/scripting/editor/*.lua",
     ] ),
     ( "widelands_console/widelands_console", [
                     "../../src/wlapplication_messages.cc",
@@ -78,7 +77,6 @@ MAINPOTS = [
         "../../data/tribes/*/*/*/*/init.lua",
         "../../data/tribes/*/*/*/*/*/init.lua",
     ]),
-
     ("tribes_encyclopedia/tribes_encyclopedia", [
         "../../data/tribes/scripting/help/*.lua",
         "../../data/tribes/*/helptexts.lua",
@@ -87,6 +85,9 @@ MAINPOTS = [
         "../../data/tribes/*/*/*/*/helptexts.lua",
         "../../data/tribes/*/*/*/*/*/helptexts.lua",
     ]),
+    ( "widelands_editor/widelands_editor", [
+        "../../data/scripting/editor/*.lua",
+    ] ),
 ]
 
 

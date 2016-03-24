@@ -9,7 +9,7 @@ include "scripting/editor/format_editor.lua"
 
 return {
    func = function(terrain_name)
-      set_textdomain("widelands")
+      set_textdomain("widelands_editor")
       local world = wl.World();
       local terrain = wl.Editor():get_terrain_description(terrain_name)
 

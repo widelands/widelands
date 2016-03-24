@@ -4,15 +4,15 @@
 
 include "scripting/formatting.lua"
 
-set_textdomain("texts")
-
 function help_online_help()
+   set_textdomain("texts")
    return
       h2(_[[Online Help]]) ..
       p(_[[If you need more documentation or help for Widelands or the Widelands Editor, be sure to visit our homepage at %s. You can find online help in our wiki there.]]):bformat(a("https://wl.widelands.org/"))
 end
 
 function help_introduction()
+   set_textdomain("texts")
    return
       h2(_[[Introduction]]) ..
       p(_[[Widelands is a free, open source real-time strategy game with singleplayer campaigns and a multiplayer mode. The game was inspired by Settlers II but has significantly more variety and depth to it. Still, it is easy to get started through playable tutorials.]]) ..
@@ -20,6 +20,7 @@ function help_introduction()
 end
 
 function help_replays()
+   set_textdomain("texts")
    return
       h2(_[[Replays]]) ..
       p(_[[Widelands records every game you play in two files. One of these files has a .wrpl.wgf extension and contains an initial savegame. The other file has a .wrpl extension and contains all commands that were issued by all players, such as building a road or attacking an enemy. The rest of the filenames will tell you the time you started the game.]]) ..

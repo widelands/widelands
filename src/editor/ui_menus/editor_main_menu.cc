@@ -113,7 +113,7 @@ void EditorMainMenu::help_btn() {
 		delete window_help_.window;
 	} else {
 		FileViewWindow* fileview = new FileViewWindow(eia(), window_help_, _("The Widelands Editor"));
-		fileview->add_tab("txts/help/editor_help.lua");
+		fileview->add_tab("scripting/editor/editor_help.lua");
 	}
 }
 

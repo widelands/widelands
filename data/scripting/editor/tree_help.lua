@@ -8,7 +8,7 @@ include "scripting/editor/format_editor.lua"
 
 return {
    func = function(tree_name)
-      set_textdomain("widelands")
+      set_textdomain("widelands_editor")
       local world = wl.World();
       local tree = wl.Editor():get_immovable_description(tree_name)
       local result = picture_li(tree.representative_image, "")
