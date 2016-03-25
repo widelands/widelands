@@ -4,7 +4,7 @@
 packet_version="2"
 
 [player_1]
-name="Haegar"
+name="Hägar"
 tribe="barbarians"
 ai=
 closeable="false"

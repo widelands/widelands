@@ -4,19 +4,19 @@
 packet_version="2"
 
 [player_1]
-name="Spieler 1"
+name="Player 1"
 tribe="barbarians"
 ai=
 closeable="false"
 
 [player_2]
-name="Spieler2"
+name="Player 2"
 tribe="barbarians"
 ai=
 closeable="false"
 
 [player_3]
-name="Spieler3"
+name="Player 3"
 tribe="barbarians"
 ai=
 closeable="false"

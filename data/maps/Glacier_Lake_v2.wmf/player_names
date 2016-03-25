@@ -4,7 +4,7 @@
 packet_version="2"
 
 [player_1]
-name="Bjorn"
+name="Bjørn"
 tribe="barbarians"
 ai=
 closeable="false"

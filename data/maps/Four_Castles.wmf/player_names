@@ -10,19 +10,19 @@ ai=
 closeable="false"
 
 [player_2]
-name="Spieler2"
+name="Player 2"
 tribe="barbarians"
 ai=
 closeable="false"
 
 [player_3]
-name="Spieler3"
+name="Player 3"
 tribe="barbarians"
 ai=
 closeable="false"
 
 [player_4]
-name="Spieler4"
+name="Player 4"
 tribe="barbarians"
 ai=
 closeable="false"

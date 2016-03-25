@@ -22,7 +22,7 @@ ai=
 closeable="false"
 
 [player_4]
-name="Kal'Lak"
+name="Kal’Lak"
 tribe="barbarians"
 ai=
 closeable="false"

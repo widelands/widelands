@@ -10,7 +10,7 @@ ai=
 closeable="false"
 
 [player_2]
-name="Spieler2"
+name="Player 2"
 tribe="barbarians"
 ai=
 closeable="false"
