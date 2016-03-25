@@ -51,7 +51,7 @@ Scrollbar::Scrollbar
 	pos_           (0),
 	singlestepsize_(1),
 	pagesize_      (5),
-	buttonsize_    (Size),
+	buttonsize_    (kSize),
 	steps_         (100),
 	pressed_       (None),
 	time_nextact_  (0),
@@ -479,10 +479,10 @@ bool Scrollbar::handle_mousemove
 }
 
 void Scrollbar::layout() {
-	if ((2 * Size + get_knob_size()) > static_cast<uint32_t>((horizontal_ ? get_w() : get_h()))) {
-		buttonsize_ = Size / 2;
+	if ((2 * kSize + get_knob_size()) > static_cast<uint32_t>((horizontal_ ? get_w() : get_h()))) {
+		buttonsize_ = kSize / 2;
 	} else {
-		buttonsize_ = Size;
+		buttonsize_ = kSize;
 	}
 }
 

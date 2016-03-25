@@ -39,11 +39,9 @@ struct Scrollbar : public Panel {
 		PlusPage
 	};
 
-	enum {
-		///< default width for vertical scrollbars,
-		// height for horizontal scrollbar
-		Size = 24,
-	};
+	/// default width for vertical scrollbars,
+	/// or height for horizontal scrollbars
+	static constexpr int kSize = 24;
 
 public:
 	Scrollbar
