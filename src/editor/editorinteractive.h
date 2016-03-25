@@ -100,6 +100,8 @@ public:
 	void map_clicked(bool draw = false);
 	void set_sel_pos(Widelands::NodeAndTriangle<>) override;
 	void set_sel_radius_and_update_menu(uint32_t);
+	void start_painting();
+	void stop_painting();
 
 	//  Handle UI elements.
 	bool handle_key(bool down, SDL_Keysym) override;
@@ -155,7 +157,7 @@ private:
 	bool need_save_;
 	std::vector<PlayerReferences> player_tribe_references_;
 	uint32_t realtime_;
-	bool left_mouse_button_is_down_;
+	bool is_painting_;
 
 	std::unique_ptr<Tools> tools_;
 	std::unique_ptr<EditorHistory> history_;
