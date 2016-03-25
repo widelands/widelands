@@ -5,9 +5,9 @@ packet_version="1"
 map_w="192"
 map_h="192"
 nr_players="4"
-name="Calvisson"
+name=_"Calvisson"
 author="Kristin"
-descr="It’s a pleasure to settle in the beauty of this fissured countryside. But the ways to encompass these large territories are long and meandering, so it is easy to err into the land of the foreign clans."
+descr=_"It’s a pleasure to settle in the beauty of this fissured countryside. But the ways to encompass these large territories are long and meandering, so it is easy to err into the land of the foreign clans."
 hint=
 tags="2teams,official,seafaring"
 
