@@ -68,6 +68,8 @@ public:
 
 	void set_force_draw(bool const t) {force_draw_ = t;}
 
+	void layout() override;
+
 private:
 	Area get_area_for_point(int32_t x, int32_t y);
 	uint32_t get_knob_pos();
@@ -92,6 +94,7 @@ private:
 	uint32_t  pos_;            ///< from 0 to range_ - 1
 	uint32_t  singlestepsize_;
 	uint32_t  pagesize_;
+	uint32_t  buttonsize_;
 	uint32_t  steps_;
 
 	Area pressed_; ///< area that the user clicked on (None if mouse is up)
