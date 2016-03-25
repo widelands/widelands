@@ -217,7 +217,7 @@ FullscreenMenuOptions::FullscreenMenuOptions
 	// Language options
 	label_language_(&box_language_, _("Language"), UI::Align::kLeft),
 	language_list_(&box_language_, 0, 0, column_width_ / 2,
-						get_inner_h() - tab_panel_y_ - buth_ - hmargin_ - 5 * padding_,
+						get_inner_h() - tab_panel_y_ - 2 * buth_ - hmargin_ - 5 * padding_,
 						true),
 
 	os_(opt)
