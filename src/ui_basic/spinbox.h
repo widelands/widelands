@@ -31,7 +31,6 @@
 namespace UI {
 
 struct SpinBoxImpl;
-struct IntValueTextReplacement;
 
 /// A spinbox is an UI element for setting the integer value of a variable.
 /// w is the overall width of the SpinBox and must be wide enough to fit 2 labels and the buttons.
@@ -76,7 +75,6 @@ public:
 private:
 	void update();
 	void change_value(int32_t);
-	int32_t find_replacement(int32_t value) const;
 	const std::string unit_text(int32_t value) const;
 
 	const SpinBox::Type type_;

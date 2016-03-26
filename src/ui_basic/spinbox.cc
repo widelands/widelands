@@ -19,6 +19,7 @@
 
 #include "ui_basic/spinbox.h"
 
+#include <map>
 #include <vector>
 
 #include <boost/format.hpp>
@@ -34,14 +35,6 @@
 #include "ui_basic/textarea.h"
 
 namespace UI {
-
-struct IntValueTextReplacement {
-	/// Value to be replaced
-	int32_t value;
-
-	/// Text to be used
-	std::string text;
-};
 
 struct SpinBoxImpl {
 	/// Value hold by the spinbox
@@ -60,8 +53,8 @@ struct SpinBoxImpl {
 	/// Background tile style of buttons.
 	const Image* background;
 
-	/// Special names for specific Values
-	std::vector<IntValueTextReplacement> valrep;
+	/// Special names for specific values
+	std::map<int32_t, std::string> value_replacements;
 
 	/// The UI parts
 	Textarea * text;
@@ -231,15 +224,9 @@ SpinBox::~SpinBox() {
  */
 void SpinBox::update()
 {
-	bool was_in_list = false;
-	for (const IntValueTextReplacement& value : sbi_->valrep) {
-		if (value.value == sbi_->value) {
-			sbi_->text->set_text(value.text);
-			was_in_list = true;
-			break;
-		}
-	}
-	if (!was_in_list) {
+	if (sbi_->value_replacements.count(sbi_->value) == 1) {
+		sbi_->text->set_text(sbi_->value_replacements.at(sbi_->value));
+	} else {
 		if (type_ == SpinBox::Type::kValueList) {
 			if ((sbi_->value >= 0) && (sbi_->values.size() > static_cast<size_t>(sbi_->value))) {
 				sbi_->text->set_text(unit_text(sbi_->values.at(sbi_->value)));
@@ -323,32 +310,12 @@ int32_t SpinBox::get_value() const
 
 
 /**
- * Searches for value in sbi->valrep
- * \returns the place where value was found or -1 if the value wasn't found.
- */
-int32_t SpinBox::find_replacement(int32_t value) const
-{
-	for (uint32_t i = 0; i < sbi_->valrep.size(); ++i)
-		if (sbi_->valrep[i].value == value)
-			return i;
-	return -1;
-}
-
-
-/**
  * Adds a replacement text for a specific value
  * overwrites an old replacement if one exists.
  */
 void SpinBox::add_replacement(int32_t value, const std::string& text)
 {
-	if (int32_t i = find_replacement(value) >= 0)
-		sbi_->valrep[i].text = text;
-	else {
-		IntValueTextReplacement newtr;
-		newtr.value = value;
-		newtr.text  = text;
-		sbi_->valrep.push_back(newtr);
-	}
+	sbi_->value_replacements[value] = text;
 	update();
 }
 
