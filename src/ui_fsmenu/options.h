@@ -98,10 +98,6 @@ public:
 	OptionsCtrl::OptionsStruct get_values();
 
 private:
-	void update_sb_autosave_unit();
-	void update_sb_dis_panel_unit();
-	void update_sb_dis_border_unit();
-
 	// Fills the language selection list
 	void add_languages_to_list(const std::string& current_locale);
 

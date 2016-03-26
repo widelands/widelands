@@ -154,7 +154,7 @@ FullscreenMenuOptions::FullscreenMenuOptions
 
 	sb_maxfps_(&box_interface_, 0, 0, column_width_ / 2, column_width_ / 4,
 				  opt.maxfps, 0, 99,
-				  _("Maximum FPS:"), ""),
+				  _("Maximum FPS:")),
 
 
 	// Windows options
@@ -166,17 +166,13 @@ FullscreenMenuOptions::FullscreenMenuOptions
 	sb_dis_panel_
 			(&box_windows_, 0, 0, column_width_, 200,
 			 opt.panel_snap_distance, 0, 99, _("Distance for windows to snap to other panels:"),
-			 /** TRANSLATORS: Options: Distance for windows to snap to  other panels: */
-			 /** TRANSLATORS: This will have a number added in front of it */
-			 ngettext("pixel", "pixels", opt.panel_snap_distance)),
+			 UI::SpinBox::Units::kPixels),
 
 	sb_dis_border_
 			(&box_windows_, 0, 0, column_width_, 200,
 			 opt.border_snap_distance, 0, 99,
 			 _("Distance for windows to snap to borders:"),
-			 /** TRANSLATORS: Options: Distance for windows to snap to borders: */
-			 /** TRANSLATORS: This will have a number added in front of it */
-			 ngettext("pixel", "pixels", opt.border_snap_distance)),
+			 UI::SpinBox::Units::kPixels),
 
 	// Sound options
 	music_ (&box_sound_, Point(0, 0), _("Enable Music"), "", column_width_),
@@ -188,15 +184,13 @@ FullscreenMenuOptions::FullscreenMenuOptions
 	sb_autosave_
 		(&box_saving_, 0, 0, column_width_, 250,
 		 opt.autosave / 60, 0, 100, _("Save game automatically every:"),
-		 /** TRANSLATORS: Options: Save game automatically every: */
-		 /** TRANSLATORS: This will have a number added in front of it */
-		 ngettext("minute", "minutes", opt.autosave / 60),
+		 UI::SpinBox::Units::kMinutes,
 		 g_gr->images().get("images/ui_basic/but3.png"), UI::SpinBox::Type::kBig),
 
 	sb_rolling_autosave_
 		(&box_saving_, 0, 0, column_width_, 250,
 		 opt.rolling_autosave, 1, 20, _("Maximum number of autosave files:"),
-		 "",
+		 UI::SpinBox::Units::kNone,
 		 g_gr->images().get("images/ui_basic/but3.png"), UI::SpinBox::Type::kBig),
 
 	zip_(&box_saving_, Point(0, 0), _("Compress widelands data files (maps, replays and savegames)"),
@@ -288,25 +282,6 @@ FullscreenMenuOptions::FullscreenMenuOptions
 
 	/** TRANSLATORS Options: Save game automatically every: */
 	sb_autosave_     .add_replacement(0, _("Off"));
-	for (UI::Button* temp_button : sb_autosave_.get_buttons()) {
-		temp_button->sigclicked.connect
-				(boost::bind
-					(&FullscreenMenuOptions::update_sb_autosave_unit,
-					 boost::ref(*this)));
-	}
-	for (UI::Button* temp_button : sb_dis_panel_.get_buttons()) {
-		temp_button->sigclicked.connect
-				(boost::bind
-					(&FullscreenMenuOptions::update_sb_dis_panel_unit,
-					 boost::ref(*this)));
-	}
-
-	for (UI::Button* temp_button : sb_dis_border_.get_buttons()) {
-		temp_button->sigclicked.connect
-				(boost::bind
-					(&FullscreenMenuOptions::update_sb_dis_border_unit,
-					 boost::ref(*this)));
-	}
 
 	// Fill in data
 	// Interface options
@@ -379,17 +354,6 @@ FullscreenMenuOptions::FullscreenMenuOptions
 	language_list_.focus();
 }
 
-void FullscreenMenuOptions::update_sb_autosave_unit() {
-	sb_autosave_.set_unit(ngettext("minute", "minutes", sb_autosave_.get_value()));
-}
-
-void FullscreenMenuOptions::update_sb_dis_panel_unit() {
-	sb_dis_panel_.set_unit(ngettext("pixel", "pixels", sb_dis_panel_.get_value()));
-}
-
-void FullscreenMenuOptions::update_sb_dis_border_unit() {
-	sb_dis_border_.set_unit(ngettext("pixel", "pixels", sb_dis_border_.get_value()));
-}
 
 void FullscreenMenuOptions::add_languages_to_list(const std::string& current_locale) {
 

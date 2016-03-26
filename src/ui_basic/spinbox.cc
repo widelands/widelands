@@ -55,7 +55,7 @@ struct SpinBoxImpl {
 	std::vector<int32_t> values;
 
 	/// The unit of the value
-	std::string unit;
+	UI::SpinBox::Units unit;
 
 	/// Background tile style of buttons.
 	const Image* background;
@@ -84,7 +84,7 @@ SpinBox::SpinBox
 	 const int32_t x, const int32_t y, const uint32_t w, const uint32_t unit_w,
 	 int32_t const startval, int32_t const minval, int32_t const maxval,
 	 const std::string& label_text,
-	 const std::string& unit,
+	 const SpinBox::Units& unit,
 	 const Image* background,
 	 SpinBox::Type type,
 	 int32_t step_size, int32_t big_step_size)
@@ -242,16 +242,12 @@ void SpinBox::update()
 	if (!was_in_list) {
 		if (type_ == SpinBox::Type::kValueList) {
 			if ((sbi_->value >= 0) && (sbi_->values.size() > static_cast<size_t>(sbi_->value))) {
-				/** TRANSLATORS: %i = number, %s = unit, e.g. "5 pixels" in the advanced options */
-				sbi_->text->set_text((boost::format(_("%1$i %2$s"))
-											 % sbi_->values.at(sbi_->value)
-											 % sbi_->unit.c_str()).str());
+				sbi_->text->set_text(unit_text(sbi_->values.at(sbi_->value)));
 			} else {
 				sbi_->text->set_text("undefined"); // The user should never see this, so we're not localizing
 			}
 		} else {
-			/** TRANSLATORS: %i = number, %s = unit, e.g. "5 pixels" in the advanced options */
-			sbi_->text->set_text((boost::format(_("%1$i %2$s")) % sbi_->value % sbi_->unit.c_str()).str());
+			sbi_->text->set_text(unit_text(sbi_->value));
 		}
 	}
 
@@ -310,16 +306,6 @@ void SpinBox::set_interval(int32_t const min, int32_t const max)
 
 
 /**
- * manually sets the used unit to a given string
- */
-void SpinBox::set_unit(const std::string & unit)
-{
-	sbi_->unit = unit;
-	update();
-}
-
-
-/**
  * \returns the value
  */
 int32_t SpinBox::get_value() const
@@ -333,14 +319,6 @@ int32_t SpinBox::get_value() const
 	} else {
 		return sbi_->value;
 	}
-}
-
-/**
- * \returns the unit
- */
-std::string SpinBox::get_unit() const
-{
-	return sbi_->unit;
 }
 
 
@@ -363,7 +341,7 @@ int32_t SpinBox::find_replacement(int32_t value) const
  */
 void SpinBox::add_replacement(int32_t value, const std::string& text)
 {
-	if (int32_t i = find_replacement(value) >= 0)
+	if (int32_t i = has_replacement(value))
 		sbi_->valrep[i].text = text;
 	else {
 		IntValueTextReplacement newtr;
@@ -380,8 +358,8 @@ void SpinBox::add_replacement(int32_t value, const std::string& text)
  */
 void SpinBox::remove_replacement(int32_t value)
 {
-	if (int32_t i = find_replacement(value) >= 0) {
-		sbi_->valrep[i].text = (boost::format(_("%1$i %2$s")) % value % sbi_->unit.c_str()).str();
+	if (int32_t i = has_replacement(value)) {
+		sbi_->valrep[i].text = unit_text(value);
 	}
 }
 
@@ -393,4 +371,20 @@ bool SpinBox::has_replacement(int32_t value) const
 	return find_replacement(value) >= 0;
 }
 
+const std::string SpinBox::unit_text(int32_t value) const {
+	switch(sbi_->unit) {
+	case (Units::kMinutes):
+		/** TRANSLATORS: A spinbox unit */
+		return (boost::format(ngettext("%d minute", "%d minutes", value)) % value).str();
+	case (Units::kPixels):
+		/** TRANSLATORS: A spinbox unit */
+		return (boost::format(ngettext("%d pixel", "%d pixels", value)) % value).str();
+	case (Units::kPercent):
+		/** TRANSLATORS: A spinbox unit */
+		return (boost::format(_("%i %%")) % value).str();
+	default:
+		return (boost::format("%u") % value).str();
+	}
 }
+
+} // namespace UI
