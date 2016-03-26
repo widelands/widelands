@@ -71,8 +71,6 @@ public:
 	void set_interval(int32_t min, int32_t max);
 	int32_t get_value() const;
 	void add_replacement(int32_t, const std::string&);
-	void remove_replacement(int32_t);
-	bool has_replacement(int32_t) const;
 	const std::vector<UI::Button*>& get_buttons() {return buttons_;}
 
 private:

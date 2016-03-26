@@ -341,7 +341,7 @@ int32_t SpinBox::find_replacement(int32_t value) const
  */
 void SpinBox::add_replacement(int32_t value, const std::string& text)
 {
-	if (int32_t i = has_replacement(value))
+	if (int32_t i = find_replacement(value) >= 0)
 		sbi_->valrep[i].text = text;
 	else {
 		IntValueTextReplacement newtr;
@@ -353,26 +353,8 @@ void SpinBox::add_replacement(int32_t value, const std::string& text)
 }
 
 
-/**
- * Removes a replacement text for a specific value
- */
-void SpinBox::remove_replacement(int32_t value)
-{
-	if (int32_t i = has_replacement(value)) {
-		sbi_->valrep[i].text = unit_text(value);
-	}
-}
-
-/**
- * \returns true, if find_replacement returns an int >= 0
- */
-bool SpinBox::has_replacement(int32_t value) const
-{
-	return find_replacement(value) >= 0;
-}
-
 const std::string SpinBox::unit_text(int32_t value) const {
-	switch(sbi_->unit) {
+	switch (sbi_->unit) {
 	case (Units::kMinutes):
 		/** TRANSLATORS: A spinbox unit */
 		return (boost::format(ngettext("%d minute", "%d minutes", value)) % value).str();
