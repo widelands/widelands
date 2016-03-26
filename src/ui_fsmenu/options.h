@@ -63,7 +63,7 @@ public:
 		// Saving options
 		int32_t autosave; // autosave interval in minutes
 		int32_t rolling_autosave; // number of file to use for rolling autosave
-		bool nozip;
+		bool zip;
 		bool write_syncstreams;
 
 		// Game options
@@ -149,7 +149,7 @@ private:
 	// Saving options
 	UI::SpinBox                 sb_autosave_;
 	UI::SpinBox                 sb_rolling_autosave_;
-	UI::Checkbox                nozip_;
+	UI::Checkbox                zip_;
 	UI::Checkbox                write_syncstreams_;
 
 	// Game options
