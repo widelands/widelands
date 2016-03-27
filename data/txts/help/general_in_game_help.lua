@@ -34,7 +34,8 @@ return {
                dl(help_format_hotkey(pgettext("hotkey", "Page Down")), _"Decrease game speed") ..
                -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
                dl(help_format_hotkey(pgettext("hotkey", "Pause")), _"Pause the game") ..
-               help_census_hotkey() ..
+               -- TRANSLATORS: This is an access key combination. The hotkey is 'c'
+               dl(help_format_hotkey("C"), _"Toggle census") ..
                -- TRANSLATORS: This is an access key combination. The hotkey is 's'
                dl(help_format_hotkey("S"), _"Toggle statistics") ..
                help_toggle_minimap_hotkey() ..

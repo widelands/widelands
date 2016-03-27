@@ -16,7 +16,6 @@ return {
          h1(_"Keyboard Shortcuts") ..
 
          p(
-            help_census_hotkey() ..
             -- TRANSLATORS: This is an access key combination.
             dl(help_format_hotkey("H"), _"Toggle main menu") ..
             -- TRANSLATORS: This is an access key combination. The hotkey is 't'

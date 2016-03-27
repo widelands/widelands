@@ -35,13 +35,6 @@ function help_format_hotkey(hotkey)
    return pgettext("hotkey", "%s:"):bformat(hotkey)
 end
 
-function help_census_hotkey()
-   set_textdomain("texts")
-   return
-      -- TRANSLATORS: This is an access key combination. The hotkey is 'c'
-      dl(help_format_hotkey("C"), _"Toggle census")
-end
-
 function help_toggle_building_spaces_hotkey()
    set_textdomain("texts")
    return
