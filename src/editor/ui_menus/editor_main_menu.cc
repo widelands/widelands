@@ -109,10 +109,12 @@ EditorMainMenu::EditorMainMenu
  * Called, when buttons get clicked
 */
 void EditorMainMenu::help_btn() {
-	if (window_help_.window) {
-		delete window_help_.window;
+	EditorInteractive& editor_interactive = eia();
+	if (editor_interactive.window_help.window) {
+		delete editor_interactive.window_help.window;
 	} else {
-		FileViewWindow* fileview = new FileViewWindow(eia(), window_help_, _("The Widelands Editor"));
+		FileViewWindow* fileview = new FileViewWindow(editor_interactive, editor_interactive.window_help,
+																	 _("The Widelands Editor"));
 		fileview->add_tab("scripting/editor/editor_help.lua");
 	}
 }

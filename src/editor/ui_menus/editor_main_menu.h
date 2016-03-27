@@ -43,8 +43,6 @@ private:
 	UI::Button button_help_;
 	UI::Button button_exit_editor_;
 
-	UI::UniqueWindow::Registry window_help_;
-
 	void help_btn      ();
 	void exit_btn       ();
 	void load_btn       ();
