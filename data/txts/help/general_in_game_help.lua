@@ -40,12 +40,12 @@ return {
                dl(help_format_hotkey("S"), _"Toggle statistics") ..
                help_toggle_minimap_hotkey() ..
                help_toggle_building_spaces_hotkey() ..
-               -- TRANSLATORS: This is an access key combination.
-               dl(help_format_hotkey("F1"), _"Tribal Encyclopedia") ..
                -- TRANSLATORS: This is an access key combination. The hotkey is 'o'
                dl(help_format_hotkey("O"), _"Toggle objectives") ..
                -- TRANSLATORS: This is an access key combination. The hotkey is 'n'
                dl(help_format_hotkey("N"), _"Toggle messages (‘news’)") ..
+               -- TRANSLATORS: This is an access key combination.
+               dl(help_format_hotkey("F1"), _"Tribal Encyclopedia") ..
                -- TRANSLATORS: This is an access key combination. The hotkey is 'i'
                dl(help_format_hotkey("I"), _"Toggle stock inventory") ..
                -- TRANSLATORS: This is an access key combination. The hotkey is 'b'
