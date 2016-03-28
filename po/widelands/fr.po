@@ -4,6 +4,7 @@
 # Translators:
 # adrien vigneron <adrienvigneron@ml1.net>, 2015-2016
 # Bouchard Renaud <renaud.bouchard@gmail.com>, 2014
+# GunChleoc, 2016
 # hugues martin, 2015
 # Jaypad <ju-ju@nataju.fr>, 2015-2016
 # Renaud Bouchard, 2015
@@ -14,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-03-18 07:42+0000\n"
-"PO-Revision-Date: 2016-03-18 07:43+0000\n"
+"POT-Creation-Date: 2016-03-18 11:30+0000\n"
+"PO-Revision-Date: 2016-03-20 16:19+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -218,49 +219,6 @@ msgid ""
 "different map. Furthermore, the host is able to set a specific win "
 "condition, and finally can start the game as soon as all players are set up."
 msgstr "Il y a sur le côté droit les informations concernant la carte ou la sauvegarde. Un bouton à droite de la carte permet à l'hôte de changer pour une carte différente. De plus, l'hôte peut définir des conditions de victoire spécifiques et finalement démarrer le jeu dès que tous les joueurs sont configurés."
-
-#: ../../data/scripting/win_condition_texts.lua:4
-msgid "Congratulations!"
-msgstr "Félicitations !"
-
-#: ../../data/scripting/win_condition_texts.lua:5
-msgid "You have won this game!"
-msgstr "Vous avez gagné cette partie !"
-
-#: ../../data/scripting/win_condition_texts.lua:9
-msgid "You are defeated!"
-msgstr "Vous êtes vaincu !"
-
-#: ../../data/scripting/win_condition_texts.lua:10
-msgid ""
-"You lost your last warehouse and are therefore defeated. You may continue as"
-" spectator if you want."
-msgstr "Vous avez perdu votre dernier entrepôt et êtes donc vaincu. Vous pouvez continuer le jeu en tant que spectateur si vous le désirez."
-
-#: ../../data/scripting/win_condition_texts.lua:14
-msgid "You won"
-msgstr "Vous avez gagné"
-
-#: ../../data/scripting/win_condition_texts.lua:15
-msgid "You are the winner!"
-msgstr "Vous êtes le vainqueur !"
-
-#: ../../data/scripting/win_condition_texts.lua:19
-msgid "You lost"
-msgstr "Vous avez perdu"
-
-#: ../../data/scripting/win_condition_texts.lua:20
-msgid "You’ve lost this game!"
-msgstr "Vous avez perdu cette partie !"
-
-#: ../../data/scripting/win_condition_texts.lua:24
-#: ../../src/wui/game_message_menu.cc:75 ../../src/wui/game_summary.cc:121
-msgid "Status"
-msgstr "État"
-
-#: ../../data/scripting/win_condition_texts.lua:25
-msgid "Player overview:"
-msgstr "Aperçu du joueur :"
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
 #: ../../src/ai/computer_player.cc:42
@@ -3287,9 +3245,10 @@ msgstr "Retours:"
 msgid "Hide work area"
 msgstr "Cacher la zone de travail"
 
-#: ../../src/wui/buildingwindow.cc:326
-msgid "Debug"
-msgstr "Débogage"
+#: ../../src/wui/buildingwindow.cc:326 ../../src/wui/fieldaction.cc:446
+#: ../../src/wui/shipwindow.cc:206
+msgid "Show Debug Window"
+msgstr "Afficher la fenêtre de débogage"
 
 #: ../../src/wui/buildingwindow.cc:337
 msgid "Center view on this"
@@ -3390,10 +3349,6 @@ msgstr "Afficher/Cacher les statistiques des bâtiments"
 #: ../../src/wui/fieldaction.cc:439
 msgid "Toggle building label display"
 msgstr "Afficher/Cacher les noms des bâtiments"
-
-#: ../../src/wui/fieldaction.cc:446
-msgid "Debug window"
-msgstr "Fenêtre de débogage"
 
 #: ../../src/wui/fieldaction.cc:452 ../../src/wui/watchwindow.cc:98
 msgid "Watch"
@@ -3512,6 +3467,10 @@ msgstr "Titre"
 msgctxt "message"
 msgid "Type"
 msgstr "Type"
+
+#: ../../src/wui/game_message_menu.cc:75 ../../src/wui/game_summary.cc:121
+msgid "Status"
+msgstr "État"
 
 #. * TRANSLATORS: We have very little space here. You can also translate this
 #. as "Time" or "Time Sent"
@@ -4080,10 +4039,6 @@ msgstr "Couler le navire"
 #: ../../src/wui/shipwindow.cc:198
 msgid "Cancel the Expedition"
 msgstr "Annuler l'expédition"
-
-#: ../../src/wui/shipwindow.cc:206
-msgid "Show Debug Window"
-msgstr ""
 
 #: ../../src/wui/soldiercapacitycontrol.cc:66
 msgid "Decrease capacity"

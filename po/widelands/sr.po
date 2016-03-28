@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-03-18 07:42+0000\n"
-"PO-Revision-Date: 2016-03-18 07:43+0000\n"
+"POT-Creation-Date: 2016-03-18 11:30+0000\n"
+"PO-Revision-Date: 2016-03-18 11:32+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Serbian (http://www.transifex.com/widelands/widelands/language/sr/)\n"
 "MIME-Version: 1.0\n"
@@ -213,49 +213,6 @@ msgid ""
 " side. A button next to the map name allows the host to change to a "
 "different map. Furthermore, the host is able to set a specific win "
 "condition, and finally can start the game as soon as all players are set up."
-msgstr ""
-
-#: ../../data/scripting/win_condition_texts.lua:4
-msgid "Congratulations!"
-msgstr ""
-
-#: ../../data/scripting/win_condition_texts.lua:5
-msgid "You have won this game!"
-msgstr ""
-
-#: ../../data/scripting/win_condition_texts.lua:9
-msgid "You are defeated!"
-msgstr ""
-
-#: ../../data/scripting/win_condition_texts.lua:10
-msgid ""
-"You lost your last warehouse and are therefore defeated. You may continue as"
-" spectator if you want."
-msgstr ""
-
-#: ../../data/scripting/win_condition_texts.lua:14
-msgid "You won"
-msgstr ""
-
-#: ../../data/scripting/win_condition_texts.lua:15
-msgid "You are the winner!"
-msgstr ""
-
-#: ../../data/scripting/win_condition_texts.lua:19
-msgid "You lost"
-msgstr ""
-
-#: ../../data/scripting/win_condition_texts.lua:20
-msgid "You’ve lost this game!"
-msgstr ""
-
-#: ../../data/scripting/win_condition_texts.lua:24
-#: ../../src/wui/game_message_menu.cc:75 ../../src/wui/game_summary.cc:121
-msgid "Status"
-msgstr ""
-
-#: ../../data/scripting/win_condition_texts.lua:25
-msgid "Player overview:"
 msgstr ""
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
@@ -3301,8 +3258,9 @@ msgstr ""
 msgid "Hide work area"
 msgstr ""
 
-#: ../../src/wui/buildingwindow.cc:326
-msgid "Debug"
+#: ../../src/wui/buildingwindow.cc:326 ../../src/wui/fieldaction.cc:446
+#: ../../src/wui/shipwindow.cc:206
+msgid "Show Debug Window"
 msgstr ""
 
 #: ../../src/wui/buildingwindow.cc:337
@@ -3403,10 +3361,6 @@ msgstr ""
 
 #: ../../src/wui/fieldaction.cc:439
 msgid "Toggle building label display"
-msgstr ""
-
-#: ../../src/wui/fieldaction.cc:446
-msgid "Debug window"
 msgstr ""
 
 #: ../../src/wui/fieldaction.cc:452 ../../src/wui/watchwindow.cc:98
@@ -3526,6 +3480,10 @@ msgstr ""
 #: ../../src/wui/game_message_menu.cc:74
 msgctxt "message"
 msgid "Type"
+msgstr ""
+
+#: ../../src/wui/game_message_menu.cc:75 ../../src/wui/game_summary.cc:121
+msgid "Status"
 msgstr ""
 
 #. * TRANSLATORS: We have very little space here. You can also translate this
@@ -4095,10 +4053,6 @@ msgstr ""
 
 #: ../../src/wui/shipwindow.cc:198
 msgid "Cancel the Expedition"
-msgstr ""
-
-#: ../../src/wui/shipwindow.cc:206
-msgid "Show Debug Window"
 msgstr ""
 
 #: ../../src/wui/soldiercapacitycontrol.cc:66

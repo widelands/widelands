@@ -3,15 +3,15 @@
 # 
 # Translators:
 # GunChleoc, 2015
-# GunChleoc, 2015
+# GunChleoc, 2015-2016
 # GunChleoc, 2014-2015
 # GunChleoc, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-03-11 07:02+0000\n"
-"PO-Revision-Date: 2016-03-11 07:03+0000\n"
+"POT-Creation-Date: 2016-03-18 11:30+0000\n"
+"PO-Revision-Date: 2016-03-28 09:40+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Portuguese (http://www.transifex.com/widelands/widelands/language/pt/)\n"
 "MIME-Version: 1.0\n"
@@ -85,7 +85,7 @@ msgstr ""
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:55
 msgid "Establish a solid food production"
-msgstr "Estabelece um circuito sólido para a produção de comida"
+msgstr "Estabelece um circuito sólido para a produção de alimentos"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:57
 msgid "Food Production"
@@ -193,7 +193,7 @@ msgid ""
 "The ores have to be smelted at a smelting works before they can be used. The"
 " refined materials are then used in the weapon smithy, the armor smithy and "
 "the toolsmithy."
-msgstr "Os metais precisam de ser derretidos na fundição antes de poderem ser usados. Depois de derretidos, são usados\nna ferragem de armas e armaduras no ferreiro."
+msgstr "Os metais precisam de ser derretidos na fundição antes de poderem ser usados. Depois de derretidos, são usados no ferreiro de armas, na loja do armador e no ferreiro."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:90
 msgid ""
@@ -207,7 +207,7 @@ msgstr "Construa uma fundição."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:92
 msgid "Build an armor smithy and a weapon smithy"
-msgstr "Construa uma ferragem de armas e uma de armaduras."
+msgstr "Construa um ferreiro de armas e uma loja do armeiro"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:93
 msgid "Build a toolsmithy"
@@ -369,7 +369,7 @@ msgid ""
 "she set the temple on fire and stole a ship to flee from the god’s influence"
 " over Atlantis. This small group started praying to Satul, the fire god and "
 "the worst enemy of Lutas."
-msgstr "Mas nem isto mudou a mente do Deus. A água continuava a subir. Quase enlouquecendo de culpa, dor e raiva, Jundila tornou-se herege: Secretamente, reuniu os gentis que não estavam de acordo com a decisão do clero em aceitar a vontade divina. Juntos, queimaram o templo e roubaram um navio para fugir da influência do Deus Atlanta.Este pequeno grupo passou a adorar Satul, o Deus do fogo e o maior inimigo de Lutas."
+msgstr "Mas nem isto mudou a mente do Deus. A água continuava a subir. Quase enlouquecendo de culpa, dor e raiva, Jundlina tornou-se herege: Secretamente, reuniu os gentis que não estavam de acordo com a decisão do clero em aceitar a vontade divina. Juntos, queimaram o templo e roubaram um navio para fugir da influência do Deus Atlanta.Este pequeno grupo passou a adorar Satul, o Deus do fogo e o maior inimigo de Lutas."
 
 #. TRANSLATORS: Foreword
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:165
@@ -896,10 +896,10 @@ msgstr "Venceste esta missão. Queres prosseguir para a próxima ou continuar a 
 #: ../../data/scripting/format_scenario.lua:36
 #, lua-format
 msgid "“%s”"
-msgstr "“%s”"
+msgstr "«&nbsp;%s&nbsp;»"
 
 #: ../../data/scripting/format_scenario.lua:146
 msgid "New Objective"
 msgid_plural "New Objectives"
-msgstr[0] "Novo Objectivo"
-msgstr[1] "Novos Objectivos"
+msgstr[0] "Novo objetivo"
+msgstr[1] "Novos objetivos"

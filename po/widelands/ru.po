@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-03-18 07:42+0000\n"
-"PO-Revision-Date: 2016-03-18 07:43+0000\n"
+"POT-Creation-Date: 2016-03-18 11:30+0000\n"
+"PO-Revision-Date: 2016-03-18 11:32+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
@@ -218,49 +218,6 @@ msgid ""
 " side. A button next to the map name allows the host to change to a "
 "different map. Furthermore, the host is able to set a specific win "
 "condition, and finally can start the game as soon as all players are set up."
-msgstr ""
-
-#: ../../data/scripting/win_condition_texts.lua:4
-msgid "Congratulations!"
-msgstr ""
-
-#: ../../data/scripting/win_condition_texts.lua:5
-msgid "You have won this game!"
-msgstr ""
-
-#: ../../data/scripting/win_condition_texts.lua:9
-msgid "You are defeated!"
-msgstr ""
-
-#: ../../data/scripting/win_condition_texts.lua:10
-msgid ""
-"You lost your last warehouse and are therefore defeated. You may continue as"
-" spectator if you want."
-msgstr ""
-
-#: ../../data/scripting/win_condition_texts.lua:14
-msgid "You won"
-msgstr ""
-
-#: ../../data/scripting/win_condition_texts.lua:15
-msgid "You are the winner!"
-msgstr ""
-
-#: ../../data/scripting/win_condition_texts.lua:19
-msgid "You lost"
-msgstr ""
-
-#: ../../data/scripting/win_condition_texts.lua:20
-msgid "You’ve lost this game!"
-msgstr ""
-
-#: ../../data/scripting/win_condition_texts.lua:24
-#: ../../src/wui/game_message_menu.cc:75 ../../src/wui/game_summary.cc:121
-msgid "Status"
-msgstr "статус"
-
-#: ../../data/scripting/win_condition_texts.lua:25
-msgid "Player overview:"
 msgstr ""
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
@@ -3324,9 +3281,10 @@ msgstr "Данные:"
 msgid "Hide work area"
 msgstr "Скрыть рабочую область"
 
-#: ../../src/wui/buildingwindow.cc:326
-msgid "Debug"
-msgstr "Отладка"
+#: ../../src/wui/buildingwindow.cc:326 ../../src/wui/fieldaction.cc:446
+#: ../../src/wui/shipwindow.cc:206
+msgid "Show Debug Window"
+msgstr ""
 
 #: ../../src/wui/buildingwindow.cc:337
 msgid "Center view on this"
@@ -3427,10 +3385,6 @@ msgstr "Переключить показ статистики построек"
 #: ../../src/wui/fieldaction.cc:439
 msgid "Toggle building label display"
 msgstr "Переключить показ названий построек"
-
-#: ../../src/wui/fieldaction.cc:446
-msgid "Debug window"
-msgstr "Окно отладки"
 
 #: ../../src/wui/fieldaction.cc:452 ../../src/wui/watchwindow.cc:98
 msgid "Watch"
@@ -3551,6 +3505,10 @@ msgstr "заголовок"
 msgctxt "message"
 msgid "Type"
 msgstr ""
+
+#: ../../src/wui/game_message_menu.cc:75 ../../src/wui/game_summary.cc:121
+msgid "Status"
+msgstr "статус"
 
 #. * TRANSLATORS: We have very little space here. You can also translate this
 #. as "Time" or "Time Sent"
@@ -4121,10 +4079,6 @@ msgstr "Затопить корабль"
 #: ../../src/wui/shipwindow.cc:198
 msgid "Cancel the Expedition"
 msgstr "Отменить экспедицию"
-
-#: ../../src/wui/shipwindow.cc:206
-msgid "Show Debug Window"
-msgstr ""
 
 #: ../../src/wui/soldiercapacitycontrol.cc:66
 msgid "Decrease capacity"

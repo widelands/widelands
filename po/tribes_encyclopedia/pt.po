@@ -2,14 +2,14 @@
 # Copyright (C) 2005-2016 Widelands Development Team
 # 
 # Translators:
-# GunChleoc, 2015
+# GunChleoc, 2015-2016
 # GunChleoc, 2014-2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-03-01 09:34+0000\n"
-"PO-Revision-Date: 2016-03-01 09:34+0000\n"
+"POT-Creation-Date: 2016-03-18 11:30+0000\n"
+"PO-Revision-Date: 2016-03-23 08:45+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Portuguese (http://www.transifex.com/widelands/widelands/language/pt/)\n"
 "MIME-Version: 1.0\n"
@@ -1472,7 +1472,7 @@ msgstr "%s e"
 
 #: ../../data/tribes/scripting/help/building_help.lua:117
 msgid "Food:"
-msgstr "Comida:"
+msgstr "Alimentos:"
 
 #: ../../data/tribes/scripting/help/building_help.lua:165
 msgid "Equipment:"
@@ -1589,7 +1589,7 @@ msgstr ""
 
 #: ../../data/tribes/scripting/help/building_help.lua:403
 msgid "Defense Training"
-msgstr "Treino de Defesa:"
+msgstr "Treino de defesa"
 
 #: ../../data/tribes/scripting/help/building_help.lua:404
 msgid "Trains ‘Defense’ from %1% up to %2%"
@@ -1827,7 +1827,7 @@ msgid ""
 "Basic armor for Empire soldiers. It is produced in the armor smithy and used"
 " in the training camp – together with food – to train soldiers from health "
 "level 1 to level 2."
-msgstr "Armadura básica para os soldados do Império. É produzida no ferreiro de armaduras e usada no campo de treino - junto com alimentos - para aumentar os pontos de vida dos soldados do nível 1 para o nível 2."
+msgstr "Armadura básica para os soldados do Império. É produzida no ferreiro de armas e usada no campo de treinos - junto com alimentos - para aumentar a saúde dos soldados do nível 1 para o nível 2."
 
 #. TRANSLATORS: Helptext for a ware: Chain Armor
 #: ../../data/tribes/wares/armor_chain/helptexts.lua:4
@@ -1836,7 +1836,7 @@ msgid ""
 "The chain armor is a medium armor for Empire soldiers. It is produced in an "
 "armor smithy and used in a training camp – together with food – to train "
 "soldiers from health level 2 to level 3."
-msgstr "A armadura de corrente é uma armadura média dos soldados do Império. É produzido num ferreiro de armas e usada no campo de treino - junto com alimentos - para aumentar os pontos de vida dos soldados do nível 2 para o nível 3."
+msgstr "A cota de malha é uma armadura média dos soldados do Império. É produzido num ferreiro de armas e usada no campo de treinos - junto com alimentos - para aumentar a saúde dos soldados do nível 2 para o nível 3."
 
 #. TRANSLATORS: Helptext for a ware: Gilded Armor
 #: ../../data/tribes/wares/armor_gilded/helptexts.lua:4
@@ -1963,7 +1963,7 @@ msgctxt "atlanteans_ware"
 msgid ""
 "Blackroot Flour is produced in mills out of blackroots. It is used in "
 "bakeries to make a tasty bread."
-msgstr "Farinha de Raízes Escuras é produzida no moinho através das Raízes Escuras. É utilizada pelos padeiros para fazer deliciosos pães."
+msgstr "Farinha de raíz é produzida no moinho através das raízes negras. É utilizada pelos padeiros para fazer deliciosos pães."
 
 #. TRANSLATORS: Helptext for a ware: Blackwood
 #: ../../data/tribes/wares/blackwood/helptexts.lua:4
@@ -1980,7 +1980,7 @@ msgid ""
 "This tasty bread is made in bakeries out of cornmeal, blackroot flour and "
 "water. It is appreciated as basic food by miners, scouts and soldiers in "
 "training sites (labyrinth and dungeon)."
-msgstr "Este delicioso pão é feito nas padarias através de farinha de milho, farinha de raiz escura e água. É apreciada como alimentação básica para mineiros, escuteiros e soldados nos campos de treinamento (labirintos e calabouços)."
+msgstr "Este delicioso pão é feito nas padarias através de farinha de milho, farinha de raiz e água. É apreciada como alimentação básica para mineiros, escuteiros e soldados nos treinamentos (labirintos e masmorras)."
 
 #. TRANSLATORS: Helptext for a ware: Pitta Bread
 #: ../../data/tribes/wares/bread_barbarians/helptexts.lua:4
@@ -1999,7 +1999,7 @@ msgid ""
 "The bakers of the Empire make really tasty bread out of flour and water. It "
 "is used in taverns and inns to prepare rations and meals. Bread is also "
 "consumed at the training sites (arena, colosseum, training camp)."
-msgstr "Os padeiros do Império produzem deliciosos pães com farinha e água. Os pães são utilizados em tavernas e hospedarias para preparar rações e refeições. Também são consumidos em locais de treino (arena, coliseu e campo de treino)."
+msgstr "Os padeiros do Império produzem deliciosos pães com farinha e água. Os pães são utilizados em tabernas e hospedarias para preparar rações e refeições. Também são consumidos em locais de treino (arena, coliseu e campo de treinos)."
 
 #. TRANSLATORS: Helptext for a ware: Bread Paddle
 #: ../../data/tribes/wares/bread_paddle/helptexts.lua:4
@@ -2079,7 +2079,7 @@ msgctxt "empire_ware"
 msgid ""
 "The fires of the Empire smelting works, armor smithies and weapon smithies "
 "are usually fed with coal."
-msgstr "As fogueiras das fundições Imperiais, ferreiros de armaduras e de armas são usualmente alimentadas com carvão."
+msgstr "As fogueiras das fundições Imperiais, ferreiros de armaduras e lojas do armeiro são usualmente alimentadas com carvão."
 
 #. TRANSLATORS: Helptext for a ware: Corn
 #: ../../data/tribes/wares/corn/helptexts.lua:4
@@ -2704,7 +2704,7 @@ msgctxt "atlanteans_ware"
 msgid ""
 "This steel shield is produced in the armor smithy and used in the labyrinth "
 "– together with food – to train soldiers from defense level 0 to level 1."
-msgstr "Este escudo de aço é produzido pelo ferreiro de armaduras e usado no labirinto - junto com alimentos - para aumentar a defesa dos soldados do nível 0 para o nível 1."
+msgstr "Este escudo de aço é produzido pelo ferreiro de armas e usado no labirinto - junto com alimentos - para aumentar a defesa dos soldados do nível 0 para o nível 1."
 
 #. TRANSLATORS: Helptext for a ware: Shovel
 #: ../../data/tribes/wares/shovel/helptexts.lua:4
@@ -3071,7 +3071,7 @@ msgstr "Serra a madeira para produzir tábuas."
 msgctxt "atlanteans_worker"
 msgid ""
 "Scouts like Scotty the scout scouting unscouted areas in a scouty fashion."
-msgstr "O explorador explora áreas inexploradas explorando-as."
+msgstr "O escuteiro explora áreas inexploradas explorando-as."
 
 #. TRANSLATORS: Helptext for a worker: Shipwright
 #: ../../data/tribes/workers/atlanteans/shipwright/helptexts.lua:3
@@ -3280,7 +3280,7 @@ msgstr "Planta árvores"
 msgctxt "barbarians_worker"
 msgid ""
 "Scouts like Scotty the scout scouting unscouted areas in a scouty fashion."
-msgstr "O explorador explora áreas inexploradas explorando-as."
+msgstr "O escuteiro explora áreas inexploradas explorando-as."
 
 #. TRANSLATORS: Helptext for a worker: Shipwright
 #: ../../data/tribes/workers/barbarians/shipwright/helptexts.lua:3
@@ -3443,7 +3443,7 @@ msgstr "Cria porcos."
 msgctxt "empire_worker"
 msgid ""
 "Scouts like Scotty the scout scouting unscouted areas in a scouty fashion."
-msgstr "O explorador explora áreas inexploradas explorando-as."
+msgstr "O escuteiro explora áreas inexploradas explorando-as."
 
 #. TRANSLATORS: Helptext for a worker: Shepherd
 #: ../../data/tribes/workers/empire/shepherd/helptexts.lua:3
