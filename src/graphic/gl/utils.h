@@ -121,6 +121,8 @@ public:
 	// needed before the texture is used as target for rendering.
 	void unbind_texture_if_bound(GLuint texture);
 
+	void delete_texture(GLuint texture);
+
 	// Calls glEnableVertexAttribArray on all 'entries' and disables all others
 	// that are activated. 'entries' is taken by value on purpose.
 	void enable_vertex_attrib_array(std::unordered_set<GLint> entries);

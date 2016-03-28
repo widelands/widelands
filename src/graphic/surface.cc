@@ -111,9 +111,9 @@ void tesselate_line_strip(int w,
 
 }  // namespace
 
-void Surface::fill_rect(const Rect& rc, const RGBAColor& clr) {
+void Surface::fill_rect(const Rect& rc, const RGBAColor& clr, BlendMode blend_mode) {
 	const FloatRect rect = rect_to_gl_renderbuffer(width(), height(), rc);
-	do_fill_rect(rect, clr, BlendMode::Copy);
+	do_fill_rect(rect, clr, blend_mode);
 }
 
 void Surface::brighten_rect(const Rect& rc, const int32_t factor)
