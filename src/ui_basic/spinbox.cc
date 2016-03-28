@@ -332,7 +332,7 @@ const std::string SpinBox::unit_text(int32_t value) const {
 		/** TRANSLATORS: A spinbox unit */
 		return (boost::format(_("%i %%")) % value).str();
 	default:
-		return (boost::format("%u") % value).str();
+		return (boost::format("%d") % value).str();
 	}
 }
 
