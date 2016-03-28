@@ -124,10 +124,7 @@ struct MultiPlayerClientGroup : public UI::Box {
 	void refresh() {
 		UserSettings us = s->settings().users.at(id_);
 		if (us.position == UserSettings::not_connected()) {
-			std::string free_i18n = _("free");
-			std::string free_text =
-				(boost::format("\\<%s\\>") % free_i18n).str();
-			name->set_text(free_text);
+			name->set_text((boost::format("&lt;%s&gt;") % _("free")).str());
 			if (type)
 				type->set_visible(false);
 			else
