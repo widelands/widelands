@@ -694,6 +694,19 @@ void Bob::movepath_update(Game & game, State & state)
 		// that contains a zero-length path.
 		return pop_task(game);
 
+	// Slowing down a ship if two or more on same spot
+	// Using probability of 10% and pausing it for 5 seconds
+	if (rand() % 10 == 0 && is_a(Ship, this)) {
+		Map& map = game.map();
+		const uint32_t ships_count
+			= map.find_bobs(Widelands::Area<Widelands::FCoords>(get_position(), 0), nullptr, FindBobShip());
+		assert (ships_count > 0);
+		if (ships_count > 1) {
+			molog ("Pausing the ship because %d ships on the same spot\n", ships_count); 
+			return start_task_idle(game, descr().main_animation(), 5000);
+		}
+	}
+
 	if
 		(static_cast<Path::StepVector::size_type>(state.ivar1)
 		 >=
