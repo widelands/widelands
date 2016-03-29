@@ -223,9 +223,9 @@ Soldier::Soldier(const SoldierDescr & soldier_descr) : Worker(soldier_descr)
 	attack_level_  = 0;
 	defense_level_ = 0;
 	evade_level_   = 0;
-	retreat_health_    = 0;
 
-	current_health_    = get_max_health();
+	current_health_   = get_max_health();
+	retreat_health_   = 0;
 
 	combat_walking_   = CD_NONE;
 	combat_walkstart_ = 0;
@@ -1756,7 +1756,7 @@ Load/save support
 ==============================
 */
 
-constexpr uint8_t kCurrentPacketVersion = 2;
+constexpr uint8_t kCurrentPacketVersion = 3;
 
 Soldier::Loader::Loader() :
 		battle_(0)
@@ -1773,6 +1773,7 @@ void Soldier::Loader::load(FileRead & fr)
 
 			Soldier & soldier = get<Soldier>();
 			soldier.current_health_ = fr.unsigned_32();
+			soldier.retreat_health_ = fr.unsigned_32();
 
 			soldier.health_level_ =
 				std::min(fr.unsigned_32(), soldier.descr().get_max_health_level());
@@ -1785,6 +1786,9 @@ void Soldier::Loader::load(FileRead & fr)
 
 			if (soldier.current_health_ > soldier.get_max_health())
 				soldier.current_health_ = soldier.get_max_health();
+
+			if (soldier.retreat_health_ > soldier.get_max_health())
+				soldier.retreat_health_ = soldier.get_max_health();
 
 			soldier.combat_walking_ = static_cast<CombatWalkingDir>(fr.unsigned_8());
 			if (soldier.combat_walking_ != CD_NONE) {
@@ -1833,6 +1837,7 @@ void Soldier::do_save
 
 	fw.unsigned_8(kCurrentPacketVersion);
 	fw.unsigned_32(current_health_);
+	fw.unsigned_32(retreat_health_);
 	fw.unsigned_32(health_level_);
 	fw.unsigned_32(attack_level_);
 	fw.unsigned_32(defense_level_);
