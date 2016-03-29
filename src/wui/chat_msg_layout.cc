@@ -180,7 +180,7 @@ std::string format_as_richtext(const ChatMessage& chat_message) {
 				}
 			}
 
-			sanitized += "\\<";
+			sanitized += "&lt;";
 		} else {
 			sanitized += chat_message.msg[pos];
 		}
@@ -205,7 +205,7 @@ std::string format_as_richtext(const ChatMessage& chat_message) {
 					% sanitized).str();
 
 		} else {
-			message = (boost::format("%s>@%s \\> </font><font size=14 face=%s color=%s italic=1 shadow=1> %s%s")
+			message = (boost::format("%s>@%s &gt; </font><font size=14 face=%s color=%s italic=1 shadow=1> %s%s")
 					% message
 					% chat_message.recipient
 					% font_face
@@ -216,7 +216,7 @@ std::string format_as_richtext(const ChatMessage& chat_message) {
 	} else {
 		// Normal messages handling
 		if (!sanitized.compare(0, 3, "/me")) {
-			message += " italic=1>-\\> ";
+			message += " italic=1>-&gt; ";
 			if (chat_message.sender.size())
 				message += chat_message.sender;
 			else

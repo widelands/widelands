@@ -31,7 +31,6 @@
 namespace UI {
 
 struct SpinBoxImpl;
-struct IntValueTextReplacement;
 
 /// A spinbox is an UI element for setting the integer value of a variable.
 /// w is the overall width of the SpinBox and must be wide enough to fit 2 labels and the buttons.
@@ -45,12 +44,19 @@ public:
 		kValueList // Uses the values that are set by set_value_list().
 	};
 
+	enum class Units {
+		kNone,
+		kPixels,
+		kMinutes,
+		kPercent
+	};
+
 	SpinBox
 		(Panel*,
 		 int32_t x, int32_t y, uint32_t w, uint32_t unit_w,
 		 int32_t startval, int32_t minval, int32_t maxval,
 		 const std::string& label_text = std::string(),
-		 const std::string& unit = std::string(),
+		 const Units& unit = Units::kNone,
 		 const Image* buttonbackground = g_gr->images().get("images/ui_basic/but3.png"),
 		 SpinBox::Type = SpinBox::Type::kSmall,
 		  // The amount by which units are increased/decreased for small and big steps when a button is pressed.
@@ -62,18 +68,14 @@ public:
 	// otherwise you will confuse the user.
 	void set_value_list(const std::vector<int32_t>&);
 	void set_interval(int32_t min, int32_t max);
-	void set_unit(const std::string&);
 	int32_t get_value() const;
-	std::string get_unit() const;
 	void add_replacement(int32_t, const std::string&);
-	void remove_replacement(int32_t);
-	bool has_replacement(int32_t) const;
 	const std::vector<UI::Button*>& get_buttons() {return buttons_;}
 
 private:
 	void update();
 	void change_value(int32_t);
-	int32_t find_replacement(int32_t value) const;
+	const std::string unit_text(int32_t value) const;
 
 	const SpinBox::Type type_;
 	SpinBoxImpl* sbi_;
