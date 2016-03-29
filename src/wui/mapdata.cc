@@ -126,7 +126,7 @@ MapData MapData::create_parent_dir(const std::string& current_dir) {
 // static
 std::string MapData::parent_name() {
 	/** TRANSLATORS: Parent directory/folder */
-	return (boost::format("\\<%s\\>") % _("parent")).str();
+	return (boost::format("&lt;%s&gt;") % _("parent")).str();
 }
 
 // static

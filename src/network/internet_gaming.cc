@@ -854,7 +854,7 @@ void InternetGaming::format_and_add_chat(std::string from, std::string to, bool 
 	ChatMessage c;
 	if (!system && from.empty()) {
 		std::string unkown_string =
-			(boost::format("\\<%s\\>") % _("unknown")).str();
+			(boost::format("&lt;%s&gt;") % _("unknown")).str();
 		c.sender = unkown_string;
 	} else {
 		c.sender = from;

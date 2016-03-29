@@ -55,9 +55,7 @@ struct MultilineTextarea : public Panel {
 	const std::string& get_text() const {return text_;}
 
 	void set_text(const std::string&);
-
-	uint32_t scrollbar_w() const {return 24;}
-	uint32_t get_eff_w() const {return scrollbar_.is_enabled() ? get_w() - scrollbar_w() : get_w();}
+	uint32_t get_eff_w() const {return scrollbar_.is_enabled() ? get_w() - Scrollbar::kSize : get_w();}
 
 	void set_color(RGBColor fg) {color_ = fg;}
 

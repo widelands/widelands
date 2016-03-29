@@ -32,8 +32,6 @@
 
 namespace UI {
 
-static const int32_t ms_scrollbar_w = 24;
-
 struct MultilineEditbox::Data {
 	Scrollbar scrollbar;
 
@@ -102,7 +100,7 @@ MultilineEditbox::MultilineEditbox
 
 MultilineEditbox::Data::Data(MultilineEditbox & o)
 :
-scrollbar(&o, o.get_w() - ms_scrollbar_w, 0, ms_scrollbar_w, o.get_h(), false),
+scrollbar(&o, o.get_w() - Scrollbar::kSize, 0, Scrollbar::kSize, o.get_h(), false),
 cursor_pos(0),
 maxbytes(0xffff),
 ww_valid(false),
@@ -537,13 +535,13 @@ void MultilineEditbox::scrollpos_changed(int32_t)
  */
 void MultilineEditbox::Data::refresh_ww()
 {
-	if (int32_t(ww.wrapwidth()) != owner.get_w() - ms_scrollbar_w)
+	if (int32_t(ww.wrapwidth()) != owner.get_w() - Scrollbar::kSize)
 		ww_valid = false;
 	if (ww_valid)
 		return;
 
 	ww.set_style(textstyle);
-	ww.set_wrapwidth(owner.get_w() - ms_scrollbar_w);
+	ww.set_wrapwidth(owner.get_w() - Scrollbar::kSize);
 
 	ww.wrap(text);
 	ww_valid = true;

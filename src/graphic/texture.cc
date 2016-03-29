@@ -170,8 +170,7 @@ Texture::Texture(const GLuint texture, const Rect& subrect, int parent_w, int pa
 Texture::~Texture()
 {
 	if (owns_texture_) {
-		Gl::State::instance().unbind_texture_if_bound(blit_data_.texture_id);
-		glDeleteTextures(1, &blit_data_.texture_id);
+		Gl::State::instance().delete_texture(blit_data_.texture_id);
 	}
 }
 
