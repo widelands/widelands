@@ -35,7 +35,9 @@
 #include "wui/plot_area.h"
 #include "wui/waresdisplay.h"
 
-#define PLOT_HEIGHT 100
+constexpr int kPlotHeight = 130;
+constexpr int kPlotWidth = 300;
+constexpr int kSpacing = 5;
 
 #define INACTIVE 0
 
@@ -137,7 +139,7 @@ WareStatisticsMenu::WareStatisticsMenu
 	(InteractivePlayer & parent, UI::UniqueWindow::Registry & registry)
 :
 UI::UniqueWindow
-	(&parent, "ware_statistics", &registry, 400, 270, _("Ware Statistics")),
+	(&parent, "ware_statistics", &registry, kPlotWidth + 2 * kSpacing, 270, _("Ware Statistics")),
 parent_(&parent)
 {
 	uint8_t const nr_wares = parent.get_player()->egbase().tribes().nrwares();
@@ -150,25 +152,19 @@ parent_(&parent)
 
 	//  First, we must decide about the size.
 	UI::Box * box = new UI::Box(this, 0, 0, UI::Box::Vertical, 0, 0, 5);
-	box->set_border(5, 5, 5, 5);
+	box->set_border(kSpacing, kSpacing, kSpacing, kSpacing);
 	set_center_panel(box);
 
 	// Setup plot widgets
 	// Create a tabbed environment for the different plots
-	uint8_t const tab_offset = 30;
-	uint8_t const spacing = 5;
-	uint8_t const plot_width = get_inner_w() - 2 * spacing;
-	uint8_t const plot_height = PLOT_HEIGHT + tab_offset + spacing;
-
 	UI::TabPanel * tabs =
 		 new UI::TabPanel
-			 (box, spacing, 0, g_gr->images().get("images/ui_basic/but1.png"));
-
+			 (box, kSpacing, 0, g_gr->images().get("images/ui_basic/but1.png"));
 
 	plot_production_ =
 		new WuiPlotArea
 			(tabs,
-			 0, 0, plot_width, plot_height);
+			 0, 0, kPlotWidth, kPlotHeight + kSpacing);
 	plot_production_->set_sample_rate(STATISTICS_SAMPLE_TIME);
 	plot_production_->set_plotmode(WuiPlotArea::PLOTMODE_RELATIVE);
 
@@ -179,7 +175,7 @@ parent_(&parent)
 	plot_consumption_ =
 		new WuiPlotArea
 			(tabs,
-			 0, 0, plot_width, plot_height);
+			 0, 0, kPlotWidth, kPlotHeight + kSpacing);
 	plot_consumption_->set_sample_rate(STATISTICS_SAMPLE_TIME);
 	plot_consumption_->set_plotmode(WuiPlotArea::PLOTMODE_RELATIVE);
 
@@ -190,7 +186,7 @@ parent_(&parent)
 	plot_economy_ =
 		new DifferentialPlotArea
 			(tabs,
-			 0, 0, plot_width, plot_height);
+			 0, 0, kPlotWidth, kPlotHeight + kSpacing);
 	plot_economy_->set_sample_rate(STATISTICS_SAMPLE_TIME);
 	plot_economy_->set_plotmode(WuiPlotArea::PLOTMODE_RELATIVE);
 
@@ -200,7 +196,7 @@ parent_(&parent)
 
 	plot_stock_ = new WuiPlotArea
 			(tabs,
-			 0, 0, plot_width, plot_height);
+			 0, 0, kPlotWidth, kPlotHeight + kSpacing);
 	plot_stock_->set_sample_rate(STATISTICS_SAMPLE_TIME);
 	plot_stock_->set_plotmode(WuiPlotArea::PLOTMODE_ABSOLUTE);
 
@@ -254,7 +250,7 @@ parent_(&parent)
 	box->add
 		(new WuiPlotGenericAreaSlider
 			(this, *plot_production_, this,
-			0, 0, 100, 45,
+			0, 0, kPlotWidth, 45,
 			g_gr->images().get("images/ui_basic/but1.png")),
 		 UI::Align::kLeft, true);
 }
