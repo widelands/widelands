@@ -124,9 +124,7 @@ void MilitarySite::update_statistics_string(std::string* s)
 		if (capacity_ > stationed) {
 			/** TRANSLATORS: %1% is the number of soldiers the plural refers to */
 			/** TRANSLATORS: %2% is the maximum number of soldier slots in the building */
-			*s = (boost::format(ngettext("%1% soldier (+%2%)",
-																		  "%1% soldiers (+%2%)",
-																		  stationed))
+			*s = (boost::format(ngettext("%1% soldier (+%2%)", "%1% soldiers (+%2%)", stationed))
 											% stationed % (capacity_ - stationed)).str();
 		} else {
 			*s = (boost::format(ngettext("%u soldier", "%u soldiers", stationed))
@@ -137,8 +135,7 @@ void MilitarySite::update_statistics_string(std::string* s)
 			/** TRANSLATORS: %1% is the number of soldiers the plural refers to */
 			/** TRANSLATORS: %2% are currently open soldier slots in the building */
 			/** TRANSLATORS: %3% is the maximum number of soldier slots in the building */
-			*s =
-					(boost::format(ngettext("%1%(+%2%) soldier (+%3%)", "%1%(+%2%) soldiers (+%3%)", stationed))
+			*s = (boost::format(ngettext("%1%(+%2%) soldier (+%3%)", "%1%(+%2%) soldiers (+%3%)", stationed))
 					 % present % (stationed - present) % (capacity_ - stationed)).str();
 		} else {
 			/** TRANSLATORS: %1% is the number of soldiers the plural refers to */
