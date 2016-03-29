@@ -970,7 +970,7 @@ void Ship::draw(const EditorGameBase& game, RenderTarget& dst, const Point& pos)
 			break;
 		case (ShipStates::kExpeditionColonizing):
 			/** TRANSLATORS: This is a ship state. An expedition is unloading wares/workers to build a port. */
-			statistics_string = pgettext("ship_state", "Founding Colony");
+			statistics_string = pgettext("ship_state", "Founding a Colony");
 			break;
 		case (ShipStates::kSinkRequest):
 		case (ShipStates::kSinkAnimation):
