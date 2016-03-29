@@ -210,8 +210,8 @@ uint32_t TextStyle::calc_bare_width(const std::string & text) const
  */
 void TextStyle::calc_bare_height_heuristic(const std::string & text, int32_t & miny, int32_t & maxy) const
 {
-	miny = font->m_computed_typical_miny;
-	maxy = font->m_computed_typical_maxy;
+	miny = font->computed_typical_miny_;
+	maxy = font->computed_typical_maxy_;
 
 	setup();
 	std::string::size_type pos = 0;

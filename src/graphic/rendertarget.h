@@ -61,7 +61,7 @@ public:
 								const RGBColor& color,
 								float width);
 	void draw_rect(const Rect&, const RGBColor&);
-	void fill_rect(const Rect&, const RGBAColor&);
+	void fill_rect(const Rect&, const RGBAColor&, BlendMode blend_mode = BlendMode::Copy);
 	void brighten_rect(const Rect&, int32_t factor);
 
 	void blit(const Point& dst,
@@ -116,9 +116,9 @@ public:
 
 	void reset();
 
-	Surface* get_surface() const {return m_surface;}
-	const Rect& get_rect() const {return m_rect;}
-	const Point& get_offset() const {return m_offset;}
+	Surface* get_surface() const {return surface_;}
+	const Rect& get_rect() const {return rect_;}
+	const Point& get_offset() const {return offset_;}
 
 protected:
 	bool clip(Rect & r) const;
@@ -131,12 +131,12 @@ protected:
 	                       const RGBColor* player_color,
 	                       const Rect& source_rect);
 
-	///The target surface
-	Surface* m_surface;
-	///The current clip rectangle
-	Rect m_rect;
-	///Drawing offset
-	Point m_offset;
+	/// The target surface
+	Surface* surface_;
+	/// The current clip rectangle
+	Rect rect_;
+	/// Drawing offset
+	Point offset_;
 };
 
 #endif  // end of include guard: WL_GRAPHIC_RENDERTARGET_H

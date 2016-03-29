@@ -46,22 +46,21 @@ public:
 
 private:
 	EditorInteractive & eia();
-	UI::UniqueWindow::Registry m_allow_buildings_menu;
-	UI::Textarea * m_nr_of_players_ta;
-	UI::EditBox * m_plr_names[MAX_PLAYERS];
+	UI::UniqueWindow::Registry allow_buildings_menu_;
+	UI::Textarea* nr_of_players_ta_;
+	UI::EditBox* plr_names_[MAX_PLAYERS];
+	UI::Button add_player_, remove_last_player_;
 	UI::Button
-		m_add_player, m_remove_last_player;
-	UI::Button
-		* m_plr_make_infrastructure_buts[MAX_PLAYERS],
-		* m_plr_set_pos_buts            [MAX_PLAYERS],
-		* m_plr_set_tribes_buts         [MAX_PLAYERS];
+		* plr_make_infrastructure_buts_[MAX_PLAYERS],
+		* plr_set_pos_buts_            [MAX_PLAYERS],
+		* plr_set_tribes_buts_         [MAX_PLAYERS];
 
-	std::vector<std::string> m_tribenames;
+	std::vector<std::string> tribenames_;
 
 	/// List of the tribes currently selected for all players
-	std::string m_selected_tribes[MAX_PLAYERS];
+	std::string selected_tribes_[MAX_PLAYERS];
 
-	int32_t m_posy;
+	int32_t posy_;
 
 	void name_changed(int32_t);
 	void clicked_add_player         ();

@@ -44,7 +44,7 @@ SdlTtfFont::~SdlTtfFont() {
 }
 
 void SdlTtfFont::dimensions(const std::string& txt, int style, uint16_t * gw, uint16_t * gh) {
-	m_set_style(style);
+	set_style(style);
 
 	int w, h;
 	TTF_SizeUTF8(font_, txt.c_str(), &w, &h);
@@ -64,7 +64,7 @@ const Texture& SdlTtfFont::render
 	const Texture* rv = texture_cache->get(hash);
 	if (rv) return *rv;
 
-	m_set_style(style);
+	set_style(style);
 
 	SDL_Surface * text_surface = nullptr;
 
@@ -127,11 +127,7 @@ uint16_t SdlTtfFont::ascent(int style) const {
 	return rv;
 }
 
-void SdlTtfFont::m_set_style(int style) {
-	// Those must have been handled by loading the correct font.
-	// NOCOM assert(!(style & BOLD));
-	//assert(!(style & ITALIC));
-
+void SdlTtfFont::set_style(int style) {
 	int sdl_style = TTF_STYLE_NORMAL;
 	if (style & UNDERLINE) sdl_style |= TTF_STYLE_UNDERLINE;
 

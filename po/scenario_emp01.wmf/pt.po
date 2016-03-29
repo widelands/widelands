@@ -3,15 +3,15 @@
 # 
 # Translators:
 # GunChleoc, 2015
-# GunChleoc, 2015
+# GunChleoc, 2015-2016
 # GunChleoc, 2014
 # GunChleoc, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-02-20 12:30+0000\n"
-"PO-Revision-Date: 2016-02-20 12:31+0000\n"
+"POT-Creation-Date: 2016-03-18 11:30+0000\n"
+"PO-Revision-Date: 2016-03-28 09:40+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Portuguese (http://www.transifex.com/widelands/widelands/language/pt/)\n"
 "MIME-Version: 1.0\n"
@@ -26,7 +26,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:30
 msgid "Blockhouse"
-msgstr ""
+msgstr "Blocausse"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:31
 msgid ""
@@ -130,7 +130,7 @@ msgid ""
 "He did not want new land and did not want our land, but he told me that THIS"
 " forest was their land – and it would stay theirs until the spirits took the"
 " last man of his folk!"
-msgstr "Mas na 5a noite na região, atacaram-nos sem razão. Perdi dúzias de bons soldados, fui aprisionado e levado perante o Grande Chefe. Humilhou-me e gozou comigo e ordenou-me que deixasse aquela terra para sempre. Não queria nem novas nem as nossas terras, apenas queria que deixássemos a floresta, dizendo ”- Será nossa até que os espíritos que lá habitam levem-me a mim e a última pessoa da minha tribo!“."
+msgstr "Mas na 5a noite na região, atacaram-nos sem razão. Perdi dúzias de bons soldados, fui aprisionado e levado perante o Grande-chefe. Humilhou-me e gozou comigo e ordenou-me que deixasse aquela terra para sempre. Não queria nem novas nem as nossas terras, apenas queria que deixássemos a floresta, dizendo «&nbsp;Será nossa até que os espíritos que lá habitam levem-me a mim e a última pessoa da minha tribo!&nbsp;»."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:90
@@ -281,7 +281,7 @@ msgstr "Uma coisa é certa: precisamos de madeira para reparar o nosso navio. Po
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:169
 msgid "Amalea recommends…"
-msgstr "Amalea recomenda…"
+msgstr "A Amalea recomenda…"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:171
@@ -402,7 +402,7 @@ msgstr "Esta vai ser a nossa ultima noite na ilha. Amanhã de manhã vamos zarpa
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:233
 msgid "I still wonder if we will ever see Fremil again."
-msgstr "Ainda penso se vamos rever Freemil outra vez."
+msgstr "Ainda penso se vamos rever Fremil outra vez."
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:234
 msgid "Victory"
@@ -432,10 +432,10 @@ msgstr "Senhor, tornou esta península um local muito seguro. É hora de seguir 
 #: ../../data/scripting/format_scenario.lua:36
 #, lua-format
 msgid "“%s”"
-msgstr "“%s”"
+msgstr "«&nbsp;%s&nbsp;»"
 
 #: ../../data/scripting/format_scenario.lua:146
 msgid "New Objective"
 msgid_plural "New Objectives"
-msgstr[0] "Novo Objectivo"
-msgstr[1] "Novos Objectivos"
+msgstr[0] "Novo objetivo"
+msgstr[1] "Novos objetivos"

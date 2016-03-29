@@ -60,19 +60,19 @@ public:
 	// kinds of map objects have suitable default constructors.
 	template<typename T> T & register_object(Serial const n, T & object) {
 		ReverseMapObjectMap::const_iterator const existing =
-			m_objects.find(n);
-		if (existing != m_objects.end()) {
-			//delete &object; can not do this
+			objects_.find(n);
+		if (existing != objects_.end()) {
+			// delete &object; can not do this
 			throw GameDataError("already loaded (%s)", to_string(existing->second->descr().type()).c_str());
 		}
-		m_objects.insert(std::pair<Serial, MapObject *>(n, &object));
-		m_loaded_obj[&object] = false;
+		objects_.insert(std::pair<Serial, MapObject *>(n, &object));
+		loaded_objects_[&object] = false;
 		return object;
 	}
 
 	template<typename T> T & get(Serial const serial) {
-		ReverseMapObjectMap::iterator const it = m_objects.find(serial);
-		if (it == m_objects.end())
+		ReverseMapObjectMap::iterator const it = objects_.find(serial);
+		if (it == objects_.end())
 			throw GameDataError("not found");
 		else if (upcast(T, result, it->second))
 			return *result;
@@ -83,7 +83,7 @@ public:
 	}
 
 	int32_t get_nr_unloaded_objects();
-	bool is_object_loaded(MapObject & obj) {return m_loaded_obj[&obj];}
+	bool is_object_loaded(MapObject & obj) {return loaded_objects_[&obj];}
 
 	void mark_object_as_loaded(MapObject &);
 
@@ -95,11 +95,11 @@ public:
 private:
 	using ReverseMapObjectMap = std::map<Serial, MapObject *>;
 
-	std::map<MapObject *, bool> m_loaded_obj;
-	ReverseMapObjectMap m_objects;
+	std::map<MapObject *, bool> loaded_objects_;
+	ReverseMapObjectMap objects_;
 
-	std::vector<MapObject *> m_schedule_destroy;
-	std::vector<Bob *> m_schedule_act;
+	std::vector<MapObject *> schedule_destroy_;
+	std::vector<Bob *> schedule_act_;
 };
 
 }

@@ -1,37 +1,38 @@
-# Portuguese translation for widelands
-# Copyright (c) 2011 Rosetta Contributors and Canonical Ltd 2011
-# This file is distributed under the same license as the widelands package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2011.
-#
+# Widelands PATH/TO/FILE.PO
+# Copyright (C) 2005-2016 Widelands Development Team
+# 
+# Translators:
+# GunChleoc, 2016
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2011
 msgid ""
 msgstr ""
-"Project-Id-Version: widelands\n"
-"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2015-02-07 14:46+0000\n"
-"PO-Revision-Date: 2014-03-06 07:28+0000\n"
-"Last-Translator: Flávio J. Saraiva <flaviojs2005@gmail.com>\n"
-"Language-Team: Portuguese <pt@li.org>\n"
+"Project-Id-Version: Widelands\n"
+"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
+"POT-Creation-Date: 2016-03-18 11:30+0000\n"
+"PO-Revision-Date: 2016-03-28 09:40+0000\n"
+"Last-Translator: GunChleoc\n"
+"Language-Team: Portuguese (http://www.transifex.com/widelands/widelands/language/pt/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2015-02-08 05:45+0000\n"
-"X-Generator: Launchpad (build 17331)\n"
+"Language: pt\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../../campaigns/dummy.wmf/scripting/init.lua:11
+#: ../../data/campaigns/dummy.wmf/scripting/init.lua:11
 msgid "Not yet implemented"
 msgstr "Nâo Implementado"
 
-#: ../../campaigns/dummy.wmf/scripting/init.lua:12
+#: ../../data/campaigns/dummy.wmf/scripting/init.lua:12
 msgid "Sorry, this map is not yet implemented."
 msgstr "Desculpe, este mapa ainda não foi implementado."
 
-#: ../../scripting/format_scenario.lua:36
+#: ../../data/scripting/format_scenario.lua:36
+#, lua-format
 msgid "“%s”"
-msgstr "\"%s\""
+msgstr "«&nbsp;%s&nbsp;»"
 
-#: ../../scripting/format_scenario.lua:146
+#: ../../data/scripting/format_scenario.lua:146
 msgid "New Objective"
 msgid_plural "New Objectives"
-msgstr[0] "Novo Objectivo"
-msgstr[1] "Novos Objectivos"
+msgstr[0] "Novo objetivo"
+msgstr[1] "Novos objetivos"

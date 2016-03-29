@@ -281,14 +281,14 @@ bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
 			Widelands::MapSaver* wms = new Widelands::MapSaver(*fs, egbase);
 			wms->save();
 			delete wms;
-			//reset filesystem to avoid file locks on saves
+			// Reset filesystem to avoid file locks on saves
 			fs.reset();
 			eia().set_need_save(false);
 			g_fs->fs_unlink(complete_filename);
 			g_fs->fs_rename(tmp_name, complete_filename);
-			// also change fs, as we assign it to the map below
+			// Also change fs, as we assign it to the map below
 			fs.reset(g_fs->make_sub_file_system(complete_filename));
-			// set the filesystem of the map to the current save file / directory
+			// Set the filesystem of the map to the current save file / directory
 			map.swap_filesystem(fs);
 			// DONT use fs as of here, its garbage now!
 

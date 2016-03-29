@@ -74,7 +74,7 @@ void ConstructionSite::update_statistics_string(std::string* s)
 {
 	unsigned int percent = (get_built_per64k() * 100) >> 16;
 	*s = (boost::format("<font color=%s>%s</font>") % UI_FONT_CLR_DARK.hex_value() %
-	      (boost::format(_("%i%% built")) % percent).str()).str();
+			(boost::format(_("%i%% built")) % percent)).str();
 }
 
 /*
@@ -232,8 +232,8 @@ bool ConstructionSite::get_building_work(Game & game, Worker & worker, bool) {
 			builder_idle_ = false;
 			return true;
 		} else {
-			//TODO(fweber): cause "construction sounds" to be played -
-			//perhaps dependent on kind of construction?
+			// TODO(fweber): cause "construction sounds" to be played -
+			// perhaps dependent on kind of construction?
 
 			++work_completed_;
 			if (work_completed_ >= work_steps_)
@@ -276,7 +276,7 @@ bool ConstructionSite::get_building_work(Game & game, Worker & worker, bool) {
 			wq.set_filled(wq.get_filled() - 1);
 			wq.set_max_size(wq.get_max_size() - 1);
 
-			//update consumption statistic
+			// Update consumption statistic
 			owner().ware_consumed(wq.get_ware(), 1);
 
 			working_ = true;
@@ -397,7 +397,7 @@ void ConstructionSite::draw
 	dst.blit_animation(pos, anim_idx, tanim, player_color, Rect(Point(0, h - lines), w, lines));
 
 	// Draw help strings
-	draw_help(game, dst, coords, pos);
+	draw_info(game, dst, pos);
 }
 
 }

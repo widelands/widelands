@@ -38,15 +38,15 @@ struct EditorSetStartingPosTool : public EditorTool {
 	                          EditorActionArgs*,
 							  Widelands::Map*) override;
 	char const * get_sel_impl() const override
-		{return m_current_sel_pic;}
+		{return current_sel_pic_;}
 
 	Widelands::PlayerNumber get_current_player() const;
 	void set_current_player(int32_t);
 	bool has_size_one() const override {return true;}
 
 private:
-	char const * fsel_picsname;
-	char const * m_current_sel_pic;
+	char const * fsel_picsname_;
+	char const * current_sel_pic_;
 };
 
 int32_t editor_tool_set_starting_pos_callback

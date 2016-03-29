@@ -28,11 +28,11 @@ namespace RT {
 
 class TextStream {
 public:
-	TextStream(std::string text) : m_t(text), m_lineno(1), m_col(0), m_i(0), m_end(text.size()) {}
+	TextStream(std::string text) : text_(text), line_(1), col_(0), pos_(0), end_(text.size()) {}
 
-	size_t line() const {return m_lineno;}
-	size_t col() const {return m_col;}
-	size_t pos() const {return m_i;}
+	size_t line() const {return line_;}
+	size_t col() const {return col_;}
+	size_t pos() const {return pos_;}
 
 	std::string peek(size_t, size_t = -1) const;
 	void expect(std::string, bool = true);
@@ -41,17 +41,17 @@ public:
 	std::string till_any_or_end(std::string);
 	std::string parse_string();
 
-	void skip(size_t d) {m_i += d;}
+	void skip(size_t d) {pos_ += d;}
 	void skip_ws();
 	void rskip_ws();
 
 	std::string remaining_text();
 
 private:
-	void m_consume(size_t);
-	std::string m_t;
-	uint32_t m_lineno, m_col;
-	size_t m_i, m_end;
+	void consume(size_t);
+	std::string text_;
+	uint32_t line_, col_;
+	size_t pos_, end_;
 };
 
 }

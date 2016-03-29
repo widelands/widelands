@@ -492,11 +492,11 @@ void FullscreenMenuLaunchMPG::refresh()
 				if (settings.scenario)
 					set_scenario_values();
 			}
-			//Try to translate the map name.
-			//This will work on every official map as expected
-			//and 'fail silently' (not find a translation) for already translated campaign map names.
-			//It will also translate 'false-positively' on any user-made map which shares a name with
-			//the official maps, but this should not be a problem to worry about.
+			// Try to translate the map name.
+			// This will work on every official map as expected
+			// and 'fail silently' (not find a translation) for already translated campaign map names.
+			// It will also translate 'false-positively' on any user-made map which shares a name with
+			// the official maps, but this should not be a problem to worry about.
 			i18n::Textdomain td("maps");
 			mapname_.set_text(_(settings.mapname));
 		}
@@ -581,7 +581,7 @@ void FullscreenMenuLaunchMPG::load_previous_playerdata()
 		infotext += (boost::format(_("Player %u")) % static_cast<unsigned int>(i)).str();
 		if (player_save_tribe[i - 1].empty()) {
 			std::string closed_string =
-				(boost::format("\\<%s\\>") % _("closed")).str();
+				(boost::format("&lt;%s&gt;") % _("closed")).str();
 			infotext += ":\n    ";
 			infotext += closed_string;
 			// Close the player

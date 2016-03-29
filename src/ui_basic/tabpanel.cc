@@ -150,7 +150,7 @@ void TabPanel::update_desired_size()
 
 		panel->get_desired_size(&panelw, &panelh);
 		// TODO(unknown):  the panel might be bigger -> add a scrollbar in that case
-		//panel->set_size(panelw, panelh);
+		// panel->set_size(panelw, panelh);
 
 		if (panelw > w)
 			w = panelw;
@@ -254,10 +254,22 @@ void TabPanel::activate(const std::string & name)
 }
 
 /**
- * Return the tab names in order
+ * Return the tabs in order
  */
 const TabPanel::TabList & TabPanel::tabs() {
 	return tabs_;
+}
+
+bool TabPanel::remove_last_tab(const std::string& tabname) {
+	if (tabs_.back()->get_name() == tabname) {
+		tabs_.pop_back();
+		if (active_ > tabs_.size() - 1) {
+			active_ = 0ul;
+		}
+		update_desired_size();
+		return true;
+	}
+	return false;
 }
 
 /**

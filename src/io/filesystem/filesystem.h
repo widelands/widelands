@@ -65,7 +65,7 @@ public:
 		(const std::string & fname, void const * data, int32_t length)
 		= 0;
 	virtual void ensure_directory_exists(const std::string & fs_dirname) = 0;
-	//TODO(unknown): use this only from inside ensure_directory_exists()
+	// TODO(unknown): use this only from inside ensure_directory_exists()
 	virtual void make_directory(const std::string & fs_dirname) = 0;
 
 	/**

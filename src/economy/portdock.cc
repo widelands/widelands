@@ -172,7 +172,7 @@ void PortDock::cleanup(EditorGameBase& egbase) {
 
 	if (egbase.objects().object_still_available(warehouse_)) {
 
-		//we need to remember this for possible recreation of portdock
+		// We need to remember this for possible recreation of portdock
 		wh = warehouse_;
 
 		// Transfer all our wares into the warehouse.
@@ -217,7 +217,7 @@ void PortDock::cleanup(EditorGameBase& egbase) {
 	if (wh) {
 		if (!wh->cleanup_in_progress_) {
 			if (upcast(Game, game, &egbase)) {
-				if (game->is_loaded()) { //do not attempt when shutting down
+				if (game->is_loaded()) { // Do not attempt when shutting down
 					wh->restore_portdock_or_destroy(egbase);
 				}
 			}

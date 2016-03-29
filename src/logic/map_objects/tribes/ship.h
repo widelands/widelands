@@ -124,34 +124,34 @@ struct Ship : Bob {
 	void close_window();
 	void refresh_window(InteractiveGameBase &);
 
-	// A ship with task expedition can be in four states: EXP_WAITING, EXP_SCOUTING,
-	// EXP_FOUNDPORTSPACE or EXP_COLONIZING in the first states, the owning player of this ship can
-	// give direction change commands to change the direction of the moving ship / send the ship in a
-	// direction. Once the ship is on its way, it is in EXP_SCOUTING state. In the backend, a click
+	// A ship with task expedition can be in four states: kExpeditionWaiting, kExpeditionScouting,
+	// kExpeditionPortspaceFound or kExpeditionColonizing in the first states, the owning player of this ship
+	// can give direction change commands to change the direction of the moving ship / send the ship in a
+	// direction. Once the ship is on its way, it is in kExpeditionScouting state. In the backend, a click
 	// on a direction begins to the movement into that direction until a coast is reached or the user
 	// cancels the direction through a direction change.
 	//
-	// The EXP_WAITING state means, that an event happend and thus the ship stopped and waits for a
-	// new command by the owner. An event leading to a EXP_WAITING state can be:
+	// The kExpeditionWaiting state means, that an event happend and thus the ship stopped and waits for a
+	// new command by the owner. An event leading to a kExpeditionWaiting state can be:
 	// * expedition is ready to start
 	// * new island appeared in vision range (only outer ring of vision range has to be checked due to the
 	//   always ongoing movement).
 	// * island was completely surrounded
 	//
-	// The EXP_FOUNDPORTSPACE state means, that a port build space was found.
+	// The kExpeditionPortspaceFound state means, that a port build space was found.
 	//
-	enum {
-		TRANSPORT          = 0,
-		EXP_WAITING        = 1,
-		EXP_SCOUTING       = 2,
-		EXP_FOUNDPORTSPACE = 3,
-		EXP_COLONIZING     = 4,
-		SINK_REQUEST       = 8,
-		SINK_ANIMATION     = 9
+	enum class ShipStates : uint8_t {
+		kTransport                = 0,
+		kExpeditionWaiting        = 1,
+		kExpeditionScouting       = 2,
+		kExpeditionPortspaceFound = 3,
+		kExpeditionColonizing     = 4,
+		kSinkRequest              = 8,
+		kSinkAnimation            = 9
 	};
 
 	/// \returns the current state the ship is in
-	uint8_t get_ship_state() {return ship_state_;}
+	ShipStates get_ship_state() {return ship_state_;}
 
 	/// \returns the current name of ship
 	const std::string & get_shipname() {return shipname_;}
@@ -159,24 +159,24 @@ struct Ship : Bob {
 	/// \returns whether the ship is currently on an expedition
 	bool state_is_expedition() {
 		return
-			(ship_state_ == EXP_SCOUTING
+			(ship_state_ == ShipStates::kExpeditionScouting
 			 ||
-			 ship_state_ == EXP_WAITING
+			 ship_state_ == ShipStates::kExpeditionWaiting
 			 ||
-			 ship_state_ == EXP_FOUNDPORTSPACE
+			 ship_state_ == ShipStates::kExpeditionPortspaceFound
 			 ||
-			 ship_state_ == EXP_COLONIZING);
+			 ship_state_ == ShipStates::kExpeditionColonizing);
 	}
 	/// \returns whether the ship is in transport mode
-	bool state_is_transport() {return (ship_state_ == TRANSPORT);}
+	bool state_is_transport() {return (ship_state_ == ShipStates::kTransport);}
 	/// \returns whether a sink request for the ship is currently valid
 	bool state_is_sinkable() {
 		return
-			(ship_state_ != SINK_REQUEST
+			(ship_state_ != ShipStates::kSinkRequest
 			 &&
-			 ship_state_ != SINK_ANIMATION
+			 ship_state_ != ShipStates::kSinkAnimation
 			 &&
-			 ship_state_ != EXP_COLONIZING);
+			 ship_state_ != ShipStates::kExpeditionColonizing);
 	}
 
 	/// \returns (in expedition mode only!) whether the next field in direction \arg dir is swimable
@@ -205,17 +205,20 @@ struct Ship : Bob {
 	void exp_construct_port (Game &, const Coords&);
 	void exp_explore_island (Game &, IslandExploreDirection);
 
-	//Returns integer of direction, or WalkingDir::IDLE if query invalid
-	//Intended for LUA scripting
+	// Returns integer of direction, or WalkingDir::IDLE if query invalid
+	// Intended for LUA scripting
 	WalkingDir get_scouting_direction();
 
-	//Returns integer of direction, or IslandExploreDirection::kNotSet
-	//if query invalid
-	//Intended for LUA scripting
+	// Returns integer of direction, or IslandExploreDirection::kNotSet
+	// if query invalid
+	// Intended for LUA scripting
 	IslandExploreDirection get_island_explore_direction();
 
 	void exp_cancel (Game &);
 	void sink_ship  (Game &);
+
+protected:
+	void draw(const EditorGameBase&, RenderTarget&, const Point&) const override;
 
 private:
 	friend struct Fleet;
@@ -248,7 +251,7 @@ private:
 	OPtr<PortDock> lastdock_;
 	OPtr<PortDock> destination_;
 	std::vector<ShippingItem> items_;
-	uint8_t ship_state_;
+	ShipStates ship_state_;
 	std::string shipname_;
 
 	struct Expedition {
@@ -276,7 +279,7 @@ protected:
 	private:
 		uint32_t lastdock_;
 		uint32_t destination_;
-		uint8_t  ship_state_;
+		ShipStates  ship_state_;
 		std::string shipname_;
 		std::unique_ptr<Expedition> expedition_;
 		std::vector<ShippingItem::Loader> items_;

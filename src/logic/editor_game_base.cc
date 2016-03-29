@@ -88,7 +88,7 @@ EditorGameBase::~EditorGameBase() {
 
 void EditorGameBase::think()
 {
-	//TODO(unknown): Get rid of this; replace by a function that just advances gametime
+	// TODO(unknown): Get rid of this; replace by a function that just advances gametime
 	// by a given number of milliseconds
 }
 
@@ -145,6 +145,9 @@ Tribes* EditorGameBase::mutable_tribes() {
 	return tribes_.get();
 }
 
+void EditorGameBase::set_ibase(InteractiveBase* const b) {
+	ibase_.reset(b);
+}
 
 InteractiveGameBase* EditorGameBase::get_igbase()
 {

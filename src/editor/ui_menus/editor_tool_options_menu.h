@@ -27,7 +27,7 @@ struct EditorToolOptionsMenu : public UI::UniqueWindow {
 	EditorToolOptionsMenu
 		(EditorInteractive         & parent,
 		 UI::UniqueWindow::Registry &,
-		 const uint32_t widht, const uint32_t height,
+		 const uint32_t width, const uint32_t height,
 		 char const                 * title);
 
 	/**
@@ -43,7 +43,7 @@ struct EditorToolOptionsMenu : public UI::UniqueWindow {
 	uint32_t vmargin () const {return spacing();}
 
 private:
-	EditorTool * m_current_pointer;
+	EditorTool * current_pointer_;
 };
 
 #endif  // end of include guard: WL_EDITOR_UI_MENUS_EDITOR_TOOL_OPTIONS_MENU_H
