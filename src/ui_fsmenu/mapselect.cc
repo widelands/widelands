@@ -51,7 +51,7 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect
 
 	table_(this, tablex_, tabley_, tablew_, tableh_, false),
 	map_details_(this, right_column_x_, tabley_,
-					 get_right_column_w(right_column_x_ + indent_),
+					 get_right_column_w(right_column_x_),
 					 tableh_ - buth_ - 4 * padding_),
 
 	basedir_("maps"),

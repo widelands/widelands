@@ -105,14 +105,14 @@ void Box::update_desired_size()
 
 	if (orientation_ == Horizontal) {
 		if (totaldepth > max_x_ && scrolling_) {
-			maxbreadth += Scrollbar::Size;
+			maxbreadth += Scrollbar::kSize;
 		}
 		set_desired_size
 			(std::min(totaldepth, max_x_), // + get_lborder() + get_rborder(),
 			 std::min(maxbreadth, max_y_)); // + get_tborder() + get_bborder());
 	} else {
 		if (totaldepth > max_y_ && scrolling_) {
-			maxbreadth += Scrollbar::Size;
+			maxbreadth += Scrollbar::kSize;
 		}
 		set_desired_size
 			(std::min(maxbreadth, max_x_) + get_lborder() + get_rborder(),
@@ -159,16 +159,16 @@ void Box::layout()
 		int32_t pagesize;
 		if (orientation_ == Horizontal) {
 			sb_x = 0;
-			sb_y = get_inner_h() - Scrollbar::Size;
+			sb_y = get_inner_h() - Scrollbar::kSize;
 			sb_w = get_inner_w();
-			sb_h = Scrollbar::Size;
-			pagesize = get_inner_w() - Scrollbar::Size;
+			sb_h = Scrollbar::kSize;
+			pagesize = get_inner_w() - Scrollbar::kSize;
 		} else {
-			sb_x = get_inner_w() - Scrollbar::Size;
+			sb_x = get_inner_w() - Scrollbar::kSize;
 			sb_y = 0;
-			sb_w = Scrollbar::Size;
+			sb_w = Scrollbar::kSize;
 			sb_h = get_inner_h();
-			pagesize = get_inner_h() - Scrollbar::Size;
+			pagesize = get_inner_h() - Scrollbar::kSize;
 		}
 		if (scrollbar_ == nullptr) {
 			scrollbar_.reset(
@@ -179,7 +179,7 @@ void Box::layout()
 			scrollbar_->set_size(sb_w, sb_h);
 		}
 		scrollbar_->set_steps(totaldepth - pagesize);
-		scrollbar_->set_singlestepsize(Scrollbar::Size);
+		scrollbar_->set_singlestepsize(Scrollbar::kSize);
 		scrollbar_->set_pagesize(pagesize);
 	} else {
 		scrollbar_.reset();
@@ -216,7 +216,7 @@ void Box::update_positions()
 	uint32_t totaldepth = 0;
 	uint32_t totalbreadth = orientation_ == Horizontal ? get_inner_h() : get_inner_w();
 	if (scrollbar_)
-		totalbreadth -= Scrollbar::Size;
+		totalbreadth -= Scrollbar::kSize;
 
 	for (uint32_t idx = 0; idx < items_.size(); ++idx) {
 		int depth, breadth;
