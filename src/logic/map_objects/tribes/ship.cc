@@ -957,20 +957,20 @@ void Ship::draw(const EditorGameBase& game, RenderTarget& dst, const Point& pos)
 			statistics_string = pgettext("ship_state", "Shipping");
 			break;
 		case (ShipStates::kExpeditionWaiting):
-			/** TRANSLATORS: This is a ship state */
+			/** TRANSLATORS: This is a ship state. An expedition is waiting for your commands. */
 			statistics_string = pgettext("ship_state", "Waiting");
 			break;
 		case (ShipStates::kExpeditionScouting):
-			/** TRANSLATORS: This is a ship state */
+			/** TRANSLATORS: This is a ship state. An expedition is scouting for port spaces. */
 			statistics_string = pgettext("ship_state", "Scouting");
 			break;
 		case (ShipStates::kExpeditionPortspaceFound):
-			/** TRANSLATORS: This is a ship state */
+			/** TRANSLATORS: This is a ship state. An expedition has found a port space. */
 			statistics_string = pgettext("ship_state", "Port Space Found");
 			break;
 		case (ShipStates::kExpeditionColonizing):
-			/** TRANSLATORS: This is a ship state */
-			statistics_string = pgettext("ship_state", "Expedition Landing");
+			/** TRANSLATORS: This is a ship state. An expedition is unloading wares/workers to build a port. */
+			statistics_string = pgettext("ship_state", "Founding Colony");
 			break;
 		case (ShipStates::kSinkRequest):
 		case (ShipStates::kSinkAnimation):
