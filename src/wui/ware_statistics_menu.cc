@@ -36,7 +36,7 @@
 #include "wui/waresdisplay.h"
 
 constexpr int kPlotHeight = 130;
-constexpr int kPlotWidth = 300;
+constexpr int kPlotWidth = 250;
 constexpr int kSpacing = 5;
 
 #define INACTIVE 0
