@@ -7,7 +7,9 @@ include "scripting/infrastructure.lua"
 set_textdomain("tribes")
 
 return {
+   -- TRANSLATORS: This is the name of a starting condition
    descname = _ "Fortified Village",
+   -- TRANSLATORS: This is the tooltip for the "Fortified Village" starting condition
    tooltip = _" Start the game with a fortified military installation",
    func =  function(plr, shared_in_start)
 
