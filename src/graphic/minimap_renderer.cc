@@ -46,6 +46,21 @@ inline RGBColor blend_color(const RGBColor& c1, const RGBColor& c2) {
 	return RGBColor((c1.r + c2.r) / 2, (c1.g + c2.g) / 2, (c1.b + c2.b) / 2);
 }
 
+inline RGBColor invert_color(const RGBColor& c) {
+	// assuming overflow and underflow
+	uint8_t r,g,b;
+	if (c.r > c.g && c.r > c.b && c.g < 200 && c.g + 50 < c.r) {
+		r = 0;
+		g = c.g;// + (255 - c.g) / 2;
+		b = c.b + (255 - c.b) / 2;
+	} else {
+		r = 255;
+		g = c.g / 2;
+		b = c.b / 2;
+	}	
+	return RGBColor(r, g, b);
+}
+
 // Returns the color to be used in the minimap for the given field.
 inline RGBColor calc_minimap_color(const Widelands::EditorGameBase& egbase,
                                    const Widelands::FCoords& f,
@@ -57,27 +72,48 @@ inline RGBColor calc_minimap_color(const Widelands::EditorGameBase& egbase,
 		color = egbase.world().terrain_descr(f.field->terrain_d()).get_minimap_color(
 		   f.field->get_brightness());
 	}
-
+	
 	if (layers & MiniMapLayer::Owner) {
 		if (0 < owner) {
 			color = blend_color(color, egbase.player(owner).get_playercolor());
 		}
 	}
 
+	const RGBColor contrast_color = invert_color(color);
+
 	if (see_details) {
 		// if ownership layer is displayed, it creates enough contrast to
 		// visualize objects using white color.
+		
+		bool high_traffic = false;
 
 		if (upcast(PlayerImmovable const, immovable, f.field->get_immovable())) {
-			if ((layers & MiniMapLayer::Road) && dynamic_cast<Road const *>(immovable)) {
-				color = blend_color(color, kWhite);
-			}
+			if ((layers & MiniMapLayer::Road) && is_a(Road, immovable)) {
+				upcast(Road const, road, immovable);
+				if (road->get_roadtype() == RoadType::kBusy) {
+					//color = contrast_color;
+					high_traffic = true;
+				} else {
+					color = kWhite;
+				}
+			} 			
 
-			if (((layers & MiniMapLayer::Flag) && dynamic_cast<Flag const*>(immovable)) ||
-			    ((layers & MiniMapLayer::Building) &&
-			     dynamic_cast<Widelands::Building const*>(immovable))) {
+			if ((layers & MiniMapLayer::Building) && is_a(Building, immovable)) {
 				color = kWhite;
-			}
+			} 
+			
+			if ((layers & MiniMapLayer::Flag) && is_a(Flag, immovable)) {
+				upcast(Flag const, flag, immovable); // why this cannot be inside if ?
+		    	if (flag->current_wares() > 5) {
+					//color = contrast_color;
+					high_traffic = true;
+				} else {
+					color = kWhite;
+				}
+			} 
+			if (high_traffic) {
+				color = contrast_color;
+			}			
 		}
 	}
 
