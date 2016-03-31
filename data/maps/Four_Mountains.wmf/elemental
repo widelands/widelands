@@ -8,7 +8,7 @@ nr_players="4"
 name=_"Four Mountains"
 author="Quappo"
 descr=_"Each tribe is surrounded by four mighty mountains. Who will first conquer them and claim the resources for his own tribe?"
-hint="I: Water can be found along the river. II: Snowmen mark additional water sources. III: Each mountain contains only one resource."
+hint=_"I: Water can be found along the river. II: Snowmen mark additional water sources. III: Each mountain contains only one resource."
 tags="2teams,artifacts,ffa,official"
 
 [teams00]
