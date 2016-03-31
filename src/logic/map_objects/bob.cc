@@ -713,20 +713,15 @@ void Bob::movepath_update(Game & game, State & state)
 	// Using probability of 1/8 and pausing it for 5, 10 or 15 seconds
 	if (game.logic_rand() % 8 == 0) {
 		if (upcast(Ship, ship, this)) {
-			// Only do this in transport mode
-			if (ship->get_ship_state() == Ship::ShipStates::kTransport) {
-				Map& map = game.map();
-				const uint32_t ships_count
-					= map.find_bobs(Widelands::Area<Widelands::FCoords>(get_position(), 0),
-										 nullptr,
-										 FindBobShip());
-				assert (ships_count > 0);
-				if (ships_count > 1) {
-					molog ("Pausing the ship because %d ships on the same spot\n", ships_count);
-					return start_task_idle(game,
-												  state.diranims.get_animation(dir),
-												  ((game.logic_rand() % 3) + 1) * 5000);
-				}
+			Map& map = game.map();
+			const uint32_t ships_count
+				= map.find_bobs(Widelands::Area<Widelands::FCoords>(get_position(), 0), nullptr, FindBobShip());
+			assert (ships_count > 0);
+			if (ships_count > 1) {
+				molog ("Pausing the ship because %d ships on the same spot\n", ships_count);
+				return start_task_idle(game,
+											  state.diranims.get_animation(dir),
+											  ((game.logic_rand() % 3) + 1) * 5000);
 			}
 		}
 	}
