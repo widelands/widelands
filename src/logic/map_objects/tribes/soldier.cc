@@ -1757,6 +1757,8 @@ Load/save support
 */
 
 constexpr uint8_t kCurrentPacketVersion = 3;
+// this is only for regression tests, we should get rid of this ASAP
+constexpr uint8_t kOldPacketVersion = 2;
 
 Soldier::Loader::Loader() :
 		battle_(0)
@@ -1769,11 +1771,16 @@ void Soldier::Loader::load(FileRead & fr)
 
 	try {
 		uint8_t packet_version = fr.unsigned_8();
-		if (packet_version == kCurrentPacketVersion) {
+		if (packet_version == kCurrentPacketVersion || packet_version == kOldPacketVersion) {
 
 			Soldier & soldier = get<Soldier>();
 			soldier.current_health_ = fr.unsigned_32();
-			soldier.retreat_health_ = fr.unsigned_32();
+			if (packet_version == kCurrentPacketVersion) {
+				soldier.retreat_health_ = fr.unsigned_32();
+			} else {
+				// not ideal but will be used only for regression tests
+				soldier.retreat_health_ = 0;
+			}
 
 			soldier.health_level_ =
 				std::min(fr.unsigned_32(), soldier.descr().get_max_health_level());
