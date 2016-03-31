@@ -1757,7 +1757,7 @@ Load/save support
 */
 
 constexpr uint8_t kCurrentPacketVersion = 3;
-// this is only for regression tests, we should get rid of this ASAP
+// TODO(TiborB): This is only for map compatibility in regression tests, we should get rid of this ASAP
 constexpr uint8_t kOldPacketVersion = 2;
 
 Soldier::Loader::Loader() :
