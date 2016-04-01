@@ -506,7 +506,7 @@ void SoundHandler::play_fx
  * This just registers the song, actual loading takes place when
  * \ref Songset::get_song() is called, i.e. when the song is about to be
  * played. The song will automatically be removed from memory when it has
- * finished playing.\n
+ * finished playing.
 */
 void SoundHandler::register_song
 	(const std::string & dir, const std::string & basename)
