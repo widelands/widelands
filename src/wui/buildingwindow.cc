@@ -269,21 +269,19 @@ void BuildingWindow::create_capsbuttons(UI::Box * capsbuttons)
 		}
 
 		if (capscache_ & Widelands::Building::PCap_Dismantle) {
-			std::map<Widelands::DescriptionIndex, uint8_t> wares;
-			Widelands::DismantleSite::count_returned_wares(&building_, wares);
-			UI::Button * dismantlebtn =
-				new UI::Button
-					(capsbuttons, "dismantle", 0, 0, 34, 34,
-					 g_gr->images().get("images/ui_basic/but4.png"),
-					 g_gr->images().get(pic_dismantle),
-					 std::string(_("Dismantle")) + "<br><font size=11>" + _("Returns:") + "</font><br>" +
-						 waremap_to_richtext(owner.tribe(), wares));
-			dismantlebtn->sigclicked.connect(boost::bind(&BuildingWindow::act_dismantle, boost::ref(*this)));
-			capsbuttons->add
-				(dismantlebtn,
-				 UI::Align::kHCenter);
-
-			requires_destruction_separator = true;
+			const Widelands::Buildcost wares = Widelands::DismantleSite::count_returned_wares(&building_);
+			if (!wares.empty()) {
+				UI::Button * dismantlebtn =
+					new UI::Button
+						(capsbuttons, "dismantle", 0, 0, 34, 34,
+						 g_gr->images().get("images/ui_basic/but4.png"),
+						 g_gr->images().get(pic_dismantle),
+						 std::string(_("Dismantle")) + "<br><font size=11>" + _("Returns:") + "</font><br>" +
+							 waremap_to_richtext(owner.tribe(), wares));
+				dismantlebtn->sigclicked.connect(boost::bind(&BuildingWindow::act_dismantle, boost::ref(*this)));
+				capsbuttons->add(dismantlebtn, UI::Align::kHCenter);
+				requires_destruction_separator = true;
+			}
 		}
 
 		if (requires_destruction_separator && can_see) {
