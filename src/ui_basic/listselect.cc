@@ -53,7 +53,7 @@ BaseListselect::BaseListselect
 	Panel(parent, x, y, w, h),
 	lineheight_(UI::g_fh1->render(as_uifont(UI::g_fh1->fontset()->representative_character()))->height()
 					 + kMargin),
-	scrollbar_      (this, get_w() - 24, 0, 24, h, false),
+	scrollbar_      (this, get_w() - Scrollbar::kSize, 0, Scrollbar::kSize, h, false),
 	scrollpos_     (0),
 	selection_     (no_selection_index()),
 	last_click_time_(-10000),

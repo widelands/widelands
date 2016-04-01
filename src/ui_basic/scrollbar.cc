@@ -51,6 +51,7 @@ Scrollbar::Scrollbar
 	pos_           (0),
 	singlestepsize_(1),
 	pagesize_      (5),
+	buttonsize_    (kSize),
 	steps_         (100),
 	pressed_       (None),
 	time_nextact_  (0),
@@ -68,6 +69,7 @@ Scrollbar::Scrollbar
 	pic_buttons_   (g_gr->images().get("images/ui_basic/but3.png"))
 {
 	set_thinks(true);
+	layout();
 }
 
 
@@ -163,7 +165,7 @@ Scrollbar::Area Scrollbar::get_area_for_point(int32_t x, int32_t y)
 	int32_t knob = get_knob_pos();
 	int32_t knobsize = get_knob_size();
 
-	if (y < Size)
+	if (y < static_cast<int32_t>(buttonsize_))
 		return Minus;
 
 	if (y < knob - knobsize / 2)
@@ -172,7 +174,7 @@ Scrollbar::Area Scrollbar::get_area_for_point(int32_t x, int32_t y)
 	if (y < knob + knobsize / 2)
 		return Knob;
 
-	if (y < extent - Size)
+	if (y < extent - static_cast<int32_t>(buttonsize_))
 		return PlusPage;
 
 	return Plus;
@@ -184,7 +186,7 @@ Scrollbar::Area Scrollbar::get_area_for_point(int32_t x, int32_t y)
 */
 uint32_t Scrollbar::get_knob_pos() {
 	assert(0 != steps_);
-	uint32_t result = Size + get_knob_size() / 2;
+	uint32_t result = buttonsize_ + get_knob_size() / 2;
 	if (uint32_t const d = steps_ - 1)
 		result += pos_ * ((horizontal_ ? get_w() : get_h()) - 2 * result) / d;
 	return result;
@@ -199,8 +201,8 @@ void Scrollbar::set_knob_pos(int32_t pos)
 	uint32_t knobsize = get_knob_size();
 	int32_t extent = horizontal_ ? get_w() : get_h();
 
-	extent -= 2 * Size + knobsize;
-	pos -= Size + knobsize / 2;
+	extent -= 2 * buttonsize_ + knobsize;
+	pos -= buttonsize_ + knobsize / 2;
 
 	pos = (pos * static_cast<int32_t>(steps_)) / extent;
 	set_scrollpos(pos);
@@ -216,15 +218,15 @@ uint32_t Scrollbar::get_knob_size()
 {
 	uint32_t extent = horizontal_ ? get_w() : get_h();
 
-	if (extent <= 3 * Size)
-		return Size;
+	if (extent <= 3 * buttonsize_)
+		return buttonsize_;
 
-	uint32_t maxhalfsize = extent / 2 - Size;
+	uint32_t maxhalfsize = extent / 2 - buttonsize_;
 	uint32_t halfsize = (maxhalfsize * get_pagesize()) /
 		(steps_ + get_pagesize());
 	uint32_t size = 2 * halfsize;
-	if (size < Size)
-		size = Size;
+	if (size < buttonsize_)
+		size = buttonsize_;
 	return size;
 }
 
@@ -262,10 +264,19 @@ void Scrollbar::draw_button(RenderTarget & dst, const Area area, const Rect r) {
 		pic = pic_plus_;
 
 	if (pic) {
-		uint16_t cpw = pic->width();
-		uint16_t cph = pic->height();
+		double image_scale =
+			std::min(1.,
+						std::min(static_cast<double>(r.w - 4) / pic->width(),
+									static_cast<double>(r.h - 4) / pic->height()));
+		int blit_width = image_scale * pic->width();
+		int blit_height = image_scale * pic->height();
 
-		dst.blit(r.origin() + Point((r.w - cpw) / 2, (r.h - cph) / 2), pic);
+		dst.blitrect_scale(
+			Rect(r.origin() + Point((r.w - blit_width) / 2, (r.h - blit_height) / 2), blit_width, blit_height),
+			pic,
+			Rect(0, 0, pic->width(), pic->height()),
+			1.,
+			BlendMode::UseAlpha);
 	}
 
 	// Draw border
@@ -321,57 +332,63 @@ void Scrollbar::draw(RenderTarget & dst)
 	}
 
 	if (horizontal_) {
-		if ((2 * Size + knobsize) > static_cast<uint32_t>(get_w())) {
-			// Our owner obviously allocated too little space - draw something
-			// stupid
-			draw_button(dst, Minus, Rect(Point(0, 0), get_w(), get_h()));
+		if ((2 * buttonsize_ + knobsize) > static_cast<uint32_t>(get_w())) {
+			// Our owner allocated too little space
+			if (static_cast<uint32_t>(get_w()) >= 2 * buttonsize_) {
+				draw_button(dst, Minus, Rect(Point(0, 0), get_w() / 2, get_h()));
+				draw_button(dst, Plus, Rect(Point(get_w() - buttonsize_, 0), get_w() / 2, get_h()));
+			} else {
+				draw_button(dst, Minus, Rect(Point(0, 0), get_w(), get_h()));
+			}
 			return;
 		}
 
-		draw_button(dst, Minus, Rect(Point(0, 0), Size, get_h()));
-		draw_button(dst, Plus, Rect(Point(get_w() - Size, 0), Size, get_h()));
+		draw_button(dst, Minus, Rect(Point(0, 0), buttonsize_, get_h()));
+		draw_button(dst, Plus, Rect(Point(get_w() - buttonsize_, 0), buttonsize_, get_h()));
 		draw_button
 			(dst, Knob, Rect(Point(knobpos - knobsize / 2, 0), knobsize, get_h()));
 
-		assert(Size + knobsize / 2 <= knobpos);
+		assert(buttonsize_ + knobsize / 2 <= knobpos);
 		draw_area
 			(dst,
 			 MinusPage,
-			 Rect(Point(Size, 0), knobpos - Size - knobsize / 2, get_h()));
-		assert(knobpos + knobsize / 2 + Size <= static_cast<uint32_t>(get_w()));
+			 Rect(Point(buttonsize_, 0), knobpos - buttonsize_ - knobsize / 2, get_h()));
+		assert(knobpos + knobsize / 2 + buttonsize_ <= static_cast<uint32_t>(get_w()));
 		draw_area
 			(dst,
 			 PlusPage,
 			 Rect
 			 	(Point(knobpos + knobsize / 2, 0),
-			 	 get_w() - knobpos - knobsize / 2 - Size, get_h()));
+				 get_w() - knobpos - knobsize / 2 - buttonsize_, get_h()));
 	} else {
-		if ((2 * Size + knobsize) > static_cast<uint32_t>(get_h())) {
-			// Our owner obviously allocated too little space - draw something
-			// stupid
-			draw_button(dst, Minus, Rect(Point(0, 0), get_w(), get_h()));
+		if ((2 * buttonsize_ + knobsize) > static_cast<uint32_t>(get_h())) {
+			// Our owner allocated too little space
+			if (static_cast<uint32_t>(get_h()) >= 2 * buttonsize_) {
+				draw_button(dst, Minus, Rect(Point(0, 0), get_w(), get_h() / 2));
+				draw_button(dst, Plus, Rect(Point(0, get_h() - buttonsize_), get_w(), get_h() / 2));
+			} else {
+				draw_button(dst, Minus, Rect(Point(0, 0), get_w(), get_h()));
+			}
 			return;
 		}
 
-		draw_button(dst, Minus, Rect(Point(0, 0), get_w(), Size));
-		draw_button(dst, Plus, Rect(Point(0, get_h() - Size), get_w(), Size));
+		draw_button(dst, Minus, Rect(Point(0, 0), get_w(), buttonsize_));
+		draw_button(dst, Plus, Rect(Point(0, get_h() - buttonsize_), get_w(), buttonsize_));
 		draw_button
 			(dst, Knob, Rect(Point(0, knobpos - knobsize / 2), get_w(), knobsize));
 
-		assert(Size + knobsize / 2 <= knobpos);
+		assert(buttonsize_ + knobsize / 2 <= knobpos);
 		draw_area
 			(dst,
 			 MinusPage,
-			 Rect(Point(0, Size), get_w(), knobpos - Size - knobsize / 2));
-		assert
-			(knobpos + knobsize / 2 + Size <=
-			 static_cast<uint32_t>(get_h()));
+			 Rect(Point(0, buttonsize_), get_w(), knobpos - buttonsize_ - knobsize / 2));
+		assert(knobpos + knobsize / 2 + buttonsize_ <= static_cast<uint32_t>(get_h()));
 		draw_area
 			(dst,
 			 PlusPage,
 			 Rect
 			 	(Point(0, knobpos + knobsize / 2),
-			 	 get_w(), get_h() - knobpos - knobsize / 2 - Size));
+				 get_w(), get_h() - knobpos - knobsize / 2 - buttonsize_));
 	}
 }
 
@@ -461,4 +478,12 @@ bool Scrollbar::handle_mousemove
 	return true;
 }
 
+void Scrollbar::layout() {
+	if ((2 * kSize + get_knob_size()) > static_cast<uint32_t>((horizontal_ ? get_w() : get_h()))) {
+		buttonsize_ = kSize / 2;
+	} else {
+		buttonsize_ = kSize;
+	}
 }
+
+} // namespace UI

@@ -62,7 +62,8 @@ MapDetails::MapDetails
 	descr_box_(&main_box_, 0, 0, UI::Box::Horizontal,
 		  max_w_, descr_box_height_, padding_ / 2),
 	descr_label_(&main_box_, 0, 0, max_w_, labelh_, ""),
-	descr_(&descr_box_, 0, 0, max_w_ - indent_, descr_box_height_ - labelh_ - padding_, "")
+	 // -1 to prevent cropping of scrollbar
+	descr_(&descr_box_, 0, 0, max_w_ - indent_ - 1, descr_box_height_ - labelh_ - padding_, "")
 {
 	suggested_teams_box_ = new UI::SuggestedTeamsBox(this, 0, 0, UI::Box::Vertical,
 																	 padding_, indent_, labelh_, max_w_, 4 * labelh_);

@@ -1,4 +1,4 @@
-# Automatically created by Widelands bzr7574[artifacts] (Debug)
+# Automatically created by Widelands bzr7905[trunk] (Debug)
 
 [global]
 packet_version="1"
@@ -8,5 +8,5 @@ nr_players="5"
 name=_"Wisent Valley"
 author="Nasenbaer"
 descr=_"It seems as if this magical valley has been inhabited by wisents since the beginning of days. When your tribe came to this place, you were sure that it offered enough space for a peaceful life. But can your tribe live in peace with your neighbors?"
-hint=
-tags="artifacts,official,unbalanced"
+hint=_"The black player is surrounded in the center with no resources, so there are three different ways to use this map: without the black player for a normal 4 players’ map, with a black AI to add a complication to the expansion of the other players, or you can play as a challenge with the black player against the other 4 (VERY difficult)"
+tags="artifacts,unbalanced,official"
