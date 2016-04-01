@@ -130,8 +130,8 @@ void Table<void *>::add_column
 		scrollbar_ =
 			new Scrollbar
 				(get_parent(),
-				 get_x() + get_w() - 24, get_y() + headerheight_,
-				 24,                     get_h() - headerheight_,
+				 get_x() + get_w() - Scrollbar::kSize, get_y() + headerheight_,
+				 Scrollbar::kSize,                     get_h() - headerheight_,
 				 false);
 		scrollbar_->moved.connect(boost::bind(&Table::set_scrollpos, this, _1));
 		scrollbar_->set_steps(1);

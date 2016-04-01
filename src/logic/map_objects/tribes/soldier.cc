@@ -224,7 +224,8 @@ Soldier::Soldier(const SoldierDescr & soldier_descr) : Worker(soldier_descr)
 	defense_level_ = 0;
 	evade_level_   = 0;
 
-	current_health_    = get_max_health();
+	current_health_   = get_max_health();
+	retreat_health_   = 0;
 
 	combat_walking_   = CD_NONE;
 	combat_walkstart_ = 0;
@@ -238,6 +239,7 @@ void Soldier::init(EditorGameBase & egbase)
 	attack_level_  = 0;
 	defense_level_ = 0;
 	evade_level_   = 0;
+	retreat_health_ = 0;
 
 	current_health_ = get_max_health();
 
@@ -300,6 +302,11 @@ void Soldier::set_evade_level(const uint32_t evade) {
 	assert                 (evade <= descr().get_max_evade_level());
 
 	evade_level_ = evade;
+}
+void Soldier::set_retreat_health(const uint32_t retreat) {
+	assert(retreat <= get_max_health());
+
+	retreat_health_ = retreat;
 }
 
 uint32_t Soldier::get_level(TrainingAttribute const at) const {
@@ -696,12 +703,13 @@ void Soldier::start_task_attack
 	state.ivar3    = 0; // Counts how often the soldier is blocked in a row
 
 	state.ivar1    |= CF_RETREAT_WHEN_INJURED;
-	state.ui32var3 = kRetreatWhenHealthDropsBelowThisPercentage * get_max_health() / 100;
+	set_retreat_health(kRetreatWhenHealthDropsBelowThisPercentage * get_max_health() / 100);
 
 	// Injured soldiers are not allowed to attack
-	if (state.ui32var3 > get_current_health()) {
-		state.ui32var3 = get_current_health();
+	if (get_retreat_health() > get_current_health()) {
+		set_retreat_health(get_current_health());
 	}
+	molog("[attack] starting, retreat health: %d\n", get_retreat_health());
 }
 
 void Soldier::attack_update(Game & game, State & state)
@@ -883,14 +891,17 @@ void Soldier::attack_update(Game & game, State & state)
 
 	if
 		(!enemy ||
-		 ((state.ivar1 & CF_RETREAT_WHEN_INJURED) &&
-		  state.ui32var3 > get_current_health() &&
+		 (get_retreat_health() > get_current_health() &&
 		  defenders > 0))
 	{
 		// Injured soldiers will try to return to safe site at home.
-		if (state.ui32var3 > get_current_health() && defenders) {
-			state.coords = Coords::null();
-			state.objvar1 = nullptr;
+		if (get_retreat_health() > get_current_health()) {
+			assert(state.ivar1 & CF_RETREAT_WHEN_INJURED);
+			if (defenders) {
+				molog(" [attack] badly injured (%d), retreating...\n", get_current_health());
+				state.coords = Coords::null();
+				state.objvar1 = nullptr;
+			}
 		}
 		// The old militarysite gets replaced by a new one, so if "enemy" is not
 		// valid anymore, we either "conquered" the new building, or it was
@@ -1016,15 +1027,19 @@ void Soldier::start_task_defense
 	// Here goes 'configuration'
 	if (stayhome) {
 		state.ivar1 |= CF_DEFEND_STAYHOME;
+		set_retreat_health(0);
 	} else {
 		/* Flag defenders are not allowed to flee, to avoid abuses */
 		state.ivar1 |= CF_RETREAT_WHEN_INJURED;
-		state.ui32var3 = get_max_health() * kRetreatWhenHealthDropsBelowThisPercentage / 100;
+		set_retreat_health(get_max_health() * kRetreatWhenHealthDropsBelowThisPercentage / 100);
 
 		// Soldier must defend even if he starts injured
-		if (state.ui32var3 < get_current_health())
-			state.ui32var3 = get_current_health();
+		// (current health is below retreat treshold)
+		if (get_retreat_health() > get_current_health()) {
+			set_retreat_health(get_current_health());
+		}
 	}
+	molog("[defense] retreat health set: %d\n", get_retreat_health());
 }
 
 struct SoldierDistance {
@@ -1128,13 +1143,15 @@ void Soldier::defense_update(Game & game, State & state)
 
 	if
 		(soldiers.empty() ||
-		 ((state.ivar1 & CF_RETREAT_WHEN_INJURED) &&
-		  get_current_health() < state.ui32var3))
+		 (get_current_health() < get_retreat_health()))
 	{
+		if (get_retreat_health() > get_current_health()) {
+			assert(state.ivar1 & CF_RETREAT_WHEN_INJURED);
+		}
 
-		if (get_current_health() < state.ui32var3)
-			molog("[defense] I am heavily injured!\n");
-		else
+		if (get_current_health() < get_retreat_health()) {
+			molog("[defense] I am heavily injured (%d)!\n", get_current_health());
+		} else
 			molog("[defense] no enemy soldiers found, ending task\n");
 
 		// If no enemy was found, return home
@@ -1158,7 +1175,6 @@ void Soldier::defense_update(Game & game, State & state)
 					 descr().get_right_walk_anims(does_carry_ware()),
 					 true);
 		}
-
 		molog("[defense] return home\n");
 		if
 			(start_task_movepath
@@ -1602,7 +1618,7 @@ bool Soldier::check_node_blocked
 	if
 		(!attackdefense ||
 		 ((attackdefense->ivar1 & CF_RETREAT_WHEN_INJURED) &&
-		  attackdefense->ui32var3 > get_current_health()))
+		  get_retreat_health() > get_current_health()))
 	{
 		// Retreating or non-combatant soldiers act like normal bobs
 		return Bob::check_node_blocked(game, field, commit);
@@ -1718,6 +1734,7 @@ void Soldier::log_general_info(const EditorGameBase & egbase)
 		("Levels: %d/%d/%d/%d\n",
 		 health_level_, attack_level_, defense_level_, evade_level_);
 	molog ("Health:   %d/%d\n", current_health_, get_max_health());
+	molog ("Retreat:  %d\n", retreat_health_);
 	molog ("Attack:   %d-%d\n", get_min_attack(), get_max_attack());
 	molog ("Defense:  %d%%\n", get_defense());
 	molog ("Evade:    %d%%\n", get_evade());
@@ -1739,7 +1756,9 @@ Load/save support
 ==============================
 */
 
-constexpr uint8_t kCurrentPacketVersion = 2;
+constexpr uint8_t kCurrentPacketVersion = 3;
+// TODO(TiborB): This is only for map compatibility in regression tests, we should get rid of this ASAP
+constexpr uint8_t kOldPacketVersion = 2;
 
 Soldier::Loader::Loader() :
 		battle_(0)
@@ -1752,10 +1771,16 @@ void Soldier::Loader::load(FileRead & fr)
 
 	try {
 		uint8_t packet_version = fr.unsigned_8();
-		if (packet_version == kCurrentPacketVersion) {
+		if (packet_version == kCurrentPacketVersion || packet_version == kOldPacketVersion) {
 
 			Soldier & soldier = get<Soldier>();
 			soldier.current_health_ = fr.unsigned_32();
+			if (packet_version == kCurrentPacketVersion) {
+				soldier.retreat_health_ = fr.unsigned_32();
+			} else {
+				// not ideal but will be used only for regression tests
+				soldier.retreat_health_ = 0;
+			}
 
 			soldier.health_level_ =
 				std::min(fr.unsigned_32(), soldier.descr().get_max_health_level());
@@ -1768,6 +1793,9 @@ void Soldier::Loader::load(FileRead & fr)
 
 			if (soldier.current_health_ > soldier.get_max_health())
 				soldier.current_health_ = soldier.get_max_health();
+
+			if (soldier.retreat_health_ > soldier.get_max_health())
+				soldier.retreat_health_ = soldier.get_max_health();
 
 			soldier.combat_walking_ = static_cast<CombatWalkingDir>(fr.unsigned_8());
 			if (soldier.combat_walking_ != CD_NONE) {
@@ -1816,6 +1844,7 @@ void Soldier::do_save
 
 	fw.unsigned_8(kCurrentPacketVersion);
 	fw.unsigned_32(current_health_);
+	fw.unsigned_32(retreat_health_);
 	fw.unsigned_32(health_level_);
 	fw.unsigned_32(attack_level_);
 	fw.unsigned_32(defense_level_);

@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-03-02 08:54+0000\n"
-"PO-Revision-Date: 2016-03-04 16:27+0000\n"
+"POT-Creation-Date: 2016-03-18 11:30+0000\n"
+"PO-Revision-Date: 2016-03-28 10:08+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Portuguese (http://www.transifex.com/widelands/widelands/language/pt/)\n"
 "MIME-Version: 1.0\n"
@@ -126,7 +126,7 @@ msgstr ""
 #: ../../data/world/immovables/manmade/debris01/init.lua:5
 #: ../../data/world/immovables/manmade/debris02/init.lua:5
 msgid "Debris"
-msgstr ""
+msgstr "Escombros"
 
 #: ../../data/world/immovables/manmade/snowman/init.lua:5
 msgid "Snowman"
@@ -727,7 +727,7 @@ msgstr ""
 
 #: ../../data/world/init.lua:17
 msgid "Artifacts"
-msgstr ""
+msgstr "Artefatos"
 
 #: ../../data/world/init.lua:17
 msgid "These immovables are used by the win condition “Artifacts”."
@@ -799,7 +799,7 @@ msgstr "Verão"
 
 #: ../../data/world/terrains/init.lua:9
 msgid "Wasteland"
-msgstr ""
+msgstr "Baldio"
 
 #: ../../data/world/terrains/init.lua:14
 msgid "Winter"

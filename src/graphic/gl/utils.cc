@@ -204,6 +204,16 @@ void State::unbind_texture_if_bound(const GLuint texture) {
 	}
 }
 
+void State::delete_texture(const GLuint texture)
+{
+	unbind_texture_if_bound(texture);
+	glDeleteTextures(1, &texture);
+
+	if (current_framebuffer_texture_ == texture) {
+		current_framebuffer_texture_ = 0;
+	}
+}
+
 void State::bind_framebuffer(const GLuint framebuffer, const GLuint texture) {
 	if (current_framebuffer_ == framebuffer && current_framebuffer_texture_ == texture) {
 		return;
