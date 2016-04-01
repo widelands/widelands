@@ -16,6 +16,7 @@ wl_library(wui_chat_ui
     graphic
     graphic_color
     graphic_text
+    graphic_text_layout
     logic
     profile
     ui_basic

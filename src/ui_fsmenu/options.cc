@@ -154,7 +154,7 @@ FullscreenMenuOptions::FullscreenMenuOptions
 
 	sb_maxfps_(&box_interface_, 0, 0, column_width_ / 2, column_width_ / 4,
 				  opt.maxfps, 0, 99,
-				  _("Maximum FPS:"), ""),
+				  _("Maximum FPS:")),
 
 
 	// Windows options
@@ -166,17 +166,13 @@ FullscreenMenuOptions::FullscreenMenuOptions
 	sb_dis_panel_
 			(&box_windows_, 0, 0, column_width_, 200,
 			 opt.panel_snap_distance, 0, 99, _("Distance for windows to snap to other panels:"),
-			 /** TRANSLATORS: Options: Distance for windows to snap to  other panels: */
-			 /** TRANSLATORS: This will have a number added in front of it */
-			 ngettext("pixel", "pixels", opt.panel_snap_distance)),
+			 UI::SpinBox::Units::kPixels),
 
 	sb_dis_border_
 			(&box_windows_, 0, 0, column_width_, 200,
 			 opt.border_snap_distance, 0, 99,
 			 _("Distance for windows to snap to borders:"),
-			 /** TRANSLATORS: Options: Distance for windows to snap to borders: */
-			 /** TRANSLATORS: This will have a number added in front of it */
-			 ngettext("pixel", "pixels", opt.border_snap_distance)),
+			 UI::SpinBox::Units::kPixels),
 
 	// Sound options
 	music_ (&box_sound_, Point(0, 0), _("Enable Music"), "", column_width_),
@@ -188,18 +184,16 @@ FullscreenMenuOptions::FullscreenMenuOptions
 	sb_autosave_
 		(&box_saving_, 0, 0, column_width_, 250,
 		 opt.autosave / 60, 0, 100, _("Save game automatically every:"),
-		 /** TRANSLATORS: Options: Save game automatically every: */
-		 /** TRANSLATORS: This will have a number added in front of it */
-		 ngettext("minute", "minutes", opt.autosave / 60),
+		 UI::SpinBox::Units::kMinutes,
 		 g_gr->images().get("images/ui_basic/but3.png"), UI::SpinBox::Type::kBig),
 
 	sb_rolling_autosave_
 		(&box_saving_, 0, 0, column_width_, 250,
 		 opt.rolling_autosave, 1, 20, _("Maximum number of autosave files:"),
-		 "",
+		 UI::SpinBox::Units::kNone,
 		 g_gr->images().get("images/ui_basic/but3.png"), UI::SpinBox::Type::kBig),
 
-	nozip_(&box_saving_, Point(0, 0), _("Do not zip widelands data files (maps, replays and savegames)"),
+	zip_(&box_saving_, Point(0, 0), _("Compress widelands data files (maps, replays and savegames)"),
 			 "", column_width_),
 	write_syncstreams_(&box_saving_, Point(0, 0), _("Write syncstreams in network games to debug desyncs"),
 							  "", column_width_),
@@ -217,7 +211,7 @@ FullscreenMenuOptions::FullscreenMenuOptions
 	// Language options
 	label_language_(&box_language_, _("Language"), UI::Align::kLeft),
 	language_list_(&box_language_, 0, 0, column_width_ / 2,
-						get_inner_h() - tab_panel_y_ - buth_ - hmargin_ - 5 * padding_,
+						get_inner_h() - tab_panel_y_ - 2 * buth_ - hmargin_ - 5 * padding_,
 						true),
 
 	os_(opt)
@@ -267,7 +261,7 @@ FullscreenMenuOptions::FullscreenMenuOptions
 	// Saving
 	box_saving_.add(&sb_autosave_, UI::Align::kLeft);
 	box_saving_.add(&sb_rolling_autosave_, UI::Align::kLeft);
-	box_saving_.add(&nozip_, UI::Align::kLeft);
+	box_saving_.add(&zip_, UI::Align::kLeft);
 	box_saving_.add(&write_syncstreams_, UI::Align::kLeft);
 
 	// Game
@@ -288,25 +282,6 @@ FullscreenMenuOptions::FullscreenMenuOptions
 
 	/** TRANSLATORS Options: Save game automatically every: */
 	sb_autosave_     .add_replacement(0, _("Off"));
-	for (UI::Button* temp_button : sb_autosave_.get_buttons()) {
-		temp_button->sigclicked.connect
-				(boost::bind
-					(&FullscreenMenuOptions::update_sb_autosave_unit,
-					 boost::ref(*this)));
-	}
-	for (UI::Button* temp_button : sb_dis_panel_.get_buttons()) {
-		temp_button->sigclicked.connect
-				(boost::bind
-					(&FullscreenMenuOptions::update_sb_dis_panel_unit,
-					 boost::ref(*this)));
-	}
-
-	for (UI::Button* temp_button : sb_dis_border_.get_buttons()) {
-		temp_button->sigclicked.connect
-				(boost::bind
-					(&FullscreenMenuOptions::update_sb_dis_border_unit,
-					 boost::ref(*this)));
-	}
 
 	// Fill in data
 	// Interface options
@@ -365,8 +340,8 @@ FullscreenMenuOptions::FullscreenMenuOptions
 	message_sound_        .set_state(opt.message_sound);
 
 	// Saving options
-	nozip_                .set_state(opt.nozip);
-	write_syncstreams_   .set_state(opt.write_syncstreams);
+	zip_                  .set_state(opt.zip);
+	write_syncstreams_    .set_state(opt.write_syncstreams);
 
 	// Game options
 	auto_roadbuild_mode_  .set_state(opt.auto_roadbuild_mode);
@@ -379,17 +354,6 @@ FullscreenMenuOptions::FullscreenMenuOptions
 	language_list_.focus();
 }
 
-void FullscreenMenuOptions::update_sb_autosave_unit() {
-	sb_autosave_.set_unit(ngettext("minute", "minutes", sb_autosave_.get_value()));
-}
-
-void FullscreenMenuOptions::update_sb_dis_panel_unit() {
-	sb_dis_panel_.set_unit(ngettext("pixel", "pixels", sb_dis_panel_.get_value()));
-}
-
-void FullscreenMenuOptions::update_sb_dis_border_unit() {
-	sb_dis_border_.set_unit(ngettext("pixel", "pixels", sb_dis_border_.get_value()));
-}
 
 void FullscreenMenuOptions::add_languages_to_list(const std::string& current_locale) {
 
@@ -478,8 +442,8 @@ OptionsCtrl::OptionsStruct FullscreenMenuOptions::get_values() {
 	// Saving options
 	os_.autosave              = sb_autosave_.get_value();
 	os_.rolling_autosave      = sb_rolling_autosave_.get_value();
-	os_.nozip                 = nozip_.get_state();
-	os_.write_syncstreams = write_syncstreams_.get_state();
+	os_.zip                   = zip_.get_state();
+	os_.write_syncstreams     = write_syncstreams_.get_state();
 
 	// Game options
 	os_.auto_roadbuild_mode   = auto_roadbuild_mode_.get_state();
@@ -546,7 +510,7 @@ OptionsCtrl::OptionsStruct OptionsCtrl::options_struct(uint32_t active_tab) {
 	// Saving options
 	opt.autosave = opt_section_.get_int("autosave", DEFAULT_AUTOSAVE_INTERVAL * 60);
 	opt.rolling_autosave = opt_section_.get_int("rolling_autosave", 5);
-	opt.nozip = opt_section_.get_bool("nozip", false);
+	opt.zip = !opt_section_.get_bool("nozip", false);
 	opt.write_syncstreams = opt_section_.get_bool("write_syncstreams", true);
 
 	// Game options
@@ -589,8 +553,8 @@ void OptionsCtrl::save_options() {
 	// Saving options
 	opt_section_.set_int("autosave",               opt.autosave * 60);
 	opt_section_.set_int("rolling_autosave",       opt.rolling_autosave);
-	opt_section_.set_bool("nozip",                 opt.nozip);
-	opt_section_.set_bool("write_syncstreams",    opt.write_syncstreams);
+	opt_section_.set_bool("nozip",                !opt.zip);
+	opt_section_.set_bool("write_syncstreams",     opt.write_syncstreams);
 
 	// Game options
 	opt_section_.set_bool("auto_roadbuild_mode",   opt.auto_roadbuild_mode);

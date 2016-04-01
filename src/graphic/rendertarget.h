@@ -61,7 +61,7 @@ public:
 								const RGBColor& color,
 								float width);
 	void draw_rect(const Rect&, const RGBColor&);
-	void fill_rect(const Rect&, const RGBAColor&);
+	void fill_rect(const Rect&, const RGBAColor&, BlendMode blend_mode = BlendMode::Copy);
 	void brighten_rect(const Rect&, int32_t factor);
 
 	void blit(const Point& dst,

@@ -38,13 +38,7 @@ struct ActionConfirm : public UI::Window {
 		(InteractivePlayer & parent,
 		 const std::string & windowtitle,
 		 const std::string & message,
-		 Widelands::Building & building);
-
-	ActionConfirm
-		(InteractivePlayer & parent,
-		 const std::string & windowtitle,
-		 const std::string & message,
-		 Widelands::Ship & ship);
+		 Widelands::MapObject& map_object);
 
 	InteractivePlayer & iaplayer() const {
 		return dynamic_cast<InteractivePlayer&>(*get_parent());
@@ -139,17 +133,13 @@ ActionConfirm::ActionConfirm
 	(InteractivePlayer & parent,
 	 const std::string & windowtitle,
 	 const std::string & message,
-	 Widelands::Building & building)
+	 Widelands::MapObject & map_object)
 	:
 	UI::Window
 		(&parent, "building_action_confirm", 0, 0, 200, 120, windowtitle),
-	object_ (&building)
+	object_ (&map_object)
 {
-	new UI::MultilineTextarea
-		(this,
-		 0, 0, 200, 74,
-		 (boost::format(message) % building.descr().descname()).str(),
-		 UI::Align::kCenter);
+	new UI::MultilineTextarea(this, 0, 0, 200, 74, message, UI::Align::kCenter);
 
 	UI::Button * okbtn =
 		new UI::Button
@@ -172,42 +162,6 @@ ActionConfirm::ActionConfirm
 }
 
 
-ActionConfirm::ActionConfirm
-	(InteractivePlayer & parent,
-	 const std::string & windowtitle,
-	 const std::string & message,
-	 Widelands::Ship & ship)
-	:
-	UI::Window(&parent, "ship_action_confirm", 0, 0, 200, 120, windowtitle),
-	object_ (&ship)
-{
-	new UI::MultilineTextarea
-		(this,
-		 0, 0, 200, 74,
-		 message,
-		 UI::Align::kCenter);
-
-	UI::Button * okbtn =
-		new UI::Button
-			(this, "ok",
-			 6, 80, 80, 34,
-			 g_gr->images().get("images/ui_basic/but4.png"),
-			 g_gr->images().get("images/wui/menu_okay.png"));
-	okbtn->sigclicked.connect(boost::bind(&ActionConfirm::ok, this));
-
-	UI::Button * cancelbtn =
-		new UI::Button
-			(this, "abort",
-			 114, 80, 80, 34,
-			 g_gr->images().get("images/ui_basic/but4.png"),
-			 g_gr->images().get("images/wui/menu_abort.png"));
-	cancelbtn->sigclicked.connect(boost::bind(&ActionConfirm::die, this));
-
-	center_to_parent();
-	cancelbtn->center_mouse();
-}
-
-
 /*
 ===============
 Create the panels for bulldoze confirmation.
@@ -221,7 +175,7 @@ BulldozeConfirm::BulldozeConfirm
 	ActionConfirm
 		(parent,
 		 _("Destroy building?"),
-		 _("Do you really want to destroy this %s?"),
+		 (boost::format(_("Do you really want to destroy this %s?")) % building.descr().descname()).str(),
 		 building),
 	todestroy_(todestroy ? todestroy : &building)
 {
@@ -285,7 +239,7 @@ DismantleConfirm::DismantleConfirm
 	ActionConfirm
 		(parent,
 		 _("Dismantle building?"),
-		 _("Do you really want to dismantle this %s?"),
+		 (boost::format(_("Do you really want to dismantle this %s?")) % building.descr().descname()).str(),
 		 building)
 {
 	// Nothing special to do
@@ -345,7 +299,7 @@ EnhanceConfirm::EnhanceConfirm
 	ActionConfirm
 		(parent,
 		 _("Enhance building?"),
-		 _("Do you really want to enhance this %s?"),
+		 (boost::format(_("Do you really want to enhance this %s?")) % building.descr().descname()).str(),
 		 building),
 	id_(id)
 {
@@ -396,7 +350,11 @@ void EnhanceConfirm::ok()
  */
 ShipSinkConfirm::ShipSinkConfirm(InteractivePlayer & parent, Widelands::Ship & ship)
 	:
-	ActionConfirm(parent, _("Sink the ship?"), _("Do you really want to sink this ship?"), ship)
+	ActionConfirm(parent,
+					  _("Sink the ship?"),
+					  /** TRANSLATORS: %s is a ship name */
+					  (boost::format(_("Do you really want to sink %s?")) % ship.get_shipname()).str(),
+					  ship)
 {
 	// Nothing special to do
 }
@@ -436,7 +394,10 @@ void ShipSinkConfirm::ok()
  */
 ShipCancelExpeditionConfirm::ShipCancelExpeditionConfirm(InteractivePlayer & parent, Widelands::Ship & ship)
 	:
-	ActionConfirm(parent, _("Sink the ship?"), _("Do you really want to cancel the active expedition?"), ship)
+	ActionConfirm(parent,
+					  _("Cancel expedition?"),
+					  _("Do you really want to cancel the active expedition?"),
+					  ship)
 {
 	// Nothing special to do
 }

@@ -1,4 +1,4 @@
-# Automatically created by Widelands bzr7574[artifacts] (Debug)
+# Automatically created by Widelands bzr7905[trunk] (Debug)
 
 [global]
 packet_version="1"
@@ -12,6 +12,5 @@ hint=
 tags="1v1,artifacts,official"
 
 [teams00]
-team1=0
-team2=2
-# blue vs. yellow
+team1="0"
+team2="2"
