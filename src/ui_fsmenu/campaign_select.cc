@@ -414,7 +414,8 @@ void FullscreenMenuCampaignMapSelect::entry_selected() {
 		map.set_filename(campmapfile);
 		ml->preload_map(true);
 
-		MapAuthorData authors(map.get_author());
+		// Localizing this, because some author fields now have "edited by" text.
+		MapAuthorData authors(_(map.get_author()));
 
 		ta_author_.set_text(authors.get_names());
 		if (is_tutorial_) {

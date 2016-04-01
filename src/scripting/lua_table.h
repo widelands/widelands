@@ -93,6 +93,7 @@ public:
 	template <typename KeyType> bool has_key(const KeyType& key) const {
 		try {
 			get_existing_table_value(key);
+			lua_pop(L_, 1);
 			return true;
 		}
 		catch (LuaTableKeyError&) {

@@ -1,0 +1,16 @@
+# Automatically created by Widelands bzr7905[trunk] (Debug)
+
+[global]
+packet_version="1"
+map_w="192"
+map_h="192"
+nr_players="4"
+name=_"Last Survivors"
+author="fk"
+descr=_"Four tribes fighting for dominance in a stark area. Resources are scattered all over the map."
+hint=
+tags="2teams,ffa,official"
+
+[teams00]
+team1="0,2"
+team2="1,3"

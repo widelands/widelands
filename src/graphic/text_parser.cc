@@ -28,6 +28,7 @@
 #include "graphic/font_handler1.h"
 #include "graphic/text/bidi.h"
 #include "graphic/text/font_set.h"
+#include "graphic/text_layout.h"
 #include "helper.h"
 
 namespace UI {
@@ -135,11 +136,17 @@ bool TextParser::parse_textblock
 			}
 
 			if (next_break == std::string::npos) {
-				if (line.size())
-					words.push_back(line);
+				if (line.size()) {
+					std::string word = line;
+					replace_entities(&word);
+					words.push_back(word);
+				}
 				break;
-			} else if (next_break)
-				words.push_back(line.substr(0, next_break));
+			} else if (next_break) {
+				std::string word = line.substr(0, next_break);
+				replace_entities(&word);
+				words.push_back(word);
+			}
 			line_breaks.push_back(words.size());
 			line.erase(0, next_break + 4);
 		}
