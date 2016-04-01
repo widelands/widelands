@@ -205,8 +205,6 @@ void EditorHelp::entry_selected(const std::string& key,
 			cr->push_arg(descr->name());
 			break;
 		}
-		default:
-			throw wexception("EditorHelp: No Type defined for tab.");
 		}
 
 		cr->resume();

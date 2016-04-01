@@ -1042,8 +1042,8 @@ void WLApplication::mainmenu()
 			case FullscreenMenuBase::MenuTarget::kEditor:
 				EditorInteractive::run_editor(filename_, script_to_run_);
 				break;
-			default:
 			case FullscreenMenuBase::MenuTarget::kExit:
+			default:
 				return;
 			}
 		} catch (const WLWarning & e) {

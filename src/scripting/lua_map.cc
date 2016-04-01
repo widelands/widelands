@@ -665,7 +665,10 @@ int upcasted_map_object_to_lua(lua_State * L, MapObject * mo) {
 		return CAST_TO_LUA(MilitarySite);
 	case MapObjectType::TRAININGSITE:
 		return CAST_TO_LUA(TrainingSite);
-
+	case (MapObjectType::MAPOBJECT):
+	case (MapObjectType::BATTLE):
+	case (MapObjectType::BOB):
+	case (MapObjectType::WARE):
 	default:
 		throw LuaError((boost::format("upcasted_map_object_to_lua: Unknown %i") %
 		                static_cast<int>(mo->descr().type())).str());
@@ -1539,9 +1542,6 @@ int LuaImmovableDescription::get_owner_type(lua_State * L) {
 		break;
 	case MapObjectDescr::OwnerType::kTribe:
 		lua_pushstring(L, "tribe");
-		break;
-	default:
-		NEVER_HERE();
 	}
 	return 1;
 }
@@ -3139,7 +3139,18 @@ int LuaMapObject::get_descr(lua_State * L) {
 		case (MapObjectType::IMMOVABLE):
 			return CAST_TO_LUA(ImmovableDescr, LuaImmovableDescription);
 		case (MapObjectType::WORKER):
+		case (MapObjectType::CARRIER):
+		case (MapObjectType::SOLDIER):
 			return CAST_TO_LUA(WorkerDescr, LuaWorkerDescription);
+		case (MapObjectType::MAPOBJECT):
+		case (MapObjectType::BATTLE):
+		case (MapObjectType::BOB):
+		case (MapObjectType::CRITTER):
+		case (MapObjectType::SHIP):
+		case (MapObjectType::FLAG):
+		case (MapObjectType::ROAD):
+		case (MapObjectType::PORTDOCK):
+		case (MapObjectType::WARE):
 		default:
 			return CAST_TO_LUA(MapObjectDescr, LuaMapObjectDescription);
 	}
@@ -4462,10 +4473,6 @@ int LuaShip::get_state(lua_State* L) {
 				break;
 			case Ship::ShipStates::kSinkAnimation:
 				lua_pushstring(L, "sink_animation");
-				break;
-			default:
-				lua_pushnil(L);
-				return 0;
 			}
 		return 1;
 	}

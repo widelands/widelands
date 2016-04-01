@@ -75,6 +75,7 @@ void FillRectProgram::draw(const std::vector<Arguments>& arguments) {
 			glDisable(GL_BLEND);
 			break;
 
+		case BlendMode::Default:
 		default:
 			break;
 		}
@@ -168,6 +169,7 @@ void FillRectProgram::draw(const std::vector<Arguments>& arguments) {
 			glEnable(GL_BLEND);
 			break;
 
+		case BlendMode::Default:
 		default:
 			break;
 		}

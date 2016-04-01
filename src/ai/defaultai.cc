@@ -221,9 +221,6 @@ DefaultAI::DefaultAI(Game& ggame, PlayerNumber const pid, DefaultAI::Type const 
 					   break;
 				   }
 			   }
-			   	break;
-				default:
-					NEVER_HERE();
 		   }
 		});
 }
@@ -461,6 +458,7 @@ void DefaultAI::think() {
 				check_enemy_sites(gametime);
 				set_taskpool_task_time(gametime +   19 * 1000, SchedulerTaskId::kCheckEnemySites);
 				break;
+			case SchedulerTaskId::kUnset :
 			default:
 				NEVER_HERE();
 			}
@@ -5383,6 +5381,7 @@ int32_t DefaultAI::calculate_strength(const std::vector<Widelands::Soldier*> sol
 				defense += static_cast<float>(95 -  8 * soldier->get_defense_level()) / 100;
 				evade += static_cast<float>(70 - 16 * soldier->get_evade_level()) / 100;
 				break;
+			case (Tribes::kNone):
 			default:
 				NEVER_HERE();
 		}
@@ -5538,7 +5537,7 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 			case DefaultAI::Type::kWeak:
 				training_score = -4;
 				break;
-			default:
+			case DefaultAI::Type::kVeryWeak:
 				training_score = -2;
 			}
 	} else if (persistent_data->last_soldier_trained + 10 * 60 * 1000 < gametime) {
@@ -5550,7 +5549,7 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 			case DefaultAI::Type::kWeak:
 				training_score = -2;
 				break;
-			default:
+			case DefaultAI::Type::kVeryWeak:
 				training_score = -1;
 			}
 	}

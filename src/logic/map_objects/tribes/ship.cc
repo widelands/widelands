@@ -694,6 +694,9 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 		}
 	}
 
+	case ShipStates::kExpeditionWaiting:
+	case ShipStates::kExpeditionPortspaceFound:
+	case ShipStates::kSinkRequest:
 	default: {
 		// wait for input
 		start_task_idle(game, descr().main_animation(), 1500);
@@ -975,8 +978,6 @@ void Ship::draw(const EditorGameBase& game, RenderTarget& dst, const Point& pos)
 		case (ShipStates::kSinkRequest):
 		case (ShipStates::kSinkAnimation):
 			break;
-		default:
-			NEVER_HERE();
 		}
 		statistics_string = (boost::format("<font color=%s>%s</font>")
 									% UI_FONT_CLR_OK.hex_value()

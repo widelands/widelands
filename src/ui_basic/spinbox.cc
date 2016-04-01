@@ -26,6 +26,7 @@
 
 #include "base/i18n.h"
 #include "base/log.h"
+#include "base/macros.h"
 #include "base/wexception.h"
 #include "graphic/font_handler1.h"
 #include "graphic/text/font_set.h"
@@ -331,8 +332,10 @@ const std::string SpinBox::unit_text(int32_t value) const {
 	case (Units::kPercent):
 		/** TRANSLATORS: A spinbox unit */
 		return (boost::format(_("%i %%")) % value).str();
-	default:
+	case (Units::kNone):
 		return (boost::format("%d") % value).str();
+	default:
+		NEVER_HERE();
 	}
 }
 
