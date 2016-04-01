@@ -25,8 +25,8 @@ rt(
    h2(_[[Reporting Bugs]]) ..
    p(_[[If you encounter a bug, please report it to our bugtracker:]]) ..
    p(a([[https://bugs.launchpad.net/widelands]])) ..
+   p(_[[Please provide enough background information. Tell us:]]) ..
    p(
-       listitem_bullet(_[[Please provide enough background information. Tell us:]]) ..
        listitem_bullet(_[[Detailed steps on how to trigger the bug, if possible.]]) ..
        listitem_bullet(_[[What you expected to happen when performing the steps and what actually happened.]]) ..
        listitem_bullet(_[[Which version of Widelands you are running (i.e. either the build number or the revision number if you are running a development version or a daily build.)]]) ..
