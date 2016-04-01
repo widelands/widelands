@@ -1385,7 +1385,9 @@ void ProductionProgram::ActCheckSoldier::execute
 		ps.set_production_result(_("No soldier to train!"));
 		return ps.program_end(game, Skipped);
 	}
-	ps.molog("  Checking soldier (%u) level %d)\n", attribute, level);
+	ps.molog("  Checking soldier (%u) level %d)\n",
+				static_cast<unsigned int>(attribute),
+				static_cast<unsigned int>(level));
 
 	const std::vector<Soldier *>::const_iterator soldiers_end = soldiers.end();
 	for (std::vector<Soldier *>::const_iterator it = soldiers.begin();; ++it) {
@@ -1471,7 +1473,9 @@ void ProductionProgram::ActTrain::execute
 
 	ps.molog
 		("  Training soldier's %u (%d to %d)",
-		 attribute, level, target_level);
+		 static_cast<unsigned int>(attribute),
+		 static_cast<unsigned int>(level),
+		 static_cast<unsigned int>(target_level));
 
 	for (;; ++it) {
 		if (it == soldiers_end) {

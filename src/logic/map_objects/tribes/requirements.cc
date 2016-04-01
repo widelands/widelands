@@ -244,11 +244,11 @@ static Requirements read_attribute
 			(
 			 "expected kHealth (%u), kAttack (%u), kDefense (%u), kEvade "
 			 "(%u) or kTotal (%u) but found unknown attribute value (%u)",
-				TrainingAttribute::kHealth,
-				TrainingAttribute::kAttack,
-				TrainingAttribute::kDefense,
-				TrainingAttribute::kEvade,
-				TrainingAttribute::kTotal,
+				static_cast<unsigned int>(TrainingAttribute::kHealth),
+				static_cast<unsigned int>(TrainingAttribute::kAttack),
+				static_cast<unsigned int>(TrainingAttribute::kDefense),
+				static_cast<unsigned int>(TrainingAttribute::kEvade),
+				static_cast<unsigned int>(TrainingAttribute::kTotal),
 				temp_at);
 	}
 	TrainingAttribute const at  = static_cast<TrainingAttribute>(temp_at);

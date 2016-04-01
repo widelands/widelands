@@ -1006,8 +1006,8 @@ void Ship::log_general_info(const EditorGameBase& egbase) {
 				 % lastdock_.get(egbase)->get_positions(egbase)[0].y).str().c_str() :
 				"-");
 
-	molog("In state: %d (%s)\n",
-		ship_state_,
+	molog("In state: %u (%s)\n",
+		static_cast<unsigned int>(ship_state_),
 		(expedition_) ? "expedition": "transportation");
 
 	if (destination_.is_set() && get_position().field->get_immovable() == destination_.get(egbase)) {
