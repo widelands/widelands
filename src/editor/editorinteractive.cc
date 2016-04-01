@@ -692,6 +692,14 @@ void EditorInteractive::map_changed(const MapWas& action) {
 					child->die();
 				}
 			}
+
+			// Make sure that we will start at coordinates (0,0).
+			mainview_move(0, 0);
+			set_sel_pos
+				(Widelands::NodeAndTriangle<>
+					(Widelands::Coords(0, 0),
+					 Widelands::TCoords<>
+						(Widelands::Coords(0, 0), Widelands::TCoords<>::D)));
 			break;
 
 		case MapWas::kGloballyMutated:
