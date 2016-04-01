@@ -688,7 +688,7 @@ void SoundHandler::set_fx_volume(int32_t volume) {
 }
 
 /** Callback to notify \ref SoundHandler that a song has finished playing.
- * Usually, another song from the same songset will be started.\n
+ * Usually, another song from the same songset will be started.
  * There is a special case for the intro screen's music: only one song will be
  * played. If the user has not clicked the mouse or pressed escape when the song
  * finishes, Widelands will automatically go on to the main menu.

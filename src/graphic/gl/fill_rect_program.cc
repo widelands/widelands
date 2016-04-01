@@ -76,7 +76,6 @@ void FillRectProgram::draw(const std::vector<Arguments>& arguments) {
 			break;
 
 		case BlendMode::Default:
-		default:
 			break;
 		}
 
@@ -170,7 +169,6 @@ void FillRectProgram::draw(const std::vector<Arguments>& arguments) {
 			break;
 
 		case BlendMode::Default:
-		default:
 			break;
 		}
 	}

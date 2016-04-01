@@ -697,7 +697,7 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 	case ShipStates::kExpeditionWaiting:
 	case ShipStates::kExpeditionPortspaceFound:
 	case ShipStates::kSinkRequest:
-	default: {
+	case ShipStates::kSinkAnimation: {
 		// wait for input
 		start_task_idle(game, descr().main_animation(), 1500);
 		return;

@@ -459,7 +459,6 @@ void DefaultAI::think() {
 				set_taskpool_task_time(gametime +   19 * 1000, SchedulerTaskId::kCheckEnemySites);
 				break;
 			case SchedulerTaskId::kUnset :
-			default:
 				NEVER_HERE();
 			}
 	}
@@ -5319,7 +5318,7 @@ void DefaultAI::lose_building(const Building& b) {
 // NOTE: This is not needed anymore and it seems it is not missed neither
 bool DefaultAI::check_supply(const BuildingObserver& bo) {
 	size_t supplied = 0;
-	for (const int16_t& temp_inputs : bo.inputs) {
+	for (const Widelands::DescriptionIndex& temp_inputs : bo.inputs) {
 		for (const BuildingObserver& temp_building : buildings_) {
 			if (temp_building.cnt_built &&
 			    std::find(temp_building.outputs.begin(), temp_building.outputs.end(), temp_inputs) !=
@@ -5382,7 +5381,6 @@ int32_t DefaultAI::calculate_strength(const std::vector<Widelands::Soldier*> sol
 				evade += static_cast<float>(70 - 16 * soldier->get_evade_level()) / 100;
 				break;
 			case (Tribes::kNone):
-			default:
 				NEVER_HERE();
 		}
 

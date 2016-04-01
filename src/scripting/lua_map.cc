@@ -668,6 +668,7 @@ int upcasted_map_object_to_lua(lua_State * L, MapObject * mo) {
 	case (MapObjectType::MAPOBJECT):
 	case (MapObjectType::BATTLE):
 	case (MapObjectType::BOB):
+	case (MapObjectType::FLEET):
 	case (MapObjectType::WARE):
 	default:
 		throw LuaError((boost::format("upcasted_map_object_to_lua: Unknown %i") %
@@ -3146,6 +3147,7 @@ int LuaMapObject::get_descr(lua_State * L) {
 		case (MapObjectType::BATTLE):
 		case (MapObjectType::BOB):
 		case (MapObjectType::CRITTER):
+		case (MapObjectType::FLEET):
 		case (MapObjectType::SHIP):
 		case (MapObjectType::FLAG):
 		case (MapObjectType::ROAD):

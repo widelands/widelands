@@ -100,7 +100,6 @@ CheckStep
 
 Predicates used in path finding and find functions.
 */
-const FindImmovable & find_immovable_always_true();
 
 struct FindBob {
 	//  Return true if this bob should be returned by find_bobs.
