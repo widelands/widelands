@@ -168,8 +168,8 @@ function worker_help_string(tribe, worker_description)
       result = result .. rt(h3(_"Health"))
       result = result .. rt(p(
          listitem_bullet(
-            -- TRANSLATORS: Soldier health / defense / evade points
-            ngettext("Starts with %1% point.", "Starts with %1% points.", worker_description.base_health):bformat(worker_description.base_health)) ..
+            -- TRANSLATORS: Soldier health / defense / evade points. A 5 digit number.
+            (_"Starts at %1% points."):bformat(worker_description.base_health)) ..
          listitem_bullet(
             -- TRANSLATORS: Soldier health / attack defense / evade points
             ngettext("Increased by %1% point for each level.", "Increased by %1% points for each level.", worker_description.health_incr_per_level):bformat(worker_description.health_incr_per_level)) ..
@@ -179,6 +179,7 @@ function worker_help_string(tribe, worker_description)
 
       result = result .. rt(h3(_"Attack"))
       result = result .. rt(p(
+      -- TRANSLATORS: Points are 4 digit numbers.
          listitem_bullet(_"A random value between %1% and %2% points is added to each attack."):bformat(worker_description.base_min_attack, worker_description.base_max_attack) ..
 
          listitem_bullet(
@@ -190,24 +191,24 @@ function worker_help_string(tribe, worker_description)
       if (worker_description.max_defense_level > 0) then
          result = result .. rt(p(
             listitem_bullet(
-               ngettext("Starts with %1% point.", "Starts with %1% points.", worker_description.base_defense):bformat(worker_description.base_defense)) ..
+               (_"Starts at %d%%."):bformat(worker_description.base_defense)) ..
             listitem_bullet(
-               ngettext("Increased by %1% point for each level.", "Increased by %1% points for each level.", worker_description.defense_incr_per_level):bformat(worker_description.defense_incr_per_level)) ..
+               (_"Increased by %d%% for each level."):bformat(worker_description.defense_incr_per_level)) ..
             listitem_bullet(
                ngettext("The maximum level is %1%.", "The maximum level is %1%.", worker_description.max_defense_level):bformat(worker_description.max_defense_level))))
       else
          result = result .. rt(p(
             listitem_bullet(
-               ngettext("Starts with %1% point.", "Starts with %1% points.", worker_description.base_defense):bformat(worker_description.base_defense)) ..
+               (_"Starts at %d%%."):bformat(worker_description.base_defense)) ..
             listitem_bullet(_"This solder cannot be trained in defense")))
       end
 
       result = result .. rt(h3(_"Evade"))
       result = result .. rt(p(
          listitem_bullet(
-            ngettext("Starts with %1% point.", "Starts with %1% points.", worker_description.base_evade):bformat(worker_description.base_evade)) ..
+            (_"Starts at %d%%."):bformat(worker_description.base_evade)) ..
          listitem_bullet(
-            ngettext("Increased by %1% point for each level.", "Increased by %1% points for each level.", worker_description.evade_incr_per_level):bformat(worker_description.evade_incr_per_level)) ..
+            (_"Increased by %d%% for each level."):bformat(worker_description.evade_incr_per_level)) ..
          listitem_bullet(
             ngettext("The maximum level is %1%.", "The maximum level is %1%.", worker_description.max_evade_level):bformat(worker_description.max_evade_level))))
    end
