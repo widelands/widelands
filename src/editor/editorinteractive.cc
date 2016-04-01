@@ -654,7 +654,7 @@ void EditorInteractive::run_editor(const std::string& filename, const std::strin
 				egbase.load_graphics(loader_ui);
 				loader_ui.step(std::string());
 			} else {
-				loader_ui.stepf(_("Loading map “%s”…"), filename.c_str());
+				loader_ui.step((boost::format(_("Loading map “%s”…")) % filename).str());
 				eia.load(filename);
 			}
 		}

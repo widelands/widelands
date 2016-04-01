@@ -58,7 +58,6 @@ struct ProgressWindow {
 
 	/// Display a progress step description.
 	void step(const std::string & description);
-	void stepf(char const * format, ...);
 
 private:
 	using VisualizationArray = std::vector<IProgressVisualization *>;
