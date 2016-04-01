@@ -618,7 +618,7 @@ void Economy::split(const std::set<OPtr<Flag> > & flags)
 		e.worker_target_quantities_[worker_index] = worker_target_quantities_[worker_index];
 	}
 
-	for (const OPtr<Flag> temp_flag : flags) {
+	for (const OPtr<Flag>& temp_flag : flags) {
 		Flag & flag = *temp_flag.get(owner().egbase());
 		assert(flags_.size() > 1);  // We will not be deleted in remove_flag, right?
 		remove_flag(flag);
