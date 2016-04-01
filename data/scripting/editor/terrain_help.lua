@@ -9,7 +9,7 @@ include "scripting/editor/format_editor.lua"
 
 return {
    func = function(terrain_name)
-      set_textdomain("widelands")
+      set_textdomain("widelands_editor")
       local world = wl.World();
       local terrain = wl.Editor():get_terrain_description(terrain_name)
 
@@ -31,9 +31,9 @@ return {
 
          local default_resource = terrain.default_resource
          if (default_resource ~= nil) then
-            -- TRANSLATORS: e.g. "5x Water"
-            result = result .. text_line(_"Default:", _"%1%x %2%":bformat(
-               terrain.default_resource_amount, default_resource.descname))
+            result = result .. text_line(_"Default:",
+               -- TRANSLATORS: e.g. "5x Water"
+               _"%1%x %2%":bformat(terrain.default_resource_amount, default_resource.descname))
          end
       end
 

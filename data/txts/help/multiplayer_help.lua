@@ -6,10 +6,9 @@ end
 
 return {
    func = function()
-      set_textdomain("widelands")
+      set_textdomain("texts")
       local result = rt(h1(_"Multiplayer Game Setup"))
       result = result .. rt(p(_"You are in the multiplayer launch game menu."))
-
 
       result = result .. rt(h2(_"Client settings"))
       result = result .. rt(p(_"On the left side is a list of all clients including you. You can set your role with the button following your nickname. Available roles are:"))

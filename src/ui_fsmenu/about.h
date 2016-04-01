@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,38 +17,34 @@
  *
  */
 
-#ifndef WL_UI_FSMENU_MAIN_H
-#define WL_UI_FSMENU_MAIN_H
+#ifndef WL_UI_FSMENU_ABOUT_H
+#define WL_UI_FSMENU_ABOUT_H
 
-#include "ui_fsmenu/main_menu.h"
+#include "ui_fsmenu/base.h"
 #include "ui_basic/button.h"
-#include "ui_basic/box.h"
+#include "ui_basic/fileview_panel.h"
 #include "ui_basic/textarea.h"
 
 /**
- * This runs the main menu. There, you can select
- * between different playmodes, exit and so on.
-*/
-class FullscreenMenuMain : public FullscreenMenuMainMenu {
+ * "Fullscreen "About" information with tabs
+ */
+class FullscreenMenuAbout : public FullscreenMenuBase {
 public:
-	FullscreenMenuMain();
-
-protected:
-	void clicked_ok() override;
+	FullscreenMenuAbout();
 
 private:
-	UI::Box      vbox;
-	UI::Button   playtutorial;
-	UI::Button   singleplayer;
-	UI::Button   multiplayer;
-	UI::Button   replay;
-	UI::Button   editor;
-	UI::Button   options;
-	UI::Button   about;
-	UI::Button   exit;
-	UI::Textarea version;
-	UI::Textarea copyright;
-	UI::Textarea gpl;
+	uint32_t const              butw_;
+	uint32_t const              buth_;
+	uint32_t const              hmargin_;
+	uint32_t const              padding_;
+	uint32_t const              tab_panel_width_;
+	uint32_t const              tab_panel_y_;
+
+	UI::Textarea                title_;
+	UI::Button                  close_;
+
+	// Tab contents
+	UI::FileViewPanel tabs_;
 };
 
-#endif  // end of include guard: WL_UI_FSMENU_MAIN_H
+#endif  // end of include guard: WL_UI_FSMENU_ABOUT_H

@@ -39,13 +39,12 @@ private:
 	InteractiveGameBase& igb_;
 	InteractiveGameBase::GameMainMenuWindows& windows_;
 	UI::Box box_;
-	UI::Button readme_;
-	UI::Button license_;
-	UI::Button authors_;
+	UI::Button help_;
 	UI::Button sound_;
 	UI::Button save_game_;
 	UI::Button exit_game_;
 
+	void clicked_help     ();
 	void clicked_sound    ();
 	void clicked_save_game();
 	void clicked_exit_game();

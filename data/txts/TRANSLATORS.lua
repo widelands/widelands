@@ -1,20 +1,18 @@
 include "txts/format_authors.lua"
-include "txts/developers.lua"
+include "txts/translators_data.lua"
 
 set_textdomain("texts")
 
 -- Uses structured data to format authors
 function list_authors()
-   local authors = developers()
+   local authors = translators()
    local result = ""
+   local translators_image = "images/wui/editor/fsel_editor_set_height.png"
    for i, category in ipairs(authors) do
-      result = result .. "<rt>" .. h1_authors(category["heading"]) .. "</rt>"
+      result = result .. "<rt>" .. h2_authors(category["heading"]) .. "</rt>"
       for j, entry in ipairs(category["entries"])  do
-         if (entry["subheading"] ~= nil) then
-            result = result .. h2_authors(entry["subheading"])
-         end
          for k, member in ipairs(entry["members"])  do
-            result = result .. p_authors(member, category["image"] )
+            result = result .. p_authors(member, translators_image)
          end
       end
       result = result .. rt("<p font-size=10> <br></p>")
@@ -24,9 +22,9 @@ end
 
 -- Main script
 return {
-   title = _"Developers",
+   title = _"Translators",
    text = rt(
-      title(_"Widelands Development Team") ..
+      title(_"Widelands Translators") ..
       list_authors()
    )
 }

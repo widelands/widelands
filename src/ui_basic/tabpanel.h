@@ -27,6 +27,10 @@
 #include "ui_basic/panel.h"
 
 namespace UI {
+
+// Button height of tab buttons in pixels. Is also used for width with pictorial buttons.
+constexpr int kTabPanelButtonHeight = 34;
+
 /**
  * This represents a Tab of the TabPanel. Note that this does no work
  * of drawing itself or handling anything really, it is only here to
@@ -125,6 +129,8 @@ protected:
 	void layout() override;
 	void update_desired_size() override;
 
+	TabPanel::Type border_type_;    ///< whether there will be a border around the panels.
+
 private:
 	// Common adding function for textual and pictorial tabs
 	uint32_t add_tab(int32_t width,
@@ -150,7 +156,6 @@ private:
 	size_t           highlight_;      ///< index of the highlighted button
 
 	const Image*     pic_background_; ///< picture used to draw background
-	TabPanel::Type   border_type_;    ///< whether there will be a border around the panels.
 };
 }
 
