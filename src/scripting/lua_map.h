@@ -558,6 +558,50 @@ private:
 	CASTED_GET_DESCRIPTION(WorkerDescr)
 };
 
+
+class LuaSoldierDescription : public LuaWorkerDescription {
+public:
+	LUNA_CLASS_HEAD(LuaSoldierDescription);
+
+	virtual ~LuaSoldierDescription() {}
+
+	LuaSoldierDescription() {}
+	LuaSoldierDescription(const Widelands::SoldierDescr* const soldierdescr)
+		: LuaWorkerDescription(soldierdescr) {
+	}
+	LuaSoldierDescription(lua_State* L) : LuaWorkerDescription(L) {
+	}
+
+
+	/*
+	 * Properties
+	 */
+	int get_max_health_level(lua_State*);
+	int get_max_attack_level(lua_State*);
+	int get_max_defense_level(lua_State*);
+	int get_max_evade_level(lua_State*);
+	int get_base_health(lua_State*);
+	int get_base_min_attack(lua_State*);
+	int get_base_max_attack(lua_State*);
+	int get_base_defense(lua_State*);
+	int get_base_evade(lua_State*);
+	int get_health_incr_per_level(lua_State*);
+	int get_attack_incr_per_level(lua_State*);
+	int get_defense_incr_per_level(lua_State*);
+	int get_evade_incr_per_level(lua_State*);
+
+	/*
+	 * Lua methods
+	 */
+
+	/*
+	 * C methods
+	 */
+
+private:
+	CASTED_GET_DESCRIPTION(SoldierDescr)
+};
+
 #undef CASTED_GET_DESCRIPTION
 
 
