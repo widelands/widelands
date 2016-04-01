@@ -107,16 +107,11 @@ void DismantleSite::init(EditorGameBase & egbase)
 {
 	PartiallyFinishedBuilding::init(egbase);
 
-	const Buildcost wares = count_returned_wares(this);
-	std::map<DescriptionIndex, uint8_t>::const_iterator it = wares.begin();
-	wares_.resize(wares.size());
-
-	for (size_t i = 0; i < wares.size(); ++i, ++it) {
-		WaresQueue & wq =
-			*(wares_[i] = new WaresQueue(*this, it->first, it->second));
-
-		wq.set_filled(it->second);
-		work_steps_ += it->second;
+	for (const auto& ware: count_returned_wares(this)) {
+		WaresQueue* wq = new WaresQueue(*this, ware.first, ware.second);
+		wq->set_filled(ware.second);
+		wares_.push_back(wq);
+		work_steps_ += ware.second;
 	}
 }
 
