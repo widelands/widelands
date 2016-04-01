@@ -173,13 +173,11 @@ private:
 };
 
 // This is to be used for shipyards to make sure the water is wide enough
+// Open water is field where all 6 adjacent triangles are water
 struct FindNodeOpenWater {
-	FindNodeOpenWater(const World& world);
+	FindNodeOpenWater() {}
 
 	bool accept(const Map& /* map */, const FCoords& coord) const;
-
-private:
-	const World& world_;
 };
 
 struct FindNodeWithFlagOrRoad {

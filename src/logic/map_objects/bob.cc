@@ -712,7 +712,7 @@ void Bob::movepath_update(Game & game, State & state)
 	// Slowing down a ship if two or more on same spot
 	// Using probability of 1/8 and pausing it for 5, 10 or 15 seconds
 	if (game.logic_rand() % 8 == 0) {
-		if (upcast(Ship, ship, this)) {
+		if (is_a(Ship, this)) {
 			Map& map = game.map();
 			const uint32_t ships_count
 				= map.find_bobs(Widelands::Area<Widelands::FCoords>(get_position(), 0), nullptr, FindBobShip());

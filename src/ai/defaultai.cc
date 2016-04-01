@@ -1139,7 +1139,7 @@ void DefaultAI::update_buildable_field(BuildableField& field, uint16_t range, bo
 			field.water_nearby =  map.find_fields(Area<FCoords>(field.coords, 5), nullptr, find_water);
 
 			if (field.water_nearby > 0) {
-				FindNodeOpenWater find_open_water(game().world());
+				FindNodeOpenWater find_open_water();
 				field.open_water_nearby =
 					map.find_fields(Area<FCoords>(field.coords, 5), nullptr, find_open_water);
 			}
