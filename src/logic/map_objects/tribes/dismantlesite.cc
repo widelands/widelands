@@ -131,8 +131,9 @@ const Buildcost DismantleSite::count_returned_wares(Building* building)
 									  former_descr->returned_wares();
 
 		for (const auto& ware : return_wares) {
+			// TODO(GunChleoc): Once we have trading, we might want to return all wares again.
 			if (building->owner().tribe().has_ware(ware.first)) {
-				result[ware.first] = ware.second;
+				result[ware.first] += ware.second;
 			}
 		}
 	}
