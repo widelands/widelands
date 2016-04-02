@@ -27,7 +27,6 @@
 #include "base/i18n.h"
 #include "graphic/graphic.h"
 #include "sound/sound_handler.h"
-#include "wui/fileview.h"
 #include "wui/game_main_menu_save_game.h"
 #include "wui/game_options_sound_menu.h"
 #include "wui/unique_window_handler.h"
@@ -71,13 +70,6 @@ GameOptionsMenu::GameOptionsMenu
 	windows_(windows),
 	box_(this, margin, margin, UI::Box::Vertical,
 		  width, get_h() - 2 * margin, vspacing),
-	help_
-		(&box_, "help",
-		 0, 0, width, 0,
-		 g_gr->images().get("images/ui_basic/but4.png"),
-		 _("Help"),
-		/** TRANSLATORS: Button tooltip */
-		_("General help and keyboard shortcuts")),
 	sound_
 		(&box_, "sound_options",
 		 0, 0, width, 0,
@@ -100,16 +92,13 @@ GameOptionsMenu::GameOptionsMenu
 		 /** TRANSLATORS: Button tooltip */
 		 _("Exit Game"))
 {
-	box_.add(&help_, UI::Align::kHCenter);
-	box_.add_space(vgap);
 	box_.add(&sound_, UI::Align::kHCenter);
 	box_.add_space(vgap);
 	box_.add(&save_game_, UI::Align::kHCenter);
 	box_.add(&exit_game_, UI::Align::kHCenter);
-	box_.set_size(width, 2 * help_.get_h() + 2 * save_game_.get_h() + 3 * vgap + 5 * vspacing);
+	box_.set_size(width, sound_.get_h() + 2 * save_game_.get_h() + vgap + 3 * vspacing);
 	set_inner_size(get_inner_w(), box_.get_h() + 2 * margin);
 
-	help_.sigclicked.connect(boost::bind(&GameOptionsMenu::clicked_help, boost::ref(*this)));
 	sound_.sigclicked.connect(boost::bind(&GameOptionsMenu::clicked_sound, boost::ref(*this)));
 	save_game_.sigclicked.connect(boost::bind(&GameOptionsMenu::clicked_save_game, boost::ref(*this)));
 	exit_game_.sigclicked.connect(boost::bind(&GameOptionsMenu::clicked_exit_game, boost::ref(*this)));
@@ -120,20 +109,10 @@ GameOptionsMenu::GameOptionsMenu
  registry.on_delete = std::bind(&UI::Button::set_perm_pressed, &btn, false); \
  if (registry.window) btn.set_perm_pressed(true);                            \
 
-	INIT_BTN_HOOKS(windows_.help, help_)
 	INIT_BTN_HOOKS(windows_.sound_options, sound_)
 
 	if (get_usedefaultpos())
 		center_to_parent();
-}
-
-void GameOptionsMenu::clicked_help() {
-	if (windows_.help.window) {
-		delete windows_.help.window;
-	} else {
-		FileViewWindow* fileview = new FileViewWindow(igb_, windows_.help, _("General Help"));
-		fileview->add_tab("txts/help/general_in_game_help.lua");
-	}
 }
 
 void GameOptionsMenu::clicked_sound() {

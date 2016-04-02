@@ -134,8 +134,7 @@ function ware_help_consumers_string(tribe, ware_description)
 
    -- Now collecting the workers that use this ware as a tool
    local workers_string = ""
-   for i, workername in ipairs(tribe.workers) do
-   local worker = wl.Game():get_worker_description(workername)
+   for i, worker in ipairs(tribe.workers) do
       local add_this_worker = false
       for j, buildcost in ipairs(worker.buildcost) do
          if (buildcost ~= nil and buildcost == ware_description.name) then
@@ -165,12 +164,16 @@ end
 
 
 return {
-   func = function(tribename, ware_description)
+   func = function(tribename, warename)
       set_textdomain("tribes_encyclopedia")
       local tribe = wl.Game():get_tribe_description(tribename)
+      local ware_description = wl.Game():get_ware_description(warename)
       include(ware_description.helptext_script)
-      return ware_help_general_string(tribe, ware_description)
-         .. ware_help_producers_string(tribe, ware_description)
-         .. ware_help_consumers_string(tribe, ware_description)
+      return {
+         title = ware_description.descname,
+         text = ware_help_general_string(tribe, ware_description)
+            .. ware_help_producers_string(tribe, ware_description)
+            .. ware_help_consumers_string(tribe, ware_description)
+      }
    end
 }

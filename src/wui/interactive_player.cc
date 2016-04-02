@@ -44,7 +44,6 @@
 #include "ui_basic/unique_window.h"
 #include "wui/building_statistics_menu.h"
 #include "wui/debugconsole.h"
-#include "wui/encyclopedia_window.h"
 #include "wui/fieldaction.h"
 #include "wui/game_chat_menu.h"
 #include "wui/game_main_menu.h"
@@ -54,6 +53,7 @@
 #include "wui/game_options_menu.h"
 #include "wui/general_statistics_menu.h"
 #include "wui/stock_menu.h"
+#include "wui/tribal_encyclopedia.h"
 #include "wui/ware_statistics_menu.h"
 
 using Widelands::Building;
@@ -156,7 +156,7 @@ toggle_help_
 	INIT_BTN_HOOKS(message_menu_, toggle_message_menu_)
 	INIT_BTN_HOOKS(encyclopedia_, toggle_help_)
 
-	encyclopedia_.open_window = [this] {new EncyclopediaWindow(*this, encyclopedia_);};
+	encyclopedia_.open_window = [this] {new TribalEncyclopedia(*this, encyclopedia_, &game().lua());};
 	options_.open_window = [this] {new GameOptionsMenu(*this, options_, main_windows_);};
 	statisticsmenu_.open_window = [this] {
 		new GameMainMenu(*this, statisticsmenu_, main_windows_);
