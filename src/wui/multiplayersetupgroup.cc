@@ -321,7 +321,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 					} else {
 						const ComputerPlayer::Implementation* impl =
 								ComputerPlayer::get_implementation(player_setting.ai);
-						title = impl->descname;
+						title = _(impl->descname);
 						pic = impl->icon_filename;
 					}
 				}
