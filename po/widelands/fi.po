@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-04-01 20:06+0000\n"
-"PO-Revision-Date: 2016-04-01 20:07+0000\n"
+"POT-Creation-Date: 2016-04-02 11:15+0000\n"
+"PO-Revision-Date: 2016-04-02 11:17+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
@@ -214,8 +214,8 @@ msgid "Loading tribes"
 msgstr "Lataan heimoja"
 
 #: ../../src/editor/editorinteractive.cc:118
-#: ../../src/editor/ui_menus/editor_main_menu.cc:46
-#: ../../src/wui/game_options_menu.cc:69
+#: ../../src/editor/ui_menus/editor_main_menu.cc:45
+#: ../../src/wui/game_options_menu.cc:68
 #: ../../src/wui/interactive_player.cc:92
 #: ../../src/wui/interactive_spectator.cc:59
 msgid "Main Menu"
@@ -256,9 +256,7 @@ msgid "Redo"
 msgstr "Tee uudelleen"
 
 #: ../../src/editor/editorinteractive.cc:143
-#: ../../src/editor/ui_menus/editor_help.cc:62
-#: ../../src/editor/ui_menus/editor_main_menu.cc:78
-#: ../../src/wui/buildingwindow.cc:354 ../../src/wui/game_options_menu.cc:78
+#: ../../src/wui/buildingwindow.cc:354
 msgid "Help"
 msgstr "Ohje"
 
@@ -498,57 +496,43 @@ msgstr "Napsauta valitaksesi esineen. Paina CTRL valitaksesi useita."
 msgid "Current: %s"
 msgstr "Nykyinen: %s"
 
-#: ../../src/editor/ui_menus/editor_help.cc:73
-msgid "Terrains"
-msgstr ""
+#: ../../src/editor/ui_menus/editor_help.cc:45
+#: ../../src/editor/ui_menus/editor_player_menu.cc:293
+#: ../../src/ui_fsmenu/multiplayer.cc:144
+#: ../../src/wui/encyclopedia_window.cc:156
+#: ../../src/wui/tribal_encyclopedia.cc:51
+msgid "Error!"
+msgstr "Virhe!"
 
-#: ../../src/editor/ui_menus/editor_help.cc:80
-msgid "Trees"
-msgstr ""
-
-#. * TRANSLATORS: %1% is a filename, %2% a map's name.
-#. * TRANSLATORS: Terrain name + editor category, e.g. Steppe (Summer)
-#. * TRANSLATORS: File name for saving objective achieved
-#. * TRANSLATORS: %1% = map name. %2% = achievement name
-#: ../../src/editor/ui_menus/editor_help.cc:157
-#: ../../src/editor/ui_menus/editor_help.cc:195
-#: ../../src/scripting/lua_game.cc:1060 ../../src/ui_fsmenu/loadgame.cc:74
-msgid "%1% (%2%)"
-msgstr "%1% (%2%)"
-
-#: ../../src/editor/ui_menus/editor_main_menu.cc:53
+#: ../../src/editor/ui_menus/editor_main_menu.cc:52
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:47
 msgid "New Map"
 msgstr "Uusi kartta"
 
-#: ../../src/editor/ui_menus/editor_main_menu.cc:58
+#: ../../src/editor/ui_menus/editor_main_menu.cc:57
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:45
 msgid "New Random Map"
 msgstr "Uusi satunnaisluotu kartta"
 
-#: ../../src/editor/ui_menus/editor_main_menu.cc:63
+#: ../../src/editor/ui_menus/editor_main_menu.cc:62
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:33
 msgid "Load Map"
 msgstr "Lataa kartta"
 
-#: ../../src/editor/ui_menus/editor_main_menu.cc:68
+#: ../../src/editor/ui_menus/editor_main_menu.cc:67
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:52
 msgid "Save Map"
 msgstr "Tallenna kartta"
 
-#: ../../src/editor/ui_menus/editor_main_menu.cc:73
+#: ../../src/editor/ui_menus/editor_main_menu.cc:72
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:50
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:69
 msgid "Map Options"
 msgstr "Kartta-asetukset"
 
-#: ../../src/editor/ui_menus/editor_main_menu.cc:83
+#: ../../src/editor/ui_menus/editor_main_menu.cc:77
 msgid "Exit Editor"
 msgstr "Poistu editorista"
-
-#: ../../src/editor/ui_menus/editor_main_menu.cc:117
-msgid "The Widelands Editor"
-msgstr ""
 
 #: ../../src/editor/ui_menus/editor_main_menu_load_or_save_map.cc:59
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:63
@@ -850,11 +834,6 @@ msgstr "Pelaajien määrä"
 #, c-format
 msgid "Player %u"
 msgstr "Pelaaja %u"
-
-#: ../../src/editor/ui_menus/editor_player_menu.cc:293
-#: ../../src/ui_fsmenu/multiplayer.cc:144
-msgid "Error!"
-msgstr "Virhe!"
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:295
 msgid ""
@@ -2023,6 +2002,13 @@ msgstr "ei"
 msgid "off"
 msgstr "pois"
 
+#. * TRANSLATORS: %1% is a filename, %2% a map's name.
+#. * TRANSLATORS: File name for saving objective achieved
+#. * TRANSLATORS: %1% = map name. %2% = achievement name
+#: ../../src/scripting/lua_game.cc:1060 ../../src/ui_fsmenu/loadgame.cc:74
+msgid "%1% (%2%)"
+msgstr "%1% (%2%)"
+
 #: ../../src/ui_basic/spinbox.cc:143
 msgid "Decrease the value"
 msgstr "Nosta/laske arvoa"
@@ -3172,29 +3158,6 @@ msgstr "Peru tutkimusmatka"
 msgid "Building materials"
 msgstr "Rakennusmateriaalit"
 
-#: ../../src/wui/encyclopedia_window.cc:86
-#: ../../src/wui/interactive_player.cc:107
-msgid "Tribal Encyclopedia"
-msgstr "Heimo-opas"
-
-#: ../../src/wui/encyclopedia_window.cc:97
-#: ../../src/wui/general_statistics_menu.cc:215
-#: ../../src/wui/productionsitewindow.cc:67 ../../src/wui/transport_ui.cc:60
-#: ../../src/wui/warehousewindow.cc:208
-msgid "Wares"
-msgstr "Tuotteet"
-
-#: ../../src/wui/encyclopedia_window.cc:104
-#: ../../src/wui/general_statistics_menu.cc:199
-#: ../../src/wui/transport_ui.cc:65 ../../src/wui/warehousewindow.cc:218
-msgid "Workers"
-msgstr "Työläislista"
-
-#: ../../src/wui/encyclopedia_window.cc:111
-#: ../../src/wui/general_statistics_menu.cc:207 ../../src/wui/minimap.cc:171
-msgid "Buildings"
-msgstr "Rakennukset"
-
 #: ../../src/wui/fieldaction.cc:239
 msgid "Build small building"
 msgstr "Rakenna pieni rakennus"
@@ -3313,7 +3276,7 @@ msgstr "Varasto"
 
 #. * TRANSLATORS: Button tooltip
 #: ../../src/wui/game_main_menu_save_game.cc:64
-#: ../../src/wui/game_options_menu.cc:94
+#: ../../src/wui/game_options_menu.cc:86
 #: ../../src/wui/interactive_spectator.cc:57
 msgid "Save Game"
 msgstr "Tallenna peli"
@@ -3471,37 +3434,28 @@ msgid "Objectives"
 msgstr "Tavoitteet"
 
 #. * TRANSLATORS: Window label when "Exit game" has been pressed
-#: ../../src/wui/game_options_menu.cc:46
+#: ../../src/wui/game_options_menu.cc:45
 msgid "Exit Game Confirmation"
 msgstr "Varmasti pois pelistä"
 
-#: ../../src/wui/game_options_menu.cc:47
+#: ../../src/wui/game_options_menu.cc:46
 msgid "Are you sure you wish to exit this game?"
 msgstr "Oletko varma että haluat poistua tästä pelistä?"
 
-#. * TRANSLATORS: Button tooltip
-#: ../../src/wui/game_options_menu.cc:80
-msgid "General help and keyboard shortcuts"
-msgstr ""
-
-#: ../../src/wui/game_options_menu.cc:85
+#: ../../src/wui/game_options_menu.cc:77
 #: ../../src/wui/game_options_sound_menu.cc:29
 msgid "Sound Options"
 msgstr "Ääniasetukset"
 
 #. * TRANSLATORS: Button tooltip
-#: ../../src/wui/game_options_menu.cc:87
+#: ../../src/wui/game_options_menu.cc:79
 msgid "Set sound effect and music options"
 msgstr "Aseta ääniefekti- ja musiikkivalinnat"
 
 #. * TRANSLATORS: Button tooltip
-#: ../../src/wui/game_options_menu.cc:101 ../../src/wui/game_summary.cc:110
+#: ../../src/wui/game_options_menu.cc:93 ../../src/wui/game_summary.cc:110
 msgid "Exit Game"
 msgstr "Poistu pelistä"
-
-#: ../../src/wui/game_options_menu.cc:134
-msgid "General Help"
-msgstr ""
 
 #: ../../src/wui/game_options_sound_menu.cc:35
 msgid "Music Volume"
@@ -3581,6 +3535,21 @@ msgstr "Arvosana"
 msgid "Land"
 msgstr "Maa-alue"
 
+#: ../../src/wui/general_statistics_menu.cc:199
+#: ../../src/wui/transport_ui.cc:65 ../../src/wui/warehousewindow.cc:218
+msgid "Workers"
+msgstr "Työläislista"
+
+#: ../../src/wui/general_statistics_menu.cc:207 ../../src/wui/minimap.cc:171
+msgid "Buildings"
+msgstr "Rakennukset"
+
+#: ../../src/wui/general_statistics_menu.cc:215
+#: ../../src/wui/productionsitewindow.cc:67 ../../src/wui/transport_ui.cc:60
+#: ../../src/wui/warehousewindow.cc:208
+msgid "Wares"
+msgstr "Tuotteet"
+
 #: ../../src/wui/general_statistics_menu.cc:223
 msgid "Productivity"
 msgstr "Tuottavuus"
@@ -3628,6 +3597,10 @@ msgstr "Tilastot"
 #: ../../src/wui/interactive_player.cc:223
 msgid "Messages"
 msgstr "Viestit"
+
+#: ../../src/wui/interactive_player.cc:107
+msgid "Tribal Encyclopedia"
+msgstr "Heimo-opas"
 
 #: ../../src/wui/interactive_player.cc:230
 #, c-format

@@ -355,23 +355,23 @@ struct HostChatProvider : public ChatProvider {
 			if (cmd == "help") {
 				c.msg = (boost::format("<br>%s<br>%s<br>%s<br>%s<br>%s<br>%s<br>%s") %
 				         _("Available host commands are:")
-				         /** TRANSLATORS: Available host command */
 				         %
+							/** TRANSLATORS: Available host command */
 				         _("/help  -  Shows this help")
-				         /** TRANSLATORS: Available host command */
 				         %
+							/** TRANSLATORS: Available host command */
 				         _("/announce <msg>  -  Send a chatmessage as announcement (system chat)")
-				         /** TRANSLATORS: Available host command */
 				         %
+							/** TRANSLATORS: Available host command */
 				         _("/warn <name> <reason>  -  Warn the user <name> because of <reason>")
-				         /** TRANSLATORS: Available host command */
 				         %
+							/** TRANSLATORS: Available host command */
 				         _("/kick <name> <reason>  -  Kick the user <name> because of <reason>")
-				         /** TRANSLATORS: Available host command */
 				         %
+							/** TRANSLATORS: Available host command */
 				         _("/forcePause            -  Force the game to pause.")
-				         /** TRANSLATORS: Available host command */
 				         %
+							/** TRANSLATORS: Available host command */
 				         _("/endForcedPause        -  Return game to normal speed.")).str();
 			}
 

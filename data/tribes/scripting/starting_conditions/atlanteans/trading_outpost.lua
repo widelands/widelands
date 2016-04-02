@@ -7,7 +7,9 @@ include "scripting/infrastructure.lua"
 set_textdomain("tribes")
 
 return {
+   -- TRANSLATORS: This is the name of a starting condition
    descname = _"Trading Outpost",
+   -- TRANSLATORS: This is the tooltip for the "Trading Outpost" starting condition
    tooltip = _"If this player runs low on important wares, they will be replenished for free",
    func =  function(player, shared_in_start)
 
