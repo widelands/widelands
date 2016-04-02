@@ -1,12 +1,12 @@
-# Automatically created by Widelands bzr6709[widelands] (Debug)
+# Automatically created by Widelands bzr7905[trunk] (Debug)
 
 [global]
 packet_version="1"
 map_w="160"
 map_h="160"
 nr_players="4"
-world="desert"
 name=_"Atoll"
 author="Nasenbaer"
 descr=_"Who will be the real king of the big atoll?"
-tags="unbalanced,official,seafaring"
+hint=
+tags="official,seafaring,unbalanced"

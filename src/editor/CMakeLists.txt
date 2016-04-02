@@ -103,7 +103,6 @@ wl_library(editor
     scripting_lua_interface
     scripting_lua_table
     ui_basic
-    ui_fsmenu
     widelands_ball_of_mud
     wui
     wui_common

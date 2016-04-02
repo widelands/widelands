@@ -16,6 +16,7 @@ wl_library(wui_chat_ui
     graphic
     graphic_color
     graphic_text
+    graphic_text_layout
     logic
     profile
     ui_basic
@@ -97,6 +98,8 @@ wl_library(wui
     encyclopedia_window.h
     fieldaction.cc
     fieldaction.h
+    fileview.cc
+    fileview.h
     game_debug_ui.cc
     game_debug_ui.h
     game_main_menu.cc
@@ -204,7 +207,6 @@ wl_library(wui
     scripting_lua_table
     sound
     ui_basic
-    ui_fsmenu
     widelands_ball_of_mud
     wui_chat_ui
     wui_edge_overlay_manager

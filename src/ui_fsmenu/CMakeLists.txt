@@ -1,11 +1,11 @@
 wl_library(ui_fsmenu
   SRCS
+    about.cc
+    about.h
     base.cc
     base.h
     campaign_select.cc
     campaign_select.h
-    fileview.cc
-    fileview.h
     helpwindow.cc
     helpwindow.h
     internet_lobby.cc

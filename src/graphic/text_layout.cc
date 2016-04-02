@@ -36,6 +36,7 @@ void replace_entities(std::string* text) {
 	boost::replace_all(*text, "&gt;", ">");
 	boost::replace_all(*text, "&lt;", "<");
 	boost::replace_all(*text, "&nbsp;", " ");
+	boost::replace_all(*text, "&amp;", "&"); // Must be performed last
 }
 
 uint32_t text_width(const std::string& text, int ptsize) {
@@ -49,6 +50,7 @@ uint32_t text_height(const std::string& text, int ptsize) {
 
 std::string richtext_escape(const std::string& given_text) {
 	std::string text = given_text;
+	boost::replace_all(text, "&", "&amp;"); // Must be performed first
 	boost::replace_all(text, ">", "&gt;");
 	boost::replace_all(text, "<", "&lt;");
 	return text;
