@@ -14,9 +14,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-04-01 20:06+0000\n"
-"PO-Revision-Date: 2016-04-01 20:07+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2016-04-02 11:15+0000\n"
+"PO-Revision-Date: 2016-04-02 18:23+0000\n"
+"Last-Translator: Guybrush88 <erpizzo@alice.it>\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -216,8 +216,8 @@ msgid "Loading tribes"
 msgstr "Caricamento delle tribù in corso"
 
 #: ../../src/editor/editorinteractive.cc:118
-#: ../../src/editor/ui_menus/editor_main_menu.cc:46
-#: ../../src/wui/game_options_menu.cc:69
+#: ../../src/editor/ui_menus/editor_main_menu.cc:45
+#: ../../src/wui/game_options_menu.cc:68
 #: ../../src/wui/interactive_player.cc:92
 #: ../../src/wui/interactive_spectator.cc:59
 msgid "Main Menu"
@@ -258,9 +258,7 @@ msgid "Redo"
 msgstr "Ripeti"
 
 #: ../../src/editor/editorinteractive.cc:143
-#: ../../src/editor/ui_menus/editor_help.cc:62
-#: ../../src/editor/ui_menus/editor_main_menu.cc:78
-#: ../../src/wui/buildingwindow.cc:354 ../../src/wui/game_options_menu.cc:78
+#: ../../src/wui/buildingwindow.cc:354
 msgid "Help"
 msgstr "Aiuto"
 
@@ -500,57 +498,43 @@ msgstr "Clicca per selezionare un oggetto. Utilizza il tasto CTRL per selezionar
 msgid "Current: %s"
 msgstr "Attualmente selezionati: %s"
 
-#: ../../src/editor/ui_menus/editor_help.cc:73
-msgid "Terrains"
-msgstr "Terreni"
+#: ../../src/editor/ui_menus/editor_help.cc:45
+#: ../../src/editor/ui_menus/editor_player_menu.cc:293
+#: ../../src/ui_fsmenu/multiplayer.cc:144
+#: ../../src/wui/encyclopedia_window.cc:156
+#: ../../src/wui/tribal_encyclopedia.cc:51
+msgid "Error!"
+msgstr "Errore!"
 
-#: ../../src/editor/ui_menus/editor_help.cc:80
-msgid "Trees"
-msgstr "Alberi"
-
-#. * TRANSLATORS: %1% is a filename, %2% a map's name.
-#. * TRANSLATORS: Terrain name + editor category, e.g. Steppe (Summer)
-#. * TRANSLATORS: File name for saving objective achieved
-#. * TRANSLATORS: %1% = map name. %2% = achievement name
-#: ../../src/editor/ui_menus/editor_help.cc:157
-#: ../../src/editor/ui_menus/editor_help.cc:195
-#: ../../src/scripting/lua_game.cc:1060 ../../src/ui_fsmenu/loadgame.cc:74
-msgid "%1% (%2%)"
-msgstr "%1% (%2%)"
-
-#: ../../src/editor/ui_menus/editor_main_menu.cc:53
+#: ../../src/editor/ui_menus/editor_main_menu.cc:52
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:47
 msgid "New Map"
 msgstr "Nuova mappa"
 
-#: ../../src/editor/ui_menus/editor_main_menu.cc:58
+#: ../../src/editor/ui_menus/editor_main_menu.cc:57
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:45
 msgid "New Random Map"
 msgstr "Nuova mappa casuale"
 
-#: ../../src/editor/ui_menus/editor_main_menu.cc:63
+#: ../../src/editor/ui_menus/editor_main_menu.cc:62
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:33
 msgid "Load Map"
 msgstr "Carica una mappa"
 
-#: ../../src/editor/ui_menus/editor_main_menu.cc:68
+#: ../../src/editor/ui_menus/editor_main_menu.cc:67
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:52
 msgid "Save Map"
 msgstr "Salva la mappa"
 
-#: ../../src/editor/ui_menus/editor_main_menu.cc:73
+#: ../../src/editor/ui_menus/editor_main_menu.cc:72
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:50
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:69
 msgid "Map Options"
 msgstr "Opzioni della mappa"
 
-#: ../../src/editor/ui_menus/editor_main_menu.cc:83
+#: ../../src/editor/ui_menus/editor_main_menu.cc:77
 msgid "Exit Editor"
 msgstr "Esci dall'editor"
-
-#: ../../src/editor/ui_menus/editor_main_menu.cc:117
-msgid "The Widelands Editor"
-msgstr ""
 
 #: ../../src/editor/ui_menus/editor_main_menu_load_or_save_map.cc:59
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:63
@@ -852,11 +836,6 @@ msgstr "Numero di giocatori"
 #, c-format
 msgid "Player %u"
 msgstr "Giocatore %u"
-
-#: ../../src/editor/ui_menus/editor_player_menu.cc:293
-#: ../../src/ui_fsmenu/multiplayer.cc:144
-msgid "Error!"
-msgstr "Errore!"
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:295
 msgid ""
@@ -1308,7 +1287,7 @@ msgstr "Il nuovo cantiere del porto è andato"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:667
 msgid "Unloading of wares failed, expedition is cancelled now."
-msgstr "Scarico merci fallito, la spedizione è stata cancellata."
+msgstr "Scarico merci fallito, la spedizione è annullata ora."
 
 #. * TRANSLATORS: Ship expedition ready
 #: ../../src/logic/map_objects/tribes/ship.cc:845
@@ -1346,7 +1325,7 @@ msgstr ""
 #: ../../src/logic/map_objects/tribes/ship.cc:969
 msgctxt "ship_state"
 msgid "Port Space Found"
-msgstr ""
+msgstr "Trovato uno spazio per il porto"
 
 #. * TRANSLATORS: This is a ship state
 #: ../../src/logic/map_objects/tribes/ship.cc:973
@@ -2025,6 +2004,13 @@ msgstr "no"
 msgid "off"
 msgstr "Spento"
 
+#. * TRANSLATORS: %1% is a filename, %2% a map's name.
+#. * TRANSLATORS: File name for saving objective achieved
+#. * TRANSLATORS: %1% = map name. %2% = achievement name
+#: ../../src/scripting/lua_game.cc:1060 ../../src/ui_fsmenu/loadgame.cc:74
+msgid "%1% (%2%)"
+msgstr "%1% (%2%)"
+
 #: ../../src/ui_basic/spinbox.cc:143
 msgid "Decrease the value"
 msgstr "Diminuisci il valore"
@@ -2054,12 +2040,12 @@ msgstr[1] ""
 #, c-format
 msgid "%d pixel"
 msgid_plural "%d pixels"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d pixel"
+msgstr[1] "%d pixel"
 
 #: ../../src/ui_fsmenu/about.cc:40 ../../src/ui_fsmenu/main.cc:55
 msgid "About Widelands"
-msgstr ""
+msgstr "Riguardo a Widelands"
 
 #: ../../src/ui_fsmenu/about.cc:48 ../../src/wui/watchwindow.cc:142
 msgid "Close"
@@ -3015,11 +3001,11 @@ msgstr ""
 
 #: ../../src/wui/actionconfirm.cc:398
 msgid "Cancel expedition?"
-msgstr ""
+msgstr "Annullare la spedizione?"
 
 #: ../../src/wui/actionconfirm.cc:399
 msgid "Do you really want to cancel the active expedition?"
-msgstr "Vuoi davvero cancellare la spedizione attiva?"
+msgstr "Vuoi davvero annullare la spedizione attiva?"
 
 #: ../../src/wui/attack_box.cc:121 ../../src/wui/attack_box.cc:144
 msgid "%1% / %2%"
@@ -3167,35 +3153,12 @@ msgstr "Inizia una spedizione"
 
 #: ../../src/wui/buildingwindow.cc:547
 msgid "Cancel the expedition"
-msgstr "Cancella la spedizione"
+msgstr "Annulla la spedizione"
 
 #: ../../src/wui/constructionsitewindow.cc:75
 #: ../../src/wui/dismantlesitewindow.cc:69
 msgid "Building materials"
 msgstr "Materiali da costruzione"
-
-#: ../../src/wui/encyclopedia_window.cc:86
-#: ../../src/wui/interactive_player.cc:107
-msgid "Tribal Encyclopedia"
-msgstr "Enciclopedia tribale"
-
-#: ../../src/wui/encyclopedia_window.cc:97
-#: ../../src/wui/general_statistics_menu.cc:215
-#: ../../src/wui/productionsitewindow.cc:67 ../../src/wui/transport_ui.cc:60
-#: ../../src/wui/warehousewindow.cc:208
-msgid "Wares"
-msgstr "Merci"
-
-#: ../../src/wui/encyclopedia_window.cc:104
-#: ../../src/wui/general_statistics_menu.cc:199
-#: ../../src/wui/transport_ui.cc:65 ../../src/wui/warehousewindow.cc:218
-msgid "Workers"
-msgstr "Lavoratori"
-
-#: ../../src/wui/encyclopedia_window.cc:111
-#: ../../src/wui/general_statistics_menu.cc:207 ../../src/wui/minimap.cc:171
-msgid "Buildings"
-msgstr "Edifici"
 
 #: ../../src/wui/fieldaction.cc:239
 msgid "Build small building"
@@ -3315,7 +3278,7 @@ msgstr "Scorte"
 
 #. * TRANSLATORS: Button tooltip
 #: ../../src/wui/game_main_menu_save_game.cc:64
-#: ../../src/wui/game_options_menu.cc:94
+#: ../../src/wui/game_options_menu.cc:86
 #: ../../src/wui/interactive_spectator.cc:57
 msgid "Save Game"
 msgstr "Salva la partita"
@@ -3473,37 +3436,28 @@ msgid "Objectives"
 msgstr "Obiettivi"
 
 #. * TRANSLATORS: Window label when "Exit game" has been pressed
-#: ../../src/wui/game_options_menu.cc:46
+#: ../../src/wui/game_options_menu.cc:45
 msgid "Exit Game Confirmation"
 msgstr "Conferma di uscita dalla partita"
 
-#: ../../src/wui/game_options_menu.cc:47
+#: ../../src/wui/game_options_menu.cc:46
 msgid "Are you sure you wish to exit this game?"
 msgstr "Sei sicuro di volere uscire da questa partita?"
 
-#. * TRANSLATORS: Button tooltip
-#: ../../src/wui/game_options_menu.cc:80
-msgid "General help and keyboard shortcuts"
-msgstr ""
-
-#: ../../src/wui/game_options_menu.cc:85
+#: ../../src/wui/game_options_menu.cc:77
 #: ../../src/wui/game_options_sound_menu.cc:29
 msgid "Sound Options"
 msgstr "Opzioni audio"
 
 #. * TRANSLATORS: Button tooltip
-#: ../../src/wui/game_options_menu.cc:87
+#: ../../src/wui/game_options_menu.cc:79
 msgid "Set sound effect and music options"
 msgstr "Imposta le opzioni degli effetti sonori e della musica"
 
 #. * TRANSLATORS: Button tooltip
-#: ../../src/wui/game_options_menu.cc:101 ../../src/wui/game_summary.cc:110
+#: ../../src/wui/game_options_menu.cc:93 ../../src/wui/game_summary.cc:110
 msgid "Exit Game"
 msgstr "Esci dal gioco"
-
-#: ../../src/wui/game_options_menu.cc:134
-msgid "General Help"
-msgstr ""
 
 #: ../../src/wui/game_options_sound_menu.cc:35
 msgid "Music Volume"
@@ -3583,6 +3537,21 @@ msgstr "Punteggio"
 msgid "Land"
 msgstr "Terra"
 
+#: ../../src/wui/general_statistics_menu.cc:199
+#: ../../src/wui/transport_ui.cc:65 ../../src/wui/warehousewindow.cc:218
+msgid "Workers"
+msgstr "Lavoratori"
+
+#: ../../src/wui/general_statistics_menu.cc:207 ../../src/wui/minimap.cc:171
+msgid "Buildings"
+msgstr "Edifici"
+
+#: ../../src/wui/general_statistics_menu.cc:215
+#: ../../src/wui/productionsitewindow.cc:67 ../../src/wui/transport_ui.cc:60
+#: ../../src/wui/warehousewindow.cc:208
+msgid "Wares"
+msgstr "Merci"
+
 #: ../../src/wui/general_statistics_menu.cc:223
 msgid "Productivity"
 msgstr "Produttività"
@@ -3630,6 +3599,10 @@ msgstr "Statistiche"
 #: ../../src/wui/interactive_player.cc:223
 msgid "Messages"
 msgstr "Messaggi"
+
+#: ../../src/wui/interactive_player.cc:107
+msgid "Tribal Encyclopedia"
+msgstr "Enciclopedia tribale"
 
 #: ../../src/wui/interactive_player.cc:230
 #, c-format
@@ -3931,7 +3904,7 @@ msgstr "Affonda la nave"
 
 #: ../../src/wui/shipwindow.cc:198
 msgid "Cancel the Expedition"
-msgstr "Cancella la spedizione"
+msgstr "Annulla la spedizione"
 
 #: ../../src/wui/soldiercapacitycontrol.cc:66
 msgid "Decrease capacity"

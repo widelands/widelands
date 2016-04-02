@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-03-11 07:02+0000\n"
-"PO-Revision-Date: 2016-03-15 08:56+0000\n"
+"POT-Creation-Date: 2016-04-02 11:15+0000\n"
+"PO-Revision-Date: 2016-04-02 18:22+0000\n"
 "Last-Translator: Guybrush88 <erpizzo@alice.it>\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
@@ -1485,7 +1485,7 @@ msgid ""
 "The lumberjack working at this lumberjack’s hut can’t find any trees in his "
 "work area. You should consider dismantling or destroying the building or "
 "building a ranger’s hut."
-msgstr ""
+msgstr "Controlli"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:7
@@ -2540,6 +2540,34 @@ msgid ""
 "Atlantis."
 msgstr ""
 
+#: ../../data/tribes/scripting/help/init.lua:48
+msgid "Tribal Encyclopedia"
+msgstr ""
+
+#: ../../data/tribes/scripting/help/init.lua:53
+msgid "General"
+msgstr "Generale"
+
+#: ../../data/tribes/scripting/help/init.lua:58
+msgid "Introduction"
+msgstr "Introduzione"
+
+#: ../../data/tribes/scripting/help/init.lua:64
+msgid "Controls"
+msgstr "Controlli"
+
+#: ../../data/tribes/scripting/help/init.lua:73
+msgid "Wares"
+msgstr "Merci"
+
+#: ../../data/tribes/scripting/help/init.lua:80
+msgid "Workers"
+msgstr "Lavoratori"
+
+#: ../../data/tribes/scripting/help/init.lua:87
+msgid "Buildings"
+msgstr "Edifici"
+
 #: ../../data/tribes/scripting/starting_conditions/atlanteans/fortified_village.lua:10
 #: ../../data/tribes/scripting/starting_conditions/barbarians/fortified_village.lua:10
 #: ../../data/tribes/scripting/starting_conditions/empire/fortified_village.lua:10
@@ -2745,7 +2773,7 @@ msgstr "Diamanti"
 #: ../../data/tribes/wares/felling_ax/init.lua:7
 msgctxt "ware"
 msgid "Felling Ax"
-msgstr ""
+msgstr "Ascia da abbattimento"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/fire_tongs/init.lua:7

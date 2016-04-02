@@ -9,7 +9,7 @@
 # Mirian Margiani <mirian.margiani@gmail.com>, 2014
 # Peter Schwanemann <nasenbaer_peter@sourceforge.net>, 2005
 # Venatrix, 2015
-# Venatrix, 2015-2016
+# Elisabeth Jäger, 2015-2016
 # w_laenger <ovvv@web.de>, 2015
 # wl-zocker, 2015
 # wl-zocker, 2016
@@ -17,9 +17,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-03-11 07:02+0000\n"
-"PO-Revision-Date: 2016-03-14 11:13+0000\n"
-"Last-Translator: Venatrix\n"
+"POT-Creation-Date: 2016-04-02 11:15+0000\n"
+"PO-Revision-Date: 2016-04-02 11:17+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2545,6 +2545,34 @@ msgid ""
 "This tribe is known from the oldest tales. The sons and daughters of "
 "Atlantis."
 msgstr "Dieser Stamm wird schon in den ältesten Sagen erwähnt. Die Söhne und Töchter von Atlantis."
+
+#: ../../data/tribes/scripting/help/init.lua:48
+msgid "Tribal Encyclopedia"
+msgstr ""
+
+#: ../../data/tribes/scripting/help/init.lua:53
+msgid "General"
+msgstr ""
+
+#: ../../data/tribes/scripting/help/init.lua:58
+msgid "Introduction"
+msgstr ""
+
+#: ../../data/tribes/scripting/help/init.lua:64
+msgid "Controls"
+msgstr ""
+
+#: ../../data/tribes/scripting/help/init.lua:73
+msgid "Wares"
+msgstr ""
+
+#: ../../data/tribes/scripting/help/init.lua:80
+msgid "Workers"
+msgstr ""
+
+#: ../../data/tribes/scripting/help/init.lua:87
+msgid "Buildings"
+msgstr ""
 
 #: ../../data/tribes/scripting/starting_conditions/atlanteans/fortified_village.lua:10
 #: ../../data/tribes/scripting/starting_conditions/barbarians/fortified_village.lua:10
