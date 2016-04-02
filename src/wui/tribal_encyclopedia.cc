@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015-2016 by the Widelands Development Team
+ * Copyright (C) 2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,33 +17,39 @@
  *
  */
 
-#include "editor/ui_menus/editor_help.h"
-
+#include "wui/tribal_encyclopedia.h"
 
 #include <memory>
 
 #include <boost/format.hpp>
 
 #include "base/i18n.h"
-#include "editor/editorinteractive.h"
+#include "logic/map_objects/tribes/tribe_descr.h"
+#include "logic/player.h"
 #include "scripting/lua_coroutine.h"
 #include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
 #include "ui_basic/messagebox.h"
+#include "wui/interactive_player.h"
 
-EditorHelp::EditorHelp(EditorInteractive& parent,
-							  UI::UniqueWindow::Registry& registry,
-							  LuaInterface* const lua)
+TribalEncyclopedia::TribalEncyclopedia(InteractivePlayer& parent,
+													UI::UniqueWindow::Registry& registry,
+													LuaInterface* const lua)
 	: EncyclopediaWindow(parent, registry, lua)
 {
+	const Widelands::TribeDescr& tribe = parent.player().tribe();
 	try {
-		init(parent, lua_->run_script("scripting/editor/editor_help.lua"));
+		std::unique_ptr<LuaTable> table(lua_->run_script("tribes/scripting/help/init.lua"));
+		std::unique_ptr<LuaCoroutine> cr(table->get_coroutine("func"));
+		cr->push_arg(tribe.name());
+		cr->resume();
+		init(parent, cr->pop_table());
 	} catch (LuaError& err) {
-		log("Error loading script for editor help:\n%s\n", err.what());
+		log("Error loading script for tribal encyclopedia:\n%s\n", err.what());
 		UI::WLMessageBox wmb(
 					&parent,
 					_("Error!"),
-					(boost::format("Error loading script for editor help:\n%s") % err.what()).str(),
+					(boost::format("Error loading script for tribal encyclopedia:\n%s") % err.what()).str(),
 					UI::WLMessageBox::MBoxType::kOk);
 		wmb.run<UI::Panel::Returncodes>();
 	}

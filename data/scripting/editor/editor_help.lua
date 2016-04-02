@@ -1,54 +1,86 @@
+-- Returns definitions for encyclopedia tabs and their contents for the
+-- Editor Help
+
+
+-- Comparison function used to sort map objects alphabetically
+function compare_by_title(a, b)
+  return a["title"] < b["title"]
+end
+
+-- Returns help entries for all the terrains in the world
+function get_terrains()
+   local result = {}
+   for i, terrain in ipairs(wl.World().terrain_descriptions) do
+      result[i] = {
+         name = terrain.name,
+         title = terrain.descname,
+         icon = terrain.representative_image,
+         script = "scripting/editor/terrain_help.lua",
+         script_parameters = {[1] = terrain.name}
+      }
+   end
+   table.sort(result, compare_by_title)
+   return result
+end
+
+-- Returns help entries for all the trees in the world
+function get_trees()
+   local result = {}
+   local counter = 1
+   for i, immovable in ipairs(wl.World().immovable_descriptions) do
+      if (immovable:has_attribute("tree")) then
+         result[counter] = {
+            name = immovable.name,
+            title = immovable.species,
+            icon = immovable.representative_image,
+            script = "scripting/editor/tree_help.lua",
+            script_parameters = {[1] = immovable.name}
+         }
+         counter = counter  + 1
+      end
+   end
+   table.sort(result, compare_by_title)
+   return result
+end
+
+-- Main function
 set_textdomain("widelands_editor")
-
-include "scripting/formatting.lua"
-include "txts/help/common_helptexts.lua"
-
 return {
-   title = _"General Help",
-   text =
-      title(_[[The Widelands Editor]]) ..
-      rt(
-         h1(_"Introduction") ..
-
-         p(_"This editor is intended for players who would like to design their own maps to use with Widelands.") ..
-         p(_"As you can see, this editor is heavy work in progress and as the editor becomes better and better, this text will also get longer and more complete.") ..
-
-         h1(_"Keyboard Shortcuts") ..
-
-         p(
-            -- TRANSLATORS: This is an access key combination.
-            dl(help_format_hotkey("H"), _"Toggle main menu") ..
-            -- TRANSLATORS: This is an access key combination. The hotkey is 't'
-            dl(help_format_hotkey("T"), _"Toggle tools menu") ..
-            -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
-            dl(help_format_hotkey(pgettext("hotkey", "1-0")), _"Change tool size") ..
-            help_toggle_minimap_hotkey() ..
-            help_toggle_building_spaces_hotkey() ..
-            -- TRANSLATORS: This is an access key combination. The hotkey is 'p'
-            dl(help_format_hotkey("P"), _"Toggle player menu") ..
-            -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
-            dl(help_format_hotkey("Ctrl + Z"), _"Undo") ..
-            -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
-            dl(help_format_hotkey("Ctrl + Y"), _"Redo") ..
-            -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
-            dl(help_format_hotkey("F1"), _"Help") ..
-            -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
-            dl(help_format_hotkey(pgettext("hotkey", "Shift (Hold)")), _"First alternative tool while pressed") ..
-            -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
-            dl(help_format_hotkey(pgettext("hotkey", "Alt (Hold)")), _"Second alternative tool while pressed") ..
-            -- TRANSLATORS: This is an access key combination. The hotkey is 'i'
-            dl(help_format_hotkey("I"), _"Activate information tool") ..
-            -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
-            dl(help_format_hotkey(pgettext("hotkey", "Ctrl + L")), _"Load map") ..
-            -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
-            dl(help_format_hotkey(pgettext("hotkey", "Ctrl + S")), _"Save map") ..
-            help_toggle_fullscreen_hotkey()
-         ) ..
-
-         h2(_"Editor Help") ..
-         -- TRANSLATORS: %s is a representation of the ? button.
-         p(_"For a detailed description of the trees and terrains, use the %s button on the bottom right."):bformat(b("?")) ..
-         help_online_help() ..
-         p(_"The wiki also includes a short tutorial on how to build a map.")
-      )
+   title = _"Editor Help",
+   tabs = {
+      {
+         name = "general",
+         -- TRANSLATORS Tab title: General help with the Widelands Editor
+         title = _"General",
+         icon = "images/logos/WL-Editor-32.png",
+         entries = {
+            {
+               name = "intro",
+               title = _"Introduction",
+               script = "scripting/editor/editor_introduction.lua",
+               script_parameters = {}
+            },
+            {
+               name = "controls",
+               title = _"Controls",
+               script = "scripting/editor/editor_controls.lua",
+               script_parameters = {}
+            }
+         }
+      },
+      {
+         name = "terrains",
+         -- TRANSLATORS Tab title: terrain help
+         title = _"Terrains",
+         icon = "images/wui/editor/editor_menu_tool_set_terrain.png",
+         entries = get_terrains()
+      },
+      {
+         name = "trees",
+         -- TRANSLATORS Tab title: tree help
+         title = _"Trees",
+         icon = "world/immovables/trees/alder/old/idle_0.png",
+         entries = get_trees()
+      }
+   }
 }

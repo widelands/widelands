@@ -19,7 +19,10 @@ rt(
    p(_[[Widelands is nearly feature complete and is much fun to play alone and even more in multiplayer with others. Still, there is always more work to be done in all areas. If you are interested in contributing – be it by making graphics, fixing bugs or adding new features, translating the game into your language or creating new maps – get in touch on our homepage.]]) ..
 
    h2(_[[Widelands Help]]) ..
-   p(_"You can find general help about gameplay or the editor by using the help button in the main menu.") ..
+   -- TRANSLATORS: %1% is a key on the keyboard
+   p((_"You can find help about gameplay or the editor by using the help button on the bottom menu, or by pressing %1%.")
+      -- TRANSLATORS: This is a key on the keyboard
+      :bformat(_"F1")) ..
    help_online_help() ..
 
    h2(_[[Reporting Bugs]]) ..

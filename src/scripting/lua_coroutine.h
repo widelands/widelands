@@ -20,6 +20,7 @@
 #ifndef WL_SCRIPTING_LUA_COROUTINE_H
 #define WL_SCRIPTING_LUA_COROUTINE_H
 
+#include <memory>
 #include <string>
 
 #include <stdint.h>
@@ -28,6 +29,7 @@
 
 class FileRead;
 class FileWrite;
+class LuaTable;
 
 namespace Widelands {
 class Player;
@@ -62,14 +64,12 @@ public:
 	// in hooks.
 	void push_arg(const Widelands::Player*);
 	void push_arg(const Widelands::Coords&);
-	void push_arg(const Widelands::BuildingDescr*);
-	void push_arg(const Widelands::WareDescr*);
-	void push_arg(const Widelands::WorkerDescr*);
 	void push_arg(const std::string&);
 
 	// Accesses the returned values from the run of the coroutine.
 	uint32_t pop_uint32();
 	std::string pop_string();
+	std::unique_ptr<LuaTable> pop_table();
 
 private:
 	friend class LuaGameInterface;
