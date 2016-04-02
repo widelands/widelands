@@ -346,10 +346,9 @@ function building_help_dependencies_production(tribe, building_description)
       local soldier = wl.Game():get_worker_description(tribe.soldier)
       for j, buildcost in ipairs(soldier.buildcost) do
          if (buildcost == ware) then
-            for k, buildingname in ipairs(tribe.buildings) do
-               local warehouse_description = wl.Game():get_building_description(buildingname)
-               if (warehouse_description.type_name == "warehouse") then
-                  outgoing = outgoing .. dependencies({ware, warehouse_description, soldier}, soldier.descname)
+            for k, building in ipairs(tribe.buildings) do
+               if (building.type_name == "warehouse") then
+                  outgoing = outgoing .. dependencies({ware, building, soldier}, soldier.descname)
                end
             end
          end
@@ -760,12 +759,15 @@ end
 
 -- The main function call
 return {
-   func = function(tribename, building)
+   func = function(tribename, buildingname)
       set_textdomain("tribes_encyclopedia")
       local tribe = wl.Game():get_tribe_description(tribename)
       -- We need to get the building description again, because it will
       -- give us a cast to the appropriate subclass.
-      local building_description = wl.Game():get_building_description(building.name)
-      return building_help(tribe, building_description)
+      local building_description = wl.Game():get_building_description(buildingname)
+      return {
+         title = building_description.descname,
+         text = building_help(tribe, building_description)
+      }
    end
 }

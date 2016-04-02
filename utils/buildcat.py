@@ -36,23 +36,22 @@ MAINPOTS = [
         "../../data/campaigns/*/elemental"
     ] ),
     ( "texts/texts", ["../../data/txts/*.lua",
-                  "../../data/txts/tips/*.tip"] ),
+        "../../data/txts/*/*.lua",
+        "../../data/txts/tips/*.tip"] ),
     ( "widelands/widelands", [
-                    "../../src/wlapplication.cc",
-                    "../../src/*/*.cc",
-                    "../../src/*/*/*.cc",
-                    "../../src/*/*/*/*.cc",
-                    "../../src/*/*/*/*/*.cc",
-                    "../../src/*/*/*/*/*/*.cc",
-                    "../../src/wlapplication.h",
-                    "../../src/*/*.h",
-                    "../../src/*/*/*.h",
-                    "../../src/*/*/*/*.h",
-                    "../../src/*/*/*/*/*.h",
-                    "../../src/*/*/*/*/*/*.h",
-                    "../../data/scripting/*.lua",
-                    "../../data/scripting/editor/*.lua",
-                    "../../data/scripting/widelands/*.lua",
+        "../../src/wlapplication.cc",
+        "../../src/*/*.cc",
+        "../../src/*/*/*.cc",
+        "../../src/*/*/*/*.cc",
+        "../../src/*/*/*/*/*.cc",
+        "../../src/*/*/*/*/*/*.cc",
+        "../../src/wlapplication.h",
+        "../../src/*/*.h",
+        "../../src/*/*/*.h",
+        "../../src/*/*/*/*.h",
+        "../../src/*/*/*/*/*.h",
+        "../../src/*/*/*/*/*/*.h",
+        "../../data/scripting/*.lua",
     ] ),
     ( "widelands_console/widelands_console", [
                     "../../src/wlapplication_messages.cc",
@@ -78,7 +77,6 @@ MAINPOTS = [
         "../../data/tribes/*/*/*/*/init.lua",
         "../../data/tribes/*/*/*/*/*/init.lua",
     ]),
-
     ("tribes_encyclopedia/tribes_encyclopedia", [
         "../../data/tribes/scripting/help/*.lua",
         "../../data/tribes/*/helptexts.lua",
@@ -87,6 +85,9 @@ MAINPOTS = [
         "../../data/tribes/*/*/*/*/helptexts.lua",
         "../../data/tribes/*/*/*/*/*/helptexts.lua",
     ]),
+    ( "widelands_editor/widelands_editor", [
+        "../../data/scripting/editor/*.lua",
+    ] ),
 ]
 
 

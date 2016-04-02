@@ -17,11 +17,11 @@ end
 return {
    title = _"License",
    text = rt(
-      "<rt text-align=center><p font-size=28 font-decoration=bold font-face=serif font-color=2F9131>" .. _"Licensing information for Widelands" .. "</p></rt>" ..
+      title(_"Licensing information for Widelands") ..
 
-      "<rt><p font-size=14><br><br>" ..
+      "<rt><p font-size=14><br>" ..
       _"Copyright 2002 - 2016 by the Widelands Development Team." .. "<br>" ..
-      _"This game is Free and Open Source (FOSS), licensed under the GNU General Public License (GPL) V2.0." .. "<br><br></p>" ..
+      _"This game is Free and Open Source (FOSS), licensed under the GNU General Public License (GPL) V2.0." .. "<br></p>" ..
 
       p(_"You can find more information on FOSS and the GPL by visiting the following webpage:  %s"):bformat(a("http://www.gnu.org/licenses/old-licenses/gpl-2.0")) ..
       p(_"You can find the full text of the license there as well as further information about its philosophy and the legal implications.") ..

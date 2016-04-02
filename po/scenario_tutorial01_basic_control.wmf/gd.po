@@ -2,15 +2,15 @@
 # Copyright (C) 2005-2016 Widelands Development Team
 # 
 # Translators:
-# GunChleoc, 2015
+# GunChleoc, 2015-2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2013
 # GunChleoc, 2013-2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-03-02 08:54+0000\n"
-"PO-Revision-Date: 2016-03-02 09:03+0000\n"
+"POT-Creation-Date: 2016-04-01 20:06+0000\n"
+"PO-Revision-Date: 2016-04-01 20:09+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -1000,9 +1000,9 @@ msgstr "Gus an geama seo fhàgail agus tilleadh dhan phrìomh chlàr-taice, brio
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:515
 msgid ""
-"‘Options’ menu button on the very left at the bottom of the screen. Then "
-"click the"
-msgstr "a’ phutan clàr-taice “Roghainnean” taobh clì aig bonn na sgrìn. An uairsin, briog air"
+"‘Main Menu’ button on the very left at the bottom of the screen. Then click "
+"the"
+msgstr "putan a’ phrìomh clàr-taice taobh clì aig bonn na sgrìn. An uairsin, briog air"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:516
 msgid "‘Exit Game’ button."
@@ -1019,7 +1019,7 @@ msgstr "Mòran taing airson an t-oideachadh seo a chluiche. Gabh tlachd à Widel
 msgid "“%s”"
 msgstr "“%s”"
 
-#: ../../data/scripting/format_scenario.lua:146
+#: ../../data/scripting/format_scenario.lua:96
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] "Amas ùr"
