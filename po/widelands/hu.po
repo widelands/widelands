@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-03-29 17:39+0000\n"
-"PO-Revision-Date: 2016-03-29 17:41+0000\n"
+"POT-Creation-Date: 2016-04-01 20:06+0000\n"
+"PO-Revision-Date: 2016-04-01 20:07+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
@@ -20,61 +20,12 @@ msgstr ""
 "Language: hu\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../../data/scripting/editor/terrain_help.lua:21
-#: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:54
-#: ../../src/editor/ui_menus/editor_tool_menu.cc:71
-msgid "Resources"
-msgstr "Erőforrások"
-
-#. TRANSLATORS: A header in the editor help
-#: ../../data/scripting/editor/terrain_help.lua:25
-msgid "Valid Resource:"
-msgid_plural "Valid Resources:"
-msgstr[0] "Érvényes erőforrás:"
-msgstr[1] "Érvényes erőforrások:"
-
-#: ../../data/scripting/editor/terrain_help.lua:35
-msgid "%1%x %2%"
-msgstr "%1%x %2%"
-
-#. TRANSLATORS: e.g. "5x Water"
-#: ../../data/scripting/editor/terrain_help.lua:35
-msgid "Default:"
-msgstr "Alapértelmezett:"
-
-#. TRANSLATORS: A header in the editor help
-#: ../../data/scripting/editor/terrain_help.lua:67
-msgid "Probability of trees growing"
-msgstr "A fák növekedésénék valószínűsége"
-
-#: ../../data/scripting/editor/terrain_help.lua:72
-msgid "No trees will grow here."
-msgstr "Itt nem nőnek fák."
-
-#. TRANSLATORS: A header in the editor help. Terrains preferred by a type of
-#. tree.
-#: ../../data/scripting/editor/tree_help.lua:17
-msgid "Preferred terrains"
-msgstr "Kedvelt terepek"
-
-#. * TRANSLATORS: %1% is a filename, %2% a map's name.
-#. * TRANSLATORS: Terrain name + editor category, e.g. Steppe (Summer)
-#. * TRANSLATORS: File name for saving objective achieved
-#. * TRANSLATORS: %1% = map name. %2% = achievement name
-#. TRANSLATORS: Terrain name (Climate)
-#: ../../data/scripting/editor/tree_help.lua:38
-#: ../../src/editor/ui_menus/editor_help.cc:157
-#: ../../src/editor/ui_menus/editor_help.cc:195
-#: ../../src/scripting/lua_game.cc:1060 ../../src/ui_fsmenu/loadgame.cc:74
-msgid "%1% (%2%)"
-msgstr "%1% (%2%)"
-
 #: ../../data/scripting/format_scenario.lua:36
 #, lua-format
 msgid "“%s”"
 msgstr "„%s”"
 
-#: ../../data/scripting/format_scenario.lua:146
+#: ../../data/scripting/format_scenario.lua:96
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] "Új cél"
@@ -127,93 +78,6 @@ msgstr "Néhány kezdőépületed nem fért el, és ezért nem lettek megépítv
 #: ../../data/scripting/infrastructure.lua:159
 msgid "Not enough space"
 msgstr "Nincs elég hely"
-
-#. * TRANSLATORS: This is a heading for a help window
-#: ../../data/scripting/widelands/multiplayer_help.lua:10
-#: ../../src/ui_fsmenu/launch_mpg.cc:157 ../../src/ui_fsmenu/launch_mpg.cc:689
-msgid "Multiplayer Game Setup"
-msgstr "Többjátékos beállítások"
-
-#: ../../data/scripting/widelands/multiplayer_help.lua:11
-msgid "You are in the multiplayer launch game menu."
-msgstr "A többjátékos mód beállító menüjében vagy."
-
-#: ../../data/scripting/widelands/multiplayer_help.lua:14
-msgid "Client settings"
-msgstr "Ügyfélbeállítások"
-
-#: ../../data/scripting/widelands/multiplayer_help.lua:15
-msgid ""
-"On the left side is a list of all clients including you. You can set your "
-"role with the button following your nickname. Available roles are:"
-msgstr "Bal oldalon látható a résztvevők listája, téged is beleértve. Szerepedet a beceneved mögötti gombbal állíthatod be. A lehetséges szerepek:"
-
-#: ../../data/scripting/widelands/multiplayer_help.lua:16
-msgid ""
-"The player with the color of the flag. If more than one client selected the "
-"same color, these share control over the player (‘shared kingdom mode’)."
-msgstr "Játékos, a megfelelő színű zászlóval. Ha egynél több résztvevő választja ugyanazon színt, akkor közösen irányítanak egy játékost („megosztott királyság mód”)."
-
-#: ../../data/scripting/widelands/multiplayer_help.lua:17
-msgid ""
-"Spectator mode, meaning you can see everything, but cannot control any "
-"player"
-msgstr "Néző mód: mindent lát, de senkit sem tud irányítani."
-
-#: ../../data/scripting/widelands/multiplayer_help.lua:19
-msgid "Player settings"
-msgstr "Játékosbeállítások"
-
-#: ../../data/scripting/widelands/multiplayer_help.lua:20
-msgid ""
-"In the middle are the settings for the players. To start a game, each player"
-" must be one of the following:"
-msgstr "Középen a játékosok beállításai láthatók. A játék megkezdéséhez minden játékosnak az alábbiak egyikének kell lennie:"
-
-#: ../../data/scripting/widelands/multiplayer_help.lua:21
-msgid "Connected to one or more clients (see ‘Client settings’)."
-msgstr "Csatlakozva egy vagy több résztvevőhöz (lásd „Ügyfélbeállítások”)"
-
-#: ../../data/scripting/widelands/multiplayer_help.lua:22
-msgid ""
-"Connected to a computer player (the face in the picture as well as the mouse"
-" hover texts indicate the strength of the currently selected computer "
-"player)."
-msgstr "Csatlakozva egy számítógépes játékoshoz (a képen látható arc és az egeret fölé mozgatva megjelenő szöveg mutatja az éppen kiválasztott számítógépes játékos erősségét)."
-
-#: ../../data/scripting/widelands/multiplayer_help.lua:23
-msgid "Set as shared in starting position for another player."
-msgstr "Osztozva egy másik játékos kezdőpozíciójával."
-
-#: ../../data/scripting/widelands/multiplayer_help.lua:24
-msgid "Closed."
-msgstr "Kizárva."
-
-#: ../../data/scripting/widelands/multiplayer_help.lua:25
-msgid ""
-"The latter three can only be set by the hosting client by left-clicking the "
-"‘type’ button of a player. Hosting players can also set the initialization "
-"of each player (the set of buildings, wares and workers the player starts "
-"with) and the tribe and team for computer players"
-msgstr "Az utóbbi három csak a gazda ügyfélnél állítható be a játékos „típus” gombjára kattintva. A gazdák az egyes játékosok kezdeti feltételeit is megadhatják (az épületek halmazát, árukat és a kezdeti munkások számát), valamint törzset és a csapatot a gépi játékosoknak."
-
-#: ../../data/scripting/widelands/multiplayer_help.lua:26
-msgid ""
-"Every client connected to a player (who isn’t a spectator) can set the tribe"
-" and the team for that player"
-msgstr "Minden játékoshoz kapcsolódó ügyfél (aki nem nező) beállíthatja a törzset és a csapatot ahhoz a játékoshoz."
-
-#: ../../data/scripting/widelands/multiplayer_help.lua:28
-msgid "Map details"
-msgstr "Térkép adatai"
-
-#: ../../data/scripting/widelands/multiplayer_help.lua:29
-msgid ""
-"You can see information about the selected map or savegame on the right-hand"
-" side. A button next to the map name allows the host to change to a "
-"different map. Furthermore, the host is able to set a specific win "
-"condition, and finally can start the game as soon as all players are set up."
-msgstr "A jobb oldalon a kiválasztott térképről vagy játékmentésről találsz információkat. A játék szervezője a térkép neve melletti gombbal választhat másik térképet. Továbbá a szervező megadhat egy játékcélt is, majd – ha minden játékos be lett állítva – elindíthatja a játékot."
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
 #: ../../src/ai/computer_player.cc:42
@@ -348,8 +212,12 @@ msgid "Loading tribes"
 msgstr "Törzsek betöltése"
 
 #: ../../src/editor/editorinteractive.cc:118
-msgid "Menu"
-msgstr "Menü"
+#: ../../src/editor/ui_menus/editor_main_menu.cc:46
+#: ../../src/wui/game_options_menu.cc:69
+#: ../../src/wui/interactive_player.cc:92
+#: ../../src/wui/interactive_spectator.cc:59
+msgid "Main Menu"
+msgstr "Főmenü"
 
 #: ../../src/editor/editorinteractive.cc:121
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:47
@@ -387,7 +255,8 @@ msgstr "Mégis"
 
 #: ../../src/editor/editorinteractive.cc:143
 #: ../../src/editor/ui_menus/editor_help.cc:62
-#: ../../src/wui/buildingwindow.cc:354
+#: ../../src/editor/ui_menus/editor_main_menu.cc:78
+#: ../../src/wui/buildingwindow.cc:354 ../../src/wui/game_options_menu.cc:78
 msgid "Help"
 msgstr "Súgó"
 
@@ -635,9 +504,15 @@ msgstr "Terepek"
 msgid "Trees"
 msgstr "Fák"
 
-#: ../../src/editor/ui_menus/editor_main_menu.cc:46
-msgid "Main Menu"
-msgstr "Főmenü"
+#. * TRANSLATORS: %1% is a filename, %2% a map's name.
+#. * TRANSLATORS: Terrain name + editor category, e.g. Steppe (Summer)
+#. * TRANSLATORS: File name for saving objective achieved
+#. * TRANSLATORS: %1% = map name. %2% = achievement name
+#: ../../src/editor/ui_menus/editor_help.cc:157
+#: ../../src/editor/ui_menus/editor_help.cc:195
+#: ../../src/scripting/lua_game.cc:1060 ../../src/ui_fsmenu/loadgame.cc:74
+msgid "%1% (%2%)"
+msgstr "%1% (%2%)"
 
 #: ../../src/editor/ui_menus/editor_main_menu.cc:53
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:47
@@ -665,14 +540,13 @@ msgstr "Térkép mentése"
 msgid "Map Options"
 msgstr "Térkép beállításai"
 
-#: ../../src/editor/ui_menus/editor_main_menu.cc:78
-#: ../../src/ui_fsmenu/main.cc:55
-msgid "View Readme"
-msgstr "Útmutató"
-
 #: ../../src/editor/ui_menus/editor_main_menu.cc:83
 msgid "Exit Editor"
 msgstr "Vissza a főmenübe"
+
+#: ../../src/editor/ui_menus/editor_main_menu.cc:117
+msgid "The Widelands Editor"
+msgstr ""
 
 #: ../../src/editor/ui_menus/editor_main_menu_load_or_save_map.cc:59
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:63
@@ -1000,6 +874,11 @@ msgstr "Érték növelése/csökkentése"
 msgid "Set Value"
 msgstr "Érték beállítása"
 
+#: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:54
+#: ../../src/editor/ui_menus/editor_tool_menu.cc:71
+msgid "Resources"
+msgstr "Erőforrások"
+
 #: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:108
 msgid "Current Selection"
 msgstr "Jelenleg kiválasztott"
@@ -1095,7 +974,7 @@ msgid "Loading map…"
 msgstr "Térkép betöltése…"
 
 #: ../../src/logic/game.cc:366 ../../src/logic/game.cc:399
-#: ../../src/ui_basic/progresswindow.cc:50 ../../src/wlapplication.cc:1377
+#: ../../src/ui_basic/progresswindow.cc:50 ../../src/wlapplication.cc:1367
 msgid "Loading…"
 msgstr "Betöltés…"
 
@@ -1471,8 +1350,8 @@ msgctxt "ship_state"
 msgid "Expedition Landing"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/soldier.cc:1469
-#: ../../src/logic/map_objects/tribes/soldier.cc:1480
+#: ../../src/logic/map_objects/tribes/soldier.cc:1485
+#: ../../src/logic/map_objects/tribes/soldier.cc:1496
 msgid "Logic error"
 msgstr "Logikai hiba"
 
@@ -1786,7 +1665,7 @@ msgid ""
 msgstr "A Widelands nem tud kapcsolatot létesíteni a megadott címmel.\nVagy nem fut Widelands szerver a feltételezett porton, vagy\na szerver leállt ahogy csatlakozni próbáltál."
 
 #: ../../src/network/netclient.cc:184 ../../src/network/nethost.cc:729
-#: ../../src/wlapplication.cc:1267
+#: ../../src/wlapplication.cc:1257
 msgid "Preparing game"
 msgstr "Játék előtötése"
 
@@ -2174,6 +2053,14 @@ msgid_plural "%d pixels"
 msgstr[0] ""
 msgstr[1] ""
 
+#: ../../src/ui_fsmenu/about.cc:40 ../../src/ui_fsmenu/main.cc:55
+msgid "About Widelands"
+msgstr ""
+
+#: ../../src/ui_fsmenu/about.cc:48 ../../src/wui/watchwindow.cc:142
+msgid "Close"
+msgstr "Bezárás"
+
 #: ../../src/ui_fsmenu/campaign_select.cc:50
 msgid "Choose a campaign"
 msgstr "Hadjárat kiválasztása"
@@ -2295,36 +2182,32 @@ msgstr "Oktatójáték:"
 msgid "Invalid path to file in campaigns.conf: %s"
 msgstr "Érvénytelen fájlútvonal a campaigns.conf fájlban: %s"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:420
+#: ../../src/ui_fsmenu/campaign_select.cc:421
 msgid "The designer of this tutorial"
 msgid_plural "The designers of this tutorial"
 msgstr[0] "A kiválasztott oktatójáték készítője"
 msgstr[1] "A kiválasztott oktatójáték készítői"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:423
+#: ../../src/ui_fsmenu/campaign_select.cc:424
 msgid "The designer of this scenario"
 msgid_plural "The designers of this scenario"
 msgstr[0] "A küldetés készítője"
 msgstr[1] "A küldetés készítői"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:426 ../../src/wui/mapdetails.cc:131
+#: ../../src/ui_fsmenu/campaign_select.cc:427 ../../src/wui/mapdetails.cc:131
 msgid "Author:"
 msgid_plural "Authors:"
 msgstr[0] "Készítő:"
 msgstr[1] "Készítők:"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:455
+#: ../../src/ui_fsmenu/campaign_select.cc:456
 msgid "Pick a tutorial from the list, then hit \"OK\"."
 msgstr "Válassz egy oktatójátékot a listáról, majd kattints az OK gombra."
 
-#: ../../src/ui_fsmenu/campaign_select.cc:457
+#: ../../src/ui_fsmenu/campaign_select.cc:458
 msgid ""
 "You can see a description of the currently selected tutorial on the right."
 msgstr "A megjelölt játékról a jobb oldalon találsz leírást."
-
-#: ../../src/ui_fsmenu/fileview.cc:70 ../../src/wui/watchwindow.cc:142
-msgid "Close"
-msgstr "Bezárás"
 
 #: ../../src/ui_fsmenu/helpwindow.cc:42 ../../src/wui/helpwindow.cc:44
 #, c-format
@@ -2461,6 +2344,11 @@ msgstr "Játék indítása"
 #: ../../src/ui_fsmenu/launch_mpg.cc:151
 msgid "Show the help window"
 msgstr "Súgóablak megjelenítése"
+
+#. * TRANSLATORS: This is a heading for a help window
+#: ../../src/ui_fsmenu/launch_mpg.cc:157 ../../src/ui_fsmenu/launch_mpg.cc:689
+msgid "Multiplayer Game Setup"
+msgstr "Többjátékos beállítások"
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:166
 msgid "Clients"
@@ -2818,36 +2706,25 @@ msgid "Editor"
 msgstr "Térképkészítő"
 
 #: ../../src/ui_fsmenu/main.cc:52 ../../src/ui_fsmenu/options.cc:111
-#: ../../src/wui/game_options_menu.cc:69
-#: ../../src/wui/interactive_player.cc:92
-#: ../../src/wui/interactive_spectator.cc:59
 msgid "Options"
 msgstr "Beállítások"
 
-#: ../../src/ui_fsmenu/main.cc:58 ../../src/wui/game_options_menu.cc:85
-msgid "License"
-msgstr "Licenc"
-
-#: ../../src/ui_fsmenu/main.cc:61 ../../src/wui/game_options_menu.cc:92
-msgid "Authors"
-msgstr "Készítők"
-
-#: ../../src/ui_fsmenu/main.cc:64
+#: ../../src/ui_fsmenu/main.cc:58
 msgid "Exit Widelands"
 msgstr "Kilépés a Widelandsből"
 
 #. * TRANSLATORS: %1$s = version string, %2%s = "Debug" or "Release"
-#: ../../src/ui_fsmenu/main.cc:70
+#: ../../src/ui_fsmenu/main.cc:64
 #, c-format
 msgid "Version %1$s (%2$s)"
 msgstr "Verzió: %1$s (%2$s)"
 
 #. * TRANSLATORS: Placeholders are the copyright years
-#: ../../src/ui_fsmenu/main.cc:75
+#: ../../src/ui_fsmenu/main.cc:69
 msgid "(C) %1%-%2% by the Widelands Development Team"
 msgstr "(C) %1%-%2%, Widelands fejlesztőcsapat"
 
-#: ../../src/ui_fsmenu/main.cc:80
+#: ../../src/ui_fsmenu/main.cc:74
 msgid "Licensed under the GNU General Public License V2.0"
 msgstr "Licenc: GNU General Public License V2.0"
 
@@ -3076,11 +2953,11 @@ msgstr "Hadjáratok"
 msgid "Load Game"
 msgstr "Játék betöltése"
 
-#: ../../src/wlapplication.cc:1053
+#: ../../src/wlapplication.cc:1043
 msgid "Game data error"
 msgstr "Játékadat hiba"
 
-#: ../../src/wlapplication.cc:1063
+#: ../../src/wlapplication.cc:1053
 #, c-format
 msgid ""
 "\n"
@@ -3088,7 +2965,7 @@ msgid ""
 "Please report this problem to help us improve Widelands. You will find related messages in the standard output (stdout.txt on Windows). You are using build %1$s (%2$s). "
 msgstr "\n\nKérlek jelentsd be ezt a hibát, hogy ezzel segítsd a Widelands fejlesztését. A hibával kapcsolatos üzeneteket megtalálod a sztenderd kimeneten (stdout.txt Windowson). Te ezt a verziót használod: %1$s (%2$s). "
 
-#: ../../src/wlapplication.cc:1070
+#: ../../src/wlapplication.cc:1060
 msgid ""
 "Please add this information to your report.\n"
 "\n"
@@ -3434,7 +3311,7 @@ msgstr "Készletek"
 
 #. * TRANSLATORS: Button tooltip
 #: ../../src/wui/game_main_menu_save_game.cc:64
-#: ../../src/wui/game_options_menu.cc:108
+#: ../../src/wui/game_options_menu.cc:94
 #: ../../src/wui/interactive_spectator.cc:57
 msgid "Save Game"
 msgstr "Játék mentése"
@@ -3600,39 +3477,29 @@ msgstr "Kilépés megerősítése"
 msgid "Are you sure you wish to exit this game?"
 msgstr "Valóban szeretnél kilépni a játékból?"
 
-#: ../../src/wui/game_options_menu.cc:78
-msgid "README"
-msgstr "OLVASSEL"
-
 #. * TRANSLATORS: Button tooltip
 #: ../../src/wui/game_options_menu.cc:80
-msgid "Show general information about Widelands and keyboard shortcuts"
-msgstr "Általános információk megjelenítése a Widelands játékról és a gyorsbillentyűkről"
+msgid "General help and keyboard shortcuts"
+msgstr ""
 
-#. * TRANSLATORS: Button tooltip
-#: ../../src/wui/game_options_menu.cc:87
-msgid "Show the distribution licence document"
-msgstr "A terjesztési licenc dokumentum megjelenítése"
-
-#. * TRANSLATORS: Button tooltip
-#: ../../src/wui/game_options_menu.cc:94
-msgid "Show information about the Widelands Development Team"
-msgstr "Információ megjelenítése a Widelands fejlesztőcsapatról"
-
-#: ../../src/wui/game_options_menu.cc:99
+#: ../../src/wui/game_options_menu.cc:85
 #: ../../src/wui/game_options_sound_menu.cc:29
 msgid "Sound Options"
 msgstr "Hangbeállítások"
 
 #. * TRANSLATORS: Button tooltip
-#: ../../src/wui/game_options_menu.cc:101
+#: ../../src/wui/game_options_menu.cc:87
 msgid "Set sound effect and music options"
 msgstr "Hanghatások és zenebeállítások megadása"
 
 #. * TRANSLATORS: Button tooltip
-#: ../../src/wui/game_options_menu.cc:115 ../../src/wui/game_summary.cc:110
+#: ../../src/wui/game_options_menu.cc:101 ../../src/wui/game_summary.cc:110
 msgid "Exit Game"
 msgstr "Kilépés a játékból"
+
+#: ../../src/wui/game_options_menu.cc:134
+msgid "General Help"
+msgstr ""
 
 #: ../../src/wui/game_options_sound_menu.cc:35
 msgid "Music Volume"
@@ -3824,12 +3691,12 @@ msgid "Please enter your password!"
 msgstr "Kérlek add meg a jelszavad!"
 
 #. * TRANSLATORS: Parent directory/folder
-#: ../../src/wui/mapdata.cc:128
+#: ../../src/wui/mapdata.cc:129
 msgid "parent"
 msgstr "szülő"
 
 #. * TRANSLATORS: Directory name for MP Scenarios in map selection
-#: ../../src/wui/mapdata.cc:136
+#: ../../src/wui/mapdata.cc:137
 msgid "Multiplayer Scenarios"
 msgstr "Többjátékos küldetések"
 

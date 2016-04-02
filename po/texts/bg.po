@@ -3,12 +3,13 @@
 # 
 # Translators:
 # Любомир Василев, 2015-2016
+# Любомир Василев, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-03-18 11:30+0000\n"
-"PO-Revision-Date: 2016-03-24 07:46+0000\n"
+"POT-Creation-Date: 2016-04-01 20:06+0000\n"
+"PO-Revision-Date: 2016-04-02 09:30+0000\n"
 "Last-Translator: Любомир Василев\n"
 "Language-Team: Bulgarian (http://www.transifex.com/widelands/widelands/language/bg/)\n"
 "MIME-Version: 1.0\n"
@@ -17,11 +18,11 @@ msgstr ""
 "Language: bg\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../../data/txts/AUTHORS.lua:40
-msgid "Authors"
-msgstr "Автори"
+#: ../../data/txts/AUTHORS.lua:27
+msgid "Developers"
+msgstr "Разработчици"
 
-#: ../../data/txts/AUTHORS.lua:42
+#: ../../data/txts/AUTHORS.lua:29
 msgid "Widelands Development Team"
 msgstr "Екипът по разработката на Widelands"
 
@@ -85,302 +86,106 @@ msgid ""
 "general support), %2% (Bugtracker), and %3% (Translations)."
 msgstr "Тази игра се предоставя във вида, в който е и без никакви гаранции. За повече информация и поддръжка, можете да ни откриете на %1% (уеб сайт, уики, форум за въпроси и обща поддръжка), %2% (система за докладване на грешки) и %3% (преводи)."
 
-#: ../../data/txts/README.lua:6
-msgid "README"
-msgstr "ПРОЧЕТИ МЕ"
+#: ../../data/txts/README.lua:7
+msgid "Readme"
+msgstr "Прочети ме"
 
-#: ../../data/txts/README.lua:13
+#: ../../data/txts/README.lua:12
 msgid "an open source strategy game"
 msgstr "стратегическа игра с отворен код"
 
-#: ../../data/txts/README.lua:17 ../../data/txts/editor_readme.lua:10
-msgid "Introduction"
-msgstr "Въведение"
-
-#: ../../data/txts/README.lua:19
-msgid ""
-"Widelands is a free, open source real-time strategy game with singleplayer\n"
-"campaigns and a multiplayer mode. The game was inspired by Settlers II but has\n"
-"significantly more variety and depth to it. Still, it is easy to get started\n"
-"through playable tutorials."
-msgstr "Widelands е безплатна игра от тип стратегия в реално време и е с отворен\nкод. Тя включва кампании за самостоятелна игра и режим за игра в мрежа.\nИграта е вдъхновена от Settlers II, но има значително повече разнообразие\nи дълбочина. Въпреки това е лесно да навлезете чрез игрите за обучение."
-
-#: ../../data/txts/README.lua:24
-msgid ""
-"In this game, you start out on a small piece of land with just a few\n"
-"resources. Using these, you’ll create an empire with many thousands of\n"
-"inhabitants. On your way towards this goal, you will have to establish an\n"
-"economic infrastructure, explore the land around you and face rivaling\n"
-"tribes."
-msgstr "В тази игра Вие започвате с малка площ и само няколко ресурса.\nИзползвайки ги, ще създадете империя с хиляди жители население.\nПо пътя към тази цел ще трябва да създадете икономическа инфраструктура,\nда проучите земята около Вас и да се изправите срещу съперничещите\nплемена."
-
-#: ../../data/txts/README.lua:30
+#: ../../data/txts/README.lua:15
 msgid "Check out the Widelands project homepage:"
 msgstr "Вижте страницата на проекта „Widelands“:"
 
-#: ../../data/txts/README.lua:34
+#: ../../data/txts/README.lua:17
 msgid ""
-"Widelands is licensed under the GNU General Public License (GPL). For more\n"
+"Widelands is licensed under the GNU General Public License (GPL). For more "
 "information, see the file ‘COPYING’."
 msgstr "Widelands е лицензирана под Общия публичен лиценз на ГНУ (GPL). За повече \nинформация, погледнете файла „COPYING“."
 
-#: ../../data/txts/README.lua:37
+#: ../../data/txts/README.lua:18
 msgid "Status"
 msgstr "Състояние"
 
-#: ../../data/txts/README.lua:39
+#: ../../data/txts/README.lua:19
 msgid ""
-"Widelands is nearly feature complete and is much fun to play alone and even\n"
-"more in multiplayer with others. Still, there is always more work to be done in\n"
-"all areas. If you are interested in contributing – be it by making graphics,\n"
-"fixing bugs or adding new features, translating the game into your language or\n"
-"creating new maps – get in touch on our homepage."
-msgstr "Widelands е почти завършена и е много забавна за самостоятелна игри и дори\nповече за мрежова игра. И все пак, винаги има какво да се добави във\nвсички области. Ако имате интерес да помогнете – било то с графики,\nпоправки или добавяне на нови функционалности, превод на играта или\nсъздаване на нови карти – свържете се с нас чрез нашия уеб сайт."
+"Widelands is nearly feature complete and is much fun to play alone and even "
+"more in multiplayer with others. Still, there is always more work to be done"
+" in all areas. If you are interested in contributing – be it by making "
+"graphics, fixing bugs or adding new features, translating the game into your"
+" language or creating new maps – get in touch on our homepage."
+msgstr "Widelands е почти завършена и е много забавна за самостоятелна игри и дори\nповече за мрежова игра. И все пак, винаги има какво да се добави във\nвсички области. Ако имате интерес да помогнете — било то с графики,\nпоправки или добавяне на нови функционалности, превод на играта или\nсъздаване на нови карти — свържете се с нас чрез нашия уеб сайт."
 
-#: ../../data/txts/README.lua:45
-msgid "General game control"
-msgstr "Общо управление на играта"
+#: ../../data/txts/README.lua:21
+msgid "Widelands Help"
+msgstr "Помощ за Widelands"
 
-#: ../../data/txts/README.lua:47
+#: ../../data/txts/README.lua:22
 msgid ""
-"To close an open window, right-click on it. To minimize/maximize a window, "
-"click on it with the middle mouse button or with the left mouse button while"
-" holding down Ctrl."
-msgstr "За да затворите прозорец, щракнете в него с десен бутон. За да намалите/увеличите\nпрозорец, щракнете върху него със средния бутон на мишката или с левия такъв,\nдокато натискате бутона Контрол."
+"You can find general help about gameplay or the editor by using the help "
+"button in the main menu."
+msgstr "Можете да откриете помощ относно играта или редактора, използвайки бутона за помощ в главното меню."
 
-#: ../../data/txts/README.lua:49
-msgid ""
-"If you hold Ctrl while building a road, flags will be placed automatically.\n"
-"If you hold Ctrl while removing a road, all flags up to the first junction are\n"
-"removed."
-msgstr "Ако задържите Контрол, докато строите път, флаговете ще се поставят автоматично.\nАко задържите Контрол, докато премахвате път, всички флагове до първото кръстовище ще\nбъдат премахнати."
-
-#: ../../data/txts/README.lua:53
-msgid ""
-"You can skip confirmation windows for irreversible actions if you hold Ctrl\n"
-"while clicking on the action button."
-msgstr "Можете да пропуснете прозорците за потвърждение на необратимите действия,\nако задържите Контрол, докато натискате бутона за съответното действие."
-
-#: ../../data/txts/README.lua:56
-msgid "Keyboard shortcuts (in-game)"
-msgstr "Клавиши и комбинации (в игра)"
-
-#: ../../data/txts/README.lua:58
-msgid " Page Up: increases game speed"
-msgstr "Page Up: увеличава скоростта на играта"
-
-#: ../../data/txts/README.lua:59
-msgid " Page Down: decreases game speed"
-msgstr "Page Down: намалява скоростта на играта"
-
-#: ../../data/txts/README.lua:60
-msgid "Pause: pauses the game"
-msgstr "Pause: спира играта на пауза"
-
-#: ../../data/txts/README.lua:61
-msgid "Space: toggles if building spaces are shown"
-msgstr "Интервал: превключва показването на местата за строеж"
-
-#: ../../data/txts/README.lua:62
-msgid "M: toggles minimap"
-msgstr "M: превключва миникартата"
-
-#: ../../data/txts/README.lua:63
-msgid "N: toggles messages (‘news’)"
-msgstr "N: превключва съобщенията („новините“)"
-
-#: ../../data/txts/README.lua:64
-msgid "C: toggles census"
-msgstr "C: превключва преброяването"
-
-#: ../../data/txts/README.lua:65
-msgid "S: toggles statistics"
-msgstr "S: превключва статистиките"
-
-#: ../../data/txts/README.lua:66
-msgid "I: toggles stock inventory"
-msgstr "I: превключва инвентара на запасите"
-
-#: ../../data/txts/README.lua:67
-msgid "O: toggles objectives"
-msgstr "O: превключва задачите"
-
-#: ../../data/txts/README.lua:68
-msgid "B: toggles building statistics"
-msgstr "B: превключва статистиките за сградите"
-
-#: ../../data/txts/README.lua:69
-msgid "F: toggles fullscreen (if supported by the OS)"
-msgstr "F: превключва режима на цял екран (ако това се поддържа от ОС)"
-
-#: ../../data/txts/README.lua:70
-msgid "Home: centers main mapview on starting location"
-msgstr "HOME: центрира картата върху началната позиция"
-
-#: ../../data/txts/README.lua:71
-msgid "(Ctrl +) 0-9: Remember and go to previously remembered locations"
-msgstr "(Контрол +) 0-9: запомня и Ви връща към запомнените местоположения"
-
-#: ../../data/txts/README.lua:72
-msgid ",: goes to the previous location"
-msgstr ",: към предходното местоположение"
-
-#: ../../data/txts/README.lua:73
-msgid ".: goes to the next location"
-msgstr ".: към следващото местоположение"
-
-#: ../../data/txts/README.lua:74
-msgid "F6: shows the debug console (only in debug-builds)"
-msgstr "F6: показва конзолата за отстраняване на грешки (само ако играта е компилирана в такъв режим)"
-
-#: ../../data/txts/README.lua:75
-msgid "Ctrl + F10: quits the game immediately"
-msgstr "Контрол + F10: излиза от играта моментално"
-
-#: ../../data/txts/README.lua:76
-msgid "Ctrl + Leftclick: skips confirmation dialogs"
-msgstr "Контрол + щракване с левия бутон: пропуска прозорците за потвърждение"
-
-#: ../../data/txts/README.lua:77
-msgid "Ctrl + F11: takes a screenshot"
-msgstr "Контрол + F11: прави снимка на екрана"
-
-#: ../../data/txts/README.lua:79
-msgid ""
-"In the message window, the following additional shortcuts are available:"
-msgstr "Следните допълнителни клавиши могат да бъдат използвани в прозореца със съобщения:"
-
-#: ../../data/txts/README.lua:81
-msgid "0: shows all messages"
-msgstr "0: показва всички съобщения"
-
-#: ../../data/txts/README.lua:82
-msgid "1: shows geologists’ messages only"
-msgstr "1: показва само съобщенията от геолозите"
-
-#: ../../data/txts/README.lua:83
-msgid "2: shows economy messages only"
-msgstr "2: показва само съобщенията за икономиката"
-
-#: ../../data/txts/README.lua:84
-msgid "3: shows seafaring messages only"
-msgstr "3: показва само съобщенията за мореплаването"
-
-#: ../../data/txts/README.lua:85
-msgid "4: shows warfare messages only"
-msgstr "4: показва само военните съобщения"
-
-#: ../../data/txts/README.lua:86
-msgid "5: shows scenario messages only"
-msgstr "5: показва само съобщенията за сценария"
-
-#: ../../data/txts/README.lua:87
-msgid "G: jumps to the location corresponding to the current message"
-msgstr "G: преминава към местоположението, свързано с текущото съобщение"
-
-#: ../../data/txts/README.lua:88
-msgid "Delete: archives/restores the current message"
-msgstr "De.ete: архивира/възстановява текущото съобщение"
-
-#: ../../data/txts/README.lua:90
-msgid "Online Help"
-msgstr "Помощ в Интернет"
-
-#: ../../data/txts/README.lua:91
-msgid ""
-"A detailed description of the tribes’ economies is available in the in-game "
-"Tribal Encyclopedia."
-msgstr "Можете да намерите подробно описание на всяка от икономиките на племената в Енциклопедията на племената, достъпна от играта."
-
-#: ../../data/txts/README.lua:92
-#, lua-format
-msgid ""
-"If you need more documentation or help for Widelands or the Widelands "
-"Editor, be sure to visit our homepage at %s. You can find online help in our"
-" Wiki there."
-msgstr "Ако имате нужда от повече документация или помощ за Widelands или редактора, посетете нашия уеб сайт: %s. Можете да получите повече информация от нашето уики там."
-
-#: ../../data/txts/README.lua:94
+#: ../../data/txts/README.lua:25
 msgid "Reporting Bugs"
 msgstr "Докладване на грешки"
 
-#: ../../data/txts/README.lua:96
+#: ../../data/txts/README.lua:26
 msgid "If you encounter a bug, please report it to our bugtracker:"
 msgstr "Ако срещнете проблем, моля докладвайте го в нашата система за грешки:"
 
-#: ../../data/txts/README.lua:100
+#: ../../data/txts/README.lua:28
 msgid "Please provide enough background information. Tell us:"
 msgstr "Моля, осигурете достатъчно информация. Кажете ни:"
 
-#: ../../data/txts/README.lua:102
-msgid "- Detailed steps on how to trigger the bug, if possible."
-msgstr "– как да възпроизведем проблема, стъпка по стъпка, колкото е възможно по-подробно;"
+#: ../../data/txts/README.lua:30
+msgid "Detailed steps on how to trigger the bug, if possible."
+msgstr "Как да възпроизведем проблема, стъпка по стъпка, колкото е възможно по-подробно."
 
-#: ../../data/txts/README.lua:104
+#: ../../data/txts/README.lua:31
 msgid ""
-"- What you expected to happen when performing the steps and what actually "
+"What you expected to happen when performing the steps and what actually "
 "happened."
-msgstr "– какво очаквате да се случи, след като бъдат изпълнени стъпките, и какво се е случило всъщност;"
+msgstr "Какво очаквате да се случи, след като бъдат изпълнени стъпките, и какво се е случило всъщност."
 
-#: ../../data/txts/README.lua:106
+#: ../../data/txts/README.lua:32
 msgid ""
-"- Which version of Widelands you are running (i.e. either the build number or\n"
-"the revision number if you are running a development version or a daily build.)"
-msgstr "– коя версия на Widelands използвате (напр. номера на компилацията или\nна ревизията, ако използвате версия за разработчици или ежедневна компилация);"
+"Which version of Widelands you are running (i.e. either the build number or "
+"the revision number if you are running a development version or a daily "
+"build.)"
+msgstr "Коя версия на Widelands използвате (напр. номера на компилацията или\nна ревизията, ако използвате версия за разработчици или ежедневна компилация)."
 
-#: ../../data/txts/README.lua:109
+#: ../../data/txts/README.lua:33
 msgid ""
-"- Please also include which operating system you are running Widelands on as\n"
+"Please also include which operating system you are running Widelands on as "
 "some bugs can be platform specific."
-msgstr "– моля, отбележете каква операционна система използвате, тъй като някои\nгрешки може да се проявяват само на дадена система;"
+msgstr "Моля, отбележете каква операционна система използвате, тъй като някои\nгрешки може да се проявяват само на дадена система."
 
-#: ../../data/txts/README.lua:112
-msgid "- Which map you were playing when the bug occurred."
-msgstr "– на коя карта играехте, когато проблемът се появи;"
+#: ../../data/txts/README.lua:34
+msgid "Which map you were playing when the bug occurred."
+msgstr "На коя карта играехте, когато проблемът се появи."
 
-#: ../../data/txts/README.lua:114
+#: ../../data/txts/README.lua:35
 msgid ""
-"- If the bug concerns something not being displayed correctly or if it helps\n"
+"If the bug concerns something not being displayed correctly or if it helps "
 "demonstrate the issue, please include one or more screenshots."
-msgstr "– ако проблемът е свързан с нещо, което не се показва правилно или ако\nсмятате, че ще е от полза, моля, добавете една или повече снимки на екрана;"
+msgstr "Ако проблемът е свързан с нещо, което не се показва правилно или ако\nсмятате, че ще е от полза, моля, добавете една или повече снимки на екрана."
 
-#: ../../data/txts/README.lua:117
+#: ../../data/txts/README.lua:36
 msgid ""
-"- If you have a save game or replay demonstrating the issue (for instance\n"
-"crashes where it can be hard to tell exactly what is triggering it), please\n"
+"If you have a save game or replay demonstrating the issue (for instance "
+"crashes where it can be hard to tell exactly what is triggering it), please "
 "include that too. For more information, see the section on Replays below."
-msgstr "– ако имате запазена игра или повторение, където проблемът се вижда\n(например при сривове, за които е трудно да се определи причината), моля,\nвключете и това. За повече информация, вижте раздела за повторенията по-долу."
+msgstr "Ако имате запазена игра или повторение, където проблемът се вижда\n(например при сривове, за които е трудно да се определи причината), моля,\nвключете и това. За повече информация, вижте раздела за повторенията по-долу."
 
-#: ../../data/txts/README.lua:121
-msgid "Replays"
-msgstr "Повторения"
+#: ../../data/txts/TRANSLATORS.lua:25
+msgid "Translators"
+msgstr "Преводачи"
 
-#: ../../data/txts/README.lua:123
-msgid ""
-"Widelands records every game you play in two files. One of these files has a\n"
-".wrpl.wgf extension and contains an initial savegame. The other file has a\n"
-".wrpl extension and contains all commands that were issued by all players, such\n"
-"as building a road or attacking an enemy. The rest of the filenames will tell\n"
-"you the time you started the game."
-msgstr "Widelands записва всяка игра, която играете, в два файла. Единият има\nразширение .wrpl.wgf и съдържа първоначалната запазена игра. Другият има\nразширение .wrpl и съдържа всички команди, издадени от играча, като\nнапример строеж на път или нападение на враг. Останалата част от имената\nпоказва датата и часа, когато играта е започната."
-
-#: ../../data/txts/README.lua:129
-msgid ""
-"Using the Watch Replay option in the main menu, a previously played game will\n"
-"be precisely reconstructed for you to watch. Note, however, that even small\n"
-"changes in the game data files or the Widelands executable can cause a replay\n"
-"to become incompatible and to ‘go out of sync’. This is similar to how network\n"
-"games will suffer from desynchronization problems if one of the players has a\n"
-"different version of the game."
-msgstr "Чрез бутона „Гледане на повторение“ в главното меню можете да гледате вече\nизиграна игра, която ще бъде пресъздадена за Вас. Имайте предвид, че дори\nдребни промени във файловете с данни на играта или изпълнимия файл може\nда направят повторението несъвместимо или „несинхронизирано“. Това е\nсъщият проблем, от който страдат мрежовите игри, ако един от играчите има\nразлична версия на играта."
-
-#: ../../data/txts/README.lua:136
-msgid ""
-"Replays are a very useful tool to find bugs in the game logic, so they\n"
-"can be useful as attachments to bug reports. The replay files are saved in the\n"
-"~/.widelands/replays directory on Linux and Mac OS X. On Windows,\n"
-"they are in the ‘replays’ subdirectory of your Widelands installation."
-msgstr "Повторенията са много полезно средство за откриване на грешки в играта, \nтака че понякога е добре да бъдат прикачени към докладите за грешки. Файловете\nс повторенията се съхраняват в папката ~/.widelands/replays directory на Линукс\nи Mac OS X. На Windows, те са в подпапката „replays“ в инсталационата папка на Widelands."
+#: ../../data/txts/TRANSLATORS.lua:27
+msgid "Widelands Translators"
+msgstr "Преводачите на Widelands"
 
 #: ../../data/txts/developers.lua:3
 msgid "Atlantean"
@@ -404,7 +209,7 @@ msgstr "Програмисти"
 
 #: ../../data/txts/developers.lua:3
 msgid "Debian Linux"
-msgstr "Debian Linux"
+msgstr "Линукс — Дебиан"
 
 #: ../../data/txts/developers.lua:3
 msgid "Documentation, Help and Wiki"
@@ -420,7 +225,7 @@ msgstr "Империя"
 
 #: ../../data/txts/developers.lua:3
 msgid "Fedora Linux"
-msgstr "Fedora Linux"
+msgstr "Линукс — Федора"
 
 #: ../../data/txts/developers.lua:3
 msgid "Former Elders"
@@ -452,7 +257,7 @@ msgstr "Mac OS X"
 
 #: ../../data/txts/developers.lua:3
 msgid "Mandriva Linux"
-msgstr "Mandriva Linux"
+msgstr "Линукс — Мандрива"
 
 #: ../../data/txts/developers.lua:3
 msgid "Maps and Missions"
@@ -487,168 +292,447 @@ msgid "Translation"
 msgstr "Превод"
 
 #: ../../data/txts/developers.lua:3
-msgid "Translators"
-msgstr "Преводачи"
-
-#: ../../data/txts/developers.lua:3
 msgid "Windows"
-msgstr "Windows"
+msgstr "Уиндоус"
 
 #: ../../data/txts/developers.lua:3
 msgid "ZetaOS"
 msgstr "ZetaOS"
 
-#: ../../data/txts/editor_readme.lua:6
-msgid "README for the Widelands Editor"
-msgstr "ПРОЧЕТИ МЕ за редактора на Widelands"
+#: ../../data/txts/help/common_helptexts.lua:10
+msgid "Online Help"
+msgstr "Помощ в Интернет"
 
-#: ../../data/txts/editor_readme.lua:8
-msgid "The Widelands Editor"
-msgstr "Редакторът на Widelands"
-
-#: ../../data/txts/editor_readme.lua:12
-msgid ""
-"This editor is intended for players who would like to design their own maps "
-"to use with Widelands."
-msgstr "Този редактор е предназначен за играчите, които биха искали да проектират свои собствени карти за Widelands."
-
-#: ../../data/txts/editor_readme.lua:13
-msgid ""
-"As you can see, this editor is heavy work in progress and as the editor "
-"becomes better and better, this text will also get longer and more complete."
-msgstr "Както виждате, редакторът е в процес на разработка и с развитието му този текст ще става все по-дълъг."
-
-#: ../../data/txts/editor_readme.lua:14
+#: ../../data/txts/help/common_helptexts.lua:11
 #, lua-format
-msgid "Please have a look at our enduser manuals on our wiki pages at: %s"
-msgstr "Моля, погледнете ръководствата ни за крайния потребител на страниците на нашето уики тук: %s"
-
-#: ../../data/txts/editor_readme.lua:15
 msgid ""
-"Those pages might be more complete and up to date than this file, and you "
-"will also find a short tutorial about building a map there."
-msgstr "Тези страници може да са по-завършени и актуални от този файл, а и там ще намерите кратко обяснение относно това как се създава карта."
+"If you need more documentation or help for Widelands or the Widelands "
+"Editor, be sure to visit our homepage at %s. You can find online help in our"
+" wiki there."
+msgstr "Ако имате нужда от повече документация или помощ за Widelands или редактора, посетете нашия уеб сайт: %s. Можете да получите повече информация от нашето уики там."
 
-#: ../../data/txts/editor_readme.lua:17
-msgid "Keyboard shortcuts"
-msgstr "Клавиши и комбинации"
+#: ../../data/txts/help/common_helptexts.lua:17
+msgid "Introduction"
+msgstr "Въведение"
 
-#. TRANSLATORS: This is a hotkey
-#: ../../data/txts/editor_readme.lua:21
-msgid "Space:"
-msgstr "Интервал:"
+#: ../../data/txts/help/common_helptexts.lua:18
+msgid ""
+"Widelands is a free, open source real-time strategy game with singleplayer "
+"campaigns and a multiplayer mode. The game was inspired by Settlers II but "
+"has significantly more variety and depth to it. Still, it is easy to get "
+"started through playable tutorials."
+msgstr "Widelands е безплатна игра от тип стратегия в реално време и е с отворен\nкод. Тя включва кампании за самостоятелна игра и режим за игра в мрежа.\nИграта е вдъхновена от Settlers II, но има значително повече разнообразие\nи дълбочина. Въпреки това е лесно да навлезете чрез игрите за обучение."
 
-#: ../../data/txts/editor_readme.lua:21
-msgid "toggles if building spaces are shown"
-msgstr "превключва показването на местата за строеж"
+#: ../../data/txts/help/common_helptexts.lua:19
+msgid ""
+"In this game, you start out on a small piece of land with just a few "
+"resources. Using these, you’ll create an empire with many thousands of "
+"inhabitants. On your way towards this goal, you will have to establish an "
+"economic infrastructure, explore the land around you and face rivaling "
+"tribes."
+msgstr "В тази игра Вие започвате с малка площ и само няколко ресурса.\nИзползвайки ги, ще създадете империя с хиляди жители население.\nПо пътя към тази цел ще трябва да създадете икономическа инфраструктура,\nда проучите земята около Вас и да се изправите срещу съперничещите\nплемена."
 
-#. TRANSLATORS: This is a hotkey
-#: ../../data/txts/editor_readme.lua:23
-msgid "C:"
-msgstr "C:"
+#: ../../data/txts/help/common_helptexts.lua:25
+msgid "Replays"
+msgstr "Повторения"
 
-#: ../../data/txts/editor_readme.lua:23
-msgid "toggles census"
-msgstr "превключва преброяването"
+#: ../../data/txts/help/common_helptexts.lua:26
+msgid ""
+"Widelands records every game you play in two files. One of these files has a"
+" .wrpl.wgf extension and contains an initial savegame. The other file has a "
+".wrpl extension and contains all commands that were issued by all players, "
+"such as building a road or attacking an enemy. The rest of the filenames "
+"will tell you the time you started the game."
+msgstr ""
 
-#. TRANSLATORS: This is a hotkey
-#: ../../data/txts/editor_readme.lua:25
-msgid "F:"
-msgstr "F:"
+#: ../../data/txts/help/common_helptexts.lua:27
+msgid ""
+"Using the Watch Replay option in the main menu, a previously played game "
+"will be precisely reconstructed for you to watch. Note, however, that even "
+"small changes in the game data files or the Widelands executable can cause a"
+" replay to become incompatible and to ‘go out of sync’. This is similar to "
+"how network games will suffer from desynchronization problems if one of the "
+"players has a different version of the game."
+msgstr ""
 
-#: ../../data/txts/editor_readme.lua:25
-msgid "toggles fullscreen"
-msgstr "превключва режима на цял екран"
+#: ../../data/txts/help/common_helptexts.lua:28
+#, lua-format
+msgid ""
+"Replays are a very useful tool to find bugs in the game logic, so they can "
+"be useful as attachments to bug reports. The replay files are saved in the "
+"%s directory on Linux and Mac OS X. On Windows, they are in the ‘replays’ "
+"subdirectory of your Widelands installation."
+msgstr ""
 
-#. TRANSLATORS: This is a hotkey
-#: ../../data/txts/editor_readme.lua:27
-msgid "H:"
-msgstr "H:"
+#. TRANSLATORS: The generic hotkey format
+#: ../../data/txts/help/common_helptexts.lua:35
+#, lua-format
+msgctxt "hotkey"
+msgid "%s:"
+msgstr ""
 
-#: ../../data/txts/editor_readme.lua:27
-msgid "toggles main menu"
-msgstr "превключва главното меню"
+#. TRANSLATORS: This is an access key combination. Localize, but do not change
+#. the key.
+#: ../../data/txts/help/common_helptexts.lua:42
+msgctxt "hotkey"
+msgid "Space"
+msgstr ""
 
-#. TRANSLATORS: This is a hotkey
-#: ../../data/txts/editor_readme.lua:29
-msgid "M:"
-msgstr "M:"
+#: ../../data/txts/help/common_helptexts.lua:42
+msgid "Toggle building spaces"
+msgstr ""
 
-#: ../../data/txts/editor_readme.lua:29
-msgid "toggles minimap"
-msgstr "превключва миникартата"
+#. TRANSLATORS: This is an access key combination. The hotkey is 'f'
+#: ../../data/txts/help/common_helptexts.lua:49
+msgid "Toggle fullscreen (if supported by the OS)"
+msgstr ""
 
-#. TRANSLATORS: This is a hotkey
-#: ../../data/txts/editor_readme.lua:31
-msgid "P:"
-msgstr "P:"
+#. TRANSLATORS: This is an access key combination. The hotkey is 'm'
+#: ../../data/txts/help/common_helptexts.lua:56
+msgid "Toggle minimap"
+msgstr ""
 
-#: ../../data/txts/editor_readme.lua:31
-msgid "toggles player menu"
-msgstr "превключва менюто за играча"
+#: ../../data/txts/help/general_in_game_help.lua:7
+#: ../../data/txts/help/general_in_game_help.lua:9
+msgid "General Help"
+msgstr ""
 
-#. TRANSLATORS: This is a hotkey
-#: ../../data/txts/editor_readme.lua:33
-msgid "T:"
-msgstr "T:"
+#: ../../data/txts/help/general_in_game_help.lua:13
+msgid "Window Control"
+msgstr ""
 
-#: ../../data/txts/editor_readme.lua:33
-msgid "toggles tools menu"
-msgstr "превключва менюто за инструменти"
+#: ../../data/txts/help/general_in_game_help.lua:16
+msgid "Close window"
+msgstr ""
 
-#. TRANSLATORS: This is a hotkey
-#: ../../data/txts/editor_readme.lua:35
-msgid "I:"
-msgstr "I:"
+#. TRANSLATORS: This is an access key combination. Localize, but do not change
+#. the key.
+#: ../../data/txts/help/general_in_game_help.lua:16
+msgctxt "hotkey"
+msgid "Right-click"
+msgstr ""
 
-#: ../../data/txts/editor_readme.lua:35
-msgid "activates information tool"
-msgstr "включва инструмента за информация"
+#. TRANSLATORS: This is an access key combination. Localize, but do not change
+#. the key.
+#: ../../data/txts/help/general_in_game_help.lua:18
+msgctxt "hotkey"
+msgid "Middle-click or Ctrl + Left-click"
+msgstr ""
 
-#. TRANSLATORS: This is a hotkey
-#: ../../data/txts/editor_readme.lua:37
-msgid "Ctrl + L:"
-msgstr "Контрол + L:"
+#: ../../data/txts/help/general_in_game_help.lua:18
+msgid "Minimize/Maximize window"
+msgstr ""
 
-#: ../../data/txts/editor_readme.lua:37
-msgid "load map"
-msgstr "зарежда карта"
+#. TRANSLATORS: This is an access key combination. Localize, but do not change
+#. the key.
+#: ../../data/txts/help/general_in_game_help.lua:20
+msgctxt "hotkey"
+msgid "Ctrl + Left-click on Button"
+msgstr ""
 
-#. TRANSLATORS: This is a hotkey
-#: ../../data/txts/editor_readme.lua:39
-msgid "Ctrl + S:"
-msgstr "Контрол + S:"
+#: ../../data/txts/help/general_in_game_help.lua:20
+msgid "Skip confirmation dialog"
+msgstr ""
 
-#: ../../data/txts/editor_readme.lua:39
-msgid "save map"
-msgstr "запазва картата"
+#: ../../data/txts/help/general_in_game_help.lua:22
+msgid "Road Control"
+msgstr ""
 
-#. TRANSLATORS: This is a hotkey
-#: ../../data/txts/editor_readme.lua:41
-msgid "1-0:"
-msgstr "1-0:"
+#. TRANSLATORS: This is an access key combination. Localize, but do not change
+#. the key.
+#: ../../data/txts/help/general_in_game_help.lua:25
+#: ../../data/txts/help/general_in_game_help.lua:27
+msgctxt "hotkey"
+msgid "Ctrl + Left-click"
+msgstr ""
 
-#: ../../data/txts/editor_readme.lua:41
-msgid "changes tool size"
-msgstr "променя размера на инструмента"
+#: ../../data/txts/help/general_in_game_help.lua:25
+msgid "While connecting two flags: Place flags automatically"
+msgstr ""
 
-#. TRANSLATORS: This is a hotkey
-#: ../../data/txts/editor_readme.lua:43
-msgid "Shift (Hold):"
-msgstr "Шифт (задържан):"
+#: ../../data/txts/help/general_in_game_help.lua:27
+msgid "While removing a flag: Remove all flags up the the first junction"
+msgstr ""
 
-#: ../../data/txts/editor_readme.lua:43
-msgid "selects first alternative tool while pressed"
-msgstr "избира първия алтернативен инструмент, докато е задържан"
+#: ../../data/txts/help/general_in_game_help.lua:29
+msgid "Keyboard Shortcuts"
+msgstr ""
 
-#. TRANSLATORS: This is a hotkey
-#: ../../data/txts/editor_readme.lua:45
-msgid "Alt (Hold):"
-msgstr "Алт (задържан):"
+#: ../../data/txts/help/general_in_game_help.lua:32
+msgid "Increase game speed"
+msgstr ""
 
-#: ../../data/txts/editor_readme.lua:45
-msgid "Selects second alternative tool while pressed"
-msgstr "избира втория алтернативен инструмент, докато е задържан"
+#. TRANSLATORS: This is an access key combination. Localize, but do not change
+#. the key.
+#: ../../data/txts/help/general_in_game_help.lua:32
+msgctxt "hotkey"
+msgid "Page Up"
+msgstr ""
+
+#: ../../data/txts/help/general_in_game_help.lua:34
+msgid "Decrease game speed"
+msgstr ""
+
+#. TRANSLATORS: This is an access key combination. Localize, but do not change
+#. the key.
+#: ../../data/txts/help/general_in_game_help.lua:34
+msgctxt "hotkey"
+msgid "Page Down"
+msgstr ""
+
+#. TRANSLATORS: This is an access key combination. Localize, but do not change
+#. the key.
+#: ../../data/txts/help/general_in_game_help.lua:36
+msgctxt "hotkey"
+msgid "Pause"
+msgstr ""
+
+#: ../../data/txts/help/general_in_game_help.lua:36
+msgid "Pause the game"
+msgstr ""
+
+#. TRANSLATORS: This is an access key combination. The hotkey is 'c'
+#: ../../data/txts/help/general_in_game_help.lua:38
+msgid "Toggle census"
+msgstr ""
+
+#. TRANSLATORS: This is an access key combination. The hotkey is 's'
+#: ../../data/txts/help/general_in_game_help.lua:40
+msgid "Toggle statistics"
+msgstr ""
+
+#. TRANSLATORS: This is an access key combination. The hotkey is 'o'
+#: ../../data/txts/help/general_in_game_help.lua:44
+msgid "Toggle objectives"
+msgstr ""
+
+#. TRANSLATORS: This is an access key combination. The hotkey is 'n'
+#: ../../data/txts/help/general_in_game_help.lua:46
+msgid "Toggle messages (‘news’)"
+msgstr ""
+
+#. TRANSLATORS: This is an access key combination.
+#: ../../data/txts/help/general_in_game_help.lua:48
+#: ../../data/txts/help/general_in_game_help.lua:89
+msgid "Tribal Encyclopedia"
+msgstr ""
+
+#. TRANSLATORS: This is an access key combination. The hotkey is 'i'
+#: ../../data/txts/help/general_in_game_help.lua:50
+msgid "Toggle stock inventory"
+msgstr ""
+
+#. TRANSLATORS: This is an access key combination. The hotkey is 'b'
+#: ../../data/txts/help/general_in_game_help.lua:52
+msgid "Toggle building statistics"
+msgstr ""
+
+#: ../../data/txts/help/general_in_game_help.lua:54
+msgid "Center main mapview on starting location"
+msgstr ""
+
+#. TRANSLATORS: This is an access key combination. Localize, but do not change
+#. the key.
+#: ../../data/txts/help/general_in_game_help.lua:54
+msgctxt "hotkey"
+msgid "Home"
+msgstr ""
+
+#. TRANSLATORS: This is an access key combination. Localize, but do not change
+#. the key.
+#: ../../data/txts/help/general_in_game_help.lua:56
+msgctxt "hotkey"
+msgid "(Ctrl +) 0-9"
+msgstr ""
+
+#: ../../data/txts/help/general_in_game_help.lua:56
+msgid "Remember and go to previously remembered locations"
+msgstr ""
+
+#. TRANSLATORS: This is an access key combination.
+#: ../../data/txts/help/general_in_game_help.lua:58
+msgid "Go to the previous location"
+msgstr ""
+
+#. TRANSLATORS: This is an access key combination.
+#: ../../data/txts/help/general_in_game_help.lua:60
+msgid "Go to the next location"
+msgstr ""
+
+#. TRANSLATORS: This is an access key combination. Localize, but do not change
+#. the key.
+#: ../../data/txts/help/general_in_game_help.lua:62
+msgctxt "hotkey"
+msgid "Ctrl + F11"
+msgstr ""
+
+#: ../../data/txts/help/general_in_game_help.lua:62
+msgid "Take a screenshot"
+msgstr ""
+
+#. TRANSLATORS: This is an access key combination.
+#: ../../data/txts/help/general_in_game_help.lua:65
+msgctxt "hotkey"
+msgid "Ctrl + F10"
+msgstr ""
+
+#: ../../data/txts/help/general_in_game_help.lua:65
+msgid "Quit the game immediately"
+msgstr ""
+
+#. TRANSLATORS: This is an access key combination.
+#: ../../data/txts/help/general_in_game_help.lua:67
+msgctxt "hotkey"
+msgid "F6"
+msgstr ""
+
+#: ../../data/txts/help/general_in_game_help.lua:67
+msgid "Show the debug console (only in debug-builds)"
+msgstr ""
+
+#: ../../data/txts/help/general_in_game_help.lua:70
+msgid ""
+"In the message window, the following additional shortcuts are available:"
+msgstr "Следните допълнителни клавиши могат да бъдат използвани в прозореца със съобщения:"
+
+#. TRANSLATORS: This is an access key combination.
+#: ../../data/txts/help/general_in_game_help.lua:73
+msgid "Show all messages"
+msgstr ""
+
+#. TRANSLATORS: This is an access key combination.
+#: ../../data/txts/help/general_in_game_help.lua:75
+msgid "Show geologists’ messages only"
+msgstr ""
+
+#. TRANSLATORS: This is an access key combination.
+#: ../../data/txts/help/general_in_game_help.lua:77
+msgid "Show economy messages only"
+msgstr ""
+
+#. TRANSLATORS: This is an access key combination.
+#: ../../data/txts/help/general_in_game_help.lua:79
+msgid "Show seafaring messages only"
+msgstr ""
+
+#. TRANSLATORS: This is an access key combination.
+#: ../../data/txts/help/general_in_game_help.lua:81
+msgid "Show warfare messages only"
+msgstr ""
+
+#. TRANSLATORS: This is an access key combination.
+#: ../../data/txts/help/general_in_game_help.lua:83
+msgid "Show scenario messages only"
+msgstr ""
+
+#. TRANSLATORS: This is an access key combination.
+#: ../../data/txts/help/general_in_game_help.lua:85
+msgid "Jump to the location corresponding to the current message"
+msgstr ""
+
+#: ../../data/txts/help/general_in_game_help.lua:87
+msgid "Archive/Restore the current message"
+msgstr ""
+
+#. TRANSLATORS: This is an access key combination. Localize, but do not change
+#. the key.
+#: ../../data/txts/help/general_in_game_help.lua:87
+msgctxt "hotkey"
+msgid "Delete"
+msgstr ""
+
+#. TRANSLATORS: %s is a representation of the ? button.
+#: ../../data/txts/help/general_in_game_help.lua:91
+#, lua-format
+msgid ""
+"For a detailed description of the tribes’ economies, use the %s button on "
+"the bottom right."
+msgstr ""
+
+#: ../../data/txts/help/multiplayer_help.lua:10
+msgid "Multiplayer Game Setup"
+msgstr ""
+
+#: ../../data/txts/help/multiplayer_help.lua:11
+msgid "You are in the multiplayer launch game menu."
+msgstr ""
+
+#: ../../data/txts/help/multiplayer_help.lua:13
+msgid "Client settings"
+msgstr ""
+
+#: ../../data/txts/help/multiplayer_help.lua:14
+msgid ""
+"On the left side is a list of all clients including you. You can set your "
+"role with the button following your nickname. Available roles are:"
+msgstr ""
+
+#: ../../data/txts/help/multiplayer_help.lua:15
+msgid ""
+"The player with the color of the flag. If more than one client selected the "
+"same color, these share control over the player (‘shared kingdom mode’)."
+msgstr ""
+
+#: ../../data/txts/help/multiplayer_help.lua:16
+msgid ""
+"Spectator mode, meaning you can see everything, but cannot control any "
+"player"
+msgstr ""
+
+#: ../../data/txts/help/multiplayer_help.lua:18
+msgid "Player settings"
+msgstr ""
+
+#: ../../data/txts/help/multiplayer_help.lua:19
+msgid ""
+"In the middle are the settings for the players. To start a game, each player"
+" must be one of the following:"
+msgstr ""
+
+#: ../../data/txts/help/multiplayer_help.lua:20
+msgid "Connected to one or more clients (see ‘Client settings’)."
+msgstr ""
+
+#: ../../data/txts/help/multiplayer_help.lua:21
+msgid ""
+"Connected to a computer player (the face in the picture as well as the mouse"
+" hover texts indicate the strength of the currently selected computer "
+"player)."
+msgstr ""
+
+#: ../../data/txts/help/multiplayer_help.lua:22
+msgid "Set as shared in starting position for another player."
+msgstr ""
+
+#: ../../data/txts/help/multiplayer_help.lua:23
+msgid "Closed."
+msgstr ""
+
+#: ../../data/txts/help/multiplayer_help.lua:24
+msgid ""
+"The latter three can only be set by the hosting client by left-clicking the "
+"‘type’ button of a player. Hosting players can also set the initialization "
+"of each player (the set of buildings, wares and workers the player starts "
+"with) and the tribe and team for computer players"
+msgstr ""
+
+#: ../../data/txts/help/multiplayer_help.lua:25
+msgid ""
+"Every client connected to a player (who isn’t a spectator) can set the tribe"
+" and the team for that player"
+msgstr ""
+
+#: ../../data/txts/help/multiplayer_help.lua:27
+msgid "Map details"
+msgstr ""
+
+#: ../../data/txts/help/multiplayer_help.lua:28
+msgid ""
+"You can see information about the selected map or savegame on the right-hand"
+" side. A button next to the map name allows the host to change to a "
+"different map. Furthermore, the host is able to set a specific win "
+"condition, and finally can start the game as soon as all players are set up."
+msgstr ""
 
 #: ../../data/txts/tips/atlanteans.tip:2 ../../data/txts/tips/barbarians.tip:2
 #: ../../data/txts/tips/empire.tip:2

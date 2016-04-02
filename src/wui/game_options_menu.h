@@ -39,9 +39,6 @@ private:
 	InteractiveGameBase& igb_;
 	InteractiveGameBase::GameMainMenuWindows& windows_;
 	UI::Box box_;
-	UI::Button readme_;
-	UI::Button license_;
-	UI::Button authors_;
 	UI::Button sound_;
 	UI::Button save_game_;
 	UI::Button exit_game_;
