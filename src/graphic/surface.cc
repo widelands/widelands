@@ -111,9 +111,9 @@ void tesselate_line_strip(int w,
 
 }  // namespace
 
-void Surface::fill_rect(const Rect& rc, const RGBAColor& clr) {
+void Surface::fill_rect(const Rect& rc, const RGBAColor& clr, BlendMode blend_mode) {
 	const FloatRect rect = rect_to_gl_renderbuffer(width(), height(), rc);
-	do_fill_rect(rect, clr, BlendMode::Copy);
+	do_fill_rect(rect, clr, blend_mode);
 }
 
 void Surface::brighten_rect(const Rect& rc, const int32_t factor)
@@ -176,6 +176,7 @@ void draw_rect(const Rect& rc, const RGBColor& clr, Surface* surface) {
 	const FloatPoint bottom_right = FloatPoint(rc.x + rc.w - 0.5f, rc.y + rc.h - 0.5f);
 	const FloatPoint bottom_left = FloatPoint(rc.x + 0.5f, rc.y + rc.h - 0.5f);
 
-	surface->draw_line_strip(
-		{top_left, top_right, bottom_right, bottom_left, top_left}, clr, 1);
+	surface->draw_line_strip({top_left, top_right, bottom_right}, clr, 1);
+	// We need to split this up in order not to miss a pixel on the bottom right corner.
+	surface->draw_line_strip({FloatPoint(bottom_right.x + 1, bottom_right.y), bottom_left, top_left}, clr, 1);
 }

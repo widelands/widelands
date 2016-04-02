@@ -45,9 +45,7 @@ public:
 		kReplay,
 		kEditor,
 		kOptions,
-		kReadme,
-		kLicense,
-		kAuthors,
+		kAbout,
 		kExit,
 
 		// Single player

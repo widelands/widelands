@@ -814,11 +814,11 @@ void CmdShipScoutDirection::execute (Game & game)
 {
 	upcast(Ship, ship, game.objects().get_object(serial));
 	if (ship && ship->get_owner()->player_number() == sender()) {
-		if (!(ship->get_ship_state() == Widelands::Ship::EXP_WAITING ||
-			ship->get_ship_state() == Widelands::Ship::EXP_FOUNDPORTSPACE ||
-			ship->get_ship_state() == Widelands::Ship::EXP_SCOUTING)) {
+		if (!(ship->get_ship_state() == Widelands::Ship::ShipStates::kExpeditionWaiting ||
+			ship->get_ship_state() == Widelands::Ship::ShipStates::kExpeditionPortspaceFound ||
+			ship->get_ship_state() == Widelands::Ship::ShipStates::kExpeditionScouting)) {
 			log (" %1d:ship on %3dx%3d received scout command but not in "
-				"EXP_WAITING or PORTSPACE_FOUND or EXP_SCOUTING status "
+				"kExpeditionWaiting or kExpeditionPortspaceFound or kExpeditionScouting status "
 				"(expedition: %s), ignoring...\n",
 				ship->get_owner()->player_number(),
 				ship->get_position().x,
@@ -886,9 +886,9 @@ void CmdShipConstructPort::execute (Game & game)
 {
 	upcast(Ship, ship, game.objects().get_object(serial));
 	if (ship && ship->get_owner()->player_number() == sender()) {
-		if (ship->get_ship_state() != Widelands::Ship::EXP_FOUNDPORTSPACE) {
+		if (ship->get_ship_state() != Widelands::Ship::ShipStates::kExpeditionPortspaceFound) {
 			log (" %1d:ship on %3dx%3d received build port command but "
-			"not in PORTSPACE_FOUND status (expedition: %s), ignoring...\n",
+			"not in kExpeditionPortspaceFound status (expedition: %s), ignoring...\n",
 				ship->get_owner()->player_number(),
 				ship->get_position().x,
 				ship->get_position().y,
@@ -955,11 +955,11 @@ void CmdShipExploreIsland::execute (Game & game)
 {
 	upcast(Ship, ship, game.objects().get_object(serial));
 	if (ship && ship->get_owner()->player_number() == sender()) {
-		if (!(ship->get_ship_state() == Widelands::Ship::EXP_WAITING ||
-			ship->get_ship_state() == Widelands::Ship::EXP_FOUNDPORTSPACE ||
-			ship->get_ship_state() == Widelands::Ship::EXP_SCOUTING)) {
+		if (!(ship->get_ship_state() == Widelands::Ship::ShipStates::kExpeditionWaiting ||
+			ship->get_ship_state() == Widelands::Ship::ShipStates::kExpeditionPortspaceFound ||
+			ship->get_ship_state() == Widelands::Ship::ShipStates::kExpeditionScouting)) {
 			log (" %1d:ship on %3dx%3d received explore island command "
-			"but not in EXP_WAITING or PORTSPACE_FOUND or EXP_SCOUTING "
+			"but not in kExpeditionWaiting or kExpeditionPortspaceFound or kExpeditionScouting "
 			"status (expedition: %s), ignoring...\n",
 				ship->get_owner()->player_number(),
 				ship->get_position().x,

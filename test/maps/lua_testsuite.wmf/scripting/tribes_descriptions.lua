@@ -25,18 +25,27 @@ function test_descr:test_name()
 end
 
 function test_descr:test_get_buildings()
-   local nobuildings = function(t)
-      local count = 0
-      for _ in pairs(t) do count = count + 1 end
-      return count
-   end
-
    local tribe = egbase:get_tribe_description("atlanteans")
-   assert_equal(41, nobuildings(tribe.buildings))
+   assert_equal(41, #tribe.buildings)
    tribe = egbase:get_tribe_description("barbarians")
-   assert_equal(50, nobuildings(tribe.buildings))
+   assert_equal(50, #tribe.buildings)
    tribe = egbase:get_tribe_description("empire")
-   assert_equal(51, nobuildings(tribe.buildings))
+   assert_equal(51, #tribe.buildings)
+
+   -- Test if buildings have been casted to their correct types
+   for i, building in ipairs(tribe.buildings) do
+      if (building.type_name == "productionsite") then
+         assert_true(#building.production_programs > 0)
+      elseif (building.type_name == "militarysite") then
+         assert_true(building.heal_per_second > 0)
+         assert_true(building.max_number_of_soldiers > 0)
+      elseif (building.type_name == "warehouse") then
+         assert_true(building.heal_per_second > 0)
+         assert_true(building.max_number_of_soldiers == nil)
+      elseif (building.type_name == "trainingsite") then
+         assert_true(building.max_attack ~= nil or building.max_defense ~= nil or building.max_evade ~= nil or building.max_health ~= nil)
+      end
+   end
 end
 
 function test_descr:test_get_carrier()
@@ -76,34 +85,20 @@ end
 
 function test_descr:test_get_wares()
    local tribe = egbase:get_tribe_description("atlanteans")
-   local nowares = function(t)
-      local count = 0
-      for _ in pairs(t) do count = count + 1 end
-      return count
-   end
-
-   local tribe = egbase:get_tribe_description("atlanteans")
-   assert_equal(44, nowares(tribe.wares))
+   assert_equal(44, #tribe.wares)
    tribe = egbase:get_tribe_description("barbarians")
-   assert_equal(40, nowares(tribe.wares))
+   assert_equal(40, #tribe.wares)
    tribe = egbase:get_tribe_description("empire")
-   assert_equal(44, nowares(tribe.wares))
+   assert_equal(44, #tribe.wares)
 end
 
 function test_descr:test_get_workers()
    local tribe = egbase:get_tribe_description("atlanteans")
-   local noworkers = function(t)
-      local count = 0
-      for _ in pairs(t) do count = count + 1 end
-      return count
-   end
-
-   local tribe = egbase:get_tribe_description("atlanteans")
-   assert_equal(29, noworkers(tribe.workers))
+   assert_equal(29, #tribe.workers)
    tribe = egbase:get_tribe_description("barbarians")
-   assert_equal(31, noworkers(tribe.workers))
+   assert_equal(31, #tribe.workers)
    tribe = egbase:get_tribe_description("empire")
-   assert_equal(32, noworkers(tribe.workers))
+   assert_equal(32, #tribe.workers)
 end
 
 function test_descr:test_has_building()

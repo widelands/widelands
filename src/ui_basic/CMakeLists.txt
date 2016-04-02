@@ -8,6 +8,8 @@ wl_library(ui_basic
     checkbox.h
     editbox.cc
     editbox.h
+    fileview_panel.cc
+    fileview_panel.h
     icon.cc
     icon.h
     icongrid.cc
@@ -60,6 +62,9 @@ wl_library(ui_basic
     graphic_text_layout
     io_filesystem
     profile
+    scripting_coroutine
+    scripting_lua_interface
+    scripting_lua_table
     sound
     widelands_ball_of_mud
 )

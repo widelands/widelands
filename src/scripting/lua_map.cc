@@ -1108,15 +1108,16 @@ void LuaTribeDescription::__unpersist(lua_State* L) {
 /* RST
 	.. attribute:: buildings
 
-			(RO) an array of :class:`string` with the names of all the buildings that the tribe can use
+			(RO) an array of :class:`LuaBuildingDescription` with all the buildings that the tribe can use,
+				  casted to their appropriate subclasses.
 */
-
 int LuaTribeDescription::get_buildings(lua_State * L) {
+	const TribeDescr& tribe = *get();
 	lua_newtable(L);
 	int counter = 0;
-	for (DescriptionIndex building : get()->buildings()) {
+	for (DescriptionIndex building : tribe.buildings()) {
 		lua_pushinteger(L, ++counter);
-		lua_pushstring(L, get_egbase(L).tribes().get_building_descr(building)->name());
+		upcasted_map_object_descr_to_lua(L, tribe.get_building_descr(building));
 		lua_settable(L, -3);
 	}
 	return 1;
@@ -1230,15 +1231,15 @@ int LuaTribeDescription::get_soldier(lua_State * L) {
 /* RST
 	.. attribute:: wares
 
-			(RO) an array of :class:`string` with the names of all the wares that the tribe uses
+			(RO) an array of :class:`LuaWareDescription` with all the wares that the tribe can use.
 */
-
 int LuaTribeDescription::get_wares(lua_State * L) {
+	const TribeDescr& tribe = *get();
 	lua_newtable(L);
 	int counter = 0;
-	for (DescriptionIndex ware : get()->wares()) {
+	for (DescriptionIndex ware : tribe.wares()) {
 		lua_pushinteger(L, ++counter);
-		lua_pushstring(L, get_egbase(L).tribes().get_ware_descr(ware)->name());
+		to_lua<LuaWareDescription>(L, new LuaWareDescription(tribe.get_ware_descr(ware)));
 		lua_settable(L, -3);
 	}
 	return 1;
@@ -1247,15 +1248,16 @@ int LuaTribeDescription::get_wares(lua_State * L) {
 /* RST
 	.. attribute:: workers
 
-			(RO) an array of :class:`string` with the names of all the workers that the tribe can use
+			(RO) an array of :class:`LuaWorkerDescription` with all the workers that the tribe can use,
+				  casted to their appropriate subclasses.
 */
-
 int LuaTribeDescription::get_workers(lua_State * L) {
+	const TribeDescr& tribe = *get();
 	lua_newtable(L);
 	int counter = 0;
-	for (DescriptionIndex worker : get()->workers()) {
+	for (DescriptionIndex worker : tribe.workers()) {
 		lua_pushinteger(L, ++counter);
-		lua_pushstring(L, get_egbase(L).tribes().get_worker_descr(worker)->name());
+		upcasted_map_object_descr_to_lua(L, tribe.get_worker_descr(worker));
 		lua_settable(L, -3);
 	}
 	return 1;
@@ -4442,25 +4444,25 @@ int LuaShip::get_state(lua_State* L) {
 	EditorGameBase& egbase = get_egbase(L);
 	if (is_a(Game, &egbase)) {
 		switch (get(L, egbase)->get_ship_state()) {
-			case Ship::TRANSPORT:
+			case Ship::ShipStates::kTransport:
 				lua_pushstring(L, "transport");
 				break;
-			case Ship::EXP_WAITING:
+			case Ship::ShipStates::kExpeditionWaiting:
 				lua_pushstring(L, "exp_waiting");
 				break;
-			case Ship::EXP_SCOUTING:
+			case Ship::ShipStates::kExpeditionScouting:
 				lua_pushstring(L, "exp_scouting");
 				break;
-			case Ship::EXP_FOUNDPORTSPACE:
+			case Ship::ShipStates::kExpeditionPortspaceFound:
 				lua_pushstring(L, "exp_found_port_space");
 				break;
-			case Ship::EXP_COLONIZING:
+			case Ship::ShipStates::kExpeditionColonizing:
 				lua_pushstring(L, "exp_colonizing");
 				break;
-			case Ship::SINK_REQUEST:
+			case Ship::ShipStates::kSinkRequest:
 				lua_pushstring(L, "sink_request");
 				break;
-			case Ship::SINK_ANIMATION:
+			case Ship::ShipStates::kSinkAnimation:
 				lua_pushstring(L, "sink_animation");
 				break;
 			default:
@@ -4655,7 +4657,7 @@ int LuaShip::get_workers(lua_State* L) {
 int LuaShip::build_colonization_port(lua_State* L) {
 	EditorGameBase& egbase = get_egbase(L);
 	Ship* ship =  get(L, egbase);
-	if (ship->get_ship_state() == Widelands::Ship::EXP_FOUNDPORTSPACE) {
+	if (ship->get_ship_state() == Widelands::Ship::ShipStates::kExpeditionPortspaceFound) {
 		if (upcast(Game, game, &egbase)) {
 			game->send_player_ship_construct_port(*ship, ship->exp_port_spaces().front());
 			return 1;

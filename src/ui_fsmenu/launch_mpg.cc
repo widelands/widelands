@@ -581,7 +581,7 @@ void FullscreenMenuLaunchMPG::load_previous_playerdata()
 		infotext += (boost::format(_("Player %u")) % static_cast<unsigned int>(i)).str();
 		if (player_save_tribe[i - 1].empty()) {
 			std::string closed_string =
-				(boost::format("\\<%s\\>") % _("closed")).str();
+				(boost::format("&lt;%s&gt;") % _("closed")).str();
 			infotext += ":\n    ";
 			infotext += closed_string;
 			// Close the player
@@ -684,7 +684,7 @@ void FullscreenMenuLaunchMPG::help_clicked() {
 	if (help_) {
 		help_->set_visible(true);
 	} else {
-		help_.reset(new UI::FullscreenHelpWindow(this, lua_, "scripting/widelands/multiplayer_help.lua",
+		help_.reset(new UI::FullscreenHelpWindow(this, lua_, "txts/help/multiplayer_help.lua",
 																/** TRANSLATORS: This is a heading for a help window */
 																_("Multiplayer Game Setup")));
 	}

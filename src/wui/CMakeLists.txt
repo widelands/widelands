@@ -16,6 +16,7 @@ wl_library(wui_chat_ui
     graphic
     graphic_color
     graphic_text
+    graphic_text_layout
     logic
     profile
     ui_basic
@@ -161,6 +162,8 @@ wl_library(wui
     trainingsitewindow.cc
     transport_draw.cc
     transport_ui.cc
+    tribal_encyclopedia.cc
+    tribal_encyclopedia.h
     unique_window_handler.cc
     unique_window_handler.h
     ware_statistics_menu.cc
@@ -204,7 +207,6 @@ wl_library(wui
     scripting_lua_table
     sound
     ui_basic
-    ui_fsmenu
     widelands_ball_of_mud
     wui_chat_ui
     wui_edge_overlay_manager

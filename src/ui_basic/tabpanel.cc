@@ -26,9 +26,6 @@
 
 namespace UI {
 
-// Button height of tab buttons in pixels. Is also used for width with pictorial buttons.
-constexpr int kTabPanelButtonHeight = 34;
-
 // Margin around image. The image will be scaled down to fit into this rectangle with preserving size.
 constexpr int kTabPanelImageMargin = 2;
 
@@ -97,10 +94,10 @@ TabPanel::TabPanel
 	 TabPanel::Type border_type)
 	:
 	Panel           (parent, x, y, 0, 0),
+	border_type_    (border_type),
 	active_         (0),
 	highlight_      (kNotFound),
-	pic_background_ (background),
-	border_type_    (border_type)
+	pic_background_ (background)
 {}
 TabPanel::TabPanel
 	(Panel * const parent,
@@ -109,10 +106,10 @@ TabPanel::TabPanel
 	 TabPanel::Type border_type)
 	:
 	Panel           (parent, x, y, w, h),
+	border_type_    (border_type),
 	active_         (0),
 	highlight_      (kNotFound),
-	pic_background_ (background),
-	border_type_    (border_type)
+	pic_background_ (background)
 {}
 
 /**
@@ -150,10 +147,10 @@ void TabPanel::update_desired_size()
 
 		panel->get_desired_size(&panelw, &panelh);
 		// TODO(unknown):  the panel might be bigger -> add a scrollbar in that case
-		// panel->set_size(panelw, panelh);
 
-		if (panelw > w)
+		if (panelw > w) {
 			w = panelw;
+		}
 		h += panelh;
 	}
 

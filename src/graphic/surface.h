@@ -61,9 +61,8 @@ public:
 	void
 	blit_monochrome(const Rect& dst, const Image&, const Rect& srcrc, const RGBAColor& multiplier);
 
-	/// Draws a filled rect to the destination. No blending takes place, the values
-	// in the target are just replaced (i.e. / BlendMode would be BlendMode::Copy).
-	void fill_rect(const Rect&, const RGBAColor&);
+	/// Draws a filled rect to the destination.
+	void fill_rect(const Rect&, const RGBAColor&, BlendMode blend_mode = BlendMode::Copy);
 
 	// Draw a 'width' pixel wide line to the destination. 'points' are taken by
 	// value on purpose.

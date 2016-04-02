@@ -213,7 +213,7 @@ public:
 		const Task           * task;
 		int32_t                ivar1;
 		int32_t                ivar2;
-		union                  {int32_t ivar3; uint32_t ui32var3;};
+		int32_t                ivar3;
 		ObjectPointer             objvar1;
 		std::string            svar1;
 

@@ -3633,12 +3633,12 @@ bool DefaultAI::check_ships(uint32_t const gametime) {
 		// iterating over ships and doing what is needed
 		for (std::list<ShipObserver>::iterator i = allships.begin(); i != allships.end(); ++i) {
 
-			const uint8_t ship_state = i->ship->get_ship_state();
+			const Widelands::Ship::ShipStates ship_state = i->ship->get_ship_state();
 
 			// Here we manage duration of expedition and related variables
-			if (ship_state == Widelands::Ship::EXP_WAITING ||
-			    ship_state == Widelands::Ship::EXP_SCOUTING ||
-				ship_state == Widelands::Ship::EXP_FOUNDPORTSPACE) {
+			if (ship_state == Widelands::Ship::ShipStates::kExpeditionWaiting ||
+				 ship_state == Widelands::Ship::ShipStates::kExpeditionScouting ||
+				ship_state == Widelands::Ship::ShipStates::kExpeditionPortspaceFound) {
 
 					// the function below will take care of variables like
 					// - expedition_ship_
@@ -3656,8 +3656,8 @@ bool DefaultAI::check_ships(uint32_t const gametime) {
 			}
 
 			// only two states need an attention
-			if ((i->ship->get_ship_state() == Widelands::Ship::EXP_WAITING ||
-			     i->ship->get_ship_state() == Widelands::Ship::EXP_FOUNDPORTSPACE) &&
+			if ((i->ship->get_ship_state() == Widelands::Ship::ShipStates::kExpeditionWaiting ||
+				  i->ship->get_ship_state() == Widelands::Ship::ShipStates::kExpeditionPortspaceFound) &&
 			    !i->waiting_for_command_) {
 				if (gametime - i->last_command_time > 180 * 1000) {
 					i->waiting_for_command_ = true;
@@ -3676,7 +3676,7 @@ bool DefaultAI::check_ships(uint32_t const gametime) {
 			}
 
 			// Checking utilization
-			if (i->ship->get_ship_state() == Widelands::Ship::TRANSPORT) {
+			if (i->ship->get_ship_state() == Widelands::Ship::ShipStates::kTransport) {
 				// Good utilization is 10 pieces of ware onboard, to track utilization we use range 0-10000
 				// to avoid float or rounding errors if integers in range 0-100
 				const int16_t tmp_util = (i->ship->get_nritems() > 10) ? 10000 : i->ship->get_nritems() * 1000;

@@ -279,7 +279,7 @@ protected:
 	void act(Game &, uint32_t data) override;
 
 	void draw(const EditorGameBase &, RenderTarget &, const FCoords&, const Point&) override;
-	void draw_help(const EditorGameBase &, RenderTarget &, const FCoords&, const Point&);
+	void draw_info(const EditorGameBase &, RenderTarget &, const Point&);
 
 	virtual void create_options_window
 		(InteractiveGameBase &, UI::Window * & registry)

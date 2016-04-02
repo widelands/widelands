@@ -19,6 +19,8 @@
 
 #include "scripting/lua_coroutine.h"
 
+#include <memory>
+
 #include "io/fileread.h"
 #include "io/filewrite.h"
 #include "scripting/lua_errors.h"
@@ -99,24 +101,6 @@ void LuaCoroutine::push_arg(const Widelands::Coords & coords) {
 	++ninput_args_;
 }
 
-void LuaCoroutine::push_arg(const Widelands::BuildingDescr* building_descr) {
-	assert(building_descr != nullptr);
-	to_lua<LuaMaps::LuaBuildingDescription>(lua_state_, new LuaMaps::LuaBuildingDescription(building_descr));
-	++ninput_args_;
-}
-
-void LuaCoroutine::push_arg(const Widelands::WareDescr* ware_descr) {
-	assert(ware_descr != nullptr);
-	to_lua<LuaMaps::LuaWareDescription>(lua_state_, new LuaMaps::LuaWareDescription(ware_descr));
-	++ninput_args_;
-}
-
-void LuaCoroutine::push_arg(const Widelands::WorkerDescr* worker_descr) {
-	assert(worker_descr != nullptr);
-	to_lua<LuaMaps::LuaWorkerDescription>(lua_state_, new LuaMaps::LuaWorkerDescription(worker_descr));
-	++ninput_args_;
-}
-
 void LuaCoroutine::push_arg(const std::string& string) {
 	assert(!string.empty());
 	lua_pushstring(lua_state_, string);
@@ -147,6 +131,17 @@ uint32_t LuaCoroutine::pop_uint32() {
 	lua_pop(lua_state_, 1);
 	--nreturn_values_;
 	return return_value;
+}
+
+std::unique_ptr<LuaTable> LuaCoroutine::pop_table() {
+	std::unique_ptr<LuaTable> result(nullptr);
+	if (!nreturn_values_) {
+		return result;
+	}
+	result.reset(new LuaTable(lua_state_));
+	lua_pop(lua_state_, 1);
+	--nreturn_values_;
+	return result;
 }
 
 constexpr uint8_t kCoroutineDataPacketVersion = 3;
