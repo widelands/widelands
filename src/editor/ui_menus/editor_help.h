@@ -21,8 +21,8 @@
 #define WL_EDITOR_UI_MENUS_EDITOR_HELP_H
 
 #include "scripting/lua_interface.h"
-#include "ui_basic/encyclopedia_window.h"
 #include "ui_basic/unique_window.h"
+#include "wui/encyclopedia_window.h"
 
 class EditorInteractive;
 

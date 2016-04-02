@@ -94,10 +94,10 @@ wl_library(wui
     debugconsole.cc
     debugconsole.h
     dismantlesitewindow.cc
+    encyclopedia_window.cc
+    encyclopedia_window.h
     fieldaction.cc
     fieldaction.h
-    fileview.cc
-    fileview.h
     game_debug_ui.cc
     game_debug_ui.h
     game_main_menu.cc

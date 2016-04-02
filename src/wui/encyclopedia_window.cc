@@ -17,7 +17,7 @@
  *
  */
 
-#include "ui_basic/encyclopedia_window.h"
+#include "wui/encyclopedia_window.h"
 
 #include <map>
 #include <memory>
