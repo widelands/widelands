@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-03-18 11:30+0000\n"
-"PO-Revision-Date: 2016-03-23 08:46+0000\n"
+"POT-Creation-Date: 2016-04-02 11:15+0000\n"
+"PO-Revision-Date: 2016-04-02 11:17+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Portuguese (http://www.transifex.com/widelands/widelands/language/pt/)\n"
 "MIME-Version: 1.0\n"
@@ -2535,6 +2535,34 @@ msgstr ""
 msgid ""
 "This tribe is known from the oldest tales. The sons and daughters of "
 "Atlantis."
+msgstr ""
+
+#: ../../data/tribes/scripting/help/init.lua:48
+msgid "Tribal Encyclopedia"
+msgstr ""
+
+#: ../../data/tribes/scripting/help/init.lua:53
+msgid "General"
+msgstr ""
+
+#: ../../data/tribes/scripting/help/init.lua:58
+msgid "Introduction"
+msgstr ""
+
+#: ../../data/tribes/scripting/help/init.lua:64
+msgid "Controls"
+msgstr ""
+
+#: ../../data/tribes/scripting/help/init.lua:73
+msgid "Wares"
+msgstr ""
+
+#: ../../data/tribes/scripting/help/init.lua:80
+msgid "Workers"
+msgstr ""
+
+#: ../../data/tribes/scripting/help/init.lua:87
+msgid "Buildings"
 msgstr ""
 
 #: ../../data/tribes/scripting/starting_conditions/atlanteans/fortified_village.lua:10

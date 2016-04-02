@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-04-01 20:06+0000\n"
-"PO-Revision-Date: 2016-04-01 20:07+0000\n"
+"POT-Creation-Date: 2016-04-02 11:15+0000\n"
+"PO-Revision-Date: 2016-04-02 11:17+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Portuguese (http://www.transifex.com/widelands/widelands/language/pt/)\n"
 "MIME-Version: 1.0\n"
@@ -120,58 +120,64 @@ msgstr ""
 msgid "Widelands Help"
 msgstr ""
 
-#: ../../data/txts/README.lua:22
+#. TRANSLATORS: %1% is a key on the keyboard
+#: ../../data/txts/README.lua:23
 msgid ""
-"You can find general help about gameplay or the editor by using the help "
-"button in the main menu."
+"You can find help about gameplay or the editor by using the help button on "
+"the bottom menu, or by pressing %1%."
 msgstr ""
 
+#. TRANSLATORS: This is a key on the keyboard
 #: ../../data/txts/README.lua:25
+msgid "F1"
+msgstr ""
+
+#: ../../data/txts/README.lua:28
 msgid "Reporting Bugs"
 msgstr "Reportar Erros"
 
-#: ../../data/txts/README.lua:26
+#: ../../data/txts/README.lua:29
 msgid "If you encounter a bug, please report it to our bugtracker:"
 msgstr "Se encontrares um erro, por favor reporta-o no nosso bugtracker:"
 
-#: ../../data/txts/README.lua:28
+#: ../../data/txts/README.lua:31
 msgid "Please provide enough background information. Tell us:"
 msgstr "Por favor forneça informações suficientes. Diga-nos:"
 
-#: ../../data/txts/README.lua:30
+#: ../../data/txts/README.lua:33
 msgid "Detailed steps on how to trigger the bug, if possible."
 msgstr ""
 
-#: ../../data/txts/README.lua:31
+#: ../../data/txts/README.lua:34
 msgid ""
 "What you expected to happen when performing the steps and what actually "
 "happened."
 msgstr ""
 
-#: ../../data/txts/README.lua:32
+#: ../../data/txts/README.lua:35
 msgid ""
 "Which version of Widelands you are running (i.e. either the build number or "
 "the revision number if you are running a development version or a daily "
 "build.)"
 msgstr ""
 
-#: ../../data/txts/README.lua:33
+#: ../../data/txts/README.lua:36
 msgid ""
 "Please also include which operating system you are running Widelands on as "
 "some bugs can be platform specific."
 msgstr ""
 
-#: ../../data/txts/README.lua:34
+#: ../../data/txts/README.lua:37
 msgid "Which map you were playing when the bug occurred."
 msgstr ""
 
-#: ../../data/txts/README.lua:35
+#: ../../data/txts/README.lua:38
 msgid ""
 "If the bug concerns something not being displayed correctly or if it helps "
 "demonstrate the issue, please include one or more screenshots."
 msgstr ""
 
-#: ../../data/txts/README.lua:36
+#: ../../data/txts/README.lua:39
 msgid ""
 "If you have a save game or replay demonstrating the issue (for instance "
 "crashes where it can be hard to tell exactly what is triggering it), please "
@@ -389,263 +395,6 @@ msgstr ""
 #. TRANSLATORS: This is an access key combination. The hotkey is 'm'
 #: ../../data/txts/help/common_helptexts.lua:56
 msgid "Toggle minimap"
-msgstr ""
-
-#: ../../data/txts/help/general_in_game_help.lua:7
-#: ../../data/txts/help/general_in_game_help.lua:9
-msgid "General Help"
-msgstr ""
-
-#: ../../data/txts/help/general_in_game_help.lua:13
-msgid "Window Control"
-msgstr ""
-
-#: ../../data/txts/help/general_in_game_help.lua:16
-msgid "Close window"
-msgstr ""
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/txts/help/general_in_game_help.lua:16
-msgctxt "hotkey"
-msgid "Right-click"
-msgstr ""
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/txts/help/general_in_game_help.lua:18
-msgctxt "hotkey"
-msgid "Middle-click or Ctrl + Left-click"
-msgstr ""
-
-#: ../../data/txts/help/general_in_game_help.lua:18
-msgid "Minimize/Maximize window"
-msgstr ""
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/txts/help/general_in_game_help.lua:20
-msgctxt "hotkey"
-msgid "Ctrl + Left-click on Button"
-msgstr ""
-
-#: ../../data/txts/help/general_in_game_help.lua:20
-msgid "Skip confirmation dialog"
-msgstr ""
-
-#: ../../data/txts/help/general_in_game_help.lua:22
-msgid "Road Control"
-msgstr ""
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/txts/help/general_in_game_help.lua:25
-#: ../../data/txts/help/general_in_game_help.lua:27
-msgctxt "hotkey"
-msgid "Ctrl + Left-click"
-msgstr ""
-
-#: ../../data/txts/help/general_in_game_help.lua:25
-msgid "While connecting two flags: Place flags automatically"
-msgstr ""
-
-#: ../../data/txts/help/general_in_game_help.lua:27
-msgid "While removing a flag: Remove all flags up the the first junction"
-msgstr ""
-
-#: ../../data/txts/help/general_in_game_help.lua:29
-msgid "Keyboard Shortcuts"
-msgstr ""
-
-#: ../../data/txts/help/general_in_game_help.lua:32
-msgid "Increase game speed"
-msgstr ""
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/txts/help/general_in_game_help.lua:32
-msgctxt "hotkey"
-msgid "Page Up"
-msgstr ""
-
-#: ../../data/txts/help/general_in_game_help.lua:34
-msgid "Decrease game speed"
-msgstr ""
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/txts/help/general_in_game_help.lua:34
-msgctxt "hotkey"
-msgid "Page Down"
-msgstr ""
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/txts/help/general_in_game_help.lua:36
-msgctxt "hotkey"
-msgid "Pause"
-msgstr ""
-
-#: ../../data/txts/help/general_in_game_help.lua:36
-msgid "Pause the game"
-msgstr ""
-
-#. TRANSLATORS: This is an access key combination. The hotkey is 'c'
-#: ../../data/txts/help/general_in_game_help.lua:38
-msgid "Toggle census"
-msgstr ""
-
-#. TRANSLATORS: This is an access key combination. The hotkey is 's'
-#: ../../data/txts/help/general_in_game_help.lua:40
-msgid "Toggle statistics"
-msgstr ""
-
-#. TRANSLATORS: This is an access key combination. The hotkey is 'o'
-#: ../../data/txts/help/general_in_game_help.lua:44
-msgid "Toggle objectives"
-msgstr ""
-
-#. TRANSLATORS: This is an access key combination. The hotkey is 'n'
-#: ../../data/txts/help/general_in_game_help.lua:46
-msgid "Toggle messages (‘news’)"
-msgstr ""
-
-#. TRANSLATORS: This is an access key combination.
-#: ../../data/txts/help/general_in_game_help.lua:48
-#: ../../data/txts/help/general_in_game_help.lua:89
-msgid "Tribal Encyclopedia"
-msgstr ""
-
-#. TRANSLATORS: This is an access key combination. The hotkey is 'i'
-#: ../../data/txts/help/general_in_game_help.lua:50
-msgid "Toggle stock inventory"
-msgstr ""
-
-#. TRANSLATORS: This is an access key combination. The hotkey is 'b'
-#: ../../data/txts/help/general_in_game_help.lua:52
-msgid "Toggle building statistics"
-msgstr ""
-
-#: ../../data/txts/help/general_in_game_help.lua:54
-msgid "Center main mapview on starting location"
-msgstr ""
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/txts/help/general_in_game_help.lua:54
-msgctxt "hotkey"
-msgid "Home"
-msgstr ""
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/txts/help/general_in_game_help.lua:56
-msgctxt "hotkey"
-msgid "(Ctrl +) 0-9"
-msgstr ""
-
-#: ../../data/txts/help/general_in_game_help.lua:56
-msgid "Remember and go to previously remembered locations"
-msgstr ""
-
-#. TRANSLATORS: This is an access key combination.
-#: ../../data/txts/help/general_in_game_help.lua:58
-msgid "Go to the previous location"
-msgstr ""
-
-#. TRANSLATORS: This is an access key combination.
-#: ../../data/txts/help/general_in_game_help.lua:60
-msgid "Go to the next location"
-msgstr ""
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/txts/help/general_in_game_help.lua:62
-msgctxt "hotkey"
-msgid "Ctrl + F11"
-msgstr ""
-
-#: ../../data/txts/help/general_in_game_help.lua:62
-msgid "Take a screenshot"
-msgstr ""
-
-#. TRANSLATORS: This is an access key combination.
-#: ../../data/txts/help/general_in_game_help.lua:65
-msgctxt "hotkey"
-msgid "Ctrl + F10"
-msgstr ""
-
-#: ../../data/txts/help/general_in_game_help.lua:65
-msgid "Quit the game immediately"
-msgstr ""
-
-#. TRANSLATORS: This is an access key combination.
-#: ../../data/txts/help/general_in_game_help.lua:67
-msgctxt "hotkey"
-msgid "F6"
-msgstr ""
-
-#: ../../data/txts/help/general_in_game_help.lua:67
-msgid "Show the debug console (only in debug-builds)"
-msgstr ""
-
-#: ../../data/txts/help/general_in_game_help.lua:70
-msgid ""
-"In the message window, the following additional shortcuts are available:"
-msgstr "Na janela das mensagens estão disponíveis os seguintes atalhos:"
-
-#. TRANSLATORS: This is an access key combination.
-#: ../../data/txts/help/general_in_game_help.lua:73
-msgid "Show all messages"
-msgstr ""
-
-#. TRANSLATORS: This is an access key combination.
-#: ../../data/txts/help/general_in_game_help.lua:75
-msgid "Show geologists’ messages only"
-msgstr ""
-
-#. TRANSLATORS: This is an access key combination.
-#: ../../data/txts/help/general_in_game_help.lua:77
-msgid "Show economy messages only"
-msgstr ""
-
-#. TRANSLATORS: This is an access key combination.
-#: ../../data/txts/help/general_in_game_help.lua:79
-msgid "Show seafaring messages only"
-msgstr ""
-
-#. TRANSLATORS: This is an access key combination.
-#: ../../data/txts/help/general_in_game_help.lua:81
-msgid "Show warfare messages only"
-msgstr ""
-
-#. TRANSLATORS: This is an access key combination.
-#: ../../data/txts/help/general_in_game_help.lua:83
-msgid "Show scenario messages only"
-msgstr ""
-
-#. TRANSLATORS: This is an access key combination.
-#: ../../data/txts/help/general_in_game_help.lua:85
-msgid "Jump to the location corresponding to the current message"
-msgstr ""
-
-#: ../../data/txts/help/general_in_game_help.lua:87
-msgid "Archive/Restore the current message"
-msgstr ""
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/txts/help/general_in_game_help.lua:87
-msgctxt "hotkey"
-msgid "Delete"
-msgstr ""
-
-#. TRANSLATORS: %s is a representation of the ? button.
-#: ../../data/txts/help/general_in_game_help.lua:91
-#, lua-format
-msgid ""
-"For a detailed description of the tribes’ economies, use the %s button on "
-"the bottom right."
 msgstr ""
 
 #: ../../data/txts/help/multiplayer_help.lua:10

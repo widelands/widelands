@@ -61,7 +61,7 @@ struct WuiPlotGenericAreaSlider : public UI::DiscreteSlider {
 		(Panel * const parent,
 		 WuiPlotArea & plot_area,
 		 WareStatisticsMenu * signal_listener,
-		 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
+		 const int32_t x, const int32_t y, const int w, const int h,
 		 const Image* background_picture_id,
 		 const std::string & tooltip_text = std::string(),
 		 const uint32_t cursor_size = 20,

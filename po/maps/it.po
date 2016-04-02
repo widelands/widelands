@@ -5,15 +5,15 @@
 # Cristiano, 2016
 # FIRST AUTHOR <gabriel.rota@gmail.com>, 2009
 # GunChleoc, 2014
-# Guybrush88 <erpizzo@alice.it>, 2015
+# Guybrush88 <erpizzo@alice.it>, 2015-2016
 # Luigi Lain <lainluigi86@tiscali.it>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-03-31 07:42+0000\n"
-"PO-Revision-Date: 2016-03-31 07:43+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2016-04-02 11:15+0000\n"
+"PO-Revision-Date: 2016-04-02 18:18+0000\n"
+"Last-Translator: Guybrush88 <erpizzo@alice.it>\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -274,7 +274,7 @@ msgstr "Isola Cometa"
 #: ../../data/maps/Comet_Island_v2.wmf/elemental:9
 #: ../../data/maps/Glacier_Lake_v2.wmf/elemental:9
 msgid "Nasenbaer – edited by king_of_nowhere"
-msgstr ""
+msgstr "Nasenbaer – modificato da king_of_nowhere"
 
 #: ../../data/maps/Comet_Island_v2.wmf/elemental:10
 msgid ""
@@ -324,7 +324,7 @@ msgstr "Quattro tribù lottano con il loro vicino più prossimo per essere i pri
 
 #: ../../data/maps/Dolomites_v2.wmf/elemental:8
 msgid "Dolomites"
-msgstr ""
+msgstr "Dolomiti"
 
 #: ../../data/maps/Dolomites_v2.wmf/elemental:10
 msgid ""
@@ -426,7 +426,7 @@ msgstr ""
 
 #: ../../data/maps/Full_Moon_v2.wmf/elemental:8
 msgid "Full Moon"
-msgstr ""
+msgstr "Luna piena"
 
 #: ../../data/maps/Full_Moon_v2.wmf/elemental:10
 msgid ""
@@ -518,7 +518,7 @@ msgstr "L'ultimo bastione"
 
 #: ../../data/maps/Last_Bastion_v2.wmf/elemental:9
 msgid "Another Barbarian – edited by king_of_nowhere"
-msgstr ""
+msgstr "Un altro barbaro – modificato da king_of_nowhere"
 
 #: ../../data/maps/Last_Bastion_v2.wmf/elemental:10
 msgid ""
@@ -536,7 +536,7 @@ msgstr "Gli dei capricciosi non hanno ascoltato le nostre preghiere. Invece, la 
 
 #: ../../data/maps/Last_Survivors.wmf/elemental:8
 msgid "Last Survivors"
-msgstr ""
+msgstr "Ultimi sopravvissuti"
 
 #: ../../data/maps/Last_Survivors.wmf/elemental:10
 msgid ""
@@ -763,7 +763,7 @@ msgstr ""
 
 #: ../../data/maps/Three_Warriors.wmf/elemental:11
 msgid "Water can be found around the lakes."
-msgstr ""
+msgstr "L'acqua può essere trovata attorno ai laghi."
 
 #: ../../data/maps/Together_We're_Strong.wmf/elemental:8
 msgid "Together We’re Strong"
@@ -845,7 +845,7 @@ msgstr "In piena estate una serie di eruzioni vulcaniche hanno portato l'inverno
 
 #: ../../data/maps/Wideworld.wmf/elemental:8
 msgid "Wide World"
-msgstr ""
+msgstr "Mondo enorme"
 
 #: ../../data/maps/Wideworld.wmf/elemental:10
 msgid ""

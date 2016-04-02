@@ -15,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-04-01 20:06+0000\n"
-"PO-Revision-Date: 2016-04-01 20:07+0000\n"
+"POT-Creation-Date: 2016-04-02 11:15+0000\n"
+"PO-Revision-Date: 2016-04-02 11:17+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -217,8 +217,8 @@ msgid "Loading tribes"
 msgstr "Chargement des tribus"
 
 #: ../../src/editor/editorinteractive.cc:118
-#: ../../src/editor/ui_menus/editor_main_menu.cc:46
-#: ../../src/wui/game_options_menu.cc:69
+#: ../../src/editor/ui_menus/editor_main_menu.cc:45
+#: ../../src/wui/game_options_menu.cc:68
 #: ../../src/wui/interactive_player.cc:92
 #: ../../src/wui/interactive_spectator.cc:59
 msgid "Main Menu"
@@ -259,9 +259,7 @@ msgid "Redo"
 msgstr "Refaire"
 
 #: ../../src/editor/editorinteractive.cc:143
-#: ../../src/editor/ui_menus/editor_help.cc:62
-#: ../../src/editor/ui_menus/editor_main_menu.cc:78
-#: ../../src/wui/buildingwindow.cc:354 ../../src/wui/game_options_menu.cc:78
+#: ../../src/wui/buildingwindow.cc:354
 msgid "Help"
 msgstr "Aide"
 
@@ -501,57 +499,43 @@ msgstr "Cliquer pour sélectionner un objet. Utiliser la touche Ctrl pour sélec
 msgid "Current: %s"
 msgstr "Actuel: %s ..."
 
-#: ../../src/editor/ui_menus/editor_help.cc:73
-msgid "Terrains"
-msgstr "Terrains"
+#: ../../src/editor/ui_menus/editor_help.cc:45
+#: ../../src/editor/ui_menus/editor_player_menu.cc:293
+#: ../../src/ui_fsmenu/multiplayer.cc:144
+#: ../../src/wui/encyclopedia_window.cc:156
+#: ../../src/wui/tribal_encyclopedia.cc:51
+msgid "Error!"
+msgstr "Erreur!"
 
-#: ../../src/editor/ui_menus/editor_help.cc:80
-msgid "Trees"
-msgstr "Arbres"
-
-#. * TRANSLATORS: %1% is a filename, %2% a map's name.
-#. * TRANSLATORS: Terrain name + editor category, e.g. Steppe (Summer)
-#. * TRANSLATORS: File name for saving objective achieved
-#. * TRANSLATORS: %1% = map name. %2% = achievement name
-#: ../../src/editor/ui_menus/editor_help.cc:157
-#: ../../src/editor/ui_menus/editor_help.cc:195
-#: ../../src/scripting/lua_game.cc:1060 ../../src/ui_fsmenu/loadgame.cc:74
-msgid "%1% (%2%)"
-msgstr "%1% (%2%)"
-
-#: ../../src/editor/ui_menus/editor_main_menu.cc:53
+#: ../../src/editor/ui_menus/editor_main_menu.cc:52
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:47
 msgid "New Map"
 msgstr "Nouvelle Carte"
 
-#: ../../src/editor/ui_menus/editor_main_menu.cc:58
+#: ../../src/editor/ui_menus/editor_main_menu.cc:57
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:45
 msgid "New Random Map"
 msgstr "Nouvelle Carte Aléatoire"
 
-#: ../../src/editor/ui_menus/editor_main_menu.cc:63
+#: ../../src/editor/ui_menus/editor_main_menu.cc:62
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:33
 msgid "Load Map"
 msgstr "Charger une Carte"
 
-#: ../../src/editor/ui_menus/editor_main_menu.cc:68
+#: ../../src/editor/ui_menus/editor_main_menu.cc:67
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:52
 msgid "Save Map"
 msgstr "Enregistrer la Carte"
 
-#: ../../src/editor/ui_menus/editor_main_menu.cc:73
+#: ../../src/editor/ui_menus/editor_main_menu.cc:72
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:50
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:69
 msgid "Map Options"
 msgstr "Options de la Carte"
 
-#: ../../src/editor/ui_menus/editor_main_menu.cc:83
+#: ../../src/editor/ui_menus/editor_main_menu.cc:77
 msgid "Exit Editor"
 msgstr "Quitter l'éditeur"
-
-#: ../../src/editor/ui_menus/editor_main_menu.cc:117
-msgid "The Widelands Editor"
-msgstr ""
 
 #: ../../src/editor/ui_menus/editor_main_menu_load_or_save_map.cc:59
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:63
@@ -853,11 +837,6 @@ msgstr "Nombre de Joueurs"
 #, c-format
 msgid "Player %u"
 msgstr "Joueur %u"
-
-#: ../../src/editor/ui_menus/editor_player_menu.cc:293
-#: ../../src/ui_fsmenu/multiplayer.cc:144
-msgid "Error!"
-msgstr "Erreur!"
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:295
 msgid ""
@@ -2026,6 +2005,13 @@ msgstr "non"
 msgid "off"
 msgstr "désactivé"
 
+#. * TRANSLATORS: %1% is a filename, %2% a map's name.
+#. * TRANSLATORS: File name for saving objective achieved
+#. * TRANSLATORS: %1% = map name. %2% = achievement name
+#: ../../src/scripting/lua_game.cc:1060 ../../src/ui_fsmenu/loadgame.cc:74
+msgid "%1% (%2%)"
+msgstr "%1% (%2%)"
+
 #: ../../src/ui_basic/spinbox.cc:143
 msgid "Decrease the value"
 msgstr "Diminuer la valeur"
@@ -3175,29 +3161,6 @@ msgstr "Annuler l'expédition"
 msgid "Building materials"
 msgstr "Matériaux de construction"
 
-#: ../../src/wui/encyclopedia_window.cc:86
-#: ../../src/wui/interactive_player.cc:107
-msgid "Tribal Encyclopedia"
-msgstr "Encyclopédie des tribus"
-
-#: ../../src/wui/encyclopedia_window.cc:97
-#: ../../src/wui/general_statistics_menu.cc:215
-#: ../../src/wui/productionsitewindow.cc:67 ../../src/wui/transport_ui.cc:60
-#: ../../src/wui/warehousewindow.cc:208
-msgid "Wares"
-msgstr "Marchandises"
-
-#: ../../src/wui/encyclopedia_window.cc:104
-#: ../../src/wui/general_statistics_menu.cc:199
-#: ../../src/wui/transport_ui.cc:65 ../../src/wui/warehousewindow.cc:218
-msgid "Workers"
-msgstr "Ouvriers"
-
-#: ../../src/wui/encyclopedia_window.cc:111
-#: ../../src/wui/general_statistics_menu.cc:207 ../../src/wui/minimap.cc:171
-msgid "Buildings"
-msgstr "Bâtiments"
-
 #: ../../src/wui/fieldaction.cc:239
 msgid "Build small building"
 msgstr "Construire un petit bâtiment"
@@ -3316,7 +3279,7 @@ msgstr "Stock"
 
 #. * TRANSLATORS: Button tooltip
 #: ../../src/wui/game_main_menu_save_game.cc:64
-#: ../../src/wui/game_options_menu.cc:94
+#: ../../src/wui/game_options_menu.cc:86
 #: ../../src/wui/interactive_spectator.cc:57
 msgid "Save Game"
 msgstr "Enregistrer la partie"
@@ -3474,37 +3437,28 @@ msgid "Objectives"
 msgstr "Objectifs"
 
 #. * TRANSLATORS: Window label when "Exit game" has been pressed
-#: ../../src/wui/game_options_menu.cc:46
+#: ../../src/wui/game_options_menu.cc:45
 msgid "Exit Game Confirmation"
 msgstr "Quitter la configuration de jeu"
 
-#: ../../src/wui/game_options_menu.cc:47
+#: ../../src/wui/game_options_menu.cc:46
 msgid "Are you sure you wish to exit this game?"
 msgstr "Voulez-vous vraiment quitter ce jeu?"
 
-#. * TRANSLATORS: Button tooltip
-#: ../../src/wui/game_options_menu.cc:80
-msgid "General help and keyboard shortcuts"
-msgstr ""
-
-#: ../../src/wui/game_options_menu.cc:85
+#: ../../src/wui/game_options_menu.cc:77
 #: ../../src/wui/game_options_sound_menu.cc:29
 msgid "Sound Options"
 msgstr "Options sonores"
 
 #. * TRANSLATORS: Button tooltip
-#: ../../src/wui/game_options_menu.cc:87
+#: ../../src/wui/game_options_menu.cc:79
 msgid "Set sound effect and music options"
 msgstr "Paramétrer les options des effets sonores et de la musique"
 
 #. * TRANSLATORS: Button tooltip
-#: ../../src/wui/game_options_menu.cc:101 ../../src/wui/game_summary.cc:110
+#: ../../src/wui/game_options_menu.cc:93 ../../src/wui/game_summary.cc:110
 msgid "Exit Game"
 msgstr "Quitter le jeu"
-
-#: ../../src/wui/game_options_menu.cc:134
-msgid "General Help"
-msgstr ""
 
 #: ../../src/wui/game_options_sound_menu.cc:35
 msgid "Music Volume"
@@ -3584,6 +3538,21 @@ msgstr "Score"
 msgid "Land"
 msgstr "Terrain"
 
+#: ../../src/wui/general_statistics_menu.cc:199
+#: ../../src/wui/transport_ui.cc:65 ../../src/wui/warehousewindow.cc:218
+msgid "Workers"
+msgstr "Ouvriers"
+
+#: ../../src/wui/general_statistics_menu.cc:207 ../../src/wui/minimap.cc:171
+msgid "Buildings"
+msgstr "Bâtiments"
+
+#: ../../src/wui/general_statistics_menu.cc:215
+#: ../../src/wui/productionsitewindow.cc:67 ../../src/wui/transport_ui.cc:60
+#: ../../src/wui/warehousewindow.cc:208
+msgid "Wares"
+msgstr "Marchandises"
+
 #: ../../src/wui/general_statistics_menu.cc:223
 msgid "Productivity"
 msgstr "Productivité"
@@ -3631,6 +3600,10 @@ msgstr "Statistiques"
 #: ../../src/wui/interactive_player.cc:223
 msgid "Messages"
 msgstr "Messages"
+
+#: ../../src/wui/interactive_player.cc:107
+msgid "Tribal Encyclopedia"
+msgstr "Encyclopédie des tribus"
 
 #: ../../src/wui/interactive_player.cc:230
 #, c-format
