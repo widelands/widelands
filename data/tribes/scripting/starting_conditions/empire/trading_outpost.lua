@@ -107,8 +107,8 @@ return {
       -- Get all warehouse types
       local plr = wl.Game().players[player.number]
       local warehouse_types = {}
-      for i, building_name in ipairs(wl.Game():get_tribe_description(plr.tribe_name).buildings) do
-         if (wl.Game():get_building_description(building_name).type_name == "warehouse") then
+      for i, building in ipairs(wl.Game():get_tribe_description(plr.tribe_name).buildings) do
+         if (building.type_name == "warehouse") then
             table.insert(warehouse_types, building_name)
          end
       end

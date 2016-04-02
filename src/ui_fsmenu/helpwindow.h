@@ -31,7 +31,7 @@ namespace UI {
 
 /**
  * Shows a help window with an OK button.
- * See scripting/widelands/multiplayer_help.lua for an example Lua file.
+ * See data/txts/help/multiplayer_help.lua for an example Lua file.
  */
 class FullscreenHelpWindow : public Window {
 public:
