@@ -44,7 +44,7 @@ function get_trees()
 end
 
 -- Main function
-set_textdomain("widelands")
+set_textdomain("widelands_editor")
 return {
    title = _"Editor Help",
    tabs = {
@@ -58,6 +58,12 @@ return {
                name = "intro",
                title = _"Introduction",
                script = "scripting/editor/editor_introduction.lua",
+               script_parameters = {}
+            },
+            {
+               name = "controls",
+               title = _"Controls",
+               script = "scripting/editor/editor_controls.lua",
                script_parameters = {}
             }
          }
