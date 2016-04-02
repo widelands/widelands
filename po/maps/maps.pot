@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-03-31 07:14+0000\n"
+"POT-Creation-Date: 2016-04-02 11:15+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -409,6 +409,12 @@ msgstr ""
 msgid ""
 "Each tribe is surrounded by four mighty mountains. Who will first conquer "
 "them and claim the resources for his own tribe?"
+msgstr ""
+
+#: ../../data/maps/Four_Mountains.wmf/elemental:11
+msgid ""
+"I: Water can be found along the river. II: Snowmen mark additional water "
+"sources. III: Each mountain contains only one resource."
 msgstr ""
 
 #: ../../data/maps/Full_Moon_v2.wmf/elemental:8

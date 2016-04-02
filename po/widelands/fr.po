@@ -15,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-03-29 17:39+0000\n"
-"PO-Revision-Date: 2016-03-29 17:41+0000\n"
+"POT-Creation-Date: 2016-04-01 20:06+0000\n"
+"PO-Revision-Date: 2016-04-01 20:07+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -25,61 +25,12 @@ msgstr ""
 "Language: fr\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: ../../data/scripting/editor/terrain_help.lua:21
-#: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:54
-#: ../../src/editor/ui_menus/editor_tool_menu.cc:71
-msgid "Resources"
-msgstr "Ressources"
-
-#. TRANSLATORS: A header in the editor help
-#: ../../data/scripting/editor/terrain_help.lua:25
-msgid "Valid Resource:"
-msgid_plural "Valid Resources:"
-msgstr[0] "Ressource valide &nbsp;:"
-msgstr[1] "Ressources valides&nbsp;:"
-
-#: ../../data/scripting/editor/terrain_help.lua:35
-msgid "%1%x %2%"
-msgstr "%1%x %2%"
-
-#. TRANSLATORS: e.g. "5x Water"
-#: ../../data/scripting/editor/terrain_help.lua:35
-msgid "Default:"
-msgstr "Défaut : "
-
-#. TRANSLATORS: A header in the editor help
-#: ../../data/scripting/editor/terrain_help.lua:67
-msgid "Probability of trees growing"
-msgstr "Probabilité de croissance des arbres"
-
-#: ../../data/scripting/editor/terrain_help.lua:72
-msgid "No trees will grow here."
-msgstr "Aucun arbre ne poussera ici."
-
-#. TRANSLATORS: A header in the editor help. Terrains preferred by a type of
-#. tree.
-#: ../../data/scripting/editor/tree_help.lua:17
-msgid "Preferred terrains"
-msgstr "Terrains préférés"
-
-#. * TRANSLATORS: %1% is a filename, %2% a map's name.
-#. * TRANSLATORS: Terrain name + editor category, e.g. Steppe (Summer)
-#. * TRANSLATORS: File name for saving objective achieved
-#. * TRANSLATORS: %1% = map name. %2% = achievement name
-#. TRANSLATORS: Terrain name (Climate)
-#: ../../data/scripting/editor/tree_help.lua:38
-#: ../../src/editor/ui_menus/editor_help.cc:157
-#: ../../src/editor/ui_menus/editor_help.cc:195
-#: ../../src/scripting/lua_game.cc:1060 ../../src/ui_fsmenu/loadgame.cc:74
-msgid "%1% (%2%)"
-msgstr "%1% (%2%)"
-
 #: ../../data/scripting/format_scenario.lua:36
 #, lua-format
 msgid "“%s”"
 msgstr "“%s”"
 
-#: ../../data/scripting/format_scenario.lua:146
+#: ../../data/scripting/format_scenario.lua:96
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] "Nouvel objectif"
@@ -132,93 +83,6 @@ msgstr "Certains de vos bâtiments de départ n'ont pu être construits en raiso
 #: ../../data/scripting/infrastructure.lua:159
 msgid "Not enough space"
 msgstr "Espace insuffisant"
-
-#. * TRANSLATORS: This is a heading for a help window
-#: ../../data/scripting/widelands/multiplayer_help.lua:10
-#: ../../src/ui_fsmenu/launch_mpg.cc:157 ../../src/ui_fsmenu/launch_mpg.cc:689
-msgid "Multiplayer Game Setup"
-msgstr "Configuration du jeu multi-joueur"
-
-#: ../../data/scripting/widelands/multiplayer_help.lua:11
-msgid "You are in the multiplayer launch game menu."
-msgstr "Vous êtes dans le menu de lancement du jeu multi-joueur"
-
-#: ../../data/scripting/widelands/multiplayer_help.lua:14
-msgid "Client settings"
-msgstr "Configuration du client"
-
-#: ../../data/scripting/widelands/multiplayer_help.lua:15
-msgid ""
-"On the left side is a list of all clients including you. You can set your "
-"role with the button following your nickname. Available roles are:"
-msgstr "Sur le coté gauche se trouve la liste des joueurs, y compris vous. Vous pouvez définir votre rôle avec le bouton qui suit votre surnom. Les rôles disponibles sont&nbsp;:"
-
-#: ../../data/scripting/widelands/multiplayer_help.lua:16
-msgid ""
-"The player with the color of the flag. If more than one client selected the "
-"same color, these share control over the player (‘shared kingdom mode’)."
-msgstr "Le joueur avec la couleur du drapeau. Si plus d'un client sélectionne la même couleur, ils partageront les contrôles du joueur (mode de royaume partagé)."
-
-#: ../../data/scripting/widelands/multiplayer_help.lua:17
-msgid ""
-"Spectator mode, meaning you can see everything, but cannot control any "
-"player"
-msgstr "Mode spectateur, signifie que vous pouvez tout voir, mais que vous ne pouvez contrôler aucun joueur"
-
-#: ../../data/scripting/widelands/multiplayer_help.lua:19
-msgid "Player settings"
-msgstr "Options du joueur"
-
-#: ../../data/scripting/widelands/multiplayer_help.lua:20
-msgid ""
-"In the middle are the settings for the players. To start a game, each player"
-" must be one of the following:"
-msgstr "Les réglages des joueurs se trouvent au milieu. Pour démarrer une partie, chaque joueur doit être un de ce qui suit&nbsp;:"
-
-#: ../../data/scripting/widelands/multiplayer_help.lua:21
-msgid "Connected to one or more clients (see ‘Client settings’)."
-msgstr "Connecté à un ou plusieurs clients (voir 'Configuration des clients')."
-
-#: ../../data/scripting/widelands/multiplayer_help.lua:22
-msgid ""
-"Connected to a computer player (the face in the picture as well as the mouse"
-" hover texts indicate the strength of the currently selected computer "
-"player)."
-msgstr "Connecté à un joueur informatique (le visage sur la photo ainsi que le texte au survol de la souris indiquent la puissance de l'actuel joueur informatique)."
-
-#: ../../data/scripting/widelands/multiplayer_help.lua:23
-msgid "Set as shared in starting position for another player."
-msgstr "Définir en tant que position de départ partagée pour un autre joueur."
-
-#: ../../data/scripting/widelands/multiplayer_help.lua:24
-msgid "Closed."
-msgstr "Fermé."
-
-#: ../../data/scripting/widelands/multiplayer_help.lua:25
-msgid ""
-"The latter three can only be set by the hosting client by left-clicking the "
-"‘type’ button of a player. Hosting players can also set the initialization "
-"of each player (the set of buildings, wares and workers the player starts "
-"with) and the tribe and team for computer players"
-msgstr "Les trois derniers sont uniquement paramétrables par l'hôte, par un clic-gauche sur le bouton 'type' d'un joueur. Les joueurs hébergeurs peuvent paramétrer l'initialisation de chaque joueur (bâtiments, marchandises et ouvriers avec lesquels le joueur démarre) ainsi que les tribus et équipes des joueurs joués par l'ordinateur."
-
-#: ../../data/scripting/widelands/multiplayer_help.lua:26
-msgid ""
-"Every client connected to a player (who isn’t a spectator) can set the tribe"
-" and the team for that player"
-msgstr "Chaque client connecté à un joueur (qui n'est pas un spectateur) peut sélectionner une tribu et une équipe pour ce joueur."
-
-#: ../../data/scripting/widelands/multiplayer_help.lua:28
-msgid "Map details"
-msgstr "Détails de la carte"
-
-#: ../../data/scripting/widelands/multiplayer_help.lua:29
-msgid ""
-"You can see information about the selected map or savegame on the right-hand"
-" side. A button next to the map name allows the host to change to a "
-"different map. Furthermore, the host is able to set a specific win "
-"condition, and finally can start the game as soon as all players are set up."
-msgstr "Il y a sur le côté droit les informations concernant la carte ou la sauvegarde. Un bouton à droite de la carte permet à l'hôte de changer pour une carte différente. De plus, l'hôte peut définir des conditions de victoire spécifiques et finalement démarrer le jeu dès que tous les joueurs sont configurés."
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
 #: ../../src/ai/computer_player.cc:42
@@ -353,8 +217,12 @@ msgid "Loading tribes"
 msgstr "Chargement des tribus"
 
 #: ../../src/editor/editorinteractive.cc:118
-msgid "Menu"
-msgstr "Menu"
+#: ../../src/editor/ui_menus/editor_main_menu.cc:46
+#: ../../src/wui/game_options_menu.cc:69
+#: ../../src/wui/interactive_player.cc:92
+#: ../../src/wui/interactive_spectator.cc:59
+msgid "Main Menu"
+msgstr "Menu Principal"
 
 #: ../../src/editor/editorinteractive.cc:121
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:47
@@ -392,7 +260,8 @@ msgstr "Refaire"
 
 #: ../../src/editor/editorinteractive.cc:143
 #: ../../src/editor/ui_menus/editor_help.cc:62
-#: ../../src/wui/buildingwindow.cc:354
+#: ../../src/editor/ui_menus/editor_main_menu.cc:78
+#: ../../src/wui/buildingwindow.cc:354 ../../src/wui/game_options_menu.cc:78
 msgid "Help"
 msgstr "Aide"
 
@@ -640,9 +509,15 @@ msgstr "Terrains"
 msgid "Trees"
 msgstr "Arbres"
 
-#: ../../src/editor/ui_menus/editor_main_menu.cc:46
-msgid "Main Menu"
-msgstr "Menu Principal"
+#. * TRANSLATORS: %1% is a filename, %2% a map's name.
+#. * TRANSLATORS: Terrain name + editor category, e.g. Steppe (Summer)
+#. * TRANSLATORS: File name for saving objective achieved
+#. * TRANSLATORS: %1% = map name. %2% = achievement name
+#: ../../src/editor/ui_menus/editor_help.cc:157
+#: ../../src/editor/ui_menus/editor_help.cc:195
+#: ../../src/scripting/lua_game.cc:1060 ../../src/ui_fsmenu/loadgame.cc:74
+msgid "%1% (%2%)"
+msgstr "%1% (%2%)"
 
 #: ../../src/editor/ui_menus/editor_main_menu.cc:53
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:47
@@ -670,14 +545,13 @@ msgstr "Enregistrer la Carte"
 msgid "Map Options"
 msgstr "Options de la Carte"
 
-#: ../../src/editor/ui_menus/editor_main_menu.cc:78
-#: ../../src/ui_fsmenu/main.cc:55
-msgid "View Readme"
-msgstr "Voir le fichier Lisezmoi"
-
 #: ../../src/editor/ui_menus/editor_main_menu.cc:83
 msgid "Exit Editor"
 msgstr "Quitter l'éditeur"
+
+#: ../../src/editor/ui_menus/editor_main_menu.cc:117
+msgid "The Widelands Editor"
+msgstr ""
 
 #: ../../src/editor/ui_menus/editor_main_menu_load_or_save_map.cc:59
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:63
@@ -1005,6 +879,11 @@ msgstr "Augmenter/Réduire la Valeur"
 msgid "Set Value"
 msgstr "Définir la Valeur"
 
+#: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:54
+#: ../../src/editor/ui_menus/editor_tool_menu.cc:71
+msgid "Resources"
+msgstr "Ressources"
+
 #: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:108
 msgid "Current Selection"
 msgstr "Sélection actuelle"
@@ -1100,7 +979,7 @@ msgid "Loading map…"
 msgstr "Chargement de la carte..."
 
 #: ../../src/logic/game.cc:366 ../../src/logic/game.cc:399
-#: ../../src/ui_basic/progresswindow.cc:50 ../../src/wlapplication.cc:1377
+#: ../../src/ui_basic/progresswindow.cc:50 ../../src/wlapplication.cc:1367
 msgid "Loading…"
 msgstr "Chargement..."
 
@@ -1476,8 +1355,8 @@ msgctxt "ship_state"
 msgid "Expedition Landing"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/soldier.cc:1469
-#: ../../src/logic/map_objects/tribes/soldier.cc:1480
+#: ../../src/logic/map_objects/tribes/soldier.cc:1485
+#: ../../src/logic/map_objects/tribes/soldier.cc:1496
 msgid "Logic error"
 msgstr "Erreur logique"
 
@@ -1791,7 +1670,7 @@ msgid ""
 msgstr "Widelands n'a pas pu établir une connexion vers l'adresse indiquée.\nSoit il n'y a aucun serveur Widelands fonctionnant sur le port supposé\nou bien le serveur a été éteint pendant que vous tentiez de vous y connecter."
 
 #: ../../src/network/netclient.cc:184 ../../src/network/nethost.cc:729
-#: ../../src/wlapplication.cc:1267
+#: ../../src/wlapplication.cc:1257
 msgid "Preparing game"
 msgstr "Préparation de la partie"
 
@@ -2179,6 +2058,14 @@ msgid_plural "%d pixels"
 msgstr[0] ""
 msgstr[1] ""
 
+#: ../../src/ui_fsmenu/about.cc:40 ../../src/ui_fsmenu/main.cc:55
+msgid "About Widelands"
+msgstr ""
+
+#: ../../src/ui_fsmenu/about.cc:48 ../../src/wui/watchwindow.cc:142
+msgid "Close"
+msgstr "Fermer"
+
 #: ../../src/ui_fsmenu/campaign_select.cc:50
 msgid "Choose a campaign"
 msgstr "Choisissez une campagne"
@@ -2300,36 +2187,32 @@ msgstr "Tutoriel:"
 msgid "Invalid path to file in campaigns.conf: %s"
 msgstr "Chemin vers le fichier non valide dans campaigns.conf: %s"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:420
+#: ../../src/ui_fsmenu/campaign_select.cc:421
 msgid "The designer of this tutorial"
 msgid_plural "The designers of this tutorial"
 msgstr[0] "Le concepteur de ce tutoriel"
 msgstr[1] "Les concepteurs de ce tutoriel"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:423
+#: ../../src/ui_fsmenu/campaign_select.cc:424
 msgid "The designer of this scenario"
 msgid_plural "The designers of this scenario"
 msgstr[0] "Le concepteur de ce scénario"
 msgstr[1] "Les concepteurs de ce scénario"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:426 ../../src/wui/mapdetails.cc:131
+#: ../../src/ui_fsmenu/campaign_select.cc:427 ../../src/wui/mapdetails.cc:131
 msgid "Author:"
 msgid_plural "Authors:"
 msgstr[0] "Auteur:"
 msgstr[1] "Auteurs:"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:455
+#: ../../src/ui_fsmenu/campaign_select.cc:456
 msgid "Pick a tutorial from the list, then hit \"OK\"."
 msgstr "Choisissez un tutoriel dans la liste, puis appuyez sur \"OK\"."
 
-#: ../../src/ui_fsmenu/campaign_select.cc:457
+#: ../../src/ui_fsmenu/campaign_select.cc:458
 msgid ""
 "You can see a description of the currently selected tutorial on the right."
 msgstr "Vous pouvez voir une description du tutoriel actuellement sélectionné à droite."
-
-#: ../../src/ui_fsmenu/fileview.cc:70 ../../src/wui/watchwindow.cc:142
-msgid "Close"
-msgstr "Fermer"
 
 #: ../../src/ui_fsmenu/helpwindow.cc:42 ../../src/wui/helpwindow.cc:44
 #, c-format
@@ -2466,6 +2349,11 @@ msgstr "Commencer la partie"
 #: ../../src/ui_fsmenu/launch_mpg.cc:151
 msgid "Show the help window"
 msgstr "Afficher la fenêtre d'aide"
+
+#. * TRANSLATORS: This is a heading for a help window
+#: ../../src/ui_fsmenu/launch_mpg.cc:157 ../../src/ui_fsmenu/launch_mpg.cc:689
+msgid "Multiplayer Game Setup"
+msgstr "Configuration du jeu multi-joueur"
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:166
 msgid "Clients"
@@ -2823,36 +2711,25 @@ msgid "Editor"
 msgstr "Éditeur"
 
 #: ../../src/ui_fsmenu/main.cc:52 ../../src/ui_fsmenu/options.cc:111
-#: ../../src/wui/game_options_menu.cc:69
-#: ../../src/wui/interactive_player.cc:92
-#: ../../src/wui/interactive_spectator.cc:59
 msgid "Options"
 msgstr "Options"
 
-#: ../../src/ui_fsmenu/main.cc:58 ../../src/wui/game_options_menu.cc:85
-msgid "License"
-msgstr "Licence"
-
-#: ../../src/ui_fsmenu/main.cc:61 ../../src/wui/game_options_menu.cc:92
-msgid "Authors"
-msgstr "Auteurs"
-
-#: ../../src/ui_fsmenu/main.cc:64
+#: ../../src/ui_fsmenu/main.cc:58
 msgid "Exit Widelands"
 msgstr "Quitter Widelands"
 
 #. * TRANSLATORS: %1$s = version string, %2%s = "Debug" or "Release"
-#: ../../src/ui_fsmenu/main.cc:70
+#: ../../src/ui_fsmenu/main.cc:64
 #, c-format
 msgid "Version %1$s (%2$s)"
 msgstr "Version %1$s (%2$s)"
 
 #. * TRANSLATORS: Placeholders are the copyright years
-#: ../../src/ui_fsmenu/main.cc:75
+#: ../../src/ui_fsmenu/main.cc:69
 msgid "(C) %1%-%2% by the Widelands Development Team"
 msgstr "(C) %1%-%2% par l'équipe des développeurs de Widelands"
 
-#: ../../src/ui_fsmenu/main.cc:80
+#: ../../src/ui_fsmenu/main.cc:74
 msgid "Licensed under the GNU General Public License V2.0"
 msgstr "Sous licence GNU Général Public Licence V2.0"
 
@@ -3081,11 +2958,11 @@ msgstr "Campagnes"
 msgid "Load Game"
 msgstr "Charger une partie"
 
-#: ../../src/wlapplication.cc:1053
+#: ../../src/wlapplication.cc:1043
 msgid "Game data error"
 msgstr "Erreur de données du jeu"
 
-#: ../../src/wlapplication.cc:1063
+#: ../../src/wlapplication.cc:1053
 #, c-format
 msgid ""
 "\n"
@@ -3093,7 +2970,7 @@ msgid ""
 "Please report this problem to help us improve Widelands. You will find related messages in the standard output (stdout.txt on Windows). You are using build %1$s (%2$s). "
 msgstr "\n\nS'il vous plaît, communiquez nous ce problème pour nous aider à améliorer Widelands, Vous trouverez les messages relatifs dans la sortie standard (stdout.txt sur windows). Vous utilisez la version %1$s (%2$s). "
 
-#: ../../src/wlapplication.cc:1070
+#: ../../src/wlapplication.cc:1060
 msgid ""
 "Please add this information to your report.\n"
 "\n"
@@ -3439,7 +3316,7 @@ msgstr "Stock"
 
 #. * TRANSLATORS: Button tooltip
 #: ../../src/wui/game_main_menu_save_game.cc:64
-#: ../../src/wui/game_options_menu.cc:108
+#: ../../src/wui/game_options_menu.cc:94
 #: ../../src/wui/interactive_spectator.cc:57
 msgid "Save Game"
 msgstr "Enregistrer la partie"
@@ -3605,39 +3482,29 @@ msgstr "Quitter la configuration de jeu"
 msgid "Are you sure you wish to exit this game?"
 msgstr "Voulez-vous vraiment quitter ce jeu?"
 
-#: ../../src/wui/game_options_menu.cc:78
-msgid "README"
-msgstr "LISEZMOI"
-
 #. * TRANSLATORS: Button tooltip
 #: ../../src/wui/game_options_menu.cc:80
-msgid "Show general information about Widelands and keyboard shortcuts"
-msgstr "Afficher les informations générales concernant Widelands et les raccourcis claviers"
+msgid "General help and keyboard shortcuts"
+msgstr ""
 
-#. * TRANSLATORS: Button tooltip
-#: ../../src/wui/game_options_menu.cc:87
-msgid "Show the distribution licence document"
-msgstr "Afficher le document de licence de distribution"
-
-#. * TRANSLATORS: Button tooltip
-#: ../../src/wui/game_options_menu.cc:94
-msgid "Show information about the Widelands Development Team"
-msgstr "Afficher les informations concernant l'équipe des développeurs de Widelands"
-
-#: ../../src/wui/game_options_menu.cc:99
+#: ../../src/wui/game_options_menu.cc:85
 #: ../../src/wui/game_options_sound_menu.cc:29
 msgid "Sound Options"
 msgstr "Options sonores"
 
 #. * TRANSLATORS: Button tooltip
-#: ../../src/wui/game_options_menu.cc:101
+#: ../../src/wui/game_options_menu.cc:87
 msgid "Set sound effect and music options"
 msgstr "Paramétrer les options des effets sonores et de la musique"
 
 #. * TRANSLATORS: Button tooltip
-#: ../../src/wui/game_options_menu.cc:115 ../../src/wui/game_summary.cc:110
+#: ../../src/wui/game_options_menu.cc:101 ../../src/wui/game_summary.cc:110
 msgid "Exit Game"
 msgstr "Quitter le jeu"
+
+#: ../../src/wui/game_options_menu.cc:134
+msgid "General Help"
+msgstr ""
 
 #: ../../src/wui/game_options_sound_menu.cc:35
 msgid "Music Volume"
@@ -3829,12 +3696,12 @@ msgid "Please enter your password!"
 msgstr "Veuillez entrer votre mot de passe!"
 
 #. * TRANSLATORS: Parent directory/folder
-#: ../../src/wui/mapdata.cc:128
+#: ../../src/wui/mapdata.cc:129
 msgid "parent"
 msgstr "parent"
 
 #. * TRANSLATORS: Directory name for MP Scenarios in map selection
-#: ../../src/wui/mapdata.cc:136
+#: ../../src/wui/mapdata.cc:137
 msgid "Multiplayer Scenarios"
 msgstr "Scénarios multijoueurs"
 

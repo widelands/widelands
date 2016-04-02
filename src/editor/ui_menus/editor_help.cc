@@ -19,204 +19,32 @@
 
 #include "editor/ui_menus/editor_help.h"
 
-#include <algorithm>
-#include <map>
+
 #include <memory>
-#include <string>
-#include <vector>
 
 #include <boost/format.hpp>
 
 #include "base/i18n.h"
 #include "editor/editorinteractive.h"
-#include "graphic/graphic.h"
-#include "graphic/texture.h"
-#include "io/filesystem/layered_filesystem.h"
-#include "logic/map_objects/world/editor_category.h"
-#include "logic/map_objects/world/terrain_description.h"
-#include "logic/map_objects/world/world.h"
+#include "scripting/lua_coroutine.h"
 #include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
+#include "ui_basic/messagebox.h"
 
-namespace {
-
-#define WINDOW_WIDTH std::min(700, g_gr->get_xres() - 40)
-#define WINDOW_HEIGHT std::min(550, g_gr->get_yres() - 40)
-
-constexpr int kPadding = 5;
-constexpr int kTabHeight = 35;
-
-const std::string heading(const std::string& text) {
-	return ((boost::format("<rt><p font-size=18 font-weight=bold font-color=D1D1D1>"
-	                       "%s<br></p><p font-size=8> <br></p></rt>") %
-	         text).str());
-}
-
-}  // namespace
-
-inline EditorInteractive& EditorHelp::eia() const {
-	return dynamic_cast<EditorInteractive&>(*get_parent());
-}
-
-EditorHelp::EditorHelp(EditorInteractive& parent, UI::UniqueWindow::Registry& registry)
-   : UI::UniqueWindow(&parent, "encyclopedia", &registry, WINDOW_WIDTH, WINDOW_HEIGHT, _("Help")),
-     tabs_(this, 0, 0, nullptr) {
-
-	const int contents_height = WINDOW_HEIGHT - kTabHeight - 2 * kPadding;
-	const int contents_width = WINDOW_WIDTH / 2 - 1.5 * kPadding;
-
-	std::vector<std::unique_ptr<HelpTab>> tab_definitions;
-
-	tab_definitions.push_back(
-	   std::unique_ptr<HelpTab>(new HelpTab("terrains",
-	                                        "images/wui/editor/editor_menu_tool_set_terrain.png",
-	                                        _("Terrains"),
-	                                        "scripting/editor/terrain_help.lua",
-	                                        HelpEntry::Type::kTerrain)));
-
-	tab_definitions.push_back(
-	   std::unique_ptr<HelpTab>(new HelpTab("trees",
-	                                        "world/immovables/trees/alder/old/idle_0.png",
-	                                        _("Trees"),
-	                                        "scripting/editor/tree_help.lua",
-	                                        HelpEntry::Type::kTree)));
-
-	for (const auto& tab : tab_definitions) {
-		// Make sure that all paths exist
-		if (!g_fs->file_exists(tab->script_path)) {
-			throw wexception("Script path %s for tab %s does not exist!",
-			                 tab->script_path.c_str(),
-			                 tab->key.c_str());
-		}
-		if (!g_fs->file_exists(tab->image_filename)) {
-			throw wexception("Image path %s for tab %s does not exist!",
-			                 tab->image_filename.c_str(),
-			                 tab->key.c_str());
-		}
-
-		wrapper_boxes_.insert(std::make_pair(
-		   tab->key, std::unique_ptr<UI::Box>(new UI::Box(&tabs_, 0, 0, UI::Box::Horizontal))));
-
-		boxes_.insert(
-		   std::make_pair(tab->key,
-		                  std::unique_ptr<UI::Box>(new UI::Box(
-		                     wrapper_boxes_.at(tab->key).get(), 0, 0, UI::Box::Horizontal))));
-
-		lists_.insert(
-		   std::make_pair(tab->key,
-		                  std::unique_ptr<UI::Listselect<Widelands::DescriptionIndex>>(
-		                     new UI::Listselect<Widelands::DescriptionIndex>(
-		                        boxes_.at(tab->key).get(), 0, 0, contents_width, contents_height))));
-		lists_.at(tab->key)->selected.connect(
-		   boost::bind(&EditorHelp::entry_selected, this, tab->key, tab->script_path, tab->type));
-
-		contents_.insert(
-		   std::make_pair(tab->key,
-		                  std::unique_ptr<UI::MultilineTextarea>(new UI::MultilineTextarea(
-		                     boxes_.at(tab->key).get(), 0, 0, contents_width, contents_height))));
-
-		boxes_.at(tab->key)->add(lists_.at(tab->key).get(), UI::Align::kLeft);
-		boxes_.at(tab->key)->add_space(kPadding);
-		boxes_.at(tab->key)->add(contents_.at(tab->key).get(), UI::Align::kLeft);
-
-		wrapper_boxes_.at(tab->key)->add_space(kPadding);
-		wrapper_boxes_.at(tab->key)->add(boxes_.at(tab->key).get(), UI::Align::kLeft);
-
-		tabs_.add("editor_help_" + tab->key,
-		          g_gr->images().get(tab->image_filename),
-		          wrapper_boxes_.at(tab->key).get(),
-		          tab->tooltip);
-	}
-	tabs_.set_size(WINDOW_WIDTH, WINDOW_HEIGHT);
-
-	fill_terrains();
-	fill_trees();
-
-	if (get_usedefaultpos()) {
-		center_to_parent();
-	}
-}
-
-void EditorHelp::fill_entries(const char* key, std::vector<HelpEntry>* entries) {
-	std::sort(entries->begin(), entries->end());
-	for (uint32_t i = 0; i < entries->size(); i++) {
-		HelpEntry cur = (*entries)[i];
-		lists_.at(key)->add(cur.descname, cur.index, cur.icon);
-	}
-	lists_.at(key)->select(0);
-}
-
-void EditorHelp::fill_terrains() {
-	const Widelands::World& world = eia().egbase().world();
-	std::vector<HelpEntry> entries;
-
-	for (Widelands::DescriptionIndex i = 0; i < world.terrains().size(); ++i) {
-		const Widelands::TerrainDescription& terrain = world.terrain_descr(i);
-		upcast(Image const, icon, &terrain.get_texture(0));
-		/** TRANSLATORS: Terrain name + editor category, e.g. Steppe (Summer) */
-		HelpEntry entry(i, (boost::format(_("%1% (%2%)"))
-								  % terrain.descname().c_str()
-								  % terrain.editor_category()->descname()).str(), icon);
-		entries.push_back(entry);
-	}
-	fill_entries("terrains", &entries);
-}
-
-void EditorHelp::fill_trees() {
-	const Widelands::World& world = eia().egbase().world();
-	std::vector<HelpEntry> entries;
-
-	for (Widelands::DescriptionIndex i = 0; i < world.get_nr_immovables(); ++i) {
-		const Widelands::ImmovableDescr* immovable = world.get_immovable_descr(i);
-		uint32_t attribute_id = immovable->get_attribute_id("tree");
-		if (immovable->has_attribute(attribute_id)) {
-			const Image* icon = immovable->representative_image();
-			HelpEntry entry(i, immovable->species(), icon);
-			entries.push_back(entry);
-		}
-	}
-	fill_entries("trees", &entries);
-}
-
-void EditorHelp::entry_selected(const std::string& key,
-                                const std::string& script_path,
-                                const HelpEntry::Type& type) {
+EditorHelp::EditorHelp(EditorInteractive& parent,
+							  UI::UniqueWindow::Registry& registry,
+							  LuaInterface* const lua)
+	: EncyclopediaWindow(parent, registry, lua)
+{
 	try {
-		std::unique_ptr<LuaTable> table(eia().egbase().lua().run_script(script_path));
-		std::unique_ptr<LuaCoroutine> cr(table->get_coroutine("func"));
-
-		std::string descname = "";
-
-		switch (type) {
-		case (HelpEntry::Type::kTerrain): {
-			const Widelands::TerrainDescription& descr =
-			   eia().egbase().world().terrain_descr(lists_.at(key)->get_selected());
-			/** TRANSLATORS: Terrain name + editor category, e.g. Steppe (Summer) */
-			descname = (boost::format(_("%1% (%2%)"))
-						  % descr.descname().c_str()
-						  % descr.editor_category()->descname()).str();
-			cr->push_arg(descr.name());
-			break;
-		}
-		case (HelpEntry::Type::kTree): {
-			const Widelands::ImmovableDescr* descr =
-			   eia().egbase().world().get_immovable_descr(lists_.at(key)->get_selected());
-			descname = descr->species();
-			cr->push_arg(descr->name());
-			break;
-		}
-		}
-
-		cr->resume();
-		const std::string help_text = cr->pop_string();
-
-		// We add the heading here instead of in Lua, so that the content can be
-		// reused in a standalone window that will have the heading as a window
-		// title.
-		contents_.at(key)->set_text((boost::format("%s%s") % heading(descname) % help_text).str());
-
+		init(parent, lua_->run_script("scripting/editor/editor_help.lua"));
 	} catch (LuaError& err) {
-		contents_.at(key)->set_text(err.what());
+		log("Error loading script for editor help:\n%s\n", err.what());
+		UI::WLMessageBox wmb(
+					&parent,
+					_("Error!"),
+					(boost::format("Error loading script for editor help:\n%s") % err.what()).str(),
+					UI::WLMessageBox::MBoxType::kOk);
+		wmb.run<UI::Panel::Returncodes>();
 	}
-	contents_.at(key)->scroll_to_top();
 }

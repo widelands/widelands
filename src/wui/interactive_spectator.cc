@@ -56,7 +56,7 @@ InteractiveSpectator::InteractiveSpectator
 	save_
 		(INIT_BTN("menu_save_game", "save_game", _("Save Game"))),
 	toggle_options_menu_
-		(INIT_BTN("menu_options_menu", "options_menu", _("Options"))),
+		(INIT_BTN("menu_options_menu", "options_menu", _("Main Menu"))),
 	toggle_statistics_
 		(INIT_BTN("menu_general_stats", "general_stats", _("Statistics"))),
 	toggle_minimap_

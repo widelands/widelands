@@ -1112,15 +1112,16 @@ void LuaTribeDescription::__unpersist(lua_State* L) {
 /* RST
 	.. attribute:: buildings
 
-			(RO) an array of :class:`string` with the names of all the buildings that the tribe can use
+			(RO) an array of :class:`LuaBuildingDescription` with all the buildings that the tribe can use,
+				  casted to their appropriate subclasses.
 */
-
 int LuaTribeDescription::get_buildings(lua_State * L) {
+	const TribeDescr& tribe = *get();
 	lua_newtable(L);
 	int counter = 0;
-	for (DescriptionIndex building : get()->buildings()) {
+	for (DescriptionIndex building : tribe.buildings()) {
 		lua_pushinteger(L, ++counter);
-		lua_pushstring(L, get_egbase(L).tribes().get_building_descr(building)->name());
+		upcasted_map_object_descr_to_lua(L, tribe.get_building_descr(building));
 		lua_settable(L, -3);
 	}
 	return 1;
@@ -1234,15 +1235,15 @@ int LuaTribeDescription::get_soldier(lua_State * L) {
 /* RST
 	.. attribute:: wares
 
-			(RO) an array of :class:`string` with the names of all the wares that the tribe uses
+			(RO) an array of :class:`LuaWareDescription` with all the wares that the tribe can use.
 */
-
 int LuaTribeDescription::get_wares(lua_State * L) {
+	const TribeDescr& tribe = *get();
 	lua_newtable(L);
 	int counter = 0;
-	for (DescriptionIndex ware : get()->wares()) {
+	for (DescriptionIndex ware : tribe.wares()) {
 		lua_pushinteger(L, ++counter);
-		lua_pushstring(L, get_egbase(L).tribes().get_ware_descr(ware)->name());
+		to_lua<LuaWareDescription>(L, new LuaWareDescription(tribe.get_ware_descr(ware)));
 		lua_settable(L, -3);
 	}
 	return 1;
@@ -1251,15 +1252,16 @@ int LuaTribeDescription::get_wares(lua_State * L) {
 /* RST
 	.. attribute:: workers
 
-			(RO) an array of :class:`string` with the names of all the workers that the tribe can use
+			(RO) an array of :class:`LuaWorkerDescription` with all the workers that the tribe can use,
+				  casted to their appropriate subclasses.
 */
-
 int LuaTribeDescription::get_workers(lua_State * L) {
+	const TribeDescr& tribe = *get();
 	lua_newtable(L);
 	int counter = 0;
-	for (DescriptionIndex worker : get()->workers()) {
+	for (DescriptionIndex worker : tribe.workers()) {
 		lua_pushinteger(L, ++counter);
-		lua_pushstring(L, get_egbase(L).tribes().get_worker_descr(worker)->name());
+		upcasted_map_object_descr_to_lua(L, tribe.get_worker_descr(worker));
 		lua_settable(L, -3);
 	}
 	return 1;
