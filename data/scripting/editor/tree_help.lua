@@ -8,7 +8,7 @@ include "scripting/editor/format_editor.lua"
 
 return {
    func = function(tree_name)
-      set_textdomain("widelands")
+      set_textdomain("widelands_editor")
       local world = wl.World();
       local tree = wl.Editor():get_immovable_description(tree_name)
       local result = picture_li(tree.representative_image, "")
@@ -33,8 +33,8 @@ return {
       end
 
       for k,v in ipairs(terrain_list) do
-         -- TRANSLATORS: Terrain name (Climate)
          result = result .. picture_li(v.terrain.representative_image,
+               -- TRANSLATORS: Terrain name (Climate)
                (_"%1% (%2%)"):bformat(v.terrain.descname, v.terrain.editor_category.descname) ..
                "<br>" .. ("%2.1f%%"):bformat(100 * v.probability)
             ) .. spacer()

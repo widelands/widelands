@@ -48,18 +48,6 @@ end
 
 
 -- RST
--- .. function:: listdivider()
---
---    Closes a paragraph and opens a new paragraph.
---    Use this before starting a list when it doesn't create a paragraph.
---    If you want more space, before the list, use paragraphdivider().
---
---    :returns: <br></p><p font-size=4><br></p><p line-spacing=3 font-size=12>
-function listdivider()
-   return ("<br></p><p font-size=4><br></p><p line-spacing=3 font-size=12>")
-end
-
--- RST
 -- .. function:: paragraphdivider()
 --
 --    Closes a paragraph and opens a new paragraph. Use this when you format a string with the speech function

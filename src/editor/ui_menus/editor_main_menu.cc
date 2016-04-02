@@ -26,7 +26,7 @@
 #include "editor/ui_menus/editor_main_menu_new_map.h"
 #include "editor/ui_menus/editor_main_menu_random_map.h"
 #include "editor/ui_menus/editor_main_menu_save_map.h"
-#include "ui_fsmenu/fileview.h"
+#include "wui/fileview.h"
 
 // TODO(unknown): these should be defined globally for the whole UI
 #define width 200
@@ -71,11 +71,11 @@ EditorMainMenu::EditorMainMenu
 		 0, 0, width, 0,
 		 g_gr->images().get("images/ui_basic/but1.png"),
 		 _("Map Options")),
-	button_view_readme_
-		(&box_, "readme",
+	button_help_
+		(&box_, "help",
 		 0, 0, width, 0,
 		 g_gr->images().get("images/ui_basic/but1.png"),
-		 _("View Readme")),
+		 _("Help")),
 	button_exit_editor_
 		(&box_, "exit",
 		 0, 0, width, 0,
@@ -87,23 +87,17 @@ EditorMainMenu::EditorMainMenu
 	box_.add(&button_load_map_, UI::Align::kHCenter);
 	box_.add(&button_save_map_, UI::Align::kHCenter);
 	box_.add(&button_map_options_, UI::Align::kHCenter);
-	box_.add(&button_view_readme_, UI::Align::kHCenter);
+	box_.add(&button_help_, UI::Align::kHCenter);
 	box_.add(&button_exit_editor_, UI::Align::kHCenter);
 	box_.set_size(width, 7 * button_new_map_.get_h()+ 6 * vspacing);
 	set_inner_size(get_inner_w(), box_.get_h() + 2 * margin);
 
+	button_help_.sigclicked.connect(boost::bind(&EditorMainMenu::help_btn, boost::ref(*this)));
 	button_new_map_.sigclicked.connect(boost::bind(&EditorMainMenu::new_map_btn, this));
 	button_new_random_map_.sigclicked.connect(boost::bind(&EditorMainMenu::new_random_map_btn, this));
 	button_load_map_.sigclicked.connect(boost::bind(&EditorMainMenu::load_btn, this));
 	button_save_map_.sigclicked.connect(boost::bind(&EditorMainMenu::save_btn, this));
 	button_map_options_.sigclicked.connect(boost::bind(&EditorMainMenu::map_options_btn, this));
-
-	window_readme_.open_window = [this] {
-		fileview_window(eia(), window_readme_, "txts/editor_readme.lua");
-	};
-	button_view_readme_.sigclicked.connect(
-		boost::bind(&UI::UniqueWindow::Registry::toggle, window_readme_));
-
 	button_exit_editor_.sigclicked.connect(boost::bind(&EditorMainMenu::exit_btn, this));
 
 	// Put in the default position, if necessary
@@ -114,6 +108,17 @@ EditorMainMenu::EditorMainMenu
 /**
  * Called, when buttons get clicked
 */
+void EditorMainMenu::help_btn() {
+	EditorInteractive& editor_interactive = eia();
+	if (editor_interactive.window_help.window) {
+		delete editor_interactive.window_help.window;
+	} else {
+		FileViewWindow* fileview = new FileViewWindow(editor_interactive, editor_interactive.window_help,
+																	 _("The Widelands Editor"));
+		fileview->add_tab("scripting/editor/editor_help.lua");
+	}
+}
+
 void EditorMainMenu::new_map_btn() {
 	new MainMenuNewMap(eia());
 	die();

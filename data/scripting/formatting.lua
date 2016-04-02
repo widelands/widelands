@@ -67,6 +67,17 @@ function rt(text_or_opts, text)
    return k .. text .. "</rt>"
 end
 
+
+-- RST
+-- .. function:: title(s)
+--
+--    Returns a paragraph formatted as a center-aligned green title heading with a small gap after it.
+--
+--    :returns: An rt section with s formatted as a title.
+function title(s)
+   return "<rt text-align=center><p font-size=28 font-decoration=bold font-face=serif font-color=2F9131>" .. s .. "</p></rt>"
+end
+
 -- RST
 -- .. function:: h1(s)
 --
@@ -145,6 +156,39 @@ function a(text)
 end
 
 -- RST
+-- .. function:: b(text)
+--
+--    Makes the text bold. Only words with default paragraph text style.
+--
+--    :returns: Bold text within a default paragraph
+function b(text)
+   return "</p><p font-size=12 font-weight=bold>" .. text .. "</p><p font-size=12>"
+end
+
+-- RST
+-- .. function:: i(text)
+--
+--    Makes the text italic. Only words with default paragraph text style.
+--
+--    :returns: Italic text within a default paragraph
+function i(text)
+   return "</p><p font-size=12 font-style=italic>" .. text .. "</p><p font-size=12>"
+end
+
+-- RST
+-- .. function:: listdivider()
+--
+--    Closes a paragraph and opens a new paragraph.
+--    Use this before starting a list when it doesn't create a paragraph.
+--    If you want more space, before the list, use paragraphdivider().
+--
+--    :returns: <br></p><p font-size=4><br></p><p line-spacing=3 font-size=12>
+function listdivider()
+   return ("<br></p><p font-size=4><br></p><p line-spacing=3 font-size=12>")
+end
+
+
+-- RST
 -- .. function:: listitem(symbol, text)
 --
 --    Adds the symbol in front of the text to create a list item and adds a paragraphdivider
@@ -179,4 +223,17 @@ end
 --    :returns: listitem("•", text)
 function listitem_bullet(text)
    return listitem("•", text)
+end
+
+-- RST
+-- .. function:: dl(dt, dd)
+--
+--    Creates a description list item
+--
+--    :arg dt: description term, will be shown in bold
+--    :arg dd: description data - the text of the list item
+--
+--    :returns: b(dt) .. " " .. dd .. "<br>"
+function dl(dt, dd)
+   return b(dt) .. " " .. dd .. "<br>"
 end

@@ -512,7 +512,7 @@ conclude_tutorial = {
       p(_[[However, since you now know how to control Widelands, you can also start a game (or continue this one) and discover more by yourself.]]) ..
       p(_[[To leave this game and return to the main menu, click on the]])
    ) ..
-   rt("image=images/wui/menus/menu_options_menu.png", p(_[[‘Options’ menu button on the very left at the bottom of the screen. Then click the]])) ..
+   rt("image=images/wui/menus/menu_options_menu.png", p(_[[‘Main Menu’ button on the very left at the bottom of the screen. Then click the]])) ..
    rt("image=images/wui/menus/menu_exit_game.png", p(_[[‘Exit Game’ button.]])) ..
    rt(p(_[[Thanks for playing this tutorial. Enjoy Widelands and remember to visit us at]])) ..
    rt("text-align=center", "<p font-size=24 font-decoration=underline>http://www.widelands.org</p>"),
