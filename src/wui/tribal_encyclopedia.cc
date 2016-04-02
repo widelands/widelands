@@ -32,7 +32,9 @@
 #include "ui_basic/messagebox.h"
 #include "wui/interactive_player.h"
 
-TribalEncyclopedia::TribalEncyclopedia(InteractivePlayer& parent, UI::UniqueWindow::Registry& registry, LuaInterface* const lua)
+TribalEncyclopedia::TribalEncyclopedia(InteractivePlayer& parent,
+													UI::UniqueWindow::Registry& registry,
+													LuaInterface* const lua)
 	: EncyclopediaWindow(parent, registry, lua)
 {
 	const Widelands::TribeDescr& tribe = parent.player().tribe();

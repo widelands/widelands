@@ -31,7 +31,9 @@
 #include "scripting/lua_table.h"
 #include "ui_basic/messagebox.h"
 
-EditorHelp::EditorHelp(EditorInteractive& parent, UI::UniqueWindow::Registry& registry, LuaInterface* const lua)
+EditorHelp::EditorHelp(EditorInteractive& parent,
+							  UI::UniqueWindow::Registry& registry,
+							  LuaInterface* const lua)
 	: EncyclopediaWindow(parent, registry, lua)
 {
 	try {

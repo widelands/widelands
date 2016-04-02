@@ -44,7 +44,6 @@
 #include "ui_basic/unique_window.h"
 #include "wui/building_statistics_menu.h"
 #include "wui/debugconsole.h"
-#include "wui/tribal_encyclopedia.h"
 #include "wui/fieldaction.h"
 #include "wui/game_chat_menu.h"
 #include "wui/game_main_menu.h"
@@ -54,6 +53,7 @@
 #include "wui/game_options_menu.h"
 #include "wui/general_statistics_menu.h"
 #include "wui/stock_menu.h"
+#include "wui/tribal_encyclopedia.h"
 #include "wui/ware_statistics_menu.h"
 
 using Widelands::Building;
