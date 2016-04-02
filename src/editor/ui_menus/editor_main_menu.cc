@@ -97,9 +97,6 @@ EditorMainMenu::EditorMainMenu
 		center_to_parent();
 }
 
-/**
- * Called, when buttons get clicked
-*/
 void EditorMainMenu::new_map_btn() {
 	new MainMenuNewMap(eia());
 	die();

@@ -65,7 +65,7 @@ GameOptionsMenu::GameOptionsMenu
 	 UI::UniqueWindow::Registry               & registry,
 	 InteractiveGameBase::GameMainMenuWindows & windows)
 :
-	UI::UniqueWindow(&gb, "options", &registry, 2 * margin + width, 0, _("Options")),
+	UI::UniqueWindow(&gb, "options", &registry, 2 * margin + width, 0, _("Main Menu")),
 	igb_(gb),
 	windows_(windows),
 	box_(this, margin, margin, UI::Box::Vertical,
@@ -103,6 +103,7 @@ GameOptionsMenu::GameOptionsMenu
 	save_game_.sigclicked.connect(boost::bind(&GameOptionsMenu::clicked_save_game, boost::ref(*this)));
 	exit_game_.sigclicked.connect(boost::bind(&GameOptionsMenu::clicked_exit_game, boost::ref(*this)));
 
+
 #define INIT_BTN_HOOKS(registry, btn)                                        \
  registry.on_create = std::bind(&UI::Button::set_perm_pressed, &btn, true);  \
  registry.on_delete = std::bind(&UI::Button::set_perm_pressed, &btn, false); \
@@ -113,7 +114,6 @@ GameOptionsMenu::GameOptionsMenu
 	if (get_usedefaultpos())
 		center_to_parent();
 }
-
 
 void GameOptionsMenu::clicked_sound() {
 	if (windows_.sound_options.window)

@@ -46,7 +46,7 @@ private:
 	void load_btn       ();
 	void save_btn       ();
 	void new_map_btn    ();
-	void new_random_map_btn    ();
+	void new_random_map_btn();
 	void map_options_btn();
 };
 

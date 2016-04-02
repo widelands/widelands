@@ -96,6 +96,8 @@ wl_library(wui
     dismantlesitewindow.cc
     fieldaction.cc
     fieldaction.h
+    fileview.cc
+    fileview.h
     game_debug_ui.cc
     game_debug_ui.h
     game_main_menu.cc

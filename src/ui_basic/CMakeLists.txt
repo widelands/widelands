@@ -10,6 +10,8 @@ wl_library(ui_basic
     editbox.h
     encyclopedia_window.cc
     encyclopedia_window.h
+    fileview_panel.cc
+    fileview_panel.h
     icon.cc
     icon.h
     icongrid.cc

@@ -57,7 +57,7 @@ return {
             {
                name = "intro",
                title = _"Introduction",
-               script = "txts/editor_readme.lua",
+               script = "scripting/editor/editor_introduction.lua",
                script_parameters = {}
             }
          }

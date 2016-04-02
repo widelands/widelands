@@ -56,7 +56,7 @@ return {
                   {
                      name = "intro",
                      title = _"Introduction",
-                     script = "txts/README.lua",
+                     script = "txts/help/general_in_game_help.lua",
                      script_parameters = {}
                   }
                }
