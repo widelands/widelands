@@ -203,6 +203,7 @@ wl_library(wui
     network
     notifications
     profile
+    scripting_coroutine
     scripting_lua_interface
     scripting_lua_table
     sound

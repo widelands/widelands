@@ -62,7 +62,6 @@ wl_library(ui_basic
     graphic_text_layout
     io_filesystem
     profile
-    scripting_coroutine
     scripting_lua_interface
     scripting_lua_table
     sound
