@@ -71,6 +71,9 @@ return {
       else
          result = result .. rt(p(_"No trees will grow here."))
       end
-      return result
+      return {
+         title = terrain.descname,
+         text = result
+      }
    end
 }

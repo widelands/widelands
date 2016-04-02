@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2016 by the Widelands Development Team
+ * Copyright (C) 2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,21 +17,17 @@
  *
  */
 
-#ifndef WL_WUI_FILEVIEW_H
-#define WL_WUI_FILEVIEW_H
+#ifndef WL_WUI_TRIBAL_ENCYCLOPEDIA_H
+#define WL_WUI_TRIBAL_ENCYCLOPEDIA_H
 
-#include <cstring>
-#include <string>
-
-#include "ui_basic/fileview_panel.h"
+#include "scripting/lua_interface.h"
 #include "ui_basic/unique_window.h"
+#include "wui/encyclopedia_window.h"
 
-struct FileViewWindow : public UI::UniqueWindow {
-	FileViewWindow(UI::Panel& parent, UI::UniqueWindow::Registry& reg, const std::string& title);
-	void add_tab(const std::string& lua_script);
+class InteractivePlayer;
 
-private:
-	UI::FileViewPanel tabs_;
+struct TribalEncyclopedia : public UI::EncyclopediaWindow {
+	TribalEncyclopedia(InteractivePlayer&, UI::UniqueWindow::Registry&, LuaInterface* const lua);
 };
 
-#endif  // end of include guard: WL_WUI_FILEVIEW_H
+#endif  // end of include guard: WL_WUI_TRIBAL_ENCYCLOPEDIA_H

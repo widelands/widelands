@@ -1,15 +1,12 @@
-set_textdomain("texts")
+set_textdomain("tribes_encyclopedia")
 
 include "scripting/formatting.lua"
 include "txts/help/common_helptexts.lua"
 
 return {
-   title = _"General Help",
+   title = _"Controls",
    text =
-      title(_"General Help") ..
       rt(
-         help_introduction() ..
-
          h2(_"Window Control") ..
          p(
                -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
@@ -24,7 +21,7 @@ return {
                -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
                dl(help_format_hotkey(pgettext("hotkey", "Ctrl + Left-click")), _"While connecting two flags: Place flags automatically") ..
                -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
-               dl(help_format_hotkey(pgettext("hotkey", "Ctrl + Left-click")), _"While removing a flag: Remove all flags up the the first junction")) ..
+               dl(help_format_hotkey(pgettext("hotkey", "Ctrl + Left-click")), _"While removing a flag: Remove all flags up to the first junction")) ..
 
          h2(_"Keyboard Shortcuts") ..
             p(
@@ -84,11 +81,7 @@ return {
                -- TRANSLATORS: This is an access key combination.
                dl(help_format_hotkey("G"), _"Jump to the location corresponding to the current message") ..
                -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
-               dl(help_format_hotkey(pgettext("hotkey", "Delete")), _"Archive/Restore the current message")) ..
-
-         h2(_"Tribal Encyclopedia") ..
-         -- TRANSLATORS: %s is a representation of the ? button.
-         p(_"For a detailed description of the tribes’ economies, use the %s button on the bottom right."):bformat(b("?")) ..
-         help_online_help()
+               dl(help_format_hotkey(pgettext("hotkey", "Delete")), _"Archive/Restore the current message")
+          )
       )
 }

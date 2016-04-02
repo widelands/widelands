@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-03-11 07:02+0000\n"
-"PO-Revision-Date: 2016-03-12 17:08+0000\n"
+"POT-Creation-Date: 2016-04-01 20:06+0000\n"
+"PO-Revision-Date: 2016-04-01 21:59+0000\n"
 "Last-Translator: MiroslavR <miroslavr256@gmail.com>\n"
 "Language-Team: Slovak (http://www.transifex.com/widelands/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
@@ -1000,9 +1000,9 @@ msgstr "Ak chcete opustiť hru a vrátiť sa do hlavého menu, kliknite na"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:515
 msgid ""
-"‘Options’ menu button on the very left at the bottom of the screen. Then "
-"click the"
-msgstr "tlačidlo „Nastavenia“ na ľavom kraji naspodku obrazovky. Potom kliknite na"
+"‘Main Menu’ button on the very left at the bottom of the screen. Then click "
+"the"
+msgstr "tlačidlo „Hlavná ponuka“ na ľavom kraji naspodku obrazovky. Potom kliknite na"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:516
 msgid "‘Exit Game’ button."
@@ -1019,7 +1019,7 @@ msgstr "Ďakujeme, že ste si zahrali tento tutoriál. Užite si Widelands a nez
 msgid "“%s”"
 msgstr "„%s“"
 
-#: ../../data/scripting/format_scenario.lua:146
+#: ../../data/scripting/format_scenario.lua:96
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] "Nová úloha"
