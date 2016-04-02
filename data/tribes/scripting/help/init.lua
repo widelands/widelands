@@ -56,7 +56,13 @@ return {
                   {
                      name = "intro",
                      title = _"Introduction",
-                     script = "txts/help/general_in_game_help.lua",
+                     script = "tribes/scripting/help/introduction.lua",
+                     script_parameters = {}
+                  },
+                  {
+                     name = "controls",
+                     title = _"Controls",
+                     script = "tribes/scripting/help/controls.lua",
                      script_parameters = {}
                   }
                }
