@@ -472,7 +472,7 @@ void MainMenuNewRandomMap::clicked_create_map() {
 			 _("Random Map"),
 			 /** TRANSLATORS: This is shown after a random map has been created in the editor. */
 			 /** TRANSLATORS: You don't need to be literal with your translation, */
-			 /** TRANSLATORS: as long as the user understands that he needs to check the player position.*/
+			 /** TRANSLATORS: as long as the user understands that he needs to check the player positions.*/
 			 _("The map has been generated. "
 				"Please double-check the player starting positions to make sure that your carriers won’t drown, "
 				"or be stuck on an island or on top of a mountain."),
