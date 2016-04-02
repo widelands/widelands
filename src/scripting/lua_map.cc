@@ -2810,7 +2810,7 @@ int LuaSoldierDescription::get_base_health(lua_State * L) {
 /* RST
 	.. attribute:: base_min_attack
 
-		(RO) The attack points that the soldier starts with
+		(RO) The minimum random attack points that get added to a soldier' attack
 */
 int LuaSoldierDescription::get_base_min_attack(lua_State * L) {
 	lua_pushinteger(L, get()->get_base_min_attack());
@@ -2820,7 +2820,7 @@ int LuaSoldierDescription::get_base_min_attack(lua_State * L) {
 /* RST
 	.. attribute:: base_max_attack
 
-		(RO) The maximum attack points that the soldier can get
+		((RO) The maximum random attack points that get added to a soldier' attack
 */
 int LuaSoldierDescription::get_base_max_attack(lua_State * L) {
 	lua_pushinteger(L, get()->get_base_max_attack());
@@ -2830,7 +2830,7 @@ int LuaSoldierDescription::get_base_max_attack(lua_State * L) {
 /* RST
 	.. attribute:: base_defense
 
-		(RO) The defense points that the soldier starts with
+		(RO) The defense % that the soldier starts with
 */
 int LuaSoldierDescription::get_base_defense(lua_State * L) {
 	lua_pushinteger(L, get()->get_base_defense());
@@ -2840,7 +2840,7 @@ int LuaSoldierDescription::get_base_defense(lua_State * L) {
 /* RST
 	.. attribute:: base_evade
 
-		(RO) The evade points that the soldier starts with
+		(RO) The evade % that the soldier starts with
 */
 int LuaSoldierDescription::get_base_evade(lua_State * L) {
 	lua_pushinteger(L, get()->get_base_evade());
@@ -2870,7 +2870,7 @@ int LuaSoldierDescription::get_attack_incr_per_level(lua_State * L) {
 /* RST
 	.. attribute:: defense_incr_per_level
 
-		(RO) The defense points that the soldier will gain with each level.
+		(RO) The defense % that the soldier will gain with each level.
 */
 int LuaSoldierDescription::get_defense_incr_per_level(lua_State * L) {
 	lua_pushinteger(L, get()->get_defense_incr_per_level());
@@ -2880,7 +2880,7 @@ int LuaSoldierDescription::get_defense_incr_per_level(lua_State * L) {
 /* RST
 	.. attribute:: evade_incr_per_level
 
-		(RO) The evade points that the soldier will gain with each level.
+		(RO) The evade % that the soldier will gain with each level.
 */
 int LuaSoldierDescription::get_evade_incr_per_level(lua_State * L) {
 	lua_pushinteger(L, get()->get_evade_incr_per_level());
