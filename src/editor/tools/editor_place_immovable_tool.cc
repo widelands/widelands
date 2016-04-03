@@ -60,7 +60,7 @@ int32_t EditorPlaceImmovableTool::handle_click_impl(const Widelands::World&,
 		(*map,
 		 Widelands::Area<Widelands::FCoords>
 		 (map->get_fcoords(center.node), radius));
-		std::list<int32_t>::iterator i = args->new_immovable_types.begin();
+		std::list<Widelands::DescriptionIndex>::iterator i = args->new_immovable_types.begin();
 		do {
 			if
 			(!mr.location().field->get_immovable()

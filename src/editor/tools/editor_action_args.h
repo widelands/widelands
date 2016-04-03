@@ -62,7 +62,7 @@ struct EditorActionArgs {
 	std::list<ResourceState> original_resource;                         // resources set tool
 	std::list<const Widelands::BobDescr *> old_bob_type, new_bob_type;  // bob change tools
 	std::list<std::string> old_immovable_types;                         // immovable change tools
-	std::list<int32_t> new_immovable_types;                             // immovable change tools
+	std::list<Widelands::DescriptionIndex> new_immovable_types;         // immovable change tools
 	Widelands::HeightInterval interval;                                 // noise height tool
 	std::list<Widelands::DescriptionIndex> terrain_type, original_terrain_type; // set terrain tool
 
