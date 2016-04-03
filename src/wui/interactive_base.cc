@@ -83,7 +83,8 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
    : MapView(nullptr, 0, 0, g_gr->get_xres(), g_gr->get_yres(), *this),
      // Initialize chatoveraly before the toolbar so it is below
      show_workarea_preview_(global_s.get_bool("workareapreview", true)),
-     chat_overlay_(new ChatOverlay(this, 10, 25, get_w() / 2, get_h() - 25)),
+	  // 34 is the button height of the bottom menu
+	  chat_overlay_(new ChatOverlay(this, 10, 25, get_w() / 2, get_h() - 25 - 34)),
      toolbar_(this, 0, 0, UI::Box::Horizontal),
      m(new InteractiveBaseInternals(new QuickNavigation(the_egbase, get_w(), get_h()))),
 	  field_overlay_manager_(new FieldOverlayManager()),
