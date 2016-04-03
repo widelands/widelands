@@ -425,9 +425,9 @@ void InteractiveBase::minimap_warp(int32_t x, int32_t y)
 	y -= get_h() >> 1;
 	const Map & map = egbase().map();
 	if (x < 0)
-		x += map.get_width () * TRIANGLE_WIDTH;
+		x += map.get_width () * kTriangleWidth;
 	if (y < 0)
-		y += map.get_height() * TRIANGLE_HEIGHT;
+		y += map.get_height() * kTriangleHeight;
 	set_viewpoint(Point(x, y), true);
 }
 
@@ -445,8 +445,8 @@ void InteractiveBase::move_view_to(const Coords c)
 	assert     (c.y < egbase().map().get_height());
 
 	const Map & map = egbase().map();
-	uint32_t const x = (c.x + (c.y & 1) * 0.5) * TRIANGLE_WIDTH;
-	uint32_t const y = c.y * TRIANGLE_HEIGHT - map[c].get_height() * HEIGHT_FACTOR;
+	uint32_t const x = (c.x + (c.y & 1) * 0.5) * kTriangleWidth;
+	uint32_t const y = c.y * kTriangleHeight - map[c].get_height() * kHeightFactor;
 	if (m->minimap.window)
 		m->mm->set_view_pos(x, y);
 	minimap_warp(x, y);

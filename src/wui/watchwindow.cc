@@ -173,10 +173,10 @@ void WatchWindow::add_view(Widelands::Coords const coords) {
 // Calc point on map from coords
 Point WatchWindow::calc_coords(Widelands::Coords const coords) {
 	// Initial positioning
-	int32_t vx = (coords.x + (coords.y & 1) * 0.5) * TRIANGLE_WIDTH;
-	int32_t vy = (coords.y) * TRIANGLE_HEIGHT;
+	int32_t vx = (coords.x + (coords.y & 1) * 0.5) * kTriangleWidth;
+	int32_t vy = (coords.y) * kTriangleHeight;
 	Widelands::Map & map = game().map();
-	uint8_t height = map[coords].get_height() * HEIGHT_FACTOR;
+	uint8_t height = map[coords].get_height() * kHeightFactor;
 
 	return Point(vx - mapview.get_w() / 2, vy - height - mapview.get_h() / 2);
 }

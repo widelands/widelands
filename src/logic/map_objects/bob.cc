@@ -796,31 +796,31 @@ Point Bob::calc_drawpos(const EditorGameBase & game, const Point pos) const
 	switch (walking_) {
 	case WALK_NW:
 		map.get_brn(end, &start);
-		spos.x += TRIANGLE_WIDTH / 2;
-		spos.y += TRIANGLE_HEIGHT;
+		spos.x += kTriangleWidth / 2;
+		spos.y += kTriangleHeight;
 		break;
 	case WALK_NE:
 		map.get_bln(end, &start);
-		spos.x -= TRIANGLE_WIDTH / 2;
-		spos.y += TRIANGLE_HEIGHT;
+		spos.x -= kTriangleWidth / 2;
+		spos.y += kTriangleHeight;
 		break;
 	case WALK_W:
 		map.get_rn(end, &start);
-		spos.x += TRIANGLE_WIDTH;
+		spos.x += kTriangleWidth;
 		break;
 	case WALK_E:
 		map.get_ln(end, &start);
-		spos.x -= TRIANGLE_WIDTH;
+		spos.x -= kTriangleWidth;
 		break;
 	case WALK_SW:
 		map.get_trn(end, &start);
-		spos.x += TRIANGLE_WIDTH / 2;
-		spos.y -= TRIANGLE_HEIGHT;
+		spos.x += kTriangleWidth / 2;
+		spos.y -= kTriangleHeight;
 		break;
 	case WALK_SE:
 		map.get_tln(end, &start);
-		spos.x -= TRIANGLE_WIDTH / 2;
-		spos.y -= TRIANGLE_HEIGHT;
+		spos.x -= kTriangleWidth / 2;
+		spos.y -= kTriangleHeight;
 		break;
 
 	case IDLE:
@@ -829,8 +829,8 @@ Point Bob::calc_drawpos(const EditorGameBase & game, const Point pos) const
 	}
 
 	if (start.field) {
-		spos.y += end.field->get_height() * HEIGHT_FACTOR;
-		spos.y -= start.field->get_height() * HEIGHT_FACTOR;
+		spos.y += end.field->get_height() * kHeightFactor;
+		spos.y -= start.field->get_height() * kHeightFactor;
 
 		assert(static_cast<uint32_t>(walkstart_) <= game.get_gametime());
 		assert(walkstart_ < walkend_);
