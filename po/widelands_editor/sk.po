@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-04-02 11:15+0000\n"
-"PO-Revision-Date: 2016-04-02 11:17+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2016-04-02 18:37+0000\n"
+"PO-Revision-Date: 2016-04-03 03:37+0000\n"
+"Last-Translator: MiroslavR <miroslavr256@gmail.com>\n"
 "Language-Team: Slovak (http://www.transifex.com/widelands/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -120,7 +120,7 @@ msgstr "Pomoc pre editor"
 
 #: ../../data/scripting/editor/editor_help.lua:54
 msgid "General"
-msgstr ""
+msgstr "Všeobecné"
 
 #: ../../data/scripting/editor/editor_help.lua:59
 #: ../../data/scripting/editor/editor_introduction.lua:10
@@ -129,15 +129,15 @@ msgstr "Úvod"
 
 #: ../../data/scripting/editor/editor_help.lua:65
 msgid "Controls"
-msgstr ""
+msgstr "Ovládanie"
 
 #: ../../data/scripting/editor/editor_help.lua:74
 msgid "Terrains"
-msgstr ""
+msgstr "Terény"
 
 #: ../../data/scripting/editor/editor_help.lua:81
 msgid "Trees"
-msgstr ""
+msgstr "Stromy"
 
 #: ../../data/scripting/editor/editor_introduction.lua:7
 msgid "The Widelands Editor"
