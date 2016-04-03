@@ -4,9 +4,20 @@ include "scripting/formatting.lua"
 include "txts/help/common_helptexts.lua"
 
 return {
-   title = _"Keyboard Shortcuts",
+   title = _"Controls",
    text =
       rt(
+         h2(_"Tools") ..
+         p(
+            -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
+            dl(help_format_hotkey(pgettext("hotkey", "Click")), _"Places new elements on the map, or increases map elements by the selected value") ..
+            -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
+            dl(help_format_hotkey(pgettext("hotkey", "Shift + Click")), _"Decreases map elements by the selected value") ..
+            -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
+            dl(help_format_hotkey(pgettext("hotkey", "Ctrl + Click")), _"Sets map elements to the selected value")
+         ) ..
+
+         h2(_"Keyboard Shortcuts") ..
          p(
             -- TRANSLATORS: This is an access key combination.
             dl(help_format_hotkey("H"), _"Toggle main menu") ..
@@ -24,10 +35,6 @@ return {
             dl(help_format_hotkey("Ctrl + Y"), _"Redo") ..
             -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
             dl(help_format_hotkey("F1"), _"Help") ..
-            -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
-            dl(help_format_hotkey(pgettext("hotkey", "Shift (Hold)")), _"First alternative tool while pressed") ..
-            -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
-            dl(help_format_hotkey(pgettext("hotkey", "Alt (Hold)")), _"Second alternative tool while pressed") ..
             -- TRANSLATORS: This is an access key combination. The hotkey is 'i'
             dl(help_format_hotkey("I"), _"Activate information tool") ..
             -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
