@@ -24,5 +24,6 @@
 constexpr int TRIANGLE_WIDTH = 64;
 constexpr int TRIANGLE_HEIGHT = 32;
 constexpr int HEIGHT_FACTOR = 5;
+constexpr float HEIGHT_FACTOR_F = 5.0f; // Same a HEIGHT_FACTOR to avoid implict upcasts to double
 
 #endif  // end of include guard: WL_WUI_MAPVIEWPIXELCONSTANTS_H

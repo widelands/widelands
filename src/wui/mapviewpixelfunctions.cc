@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -50,25 +50,27 @@ float MapviewPixelFunctions::calc_brightness
 // but hey, results say I am good at guessing :)
 // perhaps I will paint an explanation for this someday
 // florian
-#define COS60 0.5
-#define SIN60 0.86603
+#define COS60 0.5f
+#define SIN60 0.86603f
 #ifdef _MSC_VER
 //  Do not warn me about fuckin float conversion. I know what I am doing.
+// TODO(Hasi50): this could be removed now?
 #pragma warning(disable:4244)
 #endif
 	normal = Vector(0, 0, TRIANGLE_WIDTH);
 	normal.x -= l * HEIGHT_FACTOR;
 	normal.x += r * HEIGHT_FACTOR;
-	normal.x -= static_cast<float>(tl * HEIGHT_FACTOR) * COS60;
-	normal.y -= static_cast<float>(tl * HEIGHT_FACTOR) * SIN60;
-	normal.x += static_cast<float>(tr * HEIGHT_FACTOR) * COS60;
-	normal.y -= static_cast<float>(tr * HEIGHT_FACTOR) * SIN60;
-	normal.x -= static_cast<float>(bl * HEIGHT_FACTOR) * COS60;
-	normal.y += static_cast<float>(bl * HEIGHT_FACTOR) * SIN60;
-	normal.x += static_cast<float>(br * HEIGHT_FACTOR) * COS60;
-	normal.y += static_cast<float>(br * HEIGHT_FACTOR) * SIN60;
+	normal.x -= static_cast<float>(tl * HEIGHT_FACTOR_F) * COS60;
+	normal.y -= static_cast<float>(tl * HEIGHT_FACTOR_F) * SIN60;
+	normal.x += static_cast<float>(tr * HEIGHT_FACTOR_F) * COS60;
+	normal.y -= static_cast<float>(tr * HEIGHT_FACTOR_F) * SIN60;
+	normal.x -= static_cast<float>(bl * HEIGHT_FACTOR_F) * COS60;
+	normal.y += static_cast<float>(bl * HEIGHT_FACTOR_F) * SIN60;
+	normal.x += static_cast<float>(br * HEIGHT_FACTOR_F) * COS60;
+	normal.y += static_cast<float>(br * HEIGHT_FACTOR_F) * SIN60;
 	normal.normalize();
 #ifdef _MSC_VER
+// TODO(Hasi50): this could be removed now?
 #pragma warning(default:4244)
 #endif
 

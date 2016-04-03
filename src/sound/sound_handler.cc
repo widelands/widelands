@@ -362,7 +362,7 @@ bool SoundHandler::play_or_not
 	// Probability that this fx gets played; initially set according to priority
 
 	//  float division! not integer
-	probability = (priority % PRIO_ALLOW_MULTIPLE) / 128.0;
+	probability = (priority % PRIO_ALLOW_MULTIPLE) / 128.0f;
 
 	// TODO(unknown): what to do with fx that happen offscreen?
 	// TODO(unknown): reduce volume? reduce priority? other?
@@ -423,7 +423,7 @@ bool SoundHandler::play_or_not
 
 	// finally: the decision
 	// float division! not integer
-	return (rng_.rand() % 255) / 255.0 <= probability;
+	return (rng_.rand() % 255) / 255.0f <= probability;
 }
 
 /** Play (one of multiple) sound effect(s) with the given name. The effect(s)
