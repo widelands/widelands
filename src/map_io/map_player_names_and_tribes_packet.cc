@@ -20,6 +20,7 @@
 #include "map_io/map_player_names_and_tribes_packet.h"
 
 #include <boost/format.hpp>
+#include <boost/algorithm/string/trim.hpp>
 
 #include "logic/editor_game_base.h"
 #include "logic/game_data_error.h"
@@ -96,8 +97,16 @@ void MapPlayerNamesAndTribesPacket::write
 	iterate_player_numbers(p, nr_players) {
 		const std::string section_key = (boost::format("player_%u")
 													% static_cast<unsigned int>(p)).str();
+
+		// Make sure that no player name is empty, and trim leading/trailing whitespaces.
+		std::string player_name = map.get_scenario_player_name(p);
+		boost::trim(player_name);
+		if (player_name.empty()) {
+			player_name =  (boost::format(_("Player %u")) % static_cast<unsigned int>(p)).str();
+		}
+
 		Section & s = prof.create_section(section_key.c_str());
-		s.set_string("name",      map.get_scenario_player_name     (p));
+		s.set_string("name",      player_name);
 		s.set_string("tribe",     map.get_scenario_player_tribe    (p));
 		s.set_string("ai",        map.get_scenario_player_ai       (p));
 		s.set_bool  ("closeable", map.get_scenario_player_closeable(p));
