@@ -52,11 +52,6 @@ float MapviewPixelFunctions::calc_brightness
 // florian
 #define COS60 0.5f
 #define SIN60 0.86603f
-#ifdef _MSC_VER
-//  Do not warn me about fuckin float conversion. I know what I am doing.
-// TODO(Hasi50): this could be removed now?
-#pragma warning(disable:4244)
-#endif
 	normal = Vector(0, 0, TRIANGLE_WIDTH);
 	normal.x -= l * HEIGHT_FACTOR;
 	normal.x += r * HEIGHT_FACTOR;
@@ -69,10 +64,6 @@ float MapviewPixelFunctions::calc_brightness
 	normal.x += static_cast<float>(br * HEIGHT_FACTOR_F) * COS60;
 	normal.y += static_cast<float>(br * HEIGHT_FACTOR_F) * SIN60;
 	normal.normalize();
-#ifdef _MSC_VER
-// TODO(Hasi50): this could be removed now?
-#pragma warning(default:4244)
-#endif
 
 	float b = normal * sun_vect;
 	b *= -LIGHT_FACTOR;
