@@ -694,7 +694,7 @@ void EditorInteractive::map_changed(const MapWas& action) {
 			}
 
 			// Make sure that we will start at coordinates (0,0).
-			mainview_move(0, 0);
+			set_viewpoint(Point(0, 0), true);
 			set_sel_pos
 				(Widelands::NodeAndTriangle<>
 					(Widelands::Coords(0, 0),
