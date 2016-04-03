@@ -50,15 +50,9 @@ FullscreenMenuMain::FullscreenMenuMain() :
 	options
 		(&vbox, "options", 0, 0, butw_, buth_, g_gr->images().get(button_background_),
 		 _("Options"), "", true, false),
-	readme
-		(&vbox, "readme", 0, 0, butw_, buth_, g_gr->images().get(button_background_),
-		 _("View Readme"), "", true, false),
-	license
-		(&vbox, "license", 0, 0, butw_, buth_, g_gr->images().get(button_background_),
-		 _("License"), "", true, false),
-	authors
-		(&vbox, "authors", 0, 0, butw_, buth_, g_gr->images().get(button_background_),
-		 _("Authors"), "", true, false),
+	about
+		(&vbox, "about", 0, 0, butw_, buth_, g_gr->images().get(button_background_),
+		 _("About Widelands"), "", true, false),
 	exit
 		(&vbox, "exit", 0, 0, butw_, buth_, g_gr->images().get(button_background_),
 		 _("Exit Widelands"), "", true, false),
@@ -104,46 +98,36 @@ FullscreenMenuMain::FullscreenMenuMain() :
 		(boost::bind
 			 (&FullscreenMenuMain::end_modal<FullscreenMenuBase::MenuTarget>, boost::ref(*this),
 			  FullscreenMenuBase::MenuTarget::kOptions));
-	readme.sigclicked.connect
+	about.sigclicked.connect
 		(boost::bind
 			 (&FullscreenMenuMain::end_modal<FullscreenMenuBase::MenuTarget>, boost::ref(*this),
-			  FullscreenMenuBase::MenuTarget::kReadme));
-	license.sigclicked.connect
-		(boost::bind
-			 (&FullscreenMenuMain::end_modal<FullscreenMenuBase::MenuTarget>, boost::ref(*this),
-			  FullscreenMenuBase::MenuTarget::kLicense));
-	authors.sigclicked.connect
-		(boost::bind
-			 (&FullscreenMenuMain::end_modal<FullscreenMenuBase::MenuTarget>, boost::ref(*this),
-			  FullscreenMenuBase::MenuTarget::kAuthors));
+			  FullscreenMenuBase::MenuTarget::kAbout));
 	exit.sigclicked.connect
 		(boost::bind
 			 (&FullscreenMenuMain::end_modal<FullscreenMenuBase::MenuTarget>, boost::ref(*this),
 			  FullscreenMenuBase::MenuTarget::kExit));
 
 	vbox.add(&playtutorial, UI::Align::kHCenter);
-
-	vbox.add_space(padding_);
-
 	vbox.add(&singleplayer, UI::Align::kHCenter);
 	vbox.add(&multiplayer, UI::Align::kHCenter);
+
+	vbox.add_space(2 * padding_);
+
 	vbox.add(&replay, UI::Align::kHCenter);
 
-	vbox.add_space(padding_);
+	vbox.add_space(2 * padding_);
 
 	vbox.add(&editor, UI::Align::kHCenter);
 
-	vbox.add_space(padding_);
+	vbox.add_space(2 * padding_);
 
 	vbox.add(&options, UI::Align::kHCenter);
 
-	vbox.add_space(padding_);
+	vbox.add_space(2 * padding_);
 
-	vbox.add(&readme, UI::Align::kHCenter);
-	vbox.add(&license, UI::Align::kHCenter);
-	vbox.add(&authors, UI::Align::kHCenter);
+	vbox.add(&about, UI::Align::kHCenter);
 
-	vbox.add_space(padding_);
+	vbox.add_space(5 * padding_);
 
 	vbox.add(&exit, UI::Align::kHCenter);
 

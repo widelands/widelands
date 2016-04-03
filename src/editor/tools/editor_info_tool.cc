@@ -39,6 +39,8 @@ int32_t EditorInfoTool::handle_click_impl(const Widelands::World& world,
 										 EditorInteractive& parent,
 										 EditorActionArgs* /* args */,
 										 Widelands::Map* map) {
+	parent.stop_painting();
+
 	UI::Window * const w =
 	    new UI::Window
 	(&parent, "field_information", 30, 30, 400, 200,

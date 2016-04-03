@@ -104,7 +104,7 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase & e) :
 	InteractiveBase(e, g_options.pull_section("global")),
 	need_save_(false),
 	realtime_(SDL_GetTicks()),
-	left_mouse_button_is_down_(false),
+	is_painting_(false),
 	tools_(new Tools()),
 	history_(new EditorHistory(undo_, redo_)),
 
@@ -115,7 +115,7 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase & e) :
 
 	toggle_main_menu_
 	(INIT_BUTTON
-	 ("images/wui/menus/menu_toggle_menu.png", "menu", _("Menu"))),
+	 ("images/wui/menus/menu_toggle_menu.png", "menu", _("Main Menu"))),
 	toggle_tool_menu_
 	(INIT_BUTTON
 	 ("images/wui/editor/editor_menu_toggle_tool_menu.png", "tools", _("Tools"))),
@@ -307,14 +307,14 @@ void EditorInteractive::map_clicked(bool should_draw) {
 
 bool EditorInteractive::handle_mouserelease(uint8_t btn, int32_t x, int32_t y) {
 	if (btn == SDL_BUTTON_LEFT) {
-		left_mouse_button_is_down_ = false;
+		stop_painting();
 	}
 	return InteractiveBase::handle_mouserelease(btn, x, y);
 }
 
 bool EditorInteractive::handle_mousepress(uint8_t btn, int32_t x, int32_t y) {
 	if (btn == SDL_BUTTON_LEFT) {
-		left_mouse_button_is_down_ = true;
+		start_painting();
 	}
 	return InteractiveBase::handle_mousepress(btn, x, y);
 }
@@ -325,7 +325,7 @@ void EditorInteractive::set_sel_pos(Widelands::NodeAndTriangle<> const sel) {
 	    tools_->current().operates_on_triangles() ?
 	    sel.triangle != get_sel_pos().triangle : sel.node != get_sel_pos().node;
 	InteractiveBase::set_sel_pos(sel);
-	if (target_changed && left_mouse_button_is_down_)
+	if (target_changed && is_painting_)
 		map_clicked(true);
 }
 
@@ -366,11 +366,21 @@ void EditorInteractive::set_sel_radius_and_update_menu(uint32_t const val) {
 	}
 }
 
+void EditorInteractive::start_painting()
+{
+	is_painting_ = true;
+}
+
+void EditorInteractive::stop_painting()
+{
+	is_painting_ = false;
+}
+
 void EditorInteractive::toggle_help() {
 	if (helpmenu_.window)
 		delete helpmenu_.window;
 	else
-		new EditorHelp(*this, helpmenu_);
+		new EditorHelp(*this, helpmenu_, &egbase().lua());
 }
 
 
@@ -617,7 +627,7 @@ bool EditorInteractive::is_player_tribe_referenced
 
 void EditorInteractive::run_editor(const std::string& filename, const std::string& script_to_run) {
 	Widelands::EditorGameBase egbase(nullptr);
-	EditorInteractive eia(egbase);
+	EditorInteractive & eia = *new EditorInteractive(egbase);
 	egbase.set_ibase(&eia); // TODO(unknown): get rid of this
 	{
 		UI::ProgressWindow loader_ui("images/loadscreens/editor.jpg");

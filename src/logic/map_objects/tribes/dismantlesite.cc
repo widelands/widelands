@@ -30,6 +30,7 @@
 #include "graphic/animation.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
+#include "graphic/text_constants.h"
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
@@ -93,7 +94,8 @@ Print completion percentage.
 void DismantleSite::update_statistics_string(std::string* s)
 {
 	unsigned int percent = (get_built_per64k() * 100) >> 16;
-	*s = (boost::format(_("%u%% dismantled")) % percent).str();
+	*s = (boost::format("<font color=%s>%s</font>") % UI_FONT_CLR_DARK.hex_value() %
+			(boost::format(_("%u%% dismantled")) % percent)).str();
 }
 
 /*
@@ -190,7 +192,7 @@ bool DismantleSite::get_building_work(Game & game, Worker & worker, bool) {
 			wq.set_filled(wq.get_filled() - 1);
 			wq.set_max_size(wq.get_max_size() - 1);
 
-			//update statistics
+			// Update statistics
 			owner().ware_produced(wq.get_ware());
 
 			const WareDescr & wd = *owner().tribe().get_ware_descr(wq.get_ware());
@@ -266,7 +268,7 @@ void DismantleSite::draw
 	dst.blit_animation(pos, anim_idx, tanim, player_color, Rect(Point(0, lines), w, h - lines));
 
 	// Draw help strings
-	draw_help(game, dst, coords, pos);
+	draw_info(game, dst, pos);
 }
 
 }

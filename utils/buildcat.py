@@ -36,23 +36,22 @@ MAINPOTS = [
         "../../data/campaigns/*/elemental"
     ] ),
     ( "texts/texts", ["../../data/txts/*.lua",
-                  "../../data/txts/tips/*.tip"] ),
+        "../../data/txts/*/*.lua",
+        "../../data/txts/tips/*.tip"] ),
     ( "widelands/widelands", [
-                    "../../src/wlapplication.cc",
-                    "../../src/*/*.cc",
-                    "../../src/*/*/*.cc",
-                    "../../src/*/*/*/*.cc",
-                    "../../src/*/*/*/*/*.cc",
-                    "../../src/*/*/*/*/*/*.cc",
-                    "../../src/wlapplication.h",
-                    "../../src/*/*.h",
-                    "../../src/*/*/*.h",
-                    "../../src/*/*/*/*.h",
-                    "../../src/*/*/*/*/*.h",
-                    "../../src/*/*/*/*/*/*.h",
-                    "../../data/scripting/*.lua",
-                    "../../data/scripting/editor/*.lua",
-                    "../../data/scripting/widelands/*.lua",
+        "../../src/wlapplication.cc",
+        "../../src/*/*.cc",
+        "../../src/*/*/*.cc",
+        "../../src/*/*/*/*.cc",
+        "../../src/*/*/*/*/*.cc",
+        "../../src/*/*/*/*/*/*.cc",
+        "../../src/wlapplication.h",
+        "../../src/*/*.h",
+        "../../src/*/*/*.h",
+        "../../src/*/*/*/*.h",
+        "../../src/*/*/*/*/*.h",
+        "../../src/*/*/*/*/*/*.h",
+        "../../data/scripting/*.lua",
     ] ),
     ( "widelands_console/widelands_console", [
                     "../../src/wlapplication_messages.cc",
@@ -60,7 +59,6 @@ MAINPOTS = [
     ] ),
     ( "win_conditions/win_conditions", [
         "../../data/scripting/win_conditions/*.lua",
-        "../../data/scripting/win_condition_texts.lua",
     ]),
     ("world/world", [
         "../../data/world/*.lua",
@@ -79,7 +77,6 @@ MAINPOTS = [
         "../../data/tribes/*/*/*/*/init.lua",
         "../../data/tribes/*/*/*/*/*/init.lua",
     ]),
-
     ("tribes_encyclopedia/tribes_encyclopedia", [
         "../../data/tribes/scripting/help/*.lua",
         "../../data/tribes/*/helptexts.lua",
@@ -88,6 +85,9 @@ MAINPOTS = [
         "../../data/tribes/*/*/*/*/helptexts.lua",
         "../../data/tribes/*/*/*/*/*/helptexts.lua",
     ]),
+    ( "widelands_editor/widelands_editor", [
+        "../../data/scripting/editor/*.lua",
+    ] ),
 ]
 
 
@@ -227,7 +227,7 @@ def pot_modify_header(potfile_in, potfile_out, header):
             potout.writelines(potin)
 
         return True
-    
+
 def run_xgettext(infiles, outfile, opts):
     xgettext = subprocess.Popen("xgettext %s --files-from=- --output=\"%s\"" % \
         (opts, outfile), shell=True, stdin=subprocess.PIPE, universal_newlines=True)
@@ -240,7 +240,7 @@ def run_xgettext(infiles, outfile, opts):
 
     xgettext_status = xgettext.wait()
     if (xgettext_status != 0):
-        raise BuildcatError("xgettext exited with errorcode %i" % xgettext_status)    
+        raise BuildcatError("xgettext exited with errorcode %i" % xgettext_status)
 
 def run_msguniq(potfile):
     msguniq_rv = os.system("msguniq \"%s\" -F --output-file=\"%s\"" % (potfile, potfile))

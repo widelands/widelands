@@ -550,7 +550,7 @@ unsigned long long RealFSImpl::disk_space() {
 		GetDiskFreeSpaceEx
 			(canonicalize_name(directory_).c_str(), &freeavailable, 0, 0)
 		?
-		//if more than 2G free space report that much
+		// If more than 2G free space report that much
 		freeavailable.HighPart ? std::numeric_limits<unsigned long>::max() :
 		freeavailable.LowPart : 0;
 #else

@@ -423,20 +423,20 @@ public:
 	int get_food_attack(lua_State *);
 	int get_food_defense(lua_State *);
 	int get_food_evade(lua_State *);
-	int get_food_hp(lua_State *);
+	int get_food_health(lua_State *);
 	int get_max_attack(lua_State *);
 	int get_max_defense(lua_State *);
 	int get_max_evade(lua_State *);
-	int get_max_hp(lua_State *);
+	int get_max_health(lua_State *);
 	int get_max_number_of_soldiers(lua_State *);
 	int get_min_attack(lua_State *);
 	int get_min_defense(lua_State *);
 	int get_min_evade(lua_State *);
-	int get_min_hp(lua_State *);
+	int get_min_health(lua_State *);
 	int get_weapons_attack(lua_State *);
 	int get_weapons_defense(lua_State *);
 	int get_weapons_evade(lua_State *);
-	int get_weapons_hp(lua_State *);
+	int get_weapons_health(lua_State *);
 
 	/*
 	 * Lua methods
@@ -711,7 +711,7 @@ public:
 	 */
 	Widelands::MapObject * get
 		(lua_State *, Widelands::EditorGameBase &, std::string = "MapObject");
-	Widelands::MapObject * m_get_or_zero(Widelands::EditorGameBase &);
+	Widelands::MapObject * get_or_zero(Widelands::EditorGameBase &);
 };
 
 
@@ -1092,7 +1092,7 @@ public:
 	 */
 	int get_attack_level(lua_State *);
 	int get_defense_level(lua_State *);
-	int get_hp_level(lua_State *);
+	int get_health_level(lua_State *);
 	int get_evade_level(lua_State *);
 
 	/*
@@ -1204,8 +1204,8 @@ public:
 	const Widelands::FCoords fcoords(lua_State * L);
 
 private:
-	int m_region(lua_State * L, uint32_t radius);
-	int m_hollow_region(lua_State * L, uint32_t radius, uint32_t inner_radius);
+	int region(lua_State * L, uint32_t radius);
+	int hollow_region(lua_State * L, uint32_t radius, uint32_t inner_radius);
 };
 
 class LuaPlayerSlot : public LuaMapModuleClass {

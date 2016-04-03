@@ -77,37 +77,32 @@ tribes:new_soldier_type {
 
    animations = animations,
 
-   max_hp_level = 1,
-   max_attack_level = 4,
-   max_defense_level = 2,
-   max_evade_level = 2,
-
-   -- Initial values and per level increments.
-   hp = 13500,
-   hp_incr_per_level = 4000,
-   attack = {
-      minimum = 1200,
-      maximum = 1600
+   -- Battle attributes - initial values and per level increase
+   health = {
+      max_level = 1,
+      base = 13500,
+      increase_per_level = 4000,
+      pictures = path.list_files(dirname .. "health_level?.png"),
    },
-   attack_incr_per_level = 800,
-   defense = 6,
-   defense_incr_per_level = 8,
-   evade = 30,
-   evade_incr_per_level = 17,
-
-   hp_level_0_pic = dirname .. "hp_level0.png",
-   hp_level_1_pic = dirname .. "hp_level1.png",
-   evade_level_0_pic = dirname .. "evade_level0.png",
-   evade_level_1_pic = dirname .. "evade_level1.png",
-   evade_level_2_pic = dirname .. "evade_level2.png",
-   attack_level_0_pic = dirname .. "attack_level0.png",
-   attack_level_1_pic = dirname .. "attack_level1.png",
-   attack_level_2_pic = dirname .. "attack_level2.png",
-   attack_level_3_pic = dirname .. "attack_level3.png",
-   attack_level_4_pic = dirname .. "attack_level4.png",
-   defense_level_0_pic = dirname .. "defense_level0.png",
-   defense_level_1_pic = dirname .. "defense_level1.png",
-   defense_level_2_pic = dirname .. "defense_level2.png",
+   attack = {
+      max_level = 4,
+      base = 1200,
+      maximum = 1600,
+      increase_per_level = 800,
+      pictures = path.list_files(dirname .. "attack_level?.png"),
+   },
+   defense = {
+      max_level = 2,
+      base = 6,
+      increase_per_level = 8,
+      pictures = path.list_files(dirname .. "defense_level?.png"),
+   },
+   evade = {
+      max_level = 2,
+      base = 30,
+      increase_per_level = 17,
+      pictures = path.list_files(dirname .. "evade_level?.png"),
+   },
 
    -- Random animations for battle
    -- TODO(GunChleoc): Make more animations to use the random function

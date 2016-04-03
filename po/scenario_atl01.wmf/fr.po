@@ -12,9 +12,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-03-02 08:54+0000\n"
-"PO-Revision-Date: 2016-03-02 14:19+0000\n"
-"Last-Translator: Jaypad <ju-ju@nataju.fr>\n"
+"POT-Creation-Date: 2016-03-11 07:02+0000\n"
+"PO-Revision-Date: 2016-03-11 07:03+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -471,9 +471,9 @@ msgid ""
 "May Satul warm you, Jundlina! I agree with what Loftomor proposes. We need a"
 " good supply of building materials for we have to expand our territory "
 "swiftly. I will not feel safe on this island as long as we have not seen all"
-" its shores it. I brought plenty of good men from Atlantis. The military "
-"might is available. We only need some housing to live in."
-msgstr "Que Satul vous réchauffe, Jundlina ! Je suis d'accord avec ce que Loftomor propose. Nous avons besoin d'un bon approvisionnement en matériaux de construction si nous voulons étendre notre territoire rapidement. Je ne me sentirai pas en sécurité sur cette île tant que nous n'aurons pas fait le tour de son rivage. J'ai emmené de l'Atlantide quelques hommes de bonne volonté. Leur puissance militaire est disponible. Nous avons seulement besoin de maisons pour vivre."
+" its shores. I brought plenty of good men from Atlantis. The military might "
+"is available. We only need some housing to live in."
+msgstr ""
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:207
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:247
@@ -652,9 +652,9 @@ msgstr "Jundlina acquiesce"
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:300
 msgid ""
-"I have considered this, Sidolus. I think  it is about time. We will make "
-"this a priority for now. You shall get your industry soon!"
-msgstr "J'y ai pensé, Sidorus. Je crois qu'il est temps. Nous allons en faire une priorité tout de suite. Vous devriez avoir votre industrie très bientôt !"
+"I have considered this, Sidolus. I think it is about time. We will make this"
+" a priority for now. You shall get your industry soon!"
+msgstr ""
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:307
 msgid "Jundlina Summons Sidolus"

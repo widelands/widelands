@@ -140,12 +140,12 @@ public:
 	struct AiPersistentState {
 		AiPersistentState() : initialized(0) {}
 
-		//was initialized
+		// Was initialized
 		uint8_t initialized;
 		uint32_t colony_scan_area;
 		uint32_t trees_around_cutters;
 		uint32_t expedition_start_time;
-		int16_t ships_utilization; //0-10000 to avoid floats, used for decision for building new ships
+		int16_t ships_utilization; // 0-10000 to avoid floats, used for decision for building new ships
 		uint8_t no_more_expeditions;
 		int16_t last_attacked_player;
 		int32_t least_military_score;
@@ -489,7 +489,7 @@ public:
 
 	// Military stuff
 	void drop_soldier(PlayerImmovable &, Soldier &);
-	void change_training_options(TrainingSite &, int32_t atr, int32_t val);
+	void change_training_options(TrainingSite &, TrainingAttribute attr, int32_t val);
 
 	uint32_t find_attack_soldiers
 		(Flag                   &,

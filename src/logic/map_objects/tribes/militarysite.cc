@@ -124,9 +124,7 @@ void MilitarySite::update_statistics_string(std::string* s)
 		if (capacity_ > stationed) {
 			/** TRANSLATORS: %1% is the number of soldiers the plural refers to */
 			/** TRANSLATORS: %2% is the maximum number of soldier slots in the building */
-			*s = (boost::format(ngettext("%1% soldier (+%2%)",
-																		  "%1% soldiers (+%2%)",
-																		  stationed))
+			*s = (boost::format(ngettext("%1% soldier (+%2%)", "%1% soldiers (+%2%)", stationed))
 											% stationed % (capacity_ - stationed)).str();
 		} else {
 			*s = (boost::format(ngettext("%u soldier", "%u soldiers", stationed))
@@ -137,8 +135,7 @@ void MilitarySite::update_statistics_string(std::string* s)
 			/** TRANSLATORS: %1% is the number of soldiers the plural refers to */
 			/** TRANSLATORS: %2% are currently open soldier slots in the building */
 			/** TRANSLATORS: %3% is the maximum number of soldier slots in the building */
-			*s =
-					(boost::format(ngettext("%1%(+%2%) soldier (+%3%)", "%1%(+%2%) soldiers (+%3%)", stationed))
+			*s = (boost::format(ngettext("%1%(+%2%) soldier (+%3%)", "%1%(+%2%) soldiers (+%3%)", stationed))
 					 % present % (stationed - present) % (capacity_ - stationed)).str();
 		} else {
 			/** TRANSLATORS: %1% is the number of soldiers the plural refers to */
@@ -294,7 +291,7 @@ MilitarySite::find_least_suited_soldier()
 	int worst_soldier_level = INT_MIN;
 	Soldier * worst_soldier = nullptr;
 	for (Soldier* sld : present) {
-		int this_soldier_level = multiplier * static_cast<int> (sld->get_level(atrTotal));
+		int this_soldier_level = multiplier * static_cast<int> (sld->get_level(TrainingAttribute::kTotal));
 		if (this_soldier_level > worst_soldier_level)
 		{
 			worst_soldier_level = this_soldier_level;
@@ -332,8 +329,8 @@ MilitarySite::drop_least_suited_soldier(bool new_soldier_has_arrived, Soldier * 
 		// If the arriving guy is worse than worst present, I wont't release.
 		if (nullptr != newguy && nullptr != kickoutCandidate)
 		{
-			int32_t old_level = kickoutCandidate->get_level(atrTotal);
-			int32_t new_level = newguy->get_level(atrTotal);
+			int32_t old_level = kickoutCandidate->get_level(TrainingAttribute::kTotal);
+			int32_t new_level = newguy->get_level(TrainingAttribute::kTotal);
 			if (kPrefersHeroes == soldier_preference_ && old_level >= new_level)
 			{
 				return false;
@@ -513,7 +510,7 @@ void MilitarySite::update_soldier_request(bool incd)
 			}
 			if (! upgrade_soldier_request_)
 			{
-				//phoo -- I can safely request new soldiers.
+				// phoo -- I can safely request new soldiers.
 				doing_upgrade_request_ = false;
 				update_normal_soldier_request();
 			}
@@ -584,7 +581,7 @@ void MilitarySite::act(Game & game, uint32_t const data)
 	// Therefore I must poll in some occasions. Let's do that rather infrequently,
 	// to keep the game lightweight.
 
-	//TODO(unknown): I would need two new callbacks, to get rid ot this polling.
+	// TODO(unknown): I would need two new callbacks, to get rid ot this polling.
 	if (timeofgame > next_swap_soldiers_time_)
 		{
 			next_swap_soldiers_time_ = timeofgame + (soldier_upgrade_try_ ? 20000 : 100000);
@@ -604,12 +601,12 @@ void MilitarySite::act(Game & game, uint32_t const data)
 			// The healing algorithm is:
 			// * heal soldier with highest total level
 			// * heal healthiest if multiple of same total level exist
-			if (s->get_current_hitpoints() < s->get_max_hitpoints()) {
+			if (s->get_current_health() < s->get_max_health()) {
 				if (0 == soldier_to_heal || s->get_total_level() > max_total_level ||
 						(s->get_total_level() == max_total_level &&
-								s->get_current_hitpoints() / s->get_max_hitpoints() > max_health)) {
+								s->get_current_health() / s->get_max_health() > max_health)) {
 					max_total_level = s->get_total_level();
-					max_health = s->get_current_hitpoints() / s->get_max_hitpoints();
+					max_health = s->get_current_health() / s->get_max_health();
 					soldier_to_heal = s;
 				}
 			}
@@ -829,12 +826,12 @@ bool MilitarySite::attack(Soldier & enemy)
 	Soldier * defender = nullptr;
 
 	if (!present.empty()) {
-		// Find soldier with greatest hitpoints
+		// Find soldier with greatest health
 		uint32_t current_max = 0;
 		for (Soldier * temp_soldier : present) {
-			if (temp_soldier->get_current_hitpoints() > current_max) {
+			if (temp_soldier->get_current_health() > current_max) {
 				defender = temp_soldier;
-				current_max = defender->get_current_hitpoints();
+				current_max = defender->get_current_health();
 			}
 		}
 	} else {
@@ -1079,7 +1076,7 @@ MilitarySite::update_upgrade_requirements()
 		// There could be no soldier in the militarysite right now. No reason to freak out.
 		return false;
 	}
-	int32_t wg_level = worst_guy->get_level(atrTotal);
+	int32_t wg_level = worst_guy->get_level(TrainingAttribute::kTotal);
 
 	// Micro-optimization: I assume that the majority of military sites have only level-zero
 	// soldiers and prefer rookies. Handle them separately.
@@ -1105,7 +1102,7 @@ MilitarySite::update_upgrade_requirements()
 		{
 			upgrade_soldier_request_.reset();
 		}
-		soldier_upgrade_requirements_ = RequireAttribute(atrTotal, reqmin, reqmax);
+		soldier_upgrade_requirements_ = RequireAttribute(TrainingAttribute::kTotal, reqmin, reqmax);
 
 		return true;
 	}

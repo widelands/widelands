@@ -67,18 +67,18 @@ constexpr DescriptionIndex kInvalidWare = INVALID_INDEX - 1;
 constexpr DescriptionIndex kNoResource = INVALID_INDEX - 1;
 
 struct SoldierStrength {
-	uint8_t hp, attack, defense, evade;
+	uint8_t health, attack, defense, evade;
 	bool operator== (const SoldierStrength & other) const {
 		return
-			hp      == other.hp      &&
+			health  == other.health  &&
 			attack  == other.attack  &&
 			defense == other.defense &&
 			evade   == other.evade;
 	}
 	bool operator<  (const SoldierStrength & other) const {
 		return
-			hp      <  other.hp ||
-			(hp      == other.hp &&
+			health  <  other.health ||
+			(health  == other.health &&
 			 (attack  <  other.attack ||
 			  (attack  == other.attack &&
 			   (defense <  other.defense ||

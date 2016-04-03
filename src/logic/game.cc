@@ -71,7 +71,7 @@
 namespace Widelands {
 
 /// Define this to get lots of debugging output concerned with syncs
-//#define SYNC_DEBUG
+// #define SYNC_DEBUG
 
 Game::SyncWrapper::~SyncWrapper() {
 	if (dump_ != nullptr) {
@@ -555,7 +555,6 @@ bool Game::run
 	g_sound_handler.change_music("menu", 1000, 0);
 
 	cleanup_objects();
-	delete get_ibase();
 	set_ibase(nullptr);
 
 	state_ = gs_notrunning;
@@ -792,11 +791,11 @@ void Game::send_player_set_ware_max_fill
 
 
 void Game::send_player_change_training_options
-	(TrainingSite & ts, int32_t const atr, int32_t const val)
+	(TrainingSite & ts, TrainingAttribute attr, int32_t const val)
 {
 	send_player_command
 		(*new CmdChangeTrainingOptions
-		 	(get_gametime(), ts.owner().player_number(), ts, atr, val));
+			(get_gametime(), ts.owner().player_number(), ts, attr, val));
 }
 
 void Game::send_player_drop_soldier (Building & b, int32_t const ser)
@@ -931,7 +930,7 @@ void Game::sample_statistics()
 		for (Bob const * b = fc.field->get_first_bob(); b; b = b->get_next_bob())
 			if (upcast(Soldier const, s, b))
 				miltary_strength[s->owner().player_number() - 1] +=
-					s->get_level(atrTotal) + 1; //  So that level 0 also counts.
+					s->get_level(TrainingAttribute::kTotal) + 1; //  So that level 0 also counts.
 	}
 
 	//  Number of workers / wares / casualties / kills.

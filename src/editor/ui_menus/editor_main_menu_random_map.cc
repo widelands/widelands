@@ -46,19 +46,23 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent) :
 	// UI elements
 	margin_(4),
 	box_width_(get_inner_w() -  2 * margin_),
-	label_height_(UI::g_fh1->render(as_uifont("."))->height() + 2),
+	label_height_(UI::g_fh1->render(as_uifont(
+												  UI::g_fh1->fontset()->representative_character()))->height() + 2),
 	box_(this, margin_, margin_, UI::Box::Vertical, 0, 0, margin_),
 	// Size
 	width_(&box_, 0, 0, box_width_, box_width_ / 3,
 			 0, 0, 0,
-			 _("Width:"), "", g_gr->images().get("images/ui_basic/but1.png"), UI::SpinBox::Type::kValueList),
+			 _("Width:"), UI::SpinBox::Units::kNone, g_gr->images().get("images/ui_basic/but1.png"),
+			 UI::SpinBox::Type::kValueList),
 	height_(&box_, 0, 0, box_width_, box_width_ / 3,
 			  0, 0, 0,
-			  _("Height:"), "", g_gr->images().get("images/ui_basic/but1.png"), UI::SpinBox::Type::kValueList),
+			  _("Height:"), UI::SpinBox::Units::kNone, g_gr->images().get("images/ui_basic/but1.png"),
+			  UI::SpinBox::Type::kValueList),
 	max_players_(2),
 	players_(&box_, 0, 0, box_width_, box_width_ / 3,
 			  2, 1, max_players_,
-			  _("Players:"), "", g_gr->images().get("images/ui_basic/but1.png"), UI::SpinBox::Type::kSmall),
+			  _("Players:"), UI::SpinBox::Units::kNone, g_gr->images().get("images/ui_basic/but1.png"),
+				UI::SpinBox::Type::kSmall),
 	// World + Resources
 	world_descriptions_(
 	{
@@ -103,13 +107,15 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent) :
 	mountainsval_(100 - waterval_ - landval_ - wastelandval_),
 	water_(&box_, 0, 0, box_width_, box_width_ / 3,
 			  waterval_, 0, 60,
-			  _("Water:"), "%", g_gr->images().get("images/ui_basic/but1.png"), UI::SpinBox::Type::kSmall, 5),
+			  _("Water:"), UI::SpinBox::Units::kPercent, g_gr->images().get("images/ui_basic/but1.png"),
+			 UI::SpinBox::Type::kSmall, 5),
 	land_(&box_, 0, 0, box_width_, box_width_ / 3,
 			  landval_, 0, 100,
-			  _("Land:"), "%", g_gr->images().get("images/ui_basic/but1.png"), UI::SpinBox::Type::kSmall, 5),
+			  _("Land:"), UI::SpinBox::Units::kPercent, g_gr->images().get("images/ui_basic/but1.png"),
+			UI::SpinBox::Type::kSmall, 5),
 	wasteland_(&box_, 0, 0, box_width_, box_width_ / 3,
 			  wastelandval_, 0, 70,
-			  _("Wasteland:"), "%", g_gr->images().get("images/ui_basic/but1.png"),
+			  _("Wasteland:"), UI::SpinBox::Units::kPercent, g_gr->images().get("images/ui_basic/but1.png"),
 				  UI::SpinBox::Type::kSmall, 5),
 	mountains_box_(&box_, 0, 0, UI::Box::Horizontal, 0, 0, margin_),
 	mountains_label_(&mountains_box_, 0, 0, _("Mountains:")),
@@ -292,7 +298,7 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent) :
 	// ---------- "Generate Map" button ----------
 	cancel_button_.sigclicked.connect(boost::bind(&MainMenuNewRandomMap::clicked_cancel, this));
 	ok_button_.sigclicked.connect(boost::bind(&MainMenuNewRandomMap::clicked_create_map, this));
-	if (UI::g_fh1->fontset().is_rtl()) {
+	if (UI::g_fh1->fontset()->is_rtl()) {
 		button_box_.add(&ok_button_, UI::Align::kLeft);
 		button_box_.add(&cancel_button_, UI::Align::kLeft);
 	} else {

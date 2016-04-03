@@ -159,8 +159,8 @@ void GameSummaryScreen::fill_data()
 	Widelands::Player* single_won = nullptr;
 	uint8_t teawon_ = 0;
 	InteractivePlayer* ipl = game_.get_ipl();
-	//this defines a row to be selected, current player,
-	//if not then the first line
+	// This defines a row to be selected, current player,
+	// if not then the first line
 	uint32_t current_player_position = 0;
 
 	for (uintptr_t i = 0; i < players_status.size(); i++) {

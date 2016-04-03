@@ -1088,10 +1088,8 @@ inline FCoords Map::get_neighbour(const FCoords & f, const Direction dir) const
 	case WALK_E:  return  r_n(f);
 	case WALK_SE: return br_n(f);
 	case WALK_SW: return bl_n(f);
-	//case WALK_W:  return  l_n(f);
-	default:
-	assert(WALK_W == dir);
-	return l_n(f);
+	case WALK_W:  return  l_n(f);
+	default: NEVER_HERE();
 	}
 }
 

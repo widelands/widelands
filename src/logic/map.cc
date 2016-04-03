@@ -1353,12 +1353,12 @@ std::vector<Coords> Map::find_portdock(const Coords & c) const
 		}
 
 		// If starting point is owned we make sure this field has the same owner
-		if (is_good_water && owner > 0 && f.field->get_owned_by() != owner) {
+		if (is_good_water && owner != neutral() && f.field->get_owned_by() != owner) {
 			is_good_water = false;
 		}
 
 		// ... and is not on a border
-		if (is_good_water && owner > 0 && f.field->is_border()) {
+		if (is_good_water && owner != neutral() && f.field->is_border()) {
 			is_good_water = false;
 		}
 

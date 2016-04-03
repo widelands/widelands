@@ -100,10 +100,10 @@ wl_library(editor
     map_io_map_loader
     notifications
     random
+    scripting_coroutine
     scripting_lua_interface
     scripting_lua_table
     ui_basic
-    ui_fsmenu
     widelands_ball_of_mud
     wui
     wui_common

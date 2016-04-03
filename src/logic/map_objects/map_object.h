@@ -35,6 +35,7 @@
 #include "graphic/color.h"
 #include "graphic/image.h"
 #include "logic/cmd_queue.h"
+#include "logic/map_objects/tribes/training_attribute.h"
 #include "logic/widelands.h"
 #include "scripting/lua_table.h"
 
@@ -271,7 +272,7 @@ public:
 	 * doesn't have this kind of attribute.
 	 * The default behaviour returns \c -1 for all attributes.
 	 */
-	virtual int32_t get_training_attribute(uint32_t attr) const;
+	virtual int32_t get_training_attribute(TrainingAttribute attr) const;
 
 	void remove(EditorGameBase &);
 	virtual void destroy(EditorGameBase &);
@@ -378,6 +379,11 @@ protected:
 	virtual void init(EditorGameBase &);
 
 	virtual void cleanup(EditorGameBase &);
+
+	/// Draws census and statistics on screen
+	void do_draw_info(bool show_census, const std::string& census,
+							bool show_statictics, const std::string& statictics,
+							RenderTarget& dst, const Point& pos) const;
 
 	void molog(char const * fmt, ...) const
 		__attribute__((format(printf, 2, 3)));

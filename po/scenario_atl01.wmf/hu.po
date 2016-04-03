@@ -13,9 +13,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-02-20 12:30+0000\n"
-"PO-Revision-Date: 2016-02-20 12:31+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2016-03-11 07:02+0000\n"
+"PO-Revision-Date: 2016-03-11 18:42+0000\n"
+"Last-Translator: Balázs Meskó <meskobalazs@gmail.com>\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -341,7 +341,7 @@ msgstr "Hangzavar és zűrzavar"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:157
 msgid "Emerging Chaos…"
-msgstr ""
+msgstr "Feltörekvő káosz…"
 
 #. TRANSLATORS: Foreword
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:159
@@ -472,8 +472,8 @@ msgid ""
 "May Satul warm you, Jundlina! I agree with what Loftomor proposes. We need a"
 " good supply of building materials for we have to expand our territory "
 "swiftly. I will not feel safe on this island as long as we have not seen all"
-" its shores it. I brought plenty of good men from Atlantis. The military "
-"might is available. We only need some housing to live in."
+" its shores. I brought plenty of good men from Atlantis. The military might "
+"is available. We only need some housing to live in."
 msgstr ""
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:207
@@ -653,9 +653,9 @@ msgstr "Jundlina bólint"
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:300
 msgid ""
-"I have considered this, Sidolus. I think  it is about time. We will make "
-"this a priority for now. You shall get your industry soon!"
-msgstr "Gondoltam rá, Sidolus. Azt hiszem, itt az ideje. Ez lesz most az elsődleges célunk. Hamarosan felépül az ipar amit kérsz!"
+"I have considered this, Sidolus. I think it is about time. We will make this"
+" a priority for now. You shall get your industry soon!"
+msgstr ""
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:307
 msgid "Jundlina Summons Sidolus"
@@ -904,5 +904,5 @@ msgstr "„%s”"
 #: ../../data/scripting/format_scenario.lua:146
 msgid "New Objective"
 msgid_plural "New Objectives"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Új cél"
+msgstr[1] "Új célok"

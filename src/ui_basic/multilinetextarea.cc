@@ -42,10 +42,10 @@ MultilineTextarea::MultilineTextarea
 	text_      (text),
 	color_(UI_FONT_CLR_FG),
 	isrichtext(false),
-	scrollbar_ (this, get_w() - scrollbar_w(), 0, scrollbar_w(), h, false),
+	scrollbar_ (this, get_w() - Scrollbar::kSize, 0, Scrollbar::kSize, h, false),
 	scrollmode_(scroll_mode)
 {
-	assert(scrollmode_ == MultilineTextarea::ScrollMode::kNoScrolling || scrollbar_w() <= w);
+	assert(scrollmode_ == MultilineTextarea::ScrollMode::kNoScrolling || Scrollbar::kSize <= w);
 	set_thinks(false);
 
 	//  do not allow vertical alignment as it does not make sense
@@ -53,8 +53,12 @@ MultilineTextarea::MultilineTextarea
 
 	scrollbar_.moved.connect(boost::bind(&MultilineTextarea::scrollpos_changed, this, _1));
 
-	scrollbar_.set_singlestepsize(UI::g_fh1->render(as_uifont(".", UI_FONT_SIZE_SMALL))->height());
-	scrollbar_.set_pagesize(h - 2 * UI::g_fh1->render(as_uifont(".", UI_FONT_SIZE_BIG))->height());
+	scrollbar_.set_singlestepsize(UI::g_fh1->render(as_uifont(
+																		UI::g_fh1->fontset()->representative_character(),
+																		UI_FONT_SIZE_SMALL))->height());
+	scrollbar_.set_pagesize(h - 2 * UI::g_fh1->render(as_uifont(
+																		  UI::g_fh1->fontset()->representative_character(),
+																		  UI_FONT_SIZE_BIG))->height());
 	scrollbar_.set_steps(1);
 	scrollbar_.set_force_draw(scrollmode_ == ScrollMode::kScrollNormalForced ||
 										scrollmode_ == ScrollMode::kScrollLogForced);
@@ -130,8 +134,8 @@ void MultilineTextarea::layout()
 	recompute();
 
 	// Take care about the scrollbar
-	scrollbar_.set_pos(Point(get_w() - scrollbar_w(), 0));
-	scrollbar_.set_size(scrollbar_w(), get_h());
+	scrollbar_.set_pos(Point(get_w() - Scrollbar::kSize, 0));
+	scrollbar_.set_size(Scrollbar::kSize, get_h());
 }
 
 /**

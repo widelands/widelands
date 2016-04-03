@@ -50,10 +50,12 @@ MainMenuNewMap::MainMenuNewMap(EditorInteractive & parent)
 	box_(this, margin_, margin_, UI::Box::Vertical, 0, 0, margin_),
 	width_(&box_, 0, 0, box_width_, box_width_ / 3,
 			 0, 0, 0,
-			 _("Width:"), "", g_gr->images().get("images/ui_basic/but1.png"), UI::SpinBox::Type::kValueList),
+			 _("Width:"), UI::SpinBox::Units::kNone, g_gr->images().get("images/ui_basic/but1.png"),
+			 UI::SpinBox::Type::kValueList),
 	height_(&box_, 0, 0, box_width_, box_width_ / 3,
 			  0, 0, 0,
-			  _("Height:"), "", g_gr->images().get("images/ui_basic/but1.png"), UI::SpinBox::Type::kValueList),
+			  _("Height:"), UI::SpinBox::Units::kNone, g_gr->images().get("images/ui_basic/but1.png"),
+			  UI::SpinBox::Type::kValueList),
 	list_(&box_, 0, 0, box_width_, 330),
 	// Buttons
 	button_box_(&box_, 0, 0, UI::Box::Horizontal, 0, 0, margin_),
@@ -93,7 +95,7 @@ MainMenuNewMap::MainMenuNewMap(EditorInteractive & parent)
 
 	cancel_button_.sigclicked.connect(boost::bind(&MainMenuNewMap::clicked_cancel, this));
 	ok_button_.sigclicked.connect(boost::bind(&MainMenuNewMap::clicked_create_map, this));
-	if (UI::g_fh1->fontset().is_rtl()) {
+	if (UI::g_fh1->fontset()->is_rtl()) {
 		button_box_.add(&ok_button_, UI::Align::kLeft);
 		button_box_.add(&cancel_button_, UI::Align::kLeft);
 	} else {

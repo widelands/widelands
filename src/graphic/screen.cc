@@ -27,31 +27,31 @@
 #include "graphic/render_queue.h"
 #include "graphic/texture.h"
 
-Screen::Screen(int w, int h) : m_w(w), m_h(h) {
+Screen::Screen(int w, int h) : w_(w), h_(h) {
 }
 
 int Screen::width() const {
-	return m_w;
+	return w_;
 }
 
 int Screen::height() const {
-	return m_h;
+	return h_;
 }
 
 std::unique_ptr<Texture> Screen::to_texture() const {
-	std::unique_ptr<uint8_t[]> pixels(new uint8_t[m_w * m_h * 4]);
-	glReadPixels(0, 0, m_w, m_h, GL_RGBA, GL_UNSIGNED_BYTE, pixels.get());
+	std::unique_ptr<uint8_t[]> pixels(new uint8_t[w_ * h_ * 4]);
+	glReadPixels(0, 0, w_, h_, GL_RGBA, GL_UNSIGNED_BYTE, pixels.get());
 
-	Gl::swap_rows(m_w, m_h, m_w * 4, 4, pixels.get());
+	Gl::swap_rows(w_, h_, w_ * 4, 4, pixels.get());
 
 	// Ownership of pixels is not taken here. But the Texture() transfers it to
 	// the GPU, frees the SDL surface and after that we are free to free
 	// 'pixels'.
 	SDL_Surface* surface = SDL_CreateRGBSurfaceFrom(pixels.get(),
-	                                                m_w,
-	                                                m_h,
+	                                                w_,
+	                                                h_,
 	                                                32,
-	                                                m_w * 4,
+	                                                w_ * 4,
 	                                                0x000000ff,
 	                                                0x0000ff00,
 	                                                0x00ff0000,
@@ -65,13 +65,13 @@ void Screen::do_blit(const FloatRect& dst_rect,
                      float opacity,
                      BlendMode blend_mode) {
 	RenderQueue::Item i;
-	i.destination_rect = dst_rect;
 	i.program_id = RenderQueue::Program::kBlit;
 	i.blend_mode = blend_mode;
-	i.blit_arguments.texture = texture;
-	i.blit_arguments.mask.texture_id = 0;
 	i.blit_arguments.blend = RGBAColor(0, 0, 0, 255 * opacity);
+	i.blit_arguments.destination_rect = dst_rect;
+	i.blit_arguments.mask.texture_id = 0;
 	i.blit_arguments.mode = BlitMode::kDirect;
+	i.blit_arguments.texture = texture;
 	RenderQueue::instance().enqueue(i);
 }
 
@@ -80,13 +80,13 @@ void Screen::do_blit_blended(const FloatRect& dst_rect,
                              const BlitData& mask,
                              const RGBColor& blend) {
 	RenderQueue::Item i;
-	i.destination_rect = dst_rect;
 	i.program_id = RenderQueue::Program::kBlit;
 	i.blend_mode = BlendMode::UseAlpha;
-	i.blit_arguments.texture = texture;
-	i.blit_arguments.mask = mask;
 	i.blit_arguments.blend = blend;
+	i.blit_arguments.destination_rect = dst_rect;
+	i.blit_arguments.mask = mask;
 	i.blit_arguments.mode = BlitMode::kBlendedWithMask;
+	i.blit_arguments.texture = texture;
 	RenderQueue::instance().enqueue(i);
 }
 
@@ -94,34 +94,29 @@ void Screen::do_blit_monochrome(const FloatRect& dst_rect,
                                 const BlitData& texture,
                                 const RGBAColor& blend) {
 	RenderQueue::Item i;
-	i.destination_rect = dst_rect;
 	i.program_id = RenderQueue::Program::kBlit;
 	i.blend_mode = BlendMode::UseAlpha;
-	i.blit_arguments.texture = texture;
-	i.blit_arguments.mask.texture_id = 0;
 	i.blit_arguments.blend = blend;
+	i.blit_arguments.destination_rect = dst_rect;
+	i.blit_arguments.mask.texture_id = 0;
 	i.blit_arguments.mode = BlitMode::kMonochrome;
+	i.blit_arguments.texture = texture;
 	RenderQueue::instance().enqueue(i);
 }
 
-void Screen::do_draw_line(const FloatPoint& start,
-                          const FloatPoint& end,
-                          const RGBColor& color,
-								  const int line_width) {
+void Screen::do_draw_line_strip(std::vector<DrawLineProgram::PerVertexData> vertices) {
 	RenderQueue::Item i;
 	i.program_id = RenderQueue::Program::kLine;
-	i.blend_mode = BlendMode::Copy;
-	i.destination_rect = FloatRect(start.x, start.y, end.x - start.x, end.y - start.y);
-	i.line_arguments.color = color;
-	i.line_arguments.line_width = line_width;
+	i.blend_mode = BlendMode::UseAlpha;
+	i.line_arguments.vertices = std::move(vertices);
 	RenderQueue::instance().enqueue(i);
 }
 
 void Screen::do_fill_rect(const FloatRect& dst_rect, const RGBAColor& color, BlendMode blend_mode) {
 	RenderQueue::Item i;
-	i.program_id = RenderQueue::Program::kRect;
 	i.blend_mode = blend_mode;
-	i.destination_rect = dst_rect;
+	i.program_id = RenderQueue::Program::kRect;
 	i.rect_arguments.color = color;
+	i.rect_arguments.destination_rect = dst_rect;
 	RenderQueue::instance().enqueue(i);
 }

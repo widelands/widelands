@@ -273,8 +273,8 @@ private:
 
 	PortDock * portdock_;
 
-	//this is information for portdock,to know whether it should
-	//try to recreate itself
+	// This is information for portdock, to know whether it should
+	// try to recreate itself
 	bool cleanup_in_progress_;
 
 };

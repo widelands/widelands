@@ -1,0 +1,16 @@
+# Automatically created by Widelands bzr7890[trunk] (Debug)
+
+[global]
+packet_version="2"
+
+[player_1]
+name="Arminius"
+tribe="empire"
+ai=
+closeable="false"
+
+[player_2]
+name="Kartk"
+tribe="barbarians"
+ai=
+closeable="false"

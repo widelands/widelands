@@ -52,87 +52,87 @@ EditorToolChangeResourcesOptionsMenu
 	:
 	EditorToolOptionsMenu
 		(parent, registry, 250, 120, _("Resources")),
-	m_change_by_label
+	change_by_label_
 		(this,
 		 hmargin(), vmargin(), get_inner_w() - 2 * hmargin(), BUTTON_HEIGHT,
 		 _("Increase/Decrease Value"), UI::Align::kBottomCenter),
-	m_change_by_increase
+	change_by_increase_
 		(this, "incr_change_by",
 		 get_inner_w() - hmargin() - BUTTON_WIDTH,
-		 m_change_by_label.get_y() + m_change_by_label.get_h() + spacing(),
+		 change_by_label_.get_y() + change_by_label_.get_h() + spacing(),
 		 BUTTON_WIDTH, BUTTON_HEIGHT,
 		 g_gr->images().get("images/ui_basic/but1.png"),
 		 g_gr->images().get("images/ui_basic/scrollbar_up.png")),
-	m_change_by_decrease
+	change_by_decrease_
 		(this, "decr_change_by",
 		 hmargin(),
-		 m_change_by_increase.get_y(),
+		 change_by_increase_.get_y(),
 		 BUTTON_WIDTH, BUTTON_HEIGHT,
 		 g_gr->images().get("images/ui_basic/but1.png"),
 		 g_gr->images().get("images/ui_basic/scrollbar_down.png")),
-	m_change_by_value
+	change_by_value_
 		(this,
-		 m_change_by_increase.get_x() + m_change_by_increase.get_w() +
+		 change_by_increase_.get_x() + change_by_increase_.get_w() +
 		 hspacing(),
-		 m_change_by_increase.get_y(),
-		 m_change_by_decrease.get_x() - hspacing()
+		 change_by_increase_.get_y(),
+		 change_by_decrease_.get_x() - hspacing()
 		 -
-		 (m_change_by_increase.get_x() + m_change_by_increase.get_w() +
+		 (change_by_increase_.get_x() + change_by_increase_.get_w() +
 		  hspacing()),
 		 BUTTON_HEIGHT,
 		 UI::Align::kBottomCenter),
-	m_set_to_label
+	set_to_label_
 		(this,
 		 vmargin(),
-		 m_change_by_increase.get_y() + m_change_by_increase.get_h() + vspacing(),
+		 change_by_increase_.get_y() + change_by_increase_.get_h() + vspacing(),
 		 get_inner_w() - 2 * hmargin(), BUTTON_HEIGHT,
 		 _("Set Value"), UI::Align::kBottomCenter),
-	m_set_to_increase
+	set_to_increase_
 		(this, "incr_set_to",
-		 m_change_by_increase.get_x(),
-		 m_set_to_label.get_y() + m_set_to_label.get_h() + vspacing(),
+		 change_by_increase_.get_x(),
+		 set_to_label_.get_y() + set_to_label_.get_h() + vspacing(),
 		 BUTTON_WIDTH, BUTTON_HEIGHT,
 		 g_gr->images().get("images/ui_basic/but1.png"),
 		 g_gr->images().get("images/ui_basic/scrollbar_up.png")),
-	m_set_to_decrease
+	set_to_decrease_
 		(this, "decr_set_to",
 		 hmargin(),
-		 m_set_to_increase.get_y(), BUTTON_WIDTH, BUTTON_HEIGHT,
+		 set_to_increase_.get_y(), BUTTON_WIDTH, BUTTON_HEIGHT,
 		 g_gr->images().get("images/ui_basic/but1.png"),
 		 g_gr->images().get("images/ui_basic/scrollbar_down.png")),
-	m_set_to_value
+	set_to_value_
 		(this,
-		 m_change_by_value.get_x(), m_set_to_increase.get_y(),
-		 m_change_by_value.get_w(), BUTTON_HEIGHT,
+		 change_by_value_.get_x(), set_to_increase_.get_y(),
+		 change_by_value_.get_w(), BUTTON_HEIGHT,
 		 UI::Align::kBottomCenter),
-	m_cur_selection(this, 0, 0, _("Current Selection"), UI::Align::kBottomCenter),
-	m_increase_tool(increase_tool)
+	cur_selection_(this, 0, 0, _("Current Selection"), UI::Align::kBottomCenter),
+	increase_tool_(increase_tool)
 {
-	m_change_by_increase.sigclicked.connect
+	change_by_increase_.sigclicked.connect
 		(boost::bind
 			(&EditorToolChangeResourcesOptionsMenu::clicked_button,
 			 boost::ref(*this),
 			 Change_By_Increase));
-	m_change_by_decrease.sigclicked.connect
+	change_by_decrease_.sigclicked.connect
 		(boost::bind
 			(&EditorToolChangeResourcesOptionsMenu::clicked_button,
 			 boost::ref(*this),
 			 Change_By_Decrease));
-	m_set_to_increase.sigclicked.connect
+	set_to_increase_.sigclicked.connect
 		(boost::bind
 			(&EditorToolChangeResourcesOptionsMenu::clicked_button,
 			 boost::ref(*this),
 			 Set_To_Increase));
-	m_set_to_decrease.sigclicked.connect
+	set_to_decrease_.sigclicked.connect
 		(boost::bind
 			(&EditorToolChangeResourcesOptionsMenu::clicked_button,
 			 boost::ref(*this),
 			 Set_To_Decrease));
 
-	m_change_by_increase.set_repeating(true);
-	m_change_by_decrease.set_repeating(true);
-	m_set_to_increase   .set_repeating(true);
-	m_set_to_decrease   .set_repeating(true);
+	change_by_increase_.set_repeating(true);
+	change_by_decrease_.set_repeating(true);
+	set_to_increase_   .set_repeating(true);
+	set_to_decrease_   .set_repeating(true);
 	const Widelands::World & world = parent.egbase().world();
 	Widelands::DescriptionIndex const nr_resources = world.get_nr_resources();
 
@@ -149,14 +149,14 @@ EditorToolChangeResourcesOptionsMenu
 		/
 		(resource_pic_max_width + spacing());
 
-	m_radiogroup.changed.connect
+	radiogroup_.changed.connect
 		(boost::bind(&EditorToolChangeResourcesOptionsMenu::selected, this));
-	m_radiogroup.clicked.connect
+	radiogroup_.clicked.connect
 		(boost::bind(&EditorToolChangeResourcesOptionsMenu::selected, this));
 
 	uint16_t cur_x = 0;
 	Point pos
-		(hmargin(), m_set_to_value.get_y() + m_set_to_value.get_h() + vspacing());
+		(hmargin(), set_to_value_.get_y() + set_to_value_.get_h() + vspacing());
 	for
 		(Widelands::DescriptionIndex i = 0;
 		 i < nr_resources;
@@ -167,17 +167,17 @@ EditorToolChangeResourcesOptionsMenu
 			pos.x = hmargin();
 			pos.y += resource_pic_max_height + vspacing();
 		}
-		m_radiogroup.add_button
+		radiogroup_.add_button
 			(this,
 			 pos,
 			 g_gr->images().get(world.get_resource(i)->representative_image()));
 	}
 	pos.y += resource_pic_max_height + vspacing();
 
-	set_inner_size(get_inner_w(), pos.y + m_cur_selection.get_h() + vmargin());
-	m_cur_selection.set_pos(Point(get_inner_w() / 2, pos.y + hspacing()));
+	set_inner_size(get_inner_w(), pos.y + cur_selection_.get_h() + vmargin());
+	cur_selection_.set_pos(Point(get_inner_w() / 2, pos.y + hspacing()));
 
-	m_radiogroup.set_state(m_increase_tool.get_cur_res());
+	radiogroup_.set_state(increase_tool_.get_cur_res());
 
 	update();
 }
@@ -186,12 +186,12 @@ EditorToolChangeResourcesOptionsMenu
 void EditorToolChangeResourcesOptionsMenu::clicked_button(Button const n)
 {
 	assert
-		(m_increase_tool.get_change_by()
+		(increase_tool_.get_change_by()
 		 ==
-		 m_increase_tool.decrease_tool().get_change_by());
+		 increase_tool_.decrease_tool().get_change_by());
 
-	int32_t change_by = m_increase_tool.get_change_by();
-	int32_t set_to    = m_increase_tool.set_tool().get_set_to();
+	int32_t change_by = increase_tool_.get_change_by();
+	int32_t set_to    = increase_tool_.set_tool().get_set_to();
 
 	switch (n) {
 	case Change_By_Increase: change_by += change_by < 63; break;
@@ -202,13 +202,9 @@ void EditorToolChangeResourcesOptionsMenu::clicked_button(Button const n)
 		NEVER_HERE();
 		break;
 	}
-	m_increase_tool.set_change_by(change_by);
-	m_increase_tool.decrease_tool().set_change_by(change_by);
-	if (set_to < 0) {
-		set_to = 0;
-	}
-
-	m_increase_tool.set_tool().set_set_to(set_to);
+	increase_tool_.set_change_by(change_by);
+	increase_tool_.decrease_tool().set_change_by(change_by);
+	increase_tool_.set_tool().set_set_to(set_to);
 
 	select_correct_tool();
 	update();
@@ -218,28 +214,26 @@ void EditorToolChangeResourcesOptionsMenu::clicked_button(Button const n)
  * called when a resource has been selected
  */
 void EditorToolChangeResourcesOptionsMenu::selected() {
-	const int32_t res_ix = m_radiogroup.get_state();
-	if (res_ix >= 0) { // Only act if a radio button was selected
+	const int32_t resIx = radiogroup_.get_state();
 
-		m_increase_tool.set_tool().set_cur_res(res_ix);
-		m_increase_tool.set_cur_res(res_ix);
-		m_increase_tool.decrease_tool().set_cur_res(res_ix);
+	increase_tool_.set_tool().set_cur_res(resIx);
+	increase_tool_.set_cur_res(resIx);
+	increase_tool_.decrease_tool().set_cur_res(resIx);
 
-		Widelands::EditorGameBase& egbase = eia().egbase();
-		Widelands::Map & map = egbase.map();
-		eia().mutable_field_overlay_manager()->register_overlay_callback_function(
-			[res_ix, &map, &egbase](const Widelands::TCoords<Widelands::FCoords>& coords) -> uint32_t {
-				if (map.is_resource_valid(egbase.world(), coords, res_ix)) {
-					return coords.field->nodecaps();
-				}
-				return 0;
-			});
+	Widelands::EditorGameBase& egbase = eia().egbase();
+	Widelands::Map & map = egbase.map();
+	eia().mutable_field_overlay_manager()->register_overlay_callback_function(
+		[resIx, &map, &egbase](const Widelands::TCoords<Widelands::FCoords>& coords) -> uint32_t {
+			if (map.is_resource_valid(egbase.world(), coords, resIx)) {
+				return coords.field->nodecaps();
+			}
+			return 0;
+		});
 
-		map.recalc_whole_map(egbase.world());
-		select_correct_tool();
+	map.recalc_whole_map(egbase.world());
+	select_correct_tool();
 
-		update();
-	}
+	update();
 }
 
 /**
@@ -247,25 +241,25 @@ void EditorToolChangeResourcesOptionsMenu::selected() {
 */
 void EditorToolChangeResourcesOptionsMenu::update() {
 
-	m_change_by_value.set_text(std::to_string(m_increase_tool.get_change_by()));
+	change_by_value_.set_text(std::to_string(increase_tool_.get_change_by()));
 
-	m_set_to_value.set_text(std::to_string(
-										static_cast<unsigned int>(m_increase_tool.set_tool().get_set_to())));
+	set_to_value_.set_text(std::to_string(
+										static_cast<unsigned int>(increase_tool_.set_tool().get_set_to())));
 
-	m_cur_selection.set_text
-		(eia().egbase().world().get_resource(m_increase_tool.set_tool().get_cur_res())->descname());
-	m_cur_selection.set_pos
+	cur_selection_.set_text
+		(eia().egbase().world().get_resource(increase_tool_.set_tool().get_cur_res())->descname());
+	cur_selection_.set_pos
 		(Point
-		 	((get_inner_w() - m_cur_selection.get_w()) / 2, get_inner_h() - 20));
+			((get_inner_w() - cur_selection_.get_w()) / 2, get_inner_h() - 20));
 
 	{
-		int32_t const change_by = m_increase_tool.get_change_by();
-		m_change_by_decrease.set_enabled(1 < change_by);
-		m_change_by_increase.set_enabled    (change_by < 63);
+		int32_t const change_by = increase_tool_.get_change_by();
+		change_by_decrease_.set_enabled(1 < change_by);
+		change_by_increase_.set_enabled    (change_by < 63);
 	}
 	{
-		int32_t const set_to   = m_increase_tool.set_tool().get_set_to();
-		m_set_to_decrease   .set_enabled(0 < set_to);
-		m_set_to_increase   .set_enabled    (set_to    < 63);
+		int32_t const set_to   = increase_tool_.set_tool().get_set_to();
+		set_to_decrease_   .set_enabled(0 < set_to);
+		set_to_increase_   .set_enabled    (set_to    < 63);
 	}
 }

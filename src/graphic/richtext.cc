@@ -81,12 +81,11 @@ struct TextlineElement : Element {
 		std::vector<std::string>::iterator it = result_words.begin();
 
 		// Reorder words for BiDi
-		if (UI::g_fh1->fontset().is_rtl() && i18n::has_rtl_character(words)) {
+		if (UI::g_fh1->fontset()->is_rtl() && i18n::has_rtl_character(words)) {
 			std::string previous_word;
 			for (std::vector<std::string>::iterator source_it = words.begin();
 				  source_it != words.end(); ++source_it) {
 				std::string& word = *source_it;
-				replace_entities(&word);
 				if (source_it != words.end()) {
 					if (i18n::has_rtl_character(word.c_str()) || i18n::has_rtl_character(previous_word.c_str())) {
 						it = result_words.insert(result_words.begin(), word);
@@ -101,7 +100,6 @@ struct TextlineElement : Element {
 			}
 		} else {
 			for (std::string& word: words) {
-				replace_entities(&word);
 				result_words.push_back(word);
 			}
 		}

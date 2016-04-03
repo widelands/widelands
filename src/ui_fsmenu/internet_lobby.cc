@@ -148,7 +148,6 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby
 		(0, boost::bind(&FullscreenMenuInternetLobby::compare_clienttype, this, _1, _2));
 	clientsonline_list_ .double_clicked.connect
 		(boost::bind(&FullscreenMenuInternetLobby::client_doubleclicked, this, _1));
-	opengames_list_   .set_fontsize(fs_);
 	opengames_list_   .selected.connect
 		(boost::bind(&FullscreenMenuInternetLobby::server_selected, this));
 	opengames_list_   .double_clicked.connect
@@ -297,13 +296,13 @@ void FullscreenMenuInternetLobby::fill_client_list(const std::vector<InternetCli
 					continue;
 			}
 		}
+		// If a new player joins the lobby, play a sound.
+		if (clients->size() > prev_clientlist_len_ && !InternetGaming::ref().sound_off()) {
+			play_new_chat_member();
+		}
+		prev_clientlist_len_ = clients->size();
 	}
 
-	// If a new player joins the lobby, play a sound.
-	if (clients->size() > prev_clientlist_len_ && !InternetGaming::ref().sound_off()) {
-		play_new_chat_member();
-	}
-	prev_clientlist_len_ = clients->size();
 }
 
 

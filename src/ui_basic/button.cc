@@ -48,6 +48,7 @@ Button::Button //  for textual buttons. If h = 0, h will resize according to the
 	enabled_       (init_enabled),
 	repeating_     (false),
 	flat_          (flat),
+	keep_image_size_(false),
 	draw_flat_background_(false),
 	time_nextact_  (0),
 	title_         (title_text),
@@ -57,7 +58,8 @@ Button::Button //  for textual buttons. If h = 0, h will resize according to the
 {
 	// Automatically resize for font height and give it a margin.
 	if (h < 1) {
-		int new_height = UI::g_fh1->render(as_uifont("."))->height() + 4;
+		int new_height =
+				UI::g_fh1->render(as_uifont(UI::g_fh1->fontset()->representative_character()))->height() + 4;
 		set_desired_size(w, new_height);
 		set_size(w, new_height);
 	}

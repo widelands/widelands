@@ -3,13 +3,13 @@
 # 
 # Translators:
 # Lyubomir Vasilev, 2015
-# Lyubomir Vasilev, 2015-2016
+# Любомир Василев, 2015-2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-03-02 08:54+0000\n"
-"PO-Revision-Date: 2016-03-02 08:55+0000\n"
+"POT-Creation-Date: 2016-04-02 11:15+0000\n"
+"PO-Revision-Date: 2016-04-02 11:17+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Bulgarian (http://www.transifex.com/widelands/widelands/language/bg/)\n"
 "MIME-Version: 1.0\n"
@@ -2503,8 +2503,8 @@ msgctxt "immovable"
 msgid "Ship Under Construction"
 msgstr "Корабостроителна площадка"
 
-#: ../../data/tribes/preload.lua:12 ../../data/tribes/preload.lua:27
-#: ../../data/tribes/preload.lua:42
+#: ../../data/tribes/preload.lua:12 ../../data/tribes/preload.lua:28
+#: ../../data/tribes/preload.lua:44
 msgid "The Widelands Development Team"
 msgstr "Екипът по разработката на Widelands"
 
@@ -2518,24 +2518,52 @@ msgid "The mighty tribes of the east-lands."
 msgstr "Могъщите племена от източните земи."
 
 #. TRANSLATORS: This is a tribe name
-#: ../../data/tribes/preload.lua:29
+#: ../../data/tribes/preload.lua:30
 msgid "Empire"
 msgstr "Империя"
 
-#: ../../data/tribes/preload.lua:30
+#: ../../data/tribes/preload.lua:31
 msgid "This is the culture of the Roman Empire."
 msgstr "Това е културата на Римската империя."
 
 #. TRANSLATORS: This is a tribe name
-#: ../../data/tribes/preload.lua:44
+#: ../../data/tribes/preload.lua:46
 msgid "Atlanteans"
 msgstr "Атландци"
 
-#: ../../data/tribes/preload.lua:45
+#: ../../data/tribes/preload.lua:47
 msgid ""
 "This tribe is known from the oldest tales. The sons and daughters of "
 "Atlantis."
 msgstr "Това племе е познато от най-старите разкази. Синовете и дъщерите на Атлантида."
+
+#: ../../data/tribes/scripting/help/init.lua:48
+msgid "Tribal Encyclopedia"
+msgstr ""
+
+#: ../../data/tribes/scripting/help/init.lua:53
+msgid "General"
+msgstr ""
+
+#: ../../data/tribes/scripting/help/init.lua:58
+msgid "Introduction"
+msgstr ""
+
+#: ../../data/tribes/scripting/help/init.lua:64
+msgid "Controls"
+msgstr ""
+
+#: ../../data/tribes/scripting/help/init.lua:73
+msgid "Wares"
+msgstr ""
+
+#: ../../data/tribes/scripting/help/init.lua:80
+msgid "Workers"
+msgstr ""
+
+#: ../../data/tribes/scripting/help/init.lua:87
+msgid "Buildings"
+msgstr ""
 
 #: ../../data/tribes/scripting/starting_conditions/atlanteans/fortified_village.lua:10
 #: ../../data/tribes/scripting/starting_conditions/barbarians/fortified_village.lua:10
@@ -2543,11 +2571,37 @@ msgstr "Това племе е познато от най-старите раз�
 msgid "Fortified Village"
 msgstr "Укрепено селище"
 
+#: ../../data/tribes/scripting/starting_conditions/atlanteans/fortified_village.lua:11
+#: ../../data/tribes/scripting/starting_conditions/barbarians/fortified_village.lua:11
+#: ../../data/tribes/scripting/starting_conditions/empire/fortified_village.lua:11
+msgid " Start the game with a fortified military installation"
+msgstr "Започнете играта с укрепена военна установка"
+
 #: ../../data/tribes/scripting/starting_conditions/atlanteans/headquarters.lua:10
 #: ../../data/tribes/scripting/starting_conditions/barbarians/headquarters.lua:10
 #: ../../data/tribes/scripting/starting_conditions/empire/headquarters.lua:10
 msgid "Headquarters"
 msgstr "Щаб"
+
+#: ../../data/tribes/scripting/starting_conditions/atlanteans/headquarters.lua:11
+#: ../../data/tribes/scripting/starting_conditions/barbarians/headquarters.lua:11
+#: ../../data/tribes/scripting/starting_conditions/empire/headquarters.lua:11
+msgid "Start the game with your headquarters only"
+msgstr "Започнете играта само с щаба си"
+
+#: ../../data/tribes/scripting/starting_conditions/atlanteans/trading_outpost.lua:10
+#: ../../data/tribes/scripting/starting_conditions/barbarians/trading_outpost.lua:10
+#: ../../data/tribes/scripting/starting_conditions/empire/trading_outpost.lua:10
+msgid "Trading Outpost"
+msgstr "Търговски преден пост"
+
+#: ../../data/tribes/scripting/starting_conditions/atlanteans/trading_outpost.lua:11
+#: ../../data/tribes/scripting/starting_conditions/barbarians/trading_outpost.lua:11
+#: ../../data/tribes/scripting/starting_conditions/empire/trading_outpost.lua:11
+msgid ""
+"If this player runs low on important wares, they will be replenished for "
+"free"
+msgstr "Ако важните стоки на този играч са на привършване, те ще бъдат попълнени безплатно"
 
 #. TRANSLATORS: This is the ship's name used in lists of units
 #: ../../data/tribes/ships/atlanteans/init.lua:20

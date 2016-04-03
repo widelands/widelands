@@ -10,9 +10,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-03-02 08:54+0000\n"
-"PO-Revision-Date: 2016-03-02 08:55+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2016-04-02 11:15+0000\n"
+"PO-Revision-Date: 2016-04-02 11:47+0000\n"
+"Last-Translator: MiroslavR <miroslavr256@gmail.com>\n"
 "Language-Team: Slovak (http://www.transifex.com/widelands/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2230,7 +2230,7 @@ msgstr "vylepšenie zdravia vojakov z úrovne 3 na úroveň 4"
 #: ../../data/tribes/buildings/warehouses/atlanteans/headquarters/init.lua:7
 msgctxt "atlanteans_building"
 msgid "Headquarters"
-msgstr "Základňa"
+msgstr "Ústredie"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/warehouses/atlanteans/port/init.lua:7
@@ -2249,7 +2249,7 @@ msgstr "Sklad"
 #: ../../data/tribes/buildings/warehouses/barbarians/headquarters_interim/init.lua:7
 msgctxt "barbarians_building"
 msgid "Headquarters"
-msgstr "Základňa"
+msgstr "Ústredie"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/warehouses/barbarians/port/init.lua:7
@@ -2267,13 +2267,13 @@ msgstr "Sklad"
 #: ../../data/tribes/buildings/warehouses/empire/headquarters/init.lua:7
 msgctxt "empire_building"
 msgid "Headquarters"
-msgstr "Základňa"
+msgstr "Ústredie"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/warehouses/empire/headquarters_shipwreck/init.lua:7
 msgctxt "empire_building"
 msgid "Headquarters Shipwreck"
-msgstr "Základňa vo vraku"
+msgstr "Ústredie vo vraku"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/warehouses/empire/port/init.lua:7
@@ -2505,8 +2505,8 @@ msgctxt "immovable"
 msgid "Ship Under Construction"
 msgstr "Stavenisko lode"
 
-#: ../../data/tribes/preload.lua:12 ../../data/tribes/preload.lua:27
-#: ../../data/tribes/preload.lua:42
+#: ../../data/tribes/preload.lua:12 ../../data/tribes/preload.lua:28
+#: ../../data/tribes/preload.lua:44
 msgid "The Widelands Development Team"
 msgstr "Vývojový tím hry Widelands"
 
@@ -2520,24 +2520,52 @@ msgid "The mighty tribes of the east-lands."
 msgstr "Mocné kmene východných zemí."
 
 #. TRANSLATORS: This is a tribe name
-#: ../../data/tribes/preload.lua:29
+#: ../../data/tribes/preload.lua:30
 msgid "Empire"
 msgstr "Impérium"
 
-#: ../../data/tribes/preload.lua:30
+#: ../../data/tribes/preload.lua:31
 msgid "This is the culture of the Roman Empire."
 msgstr "Toto je kultúra Rímskej ríše."
 
 #. TRANSLATORS: This is a tribe name
-#: ../../data/tribes/preload.lua:44
+#: ../../data/tribes/preload.lua:46
 msgid "Atlanteans"
 msgstr "Atlantíďania"
 
-#: ../../data/tribes/preload.lua:45
+#: ../../data/tribes/preload.lua:47
 msgid ""
 "This tribe is known from the oldest tales. The sons and daughters of "
 "Atlantis."
 msgstr "Tento kmeň je známy z najstarších povestí. Synovia a dcéry Atlantídy."
+
+#: ../../data/tribes/scripting/help/init.lua:48
+msgid "Tribal Encyclopedia"
+msgstr "Encyklopédia kmeňov"
+
+#: ../../data/tribes/scripting/help/init.lua:53
+msgid "General"
+msgstr "Všeobecné"
+
+#: ../../data/tribes/scripting/help/init.lua:58
+msgid "Introduction"
+msgstr "Úvod"
+
+#: ../../data/tribes/scripting/help/init.lua:64
+msgid "Controls"
+msgstr "Ovládanie"
+
+#: ../../data/tribes/scripting/help/init.lua:73
+msgid "Wares"
+msgstr "Výrobky"
+
+#: ../../data/tribes/scripting/help/init.lua:80
+msgid "Workers"
+msgstr "Pracovníci"
+
+#: ../../data/tribes/scripting/help/init.lua:87
+msgid "Buildings"
+msgstr "Budovy"
 
 #: ../../data/tribes/scripting/starting_conditions/atlanteans/fortified_village.lua:10
 #: ../../data/tribes/scripting/starting_conditions/barbarians/fortified_village.lua:10
@@ -2545,11 +2573,37 @@ msgstr "Tento kmeň je známy z najstarších povestí. Synovia a dcéry Atlant�
 msgid "Fortified Village"
 msgstr "Opevnená dedina"
 
+#: ../../data/tribes/scripting/starting_conditions/atlanteans/fortified_village.lua:11
+#: ../../data/tribes/scripting/starting_conditions/barbarians/fortified_village.lua:11
+#: ../../data/tribes/scripting/starting_conditions/empire/fortified_village.lua:11
+msgid " Start the game with a fortified military installation"
+msgstr "Začať hru s opevneným vojenským zariadením"
+
 #: ../../data/tribes/scripting/starting_conditions/atlanteans/headquarters.lua:10
 #: ../../data/tribes/scripting/starting_conditions/barbarians/headquarters.lua:10
 #: ../../data/tribes/scripting/starting_conditions/empire/headquarters.lua:10
 msgid "Headquarters"
-msgstr "Základňa"
+msgstr "Ústredie"
+
+#: ../../data/tribes/scripting/starting_conditions/atlanteans/headquarters.lua:11
+#: ../../data/tribes/scripting/starting_conditions/barbarians/headquarters.lua:11
+#: ../../data/tribes/scripting/starting_conditions/empire/headquarters.lua:11
+msgid "Start the game with your headquarters only"
+msgstr "Začať hru len s ústredím"
+
+#: ../../data/tribes/scripting/starting_conditions/atlanteans/trading_outpost.lua:10
+#: ../../data/tribes/scripting/starting_conditions/barbarians/trading_outpost.lua:10
+#: ../../data/tribes/scripting/starting_conditions/empire/trading_outpost.lua:10
+msgid "Trading Outpost"
+msgstr "Obchodné stanovište"
+
+#: ../../data/tribes/scripting/starting_conditions/atlanteans/trading_outpost.lua:11
+#: ../../data/tribes/scripting/starting_conditions/barbarians/trading_outpost.lua:11
+#: ../../data/tribes/scripting/starting_conditions/empire/trading_outpost.lua:11
+msgid ""
+"If this player runs low on important wares, they will be replenished for "
+"free"
+msgstr "Ak tomuto hráčovi dochádzajú dôležité výrobky, doplnia sa zadarmo"
 
 #. TRANSLATORS: This is the ship's name used in lists of units
 #: ../../data/tribes/ships/atlanteans/init.lua:20

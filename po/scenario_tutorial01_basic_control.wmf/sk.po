@@ -4,13 +4,13 @@
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # GunChleoc, 2014
-# MiroslavR <miroslavr256@gmail.com>, 2015
+# MiroslavR <miroslavr256@gmail.com>, 2015-2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-03-02 08:54+0000\n"
-"PO-Revision-Date: 2016-03-02 15:06+0000\n"
+"POT-Creation-Date: 2016-04-01 20:06+0000\n"
+"PO-Revision-Date: 2016-04-01 21:59+0000\n"
 "Last-Translator: MiroslavR <miroslavr256@gmail.com>\n"
 "Language-Team: Slovak (http://www.transifex.com/widelands/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
@@ -76,7 +76,7 @@ msgid ""
 "The most important wares in the early game are the basic construction wares:"
 " logs and granite. Let’s make sure that we do not run out of logs. For this,"
 " we need a lumberjack and a hut for him to stay in."
-msgstr "Zvyčajne začínate hru s jednou základňou. To je tá veľká budova, pred ktorou stojí modrá vlajka. Základňa je sklad, kde sa skladujú výrobky, žijú robotníci a vojaci. Niektoré výrobky sú potrebné na stavbu domov, iné na výrobu iných výrobkov. Samozrejme, výrobky v základni nevydržia večne, takže musíte dbať na to, aby sa opäť vyrobili. V začiatočných fázach hry sú najdôležitejšími výrobkami základné stavebné výrobky: kmene stromov a žula. Zabezpečme, aby nám nedošlo drevo. Na to budeme potrebovať drevorubača a chatrč, v ktorej bude bývať."
+msgstr "Zvyčajne začínate hru s jedným ústredím. To je tá veľká budova, pred ktorou stojí modrá vlajka. Ústredie je sklad, kde sa skladujú výrobky, žijú pracovníci a vojaci. Niektoré výrobky sú potrebné na stavbu domov, iné na výrobu iných výrobkov. Samozrejme, výrobky v ústredí nevydržia večne, takže musíte dbať na to, aby sa opäť vyrobili. V začiatočných fázach hry sú najdôležitejšími výrobkami základné stavebné výrobky: kmene stromov a žula. Zabezpečme, aby nám nedošlo drevo. Na to budeme potrebovať drevorubača a chatrč, v ktorej bude bývať."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:44
 msgid ""
@@ -156,7 +156,7 @@ msgid ""
 "of my road network. After ordering the construction site, I was "
 "automatically put into road building mode, so all I have to do is click on "
 "the blue flag in front of my headquarters."
-msgstr "To nebude stačiť. Ešte musím spojiť chatrč drevorubača so zvyškom cestnej siete. Po tom, čo som postavil stavenisko, dostal som sa automaticky do režimu stavania ciest, takže všetko, čo musím urobiť, je kliknúť na modrú vlajku pred základňou."
+msgstr "To nebude stačiť. Ešte musím spojiť chatrč drevorubača so zvyškom cestnej siete. Po tom, čo som postavil stavenisko, dostal som sa automaticky do režimu stavania ciest, takže všetko, čo musím urobiť, je kliknúť na modrú vlajku pred ústredím."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:95
 msgid ""
@@ -166,7 +166,7 @@ msgid ""
 "menu). Therefore, I have entered the road building mode manually. I will "
 "tell you later how to do that. To build the road, all I have to do now is "
 "click on the blue flag in front of my headquarters."
-msgstr "To nebude stačiť. Ešte musím spojiť chatrč drevorubača so zvyškom cestnej siete. Máte vypnutú možnosť „Začať stavbu ciest po umiestnení vlajky“ (môžete ju zmeniť zvolením položky „Možnosti“ z hlavného menu). Preto som aktivoval režim stavania ciest manuálne. Ako to spraviť vám poviem neskôr. Aby som postavil cestu, všetko, čo teraz musím urobiť, je kliknúť na modrú vlajku pred základňou."
+msgstr "To nebude stačiť. Ešte musím spojiť chatrč drevorubača so zvyškom cestnej siete. Máte vypnutú možnosť „Začať stavbu ciest po umiestnení vlajky“ (môžete ju zmeniť zvolením položky „Možnosti“ z hlavného menu). Preto som aktivoval režim stavania ciest manuálne. Ako to spraviť vám poviem neskôr. Aby som postavil cestu, všetko, čo teraz musím urobiť, je kliknúť na modrú vlajku pred ústredím."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:103
 msgid "Waiting for the Lumberjack to Go Up"
@@ -177,7 +177,7 @@ msgid ""
 "Now watch closely while a builder leaves the headquarters and goes to the "
 "construction site. Also, a carrier will take position in between the two "
 "blue flags and carry wares from one blue flag to the other."
-msgstr "Teraz poriadne sledujte, ako staviteľ opustí základňu a pôjde ku stavenisku. Okrem toho sa medzi tieto dve modré vlajky postaví nosič a bude prenášať výrobky od jednej modrej vlajky k druhej."
+msgstr "Teraz poriadne sledujte, ako staviteľ opustí ústredie a pôjde ku stavenisku. Okrem toho sa medzi tieto dve modré vlajky postaví nosič a bude prenášať výrobky od jednej modrej vlajky k druhej."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:113
 msgid "Placing Another Flag"
@@ -219,7 +219,7 @@ msgstr "Čím kratšie sú úseky ciest, tým rýchlejšie sa budú vaše výrob
 msgid ""
 "Build a blue flag now in the middle of the road that connects your "
 "headquarters to your lumberjack’s hut."
-msgstr "Teraz postavte modrú vlajku v strede cesty, ktorá spája základňu s drevorubačskou chatrčou."
+msgstr "Teraz postavte modrú vlajku v strede cesty, ktorá spája ústredie s drevorubačskou chatrčou."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:134
 msgid "Waiting For the Hut to be Finished"
@@ -305,7 +305,7 @@ msgid ""
 "quarry next to some rocks lying around. As it happens, there is a pile of "
 "them just to the west (left) of your headquarters. I will teach you now how "
 "to move your view over there."
-msgstr "Jedným zo spôsobov získavania žuly je ťažba v žulových baniach. Jednoduchšie je však postaviť kameňolom niekde pri nejakých skalách. Čírou náhodou je ich tu hromada na západ (vľavo) od základne. Teraz vás naučím, ako tam presunúť pohľad."
+msgstr "Jedným zo spôsobov získavania žuly je ťažba v žulových baniach. Jednoduchšie je však postaviť kameňolom niekde pri nejakých skalách. Čírou náhodou je ich tu hromada na západ (vľavo) od ústredia. Teraz vás naučím, ako tam presunúť pohľad."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:184
 msgid ""
@@ -488,7 +488,7 @@ msgstr "Postavte kameňolom"
 msgid ""
 "There are some rocks to the west of your headquarters. Build a quarry right "
 "next to them."
-msgstr "Na západ od základne leží niekoľko skál. Postavte vedľa nich kameňolom."
+msgstr "Na západ od ústredia leží niekoľko skál. Postavte vedľa nich kameňolom."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:268
 msgid ""
@@ -601,11 +601,11 @@ msgstr "Keď umiestňujete cesty, majte na pamäti strmosť a využite ju vo svo
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:328
 msgid "Now please rebuild the road between your quarry and your headquarters."
-msgstr "Teraz znovu postavte cestu medzi kameňolomom a základňou."
+msgstr "Teraz znovu postavte cestu medzi kameňolomom a ústredím."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:332
 msgid "Connect the quarry to the headquarters"
-msgstr "Pripojte kameňolom k základni"
+msgstr "Pripojte kameňolom k ústrediu"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:334
 msgid "Connect Your Construction Site"
@@ -616,14 +616,14 @@ msgid ""
 "Connect your quarry construction site to your headquarters with a road. You "
 "would have been put directly into road building mode after ordering a new "
 "site. But now, you aren’t."
-msgstr "Spojte cestou stavenisko kameňolomu so základňou. Keby ste boli umiestnili nové stavenisko, režim stavania ciest by bol aktivovaný. Momentálne však nie je."
+msgstr "Spojte cestou stavenisko kameňolomu s ústredím. Keby ste boli umiestnili nové stavenisko, režim stavania ciest by bol aktivovaný. Momentálne však nie je."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:337
 msgid ""
 "To build a completely new road, just click on the flag in front of your "
 "construction site, click on the build road icon and then click on the flag "
 "in front of your headquarters. Wait for the completion of the quarry."
-msgstr "Úplne novú cestu postavíte kliknutím na vlajku pred staveniskom, potom na ikonu stavania ciest a nakoniec na vlajku pred základňou. Počkajte, kým sa dokončí výstavba kameňolomu."
+msgstr "Úplne novú cestu postavíte kliknutím na vlajku pred staveniskom, potom na ikonu stavania ciest a nakoniec na vlajku pred ústredím. Počkajte, kým sa dokončí výstavba kameňolomu."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:342
 msgid "Quarry not Connected"
@@ -636,7 +636,7 @@ msgid ""
 "transport wares. The simplest way is to click on the construction site’s "
 "flag, choose ‘Build road’, and then click on the destination flag (the one "
 "in front of your headquarters), just like I’ve demonstrated."
-msgstr "Pracovníci neradi prechádzajú po teréne. Nosiči budú prenášať výrobky, len keď postavíte cestu od základne k stavenisku. Najjednoduchším spôsobom, ako to urobiť, je kliknúť na vlajku staveniska, na tlačidlo „Postaviť cestu“ a potom kliknúť na cieľovú vlajku (tú pred základňou), presne ako som to ukazoval."
+msgstr "Pracovníci neradi prechádzajú po teréne. Nosiči budú prenášať výrobky, len keď postavíte cestu od ústredia k stavenisku. Najjednoduchším spôsobom, ako to urobiť, je kliknúť na vlajku staveniska, na tlačidlo „Postaviť cestu“ a potom kliknúť na cieľovú vlajku (tú pred ústredím), presne ako som to ukazoval."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:351
 msgid "You Destroyed the Construction Site!"
@@ -745,7 +745,7 @@ msgid ""
 "reading, and the one that informed you that a new headquarters was added to "
 "your economy. Let’s learn how to archive messages: first, select the message"
 " that you wish to archive by clicking on it in the list. Then, click the"
-msgstr "Momentálne máte dve správy. Túto, ktorú práve čítate, a tú, ktorá vás oboznámila so skutočnosťou, že sa vaša ekonomika rozrástla o novú základňu. Naučme sa archivovať správy: najprv vyberte správu, ktorú chcete archivovať, kliknutím na príslušnú položku v zozname. Potom ju kliknutím na"
+msgstr "Momentálne máte dve správy. Túto, ktorú práve čítate, a tú, ktorá vás oboznámila so skutočnosťou, že sa vaša ekonomika rozrástla o nové ústredie. Naučme sa archivovať správy: najprv vyberte správu, ktorú chcete archivovať, kliknutím na príslušnú položku v zozname. Potom ju kliknutím na"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:404
 msgid "‘Archive selected message’ button to move it into your archive."
@@ -858,7 +858,7 @@ msgid ""
 "Dismantling the quarry: a builder will walk from the headquarters to "
 "dismantle the quarry piece by piece. Thereby, you regain some of the "
 "resources you used for the construction."
-msgstr "Rozobratie kameňolomu: staviteľ opustí základňu a rozoberie kameňolom kúsok po kúsku. Získate tak časť z výrobkov, ktoré ste použili na stavbu."
+msgstr "Rozobratie kameňolomu: staviteľ opustí ústredie a rozoberie kameňolom kúsok po kúsku. Získate tak časť z výrobkov, ktoré ste použili na stavbu."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:466
 msgid ""
@@ -883,7 +883,7 @@ msgid ""
 "Dismantling the quarry: A builder will walk from the headquarters to "
 "dismantle the quarry piece by piece. Thereby, you regain some of the "
 "resources you used for the construction."
-msgstr "Rozobratie kameňolomu: staviteľ opustí základňu a rozoberie kameňolom kúsok po kúsku. Získate tak časť z výrobkov, ktoré ste použili na stavbu."
+msgstr "Rozobratie kameňolomu: staviteľ opustí ústredie a rozoberie kameňolom kúsok po kúsku. Získate tak časť z výrobkov, ktoré ste použili na stavbu."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:475
 msgid "Expanding Your Territory!"
@@ -896,7 +896,7 @@ msgid ""
 " a basic building infrastructure, and we do not have access to mountains, "
 "which we need to mine minerals and coal. So, we have to expand our "
 "territory."
-msgstr "Chcel by som vás ešte naučiť jednu ďalšiu vec: rozširovanie územia. Priestor, s ktorým začíname okolo základne, ťažko postačí pre základnú stavebnú infraštruktúru a nemáme prístup k horám, ktoré potrebujeme na ťažbu minerálov a uhlia. Preto musíme rozšíriť svoje územie."
+msgstr "Chcel by som vás ešte naučiť jednu ďalšiu vec: rozširovanie územia. Priestor okolo ústredia, s ktorým sme začali, sotva postačí pre základnú stavebnú infraštruktúru. Nemáme prístup k horám, ktoré potrebujeme na ťažbu minerálov a uhlia. Musíme si preto rozšíriť územie."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:478
 msgid ""
@@ -1000,9 +1000,9 @@ msgstr "Ak chcete opustiť hru a vrátiť sa do hlavého menu, kliknite na"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:515
 msgid ""
-"‘Options’ menu button on the very left at the bottom of the screen. Then "
-"click the"
-msgstr "tlačidlo „Nastavenia“ na ľavom kraji naspodku obrazovky. Potom kliknite na"
+"‘Main Menu’ button on the very left at the bottom of the screen. Then click "
+"the"
+msgstr "tlačidlo „Hlavná ponuka“ na ľavom kraji naspodku obrazovky. Potom kliknite na"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:516
 msgid "‘Exit Game’ button."
@@ -1019,7 +1019,7 @@ msgstr "Ďakujeme, že ste si zahrali tento tutoriál. Užite si Widelands a nez
 msgid "“%s”"
 msgstr "„%s“"
 
-#: ../../data/scripting/format_scenario.lua:146
+#: ../../data/scripting/format_scenario.lua:96
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] "Nová úloha"

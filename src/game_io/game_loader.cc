@@ -103,7 +103,7 @@ int32_t GameLoader::load_game(bool const multiplayer) {
 	PlayerNumber const nr_players = game_.map().get_nrplayers();
 	iterate_players_existing_const(p, nr_players, game_, player) {
 		const MessageQueue & messages = player->messages();
-		for (std::pair<MessageId, Message *> temp_message : messages) {
+		for (const auto& temp_message : messages) {
 			Message* message = temp_message.second;
 			MessageId message_id = temp_message.first;
 

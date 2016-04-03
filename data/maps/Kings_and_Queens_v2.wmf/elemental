@@ -1,0 +1,12 @@
+# Automatically created by Widelands bzr7905[trunk] (Debug)
+
+[global]
+packet_version="1"
+map_w="160"
+map_h="160"
+nr_players="7"
+name=_"Kings and Queens"
+author="fk"
+descr=_"An old legend tells that these seven kingdoms, that have flourished for ages in prosperity, will someday collapse into a devastating war. Has your latest betrayal been one too many and will the prophecy come true?"
+hint=
+tags="ffa,unbalanced,official"

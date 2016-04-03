@@ -49,15 +49,15 @@ TrainingSiteDescr::TrainingSiteDescr
 	num_soldiers_      (table.get_int("soldier_capacity")),
 	max_stall_         (table.get_int("trainer_patience")),
 
-	train_hp_          (false),
+	train_health_      (false),
 	train_attack_      (false),
 	train_defense_     (false),
 	train_evade_       (false),
-	min_hp_            (0),
+	min_health_        (0),
 	min_attack_        (0),
 	min_defense_       (0),
 	min_evade_         (0),
-	max_hp_            (0),
+	max_health_        (0),
 	max_attack_        (0),
 	max_defense_       (0),
 	max_evade_         (0)
@@ -68,12 +68,12 @@ TrainingSiteDescr::TrainingSiteDescr
 	//  These sections also seem redundant. Eliminate them (having the
 	//  programs should be enough).
 	std::unique_ptr<LuaTable> items_table;
-	if (table.has_key("soldier hp")) {
-		items_table = table.get_table("soldier hp");
-		train_hp_      = true;
-		min_hp_ = items_table->get_int("min_level");
-		max_hp_ = items_table->get_int("max_level");
-		add_training_inputs(*items_table.get(), &food_hp_, &weapons_hp_);
+	if (table.has_key("soldier health")) {
+		items_table = table.get_table("soldier health");
+		train_health_ = true;
+		min_health_ = items_table->get_int("min_level");
+		max_health_ = items_table->get_int("max_level");
+		add_training_inputs(*items_table.get(), &food_health_, &weapons_health_);
 	}
 
 	if (table.has_key("soldier attack")) {
@@ -114,15 +114,15 @@ Building & TrainingSiteDescr::create_object() const {
  */
 int32_t TrainingSiteDescr::get_min_level(const TrainingAttribute at) const {
 	switch (at) {
-	case atrHP:
-		return min_hp_;
-	case atrAttack:
+	case TrainingAttribute::kHealth:
+		return min_health_;
+	case TrainingAttribute::kAttack:
 		return min_attack_;
-	case atrDefense:
+	case TrainingAttribute::kDefense:
 		return min_defense_;
-	case atrEvade:
+	case TrainingAttribute::kEvade:
 		return min_evade_;
-	case atrTotal:
+	case TrainingAttribute::kTotal:
 		throw wexception("Unknown attribute value!");
 	}
 	NEVER_HERE();
@@ -136,15 +136,15 @@ int32_t TrainingSiteDescr::get_min_level(const TrainingAttribute at) const {
  */
 int32_t TrainingSiteDescr::get_max_level(const TrainingAttribute at) const {
 	switch (at) {
-	case atrHP:
-		return max_hp_;
-	case atrAttack:
+	case TrainingAttribute::kHealth:
+		return max_health_;
+	case TrainingAttribute::kAttack:
 		return max_attack_;
-	case atrDefense:
+	case TrainingAttribute::kDefense:
 		return max_defense_;
-	case atrEvade:
+	case TrainingAttribute::kEvade:
 		return max_evade_;
-	case atrTotal:
+	case TrainingAttribute::kTotal:
 		throw wexception("Unknown attribute value!");
 	}
 	NEVER_HERE();
@@ -201,14 +201,14 @@ result_         (Failed)
 	training_failure_count_.clear();
 	max_stall_val_ = training_state_multiplier_ * d.get_max_stall();
 
-	if (d.get_train_hp())
-		init_kick_state(atrHP, d);
+	if (d.get_train_health())
+		init_kick_state(TrainingAttribute::kHealth, d);
 	if (d.get_train_attack())
-		init_kick_state(atrAttack, d);
+		init_kick_state(TrainingAttribute::kAttack, d);
 	if (d.get_train_defense())
-		init_kick_state(atrDefense, d);
+		init_kick_state(TrainingAttribute::kDefense, d);
 	if (d.get_train_evade())
-		init_kick_state(atrEvade, d);
+		init_kick_state(TrainingAttribute::kEvade, d);
 }
 void
 TrainingSite::init_kick_state(const TrainingAttribute & art, const TrainingSiteDescr & d)
@@ -322,27 +322,27 @@ void TrainingSite::update_soldier_request() {
 			if (descr().get_train_attack())
 				r.add
 					(RequireAttribute
-					 	(atrAttack,
-					 	 descr().get_min_level(atrAttack),
-					 	 descr().get_max_level(atrAttack)));
+						(TrainingAttribute::kAttack,
+						 descr().get_min_level(TrainingAttribute::kAttack),
+						 descr().get_max_level(TrainingAttribute::kAttack)));
 			if (descr().get_train_defense())
 				r.add
 					(RequireAttribute
-					 	(atrDefense,
-					 	 descr().get_min_level(atrDefense),
-					 	 descr().get_max_level(atrDefense)));
+						(TrainingAttribute::kDefense,
+						 descr().get_min_level(TrainingAttribute::kDefense),
+						 descr().get_max_level(TrainingAttribute::kDefense)));
 			if (descr().get_train_evade())
 				r.add
 					(RequireAttribute
-					 	(atrEvade,
-					 	 descr().get_min_level(atrEvade),
-					 	 descr().get_max_level(atrEvade)));
-			if (descr().get_train_hp())
+						(TrainingAttribute::kEvade,
+						 descr().get_min_level(TrainingAttribute::kEvade),
+						 descr().get_max_level(TrainingAttribute::kEvade)));
+			if (descr().get_train_health())
 				r.add
 					(RequireAttribute
-					 	(atrHP,
-					 	 descr().get_min_level(atrHP),
-					 	 descr().get_max_level(atrHP)));
+						(TrainingAttribute::kHealth,
+						 descr().get_min_level(TrainingAttribute::kHealth),
+						 descr().get_max_level(TrainingAttribute::kHealth)));
 
 			soldier_request_->set_requirements(r);
 		}
@@ -506,7 +506,7 @@ void TrainingSite::drop_stalled_soldiers(Game &)
 
 	for (uint32_t i = 0; i < soldiers_.size(); ++i)
 	{
-		uint32_t this_soldier_level = soldiers_[i]->get_level(atrTotal);
+		uint32_t this_soldier_level = soldiers_[i]->get_level(TrainingAttribute::kTotal);
 
 		bool this_soldier_is_safe = false;
 		if (this_soldier_level <= highest_soldier_level_seen)
@@ -775,19 +775,19 @@ void TrainingSite::calc_upgrades() {
 
 	//  TODO(unknown): This is currently hardcoded for "soldier" but it should allow any
 	//  soldier type name.
-	if (descr().get_train_hp())
-		add_upgrade(atrHP, "upgrade_soldier_hp_");
+	if (descr().get_train_health())
+		add_upgrade(TrainingAttribute::kHealth, "upgrade_soldier_health_");
 	if (descr().get_train_attack())
-		add_upgrade(atrAttack, "upgrade_soldier_attack_");
+		add_upgrade(TrainingAttribute::kAttack, "upgrade_soldier_attack_");
 	if (descr().get_train_defense())
-		add_upgrade(atrDefense, "upgrade_soldier_defense_");
+		add_upgrade(TrainingAttribute::kDefense, "upgrade_soldier_defense_");
 	if (descr().get_train_evade())
-		add_upgrade(atrEvade, "upgrade_soldier_evade_");
+		add_upgrade(TrainingAttribute::kEvade, "upgrade_soldier_evade_");
 }
 
 
 void
-TrainingSite::training_attempted(uint32_t type, uint32_t level)
+TrainingSite::training_attempted(TrainingAttribute type, uint32_t level)
 	{
 	        TypeAndLevel key(type, level);
 		if (training_failure_count_.find(key) == training_failure_count_.end())
@@ -801,7 +801,7 @@ TrainingSite::training_attempted(uint32_t type, uint32_t level)
  */
 
 void
-TrainingSite::training_successful(uint32_t type, uint32_t level)
+TrainingSite::training_successful(TrainingAttribute type, uint32_t level)
 {
 	TypeAndLevel key(type, level);
 	// Here I assume that key exists: training has been attempted before it can succeed.
