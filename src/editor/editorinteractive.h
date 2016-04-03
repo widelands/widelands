@@ -136,6 +136,8 @@ public:
 	// Access to the tools.
 	Tools* tools();
 
+	UI::UniqueWindow::Registry window_help;
+
 private:
 	friend struct EditorToolMenu;
 

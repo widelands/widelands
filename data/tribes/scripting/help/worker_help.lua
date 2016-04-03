@@ -12,8 +12,7 @@ include "tribes/scripting/help/format_help.lua"
 
 function worker_help_producers_string(tribe, worker_description)
    local result = ""
-   for i, building_name in ipairs(tribe.buildings) do
-      local building = wl.Game():get_building_description(building_name)
+   for i, building in ipairs(tribe.buildings) do
       if (building.type_name == "productionsite") then
          local recruits_this = false;
          for j, output in ipairs(building.output_worker_types) do
@@ -165,9 +164,13 @@ end
 
 
 return {
-   func = function(tribename, worker_description)
+   func = function(tribename, workername)
       set_textdomain("tribes_encyclopedia")
       local tribe = wl.Game():get_tribe_description(tribename)
-      return worker_help_string(tribe, worker_description)
+      local worker_description = wl.Game():get_worker_description(workername)
+      return {
+         title = worker_description.descname,
+         text = worker_help_string(tribe, worker_description)
+      }
    end
 }

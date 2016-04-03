@@ -346,7 +346,6 @@ FullscreenMenuCampaignMapSelect::FullscreenMenuCampaignMapSelect(bool is_tutoria
 	table_.double_clicked.connect
 		(boost::bind(&FullscreenMenuCampaignMapSelect::clicked_ok, boost::ref(*this)));
 
-	/** TRANSLATORS: Campaign scenario number table header */
 	std::string number_tooltip;
 	std::string name_tooltip;
 	if (is_tutorial_) {
@@ -356,6 +355,8 @@ FullscreenMenuCampaignMapSelect::FullscreenMenuCampaignMapSelect(bool is_tutoria
 		number_tooltip = _("The number of this scenario in the campaign");
 		name_tooltip = _("Scenario Name");
 	}
+
+	/** TRANSLATORS: Campaign scenario number table header */
 	table_.add_column(35, _("#"), number_tooltip, UI::Align::kLeft);
 	table_.add_column(table_.get_w() - 35, name_tooltip, name_tooltip, UI::Align::kLeft);
 	table_.set_sort_column(0);
@@ -413,7 +414,8 @@ void FullscreenMenuCampaignMapSelect::entry_selected() {
 		map.set_filename(campmapfile);
 		ml->preload_map(true);
 
-		MapAuthorData authors(map.get_author());
+		// Localizing this, because some author fields now have "edited by" text.
+		MapAuthorData authors(_(map.get_author()));
 
 		ta_author_.set_text(authors.get_names());
 		if (is_tutorial_) {

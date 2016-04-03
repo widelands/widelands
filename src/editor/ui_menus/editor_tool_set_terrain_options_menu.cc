@@ -78,7 +78,7 @@ UI::Checkbox* create_terrain_checkbox(UI::Panel* parent,
 	offscreen_images->emplace_back(texture);
 
 	/** TRANSLATORS: %1% = terrain name, %2% = list of terrain types  */
-	const std::string tooltip = ((boost::format("%1%: %2%"))
+	const std::string tooltip = ((boost::format(_("%1%: %2%")))
 								  % terrain_descr.descname()
 								  % i18n::localize_list(tooltips, i18n::ConcatenateWith::AND)).str();
 

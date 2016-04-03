@@ -171,7 +171,7 @@ void PlayerDescriptionGroup::refresh()
 					} else {
 						const ComputerPlayer::Implementation* impl =
 								ComputerPlayer::get_implementation(player.ai);
-						title = impl->descname;
+						title = _(impl->descname);
 					}
 				}
 			} else { // PlayerSettings::stateHuman

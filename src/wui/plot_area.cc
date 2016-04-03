@@ -24,7 +24,6 @@
 #include <string>
 
 #include <boost/format.hpp>
-#include <boost/lexical_cast.hpp>
 
 #include "base/i18n.h"
 #include "base/wexception.h"
@@ -66,10 +65,13 @@ constexpr float kAxisLinesWidth = 2.0f;
 constexpr float kPlotLinesWidth = 3.f;
 const RGBColor kZeroLineColor(255, 255, 255);
 
-enum UNIT {
-	UNIT_MIN,
-	UNIT_HOUR,
-	UNIT_DAY,
+enum class Units {
+	kMinutesNarrow,
+	kHourNarrow,
+	kDayNarrow,
+	kMinutesGeneric,
+	kHourGeneric,
+	kDayGeneric
 };
 
 string ytick_text_style(const string& text, const RGBColor& clr) {
@@ -94,34 +96,70 @@ float scale_value
 	return yline_length / (static_cast<float>(highest_scale) / static_cast<float>(value));
 }
 
-UNIT get_suggested_unit(uint32_t game_time) {
+Units get_suggested_unit(uint32_t game_time, bool is_generic = false) {
 	// Find a nice unit for max_x
-	if (game_time > 4 * days) {
-		return UNIT_DAY;
-	} else if (game_time > 4 * hours) {
-		return UNIT_HOUR;
-	} else {
-		return UNIT_MIN;
+	if (is_generic) {
+		if (game_time > 4 * days) {
+			return Units::kDayGeneric;
+		} else if (game_time > 4 * hours) {
+			return Units::kHourGeneric;
+		} else {
+			return Units::kMinutesGeneric;
+		}
+	}
+	else {
+		if (game_time > 4 * days) {
+			return Units::kDayNarrow;
+		} else if (game_time > 4 * hours) {
+			return Units::kHourNarrow;
+		} else {
+			return Units::kMinutesNarrow;
+		}
 	}
 }
 
-std::string get_unit_name(UNIT unit) {
+std::string get_value_with_unit(Units unit, int value) {
 	switch (unit) {
-	/** TRANSLATOR: day(s). Used in statistics. */
-	case UNIT_DAY:  return _("%1% d");
-	/** TRANSLATOR: hour(s). Used in statistics. */
-	case UNIT_HOUR: return _("%1% h");
-	/** TRANSLATOR: minute(s). Used in statistics. */
-	case UNIT_MIN:  return _("%1% min");
+	case Units::kDayNarrow:
+		/** TRANSLATORS: day(s). Keep this as short as possible. Used in statistics. */
+		return (boost::format(npgettext("unit_narrow", "%1%d", "%1%d", value)) % value).str();
+	case Units::kHourNarrow:
+		/** TRANSLATORS: hour(s). Keep this as short as possible. Used in statistics. */
+		return (boost::format(npgettext("unit_narrow", "%1%h", "%1%h", value)) % value).str();
+	case Units::kMinutesNarrow:
+		/** TRANSLATORS: minute(s). Keep this as short as possible. Used in statistics. */
+		return (boost::format(npgettext("unit_narrow", "%1%m", "%1%m", value)) % value).str();
+	default: NEVER_HERE();
 	}
-	NEVER_HERE();
 }
 
-uint32_t ms_to_unit(UNIT unit, uint32_t ms) {
+std::string get_generic_unit_name(Units unit) {
 	switch (unit) {
-	case UNIT_DAY: return ms / days;
-	case UNIT_HOUR: return ms / hours;
-	case UNIT_MIN: return ms / minutes;
+	case Units::kDayGeneric:
+		/** TRANSLATORS: Generic unit label. Used in statistics. */
+		return pgettext("unit_generic", "days");
+	case Units::kHourGeneric:
+		/** TRANSLATORS: Generic unit label. Used in statistics. */
+		return pgettext("unit_generic", "hours");
+	case Units::kMinutesGeneric:
+		/** TRANSLATORS: Generic unit label. Used in statistics. */
+		return pgettext("unit_generic", "minutes");
+	default: NEVER_HERE();
+	}
+}
+
+
+uint32_t ms_to_unit(Units unit, uint32_t ms) {
+	switch (unit) {
+	case Units::kDayGeneric:
+	case Units::kDayNarrow:
+		return ms / days;
+	case Units::kHourGeneric:
+	case Units::kHourNarrow:
+		return ms / hours;
+	case Units::kMinutesGeneric:
+	case Units::kMinutesNarrow:
+		return ms / minutes;
 	}
 	NEVER_HERE();
 }
@@ -159,7 +197,7 @@ void draw_diagram
 {
 	uint32_t how_many_ticks, max_x;
 
-	UNIT unit = get_suggested_unit(time_ms);
+	Units unit = get_suggested_unit(time_ms, true);
 	max_x = ms_to_unit(unit, time_ms);
 	// Make sure that we always have a tick
 	max_x = std::max(max_x, 1u);
@@ -237,7 +275,7 @@ void draw_diagram
 		kAxisLineColor, kAxisLinesWidth);
 
 	//  print the used unit
-	const Image* xtick = UI::g_fh1->render(xtick_text_style((boost::format(get_unit_name(unit)) % "").str()));
+	const Image* xtick = UI::g_fh1->render(xtick_text_style(get_generic_unit_name(unit)));
 	dst.blit(Point(2, spacing + 2), xtick, BlendMode::UseAlpha, UI::Align::kCenterLeft);
 }
 
@@ -275,9 +313,8 @@ uint32_t WuiPlotArea::get_game_time() {
 std::vector<std::string> WuiPlotArea::get_labels() {
 	std::vector<std::string> labels;
 	for (int32_t i = 0; i < game_time_id_; i++) {
-		UNIT unit = get_suggested_unit(time_in_ms[i]);
-		uint32_t val = ms_to_unit(unit, time_in_ms[i]);
-		labels.push_back((boost::format(get_unit_name(unit)) % boost::lexical_cast<std::string>(val)).str());
+		Units unit = get_suggested_unit(time_in_ms[i], false);
+		labels.push_back(get_value_with_unit(unit, ms_to_unit(unit, time_in_ms[i])));
 	}
 	labels.push_back(_("game"));
 	return labels;

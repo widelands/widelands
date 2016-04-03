@@ -296,13 +296,13 @@ void FullscreenMenuInternetLobby::fill_client_list(const std::vector<InternetCli
 					continue;
 			}
 		}
+		// If a new player joins the lobby, play a sound.
+		if (clients->size() > prev_clientlist_len_ && !InternetGaming::ref().sound_off()) {
+			play_new_chat_member();
+		}
+		prev_clientlist_len_ = clients->size();
 	}
 
-	// If a new player joins the lobby, play a sound.
-	if (clients->size() > prev_clientlist_len_ && !InternetGaming::ref().sound_off()) {
-		play_new_chat_member();
-	}
-	prev_clientlist_len_ = clients->size();
 }
 
 
