@@ -396,8 +396,11 @@ void EditBox::draw(RenderTarget & odst)
 
 	const Image* entry_text_im = UI::g_fh1->render(as_editorfont(m_->text, m_->fontsize));
 
-	int linewidth = entry_text_im->width();
-	int lineheight = entry_text_im->height();
+	const int linewidth = entry_text_im->width();
+	const int lineheight = m_->text.empty() ?
+							  UI::g_fh1->render(as_editorfont(UI::g_fh1->fontset()->representative_character(),
+																		 m_->fontsize))->height() :
+							  entry_text_im->height();
 
 	Point point(kMargin, get_h() / 2);
 
