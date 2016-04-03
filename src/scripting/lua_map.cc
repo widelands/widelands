@@ -2810,7 +2810,7 @@ int LuaSoldierDescription::get_base_health(lua_State * L) {
 /* RST
 	.. attribute:: base_min_attack
 
-		(RO) The minimum random attack points that get added to a soldier' attack
+		(RO) The minimum random attack points that get added to a soldier's attack
 */
 int LuaSoldierDescription::get_base_min_attack(lua_State * L) {
 	lua_pushinteger(L, get()->get_base_min_attack());
@@ -2820,7 +2820,7 @@ int LuaSoldierDescription::get_base_min_attack(lua_State * L) {
 /* RST
 	.. attribute:: base_max_attack
 
-		((RO) The maximum random attack points that get added to a soldier' attack
+		(RO) The maximum random attack points that get added to a soldier's attack
 */
 int LuaSoldierDescription::get_base_max_attack(lua_State * L) {
 	lua_pushinteger(L, get()->get_base_max_attack());
