@@ -199,7 +199,7 @@ function worker_help_string(tribe, worker_description)
          result = result .. rt(p(
             listitem_bullet(
                (_"Starts at %d%%."):bformat(worker_description.base_defense)) ..
-            listitem_bullet(_"This solder cannot be trained in defense")))
+            listitem_bullet(_"This soldier cannot be trained in defense.")))
       end
 
       result = result .. rt(h3(_"Evade"))
