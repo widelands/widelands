@@ -114,8 +114,8 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
 	graphic_resolution_changed_subscriber_ = Notifications::subscribe<GraphicResolutionChanged>(
 	   [this](const GraphicResolutionChanged& message) {
 		   set_size(message.width, message.height);
-
-		   chat_overlay_->set_size(get_w() / 2, get_h() - 25);
+			// 34 is the button height of the bottom menu
+			chat_overlay_->set_size(get_w() / 2, get_h() - 25 - 34);
 		   chat_overlay_->recompute();
 		   adjust_toolbar_position();
 		});
