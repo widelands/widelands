@@ -171,6 +171,7 @@ protected:
 	UI::Box           toolbar_;
 
 private:
+	void resize_chat_overlay();
 	void roadb_add_overlay   ();
 	void roadb_remove_overlay();
 	void cmd_map_object(const std::vector<std::string> & args);
