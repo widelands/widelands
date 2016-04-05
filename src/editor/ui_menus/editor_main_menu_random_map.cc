@@ -37,6 +37,7 @@
 #include "logic/map.h"
 #include "logic/map_objects/world/world.h"
 #include "random/random.h"
+#include "ui_basic/messagebox.h"
 #include "ui_basic/progresswindow.h"
 
 using namespace Widelands;
@@ -423,6 +424,8 @@ void MainMenuNewRandomMap::normalize_landmass(ButtonId clicked_button) {
 }
 
 void MainMenuNewRandomMap::clicked_create_map() {
+	ok_button_.set_enabled(false);
+	cancel_button_.set_enabled(false);
 	EditorInteractive & eia =
 		dynamic_cast<EditorInteractive&>(*get_parent());
 	Widelands::EditorGameBase & egbase = eia.egbase();
@@ -460,6 +463,18 @@ void MainMenuNewRandomMap::clicked_create_map() {
 
 	map.recalc_whole_map(egbase.world());
 	eia.map_changed(EditorInteractive::MapWas::kReplaced);
+	UI::WLMessageBox mbox
+			(&eia,
+			 /** TRANSLATORS: Window title. This is shown after a random map has been created in the editor.*/
+			 _("Random Map"),
+			 /** TRANSLATORS: This is shown after a random map has been created in the editor. */
+			 /** TRANSLATORS: You don't need to be literal with your translation, */
+			 /** TRANSLATORS: as long as the user understands that he needs to check the player positions.*/
+			 _("The map has been generated. "
+				"Please double-check the player starting positions to make sure that your carriers won’t drown, "
+				"or be stuck on an island or on top of a mountain."),
+			 UI::WLMessageBox::MBoxType::kOk);
+	mbox.run<UI::Panel::Returncodes>();
 	die();
 }
 

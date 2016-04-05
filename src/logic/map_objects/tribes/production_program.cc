@@ -1049,7 +1049,6 @@ void ProductionProgram::ActProduce::execute
 	for (const auto& item_pair : produced_wares_) {
 		count += item_pair.second;
 		std::string ware_descname = tribe.get_ware_descr(item_pair.first)->descname();
-		// TODO(GunChleoc): would be nice with pngettext whenever it gets added to xgettext for Lua.
 		if (1 < item_pair.second || 1 < produced_wares_.size()) {
 			/** TRANSLATORS: This is an item in a list of wares, e.g. "Produced 2x Coal": */
 			/** TRANSLATORS:    %%1$i = "2" */
@@ -1145,7 +1144,6 @@ void ProductionProgram::ActRecruit::execute
 	for (const auto& item_pair : recruited_workers_) {
 		count += item_pair.second;
 		std::string worker_descname = tribe.get_worker_descr(item_pair.first)->descname();
-		// TODO(GunChleoc): would be nice with pngettext whenever it gets added to xgettext for Lua.
 		if (1 < item_pair.second || 1 < recruited_workers_.size()) {
 			/** TRANSLATORS: This is an item in a list of workers, e.g. "Recruited 2x Ox": */
 			/** TRANSLATORS:    %1$i = "2" */

@@ -606,7 +606,7 @@ int upcasted_map_object_descr_to_lua(lua_State* L, const MapObjectDescr* const d
 			case MapObjectType::CARRIER:
 				return CAST_TO_LUA(WorkerDescr, LuaWorkerDescription);
 			case MapObjectType::SOLDIER:
-				return CAST_TO_LUA(WorkerDescr, LuaWorkerDescription);
+				return CAST_TO_LUA(SoldierDescr, LuaSoldierDescription);
 			case MapObjectType::IMMOVABLE:
 				return CAST_TO_LUA(ImmovableDescr, LuaImmovableDescription);
 			default:
@@ -2717,19 +2717,176 @@ int LuaWorkerDescription::get_needed_experience(lua_State * L) {
 
 
 
+
+/* RST
+SoldierDescription
+-----------------
+
+.. class:: SoldierDescription
+
+	A static description of a tribe's soldier, so it can be used in help files
+	without having to access an actual instance of the worker on the map.
+	See also class WorkerDescription for more properties.
+*/
+const char LuaSoldierDescription::className[] = "SoldierDescription";
+const MethodType<LuaSoldierDescription> LuaSoldierDescription::Methods[] = {
+	{nullptr, nullptr},
+};
+const PropertyType<LuaSoldierDescription> LuaSoldierDescription::Properties[] = {
+	PROP_RO(LuaSoldierDescription, max_health_level),
+	PROP_RO(LuaSoldierDescription, max_attack_level),
+	PROP_RO(LuaSoldierDescription, max_defense_level),
+	PROP_RO(LuaSoldierDescription, max_evade_level),
+	PROP_RO(LuaSoldierDescription, base_health),
+	PROP_RO(LuaSoldierDescription, base_min_attack),
+	PROP_RO(LuaSoldierDescription, base_max_attack),
+	PROP_RO(LuaSoldierDescription, base_defense),
+	PROP_RO(LuaSoldierDescription, base_evade),
+	PROP_RO(LuaSoldierDescription, health_incr_per_level),
+	PROP_RO(LuaSoldierDescription, attack_incr_per_level),
+	PROP_RO(LuaSoldierDescription, defense_incr_per_level),
+	PROP_RO(LuaSoldierDescription, evade_incr_per_level),
+	{nullptr, nullptr, nullptr},
+};
+
+
 /*
  ==========================================================
- LUA METHODS
+ PROPERTIES
  ==========================================================
  */
 
 
+/* RST
+	.. attribute:: get_max_health_level
 
-/*
- ==========================================================
- C METHODS
- ==========================================================
- */
+		(RO) The maximum health level that the soldier can have.
+*/
+int LuaSoldierDescription::get_max_health_level(lua_State * L) {
+	lua_pushinteger(L, get()->get_max_health_level());
+	return 1;
+}
+
+/* RST
+	.. attribute:: max_attack_level
+
+		(RO) The maximum attack level that the soldier can have.
+*/
+int LuaSoldierDescription::get_max_attack_level(lua_State * L) {
+	lua_pushinteger(L, get()->get_max_attack_level());
+	return 1;
+}
+
+/* RST
+	.. attribute:: max_defense_level
+
+		(RO) The maximum defense level that the soldier can have.
+*/
+int LuaSoldierDescription::get_max_defense_level(lua_State * L) {
+	lua_pushinteger(L, get()->get_max_defense_level());
+	return 1;
+}
+
+/* RST
+	.. attribute:: max_evade_level
+
+		(RO) The maximum evade level that the soldier can have.
+*/
+int LuaSoldierDescription::get_max_evade_level(lua_State * L) {
+	lua_pushinteger(L, get()->get_max_evade_level());
+	return 1;
+}
+
+/* RST
+	.. attribute:: get_base_health
+
+		(RO) The health points that the soldier starts with
+*/
+int LuaSoldierDescription::get_base_health(lua_State * L) {
+	lua_pushinteger(L, get()->get_base_health());
+	return 1;
+}
+
+
+/* RST
+	.. attribute:: base_min_attack
+
+		(RO) The minimum random attack points that get added to a soldier's attack
+*/
+int LuaSoldierDescription::get_base_min_attack(lua_State * L) {
+	lua_pushinteger(L, get()->get_base_min_attack());
+	return 1;
+}
+
+/* RST
+	.. attribute:: base_max_attack
+
+		(RO) The maximum random attack points that get added to a soldier's attack
+*/
+int LuaSoldierDescription::get_base_max_attack(lua_State * L) {
+	lua_pushinteger(L, get()->get_base_max_attack());
+	return 1;
+}
+
+/* RST
+	.. attribute:: base_defense
+
+		(RO) The defense % that the soldier starts with
+*/
+int LuaSoldierDescription::get_base_defense(lua_State * L) {
+	lua_pushinteger(L, get()->get_base_defense());
+	return 1;
+}
+
+/* RST
+	.. attribute:: base_evade
+
+		(RO) The evade % that the soldier starts with
+*/
+int LuaSoldierDescription::get_base_evade(lua_State * L) {
+	lua_pushinteger(L, get()->get_base_evade());
+	return 1;
+}
+
+/* RST
+	.. attribute:: get_health_incr_per_level
+
+		(RO) The health points that the soldier will gain with each level.
+*/
+int LuaSoldierDescription::get_health_incr_per_level(lua_State * L) {
+	lua_pushinteger(L, get()->get_health_incr_per_level());
+	return 1;
+}
+
+/* RST
+	.. attribute:: attack_incr_per_level
+
+		(RO) The attack points that the soldier will gain with each level.
+*/
+int LuaSoldierDescription::get_attack_incr_per_level(lua_State * L) {
+	lua_pushinteger(L, get()->get_attack_incr_per_level());
+	return 1;
+}
+
+/* RST
+	.. attribute:: defense_incr_per_level
+
+		(RO) The defense % that the soldier will gain with each level.
+*/
+int LuaSoldierDescription::get_defense_incr_per_level(lua_State * L) {
+	lua_pushinteger(L, get()->get_defense_incr_per_level());
+	return 1;
+}
+
+/* RST
+	.. attribute:: evade_incr_per_level
+
+		(RO) The evade % that the soldier will gain with each level.
+*/
+int LuaSoldierDescription::get_evade_incr_per_level(lua_State * L) {
+	lua_pushinteger(L, get()->get_evade_incr_per_level());
+	return 1;
+}
 
 /* RST
 ResourceDescription
@@ -5543,6 +5700,11 @@ void luaopen_wlmap(lua_State * L) {
 
 	register_class<LuaWorkerDescription>(L, "map", true);
 	add_parent<LuaWorkerDescription, LuaMapObjectDescription>(L);
+	lua_pop(L, 1); // Pop the meta table
+
+	register_class<LuaSoldierDescription>(L, "map", true);
+	add_parent<LuaSoldierDescription, LuaWorkerDescription>(L);
+	add_parent<LuaSoldierDescription, LuaMapObjectDescription>(L);
 	lua_pop(L, 1); // Pop the meta table
 
 	register_class<LuaResourceDescription>(L, "map");

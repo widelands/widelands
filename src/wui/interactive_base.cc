@@ -83,7 +83,7 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
    : MapView(nullptr, 0, 0, g_gr->get_xres(), g_gr->get_yres(), *this),
      // Initialize chatoveraly before the toolbar so it is below
      show_workarea_preview_(global_s.get_bool("workareapreview", true)),
-     chat_overlay_(new ChatOverlay(this, 10, 25, get_w() / 2, get_h() - 25)),
+	  chat_overlay_(new ChatOverlay(this, 10, 25, get_w() / 2, get_h() - 25)),
      toolbar_(this, 0, 0, UI::Box::Horizontal),
      m(new InteractiveBaseInternals(new QuickNavigation(the_egbase, get_w(), get_h()))),
 	  field_overlay_manager_(new FieldOverlayManager()),
@@ -110,12 +110,12 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
 						  g_gr->images().get("images/wui/overlays/workarea2.png"),
 						  g_gr->images().get("images/wui/overlays/workarea1.png")} {
 
+	resize_chat_overlay();
+
 	graphic_resolution_changed_subscriber_ = Notifications::subscribe<GraphicResolutionChanged>(
 	   [this](const GraphicResolutionChanged& message) {
 		   set_size(message.width, message.height);
-
-		   chat_overlay_->set_size(get_w() / 2, get_h() - 25);
-		   chat_overlay_->recompute();
+			resize_chat_overlay();
 		   adjust_toolbar_position();
 		});
 
@@ -724,6 +724,13 @@ void InteractiveBase::log_message(const std::string& message) const
 	Notifications::publish(lm);
 }
 
+
+// Repositions the chat overlay
+void InteractiveBase::resize_chat_overlay() {
+	// 34 is the button height of the bottom menu
+	chat_overlay_->set_size(get_w() / 2, get_h() - 25 - 34);
+	chat_overlay_->recompute();
+}
 
 
 /*

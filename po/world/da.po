@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-03-02 08:54+0000\n"
-"PO-Revision-Date: 2016-03-02 08:56+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2016-04-02 18:37+0000\n"
+"PO-Revision-Date: 2016-04-03 05:57+0000\n"
+"Last-Translator: Ole Laursen <ole.laursen@gmail.com>\n"
 "Language-Team: Danish (http://www.transifex.com/widelands/widelands/language/da/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -246,7 +246,7 @@ msgstr "Elletræ (gammelt træ)"
 
 #: ../../data/world/immovables/trees/alder/init.lua:90
 msgid "Alder"
-msgstr ""
+msgstr "El"
 
 #: ../../data/world/immovables/trees/aspen/init.lua:12
 msgid "Aspen (Sapling)"
@@ -266,7 +266,7 @@ msgstr "Asp (gammelt træ)"
 
 #: ../../data/world/immovables/trees/aspen/init.lua:85
 msgid "Aspen"
-msgstr ""
+msgstr "Asp"
 
 #: ../../data/world/immovables/trees/beech/init.lua:12
 msgid "Beech (Sapling)"
@@ -286,7 +286,7 @@ msgstr "Bøg (gammelt træ)"
 
 #: ../../data/world/immovables/trees/beech/init.lua:82
 msgid "Beech"
-msgstr ""
+msgstr "Bøg"
 
 #: ../../data/world/immovables/trees/birch/init.lua:12
 msgid "Birch (Sapling)"
@@ -306,32 +306,32 @@ msgstr "Birk (gammelt træ)"
 
 #: ../../data/world/immovables/trees/birch/init.lua:85
 msgid "Birch"
-msgstr ""
+msgstr "Birk"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/cirrus/init.lua:13
 msgid "Cirrus Tree (Sapling)"
-msgstr "Slyngende træ (ungt træ)"
+msgstr "Krøltræ (ungt træ)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/cirrus/init.lua:37
 msgid "Cirrus Tree (Pole)"
-msgstr "Slyngende træ (pæl)"
+msgstr "Krøltræ (pæl)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/cirrus/init.lua:61
 msgid "Cirrus Tree (Mature)"
-msgstr "Slyngende træ (voksent træ)"
+msgstr "Krøltræ (voksent træ)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/cirrus/init.lua:85
 msgid "Cirrus Tree (Old)"
-msgstr "Slyngende træ (gammelt træ)"
+msgstr "Krøltræ (gammelt træ)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/cirrus/init.lua:87
 msgid "Cirrus Tree"
-msgstr ""
+msgstr "Krøltræ"
 
 #: ../../data/world/immovables/trees/deadtree1/init.lua:5
 #: ../../data/world/immovables/trees/deadtree2/init.lua:5
@@ -364,7 +364,7 @@ msgstr "Lærk (gammelt træ)"
 
 #: ../../data/world/immovables/trees/larch/init.lua:82
 msgid "Larch"
-msgstr ""
+msgstr "Lærk"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/liana/init.lua:13
@@ -389,7 +389,7 @@ msgstr "Lian (gammelt træ)"
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/liana/init.lua:90
 msgid "Liana Tree"
-msgstr ""
+msgstr "Liantræ"
 
 #: ../../data/world/immovables/trees/maple/init.lua:12
 msgid "Maple (Sapling)"
@@ -409,7 +409,7 @@ msgstr "Ahorn (gammelt træ)"
 
 #: ../../data/world/immovables/trees/maple/init.lua:82
 msgid "Maple"
-msgstr ""
+msgstr "Ahorn"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/mushroom_dark/init.lua:13
@@ -434,7 +434,7 @@ msgstr "Mørk svamp (gammelt træ)"
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/mushroom_dark/init.lua:87
 msgid "Dark Mushroom Tree"
-msgstr ""
+msgstr "Mørkt svampetræ"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/mushroom_green/init.lua:13
@@ -459,7 +459,7 @@ msgstr "Grøn svamp (gammelt træ)"
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/mushroom_green/init.lua:87
 msgid "Green Mushroom Tree"
-msgstr ""
+msgstr "Grønt svampetræ"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/mushroom_red/init.lua:13
@@ -484,7 +484,7 @@ msgstr "Rød svamp (gammelt træ)"
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/mushroom_red/init.lua:90
 msgid "Red Mushroom Tree"
-msgstr ""
+msgstr "Rødt svampetræ"
 
 #: ../../data/world/immovables/trees/oak/init.lua:12
 msgid "Oak (Sapling)"
@@ -504,7 +504,7 @@ msgstr "Eg (gammelt træ)"
 
 #: ../../data/world/immovables/trees/oak/init.lua:82
 msgid "Oak"
-msgstr ""
+msgstr "Eg"
 
 #: ../../data/world/immovables/trees/palm_borassus/init.lua:12
 msgid "Borassus Palm (Sapling)"
@@ -524,7 +524,7 @@ msgstr "Borassuspalme (gammel palme)"
 
 #: ../../data/world/immovables/trees/palm_borassus/init.lua:82
 msgid "Borassus Palm"
-msgstr ""
+msgstr "Borassuspalme"
 
 #: ../../data/world/immovables/trees/palm_coconut/init.lua:12
 msgid "Coconut Palm (Sapling)"
@@ -544,7 +544,7 @@ msgstr "Kokospalme (gammel palme)"
 
 #: ../../data/world/immovables/trees/palm_coconut/init.lua:82
 msgid "Coconut Palm"
-msgstr ""
+msgstr "Kokospalme"
 
 #: ../../data/world/immovables/trees/palm_date/init.lua:12
 msgid "Date Palm (Sapling)"
@@ -564,7 +564,7 @@ msgstr "Daddelpalme (gammel palme)"
 
 #: ../../data/world/immovables/trees/palm_date/init.lua:85
 msgid "Date Palm"
-msgstr ""
+msgstr "Daddelpalme"
 
 #: ../../data/world/immovables/trees/palm_oil/init.lua:12
 msgid "Oil Palm (Sapling)"
@@ -584,7 +584,7 @@ msgstr "Oliepalme (gammel palme)"
 
 #: ../../data/world/immovables/trees/palm_oil/init.lua:86
 msgid "Oil Palm"
-msgstr ""
+msgstr "Oliepalme"
 
 #: ../../data/world/immovables/trees/palm_roystonea/init.lua:12
 msgid "Roystonea regia Palm (Sapling)"
@@ -604,7 +604,7 @@ msgstr "Roystonea regia-palme (gammel palme)"
 
 #: ../../data/world/immovables/trees/palm_roystonea/init.lua:82
 msgid "Roystonea regia Palm"
-msgstr ""
+msgstr "Roystonea regia-palme"
 
 #: ../../data/world/immovables/trees/rowan/init.lua:12
 msgid "Rowan (Sapling)"
@@ -624,7 +624,7 @@ msgstr "Rowan (gammel træ)"
 
 #: ../../data/world/immovables/trees/rowan/init.lua:85
 msgid "Rowan"
-msgstr ""
+msgstr "Rowan"
 
 #: ../../data/world/immovables/trees/spruce/init.lua:12
 msgid "Spruce (Sapling)"
@@ -644,7 +644,7 @@ msgstr "Gran (gammelt træ)"
 
 #: ../../data/world/immovables/trees/spruce/init.lua:82
 msgid "Spruce"
-msgstr ""
+msgstr "Gran"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/twine/init.lua:13
@@ -669,7 +669,7 @@ msgstr "Twine (gammelt træ)"
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/twine/init.lua:87
 msgid "Twine Tree"
-msgstr ""
+msgstr "Twine"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/umbrella_green/init.lua:13
@@ -694,7 +694,7 @@ msgstr "Grøn paraply (gammelt træ)"
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/umbrella_green/init.lua:87
 msgid "Green Umbrella Tree"
-msgstr ""
+msgstr "Grøn paraply"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/umbrella_red/init.lua:13
@@ -719,7 +719,7 @@ msgstr "Rød paraply (gammelt træ)"
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/umbrella_red/init.lua:90
 msgid "Red Umbrella Tree"
-msgstr ""
+msgstr "Rød paraply"
 
 #: ../../data/world/init.lua:11
 msgid "Miscellaneous"
@@ -811,7 +811,7 @@ msgstr "Ørken"
 
 #: ../../data/world/terrains/init.lua:33
 msgid "Meadow 1"
-msgstr ""
+msgstr "Eng 1"
 
 #. TRANSLATORS: This is an entry in a terrain tooltip. Try to use 1 word if
 #. possible.
@@ -844,15 +844,15 @@ msgstr "kan lide træer"
 
 #: ../../data/world/terrains/init.lua:86
 msgid "Meadow 2"
-msgstr ""
+msgstr "Eng 2"
 
 #: ../../data/world/terrains/init.lua:107
 msgid "Meadow 3"
-msgstr ""
+msgstr "Eng 3"
 
 #: ../../data/world/terrains/init.lua:127
 msgid "Meadow 4"
-msgstr ""
+msgstr "Eng 4"
 
 #: ../../data/world/terrains/init.lua:147
 #: ../../data/world/terrains/init.lua:1002
@@ -873,42 +873,42 @@ msgstr "Bjergeng"
 #: ../../data/world/terrains/init.lua:800
 #: ../../data/world/terrains/init.lua:1082
 msgid "Mountain 1"
-msgstr ""
+msgstr "Bjerg 1"
 
 #: ../../data/world/terrains/init.lua:211
 #: ../../data/world/terrains/init.lua:535
 #: ../../data/world/terrains/init.lua:816
 #: ../../data/world/terrains/init.lua:1098
 msgid "Mountain 2"
-msgstr ""
+msgstr "Bjerg 2"
 
 #: ../../data/world/terrains/init.lua:227
 #: ../../data/world/terrains/init.lua:551
 #: ../../data/world/terrains/init.lua:832
 #: ../../data/world/terrains/init.lua:1114
 msgid "Mountain 3"
-msgstr ""
+msgstr "Bjerg 3"
 
 #: ../../data/world/terrains/init.lua:243
 #: ../../data/world/terrains/init.lua:567
 #: ../../data/world/terrains/init.lua:848
 #: ../../data/world/terrains/init.lua:1130
 msgid "Mountain 4"
-msgstr ""
+msgstr "Bjerg 4"
 
 #: ../../data/world/terrains/init.lua:259
 #: ../../data/world/terrains/init.lua:582
 #: ../../data/world/terrains/init.lua:863
 #: ../../data/world/terrains/init.lua:1145
 msgid "Forested Mountain 1"
-msgstr ""
+msgstr "Skovklædt bjerg 1"
 
 #: ../../data/world/terrains/init.lua:279
 #: ../../data/world/terrains/init.lua:601
 #: ../../data/world/terrains/init.lua:882
 #: ../../data/world/terrains/init.lua:1164
 msgid "Forested Mountain 2"
-msgstr ""
+msgstr "Skovklædt bjerg 2"
 
 #: ../../data/world/terrains/init.lua:299
 msgid "Swamp"
@@ -932,27 +932,27 @@ msgstr "Lava"
 
 #: ../../data/world/terrains/init.lua:383
 msgid "Ashes 1"
-msgstr ""
+msgstr "Aske 1"
 
 #: ../../data/world/terrains/init.lua:403
 msgid "Ashes 2"
-msgstr ""
+msgstr "Aske 2"
 
 #: ../../data/world/terrains/init.lua:423
 msgid "Hard Ground 1"
-msgstr ""
+msgstr "Hård jord 1"
 
 #: ../../data/world/terrains/init.lua:443
 msgid "Hard Ground 2"
-msgstr ""
+msgstr "Hård jord 2"
 
 #: ../../data/world/terrains/init.lua:463
 msgid "Hard Ground 3"
-msgstr ""
+msgstr "Hård jord 3"
 
 #: ../../data/world/terrains/init.lua:483
 msgid "Hard Ground 4"
-msgstr ""
+msgstr "Hård jord 4"
 
 #: ../../data/world/terrains/init.lua:503
 msgid "Igneous Rocks"
@@ -960,23 +960,23 @@ msgstr "Vulkanske bjergarter"
 
 #: ../../data/world/terrains/init.lua:636
 msgid "Lava Rocks 1"
-msgstr ""
+msgstr "Lavasten 1"
 
 #: ../../data/world/terrains/init.lua:653
 msgid "Lava Rocks 2"
-msgstr ""
+msgstr "Lavasten 2"
 
 #: ../../data/world/terrains/init.lua:692
 msgid "Tundra 1"
-msgstr ""
+msgstr "Tundra 1"
 
 #: ../../data/world/terrains/init.lua:712
 msgid "Tundra 2"
-msgstr ""
+msgstr "Tundra 2"
 
 #: ../../data/world/terrains/init.lua:732
 msgid "Tundra 3"
-msgstr ""
+msgstr "Tundra 3"
 
 #: ../../data/world/terrains/init.lua:752
 msgid "Tundra Taiga"
@@ -992,11 +992,11 @@ msgstr "Is"
 
 #: ../../data/world/terrains/init.lua:933
 msgid "Ice Floes 1"
-msgstr ""
+msgstr "Isflager 1"
 
 #: ../../data/world/terrains/init.lua:950
 msgid "Ice Floes 2"
-msgstr ""
+msgstr "Isflager 2"
 
 #: ../../data/world/terrains/init.lua:988
 msgid "Dry Soil"
@@ -1012,16 +1012,16 @@ msgstr "Høj bjergeng"
 
 #: ../../data/world/terrains/init.lua:1183
 msgid "Desert 1"
-msgstr ""
+msgstr "Ørken 1"
 
 #: ../../data/world/terrains/init.lua:1199
 msgid "Desert 2"
-msgstr ""
+msgstr "Ørken 2"
 
 #: ../../data/world/terrains/init.lua:1215
 msgid "Desert 3"
-msgstr ""
+msgstr "Ørken 3"
 
 #: ../../data/world/terrains/init.lua:1231
 msgid "Desert 4"
-msgstr ""
+msgstr "Ørken 4"

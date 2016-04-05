@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-03-11 07:02+0000\n"
-"PO-Revision-Date: 2016-03-12 17:09+0000\n"
+"POT-Creation-Date: 2016-04-02 11:15+0000\n"
+"PO-Revision-Date: 2016-04-02 11:47+0000\n"
 "Last-Translator: MiroslavR <miroslavr256@gmail.com>\n"
 "Language-Team: Slovak (http://www.transifex.com/widelands/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
@@ -2538,6 +2538,34 @@ msgid ""
 "This tribe is known from the oldest tales. The sons and daughters of "
 "Atlantis."
 msgstr "Tento kmeň je známy z najstarších povestí. Synovia a dcéry Atlantídy."
+
+#: ../../data/tribes/scripting/help/init.lua:48
+msgid "Tribal Encyclopedia"
+msgstr "Encyklopédia kmeňov"
+
+#: ../../data/tribes/scripting/help/init.lua:53
+msgid "General"
+msgstr "Všeobecné"
+
+#: ../../data/tribes/scripting/help/init.lua:58
+msgid "Introduction"
+msgstr "Úvod"
+
+#: ../../data/tribes/scripting/help/init.lua:64
+msgid "Controls"
+msgstr "Ovládanie"
+
+#: ../../data/tribes/scripting/help/init.lua:73
+msgid "Wares"
+msgstr "Výrobky"
+
+#: ../../data/tribes/scripting/help/init.lua:80
+msgid "Workers"
+msgstr "Pracovníci"
+
+#: ../../data/tribes/scripting/help/init.lua:87
+msgid "Buildings"
+msgstr "Budovy"
 
 #: ../../data/tribes/scripting/starting_conditions/atlanteans/fortified_village.lua:10
 #: ../../data/tribes/scripting/starting_conditions/barbarians/fortified_village.lua:10
