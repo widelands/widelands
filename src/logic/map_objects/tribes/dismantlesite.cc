@@ -107,45 +107,37 @@ void DismantleSite::init(EditorGameBase & egbase)
 {
 	PartiallyFinishedBuilding::init(egbase);
 
-	std::map<DescriptionIndex, uint8_t> wares;
-	count_returned_wares(this, wares);
-
-	std::map<DescriptionIndex, uint8_t>::const_iterator it = wares.begin();
-	wares_.resize(wares.size());
-
-	for (size_t i = 0; i < wares.size(); ++i, ++it) {
-		WaresQueue & wq =
-			*(wares_[i] = new WaresQueue(*this, it->first, it->second));
-
-		wq.set_filled(it->second);
-		work_steps_ += it->second;
+	for (const auto& ware: count_returned_wares(this)) {
+		WaresQueue* wq = new WaresQueue(*this, ware.first, ware.second);
+		wq->set_filled(ware.second);
+		wares_.push_back(wq);
+		work_steps_ += ware.second;
 	}
 }
 
 /*
 ===============
-Count wich wares you get back if you dismantle the given building
+Count which wares you get back if you dismantle the given building
 ===============
 */
-void DismantleSite::count_returned_wares
-	(Building* building,
-	 std::map<DescriptionIndex, uint8_t>   & res)
+const Buildcost DismantleSite::count_returned_wares(Building* building)
 {
+	Buildcost result;
 	for (DescriptionIndex former_idx : building->get_former_buildings()) {
-		const std::map<DescriptionIndex, uint8_t> * return_wares;
 		const BuildingDescr* former_descr = building->owner().tribe().get_building_descr(former_idx);
-		if (former_idx != building->get_former_buildings().front()) {
-			return_wares = & former_descr->returned_wares_enhanced();
-		} else {
-			return_wares = & former_descr->returned_wares();
-		}
-		assert(return_wares != nullptr);
+		const Buildcost& return_wares =
+				former_idx != building->get_former_buildings().front() ?
+									  former_descr->returned_wares_enhanced() :
+									  former_descr->returned_wares();
 
-		std::map<DescriptionIndex, uint8_t>::const_iterator i;
-		for (i = return_wares->begin(); i != return_wares->end(); ++i) {
-			res[i->first] += i->second;
+		for (const auto& ware : return_wares) {
+			// TODO(GunChleoc): Once we have trading, we might want to return all wares again.
+			if (building->owner().tribe().has_ware(ware.first)) {
+				result[ware.first] += ware.second;
+			}
 		}
 	}
+	return result;
 }
 
 
