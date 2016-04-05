@@ -19,8 +19,8 @@
 
 #include "map_io/map_player_names_and_tribes_packet.h"
 
-#include <boost/format.hpp>
 #include <boost/algorithm/string/trim.hpp>
+#include <boost/format.hpp>
 
 #include "logic/editor_game_base.h"
 #include "logic/game_data_error.h"
