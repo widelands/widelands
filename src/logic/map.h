@@ -30,6 +30,7 @@
 #include "base/i18n.h"
 #include "economy/itransport_cost_calculator.h"
 #include "logic/field.h"
+#include "logic/findimmovable.h"
 #include "logic/description_maintainer.h"
 #include "logic/map_revision.h"
 #include "logic/objective.h"
@@ -99,8 +100,6 @@ CheckStep
 
 Predicates used in path finding and find functions.
 */
-struct FindImmovable;
-const FindImmovable & find_immovable_always_true();
 
 struct FindBob {
 	//  Return true if this bob should be returned by find_bobs.
