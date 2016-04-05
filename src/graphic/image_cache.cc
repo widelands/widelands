@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2012 by the Widelands Development Team
+ * Copyright (C) 2006-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -56,10 +56,14 @@ void ImageCache::fill_with_texture_atlases(
 	}
 }
 
+/** Lazy accees to _images via hash.
+ *
+ * In case hash is not not found it will we fecthed via load_image().
+ */
 const Image* ImageCache::get(const std::string& hash) {
 	auto it = images_.find(hash);
 	if (it == images_.end()) {
-		return images_.insert(std::make_pair(hash, std::move(load_image(hash)))).first->second.get();
+		return images_.insert(std::make_pair(hash, load_image(hash))).first->second.get();
 	}
 	return it->second.get();
 }
