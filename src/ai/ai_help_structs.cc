@@ -155,9 +155,6 @@ bool FindNodeWater::accept(const Map& map, const FCoords& coord) const {
 			  TerrainDescription::Is::kWater);
 }
 
-// Open water is field where all 6 adjacent triangles are water
-FindNodeOpenWater::FindNodeOpenWater(const World& world) : world_(world) {}
-
 bool FindNodeOpenWater::accept(const Map& /* map */, const FCoords& coord) const {
 	return !(coord.field->nodecaps() & MOVECAPS_WALK) && (coord.field->nodecaps() & MOVECAPS_SWIM);
 }

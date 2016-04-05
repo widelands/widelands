@@ -362,7 +362,7 @@ bool SoundHandler::play_or_not
 	// Probability that this fx gets played; initially set according to priority
 
 	//  float division! not integer
-	probability = (priority % PRIO_ALLOW_MULTIPLE) / 128.0;
+	probability = (priority % PRIO_ALLOW_MULTIPLE) / 128.0f;
 
 	// TODO(unknown): what to do with fx that happen offscreen?
 	// TODO(unknown): reduce volume? reduce priority? other?
@@ -423,7 +423,7 @@ bool SoundHandler::play_or_not
 
 	// finally: the decision
 	// float division! not integer
-	return (rng_.rand() % 255) / 255.0 <= probability;
+	return (rng_.rand() % 255) / 255.0f <= probability;
 }
 
 /** Play (one of multiple) sound effect(s) with the given name. The effect(s)
@@ -506,7 +506,7 @@ void SoundHandler::play_fx
  * This just registers the song, actual loading takes place when
  * \ref Songset::get_song() is called, i.e. when the song is about to be
  * played. The song will automatically be removed from memory when it has
- * finished playing.\n
+ * finished playing.
 */
 void SoundHandler::register_song
 	(const std::string & dir, const std::string & basename)
@@ -688,7 +688,7 @@ void SoundHandler::set_fx_volume(int32_t volume) {
 }
 
 /** Callback to notify \ref SoundHandler that a song has finished playing.
- * Usually, another song from the same songset will be started.\n
+ * Usually, another song from the same songset will be started.
  * There is a special case for the intro screen's music: only one song will be
  * played. If the user has not clicked the mouse or pressed escape when the song
  * finishes, Widelands will automatically go on to the main menu.

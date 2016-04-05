@@ -197,10 +197,7 @@ void EditorToolChangeResourcesOptionsMenu::clicked_button(Button const n)
 	case Change_By_Increase: change_by += change_by < 63; break;
 	case Change_By_Decrease: change_by -= 1 < change_by;  break;
 	case    Set_To_Increase: set_to    += set_to    < 63; break;
-	case    Set_To_Decrease: set_to    -= 0 < set_to;     break;
-	default:
-		NEVER_HERE();
-		break;
+	case    Set_To_Decrease: set_to    -= 0 < set_to;
 	}
 	increase_tool_.set_change_by(change_by);
 	increase_tool_.decrease_tool().set_change_by(change_by);

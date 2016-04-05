@@ -142,8 +142,8 @@ void draw_minimap_int(Texture* texture,
 	const uint16_t surface_w = texture->width();
 
 	// size of the display frame
-	int32_t xsize = g_gr->get_xres() / TRIANGLE_WIDTH / 2;
-	int32_t ysize = g_gr->get_yres() / TRIANGLE_HEIGHT / 2;
+	int32_t xsize = g_gr->get_xres() / kTriangleWidth / 2;
+	int32_t ysize = g_gr->get_yres() / kTriangleHeight / 2;
 
 	const int32_t mapwidth = egbase.get_map().get_width();
 	const int32_t mapheight = map.get_height();
@@ -257,8 +257,8 @@ void write_minimap_image
 	if (viewpoint.y >= maxy) {
 		viewpoint.y -= maxy;
 	}
-	viewpoint.x /= TRIANGLE_WIDTH;
-	viewpoint.y /= TRIANGLE_HEIGHT;
+	viewpoint.x /= kTriangleWidth;
+	viewpoint.y /= kTriangleHeight;
 	viewpoint.x -= map_w / 2;
 	viewpoint.y -= map_h / 2;
 
