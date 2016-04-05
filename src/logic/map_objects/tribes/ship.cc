@@ -694,7 +694,10 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 		}
 	}
 
-	default: {
+	case ShipStates::kExpeditionWaiting:
+	case ShipStates::kExpeditionPortspaceFound:
+	case ShipStates::kSinkRequest:
+	case ShipStates::kSinkAnimation: {
 		// wait for input
 		start_task_idle(game, descr().main_animation(), 1500);
 		return;
@@ -957,26 +960,24 @@ void Ship::draw(const EditorGameBase& game, RenderTarget& dst, const Point& pos)
 			statistics_string = pgettext("ship_state", "Shipping");
 			break;
 		case (ShipStates::kExpeditionWaiting):
-			/** TRANSLATORS: This is a ship state */
+			/** TRANSLATORS: This is a ship state. An expedition is waiting for your commands. */
 			statistics_string = pgettext("ship_state", "Waiting");
 			break;
 		case (ShipStates::kExpeditionScouting):
-			/** TRANSLATORS: This is a ship state */
+			/** TRANSLATORS: This is a ship state. An expedition is scouting for port spaces. */
 			statistics_string = pgettext("ship_state", "Scouting");
 			break;
 		case (ShipStates::kExpeditionPortspaceFound):
-			/** TRANSLATORS: This is a ship state */
+			/** TRANSLATORS: This is a ship state. An expedition has found a port space. */
 			statistics_string = pgettext("ship_state", "Port Space Found");
 			break;
 		case (ShipStates::kExpeditionColonizing):
-			/** TRANSLATORS: This is a ship state */
-			statistics_string = pgettext("ship_state", "Expedition Landing");
+			/** TRANSLATORS: This is a ship state. An expedition is unloading wares/workers to build a port. */
+			statistics_string = pgettext("ship_state", "Founding a Colony");
 			break;
 		case (ShipStates::kSinkRequest):
 		case (ShipStates::kSinkAnimation):
 			break;
-		default:
-			NEVER_HERE();
 		}
 		statistics_string = (boost::format("<font color=%s>%s</font>")
 									% UI_FONT_CLR_OK.hex_value()
@@ -1006,8 +1007,8 @@ void Ship::log_general_info(const EditorGameBase& egbase) {
 				 % lastdock_.get(egbase)->get_positions(egbase)[0].y).str().c_str() :
 				"-");
 
-	molog("In state: %d (%s)\n",
-		ship_state_,
+	molog("In state: %u (%s)\n",
+		static_cast<unsigned int>(ship_state_),
 		(expedition_) ? "expedition": "transportation");
 
 	if (destination_.is_set() && get_position().field->get_immovable() == destination_.get(egbase)) {

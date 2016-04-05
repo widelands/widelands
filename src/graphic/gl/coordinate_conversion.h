@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2015 by the Widelands Development Team
+ * Copyright (C) 2006-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,13 +26,13 @@
 // Converts the pixel (x, y) in a texture to a gl coordinate in [0, 1].
 inline void pixel_to_gl_texture(const int width, const int height, float* x, float* y) {
 	*x = (*x / width);
-	*y = 1. - (*y / height);
+	*y = 1.0f - (*y / height);
 }
 
 // Converts the given pixel into an OpenGl point in the renderbuffer.
 inline void pixel_to_gl_renderbuffer(const int width, const int height, float* x, float* y) {
-	*x = (*x / width) * 2. - 1.;
-	*y = 1. - (*y / height) * 2.;
+	*x = (*x / width) * 2.0f - 1.0f;
+	*y = 1.0f - (*y / height) * 2.0f;
 }
 
 // Converts 'rect' given on a screen of 'width' x 'height' pixels into a rect

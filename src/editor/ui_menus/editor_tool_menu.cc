@@ -142,7 +142,6 @@ void EditorToolMenu::changed_to() {
 		break;
 	default:
 		NEVER_HERE();
-		break;
 	}
 
 	parent.select_tool(*current_tool_pointer, EditorTool::First);

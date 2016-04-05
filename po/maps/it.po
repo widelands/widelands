@@ -5,14 +5,14 @@
 # Cristiano, 2016
 # FIRST AUTHOR <gabriel.rota@gmail.com>, 2009
 # GunChleoc, 2014
-# Guybrush88 <erpizzo@alice.it>, 2015
+# Guybrush88 <erpizzo@alice.it>, 2015-2016
 # Luigi Lain <lainluigi86@tiscali.it>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-03-31 07:42+0000\n"
-"PO-Revision-Date: 2016-03-31 07:43+0000\n"
+"POT-Creation-Date: 2016-04-02 18:37+0000\n"
+"PO-Revision-Date: 2016-04-02 18:38+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
@@ -222,7 +222,7 @@ msgstr ""
 #: ../../data/maps/Archipelago_Sea.wmf/elemental:10
 msgid ""
 "Between Sweden and Finland lies the archipelago sea. This place of "
-"incredible beauty is not land, and it is not sea, and it is both. Within a "
+"incredible beauty is not land, and it is not sea, but it is both. Within a "
 "few hundred kilometers, there are no less than 50,000 islands and islets, "
 "most no more than a few acres across. The climate is quite mild for its "
 "latitude; farming thrives, berries are abundant, and fish plentiful. The "
@@ -274,7 +274,7 @@ msgstr "Isola Cometa"
 #: ../../data/maps/Comet_Island_v2.wmf/elemental:9
 #: ../../data/maps/Glacier_Lake_v2.wmf/elemental:9
 msgid "Nasenbaer – edited by king_of_nowhere"
-msgstr ""
+msgstr "Nasenbaer – modificato da king_of_nowhere"
 
 #: ../../data/maps/Comet_Island_v2.wmf/elemental:10
 msgid ""
@@ -290,7 +290,7 @@ msgid ""
 "Red player is close to the ores, but has little fertile terrain. Yellow "
 "player has plenty of good land, but must move far from his starting position"
 " to find ores. Blue player takes the middle ground – he has some fertile "
-"land and is not too far away from the resources"
+"land and is not too far away from the resources."
 msgstr ""
 
 #: ../../data/maps/Crater.wmf/elemental:8
@@ -324,7 +324,7 @@ msgstr "Quattro tribù lottano con il loro vicino più prossimo per essere i pri
 
 #: ../../data/maps/Dolomites_v2.wmf/elemental:8
 msgid "Dolomites"
-msgstr ""
+msgstr "Dolomiti"
 
 #: ../../data/maps/Dolomites_v2.wmf/elemental:10
 msgid ""
@@ -332,7 +332,7 @@ msgid ""
 "world heritage site for its pristine beauty. This map is an as-faithful-as-"
 "reasonable reconstruction of the area delimited by Cortina d’Ampezzo in the "
 "north-east and Canazei in the south-west. If you have to be pitted in a duel"
-" to the death with your enemies, it may as well be in a beautiful place."
+" to the death against your enemies, it may as well be in a beautiful place."
 msgstr ""
 
 #: ../../data/maps/Dolomites_v2.wmf/elemental:11
@@ -383,7 +383,7 @@ msgstr "Queste sono le bellissime terre finlandesi, terre di laghi, fiumi, antic
 #: ../../data/maps/Finnish_Lakes.wmf/elemental:11
 msgid ""
 "Yellow player has a much easier starting position than the other two; this "
-"map is suited for 1v2"
+"map is suited for 1v2."
 msgstr ""
 
 #: ../../data/maps/Firegames.wmf/elemental:8
@@ -426,7 +426,7 @@ msgstr ""
 
 #: ../../data/maps/Full_Moon_v2.wmf/elemental:8
 msgid "Full Moon"
-msgstr ""
+msgstr "Luna piena"
 
 #: ../../data/maps/Full_Moon_v2.wmf/elemental:10
 msgid ""
@@ -518,7 +518,7 @@ msgstr "L'ultimo bastione"
 
 #: ../../data/maps/Last_Bastion_v2.wmf/elemental:9
 msgid "Another Barbarian – edited by king_of_nowhere"
-msgstr ""
+msgstr "Un altro barbaro – modificato da king_of_nowhere"
 
 #: ../../data/maps/Last_Bastion_v2.wmf/elemental:10
 msgid ""
@@ -536,7 +536,7 @@ msgstr "Gli dei capricciosi non hanno ascoltato le nostre preghiere. Invece, la 
 
 #: ../../data/maps/Last_Survivors.wmf/elemental:8
 msgid "Last Survivors"
-msgstr ""
+msgstr "Ultimi sopravvissuti"
 
 #: ../../data/maps/Last_Survivors.wmf/elemental:10
 msgid ""
@@ -763,7 +763,7 @@ msgstr ""
 
 #: ../../data/maps/Three_Warriors.wmf/elemental:11
 msgid "Water can be found around the lakes."
-msgstr ""
+msgstr "L'acqua può essere trovata attorno ai laghi."
 
 #: ../../data/maps/Together_We're_Strong.wmf/elemental:8
 msgid "Together We’re Strong"
@@ -845,7 +845,7 @@ msgstr "In piena estate una serie di eruzioni vulcaniche hanno portato l'inverno
 
 #: ../../data/maps/Wideworld.wmf/elemental:8
 msgid "Wide World"
-msgstr ""
+msgstr "Mondo enorme"
 
 #: ../../data/maps/Wideworld.wmf/elemental:10
 msgid ""
@@ -871,5 +871,5 @@ msgid ""
 " three different ways to use this map: without the black player for a normal"
 " 4 players’ map, with a black AI to add a complication to the expansion of "
 "the other players, or you can play as a challenge with the black player "
-"against the other 4 (VERY difficult)"
+"against the other 4 (VERY difficult)."
 msgstr ""

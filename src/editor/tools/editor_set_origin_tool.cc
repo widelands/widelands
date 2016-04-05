@@ -32,8 +32,8 @@ int32_t EditorSetOriginTool::handle_click_impl(const Widelands::World&,
 	eia.map_changed(EditorInteractive::MapWas::kGloballyMutated);
 	eia.set_rel_viewpoint
 	(Point
-	 (-(center.node.x * 2 + (center.node.y & 1)) * (TRIANGLE_WIDTH / 2),
-	  - center.node.y *                             TRIANGLE_HEIGHT),
+	 (-(center.node.x * 2 + (center.node.y & 1)) * (kTriangleWidth / 2),
+	  - center.node.y *                             kTriangleHeight),
 	 true);
 	return 0;
 }
@@ -51,8 +51,8 @@ EditorSetOriginTool::handle_undo_impl(const Widelands::World&,
 	eia.map_changed(EditorInteractive::MapWas::kGloballyMutated);
 	eia.set_rel_viewpoint
 	(Point
-	 (- (nc.x * 2 + (nc.y & 1)) *(TRIANGLE_WIDTH / 2),
-	  - nc.y * TRIANGLE_HEIGHT),
+	 (- (nc.x * 2 + (nc.y & 1)) *(kTriangleWidth / 2),
+	  - nc.y * kTriangleHeight),
 	 true);
 	return 0;
 }

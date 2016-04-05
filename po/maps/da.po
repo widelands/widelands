@@ -3,13 +3,14 @@
 # 
 # Translators:
 # Joe Hansen <joedalton2@yahoo.dk>, 2009,2015-2016
+# Ole Laursen <ole.laursen@gmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-03-31 07:42+0000\n"
-"PO-Revision-Date: 2016-03-31 07:43+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2016-04-02 18:37+0000\n"
+"PO-Revision-Date: 2016-04-03 16:34+0000\n"
+"Last-Translator: Ole Laursen <ole.laursen@gmail.com>\n"
 "Language-Team: Danish (http://www.transifex.com/widelands/widelands/language/da/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -26,7 +27,7 @@ msgstr "Fra nemesis til genesis"
 msgid ""
 "After landing on a mysterious island close to Atlantis, the remaining "
 "Atlanteans struggle to make a new home for themselves."
-msgstr "Efter landgang på en mystisk ø tæt på Atlantis kæmper de tilbageværende atlanteanere for at skabe dem et nyt hjem."
+msgstr "Efter landgang på en mystisk ø tæt på Atlantis kæmper de tilbageværende atlantere for at skabe sig et nyt hjem."
 
 #: ../../data/campaigns/bar01.wmf/elemental:8
 #: ../../data/campaigns/campaigns.conf:67
@@ -111,11 +112,11 @@ msgstr "Jagten på ild"
 
 #: ../../data/campaigns/campaigns.conf:45
 msgid "Atlanteans"
-msgstr "Atlanteanerne"
+msgstr "Atlanterne"
 
 #: ../../data/campaigns/campaigns.conf:47
 msgid "Challenging. Introduces the Atlanteans"
-msgstr "Udfordrende. Introducerer atlanteanerne"
+msgstr "Udfordrende. Introducerer atlanterne"
 
 #: ../../data/campaigns/campaigns.conf:48
 msgid ""
@@ -124,7 +125,7 @@ msgid ""
 " the stuff of legends. Leading the remaining Atlanteans into a new future in"
 " a new part of the World, Jundlina became the most powerful human of her "
 "time, but at a high cost: her humanity and soul."
-msgstr "Da deres gud mistede troen på atlanteanerne og druknede deres ø, blev en kvindes kamp for retfærdighed og en ekstra chance for hendes folk en legende. Som anfører for de resterende atlanteanere førte hun dem til en ny fremtid i en ny del af verden, Jundlina blev den mest mægtige menneske i hendes tid, men til en høj pris: Hendes menneskelighed og sjæl. "
+msgstr "Da deres gud mistede troen på atlanterne og lod deres ø forsvinde i havet, blev en kvindes kamp for retfærdighed og en ekstra chance for hendes folk en legende. Som anfører for de resterende atlantere førte hun dem til en ny fremtid i en ny del af verden, Jundlina blev det mægtigste menneske i hendes tid, men til en høj pris: hendes menneskelighed og sjæl. "
 
 #: ../../data/campaigns/campaigns.conf:78
 #: ../../data/campaigns/emp01.wmf/elemental:7
@@ -218,7 +219,7 @@ msgstr ""
 #: ../../data/maps/Archipelago_Sea.wmf/elemental:10
 msgid ""
 "Between Sweden and Finland lies the archipelago sea. This place of "
-"incredible beauty is not land, and it is not sea, and it is both. Within a "
+"incredible beauty is not land, and it is not sea, but it is both. Within a "
 "few hundred kilometers, there are no less than 50,000 islands and islets, "
 "most no more than a few acres across. The climate is quite mild for its "
 "latitude; farming thrives, berries are abundant, and fish plentiful. The "
@@ -286,7 +287,7 @@ msgid ""
 "Red player is close to the ores, but has little fertile terrain. Yellow "
 "player has plenty of good land, but must move far from his starting position"
 " to find ores. Blue player takes the middle ground – he has some fertile "
-"land and is not too far away from the resources"
+"land and is not too far away from the resources."
 msgstr ""
 
 #: ../../data/maps/Crater.wmf/elemental:8
@@ -328,7 +329,7 @@ msgid ""
 "world heritage site for its pristine beauty. This map is an as-faithful-as-"
 "reasonable reconstruction of the area delimited by Cortina d’Ampezzo in the "
 "north-east and Canazei in the south-west. If you have to be pitted in a duel"
-" to the death with your enemies, it may as well be in a beautiful place."
+" to the death against your enemies, it may as well be in a beautiful place."
 msgstr ""
 
 #: ../../data/maps/Dolomites_v2.wmf/elemental:11
@@ -379,7 +380,7 @@ msgstr "Dette er det smukke finske landskab med søer, floder, gamle skove og bj
 #: ../../data/maps/Finnish_Lakes.wmf/elemental:11
 msgid ""
 "Yellow player has a much easier starting position than the other two; this "
-"map is suited for 1v2"
+"map is suited for 1v2."
 msgstr ""
 
 #: ../../data/maps/Firegames.wmf/elemental:8
@@ -550,7 +551,7 @@ msgid ""
 " where two or more groups try to reach the center island as fast as "
 "possible, to be the first erecting a castle on the top of the central "
 "mountain."
-msgstr "En speciel turnering i atlanteanerkulturen er den såkaldte »ø-hop«, hvor to eller flere grupper forsøger at nå den midterste ø så hurtigt som muligt, for at være den første som rejser en borg øverst på det centrale bjerg."
+msgstr "En speciel turnering i atlanterkulturen er det såkaldte \"ø-hop\", hvor to eller flere grupper forsøger at nå den midterste ø så hurtigt som muligt, for at være den første som rejser en borg øverst på bjerget i midten."
 
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/elemental:9
 msgid "Smugglers"
@@ -867,5 +868,5 @@ msgid ""
 " three different ways to use this map: without the black player for a normal"
 " 4 players’ map, with a black AI to add a complication to the expansion of "
 "the other players, or you can play as a challenge with the black player "
-"against the other 4 (VERY difficult)"
+"against the other 4 (VERY difficult)."
 msgstr ""
