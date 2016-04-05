@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-04-02 11:15+0000\n"
-"PO-Revision-Date: 2016-04-02 18:22+0000\n"
+"POT-Creation-Date: 2016-04-02 18:37+0000\n"
+"PO-Revision-Date: 2016-04-02 19:13+0000\n"
 "Last-Translator: Guybrush88 <erpizzo@alice.it>\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
@@ -1807,7 +1807,7 @@ msgstr "Scorciatoie da tastiera"
 
 #: ../../data/tribes/scripting/help/controls.lua:29
 msgid "Increase game speed"
-msgstr ""
+msgstr "Aumenta la velocità di gioco"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
@@ -1818,7 +1818,7 @@ msgstr ""
 
 #: ../../data/tribes/scripting/help/controls.lua:31
 msgid "Decrease game speed"
-msgstr ""
+msgstr "Diminuisci la velocità di gioco"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
@@ -1899,7 +1899,7 @@ msgstr ""
 #. TRANSLATORS: This is an access key combination.
 #: ../../data/tribes/scripting/help/controls.lua:55
 msgid "Go to the previous location"
-msgstr ""
+msgstr "Vai alla posizione precedente"
 
 #. TRANSLATORS: This is an access key combination.
 #: ../../data/tribes/scripting/help/controls.lua:57
@@ -1925,7 +1925,7 @@ msgstr "Ctrl + F10"
 
 #: ../../data/tribes/scripting/help/controls.lua:62
 msgid "Quit the game immediately"
-msgstr ""
+msgstr "Esci immediatamente dal gioco"
 
 #. TRANSLATORS: This is an access key combination.
 #: ../../data/tribes/scripting/help/controls.lua:64
