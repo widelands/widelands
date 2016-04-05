@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-04-02 11:15+0000\n"
-"PO-Revision-Date: 2016-04-02 18:12+0000\n"
+"POT-Creation-Date: 2016-04-02 18:37+0000\n"
+"PO-Revision-Date: 2016-04-02 19:15+0000\n"
 "Last-Translator: Guybrush88 <erpizzo@alice.it>\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
@@ -74,14 +74,14 @@ msgstr ""
 #: ../../data/scripting/editor/editor_controls.lua:28
 msgctxt "hotkey"
 msgid "Shift (Hold)"
-msgstr ""
+msgstr "Shift (Tieni premuto)"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
 #: ../../data/scripting/editor/editor_controls.lua:30
 msgctxt "hotkey"
 msgid "Alt (Hold)"
-msgstr ""
+msgstr "Alt (Tieni premuto)"
 
 #: ../../data/scripting/editor/editor_controls.lua:30
 msgid "Second alternative tool while pressed"
@@ -157,7 +157,7 @@ msgstr ""
 
 #: ../../data/scripting/editor/editor_introduction.lua:16
 msgid "The wiki also includes a short tutorial on how to build a map."
-msgstr ""
+msgstr "La wiki include anche un breve tutorial su come creare una mappa."
 
 #: ../../data/scripting/editor/terrain_help.lua:21
 msgid "Resources"

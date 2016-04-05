@@ -52,8 +52,8 @@ MiniMap::View::View
  */
 void MiniMap::View::set_view_pos(const int32_t x, const int32_t y)
 {
-	viewx_ = x / TRIANGLE_WIDTH;
-	viewy_ = y / TRIANGLE_HEIGHT;
+	viewx_ = x / kTriangleWidth;
+	viewy_ = y / kTriangleHeight;
 }
 
 
@@ -91,7 +91,7 @@ bool MiniMap::View::handle_mousepress(const uint8_t btn, int32_t x, int32_t y) {
 
 	ibase_.egbase().map().normalize_coords(c);
 
-	dynamic_cast<MiniMap&>(*get_parent()).warpview(c.x * TRIANGLE_WIDTH, c.y * TRIANGLE_HEIGHT);
+	dynamic_cast<MiniMap&>(*get_parent()).warpview(c.x * kTriangleWidth, c.y * kTriangleHeight);
 
 	return true;
 }

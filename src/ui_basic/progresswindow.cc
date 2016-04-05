@@ -126,21 +126,6 @@ void ProgressWindow::update(bool const repaint) {
 
 }
 
-/**
- * Display a loader step description
- * std:string style format broke format argument list
- * on windows visual studio.
- */
-// TODO(sirver): this should just take a string.
-void ProgressWindow::stepf(const char * format, ...) {
-	char buffer[1024];
-	va_list va;
-	va_start(va, format);
-	vsnprintf(buffer, sizeof(buffer), format, va);
-	va_end(va);
-	step (buffer);
-}
-
 /// Register additional visualization (tips/hints, animation, etc)
 void ProgressWindow::add_visualization(IProgressVisualization * const instance)
 {

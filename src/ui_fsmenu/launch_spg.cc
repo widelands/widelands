@@ -263,7 +263,7 @@ void FullscreenMenuLaunchSPG::win_condition_load() {
 			std::unique_ptr<Widelands::MapLoader> ml =
 					map.get_correct_loader(settings_->settings().mapfilename);
 			ml->preload_map(true);
-			for (const std::string map_tag : t->get_table("map_tags")->array_entries<std::string>()) {
+			for (const std::string& map_tag : t->get_table("map_tags")->array_entries<std::string>()) {
 				if (!map.has_tag(map_tag)) {
 					is_usable = false;
 					break;

@@ -9,9 +9,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-04-02 11:15+0000\n"
-"PO-Revision-Date: 2016-04-02 11:17+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2016-04-02 18:37+0000\n"
+"PO-Revision-Date: 2016-04-03 12:49+0000\n"
+"Last-Translator: Balázs Meskó <meskobalazs@gmail.com>\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -21,7 +21,7 @@ msgstr ""
 
 #: ../../data/txts/AUTHORS.lua:27
 msgid "Developers"
-msgstr ""
+msgstr "Fejlesztők"
 
 #: ../../data/txts/AUTHORS.lua:29
 msgid "Widelands Development Team"
@@ -89,7 +89,7 @@ msgstr "Ez a játék „jelen állapotában” kerül kiadásra, mindenféle gar
 
 #: ../../data/txts/README.lua:7
 msgid "Readme"
-msgstr ""
+msgstr "Útmutató"
 
 #: ../../data/txts/README.lua:12
 msgid "an open source strategy game"
@@ -103,7 +103,7 @@ msgstr "Ezen a weblapon nézhetsz utána a Widelands projektnek:"
 msgid ""
 "Widelands is licensed under the GNU General Public License (GPL). For more "
 "information, see the file ‘COPYING’."
-msgstr ""
+msgstr "A Widelands használatára és terjesztésére a GNU General Public License (GPL) vonatkozik. További tudnivalókért lásd a „COPYING” fájlt."
 
 #: ../../data/txts/README.lua:18
 msgid "Status"
@@ -116,23 +116,23 @@ msgid ""
 " in all areas. If you are interested in contributing – be it by making "
 "graphics, fixing bugs or adding new features, translating the game into your"
 " language or creating new maps – get in touch on our homepage."
-msgstr ""
+msgstr "A Widelands funkciói már közel teljesek, és jó szórakozást nyújt egyszemélyes\njátékban, még jobbat többjátékosban, másokkal. Azonban még mindig sok\nteendő van minden téren. Ha szívesen segítenél – legyen az grafika,\nhibajavítás, új funkciók hozzáadása, a játék saját nyelvedre való lefordítása,\nvagy új térképek készítése –, keress minket honlapunkon."
 
 #: ../../data/txts/README.lua:21
 msgid "Widelands Help"
-msgstr ""
+msgstr "Widelands súgó"
 
 #. TRANSLATORS: %1% is a key on the keyboard
 #: ../../data/txts/README.lua:23
 msgid ""
 "You can find help about gameplay or the editor by using the help button on "
 "the bottom menu, or by pressing %1%."
-msgstr ""
+msgstr "Segítséget a játékmenetről vagy a szerkesztőről, az alsó menün található súgó gombbal kaphatsz, vagy az %1% megnyomásával."
 
 #. TRANSLATORS: This is a key on the keyboard
 #: ../../data/txts/README.lua:25
 msgid "F1"
-msgstr ""
+msgstr "F1"
 
 #: ../../data/txts/README.lua:28
 msgid "Reporting Bugs"
@@ -148,43 +148,43 @@ msgstr "Kérjük, adj meg elegendő háttérinformációt:"
 
 #: ../../data/txts/README.lua:33
 msgid "Detailed steps on how to trigger the bug, if possible."
-msgstr ""
+msgstr "Részletes lépések, hogy hogyan reprodukálható a hiba, ha az lehetséges."
 
 #: ../../data/txts/README.lua:34
 msgid ""
 "What you expected to happen when performing the steps and what actually "
 "happened."
-msgstr ""
+msgstr "Mit vártál e lépésektől, és mi történt valójában."
 
 #: ../../data/txts/README.lua:35
 msgid ""
 "Which version of Widelands you are running (i.e. either the build number or "
 "the revision number if you are running a development version or a daily "
 "build.)"
-msgstr ""
+msgstr "A Widelands melyik verziója fut (tehát vagy az építési szám vagy\na revízószám ha a fejlesztői verziót vagy napi építést használod.)"
 
 #: ../../data/txts/README.lua:36
 msgid ""
 "Please also include which operating system you are running Widelands on as "
 "some bugs can be platform specific."
-msgstr ""
+msgstr "Kérjük, azt is közöld, milyen operációs rendszeren futtatod a Widelands játékot,\nmivel egyes hibák platformfüggőek lehetnek."
 
 #: ../../data/txts/README.lua:37
 msgid "Which map you were playing when the bug occurred."
-msgstr ""
+msgstr "Melyik térképen játszottál, amikor a hiba megjelent."
 
 #: ../../data/txts/README.lua:38
 msgid ""
 "If the bug concerns something not being displayed correctly or if it helps "
 "demonstrate the issue, please include one or more screenshots."
-msgstr ""
+msgstr "Ha a hiba olyasmi, hogy valami nem jelenik meg helyesen; vagy\nha segít szemléltetni a dolgot, akkor kérjük, mellékelj egy vagy több\nképernyőképet."
 
 #: ../../data/txts/README.lua:39
 msgid ""
 "If you have a save game or replay demonstrating the issue (for instance "
 "crashes where it can be hard to tell exactly what is triggering it), please "
 "include that too. For more information, see the section on Replays below."
-msgstr ""
+msgstr "Ha van egy játékmentésed vagy felvételed, ami szemlélteti a dolgot\n(például egy összeomlást, amelynek pontos okozóját nehéz megtalálni), \nkérjük, azt is mellékeld. További tudnivalókért lásd az alábbi,\nvisszajátszásokról szóló szakaszt."
 
 #: ../../data/txts/TRANSLATORS.lua:25
 msgid "Translators"
@@ -192,7 +192,7 @@ msgstr "Fordítók"
 
 #: ../../data/txts/TRANSLATORS.lua:27
 msgid "Widelands Translators"
-msgstr ""
+msgstr "Widelands fordítók"
 
 #: ../../data/txts/developers.lua:3
 msgid "Atlantean"
@@ -316,7 +316,7 @@ msgid ""
 "If you need more documentation or help for Widelands or the Widelands "
 "Editor, be sure to visit our homepage at %s. You can find online help in our"
 " wiki there."
-msgstr ""
+msgstr "Ha dokumentációra vagy segítségre lenne szükséged a Widelandshez játékhoz vagy a térképszerkesztőhöz, bátran keresd fel honlapunkat itt: %s. Ott online segítséget találhatsz a Wikinkben."
 
 #: ../../data/txts/help/common_helptexts.lua:17
 msgid "Introduction"
@@ -328,7 +328,7 @@ msgid ""
 "campaigns and a multiplayer mode. The game was inspired by Settlers II but "
 "has significantly more variety and depth to it. Still, it is easy to get "
 "started through playable tutorials."
-msgstr ""
+msgstr "A Widelands egy szabad, nyílt forrású valós idejű stratégiai játék egyjátékos\nhadjáratokkal és többjátékos móddal. A játékot a Settlers II ihlette, ám annál\nlényegesen gazdagabb és mélyebb. Mégis könnyen elkezdhető az oktatójátékok\nsegítségével."
 
 #: ../../data/txts/help/common_helptexts.lua:19
 msgid ""
@@ -337,7 +337,7 @@ msgid ""
 "inhabitants. On your way towards this goal, you will have to establish an "
 "economic infrastructure, explore the land around you and face rivaling "
 "tribes."
-msgstr ""
+msgstr "Ebben a játékban egy kis darabka földön kezdesz mindössze néhány \nforrással. Ezek felhasználásával több ezer lelket számláló birodalmat \népíthetsz. Míg e célt eléred, fel kell állítanod egy gazdasági rendszert, \nfel kell fedezned a környező vidéket, és szembe kell nézned a veled versengő \ntörzsekkel."
 
 #: ../../data/txts/help/common_helptexts.lua:25
 msgid "Replays"
@@ -350,7 +350,7 @@ msgid ""
 ".wrpl extension and contains all commands that were issued by all players, "
 "such as building a road or attacking an enemy. The rest of the filenames "
 "will tell you the time you started the game."
-msgstr ""
+msgstr "A Widelands rögzíti minden játékodat, játékonként két fájlban. Ezek egyike\n.wrpl.wgf kiterjesztésű, és egy kezdeti játékmentést tartalmaz. A másik fájl\n.wrpl kiterjesztésű, és a játékosok által kiadott parancsokat tartalmazza, mint\npéldául egy út építése vagy egy ellenség megtámadása. A fájlnév maradék\nrészében a játék elkezdésének időpontja olvasható."
 
 #: ../../data/txts/help/common_helptexts.lua:27
 msgid ""
@@ -360,7 +360,7 @@ msgid ""
 " replay to become incompatible and to ‘go out of sync’. This is similar to "
 "how network games will suffer from desynchronization problems if one of the "
 "players has a different version of the game."
-msgstr ""
+msgstr "A főmenü „Felvétel megtekintése” lehetőségével egy korábbi játék pontos\nmenete nézhető vissza. Fontos azonban tudni, hogy a játék adatfájljaiban vagy\na Widelands futtatható állományában bekövetkező – akár kisebb – változások könnyen\nazt okozhatják, hogy a felvétel már nem lesz kompatibilis, nem lesz\n„szinkronban”. Ez hasonló ahhoz, amiként a hálózati játékok ún. deszinkronizációs\nproblémával küzdenek, amikor az egyik játékos más verziójú játékot használ."
 
 #: ../../data/txts/help/common_helptexts.lua:28
 #, lua-format
@@ -369,94 +369,94 @@ msgid ""
 "be useful as attachments to bug reports. The replay files are saved in the "
 "%s directory on Linux and Mac OS X. On Windows, they are in the ‘replays’ "
 "subdirectory of your Widelands installation."
-msgstr ""
+msgstr "A felvételek sokat segíthetnek a játék logikáját illető hibák felderítésében,\nígy hasznos lehet őket csatolni hibajelentésekhez. A felvételek fájljai a\n„%s” könyvtárban vannak Linuxon és Mac OS X-en.\nWindowson a Widelands telepítés „replays” alkönyvtárában találhatók."
 
 #. TRANSLATORS: The generic hotkey format
 #: ../../data/txts/help/common_helptexts.lua:35
 #, lua-format
 msgctxt "hotkey"
 msgid "%s:"
-msgstr ""
+msgstr "%s:"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
 #: ../../data/txts/help/common_helptexts.lua:42
 msgctxt "hotkey"
 msgid "Space"
-msgstr ""
+msgstr "Hely"
 
 #: ../../data/txts/help/common_helptexts.lua:42
 msgid "Toggle building spaces"
-msgstr ""
+msgstr "Épülethelyek megjelenítése/elrejtése"
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 'f'
 #: ../../data/txts/help/common_helptexts.lua:49
 msgid "Toggle fullscreen (if supported by the OS)"
-msgstr ""
+msgstr "Teljes képernyős mód (ha támogatja az OS)"
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 'm'
 #: ../../data/txts/help/common_helptexts.lua:56
 msgid "Toggle minimap"
-msgstr ""
+msgstr "Kistérkép ki-/bekapcsolása"
 
 #: ../../data/txts/help/multiplayer_help.lua:10
 msgid "Multiplayer Game Setup"
-msgstr ""
+msgstr "Többjátékos beállítások"
 
 #: ../../data/txts/help/multiplayer_help.lua:11
 msgid "You are in the multiplayer launch game menu."
-msgstr ""
+msgstr "A többjátékos mód beállító menüjében vagy."
 
 #: ../../data/txts/help/multiplayer_help.lua:13
 msgid "Client settings"
-msgstr ""
+msgstr "Ügyfélbeállítások"
 
 #: ../../data/txts/help/multiplayer_help.lua:14
 msgid ""
 "On the left side is a list of all clients including you. You can set your "
 "role with the button following your nickname. Available roles are:"
-msgstr ""
+msgstr "Bal oldalon látható a résztvevők listája, téged is beleértve. Szerepedet a beceneved mögötti gombbal állíthatod be. A lehetséges szerepek:"
 
 #: ../../data/txts/help/multiplayer_help.lua:15
 msgid ""
 "The player with the color of the flag. If more than one client selected the "
 "same color, these share control over the player (‘shared kingdom mode’)."
-msgstr ""
+msgstr "Játékos, a megfelelő színű zászlóval. Ha egynél több résztvevő választja ugyanazon színt, akkor közösen irányítanak egy játékost („megosztott királyság mód”)."
 
 #: ../../data/txts/help/multiplayer_help.lua:16
 msgid ""
 "Spectator mode, meaning you can see everything, but cannot control any "
 "player"
-msgstr ""
+msgstr "Néző mód: mindent lát, de senkit sem tud irányítani."
 
 #: ../../data/txts/help/multiplayer_help.lua:18
 msgid "Player settings"
-msgstr ""
+msgstr "Játékosbeállítások"
 
 #: ../../data/txts/help/multiplayer_help.lua:19
 msgid ""
 "In the middle are the settings for the players. To start a game, each player"
 " must be one of the following:"
-msgstr ""
+msgstr "Középen a játékosok beállításai láthatók. A játék megkezdéséhez minden játékosnak az alábbiak egyikének kell lennie:"
 
 #: ../../data/txts/help/multiplayer_help.lua:20
 msgid "Connected to one or more clients (see ‘Client settings’)."
-msgstr ""
+msgstr "Csatlakozva egy vagy több résztvevőhöz (lásd „Ügyfélbeállítások”)"
 
 #: ../../data/txts/help/multiplayer_help.lua:21
 msgid ""
 "Connected to a computer player (the face in the picture as well as the mouse"
 " hover texts indicate the strength of the currently selected computer "
 "player)."
-msgstr ""
+msgstr "Csatlakozva egy számítógépes játékoshoz (a képen látható arc és az egeret fölé mozgatva megjelenő szöveg mutatja az éppen kiválasztott számítógépes játékos erősségét)."
 
 #: ../../data/txts/help/multiplayer_help.lua:22
 msgid "Set as shared in starting position for another player."
-msgstr ""
+msgstr "Osztozva egy másik játékos kezdőpozíciójával."
 
 #: ../../data/txts/help/multiplayer_help.lua:23
 msgid "Closed."
-msgstr ""
+msgstr "Kizárva."
 
 #: ../../data/txts/help/multiplayer_help.lua:24
 msgid ""
@@ -464,17 +464,17 @@ msgid ""
 "‘type’ button of a player. Hosting players can also set the initialization "
 "of each player (the set of buildings, wares and workers the player starts "
 "with) and the tribe and team for computer players"
-msgstr ""
+msgstr "Az utóbbi három csak a gazda ügyfélnél állítható be a játékos „típus” gombjára kattintva. A gazdák az egyes játékosok kezdeti feltételeit is megadhatják (az épületek halmazát, árukat és a kezdeti munkások számát), valamint törzset és a csapatot a gépi játékosoknak."
 
 #: ../../data/txts/help/multiplayer_help.lua:25
 msgid ""
 "Every client connected to a player (who isn’t a spectator) can set the tribe"
 " and the team for that player"
-msgstr ""
+msgstr "Minden játékoshoz kapcsolódó ügyfél (aki nem nező) beállíthatja a törzset és a csapatot ahhoz a játékoshoz."
 
 #: ../../data/txts/help/multiplayer_help.lua:27
 msgid "Map details"
-msgstr ""
+msgstr "Térkép adatai"
 
 #: ../../data/txts/help/multiplayer_help.lua:28
 msgid ""
@@ -482,7 +482,7 @@ msgid ""
 " side. A button next to the map name allows the host to change to a "
 "different map. Furthermore, the host is able to set a specific win "
 "condition, and finally can start the game as soon as all players are set up."
-msgstr ""
+msgstr "A jobb oldalon a kiválasztott térképről vagy játékmentésről találsz információkat. A játék szervezője a térkép neve melletti gombbal választhat másik térképet. Továbbá a szervező megadhat egy játékcélt is, majd – ha minden játékos be lett állítva – elindíthatja a játékot."
 
 #: ../../data/txts/tips/atlanteans.tip:2 ../../data/txts/tips/barbarians.tip:2
 #: ../../data/txts/tips/empire.tip:2

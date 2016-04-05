@@ -52,7 +52,7 @@ struct Flag;
  * file. The higher the preciousness_, the more will defaultAI care for that ware
  * and will try to build up an infrastructure to create that ware.
  *
- * \NOTE Network safeness:
+ * \note Network safeness:
  * - The current implementation does not care about network safe randomness, as
  *   only the host is running the computer player code and sends it's player
  *   commands to all other players. If this network behaviour is changed,

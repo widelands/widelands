@@ -125,16 +125,6 @@ bool TextParser::parse_textblock
 			line = i18n::make_ligatures(line.c_str());
 			std::string::size_type next_break = line.find("<br>");
 
-			// Replace &lt; with <
-			std::string::size_type smaller = line.find("&lt;");
-			while (smaller != std::string::npos) {
-				line.replace(smaller, 4, "<");
-				if (next_break > smaller)
-					// Fix position of <br> tag
-					next_break -= 3;
-				smaller = line.find("&lt;");
-			}
-
 			if (next_break == std::string::npos) {
 				if (line.size()) {
 					std::string word = line;

@@ -470,7 +470,6 @@ void EditBox::check_caret()
 		break;
 	default:
 		caretpos = kMargin + m_->scrolloffset + leftw;
-		break;
 	}
 
 	if (caretpos < kMargin)

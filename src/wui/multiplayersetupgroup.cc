@@ -124,7 +124,7 @@ struct MultiPlayerClientGroup : public UI::Box {
 	void refresh() {
 		UserSettings us = s->settings().users.at(id_);
 		if (us.position == UserSettings::not_connected()) {
-			name->set_text((boost::format("&lt;%s&gt;") % _("free")).str());
+			name->set_text((boost::format("<%s>") % _("free")).str());
 			if (type)
 				type->set_visible(false);
 			else
