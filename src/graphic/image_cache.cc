@@ -58,7 +58,7 @@ void ImageCache::fill_with_texture_atlases(
 
 /** Lazy accees to _images via hash.
  *
- * In case hash is not not found it will we fecthed via load_image().
+ * In case hash is not not found it will we fetched via load_image().
  */
 const Image* ImageCache::get(const std::string& hash) {
 	auto it = images_.find(hash);
