@@ -334,10 +334,6 @@ void EditorPlayerMenu::name_changed(int32_t m) {
 	std::string text = plr_names_[m]->text();
 	EditorInteractive& menu = eia();
 	Widelands::Map & map = menu.egbase().map();
-	if (text == "") {
-		text = map.get_scenario_player_name(m + 1);
-		plr_names_[m]->set_text(text);
-	}
 	map.set_scenario_player_name(m + 1, text);
 	plr_names_[m]->set_text(map.get_scenario_player_name(m + 1));
 	menu.set_need_save(true);
