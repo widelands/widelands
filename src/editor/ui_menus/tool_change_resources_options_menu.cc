@@ -51,20 +51,20 @@ EditorToolChangeResourcesOptionsMenu
 		 UI::UniqueWindow::Registry     & registry)
 	:
 	EditorToolOptionsMenu(parent, registry, 350, 120, _("Resources")),
+	increase_tool_(increase_tool),
 	box_(this, hmargin(), vmargin(), UI::Box::Vertical, 0, 0, vspacing()),
 	change_by_(&box_, 0, 0, get_inner_w() - 2 * hmargin(), 80,
-				  1, 1, kMaxValue,
+				  increase_tool_.get_change_by(), 1, kMaxValue,
 				  _("Increase/Decrease Value:"), UI::SpinBox::Units::kNone,
 				  g_gr->images().get("images/ui_basic/but1.png"),
 				  UI::SpinBox::Type::kSmall),
 	set_to_(&box_, 0, 0, get_inner_w() - 2 * hmargin(), 80,
-			  10, 0, kMaxValue,
+			  increase_tool_.set_tool().get_set_to(), 0, kMaxValue,
 			  _("Set Value:"), UI::SpinBox::Units::kNone,
 			  g_gr->images().get("images/ui_basic/but1.png"),
 			  UI::SpinBox::Type::kSmall),
 	resources_box_(&box_, 0, 0, UI::Box::Horizontal, 0, 0, 1),
-	cur_selection_(&box_, 0, 0, "", UI::Align::kCenter),
-	increase_tool_(increase_tool)
+	cur_selection_(&box_, 0, 0, "", UI::Align::kCenter)
 {
 	// Configure spin boxes
 	change_by_.set_tooltip(
@@ -102,13 +102,9 @@ EditorToolChangeResourcesOptionsMenu
 				 Point(0, 0),
 				 g_gr->images().get(resource.representative_image()),
 				 resource.descname());
+		resources_box_.add(radiogroup_.get_first_button(), UI::Align::kLeft, false, true);
 	}
 
-	UI::Radiobutton* button = radiogroup_.get_first_button();
-	resources_box_.add(button, UI::Align::kLeft);
-	while ((button = button->next_button()) != nullptr) {
-		resources_box_.add(button, UI::Align::kLeft, false, true);
-	}
 	box_.add_space(vspacing());
 	box_.add(&resources_box_, UI::Align::kLeft, true);
 	box_.set_size(box_.get_w(), box_.get_h() + 4 * vspacing() + resources_box_.get_h());

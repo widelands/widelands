@@ -44,17 +44,17 @@ EditorToolNoiseHeightOptionsMenu::EditorToolNoiseHeightOptionsMenu
 	noise_tool_(noise_tool),
 	box_(this, hmargin(), vmargin(), UI::Box::Vertical, 0, 0, vspacing()),
 	lower_(&box_, 0, 0, get_inner_w() - 2 * hmargin(), 80,
-				  10, 1, MAX_FIELD_HEIGHT,
+				  noise_tool_.get_interval().min, 1, MAX_FIELD_HEIGHT,
 				  _("Minimum Height:"), UI::SpinBox::Units::kNone,
 				  g_gr->images().get("images/ui_basic/but1.png"),
 				  UI::SpinBox::Type::kSmall),
 	upper_(&box_, 0, 0, get_inner_w() - 2 * hmargin(), 80,
-				  14, 0, MAX_FIELD_HEIGHT,
+				  noise_tool_.get_interval().max, 0, MAX_FIELD_HEIGHT,
 				  _("Maximum Height:"), UI::SpinBox::Units::kNone,
 				  g_gr->images().get("images/ui_basic/but1.png"),
 				  UI::SpinBox::Type::kSmall),
 	set_to_(&box_, 0, 0, get_inner_w() - 2 * hmargin(), 80,
-			  10, 0, MAX_FIELD_HEIGHT,
+			  noise_tool_.set_tool().get_interval().min, 0, MAX_FIELD_HEIGHT,
 			  _("Set Value:"), UI::SpinBox::Units::kNone,
 			  g_gr->images().get("images/ui_basic/but1.png"),
 			  UI::SpinBox::Type::kSmall)
@@ -73,12 +73,12 @@ EditorToolNoiseHeightOptionsMenu::EditorToolNoiseHeightOptionsMenu
 				 /** TRANSLATORS: This is an access key combination. Localize, but do not change the key. **/
 				 % _("Ctrl + Click")).str());
 
-	upper_.changed.connect
-		(boost::bind
-		 (&EditorToolNoiseHeightOptionsMenu::update_interval, boost::ref(*this)));
 	lower_.changed.connect
 		(boost::bind
-		 (&EditorToolNoiseHeightOptionsMenu::update_interval, boost::ref(*this)));
+		 (&EditorToolNoiseHeightOptionsMenu::update_lower, boost::ref(*this)));
+	upper_.changed.connect
+		(boost::bind
+		 (&EditorToolNoiseHeightOptionsMenu::update_upper, boost::ref(*this)));
 	set_to_.changed.connect
 		(boost::bind
 		 (&EditorToolNoiseHeightOptionsMenu::update_set_to, boost::ref(*this)));
@@ -101,19 +101,37 @@ EditorToolNoiseHeightOptionsMenu::EditorToolNoiseHeightOptionsMenu
 	set_inner_size(box_.get_w() + 2 * hmargin(), box_.get_h() + 2 * vspacing());
 }
 
-void EditorToolNoiseHeightOptionsMenu::update_interval() {
+
+void EditorToolNoiseHeightOptionsMenu::update_lower() {
 	int32_t upper = upper_.get_value();
 	int32_t lower = lower_.get_value();
+	// Make sure that upper increases if necessary
+	upper = std::max(lower, upper);
+	lower = std::min(lower, upper);
+	update_interval(lower, upper);
+}
+
+
+void EditorToolNoiseHeightOptionsMenu::update_upper() {
+	int32_t upper = upper_.get_value();
+	int32_t lower = lower_.get_value();
+	// Make sure that lower decreases if necessary
+	lower = std::min(lower, upper);
+	upper = std::max(lower, upper);
+	update_interval(lower, upper);
+}
+
+void EditorToolNoiseHeightOptionsMenu::update_interval(int32_t lower, int32_t upper) {
 	assert(lower >= 0);
 	assert(lower <= MAX_FIELD_HEIGHT);
 	assert(upper >= 0);
 	assert(upper <= MAX_FIELD_HEIGHT);
 
-	Widelands::HeightInterval height_interval(lower,upper);
-	height_interval.min = std::min(height_interval.min, height_interval.max);
-	height_interval.max = std::max(height_interval.min, height_interval.max);
+	Widelands::HeightInterval height_interval(lower, upper);
 	assert(height_interval.valid());
 
+	lower_.set_value(height_interval.min);
+	upper_.set_value(height_interval.max);
 	noise_tool_.set_interval(height_interval);
 	select_correct_tool();
 }

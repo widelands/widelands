@@ -44,13 +44,13 @@ private:
 	void update_set_to();
 	void update();
 
+	EditorIncreaseResourcesTool& increase_tool_;
 	UI::Box box_;
 	UI::SpinBox change_by_;
 	UI::SpinBox set_to_;
 	UI::Box resources_box_;
 	UI::Radiogroup radiogroup_;
 	UI::Textarea cur_selection_;
-	EditorIncreaseResourcesTool& increase_tool_;
 };
 
 #endif  // end of include guard: WL_EDITOR_UI_MENUS_TOOL_CHANGE_RESOURCES_OPTIONS_MENU_H
