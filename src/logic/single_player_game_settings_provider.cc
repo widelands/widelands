@@ -166,7 +166,7 @@ void SinglePlayerGameSettingsProvider::set_player_tribe(uint8_t const number, co
 		actual_tribe = s.tribes.at(random).name;
 	}
 
-	for (const TribeBasicInfo tmp_tribe : s.tribes)
+	for (const TribeBasicInfo& tmp_tribe : s.tribes)
 	{
 		if (tmp_tribe.name == player.tribe) {
 			s.players[number].tribe = actual_tribe;
@@ -181,7 +181,7 @@ void SinglePlayerGameSettingsProvider::set_player_init(uint8_t const number, uin
 	if (number >= s.players.size())
 		return;
 
-	for (const TribeBasicInfo tmp_tribe : s.tribes)
+	for (const TribeBasicInfo& tmp_tribe : s.tribes)
 	{
 		if (tmp_tribe.name == s.players[number].tribe) {
 			if (index < tmp_tribe.initializations.size())

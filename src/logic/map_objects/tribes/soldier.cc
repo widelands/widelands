@@ -413,27 +413,27 @@ Point Soldier::calc_drawpos
 	switch (combat_walking_) {
 		case CD_WALK_W:
 			moving = true;
-			epos.x -= TRIANGLE_WIDTH / 4;
+			epos.x -= kTriangleWidth / 4;
 			break;
 		case CD_WALK_E:
 			moving = true;
-			epos.x += TRIANGLE_WIDTH / 4;
+			epos.x += kTriangleWidth / 4;
 			break;
 		case CD_RETURN_W:
 			moving = true;
-			spos.x -= TRIANGLE_WIDTH / 4;
+			spos.x -= kTriangleWidth / 4;
 			break;
 		case CD_RETURN_E:
 			moving = true;
-			spos.x += TRIANGLE_WIDTH / 4;
+			spos.x += kTriangleWidth / 4;
 			break;
 		case CD_COMBAT_W:
 			moving = false;
-			epos.x -= TRIANGLE_WIDTH / 4;
+			epos.x -= kTriangleWidth / 4;
 			break;
 		case CD_COMBAT_E:
 			moving = false;
-			epos.x += TRIANGLE_WIDTH / 4;
+			epos.x += kTriangleWidth / 4;
 			break;
 		case CD_NONE:
 			break;

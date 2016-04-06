@@ -345,7 +345,7 @@ int do_set_workers(lua_State* L, PlayerImmovable* pi, const WorkersMap& valid_wo
 	}
 
 	// The idea is to change as little as possible
-	for (const WorkersMap::value_type sp : setpoints) {
+	for (const WorkersMap::value_type& sp : setpoints) {
 		const WorkerDescr* wdes = tribe.get_worker_descr(sp.first);
 		if (!valid_workers.count(sp.first))
 			report_error(L, "<%s> can't be employed here!", wdes->name().c_str());
@@ -665,7 +665,11 @@ int upcasted_map_object_to_lua(lua_State * L, MapObject * mo) {
 		return CAST_TO_LUA(MilitarySite);
 	case MapObjectType::TRAININGSITE:
 		return CAST_TO_LUA(TrainingSite);
-
+	case (MapObjectType::MAPOBJECT):
+	case (MapObjectType::BATTLE):
+	case (MapObjectType::BOB):
+	case (MapObjectType::FLEET):
+	case (MapObjectType::WARE):
 	default:
 		throw LuaError((boost::format("upcasted_map_object_to_lua: Unknown %i") %
 		                static_cast<int>(mo->descr().type())).str());
@@ -1541,9 +1545,6 @@ int LuaImmovableDescription::get_owner_type(lua_State * L) {
 		break;
 	case MapObjectDescr::OwnerType::kTribe:
 		lua_pushstring(L, "tribe");
-		break;
-	default:
-		NEVER_HERE();
 	}
 	return 1;
 }
@@ -3298,9 +3299,19 @@ int LuaMapObject::get_descr(lua_State * L) {
 		case (MapObjectType::IMMOVABLE):
 			return CAST_TO_LUA(ImmovableDescr, LuaImmovableDescription);
 		case (MapObjectType::WORKER):
-			return CAST_TO_LUA(WorkerDescr, LuaWorkerDescription);
+		case (MapObjectType::CARRIER):
 		case (MapObjectType::SOLDIER):
-			return CAST_TO_LUA(SoldierDescr, LuaSoldierDescription);
+			return CAST_TO_LUA(WorkerDescr, LuaWorkerDescription);
+		case (MapObjectType::MAPOBJECT):
+		case (MapObjectType::BATTLE):
+		case (MapObjectType::BOB):
+		case (MapObjectType::CRITTER):
+		case (MapObjectType::FLEET):
+		case (MapObjectType::SHIP):
+		case (MapObjectType::FLAG):
+		case (MapObjectType::ROAD):
+		case (MapObjectType::PORTDOCK):
+		case (MapObjectType::WARE):
 		default:
 			return CAST_TO_LUA(MapObjectDescr, LuaMapObjectDescription);
 	}
@@ -4623,10 +4634,6 @@ int LuaShip::get_state(lua_State* L) {
 				break;
 			case Ship::ShipStates::kSinkAnimation:
 				lua_pushstring(L, "sink_animation");
-				break;
-			default:
-				lua_pushnil(L);
-				return 0;
 			}
 		return 1;
 	}

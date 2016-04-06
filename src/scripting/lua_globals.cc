@@ -104,7 +104,7 @@ static int L_string_bformat(lua_State * L) {
 				case LUA_TTHREAD:
 				case LUA_TLIGHTUSERDATA:
 					report_error(L, "Cannot format the given type %s at index %i", lua_typename(L, i), i);
-					break;
+					NEVER_HERE(); // as report_error will never return
 
 				default:
 					{

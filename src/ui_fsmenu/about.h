@@ -36,7 +36,6 @@ private:
 	uint32_t const              butw_;
 	uint32_t const              buth_;
 	uint32_t const              hmargin_;
-	uint32_t const              padding_;
 	uint32_t const              tab_panel_width_;
 	uint32_t const              tab_panel_y_;
 

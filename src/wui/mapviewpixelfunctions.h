@@ -36,11 +36,11 @@ Point calc_pix_difference(const Widelands::Map&, Point, Point);
 uint32_t calc_pix_distance(const Widelands::Map&, Point, Point);
 
 inline uint32_t get_map_end_screen_x(const Widelands::Map& map) {
-	return map.get_width() * TRIANGLE_WIDTH;
+	return map.get_width() * kTriangleWidth;
 }
 
 inline uint32_t get_map_end_screen_y(const Widelands::Map& map) {
-	return map.get_height() * TRIANGLE_HEIGHT;
+	return map.get_height() * kTriangleHeight;
 }
 
 /**
@@ -59,8 +59,8 @@ void normalize_pix(const Widelands::Map&, Point& p);
 // Calculate the on-screen position of the node without taking height into
 // account.
 inline void get_basepix(const Widelands::Coords& c, int32_t& px, int32_t& py) {
-	py = c.y * TRIANGLE_HEIGHT;
-	px = c.x * TRIANGLE_WIDTH + (c.y & 1) * (TRIANGLE_WIDTH / 2);
+	py = c.y * kTriangleHeight;
+	px = c.x * kTriangleWidth + (c.y & 1) * (kTriangleWidth / 2);
 }
 
 /**
@@ -68,7 +68,7 @@ inline void get_basepix(const Widelands::Coords& c, int32_t& px, int32_t& py) {
  */
 inline void get_pix(const Widelands::FCoords& fc, int32_t& px, int32_t& py) {
 	get_basepix(fc, px, py);
-	py -= fc.field->get_height() * HEIGHT_FACTOR;
+	py -= fc.field->get_height() * kHeightFactor;
 }
 
 inline void
