@@ -41,12 +41,12 @@ EditorToolChangeHeightOptionsMenu::EditorToolChangeHeightOptionsMenu
 	box_(this, hmargin(), vmargin(), UI::Box::Vertical, 0, 0, vspacing()),
 	change_by_(&box_, 0, 0, get_inner_w() - 2 * hmargin(), 80,
 				  1, 1, MAX_FIELD_HEIGHT_DIFF,
-				  _("Increase/Decrease Value"), UI::SpinBox::Units::kNone,
+				  _("Increase/Decrease Value:"), UI::SpinBox::Units::kNone,
 				  g_gr->images().get("images/ui_basic/but1.png"),
 				  UI::SpinBox::Type::kSmall),
 	set_to_(&box_, 0, 0, get_inner_w() - 2 * hmargin(), 80,
 			  10, 0, MAX_FIELD_HEIGHT,
-			  _("Set Value"), UI::SpinBox::Units::kNone,
+			  _("Set Value:"), UI::SpinBox::Units::kNone,
 			  g_gr->images().get("images/ui_basic/but1.png"),
 			  UI::SpinBox::Type::kSmall)
 {

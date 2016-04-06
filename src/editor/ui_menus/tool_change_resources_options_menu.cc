@@ -54,16 +54,16 @@ EditorToolChangeResourcesOptionsMenu
 	box_(this, hmargin(), vmargin(), UI::Box::Vertical, 0, 0, vspacing()),
 	change_by_(&box_, 0, 0, get_inner_w() - 2 * hmargin(), 80,
 				  1, 1, kMaxValue,
-				  _("Increase/Decrease Value"), UI::SpinBox::Units::kNone,
+				  _("Increase/Decrease Value:"), UI::SpinBox::Units::kNone,
 				  g_gr->images().get("images/ui_basic/but1.png"),
 				  UI::SpinBox::Type::kSmall),
 	set_to_(&box_, 0, 0, get_inner_w() - 2 * hmargin(), 80,
 			  10, 0, kMaxValue,
-			  _("Set Value"), UI::SpinBox::Units::kNone,
+			  _("Set Value:"), UI::SpinBox::Units::kNone,
 			  g_gr->images().get("images/ui_basic/but1.png"),
 			  UI::SpinBox::Type::kSmall),
 	resources_box_(&box_, 0, 0, UI::Box::Horizontal, 0, 0, 1),
-	cur_selection_(&box_, 0, 0, _("Current Selection"), UI::Align::kCenter),
+	cur_selection_(&box_, 0, 0, "", UI::Align::kCenter),
 	increase_tool_(increase_tool)
 {
 	// Configure spin boxes
@@ -96,10 +96,12 @@ EditorToolChangeResourcesOptionsMenu
 	const Widelands::DescriptionIndex nr_resources = world.get_nr_resources();
 
 	for (Widelands::DescriptionIndex i = 0; i < nr_resources; ++i) {
+		const Widelands::ResourceDescription& resource = *world.get_resource(i);
 		radiogroup_.add_button
 				(&resources_box_,
 				 Point(0, 0),
-				 g_gr->images().get(world.get_resource(i)->representative_image()));
+				 g_gr->images().get(resource.representative_image()),
+				 resource.descname());
 	}
 
 	UI::Radiobutton* button = radiogroup_.get_first_button();
@@ -107,8 +109,9 @@ EditorToolChangeResourcesOptionsMenu
 	while ((button = button->next_button()) != nullptr) {
 		resources_box_.add(button, UI::Align::kLeft, false, true);
 	}
+	box_.add_space(vspacing());
 	box_.add(&resources_box_, UI::Align::kLeft, true);
-	box_.set_size(box_.get_w(), box_.get_h() + vspacing() + resources_box_.get_h());
+	box_.set_size(box_.get_w(), box_.get_h() + 4 * vspacing() + resources_box_.get_h());
 
 	radiogroup_.set_state(increase_tool_.get_cur_res());
 
@@ -166,7 +169,6 @@ void EditorToolChangeResourcesOptionsMenu::change_resource() {
 
 	map.recalc_whole_map(egbase.world());
 	select_correct_tool();
-
 	update();
 }
 
@@ -175,5 +177,6 @@ void EditorToolChangeResourcesOptionsMenu::change_resource() {
 */
 void EditorToolChangeResourcesOptionsMenu::update() {
 	cur_selection_.set_text
-		(eia().egbase().world().get_resource(increase_tool_.set_tool().get_cur_res())->descname());
+			((boost::format(_("Current: %s"))
+			  % eia().egbase().world().get_resource(increase_tool_.set_tool().get_cur_res())->descname()).str());
 }
