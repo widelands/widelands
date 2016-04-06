@@ -21,8 +21,9 @@
 #define WL_EDITOR_UI_MENUS_EDITOR_TOOL_CHANGE_RESOURCES_OPTIONS_MENU_H
 
 #include "editor/ui_menus/editor_tool_options_menu.h"
-#include "ui_basic/button.h"
+#include "ui_basic/box.h"
 #include "ui_basic/radiobutton.h"
+#include "ui_basic/spinbox.h"
 #include "ui_basic/textarea.h"
 
 class EditorInteractive;
@@ -38,21 +39,17 @@ struct EditorToolChangeResourcesOptionsMenu :
 
 private:
 	EditorInteractive & eia();
-	void selected();
-	enum Button {
-		Change_By_Increase, Change_By_Decrease,
-		Set_To_Increase,    Set_To_Decrease
-	};
-	void clicked_button(Button);
+	void change_resource();
+	void update_change_by();
+	void update_set_to();
 	void update();
-	UI::Textarea change_by_label_;
-	UI::Button change_by_increase_, change_by_decrease_;
-	UI::Textarea change_by_value_;
-	UI::Textarea set_to_label_;
-	UI::Button set_to_increase_, set_to_decrease_;
-	UI::Textarea set_to_value_;
-	UI::Textarea cur_selection_;
+
+	UI::Box box_;
+	UI::SpinBox change_by_;
+	UI::SpinBox set_to_;
+	UI::Box resources_box_;
 	UI::Radiogroup radiogroup_;
+	UI::Textarea cur_selection_;
 	EditorIncreaseResourcesTool& increase_tool_;
 };
 

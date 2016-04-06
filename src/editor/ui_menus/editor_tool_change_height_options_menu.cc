@@ -38,7 +38,7 @@ EditorToolChangeHeightOptionsMenu::EditorToolChangeHeightOptionsMenu
 	:
 	EditorToolOptionsMenu(parent, registry, 350, 100, _("Height Tools Options")),
 	increase_tool_(increase_tool),
-	box_(this, hmargin(), vmargin(), UI::Box::Vertical, 0, 0, vmargin()),
+	box_(this, hmargin(), vmargin(), UI::Box::Vertical, 0, 0, vspacing()),
 	change_by_(&box_, 0, 0, get_inner_w() - 2 * hmargin(), 80,
 				  1, 1, MAX_FIELD_HEIGHT_DIFF,
 				  _("Increase/Decrease Value"), UI::SpinBox::Units::kNone,
@@ -72,8 +72,8 @@ EditorToolChangeHeightOptionsMenu::EditorToolChangeHeightOptionsMenu
 
 	box_.add(&change_by_, UI::Align::kLeft);
 	box_.add(&set_to_, UI::Align::kLeft);
-	box_.set_size(get_inner_w() - 2 * hmargin(), change_by_.get_h() + set_to_.get_h() + vmargin());
-	set_inner_size(box_.get_w() + 2 * hmargin(), box_.get_h() + 2 * vmargin());
+	box_.set_size(get_inner_w() - 2 * hmargin(), change_by_.get_h() + set_to_.get_h() + vspacing());
+	set_inner_size(box_.get_w() + 2 * hmargin(), box_.get_h() + 2 * vspacing());
 }
 
 void EditorToolChangeHeightOptionsMenu::update_change_by() {
