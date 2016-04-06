@@ -29,14 +29,14 @@
 #include "base/i18n.h"
 #include "base/scoped_timer.h"
 #include "base/warning.h"
-#include "editor/tools/editor_delete_immovable_tool.h"
-#include "editor/ui_menus/editor_help.h"
-#include "editor/ui_menus/editor_main_menu.h"
-#include "editor/ui_menus/editor_main_menu_load_map.h"
-#include "editor/ui_menus/editor_main_menu_save_map.h"
-#include "editor/ui_menus/editor_player_menu.h"
-#include "editor/ui_menus/editor_tool_menu.h"
-#include "editor/ui_menus/editor_toolsize_menu.h"
+#include "editor/tools/delete_immovable_tool.h"
+#include "editor/ui_menus/help.h"
+#include "editor/ui_menus/main_menu.h"
+#include "editor/ui_menus/main_menu_load_map.h"
+#include "editor/ui_menus/main_menu_save_map.h"
+#include "editor/ui_menus/player_menu.h"
+#include "editor/ui_menus/tool_menu.h"
+#include "editor/ui_menus/toolsize_menu.h"
 #include "graphic/graphic.h"
 #include "logic/map.h"
 #include "logic/map_objects/tribes/tribes.h"
@@ -654,7 +654,7 @@ void EditorInteractive::run_editor(const std::string& filename, const std::strin
 				egbase.load_graphics(loader_ui);
 				loader_ui.step(std::string());
 			} else {
-				loader_ui.stepf(_("Loading map “%s”…"), filename.c_str());
+				loader_ui.step((boost::format(_("Loading map “%s”…")) % filename).str());
 				eia.load(filename);
 			}
 		}

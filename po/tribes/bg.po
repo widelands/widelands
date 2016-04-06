@@ -4,13 +4,14 @@
 # Translators:
 # Lyubomir Vasilev, 2015
 # Любомир Василев, 2015-2016
+# Любомир Василев, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-04-02 11:15+0000\n"
-"PO-Revision-Date: 2016-04-02 11:17+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2016-04-02 18:37+0000\n"
+"PO-Revision-Date: 2016-04-03 09:01+0000\n"
+"Last-Translator: Любомир Василев\n"
 "Language-Team: Bulgarian (http://www.transifex.com/widelands/widelands/language/bg/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2539,65 +2540,73 @@ msgstr "Това племе е познато от най-старите раз�
 
 #: ../../data/tribes/scripting/help/init.lua:48
 msgid "Tribal Encyclopedia"
-msgstr ""
+msgstr "Енциклопедия на племената"
 
 #: ../../data/tribes/scripting/help/init.lua:53
 msgid "General"
-msgstr ""
+msgstr "Общи"
 
 #: ../../data/tribes/scripting/help/init.lua:58
 msgid "Introduction"
-msgstr ""
+msgstr "Въведение"
 
 #: ../../data/tribes/scripting/help/init.lua:64
 msgid "Controls"
-msgstr ""
+msgstr "Управление"
 
 #: ../../data/tribes/scripting/help/init.lua:73
 msgid "Wares"
-msgstr ""
+msgstr "Стоки"
 
 #: ../../data/tribes/scripting/help/init.lua:80
 msgid "Workers"
-msgstr ""
+msgstr "Работници"
 
 #: ../../data/tribes/scripting/help/init.lua:87
 msgid "Buildings"
-msgstr ""
+msgstr "Сгради"
 
-#: ../../data/tribes/scripting/starting_conditions/atlanteans/fortified_village.lua:10
-#: ../../data/tribes/scripting/starting_conditions/barbarians/fortified_village.lua:10
-#: ../../data/tribes/scripting/starting_conditions/empire/fortified_village.lua:10
-msgid "Fortified Village"
-msgstr "Укрепено селище"
-
+#. TRANSLATORS: This is the name of a starting condition
 #: ../../data/tribes/scripting/starting_conditions/atlanteans/fortified_village.lua:11
 #: ../../data/tribes/scripting/starting_conditions/barbarians/fortified_village.lua:11
 #: ../../data/tribes/scripting/starting_conditions/empire/fortified_village.lua:11
+msgid "Fortified Village"
+msgstr "Укрепено селище"
+
+#. TRANSLATORS: This is the tooltip for the "Fortified Village" starting
+#. condition
+#: ../../data/tribes/scripting/starting_conditions/atlanteans/fortified_village.lua:13
+#: ../../data/tribes/scripting/starting_conditions/barbarians/fortified_village.lua:13
+#: ../../data/tribes/scripting/starting_conditions/empire/fortified_village.lua:13
 msgid " Start the game with a fortified military installation"
 msgstr "Започнете играта с укрепена военна установка"
 
-#: ../../data/tribes/scripting/starting_conditions/atlanteans/headquarters.lua:10
-#: ../../data/tribes/scripting/starting_conditions/barbarians/headquarters.lua:10
-#: ../../data/tribes/scripting/starting_conditions/empire/headquarters.lua:10
-msgid "Headquarters"
-msgstr "Щаб"
-
+#. TRANSLATORS: This is the name of a starting condition
 #: ../../data/tribes/scripting/starting_conditions/atlanteans/headquarters.lua:11
 #: ../../data/tribes/scripting/starting_conditions/barbarians/headquarters.lua:11
 #: ../../data/tribes/scripting/starting_conditions/empire/headquarters.lua:11
+msgid "Headquarters"
+msgstr "Щаб"
+
+#. TRANSLATORS: This is the tooltip for the "Headquarters" starting condition
+#: ../../data/tribes/scripting/starting_conditions/atlanteans/headquarters.lua:13
+#: ../../data/tribes/scripting/starting_conditions/barbarians/headquarters.lua:13
+#: ../../data/tribes/scripting/starting_conditions/empire/headquarters.lua:13
 msgid "Start the game with your headquarters only"
 msgstr "Започнете играта само с щаба си"
 
-#: ../../data/tribes/scripting/starting_conditions/atlanteans/trading_outpost.lua:10
-#: ../../data/tribes/scripting/starting_conditions/barbarians/trading_outpost.lua:10
-#: ../../data/tribes/scripting/starting_conditions/empire/trading_outpost.lua:10
-msgid "Trading Outpost"
-msgstr "Търговски преден пост"
-
+#. TRANSLATORS: This is the name of a starting condition
 #: ../../data/tribes/scripting/starting_conditions/atlanteans/trading_outpost.lua:11
 #: ../../data/tribes/scripting/starting_conditions/barbarians/trading_outpost.lua:11
 #: ../../data/tribes/scripting/starting_conditions/empire/trading_outpost.lua:11
+msgid "Trading Outpost"
+msgstr "Търговски преден пост"
+
+#. TRANSLATORS: This is the tooltip for the "Trading Outpost" starting
+#. condition
+#: ../../data/tribes/scripting/starting_conditions/atlanteans/trading_outpost.lua:13
+#: ../../data/tribes/scripting/starting_conditions/barbarians/trading_outpost.lua:13
+#: ../../data/tribes/scripting/starting_conditions/empire/trading_outpost.lua:13
 msgid ""
 "If this player runs low on important wares, they will be replenished for "
 "free"

@@ -2,6 +2,7 @@
 # Copyright (C) 2005-2016 Widelands Development Team
 # 
 # Translators:
+# Elisabeth Jäger, 2016
 # wl-zocker, 2014
 # Klaus Halfmann <klaus.halfmann@arcor.de>, 2016
 # millimarg, 2015
@@ -13,9 +14,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-04-02 11:15+0000\n"
-"PO-Revision-Date: 2016-04-02 12:56+0000\n"
-"Last-Translator: Klaus Halfmann <klaus.halfmann@arcor.de>\n"
+"POT-Creation-Date: 2016-04-02 18:37+0000\n"
+"PO-Revision-Date: 2016-04-02 19:42+0000\n"
+"Last-Translator: Elisabeth Jäger\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -25,7 +26,7 @@ msgstr ""
 
 #: ../../data/txts/AUTHORS.lua:27
 msgid "Developers"
-msgstr ""
+msgstr "Entwickler"
 
 #: ../../data/txts/AUTHORS.lua:29
 msgid "Widelands Development Team"
@@ -93,7 +94,7 @@ msgstr "Dieses Spiel wird so, wie es ist, und ohne jegliche Garantie verbreitet.
 
 #: ../../data/txts/README.lua:7
 msgid "Readme"
-msgstr ""
+msgstr "Liesmich"
 
 #: ../../data/txts/README.lua:12
 msgid "an open source strategy game"
@@ -124,19 +125,19 @@ msgstr "Widelands ist sehr weit entwickelt und macht sowohl im Einzel- als auch 
 
 #: ../../data/txts/README.lua:21
 msgid "Widelands Help"
-msgstr ""
+msgstr "Widelands-Hilfe"
 
 #. TRANSLATORS: %1% is a key on the keyboard
 #: ../../data/txts/README.lua:23
 msgid ""
 "You can find help about gameplay or the editor by using the help button on "
 "the bottom menu, or by pressing %1%."
-msgstr ""
+msgstr "Du kannst die Hilfe zum Spiel oder zum Editor mit der Hilfeschaltfläche am unteren Bildrand oder mit der Taste %1% aufrufen."
 
 #. TRANSLATORS: This is a key on the keyboard
 #: ../../data/txts/README.lua:25
 msgid "F1"
-msgstr ""
+msgstr "F1"
 
 #: ../../data/txts/README.lua:28
 msgid "Reporting Bugs"
@@ -152,43 +153,43 @@ msgstr "Bitte schreibe alle wichtigen Informationen auf. Also:"
 
 #: ../../data/txts/README.lua:33
 msgid "Detailed steps on how to trigger the bug, if possible."
-msgstr ""
+msgstr "Wenn möglich, eine detailierte Beschreibung der Schritte, wie der Fehler erzeugt werden kann."
 
 #: ../../data/txts/README.lua:34
 msgid ""
 "What you expected to happen when performing the steps and what actually "
 "happened."
-msgstr "Was sollte nach deinen Aktionen passierern und was tatsächlich passiert ist"
+msgstr "Was du erwartet hast und was tatsächlich passiert ist."
 
 #: ../../data/txts/README.lua:35
 msgid ""
 "Which version of Widelands you are running (i.e. either the build number or "
 "the revision number if you are running a development version or a daily "
 "build.)"
-msgstr "- Welche Version von Widelands benutzt du? (Zum Beispiel „build-19“ oder „bzr7928[trunk]“, falls du eine Entwicklungsversion benutzt.)"
+msgstr "Welche Version von Widelands benutzt du? (Zum Beispiel „build-19“ oder „bzr7928[trunk]“, falls du eine Entwicklungsversion benutzt.)"
 
 #: ../../data/txts/README.lua:36
 msgid ""
 "Please also include which operating system you are running Widelands on as "
 "some bugs can be platform specific."
-msgstr "- Bitte gib auch an, auf welchem Betriebssystem du Widelands verwendest. Manche Fehler können vom Betriebssystem abhängen."
+msgstr "Bitte gib auch an, auf welchem Betriebssystem du Widelands verwendest. Manche Fehler können vom Betriebssystem abhängen."
 
 #: ../../data/txts/README.lua:37
 msgid "Which map you were playing when the bug occurred."
-msgstr "- Welche Karte du gespielt hast, als der Fehler auftrat."
+msgstr "Welche Karte du gespielt hast, als der Fehler auftrat."
 
 #: ../../data/txts/README.lua:38
 msgid ""
 "If the bug concerns something not being displayed correctly or if it helps "
 "demonstrate the issue, please include one or more screenshots."
-msgstr ""
+msgstr "Füge bitte einen oder mehrere Screenshots bei, falls der Fehler ein Darstellungsfehler ist, oder falls diese die Erklärung des Fehlers vereinfachen."
 
 #: ../../data/txts/README.lua:39
 msgid ""
 "If you have a save game or replay demonstrating the issue (for instance "
 "crashes where it can be hard to tell exactly what is triggering it), please "
 "include that too. For more information, see the section on Replays below."
-msgstr ""
+msgstr "Hast du ein gespeichertes Spiel oder eine Aufzeichnung, in dem der Fehler auftritt (zum Beispiel ein Absturz, dessen Auslöser nicht leicht zu finden ist), füge es bitte ebenfalls an. Für weitere Informationen schaue unter dem Abschnitt „Aufzeichnungen“ weiter unten nach."
 
 #: ../../data/txts/TRANSLATORS.lua:25
 msgid "Translators"
@@ -196,7 +197,7 @@ msgstr "Übersetzer"
 
 #: ../../data/txts/TRANSLATORS.lua:27
 msgid "Widelands Translators"
-msgstr ""
+msgstr "Widelands-Übersetzer"
 
 #: ../../data/txts/developers.lua:3
 msgid "Atlantean"
@@ -332,7 +333,7 @@ msgid ""
 "campaigns and a multiplayer mode. The game was inspired by Settlers II but "
 "has significantly more variety and depth to it. Still, it is easy to get "
 "started through playable tutorials."
-msgstr ""
+msgstr "Widelands ist ein freies, quelloffenes Echtzeit-Strategiespiel mit mehreren Einzelspieler-Kampagnen und einem Mehrspielermodus. Das Spiel wurde von „Die Siedler II“ inspiriert, hat jedoch mittlerweile weit mehr Funktionen und Möglichkeiten als dieses. Durch Einführungsspiele ist es dennoch einfach, sich ins Spiel hineinzufinden."
 
 #: ../../data/txts/help/common_helptexts.lua:19
 msgid ""
@@ -341,7 +342,7 @@ msgid ""
 "inhabitants. On your way towards this goal, you will have to establish an "
 "economic infrastructure, explore the land around you and face rivaling "
 "tribes."
-msgstr ""
+msgstr "In diesem Spiel beginnst du auf einem kleinen Stück Land mit nur wenigen Rohstoffen. Indem du diese verwendest, wirst du ein Imperium mit Tausenden von Einwohnern erschaffen. Auf deinem Weg zu diesem Ziel wirst du eine wirtschaftliche Infrastruktur erstellen, das Land um dich herum erkunden und rivalisierenden Stämmen entgegentreten müssen."
 
 #: ../../data/txts/help/common_helptexts.lua:25
 msgid "Replays"
@@ -354,7 +355,7 @@ msgid ""
 ".wrpl extension and contains all commands that were issued by all players, "
 "such as building a road or attacking an enemy. The rest of the filenames "
 "will tell you the time you started the game."
-msgstr ""
+msgstr "Widelands zeichnet alle Spiele, die du spielst, in zwei Dateien auf. Eine dieser Dateien hat die Endung „.wrpl.wgf“ und enthält den Ausgangsspeicherstand. Die andere Datei hat die Endung „.wrpl“ und enthält alle Anweisungen, die von allen Spielern gegeben wurde, wie eine Straße zu bauen oder einen Feind anzugreifen. Der Rest des Dateinamens teilt dir die Zeit mit, zu der du das Spiel gestartet hast."
 
 #: ../../data/txts/help/common_helptexts.lua:27
 msgid ""
@@ -364,7 +365,7 @@ msgid ""
 " replay to become incompatible and to ‘go out of sync’. This is similar to "
 "how network games will suffer from desynchronization problems if one of the "
 "players has a different version of the game."
-msgstr ""
+msgstr "Mit der Option „Aufzeichnung abspielen“ im Hauptmenü wird ein früher gespieltes Spiel genauso nochmals vorgespielt. Beachte aber, dass auch bei kleinen Änderungen im Spieldatensatz oder in der Widelands-Ausführungsdatei (widelands.exe) eine Aufzeichnung inkompatibel sein kann oder „out of sync“ geht. Das ist ähnlich wie bei Netzwerkspielen, die unter einem Zeitversatz leiden können (laggen), wenn die Spieler mit unterschiedlichen Versionen spielen."
 
 #: ../../data/txts/help/common_helptexts.lua:28
 #, lua-format
@@ -373,94 +374,94 @@ msgid ""
 "be useful as attachments to bug reports. The replay files are saved in the "
 "%s directory on Linux and Mac OS X. On Windows, they are in the ‘replays’ "
 "subdirectory of your Widelands installation."
-msgstr ""
+msgstr "Aufzeichnungen sind ein sehr nützliches Werkzeug, um Fehler in der Spiellogik zu finden, daher können sie als Anhang zu einer Fehlermeldung nützlich sein. Die Wiedergabedateien sind im Verzeichnis %s auf Linux und Mac OS X gespeichert. Bei Windows befinden sie sich im „replays“-Unterverzeichnis deiner Widelands-Installation."
 
 #. TRANSLATORS: The generic hotkey format
 #: ../../data/txts/help/common_helptexts.lua:35
 #, lua-format
 msgctxt "hotkey"
 msgid "%s:"
-msgstr ""
+msgstr "%s:"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
 #: ../../data/txts/help/common_helptexts.lua:42
 msgctxt "hotkey"
 msgid "Space"
-msgstr ""
+msgstr "LEERTASTE"
 
 #: ../../data/txts/help/common_helptexts.lua:42
 msgid "Toggle building spaces"
-msgstr ""
+msgstr "Schaltet die Bauhilfe ein und aus"
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 'f'
 #: ../../data/txts/help/common_helptexts.lua:49
 msgid "Toggle fullscreen (if supported by the OS)"
-msgstr ""
+msgstr "Schaltet die Vollbilddarstellung an/aus (falls dies das Betriebssystem erlaubt)"
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 'm'
 #: ../../data/txts/help/common_helptexts.lua:56
 msgid "Toggle minimap"
-msgstr ""
+msgstr "Öffnet/schließt die Minikarte"
 
 #: ../../data/txts/help/multiplayer_help.lua:10
 msgid "Multiplayer Game Setup"
-msgstr ""
+msgstr "Mehrspielereinstellungen"
 
 #: ../../data/txts/help/multiplayer_help.lua:11
 msgid "You are in the multiplayer launch game menu."
-msgstr ""
+msgstr "Du befindest dich im Mehrspieler-Startmenü."
 
 #: ../../data/txts/help/multiplayer_help.lua:13
 msgid "Client settings"
-msgstr ""
+msgstr "Client-Einstellungen"
 
 #: ../../data/txts/help/multiplayer_help.lua:14
 msgid ""
 "On the left side is a list of all clients including you. You can set your "
 "role with the button following your nickname. Available roles are:"
-msgstr ""
+msgstr "Auf der linken Seite befindet sich eine Liste aller Clients einschließlich dir. Du kannst deine Rolle mit den Schaltflächen hinter deinem Spielernamen festlegen. Verfügbare Rollen sind:"
 
 #: ../../data/txts/help/multiplayer_help.lua:15
 msgid ""
 "The player with the color of the flag. If more than one client selected the "
 "same color, these share control over the player (‘shared kingdom mode’)."
-msgstr ""
+msgstr "Der Spieler mit der Farbe der Flagge. Falls mehrere Clients dieselbe Farbe ausgewählt haben, kontrollieren sie den Spieler zusammen („Gemeinsames Königreich“)."
 
 #: ../../data/txts/help/multiplayer_help.lua:16
 msgid ""
 "Spectator mode, meaning you can see everything, but cannot control any "
 "player"
-msgstr ""
+msgstr "Beobachter-Modus bedeutet, dass du alles sehen kannst, aber keinen Spieler steuerst"
 
 #: ../../data/txts/help/multiplayer_help.lua:18
 msgid "Player settings"
-msgstr ""
+msgstr "Spielereinstellungen"
 
 #: ../../data/txts/help/multiplayer_help.lua:19
 msgid ""
 "In the middle are the settings for the players. To start a game, each player"
 " must be one of the following:"
-msgstr ""
+msgstr "In der Mitte befindet sich der Einstellungsbereich für die Spieler. Um das Spiel starten zu können, muss jeder Spieler in einem der folgenden Zustände sein:"
 
 #: ../../data/txts/help/multiplayer_help.lua:20
 msgid "Connected to one or more clients (see ‘Client settings’)."
-msgstr ""
+msgstr "Mit einem oder mehreren Clients verknüpft (siehe „Client-Einstellungen“)."
 
 #: ../../data/txts/help/multiplayer_help.lua:21
 msgid ""
 "Connected to a computer player (the face in the picture as well as the mouse"
 " hover texts indicate the strength of the currently selected computer "
 "player)."
-msgstr ""
+msgstr "Mit einem Computerspieler verknüpft (das Gesicht und der Hovertext deuten die Stärke des derzeitig ausgewählten Computerspielers an)."
 
 #: ../../data/txts/help/multiplayer_help.lua:22
 msgid "Set as shared in starting position for another player."
-msgstr ""
+msgstr "Als weiterer Startpunkt für einen anderen Spieler gesetzt."
 
 #: ../../data/txts/help/multiplayer_help.lua:23
 msgid "Closed."
-msgstr ""
+msgstr "Geschlossen."
 
 #: ../../data/txts/help/multiplayer_help.lua:24
 msgid ""
@@ -468,17 +469,17 @@ msgid ""
 "‘type’ button of a player. Hosting players can also set the initialization "
 "of each player (the set of buildings, wares and workers the player starts "
 "with) and the tribe and team for computer players"
-msgstr ""
+msgstr "Die letzten drei können nur durch den Host durch Klicken auf „Typ“ des Spielers, gesetzt werden. Der Host kann darüber hinaus die Startbedingungen der einzelnen Spieler (die Menge von Gebäuden, Waren und Arbeitern, mit denen der Spieler beginnt) und den Stamm für die Computerspieler einstellen."
 
 #: ../../data/txts/help/multiplayer_help.lua:25
 msgid ""
 "Every client connected to a player (who isn’t a spectator) can set the tribe"
 " and the team for that player"
-msgstr ""
+msgstr "Jeder Client, der mit einem Spieler (keinem Beobachter) verknüpft ist, kann den Stamm und das Team dieses Spielers einstellen."
 
 #: ../../data/txts/help/multiplayer_help.lua:27
 msgid "Map details"
-msgstr ""
+msgstr "Kartendetails"
 
 #: ../../data/txts/help/multiplayer_help.lua:28
 msgid ""
@@ -486,7 +487,7 @@ msgid ""
 " side. A button next to the map name allows the host to change to a "
 "different map. Furthermore, the host is able to set a specific win "
 "condition, and finally can start the game as soon as all players are set up."
-msgstr ""
+msgstr "Du kannst auf der rechten Seite Informationen über die ausgewählte Karte oder den Spielstand sehen. Eine Schaltfläche neben der Karte erlaubt dem Host, die Karte zu ändern. Des Weiteren kann der Host eine Siegbedingung setzten und das Spiel starten, sobald alle Spieler bereit sind."
 
 #: ../../data/txts/tips/atlanteans.tip:2 ../../data/txts/tips/barbarians.tip:2
 #: ../../data/txts/tips/empire.tip:2

@@ -390,11 +390,6 @@ void Box::set_item_pos(uint32_t idx, int32_t pos)
 			maxbreadth = get_inner_w();
 		}
 		switch (it.u.panel.align) {
-		case UI::Align::kLeft:
-		default:
-			breadth = 0;
-			break;
-
 		case UI::Align::kHCenter:
 			breadth = (maxbreadth - breadth) / 2;
 			break;
@@ -402,6 +397,9 @@ void Box::set_item_pos(uint32_t idx, int32_t pos)
 		case UI::Align::kRight:
 			breadth = maxbreadth - breadth;
 			break;
+		case UI::Align::kLeft:
+		default:
+			breadth = 0;
 		}
 
 		if (orientation_ == Horizontal)

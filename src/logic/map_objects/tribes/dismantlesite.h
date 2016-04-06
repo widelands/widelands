@@ -72,7 +72,7 @@ public:
 
 	bool get_building_work(Game &, Worker &, bool success) override;
 
-	static void count_returned_wares(Building* building, std::map<DescriptionIndex, uint8_t> & res);
+	static const Buildcost count_returned_wares(Building* building);
 
 protected:
 	void update_statistics_string(std::string*) override;

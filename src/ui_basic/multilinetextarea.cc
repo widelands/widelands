@@ -163,7 +163,6 @@ void MultilineTextarea::draw(RenderTarget& dst)
 				break;
 			default:
 				anchor = RICHTEXT_MARGIN;
-				break;
 			}
 
 			dst.blitrect_scale(

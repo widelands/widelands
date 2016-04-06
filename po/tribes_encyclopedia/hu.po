@@ -10,9 +10,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-04-02 11:15+0000\n"
-"PO-Revision-Date: 2016-04-02 11:17+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2016-04-02 18:37+0000\n"
+"PO-Revision-Date: 2016-04-03 12:55+0000\n"
+"Last-Translator: Balázs Meskó <meskobalazs@gmail.com>\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -118,7 +118,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/empire/charcoal_kiln/helptexts.lua:16
 msgctxt "building"
 msgid "Burns logs into charcoal."
-msgstr ""
+msgstr "Farönkökből faszenet éget."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/coalmine/helptexts.lua:16
@@ -252,7 +252,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/atlanteans/quarry/helptexts.lua:16
 msgctxt "atlanteans_building"
 msgid "Cuts blocks of granite out of rocks in the vicinity."
-msgstr ""
+msgstr "Gránittömböket váj ki a közelben található kövekből."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/quarry/helptexts.lua:21
@@ -797,7 +797,7 @@ msgctxt "barbarians_building"
 msgid ""
 "Processes granite to make ‘grout’, a substance that solidifies and so "
 "reinforces masonry."
-msgstr ""
+msgstr "Feldolgozza a gránitot, hogy habarcsot készítsen, mely anyag szilárdítja, és megerősíti a falazást."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/lime_kiln/helptexts.lua:18
@@ -814,7 +814,7 @@ msgctxt "barbarians_building"
 msgid ""
 "If all needed wares are delivered in time, this building can produce grout "
 "in about %s on average."
-msgstr ""
+msgstr "Ha minden áru időben megérkezik, akkor ez az épület átlagosan %s alatt tud habarcsot termelni."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/lumberjacks_hut/helptexts.lua:3
@@ -2571,7 +2571,7 @@ msgctxt "barbarians_ware"
 msgid ""
 "Granite can be processed into grout which provides a solid, non burning "
 "building material. Grout is produced in a lime kiln."
-msgstr ""
+msgstr "A gránitból habarcsot lehet készíteni, ami egy szilárd, nem gyúlékony építőanyag. A habarcsot a mészégető kemencében állítják elő."
 
 #. TRANSLATORS: Helptext for a ware: Hammer
 #: ../../data/tribes/wares/hammer/helptexts.lua:4
@@ -3261,7 +3261,7 @@ msgstr "Árut szállít a csomópontok között."
 #: ../../data/tribes/workers/atlanteans/charcoal_burner/helptexts.lua:3
 msgctxt "atlanteans_worker"
 msgid "Burns coal."
-msgstr "Faszenet készít."
+msgstr "Faszenet éget."
 
 #. TRANSLATORS: Helptext for a worker: Farmer
 #: ../../data/tribes/workers/atlanteans/farmer/helptexts.lua:3
@@ -3457,7 +3457,7 @@ msgstr ""
 #: ../../data/tribes/workers/barbarians/charcoal_burner/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid "Burns coal."
-msgstr "Faszenet készít."
+msgstr "Faszenet éget."
 
 #. TRANSLATORS: Helptext for a worker: Farmer
 #: ../../data/tribes/workers/barbarians/farmer/helptexts.lua:3
@@ -3513,7 +3513,7 @@ msgstr "Ételt készít a bányászok számára."
 #: ../../data/tribes/workers/barbarians/lime_burner/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid "Mixes grout out of granite, water and coal in the lime kiln."
-msgstr ""
+msgstr " A mészégető kemencében habarcsot kever gránitból, vízből és szénből."
 
 #. TRANSLATORS: Helptext for a worker: Helmsmith
 #: ../../data/tribes/workers/barbarians/lumberjack/helptexts.lua:3
@@ -3627,7 +3627,7 @@ msgstr "Árut szállít a csomópontok között."
 #: ../../data/tribes/workers/empire/charcoal_burner/helptexts.lua:3
 msgctxt "empire_worker"
 msgid "Burns coal."
-msgstr "Faszenet készít."
+msgstr "Faszenet éget."
 
 #. TRANSLATORS: Helptext for a worker: Donkey
 #: ../../data/tribes/workers/empire/donkey/helptexts.lua:3

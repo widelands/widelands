@@ -73,7 +73,7 @@ void tesselate_line_strip(int w,
 		const FloatPoint p2 = FloatPoint(points[i + 1].x, points[i + 1].y);
 
 		const FloatPoint normal = calculate_line_normal(p1, p2);
-		const FloatPoint scaled_normal(0.5 * line_width * normal.x, 0.5 * line_width * normal.y);
+		const FloatPoint scaled_normal(0.5f * line_width * normal.x, 0.5f * line_width * normal.y);
 
 		// Quad points are created in rendering order for OpenGL.
 		{
