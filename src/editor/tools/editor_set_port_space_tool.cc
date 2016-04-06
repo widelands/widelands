@@ -45,7 +45,7 @@ int32_t editor_Tool_set_port_space_callback
 EditorSetPortSpaceTool::EditorSetPortSpaceTool
 (EditorUnsetPortSpaceTool & the_unset_tool)
 	:
-	EditorTool(the_unset_tool, *this)
+	EditorTool(the_unset_tool, the_unset_tool)
 {}
 
 
