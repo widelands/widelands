@@ -12,6 +12,22 @@ import tempfile
 import unittest
 import platform
 
+#Python2/3 compat code for iterating items
+try:
+    dict.iteritems
+except AttributeError:
+    # Python 3
+    def itervalues(d):
+        return iter(d.values())
+    def iteritems(d):
+        return iter(d.items())
+else:
+    # Python 2
+    def itervalues(d):
+        return d.itervalues()
+    def iteritems(d):
+        return d.iteritems()
+		
 def datadir():
     return os.path.join(os.path.dirname(__file__), "data")
 
@@ -76,7 +92,7 @@ class WidelandsTestCase(unittest.TestCase):
                     '--disable_fx=true',
                     '--disable_music=true',
                     '--language=en_US' ]
-            args += [ "--%s=%s" % (key, value) for key, value in wlargs.iteritems() ]
+            args += [ "--%{}=%{}".format(key, value) for key, value in iteritems(wlargs) ]
 
             widelands = subprocess.Popen(
                     args, shell=False, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
@@ -214,7 +230,7 @@ def main():
     args = parse_args()
 
     WidelandsTestCase.path_to_widelands_binary = args.binary
-    print "Using '%s' binary." % args.binary
+    print("Using '{}' binary.".format(args.binary)) 
     WidelandsTestCase.do_use_random_directory = not args.nonrandom
     WidelandsTestCase.keep_output_around = args.keep_around
 
