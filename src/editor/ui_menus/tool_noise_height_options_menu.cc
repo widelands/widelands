@@ -67,9 +67,7 @@ EditorToolNoiseHeightOptionsMenu::EditorToolNoiseHeightOptionsMenu
 				_("Click to set the height to a random value within the specified range"));
 	set_to_.set_tooltip(
 				/** TRANSLATORS: Editor set hoise height access keys. **/
-				(boost::format(_("Use %s or %s to set a fixed height"))
-				 /** TRANSLATORS: This is an access key combination. Localize, but do not change the key. **/
-				 % _("Shift + Click")
+				(boost::format(_("Use %s to set to this value"))
 				 /** TRANSLATORS: This is an access key combination. Localize, but do not change the key. **/
 				 % _("Ctrl + Click")).str());
 
