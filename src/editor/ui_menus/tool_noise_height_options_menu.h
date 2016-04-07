@@ -21,8 +21,8 @@
 #define WL_EDITOR_UI_MENUS_TOOL_NOISE_HEIGHT_OPTIONS_MENU_H
 
 #include "editor/ui_menus/tool_options_menu.h"
-#include "ui_basic/button.h"
-#include "ui_basic/textarea.h"
+#include "ui_basic/box.h"
+#include "ui_basic/spinbox.h"
 
 class EditorInteractive;
 struct EditorNoiseHeightTool;
@@ -34,19 +34,15 @@ struct EditorToolNoiseHeightOptionsMenu : public EditorToolOptionsMenu {
 		 UI::UniqueWindow::Registry &);
 
 private:
-	EditorNoiseHeightTool& noise_tool_;
-	UI::Textarea lower_label_, upper_label_;
-	UI::Button lower_decrease_, lower_increase_, upper_decrease_, upper_increase_;
-	UI::Textarea set_label_;
-	UI::Button setto_decrease_, setto_increase_;
+	void update_interval(int32_t lower, int32_t upper);
+	void update_upper();
+	void update_lower();
+	void update_set_to();
 
-	void clicked_lower_decrease();
-	void clicked_lower_increase();
-	void clicked_upper_decrease();
-	void clicked_upper_increase();
-	void clicked_setto_decrease();
-	void clicked_setto_increase();
-	void update();
+	EditorNoiseHeightTool& noise_tool_;
+	UI::Box box_;
+	UI::SpinBox lower_, upper_;
+	UI::SpinBox set_to_;
 };
 
 #endif  // end of include guard: WL_EDITOR_UI_MENUS_TOOL_NOISE_HEIGHT_OPTIONS_MENU_H
