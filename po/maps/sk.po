@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-04-02 18:37+0000\n"
-"PO-Revision-Date: 2016-04-03 10:50+0000\n"
+"POT-Creation-Date: 2016-04-03 19:12+0000\n"
+"PO-Revision-Date: 2016-04-06 10:36+0000\n"
 "Last-Translator: MiroslavR <miroslavr256@gmail.com>\n"
 "Language-Team: Slovak (http://www.transifex.com/widelands/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
@@ -321,7 +321,7 @@ msgstr "Štyri kmene súperia so svojimi najbližšími susedmi o prvenstvo na h
 
 #: ../../data/maps/Dolomites_v2.wmf/elemental:8
 msgid "Dolomites"
-msgstr ""
+msgstr "Dolomity"
 
 #: ../../data/maps/Dolomites_v2.wmf/elemental:10
 msgid ""
@@ -330,7 +330,7 @@ msgid ""
 "reasonable reconstruction of the area delimited by Cortina d’Ampezzo in the "
 "north-east and Canazei in the south-west. If you have to be pitted in a duel"
 " to the death against your enemies, it may as well be in a beautiful place."
-msgstr ""
+msgstr "Pohorie Dolomity, klenot Álp, bolo vyhlásené za svetové dedičstvo vďaka svojej nenarušenej kráse. Táto mapa je do rozumnej miery vernou rekonštrukciou územia, ktoré ohraničuje Cortina d’Ampezzo na severovýchode a Canazei na juhozápade. Keď už musíte čeliť nepriateľom v boji na život a na smrť, nech sa to aspoň koná na peknom mieste."
 
 #: ../../data/maps/Dolomites_v2.wmf/elemental:11
 msgid ""
@@ -365,7 +365,7 @@ msgid ""
 "This is a somewhat technical map, and it is best suited for two or three "
 "human players. Coal is hard to find – consider making some. There is gold "
 "near the starting point – do you see it?"
-msgstr ""
+msgstr "Táto mapa vyžaduje strategické zručnosti a je vhodná pre dvoch alebo troch hráčov. Uhlie je ťažko nájsť – zvážte jeho výrobu. Neďaleko začiatočného bodu sa nachádza zlato – vidíte ho?"
 
 #: ../../data/maps/Finnish_Lakes.wmf/elemental:8
 msgid "Finnish Lakes"
@@ -423,13 +423,13 @@ msgstr "I: Vodu možno nájsť popri rieke. II: Snehuliaci značia ďalšie zdro
 
 #: ../../data/maps/Full_Moon_v2.wmf/elemental:8
 msgid "Full Moon"
-msgstr ""
+msgstr "Spln mesiaca"
 
 #: ../../data/maps/Full_Moon_v2.wmf/elemental:10
 msgid ""
 "Whether it is the latest solstice, or lunar illness, something moves these "
 "tribes towards their final ordeal."
-msgstr ""
+msgstr "Či už je príčinou posledný slnovrat alebo vplyv mesiaca, niečo ženie tieto kmene k ich poslednej skúške."
 
 #: ../../data/maps/Glacier_Lake_v2.wmf/elemental:8
 msgid "Glacier Lake"
@@ -442,7 +442,7 @@ msgid ""
 "tribe, but a few months ago another tribe came over the mountains and "
 "settled down. And you are sure that there is only enough space for one "
 "tribe."
-msgstr ""
+msgstr "Váš kmeň dlho obýval brehy tohto nádherného a opusteného ľadovcového jazera. Nik vás nevyrušoval a zdroje postačovali celému vášmu kmeňu. Pred pár mesiacmi však prešiel cez hory iný kmeň a usadil sa. A vy máte istotu, že je tu dosť miesta len pre jeden kmeň."
 
 #: ../../data/maps/Golden_Peninsula.wmf/elemental:8
 msgid "Golden Peninsula"
@@ -496,7 +496,7 @@ msgid ""
 "An old legend tells that these seven kingdoms, that have flourished for ages"
 " in prosperity, will someday collapse into a devastating war. Has your "
 "latest betrayal been one too many and will the prophecy come true?"
-msgstr ""
+msgstr "Podľa starej legendy týchto sedem kráľovstiev, ktoré prosperovali celú večnosť, raz upadne do pustošivej vojny. Bola vaša posledná zrada priveľa a splní sa proroctvo?"
 
 #: ../../data/maps/Lake_of_Tranquility.wmf/elemental:8
 msgid "Lake of Tranquility"
@@ -712,7 +712,7 @@ msgstr "Táto rieka vždy poskytovala jedlo a komunikáciu. Tentoraz bude o kont
 msgid ""
 "Use the river wisely. Your opponents will do the same. You will find the "
 "main ore resources deep in the desert."
-msgstr ""
+msgstr "Využite rieku čo najrozumnejšie. Vaši protivníci budú konať rovnako. Hlavné zdroje rúd nájdete hlboko v púšti."
 
 #: ../../data/maps/The_Oasis_Triangle.wmf/elemental:8
 msgid "The Oasis Triangle"

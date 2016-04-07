@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-04-02 18:37+0000\n"
-"PO-Revision-Date: 2016-04-03 09:13+0000\n"
+"POT-Creation-Date: 2016-04-03 19:12+0000\n"
+"PO-Revision-Date: 2016-04-04 09:12+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -292,7 +292,7 @@ msgstr "A’ cruthachadh mapa falamh…"
 #. * TRANSLATORS: Default name for new map
 #: ../../src/editor/editorinteractive.cc:649
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:131
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:455
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:458
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:138
 #: ../../src/logic/map.h:181
 msgid "No Name"
@@ -300,7 +300,7 @@ msgstr "Gun ainm"
 
 #: ../../src/editor/editorinteractive.cc:650
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:132
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:456
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:459
 msgctxt "map_name"
 msgid "Unknown"
 msgstr "Mapa nach aithne dhuinn"
@@ -426,7 +426,7 @@ msgid "Editor Category: %s"
 msgstr "Roinn-seòrsa an deasaiche: %s"
 
 #: ../../src/editor/tools/editor_info_tool.cc:123
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:92
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:93
 msgid "Resources:"
 msgstr "Stòrasan:"
 
@@ -510,7 +510,7 @@ msgid "New Map"
 msgstr "Mapa ùr"
 
 #: ../../src/editor/ui_menus/editor_main_menu.cc:57
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:45
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:46
 msgid "New Random Map"
 msgstr "Mapa tuaireamach ùr"
 
@@ -548,7 +548,7 @@ msgstr "Ceart ma-thà"
 #: ../../src/editor/ui_menus/editor_main_menu_load_or_save_map.cc:69
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:70
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:67
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:144
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:145
 #: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:50
 #: ../../src/ui_basic/messagebox.cc:103 ../../src/ui_fsmenu/launch_mpg.cc:88
 #: ../../src/ui_fsmenu/options.cc:120
@@ -661,12 +661,12 @@ msgid "Size: %1% x %2%"
 msgstr "Meud: %1% x %2%"
 
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:53
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:55
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:56
 msgid "Width:"
 msgstr "Leud:"
 
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:57
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:59
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:60
 msgid "Height:"
 msgstr "Àirde:"
 
@@ -674,96 +674,114 @@ msgstr "Àirde:"
 msgid "Create Map"
 msgstr "Cruthaich mapa"
 
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:64
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:65
 #: ../../src/ui_fsmenu/loadgame.cc:323
 msgid "Players:"
 msgstr "Cluicheadairean:"
 
 #. * TRANSLATORS: A world name for the random map generator in the editor
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:70
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:71
 msgid "Summer"
 msgstr "Samhradh"
 
 #. * TRANSLATORS: A world name for the random map generator in the editor
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:72
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:73
 msgid "Winter"
 msgstr "Geamhradh"
 
 #. * TRANSLATORS: A world name for the random map generator in the editor
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:74
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:75
 msgid "Desert"
 msgstr "Fàsach"
 
 #. * TRANSLATORS: A world name for the random map generator in the editor
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:76
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:77
 msgid "Wasteland"
 msgstr "Talamh fàs"
 
 #. * TRANSLATORS: Amount of resources in the random map generator in the
 #. editor
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:82
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:83
 msgid "Low"
 msgstr "Ìosal"
 
 #. * TRANSLATORS: Amount of resources in the random map generator in the
 #. editor
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:84
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:85
 msgid "Medium"
 msgstr "Meadhanach"
 
 #. * TRANSLATORS: Amount of resources in the random map generator in the
 #. editor
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:86
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:87
 msgid "High"
 msgstr "Àrd"
 
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:91
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:92
 msgid "Climate:"
 msgstr "Gnàth-shìde:"
 
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:110
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:111
 msgid "Water:"
 msgstr "Uisge:"
 
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:114
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:115
 msgid "Land:"
 msgstr "Tìr:"
 
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:118
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:119
 msgid "Wasteland:"
 msgstr "Talamh fàs:"
 
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:121
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:122
 msgid "Mountains:"
 msgstr "Beanntan:"
 
 #. * TRANSLATORS: A spinbox unit
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:123
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:425
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:124
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:426
 #: ../../src/ui_basic/spinbox.cc:333
 #, c-format
 msgid "%i %%"
 msgstr "%i %%"
 
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:125
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:126
 msgid "Island mode"
 msgstr "Modh eileanan"
 
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:128
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:129
 msgid "Random Number:"
 msgstr "Àireamh thuaireamach:"
 
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:133
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:134
 msgid "Map ID:"
 msgstr "ID a’ mhapa:"
 
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:141
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:142
 msgid "Generate Map"
 msgstr "Gin mapa"
 
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:458
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:461
 msgid "Generating random map…"
 msgstr "A’ gintinn mapa tuaireamach…"
+
+#. * TRANSLATORS: Window title. This is shown after a random map has been
+#. created in the editor.
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:472
+msgid "Random Map"
+msgstr "Mapa tuaireamach"
+
+#. * TRANSLATORS: This is shown after a random map has been created in the
+#. editor.
+#. * TRANSLATORS: You don't need to be literal with your translation,
+#. * TRANSLATORS: as long as the user understands that he needs to check the
+#. player positions.
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:476
+msgid ""
+"The map has been generated. Please double-check the player starting "
+"positions to make sure that your carriers won’t drown, or be stuck on an "
+"island or on top of a mountain."
+msgstr "Tha am mapa air a chruthachadh. Dearbhaich ionadan tòiseachaidh nan cluicheadairean ach nach dèid an luchd-obrach agad a bhàthadh ’s nach bi iad glaiste ann an eilean no air mullach beinne."
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:61
 #: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:28
