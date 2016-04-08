@@ -1,5 +1,5 @@
 /*
-Eris - Heavy-duty persistence for Lua 5.2.4 - Based on Pluto
+Eris - Heavy-duty persistence for Lua 5.3.0 - Based on Pluto
 Copyright (c) 2013-2015 by Florian Nuecke.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
