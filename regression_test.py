@@ -27,7 +27,7 @@ else:
         return d.itervalues()
     def iteritems(d):
         return d.iteritems()
-		
+
 def datadir():
     return os.path.join(os.path.dirname(__file__), "data")
 
@@ -79,20 +79,22 @@ class WidelandsTestCase(unittest.TestCase):
         impact the filenames for stdout.txt.
 
         Returns the stdout filename."""
-        stdout_filename = os.path.join(self.run_dir, "stdout_%02i.txt" % which_time)
+        stdout_filename = os.path.join(self.run_dir, "stdout_{:02d}.txt".format(which_time))
+        log_filename = os.path.join(self.run_dir, "log_{:02d}.txt".format(which_time))
         if (os.path.exists(stdout_filename)):
             os.unlink(stdout_filename)
 
         with open(stdout_filename, 'a') as stdout_file:
             args = [self.path_to_widelands_binary,
                     '--verbose=true',
-                    '--datadir=%s' % datadir(),
-                    '--datadir_for_testing=%s' % datadir_for_testing(),
-                    '--homedir=%s' % self.run_dir,
+                    '--datadir={}'.format(datadir()),
+                    '--datadir_for_testing={}'.format(datadir_for_testing()),
+                    '--homedir={}'.format(self.run_dir),
                     '--disable_fx=true',
                     '--disable_music=true',
-                    '--language=en_US' ]
-            args += [ "--%{}=%{}".format(key, value) for key, value in iteritems(wlargs) ]
+                    '--language=en_US',
+                    '--logfile={}'.format(log_filename) ]
+            args += [ "--{}={}".format(key, value) for key, value in iteritems(wlargs) ]
 
             widelands = subprocess.Popen(
                     args, shell=False, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
@@ -100,21 +102,14 @@ class WidelandsTestCase(unittest.TestCase):
                 line = widelands.stdout.readline()
                 if not line:
                     break
-                stdout_file.write(line)
+                stdout_file.write(str(line))
                 stdout_file.flush()
             widelands.communicate()
-            if platform.system() == "Windows":
-                 win_stdout = self.path_to_widelands_binary.replace("widelands.exe","stdout.txt")
-                 win_stderr = self.path_to_widelands_binary.replace("widelands.exe","stderr.txt")
-                 with open(win_stdout,"r") as f:
-                     for line in f:
-                         stdout_file.write(line)
-                     stdout_file.flush()
-                 if (os.path.exists(win_stderr)):
-                     with open(win_stderr,"r") as f:
-                         for line in f:
-                             stdout_file.write(line)
-                         stdout_file.flush()
+
+            with open(log_filename,"r") as f:
+                for line in f:
+                    stdout_file.write(line)
+                stdout_file.flush()
 
             self.widelands_returncode = widelands.returncode
         return stdout_filename
@@ -131,9 +126,9 @@ class WidelandsTestCase(unittest.TestCase):
         while not all(savegame_done.values()):
             for savegame in sorted(savegame_done):
                 if not savegame_done[savegame]: break
-            out("  Loading savegame: %s ... " % savegame)
+            out("  Loading savegame: {} ... ".format(savegame))
             stdout_filename = self.run_widelands({ "loadgame": os.path.join(
-                self.run_dir, "save", "%s.wgf" % savegame) }, which_time)
+                self.run_dir, "save", "{}.wgf".format(savegame))}, which_time)
             which_time += 1
             stdout = open(stdout_filename, "r").read()
             for new_save in find_saves(stdout):
@@ -143,17 +138,17 @@ class WidelandsTestCase(unittest.TestCase):
             self.verify_success(stdout, stdout_filename)
 
     def verify_success(self, stdout, stdout_filename):
-        common_msg = "Analyze the files in %s to see why this test case failed. Stdout is\n  %s\n\nstdout:\n%s" % (
+        common_msg = "Analyze the files in {} to see why this test case failed. Stdout is\n  {}\n\nstdout:\n{}".format(
                 self.run_dir, stdout_filename, stdout)
         self.assertTrue(self.widelands_returncode == 0,
-            "Widelands exited abnormally. %s" % common_msg
+            "Widelands exited abnormally. {}".format(common_msg)
         )
         self.assertTrue("All Tests passed" in stdout,
-            "Not all tests pass. %s." % common_msg
+            "Not all tests pass. {}.".format(common_msg)
         )
         out("done.\n")
         if self.keep_output_around:
-            out("    stdout: %s\n" % stdout_filename)
+            out("    stdout: {}\n".format(stdout_filename))
 
 def parse_args():
     p = argparse.ArgumentParser(description=
@@ -238,7 +233,7 @@ def main():
     if args.regexp:
         all_files = [filename for filename in all_files if re.search(args.regexp, filename) ]
 
-    all_modules = [ "test.%s" % filename[:-3] for filename in all_files ]
+    all_modules = [ "test.{}".format(filename[:-3]) for filename in all_files ]
 
     suite = unittest.TestSuite()
     discover_loadgame_tests(args.regexp, suite)
