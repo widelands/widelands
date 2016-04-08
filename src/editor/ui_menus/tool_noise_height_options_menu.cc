@@ -21,8 +21,6 @@
 
 #include <cstdio>
 
-#include <boost/format.hpp>
-
 #include "base/i18n.h"
 #include "editor/editorinteractive.h"
 #include "editor/tools/decrease_height_tool.h"
@@ -40,7 +38,7 @@ EditorToolNoiseHeightOptionsMenu::EditorToolNoiseHeightOptionsMenu
 	 EditorNoiseHeightTool   & noise_tool,
 	 UI::UniqueWindow::Registry & registry)
 	:
-	EditorToolOptionsMenu(parent, registry, 300, 120, _("Noise Height Options")),
+	EditorToolOptionsMenu(parent, registry, 300, 120, _("Random Height Options")),
 	noise_tool_(noise_tool),
 	box_(this, hmargin(), vmargin(), UI::Box::Vertical, 0, 0, vspacing()),
 	lower_(&box_, 0, 0, get_inner_w() - 2 * hmargin(), 80,
@@ -60,16 +58,14 @@ EditorToolNoiseHeightOptionsMenu::EditorToolNoiseHeightOptionsMenu
 			  UI::SpinBox::Type::kSmall)
 {
 	lower_.set_tooltip(
-				/** TRANSLATORS: Editor noise height access keys. **/
-				_("Click to set the height to a random value within the specified range"));
+				/** TRANSLATORS: Editor random height access key. **/
+				_("Click on the map to set terrain height to a random value within the specified range"));
 	upper_.set_tooltip(
-				/** TRANSLATORS: Editor noise height access keys. **/
-				_("Click to set the height to a random value within the specified range"));
+				/** TRANSLATORS: Editor random height access key. **/
+				_("Click on the map to set terrain height to a random value within the specified range"));
 	set_to_.set_tooltip(
-				/** TRANSLATORS: Editor set hoise height access keys. **/
-				(boost::format(_("Use %s to set to this value"))
-				 /** TRANSLATORS: This is an access key combination. Localize, but do not change the key. **/
-				 % _("Ctrl + Click")).str());
+				/** TRANSLATORS: Editor set height access key. **/
+				_("Ctrl + Click on the map to set terrain height"));
 
 	lower_.changed.connect
 		(boost::bind

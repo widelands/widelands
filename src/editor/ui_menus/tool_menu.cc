@@ -64,7 +64,7 @@ UI::UniqueWindow(&parent, "tool_menu", &registry, 350, 400, _("Tools"))
    pos.x += width + spacing;                                                  \
 
 	ADD_BUTTON("change_height",    _("Change height"));
-	ADD_BUTTON("noise_height",     _("Noise height"));
+	ADD_BUTTON("noise_height",     _("Random height"));
 	ADD_BUTTON("set_terrain",      _("Terrain"));
 	ADD_BUTTON("place_immovable",  _("Immovables"));
 	ADD_BUTTON("place_bob",        _("Animals"));
