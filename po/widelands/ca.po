@@ -9,9 +9,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-04-02 18:37+0000\n"
-"PO-Revision-Date: 2016-04-02 18:39+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2016-04-03 19:12+0000\n"
+"PO-Revision-Date: 2016-04-05 21:43+0000\n"
+"Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -289,7 +289,7 @@ msgstr "S'està creant un mapa buit…"
 #. * TRANSLATORS: Default name for new map
 #: ../../src/editor/editorinteractive.cc:649
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:131
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:455
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:458
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:138
 #: ../../src/logic/map.h:181
 msgid "No Name"
@@ -297,7 +297,7 @@ msgstr "Sense nom"
 
 #: ../../src/editor/editorinteractive.cc:650
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:132
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:456
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:459
 msgctxt "map_name"
 msgid "Unknown"
 msgstr "Desconegut"
@@ -423,7 +423,7 @@ msgid "Editor Category: %s"
 msgstr "Categoria d'editor: %s"
 
 #: ../../src/editor/tools/editor_info_tool.cc:123
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:92
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:93
 msgid "Resources:"
 msgstr "Quantitat de recursos:"
 
@@ -507,7 +507,7 @@ msgid "New Map"
 msgstr "Mapa nou"
 
 #: ../../src/editor/ui_menus/editor_main_menu.cc:57
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:45
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:46
 msgid "New Random Map"
 msgstr "Mapa aleatori nou"
 
@@ -545,7 +545,7 @@ msgstr "D'acord"
 #: ../../src/editor/ui_menus/editor_main_menu_load_or_save_map.cc:69
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:70
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:67
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:144
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:145
 #: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:50
 #: ../../src/ui_basic/messagebox.cc:103 ../../src/ui_fsmenu/launch_mpg.cc:88
 #: ../../src/ui_fsmenu/options.cc:120
@@ -656,12 +656,12 @@ msgid "Size: %1% x %2%"
 msgstr "Mida: %1% x %2%"
 
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:53
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:55
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:56
 msgid "Width:"
 msgstr "Amplada:"
 
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:57
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:59
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:60
 msgid "Height:"
 msgstr "Alçada:"
 
@@ -669,96 +669,114 @@ msgstr "Alçada:"
 msgid "Create Map"
 msgstr "Crea el mapa"
 
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:64
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:65
 #: ../../src/ui_fsmenu/loadgame.cc:323
 msgid "Players:"
 msgstr "Jugadors:"
 
 #. * TRANSLATORS: A world name for the random map generator in the editor
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:70
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:71
 msgid "Summer"
 msgstr "Clima temperat"
 
 #. * TRANSLATORS: A world name for the random map generator in the editor
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:72
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:73
 msgid "Winter"
 msgstr "Clima àrtic"
 
 #. * TRANSLATORS: A world name for the random map generator in the editor
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:74
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:75
 msgid "Desert"
 msgstr "Clima desèrtic"
 
 #. * TRANSLATORS: A world name for the random map generator in the editor
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:76
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:77
 msgid "Wasteland"
 msgstr "Paisatge volcànic"
 
 #. * TRANSLATORS: Amount of resources in the random map generator in the
 #. editor
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:82
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:83
 msgid "Low"
 msgstr "Baix"
 
 #. * TRANSLATORS: Amount of resources in the random map generator in the
 #. editor
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:84
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:85
 msgid "Medium"
 msgstr "Normal"
 
 #. * TRANSLATORS: Amount of resources in the random map generator in the
 #. editor
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:86
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:87
 msgid "High"
 msgstr "Alt"
 
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:91
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:92
 msgid "Climate:"
 msgstr "Clima/paisatge:"
 
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:110
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:111
 msgid "Water:"
 msgstr "Aigua:"
 
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:114
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:115
 msgid "Land:"
 msgstr "Sòl fèrtil:"
 
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:118
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:119
 msgid "Wasteland:"
 msgstr "Erm:"
 
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:121
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:122
 msgid "Mountains:"
 msgstr "Muntanyes:"
 
 #. * TRANSLATORS: A spinbox unit
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:123
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:425
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:124
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:426
 #: ../../src/ui_basic/spinbox.cc:333
 #, c-format
 msgid "%i %%"
 msgstr "%i %%"
 
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:125
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:126
 msgid "Island mode"
 msgstr "Mode d'illes"
 
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:128
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:129
 msgid "Random Number:"
 msgstr "Número aleatori:"
 
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:133
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:134
 msgid "Map ID:"
 msgstr "Identificador del Mapa (ID):"
 
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:141
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:142
 msgid "Generate Map"
 msgstr "Genera el mapa"
 
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:458
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:461
 msgid "Generating random map…"
 msgstr "S'està generant un mapa aleatori…"
+
+#. * TRANSLATORS: Window title. This is shown after a random map has been
+#. created in the editor.
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:472
+msgid "Random Map"
+msgstr "Mapa aleatori"
+
+#. * TRANSLATORS: This is shown after a random map has been created in the
+#. editor.
+#. * TRANSLATORS: You don't need to be literal with your translation,
+#. * TRANSLATORS: as long as the user understands that he needs to check the
+#. player positions.
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:476
+msgid ""
+"The map has been generated. Please double-check the player starting "
+"positions to make sure that your carriers won’t drown, or be stuck on an "
+"island or on top of a mountain."
+msgstr "S'acaba de generar el mapa. Si us plau, repasseu bé les posicions inicials dels jugadors per assegurar-vos que els colons no s'ofegaran ni quedaran atrapats en illes petites o dalt de tot de les muntanyes."
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:61
 #: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:28
@@ -916,7 +934,7 @@ msgstr "Estableix el valor: %u"
 #. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:81
 msgid "%1%: %2%"
-msgstr ""
+msgstr "%1%: %2%"
 
 #: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:95
 msgid "Terrain Select"
@@ -1337,7 +1355,7 @@ msgstr "S'ha trobat una zona portuària"
 #: ../../src/logic/map_objects/tribes/ship.cc:973
 msgctxt "ship_state"
 msgid "Founding a Colony"
-msgstr ""
+msgstr "Fundació de colònies"
 
 #: ../../src/logic/map_objects/tribes/soldier.cc:1485
 #: ../../src/logic/map_objects/tribes/soldier.cc:1496
@@ -2057,7 +2075,7 @@ msgstr[1] "%d píxels"
 
 #: ../../src/ui_fsmenu/about.cc:40 ../../src/ui_fsmenu/main.cc:55
 msgid "About Widelands"
-msgstr ""
+msgstr "Quant al Widelands"
 
 #: ../../src/ui_fsmenu/about.cc:48 ../../src/wui/watchwindow.cc:142
 msgid "Close"
@@ -3837,16 +3855,16 @@ msgstr "Se situarà el clan aleatòriament."
 msgctxt "unit_narrow"
 msgid "%1%d"
 msgid_plural "%1%d"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1%d"
+msgstr[1] "%1%d"
 
 #. * TRANSLATORS: hour(s). Keep this as short as possible. Used in statistics.
 #: ../../src/wui/plot_area.cc:128
 msgctxt "unit_narrow"
 msgid "%1%h"
 msgid_plural "%1%h"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1%h"
+msgstr[1] "%1%h"
 
 #. * TRANSLATORS: minute(s). Keep this as short as possible. Used in
 #. statistics.
@@ -3854,26 +3872,26 @@ msgstr[1] ""
 msgctxt "unit_narrow"
 msgid "%1%m"
 msgid_plural "%1%m"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1%m"
+msgstr[1] "%1%m"
 
 #. * TRANSLATORS: Generic unit label. Used in statistics.
 #: ../../src/wui/plot_area.cc:140
 msgctxt "unit_generic"
 msgid "days"
-msgstr ""
+msgstr "dies"
 
 #. * TRANSLATORS: Generic unit label. Used in statistics.
 #: ../../src/wui/plot_area.cc:143
 msgctxt "unit_generic"
 msgid "hours"
-msgstr ""
+msgstr "hores"
 
 #. * TRANSLATORS: Generic unit label. Used in statistics.
 #: ../../src/wui/plot_area.cc:146
 msgctxt "unit_generic"
 msgid "minutes"
-msgstr ""
+msgstr "min"
 
 #: ../../src/wui/plot_area.cc:319
 msgid "game"
