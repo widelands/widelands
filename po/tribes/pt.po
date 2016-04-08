@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-04-02 11:15+0000\n"
-"PO-Revision-Date: 2016-04-02 11:17+0000\n"
+"POT-Creation-Date: 2016-04-03 19:12+0000\n"
+"PO-Revision-Date: 2016-04-07 07:34+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Portuguese (http://www.transifex.com/widelands/widelands/language/pt/)\n"
 "MIME-Version: 1.0\n"
@@ -507,7 +507,7 @@ msgstr "colher raiz negra"
 #: ../../data/tribes/buildings/productionsites/empire/farm/init.lua:74
 #: ../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:72
 msgid "No Fields"
-msgstr ""
+msgstr "Sem campos"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:74
 #: ../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:77
@@ -516,14 +516,14 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/empire/farm/init.lua:75
 #: ../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:73
 msgid "Out of Fields"
-msgstr ""
+msgstr "Não tem campos"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:75
 msgctxt "atlanteans_building"
 msgid ""
 "The blackroot farmer working at this blackroot farm has no cleared soil to "
 "plant his seeds."
-msgstr ""
+msgstr "O agricultor das raízes negras nesta quinta das raízes negras não tem terra aberta para meter sementes."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/charcoal_kiln/init.lua:7
@@ -570,14 +570,14 @@ msgstr "Sem carvão"
 #: ../../data/tribes/buildings/productionsites/empire/coalmine/init.lua:76
 #: ../../data/tribes/buildings/productionsites/empire/coalmine_deep/init.lua:74
 msgid "Main Coal Vein Exhausted"
-msgstr ""
+msgstr "Veio de carvão principal esgotado"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/coalmine/init.lua:80
 msgctxt "atlanteans_building"
 msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider dismantling or destroying it."
-msgstr ""
+msgstr "O veio principal desta mina de carvão está esgotado. Espere que recebas rendimento muito diminuído. Considera a desmontar ou destruir."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:7
@@ -608,14 +608,14 @@ msgstr "Sem cristal"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:129
 msgid "Main Crystal Vein Exhausted"
-msgstr ""
+msgstr "Veio de cristal principal esgotado"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:131
 msgctxt "atlanteans_building"
 msgid ""
 "This crystal mine’s main vein is exhausted. Expect strongly diminished "
 "returns on investment. You should consider dismantling or destroying it."
-msgstr ""
+msgstr "O veio principal desta mina de cristal está esgotado. Espere que recebas rendimento muito diminuído. Considera a desmontar ou destruir."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:7
@@ -637,7 +637,7 @@ msgstr "colher milho"
 msgctxt "atlanteans_building"
 msgid ""
 "The farmer working at this farm has no cleared soil to plant his seeds."
-msgstr ""
+msgstr "O agricultor nesta quinta não tem terra aberta para meter sementes."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:7
@@ -673,7 +673,7 @@ msgstr "Sem peixes"
 #: ../../data/tribes/buildings/productionsites/barbarians/fishers_hut/init.lua:60
 #: ../../data/tribes/buildings/productionsites/empire/fishers_house/init.lua:54
 msgid "Out of Fish"
-msgstr ""
+msgstr "Não tem peixes"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishers_house/init.lua:55
 msgctxt "atlanteans_building"
@@ -681,7 +681,7 @@ msgid ""
 "The fisher working out of this fisher’s house can’t find any fish in his "
 "work area. Remember that you can increase the number of existing fish by "
 "building a fish breeder’s house."
-msgstr ""
+msgstr "O pescador nesta casa do pescador não encontrou peixes na sua área de trabalho. Lembra que podes aumentar o número de peixes através construção de uma casa do piscicultor."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/foresters_house/init.lua:7
@@ -694,7 +694,7 @@ msgstr "Casa do silvicultor"
 #: ../../data/tribes/buildings/productionsites/barbarians/rangers_hut/init.lua:47
 #: ../../data/tribes/buildings/productionsites/empire/foresters_house/init.lua:42
 msgid "planting trees"
-msgstr ""
+msgstr "pantar árvores"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/gold_spinning_mill/init.lua:7
@@ -739,14 +739,14 @@ msgstr "Sem ouro"
 #: ../../data/tribes/buildings/productionsites/empire/goldmine/init.lua:76
 #: ../../data/tribes/buildings/productionsites/empire/goldmine_deep/init.lua:74
 msgid "Main Gold Vein Exhausted"
-msgstr ""
+msgstr "Veio de ouro principal esgotado"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/goldmine/init.lua:80
 msgctxt "atlanteans_building"
 msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider dismantling or destroying it."
-msgstr ""
+msgstr "O veio principal desta mina de ouro está esgotado. Espere que recebas rendimento muito diminuído. Considera a desmontar ou destruir."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/horsefarm/init.lua:7
@@ -776,14 +776,14 @@ msgstr "caçar"
 #: ../../data/tribes/buildings/productionsites/barbarians/hunters_hut/init.lua:60
 #: ../../data/tribes/buildings/productionsites/empire/hunters_house/init.lua:50
 msgid "No Game"
-msgstr ""
+msgstr "Sem caça"
 
 #. TRANSLATORS: "Game" means animals that you can hunt
 #: ../../data/tribes/buildings/productionsites/atlanteans/hunters_house/init.lua:54
 #: ../../data/tribes/buildings/productionsites/barbarians/hunters_hut/init.lua:62
 #: ../../data/tribes/buildings/productionsites/empire/hunters_house/init.lua:52
 msgid "Out of Game"
-msgstr ""
+msgstr "Não tem caça"
 
 #. TRANSLATORS: "game" means animals that you can hunt
 #: ../../data/tribes/buildings/productionsites/atlanteans/hunters_house/init.lua:56
@@ -791,7 +791,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "The hunter working out of this hunter’s house can’t find any game in his "
 "work area."
-msgstr ""
+msgstr "O caçador nesta casa do caçador não encontrou caça na sua área de trabalho."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/ironmine/init.lua:7
@@ -825,14 +825,14 @@ msgstr "Sem ferro"
 #: ../../data/tribes/buildings/productionsites/empire/ironmine/init.lua:76
 #: ../../data/tribes/buildings/productionsites/empire/ironmine_deep/init.lua:74
 msgid "Main Iron Vein Exhausted"
-msgstr ""
+msgstr "Veio de ferro principal esgotado"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/ironmine/init.lua:80
 msgctxt "atlanteans_building"
 msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider dismantling or destroying it."
-msgstr ""
+msgstr "O veio principal desta mina de ferro está esgotado. Espere que recebas rendimento muito diminuído. Considera a desmontar ou destruir."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/mill/init.lua:7
@@ -873,14 +873,14 @@ msgstr "Sem rochedos"
 #: ../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:73
 #: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:81
 msgid "Out of Rocks"
-msgstr ""
+msgstr "Não tem rochedos"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:67
 msgctxt "atlanteans_building"
 msgid ""
 "The stonecutter working at this quarry can’t find any rocks in his work "
 "area."
-msgstr ""
+msgstr " O canteiro nesta pedreira não encontrou rochedos na sua área de trabalho."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/sawmill/init.lua:7
@@ -1122,13 +1122,13 @@ msgstr "Sem água"
 #: ../../data/tribes/buildings/productionsites/barbarians/well/init.lua:64
 #: ../../data/tribes/buildings/productionsites/empire/well/init.lua:62
 msgid "Out of Water"
-msgstr ""
+msgstr "Não tem água"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/well/init.lua:63
 msgctxt "atlanteans_building"
 msgid ""
 "The carrier working at this well can’t find any water in his work area."
-msgstr ""
+msgstr " O carregador neste poço não encontrou água na sua área de trabalho."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/woodcutters_house/init.lua:7
@@ -1141,19 +1141,19 @@ msgstr "Casa do madeireiro"
 #: ../../data/tribes/buildings/productionsites/barbarians/lumberjacks_hut/init.lua:51
 #: ../../data/tribes/buildings/productionsites/empire/lumberjacks_house/init.lua:45
 msgid "felling trees"
-msgstr ""
+msgstr "cortar árvores"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/woodcutters_house/init.lua:54
 #: ../../data/tribes/buildings/productionsites/barbarians/lumberjacks_hut/init.lua:60
 #: ../../data/tribes/buildings/productionsites/empire/lumberjacks_house/init.lua:54
 msgid "No Trees"
-msgstr ""
+msgstr "Sem árvores"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/woodcutters_house/init.lua:55
 #: ../../data/tribes/buildings/productionsites/barbarians/lumberjacks_hut/init.lua:61
 #: ../../data/tribes/buildings/productionsites/empire/lumberjacks_house/init.lua:55
 msgid "Out of Trees"
-msgstr ""
+msgstr "Não tem árvores"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/woodcutters_house/init.lua:56
 msgctxt "atlanteans_building"
@@ -1161,7 +1161,7 @@ msgid ""
 "The woodcutter working at this woodcutter’s house can’t find any trees in "
 "his work area. You should consider dismantling or destroying the building or"
 " building a forester’s house."
-msgstr ""
+msgstr "O madeireiro nesta casa do madeireiro não encontrou árvores na sua área de trabalho. Considera desmontar ou destruir o edifício ou construir uma casa do silvicultor."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/init.lua:7
@@ -1206,7 +1206,7 @@ msgstr "Estalagem"
 #: ../../data/tribes/buildings/productionsites/empire/inn/init.lua:64
 #: ../../data/tribes/buildings/productionsites/empire/tavern/init.lua:56
 msgid "preparing a ration"
-msgstr ""
+msgstr "preparar ração"
 
 #. TRANSLATORS: Completed/Skipped/Did not start preparing a snack because ...
 #: ../../data/tribes/buildings/productionsites/barbarians/big_inn/init.lua:80
@@ -1261,7 +1261,7 @@ msgctxt "barbarians_building"
 msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider enhancing, dismantling or destroying it."
-msgstr ""
+msgstr "O veio principal desta mina de carvão está esgotado. Espere que recebas rendimento muito diminuído. Considera a melhorar, desmontar ou destruir."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deep/init.lua:7
@@ -1281,7 +1281,7 @@ msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
-msgstr ""
+msgstr "O veio principal desta mina de carvão está esgotado. Espere que recebas rendimento muito diminuído. Não se pode melhorar esta mina outra vez, assim considera a desmontar ou destruir."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/farm/init.lua:7
@@ -1305,7 +1305,7 @@ msgstr "colher trigo"
 msgctxt "barbarians_building"
 msgid ""
 "The farmer working at this farm has no cleared soil to plant his seeds."
-msgstr ""
+msgstr "O agricultor nesta quinta não tem terra aberta para meter sementes."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/fishers_hut/init.lua:7
@@ -1318,7 +1318,7 @@ msgctxt "barbarians_building"
 msgid ""
 "The fisher working out of this fisher’s hut can’t find any fish in his work "
 "area."
-msgstr ""
+msgstr "O pescador nesta cabana do pescador não encontrou peixes na sua área de trabalho."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/gamekeepers_hut/init.lua:7
@@ -1338,7 +1338,7 @@ msgctxt "barbarians_building"
 msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider enhancing, dismantling or destroying it."
-msgstr ""
+msgstr "O veio principal desta mina de ouro está esgotado. Espere que recebas rendimento muito diminuído. Considera a melhorar, desmontar ou destruir."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deep/init.lua:7
@@ -1358,7 +1358,7 @@ msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
-msgstr ""
+msgstr "O veio principal desta mina de mina de ouro está esgotado. Espere que recebas rendimento muito diminuído. Não se pode melhorar esta mina outra vez, assim considera a desmontar ou destruir."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/granitemine/init.lua:7
@@ -1372,7 +1372,7 @@ msgstr "Sem granito"
 
 #: ../../data/tribes/buildings/productionsites/barbarians/granitemine/init.lua:73
 msgid "Main Granite Vein Exhausted"
-msgstr ""
+msgstr "Veio de granito principal esgotado"
 
 #: ../../data/tribes/buildings/productionsites/barbarians/granitemine/init.lua:75
 msgctxt "barbarians_building"
@@ -1380,7 +1380,7 @@ msgid ""
 "This granite mine’s main vein is exhausted. Expect strongly diminished "
 "returns on investment. This mine can’t be enhanced any further, so you "
 "should consider dismantling or destroying it."
-msgstr ""
+msgstr "O veio principal desta mina de granito está esgotado. Espere que recebas rendimento muito diminuído. Não se pode melhorar esta mina outra vez, assim considera a desmontar ou destruir."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/helmsmithy/init.lua:7
@@ -1417,7 +1417,7 @@ msgid ""
 "The hunter working out of this hunter’s hut can’t find any game in his work "
 "area. Remember that you can build a gamekeeper’s hut to release more game "
 "into the wild."
-msgstr ""
+msgstr "O caçador nesta cabana do caçador não encontrou caça na sua área de trabalho. Lembra que podes  construir uma coutada para soltar mais caça."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/inn/init.lua:7
@@ -1437,7 +1437,7 @@ msgctxt "barbarians_building"
 msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider enhancing, dismantling or destroying it."
-msgstr ""
+msgstr "O veio principal desta mina de ferro está esgotado. Espere que recebas rendimento muito diminuído. Considera a melhorar, desmontar ou destruir."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deep/init.lua:7
@@ -1457,7 +1457,7 @@ msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
-msgstr ""
+msgstr "O veio principal desta mina de ferro está esgotado. Espere que recebas rendimento muito diminuído. Não se pode melhorar esta mina outra vez, assim considera a desmontar ou destruir."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/lime_kiln/init.lua:7
@@ -1482,7 +1482,7 @@ msgid ""
 "The lumberjack working at this lumberjack’s hut can’t find any trees in his "
 "work area. You should consider dismantling or destroying the building or "
 "building a ranger’s hut."
-msgstr ""
+msgstr "O lenhador nesta cabana do lenhador não encontrou árvores na sua área de trabalho. Considera desmontar ou destruir o edifício ou construir uma cabana do guarda-florestal."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:7
@@ -1540,7 +1540,7 @@ msgstr "Pedreira"
 msgctxt "barbarians_building"
 msgid ""
 "The stonemason working at this quarry can’t find any rocks in his work area."
-msgstr ""
+msgstr " O pedreiro nesta pedreira não encontrou rochedos na sua área de trabalho."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/rangers_hut/init.lua:7
@@ -1557,19 +1557,19 @@ msgstr "Colmo maduro"
 #. TRANSLATORS: Completed/Skipped/Did not start planting reed because ...
 #: ../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:54
 msgid "planting reed"
-msgstr ""
+msgstr "plantar junco"
 
 #. TRANSLATORS: Completed/Skipped/Did not start harvesting reed because ...
 #: ../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:62
 msgid "harvesting reed"
-msgstr ""
+msgstr "colher junco"
 
 #: ../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:73
 msgctxt "barbarians_building"
 msgid ""
 "The gardener working at this reed yard has no cleared soil to plant his "
 "seeds."
-msgstr ""
+msgstr "O horticultor nesta quinta do colmo não tem terra aberta para meter sementes."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/scouts_hut/init.lua:7
@@ -1641,7 +1641,7 @@ msgstr "Poço"
 msgctxt "barbarians_building"
 msgid ""
 "The carrier working at this well can’t find any water in his work area."
-msgstr ""
+msgstr " O carregador neste poço não encontrou água na sua área de trabalho."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/wood_hardener/init.lua:7
@@ -1707,7 +1707,7 @@ msgctxt "empire_building"
 msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider enhancing, dismantling or destroying it."
-msgstr ""
+msgstr "O veio principal desta mina de carvão está esgotado. Espere que recebas rendimento muito diminuído. Considera a melhorar, desmontar ou destruir."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/coalmine_deep/init.lua:7
@@ -1721,7 +1721,7 @@ msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
-msgstr ""
+msgstr "O veio principal desta mina de carvão está esgotado. Espere que recebas rendimento muito diminuído. Não se pode melhorar esta mina outra vez, assim considera a desmontar ou destruir."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/donkeyfarm/init.lua:7
@@ -1744,7 +1744,7 @@ msgstr "Quinta"
 msgctxt "empire_building"
 msgid ""
 "The farmer working at this farm has no cleared soil to plant his seeds."
-msgstr ""
+msgstr "O agricultor nesta quinta não tem terra aberta para meter sementes."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/fishers_house/init.lua:7
@@ -1757,7 +1757,7 @@ msgctxt "empire_building"
 msgid ""
 "The fisher working out of this fisher’s house can’t find any fish in his "
 "work area."
-msgstr ""
+msgstr "O pescador nesta casa do pescador não encontrou peixes na sua área de trabalho."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/foresters_house/init.lua:7
@@ -1776,7 +1776,7 @@ msgctxt "empire_building"
 msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider enhancing, dismantling or destroying it."
-msgstr ""
+msgstr "O veio principal desta mina de ouro está esgotado. Espere que recebas rendimento muito diminuído. Considera a melhorar, desmontar ou destruir."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/goldmine_deep/init.lua:7
@@ -1790,7 +1790,7 @@ msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
-msgstr ""
+msgstr "O veio principal desta mina de mina de ouro está esgotado. Espere que recebas rendimento muito diminuído. Não se pode melhorar esta mina outra vez, assim considera a desmontar ou destruir."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/hunters_house/init.lua:7
@@ -1804,7 +1804,7 @@ msgctxt "empire_building"
 msgid ""
 "The hunter working out of this hunter’s house can’t find any game in his "
 "work area."
-msgstr ""
+msgstr "O caçador nesta casa do caçador não encontrou caça na sua área de trabalho."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/inn/init.lua:7
@@ -1823,7 +1823,7 @@ msgctxt "empire_building"
 msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider enhancing, dismantling or destroying it."
-msgstr ""
+msgstr "O veio principal desta mina de ferro está esgotado. Espere que recebas rendimento muito diminuído. Considera a melhorar, desmontar ou destruir."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/ironmine_deep/init.lua:7
@@ -1837,7 +1837,7 @@ msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
-msgstr ""
+msgstr "O veio principal desta mina de ferro está esgotado. Espere que recebas rendimento muito diminuído. Não se pode melhorar esta mina outra vez, assim considera a desmontar ou destruir."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/lumberjacks_house/init.lua:7
@@ -1851,7 +1851,7 @@ msgid ""
 "The lumberjack working at this lumberjack’s house can’t find any trees in "
 "his work area. You should consider dismantling or destroying the building or"
 " building a forester’s house."
-msgstr ""
+msgstr "O lenhador nesta casa do lenhador não encontrou árvores na sua área de trabalho. Considera desmontar ou destruir o edifício ou construir uma casa do silvicultor."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:7
@@ -1873,7 +1873,7 @@ msgstr "Sem mármore"
 #: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:101
 #: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:75
 msgid "Main Marble Vein Exhausted"
-msgstr ""
+msgstr "Veio de mármore principal esgotado"
 
 #: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:103
 msgctxt "empire_building"
@@ -1881,7 +1881,7 @@ msgid ""
 "This marble mine’s main vein is exhausted. Expect strongly diminished "
 "returns on investment. You should consider enhancing, dismantling or "
 "destroying it."
-msgstr ""
+msgstr "O veio principal desta mina de mármore está esgotado. Espere que recebas rendimento muito diminuído. Considera a melhorar, desmontar ou destruir."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:7
@@ -1895,7 +1895,7 @@ msgid ""
 "This marble mine’s main vein is exhausted. Expect strongly diminished "
 "returns on investment. This mine can’t be enhanced any further, so you "
 "should consider dismantling or destroying it."
-msgstr ""
+msgstr "O veio principal desta mina de mármore está esgotado. Espere que recebas rendimento muito diminuído. Não se pode melhorar esta mina outra vez, assim considera a desmontar ou destruir."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/mill/init.lua:7
@@ -1934,7 +1934,7 @@ msgstr "extrair de mármore"
 msgctxt "empire_building"
 msgid ""
 "The stonemason working at this quarry can’t find any rocks in his work area."
-msgstr ""
+msgstr " O pedreiro nesta pedreira não encontrou rochedos na sua área de trabalho."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/sawmill/init.lua:7
@@ -2023,7 +2023,7 @@ msgctxt "empire_building"
 msgid ""
 "The vine farmer working at this vineyard has no cleared soil to plant his "
 "grapevines."
-msgstr ""
+msgstr "O viticultor nesta vinha não tem terra aberta para meter videira."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/weaponsmithy/init.lua:7
@@ -2076,7 +2076,7 @@ msgstr "Poço"
 msgctxt "empire_building"
 msgid ""
 "The carrier working at this well can’t find any water in his work area."
-msgstr ""
+msgstr " O carregador neste poço não encontrou água na sua área de trabalho."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/winery/init.lua:7
@@ -2111,28 +2111,28 @@ msgstr "a dormir"
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:110
 #: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:104
 msgid "upgrading soldier attack from level 0 to level 1"
-msgstr ""
+msgstr "aperfeiçoar o ataque do guerreiro do nível 0 para o nível 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:98
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:121
 #: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:115
 msgid "upgrading soldier attack from level 1 to level 2"
-msgstr ""
+msgstr "aperfeiçoar o ataque do guerreiro do nível 1 para o nível 2"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:109
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:132
 #: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:126
 msgid "upgrading soldier attack from level 2 to level 3"
-msgstr ""
+msgstr "aperfeiçoar o ataque do guerreiro do nível 2 para o nível 3"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:120
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:143
 #: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:137
 msgid "upgrading soldier attack from level 3 to level 4"
-msgstr ""
+msgstr "aperfeiçoar o ataque do guerreiro do nível 3 para o nível 4"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:7
@@ -2143,19 +2143,19 @@ msgstr "Labirinto"
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:102
 msgid "upgrading soldier defense from level 0 to level 1"
-msgstr ""
+msgstr "aperfeiçoar a defesa do guerreiro do nível 0 para o nível 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:113
 msgid "upgrading soldier defense from level 1 to level 2"
-msgstr ""
+msgstr "aperfeiçoar a defesa do guerreiro do nível 1 para o nível 2"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:124
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:165
 #: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:148
 msgid "upgrading soldier health from level 0 to level 1"
-msgstr ""
+msgstr "aperfeiçoar a saúde do guerreiro do nível 0 para o nível 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:135
@@ -2163,14 +2163,14 @@ msgstr ""
 #: ../../data/tribes/buildings/trainingsites/empire/arena/init.lua:81
 #: ../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:76
 msgid "upgrading soldier evade from level 0 to level 1"
-msgstr ""
+msgstr "aperfeiçoar a evasão do guerreiro do nível 0 para o nível 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:146
 #: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:103
 #: ../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:87
 msgid "upgrading soldier evade from level 1 to level 2"
-msgstr ""
+msgstr "aperfeiçoar a evasão do guerreiro do nível 1 para o nível 2"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:7
@@ -2187,19 +2187,19 @@ msgstr "Campo de treinos"
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:154
 msgid "upgrading soldier attack from level 4 to level 5"
-msgstr ""
+msgstr "aperfeiçoar o ataque do guerreiro do nível 4 para o nível 5"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:176
 #: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:159
 msgid "upgrading soldier health from level 1 to level 2"
-msgstr ""
+msgstr "aperfeiçoar a saúde do guerreiro do nível 1 para o nível 2"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:187
 #: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:170
 msgid "upgrading soldier health from level 2 to level 3"
-msgstr ""
+msgstr "aperfeiçoar a saúde do guerreiro do nível 2 para o nível 3"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/trainingsites/empire/arena/init.lua:7
@@ -2222,7 +2222,7 @@ msgstr "Campo de treinos"
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:181
 msgid "upgrading soldier health from level 3 to level 4"
-msgstr ""
+msgstr "aperfeiçoar a saúde do guerreiro do nível 3 para o nível 4"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/warehouses/atlanteans/headquarters/init.lua:7
@@ -2475,7 +2475,7 @@ msgstr "Veio de ferro principal"
 #: ../../data/tribes/immovables/resi_none/init.lua:7
 msgctxt "immovable"
 msgid "No Resources"
-msgstr ""
+msgstr "Sem recursos"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi_stones1/init.lua:7
@@ -2506,102 +2506,110 @@ msgstr "Construção de navio"
 #: ../../data/tribes/preload.lua:12 ../../data/tribes/preload.lua:28
 #: ../../data/tribes/preload.lua:44
 msgid "The Widelands Development Team"
-msgstr ""
+msgstr "A equipa de desenvolvimento de Widelands"
 
 #. TRANSLATORS: This is a tribe name
 #: ../../data/tribes/preload.lua:14
 msgid "Barbarians"
-msgstr ""
+msgstr "Os Bárbaros"
 
 #: ../../data/tribes/preload.lua:15
 msgid "The mighty tribes of the east-lands."
-msgstr ""
+msgstr "As poderosas tribos das terras de Este, lá onde o sol nasce."
 
 #. TRANSLATORS: This is a tribe name
 #: ../../data/tribes/preload.lua:30
 msgid "Empire"
-msgstr ""
+msgstr "O Império"
 
 #: ../../data/tribes/preload.lua:31
 msgid "This is the culture of the Roman Empire."
-msgstr ""
+msgstr "Esta é a cultura do Império romano."
 
 #. TRANSLATORS: This is a tribe name
 #: ../../data/tribes/preload.lua:46
 msgid "Atlanteans"
-msgstr ""
+msgstr "Os Atlântas"
 
 #: ../../data/tribes/preload.lua:47
 msgid ""
 "This tribe is known from the oldest tales. The sons and daughters of "
 "Atlantis."
-msgstr ""
+msgstr "Esta tribo é conhecida das mais antigas lendas. Apresento-te os filhos e filhas da Atlântida."
 
 #: ../../data/tribes/scripting/help/init.lua:48
 msgid "Tribal Encyclopedia"
-msgstr ""
+msgstr "Enciclopédia da tribo"
 
 #: ../../data/tribes/scripting/help/init.lua:53
 msgid "General"
-msgstr ""
+msgstr "Geral"
 
 #: ../../data/tribes/scripting/help/init.lua:58
 msgid "Introduction"
-msgstr ""
+msgstr "Introdução"
 
 #: ../../data/tribes/scripting/help/init.lua:64
 msgid "Controls"
-msgstr ""
+msgstr "Controle"
 
 #: ../../data/tribes/scripting/help/init.lua:73
 msgid "Wares"
-msgstr ""
+msgstr "Mercadorias"
 
 #: ../../data/tribes/scripting/help/init.lua:80
 msgid "Workers"
-msgstr ""
+msgstr "Trabalhadores"
 
 #: ../../data/tribes/scripting/help/init.lua:87
 msgid "Buildings"
-msgstr ""
+msgstr "Edifícios"
 
-#: ../../data/tribes/scripting/starting_conditions/atlanteans/fortified_village.lua:10
-#: ../../data/tribes/scripting/starting_conditions/barbarians/fortified_village.lua:10
-#: ../../data/tribes/scripting/starting_conditions/empire/fortified_village.lua:10
-msgid "Fortified Village"
-msgstr ""
-
+#. TRANSLATORS: This is the name of a starting condition
 #: ../../data/tribes/scripting/starting_conditions/atlanteans/fortified_village.lua:11
 #: ../../data/tribes/scripting/starting_conditions/barbarians/fortified_village.lua:11
 #: ../../data/tribes/scripting/starting_conditions/empire/fortified_village.lua:11
+msgid "Fortified Village"
+msgstr "Aldeia fortificada"
+
+#. TRANSLATORS: This is the tooltip for the "Fortified Village" starting
+#. condition
+#: ../../data/tribes/scripting/starting_conditions/atlanteans/fortified_village.lua:13
+#: ../../data/tribes/scripting/starting_conditions/barbarians/fortified_village.lua:13
+#: ../../data/tribes/scripting/starting_conditions/empire/fortified_village.lua:13
 msgid " Start the game with a fortified military installation"
-msgstr ""
+msgstr "Começa o jogo com uma instalação militar fortificada"
 
-#: ../../data/tribes/scripting/starting_conditions/atlanteans/headquarters.lua:10
-#: ../../data/tribes/scripting/starting_conditions/barbarians/headquarters.lua:10
-#: ../../data/tribes/scripting/starting_conditions/empire/headquarters.lua:10
-msgid "Headquarters"
-msgstr "Quartel-general"
-
+#. TRANSLATORS: This is the name of a starting condition
 #: ../../data/tribes/scripting/starting_conditions/atlanteans/headquarters.lua:11
 #: ../../data/tribes/scripting/starting_conditions/barbarians/headquarters.lua:11
 #: ../../data/tribes/scripting/starting_conditions/empire/headquarters.lua:11
+msgid "Headquarters"
+msgstr "Quartel-general"
+
+#. TRANSLATORS: This is the tooltip for the "Headquarters" starting condition
+#: ../../data/tribes/scripting/starting_conditions/atlanteans/headquarters.lua:13
+#: ../../data/tribes/scripting/starting_conditions/barbarians/headquarters.lua:13
+#: ../../data/tribes/scripting/starting_conditions/empire/headquarters.lua:13
 msgid "Start the game with your headquarters only"
-msgstr ""
+msgstr "Começa o jogo só com um quartel-general"
 
-#: ../../data/tribes/scripting/starting_conditions/atlanteans/trading_outpost.lua:10
-#: ../../data/tribes/scripting/starting_conditions/barbarians/trading_outpost.lua:10
-#: ../../data/tribes/scripting/starting_conditions/empire/trading_outpost.lua:10
-msgid "Trading Outpost"
-msgstr "Posto de comércio"
-
+#. TRANSLATORS: This is the name of a starting condition
 #: ../../data/tribes/scripting/starting_conditions/atlanteans/trading_outpost.lua:11
 #: ../../data/tribes/scripting/starting_conditions/barbarians/trading_outpost.lua:11
 #: ../../data/tribes/scripting/starting_conditions/empire/trading_outpost.lua:11
+msgid "Trading Outpost"
+msgstr "Posto de comércio"
+
+#. TRANSLATORS: This is the tooltip for the "Trading Outpost" starting
+#. condition
+#: ../../data/tribes/scripting/starting_conditions/atlanteans/trading_outpost.lua:13
+#: ../../data/tribes/scripting/starting_conditions/barbarians/trading_outpost.lua:13
+#: ../../data/tribes/scripting/starting_conditions/empire/trading_outpost.lua:13
 msgid ""
 "If this player runs low on important wares, they will be replenished for "
 "free"
-msgstr ""
+msgstr "Se este jogador ficar sem mercadorias importantes, serão repostas gratuitamente"
 
 #. TRANSLATORS: This is the ship's name used in lists of units
 #: ../../data/tribes/ships/atlanteans/init.lua:20

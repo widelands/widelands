@@ -441,6 +441,9 @@ bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 			handled = true;
 			break;
 
+		case SDLK_LCTRL:
+		case SDLK_RCTRL:
+		// TODO(GunChleoc): Keeping ALT and MODE to make the transition easier. Remove for Build 20.
 		case SDLK_LALT:
 		case SDLK_RALT:
 		case SDLK_MODE:
@@ -525,6 +528,9 @@ bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 		switch (code.sym) {
 		case SDLK_LSHIFT:
 		case SDLK_RSHIFT:
+		case SDLK_LCTRL:
+		case SDLK_RCTRL:
+		// TODO(GunChleoc): Keeping ALT and MODE to make the transition easier. Remove for Build 20.
 		case SDLK_LALT:
 		case SDLK_RALT:
 		case SDLK_MODE:
