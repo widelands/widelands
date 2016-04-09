@@ -2,6 +2,7 @@
 # Copyright (C) 2005-2016 Widelands Development Team
 # 
 # Translators:
+# Aleksandr Gladkov <djanticisco@gmail.com>, 2016
 # Anton Khabarov <2233009@gmail.com>, 2015
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # Федор <Lunar-energy@ya.ru>, 2015
@@ -9,9 +10,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-04-03 19:12+0000\n"
-"PO-Revision-Date: 2016-04-03 19:13+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2016-04-07 14:12+0000\n"
+"PO-Revision-Date: 2016-04-07 22:56+0000\n"
+"Last-Translator: Aleksandr Gladkov <djanticisco@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -74,7 +75,7 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:39
 msgid "Health:"
-msgstr ""
+msgstr "Здоровье:"
 
 #. TRANSLATORS: the current stats are: 13000 health, 2800 health gain.
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:41
@@ -127,7 +128,7 @@ msgstr ""
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:58
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:80
 msgid "The Battle Arena"
-msgstr ""
+msgstr "Арена поединков"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:60
 msgid "Now I have talked about training and levels. Let me elaborate on that."
@@ -160,7 +161,7 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:70
 msgid "Build a battle arena"
-msgstr ""
+msgstr "Постройте арену поединков"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:73
 msgid "Build a battle arena. It is a big building."
@@ -174,7 +175,7 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:82
 msgid "The Battle Arena Has Been Constructed"
-msgstr ""
+msgstr "Арена поединков была построена"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:83
 msgid ""
@@ -222,7 +223,7 @@ msgstr ""
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:99
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:116
 msgid "The Training Camp"
-msgstr ""
+msgstr "Тренировочный лагерь"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:100
 msgid ""
@@ -234,11 +235,11 @@ msgstr ""
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:102
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:110
 msgid "Build a training camp."
-msgstr ""
+msgstr "Постройте тренировочный лагерь."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:106
 msgid "Build a training camp"
-msgstr ""
+msgstr "Постройте тренировочный лагерь."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:108
 msgid ""
@@ -279,7 +280,7 @@ msgstr ""
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:127
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:129
 msgid "Heroes and Rookies"
-msgstr ""
+msgstr "Ветераны и новобранцы"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:130
 msgid ""
@@ -394,7 +395,7 @@ msgstr ""
 #. TRANSLATORS: 'it' refers to the Barbarian sentry
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:162
 msgid "Dismantle it."
-msgstr ""
+msgstr "Разобрать это."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:164
 msgid ""
@@ -421,7 +422,7 @@ msgstr ""
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:176
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:188
 msgid "Enhance Your Fortress"
-msgstr ""
+msgstr "Улучшить вашу крепость"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:178
 msgid "Enhancing Buildings"
@@ -476,11 +477,11 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:198
 msgid "Defeat your Enemy"
-msgstr ""
+msgstr "Победите ваших врагов"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:200
 msgid "Defeat the Enemy"
-msgstr ""
+msgstr "Победите ваших врагов"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:201
 msgid ""
@@ -517,7 +518,7 @@ msgstr "Разгромить вражеское племя"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:210
 msgid "Defeat Your Enemy"
-msgstr ""
+msgstr "Победите ваших врагов"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:212
 msgid "Defeat the nearby enemy."

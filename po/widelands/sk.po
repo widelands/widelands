@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-04-03 19:12+0000\n"
-"PO-Revision-Date: 2016-04-03 19:26+0000\n"
+"POT-Creation-Date: 2016-04-07 14:12+0000\n"
+"PO-Revision-Date: 2016-04-07 14:50+0000\n"
 "Last-Translator: MiroslavR <miroslavr256@gmail.com>\n"
 "Language-Team: Slovak (http://www.transifex.com/widelands/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
@@ -212,7 +212,7 @@ msgid "Loading tribes"
 msgstr "Načítavajú sa kmene"
 
 #: ../../src/editor/editorinteractive.cc:118
-#: ../../src/editor/ui_menus/editor_main_menu.cc:45
+#: ../../src/editor/ui_menus/main_menu.cc:45
 #: ../../src/wui/game_options_menu.cc:68
 #: ../../src/wui/interactive_player.cc:92
 #: ../../src/wui/interactive_spectator.cc:59
@@ -220,12 +220,12 @@ msgid "Main Menu"
 msgstr "Hlavné menu"
 
 #: ../../src/editor/editorinteractive.cc:121
-#: ../../src/editor/ui_menus/editor_tool_menu.cc:47
+#: ../../src/editor/ui_menus/tool_menu.cc:47
 msgid "Tools"
 msgstr "Nástroje"
 
 #: ../../src/editor/editorinteractive.cc:125
-#: ../../src/editor/ui_menus/editor_toolsize_menu.cc:43
+#: ../../src/editor/ui_menus/toolsize_menu.cc:43
 msgid "Tool Size"
 msgstr "Velkosť nástroja"
 
@@ -254,7 +254,7 @@ msgid "Redo"
 msgstr "Znovu"
 
 #: ../../src/editor/editorinteractive.cc:143
-#: ../../src/wui/buildingwindow.cc:357
+#: ../../src/wui/buildingwindow.cc:355
 msgid "Help"
 msgstr "Pomoc"
 
@@ -282,28 +282,28 @@ msgstr "Neuložená mapa"
 msgid "The map has not been saved, do you really want to quit?"
 msgstr "Mapa nebola uložená, naozaj chcete skončiť?"
 
-#: ../../src/editor/editorinteractive.cc:642
-#: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:122
+#: ../../src/editor/editorinteractive.cc:648
+#: ../../src/editor/ui_menus/main_menu_new_map.cc:122
 msgid "Creating empty map…"
 msgstr "Vytvára sa prázdna mapa…"
 
 #. * TRANSLATORS: Default name for new map
-#: ../../src/editor/editorinteractive.cc:649
-#: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:131
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:458
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:138
-#: ../../src/logic/map.h:181
+#: ../../src/editor/editorinteractive.cc:655
+#: ../../src/editor/ui_menus/main_menu_new_map.cc:131
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:455
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:138
+#: ../../src/logic/map.h:180
 msgid "No Name"
 msgstr "Bez názvu"
 
-#: ../../src/editor/editorinteractive.cc:650
-#: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:132
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:459
+#: ../../src/editor/editorinteractive.cc:656
+#: ../../src/editor/ui_menus/main_menu_new_map.cc:132
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:456
 msgctxt "map_name"
 msgid "Unknown"
 msgstr "Neznámy"
 
-#: ../../src/editor/editorinteractive.cc:657
+#: ../../src/editor/editorinteractive.cc:663
 #, c-format
 msgid "Loading map “%s”…"
 msgstr "Načítava sa mapa „%s“…"
@@ -312,98 +312,98 @@ msgstr "Načítava sa mapa „%s“…"
 msgid "Random Player"
 msgstr "Náhodný hráč"
 
-#: ../../src/editor/tools/editor_info_tool.cc:47
+#: ../../src/editor/tools/info_tool.cc:47
 msgid "Field Information"
 msgstr "Informácie o políčku"
 
-#: ../../src/editor/tools/editor_info_tool.cc:55
+#: ../../src/editor/tools/info_tool.cc:55
 msgid "Node:"
 msgstr "Uzol:"
 
-#: ../../src/editor/tools/editor_info_tool.cc:57
+#: ../../src/editor/tools/info_tool.cc:57
 #, c-format
 msgid "Coordinates: (%1$i, %2$i)"
 msgstr "Súradnice: (%1$i, %2$i)"
 
 #. * TRANSLATORS: Editor terrain property: small building plot
-#: ../../src/editor/tools/editor_info_tool.cc:65
+#: ../../src/editor/tools/info_tool.cc:65
 msgid "small"
 msgstr "malé"
 
 #. * TRANSLATORS: Editor terrain property: medium building plot
-#: ../../src/editor/tools/editor_info_tool.cc:67
+#: ../../src/editor/tools/info_tool.cc:67
 msgid "medium"
 msgstr "stredné"
 
 #. * TRANSLATORS: Editor terrain property: big building plot
-#: ../../src/editor/tools/editor_info_tool.cc:69
+#: ../../src/editor/tools/info_tool.cc:69
 msgid "big"
 msgstr "veľké"
 
 #. * TRANSLATORS: Editor terrain property: space for a flag
-#: ../../src/editor/tools/editor_info_tool.cc:73
+#: ../../src/editor/tools/info_tool.cc:73
 msgid "flag"
 msgstr "vlajka"
 
 #. * TRANSLATORS: Editor terrain property: mine building plot
-#: ../../src/editor/tools/editor_info_tool.cc:75
+#: ../../src/editor/tools/info_tool.cc:75
 msgid "mine"
 msgstr "tažit"
 
 #. * TRANSLATORS: Editor terrain property: port space
-#: ../../src/editor/tools/editor_info_tool.cc:77
+#: ../../src/editor/tools/info_tool.cc:77
 msgid "port"
 msgstr "prístav"
 
-#. * TRANSLATORS: This is a terrain type tooltip in the editor
 #. * TRANSLATORS: Editor terrain property: units can walk on this terrain
-#: ../../src/editor/tools/editor_info_tool.cc:79
+#. * TRANSLATORS: This is a terrain type tooltip in the editor
+#: ../../src/editor/tools/info_tool.cc:79
 #: ../../src/logic/map_objects/world/terrain_description.cc:76
 msgid "walkable"
 msgstr "schodný"
 
 #. * TRANSLATORS: Editor terrain property: units can swim on this terrain
 #. (fish, ships)
-#: ../../src/editor/tools/editor_info_tool.cc:81
+#: ../../src/editor/tools/info_tool.cc:81
 msgid "swimmable"
 msgstr "plávateľný"
 
-#: ../../src/editor/tools/editor_info_tool.cc:84
+#: ../../src/editor/tools/info_tool.cc:84
 #, c-format
 msgid "Caps: %s"
 msgstr "Vlastnosti: %s"
 
-#: ../../src/editor/tools/editor_info_tool.cc:90
+#: ../../src/editor/tools/info_tool.cc:90
 #, c-format
 msgid "Owned by: Player %u"
 msgstr "Vlastník: Hráč %u"
 
-#: ../../src/editor/tools/editor_info_tool.cc:93
+#: ../../src/editor/tools/info_tool.cc:93
 msgid "Owned by: —"
 msgstr "Vlastník: —"
 
-#: ../../src/editor/tools/editor_info_tool.cc:97
+#: ../../src/editor/tools/info_tool.cc:97
 msgid "Has immovable"
 msgstr "Obsahuje nehybný objekt"
 
-#: ../../src/editor/tools/editor_info_tool.cc:97
+#: ../../src/editor/tools/info_tool.cc:97
 msgid "No immovable"
 msgstr "Neobsahuje nehybný objekt"
 
-#: ../../src/editor/tools/editor_info_tool.cc:100
+#: ../../src/editor/tools/info_tool.cc:100
 msgid "Has animals"
 msgstr "Má zvieratá"
 
-#: ../../src/editor/tools/editor_info_tool.cc:100
+#: ../../src/editor/tools/info_tool.cc:100
 msgid "No animals"
 msgstr "Žiadne zvieratá"
 
-#: ../../src/editor/tools/editor_info_tool.cc:104
-#: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:91
+#: ../../src/editor/tools/info_tool.cc:104
+#: ../../src/editor/ui_menus/main_menu_new_map.cc:91
 msgid "Terrain:"
 msgstr "Terén:"
 
-#: ../../src/editor/tools/editor_info_tool.cc:110
+#: ../../src/editor/tools/info_tool.cc:110
 #, c-format
 msgctxt "terrain_name"
 msgid "Name: %s"
@@ -413,66 +413,65 @@ msgstr "Názov: %s"
 #. "unreachable and unwalkable"
 #. * TRANSLATORS: You can also translate this as "Category: %s" or "Property:
 #. %s"
-#: ../../src/editor/tools/editor_info_tool.cc:118
+#: ../../src/editor/tools/info_tool.cc:118
 #, c-format
 msgid "Is: %s"
 msgstr "Vlastnosti: %s"
 
-#: ../../src/editor/tools/editor_info_tool.cc:120
+#: ../../src/editor/tools/info_tool.cc:120
 #, c-format
 msgid "Editor Category: %s"
 msgstr "Kategória editora: %s"
 
-#: ../../src/editor/tools/editor_info_tool.cc:123
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:93
+#: ../../src/editor/tools/info_tool.cc:123
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:93
 msgid "Resources:"
 msgstr "Zdroje:"
 
-#: ../../src/editor/tools/editor_info_tool.cc:130
+#: ../../src/editor/tools/info_tool.cc:130
 #, c-format
 msgid "Resource name: %s"
 msgstr "Názov zdroja: %s"
 
-#: ../../src/editor/tools/editor_info_tool.cc:132
+#: ../../src/editor/tools/info_tool.cc:132
 #, c-format
 msgid "Resource amount: %i"
 msgstr "Množstvo zdroja: %i"
 
-#: ../../src/editor/tools/editor_info_tool.cc:135
+#: ../../src/editor/tools/info_tool.cc:135
 msgid "No resources"
 msgstr "Žiadne zdroje"
 
-#: ../../src/editor/tools/editor_info_tool.cc:139
-#: ../../src/wui/mapdetails.cc:111
+#: ../../src/editor/tools/info_tool.cc:139 ../../src/wui/mapdetails.cc:111
 msgid "Map:"
 msgstr "Mapa:"
 
-#: ../../src/editor/tools/editor_info_tool.cc:140
+#: ../../src/editor/tools/info_tool.cc:140
 #, c-format
 msgctxt "map_name"
 msgid "Name: %s"
 msgstr "Názov: %s"
 
-#: ../../src/editor/tools/editor_info_tool.cc:141
+#: ../../src/editor/tools/info_tool.cc:141
 #, c-format
 msgid "Size: %1$ix%2$i"
 msgstr "Veľkosť: %1$ix%2$i"
 
-#: ../../src/editor/tools/editor_info_tool.cc:146
+#: ../../src/editor/tools/info_tool.cc:146
 #, c-format
 msgid "Players: %u"
 msgstr "Hráči: %u"
 
-#: ../../src/editor/tools/editor_info_tool.cc:149
+#: ../../src/editor/tools/info_tool.cc:149
 msgid "Players: -"
 msgstr "Hráči: -"
 
-#: ../../src/editor/tools/editor_info_tool.cc:152
+#: ../../src/editor/tools/info_tool.cc:152
 #, c-format
 msgid "Author: %s"
 msgstr "Autor: %s"
 
-#: ../../src/editor/tools/editor_info_tool.cc:153
+#: ../../src/editor/tools/info_tool.cc:153
 #, c-format
 msgid "Descr: %s"
 msgstr "Popis: %s"
@@ -490,51 +489,52 @@ msgstr "Položku vyberiete kliknutím. Pomocou klávesu Ctrl môžete vybrať vi
 
 #. * TRANSLATORS: %s are the currently selected items in an editor tool
 #: ../../src/editor/ui_menus/categorized_item_selection_menu.h:191
+#: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:176
 #, c-format
 msgid "Current: %s"
 msgstr "Aktuálny výber: %s"
 
-#: ../../src/editor/ui_menus/editor_help.cc:45
-#: ../../src/editor/ui_menus/editor_player_menu.cc:293
+#: ../../src/editor/ui_menus/help.cc:45
+#: ../../src/editor/ui_menus/player_menu.cc:293
 #: ../../src/ui_fsmenu/multiplayer.cc:144
 #: ../../src/wui/encyclopedia_window.cc:156
 #: ../../src/wui/tribal_encyclopedia.cc:51
 msgid "Error!"
 msgstr "Chyba!"
 
-#: ../../src/editor/ui_menus/editor_main_menu.cc:52
-#: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:47
+#: ../../src/editor/ui_menus/main_menu.cc:52
+#: ../../src/editor/ui_menus/main_menu_new_map.cc:47
 msgid "New Map"
 msgstr "Nová mapa"
 
-#: ../../src/editor/ui_menus/editor_main_menu.cc:57
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:46
+#: ../../src/editor/ui_menus/main_menu.cc:57
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:46
 msgid "New Random Map"
 msgstr "Nová náhodná mapa"
 
-#: ../../src/editor/ui_menus/editor_main_menu.cc:62
-#: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:33
+#: ../../src/editor/ui_menus/main_menu.cc:62
+#: ../../src/editor/ui_menus/main_menu_load_map.cc:33
 msgid "Load Map"
 msgstr "Načítať mapu"
 
-#: ../../src/editor/ui_menus/editor_main_menu.cc:67
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:52
+#: ../../src/editor/ui_menus/main_menu.cc:67
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:52
 msgid "Save Map"
 msgstr "Uložiť mapu"
 
-#: ../../src/editor/ui_menus/editor_main_menu.cc:72
-#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:50
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:69
+#: ../../src/editor/ui_menus/main_menu.cc:72
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:50
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:69
 msgid "Map Options"
 msgstr "Možnosti mapy"
 
-#: ../../src/editor/ui_menus/editor_main_menu.cc:77
+#: ../../src/editor/ui_menus/main_menu.cc:77
 msgid "Exit Editor"
 msgstr "Ukončiť editor"
 
-#: ../../src/editor/ui_menus/editor_main_menu_load_or_save_map.cc:59
-#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:63
-#: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:43
+#: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:59
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:63
+#: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:43
 #: ../../src/scripting/lua_game.cc:426 ../../src/ui_basic/messagebox.cc:91
 #: ../../src/ui_fsmenu/helpwindow.cc:53
 #: ../../src/ui_fsmenu/load_map_or_game.cc:63
@@ -543,95 +543,95 @@ msgstr "Ukončiť editor"
 msgid "OK"
 msgstr "OK"
 
-#: ../../src/editor/ui_menus/editor_main_menu_load_or_save_map.cc:69
-#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:70
-#: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:67
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:145
-#: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:50
+#: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:69
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:70
+#: ../../src/editor/ui_menus/main_menu_new_map.cc:67
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:145
+#: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:50
 #: ../../src/ui_basic/messagebox.cc:103 ../../src/ui_fsmenu/launch_mpg.cc:88
 #: ../../src/ui_fsmenu/options.cc:120
 #: ../../src/wui/game_main_menu_save_game.cc:101 ../../src/wui/login_box.cc:73
 msgid "Cancel"
 msgstr "Zrušiť"
 
-#: ../../src/editor/ui_menus/editor_main_menu_load_or_save_map.cc:83
-#: ../../src/editor/ui_menus/editor_main_menu_load_or_save_map.cc:134
+#: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:83
+#: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:134
 msgid "Show Map Names"
 msgstr "Zobraziť názvy máp"
 
 #. * TRANSLATORS: Checkbox title. If this checkbox is enabled, map names
 #. aren't translated.
-#: ../../src/editor/ui_menus/editor_main_menu_load_or_save_map.cc:87
+#: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:87
 #: ../../src/ui_fsmenu/mapselect.cc:82
 msgid "Show original map names"
 msgstr "Zobraziť originálne názvy máp"
 
-#: ../../src/editor/ui_menus/editor_main_menu_load_or_save_map.cc:136
+#: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:136
 msgid "Show Filenames"
 msgstr "Zobraziť názvy súborov"
 
-#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:103
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:103
 #: ../../src/ui_fsmenu/loadgame.cc:321
 #: ../../src/wui/game_main_menu_save_game.cc:68
 msgid "Map Name:"
 msgstr "Názov mapy:"
 
-#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:107
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:107
 msgid "Authors:"
 msgstr "Autori:"
 
-#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:111
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:111
 #: ../../src/ui_fsmenu/campaign_select.cc:80
 #: ../../src/ui_fsmenu/campaign_select.cc:157
 #: ../../src/ui_fsmenu/campaign_select.cc:396 ../../src/wui/mapdetails.cc:133
 msgid "Description:"
 msgstr "Popis:"
 
-#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:115
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:115
 msgid "Hint (optional):"
 msgstr "Rada (nepovinný údaj):"
 
-#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:124
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:124
 msgid "Tags:"
 msgstr "Značky:"
 
-#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:125
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:125
 #: ../../src/ui_fsmenu/mapselect.cc:98
 msgid "Unbalanced"
 msgstr "Nevyvážené"
 
-#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:126
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:126
 #: ../../src/ui_fsmenu/mapselect.cc:107
 msgid "Free for all"
 msgstr "Prístupné všetkým"
 
-#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:127
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:127
 #: ../../src/ui_fsmenu/mapselect.cc:108
 msgid "1v1"
 msgstr "1 proti 1"
 
-#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:128
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:128
 #: ../../src/ui_fsmenu/mapselect.cc:115
 msgid "Teams of 2"
 msgstr "2-členné tímy"
 
-#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:129
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:129
 #: ../../src/ui_fsmenu/mapselect.cc:116
 msgid "Teams of 3"
 msgstr "3-členné tímy"
 
-#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:130
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:130
 #: ../../src/ui_fsmenu/mapselect.cc:117
 msgid "Teams of 4"
 msgstr "4-členné tímy"
 
 #. * TRANSLATORS: Label for the list of suggested teams when choosing a map
-#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:132
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:132
 #: ../../src/wui/suggested_teams_box.cc:97
 msgid "Suggested Teams:"
 msgstr "Navrhované tímy:"
 
-#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:141
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:141
 #: ../../src/ui_fsmenu/launch_mpg.cc:663
 #: ../../src/wui/game_main_menu_save_game.cc:172
 #, c-format
@@ -641,130 +641,130 @@ msgstr[0] "%u hráč"
 msgstr[1] "%u hráči"
 msgstr[2] "%u hráčov"
 
-#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:146
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:146
 msgid "Main Options"
 msgstr "Hlavné možnosti"
 
-#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:147
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:147
 msgid "Tags"
 msgstr "Značky"
 
-#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:149
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:149
 msgid "Teams"
 msgstr "Tímy"
 
-#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:174
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:174
 msgid "Size: %1% x %2%"
 msgstr "Veľkosť: %1% x %2%"
 
-#: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:53
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:56
+#: ../../src/editor/ui_menus/main_menu_new_map.cc:53
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:56
 msgid "Width:"
 msgstr "Šírka:"
 
-#: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:57
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:60
+#: ../../src/editor/ui_menus/main_menu_new_map.cc:57
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:60
 msgid "Height:"
 msgstr "Výška:"
 
-#: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:64
+#: ../../src/editor/ui_menus/main_menu_new_map.cc:64
 msgid "Create Map"
 msgstr "Vytvoriť mapu"
 
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:65
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:65
 #: ../../src/ui_fsmenu/loadgame.cc:323
 msgid "Players:"
 msgstr "Hráči:"
 
 #. * TRANSLATORS: A world name for the random map generator in the editor
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:71
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:71
 msgid "Summer"
 msgstr "Leto"
 
 #. * TRANSLATORS: A world name for the random map generator in the editor
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:73
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:73
 msgid "Winter"
 msgstr "Zima"
 
 #. * TRANSLATORS: A world name for the random map generator in the editor
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:75
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:75
 msgid "Desert"
 msgstr "Púšť"
 
 #. * TRANSLATORS: A world name for the random map generator in the editor
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:77
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:77
 msgid "Wasteland"
 msgstr "Pustatina"
 
 #. * TRANSLATORS: Amount of resources in the random map generator in the
 #. editor
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:83
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:83
 msgid "Low"
 msgstr "Nízke"
 
 #. * TRANSLATORS: Amount of resources in the random map generator in the
 #. editor
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:85
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:85
 msgid "Medium"
 msgstr "Stredné"
 
 #. * TRANSLATORS: Amount of resources in the random map generator in the
 #. editor
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:87
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:87
 msgid "High"
 msgstr "Vysoké"
 
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:92
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:92
 msgid "Climate:"
 msgstr "Podnebie:"
 
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:111
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:111
 msgid "Water:"
 msgstr "Voda:"
 
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:115
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:115
 msgid "Land:"
 msgstr "Súš:"
 
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:119
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:119
 msgid "Wasteland:"
 msgstr "Pustatina:"
 
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:122
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:122
 msgid "Mountains:"
 msgstr "Hory:"
 
 #. * TRANSLATORS: A spinbox unit
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:124
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:426
-#: ../../src/ui_basic/spinbox.cc:333
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:124
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:423
+#: ../../src/ui_basic/spinbox.cc:335
 #, c-format
 msgid "%i %%"
 msgstr "%i %%"
 
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:126
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:126
 msgid "Island mode"
 msgstr "Režim ostrova"
 
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:129
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:129
 msgid "Random Number:"
 msgstr "Náhodné číslo:"
 
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:134
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:134
 msgid "Map ID:"
 msgstr "Identifikátor mapy:"
 
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:142
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:142
 msgid "Generate Map"
 msgstr "Vygenerovať mapu"
 
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:461
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:458
 msgid "Generating random map…"
 msgstr "Generuje sa náhodná mapa…"
 
 #. * TRANSLATORS: Window title. This is shown after a random map has been
 #. created in the editor.
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:472
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:469
 msgid "Random Map"
 msgstr "Náhodná mapa"
 
@@ -773,47 +773,47 @@ msgstr "Náhodná mapa"
 #. * TRANSLATORS: You don't need to be literal with your translation,
 #. * TRANSLATORS: as long as the user understands that he needs to check the
 #. player positions.
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:476
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:473
 msgid ""
 "The map has been generated. Please double-check the player starting "
 "positions to make sure that your carriers won’t drown, or be stuck on an "
 "island or on top of a mountain."
 msgstr "Mapa bola vygenerovaná. Skontrolujte, či začiatočné pozície hráčov nespôsobia, že sa vaši nosiči utopia alebo zaseknú na ostrove či vrchole hory."
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:61
-#: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:28
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:61
+#: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:28
 msgid "Make Directory"
 msgstr "Vytvoriť priečinok"
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:75
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:75
 #: ../../src/ui_fsmenu/loadgame.cc:276 ../../src/ui_fsmenu/loadgame.cc:408
 msgid "Filename:"
 msgstr "Názov súboru:"
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:154
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:154
 msgid "unnamed"
 msgstr "nepomenovaný"
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:239
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:239
 #: ../../src/wui/game_main_menu_save_game.cc:260
 #, c-format
 msgid "A file with the name ‘%s’ already exists. Overwrite?"
 msgstr "Súbor s názvom „%s“ už existuje. Chcete ho prepísať?"
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:242
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:255
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:302
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:242
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:255
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:302
 msgid "Error Saving Map!"
 msgstr "Chyba pri ukladaní mapy!"
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:252
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:252
 #, c-format
 msgid ""
 "A file with the name ‘%s.tmp’ already exists. You have to remove it "
 "manually."
 msgstr "Súbor s názvom „%s.tmp“ už existuje. Je potrebné zmazať ho manuálne."
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:298
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:298
 msgid ""
 "Error Saving Map!\n"
 "Saved map file may be corrupt!\n"
@@ -821,30 +821,30 @@ msgid ""
 "Reason given:\n"
 msgstr "Chyba pri ukladaní mapy!\nUložený súbor mapy môže byť poškodený!\n\nDôvod:\n"
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:35
+#: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:35
 msgid "Enter Directory Name: "
 msgstr "Zadajte názov priečinka: "
 
-#: ../../src/editor/ui_menus/editor_player_menu.cc:72
+#: ../../src/editor/ui_menus/player_menu.cc:72
 msgid "Player Options"
 msgstr "Možnosti hráčov"
 
-#: ../../src/editor/ui_menus/editor_player_menu.cc:78
+#: ../../src/editor/ui_menus/player_menu.cc:78
 msgid "Add player"
 msgstr "Pridať hráča"
 
-#: ../../src/editor/ui_menus/editor_player_menu.cc:85
+#: ../../src/editor/ui_menus/player_menu.cc:85
 msgid "Remove last player"
 msgstr "Odstrániť posledného hráča"
 
-#: ../../src/editor/ui_menus/editor_player_menu.cc:99
+#: ../../src/editor/ui_menus/player_menu.cc:99
 msgid "Number of Players"
 msgstr "Počet hráčov"
 
 #. * TRANSLATORS: Default player name, e.g. Player 1
-#: ../../src/editor/ui_menus/editor_player_menu.cc:232
-#: ../../src/logic/map.cc:315
+#: ../../src/editor/ui_menus/player_menu.cc:232 ../../src/logic/map.cc:315
 #: ../../src/logic/single_player_game_settings_provider.cc:88
+#: ../../src/map_io/map_player_names_and_tribes_packet.cc:105
 #: ../../src/network/nethost.cc:1699 ../../src/ui_fsmenu/launch_mpg.cc:581
 #: ../../src/wui/multiplayersetupgroup.cc:139
 #: ../../src/wui/multiplayersetupgroup.cc:301
@@ -852,97 +852,140 @@ msgstr "Počet hráčov"
 msgid "Player %u"
 msgstr "Hráč %u"
 
-#: ../../src/editor/ui_menus/editor_player_menu.cc:295
+#: ../../src/editor/ui_menus/player_menu.cc:295
 msgid ""
 "Cannot remove player. It is referenced someplace. Remove all buildings and "
 "animals that depend on this player and try again."
 msgstr "Nie je možné odstrániť hráča. Niekde naňho niečo odkazuje. Odstráňte všetky budovy a zvieratá, ktoré závisia na tomto hráčovi, a pokus zopakujte."
 
-#: ../../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:41
+#: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:39
 msgid "Height Tools Options"
 msgstr "Voľby výškových nástrojov"
 
-#: ../../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:46
-#: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:58
-msgid "Increase/Decrease Value"
-msgstr "Zvýšiť/znížiť hodnotu"
+#: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:44
+#: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:58
+msgid "Increase/Decrease Value:"
+msgstr ""
 
-#: ../../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:82
-#: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:89
-msgid "Set Value"
-msgstr "Nastaviť hodnotu"
+#: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:49
+#: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:63
+#: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:58
+msgid "Set Value:"
+msgstr ""
 
-#: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:54
-#: ../../src/editor/ui_menus/editor_tool_menu.cc:71
+#. * TRANSLATORS: Editor change height access keys. *
+#. * TRANSLATORS: Editor change resources access keys. *
+#: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:55
+#: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:72
+#, c-format
+msgid "Use %s to increase, %s to decrease"
+msgstr "Použitím %s zvýšite, %s znížite"
+
+#. * TRANSLATORS: This is an access key combination. Localize, but do not
+#. change the key. *
+#: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:57
+#: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:74
+msgid "Click"
+msgstr ""
+
+#. * TRANSLATORS: This is an access key combination. Localize, but do not
+#. change the key. *
+#: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:59
+#: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:76
+msgid "Shift + Click"
+msgstr "Shift + klik"
+
+#. * TRANSLATORS: Editor set height access key. *
+#. * TRANSLATORS: Editor set resources access key. *
+#. * TRANSLATORS: Editor set hoise height access keys. *
+#: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:62
+#: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:79
+#: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:70
+#, c-format
+msgid "Use %s to set to this value"
+msgstr "Použitím %s nastavíte na túto hodnotu"
+
+#. * TRANSLATORS: This is an access key combination. Localize, but do not
+#. change the key. *
+#: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:64
+#: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:81
+#: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:72
+msgid "Ctrl + Click"
+msgstr "Ctrl + klik"
+
+#: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:53
+#: ../../src/editor/ui_menus/tool_menu.cc:71
 msgid "Resources"
 msgstr "Zdroje"
 
-#: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:108
-msgid "Current Selection"
-msgstr "Aktuálny výber"
-
-#: ../../src/editor/ui_menus/editor_tool_menu.cc:66
+#: ../../src/editor/ui_menus/tool_menu.cc:66
 msgid "Change height"
 msgstr "Zmeniť výšku"
 
-#: ../../src/editor/ui_menus/editor_tool_menu.cc:67
+#: ../../src/editor/ui_menus/tool_menu.cc:67
 msgid "Noise height"
 msgstr "Výška šumu"
 
-#: ../../src/editor/ui_menus/editor_tool_menu.cc:68
-#: ../../src/wui/minimap.cc:143
+#: ../../src/editor/ui_menus/tool_menu.cc:68 ../../src/wui/minimap.cc:143
 msgid "Terrain"
 msgstr "Terén"
 
-#: ../../src/editor/ui_menus/editor_tool_menu.cc:69
-#: ../../src/editor/ui_menus/editor_tool_place_immovable_options_menu.cc:56
+#: ../../src/editor/ui_menus/tool_menu.cc:69
+#: ../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:56
 msgid "Immovables"
 msgstr "Nehybné objekty"
 
-#: ../../src/editor/ui_menus/editor_tool_menu.cc:70
-#: ../../src/editor/ui_menus/editor_tool_place_bob_options_menu.cc:45
+#: ../../src/editor/ui_menus/tool_menu.cc:70
+#: ../../src/editor/ui_menus/tool_place_bob_options_menu.cc:45
 msgid "Animals"
 msgstr "Zvieratá"
 
-#: ../../src/editor/ui_menus/editor_tool_menu.cc:72
+#: ../../src/editor/ui_menus/tool_menu.cc:72
 msgid "Set port space"
 msgstr "Nastaviť miesto na prístav"
 
-#: ../../src/editor/ui_menus/editor_tool_menu.cc:73
+#: ../../src/editor/ui_menus/tool_menu.cc:73
 msgid ""
 "Set the position that will have the coordinates (0, 0). This will be the "
 "top-left corner of a generated minimap."
 msgstr "Nastaviť pozíciu, ktorá bude mať súradnice (0, 0). Bude to ľavý horný roh vygenerovanej minimapy."
 
-#: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:45
+#: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:43
 msgid "Noise Height Options"
 msgstr "Voľby výšky šumu"
 
-#: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:148
-#, c-format
-msgid "Minimum: %u"
-msgstr "Minimálne: %u"
+#: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:48
+msgid "Minimum Height:"
+msgstr "Minimálna výška:"
 
-#: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:151
-#, c-format
-msgid "Maximum: %u"
-msgstr "Maximálne: %u"
+#: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:53
+msgid "Maximum Height:"
+msgstr "Maximálna výška:"
 
-#: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:154
-#, c-format
-msgid "Set value: %u"
-msgstr "Nastaviť hodnotu: %u"
+#. * TRANSLATORS: Editor noise height access keys. *
+#: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:64
+#: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:67
+msgid "Click to set the height to a random value within the specified range"
+msgstr ""
+
+#: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:84
+msgid "Random Height"
+msgstr "Náhodná výška"
+
+#: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:91
+msgid "Fixed Height"
+msgstr "Pevná výška"
 
 #. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
-#: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:81
+#: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:81
 msgid "%1%: %2%"
 msgstr "%1%: %2%"
 
-#: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:95
+#: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:95
 msgid "Terrain Select"
 msgstr "Výber terénu"
 
-#: ../../src/editor/ui_menus/editor_toolsize_menu.cc:81
+#: ../../src/editor/ui_menus/toolsize_menu.cc:81
 #, c-format
 msgid "Current Size: %u"
 msgstr "Aktuálna veľkosť: %u"
@@ -1002,12 +1045,12 @@ msgid ""
 " anymore, or it's a new version that can't be handled yet."
 msgstr "Táto hra bola uložená pomocou staršej verzie Widelands a už sa nedá načítať, alebo ide o novšiu verziu, ktorú zatiaľ nie je možné spracovať."
 
-#: ../../src/logic/map.h:182
+#: ../../src/logic/map.h:181
 msgctxt "author_name"
 msgid "Unknown"
 msgstr "neznámi"
 
-#: ../../src/logic/map.h:183
+#: ../../src/logic/map.h:182
 msgid "No description defined"
 msgstr "Nie je zadefinovaný žiadny popis"
 
@@ -1235,8 +1278,8 @@ msgstr[2] "Najatí pracovníci: %s"
 msgid "No soldier to train!"
 msgstr "Žiaden vojak nepotrebuje výcvik!"
 
-#: ../../src/logic/map_objects/tribes/production_program.cc:1391
-#: ../../src/logic/map_objects/tribes/production_program.cc:1476
+#: ../../src/logic/map_objects/tribes/production_program.cc:1393
+#: ../../src/logic/map_objects/tribes/production_program.cc:1480
 msgid "No soldier found for this training level!"
 msgstr "Nenašiel sa žiaden vojak pre túto úroveň výcviku!"
 
@@ -1321,48 +1364,48 @@ msgid "Unloading of wares failed, expedition is cancelled now."
 msgstr "Nepodarilo sa vyložiť výrobky a výprava sa preto zrušila."
 
 #. * TRANSLATORS: Ship expedition ready
-#: ../../src/logic/map_objects/tribes/ship.cc:845
+#: ../../src/logic/map_objects/tribes/ship.cc:848
 msgctxt "ship"
 msgid "Expedition"
 msgstr "Výprava"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:846
+#: ../../src/logic/map_objects/tribes/ship.cc:849
 msgid "Expedition Ready"
 msgstr "Výprava pripravená"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:847
+#: ../../src/logic/map_objects/tribes/ship.cc:850
 msgid "An expedition ship is waiting for your commands."
 msgstr "Expedičná loď čaká na vaše rozkazy."
 
 #. * TRANSLATORS: This is a ship state
-#: ../../src/logic/map_objects/tribes/ship.cc:957
+#: ../../src/logic/map_objects/tribes/ship.cc:960
 msgctxt "ship_state"
 msgid "Shipping"
 msgstr "Preváža"
 
 #. * TRANSLATORS: This is a ship state. An expedition is waiting for your
 #. commands.
-#: ../../src/logic/map_objects/tribes/ship.cc:961
+#: ../../src/logic/map_objects/tribes/ship.cc:964
 msgctxt "ship_state"
 msgid "Waiting"
 msgstr "Čaká"
 
 #. * TRANSLATORS: This is a ship state. An expedition is scouting for port
 #. spaces.
-#: ../../src/logic/map_objects/tribes/ship.cc:965
+#: ../../src/logic/map_objects/tribes/ship.cc:968
 msgctxt "ship_state"
 msgid "Scouting"
 msgstr "Vykonáva prieskum"
 
 #. * TRANSLATORS: This is a ship state. An expedition has found a port space.
-#: ../../src/logic/map_objects/tribes/ship.cc:969
+#: ../../src/logic/map_objects/tribes/ship.cc:972
 msgctxt "ship_state"
 msgid "Port Space Found"
 msgstr "Našla prístavné miesto"
 
 #. * TRANSLATORS: This is a ship state. An expedition is unloading
 #. wares/workers to build a port.
-#: ../../src/logic/map_objects/tribes/ship.cc:973
+#: ../../src/logic/map_objects/tribes/ship.cc:976
 msgctxt "ship_state"
 msgid "Founding a Colony"
 msgstr "Zakladá kolóniu"
@@ -1476,7 +1519,7 @@ msgid "Bluebyte Settlers II Map. No comment defined!"
 msgstr "Bluebyte Settlers II Map. Komentár nie je definovaný!"
 
 #: ../../src/network/internet_gaming.cc:114
-#: ../../src/ui_fsmenu/internet_lobby.cc:424
+#: ../../src/ui_fsmenu/internet_lobby.cc:423
 msgid "Connection problem"
 msgstr "Problém s pripojením"
 
@@ -2055,24 +2098,24 @@ msgstr "vyp"
 msgid "%1% (%2%)"
 msgstr "%1% (%2%)"
 
-#: ../../src/ui_basic/spinbox.cc:143
+#: ../../src/ui_basic/spinbox.cc:144
 msgid "Decrease the value"
 msgstr "Znížiť hodnotu"
 
-#: ../../src/ui_basic/spinbox.cc:152
+#: ../../src/ui_basic/spinbox.cc:153
 msgid "Increase the value"
 msgstr "Zvýšiť hodnotu"
 
-#: ../../src/ui_basic/spinbox.cc:161
+#: ../../src/ui_basic/spinbox.cc:162
 msgid "Decrease the value by 10"
 msgstr "Znížiť hodnotu o 10"
 
-#: ../../src/ui_basic/spinbox.cc:168
+#: ../../src/ui_basic/spinbox.cc:169
 msgid "Increase the value by 10"
 msgstr "Zvýšiť hodnotu o 10"
 
 #. * TRANSLATORS: A spinbox unit
-#: ../../src/ui_basic/spinbox.cc:327
+#: ../../src/ui_basic/spinbox.cc:329
 #, c-format
 msgid "%d minute"
 msgid_plural "%d minutes"
@@ -2081,7 +2124,7 @@ msgstr[1] "%d minúty"
 msgstr[2] "%d minút"
 
 #. * TRANSLATORS: A spinbox unit
-#: ../../src/ui_basic/spinbox.cc:330
+#: ../../src/ui_basic/spinbox.cc:332
 #, c-format
 msgid "%d pixel"
 msgid_plural "%d pixels"
@@ -2089,11 +2132,11 @@ msgstr[0] "%d pixel"
 msgstr[1] "%d pixely"
 msgstr[2] "%d pixelov"
 
-#: ../../src/ui_fsmenu/about.cc:40 ../../src/ui_fsmenu/main.cc:55
+#: ../../src/ui_fsmenu/about.cc:39 ../../src/ui_fsmenu/main.cc:55
 msgid "About Widelands"
 msgstr "O hre"
 
-#: ../../src/ui_fsmenu/about.cc:48 ../../src/wui/watchwindow.cc:142
+#: ../../src/ui_fsmenu/about.cc:47 ../../src/wui/watchwindow.cc:142
 msgid "Close"
 msgstr "Zavrieť"
 
@@ -2319,24 +2362,24 @@ msgstr "Body"
 msgid "Game"
 msgstr "Hra"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:393
+#: ../../src/ui_fsmenu/internet_lobby.cc:392
 msgid ""
 "Widelands was unable to get the IP address of the server in time.\n"
 "There seems to be a network problem, either on your side or on the side\n"
 "of the server.\n"
 msgstr "Nepodarilo sa včas získať IP adresu servera.\nZdá sa, že na vašej strane alebo strane servera je sieťový problém.\n"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:397
+#: ../../src/ui_fsmenu/internet_lobby.cc:396
 msgid "Connection timed out"
 msgstr "Časový limit spojenia vypršal"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:425
+#: ../../src/ui_fsmenu/internet_lobby.cc:424
 msgid "Widelands was unable to connect to the host."
 msgstr "Nepodarilo sa pripojiť k hostiteľovi."
 
 #. * TRANSLATORS: This is shown for multiplayer games when no host
 #. * TRANSLATORS: server to connect to has been specified yet.
-#: ../../src/ui_fsmenu/internet_lobby.cc:447
+#: ../../src/ui_fsmenu/internet_lobby.cc:446
 msgctxt "server_name"
 msgid "unnamed"
 msgstr "bez názvu"
@@ -3181,28 +3224,28 @@ msgstr "Rozobrať"
 msgid "Returns:"
 msgstr "Vráti:"
 
-#: ../../src/wui/buildingwindow.cc:314 ../../src/wui/buildingwindow.cc:506
+#: ../../src/wui/buildingwindow.cc:312 ../../src/wui/buildingwindow.cc:504
 msgid "Hide work area"
 msgstr "Skryť pracovnú plochu"
 
-#: ../../src/wui/buildingwindow.cc:329 ../../src/wui/fieldaction.cc:446
+#: ../../src/wui/buildingwindow.cc:327 ../../src/wui/fieldaction.cc:446
 #: ../../src/wui/shipwindow.cc:206
 msgid "Show Debug Window"
 msgstr "Zobraziť okno ladenia"
 
-#: ../../src/wui/buildingwindow.cc:340
+#: ../../src/wui/buildingwindow.cc:338
 msgid "Center view on this"
 msgstr "Vycentrovať sem pohľad"
 
-#: ../../src/wui/buildingwindow.cc:509
+#: ../../src/wui/buildingwindow.cc:507
 msgid "Show work area"
 msgstr "Zobraziť pracovnú plochu"
 
-#: ../../src/wui/buildingwindow.cc:546
+#: ../../src/wui/buildingwindow.cc:544
 msgid "Start an expedition"
 msgstr "Začať výpravu"
 
-#: ../../src/wui/buildingwindow.cc:550
+#: ../../src/wui/buildingwindow.cc:548
 msgid "Cancel the expedition"
 msgstr "Zrušiť výpravu"
 
