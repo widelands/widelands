@@ -206,6 +206,9 @@ void Game::save_syncstream(bool const save)
 bool Game::run_splayer_scenario_direct(const std::string& mapname, const std::string& script_to_run) {
 	assert(!get_map());
 
+	// Replays can't handle scenarios
+	set_write_replay(false);
+
 	set_map(new Map);
 
 	std::unique_ptr<MapLoader> maploader(map().get_correct_loader(mapname));
@@ -235,7 +238,7 @@ bool Game::run_splayer_scenario_direct(const std::string& mapname, const std::st
 			 map().get_scenario_player_name (p));
 		get_player(p)->set_ai(map().get_scenario_player_ai(p));
 	}
-	win_condition_displayname_ = _("Scenario");
+	win_condition_displayname_ = "Scenario";
 
 	set_ibase
 		(new InteractivePlayer
@@ -335,7 +338,7 @@ void Game::init_newgame
 		std::unique_ptr<LuaCoroutine> cr = table->get_coroutine("func");
 		enqueue_command(new CmdLuaCoroutine(get_gametime() + 100, cr.release()));
 	} else {
-		win_condition_displayname_ = _("Scenario");
+		win_condition_displayname_ = "Scenario";
 	}
 }
 
@@ -361,6 +364,10 @@ void Game::init_savegame
 		Widelands::GamePreloadPacket gpdp;
 		gl.preload_game(gpdp);
 		win_condition_displayname_ = gpdp.get_win_condition();
+		if (win_condition_displayname_ == "Scenario") {
+			// Replays can't handle scenarios
+			set_write_replay(false);
+		}
 		std::string background(gpdp.get_background());
 		loader_ui->set_background(background);
 		loader_ui->step(_("Loading…"));
@@ -390,6 +397,10 @@ bool Game::run_load_game(const std::string& filename, const std::string& script_
 		gl.preload_game(gpdp);
 		std::string background(gpdp.get_background());
 		win_condition_displayname_ = gpdp.get_win_condition();
+		if (win_condition_displayname_ == "Scenario") {
+			// Replays can't handle scenarios
+			set_write_replay(false);
+		}
 		loader_ui.set_background(background);
 		player_nr = gpdp.get_player_nr();
 		set_ibase
@@ -467,6 +478,8 @@ bool Game::run
 			}
 		} else {
 			// Is a scenario!
+			// Replays can't handle scenarios
+			set_write_replay(false);
 			iterate_players_existing_novar(p, nr_players, *this) {
 				if (!map().get_starting_pos(p))
 				throw WLWarning
