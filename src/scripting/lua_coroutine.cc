@@ -144,7 +144,7 @@ std::unique_ptr<LuaTable> LuaCoroutine::pop_table() {
 	return result;
 }
 
-constexpr uint8_t kCoroutineDataPacketVersion = 3;
+constexpr uint8_t kCoroutineDataPacketVersion = 4;
 void LuaCoroutine::write(FileWrite& fw) {
 	fw.unsigned_8(kCoroutineDataPacketVersion);
 
