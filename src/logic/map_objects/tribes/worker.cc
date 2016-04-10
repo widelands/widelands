@@ -1844,7 +1844,7 @@ void Worker::return_update(Game & game, State & state)
 				 _("Worker"),
 				 "images/ui_basic/menu_help.png",
 				 _("Worker got lost!"),
-				 message,
+				 (boost::format("<rt><p font-size=12>%s</p></rt>") % message).str(),
 				 get_position()),
 				 serial_);
 		set_location(nullptr);

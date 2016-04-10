@@ -19,6 +19,8 @@
 
 #include "logic/cmd_luacoroutine.h"
 
+#include <boost/format.hpp>
+
 #include "base/log.h"
 #include "base/macros.h"
 #include "io/fileread.h"
@@ -52,10 +54,10 @@ void CmdLuaCoroutine::execute (Game & game) {
 				*new Widelands::Message
 				(Message::Type::kGameLogic,
 				 game.get_gametime(),
-				 "images/ui_basic/menu_help.png",
 				 "Coroutine",
+				 "images/ui_basic/menu_help.png",
 				 "Lua Coroutine Failed",
-				 e.what());
+				 (boost::format("<rt><p font-size=12>%s</p></rt>") % e.what()).str());
 			game.player(i).add_message(game, msg, true);
 		}
 		game.game_controller()->set_desired_speed(0);
