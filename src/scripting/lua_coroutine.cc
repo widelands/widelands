@@ -124,7 +124,7 @@ uint32_t LuaCoroutine::pop_uint32() {
 	if (!nreturn_values_) {
 		return 0;
 	}
-	if (!lua_isnumber(lua_state_, -1)) {
+	if (!lua_isinteger(lua_state_, -1)) {
 		throw LuaError("pop_uint32(), but no integer on the stack.");
 	}
 	const uint32_t return_value = luaL_checkuint32(lua_state_, -1);
