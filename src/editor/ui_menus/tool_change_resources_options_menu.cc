@@ -68,17 +68,12 @@ EditorToolChangeResourcesOptionsMenu
 {
 	// Configure spin boxes
 	change_by_.set_tooltip(
-				/** TRANSLATORS: Editor change resources access keys. **/
-				(boost::format(_("Use %s to increase, %s to decrease"))
-				 /** TRANSLATORS: This is an access key combination. Localize, but do not change the key. **/
-				 % _("Click")
-				 /** TRANSLATORS: This is an access key combination. Localize, but do not change the key. **/
-				 % _("Shift + Click")).str());
+				/** TRANSLATORS: Editor change rseources access keys. **/
+				_("Click on the map to increase, "
+				  "Shift + Click on the map to decrease the amount of the selected resource"));
 	set_to_.set_tooltip(
-				/** TRANSLATORS: Editor set resources access key. **/
-				(boost::format(_("Use %s to set to this value"))
-				 /** TRANSLATORS: This is an access key combination. Localize, but do not change the key. **/
-				 % _("Ctrl + Click")).str());
+				/** TRANSLATORS: Editor set rseources access key. **/
+				_("Ctrl + Click on the map to set the amount of the selected resource"));
 
 	change_by_.changed.connect
 		(boost::bind

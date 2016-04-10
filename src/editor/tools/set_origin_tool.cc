@@ -45,8 +45,8 @@ EditorSetOriginTool::handle_undo_impl(const Widelands::World&,
                                       EditorActionArgs* /* args */,
 									  Widelands::Map* map) {
 	Widelands::Coords nc
-		(map->get_width()  - center.node.x,
-		 map->get_height() - center.node.y);
+		(map->get_width()  - 1 - center.node.x,
+		 map->get_height() - 1 - center.node.y);
 	map->set_origin(nc);
 	eia.map_changed(EditorInteractive::MapWas::kGloballyMutated);
 	eia.set_rel_viewpoint

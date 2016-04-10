@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-04-02 11:15+0000\n"
-"PO-Revision-Date: 2016-04-02 11:33+0000\n"
+"POT-Creation-Date: 2016-04-07 14:12+0000\n"
+"PO-Revision-Date: 2016-04-07 14:25+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -18,101 +18,125 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n==1 || n==11) ? 0 : (n==2 || n==12) ? 1 : (n > 2 && n < 20) ? 2 : 3;\n"
 
 #: ../../data/scripting/editor/editor_controls.lua:7
+#: ../../data/scripting/editor/editor_help.lua:65
+msgid "Controls"
+msgstr "Stiùireadh"
+
+#: ../../data/scripting/editor/editor_controls.lua:10
 msgid "Keyboard Shortcuts"
 msgstr "Ath-ghoiridean meur-chlàir"
 
+#. TRANSLATORS: This is an access key combination. Localize, but do not change
+#. the key.
+#: ../../data/scripting/editor/editor_controls.lua:13
+msgid "Help"
+msgstr "Cobhair"
+
 #. TRANSLATORS: This is an access key combination.
-#: ../../data/scripting/editor/editor_controls.lua:12
+#: ../../data/scripting/editor/editor_controls.lua:15
 msgid "Toggle main menu"
 msgstr "Toglaich am prìomh chlàr-taice"
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 't'
-#: ../../data/scripting/editor/editor_controls.lua:14
+#: ../../data/scripting/editor/editor_controls.lua:17
 msgid "Toggle tools menu"
 msgstr "Toglaich clàr-taice nan inneal"
 
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/scripting/editor/editor_controls.lua:16
-msgctxt "hotkey"
-msgid "1-0"
-msgstr "1-0"
-
-#: ../../data/scripting/editor/editor_controls.lua:16
-msgid "Change tool size"
-msgstr "Atharraich meud nan innealan"
-
 #. TRANSLATORS: This is an access key combination. The hotkey is 'p'
-#: ../../data/scripting/editor/editor_controls.lua:20
+#: ../../data/scripting/editor/editor_controls.lua:21
 msgid "Toggle player menu"
 msgstr "Toglaich clàr-taice nan cluicheadair"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/scripting/editor/editor_controls.lua:22
+#: ../../data/scripting/editor/editor_controls.lua:23
 msgid "Undo"
 msgstr "Neo-dhèan"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/scripting/editor/editor_controls.lua:24
+#: ../../data/scripting/editor/editor_controls.lua:25
 msgid "Redo"
 msgstr "Ath-dhèan"
 
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/scripting/editor/editor_controls.lua:26
-msgid "Help"
-msgstr "Cobhair"
-
-#: ../../data/scripting/editor/editor_controls.lua:28
-msgid "First alternative tool while pressed"
-msgstr "An dàrna inneal dàrnach fhad ’s a tha e ’ga chumail sìos"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/scripting/editor/editor_controls.lua:28
-msgctxt "hotkey"
-msgid "Shift (Hold)"
-msgstr "Shift (cum sìos)"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/scripting/editor/editor_controls.lua:30
-msgctxt "hotkey"
-msgid "Alt (Hold)"
-msgstr "Alt (cum sìos)"
-
-#: ../../data/scripting/editor/editor_controls.lua:30
-msgid "Second alternative tool while pressed"
-msgstr "An t-inneal dàrnach eile fhad ’s a tha e ’ga chumail sìos"
-
 #. TRANSLATORS: This is an access key combination. The hotkey is 'i'
-#: ../../data/scripting/editor/editor_controls.lua:32
+#: ../../data/scripting/editor/editor_controls.lua:27
 msgid "Activate information tool"
 msgstr "Gnìomhaich an t-inneal fiosrachaidh"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/scripting/editor/editor_controls.lua:34
+#: ../../data/scripting/editor/editor_controls.lua:29
 msgctxt "hotkey"
 msgid "Ctrl + L"
 msgstr "Ctrl + L"
 
-#: ../../data/scripting/editor/editor_controls.lua:34
+#: ../../data/scripting/editor/editor_controls.lua:29
 msgid "Load map"
 msgstr "Luchdaich mapa"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/scripting/editor/editor_controls.lua:36
+#: ../../data/scripting/editor/editor_controls.lua:31
 msgctxt "hotkey"
 msgid "Ctrl + S"
 msgstr "Ctrl + S"
 
-#: ../../data/scripting/editor/editor_controls.lua:36
+#: ../../data/scripting/editor/editor_controls.lua:31
 msgid "Save map"
 msgstr "Sàbhail am mapa"
+
+#: ../../data/scripting/editor/editor_controls.lua:35
+msgid "Tools"
+msgstr "Innealan"
+
+#. TRANSLATORS: This is an access key combination. Localize, but do not change
+#. the key.
+#: ../../data/scripting/editor/editor_controls.lua:38
+msgctxt "hotkey"
+msgid "1-0"
+msgstr "1-0"
+
+#: ../../data/scripting/editor/editor_controls.lua:38
+msgid "Change tool size"
+msgstr "Atharraich meud nan innealan"
+
+#. TRANSLATORS: This is an access key combination. Localize, but do not change
+#. the key.
+#: ../../data/scripting/editor/editor_controls.lua:40
+msgctxt "hotkey"
+msgid "Click"
+msgstr "Briogadh"
+
+#: ../../data/scripting/editor/editor_controls.lua:40
+msgid ""
+"Place new elements on the map, or increase map elements by the value "
+"selected by ‘Increase/Decrease value’"
+msgstr "Cuir nithean ùra air a’ mhapa no meudaich nithean a’ mhapa leis an luach a tha air “Meudaich/Lùghdaich an luach”"
+
+#: ../../data/scripting/editor/editor_controls.lua:42
+msgid ""
+"Remove elements from the map, or decrease map elements by the value selected"
+" by ‘Increase/Decrease value’"
+msgstr "Thoir nithean air falbh on mhapa no lùghdaich nithean a’ mhapa leis an luach a tha air “Meudaich/Lùghdaich an luach”"
+
+#. TRANSLATORS: This is an access key combination. Localize, but do not change
+#. the key.
+#: ../../data/scripting/editor/editor_controls.lua:42
+msgctxt "hotkey"
+msgid "Shift + Click"
+msgstr "Shift + Briogadh"
+
+#. TRANSLATORS: This is an access key combination. Localize, but do not change
+#. the key.
+#: ../../data/scripting/editor/editor_controls.lua:44
+msgctxt "hotkey"
+msgid "Ctrl + Click"
+msgstr "Ctrl + Briogadh"
+
+#: ../../data/scripting/editor/editor_controls.lua:44
+msgid "Set map elements to the value selected by ‘Set Value’"
+msgstr "Suidhich nithean a’ mhapa air an luach a tha air “Suidhich an luach”"
 
 #: ../../data/scripting/editor/editor_help.lua:49
 msgid "Editor Help"
@@ -126,10 +150,6 @@ msgstr "Coitcheann"
 #: ../../data/scripting/editor/editor_introduction.lua:10
 msgid "Introduction"
 msgstr "Ro-ràdh"
-
-#: ../../data/scripting/editor/editor_help.lua:65
-msgid "Controls"
-msgstr "Stiùireadh"
 
 #: ../../data/scripting/editor/editor_help.lua:74
 msgid "Terrains"

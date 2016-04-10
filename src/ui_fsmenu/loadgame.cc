@@ -530,10 +530,7 @@ void FullscreenMenuLoadGame::fill_table() {
 				}
 			}
 
-			{
-				i18n::Textdomain td("win_conditions");
-				gamedata.wincondition = _(gpdp.get_win_condition());
-			}
+			gamedata.wincondition = _(gpdp.get_localized_win_condition());
 			gamedata.minimap_path = gpdp.get_minimap_path();
 			games_data_.push_back(gamedata);
 

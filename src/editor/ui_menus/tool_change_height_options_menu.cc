@@ -22,8 +22,6 @@
 #include <cstdio>
 #include <string>
 
-#include <boost/format.hpp>
-
 #include "base/i18n.h"
 #include "editor/editorinteractive.h"
 #include "editor/tools/increase_height_tool.h"
@@ -52,16 +50,10 @@ EditorToolChangeHeightOptionsMenu::EditorToolChangeHeightOptionsMenu
 {
 	change_by_.set_tooltip(
 				/** TRANSLATORS: Editor change height access keys. **/
-				(boost::format(_("Use %s to increase, %s to decrease"))
-				 /** TRANSLATORS: This is an access key combination. Localize, but do not change the key. **/
-				 % _("Click")
-				 /** TRANSLATORS: This is an access key combination. Localize, but do not change the key. **/
-				 % _("Shift + Click")).str());
+				_("Click on the map to increase, Shift + Click on the map to decrease terrain height"));
 	set_to_.set_tooltip(
 				/** TRANSLATORS: Editor set height access key. **/
-				(boost::format(_("Use %s to set to this value"))
-				 /** TRANSLATORS: This is an access key combination. Localize, but do not change the key. **/
-				 % _("Ctrl + Click")).str());
+				_("Ctrl + Click on the map to set terrain height"));
 
 	change_by_.changed.connect
 		(boost::bind

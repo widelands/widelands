@@ -4,14 +4,15 @@
 # Translators:
 # Balázs Meskó <meskobalazs@gmail.com>, 2016
 # Dániel Varga <vargad88@gmail.com>, 2015
+# Szűcs Kornél Géza <sz.kornelgeza@gmail.com>, 2016
 # zone <z-one@freemail.hu>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-04-02 18:37+0000\n"
-"PO-Revision-Date: 2016-04-03 12:41+0000\n"
-"Last-Translator: Balázs Meskó <meskobalazs@gmail.com>\n"
+"POT-Creation-Date: 2016-04-07 14:12+0000\n"
+"PO-Revision-Date: 2016-04-09 07:12+0000\n"
+"Last-Translator: Szűcs Kornél Géza <sz.kornelgeza@gmail.com>\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -480,7 +481,7 @@ msgstr "Vörös gombafa (felnőtt)"
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/mushroom_red/init.lua:88
 msgid "Red Mushroom Tree (Old)"
-msgstr "Vörös gombafa (diős)"
+msgstr "Vörös gombafa (idős)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/mushroom_red/init.lua:90

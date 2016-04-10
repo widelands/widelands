@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-04-03 19:12+0000\n"
-"PO-Revision-Date: 2016-04-03 19:13+0000\n"
+"POT-Creation-Date: 2016-04-07 14:12+0000\n"
+"PO-Revision-Date: 2016-04-07 14:13+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Chinese (Taiwan) (http://www.transifex.com/widelands/widelands/language/zh_TW/)\n"
 "MIME-Version: 1.0\n"
@@ -2135,7 +2135,7 @@ msgid "Increased by %d%% for each level."
 msgstr ""
 
 #: ../../data/tribes/scripting/help/worker_help.lua:202
-msgid "This solder cannot be trained in defense"
+msgid "This soldier cannot be trained in defense."
 msgstr ""
 
 #: ../../data/tribes/scripting/help/worker_help.lua:205

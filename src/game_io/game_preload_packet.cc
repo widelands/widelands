@@ -46,6 +46,11 @@ namespace Widelands {
 constexpr uint16_t kCurrentPacketVersion = 6;
 constexpr const char* kMinimapFilename = "minimap.png";
 
+std::string GamePreloadPacket::get_localized_win_condition() const {
+	i18n::Textdomain td("win_conditions");
+	return _(win_condition_);
+}
+
 void GamePreloadPacket::read
 	(FileSystem & fs, Game &, MapObjectLoader * const)
 {

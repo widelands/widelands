@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-04-03 19:12+0000\n"
-"PO-Revision-Date: 2016-04-04 09:12+0000\n"
+"POT-Creation-Date: 2016-04-07 14:12+0000\n"
+"PO-Revision-Date: 2016-04-07 14:18+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -214,7 +214,7 @@ msgid "Loading tribes"
 msgstr "A’ luchdadh nan treubhan"
 
 #: ../../src/editor/editorinteractive.cc:118
-#: ../../src/editor/ui_menus/editor_main_menu.cc:45
+#: ../../src/editor/ui_menus/main_menu.cc:45
 #: ../../src/wui/game_options_menu.cc:68
 #: ../../src/wui/interactive_player.cc:92
 #: ../../src/wui/interactive_spectator.cc:59
@@ -222,12 +222,12 @@ msgid "Main Menu"
 msgstr "Am prìomh chlàr-taice"
 
 #: ../../src/editor/editorinteractive.cc:121
-#: ../../src/editor/ui_menus/editor_tool_menu.cc:47
+#: ../../src/editor/ui_menus/tool_menu.cc:47
 msgid "Tools"
 msgstr "Innealan"
 
 #: ../../src/editor/editorinteractive.cc:125
-#: ../../src/editor/ui_menus/editor_toolsize_menu.cc:43
+#: ../../src/editor/ui_menus/toolsize_menu.cc:43
 msgid "Tool Size"
 msgstr "Meud nan inneal"
 
@@ -256,7 +256,7 @@ msgid "Redo"
 msgstr "Ath-dhèan"
 
 #: ../../src/editor/editorinteractive.cc:143
-#: ../../src/wui/buildingwindow.cc:357
+#: ../../src/wui/buildingwindow.cc:355
 msgid "Help"
 msgstr "Cobhair"
 
@@ -284,28 +284,28 @@ msgstr "Mapa gun sàbhaladh"
 msgid "The map has not been saved, do you really want to quit?"
 msgstr "Cha deach am mapa a shàbhaladh, a bheil thu cinnteach gu bheil thu airson fàgail?"
 
-#: ../../src/editor/editorinteractive.cc:642
-#: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:122
+#: ../../src/editor/editorinteractive.cc:648
+#: ../../src/editor/ui_menus/main_menu_new_map.cc:122
 msgid "Creating empty map…"
 msgstr "A’ cruthachadh mapa falamh…"
 
 #. * TRANSLATORS: Default name for new map
-#: ../../src/editor/editorinteractive.cc:649
-#: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:131
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:458
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:138
-#: ../../src/logic/map.h:181
+#: ../../src/editor/editorinteractive.cc:655
+#: ../../src/editor/ui_menus/main_menu_new_map.cc:131
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:455
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:138
+#: ../../src/logic/map.h:180
 msgid "No Name"
 msgstr "Gun ainm"
 
-#: ../../src/editor/editorinteractive.cc:650
-#: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:132
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:459
+#: ../../src/editor/editorinteractive.cc:656
+#: ../../src/editor/ui_menus/main_menu_new_map.cc:132
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:456
 msgctxt "map_name"
 msgid "Unknown"
 msgstr "Mapa nach aithne dhuinn"
 
-#: ../../src/editor/editorinteractive.cc:657
+#: ../../src/editor/editorinteractive.cc:663
 #, c-format
 msgid "Loading map “%s”…"
 msgstr "A’ luchdadh mapa “%s”…"
@@ -314,98 +314,98 @@ msgstr "A’ luchdadh mapa “%s”…"
 msgid "Random Player"
 msgstr "Cluicheadair tuaireamach"
 
-#: ../../src/editor/tools/editor_info_tool.cc:47
+#: ../../src/editor/tools/info_tool.cc:47
 msgid "Field Information"
 msgstr "Fiosrachadh an raoin"
 
-#: ../../src/editor/tools/editor_info_tool.cc:55
+#: ../../src/editor/tools/info_tool.cc:55
 msgid "Node:"
 msgstr "Nòd:"
 
-#: ../../src/editor/tools/editor_info_tool.cc:57
+#: ../../src/editor/tools/info_tool.cc:57
 #, c-format
 msgid "Coordinates: (%1$i, %2$i)"
 msgstr "Co-chomharran: (%1$i, %2$i)"
 
 #. * TRANSLATORS: Editor terrain property: small building plot
-#: ../../src/editor/tools/editor_info_tool.cc:65
+#: ../../src/editor/tools/info_tool.cc:65
 msgid "small"
 msgstr "beag"
 
 #. * TRANSLATORS: Editor terrain property: medium building plot
-#: ../../src/editor/tools/editor_info_tool.cc:67
+#: ../../src/editor/tools/info_tool.cc:67
 msgid "medium"
 msgstr "meadhanach"
 
 #. * TRANSLATORS: Editor terrain property: big building plot
-#: ../../src/editor/tools/editor_info_tool.cc:69
+#: ../../src/editor/tools/info_tool.cc:69
 msgid "big"
 msgstr "mòr"
 
 #. * TRANSLATORS: Editor terrain property: space for a flag
-#: ../../src/editor/tools/editor_info_tool.cc:73
+#: ../../src/editor/tools/info_tool.cc:73
 msgid "flag"
 msgstr "bratach"
 
 #. * TRANSLATORS: Editor terrain property: mine building plot
-#: ../../src/editor/tools/editor_info_tool.cc:75
+#: ../../src/editor/tools/info_tool.cc:75
 msgid "mine"
 msgstr "mèinn"
 
 #. * TRANSLATORS: Editor terrain property: port space
-#: ../../src/editor/tools/editor_info_tool.cc:77
+#: ../../src/editor/tools/info_tool.cc:77
 msgid "port"
 msgstr "port"
 
-#. * TRANSLATORS: This is a terrain type tooltip in the editor
 #. * TRANSLATORS: Editor terrain property: units can walk on this terrain
-#: ../../src/editor/tools/editor_info_tool.cc:79
+#. * TRANSLATORS: This is a terrain type tooltip in the editor
+#: ../../src/editor/tools/info_tool.cc:79
 #: ../../src/logic/map_objects/world/terrain_description.cc:76
 msgid "walkable"
 msgstr "coiseachd"
 
 #. * TRANSLATORS: Editor terrain property: units can swim on this terrain
 #. (fish, ships)
-#: ../../src/editor/tools/editor_info_tool.cc:81
+#: ../../src/editor/tools/info_tool.cc:81
 msgid "swimmable"
 msgstr "snàmh"
 
-#: ../../src/editor/tools/editor_info_tool.cc:84
+#: ../../src/editor/tools/info_tool.cc:84
 #, c-format
 msgid "Caps: %s"
 msgstr "Cuingidhean: %s"
 
-#: ../../src/editor/tools/editor_info_tool.cc:90
+#: ../../src/editor/tools/info_tool.cc:90
 #, c-format
 msgid "Owned by: Player %u"
 msgstr "Le: Cluicheadair %u"
 
-#: ../../src/editor/tools/editor_info_tool.cc:93
+#: ../../src/editor/tools/info_tool.cc:93
 msgid "Owned by: —"
 msgstr "Sealbhaiche: —"
 
-#: ../../src/editor/tools/editor_info_tool.cc:97
+#: ../../src/editor/tools/info_tool.cc:97
 msgid "Has immovable"
 msgstr "Tha nì do-ghluasad ann"
 
-#: ../../src/editor/tools/editor_info_tool.cc:97
+#: ../../src/editor/tools/info_tool.cc:97
 msgid "No immovable"
 msgstr "Chan eil nì do-ghluasad ann"
 
-#: ../../src/editor/tools/editor_info_tool.cc:100
+#: ../../src/editor/tools/info_tool.cc:100
 msgid "Has animals"
 msgstr "Tha beathach ann"
 
-#: ../../src/editor/tools/editor_info_tool.cc:100
+#: ../../src/editor/tools/info_tool.cc:100
 msgid "No animals"
 msgstr "Chan eil beathach ann"
 
-#: ../../src/editor/tools/editor_info_tool.cc:104
-#: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:91
+#: ../../src/editor/tools/info_tool.cc:104
+#: ../../src/editor/ui_menus/main_menu_new_map.cc:91
 msgid "Terrain:"
 msgstr "Cruth-tìre:"
 
-#: ../../src/editor/tools/editor_info_tool.cc:110
+#: ../../src/editor/tools/info_tool.cc:110
 #, c-format
 msgctxt "terrain_name"
 msgid "Name: %s"
@@ -415,66 +415,65 @@ msgstr "Ainm: %s"
 #. "unreachable and unwalkable"
 #. * TRANSLATORS: You can also translate this as "Category: %s" or "Property:
 #. %s"
-#: ../../src/editor/tools/editor_info_tool.cc:118
+#: ../../src/editor/tools/info_tool.cc:118
 #, c-format
 msgid "Is: %s"
 msgstr "Seòrsa: %s"
 
-#: ../../src/editor/tools/editor_info_tool.cc:120
+#: ../../src/editor/tools/info_tool.cc:120
 #, c-format
 msgid "Editor Category: %s"
 msgstr "Roinn-seòrsa an deasaiche: %s"
 
-#: ../../src/editor/tools/editor_info_tool.cc:123
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:93
+#: ../../src/editor/tools/info_tool.cc:123
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:93
 msgid "Resources:"
 msgstr "Stòrasan:"
 
-#: ../../src/editor/tools/editor_info_tool.cc:130
+#: ../../src/editor/tools/info_tool.cc:130
 #, c-format
 msgid "Resource name: %s"
 msgstr "Ainm an stòrais: %s"
 
-#: ../../src/editor/tools/editor_info_tool.cc:132
+#: ../../src/editor/tools/info_tool.cc:132
 #, c-format
 msgid "Resource amount: %i"
 msgstr "Uiread an stòrais: %i"
 
-#: ../../src/editor/tools/editor_info_tool.cc:135
+#: ../../src/editor/tools/info_tool.cc:135
 msgid "No resources"
 msgstr "Gun stòras"
 
-#: ../../src/editor/tools/editor_info_tool.cc:139
-#: ../../src/wui/mapdetails.cc:111
+#: ../../src/editor/tools/info_tool.cc:139 ../../src/wui/mapdetails.cc:111
 msgid "Map:"
 msgstr "Mapa:"
 
-#: ../../src/editor/tools/editor_info_tool.cc:140
+#: ../../src/editor/tools/info_tool.cc:140
 #, c-format
 msgctxt "map_name"
 msgid "Name: %s"
 msgstr "Ainm: %s"
 
-#: ../../src/editor/tools/editor_info_tool.cc:141
+#: ../../src/editor/tools/info_tool.cc:141
 #, c-format
 msgid "Size: %1$ix%2$i"
 msgstr "Meud: %1$ix%2$i"
 
-#: ../../src/editor/tools/editor_info_tool.cc:146
+#: ../../src/editor/tools/info_tool.cc:146
 #, c-format
 msgid "Players: %u"
 msgstr "Cluicheadairean: %u"
 
-#: ../../src/editor/tools/editor_info_tool.cc:149
+#: ../../src/editor/tools/info_tool.cc:149
 msgid "Players: -"
 msgstr "Cluicheadairean: -"
 
-#: ../../src/editor/tools/editor_info_tool.cc:152
+#: ../../src/editor/tools/info_tool.cc:152
 #, c-format
 msgid "Author: %s"
 msgstr "Ùghdar: %s"
 
-#: ../../src/editor/tools/editor_info_tool.cc:153
+#: ../../src/editor/tools/info_tool.cc:153
 #, c-format
 msgid "Descr: %s"
 msgstr "Tuairisgeul: %s"
@@ -492,51 +491,52 @@ msgstr "Briog gus nì a thaghadh. Cleachd an iuchair Ctrl gus iomadh nì a thagh
 
 #. * TRANSLATORS: %s are the currently selected items in an editor tool
 #: ../../src/editor/ui_menus/categorized_item_selection_menu.h:191
+#: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:176
 #, c-format
 msgid "Current: %s"
 msgstr "Làithreach: %s"
 
-#: ../../src/editor/ui_menus/editor_help.cc:45
-#: ../../src/editor/ui_menus/editor_player_menu.cc:293
+#: ../../src/editor/ui_menus/help.cc:45
+#: ../../src/editor/ui_menus/player_menu.cc:293
 #: ../../src/ui_fsmenu/multiplayer.cc:144
 #: ../../src/wui/encyclopedia_window.cc:156
 #: ../../src/wui/tribal_encyclopedia.cc:51
 msgid "Error!"
 msgstr "Mearachd!"
 
-#: ../../src/editor/ui_menus/editor_main_menu.cc:52
-#: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:47
+#: ../../src/editor/ui_menus/main_menu.cc:52
+#: ../../src/editor/ui_menus/main_menu_new_map.cc:47
 msgid "New Map"
 msgstr "Mapa ùr"
 
-#: ../../src/editor/ui_menus/editor_main_menu.cc:57
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:46
+#: ../../src/editor/ui_menus/main_menu.cc:57
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:46
 msgid "New Random Map"
 msgstr "Mapa tuaireamach ùr"
 
-#: ../../src/editor/ui_menus/editor_main_menu.cc:62
-#: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:33
+#: ../../src/editor/ui_menus/main_menu.cc:62
+#: ../../src/editor/ui_menus/main_menu_load_map.cc:33
 msgid "Load Map"
 msgstr "Luchdaich mapa"
 
-#: ../../src/editor/ui_menus/editor_main_menu.cc:67
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:52
+#: ../../src/editor/ui_menus/main_menu.cc:67
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:52
 msgid "Save Map"
 msgstr "Sàbhail am mapa"
 
-#: ../../src/editor/ui_menus/editor_main_menu.cc:72
-#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:50
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:69
+#: ../../src/editor/ui_menus/main_menu.cc:72
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:50
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:69
 msgid "Map Options"
 msgstr "Roghainnean a’ mhapa"
 
-#: ../../src/editor/ui_menus/editor_main_menu.cc:77
+#: ../../src/editor/ui_menus/main_menu.cc:77
 msgid "Exit Editor"
 msgstr "Fàg an deasaiche"
 
-#: ../../src/editor/ui_menus/editor_main_menu_load_or_save_map.cc:59
-#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:63
-#: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:43
+#: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:59
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:63
+#: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:43
 #: ../../src/scripting/lua_game.cc:426 ../../src/ui_basic/messagebox.cc:91
 #: ../../src/ui_fsmenu/helpwindow.cc:53
 #: ../../src/ui_fsmenu/load_map_or_game.cc:63
@@ -545,95 +545,95 @@ msgstr "Fàg an deasaiche"
 msgid "OK"
 msgstr "Ceart ma-thà"
 
-#: ../../src/editor/ui_menus/editor_main_menu_load_or_save_map.cc:69
-#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:70
-#: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:67
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:145
-#: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:50
+#: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:69
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:70
+#: ../../src/editor/ui_menus/main_menu_new_map.cc:67
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:145
+#: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:50
 #: ../../src/ui_basic/messagebox.cc:103 ../../src/ui_fsmenu/launch_mpg.cc:88
 #: ../../src/ui_fsmenu/options.cc:120
 #: ../../src/wui/game_main_menu_save_game.cc:101 ../../src/wui/login_box.cc:73
 msgid "Cancel"
 msgstr "Sguir dheth"
 
-#: ../../src/editor/ui_menus/editor_main_menu_load_or_save_map.cc:83
-#: ../../src/editor/ui_menus/editor_main_menu_load_or_save_map.cc:134
+#: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:83
+#: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:134
 msgid "Show Map Names"
 msgstr "Seall ainm nam mapaichean"
 
 #. * TRANSLATORS: Checkbox title. If this checkbox is enabled, map names
 #. aren't translated.
-#: ../../src/editor/ui_menus/editor_main_menu_load_or_save_map.cc:87
+#: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:87
 #: ../../src/ui_fsmenu/mapselect.cc:82
 msgid "Show original map names"
 msgstr "Seall ainmean tùsail nam mapaichean"
 
-#: ../../src/editor/ui_menus/editor_main_menu_load_or_save_map.cc:136
+#: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:136
 msgid "Show Filenames"
 msgstr "Seall ainmean-faidhle"
 
-#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:103
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:103
 #: ../../src/ui_fsmenu/loadgame.cc:321
 #: ../../src/wui/game_main_menu_save_game.cc:68
 msgid "Map Name:"
 msgstr "Mapa:"
 
-#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:107
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:107
 msgid "Authors:"
 msgstr "Ùghdaran:"
 
-#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:111
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:111
 #: ../../src/ui_fsmenu/campaign_select.cc:80
 #: ../../src/ui_fsmenu/campaign_select.cc:157
 #: ../../src/ui_fsmenu/campaign_select.cc:396 ../../src/wui/mapdetails.cc:133
 msgid "Description:"
 msgstr "Tuairisgeul:"
 
-#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:115
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:115
 msgid "Hint (optional):"
 msgstr "Oidheam (roghainneil):"
 
-#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:124
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:124
 msgid "Tags:"
 msgstr "Tagaichean:"
 
-#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:125
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:125
 #: ../../src/ui_fsmenu/mapselect.cc:98
 msgid "Unbalanced"
 msgstr "Gun mheidh"
 
-#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:126
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:126
 #: ../../src/ui_fsmenu/mapselect.cc:107
 msgid "Free for all"
 msgstr "An aghaidh càch a chèile"
 
-#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:127
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:127
 #: ../../src/ui_fsmenu/mapselect.cc:108
 msgid "1v1"
 msgstr "Còmhrag-dhithis"
 
-#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:128
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:128
 #: ../../src/ui_fsmenu/mapselect.cc:115
 msgid "Teams of 2"
 msgstr "Sgiobaidhean de 2"
 
-#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:129
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:129
 #: ../../src/ui_fsmenu/mapselect.cc:116
 msgid "Teams of 3"
 msgstr "Sgiobaidhean de 3"
 
-#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:130
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:130
 #: ../../src/ui_fsmenu/mapselect.cc:117
 msgid "Teams of 4"
 msgstr "Sgiobaidhean de 4"
 
 #. * TRANSLATORS: Label for the list of suggested teams when choosing a map
-#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:132
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:132
 #: ../../src/wui/suggested_teams_box.cc:97
 msgid "Suggested Teams:"
 msgstr "Sgiobaidhean a mholamaid:"
 
-#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:141
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:141
 #: ../../src/ui_fsmenu/launch_mpg.cc:663
 #: ../../src/wui/game_main_menu_save_game.cc:172
 #, c-format
@@ -644,130 +644,130 @@ msgstr[1] "%u Chluicheadair"
 msgstr[2] "%u Cluicheadairean"
 msgstr[3] "%u Cluicheadair"
 
-#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:146
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:146
 msgid "Main Options"
 msgstr "Prìomh-roghainnean"
 
-#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:147
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:147
 msgid "Tags"
 msgstr "Tagaichean"
 
-#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:149
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:149
 msgid "Teams"
 msgstr "Sgiobaidhean"
 
-#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:174
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:174
 msgid "Size: %1% x %2%"
 msgstr "Meud: %1% x %2%"
 
-#: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:53
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:56
+#: ../../src/editor/ui_menus/main_menu_new_map.cc:53
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:56
 msgid "Width:"
 msgstr "Leud:"
 
-#: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:57
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:60
+#: ../../src/editor/ui_menus/main_menu_new_map.cc:57
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:60
 msgid "Height:"
 msgstr "Àirde:"
 
-#: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:64
+#: ../../src/editor/ui_menus/main_menu_new_map.cc:64
 msgid "Create Map"
 msgstr "Cruthaich mapa"
 
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:65
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:65
 #: ../../src/ui_fsmenu/loadgame.cc:323
 msgid "Players:"
 msgstr "Cluicheadairean:"
 
 #. * TRANSLATORS: A world name for the random map generator in the editor
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:71
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:71
 msgid "Summer"
 msgstr "Samhradh"
 
 #. * TRANSLATORS: A world name for the random map generator in the editor
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:73
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:73
 msgid "Winter"
 msgstr "Geamhradh"
 
 #. * TRANSLATORS: A world name for the random map generator in the editor
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:75
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:75
 msgid "Desert"
 msgstr "Fàsach"
 
 #. * TRANSLATORS: A world name for the random map generator in the editor
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:77
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:77
 msgid "Wasteland"
 msgstr "Talamh fàs"
 
 #. * TRANSLATORS: Amount of resources in the random map generator in the
 #. editor
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:83
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:83
 msgid "Low"
 msgstr "Ìosal"
 
 #. * TRANSLATORS: Amount of resources in the random map generator in the
 #. editor
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:85
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:85
 msgid "Medium"
 msgstr "Meadhanach"
 
 #. * TRANSLATORS: Amount of resources in the random map generator in the
 #. editor
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:87
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:87
 msgid "High"
 msgstr "Àrd"
 
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:92
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:92
 msgid "Climate:"
 msgstr "Gnàth-shìde:"
 
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:111
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:111
 msgid "Water:"
 msgstr "Uisge:"
 
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:115
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:115
 msgid "Land:"
 msgstr "Tìr:"
 
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:119
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:119
 msgid "Wasteland:"
 msgstr "Talamh fàs:"
 
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:122
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:122
 msgid "Mountains:"
 msgstr "Beanntan:"
 
 #. * TRANSLATORS: A spinbox unit
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:124
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:426
-#: ../../src/ui_basic/spinbox.cc:333
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:124
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:423
+#: ../../src/ui_basic/spinbox.cc:335
 #, c-format
 msgid "%i %%"
 msgstr "%i %%"
 
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:126
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:126
 msgid "Island mode"
 msgstr "Modh eileanan"
 
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:129
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:129
 msgid "Random Number:"
 msgstr "Àireamh thuaireamach:"
 
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:134
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:134
 msgid "Map ID:"
 msgstr "ID a’ mhapa:"
 
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:142
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:142
 msgid "Generate Map"
 msgstr "Gin mapa"
 
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:461
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:458
 msgid "Generating random map…"
 msgstr "A’ gintinn mapa tuaireamach…"
 
 #. * TRANSLATORS: Window title. This is shown after a random map has been
 #. created in the editor.
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:472
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:469
 msgid "Random Map"
 msgstr "Mapa tuaireamach"
 
@@ -776,47 +776,47 @@ msgstr "Mapa tuaireamach"
 #. * TRANSLATORS: You don't need to be literal with your translation,
 #. * TRANSLATORS: as long as the user understands that he needs to check the
 #. player positions.
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:476
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:473
 msgid ""
 "The map has been generated. Please double-check the player starting "
 "positions to make sure that your carriers won’t drown, or be stuck on an "
 "island or on top of a mountain."
 msgstr "Tha am mapa air a chruthachadh. Dearbhaich ionadan tòiseachaidh nan cluicheadairean ach nach dèid an luchd-obrach agad a bhàthadh ’s nach bi iad glaiste ann an eilean no air mullach beinne."
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:61
-#: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:28
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:61
+#: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:28
 msgid "Make Directory"
 msgstr "Cruthaich pasgan"
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:75
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:75
 #: ../../src/ui_fsmenu/loadgame.cc:276 ../../src/ui_fsmenu/loadgame.cc:408
 msgid "Filename:"
 msgstr "Ainm an fhaidhle:"
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:154
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:154
 msgid "unnamed"
 msgstr "gun ainm"
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:239
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:239
 #: ../../src/wui/game_main_menu_save_game.cc:260
 #, c-format
 msgid "A file with the name ‘%s’ already exists. Overwrite?"
 msgstr "Tha faidhle air a bheil “%s” ann mar-thà. A bheil thu airson sgrìobhadh thairis air?"
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:242
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:255
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:302
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:242
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:255
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:302
 msgid "Error Saving Map!"
 msgstr "Mearachd le sàbhaladh a’ mhapa!"
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:252
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:252
 #, c-format
 msgid ""
 "A file with the name ‘%s.tmp’ already exists. You have to remove it "
 "manually."
 msgstr "Tha faidhle air a bheil “%s.tmp” ann mar-thà. Feumaidh tu a thoirt air falbh a làmh."
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:298
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:298
 msgid ""
 "Error Saving Map!\n"
 "Saved map file may be corrupt!\n"
@@ -824,30 +824,30 @@ msgid ""
 "Reason given:\n"
 msgstr "Mearachd le sàbhaladh a’ mhapa!\nDh’fhaoidte gu bheil faidhle a’ mhapa coirbte!\n\nAdhbhar:\n"
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:35
+#: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:35
 msgid "Enter Directory Name: "
 msgstr "Cuir a-steach ainm a’ phasgain: "
 
-#: ../../src/editor/ui_menus/editor_player_menu.cc:72
+#: ../../src/editor/ui_menus/player_menu.cc:72
 msgid "Player Options"
 msgstr "Roghainnean nan cluicheadairean"
 
-#: ../../src/editor/ui_menus/editor_player_menu.cc:78
+#: ../../src/editor/ui_menus/player_menu.cc:78
 msgid "Add player"
 msgstr "Cuir cluicheadair ris"
 
-#: ../../src/editor/ui_menus/editor_player_menu.cc:85
+#: ../../src/editor/ui_menus/player_menu.cc:85
 msgid "Remove last player"
 msgstr "Thoir an cluicheadair mu dheireadh air falbh"
 
-#: ../../src/editor/ui_menus/editor_player_menu.cc:99
+#: ../../src/editor/ui_menus/player_menu.cc:99
 msgid "Number of Players"
 msgstr "Àireamh de chluicheadairean"
 
 #. * TRANSLATORS: Default player name, e.g. Player 1
-#: ../../src/editor/ui_menus/editor_player_menu.cc:232
-#: ../../src/logic/map.cc:315
+#: ../../src/editor/ui_menus/player_menu.cc:232 ../../src/logic/map.cc:315
 #: ../../src/logic/single_player_game_settings_provider.cc:88
+#: ../../src/map_io/map_player_names_and_tribes_packet.cc:105
 #: ../../src/network/nethost.cc:1699 ../../src/ui_fsmenu/launch_mpg.cc:581
 #: ../../src/wui/multiplayersetupgroup.cc:139
 #: ../../src/wui/multiplayersetupgroup.cc:301
@@ -855,97 +855,140 @@ msgstr "Àireamh de chluicheadairean"
 msgid "Player %u"
 msgstr "Cluicheadair %u"
 
-#: ../../src/editor/ui_menus/editor_player_menu.cc:295
+#: ../../src/editor/ui_menus/player_menu.cc:295
 msgid ""
 "Cannot remove player. It is referenced someplace. Remove all buildings and "
 "animals that depend on this player and try again."
 msgstr "Cha ghabh an cluicheadair a thoirt air falbh. Tha iomradh air àite air choireigin. Thoir air falbh a h-uile togalach ’s beathach a bhios an eisimeil air a’ chluicheadair seo ’s feuch ris a-rithist."
 
-#: ../../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:41
+#: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:39
 msgid "Height Tools Options"
 msgstr "Roghainnean nan innealan àirde"
 
-#: ../../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:46
-#: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:58
-msgid "Increase/Decrease Value"
-msgstr "Meudaich/Lùghdaich an luach"
+#: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:44
+#: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:58
+msgid "Increase/Decrease Value:"
+msgstr "Meudaich/Lùghdaich an luach:"
 
-#: ../../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:82
-#: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:89
-msgid "Set Value"
-msgstr "Suidhich an luach"
+#: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:49
+#: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:63
+#: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:58
+msgid "Set Value:"
+msgstr "Suidhich an luach:"
 
-#: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:54
-#: ../../src/editor/ui_menus/editor_tool_menu.cc:71
+#. * TRANSLATORS: Editor change height access keys. *
+#. * TRANSLATORS: Editor change resources access keys. *
+#: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:55
+#: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:72
+#, c-format
+msgid "Use %s to increase, %s to decrease"
+msgstr "Cleachd %s gus a mheudachadh is %s gus a lùghdachadh"
+
+#. * TRANSLATORS: This is an access key combination. Localize, but do not
+#. change the key. *
+#: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:57
+#: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:74
+msgid "Click"
+msgstr "Briogadh"
+
+#. * TRANSLATORS: This is an access key combination. Localize, but do not
+#. change the key. *
+#: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:59
+#: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:76
+msgid "Shift + Click"
+msgstr "Shift + Briogadh"
+
+#. * TRANSLATORS: Editor set height access key. *
+#. * TRANSLATORS: Editor set resources access key. *
+#. * TRANSLATORS: Editor set hoise height access keys. *
+#: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:62
+#: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:79
+#: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:70
+#, c-format
+msgid "Use %s to set to this value"
+msgstr "Cleachd %s gus an luach seo a shuidheachadh"
+
+#. * TRANSLATORS: This is an access key combination. Localize, but do not
+#. change the key. *
+#: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:64
+#: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:81
+#: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:72
+msgid "Ctrl + Click"
+msgstr "Ctrl + Briogadh"
+
+#: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:53
+#: ../../src/editor/ui_menus/tool_menu.cc:71
 msgid "Resources"
 msgstr "Stòrasan"
 
-#: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:108
-msgid "Current Selection"
-msgstr "An taghadh làithreach"
-
-#: ../../src/editor/ui_menus/editor_tool_menu.cc:66
+#: ../../src/editor/ui_menus/tool_menu.cc:66
 msgid "Change height"
 msgstr "Atharraich an àirde"
 
-#: ../../src/editor/ui_menus/editor_tool_menu.cc:67
+#: ../../src/editor/ui_menus/tool_menu.cc:67
 msgid "Noise height"
 msgstr "Àirde thuaireamach"
 
-#: ../../src/editor/ui_menus/editor_tool_menu.cc:68
-#: ../../src/wui/minimap.cc:143
+#: ../../src/editor/ui_menus/tool_menu.cc:68 ../../src/wui/minimap.cc:143
 msgid "Terrain"
 msgstr "Cruth-tìre"
 
-#: ../../src/editor/ui_menus/editor_tool_menu.cc:69
-#: ../../src/editor/ui_menus/editor_tool_place_immovable_options_menu.cc:56
+#: ../../src/editor/ui_menus/tool_menu.cc:69
+#: ../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:56
 msgid "Immovables"
 msgstr "Nithean do-ghluasad"
 
-#: ../../src/editor/ui_menus/editor_tool_menu.cc:70
-#: ../../src/editor/ui_menus/editor_tool_place_bob_options_menu.cc:45
+#: ../../src/editor/ui_menus/tool_menu.cc:70
+#: ../../src/editor/ui_menus/tool_place_bob_options_menu.cc:45
 msgid "Animals"
 msgstr "Beathaichean"
 
-#: ../../src/editor/ui_menus/editor_tool_menu.cc:72
+#: ../../src/editor/ui_menus/tool_menu.cc:72
 msgid "Set port space"
 msgstr "Suidhich raon puirt"
 
-#: ../../src/editor/ui_menus/editor_tool_menu.cc:73
+#: ../../src/editor/ui_menus/tool_menu.cc:73
 msgid ""
 "Set the position that will have the coordinates (0, 0). This will be the "
 "top-left corner of a generated minimap."
 msgstr "Suidhich an t-ionad aig am bi an càraid-àireimh (0, 0). ’S e seo a bhios an oisean clì gu h-àrd aig a’ mheanbh-mhapa a thèid a ghintinn."
 
-#: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:45
+#: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:43
 msgid "Noise Height Options"
 msgstr "Roghainnean na h-àirde tuaireamaiche"
 
-#: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:148
-#, c-format
-msgid "Minimum: %u"
-msgstr "As lugha: %u"
+#: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:48
+msgid "Minimum Height:"
+msgstr "Air a char as ìsle:"
 
-#: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:151
-#, c-format
-msgid "Maximum: %u"
-msgstr "As motha: %u"
+#: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:53
+msgid "Maximum Height:"
+msgstr "Air a char as àirde:"
 
-#: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:154
-#, c-format
-msgid "Set value: %u"
-msgstr "Suidhich an luach: %u"
+#. * TRANSLATORS: Editor noise height access keys. *
+#: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:64
+#: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:67
+msgid "Click to set the height to a random value within the specified range"
+msgstr "Briog gus an àirde a shuidheachadh air luach tuaireamach am broinn na rainse"
+
+#: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:84
+msgid "Random Height"
+msgstr "Àirde thuaireamach"
+
+#: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:91
+msgid "Fixed Height"
+msgstr "Àirde shocraichte"
 
 #. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
-#: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:81
+#: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:81
 msgid "%1%: %2%"
 msgstr "%1%: %2%"
 
-#: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:95
+#: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:95
 msgid "Terrain Select"
 msgstr "Tagh cruth-tìre"
 
-#: ../../src/editor/ui_menus/editor_toolsize_menu.cc:81
+#: ../../src/editor/ui_menus/toolsize_menu.cc:81
 #, c-format
 msgid "Current Size: %u"
 msgstr "Am meud làithreach: %u"
@@ -1005,12 +1048,12 @@ msgid ""
 " anymore, or it's a new version that can't be handled yet."
 msgstr "Chaidh an geama a shàbhaladh le seann-tionndadh de Widelands is cha ghabh a luchdadh tuilleadh no ’s e tionndadh ùr a th’ ann nach urrainn dhuinn làimhseachadh fhathast."
 
-#: ../../src/logic/map.h:182
+#: ../../src/logic/map.h:181
 msgctxt "author_name"
 msgid "Unknown"
 msgstr "Gun urra"
 
-#: ../../src/logic/map.h:183
+#: ../../src/logic/map.h:182
 msgid "No description defined"
 msgstr "Cha deach tuairisgeul a mhìneachadh"
 
@@ -1245,8 +1288,8 @@ msgstr[3] "Chaidh %s a thrusadh"
 msgid "No soldier to train!"
 msgstr "Chan eil saighdear ri thrèanadh ann!"
 
-#: ../../src/logic/map_objects/tribes/production_program.cc:1391
-#: ../../src/logic/map_objects/tribes/production_program.cc:1476
+#: ../../src/logic/map_objects/tribes/production_program.cc:1393
+#: ../../src/logic/map_objects/tribes/production_program.cc:1480
 msgid "No soldier found for this training level!"
 msgstr "Cha deach saighdear airson an leibheil de thrèanadh seo a lorg!"
 
@@ -1332,48 +1375,48 @@ msgid "Unloading of wares failed, expedition is cancelled now."
 msgstr "Chaidh sgur dhen triall on a dh’fhàillig le dì-luchdadh a’ bhathair."
 
 #. * TRANSLATORS: Ship expedition ready
-#: ../../src/logic/map_objects/tribes/ship.cc:845
+#: ../../src/logic/map_objects/tribes/ship.cc:848
 msgctxt "ship"
 msgid "Expedition"
 msgstr "Triall"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:846
+#: ../../src/logic/map_objects/tribes/ship.cc:849
 msgid "Expedition Ready"
 msgstr "Tha triall deiseil"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:847
+#: ../../src/logic/map_objects/tribes/ship.cc:850
 msgid "An expedition ship is waiting for your commands."
 msgstr "Tha triall luinge a’ feitheamh air d’ òrduighean."
 
 #. * TRANSLATORS: This is a ship state
-#: ../../src/logic/map_objects/tribes/ship.cc:957
+#: ../../src/logic/map_objects/tribes/ship.cc:960
 msgctxt "ship_state"
 msgid "Shipping"
 msgstr "Ag aiseag"
 
 #. * TRANSLATORS: This is a ship state. An expedition is waiting for your
 #. commands.
-#: ../../src/logic/map_objects/tribes/ship.cc:961
+#: ../../src/logic/map_objects/tribes/ship.cc:964
 msgctxt "ship_state"
 msgid "Waiting"
 msgstr "A’ feitheamh"
 
 #. * TRANSLATORS: This is a ship state. An expedition is scouting for port
 #. spaces.
-#: ../../src/logic/map_objects/tribes/ship.cc:965
+#: ../../src/logic/map_objects/tribes/ship.cc:968
 msgctxt "ship_state"
 msgid "Scouting"
 msgstr "A’ rùrachadh"
 
 #. * TRANSLATORS: This is a ship state. An expedition has found a port space.
-#: ../../src/logic/map_objects/tribes/ship.cc:969
+#: ../../src/logic/map_objects/tribes/ship.cc:972
 msgctxt "ship_state"
 msgid "Port Space Found"
 msgstr "Air raon puirt a lorg"
 
 #. * TRANSLATORS: This is a ship state. An expedition is unloading
 #. wares/workers to build a port.
-#: ../../src/logic/map_objects/tribes/ship.cc:973
+#: ../../src/logic/map_objects/tribes/ship.cc:976
 msgctxt "ship_state"
 msgid "Founding a Colony"
 msgstr "A’ tuineachadh"
@@ -1488,7 +1531,7 @@ msgid "Bluebyte Settlers II Map. No comment defined!"
 msgstr "Mapa Bluebyte Settlers II. Cha deach beachd a mhìneachadh!"
 
 #: ../../src/network/internet_gaming.cc:114
-#: ../../src/ui_fsmenu/internet_lobby.cc:424
+#: ../../src/ui_fsmenu/internet_lobby.cc:423
 msgid "Connection problem"
 msgstr "Duilgheadas leis a’ cheangal"
 
@@ -2070,24 +2113,24 @@ msgstr "dheth"
 msgid "%1% (%2%)"
 msgstr "%1% (%2%)"
 
-#: ../../src/ui_basic/spinbox.cc:143
+#: ../../src/ui_basic/spinbox.cc:144
 msgid "Decrease the value"
 msgstr "Lùghdaich an luach"
 
-#: ../../src/ui_basic/spinbox.cc:152
+#: ../../src/ui_basic/spinbox.cc:153
 msgid "Increase the value"
 msgstr "Meudaich an luach"
 
-#: ../../src/ui_basic/spinbox.cc:161
+#: ../../src/ui_basic/spinbox.cc:162
 msgid "Decrease the value by 10"
 msgstr "Lùghdaich an luach le 10"
 
-#: ../../src/ui_basic/spinbox.cc:168
+#: ../../src/ui_basic/spinbox.cc:169
 msgid "Increase the value by 10"
 msgstr "Meudaich an luach le 10"
 
 #. * TRANSLATORS: A spinbox unit
-#: ../../src/ui_basic/spinbox.cc:327
+#: ../../src/ui_basic/spinbox.cc:329
 #, c-format
 msgid "%d minute"
 msgid_plural "%d minutes"
@@ -2097,7 +2140,7 @@ msgstr[2] "%d mionaidean"
 msgstr[3] "%d mionaid"
 
 #. * TRANSLATORS: A spinbox unit
-#: ../../src/ui_basic/spinbox.cc:330
+#: ../../src/ui_basic/spinbox.cc:332
 #, c-format
 msgid "%d pixel"
 msgid_plural "%d pixels"
@@ -2106,11 +2149,11 @@ msgstr[1] "%d phiogsail"
 msgstr[2] "%d piogsailean"
 msgstr[3] "%d piogsail"
 
-#: ../../src/ui_fsmenu/about.cc:40 ../../src/ui_fsmenu/main.cc:55
+#: ../../src/ui_fsmenu/about.cc:39 ../../src/ui_fsmenu/main.cc:55
 msgid "About Widelands"
 msgstr "Mu Widelands"
 
-#: ../../src/ui_fsmenu/about.cc:48 ../../src/wui/watchwindow.cc:142
+#: ../../src/ui_fsmenu/about.cc:47 ../../src/wui/watchwindow.cc:142
 msgid "Close"
 msgstr "Dùin"
 
@@ -2339,24 +2382,24 @@ msgstr "Puingean"
 msgid "Game"
 msgstr "Geama"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:393
+#: ../../src/ui_fsmenu/internet_lobby.cc:392
 msgid ""
 "Widelands was unable to get the IP address of the server in time.\n"
 "There seems to be a network problem, either on your side or on the side\n"
 "of the server.\n"
 msgstr "Cha deach le Widelands an seòladh IP aig an fhrithealaiche fhaighinn ri àm.\nDh’fhaoidte gu bheil duilgheadas lìonraidh air taobh an fhrithealaiche\nno agadsa.\n"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:397
+#: ../../src/ui_fsmenu/internet_lobby.cc:396
 msgid "Connection timed out"
 msgstr "Dh’fhalbh an ùine air a’ cheangal"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:425
+#: ../../src/ui_fsmenu/internet_lobby.cc:424
 msgid "Widelands was unable to connect to the host."
 msgstr "Cha deach le Widelands ceangal ris an òstair."
 
 #. * TRANSLATORS: This is shown for multiplayer games when no host
 #. * TRANSLATORS: server to connect to has been specified yet.
-#: ../../src/ui_fsmenu/internet_lobby.cc:447
+#: ../../src/ui_fsmenu/internet_lobby.cc:446
 msgctxt "server_name"
 msgid "unnamed"
 msgstr "gun_ainm"
@@ -3201,28 +3244,28 @@ msgstr "Thoir às a chèile"
 msgid "Returns:"
 msgstr "Toradh:"
 
-#: ../../src/wui/buildingwindow.cc:314 ../../src/wui/buildingwindow.cc:506
+#: ../../src/wui/buildingwindow.cc:312 ../../src/wui/buildingwindow.cc:504
 msgid "Hide work area"
 msgstr "Falaich an raon-obrach"
 
-#: ../../src/wui/buildingwindow.cc:329 ../../src/wui/fieldaction.cc:446
+#: ../../src/wui/buildingwindow.cc:327 ../../src/wui/fieldaction.cc:446
 #: ../../src/wui/shipwindow.cc:206
 msgid "Show Debug Window"
 msgstr "Seall uinneag dì-bhugachaidh"
 
-#: ../../src/wui/buildingwindow.cc:340
+#: ../../src/wui/buildingwindow.cc:338
 msgid "Center view on this"
 msgstr "Meadhanaich an sealladh air"
 
-#: ../../src/wui/buildingwindow.cc:509
+#: ../../src/wui/buildingwindow.cc:507
 msgid "Show work area"
 msgstr "Seall an raon-obrach"
 
-#: ../../src/wui/buildingwindow.cc:546
+#: ../../src/wui/buildingwindow.cc:544
 msgid "Start an expedition"
 msgstr "Tòisich air triall"
 
-#: ../../src/wui/buildingwindow.cc:550
+#: ../../src/wui/buildingwindow.cc:548
 msgid "Cancel the expedition"
 msgstr "Sguir dhen triall"
 
