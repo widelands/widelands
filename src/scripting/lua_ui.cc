@@ -206,7 +206,7 @@ int LuaPanel::get_mouse_position_x(lua_State * L) {
 int LuaPanel::set_mouse_position_x(lua_State * L) {
 	assert(panel_);
 	Point p = panel_->get_mouse_position();
-	p.x = luaL_checkint32(L, -1);
+	p.x = floor(luaL_checkdouble(L, -1));
 	panel_->set_mouse_pos(p);
 	return 1;
 }
@@ -218,7 +218,7 @@ int LuaPanel::get_mouse_position_y(lua_State * L) {
 int LuaPanel::set_mouse_position_y(lua_State * L) {
 	assert(panel_);
 	Point p = panel_->get_mouse_position();
-	p.y = luaL_checkint32(L, -1);
+	p.y = floor(luaL_checkdouble(L, -1));
 	panel_->set_mouse_pos(p);
 	return 1;
 }
@@ -554,7 +554,7 @@ int LuaMapView::set_viewpoint_x(lua_State * L) {
 
 	MapView * mv = get();
 	Point p = mv->get_viewpoint();
-	p.x = luaL_checkuint32(L, -1);
+	p.x = floor(luaL_checkdouble(L, -1));
 	mv->set_viewpoint(p, true);
 	return 0;
 }
@@ -571,7 +571,7 @@ int LuaMapView::set_viewpoint_y(lua_State * L) {
 
 	MapView * mv = get();
 	Point p = mv->get_viewpoint();
-	p.y = luaL_checkuint32(L, -1);
+	p.y = floor(luaL_checkdouble(L, -1));
 	mv->set_viewpoint(p, true);
 	return 0;
 }

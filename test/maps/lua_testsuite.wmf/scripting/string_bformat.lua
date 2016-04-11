@@ -14,7 +14,6 @@ function string_bformat_test:test_integer()
    assert_equal("1", ("%i"):bformat(1))
 end
 function string_bformat_test:test_float()
-   assert_equal("1.00", ("%.2f"):bformat(1))
    assert_equal("3.14", ("%.2f"):bformat(3.14151))
 end
 function string_bformat_test:test_wrong_number_of_args()

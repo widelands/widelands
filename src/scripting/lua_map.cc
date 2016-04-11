@@ -98,11 +98,11 @@ int food_list_to_lua(lua_State* L, const std::vector<std::vector<std::string>>& 
 	lua_newtable(L);
 	int counter = 0;
 	for (const std::vector<std::string>& foodlist : table) {
-		lua_pushnumber(L, ++counter);
+		lua_pushuint32(L, ++counter);
 		lua_newtable(L);
 		int counter2 = 0;
 		for (const std::string& foodname : foodlist) {
-			lua_pushnumber(L, ++counter2);
+			lua_pushuint32(L, ++counter2);
 			lua_pushstring(L, foodname);
 			lua_settable(L, -3);
 		}
@@ -1506,8 +1506,8 @@ int LuaImmovableDescription::get_editor_category(lua_State * L) {
 /* RST
 	.. attribute:: returns the terrain affinity values for this immovable
 
-			(RO) a table containing numbers labeled as pickiness, preferred_fertility,
-				  preferred_humidity, and preferred_temperature,
+			(RO) a table containing numbers labeled as pickiness (double), preferred_fertility (double),
+				  preferred_humidity (double), and preferred_temperature (uint),
 				  or nil if the immovable has no terrain affinity.
 */
 int LuaImmovableDescription::get_terrain_affinity(lua_State * L) {
@@ -1515,16 +1515,16 @@ int LuaImmovableDescription::get_terrain_affinity(lua_State * L) {
 		const TerrainAffinity& affinity = get()->terrain_affinity();
 		lua_newtable(L);
 		lua_pushstring(L, "pickiness");
-		lua_pushnumber(L, affinity.pickiness());
+		lua_pushdouble(L, affinity.pickiness());
 		lua_settable(L, -3);
 		lua_pushstring(L, "preferred_fertility");
-		lua_pushnumber(L, affinity.preferred_fertility());
+		lua_pushdouble(L, affinity.preferred_fertility());
 		lua_settable(L, -3);
 		lua_pushstring(L, "preferred_humidity");
-		lua_pushnumber(L, affinity.preferred_humidity());
+		lua_pushdouble(L, affinity.preferred_humidity());
 		lua_settable(L, -3);
 		lua_pushstring(L, "preferred_temperature");
-		lua_pushnumber(L, affinity.preferred_temperature());
+		lua_pushuint32(L, affinity.preferred_temperature());
 		lua_settable(L, -3);
 	} else {
 		lua_pushnil(L);
@@ -1620,7 +1620,7 @@ int LuaImmovableDescription::probability_to_grow(lua_State * L) {
 	}
 	if (get()->has_terrain_affinity()) {
 		const TerrainDescription* terrain = (*get_user_class<LuaMaps::LuaTerrainDescription>(L, 2))->get();
-		lua_pushnumber(L, Widelands::probability_to_grow(get()->terrain_affinity(), *terrain));
+		lua_pushdouble(L, Widelands::probability_to_grow(get()->terrain_affinity(), *terrain));
 	} else {
 		lua_pushnil(L);
 	}
@@ -2062,11 +2062,11 @@ int LuaProductionSiteDescription::consumed_wares(lua_State * L) {
 		lua_newtable(L);
 		int counter = 0;
 		for (const auto& group: program.consumed_wares()) {
-			lua_pushnumber(L, ++counter);
+			lua_pushuint32(L, ++counter);
 			lua_newtable(L);
 			for (const DescriptionIndex& ware_index : group.first) {
 				lua_pushstring(L, get_egbase(L).tribes().get_ware_descr(ware_index)->name());
-				lua_pushnumber(L, group.second);
+				lua_pushuint32(L, group.second);
 				lua_settable(L, -3);
 			}
 			lua_settable(L, -3);
@@ -2380,7 +2380,7 @@ int LuaTrainingSiteDescription::get_weapons_attack(lua_State * L) {
 	lua_newtable(L);
 	int counter = 0;
 	for (const std::string& weaponname : get()->get_weapons_attack()) {
-		lua_pushnumber(L, ++counter);
+		lua_pushuint32(L, ++counter);
 		lua_pushstring(L, weaponname);
 		lua_settable(L, -3);
 	}
@@ -2396,7 +2396,7 @@ int LuaTrainingSiteDescription::get_weapons_defense(lua_State * L) {
 	lua_newtable(L);
 	int counter = 0;
 	for (const std::string& weaponname : get()->get_weapons_defense()) {
-		lua_pushnumber(L, ++counter);
+		lua_pushuint32(L, ++counter);
 		lua_pushstring(L, weaponname);
 		lua_settable(L, -3);
 	}
@@ -2412,7 +2412,7 @@ int LuaTrainingSiteDescription::get_weapons_evade(lua_State * L) {
 	lua_newtable(L);
 	int counter = 0;
 	for (const std::string& weaponname : get()->get_weapons_evade()) {
-		lua_pushnumber(L, ++counter);
+		lua_pushuint32(L, ++counter);
 		lua_pushstring(L, weaponname);
 		lua_settable(L, -3);
 	}
@@ -2428,7 +2428,7 @@ int LuaTrainingSiteDescription::get_weapons_health(lua_State * L) {
 	lua_newtable(L);
 	int counter = 0;
 	for (const std::string& weaponname : get()->get_weapons_health()) {
-		lua_pushnumber(L, ++counter);
+		lua_pushuint32(L, ++counter);
 		lua_pushstring(L, weaponname);
 		lua_settable(L, -3);
 	}
@@ -3128,7 +3128,7 @@ int LuaTerrainDescription::get_editor_category(lua_State * L) {
 */
 
 int LuaTerrainDescription::get_fertility(lua_State * L) {
-	lua_pushnumber(L, get()->fertility());
+	lua_pushdouble(L, get()->fertility());
 	return 1;
 }
 
@@ -3139,7 +3139,7 @@ int LuaTerrainDescription::get_fertility(lua_State * L) {
 */
 
 int LuaTerrainDescription::get_humidity(lua_State * L) {
-	lua_pushnumber(L, get()->humidity());
+	lua_pushdouble(L, get()->humidity());
 	return 1;
 }
 
@@ -3157,11 +3157,11 @@ int LuaTerrainDescription::get_representative_image(lua_State * L) {
 /* RST
 	.. attribute:: temperature
 
-			(RO) the :class:`double` temperature value for this terrain
+			(RO) the :class:`uint` temperature value for this terrain
 */
 
 int LuaTerrainDescription::get_temperature(lua_State * L) {
-	lua_pushnumber(L, get()->temperature());
+	lua_pushuint32(L, get()->temperature());
 	return 1;
 }
 
