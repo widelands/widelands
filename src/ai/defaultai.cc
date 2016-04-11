@@ -221,9 +221,6 @@ DefaultAI::DefaultAI(Game& ggame, PlayerNumber const pid, DefaultAI::Type const 
 					   break;
 				   }
 			   }
-			   	break;
-				default:
-					NEVER_HERE();
 		   }
 		});
 }
@@ -461,7 +458,7 @@ void DefaultAI::think() {
 				check_enemy_sites(gametime);
 				set_taskpool_task_time(gametime +   19 * 1000, SchedulerTaskId::kCheckEnemySites);
 				break;
-			default:
+			case SchedulerTaskId::kUnset :
 				NEVER_HERE();
 			}
 	}
@@ -5321,7 +5318,7 @@ void DefaultAI::lose_building(const Building& b) {
 // NOTE: This is not needed anymore and it seems it is not missed neither
 bool DefaultAI::check_supply(const BuildingObserver& bo) {
 	size_t supplied = 0;
-	for (const int16_t& temp_inputs : bo.inputs) {
+	for (const Widelands::DescriptionIndex& temp_inputs : bo.inputs) {
 		for (const BuildingObserver& temp_building : buildings_) {
 			if (temp_building.cnt_built &&
 			    std::find(temp_building.outputs.begin(), temp_building.outputs.end(), temp_inputs) !=
@@ -5383,7 +5380,7 @@ int32_t DefaultAI::calculate_strength(const std::vector<Widelands::Soldier*> sol
 				defense += static_cast<float>(95 -  8 * soldier->get_defense_level()) / 100;
 				evade += static_cast<float>(70 - 16 * soldier->get_evade_level()) / 100;
 				break;
-			default:
+			case (Tribes::kNone):
 				NEVER_HERE();
 		}
 
@@ -5538,7 +5535,7 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 			case DefaultAI::Type::kWeak:
 				training_score = -4;
 				break;
-			default:
+			case DefaultAI::Type::kVeryWeak:
 				training_score = -2;
 			}
 	} else if (persistent_data->last_soldier_trained + 10 * 60 * 1000 < gametime) {
@@ -5550,7 +5547,7 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 			case DefaultAI::Type::kWeak:
 				training_score = -2;
 				break;
-			default:
+			case DefaultAI::Type::kVeryWeak:
 				training_score = -1;
 			}
 	}

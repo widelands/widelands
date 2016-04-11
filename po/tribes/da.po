@@ -9,9 +9,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-04-02 11:15+0000\n"
-"PO-Revision-Date: 2016-04-02 11:17+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2016-04-02 18:37+0000\n"
+"PO-Revision-Date: 2016-04-03 14:41+0000\n"
+"Last-Translator: Ole Laursen <ole.laursen@gmail.com>\n"
 "Language-Team: Danish (http://www.transifex.com/widelands/widelands/language/da/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -415,7 +415,7 @@ msgstr "Nedrivningsplads"
 #: ../../data/tribes/buildings/productionsites/atlanteans/armorsmithy/init.lua:7
 msgctxt "atlanteans_building"
 msgid "Armor Smithy"
-msgstr "Rustningssmedje"
+msgstr "Rustningsmedje"
 
 #. TRANSLATORS: Completed/Skipped/Did not start working because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/armorsmithy/init.lua:56
@@ -976,7 +976,7 @@ msgstr "Klejnsmedje"
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:92
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:108
 msgid "making a bread paddle"
-msgstr "tilvirkning af brødspartel"
+msgstr "tilvirkning af brødspade"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a pair of buckets
 #. because ...
@@ -1612,7 +1612,7 @@ msgstr "smedning af bronzeøkse"
 #. ...
 #: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:134
 msgid "forging a battle ax"
-msgstr "smedning af kampøkse"
+msgstr "smedning af stridsøkse"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a warrior’s ax because
 #. ...
@@ -1659,7 +1659,7 @@ msgstr "hærdning af træ"
 #: ../../data/tribes/buildings/productionsites/empire/armorsmithy/init.lua:7
 msgctxt "empire_building"
 msgid "Armor Smithy"
-msgstr "Rustningssmedje"
+msgstr "Rustningsmedje"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a suit of armor
 #. because ...
@@ -2540,69 +2540,77 @@ msgstr "Denne stamme er kendt fra de ældste sagn, sønnerne og døtrene af Atla
 
 #: ../../data/tribes/scripting/help/init.lua:48
 msgid "Tribal Encyclopedia"
-msgstr ""
+msgstr "Stammeleksikon"
 
 #: ../../data/tribes/scripting/help/init.lua:53
 msgid "General"
-msgstr ""
+msgstr "Generelt"
 
 #: ../../data/tribes/scripting/help/init.lua:58
 msgid "Introduction"
-msgstr ""
+msgstr "Introduktion"
 
 #: ../../data/tribes/scripting/help/init.lua:64
 msgid "Controls"
-msgstr ""
+msgstr "Kontroller"
 
 #: ../../data/tribes/scripting/help/init.lua:73
 msgid "Wares"
-msgstr ""
+msgstr "Varer"
 
 #: ../../data/tribes/scripting/help/init.lua:80
 msgid "Workers"
-msgstr ""
+msgstr "Arbejdere"
 
 #: ../../data/tribes/scripting/help/init.lua:87
 msgid "Buildings"
-msgstr ""
+msgstr "Bygninger"
 
-#: ../../data/tribes/scripting/starting_conditions/atlanteans/fortified_village.lua:10
-#: ../../data/tribes/scripting/starting_conditions/barbarians/fortified_village.lua:10
-#: ../../data/tribes/scripting/starting_conditions/empire/fortified_village.lua:10
-msgid "Fortified Village"
-msgstr "Befæstet landsby"
-
+#. TRANSLATORS: This is the name of a starting condition
 #: ../../data/tribes/scripting/starting_conditions/atlanteans/fortified_village.lua:11
 #: ../../data/tribes/scripting/starting_conditions/barbarians/fortified_village.lua:11
 #: ../../data/tribes/scripting/starting_conditions/empire/fortified_village.lua:11
+msgid "Fortified Village"
+msgstr "Befæstet landsby"
+
+#. TRANSLATORS: This is the tooltip for the "Fortified Village" starting
+#. condition
+#: ../../data/tribes/scripting/starting_conditions/atlanteans/fortified_village.lua:13
+#: ../../data/tribes/scripting/starting_conditions/barbarians/fortified_village.lua:13
+#: ../../data/tribes/scripting/starting_conditions/empire/fortified_village.lua:13
 msgid " Start the game with a fortified military installation"
-msgstr ""
+msgstr "Start spillet med en befæstet militærinstallation"
 
-#: ../../data/tribes/scripting/starting_conditions/atlanteans/headquarters.lua:10
-#: ../../data/tribes/scripting/starting_conditions/barbarians/headquarters.lua:10
-#: ../../data/tribes/scripting/starting_conditions/empire/headquarters.lua:10
-msgid "Headquarters"
-msgstr "Hovedkvarter"
-
+#. TRANSLATORS: This is the name of a starting condition
 #: ../../data/tribes/scripting/starting_conditions/atlanteans/headquarters.lua:11
 #: ../../data/tribes/scripting/starting_conditions/barbarians/headquarters.lua:11
 #: ../../data/tribes/scripting/starting_conditions/empire/headquarters.lua:11
+msgid "Headquarters"
+msgstr "Hovedkvarter"
+
+#. TRANSLATORS: This is the tooltip for the "Headquarters" starting condition
+#: ../../data/tribes/scripting/starting_conditions/atlanteans/headquarters.lua:13
+#: ../../data/tribes/scripting/starting_conditions/barbarians/headquarters.lua:13
+#: ../../data/tribes/scripting/starting_conditions/empire/headquarters.lua:13
 msgid "Start the game with your headquarters only"
-msgstr ""
+msgstr "Start spillet med dit hovedkvarter kun"
 
-#: ../../data/tribes/scripting/starting_conditions/atlanteans/trading_outpost.lua:10
-#: ../../data/tribes/scripting/starting_conditions/barbarians/trading_outpost.lua:10
-#: ../../data/tribes/scripting/starting_conditions/empire/trading_outpost.lua:10
-msgid "Trading Outpost"
-msgstr ""
-
+#. TRANSLATORS: This is the name of a starting condition
 #: ../../data/tribes/scripting/starting_conditions/atlanteans/trading_outpost.lua:11
 #: ../../data/tribes/scripting/starting_conditions/barbarians/trading_outpost.lua:11
 #: ../../data/tribes/scripting/starting_conditions/empire/trading_outpost.lua:11
+msgid "Trading Outpost"
+msgstr "Handelsforpost"
+
+#. TRANSLATORS: This is the tooltip for the "Trading Outpost" starting
+#. condition
+#: ../../data/tribes/scripting/starting_conditions/atlanteans/trading_outpost.lua:13
+#: ../../data/tribes/scripting/starting_conditions/barbarians/trading_outpost.lua:13
+#: ../../data/tribes/scripting/starting_conditions/empire/trading_outpost.lua:13
 msgid ""
 "If this player runs low on important wares, they will be replenished for "
 "free"
-msgstr ""
+msgstr "Hvis denne spiller er ved at løbe tør for vigtige varer, vil de blive genopfyldt gratis"
 
 #. TRANSLATORS: This is the ship's name used in lists of units
 #: ../../data/tribes/ships/atlanteans/init.lua:20
@@ -2645,7 +2653,7 @@ msgstr "Økse"
 #: ../../data/tribes/wares/ax_battle/init.lua:7
 msgctxt "ware"
 msgid "Battle Ax"
-msgstr "Krigsøkse"
+msgstr "Stridsøkse"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/ax_broad/init.lua:7
@@ -2729,7 +2737,7 @@ msgstr "Brød"
 #: ../../data/tribes/wares/bread_paddle/init.lua:7
 msgctxt "ware"
 msgid "Bread Paddle"
-msgstr "Brødpalet"
+msgstr "Brødspade"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/buckets/init.lua:7
@@ -3137,7 +3145,7 @@ msgstr "Bager"
 #: ../../data/tribes/workers/atlanteans/blackroot_farmer/init.lua:32
 msgctxt "atlanteans_worker"
 msgid "Blackroot Farmer"
-msgstr "Rodfrugtdyrker"
+msgstr "Rodfrugtsavler"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/atlanteans/builder/init.lua:27

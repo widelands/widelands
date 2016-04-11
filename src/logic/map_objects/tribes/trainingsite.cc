@@ -537,7 +537,9 @@ void TrainingSite::drop_stalled_soldiers(Game &)
 				if (tstep ==  training_failure_count_.end())
 					{
 						log("\nTrainingSite::drop_stalled_soldiers: ");
-						log("training step %d,%d not found in this school!\n", upgrade.attribute, level);
+						log("training step %d,%d not found in this school!\n",
+							 static_cast<unsigned int>(upgrade.attribute),
+							 level);
 						break;
 					}
 

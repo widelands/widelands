@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-04-02 11:15+0000\n"
-"PO-Revision-Date: 2016-04-02 11:17+0000\n"
+"POT-Creation-Date: 2016-04-07 14:12+0000\n"
+"PO-Revision-Date: 2016-04-07 14:13+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: English (United Kingdom) (http://www.transifex.com/widelands/widelands/language/en_GB/)\n"
 "MIME-Version: 1.0\n"
@@ -2084,6 +2084,72 @@ msgstr ""
 
 #: ../../data/tribes/scripting/help/worker_help.lua:144
 msgid "Experience levels"
+msgstr ""
+
+#. TRANSLATORS: Soldier levels
+#: ../../data/tribes/scripting/help/worker_help.lua:165
+msgid "Levels"
+msgstr ""
+
+#: ../../data/tribes/scripting/help/worker_help.lua:167
+msgid "Health"
+msgstr ""
+
+#. TRANSLATORS: Soldier health / defense / evade points. A 5 digit number.
+#: ../../data/tribes/scripting/help/worker_help.lua:171
+msgid "Starts at %1% points."
+msgstr ""
+
+#. TRANSLATORS: Soldier health / attack defense / evade points
+#: ../../data/tribes/scripting/help/worker_help.lua:174
+#: ../../data/tribes/scripting/help/worker_help.lua:185
+msgid "Increased by %1% point for each level."
+msgid_plural "Increased by %1% points for each level."
+msgstr[0] ""
+msgstr[1] ""
+
+#. TRANSLATORS: Soldier health / attack defense / evade level
+#: ../../data/tribes/scripting/help/worker_help.lua:177
+#: ../../data/tribes/scripting/help/worker_help.lua:187
+#: ../../data/tribes/scripting/help/worker_help.lua:197
+#: ../../data/tribes/scripting/help/worker_help.lua:212
+msgid "The maximum level is %1%."
+msgid_plural "The maximum level is %1%."
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../../data/tribes/scripting/help/worker_help.lua:179
+msgid "Attack"
+msgstr ""
+
+#. TRANSLATORS: Points are 4 digit numbers.
+#: ../../data/tribes/scripting/help/worker_help.lua:182
+msgid "A random value between %1% and %2% points is added to each attack."
+msgstr ""
+
+#: ../../data/tribes/scripting/help/worker_help.lua:189
+msgid "Defense"
+msgstr ""
+
+#: ../../data/tribes/scripting/help/worker_help.lua:193
+#: ../../data/tribes/scripting/help/worker_help.lua:201
+#: ../../data/tribes/scripting/help/worker_help.lua:208
+#, lua-format
+msgid "Starts at %d%%."
+msgstr ""
+
+#: ../../data/tribes/scripting/help/worker_help.lua:195
+#: ../../data/tribes/scripting/help/worker_help.lua:210
+#, lua-format
+msgid "Increased by %d%% for each level."
+msgstr ""
+
+#: ../../data/tribes/scripting/help/worker_help.lua:202
+msgid "This soldier cannot be trained in defense."
+msgstr ""
+
+#: ../../data/tribes/scripting/help/worker_help.lua:205
+msgid "Evade"
 msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Armor

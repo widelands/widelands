@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2003, 2006-2010, 2011-2013 by the Widelands Development Team
+ * Copyright (C) 2002-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -644,8 +644,7 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase & egbase)
 						 "play settler maps here",
 						 res);
 			}
-			const Widelands::ResourceAmount real_amount = static_cast<Widelands::ResourceAmount>
-				(2.86 * static_cast<float>(amount));
+			const Widelands::ResourceAmount real_amount = static_cast<Widelands::ResourceAmount>(2.86f * amount);
 			map_.initialize_resources(c, nres, real_amount);
 		}
 	}

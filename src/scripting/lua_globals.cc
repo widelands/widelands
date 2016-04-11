@@ -80,13 +80,10 @@ static int L_string_bformat(lua_State * L) {
 					break;
 
 				case LUA_TNUMBER:
-					{
-						const int d = lua_tointeger(L, i);
-						if (d == 0 && !lua_isnumber(L, 1)) {
-							fmt % d;
-						} else {
-							fmt % luaL_checknumber(L, i);
-						}
+					if (lua_isinteger(L, i)) {
+						fmt % luaL_checkint32(L, i);
+					} else {
+						fmt % luaL_checknumber(L, i);
 					}
 					break;
 
@@ -104,7 +101,7 @@ static int L_string_bformat(lua_State * L) {
 				case LUA_TTHREAD:
 				case LUA_TLIGHTUSERDATA:
 					report_error(L, "Cannot format the given type %s at index %i", lua_typename(L, i), i);
-					break;
+					NEVER_HERE(); // as report_error will never return
 
 				default:
 					{

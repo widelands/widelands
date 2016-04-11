@@ -157,7 +157,59 @@ function worker_help_string(tribe, worker_description)
                worker_description.needed_experience
             )
       end
-      result = result ..  rt("text-align=right", p(exp_string))
+      result = result .. rt("text-align=right", p(exp_string))
+   end
+   -- Soldier properties
+   if (worker_description.type_name == "soldier") then
+      -- TRANSLATORS: Soldier levels
+      result = result .. rt(h2(_"Levels"))
+
+      result = result .. rt(h3(_"Health"))
+      result = result .. rt(p(
+         listitem_bullet(
+            -- TRANSLATORS: Soldier health / defense / evade points. A 5 digit number.
+            (_"Starts at %1% points."):bformat(worker_description.base_health)) ..
+         listitem_bullet(
+            -- TRANSLATORS: Soldier health / attack defense / evade points
+            ngettext("Increased by %1% point for each level.", "Increased by %1% points for each level.", worker_description.health_incr_per_level):bformat(worker_description.health_incr_per_level)) ..
+         listitem_bullet(
+            -- TRANSLATORS: Soldier health / attack defense / evade level
+            ngettext("The maximum level is %1%.", "The maximum level is %1%.", worker_description.max_health_level):bformat(worker_description.max_health_level))))
+
+      result = result .. rt(h3(_"Attack"))
+      result = result .. rt(p(
+      -- TRANSLATORS: Points are 4 digit numbers.
+         listitem_bullet(_"A random value between %1% and %2% points is added to each attack."):bformat(worker_description.base_min_attack, worker_description.base_max_attack) ..
+
+         listitem_bullet(
+            ngettext("Increased by %1% point for each level.", "Increased by %1% points for each level.", worker_description.attack_incr_per_level):bformat(worker_description.attack_incr_per_level)) ..
+         listitem_bullet(
+            ngettext("The maximum level is %1%.", "The maximum level is %1%.", worker_description.max_attack_level):bformat(worker_description.max_attack_level))))
+
+      result = result .. rt(h3(_"Defense"))
+      if (worker_description.max_defense_level > 0) then
+         result = result .. rt(p(
+            listitem_bullet(
+               (_"Starts at %d%%."):bformat(worker_description.base_defense)) ..
+            listitem_bullet(
+               (_"Increased by %d%% for each level."):bformat(worker_description.defense_incr_per_level)) ..
+            listitem_bullet(
+               ngettext("The maximum level is %1%.", "The maximum level is %1%.", worker_description.max_defense_level):bformat(worker_description.max_defense_level))))
+      else
+         result = result .. rt(p(
+            listitem_bullet(
+               (_"Starts at %d%%."):bformat(worker_description.base_defense)) ..
+            listitem_bullet(_"This soldier cannot be trained in defense.")))
+      end
+
+      result = result .. rt(h3(_"Evade"))
+      result = result .. rt(p(
+         listitem_bullet(
+            (_"Starts at %d%%."):bformat(worker_description.base_evade)) ..
+         listitem_bullet(
+            (_"Increased by %d%% for each level."):bformat(worker_description.evade_incr_per_level)) ..
+         listitem_bullet(
+            ngettext("The maximum level is %1%.", "The maximum level is %1%.", worker_description.max_evade_level):bformat(worker_description.max_evade_level))))
    end
    return result
 end

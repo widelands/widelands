@@ -2,6 +2,7 @@
 # Copyright (C) 2005-2016 Widelands Development Team
 # 
 # Translators:
+# Aleksandr Gladkov <djanticisco@gmail.com>, 2016
 # Alexander Bikmeyev <bikmeyev@freemail.ru>, 2006
 # Anton Khabarov <2233009@gmail.com>, 2015
 # dr&mx <dronmax@gmail.com>, 2015
@@ -13,9 +14,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-04-02 11:15+0000\n"
-"PO-Revision-Date: 2016-04-02 11:17+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2016-04-07 14:12+0000\n"
+"PO-Revision-Date: 2016-04-07 22:55+0000\n"
+"Last-Translator: Aleksandr Gladkov <djanticisco@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -25,7 +26,7 @@ msgstr ""
 
 #: ../../data/txts/AUTHORS.lua:27
 msgid "Developers"
-msgstr ""
+msgstr "Разработчики"
 
 #: ../../data/txts/AUTHORS.lua:29
 msgid "Widelands Development Team"
@@ -93,7 +94,7 @@ msgstr "Игра поставляется «как есть», без каких
 
 #: ../../data/txts/README.lua:7
 msgid "Readme"
-msgstr ""
+msgstr "Прочти меня!"
 
 #: ../../data/txts/README.lua:12
 msgid "an open source strategy game"
@@ -124,7 +125,7 @@ msgstr ""
 
 #: ../../data/txts/README.lua:21
 msgid "Widelands Help"
-msgstr ""
+msgstr "Помощь по Widelands"
 
 #. TRANSLATORS: %1% is a key on the keyboard
 #: ../../data/txts/README.lua:23
@@ -136,7 +137,7 @@ msgstr ""
 #. TRANSLATORS: This is a key on the keyboard
 #: ../../data/txts/README.lua:25
 msgid "F1"
-msgstr ""
+msgstr "F1"
 
 #: ../../data/txts/README.lua:28
 msgid "Reporting Bugs"
@@ -196,7 +197,7 @@ msgstr "Переводчики"
 
 #: ../../data/txts/TRANSLATORS.lua:27
 msgid "Widelands Translators"
-msgstr ""
+msgstr "Переводчики Widelands"
 
 #: ../../data/txts/developers.lua:3
 msgid "Atlantean"
@@ -380,14 +381,14 @@ msgstr ""
 #, lua-format
 msgctxt "hotkey"
 msgid "%s:"
-msgstr ""
+msgstr "%s:"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
 #: ../../data/txts/help/common_helptexts.lua:42
 msgctxt "hotkey"
 msgid "Space"
-msgstr ""
+msgstr "Пробел"
 
 #: ../../data/txts/help/common_helptexts.lua:42
 msgid "Toggle building spaces"
@@ -401,11 +402,11 @@ msgstr ""
 #. TRANSLATORS: This is an access key combination. The hotkey is 'm'
 #: ../../data/txts/help/common_helptexts.lua:56
 msgid "Toggle minimap"
-msgstr ""
+msgstr "Переключить миникарту"
 
 #: ../../data/txts/help/multiplayer_help.lua:10
 msgid "Multiplayer Game Setup"
-msgstr ""
+msgstr "Подготовка сетевой игры"
 
 #: ../../data/txts/help/multiplayer_help.lua:11
 msgid "You are in the multiplayer launch game menu."
@@ -413,7 +414,7 @@ msgstr ""
 
 #: ../../data/txts/help/multiplayer_help.lua:13
 msgid "Client settings"
-msgstr ""
+msgstr "Параметры клиентов"
 
 #: ../../data/txts/help/multiplayer_help.lua:14
 msgid ""
@@ -435,7 +436,7 @@ msgstr ""
 
 #: ../../data/txts/help/multiplayer_help.lua:18
 msgid "Player settings"
-msgstr ""
+msgstr "Параметры игрока"
 
 #: ../../data/txts/help/multiplayer_help.lua:19
 msgid ""
@@ -460,7 +461,7 @@ msgstr ""
 
 #: ../../data/txts/help/multiplayer_help.lua:23
 msgid "Closed."
-msgstr ""
+msgstr "Закрыто."
 
 #: ../../data/txts/help/multiplayer_help.lua:24
 msgid ""
@@ -478,7 +479,7 @@ msgstr ""
 
 #: ../../data/txts/help/multiplayer_help.lua:27
 msgid "Map details"
-msgstr ""
+msgstr "Параметры карты"
 
 #: ../../data/txts/help/multiplayer_help.lua:28
 msgid ""

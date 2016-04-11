@@ -39,18 +39,19 @@ struct GamePreloadPacket : public GameDataPacket {
 	void read (FileSystem &, Game &, MapObjectLoader * = nullptr) override;
 	void write(FileSystem &, Game &, MapObjectSaver  * = nullptr) override;
 
-	char const * get_mapname()      {return mapname_.c_str();}
-	std::string get_background()    {return background_;}
-	std::string get_win_condition() {return win_condition_;}
-	uint32_t get_gametime() {return gametime_;}
-	uint8_t get_player_nr() {return player_nr_;}
-	std::string get_version() {return version_;}
+	char const * get_mapname()      const {return mapname_.c_str();}
+	std::string get_background()    const {return background_;}
+	std::string get_win_condition() const {return win_condition_;}
+	std::string get_localized_win_condition() const;
+	uint32_t get_gametime() const {return gametime_;}
+	uint8_t get_player_nr() const {return player_nr_;}
+	std::string get_version() const {return version_;}
 
-	uint8_t get_number_of_players() {return number_of_players_;}
-	std::string get_minimap_path() {return minimap_path_;}
+	uint8_t get_number_of_players() const {return number_of_players_;}
+	std::string get_minimap_path() const {return minimap_path_;}
 
-	time_t get_savetimestamp() {return savetimestamp_;}
-	GameController::GameType get_gametype() {return gametype_;}
+	time_t get_savetimestamp() const {return savetimestamp_;}
+	GameController::GameType get_gametype() const {return gametype_;}
 
 private:
 	std::string minimap_path_;

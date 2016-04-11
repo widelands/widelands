@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-04-02 11:15+0000\n"
-"PO-Revision-Date: 2016-04-02 11:17+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2016-04-02 18:37+0000\n"
+"PO-Revision-Date: 2016-04-03 08:44+0000\n"
+"Last-Translator: Любомир Василев\n"
 "Language-Team: Bulgarian (http://www.transifex.com/widelands/widelands/language/bg/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -126,12 +126,12 @@ msgstr "Помощ за Widelands"
 msgid ""
 "You can find help about gameplay or the editor by using the help button on "
 "the bottom menu, or by pressing %1%."
-msgstr ""
+msgstr "Можете да откриете помощ относно играта или редактора, използвайки бутона за помощ в менюто отдолу или като натиснете %1%."
 
 #. TRANSLATORS: This is a key on the keyboard
 #: ../../data/txts/README.lua:25
 msgid "F1"
-msgstr ""
+msgstr "F1"
 
 #: ../../data/txts/README.lua:28
 msgid "Reporting Bugs"
@@ -349,7 +349,7 @@ msgid ""
 ".wrpl extension and contains all commands that were issued by all players, "
 "such as building a road or attacking an enemy. The rest of the filenames "
 "will tell you the time you started the game."
-msgstr ""
+msgstr "Widelands записва всяка игра, която играете, в два файла. Единият има\nразширение .wrpl.wgf и съдържа първоначалната запазена игра. Другият има\nразширение .wrpl и съдържа всички команди, издадени от играча, като\nнапример строеж на път или нападение на враг. Останалата част от имената\nпоказва датата и часа, когато играта е започната."
 
 #: ../../data/txts/help/common_helptexts.lua:27
 msgid ""
@@ -359,7 +359,7 @@ msgid ""
 " replay to become incompatible and to ‘go out of sync’. This is similar to "
 "how network games will suffer from desynchronization problems if one of the "
 "players has a different version of the game."
-msgstr ""
+msgstr "Чрез бутона „Гледане на повторение“ в главното меню можете да гледате вече\nизиграна игра, която ще бъде пресъздадена за Вас. Имайте предвид, че дори\nдребни промени във файловете с данни на играта или изпълнимия файл може\nда направят повторението несъвместимо или „несинхронизирано“. Това е\nсъщият проблем, от който страдат мрежовите игри, ако един от играчите има\nразлична версия на играта."
 
 #: ../../data/txts/help/common_helptexts.lua:28
 #, lua-format
@@ -368,94 +368,94 @@ msgid ""
 "be useful as attachments to bug reports. The replay files are saved in the "
 "%s directory on Linux and Mac OS X. On Windows, they are in the ‘replays’ "
 "subdirectory of your Widelands installation."
-msgstr ""
+msgstr "Повторенията са много полезно средство за откриване на грешки в играта, \nтака че понякога е добре да бъдат прикачени към докладите за грешки. Файловете\nс повторенията се съхраняват в папката „%s“ при Линукс\nи Mac OS X. При Уиндоус, те са в подпапката „replays“ в инсталационата папка на Widelands."
 
 #. TRANSLATORS: The generic hotkey format
 #: ../../data/txts/help/common_helptexts.lua:35
 #, lua-format
 msgctxt "hotkey"
 msgid "%s:"
-msgstr ""
+msgstr "%s:"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
 #: ../../data/txts/help/common_helptexts.lua:42
 msgctxt "hotkey"
 msgid "Space"
-msgstr ""
+msgstr "Интервал"
 
 #: ../../data/txts/help/common_helptexts.lua:42
 msgid "Toggle building spaces"
-msgstr ""
+msgstr "Превключване на местата за строеж"
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 'f'
 #: ../../data/txts/help/common_helptexts.lua:49
 msgid "Toggle fullscreen (if supported by the OS)"
-msgstr ""
+msgstr "Превключване на/от цял екран (ако се поддържа от ОС)"
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 'm'
 #: ../../data/txts/help/common_helptexts.lua:56
 msgid "Toggle minimap"
-msgstr ""
+msgstr "Превключване на миникартата"
 
 #: ../../data/txts/help/multiplayer_help.lua:10
 msgid "Multiplayer Game Setup"
-msgstr ""
+msgstr "Настройка на мрежова игра"
 
 #: ../../data/txts/help/multiplayer_help.lua:11
 msgid "You are in the multiplayer launch game menu."
-msgstr ""
+msgstr "Вие сте в менюто за започване на мрежова игра."
 
 #: ../../data/txts/help/multiplayer_help.lua:13
 msgid "Client settings"
-msgstr ""
+msgstr "Настройки на клиента"
 
 #: ../../data/txts/help/multiplayer_help.lua:14
 msgid ""
 "On the left side is a list of all clients including you. You can set your "
 "role with the button following your nickname. Available roles are:"
-msgstr ""
+msgstr "В лявата част има списък от всички клиенти, включително Вас. Можете да зададете ролята си с бутона след псевдонима Ви. Възможните роли са:"
 
 #: ../../data/txts/help/multiplayer_help.lua:15
 msgid ""
 "The player with the color of the flag. If more than one client selected the "
 "same color, these share control over the player (‘shared kingdom mode’)."
-msgstr ""
+msgstr "Играчът с цвета на флага. Ако повече от един клиент е избрал същия цвят, те ще имат споделен контрол над играча („режим на споделено царство“)"
 
 #: ../../data/txts/help/multiplayer_help.lua:16
 msgid ""
 "Spectator mode, meaning you can see everything, but cannot control any "
 "player"
-msgstr ""
+msgstr "Режим на наблюдаване, което означава, че можете да виждате всичко, но не можете да управлявате нито един играч"
 
 #: ../../data/txts/help/multiplayer_help.lua:18
 msgid "Player settings"
-msgstr ""
+msgstr "Настройки на играча"
 
 #: ../../data/txts/help/multiplayer_help.lua:19
 msgid ""
 "In the middle are the settings for the players. To start a game, each player"
 " must be one of the following:"
-msgstr ""
+msgstr "В средата са настройките на играчите. За да започнете игра, всеки от играчите трябва да бъде едно от следните:"
 
 #: ../../data/txts/help/multiplayer_help.lua:20
 msgid "Connected to one or more clients (see ‘Client settings’)."
-msgstr ""
+msgstr "Свързан с един или повече клиенти (вижте „Настройки на клиента“)."
 
 #: ../../data/txts/help/multiplayer_help.lua:21
 msgid ""
 "Connected to a computer player (the face in the picture as well as the mouse"
 " hover texts indicate the strength of the currently selected computer "
 "player)."
-msgstr ""
+msgstr "Свързан с компютърен играч (лицето на снимката, както и текста при посочване с мишката, показват силата на избрания компютърен играч)."
 
 #: ../../data/txts/help/multiplayer_help.lua:22
 msgid "Set as shared in starting position for another player."
-msgstr ""
+msgstr "Зададен като споделен в начална позиция за друг играч."
 
 #: ../../data/txts/help/multiplayer_help.lua:23
 msgid "Closed."
-msgstr ""
+msgstr "Затворено."
 
 #: ../../data/txts/help/multiplayer_help.lua:24
 msgid ""
@@ -463,17 +463,17 @@ msgid ""
 "‘type’ button of a player. Hosting players can also set the initialization "
 "of each player (the set of buildings, wares and workers the player starts "
 "with) and the tribe and team for computer players"
-msgstr ""
+msgstr "Последните три могат да бъдат зададени от клиента, играещ ролята на сървър, чрез щракване с ляв бутон върху бутона „тип“ на играча. Играчите, които са сървъри, могат да задават и началните настройки на всеки играч (наборът от сгради, стоки и работници, с които играчът започва) и племето и отбора за компютърните играчи"
 
 #: ../../data/txts/help/multiplayer_help.lua:25
 msgid ""
 "Every client connected to a player (who isn’t a spectator) can set the tribe"
 " and the team for that player"
-msgstr ""
+msgstr "Всеки клиент, свързан с играч (зададената роля е „играч“) може да избере племето и отбора на този играч"
 
 #: ../../data/txts/help/multiplayer_help.lua:27
 msgid "Map details"
-msgstr ""
+msgstr "Подр. за картата"
 
 #: ../../data/txts/help/multiplayer_help.lua:28
 msgid ""
@@ -481,7 +481,7 @@ msgid ""
 " side. A button next to the map name allows the host to change to a "
 "different map. Furthermore, the host is able to set a specific win "
 "condition, and finally can start the game as soon as all players are set up."
-msgstr ""
+msgstr "Можете да видите информация за избраната карта или запазена игра в дясната част. Бутон до името на картата позволява на сървъра да смени картата. Също така, сървърът може да зададе условието за победа, както и може да даде начало на играта, след като всички играчи станат готови"
 
 #: ../../data/txts/tips/atlanteans.tip:2 ../../data/txts/tips/barbarians.tip:2
 #: ../../data/txts/tips/empire.tip:2

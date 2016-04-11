@@ -124,7 +124,7 @@ uint32_t LuaCoroutine::pop_uint32() {
 	if (!nreturn_values_) {
 		return 0;
 	}
-	if (!lua_isnumber(lua_state_, -1)) {
+	if (!lua_isinteger(lua_state_, -1)) {
 		throw LuaError("pop_uint32(), but no integer on the stack.");
 	}
 	const uint32_t return_value = luaL_checkuint32(lua_state_, -1);
@@ -144,7 +144,7 @@ std::unique_ptr<LuaTable> LuaCoroutine::pop_table() {
 	return result;
 }
 
-constexpr uint8_t kCoroutineDataPacketVersion = 3;
+constexpr uint8_t kCoroutineDataPacketVersion = 4;
 void LuaCoroutine::write(FileWrite& fw) {
 	fw.unsigned_8(kCoroutineDataPacketVersion);
 

@@ -26,6 +26,7 @@
 
 #include "base/i18n.h"
 #include "base/log.h"
+#include "base/macros.h"
 #include "base/wexception.h"
 #include "graphic/font_handler1.h"
 #include "graphic/text/font_set.h"
@@ -253,6 +254,7 @@ void SpinBox::update()
 void SpinBox::change_value(int32_t const value)
 {
 	set_value(value + sbi_->value);
+	changed();
 }
 
 

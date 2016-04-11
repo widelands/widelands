@@ -98,11 +98,11 @@ int food_list_to_lua(lua_State* L, const std::vector<std::vector<std::string>>& 
 	lua_newtable(L);
 	int counter = 0;
 	for (const std::vector<std::string>& foodlist : table) {
-		lua_pushnumber(L, ++counter);
+		lua_pushuint32(L, ++counter);
 		lua_newtable(L);
 		int counter2 = 0;
 		for (const std::string& foodname : foodlist) {
-			lua_pushnumber(L, ++counter2);
+			lua_pushuint32(L, ++counter2);
 			lua_pushstring(L, foodname);
 			lua_settable(L, -3);
 		}
@@ -345,7 +345,7 @@ int do_set_workers(lua_State* L, PlayerImmovable* pi, const WorkersMap& valid_wo
 	}
 
 	// The idea is to change as little as possible
-	for (const WorkersMap::value_type sp : setpoints) {
+	for (const WorkersMap::value_type& sp : setpoints) {
 		const WorkerDescr* wdes = tribe.get_worker_descr(sp.first);
 		if (!valid_workers.count(sp.first))
 			report_error(L, "<%s> can't be employed here!", wdes->name().c_str());
@@ -606,7 +606,7 @@ int upcasted_map_object_descr_to_lua(lua_State* L, const MapObjectDescr* const d
 			case MapObjectType::CARRIER:
 				return CAST_TO_LUA(WorkerDescr, LuaWorkerDescription);
 			case MapObjectType::SOLDIER:
-				return CAST_TO_LUA(WorkerDescr, LuaWorkerDescription);
+				return CAST_TO_LUA(SoldierDescr, LuaSoldierDescription);
 			case MapObjectType::IMMOVABLE:
 				return CAST_TO_LUA(ImmovableDescr, LuaImmovableDescription);
 			default:
@@ -665,7 +665,11 @@ int upcasted_map_object_to_lua(lua_State * L, MapObject * mo) {
 		return CAST_TO_LUA(MilitarySite);
 	case MapObjectType::TRAININGSITE:
 		return CAST_TO_LUA(TrainingSite);
-
+	case (MapObjectType::MAPOBJECT):
+	case (MapObjectType::BATTLE):
+	case (MapObjectType::BOB):
+	case (MapObjectType::FLEET):
+	case (MapObjectType::WARE):
 	default:
 		throw LuaError((boost::format("upcasted_map_object_to_lua: Unknown %i") %
 		                static_cast<int>(mo->descr().type())).str());
@@ -1502,8 +1506,8 @@ int LuaImmovableDescription::get_editor_category(lua_State * L) {
 /* RST
 	.. attribute:: returns the terrain affinity values for this immovable
 
-			(RO) a table containing numbers labeled as pickiness, preferred_fertility,
-				  preferred_humidity, and preferred_temperature,
+			(RO) a table containing numbers labeled as pickiness (double), preferred_fertility (double),
+				  preferred_humidity (double), and preferred_temperature (uint),
 				  or nil if the immovable has no terrain affinity.
 */
 int LuaImmovableDescription::get_terrain_affinity(lua_State * L) {
@@ -1511,16 +1515,16 @@ int LuaImmovableDescription::get_terrain_affinity(lua_State * L) {
 		const TerrainAffinity& affinity = get()->terrain_affinity();
 		lua_newtable(L);
 		lua_pushstring(L, "pickiness");
-		lua_pushnumber(L, affinity.pickiness());
+		lua_pushdouble(L, affinity.pickiness());
 		lua_settable(L, -3);
 		lua_pushstring(L, "preferred_fertility");
-		lua_pushnumber(L, affinity.preferred_fertility());
+		lua_pushdouble(L, affinity.preferred_fertility());
 		lua_settable(L, -3);
 		lua_pushstring(L, "preferred_humidity");
-		lua_pushnumber(L, affinity.preferred_humidity());
+		lua_pushdouble(L, affinity.preferred_humidity());
 		lua_settable(L, -3);
 		lua_pushstring(L, "preferred_temperature");
-		lua_pushnumber(L, affinity.preferred_temperature());
+		lua_pushuint32(L, affinity.preferred_temperature());
 		lua_settable(L, -3);
 	} else {
 		lua_pushnil(L);
@@ -1541,9 +1545,6 @@ int LuaImmovableDescription::get_owner_type(lua_State * L) {
 		break;
 	case MapObjectDescr::OwnerType::kTribe:
 		lua_pushstring(L, "tribe");
-		break;
-	default:
-		NEVER_HERE();
 	}
 	return 1;
 }
@@ -1619,7 +1620,7 @@ int LuaImmovableDescription::probability_to_grow(lua_State * L) {
 	}
 	if (get()->has_terrain_affinity()) {
 		const TerrainDescription* terrain = (*get_user_class<LuaMaps::LuaTerrainDescription>(L, 2))->get();
-		lua_pushnumber(L, Widelands::probability_to_grow(get()->terrain_affinity(), *terrain));
+		lua_pushdouble(L, Widelands::probability_to_grow(get()->terrain_affinity(), *terrain));
 	} else {
 		lua_pushnil(L);
 	}
@@ -2061,11 +2062,11 @@ int LuaProductionSiteDescription::consumed_wares(lua_State * L) {
 		lua_newtable(L);
 		int counter = 0;
 		for (const auto& group: program.consumed_wares()) {
-			lua_pushnumber(L, ++counter);
+			lua_pushuint32(L, ++counter);
 			lua_newtable(L);
 			for (const DescriptionIndex& ware_index : group.first) {
 				lua_pushstring(L, get_egbase(L).tribes().get_ware_descr(ware_index)->name());
-				lua_pushnumber(L, group.second);
+				lua_pushuint32(L, group.second);
 				lua_settable(L, -3);
 			}
 			lua_settable(L, -3);
@@ -2379,7 +2380,7 @@ int LuaTrainingSiteDescription::get_weapons_attack(lua_State * L) {
 	lua_newtable(L);
 	int counter = 0;
 	for (const std::string& weaponname : get()->get_weapons_attack()) {
-		lua_pushnumber(L, ++counter);
+		lua_pushuint32(L, ++counter);
 		lua_pushstring(L, weaponname);
 		lua_settable(L, -3);
 	}
@@ -2395,7 +2396,7 @@ int LuaTrainingSiteDescription::get_weapons_defense(lua_State * L) {
 	lua_newtable(L);
 	int counter = 0;
 	for (const std::string& weaponname : get()->get_weapons_defense()) {
-		lua_pushnumber(L, ++counter);
+		lua_pushuint32(L, ++counter);
 		lua_pushstring(L, weaponname);
 		lua_settable(L, -3);
 	}
@@ -2411,7 +2412,7 @@ int LuaTrainingSiteDescription::get_weapons_evade(lua_State * L) {
 	lua_newtable(L);
 	int counter = 0;
 	for (const std::string& weaponname : get()->get_weapons_evade()) {
-		lua_pushnumber(L, ++counter);
+		lua_pushuint32(L, ++counter);
 		lua_pushstring(L, weaponname);
 		lua_settable(L, -3);
 	}
@@ -2427,7 +2428,7 @@ int LuaTrainingSiteDescription::get_weapons_health(lua_State * L) {
 	lua_newtable(L);
 	int counter = 0;
 	for (const std::string& weaponname : get()->get_weapons_health()) {
-		lua_pushnumber(L, ++counter);
+		lua_pushuint32(L, ++counter);
 		lua_pushstring(L, weaponname);
 		lua_settable(L, -3);
 	}
@@ -2716,19 +2717,176 @@ int LuaWorkerDescription::get_needed_experience(lua_State * L) {
 
 
 
+
+/* RST
+SoldierDescription
+-----------------
+
+.. class:: SoldierDescription
+
+	A static description of a tribe's soldier, so it can be used in help files
+	without having to access an actual instance of the worker on the map.
+	See also class WorkerDescription for more properties.
+*/
+const char LuaSoldierDescription::className[] = "SoldierDescription";
+const MethodType<LuaSoldierDescription> LuaSoldierDescription::Methods[] = {
+	{nullptr, nullptr},
+};
+const PropertyType<LuaSoldierDescription> LuaSoldierDescription::Properties[] = {
+	PROP_RO(LuaSoldierDescription, max_health_level),
+	PROP_RO(LuaSoldierDescription, max_attack_level),
+	PROP_RO(LuaSoldierDescription, max_defense_level),
+	PROP_RO(LuaSoldierDescription, max_evade_level),
+	PROP_RO(LuaSoldierDescription, base_health),
+	PROP_RO(LuaSoldierDescription, base_min_attack),
+	PROP_RO(LuaSoldierDescription, base_max_attack),
+	PROP_RO(LuaSoldierDescription, base_defense),
+	PROP_RO(LuaSoldierDescription, base_evade),
+	PROP_RO(LuaSoldierDescription, health_incr_per_level),
+	PROP_RO(LuaSoldierDescription, attack_incr_per_level),
+	PROP_RO(LuaSoldierDescription, defense_incr_per_level),
+	PROP_RO(LuaSoldierDescription, evade_incr_per_level),
+	{nullptr, nullptr, nullptr},
+};
+
+
 /*
  ==========================================================
- LUA METHODS
+ PROPERTIES
  ==========================================================
  */
 
 
+/* RST
+	.. attribute:: get_max_health_level
 
-/*
- ==========================================================
- C METHODS
- ==========================================================
- */
+		(RO) The maximum health level that the soldier can have.
+*/
+int LuaSoldierDescription::get_max_health_level(lua_State * L) {
+	lua_pushinteger(L, get()->get_max_health_level());
+	return 1;
+}
+
+/* RST
+	.. attribute:: max_attack_level
+
+		(RO) The maximum attack level that the soldier can have.
+*/
+int LuaSoldierDescription::get_max_attack_level(lua_State * L) {
+	lua_pushinteger(L, get()->get_max_attack_level());
+	return 1;
+}
+
+/* RST
+	.. attribute:: max_defense_level
+
+		(RO) The maximum defense level that the soldier can have.
+*/
+int LuaSoldierDescription::get_max_defense_level(lua_State * L) {
+	lua_pushinteger(L, get()->get_max_defense_level());
+	return 1;
+}
+
+/* RST
+	.. attribute:: max_evade_level
+
+		(RO) The maximum evade level that the soldier can have.
+*/
+int LuaSoldierDescription::get_max_evade_level(lua_State * L) {
+	lua_pushinteger(L, get()->get_max_evade_level());
+	return 1;
+}
+
+/* RST
+	.. attribute:: get_base_health
+
+		(RO) The health points that the soldier starts with
+*/
+int LuaSoldierDescription::get_base_health(lua_State * L) {
+	lua_pushinteger(L, get()->get_base_health());
+	return 1;
+}
+
+
+/* RST
+	.. attribute:: base_min_attack
+
+		(RO) The minimum random attack points that get added to a soldier's attack
+*/
+int LuaSoldierDescription::get_base_min_attack(lua_State * L) {
+	lua_pushinteger(L, get()->get_base_min_attack());
+	return 1;
+}
+
+/* RST
+	.. attribute:: base_max_attack
+
+		(RO) The maximum random attack points that get added to a soldier's attack
+*/
+int LuaSoldierDescription::get_base_max_attack(lua_State * L) {
+	lua_pushinteger(L, get()->get_base_max_attack());
+	return 1;
+}
+
+/* RST
+	.. attribute:: base_defense
+
+		(RO) The defense % that the soldier starts with
+*/
+int LuaSoldierDescription::get_base_defense(lua_State * L) {
+	lua_pushinteger(L, get()->get_base_defense());
+	return 1;
+}
+
+/* RST
+	.. attribute:: base_evade
+
+		(RO) The evade % that the soldier starts with
+*/
+int LuaSoldierDescription::get_base_evade(lua_State * L) {
+	lua_pushinteger(L, get()->get_base_evade());
+	return 1;
+}
+
+/* RST
+	.. attribute:: get_health_incr_per_level
+
+		(RO) The health points that the soldier will gain with each level.
+*/
+int LuaSoldierDescription::get_health_incr_per_level(lua_State * L) {
+	lua_pushinteger(L, get()->get_health_incr_per_level());
+	return 1;
+}
+
+/* RST
+	.. attribute:: attack_incr_per_level
+
+		(RO) The attack points that the soldier will gain with each level.
+*/
+int LuaSoldierDescription::get_attack_incr_per_level(lua_State * L) {
+	lua_pushinteger(L, get()->get_attack_incr_per_level());
+	return 1;
+}
+
+/* RST
+	.. attribute:: defense_incr_per_level
+
+		(RO) The defense % that the soldier will gain with each level.
+*/
+int LuaSoldierDescription::get_defense_incr_per_level(lua_State * L) {
+	lua_pushinteger(L, get()->get_defense_incr_per_level());
+	return 1;
+}
+
+/* RST
+	.. attribute:: evade_incr_per_level
+
+		(RO) The evade % that the soldier will gain with each level.
+*/
+int LuaSoldierDescription::get_evade_incr_per_level(lua_State * L) {
+	lua_pushinteger(L, get()->get_evade_incr_per_level());
+	return 1;
+}
 
 /* RST
 ResourceDescription
@@ -2970,7 +3128,7 @@ int LuaTerrainDescription::get_editor_category(lua_State * L) {
 */
 
 int LuaTerrainDescription::get_fertility(lua_State * L) {
-	lua_pushnumber(L, get()->fertility());
+	lua_pushdouble(L, get()->fertility());
 	return 1;
 }
 
@@ -2981,7 +3139,7 @@ int LuaTerrainDescription::get_fertility(lua_State * L) {
 */
 
 int LuaTerrainDescription::get_humidity(lua_State * L) {
-	lua_pushnumber(L, get()->humidity());
+	lua_pushdouble(L, get()->humidity());
 	return 1;
 }
 
@@ -2999,11 +3157,11 @@ int LuaTerrainDescription::get_representative_image(lua_State * L) {
 /* RST
 	.. attribute:: temperature
 
-			(RO) the :class:`double` temperature value for this terrain
+			(RO) the :class:`uint` temperature value for this terrain
 */
 
 int LuaTerrainDescription::get_temperature(lua_State * L) {
-	lua_pushnumber(L, get()->temperature());
+	lua_pushuint32(L, get()->temperature());
 	return 1;
 }
 
@@ -3141,7 +3299,19 @@ int LuaMapObject::get_descr(lua_State * L) {
 		case (MapObjectType::IMMOVABLE):
 			return CAST_TO_LUA(ImmovableDescr, LuaImmovableDescription);
 		case (MapObjectType::WORKER):
+		case (MapObjectType::CARRIER):
+		case (MapObjectType::SOLDIER):
 			return CAST_TO_LUA(WorkerDescr, LuaWorkerDescription);
+		case (MapObjectType::MAPOBJECT):
+		case (MapObjectType::BATTLE):
+		case (MapObjectType::BOB):
+		case (MapObjectType::CRITTER):
+		case (MapObjectType::FLEET):
+		case (MapObjectType::SHIP):
+		case (MapObjectType::FLAG):
+		case (MapObjectType::ROAD):
+		case (MapObjectType::PORTDOCK):
+		case (MapObjectType::WARE):
 		default:
 			return CAST_TO_LUA(MapObjectDescr, LuaMapObjectDescription);
 	}
@@ -4464,10 +4634,6 @@ int LuaShip::get_state(lua_State* L) {
 				break;
 			case Ship::ShipStates::kSinkAnimation:
 				lua_pushstring(L, "sink_animation");
-				break;
-			default:
-				lua_pushnil(L);
-				return 0;
 			}
 		return 1;
 	}
@@ -5536,6 +5702,11 @@ void luaopen_wlmap(lua_State * L) {
 
 	register_class<LuaWorkerDescription>(L, "map", true);
 	add_parent<LuaWorkerDescription, LuaMapObjectDescription>(L);
+	lua_pop(L, 1); // Pop the meta table
+
+	register_class<LuaSoldierDescription>(L, "map", true);
+	add_parent<LuaSoldierDescription, LuaWorkerDescription>(L);
+	add_parent<LuaSoldierDescription, LuaMapObjectDescription>(L);
 	lua_pop(L, 1); // Pop the meta table
 
 	register_class<LuaResourceDescription>(L, "map");

@@ -302,7 +302,6 @@ void FullscreenMenuInternetLobby::fill_client_list(const std::vector<InternetCli
 		}
 		prev_clientlist_len_ = clients->size();
 	}
-
 }
 
 

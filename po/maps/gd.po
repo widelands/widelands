@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-03-31 07:42+0000\n"
-"PO-Revision-Date: 2016-03-31 12:58+0000\n"
+"POT-Creation-Date: 2016-04-07 14:12+0000\n"
+"PO-Revision-Date: 2016-04-07 14:14+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -220,7 +220,7 @@ msgstr "Innis-mhuir"
 #: ../../data/maps/Archipelago_Sea.wmf/elemental:10
 msgid ""
 "Between Sweden and Finland lies the archipelago sea. This place of "
-"incredible beauty is not land, and it is not sea, and it is both. Within a "
+"incredible beauty is not land, and it is not sea, but it is both. Within a "
 "few hundred kilometers, there are no less than 50,000 islands and islets, "
 "most no more than a few acres across. The climate is quite mild for its "
 "latitude; farming thrives, berries are abundant, and fish plentiful. The "
@@ -233,7 +233,7 @@ msgid ""
 "Large plots are rare on those small islands. Prioritize construction of "
 "large buildings on them. Sometimes you will need big military buildings to "
 "expand all the way to the next island. The AI will perform poorly."
-msgstr ""
+msgstr "Tha ionadan togail mòra gann sna h-eileanan beaga seo. Thoir am prìomhachas air togalaichean mòra annta. Feumaidh tu togalach mòr an airm a thogail aig amannan mus ruig thu an t-ath-eilean. Cha dèid gu math leis an IF."
 
 #: ../../data/maps/Atoll.wmf/elemental:8
 msgid "Atoll"
@@ -288,8 +288,8 @@ msgid ""
 "Red player is close to the ores, but has little fertile terrain. Yellow "
 "player has plenty of good land, but must move far from his starting position"
 " to find ores. Blue player takes the middle ground – he has some fertile "
-"land and is not too far away from the resources"
-msgstr ""
+"land and is not too far away from the resources."
+msgstr "Tha an cluicheadair dearg faisg air a’ chlach-mhèinneir ach chan eil mòran talmhainn thorraich aige. Tha pailteas deagh-thalmhainn aig a’ chluicheadair buidhe ach feumaidh e dol astar mòr mus lorg e clach-mhèinneir. Tha meidh aig a’ chluicheadair gorm – tha cuid a thalamh thorrach aige agus chan eil e ro fhad air falbh o na stòrasan."
 
 #: ../../data/maps/Crater.wmf/elemental:8
 msgid "Crater"
@@ -326,20 +326,20 @@ msgstr "Na Dolaimitich"
 
 #: ../../data/maps/Dolomites_v2.wmf/elemental:10
 msgid ""
-"The jewel of the alps, the dolomites mountain range has been declared a "
-"world heritage site for its pristine beauty. This map is an as-faithful-as-"
+"The jewel of the Alps, the Dolomites mountain range has been declared a "
+"World Heritage Site for its pristine beauty. This map is an as-faithful-as-"
 "reasonable reconstruction of the area delimited by Cortina d’Ampezzo in the "
 "north-east and Canazei in the south-west. If you have to be pitted in a duel"
-" to the death with your enemies, it may as well be in a beautiful place."
-msgstr ""
+" to the death against your enemies, it may as well be in a beautiful place."
+msgstr "’S e na Dolaimitich a th’ ann an seud nan Alpannan agus chaidh iad ainmeachadh mar Làrach Dualchas na Cruinne air sàilleabh am bòidhchead. Tha am mapa seo ag atharrais an sgìre eadar Cortina d’Ampezzo gu ear-thuath agus Canazei tu iar-dheas cho math ’s a ghabhas. Ma tha agad ri dian-strì an aghaidh do nàimhdean, nach b’ fheairrde thu seo a dhèanamh am badeigin àlainn?"
 
 #: ../../data/maps/Dolomites_v2.wmf/elemental:11
 msgid ""
 "There is lot of flat ground on the mountains. Unfortunately, most of it is "
-"vertical. Use the little building space that you have wisely.  A fortress at"
-" the mouth of a narrow mountain pass can be a formidable obstacle to an "
-"enemy army. Use the terrain to your advantage."
-msgstr ""
+"vertical. Use the little building space that you have wisely. A fortress at "
+"the mouth of a narrow mountain pass can be a formidable obstacle to an enemy"
+" army. Use the terrain to your advantage."
+msgstr "Tha torr talmhainn rèidhe air na beanntan. Gu mì-fhortanach, ’s ann inghearach a tha a’ mhòrchuid dheth. Cleachd na th’ agad a rum togail gu glic. Faodaidh dùn aig bun a’ bhealaich chumhaing a bhith ’na chnap-starra mòr dha dh’airm an nàmhad. Cleachd an cruth-tìre gus do chuideachadh."
 
 #: ../../data/maps/Elven_Forests.wmf/elemental:8
 msgid "Elven Forests"
@@ -359,14 +359,14 @@ msgstr "Càirdeasan"
 msgid ""
 "Ships are your best fellows. Starting positions are similar, so the map "
 "should be fair."
-msgstr ""
+msgstr "’S e na longan a th’ anns na caraidean as fhearr dhut. Tha na h-ionadan tòiseachaidh coltach ri chèile, mar sin bu chòir dhan mhapa a bhith cothromach."
 
 #: ../../data/maps/Fellowships_v2.wmf/elemental:11
 msgid ""
 "This is a somewhat technical map, and it is best suited for two or three "
 "human players. Coal is hard to find – consider making some. There is gold "
 "near the starting point – do you see it?"
-msgstr ""
+msgstr "Feumaidh am mapa seo innleachd agus mholamaid dha dhà no trì cluicheadairean daonna e. chan eil gual furasta lorg – saoil an dèan thu fhèin e? Tha òr faisg air an ionad tòiseachaidh – am faic tu e?"
 
 #: ../../data/maps/Finnish_Lakes.wmf/elemental:8
 msgid "Finnish Lakes"
@@ -381,8 +381,8 @@ msgstr "Seo tìrean àlainn nam Fionnlannach le pailteas lochan, aibhnichean, ch
 #: ../../data/maps/Finnish_Lakes.wmf/elemental:11
 msgid ""
 "Yellow player has a much easier starting position than the other two; this "
-"map is suited for 1v2"
-msgstr ""
+"map is suited for 1v2."
+msgstr "Tha ionad tòiseachaidh mòran nas fhasa aig a’ chluicheadair bhuidhe na aig an dithis eile; gabhaidh am mapa seo cleachdadh airson 1 an aghaidh 2."
 
 #: ../../data/maps/Firegames.wmf/elemental:8
 msgid "Firegames"
@@ -430,7 +430,7 @@ msgstr "Làn-ghealach"
 msgid ""
 "Whether it is the latest solstice, or lunar illness, something moves these "
 "tribes towards their final ordeal."
-msgstr ""
+msgstr "Ge b’ e an grian-stad as ùire no galar na gealaich a th’ ann, tha rudeigin a’ gluasad nan treubhan seo a dh’ionnsaigh na gàbhail deireannaich aca."
 
 #: ../../data/maps/Glacier_Lake_v2.wmf/elemental:8
 msgid "Glacier Lake"
@@ -540,7 +540,7 @@ msgstr "An fheadhainn a mhair beò"
 msgid ""
 "Four tribes fighting for dominance in a stark area. Resources are scattered "
 "all over the map."
-msgstr ""
+msgstr "Tha ceithir treubhan a strì ach an gabh iad làmh an uachdair air sgìre lom. Tha stòrasan sgapte air feadh a’ mhapa."
 
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/elemental:7
 msgid "Island Hopping"
@@ -713,7 +713,7 @@ msgstr "Bhiodh an abhainn a’ solar biadh ’s conaltradh a-riamh. An turas seo
 msgid ""
 "Use the river wisely. Your opponents will do the same. You will find the "
 "main ore resources deep in the desert."
-msgstr ""
+msgstr "Cleachd an abhainn gu glic. Nì do cho-fharpaisich an dearbh rud. Lorgaidh tu prìomh-stòras na cloiche-mhèinneir fad air falbh san fhàsach."
 
 #: ../../data/maps/The_Oasis_Triangle.wmf/elemental:8
 msgid "The Oasis Triangle"
@@ -869,5 +869,5 @@ msgid ""
 " three different ways to use this map: without the black player for a normal"
 " 4 players’ map, with a black AI to add a complication to the expansion of "
 "the other players, or you can play as a challenge with the black player "
-"against the other 4 (VERY difficult)"
-msgstr "Tha an cluicheadair dubh cuairtichte sa mheadhan gun stòrasan aige, mar sin tha trì dòighean ann gus am mapa seo a chleachdadh: gun chluicheadair dubh airson mapa àbhaisteach le 4 cluicheadairean, le IF dubh gus am meudachadh a dhèanamh nas toinnte dha na cluicheadairean eile no mar dhùbhlan leis a’ chluicheadair dhubh an aghaidh nan ceathrar eile (cianail fhèin doirbh)"
+"against the other 4 (VERY difficult)."
+msgstr "Tha an cluicheadair dubh cuairtichte sa mheadhan gun stòrasan aige, mar sin tha trì dòighean ann gus am mapa seo a chleachdadh: gun chluicheadair dubh airson mapa àbhaisteach le 4 cluicheadairean, le IF dubh gus am meudachadh a dhèanamh nas toinnte dha na cluicheadairean eile no mar dhùbhlan leis a’ chluicheadair dhubh an aghaidh nan ceathrar eile (cianail fhèin doirbh)."

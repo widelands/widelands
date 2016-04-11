@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2008, 2010-2011 by the Widelands Development Team
+ * Copyright (C) 2007-2015 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -46,7 +46,22 @@ inline PlayerNumber neutral() {return 0;}
  */
 using TeamNumber = uint8_t;
 
+/** This is used as index for wares, workers, terrain and other Descriptions.
+ *
+ * So we can have at most 254 types of these,
+ * as some are predefined as invalid by the declarations below.
+ *
+ * A DescriptionMaintainer can be used to lookup the actual item.
+ * See TerrainDescription, WareDescr, WorkerDescr
+ * EditorCategory, BuildingDescr, ImmovableDescr, ShipDescr, TribeDescr
+ * and others.
+ */
 using DescriptionIndex = uint8_t;
+
+constexpr uint8_t INVALID_INDEX = std::numeric_limits<uint8_t>::max();
+constexpr DescriptionIndex kInvalidWare = INVALID_INDEX - 1;
+constexpr DescriptionIndex kNoResource = INVALID_INDEX - 1;
+
 using ResourceAmount = uint8_t; /// 4 bits used, so 0 .. 15.
 
 using Quantity = uint32_t; // e.g. the number of a type of ware in a warehouse.
@@ -62,9 +77,6 @@ inline Duration endless() {return 0xffffffff;}
 using Serial = uint32_t; /// Serial number for MapObject.
 
 using Direction = uint8_t;
-constexpr uint8_t INVALID_INDEX = std::numeric_limits<uint8_t>::max();
-constexpr DescriptionIndex kInvalidWare = INVALID_INDEX - 1;
-constexpr DescriptionIndex kNoResource = INVALID_INDEX - 1;
 
 struct SoldierStrength {
 	uint8_t health, attack, defense, evade;

@@ -21,8 +21,9 @@
 #define WL_WUI_MAPVIEWPIXELCONSTANTS_H
 
 //  These are constants with the unit pixel.
-constexpr int TRIANGLE_WIDTH = 64;
-constexpr int TRIANGLE_HEIGHT = 32;
-constexpr int HEIGHT_FACTOR = 5;
+constexpr int kTriangleWidth = 64;
+constexpr int kTriangleHeight = 32;
+constexpr int kHeightFactor = 5;
+constexpr float kHeightFactorFloat = 5.0f; // Same a kHeightFactor to avoid implict upcasts to double
 
 #endif  // end of include guard: WL_WUI_MAPVIEWPIXELCONSTANTS_H
