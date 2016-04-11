@@ -46,7 +46,10 @@ int32_t EditorDecreaseResourcesTool::handle_click_impl(const Widelands::World& w
 	do {
 		Widelands::ResourceAmount amount = mr.location().field->get_resources_amount();
 
-		amount = (amount > args->change_by) ? amount - args->change_by : 0;
+		amount -= args->change_by;
+		if (amount < 0) {
+			amount = 0;
+		}
 
 		if (mr.location().field->get_resources() == args->current_resource &&
 			map->is_resource_valid(world, mr.location(), args->current_resource) &&
