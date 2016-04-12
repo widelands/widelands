@@ -7,11 +7,7 @@ tribes:new_ware_type {
    descname = pgettext("ware", "Granite"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
-   default_target_quantity = {
-      atlanteans = 20,
-      barbarians = 20,
-      empire = 30
-   },
+   default_target_quantity = {},
    preciousness = {
       atlanteans = 5,
       barbarians = 5,
