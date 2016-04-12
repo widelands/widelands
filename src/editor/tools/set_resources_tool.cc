@@ -71,6 +71,8 @@ EditorSetResourcesTool::handle_undo_impl(const Widelands::World& world,
 		Widelands::ResourceAmount amount     = res.amount;
 		Widelands::ResourceAmount max_amount = world.get_resource(args->current_resource)->max_amount();
 
+		if (amount < 0)
+			amount = 0;
 		if (amount > max_amount)
 			amount = max_amount;
 
