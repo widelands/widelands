@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-04-07 14:12+0000\n"
-"PO-Revision-Date: 2016-04-07 14:13+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2016-04-09 07:23+0000\n"
+"PO-Revision-Date: 2016-04-09 11:48+0000\n"
+"Last-Translator: MiroslavR <miroslavr256@gmail.com>\n"
 "Language-Team: Slovak (http://www.transifex.com/widelands/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -88,7 +88,7 @@ msgstr "Uloženie mapy"
 
 #: ../../data/scripting/editor/editor_controls.lua:35
 msgid "Tools"
-msgstr ""
+msgstr "Nástroje"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
@@ -106,37 +106,37 @@ msgstr "Zmena veľkosti nástroja"
 #: ../../data/scripting/editor/editor_controls.lua:40
 msgctxt "hotkey"
 msgid "Click"
-msgstr ""
+msgstr "Kliknutie"
 
 #: ../../data/scripting/editor/editor_controls.lua:40
 msgid ""
 "Place new elements on the map, or increase map elements by the value "
 "selected by ‘Increase/Decrease value’"
-msgstr ""
+msgstr "Umiestnenie nových prvkov do mapy alebo zvýšenie prvkov na mape o hodnotu určenú nastavením „Zvýšiť/znížiť hodnotu“"
 
 #: ../../data/scripting/editor/editor_controls.lua:42
 msgid ""
 "Remove elements from the map, or decrease map elements by the value selected"
 " by ‘Increase/Decrease value’"
-msgstr ""
+msgstr "Odstránenie prvkov z mapy alebo zníženie prvkov na mape o hodnotu určenú nastavením „Zvýšiť/znížiť hodnotu“"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
 #: ../../data/scripting/editor/editor_controls.lua:42
 msgctxt "hotkey"
 msgid "Shift + Click"
-msgstr ""
+msgstr "Shift + kliknutie"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
 #: ../../data/scripting/editor/editor_controls.lua:44
 msgctxt "hotkey"
 msgid "Ctrl + Click"
-msgstr ""
+msgstr "Ctrl + kliknutie"
 
 #: ../../data/scripting/editor/editor_controls.lua:44
 msgid "Set map elements to the value selected by ‘Set Value’"
-msgstr ""
+msgstr "Nastavenie prvkov na mape na hodnotu určenú nastavením „Nastaviť hodnotu“"
 
 #: ../../data/scripting/editor/editor_help.lua:49
 msgid "Editor Help"

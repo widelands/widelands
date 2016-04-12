@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-04-07 14:12+0000\n"
-"PO-Revision-Date: 2016-04-09 07:12+0000\n"
+"POT-Creation-Date: 2016-04-09 07:23+0000\n"
+"PO-Revision-Date: 2016-04-09 17:44+0000\n"
 "Last-Translator: Szűcs Kornél Géza <sz.kornelgeza@gmail.com>\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
@@ -313,27 +313,27 @@ msgstr "Nyír"
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/cirrus/init.lua:13
 msgid "Cirrus Tree (Sapling)"
-msgstr "Paszuly (csemete)"
+msgstr "Felhőfa (csemete)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/cirrus/init.lua:37
 msgid "Cirrus Tree (Pole)"
-msgstr "Paszuly (vessző)"
+msgstr "Felhőfa (vessző)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/cirrus/init.lua:61
 msgid "Cirrus Tree (Mature)"
-msgstr "Paszuly (felnőtt)"
+msgstr "Felhőfa (felnőtt)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/cirrus/init.lua:85
 msgid "Cirrus Tree (Old)"
-msgstr "Paszuly (idős)"
+msgstr "Felhőfa (idős)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/cirrus/init.lua:87
 msgid "Cirrus Tree"
-msgstr "Paszuly"
+msgstr "Felhőfa"
 
 #: ../../data/world/immovables/trees/deadtree1/init.lua:5
 #: ../../data/world/immovables/trees/deadtree2/init.lua:5
@@ -781,7 +781,7 @@ msgstr "Vas"
 
 #: ../../data/world/resources/init.lua:55
 msgid "Stones"
-msgstr "Kő"
+msgstr "Kövek"
 
 #: ../../data/world/resources/init.lua:69
 #: ../../data/world/terrains/init.lua:362
