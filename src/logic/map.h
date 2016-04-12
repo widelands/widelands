@@ -82,8 +82,8 @@ struct NoteFieldResourceChanged {
 
 	FCoords fc;
 	DescriptionIndex old_resource;
-	uint8_t old_initial_amount;
-	uint8_t old_amount;
+	ResourceAmount old_initial_amount;
+	ResourceAmount old_amount;
 };
 
 struct ImmovableFound {
@@ -369,11 +369,11 @@ public:
 
 	/// Initializes the 'initial_resources' on 'coords' to the 'resource_type'
 	/// with the given 'amount'.
-	void initialize_resources(const FCoords& coords, DescriptionIndex resource_type, uint8_t amount);
+	void initialize_resources(const FCoords& coords, DescriptionIndex resource_type, ResourceAmount amount);
 
 	/// Sets the number of resources of the field to 'amount'. The type of the
 	/// resource on this field is not changed.
-	void set_resources(const FCoords& coords, uint8_t amount);
+	void set_resources(const FCoords& coords, ResourceAmount amount);
 
 	/// Clears the resources, i.e. the amount will be set to 0 and the type of
 	/// resources will be kNoResource.
@@ -410,7 +410,7 @@ public:
 	 */
 	bool is_resource_valid
 		(const Widelands::World& world, const Widelands::TCoords<Widelands::FCoords>& c,
-		int32_t const curres);
+		DescriptionIndex curres);
 
 	// The objectives that are defined in this map if it is a scenario.
 	const Objectives& objectives() const {

@@ -1243,9 +1243,9 @@ void ProductionProgram::ActMine::execute
 		MapRegion<Area<FCoords> > mr
 			(map, Area<FCoords> (map.get_fcoords(ps.get_position()), distance_));
 		do {
-			uint8_t  fres   = mr.location().field->get_resources();
-			uint32_t amount = mr.location().field->get_resources_amount();
-			uint32_t start_amount =
+			DescriptionIndex fres = mr.location().field->get_resources();
+			ResourceAmount amount = mr.location().field->get_resources_amount();
+			ResourceAmount start_amount =
 				mr.location().field->get_initial_res_amount();
 
 			if (fres != resource_) {
@@ -1291,8 +1291,8 @@ void ProductionProgram::ActMine::execute
 				(map,
 				 Area<FCoords>(map.get_fcoords(ps.get_position()), distance_));
 			do {
-				uint8_t  fres   = mr.location().field->get_resources();
-				uint32_t amount = mr.location().field->get_resources_amount();
+				DescriptionIndex fres = mr.location().field->get_resources();
+				ResourceAmount amount = mr.location().field->get_resources_amount();
 
 				if (fres != resource_)
 					amount = 0;

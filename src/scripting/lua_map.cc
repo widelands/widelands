@@ -142,12 +142,12 @@ struct SoldierMapDescr {
 	}
 };
 
-using SoldiersMap = std::map<SoldierMapDescr, uint32_t>;
-using WaresMap = std::map<Widelands::DescriptionIndex, uint32_t>;
-using WorkersMap = std::map<Widelands::DescriptionIndex, uint32_t>;
-using SoldierAmount = std::pair<SoldierMapDescr, uint32_t>;
-using WorkerAmount = std::pair<Widelands::DescriptionIndex, uint32_t>;
-using PlrInfluence = std::pair<uint8_t, uint32_t>;
+using SoldiersMap = std::map<SoldierMapDescr, Widelands::Quantity>;
+using WaresMap = std::map<Widelands::DescriptionIndex, Widelands::Quantity>;
+using WorkersMap = std::map<Widelands::DescriptionIndex, Widelands::Quantity>;
+using SoldierAmount = std::pair<SoldierMapDescr, Widelands::Quantity>;
+using WorkerAmount = std::pair<Widelands::DescriptionIndex, Widelands::Quantity>;
+using PlrInfluence = std::pair<Widelands::PlayerNumber, Widelands::MilitaryInfluence>;
 using WaresSet = std::set<Widelands::DescriptionIndex>;
 using WorkersSet = std::set<Widelands::DescriptionIndex>;
 using SoldiersList = std::vector<Widelands::Soldier *>;
@@ -309,7 +309,7 @@ int do_get_workers(lua_State* L, const PlayerImmovable& pi, const WorkersMap& va
 		lua_newtable(L);
 
 	for (const DescriptionIndex& i : set) {
-		uint32_t cnt = 0;
+		Widelands::Quantity cnt = 0;
 		if (c_workers.count(i))
 			cnt = c_workers[i];
 
@@ -350,7 +350,7 @@ int do_set_workers(lua_State* L, PlayerImmovable* pi, const WorkersMap& valid_wo
 		if (!valid_workers.count(sp.first))
 			report_error(L, "<%s> can't be employed here!", wdes->name().c_str());
 
-		uint32_t cur = 0;
+		Widelands::Quantity cur = 0;
 		WorkersMap::iterator i = c_workers.find(sp.first);
 		if (i != c_workers.end())
 			cur = i->second;
@@ -422,14 +422,14 @@ SoldiersMap parse_set_soldiers_arguments(lua_State* L, const SoldierDescr& soldi
 	SoldiersMap rv;
 	if (lua_gettop(L) > 2) {
 		// STACK: cls, descr, count
-		const uint32_t count = luaL_checkuint32(L, 3);
+		const Widelands::Quantity count = luaL_checkuint32(L, 3);
 		const SoldierMapDescr d = unbox_lua_soldier_description(L, 2, soldier_descr);
 		rv.insert(SoldierAmount(d, count));
 	} else {
 		lua_pushnil(L);
 		while (lua_next(L, 2) != 0) {
 			const SoldierMapDescr d = unbox_lua_soldier_description(L, 3, soldier_descr);
-			const uint32_t count = luaL_checkuint32(L, -1);
+			const Widelands::Quantity count = luaL_checkuint32(L, -1);
 			rv.insert(SoldierAmount(d, count));
 			lua_pop(L, 1);
 		}
@@ -484,7 +484,7 @@ int do_get_soldiers(lua_State* L, const Widelands::SoldierControl& sc, const Tri
 
 		// Only return the number of those requested
 		const SoldierMapDescr wanted = unbox_lua_soldier_description(L, 2, soldier_descr);
-		uint32_t rv = 0;
+		Widelands::Quantity rv = 0;
 		for (const Soldier* s : soldiers) {
 			SoldierMapDescr sd
 				(s->get_health_level(), s->get_attack_level(), s->get_defense_level(), s->get_evade_level());
@@ -529,7 +529,7 @@ int do_set_soldiers
 	// Now adjust them
 	EditorGameBase& egbase = get_egbase(L);
 	for (const SoldiersMap::value_type& sp : setpoints) {
-		uint32_t cur = 0;
+		Widelands::Quantity cur = 0;
 		SoldiersMap::iterator i = hist.find(sp.first);
 		if (i != hist.end())
 			cur = i->second;
@@ -952,7 +952,7 @@ int LuaMap::get_player_slots(lua_State * L) {
 	Map & m = get_egbase(L).map();
 
 	lua_createtable(L, m.get_nrplayers(), 0);
-	for (uint32_t i = 0; i < m.get_nrplayers(); i++) {
+	for (Widelands::PlayerNumber i = 0; i < m.get_nrplayers(); i++) {
 		lua_pushuint32(L, i + 1);
 		to_lua<LuaMaps::LuaPlayerSlot>(L, new LuaMaps::LuaPlayerSlot(i + 1));
 		lua_settable(L, -3);
@@ -3077,7 +3077,7 @@ int LuaTerrainDescription::get_descname(lua_State * L) {
 */
 
 int LuaTerrainDescription::get_default_resource(lua_State * L) {
-	int res_index = get()->get_default_resource();
+	DescriptionIndex res_index = get()->get_default_resource();
 	const World& world = get_egbase(L).world();
 	if (res_index != Widelands::kNoResource && res_index < world.get_nr_resources()) {
 		to_lua<LuaMaps::LuaResourceDescription>
@@ -3176,7 +3176,7 @@ int LuaTerrainDescription::get_valid_resources(lua_State * L) {
 	const World& world = get_egbase(L).world();
 	lua_newtable(L);
 	int index = 1;
-	for (uint8_t res_index : get()->valid_resources()) {
+	for (DescriptionIndex res_index : get()->valid_resources()) {
 		if (res_index != Widelands::kNoResource && res_index < world.get_nr_resources()) {
 			lua_pushint32(L, index++);
 			to_lua<LuaMaps::LuaResourceDescription>
@@ -3621,7 +3621,7 @@ int LuaFlag::set_wares(lua_State * L)
 	WaresMap setpoints = parse_set_wares_arguments(L, f->owner().tribe());
 	WaresMap c_wares = count_wares_on_flag_(*f, tribes);
 
-	uint32_t nwares = 0;
+	Widelands::Quantity nwares = 0;
 
 	for (const auto& ware : c_wares) {
 		// all wares currently on the flag without a setpoint should be removed
@@ -3690,7 +3690,7 @@ int LuaFlag::get_wares(lua_State * L) {
 		lua_newtable(L);
 
 	for (const Widelands::DescriptionIndex& ware : wares_set) {
-		uint32_t count = 0;
+		Widelands::Quantity count = 0;
 		if (wares.count(ware))
 			count = wares[ware];
 
@@ -5173,7 +5173,7 @@ int LuaField::get_resource(lua_State * L) {
 }
 int LuaField::set_resource(lua_State * L) {
 	auto& egbase = get_egbase(L);
-	int32_t res = egbase.world().get_resource
+	DescriptionIndex res = egbase.world().get_resource
 		(luaL_checkstring(L, -1));
 
 	if (res == Widelands::INVALID_INDEX)
@@ -5201,13 +5201,15 @@ int LuaField::get_resource_amount(lua_State * L) {
 int LuaField::set_resource_amount(lua_State * L) {
 	EditorGameBase& egbase = get_egbase(L);
 	auto c  = fcoords(L);
-	int32_t res = c.field->get_resources();
-	int32_t amount = luaL_checkint32(L, -1);
+	DescriptionIndex res = c.field->get_resources();
+	auto amount = luaL_checkint32(L, -1);
 	const ResourceDescription * resDesc = egbase.world().get_resource(res);
-	int32_t max_amount = resDesc ? resDesc->max_amount() : 0;
+	ResourceAmount max_amount = resDesc ? resDesc->max_amount() : 0;
 
 	if (amount < 0 || amount > max_amount)
-		report_error(L, "Illegal amount: %i, must be >= 0 and <= %i", amount, max_amount);
+		report_error(L, "Illegal amount: %i, must be >= 0 and <= %i",
+						 amount,
+						 static_cast<unsigned int>(max_amount));
 
 	auto& map = egbase.map();
 	if (is_a(Game, &egbase)) {

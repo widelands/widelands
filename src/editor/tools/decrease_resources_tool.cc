@@ -44,11 +44,12 @@ int32_t EditorDecreaseResourcesTool::handle_click_impl(const Widelands::World& w
 	Widelands::Area<Widelands::FCoords>
 	(map->get_fcoords(center.node), args->sel_radius));
 	do {
-		int32_t amount = mr.location().field->get_resources_amount();
+		Widelands::ResourceAmount amount = mr.location().field->get_resources_amount();
 
 		amount -= args->change_by;
-		if (amount < 0)
+		if (amount < 0) {
 			amount = 0;
+		}
 
 		if (mr.location().field->get_resources() == args->current_resource &&
 			map->is_resource_valid(world, mr.location(), args->current_resource) &&

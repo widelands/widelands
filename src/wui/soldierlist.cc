@@ -120,7 +120,7 @@ last_animate_time_(0)
 	icon_width_ += 2 * kIconBorder;
 	icon_height_ += 2 * kIconBorder;
 
-	uint32_t maxcapacity = soldiers_.max_soldier_capacity();
+	Widelands::Quantity maxcapacity = soldiers_.max_soldier_capacity();
 	if (maxcapacity <= kMaxColumns) {
 		cols_ = maxcapacity;
 		rows_ = 1;

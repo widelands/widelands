@@ -117,8 +117,8 @@ Display number of soldiers.
 void MilitarySite::update_statistics_string(std::string* s)
 {
 	s->clear();
-	uint32_t present = present_soldiers().size();
-	uint32_t stationed = stationed_soldiers().size();
+	Quantity present = present_soldiers().size();
+	Quantity stationed = stationed_soldiers().size();
 
 	if (present == stationed) {
 		if (capacity_ > stationed) {
@@ -400,7 +400,7 @@ void MilitarySite::request_soldier_callback
 void MilitarySite::update_normal_soldier_request()
 {
 	std::vector<Soldier *> present = present_soldiers();
-	uint32_t const stationed = stationed_soldiers().size();
+	Quantity const stationed = stationed_soldiers().size();
 
 	if (stationed < capacity_) {
 		if (!normal_soldier_request_) {
@@ -718,13 +718,13 @@ std::vector<Soldier *> MilitarySite::stationed_soldiers() const
 	return soldiers;
 }
 
-uint32_t MilitarySite::min_soldier_capacity() const {
+Quantity MilitarySite::min_soldier_capacity() const {
 	return 1;
 }
-uint32_t MilitarySite::max_soldier_capacity() const {
+Quantity MilitarySite::max_soldier_capacity() const {
 	return descr().get_max_number_of_soldiers();
 }
-uint32_t MilitarySite::soldier_capacity() const
+Quantity MilitarySite::soldier_capacity() const
 {
 	return capacity_;
 }

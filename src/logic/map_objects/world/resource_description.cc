@@ -77,7 +77,7 @@ bool ResourceDescription::detectable() const {
 	return detectable_;
 }
 
-int32_t ResourceDescription::max_amount() const {
+ResourceAmount ResourceDescription::max_amount() const {
 	return max_amount_;
 }
 

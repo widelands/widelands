@@ -22,6 +22,8 @@
 
 #include <vector>
 
+#include "logic/widelands.h"
+
 namespace Widelands {
 
 class EditorGameBase;
@@ -54,19 +56,19 @@ struct SoldierControl {
 	 * \return the minimum number of soldiers that this building can be
 	 * configured to hold.
 	 */
-	virtual uint32_t min_soldier_capacity() const = 0;
+	virtual Quantity min_soldier_capacity() const = 0;
 
 	/**
 	 * \return the maximum number of soldiers that this building can be
 	 * configured to hold.
 	 */
-	virtual uint32_t max_soldier_capacity() const = 0;
+	virtual Quantity max_soldier_capacity() const = 0;
 
 	/**
 	 * \return the number of soldiers this building is configured to hold
 	 * right now.
 	 */
-	virtual uint32_t soldier_capacity() const = 0;
+	virtual Quantity soldier_capacity() const = 0;
 
 	/**
 	 * Sets the capacity for soldiers of this building.
@@ -74,13 +76,13 @@ struct SoldierControl {
 	 * New soldiers will be requested and old soldiers will be evicted
 	 * as necessary.
 	 */
-	virtual void set_soldier_capacity(uint32_t capacity) = 0;
+	virtual void set_soldier_capacity(Quantity capacity) = 0;
 
 	void changeSoldierCapacity(int32_t const difference) {
-		uint32_t const old_capacity = soldier_capacity();
-		uint32_t const new_capacity =
+		Widelands::Quantity const old_capacity = soldier_capacity();
+		Widelands::Quantity const new_capacity =
 			std::min
-				(static_cast<uint32_t>
+				(static_cast<Widelands::Quantity>
 				 	(std::max
 				 	 	(static_cast<int32_t>(old_capacity) + difference,
 				 	 	 static_cast<int32_t>(min_soldier_capacity()))),
