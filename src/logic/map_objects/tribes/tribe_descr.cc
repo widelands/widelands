@@ -363,8 +363,8 @@ DescriptionIndex TribeDescr::get_resource_indicator
 		throw GameDataError("There is no resource indicator for resource %s", res->name().c_str());
 	}
 
-	ResourceAmount bestmatch =
-		static_cast<ResourceAmount>
+	int32_t bestmatch =
+		static_cast<int32_t>
 			((static_cast<float>(amount) / res->max_amount())
 			 *
 			 num_indicators);
