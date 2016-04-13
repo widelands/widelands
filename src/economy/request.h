@@ -72,7 +72,7 @@ public:
 	PlayerImmovable & target() const {return target_;}
 	DescriptionIndex get_index() const {return index_;}
 	WareWorker get_type() const {return type_;}
-	uint32_t get_count() const {return count_;}
+	Quantity get_count() const {return count_;}
 	uint32_t get_open_count() const {return count_ - transfers_.size();}
 	bool is_open() const {return transfers_.size() < count_;}
 	Economy * get_economy() const {return economy_;}
@@ -85,7 +85,7 @@ public:
 	Flag & target_flag() const;
 
 	void set_economy(Economy *);
-	void set_count(uint32_t);
+	void set_count(Quantity);
 	void set_required_time(int32_t time);
 	void set_required_interval(int32_t interval);
 
@@ -127,7 +127,7 @@ private:
 
 	Economy         * economy_;
 	DescriptionIndex        index_;             //  the index of the ware descr
-	uint32_t          count_;             //  how many do we need in total
+	Quantity          count_;             //  how many do we need in total
 
 	CallbackFn        callbackfn_;        //  called on request success
 

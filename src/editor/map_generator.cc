@@ -24,7 +24,7 @@
 #include <stdint.h>
 
 #include "base/wexception.h"
-#include "editor/tools/editor_increase_resources_tool.h"
+#include "editor/tools/increase_resources_tool.h"
 #include "logic/editor_game_base.h"
 #include "logic/findnode.h"
 #include "logic/map.h"
@@ -130,9 +130,9 @@ void MapGenerator::generate_resources(uint32_t const* const random1,
 	const auto set_resource_helper = [this, &world, &terrain_description, &fc] (
 	   const uint32_t random_value, const int valid_resource_index) {
 		const DescriptionIndex  res_idx = terrain_description.get_valid_resource(valid_resource_index);
-		const uint32_t max_amount = world.get_resource(res_idx)->max_amount();
-		uint8_t res_val = static_cast<uint8_t>(random_value / (kMaxElevation / max_amount));
-		res_val *= static_cast<uint8_t>(map_info_.resource_amount) + 1;
+		const ResourceAmount max_amount = world.get_resource(res_idx)->max_amount();
+		ResourceAmount res_val = static_cast<ResourceAmount>(random_value / (kMaxElevation / max_amount));
+		res_val *= static_cast<ResourceAmount>(map_info_.resource_amount) + 1;
 		res_val /= 3;
 		if (map_.is_resource_valid(world, fc, res_idx)) {
 			map_.initialize_resources(fc, res_idx, res_val);

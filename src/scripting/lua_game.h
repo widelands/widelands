@@ -144,7 +144,7 @@ public:
 };
 
 class LuaMessage : public LuaGameModuleClass {
-	uint32_t             player_number_; // TODO(Hasi50): in CTor this is uint8_t, well
+	Widelands::PlayerNumber player_number_;
 	Widelands::MessageId message_id_;
 
 public:

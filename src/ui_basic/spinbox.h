@@ -23,6 +23,8 @@
 #include <cstring>
 #include <list>
 
+#include <boost/signals2.hpp>
+
 #include "graphic/align.h"
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
@@ -62,6 +64,8 @@ public:
 		  // The amount by which units are increased/decreased for small and big steps when a button is pressed.
 		 int32_t step_size = 1, int32_t big_step_size = 10);
 	~SpinBox();
+
+	boost::signals2::signal<void ()> changed;
 
 	void set_value(int32_t);
 	// For spinboxes of type kValueList. The vector needs to be sorted in ascending order,

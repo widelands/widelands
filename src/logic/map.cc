@@ -32,7 +32,7 @@
 #include "build_info.h"
 #include "economy/flag.h"
 #include "economy/road.h"
-#include "editor/tools/editor_increase_resources_tool.h"
+#include "editor/tools/increase_resources_tool.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/findimmovable.h"
 #include "logic/findnode.h"
@@ -172,7 +172,7 @@ void Map::recalc_default_resources(const World& world) {
 			if (f.field->get_resources() != Widelands::kNoResource || f.field->get_resources_amount())
 				continue;
 			std::map<int32_t, int32_t> m;
-			int32_t amount = 0;
+			ResourceAmount amount = 0;
 
 			//  this node
 			{
@@ -192,8 +192,8 @@ void Map::recalc_default_resources(const World& world) {
 			get_neighbour(f, WALK_NW, &f1);
 			{
 				const TerrainDescription& terr = world.terrain_descr(f1.field->terrain_r());
-				const int8_t resr = terr.get_default_resource();
-				const int default_amount = terr.get_default_resource_amount();
+				const DescriptionIndex resr = terr.get_default_resource();
+				const ResourceAmount default_amount = terr.get_default_resource_amount();
 				if ((terr.get_is() & TerrainDescription::Is::kUnwalkable) && default_amount > 0)
 					m[resr] += 3;
 				else
@@ -202,8 +202,8 @@ void Map::recalc_default_resources(const World& world) {
 			}
 			{
 				const TerrainDescription& terd = world.terrain_descr(f1.field->terrain_d());
-				const int8_t resd = terd.get_default_resource();
-				const int default_amount = terd.get_default_resource_amount();
+				const DescriptionIndex resd = terd.get_default_resource();
+				const ResourceAmount default_amount = terd.get_default_resource_amount();
 				if ((terd.get_is() & TerrainDescription::Is::kUnwalkable) && default_amount > 0)
 					m[resd] += 3;
 				else
@@ -215,8 +215,8 @@ void Map::recalc_default_resources(const World& world) {
 			get_neighbour(f, WALK_NE, &f1);
 			{
 				const TerrainDescription& terd = world.terrain_descr(f1.field->terrain_d());
-				const int8_t resd = terd.get_default_resource();
-				const int default_amount = terd.get_default_resource_amount();
+				const DescriptionIndex resd = terd.get_default_resource();
+				const ResourceAmount default_amount = terd.get_default_resource_amount();
 				if ((terd.get_is() & TerrainDescription::Is::kUnwalkable) && default_amount > 0)
 					m[resd] += 3;
 				else
@@ -228,8 +228,8 @@ void Map::recalc_default_resources(const World& world) {
 			get_neighbour(f, WALK_W, &f1);
 			{
 				const TerrainDescription& terr = world.terrain_descr(f1.field->terrain_r());
-				const int8_t resr = terr.get_default_resource();
-				const int default_amount = terr.get_default_resource_amount();
+				const DescriptionIndex resr = terr.get_default_resource();
+				const ResourceAmount default_amount = terr.get_default_resource_amount();
 				if ((terr.get_is() & TerrainDescription::Is::kUnwalkable) && default_amount > 0)
 					m[resr] += 3;
 				else
@@ -1869,7 +1869,7 @@ int32_t Map::change_terrain
 }
 
 bool Map::is_resource_valid
-	(const Widelands::World& world, const TCoords<Widelands::FCoords>& c, int32_t const curres)
+	(const Widelands::World& world, const TCoords<Widelands::FCoords>& c, DescriptionIndex curres)
 {
 	if (curres == Widelands::kNoResource)
 		return true;
@@ -1912,7 +1912,7 @@ void Map::ensure_resource_consistency(const World& world)
 
 void Map::initialize_resources(const FCoords& c,
                                const DescriptionIndex resource_type,
-                               uint8_t amount) {
+										 ResourceAmount amount) {
 	// You cannot have an amount of nothing.
 	if (resource_type == Widelands::kNoResource) {
 		amount = 0;
@@ -1927,7 +1927,7 @@ void Map::initialize_resources(const FCoords& c,
 	Notifications::publish(note);
 }
 
-void Map::set_resources(const FCoords& c, uint8_t amount) {
+void Map::set_resources(const FCoords& c, ResourceAmount amount) {
 	// You cannot change the amount of resources on a field without resources.
 	if (c.field->resources == Widelands::kNoResource) {
 		return;

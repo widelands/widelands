@@ -254,6 +254,7 @@ void SpinBox::update()
 void SpinBox::change_value(int32_t const value)
 {
 	set_value(value + sbi_->value);
+	changed();
 }
 
 

@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-04-02 18:37+0000\n"
-"PO-Revision-Date: 2016-04-03 08:55+0000\n"
+"POT-Creation-Date: 2016-04-07 14:12+0000\n"
+"PO-Revision-Date: 2016-04-08 05:49+0000\n"
 "Last-Translator: Любомир Василев\n"
 "Language-Team: Bulgarian (http://www.transifex.com/widelands/widelands/language/bg/)\n"
 "MIME-Version: 1.0\n"
@@ -2087,6 +2087,72 @@ msgstr "Работникът използва"
 #: ../../data/tribes/scripting/help/worker_help.lua:144
 msgid "Experience levels"
 msgstr "Нива на опит"
+
+#. TRANSLATORS: Soldier levels
+#: ../../data/tribes/scripting/help/worker_help.lua:165
+msgid "Levels"
+msgstr "Нива"
+
+#: ../../data/tribes/scripting/help/worker_help.lua:167
+msgid "Health"
+msgstr "Здраве"
+
+#. TRANSLATORS: Soldier health / defense / evade points. A 5 digit number.
+#: ../../data/tribes/scripting/help/worker_help.lua:171
+msgid "Starts at %1% points."
+msgstr "Започва с %1% точки."
+
+#. TRANSLATORS: Soldier health / attack defense / evade points
+#: ../../data/tribes/scripting/help/worker_help.lua:174
+#: ../../data/tribes/scripting/help/worker_help.lua:185
+msgid "Increased by %1% point for each level."
+msgid_plural "Increased by %1% points for each level."
+msgstr[0] "Увеличава се с %1% точка на всяко ниво."
+msgstr[1] "Увеличава се с %1% точки на всяко ниво."
+
+#. TRANSLATORS: Soldier health / attack defense / evade level
+#: ../../data/tribes/scripting/help/worker_help.lua:177
+#: ../../data/tribes/scripting/help/worker_help.lua:187
+#: ../../data/tribes/scripting/help/worker_help.lua:197
+#: ../../data/tribes/scripting/help/worker_help.lua:212
+msgid "The maximum level is %1%."
+msgid_plural "The maximum level is %1%."
+msgstr[0] "Максималното ниво е %1%."
+msgstr[1] "Максималното ниво е %1%."
+
+#: ../../data/tribes/scripting/help/worker_help.lua:179
+msgid "Attack"
+msgstr "Атака"
+
+#. TRANSLATORS: Points are 4 digit numbers.
+#: ../../data/tribes/scripting/help/worker_help.lua:182
+msgid "A random value between %1% and %2% points is added to each attack."
+msgstr "Произволен брой точки между %1% и %2% се добавят към всяка атака."
+
+#: ../../data/tribes/scripting/help/worker_help.lua:189
+msgid "Defense"
+msgstr "Защита"
+
+#: ../../data/tribes/scripting/help/worker_help.lua:193
+#: ../../data/tribes/scripting/help/worker_help.lua:201
+#: ../../data/tribes/scripting/help/worker_help.lua:208
+#, lua-format
+msgid "Starts at %d%%."
+msgstr "Започва с %d%%."
+
+#: ../../data/tribes/scripting/help/worker_help.lua:195
+#: ../../data/tribes/scripting/help/worker_help.lua:210
+#, lua-format
+msgid "Increased by %d%% for each level."
+msgstr "Увеличава се с %d%% на всяко ниво."
+
+#: ../../data/tribes/scripting/help/worker_help.lua:202
+msgid "This soldier cannot be trained in defense."
+msgstr "Този войник не може да тренира защитата си."
+
+#: ../../data/tribes/scripting/help/worker_help.lua:205
+msgid "Evade"
+msgstr "Ловкост"
 
 #. TRANSLATORS: Helptext for a ware: Armor
 #: ../../data/tribes/wares/armor/helptexts.lua:4

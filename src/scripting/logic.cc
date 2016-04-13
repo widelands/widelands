@@ -99,14 +99,14 @@ static int L_math_random(lua_State * L) {
 	switch (lua_gettop(L)) { /* check number of arguments */
 		case 0:
 		{  /* no arguments */
-			lua_pushnumber(L, r);  /* Number between 0 and 1 */
+			lua_pushdouble(L, r);  /* Number between 0 and 1 */
 			break;
 		}
 		case 1:
 		{  /* only upper limit */
 			int32_t u = luaL_checkint32(L, 1);
 			luaL_argcheck(L, 1 <= u, 1, "interval is empty");
-			lua_pushnumber(L, floor(r * u) + 1);  /* int between 1 and `u' */
+			lua_pushuint32(L, floor(r * u) + 1);  /* int between 1 and `u' */
 			break;
 		}
 		case 2:
@@ -115,7 +115,7 @@ static int L_math_random(lua_State * L) {
 			int32_t u = luaL_checkint32(L, 2);
 			luaL_argcheck(L, l <= u, 2, "interval is empty");
 			/* int between `l' and `u' */
-			lua_pushnumber(L, floor(r * (u - l + 1)) + l);
+			lua_pushint32(L, floor(r * (u - l + 1)) + l);
 			break;
 		}
 		default: return luaL_error(L, "wrong number of arguments");

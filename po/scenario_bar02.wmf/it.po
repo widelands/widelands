@@ -8,13 +8,14 @@
 # GunChleoc, 2014
 # GunChleoc, 2014
 # Guybrush88 <erpizzo@alice.it>, 2015
+# Matteo Viarengo <enthusedquill6@gmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-03-02 08:54+0000\n"
-"PO-Revision-Date: 2016-03-08 08:17+0000\n"
-"Last-Translator: Cristiano\n"
+"POT-Creation-Date: 2016-04-09 07:23+0000\n"
+"PO-Revision-Date: 2016-04-11 12:14+0000\n"
+"Last-Translator: Matteo Viarengo <enthusedquill6@gmail.com>\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -75,7 +76,7 @@ msgstr "Costruisci una torre"
 msgid ""
 "Build a tower at the north-east border of your territory to get greater "
 "visual range and to protect your people from sudden attacks by enemies."
-msgstr ""
+msgstr "Costruisci una torre al confine nord-est del tuo territorio per ottenere una visuale maggiore e proteggere il tuo popolo dagli attacchi a sorpresa dei nemici"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:54
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:56
@@ -404,7 +405,7 @@ msgid ""
 "find enough space, we should as well build up a farm and a bakery! One of "
 "our farmers seems to be very clever – he already got some crops to grow in "
 "this cold soil."
-msgstr ""
+msgstr "Boldreth ha ragione! Non abbiamo abbastanza cibo per sopravvivere a un lungo e freddo inverno. Dovremmo iniziare a costruire un pozzo,  una capanna del pescatore e una capanna del cacciatore. E se troviamo un luogo con abbastanza spazio, dovremmo costruire anche una fattoria e un forno! Uno dei nostri contadini sembra molto abile - è già riuscito a far crescere un raccolto in questo terreno gelido. "
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:237
 msgid "Food Economy Completed"
@@ -428,7 +429,7 @@ msgid ""
 "settlement. He has instructed us to build a tower,  to have a greater visual"
 " range over the area around our hall to protect our people from sudden "
 "attacks."
-msgstr ""
+msgstr "Thron mi ha detto che ha scoperto delle tracce nella neve a nordest del nostro insediamento. Ha dato istruzioni affinché venga costruita una torre, in modo da avere una visuale più ampia dell'area circostante, in modo da poter proteggere la nostra gente da eventuali attacchi a sorpresa"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:254
 msgid "Further Exploration"
@@ -610,7 +611,7 @@ msgstr "Capo, ricordi i poveri trasportatori: le nostre strade diventano sempre 
 msgid "“%s”"
 msgstr "“%s”"
 
-#: ../../data/scripting/format_scenario.lua:146
+#: ../../data/scripting/format_scenario.lua:96
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] "Nuovo obiettivo"

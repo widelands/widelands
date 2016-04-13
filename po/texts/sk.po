@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-04-02 18:37+0000\n"
-"PO-Revision-Date: 2016-04-03 03:40+0000\n"
+"POT-Creation-Date: 2016-04-09 07:23+0000\n"
+"PO-Revision-Date: 2016-04-09 11:14+0000\n"
 "Last-Translator: MiroslavR <miroslavr256@gmail.com>\n"
 "Language-Team: Slovak (http://www.transifex.com/widelands/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
@@ -126,7 +126,7 @@ msgstr "Pomoc pre Widelands"
 msgid ""
 "You can find help about gameplay or the editor by using the help button on "
 "the bottom menu, or by pressing %1%."
-msgstr ""
+msgstr "Pomoc o tom, ako hrať, alebo ako používať editor môžete získať pomocou tlačidla Pomoc v spodnej ponuke alebo stlačením klávesu %1%."
 
 #. TRANSLATORS: This is a key on the keyboard
 #: ../../data/txts/README.lua:25
@@ -359,7 +359,7 @@ msgid ""
 " replay to become incompatible and to ‘go out of sync’. This is similar to "
 "how network games will suffer from desynchronization problems if one of the "
 "players has a different version of the game."
-msgstr ""
+msgstr "Možnosť „Sledovať záznam“ v hlavnej ponuke vám umožňuje prehrať predošlú hru v presne rovnakej podobe, ako bola hraná. Všimnite si však, že aj malé zmeny v herných dátových súboroch alebo spúšťači Widelands môžu spôsobiť stratu kompatibility alebo synchronizácie záznamu. Je to, ako keď v sieťovej hre nastanú synchronizačné problémy pre odlišnú verziu hry jedného z hráčov."
 
 #: ../../data/txts/help/common_helptexts.lua:28
 #, lua-format
@@ -368,7 +368,7 @@ msgid ""
 "be useful as attachments to bug reports. The replay files are saved in the "
 "%s directory on Linux and Mac OS X. On Windows, they are in the ‘replays’ "
 "subdirectory of your Widelands installation."
-msgstr ""
+msgstr "Záznamy sú veľmi užitočným nástrojom na hľadanie chýb v hernej logike, niekedy je preto vhodné priložiť ich k nahláseným chybám. Záznamové súbory sú v systémoch Linux a Mac OS X uložené v adresári %s. V systéme Windows sa nachádzajú v podadresári „replays“ adresára, kde ste nainštalovali Widelands."
 
 #. TRANSLATORS: The generic hotkey format
 #: ../../data/txts/help/common_helptexts.lua:35

@@ -80,13 +80,10 @@ static int L_string_bformat(lua_State * L) {
 					break;
 
 				case LUA_TNUMBER:
-					{
-						const int d = lua_tointeger(L, i);
-						if (d == 0 && !lua_isnumber(L, 1)) {
-							fmt % d;
-						} else {
-							fmt % luaL_checknumber(L, i);
-						}
+					if (lua_isinteger(L, i)) {
+						fmt % luaL_checkint32(L, i);
+					} else {
+						fmt % luaL_checknumber(L, i);
 					}
 					break;
 
@@ -184,7 +181,7 @@ static int L_ngettext(lua_State * L) {
 	//  S: msgid msgid_plural n
 	const char* msgid = luaL_checkstring(L, 1);
 	const char* msgid_plural = luaL_checkstring(L, 2);
-	const uint32_t n = luaL_checkuint32(L, 3);
+	const uint32_t n = floor(luaL_checkdouble(L, 3));
 
 	lua_getglobal(L, "__TEXTDOMAIN");
 	if (!lua_isnil(L, -1)) {

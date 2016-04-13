@@ -6,14 +6,15 @@
 # Bouchard Renaud <renaud.bouchard@gmail.com>, 2014
 # Jaypad <ju-ju@nataju.fr>, 2015-2016
 # Pierre Salagnac <pierre.salagnac@free.fr>, 2007
+# Renaud Bouchard, 2016
 # Tubuntu <tubuntu@testimonium.be>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-04-02 18:37+0000\n"
-"PO-Revision-Date: 2016-04-02 18:38+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2016-04-09 07:23+0000\n"
+"PO-Revision-Date: 2016-04-12 07:49+0000\n"
+"Last-Translator: Renaud Bouchard\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -217,7 +218,7 @@ msgstr "Dans ce tutoriel, vous allez apprendre quelles options Widelands offre p
 
 #: ../../data/maps/Archipelago_Sea.wmf/elemental:8
 msgid "Archipelago Sea"
-msgstr ""
+msgstr "Mer des Archipels"
 
 #: ../../data/maps/Archipelago_Sea.wmf/elemental:10
 msgid ""
@@ -228,14 +229,14 @@ msgid ""
 "latitude; farming thrives, berries are abundant, and fish plentiful. The "
 "small human population of this place never knew famine. You warlording "
 "bastards just couldn’t leave this little paradise in peace, could you?"
-msgstr ""
+msgstr "Entre la Suisse et la Finlande réside la mer des archipels. Cet endroit d'une incroyable beauté n'est ni terre, ni mer, mais les deux. D'une centaine de kilomètres, il n'y a pas moins de 50,000 îles et îlots, dont certains ne font pas plus que quelques acres. Le climat est assez doux pour cette latitude; les fermes prospèrent, les baies sont abondantes, et le poisson foisonnent. La petite population humaine de cet endroit n'ont jamais connues la famine. Même en tant qu'ignoble seigneur de guerre, vous n'auriez pas pu laisser ce petit paradis en paix ?  "
 
 #: ../../data/maps/Archipelago_Sea.wmf/elemental:11
 msgid ""
 "Large plots are rare on those small islands. Prioritize construction of "
 "large buildings on them. Sometimes you will need big military buildings to "
 "expand all the way to the next island. The AI will perform poorly."
-msgstr ""
+msgstr "Les grands espaces sont rares sur ces petites îles. Construisez dessus en priorité de larges bâtiments. Parfois vous aurez besoin de grands bâtiments militaires pour étendre votre territoire jusqu'à l'île suivante. L'IA ne fonctionne pas bien dans ces circonstances."
 
 #: ../../data/maps/Atoll.wmf/elemental:8
 msgid "Atoll"
@@ -274,7 +275,7 @@ msgstr "L'île de la comète"
 #: ../../data/maps/Comet_Island_v2.wmf/elemental:9
 #: ../../data/maps/Glacier_Lake_v2.wmf/elemental:9
 msgid "Nasenbaer – edited by king_of_nowhere"
-msgstr ""
+msgstr "Nasenbaer - édité par King_of_nowhere"
 
 #: ../../data/maps/Comet_Island_v2.wmf/elemental:10
 msgid ""
@@ -291,7 +292,7 @@ msgid ""
 "player has plenty of good land, but must move far from his starting position"
 " to find ores. Blue player takes the middle ground – he has some fertile "
 "land and is not too far away from the resources."
-msgstr ""
+msgstr "Le joueur rouge est près des minerais, mais a très peu de terres fertiles. Le joueur jaune possède pleins de belles terres, mais doit se déplacer loin de son point de départ pour trouver des minerais. Le joueur bleu prend les terres du milieu - Il a quelques terrains fertiles et n'est pas trop loin des ressources."
 
 #: ../../data/maps/Crater.wmf/elemental:8
 msgid "Crater"
@@ -324,12 +325,12 @@ msgstr "Quatre tribus luttent avec leur plus proche voisin pour être le premier
 
 #: ../../data/maps/Dolomites_v2.wmf/elemental:8
 msgid "Dolomites"
-msgstr ""
+msgstr "Dolomites"
 
 #: ../../data/maps/Dolomites_v2.wmf/elemental:10
 msgid ""
-"The jewel of the alps, the dolomites mountain range has been declared a "
-"world heritage site for its pristine beauty. This map is an as-faithful-as-"
+"The jewel of the Alps, the Dolomites mountain range has been declared a "
+"World Heritage Site for its pristine beauty. This map is an as-faithful-as-"
 "reasonable reconstruction of the area delimited by Cortina d’Ampezzo in the "
 "north-east and Canazei in the south-west. If you have to be pitted in a duel"
 " to the death against your enemies, it may as well be in a beautiful place."
@@ -338,9 +339,9 @@ msgstr ""
 #: ../../data/maps/Dolomites_v2.wmf/elemental:11
 msgid ""
 "There is lot of flat ground on the mountains. Unfortunately, most of it is "
-"vertical. Use the little building space that you have wisely.  A fortress at"
-" the mouth of a narrow mountain pass can be a formidable obstacle to an "
-"enemy army. Use the terrain to your advantage."
+"vertical. Use the little building space that you have wisely. A fortress at "
+"the mouth of a narrow mountain pass can be a formidable obstacle to an enemy"
+" army. Use the terrain to your advantage."
 msgstr ""
 
 #: ../../data/maps/Elven_Forests.wmf/elemental:8
@@ -361,14 +362,14 @@ msgstr "Compagnons"
 msgid ""
 "Ships are your best fellows. Starting positions are similar, so the map "
 "should be fair."
-msgstr ""
+msgstr "Les navires sont vos meilleurs alliés. Les positions de départ sont similaires, la carte devrait être équilibrée."
 
 #: ../../data/maps/Fellowships_v2.wmf/elemental:11
 msgid ""
 "This is a somewhat technical map, and it is best suited for two or three "
 "human players. Coal is hard to find – consider making some. There is gold "
 "near the starting point – do you see it?"
-msgstr ""
+msgstr "C'est une carte plutôt technique, et est étudiée pour deux à trois joueurs humains. Le charbon est difficile à trouver - pensez à en produire. Il y a de l'or près des points de départ - le voyez vous ?"
 
 #: ../../data/maps/Finnish_Lakes.wmf/elemental:8
 msgid "Finnish Lakes"
@@ -384,7 +385,7 @@ msgstr "Voici les magnifiques contrées Finlandaises, faites de lacs, de rivièr
 msgid ""
 "Yellow player has a much easier starting position than the other two; this "
 "map is suited for 1v2."
-msgstr ""
+msgstr "Le joueur jaune à une position de départ plus aisée que les deux autres; cette carte est étudiée pour 1 contre 2."
 
 #: ../../data/maps/Firegames.wmf/elemental:8
 msgid "Firegames"
@@ -416,23 +417,23 @@ msgstr "Quatre Montagnes"
 msgid ""
 "Each tribe is surrounded by four mighty mountains. Who will first conquer "
 "them and claim the resources for his own tribe?"
-msgstr ""
+msgstr "Chaque tribu est entourée de quatre chaînes montagneuses. Qui en fera le premier la conquête et réclamera les ressources pour sa tribu ?"
 
 #: ../../data/maps/Four_Mountains.wmf/elemental:11
 msgid ""
 "I: Water can be found along the river. II: Snowmen mark additional water "
 "sources. III: Each mountain contains only one resource."
-msgstr ""
+msgstr "I : L'eau peut être trouvée le long de la rivière. II : Les bonshommes de neige sont des sources d'eau supplémentaires. III: Chaque montagne ne contient qu'un type de ressource."
 
 #: ../../data/maps/Full_Moon_v2.wmf/elemental:8
 msgid "Full Moon"
-msgstr ""
+msgstr "Pleine lune"
 
 #: ../../data/maps/Full_Moon_v2.wmf/elemental:10
 msgid ""
 "Whether it is the latest solstice, or lunar illness, something moves these "
 "tribes towards their final ordeal."
-msgstr ""
+msgstr "Que cela soit le dernier solstice, ou une maladie lunaire, quelque chose pousses ces tribus vers leur supplice final."
 
 #: ../../data/maps/Glacier_Lake_v2.wmf/elemental:8
 msgid "Glacier Lake"
@@ -445,7 +446,7 @@ msgid ""
 "tribe, but a few months ago another tribe came over the mountains and "
 "settled down. And you are sure that there is only enough space for one "
 "tribe."
-msgstr ""
+msgstr "Il y a longtemps votre tribu s'établit aux abords de ce magnifique et solitaire lac glaciaire. Personne ne vous dérangeait et les ressources étaient suffisantes pour toute votre tribu, mais il y a quelques mois une autre tribu est arrivée par delà les montagnes et s'installa. Et vous êtes certain qu'il n'y a seulement de la place que pour une tribu."
 
 #: ../../data/maps/Golden_Peninsula.wmf/elemental:8
 msgid "Golden Peninsula"
@@ -499,7 +500,7 @@ msgid ""
 "An old legend tells that these seven kingdoms, that have flourished for ages"
 " in prosperity, will someday collapse into a devastating war. Has your "
 "latest betrayal been one too many and will the prophecy come true?"
-msgstr ""
+msgstr "Une vieille légende dit que ces sept royaumes qui ont prospéré pendant des siècles dans l'abondance s'effondreront un jour dans une guerre dévastatrice. Est-ce que votre dernière trahison fut de trop et que la prophétie se réalisera ?"
 
 #: ../../data/maps/Lake_of_Tranquility.wmf/elemental:8
 msgid "Lake of Tranquility"
@@ -518,7 +519,7 @@ msgstr "Dernier bastion"
 
 #: ../../data/maps/Last_Bastion_v2.wmf/elemental:9
 msgid "Another Barbarian – edited by king_of_nowhere"
-msgstr ""
+msgstr "Un autre barbare - édité par king_of_nowhere"
 
 #: ../../data/maps/Last_Bastion_v2.wmf/elemental:10
 msgid ""
@@ -536,13 +537,13 @@ msgstr "Les dieux capricieux n'ont pas répondus à nos prières. À la place, l
 
 #: ../../data/maps/Last_Survivors.wmf/elemental:8
 msgid "Last Survivors"
-msgstr ""
+msgstr "Derniers survivants"
 
 #: ../../data/maps/Last_Survivors.wmf/elemental:10
 msgid ""
 "Four tribes fighting for dominance in a stark area. Resources are scattered "
 "all over the map."
-msgstr ""
+msgstr "Quatre tribus se battent pour la domination d'un environnement rigide. Les ressources sont disséminés partout sur la carte."
 
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/elemental:7
 msgid "Island Hopping"
@@ -715,7 +716,7 @@ msgstr "La rivière a toujours fournie nourriture et communication. Cette fois ,
 msgid ""
 "Use the river wisely. Your opponents will do the same. You will find the "
 "main ore resources deep in the desert."
-msgstr ""
+msgstr "Utilisez la rivière avec sagesse. Vos adversaires en feront autant. Vous trouverez  les minerais des principales ressources dans le désert profond."
 
 #: ../../data/maps/The_Oasis_Triangle.wmf/elemental:8
 msgid "The Oasis Triangle"
@@ -759,11 +760,11 @@ msgstr "Trois Guerriers"
 msgid ""
 "Mighty mountains divide this land into three fertile valleys. But a path "
 "connects the valleys and thus a fight seems inescapable!"
-msgstr ""
+msgstr "De majestueuses montagnes divisent ces terres en trois vallées fertiles. Mais un chemin connecte les vallées, et la bataille semble inévitable !"
 
 #: ../../data/maps/Three_Warriors.wmf/elemental:11
 msgid "Water can be found around the lakes."
-msgstr ""
+msgstr "L'eau peut être trouvée autour des lacs."
 
 #: ../../data/maps/Together_We're_Strong.wmf/elemental:8
 msgid "Together We’re Strong"
@@ -805,13 +806,13 @@ msgid ""
 "desperately searching for more resources to support their endlessly ongoing "
 "wars, would end up in this forgotten place at the same time and for the same"
 " well-known reason."
-msgstr ""
+msgstr "Lorsque le vent s´éleva et que les premières dunes se formèrent sur ces lagons jumeaux abandonnés, personne n'aurait pu s'attendre à ce que deux tribus cherchant désespérément davantage de ressources pour soutenir leurs guerres interminables n' arrivent à cet endroit oublié en même temps et pour la même raison. "
 
 #: ../../data/maps/Twin_Lagoons_v2.wmf/elemental:11
 msgid ""
 "Defend your transport lines, or use ships to bypass the opponent. Then "
 "remove all enemy activity."
-msgstr ""
+msgstr "Défendez vos lignes de transport, ou utilisez vos navires pour contourner l'adversaire. Puis éliminez toute activité ennemie."
 
 #: ../../data/maps/Twinkling_Waves.wmf/elemental:8
 msgid "Twinkling Waves"
@@ -845,13 +846,13 @@ msgstr "Au milieu de l'été, des éruptions volcaniques amenèrent l'hiver. Le 
 
 #: ../../data/maps/Wideworld.wmf/elemental:8
 msgid "Wide World"
-msgstr ""
+msgstr "Vaste monde"
 
 #: ../../data/maps/Wideworld.wmf/elemental:10
 msgid ""
 "The world is not enough! If you want to win, you have to send some ships. "
 "But remember: your opponents are very close to you."
-msgstr ""
+msgstr "Le monde n'est pas assez ! Si vous voulez gagner, vous devrez envoyer des navires. Mais rappelez vous : Vos adversaires sont très proches de vous."
 
 #: ../../data/maps/Wisent_Valley.wmf/elemental:8
 msgid "Wisent Valley"
