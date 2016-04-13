@@ -7,9 +7,7 @@ tribes:new_ware_type {
    descname = pgettext("ware", "Thatch Reed"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
-   default_target_quantity = {
-      barbarians = 10
-   },
+   default_target_quantity = {},
    preciousness = {
       barbarians = 5
    },
