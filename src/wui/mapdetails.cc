@@ -34,6 +34,19 @@
 #include "map_io/widelands_map_loader.h"
 #include "ui_basic/box.h"
 
+namespace {
+std::string as_header(const std::string& txt) {
+	return (boost::format("<vspace gap=6><p><font size=%i bold=1 shadow=1>%s</font></p>")
+			  % UI_FONT_SIZE_SMALL
+			  % richtext_escape(txt)).str();
+}
+std::string as_content(const std::string& txt) {
+	return (boost::format("<vspace gap=2><p><font size=%i bold=1 shadow=1>%s</font></p>")
+			  % (UI_FONT_SIZE_SMALL - 2)
+			  % richtext_escape(txt)).str();
+}
+} // namespace
+
 MapDetails::MapDetails
 		(Panel* parent, int32_t x, int32_t y, int32_t max_x, int32_t max_y) :
 	UI::Panel(parent, x, y, max_x, max_y),
@@ -65,6 +78,7 @@ MapDetails::MapDetails
 	 // -1 to prevent cropping of scrollbar
 	descr_(&descr_box_, 0, 0, max_w_ - indent_ - 1, descr_box_height_ - labelh_ - padding_, "")
 {
+	descr_.force_new_renderer();
 	suggested_teams_box_ = new UI::SuggestedTeamsBox(this, 0, 0, UI::Box::Vertical,
 																	 padding_, indent_, labelh_, max_w_, 4 * labelh_);
 
@@ -124,6 +138,8 @@ void MapDetails::update(const MapData& mapdata, bool localize_mapname) {
 	clear();
 	if (mapdata.maptype == MapData::MapType::kDirectory) {
 		// Show directory information
+		descr_.set_text((boost::format("<rt>%s</rt>") % as_content(mapdata.localized_name)).str());
+
 		name_label_.set_text(_("Directory:"));
 		name_.set_text(mapdata.localized_name);
 		name_.set_tooltip(_("The name of this directory"));
@@ -131,35 +147,46 @@ void MapDetails::update(const MapData& mapdata, bool localize_mapname) {
 	} else {
 		// Show map information
 		if (mapdata.maptype == MapData::MapType::kScenario) {
-			name_label_.set_text(_("Scenario:"));
+			name_label_.set_text(_("Scenario:")); // NOCOM keep the name label
 		} else {
 			name_label_.set_text(_("Map:"));
 		}
+		std::string  description = as_content(localize_mapname ? mapdata.localized_name : mapdata.name);
 		name_.set_text(localize_mapname ? mapdata.localized_name : mapdata.name);
 		if (mapdata.localized_name != mapdata.name) {
 			if (localize_mapname) {
-				name_.set_tooltip
+				descr_.set_tooltip
 				/** TRANSLATORS: Tooltip in map description when translated map names are being displayed. */
 				/** TRANSLATORS: %s is the English name of the map. */
 						((boost::format(_("The original name of this map: %s"))
 						  % mapdata.name).str());
 			} else {
-				name_.set_tooltip
+				descr_.set_tooltip
 				/** TRANSLATORS: Tooltip in map description when map names are being displayed in English. */
 				/** TRANSLATORS: %s is the localized name of the map. */
 						((boost::format(_("The name of this map in your language: %s"))
 						  % mapdata.localized_name).str());
 			}
-		} else {
-			name_.set_tooltip(_("The name of this map"));
 		}
+		description = (boost::format("%s%s")
+							  % description
+							  % as_header(ngettext("Author:", "Authors:", mapdata.authors.get_number()))).str();
+		description = (boost::format("%s%s") % description % as_content(mapdata.authors.get_names())).str();
+
 		author_label_.set_text(ngettext("Author:", "Authors:", mapdata.authors.get_number()));
 		author_.set_text(mapdata.authors.get_names());
+
+		description = (boost::format("%s%s") % description % as_header(_("Description:"))).str();
+		description = (boost::format("%s%s") % description % as_content(mapdata.description)).str();
+		if (!mapdata.hint.empty()) {
+			/** TRANSLATORS: Map hint header when selecting a map. */
+			description = (boost::format("%s%s") % description % as_header(_("Hint:"))).str();
+			description = (boost::format("%s%s") % description % as_content(mapdata.hint)).str();
+		}
+		description = (boost::format("<rt>%s</rt>") % description).str();
+		descr_.set_text(description);
+
 		descr_label_.set_text(_("Description:"));
-		descr_.set_text(
-					mapdata.description +
-					/** TRANSLATORS: Map hint header when selecting a map. */
-					(mapdata.hint.empty() ? "" : (std::string("\n\n") + _("HINT:") + "\n" + mapdata.hint)));
 
 		// Show / hide suggested teams
 		if (mapdata.suggested_teams.empty()) {

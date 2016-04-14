@@ -41,7 +41,8 @@ MultilineTextarea::MultilineTextarea
 	Panel       (parent, x, y, w, h),
 	text_      (text),
 	color_(UI_FONT_CLR_FG),
-	isrichtext(false),
+	force_new_renderer_(false),
+	use_old_renderer_(false),
 	scrollbar_ (this, get_w() - Scrollbar::kSize, 0, Scrollbar::kSize, h, false),
 	scrollmode_(scroll_mode)
 {
@@ -88,12 +89,16 @@ void MultilineTextarea::recompute()
 	// We wrap the text twice. We need to do this to account for the presence/absence of the scollbar.
 	bool scrollbar_was_enabled = scrollbar_.is_enabled();
 	for (int i = 0; i < 2; ++i) {
-		if (text_.compare(0, 3, "<rt")) {
-			isrichtext = false;
+		if (!is_richtext(text_)) {
+			use_old_renderer_ = false;
 			const Image* text_im = UI::g_fh1->render(make_richtext(), get_eff_w() - 2 * RICHTEXT_MARGIN);
 			height = text_im->height();
+		} else if (force_new_renderer_) {
+			use_old_renderer_ = false;
+			const Image* text_im = UI::g_fh1->render(text_, get_eff_w() - 2 * RICHTEXT_MARGIN);
+			height = text_im->height();
 		} else {
-			isrichtext = true;
+			use_old_renderer_ = true;
 			rt.set_width(get_eff_w() - 2 * RICHTEXT_MARGIN);
 			rt.parse(text_);
 			height = rt.height() + 2 * RICHTEXT_MARGIN;
@@ -143,10 +148,15 @@ void MultilineTextarea::layout()
  */
 void MultilineTextarea::draw(RenderTarget& dst)
 {
-	if (isrichtext) {
+	if (use_old_renderer_) {
 		rt.draw(dst, Point(RICHTEXT_MARGIN, RICHTEXT_MARGIN - scrollbar_.get_scrollpos()));
 	} else {
-		const Image* text_im = UI::g_fh1->render(make_richtext(), get_eff_w() - 2 * RICHTEXT_MARGIN);
+		const Image* text_im;
+		if (!is_richtext(text_)) {
+			text_im = UI::g_fh1->render(make_richtext(), get_eff_w() - 2 * RICHTEXT_MARGIN);
+		} else {
+			text_im = UI::g_fh1->render(text_, get_eff_w() - 2 * RICHTEXT_MARGIN);
+		}
 
 		uint32_t blit_width = std::min(text_im->width(), static_cast<int>(get_eff_w()));
 		uint32_t blit_height = std::min(text_im->height(), static_cast<int>(get_inner_h()));
