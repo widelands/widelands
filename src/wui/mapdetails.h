@@ -38,11 +38,13 @@ public:
 				  int32_t max_x, int32_t max_y);
 
 	void clear();
+	void set_max_height(int new_height);
+	void update_layout();
 	void update(const MapData& mapdata, bool localize_mapname);
 
 private:
-	const int padding_, indent_, labelh_;
-	const int32_t max_x_, max_y_;
+	const int padding_, indent_, labelh_, max_w_;
+	int max_h_, descr_box_height_;
 
 	UI::Box main_box_;
 

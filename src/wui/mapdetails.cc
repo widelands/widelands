@@ -41,29 +41,32 @@ MapDetails::MapDetails
 	padding_(4),
 	indent_(10),
 	labelh_(20),
-	max_x_(max_x),
-	max_y_(max_y),
+	max_w_(max_x),
+	max_h_(max_y),
+	// Subtract for main box and author box
+	descr_box_height_(max_y - 4 * labelh_ - 5 * padding_),
 
 	main_box_(this, 0, 0, UI::Box::Vertical,
-		  max_x_, max_y_, 0),
+		  max_w_, max_h_, 0),
 
 	name_box_(&main_box_, 0, 0, UI::Box::Horizontal,
-		  max_x_, 3 * labelh_ + padding_, padding_ / 2),
-	name_label_(&main_box_, 0, 0, max_x_ - padding_, labelh_, ""),
-	name_(&name_box_, 0, 0, max_x_ - indent_, 2 * labelh_, ""),
+		  max_w_, 3 * labelh_ + padding_, padding_ / 2),
+	name_label_(&main_box_, 0, 0, max_w_ - padding_, labelh_, ""),
+	name_(&name_box_, 0, 0, max_w_ - indent_, 2 * labelh_, ""),
 
 	author_box_(&main_box_, 0, 0, UI::Box::Horizontal,
-		  max_x_, 3 * labelh_ + padding_, padding_ / 2),
-	author_label_(&main_box_, 0, 0, max_x_ - padding_, labelh_, ""),
-	author_(&author_box_, 0, 0, max_x_ - indent_, labelh_, ""),
+		  max_w_, 3 * labelh_ + padding_, padding_ / 2),
+	author_label_(&main_box_, 0, 0, max_w_ - padding_, labelh_, ""),
+	author_(&author_box_, 0, 0, max_w_ - indent_, labelh_, ""),
 
 	descr_box_(&main_box_, 0, 0, UI::Box::Horizontal,
-		  max_x_, 6 * labelh_ + padding_, padding_ / 2),
-	descr_label_(&main_box_, 0, 0, max_x_, labelh_, ""),
-	descr_(&descr_box_, 0, 0, max_x_ - indent_ - 1, 5 * labelh_, "") // -1 to prevent cropping of scrollbar
+		  max_w_, descr_box_height_, padding_ / 2),
+	descr_label_(&main_box_, 0, 0, max_w_, labelh_, ""),
+	 // -1 to prevent cropping of scrollbar
+	descr_(&descr_box_, 0, 0, max_w_ - indent_ - 1, descr_box_height_ - labelh_ - padding_, "")
 {
 	suggested_teams_box_ = new UI::SuggestedTeamsBox(this, 0, 0, UI::Box::Vertical,
-																	 padding_, indent_, labelh_, max_x_, 4 * labelh_);
+																	 padding_, indent_, labelh_, max_w_, 4 * labelh_);
 
 	main_box_.add(&name_label_, UI::Align::kLeft);
 	name_box_.add_space(indent_);
@@ -95,6 +98,28 @@ void MapDetails::clear() {
 	suggested_teams_box_->hide();
 }
 
+void MapDetails::set_max_height(int new_height) {
+	max_h_ = new_height;
+	descr_box_height_ = max_h_ - 4 * labelh_ - 5 * padding_;
+	update_layout();
+}
+
+void MapDetails::update_layout() {
+	// Adjust sizes for show / hide suggested teams
+	if (suggested_teams_box_->is_visible()) {
+		suggested_teams_box_->set_pos(Point(0, max_h_ - suggested_teams_box_->get_h()));
+		main_box_.set_size(max_w_, max_h_ - suggested_teams_box_->get_h());
+		descr_box_.set_size(
+					descr_box_.get_w(),
+					descr_box_height_ - suggested_teams_box_->get_h() - padding_);
+	} else {
+		main_box_.set_size(max_w_, max_h_);
+		descr_box_.set_size(descr_box_.get_w(), descr_box_height_);
+	}
+	descr_.set_size(descr_.get_w(), descr_box_.get_h() - descr_label_.get_h() - padding_);
+	descr_.scroll_to_top();
+}
+
 void MapDetails::update(const MapData& mapdata, bool localize_mapname) {
 	clear();
 	if (mapdata.maptype == MapData::MapType::kDirectory) {
@@ -102,7 +127,7 @@ void MapDetails::update(const MapData& mapdata, bool localize_mapname) {
 		name_label_.set_text(_("Directory:"));
 		name_.set_text(mapdata.localized_name);
 		name_.set_tooltip(_("The name of this directory"));
-		main_box_.set_size(max_x_, max_y_);
+		main_box_.set_size(max_w_, max_h_);
 	} else {
 		// Show map information
 		if (mapdata.maptype == MapData::MapType::kScenario) {
@@ -138,19 +163,10 @@ void MapDetails::update(const MapData& mapdata, bool localize_mapname) {
 
 		// Show / hide suggested teams
 		if (mapdata.suggested_teams.empty()) {
-			main_box_.set_size(max_x_, max_y_);
-			descr_box_.set_size(
-						descr_box_.get_w(),
-						max_y_ - descr_label_.get_y() - descr_label_.get_h() - 2 * padding_);
+			suggested_teams_box_->hide();
 		} else {
 			suggested_teams_box_->show(mapdata.suggested_teams);
-			suggested_teams_box_->set_pos(Point(0, max_y_ - suggested_teams_box_->get_h()));
-			main_box_.set_size(max_x_, max_y_ - suggested_teams_box_->get_h());
-			descr_box_.set_size(
-						descr_box_.get_w(),
-						suggested_teams_box_->get_y() - descr_label_.get_y() - descr_label_.get_h() - 4 * padding_);
 		}
-		descr_.set_size(descr_.get_w(), descr_box_.get_h());
-		descr_.scroll_to_top();
 	}
+	update_layout();
 }
