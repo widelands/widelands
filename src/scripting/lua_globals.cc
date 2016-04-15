@@ -182,7 +182,7 @@ static int L_ngettext(lua_State * L) {
 	const char* msgid_plural = luaL_checkstring(L, 2);
 	const int32_t n = luaL_checkint32(L, 3);
 	if (n < 0) {
-		report_error(L, "Call to ngettext with negative nubmer %d", n);
+		report_error(L, "Call to ngettext with negative number %d", n);
 	}
 
 	lua_getglobal(L, "__TEXTDOMAIN");
