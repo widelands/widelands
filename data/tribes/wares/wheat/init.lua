@@ -7,10 +7,7 @@ tribes:new_ware_type {
    descname = pgettext("ware", "Wheat"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
-   default_target_quantity = {
-      barbarians = 25,
-      empire = 25
-   },
+   default_target_quantity = {},
    preciousness = {
       barbarians = 12,
       empire = 12
