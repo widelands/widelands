@@ -132,31 +132,33 @@ void MapDetails::update(const MapData& mapdata, bool localize_mapname) {
 
 		description = (boost::format("%s%s")
 							  % description
-							  % as_header(ngettext("Author:", "Authors:", mapdata.authors.get_number()))).str();
+							  % as_header(ngettext("Author", "Authors", mapdata.authors.get_number()))).str();
 		description = (boost::format("%s%s") % description % as_content(mapdata.authors.get_names())).str();
 
-		description = (boost::format("%s%s") % description % as_header(_("Map Size:"))).str();
+		description = (boost::format("%s%s") % description % as_header(_("Map Size"))).str();
 		description = (boost::format("%s%s")
 							% description
-							% as_content((boost::format(_("%d × %d")) % mapdata.width % mapdata.height).str())).str();
+							% as_content((boost::format(_("%d × %d"))
+											  % mapdata.width
+											  % mapdata.height).str())).str();
 
 		std::vector<std::string> tags;
 		for (const auto& tag : mapdata.tags) {
 			tags.push_back(localize_tag(tag));
 		}
 		std::sort(tags.begin(), tags.end());
-		description = (boost::format("%s%s") % description % as_header(_("Tags:"))).str();
+		description = (boost::format("%s%s") % description % as_header(_("Tags"))).str();
 		description = (boost::format("%s%s")
 							% description %
 							as_content(i18n::localize_list(tags, i18n::ConcatenateWith::COMMA)))
 						  .str();
 
-		description = (boost::format("%s%s") % description % as_header(_("Description:"))).str();
+		description = (boost::format("%s%s") % description % as_header(_("Description"))).str();
 		description = (boost::format("%s%s") % description % as_content(mapdata.description)).str();
 
 		if (!mapdata.hint.empty()) {
 			/** TRANSLATORS: Map hint header when selecting a map. */
-			description = (boost::format("%s%s") % description % as_header(_("Hint:"))).str();
+			description = (boost::format("%s%s") % description % as_header(_("Hint"))).str();
 			description = (boost::format("%s%s") % description % as_content(mapdata.hint)).str();
 		}
 
