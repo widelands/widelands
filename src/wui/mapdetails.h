@@ -42,7 +42,7 @@ public:
 
 private:
 	const int padding_;
-	int max_h_, descr_box_height_;
+	int max_h_;
 
 	UI::Box main_box_;
 	UI::Textarea name_label_;

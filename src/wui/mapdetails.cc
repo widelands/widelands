@@ -76,7 +76,6 @@ void MapDetails::clear() {
 
 void MapDetails::set_max_height(int new_height) {
 	max_h_ = new_height;
-	descr_box_height_ = max_h_ - name_label_.get_h() - padding_;
 	update_layout();
 }
 
@@ -85,13 +84,10 @@ void MapDetails::update_layout() {
 	if (suggested_teams_box_->is_visible()) {
 		suggested_teams_box_->set_pos(Point(0, max_h_ - suggested_teams_box_->get_h()));
 		main_box_.set_size(main_box_.get_w(), max_h_ - suggested_teams_box_->get_h() - padding_);
-		descr_.set_size(
-					descr_.get_w(),
-					descr_box_height_ - suggested_teams_box_->get_h() - padding_);
 	} else {
 		main_box_.set_size(main_box_.get_w(), max_h_);
-		descr_.set_size(descr_.get_w(), descr_box_height_);
 	}
+	descr_.set_size(descr_.get_w(), main_box_.get_h() - name_label_.get_h() - padding_);
 	descr_.scroll_to_top();
 }
 
