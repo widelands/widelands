@@ -686,7 +686,7 @@ void EditorInteractive::map_changed(const MapWas& action) {
 			redo_.set_enabled(false);
 
 			tools_.reset(new Tools());
-			select_tool(tools_->increase_height, EditorTool::First);
+			select_tool(tools_->info, EditorTool::First);
 			set_sel_radius(0);
 
 			set_need_save(false);
