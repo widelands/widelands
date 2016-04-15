@@ -41,7 +41,7 @@ public:
 	void update(const MapData& mapdata, bool localize_mapname);
 
 private:
-	const int padding_, max_w_;
+	const int padding_;
 	int max_h_, descr_box_height_;
 
 	UI::Box main_box_;

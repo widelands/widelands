@@ -52,22 +52,19 @@ MapDetails::MapDetails
 	UI::Panel(parent, x, y, max_w, max_h),
 
 	padding_(4),
-	max_w_(max_w),
-	max_h_(max_h),
-	main_box_(this, 0, 0, UI::Box::Vertical, max_w_, max_h_, 0),
-	name_label_(&main_box_, 0, 0, max_w_ - padding_, 0, ""),
-	descr_(&main_box_, 0, 0, max_w_, 20, "")
+	main_box_(this, 0, 0, UI::Box::Vertical, max_w, max_h, 0),
+	name_label_(&main_box_, 0, 0, max_w - padding_, 0, ""),
+	descr_(&main_box_, 0, 0, max_w, 20, ""),
+	suggested_teams_box_(new UI::SuggestedTeamsBox(this, 0, 0, UI::Box::Vertical, padding_, 0, 20, max_w, 20))
 {
 	name_label_.set_fontsize(UI_FONT_SIZE_SMALL + 2);
-	descr_box_height_ = max_h - name_label_.get_h() - 2 * padding_,
 	descr_.force_new_renderer();
-	suggested_teams_box_ =
-			new UI::SuggestedTeamsBox(this, 0, 0, UI::Box::Vertical, padding_, 0, 20, max_w_, 20);
 
 	main_box_.add(&name_label_, UI::Align::kLeft);
 	main_box_.add_space(padding_);
 	main_box_.add(&descr_, UI::Align::kLeft);
-	main_box_.add_space(padding_);
+	main_box_.set_size(max_w, max_h - name_label_.get_h() - padding_);
+	set_max_height(max_h);
 }
 
 
@@ -79,7 +76,7 @@ void MapDetails::clear() {
 
 void MapDetails::set_max_height(int new_height) {
 	max_h_ = new_height;
-	descr_box_height_ = max_h_ - name_label_.get_h() - 2 * padding_;
+	descr_box_height_ = max_h_ - name_label_.get_h() - padding_;
 	update_layout();
 }
 
@@ -87,12 +84,12 @@ void MapDetails::update_layout() {
 	// Adjust sizes for show / hide suggested teams
 	if (suggested_teams_box_->is_visible()) {
 		suggested_teams_box_->set_pos(Point(0, max_h_ - suggested_teams_box_->get_h()));
-		main_box_.set_size(max_w_, max_h_ - suggested_teams_box_->get_h());
+		main_box_.set_size(main_box_.get_w(), max_h_ - suggested_teams_box_->get_h() - padding_);
 		descr_.set_size(
 					descr_.get_w(),
 					descr_box_height_ - suggested_teams_box_->get_h() - padding_);
 	} else {
-		main_box_.set_size(max_w_, max_h_);
+		main_box_.set_size(main_box_.get_w(), max_h_);
 		descr_.set_size(descr_.get_w(), descr_box_height_);
 	}
 	descr_.scroll_to_top();
@@ -106,7 +103,7 @@ void MapDetails::update(const MapData& mapdata, bool localize_mapname) {
 		descr_.set_text((boost::format("<rt>%s%s</rt>")
 							  % as_header(_("Name:"))
 							  % as_content(mapdata.localized_name)).str());
-		main_box_.set_size(max_w_, max_h_);
+		main_box_.set_size(main_box_.get_w(), max_h_);
 	} else {
 		// Show map information
 		if (mapdata.maptype == MapData::MapType::kScenario) {
