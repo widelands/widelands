@@ -33,9 +33,7 @@
  */
 class MapDetails : public UI::Panel {
 public:
-	MapDetails(Panel * parent,
-				  int32_t x, int32_t y,
-				  int32_t max_x, int32_t max_y);
+	MapDetails(Panel* parent, int32_t x, int32_t y, int32_t max_w, int32_t max_h);
 
 	void clear();
 	void set_max_height(int new_height);
@@ -43,23 +41,12 @@ public:
 	void update(const MapData& mapdata, bool localize_mapname);
 
 private:
-	const int padding_, indent_, labelh_, max_w_;
+	const int padding_, labelh_, max_w_;
 	int max_h_, descr_box_height_;
 
 	UI::Box main_box_;
-
-	UI::Box name_box_;
 	UI::Textarea name_label_;
-	UI::MultilineTextarea name_;
-
-	UI::Box author_box_;
-	UI::Textarea author_label_;
-	UI::MultilineTextarea author_;
-
-	UI::Box descr_box_;
-	UI::Textarea descr_label_;
 	UI::MultilineTextarea descr_;
-
 	UI::SuggestedTeamsBox* suggested_teams_box_;
 };
 

@@ -28,6 +28,7 @@
 #include "base/wexception.h"
 #include "graphic/graphic.h"
 #include "graphic/text_constants.h"
+#include "graphic/font_handler1.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/game_controller.h"
 #include "logic/game_settings.h"
@@ -48,73 +49,40 @@ std::string as_content(const std::string& txt) {
 } // namespace
 
 MapDetails::MapDetails
-		(Panel* parent, int32_t x, int32_t y, int32_t max_x, int32_t max_y) :
-	UI::Panel(parent, x, y, max_x, max_y),
+		(Panel* parent, int32_t x, int32_t y, int32_t max_w, int32_t max_h) :
+	UI::Panel(parent, x, y, max_w, max_h),
 
 	padding_(4),
-	indent_(10),
-	labelh_(20),
-	max_w_(max_x),
-	max_h_(max_y),
-	// Subtract for main box and author box
-	descr_box_height_(max_y - 4 * labelh_ - 5 * padding_),
-
-	main_box_(this, 0, 0, UI::Box::Vertical,
-		  max_w_, max_h_, 0),
-
-	name_box_(&main_box_, 0, 0, UI::Box::Horizontal,
-		  max_w_, 3 * labelh_ + padding_, padding_ / 2),
+	labelh_(UI::g_fh1->render(as_uifont(UI::g_fh1->fontset()->representative_character()))->height() + 4),
+	max_w_(max_w),
+	max_h_(max_h),
+	// Subtract for name_label_
+	descr_box_height_(max_h - 1 * labelh_ - 2 * padding_),
+	main_box_(this, 0, 0, UI::Box::Vertical, max_w_, max_h_, 0),
 	name_label_(&main_box_, 0, 0, max_w_ - padding_, labelh_, ""),
-	name_(&name_box_, 0, 0, max_w_ - indent_, 2 * labelh_, ""),
-
-	author_box_(&main_box_, 0, 0, UI::Box::Horizontal,
-		  max_w_, 3 * labelh_ + padding_, padding_ / 2),
-	author_label_(&main_box_, 0, 0, max_w_ - padding_, labelh_, ""),
-	author_(&author_box_, 0, 0, max_w_ - indent_, labelh_, ""),
-
-	descr_box_(&main_box_, 0, 0, UI::Box::Horizontal,
-		  max_w_, descr_box_height_, padding_ / 2),
-	descr_label_(&main_box_, 0, 0, max_w_, labelh_, ""),
 	 // -1 to prevent cropping of scrollbar
-	descr_(&descr_box_, 0, 0, max_w_ - indent_ - 1, descr_box_height_ - labelh_ - padding_, "")
+	descr_(&main_box_, 0, 0, max_w_ - 1, descr_box_height_ - labelh_ - padding_, "")
 {
 	descr_.force_new_renderer();
 	suggested_teams_box_ = new UI::SuggestedTeamsBox(this, 0, 0, UI::Box::Vertical,
-																	 padding_, indent_, labelh_, max_w_, 4 * labelh_);
+																	 padding_, 0, labelh_, max_w_, 4 * labelh_);
 
 	main_box_.add(&name_label_, UI::Align::kLeft);
-	name_box_.add_space(indent_);
-	name_box_.add(&name_, UI::Align::kLeft);
-	main_box_.add(&name_box_, UI::Align::kLeft);
 	main_box_.add_space(padding_);
-
-	main_box_.add(&author_label_, UI::Align::kLeft);
-	author_box_.add_space(indent_);
-	author_box_.add(&author_, UI::Align::kLeft);
-	main_box_.add(&author_box_, UI::Align::kLeft);
-	main_box_.add_space(padding_);
-
-	main_box_.add(&descr_label_, UI::Align::kLeft);
-	descr_box_.add_space(indent_);
-	descr_box_.add(&descr_, UI::Align::kLeft);
-	main_box_.add(&descr_box_, UI::Align::kLeft);
+	main_box_.add(&descr_, UI::Align::kLeft);
 	main_box_.add_space(padding_);
 }
 
 
 void MapDetails::clear() {
 	name_label_.set_text("");
-	author_label_.set_text("");
-	descr_label_.set_text("");
-	name_.set_text("");
-	author_.set_text("");
 	descr_.set_text("");
 	suggested_teams_box_->hide();
 }
 
 void MapDetails::set_max_height(int new_height) {
 	max_h_ = new_height;
-	descr_box_height_ = max_h_ - 4 * labelh_ - 5 * padding_;
+	descr_box_height_ = max_h_ - 1 * labelh_ - 2 * padding_;
 	update_layout();
 }
 
@@ -123,14 +91,13 @@ void MapDetails::update_layout() {
 	if (suggested_teams_box_->is_visible()) {
 		suggested_teams_box_->set_pos(Point(0, max_h_ - suggested_teams_box_->get_h()));
 		main_box_.set_size(max_w_, max_h_ - suggested_teams_box_->get_h());
-		descr_box_.set_size(
-					descr_box_.get_w(),
+		descr_.set_size(
+					descr_.get_w(),
 					descr_box_height_ - suggested_teams_box_->get_h() - padding_);
 	} else {
 		main_box_.set_size(max_w_, max_h_);
-		descr_box_.set_size(descr_box_.get_w(), descr_box_height_);
+		descr_.set_size(descr_.get_w(), descr_box_height_);
 	}
-	descr_.set_size(descr_.get_w(), descr_box_.get_h() - descr_label_.get_h() - padding_);
 	descr_.scroll_to_top();
 }
 
@@ -138,21 +105,17 @@ void MapDetails::update(const MapData& mapdata, bool localize_mapname) {
 	clear();
 	if (mapdata.maptype == MapData::MapType::kDirectory) {
 		// Show directory information
+		name_label_.set_text(_("Directory"));
 		descr_.set_text((boost::format("<rt>%s</rt>") % as_content(mapdata.localized_name)).str());
-
-		name_label_.set_text(_("Directory:"));
-		name_.set_text(mapdata.localized_name);
-		name_.set_tooltip(_("The name of this directory"));
 		main_box_.set_size(max_w_, max_h_);
 	} else {
 		// Show map information
 		if (mapdata.maptype == MapData::MapType::kScenario) {
-			name_label_.set_text(_("Scenario:")); // NOCOM keep the name label
+			name_label_.set_text(_("Scenario"));
 		} else {
-			name_label_.set_text(_("Map:"));
+			name_label_.set_text(_("Map"));
 		}
 		std::string  description = as_content(localize_mapname ? mapdata.localized_name : mapdata.name);
-		name_.set_text(localize_mapname ? mapdata.localized_name : mapdata.name);
 		if (mapdata.localized_name != mapdata.name) {
 			if (localize_mapname) {
 				descr_.set_tooltip
@@ -172,10 +135,6 @@ void MapDetails::update(const MapData& mapdata, bool localize_mapname) {
 							  % description
 							  % as_header(ngettext("Author:", "Authors:", mapdata.authors.get_number()))).str();
 		description = (boost::format("%s%s") % description % as_content(mapdata.authors.get_names())).str();
-
-		author_label_.set_text(ngettext("Author:", "Authors:", mapdata.authors.get_number()));
-		author_.set_text(mapdata.authors.get_names());
-
 		description = (boost::format("%s%s") % description % as_header(_("Description:"))).str();
 		description = (boost::format("%s%s") % description % as_content(mapdata.description)).str();
 		if (!mapdata.hint.empty()) {
@@ -185,8 +144,6 @@ void MapDetails::update(const MapData& mapdata, bool localize_mapname) {
 		}
 		description = (boost::format("<rt>%s</rt>") % description).str();
 		descr_.set_text(description);
-
-		descr_label_.set_text(_("Description:"));
 
 		// Show / hide suggested teams
 		if (mapdata.suggested_teams.empty()) {
