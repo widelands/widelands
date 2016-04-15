@@ -53,11 +53,12 @@ MapDetails::MapDetails
 
 	padding_(4),
 	main_box_(this, 0, 0, UI::Box::Vertical, max_w, max_h, 0),
-	name_label_(&main_box_, 0, 0, max_w - padding_, 0, ""),
+	name_label_(&main_box_, 0, 0, max_w - padding_, 20, "", UI::Align::kLeft,
+					UI::MultilineTextarea::ScrollMode::kNoScrolling),
 	descr_(&main_box_, 0, 0, max_w, 20, ""),
 	suggested_teams_box_(new UI::SuggestedTeamsBox(this, 0, 0, UI::Box::Vertical, padding_, 0, max_w))
 {
-	name_label_.set_fontsize(UI_FONT_SIZE_SMALL + 2);
+	name_label_.force_new_renderer();
 	descr_.force_new_renderer();
 
 	main_box_.add(&name_label_, UI::Align::kLeft);
@@ -95,38 +96,33 @@ void MapDetails::update(const MapData& mapdata, bool localize_mapname) {
 	clear();
 	if (mapdata.maptype == MapData::MapType::kDirectory) {
 		// Show directory information
-		name_label_.set_text(_("Directory"));
-		descr_.set_text((boost::format("<rt>%s%s</rt>")
-							  % as_header(_("Name:"))
-							  % as_content(mapdata.localized_name)).str());
+		name_label_.set_text(as_uifont(mapdata.localized_name, UI_FONT_SIZE_SMALL + 2));
+		descr_.set_text((boost::format("<rt>%s</rt>") % as_header(_("Directory"))).str());
 		main_box_.set_size(main_box_.get_w(), max_h_);
 	} else {
-		// Show map information
-		if (mapdata.maptype == MapData::MapType::kScenario) {
-			name_label_.set_text(_("Scenario"));
-		} else {
-			name_label_.set_text(_("Map"));
-		}
-		std::string description = as_header(_("Name:"));
-		description = (boost::format("%s%s")
-							% description
-							% as_content(localize_mapname ? mapdata.localized_name : mapdata.name)).str();
+		name_label_.set_text(as_uifont(localize_mapname ? mapdata.localized_name : mapdata.name,
+												 UI_FONT_SIZE_SMALL + 2));
 
 		if (mapdata.localized_name != mapdata.name) {
 			if (localize_mapname) {
-				descr_.set_tooltip
+				name_label_.set_tooltip
 				/** TRANSLATORS: Tooltip in map description when translated map names are being displayed. */
 				/** TRANSLATORS: %s is the English name of the map. */
 						((boost::format(_("The original name of this map: %s"))
 						  % mapdata.name).str());
 			} else {
-				descr_.set_tooltip
+				name_label_.set_tooltip
 				/** TRANSLATORS: Tooltip in map description when map names are being displayed in English. */
 				/** TRANSLATORS: %s is the localized name of the map. */
 						((boost::format(_("The name of this map in your language: %s"))
 						  % mapdata.localized_name).str());
 			}
 		}
+
+		// Show map information
+		std::string description =
+				as_header(mapdata.maptype == MapData::MapType::kScenario ? _("Scenario") : _("Map"));
+
 		description = (boost::format("%s%s")
 							  % description
 							  % as_header(ngettext("Author:", "Authors:", mapdata.authors.get_number()))).str();

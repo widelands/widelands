@@ -23,7 +23,6 @@
 #include "ui_basic/box.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/panel.h"
-#include "ui_basic/textarea.h"
 #include "wui/mapdata.h"
 #include "wui/suggested_teams_box.h"
 
@@ -45,7 +44,7 @@ private:
 	int max_h_;
 
 	UI::Box main_box_;
-	UI::Textarea name_label_;
+	UI::MultilineTextarea name_label_;
 	UI::MultilineTextarea descr_;
 	UI::SuggestedTeamsBox* suggested_teams_box_;
 };
