@@ -66,7 +66,7 @@ MapDetails::MapDetails
 	main_box_.add(&name_label_, UI::Align::kLeft);
 	main_box_.add_space(padding_);
 	main_box_.add(&descr_, UI::Align::kLeft);
-	main_box_.set_size(max_w, max_h - name_label_.get_h() - padding_);
+	main_box_.set_size(max_w, max_h); // We need to initialize the width, set_max_height will set the height
 	set_max_height(max_h);
 }
 
