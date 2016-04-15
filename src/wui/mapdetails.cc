@@ -55,7 +55,7 @@ MapDetails::MapDetails
 	main_box_(this, 0, 0, UI::Box::Vertical, max_w, max_h, 0),
 	name_label_(&main_box_, 0, 0, max_w - padding_, 0, ""),
 	descr_(&main_box_, 0, 0, max_w, 20, ""),
-	suggested_teams_box_(new UI::SuggestedTeamsBox(this, 0, 0, UI::Box::Vertical, padding_, 0, 20, max_w, 20))
+	suggested_teams_box_(new UI::SuggestedTeamsBox(this, 0, 0, UI::Box::Vertical, padding_, 0, max_w))
 {
 	name_label_.set_fontsize(UI_FONT_SIZE_SMALL + 2);
 	descr_.force_new_renderer();

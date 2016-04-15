@@ -36,9 +36,8 @@ struct SuggestedTeamsBox : public UI::Box {
 	SuggestedTeamsBox(Panel * parent,
 							int32_t x, int32_t y,
 							uint32_t orientation,
-							int32_t padding, int32_t indent, int32_t label_height,
-							int32_t max_x = 0, int32_t max_y = 0,
-							uint32_t inner_spacing = 0);
+							int32_t padding, int32_t indent,
+							int32_t max_x = 0, int32_t max_y = 0);
 	~SuggestedTeamsBox();
 
 	void hide();
