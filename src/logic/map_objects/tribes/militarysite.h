@@ -43,7 +43,7 @@ public:
 	Building & create_object() const override;
 
 	uint32_t get_conquers() const override {return conquer_radius_;}
-	uint32_t get_max_number_of_soldiers () const {
+	Quantity get_max_number_of_soldiers () const {
 		return num_soldiers_;
 	}
 	uint32_t get_heal_per_second        () const {
@@ -60,7 +60,7 @@ public:
 
 private:
 	uint32_t conquer_radius_;
-	uint32_t num_soldiers_;
+	Quantity num_soldiers_;
 	uint32_t heal_per_second_;
 	DISALLOW_COPY_AND_ASSIGN(MilitarySiteDescr);
 };
@@ -93,10 +93,10 @@ public:
 	// Begin implementation of SoldierControl
 	std::vector<Soldier *> present_soldiers() const override;
 	std::vector<Soldier *> stationed_soldiers() const override;
-	uint32_t min_soldier_capacity() const override;
-	uint32_t max_soldier_capacity() const override;
-	uint32_t soldier_capacity() const override;
-	void set_soldier_capacity(uint32_t capacity) override;
+	Quantity min_soldier_capacity() const override;
+	Quantity max_soldier_capacity() const override;
+	Quantity soldier_capacity() const override;
+	void set_soldier_capacity(Quantity capacity) override;
 	void drop_soldier(Soldier &) override;
 	int incorporate_soldier(EditorGameBase & game, Soldier & s) override;
 
@@ -158,7 +158,7 @@ private:
 	std::unique_ptr<Request> normal_soldier_request_;  // filling the site
 	std::unique_ptr<Request> upgrade_soldier_request_; // seeking for better soldiers
 	bool didconquer_;
-	uint32_t capacity_;
+	Quantity capacity_;
 
 	/**
 	 * Next gametime where we should heal something.

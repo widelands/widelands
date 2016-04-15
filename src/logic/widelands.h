@@ -64,6 +64,8 @@ constexpr DescriptionIndex kNoResource = INVALID_INDEX - 1;
 
 using ResourceAmount = uint8_t; /// 4 bits used, so 0 .. 15.
 
+using Quantity = uint32_t; // e.g. the number of a type of ware in a warehouse.
+
 using Vision = uint16_t;
 
 using Time = int32_t; // TODO(unknown): should be unsigned

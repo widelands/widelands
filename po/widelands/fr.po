@@ -7,7 +7,7 @@
 # GunChleoc, 2016
 # hugues martin, 2015
 # Jaypad <ju-ju@nataju.fr>, 2015-2016
-# Renaud Bouchard, 2015
+# Renaud Bouchard, 2015-2016
 # syl_, 2016
 # Tubuntu <tubuntu@testimonium.be>, 2015
 # wl-zocker, 2015
@@ -15,9 +15,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-04-07 14:12+0000\n"
-"PO-Revision-Date: 2016-04-07 14:13+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2016-04-09 07:23+0000\n"
+"PO-Revision-Date: 2016-04-11 13:32+0000\n"
+"Last-Translator: Renaud Bouchard\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -211,8 +211,8 @@ msgstr "Nov"
 msgid "Dec"
 msgstr "Déc"
 
-#: ../../src/editor/editorinteractive.cc:75 ../../src/logic/game.cc:224
-#: ../../src/logic/game.cc:284
+#: ../../src/editor/editorinteractive.cc:75 ../../src/logic/game.cc:227
+#: ../../src/logic/game.cc:287
 msgid "Loading tribes"
 msgstr "Chargement des tribus"
 
@@ -274,8 +274,8 @@ msgid ""
 "incompatible."
 msgstr "Widelands n'a pas pu charger le fichier \"%s\". Le format de fichier semble être incompatible."
 
-#: ../../src/editor/editorinteractive.cc:238 ../../src/logic/game.cc:228
-#: ../../src/logic/game.cc:291
+#: ../../src/editor/editorinteractive.cc:238 ../../src/logic/game.cc:231
+#: ../../src/logic/game.cc:294
 msgid "Creating players"
 msgstr "Création des joueurs"
 
@@ -494,7 +494,7 @@ msgstr "Cliquer pour sélectionner un objet. Utiliser la touche Ctrl pour sélec
 
 #. * TRANSLATORS: %s are the currently selected items in an editor tool
 #: ../../src/editor/ui_menus/categorized_item_selection_menu.h:191
-#: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:176
+#: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:171
 #, c-format
 msgid "Current: %s"
 msgstr "Actuel: %s ..."
@@ -770,7 +770,7 @@ msgstr "Génération d'une carte aléatoire..."
 #. created in the editor.
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:469
 msgid "Random Map"
-msgstr ""
+msgstr "Carte aléatoire"
 
 #. * TRANSLATORS: This is shown after a random map has been created in the
 #. editor.
@@ -782,7 +782,7 @@ msgid ""
 "The map has been generated. Please double-check the player starting "
 "positions to make sure that your carriers won’t drown, or be stuck on an "
 "island or on top of a mountain."
-msgstr ""
+msgstr "La carte a été généré. Veuillez vérifier les positions de départs des joueurs pour vous assurer que vos porteurs ne se noieront pas, ne seront pas coincés sur une île ou au sommet d'une montagne. "
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:61
 #: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:28
@@ -862,73 +862,58 @@ msgid ""
 "animals that depend on this player and try again."
 msgstr "Ne peut enlever le joueur. Il est référencé quelque part. Enlevez les constructions et les animaux qui dépendent de ce jouer et ré-essayez."
 
-#: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:39
+#: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:37
 msgid "Height Tools Options"
 msgstr "Options Outils de Hauteur"
 
-#: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:44
+#: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:42
 #: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:58
 msgid "Increase/Decrease Value:"
-msgstr ""
+msgstr "Augmenter/Diminuer la valeur :"
 
-#: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:49
+#: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:47
 #: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:63
-#: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:58
+#: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:56
 msgid "Set Value:"
-msgstr ""
+msgstr "Définir la Valeur:"
 
 #. * TRANSLATORS: Editor change height access keys. *
-#. * TRANSLATORS: Editor change resources access keys. *
-#: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:55
-#: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:72
-#, c-format
-msgid "Use %s to increase, %s to decrease"
-msgstr ""
-
-#. * TRANSLATORS: This is an access key combination. Localize, but do not
-#. change the key. *
-#: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:57
-#: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:74
-msgid "Click"
-msgstr ""
-
-#. * TRANSLATORS: This is an access key combination. Localize, but do not
-#. change the key. *
-#: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:59
-#: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:76
-msgid "Shift + Click"
-msgstr ""
+#: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:53
+msgid ""
+"Click on the map to increase, Shift + Click on the map to decrease terrain "
+"height"
+msgstr "Cliquez sur la carte pour augmenter, Shift+Click sur la carte pour diminuer l'élévation du terrain"
 
 #. * TRANSLATORS: Editor set height access key. *
-#. * TRANSLATORS: Editor set resources access key. *
-#. * TRANSLATORS: Editor set hoise height access keys. *
-#: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:62
-#: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:79
-#: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:70
-#, c-format
-msgid "Use %s to set to this value"
-msgstr ""
-
-#. * TRANSLATORS: This is an access key combination. Localize, but do not
-#. change the key. *
-#: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:64
-#: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:81
-#: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:72
-msgid "Ctrl + Click"
-msgstr ""
+#: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:56
+#: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:68
+msgid "Ctrl + Click on the map to set terrain height"
+msgstr "Ctrl+Click sur la carte pour définir l'élévation hauteur du terrain"
 
 #: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:53
 #: ../../src/editor/ui_menus/tool_menu.cc:71
 msgid "Resources"
 msgstr "Ressources"
 
+#. * TRANSLATORS: Editor change rseources access keys. *
+#: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:72
+msgid ""
+"Click on the map to increase, Shift + Click on the map to decrease the "
+"amount of the selected resource"
+msgstr "Cliquez sur la carte pour augmenter, Shift+Click sur la carte pour diminuer la quantité de ressource sélectionné"
+
+#. * TRANSLATORS: Editor set rseources access key. *
+#: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:76
+msgid "Ctrl + Click on the map to set the amount of the selected resource"
+msgstr "Ctrl+Click sur la carte pour définir la quantité de ressource sélectionné"
+
 #: ../../src/editor/ui_menus/tool_menu.cc:66
 msgid "Change height"
 msgstr "Changer la hauteur"
 
 #: ../../src/editor/ui_menus/tool_menu.cc:67
-msgid "Noise height"
-msgstr "Niveau de Bruit"
+msgid "Random height"
+msgstr "Elévation aléatoire"
 
 #: ../../src/editor/ui_menus/tool_menu.cc:68 ../../src/wui/minimap.cc:143
 msgid "Terrain"
@@ -954,36 +939,38 @@ msgid ""
 "top-left corner of a generated minimap."
 msgstr "Définissez la position qui aura les coordonnées (0, 0). Ce point sera le coin supérieur gauche de la mini-carte."
 
-#: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:43
-msgid "Noise Height Options"
-msgstr "Options Niveau de Bruit"
+#: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:41
+msgid "Random Height Options"
+msgstr "Options d'élévation aléatoire"
 
-#: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:48
+#: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:46
 msgid "Minimum Height:"
-msgstr ""
+msgstr "Elévation minimum:"
 
-#: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:53
+#: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:51
 msgid "Maximum Height:"
-msgstr ""
+msgstr "Elévation maximum:"
 
-#. * TRANSLATORS: Editor noise height access keys. *
-#: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:64
-#: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:67
-msgid "Click to set the height to a random value within the specified range"
-msgstr ""
+#. * TRANSLATORS: Editor random height access key. *
+#: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:62
+#: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:65
+msgid ""
+"Click on the map to set terrain height to a random value within the "
+"specified range"
+msgstr "CLiquez sur la carte pour définir l'élévation du terrain de manière aléatoire dans les limites spécifiés"
 
-#: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:84
+#: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:80
 msgid "Random Height"
-msgstr ""
+msgstr "Elévation aléatoire"
 
-#: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:91
+#: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:87
 msgid "Fixed Height"
-msgstr ""
+msgstr "Elévation fixe"
 
 #. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:81
 msgid "%1%: %2%"
-msgstr ""
+msgstr "%1%: %2%"
 
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:95
 msgid "Terrain Select"
@@ -1003,40 +990,33 @@ msgstr "Chargement des graphiques"
 msgid "Not set"
 msgstr "Non défini"
 
-#: ../../src/logic/game.cc:216 ../../src/logic/game.cc:271
-#: ../../src/logic/game.cc:355 ../../src/logic/game.cc:381
+#: ../../src/logic/game.cc:219 ../../src/logic/game.cc:274
+#: ../../src/logic/game.cc:358 ../../src/logic/game.cc:388
 msgid "Preloading map"
 msgstr "Pré-chargement de la carte"
 
-#: ../../src/logic/game.cc:222 ../../src/logic/game.cc:281
+#: ../../src/logic/game.cc:225 ../../src/logic/game.cc:284
 msgid "Loading world"
 msgstr "Chargement des données du monde"
 
-#: ../../src/logic/game.cc:238 ../../src/logic/game.cc:338
-#: ../../src/ui_fsmenu/launch_mpg.cc:292 ../../src/ui_fsmenu/launch_spg.cc:240
-#: ../../src/ui_fsmenu/mapselect.cc:101
-#: ../../src/wui/multiplayersetupgroup.cc:368
-msgid "Scenario"
-msgstr "Scénario"
-
-#: ../../src/logic/game.cc:244 ../../src/logic/game.cc:324
+#: ../../src/logic/game.cc:247 ../../src/logic/game.cc:327
 msgid "Loading map…"
 msgstr "Chargement de la carte..."
 
-#: ../../src/logic/game.cc:366 ../../src/logic/game.cc:399
+#: ../../src/logic/game.cc:373 ../../src/logic/game.cc:410
 #: ../../src/ui_basic/progresswindow.cc:50 ../../src/wlapplication.cc:1367
 msgid "Loading…"
 msgstr "Chargement..."
 
-#: ../../src/logic/game.cc:463
+#: ../../src/logic/game.cc:474
 msgid "Creating player infrastructure"
 msgstr "Création de l'infrastructure des joueurs"
 
-#: ../../src/logic/game.cc:473 ../../src/logic/player.cc:245
+#: ../../src/logic/game.cc:486 ../../src/logic/player.cc:245
 msgid "Missing starting position"
 msgstr "Manque position de départ"
 
-#: ../../src/logic/game.cc:475 ../../src/logic/player.cc:247
+#: ../../src/logic/game.cc:488 ../../src/logic/player.cc:247
 #, c-format
 msgid ""
 "Widelands could not start the game, because player %u has no starting position.\n"
@@ -1377,34 +1357,34 @@ msgstr "Un navire d'expédition attend vos ordres."
 #: ../../src/logic/map_objects/tribes/ship.cc:960
 msgctxt "ship_state"
 msgid "Shipping"
-msgstr ""
+msgstr "Livraison"
 
 #. * TRANSLATORS: This is a ship state. An expedition is waiting for your
 #. commands.
 #: ../../src/logic/map_objects/tribes/ship.cc:964
 msgctxt "ship_state"
 msgid "Waiting"
-msgstr ""
+msgstr "Attente"
 
 #. * TRANSLATORS: This is a ship state. An expedition is scouting for port
 #. spaces.
 #: ../../src/logic/map_objects/tribes/ship.cc:968
 msgctxt "ship_state"
 msgid "Scouting"
-msgstr ""
+msgstr "Explore"
 
 #. * TRANSLATORS: This is a ship state. An expedition has found a port space.
 #: ../../src/logic/map_objects/tribes/ship.cc:972
 msgctxt "ship_state"
 msgid "Port Space Found"
-msgstr ""
+msgstr "Espace portuaire trouvé"
 
 #. * TRANSLATORS: This is a ship state. An expedition is unloading
 #. wares/workers to build a port.
 #: ../../src/logic/map_objects/tribes/ship.cc:976
 msgctxt "ship_state"
 msgid "Founding a Colony"
-msgstr ""
+msgstr "Fonde une colonie"
 
 #: ../../src/logic/map_objects/tribes/soldier.cc:1485
 #: ../../src/logic/map_objects/tribes/soldier.cc:1496
@@ -2111,20 +2091,20 @@ msgstr "Augmenter la valeur par 10"
 #, c-format
 msgid "%d minute"
 msgid_plural "%d minutes"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d minute"
+msgstr[1] "%d minutes"
 
 #. * TRANSLATORS: A spinbox unit
 #: ../../src/ui_basic/spinbox.cc:332
 #, c-format
 msgid "%d pixel"
 msgid_plural "%d pixels"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d pixel"
+msgstr[1] "%d pixels"
 
 #: ../../src/ui_fsmenu/about.cc:39 ../../src/ui_fsmenu/main.cc:55
 msgid "About Widelands"
-msgstr ""
+msgstr "A propos de Widelands"
 
 #: ../../src/ui_fsmenu/about.cc:47 ../../src/wui/watchwindow.cc:142
 msgid "Close"
@@ -2436,6 +2416,12 @@ msgstr "(pas de carte)"
 msgid "The host has not yet selected a map or saved game."
 msgstr "L'hôte n'a pas encore sélectionné de carte ou de sauvegarde."
 
+#: ../../src/ui_fsmenu/launch_mpg.cc:292 ../../src/ui_fsmenu/launch_spg.cc:240
+#: ../../src/ui_fsmenu/mapselect.cc:101
+#: ../../src/wui/multiplayersetupgroup.cc:368
+msgid "Scenario"
+msgstr "Scénario"
+
 #: ../../src/ui_fsmenu/launch_mpg.cc:294 ../../src/ui_fsmenu/launch_spg.cc:242
 msgid "Win condition is set through the scenario"
 msgstr "Condition de victoire déterminée dans le scénario"
@@ -2712,7 +2698,7 @@ msgstr "%2% %1%, %3%"
 #. * TRANSLATORS: A tooltip will explain the abbreviation.
 #. * TRANSLATORS: Make sure that this translation is consistent with the
 #. tooltip.
-#: ../../src/ui_fsmenu/loadgame.cc:552
+#: ../../src/ui_fsmenu/loadgame.cc:549
 msgid "SP"
 msgstr "SP"
 
@@ -2722,7 +2708,7 @@ msgstr "SP"
 #. * TRANSLATORS: Make sure that this translation is consistent with the
 #. tooltip.
 #. * TRANSLATORS: %1% is the number of players
-#: ../../src/ui_fsmenu/loadgame.cc:560
+#: ../../src/ui_fsmenu/loadgame.cc:557
 msgid "H (%1%)"
 msgstr "H (%1%)"
 
@@ -2732,25 +2718,25 @@ msgstr "H (%1%)"
 #. * TRANSLATORS: Make sure that this translation is consistent with the
 #. tooltip.
 #. * TRANSLATORS: %1% is the number of players
-#: ../../src/ui_fsmenu/loadgame.cc:569
+#: ../../src/ui_fsmenu/loadgame.cc:566
 msgid "MP (%1%)"
 msgstr "MP (%1%)"
 
 #. * TRANSLATORS: Error message introduction for when an old savegame can't be
 #. loaded
-#: ../../src/ui_fsmenu/loadgame.cc:586
+#: ../../src/ui_fsmenu/loadgame.cc:583
 msgid ""
 "This file has the wrong format and can’t be loaded. Maybe it was created "
 "with an older version of Widelands."
 msgstr "Ce fichier n'est pas au bon format et ne peut être chargé. Il a peut-être été créé avec une vieille version de Widelands."
 
 #. * TRANSLATORS: This text is on a separate line with an error message below
-#: ../../src/ui_fsmenu/loadgame.cc:589
+#: ../../src/ui_fsmenu/loadgame.cc:586
 msgid "Error message:"
 msgstr "Message d'erreur:"
 
 #. * TRANSLATORS: Prefix for incompatible files in load game screens
-#: ../../src/ui_fsmenu/loadgame.cc:602 ../../src/ui_fsmenu/loadgame.cc:604
+#: ../../src/ui_fsmenu/loadgame.cc:599 ../../src/ui_fsmenu/loadgame.cc:601
 #, c-format
 msgid "Incompatible: %s"
 msgstr "Incompatible: %s"
@@ -2952,7 +2938,7 @@ msgstr "Nombre maximal de sauvegardes automatiques:"
 
 #: ../../src/ui_fsmenu/options.cc:196
 msgid "Compress widelands data files (maps, replays and savegames)"
-msgstr ""
+msgstr "Compresse les fichiers de données de Widelands (cartes, replays et sauvegardes) "
 
 #: ../../src/ui_fsmenu/options.cc:198
 msgid "Write syncstreams in network games to debug desyncs"
@@ -3077,11 +3063,11 @@ msgstr "Couler le bateau?"
 #: ../../src/wui/actionconfirm.cc:356
 #, c-format
 msgid "Do you really want to sink %s?"
-msgstr ""
+msgstr "Voulez-vous réellement couler %s?"
 
 #: ../../src/wui/actionconfirm.cc:398
 msgid "Cancel expedition?"
-msgstr ""
+msgstr "Annuler l'expédition ?"
 
 #: ../../src/wui/actionconfirm.cc:399
 msgid "Do you really want to cancel the active expedition?"
@@ -3904,16 +3890,16 @@ msgstr "La tribu sera définie aléatoirement."
 msgctxt "unit_narrow"
 msgid "%1%d"
 msgid_plural "%1%d"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1%d"
+msgstr[1] "%1%d"
 
 #. * TRANSLATORS: hour(s). Keep this as short as possible. Used in statistics.
 #: ../../src/wui/plot_area.cc:128
 msgctxt "unit_narrow"
 msgid "%1%h"
 msgid_plural "%1%h"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1%h"
+msgstr[1] "%1%h"
 
 #. * TRANSLATORS: minute(s). Keep this as short as possible. Used in
 #. statistics.
@@ -3921,26 +3907,26 @@ msgstr[1] ""
 msgctxt "unit_narrow"
 msgid "%1%m"
 msgid_plural "%1%m"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1%m"
+msgstr[1] "%1%m"
 
 #. * TRANSLATORS: Generic unit label. Used in statistics.
 #: ../../src/wui/plot_area.cc:140
 msgctxt "unit_generic"
 msgid "days"
-msgstr ""
+msgstr "jours"
 
 #. * TRANSLATORS: Generic unit label. Used in statistics.
 #: ../../src/wui/plot_area.cc:143
 msgctxt "unit_generic"
 msgid "hours"
-msgstr ""
+msgstr "heures"
 
 #. * TRANSLATORS: Generic unit label. Used in statistics.
 #: ../../src/wui/plot_area.cc:146
 msgctxt "unit_generic"
 msgid "minutes"
-msgstr ""
+msgstr "minutes"
 
 #: ../../src/wui/plot_area.cc:319
 msgid "game"

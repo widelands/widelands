@@ -52,7 +52,7 @@ public:
 	struct Tools {
 		Tools()
 			:
-			current_pointer(&increase_height),
+			current_pointer(&info),
 			use_tool(EditorTool::First),
 			increase_height(decrease_height, set_height),
 			noise_height(set_height),
@@ -64,9 +64,9 @@ public:
 		{}
 		EditorTool & current() const {return *current_pointer;}
 		using ToolVector = std::vector<EditorTool *>;
-		EditorTool          *          current_pointer;
-		EditorTool::ToolIndex         use_tool;
-		EditorInfoTool                info;
+		EditorTool          *        current_pointer;
+		EditorTool::ToolIndex        use_tool;
+		EditorInfoTool               info;
 		EditorSetHeightTool          set_height;
 		EditorDecreaseHeightTool     decrease_height;
 		EditorIncreaseHeightTool     increase_height;
@@ -74,14 +74,14 @@ public:
 		EditorSetTerrainTool         set_terrain;
 		EditorDeleteImmovableTool    delete_immovable;
 		EditorPlaceImmovableTool     place_immovable;
-		EditorSetStartingPosTool    set_starting_pos;
+		EditorSetStartingPosTool     set_starting_pos;
 		EditorDeleteBobTool          delete_bob;
 		EditorPlaceBobTool           place_bob;
 		EditorDecreaseResourcesTool  decrease_resources;
 		EditorSetResourcesTool       set_resources;
 		EditorIncreaseResourcesTool  increase_resources;
-		EditorSetPortSpaceTool      set_port_space;
-		EditorUnsetPortSpaceTool    unset_port_space;
+		EditorSetPortSpaceTool       set_port_space;
+		EditorUnsetPortSpaceTool     unset_port_space;
 		EditorSetOriginTool          set_origin;
 		EditorMakeInfrastructureTool make_infrastructure;
 	};

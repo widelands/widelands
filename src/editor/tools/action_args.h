@@ -50,18 +50,19 @@ struct EditorActionArgs {
 
 	int32_t change_by;                                                  // resources, change height tools
 	std::list<Widelands::Field::Height> original_heights;               // change height tool
-	uint8_t current_resource, set_to;                                   // resources change tools
+	Widelands::DescriptionIndex current_resource;                       // resources change tools
+	Widelands::ResourceAmount set_to;                                   // resources change tools
 
 	struct ResourceState {
 		Widelands::FCoords location;
-		uint8_t idx;
-		uint8_t amount;
+		Widelands::DescriptionIndex idx;
+		Widelands::ResourceAmount amount;
 	};
 
 	std::list<ResourceState> original_resource;                         // resources set tool
 	std::list<const Widelands::BobDescr *> old_bob_type, new_bob_type;  // bob change tools
 	std::list<std::string> old_immovable_types;                         // immovable change tools
-	std::list<int32_t> new_immovable_types;                             // immovable change tools
+	std::list<Widelands::DescriptionIndex> new_immovable_types;         // immovable change tools
 	Widelands::HeightInterval interval;                                 // noise height tool
 	std::list<Widelands::DescriptionIndex> terrain_type, original_terrain_type; // set terrain tool
 

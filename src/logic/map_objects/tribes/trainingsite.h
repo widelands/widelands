@@ -38,7 +38,7 @@ public:
 
 	Building & create_object() const override;
 
-	uint32_t get_max_number_of_soldiers() const {
+	Quantity get_max_number_of_soldiers() const {
 		return num_soldiers_;
 	}
 	bool get_train_health () const {return train_health_;}
@@ -85,7 +85,7 @@ private:
 	//  struct and there should be a vector, indexed by Soldier_Index,
 	//  with that struct structs as element type.
 	/** Maximum number of soldiers for a training site*/
-	uint32_t num_soldiers_;
+	Quantity num_soldiers_;
 	/** Number of rounds w/o successful training, after which a soldier is kicked out.**/
 	uint32_t max_stall_;
 	/** Whether this site can train health*/
@@ -180,10 +180,10 @@ public:
 	// Begin implementation of SoldierControl
 	std::vector<Soldier *> present_soldiers() const override;
 	std::vector<Soldier *> stationed_soldiers() const override;
-	uint32_t min_soldier_capacity() const override;
-	uint32_t max_soldier_capacity() const override;
-	uint32_t soldier_capacity() const override;
-	void set_soldier_capacity(uint32_t capacity) override;
+	Quantity min_soldier_capacity() const override;
+	Quantity max_soldier_capacity() const override;
+	Quantity soldier_capacity() const override;
+	void set_soldier_capacity(Quantity capacity) override;
 	void drop_soldier(Soldier &) override;
 	int incorporate_soldier(EditorGameBase &, Soldier &) override;
 	// End implementation of SoldierControl
@@ -226,7 +226,7 @@ private:
 	 * There is no guarantee there really are capacity_ soldiers in the
 	 * building - some of them might still be under way or even not yet
 	 * available*/
-	uint32_t capacity_;
+	Quantity capacity_;
 
 	/** True, \b always upgrade already experienced soldiers first, when possible
 	 * False, \b always upgrade inexperienced soldiers first, when possible */

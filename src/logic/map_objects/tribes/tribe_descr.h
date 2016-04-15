@@ -122,7 +122,7 @@ public:
 	const RoadTextures& road_textures() const;
 
 	DescriptionIndex get_resource_indicator
-		(const ResourceDescription * const res, const uint32_t amount) const;
+		(const ResourceDescription * const res, const ResourceAmount amount) const;
 
 	// Returns the initalization at 'index' (which must not be out of bounds).
 	const TribeBasicInfo::Initialization& initialization(const uint8_t index) const {

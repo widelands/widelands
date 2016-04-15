@@ -24,6 +24,8 @@
 
 #include <stdint.h>
 
+#include "logic/widelands.h"
+
 namespace Widelands {
 
 struct FCoords;
@@ -161,23 +163,23 @@ private:
 
 /// Accepts a node if it has at least one of the given resource.
 struct FindNodeResource {
-	FindNodeResource(uint8_t res) : resource(res) {}
+	FindNodeResource(DescriptionIndex res) : resource(res) {}
 
 	bool accept(const Map &, const FCoords &) const;
 
 private:
-	uint8_t resource;
+	DescriptionIndex resource;
 };
 
 
 /// Accepts a node if it has the given resource type and remaining capacity.
 struct FindNodeResourceBreedable {
-	FindNodeResourceBreedable(uint8_t res) : resource(res) {}
+	FindNodeResourceBreedable(DescriptionIndex res) : resource(res) {}
 
 	bool accept(const Map &, const FCoords &) const;
 
 private:
-	uint8_t resource;
+	DescriptionIndex resource;
 };
 
 /// Accepts a node if it is a shore node in the sense that it is walkable

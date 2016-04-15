@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-04-07 14:12+0000\n"
-"PO-Revision-Date: 2016-04-07 14:13+0000\n"
+"POT-Creation-Date: 2016-04-09 07:23+0000\n"
+"PO-Revision-Date: 2016-04-09 07:24+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Vietnamese (http://www.transifex.com/widelands/widelands/language/vi/)\n"
 "MIME-Version: 1.0\n"
@@ -203,8 +203,8 @@ msgstr ""
 msgid "Dec"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:75 ../../src/logic/game.cc:224
-#: ../../src/logic/game.cc:284
+#: ../../src/editor/editorinteractive.cc:75 ../../src/logic/game.cc:227
+#: ../../src/logic/game.cc:287
 msgid "Loading tribes"
 msgstr ""
 
@@ -266,8 +266,8 @@ msgid ""
 "incompatible."
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:238 ../../src/logic/game.cc:228
-#: ../../src/logic/game.cc:291
+#: ../../src/editor/editorinteractive.cc:238 ../../src/logic/game.cc:231
+#: ../../src/logic/game.cc:294
 msgid "Creating players"
 msgstr ""
 
@@ -486,7 +486,7 @@ msgstr ""
 
 #. * TRANSLATORS: %s are the currently selected items in an editor tool
 #: ../../src/editor/ui_menus/categorized_item_selection_menu.h:191
-#: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:176
+#: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:171
 #, c-format
 msgid "Current: %s"
 msgstr ""
@@ -853,59 +853,32 @@ msgid ""
 "animals that depend on this player and try again."
 msgstr ""
 
-#: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:39
+#: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:37
 msgid "Height Tools Options"
 msgstr ""
 
-#: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:44
+#: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:42
 #: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:58
 msgid "Increase/Decrease Value:"
 msgstr ""
 
-#: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:49
+#: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:47
 #: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:63
-#: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:58
+#: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:56
 msgid "Set Value:"
 msgstr ""
 
 #. * TRANSLATORS: Editor change height access keys. *
-#. * TRANSLATORS: Editor change resources access keys. *
-#: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:55
-#: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:72
-#, c-format
-msgid "Use %s to increase, %s to decrease"
-msgstr ""
-
-#. * TRANSLATORS: This is an access key combination. Localize, but do not
-#. change the key. *
-#: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:57
-#: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:74
-msgid "Click"
-msgstr ""
-
-#. * TRANSLATORS: This is an access key combination. Localize, but do not
-#. change the key. *
-#: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:59
-#: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:76
-msgid "Shift + Click"
+#: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:53
+msgid ""
+"Click on the map to increase, Shift + Click on the map to decrease terrain "
+"height"
 msgstr ""
 
 #. * TRANSLATORS: Editor set height access key. *
-#. * TRANSLATORS: Editor set resources access key. *
-#. * TRANSLATORS: Editor set hoise height access keys. *
-#: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:62
-#: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:79
-#: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:70
-#, c-format
-msgid "Use %s to set to this value"
-msgstr ""
-
-#. * TRANSLATORS: This is an access key combination. Localize, but do not
-#. change the key. *
-#: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:64
-#: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:81
-#: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:72
-msgid "Ctrl + Click"
+#: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:56
+#: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:68
+msgid "Ctrl + Click on the map to set terrain height"
 msgstr ""
 
 #: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:53
@@ -913,12 +886,24 @@ msgstr ""
 msgid "Resources"
 msgstr ""
 
+#. * TRANSLATORS: Editor change rseources access keys. *
+#: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:72
+msgid ""
+"Click on the map to increase, Shift + Click on the map to decrease the "
+"amount of the selected resource"
+msgstr ""
+
+#. * TRANSLATORS: Editor set rseources access key. *
+#: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:76
+msgid "Ctrl + Click on the map to set the amount of the selected resource"
+msgstr ""
+
 #: ../../src/editor/ui_menus/tool_menu.cc:66
 msgid "Change height"
 msgstr ""
 
 #: ../../src/editor/ui_menus/tool_menu.cc:67
-msgid "Noise height"
+msgid "Random height"
 msgstr ""
 
 #: ../../src/editor/ui_menus/tool_menu.cc:68 ../../src/wui/minimap.cc:143
@@ -945,29 +930,31 @@ msgid ""
 "top-left corner of a generated minimap."
 msgstr ""
 
-#: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:43
-msgid "Noise Height Options"
+#: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:41
+msgid "Random Height Options"
 msgstr ""
 
-#: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:48
+#: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:46
 msgid "Minimum Height:"
 msgstr ""
 
-#: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:53
+#: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:51
 msgid "Maximum Height:"
 msgstr ""
 
-#. * TRANSLATORS: Editor noise height access keys. *
-#: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:64
-#: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:67
-msgid "Click to set the height to a random value within the specified range"
+#. * TRANSLATORS: Editor random height access key. *
+#: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:62
+#: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:65
+msgid ""
+"Click on the map to set terrain height to a random value within the "
+"specified range"
 msgstr ""
 
-#: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:84
+#: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:80
 msgid "Random Height"
 msgstr ""
 
-#: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:91
+#: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:87
 msgid "Fixed Height"
 msgstr ""
 
@@ -994,40 +981,33 @@ msgstr ""
 msgid "Not set"
 msgstr ""
 
-#: ../../src/logic/game.cc:216 ../../src/logic/game.cc:271
-#: ../../src/logic/game.cc:355 ../../src/logic/game.cc:381
+#: ../../src/logic/game.cc:219 ../../src/logic/game.cc:274
+#: ../../src/logic/game.cc:358 ../../src/logic/game.cc:388
 msgid "Preloading map"
 msgstr ""
 
-#: ../../src/logic/game.cc:222 ../../src/logic/game.cc:281
+#: ../../src/logic/game.cc:225 ../../src/logic/game.cc:284
 msgid "Loading world"
 msgstr ""
 
-#: ../../src/logic/game.cc:238 ../../src/logic/game.cc:338
-#: ../../src/ui_fsmenu/launch_mpg.cc:292 ../../src/ui_fsmenu/launch_spg.cc:240
-#: ../../src/ui_fsmenu/mapselect.cc:101
-#: ../../src/wui/multiplayersetupgroup.cc:368
-msgid "Scenario"
-msgstr ""
-
-#: ../../src/logic/game.cc:244 ../../src/logic/game.cc:324
+#: ../../src/logic/game.cc:247 ../../src/logic/game.cc:327
 msgid "Loading map…"
 msgstr ""
 
-#: ../../src/logic/game.cc:366 ../../src/logic/game.cc:399
+#: ../../src/logic/game.cc:373 ../../src/logic/game.cc:410
 #: ../../src/ui_basic/progresswindow.cc:50 ../../src/wlapplication.cc:1367
 msgid "Loading…"
 msgstr ""
 
-#: ../../src/logic/game.cc:463
+#: ../../src/logic/game.cc:474
 msgid "Creating player infrastructure"
 msgstr ""
 
-#: ../../src/logic/game.cc:473 ../../src/logic/player.cc:245
+#: ../../src/logic/game.cc:486 ../../src/logic/player.cc:245
 msgid "Missing starting position"
 msgstr ""
 
-#: ../../src/logic/game.cc:475 ../../src/logic/player.cc:247
+#: ../../src/logic/game.cc:488 ../../src/logic/player.cc:247
 #, c-format
 msgid ""
 "Widelands could not start the game, because player %u has no starting position.\n"
@@ -2410,6 +2390,12 @@ msgstr ""
 msgid "The host has not yet selected a map or saved game."
 msgstr ""
 
+#: ../../src/ui_fsmenu/launch_mpg.cc:292 ../../src/ui_fsmenu/launch_spg.cc:240
+#: ../../src/ui_fsmenu/mapselect.cc:101
+#: ../../src/wui/multiplayersetupgroup.cc:368
+msgid "Scenario"
+msgstr ""
+
 #: ../../src/ui_fsmenu/launch_mpg.cc:294 ../../src/ui_fsmenu/launch_spg.cc:242
 msgid "Win condition is set through the scenario"
 msgstr ""
@@ -2686,7 +2672,7 @@ msgstr ""
 #. * TRANSLATORS: A tooltip will explain the abbreviation.
 #. * TRANSLATORS: Make sure that this translation is consistent with the
 #. tooltip.
-#: ../../src/ui_fsmenu/loadgame.cc:552
+#: ../../src/ui_fsmenu/loadgame.cc:549
 msgid "SP"
 msgstr ""
 
@@ -2696,7 +2682,7 @@ msgstr ""
 #. * TRANSLATORS: Make sure that this translation is consistent with the
 #. tooltip.
 #. * TRANSLATORS: %1% is the number of players
-#: ../../src/ui_fsmenu/loadgame.cc:560
+#: ../../src/ui_fsmenu/loadgame.cc:557
 msgid "H (%1%)"
 msgstr ""
 
@@ -2706,25 +2692,25 @@ msgstr ""
 #. * TRANSLATORS: Make sure that this translation is consistent with the
 #. tooltip.
 #. * TRANSLATORS: %1% is the number of players
-#: ../../src/ui_fsmenu/loadgame.cc:569
+#: ../../src/ui_fsmenu/loadgame.cc:566
 msgid "MP (%1%)"
 msgstr ""
 
 #. * TRANSLATORS: Error message introduction for when an old savegame can't be
 #. loaded
-#: ../../src/ui_fsmenu/loadgame.cc:586
+#: ../../src/ui_fsmenu/loadgame.cc:583
 msgid ""
 "This file has the wrong format and can’t be loaded. Maybe it was created "
 "with an older version of Widelands."
 msgstr ""
 
 #. * TRANSLATORS: This text is on a separate line with an error message below
-#: ../../src/ui_fsmenu/loadgame.cc:589
+#: ../../src/ui_fsmenu/loadgame.cc:586
 msgid "Error message:"
 msgstr ""
 
 #. * TRANSLATORS: Prefix for incompatible files in load game screens
-#: ../../src/ui_fsmenu/loadgame.cc:602 ../../src/ui_fsmenu/loadgame.cc:604
+#: ../../src/ui_fsmenu/loadgame.cc:599 ../../src/ui_fsmenu/loadgame.cc:601
 #, c-format
 msgid "Incompatible: %s"
 msgstr ""

@@ -349,7 +349,7 @@ Does not perform any placability checks.
 ===============
 */
 Immovable & EditorGameBase::create_immovable
-	(Coords const c, uint32_t const idx, MapObjectDescr::OwnerType type)
+	(Coords const c, DescriptionIndex const idx, MapObjectDescr::OwnerType type)
 {
 	const ImmovableDescr & descr =
 		*

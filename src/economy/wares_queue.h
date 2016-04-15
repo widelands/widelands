@@ -49,9 +49,9 @@ public:
 #endif
 
 	DescriptionIndex get_ware()    const {return ware_;}
-	uint32_t get_max_fill() const {return max_fill_;}
-	uint32_t get_max_size() const {return max_size_;}
-	uint32_t get_filled()   const {return filled_;}
+	Quantity get_max_fill() const {return max_fill_;}
+	Quantity get_max_size() const {return max_size_;}
+	Quantity get_filled()   const {return filled_;}
 
 	void cleanup();
 
@@ -60,9 +60,9 @@ public:
 	void remove_from_economy(Economy &);
 	void add_to_economy(Economy &);
 
-	void set_max_size        (uint32_t);
-	void set_max_fill        (uint32_t);
-	void set_filled          (uint32_t);
+	void set_max_size        (Quantity);
+	void set_max_fill        (Quantity);
+	void set_filled          (Quantity);
 	void set_consume_interval(uint32_t);
 
 	Player & owner() const {return owner_.owner();}
@@ -77,9 +77,9 @@ private:
 
 	PlayerImmovable & owner_;
 	DescriptionIndex         ware_;    ///< ware ID
-	uint32_t max_size_;         ///< nr of items that fit into the queue maximum
-	uint32_t max_fill_;         ///< nr of wares that should be ideally in this queue
-	uint32_t filled_;           ///< nr of items that are currently in the queue
+	Quantity max_size_;         ///< nr of items that fit into the queue maximum
+	Quantity max_fill_;         ///< nr of wares that should be ideally in this queue
+	Quantity filled_;           ///< nr of items that are currently in the queue
 
 	///< time in ms between consumption at full speed
 	uint32_t consume_interval_;

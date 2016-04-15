@@ -41,16 +41,16 @@ struct WarehouseSupply : public Supply {
 
 	const WareList & get_wares  () const {return wares_;}
 	const WareList & get_workers() const {return workers_;}
-	uint32_t stock_wares  (DescriptionIndex const i) const {
+	Quantity stock_wares  (DescriptionIndex const i) const {
 		return wares_  .stock(i);
 	}
-	uint32_t stock_workers(DescriptionIndex const i) const {
+	Quantity stock_workers(DescriptionIndex const i) const {
 		return workers_.stock(i);
 	}
-	void add_wares     (DescriptionIndex, uint32_t count);
-	void remove_wares  (DescriptionIndex, uint32_t count);
-	void add_workers   (DescriptionIndex, uint32_t count);
-	void remove_workers(DescriptionIndex, uint32_t count);
+	void add_wares     (DescriptionIndex, Quantity count);
+	void remove_wares  (DescriptionIndex, Quantity count);
+	void add_workers   (DescriptionIndex, Quantity count);
+	void remove_workers(DescriptionIndex, Quantity count);
 
 	// Supply implementation
 	PlayerImmovable * get_position(Game &) override;

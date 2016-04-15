@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-04-07 14:12+0000\n"
-"PO-Revision-Date: 2016-04-07 18:33+0000\n"
+"POT-Creation-Date: 2016-04-09 07:23+0000\n"
+"PO-Revision-Date: 2016-04-09 10:01+0000\n"
 "Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -205,8 +205,8 @@ msgstr "Nov."
 msgid "Dec"
 msgstr "Des."
 
-#: ../../src/editor/editorinteractive.cc:75 ../../src/logic/game.cc:224
-#: ../../src/logic/game.cc:284
+#: ../../src/editor/editorinteractive.cc:75 ../../src/logic/game.cc:227
+#: ../../src/logic/game.cc:287
 msgid "Loading tribes"
 msgstr "S'estan carregant les diferents cultures"
 
@@ -268,8 +268,8 @@ msgid ""
 "incompatible."
 msgstr "El Widelands no ha trobat l'arxiu «%s». El format de l'arxiu sembla ser incompatible."
 
-#: ../../src/editor/editorinteractive.cc:238 ../../src/logic/game.cc:228
-#: ../../src/logic/game.cc:291
+#: ../../src/editor/editorinteractive.cc:238 ../../src/logic/game.cc:231
+#: ../../src/logic/game.cc:294
 msgid "Creating players"
 msgstr "Creant jugadors"
 
@@ -488,7 +488,7 @@ msgstr "Cliqueu per seleccionar-ne un. Empreu la tecla Ctrl per fer una selecci�
 
 #. * TRANSLATORS: %s are the currently selected items in an editor tool
 #: ../../src/editor/ui_menus/categorized_item_selection_menu.h:191
-#: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:176
+#: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:171
 #, c-format
 msgid "Current: %s"
 msgstr "Actual: %s"
@@ -856,73 +856,58 @@ msgid ""
 "animals that depend on this player and try again."
 msgstr "No es pot eliminar el jugador. Està referenciat en algun lloc. Elimineu-ne tots els edificis i animals i torneu a provar-ho."
 
-#: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:39
+#: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:37
 msgid "Height Tools Options"
 msgstr "Opcions d'eina d'alçada"
 
-#: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:44
+#: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:42
 #: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:58
 msgid "Increase/Decrease Value:"
 msgstr "Augmenta/redueix el valor:"
 
-#: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:49
+#: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:47
 #: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:63
-#: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:58
+#: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:56
 msgid "Set Value:"
 msgstr "Estableix el valor:"
 
 #. * TRANSLATORS: Editor change height access keys. *
-#. * TRANSLATORS: Editor change resources access keys. *
-#: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:55
-#: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:72
-#, c-format
-msgid "Use %s to increase, %s to decrease"
-msgstr "Useu %s per incrementar i %s per reduir"
-
-#. * TRANSLATORS: This is an access key combination. Localize, but do not
-#. change the key. *
-#: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:57
-#: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:74
-msgid "Click"
-msgstr "Clic"
-
-#. * TRANSLATORS: This is an access key combination. Localize, but do not
-#. change the key. *
-#: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:59
-#: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:76
-msgid "Shift + Click"
-msgstr "Maj+Clic"
+#: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:53
+msgid ""
+"Click on the map to increase, Shift + Click on the map to decrease terrain "
+"height"
+msgstr "Cliqueu al mapa per augmentar l'alçada. Amb Maj+Clic al mapa, es reduirà l'alçada."
 
 #. * TRANSLATORS: Editor set height access key. *
-#. * TRANSLATORS: Editor set resources access key. *
-#. * TRANSLATORS: Editor set hoise height access keys. *
-#: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:62
-#: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:79
-#: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:70
-#, c-format
-msgid "Use %s to set to this value"
-msgstr "Useu %s per establir el valor d'aquest paràmetre"
-
-#. * TRANSLATORS: This is an access key combination. Localize, but do not
-#. change the key. *
-#: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:64
-#: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:81
-#: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:72
-msgid "Ctrl + Click"
-msgstr "Ctrl+Clic"
+#: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:56
+#: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:68
+msgid "Ctrl + Click on the map to set terrain height"
+msgstr "Ctrl+Clic al mapa per establir l'alçada del terreny"
 
 #: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:53
 #: ../../src/editor/ui_menus/tool_menu.cc:71
 msgid "Resources"
 msgstr "Recursos"
 
+#. * TRANSLATORS: Editor change rseources access keys. *
+#: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:72
+msgid ""
+"Click on the map to increase, Shift + Click on the map to decrease the "
+"amount of the selected resource"
+msgstr "Cliqueu al mapa per incrementar-ne la quantitat. Amb Maj+Clic, es reduirà la quantitat del recurs seleccionat."
+
+#. * TRANSLATORS: Editor set rseources access key. *
+#: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:76
+msgid "Ctrl + Click on the map to set the amount of the selected resource"
+msgstr "Ctrl+Clic al mapa per establir la quantitat del recurs seleccionat."
+
 #: ../../src/editor/ui_menus/tool_menu.cc:66
 msgid "Change height"
 msgstr "Canvia l'alçada"
 
 #: ../../src/editor/ui_menus/tool_menu.cc:67
-msgid "Noise height"
-msgstr "Soroll d'alçada"
+msgid "Random height"
+msgstr "Alçada aleatòria"
 
 #: ../../src/editor/ui_menus/tool_menu.cc:68 ../../src/wui/minimap.cc:143
 msgid "Terrain"
@@ -948,29 +933,31 @@ msgid ""
 "top-left corner of a generated minimap."
 msgstr "Trieu la posició que tindrà coordenades (0, 0). Aquest lloc serà el punt de dalt a l'esquerra del minimapa."
 
-#: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:43
-msgid "Noise Height Options"
-msgstr "Opcions del soroll d'alçada"
+#: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:41
+msgid "Random Height Options"
+msgstr "Opcions de l'alçada aleatòria"
 
-#: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:48
+#: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:46
 msgid "Minimum Height:"
 msgstr "Alçada mínima:"
 
-#: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:53
+#: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:51
 msgid "Maximum Height:"
 msgstr "Alçada màxima:"
 
-#. * TRANSLATORS: Editor noise height access keys. *
-#: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:64
-#: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:67
-msgid "Click to set the height to a random value within the specified range"
-msgstr "Cliqueu per establir el valor de l'alçada dins de l'interval"
+#. * TRANSLATORS: Editor random height access key. *
+#: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:62
+#: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:65
+msgid ""
+"Click on the map to set terrain height to a random value within the "
+"specified range"
+msgstr "Cliqueu al mapa per establir l'alçada del terreny a un valor aleatori dins de l'interval especificat."
 
-#: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:84
+#: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:80
 msgid "Random Height"
 msgstr "Alçada aletòria"
 
-#: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:91
+#: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:87
 msgid "Fixed Height"
 msgstr "Alçada fixada"
 
@@ -997,40 +984,33 @@ msgstr "S'estan carregant els gràfics…"
 msgid "Not set"
 msgstr "Sense establir"
 
-#: ../../src/logic/game.cc:216 ../../src/logic/game.cc:271
-#: ../../src/logic/game.cc:355 ../../src/logic/game.cc:381
+#: ../../src/logic/game.cc:219 ../../src/logic/game.cc:274
+#: ../../src/logic/game.cc:358 ../../src/logic/game.cc:388
 msgid "Preloading map"
 msgstr "S'està precarregant un mapa"
 
-#: ../../src/logic/game.cc:222 ../../src/logic/game.cc:281
+#: ../../src/logic/game.cc:225 ../../src/logic/game.cc:284
 msgid "Loading world"
 msgstr "S'està carregant el món"
 
-#: ../../src/logic/game.cc:238 ../../src/logic/game.cc:338
-#: ../../src/ui_fsmenu/launch_mpg.cc:292 ../../src/ui_fsmenu/launch_spg.cc:240
-#: ../../src/ui_fsmenu/mapselect.cc:101
-#: ../../src/wui/multiplayersetupgroup.cc:368
-msgid "Scenario"
-msgstr "Escenari"
-
-#: ../../src/logic/game.cc:244 ../../src/logic/game.cc:324
+#: ../../src/logic/game.cc:247 ../../src/logic/game.cc:327
 msgid "Loading map…"
 msgstr "S'està carregant el mapa…"
 
-#: ../../src/logic/game.cc:366 ../../src/logic/game.cc:399
+#: ../../src/logic/game.cc:373 ../../src/logic/game.cc:410
 #: ../../src/ui_basic/progresswindow.cc:50 ../../src/wlapplication.cc:1367
 msgid "Loading…"
 msgstr "S'està carregant…"
 
-#: ../../src/logic/game.cc:463
+#: ../../src/logic/game.cc:474
 msgid "Creating player infrastructure"
 msgstr "S'està creant la infraestructura del jugador"
 
-#: ../../src/logic/game.cc:473 ../../src/logic/player.cc:245
+#: ../../src/logic/game.cc:486 ../../src/logic/player.cc:245
 msgid "Missing starting position"
 msgstr "No s'ha trobat la posició inicial"
 
-#: ../../src/logic/game.cc:475 ../../src/logic/player.cc:247
+#: ../../src/logic/game.cc:488 ../../src/logic/player.cc:247
 #, c-format
 msgid ""
 "Widelands could not start the game, because player %u has no starting position.\n"
@@ -2430,6 +2410,12 @@ msgstr "(cap mapa)*"
 msgid "The host has not yet selected a map or saved game."
 msgstr "El servidor encara no ha escollit un mapa o partida desada."
 
+#: ../../src/ui_fsmenu/launch_mpg.cc:292 ../../src/ui_fsmenu/launch_spg.cc:240
+#: ../../src/ui_fsmenu/mapselect.cc:101
+#: ../../src/wui/multiplayersetupgroup.cc:368
+msgid "Scenario"
+msgstr "Escenari"
+
 #: ../../src/ui_fsmenu/launch_mpg.cc:294 ../../src/ui_fsmenu/launch_spg.cc:242
 msgid "Win condition is set through the scenario"
 msgstr "Condició de victòria assignada per a aquest escenari"
@@ -2706,7 +2692,7 @@ msgstr "%1%-%2%-%3%"
 #. * TRANSLATORS: A tooltip will explain the abbreviation.
 #. * TRANSLATORS: Make sure that this translation is consistent with the
 #. tooltip.
-#: ../../src/ui_fsmenu/loadgame.cc:552
+#: ../../src/ui_fsmenu/loadgame.cc:549
 msgid "SP"
 msgstr "1J"
 
@@ -2716,7 +2702,7 @@ msgstr "1J"
 #. * TRANSLATORS: Make sure that this translation is consistent with the
 #. tooltip.
 #. * TRANSLATORS: %1% is the number of players
-#: ../../src/ui_fsmenu/loadgame.cc:560
+#: ../../src/ui_fsmenu/loadgame.cc:557
 msgid "H (%1%)"
 msgstr "H (%1%)"
 
@@ -2726,25 +2712,25 @@ msgstr "H (%1%)"
 #. * TRANSLATORS: Make sure that this translation is consistent with the
 #. tooltip.
 #. * TRANSLATORS: %1% is the number of players
-#: ../../src/ui_fsmenu/loadgame.cc:569
+#: ../../src/ui_fsmenu/loadgame.cc:566
 msgid "MP (%1%)"
 msgstr "MJ (%1%)"
 
 #. * TRANSLATORS: Error message introduction for when an old savegame can't be
 #. loaded
-#: ../../src/ui_fsmenu/loadgame.cc:586
+#: ../../src/ui_fsmenu/loadgame.cc:583
 msgid ""
 "This file has the wrong format and can’t be loaded. Maybe it was created "
 "with an older version of Widelands."
 msgstr "Aquest arxiu té un format erroni i no es pot carregar. Potser va ser creat amb una versió anterior del Widelands."
 
 #. * TRANSLATORS: This text is on a separate line with an error message below
-#: ../../src/ui_fsmenu/loadgame.cc:589
+#: ../../src/ui_fsmenu/loadgame.cc:586
 msgid "Error message:"
 msgstr "Missatge d'error:"
 
 #. * TRANSLATORS: Prefix for incompatible files in load game screens
-#: ../../src/ui_fsmenu/loadgame.cc:602 ../../src/ui_fsmenu/loadgame.cc:604
+#: ../../src/ui_fsmenu/loadgame.cc:599 ../../src/ui_fsmenu/loadgame.cc:601
 #, c-format
 msgid "Incompatible: %s"
 msgstr "Incompatible: %s"
