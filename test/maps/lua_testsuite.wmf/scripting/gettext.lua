@@ -12,13 +12,16 @@ end
 
 function test_descr:test_ngettext()
    assert_equal("foo", ngettext("foo", "bar", 1))
-   -- TODO(GunChleoc): Just using the floor here is wrong for English,
-   -- but an edge case as compared to other languages that need it here.
-   -- ngettext doesn't actually support floating point numbers,
-   -- so we might want to create our own rules off the CLDR some time.
-   assert_equal("foo", ngettext("foo", "bar", 1.5))
    assert_equal("bar", ngettext("foo", "bar", 1000))
-   assert_equal("bar", ngettext("foo", "bar", 1000.5))
+   assert_equal("1 foo", ngettext("%1% foo", "bar %1%", 1):bformat(1))
+   assert_equal("bar 2", ngettext("%1% foo", "bar %1%", 2):bformat(2))
+   -- ngettext is undefined for floating point or negative numbers.
+   assert_error("Call to ngettext with floating point", function()
+      ngettext("foo", "bar", 1.5)
+   end)
+   assert_error("Call to ngettext with negative number", function()
+      ngettext("foo", "bar", -1)
+   end)
 end
 
 function test_descr:test_pgettext()

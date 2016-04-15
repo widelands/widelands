@@ -176,12 +176,14 @@ static int L__(lua_State * L) {
 
 	:returns: The translated string.
 */
-// UNTESTED
 static int L_ngettext(lua_State * L) {
 	//  S: msgid msgid_plural n
 	const char* msgid = luaL_checkstring(L, 1);
 	const char* msgid_plural = luaL_checkstring(L, 2);
-	const uint32_t n = floor(luaL_checkdouble(L, 3));
+	const int32_t n = luaL_checkint32(L, 3);
+	if (n < 0) {
+		report_error(L, "Call to ngettext with negative nubmer %d", n);
+	}
 
 	lua_getglobal(L, "__TEXTDOMAIN");
 	if (!lua_isnil(L, -1)) {
