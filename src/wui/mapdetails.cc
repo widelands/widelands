@@ -18,6 +18,7 @@
 
 #include "wui/mapdetails.h"
 
+#include <algorithm>
 #include <cstdio>
 #include <memory>
 
@@ -33,6 +34,7 @@
 #include "logic/game_settings.h"
 #include "map_io/widelands_map_loader.h"
 #include "ui_basic/box.h"
+#include "wui/map_tags.h"
 
 namespace {
 std::string as_header(const std::string& txt) {
@@ -138,11 +140,11 @@ void MapDetails::update(const MapData& mapdata, bool localize_mapname) {
 							% description
 							% as_content((boost::format(_("%d × %d")) % mapdata.width % mapdata.height).str())).str();
 
-		// NOCOM localize tags
 		std::vector<std::string> tags;
 		for (const auto& tag : mapdata.tags) {
-			tags.push_back(tag);
+			tags.push_back(localize_tag(tag));
 		}
+		std::sort(tags.begin(), tags.end());
 		description = (boost::format("%s%s") % description % as_header(_("Tags:"))).str();
 		description = (boost::format("%s%s")
 							% description %

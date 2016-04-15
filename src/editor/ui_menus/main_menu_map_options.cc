@@ -33,6 +33,7 @@
 #include "ui_basic/multilineeditbox.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/textarea.h"
+#include "wui/map_tags.h"
 
 inline EditorInteractive & MainMenuMapOptions::eia() {
 	return dynamic_cast<EditorInteractive&>(*get_parent());
@@ -122,12 +123,12 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive & parent, bool modal)
 
 
 	tags_box_.add(new UI::Textarea(&tags_box_, 0, 0, max_w_, labelh_, _("Tags:")), UI::Align::kLeft);
-	add_tag_checkbox(&tags_box_, "unbalanced", _("Unbalanced"));
-	add_tag_checkbox(&tags_box_, "ffa", _("Free for all"));
-	add_tag_checkbox(&tags_box_, "1v1", _("1v1"));
-	add_tag_checkbox(&tags_box_, "2teams", _("Teams of 2"));
-	add_tag_checkbox(&tags_box_, "3teams", _("Teams of 3"));
-	add_tag_checkbox(&tags_box_, "4teams", _("Teams of 4"));
+	add_tag_checkbox(&tags_box_, "unbalanced", localize_tag("unbalanced"));
+	add_tag_checkbox(&tags_box_, "ffa", localize_tag("ffa"));
+	add_tag_checkbox(&tags_box_, "1v1", localize_tag("1v1"));
+	add_tag_checkbox(&tags_box_, "2teams", localize_tag("2teams"));
+	add_tag_checkbox(&tags_box_, "3teams", localize_tag("3teams"));
+	add_tag_checkbox(&tags_box_, "4teams", localize_tag("4teams"));
 
 	teams_box_.add(new UI::Textarea(&teams_box_, 0, 0, max_w_, labelh_, _("Suggested Teams:")),
 						UI::Align::kLeft);
