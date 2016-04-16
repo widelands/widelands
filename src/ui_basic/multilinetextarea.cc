@@ -57,14 +57,11 @@ MultilineTextarea::MultilineTextarea
 	scrollbar_.set_singlestepsize(UI::g_fh1->render(as_uifont(
 																		UI::g_fh1->fontset()->representative_character(),
 																		UI_FONT_SIZE_SMALL))->height());
-	scrollbar_.set_pagesize(h - 2 * UI::g_fh1->render(as_uifont(
-																		  UI::g_fh1->fontset()->representative_character(),
-																		  UI_FONT_SIZE_BIG))->height());
 	scrollbar_.set_steps(1);
 	scrollbar_.set_force_draw(scrollmode_ == ScrollMode::kScrollNormalForced ||
 										scrollmode_ == ScrollMode::kScrollLogForced);
 
-	recompute();
+	layout();
 }
 
 
@@ -133,14 +130,15 @@ void MultilineTextarea::scrollpos_changed(int32_t const /* pixels */)
 {
 }
 
-/// Take care about scrollbar on resize
+/// Take care of the scrollbar on resize
 void MultilineTextarea::layout()
 {
 	recompute();
 
-	// Take care about the scrollbar
+	// Take care of the scrollbar
 	scrollbar_.set_pos(Point(get_w() - Scrollbar::kSize, 0));
 	scrollbar_.set_size(Scrollbar::kSize, get_h());
+	scrollbar_.set_pagesize(get_h() - 2 * UI_FONT_SIZE_BIG);
 }
 
 /**
