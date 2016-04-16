@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2005, 2008 by the Widelands Development Team
+ * Copyright (C) 2005-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,9 +25,22 @@
 #include <set>
 #include <string>
 
-//  This type is used to store information about workareas. It stores radii and
-//  for each radius a set of strings. Each string contains a description of an
-//  activity (or similar) that can be performed within the radius.
+/** The WorkareaInfo stores radii and for each radius a set of strings. 
+ *
+ * A Workarea is a "circle" around a building that this building affects
+ * or is needed by this building, e.g. Areas for Mines, Fields of a Farm.
+ * Worareads are shown on the Map when clicking on a building.
+ *
+ * Each string contains a description of an  activity (or similar) i
+ * that can be performed within the radius.
+ *
+ * TODO(Hasi50): In fact this complex idea of a workarea is not used.
+ * I do knot know of any building that has different sizes of workareas
+ * during its liftimer. LuaBuildingDescription::get_workarea_radiu does not use it
+ * and the GUI does not show it. 
+ *
+ * So we should just use a simple unit8 perhaps?
+ */
 using WorkareaInfo = std::map<uint32_t, std::set<std::string>>;
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_TRIBES_WORKAREA_INFO_H

@@ -1871,10 +1871,16 @@ int LuaBuildingDescription::get_vision_range(lua_State * L) {
 /* RST
 	.. attribute:: workarea_radius
 
-			(RO) the workarea_radius of the building as an int.
+			(RO) the first workarea_radius of the building as an int, 
+                 0 in case bulding has no workareas
 */
 int LuaBuildingDescription::get_workarea_radius(lua_State * L) {
-	lua_pushinteger(L, get()->workarea_info_.begin()->first);
+    const WorkareaInfo& workareaInfo = get()->workarea_info_;
+    if (!workareaInfo.empty()) {
+        lua_pushinteger(L, workareaInfo.begin()->first);
+    } else {
+        lua_pushinteger(L, 0);
+    }
 	return 1;
 }
 
