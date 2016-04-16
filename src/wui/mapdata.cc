@@ -33,7 +33,8 @@ MapData::MapData() : authors(""), nrplayers(0), width(0), height(0),
 		name = map.get_name();
 		localized_name = name.empty() ? "" : _(name);
 		// Localizing this, because some author fields now have "edited by" text.
-		authors = MapAuthorData(_(map.get_author()));
+		const std::string& author = map.get_author();
+		authors = MapAuthorData(author.empty() ? _("No Author") : _(author));
 		description = map.get_description().empty() ? "" : _(map.get_description());
 		hint = map.get_hint().empty() ? "" : _(map.get_hint());
 		nrplayers = map.get_nrplayers();
