@@ -1876,11 +1876,11 @@ int LuaBuildingDescription::get_vision_range(lua_State * L) {
 */
 int LuaBuildingDescription::get_workarea_radius(lua_State * L) {
     const WorkareaInfo& workareaInfo = get()->workarea_info_;
-    if (!workareaInfo.empty()) {
-        lua_pushinteger(L, workareaInfo.begin()->first);
-    } else {
+	if (!workareaInfo.empty()) {
+		lua_pushinteger(L, workareaInfo.begin()->first);
+	} else {
 		lua_pushnil(L);
-    }
+	}
 	return 1;
 }
 
