@@ -35,12 +35,13 @@
  * that can be performed within the radius.
  */
 
-// TODO(Hasi50): In fact this complex idea of a workarea is not used.
-// I do knot know of any building that has different sizes of workareas
-// during its liftimer. LuaBuildingDescription::get_workarea_radiu does not use it
-// and the GUI does not show it.
+// TODO(Hasi50): This complex idea of a workarea is used inconsitently.
+// There are a few building that have different sizes of workareas (e.g. a fortress)
+// LuaBuildingDescription::get_workarea_radius does not use it.
+// InteractiveBase::show_work_area does use it.
 //
-// So we should just use a simple unit8 perhaps?
+// We could just use a unit8 as base for the map?
+// We should document (as const) the expected stings.
 
 using WorkareaInfo = std::map<uint32_t, std::set<std::string>>;
 

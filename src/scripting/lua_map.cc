@@ -672,7 +672,7 @@ int upcasted_map_object_to_lua(lua_State * L, MapObject * mo) {
 	case (MapObjectType::WARE):
 	default:
 		throw LuaError((boost::format("upcasted_map_object_to_lua: Unknown %i") %
-		                static_cast<int>(mo->descr().type())).str());
+						static_cast<int>(mo->descr().type())).str());
 	}
 }
 #undef CAST_TO_LUA
@@ -1872,10 +1872,10 @@ int LuaBuildingDescription::get_vision_range(lua_State * L) {
 	.. attribute:: workarea_radius
 
 			(RO) the first workarea_radius of the building as an int,
-                  nil in case bulding has no workareas
+			     nil in case bulding has no workareas
 */
 int LuaBuildingDescription::get_workarea_radius(lua_State * L) {
-    const WorkareaInfo& workareaInfo = get()->workarea_info_;
+	const WorkareaInfo& workareaInfo = get()->workarea_info_;
 	if (!workareaInfo.empty()) {
 		lua_pushinteger(L, workareaInfo.begin()->first);
 	} else {
