@@ -25,7 +25,7 @@
 #include <set>
 #include <string>
 
-/** The WorkareaInfo stores radii and for each radius a set of strings. 
+/** The WorkareaInfo stores radii and for each radius a set of strings.
  *
  * A Workarea is a "circle" around a building that this building affects
  * or is needed by this building, e.g. Areas for Mines, Fields of a Farm.
@@ -33,14 +33,15 @@
  *
  * Each string contains a description of an  activity (or similar) i
  * that can be performed within the radius.
- *
- * TODO(Hasi50): In fact this complex idea of a workarea is not used.
- * I do knot know of any building that has different sizes of workareas
- * during its liftimer. LuaBuildingDescription::get_workarea_radiu does not use it
- * and the GUI does not show it. 
- *
- * So we should just use a simple unit8 perhaps?
  */
+
+// TODO(Hasi50): In fact this complex idea of a workarea is not used.
+// I do knot know of any building that has different sizes of workareas
+// during its liftimer. LuaBuildingDescription::get_workarea_radiu does not use it
+// and the GUI does not show it.
+//
+// So we should just use a simple unit8 perhaps?
+
 using WorkareaInfo = std::map<uint32_t, std::set<std::string>>;
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_TRIBES_WORKAREA_INFO_H

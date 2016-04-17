@@ -1871,7 +1871,7 @@ int LuaBuildingDescription::get_vision_range(lua_State * L) {
 /* RST
 	.. attribute:: workarea_radius
 
-			(RO) the first workarea_radius of the building as an int, 
+			(RO) the first workarea_radius of the building as an int,
                   nil in case bulding has no workareas
 */
 int LuaBuildingDescription::get_workarea_radius(lua_State * L) {
