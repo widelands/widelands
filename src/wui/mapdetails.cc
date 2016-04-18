@@ -123,24 +123,12 @@ void MapDetails::update(const MapData& mapdata, bool localize_mapname) {
 
 		// Show map information
 		std::string description =
-				as_header(
-					mapdata.maptype == MapData::MapType::kScenario ?
-						(boost::format(ngettext("%d Player Scenario", "%d Player Scenario", mapdata.nrplayers))
-						%  mapdata.nrplayers).str()  :
-						(boost::format(ngettext("%d Player Map", "%d Player Map", mapdata.nrplayers))
-						%  mapdata.nrplayers).str());
+				as_header(mapdata.maptype == MapData::MapType::kScenario ? _("Scenario") : _("Map"));
 
 		description = (boost::format("%s%s")
 							  % description
 							  % as_header(ngettext("Author", "Authors", mapdata.authors.get_number()))).str();
 		description = (boost::format("%s%s") % description % as_content(mapdata.authors.get_names())).str();
-
-		description = (boost::format("%s%s") % description % as_header(_("Map Size"))).str();
-		description = (boost::format("%s%s")
-							% description
-							% as_content((boost::format(_("%d × %d"))
-											  % mapdata.width
-											  % mapdata.height).str())).str();
 
 		std::vector<std::string> tags;
 		for (const auto& tag : mapdata.tags) {
