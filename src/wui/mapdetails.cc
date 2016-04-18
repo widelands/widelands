@@ -38,12 +38,12 @@
 
 namespace {
 std::string as_header(const std::string& txt) {
-	return (boost::format("<p><font size=%i bold=1 color=D1D1D1 shadow=1><vspace gap=6>%s</font></p>")
+	return (boost::format("<p><font size=%i bold=1 shadow=1><vspace gap=6>%s</font></p>")
 			  % UI_FONT_SIZE_SMALL
 			  % richtext_escape(txt)).str();
 }
 std::string as_content(const std::string& txt) {
-	return (boost::format("<p><font size=%i bold=1 shadow=1><vspace gap=2>%s</font></p>")
+	return (boost::format("<p><font size=%i bold=1 italic=1 shadow=1><vspace gap=2>%s</font></p>")
 			  % (UI_FONT_SIZE_SMALL - 1)
 			  % richtext_escape(txt)).str();
 }
