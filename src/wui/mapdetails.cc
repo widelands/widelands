@@ -98,12 +98,13 @@ void MapDetails::update(const MapData& mapdata, bool localize_mapname) {
 	clear();
 	if (mapdata.maptype == MapData::MapType::kDirectory) {
 		// Show directory information
-		name_label_.set_text(as_uifont(mapdata.localized_name, UI_FONT_SIZE_SMALL + 2));
+		name_label_.set_text(as_uifont(richtext_escape(mapdata.localized_name), UI_FONT_SIZE_SMALL + 2));
 		descr_.set_text((boost::format("<rt>%s</rt>") % as_header(_("Directory"))).str());
 		main_box_.set_size(main_box_.get_w(), max_h_);
 	} else {
-		name_label_.set_text(as_uifont(localize_mapname ? mapdata.localized_name : mapdata.name,
-												 UI_FONT_SIZE_SMALL + 2));
+		name_label_.set_text(as_uifont(
+										richtext_escape(localize_mapname ? mapdata.localized_name : mapdata.name),
+										UI_FONT_SIZE_SMALL + 2));
 
 		if (mapdata.localized_name != mapdata.name) {
 			if (localize_mapname) {
