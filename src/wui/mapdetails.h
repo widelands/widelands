@@ -32,7 +32,12 @@
  */
 class MapDetails : public UI::Panel {
 public:
-	MapDetails(Panel* parent, int32_t x, int32_t y, int32_t max_w, int32_t max_h);
+	enum class Style {
+		kFsMenu,
+		kWui
+	};
+
+	MapDetails(Panel* parent, int32_t x, int32_t y, int32_t max_w, int32_t max_h, Style style);
 
 	void clear();
 	void set_max_height(int new_height);
@@ -40,6 +45,7 @@ public:
 	void update(const MapData& mapdata, bool localize_mapname);
 
 private:
+	const Style style_;
 	const int padding_;
 	int max_h_;
 

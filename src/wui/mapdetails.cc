@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2015 by the Widelands Development Team
+ * Copyright (C) 2002-2016 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -37,22 +37,43 @@
 #include "wui/map_tags.h"
 
 namespace {
-std::string as_header(const std::string& txt) {
-	return (boost::format("<p><font size=%i bold=1 shadow=1><vspace gap=6>%s</font></p>")
-			  % UI_FONT_SIZE_SMALL
-			  % richtext_escape(txt)).str();
+std::string as_header(const std::string& txt, MapDetails::Style style, bool is_first = false) {
+	switch (style) {
+	case MapDetails::Style::kFsMenu:
+		return (boost::format("<p><font size=%i bold=1 shadow=1>%s%s</font></p>")
+				  % UI_FONT_SIZE_SMALL
+				  % (is_first ? "" : "<vspace gap=9>")
+				  % richtext_escape(txt)).str();
+	case MapDetails::Style::kWui:
+		return (boost::format("<p><font size=%i bold=1 color=D1D1D1>%s%s</font></p>")
+				  % UI_FONT_SIZE_SMALL
+				  % (is_first ? "" : "<vspace gap=6>")
+				  % richtext_escape(txt)).str();
+	default:
+		NEVER_HERE();
+	}
 }
-std::string as_content(const std::string& txt) {
-	return (boost::format("<p><font size=%i bold=1 italic=1 shadow=1><vspace gap=2>%s</font></p>")
-			  % (UI_FONT_SIZE_SMALL - 1)
-			  % richtext_escape(txt)).str();
+std::string as_content(const std::string& txt, MapDetails::Style style) {
+	switch (style) {
+	case MapDetails::Style::kFsMenu:
+		return (boost::format("<p><font size=%i bold=1 color=D1D1D1 shadow=1><vspace gap=2>%s</font></p>")
+				  % UI_FONT_SIZE_SMALL
+				  % richtext_escape(txt)).str();
+	case MapDetails::Style::kWui:
+		return (boost::format("<p><font size=%i><vspace gap=2>%s</font></p>")
+				  % (UI_FONT_SIZE_SMALL - 2)
+				  % richtext_escape(txt)).str();
+	default:
+		NEVER_HERE();
+	}
 }
 } // namespace
 
 MapDetails::MapDetails
-		(Panel* parent, int32_t x, int32_t y, int32_t max_w, int32_t max_h) :
+		(Panel* parent, int32_t x, int32_t y, int32_t max_w, int32_t max_h, Style style) :
 	UI::Panel(parent, x, y, max_w, max_h),
 
+	style_(style),
 	padding_(4),
 	main_box_(this, 0, 0, UI::Box::Vertical, max_w, max_h, 0),
 	name_label_(&main_box_, 0, 0, max_w - padding_, 20, "", UI::Align::kLeft,
@@ -96,15 +117,19 @@ void MapDetails::update_layout() {
 
 void MapDetails::update(const MapData& mapdata, bool localize_mapname) {
 	clear();
+	// Show directory information
 	if (mapdata.maptype == MapData::MapType::kDirectory) {
-		// Show directory information
-		name_label_.set_text(as_uifont(richtext_escape(mapdata.localized_name), UI_FONT_SIZE_SMALL + 2));
-		descr_.set_text((boost::format("<rt>%s</rt>") % as_header(_("Directory"))).str());
+		name_label_.set_text((boost::format("<rt>%s%s</rt>")
+									 % as_header(_("Directory:"), style_, true)
+									 % as_content(mapdata.localized_name, style_)).str());
 		main_box_.set_size(main_box_.get_w(), max_h_);
-	} else {
-		name_label_.set_text(as_uifont(
-										richtext_escape(localize_mapname ? mapdata.localized_name : mapdata.name),
-										UI_FONT_SIZE_SMALL + 2));
+
+	} else { // Show map information
+		name_label_.set_text(
+					(boost::format("<rt>%s%s</rt>")
+					 % as_header(mapdata.maptype == MapData::MapType::kScenario ?
+										 _("Scenario:") : _("Map:"), style_, true)
+					 % as_content(localize_mapname ? mapdata.localized_name : mapdata.name, style_)).str());
 
 		if (mapdata.localized_name != mapdata.name) {
 			if (localize_mapname) {
@@ -124,31 +149,27 @@ void MapDetails::update(const MapData& mapdata, bool localize_mapname) {
 
 		// Show map information
 		std::string description =
-				as_header(mapdata.maptype == MapData::MapType::kScenario ? _("Scenario") : _("Map"));
-
-		description = (boost::format("%s%s")
-							  % description
-							  % as_header(ngettext("Author", "Authors", mapdata.authors.get_number()))).str();
-		description = (boost::format("%s%s") % description % as_content(mapdata.authors.get_names())).str();
+				as_header(ngettext("Author:", "Authors:", mapdata.authors.get_number()), style_);
+		description = (boost::format("%s%s") % description % as_content(mapdata.authors.get_names(), style_)).str();
 
 		std::vector<std::string> tags;
 		for (const auto& tag : mapdata.tags) {
 			tags.push_back(localize_tag(tag));
 		}
 		std::sort(tags.begin(), tags.end());
-		description = (boost::format("%s%s") % description % as_header(_("Tags"))).str();
+		description = (boost::format("%s%s") % description % as_header(_("Tags:"), style_)).str();
 		description = (boost::format("%s%s")
 							% description %
-							as_content(i18n::localize_list(tags, i18n::ConcatenateWith::COMMA)))
+							as_content(i18n::localize_list(tags, i18n::ConcatenateWith::COMMA), style_))
 						  .str();
 
-		description = (boost::format("%s%s") % description % as_header(_("Description"))).str();
-		description = (boost::format("%s%s") % description % as_content(mapdata.description)).str();
+		description = (boost::format("%s%s") % description % as_header(_("Description:"), style_)).str();
+		description = (boost::format("%s%s") % description % as_content(mapdata.description, style_)).str();
 
 		if (!mapdata.hint.empty()) {
 			/** TRANSLATORS: Map hint header when selecting a map. */
-			description = (boost::format("%s%s") % description % as_header(_("Hint"))).str();
-			description = (boost::format("%s%s") % description % as_content(mapdata.hint)).str();
+			description = (boost::format("%s%s") % description % as_header(_("Hint:"), style_)).str();
+			description = (boost::format("%s%s") % description % as_content(mapdata.hint, style_)).str();
 		}
 
 		description = (boost::format("<rt>%s</rt>") % description).str();

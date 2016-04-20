@@ -48,7 +48,8 @@ MainMenuLoadOrSaveMap::MainMenuLoadOrSaveMap(EditorInteractive& parent,
 
 	  table_(this, tablex_, tabley_, tablew_, tableh_, false),
 	  map_details_(
-		  this, right_column_x_, tabley_, get_inner_w() - right_column_x_ - padding_, tableh_),
+		  this, right_column_x_, tabley_, get_inner_w() - right_column_x_ - padding_, tableh_,
+		  MapDetails::Style::kWui),
      ok_(this,
          "ok",
 			UI::g_fh1->fontset()->is_rtl() ? get_inner_w() / 2 - butw_ - padding_ : get_inner_w() / 2 + padding_,
