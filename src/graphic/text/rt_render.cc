@@ -599,7 +599,7 @@ public:
 	uint16_t hotspot_y() override {return height();}
 
 	Texture* render(TextureCache* texture_cache) override {
-		if (width() > g_gr->max_texture_size() || height() > g_gr->max_texture_size() ) {
+		if (width() > g_gr->max_texture_size() || height() > g_gr->max_texture_size()) {
 			const std::string error_message =
 					(boost::format("Texture (%d, %d) too big! Maximum size is %d.")
 					 % width() % height() % g_gr->max_texture_size()).str();
