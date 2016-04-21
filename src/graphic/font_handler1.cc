@@ -81,15 +81,15 @@ public:
 
 private:
 	Texture* texture() const {
-		return get_renderer_()->render(text_, width_);
-		/* NOCOM
 		Texture* surf = texture_cache_->get(hash_);
-		if (surf)
+		if (surf != nullptr) {
 			return surf;
-
-		return texture_cache_->insert(
+		}
+		log("NOCOM texture for hash: %s\n", hash_.c_str());
+		Texture* result = texture_cache_->insert(
 		   hash_, std::unique_ptr<Texture>(get_renderer_()->render(text_, width_)));
-			*/
+		log(" - new, width: %d, height: %d\n", result->width(), result->height());
+		return result;
 	}
 
 	const string hash_;

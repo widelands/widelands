@@ -24,6 +24,7 @@
 #include <SDL.h>
 #include <stdint.h>
 
+#include "base/log.h" // NOCOM
 #include "graphic/texture.h"
 
 // The implementation took inspiration from
@@ -59,7 +60,9 @@ Texture* TextureCache::insert(const std::string& hash, std::unique_ptr<Texture> 
 	assert(entries_.find(hash) == entries_.end());
 
 	const uint32_t texture_size = texture->width() * texture->height() * 4;
+	log("NOCOM Texture size: %d\n", texture_size);
 	while (size_in_bytes_ + texture_size > max_size_in_bytes_) {
+		log("Dropped!!!!!\n");
 		drop();
 	}
 
