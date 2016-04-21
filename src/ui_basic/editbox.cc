@@ -76,8 +76,8 @@ EditBox::EditBox
 	 const Image* background,
 	 int font_size)
 	:
-	Panel(parent, x, y, w, UI::g_fh1->render(as_uifont(UI::g_fh1->fontset()->representative_character()),
-														  font_size)->height() + 2),
+	Panel(parent, x, y, w, UI::g_fh1->render(as_editorfont(UI::g_fh1->fontset()->representative_character(),
+														  font_size))->height() + 4),
 	m_(new EditBoxImpl),
 	history_active_(false),
 	history_position_(-1)
@@ -428,11 +428,11 @@ void EditBox::draw(RenderTarget & odst)
 				// TODO(GunChleoc): Arabic: Fix scrolloffset
 				dst.blitrect(point,
 								 entry_text_im,
-								 Rect(point.x + m_->scrolloffset + kMargin, point.y, max_width, lineheight));
+								 Rect(point.x + m_->scrolloffset + kMargin, 0, max_width, lineheight));
 			} else {
 				dst.blitrect(point,
 								 entry_text_im,
-								 Rect(point.x - m_->scrolloffset - kMargin, point.y, max_width, lineheight));
+								 Rect(-m_->scrolloffset, 0, max_width, lineheight));
 			}
 		}
 	} else {
