@@ -22,6 +22,7 @@
 #include <boost/bind.hpp>
 
 #include "base/utf8.h"
+#include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "graphic/text_layout.h"
 #include "graphic/wordwrap.h"
@@ -102,7 +103,7 @@ MultilineEditbox::Data::Data(MultilineEditbox & o)
 :
 scrollbar(&o, o.get_w() - Scrollbar::kSize, 0, Scrollbar::kSize, o.get_h(), false),
 cursor_pos(0),
-maxbytes(0xffff),
+maxbytes(std::min(g_gr->max_texture_size() / UI_FONT_SIZE_SMALL, 0xffff)),
 ww_valid(false),
 owner(o)
 {
