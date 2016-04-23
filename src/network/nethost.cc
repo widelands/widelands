@@ -789,6 +789,10 @@ void NetHost::run()
 			disconnect_client(0, "SERVER_CRASHED");
 			reaper();
 		}
+		// We will bounce back to the main menu, so we better log out
+		if (internet_) {
+			InternetGaming::ref().logout("SERVER_CRASHED");
+		}
 
 		throw;
 	}
