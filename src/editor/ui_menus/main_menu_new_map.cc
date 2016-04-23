@@ -123,6 +123,9 @@ void MainMenuNewMap::clicked_create_map() {
 
 	egbase.cleanup_for_load();
 
+	// Select a tool that doesn't care about map changes
+	parent.select_tool(parent.tools()->info, EditorTool::First);
+
 	map.create_empty_map(
 				egbase.world(),
 				width_.get_value() > 0 ? width_.get_value() : Widelands::kMapDimensions[0],

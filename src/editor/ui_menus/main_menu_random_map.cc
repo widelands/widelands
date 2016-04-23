@@ -434,6 +434,9 @@ void MainMenuNewRandomMap::clicked_create_map() {
 
 	egbase.cleanup_for_load();
 
+	// Select a tool that doesn't care about map changes
+	eia.select_tool(eia.tools()->info, EditorTool::First);
+
 	UniqueRandomMapInfo map_info;
 	set_map_info(map_info);
 
