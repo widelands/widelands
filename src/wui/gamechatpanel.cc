@@ -36,7 +36,7 @@ GameChatPanel::GameChatPanel
 	chat_   (chat),
 	chatbox  (this, 0, 0, w, h - 25, "", UI::Align::kLeft,
 				 UI::MultilineTextarea::ScrollMode::kScrollLogForced),
-	editbox  (this, 0, h - 20, w),
+	editbox  (this, 0, h - 20, w, 20, 4),
 	chat_message_counter(std::numeric_limits<uint32_t>::max())
 {
 	editbox.ok.connect(boost::bind(&GameChatPanel::key_enter, this));

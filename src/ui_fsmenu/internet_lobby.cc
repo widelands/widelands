@@ -84,7 +84,7 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby
 
 // Edit boxes
 	edit_servername_
-		(this, get_w() * 17 / 25, get_h() * 68 / 100, butw_,
+		(this, get_w() * 17 / 25, get_h() * 68 / 100, butw_, buth_, 4,
 		 g_gr->images().get("images/ui_basic/but2.png"), fs_),
 
 // List
