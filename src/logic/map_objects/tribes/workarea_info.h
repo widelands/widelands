@@ -28,17 +28,19 @@
 /** The WorkareaInfo stores radii and for each radius a set of strings.
  *
  * A Workarea is a "circle" around a building that this building affects
- * or is needed by this building, e.g. Areas for Mines, Fields of a Farm.
- * Worareads are shown on the Map when clicking on a building.
+ * or is needed by this buildingr., e.g. Areas for Mines, Fields of a Farm.
+ * Worareas are shown on the Map when clicking on or placing a building.
  *
- * Each string contains a description of an  activity (or similar) i
- * that can be performed within the radius.
+ * Each string contains a description of an  activity (or similar)
+ * that can be performed within the radius. Examples are buldings
+ * that can be extended like a Fortress, and will have a bigger
+ * workarea then.
+ *
+ * See LuaBuildingDescription::get_workarea_radius, InteractiveBase::show_work_area
  */
 
-// TODO(Hasi50): This complex idea of a workarea is used inconsitently.
-// There are a few building that have different sizes of workareas (e.g. a fortress)
-// LuaBuildingDescription::get_workarea_radius does not use it.
-// InteractiveBase::show_work_area does use it.
+// TODO(Hasi50): LuaBuildingDescription::get_workarea_radius does only us the very first
+// size found, which seems to be correct but depend on the std:map implemenataion
 //
 // We could just use a unit8 as base for the map?
 // We should document (as const) the expected stings.
