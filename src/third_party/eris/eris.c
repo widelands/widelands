@@ -37,6 +37,7 @@ typedef int bool;
 #define LUA_CORE
 
 /* Public Lua headers. */
+#include "lapi.h"
 #include "lua.h"
 #include "lauxlib.h"
 #include "lualib.h"
@@ -104,9 +105,8 @@ static const lua_Unsigned kMaxComplexity = 10000;
  * patched Lua version to be able to persist some of the library functions,
  * anyway: it needs to put the continuation C functions in the perms table. */
 /* ldebug.h */
-#define eris_ci_func ci_func
+#define eris_ci_func(ci)		(clLvalue((ci)->func))
 /* ldo.h */
-#define eris_incr_top incr_top
 #define eris_savestack savestack
 #define eris_restorestack restorestack
 #define eris_reallocstack luaD_reallocstack
@@ -342,7 +342,7 @@ static void
 pushtstring(lua_State* L, TString *ts) {                               /* ... */
   if (ts) {
     eris_setsvalue2n(L, L->top, ts);
-    eris_incr_top(L);                                              /* ... str */
+    api_incr_top(L);                                              /* ... str */
   }
   else {
     lua_pushnil(L);                                                /* ... nil */
@@ -1573,7 +1573,7 @@ u_closure(Info *info) {                                                /* ... */
     /* Create closure and anchor it on the stack (avoid collection via GC). */
     cl = eris_newLclosure(info->L, nups);
     eris_setclLvalue(info->L, info->L->top, cl);                   /* ... lcl */
-    eris_incr_top(info->L);
+    api_incr_top(info->L);
 
     /* Preregister closure for handling of cycles (upvalues). */
     registerobject(info);
