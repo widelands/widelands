@@ -2726,7 +2726,7 @@ int LuaWorkerDescription::get_needed_experience(lua_State * L) {
 
 /* RST
 SoldierDescription
------------------
+--------------------
 
 .. class:: SoldierDescription
 

@@ -142,7 +142,7 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby
 	clientsonline_list_ .add_column(22, "*", t_tip);
 	/** TRANSLATORS: Player Name */
 	clientsonline_list_ .add_column((lisw_ - 22) * 3 / 8, pgettext("player", "Name"));
-	clientsonline_list_ .add_column((lisw_ - 22) * 2 / 8, _("Points"));
+	clientsonline_list_ .add_column((lisw_ - 22) * 2 / 8, _("Version"));
 	clientsonline_list_ .add_column((lisw_ - 22) * 3 / 8, _("Game"));
 	clientsonline_list_.set_column_compare
 		(0, boost::bind(&FullscreenMenuInternetLobby::compare_clienttype, this, _1, _2));
@@ -273,7 +273,7 @@ void FullscreenMenuInternetLobby::fill_client_list(const std::vector<InternetCli
 			const InternetClient& client(clients->at(i));
 			UI::Table<const InternetClient * const>::EntryRecord & er = clientsonline_list_.add(&client);
 			er.set_string(1, client.name);
-			er.set_string(2, client.points);
+			er.set_string(2, client.build_id);
 			er.set_string(3, client.game);
 
 			const Image* pic;
