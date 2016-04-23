@@ -34,7 +34,8 @@ Window(&parent, "login_box", 0, 0, 500, 220, _("Metaserver login"))
 	int32_t margin = 10;
 
 	ta_nickname = new UI::Textarea(this, margin, margin, _("Nickname:"));
-	eb_nickname = new UI::EditBox(this, 150, margin, 330, 20, 4, g_gr->images().get("images/ui_basic/but2.png"));
+	eb_nickname =
+			new UI::EditBox(this, 150, margin, 330, 20, 4, g_gr->images().get("images/ui_basic/but2.png"));
 
 	ta_password = new UI::Textarea(this, margin, 40, _("Password:"));
 	eb_password = new UI::EditBox(this, 150, 40, 330, 20, 4, g_gr->images().get("images/ui_basic/but2.png"));
