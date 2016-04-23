@@ -79,10 +79,10 @@ FullscreenMenuNetSetupLAN::FullscreenMenuNetSetupLAN () :
 
 // Edit boxes
 	playername
-		(this, get_w() * 16 / 25, get_h() * 3333 / 10000, butw_, buth_, 4,
+		(this, get_w() * 16 / 25, get_h() * 3333 / 10000, butw_, buth_, 2,
 		 g_gr->images().get("images/ui_basic/but2.png"), fs_small()),
 	hostname
-		(this, get_w() * 16 / 25, get_h() * 19 / 40,  get_w() * 17 / 80, buth_, 4,
+		(this, get_w() * 16 / 25, get_h() * 19 / 40,  get_w() * 17 / 80, buth_, 2,
 		 g_gr->images().get("images/ui_basic/but2.png"), fs_small()),
 
 // List

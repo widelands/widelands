@@ -81,7 +81,7 @@ EditBox::EditBox
 	:
 	Panel(parent, x, y, w,
 			h > 0 ? h : UI::g_fh1->render(as_editorfont(UI::g_fh1->fontset()->representative_character(),
-																	  font_size))->height() + margin_y),
+																	  font_size))->height() + 2 * margin_y),
 	m_(new EditBoxImpl),
 	margin_y_(margin_y),
 	history_active_(false),

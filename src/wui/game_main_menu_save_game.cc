@@ -62,7 +62,7 @@ GameMainMenuSaveGame::GameMainMenuSaveGame
 	UI::UniqueWindow
 		(&parent, "save_game", &registry,
 		 WINDOW_WIDTH, WINDOW_HEIGHT, _("Save Game")),
-	editbox_(this, HSPACING, EDITBOX_Y, LIST_WIDTH, 0, 4, g_gr->images().get("images/ui_basic/but1.png")),
+	editbox_(this, HSPACING, EDITBOX_Y, LIST_WIDTH, 0, 2, g_gr->images().get("images/ui_basic/but1.png")),
 	ls_     (this, HSPACING, VSPACING,  LIST_WIDTH, LIST_HEIGHT - editbox_.get_h()),
 	name_label_
 		(this, DESCRIPTION_X,  5, 0, 20, _("Map Name:"),  UI::Align::kCenterLeft),

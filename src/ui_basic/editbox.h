@@ -40,12 +40,13 @@ struct EditBoxImpl;
  * When return is pressed, the editbox is unfocused, the keyboard
  * released and a callback function is called.
  * If h == 0, height will be dynamic according to font set.
+ * If h > 0, margin_y has no effect.
  */
 struct EditBox : public Panel {
 	EditBox
 		(Panel *,
 		 int32_t x, int32_t y, uint32_t w, uint32_t h = 0,
-		 int margin_y = 4,
+		 int margin_y = 2,
 		 const Image* background = g_gr->images().get("images/ui_basic/but2.png"),
 		 int font_size = UI_FONT_SIZE_SMALL);
 	virtual ~EditBox();
