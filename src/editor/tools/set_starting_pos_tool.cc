@@ -60,12 +60,16 @@ int32_t editor_tool_set_starting_pos_callback
 	// Area around already placed players
 	Widelands::PlayerNumber const nr_players = map.get_nrplayers();
 	for (Widelands::PlayerNumber p = 1, last = current_player_ - 1;; ++p) {
-		for (; p <= last; ++p)
-			if (Widelands::Coords const sp = map.get_starting_pos(p))
-				if (map.calc_distance(sp, c) < MIN_PLACE_AROUND_PLAYERS)
+		for (; p <= last; ++p) {
+			if (Widelands::Coords const sp = map.get_starting_pos(p)) {
+				if (map.calc_distance(sp, c) < MIN_PLACE_AROUND_PLAYERS) {
 					return 0;
-		if (last == nr_players)
+				}
+			}
+		}
+		if (last == nr_players) {
 			break;
+		}
 		last = nr_players;
 	}
 

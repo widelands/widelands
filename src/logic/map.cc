@@ -303,6 +303,7 @@ void Map::create_empty_map
 	 const std::string& author,
 	 const std::string& description)
 {
+	cleanup();
 	set_size(w, h);
 	set_name       (name);
 	set_author     (author);
