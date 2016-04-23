@@ -1,5 +1,5 @@
 /*
-** $Id: lmathlib.c,v 1.114 2014/12/27 20:32:26 roberto Exp $
+** $Id: lmathlib.c,v 1.117 2015/10/02 15:39:23 roberto Exp $
 ** Standard mathematical library
 ** See Copyright Notice in lua.h
 */
@@ -39,7 +39,7 @@
 static int math_abs (lua_State *L) {
   if (lua_isinteger(L, 1)) {
     lua_Integer n = lua_tointeger(L, 1);
-    if (n < 0) n = (lua_Integer)(0u - n);
+    if (n < 0) n = (lua_Integer)(0u - (lua_Unsigned)n);
     lua_pushinteger(L, n);
   }
   else
@@ -183,6 +183,9 @@ static int math_log (lua_State *L) {
     res = l_mathop(log)(x);
   else {
     lua_Number base = luaL_checknumber(L, 2);
+#if !defined(LUA_USE_C89)
+    if (base == 2.0) res = l_mathop(log2)(x); else
+#endif
     if (base == 10.0) res = l_mathop(log10)(x);
     else res = l_mathop(log)(x)/l_mathop(log)(base);
   }
@@ -270,7 +273,7 @@ static int math_random (lua_State *L) {
 
 static int math_randomseed (lua_State *L) {
   l_srand((unsigned int)(lua_Integer)luaL_checknumber(L, 1));
-  (void)rand(); /* discard first value to avoid undesirable correlations */
+  (void)l_rand(); /* discard first value to avoid undesirable correlations */
   return 0;
 }
 
