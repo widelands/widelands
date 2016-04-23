@@ -74,7 +74,6 @@ private:
 
 	void check_caret();
 
-	int         margin_y_;
 	bool        history_active_;
 	int16_t     history_position_;
 	std::string history_[CHAT_HISTORY_SIZE];
