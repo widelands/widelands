@@ -239,7 +239,7 @@ void DismantleSite::draw
 
 	// Draw the partially dismantled building
 	static_assert(0 <= DISMANTLESITE_STEP_TIME, "assert(0 <= DISMANTLESITE_STEP_TIME) failed.");
-	uint32_t total_time = DISMANTLESITE_STEP_TIME * work_steps_;
+	const uint32_t total_time = DISMANTLESITE_STEP_TIME * work_steps_;
 	uint32_t completed_time = DISMANTLESITE_STEP_TIME * work_completed_;
 
 	if (working_)
@@ -255,7 +255,7 @@ void DismantleSite::draw
 	const uint16_t w = anim.width();
 	const uint16_t h = anim.height();
 
-	uint32_t lines = h * completed_time / total_time;
+	const uint32_t lines = total_time ? h * completed_time / total_time : 0;
 
 	dst.blit_animation(pos, anim_idx, tanim, player_color, Rect(Point(0, lines), w, h - lines));
 
