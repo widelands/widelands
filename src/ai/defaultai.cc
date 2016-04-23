@@ -5810,22 +5810,36 @@ void DefaultAI::review_wares_targets(uint32_t const gametime) {
 	tribe_ = &player_->tribe();
 
 	// to avoid floats real multiplicator is multiplicator/10
-	uint16_t multiplicator = 10;
-	if ((productionsites.size() + num_ports * 5) > 50) {
-		multiplicator = (productionsites.size() + num_ports * 5) / 5;
-	}
+	const uint16_t multiplicator =
+		std::max<uint16_t>((productionsites.size() + num_ports * 5) / 5, 10);
 
 	for (EconomyObserver* observer : economies) {
 		DescriptionIndex nritems = player_->egbase().tribes().nrwares();
 		for (Widelands::DescriptionIndex id = 0; id < nritems; ++id) {
-			const uint16_t default_target = tribe_->get_ware_descr(id)->default_target_quantity(tribe_->name());
+
+			// Just skip wares that are not used by a tribe
+			if (!tribe_->has_ware(id)) {
+				continue;
+			}
+
+			uint16_t default_target =
+				tribe_->get_ware_descr(id)->default_target_quantity(tribe_->name());
+
+			// It seems that when default target for ware is not set, it returns
+			// kInvalidWare (=254), this is confusing for AI so we change it to 10
+			if (default_target == Widelands::kInvalidWare) {
+				default_target = 10;
+			}
+
+			uint16_t new_target = std::max<uint16_t>(default_target * multiplicator / 10, 2);
+			assert(new_target>1);
 
 			game().send_player_command(*new Widelands::CmdSetWareTargetQuantity(
 			                              gametime,
 			                              player_number(),
 			                              player_->get_economy_number(&observer->economy),
 			                              id,
-			                              default_target * multiplicator / 10));
+			                              new_target));
 		}
 	}
 }
