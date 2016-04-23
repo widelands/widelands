@@ -47,6 +47,7 @@ DEF_ERR(EndOfText)
 DEF_ERR(InvalidColor)
 DEF_ERR(RenderError)
 DEF_ERR(SyntaxError)
+DEF_ERR(TextureTooBig)
 DEF_ERR(WidthTooSmall)
 
 #undef DEF_ERR

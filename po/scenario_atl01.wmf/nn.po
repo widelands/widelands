@@ -3,13 +3,14 @@
 # 
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
+# Thorbjørn Bruarøy, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-03-11 07:02+0000\n"
-"PO-Revision-Date: 2016-03-11 07:03+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2016-04-16 07:28+0000\n"
+"PO-Revision-Date: 2016-04-20 07:14+0000\n"
+"Last-Translator: Thorbjørn Bruarøy\n"
 "Language-Team: Norwegian Nynorsk (http://www.transifex.com/widelands/widelands/language/nn/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -22,16 +23,16 @@ msgstr ""
 #: ../../data/campaigns/atl01.wmf/scripting/init.lua:74
 msgctxt "message_short_title"
 msgid "Building lost!"
-msgstr ""
+msgstr "Bygning tapt!"
 
 #: ../../data/campaigns/atl01.wmf/scripting/init.lua:76
 msgid "We lost a building to the ocean!"
-msgstr ""
+msgstr "Me mista ein bygning til havet!"
 
 #: ../../data/campaigns/atl01.wmf/scripting/init.lua:82
 msgctxt "message_heading"
 msgid "Building lost!"
-msgstr ""
+msgstr "Bygning tapt!"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:32
 msgid "Ensure the supply of building wares"
@@ -429,7 +430,7 @@ msgstr ""
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:431
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:444
 msgid "Jundlina"
-msgstr ""
+msgstr "Jundlina"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:187
@@ -506,7 +507,7 @@ msgstr ""
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:410
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:430
 msgid "Jundlina Replies"
-msgstr ""
+msgstr "Jundlina svarar"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:222
@@ -642,7 +643,7 @@ msgstr ""
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:298
 msgid "Jundlina Nods"
-msgstr ""
+msgstr "Jundlina nikkar"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:300
@@ -694,7 +695,7 @@ msgstr ""
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:329
 msgid "Jundlina Received a Letter"
-msgstr ""
+msgstr "Jundlina mottok eit brev"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:332
@@ -769,7 +770,7 @@ msgstr ""
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:374
 msgid "Jundlina is Worried"
-msgstr ""
+msgstr "Jundlina er bekymra"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:376
@@ -783,7 +784,7 @@ msgstr ""
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:384
 msgid "One More Building"
-msgstr ""
+msgstr "Ein bygning til"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:387
@@ -798,7 +799,7 @@ msgstr ""
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:398
 msgid "The Water is Rising!"
-msgstr ""
+msgstr "Vannet stiger!"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:401
@@ -893,10 +894,10 @@ msgstr ""
 #: ../../data/scripting/format_scenario.lua:36
 #, lua-format
 msgid "“%s”"
-msgstr ""
+msgstr "“%s”"
 
-#: ../../data/scripting/format_scenario.lua:146
+#: ../../data/scripting/format_scenario.lua:96
 msgid "New Objective"
 msgid_plural "New Objectives"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Nytt mål"
+msgstr[1] "Nye mål"
