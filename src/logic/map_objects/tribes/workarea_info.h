@@ -31,16 +31,16 @@
  * or is needed by this buildingr., e.g. Areas for Mines, Fields of a Farm.
  * Worareas are shown on the Map when clicking on or placing a building.
  *
- * Each string contains a description of an  activity (or similar)
+ * Each string contains a description of an activity (or similar)
  * that can be performed within the radius. Examples are buldings
- * that can be extended like a Fortress, and will have a bigger
+ * that can be upgraded like a Fortress, and will have a bigger
  * workarea then.
  *
  * See LuaBuildingDescription::get_workarea_radius, InteractiveBase::show_work_area
  */
 
-// TODO(Hasi50): LuaBuildingDescription::get_workarea_radius does only us the very first
-// size found, which seems to be correct but depend on the std:map implemenataion
+// TODO(Hasi50): LuaBuildingDescription::get_workarea_radius will only give us the very first
+// size found, which seems to be correct but depends on the std:map implementation
 //
 // We could just use a unit8 as base for the map?
 // We should document (as const) the expected stings.
