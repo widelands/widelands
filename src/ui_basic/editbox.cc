@@ -374,7 +374,7 @@ void EditBox::draw(RenderTarget & odst)
 		 Point(get_x(), get_y()));
 
 	// Draw border.
-	if (get_w() >= kMarginX && get_h() >= margin_y_) {
+	if (get_w() >= 2 && get_h() >= 2) {
 		static const RGBColor black(0, 0, 0);
 
 		// bottom edge
