@@ -221,6 +221,10 @@ void NetClient::run ()
 		WLApplication::emergency_save(game);
 		d->game = nullptr;
 		disconnect("CLIENT_CRASHED");
+		// We will bounce back to the main menu, so we better log out
+		if (internet_) {
+			InternetGaming::ref().logout("CLIENT_CRASHED");
+		}
 		throw;
 	}
 }

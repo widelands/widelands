@@ -12,9 +12,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-04-09 07:23+0000\n"
-"PO-Revision-Date: 2016-04-09 07:24+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2016-04-16 07:28+0000\n"
+"PO-Revision-Date: 2016-04-16 17:22+0000\n"
+"Last-Translator: Teppo Mäenpää <teppo@runbox.com>\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -25,13 +25,13 @@ msgstr ""
 #: ../../data/scripting/format_scenario.lua:36
 #, lua-format
 msgid "“%s”"
-msgstr ""
+msgstr "\"%s\""
 
 #: ../../data/scripting/format_scenario.lua:96
 msgid "New Objective"
 msgid_plural "New Objectives"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Uusi tavoite"
+msgstr[1] "Uudet tavoitteet"
 
 #. * TRANSLATORS: Concatenate the last 2 items on a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
@@ -68,7 +68,7 @@ msgstr "%1$s ja %2$s"
 #. TRANSLATORS: Short for "Not enough space"
 #: ../../data/scripting/infrastructure.lua:157
 msgid "No Space"
-msgstr ""
+msgstr "Ei tilaa"
 
 #: ../../data/scripting/infrastructure.lua:158
 msgid ""
@@ -79,7 +79,7 @@ msgstr ""
 
 #: ../../data/scripting/infrastructure.lua:159
 msgid "Not enough space"
-msgstr ""
+msgstr "Ei tarpeeksi tilaa"
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
 #: ../../src/ai/computer_player.cc:42
@@ -287,7 +287,7 @@ msgstr "Karttaa ei ole tallennettu. Haluatko poistua?"
 #: ../../src/editor/editorinteractive.cc:648
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:122
 msgid "Creating empty map…"
-msgstr ""
+msgstr "Alustan tyhjää karttaa..."
 
 #. * TRANSLATORS: Default name for new map
 #: ../../src/editor/editorinteractive.cc:655
@@ -308,7 +308,7 @@ msgstr "Tuntematon"
 #: ../../src/editor/editorinteractive.cc:663
 #, c-format
 msgid "Loading map “%s”…"
-msgstr ""
+msgstr "Lataan karttaa \"%s\"..."
 
 #: ../../src/editor/map_generator.cc:792
 msgid "Random Player"
@@ -440,40 +440,40 @@ msgstr "Resurssin nimi: %s"
 msgid "Resource amount: %i"
 msgstr "Resurssimäärä: %i"
 
-#: ../../src/editor/tools/info_tool.cc:135
+#: ../../src/editor/tools/info_tool.cc:136
 msgid "No resources"
 msgstr "Ei resursseja"
 
-#: ../../src/editor/tools/info_tool.cc:139 ../../src/wui/mapdetails.cc:111
+#: ../../src/editor/tools/info_tool.cc:140 ../../src/wui/mapdetails.cc:136
 msgid "Map:"
 msgstr "Kartta:"
 
-#: ../../src/editor/tools/info_tool.cc:140
+#: ../../src/editor/tools/info_tool.cc:141
 #, c-format
 msgctxt "map_name"
 msgid "Name: %s"
 msgstr "Nimi: %s"
 
-#: ../../src/editor/tools/info_tool.cc:141
+#: ../../src/editor/tools/info_tool.cc:142
 #, c-format
 msgid "Size: %1$ix%2$i"
 msgstr "Koko: %1$ix%2$i"
 
-#: ../../src/editor/tools/info_tool.cc:146
+#: ../../src/editor/tools/info_tool.cc:147
 #, c-format
 msgid "Players: %u"
 msgstr "Pelaajia: %u"
 
-#: ../../src/editor/tools/info_tool.cc:149
+#: ../../src/editor/tools/info_tool.cc:150
 msgid "Players: -"
 msgstr "Pelaajia: "
 
-#: ../../src/editor/tools/info_tool.cc:152
+#: ../../src/editor/tools/info_tool.cc:153
 #, c-format
 msgid "Author: %s"
 msgstr "Tekijä: %s"
 
-#: ../../src/editor/tools/info_tool.cc:153
+#: ../../src/editor/tools/info_tool.cc:154
 #, c-format
 msgid "Descr: %s"
 msgstr "Kuvaus: %s"
@@ -585,7 +585,7 @@ msgstr "Tekijät:"
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:111
 #: ../../src/ui_fsmenu/campaign_select.cc:80
 #: ../../src/ui_fsmenu/campaign_select.cc:157
-#: ../../src/ui_fsmenu/campaign_select.cc:396 ../../src/wui/mapdetails.cc:133
+#: ../../src/ui_fsmenu/campaign_select.cc:396 ../../src/wui/mapdetails.cc:158
 msgid "Description:"
 msgstr "Kuvaus:"
 
@@ -761,13 +761,13 @@ msgstr "Luo kartta"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:458
 msgid "Generating random map…"
-msgstr ""
+msgstr "Kartta-arpajaiset meneillään..."
 
 #. * TRANSLATORS: Window title. This is shown after a random map has been
 #. created in the editor.
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:469
 msgid "Random Map"
-msgstr ""
+msgstr "Satunnainen kartta"
 
 #. * TRANSLATORS: This is shown after a random map has been created in the
 #. editor.
@@ -866,13 +866,13 @@ msgstr "Korkeustyökalun asetukset"
 #: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:42
 #: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:58
 msgid "Increase/Decrease Value:"
-msgstr ""
+msgstr "Nosto/laskumäärä:"
 
 #: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:47
 #: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:63
 #: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:56
 msgid "Set Value:"
-msgstr ""
+msgstr "Asetusarvo:"
 
 #. * TRANSLATORS: Editor change height access keys. *
 #: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:53
@@ -910,7 +910,7 @@ msgstr "Muuta korkeutta"
 
 #: ../../src/editor/ui_menus/tool_menu.cc:67
 msgid "Random height"
-msgstr ""
+msgstr "Satunnainen korkeus"
 
 #: ../../src/editor/ui_menus/tool_menu.cc:68 ../../src/wui/minimap.cc:143
 msgid "Terrain"
@@ -938,15 +938,15 @@ msgstr "Aseta koordinaattipisteen (0, 0) sijainti. Tämä vastaa minikartan vase
 
 #: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:41
 msgid "Random Height Options"
-msgstr ""
+msgstr "Korkeudenarvonta-asetukset"
 
 #: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:46
 msgid "Minimum Height:"
-msgstr ""
+msgstr "Vähimäiskorkeus:"
 
 #: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:51
 msgid "Maximum Height:"
-msgstr ""
+msgstr "Enimmäiskorkeus:"
 
 #. * TRANSLATORS: Editor random height access key. *
 #: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:62
@@ -958,16 +958,16 @@ msgstr ""
 
 #: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:80
 msgid "Random Height"
-msgstr ""
+msgstr "Satunnainen korkeus"
 
 #: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:87
 msgid "Fixed Height"
-msgstr ""
+msgstr "Määräkorkeus"
 
 #. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:81
 msgid "%1%: %2%"
-msgstr ""
+msgstr "%1%: %2%"
 
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:95
 msgid "Terrain Select"
@@ -998,12 +998,12 @@ msgstr "Lataan maailma-asetuksia"
 
 #: ../../src/logic/game.cc:247 ../../src/logic/game.cc:327
 msgid "Loading map…"
-msgstr ""
+msgstr "Lataan karttaa..."
 
 #: ../../src/logic/game.cc:373 ../../src/logic/game.cc:410
 #: ../../src/ui_basic/progresswindow.cc:50 ../../src/wlapplication.cc:1367
 msgid "Loading…"
-msgstr ""
+msgstr "Lataa..."
 
 #: ../../src/logic/game.cc:474
 msgid "Creating player infrastructure"
@@ -1354,34 +1354,34 @@ msgstr "Tutkimusmatka-alus odottaa ohjeitasi"
 #: ../../src/logic/map_objects/tribes/ship.cc:960
 msgctxt "ship_state"
 msgid "Shipping"
-msgstr ""
+msgstr "Rahtaa"
 
 #. * TRANSLATORS: This is a ship state. An expedition is waiting for your
 #. commands.
 #: ../../src/logic/map_objects/tribes/ship.cc:964
 msgctxt "ship_state"
 msgid "Waiting"
-msgstr ""
+msgstr "Odottaa"
 
 #. * TRANSLATORS: This is a ship state. An expedition is scouting for port
 #. spaces.
 #: ../../src/logic/map_objects/tribes/ship.cc:968
 msgctxt "ship_state"
 msgid "Scouting"
-msgstr ""
+msgstr "tutkii"
 
 #. * TRANSLATORS: This is a ship state. An expedition has found a port space.
 #: ../../src/logic/map_objects/tribes/ship.cc:972
 msgctxt "ship_state"
 msgid "Port Space Found"
-msgstr ""
+msgstr "Luonnonsatama löytyi"
 
 #. * TRANSLATORS: This is a ship state. An expedition is unloading
 #. wares/workers to build a port.
 #: ../../src/logic/map_objects/tribes/ship.cc:976
 msgctxt "ship_state"
 msgid "Founding a Colony"
-msgstr ""
+msgstr "Perustaa siirtokuntaa"
 
 #: ../../src/logic/map_objects/tribes/soldier.cc:1485
 #: ../../src/logic/map_objects/tribes/soldier.cc:1496
@@ -1476,7 +1476,7 @@ msgstr "Pelin toisto on loppunut ja peli on keskeytetty. Voit jatkaa peliä ja t
 
 #: ../../src/logic/save_handler.cc:106
 msgid "Saving game…"
-msgstr ""
+msgstr "Peliä tallennetaan..."
 
 #: ../../src/logic/save_handler.cc:125
 msgid "Saving failed!"
@@ -2088,20 +2088,20 @@ msgstr "Kasvata arvoa 10:llä"
 #, c-format
 msgid "%d minute"
 msgid_plural "%d minutes"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d minuutti"
+msgstr[1] "%d minuuttia"
 
 #. * TRANSLATORS: A spinbox unit
 #: ../../src/ui_basic/spinbox.cc:332
 #, c-format
 msgid "%d pixel"
 msgid_plural "%d pixels"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d pikseli"
+msgstr[1] "%d pikseliä"
 
 #: ../../src/ui_fsmenu/about.cc:39 ../../src/ui_fsmenu/main.cc:55
 msgid "About Widelands"
-msgstr ""
+msgstr "Tietoa Widelandsista"
 
 #: ../../src/ui_fsmenu/about.cc:47 ../../src/wui/watchwindow.cc:142
 msgid "Close"
@@ -2136,7 +2136,7 @@ msgstr "Tämän kampanjan vaikeustaso"
 #. * TRANSLATORS: Campaign difficulty table header
 #: ../../src/ui_fsmenu/campaign_select.cc:102
 msgid "Diff."
-msgstr ""
+msgstr "Taso"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:102
 msgid "Difficulty"
@@ -2216,7 +2216,7 @@ msgstr "Skenaarion nimi"
 msgid "#"
 msgstr "#"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:395 ../../src/wui/mapdetails.cc:109
+#: ../../src/ui_fsmenu/campaign_select.cc:395 ../../src/wui/mapdetails.cc:134
 msgid "Scenario:"
 msgstr "Skenaario:"
 
@@ -2241,7 +2241,7 @@ msgid_plural "The designers of this scenario"
 msgstr[0] "Tämän skenaarion suunnittelija"
 msgstr[1] "Tämän skenaarion suunnittelijat"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:428 ../../src/wui/mapdetails.cc:131
+#: ../../src/ui_fsmenu/campaign_select.cc:428 ../../src/wui/mapdetails.cc:156
 msgid "Author:"
 msgid_plural "Authors:"
 msgstr[0] "Tekijä:"
@@ -2350,7 +2350,7 @@ msgstr "nimetön"
 
 #: ../../src/ui_fsmenu/intro.cc:32
 msgid "Press any key or click to continue…"
-msgstr ""
+msgstr "Paina mitä tahansa näppäintä tai napsauta jatkaaksesi ..."
 
 #. * TRANSLATORS: Dialog box title for selecting between map or saved game for
 #. new multiplayer game
@@ -2803,7 +2803,7 @@ msgstr "Merenkäynti"
 
 #: ../../src/ui_fsmenu/mapselect.cc:100
 msgid "Artifacts"
-msgstr ""
+msgstr "Maamerkit"
 
 #: ../../src/ui_fsmenu/multiplayer.cc:36
 msgid "Choose game type"
@@ -2935,11 +2935,11 @@ msgstr "Automaattisia tallennustiedostoja:"
 
 #: ../../src/ui_fsmenu/options.cc:196
 msgid "Compress widelands data files (maps, replays and savegames)"
-msgstr ""
+msgstr "Pakkaa tiedostot (kartat, pelitallenteet yms)."
 
 #: ../../src/ui_fsmenu/options.cc:198
 msgid "Write syncstreams in network games to debug desyncs"
-msgstr ""
+msgstr "Tallenna syncstream-aputiedostoja verkkopeliongelmien tutkimista varten."
 
 #: ../../src/ui_fsmenu/options.cc:202
 msgid "Start building road after placing a flag"
@@ -2966,7 +2966,7 @@ msgstr "Kieli"
 
 #: ../../src/ui_fsmenu/options.cc:222
 msgid "Interface"
-msgstr ""
+msgstr "Käyttöliittymä"
 
 #: ../../src/ui_fsmenu/options.cc:223
 msgid "Windows"
@@ -3060,11 +3060,11 @@ msgstr "Upotetaanko alus?"
 #: ../../src/wui/actionconfirm.cc:356
 #, c-format
 msgid "Do you really want to sink %s?"
-msgstr ""
+msgstr "Haluatko todellakin upottaa aluksen %s?"
 
 #: ../../src/wui/actionconfirm.cc:398
 msgid "Cancel expedition?"
-msgstr ""
+msgstr "Peru tutkimusmatka"
 
 #: ../../src/wui/actionconfirm.cc:399
 msgid "Do you really want to cancel the active expedition?"
@@ -3741,18 +3741,18 @@ msgstr "ylätaso"
 msgid "Multiplayer Scenarios"
 msgstr "Moninpeliskenaarioita"
 
-#: ../../src/wui/mapdetails.cc:102
+#: ../../src/wui/mapdetails.cc:127
 msgid "Directory:"
 msgstr "Hakemisto:"
 
-#: ../../src/wui/mapdetails.cc:104
+#: ../../src/wui/mapdetails.cc:129
 msgid "The name of this directory"
 msgstr "Tämän hakemiston nimi"
 
 #. * TRANSLATORS: Tooltip in map description when translated map names are
 #. being displayed.
 #. * TRANSLATORS: %s is the English name of the map.
-#: ../../src/wui/mapdetails.cc:119
+#: ../../src/wui/mapdetails.cc:144
 #, c-format
 msgid "The original name of this map: %s"
 msgstr "Tämän kartan alkuperäinen nimi on %s"
@@ -3760,19 +3760,19 @@ msgstr "Tämän kartan alkuperäinen nimi on %s"
 #. * TRANSLATORS: Tooltip in map description when map names are being
 #. displayed in English.
 #. * TRANSLATORS: %s is the localized name of the map.
-#: ../../src/wui/mapdetails.cc:125
+#: ../../src/wui/mapdetails.cc:150
 #, c-format
 msgid "The name of this map in your language: %s"
 msgstr "Tämän kartan nimi äidinkielelläsi: %s"
 
-#: ../../src/wui/mapdetails.cc:129
+#: ../../src/wui/mapdetails.cc:154
 msgid "The name of this map"
 msgstr "Tämän kartan nimi"
 
 #. * TRANSLATORS: Map hint header when selecting a map.
-#: ../../src/wui/mapdetails.cc:137
+#: ../../src/wui/mapdetails.cc:162
 msgid "HINT:"
-msgstr ""
+msgstr "VINKKI:"
 
 #: ../../src/wui/maptable.cc:36
 msgid "Number of players"
@@ -3887,16 +3887,16 @@ msgstr "Heimo arvotaan."
 msgctxt "unit_narrow"
 msgid "%1%d"
 msgid_plural "%1%d"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1%pvä"
+msgstr[1] "%1%pv"
 
 #. * TRANSLATORS: hour(s). Keep this as short as possible. Used in statistics.
 #: ../../src/wui/plot_area.cc:128
 msgctxt "unit_narrow"
 msgid "%1%h"
 msgid_plural "%1%h"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1%t"
+msgstr[1] "%1%t"
 
 #. * TRANSLATORS: minute(s). Keep this as short as possible. Used in
 #. statistics.
@@ -3904,26 +3904,26 @@ msgstr[1] ""
 msgctxt "unit_narrow"
 msgid "%1%m"
 msgid_plural "%1%m"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1%m"
+msgstr[1] "%1%m"
 
 #. * TRANSLATORS: Generic unit label. Used in statistics.
 #: ../../src/wui/plot_area.cc:140
 msgctxt "unit_generic"
 msgid "days"
-msgstr ""
+msgstr "päivää"
 
 #. * TRANSLATORS: Generic unit label. Used in statistics.
 #: ../../src/wui/plot_area.cc:143
 msgctxt "unit_generic"
 msgid "hours"
-msgstr ""
+msgstr "tuntia"
 
 #. * TRANSLATORS: Generic unit label. Used in statistics.
 #: ../../src/wui/plot_area.cc:146
 msgctxt "unit_generic"
 msgid "minutes"
-msgstr ""
+msgstr "minuuttia"
 
 #: ../../src/wui/plot_area.cc:319
 msgid "game"

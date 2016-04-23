@@ -25,9 +25,11 @@
 #include <boost/format.hpp>
 
 #include "graphic/font_handler1.h"
+#include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "graphic/text/bidi.h"
 #include "graphic/text/font_set.h"
+#include "graphic/text/rt_errors.h"
 #include "graphic/text_constants.h"
 #include "ui_basic/mouse_constants.h"
 
@@ -96,7 +98,8 @@ EditBox::EditBox
 	m_->caret = 0;
 	m_->scrolloffset = 0;
 	// yes, use *signed* max as maximum length; just a small safe-guard.
-	m_->maxLength = std::numeric_limits<int32_t>::max();
+	m_->maxLength = std::min(g_gr->max_texture_size() / UI_FONT_SIZE_SMALL,
+									 std::numeric_limits<int32_t>::max());
 
 	set_handle_mouse(true);
 	set_can_focus(true);
@@ -158,7 +161,7 @@ uint32_t EditBox::max_length() const
  */
 void EditBox::set_max_length(uint32_t const n)
 {
-	m_->maxLength = n;
+	m_->maxLength = std::min(g_gr->max_texture_size() / UI_FONT_SIZE_SMALL, static_cast<int>(n));
 
 	if (m_->text.size() > m_->maxLength) {
 		m_->text.erase(m_->text.begin() + m_->maxLength, m_->text.end());

@@ -15,9 +15,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-04-07 14:12+0000\n"
-"PO-Revision-Date: 2016-04-08 19:01+0000\n"
-"Last-Translator: Matteo Viarengo <enthusedquill6@gmail.com>\n"
+"POT-Creation-Date: 2016-04-16 07:28+0000\n"
+"PO-Revision-Date: 2016-04-16 07:28+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -394,19 +394,11 @@ msgstr "La fabbbrica di asce barbarica è il sito di produzione intermedio in un
 #: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/helptexts.lua:23
 #: ../../data/tribes/buildings/productionsites/barbarians/bakery/helptexts.lua:26
 #: ../../data/tribes/buildings/productionsites/barbarians/cattlefarm/helptexts.lua:26
-#: ../../data/tribes/buildings/productionsites/barbarians/coalmine/helptexts.lua:24
-#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deep/helptexts.lua:24
-#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deeper/helptexts.lua:24
 #: ../../data/tribes/buildings/productionsites/barbarians/fishers_hut/helptexts.lua:23
-#: ../../data/tribes/buildings/productionsites/barbarians/gamekeepers_hut/helptexts.lua:24
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine/helptexts.lua:23
-#: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deep/helptexts.lua:23
-#: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deeper/helptexts.lua:23
 #: ../../data/tribes/buildings/productionsites/barbarians/granitemine/helptexts.lua:26
 #: ../../data/tribes/buildings/productionsites/barbarians/hunters_hut/helptexts.lua:23
 #: ../../data/tribes/buildings/productionsites/barbarians/ironmine/helptexts.lua:23
-#: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deep/helptexts.lua:23
-#: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deeper/helptexts.lua:23
 #: ../../data/tribes/buildings/productionsites/barbarians/lime_kiln/helptexts.lua:23
 #: ../../data/tribes/buildings/productionsites/barbarians/lumberjacks_hut/helptexts.lua:23
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/helptexts.lua:23
@@ -418,8 +410,8 @@ msgstr "La fabbbrica di asce barbarica è il sito di produzione intermedio in un
 #: ../../data/tribes/buildings/productionsites/barbarians/well/helptexts.lua:23
 #: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/helptexts.lua:26
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/helptexts.lua:26
-#: ../../data/tribes/scripting/help/global_helptexts.lua:58
-#: ../../data/tribes/scripting/help/global_helptexts.lua:85
+#: ../../data/tribes/scripting/help/global_helptexts.lua:59
+#: ../../data/tribes/scripting/help/global_helptexts.lua:89
 #, lua-format
 msgid "%d second"
 msgid_plural "%d seconds"
@@ -509,13 +501,19 @@ msgstr "Questa miniera sfrutta solo il %s della risorsa. Dopodichè avrà solo i
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine/helptexts.lua:24
-#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deep/helptexts.lua:24
-#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deeper/helptexts.lua:24
-#, lua-format
 msgctxt "barbarians_building"
 msgid ""
-"If the food supply is steady, this mine can produce coal in %s on average."
-msgstr "Se l'afflusso di cibo è regolare, questa miniera può produrre carbone in %s in media"
+"If the food supply is steady, this mine can produce coal in 32.5 seconds on "
+"average."
+msgstr ""
+
+#. TRANSLATORS: Performance helptext for a building
+#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deep/helptexts.lua:24
+msgctxt "barbarians_building"
+msgid ""
+"If the food supply is steady, this mine can produce coal in 19.5 seconds on "
+"average."
+msgstr ""
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deeper/helptexts.lua:19
@@ -526,6 +524,14 @@ msgid ""
 "after having done so, it will still have a %s chance of finding some more "
 "coal."
 msgstr "Questa minier a sfrutta tutte le risorse fino al livello più profondo. Ma anche quando è esaurita, avrà ancora un %s di possibilità di trovare altro carbone."
+
+#. TRANSLATORS: Performance helptext for a building
+#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deeper/helptexts.lua:24
+msgctxt "barbarians_building"
+msgid ""
+"If the food supply is steady, this mine can produce coal in 14.4 seconds on "
+"average."
+msgstr ""
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/farm/helptexts.lua:16
@@ -587,10 +593,9 @@ msgstr "Rilascia animali in libertà per sostenere la produzione di carne."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/gamekeepers_hut/helptexts.lua:24
-#, lua-format
 msgctxt "barbarians_building"
-msgid "The gamekeeper pauses %s before going to work again."
-msgstr "Il guardiacaccia fa una pausa di %s prima di tornare al lavoro."
+msgid "The gamekeeper pauses 52.5 seconds before going to work again."
+msgstr ""
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine/helptexts.lua:3
@@ -623,14 +628,20 @@ msgstr "Questa miniera sfrutta solo il %s della risorsa. Dopodichè avrà solo i
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine/helptexts.lua:23
-#: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deep/helptexts.lua:23
-#: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deeper/helptexts.lua:23
 #, lua-format
 msgctxt "barbarians_building"
 msgid ""
 "If the food supply is steady, this mine can produce gold ore in %s on "
 "average."
 msgstr "Se l'afflusso di cibo è regolare, questa miniera può produrre minerale aurifero in %s in media"
+
+#. TRANSLATORS: Performance helptext for a building
+#: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deep/helptexts.lua:23
+msgctxt "barbarians_building"
+msgid ""
+"If the food supply is steady, this mine can produce gold ore in 19.5 seconds"
+" on average."
+msgstr ""
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deeper/helptexts.lua:18
@@ -641,6 +652,14 @@ msgid ""
 "after having done so, it will still have a %s chance of finding some more "
 "gold ore."
 msgstr "Questa minier a sfrutta tutte le risorse fino al livello più profondo. Ma anche quando è esaurita, avrà ancora un %s di possibilità di trovare altro minerale aurifero."
+
+#. TRANSLATORS: Performance helptext for a building
+#: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deeper/helptexts.lua:23
+msgctxt "barbarians_building"
+msgid ""
+"If the food supply is steady, this mine can produce gold ore in 18.5 seconds"
+" on average."
+msgstr ""
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/granitemine/helptexts.lua:3
@@ -763,14 +782,20 @@ msgstr "Questa miniera sfrutta solo il %s della risorsa. Dopodichè avrà solo i
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/ironmine/helptexts.lua:23
-#: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deep/helptexts.lua:23
-#: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deeper/helptexts.lua:23
 #, lua-format
 msgctxt "barbarians_building"
 msgid ""
 "If the food supply is steady, this mine can produce iron ore in %s on "
 "average."
 msgstr "Se l'afflusso di cibo è regolare, questa miniera può produrre ferro grezzo in %s in media"
+
+#. TRANSLATORS: Performance helptext for a building
+#: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deep/helptexts.lua:23
+msgctxt "barbarians_building"
+msgid ""
+"If the food supply is steady, this mine can produce iron ore in 39.5 seconds"
+" on average."
+msgstr ""
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deeper/helptexts.lua:18
@@ -781,6 +806,14 @@ msgid ""
 "after having done so, it will still have a %s chance of finding some more "
 "iron ore."
 msgstr "Questa minier a sfrutta tutte le risorse fino al livello più profondo. Ma anche quando è esaurita, avrà ancora un %s di possibilità di trovare altro ferro grezzo."
+
+#. TRANSLATORS: Performance helptext for a building
+#: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deeper/helptexts.lua:23
+msgctxt "barbarians_building"
+msgid ""
+"If the food supply is steady, this mine can produce iron ore in 17.6 seconds"
+" on average."
+msgstr ""
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/lime_kiln/helptexts.lua:3
@@ -1298,8 +1331,8 @@ msgstr "I soldati barbari non possono addestrarsi in 'difesa' e pertanto rimarra
 
 #: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/helptexts.lua:26
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/helptexts.lua:26
-#: ../../data/tribes/scripting/help/global_helptexts.lua:70
-#: ../../data/tribes/scripting/help/global_helptexts.lua:84
+#: ../../data/tribes/scripting/help/global_helptexts.lua:72
+#: ../../data/tribes/scripting/help/global_helptexts.lua:88
 #, lua-format
 msgid "%d minute"
 msgid_plural "%d minutes"
@@ -2022,7 +2055,7 @@ msgstr "Fonte necessaria"
 msgid "Calculation needed"
 msgstr "Necessari calcoli"
 
-#: ../../data/tribes/scripting/help/global_helptexts.lua:83
+#: ../../data/tribes/scripting/help/global_helptexts.lua:87
 msgid "%1% and %2%"
 msgstr "%1% e %2%"
 

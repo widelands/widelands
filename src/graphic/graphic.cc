@@ -86,10 +86,12 @@ void Graphic::initialize(const TraceGl& trace_gl,
 	   SDL_CreateWindow("Widelands Window", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
 	                    window_mode_width_, window_mode_height_, SDL_WINDOW_OPENGL);
 
-	GLint max_texture_size;
+	GLint max;
 	gl_context_ = Gl::initialize(
 	   trace_gl == TraceGl::kYes ? Gl::Trace::kYes : Gl::Trace::kNo, sdl_window_,
-	   &max_texture_size);
+		&max);
+
+	max_texture_size_ = static_cast<int>(max);
 
 	resolution_changed();
 	set_fullscreen(init_fullscreen);
@@ -113,7 +115,7 @@ void Graphic::initialize(const TraceGl& trace_gl,
 	}
 
 	std::map<std::string, std::unique_ptr<Texture>> textures_in_atlas;
-	auto texture_atlases = build_texture_atlas(max_texture_size, &textures_in_atlas);
+	auto texture_atlases = build_texture_atlas(max_texture_size_, &textures_in_atlas);
 	image_cache_->fill_with_texture_atlases(
 	   std::move(texture_atlases), std::move(textures_in_atlas));
 }
