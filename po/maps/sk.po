@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-04-09 07:23+0000\n"
-"PO-Revision-Date: 2016-04-11 14:18+0000\n"
+"POT-Creation-Date: 2016-04-16 07:28+0000\n"
+"PO-Revision-Date: 2016-04-16 13:16+0000\n"
 "Last-Translator: MiroslavR <miroslavr256@gmail.com>\n"
 "Language-Team: Slovak (http://www.transifex.com/widelands/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
@@ -225,7 +225,7 @@ msgid ""
 "latitude; farming thrives, berries are abundant, and fish plentiful. The "
 "small human population of this place never knew famine. You warlording "
 "bastards just couldn’t leave this little paradise in peace, could you?"
-msgstr ""
+msgstr "Medzi Švédskom a Fínskom leží archipelágové more. Toto čarokrásne miesto nie je ani zem, ani more, ale spojením oboch. V rozsahu niekoľkých stoviek kilometrov sa nachádza najmenej 50 000 ostrovov a ostrovčekov, ktorých rozloha poväčšine dosahuje len pár akrov. Vzhľadom na svoju zemepisnú šírku sa vyznačuje pomerne miernym podnebím; poľnohospodárstvo prekvitá, bobulí je prebytok a rýb hojne. Ľudia žijúci na tomto mieste nikdy nepoznali hlad. Vaša dychtivosť po vojne vám nedovolila nechať tento malý raj na pokoji, však?"
 
 #: ../../data/maps/Archipelago_Sea.wmf/elemental:11
 msgid ""
@@ -808,7 +808,7 @@ msgstr "Keď vietor vzdul prvé duny na tieto opustené zdvojené lagúny, málo
 msgid ""
 "Defend your transport lines, or use ships to bypass the opponent. Then "
 "remove all enemy activity."
-msgstr ""
+msgstr "Obráňte svoje dopravné trasy alebo obíďte protivníka pomocou lodí. Potom zastavte všetku nepriateľskú činnosť."
 
 #: ../../data/maps/Twinkling_Waves.wmf/elemental:8
 msgid "Twinkling Waves"
