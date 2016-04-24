@@ -2413,7 +2413,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 					}
 
 				// this is penalty if there are existing mines too close
-				// it is treated as multiplicator for count of near mines
+				// it is treated as multiplier for count of near mines
 				uint32_t nearness_penalty = 0;
 				if ((mines_per_type[bo.mines].in_construction + mines_per_type[bo.mines].finished) ==
 				    0) {
@@ -5809,8 +5809,8 @@ void DefaultAI::review_wares_targets(uint32_t const gametime) {
 	player_ = game().get_player(player_number());
 	tribe_ = &player_->tribe();
 
-	// to avoid floats real multiplicator is multiplicator/10
-	const uint16_t multiplicator =
+	// to avoid floats real multiplier is multiplier/10
+	const uint16_t multiplier =
 		std::max<uint16_t>((productionsites.size() + num_ports * 5) / 5, 10);
 
 	for (EconomyObserver* observer : economies) {
@@ -5831,8 +5831,8 @@ void DefaultAI::review_wares_targets(uint32_t const gametime) {
 				default_target = 10;
 			}
 
-			uint16_t new_target = std::max<uint16_t>(default_target * multiplicator / 10, 2);
-			assert(new_target>1);
+			uint16_t new_target = std::max<uint16_t>(default_target * multiplier / 10, 2);
+			assert(new_target > 1);
 
 			game().send_player_command(*new Widelands::CmdSetWareTargetQuantity(
 			                              gametime,
