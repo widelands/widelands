@@ -1,14 +1,14 @@
 dirname = path.dirname(__file__)
 
--- TODO(GunChleoc): The animations were taken from the brewer.
+-- TODO(GunChleoc): Needs a walkload animation.
 animations = {
    idle = {
       pictures = path.list_files(dirname .. "idle_??.png"),
-      hotspot = { 8, 24 }
+      hotspot = { 12, 24 }
    }
 }
-add_worker_animations(animations, "walk", dirname, "walk", {14, 24}, 10)
-add_worker_animations(animations, "walkload", dirname, "walkload", {10, 22}, 10)
+add_worker_animations(animations, "walk", dirname, "walk", {12, 24}, 10)
+add_worker_animations(animations, "walkload", dirname, "walk", {12, 24}, 10)
 
 
 tribes:new_worker_type {
