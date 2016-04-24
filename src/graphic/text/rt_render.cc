@@ -603,7 +603,7 @@ public:
 			const std::string error_message =
 					(boost::format("Texture (%d, %d) too big! Maximum size is %d.")
 					 % width() % height() % g_gr->max_texture_size()).str();
-			log((error_message + "\n").c_str());
+			log("%s\n", error_message.c_str());
 			throw TextureTooBig(error_message);
 		}
 		Texture* rv = new Texture(width(), height());

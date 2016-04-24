@@ -166,10 +166,10 @@ else()
 endif()
 
 # Turn some warnings into errors.
+wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Werror=format-security")
 wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Werror=return-type")
 wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Werror=shadow")
 wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Werror=uninitialized")
-
 
 IF (WIN32)
   add_definitions(-DMINGW_HAS_SECURE_API)
