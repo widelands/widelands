@@ -218,6 +218,9 @@ void EditorInteractive::load(const std::string & filename) {
 	// Instead, delete and re-create the egbase.
 	egbase().cleanup_for_load();
 
+	// Select a tool that doesn't care about map changes
+	select_tool(tools()->info, EditorTool::First);
+
 	std::unique_ptr<Widelands::MapLoader> ml(map.get_correct_loader(filename));
 	if (!ml.get())
 		throw WLWarning
