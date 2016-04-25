@@ -121,10 +121,7 @@ void MainMenuNewMap::clicked_create_map() {
 
 	loader_ui.step(_("Creating empty map…"));
 
-	egbase.cleanup_for_load();
-
-	// Select a tool that doesn't care about map changes
-	parent.select_tool(parent.tools()->info, EditorTool::First);
+	parent.cleanup_for_load();
 
 	map.create_empty_map(
 				egbase.world(),
