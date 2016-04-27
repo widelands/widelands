@@ -7,7 +7,7 @@ tribes:new_immovable_type {
    descname = pgettext("immovable", "Blackroot Field (harvested)"),
    attributes = { "field" },
    programs = {
-      disappear = {
+      program = {
          "animate=idle 50000",
          "remove=",
       }
