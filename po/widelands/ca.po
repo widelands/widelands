@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-04-09 07:23+0000\n"
-"PO-Revision-Date: 2016-04-09 10:01+0000\n"
+"POT-Creation-Date: 2016-04-23 08:17+0000\n"
+"PO-Revision-Date: 2016-04-25 18:45+0000\n"
 "Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -437,40 +437,40 @@ msgstr "Nom del recurs: %s"
 msgid "Resource amount: %i"
 msgstr "Quantitat del recurs: %i"
 
-#: ../../src/editor/tools/info_tool.cc:135
+#: ../../src/editor/tools/info_tool.cc:136
 msgid "No resources"
 msgstr "Sense recursos"
 
-#: ../../src/editor/tools/info_tool.cc:139 ../../src/wui/mapdetails.cc:111
+#: ../../src/editor/tools/info_tool.cc:140 ../../src/wui/mapdetails.cc:136
 msgid "Map:"
 msgstr "Mapa:"
 
-#: ../../src/editor/tools/info_tool.cc:140
+#: ../../src/editor/tools/info_tool.cc:141
 #, c-format
 msgctxt "map_name"
 msgid "Name: %s"
 msgstr "Nom: %s"
 
-#: ../../src/editor/tools/info_tool.cc:141
+#: ../../src/editor/tools/info_tool.cc:142
 #, c-format
 msgid "Size: %1$ix%2$i"
 msgstr "Mida: %1$ix%2$i"
 
-#: ../../src/editor/tools/info_tool.cc:146
+#: ../../src/editor/tools/info_tool.cc:147
 #, c-format
 msgid "Players: %u"
 msgstr "Jugadors: %u"
 
-#: ../../src/editor/tools/info_tool.cc:149
+#: ../../src/editor/tools/info_tool.cc:150
 msgid "Players: -"
 msgstr "Jugadors: -"
 
-#: ../../src/editor/tools/info_tool.cc:152
+#: ../../src/editor/tools/info_tool.cc:153
 #, c-format
 msgid "Author: %s"
 msgstr "Obra de: %s"
 
-#: ../../src/editor/tools/info_tool.cc:153
+#: ../../src/editor/tools/info_tool.cc:154
 #, c-format
 msgid "Descr: %s"
 msgstr "Descr.: %s"
@@ -582,7 +582,7 @@ msgstr "Autors:"
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:111
 #: ../../src/ui_fsmenu/campaign_select.cc:80
 #: ../../src/ui_fsmenu/campaign_select.cc:157
-#: ../../src/ui_fsmenu/campaign_select.cc:396 ../../src/wui/mapdetails.cc:133
+#: ../../src/ui_fsmenu/campaign_select.cc:396 ../../src/wui/mapdetails.cc:158
 msgid "Description:"
 msgstr "Descripció:"
 
@@ -2213,7 +2213,7 @@ msgstr "Nom de l'escenari"
 msgid "#"
 msgstr "#"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:395 ../../src/wui/mapdetails.cc:109
+#: ../../src/ui_fsmenu/campaign_select.cc:395 ../../src/wui/mapdetails.cc:134
 msgid "Scenario:"
 msgstr "Escenari:"
 
@@ -2238,7 +2238,7 @@ msgid_plural "The designers of this scenario"
 msgstr[0] "La persona o equip que ha dissenyat l'escenari"
 msgstr[1] "Les persones o equips que han dissenyat l'escenari"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:428 ../../src/wui/mapdetails.cc:131
+#: ../../src/ui_fsmenu/campaign_select.cc:428 ../../src/wui/mapdetails.cc:156
 msgid "Author:"
 msgid_plural "Authors:"
 msgstr[0] "Obra de:"
@@ -2315,8 +2315,8 @@ msgid "Name"
 msgstr "Nom"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:145
-msgid "Points"
-msgstr "Punts"
+msgid "Version"
+msgstr "Versió"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:146
 #: ../../src/ui_fsmenu/options.cc:226
@@ -3397,7 +3397,7 @@ msgstr "Tipus"
 
 #: ../../src/wui/game_message_menu.cc:75 ../../src/wui/game_summary.cc:121
 msgid "Status"
-msgstr "Estat de la partida"
+msgstr "Estat"
 
 #. * TRANSLATORS: We have very little space here. You can also translate this
 #. as "Time" or "Time Sent"
@@ -3406,7 +3406,7 @@ msgstr "Estat de la partida"
 #: ../../src/wui/game_message_menu.cc:78
 msgctxt "message"
 msgid "Sent"
-msgstr "Hora de rebuda"
+msgstr "Hora"
 
 #. * TRANSLATORS: %s is a tooltip, Del is the corresponding hotkey
 #: ../../src/wui/game_message_menu.cc:148
@@ -3499,7 +3499,7 @@ msgstr "Objectius"
 #. * TRANSLATORS: Window label when "Exit game" has been pressed
 #: ../../src/wui/game_options_menu.cc:45
 msgid "Exit Game Confirmation"
-msgstr "Confirmació de sortir de la partida"
+msgstr "Menú de confirmació"
 
 #: ../../src/wui/game_options_menu.cc:46
 msgid "Are you sure you wish to exit this game?"
@@ -3738,18 +3738,18 @@ msgstr "carpeta superior"
 msgid "Multiplayer Scenarios"
 msgstr "Escenaris multijugador"
 
-#: ../../src/wui/mapdetails.cc:102
+#: ../../src/wui/mapdetails.cc:127
 msgid "Directory:"
 msgstr "Directori:"
 
-#: ../../src/wui/mapdetails.cc:104
+#: ../../src/wui/mapdetails.cc:129
 msgid "The name of this directory"
 msgstr "El nom d'aquest directori"
 
 #. * TRANSLATORS: Tooltip in map description when translated map names are
 #. being displayed.
 #. * TRANSLATORS: %s is the English name of the map.
-#: ../../src/wui/mapdetails.cc:119
+#: ../../src/wui/mapdetails.cc:144
 #, c-format
 msgid "The original name of this map: %s"
 msgstr "El nom original d'aquest mapa: %s"
@@ -3757,17 +3757,17 @@ msgstr "El nom original d'aquest mapa: %s"
 #. * TRANSLATORS: Tooltip in map description when map names are being
 #. displayed in English.
 #. * TRANSLATORS: %s is the localized name of the map.
-#: ../../src/wui/mapdetails.cc:125
+#: ../../src/wui/mapdetails.cc:150
 #, c-format
 msgid "The name of this map in your language: %s"
 msgstr "El nom del mapa en el teu idioma: %s"
 
-#: ../../src/wui/mapdetails.cc:129
+#: ../../src/wui/mapdetails.cc:154
 msgid "The name of this map"
 msgstr "El nom d'aquest mapa"
 
 #. * TRANSLATORS: Map hint header when selecting a map.
-#: ../../src/wui/mapdetails.cc:137
+#: ../../src/wui/mapdetails.cc:162
 msgid "HINT:"
 msgstr "Consell:"
 
