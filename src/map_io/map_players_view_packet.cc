@@ -123,15 +123,15 @@ namespace {
 	}                                                                                               \
 	catch (const FileError&) {                                                                     \
 		throw GameDataError("MapPlayersViewPacket::read: player %u:Could not open "        \
-		                      "\"%s\" for reading. This file should exist when \"%s\" exists",       \
-		                      plnum,                                                                 \
-		                      filename,                                                              \
-		                      unseen_times_filename);                                                \
+									 "\"%s\" for reading. This file should exist when \"%s\" exists",       \
+									 plnum,                                                                 \
+									 filename,                                                              \
+									 unseen_times_filename);                                                \
 	}
 
 // Try to find the file with newest fitting version number
 #define OPEN_INPUT_FILE_NEW_VERSION(                                                               \
-   filetype, file, filename, fileversion, filename_template, version)                              \
+	filetype, file, filename, fileversion, filename_template, version)                              \
 	uint8_t fileversion = version;                                                                  \
 	filetype file;                                                                                  \
 	char(filename)[FILENAME_SIZE];                                                                  \
@@ -144,10 +144,10 @@ namespace {
 		catch (...) {                                                                                \
 			if (fileversion == 0)                                                                     \
 				throw GameDataError("MapPlayersViewPacket::read: player %u:Could not open "  \
-				                      "\"%s\" for reading. This file should exist when \"%s\" exists", \
-				                      plnum,                                                           \
-				                      filename,                                                        \
-				                      unseen_times_filename);                                          \
+											 "\"%s\" for reading. This file should exist when \"%s\" exists", \
+											 plnum,                                                           \
+											 filename,                                                        \
+											 unseen_times_filename);                                          \
 		}                                                                                            \
 	}
 
@@ -169,32 +169,32 @@ namespace {
 #define CHECK_TRAILING_BYTES(file, filename)                                                       \
 	if (!(file).end_of_file())                                                                      \
 		throw GameDataError("MapPlayersViewPacket::read: player %u:"                       \
-		                      "Found %lu trailing bytes in \"%s\"",                                  \
-		                      plnum,                                                                 \
+									 "Found %lu trailing bytes in \"%s\"",                                  \
+									 plnum,                                                                 \
 									 static_cast<long unsigned int>((file).get_size() - (file).get_pos()),    \
-		                      filename);
+									 filename);
 
 
 // Errors for the Read* functions.
 struct TribeImmovableNonexistent : public FileRead::DataError {
 	TribeImmovableNonexistent(const std::string& Name)
-	   : DataError("immovable type \"%s\" does not seem to be a tribe immovable", Name.c_str()),
-	     name(Name) {
+		: DataError("immovable type \"%s\" does not seem to be a tribe immovable", Name.c_str()),
+		  name(Name) {
 	}
 
 	std::string name;
 };
 struct WorldImmovableNonexistent : public FileRead::DataError {
 	WorldImmovableNonexistent(char const* const Name)
-	   : DataError("world does not define immovable type \"%s\"",  Name),
-	     name(Name) {
+		: DataError("world does not define immovable type \"%s\"",  Name),
+		  name(Name) {
 	}
 	char const* const name;
 };
 struct BuildingNonexistent : public FileRead::DataError {
 	BuildingNonexistent(char const* const Name)
-	   : DataError("tribes do not define building type \"%s\"", Name),
-	     name(Name) {
+		: DataError("tribes do not define building type \"%s\"", Name),
+		  name(Name) {
 	}
 	char const* const name;
 };
@@ -888,7 +888,7 @@ inline static void write_unseen_immovable
 }
 
 #define WRITE(file, filename_template, version)                               \
-   snprintf(filename, sizeof(filename), filename_template, plnum, version);   \
+	snprintf(filename, sizeof(filename), filename_template, plnum, version);   \
 	(file).write(fs, filename);                                                \
 
 void MapPlayersViewPacket::write
@@ -991,12 +991,12 @@ void MapPlayersViewPacket::write
 						}
 
 						//  edges
-						if (!bl_seen & (f_everseen | bl_everseen))
+						if (!(bl_seen) & (f_everseen | bl_everseen))
 							roads_file.unsigned_8(f_player_field.road_sw());
-						if (!br_seen & (f_everseen | br_everseen))
+						if (!(br_seen) & (f_everseen | br_everseen))
 							roads_file.unsigned_8(f_player_field.road_se());
-						if (!r_seen & (f_everseen |  r_everseen))
-							roads_file.unsigned_8(f_player_field.road_e ());
+						if (!(r_seen) & (f_everseen | r_everseen))
+							roads_file.unsigned_8(f_player_field.road_e());
 					}
 
 					//  geologic survey
