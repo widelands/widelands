@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-04-03 19:12+0000\n"
-"PO-Revision-Date: 2016-04-05 21:59+0000\n"
+"POT-Creation-Date: 2016-04-23 08:17+0000\n"
+"PO-Revision-Date: 2016-04-28 15:15+0000\n"
 "Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -388,19 +388,11 @@ msgstr "El taller de destrals dels bàrbars és l'intermedi de la sèrie de tres
 #: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/helptexts.lua:23
 #: ../../data/tribes/buildings/productionsites/barbarians/bakery/helptexts.lua:26
 #: ../../data/tribes/buildings/productionsites/barbarians/cattlefarm/helptexts.lua:26
-#: ../../data/tribes/buildings/productionsites/barbarians/coalmine/helptexts.lua:24
-#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deep/helptexts.lua:24
-#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deeper/helptexts.lua:24
 #: ../../data/tribes/buildings/productionsites/barbarians/fishers_hut/helptexts.lua:23
-#: ../../data/tribes/buildings/productionsites/barbarians/gamekeepers_hut/helptexts.lua:24
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine/helptexts.lua:23
-#: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deep/helptexts.lua:23
-#: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deeper/helptexts.lua:23
 #: ../../data/tribes/buildings/productionsites/barbarians/granitemine/helptexts.lua:26
 #: ../../data/tribes/buildings/productionsites/barbarians/hunters_hut/helptexts.lua:23
 #: ../../data/tribes/buildings/productionsites/barbarians/ironmine/helptexts.lua:23
-#: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deep/helptexts.lua:23
-#: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deeper/helptexts.lua:23
 #: ../../data/tribes/buildings/productionsites/barbarians/lime_kiln/helptexts.lua:23
 #: ../../data/tribes/buildings/productionsites/barbarians/lumberjacks_hut/helptexts.lua:23
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/helptexts.lua:23
@@ -412,8 +404,8 @@ msgstr "El taller de destrals dels bàrbars és l'intermedi de la sèrie de tres
 #: ../../data/tribes/buildings/productionsites/barbarians/well/helptexts.lua:23
 #: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/helptexts.lua:26
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/helptexts.lua:26
-#: ../../data/tribes/scripting/help/global_helptexts.lua:58
-#: ../../data/tribes/scripting/help/global_helptexts.lua:85
+#: ../../data/tribes/scripting/help/global_helptexts.lua:59
+#: ../../data/tribes/scripting/help/global_helptexts.lua:89
 #, lua-format
 msgid "%d second"
 msgid_plural "%d seconds"
@@ -503,13 +495,19 @@ msgstr "Aquesta mina explota només el %s dels recursos. A partir de llavors, ti
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine/helptexts.lua:24
-#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deep/helptexts.lua:24
-#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deeper/helptexts.lua:24
-#, lua-format
 msgctxt "barbarians_building"
 msgid ""
-"If the food supply is steady, this mine can produce coal in %s on average."
-msgstr "Si se li subministren els aliments necessaris adequadament, aquesta mina pot cavar per aconseguir carbó cada %s de mitjana."
+"If the food supply is steady, this mine can produce coal in 32.5 seconds on "
+"average."
+msgstr "Si se li subministren els aliments necessaris adequadament, aquesta mina produirà carbó aproximadament cada 32,5 segons."
+
+#. TRANSLATORS: Performance helptext for a building
+#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deep/helptexts.lua:24
+msgctxt "barbarians_building"
+msgid ""
+"If the food supply is steady, this mine can produce coal in 19.5 seconds on "
+"average."
+msgstr "Si se li subministren els aliments necessaris adequadament, aquesta mina produirà carbó aproximadament cada 19,5 segons."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deeper/helptexts.lua:19
@@ -520,6 +518,14 @@ msgid ""
 "after having done so, it will still have a %s chance of finding some more "
 "coal."
 msgstr "Aquesta mina s'explota a fons i la probabilitat de trobar carbó és del %s."
+
+#. TRANSLATORS: Performance helptext for a building
+#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deeper/helptexts.lua:24
+msgctxt "barbarians_building"
+msgid ""
+"If the food supply is steady, this mine can produce coal in 14.4 seconds on "
+"average."
+msgstr "Si se li subministren els aliments necessaris adequadament, aquesta mina produirà carbó aproximadament cada 14,4 segons."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/farm/helptexts.lua:16
@@ -581,10 +587,9 @@ msgstr "Allibera animals a l'ecosistema per mantenir la població de peces de ca
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/gamekeepers_hut/helptexts.lua:24
-#, lua-format
 msgctxt "barbarians_building"
-msgid "The gamekeeper pauses %s before going to work again."
-msgstr "El guarda de peces de caça fa una pausa de %s abans de tornar a treballar de nou."
+msgid "The gamekeeper pauses 52.5 seconds before going to work again."
+msgstr "El guarda de peces de caça fa una pausa de 52,5 segons abans de tornar a treballar de nou."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine/helptexts.lua:3
@@ -617,14 +622,20 @@ msgstr "Aquesta mina explota només el %s dels recursos. A partir de llavors, ti
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine/helptexts.lua:23
-#: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deep/helptexts.lua:23
-#: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deeper/helptexts.lua:23
 #, lua-format
 msgctxt "barbarians_building"
 msgid ""
 "If the food supply is steady, this mine can produce gold ore in %s on "
 "average."
 msgstr "Si se li subministren els aliments necessaris adequadament, aquesta mina pot cavar per aconseguir mineral d'or cada %s de mitjana."
+
+#. TRANSLATORS: Performance helptext for a building
+#: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deep/helptexts.lua:23
+msgctxt "barbarians_building"
+msgid ""
+"If the food supply is steady, this mine can produce gold ore in 19.5 seconds"
+" on average."
+msgstr "Si se li subministren els aliments necessaris adequadament, aquesta mina produirà mineral d'or aproximadament cada 19,5 segons."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deeper/helptexts.lua:18
@@ -635,6 +646,14 @@ msgid ""
 "after having done so, it will still have a %s chance of finding some more "
 "gold ore."
 msgstr "Aquesta mina s'explota a fons i la probabilitat de trobar mineral d'or és del %s."
+
+#. TRANSLATORS: Performance helptext for a building
+#: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deeper/helptexts.lua:23
+msgctxt "barbarians_building"
+msgid ""
+"If the food supply is steady, this mine can produce gold ore in 18.5 seconds"
+" on average."
+msgstr "Si se li subministren els aliments necessaris adequadament, aquesta mina produirà mineral d'or aproximadament cada 18,5 segons."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/granitemine/helptexts.lua:3
@@ -757,14 +776,20 @@ msgstr "Aquesta mina explota només el %s dels recursos. A partir de llavors, ti
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/ironmine/helptexts.lua:23
-#: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deep/helptexts.lua:23
-#: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deeper/helptexts.lua:23
 #, lua-format
 msgctxt "barbarians_building"
 msgid ""
 "If the food supply is steady, this mine can produce iron ore in %s on "
 "average."
 msgstr "Si se li subministren els aliments necessaris adequadament, aquesta mina pot cavar per aconseguir mineral de ferro cada %s de mitjana."
+
+#. TRANSLATORS: Performance helptext for a building
+#: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deep/helptexts.lua:23
+msgctxt "barbarians_building"
+msgid ""
+"If the food supply is steady, this mine can produce iron ore in 39.5 seconds"
+" on average."
+msgstr "Si se li subministren els aliments necessaris adequadament, aquesta mina produirà mineral de ferro aproximadament cada 39,5 segons."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deeper/helptexts.lua:18
@@ -775,6 +800,14 @@ msgid ""
 "after having done so, it will still have a %s chance of finding some more "
 "iron ore."
 msgstr "Aquesta mina s'explota a fons i la probabilitat de trobar mineral de ferro és del %s."
+
+#. TRANSLATORS: Performance helptext for a building
+#: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deeper/helptexts.lua:23
+msgctxt "barbarians_building"
+msgid ""
+"If the food supply is steady, this mine can produce iron ore in 17.6 seconds"
+" on average."
+msgstr "Si se li subministren els aliments necessaris adequadament, aquesta mina produirà mineral de ferro aproximadament cada 17,6 segons."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/lime_kiln/helptexts.lua:3
@@ -1292,8 +1325,8 @@ msgstr "Els soldats bàrbars no es poden entrenar en defensa i mantindran sempre
 
 #: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/helptexts.lua:26
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/helptexts.lua:26
-#: ../../data/tribes/scripting/help/global_helptexts.lua:70
-#: ../../data/tribes/scripting/help/global_helptexts.lua:84
+#: ../../data/tribes/scripting/help/global_helptexts.lua:72
+#: ../../data/tribes/scripting/help/global_helptexts.lua:88
 #, lua-format
 msgid "%d minute"
 msgid_plural "%d minutes"
@@ -1759,7 +1792,7 @@ msgstr "Clic dret"
 #: ../../data/tribes/scripting/help/controls.lua:15
 msgctxt "hotkey"
 msgid "Middle-click or Ctrl + Left-click"
-msgstr "Click del botó del mig o Ctrl+Clic esquerre"
+msgstr "Clic del botó del mig o Ctrl+Clic esquerre"
 
 #: ../../data/tribes/scripting/help/controls.lua:15
 msgid "Minimize/Maximize window"
@@ -2016,7 +2049,7 @@ msgstr "Manca la font"
 msgid "Calculation needed"
 msgstr "Manca càlcul"
 
-#: ../../data/tribes/scripting/help/global_helptexts.lua:83
+#: ../../data/tribes/scripting/help/global_helptexts.lua:87
 msgid "%1% and %2%"
 msgstr "%1% i %2%"
 
@@ -2046,7 +2079,7 @@ msgstr "Finalitat:"
 #: ../../data/tribes/scripting/help/ware_help.lua:52
 #: ../../data/tribes/scripting/help/worker_help.lua:27
 msgid "Producer"
-msgstr "Productor"
+msgstr "Es produeix a:"
 
 #. TRANSLATORS: Ware Encyclopedia: Wares produced by a productionsite
 #: ../../data/tribes/scripting/help/ware_help.lua:93
@@ -2060,8 +2093,8 @@ msgstr[1] "Béns produïts:"
 #: ../../data/tribes/scripting/help/ware_help.lua:154
 msgid "Consumer"
 msgid_plural "Consumers"
-msgstr[0] "Consumidor"
-msgstr[1] "Consumidors"
+msgstr[0] "Utilitza aquest bé:"
+msgstr[1] "Utilitzen aquest bé:"
 
 #. TRANSLATORS: Worker Encyclopedia: Workers recruited by a productionsite
 #: ../../data/tribes/scripting/help/worker_help.lua:68
@@ -2147,8 +2180,8 @@ msgid "Increased by %d%% for each level."
 msgstr "Incrementa un %d%% per cada nivell."
 
 #: ../../data/tribes/scripting/help/worker_help.lua:202
-msgid "This solder cannot be trained in defense"
-msgstr "Aquest soldat no pot entrenar la seva defensa"
+msgid "This soldier cannot be trained in defense."
+msgstr "Aquest soldat no pot entrenar-se en defensa."
 
 #: ../../data/tribes/scripting/help/worker_help.lua:205
 msgid "Evade"

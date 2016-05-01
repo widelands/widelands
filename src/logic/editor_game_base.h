@@ -141,7 +141,7 @@ public:
 	Bob& create_critter(Coords, DescriptionIndex bob_type_idx, Player* owner = nullptr);
 	Bob& create_critter(Coords, const std::string& name, Player* owner = nullptr);
 	Immovable& create_immovable(Coords,
-										 uint32_t idx,
+										 DescriptionIndex idx,
 										 MapObjectDescr::OwnerType = MapObjectDescr::OwnerType::kWorld);
 	Immovable& create_immovable(Coords,
 										 const std::string& name,

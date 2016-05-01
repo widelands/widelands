@@ -75,8 +75,8 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive& parent)
                     _("Filename:"),
                     UI::Align::kLeft) {
 
-	// Make room for edit_options_
-	map_details_.set_size(map_details_.get_w(), map_details_.get_h() - buth_ - padding_);
+	// Make room for edit_options_ button
+	map_details_.set_max_height(map_details_.get_h() - buth_ - padding_);
 
 	table_.selected.connect(boost::bind(&MainMenuSaveMap::clicked_item, boost::ref(*this)));
 	table_.double_clicked.connect(
@@ -85,7 +85,7 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive& parent)
 	editbox_ = new UI::EditBox(this,
 	                           editbox_label_.get_x() + editbox_label_.get_w() + padding_,
 	                           editbox_label_.get_y(),
-	                           tablew_ - editbox_label_.get_w() - padding_ + 1,
+										tablew_ - editbox_label_.get_w() - padding_ + 1, buth_, 2,
 										g_gr->images().get("images/ui_basic/but1.png"));
 
 	editbox_->set_text(parent.egbase().map().get_name());

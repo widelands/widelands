@@ -136,7 +136,7 @@ bool FindNodeUnownedWalkable::accept(const Map&, const FCoords& fc) const {
 
 // Looking only for mines-capable fields nearby
 // of specific type
-FindNodeMineable::FindNodeMineable(Game& g, int32_t r) : game(g), res(r) {}
+FindNodeMineable::FindNodeMineable(Game& g, DescriptionIndex r) : game(g), res(r) {}
 
 bool FindNodeMineable::accept(const Map&, const FCoords& fc) const {
 

@@ -148,20 +148,20 @@ public:
 	 */
 	Workers get_incorporated_workers();
 
-	void insert_wares  (DescriptionIndex, uint32_t count);
-	void remove_wares  (DescriptionIndex, uint32_t count);
-	void insert_workers(DescriptionIndex, uint32_t count);
-	void remove_workers(DescriptionIndex, uint32_t count);
+	void insert_wares  (DescriptionIndex, Quantity count);
+	void remove_wares  (DescriptionIndex, Quantity count);
+	void insert_workers(DescriptionIndex, Quantity count);
+	void remove_workers(DescriptionIndex, Quantity count);
 
 	/* SoldierControl implementation */
 	std::vector<Soldier *> present_soldiers() const override;
 	std::vector<Soldier *> stationed_soldiers() const override {
 		return present_soldiers();
 	}
-	uint32_t min_soldier_capacity() const override {return 0;}
-	uint32_t max_soldier_capacity() const override {return 4294967295U;}
-	uint32_t soldier_capacity() const override {return max_soldier_capacity();}
-	void set_soldier_capacity(uint32_t /* capacity */) override {
+	Quantity min_soldier_capacity() const override {return 0;}
+	Quantity max_soldier_capacity() const override {return 4294967295U;}
+	Quantity soldier_capacity() const override {return max_soldier_capacity();}
+	void set_soldier_capacity(Quantity /* capacity */) override {
 		throw wexception("Not implemented for a Warehouse!");
 	}
 	void drop_soldier(Soldier &) override {
@@ -172,7 +172,7 @@ public:
 
 	bool fetch_from_flag(Game &) override;
 
-	uint32_t count_workers(const Game &, DescriptionIndex, const Requirements &);
+	Quantity count_workers(const Game &, DescriptionIndex, const Requirements &);
 	Worker & launch_worker(Game &, DescriptionIndex worker, const Requirements &);
 
 	// Adds the worker to the inventory. Takes ownership and might delete
@@ -188,9 +188,9 @@ public:
 	bool can_create_worker(Game &, DescriptionIndex) const;
 	void     create_worker(Game &, DescriptionIndex);
 
-	uint32_t get_planned_workers(Game &, DescriptionIndex index) const;
-	void plan_workers(Game &, DescriptionIndex index, uint32_t amount);
-	std::vector<uint32_t> calc_available_for_worker
+	Quantity get_planned_workers(Game &, DescriptionIndex index) const;
+	void plan_workers(Game &, DescriptionIndex index, Quantity amount);
+	std::vector<Quantity> calc_available_for_worker
 		(Game &, DescriptionIndex index) const;
 
 	void enable_spawn(Game &, uint8_t worker_types_without_cost_index);
@@ -240,7 +240,7 @@ private:
 		DescriptionIndex index;
 
 		/// How many workers of this type are we supposed to create?
-		uint32_t amount;
+		Quantity amount;
 
 		/// Requests to obtain the required build costs
 		std::vector<Request *> requests;

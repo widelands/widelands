@@ -154,7 +154,7 @@ struct FindNodeUnownedWalkable {
 // Looking only for mines-capable fields nearby
 // of specific type
 struct FindNodeMineable {
-	FindNodeMineable(Game& g, int32_t r);
+	FindNodeMineable(Game& g, DescriptionIndex r);
 
 	bool accept(const Map&, const FCoords& fc) const;
 
@@ -245,7 +245,7 @@ struct BuildableField {
 	int16_t distant_water;
 	int8_t fish_nearby;
 	int8_t critters_nearby;
-	int8_t ground_water;  // used by wells
+	ResourceAmount ground_water;  // used by wells
 	uint8_t space_consumers_nearby;
 	uint8_t rangers_nearby;
 	// to manage the military better following variables exists:
@@ -346,7 +346,7 @@ struct BuildingObserver {
 
 	uint16_t unconnected_count;  // to any warehouse (count of such buildings)
 
-	int32_t mines;           // type of resource it mines_
+	DescriptionIndex mines;           // type of resource it mines_
 	uint16_t mines_percent;  // % of res it can mine
 	uint32_t current_stats;
 

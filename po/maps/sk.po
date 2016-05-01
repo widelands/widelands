@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-04-03 19:12+0000\n"
-"PO-Revision-Date: 2016-04-06 10:36+0000\n"
+"POT-Creation-Date: 2016-04-23 08:17+0000\n"
+"PO-Revision-Date: 2016-04-27 19:31+0000\n"
 "Last-Translator: MiroslavR <miroslavr256@gmail.com>\n"
 "Language-Team: Slovak (http://www.transifex.com/widelands/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
@@ -141,7 +141,7 @@ msgstr "Osada vo vyhnanstve"
 #: ../../data/campaigns/campaigns.conf:100
 #: ../../data/campaigns/dummy.wmf/elemental:7
 msgid "Not yet implemented"
-msgstr "Ešte nezavedené"
+msgstr "Ešte neimplementované"
 
 #: ../../data/campaigns/dummy.wmf/elemental:9
 msgid "Nobody"
@@ -225,14 +225,14 @@ msgid ""
 "latitude; farming thrives, berries are abundant, and fish plentiful. The "
 "small human population of this place never knew famine. You warlording "
 "bastards just couldn’t leave this little paradise in peace, could you?"
-msgstr ""
+msgstr "Medzi Švédskom a Fínskom leží archipelágové more. Toto čarokrásne miesto nie je ani zem, ani more, ale spojením oboch. V rozsahu niekoľkých stoviek kilometrov sa nachádza najmenej 50 000 ostrovov a ostrovčekov, ktorých rozloha poväčšine dosahuje len pár akrov. Vzhľadom na svoju zemepisnú šírku sa vyznačuje pomerne miernym podnebím; poľnohospodárstvo prekvitá, bobulí je prebytok a rýb hojne. Ľudia žijúci na tomto mieste nikdy nepoznali hlad. Vaša dychtivosť po vojne vám nedovolila nechať tento malý raj na pokoji, však?"
 
 #: ../../data/maps/Archipelago_Sea.wmf/elemental:11
 msgid ""
 "Large plots are rare on those small islands. Prioritize construction of "
 "large buildings on them. Sometimes you will need big military buildings to "
 "expand all the way to the next island. The AI will perform poorly."
-msgstr ""
+msgstr "Veľké parcely sa na týchto ostrovčekoch vyskytujú zriedkavo. Stavajte na nich preto prioritne veľké budovy. Niekedy je na ovládnutie ďalších ostrovov nutné postaviť veľké vojenské budovy. Umelá inteligencia vykazuje slabý výkon."
 
 #: ../../data/maps/Atoll.wmf/elemental:8
 msgid "Atoll"
@@ -288,7 +288,7 @@ msgid ""
 "player has plenty of good land, but must move far from his starting position"
 " to find ores. Blue player takes the middle ground – he has some fertile "
 "land and is not too far away from the resources."
-msgstr ""
+msgstr "Červený hráč sa nachádza v blízkosti rúd, ale má nedostatok úrodného terénu. Žltý hráč má dobrej pôdy dosť, no aby našiel rudy, musí sa od svojej začiatočnej pozície vzdialiť. Modrý hráč stojí niekde uprostred – má nejakú úrodnú pôdu a od zdrojov nie je veľmi ďaleko."
 
 #: ../../data/maps/Crater.wmf/elemental:8
 msgid "Crater"
@@ -325,8 +325,8 @@ msgstr "Dolomity"
 
 #: ../../data/maps/Dolomites_v2.wmf/elemental:10
 msgid ""
-"The jewel of the alps, the dolomites mountain range has been declared a "
-"world heritage site for its pristine beauty. This map is an as-faithful-as-"
+"The jewel of the Alps, the Dolomites mountain range has been declared a "
+"World Heritage Site for its pristine beauty. This map is an as-faithful-as-"
 "reasonable reconstruction of the area delimited by Cortina d’Ampezzo in the "
 "north-east and Canazei in the south-west. If you have to be pitted in a duel"
 " to the death against your enemies, it may as well be in a beautiful place."
@@ -335,10 +335,10 @@ msgstr "Pohorie Dolomity, klenot Álp, bolo vyhlásené za svetové dedičstvo v
 #: ../../data/maps/Dolomites_v2.wmf/elemental:11
 msgid ""
 "There is lot of flat ground on the mountains. Unfortunately, most of it is "
-"vertical. Use the little building space that you have wisely.  A fortress at"
-" the mouth of a narrow mountain pass can be a formidable obstacle to an "
-"enemy army. Use the terrain to your advantage."
-msgstr ""
+"vertical. Use the little building space that you have wisely. A fortress at "
+"the mouth of a narrow mountain pass can be a formidable obstacle to an enemy"
+" army. Use the terrain to your advantage."
+msgstr "Hory sú plné rovného terénu. Poväčšine však, nanešťastie, ide o úbočia. Priestoru na stavbu je málo, preto ho využite rozumne. Pevnosť naspodku úzkeho priesmyku môže pre nepriateľskú armádu znamenať ťažko prekonateľnú prekážku. Využite terén vo svoj prospech."
 
 #: ../../data/maps/Elven_Forests.wmf/elemental:8
 msgid "Elven Forests"
@@ -358,7 +358,7 @@ msgstr "Spoločenstvá"
 msgid ""
 "Ships are your best fellows. Starting positions are similar, so the map "
 "should be fair."
-msgstr ""
+msgstr "Lode sú vašimi najlepšími priateľmi. Začiatočné pozície sú podobné, mapa by preto mala byť spravodlivá."
 
 #: ../../data/maps/Fellowships_v2.wmf/elemental:11
 msgid ""
@@ -381,7 +381,7 @@ msgstr "Toto je nádherná fínska krajina, plná jazier, riek, prastarých leso
 msgid ""
 "Yellow player has a much easier starting position than the other two; this "
 "map is suited for 1v2."
-msgstr ""
+msgstr "Začiatočná pozícia žltého hráča mu v porovnaní s ostatnými dvoma podstatne zľahčuje hru; táto mapa je vhodná na boj 1 proti 2."
 
 #: ../../data/maps/Firegames.wmf/elemental:8
 msgid "Firegames"
@@ -756,7 +756,7 @@ msgstr "Traja bojovníci"
 msgid ""
 "Mighty mountains divide this land into three fertile valleys. But a path "
 "connects the valleys and thus a fight seems inescapable!"
-msgstr ""
+msgstr "Mohutné hory rozdeľujú toto územie na tri úrodné údolia. Tieto údolia sú však spojené cestou, a preto sa zdá, že boju sa nevyhnete."
 
 #: ../../data/maps/Three_Warriors.wmf/elemental:11
 msgid "Water can be found around the lakes."
@@ -808,7 +808,7 @@ msgstr "Keď vietor vzdul prvé duny na tieto opustené zdvojené lagúny, málo
 msgid ""
 "Defend your transport lines, or use ships to bypass the opponent. Then "
 "remove all enemy activity."
-msgstr ""
+msgstr "Obráňte svoje dopravné trasy alebo obíďte protivníka pomocou lodí. Potom zastavte všetku nepriateľskú činnosť."
 
 #: ../../data/maps/Twinkling_Waves.wmf/elemental:8
 msgid "Twinkling Waves"
@@ -842,13 +842,13 @@ msgstr "Uprostred leta niekoľko sopečných výbuchov privolalo zimu. Zdalo sa,
 
 #: ../../data/maps/Wideworld.wmf/elemental:8
 msgid "Wide World"
-msgstr ""
+msgstr "Šíry svet"
 
 #: ../../data/maps/Wideworld.wmf/elemental:10
 msgid ""
 "The world is not enough! If you want to win, you have to send some ships. "
 "But remember: your opponents are very close to you."
-msgstr ""
+msgstr "Svet nestačí! Ak chcete zvíťaziť, musíte vyslať lode. Nezabúdajte však, že vaši protivníci sú pri vás nebezpečne blízko."
 
 #: ../../data/maps/Wisent_Valley.wmf/elemental:8
 msgid "Wisent Valley"
@@ -869,4 +869,4 @@ msgid ""
 " 4 players’ map, with a black AI to add a complication to the expansion of "
 "the other players, or you can play as a challenge with the black player "
 "against the other 4 (VERY difficult)."
-msgstr ""
+msgstr "Čierny hráč je obkľúčený ostatnými hráčmi v strede mapy a nemá k dispozícii žiadne zdroje. Mapu možno hrať troma rôznymi spôsobmi: bez čierneho hráča ako obyčajnú mapu pre 4 hráčov, s umelou inteligenciou na mieste čierneho hráča, ktorá ostatným hráčom skomplikuje expanziu, alebo si môžete trúfnuť hrať za čierneho hráča proti ostatným 4 (VEĽMI náročná výzva)."

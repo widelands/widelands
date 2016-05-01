@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-04-03 19:12+0000\n"
-"PO-Revision-Date: 2016-04-03 19:29+0000\n"
+"POT-Creation-Date: 2016-04-16 07:28+0000\n"
+"PO-Revision-Date: 2016-04-16 15:32+0000\n"
 "Last-Translator: Любомир Василев\n"
 "Language-Team: Bulgarian (http://www.transifex.com/widelands/widelands/language/bg/)\n"
 "MIME-Version: 1.0\n"
@@ -388,19 +388,11 @@ msgstr "Работилницата за брадви на варварите е 
 #: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/helptexts.lua:23
 #: ../../data/tribes/buildings/productionsites/barbarians/bakery/helptexts.lua:26
 #: ../../data/tribes/buildings/productionsites/barbarians/cattlefarm/helptexts.lua:26
-#: ../../data/tribes/buildings/productionsites/barbarians/coalmine/helptexts.lua:24
-#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deep/helptexts.lua:24
-#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deeper/helptexts.lua:24
 #: ../../data/tribes/buildings/productionsites/barbarians/fishers_hut/helptexts.lua:23
-#: ../../data/tribes/buildings/productionsites/barbarians/gamekeepers_hut/helptexts.lua:24
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine/helptexts.lua:23
-#: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deep/helptexts.lua:23
-#: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deeper/helptexts.lua:23
 #: ../../data/tribes/buildings/productionsites/barbarians/granitemine/helptexts.lua:26
 #: ../../data/tribes/buildings/productionsites/barbarians/hunters_hut/helptexts.lua:23
 #: ../../data/tribes/buildings/productionsites/barbarians/ironmine/helptexts.lua:23
-#: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deep/helptexts.lua:23
-#: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deeper/helptexts.lua:23
 #: ../../data/tribes/buildings/productionsites/barbarians/lime_kiln/helptexts.lua:23
 #: ../../data/tribes/buildings/productionsites/barbarians/lumberjacks_hut/helptexts.lua:23
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/helptexts.lua:23
@@ -412,8 +404,8 @@ msgstr "Работилницата за брадви на варварите е 
 #: ../../data/tribes/buildings/productionsites/barbarians/well/helptexts.lua:23
 #: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/helptexts.lua:26
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/helptexts.lua:26
-#: ../../data/tribes/scripting/help/global_helptexts.lua:58
-#: ../../data/tribes/scripting/help/global_helptexts.lua:85
+#: ../../data/tribes/scripting/help/global_helptexts.lua:59
+#: ../../data/tribes/scripting/help/global_helptexts.lua:89
 #, lua-format
 msgid "%d second"
 msgid_plural "%d seconds"
@@ -503,13 +495,19 @@ msgstr "Тази мина оползотворява само %s от ресур
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine/helptexts.lua:24
-#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deep/helptexts.lua:24
-#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deeper/helptexts.lua:24
-#, lua-format
 msgctxt "barbarians_building"
 msgid ""
-"If the food supply is steady, this mine can produce coal in %s on average."
-msgstr "Ако запасите от храна са достатъчни и постоянни, тази мина може да произвежда въглища средно за %s."
+"If the food supply is steady, this mine can produce coal in 32.5 seconds on "
+"average."
+msgstr "Ако има постоянен приток на храна, тази мина може да произвежда въглища средно на всеки 32,5 секунди."
+
+#. TRANSLATORS: Performance helptext for a building
+#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deep/helptexts.lua:24
+msgctxt "barbarians_building"
+msgid ""
+"If the food supply is steady, this mine can produce coal in 19.5 seconds on "
+"average."
+msgstr "Ако има постоянен приток на храна, тази мина може да произвежда въглища средно на всеки 19,5 секунди."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deeper/helptexts.lua:19
@@ -520,6 +518,14 @@ msgid ""
 "after having done so, it will still have a %s chance of finding some more "
 "coal."
 msgstr "Тази мина оползотворява всички ресурси до най-дълбокото ниво. Но дори и така, тя все пак ще има само %s шанс да намери още въглища."
+
+#. TRANSLATORS: Performance helptext for a building
+#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deeper/helptexts.lua:24
+msgctxt "barbarians_building"
+msgid ""
+"If the food supply is steady, this mine can produce coal in 14.4 seconds on "
+"average."
+msgstr "Ако има постоянен приток на храна, тази мина може да произвежда въглища средно на всеки 14,4 секунди."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/farm/helptexts.lua:16
@@ -581,10 +587,9 @@ msgstr "Пуска диви животни на свобода, за да под
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/gamekeepers_hut/helptexts.lua:24
-#, lua-format
 msgctxt "barbarians_building"
-msgid "The gamekeeper pauses %s before going to work again."
-msgstr "Дивечовъдът спира за %s преди да започне работа отново."
+msgid "The gamekeeper pauses 52.5 seconds before going to work again."
+msgstr "Дивечовъдът спира за 52,5 секунди, преди да започне работа отново."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine/helptexts.lua:3
@@ -617,14 +622,20 @@ msgstr "Тази мина оползотворява само %s от ресур
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine/helptexts.lua:23
-#: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deep/helptexts.lua:23
-#: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deeper/helptexts.lua:23
 #, lua-format
 msgctxt "barbarians_building"
 msgid ""
 "If the food supply is steady, this mine can produce gold ore in %s on "
 "average."
 msgstr "Ако запасите от храна са достатъчни и постоянни, тази мина може да произвежда златна руда средно за %s."
+
+#. TRANSLATORS: Performance helptext for a building
+#: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deep/helptexts.lua:23
+msgctxt "barbarians_building"
+msgid ""
+"If the food supply is steady, this mine can produce gold ore in 19.5 seconds"
+" on average."
+msgstr "Ако има постоянен приток на храна, тази мина може да произвежда златна руда средно на всеки 19,5 секунди."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deeper/helptexts.lua:18
@@ -635,6 +646,14 @@ msgid ""
 "after having done so, it will still have a %s chance of finding some more "
 "gold ore."
 msgstr "Тази мина оползотворява всички ресурси до най-дълбокото ниво. Но дори и така, тя все пак ще има само %s шанс да намери още златна руда."
+
+#. TRANSLATORS: Performance helptext for a building
+#: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deeper/helptexts.lua:23
+msgctxt "barbarians_building"
+msgid ""
+"If the food supply is steady, this mine can produce gold ore in 18.5 seconds"
+" on average."
+msgstr "Ако има постоянен приток на храна, тази мина може да произвежда златна руда средно на всеки 18,5 секунди."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/granitemine/helptexts.lua:3
@@ -757,14 +776,20 @@ msgstr "Тази мина оползотворява само %s от ресур
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/ironmine/helptexts.lua:23
-#: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deep/helptexts.lua:23
-#: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deeper/helptexts.lua:23
 #, lua-format
 msgctxt "barbarians_building"
 msgid ""
 "If the food supply is steady, this mine can produce iron ore in %s on "
 "average."
 msgstr "Ако запасите от храна са достатъчни и постоянни, тази мина може да произвежда желязна руда средно за %s."
+
+#. TRANSLATORS: Performance helptext for a building
+#: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deep/helptexts.lua:23
+msgctxt "barbarians_building"
+msgid ""
+"If the food supply is steady, this mine can produce iron ore in 39.5 seconds"
+" on average."
+msgstr "Ако има постоянен приток на храна, тази мина може да произвежда желязна руда средно на всеки 39,5 секунди."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deeper/helptexts.lua:18
@@ -775,6 +800,14 @@ msgid ""
 "after having done so, it will still have a %s chance of finding some more "
 "iron ore."
 msgstr "Тази мина оползотворява всички ресурси до най-дълбокото ниво. Но дори и така, тя все пак ще има само %s шанс да намери още желязна руда."
+
+#. TRANSLATORS: Performance helptext for a building
+#: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deeper/helptexts.lua:23
+msgctxt "barbarians_building"
+msgid ""
+"If the food supply is steady, this mine can produce iron ore in 17.6 seconds"
+" on average."
+msgstr "Ако има постоянен приток на храна, тази мина може да произвежда желязна руда средно на всеки 17,6 секунди."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/lime_kiln/helptexts.lua:3
@@ -1292,8 +1325,8 @@ msgstr "Войниците на варварите не могат да трен
 
 #: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/helptexts.lua:26
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/helptexts.lua:26
-#: ../../data/tribes/scripting/help/global_helptexts.lua:70
-#: ../../data/tribes/scripting/help/global_helptexts.lua:84
+#: ../../data/tribes/scripting/help/global_helptexts.lua:72
+#: ../../data/tribes/scripting/help/global_helptexts.lua:88
 #, lua-format
 msgid "%d minute"
 msgid_plural "%d minutes"
@@ -2016,7 +2049,7 @@ msgstr "Няма източник"
 msgid "Calculation needed"
 msgstr "Не е изчислено"
 
-#: ../../data/tribes/scripting/help/global_helptexts.lua:83
+#: ../../data/tribes/scripting/help/global_helptexts.lua:87
 msgid "%1% and %2%"
 msgstr "%1% и %2%"
 
@@ -2147,8 +2180,8 @@ msgid "Increased by %d%% for each level."
 msgstr "Увеличава се с %d%% на всяко ниво."
 
 #: ../../data/tribes/scripting/help/worker_help.lua:202
-msgid "This solder cannot be trained in defense"
-msgstr "Този войник не може да тренира защитата си"
+msgid "This soldier cannot be trained in defense."
+msgstr "Този войник не може да тренира защитата си."
 
 #: ../../data/tribes/scripting/help/worker_help.lua:205
 msgid "Evade"

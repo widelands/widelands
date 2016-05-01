@@ -5,14 +5,15 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # GunChleoc, 2014
 # Jaypad <ju-ju@nataju.fr>, 2015
+# Renaud Bouchard, 2016
 # Tubuntu <tubuntu@testimonium.be>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-04-03 19:12+0000\n"
-"PO-Revision-Date: 2016-04-03 19:13+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2016-04-09 07:23+0000\n"
+"PO-Revision-Date: 2016-04-11 14:21+0000\n"
+"Last-Translator: Renaud Bouchard\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -71,7 +72,7 @@ msgid ""
 "If a Barbarian soldier is fully trained, he has level %1% health, level %2% "
 "attack, level %3% defense and level %4% evade. This is one fearsome warrior "
 "then! The individual abilities have the following meaning:"
-msgstr ""
+msgstr "Si un soldat Barbare est complètement entrainé, il aura un niveau de santé de %1%, un niveau de %2% en attaque, un niveau de %3% en défense et un niveau de %4% en esquive. C'est alors un guerrier craint de tous ! Les compétences individuelles ont cette signification :"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:39
 msgid "Health:"
@@ -82,7 +83,7 @@ msgstr "Santé :"
 msgid ""
 "The total life of a soldier. A Barbarian soldier starts with %1% health, and"
 " he will gain %2% health with each health level."
-msgstr ""
+msgstr "La santé totale d'un soldat. Un soldat Barbare commence avec %1% de santé et gagnera %2% points avec chaque niveau de santé."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:42
 msgid "Attack:"
@@ -95,7 +96,7 @@ msgid ""
 "successful. A Barbarian soldier with attack level 0 inflicts ~%1% points of "
 "health damage when he succeeds in hitting an enemy. For each attack level, "
 "he gains %2% damage points."
-msgstr ""
+msgstr "La quantité de dégâts qu'un soldat infligera à un ennemi s'il réussit son attaque. Un soldat Barbare avec un niveau d'attaque de 0 infligera %1% points de dégâts de santé lorsqu'il réussit à toucher un ennemi. Pour chaque niveau d'attaque, il gagnera %2% points de dégâts."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:46
 msgid "Defense:"
@@ -110,7 +111,7 @@ msgid ""
 "level 0, which means that the damage is always reduced by %1%%%. If an "
 "attacker with an attack value of 3500 points hits a Barbarian soldier, the "
 "Barbarian will lose 3500·%2%%% = %3% health."
-msgstr ""
+msgstr "La défense est le pourcentage qui est soustrait à la valeur d'attaque. Les Barbares ne peuvent pas entraîner cette compétence et ont donc toujours un niveau de défense de 0, ce qui signifie que leurs dommages sont toujours réduits de %1%%%. Si un soldat Barbare est attaqué par un ennemi ayant une valeur d'attaque de 3500, il perdra 3500·%2%%% = %3% points de santé."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:50
 msgid "Evade:"
@@ -123,7 +124,7 @@ msgid ""
 "Evade is the chance that the soldier is able to dodge an attack. A level 0 "
 "Barbarian has a %1%%% chance to evade an attack, and this increases in steps"
 " of %2%%% for each level."
-msgstr ""
+msgstr "L'esquive est la chance que le soldat évite une attaque. Au niveau 0, le soldat barbare a %1%%% de chance d'esquiver les attaques, et cette valeur augmente par pas de %2%%% à chaque niveau."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:58
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:80

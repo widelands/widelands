@@ -51,6 +51,7 @@ wl_library(third_party_eris
     eris/loslib.c
     eris/lparser.c
     eris/lparser.h
+    eris/lprefix.h
     eris/lstate.c
     eris/lstate.h
     eris/lstring.c
@@ -63,10 +64,13 @@ wl_library(third_party_eris
     eris/ltm.h
     eris/lua.h
     eris/lua.hpp
+    eris/lua.c
+    eris/luac.c
     eris/luaconf.h
     eris/lualib.h
     eris/lundump.c
     eris/lundump.h
+    eris/lutf8lib.c
     eris/lvm.c
     eris/lvm.h
     eris/lzio.c

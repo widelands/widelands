@@ -38,12 +38,11 @@ int32_t EditorSetResourcesTool::handle_click_impl(const Widelands::World& world,
 	 Widelands::Area<Widelands::FCoords>
 	 (map->get_fcoords(center.node), args->sel_radius));
 	do {
-		int32_t amount     = args->set_to;
-		int32_t max_amount = args->current_resource != Widelands::kNoResource ?
+		Widelands::ResourceAmount amount     = args->set_to;
+		Widelands::ResourceAmount max_amount = args->current_resource != Widelands::kNoResource ?
 							 world.get_resource(args->current_resource)->max_amount() : 0;
-		if (amount < 0)
-			amount = 0;
-		else if (amount > max_amount)
+
+		if (amount > max_amount)
 			amount = max_amount;
 
 		if (map->is_resource_valid(world, mr.location(), args->current_resource) &&
@@ -68,11 +67,9 @@ EditorSetResourcesTool::handle_undo_impl(const Widelands::World& world,
                                          EditorActionArgs* args,
                                          Widelands::Map* map) {
 	for (const auto & res : args->original_resource) {
-		int32_t amount     = res.amount;
-		int32_t max_amount = world.get_resource(args->current_resource)->max_amount();
+		Widelands::ResourceAmount amount     = res.amount;
+		Widelands::ResourceAmount max_amount = world.get_resource(args->current_resource)->max_amount();
 
-		if (amount < 0)
-			amount = 0;
 		if (amount > max_amount)
 			amount = max_amount;
 

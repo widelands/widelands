@@ -32,6 +32,12 @@ return {
       font = "default"
    },
 
+   br = {
+      name = "Brezhoneg",
+      sort_name = "Brezhoneg",
+      font = "default"
+   },
+
    ca = {
       name = "Català",
       sort_name = "Catala",

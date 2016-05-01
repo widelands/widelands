@@ -339,7 +339,7 @@ Find the best matching indicator for the given amount.
 ==============
 */
 DescriptionIndex TribeDescr::get_resource_indicator
-	(ResourceDescription const * const res, uint32_t const amount) const {
+	(ResourceDescription const * const res, const ResourceAmount amount) const {
 	if (!res || !amount) {
 		DescriptionIndex idx = immovable_index("resi_none");
 		if (!has_immovable(idx)) {
@@ -372,10 +372,10 @@ DescriptionIndex TribeDescr::get_resource_indicator
 		throw GameDataError
 			("Amount of %s is %i but max amount is %i",
 			 res->name().c_str(),
-			 amount,
-			 res->max_amount());
+			 static_cast<unsigned int>(amount),
+			 static_cast<unsigned int>(res->max_amount()));
 	}
-	if (static_cast<int32_t>(amount) < res->max_amount()) {
+	if (amount < res->max_amount()) {
 		bestmatch += 1; // Resi start with 1, not 0
 	}
 

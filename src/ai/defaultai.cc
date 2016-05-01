@@ -2413,7 +2413,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 					}
 
 				// this is penalty if there are existing mines too close
-				// it is treated as multiplicator for count of near mines
+				// it is treated as multiplier for count of near mines
 				uint32_t nearness_penalty = 0;
 				if ((mines_per_type[bo.mines].in_construction + mines_per_type[bo.mines].finished) ==
 				    0) {
@@ -4572,8 +4572,8 @@ bool DefaultAI::check_militarysites(uint32_t gametime) {
 		if (other_player_accessible(
 		       vision + 4, &unused1, &unused2, ms->get_position(), WalkSearch::kEnemy)) {
 
-			uint32_t const total_capacity = ms->max_soldier_capacity();
-			uint32_t const target_capacity = ms->soldier_capacity();
+			Quantity const total_capacity = ms->max_soldier_capacity();
+			Quantity const target_capacity = ms->soldier_capacity();
 
 			game().send_player_change_soldier_capacity(*ms, total_capacity - target_capacity);
 			changed = true;
@@ -5809,23 +5809,37 @@ void DefaultAI::review_wares_targets(uint32_t const gametime) {
 	player_ = game().get_player(player_number());
 	tribe_ = &player_->tribe();
 
-	// to avoid floats real multiplicator is multiplicator/10
-	uint16_t multiplicator = 10;
-	if ((productionsites.size() + num_ports * 5) > 50) {
-		multiplicator = (productionsites.size() + num_ports * 5) / 5;
-	}
+	// to avoid floats real multiplier is multiplier/10
+	const uint16_t multiplier =
+		std::max<uint16_t>((productionsites.size() + num_ports * 5) / 5, 10);
 
 	for (EconomyObserver* observer : economies) {
 		DescriptionIndex nritems = player_->egbase().tribes().nrwares();
 		for (Widelands::DescriptionIndex id = 0; id < nritems; ++id) {
-			const uint16_t default_target = tribe_->get_ware_descr(id)->default_target_quantity(tribe_->name());
+
+			// Just skip wares that are not used by a tribe
+			if (!tribe_->has_ware(id)) {
+				continue;
+			}
+
+			uint16_t default_target =
+				tribe_->get_ware_descr(id)->default_target_quantity(tribe_->name());
+
+			// It seems that when default target for ware is not set, it returns
+			// kInvalidWare (=254), this is confusing for AI so we change it to 10
+			if (default_target == Widelands::kInvalidWare) {
+				default_target = 10;
+			}
+
+			uint16_t new_target = std::max<uint16_t>(default_target * multiplier / 10, 2);
+			assert(new_target > 1);
 
 			game().send_player_command(*new Widelands::CmdSetWareTargetQuantity(
 			                              gametime,
 			                              player_number(),
 			                              player_->get_economy_number(&observer->economy),
 			                              id,
-			                              default_target * multiplicator / 10));
+			                              new_target));
 		}
 	}
 }

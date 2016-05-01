@@ -51,15 +51,15 @@ struct EditorSetResourcesTool : public EditorTool {
 		return "images/wui/editor/fsel_editor_set_resources.png";
 	}
 
-	uint8_t get_set_to() const       {return set_to_;}
-	void set_set_to(uint8_t const n) {set_to_ = n;}
+	Widelands::ResourceAmount get_set_to() const       {return set_to_;}
+	void set_set_to(Widelands::ResourceAmount const n) {set_to_ = n;}
 	Widelands::DescriptionIndex get_cur_res() const {return cur_res_;}
 	void set_cur_res(Widelands::DescriptionIndex const res)
 	{cur_res_ = res;}
 
 private:
 	Widelands::DescriptionIndex cur_res_;
-	uint8_t set_to_;
+	Widelands::ResourceAmount set_to_;
 };
 
 

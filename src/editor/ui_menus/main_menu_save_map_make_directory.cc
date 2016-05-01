@@ -33,7 +33,7 @@ MainMenuSaveMapMakeDirectory::MainMenuSaveMapMakeDirectory
 	vbox_(this, padding_, padding_, UI::Box::Vertical,
 		  get_inner_w() - 2 * padding_, get_inner_h() - 3 * padding_ - buth_, padding_ / 2),
 	label_(&vbox_, 0, 0, get_inner_w() - 2 * padding_, buth_, _("Enter Directory Name: "), UI::Align::kLeft),
-	edit_(&vbox_, 0, 0, get_inner_w() - 2 * padding_, g_gr->images().get("images/ui_basic/but1.png")),
+	edit_(&vbox_, 0, 0, get_inner_w() - 2 * padding_, 0, 4, g_gr->images().get("images/ui_basic/but1.png")),
 	ok_button_(
 		this, "ok",
 		UI::g_fh1->fontset()->is_rtl() ? padding_ : get_inner_w() - butw_ - padding_,

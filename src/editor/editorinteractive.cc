@@ -686,7 +686,7 @@ void EditorInteractive::map_changed(const MapWas& action) {
 			redo_.set_enabled(false);
 
 			tools_.reset(new Tools());
-			select_tool(tools_->increase_height, EditorTool::First);
+			select_tool(tools_->info, EditorTool::First);
 			set_sel_radius(0);
 
 			set_need_save(false);
@@ -698,6 +698,14 @@ void EditorInteractive::map_changed(const MapWas& action) {
 					child->die();
 				}
 			}
+
+			// Make sure that we will start at coordinates (0,0).
+			set_viewpoint(Point(0, 0), true);
+			set_sel_pos
+				(Widelands::NodeAndTriangle<>
+					(Widelands::Coords(0, 0),
+					 Widelands::TCoords<>
+						(Widelands::Coords(0, 0), Widelands::TCoords<>::D)));
 			break;
 
 		case MapWas::kGloballyMutated:

@@ -419,18 +419,18 @@ std::vector<Soldier *> TrainingSite::stationed_soldiers() const
 	return soldiers_;
 }
 
-uint32_t TrainingSite::min_soldier_capacity() const {
+Quantity TrainingSite::min_soldier_capacity() const {
 	return 0;
 }
-uint32_t TrainingSite::max_soldier_capacity() const {
+Quantity TrainingSite::max_soldier_capacity() const {
 	return descr().get_max_number_of_soldiers();
 }
-uint32_t TrainingSite::soldier_capacity() const
+Quantity TrainingSite::soldier_capacity() const
 {
 	return capacity_;
 }
 
-void TrainingSite::set_soldier_capacity(uint32_t const capacity) {
+void TrainingSite::set_soldier_capacity(Quantity const capacity) {
 	assert(min_soldier_capacity() <= capacity);
 	assert                        (capacity <= max_soldier_capacity());
 	assert(capacity_ != capacity);

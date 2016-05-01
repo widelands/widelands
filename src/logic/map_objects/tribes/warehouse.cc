@@ -128,7 +128,7 @@ void WarehouseSupply::set_economy(Economy * const e)
 
 
 /// Add wares and update the economy.
-void WarehouseSupply::add_wares(DescriptionIndex const id, uint32_t const count)
+void WarehouseSupply::add_wares(DescriptionIndex const id, Quantity const count)
 {
 	if (!count)
 		return;
@@ -779,14 +779,14 @@ PlayerImmovable::Workers Warehouse::get_incorporated_workers()
 
 
 /// Magically create wares in this warehouse. Updates the economy accordingly.
-void Warehouse::insert_wares(DescriptionIndex const id, uint32_t const count)
+void Warehouse::insert_wares(DescriptionIndex const id, Quantity const count)
 {
 	supply_->add_wares(id, count);
 }
 
 
 /// Magically destroy wares.
-void Warehouse::remove_wares(DescriptionIndex const id, uint32_t const count)
+void Warehouse::remove_wares(DescriptionIndex const id, Quantity const count)
 {
 	supply_->remove_wares(id, count);
 }
@@ -832,10 +832,9 @@ bool Warehouse::fetch_from_flag(Game & game)
  * \return the number of workers that we can launch satisfying the given
  * requirements.
  */
-uint32_t Warehouse::count_workers
-	(const Game & /* game */, DescriptionIndex ware, const Requirements & req)
+Quantity Warehouse::count_workers(const Game & /* game */, DescriptionIndex ware, const Requirements & req)
 {
-	uint32_t sum = 0;
+	Quantity sum = 0;
 
 	do {
 		sum += supply_->stock_workers(ware);
@@ -1116,7 +1115,7 @@ void Warehouse::create_worker(Game & game, DescriptionIndex const worker) {
  * Return the number of workers of the given type that we plan to
  * create in this warehouse.
  */
-uint32_t Warehouse::get_planned_workers(Game & /* game */, DescriptionIndex index) const
+Quantity Warehouse::get_planned_workers(Game & /* game */, DescriptionIndex index) const
 {
 	for (const PlannedWorkers& pw : planned_workers_) {
 		if (pw.index == index)
@@ -1131,8 +1130,7 @@ uint32_t Warehouse::get_planned_workers(Game & /* game */, DescriptionIndex inde
  *
  * This is the current stock plus any incoming transfers.
  */
-std::vector<uint32_t> Warehouse::calc_available_for_worker
-	(Game & /* game */, DescriptionIndex index) const
+std::vector<Quantity> Warehouse::calc_available_for_worker(Game & /* game */, DescriptionIndex index) const
 {
 	const WorkerDescr & w_desc = *owner().tribe().get_worker_descr(index);
 	std::vector<uint32_t> available;
@@ -1171,7 +1169,7 @@ std::vector<uint32_t> Warehouse::calc_available_for_worker
  * Set the amount of workers we plan to create
  * of the given \p index to \p amount.
  */
-void Warehouse::plan_workers(Game & game, DescriptionIndex index, uint32_t amount)
+void Warehouse::plan_workers(Game & game, DescriptionIndex index, Quantity amount)
 {
 	PlannedWorkers * pw = nullptr;
 
@@ -1234,7 +1232,7 @@ void Warehouse::update_planned_workers
 	for (const auto& buildcost : w_desc.buildcost()) {
 
 		const std::string & input_name = buildcost.first;
-		uint32_t supply;
+		Quantity supply;
 
 		DescriptionIndex id_w = owner().tribe().ware_index(input_name);
 		if (owner().tribe().has_ware(id_w)) {

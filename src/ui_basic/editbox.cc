@@ -25,9 +25,11 @@
 #include <boost/format.hpp>
 
 #include "graphic/font_handler1.h"
+#include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "graphic/text/bidi.h"
 #include "graphic/text/font_set.h"
+#include "graphic/text/rt_errors.h"
 #include "graphic/text_constants.h"
 #include "ui_basic/mouse_constants.h"
 
@@ -35,7 +37,7 @@
 
 namespace {
 
-constexpr int kMargin = 4;
+constexpr int kMarginX = 4;
 
 } // namespace
 
@@ -72,12 +74,14 @@ struct EditBoxImpl {
 
 EditBox::EditBox
 	(Panel * const parent,
-	 const int32_t x, const int32_t y, const uint32_t w,
+	 int32_t x, int32_t y, uint32_t w, uint32_t h,
+	 int margin_y,
 	 const Image* background,
 	 int font_size)
 	:
-	Panel(parent, x, y, w, UI::g_fh1->render(as_uifont(UI::g_fh1->fontset()->representative_character()),
-														  font_size)->height() + 2),
+	Panel(parent, x, y, w,
+			h > 0 ? h : UI::g_fh1->render(as_editorfont(UI::g_fh1->fontset()->representative_character(),
+																	  font_size))->height() + 2 * margin_y),
 	m_(new EditBoxImpl),
 	history_active_(false),
 	history_position_(-1)
@@ -93,7 +97,8 @@ EditBox::EditBox
 	m_->caret = 0;
 	m_->scrolloffset = 0;
 	// yes, use *signed* max as maximum length; just a small safe-guard.
-	m_->maxLength = std::numeric_limits<int32_t>::max();
+	m_->maxLength = std::min(g_gr->max_texture_size() / UI_FONT_SIZE_SMALL,
+									 std::numeric_limits<int32_t>::max());
 
 	set_handle_mouse(true);
 	set_can_focus(true);
@@ -155,7 +160,7 @@ uint32_t EditBox::max_length() const
  */
 void EditBox::set_max_length(uint32_t const n)
 {
-	m_->maxLength = n;
+	m_->maxLength = std::min(g_gr->max_texture_size() / UI_FONT_SIZE_SMALL, static_cast<int>(n));
 
 	if (m_->text.size() > m_->maxLength) {
 		m_->text.erase(m_->text.begin() + m_->maxLength, m_->text.end());
@@ -368,7 +373,7 @@ void EditBox::draw(RenderTarget & odst)
 		 Point(get_x(), get_y()));
 
 	// Draw border.
-	if (get_w() >= kMargin && get_h() >= kMargin) {
+	if (get_w() >= 2 && get_h() >= 2) {
 		static const RGBColor black(0, 0, 0);
 
 		// bottom edge
@@ -392,7 +397,7 @@ void EditBox::draw(RenderTarget & odst)
 			(Rect(Point(0, 0), get_w(), get_h()), MOUSE_OVER_BRIGHT_FACTOR);
 	}
 
-	const int max_width = get_w() - 2 * kMargin;
+	const int max_width = get_w() - 2 * kMarginX;
 
 	const Image* entry_text_im = UI::g_fh1->render(as_editorfont(m_->text, m_->fontsize));
 
@@ -402,7 +407,7 @@ void EditBox::draw(RenderTarget & odst)
 																		 m_->fontsize))->height() :
 							  entry_text_im->height();
 
-	Point point(kMargin, get_h() / 2);
+	Point point(kMarginX, get_h() / 2);
 
 	if (static_cast<int>(m_->align & UI::Align::kRight)) {
 		point.x += max_width;
@@ -428,11 +433,11 @@ void EditBox::draw(RenderTarget & odst)
 				// TODO(GunChleoc): Arabic: Fix scrolloffset
 				dst.blitrect(point,
 								 entry_text_im,
-								 Rect(point.x + m_->scrolloffset + kMargin, point.y, max_width, lineheight));
+								 Rect(point.x + m_->scrolloffset + kMarginX, 0, max_width, lineheight));
 			} else {
 				dst.blitrect(point,
 								 entry_text_im,
-								 Rect(point.x - m_->scrolloffset - kMargin, point.y, max_width, lineheight));
+								 Rect(-m_->scrolloffset, 0, max_width, lineheight));
 			}
 		}
 	} else {
@@ -469,16 +474,16 @@ void EditBox::check_caret()
 
 	switch (m_->align & UI::Align::kHorizontal) {
 	case UI::Align::kRight:
-		caretpos = get_w() - kMargin + m_->scrolloffset - rightw;
+		caretpos = get_w() - kMarginX + m_->scrolloffset - rightw;
 		break;
 	default:
-		caretpos = kMargin + m_->scrolloffset + leftw;
+		caretpos = kMarginX + m_->scrolloffset + leftw;
 	}
 
-	if (caretpos < kMargin)
-		m_->scrolloffset += kMargin - caretpos + get_w() / 5;
-	else if (caretpos > get_w() - kMargin)
-		m_->scrolloffset -= caretpos - get_w() + kMargin + get_w() / 5;
+	if (caretpos < kMarginX)
+		m_->scrolloffset += kMarginX - caretpos + get_w() / 5;
+	else if (caretpos > get_w() - kMarginX)
+		m_->scrolloffset -= caretpos - get_w() + kMarginX + get_w() / 5;
 
 	if ((m_->align & UI::Align::kHorizontal) == UI::Align::kLeft) {
 		if (m_->scrolloffset > 0)

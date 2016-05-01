@@ -1483,7 +1483,7 @@ void Soldier::battle_update(Game & game, State &)
 							 descr().descname(),
 							 "images/ui_basic/menu_help.png",
 							 _("Logic error"),
-							 messagetext,
+							 (boost::format("<rt><p font-size=12>%s</p></rt>") % messagetext).str(),
 						 	 get_position(),
 							 serial_));
 					opponent.owner().add_message
@@ -1494,7 +1494,7 @@ void Soldier::battle_update(Game & game, State &)
 							 descr().descname(),
 							 "images/ui_basic/menu_help.png",
 							 _("Logic error"),
-							 messagetext,
+							 (boost::format("<rt><p font-size=12>%s</p></rt>") % messagetext).str(),
 						 	 opponent.get_position(),
 							 serial_));
 					game.game_controller()->set_desired_speed(0);

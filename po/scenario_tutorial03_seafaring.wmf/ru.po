@@ -2,6 +2,7 @@
 # Copyright (C) 2005-2016 Widelands Development Team
 # 
 # Translators:
+# Aleksandr Gladkov <djanticisco@gmail.com>, 2016
 # Anton Khabarov <2233009@gmail.com>, 2015
 # Денис Шабанов <inactive+Dodolphin@transifex.com>, 2016
 # Федор <Lunar-energy@ya.ru>, 2015
@@ -9,9 +10,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-02-20 12:30+0000\n"
-"PO-Revision-Date: 2016-02-24 20:27+0000\n"
-"Last-Translator: Денис Шабанов <inactive+Dodolphin@transifex.com>\n"
+"POT-Creation-Date: 2016-04-07 14:12+0000\n"
+"PO-Revision-Date: 2016-04-07 22:57+0000\n"
+"Last-Translator: Aleksandr Gladkov <djanticisco@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -67,7 +68,7 @@ msgstr ""
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:43
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:45
 msgid "Ports"
-msgstr ""
+msgstr "Порты"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:46
 msgid ""
@@ -91,7 +92,7 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:57
 msgid "How to build a port"
-msgstr ""
+msgstr "Как построить порт?"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:58
 msgid ""
@@ -123,7 +124,7 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:70
 msgid "Build a port"
-msgstr ""
+msgstr "Построить гавань"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:71
 msgid "You always need a port when you want to transport wares with a ship."
@@ -149,11 +150,11 @@ msgstr ""
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:81
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:103
 msgid "Constructing ships"
-msgstr ""
+msgstr "Строительство кораблей"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:83
 msgid "Let’s build ships"
-msgstr ""
+msgstr "Давайте построим корабли"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:84
 msgid "Great. Your port has just been finished. Now we need some ships."
@@ -172,7 +173,7 @@ msgstr ""
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:91
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:93
 msgid "Build a shipyard"
-msgstr ""
+msgstr "Постройте верфь"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:94
 msgid "Ships are produced in a shipyard."
@@ -192,7 +193,7 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:105
 msgid "Waiting for the ships"
-msgstr ""
+msgstr "Ожидание кораблей"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:106
 msgid ""
@@ -227,7 +228,7 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:114
 msgid "Construct two ships"
-msgstr ""
+msgstr "Постройте два корабля"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:116
 msgid ""
@@ -245,7 +246,7 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:125
 msgid "No Iron"
-msgstr ""
+msgstr "Нет железа"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:127
 msgid "We lack iron"
@@ -277,7 +278,7 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:140
 msgid "Expeditions"
-msgstr ""
+msgstr "Экспедиции"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:141
 msgid ""
@@ -310,11 +311,11 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:150
 msgid "Start an expedition"
-msgstr ""
+msgstr "Начать экспедицию"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:153
 msgid "Start an expedition."
-msgstr ""
+msgstr "Начать экспедицию."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:155
 msgid ""
@@ -328,7 +329,7 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:163
 msgid "Start your expedition"
-msgstr ""
+msgstr "Начните вашу экспедицию"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:164
 msgid ""
@@ -378,11 +379,11 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:183
 msgid "Conclusion"
-msgstr ""
+msgstr "Заключительная часть"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:185
 msgid "Congratulations"
-msgstr ""
+msgstr "Поздравления"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:186
 msgid ""
@@ -419,10 +420,10 @@ msgstr ""
 msgid "“%s”"
 msgstr "“%s”"
 
-#: ../../data/scripting/format_scenario.lua:146
+#: ../../data/scripting/format_scenario.lua:96
 msgid "New Objective"
 msgid_plural "New Objectives"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Новая задача"
+msgstr[1] "Новых задач"
+msgstr[2] "Новых задач"
+msgstr[3] "Новые задачи"
