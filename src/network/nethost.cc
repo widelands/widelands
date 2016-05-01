@@ -354,25 +354,25 @@ struct HostChatProvider : public ChatProvider {
 			// Help
 			if (cmd == "help") {
 				c.msg = (boost::format("<br>%s<br>%s<br>%s<br>%s<br>%s<br>%s<br>%s") %
-							_("Available host commands are:")
-							%
+				         _("Available host commands are:")
+				         %
 							/** TRANSLATORS: Available host command */
-							_("/help  -  Shows this help")
-							%
+				         _("/help  -  Shows this help")
+				         %
 							/** TRANSLATORS: Available host command */
-							_("/announce <msg>  -  Send a chatmessage as announcement (system chat)")
-							%
+				         _("/announce <msg>  -  Send a chatmessage as announcement (system chat)")
+				         %
 							/** TRANSLATORS: Available host command */
-							_("/warn <name> <reason>  -  Warn the user <name> because of <reason>")
-							%
+				         _("/warn <name> <reason>  -  Warn the user <name> because of <reason>")
+				         %
 							/** TRANSLATORS: Available host command */
-							_("/kick <name> <reason>  -  Kick the user <name> because of <reason>")
-							%
+				         _("/kick <name> <reason>  -  Kick the user <name> because of <reason>")
+				         %
 							/** TRANSLATORS: Available host command */
-							_("/forcePause            -  Force the game to pause.")
-							%
+				         _("/forcePause            -  Force the game to pause.")
+				         %
 							/** TRANSLATORS: Available host command */
-							_("/endForcedPause        -  Return game to normal speed.")).str();
+				         _("/endForcedPause        -  Return game to normal speed.")).str();
 			}
 
 			// Announce
@@ -420,9 +420,9 @@ struct HostChatProvider : public ChatProvider {
 					} else {
 						kickClient = num;
 						c.msg =
-							(boost::format(_("Are you sure you want to kick %s?")) % arg1).str() + "<br>";
+						   (boost::format(_("Are you sure you want to kick %s?")) % arg1).str() + "<br>";
 						c.msg +=
-							(boost::format(_("The stated reason was: %s")) % kickReason).str() + "<br>";
+						   (boost::format(_("The stated reason was: %s")) % kickReason).str() + "<br>";
 						c.msg += (boost::format(_("If yes, type: /ack_kick %s")) % arg1).str();
 					}
 				}
@@ -2118,8 +2118,8 @@ void NetHost::handle_network ()
 		}
 	}
 
-	 // If a pause was forced or if the players all pause, send a ping regularly
-	 // to keep the sockets up and running
+    // If a pause was forced or if the players all pause, send a ping regularly
+    // to keep the sockets up and running
 	if ((forced_pause_ || real_speed() == 0) && (time(nullptr) > (d->lastpauseping + 20))) {
 		d->lastpauseping = time(nullptr);
 
