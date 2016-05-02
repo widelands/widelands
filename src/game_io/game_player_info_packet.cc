@@ -26,11 +26,12 @@
 #include "logic/game_data_error.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/player.h"
+#include "logic/playersmanager.h"
 #include "wui/interactive_player.h"
 
 namespace Widelands {
 
-constexpr uint16_t kCurrentPacketVersion = 19;
+constexpr uint16_t kCurrentPacketVersion = 20;
 
 void GamePlayerInfoPacket::read
 	(FileSystem & fs, Game & game, MapObjectLoader *) {
@@ -38,7 +39,7 @@ void GamePlayerInfoPacket::read
 		FileRead fr;
 		fr.open(fs, "binary/player_info");
 		uint16_t const packet_version = fr.unsigned_16();
-		if (packet_version == kCurrentPacketVersion) {
+		if (packet_version >= 19 && packet_version <= kCurrentPacketVersion) {
 			uint32_t const max_players = fr.unsigned_16();
 			for (uint32_t i = 1; i < max_players + 1; ++i) {
 				game.remove_player(i);
@@ -72,6 +73,19 @@ void GamePlayerInfoPacket::read
 					player.civil_blds_defeated_ = fr.unsigned_32();
 				}
 			}
+
+			// Result screen
+			PlayersManager* manager = game.player_manager();
+			const uint8_t no_endstatus = fr.unsigned_8();
+			for (uint8_t i = 0; i < no_endstatus; ++i) {
+				PlayerEndStatus status;
+				status.player = fr.unsigned_8();
+				status.result = static_cast<PlayerEndResult>(fr.unsigned_8());
+				status.time = fr.unsigned_32();
+				status.info = fr.c_string();
+				manager->set_player_end_status(status);
+			}
+
 			game.read_statistics(fr);
 		} else {
 			throw UnhandledVersionError("GamePlayerInfoPacket", packet_version, kCurrentPacketVersion);
@@ -118,8 +132,20 @@ void GamePlayerInfoPacket::write
 		fw.unsigned_32(plr->msites_defeated    ());
 		fw.unsigned_32(plr->civil_blds_lost    ());
 		fw.unsigned_32(plr->civil_blds_defeated());
-	} else
+
+	} else {
 		fw.unsigned_8(0); //  Player is NOT in game.
+	}
+
+	// Result screen
+	const std::vector<PlayerEndStatus>& end_status_list = game.player_manager()->get_players_end_status();
+	fw.unsigned_8(end_status_list.size());
+	for (const PlayerEndStatus& status : end_status_list) {
+		fw.unsigned_8(status.player);
+		fw.unsigned_8(static_cast<uint8_t>(status.result));
+		fw.unsigned_32(status.time);
+		fw.c_string(status.info.c_str());
+	}
 
 	game.write_statistics(fw);
 

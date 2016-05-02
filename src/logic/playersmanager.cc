@@ -120,5 +120,22 @@ void PlayersManager::add_player_end_status(const PlayerEndStatus& status)
 	}
 }
 
+void PlayersManager::set_player_end_status(const PlayerEndStatus& status)
+{
+	std::vector<PlayerEndStatus>::iterator it;
+	bool found = false;
+	for (it = players_end_status_.begin(); it != players_end_status_.end(); ++it) {
+		PlayerEndStatus pes = *it;
+		if (pes.player == status.player) {
+			pes = status;
+			found = true;
+			break;
+		}
+	}
+	if (!found) {
+		players_end_status_.push_back(status);
+	}
+}
+
 
 }  // namespace Widelands
