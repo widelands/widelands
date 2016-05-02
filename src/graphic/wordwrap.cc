@@ -191,7 +191,7 @@ void WordWrap::compute_end_of_line
 
 	// The line didn't fit.
 	// We just do a linear search ahead until we hit the max.
-	const icu::UnicodeString unicode_word(text.substr(line_start, orig_end).c_str());
+	const icu::UnicodeString unicode_word(text.substr(line_start, orig_end).c_str(), "UTF-8");
 	uint32_t line_width = 0;
 	int32_t end = -1;
 	icu::UnicodeString unicode_line;
