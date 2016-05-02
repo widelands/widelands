@@ -991,11 +991,11 @@ void MapPlayersViewPacket::write
 						}
 
 						//  edges
-						if (!(bl_seen) & (f_everseen | bl_everseen))
+						if ((!bl_seen) & (f_everseen | bl_everseen))
 							roads_file.unsigned_8(f_player_field.road_sw());
-						if (!(br_seen) & (f_everseen | br_everseen))
+						if ((!br_seen) & (f_everseen | br_everseen))
 							roads_file.unsigned_8(f_player_field.road_se());
-						if (!(r_seen) & (f_everseen | r_everseen))
+						if ((!r_seen) & (f_everseen | r_everseen))
 							roads_file.unsigned_8(f_player_field.road_e());
 					}
 
