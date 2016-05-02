@@ -1,7 +1,11 @@
-set_textdomain("widelands_editor")
-
 include "scripting/formatting.lua"
 include "txts/help/common_helptexts.lua"
+
+local toggle_minimap_hotkey = help_toggle_minimap_hotkey()
+local toggle_building_spaces_hotkey = help_toggle_building_spaces_hotkey()
+local toggle_fullscreen_hotkey = help_toggle_fullscreen_hotkey()
+
+set_textdomain("widelands_editor")
 
 return {
    title = _"Controls",
@@ -15,8 +19,8 @@ return {
             dl(help_format_hotkey("H"), _"Toggle main menu") ..
             -- TRANSLATORS: This is an access key combination. The hotkey is 't'
             dl(help_format_hotkey("T"), _"Toggle tools menu") ..
-            help_toggle_minimap_hotkey() ..
-            help_toggle_building_spaces_hotkey() ..
+            toggle_minimap_hotkey ..
+            toggle_building_spaces_hotkey ..
             -- TRANSLATORS: This is an access key combination. The hotkey is 'p'
             dl(help_format_hotkey("P"), _"Toggle player menu") ..
             -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
@@ -29,7 +33,7 @@ return {
             dl(help_format_hotkey(pgettext("hotkey", "Ctrl + L")), _"Load map") ..
             -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
             dl(help_format_hotkey(pgettext("hotkey", "Ctrl + S")), _"Save map") ..
-            help_toggle_fullscreen_hotkey()
+            toggle_fullscreen_hotkey
          ) ..
 
          h2(_"Tools") ..
