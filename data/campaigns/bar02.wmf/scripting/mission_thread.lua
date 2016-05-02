@@ -38,7 +38,19 @@ function initial_message_and_small_food_economy()
    wake_me(2000)
    campaign_message_box(story_msg_1)
 
-   wake_me(120000)
+   local o = add_campaign_objective(obj_build_basic_economy)
+   while not check_for_buildings(p1, {
+         barbarians_lumberjacks_hut = 1,
+         barbarians_rangers_hut = 1,
+         barbarians_quarry = 1,
+         barbarians_wood_hardener = 1,
+      }) do sleep(3413) end
+   while not check_for_buildings(p1, {barbarians_sentry=1}, game.map:get_field(57,36):region(6)) do
+      sleep(1500)
+   end
+   o.done = true
+   sleep(3000)
+   
    campaign_message_box(briefing_msg_1)
    campaign_message_box(order_msg_1_small_food_economy)
 
@@ -53,7 +65,7 @@ function initial_message_and_small_food_economy()
       "barbarians_sentry",
    }
 
-   local o = add_campaign_objective(obj_build_small_food_economy)
+   o = add_campaign_objective(obj_build_small_food_economy)
    while not check_for_buildings(p1, {
          barbarians_fishers_hut = 1,
          barbarians_hunters_hut = 1,
