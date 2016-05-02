@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-04-23 08:17+0000\n"
+"POT-Creation-Date: 2016-04-29 07:19+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -195,8 +195,7 @@ msgstr ""
 
 #: ../../src/editor/editorinteractive.cc:118
 #: ../../src/editor/ui_menus/main_menu.cc:45
-#: ../../src/wui/game_options_menu.cc:68
-#: ../../src/wui/interactive_player.cc:92
+#: ../../src/wui/game_options_menu.cc:68 ../../src/wui/interactive_player.cc:92
 #: ../../src/wui/interactive_spectator.cc:59
 msgid "Main Menu"
 msgstr ""
@@ -529,7 +528,7 @@ msgstr ""
 #: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:50
 #: ../../src/ui_basic/messagebox.cc:103 ../../src/ui_fsmenu/launch_mpg.cc:88
 #: ../../src/ui_fsmenu/options.cc:120
-#: ../../src/wui/game_main_menu_save_game.cc:101 ../../src/wui/login_box.cc:73
+#: ../../src/wui/game_main_menu_save_game.cc:101 ../../src/wui/login_box.cc:74
 msgid "Cancel"
 msgstr ""
 
@@ -815,7 +814,7 @@ msgstr ""
 #: ../../src/editor/ui_menus/player_menu.cc:232 ../../src/logic/map.cc:315
 #: ../../src/logic/single_player_game_settings_provider.cc:88
 #: ../../src/map_io/map_player_names_and_tribes_packet.cc:105
-#: ../../src/network/nethost.cc:1699 ../../src/ui_fsmenu/launch_mpg.cc:581
+#: ../../src/network/nethost.cc:1703 ../../src/ui_fsmenu/launch_mpg.cc:581
 #: ../../src/wui/multiplayersetupgroup.cc:139
 #: ../../src/wui/multiplayersetupgroup.cc:301
 #, c-format
@@ -1651,23 +1650,23 @@ msgstr ""
 msgid "Preparing game"
 msgstr ""
 
-#: ../../src/network/netclient.cc:736
+#: ../../src/network/netclient.cc:740
 msgid "/me 's file failed md5 checksumming."
 msgstr ""
 
-#: ../../src/network/netclient.cc:766
+#: ../../src/network/netclient.cc:770
 msgid ""
 "/me checked the received file. Although md5 check summing succeeded, I can "
 "not handle the file."
 msgstr ""
 
 #. * TRANSLATORS: %s contains an error message.
-#: ../../src/network/netclient.cc:984
+#: ../../src/network/netclient.cc:988
 #, c-format
 msgid "%s An automatic savegame will be created."
 msgstr ""
 
-#: ../../src/network/netclient.cc:989
+#: ../../src/network/netclient.cc:993
 msgid "Disconnected from Host"
 msgstr ""
 
@@ -1765,16 +1764,16 @@ msgstr ""
 msgid "Invalid command! Type /help for a list of commands."
 msgstr ""
 
-#: ../../src/network/nethost.cc:1633
+#: ../../src/network/nethost.cc:1637
 #, c-format
 msgid "Computer %u"
 msgstr ""
 
-#: ../../src/network/nethost.cc:1693 ../../src/wui/game_summary.cc:119
+#: ../../src/network/nethost.cc:1697 ../../src/wui/game_summary.cc:119
 msgid "Player"
 msgstr ""
 
-#: ../../src/network/nethost.cc:1858
+#: ../../src/network/nethost.cc:1862
 #, c-format
 msgid "%li second"
 msgid_plural "%li seconds"
@@ -2232,8 +2231,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/internet_lobby.cc:83
 #: ../../src/ui_fsmenu/launch_mpg.cc:140 ../../src/ui_fsmenu/launch_spg.cc:85
 #: ../../src/ui_fsmenu/load_map_or_game.cc:58
-#: ../../src/ui_fsmenu/multiplayer.cc:49
-#: ../../src/ui_fsmenu/netsetup_lan.cc:72
+#: ../../src/ui_fsmenu/multiplayer.cc:49 ../../src/ui_fsmenu/netsetup_lan.cc:72
 #: ../../src/ui_fsmenu/singleplayer.cc:49
 msgid "Back"
 msgstr ""
@@ -2264,8 +2262,7 @@ msgstr ""
 msgid "Version"
 msgstr ""
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:146
-#: ../../src/ui_fsmenu/options.cc:226
+#: ../../src/ui_fsmenu/internet_lobby.cc:146 ../../src/ui_fsmenu/options.cc:226
 msgid "Game"
 msgstr ""
 
@@ -2761,7 +2758,7 @@ msgid "Show login dialog"
 msgstr ""
 
 #: ../../src/ui_fsmenu/multiplayer.cc:116
-#: ../../src/ui_fsmenu/netsetup_lan.cc:111 ../../src/wui/login_box.cc:77
+#: ../../src/ui_fsmenu/netsetup_lan.cc:111 ../../src/wui/login_box.cc:78
 msgid "nobody"
 msgstr ""
 
@@ -3271,8 +3268,7 @@ msgstr ""
 msgid "General Statistics"
 msgstr ""
 
-#: ../../src/wui/game_main_menu.cc:53
-#: ../../src/wui/ware_statistics_menu.cc:142
+#: ../../src/wui/game_main_menu.cc:53 ../../src/wui/ware_statistics_menu.cc:142
 msgid "Ware Statistics"
 msgstr ""
 
@@ -3325,8 +3321,7 @@ msgstr ""
 msgid "Do you really want to delete the file %s?"
 msgstr ""
 
-#: ../../src/wui/game_message_menu.cc:54
-#: ../../src/wui/game_message_menu.cc:636
+#: ../../src/wui/game_message_menu.cc:54 ../../src/wui/game_message_menu.cc:636
 msgid "Messages: Inbox"
 msgstr ""
 
@@ -3623,47 +3618,47 @@ msgstr ""
 msgid "Nickname:"
 msgstr ""
 
-#: ../../src/wui/login_box.cc:39
+#: ../../src/wui/login_box.cc:40
 msgid "Password:"
 msgstr ""
 
-#: ../../src/wui/login_box.cc:45
+#: ../../src/wui/login_box.cc:46
 msgid "WARNING: Password will be shown and saved readable!"
 msgstr ""
 
-#: ../../src/wui/login_box.cc:49
+#: ../../src/wui/login_box.cc:50
 msgid "Log in to a registered account"
 msgstr ""
 
-#: ../../src/wui/login_box.cc:53
+#: ../../src/wui/login_box.cc:54
 msgid "Automatically use this login information from now on."
 msgstr ""
 
-#: ../../src/wui/login_box.cc:64
+#: ../../src/wui/login_box.cc:65
 msgid "Login"
 msgstr ""
 
-#: ../../src/wui/login_box.cc:89
+#: ../../src/wui/login_box.cc:90
 msgid "Empty Nickname"
 msgstr ""
 
-#: ../../src/wui/login_box.cc:89
+#: ../../src/wui/login_box.cc:90
 msgid "Please enter a nickname!"
 msgstr ""
 
-#: ../../src/wui/login_box.cc:96
+#: ../../src/wui/login_box.cc:97
 msgid "Space in Nickname"
 msgstr ""
 
-#: ../../src/wui/login_box.cc:97
+#: ../../src/wui/login_box.cc:98
 msgid "Sorry, but spaces are not allowed in nicknames!"
 msgstr ""
 
-#: ../../src/wui/login_box.cc:104
+#: ../../src/wui/login_box.cc:105
 msgid "Empty Password"
 msgstr ""
 
-#: ../../src/wui/login_box.cc:104
+#: ../../src/wui/login_box.cc:105
 msgid "Please enter your password!"
 msgstr ""
 

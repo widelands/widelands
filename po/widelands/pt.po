@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-04-09 07:23+0000\n"
-"PO-Revision-Date: 2016-04-09 07:24+0000\n"
+"POT-Creation-Date: 2016-04-23 08:17+0000\n"
+"PO-Revision-Date: 2016-04-23 08:18+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Portuguese (http://www.transifex.com/widelands/widelands/language/pt/)\n"
 "MIME-Version: 1.0\n"
@@ -436,40 +436,40 @@ msgstr "Nome do recurso: %s"
 msgid "Resource amount: %i"
 msgstr "Quantidade do recurso: %i"
 
-#: ../../src/editor/tools/info_tool.cc:135
+#: ../../src/editor/tools/info_tool.cc:136
 msgid "No resources"
 msgstr "Sem recursos"
 
-#: ../../src/editor/tools/info_tool.cc:139 ../../src/wui/mapdetails.cc:111
+#: ../../src/editor/tools/info_tool.cc:140 ../../src/wui/mapdetails.cc:136
 msgid "Map:"
 msgstr "Mapa:"
 
-#: ../../src/editor/tools/info_tool.cc:140
+#: ../../src/editor/tools/info_tool.cc:141
 #, c-format
 msgctxt "map_name"
 msgid "Name: %s"
 msgstr "Nome: %s"
 
-#: ../../src/editor/tools/info_tool.cc:141
+#: ../../src/editor/tools/info_tool.cc:142
 #, c-format
 msgid "Size: %1$ix%2$i"
 msgstr "Tamanho: %1$ix%2$i"
 
-#: ../../src/editor/tools/info_tool.cc:146
+#: ../../src/editor/tools/info_tool.cc:147
 #, c-format
 msgid "Players: %u"
 msgstr "Jogadores: %u"
 
-#: ../../src/editor/tools/info_tool.cc:149
+#: ../../src/editor/tools/info_tool.cc:150
 msgid "Players: -"
 msgstr "Jogadores: -"
 
-#: ../../src/editor/tools/info_tool.cc:152
+#: ../../src/editor/tools/info_tool.cc:153
 #, c-format
 msgid "Author: %s"
 msgstr "Autor: %s"
 
-#: ../../src/editor/tools/info_tool.cc:153
+#: ../../src/editor/tools/info_tool.cc:154
 #, c-format
 msgid "Descr: %s"
 msgstr "Descrição: %s"
@@ -581,7 +581,7 @@ msgstr "Autores:"
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:111
 #: ../../src/ui_fsmenu/campaign_select.cc:80
 #: ../../src/ui_fsmenu/campaign_select.cc:157
-#: ../../src/ui_fsmenu/campaign_select.cc:396 ../../src/wui/mapdetails.cc:133
+#: ../../src/ui_fsmenu/campaign_select.cc:396 ../../src/wui/mapdetails.cc:158
 msgid "Description:"
 msgstr "Descrição:"
 
@@ -2212,7 +2212,7 @@ msgstr "Nome do Cenário"
 msgid "#"
 msgstr "#"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:395 ../../src/wui/mapdetails.cc:109
+#: ../../src/ui_fsmenu/campaign_select.cc:395 ../../src/wui/mapdetails.cc:134
 msgid "Scenario:"
 msgstr "Cenário:"
 
@@ -2237,7 +2237,7 @@ msgid_plural "The designers of this scenario"
 msgstr[0] "O desenhista deste cenário"
 msgstr[1] "Os desenhistas deste cenário"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:428 ../../src/wui/mapdetails.cc:131
+#: ../../src/ui_fsmenu/campaign_select.cc:428 ../../src/wui/mapdetails.cc:156
 msgid "Author:"
 msgid_plural "Authors:"
 msgstr[0] "Autor:"
@@ -2314,8 +2314,8 @@ msgid "Name"
 msgstr "Nome"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:145
-msgid "Points"
-msgstr "Pontos"
+msgid "Version"
+msgstr ""
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:146
 #: ../../src/ui_fsmenu/options.cc:226
@@ -3737,18 +3737,18 @@ msgstr "pai"
 msgid "Multiplayer Scenarios"
 msgstr "Cenários de multi-jogador"
 
-#: ../../src/wui/mapdetails.cc:102
+#: ../../src/wui/mapdetails.cc:127
 msgid "Directory:"
 msgstr "Diretório:"
 
-#: ../../src/wui/mapdetails.cc:104
+#: ../../src/wui/mapdetails.cc:129
 msgid "The name of this directory"
 msgstr "O nome deste diretório"
 
 #. * TRANSLATORS: Tooltip in map description when translated map names are
 #. being displayed.
 #. * TRANSLATORS: %s is the English name of the map.
-#: ../../src/wui/mapdetails.cc:119
+#: ../../src/wui/mapdetails.cc:144
 #, c-format
 msgid "The original name of this map: %s"
 msgstr "O nome original deste mapa: %s"
@@ -3756,17 +3756,17 @@ msgstr "O nome original deste mapa: %s"
 #. * TRANSLATORS: Tooltip in map description when map names are being
 #. displayed in English.
 #. * TRANSLATORS: %s is the localized name of the map.
-#: ../../src/wui/mapdetails.cc:125
+#: ../../src/wui/mapdetails.cc:150
 #, c-format
 msgid "The name of this map in your language: %s"
 msgstr "O nome deste mapa em português: %s"
 
-#: ../../src/wui/mapdetails.cc:129
+#: ../../src/wui/mapdetails.cc:154
 msgid "The name of this map"
 msgstr "O nome desta mapa"
 
 #. * TRANSLATORS: Map hint header when selecting a map.
-#: ../../src/wui/mapdetails.cc:137
+#: ../../src/wui/mapdetails.cc:162
 msgid "HINT:"
 msgstr "DICA:"
 
