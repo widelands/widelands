@@ -37,6 +37,7 @@
 #include "wui/edge_overlay_manager.h"
 #include "wui/field_overlay_manager.h"
 #include "wui/mapview.h"
+#include "wui/quicknavigation.h"
 
 namespace Widelands {struct CoordPath;}
 
@@ -143,6 +144,11 @@ public:
 	}
 
 	void toggle_minimap();
+
+	// Returns the list of landmarks that have been mapped to the keys 0-9
+	const std::vector<QuickNavigation::Landmark>& landmarks();
+	// Sets the landmark for the keyboard 'key' to 'point'
+	void set_landmark(size_t key, const Point& point);
 
 protected:
 	// Will be called whenever the buildhelp is changed with the new 'value'.
