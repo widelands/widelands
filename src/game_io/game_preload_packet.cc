@@ -124,16 +124,17 @@ void GamePreloadPacket::write
 	if (!game.is_loaded()) {
 		return;
 	}
-	if (ipl != nullptr) {
-		const MiniMapLayer flags = MiniMapLayer::Owner | MiniMapLayer::Building | MiniMapLayer::Terrain;
-		const Point& vp = ipl->get_viewpoint();
-		std::unique_ptr< ::StreamWrite> sw(fs.open_stream_write(kMinimapFilename));
-		if (sw.get() != nullptr) {
-			write_minimap_image(game, &ipl->player(), vp, flags, sw.get());
-			sw->flush();
-		}
-	}
 
+	std::unique_ptr< ::StreamWrite> sw(fs.open_stream_write(kMinimapFilename));
+	if (sw.get() != nullptr) {
+		const MiniMapLayer flags = MiniMapLayer::Owner | MiniMapLayer::Building | MiniMapLayer::Terrain;
+		if (ipl != nullptr) {  // Player
+			write_minimap_image(game, &ipl->player(), ipl->get_viewpoint(), flags, sw.get());
+		} else { // Observer
+			write_minimap_image(game, nullptr, Point(0, 0), flags, sw.get());
+		}
+		sw->flush();
+	}
 }
 
 }

@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-04-16 07:28+0000\n"
-"PO-Revision-Date: 2016-04-16 17:49+0000\n"
+"POT-Creation-Date: 2016-04-23 08:17+0000\n"
+"PO-Revision-Date: 2016-04-28 15:15+0000\n"
 "Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -1792,7 +1792,7 @@ msgstr "Clic dret"
 #: ../../data/tribes/scripting/help/controls.lua:15
 msgctxt "hotkey"
 msgid "Middle-click or Ctrl + Left-click"
-msgstr "Click del botó del mig o Ctrl+Clic esquerre"
+msgstr "Clic del botó del mig o Ctrl+Clic esquerre"
 
 #: ../../data/tribes/scripting/help/controls.lua:15
 msgid "Minimize/Maximize window"
@@ -2079,7 +2079,7 @@ msgstr "Finalitat:"
 #: ../../data/tribes/scripting/help/ware_help.lua:52
 #: ../../data/tribes/scripting/help/worker_help.lua:27
 msgid "Producer"
-msgstr "Productor"
+msgstr "Es produeix a:"
 
 #. TRANSLATORS: Ware Encyclopedia: Wares produced by a productionsite
 #: ../../data/tribes/scripting/help/ware_help.lua:93
@@ -2093,8 +2093,8 @@ msgstr[1] "Béns produïts:"
 #: ../../data/tribes/scripting/help/ware_help.lua:154
 msgid "Consumer"
 msgid_plural "Consumers"
-msgstr[0] "Consumidor"
-msgstr[1] "Consumidors"
+msgstr[0] "Utilitza aquest bé:"
+msgstr[1] "Utilitzen aquest bé:"
 
 #. TRANSLATORS: Worker Encyclopedia: Workers recruited by a productionsite
 #: ../../data/tribes/scripting/help/worker_help.lua:68

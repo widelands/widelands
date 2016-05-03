@@ -23,4 +23,4 @@ VERSION
 .DS_Store
 
 # QT Creator settings
-CMakeLists.txt.user
+CMakeLists.txt.user*

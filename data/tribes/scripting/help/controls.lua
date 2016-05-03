@@ -3,6 +3,12 @@ set_textdomain("tribes_encyclopedia")
 include "scripting/formatting.lua"
 include "txts/help/common_helptexts.lua"
 
+local toggle_minimap_hotkey = help_toggle_minimap_hotkey()
+local toggle_building_spaces_hotkey = help_toggle_building_spaces_hotkey()
+local toggle_fullscreen_hotkey = help_toggle_fullscreen_hotkey()
+
+set_textdomain("tribes_encyclopedia")
+
 return {
    title = _"Controls",
    text =
@@ -35,8 +41,8 @@ return {
                dl(help_format_hotkey("C"), _"Toggle census") ..
                -- TRANSLATORS: This is an access key combination. The hotkey is 's'
                dl(help_format_hotkey("S"), _"Toggle statistics") ..
-               help_toggle_minimap_hotkey() ..
-               help_toggle_building_spaces_hotkey() ..
+               toggle_minimap_hotkey ..
+               toggle_building_spaces_hotkey ..
                -- TRANSLATORS: This is an access key combination. The hotkey is 'o'
                dl(help_format_hotkey("O"), _"Toggle objectives") ..
                -- TRANSLATORS: This is an access key combination. The hotkey is 'n'
@@ -57,7 +63,7 @@ return {
                dl(help_format_hotkey("."), _"Go to the next location") ..
                -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
                dl(help_format_hotkey(pgettext("hotkey", "Ctrl + F11")), _"Take a screenshot") ..
-               help_toggle_fullscreen_hotkey() ..
+               toggle_fullscreen_hotkey ..
                -- TRANSLATORS: This is an access key combination.
                dl(help_format_hotkey(pgettext("hotkey", "Ctrl + F10")), _"Quit the game immediately") ..
                -- TRANSLATORS: This is an access key combination.
