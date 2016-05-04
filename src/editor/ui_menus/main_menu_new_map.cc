@@ -121,7 +121,7 @@ void MainMenuNewMap::clicked_create_map() {
 
 	loader_ui.step(_("Creating empty map…"));
 
-	egbase.cleanup_for_load();
+	parent.cleanup_for_load();
 
 	map.create_empty_map(
 				egbase.world(),

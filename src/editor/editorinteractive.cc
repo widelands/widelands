@@ -214,9 +214,7 @@ void EditorInteractive::load(const std::string & filename) {
 
 	Widelands::Map & map = egbase().map();
 
-	// TODO(unknown): get rid of cleanup_for_load, it tends to be very messy
-	// Instead, delete and re-create the egbase.
-	egbase().cleanup_for_load();
+	cleanup_for_load();
 
 	std::unique_ptr<Widelands::MapLoader> ml(map.get_correct_loader(filename));
 	if (!ml.get())
@@ -243,6 +241,16 @@ void EditorInteractive::load(const std::string & filename) {
 	ml->load_map_complete(egbase(), Widelands::MapLoader::LoadType::kEditor);
 	egbase().load_graphics(loader_ui);
 	map_changed(MapWas::kReplaced);
+}
+
+void EditorInteractive::cleanup_for_load()
+{
+	// TODO(unknown): get rid of cleanup_for_load, it tends to be very messy
+	// Instead, delete and re-create the egbase.
+	egbase().cleanup_for_load();
+
+	// Select a tool that doesn't care about map changes
+	mutable_field_overlay_manager()->register_overlay_callback_function(nullptr);
 }
 
 
