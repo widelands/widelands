@@ -84,7 +84,7 @@ int32_t editor_tool_set_starting_pos_callback
 EditorSetStartingPosTool::EditorSetStartingPosTool()
 	: EditorTool(*this, *this, false), current_sel_pic_(nullptr)
 {
-	current_player_ = 0;
+	current_player_ = 1;
 	fsel_picsname_ = "images/players/fsel_editor_set_player_01_pos.png";
 }
 

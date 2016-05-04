@@ -250,7 +250,7 @@ void EditorInteractive::cleanup_for_load()
 	egbase().cleanup_for_load();
 
 	// Select a tool that doesn't care about map changes
-	select_tool(tools()->info, EditorTool::First);
+	mutable_field_overlay_manager()->register_overlay_callback_function(nullptr);
 }
 
 
