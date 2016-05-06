@@ -150,7 +150,9 @@ void MapDetails::update(const MapData& mapdata, bool localize_mapname) {
 		// Show map information
 		std::string description =
 				as_header(ngettext("Author:", "Authors:", mapdata.authors.get_number()), style_);
-		description = (boost::format("%s%s") % description % as_content(mapdata.authors.get_names(), style_)).str();
+		description = (boost::format("%s%s")
+		               % description
+		               % as_content(mapdata.authors.get_names(), style_)).str();
 
 		std::vector<std::string> tags;
 		for (const auto& tag : mapdata.tags) {
