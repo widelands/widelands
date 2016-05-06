@@ -50,7 +50,7 @@ function initial_message_and_small_food_economy()
    end
    o.done = true
    sleep(3000)
-   
+
    campaign_message_box(briefing_msg_1)
    campaign_message_box(order_msg_1_small_food_economy)
 

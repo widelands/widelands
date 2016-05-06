@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-04-23 08:17+0000\n"
-"PO-Revision-Date: 2016-04-23 17:19+0000\n"
+"POT-Creation-Date: 2016-04-29 07:19+0000\n"
+"PO-Revision-Date: 2016-05-05 08:45+0000\n"
 "Last-Translator: MiroslavR <miroslavr256@gmail.com>\n"
 "Language-Team: Slovak (http://www.transifex.com/widelands/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
@@ -550,7 +550,7 @@ msgstr "OK"
 #: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:50
 #: ../../src/ui_basic/messagebox.cc:103 ../../src/ui_fsmenu/launch_mpg.cc:88
 #: ../../src/ui_fsmenu/options.cc:120
-#: ../../src/wui/game_main_menu_save_game.cc:101 ../../src/wui/login_box.cc:73
+#: ../../src/wui/game_main_menu_save_game.cc:101 ../../src/wui/login_box.cc:74
 msgid "Cancel"
 msgstr "Zrušiť"
 
@@ -845,7 +845,7 @@ msgstr "Počet hráčov"
 #: ../../src/editor/ui_menus/player_menu.cc:232 ../../src/logic/map.cc:315
 #: ../../src/logic/single_player_game_settings_provider.cc:88
 #: ../../src/map_io/map_player_names_and_tribes_packet.cc:105
-#: ../../src/network/nethost.cc:1699 ../../src/ui_fsmenu/launch_mpg.cc:581
+#: ../../src/network/nethost.cc:1703 ../../src/ui_fsmenu/launch_mpg.cc:581
 #: ../../src/wui/multiplayersetupgroup.cc:139
 #: ../../src/wui/multiplayersetupgroup.cc:301
 #, c-format
@@ -1220,7 +1220,7 @@ msgstr "Nevykonalo sa %1$s, pretože %2$s"
 
 #: ../../src/logic/map_objects/tribes/production_program.cc:814
 msgid "No use for ships on this map!"
-msgstr "Na tejto mape sú lode zbytočné!"
+msgstr "Lode na tejto mape nemajú využitie!"
 
 #. * TRANSLATORS: e.g. 'Did not start working because 3x water and 3x wheat
 #. are missing'
@@ -1712,23 +1712,23 @@ msgstr "Nebolo možné nadviazať spojenie s danou adresou.\nBuď na príslušno
 msgid "Preparing game"
 msgstr "Pripravuje sa hra"
 
-#: ../../src/network/netclient.cc:736
+#: ../../src/network/netclient.cc:740
 msgid "/me 's file failed md5 checksumming."
 msgstr "/me - zlyhal kontrolný súčet md5 môjho súboru."
 
-#: ../../src/network/netclient.cc:766
+#: ../../src/network/netclient.cc:770
 msgid ""
 "/me checked the received file. Although md5 check summing succeeded, I can "
 "not handle the file."
 msgstr "/me skontroloval(a) prijatý súbor. Hoci md5 kontrola súčtu bola úspešná, nedokážem spracovať súbor."
 
 #. * TRANSLATORS: %s contains an error message.
-#: ../../src/network/netclient.cc:984
+#: ../../src/network/netclient.cc:988
 #, c-format
 msgid "%s An automatic savegame will be created."
 msgstr "%s Automaticky sa vytvorí uložená hra."
 
-#: ../../src/network/netclient.cc:989
+#: ../../src/network/netclient.cc:993
 msgid "Disconnected from Host"
 msgstr "Odpojený od hostiteľa"
 
@@ -1826,16 +1826,16 @@ msgstr "Nebola vynútená žiadna pauza – nie je čo ukončiť."
 msgid "Invalid command! Type /help for a list of commands."
 msgstr "Neplatný príkaz! Ak chcete vypísať zoznam príkazov, napíšte /help."
 
-#: ../../src/network/nethost.cc:1633
+#: ../../src/network/nethost.cc:1637
 #, c-format
 msgid "Computer %u"
 msgstr "Počítač %u"
 
-#: ../../src/network/nethost.cc:1693 ../../src/wui/game_summary.cc:119
+#: ../../src/network/nethost.cc:1697 ../../src/wui/game_summary.cc:119
 msgid "Player"
 msgstr "Hráč"
 
-#: ../../src/network/nethost.cc:1858
+#: ../../src/network/nethost.cc:1862
 #, c-format
 msgid "%li second"
 msgid_plural "%li seconds"
@@ -2838,7 +2838,7 @@ msgid "Show login dialog"
 msgstr "Zobraziť prihlasovacie dialógové okno"
 
 #: ../../src/ui_fsmenu/multiplayer.cc:116
-#: ../../src/ui_fsmenu/netsetup_lan.cc:111 ../../src/wui/login_box.cc:77
+#: ../../src/ui_fsmenu/netsetup_lan.cc:111 ../../src/wui/login_box.cc:78
 msgid "nobody"
 msgstr "nikto"
 
@@ -3705,47 +3705,47 @@ msgstr "Prihlásenie sa na metaserver"
 msgid "Nickname:"
 msgstr "Prezývka:"
 
-#: ../../src/wui/login_box.cc:39
+#: ../../src/wui/login_box.cc:40
 msgid "Password:"
 msgstr "Heslo:"
 
-#: ../../src/wui/login_box.cc:45
+#: ../../src/wui/login_box.cc:46
 msgid "WARNING: Password will be shown and saved readable!"
 msgstr "UPOZORNENIE: Heslo sa zobrazí a uloží čitateľne!"
 
-#: ../../src/wui/login_box.cc:49
+#: ../../src/wui/login_box.cc:50
 msgid "Log in to a registered account"
 msgstr "Prihlásiť sa na registrovaný účet"
 
-#: ../../src/wui/login_box.cc:53
+#: ../../src/wui/login_box.cc:54
 msgid "Automatically use this login information from now on."
 msgstr "Odteraz automaticky používať tieto prihlasovacie údaje"
 
-#: ../../src/wui/login_box.cc:64
+#: ../../src/wui/login_box.cc:65
 msgid "Login"
 msgstr "Prihlásiť sa"
 
-#: ../../src/wui/login_box.cc:89
+#: ../../src/wui/login_box.cc:90
 msgid "Empty Nickname"
 msgstr "Prázdna prezývka"
 
-#: ../../src/wui/login_box.cc:89
+#: ../../src/wui/login_box.cc:90
 msgid "Please enter a nickname!"
 msgstr "Zadajte svoju prezývku!"
 
-#: ../../src/wui/login_box.cc:96
+#: ../../src/wui/login_box.cc:97
 msgid "Space in Nickname"
 msgstr "Medzera v prezývke"
 
-#: ../../src/wui/login_box.cc:97
+#: ../../src/wui/login_box.cc:98
 msgid "Sorry, but spaces are not allowed in nicknames!"
 msgstr "Ľutujeme, ale v prezývkach nie sú povolené medzery."
 
-#: ../../src/wui/login_box.cc:104
+#: ../../src/wui/login_box.cc:105
 msgid "Empty Password"
 msgstr "Prádzne heslo"
 
-#: ../../src/wui/login_box.cc:104
+#: ../../src/wui/login_box.cc:105
 msgid "Please enter your password!"
 msgstr "Prosím, zadajte svoje heslo!"
 
