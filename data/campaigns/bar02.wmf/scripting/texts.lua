@@ -16,6 +16,21 @@ end
 -- =======================================================================
 
 
+obj_build_basic_economy = {
+   name = "build_basic_food_economy",
+   title = _"Build up a basic economy",
+   number = 5,
+   body = objective_text(_"Build up a basic economy",
+      _"Start collecting basic building materials, and fortify the camp."
+      .. paragraphdivider() ..
+      listitem_bullet(_"Build a lumberjack’s hut") ..
+      listitem_bullet(_"Build a ranger’s hut") ..
+      listitem_bullet(_"Build a quarry") ..
+      listitem_bullet(_"Build a wood hardener") ..
+      listitem_bullet(_"Build a sentry on the eastern border") ..
+      listitem_arrow(_"You should eventually also build a reed yard and a lime kiln."))
+}
+
 obj_build_small_food_economy = {
    name = "build_small_food_economy",
    title = _"Build up a small food economy",
@@ -149,6 +164,7 @@ story_msg_1 = {
       .. paragraphdivider() ..
       -- TRANSLATORS: Thron
       _([[For now, we are resting at the borders of the old forest and preparing for the coming days.]]))
+      .. new_objectives(obj_build_basic_economy)
 }
 
 story_msg_2 = {
