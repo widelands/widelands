@@ -85,6 +85,7 @@ void Scrollbar::set_steps(int32_t steps)
 		set_scrollpos(steps - 1);
 
 	steps_ = steps;
+	layout();
 }
 
 
@@ -111,6 +112,7 @@ void Scrollbar::set_singlestepsize(uint32_t singlestepsize)
 		singlestepsize = 1;
 
 	singlestepsize_ = singlestepsize;
+	layout();
 }
 
 
@@ -120,6 +122,7 @@ void Scrollbar::set_singlestepsize(uint32_t singlestepsize)
 void Scrollbar::set_pagesize(int32_t const pagesize)
 {
 	pagesize_ = pagesize < 1 ? 1 : pagesize;
+	layout();
 }
 
 

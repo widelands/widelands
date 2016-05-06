@@ -63,6 +63,8 @@ wl_library(wui_common
     mapdata.h
     maptable.cc
     maptable.h
+    map_tags.cc
+    map_tags.h
     suggested_teams_box.cc
     suggested_teams_box.h
   DEPENDS
