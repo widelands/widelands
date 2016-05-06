@@ -672,7 +672,7 @@ int upcasted_map_object_to_lua(lua_State * L, MapObject * mo) {
 	case (MapObjectType::WARE):
 	default:
 		throw LuaError((boost::format("upcasted_map_object_to_lua: Unknown %i") %
-		                static_cast<int>(mo->descr().type())).str());
+						static_cast<int>(mo->descr().type())).str());
 	}
 }
 #undef CAST_TO_LUA
@@ -1871,10 +1871,16 @@ int LuaBuildingDescription::get_vision_range(lua_State * L) {
 /* RST
 	.. attribute:: workarea_radius
 
-			(RO) the workarea_radius of the building as an int.
+			(RO) the first workarea_radius of the building as an int,
+			     nil in case bulding has no workareas
 */
 int LuaBuildingDescription::get_workarea_radius(lua_State * L) {
-	lua_pushinteger(L, get()->workarea_info_.begin()->first);
+	const WorkareaInfo& workareaInfo = get()->workarea_info_;
+	if (!workareaInfo.empty()) {
+		lua_pushinteger(L, workareaInfo.begin()->first);
+	} else {
+		lua_pushnil(L);
+	}
 	return 1;
 }
 
@@ -2720,7 +2726,7 @@ int LuaWorkerDescription::get_needed_experience(lua_State * L) {
 
 /* RST
 SoldierDescription
------------------
+--------------------
 
 .. class:: SoldierDescription
 

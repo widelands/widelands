@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-04-09 07:23+0000\n"
-"PO-Revision-Date: 2016-04-09 07:24+0000\n"
+"POT-Creation-Date: 2016-04-23 08:17+0000\n"
+"PO-Revision-Date: 2016-04-23 08:18+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
@@ -442,40 +442,40 @@ msgstr "Название ресурса: %s"
 msgid "Resource amount: %i"
 msgstr "Количество ресурса: %i"
 
-#: ../../src/editor/tools/info_tool.cc:135
+#: ../../src/editor/tools/info_tool.cc:136
 msgid "No resources"
 msgstr "Нет ресурсов"
 
-#: ../../src/editor/tools/info_tool.cc:139 ../../src/wui/mapdetails.cc:111
+#: ../../src/editor/tools/info_tool.cc:140 ../../src/wui/mapdetails.cc:136
 msgid "Map:"
 msgstr "Карта:"
 
-#: ../../src/editor/tools/info_tool.cc:140
+#: ../../src/editor/tools/info_tool.cc:141
 #, c-format
 msgctxt "map_name"
 msgid "Name: %s"
 msgstr "Имя: %s"
 
-#: ../../src/editor/tools/info_tool.cc:141
+#: ../../src/editor/tools/info_tool.cc:142
 #, c-format
 msgid "Size: %1$ix%2$i"
 msgstr "Размер: %1$ix%2$i"
 
-#: ../../src/editor/tools/info_tool.cc:146
+#: ../../src/editor/tools/info_tool.cc:147
 #, c-format
 msgid "Players: %u"
 msgstr "Игроки: %u"
 
-#: ../../src/editor/tools/info_tool.cc:149
+#: ../../src/editor/tools/info_tool.cc:150
 msgid "Players: -"
 msgstr "Игроки: -"
 
-#: ../../src/editor/tools/info_tool.cc:152
+#: ../../src/editor/tools/info_tool.cc:153
 #, c-format
 msgid "Author: %s"
 msgstr "Автор: %s"
 
-#: ../../src/editor/tools/info_tool.cc:153
+#: ../../src/editor/tools/info_tool.cc:154
 #, c-format
 msgid "Descr: %s"
 msgstr "Описание: %s"
@@ -587,7 +587,7 @@ msgstr "Авторы:"
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:111
 #: ../../src/ui_fsmenu/campaign_select.cc:80
 #: ../../src/ui_fsmenu/campaign_select.cc:157
-#: ../../src/ui_fsmenu/campaign_select.cc:396 ../../src/wui/mapdetails.cc:133
+#: ../../src/ui_fsmenu/campaign_select.cc:396 ../../src/wui/mapdetails.cc:158
 msgid "Description:"
 msgstr "Описание:"
 
@@ -2248,7 +2248,7 @@ msgstr "Название сценария"
 msgid "#"
 msgstr "#"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:395 ../../src/wui/mapdetails.cc:109
+#: ../../src/ui_fsmenu/campaign_select.cc:395 ../../src/wui/mapdetails.cc:134
 msgid "Scenario:"
 msgstr "Сценарий:"
 
@@ -2277,7 +2277,7 @@ msgstr[1] "Создатели этого сценария"
 msgstr[2] "Создатели этого сценария"
 msgstr[3] "Создатели этого сценария"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:428 ../../src/wui/mapdetails.cc:131
+#: ../../src/ui_fsmenu/campaign_select.cc:428 ../../src/wui/mapdetails.cc:156
 msgid "Author:"
 msgid_plural "Authors:"
 msgstr[0] "Автор"
@@ -2356,8 +2356,8 @@ msgid "Name"
 msgstr "Имя"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:145
-msgid "Points"
-msgstr "Очки"
+msgid "Version"
+msgstr ""
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:146
 #: ../../src/ui_fsmenu/options.cc:226
@@ -3783,18 +3783,18 @@ msgstr "перейти выше"
 msgid "Multiplayer Scenarios"
 msgstr "Многопользовательские сценарии"
 
-#: ../../src/wui/mapdetails.cc:102
+#: ../../src/wui/mapdetails.cc:127
 msgid "Directory:"
 msgstr "Каталог:"
 
-#: ../../src/wui/mapdetails.cc:104
+#: ../../src/wui/mapdetails.cc:129
 msgid "The name of this directory"
 msgstr "Название каталога"
 
 #. * TRANSLATORS: Tooltip in map description when translated map names are
 #. being displayed.
 #. * TRANSLATORS: %s is the English name of the map.
-#: ../../src/wui/mapdetails.cc:119
+#: ../../src/wui/mapdetails.cc:144
 #, c-format
 msgid "The original name of this map: %s"
 msgstr "Оригинальное название карты: %s"
@@ -3802,17 +3802,17 @@ msgstr "Оригинальное название карты: %s"
 #. * TRANSLATORS: Tooltip in map description when map names are being
 #. displayed in English.
 #. * TRANSLATORS: %s is the localized name of the map.
-#: ../../src/wui/mapdetails.cc:125
+#: ../../src/wui/mapdetails.cc:150
 #, c-format
 msgid "The name of this map in your language: %s"
 msgstr "Название карты на вашем языке: %s"
 
-#: ../../src/wui/mapdetails.cc:129
+#: ../../src/wui/mapdetails.cc:154
 msgid "The name of this map"
 msgstr "Название этой карты"
 
 #. * TRANSLATORS: Map hint header when selecting a map.
-#: ../../src/wui/mapdetails.cc:137
+#: ../../src/wui/mapdetails.cc:162
 msgid "HINT:"
 msgstr ""
 

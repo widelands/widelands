@@ -14,9 +14,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-04-09 07:23+0000\n"
-"PO-Revision-Date: 2016-04-09 07:24+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2016-04-23 08:17+0000\n"
+"PO-Revision-Date: 2016-04-24 22:23+0000\n"
+"Last-Translator: Luigi Lain <lainluigi86@tiscali.it>\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -77,7 +77,7 @@ msgid ""
 "Some of your starting buildings didn’t have enough room and weren’t built. "
 "You are at a disadvantage with this; consider restarting this map with a "
 "fair starting condition."
-msgstr ""
+msgstr "Alcuni dei tuoi edifici non sono stati costruiti per mancanza di spazio. Sei svantaggiato per questo; considera riavviare la mappa con condizioni iniziali più bilanciate."
 
 #: ../../data/scripting/infrastructure.lua:159
 msgid "Not enough space"
@@ -442,40 +442,40 @@ msgstr "Nome della risorsa: %s"
 msgid "Resource amount: %i"
 msgstr "Quantità della risorsa: %i"
 
-#: ../../src/editor/tools/info_tool.cc:135
+#: ../../src/editor/tools/info_tool.cc:136
 msgid "No resources"
 msgstr "Nessuna risorsa"
 
-#: ../../src/editor/tools/info_tool.cc:139 ../../src/wui/mapdetails.cc:111
+#: ../../src/editor/tools/info_tool.cc:140 ../../src/wui/mapdetails.cc:136
 msgid "Map:"
 msgstr "Mappa:"
 
-#: ../../src/editor/tools/info_tool.cc:140
+#: ../../src/editor/tools/info_tool.cc:141
 #, c-format
 msgctxt "map_name"
 msgid "Name: %s"
 msgstr "Nome: %s"
 
-#: ../../src/editor/tools/info_tool.cc:141
+#: ../../src/editor/tools/info_tool.cc:142
 #, c-format
 msgid "Size: %1$ix%2$i"
 msgstr "Dimensioni: %1$ix%2$i"
 
-#: ../../src/editor/tools/info_tool.cc:146
+#: ../../src/editor/tools/info_tool.cc:147
 #, c-format
 msgid "Players: %u"
 msgstr "Giocatori: %u"
 
-#: ../../src/editor/tools/info_tool.cc:149
+#: ../../src/editor/tools/info_tool.cc:150
 msgid "Players: -"
 msgstr "Giocatori: -"
 
-#: ../../src/editor/tools/info_tool.cc:152
+#: ../../src/editor/tools/info_tool.cc:153
 #, c-format
 msgid "Author: %s"
 msgstr "Autore: %s"
 
-#: ../../src/editor/tools/info_tool.cc:153
+#: ../../src/editor/tools/info_tool.cc:154
 #, c-format
 msgid "Descr: %s"
 msgstr "Descrizione: %s"
@@ -587,7 +587,7 @@ msgstr "Autori:"
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:111
 #: ../../src/ui_fsmenu/campaign_select.cc:80
 #: ../../src/ui_fsmenu/campaign_select.cc:157
-#: ../../src/ui_fsmenu/campaign_select.cc:396 ../../src/wui/mapdetails.cc:133
+#: ../../src/ui_fsmenu/campaign_select.cc:396 ../../src/wui/mapdetails.cc:158
 msgid "Description:"
 msgstr "Descrizione:"
 
@@ -769,7 +769,7 @@ msgstr "Generazione di una mappa casuale in corso..."
 #. created in the editor.
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:469
 msgid "Random Map"
-msgstr ""
+msgstr "Mappa casuale"
 
 #. * TRANSLATORS: This is shown after a random map has been created in the
 #. editor.
@@ -781,7 +781,7 @@ msgid ""
 "The map has been generated. Please double-check the player starting "
 "positions to make sure that your carriers won’t drown, or be stuck on an "
 "island or on top of a mountain."
-msgstr ""
+msgstr "La mappa è stata generata. Per favore controlla le posizioni iniziali dei giocatori per assicurarti che i tuoi portatori non affoghino, o siano bloccati su un'isola o in cima a una montagna."
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:61
 #: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:28
@@ -868,26 +868,26 @@ msgstr "Opzioni degli strumenti per l'altezza"
 #: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:42
 #: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:58
 msgid "Increase/Decrease Value:"
-msgstr ""
+msgstr "Incrementa/Decrementa il valore:"
 
 #: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:47
 #: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:63
 #: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:56
 msgid "Set Value:"
-msgstr ""
+msgstr "Imposta il valore:"
 
 #. * TRANSLATORS: Editor change height access keys. *
 #: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:53
 msgid ""
 "Click on the map to increase, Shift + Click on the map to decrease terrain "
 "height"
-msgstr ""
+msgstr "Clicca sulla mappa per aumentare l'elevazione del terreno, Shift + clicca per diminuirla."
 
 #. * TRANSLATORS: Editor set height access key. *
 #: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:56
 #: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:68
 msgid "Ctrl + Click on the map to set terrain height"
-msgstr ""
+msgstr "Ctrl + Clicca sulla mappa per fissare l'elevazione del terreno."
 
 #: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:53
 #: ../../src/editor/ui_menus/tool_menu.cc:71
@@ -899,12 +899,12 @@ msgstr "Risorse"
 msgid ""
 "Click on the map to increase, Shift + Click on the map to decrease the "
 "amount of the selected resource"
-msgstr ""
+msgstr "Clicca sulla mappa per aumentare l'ammontare della risorsa selezionata, Shift + clicca per diminuirlo."
 
 #. * TRANSLATORS: Editor set rseources access key. *
 #: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:76
 msgid "Ctrl + Click on the map to set the amount of the selected resource"
-msgstr ""
+msgstr "Ctrl + Clicca sulla mappa per fissare l'ammontare della risorsa selezionata"
 
 #: ../../src/editor/ui_menus/tool_menu.cc:66
 msgid "Change height"
@@ -912,7 +912,7 @@ msgstr "Cambia l'altezza"
 
 #: ../../src/editor/ui_menus/tool_menu.cc:67
 msgid "Random height"
-msgstr ""
+msgstr "Elevazione casuale"
 
 #: ../../src/editor/ui_menus/tool_menu.cc:68 ../../src/wui/minimap.cc:143
 msgid "Terrain"
@@ -940,15 +940,15 @@ msgstr "Scegli la posizione che avrà le coordinate (0, 0). Questa si troverà a
 
 #: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:41
 msgid "Random Height Options"
-msgstr ""
+msgstr "Opzioni di elevazione casuale"
 
 #: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:46
 msgid "Minimum Height:"
-msgstr ""
+msgstr "Elevazione minima:"
 
 #: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:51
 msgid "Maximum Height:"
-msgstr ""
+msgstr "Elevazione massima:"
 
 #. * TRANSLATORS: Editor random height access key. *
 #: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:62
@@ -2218,7 +2218,7 @@ msgstr "Nome dello scenario"
 msgid "#"
 msgstr "#"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:395 ../../src/wui/mapdetails.cc:109
+#: ../../src/ui_fsmenu/campaign_select.cc:395 ../../src/wui/mapdetails.cc:134
 msgid "Scenario:"
 msgstr "Scenario:"
 
@@ -2243,7 +2243,7 @@ msgid_plural "The designers of this scenario"
 msgstr[0] "Il progettista di questo scenario"
 msgstr[1] "I progettisti di questo scenario"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:428 ../../src/wui/mapdetails.cc:131
+#: ../../src/ui_fsmenu/campaign_select.cc:428 ../../src/wui/mapdetails.cc:156
 msgid "Author:"
 msgid_plural "Authors:"
 msgstr[0] "Autore:"
@@ -2320,8 +2320,8 @@ msgid "Name"
 msgstr "Nome"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:145
-msgid "Points"
-msgstr "Punti"
+msgid "Version"
+msgstr ""
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:146
 #: ../../src/ui_fsmenu/options.cc:226
@@ -3743,18 +3743,18 @@ msgstr "superiore"
 msgid "Multiplayer Scenarios"
 msgstr "Scenari multiplayer"
 
-#: ../../src/wui/mapdetails.cc:102
+#: ../../src/wui/mapdetails.cc:127
 msgid "Directory:"
 msgstr "Directory:"
 
-#: ../../src/wui/mapdetails.cc:104
+#: ../../src/wui/mapdetails.cc:129
 msgid "The name of this directory"
 msgstr "Il nome di questa directory"
 
 #. * TRANSLATORS: Tooltip in map description when translated map names are
 #. being displayed.
 #. * TRANSLATORS: %s is the English name of the map.
-#: ../../src/wui/mapdetails.cc:119
+#: ../../src/wui/mapdetails.cc:144
 #, c-format
 msgid "The original name of this map: %s"
 msgstr "Il nome originale di questa mappa: %s"
@@ -3762,17 +3762,17 @@ msgstr "Il nome originale di questa mappa: %s"
 #. * TRANSLATORS: Tooltip in map description when map names are being
 #. displayed in English.
 #. * TRANSLATORS: %s is the localized name of the map.
-#: ../../src/wui/mapdetails.cc:125
+#: ../../src/wui/mapdetails.cc:150
 #, c-format
 msgid "The name of this map in your language: %s"
 msgstr "Il nome di questa mappa nella tua lingua: %s"
 
-#: ../../src/wui/mapdetails.cc:129
+#: ../../src/wui/mapdetails.cc:154
 msgid "The name of this map"
 msgstr "Il nome di questa mappa"
 
 #. * TRANSLATORS: Map hint header when selecting a map.
-#: ../../src/wui/mapdetails.cc:137
+#: ../../src/wui/mapdetails.cc:162
 msgid "HINT:"
 msgstr "SUGGERIMENTI:"
 

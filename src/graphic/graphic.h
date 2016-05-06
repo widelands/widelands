@@ -74,6 +74,8 @@ public:
 	void refresh();
 	SDL_Window* get_sdlwindow() {return sdl_window_;}
 
+	int max_texture_size() const {return max_texture_size_;}
+
 	ImageCache& images() const {return *image_cache_.get();}
 	AnimationManager& animations() const {return *animation_manager_.get();}
 
@@ -97,6 +99,9 @@ private:
 	/// manipulation the screen context.
 	SDL_Window* sdl_window_;
 	SDL_GLContext gl_context_;
+
+	/// The maximum width or height a texture can have.
+	int max_texture_size_;
 
 	/// A RenderTarget for screen_. This is initialized during init()
 	std::unique_ptr<RenderTarget> render_target_;

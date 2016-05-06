@@ -128,12 +128,12 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent) :
 	map_number_box_(&box_, 0, 0, UI::Box::Horizontal, 0, 0, margin_),
 	map_number_label_(&map_number_box_, 0, 0, _("Random Number:")),
 	map_number_edit_(&map_number_box_, 0, 0,
-						  box_width_ - 2 * margin_ - map_number_label_.get_w(),
+						  box_width_ - 2 * margin_ - map_number_label_.get_w(), 0, 2,
 						  g_gr->images().get("images/ui_basic/but1.png")),
 	map_id_box_(&box_, 0, 0, UI::Box::Horizontal, 0, 0, margin_),
 	map_id_label_(&map_id_box_, 0, 0, _("Map ID:")),
 	map_id_edit_(&map_id_box_, 0, 0,
-					 box_width_ - 2 * margin_ - map_id_label_.get_w(),
+					 box_width_ - 2 * margin_ - map_id_label_.get_w(), 0, 2,
 					 g_gr->images().get("images/ui_basic/but1.png")),
 	// Buttons
 	button_box_(&box_, 0, 0, UI::Box::Horizontal, 0, 0, margin_),
@@ -432,7 +432,7 @@ void MainMenuNewRandomMap::clicked_create_map() {
 	Widelands::Map              & map    = egbase.map();
 	UI::ProgressWindow loader_ui;
 
-	egbase.cleanup_for_load();
+	eia.cleanup_for_load();
 
 	UniqueRandomMapInfo map_info;
 	set_map_info(map_info);

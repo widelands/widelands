@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-04-09 07:23+0000\n"
-"PO-Revision-Date: 2016-04-11 14:18+0000\n"
+"POT-Creation-Date: 2016-04-23 08:17+0000\n"
+"PO-Revision-Date: 2016-04-27 19:31+0000\n"
 "Last-Translator: MiroslavR <miroslavr256@gmail.com>\n"
 "Language-Team: Slovak (http://www.transifex.com/widelands/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
@@ -141,7 +141,7 @@ msgstr "Osada vo vyhnanstve"
 #: ../../data/campaigns/campaigns.conf:100
 #: ../../data/campaigns/dummy.wmf/elemental:7
 msgid "Not yet implemented"
-msgstr "Ešte nezavedené"
+msgstr "Ešte neimplementované"
 
 #: ../../data/campaigns/dummy.wmf/elemental:9
 msgid "Nobody"
@@ -225,14 +225,14 @@ msgid ""
 "latitude; farming thrives, berries are abundant, and fish plentiful. The "
 "small human population of this place never knew famine. You warlording "
 "bastards just couldn’t leave this little paradise in peace, could you?"
-msgstr ""
+msgstr "Medzi Švédskom a Fínskom leží archipelágové more. Toto čarokrásne miesto nie je ani zem, ani more, ale spojením oboch. V rozsahu niekoľkých stoviek kilometrov sa nachádza najmenej 50 000 ostrovov a ostrovčekov, ktorých rozloha poväčšine dosahuje len pár akrov. Vzhľadom na svoju zemepisnú šírku sa vyznačuje pomerne miernym podnebím; poľnohospodárstvo prekvitá, bobulí je prebytok a rýb hojne. Ľudia žijúci na tomto mieste nikdy nepoznali hlad. Vaša dychtivosť po vojne vám nedovolila nechať tento malý raj na pokoji, však?"
 
 #: ../../data/maps/Archipelago_Sea.wmf/elemental:11
 msgid ""
 "Large plots are rare on those small islands. Prioritize construction of "
 "large buildings on them. Sometimes you will need big military buildings to "
 "expand all the way to the next island. The AI will perform poorly."
-msgstr ""
+msgstr "Veľké parcely sa na týchto ostrovčekoch vyskytujú zriedkavo. Stavajte na nich preto prioritne veľké budovy. Niekedy je na ovládnutie ďalších ostrovov nutné postaviť veľké vojenské budovy. Umelá inteligencia vykazuje slabý výkon."
 
 #: ../../data/maps/Atoll.wmf/elemental:8
 msgid "Atoll"
@@ -338,7 +338,7 @@ msgid ""
 "vertical. Use the little building space that you have wisely. A fortress at "
 "the mouth of a narrow mountain pass can be a formidable obstacle to an enemy"
 " army. Use the terrain to your advantage."
-msgstr ""
+msgstr "Hory sú plné rovného terénu. Poväčšine však, nanešťastie, ide o úbočia. Priestoru na stavbu je málo, preto ho využite rozumne. Pevnosť naspodku úzkeho priesmyku môže pre nepriateľskú armádu znamenať ťažko prekonateľnú prekážku. Využite terén vo svoj prospech."
 
 #: ../../data/maps/Elven_Forests.wmf/elemental:8
 msgid "Elven Forests"
@@ -808,7 +808,7 @@ msgstr "Keď vietor vzdul prvé duny na tieto opustené zdvojené lagúny, málo
 msgid ""
 "Defend your transport lines, or use ships to bypass the opponent. Then "
 "remove all enemy activity."
-msgstr ""
+msgstr "Obráňte svoje dopravné trasy alebo obíďte protivníka pomocou lodí. Potom zastavte všetku nepriateľskú činnosť."
 
 #: ../../data/maps/Twinkling_Waves.wmf/elemental:8
 msgid "Twinkling Waves"

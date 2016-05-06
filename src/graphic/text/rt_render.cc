@@ -36,6 +36,7 @@
 #include "base/rect.h"
 #include "base/wexception.h"
 #include "graphic/align.h"
+#include "graphic/graphic.h"
 #include "graphic/image_cache.h"
 #include "graphic/image_io.h"
 #include "graphic/text/bidi.h"
@@ -598,6 +599,13 @@ public:
 	uint16_t hotspot_y() override {return height();}
 
 	Texture* render(TextureCache* texture_cache) override {
+		if (width() > g_gr->max_texture_size() || height() > g_gr->max_texture_size()) {
+			const std::string error_message =
+					(boost::format("Texture (%d, %d) too big! Maximum size is %d.")
+					 % width() % height() % g_gr->max_texture_size()).str();
+			log("%s\n", error_message.c_str());
+			throw TextureTooBig(error_message);
+		}
 		Texture* rv = new Texture(width(), height());
 		rv->fill_rect(Rect(0, 0, rv->width(), rv->height()), RGBAColor(255, 255, 255, 0));
 

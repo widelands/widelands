@@ -179,7 +179,7 @@ uint32_t TextStyle::calc_width_for_wrapping(const UChar& c) const {
 uint32_t TextStyle::calc_width_for_wrapping(const std::string & text) const
 {
 	int result = 0;
-	const icu::UnicodeString parseme(text.c_str());
+	const icu::UnicodeString parseme(text.c_str(), "UTF-8");
 	for (int i = 0; i < parseme.length(); ++i) {
 		UChar c = parseme.charAt(i);
 		if (!i18n::is_diacritic(c)) {
