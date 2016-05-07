@@ -30,7 +30,7 @@
 
 namespace Widelands {
 
-constexpr uint16_t kCurrentPacketVersion = 2;
+constexpr uint16_t kCurrentPacketVersion = 3;
 
 void GameInteractivePlayerPacket::read
 	(FileSystem & fs, Game & game, MapObjectLoader *)
@@ -39,7 +39,7 @@ void GameInteractivePlayerPacket::read
 		FileRead fr;
 		fr.open(fs, "binary/interactive_player");
 		uint16_t const packet_version = fr.unsigned_16();
-		if (packet_version == kCurrentPacketVersion) {
+		if (packet_version >= 2 && packet_version <= kCurrentPacketVersion) {
 			PlayerNumber player_number = fr.unsigned_8();
 			if (!(0 < player_number && player_number <= game.map().get_nrplayers())) {
 				throw GameDataError("Invalid player number: %i.", player_number);
@@ -75,6 +75,20 @@ void GameInteractivePlayerPacket::read
 			if (InteractivePlayer * const ipl = game.get_ipl()) {
 				ipl->set_player_number(player_number);
 			}
+
+			// Map landmarks
+			if (packet_version >= 3) {
+				if (InteractiveBase * const ibase = game.get_ibase()) {
+					size_t no_of_landmarks = fr.unsigned_8();
+					for (size_t i = 0; i < no_of_landmarks; ++i) {
+						uint8_t set = fr.unsigned_8();
+						Point landmark(fr.signed_32(), fr.signed_32());
+						if (set > 0) {
+							ibase->set_landmark(i, landmark);
+						}
+					}
+				}
+			}
 		} else {
 			throw UnhandledVersionError("GameInteractivePlayerPacket", packet_version, kCurrentPacketVersion);
 		}
@@ -109,6 +123,15 @@ void GameInteractivePlayerPacket::write
 
 	// Display flags
 	fw.unsigned_32(ibase ? ibase->get_display_flags() : 0);
+
+	// Map landmarks
+	const std::vector<QuickNavigation::Landmark>& landmarks = ibase->landmarks();
+	fw.unsigned_8(landmarks.size());
+	for (const QuickNavigation::Landmark& landmark: landmarks) {
+		fw.unsigned_8(landmark.set ? 1 : 0);
+		fw.signed_32(landmark.point.x);
+		fw.signed_32(landmark.point.y);
+	}
 
 	fw.write(fs, "binary/interactive_player");
 }

@@ -55,7 +55,6 @@
 #include "wui/mapviewpixelconstants.h"
 #include "wui/mapviewpixelfunctions.h"
 #include "wui/minimap.h"
-#include "wui/quicknavigation.h"
 #include "wui/unique_window_handler.h"
 
 using Widelands::Area;
@@ -482,6 +481,14 @@ void InteractiveBase::toggle_minimap() {
 		mainview_move(p.x, p.y);
 	}
 }
+
+const std::vector<QuickNavigation::Landmark>& InteractiveBase::landmarks() {
+	return m->quicknavigation->landmarks();
+}
+void InteractiveBase::set_landmark(size_t key, const Point& point) {
+	m->quicknavigation->set_landmark(key, point);
+}
+
 
 /**
  * Hide the minimap if it is currently shown; otherwise, do nothing.
