@@ -199,6 +199,7 @@ BuildableField::BuildableField(const Widelands::FCoords& fc)
 	  military_in_constr_nearby(0),
 	  area_military_presence(0),
 	  military_stationed(0),
+	  unconnected_nearby(false),
 	  military_unstationed(0),
 	  is_portspace(false),
 	  port_nearby(false),
@@ -464,7 +465,10 @@ bool FlagsForRoads::get_winner(uint32_t* winner_hash, uint32_t pos) {
 }
 
 // This is an struct that stores strength of players, info on teams and provides some outputs from these data
-PlayersStrengths::PlayerStat::PlayerStat() {}
+//PlayersStrengths::PlayerStat::PlayerStat() {}
+PlayersStrengths::PlayerStat::PlayerStat() :
+	team_number(0),
+	players_power(0) { printf (" empty initialization of PlayerStat\n"); } //NOCOM
 PlayersStrengths::PlayerStat::PlayerStat(Widelands::TeamNumber tc, uint32_t pp) :
 	team_number(tc), players_power(pp) {}
 

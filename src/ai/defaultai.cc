@@ -134,7 +134,7 @@ DefaultAI::DefaultAI(Game& ggame, PlayerNumber const pid, DefaultAI::Type const 
      ts_without_trainers_(0),
      highest_nonmil_prio_(0),
      scheduler_delay_counter_(0) {
-
+		 
 	// Subscribe to NoteFieldPossession.
 	field_possession_subscriber_ =
 	   Notifications::subscribe<NoteFieldPossession>([this](const NoteFieldPossession& note) {
@@ -844,7 +844,7 @@ void DefaultAI::late_initialization() {
 	}
 
 	// The data struct below is owned by Player object, the purpose is to have them saved therein
-	persistent_data = player_->get_mutable_ai_persistent_state();
+	persistent_data = player_->get_mutable_ai_persistent_state(); //NOCOM
 
 	if (persistent_data->initialized == kFalse) {
 		// As all data are initialized without given values, they must be populated with reasonable values first
@@ -2984,6 +2984,7 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 			RoadCandidates.road_impossible(coords);
 			count += 1;
 		}
+		delete &path; //NOCOM
 	}
 
 	// Well and finally building the winning road
@@ -2994,6 +2995,9 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 		const int32_t pathcost = map.findpath(flag.get_position(), target_coords, 0, path, check);
 		assert (pathcost >= 0);
 		game().send_player_build_road(player_number(), path);
+		
+		// QUESTION: I would delete the path below but it crashes the game, probably because of above send_player_build_road
+		//delete &path; //NOCOM
 		return true;
 	}
 
