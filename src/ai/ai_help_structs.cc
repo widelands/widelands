@@ -465,10 +465,9 @@ bool FlagsForRoads::get_winner(uint32_t* winner_hash, uint32_t pos) {
 }
 
 // This is an struct that stores strength of players, info on teams and provides some outputs from these data
-//PlayersStrengths::PlayerStat::PlayerStat() {}
 PlayersStrengths::PlayerStat::PlayerStat() :
 	team_number(0),
-	players_power(0) { printf (" empty initialization of PlayerStat\n"); } //NOCOM
+	players_power(0) {}
 PlayersStrengths::PlayerStat::PlayerStat(Widelands::TeamNumber tc, uint32_t pp) :
 	team_number(tc), players_power(pp) {}
 

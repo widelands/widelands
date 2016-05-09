@@ -138,7 +138,7 @@ public:
 
 	/// Data that are used and managed by AI. They are here to have it saved as a part of player's data
 	struct AiPersistentState {
-		AiPersistentState() 
+		AiPersistentState()
 		: initialized(0), // zero here is important, it means "~first time"
 		 colony_scan_area(0),
 		 trees_around_cutters(0),
@@ -153,8 +153,8 @@ public:
 		 ai_productionsites_ratio(0),
 		 ai_personality_wood_difference(0),
 		 ai_personality_early_militarysites(0),
-		 last_soldier_trained(0) {} // go on NOCOM
-		 
+		 last_soldier_trained(0) {}
+
 		// Was initialized
 		uint8_t initialized;
 		uint32_t colony_scan_area;
