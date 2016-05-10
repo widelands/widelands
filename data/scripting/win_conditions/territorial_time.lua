@@ -3,6 +3,7 @@
 -- =======================================================================
 
 include "scripting/coroutine.lua" -- for sleep
+include "scripting/formatting.lua"
 include "scripting/messages.lua"
 include "scripting/table.lua"
 include "scripting/win_conditions/win_condition_functions.lua"
@@ -68,8 +69,8 @@ return {
 
       -- Find all valid teams
       local teamnumbers = {} -- array with team numbers
-      for idx,p in ipairs(plrs) do
-         local team = p.team
+      for idx,pl in ipairs(plrs) do
+         local team = pl.team
          if team > 0 then
             local found = false
             for idy,t in ipairs(teamnumbers) do
@@ -110,19 +111,19 @@ return {
 
          _calc_current_landsizes()
 
-         for idx, p in ipairs(plrs) do
-            local team = p.team
+         for idx, pl in ipairs(plrs) do
+            local team = pl.team
             if team == 0 then
-               if maxplayerpoints < _landsizes[p.number] then
-                  maxplayerpoints = _landsizes[p.number]
-                  maxpointsplayer = p
+               if maxplayerpoints < _landsizes[pl.number] then
+                  maxplayerpoints = _landsizes[pl.number]
+                  maxpointsplayer = pl
                end
-               points[#points + 1] = { p.name, _landsizes[p.number] }
+               points[#points + 1] = { pl.name, _landsizes[pl.number] }
             else
                if not teampoints[team] then -- init the value
                   teampoints[team] = 0
                end
-               teampoints[team] = teampoints[team] + _landsizes[p.number]
+               teampoints[team] = teampoints[team] + _landsizes[pl.number]
             end
          end
 
@@ -178,64 +179,67 @@ return {
             msg = msg .. "\n"
             if (has_had == "has") then
                msg = msg ..
-                  (wc_has_territory):bformat(
-                     points[i][1],
-                     _percent(points[i][2], #fields),
-                     points[i][2],
-                     #fields)
+                  listitem_bullet(
+                     (wc_has_territory):bformat(
+                        points[i][1],
+                        _percent(points[i][2], #fields),
+                        points[i][2],
+                        #fields))
             else
                msg = msg ..
-                  (wc_had_territory):bformat(
-                     points[i][1],
-                     _percent(points[i][2], #fields),
-                     points[i][2],
-                     #fields)
+                  listitem_bullet(
+                     (wc_had_territory):bformat(
+                        points[i][1],
+                        _percent(points[i][2], #fields),
+                        points[i][2],
+                        #fields))
             end
 
          end
-         return msg
+         return p(msg)
       end
 
       function _send_state(points)
          set_textdomain("win_conditions")
          local msg1 = (_"%s owns more than half of the map’s area."):format(currentcandidate)
-         msg1 = msg1 .. "\n"
+         msg1 = msg1 .. "<br>"
          msg1 = msg1 .. (ngettext("You’ve still got %i minute to prevent a victory.",
                    "You’ve still got %i minutes to prevent a victory.",
-                   remaining_time / 60))
-               :format(remaining_time / 60)
+                   remaining_time // 60))
+               :format(remaining_time // 60)
+         msg1 = p(msg1)
 
          local msg2 = _"You own more than half of the map’s area."
-         msg2 = msg2 .. "\n"
+         msg2 = msg2 .. "<br>"
          msg2 = msg2 .. (ngettext("Keep it for %i more minute to win the game.",
                    "Keep it for %i more minutes to win the game.",
-                   remaining_time / 60))
-               :format(remaining_time / 60)
+                   remaining_time // 60))
+               :format(remaining_time // 60)
+         msg2 = p(msg2)
 
-         for idx, p in ipairs(plrs) do
+         for idx, pl in ipairs(plrs) do
             local msg = ""
             if remaining_time < remaining_max_time and _maxpoints(points) > ( #fields / 2 ) then
-               if candidateisteam and currentcandidate == team_str:format(p.team)
-                  or not candidateisteam and currentcandidate == p.name then
+               if candidateisteam and currentcandidate == team_str:format(pl.team)
+                  or not candidateisteam and currentcandidate == pl.name then
                   msg = msg .. msg2 .. "\n\n"
                else
                   msg = msg .. msg1 .. "\n\n"
                end
-               msg = msg .. (ngettext("Otherwise the game will end in %i minute.",
+               msg = msg .. p((ngettext("Otherwise the game will end in %i minute.",
                             "Otherwise the game will end in %i minutes.",
-                            remaining_max_time / 60))
-                  :format(remaining_max_time / 60)
+                            remaining_max_time // 60))
+                  :format(remaining_max_time // 60))
             else
-               msg = msg .. (ngettext("The game will end in %i minute.",
+               msg = msg .. p((ngettext("The game will end in %i minute.",
                             "The game will end in %i minutes.",
-                            remaining_max_time / 60))
-                  :format(remaining_max_time / 60)
-
+                            remaining_max_time // 60))
+                  :format(remaining_max_time // 60))
             end
             msg = msg .. "\n\n"
-            msg = msg .. game_status.body
+            msg = msg .. "</rt>" .. game_status.body .. "<rt>"
             msg = msg .. _status(points, "has")
-            send_message(p, game_status.title, msg, {popup = true})
+            send_message(pl, game_status.title, rt(msg), {popup = true})
          end
       end
 
@@ -275,8 +279,8 @@ return {
       table.sort(points, function(a,b) return a[2] > b[2] end)
 
       -- Game has ended
-      for idx, p in ipairs(plrs) do
-         p.see_all = 1
+      for idx, pl in ipairs(plrs) do
+         pl.see_all = 1
 
          maxpoints = points[1][2]
          local wonmsg = won_game_over.body
@@ -284,13 +288,13 @@ return {
          local lostmsg = lost_game_over.body
          lostmsg = lostmsg .. "\n\n" .. game_status.body
          for i=1,#points do
-            if points[i][1] == team_str:format(p.team) or points[i][1] == p.name then
+            if points[i][1] == team_str:format(pl.team) or points[i][1] == pl.name then
                if points[i][2] >= maxpoints then
-                  p:send_message(won_game_over.title, wonmsg .. _status(points, "had"))
-                  wl.game.report_result(p, 1, make_extra_data(p, wc_descname, wc_version, {score=_landsizes[p.number]}))
+                  pl:send_message(won_game_over.title, wonmsg .. rt(_status(points, "had")))
+                  wl.game.report_result(pl, 1, make_extra_data(pl, wc_descname, wc_version, {score=_landsizes[pl.number]}))
                else
-                  p:send_message(lost_game_over.title, lostmsg .. _status(points, "had"))
-                  wl.game.report_result(p, 0, make_extra_data(p, wc_descname, wc_version, {score=_landsizes[p.number]}))
+                  pl:send_message(lost_game_over.title, lostmsg .. rt(_status(points, "had")))
+                  wl.game.report_result(pl, 0, make_extra_data(pl, wc_descname, wc_version, {score=_landsizes[pl.number]}))
                end
             end
          end
