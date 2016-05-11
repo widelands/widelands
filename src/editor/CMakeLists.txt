@@ -89,6 +89,7 @@ wl_library(editor
   DEPENDS
     base_exceptions
     base_i18n
+    base_log
     base_macros
     base_scoped_timer
     graphic
