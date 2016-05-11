@@ -266,6 +266,9 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent) :
 	box_.add_space(margin_);
 	box_height += margin_;
 
+	island_mode_.changed.connect
+		(boost::bind(&MainMenuNewRandomMap::button_clicked, this, ButtonId::kIslandMode));
+
 	// ---------- Random map number edit ----------
 
 	map_number_box_.add(&map_number_label_, UI::Align::kLeft);
@@ -356,6 +359,8 @@ void MainMenuNewRandomMap::button_clicked(MainMenuNewRandomMap::ButtonId n) {
 		++ current_world_;
 		current_world_ %= world_descriptions_.size();
 		world_.set_title(world_descriptions_[current_world_].descname);
+		break;
+	case ButtonId::kIslandMode:
 		break;
 	case ButtonId::kNone:
 		// Make sure that all conditions are met
