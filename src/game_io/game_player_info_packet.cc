@@ -75,15 +75,17 @@ void GamePlayerInfoPacket::read
 			}
 
 			// Result screen
-			PlayersManager* manager = game.player_manager();
-			const uint8_t no_endstatus = fr.unsigned_8();
-			for (uint8_t i = 0; i < no_endstatus; ++i) {
-				PlayerEndStatus status;
-				status.player = fr.unsigned_8();
-				status.result = static_cast<PlayerEndResult>(fr.unsigned_8());
-				status.time = fr.unsigned_32();
-				status.info = fr.c_string();
-				manager->set_player_end_status(status);
+			if (packet_version >= 19) {
+				PlayersManager* manager = game.player_manager();
+				const uint8_t no_endstatus = fr.unsigned_8();
+				for (uint8_t i = 0; i < no_endstatus; ++i) {
+					PlayerEndStatus status;
+					status.player = fr.unsigned_8();
+					status.result = static_cast<PlayerEndResult>(fr.unsigned_8());
+					status.time = fr.unsigned_32();
+					status.info = fr.c_string();
+					manager->set_player_end_status(status);
+				}
 			}
 
 			game.read_statistics(fr);
