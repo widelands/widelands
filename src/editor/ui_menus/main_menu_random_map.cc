@@ -27,6 +27,7 @@
 #include <boost/format.hpp>
 
 #include "base/i18n.h"
+#include "base/log.h"
 #include "base/wexception.h"
 #include "editor/editorinteractive.h"
 #include "editor/map_generator.h"
@@ -461,6 +462,33 @@ void MainMenuNewRandomMap::clicked_create_map() {
 		g_options.pull_section("global").get_string("realname", pgettext("map_name", "Unknown")),
 		sstrm.str().c_str());
 	loader_ui.step(_("Generating random map…"));
+
+	log("============== Generating Map ==============\n");
+	log("ID:            %s\n", map_id_edit_.text().c_str());
+	log("Random number: %u\n", map_info.mapNumber);
+	log("Dimensions:    %d x %d\n", map_info.w, map_info.h);
+	log("Players:       %d\n", map_info.numPlayers);
+	log("World:         %s\n", map_info.world_name.c_str());
+	switch (map_info.resource_amount) {
+	case UniqueRandomMapInfo::ResourceAmount::raLow:
+		log("Resources:     low\n");
+		break;
+	case UniqueRandomMapInfo::ResourceAmount::raMedium:
+		log("Resources:     medium\n");
+		break;
+	case UniqueRandomMapInfo::ResourceAmount::raHigh:
+		log("Resources:     high\n");
+		break;
+	default:
+		NEVER_HERE();
+	}
+	log("Land: %0.2f%%  Water: %0.2f%%  Wasteland: %0.2f%%\n",
+	    map_info.landRatio, map_info.waterRatio, map_info.wastelandRatio);
+	if (map_info.islandMode) {
+		log("Using Island Mode\n");
+	}
+	log("\n");
+
 	gen.create_random_map();
 
 	egbase.postload     ();
