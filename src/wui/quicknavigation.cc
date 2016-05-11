@@ -28,7 +28,8 @@ static const uint32_t MaxHistorySize = 32;
 QuickNavigation::QuickNavigation
 	(const Widelands::EditorGameBase & egbase,
 	 uint32_t screenwidth, uint32_t screenheight)
-: egbase_(egbase)
+: egbase_(egbase),
+  landmarks_(10)
 {
 	screenwidth_ = screenwidth;
 	screenheight_ = screenheight;
@@ -86,6 +87,12 @@ void QuickNavigation::view_changed(Point newpos, bool jump)
 	havefirst_ = true;
 }
 
+void QuickNavigation::set_landmark(size_t index, const Point& point) {
+	assert(index < landmarks_.size());
+	landmarks_[index].point = point;
+	landmarks_[index].set = true;
+}
+
 bool QuickNavigation::handle_key(bool down, SDL_Keysym key)
 {
 	if (!havefirst_)
@@ -101,8 +108,7 @@ bool QuickNavigation::handle_key(bool down, SDL_Keysym key)
 			WLApplication::get()->get_key_state(SDL_SCANCODE_LCTRL) ||
 			WLApplication::get()->get_key_state(SDL_SCANCODE_RCTRL);
 		if (ctrl) {
-			landmarks_[which].point = current_;
-			landmarks_[which].set = true;
+			set_landmark(which, current_);
 		} else {
 			if (landmarks_[which].set)
 				setview_(landmarks_[which].point);

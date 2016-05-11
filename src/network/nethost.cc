@@ -222,7 +222,7 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 			 ||
 			 settings().players.at(number).state == PlayerSettings::stateShared
 			 ||
-		    settings().players.at(number).state == PlayerSettings::stateOpen)  // For savegame loading
+			 settings().players.at(number).state == PlayerSettings::stateOpen)  // For savegame loading
 			host_->set_player_tribe(number, tribe, random_tribe);
 	}
 
@@ -2282,8 +2282,8 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket & r)
 		int32_t time = r.signed_32();
 		Widelands::PlayerCommand & plcmd = *Widelands::PlayerCommand::deserialize(r);
 		log
-			("[Host]: Client %u (%u) sent player command %i for %i, time = %i\n",
-			 i, client.playernum, plcmd.id(), plcmd.sender(), time);
+			("[Host]: Client %u (%u) sent player command %u for %u, time = %i\n",
+			 i, client.playernum, static_cast<unsigned int>(plcmd.id()), plcmd.sender(), time);
 		receive_client_time(i, time);
 		if (plcmd.sender() != client.playernum + 1)
 			throw DisconnectException("PLAYERCMD_FOR_OTHER");

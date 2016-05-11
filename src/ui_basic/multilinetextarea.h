@@ -58,6 +58,7 @@ struct MultilineTextarea : public Panel {
 	uint32_t get_eff_w() const {return scrollbar_.is_enabled() ? get_w() - Scrollbar::kSize : get_w();}
 
 	void set_color(RGBColor fg) {color_ = fg;}
+	void force_new_renderer() {force_new_renderer_ = true;}
 
 	// Drawing and event handlers
 	void draw(RenderTarget&) override;
@@ -82,7 +83,8 @@ private:
 	RGBColor color_;
 	Align align_;
 
-	bool isrichtext;
+	bool force_new_renderer_;
+	bool use_old_renderer_;
 	RichText rt;
 
 	Scrollbar   scrollbar_;
