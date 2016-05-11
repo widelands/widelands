@@ -75,7 +75,7 @@ void GamePlayerInfoPacket::read
 			}
 
 			// Result screen
-			if (packet_version >= 19) {
+			if (packet_version > 19) {
 				PlayersManager* manager = game.player_manager();
 				const uint8_t no_endstatus = fr.unsigned_8();
 				for (uint8_t i = 0; i < no_endstatus; ++i) {

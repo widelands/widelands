@@ -123,7 +123,7 @@ void PlayersManager::set_player_end_status(const PlayerEndStatus& status)
 	for (auto& pes : players_end_status_) {
 		if (pes.player == status.player) {
 			pes = status;
-			 return;
+			return;
 		}
 	}
 	players_end_status_.push_back(status);
