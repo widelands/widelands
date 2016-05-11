@@ -94,6 +94,11 @@ public:
 	*/
 	void add_player_end_status(const PlayerEndStatus & status);
 
+	/**
+	 * Changes an already existing player end status
+	 */
+	void set_player_end_status(const PlayerEndStatus & status);
+
 private:
 	Player* players_[MAX_PLAYERS];
 	EditorGameBase& egbase_;
