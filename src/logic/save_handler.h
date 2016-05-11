@@ -33,7 +33,7 @@ namespace Widelands {class Game;}
 class SaveHandler {
 public:
 	SaveHandler() : last_saved_realtime_(0), initialized_(false), allow_saving_(true),
-		save_requested_(false), save_filename_(""), autosave_filename_("wl_autosave") {}
+		save_requested_(false), saving_next_tick_(false), save_filename_(""), autosave_filename_("wl_autosave") {}
 	void think(Widelands::Game &);
 	std::string create_file_name(const std::string& dir, const std::string& filename) const;
 	bool save_game
@@ -58,6 +58,7 @@ private:
 	bool initialized_;
 	bool allow_saving_;
 	bool save_requested_;
+	bool saving_next_tick_;
 	std::string save_filename_;
 	std::string current_filename_;
 	std::string autosave_filename_;
