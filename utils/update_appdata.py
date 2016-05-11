@@ -15,13 +15,19 @@ import sys
 #
 # The output is written to ../debian/widelands.appdata.xml
 
-print("Checking files")
+print("Updating appdata.xml and .desktop files")
+print("- Checking files")
 
 base_path = os.path.abspath(os.path.join(os.path.dirname(__file__),os.path.pardir))
 
-input_filename = os.path.normpath(base_path + "/debian/widelands.appdata.xml.stub")
-if (not os.path.isfile(input_filename)):
-	print("Error: File " + input_filename + " not found.")
+appdata_input_filename = os.path.normpath(base_path + "/debian/widelands.appdata.xml.stub")
+if (not os.path.isfile(appdata_input_filename)):
+	print("Error: File " + appdata_input_filename + " not found.")
+	sys.exit(1)
+
+desktop_input_filename = os.path.normpath(base_path + "/debian/widelands.desktop.stub")
+if (not os.path.isfile(desktop_input_filename)):
+	print("Error: File " + desktop_input_filename + " not found.")
 	sys.exit(1)
 
 translations_path = os.path.normpath(base_path + "/debian/translations")
@@ -34,21 +40,31 @@ if (not os.path.isfile(english_source_filename)):
 	print("Error: File " + english_source_filename + " not found.")
 	sys.exit(1)
 
-print("Reading translations from JSON:")
+print("- Reading source from JSON:")
 
 english_source_file = open(english_source_filename, "r")
 english_source = json.load(english_source_file)
 
-summary_en = english_source["tagline"]
-descriptions_en = english_source["description_long"]
+tagline_en = english_source["tagline"]
+descriptions_en = english_source["description"]
+generic_name_en = english_source["category"]
 
-summaries = "  <summary>" + summary_en + "</summary>\n"
+english_source_file.close()
+
+# For appdata.xml
+summaries = "  <summary>" + tagline_en + "</summary>\n"
 descriptions = "  <description>\n"
 for description in descriptions_en:
 	descriptions += "    <p>\n"
 	descriptions += "      " + description + "\n"
 	descriptions += "    </p>\n"
 descriptions += "  </description>\n"
+
+# For .desktop
+generic_names = "GenericName=" + generic_name_en + "\n"
+comments = "Comment=" + tagline_en + "\n"
+
+print("- Reading translations from JSON:")
 
 # Each language's translations live in a separate file, so we list the dir
 translation_files = sorted(os.listdir(translations_path), key=str.lower)
@@ -59,19 +75,24 @@ for translation_filename in translation_files:
 		translation_file = open(translations_path + "/" + translation_filename, "r")
 		translation = json.load(translation_file)
 		lang_code = translation_filename[:-5]
-		summary = translation["tagline"]
-		if summary != summary_en:
-			summaries += "  <summary xml:lang=\"" + lang_code + "\">"+ summary +"</summary>\n"
-		if translation["description_long"] != descriptions_en:
-			descriptions += "  <description xml:lang=\"" + lang_code + "\">\n"
-			for description in translation["description_long"]:
+		tagline = translation["tagline"]
+		if tagline != tagline_en:
+			summaries += "  <summary xml:lang=\"" + lang_code + "\">"+ tagline +"</summary>\n" # appdata.xml
+			comments += "Comment[" + lang_code + "]="+ tagline +"\n" # .desktop
+		generic_name = translation["category"]
+		if generic_name != generic_name_en:
+			generic_names += "GenericName[" + lang_code + "]="+ generic_name +"\n" # .desktop
+		if translation["description"] != descriptions_en:
+			descriptions += "  <description xml:lang=\"" + lang_code + "\">\n" # appdata.xml
+			for description in translation["description"]:
 				descriptions += "    <p>\n"
 				descriptions += "      " + description + "\n"
 				descriptions += "    </p>\n"
 			descriptions += "  </description>\n"
+		translation_file.close()
 
-print("Writing appdata")
-input_file = open(input_filename, "r")
+print("- Writing widelands.appdata.xml")
+input_file = open(appdata_input_filename, "r")
 appdata = ""
 
 for line in input_file:
@@ -80,12 +101,28 @@ for line in input_file:
 	else:
 		appdata += summaries + descriptions
 
-# print(appdata)
+input_file.close()
 
-print("Writing widelands.appdata.xml")
 dest_filepath = base_path + "/debian/widelands.appdata.xml"
 dest_file = codecs.open(dest_filepath, encoding='utf-8', mode='w')
 dest_file.write(appdata)
+dest_file.close()
+
+print("- Writing .desktop")
+input_file = open(desktop_input_filename, "r")
+desktop = ""
+
+for line in input_file:
+	if line.strip() != "GENERIC_NAME_COMMENT_HOOK":
+		desktop += line
+	else:
+		desktop += generic_names + comments
+
+input_file.close()
+
+dest_filepath = base_path + "/debian/widelands.desktop"
+dest_file = codecs.open(dest_filepath, encoding='utf-8', mode='w')
+dest_file.write(desktop)
 dest_file.close()
 
 print("Done!")
