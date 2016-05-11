@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Copyright 2016 The Widelands Development Team <widelands-dev_at_lists.launchpad.net> -->
-<application>
+<component>
   <id type="desktop">widelands.desktop</id>
-  <metadata_license>CC0</metadata_license>
+  <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-2.0</project_license>
   <name>Widelands</name>
   <summary>A a real-time build-up strategy game</summary>
@@ -16,13 +16,26 @@
     </p>
   </description>
   <screenshots>
-    <screenshot type="default">https://wl.widelands.org/wlmedia/wlscreens/screens/Current%20Developments/To%20the%20sea.png</screenshot>
-    <screenshot>https://wl.widelands.org/wlmedia/wlscreens/screens/Build%2018%20(until%20now)/Seafaring%20Expedition.png</screenshot>
-    <screenshot>https://wl.widelands.org/wlmedia/wlscreens/screens/Build%2017/Playing%20online.png</screenshot>
+    <screenshot type="default">
+      <image>https://wl.widelands.org/wlmedia/wlscreens/screens/Current%20Developments/To%20the%20sea.png</image>
+      <caption>Fleet of Ships</caption>
+    </screenshot>
+    <screenshot>
+      <image>https://wl.widelands.org/wlmedia/wlscreens/screens/Build%2018%20(until%20now)/Seafaring%20Expedition.png</image>
+      <caption>Seafaring Expedition</caption>
+    </screenshot>
+    <screenshot>
+      <image>https://wl.widelands.org/wlmedia/wlscreens/screens/Build%2017/Playing%20online.png</image>
+      <caption>Multiplayer Game Setup</caption>
+    </screenshot>
   </screenshots>
   <url type="homepage">https://wl.widelands.org/</url>
   <update_contact>widelands-dev_at_lists.launchpad.net</update_contact>
   <releases>
-    <release version="Build 18" date="2014-02-22"/>
+    <release date="2014-02-22" version="Build 18"/>
   </releases>
-</application>
+  <url type="bugtracker">https://bugs.launchpad.net/widelands</url>
+  <url type="donation">https://wl.widelands.org/wiki/The%20Widelands%20Project/</url>
+  <url type="help">https://wl.widelands.org/wiki/Game%20Manual/</url>
+  <developer_name>The Widelands Development Team</developer_name>
+</component>
