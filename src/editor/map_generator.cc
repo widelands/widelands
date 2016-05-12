@@ -193,8 +193,8 @@ void MapGenerator::generate_resources(uint32_t const* const random1,
 /// \param elevation Random value.
 /// \param map_gen_info_ Map generator information used to translate random values
 /// to height information (world specific info).
-/// \param c position within map
-/// \param mapInfo Information about the random map currently begin created
+/// \param c Position within map.
+/// \param mapInfo Information about the random map currently being created
 /// (map specific info).
 ///
 /// \returns A map height value corresponding to elevation.
@@ -240,31 +240,28 @@ uint8_t MapGenerator::make_node_elevation
 }
 
 /**
-===============
-Generate a "continuous" array of "reasonable" random values.
-The array generated is in fact organized in a two-dimensional
-way. "Reasonable" means that the values are not purely random.
-Neighboring values (in a two-dimensional way) are fitting
-together so that such an array can be used to directly generate
-height information for mountains, wasteland, resources etc.
-"Continuous" means that also value of the left border fit to
-the right border values and values of the top border fit to the
-bottom border values. This means we have some kind of "endlessly"
-repeating set of random values.
-What is more, the different heights are weighed so that the
-random distribution of all random values in the array is linear.
-The minimum valu will be 0, the maximum value will be kMaxElevation,
-the average will be kAverageElevation.
-
-w, h: are width and height of the two-dimensional array
-      produced. Thus, the array has w * h entries. To access a certain
-      "coordinate" in the array, use array[x + w * y] to retrieve the entry.
-
-rng:  is the random number generator to be used.
-      This will mostly be the current rng of the random map currently being
-      created.
-===============
-*/
+ * Generate a "continuous" array of "reasonable" random values.
+ * The array generated is in fact organized in a two-dimensional
+ * way. "Reasonable" means that the values are not purely random.
+ * Neighboring values (in a two-dimensional way) are fitting
+ * together so that such an array can be used to directly generate
+ * height information for mountains, wasteland, resources etc.
+ * "Continuous" means that also value of the left border fit to
+ * the right border values and values of the top border fit to the
+ * bottom border values. This means we have some kind of "endlessly"
+ * repeating set of random values.
+ * What is more, the different heights are weighed so that the
+ * random distribution of all random values in the array is linear.
+ * The minimum valu will be 0, the maximum value will be kMaxElevation,
+ * the average will be kAverageElevation.
+ *
+ * \param w, h Width and height of the two-dimensional array
+ *             produced. Thus, the array has w * h entries. To access a certain
+ *             "coordinate" in the array, use array[x + w * y] to retrieve the entry.
+ * \param rng  The random number generator to be used.
+ *             This will mostly be the current rng of the random map currently being
+ *             created.
+ */
 uint32_t * MapGenerator::generate_random_value_map
 	(uint32_t const w, uint32_t const h, RNG & rng)
 {
@@ -416,29 +413,27 @@ uint32_t * MapGenerator::generate_random_value_map
 
 
 /**
-===============
-Figures out terrain info for a field in a random map.
-
-map_gen_info_:  Map generator information used to translate
-             Random values to height information (world-
-             specific info)
-x, y:        first coordinate of the current triangle
-x1, y1:      second coordinate of the current triangle
-x2, y2:      third coordinate of the current triangle
-random2:     Random array for generating different
-             terrain types on land
-random3:     Random array for generating different
-             terrain types on land
-random4:     Random array for wasteland generation
-h1, h2, h3:  Map height information for the three triangle coords
-mapInfo:     Information about the random map currently
-             begin created (map specific info)
-rng:         is the random number generator to be used.
-             This will mostly be the current rng of the random map
-             currently being created.
-terrType:    Returns the terrain-Type fpor this triangle
-===============
-*/
+ * Figures out terrain info for a field in a random map.
+ *
+ * \param map_gen_info_  Map generator information used to translate
+ *                     random values to height information (world-
+ *                     specific info).
+ * \param x, y         First coordinate of the current triangle.
+ * \param x1, y1       Second coordinate of the current triangle.
+ * \param x2, y2       Third coordinate of the current triangle.
+ * \param random2      Random array for generating different
+ *                     terrain types on land.
+ * \param random3      Random array for generating different
+ *                     terrain types on land.
+ * \param random4      Random array for wasteland generation.
+ * \param h1, h2, h3   Map height information for the three triangle coords.
+ * \param mapInfo      Information about the random map currently
+ *                     being created (map specific info).
+ * \param rng          The random number generator to be used.
+ *                     This will mostly be the current rng of the random map
+ *                     currently being created.
+ * \param terrType     Returns the terrain type for this triangle.
+ */
 DescriptionIndex MapGenerator::figure_out_terrain
 	(uint32_t                  * const random2,
 	 uint32_t                  * const random3,
@@ -871,17 +866,15 @@ void MapGenerator::create_random_map()
 }
 
 /**
-===============
-Converts a character out of a mapId-String into an integer value.
-Valid characters are 'a'-'z' (or 'A'-'Z') and '2'-'9'. 'i' and 'o'
-(or 'I' and 'O') are not valid.
-The character is treated case-insensitive.
-
-num:          Number to convert
-Return value: The resulting number (0-31) or -1 if the character
-              was no legal character.
-===============
-*/
+ * Converts a character out of a mapId-String into an integer value.
+ * Valid characters are 'a'-'z' (or 'A'-'Z') and '2'-'9'. 'i' and 'o'
+ * (or 'I' and 'O') are not valid.
+ * The character is treated case-insensitive.
+ *
+ * \param ch Character to convert.
+ * \return The resulting number (0-31) or -1 if the character
+ *         was no legal character.
+ */
 
 int  UniqueRandomMapInfo::map_id_char_to_number(char ch)
 {
@@ -921,14 +914,12 @@ int  UniqueRandomMapInfo::map_id_char_to_number(char ch)
 }
 
 /**
-===============
-Converts an integer number (0-31) to a characted usable in
-a map id string.
-
-num:          Number to convert
-Return value: The converted value as a character
-===============
-*/
+ * Converts an integer number (0-31) to a characted usable in
+ * a map id string.
+ *
+ * \param num Number to convert.
+ * \return The converted value as a character.
+ */
 char UniqueRandomMapInfo::map_id_number_to_char(int32_t const num)
 {
 	if (num == 22)
@@ -953,15 +944,14 @@ char UniqueRandomMapInfo::map_id_number_to_char(int32_t const num)
 }
 
 /**
-===============
-Fills a UniqueRandomMapInfo structure from a given Map-id-string.
-
-mapIdString:  Map-Id-String
-mapInfo_out:  UniqueRandomMapInfo-Structure to be filled
-world_names:  List of valid world names to check against
-Return value: true if the map-id-string was valid, false otherwise
-===============
-*/
+ * Fills a UniqueRandomMapInfo structure from a given map ID string.
+ *
+ * \param mapIdString Map ID string.
+ * \param mapInfo_out UniqueRandomMapInfo structure to be filled.
+ * \param world_names List of valid world names to check against.
+ *
+ * \return True if the map ID string was valid, false otherwise.
+ */
 
 bool UniqueRandomMapInfo::set_from_id_string
 	(UniqueRandomMapInfo & mapInfo_out, const std::string & mapIdString,
@@ -1065,19 +1055,17 @@ bool UniqueRandomMapInfo::set_from_id_string
 }
 
 /**
-===============
-Generates an ID-String for map generation.
-The ID-String is an encoded version of the
-information in a UniqueMapInfo structure.
-Thus, the ID_String will contain all info
-necessary to re-create a given random map.
+ * Generates an ID-String for map generation.
+ * The ID-String is an encoded version of the
+ * information in a UniqueMapInfo structure.
+ * Thus, the ID_String will contain all info
+ * necessary to re-create a given random map.
+ *
+ * \param mapIdsString_out Output buffer for the resulting map ID string.
+ * \param mapInfo          Information about the random map currently being
+ *                         created (map specific info).
+ */
 
-mapIdsString_out: Output buffer for the resulting
-                  Map-ID-String
-mapInfo:     Information about the random map currently
-             begin created (map specific info)
-===============
-*/
 void UniqueRandomMapInfo::generate_id_string
 	(std::string & mapIdsString_out, const UniqueRandomMapInfo & mapInfo)
 {
