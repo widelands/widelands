@@ -55,7 +55,8 @@ struct MainMenuNewRandomMap : public UI::Window {
 		kWasteland,
 		kResources,
 		kWorld,
-		kIslandMode
+		kIslandMode,
+		kPlayers
 	};
 
 private:

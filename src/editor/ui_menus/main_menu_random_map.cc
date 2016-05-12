@@ -181,6 +181,10 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent) :
 	box_.add_space(margin_);
 	box_height += margin_;
 
+	players_.changed.connect(boost::bind(&MainMenuNewRandomMap::button_clicked,
+														this,
+														ButtonId::kPlayers));
+
 	// ---------- Worlds ----------
 
 	world_box_.add(&world_label_, UI::Align::kLeft);
@@ -328,6 +332,7 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent) :
 */
 void MainMenuNewRandomMap::button_clicked(MainMenuNewRandomMap::ButtonId n) {
 	switch (n) {
+	case ButtonId::kPlayers: // intended fall-through
 	case ButtonId::kMapSize:
 		// Restrict maximum players according to map size, but allow at least 2 players.
 		max_players_ =
