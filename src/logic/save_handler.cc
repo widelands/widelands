@@ -78,7 +78,8 @@ void SaveHandler::think(Widelands::Game & game) {
 			number_of_rolls--;
 			while (number_of_rolls >= 0) {
 				const std::string filename_next =
-					create_file_name(get_base_dir(), (boost::format("%s_%02d") % filename % number_of_rolls).str());
+					create_file_name(get_base_dir(),
+						(boost::format("%s_%02d") % filename % number_of_rolls).str());
 				if (g_fs->file_exists(filename_next)) {
 					g_fs->fs_rename(filename_next, filename_previous);
 					log("Autosave: Rolled %s to %s\n", filename_next.c_str(), filename_previous.c_str());
@@ -88,13 +89,12 @@ void SaveHandler::think(Widelands::Game & game) {
 			}
 			filename = (boost::format("%s_00") % autosave_filename_).str();
 			log("Autosave: saving as %s\n", filename.c_str());
-		}	
-		
-		
-		// saving now	
+		}
+
+		// saving now
 		const std::string complete_filename = create_file_name(get_base_dir(), filename);
 		std::string backup_filename;
-	
+
 		// always overwrite a file
 		if (g_fs->file_exists(complete_filename)) {
 			filename += "2";
@@ -104,12 +104,12 @@ void SaveHandler::think(Widelands::Game & game) {
 			}
 			g_fs->fs_rename(complete_filename, backup_filename);
 		}
-	
+
 		std::string error;
 		if (!save_game(game, complete_filename, &error)) {
 			log("Autosave: ERROR! - %s\n", error.c_str());
 			game.get_ibase()->log_message(_("Saving failed!"));
-	
+
 			// if backup file was created, move it back
 			if (backup_filename.length() > 0) {
 				if (g_fs->file_exists(complete_filename)) {
@@ -125,14 +125,14 @@ void SaveHandler::think(Widelands::Game & game) {
 			if (backup_filename.length() > 0 && g_fs->file_exists(backup_filename))
 				g_fs->fs_unlink(backup_filename);
 		}
-	
+
 		log("Autosave: save took %d ms\n", SDL_GetTicks() - realtime);
 		game.get_ibase()->log_message(_("Game saved"));
 		last_saved_realtime_ = realtime;
 		saving_next_tick_ =  false;
-			
+
 	} else {
-		// Perhaps save is due now?		
+		// Perhaps save is due now?
 		const int32_t autosave_interval_in_seconds =
 			g_options.pull_section("global").get_int("autosave", DEFAULT_AUTOSAVE_INTERVAL * 60);
 		if (autosave_interval_in_seconds <= 0) {
@@ -144,15 +144,17 @@ void SaveHandler::think(Widelands::Game & game) {
 			return;
 		}
 
-		if (game.game_controller()->is_paused()) { // check if game is paused
+		// check if game is paused (in any way)
+		if (game.game_controller()->is_paused() ||
+			game.game_controller()->real_speed() == 0) {
 			// Wait 30 seconds until next save try
 			last_saved_realtime_ = last_saved_realtime_ + 30000;
 			return;
 		}
-		log("Autosave: interval elapsed: %d s, current gametime: %s, going to save...\n",
+		log("Autosave: %d s interval elapsed, current gametime: %s, saving...\n",
 			elapsed,
 			gametimestring(game.get_gametime(), true).c_str());
-		
+
 		saving_next_tick_ = true;
 		game.get_ibase()->log_message(_("Saving game…"));
 	}
