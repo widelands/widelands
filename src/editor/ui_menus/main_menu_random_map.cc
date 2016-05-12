@@ -522,7 +522,13 @@ void MainMenuNewRandomMap::id_edit_box_changed()
 
 	std::string str = map_id_edit_.text();
 
-	if (!UniqueRandomMapInfo::set_from_id_string(map_info, str))
+	std::vector<std::string> world_names;
+	world_names.reserve(world_descriptions_.size());
+	for (const auto & descr : world_descriptions_) {
+		world_names.push_back(descr.name);
+	}
+
+	if (!UniqueRandomMapInfo::set_from_id_string(map_info, str, world_names))
 		ok_button_.set_enabled(false);
 	else {
 		std::stringstream sstrm;

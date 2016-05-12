@@ -958,12 +958,14 @@ Fills a UniqueRandomMapInfo structure from a given Map-id-string.
 
 mapIdString:  Map-Id-String
 mapInfo_out:  UniqueRandomMapInfo-Structure to be filled
+world_names:  List of valid world names to check against
 Return value: true if the map-id-string was valid, false otherwise
 ===============
 */
 
 bool UniqueRandomMapInfo::set_from_id_string
-	(UniqueRandomMapInfo & mapInfo_out, const std::string & mapIdString)
+	(UniqueRandomMapInfo & mapInfo_out, const std::string & mapIdString,
+	 const std::vector<std::string> & world_names)
 {
 	//  check string
 
@@ -1044,6 +1046,20 @@ bool UniqueRandomMapInfo::set_from_id_string
 	mapInfo_out.numPlayers      = nums[12];
 	//  Island mode
 	mapInfo_out.islandMode      = (nums[13] == 1) ? true : false;
+
+	// World name hash
+	uint16_t world_name_hash =
+		(nums[14])       |
+		(nums[15] <<  5) |
+		(nums[16] << 10) |
+		(nums[17] << 15);
+
+	for (const std::string & world_name : world_names) {
+		if (generate_world_name_hash(world_name) == world_name_hash) {
+			mapInfo_out.world_name = world_name;
+			return true;
+		}
+	}
 
 	return false; // No valid world name found
 }
