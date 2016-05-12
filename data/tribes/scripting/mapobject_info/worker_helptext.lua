@@ -2,7 +2,8 @@
 -- Note that this can't handle localization properly.
 
 return {
-   func = function(worker_description)
+   func = function(workername)
+      local worker_description = wl.Game():get_worker_description(workername)
       include(worker_description.helptext_script)
       return worker_helptext()
    end

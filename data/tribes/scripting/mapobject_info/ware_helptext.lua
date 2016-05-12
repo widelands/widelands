@@ -2,8 +2,9 @@
 -- Note that this can't handle localization properly.
 
 return {
-   func = function(tribename, ware_description)
+   func = function(tribename, warename)
+      local ware_description = wl.Game():get_ware_description(warename)
       include(ware_description.helptext_script)
-      return  ware_helptext(tribename)
+      return ware_helptext(tribename)
    end
 }
