@@ -22,18 +22,18 @@
 
 #include <memory>
 
-#include "editor/tools/editor_history.h"
-#include "editor/tools/editor_increase_height_tool.h"
-#include "editor/tools/editor_increase_resources_tool.h"
-#include "editor/tools/editor_info_tool.h"
-#include "editor/tools/editor_make_infrastructure_tool.h"
-#include "editor/tools/editor_noise_height_tool.h"
-#include "editor/tools/editor_place_bob_tool.h"
-#include "editor/tools/editor_place_immovable_tool.h"
-#include "editor/tools/editor_set_origin_tool.h"
-#include "editor/tools/editor_set_port_space_tool.h"
-#include "editor/tools/editor_set_starting_pos_tool.h"
-#include "editor/tools/editor_set_terrain_tool.h"
+#include "editor/tools/history.h"
+#include "editor/tools/increase_height_tool.h"
+#include "editor/tools/increase_resources_tool.h"
+#include "editor/tools/info_tool.h"
+#include "editor/tools/make_infrastructure_tool.h"
+#include "editor/tools/noise_height_tool.h"
+#include "editor/tools/place_bob_tool.h"
+#include "editor/tools/place_immovable_tool.h"
+#include "editor/tools/set_origin_tool.h"
+#include "editor/tools/set_port_space_tool.h"
+#include "editor/tools/set_starting_pos_tool.h"
+#include "editor/tools/set_terrain_tool.h"
 #include "logic/map.h"
 #include "notifications/notifications.h"
 #include "ui_basic/button.h"
@@ -52,7 +52,7 @@ public:
 	struct Tools {
 		Tools()
 			:
-			current_pointer(&increase_height),
+			current_pointer(&info),
 			use_tool(EditorTool::First),
 			increase_height(decrease_height, set_height),
 			noise_height(set_height),
@@ -64,10 +64,9 @@ public:
 		{}
 		EditorTool & current() const {return *current_pointer;}
 		using ToolVector = std::vector<EditorTool *>;
-		//ToolVector                     tools;
-		EditorTool          *          current_pointer;
-		EditorTool::ToolIndex         use_tool;
-		EditorInfoTool                info;
+		EditorTool          *        current_pointer;
+		EditorTool::ToolIndex        use_tool;
+		EditorInfoTool               info;
 		EditorSetHeightTool          set_height;
 		EditorDecreaseHeightTool     decrease_height;
 		EditorIncreaseHeightTool     increase_height;
@@ -75,14 +74,14 @@ public:
 		EditorSetTerrainTool         set_terrain;
 		EditorDeleteImmovableTool    delete_immovable;
 		EditorPlaceImmovableTool     place_immovable;
-		EditorSetStartingPosTool    set_starting_pos;
+		EditorSetStartingPosTool     set_starting_pos;
 		EditorDeleteBobTool          delete_bob;
 		EditorPlaceBobTool           place_bob;
 		EditorDecreaseResourcesTool  decrease_resources;
 		EditorSetResourcesTool       set_resources;
 		EditorIncreaseResourcesTool  increase_resources;
-		EditorSetPortSpaceTool      set_port_space;
-		EditorUnsetPortSpaceTool    unset_port_space;
+		EditorSetPortSpaceTool       set_port_space;
+		EditorUnsetPortSpaceTool     unset_port_space;
 		EditorSetOriginTool          set_origin;
 		EditorMakeInfrastructureTool make_infrastructure;
 	};
@@ -93,6 +92,7 @@ public:
 	static void run_editor(const std::string & filename, const std::string& script_to_run);
 
 	void load(const std::string & filename);
+	void cleanup_for_load() override;
 
 	// leaf functions from base class
 	void start() override;
@@ -101,6 +101,8 @@ public:
 	void map_clicked(bool draw = false);
 	void set_sel_pos(Widelands::NodeAndTriangle<>) override;
 	void set_sel_radius_and_update_menu(uint32_t);
+	void start_painting();
+	void stop_painting();
 
 	//  Handle UI elements.
 	bool handle_key(bool down, SDL_Keysym) override;
@@ -135,6 +137,8 @@ public:
 	// Access to the tools.
 	Tools* tools();
 
+	UI::UniqueWindow::Registry window_help;
+
 private:
 	friend struct EditorToolMenu;
 
@@ -156,7 +160,7 @@ private:
 	bool need_save_;
 	std::vector<PlayerReferences> player_tribe_references_;
 	uint32_t realtime_;
-	bool left_mouse_button_is_down_;
+	bool is_painting_;
 
 	std::unique_ptr<Tools> tools_;
 	std::unique_ptr<EditorHistory> history_;

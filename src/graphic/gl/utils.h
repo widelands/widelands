@@ -121,6 +121,8 @@ public:
 	// needed before the texture is used as target for rendering.
 	void unbind_texture_if_bound(GLuint texture);
 
+	void delete_texture(GLuint texture);
+
 	// Calls glEnableVertexAttribArray on all 'entries' and disables all others
 	// that are activated. 'entries' is taken by value on purpose.
 	void enable_vertex_attrib_array(std::unordered_set<GLint> entries);
@@ -143,7 +145,7 @@ private:
 // Calls glVertexAttribPointer.
 void vertex_attrib_pointer(int vertex_index, int num_items, int stride, int offset);
 
-// Swap order of rows in m_pixels, to compensate for the upside-down nature of the
+// Swap order of rows in pixels, to compensate for the upside-down nature of the
 // OpenGL coordinate system.
 void swap_rows(int width, int height, int pitch, int bpp, uint8_t* pixels);
 

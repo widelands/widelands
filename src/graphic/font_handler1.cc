@@ -82,9 +82,9 @@ public:
 private:
 	Texture* texture() const {
 		Texture* surf = texture_cache_->get(hash_);
-		if (surf)
+		if (surf != nullptr) {
 			return surf;
-
+		}
 		return texture_cache_->insert(
 		   hash_, std::unique_ptr<Texture>(get_renderer_()->render(text_, width_)));
 	}
@@ -108,10 +108,11 @@ namespace UI {
 class FontHandler1 : public IFontHandler1 {
 public:
 	FontHandler1(ImageCache* image_cache)
-	   : texture_cache_(new TextureCache(RICHTEXT_TEXTURE_CACHE)),
-	     fontset_(new UI::FontSet(i18n::get_locale())),
-	     rt_renderer_(new RT::Renderer(image_cache, texture_cache_.get(), fontset_.get())),
-	     image_cache_(image_cache) {
+		: texture_cache_(new TextureCache(RICHTEXT_TEXTURE_CACHE)),
+		  fontsets_(),
+		  fontset_(fontsets_.get_fontset(i18n::get_locale())),
+		  rt_renderer_(new RT::Renderer(image_cache, texture_cache_.get(), fontsets_)),
+		  image_cache_(image_cache) {
 	}
 	virtual ~FontHandler1() {}
 
@@ -128,17 +129,18 @@ public:
 		return image_cache_->insert(hash, std::move(image));
 	}
 
-	UI::FontSet& fontset() const override {return *fontset_.get();}
+	UI::FontSet const * fontset() const override {return fontset_;}
 
 	void reinitialize_fontset() override {
-		fontset_.reset(new UI::FontSet(i18n::get_locale()));
+		fontset_ = fontsets_.get_fontset(i18n::get_locale());
 		texture_cache_.get()->flush();
-		rt_renderer_.reset(new RT::Renderer(image_cache_, texture_cache_.get(), fontset_.get()));
+		rt_renderer_.reset(new RT::Renderer(image_cache_, texture_cache_.get(), fontsets_));
 	}
 
 private:
 	std::unique_ptr<TextureCache> texture_cache_;
-	std::unique_ptr<UI::FontSet> fontset_; // The currently active FontSet
+	UI::FontSets fontsets_; // All fontsets
+	UI::FontSet const * fontset_; // The currently active FontSet
 	std::unique_ptr<RT::Renderer> rt_renderer_;
 	ImageCache* const image_cache_;  // not owned
 };

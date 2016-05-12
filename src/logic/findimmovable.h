@@ -82,6 +82,8 @@ public:
 	}
 };
 
+const FindImmovable & find_immovable_always_true();
+
 // FindImmovable functor
 struct FindImmovableSize {
 	FindImmovableSize(int32_t const init_min, int32_t const init_max)

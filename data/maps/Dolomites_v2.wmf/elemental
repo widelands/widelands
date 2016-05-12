@@ -1,0 +1,12 @@
+# Automatically created by Widelands bzr7905[trunk] (Debug)
+
+[global]
+packet_version="1"
+map_w="304"
+map_h="208"
+nr_players="6"
+name=_"Dolomites"
+author="King of nowhere"
+descr=_"The jewel of the Alps, the Dolomites mountain range has been declared a World Heritage Site for its pristine beauty. This map is an as-faithful-as-reasonable reconstruction of the area delimited by Cortina d’Ampezzo in the north-east and Canazei in the south-west. If you have to be pitted in a duel to the death against your enemies, it may as well be in a beautiful place."
+hint=_"There is lot of flat ground on the mountains. Unfortunately, most of it is vertical. Use the little building space that you have wisely. A fortress at the mouth of a narrow mountain pass can be a formidable obstacle to an enemy army. Use the terrain to your advantage."
+tags="1v1,2teams,3teams,official"

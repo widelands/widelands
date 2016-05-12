@@ -30,6 +30,7 @@
 #include "base/i18n.h"
 #include "economy/itransport_cost_calculator.h"
 #include "logic/field.h"
+#include "logic/findimmovable.h"
 #include "logic/description_maintainer.h"
 #include "logic/map_revision.h"
 #include "logic/objective.h"
@@ -81,8 +82,8 @@ struct NoteFieldResourceChanged {
 
 	FCoords fc;
 	DescriptionIndex old_resource;
-	uint8_t old_initial_amount;
-	uint8_t old_amount;
+	ResourceAmount old_initial_amount;
+	ResourceAmount old_amount;
 };
 
 struct ImmovableFound {
@@ -99,8 +100,6 @@ CheckStep
 
 Predicates used in path finding and find functions.
 */
-struct FindImmovable;
-const FindImmovable & find_immovable_always_true();
 
 struct FindBob {
 	//  Return true if this bob should be returned by find_bobs.
@@ -370,11 +369,11 @@ public:
 
 	/// Initializes the 'initial_resources' on 'coords' to the 'resource_type'
 	/// with the given 'amount'.
-	void initialize_resources(const FCoords& coords, DescriptionIndex resource_type, uint8_t amount);
+	void initialize_resources(const FCoords& coords, DescriptionIndex resource_type, ResourceAmount amount);
 
 	/// Sets the number of resources of the field to 'amount'. The type of the
 	/// resource on this field is not changed.
-	void set_resources(const FCoords& coords, uint8_t amount);
+	void set_resources(const FCoords& coords, ResourceAmount amount);
 
 	/// Clears the resources, i.e. the amount will be set to 0 and the type of
 	/// resources will be kNoResource.
@@ -411,7 +410,7 @@ public:
 	 */
 	bool is_resource_valid
 		(const Widelands::World& world, const Widelands::TCoords<Widelands::FCoords>& c,
-		int32_t const curres);
+		DescriptionIndex curres);
 
 	// The objectives that are defined in this map if it is a scenario.
 	const Objectives& objectives() const {
@@ -433,7 +432,9 @@ public:
 	const PortSpacesSet& get_port_spaces() const {return port_spaces_;}
 	std::vector<Coords> find_portdock(const Widelands::Coords& c) const;
 	bool allows_seafaring();
-	bool has_artifacts(const World& world);
+
+	/// Checks whether there are any artifacts on the map
+	bool has_artifacts();
 
 protected: /// These functions are needed in Testclasses
 	void set_size(uint32_t w, uint32_t h);
@@ -1086,10 +1087,8 @@ inline FCoords Map::get_neighbour(const FCoords & f, const Direction dir) const
 	case WALK_E:  return  r_n(f);
 	case WALK_SE: return br_n(f);
 	case WALK_SW: return bl_n(f);
-	//case WALK_W:  return  l_n(f);
-	default:
-	assert(WALK_W == dir);
-	return l_n(f);
+	case WALK_W:  return  l_n(f);
+	default: NEVER_HERE();
 	}
 }
 

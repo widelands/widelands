@@ -88,7 +88,7 @@ EditorGameBase::~EditorGameBase() {
 
 void EditorGameBase::think()
 {
-	//TODO(unknown): Get rid of this; replace by a function that just advances gametime
+	// TODO(unknown): Get rid of this; replace by a function that just advances gametime
 	// by a given number of milliseconds
 }
 
@@ -145,6 +145,9 @@ Tribes* EditorGameBase::mutable_tribes() {
 	return tribes_.get();
 }
 
+void EditorGameBase::set_ibase(InteractiveBase* const b) {
+	ibase_.reset(b);
+}
 
 InteractiveGameBase* EditorGameBase::get_igbase()
 {
@@ -346,7 +349,7 @@ Does not perform any placability checks.
 ===============
 */
 Immovable & EditorGameBase::create_immovable
-	(Coords const c, uint32_t const idx, MapObjectDescr::OwnerType type)
+	(Coords const c, DescriptionIndex const idx, MapObjectDescr::OwnerType type)
 {
 	const ImmovableDescr & descr =
 		*

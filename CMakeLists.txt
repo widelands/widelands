@@ -119,6 +119,7 @@ if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-unreachable-code")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-documentation")
 
+  wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Werror=deprecated")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Werror=non-pod-varargs")
 
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Qunused-arguments")
@@ -165,10 +166,10 @@ else()
 endif()
 
 # Turn some warnings into errors.
+wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Werror=format-security")
 wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Werror=return-type")
 wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Werror=shadow")
 wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Werror=uninitialized")
-
 
 IF (WIN32)
   add_definitions(-DMINGW_HAS_SECURE_API)

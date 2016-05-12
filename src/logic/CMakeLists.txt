@@ -251,7 +251,6 @@ wl_library(logic
     graphic_color
     graphic_image_io
     graphic_surface
-    graphic_text
     graphic_text_layout
     helper
     io_fileread

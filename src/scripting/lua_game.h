@@ -94,10 +94,10 @@ public:
 	 * C methods
 	 */
 private:
-	void m_parse_building_list
+	void parse_building_list
 		(lua_State *, const Widelands::TribeDescr &,
 		 std::vector<Widelands::DescriptionIndex> &);
-	int m_allow_forbid_buildings(lua_State * L, bool);
+	int allow_forbid_buildings(lua_State * L, bool);
 
 };
 
@@ -144,7 +144,7 @@ public:
 };
 
 class LuaMessage : public LuaGameModuleClass {
-	uint32_t             player_number_; // TODO(Hasi50): in CTor this is uint8_t, well
+	Widelands::PlayerNumber player_number_;
 	Widelands::MessageId message_id_;
 
 public:

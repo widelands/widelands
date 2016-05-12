@@ -5,15 +5,16 @@
 # adrien vigneron <adrienvigneron@ml1.net>, 2016
 # GunChleoc, 2014
 # GunChleoc, 2014
+# Jaypad <ju-ju@nataju.fr>, 2016
 # Renaud Bouchard, 2015
-# Renaud Bouchard, 2015
+# Renaud Bouchard, 2015-2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-02-20 12:30+0000\n"
-"PO-Revision-Date: 2016-02-27 19:46+0000\n"
-"Last-Translator: adrien vigneron <adrienvigneron@ml1.net>\n"
+"POT-Creation-Date: 2016-04-09 07:23+0000\n"
+"PO-Revision-Date: 2016-04-11 13:35+0000\n"
+"Last-Translator: Renaud Bouchard\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -348,7 +349,7 @@ msgid ""
 "turned to the clerics, but they had no substantial help to offer. Most "
 "accepted their fate while others tried to change the god’s mind by offering "
 "animals in his temple. But to no avail…"
-msgstr ""
+msgstr "Rongé par la culpabilité, le roi se suicida. Sans monarque, le peuple se tourna vers le clergé, mais ils n'avaient aucune aide substantielle à offrir. La plupart acceptèrent leur sort pendant que d'autres essayaient de changer la volonté de leur dieux par des offrandes d'animaux en son temple. Mais en vain ..."
 
 #. TRANSLATORS: Foreword
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:161
@@ -470,8 +471,8 @@ msgid ""
 "May Satul warm you, Jundlina! I agree with what Loftomor proposes. We need a"
 " good supply of building materials for we have to expand our territory "
 "swiftly. I will not feel safe on this island as long as we have not seen all"
-" its shores it. I brought plenty of good men from Atlantis. The military "
-"might is available. We only need some housing to live in."
+" its shores. I brought plenty of good men from Atlantis. The military might "
+"is available. We only need some housing to live in."
 msgstr "Que Satul vous réchauffe, Jundlina ! Je suis d'accord avec ce que Loftomor propose. Nous avons besoin d'un bon approvisionnement en matériaux de construction si nous voulons étendre notre territoire rapidement. Je ne me sentirai pas en sécurité sur cette île tant que nous n'aurons pas fait le tour de son rivage. J'ai emmené de l'Atlantide quelques hommes de bonne volonté. Leur puissance militaire est disponible. Nous avons seulement besoin de maisons pour vivre."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:207
@@ -651,8 +652,8 @@ msgstr "Jundlina acquiesce"
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:300
 msgid ""
-"I have considered this, Sidolus. I think  it is about time. We will make "
-"this a priority for now. You shall get your industry soon!"
+"I have considered this, Sidolus. I think it is about time. We will make this"
+" a priority for now. You shall get your industry soon!"
 msgstr "J'y ai pensé, Sidorus. Je crois qu'il est temps. Nous allons en faire une priorité tout de suite. Vous devriez avoir votre industrie très bientôt !"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:307
@@ -875,7 +876,7 @@ msgid ""
 "some wares too. And this rescue came just in time: Lutas is about to swallow"
 " the rest of this island, the water rises faster by the hour. But we can "
 "make our escape now and start over in some country farther away…"
-msgstr ""
+msgstr "Loué soit Satul ! Ostur, le jeune constructeur de bateaux l'a fait. Nous avons trois navires - je n'en ai jamais vu de plus robustes - avec assez de place pour transporter tous les nôtres et même quelques marchandises. Et ce secours arrive juste à temps : Lutas est sur le point d'engloutir le reste de cette île, l'eau monte plus rapidement au fil des heures. Mais nous pouvons maintenant nous échapper et recommencer dans un lieu plus éloigné..."
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:449
@@ -899,7 +900,7 @@ msgstr "Vous avez gagné cette mission. Continuez avec la suivante ou poursuivez
 msgid "“%s”"
 msgstr "“%s”"
 
-#: ../../data/scripting/format_scenario.lua:146
+#: ../../data/scripting/format_scenario.lua:96
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] "Nouvel objectif"

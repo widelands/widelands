@@ -35,7 +35,9 @@
 #include "wui/plot_area.h"
 #include "wui/waresdisplay.h"
 
-#define PLOT_HEIGHT 100
+constexpr int kPlotHeight = 130;
+constexpr int kPlotWidth = 250;
+constexpr int kSpacing = 5;
 
 #define INACTIVE 0
 
@@ -46,7 +48,7 @@ static const char pic_tab_economy[] = "images/wui/stats/menu_tab_wares_econ_heal
 static const char pic_tab_stock[] = "images/wui/stats/menu_tab_wares_stock.png";
 
 static const RGBColor colors[] = {
-	RGBColor(115, 115, 115), //inactive
+	RGBColor(115, 115, 115), // inactive
 	RGBColor(255,   0,   0),
 	RGBColor  (0, 144,  12),
 	RGBColor  (0,   0, 255),
@@ -96,7 +98,7 @@ static const RGBColor colors[] = {
 	RGBColor (96, 143,  71),
 	RGBColor(163,  74, 128),
 	RGBColor(183, 142,  10),
-	RGBColor(105, 155, 160),//shark infested water, run!
+	RGBColor(105, 155, 160), // shark infested water, run!
 };
 
 static const uint32_t colors_length = sizeof(colors) / sizeof(RGBColor);
@@ -137,12 +139,12 @@ WareStatisticsMenu::WareStatisticsMenu
 	(InteractivePlayer & parent, UI::UniqueWindow::Registry & registry)
 :
 UI::UniqueWindow
-	(&parent, "ware_statistics", &registry, 400, 270, _("Ware Statistics")),
+	(&parent, "ware_statistics", &registry, kPlotWidth + 2 * kSpacing, 270, _("Ware Statistics")),
 parent_(&parent)
 {
 	uint8_t const nr_wares = parent.get_player()->egbase().tribes().nrwares();
 
-	//init color sets
+	// Init color sets
 	color_map_.resize(nr_wares);
 	std::fill(color_map_.begin(), color_map_.end(), INACTIVE);
 	active_colors_.resize(colors_length);
@@ -150,25 +152,19 @@ parent_(&parent)
 
 	//  First, we must decide about the size.
 	UI::Box * box = new UI::Box(this, 0, 0, UI::Box::Vertical, 0, 0, 5);
-	box->set_border(5, 5, 5, 5);
+	box->set_border(kSpacing, kSpacing, kSpacing, kSpacing);
 	set_center_panel(box);
 
-	//setup plot widgets
-	//create a tabbed environment for the different plots
-	uint8_t const tab_offset = 30;
-	uint8_t const spacing = 5;
-	uint8_t const plot_width = get_inner_w() - 2 * spacing;
-	uint8_t const plot_height = PLOT_HEIGHT + tab_offset + spacing;
-
+	// Setup plot widgets
+	// Create a tabbed environment for the different plots
 	UI::TabPanel * tabs =
 		 new UI::TabPanel
-			 (box, spacing, 0, g_gr->images().get("images/ui_basic/but1.png"));
-
+			 (box, kSpacing, 0, g_gr->images().get("images/ui_basic/but1.png"));
 
 	plot_production_ =
 		new WuiPlotArea
 			(tabs,
-			 0, 0, plot_width, plot_height);
+			 0, 0, kPlotWidth, kPlotHeight + kSpacing);
 	plot_production_->set_sample_rate(STATISTICS_SAMPLE_TIME);
 	plot_production_->set_plotmode(WuiPlotArea::PLOTMODE_RELATIVE);
 
@@ -179,7 +175,7 @@ parent_(&parent)
 	plot_consumption_ =
 		new WuiPlotArea
 			(tabs,
-			 0, 0, plot_width, plot_height);
+			 0, 0, kPlotWidth, kPlotHeight + kSpacing);
 	plot_consumption_->set_sample_rate(STATISTICS_SAMPLE_TIME);
 	plot_consumption_->set_plotmode(WuiPlotArea::PLOTMODE_RELATIVE);
 
@@ -190,7 +186,7 @@ parent_(&parent)
 	plot_economy_ =
 		new DifferentialPlotArea
 			(tabs,
-			 0, 0, plot_width, plot_height);
+			 0, 0, kPlotWidth, kPlotHeight + kSpacing);
 	plot_economy_->set_sample_rate(STATISTICS_SAMPLE_TIME);
 	plot_economy_->set_plotmode(WuiPlotArea::PLOTMODE_RELATIVE);
 
@@ -200,7 +196,7 @@ parent_(&parent)
 
 	plot_stock_ = new WuiPlotArea
 			(tabs,
-			 0, 0, plot_width, plot_height);
+			 0, 0, kPlotWidth, kPlotHeight + kSpacing);
 	plot_stock_->set_sample_rate(STATISTICS_SAMPLE_TIME);
 	plot_stock_->set_plotmode(WuiPlotArea::PLOTMODE_ABSOLUTE);
 
@@ -210,10 +206,10 @@ parent_(&parent)
 
 	tabs->activate(0);
 
-	//add tabbed environment to box
+	// Add tabbed environment to box
 	box->add(tabs, UI::Align::kLeft, true);
 
-	//register statistics data
+	// Register statistics data
 	for (Widelands::DescriptionIndex cur_ware = 0; cur_ware < nr_wares; ++cur_ware) {
 		plot_production_->register_plot_data
 			(cur_ware,
@@ -254,7 +250,7 @@ parent_(&parent)
 	box->add
 		(new WuiPlotGenericAreaSlider
 			(this, *plot_production_, this,
-			0, 0, 100, 45,
+			0, 0, kPlotWidth, 45,
 			g_gr->images().get("images/ui_basic/but1.png")),
 		 UI::Align::kLeft, true);
 }
@@ -264,27 +260,27 @@ parent_(&parent)
  * simultaneously.
  */
 void WareStatisticsMenu::cb_changed_to(Widelands::DescriptionIndex id, bool what) {
-	if (what) { //activate ware
-		//search lowest free color
+	if (what) { // Activate ware
+		// Search lowest free color
 		uint8_t color_index = INACTIVE;
 
 		for (uint32_t i = 0; i < active_colors_.size(); ++i) {
 			if (!active_colors_[i]) {
-				//prevent index out of bounds
+				// Prevent index out of bounds
 				color_index = std::min(i + 1, colors_length - 1);
 				active_colors_[i] = 1;
 				break;
 			}
 		}
 
-		//assign color
+		// Assign color
 		color_map_[static_cast<size_t>(id)] = color_index;
 		plot_production_->set_plotcolor(static_cast<size_t>(id), colors[color_index]);
 		plot_consumption_->set_plotcolor(static_cast<size_t>(id), colors[color_index]);
 		plot_economy_->set_plotcolor(static_cast<size_t>(id), colors[color_index]);
 		plot_stock_->set_plotcolor(static_cast<size_t>(id), colors[color_index]);
 
-	} else { //deactivate ware
+	} else { // Deactivate ware
 		uint8_t old_color = color_map_[static_cast<size_t>(id)];
 		if (old_color != INACTIVE) {
 			active_colors_[old_color - 1] = 0;

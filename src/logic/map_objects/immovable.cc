@@ -30,11 +30,8 @@
 #include "base/macros.h"
 #include "base/wexception.h"
 #include "config.h"
-#include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
-#include "graphic/text_constants.h"
-#include "graphic/text_layout.h"
 #include "helper.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
@@ -524,21 +521,14 @@ void Immovable::draw_construction
 	                   Rect(Point(0, curh - lines), curw, lines));
 
 	// Additionally, if statistics are enabled, draw a progression string
-	if (game.get_ibase()->get_display_flags() & InteractiveBase::dfShowStatistics) {
-		unsigned int percent = (100 * done / total);
-		construct_string_ =
-			(boost::format("<font color=%s>%s</font>")
-			 % UI_FONT_CLR_DARK.hex_value() % (boost::format(_("%i%% built")) % percent).str())
-			 .str();
-		construct_string_ = as_uifont(construct_string_);
-		dst.blit(pos - Point(0, 48),
-				 UI::g_fh1->render(construct_string_),
-				 BlendMode::UseAlpha,
-				 UI::Align::kCenter);
-	}
+	uint32_t const display_flags = game.get_ibase()->get_display_flags();
+	do_draw_info(display_flags & InteractiveBase::dfShowCensus, descr().descname(),
+					 display_flags & InteractiveBase::dfShowStatistics,
+					 (boost::format("<font color=%s>%s</font>")
+					  % UI_FONT_CLR_DARK.hex_value()
+					  % (boost::format(_("%i%% built")) % (100 * done / total)).str()).str(),
+					  dst, pos);
 }
-
-
 
 
 /**

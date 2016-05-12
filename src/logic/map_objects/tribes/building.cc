@@ -31,11 +31,8 @@
 #include "base/wexception.h"
 #include "economy/flag.h"
 #include "economy/request.h"
-#include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
-#include "graphic/text/font_set.h"
-#include "graphic/text_layout.h"
 #include "io/filesystem/filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/game.h"
@@ -121,7 +118,7 @@ BuildingDescr::BuildingDescr
 			//  Merge the enhancements workarea info into this building's
 			//  workarea info.
 			const BuildingDescr * tmp_enhancement = egbase_.tribes().get_building_descr(en_i);
-			for (std::pair<uint32_t, std::set<std::string>> area : tmp_enhancement->workarea_info_)
+			for (auto area : tmp_enhancement->workarea_info_)
 			{
 				std::set<std::string> & strs = workarea_info_[area.first];
 				for (std::string str : area.second)
@@ -498,11 +495,8 @@ std::string Building::info_string(const InfoStringFormat& format) {
 		if (upcast(ProductionSite const, productionsite, this)) {
 			result = productionsite->production_result();
 		}
-		break;
-	default:
-		NEVER_HERE();
 	}
-	return result.empty() ? result : as_uifont(result);
+	return result;
 }
 
 
@@ -654,7 +648,7 @@ void Building::draw
 		//  door animation?
 
 		//  overlay strings (draw when enabled)
-		draw_help(game, dst, coords, pos);
+		draw_info(game, dst, pos);
 	}
 }
 
@@ -664,31 +658,26 @@ void Building::draw
 Draw overlay help strings when enabled.
 ===============
 */
-void Building::draw_help
-	(const EditorGameBase& game, RenderTarget& dst, const FCoords&, const Point& pos)
+void Building::draw_info(const EditorGameBase& game, RenderTarget& dst, const Point& pos)
 {
 	const InteractiveGameBase & igbase =
 		dynamic_cast<const InteractiveGameBase&>(*game.get_ibase());
-	uint32_t const dpyflags = igbase.get_display_flags();
+	uint32_t const display_flags = igbase.get_display_flags();
 
-	if (dpyflags & InteractiveBase::dfShowCensus) {
-		const std::string info = info_string(InfoStringFormat::kCensus);
-		if (!info.empty()) {
-			dst.blit(pos - Point(0, 48), UI::g_fh1->render(info), BlendMode::UseAlpha, UI::Align::kCenter);
+	bool show_statistics_string = display_flags & InteractiveBase::dfShowStatistics;
+	if (show_statistics_string) {
+		if (upcast(InteractivePlayer const, iplayer, &igbase)) {
+			if (!iplayer->player().see_all() && iplayer->player().is_hostile(*get_owner())) {
+				show_statistics_string = false;
+			}
 		}
 	}
+	const std::string statistics_string =
+			show_statistics_string ? info_string(InfoStringFormat::kStatistics) : "";
 
-	if (dpyflags & InteractiveBase::dfShowStatistics) {
-		if (upcast(InteractivePlayer const, iplayer, &igbase))
-			if
-				(!iplayer->player().see_all() &&
-				 iplayer->player().is_hostile(*get_owner()))
-				return;
-		const std::string info = info_string(InfoStringFormat::kStatistics);
-		if (!info.empty()) {
-			dst.blit(pos - Point(0, 35), UI::g_fh1->render(info), BlendMode::UseAlpha, UI::Align::kCenter);
-		}
-	}
+	do_draw_info(display_flags & InteractiveBase::dfShowCensus, info_string(InfoStringFormat::kCensus),
+					 show_statistics_string, statistics_string,
+					 dst, pos);
 }
 
 int32_t Building::get_priority

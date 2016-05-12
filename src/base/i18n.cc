@@ -115,8 +115,8 @@ void release_textdomain() {
 	}
 	textdomains.pop_back();
 
-	//don't try to get the previous TD when the very first one ('widelands')
-	//just got dropped
+	// Don't try to get the previous TD when the very first one ('widelands')
+	// just got dropped
 	if (!textdomains.empty()) {
 		char const * const domain = textdomains.back().first.c_str();
 
@@ -281,7 +281,7 @@ void set_locale(std::string name) {
 				leave_while = true;
 				break;
 			} else {
-				//log("locale is not working: %s\n", try_locale.c_str());
+				// log("locale is not working: %s\n", try_locale.c_str());
 			}
 		}
 		if (leave_while) break;

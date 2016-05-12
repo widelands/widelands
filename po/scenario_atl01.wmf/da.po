@@ -9,9 +9,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-02-20 12:30+0000\n"
-"PO-Revision-Date: 2016-02-20 12:31+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2016-04-02 18:37+0000\n"
+"PO-Revision-Date: 2016-04-03 16:19+0000\n"
+"Last-Translator: Ole Laursen <ole.laursen@gmail.com>\n"
 "Language-Team: Danish (http://www.transifex.com/widelands/widelands/language/da/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -157,7 +157,7 @@ msgid ""
 "tabards are the uniforms of soldiers. The weaving mill needs gold thread and"
 " spider silk as raw material. Spider silk is produced by the spider farm, "
 "while gold thread is produced by the gold spinning mill out of gold."
-msgstr ""
+msgstr "Væverne fremstiller silkeklæde og våbenkjortler i væveriet. Silkeklæde bruges til konstruktionen af visse bygninger og tøj, mens våbenkjortler bruges til at uniformere soldater. Væveriet skal bruge guldtråd og silketråd som råmaterialer. Silketråd fremstilles af silkegårde, mens guldtråd fremstilles ud fra guld af guldspindemøllen."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:77
 msgid "Build a weaving mill"
@@ -185,14 +185,14 @@ msgid ""
 "mine will dig for quartz and diamonds – all of them are precious materials "
 "and very rarely found. It will produce a lot of granite while searching for "
 "them."
-msgstr ""
+msgstr "Jernmalm, guldmalm og kul hentes fra de respektive miner. Krystalminen graver efter kvarts og diamanter - begge er dyrebare materialer og findes sjældent. Der vil blive opgravet en masse granit i jagten på disse materialer."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:89
 msgid ""
 "The ores have to be smelted at a smelting works before they can be used. The"
 " refined materials are then used in the weapon smithy, the armor smithy and "
 "the toolsmithy."
-msgstr "Malmen skal smeltes på smelteværker før den kan bruges. De raffinerede materialer bruges så hos våbensmedjen, rustningssmedjen og værktøjssmedjen."
+msgstr "Malmen skal smeltes på smelteværker før den kan bruges. De raffinerede materialer bruges så af våbensmedjen, rustningsmedjen og klejnsmedjen."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:90
 msgid ""
@@ -206,7 +206,7 @@ msgstr "Byg et smelteværk"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:92
 msgid "Build an armor smithy and a weapon smithy"
-msgstr "Byg en rustningssmedje og en våbensmedje"
+msgstr "Byg en rustningsmedje og en våbensmedje"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:93
 msgid "Build a toolsmithy"
@@ -329,7 +329,7 @@ msgid ""
 " of the boldness of their king. He decided to withdraw the rights that were "
 "granted to King Ajanthul and his children. And so, he called them back below"
 " the sea again."
-msgstr "Præsterne trak sig tilbage til meditation og årsagen til det stigende vandniveau blev hurtigt fundet: Guden Lutas havde mistet håbet for atlanteanerne på grund af deres konge. Han besluttede at trække rettighederne tilbage som var tildelt kong Ajanthul og hans børn. Og så kaldte han dem tilbage til under havets overflade igen."
+msgstr "Præsterne trak sig tilbage og mediterede og årsagen til det stigende vand blev hurtigt fundet: Guden Lutas havde mistet håbet for atlanterne på grund af deres konge. Han besluttede at trække de rettigheder tilbage som var tildelt kong Ajanthul og hans børn. Og således kaldte han dem tilbage under havets overflade igen."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:155
 msgid "Uproar and Confusion"
@@ -337,7 +337,7 @@ msgstr "Oprør og forvirring"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:157
 msgid "Emerging Chaos…"
-msgstr ""
+msgstr "Begyndende kaos..."
 
 #. TRANSLATORS: Foreword
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:159
@@ -346,7 +346,7 @@ msgid ""
 "turned to the clerics, but they had no substantial help to offer. Most "
 "accepted their fate while others tried to change the god’s mind by offering "
 "animals in his temple. But to no avail…"
-msgstr ""
+msgstr "Plaget af skyld begik kongen selvmord. Uden en monark vendte folket sig mod præsterne, men de havde ingen reel hjælp at yde. De fleste accepterede deres skæbne mens andre forsøgte at ændre gudens valg ved at ofre dyr i hans tempel. Men til ingen nytte..."
 
 #. TRANSLATORS: Foreword
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:161
@@ -456,7 +456,7 @@ msgid ""
 " most buildings can’t be made out of logs alone. Stronger buildings also "
 "need granite, but there is plenty to the north-east of here; we just need to"
 " build a quarry, and my stonemasons will go to work promptly."
-msgstr ""
+msgstr "Må Satul være med dig, Jundlina! Det vigtigste i opbygning af en bosættelse er byggematerialerne. Der er lidt træ her, så vi bør bygge hytter til skovhuggere og selvfølgelig også skovfogeder, så vi ikke kommer til at mangle træer. Og vi må ikke glemme savværket, for de fleste bygninger kan ikke laves alene af stammer. Stærkere bygninger skal også bruge granit, men der er masser af det mod nordøst; vi skal bare bygge et stenbrud, og så vil mine stenhuggere gå i gang med det samme."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:197
 msgid "Sidolus Speaks"
@@ -468,9 +468,9 @@ msgid ""
 "May Satul warm you, Jundlina! I agree with what Loftomor proposes. We need a"
 " good supply of building materials for we have to expand our territory "
 "swiftly. I will not feel safe on this island as long as we have not seen all"
-" its shores it. I brought plenty of good men from Atlantis. The military "
-"might is available. We only need some housing to live in."
-msgstr "Må Satul være med dig, Jundlina! Jeg er enig med Loftomors forslag. Vi har brug for en god leverance af byggematerialer, så vi hurtigt kan udvide vores territorium. Jeg vil ikke føle mig sikker på denne ø så længe vi endnu ikke har set alle bredderne. Jeg har medbragt masser af gode mænd fra Atlantis. Den militære styrke er tilgængelig. Vi skal bare bruge et sted at bo."
+" its shores. I brought plenty of good men from Atlantis. The military might "
+"is available. We only need some housing to live in."
+msgstr "Må Satul være med dig, Jundlina! Jeg er enig med det forslag som Loftomor stiller. Vi har brug for en god forsyning af byggematerialer, så vi hurtigt kan udvide vores territorium. Jeg vil ikke føle mig sikker på denne ø så længe vi endnu ikke har set hvor den ender. Jeg har medbragt masser af gode mænd fra Atlantis. Den militære magt er her. Vi skal bare bruge nogle huse at bo i."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:207
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:247
@@ -531,7 +531,7 @@ msgid ""
 "food is something deeply ingrained in us Atlanteans – it is a ceremony that "
 "we just need for our well-being. So I guess we cannot take this away from "
 "the individuals completely."
-msgstr "Ahh, men jeg tror ikke det er muligt at ændre dette. Forberedelsen og spisning er noget dybt integreret i os atlanteanere - det er en ceremoni, som vi bruger i vores velbefindende. Så jeg antager, at vi ikke kan tage dette fuldstændig væk fra hvert enkelt individ."
+msgstr "Ah, men jeg tror det er umuligt at ændre. Det at tilberede og spise mad er noget dybt integreret i os atlantere - det er en ceremoni, som vi har behov for at bevare vores velbefindende. Så jeg antager at vi ikke kan tage dette fuldstændig væk fra hvert individ."
 
 #. TRANSLATORS: Colionder
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:231
@@ -640,7 +640,7 @@ msgid ""
 "find an ample supply of those commodities, we could start producing weapons "
 "and tools; this would help enormously. Of course, we would need smelters, a "
 "weapon smithy, an armor smithy and a toolsmithy. And maybe even more."
-msgstr "Må Satul være med dig, Jundlina. Har du overvejet at minedrift i bjergene omkring os? Vi er ved at løbe tør for kvarts, krystal og diamanter til vores bygninger. Vi kunne også bruge mere jern, guld og specielt kul. Hvis vi finder en rig forsyning af disse varer, så kan vi starte produktionen af våben og værktøjer; dette vil hjælpe os enormt. Selvfølgelig skal vi bruge smeltere, en våbensmedje, en rustningssmedje og en værktøjssmedje. Og måske mere."
+msgstr "Må Satul være med dig, Jundlina. Har du overvejet at minedrift i bjergene omkring os? Vi er ved at løbe tør for kvarts, krystal og diamanter til vores bygninger. Vi kunne også bruge mere jern, guld og specielt kul. Hvis vi finder en rig forsyning af disse varer, så kan vi starte produktionen af våben og værktøjer; dette vil hjælpe os enormt. Selvfølgelig skal vi bruge smelteværker, en våbensmedje, en rustningsmedje og en klejnsmedje. Og måske mere."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:298
 msgid "Jundlina Nods"
@@ -649,9 +649,9 @@ msgstr "Jundlina nikker"
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:300
 msgid ""
-"I have considered this, Sidolus. I think  it is about time. We will make "
-"this a priority for now. You shall get your industry soon!"
-msgstr "Jeg har overvejet dette, Sidolus. Jeg synes det er på tide. Vi vil gøre det til en prioritet. Du får snart din industri!"
+"I have considered this, Sidolus. I think it is about time. We will make this"
+" a priority for now. You shall get your industry soon!"
+msgstr "Jeg har overvejet dette, Sidolus. Jeg synes det er på tide. Vi vil opprioritere dette. Du får snart din industri!"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:307
 msgid "Jundlina Summons Sidolus"
@@ -873,7 +873,7 @@ msgid ""
 "some wares too. And this rescue came just in time: Lutas is about to swallow"
 " the rest of this island, the water rises faster by the hour. But we can "
 "make our escape now and start over in some country farther away…"
-msgstr ""
+msgstr "Hil Satul! Ostur, den unge skibsbygger gjorde det. Vi har tre skibe - aldrig har jeg set mere solide - med nok plads til os alle og også nogle forsyninger. Og redningen kom i sidste øjeblik: Lutas er ved at sluge resten af denne ø, og vandet stiger hurtigere for hver time der går. Men vi kan undslippe nu og begynde forfra i et land længere væk..."
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:449
@@ -897,7 +897,7 @@ msgstr "Du har vundet denne mission. Fortsæt med den næste eller bliv ved med 
 msgid "“%s”"
 msgstr "»%s«"
 
-#: ../../data/scripting/format_scenario.lua:146
+#: ../../data/scripting/format_scenario.lua:96
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] "Nyt mål"

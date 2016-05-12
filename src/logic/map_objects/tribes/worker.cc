@@ -111,7 +111,7 @@ bool Worker::run_mine(Game & game, State & state, const Action & action)
 {
 	Map & map = game.map();
 
-	//Make sure that the specified resource is available in this world
+	// Make sure that the specified resource is available in this world
 	DescriptionIndex const res =
 		game.world().get_resource(action.sparam1.c_str());
 	if (res == Widelands::INVALID_INDEX)
@@ -128,8 +128,8 @@ bool Worker::run_mine(Game & game, State & state, const Action & action)
 	MapRegion<Area<FCoords> > mr
 		(map, Area<FCoords>(map.get_fcoords(get_position()), action.iparam1));
 	do {
-		uint8_t fres  = mr.location().field->get_resources();
-		uint32_t amount = mr.location().field->get_resources_amount();
+		DescriptionIndex fres = mr.location().field->get_resources();
+		ResourceAmount amount = mr.location().field->get_resources_amount();
 
 		// In the future, we might want to support amount = 0 for
 		// fields that can produce an infinite amount of resources.
@@ -164,12 +164,12 @@ bool Worker::run_mine(Game & game, State & state, const Action & action)
 	mr = MapRegion<Area<FCoords> >
 		(map, Area<FCoords>(map.get_fcoords(get_position()), action.iparam1));
 	do {
-		uint8_t fres  = mr.location().field->get_resources();
+		DescriptionIndex fres = mr.location().field->get_resources();
 		if (fres != res) {
 			continue;
 		}
 
-		uint32_t amount = mr.location().field->get_resources_amount();
+		ResourceAmount amount = mr.location().field->get_resources_amount();
 
 		pick -= 8 * amount;
 		if (pick < 0) {
@@ -216,7 +216,7 @@ bool Worker::run_breed(Game & game, State & state, const Action & action)
 
 	Map & map = game.map();
 
-	//Make sure that the specified resource is available in this world
+	// Make sure that the specified resource is available in this world
 	DescriptionIndex const res =
 		game.world().get_resource(action.sparam1.c_str());
 	if (res == Widelands::INVALID_INDEX)
@@ -233,8 +233,8 @@ bool Worker::run_breed(Game & game, State & state, const Action & action)
 	MapRegion<Area<FCoords> > mr
 		(map, Area<FCoords>(map.get_fcoords(get_position()), action.iparam1));
 	do {
-		uint8_t fres  = mr.location().field->get_resources();
-		uint32_t amount =
+		DescriptionIndex fres = mr.location().field->get_resources();
+		ResourceAmount amount =
 			mr.location().field->get_initial_res_amount() -
 			mr.location().field->get_resources_amount   ();
 
@@ -273,11 +273,11 @@ bool Worker::run_breed(Game & game, State & state, const Action & action)
 		(map, Area<FCoords>(map.get_fcoords(get_position()), action.iparam1));
 
 	do {
-		uint8_t fres  = mr.location().field->get_resources();
+		DescriptionIndex fres = mr.location().field->get_resources();
 		if (fres != res)
 			continue;
 
-		uint32_t amount =
+		ResourceAmount amount =
 			mr.location().field->get_initial_res_amount() -
 			mr.location().field->get_resources_amount   ();
 
@@ -1006,7 +1006,7 @@ bool Worker::run_construct(Game & game, State & state, const Action & /* action 
 		return true;
 	}
 
-	//update consumption statistic
+	// Update consumption statistic
 	owner().ware_consumed(wareindex, 1);
 
 	ware = fetch_carried_ware(game);
@@ -1536,9 +1536,9 @@ void Worker::transfer_update(Game & game, State & /* state */) {
 				("MO(%u): [transfer]: from road to bad nextstep %u",
 				 serial(), nextstep->serial());
 	} else
-		//Scan-build reports Called C++ object pointer is null here.
-		//This is a false positive.
-		//See https://bugs.launchpad.net/widelands/+bug/1198918
+		// Scan-build reports Called C++ object pointer is null here.
+		// This is a false positive.
+		// See https://bugs.launchpad.net/widelands/+bug/1198918
 		throw wexception
 			("MO(%u): location %u has bad type",
 			 serial(), location->serial());
@@ -1844,7 +1844,7 @@ void Worker::return_update(Game & game, State & state)
 				 _("Worker"),
 				 "images/ui_basic/menu_help.png",
 				 _("Worker got lost!"),
-				 message,
+				 (boost::format("<rt><p font-size=12>%s</p></rt>") % message).str(),
 				 get_position()),
 				 serial_);
 		set_location(nullptr);
@@ -2841,7 +2841,7 @@ void Worker::scout_update(Game & game, State & state)
 						 descr().get_right_walk_anims(does_carry_ware())))
 							molog("[scout]: failed to reach destination\n");
 					else
-						return; //start_task_movepath was successfull.
+						return; // start_task_movepath was successfull.
 				}
 
 				// Else evaluate for best second target
@@ -2874,8 +2874,8 @@ void Worker::scout_update(Game & game, State & state)
 						  descr().get_right_walk_anims(does_carry_ware())))
 						molog("[scout]: Failed to reach destination\n");
 				else
-					return; //Start task movepath success.
-				//if failed go home
+					return; // Start task movepath success.
+				// If failed go home
 			}
 		}
 		// No reachable fields found.

@@ -2,6 +2,7 @@
 # Copyright (C) 2005-2016 Widelands Development Team
 # 
 # Translators:
+# Aleksandr Gladkov <djanticisco@gmail.com>, 2016
 # Alexander Bikmeyev <bikmeyev@freemail.ru>, 2006
 # Anton Khabarov <2233009@gmail.com>, 2015
 # Arex <arex@ngs.ru>, 2015
@@ -11,9 +12,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-02-20 12:30+0000\n"
-"PO-Revision-Date: 2016-02-23 18:44+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2016-04-07 14:12+0000\n"
+"PO-Revision-Date: 2016-04-07 20:45+0000\n"
+"Last-Translator: Aleksandr Gladkov <djanticisco@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -564,7 +565,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/empire/coalmine/init.lua:75
 #: ../../data/tribes/buildings/productionsites/empire/coalmine_deep/init.lua:73
 msgid "No Coal"
-msgstr ""
+msgstr "Нет угля"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/coalmine/init.lua:78
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine/init.lua:75
@@ -607,7 +608,7 @@ msgstr "добывает алмазы"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:128
 msgid "No Crystal"
-msgstr ""
+msgstr "Нет кристаллов"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:129
 msgid "Main Crystal Vein Exhausted"
@@ -670,7 +671,7 @@ msgstr "рыбалка"
 #: ../../data/tribes/buildings/productionsites/barbarians/fishers_hut/init.lua:59
 #: ../../data/tribes/buildings/productionsites/empire/fishers_house/init.lua:53
 msgid "No Fish"
-msgstr ""
+msgstr "Нет рыбы"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishers_house/init.lua:54
 #: ../../data/tribes/buildings/productionsites/barbarians/fishers_hut/init.lua:60
@@ -724,7 +725,7 @@ msgstr "Золотая шахта"
 #: ../../data/tribes/buildings/productionsites/empire/goldmine/init.lua:59
 #: ../../data/tribes/buildings/productionsites/empire/goldmine_deep/init.lua:57
 msgid "mining gold"
-msgstr ""
+msgstr "Добыча золота"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/goldmine/init.lua:77
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine/init.lua:74
@@ -733,7 +734,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/empire/goldmine/init.lua:75
 #: ../../data/tribes/buildings/productionsites/empire/goldmine_deep/init.lua:73
 msgid "No Gold"
-msgstr ""
+msgstr "Нет золота"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/goldmine/init.lua:78
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine/init.lua:75
@@ -779,7 +780,7 @@ msgstr "охотится"
 #: ../../data/tribes/buildings/productionsites/barbarians/hunters_hut/init.lua:60
 #: ../../data/tribes/buildings/productionsites/empire/hunters_house/init.lua:50
 msgid "No Game"
-msgstr ""
+msgstr "Нет игры"
 
 #. TRANSLATORS: "Game" means animals that you can hunt
 #: ../../data/tribes/buildings/productionsites/atlanteans/hunters_house/init.lua:54
@@ -810,7 +811,7 @@ msgstr "Рудник"
 #: ../../data/tribes/buildings/productionsites/empire/ironmine/init.lua:59
 #: ../../data/tribes/buildings/productionsites/empire/ironmine_deep/init.lua:57
 msgid "mining iron"
-msgstr ""
+msgstr "Добыча железа"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/ironmine/init.lua:77
 #: ../../data/tribes/buildings/productionsites/barbarians/ironmine/init.lua:74
@@ -870,7 +871,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:72
 #: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:80
 msgid "No Rocks"
-msgstr ""
+msgstr "Нет камне"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:66
 #: ../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:73
@@ -2506,8 +2507,8 @@ msgctxt "immovable"
 msgid "Ship Under Construction"
 msgstr "Место постройки корабля"
 
-#: ../../data/tribes/preload.lua:12 ../../data/tribes/preload.lua:27
-#: ../../data/tribes/preload.lua:42
+#: ../../data/tribes/preload.lua:12 ../../data/tribes/preload.lua:28
+#: ../../data/tribes/preload.lua:44
 msgid "The Widelands Development Team"
 msgstr ""
 
@@ -2521,57 +2522,97 @@ msgid "The mighty tribes of the east-lands."
 msgstr ""
 
 #. TRANSLATORS: This is a tribe name
-#: ../../data/tribes/preload.lua:29
+#: ../../data/tribes/preload.lua:30
 msgid "Empire"
 msgstr ""
 
-#: ../../data/tribes/preload.lua:30
+#: ../../data/tribes/preload.lua:31
 msgid "This is the culture of the Roman Empire."
 msgstr ""
 
 #. TRANSLATORS: This is a tribe name
-#: ../../data/tribes/preload.lua:44
+#: ../../data/tribes/preload.lua:46
 msgid "Atlanteans"
 msgstr ""
 
-#: ../../data/tribes/preload.lua:45
+#: ../../data/tribes/preload.lua:47
 msgid ""
 "This tribe is known from the oldest tales. The sons and daughters of "
 "Atlantis."
 msgstr ""
 
-#: ../../data/tribes/scripting/starting_conditions/atlanteans/fortified_village.lua:10
-#: ../../data/tribes/scripting/starting_conditions/barbarians/fortified_village.lua:10
-#: ../../data/tribes/scripting/starting_conditions/empire/fortified_village.lua:10
+#: ../../data/tribes/scripting/help/init.lua:48
+msgid "Tribal Encyclopedia"
+msgstr ""
+
+#: ../../data/tribes/scripting/help/init.lua:53
+msgid "General"
+msgstr ""
+
+#: ../../data/tribes/scripting/help/init.lua:58
+msgid "Introduction"
+msgstr ""
+
+#: ../../data/tribes/scripting/help/init.lua:64
+msgid "Controls"
+msgstr ""
+
+#: ../../data/tribes/scripting/help/init.lua:73
+msgid "Wares"
+msgstr ""
+
+#: ../../data/tribes/scripting/help/init.lua:80
+msgid "Workers"
+msgstr ""
+
+#: ../../data/tribes/scripting/help/init.lua:87
+msgid "Buildings"
+msgstr ""
+
+#. TRANSLATORS: This is the name of a starting condition
+#: ../../data/tribes/scripting/starting_conditions/atlanteans/fortified_village.lua:11
+#: ../../data/tribes/scripting/starting_conditions/barbarians/fortified_village.lua:11
+#: ../../data/tribes/scripting/starting_conditions/empire/fortified_village.lua:11
 msgid "Fortified Village"
 msgstr ""
 
-#. TRANSLATORS: Short for "Not enough space"
-#: ../../data/tribes/scripting/starting_conditions/atlanteans/fortified_village.lua:103
-#: ../../data/tribes/scripting/starting_conditions/barbarians/fortified_village.lua:96
-#: ../../data/tribes/scripting/starting_conditions/empire/fortified_village.lua:121
-msgid "No Space"
+#. TRANSLATORS: This is the tooltip for the "Fortified Village" starting
+#. condition
+#: ../../data/tribes/scripting/starting_conditions/atlanteans/fortified_village.lua:13
+#: ../../data/tribes/scripting/starting_conditions/barbarians/fortified_village.lua:13
+#: ../../data/tribes/scripting/starting_conditions/empire/fortified_village.lua:13
+msgid " Start the game with a fortified military installation"
 msgstr ""
 
-#: ../../data/tribes/scripting/starting_conditions/atlanteans/fortified_village.lua:104
-#: ../../data/tribes/scripting/starting_conditions/barbarians/fortified_village.lua:97
-#: ../../data/tribes/scripting/starting_conditions/empire/fortified_village.lua:122
-msgid ""
-"Some of your starting buildings didn’t have enough room and weren’t built. "
-"You are at a disadvantage with this; consider restarting this map with a "
-"fair starting condition."
-msgstr ""
-
-#: ../../data/tribes/scripting/starting_conditions/atlanteans/fortified_village.lua:105
-#: ../../data/tribes/scripting/starting_conditions/barbarians/fortified_village.lua:98
-#: ../../data/tribes/scripting/starting_conditions/empire/fortified_village.lua:123
-msgid "Not enough space"
-msgstr ""
-
-#: ../../data/tribes/scripting/starting_conditions/atlanteans/headquarters.lua:10
-#: ../../data/tribes/scripting/starting_conditions/barbarians/headquarters.lua:10
-#: ../../data/tribes/scripting/starting_conditions/empire/headquarters.lua:10
+#. TRANSLATORS: This is the name of a starting condition
+#: ../../data/tribes/scripting/starting_conditions/atlanteans/headquarters.lua:11
+#: ../../data/tribes/scripting/starting_conditions/barbarians/headquarters.lua:11
+#: ../../data/tribes/scripting/starting_conditions/empire/headquarters.lua:11
 msgid "Headquarters"
+msgstr ""
+
+#. TRANSLATORS: This is the tooltip for the "Headquarters" starting condition
+#: ../../data/tribes/scripting/starting_conditions/atlanteans/headquarters.lua:13
+#: ../../data/tribes/scripting/starting_conditions/barbarians/headquarters.lua:13
+#: ../../data/tribes/scripting/starting_conditions/empire/headquarters.lua:13
+msgid "Start the game with your headquarters only"
+msgstr ""
+
+#. TRANSLATORS: This is the name of a starting condition
+#: ../../data/tribes/scripting/starting_conditions/atlanteans/trading_outpost.lua:11
+#: ../../data/tribes/scripting/starting_conditions/barbarians/trading_outpost.lua:11
+#: ../../data/tribes/scripting/starting_conditions/empire/trading_outpost.lua:11
+msgid "Trading Outpost"
+msgstr ""
+
+#. TRANSLATORS: This is the tooltip for the "Trading Outpost" starting
+#. condition
+#: ../../data/tribes/scripting/starting_conditions/atlanteans/trading_outpost.lua:13
+#: ../../data/tribes/scripting/starting_conditions/barbarians/trading_outpost.lua:13
+#: ../../data/tribes/scripting/starting_conditions/empire/trading_outpost.lua:13
+msgid ""
+"If this player runs low on important wares, they will be replenished for "
+"free"
 msgstr ""
 
 #. TRANSLATORS: This is the ship's name used in lists of units

@@ -10,13 +10,14 @@
 # GunChleoc, 2014
 # Guybrush88 <erpizzo@alice.it>, 2015-2016
 # Luigi Lain <lainluigi86@tiscali.it>, 2015-2016
+# Matteo Viarengo <enthusedquill6@gmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-03-01 09:34+0000\n"
-"PO-Revision-Date: 2016-03-01 22:21+0000\n"
-"Last-Translator: Luigi Lain <lainluigi86@tiscali.it>\n"
+"POT-Creation-Date: 2016-04-16 07:28+0000\n"
+"PO-Revision-Date: 2016-04-16 07:28+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -198,7 +199,7 @@ msgstr "La casa della guardia forestale necessita di spazio libero nella sua are
 #: ../../data/tribes/buildings/productionsites/atlanteans/gold_spinning_mill/helptexts.lua:16
 msgctxt "atlanteans_building"
 msgid "Spins gold thread out of gold."
-msgstr "ricava filato d'oro dall'oro."
+msgstr "Ricava del filo d'oro a partire dall'oro."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/goldmine/helptexts.lua:16
@@ -393,19 +394,11 @@ msgstr "La fabbbrica di asce barbarica è il sito di produzione intermedio in un
 #: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/helptexts.lua:23
 #: ../../data/tribes/buildings/productionsites/barbarians/bakery/helptexts.lua:26
 #: ../../data/tribes/buildings/productionsites/barbarians/cattlefarm/helptexts.lua:26
-#: ../../data/tribes/buildings/productionsites/barbarians/coalmine/helptexts.lua:24
-#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deep/helptexts.lua:24
-#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deeper/helptexts.lua:24
 #: ../../data/tribes/buildings/productionsites/barbarians/fishers_hut/helptexts.lua:23
-#: ../../data/tribes/buildings/productionsites/barbarians/gamekeepers_hut/helptexts.lua:24
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine/helptexts.lua:23
-#: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deep/helptexts.lua:23
-#: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deeper/helptexts.lua:23
 #: ../../data/tribes/buildings/productionsites/barbarians/granitemine/helptexts.lua:26
 #: ../../data/tribes/buildings/productionsites/barbarians/hunters_hut/helptexts.lua:23
 #: ../../data/tribes/buildings/productionsites/barbarians/ironmine/helptexts.lua:23
-#: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deep/helptexts.lua:23
-#: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deeper/helptexts.lua:23
 #: ../../data/tribes/buildings/productionsites/barbarians/lime_kiln/helptexts.lua:23
 #: ../../data/tribes/buildings/productionsites/barbarians/lumberjacks_hut/helptexts.lua:23
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/helptexts.lua:23
@@ -417,8 +410,8 @@ msgstr "La fabbbrica di asce barbarica è il sito di produzione intermedio in un
 #: ../../data/tribes/buildings/productionsites/barbarians/well/helptexts.lua:23
 #: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/helptexts.lua:26
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/helptexts.lua:26
-#: ../../data/tribes/scripting/help/global_helptexts.lua:58
-#: ../../data/tribes/scripting/help/global_helptexts.lua:85
+#: ../../data/tribes/scripting/help/global_helptexts.lua:59
+#: ../../data/tribes/scripting/help/global_helptexts.lua:89
 #, lua-format
 msgid "%d second"
 msgid_plural "%d seconds"
@@ -494,7 +487,7 @@ msgctxt "barbarians_building"
 msgid ""
 "Ages ago, the Barbarians learned to delve into mountainsides for that black material that feeds their furnaces. <br>\n"
 "Wood may serve for a household fire and to keep you warm, but when it comes to working with iron or gold, there is no way around coal."
-msgstr ""
+msgstr "Anni fa, i Barbari hanno impararono a scavare nei fianchi delle montagne per estrarre quel materiale nero che alimenta le loro fornaci. <br>\nIl legno potrà servire per il fuoco domestico e per tenersi al caldo, ma quando si tratta di lavorare con il ferro e l'oro, non ci sono alternative al carbone."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine/helptexts.lua:19
@@ -508,13 +501,19 @@ msgstr "Questa miniera sfrutta solo il %s della risorsa. Dopodichè avrà solo i
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine/helptexts.lua:24
-#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deep/helptexts.lua:24
-#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deeper/helptexts.lua:24
-#, lua-format
 msgctxt "barbarians_building"
 msgid ""
-"If the food supply is steady, this mine can produce coal in %s on average."
-msgstr "Se l'afflusso di cibo è regolare, questa miniera può produrre carbone in %s in media"
+"If the food supply is steady, this mine can produce coal in 32.5 seconds on "
+"average."
+msgstr ""
+
+#. TRANSLATORS: Performance helptext for a building
+#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deep/helptexts.lua:24
+msgctxt "barbarians_building"
+msgid ""
+"If the food supply is steady, this mine can produce coal in 19.5 seconds on "
+"average."
+msgstr ""
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deeper/helptexts.lua:19
@@ -525,6 +524,14 @@ msgid ""
 "after having done so, it will still have a %s chance of finding some more "
 "coal."
 msgstr "Questa minier a sfrutta tutte le risorse fino al livello più profondo. Ma anche quando è esaurita, avrà ancora un %s di possibilità di trovare altro carbone."
+
+#. TRANSLATORS: Performance helptext for a building
+#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deeper/helptexts.lua:24
+msgctxt "barbarians_building"
+msgid ""
+"If the food supply is steady, this mine can produce coal in 14.4 seconds on "
+"average."
+msgstr ""
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/farm/helptexts.lua:16
@@ -570,7 +577,7 @@ msgctxt "barbarians_building"
 msgid ""
 "‘He loves the animals and to breed them<br>\n"
 "         as we love to cook and eat them.’"
-msgstr ""
+msgstr "Lui ama gli animali e ama allevarli<br>\nalmeno quanto noi amiamo cucinarli e mangiarli."
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/gamekeepers_hut/helptexts.lua:9
@@ -586,10 +593,9 @@ msgstr "Rilascia animali in libertà per sostenere la produzione di carne."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/gamekeepers_hut/helptexts.lua:24
-#, lua-format
 msgctxt "barbarians_building"
-msgid "The gamekeeper pauses %s before going to work again."
-msgstr "Il guardiacaccia fa una pausa di %s prima di tornare al lavoro."
+msgid "The gamekeeper pauses 52.5 seconds before going to work again."
+msgstr ""
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine/helptexts.lua:3
@@ -622,14 +628,20 @@ msgstr "Questa miniera sfrutta solo il %s della risorsa. Dopodichè avrà solo i
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine/helptexts.lua:23
-#: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deep/helptexts.lua:23
-#: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deeper/helptexts.lua:23
 #, lua-format
 msgctxt "barbarians_building"
 msgid ""
 "If the food supply is steady, this mine can produce gold ore in %s on "
 "average."
 msgstr "Se l'afflusso di cibo è regolare, questa miniera può produrre minerale aurifero in %s in media"
+
+#. TRANSLATORS: Performance helptext for a building
+#: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deep/helptexts.lua:23
+msgctxt "barbarians_building"
+msgid ""
+"If the food supply is steady, this mine can produce gold ore in 19.5 seconds"
+" on average."
+msgstr ""
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deeper/helptexts.lua:18
@@ -640,6 +652,14 @@ msgid ""
 "after having done so, it will still have a %s chance of finding some more "
 "gold ore."
 msgstr "Questa minier a sfrutta tutte le risorse fino al livello più profondo. Ma anche quando è esaurita, avrà ancora un %s di possibilità di trovare altro minerale aurifero."
+
+#. TRANSLATORS: Performance helptext for a building
+#: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deeper/helptexts.lua:23
+msgctxt "barbarians_building"
+msgid ""
+"If the food supply is steady, this mine can produce gold ore in 18.5 seconds"
+" on average."
+msgstr ""
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/granitemine/helptexts.lua:3
@@ -762,14 +782,20 @@ msgstr "Questa miniera sfrutta solo il %s della risorsa. Dopodichè avrà solo i
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/ironmine/helptexts.lua:23
-#: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deep/helptexts.lua:23
-#: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deeper/helptexts.lua:23
 #, lua-format
 msgctxt "barbarians_building"
 msgid ""
 "If the food supply is steady, this mine can produce iron ore in %s on "
 "average."
 msgstr "Se l'afflusso di cibo è regolare, questa miniera può produrre ferro grezzo in %s in media"
+
+#. TRANSLATORS: Performance helptext for a building
+#: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deep/helptexts.lua:23
+msgctxt "barbarians_building"
+msgid ""
+"If the food supply is steady, this mine can produce iron ore in 39.5 seconds"
+" on average."
+msgstr ""
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deeper/helptexts.lua:18
@@ -780,6 +806,14 @@ msgid ""
 "after having done so, it will still have a %s chance of finding some more "
 "iron ore."
 msgstr "Questa minier a sfrutta tutte le risorse fino al livello più profondo. Ma anche quando è esaurita, avrà ancora un %s di possibilità di trovare altro ferro grezzo."
+
+#. TRANSLATORS: Performance helptext for a building
+#: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deeper/helptexts.lua:23
+msgctxt "barbarians_building"
+msgid ""
+"If the food supply is steady, this mine can produce iron ore in 17.6 seconds"
+" on average."
+msgstr ""
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/lime_kiln/helptexts.lua:3
@@ -1021,7 +1055,7 @@ msgctxt "barbarians_building"
 msgid ""
 "All weapons require the same time for making, but the consumption of the "
 "same raw materials increases from step to step. The last two need gold."
-msgstr ""
+msgstr "Tutte le armi la stessa quantità di tempo per essere forgiate, ma il consumo degli stessi materiali grezzi aumenta passo a passo. Gli ultimi due passaggi richiedono l'oro. "
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/weaving_mill/helptexts.lua:16
@@ -1297,8 +1331,8 @@ msgstr "I soldati barbari non possono addestrarsi in 'difesa' e pertanto rimarra
 
 #: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/helptexts.lua:26
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/helptexts.lua:26
-#: ../../data/tribes/scripting/help/global_helptexts.lua:70
-#: ../../data/tribes/scripting/help/global_helptexts.lua:84
+#: ../../data/tribes/scripting/help/global_helptexts.lua:72
+#: ../../data/tribes/scripting/help/global_helptexts.lua:88
 #, lua-format
 msgid "%d minute"
 msgid_plural "%d minutes"
@@ -1319,7 +1353,7 @@ msgctxt "barbarians_building"
 msgid ""
 "‘He who is strong shall neither forgive nor forget, but revenge injustice "
 "suffered – in the past and for all future.’"
-msgstr ""
+msgstr "'Colui che è forte non deve ne perdonare ne dimenticare, ma vendicare le ingiustizie subite - nel passato e per tutto il futuro.'"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/helptexts.lua:8
@@ -1490,6 +1524,7 @@ msgid "Lore"
 msgstr "Conoscenza"
 
 #: ../../data/tribes/scripting/help/building_help.lua:196
+#: ../../data/tribes/scripting/help/init.lua:53
 msgid "General"
 msgstr "Generale"
 
@@ -1498,7 +1533,7 @@ msgid "Purpose:"
 msgstr "Scopo:"
 
 #: ../../data/tribes/scripting/help/building_help.lua:225
-#: ../../data/tribes/scripting/help/building_help.lua:467
+#: ../../data/tribes/scripting/help/building_help.lua:466
 msgid "Note:"
 msgstr "Nota:"
 
@@ -1556,186 +1591,436 @@ msgstr "Mina:"
 msgid "Produces:"
 msgstr "Produce:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:358
+#: ../../data/tribes/scripting/help/building_help.lua:357
 msgid "Outgoing:"
 msgstr "In uscita:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:360
+#: ../../data/tribes/scripting/help/building_help.lua:359
 msgid "None"
 msgstr "Niente"
 
-#: ../../data/tribes/scripting/help/building_help.lua:361
+#: ../../data/tribes/scripting/help/building_help.lua:360
 msgid "Dependencies"
 msgstr "Dipendenze"
 
-#: ../../data/tribes/scripting/help/building_help.lua:377
+#: ../../data/tribes/scripting/help/building_help.lua:376
 msgid "Health Training"
 msgstr "Addestramento per la salute"
 
-#: ../../data/tribes/scripting/help/building_help.lua:378
+#: ../../data/tribes/scripting/help/building_help.lua:377
 msgid "Trains ‘Health’ from %1% up to %2%"
 msgstr "Addestra I soldati in 'salute' da %1% a %2%"
 
-#: ../../data/tribes/scripting/help/building_help.lua:380
-#: ../../data/tribes/scripting/help/building_help.lua:394
-#: ../../data/tribes/scripting/help/building_help.lua:406
-#: ../../data/tribes/scripting/help/building_help.lua:419
+#: ../../data/tribes/scripting/help/building_help.lua:379
+#: ../../data/tribes/scripting/help/building_help.lua:393
+#: ../../data/tribes/scripting/help/building_help.lua:405
+#: ../../data/tribes/scripting/help/building_help.lua:418
 msgid "Soldiers:"
 msgstr "Soldati:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:390
+#: ../../data/tribes/scripting/help/building_help.lua:389
 msgid "Attack Training"
 msgstr "Addestramento per l'attacco"
 
 #. TRANSLATORS: %1$s = Health, Evade, Attack or Defense. %2$s and %3$s are
 #. numbers.
-#: ../../data/tribes/scripting/help/building_help.lua:392
+#: ../../data/tribes/scripting/help/building_help.lua:391
 msgid "Trains ‘Attack’ from %1% up to %2%"
 msgstr "Addestra I soldati in 'attacco' da %1% a %2%"
 
-#: ../../data/tribes/scripting/help/building_help.lua:403
+#: ../../data/tribes/scripting/help/building_help.lua:402
 msgid "Defense Training"
 msgstr "Addestramento per la difesa"
 
-#: ../../data/tribes/scripting/help/building_help.lua:404
+#: ../../data/tribes/scripting/help/building_help.lua:403
 msgid "Trains ‘Defense’ from %1% up to %2%"
 msgstr "Addestra I soldati in 'difesa' da %1% a %2%"
 
-#: ../../data/tribes/scripting/help/building_help.lua:416
+#: ../../data/tribes/scripting/help/building_help.lua:415
 msgid "Evade Training"
 msgstr "Addestramento per l'evasione"
 
-#: ../../data/tribes/scripting/help/building_help.lua:417
+#: ../../data/tribes/scripting/help/building_help.lua:416
 msgid "Trains ‘Evade’ from %1% up to %2%"
 msgstr "Addestra I soldati in 'evasione' da %1% a %2%"
 
 #. TRANSLATORS: This is the header for the "Building" section in the building
 #. help, containing size info, buildcost etc.
-#: ../../data/tribes/scripting/help/building_help.lua:444
+#: ../../data/tribes/scripting/help/building_help.lua:443
 msgid "Building"
 msgstr "Edificio"
 
-#: ../../data/tribes/scripting/help/building_help.lua:448
+#: ../../data/tribes/scripting/help/building_help.lua:447
 msgid "Mine plot"
 msgstr "Zona per una miniera"
 
-#: ../../data/tribes/scripting/help/building_help.lua:448
-#: ../../data/tribes/scripting/help/building_help.lua:450
-#: ../../data/tribes/scripting/help/building_help.lua:453
-#: ../../data/tribes/scripting/help/building_help.lua:455
-#: ../../data/tribes/scripting/help/building_help.lua:457
-#: ../../data/tribes/scripting/help/building_help.lua:459
+#: ../../data/tribes/scripting/help/building_help.lua:447
+#: ../../data/tribes/scripting/help/building_help.lua:449
+#: ../../data/tribes/scripting/help/building_help.lua:452
+#: ../../data/tribes/scripting/help/building_help.lua:454
+#: ../../data/tribes/scripting/help/building_help.lua:456
+#: ../../data/tribes/scripting/help/building_help.lua:458
 msgid "Space required:"
 msgstr "Spazio richiesto:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:450
+#: ../../data/tribes/scripting/help/building_help.lua:449
 msgid "Port plot"
 msgstr "Zona per un porto"
 
-#: ../../data/tribes/scripting/help/building_help.lua:453
+#: ../../data/tribes/scripting/help/building_help.lua:452
 msgid "Small plot"
 msgstr "Zona piccola"
 
-#: ../../data/tribes/scripting/help/building_help.lua:455
+#: ../../data/tribes/scripting/help/building_help.lua:454
 msgid "Medium plot"
 msgstr "Zona media"
 
-#: ../../data/tribes/scripting/help/building_help.lua:457
+#: ../../data/tribes/scripting/help/building_help.lua:456
 msgid "Big plot"
 msgstr "Zona grande"
 
-#: ../../data/tribes/scripting/help/building_help.lua:459
-#: ../../data/tribes/scripting/help/building_help.lua:543
-#: ../../data/tribes/scripting/help/building_help.lua:592
+#: ../../data/tribes/scripting/help/building_help.lua:458
+#: ../../data/tribes/scripting/help/building_help.lua:542
+#: ../../data/tribes/scripting/help/building_help.lua:591
 msgid "Unknown"
 msgstr "Sconosciuto"
 
-#: ../../data/tribes/scripting/help/building_help.lua:468
+#: ../../data/tribes/scripting/help/building_help.lua:467
 msgid ""
 "This building can either be built directly or obtained by enhancing another "
 "building."
 msgstr "Questo edificio può essere costruito direttamente oppure ottenuto migliorando un altro edificio."
 
-#: ../../data/tribes/scripting/help/building_help.lua:474
+#: ../../data/tribes/scripting/help/building_help.lua:473
 msgid "Direct build cost:"
 msgstr "Costo di costruzione diretta:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:476
+#: ../../data/tribes/scripting/help/building_help.lua:475
 msgid "Build cost:"
 msgstr "Costo di costruzione:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:487
+#: ../../data/tribes/scripting/help/building_help.lua:486
 msgid "Or enhanced from:"
 msgstr "O migliorato a partire da:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:489
+#: ../../data/tribes/scripting/help/building_help.lua:488
 msgid "Enhanced from:"
 msgstr "Migliorato a partire da:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:498
+#: ../../data/tribes/scripting/help/building_help.lua:497
 msgid "Cumulative cost:"
 msgstr "Costo complessivo:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:548
+#: ../../data/tribes/scripting/help/building_help.lua:547
 msgid "If built directly, dismantle yields:"
 msgstr "Se costruito direttamente, lo smantellamento produce:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:553
+#: ../../data/tribes/scripting/help/building_help.lua:552
 msgid "If enhanced, dismantle yields:"
 msgstr "Se migliorato, lo smantellamento produce:"
 
 #. TRANSLATORS: This is a heading for the resources that you will get back
 #. when you dismantle a building of this type. What dismantling will give you.
-#: ../../data/tribes/scripting/help/building_help.lua:556
-#: ../../data/tribes/scripting/help/building_help.lua:597
+#: ../../data/tribes/scripting/help/building_help.lua:555
+#: ../../data/tribes/scripting/help/building_help.lua:596
 msgid "Dismantle yields:"
 msgstr "Lo smantellamento produce:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:606
+#: ../../data/tribes/scripting/help/building_help.lua:605
 msgid "Can be enhanced to:"
 msgstr "Può essere aumentato a:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:636
+#: ../../data/tribes/scripting/help/building_help.lua:635
 msgid "Crew required:"
 msgstr "Equipaggio richiesto:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:636
+#: ../../data/tribes/scripting/help/building_help.lua:635
+#: ../../data/tribes/scripting/help/init.lua:80
 msgid "Workers"
 msgstr "Lavoratori"
 
 #. TRANSLATORS: %s is a worker name, e.g. "Chief Miner" or "Brewer".
-#: ../../data/tribes/scripting/help/building_help.lua:658
+#: ../../data/tribes/scripting/help/building_help.lua:657
 #, lua-format
 msgid "%s or better"
 msgstr "%s o migliore"
 
 #. TRANSLATORS: Tribal Encyclopedia: Heading for which tool workers use
-#: ../../data/tribes/scripting/help/building_help.lua:668
+#: ../../data/tribes/scripting/help/building_help.lua:667
 msgid "Worker uses:"
 msgid_plural "Workers use:"
 msgstr[0] "Il lavoratore utilizza:"
 msgstr[1] "I lavoratori utilizzano:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:673
+#: ../../data/tribes/scripting/help/building_help.lua:672
 msgid "Experience levels:"
 msgstr "Livelli di esperienza:"
 
 #. TRANSLATORS: EP = Experience Points
-#: ../../data/tribes/scripting/help/building_help.lua:675
-#: ../../data/tribes/scripting/help/building_help.lua:684
-#: ../../data/tribes/scripting/help/worker_help.lua:146
-#: ../../data/tribes/scripting/help/worker_help.lua:155
+#: ../../data/tribes/scripting/help/building_help.lua:674
+#: ../../data/tribes/scripting/help/building_help.lua:683
+#: ../../data/tribes/scripting/help/worker_help.lua:145
+#: ../../data/tribes/scripting/help/worker_help.lua:154
 #, lua-format
 msgid "%s to %s (%s EP)"
 msgstr "%s a %s (%s EP)"
 
-#: ../../data/tribes/scripting/help/building_help.lua:707
+#: ../../data/tribes/scripting/help/building_help.lua:706
 msgid "Production"
 msgstr "Produzione"
 
-#: ../../data/tribes/scripting/help/building_help.lua:708
+#: ../../data/tribes/scripting/help/building_help.lua:707
 msgid "Performance:"
 msgstr "Prestazione:"
+
+#: ../../data/tribes/scripting/help/controls.lua:7
+#: ../../data/tribes/scripting/help/init.lua:64
+msgid "Controls"
+msgstr "Controlli"
+
+#: ../../data/tribes/scripting/help/controls.lua:10
+msgid "Window Control"
+msgstr "Controllo della finestra"
+
+#: ../../data/tribes/scripting/help/controls.lua:13
+msgid "Close window"
+msgstr "Chiudi la finestra"
+
+#. TRANSLATORS: This is an access key combination. Localize, but do not change
+#. the key.
+#: ../../data/tribes/scripting/help/controls.lua:13
+msgctxt "hotkey"
+msgid "Right-click"
+msgstr "Click destro"
+
+#. TRANSLATORS: This is an access key combination. Localize, but do not change
+#. the key.
+#: ../../data/tribes/scripting/help/controls.lua:15
+msgctxt "hotkey"
+msgid "Middle-click or Ctrl + Left-click"
+msgstr "Click centrale o Ctrl + click sinistro"
+
+#: ../../data/tribes/scripting/help/controls.lua:15
+msgid "Minimize/Maximize window"
+msgstr "Rimpicciolisci/Ingrandisci finestra"
+
+#. TRANSLATORS: This is an access key combination. Localize, but do not change
+#. the key.
+#: ../../data/tribes/scripting/help/controls.lua:17
+msgctxt "hotkey"
+msgid "Ctrl + Left-click on Button"
+msgstr "Ctrl + click con il tasto sinistro sul pulsante"
+
+#: ../../data/tribes/scripting/help/controls.lua:17
+msgid "Skip confirmation dialog"
+msgstr "Salta il dialogo di conferma"
+
+#: ../../data/tribes/scripting/help/controls.lua:19
+msgid "Road Control"
+msgstr "Controllo della strada"
+
+#. TRANSLATORS: This is an access key combination. Localize, but do not change
+#. the key.
+#: ../../data/tribes/scripting/help/controls.lua:22
+#: ../../data/tribes/scripting/help/controls.lua:24
+msgctxt "hotkey"
+msgid "Ctrl + Left-click"
+msgstr "Ctrl + Click sinistro"
+
+#: ../../data/tribes/scripting/help/controls.lua:22
+msgid "While connecting two flags: Place flags automatically"
+msgstr "Mentre si uniscono due bandiere: Colloca le bandiere in automatico"
+
+#: ../../data/tribes/scripting/help/controls.lua:24
+msgid "While removing a flag: Remove all flags up to the first junction"
+msgstr "Mentre si rimuove una bandiera: Rimuovi tutte le bandiere fino alla prima giunzione"
+
+#: ../../data/tribes/scripting/help/controls.lua:26
+msgid "Keyboard Shortcuts"
+msgstr "Scorciatoie da tastiera"
+
+#: ../../data/tribes/scripting/help/controls.lua:29
+msgid "Increase game speed"
+msgstr "Aumenta la velocità di gioco"
+
+#. TRANSLATORS: This is an access key combination. Localize, but do not change
+#. the key.
+#: ../../data/tribes/scripting/help/controls.lua:29
+msgctxt "hotkey"
+msgid "Page Up"
+msgstr "Pagina su"
+
+#: ../../data/tribes/scripting/help/controls.lua:31
+msgid "Decrease game speed"
+msgstr "Diminuisci la velocità di gioco"
+
+#. TRANSLATORS: This is an access key combination. Localize, but do not change
+#. the key.
+#: ../../data/tribes/scripting/help/controls.lua:31
+msgctxt "hotkey"
+msgid "Page Down"
+msgstr "Pagina giù"
+
+#. TRANSLATORS: This is an access key combination. Localize, but do not change
+#. the key.
+#: ../../data/tribes/scripting/help/controls.lua:33
+msgctxt "hotkey"
+msgid "Pause"
+msgstr "Pausa"
+
+#: ../../data/tribes/scripting/help/controls.lua:33
+msgid "Pause the game"
+msgstr "Metti in pausa la partita"
+
+#. TRANSLATORS: This is an access key combination. The hotkey is 'c'
+#: ../../data/tribes/scripting/help/controls.lua:35
+msgid "Toggle census"
+msgstr ""
+
+#. TRANSLATORS: This is an access key combination. The hotkey is 's'
+#: ../../data/tribes/scripting/help/controls.lua:37
+msgid "Toggle statistics"
+msgstr ""
+
+#. TRANSLATORS: This is an access key combination. The hotkey is 'o'
+#: ../../data/tribes/scripting/help/controls.lua:41
+msgid "Toggle objectives"
+msgstr ""
+
+#. TRANSLATORS: This is an access key combination. The hotkey is 'n'
+#: ../../data/tribes/scripting/help/controls.lua:43
+msgid "Toggle messages (‘news’)"
+msgstr ""
+
+#. TRANSLATORS: This is an access key combination.
+#: ../../data/tribes/scripting/help/controls.lua:45
+#: ../../data/tribes/scripting/help/init.lua:48
+msgid "Tribal Encyclopedia"
+msgstr "Enciclopedia Tribale"
+
+#. TRANSLATORS: This is an access key combination. The hotkey is 'i'
+#: ../../data/tribes/scripting/help/controls.lua:47
+msgid "Toggle stock inventory"
+msgstr ""
+
+#. TRANSLATORS: This is an access key combination. The hotkey is 'b'
+#: ../../data/tribes/scripting/help/controls.lua:49
+msgid "Toggle building statistics"
+msgstr ""
+
+#: ../../data/tribes/scripting/help/controls.lua:51
+msgid "Center main mapview on starting location"
+msgstr "Centra la visuale della mappa principale sul punto di partenza"
+
+#. TRANSLATORS: This is an access key combination. Localize, but do not change
+#. the key.
+#: ../../data/tribes/scripting/help/controls.lua:51
+msgctxt "hotkey"
+msgid "Home"
+msgstr "Pagina iniziale"
+
+#. TRANSLATORS: This is an access key combination. Localize, but do not change
+#. the key.
+#: ../../data/tribes/scripting/help/controls.lua:53
+msgctxt "hotkey"
+msgid "(Ctrl +) 0-9"
+msgstr "(Ctrl +) 0-9"
+
+#: ../../data/tribes/scripting/help/controls.lua:53
+msgid "Remember and go to previously remembered locations"
+msgstr "Ricorda e vai in luoghi precedentemente memorizzati"
+
+#. TRANSLATORS: This is an access key combination.
+#: ../../data/tribes/scripting/help/controls.lua:55
+msgid "Go to the previous location"
+msgstr "Vai alla posizione precedente"
+
+#. TRANSLATORS: This is an access key combination.
+#: ../../data/tribes/scripting/help/controls.lua:57
+msgid "Go to the next location"
+msgstr "Vai alla posizione successiva"
+
+#. TRANSLATORS: This is an access key combination. Localize, but do not change
+#. the key.
+#: ../../data/tribes/scripting/help/controls.lua:59
+msgctxt "hotkey"
+msgid "Ctrl + F11"
+msgstr "Ctrl + F11"
+
+#: ../../data/tribes/scripting/help/controls.lua:59
+msgid "Take a screenshot"
+msgstr "Fai una foto alla schermata"
+
+#. TRANSLATORS: This is an access key combination.
+#: ../../data/tribes/scripting/help/controls.lua:62
+msgctxt "hotkey"
+msgid "Ctrl + F10"
+msgstr "Ctrl + F10"
+
+#: ../../data/tribes/scripting/help/controls.lua:62
+msgid "Quit the game immediately"
+msgstr "Esci immediatamente dal gioco"
+
+#. TRANSLATORS: This is an access key combination.
+#: ../../data/tribes/scripting/help/controls.lua:64
+msgctxt "hotkey"
+msgid "F6"
+msgstr "F6"
+
+#: ../../data/tribes/scripting/help/controls.lua:64
+msgid "Show the debug console (only in debug-builds)"
+msgstr "Mostra la console di elimina errori (solo  nella struttura dell'elimina errori)"
+
+#: ../../data/tribes/scripting/help/controls.lua:67
+msgid ""
+"In the message window, the following additional shortcuts are available:"
+msgstr "Nella finestra di messaggio, sono disponibili le seguenti scorciatoie: "
+
+#. TRANSLATORS: This is an access key combination.
+#: ../../data/tribes/scripting/help/controls.lua:70
+msgid "Show all messages"
+msgstr "Mostra tutti i messaggi"
+
+#. TRANSLATORS: This is an access key combination.
+#: ../../data/tribes/scripting/help/controls.lua:72
+msgid "Show geologists’ messages only"
+msgstr "Mostra solamente i messaggi dei geologi"
+
+#. TRANSLATORS: This is an access key combination.
+#: ../../data/tribes/scripting/help/controls.lua:74
+msgid "Show economy messages only"
+msgstr "Mostra solamente i messaggi relativi all'economia"
+
+#. TRANSLATORS: This is an access key combination.
+#: ../../data/tribes/scripting/help/controls.lua:76
+msgid "Show seafaring messages only"
+msgstr "Mostra solamente i messaggi relativi alla navigazione in mare"
+
+#. TRANSLATORS: This is an access key combination.
+#: ../../data/tribes/scripting/help/controls.lua:78
+msgid "Show warfare messages only"
+msgstr "Mostra solamente i messaggi relativi alla guerra"
+
+#. TRANSLATORS: This is an access key combination.
+#: ../../data/tribes/scripting/help/controls.lua:80
+msgid "Show scenario messages only"
+msgstr "Mostra solamente i messaggi sullo scenario"
+
+#. TRANSLATORS: This is an access key combination.
+#: ../../data/tribes/scripting/help/controls.lua:82
+msgid "Jump to the location corresponding to the current message"
+msgstr "Salta alla posizione corrispondente al messaggio corrente"
+
+#: ../../data/tribes/scripting/help/controls.lua:84
+msgid "Archive/Restore the current message"
+msgstr "Archivia/Ripristina il messaggio attuale"
+
+#. TRANSLATORS: This is an access key combination. Localize, but do not change
+#. the key.
+#: ../../data/tribes/scripting/help/controls.lua:84
+msgctxt "hotkey"
+msgid "Delete"
+msgstr "Elimina"
 
 #. TRANSLATORS: %1$d is a number, %2$s the name of a ware, e.g. 12x Stone
 #: ../../data/tribes/scripting/help/format_help.lua:86
@@ -1770,19 +2055,35 @@ msgstr "Fonte necessaria"
 msgid "Calculation needed"
 msgstr "Necessari calcoli"
 
-#: ../../data/tribes/scripting/help/global_helptexts.lua:83
+#: ../../data/tribes/scripting/help/global_helptexts.lua:87
 msgid "%1% and %2%"
 msgstr "%1% e %2%"
 
+#: ../../data/tribes/scripting/help/init.lua:58
+msgid "Introduction"
+msgstr "Introduzione"
+
+#: ../../data/tribes/scripting/help/init.lua:73
+msgid "Wares"
+msgstr "Merci"
+
+#: ../../data/tribes/scripting/help/init.lua:87
+msgid "Buildings"
+msgstr "Edifici"
+
+#: ../../data/tribes/scripting/help/introduction.lua:7
+msgid "About Widelands"
+msgstr "Riguardo a Widelands"
+
 #: ../../data/tribes/scripting/help/ware_help.lua:32
-#: ../../data/tribes/scripting/help/worker_help.lua:118
+#: ../../data/tribes/scripting/help/worker_help.lua:117
 msgid "Purpose"
 msgstr "Scopo"
 
 #. TRANSLATORS: Ware Encyclopedia: A building producing a ware
 #. TRANSLATORS: Worker Encyclopedia: A building recruiting a worker
 #: ../../data/tribes/scripting/help/ware_help.lua:52
-#: ../../data/tribes/scripting/help/worker_help.lua:28
+#: ../../data/tribes/scripting/help/worker_help.lua:27
 msgid "Producer"
 msgstr "Produttore"
 
@@ -1795,14 +2096,14 @@ msgstr[1] "Merci prodotte:"
 
 #. TRANSLATORS: Ware Encyclopedia: A list of buildings and / or workers that
 #. consume a ware
-#: ../../data/tribes/scripting/help/ware_help.lua:155
+#: ../../data/tribes/scripting/help/ware_help.lua:154
 msgid "Consumer"
 msgid_plural "Consumers"
 msgstr[0] "Consumatore"
 msgstr[1] "Consumatori"
 
 #. TRANSLATORS: Worker Encyclopedia: Workers recruited by a productionsite
-#: ../../data/tribes/scripting/help/worker_help.lua:69
+#: ../../data/tribes/scripting/help/worker_help.lua:68
 msgid "Worker recruited:"
 msgid_plural "Workers recruited:"
 msgstr[0] "Operaio reclutato:"
@@ -1811,20 +2112,86 @@ msgstr[1] "Operai reclutati:"
 #. TRANSLATORS: Worker Encyclopedia: A list of buildings where a worker can
 #. work
 #. TRANSLATORS: You can also translate this as 'workplace(s)'
-#: ../../data/tribes/scripting/help/worker_help.lua:95
+#: ../../data/tribes/scripting/help/worker_help.lua:94
 msgid "Works at"
 msgid_plural "Works at"
 msgstr[0] ""
 msgstr[1] ""
 
 #. TRANSLATORS: Tribal Encyclopedia: Heading for which tool a worker uses
-#: ../../data/tribes/scripting/help/worker_help.lua:133
+#: ../../data/tribes/scripting/help/worker_help.lua:132
 msgid "Worker uses"
 msgstr "Il lavoratore usa"
 
-#: ../../data/tribes/scripting/help/worker_help.lua:145
+#: ../../data/tribes/scripting/help/worker_help.lua:144
 msgid "Experience levels"
 msgstr "Livelli di esperienza"
+
+#. TRANSLATORS: Soldier levels
+#: ../../data/tribes/scripting/help/worker_help.lua:165
+msgid "Levels"
+msgstr "Livelli"
+
+#: ../../data/tribes/scripting/help/worker_help.lua:167
+msgid "Health"
+msgstr "Vita"
+
+#. TRANSLATORS: Soldier health / defense / evade points. A 5 digit number.
+#: ../../data/tribes/scripting/help/worker_help.lua:171
+msgid "Starts at %1% points."
+msgstr ""
+
+#. TRANSLATORS: Soldier health / attack defense / evade points
+#: ../../data/tribes/scripting/help/worker_help.lua:174
+#: ../../data/tribes/scripting/help/worker_help.lua:185
+msgid "Increased by %1% point for each level."
+msgid_plural "Increased by %1% points for each level."
+msgstr[0] ""
+msgstr[1] ""
+
+#. TRANSLATORS: Soldier health / attack defense / evade level
+#: ../../data/tribes/scripting/help/worker_help.lua:177
+#: ../../data/tribes/scripting/help/worker_help.lua:187
+#: ../../data/tribes/scripting/help/worker_help.lua:197
+#: ../../data/tribes/scripting/help/worker_help.lua:212
+msgid "The maximum level is %1%."
+msgid_plural "The maximum level is %1%."
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../../data/tribes/scripting/help/worker_help.lua:179
+msgid "Attack"
+msgstr "Attacco"
+
+#. TRANSLATORS: Points are 4 digit numbers.
+#: ../../data/tribes/scripting/help/worker_help.lua:182
+msgid "A random value between %1% and %2% points is added to each attack."
+msgstr ""
+
+#: ../../data/tribes/scripting/help/worker_help.lua:189
+msgid "Defense"
+msgstr "Difesa"
+
+#: ../../data/tribes/scripting/help/worker_help.lua:193
+#: ../../data/tribes/scripting/help/worker_help.lua:201
+#: ../../data/tribes/scripting/help/worker_help.lua:208
+#, lua-format
+msgid "Starts at %d%%."
+msgstr ""
+
+#: ../../data/tribes/scripting/help/worker_help.lua:195
+#: ../../data/tribes/scripting/help/worker_help.lua:210
+#, lua-format
+msgid "Increased by %d%% for each level."
+msgstr ""
+
+#: ../../data/tribes/scripting/help/worker_help.lua:202
+msgid "This soldier cannot be trained in defense."
+msgstr "Questo soldato non può essere allenato in difesa."
+
+#: ../../data/tribes/scripting/help/worker_help.lua:205
+msgid "Evade"
+msgstr "Schiva"
 
 #. TRANSLATORS: Helptext for a ware: Armor
 #: ../../data/tribes/wares/armor/helptexts.lua:4
@@ -1851,7 +2218,7 @@ msgid ""
 "The gilded armor is the strongest armor an Empire soldier can have. It is "
 "produced in the armor smithy and used in the training camp – together with "
 "food – to train soldiers from health level 3 to level 4."
-msgstr ""
+msgstr "L'armatura dorata è l'armatura più resistente che un soldato dell'Impero può ottenere. Viene prodotta dall'armaiolo e usata nel campo d'addestramento - insieme al cibo - per allenare i soldati da un livello di salute pari a 3 portandoli ad un livello di salute di 4."
 
 #. TRANSLATORS: Helptext for a ware: Helmet
 #: ../../data/tribes/wares/armor_helmet/helptexts.lua:4
@@ -1918,7 +2285,7 @@ msgid ""
 "soldiers ever were able to handle this huge and powerful ax. It is produced "
 "in a war mill and used – together with food – in a training camp to train "
 "soldiers from attack level 4 to level 5."
-msgstr ""
+msgstr "L'ascia del guerriero è la più pericolosa fra tutte le armi dei Barbari. Solamente pochi soldati furono veramente in grado di gestire quest'enorme e potente ascia. Viene prodotta in una fabbrica da guerra e usata - insieme al cibo - in un campo d'addestramento per istruire i soldati da ul livello di attaco 4 ad un livello di attacco 5."
 
 #. TRANSLATORS: Helptext for a ware: Basket
 #: ../../data/tribes/wares/basket/helptexts.lua:4
@@ -2274,7 +2641,7 @@ msgstr ""
 #: ../../data/tribes/wares/granite/helptexts.lua:4
 msgctxt "ware"
 msgid "Granite is a basic building material."
-msgstr ""
+msgstr "Il granito è un materiale di costruzione di base."
 
 #. TRANSLATORS: Helptext for a ware: Granite
 #: ../../data/tribes/wares/granite/helptexts.lua:6
@@ -2314,7 +2681,7 @@ msgstr ""
 #: ../../data/tribes/wares/hammer/helptexts.lua:4
 msgctxt "ware"
 msgid "The hammer is an essential tool."
-msgstr ""
+msgstr "Il martello è uno strumento essenziale."
 
 #. TRANSLATORS: Helptext for a ware: Hammer
 #: ../../data/tribes/wares/hammer/helptexts.lua:6
@@ -2430,7 +2797,7 @@ msgstr ""
 #: ../../data/tribes/wares/iron/helptexts.lua:10
 msgctxt "empire_ware"
 msgid "Weapons, armor and tools are made of iron."
-msgstr ""
+msgstr "Armi, armature e strumenti sono fatti di ferro."
 
 #. TRANSLATORS: Helptext for a ware: Iron Ore
 #: ../../data/tribes/wares/iron_ore/helptexts.lua:4
@@ -2845,7 +3212,7 @@ msgid ""
 "Golden tabards are produced in Atlantean weaving mills out of gold thread. "
 "They are used in the labyrinth – together with food – to train soldiers from"
 " health level 0 to level 1."
-msgstr "I tabarri dorati vengono prodotti nei mulini di tessitura atlantidei dal filato d'oro. Sono usati nel Labirinto - insieme al cibo - per addestrare i soldati in Salute dal livello 0 al livello 1."
+msgstr "I tabarri dorati vengono prodotti nei mulini di tessitura atlantidei a partire dal filo d'oro. Sono usati nel Labirinto - insieme al cibo - per addestrare i soldati in Salute dal livello 0 al livello 1."
 
 #. TRANSLATORS: Helptext for a ware: Thatch Reed
 #: ../../data/tribes/wares/thatch_reed/helptexts.lua:4
@@ -3352,7 +3719,7 @@ msgstr "Lavora nei cantieri per creare dei nuovi edifici."
 #: ../../data/tribes/workers/empire/carpenter/helptexts.lua:3
 msgctxt "empire_worker"
 msgid "Works in the sawmill."
-msgstr ""
+msgstr "Lavora alla segheria."
 
 #. TRANSLATORS: Helptext for a worker: Carrier
 #: ../../data/tribes/workers/empire/carrier/helptexts.lua:3
@@ -3515,4 +3882,4 @@ msgstr "Produce armi per i soldati."
 #: ../../data/tribes/workers/empire/weaver/helptexts.lua:3
 msgctxt "empire_worker"
 msgid "Produces cloth for ships and soldiers."
-msgstr ""
+msgstr "Produce tessuti per navi e soldati."

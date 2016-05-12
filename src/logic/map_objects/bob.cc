@@ -708,17 +708,26 @@ void Bob::movepath_update(Game & game, State & state)
 		return pop_task(game);
 
 	Direction const dir = (*path)[state.ivar1];
-	bool forcemove = false;
 
-	if
-		(state.ivar2
-		 &&
-		 static_cast<Path::StepVector::size_type>(state.ivar1) + 1
-		 ==
-		 path->get_nsteps())
-	{
-		forcemove = true;
+	// Slowing down a ship if two or more on same spot
+	// Using probability of 1/8 and pausing it for 5, 10 or 15 seconds
+	if (game.logic_rand() % 8 == 0) {
+		if (is_a(Ship, this)) {
+			Map& map = game.map();
+			const uint32_t ships_count
+				= map.find_bobs(Widelands::Area<Widelands::FCoords>(get_position(), 0), nullptr, FindBobShip());
+			assert (ships_count > 0);
+			if (ships_count > 1) {
+				molog ("Pausing the ship because %d ships on the same spot\n", ships_count);
+				return start_task_idle(game,
+											  state.diranims.get_animation(dir),
+											  ((game.logic_rand() % 3) + 1) * 5000);
+			}
+		}
 	}
+
+	bool forcemove =
+		(state.ivar2 && static_cast<Path::StepVector::size_type>(state.ivar1) + 1 == path->get_nsteps());
 
 	++state.ivar1;
 	return start_task_move(game, dir, state.diranims, state.ivar2 == 2 ? true : forcemove);
@@ -787,31 +796,31 @@ Point Bob::calc_drawpos(const EditorGameBase & game, const Point pos) const
 	switch (walking_) {
 	case WALK_NW:
 		map.get_brn(end, &start);
-		spos.x += TRIANGLE_WIDTH / 2;
-		spos.y += TRIANGLE_HEIGHT;
+		spos.x += kTriangleWidth / 2;
+		spos.y += kTriangleHeight;
 		break;
 	case WALK_NE:
 		map.get_bln(end, &start);
-		spos.x -= TRIANGLE_WIDTH / 2;
-		spos.y += TRIANGLE_HEIGHT;
+		spos.x -= kTriangleWidth / 2;
+		spos.y += kTriangleHeight;
 		break;
 	case WALK_W:
 		map.get_rn(end, &start);
-		spos.x += TRIANGLE_WIDTH;
+		spos.x += kTriangleWidth;
 		break;
 	case WALK_E:
 		map.get_ln(end, &start);
-		spos.x -= TRIANGLE_WIDTH;
+		spos.x -= kTriangleWidth;
 		break;
 	case WALK_SW:
 		map.get_trn(end, &start);
-		spos.x += TRIANGLE_WIDTH / 2;
-		spos.y -= TRIANGLE_HEIGHT;
+		spos.x += kTriangleWidth / 2;
+		spos.y -= kTriangleHeight;
 		break;
 	case WALK_SE:
 		map.get_tln(end, &start);
-		spos.x -= TRIANGLE_WIDTH / 2;
-		spos.y -= TRIANGLE_HEIGHT;
+		spos.x -= kTriangleWidth / 2;
+		spos.y -= kTriangleHeight;
 		break;
 
 	case IDLE:
@@ -820,8 +829,8 @@ Point Bob::calc_drawpos(const EditorGameBase & game, const Point pos) const
 	}
 
 	if (start.field) {
-		spos.y += end.field->get_height() * HEIGHT_FACTOR;
-		spos.y -= start.field->get_height() * HEIGHT_FACTOR;
+		spos.y += end.field->get_height() * kHeightFactor;
+		spos.y -= start.field->get_height() * kHeightFactor;
 
 		assert(static_cast<uint32_t>(walkstart_) <= game.get_gametime());
 		assert(walkstart_ < walkend_);

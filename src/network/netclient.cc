@@ -221,6 +221,10 @@ void NetClient::run ()
 		WLApplication::emergency_save(game);
 		d->game = nullptr;
 		disconnect("CLIENT_CRASHED");
+		// We will bounce back to the main menu, so we better log out
+		if (internet_) {
+			InternetGaming::ref().logout("CLIENT_CRASHED");
+		}
 		throw;
 	}
 }
@@ -784,7 +788,9 @@ void NetClient::handle_packet(RecvPacket & packet)
 				std::unique_ptr<LuaTable> t = lua.run_script(initialization_script);
 				t->do_not_warn_about_unaccessed_keys();
 				info.initializations.push_back
-					(TribeBasicInfo::Initialization(initialization_script, t->get_string("descname")));
+					(TribeBasicInfo::Initialization(initialization_script,
+															  t->get_string("descname"),
+															  t->get_string("tooltip")));
 			}
 			d->settings.tribes.push_back(info);
 		}

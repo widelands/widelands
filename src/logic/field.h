@@ -156,10 +156,10 @@ struct Field {
 
 	// Resources can be set through Map::set_resources()
 	// TODO(unknown): This should return DescriptionIndex
-	uint8_t get_resources() const {return resources;}
-	uint8_t get_resources_amount() const {return res_amount;}
+	DescriptionIndex get_resources() const {return resources;}
+	ResourceAmount get_resources_amount() const {return res_amount;}
 	// TODO(unknown): This should return uint8_t
-	int32_t get_initial_res_amount() const {return initial_res_amount;}
+	ResourceAmount get_initial_res_amount() const {return initial_res_amount;}
 
 	/// \note you must reset this field's + neighbor's brightness when you
 	/// change the height. Map::change_height does this. This function is not
@@ -212,8 +212,8 @@ private:
 	OwnerInfoAndSelectionsType owner_info_and_selections;
 
 	DescriptionIndex resources; ///< Resource type on this field, if any
-	uint8_t initial_res_amount; ///< Initial amount of resources
-	uint8_t res_amount; ///< Current amount of resources
+	ResourceAmount initial_res_amount; ///< Initial amount of resources
+	ResourceAmount res_amount; ///< Current amount of resources
 
 	Terrains terrains;
 };

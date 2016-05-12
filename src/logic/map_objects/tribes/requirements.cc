@@ -32,7 +32,7 @@ bool Requirements::check(const MapObject & obj) const
 	return !m || m->check(obj);
 }
 
-constexpr uint16_t kCurrentPacketVersion = 3;
+constexpr uint16_t kCurrentPacketVersion = 4;
 
 /**
  * Read this requirement from a file
@@ -201,7 +201,7 @@ const RequirementsStorage RequireAnd::storage(requirementIdAnd, read_and);
 
 bool RequireAttribute::check(const MapObject & obj) const
 {
-	if (atrTotal != at)
+	if (TrainingAttribute::kTotal != at)
 	{
 		int32_t const value = obj.get_training_attribute(at);
 
@@ -210,10 +210,10 @@ bool RequireAttribute::check(const MapObject & obj) const
 	else
 	{
 		int32_t value = 0;
-		value += obj.get_training_attribute(atrHP);
-		value += obj.get_training_attribute(atrAttack);
-		value += obj.get_training_attribute(atrDefense);
-		value += obj.get_training_attribute(atrEvade);
+		value += obj.get_training_attribute(TrainingAttribute::kHealth);
+		value += obj.get_training_attribute(TrainingAttribute::kAttack);
+		value += obj.get_training_attribute(TrainingAttribute::kDefense);
+		value += obj.get_training_attribute(TrainingAttribute::kEvade);
 		return value >= min && value <= max;
 	}
 }
@@ -221,7 +221,7 @@ bool RequireAttribute::check(const MapObject & obj) const
 void RequireAttribute::write
 	(FileWrite & fw, EditorGameBase &, MapObjectSaver &) const
 {
-	fw.unsigned_32(at);
+	fw.unsigned_8(static_cast<uint8_t>(at));
 	fw.signed_32(min);
 	fw.signed_32(max);
 }
@@ -229,16 +229,30 @@ void RequireAttribute::write
 static Requirements read_attribute
 	(FileRead & fr, EditorGameBase &, MapObjectLoader &)
 {
-	TrainingAttribute const at  = static_cast<TrainingAttribute>(fr.unsigned_32());
-	if
-		(at != atrHP && at != atrAttack && at != atrDefense && at != atrEvade
-		 &&
-		 at != atrTotal)
+	// Get the training attribute and check if it is a valid enum member
+	// We use a temp value, because the static_cast to the enum might be undefined.
+	uint8_t temp_at  = fr.unsigned_8();
+	switch (temp_at) {
+	case static_cast<uint8_t>(TrainingAttribute::kHealth):
+	case static_cast<uint8_t>(TrainingAttribute::kAttack):
+	case static_cast<uint8_t>(TrainingAttribute::kDefense):
+	case static_cast<uint8_t>(TrainingAttribute::kEvade):
+	case static_cast<uint8_t>(TrainingAttribute::kTotal):
+		break;
+	default:
 		throw GameDataError
 			(
-			 "expected atrHP (%u), atrAttack (%u), atrDefense (%u), atrEvade "
-			 "(%u) or atrTotal (%u) but found unknown attribute value (%u)",
-			 atrHP, atrAttack, atrDefense, atrEvade, atrTotal, at);
+			 "expected kHealth (%u), kAttack (%u), kDefense (%u), kEvade "
+			 "(%u) or kTotal (%u) but found unknown attribute value (%u)",
+				static_cast<unsigned int>(TrainingAttribute::kHealth),
+				static_cast<unsigned int>(TrainingAttribute::kAttack),
+				static_cast<unsigned int>(TrainingAttribute::kDefense),
+				static_cast<unsigned int>(TrainingAttribute::kEvade),
+				static_cast<unsigned int>(TrainingAttribute::kTotal),
+				temp_at);
+	}
+	TrainingAttribute const at  = static_cast<TrainingAttribute>(temp_at);
+
 	int32_t const min = fr.signed_32();
 	int32_t const max = fr.signed_32();
 

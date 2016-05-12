@@ -63,7 +63,8 @@ void ProgressWindow::draw_background
 	label_center_.y = yres * PROGRESS_LABEL_POSITION_Y / 100;
 	Rect wnd_rect(Point(0, 0), xres, yres);
 
-	const uint32_t h = UI::g_fh1->render(as_uifont("."))->height();
+	const uint32_t h =
+			UI::g_fh1->render(as_uifont(UI::g_fh1->fontset()->representative_character()))->height();
 
 	label_rectangle_.x = xres / 4;
 	label_rectangle_.w = xres / 2;
@@ -123,21 +124,6 @@ void ProgressWindow::update(bool const repaint) {
 	}
 	g_gr->refresh();
 
-}
-
-/**
- * Display a loader step description
- * std:string style format broke format argument list
- * on windows visual studio.
- */
-// TODO(sirver): this should just take a string.
-void ProgressWindow::stepf(const char * format, ...) {
-	char buffer[1024];
-	va_list va;
-	va_start(va, format);
-	vsnprintf(buffer, sizeof(buffer), format, va);
-	va_end(va);
-	step (buffer);
 }
 
 /// Register additional visualization (tips/hints, animation, etc)

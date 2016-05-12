@@ -7,7 +7,10 @@ include "scripting/infrastructure.lua"
 set_textdomain("tribes")
 
 return {
+   -- TRANSLATORS: This is the name of a starting condition
    descname = _ "Headquarters",
+   -- TRANSLATORS: This is the tooltip for the "Headquarters" starting condition
+   tooltip = _"Start the game with your headquarters only",
    func =  function(p, shared_in_start)
 
    local sf = wl.Game().map.player_slots[p.number].starting_field

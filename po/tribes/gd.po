@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-02-16 09:25+0000\n"
-"PO-Revision-Date: 2016-02-18 18:10+0000\n"
+"POT-Creation-Date: 2016-04-02 11:15+0000\n"
+"PO-Revision-Date: 2016-04-02 11:23+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -2505,8 +2505,8 @@ msgctxt "immovable"
 msgid "Ship Under Construction"
 msgstr "Làrach-togail luinge"
 
-#: ../../data/tribes/preload.lua:12 ../../data/tribes/preload.lua:27
-#: ../../data/tribes/preload.lua:42
+#: ../../data/tribes/preload.lua:12 ../../data/tribes/preload.lua:28
+#: ../../data/tribes/preload.lua:44
 msgid "The Widelands Development Team"
 msgstr "An sgioba leasachaidh Widelands"
 
@@ -2520,24 +2520,52 @@ msgid "The mighty tribes of the east-lands."
 msgstr "Treubhan cumhachdach an taoibh an ear."
 
 #. TRANSLATORS: This is a tribe name
-#: ../../data/tribes/preload.lua:29
+#: ../../data/tribes/preload.lua:30
 msgid "Empire"
 msgstr "An Impireachd"
 
-#: ../../data/tribes/preload.lua:30
+#: ../../data/tribes/preload.lua:31
 msgid "This is the culture of the Roman Empire."
 msgstr "Seo cultar na h-Impireachd Ròmanach."
 
 #. TRANSLATORS: This is a tribe name
-#: ../../data/tribes/preload.lua:44
+#: ../../data/tribes/preload.lua:46
 msgid "Atlanteans"
 msgstr "Na h-Atlantaich"
 
-#: ../../data/tribes/preload.lua:45
+#: ../../data/tribes/preload.lua:47
 msgid ""
 "This tribe is known from the oldest tales. The sons and daughters of "
 "Atlantis."
 msgstr "Tha sinn eòlach air an treubh seo o shean. Seo mic is nigheannan Atlantais."
+
+#: ../../data/tribes/scripting/help/init.lua:48
+msgid "Tribal Encyclopedia"
+msgstr "Leabhar-eòlais na treubha"
+
+#: ../../data/tribes/scripting/help/init.lua:53
+msgid "General"
+msgstr "Coitcheann"
+
+#: ../../data/tribes/scripting/help/init.lua:58
+msgid "Introduction"
+msgstr "Ro-ràdh"
+
+#: ../../data/tribes/scripting/help/init.lua:64
+msgid "Controls"
+msgstr "Stiùireadh"
+
+#: ../../data/tribes/scripting/help/init.lua:73
+msgid "Wares"
+msgstr "Batharan"
+
+#: ../../data/tribes/scripting/help/init.lua:80
+msgid "Workers"
+msgstr "Luchd-obrach"
+
+#: ../../data/tribes/scripting/help/init.lua:87
+msgid "Buildings"
+msgstr "Togalaichean"
 
 #: ../../data/tribes/scripting/starting_conditions/atlanteans/fortified_village.lua:10
 #: ../../data/tribes/scripting/starting_conditions/barbarians/fortified_village.lua:10
@@ -2545,33 +2573,37 @@ msgstr "Tha sinn eòlach air an treubh seo o shean. Seo mic is nigheannan Atlant
 msgid "Fortified Village"
 msgstr "Baile daingnichte"
 
-#. TRANSLATORS: Short for "Not enough space"
-#: ../../data/tribes/scripting/starting_conditions/atlanteans/fortified_village.lua:103
-#: ../../data/tribes/scripting/starting_conditions/barbarians/fortified_village.lua:96
-#: ../../data/tribes/scripting/starting_conditions/empire/fortified_village.lua:121
-msgid "No Space"
-msgstr "Gainnead ruim"
-
-#: ../../data/tribes/scripting/starting_conditions/atlanteans/fortified_village.lua:104
-#: ../../data/tribes/scripting/starting_conditions/barbarians/fortified_village.lua:97
-#: ../../data/tribes/scripting/starting_conditions/empire/fortified_village.lua:122
-msgid ""
-"Some of your starting buildings didn’t have enough room and weren’t built. "
-"You are at a disadvantage with this; consider restarting this map with a "
-"fair starting condition."
-msgstr "Cha robh rum gu leòr ann airson cuid dhe na togalaichean tòiseachaidh agad is cha deach an togail. Cuiridh seo èis ort; saoil an tòisich thu air a’ mhapa seo a-rithist le cumhan tòiseachaidh cothromach?"
-
-#: ../../data/tribes/scripting/starting_conditions/atlanteans/fortified_village.lua:105
-#: ../../data/tribes/scripting/starting_conditions/barbarians/fortified_village.lua:98
-#: ../../data/tribes/scripting/starting_conditions/empire/fortified_village.lua:123
-msgid "Not enough space"
-msgstr "Chan eil rum gu leòr ann"
+#: ../../data/tribes/scripting/starting_conditions/atlanteans/fortified_village.lua:11
+#: ../../data/tribes/scripting/starting_conditions/barbarians/fortified_village.lua:11
+#: ../../data/tribes/scripting/starting_conditions/empire/fortified_village.lua:11
+msgid " Start the game with a fortified military installation"
+msgstr "Tòisich an geama le ionad daignichte an airm"
 
 #: ../../data/tribes/scripting/starting_conditions/atlanteans/headquarters.lua:10
 #: ../../data/tribes/scripting/starting_conditions/barbarians/headquarters.lua:10
 #: ../../data/tribes/scripting/starting_conditions/empire/headquarters.lua:10
 msgid "Headquarters"
 msgstr "Prìomh-àras"
+
+#: ../../data/tribes/scripting/starting_conditions/atlanteans/headquarters.lua:11
+#: ../../data/tribes/scripting/starting_conditions/barbarians/headquarters.lua:11
+#: ../../data/tribes/scripting/starting_conditions/empire/headquarters.lua:11
+msgid "Start the game with your headquarters only"
+msgstr "Tòisich an geama leis a’ phrìomh-àras agad a-mhàin"
+
+#: ../../data/tribes/scripting/starting_conditions/atlanteans/trading_outpost.lua:10
+#: ../../data/tribes/scripting/starting_conditions/barbarians/trading_outpost.lua:10
+#: ../../data/tribes/scripting/starting_conditions/empire/trading_outpost.lua:10
+msgid "Trading Outpost"
+msgstr "Raon malairt"
+
+#: ../../data/tribes/scripting/starting_conditions/atlanteans/trading_outpost.lua:11
+#: ../../data/tribes/scripting/starting_conditions/barbarians/trading_outpost.lua:11
+#: ../../data/tribes/scripting/starting_conditions/empire/trading_outpost.lua:11
+msgid ""
+"If this player runs low on important wares, they will be replenished for "
+"free"
+msgstr "Nuair a dh’fhàsas batharan cudromach a’ chluicheadair seo gann, thèid an lìontachadh an-asgaidh"
 
 #. TRANSLATORS: This is the ship's name used in lists of units
 #: ../../data/tribes/ships/atlanteans/init.lua:20

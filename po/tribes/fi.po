@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-02-03 09:18+0000\n"
-"PO-Revision-Date: 2016-02-09 16:27+0000\n"
+"POT-Creation-Date: 2016-04-16 07:28+0000\n"
+"PO-Revision-Date: 2016-04-16 17:27+0000\n"
 "Last-Translator: Teppo Mäenpää <teppo@runbox.com>\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
@@ -2104,7 +2104,7 @@ msgstr "Tyrmä"
 #: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:94
 #: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:83
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:102
-#: ../../data/tribes/buildings/trainingsites/empire/arena/init.lua:72
+#: ../../data/tribes/buildings/trainingsites/empire/arena/init.lua:73
 #: ../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:68
 #: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:96
 msgid "sleeping"
@@ -2164,7 +2164,7 @@ msgstr "Parantaa sotilaan iskunkestoa tasolle 1"
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:135
 #: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:91
-#: ../../data/tribes/buildings/trainingsites/empire/arena/init.lua:80
+#: ../../data/tribes/buildings/trainingsites/empire/arena/init.lua:81
 #: ../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:76
 msgid "upgrading soldier evade from level 0 to level 1"
 msgstr "Kouluttaa sotilaan väistötasolta 0 tasolle 1"
@@ -2507,8 +2507,8 @@ msgctxt "immovable"
 msgid "Ship Under Construction"
 msgstr "Telakka-alue"
 
-#: ../../data/tribes/preload.lua:12 ../../data/tribes/preload.lua:27
-#: ../../data/tribes/preload.lua:42
+#: ../../data/tribes/preload.lua:12 ../../data/tribes/preload.lua:28
+#: ../../data/tribes/preload.lua:44
 msgid "The Widelands Development Team"
 msgstr "Widelands-kehittäjät"
 
@@ -2522,58 +2522,98 @@ msgid "The mighty tribes of the east-lands."
 msgstr "Itäisten maiden mahtavat heimot!"
 
 #. TRANSLATORS: This is a tribe name
-#: ../../data/tribes/preload.lua:29
+#: ../../data/tribes/preload.lua:30
 msgid "Empire"
 msgstr "Keisarikunta"
 
-#: ../../data/tribes/preload.lua:30
+#: ../../data/tribes/preload.lua:31
 msgid "This is the culture of the Roman Empire."
 msgstr "Tämä on Rooman keisarikunnan kansa ja kulttuuri."
 
 #. TRANSLATORS: This is a tribe name
-#: ../../data/tribes/preload.lua:44
+#: ../../data/tribes/preload.lua:46
 msgid "Atlanteans"
 msgstr "Atlantislaiset"
 
-#: ../../data/tribes/preload.lua:45
+#: ../../data/tribes/preload.lua:47
 msgid ""
 "This tribe is known from the oldest tales. The sons and daughters of "
 "Atlantis."
 msgstr "Tämä heimo tunnetaan jo vanhimmista taruista: Atlantiksen pojat ja tyttäret."
 
-#: ../../data/tribes/scripting/starting_conditions/atlanteans/fortified_village.lua:10
-#: ../../data/tribes/scripting/starting_conditions/barbarians/fortified_village.lua:10
-#: ../../data/tribes/scripting/starting_conditions/empire/fortified_village.lua:10
+#: ../../data/tribes/scripting/help/init.lua:48
+msgid "Tribal Encyclopedia"
+msgstr "Heimo-opas"
+
+#: ../../data/tribes/scripting/help/init.lua:53
+msgid "General"
+msgstr "Yleistä"
+
+#: ../../data/tribes/scripting/help/init.lua:58
+msgid "Introduction"
+msgstr "Esittely"
+
+#: ../../data/tribes/scripting/help/init.lua:64
+msgid "Controls"
+msgstr "Hallinta"
+
+#: ../../data/tribes/scripting/help/init.lua:73
+msgid "Wares"
+msgstr "Tarvikkeet"
+
+#: ../../data/tribes/scripting/help/init.lua:80
+msgid "Workers"
+msgstr "Työläiset"
+
+#: ../../data/tribes/scripting/help/init.lua:87
+msgid "Buildings"
+msgstr "Rakennukset"
+
+#. TRANSLATORS: This is the name of a starting condition
+#: ../../data/tribes/scripting/starting_conditions/atlanteans/fortified_village.lua:11
+#: ../../data/tribes/scripting/starting_conditions/barbarians/fortified_village.lua:11
+#: ../../data/tribes/scripting/starting_conditions/empire/fortified_village.lua:11
 msgid "Fortified Village"
 msgstr "Linnoitettu kylä"
 
-#. TRANSLATORS: Short for "Not enough space"
-#: ../../data/tribes/scripting/starting_conditions/atlanteans/fortified_village.lua:103
-#: ../../data/tribes/scripting/starting_conditions/barbarians/fortified_village.lua:96
-#: ../../data/tribes/scripting/starting_conditions/empire/fortified_village.lua:121
-msgid "No Space"
-msgstr "Ei tilaa"
+#. TRANSLATORS: This is the tooltip for the "Fortified Village" starting
+#. condition
+#: ../../data/tribes/scripting/starting_conditions/atlanteans/fortified_village.lua:13
+#: ../../data/tribes/scripting/starting_conditions/barbarians/fortified_village.lua:13
+#: ../../data/tribes/scripting/starting_conditions/empire/fortified_village.lua:13
+msgid " Start the game with a fortified military installation"
+msgstr "Aloita peli armeijavaruskunnasta"
 
-#: ../../data/tribes/scripting/starting_conditions/atlanteans/fortified_village.lua:104
-#: ../../data/tribes/scripting/starting_conditions/barbarians/fortified_village.lua:97
-#: ../../data/tribes/scripting/starting_conditions/empire/fortified_village.lua:122
-msgid ""
-"Some of your starting buildings didn’t have enough room and weren’t built. "
-"You are at a disadvantage with this; consider restarting this map with a "
-"fair starting condition."
-msgstr "Joillekin aloitusrakennuksistasi ei ollut tarpeeksi tilaa, eikä niitä rakennettu. Olet epäedullisessa asemassa sen vuoksi; Harkitse kartan aloittamista uudelleen reilummalla aloitusasemalla."
-
-#: ../../data/tribes/scripting/starting_conditions/atlanteans/fortified_village.lua:105
-#: ../../data/tribes/scripting/starting_conditions/barbarians/fortified_village.lua:98
-#: ../../data/tribes/scripting/starting_conditions/empire/fortified_village.lua:123
-msgid "Not enough space"
-msgstr "Ei tarpeeksi tilaa"
-
-#: ../../data/tribes/scripting/starting_conditions/atlanteans/headquarters.lua:10
-#: ../../data/tribes/scripting/starting_conditions/barbarians/headquarters.lua:10
-#: ../../data/tribes/scripting/starting_conditions/empire/headquarters.lua:10
+#. TRANSLATORS: This is the name of a starting condition
+#: ../../data/tribes/scripting/starting_conditions/atlanteans/headquarters.lua:11
+#: ../../data/tribes/scripting/starting_conditions/barbarians/headquarters.lua:11
+#: ../../data/tribes/scripting/starting_conditions/empire/headquarters.lua:11
 msgid "Headquarters"
 msgstr "Päämaja"
+
+#. TRANSLATORS: This is the tooltip for the "Headquarters" starting condition
+#: ../../data/tribes/scripting/starting_conditions/atlanteans/headquarters.lua:13
+#: ../../data/tribes/scripting/starting_conditions/barbarians/headquarters.lua:13
+#: ../../data/tribes/scripting/starting_conditions/empire/headquarters.lua:13
+msgid "Start the game with your headquarters only"
+msgstr "Aloita peli vain yhdellä rakennuksella"
+
+#. TRANSLATORS: This is the name of a starting condition
+#: ../../data/tribes/scripting/starting_conditions/atlanteans/trading_outpost.lua:11
+#: ../../data/tribes/scripting/starting_conditions/barbarians/trading_outpost.lua:11
+#: ../../data/tribes/scripting/starting_conditions/empire/trading_outpost.lua:11
+msgid "Trading Outpost"
+msgstr "Kauppa-asema"
+
+#. TRANSLATORS: This is the tooltip for the "Trading Outpost" starting
+#. condition
+#: ../../data/tribes/scripting/starting_conditions/atlanteans/trading_outpost.lua:13
+#: ../../data/tribes/scripting/starting_conditions/barbarians/trading_outpost.lua:13
+#: ../../data/tribes/scripting/starting_conditions/empire/trading_outpost.lua:13
+msgid ""
+"If this player runs low on important wares, they will be replenished for "
+"free"
+msgstr "Jos pelaajalta loppuvat tärkät tarvikkeet, ne korvautuvat itsestään"
 
 #. TRANSLATORS: This is the ship's name used in lists of units
 #: ../../data/tribes/ships/atlanteans/init.lua:20

@@ -24,15 +24,16 @@
 #include <boost/bind.hpp>
 
 #include "base/log.h"
-#include "graphic/font.h"
-#include "graphic/font_handler.h"
+#include "graphic/align.h"
 #include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
-#include "graphic/text/font_set.h"
+#include "graphic/text/bidi.h"
 #include "graphic/text_constants.h"
 #include "graphic/text_layout.h"
 #include "wlapplication.h"
+
+constexpr int kMargin = 2;
 
 namespace UI {
 /**
@@ -43,33 +44,27 @@ namespace UI {
  *       y
  *       w       dimensions, in pixels, of the Listselect
  *       h
- *       align   alignment of text inside the Listselect
 */
 BaseListselect::BaseListselect
 	(Panel * const parent,
 	 int32_t const x, int32_t const y, uint32_t const w, uint32_t const h,
-	 Align const align, bool const show_check)
+	 bool const show_check)
 	:
 	Panel(parent, x, y, w, h),
-	lineheight_(g_fh->get_fontheight(UI::g_fh1->fontset().serif(), UI_FONT_SIZE_SMALL)),
-	scrollbar_      (this, get_w() - 24, 0, 24, h, false),
+	lineheight_(UI::g_fh1->render(as_uifont(UI::g_fh1->fontset()->representative_character()))->height()
+					 + kMargin),
+	scrollbar_      (this, get_w() - Scrollbar::kSize, 0, Scrollbar::kSize, h, false),
 	scrollpos_     (0),
 	selection_     (no_selection_index()),
 	last_click_time_(-10000),
 	last_selection_(no_selection_index()),
-	show_check_(show_check),
-	fontname_(UI::g_fh1->fontset().serif()),
-	fontsize_(UI_FONT_SIZE_SMALL)
+	show_check_(show_check)
 {
 	set_thinks(false);
 
-	//  do not allow vertical alignment as it does not make sense
-	align_ = align & UI::Align::kHorizontal;
-
 	scrollbar_.moved.connect(boost::bind(&BaseListselect::set_scrollpos, this, _1));
-	scrollbar_.set_singlestepsize(g_fh->get_fontheight(fontname_, fontsize_));
-	scrollbar_.set_pagesize
-		(h - 2 * g_fh->get_fontheight(fontname_, fontsize_));
+	scrollbar_.set_singlestepsize(lineheight_);
+	scrollbar_.set_pagesize(h - 2 * lineheight_);
 	scrollbar_.set_steps(1);
 
 	if (show_check) {
@@ -125,8 +120,7 @@ void BaseListselect::add
 	 uint32_t             entry,
 	 const Image*   pic,
 	 bool         const   sel,
-	 const std::string  & tooltip_text,
-	 const std::string  & fontname)
+	 const std::string  & tooltip_text)
 {
 	EntryRecord * er = new EntryRecord();
 
@@ -135,8 +129,7 @@ void BaseListselect::add
 	er->use_clr = false;
 	er->name    = name;
 	er->tooltip = tooltip_text;
-	er->font_face = fontname;
-	uint32_t entry_height = g_fh->get_fontheight(fontname.empty() ? fontname_ : fontname, fontsize_);
+	uint32_t entry_height = lineheight_;
 	if (pic) {
 		uint16_t w = pic->width();
 		uint16_t h = pic->height();
@@ -160,8 +153,7 @@ void BaseListselect::add_front
 	(const std::string& name,
 	 const Image*   pic,
 	 bool         const   sel,
-	 const std::string  & tooltip_text,
-	 const std::string& fontname)
+	 const std::string  & tooltip_text)
 {
 	EntryRecord * er = new EntryRecord();
 
@@ -174,9 +166,8 @@ void BaseListselect::add_front
 	er->use_clr = false;
 	er->name    = name;
 	er->tooltip = tooltip_text;
-	er->font_face = fontname;
 
-	uint32_t entry_height = g_fh->get_fontheight(fontname.empty() ? fontname_ : fontname, fontsize_);
+	uint32_t entry_height = lineheight_;
 	if (pic) {
 		uint16_t w = pic->width();
 		uint16_t h = pic->height();
@@ -327,7 +318,7 @@ void BaseListselect::remove_selected()
 
 uint32_t BaseListselect::get_lineheight() const
 {
-	return lineheight_ + 2;
+	return lineheight_ + kMargin;
 }
 
 uint32_t BaseListselect::get_eff_w() const
@@ -355,9 +346,12 @@ void BaseListselect::draw(RenderTarget & dst)
 
 		const EntryRecord & er = *entry_records_[idx];
 
+		Point point(1, y);
+		uint32_t maxw = get_eff_w() - 2;
+
 		// Highlight the current selected entry
 		if (idx == selection_) {
-			Rect r = Rect(Point(1, y), get_eff_w() - 2, lineheight_);
+			Rect r = Rect(point, maxw, lineheight_);
 			if (r.x < 0) {
 				r.w += r.x; r.x = 0;
 			}
@@ -372,36 +366,49 @@ void BaseListselect::draw(RenderTarget & dst)
 			}
 		}
 
-		Align draw_alignment = mirror_alignment(align_);
-
-		int32_t const x =
-			(static_cast<int>(draw_alignment & UI::Align::kRight))   ? get_eff_w() -      1 :
-			(static_cast<int>(draw_alignment & UI::Align::kHCenter)) ? get_eff_w() >>     1 :
-
-			// Pictures are always left aligned, leave some space here
-			max_pic_width_         ? max_pic_width_ + 10 :
-			1;
-
-		std::string font_face = er.font_face.empty() ? fontname_ : er.font_face;
-		RGBColor color = er.use_clr ? er.clr : UI_FONT_CLR_FG;
-
-		// Horizontal center the string
-		UI::g_fh->draw_text
-			(dst,
-			 TextStyle::makebold(Font::get(font_face, fontsize_), color),
-			 Point
-			 	(x,
-			 	 y +
-				 (get_lineheight() - g_fh->get_fontheight(font_face, fontsize_))
-			 	 /
-			 	 2),
-			 er.name,
-			 draw_alignment);
+		uint32_t picw = max_pic_width_ ? max_pic_width_ + 10 : 0;
 
 		// Now draw pictures
 		if (er.pic) {
-			uint16_t h = er.pic->height();
-			dst.blit(Point(1, y + (get_lineheight() - h) / 2), er.pic);
+			dst.blit(Point(UI::g_fh1->fontset()->is_rtl() ? get_eff_w() - er.pic->width() - 1 : 1,
+								y + (get_lineheight() - er.pic->height()) / 2),
+						er.pic);
+		}
+
+		const Image* entry_text_im = UI::g_fh1->render(as_uifont(richtext_escape(er.name), UI_FONT_SIZE_SMALL,
+																					er.use_clr ? er.clr : UI_FONT_CLR_FG));
+
+		Align alignment = i18n::has_rtl_character(er.name.c_str(), 20) ? UI::Align::kRight : UI::Align::kLeft;
+		if (static_cast<int>(alignment & UI::Align::kRight)) {
+			point.x += maxw - picw;
+		}
+
+		UI::correct_for_align(alignment, entry_text_im->width(), entry_text_im->height(), &point);
+
+		// Shift for image width
+		if (!UI::g_fh1->fontset()->is_rtl()) {
+			point.x += picw;
+		}
+
+		// Fix vertical position for mixed font heights
+		if (get_lineheight() > static_cast<uint32_t>(entry_text_im->height())) {
+			point.y += (lineheight_ - entry_text_im->height()) / 2;
+		} else {
+			point.y -= (entry_text_im->height() - lineheight_) / 2;
+		}
+
+		// Crop to column width while blitting
+		if (static_cast<int>(alignment & UI::Align::kRight) &&
+			 (maxw  + picw) < static_cast<uint32_t>(entry_text_im->width())) {
+			// Fix positioning for BiDi languages.
+			point.x = 0;
+
+			// We want this always on, e.g. for mixed language savegame filenames, or the languages list
+				dst.blitrect(point,
+								 entry_text_im,
+								 Rect(entry_text_im->width() - maxw + picw, 0, maxw, entry_text_im->height()));
+		} else {
+			dst.blitrect(point, entry_text_im, Rect(0, 0, maxw, entry_text_im->height()));
 		}
 
 		y += lineheight;

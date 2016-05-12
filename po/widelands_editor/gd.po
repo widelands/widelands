@@ -1,0 +1,222 @@
+# Widelands PATH/TO/FILE.PO
+# Copyright (C) 2005-2016 Widelands Development Team
+# 
+# Translators:
+# GunChleoc, 2016
+msgid ""
+msgstr ""
+"Project-Id-Version: Widelands\n"
+"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
+"POT-Creation-Date: 2016-04-07 14:12+0000\n"
+"PO-Revision-Date: 2016-04-07 14:25+0000\n"
+"Last-Translator: GunChleoc\n"
+"Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: gd\n"
+"Plural-Forms: nplurals=4; plural=(n==1 || n==11) ? 0 : (n==2 || n==12) ? 1 : (n > 2 && n < 20) ? 2 : 3;\n"
+
+#: ../../data/scripting/editor/editor_controls.lua:7
+#: ../../data/scripting/editor/editor_help.lua:65
+msgid "Controls"
+msgstr "Stiùireadh"
+
+#: ../../data/scripting/editor/editor_controls.lua:10
+msgid "Keyboard Shortcuts"
+msgstr "Ath-ghoiridean meur-chlàir"
+
+#. TRANSLATORS: This is an access key combination. Localize, but do not change
+#. the key.
+#: ../../data/scripting/editor/editor_controls.lua:13
+msgid "Help"
+msgstr "Cobhair"
+
+#. TRANSLATORS: This is an access key combination.
+#: ../../data/scripting/editor/editor_controls.lua:15
+msgid "Toggle main menu"
+msgstr "Toglaich am prìomh chlàr-taice"
+
+#. TRANSLATORS: This is an access key combination. The hotkey is 't'
+#: ../../data/scripting/editor/editor_controls.lua:17
+msgid "Toggle tools menu"
+msgstr "Toglaich clàr-taice nan inneal"
+
+#. TRANSLATORS: This is an access key combination. The hotkey is 'p'
+#: ../../data/scripting/editor/editor_controls.lua:21
+msgid "Toggle player menu"
+msgstr "Toglaich clàr-taice nan cluicheadair"
+
+#. TRANSLATORS: This is an access key combination. Localize, but do not change
+#. the key.
+#: ../../data/scripting/editor/editor_controls.lua:23
+msgid "Undo"
+msgstr "Neo-dhèan"
+
+#. TRANSLATORS: This is an access key combination. Localize, but do not change
+#. the key.
+#: ../../data/scripting/editor/editor_controls.lua:25
+msgid "Redo"
+msgstr "Ath-dhèan"
+
+#. TRANSLATORS: This is an access key combination. The hotkey is 'i'
+#: ../../data/scripting/editor/editor_controls.lua:27
+msgid "Activate information tool"
+msgstr "Gnìomhaich an t-inneal fiosrachaidh"
+
+#. TRANSLATORS: This is an access key combination. Localize, but do not change
+#. the key.
+#: ../../data/scripting/editor/editor_controls.lua:29
+msgctxt "hotkey"
+msgid "Ctrl + L"
+msgstr "Ctrl + L"
+
+#: ../../data/scripting/editor/editor_controls.lua:29
+msgid "Load map"
+msgstr "Luchdaich mapa"
+
+#. TRANSLATORS: This is an access key combination. Localize, but do not change
+#. the key.
+#: ../../data/scripting/editor/editor_controls.lua:31
+msgctxt "hotkey"
+msgid "Ctrl + S"
+msgstr "Ctrl + S"
+
+#: ../../data/scripting/editor/editor_controls.lua:31
+msgid "Save map"
+msgstr "Sàbhail am mapa"
+
+#: ../../data/scripting/editor/editor_controls.lua:35
+msgid "Tools"
+msgstr "Innealan"
+
+#. TRANSLATORS: This is an access key combination. Localize, but do not change
+#. the key.
+#: ../../data/scripting/editor/editor_controls.lua:38
+msgctxt "hotkey"
+msgid "1-0"
+msgstr "1-0"
+
+#: ../../data/scripting/editor/editor_controls.lua:38
+msgid "Change tool size"
+msgstr "Atharraich meud nan innealan"
+
+#. TRANSLATORS: This is an access key combination. Localize, but do not change
+#. the key.
+#: ../../data/scripting/editor/editor_controls.lua:40
+msgctxt "hotkey"
+msgid "Click"
+msgstr "Briogadh"
+
+#: ../../data/scripting/editor/editor_controls.lua:40
+msgid ""
+"Place new elements on the map, or increase map elements by the value "
+"selected by ‘Increase/Decrease value’"
+msgstr "Cuir nithean ùra air a’ mhapa no meudaich nithean a’ mhapa leis an luach a tha air “Meudaich/Lùghdaich an luach”"
+
+#: ../../data/scripting/editor/editor_controls.lua:42
+msgid ""
+"Remove elements from the map, or decrease map elements by the value selected"
+" by ‘Increase/Decrease value’"
+msgstr "Thoir nithean air falbh on mhapa no lùghdaich nithean a’ mhapa leis an luach a tha air “Meudaich/Lùghdaich an luach”"
+
+#. TRANSLATORS: This is an access key combination. Localize, but do not change
+#. the key.
+#: ../../data/scripting/editor/editor_controls.lua:42
+msgctxt "hotkey"
+msgid "Shift + Click"
+msgstr "Shift + Briogadh"
+
+#. TRANSLATORS: This is an access key combination. Localize, but do not change
+#. the key.
+#: ../../data/scripting/editor/editor_controls.lua:44
+msgctxt "hotkey"
+msgid "Ctrl + Click"
+msgstr "Ctrl + Briogadh"
+
+#: ../../data/scripting/editor/editor_controls.lua:44
+msgid "Set map elements to the value selected by ‘Set Value’"
+msgstr "Suidhich nithean a’ mhapa air an luach a tha air “Suidhich an luach”"
+
+#: ../../data/scripting/editor/editor_help.lua:49
+msgid "Editor Help"
+msgstr "Cobhair leis an deasaiche"
+
+#: ../../data/scripting/editor/editor_help.lua:54
+msgid "General"
+msgstr "Coitcheann"
+
+#: ../../data/scripting/editor/editor_help.lua:59
+#: ../../data/scripting/editor/editor_introduction.lua:10
+msgid "Introduction"
+msgstr "Ro-ràdh"
+
+#: ../../data/scripting/editor/editor_help.lua:74
+msgid "Terrains"
+msgstr "Cruthan-tìre"
+
+#: ../../data/scripting/editor/editor_help.lua:81
+msgid "Trees"
+msgstr "Craobhan"
+
+#: ../../data/scripting/editor/editor_introduction.lua:7
+msgid "The Widelands Editor"
+msgstr "An deasaiche Widelands"
+
+#: ../../data/scripting/editor/editor_introduction.lua:12
+msgid ""
+"This editor is intended for players who would like to design their own maps "
+"to use with Widelands."
+msgstr "Tha an deasaiche seo airson cluicheadairean a bu toil leotha na mapaichean aca fhèin a chruthachadh gus an cleachdadh le Widelands."
+
+#: ../../data/scripting/editor/editor_introduction.lua:13
+msgid ""
+"As you can see, this editor is heavy work in progress and as the editor "
+"becomes better and better, this text will also get longer and more complete."
+msgstr "Tha mòran prògramachaidh againn ri dhèanamh fhathast air an deasaiche is nuair a bheir sinn piseach air, nì sinn an teacsa seo nas fhaide is nas coileanta cuideachd."
+
+#: ../../data/scripting/editor/editor_introduction.lua:16
+msgid "The wiki also includes a short tutorial on how to build a map."
+msgstr "Tha oideachadh goirid air mar a chruthaicheas tu mapa san uicidh cuideachd."
+
+#: ../../data/scripting/editor/terrain_help.lua:21
+msgid "Resources"
+msgstr "Stòrasan"
+
+#. TRANSLATORS: A header in the editor help
+#: ../../data/scripting/editor/terrain_help.lua:25
+msgid "Valid Resource:"
+msgid_plural "Valid Resources:"
+msgstr[0] "Stòras dligheach:"
+msgstr[1] "Stòrasan dligheach:"
+msgstr[2] "Stòrasan dligheach:"
+msgstr[3] "Stòrasan dligheach:"
+
+#: ../../data/scripting/editor/terrain_help.lua:34
+msgid "Default:"
+msgstr "Tùsail:"
+
+#. TRANSLATORS: e.g. "5x Water"
+#: ../../data/scripting/editor/terrain_help.lua:36
+msgid "%1%x %2%"
+msgstr "%1%x %2%"
+
+#. TRANSLATORS: A header in the editor help
+#: ../../data/scripting/editor/terrain_help.lua:67
+msgid "Probability of trees growing"
+msgstr "Coltachd gum fàs craobhan"
+
+#: ../../data/scripting/editor/terrain_help.lua:72
+msgid "No trees will grow here."
+msgstr "Chan fhàs craobh an-seo."
+
+#. TRANSLATORS: A header in the editor help. Terrains preferred by a type of
+#. tree.
+#: ../../data/scripting/editor/tree_help.lua:17
+msgid "Preferred terrains"
+msgstr "Na cruthan-tìre as fhearr leatha"
+
+#. TRANSLATORS: Terrain name (Climate)
+#: ../../data/scripting/editor/tree_help.lua:38
+msgid "%1% (%2%)"
+msgstr "%1% (%2%)"

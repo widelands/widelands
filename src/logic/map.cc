@@ -32,7 +32,7 @@
 #include "build_info.h"
 #include "economy/flag.h"
 #include "economy/road.h"
-#include "editor/tools/editor_increase_resources_tool.h"
+#include "editor/tools/increase_resources_tool.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/findimmovable.h"
 #include "logic/findnode.h"
@@ -172,7 +172,7 @@ void Map::recalc_default_resources(const World& world) {
 			if (f.field->get_resources() != Widelands::kNoResource || f.field->get_resources_amount())
 				continue;
 			std::map<int32_t, int32_t> m;
-			int32_t amount = 0;
+			ResourceAmount amount = 0;
 
 			//  this node
 			{
@@ -192,8 +192,8 @@ void Map::recalc_default_resources(const World& world) {
 			get_neighbour(f, WALK_NW, &f1);
 			{
 				const TerrainDescription& terr = world.terrain_descr(f1.field->terrain_r());
-				const int8_t resr = terr.get_default_resource();
-				const int default_amount = terr.get_default_resource_amount();
+				const DescriptionIndex resr = terr.get_default_resource();
+				const ResourceAmount default_amount = terr.get_default_resource_amount();
 				if ((terr.get_is() & TerrainDescription::Is::kUnwalkable) && default_amount > 0)
 					m[resr] += 3;
 				else
@@ -202,8 +202,8 @@ void Map::recalc_default_resources(const World& world) {
 			}
 			{
 				const TerrainDescription& terd = world.terrain_descr(f1.field->terrain_d());
-				const int8_t resd = terd.get_default_resource();
-				const int default_amount = terd.get_default_resource_amount();
+				const DescriptionIndex resd = terd.get_default_resource();
+				const ResourceAmount default_amount = terd.get_default_resource_amount();
 				if ((terd.get_is() & TerrainDescription::Is::kUnwalkable) && default_amount > 0)
 					m[resd] += 3;
 				else
@@ -215,8 +215,8 @@ void Map::recalc_default_resources(const World& world) {
 			get_neighbour(f, WALK_NE, &f1);
 			{
 				const TerrainDescription& terd = world.terrain_descr(f1.field->terrain_d());
-				const int8_t resd = terd.get_default_resource();
-				const int default_amount = terd.get_default_resource_amount();
+				const DescriptionIndex resd = terd.get_default_resource();
+				const ResourceAmount default_amount = terd.get_default_resource_amount();
 				if ((terd.get_is() & TerrainDescription::Is::kUnwalkable) && default_amount > 0)
 					m[resd] += 3;
 				else
@@ -228,8 +228,8 @@ void Map::recalc_default_resources(const World& world) {
 			get_neighbour(f, WALK_W, &f1);
 			{
 				const TerrainDescription& terr = world.terrain_descr(f1.field->terrain_r());
-				const int8_t resr = terr.get_default_resource();
-				const int default_amount = terr.get_default_resource_amount();
+				const DescriptionIndex resr = terr.get_default_resource();
+				const ResourceAmount default_amount = terr.get_default_resource_amount();
 				if ((terr.get_is() & TerrainDescription::Is::kUnwalkable) && default_amount > 0)
 					m[resr] += 3;
 				else
@@ -664,7 +664,7 @@ The actual logic behind find_bobs and find_reachable_bobs.
 */
 struct FindBobsCallback {
 	FindBobsCallback(std::vector<Bob *> * const list, const FindBob & functor)
-		: m_list(list), m_functor(functor), m_found(0) {}
+		: list_(list), functor_(functor), found_(0) {}
 
 	void operator()(const Map &, const FCoords cur) {
 		for
@@ -673,22 +673,22 @@ struct FindBobsCallback {
 			 bob = bob->get_next_bob())
 		{
 			if
-				(m_list &&
-				 std::find(m_list->begin(), m_list->end(), bob) != m_list->end())
+				(list_ &&
+				 std::find(list_->begin(), list_->end(), bob) != list_->end())
 				continue;
 
-			if (m_functor.accept(bob)) {
-				if (m_list)
-					m_list->push_back(bob);
+			if (functor_.accept(bob)) {
+				if (list_)
+					list_->push_back(bob);
 
-				++m_found;
+				++found_;
 			}
 		}
 	}
 
-	std::vector<Bob *> * m_list;
-	const FindBob      & m_functor;
-	uint32_t                 m_found;
+	std::vector<Bob*>* list_;
+	const FindBob& functor_;
+	uint32_t found_;
 };
 
 
@@ -711,7 +711,7 @@ uint32_t Map::find_bobs
 
 	find(area, cb);
 
-	return cb.m_found;
+	return cb.found_;
 }
 
 
@@ -737,7 +737,7 @@ uint32_t Map::find_reachable_bobs
 
 	find_reachable(area, checkstep, cb);
 
-	return cb.m_found;
+	return cb.found_;
 }
 
 
@@ -751,7 +751,7 @@ The actual logic behind find_immovables and find_reachable_immovables.
 struct FindImmovablesCallback {
 	FindImmovablesCallback
 		(std::vector<ImmovableFound> * const list, const FindImmovable & functor)
-		: m_list(list), m_functor(functor), m_found(0) {}
+		: list_(list), functor_(functor), found_(0) {}
 
 	void operator()(const Map &, const FCoords cur) {
 		BaseImmovable * const imm = cur.field->get_immovable();
@@ -759,21 +759,21 @@ struct FindImmovablesCallback {
 		if (!imm)
 			return;
 
-		if (m_functor.accept(*imm)) {
-			if (m_list) {
+		if (functor_.accept(*imm)) {
+			if (list_) {
 				ImmovableFound imf;
 				imf.object = imm;
 				imf.coords = cur;
-				m_list->push_back(imf);
+				list_->push_back(imf);
 			}
 
-			++m_found;
+			++found_;
 		}
 	}
 
-	std::vector<ImmovableFound> * m_list;
-	const FindImmovable         & m_functor;
-	uint32_t                          m_found;
+	std::vector<ImmovableFound>* list_;
+	const FindImmovable& functor_;
+	uint32_t found_;
 };
 
 
@@ -794,7 +794,7 @@ uint32_t Map::find_immovables
 
 	find(area, cb);
 
-	return cb.m_found;
+	return cb.found_;
 }
 
 
@@ -818,7 +818,7 @@ uint32_t Map::find_reachable_immovables
 
 	find_reachable(area, checkstep, cb);
 
-	return cb.m_found;
+	return cb.found_;
 }
 
 
@@ -862,20 +862,20 @@ The actual logic behind find_fields and find_reachable_fields.
 struct FindNodesCallback {
 	FindNodesCallback
 		(std::vector<Coords> * const list, const FindNode & functor)
-		: m_list(list), m_functor(functor), m_found(0) {}
+		: list_(list), functor_(functor), found_(0) {}
 
 	void operator()(const Map & map, const FCoords cur) {
-		if (m_functor.accept(map, cur)) {
-			if (m_list)
-				m_list->push_back(cur);
+		if (functor_.accept(map, cur)) {
+			if (list_)
+				list_->push_back(cur);
 
-			++m_found;
+			++found_;
 		}
 	}
 
-	std::vector<Coords> * m_list;
-	const FindNode     & m_functor;
-	uint32_t                  m_found;
+	std::vector<Coords>* list_;
+	const FindNode & functor_;
+	uint32_t found_;
 };
 
 
@@ -897,7 +897,7 @@ uint32_t Map::find_fields
 
 	find(area, cb);
 
-	return cb.m_found;
+	return cb.found_;
 }
 
 
@@ -920,7 +920,7 @@ uint32_t Map::find_reachable_fields
 
 	find_reachable(area, checkstep, cb);
 
-	return cb.m_found;
+	return cb.found_;
 }
 
 
@@ -1353,12 +1353,12 @@ std::vector<Coords> Map::find_portdock(const Coords & c) const
 		}
 
 		// If starting point is owned we make sure this field has the same owner
-		if (is_good_water && owner > 0 && f.field->get_owned_by() != owner) {
+		if (is_good_water && owner != neutral() && f.field->get_owned_by() != owner) {
 			is_good_water = false;
 		}
 
 		// ... and is not on a border
-		if (is_good_water && owner > 0 && f.field->is_border()) {
+		if (is_good_water && owner != neutral() && f.field->is_border()) {
 			is_good_water = false;
 		}
 
@@ -1424,7 +1424,7 @@ uint32_t Map::calc_distance(const Coords a, const Coords b) const
 	rx = lx + dist;
 
 	// Allow for wrap-around
-	// Yes, the second is an else if; see the above if (dist >= m_width)
+	// Yes, the second is an else if; see the above if (dist >= width_)
 	if (lx < 0)
 		lx += width_;
 	else if (rx >= static_cast<int32_t>(width_))
@@ -1869,7 +1869,7 @@ int32_t Map::change_terrain
 }
 
 bool Map::is_resource_valid
-	(const Widelands::World& world, const TCoords<Widelands::FCoords>& c, int32_t const curres)
+	(const Widelands::World& world, const TCoords<Widelands::FCoords>& c, DescriptionIndex curres)
 {
 	if (curres == Widelands::kNoResource)
 		return true;
@@ -1912,7 +1912,7 @@ void Map::ensure_resource_consistency(const World& world)
 
 void Map::initialize_resources(const FCoords& c,
                                const DescriptionIndex resource_type,
-                               uint8_t amount) {
+										 ResourceAmount amount) {
 	// You cannot have an amount of nothing.
 	if (resource_type == Widelands::kNoResource) {
 		amount = 0;
@@ -1927,7 +1927,7 @@ void Map::initialize_resources(const FCoords& c,
 	Notifications::publish(note);
 }
 
-void Map::set_resources(const FCoords& c, uint8_t amount) {
+void Map::set_resources(const FCoords& c, ResourceAmount amount) {
 	// You cannot change the amount of resources on a field without resources.
 	if (c.field->resources == Widelands::kNoResource) {
 		return;
@@ -2129,11 +2129,12 @@ bool Map::allows_seafaring() {
 	return false;
 }
 
-bool Map::has_artifacts(const World& world) {
-	for (int32_t i = 0; i < world.get_nr_immovables(); ++i) {
-		const ImmovableDescr& descr = *world.get_immovable_descr(i);
-		if (descr.has_attribute(descr.get_attribute_id("artifact"))) {
-			return true;
+bool Map::has_artifacts() {
+	for (MapIndex i = 0; i < max_index(); ++i) {
+		if (upcast(Immovable, immovable, fields_[i].get_immovable())) {
+			if (immovable->descr().has_attribute(immovable->descr().get_attribute_id("artifact"))) {
+				return true;
+			}
 		}
 	}
 	return false;

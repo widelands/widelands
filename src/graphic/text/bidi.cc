@@ -139,32 +139,6 @@ const std::set<UChar> kCannotEndLineJapanese = {
 };
 
 
-// http://unicode.org/faq/blocks_ranges.html
-// http://unicode-table.com/en/blocks/
-const std::set<UBlockCode> kCJKCodeBlocks = {
-	{
-		UBlockCode::UBLOCK_CJK_COMPATIBILITY,
-		UBlockCode::UBLOCK_CJK_COMPATIBILITY_FORMS,
-		UBlockCode::UBLOCK_CJK_COMPATIBILITY_IDEOGRAPHS,
-		UBlockCode::UBLOCK_CJK_COMPATIBILITY_IDEOGRAPHS_SUPPLEMENT,
-		UBlockCode::UBLOCK_CJK_RADICALS_SUPPLEMENT,
-		UBlockCode::UBLOCK_CJK_STROKES,
-		UBlockCode::UBLOCK_CJK_SYMBOLS_AND_PUNCTUATION,
-		UBlockCode::UBLOCK_CJK_UNIFIED_IDEOGRAPHS,
-		UBlockCode::UBLOCK_CJK_UNIFIED_IDEOGRAPHS_EXTENSION_A,
-		UBlockCode::UBLOCK_CJK_UNIFIED_IDEOGRAPHS_EXTENSION_B,
-		UBlockCode::UBLOCK_CJK_UNIFIED_IDEOGRAPHS_EXTENSION_C,
-		UBlockCode::UBLOCK_CJK_UNIFIED_IDEOGRAPHS_EXTENSION_D,
-		UBlockCode::UBLOCK_HIRAGANA,
-		UBlockCode::UBLOCK_KATAKANA,
-	},
-};
-
-bool is_cjk_character(UChar32 c) {
-	return kCJKCodeBlocks.count(ublock_getCode(c)) == 1;
-}
-
-
 // Need to mirror () etc. for LTR languages, so we're sticking them in a map.
 const std::map<UChar, UChar> kSymmetricChars = {
 	{0x0028, 0x0029}, // ()
@@ -441,15 +415,60 @@ const std::map<UChar, UChar> kArabicLegacyDiacritics = {
 	{0xFCF4, 0xFC62}, // Shadda with Kasra
 };
 
-const std::set<std::string> kRTLScripts = {
-	{"arabic", "devanagari", "hebrew", "mandaic", "nko", "samaritan", "syriac", "thaana"},
+const std::set<UI::FontSets::Selector> kLTRScripts = {
+	// We omit the default fontset, because we won't define code blocks for it - it's a catch-all.
+	UI::FontSets::Selector::kCJK,
+	UI::FontSets::Selector::kMyanmar,
+	UI::FontSets::Selector::kSinhala
+};
+
+// http://unicode.org/faq/blocks_ranges.html
+// http://unicode-table.com/en/blocks/
+const std::map<UI::FontSets::Selector, std::set<UBlockCode>> kLTRCodeBlocks = {
+	{UI::FontSets::Selector::kCJK, {
+		 UBlockCode::UBLOCK_CJK_COMPATIBILITY,
+		 UBlockCode::UBLOCK_CJK_COMPATIBILITY_FORMS,
+		 UBlockCode::UBLOCK_CJK_COMPATIBILITY_IDEOGRAPHS,
+		 UBlockCode::UBLOCK_CJK_COMPATIBILITY_IDEOGRAPHS_SUPPLEMENT,
+		 UBlockCode::UBLOCK_CJK_RADICALS_SUPPLEMENT,
+		 UBlockCode::UBLOCK_CJK_STROKES,
+		 UBlockCode::UBLOCK_CJK_SYMBOLS_AND_PUNCTUATION,
+		 UBlockCode::UBLOCK_CJK_UNIFIED_IDEOGRAPHS,
+		 UBlockCode::UBLOCK_CJK_UNIFIED_IDEOGRAPHS_EXTENSION_A,
+		 UBlockCode::UBLOCK_CJK_UNIFIED_IDEOGRAPHS_EXTENSION_B,
+		 UBlockCode::UBLOCK_CJK_UNIFIED_IDEOGRAPHS_EXTENSION_C,
+		 UBlockCode::UBLOCK_CJK_UNIFIED_IDEOGRAPHS_EXTENSION_D,
+		 UBlockCode::UBLOCK_HIRAGANA,
+		 UBlockCode::UBLOCK_KATAKANA,
+		 UBlockCode::UBLOCK_KATAKANA_PHONETIC_EXTENSIONS,
+		 UBlockCode::UBLOCK_ENCLOSED_CJK_LETTERS_AND_MONTHS,
+		 UBlockCode::UBLOCK_HANGUL_COMPATIBILITY_JAMO,
+		 UBlockCode::UBLOCK_HANGUL_JAMO,
+		 UBlockCode::UBLOCK_HANGUL_JAMO_EXTENDED_A,
+		 UBlockCode::UBLOCK_HANGUL_JAMO_EXTENDED_B,
+		 UBlockCode::UBLOCK_HANGUL_SYLLABLES,
+	 }},
+	{UI::FontSets::Selector::kMyanmar, {
+		 UBlockCode::UBLOCK_MYANMAR,
+		 UBlockCode::UBLOCK_MYANMAR_EXTENDED_A,
+	 }},
+	{UI::FontSets::Selector::kSinhala, {
+		 UBlockCode::UBLOCK_SINHALA,
+	 }},
+};
+
+const std::set<UI::FontSets::Selector> kRTLScripts = {
+	// Add "mandaic", "nko", "samaritan", "syriac", "thaana" if we get these languages.
+	UI::FontSets::Selector::kArabic,
+	UI::FontSets::Selector::kDevanagari,
+	UI::FontSets::Selector::kHebrew
 };
 
 // http://unicode.org/faq/blocks_ranges.html
 // http://unicode-table.com/en/blocks/
 // TODO(GunChleoc): We might need some more here - let's see how this goes.
-const std::map<std::string, std::set<UBlockCode>> kRTLCodeBlocks = {
-	{"arabic", {
+const std::map<UI::FontSets::Selector, std::set<UBlockCode>> kRTLCodeBlocks = {
+	{UI::FontSets::Selector::kArabic, {
 		 UBlockCode::UBLOCK_ARABIC,
 		 UBlockCode::UBLOCK_ARABIC_SUPPLEMENT,
 		 UBlockCode::UBLOCK_ARABIC_EXTENDED_A,
@@ -457,13 +476,15 @@ const std::map<std::string, std::set<UBlockCode>> kRTLCodeBlocks = {
 		 UBlockCode::UBLOCK_ARABIC_PRESENTATION_FORMS_B,
 		 UBlockCode::UBLOCK_ARABIC_MATHEMATICAL_ALPHABETIC_SYMBOLS,
 	 }},
-	{"devanagari", {
+	{UI::FontSets::Selector::kDevanagari, {
 		 UBlockCode::UBLOCK_DEVANAGARI,
 		 UBlockCode::UBLOCK_DEVANAGARI_EXTENDED,
+		 UBlockCode::UBLOCK_VEDIC_EXTENSIONS,
 	 }},
-	{"hebrew", {
+	{UI::FontSets::Selector::kHebrew, {
 		 UBlockCode::UBLOCK_HEBREW,
 	 }},
+	/* Activate when we get any of these languages
 	{"mandaic", {
 		 UBlockCode::UBLOCK_MANDAIC,
 	 }},
@@ -479,12 +500,24 @@ const std::map<std::string, std::set<UBlockCode>> kRTLCodeBlocks = {
 	{"thaana", {
 		 UBlockCode::UBLOCK_THAANA,
 	 }},
+		 */
 };
 
-// True if 'c' is included in one of the kRTLCodeBlocks.
+// True if the character is in one of the script's code blocks
+bool is_script_character(UChar32 c, UI::FontSets::Selector script) {
+	UBlockCode code = ublock_getCode(c);
+	if (kRTLCodeBlocks.count(script) == 1 && kRTLCodeBlocks.at(script).count(code) == 1) {
+		return true;
+	}
+	if (kLTRCodeBlocks.count(script) == 1 && kLTRCodeBlocks.at(script).count(code) == 1) {
+		return true;
+	}
+	return false;
+}
+
 bool is_rtl_character(UChar32 c) {
 	UBlockCode code = ublock_getCode(c);
-	for (std::string script : kRTLScripts) {
+	for (UI::FontSets::Selector script : kRTLScripts) {
 		assert(kRTLCodeBlocks.count(script) == 1);
 		if ((kRTLCodeBlocks.at(script).count(code) == 1)) {
 			return true;
@@ -492,27 +525,6 @@ bool is_rtl_character(UChar32 c) {
 	}
 	return false;
 }
-
-bool is_arabic_character(UChar32 c) {
-	UBlockCode code = ublock_getCode(c);
-	assert(kRTLCodeBlocks.count("arabic") == 1);
-	return (kRTLCodeBlocks.at("arabic").count(code) == 1);
-}
-
-
-// True if a string contains a character from an Arabic code block
-bool has_arabic_character(const char* input) {
-	bool result = false;
-	const icu::UnicodeString parseme(input);
-	for (int32_t i = 0; i < parseme.length(); ++i) {
-		if (is_arabic_character(parseme.char32At(i))) {
-			result = true;
-			break;
-		}
-	}
-	return result;
-}
-
 
 // Helper function for make_ligatures.
 // Arabic word characters have 4 forms to connect to each other:
@@ -557,40 +569,36 @@ UChar find_arabic_letter_form(UChar c, UChar previous, UChar next) {
 namespace i18n {
 
 
-// True if one of te first 'limit' characters in 'input' as UnicodeString is an RTL character
-// according to is_rtl_character(UChar32 c)
+// True if a string does not contain Latin characters.
+// Checks for the first 'limit' characters maximum.
 bool has_rtl_character(const char* input, int32_t limit) {
-	bool result = false;
-	const icu::UnicodeString parseme(input);
+	const icu::UnicodeString parseme(input, "UTF-8");
 	for (int32_t i = 0; i < parseme.length() && i < limit; ++i) {
 		if (is_rtl_character(parseme.char32At(i))) {
-			result = true;
-			break;
+			return true;
 		}
 	}
-	return result;
+	return false;
 }
 
 // True if the strings do not contain Latin characters
 bool has_rtl_character(std::vector<std::string> input) {
-	bool result = false;
 	for (const std::string& string: input) {
 		if (has_rtl_character(string.c_str())) {
-			result = true;
-			break;
+			return true;
 		}
 	}
-	return result;
+	return false;
 }
 
 
 // Contracts glyphs into their ligatures
 std::string make_ligatures(const char* input) {
 	// We only have defined ligatures for Arabic at the moment.
-	if (!has_arabic_character(input)) {
+	if (!has_script_character(input, UI::FontSets::Selector::kArabic)) {
 		return input;
 	}
-	const icu::UnicodeString parseme(input);
+	const icu::UnicodeString parseme(input, "UTF-8");
 	icu::UnicodeString queue;
 	UChar not_a_character = 0xFFFF;
 	UChar next = not_a_character;
@@ -670,7 +678,7 @@ std::string make_ligatures(const char* input) {
 // BiDi support for RTL languages
 // This turns the logical order of the glyphs into the display order.
 std::string line2bidi(const char* input) {
-	const icu::UnicodeString parseme(input);
+	const icu::UnicodeString parseme(input, "UTF-8");
 	icu::UnicodeString stack;
 	icu::UnicodeString temp_stack;
 	UChar not_a_character = 0xFFFF;
@@ -724,22 +732,41 @@ std::string icuchar2string(const UChar& convertme) {
 	return icustring2string(temp);
 }
 
-// True if a string contains a character from a CJK code block
-bool has_cjk_character(const char* input) {
-	bool result = false;
-	const icu::UnicodeString parseme(input);
+// True if a string contains a character from the script's code blocks
+bool has_script_character(const char* input, UI::FontSets::Selector script) {
+	const icu::UnicodeString parseme(input, "UTF-8");
 	for (int32_t i = 0; i < parseme.length(); ++i) {
-		if (is_cjk_character(parseme.char32At(i))) {
-			result = true;
-			break;
+		if (is_script_character(parseme.char32At(i), script)) {
+			return true;
 		}
 	}
-	return result;
+	return false;
+}
+
+
+UI::FontSet const * find_fontset(const char* word, const UI::FontSets& fontsets) {
+	UI::FontSets::Selector selector;
+	if (has_script_character(word, UI::FontSets::Selector::kArabic)) {
+		selector = UI::FontSets::Selector::kArabic;
+	} else if (has_script_character(word, UI::FontSets::Selector::kCJK)) {
+		selector = UI::FontSets::Selector::kCJK;
+	} else if (has_script_character(word, UI::FontSets::Selector::kDevanagari)) {
+		selector = UI::FontSets::Selector::kDevanagari;
+	} else if (has_script_character(word, UI::FontSets::Selector::kHebrew)) {
+		selector = UI::FontSets::Selector::kHebrew;
+	} else if (has_script_character(word, UI::FontSets::Selector::kMyanmar)) {
+		selector = UI::FontSets::Selector::kMyanmar;
+	} else if (has_script_character(word, UI::FontSets::Selector::kSinhala)) {
+		selector = UI::FontSets::Selector::kSinhala;
+	} else {
+		selector = UI::FontSets::Selector::kDefault;
+	}
+	return fontsets.get_fontset(selector);
 }
 
 //  Split a string of CJK characters into units that can have line breaks between them.
 std::vector<std::string> split_cjk_word(const char* input) {
-	const icu::UnicodeString parseme(input);
+	const icu::UnicodeString parseme(input, "UTF-8");
 	std::vector<std::string> result;
 	for (int i = 0; i < parseme.length(); ++i) {
 		icu::UnicodeString temp;

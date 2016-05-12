@@ -55,10 +55,10 @@ struct MapObjectDebugPanel
 	void log(std::string str) override;
 
 private:
-	const Widelands::EditorGameBase & m_egbase;
-	Widelands::ObjectPointer         m_object;
+	const Widelands::EditorGameBase& egbase_;
+	Widelands::ObjectPointer object_;
 
-	UI::MultilineTextarea        m_log;
+	UI::MultilineTextarea log_;
 };
 
 
@@ -68,9 +68,9 @@ MapObjectDebugPanel::MapObjectDebugPanel
 	 Widelands::MapObject       & obj)
 :
 UI::Panel(&parent, 0, 0, 350, 200),
-m_egbase (egbase),
-m_object (&obj),
-m_log    (this, 0, 0, 350, 200, "", UI::Align::kLeft, UI::MultilineTextarea::ScrollMode::kScrollLog)
+egbase_ (egbase),
+object_ (&obj),
+log_    (this, 0, 0, 350, 200, "", UI::Align::kLeft, UI::MultilineTextarea::ScrollMode::kScrollLog)
 {
 	obj.set_logsink(this);
 }
@@ -78,7 +78,7 @@ m_log    (this, 0, 0, 350, 200, "", UI::Align::kLeft, UI::MultilineTextarea::Scr
 
 MapObjectDebugPanel::~MapObjectDebugPanel()
 {
-	if (Widelands::MapObject * const obj = m_object.get(m_egbase))
+	if (Widelands::MapObject * const obj = object_.get(egbase_))
 		if (obj->get_logsink() == this)
 			obj->set_logsink(nullptr);
 }
@@ -91,7 +91,7 @@ Append the string to the log textarea.
 */
 void MapObjectDebugPanel::log(std::string str)
 {
-	m_log.set_text((m_log.get_text() + str).c_str());
+	log_.set_text((log_.get_text() + str).c_str());
 }
 
 
@@ -138,10 +138,10 @@ struct MapObjectDebugWindow : public UI::Window {
 	void think() override;
 
 private:
-	bool                  m_log_general_info;
-	Widelands::ObjectPointer m_object;
-	uint32_t              m_serial;
-	UI::TabPanel         m_tabs;
+	bool log_general_info_;
+	Widelands::ObjectPointer object_;
+	uint32_t serial_;
+	UI::TabPanel tabs_;
 };
 
 
@@ -149,18 +149,18 @@ MapObjectDebugWindow::MapObjectDebugWindow
 	(InteractiveBase & parent, Widelands::MapObject & obj)
 	:
 	UI::Window        (&parent, "map_object_debug", 0, 0, 100, 100, ""),
-	m_log_general_info(true),
-	m_object          (&obj),
-	m_tabs
+	log_general_info_(true),
+	object_          (&obj),
+	tabs_
 		(this, 0, 0,
-		 g_gr->images().get("images/ui_basic/but1.png"))
+		 g_gr->images().get("images/ui_basic/but4.png"))
 {
-	m_serial = obj.serial();
-	set_title(std::to_string(m_serial));
+	serial_ = obj.serial();
+	set_title(std::to_string(serial_));
 
-	obj.create_debug_panels(parent.egbase(), m_tabs);
+	obj.create_debug_panels(parent.egbase(), tabs_);
 
-	set_center_panel(&m_tabs);
+	set_center_panel(&tabs_);
 }
 
 
@@ -172,14 +172,14 @@ Remove self when the object disappears.
 void MapObjectDebugWindow::think()
 {
 	Widelands::EditorGameBase & egbase = ibase().egbase();
-	if (Widelands::MapObject * const obj = m_object.get(egbase)) {
-		if (m_log_general_info)  {
+	if (Widelands::MapObject * const obj = object_.get(egbase)) {
+		if (log_general_info_)  {
 			obj->log_general_info(egbase);
-			m_log_general_info = false;
+			log_general_info_ = false;
 		}
 		UI::Window::think();
 	} else {
-		set_title((boost::format("DEAD: %u") % m_serial).str());
+		set_title((boost::format("DEAD: %u") % serial_).str());
 	}
 
 }
@@ -220,12 +220,12 @@ struct FieldDebugWindow : public UI::Window {
 	void open_bob(uint32_t);
 
 private:
-	Widelands::Map             & m_map;
-	Widelands::FCoords const     m_coords;
+	Widelands::Map& map_;
+	Widelands::FCoords const coords_;
 
-	UI::MultilineTextarea       m_ui_field;
-	UI::Button m_ui_immovable;
-	UI::Listselect<intptr_t>    m_ui_bobs;
+	UI::MultilineTextarea ui_field_;
+	UI::Button ui_immovable_;
+	UI::Listselect<intptr_t> ui_bobs_;
 };
 
 
@@ -233,29 +233,29 @@ FieldDebugWindow::FieldDebugWindow
 	(InteractiveBase & parent, Widelands::Coords const coords)
 :
 	UI::Window(&parent, "field_debug", 0, 60, 300, 400, _("Debug Field")),
-	m_map     (parent.egbase().map()),
-	m_coords  (m_map.get_fcoords(coords)),
+	map_     (parent.egbase().map()),
+	coords_  (map_.get_fcoords(coords)),
 
 	//  setup child panels
-	m_ui_field(this, 0, 0, 300, 280, ""),
+	ui_field_(this, 0, 0, 300, 280, ""),
 
-	m_ui_immovable
+	ui_immovable_
 		(this, "immovable",
 		 0, 280, 300, 24,
-		 g_gr->images().get("images/ui_basic/but0.png"),
+		 g_gr->images().get("images/ui_basic/but4.png"),
 		 ""),
 
-	m_ui_bobs(this, 0, 304, 300, 96)
+	ui_bobs_(this, 0, 304, 300, 96)
 {
-	m_ui_immovable.sigclicked.connect(boost::bind(&FieldDebugWindow::open_immovable, this));
+	ui_immovable_.sigclicked.connect(boost::bind(&FieldDebugWindow::open_immovable, this));
 
-	assert(0 <= m_coords.x);
-	assert(m_coords.x < m_map.get_width());
-	assert(0 <= m_coords.y);
-	assert(m_coords.y < m_map.get_height());
-	assert(&m_map[0] <= m_coords.field);
-	assert             (m_coords.field < &m_map[0] + m_map.max_index());
-	m_ui_bobs.selected.connect(boost::bind(&FieldDebugWindow::open_bob, this, _1));
+	assert(0 <= coords_.x);
+	assert(coords_.x < map_.get_width());
+	assert(0 <= coords_.y);
+	assert(coords_.y < map_.get_height());
+	assert(&map_[0] <= coords_.field);
+	assert             (coords_.field < &map_[0] + map_.max_index());
+	ui_bobs_.selected.connect(boost::bind(&FieldDebugWindow::open_bob, this, _1));
 }
 
 
@@ -276,15 +276,15 @@ void FieldDebugWindow::think()
 		dynamic_cast<const InteractiveBase&>(*get_parent())
 		.egbase();
 	{
-		Widelands::PlayerNumber const owner = m_coords.field->get_owned_by();
+		Widelands::PlayerNumber const owner = coords_.field->get_owned_by();
 		str += (boost::format("(%i, %i)\nheight: %u\nowner: %u\n")
-				  % m_coords.x % m_coords.y
-				  % static_cast<unsigned int>(m_coords.field->get_height())
+				  % coords_.x % coords_.y
+				  % static_cast<unsigned int>(coords_.field->get_height())
 				  % static_cast<unsigned int>(owner)).str();
 
 		if (owner) {
 			Widelands::NodeCaps const buildcaps =
-				egbase.player(owner).get_buildcaps(m_coords);
+				egbase.player(owner).get_buildcaps(coords_);
 			if      (buildcaps & Widelands::BUILDCAPS_BIG)
 				str += "  can build big building\n";
 			else if (buildcaps & Widelands::BUILDCAPS_MEDIUM)
@@ -299,12 +299,12 @@ void FieldDebugWindow::think()
 				str += "  can build port\n";
 		}
 	}
-	if (m_coords.field->nodecaps() & Widelands::MOVECAPS_WALK)
+	if (coords_.field->nodecaps() & Widelands::MOVECAPS_WALK)
 		str += "is walkable\n";
-	if (m_coords.field->nodecaps() & Widelands::MOVECAPS_SWIM)
+	if (coords_.field->nodecaps() & Widelands::MOVECAPS_SWIM)
 		str += "is swimable\n";
-	Widelands::MapIndex const i = m_coords.field - &m_map[0];
-	Widelands::PlayerNumber const nr_players = m_map.get_nrplayers();
+	Widelands::MapIndex const i = coords_.field - &map_[0];
+	Widelands::PlayerNumber const nr_players = map_.get_nrplayers();
 	iterate_players_existing_const(plnum, nr_players, egbase, player) {
 		const Widelands::Player::Field & player_field = player->fields()[i];
 		str += (boost::format("Player %u:\n") % static_cast<unsigned int>(plnum)).str();
@@ -357,43 +357,45 @@ void FieldDebugWindow::think()
 		}
 	}
 	{
-		const Widelands::DescriptionIndex ridx = m_coords.field->get_resources();
+		const Widelands::DescriptionIndex ridx = coords_.field->get_resources();
 
 		if (ridx == Widelands::kNoResource) {
 			str += "Resource: None\n";
 		} else {
-			const int ramount = m_coords.field->get_resources_amount();
-			const int initial_amount = m_coords.field->get_initial_res_amount();
+			const Widelands::ResourceAmount ramount = coords_.field->get_resources_amount();
+			const Widelands::ResourceAmount initial_amount = coords_.field->get_initial_res_amount();
 
 			str += (boost::format("Resource: %s\n")
 					  % ibase().egbase().world().get_resource(ridx)->name().c_str()).str();
 
-			str += (boost::format("  Amount: %i/%i\n") % ramount % initial_amount).str();
+			str += (boost::format("  Amount: %i/%i\n")
+					  % static_cast<unsigned int>(ramount)
+					  % static_cast<unsigned int>(initial_amount)).str();
 		}
 	}
 
-	m_ui_field.set_text(str.c_str());
+	ui_field_.set_text(str.c_str());
 
 	// Immovable information
-	if (Widelands::BaseImmovable * const imm = m_coords.field->get_immovable())
+	if (Widelands::BaseImmovable * const imm = coords_.field->get_immovable())
 	{
-		m_ui_immovable.set_title((boost::format("%s (%u)")
+		ui_immovable_.set_title((boost::format("%s (%u)")
 										  % imm->descr().name().c_str()
 										  % imm->serial()).str());
-		m_ui_immovable.set_enabled(true);
+		ui_immovable_.set_enabled(true);
 	} else {
-		m_ui_immovable.set_title("no immovable");
-		m_ui_immovable.set_enabled(false);
+		ui_immovable_.set_title("no immovable");
+		ui_immovable_.set_enabled(false);
 	}
 
 	// Bobs information
 	std::vector<Widelands::Bob *> bobs;
-	m_map.find_bobs(Widelands::Area<Widelands::FCoords>(m_coords, 0), &bobs);
+	map_.find_bobs(Widelands::Area<Widelands::FCoords>(coords_, 0), &bobs);
 
 	// Do not clear the list. Instead parse all bobs and sync lists
-	for (uint32_t idx = 0; idx < m_ui_bobs.size(); idx++) {
+	for (uint32_t idx = 0; idx < ui_bobs_.size(); idx++) {
 		Widelands::MapObject* mo =
-			ibase().egbase().objects().get_object(m_ui_bobs[idx]);
+			ibase().egbase().objects().get_object(ui_bobs_[idx]);
 		bool toremove = false;
 		std::vector<Widelands::Bob *>::iterator removeIt;
 		// Nested loop :(
@@ -416,12 +418,12 @@ void FieldDebugWindow::think()
 		}
 		// Remove from our list if its not in the bobs
 		// list, or if it doesn't seem to exist anymore
-		m_ui_bobs.remove(idx);
-		idx--; //reiter the same index
+		ui_bobs_.remove(idx);
+		idx--; // reiter the same index
 	}
 	// Add remaining
 	for (const Widelands::Bob * temp_bob : bobs) {
-		m_ui_bobs.add(
+		ui_bobs_.add(
 			(boost::format("%s (%u)")
 				% temp_bob->descr().name()
 				% temp_bob->serial()).str(),
@@ -437,7 +439,7 @@ Open the debug window for the immovable on our position.
 */
 void FieldDebugWindow::open_immovable()
 {
-	if (Widelands::BaseImmovable * const imm = m_coords.field->get_immovable())
+	if (Widelands::BaseImmovable * const imm = coords_.field->get_immovable())
 		show_mapobject_debug(ibase(), *imm);
 }
 
@@ -451,7 +453,7 @@ void FieldDebugWindow::open_bob(const uint32_t index) {
 	if (index != UI::Listselect<intptr_t>::no_selection_index())
 		if
 			(Widelands::MapObject * const object =
-			 	ibase().egbase().objects().get_object(m_ui_bobs.get_selected()))
+				ibase().egbase().objects().get_object(ui_bobs_.get_selected()))
 			show_mapobject_debug(ibase(), *object);
 }
 

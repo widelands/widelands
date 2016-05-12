@@ -30,9 +30,11 @@ MapData::MapData() : authors(""), nrplayers(0), width(0), height(0),
 		MapData() {
 		i18n::Textdomain td("maps");
 		filename = init_filename;
-		name = map.get_name();
-		localized_name = name.empty() ? "" : _(name);
-		authors = MapAuthorData(map.get_author());
+		name = map.get_name().empty() ? _("No Name") : map.get_name();
+		localized_name = _(name);
+		// Localizing this, because some author fields now have "edited by" text.
+		const std::string& author = map.get_author();
+		authors = MapAuthorData(author.empty() ? _("No Author") : _(author));
 		description = map.get_description().empty() ? "" : _(map.get_description());
 		hint = map.get_hint().empty() ? "" : _(map.get_hint());
 		nrplayers = map.get_nrplayers();
@@ -125,7 +127,7 @@ MapData MapData::create_parent_dir(const std::string& current_dir) {
 // static
 std::string MapData::parent_name() {
 	/** TRANSLATORS: Parent directory/folder */
-	return (boost::format("\\<%s\\>") % _("parent")).str();
+	return (boost::format("<%s>") % _("parent")).str();
 }
 
 // static

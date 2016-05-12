@@ -360,13 +360,13 @@ void Tribes::postload() {
 
 		// Add consumers and producers to wares.
 		if (upcast(ProductionSiteDescr, de, &building_descr)) {
-			for (const WareAmount& ware_amount : de->inputs()) {
+			for (const auto& ware_amount : de->inputs()) {
 				wares_->get_mutable(ware_amount.first)->add_consumer(i);
 			}
 			for (const DescriptionIndex& wareindex : de->output_ware_types()) {
 				wares_->get_mutable(wareindex)->add_producer(i);
 			}
-			for (const WareAmount& job : de->working_positions()) {
+			for (const auto& job : de->working_positions()) {
 				workers_->get_mutable(job.first)->add_employer(i);
 			}
 		}

@@ -34,10 +34,11 @@ Window(&parent, "login_box", 0, 0, 500, 220, _("Metaserver login"))
 	int32_t margin = 10;
 
 	ta_nickname = new UI::Textarea(this, margin, margin, _("Nickname:"));
-	eb_nickname = new UI::EditBox(this, 150, margin, 330, g_gr->images().get("images/ui_basic/but2.png"));
+	eb_nickname =
+			new UI::EditBox(this, 150, margin, 330, 20, 2, g_gr->images().get("images/ui_basic/but2.png"));
 
 	ta_password = new UI::Textarea(this, margin, 40, _("Password:"));
-	eb_password = new UI::EditBox(this, 150, 40, 330, g_gr->images().get("images/ui_basic/but2.png"));
+	eb_password = new UI::EditBox(this, 150, 40, 330, 20, 2, g_gr->images().get("images/ui_basic/but2.png"));
 
 	pwd_warning =
 		new UI::MultilineTextarea
@@ -55,7 +56,7 @@ Window(&parent, "login_box", 0, 0, 500, 220, _("Metaserver login"))
 
 	UI::Button * loginbtn = new UI::Button
 		(this, "login",
-		 UI::g_fh1->fontset().is_rtl() ?
+		 UI::g_fh1->fontset()->is_rtl() ?
 			 (get_inner_w() / 2 - 200) / 2 :
 			 (get_inner_w() / 2 - 200) / 2 + get_inner_w() / 2,
 		 get_inner_h() - 20 - margin,
@@ -65,7 +66,7 @@ Window(&parent, "login_box", 0, 0, 500, 220, _("Metaserver login"))
 	loginbtn->sigclicked.connect(boost::bind(&LoginBox::clicked_ok, boost::ref(*this)));
 	UI::Button * cancelbtn = new UI::Button
 		(this, "cancel",
-		 UI::g_fh1->fontset().is_rtl() ?
+		 UI::g_fh1->fontset()->is_rtl() ?
 			 (get_inner_w() / 2 - 200) / 2 + get_inner_w() / 2 :
 			 (get_inner_w() / 2 - 200) / 2,
 		 loginbtn->get_y(), 200, 20,

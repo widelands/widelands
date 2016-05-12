@@ -234,7 +234,7 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG
 	// Y coordinate will be set later, when we know how high this box will get.
 	suggested_teams_box_ = new UI::SuggestedTeamsBox
 									(this, right_column_x_, 0, UI::Box::Vertical,
-									 padding_, indent_, label_height_,
+									 padding_, indent_,
 									 get_w() - right_column_x_, 4 * label_height_);
 }
 
@@ -318,7 +318,7 @@ void FullscreenMenuLaunchMPG::win_condition_load() {
 			std::unique_ptr<Widelands::MapLoader> ml =
 					map.get_correct_loader(settings_->settings().mapfilename);
 			ml->preload_map(true);
-			for (const std::string map_tag : t->get_table("map_tags")->array_entries<std::string>()) {
+			for (const std::string& map_tag : t->get_table("map_tags")->array_entries<std::string>()) {
 				if (!map.has_tag(map_tag)) {
 					is_usable = false;
 					break;
@@ -492,11 +492,11 @@ void FullscreenMenuLaunchMPG::refresh()
 				if (settings.scenario)
 					set_scenario_values();
 			}
-			//Try to translate the map name.
-			//This will work on every official map as expected
-			//and 'fail silently' (not find a translation) for already translated campaign map names.
-			//It will also translate 'false-positively' on any user-made map which shares a name with
-			//the official maps, but this should not be a problem to worry about.
+			// Try to translate the map name.
+			// This will work on every official map as expected
+			// and 'fail silently' (not find a translation) for already translated campaign map names.
+			// It will also translate 'false-positively' on any user-made map which shares a name with
+			// the official maps, but this should not be a problem to worry about.
 			i18n::Textdomain td("maps");
 			mapname_.set_text(_(settings.mapname));
 		}
@@ -581,7 +581,7 @@ void FullscreenMenuLaunchMPG::load_previous_playerdata()
 		infotext += (boost::format(_("Player %u")) % static_cast<unsigned int>(i)).str();
 		if (player_save_tribe[i - 1].empty()) {
 			std::string closed_string =
-				(boost::format("\\<%s\\>") % _("closed")).str();
+				(boost::format("<%s>") % _("closed")).str();
 			infotext += ":\n    ";
 			infotext += closed_string;
 			// Close the player
@@ -684,7 +684,7 @@ void FullscreenMenuLaunchMPG::help_clicked() {
 	if (help_) {
 		help_->set_visible(true);
 	} else {
-		help_.reset(new UI::FullscreenHelpWindow(this, lua_, "scripting/widelands/multiplayer_help.lua",
+		help_.reset(new UI::FullscreenHelpWindow(this, lua_, "txts/help/multiplayer_help.lua",
 																/** TRANSLATORS: This is a heading for a help window */
 																_("Multiplayer Game Setup")));
 	}

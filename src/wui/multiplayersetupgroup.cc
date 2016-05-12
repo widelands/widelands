@@ -78,7 +78,7 @@ struct MultiPlayerClientGroup : public UI::Box {
 	{
 		set_size(w, h);
 		name = new UI::Textarea
-			(this, 0, 0, w - h - UI::Scrollbar::Size * 11 / 5, h);
+			(this, 0, 0, w - h - UI::Scrollbar::kSize * 11 / 5, h);
 		add(name, UI::Align::kHCenter);
 		// Either Button if changeable OR text if not
 		if (id == settings->settings().usernum) { // Our Client
@@ -124,10 +124,7 @@ struct MultiPlayerClientGroup : public UI::Box {
 	void refresh() {
 		UserSettings us = s->settings().users.at(id_);
 		if (us.position == UserSettings::not_connected()) {
-			std::string free_i18n = _("free");
-			std::string free_text =
-				(boost::format("\\<%s\\>") % free_i18n).str();
-			name->set_text(free_text);
+			name->set_text((boost::format("<%s>") % _("free")).str());
 			if (type)
 				type->set_visible(false);
 			else
@@ -324,7 +321,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 					} else {
 						const ComputerPlayer::Implementation* impl =
 								ComputerPlayer::get_implementation(player_setting.ai);
-						title = impl->descname;
+						title = _(impl->descname);
 						pic = impl->icon_filename;
 					}
 				}
@@ -377,6 +374,8 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 			for (const TribeBasicInfo& tribeinfo : settings.tribes) {
 				if (tribeinfo.name == player_setting.tribe) {
 					init->set_title(_(tribeinfo.initializations.at(player_setting.initialization_index).descname));
+					init->set_tooltip(
+								_(tribeinfo.initializations.at(player_setting.initialization_index).tooltip));
 					break;
 				}
 			}
@@ -415,15 +414,15 @@ buth_(buth)
 	labels.push_back
 		(new UI::Textarea
 			(this,
-			 UI::Scrollbar::Size * 6 / 5, buth / 3,
-			 w / 3 - buth - UI::Scrollbar::Size * 2, buth));
+			 UI::Scrollbar::kSize * 6 / 5, buth / 3,
+			 w / 3 - buth - UI::Scrollbar::kSize * 2, buth));
 	labels.back()->set_text(_("Client name"));
 	labels.back()->set_fontsize(small_font);
 
 	labels.push_back
 		(new UI::Textarea
 			(this,
-			 w / 3 - buth - UI::Scrollbar::Size * 6 / 5, buth / 3,
+			 w / 3 - buth - UI::Scrollbar::kSize * 6 / 5, buth / 3,
 			 buth * 2, buth));
 	labels.back()->set_text(_("Role"));
 	labels.back()->set_fontsize(small_font);

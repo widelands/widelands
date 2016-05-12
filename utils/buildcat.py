@@ -36,23 +36,22 @@ MAINPOTS = [
         "../../data/campaigns/*/elemental"
     ] ),
     ( "texts/texts", ["../../data/txts/*.lua",
-                  "../../data/txts/tips/*.tip"] ),
+        "../../data/txts/*/*.lua",
+        "../../data/txts/tips/*.tip"] ),
     ( "widelands/widelands", [
-                    "../../src/wlapplication.cc",
-                    "../../src/*/*.cc",
-                    "../../src/*/*/*.cc",
-                    "../../src/*/*/*/*.cc",
-                    "../../src/*/*/*/*/*.cc",
-                    "../../src/*/*/*/*/*/*.cc",
-                    "../../src/wlapplication.h",
-                    "../../src/*/*.h",
-                    "../../src/*/*/*.h",
-                    "../../src/*/*/*/*.h",
-                    "../../src/*/*/*/*/*.h",
-                    "../../src/*/*/*/*/*/*.h",
-                    "../../data/scripting/*.lua",
-                    "../../data/scripting/editor/*.lua",
-                    "../../data/scripting/widelands/*.lua",
+        "../../src/wlapplication.cc",
+        "../../src/*/*.cc",
+        "../../src/*/*/*.cc",
+        "../../src/*/*/*/*.cc",
+        "../../src/*/*/*/*/*.cc",
+        "../../src/*/*/*/*/*/*.cc",
+        "../../src/wlapplication.h",
+        "../../src/*/*.h",
+        "../../src/*/*/*.h",
+        "../../src/*/*/*/*.h",
+        "../../src/*/*/*/*/*.h",
+        "../../src/*/*/*/*/*/*.h",
+        "../../data/scripting/*.lua",
     ] ),
     ( "widelands_console/widelands_console", [
                     "../../src/wlapplication_messages.cc",
@@ -60,7 +59,6 @@ MAINPOTS = [
     ] ),
     ( "win_conditions/win_conditions", [
         "../../data/scripting/win_conditions/*.lua",
-        "../../data/scripting/win_condition_texts.lua",
     ]),
     ("world/world", [
         "../../data/world/*.lua",
@@ -79,7 +77,6 @@ MAINPOTS = [
         "../../data/tribes/*/*/*/*/init.lua",
         "../../data/tribes/*/*/*/*/*/init.lua",
     ]),
-
     ("tribes_encyclopedia/tribes_encyclopedia", [
         "../../data/tribes/scripting/help/*.lua",
         "../../data/tribes/*/helptexts.lua",
@@ -88,6 +85,9 @@ MAINPOTS = [
         "../../data/tribes/*/*/*/*/helptexts.lua",
         "../../data/tribes/*/*/*/*/*/helptexts.lua",
     ]),
+    ( "widelands_editor/widelands_editor", [
+        "../../data/scripting/editor/*.lua",
+    ] ),
 ]
 
 
@@ -140,7 +140,7 @@ LUAXGETTEXTOPTS+=" --keyword=npgettext:1c,2,3 --flag=npgettext:2:pass-lua-format
 LUAXGETTEXTOPTS+=" --language=Lua --from-code=UTF-8 -F -c\" TRANSLATORS:\""
 
 time_now = gmtime()
-# This is the header used for Lua+conf potfiles.
+# This is the header used for POT files.
 # Set it to something sensible, as much as is possible here.
 HEAD =  "# Widelands PATH/TO/FILE.PO\n"
 HEAD += "# Copyright (C) 2005-" + strftime("%Y", time_now) + " Widelands Development Team\n"
@@ -159,6 +159,9 @@ HEAD += "\"Content-Type: text/plain; charset=UTF-8\\n\"\n"
 HEAD += "\"Content-Transfer-Encoding: 8bit\\n\"\n"
 HEAD += "\n"
 
+class BuildcatError(Exception):
+    pass
+
 def are_we_in_root_directory():
     """Make sure we are called in the root directory"""
     if (not os.path.isdir("po")):
@@ -169,14 +172,14 @@ def are_we_in_root_directory():
         sys.exit(1)
 
 
-def do_makedirs( dirs ):
+def do_makedirs(dirs):
     """Create subdirectories. Ignore errors"""
     try:
         os.makedirs( dirs )
     except:
         pass
 
-def pot_modify_header( potfile_in, potfile_out, header ):
+def pot_modify_header(potfile_in, potfile_out, header):
     """
     Modify the header of a translation catalog read from potfile_in to
     the given header and write out the modified catalog to potfile_out.
@@ -225,16 +228,28 @@ def pot_modify_header( potfile_in, potfile_out, header ):
 
         return True
 
+def run_xgettext(infiles, outfile, opts):
+    xgettext = subprocess.Popen("xgettext %s --files-from=- --output=\"%s\"" % \
+        (opts, outfile), shell=True, stdin=subprocess.PIPE, universal_newlines=True)
+    try:
+        for fname in infiles:
+            xgettext.stdin.write(os.path.normpath(fname) + "\n")
+        xgettext.stdin.close()
+    except IOError as err_msg:
+        raise BuildcatError("Failed to call xgettext: %s" % err_msg)
+
+    xgettext_status = xgettext.wait()
+    if (xgettext_status != 0):
+        raise BuildcatError("xgettext exited with errorcode %i" % xgettext_status)
+
 def run_msguniq(potfile):
     msguniq_rv = os.system("msguniq \"%s\" -F --output-file=\"%s\"" % (potfile, potfile))
     if (msguniq_rv):
-        sys.stderr.write("msguniq exited with errorcode %i\n" % msguniq_rv)
-        return False
-    return True
+        raise BuildcatError("msguniq exited with errorcode %i" % msguniq_rv)
 
-def do_compile( potfile, srcfiles ):
+def do_compile(potfile, srcfiles):
     """
-    Search Lua and conf files given in srcfiles for translatable strings.
+    Search C++, Lua and conf files given in srcfiles for translatable strings.
     Merge the results and write out the corresponding pot file.
     """
     files = []
@@ -242,29 +257,24 @@ def do_compile( potfile, srcfiles ):
         files += glob(i)
     files = set(files)
 
+    cpp_files = set([ f for f in files if
+        os.path.splitext(f)[-1].lower() == '.cc' or os.path.splitext(f)[-1].lower() == '.h'])
     lua_files = set([ f for f in files if
         os.path.splitext(f)[-1].lower() == '.lua' ])
-    conf_files = files - lua_files
+    conf_files = files - cpp_files - lua_files
 
     temp_potfile = potfile + ".tmp"
+    if (os.path.exists(temp_potfile)):
+        os.remove(temp_potfile)
 
-    if (os.path.exists(temp_potfile)): os.remove(temp_potfile)
-
-    # Find translatable strings in Lua files using xgettext
-    xgettext = subprocess.Popen("xgettext %s --files-from=- --output=\"%s\"" % \
-        (LUAXGETTEXTOPTS, temp_potfile), shell=True, stdin=subprocess.PIPE, universal_newlines=True)
-    try:
-        for fname in lua_files:
-            xgettext.stdin.write(os.path.normpath(fname) + "\n")
-        xgettext.stdin.close()
-    except IOError as err_msg:
-        sys.stderr.write("Failed to call xgettext: %s\n" % err_msg)
-        return False
-
-    xgettext_status = xgettext.wait()
-    if (xgettext_status != 0):
-        sys.stderr.write("xgettext exited with errorcode %i\n" % xgettext_status)
-        return False
+    # Find translatable strings in C++ and Lua files using xgettext
+    if len(cpp_files) > 0:
+        run_xgettext(cpp_files, temp_potfile, XGETTEXTOPTS)
+    if len(lua_files) > 0:
+        if os.path.exists(temp_potfile):
+            run_xgettext(lua_files, temp_potfile, LUAXGETTEXTOPTS + " --join-existing")
+        else:
+            run_xgettext(lua_files, temp_potfile, LUAXGETTEXTOPTS)
 
     xgettext_found_something_to_translate = os.path.exists(temp_potfile)
 
@@ -281,50 +291,20 @@ def do_compile( potfile, srcfiles ):
         os.remove(temp_potfile)
 
         if not header_fixed:
-            return False
+            raise BuildcatError("Failed to fix header.")
 
         if (conf.found_something_to_translate):
-            # Merge the conf POT with Lua POT
+            # Merge the conf POT with C++/Lua POT
             with open(potfile, "at") as p:
                 p.write("\n" + conf.toString())
 
-            if not run_msguniq(potfile):
-                return False
+            run_msguniq(potfile)
     elif (conf.found_something_to_translate):
         with open(potfile, "wt") as p:
             p.write(HEAD + conf.toString())
 
         # Msguniq is run here only to sort POT entries by file
-        if not run_msguniq(potfile):
-            return False
-
-    return True
-
-
-
-def do_compile_src( potfile, srcfiles ):
-    """
-    Use xgettext for parse the given C++ files in srcfiles. Merge the results
-    and write out the given potfile
-    """
-    # call xgettext and supply source filenames via stdin
-    xgettext = subprocess.Popen("xgettext %s --files-from=- --output=%s" % \
-            (XGETTEXTOPTS, potfile), shell=True, stdin=subprocess.PIPE, universal_newlines=True)
-    try:
-        for one_pattern in srcfiles:
-            # 'normpath' is necessary for windows ('/' vs. '\')
-            # 'glob' handles filename wildcards
-            for one_file in glob(os.path.normpath(one_pattern)):
-                xgettext.stdin.write(one_file + "\n")
-        xgettext.stdin.close()
-    except IOError as err_msg:
-        sys.stderr.write("Failed to call xgettext: %s\n" % err_msg)
-        return False
-
-    xgettext_status = xgettext.wait()
-    if (xgettext_status != 0):
-        sys.stderr.write("xgettext exited with errorcode %i\n" % xgettext_status)
-        return False
+        run_msguniq(potfile)
 
     return True
 
@@ -375,11 +355,7 @@ def do_update_potfiles():
             oldcwd = os.getcwd()
             os.chdir(path)
             potfile = os.path.basename(pot) + '.pot'
-            if pot.startswith('widelands'):
-                # This catalogs can be built with xgettext
-                succ = do_compile_src(potfile , srcfiles )
-            else:
-                succ = do_compile(potfile, srcfiles)
+            succ = do_compile(potfile, srcfiles)
 
             os.chdir(oldcwd)
 
@@ -480,6 +456,10 @@ if __name__ == "__main__":
     are_we_in_root_directory()
 
     # Make sure .pot files are up to date.
-    do_update_potfiles()
+    try:
+        do_update_potfiles()
+    except BuildcatError as err_msg:
+        sys.stderr.write("Error: %s\n" % err_msg);
+        sys.exit(1)
 
     print("")

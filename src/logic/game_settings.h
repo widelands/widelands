@@ -81,8 +81,9 @@ struct GameSettings {
 		multiplayer(false),
 		savegame(false)
 	{
+		std::unique_ptr<LuaInterface> lua(new LuaInterface);
 		std::unique_ptr<LuaTable> win_conditions(
-					(new LuaInterface)->run_script("scripting/win_conditions/init.lua"));
+					lua->run_script("scripting/win_conditions/init.lua"));
 		for (const int key : win_conditions->keys<int>()) {
 			std::string filename = win_conditions->get_string(key);
 			if (g_fs->file_exists(filename)) {

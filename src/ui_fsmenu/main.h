@@ -44,9 +44,7 @@ private:
 	UI::Button   replay;
 	UI::Button   editor;
 	UI::Button   options;
-	UI::Button   readme;
-	UI::Button   license;
-	UI::Button   authors;
+	UI::Button   about;
 	UI::Button   exit;
 	UI::Textarea version;
 	UI::Textarea copyright;

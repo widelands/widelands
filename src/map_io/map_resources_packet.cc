@@ -66,12 +66,13 @@ void MapResourcesPacket::read
 
 			for (uint16_t y = 0; y < map.get_height(); ++y) {
 				for (uint16_t x = 0; x < map.get_width(); ++x) {
-					uint8_t const id           = fr.unsigned_8();
-					uint8_t const found_amount = fr.unsigned_8();
-					uint8_t const amount       = found_amount;
-					uint8_t const start_amount = fr.unsigned_8();
+					DescriptionIndex const id         = fr.unsigned_8();
+					ResourceAmount const found_amount = fr.unsigned_8();
+					ResourceAmount const amount       = found_amount;
+					ResourceAmount const start_amount = fr.unsigned_8();
 
-					uint8_t set_id, set_amount, set_start_amount;
+					DescriptionIndex set_id;
+					ResourceAmount set_amount, set_start_amount;
 					//  if amount is zero, theres nothing here
 					if (!amount) {
 						set_id           = 0;
@@ -135,9 +136,9 @@ void MapResourcesPacket::write
 	for (uint16_t y = 0; y < map.get_height(); ++y) {
 		for (uint16_t x = 0; x < map.get_width(); ++x) {
 			const Field & f = map[Coords(x, y)];
-			int32_t       res          = f.get_resources          ();
-			int32_t const       amount = f.get_resources_amount   ();
-			int32_t const start_amount = f.get_initial_res_amount();
+			DescriptionIndex              res = f.get_resources          ();
+			ResourceAmount const       amount = f.get_resources_amount   ();
+			ResourceAmount const start_amount = f.get_initial_res_amount();
 			if (!amount)
 				res = 0;
 			fw.unsigned_8(res);

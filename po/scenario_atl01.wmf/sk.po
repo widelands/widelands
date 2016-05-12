@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-02-20 12:30+0000\n"
-"PO-Revision-Date: 2016-02-20 14:10+0000\n"
+"POT-Creation-Date: 2016-03-11 07:02+0000\n"
+"PO-Revision-Date: 2016-03-12 16:48+0000\n"
 "Last-Translator: MiroslavR <miroslavr256@gmail.com>\n"
 "Language-Team: Slovak (http://www.transifex.com/widelands/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
@@ -469,9 +469,9 @@ msgid ""
 "May Satul warm you, Jundlina! I agree with what Loftomor proposes. We need a"
 " good supply of building materials for we have to expand our territory "
 "swiftly. I will not feel safe on this island as long as we have not seen all"
-" its shores it. I brought plenty of good men from Atlantis. The military "
-"might is available. We only need some housing to live in."
-msgstr "Nech vás hreje Satul, Jundlína! Súhlasím s Loftomorovým návrhom. Budeme potrebovať dobrú zásobu stavebných materiálov, pretože si musíme rýchlo rozšíriť územie. Na tomto ostrove sa nebudem cítiť v bezpečí, kým nepreskúmame každý jeho breh. Priviedol som so sebou množstvo dobrých mužov z Atlantídy. Vojenská moc je dispozícii. Potrebujeme len nejaký príbytok."
+" its shores. I brought plenty of good men from Atlantis. The military might "
+"is available. We only need some housing to live in."
+msgstr "Nech vás hreje Satul, Jundlína! Súhlasím s Loftomorovým návrhom. Budeme potrebovať dobrú zásobu stavebných materiálov, pretože si musíme rýchlo rozšíriť územie. Na tomto ostrove sa nebudem cítiť v bezpečí, kým nepreskúmame každý jeho breh. Priviedol som so sebou množstvo dobrých mužov z Atlantídy. Vojenská moc je k dispozícii. Potrebujeme len nejaký príbytok."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:207
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:247
@@ -650,9 +650,9 @@ msgstr "Jundlína prikývne"
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:300
 msgid ""
-"I have considered this, Sidolus. I think  it is about time. We will make "
-"this a priority for now. You shall get your industry soon!"
-msgstr "Zvážila som to, Sidolus. Myslím si, že je najvyšší čas. Na teraz to bude našou prioritou. Už čoskoro dostanete svoj priemysel!"
+"I have considered this, Sidolus. I think it is about time. We will make this"
+" a priority for now. You shall get your industry soon!"
+msgstr "Premýšľala som o tom, Sidolus, a myslím si, že je najvyšší čas. Zatiaľ to budeme považovať za prioritu. Už čoskoro dostanete svoj priemysel!"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:307
 msgid "Jundlina Summons Sidolus"
@@ -810,7 +810,7 @@ msgid ""
 "that the ocean is rising quickly. We have to reach higher ground and "
 "evacuate everybody and as much wares as we can from the headquarters up the "
 "mountains. How can we escape?"
-msgstr "Nech nás Satul ochraňuje! Lutas sa k nám stále pokúša dostať. Istý prieskumník ma informoval, že oceán rýchlo stúpa. Musíme sa dostať na vyššie položené miesto a evakuovať všetkých a čo najviac výrobkov zo základne do hôr. Ako len unikneme?"
+msgstr "Kiež nás Satul zachráni! Lutas sa k nám stále pokúša dostať. Istý prieskumník ma informoval, že oceán rýchlo stúpa. Musíme dosiahnuť vyššie položené miesto, potom evakuovať všetkých a preniesť čo najviac výrobkov z ústredia do hôr. Ako len unikneme?"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:404
 msgid "A Young Man Approaches"

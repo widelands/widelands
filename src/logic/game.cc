@@ -71,7 +71,7 @@
 namespace Widelands {
 
 /// Define this to get lots of debugging output concerned with syncs
-//#define SYNC_DEBUG
+// #define SYNC_DEBUG
 
 Game::SyncWrapper::~SyncWrapper() {
 	if (dump_ != nullptr) {
@@ -89,8 +89,8 @@ static const unsigned long long MINIMUM_DISK_SPACE = 256 * 1024 * 1024;
 
 void Game::SyncWrapper::data(void const * const sync_data, size_t const size) {
 #ifdef SYNC_DEBUG
-	uint32_t time = m_game.get_gametime();
-	log("[sync:%08u t=%6u]", m_counter, time);
+	uint32_t time = game_.get_gametime();
+	log("[sync:%08u t=%6u]", counter_, time);
 	for (size_t i = 0; i < size; ++i)
 		log(" %02x", (static_cast<uint8_t const *>(sync_data))[i]);
 	log("\n");
@@ -206,6 +206,9 @@ void Game::save_syncstream(bool const save)
 bool Game::run_splayer_scenario_direct(const std::string& mapname, const std::string& script_to_run) {
 	assert(!get_map());
 
+	// Replays can't handle scenarios
+	set_write_replay(false);
+
 	set_map(new Map);
 
 	std::unique_ptr<MapLoader> maploader(map().get_correct_loader(mapname));
@@ -235,7 +238,7 @@ bool Game::run_splayer_scenario_direct(const std::string& mapname, const std::st
 			 map().get_scenario_player_name (p));
 		get_player(p)->set_ai(map().get_scenario_player_ai(p));
 	}
-	win_condition_displayname_ = _("Scenario");
+	win_condition_displayname_ = "Scenario";
 
 	set_ibase
 		(new InteractivePlayer
@@ -335,7 +338,7 @@ void Game::init_newgame
 		std::unique_ptr<LuaCoroutine> cr = table->get_coroutine("func");
 		enqueue_command(new CmdLuaCoroutine(get_gametime() + 100, cr.release()));
 	} else {
-		win_condition_displayname_ = _("Scenario");
+		win_condition_displayname_ = "Scenario";
 	}
 }
 
@@ -361,6 +364,10 @@ void Game::init_savegame
 		Widelands::GamePreloadPacket gpdp;
 		gl.preload_game(gpdp);
 		win_condition_displayname_ = gpdp.get_win_condition();
+		if (win_condition_displayname_ == "Scenario") {
+			// Replays can't handle scenarios
+			set_write_replay(false);
+		}
 		std::string background(gpdp.get_background());
 		loader_ui->set_background(background);
 		loader_ui->step(_("Loading…"));
@@ -390,6 +397,10 @@ bool Game::run_load_game(const std::string& filename, const std::string& script_
 		gl.preload_game(gpdp);
 		std::string background(gpdp.get_background());
 		win_condition_displayname_ = gpdp.get_win_condition();
+		if (win_condition_displayname_ == "Scenario") {
+			// Replays can't handle scenarios
+			set_write_replay(false);
+		}
 		loader_ui.set_background(background);
 		player_nr = gpdp.get_player_nr();
 		set_ibase
@@ -467,6 +478,8 @@ bool Game::run
 			}
 		} else {
 			// Is a scenario!
+			// Replays can't handle scenarios
+			set_write_replay(false);
 			iterate_players_existing_novar(p, nr_players, *this) {
 				if (!map().get_starting_pos(p))
 				throw WLWarning
@@ -555,7 +568,6 @@ bool Game::run
 	g_sound_handler.change_music("menu", 1000, 0);
 
 	cleanup_objects();
-	delete get_ibase();
 	set_ibase(nullptr);
 
 	state_ = gs_notrunning;
@@ -792,11 +804,11 @@ void Game::send_player_set_ware_max_fill
 
 
 void Game::send_player_change_training_options
-	(TrainingSite & ts, int32_t const atr, int32_t const val)
+	(TrainingSite & ts, TrainingAttribute attr, int32_t const val)
 {
 	send_player_command
 		(*new CmdChangeTrainingOptions
-		 	(get_gametime(), ts.owner().player_number(), ts, atr, val));
+			(get_gametime(), ts.owner().player_number(), ts, attr, val));
 }
 
 void Game::send_player_drop_soldier (Building & b, int32_t const ser)
@@ -931,7 +943,7 @@ void Game::sample_statistics()
 		for (Bob const * b = fc.field->get_first_bob(); b; b = b->get_next_bob())
 			if (upcast(Soldier const, s, b))
 				miltary_strength[s->owner().player_number() - 1] +=
-					s->get_level(atrTotal) + 1; //  So that level 0 also counts.
+					s->get_level(TrainingAttribute::kTotal) + 1; //  So that level 0 also counts.
 	}
 
 	//  Number of workers / wares / casualties / kills.

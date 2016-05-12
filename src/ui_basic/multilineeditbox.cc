@@ -22,6 +22,7 @@
 #include <boost/bind.hpp>
 
 #include "base/utf8.h"
+#include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "graphic/text_layout.h"
 #include "graphic/wordwrap.h"
@@ -31,8 +32,6 @@
 // TODO(GunChleoc): Arabic: Fix positioning for Arabic
 
 namespace UI {
-
-static const int32_t ms_scrollbar_w = 24;
 
 struct MultilineEditbox::Data {
 	Scrollbar scrollbar;
@@ -102,9 +101,9 @@ MultilineEditbox::MultilineEditbox
 
 MultilineEditbox::Data::Data(MultilineEditbox & o)
 :
-scrollbar(&o, o.get_w() - ms_scrollbar_w, 0, ms_scrollbar_w, o.get_h(), false),
+scrollbar(&o, o.get_w() - Scrollbar::kSize, 0, Scrollbar::kSize, o.get_h(), false),
 cursor_pos(0),
-maxbytes(0xffff),
+maxbytes(std::min(g_gr->max_texture_size() / UI_FONT_SIZE_SMALL, 0xffff)),
 ww_valid(false),
 owner(o)
 {
@@ -140,11 +139,11 @@ void MultilineEditbox::set_text(const std::string & text)
 		return;
 
 	d_->text = text;
-	while (d_->text.size() > d_->maxbytes)
+	while (d_->text.size() > d_->maxbytes) {
 		d_->erase_bytes(d_->prev_char(d_->text.size()), d_->text.size());
+	}
 
-	if (d_->cursor_pos > d_->text.size())
-		d_->cursor_pos = d_->text.size();
+	d_->set_cursor_pos(d_->text.size());
 
 	d_->update();
 	d_->scroll_cursor_into_view();
@@ -537,13 +536,13 @@ void MultilineEditbox::scrollpos_changed(int32_t)
  */
 void MultilineEditbox::Data::refresh_ww()
 {
-	if (int32_t(ww.wrapwidth()) != owner.get_w() - ms_scrollbar_w)
+	if (int32_t(ww.wrapwidth()) != owner.get_w() - Scrollbar::kSize)
 		ww_valid = false;
 	if (ww_valid)
 		return;
 
 	ww.set_style(textstyle);
-	ww.set_wrapwidth(owner.get_w() - ms_scrollbar_w);
+	ww.set_wrapwidth(owner.get_w() - Scrollbar::kSize);
 
 	ww.wrap(text);
 	ww_valid = true;

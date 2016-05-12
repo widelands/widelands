@@ -128,7 +128,7 @@ public:
 	int32_t get_x() const {return x_;}
 	int32_t get_y() const {return y_;}
 	Point get_pos() const {return Point(x_, y_);}
-	//int unstead of uint because of overflow situations
+	// int instead of uint because of overflow situations
 	int32_t get_w() const {return w_;}
 	int32_t get_h() const {return h_;}
 

@@ -21,4 +21,8 @@ VERSION
 
 # OS-X Meta Files
 .DS_Store
+
 data/map_object_info
+
+# QT Creator settings
+CMakeLists.txt.user*

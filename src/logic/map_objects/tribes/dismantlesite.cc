@@ -30,6 +30,7 @@
 #include "graphic/animation.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
+#include "graphic/text_constants.h"
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
@@ -93,7 +94,8 @@ Print completion percentage.
 void DismantleSite::update_statistics_string(std::string* s)
 {
 	unsigned int percent = (get_built_per64k() * 100) >> 16;
-	*s = (boost::format(_("%u%% dismantled")) % percent).str();
+	*s = (boost::format("<font color=%s>%s</font>") % UI_FONT_CLR_DARK.hex_value() %
+			(boost::format(_("%u%% dismantled")) % percent)).str();
 }
 
 /*
@@ -105,45 +107,37 @@ void DismantleSite::init(EditorGameBase & egbase)
 {
 	PartiallyFinishedBuilding::init(egbase);
 
-	std::map<DescriptionIndex, uint8_t> wares;
-	count_returned_wares(this, wares);
-
-	std::map<DescriptionIndex, uint8_t>::const_iterator it = wares.begin();
-	wares_.resize(wares.size());
-
-	for (size_t i = 0; i < wares.size(); ++i, ++it) {
-		WaresQueue & wq =
-			*(wares_[i] = new WaresQueue(*this, it->first, it->second));
-
-		wq.set_filled(it->second);
-		work_steps_ += it->second;
+	for (const auto& ware: count_returned_wares(this)) {
+		WaresQueue* wq = new WaresQueue(*this, ware.first, ware.second);
+		wq->set_filled(ware.second);
+		wares_.push_back(wq);
+		work_steps_ += ware.second;
 	}
 }
 
 /*
 ===============
-Count wich wares you get back if you dismantle the given building
+Count which wares you get back if you dismantle the given building
 ===============
 */
-void DismantleSite::count_returned_wares
-	(Building* building,
-	 std::map<DescriptionIndex, uint8_t>   & res)
+const Buildcost DismantleSite::count_returned_wares(Building* building)
 {
+	Buildcost result;
 	for (DescriptionIndex former_idx : building->get_former_buildings()) {
-		const std::map<DescriptionIndex, uint8_t> * return_wares;
 		const BuildingDescr* former_descr = building->owner().tribe().get_building_descr(former_idx);
-		if (former_idx != building->get_former_buildings().front()) {
-			return_wares = & former_descr->returned_wares_enhanced();
-		} else {
-			return_wares = & former_descr->returned_wares();
-		}
-		assert(return_wares != nullptr);
+		const Buildcost& return_wares =
+				former_idx != building->get_former_buildings().front() ?
+									  former_descr->returned_wares_enhanced() :
+									  former_descr->returned_wares();
 
-		std::map<DescriptionIndex, uint8_t>::const_iterator i;
-		for (i = return_wares->begin(); i != return_wares->end(); ++i) {
-			res[i->first] += i->second;
+		for (const auto& ware : return_wares) {
+			// TODO(GunChleoc): Once we have trading, we might want to return all wares again.
+			if (building->owner().tribe().has_ware(ware.first)) {
+				result[ware.first] += ware.second;
+			}
 		}
 	}
+	return result;
 }
 
 
@@ -190,7 +184,7 @@ bool DismantleSite::get_building_work(Game & game, Worker & worker, bool) {
 			wq.set_filled(wq.get_filled() - 1);
 			wq.set_max_size(wq.get_max_size() - 1);
 
-			//update statistics
+			// Update statistics
 			owner().ware_produced(wq.get_ware());
 
 			const WareDescr & wd = *owner().tribe().get_ware_descr(wq.get_ware());
@@ -245,7 +239,7 @@ void DismantleSite::draw
 
 	// Draw the partially dismantled building
 	static_assert(0 <= DISMANTLESITE_STEP_TIME, "assert(0 <= DISMANTLESITE_STEP_TIME) failed.");
-	uint32_t total_time = DISMANTLESITE_STEP_TIME * work_steps_;
+	const uint32_t total_time = DISMANTLESITE_STEP_TIME * work_steps_;
 	uint32_t completed_time = DISMANTLESITE_STEP_TIME * work_completed_;
 
 	if (working_)
@@ -261,12 +255,12 @@ void DismantleSite::draw
 	const uint16_t w = anim.width();
 	const uint16_t h = anim.height();
 
-	uint32_t lines = h * completed_time / total_time;
+	const uint32_t lines = total_time ? h * completed_time / total_time : 0;
 
 	dst.blit_animation(pos, anim_idx, tanim, player_color, Rect(Point(0, lines), w, h - lines));
 
 	// Draw help strings
-	draw_help(game, dst, coords, pos);
+	draw_info(game, dst, pos);
 }
 
 }

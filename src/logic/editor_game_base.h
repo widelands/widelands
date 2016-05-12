@@ -141,7 +141,7 @@ public:
 	Bob& create_critter(Coords, DescriptionIndex bob_type_idx, Player* owner = nullptr);
 	Bob& create_critter(Coords, const std::string& name, Player* owner = nullptr);
 	Immovable& create_immovable(Coords,
-										 uint32_t idx,
+										 DescriptionIndex idx,
 										 MapObjectDescr::OwnerType = MapObjectDescr::OwnerType::kWorld);
 	Immovable& create_immovable(Coords,
 										 const std::string& name,
@@ -153,7 +153,7 @@ public:
 		return gametime_;
 	}
 	InteractiveBase* get_ibase() const {
-		return ibase_;
+		return ibase_.get();
 	}
 
 	// safe system for storing pointers to non-MapObject C++ objects
@@ -180,9 +180,7 @@ public:
 	uint32_t& get_gametime_pointer() {
 		return gametime_;
 	}
-	void set_ibase(InteractiveBase* const b) {
-		ibase_ = b;
-	}
+	void set_ibase(InteractiveBase* const b);
 
 	/// Lua frontend, used to run Lua scripts
 	virtual LuaInterface& lua() {
@@ -255,7 +253,7 @@ private:
 
 	std::unique_ptr<World> world_;
 	std::unique_ptr<Tribes> tribes_;
-	InteractiveBase* ibase_;
+	std::unique_ptr<InteractiveBase> ibase_;
 	Map* map_;
 
 	uint32_t lasttrackserial_;

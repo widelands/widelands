@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-02-20 12:30+0000\n"
-"PO-Revision-Date: 2016-02-20 13:11+0000\n"
+"POT-Creation-Date: 2016-04-03 19:12+0000\n"
+"PO-Revision-Date: 2016-04-05 21:57+0000\n"
 "Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -87,7 +87,7 @@ msgstr "Hem de trobar un lloc agradable per a la cabana del llenyataire. Per fer
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:46
 msgid "Left-click the ‘OK’ button to close this box and then try it."
-msgstr "Feu clic esquerre en el botó \"Accepta\" per tancar aquesta finestra i provar-ho."
+msgstr "Feu clic esquerre en el botó «Accepta» per tancar aquesta finestra i provar-ho."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:49
 msgid "Enable the showing of building spaces"
@@ -164,7 +164,7 @@ msgid ""
 "menu). Therefore, I have entered the road building mode manually. I will "
 "tell you later how to do that. To build the road, all I have to do now is "
 "click on the blue flag in front of my headquarters."
-msgstr "Això encara no és suficient. Encara necessito connectar la cabana del llenyataire amb la meva xarxa de camins. Heu desactivat l'opció de \"Comença a construir camins després de plantar una bandera\" (per canviar-ho, escolliu \"Opcions\" en el menú principal del Widelands). Per tant, he entrat al mode de construcció de camins manualment. Us diré després com fer-ho. Per construir el camí, tot el que he de fer ara és clicar la bandera blava del davant del quarter general."
+msgstr "Això encara no és suficient. Encara necessito connectar la cabana del llenyataire amb la meva xarxa de camins. Heu desactivat l'opció de «Comença a construir camins després de plantar una bandera» (per canviar-ho, escolliu «Opcions» en el menú principal del Widelands). Per tant, he entrat al mode de construcció de camins manualment. Us diré després com fer-ho. Per construir el camí, tot el que he de fer ara és clicar la bandera blava del davant del quarter general."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:103
 msgid "Waiting for the Lumberjack to Go Up"
@@ -998,9 +998,9 @@ msgstr "Per abandonar aquesta partida i retornar al menú principal, cliqueu el"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:515
 msgid ""
-"‘Options’ menu button on the very left at the bottom of the screen. Then "
-"click the"
-msgstr "botó «Opcions» a l'extrem esquerre de la part inferior de la pantalla. Després feu clic en"
+"‘Main Menu’ button on the very left at the bottom of the screen. Then click "
+"the"
+msgstr "botó «Menú principal» a l'extrem esquerre de la part inferior de la pantalla. Llavors cliqueu"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:516
 msgid "‘Exit Game’ button."
@@ -1017,7 +1017,7 @@ msgstr "Gràcies per jugar aquest tutorial. Gaudiu del Widelands i recordeu-vos-
 msgid "“%s”"
 msgstr "“%s”"
 
-#: ../../data/scripting/format_scenario.lua:146
+#: ../../data/scripting/format_scenario.lua:96
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] "Objectiu"

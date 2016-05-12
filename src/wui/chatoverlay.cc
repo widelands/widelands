@@ -193,10 +193,9 @@ void ChatOverlay::draw(RenderTarget & dst)
 	const int32_t top = get_h() - height - 2 * MARGIN;
 	const int width = std::min<int>(get_w(), im->width());
 
-	// TODO(unknown): alpha channel not respected
 	if (!m->transparent_) {
 		Rect rect(0, top, width, height);
-		dst.fill_rect(rect, RGBAColor(50, 50, 50, 128));
+		dst.fill_rect(rect, RGBAColor(50, 50, 50, 128), BlendMode::Default);
 	}
 	int32_t topcrop = im->height() - height;
 	Rect cropRect(0, topcrop, width, height);

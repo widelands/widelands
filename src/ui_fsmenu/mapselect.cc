@@ -31,6 +31,7 @@
 #include "logic/game_controller.h"
 #include "logic/game_settings.h"
 #include "map_io/widelands_map_loader.h"
+#include "wui/map_tags.h"
 
 // TODO(GunChleoc): Arabic: line height broken for descriptions for Arabic.
 // Fix align for table headings & entries and for wordwrap.
@@ -51,8 +52,8 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect
 
 	table_(this, tablex_, tabley_, tablew_, tableh_, false),
 	map_details_(this, right_column_x_, tabley_,
-					 get_right_column_w(right_column_x_ + indent_),
-					 tableh_ - buth_ - 4 * padding_),
+					 get_right_column_w(right_column_x_),
+					 tableh_ - buth_ - 4 * padding_, MapDetails::Style::kFsMenu),
 
 	basedir_("maps"),
 	settings_(settings),
@@ -94,27 +95,27 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect
 	vbox = new UI::Box(this,
 							 tablex_, vbox->get_y() + vbox->get_h() + padding_,
 							 UI::Box::Horizontal, checkbox_space_, get_w());
-	add_tag_checkbox(vbox, "official", _("Official"));
-	add_tag_checkbox(vbox, "unbalanced", _("Unbalanced"));
-	add_tag_checkbox(vbox, "seafaring", _("Seafaring"));
-	add_tag_checkbox(vbox, "artifacts", _("Artifacts"));
-	add_tag_checkbox(vbox, "scenario", _("Scenario"));
+	add_tag_checkbox(vbox, "official", localize_tag("official"));
+	add_tag_checkbox(vbox, "unbalanced", localize_tag("unbalanced"));
+	add_tag_checkbox(vbox, "seafaring", localize_tag("seafaring"));
+	add_tag_checkbox(vbox, "artifacts", localize_tag("artifacts"));
+	add_tag_checkbox(vbox, "scenario", localize_tag("scenario"));
 	vbox->set_size(get_w() - 2 * tablex_, checkbox_space_);
 
 	vbox = new UI::Box(this,
 							 tablex_, vbox->get_y() + vbox->get_h() + padding_,
 							 UI::Box::Horizontal, checkbox_space_, get_w());
-	add_tag_checkbox(vbox, "ffa", _("Free for all"));
-	add_tag_checkbox(vbox, "1v1", _("1v1"));
+	add_tag_checkbox(vbox, "ffa", localize_tag("ffa"));
+	add_tag_checkbox(vbox, "1v1", localize_tag("1v1"));
 
 	vbox->set_size(get_w() - 2 * tablex_, checkbox_space_);
 
 	vbox = new UI::Box(this,
 							 tablex_, vbox->get_y() + vbox->get_h() + padding_,
 							 UI::Box::Horizontal, checkbox_space_, get_w());
-	add_tag_checkbox(vbox, "2teams", _("Teams of 2"));
-	add_tag_checkbox(vbox, "3teams", _("Teams of 3"));
-	add_tag_checkbox(vbox, "4teams", _("Teams of 4"));
+	add_tag_checkbox(vbox, "2teams", localize_tag("2teams"));
+	add_tag_checkbox(vbox, "3teams", localize_tag("3teams"));
+	add_tag_checkbox(vbox, "4teams", localize_tag("4teams"));
 	vbox->set_size(get_w() - 2 * tablex_, checkbox_space_);
 
 	scenario_types_ = settings_->settings().multiplayer ? Map::MP_SCENARIO : Map::SP_SCENARIO;
@@ -233,8 +234,8 @@ void FullscreenMenuMapSelect::fill_table()
 	//  Fill it with all files we find in all directories.
 	FilenameSet files = g_fs->list_directory(curdir_);
 
-	//If we are not at the top of the map directory hierarchy (we're not talking
-	//about the absolute filesystem top!) we manually add ".."
+	// If we are not at the top of the map directory hierarchy (we're not talking
+	// about the absolute filesystem top!) we manually add ".."
 	if (curdir_ != basedir_) {
 		maps_data_.push_back(MapData::create_parent_dir(curdir_));
 	}

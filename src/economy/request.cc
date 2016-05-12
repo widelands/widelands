@@ -263,7 +263,6 @@ int32_t Request::get_required_time() const
 		get_base_required_time(economy_->owner().egbase(), transfers_.size());
 }
 
-//#define MAX_IDLE_PRIORITY           100
 #define PRIORITY_MAX_COST         50000
 #define COST_WEIGHT_IN_PRIORITY       1
 #define WAITTIME_WEIGHT_IN_PRIORITY   2

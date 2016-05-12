@@ -51,9 +51,10 @@ Table<void *>::Table
 :
 	Panel             (parent, x, y, w, h),
 	total_width_     (0),
-	fontsize_        (UI_FONT_SIZE_SMALL),
-	headerheight_    (UI::g_fh1->render(as_uifont(".", fontsize_))->height() + 4),
-	lineheight_      (UI::g_fh1->render(as_uifont(".", fontsize_))->height()),
+	headerheight_    (UI::g_fh1->render(as_uifont(UI::g_fh1->fontset()->representative_character()))
+							->height() + 4),
+	lineheight_      (UI::g_fh1->render(as_uifont(UI::g_fh1->fontset()->representative_character()))
+							->height()),
 	scrollbar_       (nullptr),
 	scrollpos_       (0),
 	selection_       (no_selection_index()),
@@ -129,8 +130,8 @@ void Table<void *>::add_column
 		scrollbar_ =
 			new Scrollbar
 				(get_parent(),
-				 get_x() + get_w() - 24, get_y() + headerheight_,
-				 24,                     get_h() - headerheight_,
+				 get_x() + get_w() - Scrollbar::kSize, get_y() + headerheight_,
+				 Scrollbar::kSize,                     get_h() - headerheight_,
 				 false);
 		scrollbar_->moved.connect(boost::bind(&Table::set_scrollpos, this, _1));
 		scrollbar_->set_steps(1);
@@ -347,7 +348,7 @@ void Table<void *>::draw(RenderTarget & dst)
 				curx += curw;
 				continue;
 			}
-			const Image* entry_text_im = UI::g_fh1->render(as_uifont(richtext_escape(entry_string), fontsize_));
+			const Image* entry_text_im = UI::g_fh1->render(as_uifont(richtext_escape(entry_string)));
 
 			if (static_cast<int>(alignment & UI::Align::kRight)) {
 				point.x += curw - 2 * picw;
@@ -365,7 +366,7 @@ void Table<void *>::draw(RenderTarget & dst)
 			// Crop to column width while blitting
 			if ((curw + picw) < text_width) {
 				// Fix positioning for BiDi languages.
-				if (UI::g_fh1->fontset().is_rtl()) {
+				if (UI::g_fh1->fontset()->is_rtl()) {
 					point.x = static_cast<int>(alignment & UI::Align::kRight) ? curx : curx + picw;
 				}
 				// We want this always on, e.g. for mixed language savegame filenames
@@ -490,7 +491,7 @@ void Table<void *>::move_selection(const int32_t offset)
 
 	select(static_cast<uint32_t>(new_selection));
 
-	//scroll to newly selected entry
+	// Scroll to newly selected entry
 	if (scrollbar_)
 	{
 		// Keep an unselected item above or below

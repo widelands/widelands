@@ -551,7 +551,8 @@ DiscreteSlider::DiscreteSlider
 		 // here, we take into account the h_gap introduced by HorizontalSlider
 		 w / (2 * labels_in.size()) - cursor_size / 2, 0,
 		 w - (w / labels_in.size()) + cursor_size,
-		 h - UI::g_fh1->render(as_uifont("."))->height() - 2,
+		 h - UI::g_fh1->render(as_condensed(UI::g_fh1->fontset()->representative_character(),
+														UI::Align::kLeft, UI_FONT_SIZE_SMALL - 2))->height() - 2,
 		 0, labels_in.size() - 1, value_,
 		 background_picture_id,
 		 tooltip_text,
@@ -576,8 +577,8 @@ void DiscreteSlider::draw(RenderTarget & dst)
 	uint32_t gap_n = get_w() / labels.size();
 
 	for (uint32_t i = 0; i < labels.size(); i++) {
-		dst.blit(Point(gap_1 + i * gap_n, get_h() + 2),
-				 UI::g_fh1->render(as_uifont(labels[i])),
+		dst.blit(Point(gap_1 + i * gap_n, get_h()),
+				 UI::g_fh1->render(as_condensed(labels[i], UI::Align::kBottomCenter, UI_FONT_SIZE_SMALL - 2)),
 				 BlendMode::UseAlpha,
 				 UI::Align::kBottomCenter);
 	}
@@ -597,7 +598,8 @@ void DiscreteSlider::layout() {
 	slider.set_pos(Point(w / (2 * labels.size()) - slider.cursor_size_ / 2, 0));
 	slider.set_size
 		(w - (w / labels.size()) + slider.cursor_size_,
-		 h - UI::g_fh1->render(as_uifont("."))->height() - 2);
+		 h - UI::g_fh1->render(as_condensed(UI::g_fh1->fontset()->representative_character(),
+														UI::Align::kLeft, UI_FONT_SIZE_SMALL - 2))->height() + 2);
 	Panel::layout();
 }
 

@@ -171,7 +171,7 @@ void PlayerDescriptionGroup::refresh()
 					} else {
 						const ComputerPlayer::Implementation* impl =
 								ComputerPlayer::get_implementation(player.ai);
-						title = impl->descname;
+						title = _(impl->descname);
 					}
 				}
 			} else { // PlayerSettings::stateHuman
@@ -202,6 +202,11 @@ void PlayerDescriptionGroup::refresh()
 								(tribeinfo.initializations.at
 									(player.initialization_index)
 								 .descname));
+						d->btnPlayerInit->set_tooltip
+							(_
+								(tribeinfo.initializations.at
+									(player.initialization_index)
+								 .tooltip));
 						break;
 					}
 				}

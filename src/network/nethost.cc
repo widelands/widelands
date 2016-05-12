@@ -66,12 +66,12 @@
 
 
 struct HostGameSettingsProvider : public GameSettingsProvider {
-	HostGameSettingsProvider(NetHost * const init_host) : h(init_host), m_cur_wincondition(0) {}
+	HostGameSettingsProvider(NetHost * const init_host) : host_(init_host), current_wincondition_(0) {}
 	~HostGameSettingsProvider() {}
 
-	void set_scenario(bool is_scenario) override {h->set_scenario(is_scenario);}
+	void set_scenario(bool is_scenario) override {host_->set_scenario(is_scenario);}
 
-	const GameSettings & settings() override {return h->settings();}
+	const GameSettings & settings() override {return host_->settings();}
 
 	bool can_change_map() override {return true;}
 	bool can_change_player_state(uint8_t const number) override {
@@ -107,7 +107,7 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 			settings().players.at(number).state == PlayerSettings::stateComputer;
 	}
 
-	bool can_launch() override {return h->can_launch();}
+	bool can_launch() override {return host_->can_launch();}
 
 	virtual void set_map
 		(const std::string &       mapname,
@@ -115,7 +115,7 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 		 uint32_t            const maxplayers,
 		 bool                const savegame = false) override
 	{
-		h->set_map(mapname, mapfilename, maxplayers, savegame);
+		host_->set_map(mapname, mapfilename, maxplayers, savegame);
 	}
 	void set_player_state
 		(uint8_t number, PlayerSettings::State const state) override
@@ -123,23 +123,23 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 		if (number >= settings().players.size())
 			return;
 
-		h->set_player_state(number, state);
+		host_->set_player_state(number, state);
 	}
 	void next_player_state(uint8_t const number) override {
 		if (number > settings().players.size())
 			return;
 
 		PlayerSettings::State newstate = PlayerSettings::stateClosed;
-		switch (h->settings().players.at(number).state) {
+		switch (host_->settings().players.at(number).state) {
 		case PlayerSettings::stateClosed:
 			// In savegames : closed players can not be changed.
-			assert(!h->settings().savegame);
+			assert(!host_->settings().savegame);
 			newstate = PlayerSettings::stateOpen;
 			break;
 		case PlayerSettings::stateOpen:
 		case PlayerSettings::stateHuman:
-			if (h->settings().scenario) {
-				assert(h->settings().players.at(number).closeable);
+			if (host_->settings().scenario) {
+				assert(host_->settings().players.at(number).closeable);
 				newstate = PlayerSettings::stateClosed;
 				break;
 			} // else fall through
@@ -150,21 +150,21 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 					ComputerPlayer::get_implementations();
 				ComputerPlayer::ImplementationVector::const_iterator it =
 					impls.begin();
-				if (h->settings().players.at(number).ai.empty()) {
+				if (host_->settings().players.at(number).ai.empty()) {
 					set_player_ai(number, (*it)->name);
 					newstate = PlayerSettings::stateComputer;
 					break;
 				}
 				do {
 					++it;
-					if ((*(it - 1))->name == h->settings().players.at(number).ai)
+					if ((*(it - 1))->name == host_->settings().players.at(number).ai)
 						break;
 				} while (it != impls.end());
 				if (settings().players.at(number).random_ai) {
 					set_player_ai(number, std::string());
 					set_player_name(number, std::string());
 					// Do not share a player in savegames or scenarios
-					if (h->settings().scenario || h->settings().savegame)
+					if (host_->settings().scenario || host_->settings().savegame)
 						newstate = PlayerSettings::stateOpen;
 					else {
 						uint8_t shared = 0;
@@ -198,7 +198,7 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 		case PlayerSettings::stateShared:
 			{
 				// Do not close a player in savegames or scenarios
-				if (h->settings().scenario || h->settings().savegame)
+				if (host_->settings().scenario || host_->settings().savegame)
 					newstate = PlayerSettings::stateOpen;
 				else
 					newstate = PlayerSettings::stateClosed;
@@ -206,13 +206,13 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 			}
 		}
 
-		h->set_player_state(number, newstate, true);
+		host_->set_player_state(number, newstate, true);
 	}
 
 	void set_player_tribe
 		(uint8_t number, const std::string& tribe, bool const random_tribe) override
 	{
-		if (number >= h->settings().players.size())
+		if (number >= host_->settings().players.size())
 			return;
 
 		if
@@ -222,88 +222,88 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 			 ||
 			 settings().players.at(number).state == PlayerSettings::stateShared
 			 ||
-		    settings().players.at(number).state == PlayerSettings::stateOpen)  // For savegame loading
-			h->set_player_tribe(number, tribe, random_tribe);
+			 settings().players.at(number).state == PlayerSettings::stateOpen)  // For savegame loading
+			host_->set_player_tribe(number, tribe, random_tribe);
 	}
 
 	void set_player_team(uint8_t number, Widelands::TeamNumber team) override
 	{
-		if (number >= h->settings().players.size())
+		if (number >= host_->settings().players.size())
 			return;
 
 		if
 			(number == settings().playernum ||
 			 settings().players.at(number).state == PlayerSettings::stateComputer)
-			h->set_player_team(number, team);
+			host_->set_player_team(number, team);
 	}
 
 	void set_player_closeable(uint8_t number, bool closeable) override {
-		if (number >= h->settings().players.size())
+		if (number >= host_->settings().players.size())
 			return;
-		h->set_player_closeable(number, closeable);
+		host_->set_player_closeable(number, closeable);
 	}
 
 	void set_player_shared(uint8_t number, uint8_t shared) override {
-		if (number >= h->settings().players.size())
+		if (number >= host_->settings().players.size())
 			return;
-		h->set_player_shared(number, shared);
+		host_->set_player_shared(number, shared);
 	}
 
 	void set_player_init(uint8_t const number, uint8_t const index) override {
-		if (number >= h->settings().players.size())
+		if (number >= host_->settings().players.size())
 			return;
 
-		h->set_player_init(number, index);
+		host_->set_player_init(number, index);
 	}
 
 	void set_player_ai(uint8_t number, const std::string & name, bool const random_ai = false) override {
-		h->set_player_ai(number, name, random_ai);
+		host_->set_player_ai(number, name, random_ai);
 	}
 
 	void set_player_name(uint8_t const number, const std::string & name) override {
-		if (number >= h->settings().players.size())
+		if (number >= host_->settings().players.size())
 			return;
-		h->set_player_name(number, name);
+		host_->set_player_name(number, name);
 	}
 
 	void set_player(uint8_t const number, PlayerSettings const ps) override {
-		if (number >= h->settings().players.size())
+		if (number >= host_->settings().players.size())
 			return;
-		h->set_player(number, ps);
+		host_->set_player(number, ps);
 	}
 
 	void set_player_number(uint8_t const number) override {
 		if
 			(number == UserSettings::none() ||
-			 number < h->settings().players.size())
-			h->set_player_number(number);
+			 number < host_->settings().players.size())
+			host_->set_player_number(number);
 	}
 
 	std::string get_win_condition_script() override {
-		return h->settings().win_condition_script;
+		return host_->settings().win_condition_script;
 	}
 
 	void set_win_condition_script(std::string wc) override {
-		h->set_win_condition_script(wc);
+		host_->set_win_condition_script(wc);
 	}
 
 	void next_win_condition() override {
-		if (m_win_condition_scripts.empty()) {
-			m_win_condition_scripts = h->settings().win_condition_scripts;
-			m_cur_wincondition = -1;
+		if (wincondition_scripts_.empty()) {
+			wincondition_scripts_ = host_->settings().win_condition_scripts;
+			current_wincondition_ = -1;
 		}
 
 		if (can_change_map()) {
-			m_cur_wincondition++;
-			m_cur_wincondition %= m_win_condition_scripts.size();
-			set_win_condition_script(m_win_condition_scripts[m_cur_wincondition]);
+			current_wincondition_++;
+			current_wincondition_ %= wincondition_scripts_.size();
+			set_win_condition_script(wincondition_scripts_[current_wincondition_]);
 		}
 	}
 
 private:
-	NetHost                * h;
-	int16_t                  m_cur_wincondition;
-	std::vector<std::string> m_win_condition_scripts;
+	NetHost                * host_;
+	int16_t                  current_wincondition_;
+	std::vector<std::string> wincondition_scripts_;
 };
 
 struct HostChatProvider : public ChatProvider {
@@ -355,23 +355,23 @@ struct HostChatProvider : public ChatProvider {
 			if (cmd == "help") {
 				c.msg = (boost::format("<br>%s<br>%s<br>%s<br>%s<br>%s<br>%s<br>%s") %
 				         _("Available host commands are:")
-				         /** TRANSLATORS: Available host command */
 				         %
+							/** TRANSLATORS: Available host command */
 				         _("/help  -  Shows this help")
-				         /** TRANSLATORS: Available host command */
 				         %
+							/** TRANSLATORS: Available host command */
 				         _("/announce <msg>  -  Send a chatmessage as announcement (system chat)")
-				         /** TRANSLATORS: Available host command */
 				         %
+							/** TRANSLATORS: Available host command */
 				         _("/warn <name> <reason>  -  Warn the user <name> because of <reason>")
-				         /** TRANSLATORS: Available host command */
 				         %
+							/** TRANSLATORS: Available host command */
 				         _("/kick <name> <reason>  -  Kick the user <name> because of <reason>")
-				         /** TRANSLATORS: Available host command */
 				         %
+							/** TRANSLATORS: Available host command */
 				         _("/forcePause            -  Force the game to pause.")
-				         /** TRANSLATORS: Available host command */
 				         %
+							/** TRANSLATORS: Available host command */
 				         _("/endForcedPause        -  Return game to normal speed.")).str();
 			}
 
@@ -715,8 +715,8 @@ void NetHost::run()
 
 	try {
 		std::unique_ptr<UI::ProgressWindow> loader_ui;
-		GameTips * tips = nullptr;
 		loader_ui.reset(new UI::ProgressWindow("images/loadscreens/progress.png"));
+
 		std::vector<std::string> tipstext;
 		tipstext.push_back("general_game");
 		tipstext.push_back("multiplayer");
@@ -724,7 +724,7 @@ void NetHost::run()
 			tipstext.push_back(d->hp.get_players_tribe());
 		} catch (GameSettingsProvider::NoTribe) {
 		}
-		tips = new GameTips(*loader_ui, tipstext);
+		std::unique_ptr<GameTips> tips(new GameTips(*loader_ui, tipstext));
 
 		loader_ui->step(_("Preparing game"));
 
@@ -776,8 +776,6 @@ void NetHost::run()
 			 "",
 			 false, "nethost");
 
-		delete tips;
-
 		// if this is an internet game, tell the metaserver that the game is done.
 		if (internet_)
 			InternetGaming::ref().set_game_done();
@@ -791,6 +789,11 @@ void NetHost::run()
 			disconnect_client(0, "SERVER_CRASHED");
 			reaper();
 		}
+		// We will bounce back to the main menu, so we better log out
+		if (internet_) {
+			InternetGaming::ref().logout("SERVER_CRASHED");
+		}
+
 		throw;
 	}
 	d->game = nullptr;
@@ -885,7 +888,7 @@ void NetHost::send(ChatMessage msg)
 			s.string(msg.msg);
 			s.unsigned_8(1);
 			s.string(msg.recipient);
-		} else { //find the recipient
+		} else { // Find the recipient
 			int32_t clientnum = check_client(msg.recipient);
 			if (clientnum >= 0) {
 				s.signed_16(msg.playern);
@@ -1613,9 +1616,9 @@ bool NetHost::write_map_transfer_info(SendPacket & s, std::string mapfilename) {
 	// needs the file.
 	s.unsigned_8(NETCMD_NEW_FILE_AVAILABLE);
 	s.string(mapfilename);
-	//Scan-build reports that access to bytes here results in a dereference of null pointer.
-	//This is a false positive.
-	//See https://bugs.launchpad.net/widelands/+bug/1198919
+	// Scan-build reports that access to bytes here results in a dereference of null pointer.
+	// This is a false positive.
+	// See https://bugs.launchpad.net/widelands/+bug/1198919
 	s.unsigned_32(file_->bytes);
 	s.string(file_->md5sum);
 	return true;
@@ -2279,8 +2282,8 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket & r)
 		int32_t time = r.signed_32();
 		Widelands::PlayerCommand & plcmd = *Widelands::PlayerCommand::deserialize(r);
 		log
-			("[Host]: Client %u (%u) sent player command %i for %i, time = %i\n",
-			 i, client.playernum, plcmd.id(), plcmd.sender(), time);
+			("[Host]: Client %u (%u) sent player command %u for %u, time = %i\n",
+			 i, client.playernum, static_cast<unsigned int>(plcmd.id()), plcmd.sender(), time);
 		receive_client_time(i, time);
 		if (plcmd.sender() != client.playernum + 1)
 			throw DisconnectException("PLAYERCMD_FOR_OTHER");

@@ -84,7 +84,7 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby
 
 // Edit boxes
 	edit_servername_
-		(this, get_w() * 17 / 25, get_h() * 68 / 100, butw_,
+		(this, get_w() * 17 / 25, get_h() * 68 / 100, butw_, buth_, 2,
 		 g_gr->images().get("images/ui_basic/but2.png"), fs_),
 
 // List
@@ -142,13 +142,12 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby
 	clientsonline_list_ .add_column(22, "*", t_tip);
 	/** TRANSLATORS: Player Name */
 	clientsonline_list_ .add_column((lisw_ - 22) * 3 / 8, pgettext("player", "Name"));
-	clientsonline_list_ .add_column((lisw_ - 22) * 2 / 8, _("Points"));
+	clientsonline_list_ .add_column((lisw_ - 22) * 2 / 8, _("Version"));
 	clientsonline_list_ .add_column((lisw_ - 22) * 3 / 8, _("Game"));
 	clientsonline_list_.set_column_compare
 		(0, boost::bind(&FullscreenMenuInternetLobby::compare_clienttype, this, _1, _2));
 	clientsonline_list_ .double_clicked.connect
 		(boost::bind(&FullscreenMenuInternetLobby::client_doubleclicked, this, _1));
-	opengames_list_   .set_fontsize(fs_);
 	opengames_list_   .selected.connect
 		(boost::bind(&FullscreenMenuInternetLobby::server_selected, this));
 	opengames_list_   .double_clicked.connect
@@ -274,7 +273,7 @@ void FullscreenMenuInternetLobby::fill_client_list(const std::vector<InternetCli
 			const InternetClient& client(clients->at(i));
 			UI::Table<const InternetClient * const>::EntryRecord & er = clientsonline_list_.add(&client);
 			er.set_string(1, client.name);
-			er.set_string(2, client.points);
+			er.set_string(2, client.build_id);
 			er.set_string(3, client.game);
 
 			const Image* pic;
@@ -297,13 +296,12 @@ void FullscreenMenuInternetLobby::fill_client_list(const std::vector<InternetCli
 					continue;
 			}
 		}
+		// If a new player joins the lobby, play a sound.
+		if (clients->size() > prev_clientlist_len_ && !InternetGaming::ref().sound_off()) {
+			play_new_chat_member();
+		}
+		prev_clientlist_len_ = clients->size();
 	}
-
-	// If a new player joins the lobby, play a sound.
-	if (clients->size() > prev_clientlist_len_ && !InternetGaming::ref().sound_off()) {
-		play_new_chat_member();
-	}
-	prev_clientlist_len_ = clients->size();
 }
 
 

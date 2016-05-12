@@ -29,14 +29,14 @@
 #include "base/i18n.h"
 #include "base/scoped_timer.h"
 #include "base/warning.h"
-#include "editor/tools/editor_delete_immovable_tool.h"
-#include "editor/ui_menus/editor_help.h"
-#include "editor/ui_menus/editor_main_menu.h"
-#include "editor/ui_menus/editor_main_menu_load_map.h"
-#include "editor/ui_menus/editor_main_menu_save_map.h"
-#include "editor/ui_menus/editor_player_menu.h"
-#include "editor/ui_menus/editor_tool_menu.h"
-#include "editor/ui_menus/editor_toolsize_menu.h"
+#include "editor/tools/delete_immovable_tool.h"
+#include "editor/ui_menus/help.h"
+#include "editor/ui_menus/main_menu.h"
+#include "editor/ui_menus/main_menu_load_map.h"
+#include "editor/ui_menus/main_menu_save_map.h"
+#include "editor/ui_menus/player_menu.h"
+#include "editor/ui_menus/tool_menu.h"
+#include "editor/ui_menus/toolsize_menu.h"
 #include "graphic/graphic.h"
 #include "logic/map.h"
 #include "logic/map_objects/tribes/tribes.h"
@@ -104,7 +104,7 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase & e) :
 	InteractiveBase(e, g_options.pull_section("global")),
 	need_save_(false),
 	realtime_(SDL_GetTicks()),
-	left_mouse_button_is_down_(false),
+	is_painting_(false),
 	tools_(new Tools()),
 	history_(new EditorHistory(undo_, redo_)),
 
@@ -115,7 +115,7 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase & e) :
 
 	toggle_main_menu_
 	(INIT_BUTTON
-	 ("images/wui/menus/menu_toggle_menu.png", "menu", _("Menu"))),
+	 ("images/wui/menus/menu_toggle_menu.png", "menu", _("Main Menu"))),
 	toggle_tool_menu_
 	(INIT_BUTTON
 	 ("images/wui/editor/editor_menu_toggle_tool_menu.png", "tools", _("Tools"))),
@@ -214,9 +214,7 @@ void EditorInteractive::load(const std::string & filename) {
 
 	Widelands::Map & map = egbase().map();
 
-	// TODO(unknown): get rid of cleanup_for_load, it tends to be very messy
-	// Instead, delete and re-create the egbase.
-	egbase().cleanup_for_load();
+	cleanup_for_load();
 
 	std::unique_ptr<Widelands::MapLoader> ml(map.get_correct_loader(filename));
 	if (!ml.get())
@@ -243,6 +241,16 @@ void EditorInteractive::load(const std::string & filename) {
 	ml->load_map_complete(egbase(), Widelands::MapLoader::LoadType::kEditor);
 	egbase().load_graphics(loader_ui);
 	map_changed(MapWas::kReplaced);
+}
+
+void EditorInteractive::cleanup_for_load()
+{
+	// TODO(unknown): get rid of cleanup_for_load, it tends to be very messy
+	// Instead, delete and re-create the egbase.
+	egbase().cleanup_for_load();
+
+	// Select a tool that doesn't care about map changes
+	mutable_field_overlay_manager()->register_overlay_callback_function(nullptr);
 }
 
 
@@ -307,14 +315,14 @@ void EditorInteractive::map_clicked(bool should_draw) {
 
 bool EditorInteractive::handle_mouserelease(uint8_t btn, int32_t x, int32_t y) {
 	if (btn == SDL_BUTTON_LEFT) {
-		left_mouse_button_is_down_ = false;
+		stop_painting();
 	}
 	return InteractiveBase::handle_mouserelease(btn, x, y);
 }
 
 bool EditorInteractive::handle_mousepress(uint8_t btn, int32_t x, int32_t y) {
 	if (btn == SDL_BUTTON_LEFT) {
-		left_mouse_button_is_down_ = true;
+		start_painting();
 	}
 	return InteractiveBase::handle_mousepress(btn, x, y);
 }
@@ -325,7 +333,7 @@ void EditorInteractive::set_sel_pos(Widelands::NodeAndTriangle<> const sel) {
 	    tools_->current().operates_on_triangles() ?
 	    sel.triangle != get_sel_pos().triangle : sel.node != get_sel_pos().node;
 	InteractiveBase::set_sel_pos(sel);
-	if (target_changed && left_mouse_button_is_down_)
+	if (target_changed && is_painting_)
 		map_clicked(true);
 }
 
@@ -366,11 +374,21 @@ void EditorInteractive::set_sel_radius_and_update_menu(uint32_t const val) {
 	}
 }
 
+void EditorInteractive::start_painting()
+{
+	is_painting_ = true;
+}
+
+void EditorInteractive::stop_painting()
+{
+	is_painting_ = false;
+}
+
 void EditorInteractive::toggle_help() {
 	if (helpmenu_.window)
 		delete helpmenu_.window;
 	else
-		new EditorHelp(*this, helpmenu_);
+		new EditorHelp(*this, helpmenu_, &egbase().lua());
 }
 
 
@@ -431,6 +449,9 @@ bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 			handled = true;
 			break;
 
+		case SDLK_LCTRL:
+		case SDLK_RCTRL:
+		// TODO(GunChleoc): Keeping ALT and MODE to make the transition easier. Remove for Build 20.
 		case SDLK_LALT:
 		case SDLK_RALT:
 		case SDLK_MODE:
@@ -515,6 +536,9 @@ bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 		switch (code.sym) {
 		case SDLK_LSHIFT:
 		case SDLK_RSHIFT:
+		case SDLK_LCTRL:
+		case SDLK_RCTRL:
+		// TODO(GunChleoc): Keeping ALT and MODE to make the transition easier. Remove for Build 20.
 		case SDLK_LALT:
 		case SDLK_RALT:
 		case SDLK_MODE:
@@ -617,7 +641,7 @@ bool EditorInteractive::is_player_tribe_referenced
 
 void EditorInteractive::run_editor(const std::string& filename, const std::string& script_to_run) {
 	Widelands::EditorGameBase egbase(nullptr);
-	EditorInteractive eia(egbase);
+	EditorInteractive & eia = *new EditorInteractive(egbase);
 	egbase.set_ibase(&eia); // TODO(unknown): get rid of this
 	{
 		UI::ProgressWindow loader_ui("images/loadscreens/editor.jpg");
@@ -644,7 +668,7 @@ void EditorInteractive::run_editor(const std::string& filename, const std::strin
 				egbase.load_graphics(loader_ui);
 				loader_ui.step(std::string());
 			} else {
-				loader_ui.stepf(_("Loading map “%s”…"), filename.c_str());
+				loader_ui.step((boost::format(_("Loading map “%s”…")) % filename).str());
 				eia.load(filename);
 			}
 		}
@@ -670,7 +694,7 @@ void EditorInteractive::map_changed(const MapWas& action) {
 			redo_.set_enabled(false);
 
 			tools_.reset(new Tools());
-			select_tool(tools_->increase_height, EditorTool::First);
+			select_tool(tools_->info, EditorTool::First);
 			set_sel_radius(0);
 
 			set_need_save(false);
@@ -682,6 +706,14 @@ void EditorInteractive::map_changed(const MapWas& action) {
 					child->die();
 				}
 			}
+
+			// Make sure that we will start at coordinates (0,0).
+			set_viewpoint(Point(0, 0), true);
+			set_sel_pos
+				(Widelands::NodeAndTriangle<>
+					(Widelands::Coords(0, 0),
+					 Widelands::TCoords<>
+						(Widelands::Coords(0, 0), Widelands::TCoords<>::D)));
 			break;
 
 		case MapWas::kGloballyMutated:

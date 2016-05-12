@@ -21,5 +21,5 @@ end
 
 function building_helptext_performance()
    -- TRANSLATORS: Performance helptext for a building
-   return pgettext("barbarians_building", "If the food supply is steady, this mine can produce coal in %s on average."):bformat(ngettext("%d second", "%d seconds", 14.4):bformat(14.4))
+   return pgettext("barbarians_building", "If the food supply is steady, this mine can produce coal in 14.4 seconds on average.")
 end
