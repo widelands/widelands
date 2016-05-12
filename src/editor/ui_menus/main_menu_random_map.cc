@@ -538,12 +538,21 @@ void MainMenuNewRandomMap::id_edit_box_changed()
 		width_.set_value(find_dimension_index(map_info.w));
 		height_.set_value(find_dimension_index(map_info.h));
 
+		players_.set_interval(1, map_info.numPlayers); // hack to make sure we can set the value
+		players_.set_value(map_info.numPlayers);
+
 		landval_  = map_info.landRatio  * 100.0 + 0.49;
 		waterval_ = map_info.waterRatio * 100.0 + 0.49;
+		wastelandval_ = map_info.wastelandRatio * 100.0 + 0.49;
 
 		resource_amount_ = map_info.resource_amount;
+		resources_.set_title(resource_amounts_[resource_amount_]);
 
-		resources_.set_title(resource_amounts_[resource_amount_].c_str());
+		current_world_ = std::find(world_names.cbegin(), world_names.cend(),
+								   map_info.world_name) - world_names.cbegin();
+		world_.set_title(world_descriptions_[current_world_].descname);
+
+		island_mode_.set_state(map_info.islandMode);
 
 		// Update other values in UI as well
 		button_clicked(ButtonId::kNone);
