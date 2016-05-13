@@ -2972,7 +2972,7 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 	while (count < 10 && RoadCandidates.get_best_uncalculated(&current)) {
 		const Widelands::Coords coords = Coords::unhash(current);
 
-		Path& path = *new Path();
+		Path path;
 
 		// value of pathcost is not important, it just indicates, that the path can be built
 		const int32_t pathcost =
