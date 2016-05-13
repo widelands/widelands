@@ -2,9 +2,8 @@
 -- Note that this can't handle localization properly.
 
 return {
-   func = function(buildingname)
-      local building_description = wl.Game():get_building_description(buildingname)
-      include(building_description.helptext_script)
+   func = function(helptext_script)
+      include(helptext_script)
       return building_helptext_purpose()
    end
 }
