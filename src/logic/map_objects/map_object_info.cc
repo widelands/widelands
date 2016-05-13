@@ -473,7 +473,8 @@ void write_tribes(EditorGameBase& egbase, const std::string& output_path) {
 		fw_tribe.open_brace(); // TribeDescr
 		add_tribe_info(tribe_info, &fw_tribe);
 		fw_tribe.close_brace(true); // TribeDescr
-		fw_tribe.write(*g_fs, (boost::format("%s/tribe_%s.json") % output_path % tribe_info.name).str().c_str());
+		fw_tribe.write(*g_fs,
+		               (boost::format("%s/tribe_%s.json") % output_path % tribe_info.name).str().c_str());
 
 		const TribeDescr& tribe =
 				*tribes.get_tribe_descr(tribes.tribe_index(tribe_info.name));
