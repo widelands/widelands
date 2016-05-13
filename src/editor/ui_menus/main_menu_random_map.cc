@@ -27,6 +27,7 @@
 #include <boost/format.hpp>
 
 #include "base/i18n.h"
+#include "base/log.h"
 #include "base/wexception.h"
 #include "editor/editorinteractive.h"
 #include "editor/map_generator.h"
@@ -180,6 +181,10 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent) :
 	box_.add_space(margin_);
 	box_height += margin_;
 
+	players_.changed.connect(boost::bind(&MainMenuNewRandomMap::button_clicked,
+														this,
+														ButtonId::kPlayers));
+
 	// ---------- Worlds ----------
 
 	world_box_.add(&world_label_, UI::Align::kLeft);
@@ -266,6 +271,9 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent) :
 	box_.add_space(margin_);
 	box_height += margin_;
 
+	island_mode_.changed.connect
+		(boost::bind(&MainMenuNewRandomMap::button_clicked, this, ButtonId::kIslandMode));
+
 	// ---------- Random map number edit ----------
 
 	map_number_box_.add(&map_number_label_, UI::Align::kLeft);
@@ -324,6 +332,7 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent) :
 */
 void MainMenuNewRandomMap::button_clicked(MainMenuNewRandomMap::ButtonId n) {
 	switch (n) {
+	case ButtonId::kPlayers: // intended fall-through
 	case ButtonId::kMapSize:
 		// Restrict maximum players according to map size, but allow at least 2 players.
 		max_players_ =
@@ -356,6 +365,8 @@ void MainMenuNewRandomMap::button_clicked(MainMenuNewRandomMap::ButtonId n) {
 		++ current_world_;
 		current_world_ %= world_descriptions_.size();
 		world_.set_title(world_descriptions_[current_world_].descname);
+		break;
+	case ButtonId::kIslandMode:
 		break;
 	case ButtonId::kNone:
 		// Make sure that all conditions are met
@@ -456,6 +467,33 @@ void MainMenuNewRandomMap::clicked_create_map() {
 		g_options.pull_section("global").get_string("realname", pgettext("map_name", "Unknown")),
 		sstrm.str().c_str());
 	loader_ui.step(_("Generating random map…"));
+
+	log("============== Generating Map ==============\n");
+	log("ID:            %s\n", map_id_edit_.text().c_str());
+	log("Random number: %u\n", map_info.mapNumber);
+	log("Dimensions:    %d x %d\n", map_info.w, map_info.h);
+	log("Players:       %d\n", map_info.numPlayers);
+	log("World:         %s\n", map_info.world_name.c_str());
+	switch (map_info.resource_amount) {
+	case UniqueRandomMapInfo::ResourceAmount::raLow:
+		log("Resources:     low\n");
+		break;
+	case UniqueRandomMapInfo::ResourceAmount::raMedium:
+		log("Resources:     medium\n");
+		break;
+	case UniqueRandomMapInfo::ResourceAmount::raHigh:
+		log("Resources:     high\n");
+		break;
+	default:
+		NEVER_HERE();
+	}
+	log("Land: %0.2f  Water: %0.2f  Wasteland: %0.2f\n",
+	    map_info.landRatio, map_info.waterRatio, map_info.wastelandRatio);
+	if (map_info.islandMode) {
+		log("Using Island Mode\n");
+	}
+	log("\n");
+
 	gen.create_random_map();
 
 	egbase.postload     ();
@@ -489,7 +527,13 @@ void MainMenuNewRandomMap::id_edit_box_changed()
 
 	std::string str = map_id_edit_.text();
 
-	if (!UniqueRandomMapInfo::set_from_id_string(map_info, str))
+	std::vector<std::string> world_names;
+	world_names.reserve(world_descriptions_.size());
+	for (const auto & descr : world_descriptions_) {
+		world_names.push_back(descr.name);
+	}
+
+	if (!UniqueRandomMapInfo::set_from_id_string(map_info, str, world_names))
 		ok_button_.set_enabled(false);
 	else {
 		std::stringstream sstrm;
@@ -499,12 +543,21 @@ void MainMenuNewRandomMap::id_edit_box_changed()
 		width_.set_value(find_dimension_index(map_info.w));
 		height_.set_value(find_dimension_index(map_info.h));
 
+		players_.set_interval(1, map_info.numPlayers); // hack to make sure we can set the value
+		players_.set_value(map_info.numPlayers);
+
 		landval_  = map_info.landRatio  * 100.0 + 0.49;
 		waterval_ = map_info.waterRatio * 100.0 + 0.49;
+		wastelandval_ = map_info.wastelandRatio * 100.0 + 0.49;
 
 		resource_amount_ = map_info.resource_amount;
+		resources_.set_title(resource_amounts_[resource_amount_]);
 
-		resources_.set_title(resource_amounts_[resource_amount_].c_str());
+		current_world_ = std::find(world_names.cbegin(), world_names.cend(),
+								   map_info.world_name) - world_names.cbegin();
+		world_.set_title(world_descriptions_[current_world_].descname);
+
+		island_mode_.set_state(map_info.islandMode);
 
 		// Update other values in UI as well
 		button_clicked(ButtonId::kNone);

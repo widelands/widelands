@@ -143,6 +143,8 @@ Source: {#DLLFolder}\libmodplug-1.dll;             DestDir: {app};            Fl
 Source: {#DLLFolder}\libmad-0.dll;                 DestDir: {app};            Flags: ignoreversion;                                                       Components: "Widelands"
 Source: {#DLLFolder}\libintl-8.dll;                         DestDir: {app};            Flags: ignoreversion;                                                       Components: "Widelands"
 Source: {#DLLFolder}\libiconv-2.dll;                        DestDir: {app};            Flags: ignoreversion;                                                       Components: "Widelands"
+Source: {#DLLFolder}\libgraphite2.dll;                      DestDir: {app};            Flags: ignoreversion;                                                       Components: "Widelands"
+Source: {#DLLFolder}\libpcre-1.dll;                         DestDir: {app};            Flags: ignoreversion;                                                       Components: "Widelands"
 Source: {#BuildFolder}\build\src\widelands.exe;   DestDir: {app};            Flags: ignoreversion;                                                       Components: "Widelands"
 Source: {#BuildFolder}\ChangeLog;                                 DestDir: {app};            Flags: ignoreversion; DestName: ChangeLog.txt;                              Components: "Widelands"
 Source: {#BuildFolder}\COPYING;                                   DestDir: {app};            Flags: ignoreversion; DestName: COPYING.txt;                                Components: "Widelands"
