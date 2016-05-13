@@ -38,10 +38,15 @@ def validate_files_in_path(source_path):
 			print("\n" + str(failed) + " files are not valid JSON!");
 	return failed < 1
 
-base_path = os.path.abspath(os.path.join(os.path.dirname(__file__),os.path.pardir))
+sucess = False
 
-success = validate_files_in_path(os.path.normpath(base_path + "/data/map_object_info"))
-success = success and validate_files_in_path(os.path.normpath(base_path + "/data/txts"))
+if (len(sys.argv) == 2):
+	base_path = os.path.normpath(sys.argv[1])
+	if (not os.path.exists(base_path) or os.path.isfile(base_path)):
+		base_path = os.path.abspath(os.path.join(os.path.dirname(__file__),os.path.pardir),base_path)
+
+	if (os.path.exists(base_path) and not os.path.isfile(base_path)):
+		success = validate_files_in_path(os.path.normpath(base_path))
 
 if success:
 	sys.exit(0)

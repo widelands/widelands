@@ -47,10 +47,9 @@ namespace  {
  ==========================================================
  */
 
-const std::string kDirectory = "map_object_info";
 
 // Setup the static objects Widelands needs to operate and initializes systems.
-void initialize() {
+void initialize(const std::string& output_path) {
 	i18n::set_locale("en");
 
 	if (SDL_Init(SDL_INIT_VIDEO) != 0) {
@@ -59,7 +58,9 @@ void initialize() {
 
 	g_fs = new LayeredFileSystem();
 	g_fs->add_file_system(&FileSystem::create(INSTALL_DATADIR));
-	g_fs->ensure_directory_exists(kDirectory);
+
+	FileSystem* out_filesystem = &FileSystem::create(output_path);
+	g_fs->add_file_system(out_filesystem);
 
 	// We don't really need graphics or sound here, but we will get error messages
 	// when they aren't initialized
@@ -153,7 +154,7 @@ private:
  ==========================================================
  */
 
-void write_buildings(const TribeDescr& tribe, EditorGameBase& egbase) {
+void write_buildings(const TribeDescr& tribe, EditorGameBase& egbase, const std::string& output_path) {
 
 	log("\n==================\nWriting buildings:\n==================\n");
 	JSONFileWrite fw;
@@ -319,7 +320,7 @@ void write_buildings(const TribeDescr& tribe, EditorGameBase& egbase) {
 	}
 	fw.close_array(); // Buildings
 	fw.close_brace(); // Main
-	fw.write(*g_fs, (boost::format("%s/%s_buildings.json") % kDirectory % tribe.name()).str().c_str());
+	fw.write(*g_fs, (boost::format("%s/%s_buildings.json") % output_path % tribe.name()).str().c_str());
 	log("\n");
 }
 
@@ -329,7 +330,7 @@ void write_buildings(const TribeDescr& tribe, EditorGameBase& egbase) {
  ==========================================================
  */
 
-void write_wares(const TribeDescr& tribe, EditorGameBase& egbase) {
+void write_wares(const TribeDescr& tribe, EditorGameBase& egbase, const std::string& output_path) {
 	log("\n===============\nWriting wares:\n===============\n");
 	JSONFileWrite fw;
 	fw.open_brace(); // Main
@@ -367,7 +368,7 @@ void write_wares(const TribeDescr& tribe, EditorGameBase& egbase) {
 	fw.close_array(); // Wares
 
 	fw.close_brace(); // Main
-	fw.write(*g_fs, (boost::format("%s/%s_wares.json") % kDirectory % tribe.name()).str().c_str());
+	fw.write(*g_fs, (boost::format("%s/%s_wares.json") % output_path % tribe.name()).str().c_str());
 	log("\n");
 }
 
@@ -377,7 +378,7 @@ void write_wares(const TribeDescr& tribe, EditorGameBase& egbase) {
  ==========================================================
  */
 
-void write_workers(const TribeDescr& tribe, EditorGameBase& egbase) {
+void write_workers(const TribeDescr& tribe, EditorGameBase& egbase, const std::string& output_path) {
 	log("\n================\nWriting workers:\n================\n");
 	JSONFileWrite fw;
 	fw.open_brace(); // Main
@@ -425,7 +426,7 @@ void write_workers(const TribeDescr& tribe, EditorGameBase& egbase) {
 	fw.close_array(); // Workers
 
 	fw.close_brace(); // Main
-	fw.write(*g_fs, (boost::format("%s/%s_workers.json") % kDirectory % tribe.name()).str().c_str());
+	fw.write(*g_fs, (boost::format("%s/%s_workers.json") % output_path % tribe.name()).str().c_str());
 	log("\n");
 }
 
@@ -447,7 +448,7 @@ void add_tribe_info(const TribeBasicInfo& tribe_info, JSONFileWrite* fw) {
 		fw->write_key_value_string("icon", tribe_info.icon);
 }
 
-void write_tribes(EditorGameBase& egbase) {
+void write_tribes(EditorGameBase& egbase, const std::string& output_path) {
 	JSONFileWrite fw;
 	fw.open_brace(); // Main
 	fw.open_array("tribes"); // Tribes
@@ -472,18 +473,18 @@ void write_tribes(EditorGameBase& egbase) {
 		fw_tribe.open_brace(); // TribeDescr
 		add_tribe_info(tribe_info, &fw_tribe);
 		fw_tribe.close_brace(true); // TribeDescr
-		fw_tribe.write(*g_fs, (boost::format("%s/tribe_%s.json") % kDirectory % tribe_info.name).str().c_str());
+		fw_tribe.write(*g_fs, (boost::format("%s/tribe_%s.json") % output_path % tribe_info.name).str().c_str());
 
 		const TribeDescr& tribe =
 				*tribes.get_tribe_descr(tribes.tribe_index(tribe_info.name));
 
-		write_buildings(tribe, egbase);
-		write_wares(tribe, egbase);
-		write_workers(tribe, egbase);
+		write_buildings(tribe, egbase, output_path);
+		write_wares(tribe, egbase, output_path);
+		write_workers(tribe, egbase, output_path);
 	}
 	fw.close_array(); // Tribes
 	fw.close_brace(); // Main
-	fw.write(*g_fs, (boost::format("%s/tribes.json") % kDirectory).str().c_str());
+	fw.write(*g_fs, (boost::format("%s/tribes.json") % output_path).str().c_str());
 }
 
 }  // namespace
@@ -494,12 +495,19 @@ void write_tribes(EditorGameBase& egbase) {
  ==========================================================
  */
 
-int main()
+int main(int argc, char ** argv)
 {
+	if (!(2 <= argc && argc <= 3)) {
+		log("Usage: %s <existing-absolute-output-path>\n", argv[0]);
+		return 1;
+	}
+
+	const std::string output_path = argv[argc - 1];
+
 	try {
-		initialize();
+		initialize(output_path);
 		EditorGameBase egbase(nullptr);
-		write_tribes(egbase);
+		write_tribes(egbase, output_path);
 	}
 	catch (std::exception& e) {
 		log("Exception: %s.\n", e.what());
