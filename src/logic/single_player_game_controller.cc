@@ -124,6 +124,11 @@ bool SinglePlayerGameController::is_paused()
 	return paused_;
 }
 
+bool SinglePlayerGameController::is_paused_or_zero_speed()
+{
+	return paused_ || speed_ == 0;
+}
+
 void SinglePlayerGameController::set_paused(bool paused)
 {
 	paused_ = paused;

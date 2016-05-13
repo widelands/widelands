@@ -65,10 +65,10 @@ void SaveHandler::think(Widelands::Game & game) {
 			save_requested_ = false;
 			save_filename_ = "";
 		} else {
-			// autosave
+			// Autosave ...
 			// Roll savefiles
 			int32_t number_of_rolls = g_options.pull_section("global").get_int("rolling_autosave", 5) - 1;
-			log("Autosave: rolling savefiles (count): %d\n", number_of_rolls + 1);
+			log("Autosave: Rolling savefiles (count): %d\n", number_of_rolls + 1);
 			std::string filename_previous =
 				create_file_name(get_base_dir(), (boost::format("%s_%02d") % filename % number_of_rolls).str());
 			if (number_of_rolls > 0 && g_fs->file_exists(filename_previous)) {
@@ -91,7 +91,7 @@ void SaveHandler::think(Widelands::Game & game) {
 			log("Autosave: saving as %s\n", filename.c_str());
 		}
 
-		// saving now
+		// Saving now
 		const std::string complete_filename = create_file_name(get_base_dir(), filename);
 		std::string backup_filename;
 
@@ -145,8 +145,7 @@ void SaveHandler::think(Widelands::Game & game) {
 		}
 
 		// check if game is paused (in any way)
-		if (game.game_controller()->is_paused() ||
-			game.game_controller()->real_speed() == 0) {
+		if (game.game_controller()->is_paused_or_zero_speed()) {
 			// Wait 30 seconds until next save try
 			last_saved_realtime_ = last_saved_realtime_ + 30000;
 			return;

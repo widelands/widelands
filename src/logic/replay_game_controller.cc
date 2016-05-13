@@ -97,6 +97,10 @@ bool ReplayGameController::is_paused() {
 	return paused_;
 }
 
+bool ReplayGameController::is_paused_or_zero_speed() {
+	return paused_ || speed_ == 0;
+}
+
 void ReplayGameController::set_paused(bool const paused) {
 	paused_ = paused;
 }

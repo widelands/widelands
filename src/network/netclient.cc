@@ -488,6 +488,12 @@ bool NetClient::is_paused()
 	return false;
 }
 
+// Network games cannot be paused
+bool NetClient::is_paused_or_zero_speed()
+{
+	return d->realspeed == 0; // Is it OK? NOCOM
+}
+
 void NetClient::set_paused(bool /* paused */)
 {
 }

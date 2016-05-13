@@ -1542,6 +1542,12 @@ bool NetHost::is_paused()
 	return false;
 }
 
+// Network games cannot be paused
+bool NetHost::is_paused_or_zero_speed()
+{
+	return d->waiting; // Is it OK? NOCOM
+}
+
 void NetHost::set_paused(bool /* paused */)
 {
 }
