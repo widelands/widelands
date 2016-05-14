@@ -326,7 +326,7 @@ ImmovableProgram const * ImmovableDescr::get_program
 Immovable & ImmovableDescr::create
 	(EditorGameBase & egbase, Coords const coords) const
 {
-	assert(this);
+	assert(this != nullptr);
 	Immovable & result = *new Immovable(*this);
 	result.position_ = coords;
 	result.init(egbase);
