@@ -332,8 +332,18 @@ function destroy_quarries()
    -- Remove all rocks
    remove_all_rocks(first_quarry_field:region(6))
 
+   function count_quarry_messages(field)
+      local count = 0
+      for i, msg in ipairs(plr.messages) do
+         if (msg.field == first_quarry_field or msg.field == second_quarry_field) then
+            count = count + 1
+         end
+      end
+      return count
+   end
+
    -- Wait for messages to arrive
-   while #plr.inbox < 1 do sleep(300) end
+   while count_quarry_messages() < 2 do sleep(300) end
 
    local o = message_box_objective(plr, destroy_quarries_message)
 
