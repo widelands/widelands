@@ -1,5 +1,6 @@
 usr/widelands usr/games
 usr/wl_map_info usr/games
 usr/wl_render_richtext usr/games
+widelands.appdata.xml /usr/share/appdata
 usr/share/applications
 usr/share/icons
