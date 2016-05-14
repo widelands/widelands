@@ -42,7 +42,6 @@ public:
 	uint32_t desired_speed() override;
 	void set_desired_speed(uint32_t const speed) override;
 	bool is_paused() override;
-	bool is_paused_or_zero_speed() override;
 	void set_paused(bool const paused) override;
 
 private:

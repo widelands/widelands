@@ -81,7 +81,9 @@ public:
 	/**
 	 * Whether the game is stopped.
 	 */
-	virtual bool is_paused_or_zero_speed() = 0;
+	bool is_paused_or_zero_speed() {
+		return is_paused() || real_speed() == 0;
+	};
 
 	/**
 	 * Sets whether the game is paused.

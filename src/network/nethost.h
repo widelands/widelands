@@ -54,7 +54,6 @@ struct NetHost : public GameController, private SyncCallback {
 	uint32_t desired_speed() override;
 	void set_desired_speed(uint32_t speed) override;
 	bool is_paused() override;
-	bool is_paused_or_zero_speed() override;
 	void set_paused(bool paused) override;
 	// End GameController interface
 

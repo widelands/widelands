@@ -38,7 +38,6 @@ public:
 	uint32_t desired_speed() override;
 	void set_desired_speed(uint32_t speed) override;
 	bool is_paused() override;
-	bool is_paused_or_zero_speed() override;
 	void set_paused(bool paused) override;
 	void report_result(uint8_t player, Widelands::PlayerEndResult result, const std::string & info) override;
 
