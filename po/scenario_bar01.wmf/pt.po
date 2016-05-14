@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-03-18 11:30+0000\n"
-"PO-Revision-Date: 2016-03-28 09:40+0000\n"
+"POT-Creation-Date: 2016-05-06 09:44+0000\n"
+"PO-Revision-Date: 2016-05-13 11:06+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Portuguese (http://www.transifex.com/widelands/widelands/language/pt/)\n"
 "MIME-Version: 1.0\n"
@@ -37,7 +37,7 @@ msgstr ""
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:33
 msgid "Expand north-east and build a quarry"
-msgstr "Expande-te para Nordeste e constrói ai uma Pedreira"
+msgstr "Expande-te para Nordeste e constrói ai uma pedreira"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:35
 msgid "Expand north-east to the rocks"
@@ -138,7 +138,7 @@ msgid ""
 "A hunter can hunt down animals, while a gamekeeper prevents them from "
 "becoming extinct. The meat is then processed in a tavern into lunches for "
 "your miners."
-msgstr "Um Caçador pode caçar animais enquanto o Couteiro impede que eles se extingam. A carne é então processada na Taberna em refeições para os teus mineiros."
+msgstr "Um caçador pode caçar animais enquanto o couteiro impede que eles se extingam. A carne é então processada na taberna em refeições para os teus mineiros."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:69
 msgid ""
@@ -148,7 +148,7 @@ msgstr "Isto é um primeiro exemplo da transformação que os produtos sofrem an
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:74
 msgid "Bake bread"
-msgstr "Cozer o Pão"
+msgstr "Cozer o pão"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:76
 msgid "Build a well, a farm and a bakery"
@@ -168,13 +168,13 @@ msgstr "Refina os teus recursos minerais"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:84
 msgid "Build a smelting works"
-msgstr "Construa a Fundição"
+msgstr "Construa uma fundição"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:85
 msgid ""
 "The iron ore your miners dig up is not usable yet – it has to be melted into"
 " iron first."
-msgstr "O minério de ferro que os mineiros trazem à superfície ainda não é usável: tem de ser fundido para se transformar em Ferro."
+msgstr "O minério de ferro que os mineiros trazem à superfície ainda não é usável: tem de ser fundido para se transformar em ferro."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:90
 msgid "Enhance buildings and build a micro brewery"
@@ -223,13 +223,13 @@ msgid ""
 "You may of course enhance all mines to deep mines instantly given you have "
 "the workers – bigger mines work a bit faster, smaller mines need cheaper "
 "food. It’s up to you which strategy you prefer."
-msgstr "Podem sempre melhorar todas as Minas para Minas fundas de uma vez se para isso tiveres os trabalhadores: as minas maiores extraem mais rapidamente enquanto que as minas menores precisam de menos alimentação. Cabe a ti definir qual a estratégia que preferes."
+msgstr "Podem sempre melhorar todas as minas para minas fundas de uma vez se para isso tiveres os trabalhadores: as minas maiores extraem mais rapidamente enquanto que as minas menores precisam de menos alimentação. Cabe a ti definir qual a estratégia que preferes."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:103
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:105
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:108
 msgid "Build a wood hardener"
-msgstr "Construa um Endurecedor de Madeira"
+msgstr "Construa um endurecedor de madeira"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:106
 msgid ""
@@ -242,7 +242,7 @@ msgstr ""
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:113
 msgid "Build a lime kiln and coal economy"
-msgstr "Construa o Fono da cal e a economia do carvão"
+msgstr "Construa o forno da cal e a economia do carvão"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:115
 msgid ""
@@ -294,7 +294,7 @@ msgid ""
 "The third material necessary for improved buildings is thatch reed, used to "
 "cover roofs. Thatch reed is planted by a gardener around his building, the "
 "reed yard."
-msgstr "O terceiro material necessário para melhorar os edifícios é o Colmo que é usado para cobrir os telhados. O Colmo é plantado pelo Plantador de Colmo à volta da sua quinta, que se chama Colmeiro."
+msgstr "O terceiro material necessário para melhorar os edifícios é o colmo que é usado para cobrir os telhados. O colmo é plantado pelo horticultor à volta do seu edifício que se chama quinta do colmo."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:140
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:142
@@ -312,7 +312,7 @@ msgstr "Quando as estradas têm um tráfego intenso durante muito tempo, um carr
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:145
 msgid "Oxen are bred in cattle farms out of wheat and water."
-msgstr "Os bois de carga são criados nas Criação de bois com recurso a trigo e água."
+msgstr "Os bois de carga são criados nas criações de bois com recurso a trigo e água."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:156
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:168
@@ -445,7 +445,7 @@ msgstr "Alguém chega ao pé de ti"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:238
 msgid "An old man says…"
-msgstr "Um Ancião diz …"
+msgstr "Um ancião diz …"
 
 #. TRANSLATORS: Khantrukh
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:240
@@ -666,7 +666,7 @@ msgstr "O Bolderano exclama …"
 msgid ""
 "Just look at that! In the east is the great mountain of Kal’mavrath! I "
 "wonder what treasures nature might have hidden beneath its majestic flanks!"
-msgstr "Olha-me para isto ! A Este está a grande montanha Kal’mavrath !  Estou a pensar nas riquezas que s natureza escondeu nela por baixo dos seus majestosos flancos!"
+msgstr "Olha-me para isto ! A Este está a grande montanha Kal’mavrath !  Estou a pensar nas riquezas que a natureza escondeu nela por baixo dos seus majestosos flancos!"
 
 #. TRANSLATORS: Boldreth
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:358
@@ -782,7 +782,7 @@ msgid ""
 "celebration, I noticed how much this tiny bit of home means to my people. "
 "Their songs filled the air until deep in the night, and they were in higher "
 "spirits still the day after."
-msgstr "A taverna abriu ontem as portas ao meu povo. Apesar de eu não estar com disposição para celebrações, reparei o quanto este pequeno pedaço de casa significou para o meu povo. As suas canções encheram o ar até altas horas da noite mas no dia seguinte ainda estavam animados."
+msgstr "A taberna abriu ontem as portas ao meu povo. Apesar de eu não estar com disposição para celebrações, reparei o quanto este pequeno pedaço de casa significou para o meu povo. As suas canções encheram o ar até altas horas da noite mas no dia seguinte ainda estavam animados."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:426
@@ -833,12 +833,12 @@ msgid ""
 "As I just discovered, we are running short on blackwood! We cannot put our "
 "warriors into some crumbling huts, and even less so in times as dangerous as"
 " ours!"
-msgstr "Descobri agora mesmo que estamos com falta de Madeira queimada ! Não podemos pôr os nossos guerreiros a viver em cabanas a cair e mais ainda por causa dos tempos perigosos em que vivemos!"
+msgstr "Descobri agora mesmo que estamos com falta de madeira queimada ! Não podemos pôr os nossos guerreiros a viver em cabanas a cair e mais ainda por causa dos tempos perigosos em que vivemos!"
 
 #. TRANSLATORS: Boldreth
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:455
 msgid "We need a wood hardener, and we need one now!"
-msgstr "Precisamos de um Endurecedor de madeira e já !"
+msgstr "Precisamos de um endurecedor de madeira e já !"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:461
 msgid "Boldreth smiles…"
@@ -912,7 +912,7 @@ msgstr "São animais espectaculares: o boi é tão ágil como os humanos mas mui
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:500
 msgid "Mission Complete"
-msgstr "Missão Terminada"
+msgstr "Missão cumprida"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:501
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:516
@@ -934,7 +934,7 @@ msgid ""
 " through these dark days. Yet before I could speak any words of gratitude or"
 " encouragement, one of my warriors ran into the inn. He had been far out in "
 "the forest for the past days and I could see how weary he was."
-msgstr "Quando olhei em volta, vi as pessoas cheias de confiança e certeza de que eu os poderei guiar através destes negros dias. Mas antes que eu pudesse dizer umas palavras de gratidão e incentivo um dos meus guerreiros entrou de rompante na Estalagem. Ele tinha estado nos últimos dias embrenhado lá longe na floresta e eu conseguia ver o quão preocupado ele estava."
+msgstr "Quando olhei em volta, vi as pessoas cheias de confiança e certeza de que eu os poderei guiar através destes negros dias. Mas antes que eu pudesse dizer umas palavras de gratidão e incentivo um dos meus guerreiros entrou de rompante na hospedaria. Ele tinha estado nos últimos dias embrenhado lá longe na floresta e eu conseguia ver o quão preocupado ele estava."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:509
@@ -1029,8 +1029,8 @@ msgstr ""
 msgid "“%s”"
 msgstr "«&nbsp;%s&nbsp;»"
 
-#: ../../data/scripting/format_scenario.lua:146
+#: ../../data/scripting/format_scenario.lua:96
 msgid "New Objective"
 msgid_plural "New Objectives"
-msgstr[0] "Novo Objectivo"
-msgstr[1] "Novos Objectivos"
+msgstr[0] "Novo objetivo"
+msgstr[1] "Novos objetivos"

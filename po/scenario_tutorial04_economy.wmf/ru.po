@@ -3,15 +3,16 @@
 # 
 # Translators:
 # Aleksandr Gladkov <djanticisco@gmail.com>, 2016
+# Alexander Bikmeyev <bikmeyev@gmail.com>, 2016
 # Anton Khabarov <2233009@gmail.com>, 2015
 # Федор <Lunar-energy@ya.ru>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-04-07 14:12+0000\n"
-"PO-Revision-Date: 2016-04-07 22:57+0000\n"
-"Last-Translator: Aleksandr Gladkov <djanticisco@gmail.com>\n"
+"POT-Creation-Date: 2016-05-06 09:44+0000\n"
+"PO-Revision-Date: 2016-05-08 15:25+0000\n"
+"Last-Translator: Alexander Bikmeyev <bikmeyev@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -38,13 +39,13 @@ msgid ""
 "Building your economy up and making it work well and grow is the main part "
 "of Widelands. But you can’t control the workers directly – they will follow "
 "the general conditions you set."
-msgstr "Создайте свою экономику и сделайте так, чтобы она была на высшем уровне. Расти и продвигаться - это основная часть Widelands. Вы не можете контролировать работников напрямую – они будут следовать своим требованиям."
+msgstr "Создайте свою экономику и сделайте так, чтобы она была на высшем уровне. Расти и продвигаться - это основная часть Widelands. Вы не можете контролировать работников напрямую – они будут следовать базовым условиям, определяемым вами."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:23
 msgid ""
 "This is what I’ll show you in this tutorial: what actions can you take to "
 "define those general conditions?"
-msgstr ""
+msgstr "В этом обучающем сценарии я покажу: какие действия используются для определения общих условий?"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:31
 msgid "A Peaceful Land"
@@ -129,14 +130,14 @@ msgstr "Окно \"Статистика построек\" содержит об
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:72
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:145
 msgid "Open it. You can access it from the statistics menu."
-msgstr "Откройте это. Вы можете это открыть из меню статистики."
+msgstr "Откройте его. Это можно сделать из меню статистики."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:73
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:146
 msgid ""
 "The statistics menu is accessed via the second button at the bottom. It "
 "provides several windows that give you information about the game."
-msgstr ""
+msgstr "Меню \"Статистика\" может быть вызвано нажатием второй кнопки внизу. Оно состоит из нескольких окон, содержащих информацию об игре. "
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:78
 msgid "Building Statistics"
@@ -146,24 +147,24 @@ msgstr "Статистика построек"
 msgid ""
 "This is the building statistics window. It shows you all buildings you can "
 "own, sorted by their size."
-msgstr ""
+msgstr "Это окно Статистики построек. В нем показываются все имеющиеся у вас здания, отсортированные по размеру."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:81
 msgid "Let me now explain what all those numbers mean:"
-msgstr ""
+msgstr "Позвольте я объясню что означают все эти цифры:"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:83
 msgid ""
 "‘2/1’ below the quarry: This means that you have two quarries, plus another "
 "one which is under construction."
-msgstr ""
+msgstr "'2/1' под Каменоломней: это означает, что у вас есть две каменоломни, и еще одна строится."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:84
 msgid ""
 "‘0%’: This indicates the average productivity of all buildings of that type."
 " You have just started this game, therefore none of your buildings has done "
 "any work yet, but they are going to start working soon."
-msgstr ""
+msgstr "‘0%’: Это средняя производительность всех зданий данного типа. Вы только начали игру, так что ни одно из ваших зданий еще ничего не сделало, но скоро они начнут работать."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:85
 msgid ""
@@ -171,25 +172,25 @@ msgid ""
 "shown instead of a productivity. You want to have four soldiers in your "
 "sentries, but only two soldiers are stationed in this kind of building. This"
 " leaves two vacant positions – we really need more soldiers."
-msgstr ""
+msgstr "‘2/4’ под строением: для военных зданий, вместо производительности показывается количество расквартированных солдат. В Караульной может быть 4 солдата, но пока что есть только 2. То есть два место еще свободно - нам точно нужны новые солдаты."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:86
 msgid ""
 "In both cases, the color (green - yellow - red) signals you how good the "
 "value is."
-msgstr ""
+msgstr "Во всех случаях увет (зеленый-желтый-красный) показывает на сколько хорошим является значение."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:87
 msgid ""
 "If you click on a building, you can scroll through the buildings of the "
 "selected type."
-msgstr ""
+msgstr "Если вы щелкните на строении, вы можете прокручивать список строений данного типа."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:88
 msgid ""
 "If you don’t have any building of a particular building type, it will be "
 "shown greyed out."
-msgstr ""
+msgstr "Если у вас нет ни одного строения некоторого типа, то оно будет отображаться серым."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:91
 msgid "Now it’s your turn"

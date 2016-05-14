@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-04-07 14:12+0000\n"
-"PO-Revision-Date: 2016-04-07 14:13+0000\n"
+"POT-Creation-Date: 2016-05-06 09:44+0000\n"
+"PO-Revision-Date: 2016-05-13 09:56+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Portuguese (http://www.transifex.com/widelands/widelands/language/pt/)\n"
 "MIME-Version: 1.0\n"
@@ -114,11 +114,11 @@ msgstr ""
 
 #: ../../data/campaigns/campaigns.conf:45
 msgid "Atlanteans"
-msgstr "Atlântas"
+msgstr "Atlantas"
 
 #: ../../data/campaigns/campaigns.conf:47
 msgid "Challenging. Introduces the Atlanteans"
-msgstr "Desafiador. Introduz os Atlântas."
+msgstr "Desafiador. Introduz os Atlantas."
 
 #: ../../data/campaigns/campaigns.conf:48
 msgid ""
@@ -127,7 +127,7 @@ msgid ""
 " the stuff of legends. Leading the remaining Atlanteans into a new future in"
 " a new part of the World, Jundlina became the most powerful human of her "
 "time, but at a high cost: her humanity and soul."
-msgstr "Quando o Deus perdeu a fé nos Atlânticas e submergiu-lhes a ilha, uma valente mulher que lutava pela justiça e por uma segunda oportunidade para o seu povo, tornou-se numa lenda. Liderando o que restava do povo da Atlântida em direcção a um novo futuro numa nova terra, Jundlina tornou-se a mais poderosa humana do seu tempo. Mas pagou um alto preço: entregou a sua humanidade e a sua alma."
+msgstr "Quando o Deus perdeu a fé nos Atlantas e submergiu-lhes a ilha, uma valente mulher que lutava pela justiça e por uma segunda oportunidade para o seu povo, tornou-se numa lenda. Liderando o que restava do povo da Atlântida em direção a um novo futuro numa nova terra, Jundlina tornou-se a mais poderosa humana do seu tempo. Mas pagou um alto preço: entregou a sua humanidade e a sua alma."
 
 #: ../../data/campaigns/campaigns.conf:78
 #: ../../data/campaigns/emp01.wmf/elemental:7
@@ -553,7 +553,7 @@ msgid ""
 " where two or more groups try to reach the center island as fast as "
 "possible, to be the first erecting a castle on the top of the central "
 "mountain."
-msgstr "Um tornei especial na cultura Atlânta é chamado de «&nbsp;Ilhas Saltitantes&nbsp;», no qual dois ou mais grupos tentam chegar a ilha central o mais depressa possível, para serem os primeiros a construir um castelo ao topo da montanha central."
+msgstr "Um tornei especial na cultura Atlanta é chamado de «&nbsp;Ilhas Saltitantes&nbsp;», no qual dois ou mais grupos tentam chegar a ilha central o mais depressa possível, para serem os primeiros a construir um castelo ao topo da montanha central."
 
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/elemental:9
 msgid "Smugglers"
