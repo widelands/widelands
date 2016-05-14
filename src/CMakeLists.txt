@@ -82,6 +82,7 @@ add_subdirectory(sound)
 add_subdirectory(third_party)
 add_subdirectory(ui_basic)
 add_subdirectory(ui_fsmenu)
+add_subdirectory(website)
 add_subdirectory(wui)
 
 # TODO(unknown): Ideally widelands_ball_of_mud shouldn't exist, everything should be in a
