@@ -332,7 +332,7 @@ function destroy_quarries()
    -- Remove all rocks
    remove_all_rocks(first_quarry_field:region(6))
 
-   function count_quarry_messages(field)
+   function count_quarry_messages()
       local count = 0
       for i, msg in ipairs(plr.messages) do
          if (msg.field == first_quarry_field or msg.field == second_quarry_field) then
