@@ -178,29 +178,34 @@ return {
 
    local function _game_over(plrs)
       local points = {}
+      local win_points = 0
       for idx,plr in ipairs(plrs) do
+         local player_points, pstat = _calc_points({plr})
          if (plr.team == 0) then
-            points[#points + 1] = { plr, _calc_points({plr}) }
+            points[#points + 1] = { plr, player_points, player_points }
          else
-            points[#points + 1] = { plr, _calc_points(teams[plr.team]) }
+            local team_points, tstat = _calc_points(teams[plr.team])
+            points[#points + 1] = { plr, team_points, player_points }
+         end
+         if (points[#points][2] > win_points) then
+            win_points = points[#points][2]
          end
       end
-      table.sort(points, function(a,b) return a[2] < b[2] end)
-      for i=1,#points-1 do
-         local player = points[i][1]
-         player:send_message(lost_game_over.title, lost_game_over.body)
+      for idx,info in ipairs(points) do
+         local player = info[1]
+         local lost_or_won = 0
+         if (info[2] < win_points) then
+            lost_or_won = 0
+            player:send_message(lost_game_over.title, lost_game_over.body)
+         else
+            lost_or_won = 1
+            player:send_message(won_game_over.title, won_game_over.body)
+         end
          if (player.team == 0) then
-            wl.game.report_result(player, 0, make_extra_data(player, wc_descname, wc_version, {score=points[i][2]}))
+            wl.game.report_result(player, lost_or_won, make_extra_data(player, wc_descname, wc_version, {score=info[2]}))
          else
-            wl.game.report_result(player, 0, make_extra_data(player, wc_descname, wc_version, {score=_calc_points({player}), team_score=points[i][2]}))
+            wl.game.report_result(player, lost_or_won, make_extra_data(player, wc_descname, wc_version, {score=info[3], team_score=info[2]}))
          end
-      end
-      local player = points[#points][1]
-      player:send_message(won_game_over.title, won_game_over.body)
-      if (player.team == 0) then
-         wl.game.report_result(player, 1, make_extra_data(player, wc_descname, wc_version, {score=points[#points][2]}))
-      else
-         wl.game.report_result(player, 1, make_extra_data(player, wc_descname, wc_version, {score=_calc_points({player}), team_score=points[#points][2]}))
       end
    end
 
