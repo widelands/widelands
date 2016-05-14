@@ -333,7 +333,7 @@ function destroy_quarries()
    remove_all_rocks(first_quarry_field:region(6))
 
    -- Wait for messages to arrive
-   while #plr.inbox < 2 do sleep(300) end
+   while #plr.inbox < 1 do sleep(300) end
 
    local o = message_box_objective(plr, destroy_quarries_message)
 
