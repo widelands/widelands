@@ -70,7 +70,7 @@ game_(parent->game())
 	hbox1->add_space(PADDING);
 
 	UI::Box * info_box = new UI::Box(hbox1, 0, 0, UI::Box::Vertical, 0, 0);
-	info_area_label_ = new UI::Textarea(info_box, _("Player info:"));
+	info_area_label_ = new UI::Textarea(info_box, _("Player Info:"));
 	info_box->add(info_area_label_, UI::Align::kLeft);
 	info_area_ = new UI::MultilineTextarea(
 						  info_box, 0, 0, 130,
@@ -275,6 +275,9 @@ std::string GameSummaryScreen::parse_player_info(std::string info)
 		if (key == "score") {
 			info_str +=
 				(boost::format("%1% : %2%\n") % _("Score") % pair.at(1)).str();
+		} else if (key == "team_score") {
+			info_str +=
+				(boost::format("%1% : %2%\n") % _("Team Score") % pair.at(1)).str();
 		} else if (key == "resign_reason") {
 			info_str +=
 				(boost::format("%1%\n") % pair.at(1)).str();
