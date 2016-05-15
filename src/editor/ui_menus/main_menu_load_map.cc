@@ -30,7 +30,7 @@
  * Create all the buttons etc...
 */
 MainMenuLoadMap::MainMenuLoadMap(EditorInteractive& parent)
-   : MainMenuLoadOrSaveMap(parent, "load_map_menu", _("Load Map")) {
+   : MainMenuLoadOrSaveMap(parent, 1, "load_map_menu", _("Load Map")) {
 
 	table_.selected.connect(boost::bind(&MainMenuLoadMap::entry_selected, this));
 	table_.double_clicked.connect(boost::bind(&MainMenuLoadMap::clicked_ok, boost::ref(*this)));

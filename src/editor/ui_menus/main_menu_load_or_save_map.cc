@@ -32,6 +32,7 @@
 #include "map_io/widelands_map_loader.h"
 
 MainMenuLoadOrSaveMap::MainMenuLoadOrSaveMap(EditorInteractive& parent,
+                                             int no_of_bottom_rows,
                                              const std::string& name,
                                              const std::string& title,
                                              const std::string& basedir)
@@ -43,7 +44,7 @@ MainMenuLoadOrSaveMap::MainMenuLoadOrSaveMap(EditorInteractive& parent,
      tablex_(padding_),
      tabley_(buth_ + 2 * padding_),
      tablew_(get_inner_w() * 7 / 12),
-     tableh_(get_inner_h() - tabley_ - 4 * buth_ - 3 * padding_),
+     tableh_(get_inner_h() - tabley_ - (no_of_bottom_rows + 1) * buth_ - no_of_bottom_rows * padding_),
      right_column_x_(tablew_ + 2 * padding_),
      butw_((get_inner_w() - right_column_x_ - 2 * padding_) / 2),
 

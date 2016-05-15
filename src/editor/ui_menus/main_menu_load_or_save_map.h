@@ -34,6 +34,7 @@
 */
 struct MainMenuLoadOrSaveMap : public UI::Window {
 	MainMenuLoadOrSaveMap(EditorInteractive& parent,
+	                      int no_of_bottom_rows,
 	                      const std::string& name,
 	                      const std::string& title,
 	                      const std::string& basedir = "maps");
