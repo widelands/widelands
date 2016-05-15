@@ -6,14 +6,22 @@ import json
 import os.path
 import sys
 
-# This script collects translations for the appdata.xml
-# All non-translatable content is taken from ../debian/widelands.appdata.xml.stub
+# This script collects translations for the appdata.xml and .desktop files
+#
+# All non-translatable content for ../debian/widelands.appdata.xml is taken from
+# ../debian/widelands.appdata.xml.stub
 # That file contains a SUMMARY_DESCRIPTION_HOOK where the translatable information
 # is inserted.
-#
-# The translations are sourced from ../debian/translations/
-#
 # The output is written to ../debian/widelands.appdata.xml
+#
+# All non-translatable content for ../debian/widelands.desktop is taken from
+# ../debian/widelands.desktop.stub
+# That file contains a GENERIC_NAME_COMMENT_HOOK where the translatable information
+# is inserted.
+# The output is written to ../debian/widelands.desktop
+#
+# All translations are sourced from ../debian/translations/
+
 
 print("Updating appdata.xml and .desktop files")
 print("- Checking files")
