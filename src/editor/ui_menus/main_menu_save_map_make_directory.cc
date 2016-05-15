@@ -66,6 +66,7 @@ MainMenuSaveMapMakeDirectory::MainMenuSaveMapMakeDirectory
 						 boost::ref(*this),
 						 UI::Panel::Returncodes::kBack));
 	center_to_parent();
+	edit_.focus();
 }
 
 
