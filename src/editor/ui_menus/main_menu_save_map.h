@@ -47,7 +47,7 @@ private:
 
 	UI::Button make_directory_, edit_options_;
 
-	UI::Textarea editbox_label_;
+	UI::Textarea editbox_label_, directory_info_;
 	UI::EditBox* editbox_;
 };
 

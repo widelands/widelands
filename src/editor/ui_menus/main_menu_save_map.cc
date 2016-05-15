@@ -73,6 +73,11 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive& parent)
                     butw_,
                     buth_,
                     _("Filename:"),
+                    UI::Align::kLeft),
+     directory_info_(this,
+                    padding_,
+                    tabley_ + tableh_ + buth_ + 4 * padding_,
+                    (boost::format(_("Saving to: %s")) % g_fs->canonicalize_name(curdir_)).str(),
                     UI::Align::kLeft) {
 
 	// Make room for edit_options_ button
@@ -157,6 +162,7 @@ void MainMenuSaveMap::clicked_make_directory() {
 		//  create directory
 		std::string fullname = curdir_ + g_fs->file_separator() + md.get_dirname();
 		g_fs->make_directory(fullname);
+		curdir_ = fullname;
 		fill_table();
 	}
 }
@@ -202,6 +208,8 @@ void MainMenuSaveMap::double_clicked_item() {
 	const MapData& mapdata = maps_data_[table_.get_selected()];
 	if (mapdata.maptype == MapData::MapType::kDirectory) {
 		curdir_ = mapdata.filename;
+		/** TRANSLATORS: The directory that a file will be saved to. */
+		directory_info_.set_text((boost::format(_("Saving to: %s")) % g_fs->canonicalize_name(curdir_)).str());
 		fill_table();
 	} else {
 		clicked_ok();
