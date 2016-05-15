@@ -214,7 +214,7 @@ return {
       name = wc_points,
       pic = "images/wui/stats/genstats_points.png",
       calculator = function(p)
-         local pts = _calc_points(p)
+         local pts = _calc_points({p})
          return pts
       end,
    }
