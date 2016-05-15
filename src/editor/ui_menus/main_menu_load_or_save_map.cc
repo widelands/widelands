@@ -80,7 +80,7 @@ MainMenuLoadOrSaveMap::MainMenuLoadOrSaveMap(EditorInteractive& parent,
 	                                "show_mapnames",
 	                                0,
 	                                0,
-	                                butw_,
+	                                2 * butw_,
 	                                buth_,
 											  g_gr->images().get("images/ui_basic/but1.png"),
 	                                _("Show Map Names"));
