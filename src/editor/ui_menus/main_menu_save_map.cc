@@ -136,7 +136,7 @@ void MainMenuSaveMap::clicked_ok() {
 
 	if (g_fs->is_directory(complete_filename.c_str()) &&
 		 !Widelands::WidelandsMapLoader::is_widelands_map(complete_filename)) {
-		curdir_ = complete_filename;
+		set_current_directory(complete_filename);
 		fill_table();
 	} else {  //  Ok, save this map
 		Widelands::Map& map = eia().egbase().map();
@@ -162,7 +162,7 @@ void MainMenuSaveMap::clicked_make_directory() {
 		//  create directory
 		std::string fullname = curdir_ + g_fs->file_separator() + md.get_dirname();
 		g_fs->make_directory(fullname);
-		curdir_ = fullname;
+		set_current_directory(fullname);
 		fill_table();
 	}
 }
@@ -207,9 +207,7 @@ void MainMenuSaveMap::double_clicked_item() {
 	assert(table_.has_selection());
 	const MapData& mapdata = maps_data_[table_.get_selected()];
 	if (mapdata.maptype == MapData::MapType::kDirectory) {
-		curdir_ = mapdata.filename;
-		/** TRANSLATORS: The directory that a file will be saved to. */
-		directory_info_.set_text((boost::format(_("Saving to: %s")) % g_fs->canonicalize_name(curdir_)).str());
+		set_current_directory(mapdata.filename);
 		fill_table();
 	} else {
 		clicked_ok();
@@ -222,6 +220,12 @@ void MainMenuSaveMap::double_clicked_item() {
  */
 void MainMenuSaveMap::edit_box_changed() {
 	ok_.set_enabled(!editbox_->text().empty());
+}
+
+void MainMenuSaveMap::set_current_directory(const std::string& filename) {
+	curdir_ = filename;
+	/** TRANSLATORS: The directory that a file will be saved to. */
+	directory_info_.set_text((boost::format(_("Saving to: %s")) % g_fs->canonicalize_name(curdir_)).str());
 }
 
 /**
