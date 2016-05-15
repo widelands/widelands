@@ -154,7 +154,6 @@ void MainMenuLoadOrSaveMap::fill_table() {
 	//  Fill it with all files we find.
 	FilenameSet files = g_fs->list_directory(curdir_);
 
-
 	// If we are not at the top of the map directory hierarchy (we're not talking
 	// about the absolute filesystem top!) we manually add ".."
 	if (curdir_ != basedir_) {
