@@ -33,7 +33,8 @@
 
 MainMenuLoadOrSaveMap::MainMenuLoadOrSaveMap(EditorInteractive& parent,
                                              const std::string& name,
-                                             const std::string& title)
+                                             const std::string& title,
+                                             const std::string& basedir)
    : UI::Window(&parent, name, 0, 0, parent.get_inner_w() - 40, parent.get_inner_h() - 40, title),
 
      // Values for alignment and size
@@ -68,9 +69,10 @@ MainMenuLoadOrSaveMap::MainMenuLoadOrSaveMap(EditorInteractive& parent,
              buth_,
 				 g_gr->images().get("images/ui_basic/but1.png"),
              _("Cancel")),
-     basedir_("maps"),
+     basedir_(basedir),
      has_translated_mapname_(false),
      showing_mapames_(false) {
+	g_fs->ensure_directory_exists(basedir_);
 	curdir_ = basedir_;
 
 	UI::Box* vbox = new UI::Box(this, tablex_, padding_, UI::Box::Horizontal, padding_, get_w());
@@ -151,10 +153,13 @@ void MainMenuLoadOrSaveMap::fill_table() {
 	//  Fill it with all files we find.
 	FilenameSet files = g_fs->list_directory(curdir_);
 
+
 	// If we are not at the top of the map directory hierarchy (we're not talking
 	// about the absolute filesystem top!) we manually add ".."
 	if (curdir_ != basedir_) {
 		maps_data_.push_back(MapData::create_parent_dir(curdir_));
+	} else if (files.empty()) {
+		maps_data_.push_back(MapData::create_empty_dir(curdir_));
 	}
 
 	MapData::DisplayType display_type;

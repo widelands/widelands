@@ -131,11 +131,20 @@ std::string MapData::parent_name() {
 }
 
 // static
+MapData MapData::create_empty_dir(const std::string& current_dir) {
+	/** TRANSLATORS: Empty current folder */
+	return MapData(current_dir, (boost::format("<%s>") % _("empty")).str());
+}
+
+// static
 MapData MapData::create_directory(const std::string& directory) {
 	std::string localized_name;
 	if (boost::equals(directory, "maps/MP_Scenarios")) {
 		/** TRANSLATORS: Directory name for MP Scenarios in map selection */
 		localized_name = _("Multiplayer Scenarios");
+	} else if (boost::equals(directory, "maps/My_Maps")) {
+		/** TRANSLATORS: Directory name for user maps in map selection */
+		localized_name = _("My Maps");
 	} else {
 		localized_name = FileSystem::fs_filename(directory.c_str());
 	}

@@ -89,6 +89,9 @@ struct MapData {
 	/// Get the ".." directory
 	static MapData create_parent_dir(const std::string& current_dir);
 
+	/// To display if the directory is empty and has no parent
+	static MapData create_empty_dir(const std::string& current_dir);
+
 	/// Create a subdirectory
 	static MapData create_directory(const std::string& directory);
 
