@@ -156,13 +156,13 @@ void MainMenuSaveMap::clicked_ok() {
  * Called, when the make directory button was clicked.
  */
 void MainMenuSaveMap::clicked_make_directory() {
+	/** TRANSLATORS: A folder that hasn't been given a name yet */
 	MainMenuSaveMapMakeDirectory md(this, _("unnamed"));
 	if (md.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk) {
 		g_fs->ensure_directory_exists(curdir_);
 		//  create directory
 		std::string fullname = curdir_ + g_fs->file_separator() + md.get_dirname();
 		g_fs->make_directory(fullname);
-		set_current_directory(fullname);
 		fill_table();
 	}
 }
