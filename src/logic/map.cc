@@ -460,6 +460,11 @@ void Map::swap_filesystem(std::unique_ptr<FileSystem>& fs)
 	filesystem_.swap(fs);
 }
 
+void Map::reset_filesystem()
+{
+	filesystem_.reset();
+}
+
 FileSystem* Map::filesystem() const {
 	return filesystem_.get();
 }
