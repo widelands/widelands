@@ -73,12 +73,8 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive& parent)
                     butw_,
                     buth_,
                     _("Filename:"),
-                    UI::Align::kLeft),
-     directory_info_(this,
-                    padding_,
-                    tabley_ + tableh_ + buth_ + 4 * padding_,
-                    (boost::format(_("Saving to: %s")) % g_fs->canonicalize_name(curdir_)).str(),
                     UI::Align::kLeft) {
+	set_current_directory(curdir_);
 
 	// Make room for edit_options_ button
 	map_details_.set_max_height(map_details_.get_h() - buth_ - padding_);
@@ -224,8 +220,9 @@ void MainMenuSaveMap::edit_box_changed() {
 
 void MainMenuSaveMap::set_current_directory(const std::string& filename) {
 	curdir_ = filename;
-	/** TRANSLATORS: The directory that a file will be saved to. */
-	directory_info_.set_text((boost::format(_("Saving to: %s")) % g_fs->canonicalize_name(curdir_)).str());
+	/** TRANSLATORS: The folder that a file will be saved to. */
+	directory_info_.set_text((boost::format(_("Current Directory: %s"))
+	                          % (_("My Maps") + curdir_.substr(basedir_.size()))).str());
 }
 
 /**

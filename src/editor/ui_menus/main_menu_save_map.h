@@ -34,6 +34,10 @@
 struct MainMenuSaveMap : public MainMenuLoadOrSaveMap {
 	MainMenuSaveMap(EditorInteractive& parent);
 
+protected:
+	// Sets the current dir and updates labels.
+	void set_current_directory(const std::string& filename) override;
+
 private:
 	EditorInteractive & eia();
 	void clicked_ok();
@@ -43,14 +47,11 @@ private:
 	void double_clicked_item();
 	void edit_box_changed();
 
-	// Sets the current dir and updates labels.
-	void set_current_directory(const std::string& filename);
-
 	bool save_map(std::string, bool);
 
 	UI::Button make_directory_, edit_options_;
 
-	UI::Textarea editbox_label_, directory_info_;
+	UI::Textarea editbox_label_;
 	UI::EditBox* editbox_;
 };
 

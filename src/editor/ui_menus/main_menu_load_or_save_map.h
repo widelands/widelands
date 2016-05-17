@@ -25,6 +25,7 @@
 #include "editor/editorinteractive.h"
 #include "ui_basic/button.h"
 #include "ui_basic/checkbox.h"
+#include "ui_basic/textarea.h"
 #include "ui_basic/window.h"
 #include "wui/mapdetails.h"
 #include "wui/maptable.h"
@@ -42,6 +43,8 @@ struct MainMenuLoadOrSaveMap : public UI::Window {
 protected:
 	virtual void clicked_ok() = 0;
 	void toggle_mapnames();
+	// Sets the current dir and updates labels.
+	virtual void set_current_directory(const std::string& filename) = 0;
 	void fill_table();
 
 	bool compare_players(uint32_t, uint32_t);
@@ -59,6 +62,7 @@ protected:
 	std::vector<MapData> maps_data_;
 	MapDetails map_details_;
 
+	UI::Textarea directory_info_;
 	UI::Button ok_, cancel_;
 
 	const std::string basedir_;
