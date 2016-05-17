@@ -129,7 +129,7 @@ void MainMenuNewMap::clicked_create_map() {
 				height_.get_value() > 0 ? height_.get_value() : Widelands::kMapDimensions[0],
 				list_.get_selected(),
 				_("No Name"),
-				g_options.pull_section("global").get_string("realname", pgettext("map_name", "Unknown")));
+				g_options.pull_section("global").get_string("realname", pgettext("author_name", "Unknown")));
 
 	egbase.postload     ();
 	egbase.load_graphics(loader_ui);
