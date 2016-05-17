@@ -108,7 +108,7 @@ return {
             plr:get_buildings(plr.tribe_name .. "_headquarters"), plr:get_buildings(plr.tribe_name .. "_warehouse"), plr:get_buildings(plr.tribe_name .. "_port")
          )
 
-         descr = descr .. h2((_"Status for %s"):format(plr.name))
+         descr = descr .. h2((_"Status for %s"):format(plr.name)) .. "<p line-spacing=3 font-size=12>"
          local points = 0
          for idx, ware in ipairs(point_table[plr.tribe_name .. "_order"]) do
             local value = point_table[plr.tribe_name][ware]
