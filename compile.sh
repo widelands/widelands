@@ -31,7 +31,7 @@ while [ "$1" != "" ]; do
   shift
 done
 if [ $NO_WEBSITE -eq 0 ]; then
-  echo "A complete build wil be created."
+  echo "A complete build will be created."
   echo "You can use -n or --no-website to omit building and"
   echo "linking website-related executables."
 else
