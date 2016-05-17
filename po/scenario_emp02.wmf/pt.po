@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-03-18 11:30+0000\n"
-"PO-Revision-Date: 2016-03-28 09:40+0000\n"
+"POT-Creation-Date: 2016-05-06 09:44+0000\n"
+"PO-Revision-Date: 2016-05-13 10:50+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Portuguese (http://www.transifex.com/widelands/widelands/language/pt/)\n"
 "MIME-Version: 1.0\n"
@@ -30,11 +30,11 @@ msgstr ""
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:31
 msgid "Build three lumberjack’s houses, a forester’s house and a sawmill."
-msgstr "Constrói três casas de Lenhador, um Silvicultor e uma Serração."
+msgstr "Constrói três casas do lenhador, uma casa do silvicultor e uma serração."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:37
 msgid "Build a quarry"
-msgstr "Constrói uma Pedreira"
+msgstr "Constrói uma pedreira"
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:39
 msgid "Quarry"
@@ -42,7 +42,7 @@ msgstr "Pedreira"
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:40
 msgid "Build a quarry to the south of your headquarters."
-msgstr "Constrói uma Pedreira a Sul do teu Quartel-general."
+msgstr "Constrói uma pedreira a Sul do teu quartel-general."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:46
 msgid "Protect your colony"
@@ -96,7 +96,7 @@ msgid ""
 "To produce some sustaining food for our miners, we could build up a tavern. "
 "To supply them with some good and strong drinks, we could build up a brewery"
 " and a winery."
-msgstr "Para produzir os alimentos dos mineiros, podíamos construir uma taverna. Para os fornecer com estes alimentos e bebidas, podíamos construir uma Cervejeira e uma Vinhataria."
+msgstr "Para produzir os alimentos dos mineiros, podíamos construir uma taberna. Para os fornecer com estes alimentos e bebidas, podíamos construir uma cervejeira e uma adega."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:77
 msgid ""
@@ -116,7 +116,7 @@ msgid ""
 "It’s up to you what you want to build. But remember – coal and iron ore "
 "mines need beer, marble and gold mines need wine and all mines need at least"
 " rations, which are produced out of bread OR meat OR fish."
-msgstr "Fica a teu cargo escolheres o que irá ser construído.<br> Mas lembra-te que: as minas de carvão e de ferro precisam de cerveja: as minas de mármore e de ouro precisam no mínimo de rações que são produzidas OU com pão OU carne OU peixe."
+msgstr "Fica a teu cargo escolheres o que irá ser construído. Mas lembra-te que: as minas de carvão e de ferro precisam de cerveja: as minas de mármore e de ouro precisam no mínimo de rações que são produzidas OU com pão OU carne OU peixe."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:85
 msgid "Protect your eastern frontier"
@@ -134,7 +134,7 @@ msgstr "Constrói edifícios militares mais fortes, tais como o posto-avançado,
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:89
 msgid "To watch deep inside the enemy territory, build a tower."
-msgstr "Para vigiar bem dentro do território inimigo, constrói uma Torre."
+msgstr "Para vigiar bem dentro do território inimigo, constrói uma torre."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:95
 msgid "Destroy the Barbarian tribe"
@@ -180,7 +180,7 @@ msgid ""
 " Gods to my people and myself. Until now, we have only seen a small part of "
 "this island, but this part alone is already bringing sunlight to my mind. I "
 "feel as if we have found a priceless treasure, a land like paradise."
-msgstr "Já não era sem tempo! Parece que esta ilha foi feita para nós... uma dádiva dos Deuses para mim e o meu povo.<br>  Até agora apenas descobrimos uma parte da ilha, mas só esta parte já me aclara o pensamento. Sinto-me como se tivesse saído a sorte grande ... isto é o paraíso na terra."
+msgstr "Já não era sem tempo! Parece que esta ilha foi feita para nós... uma dádiva dos Deuses para mim e o meu povo. Até agora apenas descobrimos uma parte da ilha, mas só esta parte já me aclara o pensamento. Sinto-me como se tivesse saído a sorte grande ... isto é o paraíso na terra."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:114
@@ -208,7 +208,7 @@ msgid ""
 "But until that day, many years may pass! For now, we must concentrate on the"
 " present, and build a few lumberjack’s houses and a sawmill to produce some "
 "basic building materials."
-msgstr "Mas que esse dia ainda esteja longe! Por agora temos de concentrar-nos no presente e construir umas quantas casas para os Lenhadores e uma Serração para produzir os materiais de construção básicos."
+msgstr "Mas que esse dia ainda esteja longe! Por agora temos de concentrar-nos no presente e construir umas quantas casas para os Lenhadores e uma serração para produzir os materiais de construção básicos."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:128
@@ -312,7 +312,7 @@ msgid ""
 "It would be a good source for bolstering our supply of quality marble, "
 "beyond the meager quantities available from the quarry. Perhaps you were "
 "right when you said that this island was like paradise."
-msgstr "A ser verdade isto vai melhorar a nossa produção de mármore, bem para além das magras quantidades que se obtêm na Pedreira. Talvez tivesses razão quando disseste que esta ilha era um Paraíso."
+msgstr "A ser verdade isto vai melhorar a nossa produção de mármore, bem para além das magras quantidades que se obtêm na pedreira. Talvez tivesses razão quando disseste que esta ilha era um paraíso."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:185
@@ -399,7 +399,7 @@ msgstr "Acabei de visitar a nossa nova taverna a que chamaram de «&nbsp;A Palme
 msgid ""
 "It is good to see that we have now got a warmer and more familiar "
 "environment on our island. Thank you, Lutius."
-msgstr "É bom ver que estamos a conseguir ter uma ambiente mais acolhedor e familiar na nossa ilha.<br>Obrigado, Lutius."
+msgstr "É bom ver que estamos a conseguir ter uma ambiente mais acolhedor e familiar na nossa ilha. Obrigada!"
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:228
 msgid "The Barbarians"
@@ -512,7 +512,7 @@ msgstr "Parabéns completaste esta missão. Se quiseres podes continuar a jogar 
 msgid "“%s”"
 msgstr "«&nbsp;%s&nbsp;»"
 
-#: ../../data/scripting/format_scenario.lua:146
+#: ../../data/scripting/format_scenario.lua:96
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] "Novo objetivo"

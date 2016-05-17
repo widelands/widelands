@@ -1212,13 +1212,13 @@ void NetHost::set_player_state
 
 	SendPacket s;
 
-	if (player.state == PlayerSettings::stateHuman)
+	if (player.state == PlayerSettings::stateHuman) {
 		//  0 is host and has no client
 		if (d->settings.users.at(0).position == number) {
 			d->settings.users.at(0).position = UserSettings::none();
 			d->settings.playernum = UserSettings::none();
 		}
-		for (uint8_t i = 1; i < d->settings.users.size(); ++i)
+		for (uint8_t i = 1; i < d->settings.users.size(); ++i) {
 			if (d->settings.users.at(i).position == number) {
 				d->settings.users.at(i).position = UserSettings::none();
 				if (host) //  Did host send the user to lobby?
@@ -1241,6 +1241,8 @@ void NetHost::set_player_state
 
 				break;
 			}
+		}
+	}
 
 	player.state = state;
 

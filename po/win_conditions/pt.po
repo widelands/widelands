@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-03-18 11:30+0000\n"
-"PO-Revision-Date: 2016-03-28 10:08+0000\n"
+"POT-Creation-Date: 2016-05-06 09:44+0000\n"
+"PO-Revision-Date: 2016-05-14 07:11+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Portuguese (http://www.transifex.com/widelands/widelands/language/pt/)\n"
 "MIME-Version: 1.0\n"
@@ -28,71 +28,71 @@ msgstr "Artefatos"
 msgid ""
 "Search for ancient artifacts. Once all of them are found, the team who owns "
 "most of them will win the game."
-msgstr ""
+msgstr "Busca artefactos anciãos. Quando todos serão encontrados, ganharei a equipa que tem mais que os outros."
 
 #: ../../data/scripting/win_conditions/artifacts.lua:55
 msgid "No Artifacts"
-msgstr ""
+msgstr "Não tem artefactos"
 
 #: ../../data/scripting/win_conditions/artifacts.lua:55
 msgid ""
 "There are no artifacts on this map. This should not happen. Please file a "
 "bug report on https://launchpad.net/widelands and specify your Widelands "
 "version and the map you tried to load."
-msgstr ""
+msgstr "Este mapa não tem artefactos. Isto não devia acontecer. Por favor reporta o erro em https://launchpad.net/widelands, dizendo qual a tua versão de Widelands e qual o mapa que tentaste carregar."
 
 #: ../../data/scripting/win_conditions/artifacts.lua:61
 msgid "New Artifact Found"
-msgstr ""
+msgstr "Encontrou-se novo artefacto"
 
 #: ../../data/scripting/win_conditions/artifacts.lua:62
 msgid "Your team found a new artifact."
-msgstr ""
+msgstr "A tua equipa encontrou um novo artefacto."
 
 #: ../../data/scripting/win_conditions/artifacts.lua:65
 msgid "Artifact Lost"
-msgstr ""
+msgstr "Perdeste artefacto"
 
 #: ../../data/scripting/win_conditions/artifacts.lua:66
 msgid "One of your team’s artifacts was stolen by an enemy."
-msgstr ""
+msgstr "Um dos artefactos da tua equipa foi roubado por um inimigo."
 
 #: ../../data/scripting/win_conditions/artifacts.lua:69
 msgid "Artifact Conquered"
-msgstr ""
+msgstr "Conquistaste artefacto"
 
 #: ../../data/scripting/win_conditions/artifacts.lua:70
 msgid "Your team stole an artifact from an enemy."
-msgstr ""
+msgstr "A tua equipa robou um dos artefactos de um inimigo."
 
 #. TRANSLATORS: This is used to seperate players’ names in a list, e.g.
 #. "Steve, Robert, David"
 #: ../../data/scripting/win_conditions/artifacts.lua:140
 msgid ", "
-msgstr ""
+msgstr ", "
 
 #: ../../data/scripting/win_conditions/artifacts.lua:147
 msgid "Overview:"
-msgstr ""
+msgstr "Situação:"
 
 #: ../../data/scripting/win_conditions/artifacts.lua:150
 #: ../../data/scripting/win_conditions/artifacts.lua:163
 #, lua-format
 msgid "%i artifact"
 msgid_plural "%i artifacts"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%i artefacto"
+msgstr[1] "%i artefactos"
 
 #. TRANSLATORS: e.g. Team 1 owns 5 artifacts.
 #: ../../data/scripting/win_conditions/artifacts.lua:152
 msgid "%1$s owns %2$s."
-msgstr ""
+msgstr "%1$s tem %2$s."
 
 #. TRANSLATORS: %1$i is the team's number; %2$s is a list of team members
 #. (e.g. "Steve, Robert, David"), %3$s is something like "x artifact(s)"
 #: ../../data/scripting/win_conditions/artifacts.lua:165
 msgid "Team %1$i (%2$s) owns %3$s."
-msgstr ""
+msgstr "A equipa %1$i (%2$s) tem %3$s."
 
 #: ../../data/scripting/win_conditions/collectors.lua:19
 msgid "Collectors"
@@ -116,7 +116,7 @@ msgstr "Estado para %s"
 #. TRANSLATORS: For example: 'gold (3 P) x 4 = 12 P', P meaning 'Points'
 #: ../../data/scripting/win_conditions/collectors.lua:116
 msgid "%1$s (%2$i P) x %3$i = %4$i P"
-msgstr ""
+msgstr "%1$s (%2$i P) x %3$i = %4$i P"
 
 #: ../../data/scripting/win_conditions/collectors.lua:120
 #, lua-format
@@ -137,15 +137,15 @@ msgstr[1] "%i minutos"
 #: ../../data/scripting/win_conditions/collectors.lua:139
 msgid "%1% hour and %2%"
 msgid_plural "%1% hours and %2%"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1% hora e %2%"
+msgstr[1] "%1% horas e %2%"
 
 #. TRANSLATORS: Context: 'The game will end in 2 hours.'
 #: ../../data/scripting/win_conditions/collectors.lua:142
 msgid "%1% hour"
 msgid_plural "%1% hours"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1% hora"
+msgstr[1] "%1% horas"
 
 #. TRANSLATORS: Context: 'The game will end in 2 hours and 30 minutes.'
 #: ../../data/scripting/win_conditions/collectors.lua:146
@@ -235,11 +235,11 @@ msgstr "Cada jogador ou equipa tenta obter mais de metade da área do mapa. O ve
 
 #: ../../data/scripting/win_conditions/territorial_time.lua:25
 msgid "%1$s has %2$3.0f%% of the land (%3$i of %4$i)."
-msgstr ""
+msgstr "%1$s tem %2$3.0f%% do terreno (%3$i de %4$i)."
 
 #: ../../data/scripting/win_conditions/territorial_time.lua:26
 msgid "%1$s had %2$3.0f%% of the land (%3$i of %4$i)."
-msgstr ""
+msgstr "%1$s teve %2$3.0f%% do terreno (%3$i de %4$i)."
 
 #: ../../data/scripting/win_conditions/territorial_time.lua:224
 #, lua-format

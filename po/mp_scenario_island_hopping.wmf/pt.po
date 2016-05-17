@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-03-18 11:30+0000\n"
-"PO-Revision-Date: 2016-03-26 07:54+0000\n"
+"POT-Creation-Date: 2016-05-06 09:44+0000\n"
+"PO-Revision-Date: 2016-05-13 10:38+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Portuguese (http://www.transifex.com/widelands/widelands/language/pt/)\n"
 "MIME-Version: 1.0\n"
@@ -113,7 +113,7 @@ msgstr "3º a terminar"
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:34
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:39
 msgid "4th to finish"
-msgstr "4º  a terminar"
+msgstr "4º a terminar"
 
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:35
 msgid "Second Island"
@@ -144,7 +144,7 @@ msgstr "A recompensa para estes feitos gloriosos para:"
 msgid ""
 "%s is now King of the Hill and will win the game in 20 minutes, if nobody "
 "takes over the hill before then."
-msgstr "%s é agora o rei da montanha e irá venver a partida em 20 minutos, se ninguém o desaloja da montanha até então."
+msgstr "%s é agora o rei da montanha e irá vencer a partida em 20 minutos, se ninguém o desaloja da montanha até então."
 
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:55
 #, lua-format

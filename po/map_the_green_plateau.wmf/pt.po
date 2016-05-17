@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-03-18 11:30+0000\n"
-"PO-Revision-Date: 2016-03-28 09:40+0000\n"
+"POT-Creation-Date: 2016-05-06 09:44+0000\n"
+"PO-Revision-Date: 2016-05-13 10:33+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Portuguese (http://www.transifex.com/widelands/widelands/language/pt/)\n"
 "MIME-Version: 1.0\n"
@@ -97,13 +97,13 @@ msgstr "Vamos esperar que Lanissa - o chefe-guerreiro que está no comando deste
 
 #: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:89
 msgid "Ancient Castle Captured"
-msgstr "O Castelo antigo foi capturado"
+msgstr "O castelo antigo foi capturado"
 
 #: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:90
 msgid ""
 "Wonderful! Our troops have finally defeated Lanissa and her soldiers. The "
 "ancient castle is ours!"
-msgstr "Bravo! As nossas tropas derrotaram finalmente Lanissa e os seus guerreiros. O Castelo antigo já é nosso!"
+msgstr "Bravo! As nossas tropas derrotaram finalmente Lanissa e os seus guerreiros. O castelo antigo já é nosso!"
 
 #: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:91
 msgid ""

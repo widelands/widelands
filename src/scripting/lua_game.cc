@@ -108,6 +108,7 @@ const PropertyType<LuaPlayer> LuaPlayer::Properties[] = {
 	PROP_RO(LuaPlayer, allowed_buildings),
 	PROP_RO(LuaPlayer, objectives),
 	PROP_RO(LuaPlayer, defeated),
+	PROP_RO(LuaPlayer, messages),
 	PROP_RO(LuaPlayer, inbox),
 	PROP_RW(LuaPlayer, team),
 	PROP_RO(LuaPlayer, tribe),
@@ -192,9 +193,29 @@ int LuaPlayer::get_defeated(lua_State * L) {
 }
 
 /* RST
+	.. attribute:: messages
+
+		(RO) An array of all the messages sent to the player. Note that you
+		can't add messages to this array, use :meth:`send_message` for that.
+*/
+int LuaPlayer::get_messages(lua_State * L) {
+	Player & p = get(L, get_egbase(L));
+
+	lua_newtable(L);
+	uint32_t cidx = 1;
+	for (const auto& temp_message : p.messages()) {
+		lua_pushuint32(L, cidx ++);
+		to_lua<LuaMessage>(L, new LuaMessage(player_number(), temp_message.first));
+		lua_rawset(L, -3);
+	}
+
+	return 1;
+}
+
+/* RST
 	.. attribute:: inbox
 
-		(RO) An array of the message that are either read or new. Note that you
+		(RO) An array of the messages that are either read or new. Note that you
 		can't add messages to this array, use :meth:`send_message` for that.
 */
 int LuaPlayer::get_inbox(lua_State * L) {

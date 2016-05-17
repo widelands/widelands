@@ -450,7 +450,7 @@ void RealFSImpl::fs_rename
 	if (rename(fullname1.c_str(), fullname2.c_str()) != 0)
 		throw wexception("DiskFileSystem: unable to rename %s to %s: %s",
 							fullname1.c_str(),
-							fullname1.c_str(),
+							fullname2.c_str(),
 							strerror(errno));
 }
 

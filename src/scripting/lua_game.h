@@ -63,6 +63,7 @@ public:
 	int get_allowed_buildings(lua_State * L);
 	int get_objectives(lua_State * L);
 	int get_defeated(lua_State * L);
+	int get_messages(lua_State * L);
 	int get_inbox(lua_State * L);
 	int get_team(lua_State * L);
 	int get_tribe(lua_State * L);

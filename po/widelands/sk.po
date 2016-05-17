@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-04-29 07:19+0000\n"
-"PO-Revision-Date: 2016-05-05 08:45+0000\n"
+"POT-Creation-Date: 2016-05-06 09:44+0000\n"
+"PO-Revision-Date: 2016-05-06 13:29+0000\n"
 "Last-Translator: MiroslavR <miroslavr256@gmail.com>\n"
 "Language-Team: Slovak (http://www.transifex.com/widelands/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
@@ -258,52 +258,52 @@ msgstr "Znovu"
 msgid "Help"
 msgstr "Pomoc"
 
-#: ../../src/editor/editorinteractive.cc:224
+#: ../../src/editor/editorinteractive.cc:222
 msgid "Unsupported format"
 msgstr "Nepodporovaný formát"
 
-#: ../../src/editor/editorinteractive.cc:225
+#: ../../src/editor/editorinteractive.cc:223
 #, c-format
 msgid ""
 "Widelands could not load the file \"%s\". The file format seems to be "
 "incompatible."
 msgstr "Nepodarilo sa načítať súbor „%s“. Zdá sa, že formát súboru nie je kompatibilný."
 
-#: ../../src/editor/editorinteractive.cc:238 ../../src/logic/game.cc:231
+#: ../../src/editor/editorinteractive.cc:236 ../../src/logic/game.cc:231
 #: ../../src/logic/game.cc:294
 msgid "Creating players"
 msgstr "Vytvárajú sa hráči"
 
-#: ../../src/editor/editorinteractive.cc:285
+#: ../../src/editor/editorinteractive.cc:293
 msgid "Unsaved Map"
 msgstr "Neuložená mapa"
 
-#: ../../src/editor/editorinteractive.cc:286
+#: ../../src/editor/editorinteractive.cc:294
 msgid "The map has not been saved, do you really want to quit?"
 msgstr "Mapa nebola uložená, naozaj chcete skončiť?"
 
-#: ../../src/editor/editorinteractive.cc:648
+#: ../../src/editor/editorinteractive.cc:656
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:122
 msgid "Creating empty map…"
 msgstr "Vytvára sa prázdna mapa…"
 
 #. * TRANSLATORS: Default name for new map
-#: ../../src/editor/editorinteractive.cc:655
+#: ../../src/editor/editorinteractive.cc:663
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:131
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:455
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:138
-#: ../../src/logic/map.h:180
+#: ../../src/logic/map.h:180 ../../src/wui/mapdata.cc:33
 msgid "No Name"
 msgstr "Bez názvu"
 
-#: ../../src/editor/editorinteractive.cc:656
+#: ../../src/editor/editorinteractive.cc:664
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:132
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:456
 msgctxt "map_name"
 msgid "Unknown"
 msgstr "Neznámy"
 
-#: ../../src/editor/editorinteractive.cc:663
+#: ../../src/editor/editorinteractive.cc:671
 #, c-format
 msgid "Loading map “%s”…"
 msgstr "Načítava sa mapa „%s“…"
@@ -442,7 +442,7 @@ msgstr "Množstvo zdroja: %i"
 msgid "No resources"
 msgstr "Žiadne zdroje"
 
-#: ../../src/editor/tools/info_tool.cc:140 ../../src/wui/mapdetails.cc:136
+#: ../../src/editor/tools/info_tool.cc:140 ../../src/wui/mapdetails.cc:131
 msgid "Map:"
 msgstr "Mapa:"
 
@@ -523,7 +523,7 @@ msgid "Save Map"
 msgstr "Uložiť mapu"
 
 #: ../../src/editor/ui_menus/main_menu.cc:72
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:50
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:51
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:69
 msgid "Map Options"
 msgstr "Možnosti mapy"
@@ -532,8 +532,8 @@ msgstr "Možnosti mapy"
 msgid "Exit Editor"
 msgstr "Ukončiť editor"
 
-#: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:59
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:63
+#: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:60
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:64
 #: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:43
 #: ../../src/scripting/lua_game.cc:426 ../../src/ui_basic/messagebox.cc:91
 #: ../../src/ui_fsmenu/helpwindow.cc:53
@@ -543,8 +543,8 @@ msgstr "Ukončiť editor"
 msgid "OK"
 msgstr "OK"
 
-#: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:69
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:70
+#: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:70
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:71
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:67
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:145
 #: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:50
@@ -554,84 +554,55 @@ msgstr "OK"
 msgid "Cancel"
 msgstr "Zrušiť"
 
-#: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:83
-#: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:134
+#: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:84
+#: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:135
 msgid "Show Map Names"
 msgstr "Zobraziť názvy máp"
 
 #. * TRANSLATORS: Checkbox title. If this checkbox is enabled, map names
 #. aren't translated.
-#: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:87
-#: ../../src/ui_fsmenu/mapselect.cc:82
+#: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:88
+#: ../../src/ui_fsmenu/mapselect.cc:83
 msgid "Show original map names"
 msgstr "Zobraziť originálne názvy máp"
 
-#: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:136
+#: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:137
 msgid "Show Filenames"
 msgstr "Zobraziť názvy súborov"
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:103
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:104
 #: ../../src/ui_fsmenu/loadgame.cc:321
 #: ../../src/wui/game_main_menu_save_game.cc:68
 msgid "Map Name:"
 msgstr "Názov mapy:"
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:107
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:108
 msgid "Authors:"
 msgstr "Autori:"
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:111
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:112
 #: ../../src/ui_fsmenu/campaign_select.cc:80
 #: ../../src/ui_fsmenu/campaign_select.cc:157
-#: ../../src/ui_fsmenu/campaign_select.cc:396 ../../src/wui/mapdetails.cc:158
+#: ../../src/ui_fsmenu/campaign_select.cc:396 ../../src/wui/mapdetails.cc:168
 msgid "Description:"
 msgstr "Popis:"
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:115
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:116
 msgid "Hint (optional):"
 msgstr "Rada (nepovinný údaj):"
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:124
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:125
+#: ../../src/wui/mapdetails.cc:162
 msgid "Tags:"
 msgstr "Značky:"
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:125
-#: ../../src/ui_fsmenu/mapselect.cc:98
-msgid "Unbalanced"
-msgstr "Nevyvážené"
-
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:126
-#: ../../src/ui_fsmenu/mapselect.cc:107
-msgid "Free for all"
-msgstr "Prístupné všetkým"
-
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:127
-#: ../../src/ui_fsmenu/mapselect.cc:108
-msgid "1v1"
-msgstr "1 proti 1"
-
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:128
-#: ../../src/ui_fsmenu/mapselect.cc:115
-msgid "Teams of 2"
-msgstr "2-členné tímy"
-
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:129
-#: ../../src/ui_fsmenu/mapselect.cc:116
-msgid "Teams of 3"
-msgstr "3-členné tímy"
-
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:130
-#: ../../src/ui_fsmenu/mapselect.cc:117
-msgid "Teams of 4"
-msgstr "4-členné tímy"
-
 #. * TRANSLATORS: Label for the list of suggested teams when choosing a map
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:132
-#: ../../src/wui/suggested_teams_box.cc:97
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:133
+#: ../../src/wui/suggested_teams_box.cc:96
 msgid "Suggested Teams:"
 msgstr "Navrhované tímy:"
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:141
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:142
 #: ../../src/ui_fsmenu/launch_mpg.cc:663
 #: ../../src/wui/game_main_menu_save_game.cc:172
 #, c-format
@@ -641,19 +612,19 @@ msgstr[0] "%u hráč"
 msgstr[1] "%u hráči"
 msgstr[2] "%u hráčov"
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:146
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:147
 msgid "Main Options"
 msgstr "Hlavné možnosti"
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:147
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:148
 msgid "Tags"
 msgstr "Značky"
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:149
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:150
 msgid "Teams"
 msgstr "Tímy"
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:174
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:175
 msgid "Size: %1% x %2%"
 msgstr "Veľkosť: %1% x %2%"
 
@@ -2229,7 +2200,7 @@ msgstr "Názov scenára"
 msgid "#"
 msgstr "#"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:395 ../../src/wui/mapdetails.cc:134
+#: ../../src/ui_fsmenu/campaign_select.cc:395 ../../src/wui/mapdetails.cc:131
 msgid "Scenario:"
 msgstr "Scenár:"
 
@@ -2256,7 +2227,7 @@ msgstr[0] "Dizajnér tohto scenára"
 msgstr[1] "Dizajnéri tohto scenára"
 msgstr[2] "Dizajnéri tohto scenára"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:428 ../../src/wui/mapdetails.cc:156
+#: ../../src/ui_fsmenu/campaign_select.cc:428 ../../src/wui/mapdetails.cc:152
 msgid "Author:"
 msgid_plural "Authors:"
 msgstr[0] "Autor:"
@@ -2429,9 +2400,9 @@ msgstr "(žiadna mapa)"
 msgid "The host has not yet selected a map or saved game."
 msgstr "Hostiteľ ešte nevybral mapu alebo uloženú hru."
 
+#. * TRANSLATORS: This is a map tag
 #: ../../src/ui_fsmenu/launch_mpg.cc:292 ../../src/ui_fsmenu/launch_spg.cc:240
-#: ../../src/ui_fsmenu/mapselect.cc:101
-#: ../../src/wui/multiplayersetupgroup.cc:368
+#: ../../src/wui/map_tags.cc:36 ../../src/wui/multiplayersetupgroup.cc:368
 msgid "Scenario"
 msgstr "Scenár"
 
@@ -2586,7 +2557,7 @@ msgstr "Mapa, na ktorej je tento záznam založený"
 msgid "Delete this replay"
 msgstr "Vymazať tento záznam"
 
-#: ../../src/ui_fsmenu/loadgame.cc:168 ../../src/ui_fsmenu/mapselect.cc:67
+#: ../../src/ui_fsmenu/loadgame.cc:168 ../../src/ui_fsmenu/mapselect.cc:68
 msgid "Return to the single player menu"
 msgstr "Vrátiť sa do menu jedného hráča"
 
@@ -2797,29 +2768,17 @@ msgstr "(C) %1% – %2% od vývojového tímu hry Widelands"
 msgid "Licensed under the GNU General Public License V2.0"
 msgstr "Hra licencovaná pod Všeobecnou verejnou licenciou GNU, verzia 2.0"
 
-#: ../../src/ui_fsmenu/mapselect.cc:49
+#: ../../src/ui_fsmenu/mapselect.cc:50
 msgid "Choose a map"
 msgstr "Zvoľte mapu"
 
-#: ../../src/ui_fsmenu/mapselect.cc:65
+#: ../../src/ui_fsmenu/mapselect.cc:66
 msgid "Return to the multiplayer game setup"
 msgstr "Vrátiť sa do menu nastavenia hry viacerých hráčov"
 
-#: ../../src/ui_fsmenu/mapselect.cc:87
+#: ../../src/ui_fsmenu/mapselect.cc:88
 msgid "Show all maps"
 msgstr "Zobraziť všetky mapy"
-
-#: ../../src/ui_fsmenu/mapselect.cc:97
-msgid "Official"
-msgstr "Oficiálne"
-
-#: ../../src/ui_fsmenu/mapselect.cc:99
-msgid "Seafaring"
-msgstr "Moreplavba"
-
-#: ../../src/ui_fsmenu/mapselect.cc:100
-msgid "Artifacts"
-msgstr "Artefakty"
 
 #: ../../src/ui_fsmenu/multiplayer.cc:36
 msgid "Choose game type"
@@ -3749,28 +3708,73 @@ msgstr "Prádzne heslo"
 msgid "Please enter your password!"
 msgstr "Prosím, zadajte svoje heslo!"
 
+#. * TRANSLATORS: This is a map tag
+#: ../../src/wui/map_tags.cc:28
+msgid "Official"
+msgstr "Oficiálne"
+
+#. * TRANSLATORS: This is a map tag
+#: ../../src/wui/map_tags.cc:30
+msgid "Unbalanced"
+msgstr "Nevyvážené"
+
+#. * TRANSLATORS: This is a map tag
+#: ../../src/wui/map_tags.cc:32
+msgid "Seafaring"
+msgstr "Moreplavba"
+
+#. * TRANSLATORS: This is a map tag
+#: ../../src/wui/map_tags.cc:34
+msgid "Artifacts"
+msgstr "Artefakty"
+
+#. * TRANSLATORS: This is a map tag
+#: ../../src/wui/map_tags.cc:38
+msgid "Free for all"
+msgstr "Prístupné všetkým"
+
+#. * TRANSLATORS: This is a map tag. One versus one.
+#: ../../src/wui/map_tags.cc:40
+msgid "1v1"
+msgstr "1 proti 1"
+
+#. * TRANSLATORS: This is a map tag
+#: ../../src/wui/map_tags.cc:42
+msgid "Teams of 2"
+msgstr "2-členné tímy"
+
+#. * TRANSLATORS: This is a map tag
+#: ../../src/wui/map_tags.cc:44
+msgid "Teams of 3"
+msgstr "3-členné tímy"
+
+#. * TRANSLATORS: This is a map tag
+#: ../../src/wui/map_tags.cc:46
+msgid "Teams of 4"
+msgstr "4-členné tímy"
+
+#: ../../src/wui/mapdata.cc:37
+msgid "No Author"
+msgstr "Bez autora"
+
 #. * TRANSLATORS: Parent directory/folder
-#: ../../src/wui/mapdata.cc:129
+#: ../../src/wui/mapdata.cc:130
 msgid "parent"
 msgstr "nadradený priečinok"
 
 #. * TRANSLATORS: Directory name for MP Scenarios in map selection
-#: ../../src/wui/mapdata.cc:137
+#: ../../src/wui/mapdata.cc:138
 msgid "Multiplayer Scenarios"
 msgstr "Scenáre pre viacerých hráčov"
 
-#: ../../src/wui/mapdetails.cc:127
+#: ../../src/wui/mapdetails.cc:123
 msgid "Directory:"
 msgstr "Priečinok:"
-
-#: ../../src/wui/mapdetails.cc:129
-msgid "The name of this directory"
-msgstr "Názov tohto priečinka"
 
 #. * TRANSLATORS: Tooltip in map description when translated map names are
 #. being displayed.
 #. * TRANSLATORS: %s is the English name of the map.
-#: ../../src/wui/mapdetails.cc:144
+#: ../../src/wui/mapdetails.cc:139
 #, c-format
 msgid "The original name of this map: %s"
 msgstr "Originálny názov tejto mapy: %s"
@@ -3778,19 +3782,15 @@ msgstr "Originálny názov tejto mapy: %s"
 #. * TRANSLATORS: Tooltip in map description when map names are being
 #. displayed in English.
 #. * TRANSLATORS: %s is the localized name of the map.
-#: ../../src/wui/mapdetails.cc:150
+#: ../../src/wui/mapdetails.cc:145
 #, c-format
 msgid "The name of this map in your language: %s"
 msgstr "Názov tejto mapy vo vašom jazyku: %s"
 
-#: ../../src/wui/mapdetails.cc:154
-msgid "The name of this map"
-msgstr "Názov tejto mapy"
-
 #. * TRANSLATORS: Map hint header when selecting a map.
-#: ../../src/wui/mapdetails.cc:162
-msgid "HINT:"
-msgstr "RADA:"
+#: ../../src/wui/mapdetails.cc:173
+msgid "Hint:"
+msgstr "Rada:"
 
 #: ../../src/wui/maptable.cc:36
 msgid "Number of players"
