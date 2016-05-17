@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-04-23 08:17+0000\n"
-"PO-Revision-Date: 2016-04-23 08:18+0000\n"
+"POT-Creation-Date: 2016-05-06 09:44+0000\n"
+"PO-Revision-Date: 2016-05-06 09:46+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Interlingua (http://www.transifex.com/widelands/widelands/language/ia/)\n"
 "MIME-Version: 1.0\n"
@@ -254,52 +254,52 @@ msgstr ""
 msgid "Help"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:224
+#: ../../src/editor/editorinteractive.cc:222
 msgid "Unsupported format"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:225
+#: ../../src/editor/editorinteractive.cc:223
 #, c-format
 msgid ""
 "Widelands could not load the file \"%s\". The file format seems to be "
 "incompatible."
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:238 ../../src/logic/game.cc:231
+#: ../../src/editor/editorinteractive.cc:236 ../../src/logic/game.cc:231
 #: ../../src/logic/game.cc:294
 msgid "Creating players"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:285
+#: ../../src/editor/editorinteractive.cc:293
 msgid "Unsaved Map"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:286
+#: ../../src/editor/editorinteractive.cc:294
 msgid "The map has not been saved, do you really want to quit?"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:648
+#: ../../src/editor/editorinteractive.cc:656
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:122
 msgid "Creating empty map…"
 msgstr ""
 
 #. * TRANSLATORS: Default name for new map
-#: ../../src/editor/editorinteractive.cc:655
+#: ../../src/editor/editorinteractive.cc:663
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:131
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:455
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:138
-#: ../../src/logic/map.h:180
+#: ../../src/logic/map.h:180 ../../src/wui/mapdata.cc:33
 msgid "No Name"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:656
+#: ../../src/editor/editorinteractive.cc:664
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:132
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:456
 msgctxt "map_name"
 msgid "Unknown"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:663
+#: ../../src/editor/editorinteractive.cc:671
 #, c-format
 msgid "Loading map “%s”…"
 msgstr ""
@@ -438,7 +438,7 @@ msgstr ""
 msgid "No resources"
 msgstr ""
 
-#: ../../src/editor/tools/info_tool.cc:140 ../../src/wui/mapdetails.cc:136
+#: ../../src/editor/tools/info_tool.cc:140 ../../src/wui/mapdetails.cc:131
 msgid "Map:"
 msgstr ""
 
@@ -519,7 +519,7 @@ msgid "Save Map"
 msgstr ""
 
 #: ../../src/editor/ui_menus/main_menu.cc:72
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:50
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:51
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:69
 msgid "Map Options"
 msgstr ""
@@ -528,8 +528,8 @@ msgstr ""
 msgid "Exit Editor"
 msgstr ""
 
-#: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:59
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:63
+#: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:60
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:64
 #: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:43
 #: ../../src/scripting/lua_game.cc:426 ../../src/ui_basic/messagebox.cc:91
 #: ../../src/ui_fsmenu/helpwindow.cc:53
@@ -539,95 +539,66 @@ msgstr ""
 msgid "OK"
 msgstr ""
 
-#: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:69
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:70
+#: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:70
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:71
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:67
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:145
 #: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:50
 #: ../../src/ui_basic/messagebox.cc:103 ../../src/ui_fsmenu/launch_mpg.cc:88
 #: ../../src/ui_fsmenu/options.cc:120
-#: ../../src/wui/game_main_menu_save_game.cc:101 ../../src/wui/login_box.cc:73
+#: ../../src/wui/game_main_menu_save_game.cc:101 ../../src/wui/login_box.cc:74
 msgid "Cancel"
 msgstr ""
 
-#: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:83
-#: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:134
+#: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:84
+#: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:135
 msgid "Show Map Names"
 msgstr ""
 
 #. * TRANSLATORS: Checkbox title. If this checkbox is enabled, map names
 #. aren't translated.
-#: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:87
-#: ../../src/ui_fsmenu/mapselect.cc:82
+#: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:88
+#: ../../src/ui_fsmenu/mapselect.cc:83
 msgid "Show original map names"
 msgstr ""
 
-#: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:136
+#: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:137
 msgid "Show Filenames"
 msgstr ""
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:103
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:104
 #: ../../src/ui_fsmenu/loadgame.cc:321
 #: ../../src/wui/game_main_menu_save_game.cc:68
 msgid "Map Name:"
 msgstr ""
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:107
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:108
 msgid "Authors:"
 msgstr ""
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:111
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:112
 #: ../../src/ui_fsmenu/campaign_select.cc:80
 #: ../../src/ui_fsmenu/campaign_select.cc:157
-#: ../../src/ui_fsmenu/campaign_select.cc:396 ../../src/wui/mapdetails.cc:158
+#: ../../src/ui_fsmenu/campaign_select.cc:396 ../../src/wui/mapdetails.cc:168
 msgid "Description:"
 msgstr ""
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:115
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:116
 msgid "Hint (optional):"
 msgstr ""
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:124
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:125
+#: ../../src/wui/mapdetails.cc:162
 msgid "Tags:"
 msgstr ""
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:125
-#: ../../src/ui_fsmenu/mapselect.cc:98
-msgid "Unbalanced"
-msgstr ""
-
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:126
-#: ../../src/ui_fsmenu/mapselect.cc:107
-msgid "Free for all"
-msgstr ""
-
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:127
-#: ../../src/ui_fsmenu/mapselect.cc:108
-msgid "1v1"
-msgstr ""
-
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:128
-#: ../../src/ui_fsmenu/mapselect.cc:115
-msgid "Teams of 2"
-msgstr ""
-
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:129
-#: ../../src/ui_fsmenu/mapselect.cc:116
-msgid "Teams of 3"
-msgstr ""
-
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:130
-#: ../../src/ui_fsmenu/mapselect.cc:117
-msgid "Teams of 4"
-msgstr ""
-
 #. * TRANSLATORS: Label for the list of suggested teams when choosing a map
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:132
-#: ../../src/wui/suggested_teams_box.cc:97
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:133
+#: ../../src/wui/suggested_teams_box.cc:96
 msgid "Suggested Teams:"
 msgstr ""
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:141
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:142
 #: ../../src/ui_fsmenu/launch_mpg.cc:663
 #: ../../src/wui/game_main_menu_save_game.cc:172
 #, c-format
@@ -636,19 +607,19 @@ msgid_plural "%u Players"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:146
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:147
 msgid "Main Options"
 msgstr ""
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:147
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:148
 msgid "Tags"
 msgstr ""
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:149
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:150
 msgid "Teams"
 msgstr ""
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:174
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:175
 msgid "Size: %1% x %2%"
 msgstr ""
 
@@ -840,7 +811,7 @@ msgstr ""
 #: ../../src/editor/ui_menus/player_menu.cc:232 ../../src/logic/map.cc:315
 #: ../../src/logic/single_player_game_settings_provider.cc:88
 #: ../../src/map_io/map_player_names_and_tribes_packet.cc:105
-#: ../../src/network/nethost.cc:1699 ../../src/ui_fsmenu/launch_mpg.cc:581
+#: ../../src/network/nethost.cc:1703 ../../src/ui_fsmenu/launch_mpg.cc:581
 #: ../../src/wui/multiplayersetupgroup.cc:139
 #: ../../src/wui/multiplayersetupgroup.cc:301
 #, c-format
@@ -1696,23 +1667,23 @@ msgstr ""
 msgid "Preparing game"
 msgstr ""
 
-#: ../../src/network/netclient.cc:736
+#: ../../src/network/netclient.cc:740
 msgid "/me 's file failed md5 checksumming."
 msgstr ""
 
-#: ../../src/network/netclient.cc:766
+#: ../../src/network/netclient.cc:770
 msgid ""
 "/me checked the received file. Although md5 check summing succeeded, I can "
 "not handle the file."
 msgstr ""
 
 #. * TRANSLATORS: %s contains an error message.
-#: ../../src/network/netclient.cc:984
+#: ../../src/network/netclient.cc:988
 #, c-format
 msgid "%s An automatic savegame will be created."
 msgstr ""
 
-#: ../../src/network/netclient.cc:989
+#: ../../src/network/netclient.cc:993
 msgid "Disconnected from Host"
 msgstr ""
 
@@ -1810,16 +1781,16 @@ msgstr ""
 msgid "Invalid command! Type /help for a list of commands."
 msgstr ""
 
-#: ../../src/network/nethost.cc:1633
+#: ../../src/network/nethost.cc:1637
 #, c-format
 msgid "Computer %u"
 msgstr ""
 
-#: ../../src/network/nethost.cc:1693 ../../src/wui/game_summary.cc:119
+#: ../../src/network/nethost.cc:1697 ../../src/wui/game_summary.cc:119
 msgid "Player"
 msgstr ""
 
-#: ../../src/network/nethost.cc:1858
+#: ../../src/network/nethost.cc:1862
 #, c-format
 msgid "%li second"
 msgid_plural "%li seconds"
@@ -2210,7 +2181,7 @@ msgstr ""
 msgid "#"
 msgstr ""
 
-#: ../../src/ui_fsmenu/campaign_select.cc:395 ../../src/wui/mapdetails.cc:134
+#: ../../src/ui_fsmenu/campaign_select.cc:395 ../../src/wui/mapdetails.cc:131
 msgid "Scenario:"
 msgstr ""
 
@@ -2235,7 +2206,7 @@ msgid_plural "The designers of this scenario"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../../src/ui_fsmenu/campaign_select.cc:428 ../../src/wui/mapdetails.cc:156
+#: ../../src/ui_fsmenu/campaign_select.cc:428 ../../src/wui/mapdetails.cc:152
 msgid "Author:"
 msgid_plural "Authors:"
 msgstr[0] ""
@@ -2407,9 +2378,9 @@ msgstr ""
 msgid "The host has not yet selected a map or saved game."
 msgstr ""
 
+#. * TRANSLATORS: This is a map tag
 #: ../../src/ui_fsmenu/launch_mpg.cc:292 ../../src/ui_fsmenu/launch_spg.cc:240
-#: ../../src/ui_fsmenu/mapselect.cc:101
-#: ../../src/wui/multiplayersetupgroup.cc:368
+#: ../../src/wui/map_tags.cc:36 ../../src/wui/multiplayersetupgroup.cc:368
 msgid "Scenario"
 msgstr ""
 
@@ -2564,7 +2535,7 @@ msgstr ""
 msgid "Delete this replay"
 msgstr ""
 
-#: ../../src/ui_fsmenu/loadgame.cc:168 ../../src/ui_fsmenu/mapselect.cc:67
+#: ../../src/ui_fsmenu/loadgame.cc:168 ../../src/ui_fsmenu/mapselect.cc:68
 msgid "Return to the single player menu"
 msgstr ""
 
@@ -2775,28 +2746,16 @@ msgstr ""
 msgid "Licensed under the GNU General Public License V2.0"
 msgstr ""
 
-#: ../../src/ui_fsmenu/mapselect.cc:49
+#: ../../src/ui_fsmenu/mapselect.cc:50
 msgid "Choose a map"
 msgstr ""
 
-#: ../../src/ui_fsmenu/mapselect.cc:65
+#: ../../src/ui_fsmenu/mapselect.cc:66
 msgid "Return to the multiplayer game setup"
 msgstr ""
 
-#: ../../src/ui_fsmenu/mapselect.cc:87
+#: ../../src/ui_fsmenu/mapselect.cc:88
 msgid "Show all maps"
-msgstr ""
-
-#: ../../src/ui_fsmenu/mapselect.cc:97
-msgid "Official"
-msgstr ""
-
-#: ../../src/ui_fsmenu/mapselect.cc:99
-msgid "Seafaring"
-msgstr ""
-
-#: ../../src/ui_fsmenu/mapselect.cc:100
-msgid "Artifacts"
 msgstr ""
 
 #: ../../src/ui_fsmenu/multiplayer.cc:36
@@ -2816,7 +2775,7 @@ msgid "Show login dialog"
 msgstr ""
 
 #: ../../src/ui_fsmenu/multiplayer.cc:116
-#: ../../src/ui_fsmenu/netsetup_lan.cc:111 ../../src/wui/login_box.cc:77
+#: ../../src/ui_fsmenu/netsetup_lan.cc:111 ../../src/wui/login_box.cc:78
 msgid "nobody"
 msgstr ""
 
@@ -3681,72 +3640,117 @@ msgstr ""
 msgid "Nickname:"
 msgstr ""
 
-#: ../../src/wui/login_box.cc:39
+#: ../../src/wui/login_box.cc:40
 msgid "Password:"
 msgstr ""
 
-#: ../../src/wui/login_box.cc:45
+#: ../../src/wui/login_box.cc:46
 msgid "WARNING: Password will be shown and saved readable!"
 msgstr ""
 
-#: ../../src/wui/login_box.cc:49
+#: ../../src/wui/login_box.cc:50
 msgid "Log in to a registered account"
 msgstr ""
 
-#: ../../src/wui/login_box.cc:53
+#: ../../src/wui/login_box.cc:54
 msgid "Automatically use this login information from now on."
 msgstr ""
 
-#: ../../src/wui/login_box.cc:64
+#: ../../src/wui/login_box.cc:65
 msgid "Login"
 msgstr ""
 
-#: ../../src/wui/login_box.cc:89
+#: ../../src/wui/login_box.cc:90
 msgid "Empty Nickname"
 msgstr ""
 
-#: ../../src/wui/login_box.cc:89
+#: ../../src/wui/login_box.cc:90
 msgid "Please enter a nickname!"
 msgstr ""
 
-#: ../../src/wui/login_box.cc:96
+#: ../../src/wui/login_box.cc:97
 msgid "Space in Nickname"
 msgstr ""
 
-#: ../../src/wui/login_box.cc:97
+#: ../../src/wui/login_box.cc:98
 msgid "Sorry, but spaces are not allowed in nicknames!"
 msgstr ""
 
-#: ../../src/wui/login_box.cc:104
+#: ../../src/wui/login_box.cc:105
 msgid "Empty Password"
 msgstr ""
 
-#: ../../src/wui/login_box.cc:104
+#: ../../src/wui/login_box.cc:105
 msgid "Please enter your password!"
 msgstr ""
 
+#. * TRANSLATORS: This is a map tag
+#: ../../src/wui/map_tags.cc:28
+msgid "Official"
+msgstr ""
+
+#. * TRANSLATORS: This is a map tag
+#: ../../src/wui/map_tags.cc:30
+msgid "Unbalanced"
+msgstr ""
+
+#. * TRANSLATORS: This is a map tag
+#: ../../src/wui/map_tags.cc:32
+msgid "Seafaring"
+msgstr ""
+
+#. * TRANSLATORS: This is a map tag
+#: ../../src/wui/map_tags.cc:34
+msgid "Artifacts"
+msgstr ""
+
+#. * TRANSLATORS: This is a map tag
+#: ../../src/wui/map_tags.cc:38
+msgid "Free for all"
+msgstr ""
+
+#. * TRANSLATORS: This is a map tag. One versus one.
+#: ../../src/wui/map_tags.cc:40
+msgid "1v1"
+msgstr ""
+
+#. * TRANSLATORS: This is a map tag
+#: ../../src/wui/map_tags.cc:42
+msgid "Teams of 2"
+msgstr ""
+
+#. * TRANSLATORS: This is a map tag
+#: ../../src/wui/map_tags.cc:44
+msgid "Teams of 3"
+msgstr ""
+
+#. * TRANSLATORS: This is a map tag
+#: ../../src/wui/map_tags.cc:46
+msgid "Teams of 4"
+msgstr ""
+
+#: ../../src/wui/mapdata.cc:37
+msgid "No Author"
+msgstr ""
+
 #. * TRANSLATORS: Parent directory/folder
-#: ../../src/wui/mapdata.cc:129
+#: ../../src/wui/mapdata.cc:130
 msgid "parent"
 msgstr ""
 
 #. * TRANSLATORS: Directory name for MP Scenarios in map selection
-#: ../../src/wui/mapdata.cc:137
+#: ../../src/wui/mapdata.cc:138
 msgid "Multiplayer Scenarios"
 msgstr ""
 
-#: ../../src/wui/mapdetails.cc:127
+#: ../../src/wui/mapdetails.cc:123
 msgid "Directory:"
-msgstr ""
-
-#: ../../src/wui/mapdetails.cc:129
-msgid "The name of this directory"
 msgstr ""
 
 #. * TRANSLATORS: Tooltip in map description when translated map names are
 #. being displayed.
 #. * TRANSLATORS: %s is the English name of the map.
-#: ../../src/wui/mapdetails.cc:144
+#: ../../src/wui/mapdetails.cc:139
 #, c-format
 msgid "The original name of this map: %s"
 msgstr ""
@@ -3754,18 +3758,14 @@ msgstr ""
 #. * TRANSLATORS: Tooltip in map description when map names are being
 #. displayed in English.
 #. * TRANSLATORS: %s is the localized name of the map.
-#: ../../src/wui/mapdetails.cc:150
+#: ../../src/wui/mapdetails.cc:145
 #, c-format
 msgid "The name of this map in your language: %s"
 msgstr ""
 
-#: ../../src/wui/mapdetails.cc:154
-msgid "The name of this map"
-msgstr ""
-
 #. * TRANSLATORS: Map hint header when selecting a map.
-#: ../../src/wui/mapdetails.cc:162
-msgid "HINT:"
+#: ../../src/wui/mapdetails.cc:173
+msgid "Hint:"
 msgstr ""
 
 #: ../../src/wui/maptable.cc:36

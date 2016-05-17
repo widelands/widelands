@@ -79,6 +79,13 @@ public:
 	virtual bool is_paused() = 0;
 
 	/**
+	 * Whether the game is stopped.
+	 */
+	bool is_paused_or_zero_speed() {
+		return is_paused() || real_speed() == 0;
+	};
+
+	/**
 	 * Sets whether the game is paused.
 	 */
 	virtual void set_paused(const bool paused) = 0;

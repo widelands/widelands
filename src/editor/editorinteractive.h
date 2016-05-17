@@ -92,6 +92,7 @@ public:
 	static void run_editor(const std::string & filename, const std::string& script_to_run);
 
 	void load(const std::string & filename);
+	void cleanup_for_load() override;
 
 	// leaf functions from base class
 	void start() override;

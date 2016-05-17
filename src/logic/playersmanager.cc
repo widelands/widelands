@@ -101,9 +101,7 @@ Player* PlayersManager::add_player
 void PlayersManager::add_player_end_status(const PlayerEndStatus& status)
 {
 	// Ensure we don't have a status for it yet
-	std::vector<PlayerEndStatus>::iterator it;
-	for (it = players_end_status_.begin(); it != players_end_status_.end(); ++it) {
-		PlayerEndStatus pes = *it;
+	for (const auto& pes : players_end_status_) {
 		if (pes.player == status.player) {
 			throw wexception("Player End status for player %d already reported", pes.player);
 		}
@@ -118,6 +116,17 @@ void PlayersManager::add_player_end_status(const PlayerEndStatus& status)
 	if (egbase_.get_igbase()) {
 		egbase_.get_igbase()->show_game_summary();
 	}
+}
+
+void PlayersManager::set_player_end_status(const PlayerEndStatus& status)
+{
+	for (auto& pes : players_end_status_) {
+		if (pes.player == status.player) {
+			pes = status;
+			return;
+		}
+	}
+	players_end_status_.push_back(status);
 }
 
 

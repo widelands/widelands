@@ -234,7 +234,7 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG
 	// Y coordinate will be set later, when we know how high this box will get.
 	suggested_teams_box_ = new UI::SuggestedTeamsBox
 									(this, right_column_x_, 0, UI::Box::Vertical,
-									 padding_, indent_, label_height_,
+									 padding_, indent_,
 									 get_w() - right_column_x_, 4 * label_height_);
 }
 

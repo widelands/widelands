@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-04-02 11:15+0000\n"
-"PO-Revision-Date: 2016-04-02 11:17+0000\n"
+"POT-Creation-Date: 2016-05-06 09:44+0000\n"
+"PO-Revision-Date: 2016-05-13 11:00+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Portuguese (http://www.transifex.com/widelands/widelands/language/pt/)\n"
 "MIME-Version: 1.0\n"
@@ -194,7 +194,7 @@ msgstr ""
 
 #: ../../data/txts/developers.lua:3
 msgid "Atlantean"
-msgstr "Atlântida"
+msgstr "Atlantas"
 
 #: ../../data/txts/developers.lua:3
 msgid "Barbarian"
@@ -552,7 +552,7 @@ msgstr ""
 
 #: ../../data/txts/tips/empire.tip:10
 msgid "Always build a forester’s house so you will not run out of logs."
-msgstr "Contrói sempre uma Casa do Silvicultor para evitar ficar sem madeira."
+msgstr "Constrói sempre uma casa do silvicultor para evitar ficar sem madeira."
 
 #: ../../data/txts/tips/general_game.tip:2
 msgid ""
@@ -564,7 +564,7 @@ msgstr "A construção de um edifício só começa depois de se construir uma es
 msgid ""
 "Be sure to send a geologist to survey sites before building a well or a "
 "mine."
-msgstr "Não te esqueças de enviar um Geólogo para pesquisar água e minérios antes de construir um poço ou uma mina."
+msgstr "Não te esqueças de enviar um geólogo para pesquisar água e minérios antes de construir um poço ou uma mina."
 
 #: ../../data/txts/tips/general_game.tip:10
 msgid ""
@@ -605,7 +605,7 @@ msgid ""
 "Manage your messages more efficiently: press ‘N’ for News to access the "
 "messages window, then use ‘G’ for Go To, and the Delete key to archive "
 "messages."
-msgstr "Gere as mensagens com mais eficiência: pressione ‘N’ para abrir a janela das mensagens, depois pressione ‘G’ para ir à sua localização e a pressione a tecla DELETE para arquivar a mensagem."
+msgstr "Gere as mensagens com mais eficiência: pressione ‘N’ para abrir a janela das mensagens, depois pressione ‘G’ para ir à sua localização e a pressione a tecla Delete para arquivar a mensagem."
 
 #: ../../data/txts/tips/general_game.tip:38
 msgid ""
@@ -629,7 +629,7 @@ msgstr "Remover uma estrada enquanto CTRL está pressionado permite remover toda
 msgid ""
 "New soldiers are recruited in the headquarters or a warehouse if all needed "
 "tools are available. Training sites are for improving their abilities."
-msgstr "Novos soldados são recrutados no Quartel-general ou nos Armazéns, basta ter os materiais necessários. Os edifícios de treino são para melhorar as capacidades dos soldados."
+msgstr "Novos soldados são recrutados no quartel-general ou nos armazéns, basta ter os materiais necessários. Os treinamentos são para melhorar as capacidades dos soldados."
 
 #: ../../data/txts/tips/general_game.tip:54
 msgid ""

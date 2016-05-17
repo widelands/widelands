@@ -572,7 +572,7 @@ namespace i18n {
 // True if a string does not contain Latin characters.
 // Checks for the first 'limit' characters maximum.
 bool has_rtl_character(const char* input, int32_t limit) {
-	const icu::UnicodeString parseme(input);
+	const icu::UnicodeString parseme(input, "UTF-8");
 	for (int32_t i = 0; i < parseme.length() && i < limit; ++i) {
 		if (is_rtl_character(parseme.char32At(i))) {
 			return true;
@@ -598,7 +598,7 @@ std::string make_ligatures(const char* input) {
 	if (!has_script_character(input, UI::FontSets::Selector::kArabic)) {
 		return input;
 	}
-	const icu::UnicodeString parseme(input);
+	const icu::UnicodeString parseme(input, "UTF-8");
 	icu::UnicodeString queue;
 	UChar not_a_character = 0xFFFF;
 	UChar next = not_a_character;
@@ -678,7 +678,7 @@ std::string make_ligatures(const char* input) {
 // BiDi support for RTL languages
 // This turns the logical order of the glyphs into the display order.
 std::string line2bidi(const char* input) {
-	const icu::UnicodeString parseme(input);
+	const icu::UnicodeString parseme(input, "UTF-8");
 	icu::UnicodeString stack;
 	icu::UnicodeString temp_stack;
 	UChar not_a_character = 0xFFFF;
@@ -734,7 +734,7 @@ std::string icuchar2string(const UChar& convertme) {
 
 // True if a string contains a character from the script's code blocks
 bool has_script_character(const char* input, UI::FontSets::Selector script) {
-	const icu::UnicodeString parseme(input);
+	const icu::UnicodeString parseme(input, "UTF-8");
 	for (int32_t i = 0; i < parseme.length(); ++i) {
 		if (is_script_character(parseme.char32At(i), script)) {
 			return true;
@@ -766,7 +766,7 @@ UI::FontSet const * find_fontset(const char* word, const UI::FontSets& fontsets)
 
 //  Split a string of CJK characters into units that can have line breaks between them.
 std::vector<std::string> split_cjk_word(const char* input) {
-	const icu::UnicodeString parseme(input);
+	const icu::UnicodeString parseme(input, "UTF-8");
 	std::vector<std::string> result;
 	for (int i = 0; i < parseme.length(); ++i) {
 		icu::UnicodeString temp;

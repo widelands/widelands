@@ -222,7 +222,7 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 			 ||
 			 settings().players.at(number).state == PlayerSettings::stateShared
 			 ||
-		    settings().players.at(number).state == PlayerSettings::stateOpen)  // For savegame loading
+			 settings().players.at(number).state == PlayerSettings::stateOpen)  // For savegame loading
 			host_->set_player_tribe(number, tribe, random_tribe);
 	}
 
@@ -1212,13 +1212,13 @@ void NetHost::set_player_state
 
 	SendPacket s;
 
-	if (player.state == PlayerSettings::stateHuman)
+	if (player.state == PlayerSettings::stateHuman) {
 		//  0 is host and has no client
 		if (d->settings.users.at(0).position == number) {
 			d->settings.users.at(0).position = UserSettings::none();
 			d->settings.playernum = UserSettings::none();
 		}
-		for (uint8_t i = 1; i < d->settings.users.size(); ++i)
+		for (uint8_t i = 1; i < d->settings.users.size(); ++i) {
 			if (d->settings.users.at(i).position == number) {
 				d->settings.users.at(i).position = UserSettings::none();
 				if (host) //  Did host send the user to lobby?
@@ -1241,6 +1241,8 @@ void NetHost::set_player_state
 
 				break;
 			}
+		}
+	}
 
 	player.state = state;
 
@@ -2282,8 +2284,8 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket & r)
 		int32_t time = r.signed_32();
 		Widelands::PlayerCommand & plcmd = *Widelands::PlayerCommand::deserialize(r);
 		log
-			("[Host]: Client %u (%u) sent player command %i for %i, time = %i\n",
-			 i, client.playernum, plcmd.id(), plcmd.sender(), time);
+			("[Host]: Client %u (%u) sent player command %u for %u, time = %i\n",
+			 i, client.playernum, static_cast<unsigned int>(plcmd.id()), plcmd.sender(), time);
 		receive_client_time(i, time);
 		if (plcmd.sender() != client.playernum + 1)
 			throw DisconnectException("PLAYERCMD_FOR_OTHER");

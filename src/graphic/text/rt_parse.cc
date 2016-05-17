@@ -274,6 +274,7 @@ Parser::Parser() {
 
 		tc.allowed_children.insert("br");
 		tc.allowed_children.insert("space");
+		tc.allowed_children.insert("vspace");
 		tc.allowed_children.insert("p");
 		tc.allowed_children.insert("font");
 		tc.allowed_children.insert("sub");

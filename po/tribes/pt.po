@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-04-03 19:12+0000\n"
-"PO-Revision-Date: 2016-04-07 07:34+0000\n"
+"POT-Creation-Date: 2016-05-06 09:44+0000\n"
+"PO-Revision-Date: 2016-05-13 09:36+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Portuguese (http://www.transifex.com/widelands/widelands/language/pt/)\n"
 "MIME-Version: 1.0\n"
@@ -694,7 +694,7 @@ msgstr "Casa do silvicultor"
 #: ../../data/tribes/buildings/productionsites/barbarians/rangers_hut/init.lua:47
 #: ../../data/tribes/buildings/productionsites/empire/foresters_house/init.lua:42
 msgid "planting trees"
-msgstr "pantar árvores"
+msgstr "plantar árvores"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/gold_spinning_mill/init.lua:7
@@ -1468,7 +1468,7 @@ msgstr "Forno da cal"
 #. TRANSLATORS: Completed/Skipped/Did not start mixing grout because ...
 #: ../../data/tribes/buildings/productionsites/barbarians/lime_kiln/init.lua:55
 msgid "mixing grout"
-msgstr "misturar  argamassa"
+msgstr "misturar argamassa"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/lumberjacks_hut/init.lua:7
@@ -2529,7 +2529,7 @@ msgstr "Esta é a cultura do Império romano."
 #. TRANSLATORS: This is a tribe name
 #: ../../data/tribes/preload.lua:46
 msgid "Atlanteans"
-msgstr "Os Atlântas"
+msgstr "Os Atlantas"
 
 #: ../../data/tribes/preload.lua:47
 msgid ""
@@ -2820,7 +2820,7 @@ msgstr "Ouro"
 #: ../../data/tribes/wares/gold_ore/init.lua:7
 msgctxt "ware"
 msgid "Gold Ore"
-msgstr "Minério de Ouro"
+msgstr "Minério de ouro"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/gold_thread/init.lua:7
