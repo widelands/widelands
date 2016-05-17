@@ -75,13 +75,15 @@ std::unique_ptr<FileSystem> initialize(const std::string& output_path) {
 void cleanup() {
 	g_sound_handler.shutdown();
 
-	assert(g_gr);
-	delete g_gr;
-	g_gr = nullptr;
+	if (g_gr) {
+		delete g_gr;
+		g_gr = nullptr;
+	}
 
-	assert(g_fs);
-	delete g_fs;
-	g_fs = nullptr;
+	if (g_fs) {
+		delete g_fs;
+		g_fs = nullptr;
+	}
 
 	SDL_Quit();
 }
