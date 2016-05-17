@@ -16,7 +16,7 @@ def validate_files_in_path(source_path):
 
 	source_files = sorted(os.listdir(source_path), key=str.lower)
 
-	print("Reading JSON files in:\n   " + source_path)
+	print("\nReading JSON files in: " + source_path + "\n")
 	failed = 0
 	for source_filename in source_files:
 		file_path = source_path + "/" + source_filename
@@ -24,6 +24,7 @@ def validate_files_in_path(source_path):
 			source_file = open(file_path, "r")
 			try:
 				dataset = json.load(source_file)
+				print(source_filename)
 			except ValueError as err:
 				failed = failed + 1
 				print("\n   Error reading " + source_filename + ":");
@@ -43,7 +44,7 @@ sucess = False
 if (len(sys.argv) == 2):
 	base_path = os.path.normpath(sys.argv[1])
 	if (not os.path.exists(base_path) or os.path.isfile(base_path)):
-		base_path = os.path.abspath(os.path.join(os.path.dirname(__file__),os.path.pardir),base_path)
+		base_path = os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.pardir))
 
 	if (os.path.exists(base_path) and not os.path.isfile(base_path)):
 		success = validate_files_in_path(os.path.normpath(base_path))
