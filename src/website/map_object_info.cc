@@ -513,7 +513,7 @@ void write_tribes(EditorGameBase& egbase, FileSystem* out_filesystem) {
 int main(int argc, char ** argv)
 {
 	if (argc != 2) {
-		log("Usage: %s <existing-absolute-output-path>\n", argv[0]);
+		log("Usage: %s <existing-output-path>\n", argv[0]);
 		return 1;
 	}
 
